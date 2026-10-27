@@ -13,38 +13,33 @@
  ],
  "proof": [
   {
-   "text": "The separability hypothesis is used in the separable algebraic sense specified by the statement’s definition; no finiteness of the extension is needed. Take the zero ideal $\\mathfrak n=(0)$ of the field $\\kappa$. The cited separable-algebraic square-zero lifting theorem says that for every commutative $k$-algebra $D$, square-zero ideal $J\\subseteq D$, quotient map $D\\to D/J$, and $k$-algebra map $\\kappa\\to D/J$, a lift $\\kappa\\to D$ exists. Since every power of the zero ideal is zero, this is exactly the lifting condition in [def-weil-pbc-formally-smooth-adic] for $\\kappa$ to be formally smooth over $k$ for the $\\mathfrak n$-adic topology.",
+   "text": "By Algebra.FormallyEtale.of_isSeparable, the separable algebraic residue extension κ/k is formally étale, hence formally smooth. This is the Mathlib lifting result attached to [lem-exc-separable-algebraic-square-zero-lifting]; no finite-dimensional or finite-type hypothesis is used.",
    "uses": [
-    "lem-exc-separable-algebraic-square-zero-lifting",
-    "def-weil-pbc-formally-smooth-adic"
+    "lem-exc-separable-algebraic-square-zero-lifting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0C34, proof: first paragraph, citing Algebra Proposition 0322 and Lemma 07EC."
+    "place": "Tag 0C34, lemma-lift-residue-field, first two sentences of the proof."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-fs-adic-lift-into-complete] with source ring $k$, source algebra $S=\\kappa$, source ideal $\\mathfrak n=(0)$, target algebra $A=R$, and both target ideals $I=J=\\mathfrak m$. The target is $I$-adically complete by hypothesis; $J^1\\subseteq I$ and $J=\\bigcap_{r\\ge1}(J+I^r)$ are immediate because $I=J$; and the residue map $g:\\kappa\\to R/\\mathfrak m=\\kappa$ is the identity, so $g(\\mathfrak n^1)=0\\subseteq q(I)=0$, where $q:R\\to R/\\mathfrak m$ is the quotient map. The theorem therefore gives a $k$-algebra map $\\sigma:\\kappa\\to R$ with quotient composite equal to $g$. Under the identified residue field, this says $\\kappa\\xrightarrow{\\sigma}R\\to R/\\mathfrak m=\\kappa$ is the identity, as required.",
-   "uses": [
-    "lem-weil-pbc-fs-adic-lift-into-complete"
-   ],
+   "text": "Apply Mathlib Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete to the identity k-algebra map of κ = R/m, with ideal m and complete target R. It produces σ : κ →ₐ[k] R such that the quotient algebra map composed with σ is the identity. Taking underlying ring homomorphisms yields the required equation for IsLocalRing.residue. This Mathlib theorem constructs the compatible lifts to R/m^n and takes their inverse limit, so the general adic formal-smoothness and closed-ideal lifting lemmas are unnecessary. The whole Lean proof uses only Mathlib and has five lines; it closes this node directly rather than creating another lifting node (stages/1-dag.md §2).",
+   "uses": [],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0C34, proof: second paragraph, applying Lemma 07NJ (lift-continuous) to the complete local algebra."
+    "place": "Tag 0C34, lemma-lift-residue-field, last sentence, specialized to the zero source ideal and identical target ideals; Mathlib/RingTheory/Smooth/AdicCompletion.lean, exists_mkₐ_comp_eq_of_isAdicComplete."
    }
   }
  ],
  "proof_deps": [
-  "lem-exc-separable-algebraic-square-zero-lifting",
-  "def-weil-pbc-formally-smooth-adic",
-  "lem-weil-pbc-fs-adic-lift-into-complete"
+  "lem-exc-separable-algebraic-square-zero-lifting"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0C34, lemma-lift-residue-field proof, via formal smoothness and Tag 07NJ."
+  "place": "Tag 0C34, lemma-lift-residue-field proof; the complete-target lift is supplied directly by Mathlib Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete."
  },
  "mathlib_searches": [
   {
@@ -118,9 +113,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-fs-adic-lift-into-complete"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -148,5 +141,26 @@
   "existing": false,
   "fixed_by": "NT-stage2-Codex-42f1ff31f"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T102714-L-2957235",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

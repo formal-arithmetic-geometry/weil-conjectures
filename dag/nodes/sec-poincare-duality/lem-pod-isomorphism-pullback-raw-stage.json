@@ -1,0 +1,133 @@
+{
+ "id": "lem-pod-isomorphism-pullback-raw-stage",
+ "kind": "statement",
+ "title": "Normalized exact and t-exact pullback at each finite coefficient",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, a scheme isomorphism g:X→Y and stalk-unit hypotheses for ell. Use the actual completed integral constructible categories and raw rationalizations [def-weil-derived-pullback-tensor-hom, def-weil-rationalization-karoubi], and intrinsic standard halves [def-weil-constructible-standard-tstructure]. There exist a shift structure on completed integral pullback and a natural isomorphism from derived sectionwise inverse image to completed pullback, whose components are exactly inverseImagePullbackComparisonDerived. The isomorphism commutes with the chosen shifts; completed pullback is integral-linear, triangulated and preserves both standard halves in every degree. There is a shift structure on the prescribed rational pullback making it triangulated, whose degree-one shift comparison on an integral object is localization of the integral shift comparison; rational pullback preserves both rational standard halves. This asserts no scalar comparison between distinct coefficient fields and no unit or tower law.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "Proof, final sentence on automorphism pullback: completed-to-termwise comparison, t-exactness, and rational scalar/shift coherence (previous steps 8-9); agent extraction of the existing corrected stage-1 argument, not a quoted theorem of the blueprint"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "the pro-etale isomorphism reindexes sheaves and their completed coefficient\nrings. At each quotient it fixes constant coefficients, hence also at their inverse\nlimit. The induced exact functor on modules is integral-linear on complexes and\ntherefore on derived morphisms. The normalized reconstruction unit and comparison\nidentify its derived functor with completed integral pullback on constructible inputs.\nTransport its termwise shift through this comparison and the fully faithful inclusion.\nThis preserves distinguished triangles. Exact inverse image commutes with homology,\nso it preserves the vanishing conditions for both integral standard halves in every\ndegree. Apply semilinear scalar localization to this linear exact functor. Its object\nand pure-tensor formulas uniquely identify it with the prescribed rational pullback;\nthe induced degree-one shift has the displayed normalization. Every rational half is\nthe isomorphism closure of the corresponding integral half, so its preservation follows\nby applying pullback to an integral representative and its witnessing isomorphism.\nThe argument includes the zero object, torsion morphisms and empty schemes. The Lean proof establishes the entire integral stage and both standard-half preservation assertions, and uses the separate rational-exactness lemma only for its normalized rational shift and triangulation.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-completed-integral-coefficients",
+    "def-sf-completed-integral-scalar-action",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-isomorphism-comparison-natural",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-integral-constructible-triangulated",
+    "def-weil-constructible-standard-tstructure",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-pod-isomorphism-pullback-rational-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-sf-completed-integral-scalar-action",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-isomorphism-comparison-natural",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-constructible-standard-tstructure",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-pod-isomorphism-pullback-rational-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "S5 Lean construction of the integral stage and both standard-half preservation results, with normalized rational triangulation isolated as a strictly smaller lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 normalization-of-schemes hits; none concerns completed constructible complexes",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"IsTriangulated\"",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift",
+   "date": "2026-10-26",
+   "verdict": "generic exact-adjunction API, no specified completed pullback or scalar normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(scalar|tExact)|scalar.*(tower|unit)",
+   "results": "25 unrelated algebraic scalar-tower and completion hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 hits: scheme normalization, isomorphisms as affine or closed immersions, ideal-sheaf comap, and CategoryTheory.pullbackShiftIso.",
+   "date": "2026-10-26",
+   "verdict": "no match: pullbackShiftIso changes the indexing monoid of a shift action; none of the hits treats completed constructible pullback, rational localization, or its coefficient coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismPullbackTExactCoefficients",
+  "date": "2026-10-26",
+  "group": "S5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pod-isomorphism-pullback-texact-coefficients"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismPullbackRawStage",
+  "file": "lean/Sheaf/Paper/IsomorphismPullbackRawStage.lean",
+  "declaration": "WeilConjectures.isomorphismPullbackRawStage",
+  "statement": "theorem isomorphismPullbackRawStage\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))\n    (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :\n    ∃ s : (constructibleIntegralPullback l E g).CommShift ℤ,\n      ∃ e : (sfIntegralConstructible l E Y).ι ⋙ inverseImageIntegralDerived l E g ≅\n          constructibleIntegralPullback l E g ⋙ (sfIntegralConstructible l E X).ι,\n        (∀ K : sfIntegralConstructibleCategory l E Y,\n          HEq (e.hom.app K) (inverseImagePullbackComparisonDerived l E g hX hY K.obj)) ∧\n        (fun [_s : (constructibleIntegralPullback l E g).CommShift ℤ] ↦\n          NatTrans.CommShift e.hom ℤ ∧\n          (constructibleIntegralPullback l E g).IsTriangulated) (_s := s) ∧\n        (constructibleIntegralPullback l E g).Linear (Padic.coefficientExtensionIntegers l E) ∧\n        (∀ (b : Bool) (n : ℤ) (K : sfIntegralConstructibleCategory l E Y),\n          sfIntegralStandardClass l E Y b n K →\n          sfIntegralStandardClass l E X b n ((constructibleIntegralPullback l E g).obj K)) ∧\n        ∃ sr : (rationalDerivedPullback l E g).CommShift ℤ,\n          (∀ K : sfIntegralConstructibleCategory l E Y,\n            HEq (((rationalDerivedPullback l E g).commShiftIso\n              (self := sr) (1 : ℤ)).hom.app\n                ((sfRationalConstructibleLocalization l E Y).obj K))\n              ((sfRationalConstructibleLocalization l E X).map\n                (((constructibleIntegralPullback l E g).commShiftIso\n                  (self := s) (1 : ℤ)).hom.app K))) ∧\n          (fun [_sr : (rationalDerivedPullback l E g).CommShift ℤ] ↦\n            (rationalDerivedPullback l E g).IsTriangulated) (_sr := sr) ∧\n          (∀ (b : Bool) (n : ℤ) (K : sfRationalConstructibleCategory l E Y),\n            sfRationalStandardClass l E Y b n K →\n            sfRationalStandardClass l E X b n ((rationalDerivedPullback l E g).obj K))",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembled from raw-stage (proved) + 4 sorried sub-statements vs node lem-pod-isomorphism-pullback-texact-coefficients steps; adapter/inclusion changes vs change record (defeq aliases); importer IsomorphismFieldTransport compiled against the delivered modules"
+ }
+}

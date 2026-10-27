@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-ordered-strict-coefficient-equations",
+ "kind": "statement",
+ "title": "Strict tower projection and exchange coefficient equations",
+ "statement": "For the datum and chosen cartesian square with comparisons of [def-weil-pbc-ordered-coefficient-comparison-data], every derived-complete K satisfies three equalities in the actual derived strict tower category: the completed tower exchange is H inverse, followed by reduction of the ambient exchange, followed by H prime; restriction of H followed by beta equals rhoM followed by the constant H; restriction of the completed strict exchange followed by delta equals beta followed by the specified constant strict mate at reduction of Res K. These are the first three clauses of the original comparison, with no properness or finite-origin witnesses.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph, specified conjugating maps; agent-supplied strict coefficient comparison supplement. Ingredient sources only: proetale.tex Tag 099M (lemma-naive-completion), Tag 099N (lemma-pushforward-Noetherian-case); sites-cohomology.tex Tag 0A07 (lemma-Rf-commutes-with-Rlim), Tag 0E48 (remark-compatible-with-diagram). None states this combined comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ordered-coefficient-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": " the diagonal exact-adjunction comparison identifies the completed strict\nexchange with the reduction of the ambient mate. The perfect quotient projection\nmaps are invertible, so conjugating gives the first formula. For the second,\ntranspose the projection formula map under the ordinary ringed adjunction.\nRestriction identifies its counit with the constant counit, and quotient balancing\nsends each pure tensor to the same tensor. Apply the derived pullback and tensor\ncomparison to this equation on the single strict quotient diagram. Tensor descent\nmakes it an equality of derived tower morphisms. For the third, transpose the\nrestricted strict exchange under the constant tower adjunction. Scalar restriction\nidentifies both units and counits, and coefficient inverse image respects\ncomposition. The transpose is therefore the transpose defining the constant mate.\nBijectivity of the adjunction correspondence gives the equation. Naturality for\nrho then gives exactly beta and delta at the reduced complete input. No claim of\nfaithfulness of derived evaluation functors is used.",
+   "uses": [
+    "def-weil-pbc-completed-base-change-map",
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-flat-scalar-tower-exchange",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-quotient-diagram-scalar-projection",
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-base-change-map",
+  "lem-sbc-strict-quotient-exchange-unit-equation",
+  "lem-sbc-unbounded-exact-adjunction-square",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-scalar-tower-exchange",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-quotient-diagram-scalar-projection",
+  "lem-weil-pbc-strict-quotient-scalar-balancing",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Separated existing ordered coefficient comparison interfaces and proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of adic coefficients commutes with strict quotient tower exchange and completion reconstruction",
+   "results": "Mathlib ordinary AdicCompletion algebra declarations; no derived sheaf/tower comparison",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction identifies the strict quotient tower exchange and its projection maps, and identifies completed pullback reconstruction units and inverse limit maps",
+   "results": "Generic scalar and adjunction tools only; no specified ordered coefficient maps",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exchange.*coefficient|reconstruct.*scalar|rawComponent in Mathlib CategoryTheory, Algebra/Homology and WeilConjectures",
+   "results": "Finite and duality comparisons have other domains; none supplies these completed strict maps",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrderedExchangeCoefficientComparison",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Strict tower projection and exchange coefficient equations; second proof paragraph of completed exchange coherence.",
+   "via": [
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedExchangeStrictCoefficientEquations",
+  "file": "lean/Sheaf/Paper/OrderedExchangeStrictCoefficientEquations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.strictCoefficientEquations",
+  "statement": "theorem strictCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) : ∀ (K : d.derived X) (hK : d.TowerComplete X K), (d.towerV' sq K = (exchangeRealizationH (f := f) (g := g) d K).inv ≫ (completedReductionTower Y' d).map ((d.integralExchange sq).app K) ≫ (exchangeRealizationHPrime (f' := f') (g' := g') d K).hom) ∧ ((exchangeTowerRes d Y').map (exchangeRealizationH (f := f) (g := g) d K).hom ≫ (beta (f := f) (g := g) d K).hom = (rhoM (f := f) (g := g) d K).hom ≫ (H (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom = (beta (f := f) (g := g) d K).hom ≫ (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((reduction d X).obj ((res d X).obj K)))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2f828",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261025T201906-L-2637152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2f828",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261025T201906-L-2637152",
+  "kind": "interface",
+  "note": "independent cc review: 2f828bc vs e69069ed (previous FIX review): only scoped set_option/-instance in lambda_existsUnique & normalized_naturality plus change-record/report text differ; data module vs clone item = verbatim move; 5 modules + 4 direct importers compile (exit 0)"
+ }
+}

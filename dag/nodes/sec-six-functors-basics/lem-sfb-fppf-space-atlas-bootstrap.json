@@ -1,0 +1,538 @@
+{
+ "id": "lem-sfb-fppf-space-atlas-bootstrap",
+ "kind": "statement",
+ "title": "Algebraicity from an fppf algebraic-space atlas",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention], and let $F$ be a sheaf of sets on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-weil-pbc-sites-and-cohomology]. Suppose that $U$ is an algebraic space over $S$ [def-trf-algebraic-space] and $q:U\\to F$ is a morphism of sheaves. Assume that for every $S$-scheme $Z$ in the site and every $a\\in F(Z)$, the sheaf $h_Z\\times_{a,F,q}U$, where $h_Z(W)=\\operatorname{Mor}_S(W,Z)$, is an algebraic space $P_a$ over $Z$, and $P_a\\to Z$ is surjective, flat and locally of finite presentation. Flatness and local finite presentation for algebraic-space morphisms mean these properties on compatible etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]; surjectivity means surjectivity on field-valued point classes [lem-trf-space-fibre-products-etale-covers]. Then $F$ is an algebraic space over $S$. No representability assumption on the diagonal of $F$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S6, theorem-final-bootstrap, condition (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale scheme atlas $v:A\\to U$ using [def-trf-algebraic-space], and put $p=qv$. For each scheme $T$ and $a\\in F(T)$ write $P_a=h_T\\times_FU$. The sheaf $B_a=h_T\\times_Fh_A$ identifies, on sections, with $P_a\\times_Uh_A$, hence is an algebraic space by [lem-trf-space-fibre-products-etale-covers]; $B_a\\to P_a$ is representable surjective etale by that node. Choose a surjective etale scheme atlas $W\\to B_a$. Its composite with $B_a\\to P_a$ is again representable surjective etale by [lem-trf-space-representable-etale-scheme-tests]. The hypothesis on $P_a\\to T$ says $W\\to T$ is flat and locally of finite presentation. The chart criterion [lem-sfb-space-local-properties-chart-test], with target chart $T\\to T$, therefore gives those two properties for $B_a\\to T$. It is surjective on point classes: lift a point first to $P_a$, then along the surjective etale map to $B_a$. This proves the same scheme-test atlas hypothesis for $p:h_A\\to F$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), proof"
+   }
+  },
+  {
+   "text": "Apply step 1 at the section of $F(A)$ defined by $p$. It gives the algebraic space $R=h_A\\times_Fh_A$ and two flat locally finitely presented projections $s,t:R\\to A$; swapping the factors gives the assertion for the second projection. For each $T$, its sections are exactly the pairs $(x,y)\\in A(T)^2$ with $p(x)=p(y)$. Thus $j=(s,t):R\\to h_{A\\times_SA}$ is monic and its image is an equivalence relation. The operations are $(x,x)$, $(x,y)\\mapsto(y,x)$, and $((x,y),(y,z))\\mapsto(x,z)$, naturally in $T$. No diagonal property of $F$ has been used.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), proof"
+   }
+  },
+  {
+   "text": "The morphism $j$ is chartwise locally of finite type. Indeed, for a scheme chart $C\\to R$, the composite $C\\to A$ is locally finitely presented by step 1. To check $C\\to A\\times_SA$ at $c$, choose an affine target neighbourhood $D=\\operatorname{Spec}B$ of $j(c)$, shrink it to a principal open lying over an affine $\\operatorname{Spec}K\\subset A$, and choose an affine neighbourhood $\\operatorname{Spec}L$ of $c$ mapping into it with $L$ finitely generated over $K$; such a neighbourhood exists since $C\\to A$ is locally finitely presented, and further principal shrinking only adjoins one inverse. The maps factor $K\\to B_b\\to L$. The same finite $K$-generators generate $L$ over $B_b$, and adding the image of $b^{-1}$ makes them generators over $B$. This is precisely the affine finite-type criterion [def-weil-finite-type-morphism]. Apply [lem-sfb-space-lft-monomorphism-separated-lqf] to $j$ and then [lem-a1-separated-locally-qf-space-representable], whose target is the scheme $A\\times_SA$. Hence $R$ is a scheme. Its identity chart shows that $s,t$ are flat locally finitely presented scheme maps.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-space-lft-monomorphism-separated-lqf",
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6, reduction from algebraic-space groupoids to scheme groupoids; Tag 0462 affine finite-type argument"
+   }
+  },
+  {
+   "text": "The map $p$ is locally surjective for the fppf topology. Given $a\\in F(T)$, take a surjective etale scheme atlas $W\\to B_a$. The composite $W\\to T$ is flat and locally finitely presented by step 1. It is surjective: every point class of $T$ lifts through the two surjective maps $W\\to B_a\\to T$, and for schemes a field-valued representative gives its ordinary scheme point. Thus $\\{W\\to T\\}$ is an fppf covering by [def-pc-fppf-site]. The universal pair on $B_a$ gives $w:W\\to A$ with $p(w)=a|_W$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S1 (lemma-surjective-flat-locally-finite-presentation), explicit atlas proof"
+   }
+  },
+  {
+   "text": "Let $P(T)=A(T)/R(T)$. The map $[x]\\mapsto p(x)$ identifies $P$ with a subpresheaf of $F$, since equality of $p$-images is exactly the kernel relation in step 2. We show directly that $F$ is its sheafification. For any fppf sheaf $G$ and any map $P\\to G$, cover $T$ by lifts $x_i$ to $A$ of a section $a\\in F(T)$, using step 4. The $x_i$ have equal $p$-images on overlaps, hence their classes in $P$ agree there. Their images glue uniquely in $G(T)$. Common covering refinements show independence of lifts and naturality under pullback; uniqueness follows by restriction to the lifting cover. This supplies exactly the universal property [def-weil-pbc-sheafification]. Write $Q=A/R$ for this sheafification. The unique maps $Q\\to F$ and $F\\to Q$ extending the common map from $P$ are inverse by uniqueness, so $F\\simeq Q$.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-fppf-space-relation-slicing] to the schematic equivalence relation $R\\rightrightarrows A$ from steps 2--3. Obtain schemes $V,D$, an equivalence relation $D\\rightrightarrows V$ with flat, locally finitely presented, locally quasi-finite projections, and an isomorphism $V/D\\simeq Q$. Choose an affine open cover $\\{V_\\alpha\\}$ of $V$, with index set bounded by the size of $V$. Write $D_\\alpha=D\\times_{V\\times_SV}(V_\\alpha\\times_SV_\\alpha)$ and $Q_\\alpha=V_\\alpha/D_\\alpha$. The projection $D_\\alpha\\to V_\\alpha$ is a base change of $D\\to V$ followed by open restriction. Flatness and local finite presentation follow from [lem-weil-pbc-flat-morphism-base-change], [lem-weil-pbc-qcqs-morphism-permanence](3), [lem-pc-flat-compose], [lem-sbc-locally-finite-presentation-composition] and [lem-weil-pbc-etale-composition-cancellation](1), which makes open immersions etale, and [def-weil-etale-morphism]. Local quasi-finiteness follows from [lem-weil-pbc-separated-lqf-base-change](2) and [lem-weil-pbc-lqf-restriction-to-opens]. The other projection is identical after interchange.",
+   "uses": [
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), proof"
+   }
+  },
+  {
+   "text": "Fix $\\alpha$. Apply [lem-sfb-fppf-relation-etale-replacement] to the affine scheme $V_\\alpha$ and relation $D_\\alpha$. It gives finitely many etale maps $W_i\\to V_\\alpha$ covering $V_\\alpha$, and isomorphisms $W_i/(D_\\alpha|_{W_i})\\simeq\\overline W_i/\\overline D_i$, where the relation on the right is etale. By [lem-trf-etale-relation-quotient] each right-hand quotient, hence each left-hand quotient $E_i$, is an algebraic space. By [lem-trf-etale-relation-finding-opens] the maps $E_i\\to Q_\\alpha$ are representable open immersions: their input maps $W_i\\to V_\\alpha$ are etale, hence flat and locally finitely presented [def-weil-etale-morphism], and the relation projections are surjective because they have the diagonal section.",
+   "uses": [
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-etale-relation-finding-opens",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), proof"
+   }
+  },
+  {
+   "text": "The maps $E_i\\to Q_\\alpha$ are jointly surjective as sheaves. Indeed [lem-weil-pbc-site-sheafification-sections-local] says a section of $Q_\\alpha$ is fppf-locally a class of a map to $V_\\alpha$. Pull back the covering $\\{W_i\\to V_\\alpha\\}$ along that map; [lem-weil-pbc-etale-covering-base-change] gives an etale covering, which is an fppf covering by [def-pc-fppf-site] and [def-weil-etale-morphism]. On its members the class lifts to the corresponding $E_i$. The finite coproduct of the $E_i$ is an algebraic space by [lem-trf-algebraic-space-coproduct]; its required atlas coproduct is a finite scheme coproduct in the chosen site bound [lem-weil-pbc-scheme-coproduct-family, def-weil-size-convention]. Identify each $E_i$ with its image open subfunctor. Then [lem-trf-algebraic-space-open-gluing] shows $Q_\\alpha$ is an algebraic space.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-fppf-site",
+    "def-weil-etale-morphism",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention",
+    "lem-trf-algebraic-space-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), proof"
+   }
+  },
+  {
+   "text": "By [lem-trf-etale-relation-finding-opens], the maps $Q_\\alpha\\to V/D$ are representable open immersions, since $V_\\alpha\\to V$ are open immersions, etale by [lem-weil-pbc-etale-composition-cancellation](1), hence flat and locally finitely presented [def-weil-etale-morphism]. They cover as sheaves: a section of $V/D$ is fppf-locally represented in $V$ by [lem-weil-pbc-site-sheafification-sections-local], and the inverse images of the $V_\\alpha$ form an open covering of that test scheme. On each member the representative lies in $V_\\alpha$. The coproduct $\\coprod_\\alpha Q_\\alpha$ is algebraic by [lem-trf-algebraic-space-coproduct]. Its size condition is satisfied: take the affine cover with index bounded by $|V|$, the scheme atlases obtained in steps 7--8 (finitely many per affine piece), and their scheme coproduct in the fixed containing universe [def-weil-size-convention, lem-weil-pbc-scheme-coproduct-family]. Apply [lem-trf-algebraic-space-open-gluing] to obtain algebraicity of $V/D$, and transport it along $V/D\\simeq Q\\simeq F$. Transporting an atlas and its scheme tests along this natural isomorphism preserves exactly the defining clauses of [def-trf-algebraic-space]. Empty schemes and empty covering families are included: the empty quotient is the empty algebraic space.",
+   "uses": [
+    "lem-trf-etale-relation-finding-opens",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-trf-algebraic-space-coproduct",
+    "def-weil-size-convention",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-algebraic-space-open-gluing",
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-a1-separated-locally-qf-space-representable",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-fppf-space-relation-slicing",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-fppf-relation-etale-replacement",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-size-convention",
+  "lem-trf-algebraic-space-open-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S6 (theorem-final-bootstrap), (3) to (1) to (2), followed by slicing, affine etale-local reduction, and open gluing. The direct scheme-kernel construction avoids a separate diagonal-bootstrap invocation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|final.bootstrap|bootstrap.*sheaf",
+   "results": {
+    "t": "2026-10-22T06:29:54Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|final.bootstrap|bootstrap.*sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: flat descent and universal openness for schemes do not supply algebraicity of a sheaf from an fppf algebraic-space atlas; no AlgebraicSpace source declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf sheaf admitting a flat locally finitely presented surjective algebraic space atlas is an algebraic space",
+   "results": {
+    "t": "2026-10-22T06:29:54Z",
+    "tool": "leansearch",
+    "query": "An fppf sheaf admitting a flat locally finitely presented surjective algebraic space atlas is an algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.SheafedSpace.mk.injEq",
+     "AlgebraicGeometry.Scheme.sheaf",
+     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace_toPresheafedSpace",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.Flat",
+     "SheafOfModules.isFinitePresentation",
+     "AlgebraicGeometry.Flat.iff_flat_stalkMap"
+    ],
+    "digest": "2ab7a03d22a0661f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: flat descent and universal openness for schemes do not supply algebraicity of a sheaf from an fppf algebraic-space atlas; no AlgebraicSpace source declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": {
+    "t": "2026-10-22T06:29:55Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"Flat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: flat descent and universal openness for schemes do not supply algebraicity of a sheaf from an fppf algebraic-space atlas; no AlgebraicSpace source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf with a flat locally finitely presented surjective algebraic-space cover is an algebraic space",
+   "results": {
+    "t": "2026-10-22T06:29:57Z",
+    "tool": "leanfinder",
+    "query": "An fppf sheaf with a flat locally finitely presented surjective algebraic-space cover is an algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact"
+    ],
+    "digest": "abd1b85a79e75de9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: flat descent and universal openness for schemes do not supply algebraicity of a sheaf from an fppf algebraic-space atlas; no AlgebraicSpace source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotients by flat finitely presented equivalence relations are algebraic spaces",
+   "results": {
+    "t": "2026-10-22T06:29:58Z",
+    "tool": "leanfinder",
+    "query": "Quotients by flat finitely presented equivalence relations are algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation"
+    ],
+    "digest": "77caa530637c577d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: flat descent and universal openness for schemes do not supply algebraicity of a sheaf from an fppf algebraic-space atlas; no AlgebraicSpace source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf with a representable flat locally finitely presented surjective algebraic space atlas is an algebraic space",
+   "results": {
+    "t": "2026-10-23T09:51:38Z",
+    "tool": "leanfinder",
+    "query": "An fppf sheaf with a representable flat locally finitely presented surjective algebraic space atlas is an algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.Scheme",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite"
+    ],
+    "digest": "0252fda084e1d619"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and descent do not establish algebraicity of a sheaf; grep found no AlgebraicSpace declaration"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Flat\"",
+   "results": {
+    "t": "2026-10-23T09:56:43Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"Flat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and descent do not establish algebraicity of a sheaf; grep found no AlgebraicSpace declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|final.bootstrap|bootstrap.*sheaf",
+   "results": {
+    "t": "2026-10-23T09:56:42Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|final.bootstrap|bootstrap.*sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and descent do not establish algebraicity of a sheaf; grep found no AlgebraicSpace declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity of an fppf sheaf admitting a flat locally finitely presented surjective algebraic space cover",
+   "results": {
+    "t": "2026-10-23T09:56:43Z",
+    "tool": "leansearch",
+    "query": "Algebraicity of an fppf sheaf admitting a flat locally finitely presented surjective algebraic space cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.Scheme.Hom.cover",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+     "AlgebraicGeometry.Flat.epi_of_flat_of_surjective",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Flat.casesOn"
+    ],
+    "digest": "cc357c812b7bd11e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and descent do not establish algebraicity of a sheaf; grep found no AlgebraicSpace declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat equivalence relation quotients and algebraic space atlas bootstrap",
+   "results": {
+    "t": "2026-10-23T09:56:53Z",
+    "tool": "leanfinder",
+    "query": "Flat equivalence relation quotients and algebraic space atlas bootstrap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+     "AlgebraicGeometry.Flat.instDescScheme",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat.of_stalkMap",
+     "AlgebraicGeometry.Flat.instOfIsOpenImmersion"
+    ],
+    "digest": "2562d6e0c860cfbd"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flatness and descent do not establish algebraicity of a sheaf; grep found no AlgebraicSpace declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-finite-type-fppf-effectivity",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf.",
+   "via": [
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-space-atlas-bootstrap",
+  "worker": "stage1",
+  "summary": "Checked 04S6(3) against the source, reduced the algebraic-space atlas to a scheme atlas by explicit scheme tests, proved its kernel relation schematic by 0463 and 03XX, identified its quotient with F by local lifting and the sheaf universal property, then followed slicing and affine etale replacement/open gluing. Two strictly smaller statement-only inputs; no diagonal hypothesis added and no target changed.",
+  "blueprint": "Historical det-thm-sf-ctf-stability-direct-images proof (3), dimension-induction support through curve-stack effectivity; realizes exactly the final-bootstrap prerequisite named in blueprint.from.place. Current latest blueprint has shortened the upper direct-image route; this generic supporting theorem retains its assigned source and statement. The ancestor tool reports None; its full inherited via chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-trf-etale-relation-finding-opens",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   },
+   {
+    "node": "lem-trf-algebraic-space-open-gluing",
+    "why": "Generic scheme/algebraic-space/sheaf foundation used with exactly its stated hypotheses; the current unit has no replacement, and this does not supply a trace-formula or duality step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-etale-relation-finding-opens",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-algebraic-space-open-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-0f5ca8a91",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-0f5ca8a91 (reviewer sub-agent of L); spot-checked: I read 04S6 (all of theorem-final-bootstrap and its proof), 04S1, 0489, 04S4 and 04S0 together with situation-quasi-splitting. The item statement matches 04S6(3) and is unchanged. Steps 1-9 follow the source route: atlas reduction by chart tests, kernel relation R, R a scheme via 0463 and 03XX over the scheme A×_S A (a valid replacement for the diagonal bootstrap), 04S1 local surjectivity, a direct sheafification argument, 0489 slicing, the affine cover, étale replacement, then 02WW, 02WU, 02WQ and 02WR gluing. Every cited clause says what the step takes from it. Both new nodes are sound and not duplicates. The slicing node is 0489 with the printed R→U typo corrected to R′→U′. The replacement node (04S0 + 04S4 division + open-unit étaleness) has its hypotheses verified: affine V makes s,t separated; j is a monomorphism, hence separated and lqf; V quasi-compact gives a finite cover; empty V gives empty I. The existing 04S4 node is a strict ingredient. Searched lem-sfb-etale-sheaf-space-atlas-bootstrap, the 04SK, 02YS and stack-presentation nodes, and the a1/trf relation nodes: no restatement of either child. Batch-5: every listed trf citation and the def-trf-algebraic-space closure are general algebraic-space foundations (025Y, 03EC, 02WW, 02WU, 02WQ, 02WR), not trace-formula or Poincaré-duality content, so accepted. The declared tool_uses are accepted. Minor remark, no change needed: in step 9, any Q_α atlas satisfies the 02WQ size clause under the size convention."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfSpaceAtlasBootstrap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fppf_space_atlas_bootstrap",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfSpaceAtlasBootstrap.lean",
+  "statement": "theorem fppf_space_atlas_bootstrap {S : Scheme.{u}} (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (U : AlgebraicSpace S) (q : U.obj ⟶ F) (hatlas : ∀ (T : Over S) (a : F.obj.obj (op T)), ∃ (P : AlgebraicSpace S) (p : P.obj.obj ⟶ yoneda.obj T) (r : P.obj.obj ⟶ U.obj.obj), IsPullback r p q.hom (yonedaEquiv.symm a) ∧ (∀ (V : Over S) (c : yoneda.obj V ⟶ P.obj.obj), IsEtale c → Flat (yoneda.preimage (c ≫ p)).left ∧ LocallyOfFinitePresentation (yoneda.preimage (c ≫ p)).left) ∧ IsJointlySurjective (fun _ : Unit ↦ p)) : IsAlgebraicSpace F",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50e0ff45c",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Checked FppfSpaceAtlasBootstrap.fppf_space_atlas_bootstrap against the node and Stacks 04S6(3); every clause matches. F : Sheaf (fppfTopology.over S) (Type u); U : AlgebraicSpace S; q : U.obj ⟶ F. ∀ T a, ∃ algebraic space P with IsPullback r p q.hom (yonedaEquiv.symm a), keeping both projections. Flat ∧ LocallyOfFinitePresentation of every étale chart composite V→T: equivalent to MapIsLocally with target h_T (identity chart one way; graph of a section of an étale map is an open immersion plus base change the other way). Singleton IsJointlySurjective: read the def, it is surjectivity on field-point classes in universe u. Conclusion IsAlgebraicSpace F, no diagonal hypothesis. Edge cases (empty S/T/U/P, field extensions, universes) fine; no extra assumptions. Node differs from live only by the lean record; the 8 stmt_dep records are identical to live; statement verbatim in the file; proof only sorry; source/blueprint docstrings and all 9 proof steps present; all imports exist. No duplicate: only etale_sheaf_space_atlas_bootstrap (0BH4) is similar. Notes, no change: inline chart condition instead of MapIsFlat (def-sfb-space-morphism-properties not among stmt_deps); IsJointlySurjective reached through lem-trf-space-fibre-products-etale-covers as the node text prescribes. Second reading is the author's own and says so. No file changed, so no compile."
+ }
+}

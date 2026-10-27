@@ -1,0 +1,184 @@
+{
+ "id": "lem-sfb-smooth-morphism-cotangent-isomorphism-etale",
+ "kind": "statement",
+ "title": "Etaleness of a morphism between smooth schemes from its relative differential",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme], let $p:X\\to S$ and $q:Y\\to S$ be smooth morphisms [def-sbc-smooth-morphisms], and let $g:X\\to Y$ satisfy $qg=p$. Write $\\Omega^1_{X/S}$ and $\\Omega^1_{Y/S}$ for their sheaves of relative differentials [def-sc-relative-differential-sheaf] and $g^*$ for module pullback [def-pc-module-pullback]. The universal derivations induce an $\\mathcal O_X$-linear map $c_g:g^*\\Omega^1_{Y/S}\\to\\Omega^1_{X/S}$, locally given by $a\\otimes db\\mapsto a\\,d(g^\\sharp b)$. For every point $x\\in X$, the morphism $g$ is etale on some open neighbourhood of $x$ [def-weil-etale-morphism] if and only if the induced map of stalks $(c_g)_x:(g^*\\Omega^1_{Y/S})_x\\to\\Omega^1_{X/S,x}$ [def-pc-module-stalk-functor] is an isomorphism of $\\mathcal O_{X,x}$-modules. No field, Noetherian, separatedness, or constant-relative-dimension assumption on $S,X,Y$ is imposed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.2 Corollary 10, printed p.41 (PDF p.48), equivalence (a) and (b); primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED. Relative Jacobian formulation on smooth charts: Stacks Tag 02GU (morphisms-lemma-etale-at-point), condition (8).",
+  "external": [
+   {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GU (lemma-etale-at-point), square Jacobian criterion (8), applied on smooth source and target charts"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-etale-morphism",
+  "def-pc-module-stalk-functor",
+  "def-a1-relative-differentials-pullback-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the pointwise clause of [lem-sfb-smooth-cotangent-etale-criterion] to the same schemes $S,X,Y$, with structural maps $p,q$ and $h=g$. The equation $qg=p$ is exactly its requirement that $h$ be an $S$-morphism. Its map $dh$ is $c_g$: both send $a\\otimes db$ to $a\\,d(g^\\sharp b)$ by their displayed universal-derivation formula. Thus its assertion for the given $x$ is exactly that $g$ is etale on an open neighbourhood of $x$ if and only if $(c_g)_x$ is an isomorphism. Its pointwise clause assumes only smoothness over $S$; the equal-rank hypothesis occurs solely in its additional determinant clause and is not used here.",
+   "uses": [
+    "lem-sfb-smooth-cotangent-etale-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "2.2 Corollary 10, printed p.41, scan PDF page 48 (zero-based page 47); specialization of the existing DAG criterion pointwise clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-cotangent-etale-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "2.2 Corollary 10; local copy WANTED; direct specialization of the existing DAG statement lem-sfb-smooth-cotangent-etale-criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between two smooth schemes over the same base is etale at a point if the map on relative cotangent modules is an isomorphism at that point",
+   "results": "{\"t\": \"2026-10-24T08:15:48Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between two smooth schemes over the same base is etale at a point if the map on relative cotangent modules is an isomorphism at that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.mem_etaleLocus_iff\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"a2ef2ca5936b7fe4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme etale/smooth definitions, formal-unramifiedness implications, algebra etale locus and relative-dimension-zero constructors do not give the relative differential criterion for a map between arbitrary smooth S-schemes. Inspected Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; no such criterion there. The second semantic phrasing also did not find it."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(cotangent|differential)|[Ee]tale.*(Cotangent|Differential)|(cotangent|differential).*etale",
+   "results": "{\"t\": \"2026-10-24T08:17:12Z\", \"tool\": \"grep\", \"query\": \"etale.*(cotangent|differential)|[Ee]tale.*(Cotangent|Differential)|(cotangent|differential).*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme etale/smooth definitions, formal-unramifiedness implications, algebra etale locus and relative-dimension-zero constructors do not give the relative differential criterion for a map between arbitrary smooth S-schemes. Inspected Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; no such criterion there. The second semantic phrasing also did not find it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An S morphism of smooth S schemes is etale if its differential is invertible",
+   "results": "{\"t\": \"2026-10-24T08:17:13Z\", \"tool\": \"leansearch\", \"query\": \"An S morphism of smooth S schemes is etale if its differential is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"RingHom.Etale\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"cf81f7c4934a27a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme etale/smooth definitions, formal-unramifiedness implications, algebra etale locus and relative-dimension-zero constructors do not give the relative differential criterion for a map between arbitrary smooth S-schemes. Inspected Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; no such criterion there. The second semantic phrasing also did not find it."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"KaehlerDifferential\"",
+   "results": "{\"t\": \"2026-10-24T08:17:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"KaehlerDifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme etale/smooth definitions, formal-unramifiedness implications, algebra etale locus and relative-dimension-zero constructors do not give the relative differential criterion for a map between arbitrary smooth S-schemes. Inspected Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; no such criterion there. The second semantic phrasing also did not find it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobian criterion for a map between smooth schemes: the map is etale wherever the relative differential is an isomorphism",
+   "results": "{\"t\": \"2026-10-24T08:17:15Z\", \"tool\": \"leanfinder\", \"query\": \"Jacobian criterion for a map between smooth schemes: the map is etale wherever the relative differential is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"8d12636f90eeb343\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme etale/smooth definitions, formal-unramifiedness implications, algebra etale locus and relative-dimension-zero constructors do not give the relative differential criterion for a map between arbitrary smooth S-schemes. Inspected Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; no such criterion there. The second semantic phrasing also did not find it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between smooth schemes over a common base is etale near a point if and only if its map on relative differential stalks is an isomorphism",
+   "results": "{\"t\": \"2026-10-24T09:11:54Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between smooth schemes over a common base is etale near a point if and only if its map on relative differential stalks is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.mem_etaleLocus_iff\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"9e497e5d36e3f2c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; scheme etale/smooth definitions, etale locus membership and postcomposition do not give the stated relative differential equivalence. The grep hit is only the StandardSmoothCotangent import."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|differential",
+   "results": "{\"t\": \"2026-10-24T09:14:16Z\", \"tool\": \"grep\", \"query\": \"cotangent|differential\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"11\"], \"digest\": \"f55af6ec67a13abf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; scheme etale/smooth definitions, etale locus membership and postcomposition do not give the stated relative differential equivalence. The grep hit is only the StandardSmoothCotangent import."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Differential\"",
+   "results": "{\"t\": \"2026-10-24T09:14:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"Differential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures and Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; scheme etale/smooth definitions, etale locus membership and postcomposition do not give the stated relative differential equivalence. The grep hit is only the StandardSmoothCotangent import."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-trait-birational-immersion",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.1 Theorem 5, proof of the no-shrinking assertion, printed p.114 (PDF p.120): codimension-one domain, differential determinant, and Zariski Main Theorem; the same argument applies to any morphism between smooth trait models. Differential-determinant step: the differential of a map between smooth schemes is invertible precisely on its etale locus (BLR 2.2 Corollary 10).",
+   "via": [
+    "lem-sfb-smooth-trait-birational-immersion",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-morphism-cotangent-isomorphism-etale",
+  "worker": "stage1",
+  "summary": "Reused the already existing, more general smooth-cotangent-etale criterion rather than duplicating it or creating fresh component lemmas. Checked its pointwise clause and universal-derivation formula under precisely the item hypotheses. Read BLR 2.2 Corollary 10 in the primary scan, searched the current blueprint/DAG and project Lean, and audited Mathlib searches. No statement change and no new nodes.",
+  "blueprint": "The inherited ancestry has from.node=null (confirmed by blueprint_refs.py ancestor). This realizes the differential-determinant supporting step recorded in blueprint.from.place: BLR 2.2 Corollary 10 in the smooth-trait birational-immersion argument. Current latest-blueprint searches found no blueprint node with this whole statement; the existing non-blueprint DAG criterion supplies it."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-8b55bf6e7",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-8b55bf6e7 (reviewer sub-agent of L); spot-checked: I read the item, the report and the full statement of lem-sfb-smooth-cotangent-etale-criterion. The item is exactly the cited node's pointwise clause: S, X, Y arbitrary schemes, X→S and Y→S smooth, h an S-morphism, and 'h is etale near x iff (dh)_x is an isomorphism'. Setting h=g works because qg=p. The maps c_g and dh are the same map (adjoint to b↦d(g^♯b), using the same differentials and pullback nodes). The cited node's equal-rank hypothesis applies only to its determinant clause. The cited node is in the same unit (sk-thm-sf-ctf-stability), is present on the base, has empty proof_deps and does not cite the item, so there is no cycle. Brief §2 says a special case of an existing node is handled by citing it, so this is not D1/D2. There are no new nodes, and the base item had no proof steps to lose. All six stmt_deps exist and none is merged; def-pc-module-stalk-functor covers (c_g)_x. The statement is true: the forward direction follows from the first fundamental sequence plus Ω_{X/Y}=0; the converse follows from unramifiedness plus the fibrewise flatness criterion and Stacks 02GU (morphisms.tex l.8318), conditions (1)⇔(4). I tested id, étale-over-S schemes, Frobenius on A¹_{F_p}, a point into A¹, X=∅ and a non-reduced S. Duplicate grep found only specializations (lem-pur-etale-at-point-from-differentials, lem-sfb-smooth-tangent-isomorphism-etale) and the cited more general node; the overlap could be merged later. BLR is WANTED (not local) and no SGA is cited. The Mathlib searches cover all three kinds and 'no match' is credible. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothMorphismCotangentIsomorphismEtale",
+  "declaration": "AlgebraicGeometry.smooth_morphism_cotangent_isomorphism_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothMorphismCotangentIsomorphismEtale.lean",
+  "statement": "theorem smooth_morphism_cotangent_isomorphism_etale {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (g : X ⟶ Y) (h : g ≫ q = p) [Smooth p] [Smooth q] (x : X) : (∃ U : X.Opens, x ∈ U ∧ Etale (U.ι ≫ g)) ↔ IsIso ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map (q.relativeDifferentialsPullbackMap g ≫ (Scheme.Hom.relativeDifferentialsCongr (g ≫ q) h).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-121d85018",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: arbitrary schemes S,X,Y in Scheme.{u}; [Smooth p] [Smooth q]; g ≫ q = p; c_g is the canonical relativeDifferentialsPullbackMap (fixed uniquely by its section formula) followed by relativeDifferentialsCongr (an eqToIso), with codomain p.relativeDifferentials; the left side is ∃ open U ∋ x with Etale (U.ι ≫ g); the right side is IsIso of moduleStalkFunctor.map; ↔ in the node's order. No extra hypotheses. Edge cases (empty X, id, étale-over-S, Frobenius, point to A¹, non-reduced S) are consistent. Only node change is the added stmt_dep def-a1-relative-differentials-pullback-map (landed 2026-10-17, on base). lean.statement matches the file verbatim. Docstrings carry source place and blueprint id; proof is sorry; no new defs; report has both required sections; no duplicate found. Not recompiled (no file changed)."
+ }
+}

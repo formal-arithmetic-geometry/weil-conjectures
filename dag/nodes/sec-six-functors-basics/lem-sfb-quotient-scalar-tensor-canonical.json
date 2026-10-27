@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-quotient-scalar-tensor-canonical",
+ "kind": "statement",
+ "title": "Canonical normalized scalar tensorator",
+ "statement": "For every morphism a of commutative condensed rings and scheme T, construct the natural isomorphism canonicalTensor : D_a(U tensor^L V) ≅ D_a(U) tensor^L D_a(V) from the generic derived tensor comparison, and prove its TensorNormalized cochain computation square [def-sfb-quotient-section-tensor-data]. No coefficient flatness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0G7E, 07A4, 07A6; sites-modules.tex Tags 03EK and 03EL. Extracted from lem-sfb-quotient-section-tensor-normalization."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary internal scalar extension is strong monoidal by its normalized balancing map and preserves flat modules and quasi-isomorphisms between K-flat complexes. The generic bifunctor-derived tensor comparison is therefore invertible. Uncurry it without changing its components. Its generic homotopy counit square, transported through the complex quotient and the fixed localization comparisons, is exactly TensorNormalized.",
+   "uses": [
+    "def-sfb-internal-scalar-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-scalar-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The parent proof steps, specialized to the actual condensed coefficient map and fixed internal/section comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars is monoidal and its canonical tensor comparison commutes with pullback and computation counits",
+   "results": "Ordinary module extension, its counit and pseudofunctor composition; monoidal adjunction counit. No exact match for the specified unbounded internal/section comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project generic derived-monoidal API and section comparison interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedTensorComparison",
+   "results": "Unknown identifier: a project declaration outside the Mathlib search environment.",
+   "date": "2026-10-27",
+   "verdict": "Read the existing project declaration directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is a strong monoidal functor, computed on K-flat complexes by the tensor balancing map",
+   "results": "Tor, exact mapDerivedCategory, and ordinary tensor constructions; no direct normalized section comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic derived comparison found locally in WeilConjectures."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalized|ScalarSectionNormalized|SectionPullNormalized",
+   "results": "Mathlib search has no matches. Local search finds the fixed project definitions, the restricted coefficient normalization and the downstream private canonicalScalarTensorIso computations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic computations without importing the circular downstream module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorNormalization",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-normalization",
+   "place": "Separated construction and normalization steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientScalarTensorCanonical",
+  "file": "lean/Sheaf/Paper/QuotientScalarTensorCanonical.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.canonicalTensor_normalized",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarSheafSymmetric",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleClosed",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleBraided",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarModuleFlat",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.scalarPreservesKFlat",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.uncurryTensorIso",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.canonicalTensor",
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.canonicalTensor_normalized"
+  ],
+  "statement": "theorem canonicalTensor_normalized (T : Scheme.{u}) :\n    TensorNormalized a T (canonicalTensor a T)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+ }
+}

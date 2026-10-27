@@ -22,38 +22,36 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat resolution with flat terms for the input. The canonical derived scalar/tensor comparison, inverse-image tensor pullback comparison and restriction/direct-image mate are represented termwise on this resolution and descend to the unbounded derived category.",
+   "text": "Reuse the proved ambient calculation scalar_projection_ambient in Sheaf.Paper.EtaleProperCoefficientTensorUnit (available through a proof-only import all). It applies the generic restricted-mate identity to the normalized scalar/tensor pullback square from lem-pur-etale-scalar-mate-projection. The square is established on flat-term K-flat models and extended by localization; no boundedness witnesses are used. This gives U(scalarMate) followed by the restriction/direct-image comparison as the canonical projection conjugated by scalar/tensor isomorphisms.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-change-of-rings-tensor-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-pur-etale-scalar-mate-projection"
    ],
    "elementary": false
   },
   {
-   "text": "After restriction of scalars, the mate is the ordered coefficient-first projection morphism. The proper finite-coefficient projection theorem makes this composite an isomorphism for every input; exact restriction is conservative, so the scalar mate itself is an isomorphism.",
+   "text": "Reuse proper_scalarMate_isIso from the same module. The inverse scalar/pullback mate is invertible by lem-sfb-etale-proetale-scalar-mate. The iterated-mate identity makes the restriction/direct-image comparison invertible. The finite-coefficient proper projection formula makes the right side of the ambient calculation invertible. Cancel the direct-image comparison, then use homology and conservative ordinary restriction of scalars to conclude IsIso of scalarMate for every unbounded input.",
    "uses": [
-    "lem-amb-proper-coproducts-projection",
-    "lem-pur-etale-scalar-mate-projection"
+    "lem-pur-etale-scalar-mate-projection",
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-etale-proper-projection-formula-finite"
    ],
    "elementary": false
+  },
+  {
+   "text": "For the ordered projection identity, expand functoriality of direct image and substitute the ambient calculation. Cancel the target scalar/tensor inverse against its hom and cancel the source scalar/tensor inverse against its hom inside direct image. The remaining maps are exactly the two signed symmetries and the specified coefficient-pullback projection composite in the conclusion. Pair this equality with the preceding isomorphism result.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-change-of-rings-tensor-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-amb-proper-coproducts-projection",
-  "lem-pur-etale-scalar-mate-projection"
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-etale-proper-projection-formula-finite"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6 proper coefficient comparison, expanded with Tags 0B56 and 0D6E."
+  "place": "Tag 0GL6 proper case, using the already proved ambient helpers scalar_projection_ambient and proper_scalarMate_isIso in Sheaf.Paper.EtaleProperCoefficientTensorUnit; finite proper projection formula from Tag 0F0G and mate identities from Tags 07A4 and 07A7."
  },
  "mathlib_searches": [
   {
@@ -125,14 +123,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261020T233133-L-898201",
-  "kind": "interface",
+  "landing": "20261026T222757-L-694834",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

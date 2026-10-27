@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-finite-algebra-split-or-dual-quotient",
+ "kind": "statement",
+ "title": "A finite algebra is split reduced or has a dual-number quotient",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $A$ be a commutative unital $F$-algebra, with algebra homomorphisms understood as in [def-weil-pbc-algebra-hom-quotient], which is finite-dimensional as an $F$-vector space [def-weil-finite-dimensional-subspace]. Define $F[\\epsilon]=F\\oplus F\\epsilon$ to be the $F$-algebra with componentwise addition, unit $1+0\\epsilon$, and multiplication $(a+b\\epsilon)(c+d\\epsilon)=ac+(ad+bc)\\epsilon$; in particular $\\epsilon^2=0$. Then either there are an integer $n\\geq0$ and an $F$-algebra isomorphism $A\\simeq F^n$ with componentwise operations, or there is a surjective unital $F$-algebra homomorphism $A\\twoheadrightarrow F[\\epsilon]$. The zero algebra is allowed, and $F^0$ denotes the zero algebra.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.18, proof (b) => (c), printed p.237: the finite-dimensional commutative algebra is a product of local Artinian algebras with residue field F; if one local factor is not a field there is a surjection to the dual numbers. This is the finite-algebra input cited there as CA 16.7, with the zero-algebra case included."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "If $A$ is the zero algebra, take $n=0$: its unique map to the empty product $F^0$ is an $F$-algebra isomorphism. Henceforth suppose $A\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18, proof (b) => (c), printed p.237; expansion of the finite-local-algebra argument"
+   }
+  },
+  {
+   "text": "The field $F$ is a local ring whose only prime ideal is $(0)$. Apply [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] to the finite $F$-algebra $A$: it has finitely many maximal ideals $\\mathfrak n_1,\\ldots,\\mathfrak n_r$, and every element of their intersection is nilpotent. Thus [lem-weil-pbc-product-of-localizations-at-maximal] gives the canonical $F$-algebra isomorphism $\\alpha:A\\xrightarrow{\\sim}\\prod_{i=1}^r B_i$, where $B_i=A_{\\mathfrak n_i}$ is local. If $r=0$, this is the first alternative with $n=0$. For each existing factor, the composite $p_i:A\\xrightarrow{\\alpha}\\prod_jB_j\\to B_i$ is surjective: for $b\\in B_i$ take $\\alpha^{-1}$ of the tuple with entry $b$ at $i$ and zero elsewhere. The images under $p_i$ of a finite $F$-spanning family of $A$ span $B_i$, so each $B_i$ is finite-dimensional over $F$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-product-of-localizations-at-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06RS, lemma-local-dimension-zero-henselian, proof; Tag 00JA, lemma-product-local. These give the product decomposition used by Milne 12.18, p.237."
+   }
+  },
+  {
+   "text": "For each $i$, write $\\mathfrak m_i$ for the maximal ideal of $B_i$, $s_i:F\\to B_i$ for its structure map, and $q_i:B_i\\to B_i/\\mathfrak m_i$ for the quotient. The quotient is a field, and the images of a finite spanning family of $B_i$ span it over $F$. By [lem-weil-pbc-alg-closed-finite-extension-trivial], $q_is_i:F\\to B_i/\\mathfrak m_i$ is bijective. Consequently $\\rho_i=(q_is_i)^{-1}q_i:B_i\\to F$ is an $F$-algebra map with kernel $\\mathfrak m_i$ and $\\rho_is_i=\\operatorname{id}_F$. If every $\\mathfrak m_i=0$, every $q_i$ is also bijective; the inverses $s_i^{-1}=\\rho_i$ identify $\\alpha$ with an $F$-algebra isomorphism $A\\simeq F^r$. This proves the first alternative in this case.",
+   "uses": [
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GR, lemma-algebraically-closed; applied to the finite residue fields in Milne 12.18, printed p.237."
+   }
+  },
+  {
+   "text": "Otherwise select a factor $B=B_i$ with nonzero maximal ideal $\\mathfrak m=\\mathfrak m_i$, and put $s=s_i$, $\\rho=\\rho_i$. The finite dimension of $B$ gives Artinianity by [lem-weil-pbc-finite-dim-algebra-artinian]. Since $B$ is local, [lem-weil-pbc-artinian-local-noetherian-nilpotent] gives $\\mathfrak m^N=0$ for some $N\\ge1$. Hence $\\mathfrak m/\\mathfrak m^2\\ne0$: if $\\mathfrak m=\\mathfrak m^2$, multiplying by $\\mathfrak m$ inductively gives $\\mathfrak m=\\mathfrak m^t$ for every $t\\ge1$, contradicting $\\mathfrak m\\ne0$ at $t=N$. Regard $V=\\mathfrak m/\\mathfrak m^2$ as an $F$-vector space via $s$.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00J6 (lemma-finite-dimensional-algebra), 00J8 (lemma-artinian-radical-nilpotent), and 00KH (lemma-Noetherian-dimension-0); explicit cotangent nonvanishing expansion of Milne 12.18, printed p.237."
+   }
+  },
+  {
+   "text": "Choose $0\\ne v\\in V$. By [lem-weil-pbc-vector-space-dual-separates], there is an $F$-linear $\\lambda:V\\to F$ with $\\lambda(v)\\ne0$. Choose $u_0\\in\\mathfrak m$ representing $v$ and replace it by $u=\\lambda(v)^{-1}u_0$. Then $u\\in\\mathfrak m$ and $\\lambda([u])=1$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-dual-separates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18, proof (b) => (c), printed p.237; expansion of the finite-local-algebra argument"
+   }
+  },
+  {
+   "text": "Define $D:B\\to F$ by $D(b)=\\lambda([b-s(\\rho(b))])$, where the argument lies in $\\mathfrak m=\\ker\\rho$. It is $F$-linear and $D(s(a))=0$ for $a\\in F$. To check multiplication, write $b=s(a)+x$, $c=s(d)+y$ with $a=\\rho(b)$, $d=\\rho(c)$, $x,y\\in\\mathfrak m$. Then $bc=s(ad)+s(a)y+s(d)x+xy$, and $xy\\in\\mathfrak m^2$, so $D(bc)=aD(c)+dD(b)$. Therefore $\\psi(b)=\\rho(b)+D(b)\\epsilon$ is additive, sends $1$ to $1$, respects $F$, and satisfies $\\psi(bc)=\\psi(b)\\psi(c)$ for the multiplication of $F[\\epsilon]$ in the statement. Thus $\\psi$ is a unital $F$-algebra homomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18, proof (b) => (c), printed p.237; expansion of the finite-local-algebra argument"
+   }
+  },
+  {
+   "text": "For $a,d\\in F$, the element $s(a)+du\\in B$ satisfies $\\rho(s(a)+du)=a$ and $D(s(a)+du)=d\\lambda([u])=d$. Thus $\\psi(s(a)+du)=a+d\\epsilon$, proving surjectivity. Since $p_i:A\\to B$ is surjective, so is $\\psi p_i:A\\twoheadrightarrow F[\\epsilon]$, which is the second alternative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.18, proof (b) => (c), printed p.237; expansion of the finite-local-algebra argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-vector-space-dual-separates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.18, proof (b) => (c), printed p.237; expansion of the finite-local-algebra argument",
+  "note": "Follows Milne Theorem 12.18 finite-local-factor route; spells out the omitted dual-number quotient using the nilpotent maximal ideal and a cotangent functional. Product decomposition supplied by existing Stacks 06RS/00JA nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional commutative algebra over an algebraically closed field either a product of copies of the field or admits a surjective algebra map to the dual numbers",
+   "results": "Available; 8 hits: IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, Algebra.FiniteType.iff_quotient_mvPolynomial'', DualNumber.lift, Algebra.FiniteType.iff_quotient_mvPolynomial, DualNumber.range_lift, DualNumber.lift_apply_eps, fieldOfFiniteDimensional. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the semisimple decomposition theorem assumes semisimplicity; the formally etale product theorem assumes formal etaleness; DualNumber.lift describes maps FROM the dual numbers. None gives the dual-number quotient alternative for an arbitrary finite commutative algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional commutative algebra over an algebraically closed field that is not a product of copies of the field has a quotient isomorphic to the dual numbers",
+   "results": "Available; 8 hits: spectrum.nonempty_of_isAlgClosed_of_finiteDimensional, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing, Algebra.FormallyEtale.iff_exists_algEquiv_prod, IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the semisimple decomposition theorem assumes semisimplicity; the formally etale product theorem assumes formal etaleness; DualNumber.lift describes maps FROM the dual numbers. None gives the dual-number quotient alternative for an arbitrary finite commutative algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DualNumber\", \"Surjective\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the semisimple decomposition theorem assumes semisimplicity; the formally etale product theorem assumes formal etaleness; DualNumber.lift describes maps FROM the dual numbers. None gives the dual-number quotient alternative for an arbitrary finite commutative algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.?number|DualNumber|exists.*algEquiv.*pi|exists.*local.*ring",
+   "results": "Available; 25 hits: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/DualNumber.lean, Mathlib/RingTheory/DualNumber.lean, Mathlib/RingTheory/DualNumber.lean, Mathlib/RingTheory/DualNumber.lean, Mathlib/RingTheory/DualNumber.lean, Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean.  Searched Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the semisimple decomposition theorem assumes semisimplicity; the formally etale product theorem assumes formal etaleness; DualNumber.lift describes maps FROM the dual numbers. None gives the dual-number quotient alternative for an arbitrary finite commutative algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|surject|cotangent|derivation",
+   "results": "Available; 0 hits: .  Searched Mathlib/Algebra/DualNumber.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the semisimple decomposition theorem assumes semisimplicity; the formally etale product theorem assumes formal etaleness; DualNumber.lift describes maps FROM the dual numbers. None gives the dual-number quotient alternative for an arbitrary finite commutative algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "equivPi|exists.*[Aa]lgEquiv.*[Pp]rod|DualNumber.*[Ss]urject",
+   "results": "Available; 25 hits: Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Instances.lean, Mathlib/RingTheory/Artinian/Instances.lean, Mathlib/RingTheory/Unramified/Basic.lean.  Searched Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite commutative algebra over an algebraically closed field either product of fields or quotient dual numbers",
+   "results": "Available; 8 hits: IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.finite_of_essFiniteType_of_isAlgebraic, Algebra.QuasiFinite.recOn, AlgebraicClosure.instCommRing, Algebra.FinitePresentation.iff, Algebra.QuasiFinite.casesOn, Algebra.FiniteType.iff_quotient_mvPolynomial''. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DualNumber\", \"Surjective\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional commutative algebra over an algebraically closed field is a product of copies of the field or surjects onto the dual numbers",
+   "results": "Available; 8 hits: spectrum.nonempty_of_isAlgClosed_of_finiteDimensional, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, IsAlgClosed.nonempty_algEquiv_or_of_finrank_eq_two, IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing, IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed, minpoly.AlgHom.fintype, Algebra.FormallyEtale.iff_exists_algEquiv_prod. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv.*local|equiv.*pi|local.*equiv|exists.*[Ll]ocal",
+   "results": "Available; 10 hits: Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Artinian/Instances.lean, Mathlib/RingTheory/Artinian/Instances.lean, Mathlib/RingTheory/Artinian/Instances.lean.  Searched Mathlib/RingTheory/Artinian",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An Artinian commutative ring is a finite product of Artinian local rings",
+   "results": "Available; 8 hits: isArtinianRing_iff_isNoetherianRing_krullDimLE_zero, IsArtinianRing.instDecompositionMonoid, IsArtinianRing.setOf_isPrime_finite, IsArtinianRing.quotNilradicalEquivPi, IsArtinianRing.instIsSemiprimaryRing, isArtinian_prod, isArtinian_pi, isArtinianRing_iff_isFiniteLength. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing, \"equiv\"",
+   "results": "Available; 12 hits: IsArtinianRing.primeSpectrumEquivMaximalSpectrum, RingEquiv.isArtinianRing, IsArtinianRing.primeSpectrumEquivMaximalSpectrum_apply_asIdeal, IsArtinianRing.primeSpectrumEquivMaximalSpectrum_symm_apply_asIdeal, IsArtinianRing.primeSpectrumEquivMaximalSpectrum_comp_asIdeal, IsArtinianRing.primeSpectrumEquivMaximalSpectrum_symm_comp_asIdeal, IsArtinianRing.equivPi, IsArtinianRing.quotNilradicalEquivPi. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Artinian commutative ring is isomorphic to the finite product of its localizations at maximal ideals",
+   "results": "Available; 8 hits: IsArtinianRing.quotNilradicalEquivPi, IsArtinianRing.instDecompositionMonoid, IsArtinianRing.instFiniteMaximalSpectrum, IsArtinianRing.instFinitePrimeSpectrum, IsArtinianRing.instLocalization, IsArtinianRing.primeSpectrumEquivMaximalSpectrum, IsArtinianRing.localization_artinian, IsArtinianRing.setOf_isMaximal_finite. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no arbitrary finite-algebra split-or-dual-number-quotient dichotomy; the Artinian decomposition hits concern the nilradical quotient or need a nilpotence specialization, and the etale/semisimple hits add hypotheses. Existing DAG leaves supply the needed component facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-additive-vanishing-criterion",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.22, multiplicative type of the now commutative kernel extension. Supporting criterion for the Hom(-, G_a) proof of Milne Corollary 12.22: Theorem 12.18(a),(b),(d). Finite-algebra input in Milne Theorem 12.18(b) => (c): the local Artinian factors of the finite dual coalgebra algebra, and the dual-number quotient when a factor is not a field.",
+   "via": [
+    "lem-sfb-multiplicative-additive-vanishing-criterion",
+    "lem-sfb-commutative-multiplicative-type-extension",
+    "lem-sfb-multiplicative-isogeny-composition",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-algebra-split-or-dual-quotient",
+  "worker": "stage1",
+  "group": "Q27",
+  "summary": "Kept the statement and every imported field. Reused six existing Mathlib leaves, rather than adding duplicates, to write the product-of-local-algebras argument with explicit residue maps, nonzero cotangent space, formula for the dual-number quotient and its surjectivity. Checked zero algebra and arbitrary characteristic. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Composition of multiplicative isogenies has finite central multiplicative kernel. Supporting input: Milne Corollary 12.22, multiplicative type of the now commutative kernel extension. Supporting criterion for the Hom(-, G_a) proof of Milne Corollary 12.22: Theorem 12.18(a),(b),(d). Finite-algebra input in Milne Theorem 12.18(b) => (c): the local Artinian factors of the finite dual coalgebra algebra, and the dual-number quotient when a factor is not a field. The seven steps realize the final finite-algebra prerequisite: local factors and their residue fields, followed by the explicit dual-number quotient. The latest direct-image proof was read; this is a generic algebraic prerequisite below its recorded route, not a replacement of a unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-6b373abbc",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-6b373abbc (reviewer sub-agent of L); spot-checked: Shape: one commit; only the item node and the report are delivered; 0 new nodes; statement and stmt_deps unchanged; proof_deps equals the union of step uses; no SGA. Source: Milne AG 12.18 (b)=>(c), printed p.237, read via pdftotext. Milne writes C^vee as a product of local Artinian rings with residue field k (CA 16.7), then says a non-field factor gives a surjection to k[eps] without constructing it. The item states this with the zero algebra added. Its only citer, the multiplicative-additive-vanishing-criterion node, uses it in the matching form. proof_origin=agent is right because steps 4-7 supply the construction Milne omits (D5). Steps: (2) 06RS-proof node gives finitely many primes, all maximal, with nil intersection; this is exactly the hypothesis of the 00JA product node, which gives local factors and an iso that is F-linear; surjective projections and finite dimension of the factors are argued directly. (3) The 09GR node applied to B_i/m_i via q_i s_i gives rho_i with kernel m_i and rho_i s_i=id; if every m_i=0 then A is F^r. (4) 00J6 gives Artinian and 00J8/00KH give m^N=0 with N>=1; m=m^2 would force m=m^t for all t, so m/m^2 is nonzero, with no hidden Nakayama. (5) The dual-separates node gives lambda; rescaling gives lambda([u])=1. (6) I recomputed D(bc)=aD(c)+dD(b) using xy in m^2, so psi is a unital F-algebra map. (7) psi(s(a)+s(d)u)=a+d eps, so psi composed with p_i is surjective. All six cited nodes are Mathlib leaves and their statements say what the steps use; no tool_uses. Small cases: 0, F^r, F[t]/t^2, F[t]/t^3, F[x,y]/(x,y)^2, characteristic 2; algebraic closure is needed (a proper finite extension K is neither alternative). DAG grep for dual-number and Artinian dichotomy nodes found no duplicate; no Lean declaration found under lean/WeilConjectures by id or name variants. No changes."
+ }
+}

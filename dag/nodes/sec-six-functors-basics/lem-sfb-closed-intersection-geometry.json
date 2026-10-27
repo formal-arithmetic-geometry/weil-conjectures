@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-closed-intersection-geometry",
+ "kind": "statement",
+ "title": "Geometry and base-change hypotheses of finite closed intersections",
+ "statement": "For a closed immersion i:Z→X and a finite family of closed immersions W_a→X factoring through i, with quasi-compact complementary open immersions for i and every W_a, each augmented intersection (empty index Z, nonempty index product over X) is closed, factors through Z, and has quasi-compact complementary open. After arbitrary scheme base change, the family again consists of closed immersions factoring through the pulled-back Z, and all complementary open immersions remain quasi-compact. No cover, affine, coefficient, or nonemptiness hypothesis is needed. Use the intersections of [def-sfb-closed-intersection-augmented-row] and the family pullback of [def-sfb-finite-closed-row-constructions].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09AH; agent deduction in lem-sfb-closed-intersection-vertex-contraction, proof step 1 (finite intersections and base-change of their hypotheses)"
+ },
+ "stmt_deps": [
+  "def-sfb-closed-intersection-augmented-row",
+  "def-sfb-finite-closed-row-constructions",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For a nonempty finite index set, induct on its cardinality. A singleton product in schemes over X is the member itself; adjoining an index is a fibre product with that member. Closed immersions are stable under base change and composition, so each structural map is closed. Its range is the intersection of the member ranges: the two-factor equality follows from the surjectivity onto compatible pairs of points of a scheme fibre product, and induction gives the finite equality. Its complementary open is therefore the finite union of the given complementary opens. On every affine open of X those opens are compact, so their finite union is compact. This proves quasi-compactness of the union immersion. Choose one member of a nonempty index; the product projection followed by its given factorization gives the factorization through Z. At the empty index the intersection is Z and the identity supplies its factorization. For base change by g, closedness of each member follows from closed-immersion base change. Pull back each factorization using the universal property of the pullback; it remains a morphism over the new base. The complementary open is the inverse image by g of the original complementary open, since the range of the closed pullback projection is the inverse image of the original closed range. Its immersion is the base change of the original open immersion, hence is quasi-compact. This also gives the complement hypothesis for the augmentation. These arguments apply to empty members and to an empty family as well.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-quasi-compact-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09AH; proof step 1 (finite intersections and base-change of their hypotheses) of lem-sfb-closed-intersection-vertex-contraction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(finite.*intersection|intersection.*quasiCompact|product.*closedImmersion)",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean, Mathlib/NumberTheory/LSeries/ZetaZeros.lean, Mathlib/Combinatorics/SetFamily/Intersecting.lean, Mathlib/Combinatorics/Compactness.lean, Mathlib/Combinatorics/Enumerative/InclusionExclusion.lean, Mathlib/Combinatorics/Enumerative/InclusionExclusion.lean, Mathlib/Combinatorics/Enumerative/InclusionExclusion.lean, Mathlib/MeasureTheory/Function/Intersectivity.lean; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite intersections of closed immersions have quasi-compact open complements and this property is preserved by base change",
+   "results": "8 hits: AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.casesOn, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.recOn; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite intersections of closed immersions have quasi-compact open complements and this property is preserved by base change",
+   "results": "8 hits: AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiSeparated.of_comp; ",
+   "date": "2026-10-26",
+   "verdict": "No exact match: the hits do not provide this finite augmented closed-intersection statement with its specified maps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedIntersectionVertexContraction",
+  "date": "2026-10-26",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images; technical support-resolution subargument: Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); agent affine closed-base-change and insertion-contraction consequence extracted from old steps 1, 4 and 5 of lem-sfb-finite-closed-cover-resolution, using the existing arbitrary-ring base-change node.; proof step 1 (finite intersections and base-change of their hypotheses)",
+   "via": [
+    "lem-sfb-closed-intersection-vertex-contraction",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedIntersectionGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedIntersectionGeometry.lean",
+  "declaration": "AlgebraicGeometry.ClosedIntersection.closed_intersection_geometry",
+  "statement": "theorem closed_intersection_geometry {X Z : Scheme.{u}} (i : Z ⟶ X)\n    [IsClosedImmersion i] {m : ℕ} (W : Fin m → Over X)\n    (hclosed : ∀ a, IsClosedImmersion (W a).hom)\n    (hfactor : ∀ a, Nonempty (W a ⟶ Over.mk i))\n    (hqc : ∃ U : X.Opens, Set.range U.ι = (Set.range i)ᶜ ∧ QuasiCompact U.ι)\n    (hqcW : ∀ a, ∃ U : X.Opens,\n      Set.range U.ι = (Set.range (W a).hom)ᶜ ∧ QuasiCompact U.ι) :\n    (∀ s, IsClosedImmersion (intersection i W s).hom ∧\n      Nonempty (intersection i W s ⟶ Over.mk i) ∧\n      ∃ U : X.Opens,\n        Set.range U.ι = (Set.range (intersection i W s).hom)ᶜ ∧ QuasiCompact U.ι) ∧\n    ∀ {Y : Scheme.{u}} (g : Y ⟶ X),\n      (∀ a, IsClosedImmersion (finiteClosedPullbackFamily W g a).hom) ∧\n      (∀ a, Nonempty (finiteClosedPullbackFamily W g a ⟶ Over.mk (pullback.fst g i))) ∧\n      (∃ U : Y.Opens, Set.range U.ι = (Set.range (pullback.fst g i))ᶜ ∧\n        QuasiCompact U.ι) ∧\n      (∀ a, ∃ U : Y.Opens,\n        Set.range U.ι = (Set.range (finiteClosedPullbackFamily W g a).hom)ᶜ ∧\n          QuasiCompact U.ι)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T081212-L-1867064",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261026T081212-L-1867064",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

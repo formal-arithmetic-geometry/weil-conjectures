@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-dvr-generic-affine-group-affine",
+ "kind": "statement",
+ "title": "Raynaud affineness for flat groups over a DVR",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $K$ be its fraction field, and put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $G$ be an $S$-group scheme, meaning an $S$-scheme with multiplication, identity section and inverse satisfying the group diagrams. Suppose $G\\to S$ is flat [def-weil-flat-morphism], separated [def-weil-proper-morphism], and of finite type [def-weil-finite-type-morphism]. If $G_K=G\\times_S\\operatorname{Spec}K$ [def-pc-base-change] is affine, then $G$ is affine. Here an affine scheme means one isomorphic to the spectrum of a commutative ring [def-pc-scheme]. No smoothness, connectedness, excellence, henselianity, or perfectness of the residue field is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/qrg.pdf",
+  "place": "Section 3, Proposition 3.1, PDF p.5, statement and Raynaud proof; read online. This is the alternative affineness reference in Conrad Theorem 5.3.5, printed p.166. Local archive WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-trait-group-finite-smooth-cover] to obtain a faithfully flat local DVR extension $R\\to R'$ with algebraically closed residue field, and a finite surjective group homomorphism $q:N\\to G_{R'}$, where $N$ is smooth, separated and of finite type over $R'$. Write $L=\\operatorname{Frac}R'$. The affine generic fibre $G_K$ remains affine over $L$ by [lem-weil-pbc-affine-morphism-permanence], and $q_L$ is finite by [lem-weil-pbc-finite-morphism-permanence]; hence $N_L$ is affine by part (b) of the latter. We will prove $N$ affine and then descend this conclusion.",
+   "uses": [
+    "lem-sfb-trait-group-finite-smooth-cover",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/qrg.pdf",
+    "place": "Proposition 3.1, printed p.5, smooth reduction and affine-chart construction; online source, local archive WANTED."
+   }
+  },
+  {
+   "text": "Smoothness makes $N$ flat by [lem-pc-smooth-flat]. Apply [lem-sfb-flat-trait-group-affinization] over $R'$: with $A=\\Gamma(N,\\mathcal O_N)$ and $H=\\operatorname{Spec}A$, the canonical $u:N\\to H$ is an $R'$-group homomorphism. The ring $A$ is not assumed finitely generated. By [lem-weil-pbc-qcqs-over-affine], separatedness and finite type over the affine base imply that $N$ is quasi-compact and quasi-separated.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-flat-trait-group-affinization",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/qrg.pdf",
+    "place": "Proposition 3.1, printed p.5, smooth reduction and affine-chart construction; online source, local archive WANTED."
+   }
+  },
+  {
+   "text": "Take the finite global principal affine cover $N=\\bigcup_jN_{f_j}$ from [lem-sfb-smooth-trait-principal-translate-cover]. For every $j$, [lem-a1-affine-principal-affinization-isomorphism] identifies $u^{-1}D(f_j)$ with $N_{f_j}$ and identifies its restriction with an isomorphism onto $D(f_j)\\subset H$. These restrictions are restrictions of the same morphism $u$, so their inverse isomorphisms agree on overlaps; gluing them gives $N\\simeq\\bigcup_jD(f_j)$. Thus $u$ is an open immersion. It is quasi-compact by [lemma-nagata-open-immersion-qc-over-separated-target] applied to $N\\to H\\to\\operatorname{Spec}R'$: $N\\to\\operatorname{Spec}R'$ is quasi-compact by finite type, and $H\\to\\operatorname{Spec}R'$ is affine, hence quasi-separated by [lem-weil-pbc-affine-morphism-permanence].",
+   "uses": [
+    "lem-sfb-smooth-trait-principal-translate-cover",
+    "lem-a1-affine-principal-affinization-isomorphism",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Affine principal chart comparison, Tag 01P8; glue the inverses on their common restrictions. The existence of the cover follows the cited online Proposition 3.1."
+   }
+  },
+  {
+   "text": "Let $\\pi$ be a uniformizer of $R'$ and $k$ its residue field. By [lem-weil-pbc-open-immersion-base-change], base change of the open immersion $u$ to $k$ identifies $u_k:N_k\\to H_k$ with an open immersion: it is the inclusion of the inverse image of the open subset $u(N)$ in $H_k$. The group homomorphism $u_k$ is a morphism of absolute groupoids over $\\operatorname{Spec}k$, by taking both source and target maps to be the structure morphism. Apply [lem-sfb-field-groupoid-open-image-closed] to conclude that $u_k(N_k)$ is closed in $H_k$. Since $H_k=V(\\pi\\cdot1_A)$ is closed in $H$, the subset $u(N)\\cap V(\\pi\\cdot1_A)=u_k(N_k)$ is closed in $H$. This uses no finite-type assertion for $H_k$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-sfb-field-groupoid-open-image-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q6, lemma-open-image-is-closed; open-immersion base change is Schemes Tag 01JY. A group scheme is an absolute groupoid over the point."
+   }
+  },
+  {
+   "text": "For $j=u:N\\to\\operatorname{Spec}A$ and $f=\\pi\\cdot1_A$, we have a quasi-compact immersion by step 3. Its inverse image of $D(f)$ is $N_L$, because $D_R(\\pi)=\\operatorname{Spec}L$ for a DVR, and $N_L$ is affine by step 1. Step 4 proves that $u(N)\\cap V(f)$ is closed in $\\operatorname{Spec}A$. These are precisely the hypotheses of [lem-sfb-immersion-principal-affineness], which proves that $N$ is affine.",
+   "uses": [
+    "lem-sfb-immersion-principal-affineness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABH, lemma-get-affine; apply the quasi-compact immersion criterion with the uniformizer."
+   }
+  },
+  {
+   "text": "Now [lem-weil-pbc-finite-surjective-affine-target] applied to $q:N\\to G_{R'}$ proves $G_{R'}$ affine. The base morphism $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ is a singleton fpqc covering, as supplied by [lem-sfb-trait-group-finite-smooth-cover]. Apply [lem-weil-pbc-fpqc-descend-affine] to $G\\to\\operatorname{Spec}R$, then [lem-weil-pbc-affine-morphism-permanence](2), to obtain that $G$ is affine.",
+   "uses": [
+    "lem-sfb-trait-group-finite-smooth-cover",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent of affine morphisms, Tag 02L5; finite-surjective descent of affine schemes is Tag 01ZT in limits.tex. This is the descent reduction in the first paragraph of the online Proposition 3.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-trait-group-finite-smooth-cover",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-pc-smooth-flat",
+  "lem-sfb-flat-trait-group-affinization",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sfb-smooth-trait-principal-translate-cover",
+  "lem-a1-affine-principal-affinization-isomorphism",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-sfb-field-groupoid-open-image-closed",
+  "lem-sfb-immersion-principal-affineness",
+  "lem-weil-pbc-finite-surjective-affine-target",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Assembly of the smooth reduction and principal affine charts from Prasad–Yu Proposition 3.1 (online, local archive WANTED), followed by Stacks Tags 04Q6 and 0ABH instead of any forbidden source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat finite type group scheme over a discrete valuation ring with affine generic fibre is affine",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.affineAnd_apply, AlgebraicGeometry.ValuativeCommSq.domain",
+   "date": "2026-10-24",
+   "verdict": "no match: affine implies separated, affine-property tests, and generic points of affine schemes assume or describe affineness. None recovers affineness of this flat group from its generic fibre. Both semantic phrasings read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud affineness theorem for a separated flat group over a trait whose generic fiber is affine",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.affineAnd, AlgebraicGeometry.HasRingHomProperty.HasAffineProperty, AlgebraicGeometry.HasAffineProperty.affineAnd_iff, AlgebraicGeometry.HasAffineProperty.affineAnd_le_isAffineHom, AlgebraicGeometry.flat_iff, AlgebraicGeometry.IsAffineHom.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: affine implies separated, affine-property tests, and generic points of affine schemes assume or describe affineness. None recovers affineness of this flat group from its generic fibre. Both semantic phrasings read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "group scheme flat separated finite type over a discrete valuation ring affine generic fiber implies affine",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsAffineHom.of_comp, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.Flat.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: affine implies separated, affine-property tests, and generic points of affine schemes assume or describe affineness. None recovers affineness of this flat group from its generic fibre. Both semantic phrasings read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.Flat\"",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: affine implies separated, affine-property tests, and generic points of affine schemes assume or describe affineness. None recovers affineness of this flat group from its generic fibre. Both semantic phrasings read."
+  },
+  {
+   "tool": "grep",
+   "query": "Raynaud|generic.*affine|affine.*generic|isAffine.*[Gg]roup",
+   "results": "4 hits; ; returned names/files: Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: affine implies separated, affine-property tests, and generic points of affine schemes assume or describe affineness. None recovers affineness of this flat group from its generic fibre. Both semantic phrasings read."
+  },
+  {
+   "tool": "grep",
+   "query": "Raynaud|generic.*affine|affine.*generic|affinization",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: none states Raynaud affineness; affine-implies-separated and affine-morphism cancellation are insufficient without an affine morphism already known."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud affineness theorem separated flat group schemes over a valuation ring",
+   "results": "8 hits: AlgebraicGeometry.IsAffineHom.of_comp, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.IsSeparated.valuativeCriterion, AlgebraicGeometry.IsSeparated.hasAffineProperty, Module.Flat.flat_iff_torsion_eq_bot_of_valuationRing_localization_isMaximal, AlgebraicGeometry.IsSeparated.of_valuativeCriterion, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: none states Raynaud affineness; affine-implies-separated and affine-morphism cancellation are insufficient without an affine morphism already known."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-monomorphism-closed",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166: apply Raynaud affineness to the separated flat finite-type generic-image closure; Prasad–Yu Proposition 3.1 supplies the proof.",
+   "via": [
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-generic-affine-group-affine",
+  "worker": "stage1",
+  "summary": "Preserved the full Raynaud statement without smoothness, connectedness, excellence or residue-field restrictions. Extracted three statement-only non-elementary inputs (potential finite smooth cover, group affinization, and principal translate cover). Reused the existing general open-image closedness and uniformizer affineness criterion. Searched the entire DAG, current blueprint, project Lean and Mathlib; the nearby affine normalization nodes cannot be applied before affineness is established. No forbidden source, compiler, or repository mutation used.",
+  "blueprint": "Nearest blueprint ancestor remains null, as recorded by the imported item and blueprint_refs.py. This supporting input serves the generic torus-closure affineness step of the inherited route to the current sk-thm-sf-ctf-stability direct-image proof; no unit step is replaced. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "The special-fibre map of the canonical open immersion is itself an open immersion. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Base change preserves an affine generic fibre; affine morphisms are quasi-separated; an affine morphism to the affine base has affine source. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Finite maps remain finite on the generic fibre, and a finite scheme over an affine scheme is affine. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "The smooth covering group is flat, as required for its affinization group structure. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Separated finite-type N over an affine base is qcqs, the exact hypothesis of the principal-chart comparison. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lem-a1-affine-principal-affinization-isomorphism",
+    "why": "A global affine principal chart is isomorphic to the corresponding basic open in the spectrum of global sections. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lemma-nagata-open-immersion-qc-over-separated-target",
+    "why": "Quasi-compactness of N over the base and quasi-separatedness of its affine target give quasi-compactness of the canonical open immersion. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-surjective-affine-target",
+    "why": "Chevalley descent across the finite surjective smooth covering morphism. This is a general scheme-theoretic tool; the current unit does not supply it."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Descend the affine structure morphism along the faithfully flat local DVR extension. This is a general scheme-theoretic tool; the current unit does not supply it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-a1-affine-principal-affinization-isomorphism",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "lem-weil-pbc-finite-surjective-affine-target",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-0bbffe5a7",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-0bbffe5a7 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full, and the review is in review.md. There is no local copy of Prasad–Yu, so I fetched qrg.pdf online. Its Prop. 3.1 (p.5) proof and the appendix's Cor. A.4 (p.29) and A.9/A.10 (pp.31–32) match the route: reduce by Cor. A.4 to a finite smooth normalization over a strictly henselian base, form Spec Γ(G) as a group, cover G by the BLR principal chart and its G(R)-translates, then descend by Chevalley and fpqc descent. The delivery drops the source's SGA3 VI_B 11.11 and Hopf-flatness ending. It proves N affine instead with Stacks 04Q6 (an open image of a morphism of groupoids over a field is closed) and 0ABH (lemma-get-affine), both read in more-groupoids.tex at lines 1459–1533 and 2769–2803. This replacement is correct, needs no finite type for H_k and no surjectivity of u, and cites no SGA. finite-smooth-cover: true by Cor. A.4 with its third bullet and the A.9 extension to an algebraically closed residue field. The normalization of G_red composed with G_red → G_{R′} is finite and surjective, and Cor. A.4 has no affineness or generic-smoothness hypothesis. flat-trait-group-affinization: I checked A⊗A ≅ Γ(G×G) myself, using a finite affine cover, flat base change and torsion-free hence flat A. principal-translate-cover: the BLR seed (u_f iso ⇔ G_f affine by 01P8) plus Hensel lifting at rational points gives the cover. The statement is true without connectedness, but I could not read BLR itself (WANTED). Steps 1–6 use their cited statements correctly: finite permanence (b) in the right direction, qcqs before 01P8, the Nagata quasi-compactness triangle with an affine H, the open-immersion base change, the three 0ABH hypotheses, and 01ZT, 02L5 and permanence (2). Small cases tested: the trivial group, μ_p in residue characteristic p, disconnected constant groups, a smooth group with disconnected special fibre, and an imperfect residue field. The candidates group-model-potential-smooth-normalization, raynaud-faltings-normalized-reduction, trf-reduced-fibre-modification and group-finite-translate-cover are not duplicates. This is a first split with no re-split note, there are no cycles, and the tool_uses are general scheme theory, accepted. Minor, no change: the new nodes' source.document points to a local PDF that does not exist yet (WANTED), and citations.json is mentioned in the report but not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrGenericAffineGroupAffine",
+  "declaration": "AlgebraicGeometry.isAffine_of_affine_genericFiber_of_dvr",
+  "file": "lean/Sheaf/AlgebraicGeometry/DvrGenericAffineGroupAffine.lean",
+  "statement": "theorem isAffine_of_affine_genericFiber_of_dvr (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (G : Over (Spec (CommRingCat.of R))) [GrpObj G] [Flat G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (hgeneric : IsAffine (pullback G.hom (Spec.map (CommRingCat.ofHom (algebraMap R K))))) : IsAffine G.left",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e16814f4",
+  "group": "N8",
+  "result": "pass",
+  "note": "Only the item lean record and the new module DvrGenericAffineGroupAffine.lean are added; node text, stmt_deps and proof are unchanged. Each clause checked: IsDomain+IsDiscreteValuationRing, IsFractionRing K, G : Over (Spec R) with GrpObj using Mathlib's global CartesianMonoidalCategory (Over S) from pullbacks (Pullbacks.lean:712), Flat/IsSeparated/LocallyOfFiniteType+QuasiCompact on G.hom, generic fibre = pullback along Spec.map(algebraMap R K) affine, conclusion IsAffine G.left. Nothing beyond the node is assumed; direction matches Prasad-Yu Prop 3.1. Statement verbatim; source/blueprint docstrings and all 6 proof steps present; sorry only; imported project modules exist in live; report has both sections. No file changed, so no compile. Lead note: parallel Q34 delivery f7f926b9a8df of the same item (run-review PASS, same statement up to the declaration name, not yet landed) will collide on the module path; retire one claim."
+ }
+}

@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-scheme-derived-etale-qcoh-comparison",
+ "kind": "statement",
+ "title": "Unbounded derived Zariski-etale quasi-coherent comparison",
+ "statement": "Use schemes [def-pc-scheme], algebraic spaces and their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and the unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived direct image is computed by K-injective resolutions, and derived tensor pullback by K-flat resolutions. For every scheme $Z$, the ringed-site map $\\epsilon_Z:Z_{\\mathrm{et}}\\to Z_{\\mathrm{Zar}}$ gives an exact pullback and an equivalence $\\epsilon_Z^*:D_{\\mathrm{QCoh}}(\\mathcal O_{Z,\\mathrm{Zar}})\\xrightarrow{\\sim}D_{\\mathrm{QCoh}}(\\mathcal O_{Z,\\mathrm{et}})$ with quasi-inverse $R\\epsilon_{Z,*}$. It sends $\\mathcal O_Z$ to $\\mathcal O_{Z,\\mathrm{et}}$. For a quasi-compact quasi-separated scheme morphism $v:Z\\to W$, the canonical comparison identifies $\\epsilon_W^*Rv_{\\mathrm{Zar},*}$ with $Rv_{\\mathrm{et},*}\\epsilon_Z^*$, naturally on unbounded quasi-coherent complexes. In particular these equivalences identify derived global sections on both sites.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 071Q, lemma-derived-quasi-coherent-small-etale-site; Tag 08GH, remark-match-total-direct-images (pushforward diagram and its proof)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-kinjective-complex",
+  "def-pc-kflat-complex",
+  "def-weil-size-convention",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-derived-etale-zariski-equivalence-data",
+  "def-sfb-derived-etale-zariski-square-data",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-derived-etale-zariski-equivalence] with $T=Z$. It applies to every scheme, with no quasi-compactness or boundedness assumption. Its exact module pullback is precisely $\\epsilon_Z^*$, and its equivalence is between the full subcategories defined by quasi-coherent cohomology, with $R\\epsilon_{Z,*}$ as quasi-inverse and the canonical adjunction unit and counit as comparisons. The same statement identifies the structure modules; explicitly $\\epsilon_Z^*\\mathcal O_Z=\\mathcal O_{Z,\\mathrm{et}}\\otimes_{\\epsilon_Z^{-1}\\mathcal O_Z}\\epsilon_Z^{-1}\\mathcal O_Z\\simeq\\mathcal O_{Z,\\mathrm{et}}$ by multiplication, whose inverse is $b\\mapsto b\\otimes1$.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 071Q, lemma-derived-quasi-coherent-small-etale-site; Tag 08GH, remark-match-total-direct-images (pushforward diagram and its proof)."
+   }
+  },
+  {
+   "text": "For $v:Z\\to W$ quasi-compact and quasi-separated, specialize the direct-image clause of [lem-sfb-derived-etale-zariski-equivalence] to $h=v$. It gives the natural isomorphism $\\epsilon_W^*Rv_{\\mathrm{Zar},*}\\simeq Rv_{\\mathrm{et},*}\\epsilon_Z^*$ on the unbounded quasi-coherent derived categories. These are the canonical comparisons from the commuting ringed-site square, as specified there. Only this clause needs the quasi-compact and quasi-separated hypothesis; no separatedness, finite type, or boundedness assumption is introduced.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GH, remark-match-total-direct-images, direct-image square"
+   }
+  },
+  {
+   "text": "For global sections, take any $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Z,\\mathrm{et}})$ and choose $E\\to I$ K-injective by [prop-pur-kinjective-resolutions-exist], taking both sites small in the module universe as in [lem-sfb-derived-etale-zariski-equivalence]. Restriction $\\epsilon_{Z,*}I$ is K-injective: for any acyclic Zariski complex $A$, adjunction identifies maps $A\\to\\epsilon_{Z,*}I$, including their homotopies, with maps $\\epsilon_Z^*A\\to I$; exactness of $\\epsilon_Z^*$ makes its source acyclic, so every such map is null-homotopic by [def-pur-kinjective-complex]. Thus the K-injective definition of derived global sections [def-pur-ringed-site-zeroth-hypercohomology] gives the identity of representative complexes $R\\Gamma(Z_{\\mathrm{Zar}},R\\epsilon_{Z,*}E)=\\Gamma(Z_{\\mathrm{Zar}},\\epsilon_{Z,*}I)=\\Gamma(Z_{\\mathrm{et}},I)=R\\Gamma(Z_{\\mathrm{et}},E)$, since restriction has the same value on the final object $Z$. The identity commutes with all maps of these representatives. Substituting $E=\\epsilon_Z^*F$ and using the canonical unit $F\\simeq R\\epsilon_{Z,*}\\epsilon_Z^*F$ from step 1 gives the claimed natural comparison for every unbounded $F$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "def-pur-kinjective-complex",
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives, its three-line adjunction argument; spaces-perfect.tex Tag 071Q for the unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-kinjective-complex",
+  "def-pur-ringed-site-zeroth-hypercohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 071Q and 08GH, reusing the existing stronger comparison node; global sections by derived.tex Tag 08BJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived quasi coherent modules on the Zariski and small etale sites of a scheme are equivalent compatibly with derived direct image and structure sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded Zariski etale comparison for derived quasi coherent sheaves and pushforward",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*quasicoherent|quasicoherent.*etale|derived.*[Zz]ariski",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived quasi coherent modules on the Zariski and small etale sites of a scheme are equivalent compatibly with derived direct image and structure sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"CategoryTheory.Equivalence.sheafCongr\", \"module\": \"Mathlib.CategoryTheory.Sites.Equivalence\", \"type\": \": Sheaf J A ≌ Sheaf K A\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and an equivalence $e: \\\\mathcal{C} \\\\simeq \\\\mathcal{D}$ where the inverse functor $e^{-1}$ is a dense subsite,\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module pullback adjunctions, scheme morphism properties or one-hypercovers; none supplies this derived quasi-coherent algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived categories of quasi coherent sheaves on Zariski and small etale sites of a scheme are equivalent with quasi inverse derived restriction",
+   "results": "8 hits: DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, DerivedCategory.quotientCompQhIso, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongr; log digest b5350ed26a3b7e10",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern generic derived localization, equivalences of sheaf categories, quasicoherence definitions, or etale morphisms; none is the ringed-site unbounded quasi-coherent comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SheafOfModules\"",
+   "results": "0 hits: ; log digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern generic derived localization, equivalences of sheaf categories, quasicoherence definitions, or etale morphisms; none is the ringed-site unbounded quasi-coherent comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*quasicoherent|quasicoherent.*etale|derived.*[Zz]ariski",
+   "results": "0 hits: ; log digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern generic derived localization, equivalences of sheaf categories, quasicoherence definitions, or etale morphisms; none is the ringed-site unbounded quasi-coherent comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived Zariski etale quasi coherent comparison",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.ctorIdx, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData, SheafOfModules.IsQuasicoherent.casesOn; log digest 2b524a4e3e04ad8d",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern generic derived localization, equivalences of sheaf categories, quasicoherence definitions, or etale morphisms; none is the ringed-site unbounded quasi-coherent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Zariski etale comparison for quasi coherent sheaf cohomology and derived direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.Etale.formallyEtale; log digest dd28e97c384b0f8b",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern generic derived localization, equivalences of sheaf categories, quasicoherence definitions, or etale morphisms; none is the ringed-site unbounded quasi-coherent comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-duality",
+  "date": "2026-10-23",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Unbounded derived Zariski-etale quasi-coherent comparison.",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "worker": "stage1",
+  "summary": "No new nodes: the existing lem-sfb-derived-etale-zariski-equivalence states the exact unbounded equivalence, structure-module normalization and qcqs direct-image comparison. Reuse it and give the elementary K-injective adjunction argument for derived global sections on arbitrary schemes. Statement unchanged; add the resolution, size and global-section definition dependencies. Checked Stacks 071Q, 08GH and 08BJ and all cited statements. No exact project attachment found.",
+  "blueprint": "Inherited ancestor is null (blueprint_refs.py ancestor); inherited place traces the direct-image stability construction through proper flat space duality. Steps 1 and 2 provide its scheme/etale transfer and step 3 its derived-section transfer, without modifying the unit route. The current latest direct-images proof (3) was read; no blueprint node states this coherent comparison.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of unbounded K-injective resolutions for module sheaves on a small ringed site, used to choose a global-section representative; the unit has no such foundational existence statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-0ebb0c2ae",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-0ebb0c2ae (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and the Stacks sources: spaces-perfect 071Q (statement and full proof), 08GH (both squares), derived 08BJ. The statement is byte-identical to live; the item is still unsplit live and side-live, with no repair note. stmt_deps add the K-injective, K-flat, size-convention and RGamma definitions; the size convention is unnamed in the statement but harmless. No cycle (transitive closure checked), all ids exist, no SGA. Step 1: with T=Z, lem-sfb-derived-etale-zariski-equivalence gives exactness, the D_QCoh equivalence with quasi-inverse R eps_*, and the structure modules. eps^*O = O_et by multiplication is a one-line identity from its pullback formula. This matches 071Q, which needs no qc. Step 2: that node's qcqs clause with h=v gives eps_W^*Rv_* = Rv_et,*eps_Z^*. Only qcqs is used, as in 08GH. Advisory: the cited clause says 'intertwines' and does not write the unit/composition/counit composite; pinning it belongs to that node's split (source 08GH), not to this item. Step 3 is elementary and correct: the 08BJ argument (eps_* right adjoint to exact eps^* preserves K-injectives) is written out. Gamma is evaluation at the final object Z on both sites, giving RGamma(Zar, R eps_*E) = RGamma(et, E) in derived form; the unit F = R eps_*eps^*F on D_QCoh finishes it. prop-pur-kinjective-resolutions-exist is in unit sk-def-sf-operations, which sk-thm-sf-ctf-stability uses, so it is on route; the declared tool_use is redundant. Small sites: Zariski is small, etale by the size convention. No 08BJ node exists in the DAG. Edge cases (empty Z, zero complex, shifts, non-qc Z, v=id, non-separated qcqs v) are all fine. No new nodes, so no relabelling. The same-day stronger node Q62 lem-sfb-derived-etale-zariski-equivalence carries the 071Q/08GH work. Maintainer note: the item could later be merged into it once a global-sections clause is added there. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeDerivedEtaleQCohComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scheme_derived_etale_qcoh_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.DerivedEtaleZariskiSquareData.directImageComparison",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleTerminalSections",
+   "AlgebraicGeometry.Scheme.Modules.SchemeEtaleZariskiDerivedSectionsData",
+   "AlgebraicGeometry.Scheme.Modules.scheme_derived_etale_qcoh_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDerivedEtaleQCohComparison.lean",
+  "statement": "theorem scheme_derived_etale_qcoh_comparison [HasDerivedCategory.{a} AddCommGrpCat.{u}] : ∃ d : ∀ T : Scheme.{u}, DerivedEtaleZariskiEquivalenceData T, (∀ (Z W : Scheme.{u}) (v : Z ⟶ W), QuasiCompact v → QuasiSeparated v → ∃ s : DerivedEtaleZariskiSquareData v (d Z) (d W), ∀ K : schemeDerivedCategory Z, schemeDerivedQCohProperty Z K → IsIso (s.directImageComparison.app K)) ∧ ∀ T : Scheme.{u}, Nonempty (SchemeEtaleZariskiDerivedSectionsData T (d T))",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned immutable head 455eae2115cb: reuse the now-landed existing definition owner def-sfb-derived-etale-zariski-equivalence-data and add existing:true ownership only for its unowned comparison-square data. Import their original published module. The theorem statement and all mathematical data are unchanged; no extraction, duplicate definition, or dependency-module repair remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10fc91010",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Item Lean byte-identical to 78a088 (maths re-checked: ∃ d for every scheme with exactness, D_QCoh equivalence with quasi-inverse Rε_* via actual unit/counit, structure_iso on the actual multiplication map; for qcqs v only, directImageComparison = unit ≫ comparison.inv ≫ counit mate, the same arrow as pushforward_comparison_iso; derived RΓ comparison pinned by ordinary_sections/comparison_representatives (08BJ, derived form); universes u/w/a independent; edge cases ok; only by sorry; no hollow definitions; lean.statement verbatim). The ownership repair is right: the item cites NJ's landed def-sfb-derived-etale-zariski-equivalence-data, and the new existing:true def-sfb-derived-etale-zariski-square-data owns DerivedEtaleZariskiSquareData/smallEtaleStructureMap/ordinaryPullback* in the published module (signature verbatim, no race). FIX (H2): the new def node cited theorem lem-trf-zariski-etale-functor-comparison-square (its module contains only the theorem, which is unused); fixes/def-sfb-derived-etale-zariski-square-data.json replaces it in stmt_deps and statement by def-sfb-scheme-zariski-etale-module-constructions + def-sfb-scheme-small-etale-module-direct-image (both on base 3aae7a40), lean record unchanged. Advisory: NJ's landed equivalence-data node has the same theorem stmt_dep. No compile (JSON-only fix)."
+ }
+}

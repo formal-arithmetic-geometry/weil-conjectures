@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-quotient-reduction-tensor-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of normalized scalar tensor balancing",
+ "statement": "Let J be a site small in the coefficient universe, R a sheaf of commutative rings, B_n a sequence of ring sheaves with successive transitions and q_n:R to B_n. Let s be a Reduction, a the semilinear system derived calculus, and t a TensorReduction [def-pur-quotient-diagram-projection-data]. For all derived R-modules M,N, evaluating t.balance at n, then using a.tensorEvaluation and s.evaluation on both factors, equals s.evaluation on the ambient tensor followed by t.finiteBalance n. All comparisons are the ones fixed by the ordinary summand and derived representative equations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-pullback-tensor-product (07A4), lemma-adjoint (07A6), equation-projection-formula-map (0B56); Zheng Construction 4.1",
+  "note": "Agent-formulated normalization auxiliary; proof expands the representative comparison argument."
+ },
+ "stmt_deps": [
+  "def-pur-quotient-diagram-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Compare the two chain maps on each total-degree (i,j) summand. Rewrite their summand equations and ordinaryComplexEvaluation_component. Naturality moves the ordinary evaluation comparison past the tensor summand. Cancel the ordinary comparison isomorphisms in TensorReduction.ordinary_evaluation to identify the two coefficients. The coproduct universal property gives equality of chain maps.",
+   "uses": [
+    "lem-pur-system-cochain-tensor-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose flat-term K-flat representatives P,Q. Their ordinary reductions are K-flat and have flat terms by the TensorReduction fields. Evaluating them and applying the finite scalar model gives K-flat representatives. Localize the chain equality. Insert the representative equations for balance, finiteBalance and tensorEvaluation, and Reduction.evaluation_model. Naturality of the exact-evaluation factorization and of tensorModelIso supplies the intervening squares. Cancel all invertible representative comparisons; the resulting rectangle is the required equality on P,Q.",
+   "uses": [
+    "lem-pur-system-tensor-reduction-formula",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard both sides as natural transformations of M,N. Every derived object has a flat-term K-flat resolution. Precompose naturality by the tensor of the two representative isomorphisms and cancel this isomorphism, giving the equality for arbitrary M,N.",
+   "uses": [
+    "lem-pur-system-tensor-reduction-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-cochain-tensor-reduction",
+  "lem-pur-system-tensor-reduction-formula",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A4, 07A6, 0B56; Zheng Construction 4.1, common flat-term K-flat representative argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation commutes with the derived tensor balancing comparison for extension of scalars on module sheaf systems",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange; SheafOfModules.evaluation; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt",
+   "date": "2026-10-24",
+   "verdict": "Ordinary tensor base change only; does not compare the derived representative squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"tensor\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*tensor|tensor.*mapDerivedCategory",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean:57",
+   "date": "2026-10-24",
+   "verdict": "Group homology comparison unrelated to scalar/evaluation normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientDiagramProjectionEvaluation",
+  "date": "2026-10-24",
+  "group": "B8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof step 8).; quotient-diagram projection evaluation, ordinary reduction and tensor representative comparisons",
+   "via": [
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientReductionTensorEvaluation",
+  "file": "lean/Sheaf/Paper/QuotientReductionTensorEvaluation.lean",
+  "declaration": "SheafOfModules.QuotientDiagramProjection.reductionTensorEvaluation",
+  "statement": "theorem reductionTensorEvaluation\n    (s : Reduction.{c, v, r} J R B τ q) (a : Data.{c, v, r} J B τ)\n    (t : TensorReduction.{c, v, r} s a) (n : ℕ)\n    (M N : D.{c, v, max c v r} J R) :\n    (e.{c, v, max c v r} J B τ n).map (t.balance.hom.app (M, N)) ≫\n        (a.tensorEvaluation n).hom.app (s.functor.obj M, s.functor.obj N) ≫\n        (a.levelClosed n).tensor.map\n          (Prod.mkHom ((s.evaluation n).hom.app M) ((s.evaluation n).hom.app N)) =\n      (s.evaluation n).hom.app (t.ambient.tensor.obj (M, N)) ≫\n        (t.finiteBalance n).hom.app (M, N)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bf0c8",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261024T184625-L-3081691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bf0c8",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261024T184625-L-3081691",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs old item definitions (byte-identical except added Prop field TensorReduction.flatTerms, change record present); construction sorry vs old item conclusion (implied, plus true flatness field); #print axioms of item and reductionTensorEvaluation (sorryAx only via construction hole and pre-existing upstream SemilinearSections.Data)"
+ }
+}

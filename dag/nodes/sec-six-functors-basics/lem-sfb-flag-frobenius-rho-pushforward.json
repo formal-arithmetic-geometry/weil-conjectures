@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-flag-frobenius-rho-pushforward",
+ "kind": "statement",
+ "title": "Andersen–Haboush trivial Frobenius pushforward at rho weights",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme]: smooth, connected, affine and of finite type, with no nontrivial smooth connected solvable normal subgroup, and with every surjective homomorphism from a semisimple group having finite central kernel an isomorphism. Solvable means that successive commutator subgroup schemes eventually become trivial; finite central means finite-dimensional coordinate algebra and commuting after every scalar extension. Fix a split maximal torus $T\\subseteq S$ and a Borel subgroup $B\\supseteq T$ (a maximal smooth connected solvable closed subgroup), with character lattice $X=X^*(T)$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$ and integer coroot pairing as in [lem-sfb-reductive-borel-pair-structure]. Here a split maximal torus is a maximal subgroup isomorphic to $\\mathbf G_m^r$. Write $p:B\\to T$ for the projection with kernel the unipotent radical and put $Q=S/B$. For $\\mu\\in X$ put $\\widetilde\\mu=\\mu\\circ p$ and $M_\\mu=\\mathcal L_{-\\widetilde\\mu}$ [lem-sfb-homogeneous-line-bundle-sections], the invertible sheaf associated to the quotient action $(g,z)\\cdot b=(gb,\\widetilde\\mu(b)z)$. Put $\\rho=\\tfrac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$, the actual character supplied by [lem-sfb-rho-section-modules]. Assume $\\operatorname{char}F=p_0>0$ (so $p_0$ is prime). Let $\\operatorname{Fr}_Q:Q\\to Q$ be absolute Frobenius: the identity on points and the $p_0$-power map on regular functions [def-weil-absolute-frobenius-scheme]. For every integer $r\\ge1$ put $q=p_0^r$ and $f_r=\\operatorname{Fr}_Q^r$. Then $f_r$ is finite [def-weil-finite-integral-morphism], and there is an integer $d_r\\ge1$ and an isomorphism of Zariski $\\mathcal O_Q$-modules $$ (f_r)_*M_{(q-1)\\rho}\\simeq\\mathcal O_Q^{\\oplus d_r}. $$ Pushforward has the scalar action through $f_r^\\sharp$ [def-pc-module-pullback]; no $F$-linearity of the absolute Frobenius is asserted. The isomorphism is an ordinary module isomorphism, with no equivariance requirement. The statement includes $S=1$, in which case $d_r=1$.",
+ "source": {
+  "document": "literature/jantzen-representations-of-algebraic-groups-2003.pdf",
+  "place": "Part II, 4.4--4.5, Andersen–Haboush Frobenius argument, WANTED. Online corroboration read: Mathieu, Tilting Modules and their Applications, AS Pure Math 26 (2000), Lemma 3.1, printed p.157, https://www.imsc.res.in/~knr/vdk/mathieu.pdf; Thomsen, Flag varieties, Toric varieties and characteristic p geometry (1998), Part I Theorem 5.1, printed p.27, https://pure.au.dk/ws/files/428868227/imf_phd_1998_jft.pdf. The formula is stated here for iterated absolute Frobenius, forgetting linearizations and the dimension formula."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "lem-sfb-rho-section-modules",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Write $p=p_0$ and put $N=|\\Phi^+|$. The Bruhat-chart statement gives an integral $Q$ covered by opens isomorphic to $\\mathbf A_F^N$, on each of which $M_\\mu$ is trivial because the $B$-torsor has a section. Since $F$ is algebraically closed, every coefficient has a unique $p^r$th root. On such a chart the monomials $x_1^{a_1}\\cdots x_N^{a_N}$, $0\\le a_i<p^r$, form a basis of $F[x_1,\\ldots,x_N]$ over its subring of $p^r$th powers: write each exponent uniquely as $p^r b_i+a_i$ and take roots of coefficients. Thus every $f_r$ is finite, and $(f_r)_*M_\\mu$ is locally free of rank $p^{rN}$. The calculation localizes by replacing a denominator $s$ with $s^{p^r}$; these define the same open. This proves the finiteness clause directly, without a flat-Frobenius theorem.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-homogeneous-line-bundle-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/mathieu-tilting-modules-2000.pdf",
+    "place": "Section 3, Lemma 3.1, printed p.157, and the iteration in Theorem 3.2, printed pp.157--158; WANTED locally; read online https://www.imsc.res.in/~knr/vdk/mathieu.pdf. Agent expansion over the p-power subsheaf, with the source conventions L(-lambda)=M_lambda."
+   }
+  },
+  {
+   "text": "Put $\\eta=(p-1)\\rho$, $V=\\Gamma(Q,M_\\eta)$, $\\mathfrak u=\\operatorname{Lie}(U)$ and $A=u(\\mathfrak u)$. The rho-orbit statement gives $-w_0\\eta=\\eta$ and $\\langle\\eta,\\alpha^\\vee\\rangle=p-1$. The restricted-induced-invariants lemma therefore gives $V^{\\mathfrak u}=Fv_+$ with $v_+\\ne0$. The restricted-freeness lemma gives $V^\\vee\\simeq u(\\operatorname{Lie}(U^-))$. Conjugation by $n_0$ identifies this restricted algebra with $A$: conjugation takes invariant derivations to invariant derivations and commutes with their $p$th iterates. The PBW-dimension statement now gives $\\dim_F V=\\dim_F V^\\vee=\\dim_F A=p^N$. This dimension argument uses neither the induced Weyl dimension formula nor Kempf vanishing.",
+   "uses": [
+    "lem-sfb-rho-regular-weyl-orbit",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-steinberg-weyl-restricted-freeness",
+    "lem-sfb-unipotent-restricted-enveloping-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/mathieu-tilting-modules-2000.pdf",
+    "place": "Section 3, Lemma 3.1, printed p.157, and the iteration in Theorem 3.2, printed pp.157--158; WANTED locally; read online https://www.imsc.res.in/~knr/vdk/mathieu.pdf. Agent expansion over the p-power subsheaf, with the source conventions L(-lambda)=M_lambda."
+   }
+  },
+  {
+   "text": "Let $R=\\mathcal O_Q^p\\subseteq\\mathcal O_Q$, the image sheaf of the $p$-power map. By integrality, $a\\mapsto a^p$ is an isomorphism of sheaves of rings $\\mathcal O_Q\\to R$, though not generally over $F$. Since $F$ is perfect, its constants belong to $R$. Regard $M=M_\\eta$ as an $R$-module and form\n$$\\theta:R\\otimes_F V\\longrightarrow M,\\qquad a\\otimes v\\longmapsto av.$$\nUnder the ring-sheaf isomorphism $\\mathcal O_Q\\to R$, the target is precisely $\\operatorname{Fr}_{Q*}M$ with the scalar action in the statement, and the source is free of rank $p^N$. The infinitesimal action on $M$ comes from its homogeneous linearization. It is $R$-linear because a derivation kills every $p$th power; on the source it acts only on $V$. The product rule $x(av)=x(a)v+a(xv)=a(xv)$ proves that $\\theta$ is $A$-linear. These are sheaf actions: infinitesimal translations are the identity on the underlying topological space, so act over every open.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections",
+    "lem-sfb-unipotent-restricted-enveloping-augmentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/mathieu-tilting-modules-2000.pdf",
+    "place": "Section 3, Lemma 3.1, printed p.157, and the iteration in Theorem 3.2, printed pp.157--158; WANTED locally; read online https://www.imsc.res.in/~knr/vdk/mathieu.pdf. Agent expansion over the p-power subsheaf, with the source conventions L(-lambda)=M_lambda."
+   }
+  },
+  {
+   "text": "The augmentation ideal $J\\subset A$ has $J^h=0$. At any stalk, if $K=\\ker\\theta$ were nonzero, choose the largest $j$ with $J^jK\\ne0$; then $J^jK$ contains a nonzero element killed by $J$. But\n$$(R\\otimes_F V)^{\\mathfrak u}=R\\otimes_F V^{\\mathfrak u}=Rv_+.$$\nIndeed choose a finite basis of $\\mathfrak u$ and express all its operators as one matrix over $F$; row reduction puts its common kernel into coordinate form and the same invertible row and column operations work over every $F$-algebra, including each stalk of $R$. On $Rv_+$, $\\theta$ is multiplication by the nonzero section $v_+$. The Bruhat charts give an integral $Q$, so every local frame writes this section as a nonzero element of a domain; its germ is nonzero at every point and multiplication is injective. Thus $K=0$ at every stalk and $\\theta$ is injective.",
+   "uses": [
+    "lem-sfb-unipotent-restricted-enveloping-augmentation",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/mathieu-tilting-modules-2000.pdf",
+    "place": "Section 3, Lemma 3.1, printed p.157, and the iteration in Theorem 3.2, printed pp.157--158; WANTED locally; read online https://www.imsc.res.in/~knr/vdk/mathieu.pdf. Agent expansion over the p-power subsheaf, with the source conventions L(-lambda)=M_lambda."
+   }
+  },
+  {
+   "text": "Step 1 gives both sides of $\\theta$ the same finite rank over $R$. At the generic point the injective map is an isomorphism, so in local frames its determinant is nonzero and it is invertible on a nonempty open. Its invertibility locus is open, since the inverse matrix is adjugate divided by determinant. For each $g\\in S(F)$, translation preserves $R$ and sends $\\theta(a\\otimes v)$ to $\\theta((ga)\\otimes(gv))$; hence that open is $S(F)$-stable. The $B$-torsor gives transitivity on $Q(F)$: the fibre over an $F$-point is nonempty of finite type and has an $F$-point by the affine Nullstellensatz. The nonempty open also has an $F$-point, by taking an affine part of a Bruhat chart and the same Nullstellensatz. It therefore contains all $Q(F)$. Every closed point is an $F$-point, again affine-locally by Nullstellensatz. If the complementary closed subset were nonempty, the Jacobson-density statement would give a closed point in it, a contradiction. Thus $\\theta$ is everywhere invertible. Transport through $\\mathcal O_Q\\simeq R$ gives $\\operatorname{Fr}_{Q*}M_{(p-1)\\rho}\\simeq\\mathcal O_Q^{\\oplus p^N}$.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/mathieu-tilting-modules-2000.pdf",
+    "place": "Section 3, Lemma 3.1, printed p.157, and the iteration in Theorem 3.2, printed pp.157--158; WANTED locally; read online https://www.imsc.res.in/~knr/vdk/mathieu.pdf. Agent expansion over the p-power subsheaf, with the source conventions L(-lambda)=M_lambda."
+   }
+  },
+  {
+   "text": "Write $L=M_\\rho$. The character multiplication in the associated-bundle construction gives $M_{m\\rho}\\simeq L^{\\otimes m}$ for $m\\ge0$: tensoring the local frames multiplies their transition characters. For any invertible sheaf $P$ in characteristic $p$, absolute Frobenius pullback raises its transition functions to their $p$th powers, so $\\operatorname{Fr}_Q^*P\\simeq P^{\\otimes p}$. The ordinary projection formula with an invertible $P$ is verified in a local frame $e$: the map $\\operatorname{Fr}_*M\\otimes P\\to\\operatorname{Fr}_*(M\\otimes\\operatorname{Fr}^*P)$ sends $m\\otimes e$ to $m\\otimes\\operatorname{Fr}^*e$; replacing $e$ by $ue$ multiplies the right frame by $u^p$, exactly the scalar action on $\\operatorname{Fr}_*M$. Thus the local isomorphisms glue. For $r\\ge2$, the identity $p^r-1=(p-1)+p(p^{r-1}-1)$ and step 5 now give\n$$\\operatorname{Fr}_*M_{(p^r-1)\\rho}\\simeq M_{(p^{r-1}-1)\\rho}^{\\oplus p^N}.$$\nApply $(\\operatorname{Fr}^{r-1})_*$, which preserves finite direct sums sectionwise. Starting from step 5, induction yields $(f_r)_*M_{(p^r-1)\\rho}\\simeq\\mathcal O_Q^{\\oplus p^{rN}}$. Set $d_r=p^{rN}\\ge1$. When $S=1$, $N=0$, $Q=\\operatorname{Spec}F$, and the same calculation gives $d_r=1$, with the ring isomorphism $a\\mapsto a^{p^r}$ supplying the scalar transport.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/mathieu-tilting-modules-2000.pdf",
+    "place": "Section 3, Lemma 3.1, printed p.157, and the iteration in Theorem 3.2, printed pp.157--158; WANTED locally; read online https://www.imsc.res.in/~knr/vdk/mathieu.pdf. Agent expansion over the p-power subsheaf, with the source conventions L(-lambda)=M_lambda."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "lem-sfb-rho-regular-weyl-orbit",
+  "lem-sfb-restricted-induced-infinitesimal-invariants",
+  "lem-sfb-steinberg-weyl-restricted-freeness",
+  "lem-sfb-unipotent-restricted-enveloping-augmentation",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-lft-over-field-jacobson-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/mathieu-tilting-modules-2000.pdf",
+  "place": "Section 3, Lemma 3.1, printed p.157, and the iteration in Theorem 3.2, printed pp.157--158; WANTED locally; read online https://www.imsc.res.in/~knr/vdk/mathieu.pdf. Agent expansion over the p-power subsheaf, with the source conventions L(-lambda)=M_lambda."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Andersen Haboush Frobenius direct image of the line bundle of weight p to r minus one times rho on G mod B is a nonzero trivial vector bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.chainTop_isNonZero'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Given a torsion-free commutative domain $ R $, a nilpotent Lie algebra $ L $ over $ R $, and a torsion-free Noetherian Lie module $ M $ over $ L $, if $ \\\\alpha: L \\\\to R $ is a non-zero linear function\"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {L : Type u_2} [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [LieModule.IsTriangularizable k L V] (A : LieIde\", \"doc\": \"Let $ V $ be a triangularizable Lie module over a Lie algebra $ \\\\mathfrak{g} $ over a field $ k $. If $ A $ is a coatom Lie ideal of $ \\\\mathfrak{g} $ (i.e., a maximal proper Lie ideal) and the weight \"}\n  {\"name\": \"LieModule.Weight.genWeightSpaceOf_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : LieModule.Weight R L M) (x : L), LieModu\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and for any weight $\\\\chi \\\\in M$ and element $x \\\\in \\\\mathfrak{g}$, the generalized weight space associ\"}\n  {\"name\": \"LieModule.chainTop_isNonZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {M : Type u_3}\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsAddTorsionFree R] [inst_9 : IsDom\", \"doc\": \"Given a non-zero weight $\\\\alpha$ and any weight $\\\\beta$ in a torsion-free Noetherian Lie module $M$ over a nilpotent Lie algebra $L$ with commutative torsion-free domain $R$, the weight $n\\\\alpha + \\\\be\"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (k : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field k] [inst_5 : LieAlgebra k L] [inst_6 : Module k M]\\n  [Module.Finite k M] [inst_8 : LieModule k L M] [LieModule.LinearWeights k L\", \"doc\": \"Let $ k $ be a field, $ L $ a nilpotent Lie algebra over $ k $, and $ M $ a finite-dimensional, nontrivial $ k $-module equipped with compatible Lie module and linear weight structures over $ L $, suc\"}\n  {\"name\": \"LieModule.Weight.exists_ne_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : LieModule.Weight R L M), ∃ x ∈ LieModule\", \"doc\": \"For any weight $\\\\chi$ of a Lie module $M$ over a nilpotent Lie ring $L$ over a commutative ring $R$, the generalized weight space associated with $\\\\chi$ contains at least one non-zero element, i.e., $\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieModule.Weight.genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : LieModule.Weight R L M), LieModule.genWe\", \"doc\": \"For any weight $\\\\chi$ in a Lie module $M$ over a nilpotent Lie ring $L$, the generalized weight space associated to $\\\\chi$ is not equal to the trivial submodule $\\\\{0\\\\}$, i.e., $\\\\text{genWeightSpace}_M\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Steinberg homogeneous invertible sheaf pushed forward along the iterated absolute Frobenius on a flag scheme is finite free of positive rank",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WittVector.instIsocrystalStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        [IsDomain k] →\\n          [inst_3 : CharP k p] →\\n            [inst_4 : PerfectRing k p] → (m : ℤ) → WittVector.Isocrystal p k (WittVector.StandardOneDimIsocrystal p k m)\", \"doc\": \"For any prime $ p $, field $ k $ of characteristic $ p $, and integer $ m $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with\"}\n  {\"name\": \"IsArithFrobAt.arithFrobAt\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (G : Type u_3)\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [inst_5 : SMulCommClass G R S] (Q : Ideal S) [inst_6 : Finite G]\\n  [inst_7 : Algebra.IsInvariant R S G] [inst_8 : Q.IsPrime] [inst_9 :\", \"doc\": \"Given a prime ideal $ Q $ in a semiring $ S $ with finite quotient $ S/Q $, and a commutative semiring $ R $ with scalar multiplication commuting with a monoid action on $ S $, there exists a prime id\"}\n  {\"name\": \"WittVector.isocrystal_classification\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_2) [inst_1 : Field k] [inst_2 : IsAlgClosed k] [inst_3 : CharP k p]\\n  (V : Type u_3) [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V],\\n  Module.finrank (FractionRing (WittVector p k)) V = 1 →\\n    ∃ m, Nonempty (WittVector.IsocrystalEq\", \"doc\": \"For any algebraically closed field $ k $ of characteristic $ p $, every one-dimensional isocrystal over $ k $ is isomorphic to the standard one-dimensional isocrystal (constructed as the field of frac\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"WittVector.exists_frobenius_solution_fractionRing_aux\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [inst_2 : IsAlgClosed k]\\n  (m n : ℕ) (r' q' : WittVector p k) (hr' : r'.coeff 0 ≠ 0) (hq' : q'.coeff 0 ≠ 0)\\n  (hq : ↑p ^ n * q' ∈ nonZeroDivisors (WittVector p k)),\\n  have b := WittVector.frobeniusRotation p hr'\", \"doc\": \"Given natural numbers $m,n$, Witt vectors $r',q' \\\\in \\\\mathbb{W}(k)$ with nonzero constant coefficients, and the condition that $p^n q' \\\\in \\\\mathbb{W}(k)$ is a non-zero divisor, let $b$ denote the Frob\"}\n  {\"name\": \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (k : Type u_1) [inst_1 : CommRing k] [inst_2 : IsDomain k] [inst_3 : CharP k p]\\n  [inst_4 : PerfectRing k p] (m : ℤ) (x : WittVector.StandardOneDimIsocrystal p k m),\\n  (WittVector.Isocrystal.frobenius p k) x = ↑p ^ m • (WittVector.FractionRing.frobeniusRingHom p\", \"doc\": \"For any integer $ m $ and element $ x $ in the standard one-dimensional isocrystal over a field $ k $ of characteristic $ p $, the Frobenius isomorphism $ \\\\Phi $ satisfies $ \\\\Phi(x) = p^m \\\\cdot \\\\varph\"}\n  {\"name\": \"Algebra.FormallyUnramified.finite_of_free\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FormallyUnramified R S] [Algebra.EssFiniteType R S] [Module.Free R S], Module.Finite R S\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ equipped with an $ R $-algebra structure. If $ S $ is formally unramified over $ R $ and $ S $ is a free $ R $-module, then $ S $ is finitely genera\"}\n  {\"name\": \"WittVector.instModuleFractionRingStandardOneDimIsocrystal\", \"module\": \"Mathlib/RingTheory/WittVector/Isocrystal\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    (k : Type u_1) →\\n      [inst_1 : CommRing k] →\\n        (_m : ℤ) → Module (FractionRing (WittVector p k)) (WittVector.StandardOneDimIsocrystal p k _m)\", \"doc\": \"For a prime $ p $ and a commutative ring $ k $, the standard one-dimensional isocrystal (constructed as the field of fractions of Witt vectors over $ k $) is equipped with a canonical module structure\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius pushforward of the Steinberg line bundle on a flag variety is a direct sum of structure sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : Y.Opens) : Γ((pushforward f).obj M, U) = Γ(M, f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, any sheaf of modules $ M $ over the structure sheaf of $ X $, and any open subset $ U $ of $ Y $, the sections of the pushforward sheaf $ f_*M $ over $ U $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \":\\n  f ≫ StructureSheaf.toPushforwardStalk f p =\\n    StructureSheaf.toStalk R p ≫ (TopCat.Presheaf.stalkFunctor _ _).map (Spec.sheafedSpaceMap f).hom.c\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(φ : M ⟶ N) (U : Y.Opens) : ((pushforward f).map φ).app U = φ.app (f ⁻¹ᵁ U)\", \"doc\": \"For any morphism $\\\\phi: M \\\\to N$ of sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq Y$, the component of the pushforward $f_*\\\\phi$ at $U$ equals the component of $\\\\phi$ at the pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ pushforward g ≅ pushforward (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pushforward\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Andersen|Haboush|Frobenius.*(Steinberg|pushforward)|Steinberg.*bundle",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Andersen Haboush trivial Frobenius pushforward of the Steinberg invertible sheaf on G over B",
+   "results": "8 hits; IsArithFrobAt.arithFrobAt, arithFrobAt, WittVector.instIsocrystalStandardOneDimIsocrystal, IsArithFrobAt.exists_of_isInvariant, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.unitToPushforwardObjUnit, coe_frobenius_comp_coe_frobeniusEquiv_symm, WittVector.StandardOneDimIsocrystal.frobenius_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pushforward\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Andersen|Haboush|Steinberg.*bundle|Frobenius.*pushforward",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types; ordinary universal enveloping algebras, characteristic-zero Lie weight theory, abstract group invariants and ordinary Frobenius field maps do not state this restricted algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius pushforward of the Steinberg homogeneous line bundle on a flag variety is trivial",
+   "results": "Bundle.Trivial, IsHomeomorphicTrivialFiberBundle, Bundle.Trivial.trivialization_symm_apply, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom, Trivialization.pullback_source, Bundle.Trivial.linearMapAt_trivialization, Bundle.Trivial.symmₗ_trivialization, VectorBundle.trivialization_linear'",
+   "date": "2026-10-24",
+   "verdict": "no match: topological trivial bundles and ordinary Spec pushforward stalks do not state Frobenius flag-line-bundle triviality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dominant-flag-line-kempf-vanishing",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation.",
+   "via": [
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flag-frobenius-rho-pushforward",
+  "worker": "stage1",
+  "summary": "Expanded Mathieu Lemma 3.1 over the p-power structure subsheaf, proved Frobenius finiteness on existing Bruhat charts, and wrote the iteration by transition functions. Three independent restricted representation-theory inputs are statement-only nodes. Avoided the existing induced simplicity and dimension nodes because their dependency closures include this item. Normalized doubled TeX escapes without changing the statement.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration/moduli/Haboush prerequisite chain described in blueprint.from.place, at the Andersen-Haboush input to Kempf vanishing. Ancestor command returns null; retained inherited null and via list. Steps 1--5 expand Mathieu Lemma 3.1; step 6 realizes the iterated formula. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine closed-point residue field and existence of rational points over an algebraically closed field, used to propagate the isomorphism locus; the unit has no alternative residue-field theorem."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic density of closed points in finite-type schemes, used only to show the invariant open is the whole flag scheme; not a curve-estimate argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-lft-over-field-jacobson-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-269c0312c",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-269c0312c (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full, plus every cited statement. I checked them against Mathieu, Tilting Modules (online scan), printed pp.153-157: Lemma 2.1, Lemma 2.3 (H^0(u,∇(λ))=K v_λ for restricted λ), Thm 2.6(i) (St is free of rank one over u(u^-)) and Lemma 3.1 with its proof. Steps 3-5 expand Lemma 3.1 correctly. Step 3: θ maps O^p⊗St to M_{(p-1)ρ}; it is u-linear because derivations kill p-th powers. Step 4: injectivity on stalks, using J^h=0, the invariants R⊗V^u=Rv_+ and integrality of Q. Step 5: the isomorphism holds on a dense open, which is S(F)-stable and contains all F-points (Nullstellensatz), and Jacobson density excludes a nonempty complement. Step 1 proves finiteness and the rank p^{rN} on the Bruhat A^N charts. Step 6 iterates via Fr^*P≅P^p, the projection formula checked in frames and p^r-1=(p-1)+p(p^{r-1}-1), giving d_r=p^{rN}. Conventions agree: M_μ sections have U-weight -w0μ, V(λ)=Γ(M_{-w0λ}) is ∇(λ), and Mathieu's L((1-p)ρ) is our M_{(p-1)ρ}. The statement is unchanged from base apart from TeX unescaping, and it is the form used by the Kempf citer. Edge cases hold: SL2 (Fr_*O(p-1)=O^p; invariants of Sym^n are one-dimensional for n<p), p=2 and S=1. The new nodes are true, self-contained, statement-only and not duplicates. Existing nodes I compared: primitive-line (group invariants, not Lie invariants), restricted-module-infinitesimal-simplicity, kostant-pbw and hopf-augmentation-height all state different things. None of the new nodes restates the item. Avoiding the induced simplicity and dimension nodes is right: their closures contain this item, and the closure check confirms the delivery is acyclic. There is no re-split note and no parallel split. Accepted tool_uses: affine Nullstellensatz and the Jacobson density leaf, both generic and used only in step 5. Batch-5 flags: the closures reach only generic scheme lemmas (trf smooth-composition, fppf-covering base change, proper-field invertible-coherent, split-lattice torus). None is part of the trace formula or Poincaré duality or a step of their proofs, so no return. No SGA source is used. Note for the later worker on the invariants node: Mathieu's Lemma 2.1 relies on a characteristic-0 semicontinuity argument, which must be replaced by an argument inside the DAG."
+ }
+}

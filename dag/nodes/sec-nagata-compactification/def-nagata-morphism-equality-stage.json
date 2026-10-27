@@ -98,7 +98,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "split_report": {
@@ -141,9 +152,24 @@
   "note": "stage = directedFiniteUpperBound i0 d r of {i0, all lambda_jk, all mu_jklb} as the node; choice data as a record: T_j, V_jk over T_j with f.p. ring maps, generators G_jk (subring closure), W1,W2 = phi/psi preimages with lambda_jk forced equal to the landed nagataQCOpenEqualityStage, affine cover U_jkl of the intersection in X_lambda (baseChangeDiagram), phiU/psiU factorizations, mu in Over(op lambda_jk) with equality of the two pullbacks of each b on U x_{S_lambda} S_mu; binders: directed nonempty preorder, affine transitions, limit cone, S_i0 qcqs, p,q finite presentation, phi,psi over S_i0, equal base change as fst-composites; no sorry, compile 3.2 s. Existence of the data is not asserted (left to citers)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\varphi_{\\lambda_0},\\psi_{\\lambda_0}\\colon X_{\\lambda_0}\\to Y_{\\lambda_0}$ have equal base change to $S$. On a\nfinite affine target cover, include the stages at which their inverse-image\nopens agree and the stages at which the induced ring maps agree on finite\ngenerator lists. Define $\\lambda_{\\varphi=\\psi}$ to be the selected upper\nbound of this finite set.",
-  "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $(S_\\lambda)$ be a cofiltered inverse system of quasi-compact\nquasi-separated schemes with affine transition morphisms and limit $S$, let\n$X_{\\lambda_0},Y_{\\lambda_0}$ be of finite presentation over\n$S_{\\lambda_0}$, and let\n$\\varphi_{\\lambda_0},\\psi_{\\lambda_0}\\colon X_{\\lambda_0}\\to Y_{\\lambda_0}$\nbe $S_{\\lambda_0}$-morphisms with equal base change to $S$. Define\n$\\lambda_{\\varphi=\\psi}\\geq\\lambda_0$ to be a selected stage such that the\nbase changes of $\\varphi_{\\lambda_0}$ and $\\psi_{\\lambda_0}$ to\n$S_\\lambda$ agree for every $\\lambda\\geq\\lambda_{\\varphi=\\psi}$.",
+  "proof": [
+   {
+    "text": "We show that such a stage exists. On a finite affine target cover, the\ninverse-image opens of the two morphisms have equal inverse images over\n$S$, so they agree past the stage of [def-nagata-qc-open-equality-stage].\nOn a finite affine cover of each common inverse image, the induced ring\nmaps agree over $S$ on a finite generator list, so by\n[lemma-nagata-filtered-colimit-finite-data] they agree on it at some\nstage and at every later stage. A common upper bound of these finitely many\nstages (for instance the selected upper bound of\n[def-nagata-directed-finite-upper-bound] for a directed index set) has the\nrequired property: past it the local maps agree, and the local equalities\nglue.",
+    "uses": [
+     "def-nagata-qc-open-equality-stage",
+     "lemma-nagata-filtered-colimit-finite-data",
+     "def-nagata-directed-finite-upper-bound"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

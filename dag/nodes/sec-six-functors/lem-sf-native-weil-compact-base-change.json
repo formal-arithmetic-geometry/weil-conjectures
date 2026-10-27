@@ -1,0 +1,172 @@
+{
+ "id": "lem-sf-native-weil-compact-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "clause (4), base change $g^*Rf_!\\simeq Rf'_!g'^*$ for arbitrary base change, rendered for Weil complexes by AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso; its Lean record was on prop-functor-package until 2026-10-26 (maintainer, from the 2026-10-25 batch-5 blueprint audit), which made the batch-5 sorry route reach the whole package (exceptional coherence, orientation, Verdier) for this one clause",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base change for native compactly supported Weil direct images",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the categories $\\mathrm{WC}^{\\mathrm{der}}(-)$ and the actual equivariant derived operations $h^*,Rh_*,Rh_{0!}$ of [def-sf-native-weil-derived-framework]. Consider a cartesian square [def-weil-pbc-cartesian-square] of $k_0$-schemes and $k_0$-morphisms\n$$\\begin{array}{ccc}X'&\\xrightarrow{g}&X\\\\ f'\\downarrow&&\\downarrow f\\\\ Y'&\\xrightarrow{h}&Y\\end{array}$$\nwhere $f$ and $f'$ are separated [def-weil-proper-morphism], quasi-compact and locally of finite type [def-weil-finite-type-morphism], and $Y$ and $Y'$ are quasi-compact, quasi-separated [def-weil-quasi-separated-morphism] and locally of finite type over $k_0$. No hypothesis is put on $g$ and $h$ beyond being $k_0$-morphisms. Then there is an isomorphism of functors on the native derived Weil categories\n$$h^*\\circ Rf_{0!}\\ \\cong\\ Rf'_{0!}\\circ g^*:\\mathrm{WC}^{\\mathrm{der}}(X)\\longrightarrow\\mathrm{WC}^{\\mathrm{der}}(Y'),$$\nwhere $Rf_{0!}$, $Rf'_{0!}$ are the compactly supported direct images built from the chosen compactifications. Only the existence of a natural isomorphism is asserted; it lies in the categories of Weil complexes, hence is equivariant.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+  "place": "nonempty_upperStar_derivedLowerShriek_iso (proof sorry); prop-functor-package clause 4. No absolute separatedness over k0 is assumed."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose the compactification c of f and form c' by Compactification.ofIsPullback hH. Add the induced over, locally finite type and quasi-compact instances. The pullback identities from the compactification base-change theorem give chosen Cartesian squares for the proper maps c'.g over c.g and for the open immersions c'.i over c.i.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-pbc-cartesian-square",
+    "def-nagata-compactification",
+    "def-nagata-compactification-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "nonempty_upperStar_derivedLowerShriek_iso (proved in this delivery); prop-functor-package clause 4."
+   }
+  },
+  {
+   "text": "Use the native compactification model comparisons for c and c', and the native basic comparisons to show extension by zero preserves the Weil-complex object properties. Lift the ambient extension-by-zero, upper-star and lower-star functors to the full subcategories with those preservation proofs.",
+   "uses": [
+    "lem-sf-native-weil-compactification-model-comparison",
+    "lem-sf-native-weil-basic-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "nonempty_upperStar_derivedLowerShriek_iso (proved in this delivery); prop-functor-package clause 4."
+   }
+  },
+  {
+   "text": "Apply native proper natural base change to the chosen proper square and native open natural base change to the chosen open square. Whisker these isomorphisms with the compactification model comparisons and the full-subcategory inclusion comparisons, using associators, to obtain an ambient isomorphism between the two composites. Full faithfulness of the inclusion of the target Weil-complex subcategory gives the required preimage isomorphism.",
+   "uses": [
+    "lem-sf-native-weil-proper-natural-base-change",
+    "lem-sf-native-weil-open-natural-base-change",
+    "lem-sf-native-weil-compactification-model-comparison",
+    "lem-sf-native-weil-basic-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+    "place": "nonempty_upperStar_derivedLowerShriek_iso (proved in this delivery); prop-functor-package clause 4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-cartesian-square",
+  "def-nagata-compactification",
+  "def-nagata-compactification-base-change",
+  "lem-sf-native-weil-compactification-model-comparison",
+  "lem-sf-native-weil-basic-comparisons",
+  "lem-sf-native-weil-proper-natural-base-change",
+  "lem-sf-native-weil-open-natural-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+  "place": "nonempty_upperStar_derivedLowerShriek_iso; direct compactification, native proper base-change and native open base-change calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived direct image of Weil complexes commutes with arbitrary base change through a compactification",
+   "results": "Logged 2026-10-26T11:07:06Z: 8 hits. AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforward_map_val. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "Logged 2026-10-26T11:07:05Z: 0 hits. . ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|LowerShriek|compactlySupported",
+   "results": "Logged 2026-10-26T11:07:04Z: 25 hits. Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/CompactlySupported.lean, Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean, Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean, Mathlib/Topology/ContinuousMap/BoundedCompactlySupported.lean. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback commutes with proper pushforward after extension by zero in equivariant derived categories",
+   "results": "Logged 2026-10-26T11:07:05Z: 8 hits. SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackComp, CategoryTheory.Precoverage.ZeroHypercover.pullback₂_toPreZeroHypercover, SheafOfModules.conjugateEquiv_pullbackId_hom, CategoryTheory.ExponentiableMorphism.pushforwardUncurry, CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-26",
+  "why": "batch-5 blueprint audit 2026-10-25 (approved by the human 2026-10-26): the route sorry WeilComplex.nonempty_upperStar_derivedLowerShriek_iso was recorded on the big node prop-functor-package, so the batch-5 sorry route reached the whole six-functor package (item 7: exceptional coherence, orientation, Verdier; ~237 open nodes exclusive to batch 5 at the 10-25 snapshot, 33 of them -pod- nodes internal to the assumed Poincare duality) for one base-change clause; this node records that declaration alone, beside the native composition / open-closed / open-immersion nodes of the same Lean file"
+ },
+ "lean_audit": {},
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso"
+  ],
+  "statement": "theorem nonempty_upperStar_derivedLowerShriek_iso {X' Y' : Scheme.{u}}\n    [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]\n    {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]\n    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]\n    {f' : X' ⟶ Y'} [f'.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f']\n    [LocallyOfFiniteType f'] [QuasiCompact f']\n    [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (Y' ↘ Spec (CommRingCat.of k₀))]\n    {g : X' ⟶ X} [g.IsOver (Spec (CommRingCat.of k₀))] {h : Y' ⟶ Y}\n    [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) :\n    Nonempty (derivedLowerShriek k₀ l f ⋙ upperStar h ≅ upperStar g ⋙ derivedLowerShriek k₀ l f') :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-26",
+  "note": "upstream declaration, proof still `sorry`; moved here from prop-functor-package (maintainer, 2026-10-26, batch-5 blueprint audit 2026-10-25). Statement copied from the live file (quarantine/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean while the module is out for rework, section Package: variables X Y Z U over k0)."
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sf-native-weil-compact-base-change",
+  "worker": "stage1",
+  "summary": "NB continued the existing sandbox, preserving its logged searches. Replaced the uncited open comparison and objectwise/different-coefficient proper input by two searched statement-only native natural-isomorphism inputs. Reused model comparison, exact and constructible native pullback, open preservation and compactification base change. Added explicit quasi-compactness of the chosen open and finite-type composition checks. Item statement unchanged.",
+  "blueprint": "prop-functor-package clause (4), compact-support base change through its proper and open factors, with the chosen-model comparison; current sk-prop-sf-cbc and lem-cbc-extension-zero-base-change provide the factorization route. The item is only this clause, not the key node of the package unit.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-compactification-base-change",
+    "why": "Compactification base change is the geometric tool needed to use the same compactification before and after pullback; it does not replace the unit base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-compactification-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NB-d58108b8a",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-d58108b8a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Sources: prop-functor-package clause (4) and its proof; sk-prop-sf-cbc (the proper plus extension-by-zero route); lem-cbc-extension-zero-base-change; thm-weil-pbc-qbar (proof sections 'Forgetting the Weil structure' and 'Constructibility and the isomorphism'); Stacks 03S6 (etale-cohomology.tex 11492-11514) and 04J0 (sites-modules.tex 2368-2409). The item statement is unchanged and matches the Lean record WeilComplex.nonempty_upperStar_derivedLowerShriek_iso hypothesis by hypothesis, on the native coefficient category B/W/WC^der. Step 1: a is quasi-compact by QuasiCompact.of_comp (pa=f, p quasi-separated), c' comes from the Nagata base-change lemma, the (a,a') square is cartesian by pasting, and all six schemes are of finite type. Step 2: pullback is exact and preserves constructibility for every scheme morphism, so the elementary mark is fine. Step 4: the proper node is applied to (Xbar, Xbar', Y, Y', p, p', h, g~) and the open node to (X, X', Xbar, Xbar', a, a', g~, g); hypotheses and directions are correct, the proper isomorphism is whiskered only after J_a, and fullness gives the isomorphism in WC^der. Both new nodes are statement-only, self-contained, strictly smaller factors, searched, and true. Small cases tested: identity squares, empty schemes, j=id, p a closed immersion. No native-W duplicate exists: lem-weil-pbc-weil-complex-proper-base-change is objectwise and condensed, lem-trf-open-square-exchange uses finite coefficient rings, and sk-def-sfb-open-base-change is condensed. One fault (C5), fixed in fixes/. The proper node contained an extra conjunct, Rp_*(WC)⊆WC; reviewed same-unit nodes already state it (lem-sf-native-weil-proper-shriek-star, lem-sf-native-weil-shriek-triangulated). I dropped the conjunct; the natural isomorphism, typed into D(W_T'), is unchanged. Item step 3 now cites lem-sf-native-weil-shriek-triangulated for the preservation of Rf_{0!} and Rf'_{0!} (f, f' separated, qc, lft; Y, Y' qcqs, lft), and proof_deps were recomputed. No cycle. Accepted tool_use: lemma-nagata-compactification-base-change, which is actually on route. Advisory: lem-weil-pbc-weil-complex-proper-base-change has a native Lean record under a condensed DAG statement.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T222552-L-669106",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

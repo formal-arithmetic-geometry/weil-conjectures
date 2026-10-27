@@ -1,0 +1,438 @@
+{
+ "id": "lem-sf-cyclic-derived-lifted-counit-represents",
+ "kind": "statement",
+ "title": "A lifted cyclic derived counit represents the native Hom functor",
+ "statement": "Let $\\mathcal A_X,\\mathcal A_Y$ be Grothendieck abelian categories [def-sp-grothendieck-abelian], with additive exact autoequivalences $P,Q$. Put $\\mathcal B_X=\\mathcal A_X^P$, $\\mathcal B_Y=\\mathcal A_Y^Q$, the fixed-pair categories [def-weil-endofunctor-fixed-pair-category], and use ordinary derived categories [def-weil-abstract-derived-category]. Write $U_X,U_Y$ for derived forgetting and $\\theta$ for the induced action. Let $\\mathcal C_X,\\mathcal C_Y$ be full subcategories of the bounded ordinary derived categories, closed under isomorphisms and shifts, invariant under $P,Q$ and their inverses. Put $\\mathcal W_X=U_X^{-1}(\\mathcal C_X)$ and $\\mathcal W_Y=U_Y^{-1}(\\mathcal C_Y)$ inside the bounded native derived categories.\n\nLet $F:\\mathcal C_X\\to\\mathcal C_Y$ and $G:\\mathcal C_Y\\to\\mathcal C_X$ be exact functors with adjunction $F\\dashv G$ and counit $\\epsilon$. Suppose $a:QF\\xrightarrow{\\sim}FP$ is a shift-compatible natural isomorphism whose mate $b:PG\\xrightarrow{\\sim}GQ$ of $a^{-1}$ [def-weil-pbc-adjunction-mate] is invertible. Let $F^{\\mathrm W}:\\mathcal W_X\\to\\mathcal W_Y$ be exact with a natural shift-compatible comparison $c:U_YF^{\\mathrm W}\\xrightarrow{\\sim}FU_X$ intertwining actions. Assume the natural Hom short exact sequence of [lem-sf-cyclic-derived-hom-exact-sequence] is compatible with $F^{\\mathrm W},F,c$ on these subcategories, including the left connecting maps. Explicitly, if $V^r_{K,H}=\\operatorname{Hom}(U_XK,U_XH[r])$ and $T^r(u)=\\theta_{H[r]}P(u)\\theta_K^{-1}$, the sequences are $0\\to(V^{-1}_{K,H})_T\\to\\operatorname{Hom}(K,H)\\to(V^0_{K,H})^T\\to0$, and similarly on $Y$; $(V)_T=\\operatorname{coker}(1-T)$, $(V)^T=\\ker(1-T)$. The functor $F^{\\mathrm W}$ acts on both outer terms by $F$ under $c$.\n\nFor $L\\in\\mathcal W_Y$ put $N=GU_YL$, $v=G(\\theta_L)b_{U_YL}:PN\\xrightarrow{\\sim}N$. There exist $H_L\\in\\mathcal W_X$, an action-compatible isomorphism $e_L:U_XH_L\\xrightarrow{\\sim}N$ satisfying $e_L\\theta_{H_L}=vP(e_L)$, and a native derived morphism $d_L:F^{\\mathrm W}H_L\\to L$ with\n$$U_Y(d_L)=\\epsilon_{U_YL}F(e_L)c_{H_L}.$$\nFor every such $H_L,e_L$ and every native lift $d_L$ of the displayed counit, the maps\n$$\\Psi_K:\\operatorname{Hom}_{\\mathcal W_X}(K,H_L)\\longrightarrow\\operatorname{Hom}_{\\mathcal W_Y}(F^{\\mathrm W}K,L),\\qquad u\\longmapsto d_LF^{\\mathrm W}(u)$$\nare bijective, naturally in $K$. The maps on degree $-1$ coinvariants and degree $0$ invariants are the bijections induced by the ordinary adjunction in those two degrees, through $e_L,c$ and shift comparisons. No functorial choice of $H_L,e_L,d_L$ is required. The representability includes all native extension morphisms, and does not assume derived forgetting is faithful.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Old proof Steps 5–6: realize the right action, lift its counit and test both terms of cyclic derived Hom. Agent-written native-derived expansion of the final sentence, rather than an identification with fixed pairs in an ordinary derived category."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-cyclic-derived-hom-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Apply cyclic derived action realization to N = G(U(L)) and the invertible action b followed by G(theta_L). Its interval-preservation conclusion gives native boundedness in the same interval, and isomorphism closure of S places the realized H in the required native full subcategory. The induced e satisfies the prescribed action equation.",
+   "uses": [
+    "lem-sf-cyclic-derived-action-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument."
+   }
+  },
+  {
+   "text": "The mate/counit identity for a inverse, counit naturality and naturality of a give a_H followed by F(theta_H), F(e), epsilon equal to Q(F(e) followed by epsilon) followed by theta_L. Compose with c_H and apply its assumed action equation hc. This proves equivariance of the ordinary counit carrier t. Expand the canonical degree-zero shift comparison to see that t followed by the inverse zero-shift identification is in ker(1-T). The surjective map in the assumed native Hom sequence supplies d, and cancellation of the invertible zero-shift map gives exactly U(d)=c_H followed by F(e), epsilon.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument."
+   }
+  },
+  {
+   "text": "For every integer r, outerMap is additive and bijective. On ordinary full subcategories equip the right adjoint temporarily with Mathlib Adjunction.rightAdjointCommShift, determined by F and the specified adjunction. Compose the isomorphism Hom(X,Y[r]) to Hom(X,G(Z[r])) induced by shifted e and this shift comparison with the inverse adjunction Hom bijection. Adjunction.shift_counit_app and naturality of the F shift comparison identify its formula with F(u), then the F shift comparison, then the shifted F(e) followed by epsilon. The fully faithful inclusions and their canonical shift isomorphisms identify this bijection with outerMap, including c_K. This construction does not require compatibility of the given shift structure on G with the adjunction.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument."
+   }
+  },
+  {
+   "text": "Fix any native lift d with the prescribed underlying carrier. Transport followed by shifted U(d) equals outerMap, since shifted c_H inverse cancels against shifted c_H. Naturality of cyclicDerivedStructure and the derived Q shift comparison show that postcomposition by shifted U(d) commutes with the cyclic action. Together with the action clause of Compatible this proves that outerMap intertwines T in every degree. No shifted mate calculation is needed.",
+   "uses": [
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument."
+   }
+  },
+  {
+   "text": "Restrict the degree-zero additive equivalence to ker(1-T), with its inverse restricting by injectivity. In degree minus one equivariance and additivity identify the image subgroups of 1-T: e(x-Tx)=e(x)-T(e(x)), and surjectivity gives the reverse inclusion. QuotientAddGroup.congr induces the required additive quotient equivalence, with the stated formula on every representative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument."
+   }
+  },
+  {
+   "text": "The left connecting square follows on quotient representatives by the left clause of Compatible followed by boundary naturality with identity precomposition and postcomposition by d. Use transport followed by U(d) equals outerMap and descend by quotient induction. The right square follows by the forgetting clause of Compatible and naturality of the inverse zero-shift isomorphism. Both squares concern all native morphisms.",
+   "uses": [
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument."
+   }
+  },
+  {
+   "text": "Apply the two assumed exact sequences to (K,H) and (J(K),L). For the native middle map m, injectivity follows as follows: if m(x)=0, the right square and the injective invariant equivalence give q(x)=0; exactness gives x=i(v); the left square and injectivity of the target boundary and coinvariant equivalence force v=0. For surjectivity, lift the invariant image of y through the invariant equivalence and the source surjective q to obtain x. The difference y-m(x) has zero invariant image, hence equals the target boundary of v; correct x by the source boundary of the inverse coinvariant image of v. This proves the short five lemma directly on the underlying additive groups with independent universes. Functoriality J.map_comp and associativity give naturality. Retain the specified outer equivalences and squares as witnesses in Represents.",
+   "uses": [
+    "lem-sf-cyclic-derived-hom-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cyclic-derived-action-realization",
+  "def-weil-pbc-adjunction-mate",
+  "lem-sf-cyclic-derived-hom-exact-sequence",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, expanded by the agent into the native-derived counit argument. Lean proof by N4: realization, mate identity, shifted ordinary Hom bijection, compatibility and a direct additive diagram chase."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift the invariant ordinary adjunction counit to a derived fixed-pair category and prove it represents the adjunction using invariant and coinvariant exact sequence",
+   "results": {
+    "t": "2026-10-22T07:06:00Z",
+    "tool": "leanfinder",
+    "query": "Lift the invariant ordinary adjunction counit to a derived fixed-pair category and prove it represents the adjunction using invariant and coinvariant exact sequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.instIsRightAdjointModuleCatInvariantsFunctor",
+     "Rep.coinvariantsAdjunction",
+     "Rep.invariantsAdjunction",
+     "Rep.resIndAdjunction_counit_app",
+     "Rep.invariantsAdjunction_counit_app_hom",
+     "Rep.coindResAdjunction_counit_app",
+     "Rep.indResAdjunction_counit_app_hom_hom",
+     "Rep.instIsLeftAdjointModuleCatCoinvariantsFunctor"
+    ],
+    "digest": "4634464c882e005f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": {
+    "t": "2026-10-22T07:12:26Z",
+    "tool": "loogle",
+    "query": "\"mateEquiv\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "digest": "b8ac30fd6644aa85"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "coinvariant.*adjunction|adjunction.*coinvariant|IsoAlgebra",
+   "results": {
+    "t": "2026-10-22T07:11:24Z",
+    "tool": "grep",
+    "query": "coinvariant.*adjunction|adjunction.*coinvariant|IsoAlgebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/AlgCat/Basic.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean"
+    ],
+    "digest": "7c6a6f6927cf18c5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction bijections on invariants and coinvariants imply a lifted counit represents Hom in a derived equivariant category",
+   "results": {
+    "t": "2026-10-22T07:11:25Z",
+    "tool": "leansearch",
+    "query": "Adjunction bijections on invariants and coinvariants imply a lifted counit represents Hom in a derived equivariant category",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.adjunctionOfEquivRight_counit_app",
+     "CategoryTheory.Adjunction.mkOfHomEquiv_counit_app",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit",
+     "CategoryTheory.Adjunction.adjunctionOfEquivLeft_counit_app",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp",
+     "CategoryTheory.Adjunction.homEquiv",
+     "CategoryTheory.Adjunction.homEquiv_counit",
+     "CategoryTheory.Adjunction.mkOfHomEquiv"
+    ],
+    "digest": "4ff53e8a3852f0a9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits provide ordinary sheaf pushforwards, higher derived functors, representation invariants or generic mate/adjunction identities; none gives the full stated comparison or lifted-representability criterion by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "cyclic.*(derived|counit)|IsoAlgebra|coinvariant.*adjunction",
+   "results": {
+    "t": "2026-10-22T09:35:53Z",
+    "tool": "grep",
+    "query": "cyclic.*(derived|counit)|IsoAlgebra|coinvariant.*adjunction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/AlgCat/Basic.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean",
+     "Mathlib/RepresentationTheory/Coinvariants.lean"
+    ],
+    "digest": "190a8a57fd8e4253"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the resulting ordinary representation adjunctions and generic mate/counit identities; these do not state native derived cyclic lifted representability, nor specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant derived counit induces a bijection on native Hom groups by the short five lemma on invariants and coinvariants",
+   "results": {
+    "t": "2026-10-22T09:35:53Z",
+    "tool": "leansearch",
+    "query": "An equivariant derived counit induces a bijection on native Hom groups by the short five lemma on invariants and coinvariants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.mkOfHomEquiv_counit_app",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit",
+     "Rep.invariantsAdjunction_homEquiv_apply_hom",
+     "Rep.coinvariantsAdjunction_homEquiv_apply_hom",
+     "Rep.invariantsAdjunction_homEquiv_symm_apply_hom",
+     "CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence",
+     "CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1",
+     "CategoryTheory.Adjunction.homEquiv"
+    ],
+    "digest": "069dd02815269b68"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the resulting ordinary representation adjunctions and generic mate/counit identities; these do not state native derived cyclic lifted representability, nor specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_counit\"",
+   "results": {
+    "t": "2026-10-22T09:35:53Z",
+    "tool": "loogle",
+    "query": "\"mateEquiv_counit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm"
+    ],
+    "digest": "46db0dd75d6df456"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the resulting ordinary representation adjunctions and generic mate/counit identities; these do not state native derived cyclic lifted representability, nor specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lifted counit for an adjunction represents Hom in derived categories of invertible actions using a short exact sequence of invariant and coinvariant Hom groups",
+   "results": {
+    "t": "2026-10-22T09:35:56Z",
+    "tool": "leanfinder",
+    "query": "A lifted counit for an adjunction represents Hom in derived categories of invertible actions using a short exact sequence of invariant and coinvariant Hom groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.indResAdjunction_counit_app_hom_hom",
+     "Rep.coinvariantsAdjunction_counit_app",
+     "Rep.coinvariantsAdjunction",
+     "Rep.invariantsAdjunction_counit_app_hom",
+     "Rep.invariantsAdjunction",
+     "Rep.resCoindAdjunction_counit_app_hom_hom",
+     "Rep.coinvariantsAdjunction_unit_app_hom",
+     "Rep.coinvariantsAdjunction_homEquiv_apply_hom"
+    ],
+    "digest": "b814ff31b4e52ef7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the resulting ordinary representation adjunctions and generic mate/counit identities; these do not state native derived cyclic lifted representability, nor specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₂_of_shortExact_of_isIso₁₃|mateEquiv_counit|homEquiv_counit",
+   "results": {
+    "t": "2026-10-22T09:37:24Z",
+    "tool": "grep",
+    "query": "isIso₂_of_shortExact_of_isIso₁₃|mateEquiv_counit|homEquiv_counit",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean",
+     "Mathlib/CategoryTheory/Adjunction/Additive.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean"
+    ],
+    "digest": "5b19c9a8b11c390e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the resulting ordinary representation adjunctions and generic mate/counit identities; these do not state native derived cyclic lifted representability, nor specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction for complexes with an invertible semilinear automorphism by lifting the ordinary counit and comparing invariant and coinvariant Hom groups",
+   "results": {
+    "t": "2026-10-22T09:37:26Z",
+    "tool": "leanfinder",
+    "query": "Derived adjunction for complexes with an invertible semilinear automorphism by lifting the ordinary counit and comparing invariant and coinvariant Hom groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.coinvariantsAdjunction",
+     "Rep.invariantsAdjunction",
+     "Rep.coinvariantsAdjunction_homEquiv_apply_hom",
+     "Rep.indResAdjunction_counit_app_hom_hom",
+     "Rep.coinvariantsAdjunction_unit_app_hom",
+     "Rep.instIsRightAdjointModuleCatInvariantsFunctor",
+     "Rep.resCoindAdjunction",
+     "Rep.invariantsAdjunction_homEquiv_symm_apply_hom"
+    ],
+    "digest": "b603d335cca1eed7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the resulting ordinary representation adjunctions and generic mate/counit identities; these do not state native derived cyclic lifted representability, nor specialize to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-exceptional-forgetful",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Old proof Steps 5–6: realize the right action, lift its counit and test both terms of cyclic derived Hom. Supplied provenance: exceptional-adjunction final sentence of cor-coef-verdier-weil-equivariance.proof.md; blueprint_refs ancestor is None.",
+   "via": [
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cyclic-derived-lifted-counit-represents",
+  "worker": "stage1",
+  "group": "Q113",
+  "summary": "Eight steps assemble existing action realization, the equivariant carrier counit and the cyclic Hom short exact sequence. The ordinary adjunction is checked on the full Hom groups in degrees zero and minus one, the action-intertwining calculation is explicit, and the assumed connecting-map compatibility supplies the left square before the short five lemma. No new nodes. Corrected the ill-typed target (N,v) of the underlying isomorphism e_L to N with its explicit intertwining equation; no mathematical hypothesis or conclusion is changed. Repair of the return at c3d60994484: compared the retained delivered split with the current unsplit live item, re-read every current cited statement and retained current non-split metadata; clarified the fixed-pair parameter substitution and explicitly cancelled c_H[r] in the outer comparison maps. The live promotion remains the maintainer landing operation.",
+  "blueprint": "The nearest imported blueprint ancestor is None (blueprint_refs ancestor). Retains the inherited from.node and via. Expands the final sentence of cor-coef-verdier-weil-equivariance.proof.md through the native-derived realization and cyclic Hom criterion, rather than identifying the two fixed-pair/derived categories. Searches of all blueprint nodes for cyclic derived, fixed-pair and counit represents found no equivalent statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-e92daab36",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-e92daab36 (reviewer sub-agent of L); spot-checked: This re-delivery follows the side-completion promotion return of c3d60994484b, which itself had a PASS. It is one commit with the item JSON and the report. There are no new nodes, fixes or tool_uses. Compared with the prior head, only proof Steps 1 and 6 and split_report changed. Step 1 now spells out the specialization of the fixed-pair adjunction node: its L,R become F,G and its endofunctors become P,Q. Step 6 now shows how the outer terms cancel: postcomposing c_H[r]^{-1} s F(u) c_K with h[r] c_H[r] gives φ_r(u). The statement and all other fields are unchanged. The base type correction (e_L : U_X H_L ≅ N with e_L θ_H = v P(e_L)) is sound and neither weakens the item nor breaks its citer lem-sf-weil-native-exceptional-forgetful Step 2. I re-read every cited statement in the current snapshot and re-derived each step. Step 1: in the diagrammatic notation of lem-sf-fixed-pair-adjunction-lift, e_K : Q(FK) → F(PK) is the item's a and b_M : P(GM) → G(QM) is the item's b. This gives R̃(B,θ_L) = (N,v) and the counit equation ε_B F(v) a_N = θ_L Q(ε_B). That agrees with IsoAlgebraAdjunction.lean, map_counit_app_comp_str and the counit carrier simp lemma at lines 63-115. Step 2: N is in C_X and so bounded; the realization applies, and closure of C_X under isomorphisms puts H in W_X. Step 3: tθ = θ_L Q(t), using the c action condition, eθ_H = vP(e) and naturality of a; surjectivity of the Hom sequence then gives d. Step 4: φ_r is a composite of bijections (shift, e∘−, the adjunction transpose, the F-shift comparison, −∘c_K). Step 5: φ_r T_X = T_Y φ_r, using a_A^{-1} F(κ^{-1}) c_K = Q(c_K) θ^{-1}. Step 6: the outer maps equal φ_{-1} and φ_0; the left square comes from the item's explicit connecting-map hypothesis, not from the right square. Step 7: short five lemma in Ab (Mathlib leaf). Step 8: naturality by functoriality. proof_deps equals the union of the step uses. Units are fine: the fixed-pair adjunction lift is in sk-def-sf-operations, which is in this unit's uses. Small cases: trivial action with K = k[0], H = L = k[1] gives native Hom = Ext^1 = k from the coinvariant term; a scalar action λ ≠ 1 gives 0 on both sides; the zero object gives 0. Source: main-20261015 cor-coef-verdier-weil-equivariance final sentence; the expansion is honestly marked agent-written; no SGA. There is no re-split repair note for this item. Maintainer note: promotion into the live DAG is left to the authorized landing."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CyclicDerivedLiftedCounitRepresents",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerived_liftedCounit_represents",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.nativeProperty",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.underlying",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.action",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.structureIso",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.ExactOn",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.transport",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.Compatible",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.outerMap",
+   "CategoryTheory.Endofunctor.IsoAlgebra.CyclicDerivedCounit.Represents",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerived_liftedCounit_represents"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CyclicDerivedLiftedCounitRepresents.lean",
+  "statement": "theorem cyclicDerived_liftedCounit_represents {A : Type uX} [Category.{vX} A] [Abelian A] [IsGrothendieckAbelian.{vX} A] (P : A ⥤ A) [P.Additive] [P.IsEquivalence] [HasDerivedCategory.{wX} A] [HasDerivedCategory.{zX} (IsoAlgebra P)] {B : Type uY} [Category.{vY} B] [Abelian B] [IsGrothendieckAbelian.{vY} B] (Q : B ⥤ B) [Q.Additive] [Q.IsEquivalence] [HasDerivedCategory.{wY} B] [HasDerivedCategory.{zY} (IsoAlgebra Q)] (S : ObjectProperty (DerivedCategory A)) [S.IsClosedUnderIsomorphisms] [S.IsStableUnderShift ℤ] (hS : ∀ N, S N → DerivedCategory.TStructure.t.bounded N) (hP : ∀ N, S N → S (P.mapDerivedCategory.obj N)) (hPinv : ∀ N, S (P.mapDerivedCategory.obj N) → S N) (T : ObjectProperty (DerivedCategory B)) [T.IsClosedUnderIsomorphisms] [T.IsStableUnderShift ℤ] (hT : ∀ N, T N → DerivedCategory.TStructure.t.bounded N) (hQ : ∀ N, T N → T (Q.mapDerivedCategory.obj N)) (hQinv : ∀ N, T (Q.mapDerivedCategory.obj N) → T N) (F : S.FullSubcategory ⥤ T.FullSubcategory) [F.Additive] [F.CommShift ℤ] (hF : ExactOn S T F) (G : T.FullSubcategory ⥤ S.FullSubcategory) [G.Additive] [G.CommShift ℤ] (hG : ExactOn T S G) (adj : F ⊣ G) (a : F ⋙ action Q T hQ ≅ action P S hP ⋙ F) [NatTrans.CommShift a.hom ℤ] (b : G ⋙ action P S hP ≅ action Q T hQ ⋙ G) (hb : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ a.inv)).natTrans = b.hom) (J : (nativeProperty P S).FullSubcategory ⥤ (nativeProperty Q T).FullSubcategory) [J.Additive] [J.CommShift ℤ] (hJ : ExactOn (nativeProperty P S) (nativeProperty Q T) J) (c : J ⋙ underlying Q T ≅ underlying P S ⋙ F) [NatTrans.CommShift c.hom ℤ] (hc : ∀ K : (nativeProperty P S).FullSubcategory, (structureIso Q T hQ (J.obj K)).hom ≫ c.hom.app K = (action Q T hQ).map (c.hom.app K) ≫ a.hom.app ((underlying P S).obj K) ≫ F.map (structureIso P S hP K).hom) (bX : CyclicDerivedHomBoundary P) (bY : CyclicDerivedHomBoundary Q) (hbX : CyclicDerivedHomBoundaryExact P bX ∧ CyclicDerivedHomBoundaryNatural P bX ∧ CyclicDerivedHomBoundaryNormalized P bX) (hbY : CyclicDerivedHomBoundaryExact Q bY ∧ CyclicDerivedHomBoundaryNatural Q bY ∧ CyclicDerivedHomBoundaryNormalized Q bY) (hcompat : Compatible P S Q T F J c bX bY) (L : (nativeProperty Q T).FullSubcategory) : (∃ (H : (nativeProperty P S).FullSubcategory) (e : (underlying P S).obj H ≅ G.obj ((underlying Q T).obj L)), (structureIso P S hP H).hom ≫ e.hom = (action P S hP).map e.hom ≫ b.hom.app ((underlying Q T).obj L) ≫ G.map (structureIso Q T hQ L).hom ∧ ∃ d : J.obj H ⟶ L, (underlying Q T).map d = c.hom.app H ≫ F.map e.hom ≫ adj.counit.app ((underlying Q T).obj L)) ∧ (∀ (H : (nativeProperty P S).FullSubcategory) (e : (underlying P S).obj H ≅ G.obj ((underlying Q T).obj L)), (structureIso P S hP H).hom ≫ e.hom = (action P S hP).map e.hom ≫ b.hom.app ((underlying Q T).obj L) ≫ G.map (structureIso Q T hQ L).hom → ∀ d : J.obj H ⟶ L, (underlying Q T).map d = c.hom.app H ≫ F.map e.hom ≫ adj.counit.app ((underlying Q T).obj L) → Represents P S Q T F J c G adj bX bY L H e d)",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded native derived action, Hom groups, invariant subgroup, coinvariant quotient and normalized boundaries. Auxiliary declarations spell out only this item’s full subcategories, ambient exactness, functor compatibility and conclusion. The theorem covers every counit lift and records both outer additive equivalences and both exact-sequence squares; no derived faithfulness or functorial realization is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f14f3d110",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Single module CyclicDerivedLiftedCounitRepresents (9 aux decls + sorry theorem); node changed only in lean field; statement verbatim. Clause check: S/T closure+bounded+inverse invariance (hPinv equivalent via iso closure), nativeProperty = bounded ∩ U⁻¹S, action/θ canonical (S.lift CommShift, cyclicDerivedStructure), ExactOn exactness without cone closure, a QF≅FP CommShift, hb = mateEquiv of a.inv with correct PG→GQ direction (checked Mates.lean:84/TwoSquare.lean:50), hc = node's c action equation, Compatible = transport (F under c) T-intertwining + forget square + left connecting square, bX/bY pinned by Exact∧Natural∧Normalized (∃! in dep). Conclusion: ∃ H,e (θ_H≫e = P(e)≫b≫G(θ_L)) ∧ ∃ d with U(d)=c_H≫F e≫ε; ∀ H,e,d → Represents (Ψ bijective, natural, pMinus/pZero ≃+ fixed by outerMap = φ_r, boundary and forget squares; verified true by hand). Edge cases OK; universes independent; proof-dep imports required; no hollow defs. Advisory: stage-1 theorem stmt_dep lem-sf-cyclic-derived-hom-exact-sequence supplies plain defs (not added in S2, not flagged); docstring cites 'blueprint latest' vs main-20261015. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261024T190433-L-4055226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

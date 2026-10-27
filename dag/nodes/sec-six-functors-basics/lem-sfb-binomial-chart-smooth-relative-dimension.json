@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-binomial-chart-smooth-relative-dimension",
+ "kind": "statement",
+ "title": "Standard smooth atlas for a diagonal plane hypersurface",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $n\\geq1$, and let $\\alpha,\\beta,\\gamma$ be invertible elements of $\\Gamma(S,\\mathcal O_S)$. Assume that the section $n\\cdot1$ is invertible. Let $D\\subset\\mathbf P^2_S$ be the closed hypersurface $\\alpha A^n+\\beta B^n+\\gamma C^n=0$ [def-pc-proj, def-nagata-projective-space-base-change, def-pc-zero-scheme, def-pc-projective-space-twist]. Its structure morphism $D\\to S$ is smooth of relative dimension one [def-sbc-smooth-morphisms] and H-projective [def-kun-projective]. More precisely, over any affine open $\\operatorname{Spec}R\\subset S$ each standard projective chart has coordinate ring $Q=R[s,t]/(\\lambda s^n+\\mu t^n+\\nu)$, for a permutation $(\\lambda,\\mu,\\nu)$ of the restrictions of $(\\alpha,\\beta,\\gamma)$. The opens $D(s),D(t)$ cover $\\operatorname{Spec}Q$, and their coordinate rings have standard smooth presentations [def-weil-pbc-standard-smooth-algebra]\n$$Q_s\\cong R[s,z,t]/(\\lambda s^n+\\mu t^n+\\nu,sz-1),\\qquad Q_t\\cong R[t,z,s]/(\\lambda s^n+\\mu t^n+\\nu,tz-1),$$\nwith Jacobian determinants $\\lambda n s^n$ and $\\mu n t^n$, respectively, for the first two variables. These presentations and their invertible determinants persist after every ring base change $R\\to R'$, and after every map $\\operatorname{Spec}L\\to S$ with $L$ a field, the resulting opens of $D_L$ have dimension one at each point.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYA, section-plane-curves, Fermat smoothness calculation; literature/stacks-project/algebra.tex Tag 00T7, lemma-standard-smooth, parts (1), (5), (7); relative unit-coefficient version of returned proof step 4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-proj",
+  "def-nagata-projective-space-base-change",
+  "def-pc-zero-scheme",
+  "def-pc-projective-space-twist",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-kun-dimension",
+  "def-weil-affine-spectrum",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:D\\to S$ and $F=\\alpha A^n+\\beta B^n+\\gamma C^n$. Apply [lem-weil-pbc-projective-space-standard-charts] with three coordinates. Above an affine open $V=\\operatorname{Spec}R$ the three charts cover projective space, have coordinate rings $R[s,t]$, and the distinguished coordinate trivializes $\\mathcal O(1)$. Its $n$th tensor power trivializes $\\mathcal O(n)$ [def-pc-projective-space-twist]. For example on the $C$-chart, $s=A/C$, $t=B/C$, and $F=(\\alpha s^n+\\beta t^n+\\gamma)C^n$. The affine local formula of [lem-pc-zero-scheme-properties](1) therefore identifies $D\\cap D_+(C)\\cap f^{-1}V$ with $\\operatorname{Spec}Q$, where $Q=R[s,t]/(\\alpha s^n+\\beta t^n+\\gamma)$. The $A$- and $B$-charts give the asserted permutations. All coefficients and $n$ remain units under restriction to $V$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-pc-projective-space-twist",
+    "lem-pc-zero-scheme-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYA, section-plane-curves, Fermat affine chart calculation; constructions.tex Tag 01NG, lemma-standard-covering-projective-space"
+   }
+  },
+  {
+   "text": "Fix one such $Q$ and write $g=\\lambda s^n+\\mu t^n+\\nu$. In $Q$ the equation gives $1=-\\nu^{-1}\\lambda s^n-\\nu^{-1}\\mu t^n$. Since $n\\geq1$, this is $1=s(-\\nu^{-1}\\lambda s^{n-1})+t(-\\nu^{-1}\\mu t^{n-1})$. A prime of $Q$ cannot contain both $s$ and $t$, so $D(s)\\cup D(t)=\\operatorname{Spec}Q$. This proof also covers $n=1$ and the zero ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYA, section-plane-curves, unit-ideal argument in the Fermat smoothness calculation, with unit coefficients"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-principal-localization-open-immersion], $D(s)$ and $D(t)$, with their open subscheme structures, are $\\operatorname{Spec}Q_s$ and $\\operatorname{Spec}Q_t$. Put $B_s=R[s,z,t]/(g,sz-1)$. The map $B_s\\to Q_s$ sends $s,t$ to their classes and $z$ to $s^{-1}$. Conversely $Q\\to B_s$ sends $s$ to a unit with inverse $z$ and therefore extends uniquely to $Q_s\\to B_s$ by [lem-weil-pbc-ring-localization-universal-property]. The composites fix $s,t,z$ and fix every fraction $a/s^r$, respectively, so they are identities. The same construction gives $Q_t\\cong R[t,z,s]/(g,tz-1)$, with $z\\mapsto t^{-1}$. These are isomorphisms over $R$, so their structural maps are those of the restricted morphism $f$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization; schemes.tex Tag 01I3, lemma-standard-open-affine"
+   }
+  },
+  {
+   "text": "In the variable order $(s,z,t)$, the matrix $(\\partial f_j/\\partial x_i)_{i,j\\leq2}$ for $(f_1,f_2)=(g,sz-1)$ is $\\left(\\begin{smallmatrix}\\lambda n s^{n-1}&z\\\\0&s\\end{smallmatrix}\\right)$. Its determinant is $\\lambda n s^n$, a unit with inverse $\\lambda^{-1}n^{-1}z^n$. In the order $(t,z,s)$ for $(g,tz-1)$ the matrix is $\\left(\\begin{smallmatrix}\\mu n t^{n-1}&z\\\\0&t\\end{smallmatrix}\\right)$; its determinant is $\\mu n t^n$ with inverse $\\mu^{-1}n^{-1}z^n$. Thus both presentations are standard smooth by [def-weil-pbc-standard-smooth-algebra], with three variables and two relations, hence presentation dimension $3-2=1$.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T6, definition-standard-smooth; example-make-standard-smooth following Tag 00T7"
+   }
+  },
+  {
+   "text": "For every $R\\to R'$, apply [lem-weil-pbc-standard-smooth-base-change] to the two presentations in step 4. It gives precisely $R'[s,z,t]/(\\lambda' s^n+\\mu' t^n+\\nu',sz-1)$ and $R'[t,z,s]/(\\lambda' s^n+\\mu' t^n+\\nu',tz-1)$, with the same numbers of variables and relations. The determinants and their inverses are the images of those in step 4. Also $R'\\otimes_RQ=R'[s,t]/(\\lambda' s^n+\\mu' t^n+\\nu')$: maps out of either algebra are exactly a pair of elements satisfying this equation. Adjoining an inverse to $s$ or $t$ gives the same descriptions of its two localized rings as in step 3. The identity in step 2 maps to the same identity with primed coefficients, so these opens still cover. On schemes these are the actual base-changed charts: the projective-space chart descriptions apply over $R'$, and [lem-pc-zero-scheme-pullback] identifies the pulled-back zero scheme with the zero scheme of the pulled-back section. In particular no flatness of $R\\to R'$ is needed.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-base-change",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-pc-zero-scheme-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7, lemma-standard-smooth (5) and its coefficientwise proof; local coefficient description of the zero scheme under pullback"
+   }
+  },
+  {
+   "text": "The two algebras of step 4 are smooth over $R$ by [lem-weil-pbc-standard-smooth-is-smooth]. Their spectra are smooth over $V=\\operatorname{Spec}R$ by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Their identifications with the open subschemes of $D$ are over $V$, so smoothness transfers along them by [lem-weil-pbc-smooth-restrict-open-subschemes](c); part (b) of that node then makes each of these open subschemes smooth over $S$. Varying $V$ and the three projective charts gives a cover of $D$ by step 1, refined by the two opens of step 2. Apply [lem-weil-pbc-smooth-local-on-source] to this cover to conclude that $f:D\\to S$ is smooth. This includes an empty base or empty chart, for which the covering criterion is vacuous.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6, lemma-smooth-characterize (1)-(3); algebra.tex Tag 00T7 (1); open-target composition as in Tags 01VC and 01VA"
+   }
+  },
+  {
+   "text": "Let $h:\\operatorname{Spec}L\\to S$ with $L$ a field. $\\operatorname{Spec}L$ has one point [def-weil-affine-spectrum], so choose an affine open $V=\\operatorname{Spec}R$ containing its image; $h$ factors through $V$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. Step 5 applied to $R\\to L$ gives a covering of $D_L$ by standard smooth affine schemes with three variables and two relations. By [lem-weil-pbc-standard-smooth-over-field-dimension-at-points] each such open has dimension $3-2=1$ at every one of its points. This is dimension at a point in [def-kun-dimension], not the dimension of a local ring. If $x\\in U\\subset X$ with $U$ open, every open neighbourhood $W$ of $x$ contains $W\\cap U$. A strict chain of nonempty irreducible closed subsets in $W\\cap U$ gives such a chain of the same length in $W$ by taking closures: intersecting those closures with $W\\cap U$ recovers the original subsets, so strictness is preserved. Thus $\\dim(W\\cap U)\\leq\\dim W$, which is also [lem-weil-pbc-open-subspace-dimension-monotone] with $U'=W\\cap U\\subseteq W$. The open neighbourhoods of $x$ in $U$ are also open in $X$, and the two minima in the definition are therefore equal: $\\dim_x U=\\dim_x X$ directly from that definition. Hence $\\dim_x D_L=1$ for every $x\\in D_L$. Taking $L=\\kappa(s)$ for every $s\\in S$, together with step 6, is exactly smoothness of relative dimension one in [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+    "def-kun-dimension",
+    "def-sbc-smooth-morphisms",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7, lemma-standard-smooth (7); Tag 00OT, lemma-dimension-at-a-point-finite-type-over-field; morphisms.tex Tag 02G2"
+   }
+  },
+  {
+   "text": "Finally the given closed immersion $D\\hookrightarrow\\mathbf P^2_S$, followed by the structural projection, is $f$. Taking $N=2$ in [def-kun-projective] proves that $f$ is H-projective; no properness or ampleness criterion is required.",
+   "uses": [
+    "def-kun-projective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-projective.md",
+    "place": "H-projective convention: closed immersion into a finite projective space over the base"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-pc-projective-space-twist",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-standard-smooth-base-change",
+  "lem-pc-zero-scheme-pullback",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
+  "def-kun-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "def-kun-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYA, section-plane-curves: relative unit-coefficient version of the Fermat calculation, with standard-smooth presentations from algebra.tex Tags 00T6 and 00T7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A diagonal projective plane hypersurface with unit coefficients and invertible degree is smooth of relative dimension one over any scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (P : Fin 3 → R),\\n  W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"A projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$ is nonsingular if and only if any of its affine lifts (representatives) satisfies the curve's homogeneous cubic equation\"}\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (a b : R),\\n  W'.NonsingularLift ⟦![a, b, 1]⟧ ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For elements $a, b$ in a commutative ring $R$, the projective point $[a : b : 1]$ on a Weierstrass curve $W'$ is nonsingular if and only if the corresponding affine point $(a, b)$ on the affine model \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [Nontrivial R], W'.NonsingularLift ⟦![0, 1, 0]⟧\", \"doc\": \"For any non-trivial commutative ring $ R $, the projective point $[0:1:0]$ on the Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ satisfies the nonsingularity condition. This means the poin\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (a b : R),\\n  W'.Nonsingular ![a, b, 1] ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For any elements $a, b$ in a ring $R$, the point $[a : b : 1]$ on the projective Weierstrass curve $W'$ is nonsingular if and only if the corresponding point $(a, b)$ on the affine Weierstrass curve $\"}\n  {\"name\": \"WeierstrassCurve.Projective.Nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → (Fin 3 → R) → Prop\", \"doc\": \"A point $ P = [X:Y:Z] $ in projective space over a ring $ R $ is nonsingular if it satisfies the homogeneous cubic equation defining the projective Weierstrass curve $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth definitions and general atlas criteria require construction of the displayed unit-coefficient presentations; Weierstrass nonsingularity is a different equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ring R[s,t]/(alpha*s^n+beta*t^n+gamma) is smooth of relative dimension one if n alpha beta gamma are units by the Jacobian criterion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → f.IsStandardSmooth\", \"doc\": \"If a ring homomorphism $ f : R \\to S $ is standard smooth of relative dimension $ n $, then $ f $ is standard smooth.\"}\n  {\"name\": \"RingHom.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"{R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is standard smooth if the induced algebra structure on $ S $ over $ R $ satisfies the standard smoothness condition, meaning $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [H : Algebra.IsStandardSmoothOfRelativeDimension n R S], Algebra.IsStandardSmooth R S\", \"doc\": \"If $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, then $ S $ is a standard smooth algebra over $ R $. This follows from the fact that the localized polynomial ring structur\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth definitions and general atlas criteria require construction of the displayed unit-coefficient presentations; Weierstrass nonsingularity is a different equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, MvPolynomial",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth definitions and general atlas criteria require construction of the displayed unit-coefficient presentations; Weierstrass nonsingularity is a different equation."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*hypersurface|Fermat|standardSmooth|StandardSmooth",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"102\", \"text\": \"  have : @RingHom.Etale = @RingHom.IsStandardSmoothOfRelativeDimension 0 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"103\", \"text\": \"    ext; apply RingHom.etale_iff_isStandardSmoothOfRelativeDimension_zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.RingTheory.RingHom.LocallyStandardSmooth\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"33\", \"text\": \"- `AlgebraicGeometry.Smooth.iff_forall_exists_isStandardSmooth`: A morphism of schemes is smooth\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"84\", \"text\": \"lemma Smooth.iff_forall_exists_isStandardSmooth (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"87\", \"text\": \"        (e : V ≤ f ⁻¹ᵁ U), (f.appLE U V e).hom.IsStandardSmooth := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"88\", \"text\": \"  have : HasRingHomProperty @Smooth.{u} (Locally IsStandardSmooth) := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth definitions and general atlas criteria require construction of the displayed unit-coefficient presentations; Weierstrass nonsingularity is a different equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth relative dimension one of diagonal projective plane hypersurface by standard smooth presentations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and $n \\\\in \\\\mathbb{N}$. If for every point $x \\\\in X$, there exist open subsets $V \\\\subseteq X$ and $U \\\\subseteq Y$ such that $x \\\\in V$, $V \\\\subseteq f^{-1}(U)\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmooth R S] : ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.mk\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n) → Algebra.IsStandardSmoothOfRelativeDimension n R S\", \"doc\": \"If there exist finite generating and relation sets $ \\\\iota, \\\\sigma $ such that the dimension $ \\\\#\\\\iota - \\\\#\\\\sigma $ equals $ n $, then $ S $ is a standard smooth algebra of relative dimension $ n $ ov\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth definitions and general atlas criteria require construction of the displayed unit-coefficient presentations; Weierstrass nonsingularity is a different equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagonal plane hypersurface with invertible coefficients and invertible degree is smooth of relative dimension one",
+   "results": "Actual search returned 8 hits: Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.id, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.relativeDimension, RingHom.IsStandardSmoothOfRelativeDimension.id, RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine curve defined by lambda s^n plus mu t^n plus nu is smooth when n lambda mu nu are units",
+   "results": "Actual search returned 8 hits: WeierstrassCurve.Affine.Nonsingular, WeierstrassCurve.Affine, WeierstrassCurve.Jacobian.Nonsingular, WeierstrassCurve.IsElliptic, WeierstrassCurve, WeierstrassCurve.Jacobian.nonsingularLift_zero, WeierstrassCurve.Projective.Nonsingular, WeierstrassCurve.Jacobian.nonsingular_zero",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, MvPolynomial",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "Fermat|diagonal.*hypersurface|binomial.*smooth",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Diagonal projective plane hypersurface with unit coefficients and invertible degree is smooth",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.IsSmooth.casesOn, LibraryNote.Design_choices_about_smooth_algebraic_structures, Matrix.isUnit_diagonal, WeierstrassCurve.Projective.nonsingular_smul, Algebra.smoothLocus, AlgebraicGeometry.IsSmooth, WeierstrassCurve.Projective.nonsingular_of_equiv, WeierstrassCurve.Projective.nonsingular_some",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is smooth if and only if each point has affine neighborhoods on which the ring map is standard smooth",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth.iff_forall_exists_isStandardSmooth",
+   "results": "Actual search returned 1 hits: AlgebraicGeometry.Smooth.iff_forall_exists_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma Smooth.iff_forall_exists_isStandardSmooth",
+   "results": "Actual search returned 1 hits: 84",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is smooth exactly when each point has an affine standard smooth chart over an affine open of the target",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.mk, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.rec",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the hits give generic smooth-chart criteria or Weierstrass predicates; the explicit diagonal equation and presentations still require the calculations in this split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fermat-kummer-relative-curve",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Returned proof step 4: two localized Jacobian presentations, affine smoothness, open localization, coefficient base change and fibre dimension.",
+   "via": [
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-binomial-chart-smooth-relative-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement; constructed the two inverse-localization presentations and computed the ordered Jacobian minors explicitly. Reused existing nodes for projective charts, zero schemes, principal open immersions, smoothness, base change and dimension at points; no new nodes are necessary. All clauses, including arbitrary base change and H-projectivity, are proved without a Noetherian or field assumption on the base. Repair of the 2026-10-23 return: reread every dependency against the current DAG and retained the approved route; made the one-point affine factorization and open-neighbourhood dimension comparison explicit in step 7.",
+  "blueprint": "Realizes the inherited from.place: Fermat realization in the de Jong §3.5 auxiliary cover, and the returned proof step 4 (two localized Jacobian presentations, smoothness, base change and fibre dimension). The ancestor tool reports blueprint.from.node=None; the inherited ancestry fields are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic scheme/algebra tool used for Standard charts and coordinate sections of projective space over a scheme; this unit supplies the alteration/curve route, not the general statement."
+   },
+   {
+    "node": "lem-pc-zero-scheme-pullback",
+    "why": "Generic scheme/algebra tool used for Pullback compatibility of the zero locus; this unit supplies the alteration/curve route, not the general statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic scheme/algebra tool used for A ring map is smooth iff the morphism of spectra is smooth; this unit supplies the alteration/curve route, not the general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-pc-zero-scheme-pullback",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-861a59cc2",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-861a59cc2 (reviewer sub-agent of L); spot-checked: S1 re-delivery after an administrative landing refusal of 799eb (that head got a FIX from a reviewer). The item is still unsplit with an empty proof in both live and side-live, so no other group has superseded it. Diffed against the prior fixes/ file: the statement and steps 1-6 and 8 are identical. Step 7 now cites def-weil-affine-spectrum for 'Spec L has one point' (correct). It replaces the earlier FIX's citation of lem-weil-pbc-open-subspace-dimension-monotone with an inline proof (closures of a strict irreducible chain in W∩U stay strict in W), which I checked and found correct. I reread every cited statement: chart node (a)-(c); zero-scheme-properties clause (1) only; zero-scheme-pullback valid for any morphism, so no flatness is needed; ordered Jacobian (Def 00T6, algebra.tex 37236), matrix [[λns^{n-1},z],[0,s]] with det λns^n and inverse λ^{-1}n^{-1}z^n; the two localization inverse maps are well defined; standard smooth ⇒ smooth ⇒ affine ⇒ restriction parts (c),(b) ⇒ local on source; field dimension at every prime plus def-kun-dimension minima; H-projective with N=2. Source Tag 0BYA (curves.tex 1606-1618) gives the Fermat chart calculation over a field. Small cases checked: n=1, the conic, p|n nonreduced, zero ring. No SGA; the three generic tool_uses are accepted; no new nodes. Single change: the Mathlib leaf lem-weil-pbc-open-subspace-dimension-monotone, which is still in the snapshot, is cited again in step 7 next to the inline argument and added to uses and proof_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-binomial-chart-smooth-relative-dimension.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalPlaneSmoothAtlas",
+  "declaration": "AlgebraicGeometry.DiagonalPlaneCurve.smooth_atlas",
+  "declarations": [
+   "AlgebraicGeometry.DiagonalPlaneCurve.equation",
+   "AlgebraicGeometry.DiagonalPlaneCurve.curve",
+   "AlgebraicGeometry.DiagonalPlaneCurve.ι",
+   "AlgebraicGeometry.DiagonalPlaneCurve.π",
+   "AlgebraicGeometry.DiagonalPlaneCurve.affinePolynomial",
+   "AlgebraicGeometry.DiagonalPlaneCurve.ChartRing",
+   "AlgebraicGeometry.DiagonalPlaneCurve.coordinate",
+   "AlgebraicGeometry.DiagonalPlaneCurve.localizedRelations",
+   "AlgebraicGeometry.DiagonalPlaneCurve.HasChartAtlas",
+   "AlgebraicGeometry.DiagonalPlaneCurve.chartCoefficients",
+   "AlgebraicGeometry.DiagonalPlaneCurve.chartOpen",
+   "AlgebraicGeometry.DiagonalPlaneCurve.smooth_atlas"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalPlaneSmoothAtlas.lean",
+  "statement": "theorem smooth_atlas (S : Scheme.{u}) (n : ℕ) (hn : 1 ≤ n) (a : Fin 3 → Γ(S, ⊤)) (ha : ∀ j : Fin 3, IsUnit (a j)) (hdegree : IsUnit (n : Γ(S, ⊤))) : SmoothOfRelativeDimension 1 (π S n a) ∧ IsHProjective (π S n a) ∧ (∀ (V : S.Opens) (_ : IsAffineOpen V) (e : Equiv.Perm (Fin 3)), IsAffineOpen (chartOpen S n a V e) ∧ ∃ E : ChartRing n (chartCoefficients S a V e) ≃+* Γ(curve S n a, chartOpen S n a V e), (∀ r : Γ(S, V), E (algebraMap Γ(S, V) _ r) = (π S n a).appLE V (chartOpen S n a V e) inf_le_right r) ∧ (∀ j : Fin 2, E (coordinate n (chartCoefficients S a V e) j) = (ι S n a).appLE (ProjectiveSpace.standardOpen (ULift.{u} (Fin 3)) S ⟨e 2⟩) (chartOpen S n a V e) inf_le_left (ProjectiveSpace.coordRatio (ULift.{u} (Fin 3)) S ⟨e 2⟩ ⟨e j.castSucc⟩)) ∧ HasChartAtlas n (chartCoefficients S a V e) ∧ (∀ (R' : Type (max u v)) [CommRing R'] [Algebra Γ(S, V) R'], (∃ E' : R' ⊗[Γ(S, V)] ChartRing n (chartCoefficients S a V e) ≃ₐ[R'] ChartRing n (fun j ↦ algebraMap Γ(S, V) R' (chartCoefficients S a V e j)), ∀ j : Fin 2, E' (1 ⊗ₜ[Γ(S, V)] coordinate n (chartCoefficients S a V e) j) = coordinate n (fun k ↦ algebraMap Γ(S, V) R' (chartCoefficients S a V e k)) j) ∧ HasChartAtlas n (fun j ↦ algebraMap Γ(S, V) R' (chartCoefficients S a V e j)))) ∧ ∀ (L : Type u) [Field L] (h : Spec (CommRingCat.of L) ⟶ S) (x : (pullback (π S n a) h : Scheme.{u})), topologicalKrullDimAt x = 1",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Second reading (maintainer review): the private helper `ratio` duplicated the upstream `AlgebraicGeometry.ProjectiveSpace.coordRatio` (WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible) verbatim; the statement now uses coordRatio directly and the helper is removed.",
+  "fixed_by": "NT-stage2-cc-029890ddb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-029890ddb",
+  "group": "NM",
+  "result": "fix",
+  "note": "Statement is correct against the node, the 11 stmt_deps and Stacks 0BYA/00T6/00T7: arbitrary scheme, n≥1, unit coefficients, n invertible; D is the actual zeroLocus.subscheme of Σ a_i·T_i^{⊗n}; SmoothOfRelativeDimension 1 and IsHProjective; for every affine V and permutation e the chart is affine, with a ring iso to Γ(V)[s,t]/(λs^n+μt^n+ν) pinned on coefficients (π.appLE) and on coordinate ratios (ι.appLE); HasChartAtlas = D(s)∪D(t) cover plus SubmersivePresentations with relations (g, sz−1) in orders (s,z,t)/(t,z,s); jacobian λn s^n / μn t^n matches Mathlib jacobiMatrix_apply; base change to arbitrary R' with no flatness; topologicalKrullDimAt x = 1 on every field fibre. Edge cases n=1, zero ring, empty base OK. Statement verbatim; node non-lean fields equal to live. H4 finding: helper DiagonalPlaneCurve.ratio duplicated verbatim ProjectiveSpace.coordRatio (WeilConjectures/AlgebraicGeometry/ProjectiveSpace/OfInvertible.lean:57). FIX: fixes/DiagonalPlaneSmoothAtlas.lean drops ratio, publicly imports OfInvertible and uses coordRatio (ULift.{u} (Fin 3)) S ⟨e 2⟩ ⟨e j.castSucc⟩; fixes/<item>.lean-record.json updates statement and declarations. nt_compile --json: 4.4 s, exit 0, clean. Advisory: R' : Type (max u v), smaller universes via ULift only; documented in the report, not changed."
+ }
+}

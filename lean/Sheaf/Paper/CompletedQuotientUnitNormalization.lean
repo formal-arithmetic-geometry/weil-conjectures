@@ -6,7 +6,7 @@ Authors: SHEAF group E4
 module
 
 public import Sheaf.Paper.CompletedRlimFunctor
-public import Sheaf.Paper.CompletedTowerPullback
+public import Sheaf.Paper.CompletedReductionUnit
 public import Sheaf.CategoryTheory.ExactEquivalenceDerivedSquares
 import all Sheaf.CategoryTheory.ExactEquivalenceDerivedSquares
 import all Mathlib.CategoryTheory.Limits.HasLimits

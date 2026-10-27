@@ -1,0 +1,280 @@
+{
+ "id": "lem-trf-relative-power-series-fibre-diagram",
+ "kind": "statement",
+ "title": "Relative power-series evaluation and its closed-fibre diagram",
+ "statement": "Let $f:(A,\\mathfrak m,K)\\to(B,\\mathfrak n,L)$ be a local homomorphism of nonzero commutative Noetherian local rings [def-weil-pbc-noetherian-ring], with residue fields $K=A/\\mathfrak m$, $L=B/\\mathfrak n$ and induced inclusion $\\iota:K\\hookrightarrow L$. Suppose $A,B$ are complete for their maximal ideals [def-weil-pbc-adically-complete-ring]. Fix residue sections $a:K\\to A$, $b:L\\to B$ with $b\\iota=fa$, an integer $e\\geq0$, generators $x_1,\\ldots,x_e$ of $\\mathfrak m$, and a continuous surjective local map $q:R=K[[X_1,\\ldots,X_e]]\\to A$ with $q|_K=a$ and $q(X_i)=x_i$ [def-weil-pbc-multivariate-power-series]. Assume $C=B/\\mathfrak mB$ is complete regular local [def-weil-regular-scheme] of finite Krull dimension $s\\geq0$ [def-weil-pbc-krull-dimension-ring]. Let $\\pi:B\\to C$ be the quotient map. There are $t_1,\\ldots,t_s\\in\\mathfrak n$ such that $\\bar t_i=\\pi(t_i)$ generate the maximal ideal of $C$, and a continuous isomorphism of local $L$-algebras $\\rho:L[[T_1,\\ldots,T_s]]\\xrightarrow{\\sim}C$ with $\\rho|_L=\\pi b$ and $\\rho(T_i)=\\bar t_i$. Put $S=L[[X_1,\\ldots,X_e,T_1,\\ldots,T_s]]$, let $j:R\\to S$ extend coefficients by $\\iota$ and retain the $X$ variables, and let $p:S\\to L[[T_1,\\ldots,T_s]]$ set all $X$ variables to zero. Then $S$ is Noetherian complete local with maximal ideal $(X,T)S$, $j$ is local, $p$ is surjective with $\\ker p=(X)S$, and there is a continuous surjective local map $v:S\\to B$ satisfying\n$$v|_L=b,\\quad v(X_i)=f(x_i),\\quad v(T_i)=t_i,\\quad vj=fq,\\quad \\pi v=\\rho p.$$\nIn particular $\\ker v\\subseteq(X)S$. No flatness of $f$, characteristic restriction, or finite type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent-formulated coefficient-preserving presentation diagram: Tag 07NQ (proposition-fs-flat-fibre-fs), proof of (2) implies (3), special-fibre diagram before the kernel identity; algebra.tex Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2) and proof. Extracted from original steps 5--7 of lem-trf-relative-cohen-flat-presentation; explicit evaluation and setting-X-to-zero identities are the refinement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathfrak p=\\mathfrak n/\\mathfrak mB$ for the maximal ideal of $C$. Indeed $\\mathfrak mB\\subseteq\\mathfrak n$ because $f$ is local, and $C/\\mathfrak p=B/\\mathfrak n=L$. By the definition of regular local ring, choose $s$ generators $\\bar t_i$ of $\\mathfrak p$; choose lifts $t_i\\in\\mathfrak n$. The map $c=\\pi b:L\\to C$ induces the identity on this residue field. Apply [lem-trf-regular-complete-coefficient-coordinates] with $k=L$, $d=s$, and this generating list. Its hypotheses are exactly the assumed Noetherian regularity, finite dimension and completeness of $C$, and it gives the required continuous local $L$-algebra isomorphism $\\rho$, preserving both coefficients and the selected parameters.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-trf-regular-complete-coefficient-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KU (definition-regular-local); Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2) and proof."
+   }
+  },
+  {
+   "text": "Apply the field case of [lem-weil-pbc-power-series-field-cohen-regular-complete] to $K$ with $e$ variables and to $L$ with $e+s$ variables. Thus the maximal ideals of $R,S$ are $\\mathfrak r=(X)R$ and $\\mathfrak h=(X,T)S$, and both rings are complete Noetherian local rings. The coefficientwise map $j$ is a ring map by the finite convolution formula for multiplication; it sends $X_i$ to $X_i$, hence $j(\\mathfrak r)\\subseteq\\mathfrak h$ and $j(\\mathfrak r^N)\\subseteq\\mathfrak h^N$, so it is local and continuous. Apply [lem-weil-pbc-power-series-quotient-variables] over $L$ with $d=e+s$ and $i=e$: it gives precisely $p$, its surjectivity and $\\ker p=(X)S$. On monomials $p(\\mathfrak h^N)\\subseteq(T)^N$, so $p$ is continuous.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-quotient-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary), power series over a field; coefficient and variable-quotient refinements stated in the cited nodes."
+   }
+  },
+  {
+   "text": "All $f(x_i)$ and $t_i$ lie in $\\mathfrak n$. Apply [lem-weil-pbc-power-series-adic-evaluation] to $\\alpha=b:L\\to B$, $I=\\mathfrak n$, and this $e+s$ element list. Completeness of $B$ gives a continuous ring map $v:S\\to B$ with $v|_L=b$, $v(X_i)=f(x_i)$ and $v(T_i)=t_i$. As $\\mathfrak h$ is generated by these variables, $v(\\mathfrak h)\\subseteq\\mathfrak n$; hence $v$ is local.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NL (lemma-power-series-ring-over-Cohen-fs), power-series universal property in the proof, as made explicit by the cited evaluation node."
+   }
+  },
+  {
+   "text": "Let $J=v(\\mathfrak h)B=(f(x_1),\\ldots,f(x_e),t_1,\\ldots,t_s)B$. For $z\\in\\mathfrak n$, express $\\pi(z)=\\sum_i\\bar u_i\\bar t_i$ in $C$, and lift the finitely many $\\bar u_i$ to $u_i\\in B$. Then $z-\\sum_i u_it_i\\in\\ker\\pi=\\mathfrak mB=(f(x_1),\\ldots,f(x_e))B$, proving $\\mathfrak n\\subseteq J$; the reverse inclusion holds because all generators lie in $\\mathfrak n$. Thus $J=\\mathfrak n$. The composite $S\\xrightarrow v B\\to B/J=L$ is surjective since on constant series $b$ is a residue section. Now apply [lem-weil-pbc-complete-source-surjective-mod-ideal] with source ideal $\\mathfrak h$: $S$ is precomplete by step 2, and $B$ is $J$-adically Hausdorff because $J=\\mathfrak n$ and its assumed completeness includes separatedness. This proves that $v$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0315 (lemma-completion-generalities), complete-source surjectivity method; precise ring-map form in the cited node and Mathlib/RingTheory/AdicCompletion/Functoriality.lean, lines 447-459."
+   }
+  },
+  {
+   "text": "The maps $vj,fq:R\\to B$ are continuous: $j,v,q$ are continuous and $f(\\mathfrak m^N)\\subseteq\\mathfrak n^N$. They agree on $K$, since $b\\iota=fa$, and on every $X_i$, where both take the value $f(x_i)$. Uniqueness in [lem-weil-pbc-power-series-adic-evaluation], with target ideal $\\mathfrak n$, gives $vj=fq$. Likewise $\\pi v,\\rho p:S\\to C$ are continuous for the variables-adic and $\\mathfrak p$-adic topologies: $\\pi(\\mathfrak n^N)\\subseteq\\mathfrak p^N$ and $p$ is continuous by step 2. They agree on $L$ by $\\rho|_L=\\pi b$, on $X_i$ by $\\pi f(x_i)=0$, and on $T_i$ by $\\rho(T_i)=\\bar t_i$. Apply the same uniqueness assertion with target ideal $\\mathfrak p$ (for which $C$ is assumed complete) to obtain $\\pi v=\\rho p$.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings), power-series maps in its proof; coefficient-preserving diagram identities verified here by the cited evaluation uniqueness."
+   }
+  },
+  {
+   "text": "For $F\\in\\ker v$, the second identity gives $\\rho(p(F))=\\pi(v(F))=0$. Since $\\rho$ is injective, $p(F)=0$; step 2 then gives $F\\in\\ker p=(X)S$. This proves the kernel inclusion. All arguments allow empty variable lists: if $s=0$, $\\rho:L\\to C$ is the coefficient isomorphism of step 1; if $e=0$, $p$ is the identity and the inclusion says $v$ is injective. If both vanish, it is the coefficient isomorphism $L\\to B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Diagram chase using the isomorphism of Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2), and the identities established above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Coefficient-preserving diagram refinement, assembled from Tag 0C0S(2), definition 00KU, Remark 032C, the 0315 complete-source surjectivity method, and the explicit evaluation nodes for the universal property used in more-algebra.tex Tags 07NL and 07NN. Tag 07NQ provides the motivating special-fibre diagram, not a flatness hypothesis used here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.map",
+   "results": "{\"t\": \"2026-10-22T06:44:13Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, Ideal.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff_mem_of_mem_map_C\", \"MvPowerSeries.ker_map_of_fg\", \"MvPowerSeries.mem_map_C_of_forall_coeff_mem\", \"MvPowerSeries.mem_map_C_iff_of_fg\", \"MvPowerSeries.ker_mapAlgHom_of_fg\"], \"digest\": \"edd7333a50d44ead\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise kernel and Weierstrass results do not construct the regular-fibre presentation diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.?fib|special.?fib|surjective.*(eval|subst)|ker.*(eval|subst)",
+   "results": "{\"t\": \"2026-10-22T06:44:13Z\", \"tool\": \"grep\", \"query\": \"closed.?fib|special.?fib|surjective.*(eval|subst)|ker.*(eval|subst)\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise kernel and Weierstrass results do not construct the regular-fibre presentation diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative power series evaluation diagram with compatible coefficient fields and regular special fibre",
+   "results": "{\"t\": \"2026-10-22T06:44:14Z\", \"tool\": \"leansearch\", \"query\": \"A relative power series evaluation diagram with compatible coefficient fields and regular special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.eval₂\", \"PowerSeries.eval₂_eq_tsum\", \"MvPowerSeries.eval₂_subst\", \"PowerSeries.aeval_eq_sum\", \"PowerSeries.eval₂\", \"PowerSeries.eval₂_C\", \"PowerSeries.heval\", \"MvPowerSeries.aeval_eq_sum\"], \"digest\": \"68ef5a2cba7541d5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise kernel and Weierstrass results do not construct the regular-fibre presentation diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given compatible coefficient fields and a power series presentation of the source of a complete local ring map with regular closed fibre, construct a surjective relative power series diagram inducing an isomorphism on the closed fibre",
+   "results": "{\"t\": \"2026-10-22T06:44:25Z\", \"tool\": \"leanfinder\", \"query\": \"Given compatible coefficient fields and a power series presentation of the source of a complete local ring map with regular closed fibre, construct a surjective relative power series diagram inducing an isomorphism on the closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassFactorization\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"IsAdicComplete.henselianRing\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\"], \"digest\": \"dfb3cfc6967ba56b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise kernel and Weierstrass results do not construct the regular-fibre presentation diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift regular parameters of a complete regular closed fibre to obtain a surjective power series evaluation map whose kernel is contained in the base variable ideal",
+   "results": "{\"t\": \"2026-10-22T06:44:27Z\", \"tool\": \"leanfinder\", \"query\": \"Lift regular parameters of a complete regular closed fibre to obtain a surjective power series evaluation map whose kernel is contained in the base variable ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassFactorizationAt\"], \"digest\": \"62aa07388aaec8c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise kernel and Weierstrass results do not construct the regular-fibre presentation diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.?fib|special.?fib|surjective.*(eval|subst)|ker.*(eval|subst)",
+   "results": "{\"t\": \"2026-10-22T06:44:53Z\", \"tool\": \"grep\", \"query\": \"closed.?fib|special.?fib|surjective.*(eval|subst)|ker.*(eval|subst)\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation, coefficientwise kernel and Weierstrass results do not construct the regular-fibre presentation diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.?fib|special.?fib|surjective.*eval|regular.*local",
+   "results": "{\"t\": \"2026-10-23T12:13:53Z\", \"tool\": \"grep\", \"query\": \"closed.?fib|special.?fib|surjective.*eval|regular.*local\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial generators, evaluation, standard smoothness and univariate Weierstrass results do not state this coefficient-preserving regular-fibre diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective power series evaluation on complete local rings from lifts of generators of the maximal ideal and a coefficient field",
+   "results": "{\"t\": \"2026-10-23T12:13:54Z\", \"tool\": \"leansearch\", \"query\": \"Surjective power series evaluation on complete local rings from lifts of generators of the maximal ideal and a coefficient field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.aeval_val_surjective\", \"PowerSeries.aeval\", \"PowerSeries.aeval_eq_sum\", \"MvPowerSeries.eval₂\", \"PowerSeries.aeval_coe\", \"MvPowerSeries.aeval\", \"PowerSeries.eval₂_eq_tsum\", \"PowerSeries.eval₂\"], \"digest\": \"29b62007396f3454\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial generators, evaluation, standard smoothness and univariate Weierstrass results do not state this coefficient-preserving regular-fibre diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, RingHom.ker",
+   "results": "{\"t\": \"2026-10-23T12:13:54Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, RingHom.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"MvPowerSeries.ker_map_of_fg\", \"MvPowerSeries.ker_mapAlgHom_of_fg\"], \"digest\": \"ff6c4497353eb8ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: coefficient-map kernel theorems concern coefficient reduction, not setting the base variables to zero in a relative presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete local ring map with compatible coefficient fields and regular closed fibre admits a surjective formal power series presentation inducing an isomorphism on the fibre",
+   "results": "{\"t\": \"2026-10-23T12:13:55Z\", \"tool\": \"leanfinder\", \"query\": \"A complete local ring map with compatible coefficient fields and regular closed fibre admits a surjective formal power series presentation inducing an isomorphism on the fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth\", \"Algebra.IsStandardSmooth\", \"PowerSeries.exists_isWeierstrassFactorization\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"StandardEtalePresentation.lift_bijective\"], \"digest\": \"d0b392bf2464dc00\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial generators, evaluation, standard smoothness and univariate Weierstrass results do not state this coefficient-preserving regular-fibre diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_of_mk_map_comp_surjective|ker_map_of_fg|def eval₂|def aeval",
+   "results": "{\"t\": \"2026-10-23T12:14:29Z\", \"tool\": \"grep\", \"query\": \"surjective_of_mk_map_comp_surjective|ker_map_of_fg|def eval₂|def aeval\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Adjoin.lean\"], \"digest\": \"70cb350969df1847\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the complete-source surjectivity theorem at Mathlib/RingTheory/AdicCompletion/Functoriality.lean:447 is the existing cited node; evaluation definitions alone do not give the regular-fibre coordinates and diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose regular parameters of a complete regular special fibre and lift them to construct a commuting diagram of power series evaluations with kernel contained in the base variables",
+   "results": "{\"t\": \"2026-10-23T12:14:34Z\", \"tool\": \"leanfinder\", \"query\": \"Choose regular parameters of a complete regular special fibre and lift them to construct a commuting diagram of power series evaluations with kernel contained in the base variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorizationAt\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassDistinguished\"], \"digest\": \"964647a3a25c20f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial generators, evaluation, standard smoothness and univariate Weierstrass results do not state this coefficient-preserving regular-fibre diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-cohen-flat-presentation",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Supporting relative Cohen presentation of completed flat local maps with regular closed fibre. Re-split: original relative Cohen proof steps 5--7 (fibre parameters, target evaluation surjection, and special-fibre diagram).",
+   "via": [
+    "lem-trf-relative-cohen-flat-presentation",
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-relative-power-series-fibre-diagram",
+  "worker": "stage1",
+  "summary": "Construct the coefficient-preserving regular-fibre diagram from existing nodes only: choose and lift regular parameters; construct S,j,p and the continuous evaluation v; prove the target maximal ideal is generated by the evaluated variables and apply complete-source surjectivity; establish both squares by evaluation uniqueness and chase the kernel. Statement unchanged; no new nodes. Checked empty parameter lists, arbitrary residue-field extension and both equal-characteristic cases. All citations checked against statements.",
+  "blueprint": "Refines the original relative Cohen presentation steps 5--7 identified in blueprint.from.place, on the inherited historical alteration branch of lem-trf-local-term-locality. The current latest blueprint proves locality by contracting correspondences; this auxiliary algebraic split does not modify that unit route or claim the historical branch is needed by the latest locality proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic structure of finite-variable power series over a field supplies completeness, Noetherianity and maximal ideals of R and S; no same-unit node states this general input."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-quotient-variables",
+    "why": "Generic setting-variables-to-zero theorem supplies p and its kernel; no same-unit node states it."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic continuous evaluation existence and uniqueness construct v and verify both diagram identities; no same-unit node states this universal property."
+   },
+   {
+    "node": "lem-weil-pbc-complete-source-surjective-mod-ideal",
+    "why": "Generic complete-source surjectivity applies once the image of the variables ideal is shown equal to the target maximal ideal; no same-unit node states this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-389300a30",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-389300a30 (reviewer sub-agent of L); spot-checked: Pass with no changes. This is the first split of a statement node: 0 new nodes, the statement is identical to live and stmt_deps are unchanged. proof_deps equals the union of the step uses. The item is still unsplit in live and side-live, so no parallel group has superseded it, and there is no re-split note. I read all 8 cited statements and every step checks out. Step 1: C is a nonzero Noetherian quotient with maximal ideal p=n/mB; lifts of generators of p lie in n; πb induces id_L on C/p, so lem-trf-regular-complete-coefficient-coordinates gives ρ with k=L, d=s. Step 2: R and S come from the field branch of the power-series structure node; j is local and continuous; p and ker p=(X)S come from quotient-variables with i=e. Step 3: adic-evaluation into the n-complete B with α=b gives v; v is local because v^{-1}(n)=h. Step 4: J=v(h)B=n by lifting coefficients of π(z), since ker π=mB=(f(x))B; the complete-source criterion then applies with the correct image ideal, and n-Hausdorffness follows from completeness. Step 5: both squares follow from evaluation uniqueness (α=bι with I=n, and α=πb with I=p); the values on K/L, X_i and T_i were checked. Step 6: the kernel chase through injective ρ. Edge cases e=0, s=0 and inseparable L/K pass; I also tested A=K[[x]], B=L[[x,t]]. Sources read: Stacks 0C0S (algebra.tex 45036ff) and the 07NQ (2)⇒(3) diagram, where flatness is used only at the end and is not needed here; no SGA is cited. Duplicate search over dag/nodes found nothing that states this diagram. The four pbc tool_uses are generic power-series and completion foundations, and I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativePowerSeriesFibreDiagram",
+  "declaration": "IsLocalRing.exists_relative_power_series_fibre_diagram",
+  "file": "lean/Sheaf/RingTheory/RelativePowerSeriesFibreDiagram.lean",
+  "statement": "theorem exists_relative_power_series_fibre_diagram (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] (f : A →+* B) [IsLocalHom f] [IsAdicComplete (maximalIdeal A) A] [IsAdicComplete (maximalIdeal B) B] (a : ResidueField A →+* A) (b : ResidueField B →+* B) (ha : (residue A).comp a = RingHom.id (ResidueField A)) (hb : (residue B).comp b = RingHom.id (ResidueField B)) (hab : b.comp (ResidueField.map f) = f.comp a) (e : ℕ) (x : Fin e → A) (hx : Ideal.span (Set.range x) = maximalIdeal A) (q : MvPowerSeries (Fin e) (ResidueField A) →+* A) [IsLocalHom q] (hq : Function.Surjective q) (hqC : ∀ k : ResidueField A, q (MvPowerSeries.C k) = a k) (hqX : ∀ i : Fin e, q (MvPowerSeries.X i) = x i) (hqcont : ∀ N : ℕ, ∃ M : ℕ, ∀ F ∈ Ideal.span (Set.range (MvPowerSeries.X : Fin e → MvPowerSeries (Fin e) (ResidueField A))) ^ M, q F ∈ maximalIdeal A ^ N) [IsRegularLocalRing (B ⧸ (maximalIdeal A).map f)] [IsAdicComplete (maximalIdeal (B ⧸ (maximalIdeal A).map f)) (B ⧸ (maximalIdeal A).map f)] (s : ℕ) (hdim : ringKrullDim (B ⧸ (maximalIdeal A).map f) = (s : WithBot ℕ∞)) : IsNoetherianRing (MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B)) ∧ IsLocalRing (MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B)) ∧ IsAdicComplete (maximalIdeal (MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B))) (MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B)) ∧ maximalIdeal (MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B)) = Ideal.span (Set.range (MvPowerSeries.X : Fin e ⊕ Fin s → MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B))) ∧ IsLocalHom ((MvPowerSeries.rename (Sum.inl : Fin e → Fin e ⊕ Fin s)).toRingHom.comp (MvPowerSeries.map (ResidueField.map f))) ∧ Function.Surjective (MvPowerSeries.killCompl (R := ResidueField B) (Function.Embedding.inr : Fin s ↪ Fin e ⊕ Fin s)) ∧ RingHom.ker (MvPowerSeries.killCompl (R := ResidueField B) (Function.Embedding.inr : Fin s ↪ Fin e ⊕ Fin s)).toRingHom = Ideal.span (Set.range (fun i : Fin e ↦ (MvPowerSeries.X (Sum.inl i) : MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B)))) ∧ ∃ (t : Fin s → B) (ρ : MvPowerSeries (Fin s) (ResidueField B) ≃+* (B ⧸ (maximalIdeal A).map f)), (∀ i : Fin s, t i ∈ maximalIdeal B) ∧ Ideal.span (Set.range (fun i : Fin s ↦ Ideal.Quotient.mk ((maximalIdeal A).map f) (t i))) = maximalIdeal (B ⧸ (maximalIdeal A).map f) ∧ (∀ l : ResidueField B, ρ (MvPowerSeries.C l) = Ideal.Quotient.mk ((maximalIdeal A).map f) (b l)) ∧ (∀ i : Fin s, ρ (MvPowerSeries.X i) = Ideal.Quotient.mk ((maximalIdeal A).map f) (t i)) ∧ (∀ N : ℕ, Ideal.comap ρ.toRingHom (maximalIdeal (B ⧸ (maximalIdeal A).map f) ^ N) = Ideal.span (Set.range (MvPowerSeries.X : Fin s → MvPowerSeries (Fin s) (ResidueField B))) ^ N) ∧ ∃ v : MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B) →+* B, Function.Surjective v ∧ IsLocalHom v ∧ (∀ N : ℕ, ∃ M : ℕ, ∀ F ∈ Ideal.span (Set.range (MvPowerSeries.X : Fin e ⊕ Fin s → MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B))) ^ M, v F ∈ maximalIdeal B ^ N) ∧ (∀ l : ResidueField B, v (MvPowerSeries.C l) = b l) ∧ (∀ i : Fin e, v (MvPowerSeries.X (Sum.inl i)) = f (x i)) ∧ (∀ i : Fin s, v (MvPowerSeries.X (Sum.inr i)) = t i) ∧ v.comp ((MvPowerSeries.rename (Sum.inl : Fin e → Fin e ⊕ Fin s)).toRingHom.comp (MvPowerSeries.map (ResidueField.map f))) = f.comp q ∧ (Ideal.Quotient.mk ((maximalIdeal A).map f)).comp v = ρ.toRingHom.comp (MvPowerSeries.killCompl (R := ResidueField B) (Function.Embedding.inr : Fin s ↪ Fin e ⊕ Fin s)).toRingHom ∧ RingHom.ker v ≤ Ideal.span (Set.range (fun i : Fin e ↦ (MvPowerSeries.X (Sum.inl i) : MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B))))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2e1dfb4c",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean; lean.statement verbatim equal to the module signature. Only Mathlib declarations in the statement, covered by the 5 definition stmt_deps (IsRegularLocalRing is the ring clause of def-weil-regular-scheme, whose module is publicly imported); no theorem-module declarations, proof imports private (H2 clean). j = rename inl ∘ map (ResidueField.map f) equals the parent's coefficientExtensionInl, spelled out to avoid an import cycle (H4 clean). p = killCompl inr checked in Mathlib Rename.lean (keeps the T block, kills X). Every hypothesis matches the node: residue sections ha/hb/hab, generators hx, q local/surjective/continuous with hqC/hqX, C regular and complete with Krull dimension s; nothing stronger. All conclusions present: S Noetherian/local/complete with maximal ideal (X,T); j local; p surjective with ker p = (X); t_i in n generating m_C; ρ with C/X normalisation and powers clause (automatic for a ring isomorphism of local rings, same as the coordinates dependency); v surjective, local, continuous with the three value clauses, vj = fq, πv = ρp, ker v ⊆ (X). Edge cases e=0, s=0, both, any characteristic, inseparable L/K, independent universes all fine. No definitions, proof sorry, docstrings carry 07NQ/0C0S(2), the blueprint id and the 6 steps; report has Worker report and Second reading by Q59 sections. No files changed, no compile run."
+ }
+}

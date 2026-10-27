@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-intrinsic-site-hom-transport",
+ "kind": "lemma",
+ "title": "Internal Hom under intrinsic finite-coefficient realization",
+ "statement": "Let X be a scheme and A a finite commutative ring. Let R be the exact constant-scalar associated-module-sheaf realization on the small pro-etale site [def-sp-finite-coefficient-intrinsic-derived-comparison]. For arbitrary unbounded fixed-scalar derived complexes K,L, there exists an isomorphism R(RHom(K,L)) ≅ RHom(R(K),R(L)), where the left internal Hom is the fixed-ModuleCat pro-etale closed derived Hom and the right internal Hom is the recorded intrinsic Hom-complex localization [def-pur-derived-internal-hom]. No constructibility, boundedness, separatedness, or nonempty-site hypothesis is imposed.",
+ "stmt_deps": [
+  "def-sp-finite-coefficient-intrinsic-derived-comparison",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "section-internal-hom, lemma-RHom-well-defined (Tag 0A95), and lemma-sheafification-presheaf-modules; coefficient-presentation transport in Step 2 of lem-sf-tensor-exchange-ctf-domains"
+ },
+ "proof": [
+  {
+   "text": "The realization is an exact equivalence with inverse restriction along the constant-scalar unit. On every slice the two tensors are the same sheafified balanced tensor, so the sheaf-Hom adjunction identifies the ordinary internal Homs.",
+   "uses": [
+    "def-sp-finite-coefficient-intrinsic-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An exact equivalence preserves acyclic complexes and K-injectivity. Apply realization to a K-injective representative of L; the ordinary Hom identifications identify the Hom complexes, products, and signed differentials. They therefore compute both recorded derived Homs.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Independence of K-injective representatives and the localization universal property extend this identification to arbitrary derived inputs, giving the asserted isomorphism. The zero-ring and empty-site cases use the same equivalence.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sp-finite-coefficient-intrinsic-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "section-internal-hom, lemma-RHom-well-defined (Tag 0A95), and lemma-sheafification-presheaf-modules; coefficient-presentation transport in Step 2 of lem-sf-tensor-exchange-ctf-domains"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence of sheaf module categories preserves derived internal Hom",
+   "results": "Eight hits, including Equivalence.sheafCongr and PresheafOfModules.homEquivOfIsLocallyBijective. No derived Hom identification for the intrinsic coefficient realization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coefficient realization of module sheaves commutes with derived internal Hom",
+   "results": "Eight LeanFinder hits: LightCondensed.ihom_map_val_app, SheafOfModules.map_ιFree_mapFree_hom, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints, SheafOfModules.freeHomEquiv_comp_apply, LightCondensed.ihomPoints_apply, SheafOfModules.freeHomEquiv_symm_comp, and SheafOfModules.Presentation.map_π_eq. None identifies the recorded unbounded derived Homs.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsZero",
+   "results": "No hits; IsZero unknown to the remote index.",
+   "date": "2026-10-25",
+   "verdict": "no matching coefficient realization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|finiteCoefficientIntrinsicRealization",
+   "results": "msearch.py grep: 0 Mathlib hits. Local project search found the exact coefficient equivalence and its tensor comparison, and the two separate derived Hom constructions, without an isomorphism identifying them.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TensorExchangeCtfDomains",
+  "date": "2026-10-25",
+  "group": "K9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 2; coefficient-presentation Hom transport",
+   "via": [
+    "lem-sf-tensor-exchange-ctf-domains"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntrinsicSiteHomTransport",
+  "file": "lean/Sheaf/Paper/IntrinsicSiteHomTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsicSiteHom_transport",
+  "statement": "theorem intrinsicSiteHom_transport (X : Scheme.{u}) (A : Type u)\n    [CommRing A] [Finite A]\n    (K L : DerivedCategory\n      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :\n    Nonempty\n      ((finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj\n          (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).obj (op K)).obj L) ≅\n        (derivedInternalHomOfUniverses.{u + 1, u, u} (ProEt.topology X)\n          (proEtaleConstantRing X A)).obj\n          (op ((finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj K),\n            (finiteCoefficientIntrinsicRealization X A).mapDerivedCategory.obj L))",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163835-L-861613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163835-L-861613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

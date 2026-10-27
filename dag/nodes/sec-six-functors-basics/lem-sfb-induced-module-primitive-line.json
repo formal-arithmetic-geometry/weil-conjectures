@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-induced-module-primitive-line",
+ "kind": "statement",
+ "title": "Primitive line in a nonzero induced module of a Borel character",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and $S$ a semisimple simply connected $F$-group scheme [def-sc-group-scheme], with semisimple and simply connected as defined in [lem-sfb-rho-section-modules]. Fix a split maximal torus $T\\subseteq S$, a Borel subgroup $B\\supseteq T$, and its unipotent radical $U$, with these notions as in [lem-sfb-rho-section-modules]. Multiplication $T\\times_F U\\to B$ is an isomorphism of $F$-schemes (so each $b\\in B(A)$ is uniquely $tu$ for every commutative $F$-algebra $A$). Write $\\Phi^+$ for the positive roots specified there. There is a Weyl group element $w_0$ carrying $\\Phi^+$ onto $-\\Phi^+$; the Weyl group is $N_S(T)(F)/T(F)$, where $N_S(T)$ is the subgroup scheme normalizing $T$. Its action on characters is $(w\\lambda)(t)=\\lambda(n^{-1}tn)$ for a representative $n$ of $w$. Let $\\lambda:B\\to\\mathbf G_m$ be a character trivial on $U$, and use the same notation for its restriction to $T$. Define\n$$E_B(\\lambda)=\\{f\\in F[S]:f(gb)=\\lambda(b)^{-1}f(g)\\text{ after every commutative }F\\text{-algebra extension}\\}$$\nwith rational left-translation action $(s f)(g)=f(s^{-1}g)$. If $E_B(\\lambda)\\ne0$, its subspace fixed by $U$ is one-dimensional, and $T$ acts on this line by the character $w_0\\lambda$. Here fixed means the coaction identity $f\\mapsto f\\otimes1$, and a $T$-weight $\\mu$ means $t f=\\mu(t)f$ after every commutative $F$-algebra extension; thus the assertion is about group schemes, not just their Lie algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 22.21 and Proposition 22.22 with its proof, printed pp.468--469; w_0 in Definition 21.72 and Theorem 21.73(b), printed p.448. The proposition works over any characteristic; E(lambda) need not be simple. The Borel decomposition is Remark 21.74, printed p.448, and the split solvable-group decomposition used there. See also Proposition 21.29 and its proof, printed pp.433--434 (P(lambda)=U(lambda) semidirect T)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "def-sfb-rank-one-root-interfaces",
+  "def-sfb-rho-section-module-data",
+  "def-sfb-trivial-torus-coherent-data"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-reductive-borel-pair-structure], $S$ is reductive and $B=U\\rtimes T$. The stated $T\\times U$ decomposition follows by rewriting $ut=t(t^{-1}ut)$, with inverse obtained from the projection $B\\to T$. Apply [lem-sfb-longest-weyl-open-cell] to obtain $w_0$, a representative $n_0$, and the dense open immersion $j(u,b)=un_0b$. Put $E=E_B(\\lambda)$. Its defining right-equivariance identity is preserved by left translation, since $(sf)(gb)=f(s^{-1}gb)=\\lambda(b)^{-1}f(s^{-1}g)$ after every scalar extension. Hence the left regular coaction restricts to $E$: equivalently, $E$ is the kernel of the difference between the right-translation coaction and $f\\mapsto f\\otimes\\lambda^{-1}$, and left and right translations commute. Tensoring kernels with vector spaces over $F$ preserves kernels, as follows by choosing bases and taking direct sums of the same kernel. Thus $E$ is a rational $U$-module without any finite-dimensionality assumption.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-longest-weyl-open-cell"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.22, first sentence of proof; 21.73(b), 21.74 and 21.84; Definition 22.21 for the regular subrepresentation."
+   }
+  },
+  {
+   "text": "Both $S$ and $U$ are smooth over $F$, so [sbc-lem-smooth-geometrically-reduced] makes them reduced (apply the geometric-fibre assertion to their structure maps to $\\operatorname{Spec}F$). The source of $j$ and its target are affine; $j$ is therefore quasi-compact and quasi-separated, as affine-locally it is a map between spectra. By [lemma-nagata-reduced-dense-image-schematic], its scheme-theoretic image is $S$. In [def-nagata-scheme-theoretic-image] the kernel ideal for a quasi-compact morphism is the actual kernel of the structure-sheaf map. It follows that $j^*:F[S]\\to F[U\\times B]$ is injective. Define $r:E\\to F[U]$ by $r(f)(x)=f(xn_0)$. Right equivariance gives $j^*f(x,b)=\\lambda(b)^{-1}r(f)(x)$ as a regular-function identity. If $r(f)=0$, this identity gives $j^*f=0$, hence $f=0$. Thus $r$ is injective. Direct substitution also gives $r(uf)(x)=r(f)(u^{-1}x)$ after every scalar extension.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.22, restriction to the open cell and left-translation identity; the schematic-density justification is explicit. Milne Proposition 1.10 supplies the reduced-density principle."
+   }
+  },
+  {
+   "text": "Choose $0\\ne h\\in E$. By [lem-sfb-comodule-finite-subrepresentation] for the rational $U$-module $E$, there is a nonzero finite-dimensional rational $U$-submodule $M$ containing $h$. Choose a basis, identifying $M$ with $F^d$ for $d\\ge1$. The radical $U$ is smooth affine of finite type and has a faithful representation with unipotent geometric points, by the meaning of unipotent in the hypotheses. Thus [lem-sfb-unipotent-rational-representation-fixed-vector] gives $0\\ne v\\in M$ fixed by every $u\\in U(F)$. This cited result asserts pointwise fixedness only. To obtain the coaction identity, write $\\rho_M(v)-v\\otimes1=\\sum_{i=1}^d e_i\\otimes a_i$ with $a_i\\in F[U]$. Every $a_i$ vanishes on all $U(F)$. Since $F[U]$ is reduced and finitely generated, clause 2 of [lem-wf-affine-nullstellensatz-vanishing] gives $a_i=0$ for every $i$. Hence $\\rho_M(v)=v\\otimes1$, and the inclusion of the subcomodule gives $0\\ne v\\in E^U$. This step uses no characteristic-zero hypothesis.",
+   "uses": [
+    "lem-sfb-comodule-finite-subrepresentation",
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.22, assertion E(lambda)^U is nonzero; Proposition 4.7/Corollary 4.8, section 14.b and Proposition 14.3. Milne Proposition 1.10 justifies upgrading fixed F-points to the coaction identity."
+   }
+  },
+  {
+   "text": "For $f\\in E^U$, the translation identity gives $r(f)(u^{-1}x)=r(f)(x)$ for every commutative $F$-algebra $A$ and $u,x\\in U(A)$. Substituting $u=x$ gives $r(f)(x)=r(f)(1)$. In particular take $A=F[U]$ and the universal point $x$; this proves $r(f)=r(f)(1)\\,1$ in the coordinate algebra, rather than merely on $F$-points. The injectivity of $r$ now makes $f\\mapsto r(f)(1)=f(n_0)$ an injective linear map $E^U\\to F$. Together with the nonzero vector of step 3, this makes $E^U$ one-dimensional: the image of that vector is a nonzero scalar, so it spans the one-dimensional target and the inverse image of that span is all of $E^U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.22, constancy of f_U and the one-dimensionality conclusion."
+   }
+  },
+  {
+   "text": "Let $f\\in E^U$, $A$ any commutative $F$-algebra, $t\\in T(A)$ and $x\\in U(A)$. Normality of $U$ in $B$ gives $t^{-1}xt\\in U(A)$. Directly,\n$$r(tf)(x)=f(t^{-1}xn_0)=f((t^{-1}xt)n_0(n_0^{-1}t^{-1}n_0))=(w_0\\lambda)(t)\\,r(f)(t^{-1}xt).$$\nHere $n_0^{-1}t^{-1}n_0\\in T(A)$, and right equivariance contributes $\\lambda(n_0^{-1}t^{-1}n_0)^{-1}=\\lambda(n_0^{-1}tn_0)=(w_0\\lambda)(t)$, so the inverse in the definition has been accounted for. Since $r(f)$ is constant, this equals $(w_0\\lambda)(t)r(f)(x)$. The map $A\\otimes_F E\\to A\\otimes_F F[U]$ induced by $r$ is injective: extend an $F$-basis of its image to a basis of $F[U]$ to construct a linear left inverse of $r$, then tensor that inverse with $A$. The displayed equality therefore implies $tf=(w_0\\lambda)(t)f$ in $A\\otimes_F E$. As it holds for every $A$ and $t$, it is exactly the claimed group-scheme weight identity on the line.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.22, final displayed calculation of the T-weight w_0(lambda), printed p.469."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "lem-sfb-comodule-finite-subrepresentation",
+  "lem-sfb-longest-weyl-open-cell",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-unipotent-rational-representation-fixed-vector",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 22.22, proof, printed pp.468--469; supporting results 21.73(b), 21.84, 4.7--4.8 and section 14.b."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "highest.weight|primitive.element|unipotent.*invariant|induced.*weight|longest.*element",
+   "results": "{\"t\": \"2026-10-23T12:07:08Z\", \"tool\": \"grep\", \"query\": \"highest.weight|primitive.element|unipotent.*invariant|induced.*weight|longest.*element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\", \"Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean\"], \"digest\": \"c14c23d7bfe5a510\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are LieModule weight spaces or RootPairing constructions, not U-fixed regular functions induced from an algebraic Borel character. Loogle returned zero hits; the grep hits concern field primitive elements and unrelated weight constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a nonzero induced module of a split reductive algebraic group the unipotent radical of the Borel fixes a line of weight w0 lambda",
+   "results": "{\"t\": \"2026-10-23T12:07:08Z\", \"tool\": \"leansearch\", \"query\": \"In a nonzero induced module of a split reductive algebraic group the unipotent radical of the Borel fixes a line of weight w0 lambda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.IsNonZero\", \"LieModule.Weight.genWeightSpace_ne_bot\", \"LieModule.exists_forall_lie_eq_smul\", \"LieModule.Weight.isNonZero_iff_ne_zero\", \"LieModule.Weight.IsZero\", \"LieModule.Weight.coe_toLinear_ne_zero_iff\", \"LieModule.chainTop_isNonZero\", \"LieModule.Weight.IsNonZero.neg\"], \"digest\": \"916dd90c1a4ce6b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are LieModule weight spaces or RootPairing constructions, not U-fixed regular functions induced from an algebraic Borel character. Loogle returned zero hits; the grep hits concern field primitive elements and unrelated weight constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieModule\", \"highest\"",
+   "results": "{\"t\": \"2026-10-23T12:07:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"LieModule\\\", \\\"highest\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are LieModule weight spaces or RootPairing constructions, not U-fixed regular functions induced from an algebraic Borel character. Loogle returned zero hits; the grep hits concern field primitive elements and unrelated weight constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique highest weight vector in a nonzero induced rational representation of a semisimple algebraic group in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T12:07:15Z\", \"tool\": \"leanfinder\", \"query\": \"Unique highest weight vector in a nonzero induced rational representation of a semisimple algebraic group in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.Weight.genWeightSpace_ne_bot\", \"LieModule.injOn_genWeightSpace\", \"LieModule.Weight.genWeightSpaceOf_ne_bot\", \"LieModule.chainTop_isNonZero'\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieModule.Weight.exists_ne_zero\", \"LieModule.genWeightSpace_add_chainTop\", \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\"], \"digest\": \"c41c8e6bcd959ecd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are LieModule weight spaces or RootPairing constructions, not U-fixed regular functions induced from an algebraic Borel character. Loogle returned zero hits; the grep hits concern field primitive elements and unrelated weight constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive algebraic group induced regular function module E lambda has a one dimensional subspace fixed by the unipotent radical of a Borel, with weight w0 lambda",
+   "results": "{\"t\": \"2026-10-23T12:07:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a split reductive algebraic group induced regular function module E lambda has a one dimensional subspace fixed by the unipotent radical of a Borel, with weight w0 lambda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.coe_genWeightSpace_zero_eq_span_range_u\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"LieModule.exists_isRegular\", \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\", \"LieModule.Weight.genWeightSpace_ne_bot\", \"LieModule.Weight.genWeightSpaceOf_ne_bot\"], \"digest\": \"d890aa98b83e7b56\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: semantic hits are LieModule weight spaces or RootPairing constructions, not U-fixed regular functions induced from an algebraic Borel character. Loogle returned zero hits; the grep hits concern field primitive elements and unrelated weight constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "highest.weight|primitive|unipotent|Borel|longest",
+   "results": "{\"t\": \"2026-10-23T12:23:26Z\", \"tool\": \"grep\", \"query\": \"highest.weight|primitive|unipotent|Borel|longest\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: grep of RepresentationTheory has zero hits; semantic hits concern Lie algebras with characteristic-zero hypotheses, not a Borel decomposition and primitive line for rational group-scheme modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Borel subgroup of a split semisimple group is torus times unipotent radical and a nonzero induced Borel character module has one primitive line of longest Weyl weight",
+   "results": "{\"t\": \"2026-10-23T12:23:35Z\", \"tool\": \"leanfinder\", \"query\": \"A Borel subgroup of a split semisimple group is torus times unipotent radical and a nonzero induced Borel character module has one primitive line of longest Weyl weight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.chainTopCoeff_zero_right\", \"LieAlgebra.IsKilling.chainBotCoeff_zero_right\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.IsKilling.le_chainBotCoeff_of_rootSpace_ne_top\", \"LieAlgebra.IsKilling.rootSpace_neg_nsmul_add_chainTop_of_le\", \"LieAlgebra.IsKilling.rootSpace_neg_nsmul_add_chainTop_of_lt\", \"LieAlgebra.IsKilling.span_weight_isNonZero_eq_top\"], \"digest\": \"d3db29e09e6ebc63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: grep of RepresentationTheory has zero hits; semantic hits concern Lie algebras with characteristic-zero hypotheses, not a Borel decomposition and primitive line for rational group-scheme modules."
+  },
+  {
+   "tool": "grep",
+   "query": "highest.weight|primitive.line|Borel|unipotent",
+   "results": "{\"t\": \"2026-10-23T13:31:43Z\", \"tool\": \"grep\", \"query\": \"highest.weight|primitive.line|Borel|unipotent\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule hits require characteristic zero and concern Lie algebras; Representation.IndV and ind are abstract-group induction via group algebras, not regular-function induction from an algebraic Borel. No matching scheme-theoretic primitive line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero induced representation of a Borel character has a unique unipotent fixed line with longest Weyl conjugate character",
+   "results": "{\"t\": \"2026-10-23T13:31:44Z\", \"tool\": \"leansearch\", \"query\": \"A nonzero induced representation of a Borel character has a unique unipotent fixed line with longest Weyl conjugate character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IndV\", \"Representation.ind\", \"Rep.ind\", \"Rep.toInvariants\", \"Representation.toInvariants\", \"Representation.IndV.hom_ext\", \"Rep.coindToInd.congr_simp\", \"Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants\"], \"digest\": \"0eb65054fb3deb89\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule hits require characteristic zero and concern Lie algebras; Representation.IndV and ind are abstract-group induction via group algebras, not regular-function induction from an algebraic Borel. No matching scheme-theoretic primitive line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"invariant\"",
+   "results": "{\"t\": \"2026-10-23T13:31:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\", \\\"invariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule hits require characteristic zero and concern Lie algebras; Representation.IndV and ind are abstract-group induction via group algebras, not regular-function induction from an algebraic Borel. No matching scheme-theoretic primitive line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonzero rational algebraic group representation induced from a Borel character lambda the unipotent radical fixed space has dimension one and torus weight longest Weyl element times lambda",
+   "results": "{\"t\": \"2026-10-23T13:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonzero rational algebraic group representation induced from a Borel character lambda the unipotent radical fixed space has dimension one and torus weight longest Weyl element times lambda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"LieAlgebra.IsKilling.chainTopCoeff_zero_right\", \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"LieAlgebra.IsKilling.rootSpace_neg_nsmul_add_chainTop_of_lt\", \"LieAlgebra.IsKilling.chainBotCoeff_zero_right\", \"LieModule.zero_lt_finrank_genWeightSpace\", \"LieAlgebra.IsKilling.chainLength_zero_right\"], \"digest\": \"1af542bbaf4f65fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LieModule hits require characteristic zero and concern Lie algebras; Representation.IndV and ind are abstract-group induction via group algebras, not regular-function induction from an algebraic Borel. No matching scheme-theoretic primitive line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-tensor-square-invariant-line",
+  "date": "2026-10-23",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Tensor-square rho sections have a one-dimensional invariant space. Primitive-vector input for the tensor-square invariant-line calculation: Milne 22.22 for E_B(-m rho), including the longest Weyl element and its T-weight.",
+   "via": [
+    "lem-sfb-rho-tensor-square-invariant-line",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-induced-module-primitive-line",
+  "worker": "stage1",
+  "summary": "Followed Milne 22.22: dense open cell gives injective restriction; finite-subrepresentation and unipotent fixed-point results give a nonzero coaction invariant after the reduced affine vanishing test; constancy gives dimension one, and the explicit all-algebras torus calculation gives w_0 lambda. Added only the geometric Bruhat-cell input. No statement correction.",
+  "blueprint": "The existing from.place traces this input to det-thm-sf-ctf-stability-direct-images (3), via the stable-moduli/GIT/Haboush/Steinberg/rho-module chain. The latest blueprint direct-images proof (3) remains the parent route. This split realizes its already assigned primitive-vector prerequisite by Milne 22.22; no unit/chapter change. The ancestor command returns null on the current created-item chain; new node retains that exact ancestor and prepends this item to via.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smoothness-to-reducedness input for S and U, needed to use schematic density and the affine vanishing test; this unit has no version of it."
+   },
+   {
+    "node": "lemma-nagata-reduced-dense-image-schematic",
+    "why": "Generic scheme-theoretic density theorem for the open Bruhat immersion; no node of this unit supplies injectivity from dense image and reduced target."
+   },
+   {
+    "node": "def-nagata-scheme-theoretic-image",
+    "why": "Uses the explicit quasi-compact kernel-ideal definition to read schematic density as injectivity on coordinate algebras."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic reduced affine vanishing test upgrades the available unipotent fixed-vector theorem from F-points to coaction fixedness; it does not replace the representation-theoretic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "def-nagata-scheme-theoretic-image",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-716420401",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-716420401 (reviewer sub-agent of L); spot-checked: I read Milne Def 22.21, Prop 22.22 with proof (pp.468-469), 21.72, 21.73(b), 21.84 and 21.85, and every cited node's statement. The item's statement is unchanged from live (item still unsplit there, no repair note, new id unused). E_B(lambda) has Milne's convention, and an SL2 test with B upper triangular and f=g21^m gives weight z^m = w0 lambda, so there is no sign error. Step 1: pair-structure gives semisimple implies reductive and B=U⋊T; E is rational as a kernel because left and right translations commute. Step 2: S and U are reduced by the smooth-fibre node; j is affine-to-affine so qc and qs, with dense image; Nagata SIm(j)=S plus the qc kernel definition makes j^* injective; j^*f = lambda(b)^-1 r(f) makes r injective. Step 3: the finite-subcomodule node needs no finite dimension; the fixed-vector hypotheses (smooth, affine, finite type, faithful, unipotent) hold for the radical; the points-to-coaction upgrade uses Nullstellensatz clause 2 on the reduced, finitely generated F[U], which is correct. Steps 4-5 are elementary and match Milne's display, with n0^-1 t^-1 n0 in T(A) and the injectivity of r after tensoring with A given by a linear left inverse. proof_deps = union of uses; no cycle. The new node lem-sfb-longest-weyl-open-cell is true: it is a left translate of the 21.84 big cell since n0^-1 U n0 = U^-, it is dense, and w0 is unique by 21.72; checked in rank 0 and SL2. It is statement-only, self-contained, with recorded searches and correct blueprint fields, and is not a clause of the item. Overlap: base node lem-sfb-normal-big-cell-character-functions (Q80, unsplit) states the same open cell as one clause of a larger normality/f_chi statement. I kept the smaller stand-alone node; maintainer note: that node's split should cite this one. Accepted tool_uses (generic): sbc-lem-smooth-geometrically-reduced, lemma-nagata-reduced-dense-image-schematic, def-nagata-scheme-theoretic-image, lem-wf-affine-nullstellensatz-vanishing. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.InducedModulePrimitiveLine",
+  "declaration": "AlgebraicGeometry.induced_module_primitive_line",
+  "declarations": [
+   "AlgebraicGeometry.RhoSection.inducedCharacterModule",
+   "AlgebraicGeometry.RhoSection.inducedFixedSpace",
+   "AlgebraicGeometry.induced_module_primitive_line"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/InducedModulePrimitiveLine.lean",
+  "statement": "theorem induced_module_primitive_line {F : Type u} [Field F] [IsAlgClosed F] (S T B U : Grp (Over (Spec (.of F)))) (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (iT : T ⟶ S) (iB : B ⟶ S) (k : T ⟶ B) (hpair : IsRhoBorelPair iT iB k) (iU : U ⟶ B) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hUnormal : IsNormalSubgroupScheme iU.hom.hom) (hUsmooth : Smooth U.X.hom) (hUconnected : ConnectedSpace U.X.left) (hUunipotent : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) (a : ModObj T.X B.X) (ha : a.smul = (fst T.X B.X ≫ k.hom.hom) * snd T.X B.X * (fst T.X B.X ≫ k.hom.hom)⁻¹) (lam : B ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hlam : iU.hom.hom ≫ lam.hom.hom = 1) : IsIso ((fst T.X U.X ≫ k.hom.hom) * (snd T.X U.X ≫ iU.hom.hom)) ∧ ∃ (w0 : RankOneRoots.Weyl iT) (n0 : RankOneRoots.normalizer iT) (e : T ≅ T), QuotientGroup.mk n0 = w0 ∧ e.hom.hom.hom ≫ iT.hom.hom = (toUnit T.X ≫ n0.val⁻¹) * iT.hom.hom * (toUnit T.X ≫ n0.val) ∧ (fun chi ↦ e.hom ≫ chi) '' RankOneRoots.roots T B a = (fun chi ↦ chi⁻¹) '' RankOneRoots.roots T B a ∧ (RhoSection.inducedCharacterModule S B iB lam ≠ ⊥ → Module.finrank F (RhoSection.inducedFixedSpace S B U iB iU lam) = 1 ∧ ∀ (f : RhoSection.Coordinate S.X), f ∈ RhoSection.inducedFixedSpace S B U iB iU lam → ∀ (A : Type u) [CommRing A] [Algebra F A] (t : StandardGroupSchemes.affine F A ⟶ T.X) (g : StandardGroupSchemes.affine F A ⟶ S.X), RhoSection.evaluate ((t ≫ iT.hom.hom)⁻¹ * g) f = RhoSection.characterValue (t ≫ e.hom.hom.hom ≫ k.hom.hom ≫ lam.hom.hom) * RhoSection.evaluate g f)",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing sectionModule at the inverse character and exponent one. Fixedness and weight use the equivalent functor-of-points identities over every commutative F-algebra, including universal and nonreduced points. The added stmt_deps are already landed terminology nodes, not new definitions. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5da16fe4e",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Statement matches node and Milne 22.21/22.22 clause by clause: hS/hsc copied from exists_rho_section_modules; IsRhoBorelPair; U by the same largest-subgroup property as reductive_borel_pair_structure; a pinned to conjugation; roots = RankOneRoots.roots (TorusCharacterTangent weights on Lie B); T×U→B IsIso in Over and w0/n0/e (e forced, iT closed immersion) are conclusions; E_B(λ)=sectionModule at lam⁻¹ (pointwise inverse, rfl) with exponent 1; fixed space = equalizer over all A:Type u; finrank=1; weight f(t⁻¹g)=λ(n0⁻¹tn0)f(g). SL2 sign test gives z^m = w0λ. Edge cases rank 0, E=0, char 2, nonreduced A, universes fine. Node changes only lean plus three landed stmt_deps (allowed by brief-stage2 §5); dependency nodes byte-identical to live; statement verbatim; defs have real data; docstrings, 5-step proof plan and both report sections present; no existing duplicate found. No changes, no compile."
+ }
+}

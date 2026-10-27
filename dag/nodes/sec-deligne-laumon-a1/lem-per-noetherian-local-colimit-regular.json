@@ -264,20 +264,38 @@
   "module": "Sheaf.RingTheory.NoetherianLocalColimitRegular",
   "declaration": "IsRegularLocalRing.of_noetherian_colimit",
   "file": "lean/Sheaf/RingTheory/NoetherianLocalColimitRegular.lean",
-  "statement": "theorem of_noetherian_colimit {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [HasColimit F] [∀ i : I, IsRegularLocalRing (F.obj i)] (hlocal : ∀ (i j : I) (hij : i ≤ j), IsLocalHom (F.map (homOfLE hij)).hom) [IsNoetherianRing (colimit F : CommRingCat.{u})] : IsRegularLocalRing (colimit F : CommRingCat.{u})",
+  "statement": "theorem of_noetherian_colimit {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [∀ i : I, IsRegularLocalRing (F.obj i)] (hlocal : ∀ (i j : I) (hij : i ≤ j), IsLocalHom (F.map (homOfLE hij)).hom) [IsNoetherianRing (colimit F : CommRingCat.{u})] : IsRegularLocalRing (colimit F : CommRingCat.{u})",
   "branch": "newtargets-dag",
-  "by": "NY",
-  "date": "2026-10-18",
+  "by": "Q140",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.NoetherianLocalColimitRegular deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Restores the statement whose former module was deleted on 2026-10-20. Uses the recorded Mathlib ring predicates and categorical colimit. The redundant HasColimit binder in the old Lean record is omitted: the directed-ring-diagram instance supplies it, as required by coord/STATE.md, FILTERED COLIMITS OF RINGS. The mathematical statement and dependencies are unchanged."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0463e1b23",
-  "group": "NY",
+  "reviewer": "NT-stage2-cc-2f974cb5b",
+  "group": "Q140",
   "result": "pass",
-  "note": "IsRegularLocalRing.of_noetherian_colimit matches the node (07DX) clause by clause: I : Type u with PartialOrder/Nonempty/IsDirected; F : I ⥤ CommRingCat.{u} (functor laws = u_ii=id, u_jk∘u_ij=u_ik); Mathlib IsRegularLocalRing stages (rfl probe); IsLocalHom transition maps (⇔ comap m_j = m_i); colimit F with HasColimit (recorded dep decl); IsNoetherianRing colimit hypothesis; conclusion IsRegularLocalRing colimit. No extra hypotheses; edge cases (empty excluded per node, field, DVR, non-injective local maps) covered. Only lean field of item changed; stmt_dep nodes identical to live; statement verbatim; docstrings with source, blueprint id and 8 proof steps; plain imports = proof-dep modules. No duplicate (Mathlib/side/slopmaster2 grep); N6 parallel run was RETURNed. nt_compile --json: clean 2.1 s; broken control fails; probe instantiates at the citer's single-universe setting. Advisory: FilteredColimits could be a plain import."
+  "note": "Lean-only re-delivery putting back the deleted module; the snapshot node differs from live only in the lean field. Every 07DX clause matches exactly: nonempty directed PartialOrder I : Type u; F : I ⥤ CommRingCat.{u}; stages are IsRegularLocalRing (which includes local and Noetherian); transition maps are IsLocalHom, equivalent to comap m_j = m_i; colimit F, whose HasColimit is inferred, so dropping the old binder is harmless; Noetherian colimit is the only assumption on L; conclusion IsRegularLocalRing, so locality is concluded. Edge cases (empty I excluded, field, DVR, non-injective local maps, universes) are covered. lean.statement is verbatim the file signature; proof is sorry only; docstrings carry the source place, the blueprint id and 8 steps; plain imports are proof-dep modules (WeilConjectures RegularLocalRing.Defs = recorded module of lem-sc-regular-local-domain and the hypersurface criterion). No duplicate found; report has both sections. No compile, per instruction; relies on the worker's clean compile and NY's earlier PASS of the near-identical statement."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/NoetherianLocalColimitRegular.lean",
+  "module": "Sheaf.RingTheory.NoetherianLocalColimitRegular",
+  "declaration": "IsRegularLocalRing.of_noetherian_colimit",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

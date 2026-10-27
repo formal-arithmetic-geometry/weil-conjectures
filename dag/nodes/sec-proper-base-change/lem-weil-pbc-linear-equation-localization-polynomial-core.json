@@ -114,5 +114,33 @@
   ],
   "sorry_after": []
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $r\\ge1$, $f_1,\\dots,f_r\\in A$ and $1\\le i\\le r$. Put\n$$\nB=A[X_1,\\dots,X_r]\\Big/\\Bigl(\\textstyle\\sum_{j=1}^rf_jX_j-1\\Bigr),\n$$\nlet $A_{f_i}=A[1/f_i]$, and let $B_{f_i}$ be the localization of $B$ at the image of $f_i$,\nan $A_{f_i}$-algebra via the map induced by $A\\to B$. Write $x_j\\in B_{f_i}$ for the image of\n$X_j$. Then there is an isomorphism of $A_{f_i}$-algebras\n$$\n\\varphi\\colon A_{f_i}[Y_j : j\\ne i]\\xrightarrow{\\ \\sim\\ }B_{f_i}\n$$\nfrom the polynomial ring in the $r-1$ variables $Y_j$, $j\\ne i$, such that $\\varphi$ is the\nevaluation homomorphism $Y_j\\mapsto x_j$ $(j\\ne i)$ and $\\varphi^{-1}(x_j)=Y_j$ for every\n$j\\ne i$.",
+  "proof": [
+   {
+    "text": "Let $\\varphi$ be the $A_{f_i}$-algebra homomorphism with $\\varphi(Y_j)=x_j$ for $j\\ne i$. For\nthe inverse, let $\\psi_0\\colon A[X_1,\\dots,X_r]\\to A_{f_i}[Y_j : j\\ne i]$ be the $A$-algebra\nhomomorphism with $\\psi_0(X_i)=f_i^{-1}\\bigl(1-\\sum_{j\\ne i}f_jY_j\\bigr)$ and\n$\\psi_0(X_j)=Y_j$ for $j\\ne i$. It sends $\\sum_jf_jX_j-1$ to $0$, so it factors through $B$,\nand since $f_i$ maps to a unit it extends to $\\psi\\colon B_{f_i}\\to A_{f_i}[Y_j : j\\ne i]$.\nBy the universal property of localization, $\\psi$ is $A_{f_i}$-linear. The two composites\n$\\psi\\circ\\varphi$ and $\\varphi\\circ\\psi$ fix all generators (for $x_i$ use the relation\n$f_ix_i=1-\\sum_{j\\ne i}f_jx_j$ in $B_{f_i}$). An algebra homomorphism out of a polynomial\nring, a quotient of it, or a localization of such a quotient is determined by its values on\nthe generators, so both composites are identities. Hence $\\varphi$ is an isomorphism with\ninverse $\\psi$, and $\\varphi^{-1}(x_j)=\\psi(x_j)=Y_j$ for $j\\ne i$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

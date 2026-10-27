@@ -1,0 +1,139 @@
+{
+ "id": "lem-zl-proetale-irreducibility-detector",
+ "kind": "statement",
+ "title": "A finite cover detecting pro-etale irreducibility on smooth curves",
+ "statement": "Let $k$ be algebraically closed, let $\\ell$ be prime and different from $\\operatorname{char}k$, and let $f:X\\to\\operatorname{Spec}k$ be smooth of fixed finite relative dimension with $X$ connected and affine. Let $F_j$, $j\\in\\operatorname{Fin}r$, be nonzero irreducible pro-etale $\\overline{\\mathbf Q}_\\ell$ local systems [def-weil-pbc-qbar-category], with irreducibility expressed as no proper nonzero lisse subsheaf. There exist a connected scheme $T$ and a finite etale morphism $\\pi:T\\to X$ such that, for every smooth connected affine curve $i:C\\to X$ over $k$, connectedness of $T\\times_X C$ implies irreducibility of every $i^*F_j$. Morphism properties are as in [def-weil-scheme-morphism-properties], connectedness as in [def-weil-connected-scheme], and pullback as in [lem-sf-native-adic-pullback-exact-lisse]. The empty family is allowed. This asserts no existence of a curve.",
+ "stmt_deps": [
+  "def-weil-pbc-qbar-category",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-connected-scheme",
+  "lem-sf-native-adic-pullback-exact-lisse"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-cor-wgen-bertini-irreducible/lem-zl-curve-testing-irreducibility.proof.md",
+  "place": "Finite coefficient models, stable lattices and the common reduction quotient, followed by the connected restricted torsor argument; no Bertini existence assertion."
+ },
+ "proof": [
+  {
+   "text": "Use the proved universal pro-etale lisse monodromy on the smooth connected affine base. Its fullness, faithfulness and essential surjectivity identify no proper nonzero lisse subobject with irreducibility of the stalk representation. Use a small profinite fundamental-group model at one geometric point. Here the existing declarations universalLisseMonodromy and universalLisseMonodromy_isEquivalenceAt in WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension replace the separate etale-adic correspondence node.",
+   "uses": [
+    "lem-fet-galois-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved Burnside and determinant support lemmas of FiniteMatrixWitness directly over PadicAlgCl: finitely many operators of each irreducible stalk representation have nonzero vectorized determinant. Continuity of all matrix coefficients makes this determinant nonzero on a product neighborhood of these operators. Choose an open normal subgroup inside each translated coordinate neighborhood and intersect over coordinates and the finite family. Any subgroup meeting every resulting coset contains operators with nonzero determinant, hence spans all endomorphisms and acts irreducibly. No finite coefficient field or stable lattice is needed.",
+   "uses": [
+    "lem-zl-finite-matrix-irreducibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient by the common open normal subgroup is finite. Realize its regular action as a finite etale cover using exists_fiber_equiv. Surjectivity onto the quotient makes its fibre transitive and nonempty, so the cover is connected. For the empty family the intersection is the full group and this construction gives a degree-one cover.",
+   "uses": [
+    "cor-galois-open-subgroups",
+    "lem-fet-galois-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each smooth connected affine curve choose a geometric point over a rational point and a path to the fixed base point. The pullback fibre is the regular quotient with action through the induced fundamental-group map. Connectedness of the pullback gives transitivity, and the orbit of the identity shows that the induced map surjects onto the quotient. Apply the detector to its image subgroup. Transport along the path and the proved universal-monodromy pullback compatibility give an equivariant stalk isomorphism, so irreducibility transports to each pulled-back local system. Use Mathlib IsFundamentalGroup transitivity directly and isCompatible_universalLisseMonodromy from the source library; no separate FLC equivalence or Stacks-category transitivity wrapper is imported.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "lem-fet-galois-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fet-galois-category",
+  "lem-zl-finite-matrix-irreducibility",
+  "cor-galois-open-subgroups",
+  "lem-galois-pi1-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-cor-wgen-bertini-irreducible/lem-zl-curve-testing-irreducibility.proof.md",
+  "place": "Finite-matrix witness and regular quotient-cover argument, shortened by continuity of the nonzero Burnside determinant; Lean proof by K1, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An irreducible lisse sheaf admits a connected finite etale cover detecting irreducibility under pullback",
+   "results": "Topological irreducibility, etale base-change stability and Representation.IsIrreducible; no pro-etale detecting cover.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIrreducible, Representation",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A real constructible Weil sheaf is mixed; irreducible local systems remain irreducible on a Bertini curve",
+   "results": "Constructible images and condensed locally constant modules; no detecting-cover theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*Irreducible.*cover; IsIrreducibleAdicLocalSystem; common_irreducibility_detecting_cover",
+   "results": "The existing Sheaf.RepresentationTheory.CommonIrreducibilityDetectingCover uses etale LisseAlgebraicSheaf; the source library has pro-etale lisse monodromy and dense-open irreducibility but no detector in its AdicSheaf interface.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.DeligneLaumon.Reduction.RealSheaves",
+  "date": "2026-10-25",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-curve-testing-irreducibility",
+   "place": "Finite coefficient models, stable lattices and the common reduction quotient, followed by the connected restricted torsor argument; no Bertini existence assertion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.ProEtaleIrreducibilityDetector",
+  "file": "lean/Sheaf/DeligneLaumon/ProEtaleIrreducibilityDetector.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_connected_finiteEtale_irreducibility_detector",
+  "statement": "theorem exists_connected_finiteEtale_irreducibility_detector\n    {k : Type u} [Field k] [IsAlgClosed k] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k ≠ l)] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))\n    [IsAffine X] [ConnectedSpace X] {d : ℕ} [SmoothOfRelativeDimension d f]\n    {r : ℕ} (F : Fin r → AdicSheaf l X)\n    (hF : ∀ j, IsIrreducibleAdicLocalSystem (F j)) :\n    ∃ (T : Scheme.{u}) (π : T ⟶ X), IsFinite π ∧ Etale π ∧ ConnectedSpace T ∧\n      ∀ (C : Scheme.{u}) (i : C ⟶ X) [IsAffine C]\n        [SmoothOfRelativeDimension 1 (i ≫ f)] [ConnectedSpace C],\n        ConnectedSpace ↑(pullback π i) →\n          ∀ j, IsIrreducibleAdicLocalSystem ((i)^*ᵃ[l].obj (F j))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T095615-L-3453279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T023409-L-562543",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

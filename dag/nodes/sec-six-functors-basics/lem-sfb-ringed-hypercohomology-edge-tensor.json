@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-ringed-hypercohomology-edge-tensor",
+ "kind": "statement",
+ "title": "Tensor compatibility of the hypercohomology-to-sheaf-cohomology edge",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the common coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with $\\mathcal O$ a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived category [def-weil-abstract-derived-category], cohomology sheaves $\\mathcal H^n$ [def-weil-derived-cohomology-sheaves], and K-injective derived global sections $R\\Gamma$ [def-pur-ringed-site-zeroth-hypercohomology]. Put $A=\\Gamma(\\mathcal C,\\mathcal O)$. For $K\\in D(\\mathcal O)$ and $n\\in\\mathbf Z$, let $e_K^n:H^nR\\Gamma(\\mathcal C,K)\\to\\Gamma(\\mathcal C,\\mathcal H^nK)$ send a global cocycle in a K-injective representative to its class in the cohomology sheaf. This map is independent of the representative and natural for every derived morphism $K\\to K'$. Use derived tensor, the derived global cup map $c_{K,L}$, and the local tensor-of-cocycles map $\\kappa^{a,b}_{K,L}:\\mathcal H^aK\\otimes_{\\mathcal O}\\mathcal H^bL\\to\\mathcal H^{a+b}(K\\otimes^{\\mathbf L}_{\\mathcal O}L)$ of [def-sfb-ringed-site-module-cup-product]. For all $K,L\\in D(\\mathcal O)$, $a,b\\geq0$, $x\\in H^aR\\Gamma K$, and $y\\in H^bR\\Gamma L$, one has\n$$e_{K\\otimes^{\\mathbf L}L}^{a+b}\\bigl(H^{a+b}(c_{K,L})(\\kappa^{a,b}_{R\\Gamma K,R\\Gamma L}(x\\otimes y))\\bigr)=\\Gamma(\\kappa^{a,b}_{K,L})(e_K^a(x)\\otimes e_L^b(y)).$$\nThe tensor of global sections on the right is first mapped to the global sections of the sheaf tensor product. No final site object, boundedness, flatness, or quasi-coherence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKV (lemma-sheafification-cohomology) and Tag 0FPK (lemma-cup-compatible-with-naive), applied to the global-sections morphism; the edge compatibility is the agent-stated consequence of these cochain descriptions."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-ringed-site-module-cup-product"
+ ],
+ "proof": [
+  {
+   "text": "For any complex $M$, define $\\delta_M^n:H^n\\Gamma M\\to\\Gamma\\mathcal H^nM$ by sending a compatible family of degree-$n$ cycles to its image under $\\ker d_M^n\\to\\mathcal H^nM$. A global boundary maps to zero, so this is well-defined. For a chain map $v:M\\to N$, both $\\delta_N^n H^n\\Gamma(v)$ and $\\Gamma\\mathcal H^n(v)\\delta_M^n$ send $[z]$ to the family $[v(z)]$. If $v-w=dh+hd$, then on a cycle their difference is $d(hz)$, hence zero on both cohomologies. This is precisely the kernel/quotient description of [def-weil-derived-cohomology-sheaves]; it uses compatible families, not evaluation at a final object.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology, proof: kernel/quotient description; global compatible-family version written here"
+   }
+  },
+  {
+   "text": "Choose K-injective representatives $I$ for $K$ and $J$ for $L$ by [prop-pur-kinjective-resolutions-exist]. By [def-pur-ringed-site-zeroth-hypercohomology], $H^nR\\Gamma K=H^n\\Gamma I$ (the same termwise K-injective computation in every degree). Set $e_K^n=\\delta_I^n$. By [lem-weil-pbc-kinjective-hom-derived], every derived map between such representatives is represented by a chain map, uniquely up to homotopy; a derived isomorphism between them is a homotopy equivalence. Global sections preserves a chain homotopy termwise, and step 1 is natural for chain maps and unchanged by homotopy. Therefore these maps are independent of the K-injective representative and natural for every derived morphism. More generally, for any complex $P$ and a resolution $r:P\\to I$, step 1 gives\n$$e_{[P]}^n H^n(\\beta_P)=\\Gamma(\\mathcal H^n(r))\\,\\delta_P^n,$$\nwith the canonical identification of $\\mathcal H^n[P]$ and $\\mathcal H^n I$; here $\\beta_P:[\\Gamma P]\\to R\\Gamma[P]$ is induced by $\\Gamma(r)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, proof, with K-injective representative independence (Derived Categories Tag 070I)"
+   }
+  },
+  {
+   "text": "Represent $x$ by a global cycle $z\\in\\Gamma I^a$. It defines a chain map $t:\\mathcal O[-a]\\to I$, sending $1$ to $z$. The complex $\\mathcal O[-a]$ has flat terms and is K-flat: tensoring an acyclic complex with it only shifts that complex, directly from [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. Apply [lem-pur-kflat-map-factorization] to obtain a flat-term K-flat $P$, a quasi-isomorphism $r:P\\to I$, and $u:\\mathcal O[-a]\\to P$ with $t\\simeq ru$. Put $\\widetilde z=u(1)\\in\\Gamma P^a$. The homotopy equation on $1$ says $z-r(\\widetilde z)=d(h(1))$, so $H^a(\\beta_P)[\\widetilde z]=x$. Similarly construct a flat-term K-flat $Q$, a quasi-isomorphism $s:Q\\to J$, and $\\widetilde w\\in\\Gamma Q^b$ mapping to $y$. Thus the replacements retain these particular global cycles; no surjectivity of global sections along an arbitrary resolution is asserted.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-kflat-map-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat, including flat terms; explicit application to the two shifted unit maps"
+   }
+  },
+  {
+   "text": "Put $T=\\operatorname{Tot}(P\\otimes_{\\mathcal O}Q)$. By [lem-weil-pbc-site-derived-tensor-descent], $[T]$ is canonically $K\\otimes^{\\mathbf L}L$, and $\\rho_{P,Q}$ is an isomorphism. Apply [lem-sfb-ringed-derived-naive-cup-comparison] to global sections and $P,Q$. On degree-$(a+b)$ cohomology its left route is the cup product in the question (transported along $[P]\\simeq K$, $[Q]\\simeq L$); its right route factors through the actual complex $\\Gamma T$. Specifically, $\\rho_{\\Gamma P,\\Gamma Q}$ sends the tensor pairing of $[\\widetilde z]$ and $[\\widetilde w]$ to $[\\widetilde z\\otimes\\widetilde w]$ in the ordinary tensor complex. To verify this even though $\\Gamma P,\\Gamma Q$ need not be K-flat, take the chain maps $A[-a]\\to\\Gamma P$ and $A[-b]\\to\\Gamma Q$ defined by these cycles and apply [lem-sc-module-cup-shifted-unit-tensor]: its single-free-complex normalization gives exactly this summand, with no sign. Naturality of the cocycle pairing of [def-sfb-ringed-site-module-cup-product] identifies their images with the given tensor pairing. Consequently the cup product, under $[T]\\simeq K\\otimes^{\\mathbf L}L$, is $H^{a+b}(\\beta_T)[v]$, where $v$ is the compatible family obtained from $\\widetilde z\\otimes\\widetilde w$ by the $(a,b)$ summand inclusion.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-ringed-derived-naive-cup-comparison",
+    "lem-sc-module-cup-shifted-unit-tensor",
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPK, lemma-cup-compatible-with-naive, global specialization; tensor-of-cocycles normalization from More on Algebra Tag 068G"
+   }
+  },
+  {
+   "text": "Apply step 2 to $T$: the edge of $H^{a+b}(\\beta_T)[v]$ is the global sheaf class $[v]$. On the other hand step 2 applied to $r$ and $s$ identifies $e_K^a(x)$ and $e_L^b(y)$ with the images of the sheaf classes of $\\widetilde z$ and $\\widetilde w$. On the flat-term K-flat representatives $P,Q$, the definition [def-sfb-ringed-site-module-cup-product] sends their tensor to $[\\widetilde z\\otimes\\widetilde w]=[v]$ in $\\mathcal H^{a+b}T$. Equality can be checked on each object of the site: both compatible families have precisely that class, and restrictions commute with the summand inclusion. Mapping the tensor of global sections into sections of the sheaf tensor gives exactly this family. Therefore the two sides of the asserted identity are equal. In particular $d(\\widetilde z\\otimes\\widetilde w)=d\\widetilde z\\otimes\\widetilde w+(-1)^a\\widetilde z\\otimes d\\widetilde w=0$; changing either cycle by a boundary changes this class by a boundary, with the sign $(-1)^a$ for a boundary in the second factor.",
+   "uses": [
+    "def-sfb-ringed-site-module-cup-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0BKV and 0FPK; final direct equality of the two tensor-cocycle sheaf classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-cohomology-sheaves",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-kflat-map-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-ringed-derived-naive-cup-comparison",
+  "lem-sc-module-cup-shifted-unit-tensor",
+  "def-sfb-ringed-site-module-cup-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0BKV, 0G7D and 0FPK: explicit edge and chosen-cocycle argument assembling these results"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "edgeMap|edge_map|cupProduct|cup_product",
+   "results": "{\"t\": \"2026-10-23T21:01:38Z\", \"tool\": \"grep\", \"query\": \"edgeMap|edge_map|cupProduct|cup_product\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, HomologicalComplex.homology",
+   "results": "{\"t\": \"2026-10-23T21:01:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, HomologicalComplex.homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of a complex of sheaves canonical edge map to sections of cohomology sheaf tensor cocycles",
+   "results": "{\"t\": \"2026-10-23T21:01:44Z\", \"tool\": \"leanfinder\", \"query\": \"cohomology of a complex of sheaves canonical edge map to sections of cohomology sheaf tensor cocycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.leftHomologyData_π_hom_apply\", \"groupCohomology.π\", \"CochainComplex.HomComplex.leftHomologyData'_H_coe\", \"CochainComplex.HomComplex.CohomologyClass\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\", \"CochainComplex.HomComplex.leftHomologyData'_π\", \"groupCohomology.toCocycles_comp_isoCocycles₂_hom_apply\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom\"], \"digest\": \"edec8c154f7ebf50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "hypercohomology edge to global sections of cohomology sheaf compatible with derived tensor pairing",
+   "results": "{\"t\": \"2026-10-23T21:04:36Z\", \"tool\": \"leansearch\", \"query\": \"hypercohomology edge to global sections of cohomology sheaf compatible with derived tensor pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.termΓ(_,_)\", \"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.Sheaf.coneΓ\", \"CategoryTheory.GrothendieckTopology.OneHypercover.amalgamate\", \"SheafOfModules.unitHomEquiv_comp_apply\"], \"digest\": \"03996d7871528072\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "map from cohomology of global sections to global sections of cohomology sends tensor cycles to their sheaf classes",
+   "results": "{\"t\": \"2026-10-23T21:04:38Z\", \"tool\": \"leanfinder\", \"query\": \"map from cohomology of global sections to global sections of cohomology sends tensor cycles to their sheaf classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.HomComplex.leftHomologyData_π_hom_apply\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"groupCohomology.cocyclesIso₀_hom_comp_f_apply\", \"CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\"], \"digest\": \"554bf458774c419b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H",
+   "results": "{\"t\": \"2026-10-23T21:04:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|edgeMap|edge_map|cup_product|cupProduct",
+   "results": "{\"t\": \"2026-10-23T21:04:38Z\", \"tool\": \"grep\", \"query\": \"hypercohomology|edgeMap|edge_map|cup_product|cupProduct\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state the ringed-site hypercohomology edge compatibility; underived sections, abelian Ext presheaves and abstract homology maps do not identify this derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "edgeMap|edge_map|hypercohomology|cupProduct|cup_product",
+   "results": "{\"t\": \"2026-10-23T21:49:16Z\", \"tool\": \"grep\", \"query\": \"edgeMap|edge_map|hypercohomology|cupProduct|cup_product\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, HomologicalComplex.homology",
+   "results": "{\"t\": \"2026-10-23T21:49:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, HomologicalComplex.homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed site hypercohomology edge to global sections of cohomology sheaf preserves tensor pairing",
+   "results": "{\"t\": \"2026-10-23T21:49:16Z\", \"tool\": \"leansearch\", \"query\": \"Ringed site hypercohomology edge to global sections of cohomology sheaf preserves tensor pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.Γ\", \"AlgebraicGeometry.LocallyRingedSpace.Γ_obj\", \"AlgebraicGeometry.LocallyRingedSpace.Γ_def\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom\", \"AlgebraicGeometry.StructureSheaf.to_global_factors_apply\", \"AlgebraicGeometry.StructureSheaf.to_global_factors\", \"AlgebraicGeometry.Scheme.ΓSpecIso\"], \"digest\": \"259beef209c4a1d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ringed site hypercohomology to sections of cohomology sheaf is compatible with derived tensor cup products",
+   "results": "{\"t\": \"2026-10-23T21:49:17Z\", \"tool\": \"leanfinder\", \"query\": \"Ringed site hypercohomology to sections of cohomology sheaf is compatible with derived tensor cup products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate\", \"CategoryTheory.GrothendieckTopology.OneHypercover.f_glueMorphisms_assoc\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply\", \"groupCohomology.toCocycles_comp_isoCocycles₁_hom\"], \"digest\": \"c7cc21eaae0457eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|hypercohomology|edgeMap|edge_map",
+   "results": "{\"t\": \"2026-10-23T21:50:15Z\", \"tool\": \"grep\", \"query\": \"cupProduct|cup_product|hypercohomology|edgeMap|edge_map\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of global sections maps to sections of the cohomology sheaf and preserves products of cycles",
+   "results": "{\"t\": \"2026-10-23T21:50:18Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of global sections maps to sections of the cohomology sheaf and preserves products of cycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.π_map_apply\", \"CochainComplex.HomComplex.leftHomologyData_π_hom_apply\", \"CategoryTheory.PresheafOfGroups.OneCochain.mul_ev\", \"groupCohomology.π_map\", \"groupCohomology.π_comp_H0Iso_hom\", \"groupCohomology.cocyclesIso₀_hom_comp_f_apply\", \"CochainComplex.HomComplex.leftHomologyData'_π\", \"groupCohomology.cocyclesIso₀_inv_comp_iCocycles_apply\"], \"digest\": \"a339fcf89d6f64a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: source read; the hits give ordinary tensor, adjunction lax structure, or generic derived comparison separately, not their ringed-topos derived/naive cup compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-relative-cup-sections",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Reviewer-added input for lem-sfb-abelian-coherent-exterior-base-change steps 6-8: identification of the relative cup product on higher direct images with the global cup product over affine opens, and its compatibility with base change. Supporting input for this split: Tensor compatibility of the hypercohomology-to-sheaf-cohomology edge.",
+   "via": [
+    "lem-sfb-space-affine-relative-cup-sections",
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-hypercohomology-edge-tensor",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Proved representative independence with K-injective homotopy comparison, used existing 0G7D factorization to retain chosen global cycles in flat-term K-flat representatives, and compared both tensor classes through the derived/naive cup diagram. One new general ringed-topos 0FPK lemma, not an edge assertion. No boundedness, final object, flatness, or quasi-coherence added.",
+  "blueprint": "Auxiliary tensor-edge input to the relative cup comparison in the alteration/Picard chain recorded in blueprint.from.place. Realizes the tensor compatibility used by lem-sfb-space-affine-relative-cup-sections, beneath the direct-image step of sk-thm-sf-ctf-stability. The ancestor command reports null; retained that ancestry and filled same_as after whole-blueprint searches.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective existence on a small ringed site, needed to define the edge; no such infrastructure theorem is in this unit."
+   },
+   {
+    "node": "lem-pur-kflat-map-factorization",
+    "why": "Generic 0G7D factorization retaining a chosen global cycle in a K-flat model; does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic canonical flat-term K-flat tensor model and naturality; needed to identify Tot(P tensor Q) with the specified derived tensor."
+   },
+   {
+    "node": "lem-sc-module-cup-shifted-unit-tensor",
+    "why": "Generic module-complex tensor normalization for maps from shifted free units, valid over every ring; checks the actual pure tensor under derived-to-ordinary comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-kflat-map-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sc-module-cup-shifted-unit-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-b05e90fe1",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-b05e90fe1 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. Item statement and stmt_deps are byte-identical to the live and side-live clones; the item is still unsplit there and has no repair note, so this is a first split. Sources read: Stacks 0BKV lemma-sheafification-cohomology l.4349, 0FPJ section-cup-product l.8205, 0FPK lemma-cup-compatible-with-naive l.8244. The new node lem-sfb-ringed-derived-naive-cup-comparison states exactly the 0FPK diagram: the left column is the derived-to-ordinary map followed by the naive cup, the right column is the 0B6C cup c followed by Rf_* of the derived-to-ordinary map, and β is the canonical f_*→Rf_*. It holds for an arbitrary ringed-topos morphism, with c equal to the def node's adjoint of μ∘(ε⊗ε). The node is statement-only and self-contained. It has no edge or cohomology clause, so it does not restate the item. No duplicate: the lem-sc-module-cup-* nodes cover only a scheme's Γ(X,-), and the affine-relative-cup node is a different statement. Steps: step 1 (ker/im edge on compatible families, naturality and homotopy invariance) is correct. In step 2, K-injective existence, RΓ defined as Γ of a K-injective representative, and the Hom-into-K-injective lemma give independence and naturality. In step 3, the 0G7D statement applied to t:O[-a]→I gives z−r(z̃)=d h^a(1), since h^{a+1}d_D=0. Step 4: the descent iso is ρ_{P,Q}; the left route of 0FPK yields the cup by naturality of κ and c; the shifted-free-unit tensor lemma (or naturality of ρ) gives [z̃⊗w̃] on the non-K-flat ΓP,ΓQ. Step 5 matches the def's κ on flat-term K-flat representatives. Small cases checked: the point site, zero inputs and no final object for the item, and f=id for the new node. The four tool_uses are generic infrastructure and are accepted. Batch-5 flag: def-sfb-ringed-site-module-cup-product is a general definition that reaches def-trf-algebraic-space only through its sentence applying it to étale sites. It is not a step of the trace formula or of PD, and the item already cited it on the base, so it adds nothing to the closure; accepted. Advisory: step 3 does not cite def-pc-flat-sheaf-modules directly (the check is elementary). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedHypercohomologyEdgeTensor",
+  "declaration": "SheafOfModules.RingedSiteCup.hypercohomologyEdge_tensor",
+  "declarations": [
+   "SheafOfModules.RingedSiteCup.HypercohomologyEdgeSpec",
+   "SheafOfModules.RingedSiteCup.hypercohomologyEdge_existsUnique",
+   "SheafOfModules.RingedSiteCup.hypercohomologyEdge",
+   "SheafOfModules.RingedSiteCup.hypercohomologyEdge_tensor"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedHypercohomologyEdgeTensor.lean",
+  "statement": "theorem hypercohomologyEdge_tensor (X : RingedTensorCorner.{u, w}) (b : RingedTensorModel X) (K L : X.mateDerived) (a d : ℕ) (x : (scalarCohomology X (a : ℤ)).obj ((derivedGlobalSections X).obj K)) (y : (scalarCohomology X (d : ℤ)).obj ((derivedGlobalSections X).obj L)) : (hypercohomologyEdge X ((a : ℤ) + (d : ℤ))).app (X.tensor.obj (K, L)) ((scalarCohomology X ((a : ℤ) + (d : ℤ))).map (global X b K L) ((scalarPairing X ((derivedGlobalSections X).obj K) ((derivedGlobalSections X).obj L) (a : ℤ) (d : ℤ)) (TensorProduct.tmul (scalars X) x y))) = (λ_ (SheafOfModules.unit ((sheafCompose X.topology (forget₂ CommRingCat RingCat)).obj X.ring))).inv ≫ (((hypercohomologyEdge X (a : ℤ)).app K x) ⊗ₘ ((hypercohomologyEdge X (d : ℤ)).app L y)) ≫ cohomologyPairing X b K L (a : ℤ) (d : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45fe6b41a",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Only the item's lean field and one new module RingedHypercohomologyEdgeTensor.lean changed; stmt_dep records are byte-identical to side-live and lean.statement is verbatim. The edge hypercohomologyEdge is a natural transformation RΓ⋙Hⁿ⟶Hⁿ⋙Γ in every integer degree, pinned by a ∃! cocycle condition on every K-injective representative (unit via rightDerivedFunctorUnitQ, canonical homologyFunctorFactors); the ∃! is true because every object has a K-injective model, the unit is invertible there and homologyπ is surjective. The tensor equation uses the dependency's global, scalarPairing and cohomologyPairing with the same model b on both sides; the right side λ⁻¹≫(e(x)⊗ₘe(y))≫κ is exactly the map Γ⊗_AΓ→Γ(⊗) followed by Γ(κ); a,b≥0 become ℕ with ℤ casts. No boundedness, flatness, final-object or universe assumption added. The only existing edge (HypercohomologyLeftEdge) is for ℕ-indexed complexes in the Plus category and cannot express the unbounded edge. Docstrings carry the source place, blueprint id and node steps 1-5; both theorems are sorry; the report has both required sections. No compile run because nothing was changed."
+ }
+}

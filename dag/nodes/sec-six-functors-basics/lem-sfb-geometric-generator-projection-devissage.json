@@ -1,0 +1,479 @@
+{
+ "id": "lem-sfb-geometric-generator-projection-devissage",
+ "kind": "statement",
+ "title": "Geometric norm projection by finite supported-lattice devissage",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, a separable closure $k^s$, and a separated finite-type $k$-scheme $X$. Put $T=X\\times_k k^s$ and let $u:T\\to X$ be projection. Fix a normed algebraic closure $\\Omega/\\mathbf Q_\\ell$ and a finite intermediate field $E$, with the restricted norm. On profinite sets set $A(P)=C(P,E)$ and $B(P)=C(P,\\Omega)$, using all continuous maps [def-sfb-continuous-map-condensed-ring]. Put $R_Z=p_Z^*R$ for $R=A,B$ and $Z=X,T$, use internal modules, ordinary derived categories and K-flat derived tensor [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories, sk-def-sfb-derived-tensor-hom]. Let $V\\in D(\\operatorname{Mod}_{A_X})$ be bounded constructible in the finite constant local model convention [sk-def-sfb-constructible], and put $V^s=u^*V$ using the module pullback [sk-def-sfb-module-derived-pushpull].\n\nThe complex $V^s$ belongs to $\\Dbc(T,E)$ in that same convention. It belongs to the subcategory obtained by finitely many cones and integer shifts from the supported lattice objects\n$$Q=(i_!L_0)[1/\\ell]=A_T\\otimes_{O_T}i_!L_0,$$\nwhere $O(P)=C(P,\\mathcal O_E)$, $\\mathcal O_E=\\{x\\in E:|x|\\leq1\\}$, $i:S\\hookrightarrow T$ is constructible locally closed and $L_0$ is a lisse finite-rank $O_S$-module [def-weil-l-adic-coefficient-extension, def-sfb-lisse-coefficient-module]; $i_!$ is open extension by zero followed by closed pushforward [lem-weil-pbc-condensed-open-closed-recollement]. Writing $\\mathcal H_R=Rp_{T*,R}$ for derived geometric sections to condensed $R$-modules [sk-def-sfb-pullback-from-point, sk-def-sfb-module-derived-pushpull], the specified coefficient projection\n$$\\pi_{V^s}:B\\otimes_A^L\\mathcal H_A(V^s)\\longrightarrow\\mathcal H_B(B_T\\otimes_{A_T}^LV^s)$$\nis an isomorphism in $D(\\operatorname{Mod}_B)$. Here $\\pi_N$ is the transpose under $B\\otimes_A^L-\\dashv\\operatorname{Res}$ of $\\mathcal H_A(N)\\to\\operatorname{Res}\\mathcal H_B(B_T\\otimes^L_{A_T}N)$ induced by the scalar unit $n\\mapsto1\\otimes n$ and the canonical comparison with exact restriction. These maps are natural in $N$ and commute with the canonical shifts and connecting morphisms of distinguished triangles. The assertion includes empty $X$ and $V=0$ and assumes neither completeness of $\\Omega$ nor flatness of $A\\to B$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); agent refinement of returned steps 4-5; finite lattice generator argument, exact norm projection reference WANTED"
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-pullback-from-point",
+  "def-sfb-condensed-point-modules-geometric-base-change",
+  "def-sfb-supported-lattice-norm-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Base change of the separated finite-type structure morphism along $\\operatorname{Spec}k^s\\to\\operatorname{Spec}k$ makes $T$ separated and finite type over $k^s$. Both $X$ and $T$ are qcqs. The field $k^s$ is separably closed of characteristic $p\\ne\\ell$, so it is an allowed standing base field for finite-$E$ lattice generation and for the supported norm-projection theorem. No finite-type hypothesis on $u:T\\to X$ is needed.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T4, lemma-base-change-finite-type; schemes.tex Tag 01KU, lemma-separated-permanence (3)."
+   }
+  },
+  {
+   "text": "Exactness of module inverse image and its exact termwise derived factorization give $H^q(u^*V)\\cong u^*H^q(V)$. Thus the same finite cohomological interval bounds $V^s$. Apply finite-constant-model pullback to each $H^q(V)$ with coefficient $\\underline E=A$: its pulled strata and covers, with the same finitely presented $E$-modules, give constructibility on $T$. Hence $V^s\\in\\Dbc(T,E)$ in precisely the asserted convention.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-pullback-constant-model-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
+    "place": "Exactness and sums; Constructible complexes, finite-E case."
+   }
+  },
+  {
+   "text": "Apply clause (1) of integral-model generation over the standing field $k^s$ to $V^s$. It gives a finite cone-and-shift expression with leaves $(i_!L_0)[1/\\ell]=A_T\\otimes_{O_T}i_!L_0$. These are the generators in the question: the coefficients are the pulled-back norm-topological $E$ and $\\mathcal O_E$, and lisse means pro-etale locally finite free, allowing variable rank and zero. A field is Noetherian since its only ideals are zero and the unit ideal; finite type therefore makes $T$ Noetherian, so closed subsets of its underlying space satisfy the minimal condition, equivalently the descending-chain condition. Every subset of its underlying space is therefore quasi-compact. In particular opens and complements of closed subsets are quasi-compact opens; their intersections show that every locally closed stratum in that theorem is constructible. The convention for $i_!$ is the exact open-then-closed extension used there; the stated recollement functors give this convention for our bounded-below generators.",
+   "uses": [
+    "det-lem-integral-models-generators",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Clause (1), finite-E supported integral lattice generation."
+   }
+  },
+  {
+   "text": "Put $s=\\operatorname{Spec}k^s$ and $t:T\\to s$. Apply scalar-mate thick closure to $t$ and $A_s\\to B_s$. Its $\\beta_{t,N}$ is the counit mate; after exact scalar restriction it is the specified projection transformation, with its canonical shift and connecting squares. Field/action derived-section transport over $k^s$, taking its separable closure to be itself, has trivial Galois group. It identifies $D(E_R)Rt_{*,R}$ with $\\mathcal H_R$ and identifies this counit mate with the scalar-unit-transpose $\\pi_N$ in the question. The equivalences preserve scalar units, restriction, input morphisms and shifts; since they are exact, their termwise derived functors preserve distinguished triangles. Therefore $\\pi$ is natural and its components form morphisms of distinguished triangles, including the connecting squares. Invertibility is preserved and reflected by these equivalences, so the isomorphism locus for $\\pi_N$ contains zero and is closed under isomorphisms, all integer shifts and cones. This argument uses ordinary K-flat tensor and exact scalar restriction, with no flatness of $A\\to B$.",
+   "uses": [
+    "lem-sfb-derived-scalar-mate-thick-locus",
+    "lem-sfb-field-action-derived-section-transport",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-extracted formal geometric coefficient-projection assembly; trivial-Galois specialization of existing field/action transport and thick-locus statements."
+   }
+  },
+  {
+   "text": "For every leaf $Q$ in step 3 apply supported-lattice norm projection with $K=k^s$, the same $E\\subset\\Omega$, the same immersion into $T$, and the same $L_0$. Its map is expressly the transpose of the scalar unit followed by the exact restriction comparison, hence is exactly $\\pi_Q$, not merely an unspecified isomorphism of its source and target. Thus every leaf lies in the locus of step 4.",
+   "uses": [
+    "lem-sfb-supported-lattice-norm-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-extracted supported-lattice norm projection obligation; reuse the existing supported-lattice theorem, not a claim that the paragraph proves it."
+   }
+  },
+  {
+   "text": "Induct on the finite cone-and-shift expression of step 3. The leaves satisfy the assertion by step 5, zero does by step 4, and shifting or replacing an object by an isomorphic one preserves it by step 4. At a cone node the two already constructed components of the morphism of distinguished triangles from step 4 are invertible; two-out-of-three for triangle morphisms makes the third component invertible. This proves that $\\pi_{V^s}$ is invertible. The naturality and shift/connecting compatibility were proved for all $N$ in step 4 and therefore apply to $V^s$. If $V=0$ or $X$ is empty, then $V^s=0$; both functors take it to zero and its unique comparison is the zero-object isomorphism. None of these steps completes $\\Omega$ or replaces all continuous functions by finite-subextension-valued functions.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), finite triangulated devissage; agent induction on the existing finite cone expression."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-qcqs-over-affine",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-pullback-constant-model-constructible",
+  "det-lem-integral-models-generators",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sfb-derived-scalar-mate-thick-locus",
+  "lem-sfb-field-action-derived-section-transport",
+  "lem-sfb-supported-lattice-norm-projection",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); agent assembly of finite lattice generation and normalized coefficient projection, not a claim that this paragraph proves norm coefficient exchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(proetale|pro.etale).*(projection|cohomology)|(projection|cohomology).*proetale",
+   "results": {
+    "t": "2026-10-22T06:02:44Z",
+    "tool": "grep",
+    "query": "(proetale|pro.etale).*(projection|cohomology)|(projection|cohomology).*proetale",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Condensed\"",
+   "results": {
+    "t": "2026-10-22T06:02:45Z",
+    "tool": "loogle",
+    "query": "\"DerivedCategory\", \"Condensed\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient projection for constructible pro etale complexes is an isomorphism if it is an isomorphism on supported integral lattice generators",
+   "results": {
+    "t": "2026-10-22T06:02:45Z",
+    "tool": "leansearch",
+    "query": "Coefficient projection for constructible pro etale complexes is an isomorphism if it is an isomorphism on supported integral lattice generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.pOpcyclesIso",
+     "CochainComplex.isLE_of_iso",
+     "CochainComplex.isStrictlyGE_of_iso",
+     "CochainComplex.isIso_ιTruncLE_iff",
+     "CochainComplex.IsLE",
+     "CochainComplex.isIso_πTruncGE_iff",
+     "HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported",
+     "CochainComplex.isStrictlyLE_of_iso"
+    ],
+    "digest": "44f7ecc029e3ecd6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived tensor with the condensed normed algebraic closure commutes with geometric pro etale cohomology of bounded constructible l adic complexes by lattice generator devissage",
+   "results": {
+    "t": "2026-10-22T06:02:54Z",
+    "tool": "leanfinder",
+    "query": "Ordinary derived tensor with the condensed normed algebraic closure commutes with geometric pro etale cohomology of bounded constructible l adic complexes by lattice generator devissage",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf"
+    ],
+    "digest": "b28372053a4ff1b5"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(proetale|pro.etale|[Cc]ondensed).*(projection|[Cc]onstructible)|(projection|[Cc]onstructible).*proetale",
+   "results": {
+    "t": "2026-10-22T06:05:28Z",
+    "tool": "grep",
+    "query": "(proetale|pro.etale|[Cc]ondensed).*(projection|[Cc]onstructible)|(projection|[Cc]onstructible).*proetale",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "8af47d7ab76bbf47"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"projection\"",
+   "results": {
+    "t": "2026-10-22T06:05:29Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"projection\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible E sheaf on a separably closed scheme satisfies the norm coefficient projection theorem using a finite sequence of lattice supported cones and shifts",
+   "results": {
+    "t": "2026-10-22T06:05:45Z",
+    "tool": "leanfinder",
+    "query": "A bounded constructible E sheaf on a separably closed scheme satisfies the norm coefficient projection theorem using a finite sequence of lattice supported cones and shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+     "LightCondMod.ofSheafLightProfinite",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "CondensedMod.ofSheafProfinite"
+    ],
+    "digest": "5f5485ae64de1ad8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic modules, condensed free modules, or underived restriction; none states this pro-etale derived assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Condensed\"",
+   "results": {
+    "t": "2026-10-23T04:17:16Z",
+    "tool": "loogle",
+    "query": "\"DerivedCategory\", \"Condensed\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern general complexes, ordinary condensed constructions or site adjunctions, not finite supported-lattice generation together with norm-coefficient geometric projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible pro etale complexes over a finite extension of Q_l are finitely generated by supported integral lattices and satisfy continuous norm coefficient projection",
+   "results": {
+    "t": "2026-10-23T04:17:21Z",
+    "tool": "leanfinder",
+    "query": "Bounded constructible pro etale complexes over a finite extension of Q_l are finitely generated by supported integral lattices and satisfy continuous norm coefficient projection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRham",
+     "BDeRhamPlus",
+     "Condensed.finFree",
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteFree",
+     "CondensedMod.ofSheafProfinite",
+     "Profinite.NobelingProof.Nobeling_aux",
+     "LocallyConstant.freeOfProfinite"
+    ],
+    "digest": "56329aa2a887cb73"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern general complexes, ordinary condensed constructions or site adjunctions, not finite supported-lattice generation together with norm-coefficient geometric projection."
+  },
+  {
+   "tool": "grep",
+   "query": "(proetale|pro.etale).*(projection|lattice)|(projection|lattice).*proetale",
+   "results": {
+    "t": "2026-10-23T04:17:21Z",
+    "tool": "grep",
+    "query": "(proetale|pro.etale).*(projection|lattice)|(projection|lattice).*proetale",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern general complexes, ordinary condensed constructions or site adjunctions, not finite supported-lattice generation together with norm-coefficient geometric projection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous coefficient extension commutes with pro etale geometric cohomology of bounded constructible E sheaves by finite supported lattice devissage",
+   "results": {
+    "t": "2026-10-23T04:18:24Z",
+    "tool": "leansearch",
+    "query": "Continuous coefficient extension commutes with pro etale geometric cohomology of bounded constructible E sheaves by finite supported lattice devissage",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val",
+     "LightCondensed.lanLightCondSet",
+     "Condensed.lanCondensedSet",
+     "Condensed.lanSheafProfinite",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val"
+    ],
+    "digest": "5b543aa905a36bf8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern general complexes, ordinary condensed constructions or site adjunctions, not finite supported-lattice generation together with norm-coefficient geometric projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient projection is an isomorphism on a bounded constructible complex if it is an isomorphism on integral supported lattice generators",
+   "results": {
+    "t": "2026-10-23T04:18:31Z",
+    "tool": "leanfinder",
+    "query": "The coefficient projection is an isomorphism on a bounded constructible complex if it is an isomorphism on integral supported lattice generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ComplexShape.Embedding.isIso_liftExtend_f_iff",
+     "HomologicalComplex.instIsIsoπTruncGEOfIsStrictlySupported",
+     "CochainComplex.exists_iso_single",
+     "HomologicalComplex.isIso_πTruncGE_iff",
+     "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+     "CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE",
+     "CochainComplex.isIso_πTruncGE_iff",
+     "HomologicalComplex.isSupported_of_iso"
+    ],
+    "digest": "813f9e29d17232af"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern general complexes, ordinary condensed constructions or site adjunctions, not finite supported-lattice generation together with norm-coefficient geometric projection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-condensed-finite-scalar-model",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric finite-E cohomology and coefficient projection before arithmetic descent; returned proof steps 4-5, geometric pullback, finite supported lattice generation and projection devissage",
+   "via": [
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometric-generator-projection-devissage",
+  "worker": "stage1",
+  "summary": "Q66: unchanged statement; exact module pullback gives bounded constructibility, existing integral generators give the finite expression, supported norm projection treats its leaves, and scheme scalar-mate thick closure transported through the trivial-Galois geometric-section equivalence proves the actual normalized point projection and its connecting compatibility. No new nodes or Lean files.",
+  "blueprint": "Paragraph (3) of the current direct-image stability proof: finite-E geometric coefficient-change obligation. The generator input is clause (1) of det-lem-integral-models-generators; no alternate coefficient topology or SGA route is used.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of internal module inverse image, needed to compute cohomology of u^* termwise; the direct-image unit does not prove this tool."
+   },
+   {
+    "node": "lem-sfb-pullback-constant-model-constructible",
+    "why": "Generic pullback of finite-constant coefficient models on qcqs schemes; applies to finite E without changing coefficient categories."
+   },
+   {
+    "node": "det-lem-integral-models-generators",
+    "why": "Existing finite integral-supported generation theorem, clause (1), supplies the finite expression used by the direct-image coefficient devissage."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic Noetherian-topology fact guarantees that the locally closed supported generators supplied by the existing theorem are constructible; no new generation theorem is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-pullback-constant-model-constructible",
+  "det-lem-integral-models-generators",
+  "lem-sfb-noetherian-space-compact-subsets"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-aeb957d1a",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-aeb957d1a (reviewer sub-agent of L); spot-checked: Read all of the item's 6 steps and every cited statement; the delivery has no new nodes and all 24 cited statements are identical to live. The item is still unsplit with no proof in live and side-live, so the delivery is not superseded; it is not a re-split order. No SGA source is cited. Step 1: base change (lem-pod-separated-finite-type-base-change) makes T separated and of finite type over k^s; qcqs-over-affine gives X and T qcqs. Step 2: module pullback is exact and derives termwise, so H^q(u^*V)=u^*H^q(V); pullback-constant-model applies with \\underline E for qcqs Y',Y, so V^s is in Dbc(T,E). Step 3: clause (1) of integral-models applies to the standing scheme T over k^s, and its a_! is the open-then-closed convention. Step 4: thick-locus for t:T→Spec k^s, then field-action transport with k:=k^s (trivial G), identifies the counit mate with the item's map π_N, so the locus where π is invertible is thick. Step 5: supported-lattice-norm-projection with K=k^s gives exactly π_Q on each generator. Step 6: induction on cones and shifts. Edge cases empty X, V=0, rank 0 and empty S all hold; no completeness of Ω or flatness of A→B is used. No cycle. No duplicate among the nodes searched (norm-algcl-cohomology-topology-comparison, finite-stage-devissage, algcl scalar-extension-constructible). FIX (C1): step 3 used 'T Noetherian ⇒ every subset of |T| is quasi-compact' without citing that a Noetherian scheme has a Noetherian underlying space. Added the Mathlib leaf lem-weil-pbc-noetherian-scheme-closed-subsets-minimal to step 3's uses and to proof_deps, with one clause of text. Accepted tool uses: module-pullback-exact-main, pullback-constant-model-constructible, integral-models-generators, noetherian-space-compact-subsets. Batch-5 check: the reached nodes def-pod-l-adic-representations (a general definition), lem-pod-derived-exact-square-composition (generic pasting lemma), lem-pd-sheaf-trilinear-universal (generic sheaf tensor property) and lem-pd-module-ringed-topos-derived-comparison (generic comparison of module formalisms, reached via rational proper base change) are not Poincaré duality, the trace formula, or steps of their proofs. A deeper search of the closures for theorem-level nodes in those chapters finds only generic results (cor-galois-lisse-representations, prop-constructible-truncations, thm-pd-spreading-out). All accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricGeneratorProjectionDevissage",
+  "declaration": "AlgebraicGeometry.ProEtale.geometric_generator_projection_devissage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.GeometricNormProjection.baseChangeQuasiCompact",
+   "AlgebraicGeometry.ProEtale.GeometricNormProjection.baseChangeLocallyOfFiniteType",
+   "AlgebraicGeometry.ProEtale.GeometricNormProjection.source",
+   "AlgebraicGeometry.ProEtale.GeometricNormProjection.target",
+   "AlgebraicGeometry.ProEtale.GeometricNormProjection.condensedExtensionCommShift",
+   "AlgebraicGeometry.ProEtale.geometric_generator_projection_devissage"
+  ],
+  "file": "lean/Sheaf/Paper/GeometricGeneratorProjectionDevissage.lean",
+  "statement": "theorem geometric_generator_projection_devissage (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (_hpℓ : p ≠ ℓ) (k ks : Type u) [Field k] [Field ks] [Algebra k ks] [IsSepClosure k ks] [CharP k p] (X : Scheme.{u}) (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] [QuasiCompact a] [IsSeparated a] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (E : IntermediateField ℚ_[ℓ] Ω) [FiniteDimensional ℚ_[ℓ] E] (V : DerivedCategory.{u + 2} (Modules (normCoefficients E).toMon X)) (_hV : constantModelBoundedConstructible (normCoefficients E).X X V) : constantModelBoundedConstructible (normCoefficients E).X (geometricScheme k ks X a) ((CondensedRing.moduleObjectDerivedPullback (normCoefficients E).X (geometricProjection k ks X a)).obj V) ∧ (∀ P : ObjectProperty (DerivedCategory.{u + 2} (Modules (normCoefficients E).toMon (geometricScheme k ks X a))), P.IsTriangulated → P.IsClosedUnderIsomorphisms → (∀ (S : Scheme.{u}) (i : S ⟶ geometricScheme k ks X a) (hi : IsImmersion i), Topology.IsConstructible (Set.range i) → ∀ L₀ : Modules (supportedLatticeIntegralRing ℓ E).toMon S, IsLisseCoefficientModule (supportedLatticeIntegralRing ℓ E).X L₀ → P (supportedRationalizedLattice ℓ E (Over.mk (pullback.snd a (Spec.map (CommRingCat.ofHom (algebraMap k ks))))) i hi L₀)) → P ((CondensedRing.moduleObjectDerivedPullback (normCoefficients E).X (geometricProjection k ks X a)).obj V)) ∧ IsIso (pointProjection (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a) (canonicalPointScalar (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a)) ((CondensedRing.moduleObjectDerivedPullback (normCoefficients E).X (geometricProjection k ks X a)).obj V)) ∧ ∃ π : GeometricNormProjection.source (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a) ⟶ GeometricNormProjection.target (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a), (∀ N : DerivedCategory.{u + 2} (Modules (normCoefficients E).toMon (geometricScheme k ks X a)), π.app N = pointProjection (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a) (canonicalPointScalar (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a)) N) ∧ NatTrans.CommShift π ℤ ∧ ∀ Δ : Triangle (DerivedCategory.{u + 2} (Modules (normCoefficients E).toMon (geometricScheme k ks X a))), Δ ∈ distTriang _ → (GeometricNormProjection.source (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a)).mapTriangle.obj Δ ∈ distTriang _ ∧ (GeometricNormProjection.target (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a)).mapTriangle.obj Δ ∈ distTriang _ ∧ ∃ m : (GeometricNormProjection.source (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a)).mapTriangle.obj Δ ⟶ (GeometricNormProjection.target (supportedLatticeNormInclusion ℓ E) (geometricScheme k ks X a)).mapTriangle.obj Δ, m.hom₁ = π.app Δ.obj₁ ∧ m.hom₂ = π.app Δ.obj₂ ∧ m.hom₃ = π.app Δ.obj₃",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "States all three conclusions and fixes every natural-transformation component to the existing canonical pointProjection. Helpers only name its source, target and canonical shifts. The two new definition nodes own the reused condensed point/geometric-base-change and supported norm lattice helpers; neither enclosing theorem is a statement prerequisite. The supported-lattice projection theorem remains a proof dependency. Lean unchanged from reviewed head 121e7b78597f; no completeness or coefficient-flatness assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-502b56fbe",
+  "group": "Q159",
+  "result": "fix",
+  "note": "Re-delivery after the 121e H2 RETURN. The item Lean is byte-identical to the reviewed head (sha a24e…122a), and the clause-by-clause match was re-confirmed: primes, CharP, IsSepClosure, separated finite type, incomplete normed algebraic closure Ω, finite E, all-continuous A and B, constant-model Dbc; conclusions are Dbc on T, finite cone/shift generation by constructible supported lisse lattices, IsIso of the canonical pointProjection, and π pinned componentwise with CommShift and triangle morphisms. Edge cases covered (empty X, V=0, rank 0, no completeness, no flatness). The two new existing-binding definition nodes (def-sfb-condensed-point-modules-geometric-base-change, def-sfb-supported-lattice-norm-coefficients) were read against the CondensedGaloisGlobalDescent and SupportedLatticeNormProjection source; signatures are verbatim and check_new_node returns [] for both. The item's stmt_deps are the 11 base nodes plus the 2 new nodes, with no theorem citations. F1 (H2): canonicalPointScalar, used in the IsIso clause and in pinning π, is owned only by the landed def-sfb-canonical-point-scalar-comparison, which the re-delivery dropped and left unreached. FIX: fixes/def-sfb-supported-lattice-norm-coefficients.json adds it to stmt_deps, with a TeX sentence and a note line. The fixed node passes check_new_node; the owner is reached via item→new node→owner, with no cycle. No Lean change, so no compile. Advisory: pointUnit_isMonHom is owned by the global-descent theorem node, and two live def nodes still cite that theorem."
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-asd-relative-framed-extension-pullback-square",
+ "kind": "statement",
+ "title": "Relative framed extension square under arbitrary inverse image",
+ "statement": "Let $i:Z\\hookrightarrow T$ and $i':Z'\\hookrightarrow T'$ be closed immersions [def-weil-closed-immersion] of schemes [def-pc-scheme] in a cartesian square [def-pc-fibre-product] with arbitrary maps $v:T'\\to T$ and $w:Z'\\to Z$. Identify their complementary opens by $T'\\setminus Z'=v^{-1}(T\\setminus Z)$. Let $G,G'$ be abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves] on $T,T'$ and $f:G\\to v_*G'$ a coefficient map. Let $(P,\\tau)$ be a $G$-torsor with a section on $T\\setminus Z$ [def-amb-torsor-with-section], and $Q$ a $G'$-torsor. Let $b:P(V)\\to Q(V\\times_TT')$ be a natural map, equivariant along $f$. Restrict $b(\\tau)$ to obtain $\\tau'$ on $T'\\setminus Z'$. The relative extension classes [lem-sp-relative-torsor-extension] satisfy $e^*[Q,\\tau']=\\bar f_*v^{-1}[P,\\tau]$, where $\\bar f:v^{-1}G\\to G'$ is adjoint to $f$ and $e:v^{-1}i_*\\mathbf Z_Z\\to i'_*\\mathbf Z_{Z'}$ is the canonical integral exchange map [lem-pur-relative-extension-cohomology-normalization]. No etaleness or flatness condition on $v$ and no exchange isomorphism are required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-amb-torsor-with-section",
+  "lem-sp-relative-torsor-extension",
+  "lem-pur-relative-extension-cohomology-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1, relative free torsor extension; refinement using Tag 0A45, etale-cohomology.tex, lemma-cohomology-with-support-triangle. This arbitrary-morphism square is the extension-morphism part of the normalization argument, not a verbatim Stacks assertion."
+ },
+ "proof": [
+  {
+   "text": "Choose a representing relative extension of the primed torsor and pulled complementary frame. The adjoint of integral exchange preserves supported one by the base-change unit identity. Compose b with the target extension map; equivariance gives compatibility of kernel maps, and the unit identity gives compatibility with the supported quotient.",
+   "uses": [
+    "lem-pur-relative-extension-cohomology-normalization",
+    "lem-sp-relative-torsor-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback of the complementary open is canonically isomorphic to the primed complementary open, for any base morphism. Restricting the composed torsor map there gives zero by the definition of the pulled frame. The relative extension morphism construction therefore gives a source representing extension and a morphism to the direct image of the primed extension. Adjunction identifies its two squares with the coefficient mate and integral exchange.",
+   "uses": [
+    "lem-pur-relative-extension-cohomology-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image preserves the source short extension. Apply ShortComplex.ShortExact.extClass_naturality to its adjoint morphism into the target extension. Rewrite mapped extension classes by Ext.mapExactFunctor_extClass, and identify both chosen extension classes with relativeExtension by their representing properties. Reverse the resulting equality.",
+   "uses": [
+    "lem-sp-relative-torsor-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The extension-morphism and extClass-naturality argument for Tag 03AJ with relative framing; the exchange map and its mate suffice without an inverse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The extension class of a relative framed torsor is natural under inverse image and change of coefficients",
+   "results": "Eight results about other cohomology and torsor constructions, with no exact framed relative extension theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extClass_naturality\"",
+   "results": "CategoryTheory.ShortComplex.ShortExact.extClass_naturality supplies the generic naturality theorem after a morphism of extensions has been constructed.",
+   "date": "2026-10-27",
+   "verdict": "generic API used"
+  },
+  {
+   "tool": "grep",
+   "query": "extClass_naturality|etaleIsoTorsorPullback|CartierPoleBoundarySpec",
+   "results": "Mathlib Algebra/Homology/DerivedCategory/Ext/ExtClass.lean, extClass_naturality at line 131. Local project has relative_extension_pullback with an etale hypothesis; its first extension-morphism argument is used in this generalization.",
+   "date": "2026-10-27",
+   "verdict": "generic API used, no geometric exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierPoleBoundaryPullback",
+  "date": "2026-10-27",
+  "group": "F9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "The relative Cartier class in the pullback argument: the integral framed extension commutes with inverse image, before the Kummer boundary.",
+   "via": [
+    "lem-asd-cartier-pole-boundary-pullback",
+    "lem-asd-supported-kummer-boundary-pullback",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeFramedExtensionPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFramedExtensionPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.relative_extension_pullback_square",
+  "statement": "theorem relative_extension_pullback_square {T Z T' Z' : Scheme.{u}}\n    (i : Z ⟶ T) [IsClosedImmersion i] (i' : Z' ⟶ T') [IsClosedImmersion i']\n    (h : T' ⟶ T) (w : Z' ⟶ Z) (sq : IsPullback w i' i h)\n    (hW : i'.openComplement = h ⁻¹ᵁ i.openComplement)\n    {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    {G' : Sheaf T'.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (f : G ⟶ (lowerStar AddCommGrpCat.{u + 1} h).obj G')\n    (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk i.openComplement.ι))\n    (Q : Sheaf.Torsor G')\n    (b : P.1.sheaf.obj ⟶ (MorphismProperty.Over.pullback @Etale ⊤ h).op ⋙ Q.sheaf.obj)\n    (hb : ∀ (V : T.Etaleᵒᵖ) (g : G.obj.obj V) (t : P.1.sheaf.obj.obj V),\n      b.app V (P.1.vadd V g t) =\n        Q.vadd (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj V.unop))\n          (f.hom.app V g) (b.app V t)) :\n    (Ext.mk₀ (relativeExtensionExchange i i' h w sq.toCommSq)).comp\n        (relativeExtension i' (relativeExtensionPulledFrame i i' h hW P Q b))\n        (zero_add 1) =\n      ((relativeExtension i P).mapExactFunctor (upperStar AddCommGrpCat.{u + 1} h)).comp\n        (Ext.mk₀ (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h).homEquiv _ _).symm f))\n        (add_zero 1)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-27"
+ },
+ "proof_deps": [
+  "lem-pur-relative-extension-cohomology-normalization",
+  "lem-sp-relative-torsor-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T123439-L-2299310",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T123439-L-2299310",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

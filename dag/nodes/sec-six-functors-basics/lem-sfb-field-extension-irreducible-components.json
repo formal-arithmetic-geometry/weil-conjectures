@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-field-extension-irreducible-components",
+ "kind": "statement",
+ "title": "Irreducible components under extension of the ground field",
+ "statement": "Let $k$ be a field [def-weil-field], $K/k$ a field extension [def-pc-field-extension], and $X$ a scheme over $k$ [def-weil-scheme-over-base]. Put $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ and let $p:X_K\\to X$ be the projection [def-pc-base-change, def-pc-fibre-product]. For every irreducible component $T\\subseteq |X|$ [def-weil-irreducible-components], the inverse image $p^{-1}(T)$ is nonempty and is a union of irreducible components of $X_K$. For every irreducible component $C$ of $X_K$, the actual set-theoretic image $p(C)$ is an irreducible component of $X$; the map $C\\mapsto p(C)$ is surjective onto the irreducible components of $X$. No finite-type, quasi-compactness, reducedness, algebraicity, or separability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 04KW (lemma-inverse-image-irreducible) and 04KX (lemma-image-irreducible); nonemptiness is stated in the final paragraph of the proof of 04KX."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "For any field extension E/F and F-scheme Y, the projection Y_E to Y is flat and surjective: apply flatness and surjectivity of Spec E to Spec F and their stability under base change. A component has a generic point by sobriety. In a scheme, a point is component-generic exactly when it has no proper generalization: a generalization of a component-generic point has irreducible closure containing that component, hence the same closure and the same point by sobriety; conversely place the closure of the point inside a component and use its generic point. We will use this criterion throughout. Each component-generic point w of Y_E maps to a component-generic point of Y: if z' is a generalization of z=r(w), generalizations lift along the flat map r, giving a generalization w' of w with r(w')=z'; the criterion gives w'=w, so z'=z, and the criterion makes z component-generic. These assertions apply without any finiteness assumptions.",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-scheme-sober",
+    "lem-sc-irreducible-components-cover",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 04KW and 04KX, generic-point arguments; generalizations lift along flat morphisms, Morphisms Tag 03HV (lemma-generalizations-lift-flat)"
+   }
+  },
+  {
+   "text": "Fix a component T of X, with generic point eta. Choose a closed subscheme i:Z to X whose image is T. Its field base change Z_K to X_K is a closed immersion. Its image is exactly p^{-1}(T): one inclusion follows from the commuting square; for the converse a point w of X_K above t in T gives Spec kappa(w) to X factoring through Z. Indeed, locally i is Spec(A/I) to Spec A and the prime for t contains I, so A to kappa(w) kills I. Pair this factorization with Spec kappa(w) to Spec K in the fibre-product universal property. Thus |Z_K| is identified with p^{-1}(T). Flatness is not needed for this identification.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KW, interpretation of T_K as the inverse image; Schemes Tags 01J3 and 01K1"
+   }
+  },
+  {
+   "text": "Let B be an irreducible component of Z_K and xi its generic point. Applying the generic-point image assertion from step 1 to the K/k extension of Z shows that xi maps to eta, since Z is irreducible. If xi' is a generalization of xi in X_K, its image generalizes eta. By the criterion of step 1, eta has no proper generalization in X, so p(xi')=eta and xi' lies in p^{-1}(T)=|Z_K|. The subspace topology of the closed immersion makes it a generalization there as well. Since xi is component-generic in Z_K, xi'=xi. The criterion now makes xi component-generic in X_K, and closedness of |Z_K| identifies the two closures of xi. Hence B is a component of X_K. The components cover Z_K, so p^{-1}(T) is a union of components of X_K. It is nonempty because p is surjective and T is nonempty.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-weil-pbc-scheme-sober",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-closed-immersion",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KW, entire proof; Tag 04KX, final paragraph"
+   }
+  },
+  {
+   "text": "First prove the image assertion when E/F is algebraic, for an arbitrary F-scheme Y. The map Spec E to Spec F is integral: an algebraic element satisfies a nonzero polynomial over a field, and division by its leading coefficient makes the equation monic. Its base change r:Y_E to Y is integral, hence universally closed, in particular closed. For a component B of Y_E with generic point xi, step 1 makes r(xi) component-generic in Y. Let T be its component. Continuity gives r(B) contained in the closure of {r(xi)}, namely T. Closedness of r gives the reverse inclusion since r(B) contains r(xi). Therefore the actual image r(B), not just its closure, equals T.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sbc-integral-morphism-base-change",
+    "pqf-lem-integral-univclosed",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-weil-pbc-scheme-sober",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KX, second proof paragraph; Morphisms Tags 01WL and 01WM"
+   }
+  },
+  {
+   "text": "For an algebraic extension E/F, the component map just constructed is surjective. Given a component T of Y, steps 2--3 give a nonempty union of components inside r^{-1}(T). Choose one, B. Step 4 makes r(B) a component, and r(B) is contained in T. Maximality of an irreducible component forces r(B)=T. This argument also covers algebraic extensions of infinite degree.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KX, final proof paragraph"
+   }
+  },
+  {
+   "text": "We also need the component bijection over a separably closed field F. If E/F is any extension and Y is an F-scheme, the fibre of r:Y_E to Y at y is Spec(kappa(y) tensor_F E): compose the fibre-product universal properties and then use the affine-spectrum tensor description. The field-tensor lemma makes this fibre irreducible and nonempty because F is separably closed. The scheme-theoretic fibre has the topology of r^{-1}(y), and r is open because schemes over a field are universally open. The continuous open-map theorem with irreducible fibres therefore gives mutually inverse maps B maps to r(B) and T maps to r^{-1}(T) on components. In particular these are actual images. This proves the comparison needed below using the existing tensor and topological lemmas, rather than introducing a node for a clause of the item.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-weil-residue-field",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-field-tensor-irreducible",
+    "lem-sc-scheme-over-field-universally-open",
+    "lem-sc-open-map-irreducible-fibres-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KX, first proof paragraph, using Tag 038F and lemma-separably-closed-field-irreducible-components; Algebra Tag 00I7"
+   }
+  },
+  {
+   "text": "Return to arbitrary K/k. Choose an algebraic closure Omega of K and let A be the subfield of elements of Omega algebraic over k. The relative-algebraic-closure lemma makes A algebraically closed, hence separably closed: a nonconstant polynomial splits into linear factors by successive root extraction and division, so in particular every separable polynomial splits. We have compatible inclusions k into A into Omega and K into Omega. Write a:X_Omega to X_K, b:X_Omega to X_A, and c:X_A to X. Fibre-product functoriality gives p composed with a = c composed with b. For a component C of X_K, step 5 for the algebraic extension Omega/K provides a component D of X_Omega with a(D)=C. Step 6 over A makes b(D) a component of X_A. Step 4 for the algebraic extension A/k makes c(b(D)) a component of X. The commuting equality gives p(C)=p(a(D))=c(b(D)), proving the actual-image assertion for every C.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-pbc-relative-algebraic-closure-algclosed",
+    "def-weil-algebraic-closure",
+    "def-kun-separably-closed",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KX, first proof paragraph, with algebraic closures instead of separable closures; Fields Tags 09GT, 09GJ and 09GR"
+   }
+  },
+  {
+   "text": "Finally, for a component T of X choose a component C contained in the nonempty union p^{-1}(T) from step 3. Step 7 makes p(C) a component of X contained in T, so maximality gives p(C)=T. Thus C maps to p(C) is a well-defined surjection on components. If X is empty, both component sets are empty and the assertion about individual T is vacuous.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KX, final proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-scheme-sober",
+  "lem-sc-irreducible-components-cover",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "lem-sbc-integral-morphism-base-change",
+  "pqf-lem-integral-univclosed",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-field-tensor-irreducible",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-sc-open-map-irreducible-fibres-components",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-relative-algebraic-closure-algclosed",
+  "def-weil-algebraic-closure",
+  "def-kun-separably-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 04KW and 04KX, proofs; the comparison square uses algebraic closures in place of separable algebraic closures."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The irreducible components under base change by an algebraic field extension map onto irreducible components",
+   "results": "Search returned 8 hits: preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, Polynomial.Separable.map_irreducible_of_isPurelyInseparable, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, image_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, Ideal.map_equiv_liesOver, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general component maps require irreducible fibres; field extensions can have reducible residual fibres. Integral base-change stability alone does not state either assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"pullback\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: general component maps require irreducible fibres; field extensions can have reducible residual fibres. Integral base-change stability alone does not state either assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Field base change of a scheme sends irreducible components onto irreducible components and inverse images of components are unions of components",
+   "results": "Search returned 8 hits: AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, WeierstrassCurve.Affine.Point.map_baseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, image_mem_irreducibleComponents_of_isPreirreducible_fiber, preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: general component maps require irreducible fibres; field extensions can have reducible residual fibres. Integral base-change stability alone does not state either assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme over a field and an algebraic field extension, each irreducible component upstairs maps onto an irreducible component downstairs",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.IsDominant, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.irreducibleSpace_of_isIntegral, image_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the general topological component-image theorem assumes irreducible fibres; the geometric component equivalence has the same restriction and field-extension residual fibres can split"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|GeometricallyIrreducible",
+   "results": "Actual hits: Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the general topological component-image theorem assumes irreducible fibres; the geometric component equivalence has the same restriction and field-extension residual fibres can split"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|irreducibleComponent",
+   "results": "Actual hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the general topological component-image theorem assumes irreducible fibres; the geometric component equivalence has the same restriction and field-extension residual fibres can split"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"pullback\"",
+   "results": "0 actual hits: ; digest 4f53cda18c2baa0c. Read Topology/Irreducible.lean:469--519 and AlgebraicGeometry/Geometrically/Irreducible.lean:73--93: component image/preimage results require irreducible fibres; a general field extension can split fibres (C/R). No match for the unrestricted statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme over a field and arbitrary field extension, images of irreducible components are irreducible components and every component is reached",
+   "results": "8 actual hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.IsDominant, AlgebraicGeometry.irreducibleSpace_of_isIntegral, image_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral; digest d450e2c7452a78d2. Read Topology/Irreducible.lean:469--519 and AlgebraicGeometry/Geometrically/Irreducible.lean:73--93: component image/preimage results require irreducible fibres; a general field extension can split fibres (C/R). No match for the unrestricted statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Irreducible components of a scheme under arbitrary extension of the ground field map surjectively onto irreducible components",
+   "results": "8 actual hits: irreducibleComponents, preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, irreducibleComponentsEquivOfIsPreirreducibleFiber, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, image_mem_irreducibleComponents_of_isPreirreducible_fiber; digest 4b9a6cc955ef6b12. Read Topology/Irreducible.lean:469--519 and AlgebraicGeometry/Geometrically/Irreducible.lean:73--93: component image/preimage results require irreducible fibres; a general field extension can split fibres (C/R). No match for the unrestricted statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|GeometricallyIrreducible",
+   "results": "15 actual hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; digest bba4e6971d769fad. Read Topology/Irreducible.lean:469--519 and AlgebraicGeometry/Geometrically/Irreducible.lean:73--93: component image/preimage results require irreducible fibres; a general field extension can split fibres (C/R). No match for the unrestricted statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|irreducibleComponent",
+   "results": "25 actual hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; digest a89d8485448d331e. Read Topology/Irreducible.lean:469--519 and AlgebraicGeometry/Geometrically/Irreducible.lean:73--93: component image/preimage results require irreducible fibres; a general field extension can split fibres (C/R). No match for the unrestricted statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of an irreducible component under extension of the base field is a nonempty union of irreducible components",
+   "results": "8 actual hits: preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, image_mem_irreducibleComponents_of_isPreirreducible_fiber, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, Algebra.HasGoingDown.iff_generalizingMap_primeSpectrumComap, AlgebraicGeometry.Polynomial.comap_C_mem_imageOfDf, irreducibleComponentsEquivOfIsPreirreducibleFiber, MvPolynomial.pointToPoint_zeroLocus_le; digest 6e06970d0ac46a96. Read Topology/Irreducible.lean:469--519 and AlgebraicGeometry/Geometrically/Irreducible.lean:73--93: component image/preimage results require irreducible fibres; a general field extension can split fibres (C/R). No match for the unrestricted statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-local-minimal-prime",
+  "date": "2026-10-23",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: The identity component and smooth reduction of a locally algebraic group. Input in the identity-component proof: local minimal primes and the neutral irreducible component, used before constructing the open identity subgroup; Stacks 047M second paragraph: descent of the neutral component from an algebraic closure, using inverse images and images of irreducible components (04KW, 04KX).",
+   "via": [
+    "lem-sfb-group-local-minimal-prime",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-extension-irreducible-components",
+  "worker": "stage1",
+  "summary": "Q157 proves the unrestricted 04KW--04KX statement in eight steps, retaining the actual-image and nonemptiness clauses. Existing flat generalization-lifting, tensor-irreducibility, open-map and integral-morphism nodes supply all inputs. No new nodes or Mathlib leaves; no additional hypotheses. No exact project attachment or Mathlib match was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: The identity component and smooth reduction of a locally algebraic group. Input in the identity-component proof: local minimal primes and the neutral irreducible component, used before constructing the open identity subgroup; Stacks 047M second paragraph: descent of the neutral component from an algebraic closure, using inverse images and images of irreducible components (04KW, 04KX).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-field-tensor-irreducible",
+    "why": "The general field-tensor irreducibility theorem supplies fibres over a separably closed field, a generic algebra tool outside the constructibility unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-field-tensor-irreducible"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-149f6efbf",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-149f6efbf (reviewer sub-agent of L); spot-checked: FIX. I read the whole item (statement unchanged, 8 steps, 0 new nodes) and Stacks varieties.tex 04KW and 04KX in full. The item matches the source. Nonemptiness comes from the last paragraph of the 04KX proof. The item is still unsplit in live and side-live, so no other group has superseded it. All 8 steps check out against the statements they cite. Step 3 is the 04KW argument. Step 4 gets the actual image from algebraic ⇒ integral (01WL), then universally closed (01WM), then closedness. Step 6 uses the 00I7 field-tensor node, openness (0383) and the open-map/irreducible-fibres lemma (037A). Step 7 builds the Ω ⊇ A square and applies step 5 to Ω/K, step 6 to Ω/A and step 4 to A/k; every hypothesis is met. Small cases (Spec C over R, k(t)⊗k(u), empty X, non-quasi-compact X) pass, and no duplicate exists. One fault was fixed (batch-5 flag, C7). Steps 1, 3 and 4 took the image of a generic point from lem-trf-field-extension-residual-generic-components, a node of sec-trace-formula. Its own proof uses only general commutative algebra, but the source's argument is 'generalizations lift along flat maps' (03HV), which the DAG already has as the Mathlib leaf lem-weil-pbc-flat-generalizations-lift. I replaced the citation with that leaf, wrote out the two-line deduction in step 1, set the step 1 source to 03HV, and removed the trf entry from tool_uses and proof_deps. The delivery now cites no trace-formula node. The remaining tool_uses entry, lem-weil-pbc-field-tensor-irreducible (generic 00I7), is accepted. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-field-extension-irreducible-components.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldExtensionIrreducibleComponents",
+  "declaration": "AlgebraicGeometry.field_extension_irreducible_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldExtensionIrreducibleComponents.lean",
+  "statement": "theorem field_extension_irreducible_components (k K : Type u) [Field k] [Field K] [Algebra k K] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k)) : (∀ T ∈ irreducibleComponents X, ((pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' T).Nonempty ∧ ∃ S : Set (Set ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))))), S ⊆ irreducibleComponents ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' T = ⋃₀ S) ∧ (∀ C ∈ irreducibleComponents ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))), (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) '' C ∈ irreducibleComponents X) ∧ (∀ T ∈ irreducibleComponents X, ∃ C ∈ irreducibleComponents ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))), (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) '' C = T)",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62585f96f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement matches Stacks 04KW/04KX and the node clause by clause: nonempty preimage that is an unrestricted union of components; actual image (no closure) of each component is a component; surjectivity. Base change is pullback f (Spec.map algebraMap k K) with pullback.fst, as def-pc-base-change records. No extra hypotheses; the common universe u is forced by Spec. Edge cases (empty X, K=k, C/R, transcendental, inseparable, nonreduced, non-qc) are covered. No existing Mathlib or project declaration states this (Mathlib's versions need irreducible fibres). Node changed only in lean; lean.statement is verbatim the file's signature. Docstrings give the source, blueprint tag and all 8 proof steps. Only sorry. Imports exist. Report has both required sections. No findings."
+ }
+}

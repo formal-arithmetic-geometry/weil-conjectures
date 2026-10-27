@@ -1,0 +1,322 @@
+{
+ "id": "lem-per-completed-pullback-fraction-descent",
+ "kind": "statement",
+ "title": "Completed pullback linearity and descent of comparisons to raw fractions",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $A=\\mathcal O_E$ and $\\varpi$ a uniformizer [def-weil-l-adic-coefficient-extension]. Let $g:X'\\to X$ be a morphism between noetherian finite-dimensional schemes on which $\\ell$ is invertible. On their small pro-etale sites [def-weil-pbc-proetale-site] put $B_W=\\varprojlim_{n\\geq1}(A/\\varpi^n)_W$ for $W=X,X'$ [def-weil-pbc-adic-coefficient-datum]. Use module sheaves and ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and sheaf tensors [def-pur-sheaf-tensor-product]. Let $c_g:g^{-1}B_X\\to B_{X'}$ be the projection-defined map of [def-weil-pbc-completed-pullback], and put $P_gK=B_{X'}\\otimes^L_{g^{-1}B_X}g^{-1}K$. Put $E_W=B_W[1/\\varpi]$, the sheaf localization [def-weil-pbc-ringed-section-localization], and let $\\mathcal C_W$ be the full completed constructible subcategory including compatible etale-origin witnesses [def-weil-pbc-bounded-constructible-complete], and $Q_W:\\mathcal C_W\\to\\mathcal R_W=\\mathcal C_W[1/\\varpi]$ its raw scalar localization [def-weil-pbc-rational-category]. Let $J_W:\\mathcal R_W\\to D(E_W)$ be the specified functor with $J_W(Q_WK)=E_W\\otimes^L_{B_W}K$ and $J_W(f/\\varpi^n)=\\varpi^{-n}(E_W\\otimes^L_{B_W}f)$ [lem-per-rational-module-realization-functor]. Assume that $P_g$ maps $\\mathcal C_X$ to $\\mathcal C_{X'}$ and that the specified natural $\\gamma_{g,K}:P_gK\\to\\widehat P_gK$ is invertible for $K\\in\\mathcal C_X$. Then the coefficient map preserves every constant $A$-scalar and both restricted functors $P_g,\\widehat P_g:\\mathcal C_X\\to\\mathcal C_{X'}$ are $A$-linear [def-weil-linear-category, def-weil-linear-functor]. In particular\n$$\\widehat P_g(f)=\\gamma_{g,L}P_g(f)\\gamma_{g,K}^{-1},\\qquad \\overline P_g(f/\\varpi^n)=\\widehat P_g(f)/\\varpi^n$$\ndefines a functor $\\overline P_g:\\mathcal R_X\\to\\mathcal R_{X'}$ with object $Q_{X'}\\widehat P_gK$. The latter fraction formula is independent of representatives even when integral morphism modules have $\\varpi$-torsion: the relation $f/\\varpi^n=h/\\varpi^m$ is equivalent to $\\varpi^r(\\varpi^m f-\\varpi^n h)=0$ for some $r\\geq0$, and its image satisfies the same annihilating-power relation. Sums and compositions are the corresponding fraction operations.\nLet $H(K)=J_{X'}(Q_{X'}\\widehat P_gK)$ and $G(K)=E_{X'}\\otimes^L_{g^{-1}E_X}g^{-1}(J_XQ_XK)$ on integral objects and maps. The functor $H$ extends by $J_{X'}\\overline P_g$; $G$ extends by the same displayed expression with $J_X$ on $\\mathcal R_X$. For either extension $F$, $F(f/\\varpi^n)=\\varpi^{-n}F(f)$. Every natural transformation $\\beta:H\\to G$ on $\\mathcal C_X$ extends uniquely with the same components to these raw rationalized functors. Explicitly\n$$G(f/\\varpi^n)\\beta_K=\\varpi^{-n}G(f)\\beta_K=\\varpi^{-n}\\beta_LH(f)=\\beta_LH(f/\\varpi^n).$$\nIf every $\\beta_K$ is invertible, the descended transformation is a natural isomorphism. No full faithfulness of $J_W$ is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Section 6.8 rationalization; explicit completed-pullback linearity and raw-fraction descent (agent elaboration)"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-linear-category",
+  "def-weil-linear-functor",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-sheaf-of-modules-category",
+  "lem-per-rational-module-realization-functor",
+  "lem-weil-pbc-continuous-coefficient-general-pullback-isIso"
+ ],
+ "proof": [
+  {
+   "text": "Compare the two maps from the inverse image of the constant A-sheaf to the completed coefficient sheaf after every finite quotient projection. The constant inverse-image map is natural in the quotient map A → A/(varpi^(n+1)), and the finite coefficient comparison is defined using this map. Cancel the level presentation isomorphisms and use the constant-to-completion projection equation. Joint monicity of the limit projections proves coefficient_constants. Neither preservation of this limit nor invertibility of its structural map is used.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Section 6.8 rationalization; explicit completed-pullback linearity and raw-fraction descent (agent elaboration)"
+   }
+  },
+  {
+   "text": "Use the constant-section linearity of the existing actual derived direct image from lem-pbc-scalar-constructible-operation-restriction. The published ordinary derived pullback is its left adjoint. The linear-adjunction Hom bijection gives additivity and A-linearity of this exact specified ordinary pullback. Restrict it using hP and pbcConditionalIntegral; the full-subcategory Hom actions are inherited.",
+   "uses": [
+    "lem-pbc-scalar-constructible-operation-restriction",
+    "def-weil-linear-functor",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Section 6.8 rationalization; explicit completed-pullback linearity and raw-fraction descent (agent elaboration)"
+   }
+  },
+  {
+   "text": "The integral constructible predicate is closed under isomorphisms by lem-weil-pbc-uniform-complete-triangulated. Transport hP along the assumed invertible completedPullbackComparison. The specified strict completed pullback unit is natural and has exactly these components, so it restricts to a natural isomorphism from ordinary to completed pullback. Transport addition and A-linearity along this isomorphism. Cancel its source component in the naturality equation to obtain the stated conjugation formula.",
+   "uses": [
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Section 6.8 rationalization; explicit completed-pullback linearity and raw-fraction descent (agent elaboration)"
+   }
+  },
+  {
+   "text": "Construct bar using the existing ScalarLocalization.transport of the A-linear completed restriction: its Hom map is LinearMap.baseChange. It is additive and localization-linear and has the literal prescribed object map. The baseChange formula on a pure tensor gives its formula on each fraction. Mathlib IsLocalization.tensorProduct_isLocalizedModule identifies the tensor-with-one map as module localization. Its mk'_eq_mk'_iff gives exactly the extra-power relation for fraction equality, without any torsion cancellation; mk'_add_mk' gives common-denominator addition. Apply the completed restriction to the annihilator equation to preserve the same r. Bilinearity of composition and functoriality of Q prove the composition formula.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-pbc-localization-module-tensor",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-rational-category",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Section 6.8 rationalization; explicit completed-pullback linearity and raw-fraction descent (agent elaboration)"
+   }
+  },
+  {
+   "text": "Activate the normalized module actions supplied by JY and JX. Evaluate each constant field scalar using the sheafification adjunction defining rationalModuleConstantMap. The adjunct of the specified rationalContinuousPullback is the given continuous precomposition map, so it preserves these constants. Thus module direct image is E-linear for precisely the supplied actions. Its module left adjoint is E-linear, and exact derived descent gives E-linearity of rationalPull. The canonical coefficient equivalence sends invSelf(varpi) to varpi^(-1), by its algebraMap equation and the inverse identity. Convert the localization-linear bar to E-linearity. Functor.map_smul for the two composites now gives H_fractions and G_fractions.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "lem-weil-pbc-continuous-coefficient-general-pullback-isIso",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "def-weil-linear-functor",
+    "lem-pbc-scalar-triangulation-adapters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Section 6.8 rationalization; explicit completed-pullback linearity and raw-fraction descent (agent elaboration)"
+   }
+  },
+  {
+   "text": "Use the baseChange formula on 1 tensor f to identify the restriction of bar followed by JX with the integral completed functor followed by QX and JX on arrows. Keep the supplied beta components on every raw object. Prove naturality by tensor induction: the zero and sum cases use additivity; a pure tensor a tensor f is the field scalar corresponding to a times Q(f), so E-linearity and bilinear composition reduce to the integral naturality equation. Every raw object has its original integral object, so components give uniqueness. The prescribed transports and componentwise invertibility give invertibility of every component, hence of the natural transformation. No faithfulness hypothesis or existence choice is used.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "def-weil-linear-category",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15 and Section 6.8 rationalization; explicit completed-pullback linearity and raw-fraction descent (agent elaboration)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-functor",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-rational-category",
+  "def-weil-proetale-inverse-image",
+  "lem-pbc-scalar-constructible-operation-restriction",
+  "lem-pbc-scalar-triangulation-adapters",
+  "lem-per-rational-module-realization-functor",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-pbc-continuous-coefficient-general-pullback-isIso",
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 and Proposition 6.8.14(2); C3 implementation using the existing linear adjunction, tensor base change, and Mathlib module-localization APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive A linear functor conjugated by natural isomorphisms descends to fractions inverting a central scalar and a linear natural comparison descends as well",
+   "results": "8 hits: CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.linear, CategoryTheory.Shift.linear_of_localization, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalization, CategoryTheory.Localization.instLinearLocalization'. Inspected candidates give linearity transport or abstract categorical localization; not the completed coefficient pullback and explicit torsion-sensitive raw-fraction comparison together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linear functors of preadditive categories and natural isomorphisms descend to rationalization by central scalar fractions",
+   "results": "8 hits: CategoryTheory.Functor.ratLinear, CategoryTheory.Functor.Linear.mk, CategoryTheory.Free.ext, CategoryTheory.Functor.Linear, CategoryTheory.Functor.Linear.casesOn, CategoryTheory.Functor.Linear.recOn, CategoryTheory.Functor.mapLinearMap, CategoryTheory.Functor.intLinear. Inspected candidates give linearity transport or abstract categorical localization; not the completed coefficient pullback and explicit torsion-sensitive raw-fraction comparison together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Linear, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Functor.Linear, CategoryTheory.Functor.ratLinear, CategoryTheory.Functor.linear_of_iso, CategoryTheory.Functor.instLinearComp, CategoryTheory.Functor.linear_of_full_essSurj_comp, CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj, CategoryTheory.Functor.mapLinearMap, CategoryTheory.Functor.coe_mapLinearMap. Inspected candidates give linearity transport or abstract categorical localization; not the completed coefficient pullback and explicit torsion-sensitive raw-fraction comparison together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapFraction|map_fraction|conjugat.*linear|linear.*conjugat|natTrans.*[Ll]ocalization",
+   "results": "7 hits: Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Shift/Localization.lean. Inspected candidates give linearity transport or abstract categorical localization; not the completed coefficient pullback and explicit torsion-sensitive raw-fraction comparison together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of additive functors gives linearity by conjugation and induces the same component natural isomorphism on explicit raw scalar fraction categories",
+   "results": "8 hits: CategoryTheory.Functor.linear_of_iso, CategoryTheory.Free.ext, AddEquiv.toNatLinearEquiv, ModuleCat.Iso.conj_eq_conj, CategoryTheory.Functor.additive_of_iso, CategoryTheory.Functor.mapLinearMap, CategoryTheory.Functor.intLinear, CategoryTheory.Functor.CommShift.isoAdd. Inspected candidates give linearity transport or abstract categorical localization; not the completed coefficient pullback and explicit torsion-sensitive raw-fraction comparison together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "linear_of_iso|functor_linear_iff|natTransExtension",
+   "results": "10 hits: Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Linear.lean, Mathlib/CategoryTheory/Localization/Linear.lean, Mathlib/CategoryTheory/Localization/Linear.lean. Inspected candidates give linearity transport or abstract categorical localization; not the completed coefficient pullback and explicit torsion-sensitive raw-fraction comparison together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear",
+   "results": "12 hits: CategoryTheory.Functor.instLinearId, CategoryTheory.Functor.Linear, CategoryTheory.Functor.intLinear, CategoryTheory.Functor.natLinear, CategoryTheory.Functor.ratLinear, CategoryTheory.Functor.fullSubcategoryInclusionLinear, CategoryTheory.Functor.inducedFunctorLinear, CategoryTheory.Equivalence.inverseLinear. Read the displayed results and relevant LinearFunctor, Localization/Linear and Localization/Construction sources.",
+   "date": "2026-10-22",
+   "verdict": "no match: general linearity and categorical-localization results do not state the completed coefficient-map and torsion-sensitive raw-fraction comparison together."
+  },
+  {
+   "tool": "grep",
+   "query": "linear.*pullback|pullback.*linear|linear_of_iso|natTransExtension",
+   "results": "22 hits: Mathlib/Algebra/Module/ZLattice/Basic.lean, Mathlib/Algebra/Module/Submodule/Map.lean, Mathlib/Algebra/Order/GroupWithZero/Canonical.lean, Mathlib/Geometry/Manifold/VectorField/Pullback.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/Construction.lean. Read the displayed results and relevant LinearFunctor, Localization/Linear and Localization/Construction sources.",
+   "date": "2026-10-22",
+   "verdict": "no match: general linearity and categorical-localization results do not state the completed coefficient-map and torsion-sensitive raw-fraction comparison together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linearity of a derived inverse image functor with coefficient ring sheaves followed by extension to fractions and natural comparisons",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, SheafOfModules.pullback, DerivedCategory.instLinear, DerivedCategory.instLinearSingleFunctor, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction. Read the displayed results and relevant LinearFunctor, Localization/Linear and Localization/Construction sources.",
+   "date": "2026-10-22",
+   "verdict": "no match: general linearity and categorical-localization results do not state the completed coefficient-map and torsion-sensitive raw-fraction comparison together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of sheaves along a morphism of ringed topoi is linear over a constant coefficient ring and descends to scalar fractions",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso. Read the displayed results and relevant LinearFunctor, Localization/Linear and Localization/Construction sources.",
+   "date": "2026-10-22",
+   "verdict": "no match: general linearity and categorical-localization results do not state the completed coefficient-map and torsion-sensitive raw-fraction comparison together."
+  },
+  {
+   "tool": "grep",
+   "query": "map_smul|linear_of_iso|functor_linear",
+   "results": "5 hits: Mathlib/CategoryTheory/Localization/Linear.lean, Mathlib/CategoryTheory/Localization/Linear.lean, Mathlib/CategoryTheory/Localization/Linear.lean, Mathlib/CategoryTheory/Localization/Linear.lean, Mathlib/CategoryTheory/Localization/Linear.lean. Read the displayed results and relevant LinearFunctor, Localization/Linear and Localization/Construction sources.",
+   "date": "2026-10-22",
+   "verdict": "no match: general linearity and categorical-localization results do not state the completed coefficient-map and torsion-sensitive raw-fraction comparison together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback by extension of scalar sheaves preserves multiplication by constant scalars; a natural isomorphism of linear functors extends to localization of Hom modules",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackIso. Read the displayed results and relevant LinearFunctor, Localization/Linear and Localization/Construction sources.",
+   "date": "2026-10-22",
+   "verdict": "no match: general linearity and categorical-localization results do not state the completed coefficient-map and torsion-sensitive raw-fraction comparison together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-realization-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph of lem-per-smooth-pullback-t-exact: exactness of pullback via coefficient realization; linearity, conjugation by the specified unit, and fraction naturality (retained old item steps 7-8).",
+   "via": [
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-completed-pullback-fraction-descent",
+  "worker": "stage1",
+  "summary": "Six-step explicit scalar and fraction proof, reusing existing general ringed-topos derived pullback and module-localization statements. No new nodes or statement changes; arbitrary coefficient map and torsion Hom modules retained.",
+  "blueprint": "First proof paragraph of lem-per-smooth-pullback-t-exact, coefficient realization of pullback; retains the completed-pullback and raw-fraction descent arguments extracted via lem-per-rational-realization-pullback-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic K-flat computation and existence of ordinary ringed-topos derived pullback, for both integral and rational coefficient maps; not a perverse-specific result."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "Generic inverse-image localization comparison preserving the unit, needed to type the rational coefficient map."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-tensor",
+    "why": "Generic module tensor/localization identification supplies the fraction representatives and equality relation for raw Hom modules."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Generic coefficient-ring identification A[1/varpi]=E; no perverse-specific result supplies it."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of flat-term K-flat resolutions of module complexes on a ringed site, needed to compute the scalar endomorphism through lem-weil-pbc-ringed-topoi-derived-pullback; added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-weil-l-adic-integers-localization-uniformizer"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-812e65e1d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-812e65e1d (reviewer sub-agent of L); spot-checked: Q27 lem-per-completed-pullback-fraction-descent @812e65e1: first split. Zero new nodes, six steps, statement unchanged. Source matches: Bhatt–Scholze Remark 6.8.15 gives f^*K = f_naive^*K ⊗ Λ_Y, which is P_g with the projection-defined c_g, and 6.8.14(2) is the rationalization; the fraction calculations are agent elaboration, correctly marked. All six steps are correct. Step 1 holds: c_g fixes the constant scalars, shown through ε∘g^{-1}ρ and the projections into the limit. Step 2: naturality of ε from ringed-topoi-derived-pullback, tensor balancing and bilinearity give P_g(af) = aP_g(f). Step 3: γ-conjugation, and C_{X'} is closed under isomorphism because membership is the existence of witnesses. Step 4: M⊗E ≅ M_ϖ for any M, and ϖ-torsion Hom modules are handled. Step 5: the rational ring map is built through localization-inverse-image-coherence and is well defined since c_g(t') = ϖ. Step 6: componentwise extension and its uniqueness. No duplicate: prop-weil-pbc-descent-functors and the fd common-stage nodes are Q̄ results, and lem-sf-completed-coefficient-pullback-linearity covers automorphisms only. Batch-5 flag: localization-inverse-image-coherence reaches lem-trf-geometric-inverse-image-exact, def-trf-geometric-morphism and def-trf-abelian-inverse-image-presentation. These are generic topos facts, not part of the trace formula or Poincaré duality, so the flag is accepted. FIX (C1): step 2 used a flat-term K-flat representative without a node for its existence, so lem-pc-kflat-resolution was added to the text, uses, proof_deps and tool_uses (no cycle, no batch-5 reach). Step 5 used the E-scalar action on D(E_W) without citing it, so def-weil-pbc-scalar-localization-coefficient-actions was added. The statement is untouched.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackFractionDescent",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedPullbackFractions.completedPullbackFractionDescent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.Integral",
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.Rational",
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.Q",
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.fraction",
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.rationalPull",
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.realizationSmul",
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.Descent",
+   "AlgebraicGeometry.Scheme.CompletedPullbackFractions.completedPullbackFractionDescent"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedPullbackFractionDescent.lean",
+  "statement": "theorem completedPullbackFractionDescent (hγ : ∀ K : Integral l E Y, IsIso (completedPullbackComparison g (pbcIntegralDatum l E) K.obj)) (JY : RationalModuleRealization l E Y) (JX : RationalModuleRealization l E X) : Nonempty (Descent l E g hP hγ JY JX)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem packages all clauses in Descent. Integral/Rational/Q are transparent aliases of the recorded categories and localization functor. The coefficient ring is the existing ULift encoding of the valuation ring. The realization dependency supplies the normalized continuous model of sheaf localization; rationalPull uses its canonical continuous-precomposition coefficient map, with the landed general-pullback node added to stmt_deps. No new coefficient map, completion unit, or faithfulness assumption is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db2f2f222",
+  "group": "Q131",
+  "result": "pass",
+  "note": "All hypotheses and conclusion clauses match the node: specified γ invertibility (hγ), preservation hP, A-scalar preservation, linearity of both restrictions, conjugation by γ, bar fixed on all objects and fractions, torsion-sensitive ∃r fraction equality plus same-r annihilator, sum and composition formulas, H/G fraction formulas, unique extension of every integral β, and iso when β is invertible. No faithfulness assumption; universes inherited from deps. Mechanical theorem-stmt_dep finding: the statement needs the theorem's conclusion (rationalContinuousPullback_isIso via asIso, as proEtaleRingDerivedPullback takes a coefficient iso), so PASS on that point; the map is the canonical localization of c_g. No duplicate; only sorry is the theorem proof; docstrings and verbatim statement OK. Advisories: duplicated copyright header; pbcConditionalIntegral/proEtaleRingDerivedPullback from non-stmt_dep nodes via public imports. No files changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T084340-L-3671102",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

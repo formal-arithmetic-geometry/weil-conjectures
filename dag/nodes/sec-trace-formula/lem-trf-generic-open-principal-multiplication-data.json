@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-generic-open-principal-multiplication-data",
+ "kind": "statement",
+ "title": "Principal multiplication data from a schematically dense generic open",
+ "statement": "Let $A$ be a commutative integral domain and $B$ a commutative finite type $A$-algebra [def-weil-pbc-finite-type-algebra]. Let $K$ be the fraction field of $A$, the localization at all nonzero elements, and put $B_K=B\\otimes_A K$ [def-weil-pbc-module-tensor-product]. Write $X=\\operatorname{Spec}B$, $X_K=\\operatorname{Spec}B_K$ [def-weil-affine-spectrum]. Let $U\\subseteq X$ be an open subscheme, and $U_K$ its inverse image under the canonical projection $X_K\\to X$. Suppose the open inclusion $j_K:U_K\\hookrightarrow X_K$ induces an injective map of sheaves $\\mathcal O_{X_K}\\to(j_K)_*\\mathcal O_{U_K}$. There exist $m\\geq0$ and $g_1,\\ldots,g_m\\in B$ such that $D(g_i)\\subseteq U$ for every $i$, $U_K=\\bigcup_{i=1}^mD(g_i\\otimes1)$, and the map $\\mu_K:B_K\\to B_K^{\\oplus m}$, $b\\mapsto((g_i\\otimes1)b)_i$, is injective. Here $D(g)=\\{\\mathfrak p\\in\\operatorname{Spec}B:g\\notin\\mathfrak p\\}$, and the union and tuple for $m=0$ are empty. No quasi-compactness of $U$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0573, lemma-scheme-theoretically-dense-generic-fibre, proof third paragraph: finite principal opens inside U covering its generic fibre and the injective multiplication map; Tag 0565, algebra-lemma-when-injective-covering."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-trf-schematically-dense-open"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite $A$-algebra generators $t_1,\\ldots,t_r$ of $B$ using [def-weil-pbc-finite-type-algebra]. They give $K$-algebra generators $t_i\\otimes1$ of $B_K$: by [def-weil-pbc-module-tensor-product] every tensor is a finite sum of pure tensors, and if $b=P(t_1,\\ldots,t_r)$ then $b\\otimes k=kP_K(t_1\\otimes1,\\ldots,t_r\\otimes1)$, where $P_K$ maps each coefficient of $P$ into $K$. Every ideal of the field $K$ is either zero or, by multiplying a nonzero element by its inverse, the unit ideal; hence $K$ is Noetherian. Apply [lem-weil-pbc-finite-type-algebra-noetherian] to $K\\to B_K$ to conclude that $B_K$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 0573 (lemma-scheme-theoretically-dense-generic-fibre), proof third paragraph; Tag 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "The one-chart affine covering of $X_K=\\operatorname{Spec}B_K$ makes it locally Noetherian by [pqf-def-locnoeth], since its section ring is $B_K$. It is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so it is a Noetherian scheme. Apply [lem-weil-pbc-noetherian-open-subscheme-noetherian] to the open $U_K\\subseteq X_K$. In particular, $U_K$ is quasi-compact: every open covering of its underlying space has a finite subcover.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 0573, proof third paragraph; Tags 01OV (definition-noetherian), 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology)"
+   }
+  },
+  {
+   "text": "Let $G=\\{g\\in B:D(g)\\subseteq U\\}$. By [lem-weil-pbc-spec-localization-away-basic-open](i), $U=\\bigcup_{g\\in G}D(g)$. Under the canonical map $p:X_K\\to X$, a prime $\\mathfrak q\\subset B_K$ maps to the inverse image prime in $B$, so $p(\\mathfrak q)\\in D(g)$ if and only if $g\\otimes1\\notin\\mathfrak q$. Thus $p^{-1}D(g)=D(g\\otimes1)$, and inverse images of the displayed union give $U_K=\\bigcup_{g\\in G}D(g\\otimes1)$. These are open by the same basis statement applied to $B_K$. Choose a finite subcover by Step 2 and enumerate its functions as $g_1,\\ldots,g_m$. Each still belongs to $G$, so $D(g_i)\\subseteq U$. If $U_K$ is empty, choose the empty subcover and $m=0$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0573 (lemma-scheme-theoretically-dense-generic-fibre), proof third paragraph: finite principal opens chosen inside U"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affine-schematic-density-criterion] with ring $B_K$, integer $m$, and functions $f_i=g_i\\otimes1$. Step 3 identifies the union of its principal opens with $U_K$, so its open immersion is precisely $j_K$ and its sheaf-injectivity hypothesis is the one assumed here. Its equivalent multiplication condition is injectivity of $b\\mapsto((g_i\\otimes1)b)_i$, exactly $\\mu_K$. The criterion permits $m=0$; then injectivity says $B_K=0$, as is also forced by the assumed sheaf injection when $U_K$ is empty.",
+   "uses": [
+    "lem-trf-affine-schematic-density-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 0573, proof third paragraph; Tag 0565 (lemma-when-injective-covering), Tag 056C (example-scheme-theoretic-closure), Tag 01RE (lemma-characterize-scheme-theoretically-dense)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-trf-affine-schematic-density-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0573 (lemma-scheme-theoretically-dense-generic-fibre), proof third paragraph; its Noetherian, principal-basis and affine schematic-density inputs are made explicit in the cited existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*(principal|basicOpen)|basicOpen.*generic|IsNoetherian.*isCompact",
+   "results": "{\"t\": \"2026-10-22T06:46:56Z\", \"tool\": \"grep\", \"query\": \"generic.*(principal|basicOpen)|basicOpen.*generic|IsNoetherian.*isCompact\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\"], \"digest\": \"66b578796a351151\"} No exact match or one-line specialization. The hits concern basic-open covers, section fractions, or topological dominance; none gives a finite total-space principal family with generic-fibre coverage and injective tuple multiplication. Read Cover/Open.lean and the returned signatures; the affine density criterion is an existing project node, not a Mathlib leaf for this combined selection statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherianRing\", \"basicOpen\"",
+   "results": "{\"t\": \"2026-10-22T06:46:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNoetherianRing\\\", \\\"basicOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No exact match or one-line specialization. The hits concern basic-open covers, section fractions, or topological dominance; none gives a finite total-space principal family with generic-fibre coverage and injective tuple multiplication. Read Cover/Open.lean and the returned signatures; the affine density criterion is an existing project node, not a Mathlib leaf for this combined selection statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic fibre open of a finite type algebra is covered by finitely many principal opens chosen inside the original open.",
+   "results": "{\"t\": \"2026-10-22T06:46:57Z\", \"tool\": \"leansearch\", \"query\": \"A generic fibre open of a finite type algebra is covered by finitely many principal opens chosen inside the original open.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.Scheme.affineBasisCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\"], \"digest\": \"b7c89404d93a90c0\"} No exact match or one-line specialization. The hits concern basic-open covers, section fractions, or topological dominance; none gives a finite total-space principal family with generic-fibre coverage and injective tuple multiplication. Read Cover/Open.lean and the returned signatures; the affine density criterion is an existing project node, not a Mathlib leaf for this combined selection statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra B over a domain A with fraction field K, an open U of Spec B that is schematically dense on the generic fibre admits finitely many principal opens D(g_i) inside U whose generic fibres cover U_K and whose multiplication map B_K to B_K^m is injective.",
+   "results": "{\"t\": \"2026-10-22T06:47:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type algebra B over a domain A with fraction field K, an open U of Spec B that is schematically dense on the generic fibre admits finitely many principal opens D(g_i) inside U whose generic fibres cover U_K and whose multiplication map B_K to B_K^m is injective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\"], \"digest\": \"144be2d2543030ca\"} No exact match or one-line specialization. The hits concern basic-open covers, section fractions, or topological dominance; none gives a finite total-space principal family with generic-fibre coverage and injective tuple multiplication. Read Cover/Open.lean and the returned signatures; the affine density criterion is an existing project node, not a Mathlib leaf for this combined selection statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose finitely many functions on an affine scheme whose basic opens lie in a given open subset and cover its quasi-compact generic fibre, obtaining an injective tuple multiplication map from schematic density.",
+   "results": "{\"t\": \"2026-10-22T06:47:49Z\", \"tool\": \"leanfinder\", \"query\": \"Choose finitely many functions on an affine scheme whose basic opens lie in a given open subset and cover its quasi-compact generic fibre, obtaining an injective tuple multiplication map from schematic density.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\"], \"digest\": \"a398d76581c8d0f2\"} No exact match or one-line specialization. The hits concern basic-open covers, section fractions, or topological dominance; none gives a finite total-space principal family with generic-fibre coverage and injective tuple multiplication. Read Cover/Open.lean and the returned signatures; the affine density criterion is an existing project node, not a Mathlib leaf for this combined selection statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically_dense|generic.*principal|principal.*generic",
+   "results": "{\"t\": \"2026-10-23T23:43:39Z\", \"tool\": \"grep\", \"query\": \"schematicallyDense|schematically_dense|generic.*principal|principal.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures. Cover and basic-open results describe open covers or the unit-ideal covering criterion; dominance results concern topological density, and fraction-representation results assume a covering. None states this combined generic-fibre selection and injective multiplication result. The local grep also finds no schematic-density/generic-principal theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A schematically dense generic open of an affine finite type scheme admits a finite principal open covering with injective multiplication by its defining functions.",
+   "results": "{\"t\": \"2026-10-23T23:43:39Z\", \"tool\": \"leansearch\", \"query\": \"A schematically dense generic open of an affine finite type scheme admits a finite principal open covering with injective multiplication by its defining functions.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.IsAffineOpen.self_le_iSup_basicOpen_iff\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\"], \"digest\": \"07d156b398dced90\"} Read the returned signatures. Cover and basic-open results describe open covers or the unit-ideal covering criterion; dominance results concern topological density, and fraction-representation results assume a covering. None states this combined generic-fibre selection and injective multiplication result. The local grep also finds no schematic-density/generic-principal theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.basicOpen, Function.Injective",
+   "results": "{\"t\": \"2026-10-23T23:43:39Z\", \"tool\": \"loogle\", \"query\": \"PrimeSpectrum.basicOpen, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned signatures. Cover and basic-open results describe open covers or the unit-ideal covering criterion; dominance results concern topological density, and fraction-representation results assume a covering. None states this combined generic-fibre selection and injective multiplication result. The local grep also finds no schematic-density/generic-principal theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A schematically dense open in the generic fibre of a finite type algebra over a domain is covered by finitely many total space principal opens whose tuple multiplication map on the generic fibre is injective.",
+   "results": "{\"t\": \"2026-10-23T23:43:40Z\", \"tool\": \"leanfinder\", \"query\": \"A schematically dense open in the generic fibre of a finite type algebra over a domain is covered by finitely many total space principal opens whose tuple multiplication map on the generic fibre is injective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\"], \"digest\": \"4e703ccb774b6480\"} Read the returned signatures. Cover and basic-open results describe open covers or the unit-ideal covering criterion; dominance results concern topological density, and fraction-representation results assume a covering. None states this combined generic-fibre selection and injective multiplication result. The local grep also finds no schematic-density/generic-principal theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an open subset U of Spec B, where B is a finitely generated algebra over a domain A, choose finitely many functions g in B with D(g) contained in U covering the base change to Frac A; schematic density implies that simultaneous multiplication by the g is injective.",
+   "results": "{\"t\": \"2026-10-23T23:46:08Z\", \"tool\": \"leanfinder\", \"query\": \"Given an open subset U of Spec B, where B is a finitely generated algebra over a domain A, choose finitely many functions g in B with D(g) contained in U covering the base change to Frac A; schematic density implies that simultaneous multiplication by the g is injective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"Algebra.ZariskisMainProperty\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\"], \"digest\": \"657c3d6784936f5a\"} Read the returned signatures. Cover and basic-open results describe open covers or the unit-ideal covering criterion; dominance results concern topological density, and fraction-representation results assume a covering. None states this combined generic-fibre selection and injective multiplication result. The local grep also finds no schematic-density/generic-principal theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalize_finite_fraction_representation|toBasicOpen_injective|affineOpenCoverOfSpanRangeEqTop|self_le_iSup_basicOpen_iff",
+   "results": "{\"t\": \"2026-10-23T23:47:09Z\", \"tool\": \"grep\", \"query\": \"normalize_finite_fraction_representation|toBasicOpen_injective|affineOpenCoverOfSpanRangeEqTop|self_le_iSup_basicOpen_iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\"], \"digest\": \"4ff23050dbde8336\"} Read the returned signatures. Cover and basic-open results describe open covers or the unit-ideal covering criterion; dominance results concern topological density, and fraction-representation results assume a covering. None states this combined generic-fibre selection and injective multiplication result. The local grep also finds no schematic-density/generic-principal theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-schematic-density-generic-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The final sentence of the Tag 0578 generic-fibre alternative in the constructibility input: apply Tag 0573 to the smooth open of the generic fibre. Tag 0573 subargument: choose finitely many total-space principal opens on each affine chart and the generic multiplication map (returned steps 2-3).",
+   "via": [
+    "lem-trf-schematic-density-generic-fibre-open",
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-generic-open-principal-multiplication-data",
+  "worker": "stage1",
+  "summary": "Four-step split of the Tag 0573 principal-open selection subargument, with no new nodes: finite generators after tensoring, Noetherian quasi-compactness of the generic open, finite selection from total-space principal opens, and the existing affine schematic-density criterion. Statement and its hypotheses are unchanged. All citations were read as statements, and zero generic ring, empty family, nilpotents, zero divisors and a non-quasi-compact total open were checked.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestor/via chain for the Tag 0578/0573 generic-density auxiliary input. Realizes exactly Tag 0573 proof third paragraph. Read the latest ancestor proof: its current text discusses contracting correspondences rather than this older constructibility expansion; no new same-statement blueprint node was found. No chapter or unit route is altered."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-1a21a548c",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-1a21a548c (reviewer sub-agent of L); spot-checked: I read Stacks 0573 (more-morphisms.tex, lemma-scheme-theoretically-dense-generic-fibre, third paragraph) together with 0565 and 056C. The item states that paragraph's selection exactly: D(g_i) in U, a cover of U_K, and injective mu_K, with m=0 allowed. The parent lem-trf-schematic-density-generic-fibre-open step 2 uses exactly these clauses, and the statement is not weakened. Step 1: the finite-type definition and the generation of the tensor product by pure tensors make B_K finite type over K. K is Noetherian (field, elementary), so the Mathlib leaf lem-weil-pbc-finite-type-algebra-noetherian makes B_K Noetherian. Step 2: pqf-def-locnoeth (one Noetherian affine chart) and affine quasi-compactness make X_K a Noetherian scheme. lem-weil-pbc-noetherian-open-subscheme-noetherian then gives U_K quasi-compact, and quasi-compactness of U is never used. Step 3 (elementary): the basis clause (i) gives G={g: D(g) in U} covering U. p^{-1}D(g)=D(g⊗1) by contraction, and a finite subcover comes from Step 2, empty when U_K is empty. Step 4: the same-unit lem-trf-affine-schematic-density-criterion with ring B_K and f_i=g_i⊗1 has union equal to U_K, so its sheaf condition is the hypothesis and its multiplication condition is mu_K. proof_deps equals the union of uses. There are 0 new nodes, no SGA, and no tool_uses are needed. A grep of the DAG for 0573/0565 found no duplicate (sibling nodes state different facts). No repair note exists, so the re-split rules do not apply. Edge cases checked: B_K=0; U_K empty with B_K nonzero, where the hypothesis fails (k[t,x]/(tx), U=D(x)); U=X; k[x,y]/(xy); a non-quasi-compact U."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericOpenPrincipalMultiplicationData",
+  "declaration": "AlgebraicGeometry.generic_open_principal_multiplication_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericOpenPrincipalMultiplicationData.lean",
+  "statement": "theorem generic_open_principal_multiplication_data (A : Type u) [CommRing A] [IsDomain A] (B : Type v) [CommRing B] [Algebra A B] (hB : (algebraMap A B).FiniteType) (K : Type w) [Field K] [Algebra A K] [IsFractionRing A K] (U : (Spec (.of B)).Opens) (hU : SchematicallyDenseOpen (Z := Spec (.of (B ⊗[A] K))) (TopologicalSpace.Opens.comap ⟨PrimeSpectrum.comap (algebraMap B (B ⊗[A] K)), PrimeSpectrum.continuous_comap (algebraMap B (B ⊗[A] K))⟩ U)) : ∃ (m : ℕ) (g : Fin m → B), (∀ i : Fin m, PrimeSpectrum.basicOpen (g i) ≤ U) ∧ TopologicalSpace.Opens.comap ⟨PrimeSpectrum.comap (algebraMap B (B ⊗[A] K)), PrimeSpectrum.continuous_comap (algebraMap B (B ⊗[A] K))⟩ U = ⨆ i : Fin m, PrimeSpectrum.basicOpen (g i ⊗ₜ[A] (1 : K)) ∧ Function.Injective (fun b : B ⊗[A] K ↦ fun i : Fin m ↦ (g i ⊗ₜ[A] (1 : K)) * b)",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16ccab6fe",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0573 proof para 3 clause by clause: domain A, RingHom.FiniteType algebraMap, IsFractionRing K, B⊗[A]K, Spec, arbitrary U, U_K as Opens.comap of PrimeSpectrum.comap (algebraMap B (B⊗K)) (canonical b↦b⊗1), SchematicallyDenseOpen hypothesis (def node's equivalent form), ∃ m (Fin m → B) with D(g_i)≤U, equality U_K=⨆ D(g_i⊗1), injective b↦((g_i⊗1)b)_i. Precedence verified (⨆ body at prec 60, so conjunction parses correctly). Edge cases m=0, B_K=0, non-qc U checked; independent universes u v w. Node diff vs live: lean added + landed def-trf-schematically-dense-open stmt_dep only. Statement field verbatim; sorry-only theorem; source/blueprint docstrings with 4 proof steps; report has Worker report and Second reading by Q84. No findings; no file changed, not recompiled."
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-compact-support-projection-right-unit",
+ "kind": "statement",
+ "title": "Right-unit normalization of the actual compactification projection in comparison coordinates",
+ "statement": "Let A be a finite commutative ring and f:X→Y a morphism of schemes with a specified compactification c. Work in the ambient unbounded small pro-etale derived categories of fixed A-module sheaves. Let F=Rf_!(c), S=Lf*, and tensor be the actual derived tensor of [def-weil-derived-pullback-tensor-hom]. Let A_T be the comparison image of the ordinary constant complex and e_f:S A_Y≅A_X its canonical pullback identification [def-pur-finite-site-coordinates]. Let rho_M:M tensor A_X≅M be the canonical compared-coefficient right unitor [def-pur-affine-line-purity-coordinate-maps]. Then, for every M in D(X,A), the specified proper-counit/open-tensor projection [def-exchange-projection] satisfies PF(c;M,A_Y) followed by F((1_M tensor e_f) followed by rho_M) = rho_(FM). No boundedness, Tor, trace, exchange, composition comparison or projection invertibility assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56 and 07A4: equation-projection-formula-map and lemma-pullback-tensor-product at the unit; Tag 0GL1: lemma-j-shriek-and-tensor"
+ },
+ "stmt_deps": [
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-coordinate-maps",
+  "def-pur-finite-site-coordinates",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Write f = pj for the supplied compactification and F = Rp_* j_!. Expand its published projection into the proper counit mate and Rp_* of the open tensor comparison, followed by the pullback compositor. Naturality is already built into this transformation. At the ordinary coefficient unit, the proper mate composed with Rp_* of the pullback-unit comparison and right unitor is the right unitor: transpose under Lp* adjoint Rp*, apply the tensor-unit identity of the canonical comparison and the counit triangle.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 and 07A4: equation-projection-formula-map and lemma-pullback-tensor-product at the unit; Tag 0GL1: lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "Restrict the inverse open tensor comparison to j. Its normalization is the identity. Hence its specialization at the unit, followed by j_! of the pullback-unit comparison and right unitor, equals the right unitor of j_!M with the proper pullback-unit comparison inserted. To justify equality before restriction, identify the source with j_!M by its unit constraints; both arrows are then between objects in the image of the fully faithful j_!, and their restrictions are equal.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 and 07A4: equation-projection-formula-map and lemma-pullback-tensor-product at the unit; Tag 0GL1: lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "The canonical pullback composition isomorphism identifies the successive pullback-unit comparisons for p and j with the pullback-unit comparison for f. Apply Rp_* to the open equation and substitute the proper equation. Transport the tensor unit by the exact comparison image of the ordinary constant unit. The maps pullbackUnit and moduleRightUnit in the fixed-scalar coordinates are precisely these identifications, giving PF(c;M,A_Y) followed by F(1_M tensor e_f;rho_M) = rho_(FM). The argument is on the ambient unbounded categories and does not require inverting PF at the unit.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-affine-line-purity-coordinate-maps",
+    "def-pur-finite-site-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 and 07A4: equation-projection-formula-map and lemma-pullback-tensor-product at the unit; Tag 0GL1: lemma-j-shriek-and-tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-coordinate-maps",
+  "def-pur-finite-site-coordinates",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56 and 07A4: equation-projection-formula-map and lemma-pullback-tensor-product at the unit; Tag 0GL1: lemma-j-shriek-and-tensor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Right unitality of compactification projection formula with derived pullback unit and tensor right unitor",
+   "results": "CategoryTheory.Dial.rightUnitorImpl; Functor.LaxMonoidal.ofBifunctor.topMapᵣ; MonoidalCategory.rightUnitorNatIso; Localization.Monoidal.rightUnitor. These provide unit constraints but no normalization of the actual compactification projection.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"right_unitality_hom\"",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.right_unitality_hom and its reassociated form, Mathlib/CategoryTheory/Monoidal/Functor.lean. Read its signature: it assumes an oplax structure and does not identify the compact-support projection or its comparison-unit coordinates.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMapOfCompactification.*unit",
+   "results": "msearch grep returned 0 hits. Additional local rg found only the generic oplax right-unit equation at Mathlib/CategoryTheory/Monoidal/Functor.lean:307. Existing source-library Etale.projectionMap_rightUnitality is only on the ordinary site; NativeIntegrationProjectionLaws concerns inverse components of a selected composite and assumes unit-component invertibility, so neither states the present ambient arbitrary-compactification equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BaseChangedLineTraceEvaluation",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Integration paragraph: evaluation of the base-changed affine-line trace through projection, unit normalization",
+   "via": [
+    "lem-pur-base-changed-line-trace-evaluation",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportProjectionRightUnit",
+  "file": "lean/Sheaf/Paper/CompactSupportProjectionRightUnit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineLinePurity.compactSupportProjection_rightUnit",
+  "statement": "theorem compactSupportProjection_rightUnit\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :\n    ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app (unit A Y) ≫\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map (pullbackUnit A f).hom ≫\n          (moduleRightUnit A X M).hom) =\n      (moduleRightUnit A Y\n        ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T205018-L-3089704",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T205018-L-3089704",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

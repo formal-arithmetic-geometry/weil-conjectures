@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-integral-henselian-lisse-section-rigidity",
+ "kind": "statement",
+ "title": "Lisse section rigidity on integral henselian test pairs",
+ "statement": "Let $A,B,C$ be commutative rings with unital homomorphisms $A\\to B$ and $A\\to C$, and let $I\\subseteq A$ be an ideal. Assume $B$ is integral over $A$, meaning every element satisfies a monic polynomial over $A$, that $C$ is w-contractible [sk-def-pe-wlocal], and that $(C,IC)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Put\n$$D=B\\otimes_A C,\\qquad T=\\operatorname{Spec}D,\\qquad T_0=\\operatorname{Spec}(D/ID),$$\nwhere $ID=(IC)D$, and let $a:T_0\\hookrightarrow T$ be the quotient closed immersion and $b:T\\to\\operatorname{Spec}B$ the projection [def-pc-scheme, def-weil-closed-immersion]. Then $D$ is integral over $C$, $(D,ID)$ is a henselian pair, both $D$ and $D/ID$ are w-strictly local [sk-def-pe-wlocal], and the actual map\n$$\\pi_0(a):\\pi_0(T_0)\\longrightarrow\\pi_0(T)$$\nis a homeomorphism of component spaces with their quotient topology [lem-pe-spectral-components-profinite].\n\nLet $\\Lambda$ be any commutative condensed ring [sk-def-sfb-condensed-ring], with $\\Lambda_Y=p_Y^*\\Lambda$ on each small pro-etale site [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Use internal module sheaves and ordinary unbounded derived categories, with K-injective total right derived direct images, in compatible universes [sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull, def-weil-size-convention]. For every finite-rank lisse $\\Lambda_{\\operatorname{Spec}B}$-module $L$ (pro-etale locally finite free, rank zero and varying ranks allowed [def-sfb-lisse-coefficient-module]), $M=b^*L$ is finite-rank lisse and the canonical restriction is an isomorphism in $D(\\mathbf{Ab})$:\n$$R\\Gamma(T,M[0])\\xrightarrow{\\sim}R\\Gamma(T_0,a^*M[0]).$$\nHere the map is induced by the actual derived adjunction unit for $a$, followed by the canonical derived composition comparison, and $R\\Gamma$ means total right derived global sections followed by forgetting scalars. No finiteness or finite presentation of $B/A$ or $D/C$, Noetherianity, or completeness or discreteness of $\\Lambda$ is required. Zero algebras and empty spectra are included; no w-contractibility assertion for $D$ is made.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Corollary 4.4(1), Lemma 4.1, Proposition 4.3, equation (4.2) and Corollary 4.7, through existing lem-sfb-wstrict-lisse-component-cohomology; Bhatt–Scholze Lemma 2.2.13 and existing lem-sfb-indfinite-contractible-base-wstrict. Algebraic inputs: Stacks Tags 02JK (algebra.tex, lemma-base-change-integral (1)), 09XK (more-algebra.tex, lemma-integral-over-henselian-pair), 0817 (properties.tex, lemma-integral-algebra-directed-colimit-finite (2)), 01ID (schemes.tex, lemma-colimit-quasi-coherent). Agent-extracted local argument of returned steps 2–5, not a verbatim HRS theorem."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-closed-immersion",
+  "lem-pe-spectral-components-profinite",
+  "def-sfb-lisse-coefficient-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply integral base change to $A\\to B$ and $A\\to C$. It makes $C\\otimes_A B$ integral over $C$; the flip $c\\otimes b\\mapsto b\\otimes c$ identifies this $C$-algebra with $D$. Apply integral permanence of henselian pairs to $(C,IC)$ and $C\\to D$. Thus $(D,(IC)D)=(D,ID)$ is henselian. Neither input requires an injective or finite ring map.",
+   "uses": [
+    "lem-weil-pbc-integral-base-change",
+    "lem-weil-pbc-integral-over-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02JK (lemma-base-change-integral (1)) and 09XK (lemma-integral-over-henselian-pair)."
+   }
+  },
+  {
+   "text": "Put $S=\\operatorname{Spec}C$, which is qcqs by the affine qcqs lemma. Form the quasi-coherent algebra $\\widetilde D$: the tilde-sections construction gives sections $D_f$ on $D(f)\\subset S$, and multiplication is the ordinary multiplication of fractions, compatible with restriction. Its global sections are $D$. For an affine open $U\\subset S$, the affine algebra restriction lemma identifies its sections with $D\\otimes_C\\mathcal O_S(U)$; integral base change therefore verifies integrality on every such $U$. Apply the integral-algebra approximation lemma, clause (2), to $\\widetilde D$. It gives a nonempty directed system of finite and finitely presented quasi-coherent algebras $\\mathcal D_i$ with colimit $\\widetilde D$. The affine-sections colimit lemma gives $D\\cong\\varinjlim_i D_i$, where $D_i=\\mathcal D_i(S)$ are finite as $C$-modules and finitely presented as $C$-algebras by the approximation lemma's stated affine definitions. All maps are $C$-algebra maps. Choose the indexing data in the compatible universes of the statement. No inclusion of $D_i$ into $D$ is required.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+    "lem-weil-pbc-integral-base-change",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-quasi-coherent-algebra-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0817 (lemma-integral-algebra-directed-colimit-finite (2)); Tag 01ID (lemma-colimit-quasi-coherent), affine sections; affine localization construction of the associated algebra."
+   }
+  },
+  {
+   "text": "Apply the ind-finite contractible-base lemma to the $C$-algebra system $(D_i)$ of step 2. Its base is w-contractible by hypothesis, and each stage has both required finiteness properties. Thus $D$ is w-strictly local, even when the transition maps are noninjective. Apply henselian w-strict locality invariance to the pair $(D,ID)$ from step 1: it gives w-strict locality of $D/ID$. This uses only weak strict locality of $D$, without imposing extremal disconnectedness on its components.",
+   "uses": [
+    "lem-sfb-indfinite-contractible-base-wstrict",
+    "lem-zl-henselian-wstrict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9 and Example 2.2.2 through the existing ind-finite lemma; Lemma 2.2.13 for the henselian quotient."
+   }
+  },
+  {
+   "text": "Apply the first clause of condensed henselian lisse rigidity to $A=D$, $I=ID$ and the given condensed ring $\\Lambda$. Henselianity is step 1. It identifies the actual induced map $\\pi_0(a):\\pi_0(T_0)\\to\\pi_0(T)$ as a homeomorphism with the component quotient topologies. This clause is unconditional: the later w-contractibility condition in that lemma is needed only for its derived-category equivalence, which is not used here.",
+   "uses": [
+    "lem-zl-condensed-henselian-lisse-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.4(1), independent of the additional condition in Corollary 4.4(2)."
+   }
+  },
+  {
+   "text": "Pull back a pro-etale cover trivializing $L$ along $b$. Inverse image preserves this cover and its finite free trivializations, using the canonical coefficient and module-pullback composition comparisons. Thus $M=b^*L$ is finite-rank lisse, with the same possibly varying ranks and with rank zero allowed. Apply w-strict lisse component cohomology to $h=a$, $X=T$, $X'=T_0$ and $M$. Steps 3 and 4 supply exactly its weak strict locality and component-homeomorphism hypotheses. Its conclusion is the asserted isomorphism in $D(\\mathbf{Ab})$, for arbitrary condensed $\\Lambda$. Its map is explicitly induced by the actual adjunction unit and canonical pullback comparisons, so it is the stated restriction after the derived composition comparison, rather than an unspecified isomorphism of section objects. That lemma permits empty spectra; all preceding algebraic inputs permit the zero algebra. None uses Noetherianity, completeness or discreteness.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-sfb-wstrict-lisse-component-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1, Proposition 4.3, equation (4.2) and Corollary 4.7 through existing unit-normalized w-strict component cohomology; local trivializing-cover definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-indfinite-contractible-base-wstrict",
+  "lem-sfb-wstrict-lisse-component-cohomology",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "lem-weil-pbc-integral-base-change",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-zl-condensed-henselian-lisse-rigidity",
+  "lem-zl-henselian-wstrict-local-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Assembly of Stacks 02JK, 09XK, 0817 and 01ID, BS Lemma 2.2.13, HRS Corollary 4.4(1), and the existing w-strict component-cohomology lemma. The w-strict derived extension is not claimed as a verbatim HRS theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Henselian|henselian).*(Integral|integral)|(wStrict|WStrict|wContract).*([Ll]isse|[Cc]ohomology)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(weakly.*strict|wStrict|WStrict|w_strict).*(integral|condensed|[Ll]isse)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"Henselian\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections of locally finite free modules over a condensed ring on the spectrum of an integral algebra over a henselian weakly contractible ring are invariant under quotient by the henselian ideal",
+   "results": "8 hits: Algebra.QuasiFinite.instQuotientIdeal, Condensed.freeForgetAdjunction, instHenselianRingMaximalIdeal, ModuleCat.Tilde.sectionsSubmodule, HenselianLocalRing.toIsLocalRing, Module.Finite.quotient, ModuleCat.Tilde.isLocallyFraction, Algebra.instFiniteResidueFieldOfFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral algebra over a henselian pair with weakly contractible base has weakly strictly local spectra and lisse condensed module derived sections invariant under henselian quotient",
+   "results": "8 hits: IsAdicComplete.henselianRing, BDeRham, BDeRhamPlus, HenselianLocalRing, instCommRingBDeRhamPlus, HenselianLocalRing.TFAE, HenselianRing, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly contractible ring C henselian along J and arbitrary integral C algebra D restriction from Spec D to Spec D modulo JD is an isomorphism on derived sections of lisse condensed modules",
+   "results": "8 hits: CondensedMod.IsSolid.isIso_solidification_map, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, LightCondMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(wStrict|WStrict|w_strict|WContract|wContract).*(lisse|Lisse|cohomology|Cohomology)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic integrality, formal etaleness or general sheaf/module facts; none states the integral henselian internal pro-etale lisse derived-section assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an integral algebra over a weakly contractible henselian pair derived global sections of a lisse condensed module are unchanged by quotienting by the henselian ideal",
+   "results": "8 hits: instIsIntegralQuotientIdeal, Algebra.IsIntegral.quotient, Ideal.Quotient.algebra_isIntegral_of_liesOver, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, CondensedMod.isDiscrete_tfae, Algebra.QuasiFinite.instQuotientIdeal, HenselianRing.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic integrality, formal etaleness or general sheaf/module facts; none states the integral henselian internal pro-etale lisse derived-section assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"IsIntegral\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic integrality, formal etaleness or general sheaf/module facts; none states the integral henselian internal pro-etale lisse derived-section assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of locally finite free condensed modules on weakly strictly local affine schemes are invariant under a morphism inducing a homeomorphism on connected components",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_mapFree_inv, ModuleCat.Tilde.res_const, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.mapFree, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic integrality, formal etaleness or general sheaf/module facts; none states the integral henselian internal pro-etale lisse derived-section assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian quotient invariance of pro etale lisse sheaf cohomology on the spectrum of an integral algebra over a weakly contractible ring",
+   "results": "8 hits: StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.formallyEtale, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.FormallyEtale.localization_base, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic integrality, formal etaleness or general sheaf/module facts; none states the integral henselian internal pro-etale lisse derived-section assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-lisse-closed-base-change",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: integral-root closed restriction; tensor-algebra henselianity, finite finite-presentation approximation, weak strict locality and unit-normalized lisse restriction (returned steps 2–5).",
+   "via": [
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-henselian-lisse-section-rigidity",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and clause; split the tensor-algebra henselian argument, finite finitely presented approximation, w-strict locality, actual component map and unit-normalized lisse restriction. Reused existing nodes throughout; no new nodes. Checked zero algebras, variable rank and noninjective approximation maps.",
+  "blueprint": "Current main-20261015 direct-images proof paragraph (3), open direct image, via the integral-root closed restriction argument extracted into this item. The inherited blueprint ancestor is null; its concrete place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-lisse-coefficient-module",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-over-henselian-pair",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   },
+   {
+    "node": "lem-zl-condensed-henselian-lisse-rigidity",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   },
+   {
+    "node": "lem-zl-henselian-wstrict-local-invariance",
+    "why": "Generic algebraic, affine-section, henselian or coefficient comparison input used with precisely its stated hypotheses; it supplies a tool below the fixed direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-lisse-coefficient-module",
+  "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-quasi-coherent-algebra-affine-inclusion",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-zl-condensed-henselian-lisse-rigidity",
+  "lem-zl-henselian-wstrict-local-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-3f9c853a2",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-3f9c853a2 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes, and the item's statement and stmt_deps are byte-identical to the imported node. The item is unsplit on live and side-live, so it is not superseded. It has no repair note and is not on the dropped list. The 5 steps carry the parent's old Steps 2–5 (NB 817f9f5c, PASSed). Nothing was shortened, and the D~ construction and the lisse pullback are now spelled out. Step 1: 02JK plus the C⊗_A B ≅ D flip makes D integral over C, and 09XK makes (D,(IC)D)=(D,ID) henselian. Step 2: affine qcqs, then tilde-sections build D~ (multiplication glued from the basic opens D(f)). Affine-inclusion (i) with U'=S gives D~(U)≅D⊗_C O(U), which is integral by 02JK. 0817(2) (properties.tex, proof read) gives finite, finitely presented 𝒟_i, and the affine-sections clause of the quasi-coherent colimit node gives D≅colim D_i as C-algebras. Step 3: the ind-finite node applies (C w-contractible; module-finite, finitely presented stages; noninjective maps and zero algebras allowed), so D is w-strictly local. lem-zl-henselian-wstrict-local-invariance (BS 2.2.13, read) then makes D/ID w-strictly local. Step 4: the first clause of lem-zl-condensed-henselian-lisse-rigidity (full statement read) is unconditional, and it matches HRS Cor 4.4(1), whose proof via 09XI I read. Step 5: b*L is lisse by pulling back the trivializing cover and the canonical coefficient comparison. lem-sfb-wstrict-lisse-component-cohomology with h=a then gives exactly the map induced by the adjunction unit, an isomorphism in D(Ab), for any condensed Λ. Edge cases checked: I=0, B=0 or C=0, I=A (forces C=0), infinite integral B, rank 0 and varying ranks, incomplete Λ. Duplicate search (rg -L for w-contractible ∧ integral ∧ henselian, and the citers of the component-cohomology node) found no duplicate. Batch-5: the two flagged cites add only lem-trf-henselian-smooth-algebra-lifting (Stacks 0H74, pure algebra) to the closure; every other trf/pod node in it is already reached through the item's other cites. Both flagged nodes (the π0 homeomorphism for henselian pairs, BS 2.2.13) lie outside the trace-formula and Poincaré assumptions, so I accepted them. I accepted the 8 declared tool_uses: generic algebra, quasi-coherent-algebra and coefficient tools. No SGA is cited. Advisory: 0817 gives a directed set while the ind-finite node asks for a poset (routine reindexing, Stacks remark-preorder-versus-partial-order); Step 2 could cite lem-weil-pbc-affine-morphism-relative-spec (1) instead of building D~ by hand."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralHenselianLisseSectionRigidity",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_henselian_lisse_section_rigidity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralHenselianTensorIdeal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralHenselianClosedFibre",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralHenselianTensorProjection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integral_henselian_lisse_section_rigidity"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralHenselianLisseSectionRigidity.lean",
+  "statement": "theorem integral_henselian_lisse_section_rigidity (A B C : Type u) [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra A C] (I : Ideal A) [Algebra.IsIntegral A B] [IsWContractibleRing C] [HenselianRing C (I.map (algebraMap A C))] : (Algebra.TensorProduct.includeRight : C →ₐ[A] B ⊗[A] C).toRingHom.IsIntegral ∧ HenselianRing (B ⊗[A] C) (integralHenselianTensorIdeal A B C I) ∧ IsWStrictlyLocalRing (B ⊗[A] C) ∧ IsWStrictlyLocalRing ((B ⊗[A] C) ⧸ integralHenselianTensorIdeal A B C I) ∧ IsHomeomorph (integralHenselianClosedFibre A B C I).continuous.connectedComponentsMap ∧ ∀ (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (L : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of B))) Ab.{u + 1}) (condensedRingObj Λ.X (Spec (.of B)))), IsLisseCoefficientModule Λ.X L → IsLisseCoefficientModule Λ.X ((upperStar Λ.X (integralHenselianTensorProjection A B C)).obj L) ∧ IsIso ((componentLisseSectionsPullback Λ (integralHenselianClosedFibre A B C I)).app ((upperStar Λ.X (integralHenselianTensorProjection A B C)).obj L))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-915aa51ca",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim in file. Clause-by-clause match: Algebra.IsIntegral A B, IsWContractibleRing C, HenselianRing C (IC); conclusions includeRight integral, HenselianRing D (I.map algebraMap) = (IC)D, IsWStrictlyLocalRing D and D/ID, IsHomeomorph of a.continuous.connectedComponentsMap, ∀ Λ : Profinite.CondensedRing with IsCommMonObj, ∀ lisse L: b^*L lisse and IsIso (componentLisseSectionsPullback Λ a).app (b^*L) = derived unit + rightDerivedFunctorCompIso' + single-degree comparison in D(Ab) (body read in side-live). a, b, ID are canonical Spec.map/ideal-map helpers, not hollow. Edge cases (zero rings, empty spectra, I=0, I=A, rank 0/varying, arbitrary Λ) covered; one universe u needed for b and matches the dependency. No duplicate (IntegralHenselianClosedFibreSections is étale/local). Docstrings with source place and blueprint, 5-step proof plan, sorry only, Mathlib ProEt site. Advisory: componentLisseSectionsPullback is a plain def of theorem node lem-sfb-wstrict-lisse-component-cohomology (proof_dep only); stmt_deps unchanged from stage 1, so advisory. No recompile (none changed); worker compiles clean 12.1/11.4 s."
+ }
+}

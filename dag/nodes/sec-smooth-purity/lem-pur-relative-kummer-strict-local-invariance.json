@@ -1,0 +1,383 @@
+{
+ "id": "lem-pur-relative-kummer-strict-local-invariance",
+ "kind": "statement",
+ "title": "Strict-local pullback invariance with constants and coordinate classes",
+ "statement": "Let $k$ be an algebraically closed field, $\\ell$ a prime invertible in $k$, $N\\geq1$, $r=\\ell^N$, and $A$ a finite free commutative $\\mathbf Z/r\\mathbf Z$-algebra. Choose a primitive $r$-th root $\\zeta\\in k$. For any $k$-scheme $T$, let $L_T=\\mu_{r,T}\\otimes_{\\mathbf Z/r}A_T$ on the small etale site [def-sc-kummer-sequence], [def-pur-sheaf-tensor-product], [def-weil-pbc-etale-sheaves]. Let $S=\\operatorname{Spec}H$, where $H$ is a strictly henselian local $k$-algebra [def-weil-pbc-henselian-terminology]; no finite-type or Noetherian assumption on $H$ is made. Let $C$ be either $\\mathbf A^1_k=\\operatorname{Spec}k[t]$ or $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$, put $C_S=C\\times_k S$, and let $h:C_S\\to C$ be the projection [def-pc-fibre-product], [def-sbc-affine-space].\n\nIn the ordinary bounded-below derived category of etale $A$-module sheaves [def-weil-pbc-derived-categories], the actual adjunction unit\n$$L_C\\longrightarrow Rh_*L_{C_S}$$\nis an isomorphism, using $h^*L_C=L_{C_S}$. Under the canonical composition identification $R\\Gamma(C,Rh_*L_{C_S})\\cong R\\Gamma(C_S,L_{C_S})$, $R\\Gamma$ of this unit is the canonical pullback of [def-weil-pbc-cohomology-pullback]. Thus the canonical derived pullback\n$$h^*:R\\Gamma(C,L_C)\\xrightarrow{\\sim}R\\Gamma(C_S,L_{C_S})$$\nis an isomorphism. It sends the constant section $\\zeta\\otimes a$ to the same constant section for every $a\\in A$. If $C=\\mathbf G_{m,k}$, it sends the scalar-extended Kummer boundary $\\kappa_{C,A}(t)$ to $\\kappa_{C_S,A}(t)$, where $\\kappa_{T,A}(v)=H^1(z\\mapsto z\\otimes1_A)(\\delta_T(v))$ and $\\delta_T$ is the ordinary $r$-Kummer connecting map. The statement is about the specified pullback, not just an abstract isomorphism of the two derived objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Step 2: the rotated smooth-base-change square with smooth side C to Spec k, then derived global sections and the Kummer generator. Old steps 7–8. Stacks Tag 0EYU, etale-cohomology.tex, theorem-smooth-base-change; Tag 03Q9, theorem-higher-direct-images."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-sc-kummer-sequence",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-sbc-affine-space",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-cohomology-pullback",
+  "def-pur-kummer-line-geometry",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-sc-mu-trivialization"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing strictly henselian constant-sheaf unit theorem to make the constant-sheaf functor over Spec H fully faithful. The existing terminal-section surjectivity theorem for epimorphisms makes global sections exact over Spec H. Both results follow from sections of etale neighbourhoods of a strictly henselian local scheme. Over the algebraically closed field k the constant-sheaf functor is an equivalence. Inverse image along g:Spec H -> Spec k commutes with constant sheaves. Transport full faithfulness through this comparison and the equivalence over k to prove g* fully faithful; hence its ordinary adjunction unit is invertible.",
+   "uses": [
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "lem-pur-point-constant-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QO and 03PL; local-site proof using sections of etale neighbourhoods"
+   }
+  },
+  {
+   "text": "The canonical g_* followed by global sections on Spec k is naturally isomorphic to global sections on Spec H. The first global-sections functor is an equivalence and reflects exactness, while the second is exact by the local-site argument. Hence g_* is exact. The right-derived comparison of this exact functor is invertible. Represent a bounded-below derived object by a homotopy complex and use derivedPlus_unit_app_fac: the derived unit, composed with the inverse-image factorization isomorphism, is the image of the ordinary unit followed by the invertible right-derived comparison. Cancel the factorization isomorphism. This proves invertibility of the actual derived unit for every A-module complex over Spec k, without a stalk calculation.",
+   "uses": [
+    "lem-pur-point-constant-equivalence",
+    "src-sbc-exact-functor-plus-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO, exactness over a strictly local scheme; exact-functor right-derived comparison"
+   }
+  },
+  {
+   "text": "The structure map p:C -> Spec k is smooth. For A1 this follows from formal smoothness and finite presentation of k[t]; for Gm use the localization k[t] -> k[t,t^-1] and composition with its open immersion. The map g is affine, hence qcqs. Every cohomology sheaf of every A-module complex is annihilated by m, which is invertible over k. In the rotated Cartesian square, the bounded-below derived smooth-base-change theorem therefore makes the canonical exchange invertible. The mate identity upperStar_map_unit_comp_baseChange_app identifies p*(eta_g) followed by this exchange with eta_h followed by the inverse-image square comparison. Cancel the latter isomorphism and transfer across the normalized root-line comparison to conclude that relativeKummerUnit is invertible.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pc-open-immersion-smooth-composition",
+    "sbc-thm-smooth-base-change",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU: rotated smooth-base-change square and the triangle identity"
+   }
+  },
+  {
+   "text": "For an exact adjunction L adjoint R and an isomorphism R followed by G = H, use the universal property of the right-derived functor to compute its resolution-defined pullback. On a homotopy representative, derivedPlus_unit_app_fac, naturality of the derived comparison, and rightDerivedFunctorPlusCompIso_fac identify it with RG of the derived unit followed by the Leray composition isomorphism. Apply this calculation to module sheaves and global sections. Naturality of the Leray isomorphism with respect to the normalized line comparison yields the required equality for relativeKummerGlobalPullback. Both its factors are isomorphisms.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01F8-01FA and 01EZ: derived functoriality and Leray composition"
+   }
+  },
+  {
+   "text": "Compute cohomology pullback in degree zero under H.equiv0 using the adjunction and maps between the chosen terminal etale objects. Apply the normalized pure-tensor generator law of the finite twist comparison. To identify the pulled-back root, compose with the monic inclusion into Gm: the normalization law for roots and naturality of the Gm section map identify its image with the transported unit zeta. Injectivity of the root inclusion gives equality of roots. Naturality of toSheafify on the explicit tensor generator then proves that every constant zeta tensor a pulls back to the specified constant.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK and degree-zero functoriality; normalized tensor generators"
+   }
+  },
+  {
+   "text": "The natural Kummer sequence map under inverse image has kernel component equal to the normalized root comparison: both agree after the monic inclusion in Gm. Naturality of the cohomology connecting map under pullback and under this sequence map gives naturality of the Kummer boundary. Its degree-zero Gm component is the explicit pullback of units. Finally the tensor-generator normalization implies that z -> z tensor 1 commutes with inverse image and the scalar coefficient comparison. Apply H1 and naturality of cohomology pullback to conclude the equality of scalar-extended classes for every unit, in particular the Laurent coordinate. All sequences here are abelian sheaves; no module structure on Gm is introduced.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PL and 04I0: Kummer exactness and natural connecting maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohomology-pullback",
+  "lem-amb-kummer-any-base",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-pur-point-constant-equivalence",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "sbc-def-base-change-map",
+  "sbc-thm-smooth-base-change",
+  "src-sbc-exact-functor-plus-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Step 2; U7: local-site/point-equivalence exact-unit argument, rotated smooth exchange, direct module Leray calculation and normalized generators (2026-10-24)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth curve over an algebraically closed field base extension to a strictly henselian local scheme preserves derived etale global cohomology of constant finite torsion coefficients",
+   "results": "{\"t\": \"2026-10-22T06:44:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth curve over an algebraically closed field base extension to a strictly henselian local scheme preserves derived etale global cohomology of constant finite torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.comp\", \"Algebra.Etale.comp\", \"Algebra.IsEtaleAt.comp\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"da99aba04fe64508\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, \"cohomology\"",
+   "results": "{\"t\": \"2026-10-22T06:43:54Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel.*cohom|smooth.*baseChange|rightDerived.*[Uu]nit",
+   "results": "{\"t\": \"2026-10-22T06:43:54Z\", \"tool\": \"grep\", \"query\": \"strict.*hensel.*cohom|smooth.*baseChange|rightDerived.*[Uu]nit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"0e8489d2c9ef14b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth curve over an algebraically closed field base extension to a strictly henselian local scheme preserves derived etale global cohomology of constant finite torsion coefficients",
+   "results": "{\"t\": \"2026-10-22T06:43:54Z\", \"tool\": \"leansearch\", \"query\": \"For a smooth curve over an algebraically closed field base extension to a strictly henselian local scheme preserves derived etale global cohomology of constant finite torsion coefficients\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change in the rotated square proves the derived unit for projection from curve times strictly henselian scheme is invertible",
+   "results": "{\"t\": \"2026-10-22T06:44:06Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth base change in the rotated square proves the derived unit for projection from curve times strictly henselian scheme is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"RingHom.Etale\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.Smooth\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\"], \"digest\": \"400fd7b8f2b8c372\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the normalized etale/pro-etale cohomology and specified maps of this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel.*cohom|smooth.*baseChange|rightDerived.*[Uu]nit",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"grep\", \"query\": \"strict.*hensel.*cohom|smooth.*baseChange|rightDerived.*[Uu]nit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\"], \"digest\": \"8231dc332897cb46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern algebraic smoothness, formal etaleness, Kan extension exchange, or generic derived-functor units; none gives this etale-cohomology unit and its normalized constants and Kummer class"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change and strictly henselian acyclicity give the canonical derived pullback isomorphism for finite etale coefficients",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"leansearch\", \"query\": \"Smooth base change and strictly henselian acyclicity give the canonical derived pullback isomorphism for finite etale coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"9077c96a23a5ab7d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern algebraic smoothness, formal etaleness, Kan extension exchange, or generic derived-functor units; none gives this etale-cohomology unit and its normalized constants and Kummer class"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact\", \"CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"CategoryTheory.TwoSquare.isIso_ranBaseChange_app\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff\", \"CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff\"], \"digest\": \"224ab98d47cc3b00\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern algebraic smoothness, formal etaleness, Kan extension exchange, or generic derived-functor units; none gives this etale-cohomology unit and its normalized constants and Kummer class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection from a smooth scheme times a strictly henselian local scheme over an algebraically closed field induces an isomorphism on derived etale cohomology of finite constant coefficients",
+   "results": "{\"t\": \"2026-10-22T07:53:31Z\", \"tool\": \"leanfinder\", \"query\": \"Projection from a smooth scheme times a strictly henselian local scheme over an algebraically closed field induces an isomorphism on derived etale cohomology of finite constant coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.FormallyEtale.instForallOfFinite\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.FormallyEtale.pi_iff\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"5d81ed1dc426775b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern algebraic smoothness, formal etaleness, Kan extension exchange, or generic derived-functor units; none gives this etale-cohomology unit and its normalized constants and Kummer class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology with constant finite torsion coefficients is invariant under product with a strictly henselian local scheme over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-22T07:58:22Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology with constant finite torsion coefficients is invariant under product with a strictly henselian local scheme over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instForallOfFinite\", \"Algebra.FormallyEtale.pi_iff\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"32373671d14a1c1a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern algebraic smoothness, formal etaleness, Kan extension exchange, or generic derived-functor units; none gives this etale-cohomology unit and its normalized constants and Kummer class"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-gm-relative-kummer",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-gm-relative-kummer",
+   "place": "Step 2: the rotated smooth-base-change square with smooth side C to Spec k, then derived global sections and the Kummer generator. Old steps 7–8. Stacks Tag 0EYU, etale-cohomology.tex, theorem-smooth-base-change; Tag 03Q9, theorem-higher-direct-images.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-relative-kummer-strict-local-invariance",
+  "worker": "stage1",
+  "summary": "Retained the exact arbitrary strictly henselian-base statement. Proved the actual unit through the rotated smooth-base-change square and its explicit adjunction transpose; retained module coefficients, canonical derived global pullback, constants and Kummer boundary normalization. Reused existing DAG nodes; no new nodes.",
+  "blueprint": "prop-pur-gm-relative-kummer proof Step 2: smooth exchange in the rotated square, strict-local cohomology, actual unit, derived global pullback and coordinate class.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-pe-left-module-derived-evaluation-forget",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-connected",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-field-extension",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "sbc-def-base-change-map",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "sbc-lem-strict-henselian-constant-cohomology",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   },
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "Generic coefficient, etale-cohomology, scheme or derived-category tool used with its stated hypotheses; the rotated smooth-base-change route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-kummer-any-base",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pc-open-immersion-smooth-composition",
+  "sbc-def-base-change-map",
+  "sbc-thm-smooth-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-6b0c0a82f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-6b0c0a82f (reviewer sub-agent of L); spot-checked: No new nodes. The only change is the item's 7-step proof; its statement and stmt_deps are byte-identical to the file created in the Q160 re-split of prop-pur-gm-relative-kummer. No repair note exists for this item. Every argument of the parent's old steps 7–8 and old step 3 (Kummer naturality) is carried, in more detail. The route is main-20261015 Step 2 and unit step 0: the rotated square with smooth f: C→Spec k and qcqs (affine) g: S→Spec k. Step 1: Lagrange idempotents in k[x]/(x^r−1) give the A_T≅L_T trivialization; lem-asd root pullback holds since rA=0 and r is invertible. Step 2: the stalk formula (qcqs, torsion) and strict-henselian vanishing (order ℓ^{N·rk} invertible in H) apply. Spec H is connected, so constants are an isomorphism. Geometric points of Spec k are field extensions of b̄, handled by the geometric-point field-extension node (separably closed). The module/abelian comparisons are unit-compatible. Step 4: the letters of sbc-thm-smooth-base-change match the item's square, and exchange-forget(2),(3) applies with their f,f′ being our g,h. Step 5: the transpose formula Le^*ε_g∘θ is explicit in sbc-def-base-change-map; with naturality of θ and the triangle identity, B∘f^*η_g=η_h. Step 6: ringed-topoi composition into the point, then derived-unit(1),(2), then the module evaluation/forget comparison, which commutes with global pullback, then the degree-zero lemma. Step 7: Kummer exactness, ladder(3), triangleOfSESδ naturality (Mathlib singleδ is it conjugated by a natural isomorphism), triangulated RΓ, functorial(3). The statement is true and not weakened; small cases checked: H=k, H a big algebraically closed field, H nonreduced or non-Noetherian, A=0, N=1. Script duplicate search over the DAG found none, and there is no cycle. No SGA is used. The 17 declared tool_uses are generic black-box tools on the unit's route and are accepted; advisory: their 'why' lines are one identical boilerplate sentence."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeKummerStrictLocalInvariance",
+  "declaration": "AlgebraicGeometry.Etale.relativeKummer_strictLocal_invariance",
+  "declarations": [
+   "AlgebraicGeometry.Etale.relativeKummerLinePlus",
+   "AlgebraicGeometry.Etale.relativeKummerLinePullback",
+   "AlgebraicGeometry.Etale.relativeKummerUnit",
+   "AlgebraicGeometry.Etale.relativeKummerGlobalPullback",
+   "AlgebraicGeometry.Etale.relativeKummerUnderlyingPullback",
+   "AlgebraicGeometry.Etale.relativeKummerAbelianPullback",
+   "AlgebraicGeometry.Etale.relativeKummerMapOnCohomology",
+   "AlgebraicGeometry.Etale.relativeKummerHasSheafify",
+   "AlgebraicGeometry.Etale.relativeKummerHasExt",
+   "AlgebraicGeometry.Etale.relativeKummerPullbackOnCohomology",
+   "AlgebraicGeometry.Etale.relativeKummerCohomologyPullback",
+   "AlgebraicGeometry.Etale.relativeKummerModuleSectionClass",
+   "AlgebraicGeometry.Etale.relativeKummerConstant",
+   "AlgebraicGeometry.Etale.relativeKummerClass",
+   "AlgebraicGeometry.Etale.relativeKummerAnnihilator",
+   "AlgebraicGeometry.Etale.relativeKummerExponentUnit",
+   "AlgebraicGeometry.Etale.relativeKummerBaseMap",
+   "AlgebraicGeometry.Etale.relativeKummerBaseCurve",
+   "AlgebraicGeometry.Etale.relativeKummerProjection",
+   "AlgebraicGeometry.Etale.relativeKummerBaseStructure",
+   "AlgebraicGeometry.Etale.relativeKummerFieldExponentUnit",
+   "AlgebraicGeometry.Etale.RelativeKummerPullbackInvariance",
+   "AlgebraicGeometry.Etale.RelativeKummerClassInvariance",
+   "AlgebraicGeometry.Etale.relativeKummerPositive",
+   "AlgebraicGeometry.Etale.relativeKummer_strictLocal_invariance"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeKummerStrictLocalInvariance.lean",
+  "statement": "theorem relativeKummer_strictLocal_invariance : (∀ b : Bool, RelativeKummerPullbackInvariance A (ℓ ^ N) (relativeKummerPositive ℓ N hℓ) (relativeKummerAnnihilator A (ℓ ^ N)) hζ (relativeKummerProjection k H b) (KummerLine.structureMap k b) (relativeKummerExponentUnit (ℓ ^ N) (relativeKummerFieldExponentUnit ℓ N hℓk) (KummerLine.curve k b) (KummerLine.structureMap k b)) (relativeKummerExponentUnit (ℓ ^ N) (relativeKummerFieldExponentUnit ℓ N hℓk) (relativeKummerBaseCurve k H b) (relativeKummerBaseStructure k H b))) ∧ RelativeKummerClassInvariance A (ℓ ^ N) (relativeKummerPositive ℓ N hℓ) (relativeKummerAnnihilator A (ℓ ^ N)) (relativeKummerProjection k H true) (relativeKummerExponentUnit (ℓ ^ N) (relativeKummerFieldExponentUnit ℓ N hℓk) (KummerLine.curve k true) (KummerLine.structureMap k true)) (relativeKummerExponentUnit (ℓ ^ N) (relativeKummerFieldExponentUnit ℓ N hℓk) (relativeKummerBaseCurve k H true) (relativeKummerBaseStructure k H true)) (KummerLine.coordinateUnit k)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Ordinary D+ and the actual normalized root-line maps. Added landed statement dependencies for canonical geometry, coefficient root line, scalar map, scalar-forgetting comparison, root trivialization and normalized inverse image. All original hypotheses and clauses retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8dc95a22e",
+  "group": "Q17",
+  "result": "pass",
+  "note": "All clauses match the node: k algebraically closed, ℓ prime and invertible in k, N≥1, A a finite free Z/ℓ^N-algebra (rA=0 derived, not assumed), ζ primitive root, H strictly henselian with no finiteness binder, both curves via ∀ b : Bool, C_S the actual pullback and h = pullback.fst; actual derived unit (composed with the finiteEtaleTwistPullbackData c(1) comparison) IsIso; RΓ(unit) ≫ moduleLerayPlus = resolution-defined pullback (true by Leray naturality and the module analogue of derivedCohomologyPullback_eq_derivedUnit, not a tautology); IsIso of the pullback; constants a⊗ζ in H0 preserved ∀ a; G_m Kummer class κ_A(t) preserved via ordinaryFiniteRootMap∘kummerδ₀ and Units.map h.appTop. Theorem stmt_dep lem-asd-etale-finite-twist-pullback: finiteEtaleTwistPullbackData = Classical.choice of the theorem's Nonempty, with c pinned by its laws, so the dependency is genuine (PASS on that point). §1(B) record for def-weil-pbc-cohomology-pullback is a superset that keeps cohomologyMap with a public re-export; the live record notes the D+ clause lacked a declaration; abelian/moduleDerivedCohomologyPullback = rightDerivedDesc of section pullback, identical to the upstream inline LHS; moduleLerayPlus = ModuleCat analogue of NH etaleLerayPlus; no live duplicate. lean.statement verbatim, declaration list matches, docstrings carry source and blueprint tags plus the proof plan, single sorry, no pro-étale substitute. Advisory: def-sbc-affine-space met by the Spec k[t] model; tate-sheaf and raw-scalar modules are imported only transitively. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T002536-L-3130013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

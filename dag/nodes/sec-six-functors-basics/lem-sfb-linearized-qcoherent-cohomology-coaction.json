@@ -1,0 +1,342 @@
+{
+ "id": "lem-sfb-linearized-qcoherent-cohomology-coaction",
+ "kind": "statement",
+ "title": "Rational cohomology coactions from a quasi-coherent sheaf linearization",
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an affine group scheme of finite type over $k$ [def-sc-group-scheme, def-weil-finite-type-morphism], and $Y$ a quasi-compact separated $k$-scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme, def-weil-proper-morphism]. Let $a:G\\times_kY\\to Y$ be a left action, with identity and associativity as morphism equalities. Let $\\mathcal E$ be a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent] with a $G$-linearization: an isomorphism $\\theta:p_2^*\\mathcal E\\to a^*\\mathcal E$ [def-pc-module-pullback] restricting to the identity at the group identity, and satisfying $\\theta_{gh,y}=\\theta_{g,hy}\\theta_{h,y}$ on $G\\times_kG\\times_kY$. This equation means equality of the pulled-back sheaf maps, not just equality at field-valued points. A map of linearized sheaves is a sheaf map commuting with $\\theta$. Write $H^i(Y,\\mathcal E)$ for right-derived global sections on Zariski module sheaves [pqf-def-cohomology], with its $k$-vector-space structure. For every $i\\geq0$ there is a canonical coaction $$c_i:H^i(Y,\\mathcal E)\\longrightarrow H^i(Y,\\mathcal E)\\otimes_k k[G]$$ satisfying $(c_i\\otimes1)c_i=(1\\otimes\\Delta)c_i$ and $(1\\otimes\\varepsilon)c_i=1$, where $\\Delta,\\varepsilon$ are induced by multiplication and identity of $G$. For every commutative $k$-algebra $A$ the canonical map $A\\otimes_k H^i(Y,\\mathcal E)\\to H^i(Y_A,\\mathcal E_A)$, $b\\otimes z\\mapsto b\\,p^*z$, is an isomorphism; under it evaluation of $c_i$ at any $g\\in G(A)$ is the cohomological action induced by $g$ and $\\theta$. In degree zero it sends a section $s$ to the section with value $(g s)(y)=\\theta_{g,g^{-1}y}(s(g^{-1}y))$. These coactions are natural in maps of linearized sheaves. For a short exact sequence of linearized quasi-coherent modules, every map, including every connecting map, of its natural long exact Zariski cohomology sequence is a homomorphism of these $k[G]$-comodules. No properness, coherence, finite-dimensionality of cohomology, smoothness or reductivity of $G$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02KH, lemma-flat-base-change-cohomology (the canonical flat base-change isomorphism). The coaction and compatibility with connecting maps are an agent-written consequence using the universal group element and naturality of right-derived global sections; not a verbatim assertion of 02KH."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-sfb-group-scheme-linearization",
+  "def-sfb-coordinate-hopf-algebra",
+  "def-sfb-rational-highest-weight-data",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-module-cohomology-boundary",
+  "def-sfb-hopf-action-module-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $V_i=H^i(Y,\\mathcal E)$. Every $k$-module is flat [lem-weil-pbc-module-over-field-flat], so every commutative $k$-algebra $A$ is a flat $k$-algebra [def-weil-pbc-flat-ring-map], and $\\operatorname{Spec}A\\to\\operatorname{Spec}k$ is flat: each of its stalks is a vector space over $k$, which is precisely the stalkwise definition [def-weil-flat-morphism]. The scheme $Y$ is quasi-compact and its structure morphism $Y\\to\\operatorname{Spec}k$ is separated, and $\\mathcal E$ is quasi-coherent. Hence [lem-pc-flat-cohomology-separated], with $R=k$ and $S=A$, says that the specific comparison $\\beta^i_{Y,\\mathcal E,A}:A\\otimes_k\\operatorname{HOver}(Y,\\mathcal E,i)\\to\\operatorname{HOver}(Y_A,\\mathcal E_A,i)$, $a\\otimes x\\mapsto a\\cdot p_A^*x$, of [def-pc-flat-cohomology-comparison] is bijective; an abstract isomorphism would not suffice, since steps 4 to 8 compute with this formula. That comparison is written in the Ext model of cohomology. By [new-module-cohomology-ext-pullback-comparison] (with $R=k$, $B=A$, $h:Y\\to\\operatorname{Spec}k$) there are additive equivalences $E$ on $Y$ and $E'$ on $Y_A$ from right-derived module cohomology to the Ext model, natural in module morphisms, with $E'(p_A^*z)=\\operatorname{baseChangeLinear}(E(z))$, where $p_A^*$ is the module-cohomology pullback of [def-weil-pbc-module-cohomology-fmap] (a). Naturality for the module endomorphisms given by multiplication by global functions makes $E$ $k$-linear and $E'$ $A$-linear. Transporting along $1\\otimes E$ and $E'$, the map $\\beta_A^i:A\\otimes_kV_i\\xrightarrow{\\sim}H^i(Y_A,\\mathcal E_A)$, $a\\otimes z\\mapsto a\\,p_A^*z$, is bijective, with $p_A^*$ the f-map pullback used in steps 2 to 8. This works for every commutative $k$-algebra, including the zero algebra; the latter has empty spectrum and both sides vanish.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-flat-morphism",
+    "lem-pc-flat-cohomology-separated",
+    "def-pc-flat-cohomology-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology (2), and the specified comparison in its proof (separated finite-affine-cover case)"
+   }
+  },
+  {
+   "text": "For $g\\in G(A)$ let $a_g:Y_A\\to Y_A$ be the action automorphism and set $t_g=a_{g^{-1}}$. Restrict $\\theta$ along $(g,\\operatorname{id})$ to get $\\theta_g:\\mathcal E_A\\to a_g^*\\mathcal E_A$. Pull it back by $t_g$ and use $a_g t_g=\\operatorname{id}$ to obtain $q_g:t_g^*\\mathcal E_A\\to\\mathcal E_A$. Define $$r_A^i(g)=H^i(q_g)\\circ t_g^*:H^i(Y_A,\\mathcal E_A)\\to H^i(Y_A,\\mathcal E_A).$$ Here pullback and its coefficient map mean exactly [def-weil-pbc-module-cohomology-fmap], with the canonical pullback composition identifications [def-pc-module-pullback]. The linearity and degree-zero assertions of [lem-weil-pbc-module-cohomology-fmap-basic-properties] show that $r_A^i(g)$ is $A$-linear and, for sections, sends $s$ to $y\\mapsto\\theta_{g,g^{-1}y}s(g^{-1}y)$. This formula denotes the pulled-back sheaf map, so it does not assume that sections or morphisms are detected by field-valued points.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F7, functoriality of cohomology; agent-written universal-element construction"
+   }
+  },
+  {
+   "text": "The given sheaf cocycle identity, pulled back along $(g,h,(gh)^{-1}y)$, gives $$t_{gh}=t_h\\circ t_g,\\qquad q_{gh}=q_g\\circ t_g^*(q_h),\\qquad q_e=\\operatorname{id}.$$ Indeed the two coefficient factors are $\\theta_{g,g^{-1}y}$ and $\\theta_{h,h^{-1}g^{-1}y}$, in that order. The composition and coefficient-naturality clauses of [lem-weil-pbc-module-cohomology-fmap-functorial] therefore give $r_A^i(g)r_A^i(h)=r_A^i(gh)$; the identity clause of [lem-weil-pbc-module-cohomology-fmap-basic-properties] gives $r_A^i(e)=1$. Thus these are actions, with inverse $r_A^i(g^{-1})$. All equalities used here are sheaf-map equalities pulled back from the given cocycle.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F7, functoriality of cohomology; agent-written universal-element construction"
+   }
+  },
+  {
+   "text": "For a $k$-algebra map $\\alpha:A\\to A'$ let $b:Y_{A'}\\to Y_A$. Functoriality and the scalar law [lem-weil-pbc-module-cohomology-fmap-functorial, lem-weil-pbc-module-cohomology-fmap-basic-properties] give, on pure tensors, $$b^*\\beta_A^i(a\\otimes z)=\\alpha(a)p_{A'}^*z=\\beta_{A'}^i(\\alpha(a)\\otimes z).$$ Moreover $t_g b=b t_{\\alpha(g)}$ and $b^*q_g=q_{\\alpha(g)}$ under the composition identifications, since all were obtained by pulling back the same action and linearization maps. Applying the same composition and coefficient-naturality laws gives $$b^*r_A^i(g)=r_{A'}^i(\\alpha(g))b^*.$$ No flatness of $\\alpha$ is needed: these are cohomology f-maps, not an application of flat base change over $A$. The two $\\beta$ isomorphisms come independently from the field $k$.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F7, functoriality of cohomology; agent-written universal-element construction"
+   }
+  },
+  {
+   "text": "Set $B=k[G]$ and let $u\\in G(B)$ be the universal element, namely the identity morphism of the affine scheme $G$. Define $c_i(z)$ by applying $r_B^i(u)$ to $\\beta_B^i(1\\otimes z)$, then $(\\beta_B^i)^{-1}$, then the tensor flip $B\\otimes_kV_i\\cong V_i\\otimes_kB$. For any $g\\in G(A)$ let $\\operatorname{ev}_g:B\\to A$ be its coordinate map. Step 4 with $\\alpha=\\operatorname{ev}_g$ proves that evaluation of $c_i(z)$ is $(\\beta_A^i)^{-1}r_A^i(g)\\beta_A^i(1\\otimes z)$ (with the tensor flip understood). Both resulting operators are $A$-linear, so agreement on $1\\otimes z$ is agreement on $A\\otimes V_i$. This proves the stated evaluation assertion and identifies degree zero with the formula in step 2. The construction uses the actual universal element and the canonical $\\beta$, and hence specifies a canonical linear map into the algebraic tensor product.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F7, functoriality of cohomology; agent-written universal-element construction"
+   }
+  },
+  {
+   "text": "Use $D=B\\otimes_kB$ and the two universal elements $u_1,u_2\\in G(D)$, obtained from the first and second inclusions of $B$. In $V_i\\otimes_kD$, step 5 identifies $(1\\otimes\\Delta)c_i(z)$ with $r_D^i(u_1u_2)(1\\otimes z)$. To compute the other side write $c_i(z)=\\sum_j z_j\\otimes b_j$. After evaluation at $(u_1,u_2)$, $(c_i\\otimes1)c_i(z)=\\sum_j c_i(z_j)\\otimes b_j$ corresponds to $r_D^i(u_1)r_D^i(u_2)(1\\otimes z)$: the second action contributes the $b_j$ in the second $B$ factor and the first action contributes $c_i(z_j)$ in the first. Step 3 makes these equal. Evaluation at this universal pair is the identity on the coordinate ring $D$, so this is equality of tensors, with no density assertion. Likewise evaluation at $e\\in G(k)$ is $1\\otimes\\varepsilon$ and step 3 gives $(1\\otimes\\varepsilon)c_i=1$. These are the required two coaction laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F7, functoriality of cohomology; agent-written universal-element construction"
+   }
+  },
+  {
+   "text": "If $v:\\mathcal E\\to\\mathcal F$ is a map of linearized sheaves, its pullbacks satisfy $v_Aq_g^{\\mathcal E}=q_g^{\\mathcal F}t_g^*(v_A)$. The coefficient-naturality laws of [lem-weil-pbc-module-cohomology-fmap-functorial] then make $H^i(v_A)$ commute with $r_A^i(g)$. Also $H^i(v_A)\\beta_A^{i,\\mathcal E}=\\beta_A^{i,\\mathcal F}(1\\otimes H^i(v))$, by the formula for $\\beta$ and that same naturality. Apply these equations with $A=B$ and $g=u$ to obtain $(H^i(v)\\otimes1)c_i^{\\mathcal E}=c_i^{\\mathcal F}H^i(v)$. This proves naturality, and already covers the maps at fixed degree in any short exact sequence.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F7, functoriality of cohomology; agent-written universal-element construction"
+   }
+  },
+  {
+   "text": "Let $E$ be the given short exact linearized sequence. Each $p_A:Y_A\\to Y$ is flat by step 1 and [lem-weil-pbc-flat-morphism-base-change]; hence its module pullback is exact by [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective], giving a short exact row $E_A$. Apply [lem-sfb-module-cohomology-fmap-boundary] to the unit coefficient maps over $p_A$ to get $p_A^{i+1}\\delta_E^i=\\delta_{E_A}^ip_A^i$. Apply it over the identity to multiplication by any $a\\in A$ on all three terms of $E_A$: thus $\\delta_{E_A}^i$ is $A$-linear. The pure-tensor formula for $\\beta_A$ now gives $$\\delta_{E_A}^i\\beta_A^{i,E_3}=\\beta_A^{i+1,E_1}(1\\otimes\\delta_E^i).$$ Apply the same boundary lemma with $f=t_g:Y_A\\to Y_A$ and the three coefficient maps adjoint to $q_g^{E_j}$. Their squares commute by linearization-equivariance of the arrows of $E$. It gives $\\delta_{E_A}^i r_A^{i,E_3}(g)=r_A^{i+1,E_1}(g)\\delta_{E_A}^i$. At $A=B$, $g=u$, the last two displayed equalities and the definition in step 5 give $$c_{i+1}^{E_1}\\delta_E^i=(\\delta_E^i\\otimes1)c_i^{E_3}.$$ This includes every connecting map; step 7 includes the other maps. Together with the natural long exact sequence of [pqf-def-cohomology] this proves the last assertion. None of the steps required properness, finite-dimensional cohomology, smoothness or reductivity.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-sfb-module-cohomology-fmap-boundary",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01F9; boundary lemma for f-maps; exact flat pullback from modules.tex Tag 02N4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-over-field-flat",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-flat-morphism",
+  "lem-pc-flat-cohomology-separated",
+  "def-pc-flat-cohomology-comparison",
+  "new-module-cohomology-ext-pullback-comparison",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-sfb-module-cohomology-fmap-boundary",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex; literature/stacks-project/cohomology.tex",
+  "place": "Tag 02KH and Tag 01F7; the universal-element construction, coaction identities and boundary assembly are written by Q41"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine algebraic group acting on a quasi compact separated scheme and a linearized quasi coherent sheaf induces a rational comodule on sheaf cohomology, with equivariant connecting morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"Rep.Tor_obj\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] (n : ℕ) (X : Rep k G),\\n  (Rep.Tor k G n).obj X = ((Rep.coinvariantsTensor k G).obj X).leftDerived n\", \"doc\": \"For any commutative ring $k$, group $G$, natural number $n$, and representation $X$ in $\\\\text{Rep}(k, G)$, the $n$-th Tor functor applied to $X$ is defined as the $n$-th left-derived functor of the co\"}\n  {\"name\": \"ContinuousCohomology.homogeneousCochains\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] →\\n              CategoryTheory.Functor (Action (TopModuleCat R) G) (CochainComplex (TopModuleC\", \"doc\": \"The functor constructs cochain complexes in the category of topological $ R $-modules by first forming the $ G $-equivariant cochain complex $ \\\\text{MultiInd.complex} $, then applying the invariants f\"}\n  {\"name\": \"continuousCohomology\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [IsTopologicalGroup G] → ℕ → CategoryTheory.Functor (Action (TopModuleCat R) G) (TopModuleCat R)\", \"doc\": \"The functor computes the $n$-th continuous cohomology group by composing the homogeneous cochain complex construction (which forms $G$-equivariant cochains and extracts $G$-invariant submodules) with \"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"groupCohomology\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ℕ → ModuleCat k\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, and a natural number $ n $, this defines the $ n $-th group cohomology module as the homology of the inhomogeneous coc\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: these are abstract-group cohomology or ordinary sheaf-cohomology definitions, not a coordinate-Hopf-algebra coaction on scheme cohomology with equivariant connecting maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change constructs the coordinate Hopf algebra coaction on cohomology of equivariant quasi coherent sheaves and commutes with boundary maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.subtype_comp_d₀₁_assoc\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) {Z : ModuleCat k}\\n  (h : ModuleCat.of k (G → ↑A.V) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.ofHom A.ρ.invariants.subtype)\\n      (CategoryTheory.CategoryStruct.comp (groupCohomology.d₀₁ A) h) =\\n    CategoryTheory.Categ\", \"doc\": \"For any commutative ring $k$, group $G$, and representation $A$ in $\\\\text{Rep}(k, G)$, the composition of the canonical inclusion morphism from the invariant submodule $A^G$ to $A$, followed by the fi\"}\n  {\"name\": \"groupCohomology.shortComplexH0\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → CategoryTheory.ShortComplex (ModuleCat k)\", \"doc\": \"In the category of modules over a ring $ k $, this constructs a short complex consisting of the inclusion map from the invariant submodule $ V^G $ to $ V $, followed by the first differential $ d^1 $ \"}\n  {\"name\": \"groupCohomology\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ℕ → ModuleCat k\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, and a natural number $ n $, this defines the $ n $-th group cohomology module as the homology of the inhomogeneous coc\"}\n  {\"name\": \"groupCohomology.mapCocycles₁_comp_i\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] {A : Rep k H} {B : Rep k G} (f : G →* H)\\n  (φ : (Action.res (ModuleCat k) f).obj A ⟶ B),\\n  CategoryTheory.CategoryStruct.comp (groupCohomology.mapCocycles₁ f φ)\\n      (groupCohomology.shortComplexH1 B).moduleCatLeftHomology\", \"doc\": \"For representation morphisms $ f $ and $ \\\\phi $, the composition of the induced 1-cocycle map $ \\\\text{mapCocycles}_1(f, \\\\phi) $ with the kernel inclusion $ i_B $ in the short complex for $ B $ equals \"}\n  {\"name\": \"groupCohomology.δ₀_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  (z : ↥X.X₃.ρ.invariants) (y : ↑X.X₂.V),\\n  (CategoryTheory.ConcreteCategory.hom X.g.hom) y = ↑z →\\n    ∀ (x : G → ↑X.X₁.V)\\n      (hx :\\n        ⇑(CategoryTheory.ConcreteCategory.hom\", \"doc\": \"Given a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ of $ G $-representations, an invariant element $ z \\\\in X_3^G $, and elements $ y \\\\in X_2 $, $ x: G \\\\to X_1 $ satisfying $ X.g(y) = z $ \"}\n  {\"name\": \"groupCohomology.comp_d₁₂_eq\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G),\\n  CategoryTheory.CategoryStruct.comp (groupCohomology.cochainsIso₁ A).hom (groupCohomology.d₁₂ A) =\\n    CategoryTheory.CategoryStruct.comp ((groupCohomology.inhomogeneousCochains A).d 1 2)\\n      (groupCohomology.cochainsIso₂ A).h\", \"doc\": \"For a group $G$, commutative ring $k$, and $G$-representation $A$, the composition of the first cochain isomorphism $\\\\text{cochainsIso}_1(A)$ with the coboundary operator $d_{12}(A)$ equals the compos\"}\n  {\"name\": \"groupCohomology.δ_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {X : CategoryTheory.ShortComplex (Rep k G)} (hX : X.ShortExact)\\n  {i j : ℕ} (hij : i + 1 = j) (z : (Fin i → G) → ↑X.X₃.V)\\n  (hz : (CategoryTheory.ConcreteCategory.hom ((groupCohomology.inhomogeneousCochains X.X₃).d i j)) z = 0)\\n  (y : (Fin i → \", \"doc\": \"Given a short exact sequence $0 \\\\to X_1 \\\\xrightarrow{f} X_2 \\\\xrightarrow{g} X_3 \\\\to 0$ of $G$-representations over a commutative ring $k$, and an $i$-cocycle $z$ for $X_3$ with corresponding $i$-cocha\"}\n  {\"name\": \"groupCohomology.H1InfRes\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [S.Normal] → CategoryTheory.ShortComplex (ModuleCat k)\", \"doc\": \"A short complex in the category of modules over a commutative ring $ k $, consisting of the first group cohomology modules $ H^1(G/S, A^S) $, $ H^1(G, A) $, and $ H^1(S, A) $ for a group $ G $, its no\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: these are abstract-group cohomology or ordinary sheaf-cohomology definitions, not a coordinate-Hopf-algebra coaction on scheme cohomology with equivariant connecting maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a linearized quasi coherent sheaf on a scheme is a rational representation of an affine group scheme natural in exact sequences",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.functor\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"(n : ℕ) : Rep k G ⥤ ModuleCat k\", \"doc\": \"For a fixed natural number $ n $, this functor maps each $ k $-representation of a group $ G $ to its $ n $-th group cohomology module $ H^n(G, A) $, and each morphism of representations to the induce\"}\n  {\"name\": \"Rep.linearizationOfMulActionIso\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] →\\n      (H : Type u) →\\n        [inst_2 : MulAction G H] → (Rep.linearization k G).obj (Action.ofMulAction G H) ≅ Rep.ofMulAction k G H\", \"doc\": \"The linearization of the $G$-action on the module $H$ is naturally isomorphic to the representation of $G$ on $H$ constructed directly from the monoid action, where both constructions yield equivalent\"}\n  {\"name\": \"groupCohomology\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic\", \"type\": \"[Group G] (A : Rep k G) (n : ℕ) : ModuleCat k\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, and a natural number $ n $, this defines the $ n $-th group cohomology module as the homology of the inhomogeneous coc\"}\n  {\"name\": \"groupCohomologyIsoExt\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic\", \"type\": \"[Group G] (A : Rep k G) (n : ℕ) :\\n  groupCohomology A n ≅ ((Ext k (Rep k G) n).obj (Opposite.op <| Rep.trivial k G k)).obj A\", \"doc\": \"For a group $ G $, a commutative ring $ k $, and a $ k $-representation $ A $ of $ G $, the $ n $-th group cohomology module $ H^n(G, A) $ is isomorphic to the $ n $-th extension group $ \\\\text{Ext}^n_\"}\n  {\"name\": \"groupCohomology.H1\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : Group G] → Rep k G → ModuleCat k\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, this defines the first group cohomology module $ H^1(G, A) $ as the homology of the inhomogeneous cochain complex asso\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"groupCohomology.cochainsFunctor_obj\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] (A : Rep k G),\\n  (groupCohomology.cochainsFunctor k G).obj A = groupCohomology.inhomogeneousCochains A\", \"doc\": \"For any commutative ring $ k $, group $ G $, and representation $ A $ of $ G $ over $ k $, the object part of the inhomogeneous cochain complex functor applied to $ A $ is equal to the inhomogeneous c\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: these are abstract-group cohomology or ordinary sheaf-cohomology definitions, not a coordinate-Hopf-algebra coaction on scheme cohomology with equivariant connecting maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: these are abstract-group cohomology or ordinary sheaf-cohomology definitions, not a coordinate-Hopf-algebra coaction on scheme cohomology with equivariant connecting maps"
+  },
+  {
+   "tool": "grep",
+   "query": "lineariz.*cohomology|equivariant.*cohomology|cohomology.*comodule|cohomology.*coaction",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: these are abstract-group cohomology or ordinary sheaf-cohomology definitions, not a coordinate-Hopf-algebra coaction on scheme cohomology with equivariant connecting maps"
+  },
+  {
+   "tool": "grep",
+   "query": "lineariz.*cohomology|cohomology.*coaction|cohomology.*comodule",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group representation/cohomology constructions or ordinary sheaf cohomology, not the coordinate-Hopf-algebra coaction on linearized quasi-coherent sheaf cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational representation on sheaf cohomology induced by an algebraic group action and an equivariant sheaf",
+   "results": "OK 8 hits: Representation.IndV, Rep.linearizationOfMulActionIso, Representation.toCoinvariants_mk, Rep.coindVEquiv, Representation.toCoinvariants, Representation.Coinvariants.mk_self_apply, Rep.coind, Representation.Coinvariants",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group representation/cohomology constructions or ordinary sheaf cohomology, not the coordinate-Hopf-algebra coaction on linearized quasi-coherent sheaf cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\", \"cohomology\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group representation/cohomology constructions or ordinary sheaf cohomology, not the coordinate-Hopf-algebra coaction on linearized quasi-coherent sheaf cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a quasi coherent sheaf linearized under an affine group scheme is a rational comodule over its coordinate Hopf algebra",
+   "results": "OK 8 hits: groupCohomology, groupCohomology.functor_obj, groupCohomology.H1, groupCohomology.H0, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, groupCohomology.functor, groupCohomology.cochainsFunctor_obj",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group representation/cohomology constructions or ordinary sheaf cohomology, not the coordinate-Hopf-algebra coaction on linearized quasi-coherent sheaf cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat scalar extension and a sheaf linearization yield a coordinate Hopf algebra coaction on every Zariski cohomology group with equivariant boundary maps",
+   "results": "OK 8 hits: Algebra.Extension.tensorH1Cotangent, groupCohomology, continuousCohomology, Rep.Tor, ContinuousCohomology.MultiInd.complex, groupCohomology.H1, groupCohomology.H0, ContinuousCohomology.homogeneousCochains",
+   "date": "2026-10-24",
+   "verdict": "no match: returned abstract-group representation/cohomology constructions or ordinary sheaf cohomology, not the coordinate-Hopf-algebra coaction on linearized quasi-coherent sheaf cohomology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-cohomology-finite-exact",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Finite rational cohomology and character filtrations for homogeneous bundles. Supporting input to lem-sfb-flag-cohomology-finite-exact: construct the coaction using the universal element of S over F[S], and obtain coaction-equivariant connecting maps before the filtration argument",
+   "via": [
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-linearized-qcoherent-cohomology-coaction",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed all A-point actions from inverse translation and the given sheaf cocycle; used existing canonical flat base change and f-map calculus. The universal element defines the coaction and two independent universal elements prove its law scheme-theoretically. One new generic boundary-naturality node supplies the missing comparison for exact module rows. Checked zero algebras, empty schemes, nonreduced groups and arbitrary-dimensional cohomology.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting flag-cohomology prerequisite, specifically universal-element coactions and equivariant connecting maps; no change to the unit route. The existing ancestry utility returns blueprint.from.node = None, retained for this item and its new child.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-cohomology-separated",
+    "why": "Reviewer FIX (C4): the specific comparison b⊗x↦b·p^*x is bijective for a quasi-compact separated scheme over a field and any (flat) k-algebra; replaces lem-pc-flat-base-change-cohom, whose affine clause gives only an abstract isomorphism. Generic tool, used as its statement stands."
+   },
+   {
+    "node": "new-module-cohomology-ext-pullback-comparison",
+    "why": "Reviewer FIX: identifies the Ext-model pullback in the flat comparison with the module f-map pullback used by the coaction construction and the boundary lemma. Generic comparison of two cohomology models, used as a black box."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "why": "Generic Linearity, degree zero, identity and restriction cases of the maps induced by h-maps is used only as its statement specifies; this unit has no replacement for the ordinary Zariski module-cohomology calculus or flat-pullback theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "why": "Generic Functoriality of the maps on cohomology induced by f-maps is used only as its statement specifies; this unit has no replacement for the ordinary Zariski module-cohomology calculus or flat-pullback theorem."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic Flat module pullback is exact and direct image preserves injectives is used only as its statement specifies; this unit has no replacement for the ordinary Zariski module-cohomology calculus or flat-pullback theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-cohomology-separated",
+  "new-module-cohomology-ext-pullback-comparison",
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-d64f10840",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-d64f10840 (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps; its statement and stmt_deps are byte-identical to live, where it is still unsplit), the new node and every cited statement. Sources read: Stacks 02KH (coherent.tex l.948) and 01F8/01F9/01FA/01FB (cohomology.tex l.2340-2440); the 05TE label (derived.tex l.5681) was checked in tags/tags. No SGA. One fault, C4 in step 1. The step cited lem-pc-flat-base-change-cohom, whose affine clause gives only an abstract isomorphism, but steps 4-8 compute with the specific map beta(a⊗z)=a·p_A^*z. A second gap is in the same step: that beta is built in the Ext model, while steps 4 and 8 treat p_A^* as the module f-map pullback. FIX: step 1 now cites lem-pc-flat-cohomology-separated (the specific beta of def-pc-flat-cohomology-comparison is bijective; here Y is compact and separated over k, every k-algebra is flat via def-weil-pbc-flat-ring-map, and E is quasi-coherent). It also cites new-module-cohomology-ext-pullback-comparison, which sends the f-map unit pullback to baseChangeLinear; its naturality for multiplication maps carries the scalar actions across. lem-pc-flat-base-change-cohom is dropped, and proof_deps and tool_uses are updated; there is no cycle. The other steps check out: theta_g and q_g run in the stated direction; the cocycle gives q_gh=q_g∘t_g^*q_h and t_gh=t_h∘t_g, hence r(g)r(h)=r(gh); the base-change square needs no flatness of alpha; I did the tensor calculations for coassociativity (u1,u2 in D=B⊗B) and the counit by hand; for the connecting maps the boundary lemma is applied three times (unit maps over p_A, multiplication by a, adjoints of q_g over t_g). The new node is true: a horseshoe resolution gives termwise split rows, f_* of them is exact, and naturality of the connecting morphism plus RGamma gives the identity, without flatness. It is statement-only and introduces its own objects, and it is no duplicate: I compared it with lem-sfb-topos-cohomology-pullback-delta, the fmap calculus nodes and the regular-hyperplane maps. Edge cases checked: A=0, Y empty, trivial G, G_m weight n, nonreduced G, infinite-dimensional cohomology.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LinearizedQcoherentCohomologyCoaction",
+  "declaration": "AlgebraicGeometry.LinearizedCohomology.exists_coaction",
+  "declarations": [
+   "AlgebraicGeometry.LinearizedCohomology.tensorComparison",
+   "AlgebraicGeometry.LinearizedCohomology.tensorLift",
+   "AlgebraicGeometry.LinearizedCohomology.IsEquivariant",
+   "AlgebraicGeometry.LinearizedCohomology.test",
+   "AlgebraicGeometry.LinearizedCohomology.base",
+   "AlgebraicGeometry.LinearizedCohomology.baseModule",
+   "AlgebraicGeometry.LinearizedCohomology.baseH",
+   "AlgebraicGeometry.LinearizedCohomology.inverseTranslation",
+   "AlgebraicGeometry.LinearizedCohomology.actionCoefficient",
+   "AlgebraicGeometry.LinearizedCohomology.action",
+   "AlgebraicGeometry.LinearizedCohomology.map",
+   "AlgebraicGeometry.LinearizedCohomology.boundary",
+   "AlgebraicGeometry.LinearizedCohomology.zeroSection",
+   "AlgebraicGeometry.LinearizedCohomology.sectionAction",
+   "AlgebraicGeometry.LinearizedCohomology.evaluate",
+   "AlgebraicGeometry.LinearizedCohomology.evaluatedAction",
+   "AlgebraicGeometry.LinearizedCohomology.exists_coaction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearizedQcoherentCohomologyCoaction.lean",
+  "statement": "theorem exists_coaction (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (Y : Over (Spec (.of k))) [CompactSpace Y.left] [IsSeparated Y.hom] (a : ModObj G.X Y) : ∃ c : ∀ (E : Y.left.Modules) (_ : E.IsQuasicoherent) (_ : GroupSchemeLinearization.Linearization a E) (i : ℕ), scalarCohomology Y.hom E i →ₗ[k] scalarCohomology Y.hom E i ⊗[k] Γ(G.X.left, ⊤), (∀ (E : Y.left.Modules) (hE : E.IsQuasicoherent) (D : GroupSchemeLinearization.Linearization a E) (i : ℕ), HopfAction.Coassociative k Γ(G.X.left, ⊤) (scalarCohomology Y.hom E i) (c E hE D i) ∧ HopfAction.Counital k Γ(G.X.left, ⊤) (scalarCohomology Y.hom E i) (c E hE D i) ∧ ∃ beta : ∀ (A : Type u) [CommRing A] [Algebra k A], A ⊗[k] scalarCohomology Y.hom E i ≃ₗ[A] baseH E A i, (∀ (A : Type u) [CommRing A] [Algebra k A] (b : A) (z : scalarCohomology Y.hom E i), beta A (b ⊗ₜ[k] z) = b • @id (baseH E A i) (moduleCohomologyPullback (fst Y (test (k := k) A)).left E i z)) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (x : Γ(G.X.left, ⊤) →ₐ[k] A) (z : A ⊗[k] scalarCohomology Y.hom E i), beta A (evaluatedAction (c E hE D i) A x z) = action a D A ((Spec.map (CommRingCat.ofHom x.toRingHom)).asOver (Spec (.of k)) ≫ G.X.left.isoSpec.inv.asOver (Spec (.of k))) i (beta A z))) ∧ (∀ (E : Y.left.Modules) (_ : E.IsQuasicoherent) (D : GroupSchemeLinearization.Linearization a E) (A : Type u) [CommRing A] [Algebra k A] (g : test (k := k) A ⟶ G.X) (z : baseH E A 0), zeroSection E A (action a D A g 0 z) = sectionAction a D A g (zeroSection E A z)) ∧ (∀ (E F : Y.left.Modules) (hE : E.IsQuasicoherent) (hF : F.IsQuasicoherent) (D : GroupSchemeLinearization.Linearization a E) (D' : GroupSchemeLinearization.Linearization a F) (f : E ⟶ F) (_ : IsEquivariant a D D' f) (i : ℕ), (map f i).rTensor Γ(G.X.left, ⊤) ∘ₗ c E hE D i = c F hF D' i ∘ₗ map f i) ∧ (∀ [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings Y.left.toRingedSpace))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings Y.left.toRingedSpace).obj.obj (op ⊤)))] (S : ShortComplex Y.left.Modules) (hS : S.ShortExact) (h₁ : S.X₁.IsQuasicoherent) (_ : S.X₂.IsQuasicoherent) (h₃ : S.X₃.IsQuasicoherent) (D₁ : GroupSchemeLinearization.Linearization a S.X₁) (D₂ : GroupSchemeLinearization.Linearization a S.X₂) (D₃ : GroupSchemeLinearization.Linearization a S.X₃) (_ : IsEquivariant a D₁ D₂ S.f) (_ : IsEquivariant a D₂ D₃ S.g) (i : ℕ), (boundary S hS i).rTensor Γ(G.X.left, ⊤) ∘ₗ c S.X₃ h₃ D₃ i = c S.X₁ h₁ D₁ (i + 1) ∘ₗ boundary S hS i)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical action and tensor comparisons have real data. The right-derived cohomology, coordinate Hopf algebra, existing test-scheme linearization and canonical connecting map are reused. The scalar-extension isomorphisms are fixed by their pure-tensor formula, and the coaction by evaluation on all scalar-extended classes, including the universal point. Only exists_coaction is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-602cb1bf8",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 967c938d. F1 resolved: theorem stmt_dep lem-sfb-rational-representation-comodule-dictionary dropped; the point is now (Spec.map (ofHom x)).asOver ≫ isoSpec.inv.asOver, definitionally the body of coordinatePoint (Spec.mapMulEquiv toFun, Mathlib Group/Affine l.274). F2 resolved: def-sfb-hopf-action-module-data (owner of Coassociative/Counital) added to stmt_deps and imported. Diff vs 967c: only those imports and one clause, plus node stmt_deps and lean.statement; node vs live differs only in lean and stmt_deps; lean.statement verbatim. All added stmt_deps are landed definition nodes. Maths re-checked: hypotheses, beta pinned for all A incl. 0, evaluation pins c, θ direction, degree-zero formula, naturality, δ i→i+1. Helpers have real data; only sorry. No compile (no file changed)."
+ }
+}

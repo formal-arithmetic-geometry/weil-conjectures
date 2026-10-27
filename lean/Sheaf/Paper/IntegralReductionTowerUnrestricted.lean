@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Sheaf.Paper.CompletedIntegralCoefficients
+public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-! # Integral reduction towers without a finite-field datum
@@ -288,6 +289,7 @@ attribute [local irreducible] identifiedMap
 end SheafOfModules.UnrestrictedTowerProof
 
 namespace WeilConjectures
+attribute [local irreducible] scalarReductionExistence HasDerivedCategory.standard
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
@@ -319,19 +321,7 @@ set_option linter.defProp false in
 /-- The canonical scalar-extension witness, with explicit standard localizations.
 Source: Stacks Tag 06YY (blueprint: def-weil-integral-reduction-tower). -/
 noncomputable def unrestrictedIntegralReductionExistence (n : ℕ) :=
-  letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
-    (SheafOfModules.derivedChangeRingIndependentCoefficients
-      (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (completedIntegralCommRingSheafUnrestricted l E Y)))
-  letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
-    (SheafOfModules.derivedChangeRingIndependentCoefficients
-      (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (integralCoefficientCommRingSheaf l E Y n)))
-  SheafOfModules.derivedChangeOfRingsIndependentCoefficients
-    (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
-    (O := completedIntegralCommRingSheafUnrestricted l E Y)
-    (O' := integralCoefficientCommRingSheaf l E Y n)
-    (completedIntegralCommRingProjectionUnrestricted l E Y n)
+  scalarReductionExistence l E Y n
 
 /-- Ordinary scalar extension along the actual coefficient projection, fixed on
 objects and maps by sectionwise tensor product followed by sheafification.
@@ -339,17 +329,18 @@ Source: Stacks Tag 06YY (blueprint: def-weil-integral-reduction-tower). -/
 noncomputable def unrestrictedIntegralReductionFunctor (n : ℕ) :
     integralTowerModules l E Y ⥤
       SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n) :=
-  (unrestrictedIntegralReductionExistence l E Y n).choose
+  scalarReductionExtension l E Y n
 
 /-- Additivity of ordinary reduction, from the scalar-extension witness.
 Source: Stacks Tag 06YY (blueprint: def-weil-integral-reduction-tower). -/
 noncomputable instance unrestrictedIntegralReductionFunctor_additive (n : ℕ) :
     (unrestrictedIntegralReductionFunctor l E Y n).Additive :=
-  (unrestrictedIntegralReductionExistence l E Y n).choose_spec.choose_spec.choose_spec.choose
+  scalarReductionExtensionAdditive l E Y n
 
 /-- Termwise finite reduction, before restricting the coefficient action.
 Source: Stacks Tag 06YY (blueprint: def-weil-integral-reduction-tower). -/
-noncomputable abbrev unrestrictedIntegralFiniteComplex (n : ℕ) :=
+@[reducible]
+noncomputable def unrestrictedIntegralFiniteComplex (n : ℕ) :=
   (unrestrictedIntegralReductionFunctor l E Y n).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- Finite reduction, read over the completion via its limit projection.
@@ -369,7 +360,7 @@ noncomputable def unrestrictedIntegralTensorSection (n : ℕ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (s : (integralCoefficientCommRingSheaf l E Y n).obj.obj U) (x : M.val.obj U) :
     ((unrestrictedIntegralReductionFunctor l E Y n).obj M).val.obj U :=
-  (eqToHom ((unrestrictedIntegralReductionExistence l E Y n).choose_spec.choose M).symm).val.app U
+  (eqToHom ((scalarReductionExistence l E Y n).choose_spec.choose M).symm).val.app U
     ((CategoryTheory.toSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (SheafOfModules.changeOfRingsPresheaf
         (completedIntegralCommRingProjectionUnrestricted l E Y n) M).presheaf).app U
@@ -401,12 +392,16 @@ private theorem unrestrictedCoefficientStep_comp (n : ℕ) :
     ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] using h
 
 attribute [local irreducible] unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted constantSheaf
+  SheafOfModules.changeOfRings SheafOfModules.changeOfRingsHom
 
 private theorem unrestrictedReduction_obj (n : ℕ) (M : integralTowerModules l E Y) :
     (unrestrictedIntegralReductionFunctor l E Y n).obj M =
       SheafOfModules.changeOfRings
         (completedIntegralCommRingProjectionUnrestricted l E Y n) M :=
-  (unrestrictedIntegralReductionExistence l E Y n).choose_spec.choose M
+  by
+    change (scalarReductionExistence l E Y n).choose.obj M = _
+    exact (scalarReductionExistence l E Y n).choose_spec.choose M
 
 private theorem unrestrictedReduction_map (n : ℕ)
     {M N : integralTowerModules l E Y} (a : M ⟶ N) :
@@ -415,7 +410,9 @@ private theorem unrestrictedReduction_map (n : ℕ)
         SheafOfModules.changeOfRingsHom
           (completedIntegralCommRingProjectionUnrestricted l E Y n) M a ≫
         eqToHom (unrestrictedReduction_obj l E Y n N).symm :=
-  (unrestrictedIntegralReductionExistence l E Y n).choose_spec.choose_spec.choose a
+  by
+    change (scalarReductionExistence l E Y n).choose.map a = _
+    exact (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose a
 
 private noncomputable def unrestrictedModuleStep (n : ℕ)
     (M : integralTowerModules l E Y) :

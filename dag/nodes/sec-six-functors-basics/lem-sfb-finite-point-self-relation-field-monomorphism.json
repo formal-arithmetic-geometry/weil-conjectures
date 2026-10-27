@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-finite-point-self-relation-field-monomorphism",
+ "kind": "statement",
+ "title": "A finite self-relation gives a field monomorphism at a space point",
+ "statement": "Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space, def-weil-affine-spectrum], with point classes [def-a1-space-point-topology]. Let $L$ be a field [def-weil-field] and $b:\\operatorname{Spec}L\\to X$ a morphism. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Suppose the two projections $\\operatorname{Spec}L\\times_X\\operatorname{Spec}L\\to\\operatorname{Spec}L$ are etale [def-weil-etale-morphism] and quasi-compact (inverse images of affine opens are quasi-compact [def-weil-pbc-quasi-compact-scheme]). Then there is a field $k$ and a monomorphism $j:\\operatorname{Spec}k\\to X$ representing the same point as $b$. Monomorphism means injectivity of composition on morphisms from every test scheme. No quasi-compactness of $j$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JU (lemma-R-finite-above-x), implication (3) to (4)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=\\operatorname{Spec}L$ and $R=U\\times_XU$. The representable diagonal in [def-trf-algebraic-space] makes $R$ a scheme, and the sheaf product has the stated universal property by [lem-trf-space-fibre-products-etale-covers]. On every test scheme $T$, $R(T)$ is exactly the set of pairs $(a_1,a_2)\\in U(T)^2$ satisfying $b a_1=b a_2$. This is an equivalence relation and its map to $U(T)^2$ is injective. Thus $R\\rightrightarrows U$ is an etale equivalence relation, since its two projections are etale by hypothesis.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), (3) implies (4), first two sentences."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-relation-quotient] to this relation over $\\operatorname{Spec}\\mathbf Z$. The fppf quotient sheaf $Y=U/R$ is an algebraic space; $q:U\\to Y$ is representable surjective etale and $R\\cong U\\times_YU$ with the same projections. Since $b s=b t$, its quotient universal property gives a map $i:Y\\to X$ satisfying $i q=b$.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 02WW (theorem-presentation) and 02WV (lemma-when-it-works-it-works); used in 03JU (3) implies (4)."
+   }
+  },
+  {
+   "text": "The map $i$ is a monomorphism. Indeed, take $y_1,y_2\\in Y(T)$ with $i(y_1)=i(y_2)$. By the local lifting clause of [lem-trf-etale-relation-quotient], lift both on a common etale covering $T_a\\to T$ to $u_{1,a},u_{2,a}\\in U(T_a)$ (successively lift the two sections and refine). Their images under $b$ agree, so their pair is in $R(T_a)=U(T_a)\\times_{X(T_a)}U(T_a)$. The quotient map identifies this pair, giving $y_1|_{T_a}=y_2|_{T_a}$. Since $Y$ is a sheaf, $y_1=y_2$. This proves injectivity for every test scheme.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VH (lemma-quotient-groupoid-restrict), the same local quotient injectivity argument specialized to the kernel pair of b."
+   }
+  },
+  {
+   "text": "The scheme $U$ is affine, hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Its relation for $q$ is $R$ by step 2, so one (in fact both) of its projections is quasi-compact by hypothesis. Apply [lem-sfb-space-qs-atlas-criterion] to the surjective etale atlas $q:U\\to Y$. It follows that $Y$ is quasi-separated in the absolute-diagonal sense required below.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qs-atlas-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S4 (lemma-quasi-separated), supplying the quasi-separatedness implicit in the invocation of 03DZ in 03JU."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pointlike-quasiseparated-space-field] to $q:U=\\operatorname{Spec}L\\to Y$: step 2 supplies its representable surjective etale atlas and step 4 supplies quasi-separatedness. We obtain $Y\\cong\\operatorname{Spec}k$ for a subfield $k\\subseteq L$. Compose the inverse of this isomorphism with $i$ to obtain $j:\\operatorname{Spec}k\\to X$. It is monic by step 3. The equality $b=i q$ identifies $b$ with the pullback of $j$ along the field extension $k\\subseteq L$, so their point classes agree by [def-a1-space-point-topology]. This proves the conclusion without a quasi-compactness assertion about $j$.",
+   "uses": [
+    "lem-sfb-pointlike-quasiseparated-space-field",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JU (lemma-R-finite-above-x), (3) implies (4), final factorization; Tag 03DZ (lemma-point-like-spaces)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-relation-quotient",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qs-atlas-criterion",
+  "lem-sfb-pointlike-quasiseparated-space-field",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JU (lemma-R-finite-above-x), (3) implies (4), with its 03DZ input and the explicit 07S4 hypothesis check."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space point with finite etale self relation is represented by a monomorphism from a field spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecStalk x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point has a residue field monomorphism when its etale equivalence relation on a field is finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Mono\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]quivalence[Rr]elation.*[Ff]ield",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite self relation at an algebraic space point implies existence of a field valued monomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    (self : AlgebraicGeometry.ValuativeCommSq f) →\\n      AlgebraicGeometry.Spec { carrier := self.K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X\", \"doc\": \"For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \\to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space point with etale quasi compact self relation has a representative from the spectrum of a field which is a monomorphism",
+   "results": "{\"t\": \"2026-10-23T14:55:56Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space point with etale quasi compact self relation has a representative from the spectrum of a field which is a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsPreimmersion\"], \"digest\": \"735ef3afadf0ae66\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]quivalence[Rr]elation.*[Ff]ield",
+   "results": "{\"t\": \"2026-10-23T14:57:31Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Ee]quivalence[Rr]elation.*[Ff]ield\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale self relation of a field valued point of an algebraic space gives a field spectrum monomorphism",
+   "results": "{\"t\": \"2026-10-23T14:57:31Z\", \"tool\": \"leansearch\", \"query\": \"Finite etale self relation of a field valued point of an algebraic space gives a field spectrum monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"RingHom.FormallyEtale\", \"Algebra.etaleLocus_eq_univ_iff_etale\"], \"digest\": \"286eb604d7ce014b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Mono\"",
+   "results": "{\"t\": \"2026-10-23T14:57:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Mono\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field valued point of an algebraic space whose kernel pair projections are quasi compact and etale factors through a field spectrum subobject",
+   "results": "{\"t\": \"2026-10-23T15:03:05Z\", \"tool\": \"leanfinder\", \"query\": \"A field valued point of an algebraic space whose kernel pair projections are quasi compact and etale factors through a field spectrum subobject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.ValuativeCommSq.i₁\"], \"digest\": \"350edef740d87d61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only schemes, residue fields, etale algebras or topological quasi-separatedness; none states the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-space-decent",
+  "date": "2026-10-23",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: after proving the field self-relation finite etale, obtain a field monomorphism representing the point.",
+   "via": [
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-point-self-relation-field-monomorphism",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the etale kernel-pair quotient, proved the induced map monic by local lifting, verified quasi-separatedness via 07S4 and isolated the genuine 03DZ representability input as one new statement-only node.",
+  "blueprint": "The historical inherited ancestor is null (as blueprint_refs.py ancestor reports). This realizes the recorded supporting input to det-thm-sf-ctf-stability-direct-images proof (3), via the locally separated-space decency argument, specifically Stacks 03JU (3) implies (4); latest blueprint unit and direct-image proof read.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Representable diagonal and sheaf semantics define the kernel pair; generic space foundations, not a trace-formula result."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic sheaf fibre-product universal property identifies the kernel pair; the unit gives no alternative foundation."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic etale relation presentation and quotient universal property, the exact 02WW input cited by 03JU; no unit-specific alternate quotient theorem."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine scheme quasi-separatedness verifies the hypothesis of 07S4; not a base-change route replacement."
+   },
+   {
+    "node": "def-a1-space-point-topology",
+    "why": "Generic definition of field-valued point classes verifies that the factorization represents the same point."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-etale-relation-quotient",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-a1-space-point-topology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-54ac92dad",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-54ac92dad (reviewer sub-agent of L); spot-checked: PASS; I read the item, the new node and every cited statement in full. The split follows Stacks 03JU (3)⇒(4): R=U×_X U is an étale equivalence relation (step 1, elementary); 02WW quotient via lem-trf-etale-relation-quotient (step 2, every clause checked); i is monic by the 02VH local-lift argument (step 3, a correct few-line argument); Y is absolutely quasi-separated by 07S4 (lem-sfb-space-qs-atlas-criterion) with affine U and the quasi-compact projections from the hypothesis (step 4); 03DZ then gives Y≅Spec k and j=i∘iso⁻¹ (step 5). Step 4 makes explicit the quasi-separatedness that 03JU leaves implicit. The new 03DZ node is faithful: absolute qs is the Stacks convention and implies the qs over S that the proof uses; finite separable is justified by the étale map plus finite locally free projections. It is self-contained and statement-only. Small cases tested: L=k, a non-Galois finite separable extension, empty Y, and Q-bar/Gal, which shows qs is needed. rg -L search found no duplicate: lem-sfb-qs-space-field-monomorphism gives only a mono, not Y≅Spec k; nothing else states 03DZ or the item. The item statement is unchanged from the base and still unsplit live, so the delivery is not superseded, and there is no re-split note. Batch-5 flags are all general algebraic-space foundations, none part of the trace-formula or Poincaré proofs: lem-trf-etale-relation-quotient (02WW presentation), lem-sfb-space-qs-atlas-criterion (closure reaches only def-trf-algebraic-space), def-trf-algebraic-space (a general definition). The worker wrote the five tool_uses itself, against C8; all are generic foundations, so I accept them as recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePointSelfRelationFieldMonomorphism",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_point_self_relation_field_monomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePointSelfRelationFieldMonomorphism.lean",
+  "statement": "theorem finite_point_self_relation_field_monomorphism (X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (L : Type u) [Field L] (b : yoneda.obj (Over.mk (specULiftZIsTerminal.from (Spec (CommRingCat.of L)))) ⟶ X.obj.obj) (R : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (s t : R ⟶ Over.mk (specULiftZIsTerminal.from (Spec (CommRingCat.of L)))) (hR : IsPullback (yoneda.map s) (yoneda.map t) b b) (hs : Etale s.left) (ht : Etale t.left) (hsc : QuasiCompact s.left) (htc : QuasiCompact t.left) : ∃ (k : Type u) (_ : Field k) (j : yoneda.obj (Over.mk (specULiftZIsTerminal.from (Spec (CommRingCat.of k)))) ⟶ X.obj.obj), (∀ T : Over (Spec (CommRingCat.of (ULift.{u} ℤ))), Function.Injective (j.app (op T))) ∧ (Quot.mk _ (⟨k, specULiftZIsTerminal.from (Spec (CommRingCat.of k)), yonedaEquiv j⟩ : PointRepresentative X.obj.obj) : Point X.obj.obj) = Quot.mk _ (⟨L, specULiftZIsTerminal.from (Spec (CommRingCat.of L)), yonedaEquiv b⟩ : PointRepresentative X.obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-916a90544",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, Stacks 03JU (3)=>(4), all 7 stmt_deps and their Lean (AlgebraicSpace/IsAlgebraicSpace, Spec, Point/PointRepresentative/Rel, Field, fibre products, Etale, quasi-compactness), the module and report. Every clause matches: X over Spec ULift Z (terminal); b a Yoneda map from Spec L; self-product presented by R,s,t with IsPullback in presheaves (exists by the representable diagonal; equivalent to the canonical one up to iso); Etale and QuasiCompact on both projections (Mathlib QuasiCompact is equivalent to the affine-preimage test); ∃ k : Type u, field, j with injective j.app on every T : Over S (monomorphism on test schemes); equality of Quot.mk point classes of yonedaEquiv j and b. No extra assumptions; universes bound; statement verbatim; node otherwise identical to live; single sorry theorem with source/blueprint docstring and the 5-step proof. No duplicate (grep of Sheaf and dag for 03JU, field_monomorphism, self_relation; the related sfb nodes state different results). Edge cases: empty X, trivial relation k=L, all characteristics. Report has Worker report and Second reading sections. No changes, so no compile."
+ }
+}

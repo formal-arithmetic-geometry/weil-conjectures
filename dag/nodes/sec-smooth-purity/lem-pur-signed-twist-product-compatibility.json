@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-signed-twist-product-compatibility",
+ "kind": "statement",
+ "title": "Multiplication compatibility forced by signed evaluation normalization",
+ "statement": "Fix a finite purity setting P of [def-pur-conventions], a natural number n with P.level=n+1, the finite coefficient ring A=O_E/(varpi_E^(n+1)), and a proof that ell^(n+1) annihilates A. For every k-scheme X with structure morphism a, write L_X(r) and M_X(r) for the signed etale and pro-etale A-module sheaves, and nu_X for site comparison, as defined in [def-pur-signed-twist-site-transport-data]. Let b_X(j):nu_X^*L_X(j) ≅ M_X(j), j≥0, satisfy the specified root-tensor normalization [lem-amb-finite-tate-site-descent]. Let q_X(r) be any family of signed comparison isomorphisms agreeing with b in nonnegative degrees and satisfying the actual evaluation equation of [def-pur-signed-twist-site-transport-data]. Fix ordered multiplication isomorphisms mu_X(r,s):M_X(r) tensor M_X(s) ≅ M_X(r+s), normalized on every signed line basis as in [def-sf-signed-line-product-normalization-data]. Then for every pair of integers r,s, q_X(r+s) carries the pulled canonical etale ordered product to mu_X(r,s) applied to the two q-images. This is an equality on all pairs of local etale sections and after every restriction to a pro-etale object over them. It asserts SignedSiteMultiplication and makes no geometric claim.",
+ "stmt_deps": [
+  "def-pur-signed-twist-site-transport-data",
+  "lem-amb-finite-tate-site-descent",
+  "def-sf-signed-line-product-normalization-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, tensor product; Tag 03EO, lemma-internal-hom-adjoint-tensor; elementary basis calculation for the specified ordered powers and contractions."
+ },
+ "proof": [
+  {
+   "text": "Check multiplication on a cover trivializing $L_X$. Write $e_0=1$, $e_a=e^{\\otimes a}$ for $a>0$, and $e_{-a}=e_a^\\vee$. Write $f=q_{X,1}(e)$ and define $f_a$ in the same way. The fixed positive tensor comparisons and Step 2 give $q_{X,a}(e_a)=f_a$ for every integer $a$. The module associators, symmetries and unitors are induced by their sectionwise module maps [lem-pc-sheaf-modules-tensor-closed]. Hence each ordered multiplication sends $e_r\\otimes e_s$ to $e_{r+s}$: for two positive exponents it concatenates tensors; for two negative exponents the tensor of functionals takes value $1$ on $e_{-r-s}$; for opposite signs it contracts $\\min(|r|,|s|)$ basis/dual pairs, leaving the positive or dual excess, and for equal opposite exponents the value is $1$. Zero exponents use the unitors. The same calculation holds for the $f_a$. The normalized inverse-image tensor comparison sends pulled pure tensors to tensors of pulled sections [lem-pur-independent-inverse-image-tensor-comparison]. Thus both sides of the claimed multiplication equation send $e_r\\otimes e_s$ to $f_{r+s}$, and by linearity they agree. Equality is local by uniqueness of gluing sections. A replacement $e\\mapsto ue$ multiplies $e_a$ by $u^a$ for every signed $a$, and both routes by $u^{r+s}$, so the calculation is independent of the cover and basis.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, tensor product; Tag 03EO, lemma-internal-hom-adjoint-tensor; elementary basis calculation for the specified ordered powers and contractions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-independent-inverse-image-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Separate result in Step 3 of lem-pur-signed-twist-site-transport; its full local proof is in the declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor for sheaves of modules preserves the dual of a finite locally free line and its evaluation pairing",
+   "results": "8 hits: Scheme.Modules.pullback; SheafOfModules.pullback; pullbackObjFreeIso.congr_simp; pullbackPushforwardAdjunction; Equivalence.sheafCongrPrecoherent_inverse_map_val_app; instIsLeftAdjointPullback; pullbackObjFreeIso_hom_naturality; pullbackObjFreeIso_hom_naturality_assoc.",
+   "date": "2026-10-25",
+   "verdict": "Generic pullback and free-module API, no normalization of the actual signed Tate comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image of module sheaves sends a finite locally free line dual to its dual preserving evaluation and uniquely extends a positive Tate comparison to signed powers",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv; ModuleCat.tilde; LightCondensed.free; ModuleCat.Tilde.toOpen; ModuleCat.tildeInModuleCat; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.freeHomEquiv_symm_comp; ModuleCat.Tilde.const.",
+   "date": "2026-10-25",
+   "verdict": "no exact result for the specified root-normalized signed Tate maps; generic free-sheaf and tilde results do not assert the evaluation, product or geometric equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual, CategoryTheory.Functor.Monoidal",
+   "results": "1 hit: CategoryTheory.hasRightDualOfEquivalence, Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "dual transport along an equivalence, not the specified Tate comparison and its local normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|signed.*[Pp]ower",
+   "results": "1 hit: Mathlib/Combinatorics/Enumerative/Partition/GenFun.lean:53, each n is assigned a value, which we use as the coefficients of the power series.",
+   "date": "2026-10-25",
+   "verdict": "unrelated power-series use; no Tate sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SignedTwistSiteTransport",
+  "date": "2026-10-25",
+  "group": "A6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Proof 'Permutations': the canonical tensor/evaluation identifications of the coefficient twists used by the supported products. This is source Step 3 of lem-pur-signed-twist-site-transport.",
+   "via": [
+    "lem-pur-signed-twist-site-transport",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedTwistProductCompatibility",
+  "file": "lean/Sheaf/Paper/SignedTwistProductCompatibility.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.signedTwistProductCompatibility",
+  "statement": "theorem signedTwistProductCompatibility (P : PurityFiniteSetting.{u}) (n : ℕ)\n    (hlevel : P.level = n + 1)\n    (hA : ((P.coefficients.l ^ (n + 1) : ℕ) : P.signedSiteCoefficient n) = 0)\n    (b : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj\n        (P.signedSiteEtale n hA X (k : ℤ)) ≅ P.signedSitePro n X (k : ℤ))\n    (hb : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      IsFiniteTateSiteComparison P.coefficients.l P.extension n X n hA k (b X a k))\n    (q : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (r : ℤ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj\n        (P.signedSiteEtale n hA X r) ≅ P.signedSitePro n X r)\n    (hq : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      q X a k = b X a k)\n    (he : P.SignedSiteEvaluation n hA q)\n    (μ : P.SignedSiteProducts n)\n    (hμ : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)),\n      SheafOfModules.SignedLineProductNormalized.{u + 1, u, u + 1}\n        (R := integralCoefficientCommRingSheaf P.coefficients.l P.extension X n)\n        (purTwistFiniteOne X P.coefficients.l P.extension n) (μ X a)) :\n    P.SignedSiteMultiplication n hlevel hA μ q",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "independent cc review: delivered SignedTwistSiteTransportData defs vs clone a25e16ef939 SignedTwistSiteTransport lines 44-284 (byte-identical); theorem signature byte-identical; 3 new sorry statements = item conjuncts (node lean.statement = signature ×3); root_normalized compiled in scratch against live defs, axioms propext/Classical.choice/Quot.sound; 0 importers"
+ }
+}

@@ -105,5 +105,82 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
+     "lines": [
+      195,
+      234
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_smooth",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
+     "lines": [
+      157,
+      193
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "On a smooth connected curve $C$ over an algebraically closed field let\n$\\mathcal G_m^{\\mathrm{cl}}=\\nu_C^*\\mathbf G_{m,C_{\\mathrm{ét}}}$ be the\nclassical multiplicative sheaf on $C_{\\mathrm{proét}}$.\n\nFor a smooth separated curve $C$ of finite type over an algebraically closed\nfield, one has\n\n$$\nH^1(C,\\mathcal G_m^{\\mathrm{cl}})=\\operatorname{Pic}(C),\n\\qquad\nH^q(C,\\mathcal G_m^{\\mathrm{cl}})=0\\quad(q\\geq2).\n$$\n\nThe identifications are natural under restriction and extension of the\nalgebraically closed ground field. In particular $\\Br(C)=0$ ([def-br]).",
+  "proof": [
+   {
+    "text": "We compute on $C_{\\mathrm{ét}}$. Descent for invertible modules identifies\n$\\mathbf G_m$-torsors with line bundles ([thm-sc-hilbert-90]), which gives\nthe assertion in degree one. In degrees at least two we use the theorem that\n$H^q(C_{\\mathrm{ét}},\\mathbf G_m)=0$ for $q\\geq2$ on a smooth curve over an\nalgebraically closed field (Stacks, Tag 03RM). Its proof combines the divisor\nsequence of rational functions and their discrete valuations\n([lem-sc-divisor-sequence-general]) with the Galois cohomology of the function field\n$K=k(C)$; the geometric input is Tsen's theorem ([lem-sc-tsen]), which we\nrecall.",
+    "uses": [
+     "thm-sc-hilbert-90",
+     "lem-sc-divisor-sequence-general",
+     "lem-sc-tsen"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Tsen's theorem says that $K$ is $C_1$ ([def-sc-cr-field]): a homogeneous form of\ndegree $d$ in $m>d$ variables has a nonzero zero. On a smooth proper model,\nbound the poles of its coefficients by a divisor $D$ and let the unknowns\nrange over $H^0(C,\\cO_C(NH))$ for an ample divisor $H$. The value of the form\nthen lies in $H^0(C,\\cO_C(dNH+D))$. By Riemann–Roch there are\n$mN\\deg H+O(1)$ unknown coefficients and $dN\\deg H+O(1)$ homogeneous\nequations. For large $N$ the first number is larger, so over the\nalgebraically closed field $k$ the equations have a nonzero solution\n(Stacks, Tag 03RD).",
+    "uses": [
+     "def-sc-cr-field"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The reduced norm form of a division algebra of degree $d>1$ over $K$ has\ndegree $d$ in $d^2>d$ variables and does not vanish on a nonzero element.\nTsen's theorem therefore gives $\\operatorname{Br}(K)=0$ (Stacks, Tag 03RF).\nThe same holds for every finite extension of $K$, since it is again the\nfunction field of a curve over $k$. The vanishing of the Brauer group is one ingredient; (Stacks, Tag 03RM)\ncombines it with the discrete-valuation calculation and the cohomology of\nthe function field to obtain vanishing in every degree $q\\geq2$ (for $q=2$\nthis is also the route $\\Br(C)\\hookrightarrow\\Br(k(C))=0$ of\n[lem-sc-brauer-injectivity]).",
+    "uses": [
+     "lem-sc-brauer-injectivity"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Finally [sk-prop-sf-comparison] transports these identifications to\n$C_{\\mathrm{proét}}$. The comparison maps, the torsor identifications and the\nrestriction maps are functorial, which gives the stated naturality.",
+    "uses": [
+     "sk-prop-sf-comparison"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

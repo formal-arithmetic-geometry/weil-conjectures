@@ -1,0 +1,161 @@
+{
+ "id": "lem-sfb-space-diagonal-locally-finite-type",
+ "kind": "statement",
+ "title": "The relative diagonal of an algebraic-space morphism is locally of finite type",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$, with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $g:U\\to V$ be any morphism of algebraic spaces. Its diagonal $\\Delta_g:U\\to U\\times_VU$ is representable and locally of finite type, where local finite type is tested on etale scheme charts [def-weil-finite-type-morphism]. Representable means that its pullback along every scheme mapping to $U\\times_VU$ is a scheme. No finiteness or separation hypothesis is imposed on $g$, $U$, or $V$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03HK (lemma-properties-diagonal), parts (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Spec}\\mathbf Z$ and $W=U\\times_VU$. Apply [lem-sfb-space-diagonal-scheme-tests] to $g:U\\to V$ over $B$. Its hypotheses are exactly that $B$ is a scheme and $U,V$ are algebraic spaces over $B$; it imposes no finiteness or separation conditions. For every scheme $T\\to W$ it gives a scheme $D_T=U\\times_WT$ with locally finite type projection $d_T:D_T\\to T$. The existence of these schemes for all $T\\to W$ is precisely representability of $\\Delta_g$, as defined in [def-trf-algebraic-space].",
+   "uses": [
+    "lem-sfb-space-diagonal-scheme-tests",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HK (lemma-properties-diagonal), (1)--(2), read with spaces.tex Tag 025V (definition-relative-representable-property); specialization of the existing scheme-test formulation."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $T\\to W$, which exists by [def-trf-algebraic-space]. Step 1 says $D_T$ is a scheme and $d_T:D_T\\to T$ is locally of finite type. In [lem-sfb-space-local-properties-chart-test] take $f=\\Delta_g$, the target chart $T\\to W$, and the source chart $D_T\\to U\\times_WT$ to be the identity. The identity is etale and surjective, so the criterion implies that $\\Delta_g$ is locally of finite type in the etale-chart sense required here. This also handles the empty atlas when $W$ is empty.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HK (lemma-properties-diagonal), (2), and Tag 03MJ (lemma-local-source-target): comparison of scheme-test and chartwise local finite type."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-space-diagonal-scheme-tests",
+  "lem-sfb-space-local-properties-chart-test"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03HK (lemma-properties-diagonal), (1)--(2), read with spaces.tex Tag 025V (definition-relative-representable-property); specialization of the existing scheme-test formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ll]ocallyOfFiniteType.*diagonal|diagonal.*[Ll]ocallyOfFiniteType|AlgebraicSpace",
+   "results": "OK 1 hits. Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of FiniteType.lean:37-44, Separated.lean:39-46 and FormallyUnramified.lean:126 shows scheme morphisms only; no algebraic-space statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of any algebraic space morphism is locally of finite type",
+   "results": "OK 8 hits. AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion; AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal; AlgebraicGeometry.LocallyOfFiniteType.mk; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; AlgebraicGeometry.IsImmersion.instDiagonalScheme; AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of FiniteType.lean:37-44, Separated.lean:39-46 and FormallyUnramified.lean:126 shows scheme morphisms only; no algebraic-space statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\", \"diagonal\"",
+   "results": "OK 0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of FiniteType.lean:37-44, Separated.lean:39-46 and FormallyUnramified.lean:126 shows scheme morphisms only; no algebraic-space statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative diagonal of every morphism of algebraic spaces is representable and locally of finite type",
+   "results": "OK 8 hits. AlgebraicGeometry.AffineTargetMorphismProperty.diagonal; AlgebraicGeometry.IsImmersion.instDiagonalScheme; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal; AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal; AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme; AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme; AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of FiniteType.lean:37-44, Separated.lean:39-46 and FormallyUnramified.lean:126 shows scheme morphisms only; no algebraic-space statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any algebraic space morphism has a locally finite type diagonal even without finite type assumptions",
+   "results": "OK 8 hits. AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal; AlgebraicGeometry.IsImmersion.instDiagonalScheme; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal; AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme; AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact; AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: source inspection of FiniteType.lean:37-44, Separated.lean:39-46 and FormallyUnramified.lean:126 shows scheme morphisms only; no algebraic-space statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-descend-separated",
+  "date": "2026-10-23",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 0851 (lemma-descend-separated-morphism), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence by spaces-morphisms.tex Tag 03KL (lemma-base-change-separated). Supporting input: Tag 03HK (lemma-properties-diagonal), parts (1) and (2).",
+   "via": [
+    "lem-sfb-space-descend-separated",
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-diagonal-locally-finite-type",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger arbitrary-base scheme-test lemma rather than duplicating Tag 03HK. Specialization to Spec Z gives representability on every scheme test; the existing two-chart criterion translates its scheme local finite type conclusion to the item chart convention. No statement change and no new nodes. Repeated all search kinds using the required logged command for Q18.",
+  "blueprint": "The inherited ancestry has from.node null. Retains its exact from.place chain through det-thm-sf-ctf-stability-direct-images, proof (3), and separatedness descent; realizes the final supporting input Tag 03HK (1)--(2) by the already existing scheme-test node. Latest blueprint direct-images proof (3) read; no change to its route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-2981f256f",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-2981f256f (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes. Statement checked against Stacks spaces-morphisms.tex Tag 03HK (lemma-properties-diagonal, l.165-234), parts (1)-(2): it agrees, with no extra hypotheses and nothing weakened. Step 1 cites the existing unsplit lem-sfb-space-diagonal-scheme-tests (Q153), a strict generalisation (any base B, plus a monomorphism clause). With B=Spec Z it gives a scheme D_T=U x_W T for every scheme T -> W, which is exactly representability as defined in def-trf-algebraic-space. Step 1 uses only that node's statement (C3 OK). Step 2 cites lem-sfb-space-local-properties-chart-test with target chart a surjective etale atlas T -> W (W is an algebraic space by lem-trf-space-fibre-products-etale-covers) and source chart id_{D_T}. Since d_T is locally of finite type, Delta_g is locally of finite type in the chart sense. Every hypothesis of the chart test is met, and it assumes no quasi-compactness or separatedness. Tag 03MJ was checked at l.4097. Edge cases: empty W uses the empty atlas, which the chart test allows; if U and V are schemes the result reduces to the scheme diagonal. No closure contains the item, so there is no cycle. Both cited lemmas are in the item's own unit, so there are no tool uses. Batch-5 flag: the closure of the chart-test node reaches def-trf-algebraic-space and generic lemmas on space fibre products and atlas tests. These are foundations, not part of the trace-formula or Poincare-duality proofs, and the item's base stmt_deps already contained them, so the citation is accepted. No SGA source is used. Advisory: the item is now a corollary of the more general scheme-tests node, which carries the Tag 03HK content."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDiagonalLocallyFiniteType",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.diagonal_representable_and_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDiagonalLocallyFiniteType.lean",
+  "statement": "theorem diagonal_representable_and_locallyOfFiniteType {U V : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))} (g : U ⟶ V) : IsRepresentable (Limits.pullback.diagonal g.hom.hom) ∧ MapIsLocally (@LocallyOfFiniteType) (Y := ⟨Limits.pullback g.hom g.hom, (fibreProduct_isAlgebraicSpace U U V g g).1⟩) (ObjectProperty.homMk (Limits.pullback.diagonal g.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11b815089",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Lean statement matches the node and Stacks 03HK (1)-(2). Base is Spec ULift.{u} Z with arbitrary u. U x_V U is bundled via the landed fibreProduct_isAlgebraicSpace. Conjunct 1 uses IsRepresentable on the presheaf diagonal: every scheme test gets a representing scheme and pullback square. Conjunct 2 uses the landed MapIsLocally (@LocallyOfFiniteType): all compatible etale chart pairs; equivalent to the node's chart notion by Tag 03MJ, and local_properties_chart_test covers this property. No extra hypotheses. Edge cases checked: empty spaces, u=0, identity g, U and V schemes. Added stmt_dep def-sfb-space-morphism-properties is landed, used and acyclic. lean.statement is verbatim; declaration name is unique; no H4 duplicate. Proof is only sorry; docstrings give source place, blueprint id and both proof steps. Report has Worker report and Second reading sections. No file changed, so no compile."
+ }
+}

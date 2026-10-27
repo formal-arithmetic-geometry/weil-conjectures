@@ -1,0 +1,154 @@
+{
+ "id": "lem-sf-finite-localizing-smooth-local-formula",
+ "kind": "statement",
+ "title": "Common-cover smooth formula for the finite localizing exceptional adjoint",
+ "statement": "Fix a prime ell and a field k of positive characteristic different from ell. Let A be a finite discrete commutative ring killed by ell^r. Let f:X -> Y be a separated finite-type smooth k-morphism of pure relative dimension d between separated finite-type k-schemes. Use the internal condensed finite-discrete coefficient module derived categories and bounded constructible finite-Tor property of [sk-def-sfb-constructible], [def-weil-proetale-tor-amplitude], and their localizing closures [sk-def-localizing-closure]. Fix a boundary compactification c, preservation h of localizing closures by its compact-support functor, and a specified right adjoint G to that restricted compact-support functor [sk-prop-sf-existence]. Then there exists one etale cover U_i -> X such that (1) the actual pro-etale Tate line, defined as comparison pullback of the finite etale twist A_X(d) for N=ell^r [def-asd-finite-etale-tate-twist], pulls back to the constant regular A-module on every U_i, and (2) on the full subcategory of the localizing closure consisting of bounded constructible finite-Tor objects on Y, the composite of G, ambient inclusion and pullback to U_i is naturally isomorphic to ambient inclusion, f-pullback, U_i-pullback, and shift by 2d. The cover and isomorphisms are independent of the input complex. This statement asserts only the smooth tensor calculation, and does not assert preservation or an adjunction restriction for arbitrary f.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Final restriction and smooth formula paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "sk-def-localizing-closure",
+  "sk-prop-sf-existence",
+  "def-sbc-smooth-morphisms",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-proetale-modules",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-discrete coefficient equivalence and its constructibility/finite-Tor API. The existing ordinary finite-coefficient shriek-finiteness and adjunction theorems give the small adjunction; bounded etale origin and compactification independence identify its left adjoint for the fixed compactification. Conjugate this adjunction by the coefficient equivalences. Apply the generator-preservation argument of EtaleProEtaleAdjunctionTransfer to the specified localizing adjunction, restrict it along the fully faithful generator inclusions, and use uniqueness of right adjoints to obtain a natural comparison with the ordinary exceptional adjoint.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "det-sp-et-proet-adjunction-transfer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Smooth tensor duality supplies a single etale line L, its shifted-dualizing-complex isomorphism, and an etale cover trivializing L. The finite etale Tate-twist line theorem supplies a cover trivializing the actual Tate line. Take their fiber-product common refinement. Translate over-site trivializations using the over-sheaf equivalence and pull them back to each member of the refinement. The cover and both trivializations are independent of the input complex.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical smooth tensor maps are invertible by the ordinary smooth-duality theorem. Their naturality in the input, the monoidal structure on derived pullback, the pulled-back dualizing-line trivialization and the shifted-unit tensor isomorphism give a natural local formula on the etale derived categories. For ordinary constructible finite-Tor pro-etale objects, choose etale origins functorially via the bounded-below comparison equivalence. Its invertible adjunction unit, the definition of the pro-etale exceptional adjoint, exact pullback comparisons and shift comparisons transport the local formula to pro-etale sheaves.",
+   "uses": [
+    "lem-sf-smooth-dualizing-complex-invertible",
+    "def-sfb-unbounded-direct-image-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the coefficient equivalence pullback comparison by uniqueness of left adjoints from the normalized pushforward comparison. Whisker the localizing-adjoint comparison with local pullback, apply the ordinary local smooth formula, and reflect the resulting natural isomorphism through the fully faithful coefficient equivalence. The underived etale/pro-etale pullback square and constant-sheaf comparison separately transport the Tate-line trivialization. A proved private categorical transport lemma assembles these comparisons with explicit associators and reflects the isomorphism through the fully faithful coefficient equivalence.",
+   "uses": [
+    "lem-pe-finite-discrete-encoding-pullback-fixed",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-unbounded-direct-image-mate",
+  "det-sp-et-proet-adjunction-transfer",
+  "lem-asd-finite-etale-twist-line",
+  "lem-pe-finite-discrete-encoding-pullback-fixed",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sf-smooth-dualizing-complex-invertible",
+  "thm-asd-smooth-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Common-cover smooth formula: ordinary finite-coefficient small adjunction, generator comparison, smooth tensor duality, and natural exact pullback transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint on the localizing closure of constructible finite Tor complexes for a smooth morphism is naturally a shifted pullback on an etale cover",
+   "results": "['AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'CategoryTheory.PullbackShift.adjunction', 'CategoryTheory.Adjunction.localization', 'SheafOfModules.instIsLeftAdjointPullback', 'SheafOfModules.PullbackConstruction.adjunction']",
+   "date": "2026-10-23",
+   "verdict": "no match for the local smooth exceptional formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\"",
+   "results": "['CategoryTheory.Functor.CommShift.commShiftIso', \"CategoryTheory.Functor.commShiftIso_zero'\", 'CategoryTheory.Functor.CommShift.commShiftIso_zero', \"CategoryTheory.Functor.commShiftIso_add'\", 'CategoryTheory.Functor.CommShift.commShiftIso_add', 'CategoryTheory.Functor.commShiftIso_id_hom_app', 'CategoryTheory.Functor.commShiftIso_id_inv_app', 'CategoryTheory.Functor.CommShift.id_commShiftIso_hom_app']",
+   "date": "2026-10-23",
+   "verdict": "no match for the local smooth exceptional formula"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*local.*(formula|Iso)|localizingExceptionalAdjoint",
+   "results": "['Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/RingTheory/RingHom/LocallyStandardSmooth.lean']",
+   "date": "2026-10-23",
+   "verdict": "no match for the local smooth exceptional formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth exceptional inverse image of finite torsion sheaves is naturally isomorphic to shifted pullback on an etale cover",
+   "results": "['SheafOfModules.freeFunctorCompPullbackIso', 'AlgebraicGeometry.IsEtale.instIsSmooth', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback', 'SheafOfModules.pullbackObjFreeIso', 'SheafOfModules.pushforwardNatIso_inv', 'CategoryTheory.Functor.sheafPushforwardContinuousIso_inv', 'CategoryTheory.GrothendieckTopology.overMapPullbackCongr_inv_app_val_app', 'SheafOfModules.pullbackIso']",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary pullbacks and not exceptional inverse image"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteLocalizingExceptionalPreservation",
+  "date": "2026-10-23",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Final smooth formula paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteLocalizingSmoothLocalFormula",
+  "file": "lean/Sheaf/Paper/FiniteLocalizingSmoothLocalFormula.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.localizingExceptionalAdjoint_smoothLocalFormula",
+  "statement": "theorem localizingExceptionalAdjoint_smoothLocalFormula\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    (A : Type u) [CommRing A] [Finite A] [TopologicalSpace A]\n    [DiscreteTopology A] [IsTopologicalRing A]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]\n    (c : Compactification.BoundaryCompactification f)\n    (h : ∀ K, localizingClosureProEtale (Profinite.continuousCoefficientRingObj A) X K →\n      localizingClosureProEtale (Profinite.continuousCoefficientRingObj A) Y\n        ((rightDerivedLowerShriekOfCompactification\n          (Profinite.continuousCoefficientRingObj A) c.obj.obj).obj K))\n    (G : (localizingClosureProEtale (Profinite.continuousCoefficientRingObj A) Y).FullSubcategory\n      ⥤ (localizingClosureProEtale (Profinite.continuousCoefficientRingObj A) X).FullSubcategory)\n    (adj : localizingLowerShriek (Profinite.continuousCoefficientRingObj A) c.obj.obj h ⊣ G)\n    (d : ℕ) [SmoothOfRelativeDimension d f]\n    (r : ℕ) (hAr : ((ℓ ^ r : ℕ) : ULift.{u + 1} A) = 0) :\n    ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage X, ∀ i : 𝒰.I₀,\n          Nonempty\n            ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (𝒰.f i)).obj\n                ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) X).obj\n                  (finiteEtaleTateTwist X (ℓ ^ r) (ULift.{u + 1} A) hAr d)) ≅\n              (constantSheaf (Scheme.ProEt.topology (𝒰.X i))\n                (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj\n                  (ModuleCat.of (ULift.{u + 1} A) (ULift.{u + 1} A))) ∧\n          Nonempty\n            (((show ObjectProperty _ from fun K : (localizingClosureProEtale\n                  (Profinite.continuousCoefficientRingObj A) Y).FullSubcategory ↦\n                (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj A) Y ⊓\n                  fun L ↦ _root_.DerivedCategory.finiteTorAmplitude _ L) K.obj)).ι ⋙\n                G ⋙ (localizingClosureProEtale (Profinite.continuousCoefficientRingObj A) X).ι ⋙\n                (upperStar (Profinite.continuousCoefficientRingObj A) (𝒰.f i)).mapDerivedCategory ≅\n              ((show ObjectProperty _ from fun K : (localizingClosureProEtale\n                  (Profinite.continuousCoefficientRingObj A) Y).FullSubcategory ↦\n                (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj A) Y ⊓\n                  fun L ↦ _root_.DerivedCategory.finiteTorAmplitude _ L) K.obj)).ι ⋙\n                (localizingClosureProEtale (Profinite.continuousCoefficientRingObj A) Y).ι ⋙\n                (upperStar (Profinite.continuousCoefficientRingObj A) f).mapDerivedCategory ⋙\n                (upperStar (Profinite.continuousCoefficientRingObj A) (𝒰.f i)).mapDerivedCategory ⋙\n                shiftFunctor _ (2 * (d : ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261022T202028-L-1250249",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-67fbf",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261025T023929-L-2486759",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteLocalizingSmoothLocalFormula proof and node lem-sf-finite-localizing-smooth-local-formula vs clone and the step 4 realization of unit sk-prop-sf-rf-shriek-preservation; importer FiniteLocalizingExceptionalPreservation compiled with the delivered module (exit 0); #print axioms = propext, sorryAx (from imported open statements), Classical.choice, Quot.sound"
+ }
+}

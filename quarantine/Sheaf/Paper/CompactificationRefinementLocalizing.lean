@@ -16,9 +16,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 import all Sheaf.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeMono
 import all Sheaf.Paper.CondensedOpenClosedRecollement
 import Sheaf.Paper.ProEtaleProperOpenInterchange
-import Sheaf.Paper.RefinementBoundaryVanishing
 import Sheaf.Paper.LocalizingClosureExistence
 import Sheaf.Paper.CompactificationLocalizing
+import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import all Sheaf.Paper.CondensedFlatCoefficientCalculus
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
@@ -222,6 +223,12 @@ private theorem restrictionMate_isIso
       infer_instance
     exact NatIso.isIso_of_isIso_app _
   exact conjugateEquiv_symm_of_iso (a.comp b) c ρ
+
+/-- Zero objects are closed under isomorphisms; the instance making functor kernels
+closed under isomorphisms is no longer in the imported library. -/
+local instance isZero_isClosedUnderIsomorphisms_local {C : Type*} [Category C] :
+    ObjectProperty.IsClosedUnderIsomorphisms (IsZero (C := C)) :=
+  ⟨fun e h ↦ h.of_iso e.symm⟩
 
 private theorem kernelTriangulated
     {C : Type v} {D : Type w} [Category C] [Category D]
@@ -461,6 +468,16 @@ end
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+-- Reuse the canonical module and graded-tensor structures in the derived adjunctions.
+attribute [local instance 3000] projectionDerivedMonoidal
+attribute [local instance 4000] projectionModuleAbelian projectionModuleMonoidal
+  projectionModuleHasDerived
+attribute [local instance 5000] projectionSheafMonoidal projectionCoefficientMonObj
+  projectionModuleCategory
+attribute [local instance 2000] CategoryTheory.scalarTensor4 CategoryTheory.scalarTensor12
+  CategoryTheory.scalarTensor23 CategoryTheory.scalarTensorColimits
+  CategoryTheory.scalarFlipTensorColimits
 
 attribute [local irreducible] DerivedCategory.monoidalClosed
   CategoryTheory.Mod.monoidalClosed CategoryTheory.Mod.monoidalCategory
@@ -968,14 +985,12 @@ private noncomputable def liftCoefficientIso (A : Type) [TopologicalSpace A] [Ri
   hom_inv_id := by ext; rfl
   inv_hom_id := by ext; rfl
 
-private theorem admissible_standard_or_continuous
+private theorem admissible_standard
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) :
-    StandardCoefficient Λ ℓ ∨
-      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ))) := by
-  rcases hΛ with hA | hZ | hQ | hE | hO | hC | hbar
-  · left
-    rcases hA with ⟨A, hring, htop, hdisc, htopring, hfin, ⟨n, hn⟩, ⟨e⟩⟩
+    StandardCoefficient Λ ℓ := by
+  rcases hΛ with hA | hZ | hQ | hE | hO | hbar
+  · rcases hA with ⟨A, hring, htop, hdisc, htopring, hfin, ⟨n, hn⟩, ⟨e⟩⟩
     let A' := ULift.{u} A
     let er := liftCoefficientIso.{u} A
     let er' := (sheafCompose (coherentTopology Profinite.{u})
@@ -987,14 +1002,13 @@ private theorem admissible_standard_or_continuous
     apply ULift.ext
     change (ℓ ^ n : A) = 0
     simpa only [nsmul_eq_mul, mul_one, Nat.cast_pow] using hn (1 : A)
-  · exact Or.inl (Or.inr (Or.inl hZ))
-  · exact Or.inl (Or.inr (Or.inr (Or.inl hQ)))
+  · exact Or.inr (Or.inl hZ)
+  · exact Or.inr (Or.inr (Or.inl hQ))
   · rcases hE with ⟨E, hE⟩
-    exact Or.inl (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, Or.inr hE⟩))))
+    exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, Or.inr hE⟩)))
   · rcases hO with ⟨E, hE⟩
-    exact Or.inl (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, Or.inl hE⟩))))
-  · exact Or.inr hC
-  · exact Or.inl (Or.inr (Or.inr (Or.inr (Or.inr hbar))))
+    exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, Or.inl hE⟩)))
+  · exact Or.inr (Or.inr (Or.inr (Or.inr hbar)))
 
 private theorem standardBoundaryVanishing
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -1185,13 +1199,8 @@ theorem localizingRefinement_coherence
         change PreservesColimit L ((J ⋙ R) ⋙ V)
         infer_instance
       · intro L hL
-        rcases admissible_standard_or_continuous Λ ℓ _hΛ with hs | hc
-        · exact standardBoundaryVanishing Λ ℓ k p _hp _hpℓ hs f c d r L hL
-        · have := (constantModelConstructibleFiniteTor_wellDefined Λ X).1
-          exact CategoryTheory.boundedZero (IsConstantModelConstructible Λ X)
-            F
-            (fun M hM ↦ continuousAlgCl_refinementBoundaryVanishing
-              Λ ℓ k p _hp _hpℓ hc f c d r M hM) L hL.1.1 hL.1.2
+        exact standardBoundaryVanishing Λ ℓ k p _hp _hpℓ (admissible_standard Λ ℓ _hΛ)
+          f c d r L hL
     have hij : IsCompl (Set.range i.base) (Set.range c.obj.obj.obj.i.base) := by
       dsimp only [i]
       rw [Scheme.Hom.range_closedComplement]

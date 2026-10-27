@@ -5,20 +5,10 @@ Authors: SHEAF group N6
 -/
 module
 
-public import Sheaf.CategoryTheory.RingedToposMorphism
-public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-public import Sheaf.CategoryTheory.CoherentCechImageModel
-import Sheaf.CategoryTheory.DerivedCechImageTotalization
-import Sheaf.CategoryTheory.NonnegativeDerivedTotalization
-public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
-import Sheaf.CategoryTheory.Sites.ToposLocalizationSitePresentation
-public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+
+public import Sheaf.CategoryTheory.CechLocalizationUnitModels
+import Sheaf.CategoryTheory.CechPushforwardAugmentedFamily
+import Sheaf.CategoryTheory.ExactUnitAugmentedFamily
 
 /-! # The closed-localization unit under nonnegative Cech descent
 
@@ -36,269 +26,16 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.CechLocalizationUnit
 
-/-- Finite-diagonal totalization followed by extension by zero in negative degrees.
-Source: Stacks 015J (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def total (A : Type u) [Category.{v} A] [Abelian A] [HasFiniteCoproducts A] :
-    CosimplicialObject (CochainComplex A ℕ) ⥤ CochainComplex A ℤ :=
-  AlgebraicTopology.alternatingCofaceMapComplex (CochainComplex A ℕ) ⋙
-    HomologicalComplex₂.totalFunctor A (.up ℕ) (.up ℕ) (.up ℕ) ⋙
-      ComplexShape.embeddingUpNat.extendFunctor A
-
-/-- Apply an exact natural transformation to the ordinary unbounded derived categories.
-Source: Stacks 015F (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def derivedNatTrans {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
-    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
-    {F G : A ⥤ B} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⟶ G) :
-    F.mapDerivedCategory ⟶ G.mapDerivedCategory :=
-  Localization.liftNatTrans DerivedCategory.Q
-    (HomologicalComplex.quasiIso A (.up ℤ))
-    (F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
-    (G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
-    F.mapDerivedCategory G.mapDerivedCategory
-    (Functor.whiskerRight (NatTrans.mapHomologicalComplex a (.up ℤ)) DerivedCategory.Q)
-
-/-- Nonnegative complexes viewed in the ordinary unbounded derived category.
-Source: Stacks 015J (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def QNN (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] :
-    CochainComplex A ℕ ⥤ DerivedCategory A :=
-  ComplexShape.embeddingUpNat.extendFunctor A ⋙ DerivedCategory.Q
-
-/-- A nonnegative augmented cosimplicial model, with its normalized total augmentation.
-The equation fixes the total map on every nonnegative degree, including degree zero.
-Source: Stacks 03FC and 015J (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-structure AugmentedModel (A : Type u) [Category.{v} A] [Abelian A]
-    [HasFiniteCoproducts A] (P : Type uP) [Category.{vP} P] where
-  point : P ⥤ CochainComplex A ℕ
-  columns : P ⥤ CosimplicialObject (CochainComplex A ℕ)
-  augmentation : point ⋙ Functor.const SimplexCategory ⟶ columns
-  totalAugmentation : point ⋙ ComplexShape.embeddingUpNat.extendFunctor A ⟶ columns ⋙ total A
-  total_formula : ∀ (p : P) (q : ℕ),
-    ((point.obj p).extendXIso ComplexShape.embeddingUpNat (i := q) rfl).inv ≫
-        (totalAugmentation.app p).f (q : ℤ) ≫
-        ((HomologicalComplex₂.total
-          ((AlgebraicTopology.alternatingCofaceMapComplex (CochainComplex A ℕ)).obj
-            (columns.obj p)) (.up ℕ)).extendXIso
-              ComplexShape.embeddingUpNat (i := q) rfl).hom =
-      ((augmentation.app p).app (SimplexCategory.mk 0)).f q ≫
-        HomologicalComplex₂.ιTotal
-          ((AlgebraicTopology.alternatingCofaceMapComplex (CochainComplex A ℕ)).obj
-            (columns.obj p)) (.up ℕ) 0 q q (by simp [ComplexShape.π])
-  total_quasiIso : ∀ p : P, QuasiIso (totalAugmentation.app p)
-
-/-- Exact descent of the specified unit, including the identity-functor normalization.
-Source: Stacks 015F (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def exactUnit {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
-    {H : A ⥤ A} [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-    (η : 𝟭 A ⟶ H) : 𝟭 (DerivedCategory A) ⟶ H.mapDerivedCategory :=
-  (Functor.mapDerivedCategoryIdIso A).inv ≫ derivedNatTrans η
-
-/-- The recorded module category, after forgetting a commutative ring to a ring.
-Source: Stacks 03CX (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-abbrev Modules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{u}) : Type (u + 1) :=
-  ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
-
-section Comparison
-
-variable {CX : Type u} [SmallCategory CX] {JX : GrothendieckTopology CX}
-  (RX : Sheaf JX CommRingCat.{u})
-  (D : CoherentCechImageModel ((sheafCompose JX (forget₂ CommRingCat RingCat)).obj RX))
-
-variable {AV : Type (u + 1)} [Category.{u} AV] [Abelian AV]
-  {AY : Type (u + 1)} [Category.{u} AY] [Abelian AY]
-  {AB : Type (u + 1)} [Category.{u} AB] [Abelian AB]
-  [HasFiniteCoproducts AB]
-  [HasDerivedCategory.{u + 1} (Modules RX)] [HasDerivedCategory.{u + 1} AV]
-  [HasDerivedCategory.{u + 1} AY] [HasDerivedCategory.{u + 1} AB]
-  [Abelian.HasKInjectiveResolutions (Modules RX)] [Abelian.HasKInjectiveResolutions AV]
-  [Abelian.HasKInjectiveResolutions AY]
-  (F : (Modules RX) ⥤ AV) [F.Additive] (G : AV ⥤ AY) [G.Additive]
-  (T : AY ⥤ AB) [T.Additive] [PreservesFiniteLimits T] [PreservesFiniteColimits T]
-  (H : AV ⥤ AV) [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-  (η : 𝟭 AV ⟶ H)
-  {P : Type uP} [Category.{vP} P]
-  (V : Pᵒᵖ ⥤ Sheaf JX (Type u)) (N : P ⥤ (Modules RX))
-
-/-- The power sheaf defining the n-th Cech slice.
-Source: Stacks 03FC (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def power (p : P) (n : SimplexCategory) : Sheaf JX (Type u) :=
-  (sheafCoverNerve (V.obj (op p))).obj (op n)
-
-/-- The module endofunctor j_n* j_n^* for the n-th slice.
-Source: Stacks 03FC and 04IE (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-abbrev slice (p : P) (n : SimplexCategory) : (Modules RX) ⥤ (Modules RX) :=
-  D.image.obj (op (power V p n))
-
-/-- Additivity transported from the actual localization composite.
-Source: Stacks 04IE (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-instance image_additive (A : Sheaf JX (Type u)) : (D.image.obj (op A)).Additive :=
-  letI := (D.adj A).isLeftAdjoint
-  letI : HasBinaryBiproducts (Modules RX) := Abelian.hasBinaryBiproducts
-  letI := preservesBinaryBiproducts_of_preservesBinaryCoproducts
-    (elementModulePullback ((sheafCompose JX (forget₂ CommRingCat RingCat)).obj RX) A)
-  letI : (elementModulePullback
-      ((sheafCompose JX (forget₂ CommRingCat RingCat)).obj RX) A).Additive :=
-    Functor.additive_of_preservesBinaryBiproducts _
-  Functor.additive_of_iso (D.imageIso A).symm
-
-/-- The derived Cech column, canonically identified with R(f v_n)_*(v_n^*N[0]).
-Deriving j_n* j_n^* is Rj_n* j_n^*, since j_n^* is exact and preserves injectives;
-the latter follows from its exact left adjoint j_n!. The normalized composition
-comparison then gives R(f v_n)_*.
-Source: Stacks 03FC and 0D6E (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def baseColumn (p : P) (n : SimplexCategory) : DerivedCategory AV :=
-  F.rightDerivedFunctor.obj
-    ((slice RX D V p n).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor (Modules RX) 0).obj
-      (N.obj p)))
-
-/-- Every Cech operator on the canonical derived columns, including degeneracies.
-Source: Stacks 03FC (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def columnOperator (p : P) {n m : SimplexCategory} (θ : n ⟶ m) :
-    baseColumn RX D F V N p n ⟶ baseColumn RX D F V N p m :=
-  F.rightDerivedFunctor.map ((Functor.rightDerivedFunctorNatTrans
-    (D.image.map (((sheafCoverNerve (V.obj (op p))).map θ.op).op))).app
-      ((DerivedCategory.singleFunctor (Modules RX) 0).obj (N.obj p)))
-
-/-- Simultaneous change of coefficients and refinement of the covering sheaf.
-The direction P^op -> covers makes a refinement V_q -> V_p accompany N_p -> N_q.
-Source: Stacks 03FC (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def columnChange {p q : P} (a : p ⟶ q) (n : SimplexCategory) :
-    baseColumn RX D F V N p n ⟶ baseColumn RX D F V N q n :=
-  F.rightDerivedFunctor.map
-    ((Functor.rightDerivedFunctorNatTrans
-      (D.image.map (((Arrow.mapCechNerve
-        (Arrow.homMk (V.map a.op) (𝟙 _) (terminal.hom_ext _ _) :
-          Arrow.mk (terminal.from (V.obj (op q))) ⟶
-            Arrow.mk (terminal.from (V.obj (op p))))).app (op n)).op))).app
-        ((DerivedCategory.singleFunctor (Modules RX) 0).obj (N.obj p)) ≫
-      (slice RX D V q n).rightDerivedFunctor.map
-        ((DerivedCategory.singleFunctor (Modules RX) 0).map (N.map a)))
-
-/-- The actual derived restriction-of-sections augmentation in every Cech degree.
-Source: Stacks 03FC and 015F (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def columnAugmentation (p : P) (n : SimplexCategory) :
-    F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor (Modules RX) 0).obj (N.obj p)) ⟶
-      baseColumn RX D F V N p n :=
-  F.rightDerivedFunctor.map (((Functor.mapDerivedCategoryIdIso _).inv ≫
-      (Functor.rightDerivedFunctorIsoMapDerivedCategory (𝟭 _)).inv ≫
-        Functor.rightDerivedFunctorNatTrans (D.augmentation (power V p n))).app
-          ((DerivedCategory.singleFunctor (Modules RX) 0).obj (N.obj p)))
-
-/-- Complete compatible models for the two augmented Cech comparisons.
-All resolutions, isomorphisms and lifts are conclusions of the theorem. Column maps
-and augmentations are fixed by the displayed canonical derived maps, not freely supplied.
-Source: Stacks 03FC, 015J, 015F (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-structure Comparison where
-  source : AugmentedModel AB P
-  target : AugmentedModel AB P
-  sourcePoint :
-    N ⋙ DerivedCategory.singleFunctor (Modules RX) 0 ⋙ F.rightDerivedFunctor ⋙
-      G.rightDerivedFunctor ⋙
-      T.mapDerivedCategory ≅ source.point ⋙ QNN AB
-  targetPoint :
-    N ⋙ DerivedCategory.singleFunctor (Modules RX) 0 ⋙ F.rightDerivedFunctor ⋙
-      H.mapDerivedCategory ⋙ G.rightDerivedFunctor ⋙
-      T.mapDerivedCategory ≅ target.point ⋙ QNN AB
-  sourceColumns : ∀ (p : P) (n : SimplexCategory),
-    T.mapDerivedCategory.obj (G.rightDerivedFunctor.obj (baseColumn RX D F V N p n)) ≅
-      (QNN AB).obj ((source.columns.obj p).obj n)
-  targetColumns : ∀ (p : P) (n : SimplexCategory),
-    T.mapDerivedCategory.obj (G.rightDerivedFunctor.obj
-      (H.mapDerivedCategory.obj (baseColumn RX D F V N p n))) ≅
-      (QNN AB).obj ((target.columns.obj p).obj n)
-  source_operator : ∀ (p : P) (n m : SimplexCategory) (θ : n ⟶ m),
-    T.mapDerivedCategory.map (G.rightDerivedFunctor.map (columnOperator RX D F V N p θ)) ≫
-      (sourceColumns p m).hom = (sourceColumns p n).hom ≫
-        (QNN AB).map ((source.columns.obj p).map θ)
-  target_operator : ∀ (p : P) (n m : SimplexCategory) (θ : n ⟶ m),
-    T.mapDerivedCategory.map (G.rightDerivedFunctor.map
-      (H.mapDerivedCategory.map (columnOperator RX D F V N p θ))) ≫
-      (targetColumns p m).hom = (targetColumns p n).hom ≫
-        (QNN AB).map ((target.columns.obj p).map θ)
-  source_natural : ∀ (p q : P) (b : p ⟶ q) (n : SimplexCategory),
-    T.mapDerivedCategory.map (G.rightDerivedFunctor.map (columnChange RX D F V N b n)) ≫
-      (sourceColumns q n).hom = (sourceColumns p n).hom ≫
-        (QNN AB).map ((source.columns.map b).app n)
-  target_natural : ∀ (p q : P) (b : p ⟶ q) (n : SimplexCategory),
-    T.mapDerivedCategory.map (G.rightDerivedFunctor.map
-      (H.mapDerivedCategory.map (columnChange RX D F V N b n))) ≫
-      (targetColumns q n).hom = (targetColumns p n).hom ≫
-        (QNN AB).map ((target.columns.map b).app n)
-  source_augmentation : ∀ (p : P) (n : SimplexCategory),
-    sourcePoint.hom.app p ≫ (QNN AB).map ((source.augmentation.app p).app n) =
-      T.mapDerivedCategory.map (G.rightDerivedFunctor.map
-        (columnAugmentation RX D F V N p n)) ≫ (sourceColumns p n).hom
-  target_augmentation : ∀ (p : P) (n : SimplexCategory),
-    targetPoint.hom.app p ≫ (QNN AB).map ((target.augmentation.app p).app n) =
-      T.mapDerivedCategory.map (G.rightDerivedFunctor.map
-        (H.mapDerivedCategory.map (columnAugmentation RX D F V N p n))) ≫
-          (targetColumns p n).hom
-  unitColumns : source.columns ⟶ target.columns
-  unit_columns : ∀ (p : P) (n : SimplexCategory),
-    (sourceColumns p n).hom ≫ (QNN AB).map ((unitColumns.app p).app n) =
-      T.mapDerivedCategory.map (G.rightDerivedFunctor.map
-        ((exactUnit η).app (baseColumn RX D F V N p n))) ≫ (targetColumns p n).hom
-  sourceComparison :
-    N ⋙ DerivedCategory.singleFunctor (Modules RX) 0 ⋙ F.rightDerivedFunctor ⋙
-      G.rightDerivedFunctor ⋙
-      T.mapDerivedCategory ≅ source.columns ⋙ total AB ⋙ DerivedCategory.Q
-  targetComparison :
-    N ⋙ DerivedCategory.singleFunctor (Modules RX) 0 ⋙ F.rightDerivedFunctor ⋙
-      H.mapDerivedCategory ⋙ G.rightDerivedFunctor ⋙
-      T.mapDerivedCategory ≅ target.columns ⋙ total AB ⋙ DerivedCategory.Q
-  source_normalization : ∀ p : P,
-    sourcePoint.hom.app p ≫ DerivedCategory.Q.map (source.totalAugmentation.app p) =
-      sourceComparison.hom.app p
-  target_normalization : ∀ p : P,
-    targetPoint.hom.app p ≫ DerivedCategory.Q.map (target.totalAugmentation.app p) =
-      targetComparison.hom.app p
-  unit_total : ∀ p : P,
-    T.mapDerivedCategory.map (G.rightDerivedFunctor.map
-      ((exactUnit η).app (F.rightDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor (Modules RX) 0).obj (N.obj p))))) ≫
-      targetComparison.hom.app p = sourceComparison.hom.app p ≫
-        DerivedCategory.Q.map ((total AB).map (unitColumns.app p))
-
-/-- Applying a specified exact restriction to the whole comparison square.
-The arrow inside S.map is the original derived unit, as in Comparison.unit_total.
-Source: Stacks 03DJ and 015F (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def Comparison.Restricts
-    (c : Comparison RX D F G T H η V N)
-    {E : Type v} [Category.{w} E] (S : DerivedCategory AB ⥤ E) : Prop :=
-  ∀ p : P,
-    S.map (T.mapDerivedCategory.map (G.rightDerivedFunctor.map
-      ((exactUnit η).app (F.rightDerivedFunctor.obj
-        ((DerivedCategory.singleFunctor (Modules RX) 0).obj (N.obj p))))) ≫
-          c.targetComparison.hom.app p) =
-      S.map (c.sourceComparison.hom.app p ≫
-        DerivedCategory.Q.map ((total AB).map (c.unitColumns.app p)))
-
-end Comparison
-
-
-
-/-- Exact restriction of the ordinary derived category to the genuine ringed slice site.
-The localization model on the slice is the standard one; the underlying functor is
-exactly the recorded overFunctor, with its explicit site universes.
-Source: Stacks 03DJ and 04IX (blueprint: lem-sfb-cech-localization-unit-totalization). -/
-def restrictDerived {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{u + 1} (Modules R)] (U : C) :
-    letI : HasDerivedCategory.{u + 1}
-      (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) :=
-      HasDerivedCategory.standard _
-    DerivedCategory (Modules R) ⥤
-      DerivedCategory
-        (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) :=
-  letI : HasDerivedCategory.{u + 1}
-      (SheafOfModules.{u} (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) :=
-    HasDerivedCategory.standard _
-  (SheafOfModules.localizedSystemRestriction.{u, u, u} R U).mapDerivedCategory
+private theorem map_square_then {A B : Type*} [Category A] [Category B]
+    (L : A ⥤ B) {X Y X' Y' : A} {Z W : B}
+    (f : X ⟶ Y) (a : X ⟶ X') (b : Y ⟶ Y') (g : X' ⟶ Y')
+    (r : L.obj X' ⟶ Z) (s : L.obj Y' ⟶ W) (k : Z ⟶ W)
+    (h : f ≫ b = a ≫ g) (j : L.map g ≫ s = r ≫ k) :
+    L.map f ≫ (L.map b ≫ s) = (L.map a ≫ r) ≫ k := by
+  rw [← L.map_comp_assoc, h, L.map_comp, Category.assoc, j, Category.assoc]
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- The specified exact-adjunction unit is preserved by augmented nonnegative Cech descent,
 by derived direct images, and by exact restriction to an object of B's site.
@@ -375,6 +112,58 @@ theorem cech_localization_unit_totalization
       ∀ U : CB,
         Comparison.Restricts RX D f.modules g.modules tInverse
           (hInverse ⋙ hDirect) hAdj.unit V N c (restrictDerived RB U) := by
-  sorry
+  classical
+  let := gAdj.isRightAdjoint
+  obtain ⟨b⟩ := cech_pushforward_augmented_family RX RV f fInverse fAdj V N cover D
+  let M := N ⋙ DerivedCategory.singleFunctor (Modules RX) 0 ⋙ f.modules.rightDerivedFunctor
+  obtain ⟨d⟩ := exact_unit_augmented_family g.modules tInverse
+    (hInverse ⋙ hDirect) hAdj.unit M b.model b.pointIso
+  let L := g.modules.rightDerivedFunctor ⋙ tInverse.mapDerivedCategory
+  let LH := (hInverse ⋙ hDirect).mapDerivedCategory ⋙ L
+  let c : Comparison RX D f.modules g.modules tInverse
+      (hInverse ⋙ hDirect) hAdj.unit V N := {
+    source := d.source
+    target := d.target
+    sourcePoint := d.sourcePoint
+    targetPoint := d.targetPoint
+    sourceColumns := fun p n ↦ L.mapIso (b.columnIso p n) ≪≫ d.sourceColumns p n
+    targetColumns := fun p n ↦ LH.mapIso (b.columnIso p n) ≪≫ d.targetColumns p n
+    source_operator := fun p n m θ ↦
+      map_square_then L _ _ _ _ _ _ _ (b.operator p n m θ) (d.source_operator p n m θ)
+    target_operator := fun p n m θ ↦
+      map_square_then LH _ _ _ _ _ _ _ (b.operator p n m θ) (d.target_operator p n m θ)
+    source_natural := fun p q k n ↦
+      map_square_then L _ _ _ _ _ _ _ (b.natural p q k n) (d.source_natural p q k n)
+    target_natural := fun p q k n ↦
+      map_square_then LH _ _ _ _ _ _ _ (b.natural p q k n) (d.target_natural p q k n)
+    source_augmentation := by
+      intro p n
+      change _ = L.map _ ≫ (L.map _ ≫ _)
+      rw [d.source_augmentation, b.augmentation]
+      change L.map (_ ≫ _) ≫ _ = _
+      rw [L.map_comp, Category.assoc]
+    target_augmentation := by
+      intro p n
+      change _ = LH.map _ ≫ (LH.map _ ≫ _)
+      rw [d.target_augmentation, b.augmentation]
+      change LH.map (_ ≫ _) ≫ _ = _
+      rw [LH.map_comp, Category.assoc]
+    unitColumns := d.unitColumns
+    unit_columns := by
+      intro p n
+      change (L.map _ ≫ _) ≫ _ = L.map _ ≫ (LH.map _ ≫ _)
+      rw [Category.assoc, d.unit_columns]
+      change L.map _ ≫ (L.map _ ≫ _) = L.map _ ≫ (L.map _ ≫ _)
+      rw [← L.map_comp_assoc, ← L.map_comp_assoc]
+      have h := (exactUnit hAdj.unit).naturality (b.columnIso p n).hom
+      dsimp only [Functor.id_map] at h
+      exact congrArg (fun k ↦ L.map k ≫ (d.targetColumns p n).hom) h
+    sourceComparison := d.sourceComparison
+    targetComparison := d.targetComparison
+    source_normalization := d.source_normalization
+    target_normalization := d.target_normalization
+    unit_total := d.unit_total }
+  refine ⟨c, fun U p ↦ ?_⟩
+  exact congrArg (fun k ↦ (restrictDerived RB U).map k) (c.unit_total p)
 
 end CategoryTheory.CechLocalizationUnit

@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-recorded-pullback-counit-data",
+ "kind": "definition",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0FJX and 0FJY, with the original derived-pullback counits as in cohomology.tex Tags 06YJ and 0D5S."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-zero-perfect-determinant-section",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Retained original universal counit of scheme tensor pullback",
+ "statement": "For a scheme map $f:X\\to Y$ [def-pc-scheme], retain the original presentation of the derived pullback [def-pc-derived-pullback] on the recorded derived categories [def-pc-derived-category]. RecordedPullbackData records a module functor E with object and map equalities to the actual ordinary tensor pullback [def-pc-module-pullback], its additive structure, and its natural counit $Lf^*\\circ Q_Y\\to Q_X\\circ K(E)$ on homotopy categories [def-weil-abstract-derived-category]. It records the universal left-derived-functor property and that the counit is invertible on K-flat complexes [def-pc-kflat-complex]. The definition recordedPullbackData retains that original presentation, not a new freely chosen counit for the already fixed functor. recordedTransportCounit transports a counit along equality of its underived functors; recordedDerivedPullbackCounit is the resulting original counit with target expressed using the fixed ordinary tensor-pullback functor. These are definition-level data and operations, with no separate composition or existence theorem asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-pullback",
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent identity and composition comparisons for derived pullback of sheaves of modules normalized by original counits",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.GrothendieckTopology.overMapPullback_id_comp; SheafOfModules.pullback_comp_id; PresheafOfModules.pullback_id_comp; SheafOfModules.pullback_id_comp; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; SheafOfModules.pullback_assoc; CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc. These are underived comparison identities, not the retained derived-pullback coherence structure.",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; existing project definition located"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "structure coherent derived pullback identity composition normalized tensor counits",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc; CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit; CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality; CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom; PresheafOfModules.pullback_id_comp. None is the required derived coherence structure.",
+   "date": "2026-10-24",
+   "verdict": "no Mathlib match; existing project definition located"
+  },
+  {
+   "tool": "grep",
+   "query": "TwoTermDeterminantPullbackCoherence|RecordedPullbackData|recordedDerivedPullbackCounit",
+   "results": "[grep] OK 0 hit(s) in Mathlib. rg in lean/Sheaf and lean/WeilConjectures locates structure TwoTermDeterminantPullbackCoherence in Sheaf/TraceFormula/TwoTermDeterminantPullbackCoherence.lean:71 and RecordedPullbackData plus recordedDerivedPullbackCounit in WeilConjectures/AlgebraicGeometry/DerivedPullbackRecordedComposition.lean:36,126. A scan of every definition-node lean.declaration and lean.declarations finds no owner of either structure or the retained counit. The affine-determinant-interface node only uses the coherence type in its signature. blueprint_refs.py search derived pullback coherence and recorded pullback counit each reports 0 matching blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "existing project definitions, no definition-node ownership; attach rather than duplicate"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative theta autoduality of smooth curve Picard spaces. Supporting input: The degree-g-minus-one Picard torsor and its determinant theta divisor. Supporting input: the determinant SECTION, not just the determinant line, and rank-zero line-twist cancellation in the relative degree-g-minus-one construction. Definition ownership for the normalized determinant-pair pullback interfaces.",
+   "via": [
+    "lem-sfb-rank-zero-perfect-determinant-section",
+    "lem-sfb-relative-degree-gminusone-theta",
+    "lem-sfb-relative-jacobian-theta-polarization",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedPullbackRecordedComposition",
+  "declaration": "AlgebraicGeometry.RecordedPullbackData",
+  "declarations": [
+   "AlgebraicGeometry.RecordedPullbackData",
+   "AlgebraicGeometry.recordedPullbackData",
+   "AlgebraicGeometry.recordedTransportCounit",
+   "AlgebraicGeometry.recordedDerivedPullbackCounit"
+  ],
+  "statement": "structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y)",
+  "branch": "slopmaster2",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only attachment to the existing retained data and counit operations. None of recordedDerivedPullbackCounit_universal, recordedDerivedPullbackCounit_kFlat, or the composition theorems is attached. It supplies the definition-owned counit used by the item helpers; no fresh choice or duplicate implementation is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fb7152fe",
+  "group": "Q79",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fb7152fe",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery of eab8 (H2 RETURN) repairs both faults: the cotangent helpers are now local defs rankZeroPullbackComplex/rankZeroPullbackCounit, identical to CotangentPresentation.pullbackComplex/pullbackCounit (LciCotangentPresentation.lean:211,515); the plain TwoTermDeterminantPullbackCoherence and RecordedPullbackData/recordedPullbackData/recordedTransportCounit/recordedDerivedPullbackCounit get definition-only existing:true owners (def-sfb-determinant-pullback-coherence-data, def-sfb-recorded-pullback-counit-data); node text matches the fields, no theorem attached, neither node created by another group; stmt_deps now cite them; coherence existence theorem remains in proof_deps. Statement text unchanged; lean.statement verbatim; single sorry. Mechanical finding: lem-weil-pbc-module-pullback-tensor stays, since the item uses Classical.choose of module_pullback_tensor (the constructed iso, unique by its pure-tensor formula; lines 187-189), so the statement genuinely depends on the theorem's conclusion: PASS on that point. Maths reviewed in full previously; unchanged. Not recompiled (no file changed). Minor: branch metadata newtargets-dag vs sheaf-dag; advisory: def-trf-affine-determinant-interfaces should later cite the new coherence-data node."
+ }
+}

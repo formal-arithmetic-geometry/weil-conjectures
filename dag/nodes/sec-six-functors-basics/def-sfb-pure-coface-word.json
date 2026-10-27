@@ -1,0 +1,186 @@
+{
+ "id": "def-sfb-pure-coface-word",
+ "kind": "definition",
+ "title": "Raw pure coface words and contextual coface replacements",
+ "status": "split",
+ "statement": "Let $\\Delta$ be the category of nonempty finite ordinals and nondecreasing maps [def-weil-pbc-simplicial-set]. For $a,b\\geq0$, a raw pure coface word from $[a]$ to $[b]$ is a finite composable sequence of the injections $\\delta_i^r:[r-1]\\to[r]$ omitting $i$, with $r\\geq1$ and $0\\leq i\\leq r$, including the empty word when $a=b$. Words are syntax, not identified by their values. Concatenation places one composable sequence after another; evaluation sends the empty word to the identity and a sequence to its composite. A forward step replaces, in any composable prefix and suffix, $\\delta_j^{r+1}\\circ\\delta_i^r$ by $\\delta_i^{r+1}\\circ\\delta_{j-1}^r$, where $r\\geq1$ and $0\\leq i<j\\leq r+1$. Two words are related if connected by finitely many such steps in either direction, allowing zero steps. Every intermediate word has the same endpoints and consists solely of cofaces, hence all its degrees are between $a$ and $b$.",
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tags 0167 (lemma-relations-face-degeneracy), part (1), and 0168 (lemma-face-degeneracy-category); raw pure-coface syntax for the omitted presentation proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CofaceWord|cofaceWord|coface.word|pure.coface|coface.*relation",
+   "results": {
+    "t": "2026-10-23T19:40:36Z",
+    "tool": "grep",
+    "query": "CofaceWord|cofaceWord|coface.word|pure.coface|coface.*relation",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact match: returned simplex mixed quotients, individual coface identities, or no hits; none defines raw coface-only words with the coface-only contextual rewrite relation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raw words of coface maps and the equivalence relation generated only by coface identities",
+   "results": {
+    "t": "2026-10-23T19:40:36Z",
+    "tool": "leansearch",
+    "query": "Raw words of coface maps and the equivalence relation generated only by coface identities",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.δ_comp_δ",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_of_le",
+     "SimplexCategoryGenRel.faces.rec",
+     "CategoryTheory.CosimplicialObject.δ_comp_δ'_assoc",
+     "AlgebraicTopology.alternatingCofaceMapComplex",
+     "CategoryTheory.CosimplicialObject.δ_comp_δ",
+     "FreeSimplexQuiver.homRel.δ_comp_σ_succ",
+     "CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc"
+    ],
+    "digest": "616f480c259196c5"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact match: returned simplex mixed quotients, individual coface identities, or no hits; none defines raw coface-only words with the coface-only contextual rewrite relation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategoryGenRel, FreeSimplexQuiver",
+   "results": {
+    "t": "2026-10-23T19:40:36Z",
+    "tool": "loogle",
+    "query": "SimplexCategoryGenRel, FreeSimplexQuiver",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact match: returned simplex mixed quotients, individual coface identities, or no hits; none defines raw coface-only words with the coface-only contextual rewrite relation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two raw coface words with equal order preserving maps are related using only coface identities",
+   "results": {
+    "t": "2026-10-23T19:40:37Z",
+    "tool": "leanfinder",
+    "query": "Two raw coface words with equal order preserving maps are related using only coface identities",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SimplexCategoryGenRel.faces",
+     "SimplexCategoryGenRel.P_δ",
+     "SimplexCategoryGenRel.P_σ",
+     "SimplexCategoryGenRel.P_δ.δ",
+     "SimplexCategoryGenRel.degeneracies",
+     "SimplexCategoryGenRel.ext",
+     "SimplexCategoryGenRel.P_σ.σ",
+     "SimplicialObject.Splitting.IndexSet.ext"
+    ],
+    "digest": "fd1086ee35272496"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact match: returned simplex mixed quotients, individual coface identities, or no hits; none defines raw coface-only words with the coface-only contextual rewrite relation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pure-coface-word-relations",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Compatible local deformations of isolated curve singularities lift globally. Affine part of the formal-lifting input: final sentence of the proof of Stacks 0DZP, application of lemma-isolated after lemma-affine. Supporting algebra: finite support of the obstruction and difference modules at the prescribed isolated points; finite polynomial resolution used to obtain finite free terms for the full cotangent complex (Stacks 08PX). Tag 08PX (proposition-polynomial), inductive polynomial replacement of the next degree; repaired compatible-degeneracy form using the split indexing of simplicial.tex Tag 017P (definition-split). Arbitrary independent lifts of degeneracies in the printed proof do not establish their identities; the new statement isolates the polynomial boundary attachment that supplies compatible lifts. Supporting categorical input: recognition of a truncated simplicial object from the face and degeneracy identities; bounded-degree version of Stacks 0168 and 016B. Pure-word input: Completeness of pure coface word relations within the endpoint degrees. Raw coface words and their pure contextual replacements.",
+   "via": [
+    "lem-sfb-pure-coface-word-relations",
+    "lem-sfb-truncated-simplex-presentation",
+    "lem-sfb-split-polynomial-boundary-attachment",
+    "lem-sfb-finite-polynomial-simplicial-resolution",
+    "lem-sfb-cotangent-ext-smooth-support",
+    "lem-sfb-affine-isolated-deformation-lift",
+    "lem-sfb-isolated-curve-formal-lifting",
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.PureCofaceWord",
+  "declaration": "SimplexCategory.CofaceWord",
+  "declarations": [
+   "SimplexCategory.CofaceWord",
+   "SimplexCategory.CofaceWord.comp",
+   "SimplexCategory.CofaceWord.eval",
+   "SimplexCategory.CofaceWord.Step",
+   "SimplexCategory.CofaceWord.Related"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/PureCofaceWord.lean",
+  "statement": "inductive CofaceWord : ℕ → ℕ → Type",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c9c01951",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c9c01951",
+  "group": "NX",
+  "result": "pass",
+  "note": "Clause-by-clause check of SimplexCategory.CofaceWord.related_of_eval_eq against the node and Stacks 0167(1)/0168. Step.context matches Mathlib δ_comp_δ (i ≤ j, j.succ / castSucc), which is the node's i<J≤r+1 with r=n+1, J=j+1, extremes included. Words are raw syntax with eval read right to left; Related = EqvGen Step gives finite steps in either direction. The indexed type CofaceWord a b keeps every degree in [a,b]; no codegeneracy letters. Edge cases a=b, b=a+1, a=0/b=2 (r=1), i=j are covered; hab is implied, so not stronger; no universes. New def node def-sfb-pure-coface-word is justified (no Mathlib/project/DAG equivalent; FreeSimplexQuiver is mixed; P_δ normal form TODO) and its 5 decls carry real data. Both lean.statement fields are verbatim the file signatures; the item record diff vs side-live is only lean + the new stmt_dep. Docstrings carry source place, blueprint tag and the 5 proof steps; proof is sorry only; both imports used. Item is not superseded on side-live. Report sections present. Not recompiled (2026-10-21 rule); no fixes."
+ }
+}

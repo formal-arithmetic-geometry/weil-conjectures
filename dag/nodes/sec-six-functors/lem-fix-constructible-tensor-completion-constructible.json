@@ -1,0 +1,155 @@
+{
+ "id": "lem-fix-constructible-tensor-completion-constructible",
+ "kind": "statement",
+ "title": "Completeness and canonical unit on constructible ordinary tensor",
+ "statement": "Fix a prime ell and a finite extension E/Q_ell, and let W be a quasi-compact quasi-separated scheme whose residue fields invert ell. For two constructible integral complexes M,N [def-weil-derived-complete-integral-detailed], form their actual ordinary derived tensor from lem-fix-constructible-tensor-completion-presentation. This tensor is derived complete [def-weil-derived-complete], and its canonical completion unit is invertible. No completed-tensor comparison or coordinate normalization is asserted here.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5, pp. 49–50 (the ordinary derived tensor of constructible complexes is already complete), with Definition 6.5.1 and Lemmas 6.5.3–6.5.4, p. 49; Definition 3.4.10 and Lemma 3.4.12(4), pp. 22–23 (completed tensor and canonical reduction-tower completion). Specialization R=O_E; its residue ring is a field, so the constructibility convention agrees with def-weil-derived-complete-integral-detailed."
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "lem-fix-constructible-tensor-completion-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=M\\otimes^L_BN$ and use the canonical completion $C_W$ and unit $\\eta_H$ of lem-fix-qcqs-completion-unit-locality. Apply lem-fix-constructible-projective-chart-refinement to $M,N$: it gives a finite qcqs open–closed tree and, on a pro-etale cover of every leaf, bounded representatives $P_i,Q_i$ with finite-projective sheaf terms. The covers and both representatives are simultaneous, so no compatibility of separately chosen models is assumed.",
+   "uses": [
+    "lem-fix-constructible-projective-chart-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion; Tag 09BL, lemma-closed-immersion-affines-apply; Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact. Agent formulation of canonical-unit locality on qcqs schemes from returned item steps 1, 2 and 7; Bhatt–Scholze Lemma 6.5.8 and Remark 6.5.10."
+   }
+  },
+  {
+   "text": "On each simultaneous chart, apply lem-fix-projective-tensor-chart-complete to the two bounded finite-projective representatives. It identifies ordinary pullback of the canonical ordinary tensor with the tensor of those representatives, and proves its Roos-triangle completeness. The finite chart composites give a pro-etale covering family because their point images cover the leaf and the finitely many chart domains are quasi-compact.",
+   "uses": [
+    "lem-fix-projective-tensor-chart-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5, pp. 49–50, finite-projective devissage; Definition 3.4.10 and Proposition 3.5.1. Explicit completed-ring-sheaf version of returned item steps 5 and 6. Also Stacks proetale.tex Tag 099M, lemma-naive-completion, and sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok."
+   }
+  },
+  {
+   "text": "Apply the finite-tree detection clause of lem-fix-qcqs-completion-unit-locality to $H$ and these covers. It gives that $\\eta_H$ is invertible on $W$ and that $H$ is derived complete in the stated Roos-triangle sense. This also treats an empty root, since its chart conditions are vacuous.",
+   "uses": [
+    "lem-fix-qcqs-completion-unit-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M, lemma-naive-completion; Tag 09BL, lemma-closed-immersion-affines-apply; Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact. Agent formulation of canonical-unit locality on qcqs schemes from returned item steps 1, 2 and 7; Bhatt–Scholze Lemma 6.5.8 and Remark 6.5.10."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-projective-chart-refinement",
+  "lem-fix-projective-tensor-chart-complete",
+  "lem-fix-qcqs-completion-unit-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5 and Lemma 6.5.8; finite projective chart calculation isolated in lem-fix-projective-tensor-chart-complete. Global finite-tree detection and normalized whole-tower comparison assembled in Lean by E8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized comparison between the completion of an ordinary derived sheaf tensor and its completed tensor, compatible with the canonical augmentation",
+   "results": "AdicCompletion tensor and naturality lemmas; light condensed monoidal instances.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerLeft",
+   "results": "12 isoWhiskerLeft and whiskering laws.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorOperationUnit|tensor.*completion.*comparison",
+   "results": "No matches in Mathlib. Existing project integralAmbientOperationModels supplies the normalized comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement. The existing project construction is used with the indicated elementary categorical glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor commutes with inverse image of ringed topoi and bounded complexes of finite projective sheaf modules are derived complete",
+   "results": "SheafOfModules.pullback, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, sheafificationCompPullback, pullbackPushforwardAdjunction, instIsLeftAdjointPullback, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, SheafOfModules.pullbackComp, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-27",
+   "verdict": "No match for derived tensor completeness of sheaves with local projective models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived pullback of an ordinary tensor is derived complete when both pulled back inputs have bounded finite projective sheaf models",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat and six free/internal-projectivity tensor criteria.",
+   "date": "2026-10-27",
+   "verdict": "No pro-etale derived completion or ordinary ringed derived tensor-pullback model statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*tensor.*pullback|pullback.*derived.*tensor|bounded.*projective.*complete",
+   "results": "No matches in Mathlib. Existing project declarations checked: BoundedProjectiveTensorComplete, RingedTopoiCanonicalTensorPullbackOfUniverses, QcqsCompletionOrdinaryModels, OrdinaryIntegralPullbackConstruction. blueprint_refs.py search projective tensor chart: 0 matches.",
+   "date": "2026-10-27",
+   "verdict": "The existing declarations supply the ingredients; the comparison between the two ordinary pullback presentations and the local projective conclusion remains to assemble."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstructibleTensorCompletion",
+  "date": "2026-10-27",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": the ordinary-to-completed integral tensor comparison for evaluation.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleTensorCompletionConstructible",
+  "file": "lean/Sheaf/Paper/ConstructibleTensorCompletionConstructible.lean",
+  "declaration": "WeilConjectures.ConstructibleTensorModel.tensorComplete_onConstructible",
+  "statement": "theorem tensorComplete_onConstructible\n    [CompactSpace W] [QuasiSeparatedSpace W]\n    [∀ w : W, Invertible (l : W.residueField w)]\n    (M N : DerivedCategory (integralTowerModules l E W))\n    (hM : sfIntegralConstructible l E W M) (hN : sfIntegralConstructible l E W N) :\n    IsDerivedCompleteUnrestricted l E W ((ordinaryTensor l E W).obj (M, N)) ∧\n      IsIso ((tensorCompletionUnit l E W).app ((ordinaryTensor l E W).obj (M, N)))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fa5ac",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T222635-L-676636",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs node lem-fix-constructible-tensor-completion (signature unchanged, proof via 6 proved helpers + 1 true local sorry projectiveTensorChartComplete); removed unit import IntrinsicFiniteTorsionConstructibility vs unit sk-rem-sf-pf-done realized (empty; node realized only in sk-def-sf-setting, still in public import closure); 18 direct importers compiled OK in sandbox"
+ }
+}

@@ -8,11 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-!
 # Local finite presentation is fppf local on the source
@@ -26,7 +23,7 @@ Source: Stacks Project, Descent, Tag 036N,
 
 universe u v
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
@@ -79,6 +76,28 @@ theorem locallyOfFinitePresentation_iff_of_fppf_source_family
     [∀ i : I, Flat (h i)] [∀ i : I, LocallyOfFinitePresentation (h i)]
     (hjoint : ∀ x : X, ∃ (i : I) (y : U i), h i y = x) :
     LocallyOfFinitePresentation f ↔ ∀ i : I, LocallyOfFinitePresentation (h i ≫ f) := by
-  sorry
+  classical
+  constructor
+  · intro hf i
+    have : LocallyOfFinitePresentation f := hf
+    infer_instance
+  · intro hcomp
+    -- Select a small covering subfamily even when I is in a larger universe.
+    choose i y hy using hjoint
+    let V : X → Scheme.{u} := fun x ↦ U (i x)
+    let k : ∀ x : X, V x ⟶ X := fun x ↦ h (i x)
+    let g : (∐ V) ⟶ X := Sigma.desc k
+    have : Flat g := IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance
+    have : LocallyOfFinitePresentation g :=
+      IsZariskiLocalAtSource.sigmaDesc fun _ ↦ inferInstance
+    have : LocallyOfFinitePresentation (g ≫ f) := by
+      have heq : g ≫ f = Sigma.desc (fun x : X ↦ k x ≫ f) := by
+        ext x
+        simp [g]
+      rw [heq]
+      exact IsZariskiLocalAtSource.sigmaDesc fun x ↦ hcomp (i x)
+    have : Surjective g := Surjective.sigmaDesc_of_union_range_eq_univ <|
+      Set.eq_univ_of_forall fun x ↦ Set.mem_iUnion.mpr ⟨x, y x, hy x⟩
+    exact LocallyOfFinitePresentation.of_comp_of_flat_of_surjective g f
 
 end AlgebraicGeometry

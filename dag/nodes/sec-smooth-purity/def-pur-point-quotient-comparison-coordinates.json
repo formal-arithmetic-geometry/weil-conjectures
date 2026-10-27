@@ -1,0 +1,113 @@
+{
+ "id": "def-pur-point-quotient-comparison-coordinates",
+ "kind": "definition",
+ "title": "Canonical strict point quotient and cone comparison data",
+ "statement": "For every automorphism g of Spec D.k, let PointQuotientComparisonData consist of the strict tower natural isomorphism j and the whole-cone natural isomorphism eta of multiplication-cone descent. PointQuotientComparisonNormalized imposes the generator and inverse-generator formulas on every degree, site object and tower level, together with both cone-coordinate identities on every good representative. These properties determine both data fields uniquely: the prescribed inverse determines j, and binary biproduct extensionality on the shifted cone determines eta.hom. Multiplication-cone descent supplies existence for any calculus and Roos model. Define pointQuotientComparisonData by this uniquely determining existence theorem; the auxiliary calculus and Roos model cannot affect either isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism; point normalization plan, steps 1--6; Deligne Weil II (1.1.7), pp. 150--151"
+ },
+ "stmt_deps": [
+  "def-pur-point-normalization-coordinates",
+  "lem-trf-isomorphism-multiplication-cone-descent"
+ ],
+ "proof": [
+  {
+   "text": "Project the tower natural isomorphism and cone natural isomorphism from multiplication-cone descent, retaining its generator, inverse-generator, first cone coordinate and shifted cone coordinate. These are exactly the four factors of PointQuotientComparisonNormalized. The inverse-generator formula determines every component of j inverse by sectionwise extensionality, and uniqueness of inverses determines j. The two cone coordinates determine every component of eta hom by binary biproduct extensionality on the shifted cone, hence eta by uniqueness of its inverse. Thus choosing the specified data chooses a uniquely determined pair, with no arbitrary witness.",
+   "uses": [
+    "lem-trf-isomorphism-multiplication-cone-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-isomorphism-multiplication-cone-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Natural Weil isomorphism; point normalization plan, steps 1--6; Deligne Weil II (1.1.7), pp. 150--151"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A pullback of a sheaf of modules along a ring isomorphism is scalar restriction along its inverse, and the mate of an identity square is identity",
+   "results": "8 hits including SheafOfModules.pullback_id_comp, pullback_comp_id, pullbackPushforwardAdjunction, and restrictScalars; generic ordinary APIs only.",
+   "date": "2026-10-25",
+   "verdict": "no match for the specified pro-etale comparison or derived identity exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a module sheaf along a ring isomorphism is inverse to multiplication; identity square adjunction mate is identity",
+   "results": "8 hits including SheafOfModules.conjugateEquiv_pullbackId_hom, pullback_id_comp, pullback_comp_id and pullbackIso.",
+   "date": "2026-10-25",
+   "verdict": "no match for the specified point-comparison coordinates"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_id_comp|pullback_comp_id|conjugateEquiv_pullbackId_hom|IsIso.*scalarExtension",
+   "results": "14 hits, including Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean lines 144, 204, 209; generic ordinary identities.",
+   "date": "2026-10-25",
+   "verdict": "no match for these named derived coefficient comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointFrobeniusTransportNormalization",
+  "date": "2026-10-26",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Point normalization step 2; uniquely specified strict quotient and whole-cone comparisons",
+   "via": [
+    "lem-pur-point-frobenius-transport-normalization",
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointQuotientComparisonCoordinates",
+  "file": "lean/Sheaf/Paper/PointQuotientComparisonCoordinates.lean",
+  "declaration": "WeilConjectures.PointFrobeniusNormalization.PointQuotientComparisonData",
+  "declarations": [
+   "WeilConjectures.PointFrobeniusNormalization.PointQuotientComparisonData",
+   "WeilConjectures.PointFrobeniusNormalization.PointQuotientComparisonNormalized",
+   "WeilConjectures.PointFrobeniusNormalization.pointQuotientComparison_exists",
+   "WeilConjectures.PointFrobeniusNormalization.pointQuotientComparisonData"
+  ],
+  "statement": "structure PointQuotientComparisonData (g : Spec (.of D.k) ⟶ Spec (.of D.k)) [IsIso g]",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-690b8",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T023236-L-533707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-690b8",
+  "group": "G7",
+  "result": "fix",
+  "landing": "20261026T023236-L-533707",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone original (26 defs verbatim, theorem signature identical); pointIdentityExchangeRecipe clauses vs FiniteNormalization/IntegralNormalization fields; item node vs base node"
+ }
+}

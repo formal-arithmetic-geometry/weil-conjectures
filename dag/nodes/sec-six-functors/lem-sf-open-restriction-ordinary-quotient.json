@@ -1,0 +1,128 @@
+{
+ "id": "lem-sf-open-restriction-ordinary-quotient",
+ "kind": "statement",
+ "title": "Ordinary strict quotient restriction with its finite mate formula",
+ "statement": "Fix independent site and coefficient universes, a prime l and a finite extension E of Q_l [def-weil-l-adic-coefficient-extension], an open immersion j:U→X and the section-normalized operations o [def-sf-integral-open-operations]. Let tensor be a generator-normalized TensorComparison as in that definition. For each T in {X,U}, fix an ordinary quotient/limit model M_T [def-trf-completion-unit-models], including its evaluations, quotient squares and scalar-unit formula. There exists a natural isomorphism f:restriction⋙M_U.tensor ≅ M_X.tensor⋙systemRestriction. For every completed-coefficient module N on X and positive finite level n, evaluate f_N, apply the restriction-evaluation isomorphism built from o.finite, o.systems, o.transportEvaluation and o.openSystems.restrictionEvaluation, and then apply finiteRestriction to M_X.evaluation. The resulting map equals M_U.evaluation at restriction(N) followed by the finite-open adjunction unit, finiteRestriction of inverse tensor.ordinary at restriction(N), and finiteRestriction of scalarReductionExtension applied to the integral-open counit at N. This is an ordinary strict-system assertion, with no complexes or derived comparisons.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DJ and 0E8I (lemma-j-shriek-and-tensor); sites-cohomology.tex Tag 0941, ordinary strict quotient construction."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-integral-open-operations",
+  "def-trf-completion-unit-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved open scalar transition compatibility for the two supplied OrdinaryModels, viewed as OrdinaryReductions. The repaired restrictionSections normalization supplies its section hypothesis. Assemble the normalized finite extension comparisons into a natural isomorphism by ordinary system evaluation. Joint faithfulness proves naturality.",
+   "uses": [
+    "lem-sf-ordinary-open-tensor-system-assembly"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the right mate of the inverse extension comparison under the integral and system open adjunctions. The evaluated system counit and the generic evaluation-right-mate equation identify each evaluated component, after the fixed comparisons, with the finite right mate of inverse tensor.ordinary.",
+   "uses": [
+    "lem-sf-ordinary-open-restriction-evaluation-mate",
+    "lem-sf-open-system-counit-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite normalized mate is invertible. Since the remaining finite comparisons are isomorphisms, each evaluation of the system mate is invertible. The ordinary evaluations are jointly faithful and therefore jointly conservative in the abelian system category. Take the resulting natural isomorphism; the finite mate word gives the original normalization equation.",
+   "uses": [
+    "lem-sf-ordinary-open-finite-restriction-mate-invertible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ordinary-open-tensor-system-assembly",
+  "lem-sf-ordinary-open-restriction-evaluation-mate",
+  "lem-sf-open-system-counit-evaluation",
+  "lem-sf-ordinary-open-finite-restriction-mate-invertible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DJ and 0E8I, with existing extension transition comparison, system assembly and ordinary adjunction mate/counit calculus; S8, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of sheaves of modules to a slice site preserves K-flat complexes and commutes with scalar extension",
+   "results": "8 hits, including SheafOfModules.over and SheafOfModules.restrictScalars; none supplies the K-flat preservation with prescribed coefficient transports or the strict quotient comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits; leftAdjointUniq and its unit and counit equations provide adjunction transport but no geometric restriction/tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*(tensor|scalar)|localizedSystemRestriction",
+   "results": "25 Mathlib hits concerning scalar restriction and modules, without the requested geometric comparison. Local source searches additionally found ringedSite_restriction_exact_kflat (slice before transport), exactMonoidal_totalTensor_kFlat (needs a monoidal structure), and OrdinaryReductionAugmentedComputation (derived presentation). None states the prescribed transported ordinary geometric steps.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OpenRestrictionAugmentedDescent",
+  "date": "2026-10-27",
+  "group": "B7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Ordinary strict quotient restriction with its finite mate formula; ordinary part of the augmented restriction construction.",
+   "via": [
+    "lem-sf-open-restriction-augmented-descent",
+    "lem-sf-canonical-open-restriction-model",
+    "lem-sf-open-reduction-adjunction-transport",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryOpenRestrictionQuotient",
+  "file": "lean/Sheaf/Paper/OrdinaryOpenRestrictionQuotient.lean",
+  "declaration": "WeilConjectures.CanonicalOpenRestriction.ordinaryRestrictionQuotient",
+  "statement": "theorem ordinaryRestrictionQuotient\n    (tensor : TensorComparison l E j o)\n    (MX : CompletionUnit.OrdinaryModel l E X)\n    (MU : CompletionUnit.OrdinaryModel l E U) :\n    ∃ f : restriction l E j o ⋙ MU.tensor ≅ MX.tensor ⋙ systemRestriction l E j o,\n      ∀ (N : scalarReductionSource l E X) (n : ℕ),\n        (coefficientSequenceEvaluation l E U n).map (f.hom.app N) ≫\n          ((o.finite n).unitIso.app _ ≪≫\n    (o.finite n).inverse.mapIso\n      ((o.transportEvaluation n).app ((systemRestriction l E j o).obj (MX.tensor.obj N))).symm ≪≫\n    (o.finite n).inverse.mapIso\n      ((SemilinearSections.evaluation.{t+1, t, max u (t+1)}\n        ((ProEt.topology X).over (openObject j))\n        (fun k ↦ (rings l E X k).over (openObject j))\n        (fun k ↦ ((ProEt.topology X).overPullback CommRingCat.{max u (t+1)}\n          (openObject j)).map (transitions l E X k)) n).mapIso\n        (o.systems.counitIso.app _)) ≪≫\n    (o.finite n).inverse.mapIso\n      ((o.openSystems.restrictionEvaluation n).app (MX.tensor.obj N))).hom ≫\n          (finiteRestriction l E j o n).map ((MX.evaluation n).hom.app N) =\n        (MU.evaluation n).hom.app ((restriction l E j o).obj N) ≫ (((o.finite n).toAdjunction.comp\n          (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}\n            (rings l E X n) (openObject j))).unit.app _ ≫\n    (finiteRestriction l E j o n).map\n      ((tensor.ordinary n).inv.app ((restriction l E j o).obj N)) ≫\n    (finiteRestriction l E j o n).map\n      ((scalarReductionExtension l E X n).map\n        ((ordinaryAdjunction l E j o).counit.app N)))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261027T012812-L-2333234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0d913",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T135439-L-3708468",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-sf-open-restriction-ordinary-quotient; OpenSystems.restrictionSections vs change record + def-coef-semilinear-derived-calculus statement_change; finiteRestrictionMate_isIso vs its node (true, generator-pinned); 8 NOT RUN importers compiled OK against delivered SDC"
+ }
+}

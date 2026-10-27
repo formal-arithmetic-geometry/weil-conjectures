@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-lci-cohen-macaulay-stalks",
+ "kind": "statement",
+ "title": "Local complete intersections over a field have Cohen-Macaulay stalks",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ a scheme locally of finite type over $k$ [def-weil-finite-type-morphism]. Suppose $X$ has an affine open cover whose coordinate rings are local complete intersections over $k$ [def-weil-pbc-complete-intersection-over-field]. Then every local ring $\\mathcal O_{X,x}$ is Noetherian [def-weil-pbc-noetherian-ring] and Cohen-Macaulay: $\\operatorname{depth}(\\mathcal O_{X,x})=\\dim\\mathcal O_{X,x}$ [def-weil-pbc-depth, def-weil-pbc-krull-dimension-ring]. Here $x$ ranges over all points of $X$, not only closed points.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SB, lemma-lci-CM, applied on affine charts; Cohen-Macaulay ring means that every prime localization is Cohen-Macaulay."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary point $x\\in X$. Choose an affine chart $U=\\operatorname{Spec}S$ of the hypothesized cover containing $x$. The affine-open stalk lemma identifies $\\mathcal O_{X,x}$ with $S_{\\mathfrak p}$ for the prime $\\mathfrak p$ corresponding to $x$. By the definition of local complete intersection there is $g\\notin\\mathfrak p$ among the covering elements such that $T=S_g$ is a global complete intersection. No closedness assumption on $x$ has been made.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SB, lemma-lci-CM, first reduction to a global complete intersection; Schemes Tag 01HV, lemma-spec-sheaves (6), for the affine stalk"
+   }
+  },
+  {
+   "text": "Set $\\mathfrak q=\\{s/g^a:s\\in\\mathfrak p\\}\\subset T$. The fraction relation and $g\\notin\\mathfrak p$ show membership is independent of representatives; the ideal and primality conditions follow from those of $\\mathfrak p$. There are inverse ring maps $S_{\\mathfrak p}\\to T_{\\mathfrak q}$, $s/t\\mapsto(s/1)/(t/1)$, and $T_{\\mathfrak q}\\to S_{\\mathfrak p}$, $(s/g^a)/(t/g^b)\\mapsto(sg^b)/(g^at)$. Here $t\\notin\\mathfrak p$ makes the latter denominator admissible. The fraction relations verify well-definedness, and substitution gives both composites equal to the identity. In particular $\\mathcal O_{X,x}\\cong T_{\\mathfrak q}$, and $T\\neq0$ because it has the prime $\\mathfrak q$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, definition-localization, fraction relations; the local reduction at the beginning of Tag 00SB"
+   }
+  },
+  {
+   "text": "Choose the presentation $T\\cong P/J$, where $P=k[y_1,\\ldots,y_n]$, $J=(f_1,\\ldots,f_c)$, and $\\dim T=n-c$, supplied by the global-complete-intersection definition. Regard $\\mathfrak q$ as a prime of $P/J$, and let $\\mathfrak r$ be its inverse image in $P$. Thus $J\\subseteq\\mathfrak r$. Put $R=P_{\\mathfrak r}$ and $a_j=f_j/1$. The polynomial-ring regularity node gives that $R$ is a Noetherian regular local ring. The global-complete-intersection regular-sequence node applies because $T\\neq0$ and $\\dim T=n-c$; it gives that $a_1,\\ldots,a_c$ is an $R$-regular sequence. The localization-of-quotient node identifies $T_{\\mathfrak q}$ with $R/JR=R/(a_1,\\ldots,a_c)$, by the map taking a class of a fraction to the corresponding fraction of classes.",
+   "uses": [
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00SB, lemma-lci-CM, and 00SC, lemma-lci, proof (regular sequence at an arbitrary prime); Tag 00OQ, proposition-finite-gl-dim-polynomial-ring; Tag 00CT, proposition-localize-quotient"
+   }
+  },
+  {
+   "text": "Write $d=\\dim R$. Since $R$ is regular local, its maximal ideal has a generating list $z_1,\\ldots,z_d$. The regular-local-generators node says this list is $R$-regular. It lies in the maximal ideal, so the depth definition gives $\\operatorname{depth}(R)\\ge d$. This establishes the Cohen--Macaulay lower bound needed for the base case of the next induction, without making any assertion that the prime $\\mathfrak r$ is maximal in $P$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NQ, lemma-regular-ring-CM, as used in Tag 00SB; Tag 00LI, definition-depth"
+   }
+  },
+  {
+   "text": "For $0\\le i\\le c$ put $R_i=R/(a_1,\\ldots,a_i)$. Induct on $i$ with invariant: $R_i$ is a nonzero Noetherian local ring and $\\operatorname{depth}(R_i)\\ge\\dim R_i$. At $i=0$ use $R_0=R$ and step 4. If $i<c$, regularity of the defining sequence says that multiplication by the class $\\bar a_{i+1}$ is injective on $R_i$. Since $a_{i+1}\\in\\mathfrak rR$, this class lies in the maximal ideal of $R_i$; the local-quotient structure node identifies that ideal as the image of $\\mathfrak rR$. Apply the Cohen--Macaulay nonzerodivisor-quotient node to $(R_i,\\bar a_{i+1})$. It gives a nonzero Noetherian local quotient of dimension $\\dim R_i-1$ with depth at least that dimension. This quotient is $R_{i+1}$: the maps in both directions send the iterated class of $r$ to the class of $r$ modulo $(a_1,\\ldots,a_{i+1})$, and their kernels are exactly that ideal. This proves the inductive step. In particular $B=R_c$ is Noetherian local and $\\operatorname{depth}(B)\\ge\\dim B$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JN, lemma-reformulate-CM, successive quotients by a regular sequence, with its one-element case iterated; Tag 00LF, definition-regular-sequence"
+   }
+  },
+  {
+   "text": "Apply the depth bound to the nonzero finite $B$-module $M=B$ (generated by $1$). Its support is all of $\\operatorname{Spec}B$: for every prime $\\mathfrak b$, the localization $B_{\\mathfrak b}$ is nonzero, since $1/1=0$ would imply $s=0$ for some $s\\notin\\mathfrak b$. Hence the definition of support dimension in that bound is precisely the prime-chain definition of $\\dim B$. We get $\\operatorname{depth}(B)\\le\\dim B$, and step 5 gives equality. The isomorphisms from steps 1--3 identify $\\mathcal O_{X,x}$ with $B$. A ring isomorphism bijects ideals and prime chains, takes the unique maximal ideal to the unique maximal ideal, and identifies multiplication on every successive quotient; therefore it preserves Noetherianity, Krull dimension, and the lengths of regular sequences defining depth. Thus $\\mathcal O_{X,x}$ is Noetherian and has depth equal to dimension. Since $x$ was arbitrary this proves the assertion at every point.",
+   "uses": [
+    "lem-weil-pbc-depth-le-support-dimension",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LK, lemma-bound-depth, with M=B; Tags 00LI, definition-depth, 00KE, definition-Krull, and 00LF, definition-regular-sequence; conclusion of Tag 00SB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SB, lemma-lci-CM: affine/global complete intersection reduction, polynomial regularity and regular-sequence quotient; Tag 00SC for the arbitrary-prime regular sequence and Tag 02JN iterated at that prime."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every local ring of a finite type local complete intersection scheme over a field is Cohen Macaulay",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [IsLocalization.Away r S], Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"If $ S $ is the localization of a commutative ring $ R $ at an element $ r $, then $ S $ is a standard smooth $ R $-algebra of relative dimension $ 0 $.\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension 0\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ makes $ S $ a standard smooth algebra over $ R $ of relative dimension 0, then this property is preserved under localization at any element of $ R $. Specificall\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.Presentation.localizationAway_dimension_zero\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S], (Algebra.Presentation.localizationAway S r).dimension = 0\", \"doc\": \"The algebra presentation obtained by localizing a commutative semiring $ S $ at the powers of an element $ r $ has dimension zero, meaning the number of generators equals the number of relations in th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smoothness or Krull dimension, not the depth equality for lci stalks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete intersection algebra over a field has depth equal to dimension at all prime localizations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Presentation.localizationAway_dimension_zero\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S], (Algebra.Presentation.localizationAway S r).dimension = 0\", \"doc\": \"The algebra presentation obtained by localizing a commutative semiring $ S $ at the powers of an element $ r $ has dimension zero, meaning the number of generators equals the number of relations in th\"}\n  {\"name\": \"Ring.KrullDimLE.of_isLocalization\", \"module\": \"Mathlib/RingTheory/KrullDimension/Zero\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_2)\\n  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization.AtPrime S p], Ring.KrullDimLE 0 S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq 0 $. This follows b\"}\n  {\"name\": \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [inst_1 : I.IsPrime] (A : Type u_2) [inst_2 : CommRing A]\\n  [inst_3 : Algebra R A] [IsLocalization.AtPrime A I], ringKrullDim A = ↑I.height\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the complement of a prime ideal $ I $, then the Krull dimension of $ A $ is equal to the height of $ I $. This equality connects the dimensi\"}\n  {\"name\": \"Ring.DimensionLEOne.localization\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ {R : Type u_2} (Rₘ : Type u_3) [inst : CommRing R] [IsDomain R] [inst_2 : CommRing Rₘ] [inst_3 : Algebra R Rₘ]\\n  {M : Submonoid R} [IsLocalization M Rₘ], M ≤ nonZeroDivisors R → ∀ [h : Ring.DimensionLEOne R], Ring.DimensionLEOne Rₘ\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain with Krull dimension at most one. If $ R_\\\\mathfrak{m} $ denotes the localization of $ R $ at a submonoid $ M $ consisting of non-zero divisor\"}\n  {\"name\": \"Ring.krullDimLE_of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_2)\\n  [inst_1 : (P : Ideal R) → [inst : P.IsMaximal] → CommRing (Rₚ P)]\\n  [inst_2 : (P : Ideal R) → [inst_2 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_3 : P.IsMaximal], IsLocalization.AtPrime (Rₚ P) P] \", \"doc\": \"If for every maximal ideal $\\\\mathfrak{m}$ of a commutative semiring $R$, the Krull dimension of the localization $R_\\\\mathfrak{m}$ is at most $n$, then the Krull dimension of $R$ itself is also at most\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] {r : R},\\n  r ∈ nonZeroDivisors R →\\n    ∀ {p : Ideal R} [p.IsPrime],\\n      ↑p.height = ringKrullDim R → r ∈ p → ringKrullDim (R ⧸ Ideal.span {r}) + 1 = ringKrullDim R\", \"doc\": \"For a commutative ring $ R $, if $ r $ is a non-zero divisor in $ R $ and belongs to a prime ideal $ \\\\mathfrak{p} $ with height equal to the Krull dimension of $ R $, then the Krull dimension of the q\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smoothness or Krull dimension, not the depth equality for lci stalks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohenMacaulay\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smoothness or Krull dimension, not the depth equality for lci stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|completeIntersection",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smoothness or Krull dimension, not the depth equality for lci stalks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every local ring of a finite type local complete intersection scheme over a field is Cohen Macaulay",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"[IsNoetherianRing R] [IsLocalRing R] : FiniteRingKrullDim R\", \"doc\": \"Every Noetherian local ring has finite Krull dimension. This instance asserts that if a commutative ring is both Noetherian (every ideal is finitely generated) and local (possessing a unique maximal i\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(P : PrimeSpectrum.Top R) : IsLocalRing <| Localizations R P\", \"doc\": \"For any commutative ring $ R $ and prime ideal $ P $ in its prime spectrum, the localization of $ R $ at the submonoid of elements not in $ P $ forms a local ring. This localization inverts all elemen\"}\n  {\"name\": \"IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"[IsLocalRing R] (I : Ideal R) (hp : IsLocalRing.maximalIdeal R ∈ I.minimalPrimes) : IsArtinianRing (R ⧸ I)\", \"doc\": \"Let $ R $ be a local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ I $ be an ideal of $ R $ such that $ \\\\mathfrak{m} $ is a minimal prime ideal containing $ I $. Then the quotient ring $ R/I $ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Field (X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"Localization.AtPrime.isLocalRing\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \": IsLocalRing (Localization P.primeCompl)\", \"doc\": \"For a semiring $ R $ and a prime ideal $ P $, the localization of $ R $ at the complement of $ P $ forms a local ring. This means the localized ring has a unique maximal ideal, which corresponds to th\"}\n  {\"name\": \"IsLocalRing.isField_iff_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic\", \"type\": \": IsField R ↔ maximalIdeal R = ⊥\", \"doc\": \"For a local ring $ R $, $ R $ is a field if and only if its maximal ideal is the zero ideal.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"IsLocalRing.instCommRingResidueField\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → [inst_1 : IsLocalRing R] → CommRing (IsLocalRing.ResidueField R)\", \"doc\": \"For any commutative ring $ R $ that is a local ring, the residue field of $ R $, defined as the quotient of $ R $ by its unique maximal ideal of non-units, inherits a commutative ring structure from $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smoothness or Krull dimension, not the depth equality for lci stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|IsLocalCompleteIntersection",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern dimension or regular sequences only, not equality of depth and dimension for lci stalks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient of a regular local ring by a regular sequence is Cohen Macaulay",
+   "results": "8 hits; IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, RingTheory.Sequence.IsRegular, Ideal.Quotient.isNoetherianRing, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern dimension or regular sequences only, not equality of depth and dimension for lci stalks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohenMacaulay\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern dimension or regular sequences only, not equality of depth and dimension for lci stalks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every prime localization of a local complete intersection algebra over a field has depth equal to Krull dimension",
+   "results": "8 hits; Algebra.Presentation.localizationAway_dimension_zero, Ring.KrullDimLE.of_isLocalization, IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.krullDimLE_of_isLocalization_maximal, Ring.DimensionLEOne.localization, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern dimension or regular sequences only, not equality of depth and dimension for lci stalks"
+  },
+  {
+   "tool": "grep",
+   "query": "depth.*ringKrullDim|ringKrullDim.*depth|complete.intersection",
+   "results": "1 hits; Mathlib/RingTheory/Extension/Presentation/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern dimension or regular sequences only, not equality of depth and dimension for lci stalks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotients of regular local rings by regular sequences are Cohen Macaulay local rings",
+   "results": "8 hits; IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.isWeaklyRegular_iff_Fin, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingTheory.Sequence.isWeaklyRegular_iff, RingTheory.Sequence.isRegular_cons_iff'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern dimension or regular sequences only, not equality of depth and dimension for lci stalks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-smoothing",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Smoothing a proper curve with isolated complete-intersection singularities. Supporting input: Local complete intersections over a field have Cohen-Macaulay stalks.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smoothing",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-lci-cohen-macaulay-stalks",
+  "worker": "stage1",
+  "summary": "Read Stacks 00SB and its cited algebraic inputs, checked existing DAG statements, and expanded the affine reduction and successive nonzerodivisor quotients at an arbitrary prime. All inputs already have nodes; no new node is needed. Corrected doubled TeX escapes only; the mathematical statement is unchanged. Project source has no attachment.",
+  "blueprint": "Realizes the existing blueprint.from.place supporting input: local complete intersections over a field have Cohen-Macaulay stalks, needed for isolated-lci curve smoothing in the alteration reduction. The ancestry has from.node=null, as confirmed by blueprint_refs.py ancestor; retained it rather than inventing an imported ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+    "why": "Gives the regular defining sequence at an arbitrary polynomial prime, a generic commutative algebra input to the lci-curve smoothing prerequisite; the unit supplies no alternate algebra lemma."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Supplies a maximal-ideal regular sequence for the ambient regular local ring, a generic algebra tool below the fixed alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+    "why": "Supplies the one-equation Cohen-Macaulay induction step, a generic algebra tool; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Supplies the upper bound on depth to turn the constructed lower bound into equality; the unit does not state a depth bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+  "lem-weil-pbc-depth-le-support-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-7ed192f4e",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-7ed192f4e (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited node's statement and Stacks 00SB (lemma-lci-CM, algebra.tex:35876) plus 02JN; no new nodes. The statement is byte-identical to live, where the item is still unsplit; it is not in the dropped list, has no repair note, cites no SGA, and has no cycle (68-node closure). Step 1: the affine-stalk node part (c) gives O_{X,x}=S_p at any point, and lci definition part (2) gives g outside p. Step 2 (elementary, few lines): S_p≅(S_g)_q; I checked that q does not depend on representatives, that the denominators are admissible, and that T≠0. Step 3: T≅P/J with dim n-c; P_r is regular local at an arbitrary prime; the 00SC node with q''=r makes f_j/1 a regular sequence; 00CT gives T_q≅R/JR. Step 4: by 00NQ the d generators of m form a regular sequence, so depth R≥d. Step 5: the induction is properly set up (invariant, base, step) using the regular-sequence definition, the quotient-local-structure node and the 02JN c=1 node; the d=0 edge case cannot occur. Step 6: 00LK with M=B and Supp B=Spec B gives depth≤dim, and the isomorphism transfers equality to O_{X,x}. Small cases checked: c=0, k[e]/(e^2), generic point of A^1. I accept the four tool_uses of generic sk-thm-p1 algebra nodes (00SC, 00NQ, 02JN, 00LK); the unit has no algebra nodes of its own and they replace no step of its route. lean_audit is absent from the delivered file; it is a maintainer field, not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LCICohenMacaulayStalks",
+  "declaration": "AlgebraicGeometry.isNoetherianRing_stalk_and_depth_eq_ringKrullDim_of_lci",
+  "file": "lean/Sheaf/AlgebraicGeometry/LCICohenMacaulayStalks.lean",
+  "statement": "theorem isNoetherianRing_stalk_and_depth_eq_ringKrullDim_of_lci (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] (hlci : ∃ (I : Type u) (A : I → CommRingCat.{u}) (aA : ∀ i, Algebra k (A i)) (ft : ∀ i, Algebra.FiniteType k (A i)) (φ : ∀ i, Spec (A i) ⟶ X), (∀ i, IsOpenImmersion (φ i)) ∧ (∀ i, φ i ≫ f = Spec.map (CommRingCat.ofHom (@algebraMap k (A i) _ _ (aA i)))) ∧ (∀ z : X, ∃ i, ∃ y : Spec (A i), φ i y = z) ∧ (∀ i, @Algebra.IsLocalCompleteIntersection k (A i) _ _ (aA i) (ft i))) (x : X) : IsNoetherianRing (X.presheaf.stalk x) ∧ (IsLocalRing.depth (R := X.presheaf.stalk x) (X.presheaf.stalk x) : WithBot ℕ∞) = ringKrullDim (X.presheaf.stalk x)",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65354bdad",
+  "group": "Q26",
+  "result": "pass",
+  "note": "65354bda applies the 23bc8381 H12 RETURN correction exactly. The new def node def-sfb-local-complete-intersection-scheme-over-field and its alias module are removed; stmt_deps are back to the six base entries; the item record differs from live only in lean. hlci is token-identical to the body of IsLocalCompleteIntersectionOver (SyntomicGeometricFibresAffineCriterion.lean:51) except for a renamed bound variable, using only Algebra.IsLocalCompleteIntersection (declared by def-weil-pbc-complete-intersection-over-field) and Mathlib; no syntomic import. Clauses checked: Field k; LocallyOfFiniteType f with no extra hypotheses; affine lci cover, empty index allowed, per-chart FiniteType implied; arbitrary x; IsNoetherianRing stalk and (IsLocalRing.depth : WithBot ℕ∞) = ringKrullDim. Edge cases checked: empty X, zero charts, generic point, k[ε]/ε², c=0. Statement field equals the file signature; lines <=100; sorry-only proof; source and blueprint docstrings with the 6-step proof; all imported modules exist; report has both required sections. No new reach finding. No FIX, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261023T124035-L-1314938",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.isNoetherianRing_stalk_and_depth_eq_ringKrullDim_of_lci"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "lem-coef-integral-support-realization-comparison",
+ "kind": "statement",
+ "title": "Integral support comparison for a fixed finite realization",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne\\operatorname{char}(D.k)$, and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism of separated finite-type $D.k$-schemes and fix a compactification $c$ [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. Fix reduction/limit calculi $S_X,S_Z,S_Y$ and any finite-operation realization $r$ with system compact-support functor $\\mathcal F_r$ [lem-coef-derived-system-evaluation-calculus, def-sf-finite-adjunction-diagram-data, def-coef-finite-adjunction-system-data]. On $D^b_c(X,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], the literal ambient functor $\\mathcal L_Y\\mathcal F_r\\mathcal R_X$ of [lem-coef-integral-exceptional-mapping-system] is naturally isomorphic to the recorded integral compact-support functor for $c$ followed by inclusion in the ambient derived category [def-weil-integral-rational-qbar-compact-support]. No exceptional preservation or integral adjunction is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/_section.md",
+  "place": "Accepted specified-adjunction interface: literal compact-support identification; uniqueness-of-adjoints transfer from lem-coef-finite-adjunction-diagram-realization."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-finite-adjunction-diagram-data",
+  "def-coef-finite-adjunction-system-data",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-coef-integral-exceptional-mapping-system",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "Choose a geometric finite-operation realization r0 with IntegralSupport using lem-coef-finite-adjunction-diagram-realization. The reduction functors for the arbitrary calculus and r0 are left adjoints of the same total limit, hence are naturally isomorphic. The system open extensions are left adjoints of the same geometric system pullback and the proper images are right adjoints of the same pullback, so uniqueness of adjoints gives whole-system natural isomorphisms of the two support composites.",
+   "uses": [
+    "lem-coef-finite-adjunction-diagram-realization",
+    "def-coef-finite-adjunction-system-data",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the actual supportIso for the arbitrary realization and r0 with reduction and total limit. Insert the reduction and support-composite isomorphisms to identify F_r with F_r0. Compose with IntegralSupport.iso for r0. The proof witnesses for restricted reductions are propositions and are identified by proof irrelevance. No map or equality is inferred merely from finite evaluations.",
+   "uses": [
+    "def-sf-finite-adjunction-diagram-data",
+    "lem-coef-integral-exceptional-mapping-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-adjunction-diagram-realization",
+  "def-coef-finite-adjunction-system-data",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-finite-adjunction-diagram-data",
+  "lem-coef-integral-exceptional-mapping-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/_section.md",
+  "place": "Accepted specified-adjunction interface: literal compact-support identification; uniqueness-of-adjoints transfer from lem-coef-finite-adjunction-diagram-realization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The total derived inverse limit of the normalized finite exceptional inverse image of reductions of a bounded constructible integral complex is bounded constructible",
+   "results": [
+    "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+    "HomologicalComplex.instHasLimit"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No coefficient-operation preservation result; generic bounded representatives and limits only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism between integral compactly supported direct image and total inverse limit of finite coefficient compact support systems",
+   "results": [
+    "CategoryTheory.Sheaf.ΓNatIsoLim",
+    "CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Only ordinary limits and unrelated sheaf global sections; no integral compact-support system comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.fullyFaithfulCancelRight",
+   "results": [
+    "CategoryTheory.Functor.fullyFaithfulCancelRight"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Cancels an already given ambient isomorphism; does not supply the geometric isomorphism or preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralSupport|support_and_counits|integralDualExceptionalSystem",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No Mathlib result. Repository rg finds support_and_counits and integralDualExceptionalSystem, but the former lacks a functor comparison and the latter needs additional dualizing/duality data not quantified in the new statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralExceptionalMappingAdjunction",
+  "date": "2026-10-26",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "paragraph 'The integral exceptional adjunction, its units and counits, ... are [prop-coef-integral-exceptional-adjoint]' together with paragraph 8, fourth sentence: 'the adjunction formula uses exactly the evaluations and counits preserved by the duality comparisons'; step 1 of lem-coef-ramified-scalar-counit-limit: the specified integral counit is the descended reconstruction counit; interface for the specified total mapping-complex adjunction, without the descended-counit conclusion.; through the specified-adjunction interface, Accepted specified-adjunction interface, exists_unique docstring: literal compact-support identification (paragraph 2).",
+   "via": [
+    "def-coef-specified-integral-mapping-adjunction",
+    "lem-coef-integral-exceptional-descended-counit",
+    "lem-coef-ramified-scalar-counit-limit",
+    "lem-coef-finite-scalar-mate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSupportRealizationComparison",
+  "file": "lean/Sheaf/SixFunctors/IntegralSupportRealizationComparison.lean",
+  "declaration": "WeilConjectures.IntegralExceptionalMapping.support_realization_comparison",
+  "statement": "theorem support_realization_comparison :\n    Nonempty (F r ≅\n      sfCompactSupportFiniteIntegralFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) c E ⋙\n        (sfIntegralConstructible l E Y).ι)",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T203239-L-2794847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T203239-L-2794847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

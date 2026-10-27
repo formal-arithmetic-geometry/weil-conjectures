@@ -148,7 +148,32 @@
   "item": "lem-weil-pbc-fpqc-descend-affine",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.quasiCompact_of_fpqc_baseChange"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.quasiCompact_of_fpqc_baseChange",
+     "module": "WeilConjectures.AlgebraicGeometry.FpqcDescendQuasiCompact",
+     "lines": [
+      28,
+      59
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -190,5 +215,47 @@
    "AlgebraicGeometry.quasiCompact_of_fpqc_baseChange"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $g:S'\\to S$ be a morphism of schemes [def-pc-scheme] which is flat, surjective and quasi-compact [def-weil-finite-type-morphism] (the preimage of every affine open of $S$ is quasi-compact). Let $f:X\\to S$ be a morphism of schemes and let $f':X\\times_SS'\\to S'$ be the second projection of the fibre product. If $f'$ is quasi-compact, then $f$ is quasi-compact.",
+  "proof": [
+   {
+    "text": "Let $U\\subseteq S$ be an affine open. By the definition of a quasi-compact morphism [def-weil-finite-type-morphism] it suffices to show that $f^{-1}(U)$ is quasi-compact. Since $g$ is quasi-compact, $V:=g^{-1}(U)\\subseteq S'$ is a quasi-compact open of $S'$ (definition of quasi-compactness of $g$ applied to the affine open $U$).",
+    "uses": [
+     "def-weil-finite-type-morphism"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Write $X'=X\\times_SS'$ with projections $p:X'\\to X$ and $f':X'\\to S'$, so that $f\\circ p=g\\circ f'$. Since $f'$ is quasi-compact and $V$ is a quasi-compact open of $S'$, the open $W:=f'^{-1}(V)\\subseteq X'$ is quasi-compact (the preimage of a quasi-compact open under a quasi-compact morphism is quasi-compact).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The projection $p:X'=X\\times_SS'\\to X$ is surjective: it is the base change of the surjective morphism $g:S'\\to S$ along $f:X\\to S$ (identifying $X\\times_SS'$ with $S'\\times_SX$ by the canonical symmetry isomorphism of the fibre product, which is a homeomorphism commuting with the projections), and surjectivity is stable under base change.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "$p(W)=f^{-1}(U)$. If $x'\\in W$ then $f(p(x'))=g(f'(x'))\\in g(V)\\subseteq U$, so $p(x')\\in f^{-1}(U)$. Conversely, let $x\\in f^{-1}(U)$; by step 3 choose $x'\\in X'$ with $p(x')=x$; then $g(f'(x'))=f(x)\\in U$, so $f'(x')\\in g^{-1}(U)=V$ and $x'\\in f'^{-1}(V)=W$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The restriction $p|_W:W\\to X$ is continuous (a morphism of schemes [def-pc-scheme] is continuous on underlying spaces, and restriction to a subspace preserves continuity) and $W$ is quasi-compact (step 2), so its image $p(W)=f^{-1}(U)$ (step 4) is quasi-compact in the topology induced from $X$, as a continuous image of a quasi-compact space. As $U$ was an arbitrary affine open of $S$, $f$ is quasi-compact [def-weil-finite-type-morphism].",
+    "uses": [
+     "def-pc-scheme",
+     "def-weil-finite-type-morphism"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

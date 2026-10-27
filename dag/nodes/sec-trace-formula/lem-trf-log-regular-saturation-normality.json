@@ -38,48 +38,26 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-power-series-field-cohen-regular-complete], $A$ is regular local. In case (i) put $S=A$. In case (ii) put $\\Theta=\\iota(\\theta)$ and $\\mathfrak n=(p,X_1,\\ldots,X_r,t_1,\\ldots,t_n)\\subset A$. Every nonzero monoid element has a nonzero exponent vector, so the hypothesis on $\\theta-p$ implies that $\\Theta$ has constant coefficient exactly $p$. Consequently $\\Theta\\in\\mathfrak n$ and $\\Theta\\notin\\mathfrak n^2$: the constant coefficient of any element of $\\mathfrak n^2$ belongs to $p^2C$, whereas $p\\notin p^2C$, since $C$ is a domain and $p$ is a nonunit uniformizer [def-weil-pbc-cohen-ring]. Now [lem-weil-pbc-regular-local-hypersurface-criterion] makes $S=A/(\\Theta)$ regular local. This works also for $r+n=0$, when $\\Theta=p$ and $S=C/pC$.",
+   "text": "Put $d=r+n$ and use [lem-trf-power-series-cohen-hypersurface-normality]. In case (i), $S=A$ is a normal domain. In case (ii), put $\\Theta=\\iota(\\theta)$ and $S=A/(\\Theta)$. Each generator $z^q$ with $q\\neq0$ maps to a monomial with nonzero exponent, and each $t_i$ maps to a variable, by [lem-trf-completed-monoid-support-projection]. Their images have zero constant coefficient. The hypothesis on $\\theta-p$ therefore gives constant coefficient exactly $p$ for $\\Theta$, so the same ambient lemma makes $S$ a normal domain, including $d=0$.",
    "uses": [
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "def-weil-pbc-cohen-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 032C (remark-Noetherian-complete-local-ring-universally-catenary), 0327 (definition-cohen-ring), and 00NQ (lemma-regular-ring-CM); explicit constant-coefficient check by Q48"
-   }
-  },
-  {
-   "text": "In case (i) we already have the inclusion $R=T\\hookrightarrow S=A$ and its $R$-linear retraction. In case (ii), $\\rho(\\Theta a)=\\theta\\rho(a)$ implies $T\\cap\\Theta A=\\theta T$: if $t=\\Theta a\\in T$, apply $\\rho$ to obtain $t=\\theta\\rho(a)$; the reverse inclusion is immediate. Thus $R=T/(\\theta)$ embeds in $S=A/(\\Theta)$, and $[a]\\mapsto[\\rho(a)]$ is a well-defined $R$-linear retraction $\\bar\\rho:S\\to R$ fixing $1$.",
-   "uses": [
+    "lem-trf-power-series-cohen-hypersurface-normality",
     "lem-trf-completed-monoid-support-projection"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; Q48 agent proof of normality of these models"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-formulated combination of Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary), Tag 00NQ (lemma-regular-ring-CM), Tag 0AFS (lemma-localization-of-regular-local-is-regular), and Tag 0567 (lemma-regular-normal). Extracted from steps 3 and 5 of the returned split; the constant-coefficient argument is agent-origin, not a theorem quoted verbatim from these tags."
    }
   },
   {
-   "text": "Use [lem-weil-pbc-regular-local-localization] to regard the regular local ring $S$ as a regular ring, then apply [lem-weil-pbc-regular-ring-normal]. Its conclusion says every prime localization of $S$ is a normal domain. At the maximal ideal $\\mathfrak m_S$ the canonical map $S\\to S_{\\mathfrak m_S}$ is an isomorphism: every denominator lies outside the unique maximal ideal and is already a unit. Therefore $S$ itself is a nonzero normal domain.",
+   "text": "Apply [lem-trf-split-principal-quotient-normality] to $\\iota:T\\hookrightarrow A$ and its $T$-linear retraction $\\rho$. In case (i) take the element $0\\in T$, so the ambient quotient is $S=A$ and the conclusion is normality of $R=T$. In case (ii) take the given $\\theta\\in T$, whose ambient quotient is the normal domain $S=A/(\\Theta)$ of step 3. The lemma gives the quotient injection and retraction, and then normality of $R=T/(\\theta)$, exactly the required conclusion.",
    "uses": [
-    "lem-weil-pbc-regular-local-localization",
-    "lem-weil-pbc-regular-ring-normal"
+    "lem-trf-split-principal-quotient-normality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 0AFS (lemma-localization-of-regular-local-is-regular), 0567 (lemma-regular-normal), 00GV (definition-ring-normal), and 0309 (definition-domain-normal)"
-   }
-  },
-  {
-   "text": "The unital injection $R\\hookrightarrow S$ makes $R$ a nonzero domain and embeds $\\operatorname{Frac}(R)$ into $\\operatorname{Frac}(S)$. Let $x=a/b\\in\\operatorname{Frac}(R)$, $b\\neq0$, be integral over $R$. Its same monic equation makes it integral over $S$, so $x\\in S$ by the normality just proved. Apply the $R$-linear retraction of step 4 to $bx=a$: it gives $b\\bar\\rho(x)=a$, hence $x=\\bar\\rho(x)\\in R$ inside $\\operatorname{Frac}(S)$. (Use $\\rho$ for $\\bar\\rho$ in case (i).) This proves that $R$ is integrally closed in its fraction field in both cases.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; Q48 agent proof of normality of these models"
+    "place": "Agent-formulated local-algebra lemma using normal domains as in Tag 0309 (definition-domain-normal); extracted from steps 4 and 6 of the returned split. Tag 0309 defines normality and does not assert this descent theorem. Motivation: ILO Expose VI 1.6(i)--(ii), printed p. 70, in literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf."
    }
   }
  ],
@@ -87,10 +65,8 @@
   "lem-trf-sharp-fs-orthant-embedding",
   "lem-trf-completed-monoid-support-projection",
   "def-weil-pbc-cohen-ring",
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-regular-local-hypersurface-criterion",
-  "lem-weil-pbc-regular-local-localization",
-  "lem-weil-pbc-regular-ring-normal"
+  "lem-trf-power-series-cohen-hypersurface-normality",
+  "lem-trf-split-principal-quotient-normality"
  ],
  "proof_origin": {
   "by": "agent",
@@ -191,29 +167,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-log-regular-saturation-normality",
   "worker": "stage1",
-  "summary": "Kept the full statement including arbitrary Cohen residue field, zero monoid and zero variable cases. Proved normality by an orthant lattice embedding, completion as supported formal series, a module projection, and regularity of the ambient power-series hypersurface. Only the lattice embedding and completion comparison are new unsplit statements. Checked all cited statements and source hypotheses; Kato is unavailable and the proof is explicitly agent-origin.",
+  "summary": "Repair of the human-requested re-split: statement unchanged, old steps 1 and 2 retained verbatim, old steps 3 and 5 extracted to the statement-only ambient power-series/Cohen hypersurface normality lemma, and old steps 4 and 6 extracted to the statement-only module-split quotient normality descent lemma. All old arguments are retained verbatim in report.md as future-worker plans, not proof sketches in unsplit nodes. Four-step assembly is below 3000 characters. Read every cited statement and checked the zero-monoid, zero-variable, arbitrary residue-field and nonmultiplicative-retraction cases.",
   "blueprint": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii).",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "why": "Regularity of the ambient formal power-series ring over a field or any Cohen ring; the log-regular unit does not state this general local-algebra fact."
-   },
-   {
-    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
-    "why": "Regularity of a quotient by an element outside the square of the maximal ideal; this is a general commutative-algebra tool, not a change to the alteration route."
-   },
-   {
-    "node": "lem-weil-pbc-regular-local-localization",
-    "why": "The general implication regular local implies regular ring, needed for the normality theorem in its stated form."
-   },
-   {
-    "node": "lem-weil-pbc-regular-ring-normal",
-    "why": "The general theorem regular rings are normal; used only for the ambient regular local ring, not for the singular monoid model."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-power-series-field-cohen-regular-complete",
@@ -222,12 +181,12 @@
   "lem-weil-pbc-regular-ring-normal"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q48-4b9340775",
-  "group": "Q48",
+  "reviewer": "NT-cc-Q08-14b42e8f1",
+  "group": "Q08",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-4b9340775 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every step holds. Source: ILO Exposé VI 1.6 (p.70) gives exactly the models k[[P]][[t]] and C[[P]][[t]]/(f) with f≡p mod (P−{0}, t). The item's statement is word for word the model clause of lem-trf-log-regular-completed-chart, nothing is weakened, and normality is correctly marked agent-proved with Kato 1994 WANTED. Step 1: Q=λ(P)×N^n=(λ(G)×Z^n)∩N^{r+n}, and the completion ideal maps onto J. Step 2: both coefficient rings are complete local with finitely generated maximal ideal (0 or pC), so the projection lemma applies. Step 3: Θ has constant coefficient exactly p, while every element of 𝔫² has constant coefficient in p²C and p∉p²C, so the hypersurface criterion applies; r+n=0 gives C/p. Step 4: T∩ΘA=θT follows from the T-linearity of ρ, so R embeds in S with an R-linear retraction. Step 5: regular local ⇒ regular ⇒ normal, and S≅S_m. Step 6: the retraction argument correctly descends integral closure. Both new nodes are true and statement-only, and neither restates the item. Orthant embedding: G is torsion-free, the kernel of the facet map is trivial by sharpness, and it fails without saturation (⟨2,3⟩) or without sharpness. Support projection: the filtrations are cofinal, the image is the closure A_Q, π(ab)=aπ(b) because e∈Q iff f∈Q, and π is not multiplicative for the diagonal M. Duplicate search over orthant, toric, monoid algebra, saturated+normal and supported series found only distinct nodes (fine-monoid-finite-saturation, toric-refinement, completed-chart, complete-toric-monomial-factors). I accept the four declared tool uses, all generic commutative-algebra results from sec-proper-base-change: power-series regularity, the hypersurface criterion, regular local⇒regular, regular⇒normal. No cycle, no SGA, no changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-14b42e8f1 (reviewer sub-agent of L); spot-checked: This answers the human's re-split note of 2026-10-21, released 2026-10-22. The live item still has the old 6-step proof and neither new node exists live, so the delivery is not superseded; the item is not in the dropped list. The item statement is byte-identical and matches ILO VI 1.6(i)-(ii) (PDF p.76). Mapping from the old proof: old steps 1-2 stay verbatim as assembly around the existing orthant and support-projection nodes. Old steps 3+5 go to lem-trf-power-series-cohen-hypersurface-normality; only the item-specific check that the constant coefficient of iota(theta) is exactly p stays in item step 3. Old steps 4+6 go to lem-trf-split-principal-quotient-normality. No argument is dropped. The assembly has 4 steps, 2339 characters; the two new nodes carry about 1210 and 977 characters, which is comparable. Node A is true: C[[X]] is regular local with n=(p,X); n^2 has constant coefficients in p^2C and p is not in p^2C, so the hypersurface quotient is regular, hence normal and equal to its localization at the maximal ideal. Checked d=0 (C/p), p-X^2 (a ramified DVR) and that constant term p^2 fails. Node B is true: x=rho(iota(theta)a)=theta*rho(a) gives the contraction, the quotient injection and the descended linear retraction; a=b*rhobar(x) gives normality. Checked theta=0 (direct summand), a unit theta (premise false) and a non-multiplicative rho. No DAG or Mathlib duplicates (searched direct summand/retraction with normal; Mathlib RegularLocalRing has no regular-implies-normal result). Statement-only metadata, stmt_deps and searches are fine; there is no cycle and no SGA. Advisory: the item's tool_uses still list the four pbc nodes, which are now used only via node A; this is harmless."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -255,5 +214,16 @@
   "existing": false,
   "note": "The four construction helpers implement the polynomial ring ideals and completion explicitly introduced in this node; no separate independent notion is introduced. The theorem states both coefficient cases as a conjunction."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

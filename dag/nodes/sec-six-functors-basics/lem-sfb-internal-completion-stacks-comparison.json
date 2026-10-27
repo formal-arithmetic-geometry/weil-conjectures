@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-internal-completion-stacks-comparison",
+ "kind": "statement",
+ "title": "Actual Roos completeness under constant scalar restriction",
+ "statement": "Let l be prime, E a finite extension of the l-adic field in Type u, X a Noetherian scheme in universe u, and K an arbitrary object of the derived category of modules over the actual continuous integral coefficient ring [sk-def-pe-derived-completion]. Transport K by restriction along the inverse canonical point coefficient isomorphism [def-sfb-integral-constant-model-realization], and then restrict scalars from the continuous integer ring to the constant integer ring [det-lem-integral-models-stacks]. K is complete for its canonical augmented quotient Roos complex if and only if the resulting section-module complex on the equivalent coefficient-sized small pro-etale site is ConstantCompletion.IsComplete for the kernel of the first residue map. No boundedness or constructibility is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1), completion comparison; constant-coefficient criterion (2)--(3); Stacks 099I, 099L, 099M"
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "det-lem-integral-models-stacks",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-integral-models-stacks-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit conservative derived constant section transport F and its comparison with the target smallDerivedObject.",
+   "uses": [
+    "def-sfb-internal-completion-section-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a singleton generator of the residue kernel and apply the existing general ringedKoszulCompletionReflector. Its IsIso(unit) iff local completeness clause applies to the prescribed kernel ideal.",
+   "uses": [
+    "lem-sfb-internal-constant-residue-generator",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a native K-flat resolution of a localization representative of K. Compare its actual augmented quotient Roos complex with the prescribed Koszul unit. Cancel the comparison isomorphism and reflect invertibility through F.",
+   "uses": [
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "def-sfb-internal-completion-section-transport",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply representative independence for actual completeness and isomorphism invariance of local completeness along Q(P) isomorphic to K and the target object comparison. This proves both directions without boundedness.",
+   "uses": [
+    "def-sfb-internal-completion-section-transport",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-completion-section-transport",
+  "lem-sfb-internal-constant-residue-generator",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-sfb-internal-quotient-koszul-unit-comparison",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1), completion comparison; constant-coefficient criterion (2)--(3); Stacks 099I, 099L, 099M"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible integral proetale complex is derived complete and its residue reduction is bounded constructible with finite Tor amplitude",
+   "results": "Eight results about ordinary adic completeness; no internal derived residue criterion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.torAmplitudeIn",
+   "results": "Unknown identifier; zero hits in Mathlib.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internal_integral_residue_criterion|finiteTorAmplitude|isDerivedComplete_iff",
+   "results": "Zero Mathlib hits. Repository search found the Stacks criterion, stratified Tor devissage and cohomology Tor interval.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing generic results; actual coefficient comparisons absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite constant modules over a complete discrete valuation ring have Tor amplitude in degrees minus one and zero, and restriction of scalars preserves derived adic completeness",
+   "results": "Eight ordinary completion results, with no derived sheaf coefficient transport.",
+   "date": "2026-10-25",
+   "verdict": "no specialized match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralResidueCriterion",
+  "date": "2026-10-25",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Proof (1), completion comparison; constant-coefficient criterion (2)--(3); Stacks 099I, 099L, 099M",
+   "via": [
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalCompletionStacksComparison",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalCompletionStacksComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_completion_stacks_comparison",
+  "statement": "theorem internal_completion_stacks_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (K : DerivedCategory (AdicCompletion.Modules l E X)) :\n    IsDerivedComplete l E X K ↔\n      ConstantCompletion.IsComplete\n        (IntegralModelsStacks.smallMap X (IntegralModelsStacks.residueMap l E X))\n        (IntegralModelsStacks.smallDerivedObject X _\n          ((IntegralModelsStacks.restriction l E X).obj\n          ((Mod.comap (coefficientMap\n            (IntegralConstantModel.pointComparison l E).inv.hom X)).mapDerivedCategory.obj\n            K)))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261025T095403-L-3392480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T123400-L-1867558",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

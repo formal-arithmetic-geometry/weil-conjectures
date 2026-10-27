@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+ "kind": "statement",
+ "title": "Quasi-affine quotient by the normalizer of a split torus",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms] [pqf-def-affine-morphism] [def-sbc-locally-finite-presentation]. Here a group scheme over $S$ is a group object in schemes over $S$, with multiplication, identity and inverse satisfying the group identities; finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Fix an integer $r\\geq0$ and a closed subgroup $T\\hookrightarrow G$ [def-weil-closed-immersion] identified with $\\mathbf G_{m,S}^r$, where $\\mathbf G_m(W)=\\Gamma(W,\\mathcal O_W)^\\times$ [def-sfb-relative-torus]. For an $S$-scheme $W$, put $G(W)=\\operatorname{Hom}_S(W,G)$ and define $N(W)$ to be the subgroup of elements $g\\in G(W)$ such that conjugation by $g$ preserves $T_W=T\\times_SW$ as a subgroup functor, meaning $g_{W'}T(W')g_{W'}^{-1}=T(W')$ for every $W$-scheme $W'$ [def-pc-fibre-product]. Form the fppf sheafification of the presheaf of right coset sets $W\\mapsto G(W)/N(W)$ [def-pc-fppf-site] [def-weil-pbc-sheafification]. This sheaf is represented by an $S$-scheme $X$ whose structure morphism $X\\to S$ is smooth and quasi-affine [def-nagata-quasi-affine-morphism]. The canonical morphism $G\\to X$ is a smooth surjection [def-weil-surjective-morphism]. No maximality assumption on $T$, reductivity or connectedness assumption on $G$, or Noetherian assumption on $S$ is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative group-scheme structural result."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-torus",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-nagata-quasi-affine-morphism",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix any affine open $U=\\operatorname{Spec}A\\subseteq S$; all objects in steps 1--7 are restricted to $U$. Smoothness and finite presentation of $G_U\\to U$ persist by [lem-sfb-space-smooth-surjective-fppf-locality] and [lem-weil-pbc-qcqs-morphism-permanence](3), and $T_U\\hookrightarrow G_U$ is closed by [lem-weil-pbc-closed-immersion-base-change]. Apply [lem-sfb-relative-torus-centralizer-normalizer] to $T_U\\hookrightarrow G_U$: the functor $N=N_{G_U}(T_U)$ is represented by a smooth affine finitely presented subgroup scheme, closed in $G_U$. Apply [lem-sfb-split-torus-finite-torsion-normalizer-detection] to choose $n\\geq1$ with $N_{G_U}(T_U)=N_{G_U}(H)$ on all test schemes, where $H=T_U[n]=D_A((\\mathbf Z/n\\mathbf Z)^r)$. The displayed Laurent quotient in that node identifies $H$ with this finite diagonalizable group, including when $n$ is not invertible.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-split-torus-finite-torsion-normalizer-detection",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.1 proof, printed p.68, first paragraph; Proposition 2.1.2."
+   }
+  },
+  {
+   "text": "Let $N$ act on $G_U$ on the left by $a\\cdot g=ga^{-1}$. This action is free and its orbit sets are the right coset sets $G_U(W)/N(W)$. By [lem-pc-smooth-flat], smoothness of $N\\to U$ implies flatness and local finite presentation. Apply [lem-sfb-free-flat-group-space-quotient] with $B=U$ to obtain the algebraic space $F=G_U/N$. Its map $q:G_U\\to F$ is surjective, flat and locally finitely presented, has fppf-local sections on every scheme test, and $N\\times_U G_U\\simeq G_U\\times_FG_U$ by $(a,g)\\mapsto(ga^{-1},g)$. In particular the quotient is the fppf sheafification required in the statement.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH, lemma-quotient-free-action; application to right translation by a smooth closed subgroup."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-diagonalizable-subgroup-parameter] to $H\\hookrightarrow G_U$, obtaining $Y=Y_H$. Conjugation defines $G_U\\to Y$, sending $g$ to $gH_Wg^{-1}$ on a test $W$. This is unchanged by $g\\mapsto ga^{-1}$ with $a\\in N(W)$, and $h_Y$ is an fppf sheaf [def-trf-scheme-algebraic-space], so the universal property of sheafification [def-weil-pbc-sheafification] gives $j:F\\to Y$. This is monic: two sections of $F(W)$ have lifts $g,h$ on a common fppf cover by step 2. Equality of their images means $gH g^{-1}=hH h^{-1}$ there, hence $h^{-1}g\\in N_{G_U}(H)=N$. Thus their right cosets agree on the cover, and the two sections agree because $F$ is a sheaf. This argument concerns subgroup functors on all tests, not merely geometric points.",
+   "uses": [
+    "lem-sfb-finite-diagonalizable-subgroup-parameter",
+    "def-weil-pbc-sheafification",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.1 proof, printed pp.70-71, orbit map into the finite subgroup parameter scheme."
+   }
+  },
+  {
+   "text": "The composite $j q:G_U\\to Y$ is locally of finite type by [lemma-nagata-finite-type-to-separated-target](a), since $G_U\\to U$ is of finite presentation. Apply [lem-sfb-representable-lft-fppf-source-descent] to $q$ and $j$, regarding algebraic spaces as stacks with only identity automorphisms: $q$ is surjective flat locally finitely presented by step 2, so $j$ is locally of finite type on etale charts. By [lem-sfb-space-lft-monomorphism-separated-lqf], $j$ is separated and chartwise locally quasi-finite. Its target $Y$ is a scheme, so [lem-a1-separated-locally-qf-space-representable] represents $F$ by a scheme $X_U$, with $j:X_U\\to Y$ separated and locally quasi-finite.",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-sfb-representable-lft-fppf-source-descent",
+    "lem-sfb-space-lft-monomorphism-separated-lqf",
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.1 proof, printed pp.70-71; Tags 06EW, 0463 and 03XX."
+   }
+  },
+  {
+   "text": "The map $q:G_U\\to X_U$ is surjective on scheme points. Therefore $X_U$ is quasi-compact: pull back an open cover to the affine scheme $G_U$, choose a finite subcover there, and use surjectivity. By [lem-a1-lft-flat-lfp-source-descent], $X_U\\to U$ is locally of finite type, hence of finite type. Since $U$ is affine, $Y$ is a quasi-affine scheme. The statement of [lem-trf-quasi-affine-canonical-affine-embedding] makes $Y$ separated; its relative diagonal over $U$ is the pullback of its absolute diagonal, so [lem-weil-pbc-closed-immersion-base-change] makes $Y\\to U$ separated. Apply [lemma-nagata-finite-type-to-separated-target](b) to $X_U\\to Y\\to U$: $j$ is of finite type, in particular quasi-compact. Now all hypotheses of [lemma-nagata-zmt-quasi-affine-source] hold for $j$, and $X_U$ is quasi-affine.",
+   "uses": [
+    "lem-a1-lft-flat-lfp-source-descent",
+    "def-weil-finite-type-morphism",
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lemma-nagata-zmt-quasi-affine-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.1 proof, printed pp.70-71, the Zariski Main Theorem step; Tags 02KL, 01P9, 01T8 and 0BCK."
+   }
+  },
+  {
+   "text": "The scheme map $q:G_U\\to X_U$ is an fppf cover by step 2 and [def-pc-fppf-site]. After base change along this very cover it is the projection $G_U\\times_FG_U\\simeq N\\times_U G_U\\to G_U$, up to interchanging the two factors of the kernel pair. This projection is smooth by base change of the smooth map $N\\to U$. Hence [lem-sfb-space-smooth-surjective-fppf-locality] proves that $q$ is smooth. Since $q$ is flat, surjective and locally finitely presented and its composite with $X_U\\to U$ is the given smooth map $G_U\\to U$, [lem-sbc-smooth-flat-surjective-source-descent] proves $X_U\\to U$ smooth. Surjectivity of $q$ is already part of step 2.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.2 and Theorem 2.3.1; quotient-map smoothness by Tags 0429, 03ZE, and base smoothness by Tag 05B5."
+   }
+  },
+  {
+   "text": "For affine opens $V\\subseteq U\\subseteq S$, restriction of the quotient sheaf to $V$ is the fppf quotient $G_V/N_V$: the same local representatives and right-coset equalities define both sheaves, and restriction retains the universal property of [def-weil-pbc-sheafification]. Consequently $X_V$ is canonically isomorphic to $X_U\\times_UV$, which is the open subscheme above $V$ by [lem-weil-pbc-open-fibre-product]. These canonical maps obey the identity and cocycle conditions because they identify the same quotient functors. Apply [lem-weil-pbc-relative-glueing-affine-opens] to all affine opens of $S$, producing $X\\to S$ with inverse image $X_U$ over each $U$. The isomorphisms with the original quotient sheaf agree on the affine basis; they glue uniquely by the sheaf axiom, so $X$ represents that sheaf on every $S$-scheme.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-relative-glueing-affine-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LH, lemma-relative-glueing; quotient sheaf restriction."
+   }
+  },
+  {
+   "text": "For every affine open $U\\subseteq S$, the inverse image $X_U$ is quasi-affine by step 5. Thus $X\\to S$ is quasi-affine by [def-nagata-quasi-affine-morphism]. Open coverings are fppf coverings: their inclusions are etale by [lem-weil-pbc-etale-composition-cancellation](1), hence flat locally finitely presented by [def-weil-etale-morphism]. Apply [lem-sfb-space-smooth-surjective-fppf-locality] to the covers $\\{U\\to S\\}$ and $\\{X_U\\to X\\}$ and step 6. It gives smoothness of $X\\to S$ and smoothness and surjectivity of the glued canonical map $G\\to X$. When $S$ is empty the same construction gives the empty scheme and all conclusions hold.",
+   "uses": [
+    "def-nagata-quasi-affine-morphism",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Zariski gluing and locality, after Theorem 2.3.1; Tags 02GP, 0429 and 041Q."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-torus-centralizer-normalizer",
+  "lem-sfb-split-torus-finite-torsion-normalizer-detection",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-pc-smooth-flat",
+  "lem-sfb-finite-diagonalizable-subgroup-parameter",
+  "def-weil-pbc-sheafification",
+  "def-trf-scheme-algebraic-space",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-sfb-representable-lft-fppf-source-descent",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "def-weil-finite-type-morphism",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lemma-nagata-zmt-quasi-affine-source",
+  "def-pc-fppf-site",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "def-nagata-quasi-affine-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Theorem 2.3.1, printed pp.67-71, normalizer-orbit proof reconstructed with the split-torus torsion reduction and Stacks quotient, schemehood, descent and gluing tools; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalizer|torus|reductive",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"grep\", \"query\": \"normalizer|torus|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of smooth affine group scheme by normalizer of split torus is a quasi-affine scheme",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"leansearch\", \"query\": \"Quotient of smooth affine group scheme by normalizer of split torus is a quasi-affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"Rep.quotientToCoinvariants\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"QuotientGroup.Quotient.group\", \"Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime\"], \"digest\": \"ddbf1c08ccdfdc68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.recOn; AlgebraicGeometry.Scheme.IsQuasiAffine; Rep.quotientToCoinvariants; AlgebraicGeometry.Scheme.IsQuasiAffine.rec; AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine; QuotientGroup.Quotient.group; Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of a smooth affine group scheme by the normalizer of a split torus is represented by a smooth quasi-affine scheme",
+   "results": "{\"t\": \"2026-10-24T10:24:43Z\", \"tool\": \"leanfinder\", \"query\": \"The fppf quotient of a smooth affine group scheme by the normalizer of a split torus is represented by a smooth quasi-affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"d083ef7b39121efe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.IsQuasiAffine; AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine; CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.Hom.normalization; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous spaces for smooth affine group schemes modulo torus normalizers are quasi affine",
+   "results": "{\"t\": \"2026-10-24T10:27:09Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous spaces for smooth affine group schemes modulo torus normalizers are quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\"], \"digest\": \"49cd7cfbebf1c840\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.IsQuasiAffine; AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom; AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.AffineSpace.instIsAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of a smooth affine group scheme by the normalizer of a split torus is a smooth quasi-affine scheme",
+   "results": "{\"t\": \"2026-10-24T11:04:16Z\", \"tool\": \"leanfinder\", \"query\": \"The fppf quotient of a smooth affine group scheme by the normalizer of a split torus is a smooth quasi-affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"9b188503b98726d0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.AffineSpace; CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit; AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization; AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf quotient of a smooth affine group scheme by the normalizer of a split torus is a smooth quasi-affine scheme",
+   "results": "{\"t\": \"2026-10-24T11:04:15Z\", \"tool\": \"leansearch\", \"query\": \"The fppf quotient of a smooth affine group scheme by the normalizer of a split torus is a smooth quasi-affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AddAction.right_quotientAction\", \"QuotientGroup.Quotient.group\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"MulAction.right_quotientAction\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime\"], \"digest\": \"9c26548a7a357b87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine; AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine; AddAction.right_quotientAction; QuotientGroup.Quotient.group; AlgebraicGeometry.quasiSeparatedSpace_of_isAffine; MulAction.right_quotientAction; AlgebraicGeometry.Scheme.Hom.normalizationDesc; Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T11:04:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer|torus|reductive",
+   "results": "{\"t\": \"2026-10-24T11:04:14Z\", \"tool\": \"grep\", \"query\": \"normalizer|torus|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme normalizer torus quotient homogeneous space quasi affine",
+   "results": "{\"t\": \"2026-10-24T11:04:18Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme normalizer torus quotient homogeneous space quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"dbfea764acbe6428\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.Hom.normalization; AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization; AlgebraicGeometry.Scheme.Hom.normalization.hom_ext; AlgebraicGeometry.Scheme.Hom.toNormalization; AlgebraicGeometry.Scheme.Hom.fromNormalization; AlgebraicGeometry.Scheme.Hom.normalizationDesc; AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.Scheme.Hom.ι_fromNormalization; the hits concern abstract groups, scheme morphism properties, or unrelated parameter constructions, not this relative group-scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-maximal-torus-parameter-scheme",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2.",
+   "via": [
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Split the finite-torsion orbit argument into explicit quotient, monomorphism, schemehood, quasi-affineness, smoothness and affine-base gluing steps. Added two statement-only structural inputs (finite-torsion detection and the finite diagonalizable subgroup parameter scheme); the smooth normalizer of the split torus is the existing lem-sfb-relative-torus-centralizer-normalizer. Checked arbitrary-base and nonreduced tests and recorded actual searches. No Lean attachment or new Mathlib leaf.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. The supporting split realizes its normalizer-quotient input using finite torsion and the finite-subgroup parameter scheme; no imported blueprint ancestor exists.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-a1-lft-flat-lfp-source-descent",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-trf-quasi-affine-canonical-affine-embedding",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lemma-nagata-zmt-quasi-affine-source",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-relative-glueing-affine-opens",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic scheme-theoretic quotient, finiteness, separation, smoothness, or gluing tool in the finite-subgroup orbit construction; no node of this unit states that general fact, and no six-functor unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-smooth-flat",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lemma-nagata-zmt-quasi-affine-source",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-bf2d06745",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-bf2d06745 (reviewer sub-agent of L); spot-checked: Read Conrad, Reductive Group Schemes, from the cited URL (still not in literature/, so the WANTED line stands): Prop 2.1.2 pp.56-58, Thm 2.3.1 pp.67-71, Lemma 2.3.4 pp.69-70. The item is Thm 2.3.1 for a split torus, with no hypothesis or conclusion changed. The route follows Conrad's proof: torsion-level stabilization, then the orbit monomorphism into the Twist parameter scheme, then Stacks/LMB algebraic-space tools instead of Knutson for schemehood, then ZMT, then smoothness from the fppf cover, then gluing over affine opens. I checked all 8 steps against the statements of the cited nodes: free-quotient kernel-pair order, the cartesian square giving the relative diagonal of Y over U, nagata (a)/(b), the ZMT hypotheses, source smoothness descent, and the relative-glueing hypotheses over the affine basis (no affine intersections assumed). Edge cases r=0, central T, empty S and non-invertible n all work. New detection node: true over any ring by descent to a finitely generated Z-model, the descending chain N(T[n!]) and joint torsion density; not a duplicate. New parameter node: Lemma 2.3.4 for split finite H; I checked that the fppf-forms functor is equivalent to Conrad's geometric-fibre functor; not a duplicate. FIX 1 (C5 duplicate): step 1 used the new node lem-sfb-diagonalizable-normalizer-smooth only with M=Z^r, which is exactly the existing reviewed node lem-sfb-relative-torus-centralizer-normalizer (same unit, no cycle). Step 1 now cites it and the new node is dropped. FIX 2 (C1): step 3 needs h_Y to be an fppf sheaf before using the sheafification property; it now cites def-trf-scheme-algebraic-space (a general definition). proof_deps recomputed and split_report summary updated. Batch-5 check: every flagged citation reaches sec-trace-formula only through the general definition def-trf-algebraic-space, or is the generic quasi-affine Mathlib leaf; none is a step of the trace-formula or Poincare-duality proofs, so all are accepted. The declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusNormalizerQuasiAffineQuotient",
+  "declaration": "AlgebraicGeometry.exists_smooth_quasiAffine_splitTorusNormalizer_quotient",
+  "declarations": [
+   "AlgebraicGeometry.torusNormalizerSections",
+   "AlgebraicGeometry.torusNormalizerSubfunctor",
+   "AlgebraicGeometry.torusNormalizerCosetRelation",
+   "AlgebraicGeometry.torusNormalizerCosetPresheaf",
+   "AlgebraicGeometry.torusNormalizerQuotientSheaf",
+   "AlgebraicGeometry.torusNormalizerQuotientMap",
+   "AlgebraicGeometry.exists_smooth_quasiAffine_splitTorusNormalizer_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusNormalizerQuasiAffineQuotient.lean",
+  "statement": "theorem exists_smooth_quasiAffine_splitTorusNormalizer_quotient {S : Scheme.{u}} (G T : Grp (Over S)) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] [QuasiSeparated G.X.hom] (r : ℕ) (i : T ⟶ G) [IsClosedImmersion i.hom.hom.left] (hT : Nonempty (yonedaGrpObj T.X ≅ relativeSplitTorusFunctor S r)) : ∃ (X : Over S) (q : G.X ⟶ X) (e : yoneda.obj X ⋙ uliftFunctor.{u + 1, u} ≅ (torusNormalizerQuotientSheaf i).obj), Smooth X.hom ∧ IsQuasiAffineHom X.hom ∧ Smooth q.left ∧ Surjective q.left ∧ Functor.whiskerRight (yoneda.map q) uliftFunctor.{u + 1, u} ≫ e.hom = torusNormalizerQuotientMap i",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The normalizer subgroup is tested after every map of S-schemes. Its subpresheaf, right-coset relation, pointwise coequalizer, fppf sheafification, and canonical quotient map are real constructions in the owning module. The final equality identifies the smooth surjection with that canonical map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de12db133",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Clause check passes. Hypotheses: Grp (Over S) G smooth/affine/lfp/qc/qs over arbitrary S; i closed immersion; T ≅ relativeSplitTorusFunctor S r as group functors. Normalizer is ⨅ over all V→W of comap of Subgroup.normalizer(range(t≫i)); the sup subfunctor has exactly those sections (restriction-stable). Coset relation fst⁻¹*snd ∈ N, pointwise coequalizer, fppfTopology.over S sheafification in Type(u+1) via ulift (no restriction). Conclusion: X represents the sheaf, Smooth ∧ IsQuasiAffineHom X.hom, Smooth/Surjective q.left, q pinned to the canonical coequalizer+toSheafify map. Edge cases r=0, empty S, central T, nonreduced tests, any characteristic covered; single universe u. No duplicate (RankOneRoots.normalizer is field-only). Node differs from side-live only in lean; statement verbatim. Docstrings, 8-step proof, sorry only; no hollow defs. Worker report present; second-reading section is a substantive self-reread. Not compiled (no change). Minor: qc/qs redundant given affine, harmless."
+ }
+}

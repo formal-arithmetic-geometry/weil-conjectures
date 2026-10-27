@@ -1,0 +1,96 @@
+{
+ "id": "def-sfb-finite-tor-localizing-closure-of-size",
+ "kind": "definition",
+ "title": "Finite-Tor constructible localizing hull with specified coproduct size",
+ "status": "split",
+ "statement": "Fix universes $u,w$. Let $\\Lambda$ be a commutative condensed ring and $X$ a scheme in universe $u$. In the ordinary unbounded derived category $D_X=D(\\operatorname{Mod}_{\\Lambda_X})$, let $\\mathcal C_X$ be the bounded finite-constant-model constructible objects of finite Tor amplitude from [sk-def-sfb-constructible]. Define $\\mathcal H_X^{(w)}$ to be the intersection of all full replete triangulated object properties containing $\\mathcal C_X$ and closed under all ambient coproducts indexed by types in universe $w$, using exactly the generic $w$-indexed localizing-closure construction of [sk-def-localizing-closure]. Thus the indexing universe is explicit and independent of the object universe of $D_X$; no derived-completeness condition is imposed.",
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+  "place": "Smallest triangulated subcategory containing Dctf and closed under arbitrary direct sums, with the fixed indexing universe made explicit."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localizing closure of bounded constructible finite Tor amplitude module objects with an independent coproduct indexing universe",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.instLocalizationLocalizedModule\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"CategoryTheory.Functor.IsLocalization.pi\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"instFinitePresentationLocalizationLocalizedModule\", \"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"IsLocalizedModule.pi\", \"Condensed.instAB4CondensedMod\"]}",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing closure finite Tor constructible module objects indexing universe",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.of_localizationSpan_finite'\", \"Module.Finite.of_localizationSpan'\", \"Module.Finite.instLocalizationLocalizedModule\", \"Module.Finite.of_isLocalizedModule\", \"IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation\", \"ModuleCat.instPreservesFiniteLimitsLocalizationLocalizedModule_functor\", \"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"Module.Finite.of_localizationSpan_finite\"]}",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorLocalizingClosureOfSize|localizingClosureOfSize",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-proper-localizing-adjunction-comparison",
+  "date": "2026-10-22",
+  "group": "Q120"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-cor-existence-ii-restriction.proof.md (1), the two localizing hulls in the proper comparison, using the item's shared u+1 coproduct indexing universe.",
+   "via": [
+    "lem-sfb-adic-proper-localizing-adjunction-comparison",
+    "lem-sfb-adic-localizing-exceptional-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTorLocalizingClosureOfSize",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteTorLocalizingClosureOfSize",
+  "statement": "def finiteTorLocalizingClosureOfSize (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) : ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-22",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/FiniteTorLocalizingClosureOfSize.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b476485e0",
+  "group": "Q120",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b476485e0",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 72c209e2a250; the main theorem signature is byte-identical. H2 fixed: det-sf-comp-coherence-cocycle removed; stmt_deps = 11 base deps + 4 new def nodes. H13 fixed: sk-prop-sf-existence and sk-def-localizing-closure records identical to live. New nodes: def-sfb-compactification-refinement-component (existing:true on the unchanged CompactificationCoherenceCocycle.lean:66, verbatim; deps def-sf-comp-refinement-data, def-sfb-module-derived-lower-shriek-compactification, det-nagata-definition-refinement); def-sfb-derived-open-lower-shriek-id (existing:true on ProperLowerShriek l.59-68, both decls listed, previously unowned); def-sfb-finite-tor-localizing-closure-of-size (localizingClosureOfSize.{w} of C_T); def-sfb-finite-tor-localizing-lower-shriek-of-size (ObjectProperty.lift of the actual F_c, Prop witness only). None duplicates a live node. Mathematics re-checked: hypotheses match the node; B=C and L=H with u+1 indexing on both sides; inclusion clauses present; e pinned by the refinement normalization (direction typed); b.homEquiv = a(e_M≫f) with the original J; edge cases covered; only sorry; docstrings carry source and blueprint tags. Nothing compiled (no file changed); worker reports clean scompile runs. Advisory: ofIsProper/DenseBoundaryCompactification come from def nodes not cited directly; the direct LocalizingExceptionalAdjoint import is redundant."
+ }
+}

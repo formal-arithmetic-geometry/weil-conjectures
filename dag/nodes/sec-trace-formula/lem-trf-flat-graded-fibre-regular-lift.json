@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-flat-graded-fibre-regular-lift",
+ "kind": "statement",
+ "title": "Residue-fibre regular initial forms lift through a flat associated graded ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local commutative ring [def-weil-pbc-noetherian-ring]. Let $I\\subseteq\\mathfrak m$ be an ideal, set $A=R/I$, $\\mathfrak n=\\mathfrak m/I$, $k=R/\\mathfrak m$, and put $G=\\operatorname{gr}_I R=\\bigoplus_{j\\ge0}G_j$ with $G_j=I^j/I^{j+1}$ [def-weil-pbc-associated-graded-ring]. Assume $G$ is flat over $A$, meaning that tensoring any injection of $A$-modules with $G$ preserves injectivity [def-weil-pbc-module-tensor-product]. Then every $G_j$ is finite free over $A$. Write $F=G\\otimes_Ak$. For every $n\\ge0$ and $a\\in I^n$, let $\\alpha=a\\bmod I^{n+1}\\in G_n$ and $h=\\alpha\\otimes1\\in F_n$. If multiplication by $h$ is injective on $F$, then multiplication by $\\alpha$ gives an injective map $G_j\\to G_{j+n}$ for every $j\\ge0$, and $a$ is a nonzerodivisor of $R$: $ab=0$ implies $b=0$ for every $b\\in R$. No reducedness or characteristic hypothesis on $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-written filtered-algebra synthesis of the item, former steps 1--2 and 7--8. Supporting Tag 00NZ, lemma-finite-flat-local; the finite-free case of Tag 00ME, lemma-mod-injective; Tag 00IP, lemma-intersect-powers-ideal-module-zero, or Tag 00IQ, lemma-intersection-powers-ideal-module (2). These tags supply the local module inputs, not the full filtered statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "First $A=R/I$ is Noetherian and local with maximal ideal $\\mathfrak n=\\mathfrak m/I$: ideals of $A$ are inverse images of ideals of $R$ containing $I$, so their generators descend, and maximal ideals correspond to maximal ideals of $R$ containing $I$. Fix $j$. Since $R$ is Noetherian, $I^j$ has finitely many generators $x_1,\\ldots,x_t$. Their classes generate $G_j=I^j/I^{j+1}$ over $A$: reduce coefficients in an expression $x=\\sum r_ix_i$ modulo $I$, since $I I^j=I^{j+1}$. Thus $G_j$ is finite over $A$, including $j=0$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary quotient-ideal correspondence and the definition of Noetherian; finite graded-piece argument supporting Tag 00NZ (lemma-finite-flat-local)."
+   }
+  },
+  {
+   "text": "Let $i_j:G_j\\to G$ and $p_j:G\\to G_j$ be the homogeneous inclusion and projection, with $p_ji_j=1$. For an injection $v:U\\to V$ of $A$-modules and $z\\in U\\otimes_A G_j$ with $(v\\otimes1)z=0$, its image $(1\\otimes i_j)z$ is killed by $v\\otimes1_G$, hence vanishes by the assumed flatness of $G$. Applying $1\\otimes p_j$ gives $z=0$. Tensor functoriality therefore proves flatness of $G_j$. Apply [lem-weil-pbc-finite-flat-local-free] over the local ring $A$ to obtain freeness. This is finite freeness: a basis of a finitely generated free module is finite, since the union of the finite basis supports of a finite generating set must contain every basis vector.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NZ (lemma-finite-flat-local), applied after the explicit direct-summand argument."
+   }
+  },
+  {
+   "text": "Fix $n,a,\\alpha,h$ as in the statement. Write $\\mu_j:G_j\\to G_{j+n}$ for multiplication by $\\alpha$. For every $A$-module $M$ the map $M\\otimes_A k\\to M/\\mathfrak nM$, $x\\otimes\\bar c\\mapsto cx\\bmod\\mathfrak nM$, is well defined by bilinearity, independently of the lift $c\\in A$; its inverse sends $[x]$ to $x\\otimes1$. The inverse kills $\\mathfrak nM$ since $\\mathfrak n k=0$, and the two composites are identities on classes and pure tensors. These formulas also show naturality for $\\mu_j$. The map $G_j\\otimes_Ak\\to F$ induced by $i_j$ has left inverse induced by $p_j$. Multiplication by $h$ on its image is the map induced by $\\mu_j$, followed by the inclusion $G_{j+n}\\otimes_Ak\\to F$, as one checks on pure tensors using the graded multiplication formula. Thus injectivity of multiplication by $h$ on $F$ implies injectivity of $\\mu_j\\otimes_Ak$, or equivalently of $G_j/\\mathfrak nG_j\\to G_{j+n}/\\mathfrak nG_{j+n}$.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary tensor/quotient identification by the displayed inverse maps; fibre map in Tag 00ME (lemma-mod-injective)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-mod-injective] to the identity local homomorphism $A\\to A$, with its source module $N=G_j$, target module $M=G_{j+n}$, and $u=\\mu_j$. Step 1 supplies Noetherianity of the target ring $A$ and finiteness of $N$; step 2 supplies flatness of $M$; step 3 supplies injectivity modulo the maximal ideal $\\mathfrak n$. Its conclusion gives injectivity of $\\mu_j$ for every $j\\ge0$. The additional flat-cokernel conclusion is not needed.",
+   "uses": [
+    "lem-weil-pbc-flat-mod-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ME (lemma-mod-injective), injectivity conclusion for the identity local ring homomorphism."
+   }
+  },
+  {
+   "text": "Let $b\\in R$ satisfy $ab=0$. Inductively prove $b\\in I^j$ for all $j\\ge0$. The base case is $I^0=R$. If $b\\in I^j$, its class $\\beta=b\\bmod I^{j+1}\\in G_j$ satisfies $\\alpha\\beta=ab\\bmod I^{n+j+1}=0$ by the defining homogeneous multiplication. Step 4 implies $\\beta=0$, so $b\\in I^{j+1}$. This establishes the induction also when $n=0$.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary induction using the homogeneous multiplication formula, after the Tag 00ME application."
+   }
+  },
+  {
+   "text": "The unique maximal ideal of the local ring $R$ is its Jacobson radical, so $I\\subseteq\\mathfrak m$ is contained in that radical. Apply [lem-weil-pbc-krull-intersection-jacobson] to the Noetherian ring $R$, the ideal $I$, and the cyclic finite module $R$: $\\bigcap_{j\\ge0}I^jR=0$. Step 5 places $b$ in this intersection, hence $b=0$. This proves the nonzerodivisor conclusion without any reducedness or characteristic assumption.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ (lemma-intersection-powers-ideal-module), part (2), equivalently Tag 00IP (lemma-intersect-powers-ideal-module-zero) in this local case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-flat-local-free",
+  "lem-weil-pbc-flat-mod-injective",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Filtered-algebra assembly using Tag 00NZ (lemma-finite-flat-local), Tag 00ME (lemma-mod-injective), and Tag 00IQ (lemma-intersection-powers-ideal-module), part (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*(regular|Regular)|[Ii]nitial[Ff]orm.*[Rr]egular|[Rr]egular.*associatedGraded",
+   "results": "{\"t\": \"2026-10-22T07:19:01Z\", \"tool\": \"grep\", \"query\": \"associatedGraded.*(regular|Regular)|[Ii]nitial[Ff]orm.*[Rr]egular|[Rr]egular.*associatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat base-change and localization lemmas preserve regular sequences already regular over the base; none lifts regularity of a residue initial form through a filtered ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-flat-graded-fibre-regular-lift: a regular homogeneous initial class on the closed fibre of a flat associated graded algebra lifts to a regular element of the local ring",
+   "results": "{\"t\": \"2026-10-22T07:19:01Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-flat-graded-fibre-regular-lift: a regular homogeneous initial class on the closed fibre of a flat associated graded algebra lifts to a regular element of the local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"HomogeneousLocalization.Away.finiteType\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"HomogeneousLocalization.isLocalRing\", \"RingHom.Flat.propertyIsLocal\", \"Algebra.HasGoingDown.of_flat\"], \"digest\": \"076239b205be5313\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat base-change and localization lemmas preserve regular sequences already regular over the base; none lifts regularity of a residue initial form through a filtered ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"IsRegular\"",
+   "results": "{\"t\": \"2026-10-22T07:19:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AssociatedGraded\\\", \\\"IsRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat base-change and localization lemmas preserve regular sequences already regular over the base; none lifts regularity of a residue initial form through a filtered ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-flat-graded-fibre-regular-lift: in a Noetherian local ring with flat associated graded algebra, an element whose initial form acts injectively on the residue fibre is a nonzerodivisor",
+   "results": "{\"t\": \"2026-10-22T07:19:09Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-flat-graded-fibre-regular-lift: in a Noetherian local ring with flat associated graded algebra, an element whose initial form acts injectively on the residue fibre is a nonzerodivisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"Module.Flat.isSMulRegular_of_isRegular\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"IsSMulRegular.of_flat\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\"], \"digest\": \"a9075ef178f71f1a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat base-change and localization lemmas preserve regular sequences already regular over the base; none lifts regularity of a residue initial form through a filtered ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-flat-graded-fibre-regular-lift: lift injective multiplication from the special fibre between finite free graded pieces and use adic separation to detect a nonzero divisor",
+   "results": "{\"t\": \"2026-10-22T07:19:33Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-flat-graded-fibre-regular-lift: lift injective multiplication from the special fibre between finite free graded pieces and use adic separation to detect a nonzero divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"HomogeneousLocalization.Away.eventually_smul_mem\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_injective\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalization\"], \"digest\": \"b172b7f7cb2f0ca6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat base-change and localization lemmas preserve regular sequences already regular over the base; none lifts regularity of a residue initial form through a filtered ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-flat-graded-fibre-regular-lift: regular initial form on the residue fibre of a flat associated graded ring implies nonzerodivisor in a Noetherian local ring",
+   "results": "{\"t\": \"2026-10-23T12:22:07Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-flat-graded-fibre-regular-lift: regular initial form on the residue fibre of a flat associated graded ring implies nonzerodivisor in a Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"Module.Flat.isSMulRegular_of_isRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"Algebra.Smooth.flat_of_isNoetherianRing\"], \"digest\": \"036436cf12ad289e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field linear independence and flat base-change regularity are component inputs; none states finite freeness of these graded pieces together with both filtered lifting conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"IsRegular\"",
+   "results": "{\"t\": \"2026-10-23T12:22:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AssociatedGraded\\\", \\\"IsRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field linear independence and flat base-change regularity are component inputs; none states finite freeness of these graded pieces together with both filtered lifting conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*(regular|Regular)|[Ii]nitial[Ff]orm.*[Rr]egular|[Rr]egular.*associatedGraded",
+   "results": "{\"t\": \"2026-10-23T12:22:07Z\", \"tool\": \"grep\", \"query\": \"associatedGraded.*(regular|Regular)|[Ii]nitial[Ff]orm.*[Rr]egular|[Rr]egular.*associatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field linear independence and flat base-change regularity are component inputs; none states finite freeness of these graded pieces together with both filtered lifting conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-flat-graded-fibre-regular-lift: lift injective multiplication from the residue field of finite flat graded pieces and conclude the original element is a nonzero divisor",
+   "results": "{\"t\": \"2026-10-23T12:22:08Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-flat-graded-fibre-regular-lift: lift injective multiplication from the residue field of finite flat graded pieces and conclude the original element is a nonzero divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"Module.Flat.isSMulRegular_of_isRegular\", \"IsSMulRegular.of_flat\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Ideal.ResidueField.liftₐ\", \"Ideal.ResidueField.liftₐ_algebraMap\", \"IsLocalRing.ResidueField.lift\", \"Module.IsLocalRing.linearIndependent_of_flat\"], \"digest\": \"ce26d0ffa9630cc2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field linear independence and flat base-change regularity are component inputs; none states finite freeness of these graded pieces together with both filtered lifting conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-flat-graded-fibre-regular-lift: injectivity of multiplication on the special fibre of a flat graded ring lifts degree by degree and adic separation detects nonzerodivisors",
+   "results": "{\"t\": \"2026-10-23T12:22:09Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-flat-graded-fibre-regular-lift: injectivity of multiplication on the special fibre of a flat graded ring lifts degree by degree and adic separation detects nonzerodivisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_injective\", \"IsSMulRegular.of_flat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"HomogeneousLocalization.val_injective\", \"RingHom.FaithfullyFlat.injective\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\"], \"digest\": \"57c46acb2b978112\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field linear independence and flat base-change regularity are component inputs; none states finite freeness of these graded pieces together with both filtered lifting conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent_of_flat|isSMulRegular_of_isRegular|theorem.*of_flat|lemma.*of_flat",
+   "results": "{\"t\": \"2026-10-23T12:23:40Z\", \"tool\": \"grep\", \"query\": \"linearIndependent_of_flat|isSMulRegular_of_isRegular|theorem.*of_flat|lemma.*of_flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\"], \"digest\": \"9aeff641e49d2c2a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field linear independence and flat base-change regularity are component inputs; none states finite freeness of these graded pieces together with both filtered lifting conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-cone-directrix-minimal-primes",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: The linear vertex of a flat normal-cone fibre survives every minimal-prime quotient. New refinement: Agent-written filtered-algebra synthesis of the item, former steps 1--2 and 7--8. Supporting Tag 00NZ, lemma-finite-flat-local; the finite-free case of Tag 00ME, lemma-mod-injective; Tag 00IP, lemma-intersect-powers-ideal-module-zero, or Tag 00IQ, lemma-intersection-powers-ideal-module (2). These tags supply the local module inputs, not the full filtered statement.",
+   "via": [
+    "lem-trf-normal-cone-directrix-minimal-primes",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-graded-fibre-regular-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and gave six steps. Reused the existing finite-flat-local-free, flat-mod-injective and Krull-intersection nodes; proved the summand-flatness, residue-tensor identification and filtration induction explicitly. No new nodes or attachments.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality (1)--(2), through the ILO VIII synchronization descendants specified in blueprint.from. Realizes the finite-flat graded-piece and regular-initial-form input in former steps 1--2 and 7--8 of lem-trf-normal-cone-directrix-minimal-primes; current latest blueprint instead states the Varshavsky contracting route. This lower algebra lemma neither replaces nor changes a unit step. Whole-blueprint searches for regular initial, flat graded, residue-fibre, finite flat and Krull found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-mod-injective",
+    "why": "Generic Noetherian-local module injectivity criterion, used only with the identity A→A; no statement of this trace-formula unit supplies the criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-mod-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-8f70b58fa",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-8f70b58fa (reviewer sub-agent of L); spot-checked: I read the whole item: the statement is unchanged, the proof has six steps and there are no new nodes. proof_deps equals the union of the step uses, and nothing cites SGA. The statement is true. Edge cases checked: F≠0 since G_0⊗k=k; n=0 means a is a unit; I=0; k[ε]/ε² with I=(ε), where h²=0 so ε is correctly not certified; rank-0 pieces. Step 1: A is Noetherian local and G_j is finite over A, using I·I^j=I^{j+1}. Step 2: G_j is a direct summand of G, so flatness passes to it under the def-weil-pbc-flat-ring-map convention. Then lem-weil-pbc-finite-flat-local-free (Mathlib Module.free_of_flat_of_isLocalRing, Stacks 00NZ) gives freeness, with its local-ring and finite-flat hypotheses supplied by steps 1-2. Step 3: M⊗k≅M/nM with explicit inverses. G_j⊗k→F has the retraction p_j⊗1, and multiplication by h on that piece equals (i_{j+n}⊗1)(μ_j⊗1), so μ_j⊗k is injective. Step 4: lem-weil-pbc-flat-mod-injective (I read Stacks 00ME at algebra.tex 23424) applied with R=S=A and the identity map, which is local. A is Noetherian and N=G_j is finite by step 1, M=G_{j+n} is flat by step 2, and ū is injective by step 3. The dependency is acyclic. Step 5: a correct induction b∈I^j ⇒ b∈I^{j+1}, starting from I^0=R. Step 6: lem-weil-pbc-krull-intersection-jacobson (Mathlib leaf, Stacks 00IQ(2)) with M=R and I⊆m=Jac(R). The parent lem-trf-normal-cone-directrix-minimal-primes step 4 uses the item with matching hypotheses, and the item does not restate a parent clause. A duplicate search (rg -L for initial form, 00ME, flat-graded) found only different lemmas: lem-sfb-regular-hypersurface-initial-form, lem-pur-quasi-regular-noetherian-local and lem-weil-pbc-associated-graded-ideal-approximation. Accepted tool_use: lem-weil-pbc-flat-mod-injective, a generic 00ME criterion used as a black box; nothing in unit sk-i-curve-zero supplies it. Minor point: the k-algebra structure on G⊗_A k is presupposed, as in the parent; this is not a fault. coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatGradedFibreRegularLift",
+  "declaration": "Ideal.flat_graded_fibre_regular_lift",
+  "declarations": [
+   "Ideal.associatedGradedFibreMul",
+   "Ideal.flat_graded_fibre_regular_lift"
+  ],
+  "file": "lean/Sheaf/RingTheory/FlatGradedFibreRegularLift.lean",
+  "statement": "theorem flat_graded_fibre_regular_lift {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) [Module.Flat (R ⧸ I) (associatedGraded I)] : (∀ j : ℕ, ∃ (r : ℕ) (v : Fin r → associatedGradedPiece I j), ∀ x : associatedGradedPiece I j, ∃! c : Fin r → (R ⧸ I), (∑ i : Fin r, c i • DirectSum.of (associatedGradedPiece I) j (v i)) = DirectSum.of (associatedGradedPiece I) j x) ∧ (∀ (n : ℕ) (a : (I ^ n : Ideal R)), Function.Injective (associatedGradedFibreMul I (Ideal.Quotient.factor hI) n a) → (∀ j : ℕ, Function.Injective (associatedGradedMul I n j (Submodule.Quotient.mk a))) ∧ ∀ b : R, a.val * b = 0 → b = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The finite-free clause uses finite unique coefficient expansions through the canonical homogeneous inclusion, avoiding a second scalar action on the existing graded pieces. The helper constructs actual multiplication on G tensor_(R/I) (R/m) with the quotient-factor coefficient action."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46df069d3",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Read item node, 3 stmt_deps (IsNoetherianRing; AssociatedGradedRing module incl. associatedGradedMul/associatedGraded_smul/associatedGradedAlgebra; TensorProduct), report, and module. Clause-by-clause match: Noetherian local R, I≤m, Module.Flat (R⧸I) gr_I R, unconditional finite-free G_j as unique Fin r expansions through injective A-stable ι_j (equivalent to finite free), fibre G⊗_A k via the canonical Ideal.Quotient.factor action in the node's tensor order, helper = actual multiplication by α⊗1 (real data, docstring with source/blueprint), conclusions μ_{n,j} injective ∀j and a nonzerodivisor. No extra hypotheses or universe restriction; lean.statement verbatim; node differs from side-live only by the lean record; proof-dep plain imports (LocalRing.Module, FlatModInjective, Filtration) per convention; sorry only; no SGA. Edge cases n=0, I=0, I=m, rank 0, k[ε]/ε² ok. Advisory: parent normalConeFibre uses k⊗G order (comm-iso at parent proof stage); ResidueField.Basic import possibly redundant. No recompile (no file changed)."
+ }
+}

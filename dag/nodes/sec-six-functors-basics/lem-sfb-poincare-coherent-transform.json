@@ -1,0 +1,434 @@
+{
+ "id": "lem-sfb-poincare-coherent-transform",
+ "kind": "statement",
+ "title": "The coherent Poincare transform of the structure sheaf",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $A/k$ be an abelian variety [def-sc-abelian-variety] of dimension $g\\geq0$ [def-kun-topological-krull-dimension]. Let $A^\\vee$ be the dual abelian variety and $\\mathcal P_A$ the universal Poincare invertible module on $A\\times_k A^\\vee$, normalized on both identity axes, as in [lem-sfb-abelian-polarization-calculus]. Write $p_2:A\\times_k A^\\vee\\to A^\\vee$ for the second projection and $e:\\operatorname{Spec}k\\to A^\\vee$ for the identity. Regard $e_*k$ as the coherent module supported on the reduced identity point, with structure-sheaf action through evaluation at $e$. Use derived categories of Zariski module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category] and their ordinary derived direct image [def-pc-ringed-spaces-derived-direct-image]; shifts have $H^i(C[r])=H^{i+r}(C)$. There is an isomorphism\n$$Rp_{2*}\\mathcal P_A\\simeq e_*k[-g]\\quad\\text{in }D(\\mathcal O_{A^\\vee}).$$\nNo restriction on the characteristic of $k$ is imposed.",
+ "source": {
+  "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+  "place": "Mumford, Abelian Varieties, Chapter III §13, proof of the dual-variety theorem pp.126–129 and Corollary 1 p.129 (Koszul calculation); used again in §16 pp.151–152. Primary book scan read online at https://djvu.online/file/2tC7xp3dbqGCh; local book WANTED. The statement is the derived form of that calculation, not the Riemann–Roch theorem of §16."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-abelian-polarization-calculus",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=A^\\vee$ and $C=Rp_{2*}\\mathcal P_A$. By [lem-sfb-abelian-polarization-calculus], $B$ is an abelian variety of dimension $g$. The projection $p_2$ is proper by [lem-kun-proper-stability], which also gives properness of the composite $A\\times B\\to B\\to\\operatorname{Spec}k$. The schemes $B$ and $A\\times B$ are proper over $k$, hence Noetherian, and $\\mathcal P_A$ is coherent, by [lem-trf-proper-field-invertible-coherent]. Moreover $p_2$ is flat: on affine product charts its ring map is $D\\to E\\otimes_kD$, whose target is a free $D$-module after choosing a $k$-basis of $E$. The line module $\\mathcal P_A$ is locally the structure sheaf, so it too is flat over $B$ and has relative Tor dimension zero. Thus [lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect] makes $C$ perfect. By [lem-pc-relatively-flat-canonical-module-base-change], its derived pullback by every $T\\to B$ is the derived direct image of the ordinary restricted Poincare module; this includes residue fields, localizations and nonflat infinitesimal quotients.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-kun-proper-stability",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 pp.126–127, base-change complex; Stacks 08EV (perfect-lemma-perfect-direct-image) and 0A1D (perfect-lemma-base-change-tensor)."
+   }
+  },
+  {
+   "text": "For a closed point $b\\ne e$ of $B$, the normalized fibre $\\mathcal P_b$ is algebraically trivial and nontrivial, by the representing property in [lem-sfb-abelian-polarization-calculus]. By [lem-weil-pbc-closed-point-residue-field-base], these closed points are $k$-points, since $B$ is of finite type over algebraically closed $k$. By [lem-sfb-abelian-picard-zero-cohomology] and the base change in step 1, the derived fibre of $C$ at $b$ is zero. Apply [lem-sc-perfect-finite-free-residue-model-existence] at $b$: all its ranks are zero, so $C$ vanishes on a neighbourhood of $b$. Each cohomology sheaf of the perfect complex $C$ is coherent. Its support is closed by [lem-weil-pbc-finite-type-module-support-closed], and the density of closed points [lem-sc-lft-over-field-jacobson-space] applied on $B\\setminus\\{e\\}$ shows that this support is contained in $\\{e\\}$. Thus $C$ is zero away from the identity.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-abelian-picard-zero-cohomology",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "II §8 (vii), pp.76–77; III §13 p.127, punctual support. Stacks 0BCD (more-algebra-lemma-lift-perfect-from-residue-field)."
+   }
+  },
+  {
+   "text": "At $e$, step 1 identifies the derived fibre with $R\\Gamma(A,\\mathcal O_A)$. By [lem-sc-abelian-variety-characterization] and [lem-pc-h0-proper-variety] its degree-zero cohomology is $k$. Cohomology is finite dimensional by [lem-fin-proper-coherent-finite-dimensional] and zero above $g$ by [lem-sc-noetherian-cohomology-above-dimension]; there is no negative cohomology. By [lem-sc-perfect-finite-free-residue-model-existence] choose a finite free model on an affine neighbourhood of $e$ with ranks equal to these fibre dimensions. Pass to $R=\\mathcal O_{B,e}$ and denote the resulting complex by $K$. It represents the local restriction of $C$, has terms only in $[0,g]$ and $K^0=R$. Its differentials reduce to zero modulo $\\mathfrak m$: each term modulo $\\mathfrak m$ already has the dimension of its cohomology, so both adjacent differential ranks must be zero. By [lem-weil-pbc-smooth-scheme-over-field-regular] and [lem-ag-group-identity-local-dimension], $R$ is regular local of dimension $g$, with residue field $k$.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-h0-proper-variety",
+    "lem-fin-proper-coherent-finite-dimensional",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-perfect-finite-free-residue-model-existence",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 pp.127–129, the finite free complex at the identity; Stacks 0BCD. No coherent exterior-algebra theorem is needed."
+   }
+  },
+  {
+   "text": "Let $D=\\operatorname{Hom}_R^\\bullet(K,R[0])$, with the usual cochain signs, so $D$ has terms in $[-g,0]$. For every prime of $R$ other than $\\mathfrak m$, $K$ localizes to an acyclic bounded finite free complex, by step 2. Such a complex is split exact: starting at its last nonzero term, split the surjection onto that free term and repeat on its projective kernel. Its dual is therefore acyclic too. Consequently all cohomology of $D$ is supported at $\\mathfrak m$. The complex $D[-g]$ has terms in $[0,g]$, so [lem-sfb-regular-local-punctual-acyclicity] gives $H^j(D)=0$ for $j<0$; its positive cohomology is zero by its shape. Thus $D$ is a finite free resolution of $M=H^0(D)=\\operatorname{coker}(D^{-1}\\to D^0)$. Since $D^0=R$ and the matrix entries lie in $\\mathfrak m$, write $M=R/I$ for an ideal $I\\subseteq\\mathfrak m$.",
+   "uses": [
+    "lem-sfb-regular-local-punctual-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 pp.127–128, reversed dual complex and cyclic cokernel; Stacks 00N0 (algebra-lemma-acyclic)."
+   }
+  },
+  {
+   "text": "The nonzero cyclic module $R/I$ has support only at $\\mathfrak m$. Apply [lem-weil-pbc-coherent-support-power-ideal-kills] on $\\operatorname{Spec}R$ with the coherent sheaf associated to $R/I$ and the ideal $\\mathfrak m$. We obtain $\\mathfrak m^N\\subseteq I$ for some $N\\geq1$. Set $T=\\operatorname{Spec}(R/I)$ and let $j:T\\to B$ be the local morphism. The maximal ideal of $R/I$ is nilpotent, and its residue field is $k$. No assertion that $T$ is reduced is being made.",
+   "uses": [
+    "lem-weil-pbc-coherent-support-power-ideal-kills"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 p.128, the infinitesimal cyclic quotient. Stacks coherent-support power-annihilation criterion."
+   }
+  },
+  {
+   "text": "For any $R$-algebra $Q$, finite freeness gives the natural identity\n$$H^0(K\\otimes_RQ)=\\ker(K^0\\otimes_RQ\\to K^1\\otimes_RQ)=\\operatorname{Hom}_R(R/I,Q).$$\nIndeed the right side is exactly the kernel obtained by applying $\\operatorname{Hom}_R(-,Q)$ to $D^{-1}\\to D^0\\to R/I\\to0$; $K$ has no negative term. The affine derived-category equivalence [lem-pc-affine-qcoh-derived-equivalence] and the base-change comparison [lem-pc-relatively-flat-canonical-module-base-change] identify the left side, for $Q=R/I$, with $H^0(A\\times_kT,\\mathcal P_T)$. The identity of $R/I$ therefore gives a section $s$. Its reduction at the closed point of $T$ is nonzero: under the same kernel identity it is the nonzero quotient $R/I\\to k$, represented by $1\\in K^0\\otimes_Rk=k$. Hence $s$ reduces to a nonzero constant section of $\\mathcal O_A$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 p.128, the quotient module and evaluation section; Stacks 0A1D (perfect-lemma-base-change-tensor)."
+   }
+  },
+  {
+   "text": "The section $s$ trivializes $\\mathcal P_T$. To check this, trivialize the line module locally on $A\\times T$ and write $s$ as a scalar $u$. Its reduction modulo the nilpotent ideal $\\mathfrak m(R/I)$ is a unit, since the reduced section on $A$ is a nonzero constant. A lift of its inverse makes $u$ invertible by the finite geometric-series inverse for $1+v$ with $v$ nilpotent. Thus $\\mathcal O_{A\\times T}\\xrightarrow{s}\\mathcal P_T$ is an isomorphism. Restricting $s$ to the identity section of $A$ gives a unit in $R/I$; divide by it to respect the fixed rigidification. Now [lem-sfb-abelian-polarization-calculus] identifies $j:T\\to B$ with the constant identity map, since their rigidified families are isomorphic. On local rings, the quotient $R\\to R/I$ must consequently factor through $R/\\mathfrak m=k$. Hence $\\mathfrak m\\subseteq I$, and together with $I\\subseteq\\mathfrak m$ this proves $I=\\mathfrak m$. In particular the dual complex $D$ resolves the reduced residue field, rather than a thickening.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 p.128, evaluation and the maximal triviality subscheme; the normalized universal property identifies that subscheme with the reduced identity."
+   }
+  },
+  {
+   "text": "Choose $g$ generators $x_1,\\ldots,x_g$ of $\\mathfrak m$. They form a regular sequence by [lem-weil-pbc-regular-local-generators-regular-sequence], hence a Koszul-regular sequence by [lem-weil-pbc-regular-sequence-koszul-regular]. Its Koszul complex resolves $k$. Reindex $D$ as the nonnegative chain resolution with degree $n$ equal to $D^{-n}$. By [lem-sfb-projective-resolution-homotopy-equivalence] it is homotopy equivalent to the augmented Koszul resolution. Dualizing these chain maps and homotopies gives a homotopy equivalence between their dual cochain complexes; finite free double duality (with the standard cochain evaluation signs) identifies the dual of $D$ with $K$. By [lem-sc-koszul-regular-sequence-dual-complex], therefore,\n$$K\\simeq\\bigwedge_k^g\\operatorname{Hom}_k(\\mathfrak m/\\mathfrak m^2,k)[-g].$$\nThe chosen parameters give a basis of $\\mathfrak m/\\mathfrak m^2$, so the displayed determinant is a one-dimensional $k$-space; choosing a nonzero basis identifies it with $k$. Thus $K\\simeq k[-g]$ in $D(R)$. When $g=0$, the parameter list is empty, $R=k$ and the determinant is $k$ in degree zero, so the same argument applies.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "lem-sfb-projective-resolution-homotopy-equivalence",
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 Corollary 1, p.129, comparison with the Koszul resolution; Stacks 0BQZ (duality-lemma-regular-immersion-ext)."
+   }
+  },
+  {
+   "text": "By step 2 every cohomology sheaf of $C$ is supported at $e$. The local computation in step 8 gives $\\mathcal H^i(C)_e=0$ for $i\\ne g$ and $\\mathcal H^g(C)_e\\cong k$ as $R$-modules, with scalar action through $R\\to k$. Hence $\\mathcal H^i(C)=0$ for $i\\ne g$. Apply [lem-trf-coherent-finite-support-skyscrapers] to $\\mathcal H^g(C)$: its singleton support and stalk identify it with the module skyscraper $e_*k$, with precisely the evaluation action in the statement. Finally [lem-sf-derived-concentrated-single] yields\n$$Rp_{2*}\\mathcal P_A=C\\simeq\\mathcal H^g(C)[-g]\\simeq e_*k[-g].$$\nThe only arbitrary choice is a basis of the one-dimensional determinant; the item asserts existence of an isomorphism, not a canonical scalar normalization. All inputs hold in arbitrary characteristic.",
+   "uses": [
+    "lem-trf-coherent-finite-support-skyscrapers",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "III §13 Corollary 1, p.129, recast in the derived category; coherent finite-support reconstruction and single-degree truncation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-group-identity-local-dimension",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-kun-proper-stability",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-relatively-flat-canonical-module-base-change",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-perfect-finite-free-residue-model-existence",
+  "lem-sf-derived-concentrated-single",
+  "lem-sfb-abelian-picard-zero-cohomology",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sfb-projective-resolution-homotopy-equivalence",
+  "lem-sfb-regular-local-punctual-acyclicity",
+  "lem-trf-coherent-finite-support-skyscrapers",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+  "place": "III §13 pp.126–129 and II §8 (vii), pp.76–77, primary scan read online at https://djvu.online/file/2tC7xp3dbqGCh. Local book WANTED; the written proof is an agent assembly of the explicit local calculation and existing Stacks interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Poincare|FourierMukai|Fourier.Mukai",
+   "results": "No hits. Scope: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern cotangent-complex maps, underived module pushforward, abstract skyscraper sheaves, or scheme functor coherence; none computes the coherent Poincare transform"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Poincare bundle has derived pushforward the skyscraper sheaf at the origin shifted by the dimension",
+   "results": "Returned: skyscraperSheaf, skyscraperSheafFunctor, TopCat.Sheaf.pushforward_sheaf_of_sheaf, skyscraperPresheaf_eq_pushforward, TopCat.Sheaf.pushforward, skyscraperPresheafFunctor, AlgebraicGeometry.Scheme.Modules.pushforward, skyscraperPresheafStalkAdjunction.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern cotangent-complex maps, underived module pushforward, abstract skyscraper sheaves, or scheme functor coherence; none computes the coherent Poincare transform"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Poincare\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern cotangent-complex maps, underived module pushforward, abstract skyscraper sheaves, or scheme functor coherence; none computes the coherent Poincare transform"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image of the normalized Poincare line bundle on an abelian variety times its dual is the residue field at the identity shifted by minus the dimension",
+   "results": "Returned: Algebra.Generators.H1Cotangent.δ_map, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, Algebra.Generators.H1Cotangent.δ_eq, Submodule.mulExact_unitsToPic_mapAlgebra, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern cotangent-complex maps, underived module pushforward, abstract skyscraper sheaves, or scheme functor coherence; none computes the coherent Poincare transform"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Mukai transform of the structure sheaf of an abelian variety is the skyscraper at zero in degree g",
+   "results": "Returned: SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.restrictFunctorId, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τr, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.pushforwardId, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern cotangent-complex maps, underived module pushforward, abstract skyscraper sheaves, or scheme functor coherence; none computes the coherent Poincare transform"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived pushforward of the Poincare line bundle on an abelian variety is a skyscraper sheaf shifted by minus its dimension",
+   "results": "8 hits. Recorded top results: SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module pullback/pushforward coherence, analytic Fourier and residue-field declarations do not compute this coherent Poincare transform"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Poincare\"",
+   "results": "0 hits. Recorded top results: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module pullback/pushforward coherence, analytic Fourier and residue-field declarations do not compute this coherent Poincare transform"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|FourierMukai|Fourier.Mukai",
+   "results": "0 hits. Recorded top results: . Scope: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module pullback/pushforward coherence, analytic Fourier and residue-field declarations do not compute this coherent Poincare transform"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Mukai transform of the structure sheaf is the residue field at the origin shifted by dimension",
+   "results": "8 hits. Recorded top results: AlgebraicGeometry.LocallyRingedSpace.residueField, AlgebraicGeometry.Scheme.residueField, FourierTransform.fourier, AlgebraicGeometry.LocallyRingedSpace.Γevaluation, FourierTransform.fourierₗ, FourierTransform.fourier_zero, FourierTransform, FourierTransform.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module pullback/pushforward coherence, analytic Fourier and residue-field declarations do not compute this coherent Poincare transform"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Fourier Mukai transform of O_A on the dual abelian variety is k(0)[-g]",
+   "results": "8 hits. Recorded top results: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_hom_τl, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom, CategoryTheory.TwistShiftData.z_zero_zero, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τr, AlgebraicGeometry.Scheme.Modules.pushforwardId, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl, AlgebraicGeometry.Scheme.Modules.pullbackId",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned module pullback/pushforward coherence, analytic Fourier and residue-field declarations do not compute this coherent Poincare transform"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-euler-degree-square",
+  "date": "2026-10-24",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves. Supporting input: Theorem 11.1(a): separate the coherent Euler-characteristic square identity from the top-intersection normalization. Replacement of the returned theta-section argument by Mumford AV §16, pp.151–152: the coherent direct-image calculation for the normalized Poincare module, proved independently in §13, Corollary 1, p.129.",
+   "via": [
+    "lem-sfb-abelian-euler-degree-square",
+    "lem-sfb-abelian-line-bundle-degree-square",
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-poincare-coherent-transform",
+  "worker": "stage1",
+  "summary": "Kept the statement and its Zariski coefficient category unchanged. Wrote the local cyclic-dual-complex and universal-triviality argument explicitly, using existing perfect-pushforward, arbitrary-base-change and Koszul nodes. Added two statement-only inputs: nontrivial Picard-zero coherent vanishing and regular-local punctual acyclicity. Checked the determinant choice, reduced identity, dimension zero, arbitrary characteristic, source statements, and all citation quotes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves. Supporting input: Theorem 11.1(a): separate the coherent Euler-characteristic square identity from the top-intersection normalization. Replacement of the returned theta-section argument by Mumford AV §16, pp.151–152: the coherent direct-image calculation for the normalized Poincare module, proved independently in §13, Corollary 1, p.129. The split realizes the coherent Poincare calculation supporting the Euler-degree square identity; it does not alter the unit route. The inherited blueprint ancestor is null (blueprint_refs.py ancestor reports None), so its chain and null ancestor are retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic Local dimension at a group identity equals global dimension is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-fin-proper-coherent-finite-dimensional",
+    "why": "Generic Source API for finite-dimensional proper coherent cohomology is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-kun-proper-stability",
+    "why": "Generic Properness survives base change and composition is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic Derived quasi-coherent modules on an affine scheme is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+    "why": "Generic Proper pushforward of a bounded coherent finite-Tor complex is perfect is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Generic Global sections of a proper scheme is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-pc-relatively-flat-canonical-module-base-change",
+    "why": "Generic Canonical base change with ordinary module target for a relatively flat module is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic Abelian varieties are the complete group varieties is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sc-koszul-regular-sequence-dual-complex",
+    "why": "Generic Dual of the Koszul resolution of a regular quotient is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic Schemes locally of finite type over a field are Jacobson is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sc-perfect-finite-free-residue-model-existence",
+    "why": "Generic Finite-free model from fibre data is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "Generic A complex with cohomology in a single degree is that cohomology object shifted is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-sfb-projective-resolution-homotopy-equivalence",
+    "why": "Generic Projective resolutions have augmentation preserving homotopy equivalences is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-trf-coherent-finite-support-skyscrapers",
+    "why": "Generic Finite-support coherent modules decompose into finite-length skyscrapers is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic Noetherianity and coherence of invertible modules on a proper scheme over a field is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Residue fields of closed points over an algebraically closed field is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "why": "Generic A coherent module supported in the zero set of an ideal is killed by a power of it is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Generic The support of a finite type quasi-coherent module is closed, locally the zero locus of the annihilator is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic A regular system of parameters is a regular sequence is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic A regular sequence is Koszul-regular is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic A scheme smooth over a field is regular is used for the coherent local-complex calculation; no step of the constructible-finite-Tor unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-group-identity-local-dimension",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-kun-proper-stability",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-relatively-flat-canonical-module-base-change",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-koszul-regular-sequence-dual-complex",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-perfect-finite-free-residue-model-existence",
+  "lem-sf-derived-concentrated-single",
+  "lem-sfb-projective-resolution-homotopy-equivalence",
+  "lem-trf-coherent-finite-support-skyscrapers",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-e375f3ba4",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-e375f3ba4 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 25 cited statements in full. No re-split note exists for this item; the base proof was empty. The statement is unchanged and correct: Mumford III §13, Zariski coefficient category, g≥0, any characteristic. Mumford is WANTED and not local, so the Mumford-derived claims were checked mathematically, not against the page. The 9 steps reproduce Mumford's p.126-129 argument with exact hypothesis checks. (1) p2 is flat, so 08EV gives a perfect C, and 0A1D gives base change to every T. (2) Off e: closed points are k-points, the new vanishing lemma and 0BCD with all ranks zero kill C near b, and 056J plus Jacobson density remove the rest. (3) At e: a minimal model K in [0,g] with K^0=R and residue differentials zero (rank count checked); R is regular local of dim g. (4) The dual D is split exact off m, and the new acyclicity node gives H^{<0}(D)=0 (shift checked), so D resolves R/I with I⊆m. (5) 01Y9 gives m^N⊆I. (6) H^0(K⊗Q)=Hom(R/I,Q), which gives the section s. (7) A nilpotent-unit argument plus the rigidified universal property make j constant, so I=m. (8) Homotopy equivalence with Koszul, then 0BQZ, gives K≃k[-g]; g=0 checked. (9) The 0C1R skyscraper and 08J5 conclude. New node regular-local-punctual-acyclicity is true: it is Tag 00N0 (Peskine-Szpiro) with M_n=F^{d-n}; regular local implies CM, so free modules have depth d. Tested d=0, d=1 and the k[ε] counterexample. New node abelian-picard-zero-cohomology is true: Mumford II §8 (vii), with algebraic triviality equal to Pic^0. Its closure equals the closure of the existing stmt_dep polarization-calculus. Neither new node duplicates an existing node (checked 00MZ, the CM-resolution nodes, the DVR amplitude node, the zero-dimensional-support node and the abelian Pic/Poincare nodes), and neither restates a clause of the item. Batch 5: every flagged citation is a generic coherent tool outside both assumed statements. That covers 02O5, 08EV, h0-proper-variety and 0BCD, whose only trf/pod reach is definitions or the Mathlib leaves lem-pod-separated-finite-type-base-change and lem-trf-affine-open-limit-descent. It also covers the two sec-trace-formula Stacks lemmas (0C1R, 01XZ), whose closures contain no other trf/pod node. No citation is a step of the trace formula or of Poincare duality. The 22 declared tool_uses are accepted; no SGA is cited. Maintainer note: the null blueprint.from.node is inherited from the base. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.PoincareCoherentTransform",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.poincare_coherent_transform",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.poincare_coherent_transform"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/PoincareCoherentTransform.lean",
+  "statement": "theorem IsAbelianVariety.poincare_coherent_transform {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (D : AbelianDualPoincareDatum A) [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings (A ⊗ D.dual).left.toRingedSpace))] [HasDerivedCategory.{wB} (SheafOfModules.{u} (moduleRings D.dual.left.toRingedSpace))] : Nonempty ((RingedSpace.derivedModuleDirectImage (snd A D.dual).left.toLRSHom.toShHom).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (A ⊗ D.dual).left.toRingedSpace)) 0).obj D.poincare) ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings D.dual.left.toRingedSpace)) 0).obj ((RingedSpace.moduleDirectImage (η[D.dual]).left.toLRSHom.toShHom).obj (𝟙_ (Spec (.of k)).Modules)))⟦-(IsAbelianVariety.dim A : ℤ)⟧)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc32b642b",
+  "group": "NP",
+  "result": "pass",
+  "note": "Only the item's lean record changed and the new module PoincareCoherentTransform.lean has one sorry theorem. Every clause matches the node and Mumford III §13: alg-closed k : Type u with no characteristic condition; IsAbelianVariety A with GrpObj; g = IsAbelianVariety.dim (= topologicalKrullDim by topologicalKrullDim_eq); dual and normalized Poincaré module from the landed AbelianDualPoincareDatum D, whose universal ∃! pins it up to unique iso, reused per H4; p2 = (snd A D.dual).left; e = η[D.dual].left; e_*k = moduleDirectImage of the unit of Spec k (reduced point, evaluation action); ordinary K-injective derivedModuleDirectImage; ⟦-g⟧ Mathlib shift; Nonempty iso in D(O_{A^∨}), not per-degree. Edge cases g=0, char p, reduced point ok; no extra hypotheses; universes explicit. lean.statement verbatim; docstrings carry source, blueprint tag and 9 steps; imports = statement deps public + proof-dep modules/mathlib_match files; no line over 100; no duplicate. Advisory: def-sfb-abelian-dual-poincare-datum reached only via polarization-calculus stmt_dep (H2 bars adding it; same as landed line-bundle-degree-square). No file changed, so no compile; worker reports clean scompile."
+ }
+}

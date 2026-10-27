@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-finite-type-stack-affine-smooth-atlas",
+ "kind": "statement",
+ "title": "Finite-type algebraic stacks over a field have affine smooth presentations",
+ "statement": "Let $k$ be a field [def-weil-field], and let $\\mathcal Z$ be an algebraic stack over $k$: a stack in groupoids for etale coverings, with diagonal representable by algebraic spaces and a representable smooth surjective atlas from a scheme. Stacks, representability and 2-fibre products have the conventions of [def-sfb-stable-pointed-moduli-groupoids]; schemes and algebraic spaces use [def-pc-scheme, def-trf-algebraic-space]. Suppose $\\mathcal Z$ is of finite type over $k$, meaning locally of finite type as tested on smooth scheme atlases, and quasi-compact. Here quasi-compact means that every cover of $\\mathcal Z$ by open substacks has a finite subcover; an open substack is a full pullback-stable subcategory whose pullback to every scheme is an open subscheme. There exist an affine scheme $A$ of finite type over $k$ and a representable smooth surjective morphism $a:A\\to\\mathcal Z$. If $\\mathcal Z$ is smooth over $k$, then $A$ is smooth over $k$. Smoothness and finite type on schemes mean [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; on stacks smoothness is tested on smooth atlases. A representable smooth surjective atlas means that after every scheme base change it is a smooth surjective morphism of algebraic spaces, tested on etale scheme charts. The empty stack and the empty affine scheme are allowed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04YC (lemma-quasi-compact-stack), especially proof choosing a finite affine subcover of an atlas. Finite-type refinement: stacks-morphisms.tex Tag 06FS (definition-locally-finite-type); smooth refinement: Tag 075U (definition-smooth). The same affine-subcover proof applies to the etale-stack convention."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-open-moduli-cover"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable smooth surjective scheme atlas $p:U\\to\\mathcal Z$. By the hypothesis that local finite type is tested on smooth atlases, $U\\to\\operatorname{Spec}k$ is locally of finite type. Thus the definition [def-weil-finite-type-morphism] supplies an affine open cover $(U_i=\\operatorname{Spec}B_i)_{i\\in I}$ of $U$, each $B_i$ a finitely generated $k$-algebra. Apply [lem-sfb-smooth-atlas-open-image] to each $U_i\\subseteq U$, obtaining open substacks $\\mathcal W_i\\subseteq\\mathcal Z$ and smooth maps $U_i\\to\\mathcal Z$ which factor as smooth surjections onto $\\mathcal W_i$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-smooth-atlas-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), proof of (1) implies (2), with Tag 05UP (lemma-open-image-substack) for the open image."
+   }
+  },
+  {
+   "text": "The $\\mathcal W_i$ cover $\\mathcal Z$: after a scheme base change $T\\to\\mathcal Z$, their pullbacks are the images of the $U_i\\times_{\\mathcal Z}T\\to T$, by [lem-sfb-smooth-atlas-open-image]. The $U_i$ cover $U$, and $U\\times_{\\mathcal Z}T\\to T$ is surjective by the atlas hypothesis, so these images cover $T$. Quasi-compactness in the statement now gives a finite subset $J\\subseteq I$ for which the $\\mathcal W_j$ still cover. This uses exactly the given open-substack definition of quasi-compactness.",
+   "uses": [
+    "lem-sfb-smooth-atlas-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), proof of (1) implies (2), with Tag 05UP (lemma-open-image-substack) for the open image."
+   }
+  },
+  {
+   "text": "Form $A=\\coprod_{j\\in J}U_j$ using [lem-weil-pbc-scheme-coproduct-family]. The objects $U_j\\to\\mathcal Z$ glue on this disjoint open cover to an object $a:A\\to\\mathcal Z$: on each self-overlap use the identity isomorphism, and on each overlap of distinct components use the unique empty-overlap isomorphism. These satisfy the cocycle condition [def-sfb-stable-pointed-moduli-groupoids]. By [lem-weil-pbc-finite-affine-coproduct-spectrum], $A\\simeq\\operatorname{Spec}(\\prod_{j\\in J}B_j)$, hence $A$ is affine. Its finite affine open cover by the $U_j$, with each $B_j$ finitely generated over $k$, is precisely the finite-cover criterion for $A$ to be of finite type [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), proof of (1) implies (2), with Tag 05UP (lemma-open-image-substack) for the open image."
+   }
+  },
+  {
+   "text": "The map $a$ is representable by algebraic spaces: for a scheme $T\\to\\mathcal Z$, its 2-fibre product with $A$ is the base change of the representable diagonal along $A\\times_kT\\to\\mathcal Z\\times_k\\mathcal Z$. This is the groupoid of triples $(x,t,\\phi:a(x)\\simeq t)$ in [def-sfb-stable-pointed-moduli-groupoids]; the scheme product exists by [def-pc-fibre-product]. The coprojections $U_j\\to A$ form a disjoint open cover [lem-weil-pbc-scheme-coproduct-family]. Each restriction $U_j\\to\\mathcal Z$ is smooth by Step 1, so source-open locality in [lem-sfb-stack-chartwise-smooth-etale-calculus] proves that $a$ is smooth. For any scheme $T\\to\\mathcal Z$, put $A_T=A\\times_{\\mathcal Z}T$ and $T_j=T\\times_{\\mathcal Z}\\mathcal W_j$. Pulling back the open cover of $A$ gives the open cover $U_j\\times_{\\mathcal Z}T$ of $A_T$: an object over a scheme belongs to its $j$-th member exactly when its $A$-coordinate factors through $U_j$. The $T_j$ cover $T$ by Step 2. The map $U_j\\times_{\\mathcal Z}T\\to T$ has image exactly $T_j$ by [lem-sfb-smooth-atlas-open-image]. Every point of $T$ therefore lies in the image of a member of the cover of $A_T$, proving that $A_T\\to T$ is surjective.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-smooth-atlas-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), proof of (1) implies (2), with Tag 05UP (lemma-open-image-substack) for the open image."
+   }
+  },
+  {
+   "text": "If $\\mathcal Z$ is smooth over $k$, the smooth-atlas test in the statement, applied to the smooth surjective atlas $A\\to\\mathcal Z$ just constructed, says exactly that $A\\to\\operatorname{Spec}k$ is smooth. If $\\mathcal Z$ is empty choose the empty atlas and $J=\\varnothing$; the finite-coproduct spectrum identification gives $A=\\operatorname{Spec}(0)$, the empty affine scheme. The finite-cover criterion and the smooth-atlas test also include this empty case.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack), proof of (1) implies (2), with Tag 05UP (lemma-open-image-substack) for the open image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sfb-smooth-atlas-open-image",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-pc-fibre-product",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04YC (lemma-quasi-compact-stack), proof of (1) implies (2), with Tag 05UP (lemma-open-image-substack) for the open image."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic stack admits a smooth surjective atlas from an affine scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.singleton f)\", \"doc\": \"A singleton pre-zero hypercover of a scheme $ S $, constructed from a surjective and quasi-compact morphism $ f: X \\to S $, satisfies the quasi-compactness predicate.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompactCover_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S),\\n  AlgebraicGeometry.QuasiCompactCover 𝒰 ↔\\n    ∀ {U : S.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"A pre-zero hypercover $\\\\mathcal{U}$ of a scheme $S$ is quasi-compact if and only if for every affine open subset $U \\\\subseteq S$, the open set $U$ is the union of images of finitely many compact open \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack of finite type over a field has a smooth affine presentation of finite type over that field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmooth R S] : FinitePresentation R S\", \"doc\": \"Every standard smooth algebra over a commutative semiring is finitely presented over its base semiring. Specifically, if $ S $ is a standard smooth algebra over $ R $, then $ S $ admits a finite prese\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"RingHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →+* B) : Prop\", \"doc\": \"Given a ring homomorphism $ f : A \\\\to B $ between commutative semirings, this proposition asserts that the algebra structure on $ B $ over $ A $ induced by $ f $ is finitely presented. An algebra is f\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"IsSmooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|SmoothAtlas|smooth.atlas|quasi.compact.stack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type smooth algebraic stack over a field has a smooth finite type scheme atlas",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|SmoothAtlas|smooth.atlas|quasi.compact.stack",
+   "results": "{\"t\": \"2026-10-22T07:20:31Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|SmoothAtlas|smooth.atlas|quasi.compact.stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack of finite type over a field has a smooth affine presentation of finite type over that field",
+   "results": "{\"t\": \"2026-10-22T07:20:31Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic stack of finite type over a field has a smooth affine presentation of finite type over that field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.Smooth.finitePresentation\", \"Algebra.IsStandardSmooth.finitePresentation\", \"AlgHom.FinitePresentation\", \"RingHom.smooth_def\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.FinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"a6bed92a67494932\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-22T07:20:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"Stack\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact algebraic stack admits a smooth surjective atlas from an affine scheme",
+   "results": "{\"t\": \"2026-10-22T07:20:41Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact algebraic stack admits a smooth surjective atlas from an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.compactSpace_iff_exists\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\"], \"digest\": \"dc0fa3afa91f160f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type smooth algebraic stack over a field has a smooth finite type scheme atlas",
+   "results": "{\"t\": \"2026-10-22T07:20:41Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type smooth algebraic stack over a field has a smooth finite type scheme atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"5399eb60efc30560\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-open-finite-etale-permanence",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Open substacks and finite etale decorations of a smooth finite-diagonal stack. A finite-type affine smooth chart before restricting it to the open substack and pulling it through the finite etale decoration. Ancestor repaired from the inherited explicit place: main-20261015 direct-images proof (3), open-direct-image finiteness via the alteration-moduli prerequisites.",
+   "via": [
+    "lem-sfb-dm-open-finite-etale-permanence",
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-type-stack-affine-smooth-atlas",
+  "worker": "stage1",
+  "summary": "Realized the finite affine-subcover argument of Stacks 04YC; extracted only the open-image theorem 05UP as a statement-only node, and reused scheme coproduct, finite-product spectrum and chartwise smoothness nodes. No hypotheses or conclusions changed. The general algebraic-stack hypothesis is retained; DM-only topology and finite-type calculus nodes are not used. Repair of return L (head b0c6faec380): compared the retained delivery with the current unsplit DAG and reread all cited statements; their complete saved quotation texts are unchanged. Step 4 now explicitly tracks the pulled-back coproduct cover and its images, citing the current coproduct statement as well as the chartwise calculus. Delivery is rebuilt on the current origin/sheaf-dag by the prescribed tool. Continued repair of return L at 29c409c2b3d: the current live item remains unsplit and every saved citation still matches the current statement. Step 3 now specifies identity descent maps on self-overlaps separately from the empty distinct-component overlaps; the newly detected 01VC tag collision is reviewed in the report.",
+  "blueprint": "Supports the alteration-moduli prerequisites beneath paragraph (3) of det-thm-sf-ctf-stability-direct-images, main-20261015; the inherited from.node was null because the creation chain ends at a Lean module, and is anchored to the explicit blueprint place already inherited. Searches affine smooth atlas, 04YC, smooth image, open substacks, 04XL, open image and 05UP found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-411a54be5",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-411a54be5 (reviewer sub-agent of L); spot-checked: PASS with no fixes; review.md is written. (1) This is the third push after two landing (L) refusals; the previous heads b0c6faec and 29c409c2 were both PASSed. Diffed against 29c409c2, the only change is Step 3, which now gives the descent datum fully: identity maps on the self-overlaps, unique maps on the empty overlaps between distinct components. That is correct and more precise than before. The new node is byte-identical to the earlier one. In clones/live and clones/side-live the item is still unsplit and the new node is absent, so no other group has superseded this delivery. There is no repair note for the item, so the re-split rule does not apply; the base proof was empty. (2) Sources read: stacks-properties.tex 04YC (l.1171-1205, proof of (1)=>(2)) and 05UP (l.1868-1915, statement and full proof). lem-sfb-smooth-atlas-open-image matches 05UP clause by clause: W is the source's Y, T x_X W is the open image T_0, V->W is smooth and surjective, and a scheme U is a special case of the source's algebraic space. The condition defining W is local on T, so the etale-stack convention works. Small cases checked: V empty gives W empty, V=U gives W=X, and X a scheme with p=id gives W=V. The node has no quasi-compactness, finite-type or affineness content, so it is not a restatement of the item, and it duplicates no node in the DAG. (3) Item steps, checked against the full statements of every cited node. Step 1: finite-type-morphism over Spec k gives the affine cover, and the new node gives the W_i. Step 2: the images cover T, and quasi-compactness defined through open substacks gives a finite J. Step 3: the coproduct is a disjoint open cover; effective etale descent from def-sfb-stable-pointed-moduli-groupoids produces a; Spec of the product gives an affine A, including J empty. Step 4: representability comes from the diagonal and def-pc-fibre-product. Smoothness comes from the source-open locality clause of the chartwise calculus, which holds for general algebraic stacks; its etale-only coproduct clause is not used. Surjectivity holds because the images T_j cover T. Step 5: the smooth-atlas test gives A smooth, and the empty case gives Spec 0. Edge cases checked: a single chart, overlapping W_j, non-DM stacks such as BG_m, k not perfect, and Z not smooth. No hypothesis is used beyond the statement. proof_deps equals the union of the step uses, and no SGA source is used. (4) Batch-5 flags: def-sfb-stable-pointed-moduli-groupoids is cited only for its general stack and 2-fibre-product conventions, and its route to def-trf-projective-bundle-morphism is only a definition. def-trf-algebraic-space is the general definition of algebraic spaces. Both were already stmt_deps of the item on the base, and neither is a statement or proof step of the trace formula or of Poincare duality, so both are accepted. Maintainer note (metadata only): the item's from.node is the repaired ancestor det-thm-sf-ctf-stability-direct-images, while the new node has from.node null, which is the computed ancestor."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeStackAffineSmoothAtlas",
+  "declaration": "CategoryTheory.finiteType_stack_affine_smooth_atlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeStackAffineSmoothAtlas.lean",
+  "statement": "theorem finiteType_stack_affine_smooth_atlas (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (hlft : ∀ (U : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a → LocallyOfFiniteType U.hom) (hqc : ∀ C : Set (OpenModuliSubstack F), IsOpenModuliCover (fun W : C ↦ W.val) → ∃ D : Set (OpenModuliSubstack F), D.Finite ∧ D ⊆ C ∧ IsOpenModuliCover (fun W : D ↦ W.val)) : ∃ (A : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj A)) F), IsAffine A.left ∧ LocallyOfFiniteType A.hom ∧ QuasiCompact A.hom ∧ IsSmoothModuliAtlas F A a ∧ (IsSmoothModuliStack F → Smooth A.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 0623bfc7902d: the new existing:true definition node def-sfb-open-moduli-cover owns CategoryTheory.IsOpenModuliCover in its unchanged live module. It replaces the theorem in stmt_deps; lem-sfb-stack-chartwise-smooth-etale-calculus remains in proof_deps. The theorem signature is unchanged. The other added owning nodes are def-sfb-algebraic-moduli-stack and def-sfb-open-moduli-substack."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7403ff64c",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 0623bfc7902d. F1 (H2) done as prescribed: new existing:true def node def-sfb-open-moduli-cover on CategoryTheory.IsOpenModuliCover (lean.statement verbatim with live StackChartwiseSmoothEtaleCalculus l.86-87, no copy/move, TeX matches the body clause by clause incl. IsSchemeModuliBaseChange equivalence + first-projection identification, same pattern as def-sfb-surjective-moduli-map Q87, absent from live) replaces lem-sfb-stack-chartwise-smooth-etale-calculus in the item stmt_deps; the theorem stays in proof_deps. F2 (H9): two unused private imports removed; the rest of the module is byte-identical, signature verbatim. Statement re-checked: k field; F algebraic stack via IsAlgebraicModuliStack; hlft over smooth atlases; hqc as set-indexed open-substack finite subcover; conclusion IsAffine ∧ LFT ∧ QC ∧ IsSmoothModuliAtlas ∧ (IsSmoothModuliStack → Smooth) for the same A. Edge cases: empty stack, BG_m, imperfect k, non-smooth Z. Universes independent, only proof is sorry, report has Worker report and Second reading by Q09. No compile run (no file changed). Advisory: the new node's TeX does not cite def-sfb-moduli-chart-normalization but spells the notion out."
+ }
+}

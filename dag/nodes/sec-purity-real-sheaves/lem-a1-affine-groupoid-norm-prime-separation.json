@@ -1,0 +1,254 @@
+{
+ "id": "lem-a1-affine-groupoid-norm-prime-separation",
+ "kind": "statement",
+ "title": "A norm separates two geometric objects with no arrow between them",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], and let $A,B$ be commutative $k$-algebras. Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ [def-pc-scheme, def-weil-affine-spectrum], with $k$-morphisms $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$ and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] defining a groupoid on $H$-points, naturally in each $k$-scheme $H$, with source $s$, target $t$, identity $e$, inverse $i$ and composition $c$. Assume $s,t$ are finite locally free [def-pc-finite-locally-free], and write $\\sigma=s^\\sharp,\\tau=t^\\sharp:A\\to B$. For any $k$-algebra map $\\alpha_1:A\\to k$, set $E_1=B\\otimes_{A,\\sigma,\\alpha_1}k$ [def-weil-module-base-change] and\n$$\\mathcal B_1=\\{\\beta:B\\to k\\text{ a }k\\text{-algebra map}:\\beta\\sigma=\\alpha_1\\}.$$\nThe algebra $E_1$ is finite dimensional over $k$, all its prime ideals are maximal with residue field canonically $k$ [def-weil-residue-field], and their corresponding $k$-points identify with $\\mathcal B_1$. This set is finite and nonempty (it contains the identity arrow at $\\alpha_1$). If $\\alpha_0:A\\to k$ is another $k$-algebra map and no $\\beta\\in\\mathcal B_1$ satisfies $\\beta\\tau=\\alpha_0$, then there exists $f\\in A$ such that\n$$\\alpha_0(f)=0,\\qquad (\\beta\\tau)(f)\\ne0\\quad(\\beta\\in\\mathcal B_1).$$\nFor this same $f$, let $g=N_\\sigma(\\tau(f))\\in A$ denote the norm section whose restrictions to finite-free affine charts are the multiplication determinants [lem-pd-finite-locally-free-norm-charts, def-weil-endomorphism-determinant]. Then\n$$\\alpha_0(g)=0,\\qquad\\alpha_1(g)\\ne0.$$\nThe assertion allows nonreduced fibre algebras, varying local ranks, and stabilizers; it makes no assumption that the two points agree on invariant functions.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+  "place": "Tag 03BL (groupoids-lemma-points), finite source-fibre list, prime avoidance, and the two determinant nonvanishing gaps; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local norms."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-algebraic-closure",
+  "def-weil-module-base-change",
+  "def-weil-residue-field",
+  "lem-pd-finite-locally-free-norm-charts",
+  "def-weil-endomorphism-determinant",
+  "def-a1-scheme-groupoid-laws"
+ ],
+ "proof": [
+  {
+   "text": "Install the A-actions induced by sigma and alpha_1. Finiteness of s gives a finite A-module B by IsFinite.SpecMap_iff. Mathlib Module.Finite.base_change makes E=k tensor_A B finite dimensional over k. IsArtinianRing.of_finite k E then makes E Artinian, so its spectrum is finite and every prime is maximal. This entirely algebraic argument does not require the affine scheme pullback formula or finite scheme fibres.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 03BL (groupoids-lemma-points), finite source-fibre list, prime avoidance, and the two determinant nonvanishing gaps; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local norms."
+   }
+  },
+  {
+   "text": "For every prime P of E, its residue field is a finite E-module because P is maximal, and hence a finite k-module. The structural k-map is bijective by [lem-pc-finite-extension-alg-closed]. Compose its inverse with the residue map to obtain a k-point with kernel P. Two k-points f,g with ker(f) contained in ker(g) agree: apply g to x-algebraMap(k,E)(f(x)). Thus taking the kernel is a bijection from k-points to primes. Tensor universality (AlgHom.liftEquiv) identifies these k-points with beta sigma=alpha_1; sigma being a k-map ensures that restriction to 1 tensor b is a k-map for the original B-structure. This gives the required equivalence, the evaluation equation and uniqueness. Transfer spectrum finiteness along it. The equation e followed by s=id and compatibility of s with k imply that e-sharp is a k-map. Composing it with alpha_1 supplies exactly the stated identity witness.",
+   "uses": [
+    "lem-pc-finite-extension-alg-closed",
+    "def-a1-scheme-groupoid-laws",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 03BL (groupoids-lemma-points), finite source-fibre list, prime avoidance, and the two determinant nonvanishing gaps; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local norms."
+   }
+  },
+  {
+   "text": "Index the ideals ker(beta tau) by the finite nonempty source-point set, with the identity as a chosen index. If ker(alpha_0) were contained in their union, [lem-weil-pbc-prime-avoidance] would put it inside one of them. The scalar-subtraction kernel argument above would then give beta tau=alpha_0, a contradiction. Take f in ker(alpha_0) outside the union. This directly gives both required evaluations of f, including repeated targets and stabilizers.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 03BL (groupoids-lemma-points), finite source-fibre list, prime avoidance, and the two determinant nonvanishing gaps; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local norms."
+   }
+  },
+  {
+   "text": "Apply [lem-pd-finite-locally-free-norm-charts] on the top open to the global section corresponding to tau(f). Transport its norm section through GammaSpecIso to g in A and combine the two section restrictions by presheaf functoriality. On a chart containing x, use the existing proved mem_basicOpen_normAt_of_free theorem, which transports [lem-pd-finite-free-norm-prime-criterion] to the scheme fibre. Restricting basic opens and basicOpen_eq_of_affine give g outside x if and only if tau(f) is outside every prime y with s(y)=x.",
+   "uses": [
+    "lem-pd-finite-locally-free-norm-charts",
+    "lem-pd-finite-free-norm-prime-criterion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 03BL (groupoids-lemma-points), finite source-fibre list, prime avoidance, and the two determinant nonvanishing gaps; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local norms."
+   }
+  },
+  {
+   "text": "For x_0=ker(alpha_0), the identity beta_0=alpha_0 e-sharp has s(y_0)=x_0 and tau(f) in y_0=ker(beta_0). The norm nonvanishing equivalence therefore forces alpha_0(g)=0. For x_1=ker(alpha_1), take any prime Q of B over x_1. In B/Q one has sigma(a)=alpha_1(a): the difference comes from a-algebraMap(k,A)(alpha_1(a)), which belongs to ker(alpha_1). Thus its A-module structure factors through k. Finiteness over A implies finiteness over k by Module.Finite.of_restrictScalars_finite. Its structural k-map is bijective by [lem-pc-finite-extension-alg-closed], so its inverse composed with B to B/Q gives a k-map beta with kernel Q and beta sigma=alpha_1. The separation property of f makes tau(f) outside Q. Apply the norm equivalence to get alpha_1(g) nonzero. No reducedness, equal invariant values, or common chart rank is used.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "lem-pc-finite-extension-alg-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+    "place": "Tag 03BL (groupoids-lemma-points), finite source-fibre list, prime avoidance, and the two determinant nonvanishing gaps; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local norms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-finite-extension-alg-closed",
+  "def-a1-scheme-groupoid-laws",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-pd-finite-free-norm-prime-criterion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/divisors.tex",
+  "place": "Tag 03BL (groupoids-lemma-points), finite source-fibre and separating-norm paragraph; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local determinant construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free affine groupoid over an algebraically closed field two points not joined by an arrow can be separated by a norm which vanishes at one point and is nonzero at the other",
+   "results": "8 hit(s); top recorded hits: AlgebraicGeometry.IsSeparated.hasAffineProperty, instTotallySeparatedSpaceAlgEquivOfIsIntegral, krullTopology_isTotallySeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, BoundedContinuousFunction.separatesPoints_charPoly, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: norm_eq_zero_iff requires an integral domain algebra and cannot handle a product or nonreduced source fibre; separatedness results are unrelated to norm separation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine groupoid with finite locally free source over an algebraically closed field admits a norm separating any pair of points with no arrow between them",
+   "results": "8 hit(s); top recorded hits: AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.IsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: norm_eq_zero_iff requires an integral domain algebra and cannot handle a product or nonreduced source fibre; separatedness results are unrelated to norm separation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite groupoid source fibre over an algebraically closed field and prime avoidance yield a norm vanishing at one object but not at a different orbit",
+   "results": "8 hit(s); top recorded hits: map_eq_zero_iff_eq_one, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, inseparable_one_iff_norm, GroupNorm.recOn, GroupNorm.casesOn, AddGroupNorm.casesOn, GroupNormClass.casesOn, normGroupNorm",
+   "date": "2026-10-22",
+   "verdict": "no match: norm_eq_zero_iff requires an integral domain algebra and cannot handle a product or nonreduced source fibre; separatedness results are unrelated to norm separation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, Ideal.IsPrime, Module.Free",
+   "results": "0 hit(s); top recorded hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: norm_eq_zero_iff requires an integral domain algebra and cannot handle a product or nonreduced source fibre; separatedness results are unrelated to norm separation"
+  },
+  {
+   "tool": "grep",
+   "query": "norm_eq_zero_iff|norm.*prime|prime.*norm",
+   "results": "5 hit(s); top recorded hits: Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean; subdirectory Mathlib/RingTheory/Norm",
+   "date": "2026-10-22",
+   "verdict": "no match: norm_eq_zero_iff requires an integral domain algebra and cannot handle a product or nonreduced source fibre; separatedness results are unrelated to norm separation"
+  },
+  {
+   "tool": "grep",
+   "query": "norm_eq_zero_iff|norm.*prime|prime.*norm",
+   "results": "5 hits; Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean, Mathlib/RingTheory/Norm/Basic.lean; Mathlib/RingTheory/Norm",
+   "date": "2026-10-23",
+   "verdict": "no match: groupoid norm separation is not stated; the norm_eq_zero_iff grep hits assume a domain algebra, excluding the permitted nonreduced and product fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, Ideal.IsPrime, Module.Free",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: groupoid norm separation is not stated; the norm_eq_zero_iff grep hits assume a domain algebra, excluding the permitted nonreduced and product fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite groupoid source fibre over an algebraically closed field and prime avoidance yield a norm vanishing at one object but not at a different orbit",
+   "results": "8 hits; map_eq_zero_iff_eq_one, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, inseparable_one_iff_norm, GroupNorm.recOn, GroupNorm.casesOn, AddGroupNorm.casesOn, GroupNormClass.casesOn, normGroupNorm",
+   "date": "2026-10-23",
+   "verdict": "no match: groupoid norm separation is not stated; the norm_eq_zero_iff grep hits assume a domain algebra, excluding the permitted nonreduced and product fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free affine groupoid over an algebraically closed field two points not joined by an arrow can be separated by a norm which vanishes at one point and is nonzero at the other",
+   "results": "8 hits; AlgebraicGeometry.IsSeparated.hasAffineProperty, instTotallySeparatedSpaceAlgEquivOfIsIntegral, krullTopology_isTotallySeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, BoundedContinuousFunction.separatesPoints_charPoly, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: groupoid norm separation is not stated; the norm_eq_zero_iff grep hits assume a domain algebra, excluding the permitted nonreduced and product fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine groupoid with finite locally free source over an algebraically closed field admits a norm separating any pair of points with no arrow between them",
+   "results": "8 hits; AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.IsSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: groupoid norm separation is not stated; the norm_eq_zero_iff grep hits assume a domain algebra, excluding the permitted nonreduced and product fibres"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-orbit-fibres",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical affine-quotient branch of lem-a1-affine-hc0, through Tag 03XX and Tag 03BL: Tag 03BL (groupoids-lemma-points), finite source-fibre list, prime avoidance, and the two determinant nonvanishing gaps; Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm), local norms.",
+   "via": [
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-groupoid-norm-prime-separation",
+  "worker": "stage1",
+  "summary": "Read Stacks 03BL and 0BD2, checked the whole item against the current library, and split the finite source-fibre, prime-avoidance and norm argument into five explicit steps. Reuse existing nodes throughout: no new node, no statement change. The finite-dimensional-domain and finite-extension facts identify every fibre prime with a unique k-point. Chartwise norm-prime criteria give both required values, including vanishing at alpha_0 using its identity arrow. All cited statements were read and their verbatim quotations checked in citations.json. Searches were executed through msearch and appended without removing the inherited searches.",
+  "blueprint": "Inherited historical affine-quotient support branch of lem-a1-affine-hc0, through Tag 03XX to groupoids-lemma-points (03BL): finite list b_i, kernels and prime avoidance, then the two determinant gaps. Steps 1-2 establish the finite list and its residue-field identification; step 3 realizes prime avoidance; steps 4-5 fill the norm nonvanishing and vanishing arguments using the pre-existing general norm criterion. The current main-20261015 ancestor instead states compact-support H_c^0 vanishing; ancestry is historical and is retained, as in the parent split.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-finite-locally-free-norm-charts",
+    "why": "General determinant norm charts for finite flat locally finitely presented morphisms; no Rankin unit statement supplies the local free norms."
+   },
+   {
+    "node": "lem-pd-finite-free-norm-prime-criterion",
+    "why": "General finite free ring-norm criterion at an arbitrary prime, including nonreduced fibres; supplies exactly the two determinant gaps of Stacks 03BL without changing its route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-finite-locally-free-norm-charts",
+  "lem-pd-finite-free-norm-prime-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-719160975",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-719160975 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 11 cited statements, and Stacks groupoids.tex Tag 03BL (lemma-points, lines 4453-4545). There are no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the item NM created in the orbit-fibres split. The item is the 03BL part (2) argument after base change to k; its conclusion alpha_0(g)=0 is stronger than Stacks' 'g not a unit' and holds because of the identity arrow. Step 1: s is finite by def-pc-finite-locally-free, so B is a finite A-module and E_1 is finite-dimensional; 01I4, 01WL and 02NU give a finite fibre. Step 2: E_1/P is a field (domain node), equal to k (algebraically-closed node); the tensor universal property identifies the points with B_1, and alpha_1 e^# shows B_1 is nonempty. Step 3: prime avoidance (00DS) with r>=1, prime I_j and the explicit h_j witnesses. Step 4 had one gap: it equated the points of R over u_1 with the primes of E_1, but step 1 only identifies Spec E_1 with the fibre-product scheme, and s^{-1}V=Spec F was not justified. FIX: step 4 now uses that s is affine (finite), that E_1 = B/sigma(ker alpha_1)B, and that ker alpha_1 is maximal, so these points are exactly the ker beta with beta in B_1. Only step 4 changes; proof_deps is unchanged. Step 5: the prime of beta_0 = alpha_0 e^# lies over u_0 and contains tau(f); the contrapositive of the norm-prime criterion gives alpha_0(g)=0. Edge cases tested: Spec(k x k) with only identity arrows, k[eps]/eps^2, mu_p in characteristic p, A=0, alpha_0=alpha_1. Accepted tool_uses: lem-pd-finite-locally-free-norm-charts and lem-pd-finite-free-norm-prime-criterion; they fill the two determinant references that 03BL leaves as 'insert future reference', and no node of sk-p-real-rankin gives them. No SGA source is used. No duplicate node: rg for 03BL found no node stating this lemma.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidNormPrimeSeparation",
+  "declaration": "AlgebraicGeometry.affineGroupoid_norm_prime_separation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidNormPrimeSeparation.lean",
+  "statement": "theorem affineGroupoid_norm_prime_separation (k : Type v) [Field k] [IsAlgClosed k] (A B : CommRingCat.{u}) [Algebra k A] [Algebra k B] (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (hG : Scheme.IsGroupoid s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] (hs : (Spec.preimage s).hom.comp (algebraMap k A) = algebraMap k B) (ht : (Spec.preimage t).hom.comp (algebraMap k A) = algebraMap k B) (alpha₁ : A →ₐ[k] k) : letI := (Spec.preimage s).hom.toAlgebra letI := alpha₁.toRingHom.toAlgebra FiniteDimensional k (k ⊗[A] B) ∧ (∀ P : PrimeSpectrum (k ⊗[A] B), P.asIdeal.IsMaximal ∧ Function.Bijective ((Scheme.Spec.residueFieldIso (CommRingCat.of (k ⊗[A] B)) P).inv.hom.comp ((algebraMap (k ⊗[A] B) P.asIdeal.ResidueField).comp (algebraMap k (k ⊗[A] B))))) ∧ (∃ φ : PrimeSpectrum (k ⊗[A] B) ≃ {beta : B →ₐ[k] k // beta.toRingHom.comp (Spec.preimage s).hom = alpha₁.toRingHom}, ∀ P : PrimeSpectrum (k ⊗[A] B), ∃! psi : (k ⊗[A] B) →ₐ[k] k, RingHom.ker psi.toRingHom = P.asIdeal ∧ ∀ b : B, psi (1 ⊗ₜ[A] b) = (φ P).val b) ∧ Finite {beta : B →ₐ[k] k // beta.toRingHom.comp (Spec.preimage s).hom = alpha₁.toRingHom} ∧ (∃ beta : B →ₐ[k] k, beta.toRingHom.comp (Spec.preimage s).hom = alpha₁.toRingHom ∧ beta.toRingHom = alpha₁.toRingHom.comp (Spec.preimage e).hom) ∧ ∀ alpha₀ : A →ₐ[k] k, (∀ beta : B →ₐ[k] k, beta.toRingHom.comp (Spec.preimage s).hom = alpha₁.toRingHom → beta.toRingHom.comp (Spec.preimage t).hom ≠ alpha₀.toRingHom) → ∃ f g : A, alpha₀ f = 0 ∧ (∀ beta : B →ₐ[k] k, beta.toRingHom.comp (Spec.preimage s).hom = alpha₁.toRingHom → beta ((Spec.preimage t).hom f) ≠ 0) ∧ (∀ x : Spec A, ∃ V : (Spec A).Opens, x ∈ V ∧ IsAffineOpen V ∧ (letI := (s.app V).hom.toAlgebra Module.Free Γ(Spec A, V) Γ(Spec B, s ⁻¹ᵁ V) ∧ Module.Finite Γ(Spec A, V) Γ(Spec B, s ⁻¹ᵁ V) ∧ (Spec A).presheaf.map (homOfLE (le_top : V ≤ ⊤)).op ((Scheme.ΓSpecIso A).inv g) = Algebra.norm Γ(Spec A, V) ((Spec B).presheaf.map (homOfLE (le_top : s ⁻¹ᵁ V ≤ ⊤)).op ((Scheme.ΓSpecIso B).inv ((Spec.preimage t).hom f))))) ∧ alpha₀ g = 0 ∧ alpha₁ g ≠ 0",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd56e24d2",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: k alg. closed in its own universe v; Scheme.IsGroupoid from the landed def-a1-scheme-groupoid-laws (allowed stmt_deps addition); hs/ht k-compatibility, which implies it for e,i,c; finite locally free instances meet the norm-charts dependency's hypotheses; fibre k⊗[A]B with left k-structure; maximal primes and bijective k→κ(P) in the scheme residue field; prime/arrow equivalence pinned by the unique k-point ψ with ψ(1⊗b)=φ(P)(b); finite and nonempty via α₁∘e♯; no-arrow hypothesis in the correct direction; ∃ f g with g pinned by the norm-chart condition copied at W=⊤ (unique by sheaf locality); α₀ g=0 ∧ α₁ g≠0. Edge cases A=0, α₀=α₁, nonreduced/product fibres, mixed ranks, universes. lean.statement verbatim; sorry only; no new defs; docstrings carry source place, blueprint id and 5 proof steps; report sections present; no SGA. Not compiled (no file changed). Advisory: live has a separate IsGroupoidScheme predicate used by orbit-fibres."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T082755-L-2221217",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

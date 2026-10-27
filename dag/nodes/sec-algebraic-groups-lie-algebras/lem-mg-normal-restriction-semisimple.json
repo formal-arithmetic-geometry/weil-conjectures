@@ -53,7 +53,43 @@
   "def-wf-simple-module"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.isSemisimpleRepresentation_degreeZero",
+    "Representation.isSemisimpleRepresentation_comp_subtype"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.isSemisimpleRepresentation_degreeZero",
+     "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+     "lines": [
+      485,
+      491
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "Representation.isSemisimpleRepresentation_comp_subtype",
+     "module": "WeilConjectures.Mathlib.RepresentationTheory.Semisimple",
+     "lines": [
+      59,
+      107
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-i-restriction",
  "lean": {
@@ -67,5 +103,33 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $N\\triangleleft\\Gamma$ be a normal subgroup, with no finiteness\nassumption on $\\Gamma/N$. Every finite-dimensional semisimple\n$\\Gamma$-representation over $\\Qlb$ restricts to a semisimple\n$N$-representation. In particular, a semisimple represented degree datum\n([d-monodromy]) is geometrically semisimple.",
+  "proof": [
+   {
+    "text": "By the direct-sum definition of semisimplicity in\n[def-wf-semisimple-module], it is enough to treat a simple\n$\\Gamma$-module $V$. Choose a nonzero $N$-stable subspace\n$S\\subseteq V$ of least positive dimension. It is simple as an\n$N$-module by [def-wf-simple-module]. Normality makes every\ntranslate $\\gamma S$ another simple $N$-submodule. The sum of all\nthese translates is a nonzero $\\Gamma$-submodule, hence is $V$, and\nfinitely many translates already span because $V$ is finite-dimensional.",
+    "uses": [
+     "def-wf-semisimple-module",
+     "def-wf-simple-module"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Add those translates one at a time. If $D$ is the direct sum already\nobtained and $S'$ is the next translate, then $S'\\cap D$ is an\n$N$-submodule of the simple module $S'$; it is either zero, in which\ncase $D+S'=D\\oplus S'$, or all of $S'$, in which case nothing is\nadded. Thus $V|_N$ is a direct sum of simple $N$-modules. For a\nrepresented degree datum take $N=P=\\ker(\\deg)$, which is normal in $W$\n([d-monodromy]); the final assertion is precisely geometric semisimplicity in\n[def-wf-geometric-semisimplicity].",
+    "uses": [
+     "d-monodromy",
+     "def-wf-geometric-semisimplicity"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

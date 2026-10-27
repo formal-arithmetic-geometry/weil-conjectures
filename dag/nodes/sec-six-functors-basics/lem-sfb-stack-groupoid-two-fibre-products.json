@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-stack-groupoid-two-fibre-products",
+ "kind": "statement",
+ "title": "Two-fibre products of arbitrary groupoid stacks are stacks",
+ "statement": "Fix the universes of [def-weil-size-convention] and a site $(\\mathcal C,J)$ [def-weil-pbc-topos] small in the larger universe. Let $\\mathcal A,\\mathcal B,\\mathcal D$ be categories fibred in groupoids over $\\mathcal C$, with fibre groupoids in that universe: pullback objects exist along every base arrow, with the cartesian unique factorization property, and every fibre is a groupoid. Assume they are $J$-stacks, meaning that their isomorphism presheaves on slice sites are sheaves and all descent data on covering sieves are effective. Let $u:\\mathcal A\\to\\mathcal D$ and $v:\\mathcal B\\to\\mathcal D$ be pullback-compatible functors over $\\mathcal C$. Form the category $\\mathcal Q$ over $\\mathcal C$ whose objects over $T$ are triples $(a,b,\\alpha)$ with $a\\in\\mathcal A(T)$, $b\\in\\mathcal B(T)$ and $\\alpha:u(a)\\xrightarrow{\\sim}v(b)$; its vertical arrows $(a,b,\\alpha)\\to(a',b',\\alpha')$ are pairs $(s:a\\to a',t:b\\to b')$ with $v(t)\\alpha=\\alpha'u(s)$, and its pullbacks are induced from those of the three factors. Then $\\mathcal Q$ is a $J$-stack in groupoids. Its two projections and tautological isomorphism $u\\operatorname{pr}_1\\cong v\\operatorname{pr}_2$ give a two-fibre product of $\\mathcal A\\to\\mathcal D\\leftarrow\\mathcal B$ in the 2-category of $J$-stacks, pullback-compatible functors and natural isomorphisms over the identity of the base.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tags 026G (lemma-2-product-stacks) and 02ZL (lemma-2-product-stacks-in-groupoids); the covering-sieve formulation uses exactly the same gluing argument and requires no fibre products in the base."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-topos"
+ ],
+ "proof": [
+  {
+   "text": "Use the larger universe of [def-weil-size-convention]; all triples and arrow pairs below form sets in it. Complete the description of $\\mathcal Q$ by taking an arrow over $f:T'\\to T$ to be a pair $(s:a'\\to a,t:b'\\to b)$ over $f$ satisfying $v(t)\\alpha'=\\alpha u(s)$. Identities and composition are componentwise: if also $v(t')\\alpha''=\\alpha'u(s')$, then $v(tt')\\alpha''=\\alpha u(ss')$. Thus the equation is preserved by composition. For a vertical arrow its inverse pair satisfies $v(t^{-1})\\alpha=\\alpha'u(s^{-1})$, obtained by multiplying its equation by the inverses. Hence each fibre is a groupoid, and the component projections are functors over $\\mathcal C$.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0040 (lemma-2-product-categories-over-C) and 0041 (lemma-2-product-fibred-categories), explicit arrow construction."
+   }
+  },
+  {
+   "text": "For $q=(a,b,\\alpha)$ over $T$ and $f:T'\\to T$, choose cartesian lifts $r:a_f\\to a$ and $s:b_f\\to b$. Since $u(r)$ and $v(s)$ are cartesian, factor $\\alpha u(r)$ uniquely through $v(s)$ to obtain a vertical $\\alpha_f:u(a_f)\\to v(b_f)$. It is invertible because the fibre of $\\mathcal D$ is a groupoid. Then $(r,s):(a_f,b_f,\\alpha_f)\\to q$ is cartesian: given $(r',s')$ over $fh$, factor its components uniquely as $rr''$ and $ss''$ over $h$; cancelling the cartesian arrow $v(s)$ in $v(s)v(s'')\\alpha'=\\alpha u(r)u(r'')$ gives $v(s'')\\alpha'=\\alpha_f u(r'')$. This proves existence and uniqueness of the factorization in $\\mathcal Q$. Identity and composite pullback comparisons are the unique vertical maps commuting with the lifts, so satisfy their coherence equations by uniqueness. Projections preserve these lifts. The arrow equation makes the components $\\alpha$ a natural isomorphism $u\\operatorname{pr}_1\\cong v\\operatorname{pr}_2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02XQ (lemma-2-product-fibred-categories-over-C), with the omitted cartesian-factorization check supplied."
+   }
+  },
+  {
+   "text": "For $q=(a,b,\\alpha)$ and $q'=(a',b',\\alpha')$ over $T$, an isomorphism after restriction to $W\\to T$ is precisely a pair $(s,t)$ in $\\operatorname{Isom}_{\\mathcal A}(a,a')(W)\\times\\operatorname{Isom}_{\\mathcal B}(b,b')(W)$ with $v(t)\\alpha=\\alpha'u(s)$, using the pullback comparisons of step 2. Given a matching family of such pairs on a covering sieve of $W$, glue $s$ and $t$ uniquely by the two factor sheaf hypotheses and the matching-family definition in [def-weil-pbc-topos]. The two sides of the equation are sections of the sheaf $\\operatorname{Isom}_{\\mathcal D}(u(a),v(b'))$ restricted to $W$; they agree on the covering sieve, hence agree on $W$ by uniqueness in that sheaf. The glued pair therefore lies in $\\operatorname{Isom}_{\\mathcal Q}(q,q')$, and uniqueness follows componentwise. This proves its sheaf condition on every slice without any assumption about fibre products in $\\mathcal C$.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 026G (lemma-2-product-stacks), morphism-presheaf paragraph, expressed directly by matching families."
+   }
+  },
+  {
+   "text": "Let $R\\in J(T)$ and let a descent datum in $\\mathcal Q$ be given on $R$. Write its objects as $q_f=(a_f,b_f,\\alpha_f)$ for $f:W\\to T$ in $R$. For $h:V\\to W$, write its transition vertically as $(s_h,t_h):h^*q_f\\to q_{fh}$. Thus $v(t_h)h^*\\alpha_f=\\alpha_{fh}u(s_h)$. Projecting the identity and composition equations gives descent data in $\\mathcal A$ and $\\mathcal B$. Their effectiveness, assumed in the statement, supplies $a,b$ over $T$ and compatible vertical isomorphisms $e_f:f^*a\\to a_f$, $d_f:f^*b\\to b_f$. Put $\\gamma_f=v(d_f)^{-1}\\alpha_f u(e_f)$, a section over $f$ of $\\operatorname{Isom}_{\\mathcal D}(u(a),v(b))$, using the canonical pullback comparisons of $u,v$. Compatibility says $e_{fh}=s_h h^*e_f$ and $d_{fh}=t_h h^*d_f$, after the unique composite-pullback identifications of step 2. Hence\n$$\\gamma_{fh}=v(h^*d_f)^{-1}v(t_h)^{-1}\\alpha_{fh}u(s_h)u(h^*e_f)=v(h^*d_f)^{-1}h^*\\alpha_f u(h^*e_f)=h^*\\gamma_f.$$\nThis is a matching family on the covering sieve, in the sense of [def-weil-pbc-topos].",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 026G (lemma-2-product-stacks), descent paragraph, with covering-sieve transitions and conjugation written explicitly."
+   }
+  },
+  {
+   "text": "The $\\mathcal D$-sheaf hypothesis and [def-weil-pbc-topos] glue the matching family $\\gamma_f$ uniquely to an isomorphism $\\alpha:u(a)\\to v(b)$. Set $q=(a,b,\\alpha)$. By the formula for $\\gamma_f=f^*\\alpha$, one has $v(d_f)f^*\\alpha=\\alpha_f u(e_f)$, so $(e_f,d_f):f^*q\\to q_f$ is an arrow of $\\mathcal Q$, not merely a pair of arrows in the factors. It is invertible by step 1. Its compatibility with each transition is precisely the two compatibility equations for $e_f,d_f$ used in step 4; equality of pairs is equality of their components. Thus these arrows identify the given descent datum with that of $q$. Together with steps 2 and 3, this proves that $\\mathcal Q$ is a stack in groupoids. The argument also applies to an empty covering sieve: effectiveness in the two factors supplies $a,b$, and the empty matching family has its unique amalgamation in the $\\mathcal D$-isomorphism sheaf.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tags 026G (lemma-2-product-stacks), including its omitted final descent verification, and 02ZL (lemma-2-product-stacks-in-groupoids)."
+   }
+  },
+  {
+   "text": "For any $J$-stack $\\mathcal W$ and pullback-compatible $F:\\mathcal W\\to\\mathcal A$, $G:\\mathcal W\\to\\mathcal B$ with natural isomorphism $\\theta:uF\\cong vG$ over the base, define $H(w)=(F(w),G(w),\\theta_w)$ and $H(k)=(F(k),G(k))$. Naturality of $\\theta$ is exactly the arrow equation, so this is a functor; its identity and composition laws are those of $F,G$. The componentwise cartesian-factorization argument in step 2 shows that pairs of cartesian arrows are cartesian in $\\mathcal Q$; therefore $H$ preserves pullbacks. Conversely, projecting any pullback-compatible $H$ gives $F,G$ and pulling back the tautological isomorphism gives $\\theta$. These constructions recover the object and arrow assignments exactly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0040 (lemma-2-product-categories-over-C), universal functor, restricted to pullback-compatible functors."
+   }
+  },
+  {
+   "text": "Between cone data $(F,G,\\theta)$ and $(F',G',\\theta')$, a morphism is a pair of natural isomorphisms $\\sigma:F\\cong F'$, $\\tau:G\\cong G'$ over the base with $v(\\tau)\\theta=\\theta'u(\\sigma)$. Its components $(\\sigma_w,\\tau_w)$ are exactly the components of a natural isomorphism $H\\cong H'$ in $\\mathcal Q$; naturality follows in each component, and conversely follows by projection. This correspondence is bijective, and respects identities and composition because these are componentwise. Hence the groupoid of functors $\\mathcal W\\to\\mathcal Q$ and base-preserving natural isomorphisms is isomorphic to the groupoid of these cones. Precomposition acts on both descriptions by the same component formulas. This is the required 2-fibre-product universal property in $J$-stacks.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0040 (lemma-2-product-categories-over-C), omitted 2-morphism verification; Tag 02ZL after the stack condition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-topos"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tags 026G (lemma-2-product-stacks) and 02ZL (lemma-2-product-stacks-in-groupoids), with the explicit cartesian and universal-property constructions of categories.tex Tags 0040 and 02XQ; omitted compatibility checks expanded, using covering sieves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stackification|stackify|associatedStack|[Ii]sStack.*[Pp]ullback|[Pp]ullback.*[Ii]sStack",
+   "results": "{\"t\": \"2026-10-23T15:39:19Z\", \"tool\": \"grep\", \"query\": \"stackification|stackify|associatedStack|[Ii]sStack.*[Pp]ullback|[Pp]ullback.*[Ii]sStack\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two fiber product of stacks in groupoids is a stack and stackification preserves it",
+   "results": "{\"t\": \"2026-10-23T15:39:19Z\", \"tool\": \"leansearch\", \"query\": \"The two fiber product of stacks in groupoids is a stack and stackification preserves it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.isGroupoidProd\", \"CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification\", \"FundamentalGroupoidFunctor.preservesProduct\", \"CategoryTheory.groupoidProd\", \"CategoryTheory.GrothendieckTopology.sheafify\", \"CategoryTheory.GrothendieckTopology.sheafifyCompIso\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\"], \"digest\": \"b156614bb0181e79\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T15:39:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStack\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of categories fibered in groupoids commutes with two fiber products",
+   "results": "{\"t\": \"2026-10-23T15:39:20Z\", \"tool\": \"leanfinder\", \"query\": \"Stackification of categories fibered in groupoids commutes with two fiber products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\"], \"digest\": \"bcdff168f0ff7367\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two pullbacks of stacks in groupoids are stacks with effective descent of triples",
+   "results": "{\"t\": \"2026-10-23T15:39:22Z\", \"tool\": \"leanfinder\", \"query\": \"Two pullbacks of stacks in groupoids are stacks with effective descent of triples\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\"], \"digest\": \"232cb6f69fbb3552\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\"",
+   "results": "{\"t\": \"2026-10-23T15:40:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isStackFor_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.IsStackFor.essSurj\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\"], \"digest\": \"b8afc658ce1201e8\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy pullback of groupoid valued pseudofunctors satisfying descent again satisfies descent",
+   "results": "{\"t\": \"2026-10-23T15:40:32Z\", \"tool\": \"leanfinder\", \"query\": \"A homotopy pullback of groupoid valued pseudofunctors satisfying descent again satisfies descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullHom_hom\", \"CategoryTheory.Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_hom\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso\"], \"digest\": \"1b42e2f6b5de3b9b\"}; Read hits: IsStack and descent-data pullFunctor express a stack condition or restriction of descent data. groupoidProd is an ordinary product of categories. Set-valued sheafification left exactness does not construct groupoid stackification or prove descent for a two-fibre product. None states either assertion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sStack|[Hh]omotopy[Pp]ullback|[Ii]so[Cc]omma",
+   "results": "{\"t\": \"2026-10-23T21:12:00Z\", \"tool\": \"grep\", \"query\": \"[Ii]sStack|[Hh]omotopy[Pp]ullback|[Ii]so[Cc]omma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\"], \"digest\": \"6e2e9ec9e9bb54ec\"}; Read the returned hits and Mathlib CategoryTheory/Sites/Descent/IsStack.lean:49-90 and DescentData.lean:511-525. IsStack.of_isStackFor constructs a stack after all descent equivalences have been supplied; it does not supply descent for the triple category. pullFunctor restricts descent data along a base map. Ordinary pullback pasting and morphism-property descent are different assertions. No hit proves this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T21:12:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStack\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits and Mathlib CategoryTheory/Sites/Descent/IsStack.lean:49-90 and DescentData.lean:511-525. IsStack.of_isStackFor constructs a stack after all descent equivalences have been supplied; it does not supply descent for the triple category. pullFunctor restricts descent data along a base map. Ordinary pullback pasting and morphism-property descent are different assertions. No hit proves this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy pullback of groupoid valued stacks satisfies descent and is a two fibre product of stacks",
+   "results": "{\"t\": \"2026-10-23T21:12:01Z\", \"tool\": \"leansearch\", \"query\": \"A homotopy pullback of groupoid valued stacks satisfies descent and is a two fibre product of stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.of_isPullback_of_descendsAlong\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq\", \"CategoryTheory.Limits.pullbackPullbackLeftIsPullback\", \"CategoryTheory.Limits.pullbackPullbackRightIsPullback\", \"CategoryTheory.MorphismProperty.DescendsAlong.of_isPullback\", \"CategoryTheory.IsPullback.of_bot'\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"CategoryTheory.Limits.FormalCoproduct.homPullbackEquiv\"], \"digest\": \"abf3a555541e09af\"}; Read the returned hits and Mathlib CategoryTheory/Sites/Descent/IsStack.lean:49-90 and DescentData.lean:511-525. IsStack.of_isStackFor constructs a stack after all descent equivalences have been supplied; it does not supply descent for the triple category. pullFunctor restricts descent data along a base map. Ordinary pullback pasting and morphism-property descent are different assertions. No hit proves this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two fibre product of stacks in groupoids over a site is a stack with the two categorical universal property",
+   "results": "{\"t\": \"2026-10-23T21:12:01Z\", \"tool\": \"leanfinder\", \"query\": \"The two fibre product of stacks in groupoids over a site is a stack with the two categorical universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\"], \"digest\": \"4b79dc3aa8d6bf60\"}; Read the returned hits and Mathlib CategoryTheory/Sites/Descent/IsStack.lean:49-90 and DescentData.lean:511-525. IsStack.of_isStackFor constructs a stack after all descent equivalences have been supplied; it does not supply descent for the triple category. pullFunctor restricts descent data along a base map. Ordinary pullback pasting and morphism-property descent are different assertions. No hit proves this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo pullback of groupoid valued pseudofunctors satisfying effective descent again satisfies effective descent",
+   "results": "{\"t\": \"2026-10-23T21:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudo pullback of groupoid valued pseudofunctors satisfying effective descent again satisfies effective descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_functor\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\"], \"digest\": \"c360f7bf27435158\"}; Read the returned hits and Mathlib CategoryTheory/Sites/Descent/IsStack.lean:49-90 and DescentData.lean:511-525. IsStack.of_isStackFor constructs a stack after all descent equivalences have been supplied; it does not supply descent for the triple category. pullFunctor restricts descent data along a base map. Ordinary pullback pasting and morphism-property descent are different assertions. No hit proves this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stacks 026G|stacks 02ZL|[Ii]sStack.*[Pp]ullback|[Pp]ullback.*[Ii]sStack|[Ii]so[Cc]omma",
+   "results": "{\"t\": \"2026-10-23T21:13:19Z\", \"tool\": \"grep\", \"query\": \"stacks 026G|stacks 02ZL|[Ii]sStack.*[Pp]ullback|[Pp]ullback.*[Ii]sStack|[Ii]so[Cc]omma\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits and Mathlib CategoryTheory/Sites/Descent/IsStack.lean:49-90 and DescentData.lean:511-525. IsStack.of_isStackFor constructs a stack after all descent equivalences have been supplied; it does not supply descent for the triple category. pullFunctor restricts descent data along a base map. Ordinary pullback pasting and morphism-property descent are different assertions. No hit proves this item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stackification-two-fibre-products",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite: Tag 04Y4 proof, reduction from quotient stacks to test-point groupoids by Tag 04Y2. Supporting input for Tag 04Y1, opening paragraph: the triple category of the three stackifications is a stack (Tags 026G and 02ZL).",
+   "via": [
+    "lem-sfb-stackification-two-fibre-products",
+    "lem-sfb-quotient-map-cartesian-action-groupoid",
+    "lem-sfb-open-subgroupoid-etale-quotient",
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-groupoid-two-fibre-products",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the pair-arrow construction, cartesian lifts and their unique factorization, the matching-pair sheaf condition, and the covering-sieve descent argument including the conjugation equation and omitted final comparison. Verified the universal property on both functors and natural isomorphisms. No new nodes: each step is an explicit few-line consequence of the inline stack/fibration hypotheses and the two cited conventions. Avoided the pretopology-only sheaf-limits node, whose statement assumes base fibre products. Mathlib searches returned stack-condition constructors but no closure under 2-fibre products.",
+  "blueprint": "The inherited creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor reports None). Retain its from.node=null and via. The latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), is the direct-image context; this realizes the inherited alteration/moduli prerequisite via stackification Tag 04Y1 and quotient-stack test groupoids, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-topos",
+    "why": "Generic covering-sieve and matching-family sheaf definitions on an arbitrary small site; needed because no fibre products in the base are assumed."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic universe convention ensuring the triple and arrow-pair constructions remain within the fixed larger universe."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-topos",
+  "def-weil-size-convention"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-499b8ba8f",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-499b8ba8f (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement, stmt_deps and blueprint are identical to the copy created by Q07; there are 0 new nodes and no re-split note, and live and side-live still have the item unsplit. I checked the source in Stacks stacks.tex:722 (026G, full proof) and :1036 (02ZL), and in categories.tex 0040/02XQ/0041, with the tags confirmed in tags/tags. Steps 1-2: the arrow equation is closed under composition and inverses, and the cartesian property of (r,s) follows by cancelling v(s); recomputed. Step 3: the Isom sheaf is the fibre product of the A and B Isom sheaves over the D Isom sheaf, glued componentwise with the equation tested by uniqueness in the D Isom sheaf. Steps 4-5: γ_f=v(d_f)^{-1}α_f u(e_f) forms a matching family; I recomputed γ_{fh}=h*γ_f. The glued α makes (e_f,d_f) a Q-arrow, which supplies the check 026G omits, and the empty sieve is handled. Steps 6-7: the 2-universal property is shown as an isomorphism of groupoids. The cited def-weil-size-convention and def-weil-pbc-topos say what is used; the tool_uses are accepted. Small cases checked: terminal site, D terminal, identities, empty factor. No duplicates: lem-sfb-algebraic-stack-fibre-products, representable-fibred-category-stack and groupoid-diagonal-two-pullback-identities state different results. No SGA, no route change."
+ }
+}

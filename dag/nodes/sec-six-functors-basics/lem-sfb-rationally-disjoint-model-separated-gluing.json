@@ -1,0 +1,405 @@
+{
+ "id": "lem-sfb-rationally-disjoint-model-separated-gluing",
+ "kind": "statement",
+ "title": "Shrinking inequivalent smooth models to glue them separatedly",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $E$, residue field $k$, and $T=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Products and fibres are scheme-theoretic base changes [def-pc-base-change]. Smooth and finite type have the meanings of [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Write $R^{\\mathrm{sh}}$ for a strict henselization at a geometric closed point and $E^{\\mathrm{sh}}=\\operatorname{Frac}(R^{\\mathrm{sh}})$ [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. An open in a scheme over a trait is base-dense if it is dense in each fibre. A rational map over that trait is a morphism on a base-dense open, modulo agreement on a base-dense common open; its domain of definition is the union of all representative domains. A birational map over the trait is an isomorphism between base-dense opens. For a smooth separated finite-type $E$-scheme $X$, a smooth model means a smooth separated finite-type $T$-scheme $M$ with a specified identification $M_E\\simeq X$. Let $X/E$ be a nonempty smooth separated finite-type scheme, and let $M_1,\\ldots,M_r$, $r\\geq1$, be smooth models of $X$ with nonempty irreducible special fibres. Suppose that for distinct $i,j$ there is no $T$-rational map $M_i\\dashrightarrow M_j$ inducing the identity of $X$ (and likewise with $i,j$ interchanged). Then there are opens $V_i\\subseteq M_i$, containing the entire generic fibre and the generic point of $(M_i)_k$, such that for $i\\ne j$ the diagonal copy of $X$ is closed in $V_i\\times_TV_j$. Gluing these $V_i$ along their identified generic fibres gives a smooth separated finite-type $T$-scheme $Y$ with $Y_E\\simeq X$ and $Y_k=\\coprod_i(V_i)_k$. Each $V_i\\to Y$ is an open immersion and the $V_i$ cover $Y$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "4.3 Proposition 4, first two proof paragraphs, printed pp.106-107 (PDF pp.112-113): schematic closures of cross diagonals, shrinking their nowhere-dense special images, and gluing. Primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sc-generic-point",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The DVR $R$ is Noetherian since its ideals are principal. Its primes are $(0)$ and $(\\pi)$, and its localizations are the field $E$ and $R$; its dimension is one, so $R$ is regular. By [lem-weil-pbc-regular-local-localization] it is a regular ring. Using the smooth-ring-map description in [def-sbc-smooth-morphisms], [lem-weil-pbc-regular-ring-smooth-ascent] makes every smooth affine chart of each $M_i$ regular. By [lem-weil-pbc-regular-ring-normal] their local rings are domains, so each $M_i$ is reduced. By [lem-weil-pbc-finite-type-over-noetherian] the $M_i$ and their products over $T$ are Noetherian; the product maps are of finite type by [lem-sfb-finite-type-composition-base-change]. Each has finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components]. By [lem-pc-smooth-flat] each $M_i/T$ is flat and locally finitely presented. No connectedness or irreducibility of the entire generic fibre is asserted.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-dimension-one",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-localization",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 0AFS (lemma-localization-of-regular-local-is-regular), 07NF (lemma-regular-goes-up), 0567 (lemma-regular-normal); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Write $\\xi_i$ for the generic point of $(M_i)_k$. This special fibre is reduced by [sbc-lem-smooth-geometrically-reduced], and is nonempty and irreducible by hypothesis, hence integral. Its local ring at $\\xi_i$ is a field by [lem-sc-integral-scheme-stalks-in-function-field]. For $A_i=\\mathcal O_{M_i,\\xi_i}$, [lem-sbc-scheme-fibre-stalk-quotient] identifies $A_i/\\pi A_i$ with that field. Thus the maximal ideal of $A_i$ is $(\\pi)$. The local flatness of $M_i/T$, with [lem-trf-flat-module-torsionfree-domain], makes multiplication by $\\pi$ injective, so $\\pi\\ne0$ in $A_i$. Step 1 makes $A_i$ a Noetherian local domain. The principal-maximal-ideal characterization in [def-sc-discrete-valuation-ring] now proves that $A_i$ is a DVR with uniformizer $\\pi$.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "def-weil-flat-morphism",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), principal nonzero maximal ideal criterion; schemes.tex fibre stalk quotient; BLR 4.3 Proposition 4, printed p.106, local ring at the special generic point."
+   }
+  },
+  {
+   "text": "Fix $i\\ne j$. In $P_{ij}=M_i\\times_T M_j$, let $\\Gamma_{ij}$ be the scheme-theoretic image of $\\delta_{ij}:X\\longrightarrow P_{ij}$, the two generic-fibre identifications on its projections. The generic fibre of $P_{ij}$ is open (it is $D(\\pi)$), and $\\delta_{ij}$ is a closed immersion into that open because $X/E$ is separated. This map is quasi-compact and quasi-separated: locally its source is a closed subscheme of an open in the Noetherian target; the open immersion is quasi-compact by [lem-sfb-noetherian-open-immersion-qc]. By [lem-trf-reduced-scheme-image], $\\Gamma_{ij}$ is reduced with support the closure of the diagonal. By [lemma-nagata-scheme-image-restrict-open], its restriction to the generic fibre is exactly $\\delta_{ij}(X)$. Its projections $p_i:\\Gamma_{ij}\\to M_i$, $p_j:\\Gamma_{ij}\\to M_j$ are finite type: their closed inclusion is finite type by [lem-weil-pbc-closed-immersion-proper], and product projection and composition preserve finite type. Both generic projections are the specified isomorphisms with $X$.",
+   "uses": [
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-trf-reduced-scheme-image",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced), Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image); BLR 4.3 Proposition 4, printed p.106, schematic closure of the cross diagonal."
+   }
+  },
+  {
+   "text": "Suppose $y\\in\\Gamma_{ij}$ satisfies $p_i(y)=\\xi_i$. By [lem-sfb-noetherian-injective-germ-neighbourhood], choose an affine neighbourhood $U$ of $\\xi_i$ in $M_i$ whose coordinate ring embeds into $A_i$. It is a domain, so $U$ is integral by [lem-weil-pbc-spec-domain-stalks-function-field]. Its open $U_E$ is nonempty: $\\pi$ is nonzero in this domain. Restricting the scheme-theoretic image to $U\\times_T M_j$, by [lemma-nagata-scheme-image-restrict-open], identifies $p_i^{-1}(U)$ with the reduced closure of the graph on $U_E$. Since $U_E$ is integral, this closure is irreducible and reduced, hence integral. The open graph on $U_E$ has the same function field as $U$, and $p_i$ induces the identity of these fields. By [lem-sc-integral-scheme-stalks-in-function-field], the local map $A_i\\to B=\\mathcal O_{\\Gamma_{ij},y}$ therefore embeds both into the same field $L=\\operatorname{Frac}(A_i)$, as subrings, and the inclusion is local. This argument uses only an integral neighbourhood of $\\xi_i$; other generic components of $X$ cause no difficulty.",
+   "uses": [
+    "lem-sfb-noetherian-injective-germ-neighbourhood",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lem-trf-reduced-scheme-image",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BX3 (lemma-ring-affine-open-injective-local-ring), case (2); morphisms.tex Tag 056B; BLR 4.3 Proposition 4, printed p.106, comparison of the two local rings."
+   }
+  },
+  {
+   "text": "In Step 4 the inclusion $A_i\\subseteq B\\subseteq L$ is equality. Indeed each nonzero $b\\in L$ has the form $u\\pi^m$ with $u\\in A_i^\\times$ and $m\\in\\mathbf Z$. If $b\\in B$ had $m<0$, then $u^{-1}b\\pi^{-m-1}=\\pi^{-1}\\in B$, contradicting that the local map sends $\\pi\\in\\mathfrak m_{A_i}$ into $\\mathfrak m_B$. Thus every element of $B$ lies in $A_i$. Apply [lem-trf-finite-type-stalk-isomorphism-open-neighbourhood] to $p_i$: its target $M_i$ is reduced with finitely many irreducible components by Step 1, and it is finite type by Step 3. There is an open $W$ of $y$ on which $p_i$ is an open immersion onto an open $U'$ containing $\\xi_i$. The map $p_j\\circ(p_i|_W)^{-1}:U'\\to M_j$ agrees with the generic identity wherever defined. Glue it with the identity $X=(M_i)_E\\to(M_j)_E$ by [lem-weil-pbc-scheme-morphism-gluing]. The resulting domain $U'\\cup(M_i)_E$ is base-dense, since it contains the entire generic fibre and $\\xi_i$. This is a forbidden $T$-rational identity map. Hence $\\xi_i\\notin p_i(|(\\Gamma_{ij})_k|)$. The same argument for the reversed ordered pair excludes $\\xi_j$ from the other projected image.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, valuation description of a DVR; varieties.tex Tag 09NH (lemma-local-isomorphism); BLR 4.3 Proposition 4, printed pp.106-107, contradiction from a rational identity map."
+   }
+  },
+  {
+   "text": "Put $C_{ij}=p_i(|(\\Gamma_{ij})_k|)\\subseteq |(M_i)_k|$. The fibre map $(\\Gamma_{ij})_k\\to(M_i)_k$ is finite type by [lem-sfb-finite-type-composition-base-change]. Its target is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and its local finite-type hypothesis therefore gives local finite presentation by [pqf-lem-lft-fp-locnoeth]. Its target is qcqs by [lem-weil-pbc-qcqs-over-affine], since it is separated finite type over $k$ (its diagonal is the base change of that of $M_i/T$). Chevalley's theorem [lem-weil-pbc-chevalley-constructible-image] applied to the whole source makes $C_{ij}$ constructible. Step 5 says that it omits the generic point $\\xi_i$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-chevalley-constructible-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054J (lemma-chevalley), Tag 01T6 (lemma-finite-type-noetherian), Tag 01TU (lemma-locally-finite-type-finite-presentation); BLR 4.3 Proposition 4, printed p.106, nowhere dense special images."
+   }
+  },
+  {
+   "text": "The closure $F_{ij}=\\overline{C_{ij}}$ inside $(M_i)_k$ is proper. To see this directly, write $C_{ij}$ as a finite union of locally closed sets $O_a\\cap Z_a$ with $O_a$ open and $Z_a$ closed, using [def-weil-constructible-subset]. If its closure were the irreducible space $(M_i)_k$, one of these finitely many pieces would have full closure. Then $Z_a=(M_i)_k$ and $O_a$ is nonempty, so that piece contains $\\xi_i$, contrary to Step 5. Since the special fibre is closed in $M_i$, each $F_{ij}$ is closed in $M_i$. Set\n$$V_i=M_i\\setminus\\bigcup_{j\\ne i}F_{ij}.$$\nThe union is finite and omits $\\xi_i$; the $V_i$ contain their special generic points and the entire generic fibre. For $r=1$ the union is empty and $V_1=M_1$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology Tags 005G (definition-constructible), 005L (lemma-constructible-noetherian); elementary finite-union argument in BLR 4.3 Proposition 4, printed p.106."
+   }
+  },
+  {
+   "text": "For $i\\ne j$, restrict the closed subscheme $\\Gamma_{ij}\\subseteq M_i\\times_T M_j$ to $V_i\\times_T V_j$. Its special fibre is empty: a special point would project into $C_{ij}$ and also into $V_i$, whereas $C_{ij}\\subseteq F_{ij}$ was removed. Consequently this restricted scheme factors through the open generic fibre of the product: an open restriction whose inverse-image complement has no points is the entire scheme. There it is exactly the diagonal copy of $X$ by Step 3. Thus the morphism $X\\to V_i\\times_T V_j$ is a closed immersion, not merely a map with closed point image: it is the restriction of the closed immersion of $\\Gamma_{ij}$, as guaranteed by [lem-weil-pbc-closed-immersion-base-change]. This supplies the asserted scheme structure on the cross diagonal.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 4.3 Proposition 4, printed p.106, condition (*); Stacks schemes.tex Tag 01JU (lemma-base-change-immersion), closed-immersion case."
+   }
+  },
+  {
+   "text": "Use gluing data with charts $V_i$, overlap $V_i$ for equal indices, and overlap $X$ for distinct indices, with all transition maps induced by the specified identifications $(V_i)_E\\simeq X$. The inverse and cocycle identities hold because each transition is the identity in the common $X$ coordinates. By [lem-weil-pbc-glue-schemes] these data give a scheme $Y$ covered by open immersions $V_i\\to Y$ whose distinct intersections are exactly $X$. The maps $V_i\\to T$ agree on those intersections, so [lem-weil-pbc-scheme-morphism-gluing] gives $Y\\to T$. Its generic fibre is the gluing of copies of $X$ by their entire identity overlaps, hence is $X$; its special fibre has disjoint open charts $(V_i)_k$ and is their coproduct. This proves all claimed chart and fibre identifications.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes); BLR 4.3 Proposition 4, printed p.107, gluing all models along their generic fibres."
+   }
+  },
+  {
+   "text": "Restricting the smooth charts of $M_i/T$ to $V_i$ gives smooth charts there, directly from the affine-local definition [def-sbc-smooth-morphisms]. The covering $Y=\\bigcup_i V_i$ and [lem-weil-pbc-smooth-local-on-source] imply that $Y/T$ is smooth. Each $V_i$ is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Restricting the finite-type affine charts of $M_i$ to $V_i$, then using quasi-compactness to choose a finite subcover, gives a finite cover of $V_i$ by finite-type affine $R$-schemes [def-weil-finite-type-morphism]. There are finitely many $i$, so their combined finite affine cover proves $Y/T$ finite type by that same definition.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6 (lemma-smooth-characterize), Tag 01T0 (section-finite-type); properties.tex Tags 01OW and 01OZ, Noetherian open subspaces."
+   }
+  },
+  {
+   "text": "The products $V_i\\times_T V_j$ cover $Y\\times_T Y$. On an unmixed product the diagonal is the diagonal of $V_i/T$, a closed immersion because it is the restriction of the diagonal of $M_i/T$ by [lem-weil-pbc-closed-immersion-base-change]. On a mixed product its inverse image is the overlap $X$, and the diagonal is the closed immersion of Step 8. These local closed immersions imply that the whole diagonal is a closed immersion: its image has closed intersection with every open product in this cover, hence is closed; the local homeomorphisms onto that image glue to a homeomorphism, and surjectivity of the structure-sheaf map holds on the cover, hence globally. These are precisely the two conditions of [def-weil-closed-immersion]. Therefore $Y/T$ is separated. The separation check uses both diagonal and mixed products, and so also applies when $r=1$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KK (definition-separated); the cover argument behind Tag 01KP (lemma-characterize-separated); BLR 4.3 Proposition 4, printed p.107, separatedness from (*)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-dimension-one",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-localization",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-pc-smooth-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "def-weil-flat-morphism",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-trf-reduced-scheme-image",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-noetherian-injective-germ-neighbourhood",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "def-weil-constructible-subset",
+  "def-sc-generic-point",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Independent elaboration of BLR 4.3 Proposition 4, printed pp.106-107 (PDF pp.112-113), cross-diagonal closure and shrinking argument. Primary scan read online; local PDF WANTED. Stacks lemmas supply the explicit algebraic and gluing steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite smooth models over a discrete valuation ring with no rational identity maps between distinct models can be shrunk in the special fibres and glued along their generic fibre to a separated scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 →\\n          [Small.{u, u_1} 𝒰.I₀] → [Quiver.IsThin 𝒰.I₀] → Alg\", \"doc\": \"Given a scheme $ S $ with an open cover $ \\\\mathcal{U} $, where the zeroth component $ \\\\mathcal{U}_0 $ forms a small, thin category equipped with a locally directed structure, this is the colimit of th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.ValuativeCriterion.Uniqueness f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is separated, then for any valuative commutative square involving $ f $, the lifting data is uniquely determined, i.e., any two compatible lifts in such diagram\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing separated models along the generic fibre is separated when the cross diagonal is closed after shrinking the special fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam →\\n    AlgebraicGeometry.IsSeparated f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is separated if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsClosedImmersion (pullback.lift (𝟙 _) f (Category.id_comp (f ≫ g)))\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"GlueData\", \"Separated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*[Ss]eparated|[Ss]eparated.*glue|diagonal.*closure",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary rational maps, gluing, local smooth presentations, analytic Haar characters or Weierstrass models; none supplies this statement about smooth trait models and fibrewise rational maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shrink finitely many smooth models over a discrete valuation ring and glue their generic fibres to a separated scheme when no fibrewise rational identity map exists",
+   "results": "AlgebraicGeometry.IsSeparated.of_valuativeCriterion; IsSeparated.valuativeCriterion; Scheme.IsSeparated; Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver; IsSeparated.hasAffineProperty. These concern separatedness or ordinary rational maps and do not assert shrinking of trait models.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*separated|separated.*glue|cross.*diagonal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Models of the same generic fibre over a trait can be glued separatedly after deleting special closed subsets",
+   "results": "AlgebraicGeometry.Scheme.GlueData; Scheme.GlueData.mk; Scheme.Cover.instIsIsoFromGlued; IsSeparated.instMorphismRestrict; several LocallyRingedSpace.GlueData constructors. Gluing exists, but none supplies the cross-diagonal shrinking.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.IsSeparated",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-group-translation-model",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting geometric tool for the finite minimal-model gluing in lem-sfb-bounded-group-translation-model, proof step 1; BLR 4.3 Proposition 4, printed pp.106-107, first two proof paragraphs. The inherited created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); the enclosing current blueprint unit sk-thm-sf-ctf-stability uses constructible direct-image preservation, not a new route at unit level.",
+   "via": [
+    "lem-sfb-bounded-group-translation-model",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rationally-disjoint-model-separated-gluing",
+  "worker": "stage1",
+  "group": "Q155",
+  "summary": "Proved the cross-diagonal shrinking construction in eleven explicit steps, using existing DAG tools only. Compared each cited statement with its use, handled nonintegral global models by an integral neighbourhood of each special generic point, checked scheme-theoretic closedness and finite-type gluing. The statement is unchanged; removed only the unused group-scheme statement dependency. No new nodes or attachments.",
+  "blueprint": "BLR 4.3 Proposition 4, first two proof paragraphs, as the supporting gluing tool of lem-sfb-bounded-group-translation-model step 1. Whole-blueprint searches for glue, gluing, discrete valuation, rational model, and 09NH yielded no duplicate of the item; the nearest imported ancestor is null in the inherited chain. Read latest sk-thm-sf-ctf-stability statement and proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic A localization of a regular local ring at a prime is a regular local ring tool used only for its stated local algebra, image, or gluing property; it implements the BLR cross-diagonal argument inside this item, and does not replace a step of the enclosing six-functor unit."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic Smooth morphisms tool used only for its stated local algebra, image, or gluing property; it implements the BLR cross-diagonal argument inside this item, and does not replace a step of the enclosing six-functor unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic Regularity ascends along smooth ring maps tool used only for its stated local algebra, image, or gluing property; it implements the BLR cross-diagonal argument inside this item, and does not replace a step of the enclosing six-functor unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic A regular ring is normal tool used only for its stated local algebra, image, or gluing property; it implements the BLR cross-diagonal argument inside this item, and does not replace a step of the enclosing six-functor unit."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic The local ring of a scheme-theoretic fibre is a quotient of the local ring tool used only for its stated local algebra, image, or gluing property; it implements the BLR cross-diagonal argument inside this item, and does not replace a step of the enclosing six-functor unit."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic Scheme theoretic image of a reduced scheme tool used only for its stated local algebra, image, or gluing property; it implements the BLR cross-diagonal argument inside this item, and does not replace a step of the enclosing six-functor unit."
+   },
+   {
+    "node": "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood",
+    "why": "Generic A finite-type stalk isomorphism over a reduced finite-component target spreads to an open immersion tool used only for its stated local algebra, image, or gluing property; it implements the BLR cross-diagonal argument inside this item, and does not replace a step of the enclosing six-functor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-localization",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-trf-reduced-scheme-image",
+  "lem-trf-finite-type-stalk-isomorphism-open-neighbourhood"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-33da11255",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-33da11255 (reviewer sub-agent of L); spot-checked: I read the whole item: all 11 steps and the full statement of every cited node. This is a first split of a Q54-created unsplit node. The statement is byte-identical to the Q54 snapshot. Only stmt_deps changed: unused def-sc-group-scheme removed, generic-point and open-immersion added. There are no new nodes, and the 421-node proof closure contains no cycle. BLR 4.3 Prop 4 is not in literature/. The Q54 maintainer read pp.106-107 and matched the statement; this proof follows BLR's cross-diagonal domination argument, with the forbidden rational map taking the place of minimality. I checked Stacks 09NH (varieties.tex:8913): its hypotheses match the lem-trf node exactly. Checks by step. Steps 1-2: A_i is a DVR via 0HA1, flat torsion-freeness and 00PD. Steps 3-4: Gamma is reduced (056B) and restricts to delta(X) on the generic fibre (restrict-open lemma); the integral neighbourhood from 0BX3 gives a local inclusion A_i in B inside Frac A_i. Step 5: domination forces B=A_i; 09NH plus morphism gluing then gives a base-dense rational identity map, which is a contradiction. Step 6: all hypotheses of the Chevalley node hold. Step 7: a constructible set omitting the generic point has proper closure; this is elementary. Step 8: the closed immersion X into V_i x V_j follows by base change along the open. Steps 9-11: the glue data and cocycle are correct, smoothness and finite type follow from qc Noetherian opens, and separatedness from local closed immersions on the product cover. Edge cases checked: r=1, disconnected X, empty C_ij, any DVR. Quasi-separatedness of delta in Step 3 is left implicit but is elementary. Batch-5: lem-trf-flat-module-torsionfree-domain (0539), lem-trf-reduced-scheme-image (056B) and lem-trf-finite-type-stalk-isomorphism-open-neighbourhood (09NH) are general algebra and scheme tools of unit sk-i-curve-zero. Their closures reach no sec-trace-formula or sec-poincare-duality node, and they are not steps of either assumed proof, so they are kept. I accepted the 7 declared tool_uses as generic tools. No duplicate exists in the DAG. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationallyDisjointModelSeparatedGluing",
+  "declaration": "AlgebraicGeometry.exists_separated_gluing_of_rationally_disjoint_models",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationallyDisjointModelSeparatedGluing.lean",
+  "statement": "theorem exists_separated_gluing_of_rationally_disjoint_models (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (π : R) (_hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (E : Type u) [Field E] [Algebra R E] [IsFractionRing R E] (X : Scheme.{u}) (x : X ⟶ Spec (.of E)) [Nonempty X] [Smooth x] [IsSeparated x] [LocallyOfFiniteType x] [QuasiCompact x] (r : ℕ) (_hr : 0 < r) (M : Fin r → Scheme.{u}) (m : ∀ i, M i ⟶ Spec (.of R)) [∀ i, Smooth (m i)] [∀ i, IsSeparated (m i)] [∀ i, LocallyOfFiniteType (m i)] [∀ i, QuasiCompact (m i)] (g : ∀ i, X ⟶ M i) (hg : ∀ i, IsPullback (g i) x (m i) (Spec.map (CommRingCat.ofHom (algebraMap R E)))) (h_irred : ∀ i, IrreducibleSpace ((m i).fiber (IsLocalRing.closedPoint R))) (h_disjoint : ∀ (i j : Fin r), i ≠ j → ¬ ∃ (U : (M i).Opens) (f : U.toScheme ⟶ M j) (s : X ⟶ U.toScheme), (∀ t : Spec (.of R), Dense ((m i).fiberι t ⁻¹' (U : Set (M i)))) ∧ f ≫ m j = U.ι ≫ m i ∧ s ≫ U.ι = g i ∧ s ≫ f = g j) : ∃ (V : ∀ i, (M i).Opens) (a : ∀ i, X ⟶ (V i).toScheme), (∀ i, a i ≫ (V i).ι = g i) ∧ (∀ (i : Fin r) (ξ : (m i).fiber (IsLocalRing.closedPoint R)), IsGenericPoint ((m i).fiberι _ ξ) (Set.range ((m i).fiberι (IsLocalRing.closedPoint R))) → (m i).fiberι _ ξ ∈ V i) ∧ (∀ (i j : Fin r), i ≠ j → ∃ d : X ⟶ pullback ((V i).ι ≫ m i) ((V j).ι ≫ m j), d ≫ pullback.fst _ _ = a i ∧ d ≫ pullback.snd _ _ = a j ∧ IsClosedImmersion d) ∧ ∃ (Y : Scheme.{u}) (y : Y ⟶ Spec (.of R)) (c : ∀ i, (V i).toScheme ⟶ Y) (w : X ⟶ Y), Smooth y ∧ IsSeparated y ∧ LocallyOfFiniteType y ∧ QuasiCompact y ∧ (∀ i, IsOpenImmersion (c i)) ∧ (∀ i, c i ≫ y = (V i).ι ≫ m i) ∧ (∀ i, a i ≫ c i = w) ∧ (∀ p : Y, ∃ (i : Fin r) (q : (V i).toScheme), c i q = p) ∧ IsPullback w x y (Spec.map (CommRingCat.ofHom (algebraMap R E))) ∧ (∀ (i j : Fin r), i ≠ j → IsPullback (a i) (a j) (c i) (c j)) ∧ ∃ z : ∀ i, ((V i).ι ≫ m i).fiber (IsLocalRing.closedPoint R) ⟶ y.fiber (IsLocalRing.closedPoint R), (∀ i, z i ≫ y.fiberι _ = ((V i).ι ≫ m i).fiberι _ ≫ c i) ∧ Nonempty (IsColimit (Cofan.mk (y.fiber (IsLocalRing.closedPoint R)) z))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Rational-identity nonexistence is expanded using representatives on fibrewise dense opens containing the generic fibre; any representative inducing the generic identity normalizes to this form by gluing with that identity. Generic fibres and mixed chart intersections are cartesian squares. The special-fibre equality is a coproduct universal property with canonical chart maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c3a32861",
+  "group": "NY",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; lean.statement verbatim in file; all 11 stmt_dep records present (Smooth is the current Mathlib class). Clause by clause: DVR, uniformizer (maximalIdeal = span{π}), fraction field, Spec R; X nonempty smooth separated finite type over E; r>0 models with cartesian generic identification hg; IrreducibleSpace special fibres (includes Nonempty); h_disjoint over ordered i≠j with fibrewise-dense opens containing X, equivalent to the node's rational-identity condition (X reduced, M_j separated, glue with the generic identity). Conclusions: V_i contains the generic fibre and the special generic point; the cross diagonal is a closed immersion (node step 8; equivalent to closed image since X→V_i×V_j is an immersion); Y smooth separated finite type, open-immersion cover over T, Y_E≅X cartesian, mixed chart intersections = X, Y_k = coproduct cofan with uniquely pinned legs. Edge cases r=1, disconnected X, universe u all fine. Docstrings carry source, blueprint id and all 11 steps; proof sorry only; no defs; imports per brief §114; lines ≤100. No compile: no file changed. Parallel note: Q129 b2fefbca delivered the same file and declaration with an equivalent statement (S2 PASS, not landed): only one may land; the second must not rebind the lean record."
+ }
+}

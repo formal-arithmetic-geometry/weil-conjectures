@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-positive-finite-localization-construction",
+ "kind": "statement",
+ "title": "Supported localization at one positive finite coefficient level",
+ "statement": "Fix a field k, a prime l invertible in k, a finite extension E/Q_l, a separated finite-type k-scheme X with structure morphism t, and complementary closed/open immersions i:Z→X and j:U→X. Using [def-sf-localization-stage-data], for each natural number n there is a record SfFiniteLocalization l E n k i j. This asserts only exponent n+1 finite operations, their intrinsic comparison isomorphisms and units, supported triangle with unique natural boundary, orthogonality and exceptional-open vanishing, exceptional unit, and the conditional quantitative finite Tor bounds with N=2d+c. There is no integral operation, inverse limit, reduction compatibility, rational stage or common coefficient stage in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite parts of (1)--(4), Finite Tor amplitude (1')--(4')."
+ },
+ "stmt_deps": [
+  "def-sf-localization-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-finite-kernel-constructible-localization] at exponent n+1. Use its constructibility clauses to lift the five ambient functors to the full intrinsic constructible categories. Restrict all three adjunctions along their fully faithful inclusions. Their units are the ambient units after the four operation comparison isomorphisms.",
+   "uses": [
+    "lem-sf-finite-kernel-constructible-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the supported distinguished triangles to the restricted functors. Shifted closed-to-open orthogonality forces the connecting arrow to be unique; applying the triangle extension axiom to a morphism and the same orthogonality proves naturality. The adjunction Hom bijection and orthogonality kill exceptional after open image. Full faithfulness of closed image makes the exceptional unit invertible.",
+   "uses": [
+    "lem-sf-finite-kernel-constructible-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the bounded-below torsion site-comparison unit [thm-weil-pbc-site-comparison] on the constructible etale origins to transport the etale exceptional Hom bijection to the intrinsic constructible category. Its left adjoint is the same closed direct image. Uniqueness of right adjoints therefore identifies the restricted kernel functor with the specified sfFiniteExceptional, normalized by the exceptional counit. This reproduces the argument of [lem-sf-finite-exceptional-site-normalization] over k; the latter finite-field theorem itself is not applied as if it allowed arbitrary k.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-finite-exceptional-site-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The monoidal exact immersion pullbacks preserve the residue tensor and its interval. Closed image has zero open restriction, and its residue tensor is detected by closed pullback and the invertible closed counit. These are the assertions of [lem-sf-immersion-residue-tor-intervals], transported from the fixed-module presentation to the intrinsic constant-ring presentation. Its coefficient-field universe must be bridged explicitly: identify the lifted quotient rings and residue modules by the lift equivalence and transport the exact pullback and tensor comparisons along the canonical realization. This yields the three unchanged intrinsic intervals without assuming the published lemma directly has E:Type u.",
+   "uses": [
+    "lem-sf-immersion-residue-tor-intervals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a supplied finite torsion cohomological dimension c and dimension d of U (d=0 when U is empty), [lem-sf-open-general-field-uniform-bound] gives the coefficient-independent bound N=2d+c. Apply the residue projection-formula bound [lem-sf-proetale-open-residue-tor-bound] through the intrinsic coefficient realization to obtain the open interval [a,b+N]. Inversely rotate the supported triangle and apply the exact homology sequence after residue tensor: the closed image of the exceptional value is in [a,b+N+1]. Closed pullback and its counit give the same exceptional interval, as in the finite argument of [lem-sf-supported-tor-reduction-propagation]. Choose intervals for each input to deduce all five finite-Tor preservation clauses, and assemble the record. Zero inputs and empty pieces obey the same proof.",
+   "uses": [
+    "lem-sf-open-general-field-uniform-bound",
+    "lem-sf-proetale-open-residue-tor-bound",
+    "lem-sf-supported-tor-reduction-propagation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-kernel-constructible-localization",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-finite-exceptional-site-normalization",
+  "lem-sf-immersion-residue-tor-intervals",
+  "lem-sf-open-general-field-uniform-bound",
+  "lem-sf-proetale-open-residue-tor-bound",
+  "lem-sf-supported-tor-reduction-propagation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite parts of (1)--(4), Finite Tor amplitude (1')--(4')."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Construct a supported localization triangle from adjunctions closed open recollement and prove uniqueness of the boundary",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Adjunction.IsTriangulated.mk''; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Adjunction.isTriangulated_leftAdjoint; CategoryTheory.Adjunction.isTriangulated_rightAdjoint",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "SfFiniteLocalization|SfIntegralLocalization|HasProEtaleTorAmplitude.*iso",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude is invariant under isomorphism and uniform bounds on all derived reductions imply integral finite Tor amplitude",
+   "results": "RingHom.Flat.respectsIso; CategoryTheory.hasProjectiveDimensionLT_of_iso; CategoryTheory.Triangulated.TStructure.isLE_of_iso; RingHom.finite_respectsIso; RingHom.isIntegral_respectsIso; CategoryTheory.hasInjectiveDimensionLT_of_iso; RingHom.finitePresentation_respectsIso; RingHom.finiteType_respectsIso",
+   "date": "2026-10-25",
+   "verdict": "The results do not construct normalized finite or integral supported localization on the specified intrinsic categories. Generic categorical tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Y2",
+  "item": "Sheaf.Paper.SfIntegralLocalizationConstruction",
+  "date": "2026-10-25"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Finite parts of (1)--(4), Finite Tor amplitude (1')--(4').",
+   "via": [
+    "lem-sf-integral-localization-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfPositiveFiniteLocalizationConstruction",
+  "file": "lean/Sheaf/Paper/SfPositiveFiniteLocalizationConstruction.lean",
+  "declaration": "WeilConjectures.sfPositiveFiniteLocalizationConstruction",
+  "declarations": [
+   "WeilConjectures.sfPositiveFiniteLocalizationConstruction"
+  ],
+  "statement": "theorem sfPositiveFiniteLocalizationConstruction (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (t : X ⟶ Spec (.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range j = (Set.range i)ᶜ) (n : ℕ) : Nonempty (SfFiniteLocalization l E n k i j)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T164813-L-1086400",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T164813-L-1086400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Localization (099R), comparison (099Y, 099V, 09AL); constant-coefficient module sheafification, sites-modules.tex Tags 03CY and 093J."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G7",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL and 09B1: finite-model heart descent, bounded truncation devissage and reflection of constant models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite ring locally perfect derived descent to the etale site",
+   "results": "8 unrelated etale ring declarations; no derived origin theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the project finite-model heart descent and bounded etale-origin API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf",
+   "results": "12 constant-sheaf primitives; none supplies bounded derived origin.",
+   "date": "2026-10-27",
+   "verdict": "Use the exact constant and comparison functor APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*perfect|perfect.*stalk",
+   "results": "One Mathlib hit about a PerfectField instance at a smooth stalk; no derived descent.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicEtaleLevelDescent",
+  "date": "2026-10-27",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-etale-level-descent",
+   "place": "Single finite-level descent, coefficient-coordinate and bounded-origin steps",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-etale-stalk-data",
+    "lem-weil-pbc-finite-perfect-adic-stalk-models",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-finite-perfect-chart-etale-origin",
+ "title": "Etale origin and reflection of perfect local models",
+ "statement": "Let X be any scheme, B a finite commutative ring in the scheme universe, R a commutative ring sheaf on X_proet and psi:constant(B)->R an isomorphism. Fix an R-derived complex K, an X-etale chart V and a<=b. Suppose a covering etale sieve on V supplies actual ringed-slice isomorphisms of K with constant finite-projective complexes supported in [a,b], using [def-weil-pbc-finite-perfect-adic-tower-data, def-weil-pbc-ringed-derived-restriction]. Then there exists an etale derived ULift(B)-module sheaf L on V.left such that, for every W->V and every small algebraic derived B-complex F, a constant-model isomorphism for L pulled back to W.left exists if and only if the corresponding actual ringed-slice constant-model isomorphism for K exists. This does not assert perfectness or choose a geometric fibre.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-finite-perfect-adic-etale-level-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose one model-cover member through each point of V.left. Pullback composition gives coherence of the fixed-coordinate chart functors. The derived slice-coordinate equivalence converts each actual constant model to a constant model of the fixed-coordinate restriction J on V.left.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-slice-derived-coordinates",
+    "def-weil-pbc-finite-coefficient-slice-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact cohomology comparison identifies local cohomology with constants of the lifted homology of the supplied perfect complex. Finite B is Noetherian, so this homology is finite. Coverwise detection proves vanishing outside [a,b]. Finite constant heart models give etale origins of all cohomology sheaves, and bounded truncation devissage produces a bounded-below etale L marked by comparisonUpperStar(L)~=J.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-sf-proetale-origin-from-finite-models",
+    "lem-weil-pbc-bounded-heart-etale-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Comparison/pullback and comparison/constant natural isomorphisms identify constant models on each chart. The forward direction maps the supplied isomorphism and uses the coordinate equivalence. For the reverse direction, comparison reflects bounds; even an arbitrary F has bounded constant realization if it is isomorphic to the bounded restriction of J. The comparison adjunction units are invertible on both bounded-below objects, and applying the derived right adjoint lifts the isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-coefficient-slice-derived-coordinates",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-finite-coefficient-slice-restriction",
+  "lem-sf-proetale-origin-from-finite-models",
+  "lem-weil-pbc-bounded-heart-etale-origin",
+  "lem-weil-pbc-finite-coefficient-slice-derived-coordinates",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectChartEtaleOrigin",
+  "file": "lean/Sheaf/Paper/FinitePerfectChartEtaleOrigin.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectChart_etale_origin",
+  "statement": "theorem finitePerfectChart_etale_origin\n    (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]\n    (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})\n    (ψ : adicConstantRing X B ⟶ R) (hψ : IsIso ψ)\n    (K : DerivedCategory (SheafOfModules.{t + 1}\n      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)))\n    (V : X.Etale) (a b : ℤ) (hab : a ≤ b)\n    (hmodel : ∃ T : Sieve V, T ∈ X.smallEtaleTopology V ∧\n      ∀ (W : X.Etale) (g : W ⟶ V), T g →\n        ∃ P : CochainComplex (ModuleCat.{t} B) ℤ,\n          P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧\n          (∀ i : ℤ, Module.Projective B (P.X i) ∧ Module.Finite B (P.X i)) ∧\n          Nonempty\n            (ringedSiteDerivedRestrictionOfUniverses\n                ((sheafCompose (ProEt.topology X)\n                  (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)\n                ((toProEt X).obj W) K ≅\n              ringedSiteDerivedRestrictionOfUniverses\n                ((sheafCompose (ProEt.topology X)\n                  (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)\n                ((toProEt X).obj W) ((completedAdicDerivedChange X ψ).obj\n                  ((finitePerfectAdicDerivedConstant X B).obj (DerivedCategory.Q.obj P))))) :\n    ∃ L : DerivedCategory\n        (Sheaf V.left.smallEtaleTopology (ModuleCat.{t + 1} (ULift.{t + 1} B))),\n      ∀ (W : X.Etale) (g : W ⟶ V) (F : DerivedCategory (ModuleCat.{t} B)),\n        Nonempty\n          ((AlgebraicGeometry.Etale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} B))\n              g.left).mapDerivedCategory.obj L ≅\n            (constantSheaf W.left.smallEtaleTopology\n              (ModuleCat.{t + 1} (ULift.{t + 1} B))).mapDerivedCategory.obj\n                ((finitePerfectAdicAlgebraLift B).obj F)) ↔\n        Nonempty\n          (ringedSiteDerivedRestrictionOfUniverses\n              ((sheafCompose (ProEt.topology X)\n                (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)\n              ((toProEt X).obj W) K ≅\n            ringedSiteDerivedRestrictionOfUniverses\n              ((sheafCompose (ProEt.topology X)\n                (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)\n              ((toProEt X).obj W) ((completedAdicDerivedChange X ψ).obj\n                ((finitePerfectAdicDerivedConstant X B).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T123442-L-2300780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T123442-L-2300780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

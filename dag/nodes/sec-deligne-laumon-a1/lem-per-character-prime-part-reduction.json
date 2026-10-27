@@ -1,0 +1,277 @@
+{
+ "id": "lem-per-character-prime-part-reduction",
+ "kind": "statement",
+ "title": "Cyclotomic character values and reduction to the prime-to-p part",
+ "statement": "Let $N\\geq1$, let $\\zeta\\in\\mathbf C$ be a primitive $N$th root of unity, let $K=\\mathbf Q(\\zeta)\\subset\\mathbf C$, and let $A\\subset K$ consist of the elements satisfying a monic polynomial in $\\mathbf Z[T]$. Let $G$ be a finite group with $|G|$ dividing $N$, and let $V$ be a finite-dimensional complex vector space with an action $\\rho:G\\to\\operatorname{GL}_{\\mathbf C}(V)$. Put $\\chi_V(g)=\\operatorname{tr}_{\\mathbf C}(\\rho(g))$. Then $\\chi_V(g)\\in A$ for every $g\\in G$. Furthermore let $p$ be any prime, $k$ any field of characteristic $p$, and $r:A\\to k$ any unital ring homomorphism. If $g=su$ with $s,u\\in G$ commuting, the order of $s$ prime to $p$ and the order of $u$ a power of $p$ (including $1$), then $r(\\chi_V(g))=r(\\chi_V(s))$. Such $s,u$, both powers of $g$, exist for every $g\\in G$. Here field generation is [def-weil-simple-field-extension], $A$ is the integral closure of $\\mathbf Z$ in $K$ [def-weil-pbc-integral-closure], and finite-dimensional means having a finite spanning family [def-weil-finite-dimensional-subspace].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, motivation only. WANTED: Serre, Linear Representations of Finite Groups, Part II Chapter 10 and Part III, ordinary character reduction modulo p. Agent-derived spectral lemma; no Stacks tag found."
+ },
+ "stmt_deps": [
+  "def-weil-simple-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof": [
+  {
+   "text": "First fix any abelian subgroup $H\\leq G$. The field $\\mathbf C$ is algebraically closed by [lem-weil-complex-algebraically-closed] and has characteristic zero. Apply [lem-per-finite-group-character-decomposition] to $V|_H$, obtaining a finite direct sum of nonzero irreducible $H$-representations $W_j$ (the sum is empty if $V=0$). For each $W_j$ apply [lem-per-normal-commuting-weight-induction] with its finite group equal to $H$ and its normal subgroup also equal to $H$. Its commuting-image hypothesis holds because $H$ is abelian. Conjugation in $H$ fixes every character of $H$, so the transitive action on the nonempty set $X$ in that statement forces $X$ to have one element. Thus $H$ acts by a single character $\\lambda_j:H\\to\\mathbf C^\\times$ on all of $W_j$. Choose a finite basis of each $W_j$: projections of a finite spanning family of $V$ span the summands, and deleting dependent entries gives bases. Their union, transported through the direct-sum isomorphism, is a basis of $V$ consisting of common eigenvectors for $H$ [def-weil-finite-dimensional-subspace, def-weil-pbc-free-module]. This is a direct specialization of the two cited representation statements.",
+   "uses": [
+    "lem-weil-complex-algebraically-closed",
+    "lem-per-finite-group-character-decomposition",
+    "lem-per-normal-commuting-weight-induction",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent auxiliary ordinary-character argument for the inherited cyclotomic representation input, not a proof in the blueprint. ILO X Proposition 1.2, proof, printed p.138, (4)-(5), supplies motivation only."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-finite-additive-group-card-annihilator] on the group $G$ written additively (no commutativity is required): its formula becomes $h^{|G|}=1$ for every $h\\in G$. Since $|G|\\mid N$, also $h^N=1$. The $N$ powers $1,\\zeta,\\ldots,\\zeta^{N-1}$ are distinct: equality with exponents $0\\leq i<j<N$ gives $\\zeta^{j-i}=1$, contradicting primitivity. They all belong to $\\mu_N(\\mathbf C)$, whose cardinality is at most $N$ by [lem-exc-field-roots-cyclic-bound]. Hence every complex $N$th root of unity is one of these powers. Each lies in $K$ by [def-weil-simple-field-extension] and is integral over $\\mathbf Z$, being a root of the monic polynomial $T^N-1$; therefore it lies in $A$ [def-weil-pbc-integral-closure]. For arbitrary $h\\in G$, use Step 1 for the abelian cyclic subgroup $\\langle h\\rangle$. Write its eigenvalues, with repetitions, as $a_1,\\ldots,a_t$. Applying $\\rho(h)^N=1$ to each nonzero basis vector gives $a_i^N=1$, so $a_i\\in A$. The trace formula [def-weil-endomorphism-trace] gives $\\chi_V(h)=\\sum_i a_i$. The subring assertion in [def-weil-pbc-integral-closure] gives $\\chi_V(h)\\in A$, also for the empty sum.",
+   "uses": [
+    "lem-sfb-finite-additive-group-card-annihilator",
+    "lem-exc-field-roots-cyclic-bound",
+    "def-weil-simple-field-extension",
+    "def-weil-pbc-integral-closure",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent auxiliary ordinary-character argument for the inherited cyclotomic representation input, not a proof in the blueprint. ILO X Proposition 1.2, proof, printed p.138, (4)-(5), supplies motivation only."
+   }
+  },
+  {
+   "text": "Take any decomposition $g=su$ satisfying the hypotheses, and write $u^{p^a}=1$ with $a\\geq0$. The subgroup $H=\\langle s,u\\rangle$ is abelian: every word can be reordered into $s^b u^c$ with integer exponents. Apply Step 1 to $H$. In its common eigenbasis let $\\alpha_i,\\beta_i$ be the respective eigenvalues of $s,u$. Step 2 gives $s^N=u^N=1$, whence $\\alpha_i^N=\\beta_i^N=1$ and $\\alpha_i,\\beta_i\\in A$. Moreover $\\beta_i^{p^a}=1$. Put $b_i=r(\\beta_i)$. The iterate of Frobenius on $k$ is a ring endomorphism sending $x$ to $x^{p^a}$ by [def-weil-ring-frobenius], so $(b_i-1)^{p^a}=b_i^{p^a}-1=r(\\beta_i^{p^a})-1=0$. Since $k$ is a field and $p^a>0$, a nonzero $b_i-1$ would have a nonzero power; thus $b_i=1$. On each basis vector $\\rho(su)$ acts by $\\alpha_i\\beta_i$, so [def-weil-endomorphism-trace] and the homomorphism laws give\n$$r(\\chi_V(g))=\\sum_i r(\\alpha_i)r(\\beta_i)=\\sum_i r(\\alpha_i)=r(\\chi_V(s)).$$\nThis proves the reduction for every commuting pair in the statement, without assuming that the pair consists of powers of $g$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent auxiliary ordinary-character argument for the inherited cyclotomic representation input, not a proof in the blueprint. ILO X Proposition 1.2, proof, printed p.138, (4)-(5), supplies motivation only."
+   }
+  },
+  {
+   "text": "It remains to construct a pair. Write $|G|=p^a d$ with $a\\geq0$ and $p\\nmid d$, by repeatedly dividing the positive integer $|G|$ by $p$ as long as possible. Regard the cyclic subgroup $C=\\langle g\\rangle$ additively as a $\\mathbf Z$-module, with integer scalar multiplication given in multiplicative notation by integer powers. Step 2 shows that every element of $C$ is killed by $|G|$. The integers $p^a,d$ are coprime, including $a=0$ or $d=1$. Apply [lem-sc-coprime-torsion-decomposition] with $R=\\mathbf Z$, $M=C$, two indices, and $q_1=d$, $q_2=p^a$. Its product-annihilator hypothesis is exactly the preceding assertion. The internal direct sum gives $g=s+u$ with $ds=0$ and $p^a u=0$; its two components have the meaning of [def-weil-pbc-direct-sum-modules]. In multiplicative notation $g=su$, $s^d=1$, and $u^{p^a}=1$. Their orders divide $d$ and $p^a$, respectively: division of an annihilating positive exponent by the least positive order leaves a smaller annihilating remainder, which must be zero. Thus the order of $s$ is prime to $p$, and that of $u$ is a power of $p$, possibly $1$. Both are in $C$, so they are integer powers of $g$ and commute. Reducing these integer exponents modulo $|G|$, using $g^{|G|}=1$, also expresses both as nonnegative powers of $g$.",
+   "uses": [
+    "lem-sc-coprime-torsion-decomposition",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent auxiliary ordinary-character argument for the inherited cyclotomic representation input, not a proof in the blueprint. ILO X Proposition 1.2, proof, printed p.138, (4)-(5), supplies motivation only."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-complex-algebraically-closed",
+  "lem-per-finite-group-character-decomposition",
+  "lem-per-normal-commuting-weight-induction",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-free-module",
+  "lem-sfb-finite-additive-group-card-annihilator",
+  "lem-exc-field-roots-cyclic-bound",
+  "def-weil-simple-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-endomorphism-trace",
+  "def-weil-ring-frobenius",
+  "lem-sc-coprime-torsion-decomposition",
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+  "place": "Agent auxiliary ordinary-character argument for the inherited cyclotomic representation input, not a proof in the blueprint. ILO X Proposition 1.2, proof, printed p.138, (4)-(5), supplies motivation only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite order complex linear operator has trace in cyclotomic integers and modulo a prime of residue characteristic p its trace equals the trace of its prime to p part",
+   "results": "{\"t\": \"2026-10-24T02:09:51Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite order complex linear operator has trace in cyclotomic integers and modulo a prime of residue characteristic p its trace equals the trace of its prime to p part\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZMod.trace_pow_card\", \"Algebra.trace_quotient_eq_of_isDedekindDomain\", \"Algebra.trace_quotient_mk\", \"Algebra.normalizedTrace\", \"FiniteField.trace_to_zmod_nondegenerate\", \"FiniteField.algebraMap_trace_eq_sum_pow\", \"Algebra.coe_trace_int\", \"Algebra.normalizedTrace_eq_of_fininteDimensional\"], \"digest\": \"90b06b611ba61165\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field matrix trace identities and multiplicative characters of fields do not give ordinary-character reduction to the p-prime part. The online isIntegral_character result covers only integrality and is absent from the pinned local Character.lean; it does not give cyclotomic values or the reduction clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Character values modulo p only depend on the p regular part of a finite group element",
+   "results": "{\"t\": \"2026-10-24T02:11:05Z\", \"tool\": \"leanfinder\", \"query\": \"Character values modulo p only depend on the p regular part of a finite group element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirichletCharacter.FactorsThrough.same_level\", \"DirichletCharacter.factorsThrough_conductor\", \"ZMod.χ₄_nat_mod_four\", \"MulChar.IsQuadratic.pow_char\", \"DirichletCharacter\", \"DirichletCharacter.eval_modulus_sub\", \"AddChar.zmod_inj\", \"DirichletCharacter.FactorsThrough.χ₀\"], \"digest\": \"df203577a16c9ea0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field matrix trace identities and multiplicative characters of fields do not give ordinary-character reduction to the p-prime part. The online isIntegral_character result covers only integrality and is absent from the pinned local Character.lean; it does not give cyclotomic values or the reduction clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "All finite group character values are in the cyclotomic integer ring of the group exponent",
+   "results": "{\"t\": \"2026-10-24T02:13:24Z\", \"tool\": \"leanfinder\", \"query\": \"All finite group character values are in the cyclotomic integer ring of the group exponent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulChar.apply_mem_algebraAdjoin\", \"MulChar.apply_mem_rootsOfUnity_orderOf\", \"MulChar.apply_mem_algebraAdjoin_of_pow_eq_one\", \"MulChar.apply_mem_rootsOfUnity\", \"MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"MulChar.apply_mem_rootsOfUnity_of_pow_eq_one\", \"MulChar.exists_apply_eq_pow\", \"MulChar.card_eq_card_units_of_hasEnoughRootsOfUnity\"], \"digest\": \"7b810932a777507a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field matrix trace identities and multiplicative characters of fields do not give ordinary-character reduction to the p-prime part. The online isIntegral_character result covers only integrality and is absent from the pinned local Character.lean; it does not give cyclotomic values or the reduction clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIntegral_character\"",
+   "results": "{\"t\": \"2026-10-24T02:13:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"isIntegral_character\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"FDRep.isIntegral_character\", \"Representation.isIntegral_character\"], \"digest\": \"244fa197c5d147d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field matrix trace identities and multiplicative characters of fields do not give ordinary-character reduction to the p-prime part. The online isIntegral_character result covers only integrality and is absent from the pinned local Character.lean; it does not give cyclotomic values or the reduction clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Trace finite order representation matrix is sum of roots of unity reduction modulo prime p regular part",
+   "results": "{\"t\": \"2026-10-24T02:09:50Z\", \"tool\": \"leansearch\", \"query\": \"Trace finite order representation matrix is sum of roots of unity reduction modulo prime p regular part\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.trace_eq_sum_roots_charpoly\", \"ZMod.trace_pow_card\", \"Matrix.trace_eq_sum_roots_charpoly_of_splits\", \"Matrix.trace\", \"Polynomial.orderOf_root_cyclotomic_dvd\", \"FiniteField.trace_pow_card\", \"modularCyclotomicCharacter.toFun\", \"ZMod.instHasEnoughRootsOfUnityHSubNatOfNat\"], \"digest\": \"238241119e150897\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field matrix trace identities and multiplicative characters of fields do not give ordinary-character reduction to the p-prime part. The online isIntegral_character result covers only integrality and is absent from the pinned local Character.lean; it does not give cyclotomic values or the reduction clause."
+  },
+  {
+   "tool": "grep",
+   "query": "prime.*part|p.?regular|isIntegral_character|character.*[Rr]oot",
+   "results": "{\"t\": \"2026-10-24T02:13:21Z\", \"tool\": \"grep\", \"query\": \"prime.*part|p.?regular|isIntegral_character|character.*[Rr]oot\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\"], \"digest\": \"38e1ec187af19a1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-field matrix trace identities and multiplicative characters of fields do not give ordinary-character reduction to the p-prime part. The online isIntegral_character result covers only integrality and is absent from the pinned local Character.lean; it does not give cyclotomic values or the reduction clause."
+  },
+  {
+   "tool": "grep",
+   "query": "prime.to.p.part|p.regular|isIntegral_character|character.*cyclotomic",
+   "results": "{\"t\": \"2026-10-24T03:01:27Z\", \"tool\": \"grep\", \"query\": \"prime.to.p.part|p.regular|isIntegral_character|character.*cyclotomic\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit gives all cyclotomic-value and prime-to-p reduction clauses. Online isIntegral_character results cover only integrality and are absent from the pinned Character.lean. cyclotomicCharacter is a Galois action on roots of unity, not an ordinary representation character."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIntegral_character\"",
+   "results": "{\"t\": \"2026-10-24T03:01:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"isIntegral_character\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"FDRep.isIntegral_character\", \"Representation.isIntegral_character\"], \"digest\": \"244fa197c5d147d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit gives all cyclotomic-value and prime-to-p reduction clauses. Online isIntegral_character results cover only integrality and are absent from the pinned Character.lean. cyclotomicCharacter is a Galois action on roots of unity, not an ordinary representation character."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group complex character values are cyclotomic integers and modulo a prime p depend only on the prime to p part of an element",
+   "results": "{\"t\": \"2026-10-24T03:01:30Z\", \"tool\": \"leanfinder\", \"query\": \"Finite group complex character values are cyclotomic integers and modulo a prime p depend only on the prime to p part of an element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.toFun_apply\", \"AddChar.FiniteField.primitiveChar_to_Complex\", \"MulChar.exists_apply_eq_pow\", \"AddChar.FiniteField.primitiveChar_to_Complex_isPrimitive\", \"DirichletCharacter.FactorsThrough.same_level\", \"Char.card_pow_char_pow\"], \"digest\": \"2808ef2ae1f31164\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit gives all cyclotomic-value and prime-to-p reduction clauses. Online isIntegral_character results cover only integrality and are absent from the pinned Character.lean. cyclotomicCharacter is a Galois action on roots of unity, not an ordinary representation character."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary complex finite group character is valued in cyclotomic integers and modulo p has the same value on an element and its p regular part",
+   "results": "{\"t\": \"2026-10-24T03:11:18Z\", \"tool\": \"leansearch\", \"query\": \"An ordinary complex finite group character is valued in cyclotomic integers and modulo p has the same value on an element and its p regular part\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter\", \"modularCyclotomicCharacter.toFun\", \"cyclotomicCharacter.toFun\", \"modularCyclotomicCharacter.toFun_unique'\", \"modularCyclotomicCharacter.congr_simp\", \"modularCyclotomicCharacter'\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun_apply\"], \"digest\": \"1be3fd50c0fdf4dc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit gives all cyclotomic-value and prime-to-p reduction clauses. Online isIntegral_character results cover only integrality and are absent from the pinned Character.lean. cyclotomicCharacter is a Galois action on roots of unity, not an ordinary representation character."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of ordinary character values modulo a residue field of prime characteristic depends only on the p regular component of a finite group element",
+   "results": "{\"t\": \"2026-10-24T03:11:19Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction of ordinary character values modulo a residue field of prime characteristic depends only on the p regular component of a finite group element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CharP.quotient\", \"ModP.charP\", \"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.toZModPow_toFun\", \"Tactic.ReduceModChar.CharP.intCast_eq_mod\", \"CharP.cast_eq_mod\", \"Tactic.ReduceModChar.CharP.isInt_of_mod\", \"MulChar.map_ringChar\"], \"digest\": \"444019fa493ee783\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit gives all cyclotomic-value and prime-to-p reduction clauses. Online isIntegral_character results cover only integrality and are absent from the pinned Character.lean. cyclotomicCharacter is a Galois action on roots of unity, not an ordinary representation character."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-brauer-elementary-unit-character",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary representation input under lem-per-artin-gabber-affine-curve, Proof Step 3, via lem-per-brauer-monomial-induction; Expose X Proposition 1.2, printed p.138, before (5). The latest blueprint does not prove this auxiliary input. Specifically: Cyclotomic character values and reduction to the prime-to-p part.",
+   "via": [
+    "lem-per-brauer-elementary-unit-character",
+    "lem-per-brauer-monomial-induction",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-character-prime-part-reduction",
+  "worker": "stage1",
+  "summary": "Retained the mathematical statement verbatim, added the existing trace definition to statement dependencies, and supplied four proof steps using existing nodes: common scalar blocks for abelian subgroups, cyclotomic integrality by a root-count bound, residue-field reduction by Frobenius, and existence of commuting primary parts by coprime torsion decomposition of the cyclic subgroup. No new nodes or new Mathlib leaves. ILO X Proposition 1.2, proof on printed pp.136-138, motivates the representation input but does not prove this character lemma; the proof is agent-written and Serre remains WANTED.",
+  "blueprint": "Inherited ancestor lem-per-artin-gabber-affine-curve, proof Step 3, via the cyclotomic/Brauer-splitting auxiliary chain already recorded in blueprint.from.via. The latest blueprint paragraph is a duality argument and does not state this ordinary-character lemma. These steps supply the inherited auxiliary without changing the unit or chapter route; no blueprint node has the same full statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-complex-algebraically-closed",
+    "why": "The usual complex coefficient field satisfies the algebraic-closure hypothesis of the representation statements; a generic field fact."
+   },
+   {
+    "node": "lem-sfb-finite-additive-group-card-annihilator",
+    "why": "Renaming multiplication as addition gives the exponent bound for the finite group; the statement expressly permits noncommutative groups."
+   },
+   {
+    "node": "lem-exc-field-roots-cyclic-bound",
+    "why": "The root-count bound exhausts the Nth roots by powers of the specified primitive root. This avoids any characteristic-zero ambiguity in lem-sc-primitive-root."
+   },
+   {
+    "node": "lem-sc-coprime-torsion-decomposition",
+    "why": "The Z-module underlying the cyclic subgroup supplies the two commuting powers with the required annihilating exponents; a generic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "def-weil-ring-frobenius",
+    "why": "Its statement includes the ring-endomorphism property of every iterate, giving the power-of-a-difference identity in the residue field."
+   },
+   {
+    "node": "def-weil-pbc-integral-closure",
+    "why": "Its statement explicitly includes the subring theorem for integral elements, Stacks 00GO, not merely the construction."
+   },
+   {
+    "node": "def-weil-endomorphism-trace",
+    "why": "The sum of diagonal entries in its statement is used in the common eigenbasis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-complex-algebraically-closed",
+  "lem-sfb-finite-additive-group-card-annihilator",
+  "lem-exc-field-roots-cyclic-bound",
+  "lem-sc-coprime-torsion-decomposition",
+  "def-weil-ring-frobenius",
+  "def-weil-pbc-integral-closure",
+  "def-weil-endomorphism-trace"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-9c0ebf442",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-9c0ebf442 (reviewer sub-agent of L); spot-checked: Read in full. The item statement is identical to the live/base node, which is still unsplit, so no parallel group has split it. There are no new nodes and no repair note. Step 1 applies finite-group-character-decomposition, then normal-commuting-weight-induction with A=H to each irreducible block. All hypotheses hold, and the transitive conjugation action is trivial for abelian H, so each block is scalar and V has a common eigenbasis. Step 2 uses card_nsmul_eq_zero' (noncommutative allowed) to get h^N=1. With |mu_N(C)|<=N (fields 09HW/09HX), mu_N(C)={zeta^i}, which lies in A. The trace is the diagonal sum, and the integral closure is a subring (00GO), so chi lies in A. Step 3: in a common eigenbasis of <s,u>, iterated Frobenius in k (char p) gives (r(beta)-1)^{p^a}=0, so r(beta)=1 and r(chi(su))=r(chi(s)); this covers every commuting pair. Step 4: |G|=p^a d, and torsionBy_isInternal (Torsion/Basic.lean:534) on the Z-module <g> with coprime d and p^a gives s and u as powers of g, with the right orders. Small cases checked: V=0, G=1, p not dividing |G|, |G| a p-power, C6 in char 2. The ILO X 1.2 p.138 text was checked: it cites Serre and is motivation only. The proof is marked agent-written and Serre is listed as WANTED. No duplicates found (rg -L for p-regular, prime-to-p and common eigenbasis), no cycle, and the route is fine: every outside statement node is a Mathlib leaf. Batch-5 finding: weight-induction reaches lem-trf-vector-space-quotient-dimension through the common-eigenvector node. That node is the Mathlib rank-nullity leaf (Submodule.finrank_quotient_add_finrank): generic linear algebra, not part of the trace formula or Poincaré duality, so it is outside the assumptions and not a reason to return."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CharacterPrimePartReduction",
+  "declaration": "Representation.character_prime_part_reduction",
+  "file": "lean/Sheaf/RepresentationTheory/CharacterPrimePartReduction.lean",
+  "statement": "theorem character_prime_part_reduction (N : ℕ) (hN : 1 ≤ N) (ζ : ℂ) (hζ : IsPrimitiveRoot ζ N) {G : Type u} [Group G] [Finite G] (hG : Nat.card G ∣ N) {V : Type v} [AddCommGroup V] [Module ℂ V] [FiniteDimensional ℂ V] (ρ : Representation ℂ G V) : ∃ χ : G → integralClosure ℤ (IntermediateField.adjoin ℚ ({ζ} : Set ℂ)), (∀ g : G, ((χ g).val : ℂ) = LinearMap.trace ℂ V (ρ g)) ∧ (∀ (p : ℕ), p.Prime → ∀ (k : Type w) [Field k] [CharP k p] (r : integralClosure ℤ (IntermediateField.adjoin ℚ ({ζ} : Set ℂ)) →+* k) (g s u : G), g = s * u → Commute s u → Nat.Coprime (orderOf s) p → (∃ a : ℕ, orderOf u = p ^ a) → r (χ g) = r (χ s)) ∧ (∀ (p : ℕ), p.Prime → ∀ g : G, ∃ s u : G, g = s * u ∧ Commute s u ∧ Nat.Coprime (orderOf s) p ∧ (∃ a : ℕ, orderOf u = p ^ a) ∧ (∃ m : ℕ, s = g ^ m) ∧ (∃ n : ℕ, u = g ^ n))",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39249ea59",
+  "group": "O3",
+  "result": "pass",
+  "note": "Item lem-per-character-prime-part-reduction: Lean statement matches the node clause by clause. N≥1; ζ primitive (IsPrimitiveRoot); K=IntermediateField.adjoin ℚ {ζ}; A=integralClosure ℤ K; finite G with Nat.card G ∣ N, no commutativity assumed; FiniteDimensional ℂ V; ρ : Representation ℂ G V; ∃ χ : G → A pinned by (χ g).val = LinearMap.trace (unique); reduction clause for every prime p, every field k : Type w with CharP k p and every r : A →+* k, over all commuting pairs g=su with orderOf s coprime to p and orderOf u = p^a; separate existence clause with natural powers of g. Edge cases checked: V=0, G trivial, a=0, p ∤ |G|, |G| a power of p, nonabelian G, infinite k. lean.statement verbatim in file; item node identical to live apart from lean; still unsplit-lean on live, no parallel delivery, no repair note; four stmt_dep Mathlib leaf nodes byte-identical to live; private proof-interface imports exist in live. No definitions, one sorry, docstrings give source place, blueprint tag and the 4-step proof; report has Worker report and Second reading sections. No compile run (no file changed); worker reports a clean compile. No findings."
+ }
+}

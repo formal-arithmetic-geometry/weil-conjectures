@@ -1,0 +1,205 @@
+{
+ "id": "lem-sf-weil-open-closed-triangle-exists",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-open-closed-weight",
+   "via": [],
+   "place": "First sentence of the current lem-zl-open-closed-weight proof: the localization triangle exists; the native derived-Weil input is exists_distTriang_openClosed, with vertex isomorphisms only."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The open-closed triangle of a Weil complex exists",
+ "statement": "Let $k_0$ be a finite field, $\\ell\\ne\\operatorname{char}k_0$ a prime, and $X$ a $k_0$-scheme that is locally of finite type, quasi-compact and quasi-separated over $k_0$. Use the triangulated category [def-weil-triangulated-category] of Weil complexes on $X$ [def-sf-native-weil-derived-framework]. Let $j\\colon U\\to X$ be a quasi-compact open immersion [def-weil-open-immersion] and $i\\colon Z\\to X$ a closed immersion [def-weil-closed-immersion] over $k_0$ whose images are complementary. For every Weil complex $K$ on $X$ there is a distinguished triangle $T_1\\to T_2\\to T_3\\to T_1[1]$ with $T_1\\cong j_!j^*K$, $T_2\\cong K$ and $T_3\\cong i_*i^*K$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-open-closed-weight.md",
+  "place": "lem-zl-open-closed-weight: the Lean of lem-zl-open-closed-weight (WeilConjectures.DeligneLaumon.Reduction.FormalSteps) uses exists_distTriang_openClosed; upstream docstring: a weakening of prop-sf-open-closed-triangle-all-stages (vertices up to isomorphism, arrows not asserted canonical); Lean: upstream file lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean, declaration AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed (module WeilConjectures.WeilSheaf.LowerShriekFunctoriality, lines 163-181, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-native-weil-open-closed-triangle] to the given $k_0,\\ell,X,j,i,K$. Its category is precisely the native category specified in the statement, not fixed pairs in a geometric derived category. Its hypotheses are exactly the given local finite type, quasi-compactness, quasi-separatedness, quasi-compact open immersion and complementary closed immersion over $k_0$. Obtain a distinguished triangle $S$ in that category, together with isomorphisms $e_1:S_1\\cong Rj_{0!}j^*K$, $e_2:S_2\\cong K$ and $e_3:S_3\\cong Ri_*i^*K$. This existing node asserts the triangle before any compactly supported direct image is applied; no separatedness of $X$ over $k_0$ is required.",
+   "uses": [
+    "lem-sf-native-weil-open-closed-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/lem-zl-open-closed-weight.proof.md",
+    "place": "First sentence: existence of the localization triangle; native derived-Weil realization specified by LowerShriekFunctoriality.lean:171-181."
+   }
+  },
+  {
+   "text": "Set $T=S$. In [def-sf-native-weil-derived-framework], the operations denoted here by $j_!$ and $i_*$ on Weil complexes are the native restricted derived operations $Rj_{0!}$ and $Ri_*$. Thus $e_1,e_2,e_3$ have exactly the three required endpoints. Keep the distinguished arrows of $S$, and use these three isomorphisms as witnesses of their respective nonempty isomorphism types. The requested conclusion follows; it prescribes only vertices, so there is no additional assertion about the counit or unit arrows.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/lem-zl-open-closed-weight.proof.md",
+    "place": "First sentence: existence of the localization triangle; native derived-Weil realization specified by LowerShriekFunctoriality.lean:171-181."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-open-closed-triangle",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/lem-zl-open-closed-weight.proof.md",
+  "place": "First sentence: existence of the localization triangle; native derived-Weil realization specified by LowerShriekFunctoriality.lean:171-181."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open closed distinguished triangle j_! j^* K to K to i_* i^* K",
+   "results": "Pretriangulated.distinguishedTriangles, Functor.map_distinguished_iff, HomotopyCategory.Pretriangulated.rotate_distinguished_triangle, ShortExact.singleTriangle_distinguished: general triangulated API only",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "distinguished triangle for open immersion and complementary closed immersion: extension by zero, object, pushforward of restriction",
+   "results": "Scheme.Modules.restrictAdjunction, TStructure.triangleLTGE, liftCoborder_app: no recollement triangle",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'openClosed|distTriang_open' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "openClosed|recollement|open_closed",
+   "results": "Mathlib/Topology/MetricSpace/Ultra/Basic.lean; Mathlib/Topology/MetricSpace/Ultra/Basic.lean; Mathlib/Topology/MetricSpace/Ultra/Basic.lean; Mathlib/Topology/MetricSpace/Ultra/Basic.lean; Mathlib/Topology/MetricSpace/Ultra/Basic.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean; Mathlib/Topology/Algebra/Valued/ValuationTopology.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these generic derived/triangulated or topological declarations do not state the native pro-etale Frobenius-equivariant localization triangle with these three vertices"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"distTriang\", \"Sheaf\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: these generic derived/triangulated or topological declarations do not state the native pro-etale Frobenius-equivariant localization triangle with these three vertices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A distinguished localization triangle for bounded constructible derived complexes of Frobenius equivariant proetale module sheaves under complementary open and closed immersions",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; DerivedCategory.mem_distTriang_iff; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-23",
+   "verdict": "no match: these generic derived/triangulated or topological declarations do not state the native pro-etale Frobenius-equivariant localization triangle with these three vertices"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization distinguished triangle in the derived category of Frobenius equivariant sheaves",
+   "results": "CategoryTheory.ShortComplex.ShortExact.singleTriangle; CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; DerivedCategory.mem_distTriang_iff; CategoryTheory.Functor.map_distinguished_iff; CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished; DerivedCategory.triangleOfSES; CategoryTheory.Triangulated.Localization.isTriangulated; DerivedCategory.triangleOfSES_distinguished",
+   "date": "2026-10-23",
+   "verdict": "no match: these generic derived/triangulated or topological declarations do not state the native pro-etale Frobenius-equivariant localization triangle with these three vertices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero restriction closed direct image exact sequence yields a distinguished triangle in a derived category of Weil sheaves",
+   "results": "DerivedCategory.triangleOfSES_distinguished; CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished; CategoryTheory.ShortComplex.ShortExact.singleTriangle; CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; DerivedCategory.triangleOfSES; CategoryTheory.Functor.map_distinguished_exact; DerivedCategory.HomologySequence.exact₃; DerivedCategory.HomologySequence.exact₁",
+   "date": "2026-10-23",
+   "verdict": "no match: these generic derived/triangulated or topological declarations do not state the native pro-etale Frobenius-equivariant localization triangle with these three vertices"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-zl-open-closed-weight",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+  "file": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed"
+  ],
+  "statement": "theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]\n    [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) [IsClosedImmersion i]\n    [i.IsOver (Spec (CommRingCat.of k₀))] (hij : IsCompl (Set.range j.base) (Set.range i.base))\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l X) :\n    ∃ T ∈ distTriang (WeilComplex k₀ l X),\n      Nonempty (T.obj₁ ≅ (derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)) ∧\n      Nonempty (T.obj₂ ≅ K) ∧\n      Nonempty (T.obj₃ ≅ (derivedLowerStar i).obj ((upperStar i).obj K)) :=\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-23",
+  "note": "upstream declaration attached as it stands, proof still `sorry`; recorded by the 2026-10-23 maintainer audit of route sorries with no node",
+  "branch": "slopmaster2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      163,
+      181
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sf-weil-open-closed-triangle-exists",
+  "worker": "stage1",
+  "summary": "Reused the pre-existing exact native derived-Weil open-closed triangle node and packaged its witnesses. No new nodes; the imported all-stages same_as was not exact (different coefficient realization and stronger separatedness hypothesis), so it was removed. The attached upstream declaration remains sorried.",
+  "blueprint": "Current lem-zl-open-closed-weight.proof.md first sentence, existence of the localization triangle; realized in the actual native category used by its upstream Lean proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-native-weil-open-closed-triangle",
+    "why": "The existing native localization theorem supplies exactly this input, before applying compact support. It is the native realization of the unit-prescribed open-closed triangle; the all-stages geometric coefficient theorem does not cover the stated native category or nonseparated X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-native-weil-open-closed-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-7e216f5d4",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-7e216f5d4 (reviewer sub-agent of L); spot-checked: I read the whole delivery (one commit: the item JSON and the report, no new nodes). The item states exactly what the existing live node lem-sf-native-weil-open-closed-triangle (N6, 2026-10-22, still unsplit in live and side-live) states. Both use the WC^der category of def-sf-native-weil-derived-framework. Both have the same hypotheses: X qcqs and locally of finite type over k_0, j a quasi-compact open immersion, i a closed immersion over k_0, complementary images. Both have the same vertex-only conclusion, and both carry the same Lean declaration exists_distTriang_openClosed (I read LowerShriekFunctoriality.lean:163-181). Step 1 applies that node and its hypotheses match one for one. Rh_{0!} needs h separated of finite type over a qcqs target, which a quasi-compact open immersion into X satisfies, and neither statement assumes X separated. Step 2 is elementary: the last paragraph of the framework def says that j_!, i_*, j^* are the restricted derivedLowerShriek, derivedLowerStar and upperStar. There is no cycle: the latest Q14 head 40ae300e of the native node does not cite this item. The delivery removed same_as prop-sf-open-closed-triangle-all-stages, and that is correct: that node assumes X separated of finite type over k, uses geometric D^b_c(-,Λ) coefficients and has canonical arrows. from.node is lem-zl-open-closed-weight, whose main-20261015 proof's first sentence is the localization triangle. No SGA source is used. I accept the off-unit tool_use of the sk-thm-sf-package node: it is the native realization of the triangle that the unit's route (sk-prop-sf-open-closed-triangle) cites, and that route's node does not cover this category. Edge cases U=∅, Z=∅, X=∅ and non-reduced Z all behave correctly. There is no repair note for this item. Note to the maintainer: under stages/1-dag.md §1, mark the item merged into lem-sf-native-weil-open-closed-triangle and keep the Lean attachment on one node. Advisory, carried over from the base and not the delivery's fault: the item's statement cites no def node for quasi-separated or locally of finite type."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T222552-L-669106",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso"
+  ],
+  "sorry_after": []
+ }
+}

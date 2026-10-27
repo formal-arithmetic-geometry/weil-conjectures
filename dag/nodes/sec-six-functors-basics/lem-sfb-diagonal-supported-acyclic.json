@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-diagonal-supported-acyclic",
+ "kind": "statement",
+ "title": "Acyclicity of the supported diagonal coefficient under every retraction",
+ "statement": "For a commutative condensed ring object Lambda, a scheme Y with Noetherian diagonal surface W, and f:W -> P=ProjectiveLine Y satisfying Delta followed by f = id, the full canonical right-derived unit diagonalTraceRightSingle at source Lambda Y is invertible, with the definitions of def-sfb-diagonal-coefficient-category and lem-diagonal-canonical-right-derived.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), closed diagonal supported coefficient source; supported-source normalization in the diagonal tower trace"
+ },
+ "proof": [
+  {
+   "text": "For an exact functor G preserving K-injective complexes and an additive functor F with G followed by F naturally isomorphic to the identity, take a K-injective resolution I of a complex K. G sends its resolution map to a quasi-isomorphism; F sends that map to a quasi-isomorphism by the retraction. The right-derived unit of F on G(I) is invertible by K-injective computation. Naturality and cancellation of the two quasi-isomorphisms prove it invertible on G(K).",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding argument to the diagonal direct image. It is exact by closed localization. It preserves K-injective complexes because its left adjoint, diagonal inverse image, is exact. Ordinary composition with f is the identity by the given equality Delta f=id. Transfer from the image of a single complex to the single complex on the image through the single-complex comparison. This is precisely invertibility of the canonical diagonalTraceRightSingle.",
+   "uses": [
+    "lem-sf-ring-sheaf-closed-localization",
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-ring-sheaf-closed-localization",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), closed diagonal supported coefficient source; supported-source normalization in the diagonal tower trace",
+  "by": "R2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an exact functor G preserving K injective complexes and F composed with G isomorphic to identity the full right derived unit of F is invertible on the image of G",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.totalRightDerivedUnit, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc. Local rg in both project library roots found the existing scalar adjunction, closed localization and K-injective preservation interfaces, but no direct proof of this concrete supported-module assertion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project interfaces. Prove the concrete supported-module assertion from them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorUnitQ",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Functor.rightDerivedFunctorUnitQ'. Local rg in both project library roots found the existing scalar adjunction, closed localization and K-injective preservation interfaces, but no direct proof of this concrete supported-module assertion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project interfaces. Prove the concrete supported-module assertion from them."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*flat|preservesKInjective|pushHomOfComapIso",
+   "results": "7 hits: Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. Local rg in both project library roots found the existing scalar adjunction, closed localization and K-injective preservation interfaces, but no direct proof of this concrete supported-module assertion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project interfaces. Prove the concrete supported-module assertion from them."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalSupportedScalarSource",
+  "date": "2026-10-27",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "Paragraph (1), closed diagonal supported coefficient source; supported-source normalization in the diagonal tower trace",
+   "via": [
+    "lem-diagonal-supported-scalar-source",
+    "lem-diagonal-uniformizer-scalar-frame",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalSupportedAcyclic",
+  "file": "lean/Sheaf/Paper/DiagonalSupportedAcyclic.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_supported_acyclic",
+  "statement": "theorem diagonal_supported_acyclic\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})\n    [IsNoetherian (diagonalSurface Y)]\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (h : diagonalImmersion Y ≫ f = 𝟙 (ProjectiveLine Y)) :\n    IsIso (diagonalTraceRightSingle (CondensedRing.lowerStar Λ f)\n      (canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ f)) (source Λ Y))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T012926-L-2348817",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T012926-L-2348817",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

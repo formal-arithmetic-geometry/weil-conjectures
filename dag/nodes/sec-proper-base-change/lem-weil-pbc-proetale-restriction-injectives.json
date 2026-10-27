@@ -123,7 +123,18 @@
   "prop-weil-pbc-proetale-constant-exact"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -181,5 +192,38 @@
   "landing": "20261019T002500-L-2139799",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "For a weakly etale $v:W\\to X$, the site $W_{\\Proet}$ is the slice of\n$X_{\\Proet}$ over $W$. The restriction functor on constant-coefficient module\nsheaves is exact and preserves injectives. Consequently derived evaluation on\n$W$, computed in sheaves on $X_{\\Proet}$, agrees with derived global sections\non $W_{\\Proet}$.",
+  "proof": [
+   {
+    "text": "Composition and base change preserve weak etaleness by the stability lemma\nfor ind-etale algebras. A morphism between two weakly etale $X$-schemes is\nweakly etale as well. On rings, factor $B\\to C$ as $B\\to B\\otimes_AC\\to C$.\nThe first arrow is weakly etale by base change; the second is a base change\nof the flat diagonal of $B/A$. This second map is a flat ring epimorphism,\nwhose own diagonal is an isomorphism, so is weakly etale. The scheme\nassertion follows on affine opens. Objects, morphisms, and coverings of the\nsmall pro-etale site therefore identify the slice with $W_{\\Proet}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The construction of extension by zero along an etale map applies on this\nslice with exactly the same formula: sheafify\n\n$$\n V\\longmapsto\\bigoplus_{s:V\\to W\\text{ over }X}M(V,s).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "A map from this presheaf to $N$ is precisely a family of maps $M(V,s)\\to\nN(V)$ compatible with restrictions, hence a map to the restriction of $N$.\nThis proves its left adjunction to restriction. The constructed functor is\nexact. Kernels are computed summand by summand before sheafification, which\nis exact for module presheaves. For an epimorphism of sheaves on the slice, a\nlocal section of the displayed direct sum has finite support. Lift its\nfinitely many summands on coverings in the slice and take a common covering\nof $V$. Thus its sheafification is locally surjective and hence an\nepimorphism. This proves exactness without a claim about ordinary geometric\nstalks on the pro-etale site.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The adjunction now makes restriction preserve injectives. Restriction itself\nis exact, since the pro-etale inverse image is exact on sheaves with values in\n$\\mathcal A=\\Mod_\\Lambda$, i.e. on sheaves of $\\Lambda$-modules\n([lem-sfb-finite-upper-star-exact]); it is the inverse image of the pro-etale operations for this\nlocalization. Restricting an injective resolution therefore computes both\nversions of derived sections in the statement.",
+    "uses": [
+     "lem-sfb-finite-upper-star-exact"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,561 @@
+{
+ "id": "lem-sfb-proper-nodal-dualizing-base-change",
+ "kind": "statement",
+ "title": "Proper nodal dualizing line over an arbitrary base",
+ "statement": "Let $S$ be any scheme [def-pc-scheme] and $f:C\\to S$ a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism], finitely presented [def-sbc-locally-finite-presentation] morphism with nonempty reduced geometric fibres of pure dimension one [def-weil-geometric-fibre, def-weil-pure-dimension]. Each nonsmooth closed point of a geometric fibre over an algebraically closed field $\\Omega$ has completed local $\\Omega$-algebra $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]; the other points are smooth [def-sbc-smooth-morphisms]. No connectedness, genus, marking or projectivity hypothesis is imposed. The relative dualizing module $\\omega_{C/S}$ is invertible [def-sc-invertible-module] and admits the Jacobian-normalized fundamental class and adjunction presentations of [def-trf-nodal-dualizing-datum]. It restricts canonically to $\\Omega^1_{C/S}$ on the relative smooth locus. Its formation and these adjunction comparisons commute with arbitrary base change and with isomorphisms of $S$-families, compatibly with composition. For a geometric fibre $C_\\Omega$, the normalization $\\nu:V\\to C_\\Omega$ of a reduced irreducible component [def-weil-pbc-reduced-normalization] is a proper smooth connected curve, and there is a canonical isomorphism $\\nu^*\\omega_{C_\\Omega/\\Omega}\\simeq\\Omega^1_{V/\\Omega}\\otimes\\mathcal O_V(B_V)$, where $B_V$ is the reduced divisor of ambient nodal branches on $V$ and a self-node contributes two branches [def-pc-divisor-line-bundle]. In particular $\\deg(\\nu^*\\omega_{C_\\Omega/\\Omega})=2g(V)-2+\\#B_V$, with genus $g(V)=\\dim_\\Omega H^1(V,\\mathcal O_V)$ [def-pc-genus] and degree $\\deg M=\\chi(M)-\\chi(\\mathcal O_V)$ [def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E6R (lemma-gorenstein-dualizing), together with the relative-dualizing construction immediately preceding it; nodal normalization description in curves.tex Tag 0C4D (lemma-nodal). The Jacobian-adjunction identification is the arbitrary-base extension of duality.tex Tags 0E9Y (lemma-determinant), 0E9Z (lemma-fundamental-class-lci), by finite-presentation descent; these latter tags are stated over Noetherian bases, not quoted as already arbitrary-base statements."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-trf-nodal-dualizing-datum",
+  "def-weil-pbc-reduced-normalization",
+  "def-pc-divisor-line-bundle",
+  "def-pc-genus",
+  "def-pc-degree-line-bundle",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing arbitrary-base Gorenstein-curve duality theorem to $f$. Its statement explicitly allows disconnected nodal fibres and imposes no genus or stability condition. It gives an invertible $\\omega_{C/S}$, its smooth-locus identification, and canonical base-change and family-isomorphism comparisons satisfying composition. This supplies the relative dualizing module; it does not yet supply the asserted Jacobian-normalized adjunction comparisons. Those are constructed in the following steps.",
+   "uses": [
+    "lem-sfb-gorenstein-curve-relative-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6R (lemma-gorenstein-dualizing), with Tags 0E6P, 0E6Q and preceding relative-dualizing-complex construction"
+   }
+  },
+  {
+   "text": "Work over an arbitrary affine open $T=\\operatorname{Spec}A\\subset S$, without assuming that $S$ is quasi-compact. Express $T$ as the inverse limit of spectra $T_i$ of finite-type $\\mathbf Z$-subalgebras of $A$. Apply proper Noetherian-stage descent to $C_T\\to T$: properness supplies quasi-compactness and separatedness, so all its quasi-separatedness hypotheses hold. We obtain a proper finitely presented scheme $C_i\\to T_i$ with pullback $C_T$. The stages are Noetherian because they are of finite type over $\\mathbf Z$. After increasing the stage, surjectivity also descends, since all geometric fibres of $C_T/T$ are nonempty. Thus the chosen stage family has no empty fibres. This persists at every later stage: its fibre at a new point is the field extension of the nonempty fibre at its image, so all later increases of the coefficient stage retain this hypothesis.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-proper-noetherian-stage",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-descend-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM, 081F, 07RR; absolute approximation by finite-type subrings"
+   }
+  },
+  {
+   "text": "Each geometric fibre of $C_T/T$ is a local complete intersection by the nodal-curve criterion. Apply complete-intersection-fibre limit descent to $C_i\\to T_i$, increasing $i$ so that it is flat with local-complete-intersection geometric fibres. Apply pure-relative-dimension descent with $d=1$ as well. Its ordinary-fibre hypothesis follows from the geometric-fibre hypothesis by invariance of local fibre dimensions under field extension. Both conclusions persist on a directed tail, so one common stage has them simultaneously; dimension invariance also gives pure dimension one on its geometric fibres.",
+   "uses": [
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-pure-relative-dimension-finite-stage",
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5F (lemma-descend-nodal-family), first two paragraphs of proof; inputs Tags 0C3L, 0EY2"
+   }
+  },
+  {
+   "text": "Put $Z_i=V(\\operatorname{Fit}_1\\Omega^1_{C_i/T_i})$. Apply differential base change on affine charts, then clause (2) of Fitting-ideal base change to the finitely presented differential modules; localization is included in that clause, so these affine ideal equalities glue. Thus Fitting ideals commute with the given base change; hence its pullback is $\\operatorname{Sing}(C_T/T)$. This latter morphism to $T$ is unramified by the nodal-family Fitting theorem. Since $C_i,T_i$ are Noetherian and $C_i/T_i$ is finitely presented, $Z_i$ is a closed finite-type subscheme and is quasi-compact and quasi-separated. Unramified limit descent therefore makes $Z_i/T_i$ unramified after another increase. Unramified base-change permanence makes the first-Fitting singular subscheme of each geometric fibre unramified over its algebraically closed field. Differential and Fitting base change identify it with the corresponding fibre of $Z_i$. The nodal-curve criterion therefore applies: it is a pure one-dimensional local complete intersection and its first-Fitting singular subscheme is unramified. Every nonsmooth closed point of such a geometric fibre is therefore a node, so the fibre is reduced by the reducedness criterion for curves over an algebraically closed field whose nonsmooth closed points are nodes. Consequently $C_i/T_i$ is a proper flat nodal family with reduced geometric fibres, with nonempty fibres by step 2. This is the full argument for descending nodality, rather than an application of the merely source-local approximation node.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-unramified-limit-descent",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-trf-nodal-points-reduced-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5F (lemma-descend-nodal-family), last paragraph; Tags 0C4W, 0C4E, 0C59"
+   }
+  },
+  {
+   "text": "For this Noetherian stage, clause (1) implies clause (2) of the affine syntomic criterion, so every residue-field fibre ring on an affine chart is a local complete intersection. The pointwise local-ring criterion makes its local rings complete intersections; flatness and finite presentation hold at each chosen point. The standard syntomic local-model theorem now gives affine relative global complete-intersection presentations around every point of $C_i$. Their fibre dimension is one, so their numbers of variables and equations differ by one. The relative-global-complete-intersection regular-sequence theorem makes the equations regular at the ambient points on the closed subscheme. Over the Noetherian ambient polynomial ring they are regular on a principal neighbourhood of each such point. Thus the local regular-immersion presentations required by the Noetherian adjunction and fundamental-class theorems are available. To obtain polynomial presentations before applying the fundamental-class theorem, write a principal localization as $P_g=P[t]/(gt-1)$ and prepend $gt-1$ to the localized regular relations. It is a non-zero-divisor: the constant coefficient of $(gt-1)h=0$ kills the constant coefficient of $h$, and induction kills every coefficient. The other relations are regular modulo this first relation, and adding one variable and one equation preserves relative dimension one.",
+   "uses": [
+    "lem-trf-syntomic-geometric-fibres-affine-criterion",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-syntomic-pointwise-local-model",
+    "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "lem-exc-regular-sequence-principal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UD, 01UE, 01UG; algebra.tex Tag 00SV"
+   }
+  },
+  {
+   "text": "Apply flat-lci adjunction in relative dimension one to $C_i/T_i$. Its local line is $K_i=(\\bigwedge^c I/I^2)^\\vee\\otimes\\bigwedge^{c+1}\\Omega^1_{P/T_i}|_{C_i}$, with the stated sheaf-Ext identification. The same theorem identifies $K_i[1]$ with the relative dualizing complex on separated charts. Since $C_i/T_i$ is proper, it is separated; its open charts are separated over the Noetherian $T_i$. By steps 4--5 the family $C_i/T_i$ satisfies the hypotheses of the Noetherian dualizing-adjunction comparison theorem, which gives $\\theta_i:\\omega_{C_i/T_i}\\simeq K_{C_i/T_i}$ and states that $\\theta$ commutes with the base-change comparisons of $\\omega$ and of $K$ along morphisms of Noetherian bases and with isomorphisms of families; the relative-dualizing-complex clause alone fixes this identification only up to units. Apply adjunction-cotangent determinant normalization: this isomorphism identifies the specified adjunction transitions with the intrinsic transitions of $\\det L_{C_i/T_i}$, including their base-change normalizations. Apply the Noetherian lci fundamental-class theorem as well, obtaining its signed Jacobian formula in every regular affine curve presentation.",
+   "uses": [
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-sfb-adjunction-cotangent-determinant-normalization",
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0B6V, 0E2Y, 0E9Y, 0E9Z; determinant comparison as in perfect.tex Tags 0FJX, 0FJY"
+   }
+  },
+  {
+   "text": "Pull the stage identification $\\omega_{C_i/T_i}\\cong\\det L_{C_i/T_i}$, the normalization of step 6 composed with $\\theta_i$, to $C_T$. The canonical comparison for $\\omega$ in step 1 applies because this stage too is a proper nodal family. Cotangent base change applies because the family is flat, hence the square is Tor-independent. Determinant pullback therefore gives $\\omega_{C_T/T}\\cong\\det L_{C_T/T}$. The normalization theorem of step 6 expressly applies to these pulled-back models even when $T$ is not Noetherian. Thus both comparisons use the prescribed adjunction transitions, rather than an independently chosen trivialization of either line.",
+   "uses": [
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-sfb-adjunction-cotangent-determinant-normalization",
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Y; moduli-curves.tex Tag 0E6R; cotangent.tex Tag 08QQ; perfect.tex Tag 0FJY"
+   }
+  },
+  {
+   "text": "This identification is independent of the Noetherian model. For two models over the same affine $T$, the finitely generated coefficient subalgebras are contained in a common finitely generated subalgebra of $A$; pull both models to that stage. Finite-presentation spreading out descends the isomorphism between their pullbacks, its inverse, and their two inverse identities to a later stage. Repeat steps 3--4 there if necessary. At that Noetherian stage, clauses (1) and (2) of the comparison theorem of step 6 say that the pullbacks of $\\theta$ from the two original stages, conjugated by the base-change comparisons of $\\omega$ and of $K$, both equal $\\theta$ of the common stage family, transported along the descended isomorphism of models. The determinant normalization identifies these $K$-comparisons with the cotangent and determinant comparisons, and the composition laws of all three then show that the two identifications $\\omega_{C_T/T}\\cong\\det L_{C_T/T}$ coincide. The same argument applies to a restriction to an affine open inside an overlap of two base opens. These equalities on an affine cover give equality on the overlap. The affine identifications therefore glue to $\\omega_{C/S}\\cong\\det L_{C/S}$ for the original, possibly non-quasi-compact base.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-adjunction-cotangent-determinant-normalization",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM, morphism and equality descent; duality.tex Tags 0B6V, 0E2Y; perfect.tex Tag 0FJY"
+   }
+  },
+  {
+   "text": "Construct the fundamental class on $C$ in the intrinsic determinant line. For each conormal model $E=[I/I^2\\xrightarrow{d}\\Omega^1_{P/S}|_U]$, use the cofactor map $H^0(E)=\\Omega^1_{U/S}\\to\\det E$: in ordered bases it sends $\\bar v$ to $(\\bar f_1\\wedge\\cdots\\wedge\\bar f_c)^\\vee\\otimes(df_1\\wedge\\cdots\\wedge df_c\\wedge v)$. Regular sequences are Koszul-regular, so the cotangent presentation theorem applies to every such model. The cofactor-naturality theorem states precisely that $\\det(a)w_E=w_{E'}H^0(a)$ for the derived comparison of any two such models, without an injectivity or reduced-base hypothesis. Hence these maps agree on overlaps in $\\det L$. Compose with the inverse of step 8 to obtain $\\alpha:\\Omega^1_{C/S}\\to\\omega_{C/S}$. Substituting $v=da$ gives the determinant of the Jacobian with last row $da$; the sign of the volume trivialization is the one specified by the normalized Noetherian fundamental-class comparison. Thus the formula holds in every regular presentation, including one not chosen in the construction.",
+   "uses": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-sfb-two-term-cofactor-naturality",
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-weil-pbc-regular-sequence-koszul-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E9Y, 0E9Z, wedge/cofactor construction; perfect.tex Tags 0FJX, 0FJY"
+   }
+  },
+  {
+   "text": "The regular-immersion and Ext presentations persist after the arbitrary base change used above: the ambient polynomial algebra and its quotient are flat over the original base, so the relative-regular-equations theorem gives regular equations locally at every point of the pulled-back closed subscheme. For coverage by actual affine polynomial regular presentations one may shrink the Noetherian charts before pullback so that every successive quotient is flat over the base: partial-local-flatness gives this at the chosen point, and openness of flatness gives a common principal neighbourhood for the finitely many quotients. On this neighbourhood the quotient stalks are flat over the corresponding base local rings by flatness over a localization; the definition of a flat morphism and its affine criterion therefore make each localized quotient flat over the coefficient ring. Tensoring the successive exact multiplication sequences then preserves their injections because their cokernels are flat (apply the flat-quotient tensor theorem on the one-object ringed site). A principal localization $P_g$ can be presented polynomially by adjoining $t$ and the first relation $gt-1$; this first relation is a non-zero-divisor over every coefficient ring, since the lowest-degree coefficient of $(gt-1)h=0$ successively forces every coefficient of $h$ to vanish. The remaining relations are the regular sequence in $P_g$. This supplies the affine covers in the datum, with one more variable and relation. The base-changed adjunction theorem supplies their sheaf-Ext descriptions. Together with step 9 these are exactly the clauses of the nodal dualizing datum.",
+   "uses": [
+    "lem-pur-relative-regular-equations-base-change",
+    "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "def-trf-nodal-dualizing-datum",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-flat-morphism-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0FUD; more-algebra.tex Tag 0CEP; algebra.tex Tags 00SV, 00RC; duality.tex Tag 0E2Y"
+   }
+  },
+  {
+   "text": "On the smooth locus the adjunction line is canonically $\\Omega^1_{C/S}$. In a smooth conormal presentation the conormal-differential map is locally a split inclusion, and in bases adapted to the split sequence the wedge formula in step 9 is the identity on the remaining rank-one quotient. This is also the smooth-locus normalization of the Noetherian fundamental-class theorem. The nodal-family Fitting theorem identifies the smooth locus after arbitrary base change, so these identifications apply on the entire smooth locus after pullback, not only on a chosen smaller open.",
+   "uses": [
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-sc-smooth-omega-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Z, smooth-locus assertion; curves.tex Tag 0C59"
+   }
+  },
+  {
+   "text": "For any $S'\\to S$, compare the constructed datum with its pullback on affine base charts. The cotangent and determinant comparisons are compatible with composition, as is the comparison for $\\omega$. For an affine $T'\\subset S'$ over an affine $T\\subset S$, choose the Noetherian stage of $T'$ to contain the image of the coefficient ring of a stage of $T$; then $C_{T'}$ has the pulled-back model, and clause (1) of the comparison theorem of step 6 for this map of Noetherian stages shows that the pullback of the identification of step 8 is the corresponding identification for $C_{S'}/S'$. For $\\alpha$, each polynomial Jacobian entry is pulled back by the coefficient homomorphism; the identity $\\varphi(\\det M)=\\det(\\varphi(M))$ follows term by term from the finite permutation formula. The differential base-change isomorphism sends $da$ to $d(\\varphi(a))$. Hence the fundamental classes commute with these comparisons. The same intrinsic cotangent comparisons and cofactor naturality apply to an isomorphism of families. The determinant functor sends composites to composites, and the comparison for $\\omega$ does so too; thus all these identifications satisfy both the base-change and family-isomorphism composition laws.",
+   "uses": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-sfb-adjunction-cotangent-determinant-normalization",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-two-term-cofactor-naturality",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2Y, 0E9Y; perfect.tex Tag 0FJY; moduli-curves.tex Tag 0E6R"
+   }
+  },
+  {
+   "text": "Fix a geometric fibre $D=C_\\Omega$. Properness is stable under base change, and its reduced irreducible component $Z$ is a closed subscheme, hence proper. Apply normalization adjunction to the ambient nodal curve $D$ and this proper component. It gives a finite normalization $\\nu:V\\to Z$ with $V$ proper, smooth and connected, and $\\nu^*(K_{D/\\Omega}|_Z)\\cong\\Omega^1_{V/\\Omega}\\otimes\\mathcal O_V(B_V)$. Here the divisor counts the branches of the ambient curve, including both preimages of a self-node. The field-base case of steps 5--8 ($\\Omega$ is Noetherian) identifies this very adjunction line with $\\omega_{D/\\Omega}$ through $\\theta_{D}$ of the comparison theorem. Substitution gives the asserted canonical normalization formula, without assuming that $D$ or its components are smooth or that $D$ is connected.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-trf-nodal-normalization-adjunction",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), branch structure; duality.tex Tag 0B6V, local adjunction; normalization formula as in cited existing node"
+   }
+  },
+  {
+   "text": "Over the algebraically closed field $\\Omega$, connectedness of $V$ is geometric connectedness. Apply coherent Riemann--Roch and duality to this smooth proper geometrically connected curve: the cited statement includes projectivity of such curves, $\\deg\\Omega^1_{V/\\Omega}=2g(V)-2$, and equality of Euler-characteristic degree with divisor degree. Every branch point has residue field $\\Omega$, so the reduced divisor $B_V$ has degree $\\#B_V$. Additivity of degree under tensor products, applied to step 13, now yields $\\deg\\nu^*\\omega_{D/\\Omega}=2g(V)-2+\\#B_V$. This includes $B_V=0$, rational components, and self-nodes; the last contribute two distinct points to the reduced divisor.",
+   "uses": [
+    "lem-weil-separably-closed-geometrically-connected",
+    "sk-thm-picard-rr",
+    "lem-kun-closed-point-field",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Riemann--Roch and Serre duality; Tag 0A26 for projectivity; varieties.tex Tag 0AYX (lemma-degree-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-proper-noetherian-stage",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-descend-surjective",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-complete-intersection-fibres-limit-descent",
+  "lem-trf-pure-relative-dimension-finite-stage",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-unramified-limit-descent",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-trf-syntomic-geometric-fibres-affine-criterion",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-trf-syntomic-pointwise-local-model",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "lem-sfb-adjunction-cotangent-determinant-normalization",
+  "lem-sfb-lci-curve-fundamental-class",
+  "lem-sfb-nodal-dualizing-adjunction-line-comparison",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "thm-pd-spreading-out",
+  "lem-sfb-two-term-cofactor-naturality",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-pur-relative-regular-equations-base-change",
+  "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "def-trf-nodal-dualizing-datum",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-weil-separably-closed-geometrically-connected",
+  "sk-thm-picard-rr",
+  "lem-kun-closed-point-field",
+  "lem-trf-curve-degree-tensor-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E6P--0E6R, combined with curves.tex Tag 0C5F, duality.tex Tags 0B6V, 0E2Y, 0E9Y, 0E9Z and perfect.tex Tags 0FJX, 0FJY; synthesis of existing DAG statements, not a verbatim proof in a single source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented family of nodal curves over any scheme has an invertible relative dualizing sheaf compatible with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern base-change stability of morphism properties or module adjunction, not a relative dualizing line or its adjunction normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Gorenstein\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern base-change stability of morphism properties or module adjunction, not a relative dualizing line or its adjunction normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "Gorenstein|relativeDualizing|dualizingSheaf|fundamentalClass",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Focal.lean\", \"line\": \"37\", \"text\": \"* [D. Gorenstein, *Finite Groups*][gorenstein1968]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern base-change stability of morphism properties or module adjunction, not a relative dualizing line or its adjunction normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction construction of the canonical line bundle of a nodal curve and arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.mapPullbackAdj\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"{C : Type u₁} →\\n  {inst : CategoryTheory.Category.{v₁, u₁} C} →\\n    {Y X : C} →\\n      (f : Y ⟶ X) →\\n        [self : CategoryTheory.ChosenPullbacksAlong f] →\\n          CategoryTheory.Over.map f ⊣ CategoryTheory.ChosenPullbacksAlong.pullback f\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a morphism $f : Y \\\\to X$ in $\\\\mathcal{C}$, there is an adjunction between the functor $\\\\text{Over.map}\\\\, f : \\\\mathcal{C}/X \\\\to \\\\mathcal{C}/Y$ that composes morphisms\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ExponentiableMorphism\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    {I J : C} →\\n      (f : I ⟶ J) →\\n        {inst_1 : CategoryTheory.ChosenPullbacksAlong f} →\\n          [self : CategoryTheory.ExponentiableMorphism f] →\\n            CategoryTheory.ChosenPullbacksAlong.pullback f ⊣ CategoryTheory.Exponent\", \"doc\": \"Given an exponentiable morphism $ f: I \\to J $ in a category $ \\\\mathcal{C} $, the pullback functor along $ f $ from the over-category $ \\\\mathcal{C}/J $ to $ \\\\mathcal{C}/I $ is left adjoint to the pushf\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"module\": \"Mathlib.Topology.Sheaves.Presheaf\", \"type\": \"{X Y : TopCat.{v}} (f : X ⟶ Y) : pullback C f ⊣ pushforward C f\", \"doc\": \"Given topological spaces $X$ and $Y$ with a continuous map $f: X \\to Y$, the pullback presheaf functor (defined via left Kan extension) is left adjoint to the pushforward presheaf functor. This establi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafData), Y.kerAdjunction.unit.app I = CategoryTheory.eqToHom ⋯\", \"doc\": \"For any scheme $Y$ and ideal sheaf data $\\\\mathcal{I}$ on $Y$, the unit of the adjunction between the right opposite of the subscheme functor and the kernel functor evaluates at $\\\\mathcal{I}$ to the ca\"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : constantSheaf J A ⊣ Γ J A\", \"doc\": \"The constant sheaf functor is left adjoint to the global sections functor, establishing an adjunction between them in the category of sheaves with respect to a Grothendieck topology $J$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern base-change stability of morphism properties or module adjunction, not a relative dualizing line or its adjunction normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing sheaf of a proper flat nodal curve commutes with base change and its pullback to normalization is differentials twisted by nodal branches",
+   "results": "8 hits; names/files returned: AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no coherent relative-dualizing line, normalized adjunction or nodal normalization formula in these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits; names/files returned: none. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no coherent relative-dualizing line, normalized adjunction or nodal normalization formula in these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingSheaf|Gorenstein|fundamentalClass",
+   "results": "0 hits; names/files returned: none. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no coherent relative-dualizing line, normalized adjunction or nodal normalization formula in these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical module of a family of nodal algebraic curves is invertible and compatible with arbitrary change of base",
+   "results": "8 hits; names/files returned: Module.Invertible.of_isLocalization, Module.Invertible.instTensorProduct_2, Module.Invertible.instFinite, Module.Invertible.instDual, Module.Invertible.instTensorProduct, KaehlerDifferential.tensorKaehlerEquiv, Module.Invertible.instLocalizationLocalizedModule, Submodule.tensorInvEquiv. ",
+   "date": "2026-10-22",
+   "verdict": "no match: no coherent relative-dualizing line, normalized adjunction or nodal normalization formula in these hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-log-canonical-deletion-algebra",
+  "date": "2026-10-22",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Proper nodal dualizing line over an arbitrary base.",
+   "via": [
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-nodal-dualizing-base-change",
+  "worker": "stage1",
+  "summary": "Reused the existing arbitrary-base dualizing, finite-stage descent, normalized adjunction, cofactor and normalization-adjunction nodes; wrote out global Noetherian descent and model-independent comparisons. No new nodes. Corrected the nodal-fibre definition citation which accidentally introduced connectedness, retaining the intended disconnected-fibre theorem. Repair of returned head c553dccd431: compared against current origin/sheaf-dag, re-read the three prerequisites whose proof/review records changed, and made the affine Fitting application, polynomial chart conversion and separated duality hypotheses explicit; all prerequisite statements remain unchanged. Refreshed the repair against the newly fetched live DAG, checked all 55 statement/proof prerequisites and all 63 citation pairs, and made the geometric-fibre unramified base-change application and the pointwise syntomic hypotheses explicit. Return L rechecked on 2026-10-23: compare the returned head against the current live DAG, including every statement and proof prerequisite; clarify persistence of nonempty fibres under later stage changes and the common coefficient stage in the model comparison. Preserve the reviewed proof route and all source/search records. Reviewer FIX (re-applied a third time, after the c553dccd, af460146 and 852e159a FIXes were lost at refused landings): new statement-only node lem-sfb-nodal-dualizing-adjunction-line-comparison for the omega/K comparison and its compatibility with both base-change systems (steps 6-8, 12, 13); stage-fibre reducedness (step 4); Koszul-regularity citation (step 9). The new step-8 common-subalgebra sentence and step-2 persistence sentence of this head are kept.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Proper nodal dualizing line over an arbitrary base.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-regular-sequence-principal-neighbourhood",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-pur-relative-regular-equations-base-change",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-complete-intersection-fibres-limit-descent",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-independence-base-change",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-flat-lci-canonical-adjunction",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-lci-pointwise-criterion",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-nodal-curve-lci-criterion",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-nodal-family-fitting-singular",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-nodal-normalization-adjunction",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-pure-relative-dimension-finite-stage",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-syntomic-geometric-fibres-affine-criterion",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-syntomic-pointwise-local-model",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-two-term-perfect-determinant",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-unramified-limit-descent",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-surjective",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-noetherian-stage",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-weil-separably-closed-geometrically-connected",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "sk-thm-picard-rr",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic algebraic/coherent-duality or finite-stage descent tool used with its stated hypotheses; the alteration unit supplies no alternative statement. Its use preserves the proper nodal-family prerequisite of the existing unit route."
+   },
+   {
+    "node": "lem-trf-nodal-points-reduced-algebraically-closed",
+    "why": "Step 4 needs reducedness of the geometric fibres of the Noetherian stage family before applying the arbitrary-base dualizing theorem to it; this generic curve-over-an-algebraically-closed-field criterion is the existing node, and the unit supplies none."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Step 9 needs the regular conormal sequences to be Koszul-regular, the hypothesis of the cotangent presentation theorem; this generic commutative-algebra fact is the existing node, and the unit supplies none."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-kun-closed-point-field",
+  "lem-pur-relative-regular-equations-base-change",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-trf-complete-intersection-fibres-limit-descent",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-nodal-normalization-adjunction",
+  "lem-trf-pure-relative-dimension-finite-stage",
+  "lem-trf-syntomic-geometric-fibres-affine-criterion",
+  "lem-trf-syntomic-pointwise-local-model",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-trf-unramified-limit-descent",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-proper-noetherian-stage",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-separably-closed-geometrically-connected",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "sk-thm-picard-rr",
+  "thm-pd-spreading-out",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-1a19ed371",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-1a19ed371 (reviewer sub-agent of L); spot-checked: This is the 4th delivery of the same split. The c553dccd, af460146 and 852e159a FIXes were each lost at landing ('completed in this project's DAG but not in the live', svc.log 10-22 15:20 and 19:43, 10-23 00:17). This head has no lem-sfb-nodal-dualizing-adjunction-line-comparison, and neither do the live DAG and the snapshot. Delta against the 852e head: statement, stmt_deps and blueprint are byte-identical; 12 of 14 steps are identical; only steps 2 and 8 changed. Step 2 adds that nonemptiness persists at later stages, which is correct because a field extension of a nonempty fibre is nonempty. Step 8 adds a common finitely generated coefficient subalgebra, which is correct. I re-read every cited statement in this snapshot. I accept the STATEMENT-DISPUTED correction: def-trf-nodal-geometric-fibres requires connected fibres, and two disjoint P^1 satisfy the explicit nodal condition. Steps 1-3, 5, 10, 11 and 14 are correct. Small cases: P^1 gives -2, a rational self-node 0, one meeting point -1. Three faults remain open and I repaired them. (E5/C4) Flat-lci adjunction says only that K[1] 'is the relative dualizing complex'. By Stacks duality 0E2W that fixes omega~K only up to units, but steps 6-8, 12 and 13 need theta to commute with both base-change systems. This is true by 0E2Z, 0E2Y and 0E2W, but no node states it. FIX: I re-added the unsplit statement-only node lem-sfb-nodal-dualizing-adjunction-line-comparison, verbatim from the 852e fix, and cite it in steps 6, 7, 8, 12 and 13. An rg search for 0E2Y, 0E2Z and adjunction line + dualizing finds no duplicate: the new locnoeth-lci-curve-adjunction-gluing glues only K and alpha. A Mathlib grep finds nothing. (E1) Step 4 never shows the stage fibres are reduced, which the Gorenstein node needs in step 7. FIX: cite lem-trf-nodal-points-reduced-algebraically-closed. (C4) Step 9 applies the cotangent presentation, which needs Koszul-regular sequences. FIX: cite lem-weil-pbc-regular-sequence-koszul-regular. Both are added to tool_uses. Step 8 merges the 852e FIX text with this head's new sentence. proof_deps is the union (45); the longest step is 1659 characters; no SGA; no cycle. Batch-5 check: every flagged citation is a generic coherent, commutative-algebra or limit tool (Fitting, lci/syntomic, nodal lci, unramified/lci/dimension descent, flat-lci adjunction, determinant, cofactor, degree additivity, normalization adjunction, regular-equation base change, proper Noetherian stage, Riemann-Roch). Neither the l-adic trace formula assumption nor Poincare duality gives any of them, and none is a step of their proofs: the item serves the ctf-stability alteration route. All accepted. The declared generic tool_uses are accepted. Maintainer note: this FIX has now been lost 3 times; please promote the FIXed version or have NP adopt the comparison node.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
+}

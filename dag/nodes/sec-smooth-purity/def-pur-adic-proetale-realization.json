@@ -12,9 +12,55 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.md",
   "place": "node thm-pur-adic-reconstruction, order 2023"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restriction of scalars along a ring-sheaf isomorphism is an equivalence: construct the inverse from its inverse ring map, with identity-on-section unit and counit. Apply the constant-ring module-sheaf equivalence and fixed-ring scalar restriction along the explicit quotient equivalence. The composite is an equivalence, hence preserves finite limits and colimits and is additive. The same ring-sheaf argument gives integralExceptionalLevel_equivalence.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "def-pur-twist-sheaves",
+    "def-pur-adic-exceptional-system-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constantRingScalar calculation identifies the constant-ring presentation map on a constant scalar. Naturality of ring sheafification and the quotient equivalence inverse equation then identify the composite scalar map with the intrinsic scalar unit. Consequently the intrinsic module-sheafification unit defines a linear natural transformation from the identity to realization followed by the two coordinate restrictions. Its components are bijections: the underlying abelian presheaf is already a sheaf, so its sheafification unit is invertible. Invert this natural transformation to obtain the normalized fixed-unit comparison. Surjectivity of scalar-unit sections proves uniqueness.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "def-pur-adic-exceptional-system-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precomposition with the intrinsic realization equivalence is fully faithful on functor categories. Lift the composite of the fixed-unit comparison with the equivalence unit through this fully faithful functor. Cancelling the equivalence unit proves its normalization and uniqueness. Apply exact derived localization to this actual ordinary comparison.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict coordinate functor and ordinary evaluation commute definitionally, both on objects and on maps. For a normalized evaluation package, lift its factorization isomorphism composed with the inverse exact factorization through quasi-isomorphism localization. The lift component formula proves the required square. Cancel the exact factorization isomorphism and use localization natural-transformation extensionality to prove uniqueness. Compose these specified comparisons and the actual coordinate-equivalence counit exactly as in the existing direct and inverse coordinate definitions.",
+   "uses": [
+    "def-pur-adic-exceptional-system-realization",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "def-pur-twist-sheaves",
+  "def-pur-adic-exceptional-system-realization",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "kind": "stage3",
+  "by": "T2",
+  "date": "2026-10-25",
+  "note": "Explicit scalar-unit and localization proofs; all existing statements and construction bodies retained."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -96,7 +142,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
@@ -149,5 +206,15 @@
   "group": "N0",
   "result": "fix",
   "note": "Re-delivery of PASSed 76c20af30ac6 (landing return was a load timeout in base WeilSiteDerivedTensorDescent). All 13 owned modules byte-identical to 76c; item node adds only a correct lean.note (upstream exists_iso_realization_twistShiftPullbackLevel is only the reconstruction step); new-node edits trim implementation wording and add the real def-weil-exceptional-inverse-image citation; declaration lists match modules and statements are verbatim; dependency copies equal live. Statement substance unchanged from the clause-by-clause PASS (actual U, V, smoothPurityMap at K_n, IsIso, ctf endpoints, reduction equation for every n+1, coherent lift G; edge cases covered). New content: a §1(B) edit of Q118's live DerivedPullbackTensorHom (2 transparency options, 16 @[no_expose], not 9 as reported, including the operation functors). It does not address the landing failure and is ineffective: back to back, live 39.6/42.1 s vs delivered 36.6/41.9 s. The live module already has a published build and about 40 live files use the hidden names; 2 sampled importers compile clean. FIX: fixes/DerivedPullbackTensorHom.lean = live text. nt_compile --json: all 13 owned modules clean against live (5-26 s). Notes: if the dep node carries a group note, use --revert-nodes (the node is not in the snapshot); NW's re-binding of def-weil-finite-tor-amplitude left Sheaf.Paper.FiniteTorAmplitude, whose finiteTorConstructibleIntegral this item and at least 10 live modules use, with no owning node; land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T101433-L-3694026",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

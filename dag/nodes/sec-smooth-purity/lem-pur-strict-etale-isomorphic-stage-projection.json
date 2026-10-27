@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-strict-etale-isomorphic-stage-projection",
+ "kind": "statement",
+ "title": "Strict compact-support projection for isomorphic selected stages",
+ "statement": "Let O and O′ be commutative rings with elements ell and mu, phi : O → O′ a ring homomorphism, and r : ℕ → ℕ monotone. Let a be a strict coefficient change whose level maps O/(ell^(r(n)+1)) → O′/(mu^(n+1)) are bijective and send [x] to [phi(x)] [def-pur-strict-etale-coefficient-transport-interfaces]. For any compactification c of a scheme morphism and any strict compact-support presentations SA and SB [def-per-strict-etale-system-interfaces], there are exact strict coefficient transports TX, TY, TZ and a StrictEtaleTransportProjection P. This record consists solely of the normalized open/proper compact-support square, its finite-level projection squares, tensor/quotient interchanges, and their evaluation and quotient cubes. Quotient cubes compare the composites of any normalized open/proper quotient faces. The derived finite-level coefficient functors of TX and TY are equivalences. No exceptional right adjoint or exceptional comparison is part of this assertion. Index n denotes positive exponent n+1; r need not be strictly increasing.",
+ "stmt_deps": [
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Construction 5.15 and Lemma 5.22 (printed pp. 21, 35–36); geometric restriction part of the parent cofinal step, generalized to any monotone selection with isomorphic selected rings. The compact-support presentations already include their evaluated derived direct images."
+ },
+ "proof": [
+  {
+   "step": 1,
+   "text": "Use the coefficient-only isomorphic-stage transport construction at X, Y and c.Z. Each transport has an equivalence on every derived finite-level scalar functor.",
+   "uses": [
+    "lem-pur-strict-etale-isomorphic-stage-transport",
+    "def-pur-strict-etale-coefficient-transport-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "Apply the compact-support mate and quotient assembly to the three transports and their level equivalences. The resulting normalized record is StrictEtaleTransportProjection; package the two requested equivalence conjuncts.",
+   "uses": [
+    "lem-pur-strict-etale-projection-from-equivalences",
+    "def-pur-strict-etale-isomorphic-stage-projection-interfaces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "lem-pur-strict-etale-isomorphic-stage-transport",
+  "lem-pur-strict-etale-projection-from-equivalences",
+  "def-pur-strict-etale-isomorphic-stage-projection-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Extraction of geometric left-adjoint projection construction from the parent cofinal argument. Arithmetic ideal equality and exceptional mate assembly are proved in the parent Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of inverse systems of sheaves along a monotone map and coefficient ring isomorphisms commutes with derived compact support and quotient tensor",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.pushforwardNatIso_inv; scheme restriction isomorphisms. Ordinary tools, no strict derived-system projection cube.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; inspected result signatures."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv, mateEquiv_counit, mateEquiv_vcomp and generic mate identities.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tools do not construct the strict coefficient transports or their geometric cube."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of finite free coefficients commutes with right adjoints of compact support on derived sheaf systems",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; sheafificationCompPullback; ordinary sheaf pullback/pushforward adjunctions.",
+   "date": "2026-10-26",
+   "verdict": "No strict coefficient-system geometric realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*[Ii]somorphic|[Cc]ofinal.*[Pp]rojection|mate.*cube",
+   "results": "msearch: zero Mathlib hits. Repository search found the existing alternate SystemProjection cofinal interface, but no bridge to the StrictEtale transport records.",
+   "date": "2026-10-26",
+   "verdict": "New bridge required. Generic exchangeMate_cube is used to assemble the parent exceptional comparison, not restated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCoefficientSystemAdjoint",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Former strict coefficient-system construction, parent cofinal step: identity-on-representatives quotient identifications and geometric projection squares before taking the exceptional mate.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictEtaleIsomorphicStageProjection",
+  "file": "lean/Sheaf/Paper/StrictEtaleIsomorphicStageProjection.lean",
+  "declaration": "AlgebraicGeometry.strictEtaleIsomorphicStageProjection",
+  "declarations": [
+   "AlgebraicGeometry.strictEtaleIsomorphicStageProjection"
+  ],
+  "statement": "theorem strictEtaleIsomorphicStageProjection\n    {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}\n    {phi : O →+* O'} {index : ℕ →o ℕ}\n    (a : StrictEtaleCoefficientChange O O' ell mu phi index)\n    (_ha : ∀ n, Function.Bijective (a.ring n))\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (SA : StrictEtaleCompactSupport O ell c) (SB : StrictEtaleCompactSupport O' mu c) :\n    ∃ (TX : StrictEtaleCoefficientTransport a X SA.PX SB.PX)\n      (TY : StrictEtaleCoefficientTransport a Y SA.PY SB.PY)\n      (TZ : StrictEtaleCoefficientTransport a c.Z SA.PZ SB.PZ)\n      (_P : StrictEtaleTransportProjection a c SA SB TX TY TZ),\n      ∀ n, (TX.level n).derived.IsEquivalence ∧ (TY.level n).derived.IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T001020-L-4162695",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3f2d5",
+  "group": "G3",
+  "result": "fix",
+  "landing": "20261026T023216-L-530734",
+  "kind": "interface",
+  "note": "independent cc review: moved Interfaces declarations vs published item module (diff identical); item proof vs two new sorried lemmas and their nodes; importer EtaleCoefficientSystemAdjoint compiled against delivery vs published (no errors, both >60s under load ~88)"
+ }
+}

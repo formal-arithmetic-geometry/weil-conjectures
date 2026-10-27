@@ -1,0 +1,152 @@
+{
+ "id": "def-sfb-form-differential-expressions",
+ "kind": "definition",
+ "title": "Coordinate differential expressions and principal symbols on complex type forms",
+ "status": "split",
+ "statement": "Use the real and complex fields $\\mathbf R,\\mathbf C$ [def-weil-field]. For $n\\geq0$ let $V=\\mathbf C^n$ with real coordinate vectors $e_j$ indexed by $\\{1,\\ldots,n\\}\\times\\{0,1\\}$. Let $F_a=\\operatorname{Alt}_{\\mathbf R}^a(V,\\mathbf C)$. For integers $p,q$ define $F^{p,q}\\subset F_{(p+q)_+}$ to be zero outside $0\\leq p,q\\leq n$; inside that range it consists of tensors $\\tau$ satisfying $\\sum_j\\tau(v_1,\\ldots,iv_j,\\ldots,v_{p+q})=i(p-q)\\tau(v_1,\\ldots,v_{p+q})$. These are the coordinate fibres of the type spaces of [def-sfb-hermitian-dolbeault-data]. For an open $U\\subset V$ and natural numbers $a,b,k$, a smooth coordinate differential expression of order at most $k$ is a family of smooth complex-linear maps $A_{\\ell,j}:U\\to\\operatorname{Hom}_{\\mathbf C}(F_a,F_b)$, where $0\\leq\\ell\\leq k$ and $j$ is an ordered list of $\\ell$ real coordinate directions. Its action is $Af(z)=\\sum_{\\ell=0}^k\\sum_j A_{\\ell,j}(z)D^\\ell f(z)(e_{j_1},\\ldots,e_{j_\\ell})$, with the empty list giving the order-zero term. Its degree-$k$ principal symbol at a real covector $\\xi\\in V^*_{\\mathbf R}$ is $\\sigma_k(A)(z,\\xi)=\\sum_j(\\prod_{t=1}^k\\xi(e_{j_t}))A_{k,j}(z)$, without a factor of $i$. Let $M$ be a complex manifold modeled on $V$ and use the concrete spaces $A^{p,q}(M)$ and coordinate pullbacks of [def-sfb-hermitian-dolbeault-data]. A complex-linear map on smooth forms has differential order at most $k$ from type $(p,q)$ to $(r,s)$ if it sends that source type into the target type and in every atlas chart has such a coordinate expression, whose action agrees with the map on every smooth source-type section. For a type endomorphism it is elliptic of order $k$ if in every chart one can choose such a representing expression whose degree-$k$ symbol is a bijection of $F^{p,q}$ for every point and every nonzero real covector. Real ellipticity means that the same symbol, restricted from complex scalars to real scalars, is a bijection on the underlying real type fibre.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-hermitian-dolbeault-data"
+ ],
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Kong, Notes on Complex Geometry (April 9, 2025), §3.1 tensor types and §6.2 definition immediately preceding Lemma 6.4, printed p.23; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. The ordered-coordinate-list expansion is the usual multi-index expansion with repeated multi-indices collected."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth differential operators on differential forms coordinate coefficients principal symbol ellipticity",
+   "results": "[leansearch] OK 8 hit(s); returned names: extDeriv_extDeriv, extDeriv_extDeriv_apply, contMDiffOn_infty, extDerivWithin_extDerivWithin_apply, RingHom.Smooth, Manifold.termMDiffAt[_]__, smoothSheafCommRing.coeFun, IsLocalFrameOn.contMDiffOn_of_coeff; digest 601be1e8b0e112bf",
+   "date": "2026-10-24",
+   "verdict": "No definition of coordinate differential order or its principal symbol on type-form fibres. Reuse the existing real derivative and alternating tensor infrastructure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coordinate definition of smooth differential operator on type p q differential forms its principal symbol and ellipticity",
+   "results": "[leanfinder] OK 8 hit(s); returned names: hfdifferential, fdifferential, Manifold.term𝒅ₕ, Manifold.termMfderiv[_]__, Manifold.termMfderiv%__, Manifold.termCMDiff[_]____, Manifold.term𝒅, Manifold.termCMDiff____; digest 71385a362e53cb16",
+   "date": "2026-10-24",
+   "verdict": "No definition of coordinate differential order or its principal symbol on type-form fibres. Reuse the existing real derivative and alternating tensor infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"principalSymbol\"",
+   "results": "[loogle] OK 0 hit(s); returned names: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "No definition of coordinate differential order or its principal symbol on type-form fibres. Reuse the existing real derivative and alternating tensor infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "principalSymbol|principal_symbol|IsElliptic|DifferentialOperator",
+   "results": "[grep] OK 0 hit(s); returned names: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "No definition of coordinate differential order or its principal symbol on type-form fibres. Reuse the existing real derivative and alternating tensor infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'principalSymbol|principal_symbol|IsElliptic|DifferentialOperator|lem-sfb-dolbeault-laplacian-elliptic' lean/WeilConjectures lean/Sheaf; rg -l 'principal symbol|principal.symbol|differential operator|differential.operator' dag/nodes; rg -n 'dolbeault|Dolbeault|Hermitian|principalSymbol|principal_symbol|formDifferential|FormDifferential|typeTensor' dag/lean_names_upstream.json lean/WeilConjectures",
+   "results": "No upstream symbol or form-differential declaration. Sheaf matches: CoordinateWeightedAdjoint.lean has coordinate firstOrder and weightedAdjoint, but no principal symbol; HermitianDolbeaultOrthogonalDecomposition.lean cites the item. DAG hits include the present analytic theorem nodes and the pseudodifferential/distribution framework; none defines the differential order and principal symbol on complex type forms. Existing HermitianDolbeaultData.lean supplies smooth forms, type spaces, metric, pairing, and normalized operators and is reused.",
+   "date": "2026-10-24",
+   "verdict": "No existing declaration or definition node of this notion."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "python3 tools/blueprint_refs.py search 'principal symbol'; python3 tools/blueprint_refs.py ancestor lem-sfb-dolbeault-laplacian-elliptic",
+   "results": "0 blueprint nodes match 'principal symbol'\na node created for lem-sfb-dolbeault-laplacian-elliptic has blueprint.from.node = None",
+   "date": "2026-10-24",
+   "verdict": "The inherited blueprint ancestor is null; preserve the existing via chain."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dolbeault-laplacian-elliptic",
+  "date": "2026-10-24",
+  "group": "Q160"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Lemmas 6.2 and 6.4, smooth formal adjoints and ellipticity of the Dolbeault Laplacian. Coordinate meaning of differential order and the highest-order principal symbol on the actual type fibre.",
+   "via": [
+    "lem-sfb-dolbeault-laplacian-elliptic",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.FormDifferentialExpressions",
+  "declaration": "ComplexManifold.FormDifferentialExpression",
+  "declarations": [
+   "ComplexManifold.FormTensor",
+   "ComplexManifold.typeTensor",
+   "ComplexManifold.FormDifferentialExpression",
+   "ComplexManifold.FormDifferentialExpression.apply",
+   "ComplexManifold.FormDifferentialExpression.symbol",
+   "ComplexManifold.FormDifferentialExpression.Represents",
+   "ComplexManifold.HasFormDifferentialOrder",
+   "ComplexManifold.IsFormElliptic"
+  ],
+  "file": "lean/Sheaf/Geometry/Manifold/FormDifferentialExpressions.lean",
+  "statement": "structure FormDifferentialExpression (n a b k : ℕ) (U : Set (Model n))",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d68d0610",
+  "group": "Q160",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d68d0610",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Item record changes only lean + added stmt_deps (def-sfb-hermitian-dolbeault-data, def-sfb-form-differential-expressions); lean.statement verbatim through ':= by'; new def node record complete with verbatim statement. Clause check vs node (Kong L6.2/6.4): compact Hausdorff complex manifold via 𝓘(ℂ,Fin n→ℂ) ∞, n≥1, no extra assumptions; ∃ D : DolbeaultOperators pins dbar (bidegree + chart extDeriv) and adjoint (formal_adjoint + positive l2Pair), so adjoint existence is a conclusion; order-1 adjoint, typewise adjunction, uniqueness on type (p,q+1) (true by positivity), order-2 Laplacian, IsFormElliptic with complex and restrictScalars ℝ BijOn on the typeTensor fibre for all nonzero real covectors. The ∃-representing-expression ellipticity is well defined (symmetrized top coefficients on type fibres are determined by L via compactly supported type sections). Type sign i(p−q) checked; edge cases empty M, q=0/n, p=0/n, k=0 fine; symbol −(εε†+ε†ε) invertible for any degree normalization. H4: no symbol or general-order differential-operator notion in lean/Sheaf, the DAG or Mathlib (firstOrder in CoordinateWeightedAdjoint is a first-order proof dep only). No hollow defs, docstrings with source and blueprint id, six proof steps in the theorem docstring, autoImplicit false, only the theorem is sorry, Worker report and Second reading sections present. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,224 @@
+{
+ "id": "lem-trf-qcqs-relative-finite-presentation-approximation",
+ "kind": "statement",
+ "title": "Relative finite-presentation approximation of a qcqs morphism",
+ "statement": "Let $f:Z\\to S$ be a morphism of schemes [def-pc-scheme], where both $Z$ and $S$ are quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. There exist a small nonempty directed set $I$, a system of $S$-schemes $Z_i\\to S$ of finite presentation [def-sbc-locally-finite-presentation], and affine $S$-morphisms $Z_j\\to Z_i$ for $j\\geq i$ [pqf-def-affine-morphism], satisfying the identity and composition laws, together with compatible $S$-morphisms $p_i:Z\\to Z_i$ exhibiting $Z$ as their inverse limit in schemes. In particular $f$ is the composite of each $p_i$ with $Z_i\\to S$. Each $Z_i$ is quasi-compact and quasi-separated. Inverse limit means that every compatible family of maps from a scheme to the $Z_i$ factors uniquely through $Z$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 09MV, label lemma-relative-approximation; qcqs-base special case, including qcqs stages of finite presentation over a qcqs base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-qcqs-arrow-absolute-approximation] to $f:Z\\to S$. Write the resulting arrows as $h_i:A_i\\to B_i$, the projections as $u_i:Z\\to A_i$ and $v_i:S\\to B_i$, and the transitions as $a_{ji},b_{ji}$. Thus $h_i u_i=v_i f$, $Z=\\varprojlim A_i$, $S=\\varprojlim B_i$, and both systems have affine transitions and qcqs stages of finite type over $\\mathbf Z$. The index set is small, nonempty and directed.",
+   "uses": [
+    "lem-trf-qcqs-arrow-absolute-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MV, label lemma-relative-approximation, proof"
+   }
+  },
+  {
+   "text": "The node [lem-weil-pbc-finite-type-over-noetherian] gives that $\\operatorname{Spec}\\mathbf Z$ is Noetherian. Apply [pqf-lem-lft-fp-locnoeth] to the finite-type structural map $A_i\\to\\operatorname{Spec}\\mathbf Z$, obtaining local finite presentation. Both structural maps are locally of finite type; applying [lem-a1-map-over-base-finite-presentation] over $\\operatorname{Spec}\\mathbf Z$ therefore makes $h_i:A_i\\to B_i$ locally of finite presentation. Its source and target are qcqs, so clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] gives quasi-compactness and quasi-separatedness of $h_i$. Hence $h_i$ is of finite presentation, meaning precisely locally of finite presentation, quasi-compact and quasi-separated.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MV, label lemma-relative-approximation, proof"
+   }
+  },
+  {
+   "text": "Put $Z_i=A_i\\times_{B_i}S$ using $v_i$ [def-pc-fibre-product], with structure map $r_i:Z_i\\to S$ the second projection. It is the base change of $h_i$, so clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] makes it of finite presentation. Clause (2), with the qcqs base $S$, makes $Z_i$ qcqs. Define the transition $t_{ji}:Z_j\\to Z_i$ by the pair $(a_{ji}\\operatorname{pr}_{A_j},\\operatorname{pr}_S)$; it is defined because $h_i a_{ji}=b_{ji}h_j$ and $v_i=b_{ji}v_j$. The identity and composition laws hold since their composites with both projections agree. Apply the affine-transition conclusion of [lem-weil-pbc-limit-fibre-products] to the three systems $(A_i),(B_i)$ and the constant system $(S)$ with maps $v_i:S\\to B_i$. All three sets of transitions are affine, the last being identities. Consequently all $t_{ji}$ are affine. Each $t_{ji}$ is over $S$ by its second component.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MV, label lemma-relative-approximation, proof"
+   }
+  },
+  {
+   "text": "The constant system $(S)$ has limit $S$: a compatible family of maps into it is constant, because any two indices have an upper bound. The limit comparison in [lem-weil-pbc-limit-fibre-products] therefore identifies the limit of $(Z_i)$ with $Z\\times_S S$, where the maps to $S$ are $f$ and the identity. Its first projection is an isomorphism with inverse $(\\mathrm{id}_Z,f)$: both composites are identities by the two projection equations [def-pc-fibre-product]. Thus the cone from $Z$ has projections $p_i=(u_i,f)$, and it is limiting in schemes. Explicitly, a compatible family $T\\to Z_i$ supplies compatible maps $T\\to A_i$ and one common map $T\\to S$; the cited limit comparison gives their unique map to $Z\\times_S S$, and the displayed isomorphism gives a unique map $T\\to Z$. Its composites are the given family. Finally $r_i p_i=f$ by the second projection, which proves every compatibility and the claimed factorization of $f$.",
+   "uses": [
+    "lem-weil-pbc-limit-fibre-products",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09MV, label lemma-relative-approximation, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-qcqs-arrow-absolute-approximation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-limit-fibre-products"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 09MV, label lemma-relative-approximation, proof, restricted to a qcqs base; varying-base approximation Tag 0GS1 and fibre-product limit comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Any quasi compact quasi separated scheme over a quasi separated scheme is a directed inverse limit of schemes of finite presentation with affine transition maps",
+   "results": "{\"t\": \"2026-10-23T12:55:32Z\", \"tool\": \"leanfinder\", \"query\": \"Any quasi compact quasi separated scheme over a quasi separated scheme is a directed inverse limit of schemes of finite presentation with affine transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover\"], \"digest\": \"a0d53bae6bf737db\"}; No match: the hits descend morphisms into a finitely presented target in an already supplied limit system; none constructs a relative finite-presentation approximation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.preservesColimit_yoneda\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S : AlgebraicGeometry.Scheme} (D : CategoryTheory.Functor I (CategoryTheory.Over S)) [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (CategoryTheory.Over.Hom.left (D.map f))] [∀ (i : I), CompactSpace ↥(D.obj i)\", \"doc\": \"`Hom_S(-, X)` sends a cofiltered limit of qcqs `S`-schemes with affine transition maps\\nto a filtered colimit if `X` is locally of finite presentation over `X`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S) (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltere\", \"doc\": \"Given a cofiltered diagram of qcqs schemes `Dᵢ` over `S` with affine transition maps.\\nIf `X` is locally of finite presentation over `S`, then any `S`-morphism `lim Dᵢ ⟶ X` factors\\nthrough some `lim Dᵢ\"}\n\nNo match: the hits descend morphisms into a finitely presented target in an already supplied limit system; none constructs a relative finite-presentation approximation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*approximation|approximation.*relative|exists.*[Ff]inite[Pp]resentation",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1163\", \"text\": \"/-- See `Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation` for the general case. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1164\", \"text\": \"private nonrec lemma Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1232\", \"text\": \"lemma Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1257\", \"text\": \"  -- Using the affine version `exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1273\", \"text\": \"    choose k ak hk hk' using fun j ↦ exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine\"}\n\nNo match: the hits descend morphisms into a finitely presented target in an already supplied limit system; none constructs a relative finite-presentation approximation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism from a qcqs scheme to a quasi separated scheme has a directed finite presentation approximation with affine transition morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The predicate that a morphism $ f: X \\\\to Y $ of schemes is quasi-separated, i.e., the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [hY : QuasiSeparatedSpace Y] [QuasiSeparated f] : QuasiSeparatedSpace X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiSeparated f ↔ QuasiSeparatedSpace ↥X\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is quasi-separated, then a morphism $f: X \\\\to Y$ is quasi-separated if and only if $X$ is a quasi-separated topological space.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace X] : QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n\nNo match: the hits descend morphisms into a finitely presented target in an already supplied limit system; none constructs a relative finite-presentation approximation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a morphism of schemes by a directed inverse system of finitely presented schemes over its target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) →\\n        (D ⟶ (CategoryTheory.Functor.const I).obj S) → (X ⟶ S) → Type (u + 1)\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this inductive type encode\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.b\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} → (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this function returns the \"}\n\nNo match: the hits descend morphisms into a finitely presented target in an already supplied limit system; none constructs a relative finite-presentation approximation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A qcqs scheme over a qcqs base is a directed limit of finitely presented schemes over the fixed base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{I : Type*} [Category* I] {D : I ⥤ Scheme.{u}} (c : Cone D) (hc : IsLimit c) [∀ i, IsAffine (D.obj i)] : IsAffine c.pt\", \"doc\": \"If $\\\\{X_i\\\\}_{i \\\\in I}$ is a diagram of affine schemes indexed by a category $I$, and $c$ is a limit cone over this diagram in the category of schemes, then the apex of the cone $c$ is also an affine s\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {σ : Type v} [Small.{u, v} σ],\\n  CategoryTheory.Limits.HasColimitsOfShape (CategoryTheory.Discrete σ) AlgebraicGeometry.Scheme\", \"doc\": \"For any small type $\\\\sigma$, the category of schemes admits all colimits of diagrams indexed by the discrete category constructed from $\\\\sigma$, where the discrete category has objects corresponding t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.CanonicallyOver\", \"module\": \"Mathlib.AlgebraicGeometry.Over\", \"type\": \"(X S : Scheme.{u})\", \"doc\": \"The abbreviation denotes the class of schemes equipped with a canonical morphism to a given scheme $X$, forming the over category of schemes over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instHasColimitOverScheme\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \": HasColimit F\", \"doc\": \"The category of schemes admits colimits for functors defined on small categories.\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"CategoryTheory.Limits.HasFiniteLimits AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes satisfies all finite limit conditions, including the existence of terminal objects, binary products, and pullbacks, as required by the inductive definition of having finite lim\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasColimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes admits all colimits, meaning that for any small diagram in this category, there exists a colimit object within the category of affine schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\nNo match: the hits descend maps into finitely presented targets for already given diagrams; they do not construct the relative approximation required here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsAffineHom",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.preservesColimit_yoneda\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S : AlgebraicGeometry.Scheme} (D : CategoryTheory.Functor I (CategoryTheory.Over S)) [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (CategoryTheory.Over.Hom.left (D.map f))] [∀ (i : I), CompactSpace ↥(D.obj i)\", \"doc\": \"`Hom_S(-, X)` sends a cofiltered limit of qcqs `S`-schemes with affine transition maps\\nto a filtered colimit if `X` is locally of finite presentation over `X`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S) (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltere\", \"doc\": \"Given a cofiltered diagram of qcqs schemes `Dᵢ` over `S` with affine transition maps.\\nIf `X` is locally of finite presentation over `S`, then any `S`-morphism `lim Dᵢ ⟶ X` factors\\nthrough some `lim Dᵢ\"}\nNo match: the hits descend maps into finitely presented targets for already given diagrams; they do not construct the relative approximation required here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*approximation|approximation.*relative|exists.*[Ff]inite[Pp]resentation",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1163\", \"text\": \"/-- See `Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation` for the general case. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1164\", \"text\": \"private nonrec lemma Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1232\", \"text\": \"lemma Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1257\", \"text\": \"  -- Using the affine version `exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1273\", \"text\": \"    choose k ak hk hk' using fun j ↦ exists_π_app_comp_eq_of_locallyOfFinitePresentation_of_isAffine\"}\nNo match: the hits descend maps into finitely presented targets for already given diagrams; they do not construct the relative approximation required here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q100"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting 09NI proof, second paragraph: write the affine source as a directed limit of schemes of finite presentation over the target; serves the same affine-neighbourhood dependency of the ancestor as the item.",
+   "via": [
+    "lem-trf-affine-source-stalk-isomorphism-neighbourhood",
+    "lem-trf-integral-codimension-one-affine-neighbourhood",
+    "lem-trf-codimension-one-points-affine-neighbourhood",
+    "lem-trf-relative-nodal-point-pinching",
+    "lem-trf-exceptional-contraction-diamond",
+    "lem-trf-valuation-stable-blowdown-uniqueness",
+    "lem-trf-valuation-contracted-component-inclusion",
+    "lem-trf-valuation-semistable-dominates-stable",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-qcqs-relative-finite-presentation-approximation",
+  "worker": "stage1",
+  "summary": "Read Stacks 09MV and 0GS1, the latest blueprint ancestor, and the project approximation declarations. Retained the statement and all imported fields. Split off only the simultaneous absolute approximation of an arbitrary arrow; use existing finite-presentation permanence, qcqs permanence and the full fibre-product limit statement for the fixed-base assembly. Checked all cited statements, the constant-system limit and the final universal property. Existing project approximation theorems assume locally finite type and are not attachments.",
+  "blueprint": "Supporting 09NI proof, second paragraph: write the affine source as a directed limit of schemes of finite presentation over the target; serves the same affine-neighbourhood dependency of the ancestor as the item. The four steps realize the auxiliary relative approximation invoked by the supporting 09NI neighbourhood proof, via 0GS1 and fixed-target fibre products; no trace-formula route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-map-over-base-finite-presentation",
+    "why": "Generic finite-presentation permanence for an arrow over a common base; this algebraic-geometric tool is not replaced by any statement of the trace-locality unit."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Generic theorem that inverse limits of affine-transition scheme diagrams commute with fibre products, including affineness of the induced transitions; the trace-locality unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-limit-fibre-products"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-e7cd76626",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-e7cd76626 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-qcqs-arrow-absolute-approximation, every cited statement, and Stacks limits.tex 0GS1 (l.1594), 09MV (l.1655), 01ZA, 01ZC and categories 0032. The item statement is unchanged and is the qcqs-base case of 09MV. Step 1 takes only what 0GS1 states. Step 2: Spec Z is Noetherian, so A_i is lfp over Z; 02FV then makes h_i lfp, and qcqs-permanence (1) makes it qc and qs, so h_i is of finite presentation. Step 3: Z_i = A_i x_{B_i} S is fp over S by (3) and qcqs by (2); t_ji is well defined, since h_i a_ji = b_ji h_j and v_i = b_ji v_j; lem-weil-pbc-limit-fibre-products, applied to (A_i), (B_i) and the constant system (S) with g_i = v_i, gives affine transitions, all its hypotheses checked. Step 4: lim Z_i = Z x_{f,S,id} S, which is Z, with p_i = (u_i, f) and r_i p_i = f; the limit is in schemes. The new node is a correct statement-only node. Its 'directed poset' is true by 0032. The report's source error in the 0GS1 proof (b'' <= min(b, b') gives no upper bound) is real, and the repair through 01ZC existence plus equality works. It is not a restatement of the item: the targets vary and are absolute over Z. No duplicate: rg -L for 0GS1/09MV/approximate-morphism found nothing else; the nagata stage-data node (lft f), finite-type-fp-model-system, 01ZA and 07RN nodes differ; the project Lean nonempty_finitePresentationApproximation assumes LocallyOfFiniteType. Edge cases checked: empty Z or S, f already fp, an infinitely generated affine map. Accepted tool_uses: lem-a1-map-over-base-finite-presentation and lem-weil-pbc-limit-fibre-products, both generic. No SGA cited. Minor: the new node lacks lean_audit/merged_into keys, common among recent nodes, and preflight passed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsRelativeFinitePresentationApproximation",
+  "declaration": "AlgebraicGeometry.exists_qcqs_relative_finitePresentation_approximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsRelativeFinitePresentationApproximation.lean",
+  "statement": "theorem exists_qcqs_relative_finitePresentation_approximation {Z S : Scheme.{u}} [CompactSpace Z] [QuasiSeparatedSpace Z] [CompactSpace S] [QuasiSeparatedSpace S] (f : Z ⟶ S) : ∃ (I : Type u) (_ : Preorder I) (_ : IsDirected I (· ≤ ·)) (_ : Nonempty I) (D : Iᵒᵖ ⥤ Scheme.{u}) (q : D ⟶ (Functor.const Iᵒᵖ).obj S) (π : (Functor.const Iᵒᵖ).obj Z ⟶ D), (∀ i : Iᵒᵖ, LocallyOfFinitePresentation (q.app i) ∧ QuasiCompact (q.app i) ∧ QuasiSeparated (q.app i)) ∧ (∀ (i j : Iᵒᵖ) (h : i ⟶ j), IsAffineHom (D.map h)) ∧ (∀ i : Iᵒᵖ, π.app i ≫ q.app i = f) ∧ (∀ i : Iᵒᵖ, CompactSpace (D.obj i) ∧ QuasiSeparatedSpace (D.obj i)) ∧ Nonempty (IsLimit (Cone.mk Z π))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-555948bdc",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09MV (limits.tex l.1655), qcqs-base case. Checked: qcqs Z,S; nonempty directed I : Type u; D : Iᵒᵖ ⥤ Scheme with q : D ⟶ const S; finite presentation as LocallyOfFinitePresentation ∧ QuasiCompact ∧ QuasiSeparated (01TP); IsAffineHom transitions; π.app i ≫ q.app i = f; qcqs stages; IsLimit (Cone.mk Z π) in Scheme. Edge cases (empty Z/S, f = 𝟙, singleton index) admitted, empty index excluded as required. No Mathlib or project duplicate. No defs, sorry proof, docstrings and imports fine, lean.statement verbatim. No files changed, no compile run. Minor: the second reading was done by the same worker."
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-open-quotient-normalized-cochains",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor and finite-reduction compatibility: the normalized scalar and tensor chain comparisons before localization.",
+   "via": [
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "kind": "statement",
+ "title": "Normalized strict quotient tensor cochains for compatible open models",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and an open immersion $j:U\\to X$ of Noetherian schemes, with $\\ell$ invertible in global sections. Let $C$ be a compatible open tensor context [lem-pur-completed-open-tensor-representatives], using the completed coefficient sheaves $B_W$ and strict positive quotient towers $A_n=\\mathcal O_E/\\varpi^{n+1}$. There exist normalized tensor-completion presentations $t_X,t_U$ [def-sf-tensor-completion-comparison], strict scalar-restriction compatibility $sc$, and the strict scalar comparison $r$ induced by $C.coefficients.ordinary$. For every pair of flat-term K-flat complexes $Q$ over $B_U$ and $F$ over $B_X$ representing integral constructible objects, there is a StrictSquare [def-sf-open-tensor-quotient-data] with total chain comparison $C.strictOpen.totalComparison$, scalar compatibility $sc$ and $r$. This includes the two balanced coefficient isomorphisms with formula $(x\\otimes y)\\otimes a\\mapsto(x\\otimes a)\\otimes(y\\otimes1)$, the coefficient-linear finite gamma comparisons, their scalar-restriction and reduction equations, scalar-unit augmentations, and the strict square and its localized equality. Its upper and lower augmentations equal the first coordinates of $t_X,t_U$ in every level and degree (RoosNormalization). All quotient transitions and signed unbounded total differentials are retained. This assertion does not give integral constructibility preservation, finite-extension identification, or new derived open operations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I; Bhatt–Scholze Lemma 6.5.8(2),(3). Agent-formulated strict-system specialization."
+ },
+ "stmt_deps": [
+  "def-sf-open-tensor-quotient-data",
+  "lem-pur-completed-open-tensor-representatives",
+  "def-sf-tensor-completion-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Global invertibility gives invertibility in each residue field. Use the existing normalized tensor-completion model existence on X and U. Obtain sc,r and their scalar-unit compatibility from the strict open scalar comparison lemma.",
+   "uses": [
+    "lem-sf-tensor-completion-model-existence",
+    "lem-sf-open-quotient-scalar-unit-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized balancing isomorphisms on both pairs. Construct gamma by conjugation of the fixed integral chain comparison through balancing and scalar reduction. Fully faithful restriction lifts it to coefficient-linear finiteGamma and supplies all reduction equations.",
+   "uses": [
+    "lem-sf-open-quotient-coefficient-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define upper and lower as scalarUnitTower followed by balancing. The coefficient formulas give their scalar-unit section formulas. Naturality of scalarUnitTower with tc.chain, the reduction equation, and the scalar-unit compatibility give the strict square. Define lowerRoute by tc.chain followed by extension of lower. Apply transpose and localization to the strict equality for derivedSquare. Finally use total-summand, tensor and sheafification extensionality: the sections formula agrees with the first Roos coordinate supplied by Tensor.canonical. Thus both augmentations satisfy RoosNormalization.",
+   "uses": [
+    "lem-sf-open-quotient-scalar-unit-compatibility",
+    "lem-sf-open-quotient-coefficient-comparisons",
+    "def-sf-tensor-completion-comparison",
+    "lem-sf-open-quotient-roos-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-tensor-completion-model-existence",
+  "lem-sf-open-quotient-scalar-unit-compatibility",
+  "lem-sf-open-quotient-coefficient-comparisons",
+  "def-sf-tensor-completion-comparison",
+  "lem-sf-open-quotient-roos-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Z5: scalar-unit naturality and fully faithful scalar restriction refine the strict-chain specialization of Tag 0E8I and sites-cohomology Tag 0GL1; Roos normalization uses Tensor.canonical."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product cochain complex extension by zero quotient tower scalar unit augmentation square",
+   "results": "HomologicalComplex tensor-unit lemmas and CochainComplex.augment (natural-number complexes); no normalized strict open tensor quotient square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict coefficient tower tensor augmentation scalar restriction extension by zero chain comparison",
+   "results": "Algebra.TensorProduct.map_restrictScalars_comp_includeRight, IsBaseChange.comp_iff, and ordinary module tensor lemmas; none concerns sheafified strict complex systems.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Aa]ugment|[Aa]ugment.*tensor|[Ee]xtension[Bb]y[Zz]ero",
+   "results": "Five matches in AugmentedSimplexCategory.Monoidal; no ringed-site coefficient tower theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorQuotientAugmentation",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorQuotientCochains",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorQuotientCochains.lean",
+  "declaration": "WeilConjectures.OpenTensorQuotient.openQuotientNormalizedCochains",
+  "statement": "theorem openQuotientNormalizedCochains [IsNoetherian X] [IsNoetherian U]\n    (hlX : IsUnit (l : Γ(X, ⊤))) (hlU : IsUnit (l : Γ(U, ⊤)))\n    (C : CompletedOpenTensor.Context l E j) :\n    ∃ (tensorX : OpenFactorCoherence.Tensor l E X)\n      (tensorU : OpenFactorCoherence.Tensor l E U)\n      (sc : ScalarCompatibility l E j C.operations)\n      (r : ScalarComparison l E j C.operations sc C.coefficients),\n      ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ)\n        (F : CochainComplex (scalarReductionSource l E X) ℤ),\n        integralOperationsGoodComplex l E U Q → integralOperationsGoodComplex l E X F →\n        sfIntegralConstructible l E U (DerivedCategory.Q.obj Q) →\n        sfIntegralConstructible l E X (DerivedCategory.Q.obj F) →\n        ∃ z : StrictSquare l E j C.operations C.strictOpen.totalComparison sc C.coefficients r\n            Q F,\n          RoosNormalization l E X tensorX\n            ((OpenSemilinearTensor.extensionComplex l E j C.operations).obj Q) F z.upper ∧\n          RoosNormalization l E U tensorU Q\n            ((OpenSemilinearTensor.restrictionComplex l E j C.operations).obj F) z.lower",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2391b",
+  "group": "E4",
+  "result": "fix",
+  "landing": "20261025T122806-L-1807639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T094550-L-243433",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

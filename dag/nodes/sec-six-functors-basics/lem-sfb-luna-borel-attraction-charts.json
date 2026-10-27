@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-luna-borel-attraction-charts",
+ "kind": "statement",
+ "title": "Luna affine attraction neighbourhoods stable under the common unipotent subgroup",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field]. All algebraic groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Solvable groups, unipotent groups and tori have the meanings of [def-sfb-solvable-group-structure]: solvability is termination of successive commutator subgroup schemes, a smooth group is unipotent when its geometric points are unipotent matrices in a faithful representation, and a torus is isomorphic to $(\\mathbf G_m)^r$ for some $r\\geq0$. A Borel subgroup of a smooth connected group is a maximal smooth connected solvable subgroup; a maximal torus is a torus subgroup maximal under inclusion. Let $G$ be smooth and connected, let $T\\subseteq G$ be a maximal torus, and let $X=\\mathcal B(G)$ and $b_B\\in X(k)$ denote the flag variety and its Borel-labelled points of [lem-sfb-general-borel-flag-variety]. Let $V\\subseteq G$ be any smooth connected unipotent subgroup such that $V\\subseteq B'$ for every Borel subgroup $B'\\supseteq T$. For every Borel $B\\supseteq T$, there is an affine open subscheme $A_B\\subseteq X$ [def-weil-open-immersion, def-weil-affine-spectrum] whose rational points are $$A_B(k)=\\{b_{B'}\\in X(k):b_B\\in\\overline{T(k)\\cdot b_{B'}}\\}.$$ The bar denotes closure in the underlying Zariski topological space of $X$. The action of $V$ on $X$ restricts to $V\\times_k A_B\\to A_B$, and the closed complement $|X|\\setminus|A_B|$ is invariant under $V(k)$. No assertion that $V$ is normal in $G$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.65 and its proof, printed p.374; its proof only uses containment of the unipotent acting subgroup in every Borel containing T to obtain containment in the parabolic stabilizer of the dual line. Thus it applies to every V as stated, before any conclusion of Theorem 17.56."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-solvable-group-structure",
+  "lem-sfb-general-borel-flag-variety",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-general-borel-flag-variety], $X$ is smooth connected projective, its $k$-points form one $G(k)$-orbit, and the scheme stabilizer of $b_B$ is $B$. Thus [lem-sfb-homogeneous-orbit-quotient-geometry] identifies $X$ equivariantly with $G/B$. Apply [lem-sfb-general-flag-isolated-linear-action] to obtain a $G$-equivariant closed immersion $i:X\\hookrightarrow\\mathbf P(E)$ and a cocharacter $\\mu$ with $X^\\mu$ finite reduced and nonempty. Use [lem-sfb-cocharacter-conjugate-maximal-torus] to conjugate $\\mu$ into the prescribed $T$. Conjugation acts on $X$ by an automorphism, so the new fixed subscheme remains finite reduced. The closed subscheme $X^T$ is contained in this finite reduced fixed subscheme, hence is itself finite reduced; it is nonempty because $b_B$ is fixed by $T$.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-general-flag-isolated-linear-action",
+    "lem-sfb-cocharacter-conjugate-maximal-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.65, first paragraph; Theorems 4.27, 17.10 and Section 17f."
+   }
+  },
+  {
+   "text": "Replace $E$ by the vector subspace $E_0$ spanned by the lines $i(x)$ for $x\\in X(k)$. It is $G(k)$-stable, hence a rational $G$-subrepresentation by [lem-sfb-smooth-group-rational-point-subspace-test]. Since $X$ is smooth over $k$, [sbc-lem-smooth-geometrically-reduced] makes it reduced. Each linear equation of $\\mathbf P(E_0)$ vanishes on $i(X(k))$; on affine charts its pullback is zero by the vanishing principle of [lem-wf-affine-nullstellensatz-vanishing]. Hence $i$ factors as a closed immersion into $\\mathbf P(E_0)$. Rename $E_0$ as $E$. The hypotheses of [lem-sfb-torus-extreme-weight-affine-chart] now hold. Obtain separating $\\lambda$, minimum weight line $k e_0=i(x_0)$, functional $f_0$, and affine chart $U=i^{-1}D(f_0)$ with its stated torus-orbit-closure description.",
+   "uses": [
+    "lem-sfb-smooth-group-rational-point-subspace-test",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sfb-torus-extreme-weight-affine-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.65, nondegenerate embedding and weight paragraphs; Propositions 13.52--13.53."
+   }
+  },
+  {
+   "text": "The point $x_0$ is $T$-fixed, so [lem-sfb-general-borel-flag-variety] writes it as $b_{B_0}$ with $T\\subseteq B_0$. By [lem-sfb-torus-normalizer-borel-transitivity], choose $n\\in G(k)$ normalizing $T$ with $nB_0n^{-1}=B$. Conjugate the weight decomposition and $\\lambda$ by $n$, and replace $e_0,f_0,U$ by $\\rho(n)e_0,\\rho^\\vee(n)f_0,nU$, where $\\rho^\\vee(g)f=f\\circ\\rho(g)^{-1}$. These still have the minimum-weight coordinate description. Because $nTn^{-1}=T$, conjugation carries $x_0\\in\\overline{T(k)y}$ exactly to $b_B\\in\\overline{T(k)(ny)}$. Thus after renaming, $x_0=b_B$ and $U$ has exactly the rational points required of $A_B$.",
+   "uses": [
+    "lem-sfb-general-borel-flag-variety",
+    "lem-sfb-torus-normalizer-borel-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.65, normalizer translation of the attracting point; Proposition 17.53."
+   }
+  },
+  {
+   "text": "Let $O=G\\cdot[f_0]\\subseteq\\mathbf P(E^*)$ for the contragredient representation. By [lem-sfb-smooth-group-orbit-geometry], this is a smooth locally closed orbit, with invariant closed boundary $Z=\\overline O\\setminus O$. Put $D=\\{[f]:f(e_0)\\ne0\\}$. Every $G(k)$-orbit in $\\mathbf P(E^*)(k)$ meets $D$: otherwise a nonzero representative $f$ annihilates all $\\rho(g)e_0$, which span $E$ since $G(k)x_0=X(k)$. On $D$, normalize $f(e_0)=1$. Under $\\lambda(t)^{-1}$ each remaining dual coordinate is multiplied by $t^{m_\\chi-m_{\\chi_0}}$, a strictly positive power; hence its limit at zero is $[f_0]$. If $Z$ were nonempty it would contain a $k$-point, by [lem-wf-affine-nullstellensatz-vanishing] on a nonempty affine chart. Move that point into $D$. Invariance and closedness of $Z$ put its limit $[f_0]$ in $Z$, a contradiction. Consequently $Z$ is empty, so $O$ is closed in projective space and is proper by [lem-pc-projective-proper].",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.65, dual-representation paragraph; orbit boundary as in Sections 1 and 7."
+   }
+  },
+  {
+   "text": "The dual line $[f_0]$ is fixed scheme-theoretically by $T$, because $f_0$ is a character eigenvector. The orbit $O$ is nonempty smooth connected proper and $G(k)$-transitive. Apply [lem-sfb-proper-homogeneous-torus-borel-stabilizer] to obtain a Borel $C$ with $T\\subseteq C$ fixing this dual line on every algebra. The assumption on $V$ gives $V\\subseteq C$. Thus $V$ preserves the direct-summand line $k f_0$ in $E^*$. On a commutative $k$-algebra $A$, every $v\\in V(A)$ acts on $A f_0$ by a unit $c(v)\\in A^\\times$, so $f_0(\\rho_A(v)e)=c(v)^{-1}f_0(e)$ for $e\\in E\\otimes_k A$. Therefore $\\rho(v)$ preserves the open condition $f_0\\ne0$ and its hyperplane complement. Equivariance of $i$ gives the restricted action $V\\times_k U\\to U$. For each $v\\in V(k)$ the automorphism and its inverse preserve the complement, so $|X|\\setminus|U|$ is $V(k)$-invariant. Taking $A_B=U$ proves all clauses.",
+   "uses": [
+    "lem-sfb-proper-homogeneous-torus-borel-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.65, final sentences: containment in a Borel through T fixes the dual line, hence the open cell."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-general-borel-flag-variety",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-general-flag-isolated-linear-action",
+  "lem-sfb-cocharacter-conjugate-maximal-torus",
+  "lem-sfb-smooth-group-rational-point-subspace-test",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-torus-extreme-weight-affine-chart",
+  "lem-sfb-torus-normalizer-borel-transitivity",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-pc-projective-proper",
+  "lem-sfb-proper-homogeneous-torus-borel-stabilizer"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.65 and proof, printed p.374; the argument is applied to any subgroup contained in every Borel through T, using only that containment."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In the flag variety of an affine algebraic group the set of flags whose torus orbit closure contains a specified torus fixed flag is affine open stable under the unipotent part of the intersection of Borels containing that torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U → ∃ W, AlgebraicGeometry.IsAffineOpen W ∧ x ∈ W ∧ W.carrier ⊆ ↑U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U → ∀ {V : X.Opens} (x : ↥V), ↑x ∈ U → ∃ f, X.basicOpen f ≤ V ∧ ↑x ∈ X.basicOpen f\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, every point $ x \\\\in U $ and any open neighborhood $ V $ of $ x $ in $ X $ contains a distinguished open set $ D(f) $, defined by a section $ f $ of t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.of_affine_open_cover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : ↑X.affineOpens → Prop} {ι : Sort u_2} (U : ι → ↑X.affineOpens),\\n  ⨆ i, ↑(U i) = ⊤ →\\n    ∀ (V : ↑X.affineOpens),\\n      (∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))), P U → P (X.affineBasicOpen f)) →\\n        (∀ (U : ↑X.affineOpens) (s : Finset ↑\", \"doc\": \"Let $ X $ be a scheme and $ P $ a property of affine open subsets of $ X $. Suppose that: (1) $ \\\\{U_i\\\\}_{i \\\\in I} $ is a cover of $ X $ by affine open subsets such that $ \\\\bigcup_i U_i = X $; (2) $ P \"}\n  {\"name\": \"AlgebraicGeometry.affineOpensRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (U : X.Opens) → ↑(↑U).affineOpens ≃ { V // ↑V ≤ U }\", \"doc\": \"For a scheme $ X $ and an open subset $ U $, there is a bijection between the affine open subsets of the restricted scheme $ U $ and the affine open subsets of $ X $ that are contained within $ U $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Luna affine attraction charts on the variety of Borel subgroups for a maximal torus action",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ChartedSpace.atlas\", \"module\": \"Mathlib.Geometry.Manifold.ChartedSpace\", \"type\": \"{H : Type u_5} →\\n  {inst : TopologicalSpace H} →\\n    {M : Type u_6} → {inst_1 : TopologicalSpace M} → [self : ChartedSpace H M] → Set (OpenPartialHomeomorph M H)\", \"doc\": \"The atlas of a charted space $ M $ with model space $ H $ is a collection of charts (homeomorphisms from open subsets of $ M $ to open subsets of $ H $) that cover $ M $ and satisfy compatibility cond\"}\n  {\"name\": \"ChartedSpaceCore.atlas\", \"module\": \"Mathlib.Geometry.Manifold.ChartedSpace\", \"type\": \"{H : Type u_5} → [inst : TopologicalSpace H] → {M : Type u_6} → ChartedSpaceCore H M → Set (PartialEquiv M H)\", \"doc\": \"The atlas of a charted space core structure on a type $ M $ with model space $ H $ is a set of partial equivalences between $ M $ and $ H $, representing the collection of charts that locally model th\"}\n  {\"name\": \"atlas\", \"module\": \"Mathlib.Geometry.Manifold.ChartedSpace\", \"type\": \"(H : Type*) [TopologicalSpace H] (M : Type*) [TopologicalSpace M] [ChartedSpace H M] : Set (OpenPartialHomeomorph M H)\", \"doc\": \"The atlas of a charted space $ M $ with model space $ H $ is a collection of charts (homeomorphisms from open subsets of $ M $ to open subsets of $ H $) that cover $ M $ and satisfy compatibility cond\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme) : Set X.Opens\", \"doc\": \"For a scheme $ X $, the set of affine open subsets of $ X $, i.e., open subsets $ U $ for which the restricted scheme structure is affine.\"}\n  {\"name\": \"TopologicalSpace.Opens.instChartedSpace\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \": ChartedSpace H s\", \"doc\": \"Every open subset of a charted space inherits a charted space structure from the ambient space, where the charts are restrictions of the original charts to the open subset and the topology is the subs\"}\n  {\"name\": \"TopologicalSpace.Opens.chart_eq\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"{s : Opens M} (hs : Nonempty s) {e : OpenPartialHomeomorph s H} (he : e ∈ atlas H s) :\\n  ∃ x : s, e = (chartAt H (x : M)).subtypeRestr hs\", \"doc\": \"For any non-empty open subset $ s $ of a charted space $ M $ with model space $ H $, every chart $ e $ in the atlas of $ s $ is the restriction of a chart from $ M $'s atlas to $ s $. Specifically, th\"}\n  {\"name\": \"AlgebraicGeometry.affineOpensRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : U.toScheme.affineOpens ≃ { V : X.affineOpens // V ≤ U }\", \"doc\": \"For a scheme $ X $ and an open subset $ U $, there is a bijection between the affine open subsets of the restricted scheme $ U $ and the affine open subsets of $ X $ that are contained within $ U $.\"}\n  {\"name\": \"ChartedSpace.recOn\", \"module\": \"Mathlib.Geometry.Manifold.ChartedSpace\", \"type\": \"{H : Type u_5} →\\n  [inst : TopologicalSpace H] →\\n    {M : Type u_6} →\\n      [inst_1 : TopologicalSpace M] →\\n        {motive : ChartedSpace H M → Sort u} →\\n          (t : ChartedSpace H M) →\\n            ((atlas : Set (OpenPartialHomeomorph M H)) →\\n                (chartAt : M → OpenPartialHomeomorph \", \"doc\": \"Given a charted space structure on a topological space $M$ with model space $H$, this recursor allows defining a property or structure on $M$ by specifying its behavior on the atlas (a set of open par\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"IsAffine\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "Luna|attract.*[Bb]orel|[Bb]orel.*affine|torus.*orbit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, Lie algebras, topological actions, ordinary affine opens or unrelated uses of Borel; none states this assertion about algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Luna affine open attraction neighborhoods on the scheme of Borel subgroups are stable under every subgroup contained in all Borels containing a maximal torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isBasis_affine_open\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), TopologicalSpace.Opens.IsBasis X.affineOpens\", \"doc\": \"For any scheme $X$, the collection of affine open subsets of $X$ forms a basis for the topology of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.affineOpensRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (U : X.Opens) → ↑(↑U).affineOpens ≃ { V // ↑V ≤ U }\", \"doc\": \"For a scheme $ X $ and an open subset $ U $, there is a bijection between the affine open subsets of the restricted scheme $ U $ and the affine open subsets of $ X $ that are contained within $ U $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X} {U : X.Opens},\\n  x ∈ U → ∃ W, AlgebraicGeometry.IsAffineOpen W ∧ x ∈ W ∧ W.carrier ⊆ ↑U\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and open subset $U \\\\subseteq X$ containing $x$, there exists an affine open subset $W \\\\subseteq X$ such that $x \\\\in W$ and $W \\\\subseteq U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), TopologicalSpace.Opens.IsBasis X.affineOpens\", \"doc\": \"For any scheme $X$, the collection of affine open subsets of $X$ forms a basis for the topology on $X$. This means: (1) Every point of $X$ is contained in at least one affine open subset; (2) The inte\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U → ∀ {V : X.Opens} (x : ↥V), ↑x ∈ U → ∃ f, X.basicOpen f ≤ V ∧ ↑x ∈ X.basicOpen f\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, every point $ x \\\\in U $ and any open neighborhood $ V $ of $ x $ in $ X $ contains a distinguished open set $ D(f) $, defined by a section $ f $ of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.toOpens_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, Monotone AlgebraicGeometry.Scheme.AffineZariskiSite.toOpens\", \"doc\": \"The canonical inclusion map from the affine Zariski site of a scheme $ X $ to its open subsets is monotone with respect to the inclusion order on open sets.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.instPreorder\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Preorder X.AffineZariskiSite\", \"doc\": \"For any scheme $X$, the affine Zariski site (the collection of affine open subsets of $X$) is equipped with a preorder. In this preorder, an affine open subset $U$ is less than or equal to another aff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general affine open covers and topological orbit closures; none is the algebraic flag attraction chart and its stability assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"IsAffine\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general affine open covers and topological orbit closures; none is the algebraic flag attraction chart and its stability assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Luna|attract.*[Bb]orel|[Bb]orel.*affine|torus.*orbit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general affine open covers and topological orbit closures; none is the algebraic flag attraction chart and its stability assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The torus orbit closure attraction neighborhood of a Borel flag is affine and invariant under the intersection of Borels through the torus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"vadd_closure_orbit_subset\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {M : Type u_1} {α : Type u_2} [inst : TopologicalSpace α] [inst_1 : AddMonoid M] [inst_2 : AddAction M α]\\n  [ContinuousConstVAdd M α] (c : M) (x : α), c +ᵥ closure (AddAction.orbit M x) ⊆ closure (AddAction.orbit M x)\", \"doc\": \"For any additive monoid $ M $ acting continuously on a topological space $ \\\\alpha $, and for any $ c \\\\in M $ and $ x \\\\in \\\\alpha $, the additive action of $ c $ on the closure of the orbit of $ x $ und\"}\n  {\"name\": \"affineSpan_intrinsicClosure\", \"module\": \"Mathlib.Analysis.Convex.Intrinsic\", \"type\": \"(s : Set P) : affineSpan 𝕜 (intrinsicClosure 𝕜 s) = affineSpan 𝕜 s\", \"doc\": \"For any subset $ s $ of an affine space $ P $, the affine span of the intrinsic closure of $ s $ is equal to the affine span of $ s $ itself, i.e., $ \\\\text{aff}(\\\\text{intrinsicClosure}(s)) = \\\\text{aff\"}\n  {\"name\": \"mem_closure_iff_frequently\", \"module\": \"Mathlib.Topology.Neighborhoods\", \"type\": \": x ∈ closure s ↔ ∃ᶠ x in 𝓝 x, x ∈ s\", \"doc\": \"A point $x$ is in the closure of a set $s$ if and only if every neighborhood of $x$ intersects $s$.\"}\n  {\"name\": \"AffineSpace.asymptoticNhds_bind_nhds\", \"module\": \"Mathlib.Topology.Algebra.AsymptoticCone\", \"type\": \"[TopologicalSpace P] [IsTopologicalAddTorsor P] (v : V) : (asymptoticNhds k P v).bind 𝓝 = asymptoticNhds k P v\", \"doc\": \"For any vector $v$ in a topological vector space $V$ and an affine space $P$ over $V$ equipped with a topological additive torsor structure, the asymptotic neighborhood filter at $v$ is unchanged when\"}\n  {\"name\": \"tangentConeAt_inter_nhds\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Basic\", \"type\": \"(ht : t ∈ 𝓝 x) : tangentConeAt 𝕜 (s ∩ t) x = tangentConeAt 𝕜 s x\", \"doc\": \"For any neighborhood $ t $ of $ x $ in a topological additive commutative group $ E $ over a field $ \\\\mathbb{k} $, the tangent cone at $ x $ of the intersection $ s \\\\cap t $ equals the tangent cone at\"}\n  {\"name\": \"AffineSpace.asymptoticNhds\", \"module\": \"Mathlib.Topology.Algebra.AsymptoticCone\", \"type\": \"(v : V) : Filter P\", \"doc\": \"For a vector $ v $ in a topological vector space $ V $, the asymptotic neighborhood filter at $ v $ is defined as the supremum over all points $ p $ in the affine space $ P $ of the filter generated b\"}\n  {\"name\": \"Flow.isInvariant_orbit\", \"module\": \"Mathlib.Dynamics.Flow\", \"type\": \"(x : α) : IsInvariant ϕ (orbit ϕ x)\", \"doc\": \"For any point $x$ in a topological space $\\\\alpha$ and a topological flow $\\\\phi$ acting on $\\\\alpha$, the orbit of $x$ under $\\\\phi$ is invariant under $\\\\phi$. This means that for every $t$ in the topolo\"}\n  {\"name\": \"intrinsicClosure_subset_affineSpan\", \"module\": \"Mathlib.Analysis.Convex.Intrinsic\", \"type\": \": intrinsicClosure 𝕜 s ⊆ affineSpan 𝕜 s\", \"doc\": \"For any subset $ s $ of an affine space $ P $ over a ring $ k $, the intrinsic closure of $ s $ is contained within the affine span of $ s $, i.e., $ \\\\text{intrinsicClosure} \\\\, k \\\\, s \\\\subseteq \\\\text{\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general affine open covers and topological orbit closures; none is the algebraic flag attraction chart and its stability assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-borel-intersection",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Theorem 17.65, used in the final two paragraphs of Section 17h to trap an orbit inside an affine chart. The containment-only form of its proof avoids presupposing the Chevalley equality.",
+   "via": [
+    "lem-sfb-chevalley-borel-intersection",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-luna-borel-attraction-charts",
+  "worker": "stage1",
+  "summary": "Read Milne Theorem 17.65 and its cited inputs; reuse the existing flag linearization rather than duplicating it. Separate cocharacter conjugacy, the general extremal torus chart, and the proper homogeneous stabilizer lemma as three statement-only inputs. The five proof steps construct the required chart, prove the dual orbit closed by an explicit boundary argument, and deduce scheme action stability from containment of V in a Borel stabilizing the dual line; no normality or reductivity is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Theorem 17.65, used in the final two paragraphs of Section 17h to trap an orbit inside an affine chart. The containment-only form of its proof avoids presupposing the Chevalley equality. The item supports the Chevalley intersection prerequisite, following Milne 17.65. The newest blueprint direct-image proof (3) remains the compactification route; its wording has been read and is not replaced.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smoothness over the field makes X reduced, needed to restrict the embedding to the span of its rational points."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "The reduced finite-type vanishing principle identifies the projective span scheme-theoretically; its closed-point clause also detects a nonempty dual-orbit boundary."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "A closed projective dual orbit is proper, allowing the Borel stabilizer theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-pc-projective-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-addc43eba",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-addc43eba (reviewer sub-agent of L); spot-checked: Read in full the item's 5 steps, the 3 new unsplit statement nodes, every cited statement, and Milne iAG2017 Theorem 17.65 with its proof (printed p.374). The item statement and stmt_deps are unchanged from live, and the item is still unsplit in live and side-live. The steps follow Milne's route: (1) general-borel-flag-variety, homogeneous-orbit-quotient, the isolated linear action, and the new cocharacter conjugacy moving the cocharacter into the prescribed T; X^T is a union of components of the finite reduced fixed scheme, and b_B makes it nonempty. (2) Restrict to the span of the points via the rational-point subspace test, reducedness and the Nullstellensatz vanishing clause; the hypotheses of the extreme chart node then hold. (3) Normalizer transitivity; checked y∈nU ⇔ b_B ∈ closure(T·y). (4) Every dual orbit meets D(e0), λ^{-1} contracts it to [f0], a nonempty boundary has a k-point, so the dual orbit is closed and proper. (5) The new stabilizer node gives a Borel C ⊇ T fixing [f0]; V ⊆ C, ρ^∨(v)f0 = c·f0 makes D(f0) V-stable on A-points. New nodes: cocharacter conjugacy is true (Milne 17.10) and no DAG node states torus conjugacy. The extreme-weight chart I proved independently: the projection of the dense open to the finite set P(E_χ0)∩X is constant, so E_χ0 is a line; both inclusions of U(k) hold; tested on P1, r=0 and trivial actions. The proper-homogeneous stabilizer is true: Borel fixed point, transitivity, then conjugating T inside ((G_y)_red)^0; tested on a point, SL2 on P1 and non-smooth stabilizers. None restates the item or duplicates projective-attracting-cells, flag-torus-fixed-geometry or solvable-proper-fixed-point. Refs, stmt_deps and the union of proof_deps were checked mechanically; no SGA. The tool_uses (smooth⇒reduced, Nullstellensatz, projective⇒proper) are generic and accepted. Batch-5 flag: homogeneous-orbit-quotient reaches lem-trf-fppf-covering-base-change, a generic Mathlib leaf on fppf base change that is not part of the trace formula or Poincaré duality, so it is not a RETURN. Minor unwritten elementary details in step 5 (the action restricts to the reduced orbit; G(k) is transitive on O(k)) were accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LunaBorelAttractionCharts",
+  "declaration": "AlgebraicGeometry.exists_luna_borel_attraction_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LunaBorelAttractionCharts.lean",
+  "statement": "theorem exists_luna_borel_attraction_chart {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) (hG : SolvableGroupStructure.IsAlgebraic G) [Smooth G.X.hom] [ConnectedSpace G.X.left] (X : Mod (Over (Spec (.of k))) G.X) (b : {B : Subobject G.X // ∃ h : GrpObj (B : Over (Spec (.of k))), @IsBorelGroupScheme k _ _ G.X (B : Over (Spec (.of k))) G.grp h B.arrow} ≃ (𝟙_ (Over (Spec (.of k))) ⟶ X.X)) (hflag : Nonempty X.X.left ∧ Smooth X.X.hom ∧ ConnectedSpace X.X.left ∧ IsHProjective X.X.hom ∧ LocallyOfFiniteType X.X.hom ∧ QuasiCompact X.X.hom ∧ IsProper X.X.hom ∧ IsSeparated X.X.hom ∧ (∀ x y : 𝟙_ (Over (Spec (.of k))) ⟶ X.X, ∃ g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X, g • x = y) ∧ (∀ B C, ∀ g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X, b C = g • b B ↔ ∀ (A : Type u) [CommRing A] [Algebra k A] (z : StandardGroupSchemes.affine k A ⟶ G.X), (∃ c : StandardGroupSchemes.affine k A ⟶ (C.val : Over (Spec (.of k))), c ≫ C.val.arrow = z) ↔ ∃ t : StandardGroupSchemes.affine k A ⟶ (B.val : Over (Spec (.of k))), t ≫ B.val.arrow = (toUnit (StandardGroupSchemes.affine k A) ≫ g)⁻¹ * z * (toUnit (StandardGroupSchemes.affine k A) ≫ g)) ∧ (∀ B, ∀ (A : Type u) [CommRing A] [Algebra k A] (g : StandardGroupSchemes.affine k A ⟶ G.X), g • (toUnit (StandardGroupSchemes.affine k A) ≫ b B) = toUnit (StandardGroupSchemes.affine k A) ≫ b B ↔ ∃ t : StandardGroupSchemes.affine k A ⟶ (B.val : Over (Spec (.of k))), t ≫ B.val.arrow = g) ∧ (∀ (T : Grp (Over (Spec (.of k)))) (i : T ⟶ G), IsClosedSubgroupScheme i.hom.hom → SolvableGroupStructure.IsTorus T → ∃ x : 𝟙_ (Over (Spec (.of k))) ⟶ X.X, ∃ j : T.X ⟶ ((b.symm x).val : Over (Spec (.of k))), j ≫ (b.symm x).val.arrow = i.hom.hom) ∧ (∀ (T : Grp (Over (Spec (.of k)))) (i : T ⟶ G), IsClosedSubgroupScheme i.hom.hom → SolvableGroupStructure.IsTorus T → ∀ B, (∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T.X), (t ≫ i.hom.hom) • (toUnit (StandardGroupSchemes.affine k A) ≫ b B) = toUnit (StandardGroupSchemes.affine k A) ≫ b B) ↔ ∃ j : T.X ⟶ (B.val : Over (Spec (.of k))), j ≫ B.val.arrow = i.hom.hom)) (T : Grp (Over (Spec (.of k)))) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (V : Grp (Over (Spec (.of k)))) (iV : V ⟶ G) (hValg : SolvableGroupStructure.IsAlgebraic V) (hVclosed : IsClosedSubgroupScheme iV.hom.hom) [ConnectedSpace V.X.left] (hVuni : SolvableGroupStructure.IsUnipotent V) (hV : ∀ (C : {C : Subobject G.X // ∃ h : GrpObj (C : Over (Spec (.of k))), @IsBorelGroupScheme k _ _ G.X (C : Over (Spec (.of k))) G.grp h C.arrow}), (∃ j : T.X ⟶ (C.val : Over (Spec (.of k))), j ≫ C.val.arrow = iT.hom.hom) → ∃ j : V.X ⟶ (C.val : Over (Spec (.of k))), j ≫ C.val.arrow = iV.hom.hom) (B : {B : Subobject G.X // ∃ h : GrpObj (B : Over (Spec (.of k))), @IsBorelGroupScheme k _ _ G.X (B : Over (Spec (.of k))) G.grp h B.arrow}) (hTB : ∃ j : T.X ⟶ (B.val : Over (Spec (.of k))), j ≫ B.val.arrow = iT.hom.hom) : ∃ U : X.X.left.Opens, IsAffineOpen U ∧ (∀ B', (b B').left (IsLocalRing.closedPoint k) ∈ U ↔ (b B).left (IsLocalRing.closedPoint k) ∈ closure (Set.range (fun t : 𝟙_ (Over (Spec (.of k))) ⟶ T.X ↦ ((t ≫ iT.hom.hom) • b B').left (IsLocalRing.closedPoint k)))) ∧ (∃ a : V.X ⊗ Over.mk (U.ι ≫ X.X.hom) ⟶ Over.mk (U.ι ≫ X.X.hom), a ≫ Over.homMk U.ι = (iV.hom.hom ⊗ₘ Over.homMk U.ι) ≫ γ[G.X, X.X]) ∧ (∀ v : 𝟙_ (Over (Spec (.of k))) ⟶ V.X, Set.image (lift (toUnit X.X ≫ v ≫ iV.hom.hom) (𝟙 X.X) ≫ γ[G.X, X.X]).left ((U : Set X.X.left)ᶜ) = (U : Set X.X.left)ᶜ)",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3464a26db",
+  "group": "Q74",
+  "result": "pass",
+  "note": "First delivery (live node has no lean; only lean+stmt_deps differ). Added stmt_dep def-sfb-reductive-torus-centralizer-terminology is an existing landed node (IsMaximalTorus), allowed. hflag is verbatim the conclusion of live exists_general_borel_flag_variety (mechanically checked) and the b type is identical; the properties determine X≅G/B, so any presentation works. G alg/smooth/connected match the dep. IsMaximalTorus = closed torus maximal among closed tori. V: IsUnipotent (incl. Smooth)+IsAlgebraic+closed+ConnectedSpace; hV is scheme-theoretic containment in every Borel ⊇ T. Conclusion: IsAffineOpen U; for all B', b_B' ∈ U ↔ b_B ∈ Zariski closure of T(k)·b_B'; restricted action pinned by a ≫ U.ι = (iV ⊗ ι) ≫ γ; Uᶜ invariant under each v ∈ V(k) on all points. No normality/reductivity. lean.statement verbatim; docstrings carry source/blueprint/5 proof steps; sorry only; imports exist. No recompile (no change)."
+ }
+}

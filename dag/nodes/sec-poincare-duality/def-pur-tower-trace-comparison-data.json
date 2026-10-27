@@ -1,0 +1,142 @@
+{
+ "id": "def-pur-tower-trace-comparison-data",
+ "kind": "definition",
+ "title": "Normalized tower and trace comparison coordinates",
+ "statement": "Fix the finite-field and coefficient setting $P$ of [def-pur-conventions], with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and finite coefficient subfields of a fixed $\\overline{\\mathbf Q}_\\ell$. Let $X,Y$ be separated finite-type $k$-schemes and fix $j:X\\hookrightarrow Z$, $p:Z\\to Y$ with $j$ open, $p$ proper, and $f=p\\circ j$ a $k$-morphism smooth of pure relative dimension $d\\ge0$ [def-weil-compactifications-refinements, def-sbc-smooth-morphisms]. Use the actual complete finite-Tor integral categories, completed pullback and tensor, and the specified compact-support/exceptional adjunctions of [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude, def-pur-integral-derived-operations, def-weil-exceptional-inverse-image]. For a specified coefficient system $S$, a family of field-shriek models $M$, a finite coefficient field $E$ and an integral tower model $m$, define $\\mathrm{Stage}(S,M,E,m)$ to consist of: finite-Tor preservation of realized compact support and exceptional image, a completed unit-pullback core, the finite Hom-normalized exceptional comparison, finite-Tor membership of the shifted Tate line $T_E$, the multiplication-normalized ordinary coefficient extension comparison from $\\mathbf Q_\\ell$, the ringed tensor and open models, K-flat line and unit representatives, and the normalized unit and tensor-source isomorphisms. Include finite-Tor membership of the tensor source and invertibility of its completion and projection maps. All notions are those of [def-pur-realized-tower-purity-data, det-sp-field-extension-towers, def-pur-unit-trace-construction]. Define $\\gamma^T$ as the normalized source comparison followed by realized tower purity and the counit-preserving comparison to $S.G$. Its unit value, preceded by the inverse pulled-unit identification, is $a^T_E:T_E\\to G_E1$. Define $\\tau_E(a)=\\epsilon_E P_E(a)$ with the specified left realization, and $C_E(t_0)$ by ordinary coefficient extension and inverse support/twist comparisons. Define $\\gamma^{tr}(t,K)$ as the specified adjoint transpose of inverse projection followed by $t\\otimes1$, preceded by the normalized tensor-source comparison. PrescribedUnitReductions means that the scalar reduction of the pulled-unit-normalized orientation equals the fixed finite purity map after the finite exceptional comparison at every level. Define the rational input by scalar localization, the rational tower map by localization of $\\gamma^T$, and its component by preceding it with rationalSourceComparison and the localized inverse tensor-source comparison, then following it with the exceptional rationalization comparison and representative_eq [thm-pur-rational-and-qbar-purity, def-weil-pbc-rational-category]. Define commonImage by modelScalar followed by commonInclusion [def-weil-pbc-qbar-category]. Comparison is the conjunction of the prescribed-unit and invertibility conditions, uniqueness of a permitted base orientation, scalar extension of its counit trace, equality of its trace purity with $\\gamma^T$, equality with rationalIso, and the image of its canonical scalar square. These are the existing definitions moved verbatim to a public data module; no new choice or equality is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Definitions of the realized map and normalized tensor/counit coordinates"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-completed-integral-coefficients",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-compactifications-refinements",
+  "def-exchange-projection",
+  "lem-sf-integral-compactification-system-realization",
+  "det-sp-unique-right-adjoint",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-tower-gamma",
+  "thm-pur-adic-reconstruction",
+  "def-pur-smooth-purity-map",
+  "det-sp-field-extension-towers",
+  "def-weil-pbc-rational-category",
+  "thm-pur-rational-and-qbar-purity",
+  "lem-pur-adic-purity-scalar-naturality",
+  "def-weil-pbc-qbar-category",
+  "def-pur-realized-tower-purity-data",
+  "def-pur-unit-trace-construction"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized integral tower purity has unit orientations determined by their finite reductions and is the counit transpose of projection followed by the unit trace",
+   "results": "Algebra.normalizedTrace; NormalizationMonoid.normUnit; Algebra.normalizedTrace_trans; Algebra.normalizedTrace_eq_of_finiteDimensional_apply; Algebra.normalizedTrace_def; Algebra.normalizedTrace_eq_of_fininteDimensional_apply; Algebra.normalizedTrace.congr_simp; normalize_coe_units",
+   "date": "2026-10-26",
+   "verdict": "no geometric purity comparison; field traces and monoid normalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv, homEquiv_apply, homEquiv_symm_apply, homEquiv_unit, homEquiv_counit, mkOfHomEquiv_homEquiv, comp_homEquiv and related generic adjunction identities",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction equivalence used in assembly; no coefficient or normalization bridge"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit tower smooth purity map equals the adjoint transpose of its unit trace by projection formula",
+   "results": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.transitionMap_comp_eval; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; AdicCompletion.transitionMap_comp_reduceModIdeal; Algebra.Generators.CotangentSpace.fst_compEquiv; Algebra.FormallySmooth.exists_kerProj_comp_eq_id; AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.eval_lift",
+   "date": "2026-10-26",
+   "verdict": "no match: adic completion of rings and cotangent spaces, not geometric tower purity"
+  },
+  {
+   "tool": "grep",
+   "query": "adicTranspose|normalized_presentations|prescribed_orientations_unique|canonical_integral_transpose|scalar_counit",
+   "results": "msearch: 0 Mathlib hits. Local Sheaf source: adicTranspose in AdicProjectionShiftData; existing tower transpose and reduction injectivity interfaces inspected. No existing statements in the Stage coordinates.",
+   "date": "2026-10-26",
+   "verdict": "new bridge statements needed; existing constructions are reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerTracePurityComparison",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 3, geometric orientation and trace are equivariant: comparison of the tower construction with the existing rational purity family, before rational Weil equivariance is deduced; Definitions of the realized map and normalized tensor/counit coordinates",
+   "via": [
+    "lem-pur-tower-trace-purity-comparison",
+    "lem-pur-rational-weil-naturality-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerTracePurityComparisonData",
+  "file": "lean/Sheaf/Paper/TowerTracePurityComparisonData.lean",
+  "declaration": "WeilConjectures.TowerTracePurityComparison.Comparison",
+  "statement": "def Comparison : Prop",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.TowerTracePurityComparison.base",
+   "WeilConjectures.TowerTracePurityComparison.Stage",
+   "WeilConjectures.TowerTracePurityComparison.tower",
+   "WeilConjectures.TowerTracePurityComparison.orientation",
+   "WeilConjectures.TowerTracePurityComparison.counitTrace",
+   "WeilConjectures.TowerTracePurityComparison.extendedTrace",
+   "WeilConjectures.TowerTracePurityComparison.tracePurity",
+   "WeilConjectures.TowerTracePurityComparison.PrescribedUnitReductions",
+   "WeilConjectures.TowerTracePurityComparison.sourceObject",
+   "WeilConjectures.TowerTracePurityComparison.targetObject",
+   "WeilConjectures.TowerTracePurityComparison.rationalTower",
+   "WeilConjectures.TowerTracePurityComparison.rationalTrace",
+   "WeilConjectures.TowerTracePurityComparison.atField",
+   "WeilConjectures.TowerTracePurityComparison.commonImage",
+   "WeilConjectures.TowerTracePurityComparison.rationalInput",
+   "WeilConjectures.TowerTracePurityComparison.normalizedRationalSource",
+   "WeilConjectures.TowerTracePurityComparison.rationalTowerComponent",
+   "WeilConjectures.TowerTracePurityComparison.Comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-808b5",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T070501-L-3596498",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-808b5",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T070501-L-3596498",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's old item module (verbatim apart from blueprint tags/imports); item proof vs four bridge statements and node proof/proof_deps; bridge statements vs pinned Stage/CoefficientComparison definitions and integralMap"
+ }
+}

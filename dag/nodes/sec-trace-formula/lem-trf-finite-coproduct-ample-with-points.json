@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-finite-coproduct-ample-with-points",
+ "kind": "statement",
+ "title": "Ampleness on a finite disjoint union with integral point summands",
+ "statement": "Let $I,J$ be finite sets, let $(Y_i)_{i\\in I}$ and $(P_j)_{j\\in J}$ be families of schemes [def-pc-scheme], and assume each $P_j$ is integral [def-pc-integral-scheme] with topological Krull dimension zero [def-kun-topological-krull-dimension]. Form the disjoint union $Z=(\\coprod_{i\\in I}Y_i)\\amalg(\\coprod_{j\\in J}P_j)$ [lem-weil-pbc-scheme-coproduct-family], with inclusions $a_i:Y_i\\to Z$ and $b_j:P_j\\to Z$. Let $\\mathcal L$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module], with pullbacks as in [def-pc-module-pullback]. Each $P_j$ is isomorphic to the spectrum of a field [def-weil-field], and every invertible module on $P_j$ is ample. Moreover $\\mathcal L$ is ample on $Z$ in the absolute sense [def-weil-pbc-ample-invertible-module] if and only if $a_i^*\\mathcal L$ is ample on $Y_i$ for every $i\\in I$. Thus no condition on the $b_j^*\\mathcal L$ is required. This includes empty index sets and empty $Y_i$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01PS, definition-ample, applied to a finite disjoint union; the isolated-point summands in Varieties Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-field",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix $j\\in J$ and write $P=P_j$. By [def-pc-integral-scheme], $P$ is nonempty and irreducible. By [lem-sc-scheme-sober], it has a unique generic point $\\eta$. For any $x\\in P$, the closure $\\overline{\\{x\\}}$ is nonempty irreducible and closed. If it were properly contained in $P$, these two irreducible closed subsets would form a chain of length one, contradicting $\\dim P=0$ in [def-kun-topological-krull-dimension]. Hence every $x$ is a generic point of $P$ and uniqueness gives $x=\\eta$. Thus $|P|=\\{\\eta\\}$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober), with Topology Tag 0055 (definition-Krull)."
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood $U=\\operatorname{Spec}A$ of $\\eta$, which exists by the definition of a scheme [def-pc-scheme]. Since $P$ has one point, $U=P$. Apply [lem-sc-integral-function-field-affine-fraction] to the integral scheme $P$, its generic point $\\eta$ and this nonempty affine open: $K=\\mathcal O_{P,\\eta}$ is a field. In the stalk description [def-weil-pbc-module-stalk], the only open neighbourhood of $\\eta$ is $P$, so the germ map $\\Gamma(P,\\mathcal O_P)\\to K$ is an isomorphism. As $\\Gamma(\\operatorname{Spec}A,\\mathcal O)=A$ by [def-weil-affine-spectrum], the affine presentation identifies $P$ with $\\operatorname{Spec}K$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-pbc-module-stalk",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV (lemma-integral-scheme-rational-functions), integral case; Schemes Definition 01IJ."
+   }
+  },
+  {
+   "text": "Let $N$ be any invertible module on $P$. Local freeness of rank one [def-sc-invertible-module] gives a trivializing open neighbourhood of its unique point, necessarily all of $P$. The section corresponding to $1$ under $N\\cong\\mathcal O_P$ has nonzero value at $\\eta$, so its nonvanishing open is the affine scheme $P$. Every open cover of a singleton has a one-member subcover. Hence $P$ is quasi-compact, and this section with exponent $1$ verifies [def-weil-pbc-ample-invertible-module]: $N$ is ample. By [lem-weil-pbc-invertible-pullback-invertible], each $b_j^*\\mathcal L$ is invertible, so this applies to it.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-invertible-pullback-invertible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS (definition-ample), applied directly to the disjoint open cover; Varieties Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components), isolated point summands."
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal L$ is ample on $Z$. By [lem-weil-pbc-scheme-coproduct-family], each $a_i$ is an open immersion onto an open-and-closed subset, hence is a homeomorphism onto a closed subset. Therefore it is affine by [lem-trf-closed-embedding-affine]. Apply [lem-weil-pbc-pullback-ample-invertible] to this affine morphism and the ample invertible module $\\mathcal L$. It gives ampleness of $a_i^*\\mathcal L$ for every $i$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-closed-embedding-affine",
+    "lem-weil-pbc-pullback-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS (definition-ample), applied directly to the disjoint open cover; Varieties Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components), isolated point summands."
+   }
+  },
+  {
+   "text": "Conversely assume every $a_i^*\\mathcal L$ is ample. Each $Y_i$ is quasi-compact by [def-weil-pbc-ample-invertible-module], and each $P_j$ is a singleton by Step 1. The disjoint open summands cover $Z$ by [lem-weil-pbc-scheme-coproduct-family]. For any open cover of $Z$, restrict it to each summand, choose a finite subcover there, and unite these finite choices. Finiteness of $I$ and $J$ makes this a finite subcover of $Z$. This proves quasi-compactness in [def-weil-pbc-quasi-compact-scheme].",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS (definition-ample), applied directly to the disjoint open cover; Varieties Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components), isolated point summands."
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$ and identify its unique summand $W$ with the corresponding open-and-closed subscheme using [lem-weil-pbc-scheme-coproduct-family]. Its restricted line module is ample, either by the assumption on the $Y_i$ or by Step 3. By [def-weil-pbc-ample-invertible-module], choose $n\\ge1$ and $s\\in\\Gamma(W,(\\mathcal L|_W)^{\\otimes n})$ with affine $W_s$ containing $z$. Pullback along an open inclusion is restriction by [def-pc-module-pullback]; iterating [lem-weil-pbc-invertible-pullback-tensor](2) identifies this tensor power with $(\\mathcal L^{\\otimes n})|_W$. Regard $s$ as a section of the latter. On the disjoint two-open cover $Z=W\\cup(Z\\setminus W)$ glue $s$ to the zero section on $Z\\setminus W$. This is the sheaf axiom for the module sheaf [def-weil-sheaf-of-modules-category]: restrictions to the empty overlap agree, since a sheaf of abelian groups has just the zero section there. The resulting global section $\\widetilde s$ of $\\mathcal L^{\\otimes n}$ has exactly the same germs as $s$ on $W$ and zero germs on the complement. Thus $Z_{\\widetilde s}=W_s$, an affine open containing $z$. Together with Step 5 this proves ampleness of $\\mathcal L$. No exponent has to be shared by different summands. If $I=J=\\varnothing$, the cover argument makes $Z$ quasi-compact and the pointwise condition is vacuous; empty $Y_i$ cause no change.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-ample-invertible-module",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS (definition-ample), applied directly to the disjoint open cover; Varieties Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components), isolated point summands."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-pbc-module-stalk",
+  "def-weil-affine-spectrum",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-closed-embedding-affine",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01PS (definition-ample), applied directly to the disjoint open cover; Varieties Tag 0B5Y (lemma-ampleness-in-terms-of-degrees-components), isolated point summands.",
+  "note": "Direct proof from the absolute ampleness definition; the point summands use Stacks 01IS and 01RV. Expands the disjoint-union assertion implicit in Varieties 0B5Y."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(ample|ampleness).*(coprod|disjoint|zero.dim)|(coprod|disjoint|zero.dim).*(ample|ampleness)",
+   "results": "0 hits; ; hits provide affine coproducts, quasi-affine structure sheaves or unrelated uses of ample, not absolute ampleness of invertible sheaves with point summands.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample line bundle on a finite disjoint union is equivalent to ample on each component",
+   "results": "8 hits; AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instIsAffineHomDescScheme, AmpleSet.union, AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint, AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint, AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.IsFinite.instDescScheme, TopologicalSpace.separableSpace_sum_iff; hits provide affine coproducts, quasi-affine structure sheaves or unrelated uses of ample, not absolute ampleness of invertible sheaves with point summands.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAmple, coproduct",
+   "results": "0 hits; ; loogle: unknown identifier 'IsAmple'; hits provide affine coproducts, quasi-affine structure sheaves or unrelated uses of ample, not absolute ampleness of invertible sheaves with point summands.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a finite disjoint union of schemes is ample if and only if all its restrictions are ample and zero dimensional integral summands impose no condition",
+   "results": "8 hits; AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.disjoint_opensRange_sigmaι, AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint, AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd, AlgebraicGeometry.instIsAffineCoprodScheme; hits provide affine coproducts, quasi-affine structure sheaves or unrelated uses of ample, not absolute ampleness of invertible sheaves with point summands.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(ample|ampleness|IsAmple)",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean; hits provide affine coproducts, quasi-affine structure sheaves or unrelated uses of ample, not absolute ampleness of invertible sheaves with point summands.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ample\"",
+   "results": "12 hits; Lean.Order.Example.find, Lean.Order.Example.findF, Lean.Order.Example.find_eq, Lean.Order.Example.find_spec, Lean.Elab.Tactic.BVDecide.SolverMode.counterexample, Lean.Parser.Command.example, Lean.Meta.Match.CounterExample, Lean.Meta.Match.Example; hits provide affine coproducts, quasi-affine structure sheaves or unrelated uses of ample, not absolute ampleness of invertible sheaves with point summands.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute ampleness of an invertible module is detected on finite open and closed summands of a scheme and every line bundle on a zero dimensional integral scheme is ample",
+   "results": "8 hits; AlgebraicGeometry.reduce_to_affine_global, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen, AlgebraicGeometry.of_affine_open_cover, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover; hits provide affine coproducts, quasi-affine structure sheaves or unrelated uses of ample, not absolute ampleness of invertible sheaves with point summands.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|\\bample\\b|ampleness",
+   "results": "{\"t\": \"2026-10-23T04:16:45Z\", \"tool\": \"grep\", \"query\": \"IsAmple|\\\\bample\\\\b|ampleness\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; inspected hits concern affine coproducts, affine open covers, or localization of structure-sheaf sections; none states absolute ampleness of an arbitrary invertible module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.IsAmple",
+   "results": "{\"t\": \"2026-10-23T04:16:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Modules.IsAmple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.Scheme.Modules.IsAmple'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; inspected hits concern affine coproducts, affine open covers, or localization of structure-sheaf sections; none states absolute ampleness of an arbitrary invertible module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute ampleness of a line bundle on a finite coproduct of schemes is equivalent to ampleness on every summand",
+   "results": "{\"t\": \"2026-10-23T04:16:45Z\", \"tool\": \"leansearch\", \"query\": \"Absolute ampleness of a line bundle on a finite coproduct of schemes is equivalent to ampleness on every summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.instIsAffineHomDescScheme\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.coprodMap\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.instIsAffineCoprodScheme\"], \"digest\": \"bacbdca55718af53\"}; inspected hits concern affine coproducts, affine open covers, or localization of structure-sheaf sections; none states absolute ampleness of an arbitrary invertible module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a finite disjoint union of schemes is ample if and only if each restriction is ample; integral zero dimensional summands are spectra of fields",
+   "results": "{\"t\": \"2026-10-23T04:16:57Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible sheaf on a finite disjoint union of schemes is ample if and only if each restriction is ample; integral zero dimensional summands are spectra of fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.instIsAffineCoprodScheme\", \"AlgebraicGeometry.instIsAffineHomDescScheme\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint\", \"AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd\", \"AlgebraicGeometry.IsAffineOpen.biSup_of_disjoint\", \"AlgebraicGeometry.IsAffineOpen.sup_of_disjoint\"], \"digest\": \"a511b2a8d7e02eca\"}; inspected hits concern affine coproducts, affine open covers, or localization of structure-sheaf sections; none states absolute ampleness of an arbitrary invertible module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute ample invertible modules restricted to a finite partition by open and closed subschemes",
+   "results": "{\"t\": \"2026-10-23T04:18:27Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute ample invertible modules restricted to a finite partition by open and closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\"], \"digest\": \"226cf7ab0e57eef5\"}; inspected hits concern affine coproducts, affine open covers, or localization of structure-sheaf sections; none states absolute ampleness of an arbitrary invertible module.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fibre-degree-ample-criterion",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting finite disjoint-union ampleness and automatic ampleness on integral point summands (returned proof Steps 4-5).",
+   "via": [
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-coproduct-ample-with-points",
+  "worker": "stage1",
+  "summary": "Q49 proves the point summands are singletons and spectra of fields, then proves automatic ampleness using a global frame. The forward implication uses affine pullback along clopen coprojections; the reverse implication proves quasi-compactness by finite subcovers and glues each local ample section to zero on the complementary open. All non-elementary facts already have nodes. No statement change and no new nodes. Searches cover the whole project, DAG and blueprint and use the required logged Mathlib search command.",
+  "blueprint": "Preserves the recorded ancestry from lem-trf-local-term-locality through the stable-modification/fibre-degree criterion chain. Expands the finite disjoint-union and point-summand step identified in blueprint.from.place, using Stacks 01PS and the point summands in Varieties 0B5Y. This is supporting geometry below the fixed unit route, not a replacement of its contracting-correspondence argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-252ccc7fd",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-252ccc7fd (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full. The delivery adds 0 new nodes and leaves the statement unchanged; it matches the use in its citer lem-trf-fibre-degree-ample-criterion step 2. Step 1: integral plus dim 0 means the space is the single generic point, by sobriety (lem-sc-scheme-sober) and the length-1 chain argument (def-kun-topological-krull-dimension). Step 2: the affine chart is all of P; lem-sc-integral-function-field-affine-fraction makes O_{P,eta} a field, and with one neighbourhood the germ map is an isomorphism, so P = Spec K. Step 3: the trivialising neighbourhood is P, the frame section has X_s = P, so every invertible module on P is ample with n = 1. Step 4: the clopen open immersion is a homeomorphism onto a closed subset, so it is affine (lem-trf-closed-embedding-affine = Stacks 04DE, checked at morphisms.tex l.11338); lem-weil-pbc-pullback-ample-invertible then gives the forward direction. Step 5: finite subcovers summand by summand give quasi-compactness. Step 6: restriction to an open = pullback, iterated tensor compatibility (2), the local section glued with 0 on the complement, and Z_s~ = W_s affine. Source checked: Stacks 01PS (properties.tex l.4244) matches def-weil-pbc-ample-invertible-module. Edge cases checked: I=J=empty, I empty, Y_i empty, infinite J excluded, nonreduced Artinian points excluded by integrality. Duplicates: lem-pc-very-ample-disjoint-union (very ample, proper over a field) and lem-weil-pbc-zero-dim-integral-point (finite type over an algebraically closed field) differ; no existing node states the item. proof_deps equals the union of uses, and there is no SGA. I accept as tool_uses, for the maintainer to record (C8), the cross-unit invertible/ample tools: def-weil-pbc-ample-invertible-module, lem-weil-pbc-pullback-ample-invertible, lem-weil-pbc-invertible-pullback-invertible, lem-weil-pbc-invertible-pullback-tensor and def-pc-module-pullback."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoproductAmpleWithPoints",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_coproduct_isAmple_iff_with_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoproductAmpleWithPoints.lean",
+  "statement": "theorem finite_coproduct_isAmple_iff_with_points {I : Type v} {J : Type w} [Finite I] [Finite J] (Y : I → Scheme.{u}) (P : J → Scheme.{u}) [∀ j : J, IsIntegral (P j)] (hP : ∀ j : J, topologicalKrullDim (P j) = 0) (L : ((∐ Y) ⨿ (∐ P)).Modules) [L.IsInvertible] : (∀ j : J, (∃ (K : Type u) (_ : Field K), Nonempty (P j ≅ Spec (CommRingCat.of K))) ∧ ∀ (N : (P j).Modules) (hN : N.IsInvertible), @IsAmple (P j) N hN) ∧ (IsAmple ((∐ Y) ⨿ (∐ P)) L ↔ ∀ i : I, ∃ h : ((tensorPullback (Sigma.ι Y i ≫ coprod.inl)).obj L).IsInvertible, @IsAmple (Y i) ((tensorPullback (Sigma.ι Y i ≫ coprod.inl)).obj L) h)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a7419a32",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Only item lean field changed; 8 stmt_dep records identical to live; lean.statement verbatim in file. Clause-by-clause: Finite I/J (indep. universes v,w; Finite⇒Small so Mathlib coproduct), IsIntegral + topologicalKrullDim=0 for P_j, Z=(∐Y)⨿(∐P) with a_i=Sigma.ι Y i ≫ coprod.inl, L.IsInvertible, tensorPullback (listed in def-pc-module-pullback record; genuine O_X⊗g⁻¹O_Y g⁻¹M), IsAmple = 01PS absolute. Conclusions: ∀j (P_j≅Spec K, K field in Type u) ∧ every invertible N on P_j ample; IsAmple Z L ↔ ∀i ∃h:IsInvertible (Prop, proof-irrelevant), IsAmple (a_i^*L). Mathematically true; edge cases I=J=∅, empty Y_i, P_j nonempty by integrality OK. No defs, sorry only, docstrings with source/blueprint/6 proof steps, no extra hypotheses, report has Worker report + Second reading by Q17. No findings."
+ }
+}

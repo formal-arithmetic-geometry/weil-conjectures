@@ -1,0 +1,135 @@
+{
+ "id": "def-weil-pbc-completed-pullback-reduction-functor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Clause (1), the named finite projection and compatibility with quotient transitions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Functor of the strict-tower completed pullback",
+ "statement": "For a scheme morphism g:X→Y and Noetherian adic datum d, define completedPullbackFunctor as completedReductionTower Y d followed by completedTowerPullback g d followed by completedTowerRlim d X. Its object at K is exactly the published completedPullbackObject g d K; its map is the functorial map of this specified composite. This records the existing functor and auxiliary normalized finite constructions separately from their completed-pullback reduction theorem. It also packages the native reduction-tower and exact pullback cochain counits as natural transformations, and composes supplied cochain comparisons by whiskering and composition, retaining their specified component maps. The finite and pulled model maps are also packaged as natural transformations; the two normalization predicates are the same component equations instantiated from generic normalized-descent predicates.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Clause (1): completion, finite quotient comparison, and compatibility with transitions; explicit scalar-adjunction refinement of Stacks Tag 099N (5)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Clause (1): completion, finite quotient comparison, and compatibility with transitions; explicit scalar-adjunction refinement of Stacks Tag 099N (5). The native cochain counits are composed as natural transformations with their existing component maps. The normalization predicates share the same typed component equations with the normalized descent proof.",
+  "by": "K7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite projection from a derived completion induces a scalar-adjunction map to the finite quotient",
+   "results": "AdicCompletion.evalOneₐ; AdicCompletion.evalₐ; AdicCompletion.kerProj; AdicCompletion.incl; AdicCompletion.eval; Profinite.toProfiniteAdjToCompHaus; AdicCompletion.mkₐ; AdicCompletion.ofTensorProduct_surjective_of_finite",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of derived adic completion becomes an isomorphism after derived reduction modulo a power of the ideal",
+   "results": "AdicCompletion.eval_of; AdicCompletion.mk_smul_top_ofAlgEquiv_symm; AdicCompletion.mk_ofAlgEquiv_symm; AdicCompletion.of_apply; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.ofAlgEquiv_apply; AdicCompletion.exists_smodEq_pow_add_one_smul; AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit.*[Ii]so|completedPullbackReductionArrow.*[Ii]so",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackReduction",
+  "date": "2026-10-25",
+  "group": "K7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackReductionData",
+  "declaration": "AlgebraicGeometry.Scheme.completedPullbackFunctor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedPullbackFunctor",
+   "AlgebraicGeometry.Scheme.completedReductionModelPushforward_isRightAdjoint",
+   "AlgebraicGeometry.Scheme.completedReductionInverseImageGenerator",
+   "AlgebraicGeometry.Scheme.completedReductionRestrictionFactors",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteModules",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteDerived",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteTarget",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteTensor",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteGenerator",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinarySource_preservesZero",
+   "AlgebraicGeometry.Scheme.completedReductionLimitProjection",
+   "AlgebraicGeometry.Scheme.completedReductionQuotientAssoc",
+   "AlgebraicGeometry.Scheme.completedPullbackSourceNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionSectionEquation",
+   "AlgebraicGeometry.Scheme.HasCompletedReductionOrdinaryComparisonNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison_exists",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison",
+   "AlgebraicGeometry.Scheme.completedReductionPulledModelMap",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteModelMap",
+   "AlgebraicGeometry.Scheme.HasCompletedReductionFiniteEvaluationNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_exists",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation",
+   "AlgebraicGeometry.Scheme.completedPullbackReductionArrow",
+   "AlgebraicGeometry.Scheme.HasCompletedReductionOrdinaryTransitionNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition_exists",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition",
+   "AlgebraicGeometry.Scheme.HasCompletedReductionTargetTransitionNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionTargetTransition_exists",
+   "AlgebraicGeometry.Scheme.completedReductionTargetTransition",
+   "AlgebraicGeometry.Scheme.completedReductionTargetNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionOrdinaryRestrictionUnit_exists",
+   "AlgebraicGeometry.Scheme.completedReductionRestrictionUnit",
+   "AlgebraicGeometry.Scheme.completedReductionUnit",
+   "AlgebraicGeometry.Scheme.completedReductionCompositeCounitNat",
+   "AlgebraicGeometry.Scheme.completedReductionTowerComplexNat",
+   "AlgebraicGeometry.Scheme.completedReductionComplexCounitNat",
+   "AlgebraicGeometry.Scheme.completedReductionPullbackComplexNat",
+   "AlgebraicGeometry.Scheme.completedReductionFiniteModelNat",
+   "AlgebraicGeometry.Scheme.completedReductionPulledModelNat",
+   "AlgebraicGeometry.Scheme.completedReductionComparisonNormalized",
+   "AlgebraicGeometry.Scheme.completedReductionTransitionNormalized"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedPullbackReductionData.lean",
+  "by": "K7",
+  "date": "2026-10-25",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "statement": "def completedPullbackFunctor : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)) ⥤ DerivedCategory (pbcModules X (pbcAdicCompletion X d))"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; Data module vs old CompletedPullbackReduction (rebuilt PulledModelMap/normalization predicates proved equivalent to the old by scratch rfl/iff); new ArrowIsIso sorry = clause 2 of item; Coherence proved (axioms: sorryAx only from published upstream holes); 16 direct importers compiled against the sandbox build"
+ }
+}

@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-section-geometric-adjunction-bridge",
+ "kind": "statement",
+ "title": "The section-derived geometric adjunction is the exact cartesian-coefficient adjunction",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $f:X\\to Y$ any scheme morphism [def-weil-pbc-scheme-conventions], and use small pro-etale sites in the module universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Put $R_Z=p_Z^*\\Lambda$ for $Z=X,Y$, with its canonical coefficient identification $c:f^{-1}R_Y\\xrightarrow{\\sim}R_X$ [sk-def-sfb-pulled-back-coefficients]. Use the fixed internal/section equivalences $E_Z$ [def-weil-pbc-internal-abelian-sheaf-module-equivalence], the specified ordinary section operations and adjunction of [def-pd-section-module-operations-data], and ordinary unbounded derived categories [def-weil-abstract-derived-category]. Write $L_{\\mathrm{sec}}\\dashv G_{\\mathrm{sec}}$ for their canonical ringed K-flat pullback and K-injective direct image adjunction, with the resolution comparison maps used in [lem-pd-section-derived-pushpull-normalization]. Write $L_{\\mathrm{op}}\\dashv G_{\\mathrm{op}}$ for the independently specified exact termwise pullback and K-injective direct image adjunction of [def-weil-pbc-proetale-operations] for this same $c$.\n\nThe canonical comparisons $L_{\\mathrm{sec}}\\cong L_{\\mathrm{op}}$ and $G_{\\mathrm{sec}}\\cong G_{\\mathrm{op}}$ identify the two adjunctions, including their units and counits. More precisely, both ordinary pullbacks are naturally $R_X\\otimes_{f^{-1}R_Y}f^{-1}(-)$ with the same ordinary module adjunction, and are exact. For every complex $M$, the left-derived comparison $L_{\\mathrm{sec}}(QM)\\to Q(f^*M)$ is invertible and identifies it with $L_{\\mathrm{op}}(QM)$. Both right-derived functors have the same canonical value $Q(f_*I)$ on a K-injective resolution into $I$ [def-pur-kinjective-complex]. Under these comparisons their Hom bijections have the following identical normalization. For quasi-isomorphisms $t:P\\to M$, $s:K\\to I$ with $I$ K-injective and a cochain map $h:P\\to f_*I$, the morphism $Q(h)Q(t)^{-1}:QM\\to Q(f_*I)$, followed by the canonical inverse resolution identification to $G(QK)$, has transpose\n$$Q(s)^{-1}\\,Q(h^\\flat)\\,Q(f^*t)^{-1}:Q(f^*M)\\longrightarrow QK,$$\nwhere $h^\\flat:f^*P\\to I$ is its ordinary adjunction transpose. Here $Q$ denotes the appropriate derived localization and quasi-isomorphism means a map inducing isomorphisms on all cohomology sheaves. Consequently the adjunction transported from internal modules by $D(E_X),D(E_Y)$ in [lem-pd-section-derived-pushpull-normalization] is the specified adjunction of [def-weil-pbc-proetale-operations] under these canonical comparisons. No properness or boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 09T5, lemma-derived-adjoint-functors, and the representative bijection of lemma-pre-derived-adjoint-functors-general; agent comparison of the two fixed pro-etale realizations"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pd-section-module-operations-data",
+  "def-weil-abstract-derived-category",
+  "lem-pd-section-derived-pushpull-normalization",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Identify the ordinary operations before deriving them. The section operations retain the same coefficient map, adjunction and scalar-restriction action as the ringed module operations. The section/internal transport theorem explicitly identifies their pullback with $R_X\\otimes_{f^{-1}R_Y}f^{-1}(-)$ and their pushforward with scalar restriction along the adjunct of $c$. The operation definition gives precisely these formulas for the other realization. The ringed module adjunction is the tensor/restriction Hom bijection for this same $c$; the retained section adjunction is this bijection too. Thus the ordinary comparisons identify the adjunctions, rather than merely identifying their functors. In the two tensor-factor orders the comparison is $r\\otimes m\\leftrightarrow m\\otimes r$; on direct image it is the identity on sections.",
+   "uses": [
+    "def-pd-section-module-operations-data",
+    "def-weil-pbc-proetale-operations",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6 (definition-pushforward), 03D7 (lemma-adjoint-pullback-pushforward-modules), tensor/restriction Hom calculation"
+   }
+  },
+  {
+   "text": "The internal module pullback is exact for every commutative condensed ring and every scheme morphism. The additive exact section equivalences and ordinary comparison of the transport theorem carry this exactness to the section pullback. The other ordinary pullback is isomorphic to it by Step 1, hence is exact as well. The exact-functor factorization sends every quasi-isomorphism to a quasi-isomorphism and descends the termwise functor. The exact-functor derived-functor theorem says that this descent is a universal left derived functor, with invertible comparison at every complex. The section pullback $L_{\\mathrm{sec}}$ is the canonical ringed left derived functor, a universal left derived functor with comparison $\\epsilon:L_{\\mathrm{sec}}Q\\to Q f^*$ [lem-weil-pbc-ringed-topoi-derived-pullback]. Two universal left derived functors of the same functor are uniquely isomorphic compatibly with their comparisons. Therefore the canonical comparison $\\epsilon_M:L_{\\mathrm{sec}}(QM)\\to Q(f^*M)$ is invertible and gives the comparison with $L_{\\mathrm{op}}$. Its normalization on a K-flat resolution $t:P\\to M$ follows from naturality: $Q(f^*t)\\epsilon_P=\\epsilon_M L_{\\mathrm{sec}}(Qt)$. In particular the comparison is the specified resolution comparison, not an arbitrary isomorphism of functors.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, and its dual; exact termwise localization"
+   }
+  },
+  {
+   "text": "Smallness relative to the module universe gives functorial unbounded K-injective resolutions in both section module categories. Apply the K-injective total-derived theorem to the additive termwise direct image followed by localization (the termwise functor preserves shifts and mapping cones). For either right-derived pair write $\\beta_I:Q(f_*I)\\to G(QI)$ for its comparison. This map is invertible for K-injective $I$. For $s:K\\to I$, the canonical identification from the common value to the right-derived value is $p_s=G(Qs)^{-1}\\beta_I:Q(f_*I)\\to G(QK)$. The universal properties identify the two right-derived functors compatibly with these maps: composition with the universal comparison bijects natural transformations, so the two induced comparisons are inverse by uniqueness. This also identifies their morphisms and is natural in $K$. Changing resolutions causes no extra choice: quasi-isomorphisms between K-injectives are homotopy equivalences and termwise direct image preserves homotopies.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined), 070I (lemma-K-injective)"
+   }
+  },
+  {
+   "text": "Apply the canonical pre-derived adjunction bijection to the common ordinary adjunction, with $G=f^*$ and $F=f_*$. Its hypotheses hold: the left functor is everywhere derived by Step 2 and the right functor by Step 3. The operation adjunction is defined by this bijection. The canonical ringed adjunction is the derived adjunction of the underived one, characterized by its counit $\\varepsilon'$: for every complex $X$, $\\varepsilon'_{QX}\\circ L_{\\mathrm{sec}}(\\beta_X)=Q(\\varepsilon_X)\\circ\\epsilon_{f_*X}$, with $\\varepsilon$ the ordinary counit, $\\beta$ of Step 3 and $\\epsilon$ of Step 2 [lem-sc-derived-adjunction-from-underived]. The representative formula below with $M=f_*I$, $I$ K-injective, $t=1$, $s=1$, $h=1_{f_*I}$ (so $h^\\flat=\\varepsilon_I$) gives this same counit at $QI$. Every object of $D(R_X)$ is isomorphic to such a $QI$, and an adjunction is determined by its counit. So it is this bijection too. The cited statement characterizes the bijection on every representative by $e(p_s Q(h)Q(t)^{-1})=Q(s)^{-1}Q(h^\\flat)u_t$. Under Step 2 the cone leg is $u_t=Q(f^*t)^{-1}$: its compatibility is exactly the naturality equation for $\\epsilon$ there. Under Step 3 the cocone leg is the displayed $p_s$. Consequently for either realization the transpose of the stated morphism is exactly $Q(s)^{-1}Q(h^\\flat)Q(f^*t)^{-1}$. This applies to any quasi-isomorphism $t$, not just a K-flat resolution, since exactness makes $f^*t$ a quasi-isomorphism. No preservation claim for arbitrary quasi-isomorphisms by $f_*$ is used.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND (lemma-pre-derived-adjoint-functors-general), representative formula in the six Hom identifications; 09T5 (lemma-derived-adjoint-functors); sites-cohomology.tex Tag 07A6 (lemma-adjoint)"
+   }
+  },
+  {
+   "text": "Check that agreement on these representatives identifies the whole Hom bijections. Since $f^*$ is exact, its right adjoint $f_*$ takes K-injectives to K-injectives. For a fixed resolution $s:K\\to I$, every morphism $QM\\to Q(f_*I)$ is therefore $Q(h)$ for a homotopy class of cochain maps $h:M\\to f_*I$, by the K-injective Hom theorem. Thus the representatives of Step 4 already cover every morphism with $t=1_M$. Both Hom bijections coincide everywhere, and hence identify the adjunctions. Explicitly, the unit at $A$ is the Hom image of $1_{LA}$ in $\\operatorname{Hom}(A,GLA)$, and the counit at $B$ is the inverse Hom image of $1_{GB}$ in $\\operatorname{Hom}(LGB,B)$; equality of the bijections identifies these maps under the canonical functor comparisons.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 070I (lemma-K-injective); recovery of unit and counit from the adjunction bijections"
+   }
+  },
+  {
+   "text": "Finally apply the section-derived normalization theorem: $D(E_X)$ and $D(E_Y)$ identify the independently derived internal adjunction with the section adjunction, compatibly with the specified resolution comparisons and with units and counits. Compose with the comparisons just proved. This gives the asserted internal-to-operation identification. Every step took place in the ordinary unbounded derived categories of all module sheaves on the small sites; the arguments used neither properness nor a bound on cohomological degrees.",
+   "uses": [
+    "lem-pd-section-derived-pushpull-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors); application of the existing internal/section comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-module-operations-data",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND, 09T5, 015F, 070K, 070Y, 070I, 08BJ; comparison of the two already fixed realizations, using sites-modules.tex 03D6/03D7 and sites-cohomology.tex 07A6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical section-ring K-injective derived geometric adjunction agrees with exact termwise pro-etale pullback adjunction including units counits and coefficient restriction comparisons",
+   "results": "8 hits; AlgebraicGeometry.ΓSpec.adjunction_counit_app'; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf adjunctions and general derived-adjunction constructions do not identify these two fixed pro-etale realizations and their representative comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Adjunction\"",
+   "results": "12 hits; PresheafOfModules.freeAdjunctionUnit; PresheafOfModules.freeAdjunction; PresheafOfModules.freeAdjunctionUnit_app; PresheafOfModules.freeAdjunction_homEquiv; PresheafOfModules.freeAdjunction_unit_app; PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction; PresheafOfModules.colimitAdjunction",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf adjunctions and general derived-adjunction constructions do not identify these two fixed pro-etale realizations and their representative comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "section.*[Aa]djunction|[Dd]erived.*[Aa]djunction|[Kk][Ii]njective",
+   "results": "13 hits; Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf adjunctions and general derived-adjunction constructions do not identify these two fixed pro-etale realizations and their representative comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two constructions of the unbounded derived sheaf module adjunction agree through exact cartesian coefficient pullback and K-injective direct image with the same representative Hom formula",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; SheafOfModules.instIsRightAdjointPushforward; PresheafOfModules.sheafificationAdjunction; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.sheafificationCompPullback",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf adjunctions and general derived-adjunction constructions do not identify these two fixed pro-etale realizations and their representative comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical section ring derived adjunction on pro etale sheaves agrees with exact termwise inverse image and K injective direct image including units and counits",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Adjunction.derived_unit; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; CategoryTheory.Adjunction.derivedη; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary sheaf adjunctions and general derived-adjunction constructions do not identify these two fixed pro-etale realizations and their representative comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "section.*[Aa]djunction|[Dd]erived.*[Aa]djunction|[Kk][Ii]njective",
+   "results": "{\"n_hits\": 25, \"top\": [\"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\", \"Mathlib/AlgebraicTopology/SingularHomology/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\"], \"note\": \"\", \"digest\": \"1fe4a09c32d3e602\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module adjunctions and general absolute derived adjunctions do not state this comparison of the two fixed pro-etale constructions and its full representative normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived adjunction of ringed topos pullback and pushforward agrees with the exact termwise pullback adjunction",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"TopCat.Sheaf.pullback\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"note\": \"\", \"digest\": \"26300deecd618231\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module adjunctions and general absolute derived adjunctions do not state this comparison of the two fixed pro-etale constructions and its full representative normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "{\"n_hits\": 3, \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived_unit\"], \"note\": \"\", \"digest\": \"ecb89a2541633757\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module adjunctions and general absolute derived adjunctions do not state this comparison of the two fixed pro-etale constructions and its full representative normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback of sheaves of modules with an isomorphism of coefficient rings has derived adjunction computed by termwise pullback and K-injective direct image",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"note\": \"\", \"digest\": \"ae8cbdc3b35c330e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module adjunctions and general absolute derived adjunctions do not state this comparison of the two fixed pro-etale constructions and its full representative normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of two derived adjunctions induced by the same ordinary module adjunction with canonical resolution maps",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derived_counit\"], \"note\": \"\", \"digest\": \"56dc1ef594ca4bdc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module adjunctions and general absolute derived adjunctions do not state this comparison of the two fixed pro-etale constructions and its full representative normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "def adjunction|def pullbackIso|def pullbackPushforwardAdjunction",
+   "results": "{\"n_hits\": 3, \"top\": [\"60\", \"79\", \"106\"], \"note\": \"\", \"digest\": \"73d9174939e90016\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module adjunctions and general absolute derived adjunctions do not state this comparison of the two fixed pro-etale constructions and its full representative normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-scalar-projection-mate",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Last paragraph, passage from finite E to the algebraic closure: identifying the section-ring geometric adjunction used to compare the canonical scalar/direct-image arrow; extracted bridge in old item step 3",
+   "via": [
+    "lem-sfb-internal-scalar-projection-mate",
+    "lem-sfb-qlbar-direct-image-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-section-geometric-adjunction-bridge",
+  "worker": "stage1",
+  "summary": "Six-step split with no new nodes. Identifies the ordinary tensor/restriction adjunction, proves exactness and normalized universal derived comparisons, calculates both canonical Hom bijections on fraction representatives, checks they cover all morphisms via K-injectivity, and applies the existing internal/section normalization. Statement unchanged.",
+  "blueprint": "Refines the inherited final-paragraph coefficient-change bridge of lem-sfb-dc-lower-star-preserves, via lem-sfb-qlbar-direct-image-comparison and lem-sfb-internal-scalar-projection-mate. This is only the geometric adjunction comparison used by that bridge; no finiteness step is replaced. The latest blueprint proof was read.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic ordinary module, localization, or unbounded derived-adjunction comparison tool used for the fixed coefficient operations; this unit has no statement of this foundational fact and no finiteness step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pd-section-derived-pushpull-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-32a4de5ef",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-32a4de5ef (reviewer sub-agent of L); spot-checked: Read in full: the item, all 14 cited statements, Stacks derived.tex 0FND/0DVC/09T5 and sites-cohomology 07A6. No new nodes and the statement is unchanged. Coefficient category and base change are the same on both sides: Mod of the section ring p_Z^*Λ on small pro-étale sites, with the same c = α_f from sk-def-sfb-pulled-back-coefficients, which def-weil-pbc-proetale-operations takes as an arbitrary fixed c. The representative formula matches lem-pc-pre-derived-adjoint-functors-general in orientation (p_s = G(Qs)^{-1}β_I, u_t = Q(f^*t)^{-1}ε_M). Checked on f = id, Λ = 0, X = ∅ and single-degree complexes. No duplicate in the DAG: five nodes cite both realizations, but they use the comparison and none states it. Two missing citations repaired. (C1) Step 2 used that L_sec is a universal left derived functor with comparison ε but cited nothing for it: added lem-weil-pbc-ringed-topoi-derived-pullback. (C1/C4) Step 4 said, with no node, that the ringed adjunction is the 0FND bijection. Added lem-sc-derived-adjunction-from-underived, the canonical derived adjunction characterized by its counit, plus the check: with t = s = 1, M = f_*I and h = 1, the 0FND formula gives the same counit on K-injectives, and an adjunction is determined by its counit. Neither added node creates a cycle. proof_deps updated. The worker's generic tool_uses are accepted. Steps 1, 3, 5 and 6 are correct as written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionGeometricAdjunctionBridge",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionGeometricAdjunctionBridge",
+  "file": "lean/Sheaf/Paper/SectionGeometricAdjunctionBridge.lean",
+  "statement": "theorem sectionGeometricAdjunctionBridge {X Y : Scheme.{u}} (f : X ⟶ Y) : ∃! c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring Λ Y) ≅ ring Λ X, (∀ (V : Y.ProEtᵒᵖ) (r : (ring Λ Y).obj.obj V), ((proEtaleRingDirectImageMap f (ring Λ Y) (ring Λ X) c).hom.app V).hom r = ((coefficientMap Λ f).hom.app V).hom r) ∧ ∃ (b : pullback Λ f ≅ proEtaleRingModulePullback f (ring Λ Y) (ring Λ X) c) (d : pushforward Λ f ≅ proEtaleRingModuleDirectImage f (ring Λ Y) (ring Λ X) c) (l : derivedPullback Λ f ≅ proEtaleRingDerivedPullbackOfUniverses f (ring Λ Y) (ring Λ X) c) (r : derivedPushforward Λ f ≅ proEtaleRingDerivedDirectImageOfUniverses f (ring Λ Y) (ring Λ X) c), (∀ (N : modules Λ X) (V : Y.ProEtᵒᵖ) (m : ((pushforward Λ f).obj N).val.obj V), (d.hom.app N).val.app V m = m) ∧ (∀ (M : modules Λ Y) (N : modules Λ X) (h : (pullback Λ f).obj M ⟶ N), (adjunction Λ f).homEquiv M N h ≫ d.hom.app N = (proEtaleRingModuleAdjunction f (ring Λ Y) (ring Λ X) c).homEquiv M N (b.inv.app M ≫ h)) ∧ PreservesFiniteLimits (pullback Λ f) ∧ PreservesFiniteColimits (pullback Λ f) ∧ PreservesFiniteLimits (proEtaleRingModulePullback f (ring Λ Y) (ring Λ X) c) ∧ PreservesFiniteColimits (proEtaleRingModulePullback f (ring Λ Y) (ring Λ X) c) ∧ (∀ M : CochainComplex (modules Λ Y) ℤ, l.hom.app (DerivedCategory.Q.obj M) ≫ (proEtaleRingModulePullback f (ring Λ Y) (ring Λ X) c).mapDerivedCategoryFactors.hom.app M = (pullback Λ f).mapDerivedCategoryFactors.hom.app M ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex b (.up ℤ)).hom.app M)) ∧ (∀ M : CochainComplex (modules Λ Y) ℤ, IsIso ((pullback Λ f).leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj M))) ∧ (∀ I : CochainComplex (modules Λ X) ℤ, (pushforward Λ f).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I) ≫ r.hom.app (DerivedCategory.Q.obj I) = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex d (.up ℤ)).hom.app I) ≫ (proEtaleRingModuleDirectImage f (ring Λ Y) (ring Λ X) c).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) ∧ (∀ (I : CochainComplex (modules Λ X) ℤ) [I.IsKInjective], IsIso ((pushforward Λ f).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I)) ∧ IsIso ((proEtaleRingModuleDirectImage f (ring Λ Y) (ring Λ X) c).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I))) ∧ (∀ (A : DerivedCategory (modules Λ Y)) (B : DerivedCategory (modules Λ X)) (h : (derivedPullback Λ f).obj A ⟶ B), (derivedAdjunction Λ f).homEquiv A B h ≫ r.hom.app B = (proEtaleRingDerivedAdjunctionOfUniverses f (ring Λ Y) (ring Λ X) c).homEquiv A B (l.inv.app A ≫ h)) ∧ (∀ A : DerivedCategory (modules Λ Y), (proEtaleRingDerivedAdjunctionOfUniverses f (ring Λ Y) (ring Λ X) c).unit.app A = (derivedAdjunction Λ f).unit.app A ≫ r.hom.app ((derivedPullback Λ f).obj A) ≫ (proEtaleRingDerivedDirectImageOfUniverses f (ring Λ Y) (ring Λ X) c).map (l.hom.app A)) ∧ (∀ B : DerivedCategory (modules Λ X), (proEtaleRingDerivedAdjunctionOfUniverses f (ring Λ Y) (ring Λ X) c).counit.app B = (proEtaleRingDerivedPullbackOfUniverses f (ring Λ Y) (ring Λ X) c).map (r.inv.app B) ≫ l.inv.app ((derivedPushforward Λ f).obj B) ≫ (derivedAdjunction Λ f).counit.app B) ∧ (∀ (M P : CochainComplex (modules Λ Y) ℤ) (K I : CochainComplex (modules Λ X) ℤ) (t : P ⟶ M) (s : K ⟶ I) [QuasiIso t] [QuasiIso s] [I.IsKInjective] (h : P ⟶ ((pushforward Λ f).mapHomologicalComplex (.up ℤ)).obj I), (derivedAdjunction Λ f).homEquiv _ _ ((pullback Λ f).mapDerivedCategoryFactors.hom.app M ≫ inv (DerivedCategory.Q.map (((pullback Λ f).mapHomologicalComplex (.up ℤ)).map t)) ≫ DerivedCategory.Q.map ((((adjunction Λ f).mapHomologicalComplex (.up ℤ)).homEquiv P I).symm h) ≫ inv (DerivedCategory.Q.map s)) = inv (DerivedCategory.Q.map t) ≫ DerivedCategory.Q.map h ≫ (pushforward Λ f).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I) ≫ inv ((derivedPushforward Λ f).map (DerivedCategory.Q.map s))) ∧ (∀ (M P : CochainComplex (modules Λ Y) ℤ) (K I : CochainComplex (modules Λ X) ℤ) (t : P ⟶ M) (s : K ⟶ I) [QuasiIso t] [QuasiIso s] [I.IsKInjective] (h : P ⟶ ((proEtaleRingModuleDirectImage f (ring Λ Y) (ring Λ X) c).mapHomologicalComplex (.up ℤ)).obj I), (proEtaleRingDerivedAdjunctionOfUniverses f (ring Λ Y) (ring Λ X) c).homEquiv _ _ ((proEtaleRingModulePullback f (ring Λ Y) (ring Λ X) c).mapDerivedCategoryFactors.hom.app M ≫ inv (DerivedCategory.Q.map (((proEtaleRingModulePullback f (ring Λ Y) (ring Λ X) c).mapHomologicalComplex (.up ℤ)).map t)) ≫ DerivedCategory.Q.map ((((proEtaleRingModuleAdjunction f (ring Λ Y) (ring Λ X) c).mapHomologicalComplex (.up ℤ)).homEquiv P I).symm h) ≫ inv (DerivedCategory.Q.map s)) = inv (DerivedCategory.Q.map t) ≫ DerivedCategory.Q.map h ≫ (proEtaleRingModuleDirectImage f (ring Λ Y) (ring Λ X) c).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj I) ≫ inv ((proEtaleRingDerivedDirectImageOfUniverses f (ring Λ Y) (ring Λ X) c).map (DerivedCategory.Q.map s))) ∧ (∀ (A : DerivedCategory (internalModules Λ Y)) (B : DerivedCategory (internalModules Λ X)) (h : (internalDerivedPullback Λ f).obj A ⟶ B), (proEtaleRingDerivedAdjunctionOfUniverses f (ring Λ Y) (ring Λ X) c).homEquiv _ _ (l.inv.app ((derivedEquivalence Λ Y).functor.obj A) ≫ (derivedPullComparison Λ f).inv.app A ≫ (derivedEquivalence Λ X).functor.map h) = (derivedEquivalence Λ Y).functor.map ((normalizationInternalAdjunction Λ f).homEquiv A B h) ≫ (derivedPushComparison Λ f).hom.app B ≫ r.hom.app ((derivedEquivalence Λ X).functor.obj B))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedLocalization",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedPullbackOfUniverses",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedDirectImageOfUniverses",
+   "AlgebraicGeometry.Scheme.proEtaleRingDerivedAdjunctionOfUniverses",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionGeometricAdjunctionBridge"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-936ccdba1",
+  "group": "Q86",
+  "result": "fix",
+  "note": "Re-delivery of H13-returned 23cbbe7d. Theorem statement byte-identical. The 4 OfUniverses helpers moved into the item module with source/blueprint docstrings and listed in lean.declarations. def-weil-pbc-proetale-operations and all 11 stmt_dep nodes byte-identical to side-live; item node differs only in lean; lean.statement verbatim in file; no name clashes. Helpers are abbrevs of the existing mapDerivedCategory/rightDerivedFunctor/mapDerivedCategoryRightDerivedAdjunction at w=u+1, so not hollow and no universe restriction. [-instance] integralCoefficientRingSheafify switch has landed precedent. Mathematics re-read clause by clause (c pinned, b/d/l/r pinned, exactness, IsIso at K-injective I, homEquiv/unit/counit, both 0FND representative formulas, internal-to-operation identification); edge cases f=id, Λ=0, X=∅, t=s=1 checked; only proof is sorry. Sole fault H11: the second-reading section says no second reading was done. Fixed by fixes/lem-sfb-section-geometric-adjunction-bridge.report.md (worker report and H13 repair section verbatim plus an independent clause-by-clause reading). No Lean file changed, so no compile run."
+ }
+}

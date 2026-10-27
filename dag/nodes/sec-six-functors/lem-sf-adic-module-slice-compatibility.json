@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-adic-module-slice-compatibility",
+ "kind": "statement",
+ "title": "Restriction compatibility of normalized adic comparisons",
+ "statement": "Fix a prime ℓ and a normalized AdicModuleSectionComparison of lem-sf-adic-module-section-data for every scheme. For any site object U → X, the coefficient sheaves coincide on further-object functions. Native pullback corresponds to literal sectionwise restriction through the canonical inverse-image/localization section map. The native balanced tensor pullback comparison is normalized before the coequalizer, and the sectionwise tensor restriction comparison preserves local pure tensors; these comparisons commute with the base equivalences. The native Hom comparison commutes with restriction on every further slice, through the actual adicUpperStarIhomIso, and bidual evaluation commutes through the actual dual pullback map. This result assumes, rather than constructs, all base equivalences and closed comparisons; it does not construct the trivialization bijection, which is proved in the parent. Native evaluation compatibility follows from the Hom restriction formula at the identity slice.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CV, 03EK, 03EO and 0E8H; steps of lem-sf-adic-module-slice-hom-comparison."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-module-section-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct coefficientSlice by composing the coefficient equivalence on the object with the inverse coefficient equivalence on the composed site object. Their identity normalizations prove coefficientSlice_identity.",
+   "uses": [
+    "lem-sf-adic-slice-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Assemble the module restriction iso and its section formula from the explicit additive inverse-image section equivalences and their scalar-linearity equation.",
+   "uses": [
+    "lem-sf-adic-slice-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the explicitly constructed native balanced tensor iso and its proved quotient equation. Define the sectionwise tensor comparison by the inverse of the first path around the desired square followed by the second path. Its pure-tensor normalization is lem-sf-adic-slice-tensor. Cancellation of inverse isomorphisms proves tensor_slice directly.",
+   "uses": [
+    "lem-sf-adic-slice-native-tensor",
+    "lem-sf-adic-slice-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the two closed compatibility equations for Hom on every further slice and for native bidual pullback. Specialize the Hom equation to the identity further slice. Rewrite by the base evaluation formulas and the normalized restriction section formula, simplify the image of the identity, then use injectivity of the base additive section equivalence to deduce evaluation_slice. Package the resulting twelve fields.",
+   "uses": [
+    "lem-sf-adic-slice-closed",
+    "lem-sf-adic-slice-restriction",
+    "lem-sf-adic-module-section-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-slice-coefficients",
+  "lem-sf-adic-slice-restriction",
+  "lem-sf-adic-slice-native-tensor",
+  "lem-sf-adic-slice-tensor",
+  "lem-sf-adic-slice-closed",
+  "lem-sf-adic-module-section-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "H2: explicit coefficient and native tensor constructions, module restriction from scalar linearity, tensor square by iso cancellation, and evaluation from the Hom equation at the identity further slice. Three strictly smaller normalization obligations remain."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of algebras in sheaves of vector spaces equivalent to sheaves of modules, preserving underlying sections tensor and internal Hom",
+   "results": "SheafOfModules.forgetToSheafModuleCat; SheafOfModules.over; SheafOfModules.instCategory; SheafOfModules.toSheaf_obj_val; SheafOfModules.toSheaf; SheafOfModules.unitHomEquiv; SheafOfModules.forgetToSheafModuleCat_obj_val; SheafOfModules.unit",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  },
+  {
+   "tool": "grep",
+   "query": "adicConstantSheafObjMonHom|module.*equivalence.*sheaf",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over an algebra sheaf in vector space sheaves agree with sectionwise modules preserving relative tensor and slice internal Hom",
+   "results": "SheafOfModules; AlgebraicGeometry.Scheme.Modules; SheafOfModules.noConfusionType; SheafOfModules.hom_ext; SheafOfModules.instCategory; SheafOfModules.mk; AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf; SheafOfModules.sections",
+   "date": "2026-10-24",
+   "verdict": "No comparison with the native adic internal-module category; section-module definitions alone do not identify its actions or tensor/Hom maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleSliceHomComparison",
+  "date": "2026-10-24",
+  "group": "E2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The native module/slice-Hom comparison required by lisse biduality; the specific steps of lem-sf-adic-module-slice-hom-comparison recorded in proof.",
+   "via": [
+    "lem-sf-adic-module-slice-hom-comparison",
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicModuleSliceCompatibility",
+  "file": "lean/Sheaf/SixFunctors/AdicModuleSliceCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicModuleSliceCompatibility",
+  "statement": "theorem adicModuleSliceCompatibility (l : ℕ) [Fact l.Prime]\n    (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X) :\n    Nonempty (AdicModuleSliceCompatibility l base)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-9c0de",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261024T224912-L-1826302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T182338-L-3549900",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-relative-kunneth-cube-factor-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Coherence (iii): six factor squares and their specified endpoints",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Transport the six base-change squares to normalized presentations",
+ "statement": "Fix a normalized presentation R of the relative product for a six-functor datum at any coefficient stage, and R' of its geometric base change, as in [def-sf-relative-kunneth-constructions]. Let G be the geometric cube, over a separated base and a separated original f, with its supplied compactifications. There exist normalized primitive cube comparisons. For every such comparison A and every pair K,L of finite-Tor inputs, there are isomorphisms beta_i (0<=i<=6) from base pullback of the i-th old expression to the i-th changed expression on the pulled-back inputs. beta_0 is exactly A.sourceIso, beta_6 is exactly A.targetIso, and each of the six individual factor squares commutes. No equation for the composite relative map is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Coherence (iii): six factor squares and their specified endpoints"
+ },
+ "stmt_deps": [
+  "def-sf-relative-kunneth-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the specified pullback, support and tensor to the full finite-Tor domains. Lift canonical monoidal pullback, composition and the three exchanges of the compactified squares of G. A2 inverts exchange. The normalization equations and faithfulness of the inclusions give all primitive cube comparison fields; this supplies existence, independently of any composite relative-product map.",
+   "uses": [
+    "def-sf-datum",
+    "def-sf-relative-product-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii): six factor squares and their specified endpoints"
+   }
+  },
+  {
+   "text": "Apply the input-domain lemma on the Cartesian product, transporting along its canonical isomorphism to Q.X'. It gives exactly the etale-origin witnesses and integral/common-stage representatives required by the existing factor-square theorem. Pullback pasting and cancellation using the two product squares and the f- and g-faces gives the Cartesian v-face of its Change.",
+   "uses": [
+    "lem-sf-relative-product-input-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii): six factor squares and their specified endpoints"
+   }
+  },
+  {
+   "text": "Construct the seven beta_i by the formulas in RelativeProductBaseChange.beta. For an arbitrary normalized A, its normalization fields and full faithfulness identify its primitive maps with those lifts. The i=0 formula is A.sourceIso, and the i=6 formula is A.targetIso. Apply factor_squares separately for all six indices and transport through the full inclusions and tensor models. Cancel inverse coordinate comparisons to obtain the six separate equations; no pasting of all six is performed in this lemma.",
+   "uses": [
+    "lem-sf-relative-product-base-change-factor-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Coherence (iii): six factor squares and their specified endpoints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-datum",
+  "def-sf-relative-product-factors",
+  "lem-sf-relative-product-base-change-factor-squares",
+  "lem-sf-relative-product-input-domains"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Coherence (iii): six factor squares and their specified endpoints; expansion and coordinate transport of the stated argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative Kunneth base change commuting factor squares closed subscheme compact cohomology",
+   "results": "8 hits: CategoryTheory.TwoSquare.lanBaseChange, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.tensorKaehlerEquivBase, CategoryTheory.TwoSquare.lanBaseChange_app, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kunneth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|RelativeKunnethCube",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeKunneth",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeKunnethCubeFactorTransport",
+  "file": "lean/Sheaf/Paper/RelativeKunnethCubeFactorTransport.lean",
+  "declaration": "WeilConjectures.relativeKunneth_cube_factor_transport",
+  "statement": "theorem relativeKunneth_cube_factor_transport\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    {S : SixFunctorDatum D C E n hn} {s : PodCoefficientStage}\n    {Q Q' : SixFunctorCompactifiedSquare D}\n    [IsSeparated Q.Y.obj.hom] [IsSeparated Q.f.hom.left]\n    [IsSeparated Q.g.hom.left] [IsSeparated Q.g'.hom.left] [IsSeparated Q.f'.hom.left]\n    [IsSeparated Q'.g.hom.left] [IsSeparated Q'.g'.hom.left] [IsSeparated Q'.f'.hom.left]\n    (R : RelativeProductPresentation S s Q) (R' : RelativeProductPresentation S s Q')\n    (cg : Compactification Q.g.hom.left)\n    (ch : Compactification (Q.f' ≫ Q.g).hom.left)\n    (cg' : Compactification Q'.g.hom.left)\n    (ch' : Compactification (Q'.f' ≫ Q'.g).hom.left)\n    (G : RelativeKunnethCube Q Q' cg ch cg' ch') :\n    Nonempty (RelativeKunnethCubeComparisons R R' G) ∧\n    ∀ (A : RelativeKunnethCubeComparisons R R' G) K L,\n      ∃ beta : ∀ i : Fin 7,\n        (R'.coordinates.operations.pull G.b G.separated_b).obj\n          (((relativeProductTerms Q cg ch i).eval\n            R.coordinates.operations R.coordinates.tensor).obj (K, L)) ≅\n          ((relativeProductTerms Q' cg' ch' i).eval\n            R'.coordinates.operations R'.coordinates.tensor).obj\n              ((R'.coordinates.operations.pull G.x G.separated_x).obj K,\n               (R'.coordinates.operations.pull G.y G.separated_y).obj L),\n        beta 0 = A.sourceIso K L ∧ beta 6 = A.targetIso K L ∧\n          ∀ i : Fin 6,\n            (R'.coordinates.operations.pull G.b G.separated_b).map\n                ((R.factors cg ch i).hom.app (K, L)) ≫ (beta i.succ).hom =\n              (beta i.castSucc).hom ≫\n                (R'.factors cg' ch' i).hom.app\n                  ((R'.coordinates.operations.pull G.x G.separated_x).obj K,\n                   (R'.coordinates.operations.pull G.y G.separated_y).obj L)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b2e9",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T201243-L-2368212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b2e9",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T201243-L-2368212",
+  "kind": "interface",
+  "note": "independent cc review: relativeKunneth statement byte-identical to published; 12 moved declarations have identical type and value Expr hashes in the sandbox and published builds; two new sorry lemmas checked against the item's closed and base-change clauses and their nodes; 3 direct importers compiled against the delivered modules"
+ }
+}

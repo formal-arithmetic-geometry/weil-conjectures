@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-smooth-plane-hypersurface-geometric-genus",
+ "kind": "statement",
+ "title": "Geometric integrality and genus of a smooth plane hypersurface",
+ "statement": "Let $k$ be a field [def-weil-field], $d\\geq1$ an integer, and $F\\in k[A,B,C]$ a nonzero homogeneous polynomial of degree $d$ [def-weil-pbc-mv-polynomial-ring]. Put $Z=\\operatorname{Proj}(k[A,B,C]/(F))\\subset\\mathbf P^2_k$ with its closed subscheme structure [def-pc-proj, def-nagata-projective-space-base-change, def-weil-closed-immersion]. Assume that $Z\\to\\operatorname{Spec}k$ is smooth of relative dimension one [def-sbc-smooth-morphisms]. For every field extension $L/k$ [def-pc-field-extension], the base change $Z_L$ is the closed plane hypersurface of the coefficient image of $F$, the scalar map $L\\to\\Gamma(Z_L,\\mathcal O_{Z_L})$ is an isomorphism, and $Z_L$ is nonempty and connected [def-weil-connected-scheme]. The scheme $Z$ is geometrically integral [def-pc-geometrically-irreducible], and every local ring of every $Z_L$ is an integrally closed domain. Thus $Z_L$ is a smooth H-projective geometrically integral curve [def-kun-projective], and its genus [def-pc-genus] is\n$$g(Z_L)=\\dim_LH^1(Z_L,\\mathcal O_{Z_L})=(d-1)(d-2)/2.$$\nHere $H^1$ is structure-sheaf cohomology [def-sc-ringed-space-module-cohomology]. No rational point or algebraic closedness hypothesis on $k$ or $L$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD, lemma-genus-plane-curve and its proof, and Tag 0BYA, section-plane-curves; smooth connected-to-normal-integral argument of returned proof steps 5--7 over all field extensions, using the existing smooth-family geometry core."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-proj",
+  "def-nagata-projective-space-base-change",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-field-extension",
+  "def-weil-connected-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-kun-projective",
+  "def-pc-genus",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-smooth-projective-curve",
+  "def-sfb-plane-hypersurface-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix any field extension $L/k$ and let $F_L$ be the coefficient image of $F$. A nonzero coefficient stays nonzero under the injective map $k\\to L$, so $F_L$ is nonzero homogeneous of degree $d$. Apply [lemma-nagata-relative-proj-base-change-arbitrary] to the graded quotient algebra. The graded isomorphism $L\\otimes_k(k[A,B,C]/(F))\\cong L[A,B,C]/(F_L)$ sends $l\\otimes\\bar P$ to $l\\overline{P_L}$. Its inverse sends $l$ to $l\\otimes1$ and each variable $X$ to $1\\otimes\\bar X$; it kills $F_L$ since its image is $1\\otimes\\bar F=0$. Both composites fix scalars and variables. This identifies $Z_L$ with that Proj. The canonical closed immersion into $\\mathbf P^2_L$ is supplied by [lem-sfb-projective-hypersurface-structure-sequence] with $n=2$.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "lem-sfb-projective-hypersurface-structure-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NT (lemma-proj-base-change), 01O3 (lemma-relative-proj-base-change); curves.tex Tag 0BYD, quotient closed immersion"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-plane-hypersurface-cohomology] to $L,F_L,d$. Its hypotheses hold by step 1, and it gives the actual scalar isomorphism $L\\xrightarrow{\\sim}\\Gamma(Z_L,\\mathcal O_{Z_L})$ and $\\dim_LH^1(Z_L,\\mathcal O_{Z_L})=(d-1)(d-2)/2$. This applies to every $L/k$ without a rational-point assumption.",
+   "uses": [
+    "lem-sfb-plane-hypersurface-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, lemma-genus-plane-curve, cohomology computation"
+   }
+  },
+  {
+   "text": "The empty scheme has zero global-section ring, whereas step 2 gives the nonzero field $L$, so $Z_L$ is nonempty. If $Z_L=U\\amalg V$ with both opens nonempty, glue the section $0$ on $U$ to $1$ on $V$. It is an idempotent global section distinct from both $0$ and $1$: at a point of either open its germ is evaluated in a nonzero local ring. Under step 2 it would give a nontrivial idempotent of $L$, impossible since $e(e-1)=0$ in a field. Thus $Z_L$ is connected.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, H0 conclusion; explicit elementary idempotent argument"
+   }
+  },
+  {
+   "text": "By [lem-sbc-smooth-relative-dimension-permanence](1), $Z_L\\to\\operatorname{Spec}L$ is smooth of relative dimension one. For every field extension $M/L$, [def-pc-base-change] identifies $(Z_L)_M$ with $Z_M$; step 3 for the composite $M/k$ makes it connected. Hence $Z_L$ is geometrically connected over $L$ by [def-pc-geometrically-irreducible].",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-pc-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VB, lemma-base-change-smooth, and 02NK, lemma-base-change-relative-dimension-d"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-smooth-connected-generic-geometry-core] to $Z_L\\to\\operatorname{Spec}L$. Its base is integral with integrally closed field local ring. Nonemptiness is step 3; smoothness is step 4. The sole fibre is $Z_L$, geometrically connected by step 4, so the fibre hypothesis holds. The generic fibre over the field base is $Z_L$ itself. The lemma gives that $Z_L$ is integral and every local ring is an integrally closed domain. Since $L/k$ was arbitrary, $Z$ is geometrically integral; applying this to all composites $M/k$ gives geometric integrality of each $Z_L$.",
+   "uses": [
+    "lem-sbc-smooth-connected-generic-geometry-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; existing normal integral geometry core, specialized to a field"
+   }
+  },
+  {
+   "text": "The closed immersion of step 1 is into $\\operatorname{Proj}(L[A,B,C])$; applying [lemma-nagata-relative-proj-base-change-arbitrary] to $\\operatorname{Spec}L\\to\\operatorname{Spec}\\mathbf Z$ and the graded algebra $\\mathbf Z[A,B,C]$ identifies this Proj over $\\operatorname{Spec}L$ with $\\mathbf P(\\{0,1,2\\};\\operatorname{Spec}L)$, so $Z_L\\to\\operatorname{Spec}L$ is H-projective by [def-kun-projective]. By [lem-kun-projective-implies-proper] it is proper, hence separated and of finite type, in particular quasi-compact, so $Z_L$ is projective over $L$ in the convention of [def-pc-smooth-projective-curve]. Step 4 gives smoothness of relative dimension one; since $\\operatorname{Spec}L$ is a point, the only fibre is $Z_L$ itself, so $\\dim_xZ_L=1$ at every $x$ and $\\dim Z_L=1$. With the integrality of step 5, $Z_L$ is a curve over $L$, a smooth projective curve [def-pc-smooth-projective-curve], and geometrically irreducible because it is geometrically integral (step 5). Its genus is defined by [def-pc-genus] as $\\dim_LH^1(Z_L,\\mathcal O_{Z_L})$, already computed in step 2. This proves every assertion for every $L/k$.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "def-kun-projective",
+    "lem-kun-projective-implies-proper",
+    "def-pc-smooth-projective-curve",
+    "def-pc-genus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, lemma-genus-plane-curve, interpreted by the genus definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "lem-sfb-projective-hypersurface-structure-sequence",
+  "lem-sfb-plane-hypersurface-cohomology",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "def-kun-projective",
+  "def-pc-genus",
+  "lem-kun-projective-implies-proper",
+  "def-pc-smooth-projective-curve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD and Section 0BYA, assembled with arbitrary relative-Proj base change and the existing smooth normal integral geometry core; connectedness is proved explicitly by idempotents."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth positive degree plane hypersurface over a field is geometrically integral and its genus is (d-1)(d-2)/2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"Type u → Type u\", \"doc\": \"The type of Weierstrass curves over a given type $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R], IsDomain W'.CoordinateRing\", \"doc\": \"If $ R $ is a domain, then the coordinate ring of an affine Weierstrass curve over $ R $, defined as the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1\"}\n  {\"name\": \"WeierstrassCurve.Affine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of affine Weierstrass curves over a given base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.natDegree_polynomial\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W : WeierstrassCurve.Affine R} [Nontrivial R], W.polynomial.natDegree = 2\", \"doc\": \"For a non-trivial base ring $ R $, the natural degree of the polynomial defining an affine Weierstrass curve is equal to 2. This follows from the standard Weierstrass equation $ Y^2 + (a_1 X + a_3) Y \"}\n  {\"name\": \"WeierstrassCurve.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → {K : Type u_2} → [inst_1 : Field K] → [Algebra R K] → WeierstrassCurve K → Prop\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve over $ K $, this proposition asserts that the curve is integral (i.e., its coordinate ri\"}\n  {\"name\": \"WeierstrassCurve.IsElliptic\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass\", \"type\": \"{R : Type u} → [CommRing R] → WeierstrassCurve R → Prop\", \"doc\": \"A predicate on a Weierstrass curve over a commutative ring $ R $, asserting that the curve is elliptic.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass models and general geometric-integrality definitions do not prove geometric integrality or the degree-genus formula for arbitrary smooth plane equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth plane curves are geometrically connected and geometrically irreducible using H0 of the structure sheaf equal to the base field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R], IsDomain W'.CoordinateRing\", \"doc\": \"If $ R $ is a domain, then the coordinate ring of an affine Weierstrass curve over $ R $, defined as the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instSubsingleton\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Subsingleton R], Subsingleton W'.CoordinateRing\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a base ring $ R $, defined as the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (\"}\n  {\"name\": \"WeierstrassCurve.Affine.irreducible_polynomial\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W : WeierstrassCurve.Affine R} [IsDomain R], Irreducible W.polynomial\", \"doc\": \"The Weierstrass polynomial $ Y^2 + (a_1 X + a_3) Y - (X^3 + a_2 X^2 + a_4 X + a_6) $ is irreducible in the polynomial ring over an integral domain $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"WeierstrassCurve.Affine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of affine Weierstrass curves over a given base $ R $.\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → {K : Type u_2} → [inst_1 : Field K] → [Algebra R K] → WeierstrassCurve K → Prop\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve over $ K $, this proposition asserts that the curve is integral (i.e., its coordinate ri\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass models and general geometric-integrality definitions do not prove geometric integrality or the degree-genus formula for arbitrary smooth plane equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass models and general geometric-integrality definitions do not prove geometric integrality or the degree-genus formula for arbitrary smooth plane equations."
+  },
+  {
+   "tool": "grep",
+   "query": "plane.*curve|hypersurface|arithmeticGenus|geometricallyIntegral",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"17\", \"text\": \"- `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"133\", \"text\": \"theorem isCommMonObj_of_isProper_of_geometricallyIntegral\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"134\", \"text\": \"    (G : Over (Spec (.of K))) [IsProper G.hom] [GeometricallyIntegral G.hom] [GrpObj G] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"435\", \"text\": \"instance : GeometricallyIntegral (𝔸(n; S) ↘ S) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"15\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"19\", \"text\": \"- `GeometricallyIntegral.iff_geometricallyIntegral_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"22\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"25\", \"text\": \"- `AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"40\", \"text\": \"class GeometricallyIntegral (f : X ⟶ Y) : Prop where\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass models and general geometric-integrality definitions do not prove geometric integrality or the degree-genus formula for arbitrary smooth plane equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth plane projective curve geometric integrality genus degree formula",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → {K : Type u_2} → [inst_1 : Field K] → [Algebra R K] → WeierstrassCurve K → Prop\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve over $ K $, this proposition asserts that the curve is integral (i.e., its coordinate ri\"}\n  {\"name\": \"WeierstrassCurve.isIntegral_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] (W : WeierstrassCurve K),\\n  WeierstrassCurve.IsIntegral R W ↔ ∃ W_int, W = W_int.baseChange K\", \"doc\": \"For a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, the curve $ W $ is integral (i.e., its coordinate ring is an integral do\"}\n  {\"name\": \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"{W : WeierstrassCurve K} [IsMinimal R W] : IsIntegral R W\", \"doc\": \"Every minimal Weierstrass curve over the fraction field of a discrete valuation ring is integral, meaning its coordinate ring forms an integral domain.\"}\n  {\"name\": \"WeierstrassCurve.IsIntegral.mk\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] {W : WeierstrassCurve K},\\n  (∃ W_int, W = W_int.baseChange K) → WeierstrassCurve.IsIntegral R W\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, if there exists a Weierstrass curve $ W_{\\\\text{int}} $ over $ R $ such that $ W\"}\n  {\"name\": \"WeierstrassCurve.isIntegral_of_exists_lift\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"{W : WeierstrassCurve K} (h₁ : ∃ r₁, (algebraMap R K) r₁ = W.a₁) (h₂ : ∃ r₂, (algebraMap R K) r₂ = W.a₂)\\n  (h₃ : ∃ r₃, (algebraMap R K) r₃ = W.a₃) (h₄ : ∃ r₄, (algebraMap R K) r₄ = W.a₄)\\n  (h₆ : ∃ r₆, (algebraMap R K) r₆ = W.a₆) : IsIntegral R W\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and a Weierstrass curve $ W $ over $ K $, if each coefficient $ a_1, a_2, a_3, a_4, a_6 $ of $ W $ lies in the i\"}\n  {\"name\": \"WeierstrassCurve.integralModel\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) [hW : IsIntegral R W] : WeierstrassCurve R\", \"doc\": \"Given a commutative ring $ R $, a field $ K $ equipped with an $ R $-algebra structure, and an integral Weierstrass curve $ W $ over $ K $, this constructs the integral model of $ W $ as a Weierstrass\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass models and general geometric-integrality definitions do not prove geometric integrality or the degree-genus formula for arbitrary smooth plane equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected curve over a field is integral and all local rings are integrally closed domains",
+   "results": "8 hits; WeierstrassCurve.IsIntegral, WeierstrassCurve.instIsIntegralOfIsMinimal, WeierstrassCurve.exists_isIntegral, WeierstrassCurve.integralModel, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; Weierstrass models, integral morphisms, and cotangent cohomology do not state the general smooth plane-hypersurface assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegular.isIntegral, IsRegular.isIntegrallyClosed",
+   "results": "0 hits; ; loogle: unknown identifier 'IsRegular.isIntegral'",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; no declaration proves general smooth plane-hypersurface geometry and coherent genus. Unknown-identifier Loogle query supplies no usable evidence; the separate genus query ran successfully."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|regular.*integral|smooth.*normal",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; Weierstrass models, integral morphisms, and cotangent cohomology do not state the general smooth plane-hypersurface assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth positive degree plane hypersurface over any field is geometrically integral and has genus (d-1)(d-2)/2",
+   "results": "8 hits; WeierstrassCurve, WeierstrassCurve.Affine.CoordinateRing.instIsDomain, WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one, WeierstrassCurve.Affine, WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one, WeierstrassCurve.IsElliptic, WeierstrassCurve.IsIntegral, WeierstrassCurve.Affine.natDegree_polynomial",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; Weierstrass models, integral morphisms, and cotangent cohomology do not state the general smooth plane-hypersurface assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth projective plane hypersurface geometric integrality and degree genus formula",
+   "results": "8 hits; AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsIntegral, WeierstrassCurve.IsIntegral, Algebra.FormallySmooth.of_perfectField, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.recOn, Polynomial.integralNormalization_degree",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; Weierstrass models, integral morphisms, and cotangent cohomology do not state the general smooth plane-hypersurface assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"genus\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; Weierstrass models, integral morphisms, and cotangent cohomology do not state the general smooth plane-hypersurface assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "plane.*genus|genus.*plane|hypersurface.*cohomology",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; Weierstrass models, integral morphisms, and cotangent cohomology do not state the general smooth plane-hypersurface assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every field extension of a smooth plane curve is connected and integral and its first structure sheaf cohomology has dimension choose d minus one two",
+   "results": "8 hits; Algebra.IsStandardSmooth.subsingleton_h1Cotangent, WeierstrassCurve.Affine.FunctionField, FunctionField.classNumber, Algebra.IsStandardSmooth.relativeDimension, WeierstrassCurve.Affine.CoordinateRing.instIsDomain, WeierstrassCurve, WeierstrassCurve.Affine.CoordinateRing.instSubsingleton, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; Weierstrass models, integral morphisms, and cotangent cohomology do not state the general smooth plane-hypersurface assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fermat-kummer-relative-curve",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Returned proof steps 5--7: H0, nonemptiness, idempotents over all field extensions, the field-base application of the smooth normal-integral core and the genus formula.",
+   "via": [
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-plane-hypersurface-geometric-genus",
+  "worker": "stage1",
+  "summary": "Preserved the full statement; reused the existing plane-hypersurface cohomology and smooth geometry core, with explicit coefficient extension, nonemptiness and idempotent connectedness. Checked every extension M/L before invoking geometric connectedness; no new nodes, no Lean attachment, no hypothesis of a rational point or algebraically closed field. Mathlib searches actually run and logged. Repair of return at 2c35b59d016: compared retained split with the current statement-only live node, re-read all nine cited statements, checked all verbatim quotes, and made the graded quotient inverse and the geometry core fibre hypothesis explicit. Delivery rebuilt on the current DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Returned proof steps 5--7: H0, nonemptiness, idempotents over all field extensions, the field-base application of the smooth normal-integral core and the genus formula. Realized by proof steps 1--6: base-change equation, cohomology, idempotents, smooth permanence, the prescribed field-base core, and genus.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Arbitrary relative Proj base change identifies the scalar-extended homogeneous equation; no node in this unit states that generic construction."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base-change permanence of smoothness and relative dimension is a tool for the plane curve, not a replacement of the alteration route."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Use the existing normal integral geometry core over a field exactly as the parent Fermat argument prescribes."
+   },
+   {
+    "node": "def-pc-base-change",
+    "why": "The definition supplies associativity of iterated base change."
+   },
+   {
+    "node": "def-pc-genus",
+    "why": "The definition identifies the genus with first structure-sheaf cohomology."
+   },
+   {
+    "node": "def-kun-projective",
+    "why": "The definition identifies the displayed closed plane embedding as H-projectivity."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic fact that an H-projective morphism is proper (separated, finite type), needed to verify that the plane hypersurface is a curve in the sense of the genus definition; no node of this unit states it. Added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "def-pc-base-change",
+  "def-pc-genus",
+  "def-kun-projective",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-e54f31d66",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-e54f31d66 (reviewer sub-agent of L); spot-checked: This re-push follows the landing refusal of 2c35b59d0169, which a reader had marked FIX. It has no new nodes and the statement is unchanged from the base. The item is still unsplit with no proof in both live and side-live, so no other group superseded it. Compared with 2c35, only step 1 (the graded quotient inverse is now written out and correct), step 5 (the field-base fibre hypothesis is now checked explicitly and correct) and the summary changed. The reviewer's step-6 FIX was lost: step 6, proof_deps and tool_uses are identical to the unfixed version. I re-applied that fix to this head in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-plane-hypersurface-geometric-genus.json. The fault it repairs is C1/C2: step 6 is marked elementary but uses two facts it does not cite. (a) def-kun-projective needs an embedding into P({0,1,2};Spec L)=Spec L x_Z P^2_Z, while step 1 gives one into Proj L[A,B,C]; the Nagata base-change lemma applied to Spec L -> Spec Z identifies the two. (b) def-pc-genus needs a curve in the sense of def-pc-smooth-projective-curve, i.e. separated, of finite type and quasi-compact, and lem-kun-projective-implies-proper supplies this. The fixed step also writes out dim Z_L = 1 from relative dimension one over a point. The step is now non-elementary, proof_deps and uses are extended, and a tool_uses entry for lem-kun-projective-implies-proper is added. Checks: Stacks 0BYD (curves.tex l.1687) was read and needs only F nonzero homogeneous, matching lem-sfb-plane-hypersurface-cohomology. Steps 1-5 were checked against the full statements of the Nagata base-change lemma, the structure-sequence node, the cohomology node, sbc permanence (1), def-pc-base-change, def-pc-geometrically-irreducible and the sbc geometry core. Small cases: d=1 and d=2 give genus 0, including the real conic with no rational point; d=3 gives genus 1; AB and A^2 are excluded by smoothness.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPlaneHypersurfaceGeometricGenus",
+  "declaration": "AlgebraicGeometry.PlaneHypersurface.geometric_genus_of_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPlaneHypersurfaceGeometricGenus.lean",
+  "statement": "theorem geometric_genus_of_smooth {k : Type u} [Field k] (d : ℕ) (hd : 1 ≤ d) (F : MvPolynomial (ULift.{u} (Fin 3)) k) (hF : F.IsHomogeneous d) (hF0 : F ≠ 0) (hsmooth : SmoothOfRelativeDimension 1 (π d F hF)) : GeometricallyIntegral (π d F hF) ∧ ∀ (L : Type u) [Field L] [Algebra k L], ∃ e : pullback (π d F hF) (Spec.map (CommRingCat.ofHom (algebraMap k L))) ≅ scheme d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L)), e.hom ≫ π d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L)) = pullback.snd (π d F hF) (Spec.map (CommRingCat.ofHom (algebraMap k L))) ∧ IsClosedImmersion (ι d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ∧ Function.Bijective (scalarMap d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ∧ ConnectedSpace (scheme d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ∧ (∀ x : scheme d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L)), IsDomain ((scheme d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))).presheaf.stalk x) ∧ IsIntegrallyClosed ((scheme d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))).presheaf.stalk x)) ∧ SmoothOfRelativeDimension 1 (π d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ∧ IsHProjective (π d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ∧ GeometricallyIntegral (π d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ∧ IsSmoothProjectiveCurve (π d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ∧ (@Scheme.arithmeticGenus L _ (scheme d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))) ⟨π d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L))⟩ : Cardinal.{u}) = Module.rank L (cohomology d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L)) 1) ∧ Module.rank L (cohomology d (MvPolynomial.map (algebraMap k L) F) (hF.map (algebraMap k L)) 1) = (((d - 1) * (d - 2) / 2 : ℕ) : Cardinal.{u})",
+  "branch": "sheaf-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The explicit coefficient-image hypersurface is identified over Spec L with the actual pullback; every subsequent assertion is about this model of Z_L. ConnectedSpace includes nonemptiness. The recorded cohomological arithmeticGenus is compared to the recorded module-cohomology dimension using cardinal rank, including finiteness. Uses the canonical PlaneHypersurface definitions recorded by def-sfb-plane-hypersurface-scheme, without introducing a second hypersurface or genus construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-107683c7f",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Re-delivery fixes the H2 RETURN of 87d82e2066bf exactly. The Lean module is byte-identical to the returned head, which was clause-checked then; I re-checked that reading against the unchanged signature (base-change iso over Spec L, closed immersion, bijective scalarMap, ConnectedSpace, GeometricallyIntegral, normal-domain stalks, SmoothOfRelativeDimension 1, IsHProjective, IsSmoothProjectiveCurve, arithmeticGenus = rank H^1 = (d-1)(d-2)/2), and the statement field matches it verbatim. Item: theorem lem-sfb-plane-hypersurface-cohomology and unused def-pc-base-change moved from stmt_deps to proof_deps only; new existing:true def node def-sfb-plane-hypersurface-scheme added. New node has all brief §5 fields (import_flags [], stmt_deps = cited ids, Stacks 0BYA/0BYD/01DZ, searches of every kind). Its lean record is existing:true on Sheaf.AlgebraicGeometry.PlaneHypersurfaceCohomology with ideal/scheme/ι/π/scalarMap/cohomology; statement verbatim equal to the live scheme signature; TeX matches the live defs (zeroLocus of unitToTwist F, subscheme, subschemeι, ΓSpecIso pullback, restrictScalars of moduleCohomology), including F=0/d=0. No other owner in live or side-live dag; item not landed elsewhere. Edge cases d=1..4, all characteristics, no rational point. No file changed, nothing compiled."
+ }
+}

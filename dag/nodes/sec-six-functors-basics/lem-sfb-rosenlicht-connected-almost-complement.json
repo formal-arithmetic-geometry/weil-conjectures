@@ -1,0 +1,427 @@
+{
+ "id": "lem-sfb-rosenlicht-connected-almost-complement",
+ "kind": "statement",
+ "title": "A connected smooth almost-complement to a central abelian subvariety",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed and normal subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Affine means isomorphic to the spectrum of a commutative ring [def-pc-scheme]. Dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. Let $G$ be a smooth connected separated finite-type $k$-group scheme, and let $A\\hookrightarrow G$ be a central closed subgroup which is an abelian variety [def-sc-abelian-variety]; central means that its points commute with all points of $G$ after every commutative algebra extension. There is a smooth connected separated finite-type closed normal subgroup $N\\hookrightarrow G$ such that multiplication $m:A\\times_k N\\to G$, $(a,n)\\mapsto an$, is a faithfully flat homomorphism of finite presentation with finite scheme-theoretic kernel, and $\\dim G=\\dim A+\\dim N$. Fibre products are [def-pc-fibre-product], finite morphisms are [def-weil-finite-integral-morphism], and faithfully flat means flat [def-weil-flat-morphism] and surjective. Finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. The product and kernel are scheme-theoretic; no affineness or commutativity assumption is imposed on $G$ or $N$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 8.24 (Rosenlicht decomposition), printed p.153, with connected refinement by taking the identity component of its smooth almost-complement. Proposition 5.23, printed p.104, gives the dimension formula for the product homomorphism with finite kernel; Corollary 1.35 and Summary 1.71 give connected-image surjectivity. No Stacks tag states this decomposition theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sc-abelian-variety",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-abelian-subgroup-equivariant-multiple-map] to obtain $n>0$ and $\\phi:G\\to A$. Put $r(g)=\\phi(g)-\\phi(e)$, a morphism by [def-sc-group-scheme]. Then $r(e)=0$ and $r(i(a))=[n]a$ as morphisms, by substituting $g=e$ in equivariance. To prove homomorphy, consider $h(x,y)=r(xy)-r(x)-r(y):G\\times_kG\\to A$. It vanishes on both identity axes. The connected $G$ equals its neutral component, so [lem-sfb-locally-algebraic-group-identity-component] gives geometric irreducibility. Smoothness gives geometric reducedness by [sbc-lem-smooth-geometrically-reduced]; hence $G$ is geometrically integral. All hypotheses of [lem-sfb-abelian-product-axis-rigidity] hold with $V=W=G$ and both basepoints $e$, so $h=0$. Thus $r$ is a group-scheme homomorphism restricting to $[n]_A$. The differences use commutativity of $A$, supplied by [lem-sc-av-commutative].",
+   "uses": [
+    "lem-sfb-abelian-subgroup-equivariant-multiple-map",
+    "def-sc-group-scheme",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-abelian-product-axis-rigidity",
+    "lem-sc-av-commutative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24, first two sentences, printed p.153; 8.19 expressed by the existing product-axis rigidity statement."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $r:G\\to A$: its kernel $K$ is a closed normal finite-type subgroup of $G$. Both groups are separated and finite type, as required (for $A$ this follows from properness in [def-sc-abelian-variety]). Put $N=(K^0)_{\\mathrm{red}}$. By [lem-sfb-locally-algebraic-group-identity-component], this is a smooth connected integral separated finite-type subgroup with the same space as $K^0$. Its inclusion in $G$ is closed: $K^0\\hookrightarrow K$ is clopen, its reduction is closed, and closed immersions compose by [lem-weil-pbc-closed-immersion-products].",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "def-sc-abelian-variety",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24, kernel construction and last paragraph (perfect-field reduction), with Proposition 1.34 for the connected refinement."
+   }
+  },
+  {
+   "text": "The subgroup $N$ is normal scheme-theoretically, not merely on $k$-points. Conjugation gives $c:G\\times_kN\\to K$ because $r(gng^{-1})=r(g)+0-r(g)=0$. Both $G$ and $N$ are geometrically irreducible by [lem-sfb-locally-algebraic-group-identity-component]; hence their product is irreducible by [lem-sc-irreducible-product-over-field]. Its connected image contains $e$, so lies in $K^0$. Factor $c$ through that open subscheme by [lem-weil-pbc-morphism-factors-through-open-subscheme]. The source is reduced: $G$ and $N$ are reduced and tensor products of their affine chart rings are reduced by [lem-weil-pbc-perfect-reduced-tensor], since the algebraically closed $k$ is perfect. The reduced-source factorization in [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] now factors $c$ through $(K^0)_{\\mathrm{red}}=N$. Evaluating this morphism on every commutative $k$-algebra gives closure of $N(R)$ under conjugation by $G(R)$, precisely normality in [def-sc-group-scheme-subgroup].",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sc-irreducible-product-over-field",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-perfect-reduced-tensor",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24, normality after perfect-field reduction and taking the neutral component; Stacks Groupoids Tags 0B7R and 047R, expanded via connected image and reduced-source factorization."
+   }
+  },
+  {
+   "text": "Let $P=A\\times_kN$ with componentwise group law and let $m:P\\to G$ be multiplication. For every test algebra, centrality gives $(an)(a^{\\prime}n^{\\prime})=(aa^{\\prime})(nn^{\\prime})$, so $m$ preserves multiplication and is a homomorphism by [def-sc-group-scheme]. The scheme $P$ is separated and of finite type: tensor products of finite affine chart algebras are finitely generated, and its diagonal is the product of the closed diagonals of $A$ and $N$, up to rearranging factors; use the product clause of [lem-weil-pbc-closed-immersion-products]. It is nonempty, since it has an identity.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24, second paragraph, centrality makes (40) a homomorphism."
+   }
+  },
+  {
+   "text": "Let $F=A\\times_GN$, the scheme-theoretic intersection. Its projection to $A$ is closed by base change of $N\\hookrightarrow G$ in [lem-weil-pbc-proper-fp-permanence](b). As $N\\subseteq\\ker r$ and $r|_A=[n]$, it factors through $A[n]$. This is a closed immersion: on affine charts a surjection onto the coordinate ring of $F$ factors through the quotient defining $A[n]$ and remains surjective. By [lem-sc-mult-n-isogeny], $A[n]$ is finite. Therefore $F$ is finite by [lem-weil-pbc-closed-immersion-finite] and [lem-weil-pbc-finite-composition]. For every test algebra, $an=e$ is equivalent to $n=i(a)^{-1}\\in N$. Thus $a\\mapsto(a,i(a)^{-1})$ identifies $F$ with $\\ker m$; its inverse is first projection. The two composites are identities on points of every test algebra, hence identities of scheme morphisms. In particular the kernel is finite, without any assertion that it is reduced.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-mult-n-isogeny",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24, second paragraph: finite intersection and the antidiagonal kernel of (40), with N replaced by its reduced neutral component."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $m:P\\to G$. It gives $m=j\\circ q$ with $j:I\\hookrightarrow G$ a closed subgroup and $q:P\\to I$ faithfully flat and of finite presentation. It remains to show that this closed image is all of $G$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24, surjectivity and faithful flatness; Theorem 5.39 replaces the appeal to Summary 1.71."
+   }
+  },
+  {
+   "text": "By [lem-sfb-group-neutral-component-translates], there are finitely many components $K_i$ of $K$, and representatives $k_i\\in K(k)$ with $K_i=k_iK^0$. Each $k$-point of $K^0$ belongs to its reduction $N$: a morphism from the reduced $\\operatorname{Spec}k$ factors through the reduction by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme]. For any $g\\in G(k)$, [lem-sc-isogeny-surjective] gives $a\\in A(k)$ with $[n]a=r(g)$, since $n>0$ and $k$ is algebraically closed. Then $i(a)^{-1}g\\in K(k)$, so it equals $k_i u$ for some $u\\in N(k)$. Centrality of $A$ gives $g=k_i i(a)u\\in k_i I(k)$. Thus the finitely many translates $k_i I$ contain all $G(k)$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sc-isogeny-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24, surjectivity from the multiplication map, with the connected refinement justified using Proposition 1.34 and Corollary 1.35."
+   }
+  },
+  {
+   "text": "Translation is an isomorphism by [lem-sc-translation-automorphism], so each $k_iI$ is closed in $G$. Their finite union is closed and contains every closed point, since closed points are rational by [lem-weil-pbc-closed-point-residue-field-base]; it is therefore $|G|$ by [lem-sc-lft-over-field-jacobson-space]. The scheme $G$ is irreducible by step 1. By the definition of irreducibility, a finite closed covering has a member equal to $|G|$. Translating back gives $|I|=|G|$. Since $G$ is reduced, apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $\\mathrm{id}_G$ and $I\\hookrightarrow G$. The resulting section of this closed immersion is its inverse (a closed immersion is a monomorphism), so $j$ is an isomorphism. Consequently $m$ is faithfully flat and of finite presentation.",
+   "uses": [
+    "lem-sc-translation-automorphism",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.24 with connected refinement: connected-image surjectivity from Corollary 1.35; no equal-dimension matrix-group criterion is used."
+   }
+  },
+  {
+   "text": "The finite kernel $F$ has dimension zero: its morphism to $\\operatorname{Spec}k$ is surjective since $F$ has the identity, so [lem-sc-finite-surjective-dimension] applies and gives $\\dim F=\\dim\\operatorname{Spec}k=0$. The last equality follows because the spectrum of a field consists of one point.",
+   "uses": [
+    "lem-sc-finite-surjective-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.23, printed p.104, preparation for its application to a finite kernel."
+   }
+  },
+  {
+   "text": "The factorization theorem [lem-sfb-algebraic-group-homomorphism-factorization] identifies the target $G=I$ of $m$ with the quotient of $P$ by $F=\\ker m$. It is also the fpqc coset quotient used in [lem-sfb-homogeneous-quotient-krull-dimension]: $m$ is faithfully flat of finite presentation, hence an fpqc covering, every section of $G$ lifts after pullback along this covering, and two lifts $x,y$ have equal image exactly when $x^{-1}y\\in F$. Maps from $P$ constant on cosets descend uniquely by [lem-weil-pbc-fpqc-representable-descent], so $G$ represents the fpqc quotient as well (coverings are [def-weil-pbc-fpqc-covering]); thus the represented quotient schemes agree. The dimension formula gives $\\dim P=\\dim F+\\dim G=\\dim G$. Finally [lem-sfb-scheme-product-dimension] gives $\\dim P=\\dim A+\\dim N$. This proves the asserted dimension equality.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-homogeneous-quotient-krull-dimension",
+    "lem-sfb-scheme-product-dimension",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.23, printed p.104, applied to (40), and Theorem 5.39 for the quotient interpretation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abelian-subgroup-equivariant-multiple-map",
+  "def-sc-group-scheme",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-abelian-product-axis-rigidity",
+  "lem-sc-av-commutative",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "def-sc-abelian-variety",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-mult-n-isogeny",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sc-isogeny-surjective",
+  "lem-sc-translation-automorphism",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-finite-surjective-dimension",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "lem-sfb-scheme-product-dimension",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 8.24 and its proof, printed p.153; connected refinement using Proposition 1.34, Corollary 1.35 and reduced components, with Proposition 5.23, p.104 for dimension. Normality and the finite-translate connected refinement are expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|almost.?complement|abelian.*subvariety",
+   "results": "{\"t\": \"2026-10-24T08:15:36Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|almost.?complement|abelian.*subvariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-24T08:15:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian subvariety of a connected algebraic group admits a normal almost complement whose product map has finite kernel",
+   "results": "{\"t\": \"2026-10-24T08:15:37Z\", \"tool\": \"leansearch\", \"query\": \"An abelian subvariety of a connected algebraic group admits a normal almost complement whose product map has finite kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsComplement'\", \"AddSubgroup.IsComplement'\", \"AddSubgroup.IsComplement'.symm\", \"Subgroup.IsComplement'.isCompl\", \"AddSubgroup.isComplement'_comm\", \"AddSubgroup.isComplement_addSubgroup_left_iff_bijective\", \"Subgroup.SchurZassenhausInduction.step7\", \"AddSubgroup.normal_of_comm\"], \"digest\": \"171bb80c48ce3923\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht decomposition: a central abelian subvariety of a connected algebraic group has a smooth connected normal almost complement with finite intersection",
+   "results": "{\"t\": \"2026-10-24T08:15:38Z\", \"tool\": \"leanfinder\", \"query\": \"Rosenlicht decomposition: a central abelian subvariety of a connected algebraic group has a smooth connected normal almost complement with finite intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidHom.ker_transferSylow_isComplement'\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Subgroup.SchurZassenhausInduction.step7\", \"Subgroup.exists_left_complement'_of_coprime\", \"Subgroup.exists_isComplement_right\", \"isPathConnected_compl_of_isPathConnected_compl_zero\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"IsCyclic.isComplement'\"], \"digest\": \"cb0613e4aecb77e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; abstract subgroup complements and centres, topological groups, Hopf structure on an already affine group, or general affine scheme criteria do not imply this assertion for a possibly non-affine group scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht decomposition of a nonaffine algebraic group into a central abelian variety and a smooth connected normal subgroup with finite intersection",
+   "results": "{\"t\": \"2026-10-24T09:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"Rosenlicht decomposition of a nonaffine algebraic group into a central abelian variety and a smooth connected normal subgroup with finite intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"6536ff5b1ca33662\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central complete connected subgroup of an algebraic group admits a connected smooth normal almost complement",
+   "results": "{\"t\": \"2026-10-24T09:03:58Z\", \"tool\": \"leansearch\", \"query\": \"A central complete connected subgroup of an algebraic group admits a connected smooth normal almost complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.exists_isComplement_left\", \"Subgroup.IsComplement'\", \"Subgroup.isComplement_subgroup_right_iff_existsUnique_quotientGroupMk\", \"AddSubgroup.exists_isComplement_left\", \"AddSubgroup.exists_isComplement_right\", \"Subgroup.normalCore_isClosed\", \"Subgroup.IsComplement.leftQuotientEquiv\", \"Subgroup.isComplement'_top_right\"], \"digest\": \"de134dd2162b7872\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-24T09:03:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|almost.?complement|abelian.*subvariety",
+   "results": "{\"t\": \"2026-10-24T09:03:58Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|almost.?complement|abelian.*subvariety\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures; abstract transfer, abelianization and scalar multiplication, and Weierstrass point addition, do not construct a regular map from a possibly nonaffine algebraic group to its abelian subgroup."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudoabelian-proper-algclosed",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 8.26 proof, second case: choose a smooth almost-complement to the complete reduced central identity component using Theorem 8.24.",
+   "via": [
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rosenlicht-connected-almost-complement",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split Rosenlicht decomposition by constructing the normalized positive-multiple map, its reduced neutral kernel, the finite antidiagonal kernel, and a finite-translate argument proving that the connected complement still surjects. Added only the equivariant map of Milne Proposition 8.23; reused all component, rigidity, quotient, dimension and finiteness nodes. All cited statements and Mathlib search hits were read.",
+  "blueprint": "The inherited from.place and via chain are retained: this supports Milne Theorem 8.26 second case in the pseudo-abelian properness input below the sk-thm-sf-ctf-stability alteration chain. The latest blueprint direct-images proof (3) was read. The ancestor tool returns None; no imported blueprint node states the item or the equivariant map. The split realizes the 8.24 invocation by its kernel construction and supplies the connected refinement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Commutativity of the abelian target for the normalized difference map. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-isogeny-surjective",
+    "why": "Rational-point surjectivity of multiplication on an abelian variety over an algebraically closed field. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Fpqc descent of maps identifies the represented coset quotient. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-mult-n-isogeny",
+    "why": "Surjectivity and finite kernel of multiplication on an abelian variety. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Base change of a closed immersion for the scheme-theoretic intersection. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Composition and products of closed immersions. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Finiteness of the closed immersion into A[n]. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Composition of finite morphisms. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "Reducedness of the conjugation source over a perfect field. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Factor conjugation through the reduction and reflect a closed image with full support. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Restrict conjugation to the open identity component. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Density and existence of closed points in finite-type schemes. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Closed points over the algebraically closed field are rational. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-translation-automorphism",
+    "why": "Translations preserve closed subschemes. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-finite-surjective-dimension",
+    "why": "A nonempty finite group scheme has dimension zero. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Geometric reducedness of G. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-irreducible-product-over-field",
+    "why": "Connectedness of the conjugation source G times N. This is a generic scheme/group tool, not a replacement for a step of the six-functor unit; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-av-commutative",
+  "lem-sc-isogeny-surjective",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sc-mult-n-isogeny",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-translation-automorphism",
+  "lem-sc-finite-surjective-dimension",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-irreducible-product-over-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-aaa53acad",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-aaa53acad (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 pp.151-153 (8.13, 8.15-8.24). Item: unchanged statement over algebraically closed k with A central (Milne 8.13); it is stronger than Milne 8.24 because N is connected and the dimension formula is added, and both are proved, not quoted. New node lem-sfb-abelian-subgroup-equivariant-multiple-map: Milne Prop 8.23 restricted to algebraically closed k and central A; n>0 as in Lemma 8.22. It is statement-only and self-contained, restates no clause of the item, has 6 logged searches of all three kinds, and has no DAG or blueprint duplicate (checked abelian-inclusion-multiple-retraction, commutative-torsor-positive-weight, rosenlicht-nonproper-affine-subgroup and the other 8.23 hits). All 10 steps check against the cited statements: (1) the rigidity node applied with V=W=G, geometrically integral via the identity-component node and smoothness; (2) N=(K^0)_red is a closed subgroup; (3) scheme-theoretic normality via the irreducible product, the open factorization, the perfect reduced tensor and the reduced-source factorization; (5) F lands in the closed subscheme A[n], is finite and equals ker m on all T-points; (7-8) finitely many translates k_i I cover G(k), so |I|=|G| by Jacobson density and irreducibility, and j is an isomorphism because G is reduced; (9) dim F=0; (10) m meets the homogeneous-quotient convention (flat fp surjective, kernel relation, fpqc-local lifts), giving dim G=dim A+dim N. Edge cases checked: G=A, A trivial, p|n, disconnected K, dim G=0. All 17 tool_uses are generic and accepted. Batch-5: trf smooth-composition, fppf-covering-base-change, the rational-sequence polynomial difference and the scheme-as-algebraic-space definition are generic, not steps of the trace formula or Poincaré duality, so accepted. No cycle and no merged cites. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RosenlichtConnectedAlmostComplement",
+  "declaration": "AlgebraicGeometry.rosenlicht_connected_almostComplement",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RosenlichtConnectedAlmostComplement.lean",
+  "statement": "theorem rosenlicht_connected_almostComplement {k : Type u} [Field k] [IsAlgClosed k] (G A : Over (Spec (.of k))) [GrpObj G] [GrpObj A] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsAbelianVariety A] (i : A ⟶ G) [IsClosedSubgroupScheme i] (hcentral : ∀ (R : Type u) [CommRing R] [Algebra k R] (a : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ A) (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G), Commute (a ≫ i) g) : ∃ (N : Over (Spec (.of k))) (_ : GrpObj N) (j : N ⟶ G) (m : A ⊗ N ⟶ G), Smooth N.hom ∧ ConnectedSpace N.left ∧ IsSeparated N.hom ∧ LocallyOfFiniteType N.hom ∧ QuasiCompact N.hom ∧ IsClosedSubgroupScheme j ∧ IsNormalSubgroupScheme j ∧ m = (fst A N ≫ i) * (snd A N ≫ j) ∧ IsMonHom m ∧ Flat m.left ∧ Surjective m.left ∧ LocallyOfFinitePresentation m.left ∧ QuasiCompact m.left ∧ QuasiSeparated m.left ∧ IsFinite (GrpObj.ker m).hom ∧ topologicalKrullDim G.left = topologicalKrullDim A.left + topologicalKrullDim N.left",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e6ff3519",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Statement-only theorem rosenlicht_connected_almostComplement checked clause by clause against the node and Milne Thm 8.24/Prop 5.23: algebraically closed k; G smooth, connected, separated, finite type GrpObj with no affine or commutative assumption; A abelian variety with IsClosedSubgroupScheme i; centrality on points over all k-algebras R : Type u; N with its own GrpObj, smooth, connected, separated, finite type, closed and normal j; m pinned to (fst≫i)*(snd≫j) with IsMonHom; Flat, Surjective, LFP, QC, QS; IsFinite of GrpObj.ker m (pullback against the identity section); topologicalKrullDim equality. Recorded declarations read in side-live. Node differs from live only in the lean field; statement field verbatim; one sorry; docstrings name source and blueprint and give the 10 proof steps; both report sections present. Edge cases (A trivial, A=G, dim 0, nonreduced kernel, non-affine N) are covered. No duplicate found. No findings, no fixes, no compile needed."
+ }
+}

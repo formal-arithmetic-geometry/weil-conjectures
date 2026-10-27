@@ -1,0 +1,146 @@
+{
+ "id": "lem-sfb-internal-bar-character-cocycles",
+ "kind": "statement",
+ "title": "The ordered character product as an internal inhomogeneous bar cocycle",
+ "statement": "Let $A$ be a commutative condensed ring and $G$ any profinite group, in the sizes and internal module categories of [sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-size-convention]. Let $H$ be internal functions and $B$ its inhomogeneous bar diagram of [def-sfb-condensed-equivariant-bar-data], with the trivial regular coefficient. For every ordered list $a=(a_1,\\dots,a_q)$ of additive condensed characters of [def-sfb-condensed-unipotent-class], there exists a cochain map $c:A[-q]\\to U^\\bullet$, whose transported degree-q component (as in [def-sfb-internal-bar-character-data]) has on every profinite $S$, scalar $r\\in A(S)$, base change $f:T\\to S$ and tuple $g_i\\in C(T,G)$ the internal-function value $f^*r\\prod_{i=1}^q a_i(g_i)$. For the empty list the product is 1. This statement is independent of a homogeneous resolution or deletion maps.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written internal-bar expansion, extracted from lem-sfb-internal-bar-character-lifts."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-bar-character-data",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof": [
+  {
+   "text": "For r on S, define a family on every T over S by f* r times the product of character values. The naturality of every character and of ring multiplication proves restriction compatibility. Use the evaluation equivalence of the internal functions to obtain a section. Its addition, scalar and restriction equations give an internal linear map from the regular module into the degree-q internal functions.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport through B.term and evaluate the differential using B.face. The trivial action makes the first face drop g_1. Use partial products T_j=product_{k<j} a_k(g_k) product_{k>=j} a_k(g_(k+1)), with 0-based character indices k and tuple entries g_0,...,g_q. The first dropping face is T_0, and the final dropping face is T_q. Interior face i (1<=i<=q) has value T_i+T_(i-1), by expanding a_(i-1)(g_(i-1) g_i) with additivity. Its signed sum is T_0 + sum_{i=1}^q (-1)^i(T_i+T_(i-1)) + (-1)^(q+1)T_q = 0, since each T_j occurs with opposite signs. In degree zero this is 1-1. All identities remain true after multiplying by the restricted scalar.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation is injective, so the differential of the internal map is zero. Use mkHomFromSingle and extension along embeddingUpNat to obtain the cochain map. Cancel the single and term isomorphisms to recover the displayed scalar formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written internal-bar expansion, extracted from lem-sfb-internal-bar-character-lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Additive characters define degree one chain maps on homogeneous bar complex by deleting the first vertex",
+   "results": "{\"t\": \"2026-10-26T06:39:25Z\", \"tool\": \"leanfinder\", \"query\": \"Additive characters define degree one chain maps on homogeneous bar complex by deleting the first vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex.d\", \"groupHomology.inhomogeneousChains.d\", \"Rep.barComplex.d_single\", \"Rep.standardComplex.d\", \"Rep.barComplex.d_def\", \"Rep.standardComplex.εToSingle₀\", \"Rep.barComplex\", \"Rep.FiniteCyclicGroup.chainComplexFunctor\"], \"digest\": \"85be8a1bec56ec81\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.toSingle\"",
+   "results": "{\"t\": \"2026-10-26T06:39:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex.toSingle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CochainComplex.toSingle₀Equiv\", \"CochainComplex.toSingle₀Equiv_apply\", \"CochainComplex.toSingle₀Equiv_symm_apply_f_zero\", \"CochainComplex.toSingle₀Equiv_symm_apply_f_succ\"], \"digest\": \"ef0386adb4262fe1\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "grep",
+   "query": "character.*(barComplex|chainMap)|barComplex.*character",
+   "results": "{\"t\": \"2026-10-26T06:41:10Z\", \"tool\": \"grep\", \"query\": \"character.*(barComplex|chainMap)|barComplex.*character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered products of additive group characters are cocycles in inhomogeneous group cochains with trivial coefficients",
+   "results": "{\"t\": \"2026-10-26T06:44:43Z\", \"tool\": \"leansearch\", \"query\": \"Ordered products of additive group characters are cocycles in inhomogeneous group cochains with trivial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocyclesMk\", \"groupCohomology.cocyclesOfIsCocycle₁\", \"groupCohomology.cocycles\", \"groupCohomology.mem_cocycles₁_of_addMonoidHom\", \"AddChar.instAddCommGroup\", \"groupCohomology.iCocycles\", \"groupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCocycles₂\", \"AddChar.coe_mul\"], \"digest\": \"a3f459eeca588cdd\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal condensed character deletion gives a unique chain map to the shift of a homogeneous bar complex",
+   "results": "{\"t\": \"2026-10-26T06:44:43Z\", \"tool\": \"leansearch\", \"query\": \"Internal condensed character deletion gives a unique chain map to the shift of a homogeneous bar complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.ofHom\", \"CochainComplex.homOfDegreewiseSplit\", \"HomologicalComplex.Hom.mk\", \"HomologicalComplex.Hom.ext_iff\", \"HomologicalComplex.Hom.mk.noConfusion\", \"ChainComplex.truncate\", \"Homotopy.shift\", \"CochainComplex.HomComplex.Cochain.shift\"], \"digest\": \"0fa4681d5977fd34\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated degree one character deletion chain maps on the homogeneous bar have ordered product coefficients after augmentation",
+   "results": "{\"t\": \"2026-10-26T06:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated degree one character deletion chain maps on the homogeneous bar have ordered product coefficients after augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_P\", \"AlgebraicTopology.DoldKan.PInfty\", \"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"AlgebraicTopology.DoldKan.hσ'_eq_zero\"], \"digest\": \"6be1b464c62f384f\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalBarCharacterLifts",
+  "date": "2026-10-26",
+  "group": "R4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The ordered character product as an internal inhomogeneous bar cocycle; character-lift calculation below direct-images paragraph (3).",
+   "via": [
+    "lem-sfb-internal-bar-character-lifts",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalBarCharacterCocycles",
+  "file": "lean/Sheaf/CategoryTheory/InternalBarCharacterCocycles.lean",
+  "declaration": "Profinite.CondensedAction.InternalBarCharacter.exists_product_cocycle",
+  "statement": "theorem exists_product_cocycle\n    {H : CategoryTheory.CondensedBar.InternalFunctions A}\n    (B : CategoryTheory.CondensedBar.BarDiagram (G := G) H)\n    (a : List (Character A G)) :\n    ∃ c : (HomologicalComplex.single (Modules A.toMon) (.up ℤ) (a.length : ℤ)).obj\n        (Mod.regular A.X) ⟶ CategoryTheory.CondensedBar.extend\n          ((CategoryTheory.CondensedBar.cochains B).obj\n            ((trivial (R := A.toMon) (P := G)).obj (Mod.regular A.X))),\n    ∀ (S : Profinite.{u}) (r : CategoryTheory.CondensedBar.sectionRing A S)\n      (T : Profinite.{u}) (f : T ⟶ S) (g : Fin a.length → C(T, G)),\n    (H.evaluate (CategoryTheory.CondensedBar.power G a.length) S (Mod.regular A.X)\n      (onSections A.toMon (cocycleComponent B c) S r)).val T f\n        (CategoryTheory.CondensedBar.tupleMap g) =\n      (InternalAbelianSheafModule.sectionRingSheaf\n        (coherentTopology Profinite.{u}) A.X).obj.map f.op r *\n          ∏ k : Fin a.length, (a.get k).app T (g k)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f251e",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082841-L-2231382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f251e",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082841-L-2231382",
+  "kind": "interface",
+  "note": "independent cc review: 7 moved defs vs clone (identical except blueprint docstring tags), Lifts/exists_lifts byte-identical, three new sorry statements vs Resolution boundary/diagonal/augmentation fields and Mathlib shift sign conventions, item node only proof/proof_deps/proof_origin/lean changed; no importers of the item"
+ }
+}

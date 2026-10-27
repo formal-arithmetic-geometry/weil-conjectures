@@ -1,0 +1,360 @@
+{
+ "id": "lem-sfb-split-unipotent-torus-stable-series",
+ "kind": "statement",
+ "title": "Torus-stable additive series in a split unipotent group over an arbitrary field",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]; geometrically connected means connected after every field extension. Let $U$ be smooth and geometrically connected and split unipotent: there is a faithful finite-dimensional matrix representation in which all geometric points are unipotent matrices, and a finite descending series of smooth geometrically connected subgroups, each normal in its predecessor, with represented fppf quotients isomorphic to $\\mathbf G_a$ [def-sc-gm-ga]. A represented fppf quotient is the group scheme representing the sheafification of the right-coset functor for faithfully flat finitely presented coverings of commutative $k$-algebras. Let $E=\\mathbf G_{m,k}^s$, $s\\geq0$, act on $U$ by $k$-group automorphisms: a morphism $E\\times_kU\\to U$ obeying the unit, associativity and group-homomorphism identities. Then there are $m\\geq0$ and a descending series $U=V_0\\supseteq V_1\\supseteq\\cdots\\supseteq V_m=1$ of smooth geometrically connected subgroups normal in $U$ and stable under $E$, with $k$-group isomorphisms $b_i:V_i/V_{i+1}\\xrightarrow{\\sim}\\mathbf G_a$ for $0\\leq i<m$, such that for some $n_i=(n_{i1},\\ldots,n_{is})\\in\\mathbf Z^s$ the induced $E$-action on each quotient satisfies\n$$b_i(e\\cdot\\bar v)=\\left(\\prod_{j=1}^s e_j^{n_{ij}}\\right)b_i(\\bar v)$$\non every commutative $k$-algebra. In particular the quotient homomorphism $q_i:V_i\\to\\mathbf G_a$ defined by $b_i$ has scheme-theoretic kernel $V_{i+1}$. If $U=1$, $m=0$ is allowed. There is no perfectness, infinitude or characteristic restriction on $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Supporting equivariant filtration for Summary 16.29(d) and Proposition 16.54, printed pp.334,344. This arbitrary-field split-unipotent formulation is an agent-specified structural input, not an application of the perfect-field-only Corollary 16.24. WANTED: Conrad, Linear Algebraic Groups I (Stanford, Winter 2010), Appendix D.3, proof of Theorem D.3.2, printed pp.86–87, invariant vector-group series and linearization of the split-torus actions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-split-unipotent-series",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-split-torus-coordinate-characters"
+ ],
+ "proof": [
+  {
+   "text": "Use strong induction on the finite nonnegative integer $\\dim U$, proving the stated assertion for every split-torus action and split unipotent group of that dimension. Affineness implies separatedness by the cited lemma. Finiteness and nonnegativity follow from the dimension lemma (take the identity subgroup). If $U=1$, choose $m=0$. For $U\\ne1$, the central-vector-subgroup lemma supplies an $E$-stable central $C\\simeq\\mathbf G_a^d$ with $d\\geq1$. Apply vector-group linearization to its restricted action, obtaining an equivariant $a:\\mathbb V(W)\\simeq C$ and the linear Laurent coaction on the nonzero vector space $W$.",
+   "uses": [
+    "lem-sfb-split-unipotent-central-vector-subgroup",
+    "lem-sfb-torus-vector-group-linearization",
+    "lem-sfb-homogeneous-quotient-krull-dimension",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written dimension induction following Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, printed pp.86--87, read online at https://math.stanford.edu/~conrad/252Page/handouts/alggroups.pdf; Milne Section 16g. The Conrad notes are WANTED locally."
+   }
+  },
+  {
+   "text": "Write $c(w)=\\sum_{\\nu\\in\\mathbf Z^s}w_\\nu\\otimes t^\\nu$ with finite support. Comparing coefficients in coassociativity gives $c(w_\\nu)=w_\\nu\\otimes t^\\nu$, and the counit gives $w=\\sum_\\nu w_\\nu$. Choose $w\\ne0$ and one nonzero $w_\\nu$. Then $L=kw_\\nu$ is stable and its action on every algebra is multiplication by $\\chi_\\nu(e)=\\prod_j e_j^{\\nu_j}$. Its image $N=a(\\mathbb V(L))$ is an $E$-stable closed copy of $\\mathbf G_a$ in $C$, hence central in $U$. The closedness is visible after completing $w_\\nu$ to a basis: the remaining coordinates vanish. Smoothness and geometric connectedness are those of affine one-space. Let $b:N\\simeq\\mathbf G_a$ be the parameter inverse to $z\\mapsto a(zw_\\nu)$.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written dimension induction following Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, printed pp.86--87, read online at https://math.stanford.edu/~conrad/252Page/handouts/alggroups.pdf; Milne Section 16g. The Conrad notes are WANTED locally."
+   }
+  },
+  {
+   "text": "The normal-quotient lemma constructs $q:U\\to Q=U/N$ with kernel $N$, with $Q$ affine, smooth and geometrically connected. The quotient-splitness lemma applies to this smooth geometrically connected central $N$, so $Q$ is split unipotent. The action descends by $e\\cdot q(u)=q(e\\cdot u)$: stability of $N$ makes this independent of an fppf-local representative, and the represented sheaf quotient gives an algebraic action. The group and action identities descend from those on $U$. The dimension lemma gives $\\dim U=\\dim N+\\dim Q$, and $\\dim N\\geq1$ since $k[z]$ has the strict prime chain $(0)\\subsetneq(z)$. Thus $\\dim Q<\\dim U$ and the induction hypothesis applies to $Q$ with this $E$-action.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-split-unipotent-quotient-split",
+    "lem-sfb-homogeneous-quotient-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written dimension induction following Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, printed pp.86--87, read online at https://math.stanford.edu/~conrad/252Page/handouts/alggroups.pdf; Milne Section 16g. The Conrad notes are WANTED locally."
+   }
+  },
+  {
+   "text": "Write the resulting quotient series as $Q=W_0\\supseteq\\cdots\\supseteq W_r=1$. Put $V_i=q^{-1}(W_i)$ for $0\\leq i\\leq r$, and append $V_{r+1}=1$. The normal-quotient lemma makes every $V_i$ smooth and connected, normal in $U$, and identifies $V_i/V_{i+1}$ with $W_i/W_{i+1}$ for $i<r$. The same argument after every field extension gives geometric connectedness, since quotient formation commutes with that extension and $N_K,W_{i,K}$ are connected. Equivariance of $q$ proves $E$-stability. The quotient isomorphisms respect $E$: locally lift a section to $V_i$ and use $q(e\\cdot v)=e\\cdot q(v)$; equality of the sheaf maps is checked fppf locally. Transport the character parameters from the quotient series along these isomorphisms. Finally $V_r=\\ker q=N$ and $V_r/V_{r+1}=N$ has parameter $b$ and weight $\\nu$. This also covers $Q=1$ and $r=0$. Each final homomorphism to $\\mathbf G_a$ is a quotient map followed by an isomorphism, so its scheme-theoretic kernel is exactly $V_{i+1}$ by the normal-quotient lemma. This completes the induction.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-written dimension induction following Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, printed pp.86--87, read online at https://math.stanford.edu/~conrad/252Page/handouts/alggroups.pdf; Milne Section 16g. The Conrad notes are WANTED locally."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-ga",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "lem-sfb-split-unipotent-central-vector-subgroup",
+  "lem-sfb-split-unipotent-quotient-split",
+  "lem-sfb-torus-vector-group-linearization",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-written dimension induction following Conrad--Lichtenstein, Appendix D.3, proof of Theorem D.3.2, printed pp.86--87, read online at https://math.stanford.edu/~conrad/252Page/handouts/alggroups.pdf; Milne Section 16g. The Conrad notes are WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split unipotent algebraic group with an action of a split torus has a torus stable normal series with additive group quotients and character actions",
+   "results": "{\"t\": \"2026-10-24T07:42:17Z\", \"tool\": \"leanfinder\", \"query\": \"A split unipotent algebraic group with an action of a split torus has a torus stable normal series with additive group quotients and character actions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"lowerCentralSeries_normal\", \"instNormalUpperCentralSeriesStep\", \"Group.IsNilpotent.nilpotent\", \"Group.IsNilpotent.nilpotent'\", \"comap_upperCentralSeries_quotient_center\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\"], \"digest\": \"49fbfc5d7abdeb37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SemidirectProduct\", \"IsConj\"",
+   "results": "{\"t\": \"2026-10-24T07:43:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SemidirectProduct\\\", \\\"IsConj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*unipotent|unipotent.*split|torus.*filtration|filtration.*torus",
+   "results": "{\"t\": \"2026-10-24T07:43:38Z\", \"tool\": \"grep\", \"query\": \"split.*unipotent|unipotent.*split|torus.*filtration|filtration.*torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split torus acting on a split unipotent group admits an invariant central series of additive groups with character actions",
+   "results": "{\"t\": \"2026-10-24T07:43:39Z\", \"tool\": \"leansearch\", \"query\": \"A split torus acting on a split unipotent group admits an invariant central series of additive groups with character actions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeries\", \"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"upperCentralSeries_isAscendingCentralSeries\", \"upperCentralSeries_one\", \"instNormalUpperCentralSeriesStep\", \"mem_upperCentralSeries_succ_iff\", \"AddSubgroup.pointwise_isCentralScalar\"], \"digest\": \"0f505644b4d619b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "grep",
+   "query": "upperCentralSeries|lowerCentralSeries_normal",
+   "results": "{\"t\": \"2026-10-24T07:45:45Z\", \"tool\": \"grep\", \"query\": \"upperCentralSeries|lowerCentralSeries_normal\", \"sub\": \"GroupTheory/Nilpotent\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Split unipotent groups have normal filtrations stable under split torus automorphisms whose successive quotients are vector groups with linear torus actions",
+   "results": "{\"t\": \"2026-10-24T07:45:50Z\", \"tool\": \"leanfinder\", \"query\": \"Split unipotent groups have normal filtrations stable under split torus automorphisms whose successive quotients are vector groups with linear torus actions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"Group.IsNilpotent.nilpotent\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"LieModule.posFittingCompOf_le_lowerCentralSeries\", \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"LieModule.posFittingComp_le_iInf_lowerCentralSeries\"], \"digest\": \"a7963c488dae2161\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "grep",
+   "query": "upperCentralSeries|lowerCentralSeries_normal",
+   "results": "{\"t\": \"2026-10-24T07:47:44Z\", \"tool\": \"grep\", \"query\": \"upperCentralSeries|lowerCentralSeries_normal\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\", \"Mathlib/GroupTheory/IsPerfect.lean\"], \"digest\": \"51c69bfc6b7b30de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperCentralSeries\"",
+   "results": "{\"t\": \"2026-10-24T07:47:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperCentralSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubgroup.upperCentralSeries\", \"Subgroup.upperCentralSeries\", \"AddSubgroup.upperCentralSeries_isAscendingCentralSeries\", \"Subgroup.upperCentralSeries_isAscendingCentralSeries\", \"AddSubgroup.instCharacteristicUpperCentralSeries\", \"Subgroup.instCharacteristicUpperCentralSeries\", \"AddSubgroup.upperCentralSeriesStep\", \"Subgroup.upperCentralSeriesStep\"], \"digest\": \"ca38021e6da4867f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract group central series or formal conjugacy of splittings; none constructs smooth torus-stable algebraic subgroups with additive quotient schemes and character actions over an arbitrary field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k",
+   "results": "{\"t\": \"2026-10-24T08:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_lowerCentralSeries_ideal_quot_eq\", \"LieModule.isNilpotent_quotient_iff\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"nilpotent_quotient_of_nilpotent\", \"LieModule.iInf_lcs_le_of_isNilpotent_quot\", \"nilpotencyClass_quotient_le\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"408bab4c9da75c2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*unipotent|torus.*series|torus.*filtration",
+   "results": "{\"t\": \"2026-10-24T08:28:46Z\", \"tool\": \"grep\", \"query\": \"split.*unipotent|torus.*series|torus.*filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant normal additive character series for a split unipotent algebraic group with an algebraic split torus action",
+   "results": "{\"t\": \"2026-10-24T08:28:47Z\", \"tool\": \"leansearch\", \"query\": \"Invariant normal additive character series for a split unipotent algebraic group with an algebraic split torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.noConfusionType\", \"PadicInt.addChar_of_value_at_one\", \"AddChar.directSum_apply\", \"AddChar.directSum\", \"AddChar.instAddCommGroup\", \"PadicInt.coe_addChar_of_value_at_one\", \"PadicInt.addChar_of_value_at_one.congr_simp\", \"AddChar.injective_iff\"], \"digest\": \"02480b94aa895520\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\"",
+   "results": "{\"t\": \"2026-10-24T08:28:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients",
+   "results": "{\"t\": \"2026-10-24T08:28:48Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"instNormalUpperCentralSeriesStep\", \"Group.IsNilpotent.nilpotent'\", \"Group.IsNilpotent.nilpotent\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"nilpotent_center_quotient_ind\", \"comap_upperCentralSeries_quotient_center\"], \"digest\": \"1b709116e35512a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k",
+   "results": "{\"t\": \"2026-10-24T08:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_lowerCentralSeries_ideal_quot_eq\", \"LieModule.isNilpotent_quotient_iff\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"nilpotent_quotient_of_nilpotent\", \"LieModule.iInf_lcs_le_of_isNilpotent_quot\", \"nilpotencyClass_quotient_le\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"408bab4c9da75c2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*unipotent|torus.*series|torus.*filtration",
+   "results": "{\"t\": \"2026-10-24T08:28:46Z\", \"tool\": \"grep\", \"query\": \"split.*unipotent|torus.*series|torus.*filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant normal additive character series for a split unipotent algebraic group with an algebraic split torus action",
+   "results": "{\"t\": \"2026-10-24T08:28:47Z\", \"tool\": \"leansearch\", \"query\": \"Invariant normal additive character series for a split unipotent algebraic group with an algebraic split torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.noConfusionType\", \"PadicInt.addChar_of_value_at_one\", \"AddChar.directSum_apply\", \"AddChar.directSum\", \"AddChar.instAddCommGroup\", \"PadicInt.coe_addChar_of_value_at_one\", \"PadicInt.addChar_of_value_at_one.congr_simp\", \"AddChar.injective_iff\"], \"digest\": \"02480b94aa895520\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\"",
+   "results": "{\"t\": \"2026-10-24T08:28:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients",
+   "results": "{\"t\": \"2026-10-24T08:28:48Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"instNormalUpperCentralSeriesStep\", \"Group.IsNilpotent.nilpotent'\", \"Group.IsNilpotent.nilpotent\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"nilpotent_center_quotient_ind\", \"comap_upperCentralSeries_quotient_center\"], \"digest\": \"1b709116e35512a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k",
+   "results": "{\"t\": \"2026-10-24T08:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_lowerCentralSeries_ideal_quot_eq\", \"LieModule.isNilpotent_quotient_iff\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"nilpotent_quotient_of_nilpotent\", \"LieModule.iInf_lcs_le_of_isNilpotent_quot\", \"nilpotencyClass_quotient_le\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"408bab4c9da75c2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*unipotent|torus.*series|torus.*filtration",
+   "results": "{\"t\": \"2026-10-24T08:28:46Z\", \"tool\": \"grep\", \"query\": \"split.*unipotent|torus.*series|torus.*filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant normal additive character series for a split unipotent algebraic group with an algebraic split torus action",
+   "results": "{\"t\": \"2026-10-24T08:28:47Z\", \"tool\": \"leansearch\", \"query\": \"Invariant normal additive character series for a split unipotent algebraic group with an algebraic split torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddChar.noConfusionType\", \"PadicInt.addChar_of_value_at_one\", \"AddChar.directSum_apply\", \"AddChar.directSum\", \"AddChar.instAddCommGroup\", \"PadicInt.coe_addChar_of_value_at_one\", \"PadicInt.addChar_of_value_at_one.congr_simp\", \"AddChar.injective_iff\"], \"digest\": \"02480b94aa895520\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\"",
+   "results": "{\"t\": \"2026-10-24T08:28:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.Biprod.unipotentLower\", \"CategoryTheory.Biprod.unipotentUpper\", \"CategoryTheory.Biprod.unipotentLower_hom\", \"CategoryTheory.Biprod.unipotentUpper_hom\", \"CategoryTheory.Biprod.unipotentLower_inv\", \"CategoryTheory.Biprod.unipotentUpper_inv\"], \"digest\": \"0b525c109db5567d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients",
+   "results": "{\"t\": \"2026-10-24T08:28:48Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"instNormalUpperCentralSeriesStep\", \"Group.IsNilpotent.nilpotent'\", \"Group.IsNilpotent.nilpotent\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"nilpotent_center_quotient_ind\", \"comap_upperCentralSeries_quotient_center\"], \"digest\": \"1b709116e35512a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central series and biproduct unipotent automorphisms do not give smooth algebraic subgroups and represented additive character quotients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-unipotent-torus-absorption",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism.",
+   "via": [
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-unipotent-torus-stable-series",
+  "worker": "stage1",
+  "summary": "Q151: proved by dimension induction using a central E-stable vector subgroup, linearization and a coaction coefficient weight line. Three strictly smaller structural prerequisites are statement-only nodes. Reused quotient geometry and dimension; checked arbitrary fields, all algebra points and geometric connectedness. Original statement unchanged.",
+  "blueprint": "Supporting equivariant-filtration input on the existing ancestry from det-thm-sf-ctf-stability-direct-images proof (3); realizes the stable-series prerequisite of lem-sfb-split-unipotent-torus-absorption. The latest blueprint direct-images proof was read; this deeply supporting algebraic-group argument is not stated there.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic separatedness of affine schemes verifies the hypothesis of the dimension formula; no algebraic-group route is replaced."
+   },
+   {
+    "node": "lem-sfb-homogeneous-quotient-krull-dimension",
+    "why": "Generic quotient dimension formula supplies the induction parameter and strict dimension decrease; this unit has no alternate dimension formula."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness of affine one-space verifies the chosen weight-line subgroup is smooth; this is a scheme-geometric tool, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-b6d10cf8d",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-b6d10cf8d (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, against Milne iAG §14g p.299 and §16g p.343, and against Conrad's Linear Algebraic Groups I App. D.3, proof of Thm D.3.2, pp.86-87 (fetched read-only and run through pdftotext). The item's statement and stmt_deps are identical to the live base, which is unsplit, statement-only and has no re-split repair note. Steps: (1) strong induction on dim U, with finiteness from the dimension node and separatedness from the affine-source leaf; the central-vector and linearization nodes are used exactly as stated. (2) Coassociativity and counit give a weight line N=a(V(kw_nu)) that is closed, E-stable and central; I checked this. (3) The normal-quotient node gives Q affine, smooth and geometrically connected with kernel N; the quotient-split node's hypotheses hold; the E-action descends; dim Q<dim U. (4) Inverse images V_i=q^{-1}(W_i) plus the last term N: smoothness, connectedness, normality in U, the quotient identifications and the kernel clause all come from the normal-quotient node, and equivariance from q. New nodes are all true and strictly smaller than the item. Central vector subgroup: Conrad p.86 (CGP B.3.2, the maximal central split p-torsion subgroup is stable under all automorphisms), and in characteristic 0 the center is a vector group. Linearization: Conrad p.87 (CGP B.4.3), which I also verified with a graded k[F]-basis argument. Quotient splitness: Milne 16g p.343. No duplicates in the snapshot or live DAG: unipotent-central-additive-subgroup needs a perfect field, and gm-representation-weight-basis starts from a linear representation. Inline 'split unipotent' agrees with def-sfb-split-unipotent-series. Batch 5: normal-quotient-geometry and homogeneous-quotient-krull-dimension are general group-scheme facts whose closure reaches only general trf definitions (def-trf-scheme-cover-descent-datum, def-trf-scheme-algebraic-space). Those are not trace-formula or Poincaré-duality steps, so they are acceptable. All three tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitUnipotentTorusStableSeries",
+  "declaration": "AlgebraicGeometry.splitUnipotent_exists_torusStableSeries",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitUnipotentTorusStableSeries.lean",
+  "statement": "theorem splitUnipotent_exists_torusStableSeries {k : Type u} [Field k] (U : Grp (Over (Spec (.of k)))) (_halg : SolvableGroupStructure.IsAlgebraic U) (_hunip : SolvableGroupStructure.IsUnipotent U) (_hgeom : GeometricallyConnected U.X.hom) (_hsplit : ∃ n : ℕ, SplitUnipotentLength U n) (s : ℕ) (act : (MultiplicativeType.splitTorus k s).X ⊗ U.X ⟶ U.X) (_hone : ∀ (R : Type u) [CommRing R] [Algebra k R] (x : (Spec (.of R)).asOver (Spec (.of k)) ⟶ U.X), lift (1 : (Spec (.of R)).asOver (Spec (.of k)) ⟶ (MultiplicativeType.splitTorus k s).X) x ≫ act = x) (_hassoc : ∀ (R : Type u) [CommRing R] [Algebra k R] (e f : (Spec (.of R)).asOver (Spec (.of k)) ⟶ (MultiplicativeType.splitTorus k s).X) (x : (Spec (.of R)).asOver (Spec (.of k)) ⟶ U.X), lift (e * f) x ≫ act = lift e (lift f x ≫ act) ≫ act) (_hhom : ∀ (R : Type u) [CommRing R] [Algebra k R] (e : (Spec (.of R)).asOver (Spec (.of k)) ⟶ (MultiplicativeType.splitTorus k s).X) (x y : (Spec (.of R)).asOver (Spec (.of k)) ⟶ U.X), lift e (x * y) ≫ act = (lift e x ≫ act) * (lift e y ≫ act)) : ∃ (m : ℕ) (V : Fin (m + 1) → Grp (Over (Spec (.of k)))) (a : ∀ i : Fin (m + 1), V i ⟶ U) (j : ∀ i : Fin m, V i.succ ⟶ V i.castSucc), IsIso (a 0) ∧ Nonempty (V (Fin.last m) ≅ Grp.trivial _) ∧ (∀ i : Fin (m + 1), IsClosedSubgroupScheme (a i).hom.hom ∧ IsNormalSubgroupScheme (a i).hom.hom ∧ Smooth (V i).X.hom ∧ GeometricallyConnected (V i).X.hom) ∧ (∀ i : Fin m, j i ≫ a i.castSucc = a i.succ ∧ IsClosedSubgroupScheme (j i).hom.hom ∧ IsNormalSubgroupScheme (j i).hom.hom ∧ ∃ (actᵢ : (MultiplicativeType.splitTorus k s).X ⊗ (V i.castSucc).X ⟶ (V i.castSucc).X) (q : V i.castSucc ⟶ Grp.mk (StandardGroupSchemes.additive k)) (n : Fin s → ℤ), (MultiplicativeType.splitTorus k s).X ◁ (a i.castSucc).hom.hom ≫ act = actᵢ ≫ (a i.castSucc).hom.hom ∧ SolvableGroupStructure.IsFppfQuotient (j i).hom.hom q ∧ (∀ (R : Type u) [CommRing R] [Algebra k R] (e : (Spec (.of R)).asOver (Spec (.of k)) ⟶ (MultiplicativeType.splitTorus k s).X) (x : (Spec (.of R)).asOver (Spec (.of k)) ⟶ (V i.castSucc).X), (lift e x ≫ actᵢ ≫ q.hom.hom).left.appTop ((Scheme.ΓSpecIso (.of (Polynomial k))).inv Polynomial.X) = ((List.ofFn (fun l : Fin s ↦ (e ≫ SplitTorusFrames.coordinate k s l) ^ n l)).prod.left.appTop ((Scheme.ΓSpecIso (.of (LaurentPolynomial k))).inv (LaurentPolynomial.T 1))) * (x ≫ q.hom.hom).left.appTop ((Scheme.ΓSpecIso (.of (Polynomial k))).inv Polynomial.X)))",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The quotient is presented by q: V_i → G_a itself: its quotient identification b_i is identity for this representative. IsFppfQuotient identifies the scheme-theoretic kernel with the next inclusion. Integer character products use the existing ordered split-torus coordinates and pointwise group powers, evaluated at the Laurent coordinate. No new notions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c9277453",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Re-delivery repairing H2 from 2de00f0f: the theorem stmt_dep lem-sfb-split-torus-torsor-frame-geometry is replaced by the new def node def-sfb-split-torus-coordinate-characters (existing:true on landed SplitTorusFrames.coordinate, module SplitTorusTorsorFrameGeometry; same pattern as landed Q18 def-sfb-split-torus-frame-model). Node fields follow §5; its TeX matches the recursive def and splitTorus ordering; no other def node owns coordinate. Item differs from side-live only in lean/stmt_deps; lean.statement is verbatim the file signature; all added stmt_deps are def nodes. Maths re-checked clause by clause (IsAlgebraic/IsUnipotent/GeometricallyConnected/SplitUnipotentLength hypotheses, R-point action laws, closed normal smooth geometrically connected series, IsIso a0, trivial last term, restricted actions, IsFppfQuotient with kernel, integer weights in G_m(R) on the Laurent coordinate); edge cases U=1/m=0, s=0, char p and non-reduced R covered. Gates: no definitions, only sorry, source/blueprint docstrings present. No compile (no file changed). Advisory: short second-reading section; NH parallel delivery cd899ce8 was returned."
+ }
+}

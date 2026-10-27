@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-global-section-module-monoidal",
+ "kind": "statement",
+ "title": "Normalized strong monoidal global scalar extension on module sheaves",
+ "statement": "Let (C,J) be a small site and O a sheaf of commutative rings, with global-section ring A and the actual scalar-extension functor F from A-module sheaves on the one-object bottom-topology site to O-module sheaves [def-weil-pbc-global-section-scalar-extension]. Equip both categories with the actual tensor product [def-pur-sheaf-tensor-product]. The functor F preserves small colimits. There exists a strong monoidal structure on F whose inverse unit constraint F(A) to O is exactly the fixed multiplication morphism ringFamilyGlobalExtensionUnit. This assertion concerns module sheaves only and contains no complexes or localization factors.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099E, final tensor base-change paragraph, assigned proof step 1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation on the one-object bottom-topology site identifies sheaves with module presheaves. The forgetful equivalence and evaluation preserve colimits. Evaluation jointly reflects presheaf colimits, so the constant module-presheaf functor preserves them. Presheaf pullback and module sheafification are left adjoints, hence their composite preserves small colimits. This part is proved in Lean.",
+   "uses": [
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For sectionwise scalar extension the tensor comparison sends (b tensor x) tensor (c tensor y) to bc tensor (x tensor y); its inverse sends b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). Balancing over A and O(U) makes these maps well defined, and their composites fix pure tensors. They commute with restrictions. Identify the chosen presheaf pullback with this extension by uniqueness of left adjoints. Compose these constraints with the strong monoidal module sheafification.",
+   "uses": [
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Associativity follows by multiplying the three coefficients; both unit identities are multiplication by one. The inverse unit constraint has adjoint transpose s maps to s(U), which is exactly the transpose used to define the fixed ringFamilyGlobalExtensionUnit. Thus the unit normalization is an equality with that morphism. All formulas apply to zero rings and empty sites.",
+   "uses": [
+    "def-weil-pbc-global-section-scalar-extension",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-global-section-scalar-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B8",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099E, final tensor base-change paragraph, assigned proof step 1",
+  "note": "Module-level tensor comparison, existing complex lift, and localization-colimit argument for the assigned node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves tensor products of module sheaves and complexes",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj_map_tmul, ModuleCat.ExtendScalars.map_tmul, ModuleCat.extendScalarsComp_hom_app_one_tmul, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the actual global scalar-extension functor; reuse the module tensor and source complex APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj.*mapHomologicalComplex|mapHomologicalComplex.*tensorObj",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the actual global scalar-extension functor; reuse the module tensor and source complex APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars from global sections is a monoidal functor on sheaves of modules",
+   "results": "ModuleCat.extendScalars, ModuleCat.ExtendScalars.map', ModuleCat.coextendScalars, PresheafOfModules.monoidalCategory, ModuleCat.ExtendScalars.obj', PresheafOfModules.monoidalCategoryStruct, CommRingCat.moduleCatExtendScalarsPseudofunctor, SheafOfModules.sectionsFunctor",
+   "date": "2026-10-26",
+   "verdict": "No exact comparison for the actual global scalar-extension functor; reuse the module tensor and source complex APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalSectionTensorBaseChange",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned node lem-weil-pbc-global-section-tensor-base-change, Tags 0996 and 099E, final tensor base-change paragraph, assigned proof step 1. Inherited blueprint ancestor is null; this is a strictly smaller step of its tensor base-change proof.",
+   "via": [
+    "lem-weil-pbc-global-section-tensor-base-change",
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalSectionModuleMonoidal",
+  "file": "lean/Sheaf/Paper/GlobalSectionModuleMonoidal.lean",
+  "declaration": "CategoryTheory.ringFamilyGlobalExtension_module_monoidal",
+  "declarations": [
+   "CategoryTheory.ringFamilyGlobalExtension_module_monoidal",
+   "CategoryTheory.ringFamilyGlobalExtension_preservesColimits"
+  ],
+  "statement": "theorem ringFamilyGlobalExtension_module_monoidal\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) :\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.monoidalCategory\n      (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))\n    ∃ mon : (ringFamilyGlobalExtension O).Monoidal,\n      letI := mon\n      Functor.OplaxMonoidal.η (ringFamilyGlobalExtension O) =\n        ringFamilyGlobalExtensionUnit O",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T100219-L-4150121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261026T111904-L-1766244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ringFamilyGlobalExtension_module_monoidal"
+  ],
+  "sorry_after": []
+ }
+}

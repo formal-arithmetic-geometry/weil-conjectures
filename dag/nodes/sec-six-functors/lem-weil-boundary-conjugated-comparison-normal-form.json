@@ -1,0 +1,191 @@
+{
+ "id": "lem-weil-boundary-conjugated-comparison-normal-form",
+ "kind": "statement",
+ "title": "Conjugated comparison isomorphisms and their direct-counit normal form",
+ "statement": "Let $\\mathcal C_X,\\mathcal C_Y,\\mathcal C_B,\\mathcal D_X,\\mathcal D_Y,\\mathcal D_B$ be categories [def-nagata-category]. Composition is functional, $VU=V\\circ U$. Functors preserve identities and composition; natural transformations are families of morphisms with commuting naturality squares, and natural isomorphisms have invertible components. For $h=f,g,c$ use source-target pairs $(X,Y),(Y,B),(X,B)$, respectively. Fix functors $F_h:\\mathcal C_s\\to\\mathcal C_t$, $R_h:\\mathcal C_t\\to\\mathcal C_s$, $P_h:\\mathcal D_s\\to\\mathcal D_t$, $Q_h:\\mathcal D_t\\to\\mathcal D_s$ and $S_i:\\mathcal C_i\\to\\mathcal D_i$, and natural isomorphisms\n$$\\rho_h:S_sR_h\\xrightarrow{\\sim}Q_hS_t,\\quad B_h:S_tF_h\\xrightarrow{\\sim}P_hS_s,\\quad \\alpha:F_gF_f\\xrightarrow{\\sim}F_c,\\quad\\theta:R_c\\xrightarrow{\\sim}R_fR_g.$$\nLet $\\epsilon_c:F_cR_c\\to\\mathrm{id}_{\\mathcal C_B}$ be natural and, for each $H\\in\\mathcal C_B$, let $m_H:P_cQ_cS_BH\\to S_BH$ satisfy\n$$m_H\\circ P_c(\\rho_{c,H})\\circ B_{c,R_cH}=S_B(\\epsilon_{c,H}).$$\nThe formulas\n$$\\Xi_H=\\rho_{c,H}\\circ S_X(\\theta_H^{-1})\\circ\\rho_{f,R_gH}^{-1}\\circ Q_f(\\rho_{g,H}^{-1}),$$\n$$a_G=B_{c,G}\\circ S_B(\\alpha_G)\\circ B_{g,F_fG}^{-1}\\circ P_g(B_{f,G}^{-1})$$\ndefine natural isomorphisms $\\Xi:Q_fQ_gS_B\\xrightarrow{\\sim}Q_cS_B$ and $a:P_gP_fS_X\\xrightarrow{\\sim}P_cS_X$. For $K=R_cH$ they satisfy\n$$\\Xi_H^{-1}\\circ\\rho_{c,H}=Q_f(\\rho_{g,H})\\circ\\rho_{f,R_gH}\\circ S_X(\\theta_H),$$\nand\n$$m_H\\circ P_c(\\rho_{c,H})\\circ a_K=S_B(\\epsilon_{c,H}\\circ\\alpha_K)\\circ B_{g,F_fK}^{-1}\\circ P_g(B_{f,K}^{-1}).$$\nNo adjunction axioms or mate relation between $\\alpha$ and $\\theta$ are assumed. All compositions of functors use the canonical associators.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent-formulated categorical calculation supporting Corollary 5.1.6; lem-weil-boundary-comparison-composition-transport, returned proof steps 3–4. The corollary supplies the geometric comparison unit, not this formal identity."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "For natural transformations $u:U\\to V$ and $v:V\\to W$ and an arrow $x:A\\to A'$, naturality twice gives $W(x)\\circ v_A\\circ u_A=v_{A'}\\circ V(x)\\circ u_A=v_{A'}\\circ u_{A'}\\circ U(x)$. For invertible $u$, multiplying $V(x)\\circ u_A=u_{A'}\\circ U(x)$ by inverses gives $U(x)\\circ u_A^{-1}=u_{A'}^{-1}\\circ V(x)$. Precomposition replaces $x$ by its functor image; postcomposition applies a functor to the same equality. Finally $T(u_A^{-1})$ is inverse to $T(u_A)$, since their two composites are $T(\\mathrm{id})=\\mathrm{id}$. These calculations establish naturality and invertibility of any of the composites below using only the hypotheses and associativity [def-nagata-category].",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0014, categories-definition-category; agent calculation from the functor, naturality and invertibility hypotheses of the item."
+   }
+  },
+  {
+   "text": "Apply step 1 to the following chains of natural isomorphisms, with each arrow labelled by its component:\n$$Q_fQ_gS_B\\xrightarrow{Q_f(\\rho_g^{-1})}Q_fS_YR_g\\xrightarrow{\\rho_{f,R_g(-)}^{-1}}S_XR_fR_g\\xrightarrow{S_X(\\theta^{-1})}S_XR_c\\xrightarrow{\\rho_c}Q_cS_B,$$\n$$P_gP_fS_X\\xrightarrow{P_g(B_f^{-1})}P_gS_YF_f\\xrightarrow{B_{g,F_f(-)}^{-1}}S_BF_gF_f\\xrightarrow{S_B(\\alpha)}S_BF_c\\xrightarrow{B_c}P_cS_X.$$\nTheir components are exactly $\\Xi_H$ and $a_G$. Thus both are natural isomorphisms of the claimed functors. Inserting canonical associators changes no component: both bracketings of a functor composite have the same object and arrow action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0014, categories-definition-category; agent calculation from the functor, naturality and invertibility hypotheses of the item."
+   }
+  },
+  {
+   "text": "Write $r=\\rho_{g,H}$, $b=\\rho_{f,R_gH}$, $t=\\theta_H$, $d=\\rho_{c,H}$ and $w=Q_f(r)\\circ b\\circ S_X(t)\\circ d^{-1}$. Reassociating with [def-nagata-category] gives the two inverse products\n$$w\\circ\\Xi_H=Q_f(r)\\circ b\\circ S_X(t)\\circ S_X(t^{-1})\\circ b^{-1}\\circ Q_f(r^{-1})=\\mathrm{id}_{Q_fQ_gS_BH}.$$\n$$\\Xi_H\\circ w=d\\circ S_X(t^{-1})\\circ b^{-1}\\circ Q_f(r^{-1})\\circ Q_f(r)\\circ b\\circ S_X(t)\\circ d^{-1}=\\mathrm{id}_{Q_cS_BH}.$$\nCancel adjacent inverse pairs, using step 1 for functor images. Hence $w=w\\circ\\Xi_H\\circ\\Xi_H^{-1}=\\Xi_H^{-1}$. Composing on the right with $d$ cancels $d^{-1}\\circ d$, giving $\\Xi_H^{-1}\\circ\\rho_{c,H}=Q_f(\\rho_{g,H})\\circ\\rho_{f,R_gH}\\circ S_X(\\theta_H)$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0014, categories-definition-category; agent calculation from the functor, naturality and invertibility hypotheses of the item."
+   }
+  },
+  {
+   "text": "For $K=R_cH$, expand $a_K$ and reassociate [def-nagata-category]:\n$$m_H\\circ P_c(\\rho_{c,H})\\circ a_K=(m_H\\circ P_c(\\rho_{c,H})\\circ B_{c,K})\\circ S_B(\\alpha_K)\\circ B_{g,F_fK}^{-1}\\circ P_g(B_{f,K}^{-1}).$$\nThe parenthesized factor is $S_B(\\epsilon_{c,H})$ by the assumed square, since $B_{c,K}=B_{c,R_cH}$. The functor composition law gives $S_B(\\epsilon_{c,H})\\circ S_B(\\alpha_K)=S_B(\\epsilon_{c,H}\\circ\\alpha_K)$. Substituting these two equalities yields the stated direct-counit normal form. No relation between $\\alpha$ and $\\theta$ enters either calculation.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0014, categories-definition-category; agent calculation from the functor, naturality and invertibility hypotheses of the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0014, categories-definition-category; explicit component calculation for the four-factor comparisons serving cor-weil-boundary-duality-discharge, first proof paragraph (via lem-weil-boundary-comparison-composition-transport, step 3). Bhatt–Scholze Corollary 5.1.6 is context only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|leftAdjointCompIso_inv_app|isoWhisker.*trans",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean:285: theorem conjugateEquiv_counit (α : L₂ ⟶ L₁) (d : D) :; Mathlib/CategoryTheory/Adjunction/Mates.lean:291: theorem conjugateEquiv_counit_symm (α : R₁ ⟶ R₂) (d : D) :; Mathlib/CategoryTheory/Adjunction/Mates.lean:295:     exact (conjugateEquiv_counit adj₁ adj₂ ((conjugateEquiv adj₁ adj₂).symm α) d); Mathlib/CategoryTheory/Shift/CommShift.lean:455:       Iso.symm_hom, isoWhiskerRight_hom, NatTrans.comp_app, whiskerLeft_app,; Mathlib/CategoryTheory/Shift/Pullback.lean:184:       isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,; Mathlib/CategoryTheory/Grothendieck.lean:529:       Iso.trans_hom, eqToIso.hom, eqToHom_app, eqToHom_refl, isoWhiskerLeft_hom, NatTrans.comp_app]; Mathlib/CategoryTheory/Whiskering.lean:290: theorem isoWhiskerLeft_trans (F : C ⥤ D) {G H K : D ⥤ E} (α : G ≅ H) (β : H ≅ K) :; Mathlib/CategoryTheory/Whiskering.lean:295: theorem isoWhiskerRight_trans {G H K : C ⥤ D} (α : G ≅ H) (β : H ≅ K) (F : D ⥤ E) :; Mathlib/CategoryTheory/Whiskering.lean:300: theorem isoWhiskerLeft_trans_isoWhiskerRight {F G : C ⥤ D} {H K : D ⥤ E} (α : F ≅ G) (β : H ≅ K) :; Mathlib/CategoryTheory/Join/Basic.lean:374:       (isoWhiskerLeft (Prod.fst C D) eₗ).hom ≫ whiskerRight (edgeTransform C D) G := by cat_disch) :; Mathlib/CategoryTheory/Sites/Subcanonical.lean:126:   ((isoWhiskerLeft _ sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf.symm).trans; Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean:221:             (Functor.isoWhiskerLeft _ φ.symm).trans (Functor.associator _ _ _).symm }; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:251:   conjugateEquiv_counit _ _ ((tensoringLeft C).map f) X; Mathlib/CategoryTheory/Sites/LocalSite.lean:137:   ((sheafToPresheaf J A).isoWhiskerLeft (pointPresheafFiberNatIso J A)).trans; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean:350:           (isoWhiskerRight (cospanOp f g).symm (yoneda.obj X)) _).symm.trans; Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean:162:     NatTrans.comp_app, Category.assoc, isoWhiskerLeft_hom, NatTrans.comp_app, Category.assoc,; Mathlib/CategoryTheory/Limits/Preserves/Grothendieck.lean:92:       fiberwiseColim_obj, isoWhiskerLeft_hom, NatTrans.comp_app, Functor.associator_hom_app,",
+   "date": "2026-10-22",
+   "verdict": "no match: whiskering and mate identities are building blocks; none gives both four-factor comparisons, inverse cancellation, and the direct counit normal form from the stated single square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Whiskering and composing natural isomorphisms defines conjugated left and right composition maps and cancels the direct counit comparison",
+   "results": "CategoryTheory.conjugateEquiv_counit_symm (Mathlib/CategoryTheory/Adjunction/Mates); CategoryTheory.conjugateEquiv_counit (Mathlib/CategoryTheory/Adjunction/Mates); CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit (Mathlib/CategoryTheory/Adjunction/FullyFaithful); CategoryTheory.Adjunction.whiskerLeftRUnitIsoOfIsIsoCounit_hom_app (Mathlib/CategoryTheory/Adjunction/FullyFaithful); CategoryTheory.conjugateEquiv_whiskerRight (Mathlib/CategoryTheory/Adjunction/Mates); CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit (Mathlib/CategoryTheory/Adjunction/FullyFaithful); CategoryTheory.Adjunction.comp_counit (Mathlib/CategoryTheory/Adjunction/Basic); CategoryTheory.conjugateEquiv_comm (Mathlib/CategoryTheory/Adjunction/Mates)",
+   "date": "2026-10-22",
+   "verdict": "no match: whiskering and mate identities are building blocks; none gives both four-factor comparisons, inverse cancellation, and the direct counit normal form from the stated single square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating composition isomorphisms by natural isomorphisms gives an inverse formula and a normalized direct counit",
+   "results": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv (Mathlib.CategoryTheory.Adjunction.CompositionIso); CategoryTheory.ComonadIso.mk_inv_toNatTrans (Mathlib.CategoryTheory.Monad.Basic); CategoryTheory.conjugateEquiv_symm_iso (Mathlib.CategoryTheory.Adjunction.Mates); CategoryTheory.Iso.inverseCompIso (Mathlib.CategoryTheory.Equivalence); CategoryTheory.Adjunction.counitAsIsoOfIso (Mathlib.CategoryTheory.Monad.Adjunction); CategoryTheory.Adjunction.leftAdjointCompIso (Mathlib.CategoryTheory.Adjunction.CompositionIso); CategoryTheory.Iso.isoInverseComp (Mathlib.CategoryTheory.Equivalence); Mathlib.Tactic.Monoidal.normalizeIsoComp (Mathlib.Tactic.CategoryTheory.Monoidal.PureCoherence)",
+   "date": "2026-10-22",
+   "verdict": "no match: whiskering and mate identities are building blocks; none gives both four-factor comparisons, inverse cancellation, and the direct counit normal form from the stated single square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso\", \"trans\"",
+   "results": "CategoryTheory.NatIso.trans_app (Mathlib.CategoryTheory.NatIso); CategoryTheory.NatIso.op_trans (Mathlib.CategoryTheory.Opposites); CategoryTheory.NatIso.unop_trans (Mathlib.CategoryTheory.Opposites); CategoryTheory.NatTrans.OppositeShift.natIsoId (Mathlib.CategoryTheory.Shift.Opposite); CategoryTheory.NatTrans.OppositeShift.natIsoComp (Mathlib.CategoryTheory.Shift.Opposite); CategoryTheory.NatTrans.instCommShiftOppositeShiftHomFunctorNatIsoId (Mathlib.CategoryTheory.Shift.Opposite); CategoryTheory.NatTrans.instCommShiftOppositeShiftHomFunctorNatIsoComp (Mathlib.CategoryTheory.Shift.Opposite); CategoryTheory.NatTrans.PullbackShift.natIsoId (Mathlib.CategoryTheory.Shift.Pullback); CategoryTheory.NatTrans.PullbackShift.natIsoComp (Mathlib.CategoryTheory.Shift.Pullback); CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoId (Mathlib.CategoryTheory.Shift.Pullback); CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp (Mathlib.CategoryTheory.Shift.Pullback); CategoryTheory.Bicategory.leftUnitorNatIsoCat_hom_toNatTrans_app (Mathlib.CategoryTheory.Bicategory.Yoneda)",
+   "date": "2026-10-22",
+   "verdict": "no match: whiskering and mate identities are building blocks; none gives both four-factor comparisons, inverse cancellation, and the direct counit normal form from the stated single square."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|isoWhiskerLeft_trans|isoWhiskerRight_trans|trans_app",
+   "results": "Whiskering.lean:290 isoWhiskerLeft_trans, :295 isoWhiskerRight_trans; NatIso.lean:93 NatIso.trans_app. These provide construction identities only. Read those files and Adjunction/Mates.lean:285–295.",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned whiskering identities are elementary building blocks; mate and equivalence counit identities impose adjunction or equivalence data absent here. None states the two four-factor comparisons and both component equations under the single square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the composite of whiskered natural isomorphisms and cancellation with an inverse component",
+   "results": "Mathlib.Tactic.Bicategory.naturality_comp and naturality_whiskerRight; CategoryTheory.Iso.compInverseIso, NatIso.naturality_2'_assoc and naturality_1'_assoc; bicategorical whiskering and pseudofunctor naturality identities.",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned whiskering identities are elementary building blocks; mate and equivalence counit identities impose adjunction or equivalence data absent here. None states the two four-factor comparisons and both component equations under the single square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso\", \"trans\"",
+   "results": "CategoryTheory.NatIso.trans_app (Mathlib.CategoryTheory.NatIso), NatIso.op_trans, NatIso.unop_trans; remaining hits concern shifts and bicategorical Yoneda.",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned whiskering identities are elementary building blocks; mate and equivalence counit identities impose adjunction or equivalence data absent here. None states the two four-factor comparisons and both component equations under the single square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating natural composition isomorphisms by comparison natural isomorphisms and simplifying a counit square",
+   "results": "CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_counit_symm; CategoryTheory.Equivalence.trans_counitIso; AlgebraicTopology.DoldKan.Compatibility.υ; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Equivalence.congrRight_counitIso_hom_app; CategoryTheory.Equivalence.cancel_counitInv_right_assoc'; CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned whiskering identities are elementary building blocks; mate and equivalence counit identities impose adjunction or equivalence data absent here. None states the two four-factor comparisons and both component equations under the single square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composites of natural isomorphisms are natural and their inverses cancel; substitute a commuting counit comparison square",
+   "results": "CategoryTheory.Equivalence.cancel_counitInv_right_assoc'; CategoryTheory.Equivalence.trans_counitIso; AlgebraicTopology.DoldKan.Compatibility.υ; CategoryTheory.Equivalence.cancel_counitInv_right_assoc; CategoryTheory.Adjunction.comp_counit; CategoryTheory.Adjunction.counitAsIsoOfIso; AlgebraicTopology.DoldKan.Compatibility.τ₁; CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned whiskering identities are elementary building blocks; mate and equivalence counit identities impose adjunction or equivalence data absent here. None states the two four-factor comparisons and both component equations under the single square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-comparison-composition-transport",
+  "date": "2026-10-22",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "First proof paragraph of cor-weil-boundary-duality-discharge: the independently formal costalk comparison, with the structure-map dualizing-object identification made precise by lem-weil-boundary-dualizing-composition, steps 6–7 (site-comparison transport of the composition mate and counits). Extracted argument: returned steps 3–4, conjugation, inverse cancellation and direct-counit reduction.",
+   "via": [
+    "lem-weil-boundary-comparison-composition-transport",
+    "lem-weil-boundary-dualizing-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-boundary-conjugated-comparison-normal-form",
+  "worker": "stage1",
+  "summary": "Statement unchanged. All four-factor maps are typed explicitly. Naturality of products, inverses and whiskerings is proved directly from the given squares; the inverse is verified by adjacent cancellation and the direct normal form by substituting the single assumed square. No adjunction, mate identity or geometric comparison theorem is used; no new nodes are needed. Searches found only building blocks, not an exact Mathlib or completed project declaration. Repair of returned head 7e46150da46: revalidated against the current unsplit repository item and re-read the sole cited category node; both inverse-product calculations are now displayed explicitly. The delivery tool rebases the stage-1 overlay on current origin/sheaf-dag for live promotion by L. The resumed repair separates the two inverse products into distinct TeX displays and writes the inverse-uniqueness cancellation explicitly. Final repair review expands a_K before applying the assumed square, displaying its exact B_{c,R_cH} factor; the remaining equality is explicitly the composition law of S_B.",
+  "blueprint": "First proof paragraph of cor-weil-boundary-duality-discharge: independently formal costalk comparison; the comparison-composition portion of lem-weil-boundary-dualizing-composition, realized through lem-weil-boundary-comparison-composition-transport step 3. The present four steps discharge the formal conjugation and direct-counit normalization."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N5-e7578bf30",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-e7578bf30 (reviewer sub-agent of L); spot-checked: Re-delivery after the 2026-10-22 11:43 UTC return of head 7e46150da46. That return was only a landing refusal: 'side completion never promoted; L promotes it'; it named no content fault. Compared with that head, the statement, stmt_deps, source, blueprint and unit are identical. Only proof steps 3 and 4 changed: step 3 now displays both inverse products explicitly, and step 4 expands a_K with the bracket m_H∘P_c(ρ_c)∘B_{c,R_cH} before using the square. So this is not an A6 byte-identical re-push. Live and side-live clones still have the item unsplit, with no repair note and no other group's split. All Ξ_H and a_G chains and both final equations type-check. Step 3: adjacent-pair cancellation in both orders, then uniqueness of the inverse and right composition with d, gives equation 1. Step 4: substituting the assumed square at K=R_cH and using functoriality of S_B gives equation 2, with no invertibility or naturality of m and no α/θ mate relation. Step 1 uses only identity and associativity, which def-nagata-category (status mathlib) states verbatim, plus the stated functor and naturality definitions; all steps are elementary. The parent lem-weil-boundary-comparison-composition-transport step 3 uses exactly these clauses with c=gf and m=μ_{gf}, and its α^p matches a. Edge cases checked: empty categories, identity data, and noncommuting invertible matrices with m=(ρ_cB_c)^{-1}. There are no new nodes. The sibling lem-weil-boundary-iterated-counit-normal-form states a different identity, not a duplicate. Source: BS Cor. 5.1.6 (printed p. 35) is cited honestly as context only; no SGA is used and there are no tool_uses. Promotion to the live DAG remains L's job."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundaryConjugatedComparisonNormalForm",
+  "declaration": "CategoryTheory.BoundaryConjugatedComparison.normalForm",
+  "declarations": [
+   "CategoryTheory.BoundaryConjugatedComparison.rightIso",
+   "CategoryTheory.BoundaryConjugatedComparison.leftIso",
+   "CategoryTheory.BoundaryConjugatedComparison.normalForm"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BoundaryConjugatedComparisonNormalForm.lean",
+  "statement": "theorem normalForm {CX : Type uCX} [Category.{vCX} CX] {CY : Type uCY} [Category.{vCY} CY] {CB : Type uCB} [Category.{vCB} CB] {DX : Type uDX} [Category.{vDX} DX] {DY : Type uDY} [Category.{vDY} DY] {DB : Type uDB} [Category.{vDB} DB] (Ff : CX ⥤ CY) (Fg : CY ⥤ CB) (Fc : CX ⥤ CB) (Rf : CY ⥤ CX) (Rg : CB ⥤ CY) (Rc : CB ⥤ CX) (Pf : DX ⥤ DY) (Pg : DY ⥤ DB) (Pc : DX ⥤ DB) (Qf : DY ⥤ DX) (Qg : DB ⥤ DY) (Qc : DB ⥤ DX) (SX : CX ⥤ DX) (SY : CY ⥤ DY) (SB : CB ⥤ DB) (ρf : Rf ⋙ SX ≅ SY ⋙ Qf) (ρg : Rg ⋙ SY ≅ SB ⋙ Qg) (ρc : Rc ⋙ SX ≅ SB ⋙ Qc) (Bf : Ff ⋙ SY ≅ SX ⋙ Pf) (Bg : Fg ⋙ SB ≅ SY ⋙ Pg) (Bc : Fc ⋙ SB ≅ SX ⋙ Pc) (α : Ff ⋙ Fg ≅ Fc) (θ : Rc ≅ Rg ⋙ Rf) (εc : Rc ⋙ Fc ⟶ 𝟭 CB) (m : ∀ H : CB, Pc.obj (Qc.obj (SB.obj H)) ⟶ SB.obj H) (hm : ∀ H : CB, Bc.hom.app (Rc.obj H) ≫ Pc.map (ρc.hom.app H) ≫ m H = SB.map (εc.app H)) : (∀ H : CB, (rightIso ρf ρg ρc θ).hom.app H = Qf.map (ρg.inv.app H) ≫ ρf.inv.app (Rg.obj H) ≫ SX.map (θ.inv.app H) ≫ ρc.hom.app H) ∧ (∀ G : CX, (leftIso Bf Bg Bc α).hom.app G = Pg.map (Bf.inv.app G) ≫ Bg.inv.app (Ff.obj G) ≫ SB.map (α.hom.app G) ≫ Bc.hom.app G) ∧ (∀ H : CB, ρc.hom.app H ≫ (rightIso ρf ρg ρc θ).inv.app H = SX.map (θ.hom.app H) ≫ ρf.hom.app (Rg.obj H) ≫ Qf.map (ρg.hom.app H)) ∧ (∀ H : CB, (leftIso Bf Bg Bc α).hom.app (Rc.obj H) ≫ Pc.map (ρc.hom.app H) ≫ m H = Pg.map (Bf.inv.app (Rc.obj H)) ≫ Bg.inv.app (Ff.obj (Rc.obj H)) ≫ SB.map (α.hom.app (Rc.obj H) ≫ εc.app H))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "rightIso and leftIso are canonical composites of the prescribed whiskered isomorphisms and functor associators. normalForm states their component formulas and the inverse and direct-counit identities, without any adjunction or mate hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ace286fb",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Only the lean field changes from side-live. lean.statement is verbatim in the file. rightIso and leftIso are real whiskering/associator composites and their intermediate functor types trace correctly. All hypotheses (rho, B, alpha, theta, eps, m, hm square) match the node after converting to diagrammatic order, with no adjunction or mate assumption and 12 free universes. The four clauses match: component formulas for Xi and a, Xi^-1 after rho_c, and the normal form with SB.map(alpha ≫ eps); all are true. Edge cases checked: empty categories, identity data, non-invertible eps and m, independent alpha and theta. No name clash in live lean trees; Mathlib has only mate/whiskering building blocks. Docstrings give source and blueprint; proof is sorry only. Report has both required sections. No fixes, so no compile."
+ }
+}

@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-relative-torus-bimultiplicative-vanishing",
+ "kind": "statement",
+ "title": "Vanishing of multiplicative pairings from two relative one-dimensional tori",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme is a group object in schemes over $S$, with multiplication, inverse and identity obeying the group identities; it is separated when its diagonal is a closed immersion [def-weil-closed-immersion]. On $S$-schemes use the fppf topology, whose covering families are jointly surjective flat morphisms locally of finite presentation. Write $\\mathbf G_a(T)=\\Gamma(T,\\mathcal O_T)$ with addition and $\\mathbf G_m(T)=\\Gamma(T,\\mathcal O_T)^\\times$ with multiplication, for every $S$-scheme $T$. A group sheaf means a group-valued functor with unique gluing of compatible sections for these coverings. A central exact sequence means that its first map identifies its source with the kernel of its second map, the second map is locally surjective for this topology, and the kernel commutes with every local section of the middle sheaf. Let $Z$ be a separated commutative $S$-group scheme. If $b:\\mathbf G_m\\times_S\\mathbf G_m\\to Z$ is an $S$-morphism which is multiplicative in each argument, meaning $b(aa',c)=b(a,c)b(a',c)$ and $b(a,cc')=b(a,c)b(a,c')$ for all sections after every base change, then $b(a,c)=1$ for all $a,c$ after every base change.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 4.3.1, proof, printed p.127: vanishing of the bi-additive pairing D x D -> Z using the relatively schematically dense torsion subgroups of Gm. Read online on 2026-10-24; local archival copy WANTED. No Stacks tag states this lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-split-torus"
+ ],
+ "proof": [
+  {
+   "text": "First verify local divisibility without any restriction on the characteristic. Over a nonempty affine test scheme $U=\\operatorname{Spec}A\\to S$, identify $D_A(\\mathbf Z)$ with $\\mathbf G_{m,U}$: a homomorphism from $A[\\mathbf Z]=A[t,t^{-1}]$ is uniquely specified by the unit image of $t$. The basis description in [def-sfb-ring-diagonalizable-group] and the affine-spectrum dictionary give this identification. Apply [lem-sfb-relative-diagonalizable-character-duality] with $M=\\mathbf Z$ and $L=n\\mathbf Z$, for $n\\geq1$. Identifying $L$ with $\\mathbf Z$ by $k\\mapsto nk$, its quotient map is $[n]:\\mathbf G_{m,U}\\to\\mathbf G_{m,U}$, since $t\\mapsto t^n$. Its fppf sheaf quotient is $D_A(L)$. Apply the local-surjectivity clause of [lem-cbc-set-presheaf-sheafification-local-bijection] to the pointwise quotient presheaf mapping to $h_{D_A(L)}$; its associated-sheaf map is an isomorphism by the quoted quotient assertion. The target is a sheaf by the representable-descent statements cited below. Hence every unit $c$ on $U$ has an $n$th root on an fppf covering. These are coverings in [def-pc-fppf-site]. By [lem-trf-fppf-covering-is-fpqc] and the uniqueness assertion of [lem-weil-pbc-fpqc-representable-descent], equality of two morphisms to $Z$ can be checked on that covering. Affine open covers handle any test scheme; on the empty test scheme there is only one morphism.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-weil-affine-spectrum",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, proof, printed p.127, paragraph proving the vanishing of the bi-additive pairing; explicit expansion of the root-cover and relative-density arguments."
+   }
+  },
+  {
+   "text": "For each $n\\geq1$ let $\\mu_n(T)=\\{a\\in\\Gamma(T,\\mathcal O_T)^\\times:a^n=1\\}$. Multiplicativity and cancellation in the group $Z(T)$ give $b(1,c)=1$. Given $a\\in\\mu_n(T)$ and a unit $c$, use step 1 locally to write $c=d^n$. Repeated multiplicativity in the two arguments gives\n$$b(a,c)=b(a,d^n)=b(a,d)^n=b(a^n,d)=b(1,d)=1.$$\nThe equality descends by step 1. Thus $b$ agrees with the identity morphism on $\\mu_n\\times_S\\mathbf G_m$ for every positive $n$, as an equality on all test schemes, including nonreduced ones.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, proof, printed p.127, paragraph proving the vanishing of the bi-additive pairing; explicit expansion of the root-cover and relative-density arguments."
+   }
+  },
+  {
+   "text": "Put $X=\\mathbf G_m\\times_S\\mathbf G_m$ and let $e_X:X\\to Z$ be its structure map followed by the identity section. The equalizer $E$ of $b$ and $e_X$ is the pullback of $\\Delta_{Z/S}$ along $(b,e_X):X\\to Z\\times_SZ$. Since $Z$ is $S$-separated, its diagonal is a closed immersion; [lem-weil-pbc-closed-immersion-base-change] makes $E\\hookrightarrow X$ a closed immersion. View $X$ over its second factor $T=\\mathbf G_m$. Over an arbitrary affine open $V=\\operatorname{Spec}R\\subseteq T$ it is $\\mathbf G_{m,V}=\\operatorname{Spec}R[t,t^{-1}]$, by the same unit-representing calculation as in step 1. By [def-weil-closed-immersion], the restriction of $E$ is cut out by an ideal $I\\subseteq R[t,t^{-1}]$. Step 2 says that it contains $\\mu_{n,V}$ for every $n\\geq1$. This subscheme is $\\operatorname{Spec}(R[t,t^{-1}]/(t^n-1))$: its morphisms from affine tests are exactly units with $n$th power $1$. By [def-weil-affine-spectrum], containment means that every element of $I$ maps to zero in every such quotient.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, proof, printed p.127, paragraph proving the vanishing of the bi-additive pairing; explicit expansion of the root-cover and relative-density arguments."
+   }
+  },
+  {
+   "text": "For $f\\in I$, multiply by a power $t^k$ so that $g=t^kf\\in R[t]$. Choose $n\\geq1$ strictly larger than every exponent appearing in $g$. The quotient $R[t,t^{-1}]/(t^n-1)$ is $R[t]/(t^n-1)$, since $t$ there has inverse $t^{n-1}$. By [lem-weil-pbc-monic-quotient-free], the classes $1,t,\\ldots,t^{n-1}$ are an $R$-basis; since $g$ maps to zero, all its coefficients vanish. Hence $g=0$ and $f=0$, so $I=0$. This works also for the zero ring and uses no reducedness assumption. Consequently $E=X$ over every affine open of $T$, and therefore $E=X$ globally. Thus $b=e_X$; evaluation on any $S$-scheme gives the required equality $b(a,c)=1$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Proposition 4.3.1, proof, printed p.127, paragraph proving the vanishing of the bi-additive pairing; explicit expansion of the root-cover and relative-density arguments."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-affine-spectrum",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Proposition 4.3.1, proof, printed p.127, paragraph proving the vanishing of the bi-additive pairing; explicit expansion of the root-cover and relative-density arguments. Source read online; no local archival copy is available. The affine ideal calculation expands the relative schematic density assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every bimultiplicative morphism from two multiplicative group schemes to a separated commutative group scheme over an arbitrary base scheme is trivial",
+   "results": "{\"t\": \"2026-10-24T07:46:30Z\", \"tool\": \"leanfinder\", \"query\": \"Every bimultiplicative morphism from two multiplicative group schemes to a separated commutative group scheme over an arbitrary base scheme is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"CategoryTheory.Grp.uniqueHomFromTrivial\", \"AlgebraicGeometry.Scheme.IsSeparated.isSeparated_terminal_from\", \"CategoryTheory.Hom.commGroup\", \"CategoryTheory.CommGrp.trivial_grp_mul\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.instBraidedCategoryScheme\"], \"digest\": \"bfc5430a7a7d39d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are separatedness properties and general categorical group-object operations, not vanishing of a pairing of relative tori."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommGrp\", \"pairing\"",
+   "results": "{\"t\": \"2026-10-24T07:52:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"CommGrp\\\", \\\"pairing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are separatedness properties and general categorical group-object operations, not vanishing of a pairing of relative tori."
+  },
+  {
+   "tool": "grep",
+   "query": "bimultiplicative|biadditive|central.?extension",
+   "results": "{\"t\": \"2026-10-24T07:52:33Z\", \"tool\": \"grep\", \"query\": \"bimultiplicative|biadditive|central.?extension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are separatedness properties and general categorical group-object operations, not vanishing of a pairing of relative tori."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism of group schemes Gm tensor Gm to a separated commutative group scheme vanishes",
+   "results": "{\"t\": \"2026-10-24T07:52:33Z\", \"tool\": \"leansearch\", \"query\": \"Every morphism of group schemes Gm tensor Gm to a separated commutative group scheme vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.IsSeparated.comp_iff\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.IsAffineHom.of_comp\", \"AlgebraicGeometry.IsSeparated.casesOn\"], \"digest\": \"7e1739143937afee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are separatedness properties and general categorical group-object operations, not vanishing of a pairing of relative tori."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every bimultiplicative morphism from Gm times Gm over any base to a separated commutative group scheme is trivial",
+   "results": "{\"t\": \"2026-10-24T08:25:45Z\", \"tool\": \"leanfinder\", \"query\": \"Every bimultiplicative morphism from Gm times Gm over any base to a separated commutative group scheme is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"CategoryTheory.CommGrp.trivial\", \"CategoryTheory.CommGrp.instHasInitial\", \"CategoryTheory.CommGrp.trivial_X\", \"CategoryTheory.Grp.uniqueHomFromTrivial\", \"CategoryTheory.CommGrp.trivial_grp_mul\", \"CategoryTheory.CommGrp.instInhabited\", \"AlgebraicGeometry.Scheme.IsSeparated.isSeparated_terminal_from\"], \"digest\": \"93117c1ddd3e50c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract trivial-group morphisms, module bilinear maps, analytic tori or product identities; none states a separately multiplicative scheme pairing vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"bimultiplicative\"",
+   "results": "{\"t\": \"2026-10-24T08:25:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, \\\"bimultiplicative\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "bimultiplicative|biadditive|torsion.*[Dd]ense",
+   "results": "{\"t\": \"2026-10-24T08:25:46Z\", \"tool\": \"grep\", \"query\": \"bimultiplicative|biadditive|torsion.*[Dd]ense\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract trivial-group morphisms, module bilinear maps, analytic tori or product identities; none states a separately multiplicative scheme pairing vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bilinear pairing of multiplicative group schemes into a separated commutative group scheme is zero",
+   "results": "{\"t\": \"2026-10-24T08:25:47Z\", \"tool\": \"leansearch\", \"query\": \"A bilinear pairing of multiplicative group schemes into a separated commutative group scheme is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.map_zero₂\", \"LinearMap.BilinForm.zero_apply\", \"LinearMap.IsOrtho\", \"LinearMap.SeparatingRight\", \"RootPairing.InvariantForm.apply_root_root_zero_iff\", \"LinearMap.BilinForm.zero_left\", \"LinearMap.isOrtho_zero_right\", \"ContinuousLinearMap.bilinearComp_zero\"], \"digest\": \"461a3a597f7a136a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract trivial-group morphisms, module bilinear maps, analytic tori or product identities; none states a separately multiplicative scheme pairing vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"pairing\"",
+   "results": "{\"t\": \"2026-10-24T08:26:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"pairing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract trivial-group morphisms, module bilinear maps, analytic tori or product identities; none states a separately multiplicative scheme pairing vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a product of two tori that is a group homomorphism separately in both variables is the constant identity",
+   "results": "{\"t\": \"2026-10-24T08:26:29Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a product of two tori that is a group homomorphism separately in both variables is the constant identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"torusMap_eq_center_iff\", \"torusMap_zero_radius\", \"Prod.id_prod\", \"CategoryTheory.Grp.fst_hom\", \"UnitAddTorus\", \"PontryaginDual.map_one\", \"CategoryTheory.Limits.prod.map_id_id\", \"ContinuousMonoidHom.diag_toFun\"], \"digest\": \"b30d0de8390de3fb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are abstract trivial-group morphisms, module bilinear maps, analytic tori or product identities; none states a separately multiplicative scheme pairing vanishing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-sl2-central-extension-splitting",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. Supporting subargument: Proposition 4.3.1, proof, printed p.127: vanishing of the bi-additive pairing D x D -> Z using the relatively schematically dense torsion subgroups of Gm.",
+   "via": [
+    "lem-sfb-relative-sl2-central-extension-splitting",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-torus-bimultiplicative-vanishing",
+  "worker": "stage1",
+  "summary": "Four-step expansion of Conrad Proposition 4.3.1: relative diagonalizable quotient gives fppf-local roots, multiplicativity kills each torsion restriction, separatedness gives a closed equalizer, and the monic-quotient basis kills its ideal. No statement change or new node. Audited exact citations and edge cases over arbitrary nonreduced bases.",
+  "blueprint": "Inherited supporting chain from det-thm-sf-ctf-stability-direct-images, proof (3), through the marked plurinodal and integral reductive-group inputs. At its immediate place, realizes the Proposition 4.3.1 pairing-vanishing subargument of lem-sfb-relative-sl2-central-extension-splitting; retains the recorded blueprint.from.place and ancestry. The latest direct-images proof (3) was read; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-cee5772b6",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-cee5772b6 (reviewer sub-agent of L); spot-checked: PASS: I read the whole item and every cited statement. The delivery is one commit carrying the item plus the report, with no new nodes. The statement is unchanged. The source (Conrad, Reductive group schemes, Prop. 4.3.1 proof, p.127) has no copy under literature/, so I could not reread that page; I checked the argument on its own instead. Step 1: on a nonempty affine test (so A≠0), character-duality with M=ℤ, L=nℤ says the fppf quotient of G_m by μ_n is D_A(nℤ), and the quotient map is t↦t^n. That quotient is the sheafification of the pointwise quotient. The target is representable, hence a sheaf: fppf coverings are fpqc coverings, and representables satisfy fpqc descent. So the local-surjectivity clause of the sheafification local-bijection lemma gives fppf-local n-th roots. The uniqueness half of the descent lemma lets equality of maps to Z be checked on a cover. Empty and non-affine tests are handled. Step 2 is elementary and correct: b(a,d^n)=b(a,d)^n=b(a^n,d)=b(1,d)=1, so b is trivial on μ_n×G_m. Step 3: the equalizer is the pullback of the diagonal, a closed immersion because Z is separated (Stacks 01QR). Over an affine V=Spec R in the second factor it is cut out by an ideal I of R[t^±1]. μ_{n,V} lies in it, and through Spec Hom this means I⊆(t^n−1). Step 4: R[t^±]/(t^n−1)=R[t]/(t^n−1), which is free on 1,…,t^{n−1} by the monic-quotient node. Taking n above the degree of t^k f forces f=0, for any R including nonreduced ones. I tested R=0, R=F_p[ε]/ε² with f=εt^k, n=1, and p|n. Duplicates: a scan of all node statements found only field-only torsion-density nodes. Cycles: none; the item is not in its 154-node closure. Batch 5: lem-trf-fppf-covering-is-fpqc (Mathlib fppfPrecoverage_le_fpqcPrecoverage, Stacks 022C) and lem-trf-fppf-covering-base-change (Mathlib leaf), reached through character-duality, are general covering-class facts. Neither assumption gives them and neither belongs to their proofs, so they lie outside the assumed statements. No Poincaré-duality or batch-4 node is reached. No tool_uses are needed: every node outside the unit is a definition or a Mathlib leaf. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorusBimultiplicativeVanishing",
+  "declaration": "AlgebraicGeometry.relativeTorus_bimultiplicative_eq_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorusBimultiplicativeVanishing.lean",
+  "statement": "theorem relativeTorus_bimultiplicative_eq_one (S : Scheme.{u}) (Z : Over S) [GrpObj Z] [IsCommMonObj Z] [IsSeparated Z.hom] (b : (relativeSplitTorus S 1).X ⊗ (relativeSplitTorus S 1).X ⟶ Z) (hleft : ∀ (T : Over S) (a a' c : T ⟶ (relativeSplitTorus S 1).X), lift (a * a') c ≫ b = (lift a c ≫ b) * (lift a' c ≫ b)) (hright : ∀ (T : Over S) (a c c' : T ⟶ (relativeSplitTorus S 1).X), lift a (c * c') ≫ b = (lift a c ≫ b) * (lift a c' ≫ b)) : ∀ (T : Over S) (a c : T ⟶ (relativeSplitTorus S 1).X), lift a c ≫ b = 1",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d88e42d7",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Only change from live: lean record + stmt_dep def-sfb-relative-split-torus (landed Q110 def, the single owner of G_m over an arbitrary scheme; the functor-of-points, ring and field variants do not fit). Clause check: arbitrary S; Z : Over S with GrpObj, IsCommMonObj, IsSeparated Z.hom (closed diagonal); b a plain Over-S morphism from relativeSplitTorus S 1 ⊗ itself; hleft/hright for all T : Over S with Hom.mul = lift ≫ μ; conclusion lift a c ≫ b = 1 (toUnit ≫ η). No extra hypotheses; empty S/T, trivial Z, nonreduced bases, any characteristic covered; single universe, all binders bound. lean.statement verbatim; only sorry is the proof; docstrings carry source, blueprint id and 4 proof steps; report has both sections. No fixes, no compile."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-asd-projective-line-exceptional-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proof (1), the projective-line model before restriction to its affine chart. Arbitrary-base form needed by the adopted source statement.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Projective-line exceptional base change over arbitrary schemes",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and $S$ an arbitrary scheme [def-pc-scheme]. Suppose some positive integer kills $\\Lambda$ and is a unit in $\\Gamma(S,\\mathcal O_S)$. Write $q:\\mathbf P^1_S\\to S$ for the projective-line projection [def-nagata-projective-space-base-change], using the coordinate type $\\operatorname{Option}(\\operatorname{ULift}(\\operatorname{Fin}(1)))$. For every cartesian square with lower-right arrow $q$ [def-pc-fibre-product] and compactifiable, quasi-compact left arrow $q^\\prime$ [def-asd-compactifiable, def-weil-finite-type-morphism], the canonical exceptional base-change mate [thm-amb-etale-exceptional-adjoint, def-amb-etale-compact-support] is invertible on the entire ordinary unbounded small-etale derived categories of constant-$\\Lambda$ module sheaves [def-weil-pbc-derived-categories]. Neither base is assumed Noetherian.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/sk-lem-geo-affine-local.proof.md",
+  "place": "Proof (1), the projective-line model before restriction to its affine chart. Arbitrary-base form needed by the adopted source statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-projective-space-base-change",
+  "def-pc-fibre-product",
+  "def-asd-compactifiable",
+  "def-weil-finite-type-morphism",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Choose a positive exponent N invertible on S. Use the existing arbitrary-base finite Kummer splitting, its trace base-change equation and both supported diagonal integrals.",
+   "uses": [
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reindex the target coordinates and transport the projective-line presentation across the given pullback square. Properness is preserved by base change. The diagonal adjunction theorem supplies each explicit twisted-pullback right adjoint with its actual constructed counit.",
+   "uses": [
+    "lem-asd-projective-line-presentations",
+    "lem-asd-presented-projective-line-trace-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The concrete counit base-change equality supplies the compatibility required by isIso_mateEquiv_app_of_counit. Cancel compact-support exchange with its inverse; the explicit twisted-pullback comparison is an isomorphism. Thus every component of the canonical exceptional mate is invertible, and hence the whole natural transformation is invertible.",
+   "uses": [
+    "lem-asd-presented-projective-line-trace-counit-base-change",
+    "def-asd-presented-projective-line-trace-model",
+    "det-sp-unique-right-adjoint",
+    "def-amb-etale-compact-support",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-asd-presented-projective-line-trace-model",
+  "det-sp-unique-right-adjoint",
+  "lem-asd-presented-projective-line-trace-adjunction",
+  "lem-asd-presented-projective-line-trace-counit-base-change",
+  "lem-asd-projective-line-presentations",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Projective-line computation, explicit finite trace model and mate comparison; S4 Lean reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exceptional inverse image base change for projective line projection with finite torsion coefficients",
+   "results": "Finite morphism base-change permanence and WeierstrassCurve.Projective base-change formulas.",
+   "date": "2026-10-25",
+   "verdict": "no match for exceptional inverse-image base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change for the right adjoint of compact support along an affine space projection, using projective line adjunction and counit compatibility",
+   "results": "Scheme.Modules pushforward and pullback adjunctions; SheafOfModules pullback/pushforward counit lemmas.",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary module adjunctions do not assert exceptional base change"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*mateEquiv|projectiveLine.*[Bb]aseChange|affineSpaceAdjunction; Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "results": "No specialized result in Mathlib. The source library has a conditional projective-line criterion and the affine-line restriction and iteration over affine bases.",
+   "date": "2026-10-25",
+   "verdict": "no match in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange",
+  "date": "2026-10-25",
+  "group": "K4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectiveLineExceptionalBaseChange",
+  "file": "lean/Sheaf/SixFunctors/ProjectiveLineExceptionalBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLineExceptionalBaseChange",
+  "statement": "theorem projectiveLineExceptionalBaseChange\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (S : Scheme.{u}) [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄\n    {g : S' ⟶ S} {q' : P' ⟶ S'}\n    {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}\n    (sq : IsPullback g' q' (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) g)\n    [HasCompactification q'] [QuasiCompact q'] :\n    IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T143613-L-1060958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T104350-L-795127",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ }
+}

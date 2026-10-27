@@ -1,0 +1,24 @@
+--- a/batch2/scompile.py
++++ b/batch2/scompile.py
+@@ -52,7 +52,10 @@
+ sys.path.insert(0, str(H / "weil-launcher")); import compile_attach as CA
+ NO_ANSWER = "no answer from the server within"
+ def cacheable(result):
+-    return result[0] != 124   # a timeout is not stored (server load can cause it)
++    # Storage and infrastructure failures depend on the server, not on the source
++    # or published-build stamp. Reject old cached error-28 results on reads too.
++    return result[0] not in (75, 124) and not any(m in result[1].lower() for m in
++        ("no space left on device", "disk quota exceeded", "[errno 28]", "error code: 28"))
+ def _runner_many(args, sources):
+     """compile_attach runner: compile the caller's snapshot as run_many does."""
+     return list(_direct_many(args["g"], args["item"], args["files"], {p: b.decode() for p, b in sources.items()}))
+@@ -74,7 +77,8 @@
+             "args": {"g": g, "item": item, "files": files}, "label": pathlib.Path(files[0]).name,
+             "fail_result": [2, "compile tool fault: the compile runner stopped without a result (see ~/weil-launcher/compile-attach.log)"],
+             "alive_paths": [str(pathlib.Path(files[0]).parent)]}
+-    r = CA.attach("s", task, content, CA.digest(CA.published_stamp()), spec, snap, prio=prio)
++    r = CA.attach("s", task, content, CA.digest(CA.published_stamp()), spec, snap,
++                  valid=cacheable, prio=prio)
+     if isinstance(r, dict) and r.get("superseded"):
+         return 3, ("NOT compiled: a newer version of these files was sent to compile while this request waited; this request "
+                    "was withdrawn (one request per file at a time). Run the command again for the result of the current version.")

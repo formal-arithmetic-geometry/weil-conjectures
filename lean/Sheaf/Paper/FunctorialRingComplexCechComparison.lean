@@ -9,10 +9,9 @@ public import Sheaf.Paper.FunctorialRingComplexSheaf
 public import Sheaf.Paper.RingComplexGodementConstruction
 public import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Paper.RingComplexGodementCech
-import Sheaf.Paper.RingComplexCechBaseChange
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.RingedExtendedCech
-import Sheaf.Paper.RingComplexSemilinearExtension
+import Sheaf.Paper.GlobalSectionRingFamilyBaseChange
+import Sheaf.Paper.GlobalSectionScalarCechModel
 
 /-!
 # The derived Čech comparison for a sheafified Godement ring model
@@ -74,6 +73,33 @@ theorem ringFamilySheafModel_cech
           (ringFamilySheafModel O (fun A I ↦ ringComplexGodement A I.val)
             (fun A I ↦ ringComplexGodementAugmentation A I.val) m hm r f).2 =
         DerivedCategory.Q.map (ringedExtendedCech O r f).2 := by
-  sorry
+  let A := ringFamilyGlobalRing O
+  let I := ringFamilyGlobalIdeal O r f
+  let K : RingComplexFamily.{u} := fun A I ↦ ringComplexGodement A I.val
+  let ε : RingComplexAugmentations K := fun A I ↦ ringComplexGodementAugmentation A I.val
+  let inst (B : CommRingCat.{u}) : HasDerivedCategory (RingSiteModules B) :=
+    HasDerivedCategory.standard _
+  have hK (B : CommRingCat.{u}) (L : {I : Ideal B // I.FG}) :
+      RingComplexHasCechModel B L.val (K B L) (ε B L) :=
+    ringComplex_godement_cech B L
+  obtain ⟨P, p, hflat, _, hp, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (K A I)
+  have hP : RingComplexHasCechModel A I.val P (p ≫ ε A I) :=
+    ringComplexHasCechModel_of_quasiIso (ε A I) p hp (hK A I)
+  let q := ringFamilyGlobalComparison O K ε m hm r f P p
+  obtain ⟨hq, haug⟩ :=
+    ringFamilyGlobalExtension_to_family O K ε m hm hK r f P p hp hflat
+  obtain ⟨e, he⟩ := ringFamilyGlobalExtension_cech O r f P (p ≫ ε A I) hflat hP
+  let : QuasiIso q := hq
+  refine ⟨e ≪≫ asIso (DerivedCategory.Q.map q), ?_⟩
+  calc
+    (e ≪≫ asIso (DerivedCategory.Q.map q)).hom ≫
+        DerivedCategory.Q.map (ringFamilySheafModel O K ε m hm r f).2 =
+        e.hom ≫ DerivedCategory.Q.map
+          (q ≫ (ringFamilySheafModel O K ε m hm r f).2) := by
+      simp only [Iso.trans_hom, asIso_hom, Functor.map_comp, Category.assoc]
+    _ = e.hom ≫ DerivedCategory.Q.map
+        (ringFamilyGlobalExtensionAugmentation O (p ≫ ε A I)) := by rw [haug]
+    _ = DerivedCategory.Q.map (ringedExtendedCech O r f).2 := he
 
 end CategoryTheory

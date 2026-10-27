@@ -20,8 +20,8 @@ Rules (the human, 2026-10-20):
   2. A rework item is OPEN when none of the modules it imports, transitively (its imports read from the quarantined
      copy, the library's from lean/), is itself a rework item: rework proceeds bottom-up, deepest first.
   3. A worker fixes it in its sandbox against the last green build and restores it to its original path (a copy of
-     the quarantined file, made to compile; upstream files come back verbatim, the fix goes into our own modules
-     unless the module is listed in coord/upstream-statement-exceptions.tsv). It lands through the normal landing and
+     the quarantined file, made to compile; since 2026-10-23 an upstream file may be repaired in place too, with
+     its statements unchanged (tools/stage3_gate.py), as syncs merge instead of overwriting). It lands through the normal landing and
      merge queue; tools/batch_land.py puts its import lines back into the root files (roots_to_restore) in the same
      landing. When a green build has verified it (the file is at its original path in refs/heads/sheaf-verified and
      the roots there import it), `reconcile` (run by ~/cc1/buildloop.sh after every green build) deletes the
@@ -276,7 +276,11 @@ def blocked(g=None, imports=None, rows=None) -> tuple[set[str], set[str], dict[s
         g = dag_queue.Dag(dag_queue.load())
     if imports is None:
         _, imports = li.scan()
-    R = set(rows)
+    # 2026-10-24: only modules still in quarantine block; a row stays until the next verifying build reconciles it, and
+    # with 3200 rows of modules already back in the library 796 stage-3 items were wrongly held as "blocked by rework"
+    R = {m for m in rows if not landed(m)}
+    if not R:
+        return set(), set(), {}
     why: dict[str, str] = {}
     # module level: reverse imports from the rework modules
     rev = collections.defaultdict(set)
@@ -744,11 +748,20 @@ def cluster_set(rows=None) -> tuple[list[str], set[str]]:
     def blob(m):
         p = ROOT / (rows[m].get("quarantine") or qpath(m))
         return hashlib.sha1(p.read_bytes()).hexdigest() if p.is_file() else None
-    seeds = {m for m in live if (rows[m].get("cause") or "").startswith("error:")
+    # 2026-10-25: a batch-check finding of the build (overtime: "<module> took N s in the global build and does not
+    # compile alone within 60 s ...") is an error root too; its cause carries no `error:` prefix, so the restore put
+    # TensorHomExchange back unchanged after every red build and the next build failed on it again.
+    def error_root(c: str) -> bool:
+        return c.startswith("error:") or "does not compile alone within" in c
+    seeds = {m for m in live if error_root(rows[m].get("cause") or "")
              and tried.get(m) == blob(m) and not stale_cause(m, rows)}
     bad = set(seeds)
     for m in live:     # a project import that is nowhere (neither in lean/ nor quarantined)
-        if any(i.startswith(PROJECT_PREFIXES) and i not in live and not li.file_of(i).is_file() for i in allimp[m] - {m}):
+        # 2026-10-25: the comparator modules (Weil.*) live in lean/Comparator/, not at li.file_of; Weil.Definitions was
+        # taken as missing and kept WeilConjectures.Statement (imported by the lakefile root Weil.Solution) out
+        if any(i.startswith(PROJECT_PREFIXES) and i not in live and not li.file_of(i).is_file()
+               and not (li.LEAN / "Comparator" / pathlib.Path(*i.split(".")).with_suffix(".lean")).is_file()
+               for i in allimp[m] - {m}):
             bad.add(m)
     rev = collections.defaultdict(set)
     for m in live:
@@ -816,11 +829,27 @@ def _drop_mine(ids: list[str], reason: str) -> list[dict]:
             else:
                 f.parent.mkdir(parents=True, exist_ok=True); f.write_bytes(data)
             paths.append("lean/" + rel)
+        # 2026-10-26: the library modules whose imports reach a removed module leave with it, same commit
+        # (tools/red_rework.py take_out_importers; left behind they fail the next build with "bad import")
+        moved_prev, extra = None, ""
+        try:
+            import red_rework
+            r = red_rework.take_out_importers(f"importers of the modules removed by the cluster restore take-out")
+            if r is not None:
+                paths += [p for p in r[0] if p not in paths]; moved_prev = r[2]
+                extra = f"; {len(r[1])} importer(s) of removed modules moved to quarantine/ as rework"
+        except Exception as exc:  # noqa: BLE001
+            print(f"{time.strftime('%F %T')} cluster restore take-out: importer take-out failed ({exc!r})"[:400], flush=True)
         for i in range(0, len(paths), 400):
             git("add", "-A", "--", *paths[i:i + 400])
         git("-c", "user.name=Bin Wu", "-c", "user.email=844524296@qq.com", "commit", "-q", "-m",
-            f"rework cluster restore: {len(dropped)} landing(s) taken out of the candidate ({reason[:200]})"
+            f"rework cluster restore: {len(dropped)} landing(s) taken out of the candidate ({reason[:200]}){extra}"
             "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>", "--", *paths, check=False)
+        if moved_prev:
+            try:
+                red_rework._record(moved_prev, "red build rework: importers of modules removed by the cluster restore take-out")
+            except Exception as exc:  # noqa: BLE001
+                print(f"cluster restore take-out: landing record failed ({exc!r})"[:300], flush=True)
         ld.drop_close(dropped, reason)
     return dropped
 

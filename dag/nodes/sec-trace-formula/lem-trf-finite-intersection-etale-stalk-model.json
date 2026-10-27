@@ -1,0 +1,319 @@
+{
+ "id": "lem-trf-finite-intersection-etale-stalk-model",
+ "kind": "statement",
+ "title": "Finite closed intersections and their étale stalk models",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $n\\geq0$, and let $D_j\\hookrightarrow X$ be closed immersions [def-weil-closed-immersion] for $0\\leq j<n$. For $J\\subseteq\\{0,\\ldots,n-1\\}$ set $Z=\\mathop{\\times}_{j\\in J,X}D_j$ [def-pc-fibre-product], with $Z=X$ if $J=\\varnothing$. Then the canonical morphism $i:Z\\to X$ is a closed immersion and $Z$ is locally Noetherian. On every affine open $U=\\operatorname{Spec}A'\\subseteq X$ [def-weil-affine-spectrum], if $D_j\\times_XU=\\operatorname{Spec}(A'/I'_j)$, then $Z\\times_XU=\\operatorname{Spec}(A'/\\sum_{j\\in J}I'_j)$ over $U$. For $z\\in Z$, put $x=i(z)$, choose such an affine open $U=\\operatorname{Spec}A'\\ni x$, and put $A=\\mathcal O_{X,x}$ and $I=(\\sum_{j\\in J}I'_j)A$ (the image of the ideal of $Z$ in $A$, independent of $U$), so $\\mathcal O_{Z,z}=A/I$ [def-weil-pbc-module-stalk]. For every étale $v:W\\to X$ [def-weil-etale-morphism] and $w\\in W$ with $v(w)=x$, put $B=\\mathcal O_{W,w}$. Then $B$ is a Noetherian local ring, $Z\\times_X\\operatorname{Spec}B\\cong\\operatorname{Spec}(B/IB)$ over $\\operatorname{Spec}B$, and $B/IB$ is a nonzero Noetherian local ring. There is a unique point $\\widetilde w\\in Z\\times_XW$ over $w$; its local ring is $B/IB$, and the stalk map $\\mathcal O_{Z,z}\\to\\mathcal O_{Z\\times_XW,\\widetilde w}$ identifies with the natural flat local homomorphism $A/I\\to B/IB$ [def-weil-flat-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01QO (lemma-closed-immersion), 02GO (lemma-base-change-etale), 01T6 (lemma-finite-type-noetherian); schemes.tex Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JU (lemma-fibre-product-immersion), applied to a finite family and localized at its points"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-stalk",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Work over an arbitrary affine open $U=\\operatorname{Spec}R$ of $X$. Restriction of fibre products to these opens is the open-fibre-product identification. Enumerate $J$ and induct on the number of factors, with coordinate ring $R/L$ where $L$ is the sum of the ideals already used. The empty product is $U$, with $L=0$. Adding $D_j$ gives $\\operatorname{Spec}((R/L)\\otimes_R(R/I'_j))$. Apply the tensor-quotient formula with $B=R/L$: its ring is $(R/L)/(I'_j(R/L))=R/(L+I'_j)$. The last equality follows directly: the inverse image of $I'_j(R/L)$ consists of $L+I'_j$, and both quotient maps send $r$ to its class. Thus all identifications respect the maps from $R$ and the projections. This proves the asserted affine formula for every $U$. The affine characterization of closed immersions now gives that $i$ is closed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes); Morphisms Tag 01QO; Algebra quotient calculation"
+   }
+  },
+  {
+   "text": "Choose the affine cover $U_a=\\operatorname{Spec}R_a$ of $X$ with $R_a$ Noetherian supplied by local Noetherianity. The preceding step gives an affine cover of $Z$ by quotient rings of the $R_a$; a quotient is a finite-type algebra (zero polynomial variables), so the finite-type Noetherian theorem makes all these rings Noetherian. Hence $Z$ is locally Noetherian. Also $v$ is unramified, and the definition of unramified includes locally of finite type. Over each $U_a$, the definition of locally of finite type supplies an affine cover of $v^{-1}U_a$ by spectra of finite-type $R_a$-algebras $C$. These $C$ are Noetherian by the same theorem. Choose such a chart containing $w$; the affine-stalk identification gives $B=C_{\\mathfrak q}$, which is Noetherian by localization. It is a local ring because it is a scheme stalk. This argument uses the chosen Noetherian cover, not an unproved assertion about every affine open.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian), proof; Algebra Tag 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "Fix $z$, $x=i(z)$ and an arbitrary affine neighbourhood $U=\\operatorname{Spec}R$ of $x$ as in the statement. Write $K=\\sum_{j\\in J}I'_j$ and let $\\mathfrak p$ be the prime of $x$. Since $z$ corresponds to a prime of $R/K$, $K\\subseteq\\mathfrak p$. The affine-stalk and quotient-localization identifications give $A=R_{\\mathfrak p}$ and $\\mathcal O_{Z,z}=R_{\\mathfrak p}/KR_{\\mathfrak p}=A/I$. Their maps are the actual stalk maps: on fractions the map sends $r/s$ to $\\bar r/\\bar s$. Its kernel is therefore $I=KR_{\\mathfrak p}$. In particular $I$ is independent of the affine neighbourhood, being the kernel of $i_z^\\sharp$. The ideal sheaf of $i$ restricts on this chart to $\\widetilde K$, and the associated-module stalk-localization theorem identifies its stalk with $K_{\\mathfrak p}$, whose image in $R_{\\mathfrak p}$ is $KR_{\\mathfrak p}=I$. Also $I\\subseteq\\mathfrak m_A$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT (proposition-localize-quotient); Schemes Tags 01HV (lemma-spec-sheaves), 01I1 (lemma-morphism-into-affine); Morphisms Tag 01QO"
+   }
+  },
+  {
+   "text": "Let $\\varphi:A\\to B$ be the stalk map of $v$ at $w$. It is local by the definition of a scheme morphism, hence $IB\\subseteq\\mathfrak m_B$, since $I\\subseteq\\mathfrak m_A$. The quotient-local-structure theorem gives that $B/IB$ is nonzero and local. It is Noetherian by the finite-type Noetherian theorem, applied to the quotient of the Noetherian ring $B$. The structural map $\\operatorname{Spec}B\\to X$ factors through $U$ with ring map $R\\to A\\to B$. The affine fibre-product and tensor-quotient formulas yield $Z\\times_X\\operatorname{Spec}B=\\operatorname{Spec}(B/KB)=\\operatorname{Spec}(B/IB)$ over $\\operatorname{Spec}B$: extending $K$ through its localization $I$ generates the same ideal in $B$, since the denominators in $R\\setminus\\mathfrak p$ map to units in $B$. Reassociation of these pullbacks follows from their universal property.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes); Algebra Tags 00CT, 00FN, 00E9 (lemma-characterize-local-ring), 07BJ (lemma-characterize-local-ring-map)"
+   }
+  },
+  {
+   "text": "For the point and stalk assertions choose an affine neighbourhood $V=\\operatorname{Spec}C\\subseteq v^{-1}U$ of $w$, with prime $\\mathfrak q$ and ring map $\\psi:R\\to C$. On this open the pullback $P=Z\\times_XW$ is $\\operatorname{Spec}(C/KC)$, by the same two affine formulas. The inverse image of $\\mathfrak q$ is $\\mathfrak p$, so $KC\\subseteq\\mathfrak q$. There is exactly one prime of $C/KC$ contracting to $\\mathfrak q$, namely $\\mathfrak q/KC$: an ideal of a quotient is determined by its inverse image. Thus exactly one point $\\widetilde w$ of $P$ lies over $w$, since any such point lies in this open. Its local ring is $(C/KC)_{\\mathfrak q/KC}=C_{\\mathfrak q}/KC_{\\mathfrak q}=B/IB$ by quotient-localization. This also identifies the local quotient map with the stalk map from $W$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR, 01I4, 01HV, 01I1; Algebra Tag 00CT (proposition-localize-quotient)"
+   }
+  },
+  {
+   "text": "The projection $P\\to Z$ is the base change of the etale map $v$, hence etale. By the definitions of etale and flat morphisms its stalk map at $\\widetilde w$ is flat and local. The affine projection formulas and the formula for stalk maps of spectrum morphisms identify it explicitly: for $r\\in R$ and $s\\notin\\mathfrak p$ it sends $\\bar r/\\bar s$ in $(R/K)_{\\mathfrak p/K}=A/I$ to $\\overline{\\psi(r)}/\\overline{\\psi(s)}$ in $(C/KC)_{\\mathfrak q/KC}=B/IB$. These fractions exhaust the source; thus it is exactly the quotient map induced by $\\varphi$, with no choice of a different algebra structure. This proves the final assertion. When $J$ is empty all sums and extended ideals are zero, $Z=X$, $P=W$, and these formulas reduce to $A\\to B$; if $Z$ is empty the assertions quantified over $z$ are vacuous.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO (lemma-base-change-etale); Schemes Tags 01I4, 01HV, 01I1; Algebra Tag 00CT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Assembly of Tags 01I4, 01JR, 01HV with Morphisms 01QO, 01T6, 02GO and Algebra 00CT, 00FN; finite-family induction and explicit fraction formulas supplied by Q02"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite scheme-theoretic intersection of closed subschemes is closed, locally Noetherian, with local ring the quotient by the sum of the defining ideals; after etale base change its stalk is the extended-ideal quotient and the induced local map is flat.",
+   "results": "Hits: AlgebraicGeometry.Scheme.IdealSheafData.ideal_iInf, AlgebraicGeometry.Scheme.IdealSheafData.ideal_biInf, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.Scheme.zeroLocus_biInf, AlgebraicGeometry.Scheme.zeroLocus_iInf, AlgebraicGeometry.Scheme.zeroLocus_iInf_of_nonempty, AlgebraicGeometry.Scheme.zeroLocus_biInf_of_nonempty, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine Read the relevant source; these are component tools or definitions, not the stated multi-clause comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Etale",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*stalk|stalk.*quotient|[Ii]sClosedImmersion.*[Pp]ullback",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean Read the relevant source; these are component tools or definitions, not the stated multi-clause comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite intersection of closed immersions, quotient local rings by sums of ideals, and flat local stalk maps after etale base change",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For closed subschemes D_j of a locally Noetherian scheme X, identify the stalk of their fibre product at x and its pullback to Spec O_W,w as O_X,x / sum I_j and O_W,w / (sum I_j) O_W,w.",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.Pullback.SpecTensorTo_SpecOfPoint, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField Read the relevant source; these are component tools or definitions, not the stated multi-clause comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "intersection.*stalk|stalk.*quotient|IsClosedImmersion.*pullback",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean Read relevant source; component facts only, not the entire multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite closed intersections have quotient stalk rings and etale pullback induces flat local homomorphisms on these quotients",
+   "results": "Hits: AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo', AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, AlgebraicGeometry.Flat.iff_flat_stalkMap, RingHom.Etale, AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap Read relevant source; component facts only, not the entire multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Etale",
+   "results": "No hits. Read relevant source; component facts only, not the entire multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite intersections of closed subschemes of a locally Noetherian scheme have quotient local rings by sums of ideals, and etale pullback gives flat local quotient maps",
+   "results": "Hits: AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, Algebra.isOpen_etaleLocus, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus Read relevant source; component facts only, not the entire multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of finitely many closed subschemes has affine coordinate ring the quotient by the sum of their ideals, with local rings after etale base change given by the extended ideal quotient",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback, AlgebraicGeometry.specTargetImage, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.Hom.liftQuotient, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint Read relevant source; component facts only, not the entire multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocallyNoetherian_iff|isNoetherianRing_of_isAffine|isNoetherianRing.*Γ|isNoetherianRing.*app|isNoetherianRing.*affine|IsLocallyNoetherian",
+   "results": "Hits: 21, 29, 32, 57, 59 Read relevant source; affine Noetherian criterion matches a possible auxiliary fact, but it is not needed or added; it does not state the multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme is locally Noetherian if and only if every affine open has Noetherian coordinate ring",
+   "results": "Hits: AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.IsLocallyNoetherian.mk, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian.rec, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian Read relevant source; affine Noetherian criterion matches a possible auxiliary fact, but it is not needed or added; it does not state the multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocallyNoetherian",
+   "results": "Hits: AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace Read relevant source; affine Noetherian criterion matches a possible auxiliary fact, but it is not needed or added; it does not state the multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme is locally Noetherian if and only if the ring of sections on each affine open is a Noetherian ring",
+   "results": "Hits: AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top Read relevant source; affine Noetherian criterion matches a possible auxiliary fact, but it is not needed or added; it does not state the multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "component_noetherian|isLocallyNoetherian_iff_of_affine_openCover|isLocallyNoetherian_of_affine_cover",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean Read relevant source; affine Noetherian criterion matches a possible auxiliary fact, but it is not needed or added; it does not state the multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherianity of all affine section rings follows from one affine open cover with Noetherian coordinate rings",
+   "results": "Hits: AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top, AlgebraicGeometry.IsLocallyNoetherian.component_noetherian, AlgebraicGeometry.noetherianSpace_of_isAffineOpen, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian Read relevant source; affine Noetherian criterion matches a possible auxiliary fact, but it is not needed or added; it does not state the multi-clause item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-regular-intersection-descent",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof, contracting-local-terms paragraph: specialization to the normal cone (Varshavsky §§1.3–1.4 and 2.1); the inherited geometric refinement branch, through permissible-boundary preservation, uses the local strict-normal-crossings intersection criterion (Gabber VIII, Lemma 4.2.9). Finite intersection, quotient by the sum of ideals, and the local quotient after étale base change; old steps 1–2 of the item.",
+   "via": [
+    "lem-trf-etale-regular-intersection-descent",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-intersection-etale-stalk-model",
+  "worker": "stage1",
+  "summary": "Q02 checked attachment candidates and Stacks sources, supplied a finite-family affine induction, proved Noetherianity using a chosen Noetherian cover, and computed the actual quotient stalk maps by fractions. All tools already have DAG nodes; no new nodes or statement change.",
+  "blueprint": "Realizes the inherited refinement branch of lem-trf-local-term-locality, contracting-correspondence proof paragraphs citing specialization to the normal cone, through lem-trf-etale-regular-intersection-descent: finite-intersection local models used in its old steps 1–2. Current latest blueprint proof and unit read; no replacement of the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-1426c8cd1",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-1426c8cd1 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the statement of every cited node; there are no new nodes, and I made no changes. The item statement is byte-identical to the live and side-live clones, which still show the item as unsplit. There is no repair note, nothing cites SGA, and tool_uses is empty. Sources checked: Stacks 01QO (morphisms.tex:58, criterion (2) matches the closed-immersion definition's 'Equivalently' clause), 01JU (schemes.tex:3330), and tags 01T6, 02GO, 01I4, 01JR, 00CT, 00FN. Step 1: the induction over J has a base (L=0) and an inductive step. The step uses the open-fibre-product lemma (open image p^-1V∩q^-1W), the affine fibre product, and the tensor-quotient lemma with B=R/L, which gives R/(L+I'_j); closedness then follows from 01QO(2). Step 2: Noetherianity of Z comes from the chosen Noetherian cover of the cover-form definition pqf-def-locnoeth, whose Lean record proves the equivalence with Mathlib's class; quotients are handled by the finite-type lemma with n=0. For B: étale gives unramified, which gives locally of finite type, so B is the localization C_q of a finitely generated algebra; this uses the affine-stalk lemma (c) and the localization-Noetherian lemma. Step 3: I = ker of the stalk map R_p -> (R/K)_{p/K}, computed by the quotient-localization and Spec-stalk-map lemmas; this makes I independent of U, and K ⊆ p gives I ⊆ m_A. Step 4: the stalk map of v is local, so IB ⊆ m_B, and the quotient-local-structure lemma gives a nonzero local Noetherian B/IB. Spec B factors through v^-1U, so the pullback is Spec(B/KB), and KB = IB. Step 5: on V = Spec C the pullback is Spec(C/KC) with KC ⊆ q, so q/KC is the unique prime over q. Every point over w lies in this open, so the point is globally unique, and its local ring is C_q/KC_q = B/IB. Step 6: the projection is étale by base-change lemma 02GO, hence flat and local, and the explicit fraction formula shows it is the map induced by φ. Edge cases I tested: J empty, repeated indices, disjoint D_j (z-clauses vacuous) and nilpotent ideals; all are consistent. Every cited node is a definition or a mathlib-status lemma, so there is no route issue and no duplicate concern."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteIntersectionEtaleStalkModel",
+  "declaration": "AlgebraicGeometry.finiteIntersection_etale_stalk_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteIntersectionEtaleStalkModel.lean",
+  "statement": "theorem finiteIntersection_etale_stalk_model {X : Scheme.{u}} [IsLocallyNoetherian X] {n : ℕ} (D : Fin n → Scheme.{u}) (i : (j : Fin n) → D j ⟶ X) (hclosed : ∀ j : Fin n, IsClosedImmersion (i j)) (J : Finset (Fin n)) (c : WidePullbackCone (fun j : J ↦ i j.val)) (hc : IsLimit c) : IsClosedImmersion c.base ∧ IsLocallyNoetherian c.pt ∧ (∀ (U : X.Opens) (hU : IsAffineOpen U), ∃ e : pullback c.base hU.fromSpec ≅ Spec (.of (Γ(X, U) ⧸ (⨆ j : J, (i j.val).ker.ideal ⟨U, hU⟩))), e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)) = pullback.snd c.base hU.fromSpec) ∧ (∀ (z : c.pt) (U : X.Opens) (hU : IsAffineOpen U) (hx : c.base z ∈ U) (K : Ideal Γ(X, U)) (hK : K = ⨆ j : J, (i j.val).ker.ideal ⟨U, hU⟩) (I : Ideal (X.presheaf.stalk (c.base z))) (hI : I = K.map (X.presheaf.germ U (c.base z) hx).hom), I = RingHom.ker (c.base.stalkMap z).hom ∧ ∃ eA : (X.presheaf.stalk (c.base z) ⧸ I) ≃+* c.pt.presheaf.stalk z, (∀ a : X.presheaf.stalk (c.base z), eA (Ideal.Quotient.mk I a) = (c.base.stalkMap z).hom a) ∧ ∀ (W : Scheme.{u}) (v : W ⟶ X), Etale v → ∀ (w : W) (hw : v w = c.base z) (φ : X.presheaf.stalk (c.base z) →+* W.presheaf.stalk w) (hφ : φ = (v.stalkMap w).hom.comp (X.presheaf.stalkCongr (.of_eq hw)).inv.hom) (IB : Ideal (W.presheaf.stalk w)) (hIB : IB = I.map φ), IsNoetherianRing (W.presheaf.stalk w) ∧ IsLocalRing (W.presheaf.stalk w) ∧ Nontrivial (W.presheaf.stalk w ⧸ IB) ∧ IsNoetherianRing (W.presheaf.stalk w ⧸ IB) ∧ IsLocalRing (W.presheaf.stalk w ⧸ IB) ∧ (∃ e : pullback c.base (W.fromSpecStalk w ≫ v) ≅ Spec (.of (W.presheaf.stalk w ⧸ IB)), e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk IB)) = pullback.snd c.base (W.fromSpecStalk w ≫ v)) ∧ ∃ (p : (pullback c.base v : Scheme.{u})) (hp : pullback.snd c.base v p = w), (∀ p' : (pullback c.base v : Scheme.{u}), pullback.snd c.base v p' = w → p' = p) ∧ ∃ (hz : pullback.fst c.base v p = z) (eB : (W.presheaf.stalk w ⧸ IB) ≃+* (pullback c.base v).presheaf.stalk p), (∀ b : W.presheaf.stalk w, eB (Ideal.Quotient.mk IB b) = ((pullback.snd c.base v).stalkMap p).hom ((W.presheaf.stalkCongr (.of_eq hp)).inv.hom b)) ∧ ∃ q : (X.presheaf.stalk (c.base z) ⧸ I) →+* (W.presheaf.stalk w ⧸ IB), q.Flat ∧ IsLocalHom q ∧ (∀ a : X.presheaf.stalk (c.base z), q (Ideal.Quotient.mk I a) = Ideal.Quotient.mk IB (φ a)) ∧ (∀ a : X.presheaf.stalk (c.base z) ⧸ I, eB (q a) = ((pullback.fst c.base v).stalkMap p).hom ((c.pt.presheaf.stalkCongr (.of_eq hz)).inv.hom (eA a))))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6621e63c8",
+  "group": "N6",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Z is any limit of the finite wide pullback (J empty gives X); closed immersion and locally Noetherian; affine model Spec(Γ(X,U)/⨆ ker ideals) over U, where Hom.ker_apply makes these ideals the presentation ideals; I = kernel of the stalk map of Z at z (so independent of U); eA, eB and q are fixed by formulas on classes; B and B/IB Noetherian and local, B/IB nonzero; Z×_X Spec B ≅ Spec(B/IB) over Spec B; exactly one point over w; flat local q with the square commuting through the actual stalk maps of the projections. Edge cases checked: n=0 or J empty, Z or its trace on U empty, zero affine rings, one universe u. Recorded statement equals the file signature; proof is sorry; docstrings and blueprint id present; node changes only its lean field compared with side-live; no new node, dependency module or duplicate. Second reading is by the same worker but goes through the clauses. Advisory: public import of PresheafModuleStalkFunctor unused in the signature; the descent citer will need a lemma that its iterated pullback is a limit of this wide pullback. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,407 @@
+{
+ "id": "lem-sfb-relative-quasiaffine-group-envelope",
+ "kind": "statement",
+ "title": "Relative affine envelope of a quasi-affine homomorphism of flat groups",
+ "statement": "Let $B$ be a Noetherian integrally closed domain of Krull dimension at most one, let $K=\\operatorname{Frac}B$, and put $S=\\operatorname{Spec}B$ [def-weil-affine-spectrum]. Fields are allowed. Let $G$ and $J$ be flat separated group schemes of finite type over $S$ [def-weil-flat-morphism, def-weil-finite-type-morphism]. A group scheme has multiplication, inverse and identity over $S$ satisfying the group diagrams; separated means its diagonal is a closed immersion. Let $f:G\\to J$ be an $S$-group homomorphism which is quasi-affine [def-nagata-quasi-affine-morphism], meaning that each inverse image of an affine open is a quasi-compact open subscheme of an affine scheme. Set $\\mathcal A=f_*\\mathcal O_G$, so $\\mathcal A(W)=\\Gamma(f^{-1}W,\\mathcal O_G)$ with its induced $\\mathcal O_J$-algebra structure. This is a quasi-coherent algebra [pqf-def-coherent]. Form $q:H=\\underline{\\operatorname{Spec}}_J\\mathcal A\\to J$ by [lem-weil-pbc-affine-morphism-relative-spec], and let $j:G\\to H$ be the canonical $J$-morphism: on every affine open $W\\subseteq J$, $q^{-1}W=\\operatorname{Spec}\\Gamma(f^{-1}W,\\mathcal O_G)$ and $j$ corresponds to the identity of this ring [lem-weil-pbc-morphism-into-affine-scheme]. Then $H$ admits an $S$-group-scheme structure for which $j$ and $q$ are homomorphisms and $qj=f$. The map $q$ is affine [pqf-def-affine-morphism], and $j$ is a quasi-compact open immersion [def-weil-open-immersion]. Writing $H_K=H\\times_S\\operatorname{Spec}K$, $G_K=G\\times_S\\operatorname{Spec}K$ and $j_K:G_K\\to H_K$ [def-pc-base-change], the canonical sheaf homomorphism $\\mathcal O_{H_K}\\to(j_K)_*\\mathcal O_{G_K}$ is an isomorphism. No finite generation of $\\mathcal A(W)$ and no finite-type assertion for $H$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SM (lemma-characterize-quasi-affine), canonical relative-spectrum factorization (4). The extension of the group operations and the generic sheaf comparison are agent-written consequences of flat base change and torsion-free flatness over a Dedekind domain, not assertions quoted from this lemma; the construction and precise supporting source labels are recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-nagata-quasi-affine-morphism",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-open-immersion",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type separated structure maps $G\\to S$ and $J\\to S$ have quasi-compact quasi-separated sources, since $S$ is affine. Consequently $f:G\\to J$ is quasi-compact and quasi-separated by qcqs morphism permanence (source $G$ quasi-compact and target $J$ quasi-separated for quasi-compactness; source $G$ quasi-separated for quasi-separatedness). Apply the canonical relative-affinization map theorem to $f$. It supplies precisely the algebra $\\mathcal A$, the affine morphism $q:H\\to J$, and the canonical $j:G\\to H$ in the statement, with $qj=f$ and the asserted identity-on-sections description on every affine open $W\\subseteq J$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-qcqs-relative-affinization-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LY, lemma-canonical-morphism; qcqs hypotheses as verified in the text"
+   }
+  },
+  {
+   "text": "For every affine open $W\\subseteq J$, the scheme $G_W=f^{-1}W$ is quasi-affine by hypothesis. The chart $H_W=q^{-1}W=\\operatorname{Spec}\\Gamma(G_W,\\mathcal O)$ identifies $j|_{G_W}$ with its canonical map to the spectrum of global functions. The canonical-affine-charts criterion therefore makes $j$ a quasi-compact open immersion. An open immersion is separated, and a separated morphism is quasi-separated; thus $j$ is also quasi-separated, as required in the subsequent applications of flat base change and the local function comparison.",
+   "uses": [
+    "lem-trf-canonical-affine-charts-qc-open-immersion",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4)"
+   }
+  },
+  {
+   "text": "In fact the canonical unit $\\beta:\\mathcal O_H\\to j_*\\mathcal O_G$ is an isomorphism before passing to the generic fibre. Apply the qcqs functions local comparison to $j$. On the affine open $H_W=\\operatorname{Spec}A_W$, where $A_W=\\Gamma(G_W,\\mathcal O)$, the coefficient map $A_W\\to\\Gamma(G_W,\\mathcal O)$ is the identity by construction. Its localization at every prime is still the identity. The cited comparison identifies these localized coefficient maps with the stalks of $\\beta$, hence makes $\\beta$ an isomorphism on $H_W$. These opens cover $H$, so the same comparison gives that $\\beta$ is an isomorphism on $H$. In particular restriction gives compatible ring isomorphisms $\\Gamma(V,\\mathcal O_H)\\simeq\\Gamma(j^{-1}V,\\mathcal O_G)$ for every open $V\\subseteq H$.",
+   "uses": [
+    "lem-sfb-qcqs-functions-local-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, i=0 and localization, applied through the cited local comparison"
+   }
+  },
+  {
+   "text": "The scheme $H$ is flat over $S$. Indeed each open $G_W\\subseteq G$ is flat over $S$: its local rings and structure maps are the same as those of $G$ at its points. The module $\\mathcal O_{G_W}$ is invertible, with basis $1$. The torsion-free-sections theorem therefore makes $A_W=\\Gamma(G_W,\\mathcal O)$ torsion-free over the domain $B$. The Dedekind torsion-free-flat theorem applies to the stated Noetherian integrally closed $B$ of dimension at most one, including the field case, without requiring $A_W$ to be finitely generated. Thus $B\\to A_W$ is flat, and the affine flatness equivalence makes $H_W\\to S$ flat. Since these opens cover $H$, the local-ring definition of flatness gives flatness of $H\\to S$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sc-invertible-module",
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "lem-sfb-dedekind-torsionfree-module-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat (1); torsion-freeness as in lemma-flat-torsion-free"
+   }
+  },
+  {
+   "text": "Flat base change in degree zero preserves the unit isomorphism of step 3: for any flat $t:T\\to H$, its pullback is the canonical isomorphism $\\mathcal O_T\\simeq (j_T)_*\\mathcal O_{G\\times_HT}$. Here $j$ is qcqs by step 2 and the pullback of the structure sheaf is the structure sheaf. Apply this first along $\\operatorname{pr}_1:H\\times_SH\\to H$, flat because $H\\to S$ is flat, to obtain the unit isomorphism for $G\\times_SH\\to H\\times_SH$. Next apply it along $\\operatorname{pr}_2:G\\times_SH\\to H$, flat because $G\\to S$ is flat, to obtain the unit isomorphism for $G\\times_SG\\to G\\times_SH$. Composing the two direct images gives $\\mathcal O_{H^2}\\simeq(j^2)_*\\mathcal O_{G^2}$, where powers mean fibre powers over $S$. Repeating the same replacements one factor at a time gives $\\mathcal O_{H^3}\\simeq(j^3)_*\\mathcal O_{G^3}$. Each projection used is a composite of base changes of the flat maps $G\\to S$ or $H\\to S$, hence flat: on local rings composition is composition of flat maps. The base-changed maps remain qcqs by permanence, so every base-change application satisfies its hypotheses. All these isomorphisms are the canonical restriction maps.",
+   "uses": [
+    "lem-pc-flat-base-change-cohom",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology (1), i=0; two and three successive flat base changes"
+   }
+  },
+  {
+   "text": "We spell out how the preceding ring isomorphisms extend maps into $H$ over a prescribed map to $J$. Put $v=j^n:G^n\\to H^n$, for $n=1,2,3$, and fix $a:H^n\\to J$. Given $b:G^n\\to H$ with $qb=av$, take an affine open $W\\subseteq J$ and put $V=a^{-1}W$. The ring map defining $b:v^{-1}V\\to H_W$ extends uniquely along $\\Gamma(V,\\mathcal O)\\simeq\\Gamma(v^{-1}V,\\mathcal O)$ to a map $V\\to H_W$, by the morphisms-into-affine bijection. This extension is over $W$: the two maps to the affine $W$ have equal ring maps after the same isomorphism. For two such $W$, cover their intersection by affine opens $W'$; on $a^{-1}W'$ both extensions land in the affine $H_{W'}$ and their ring maps agree after restriction along $v$, so agree. Scheme-morphism gluing now gives a unique extension $\\bar b:H^n\\to H$ with $q\\bar b=a$. This is just affine adjunction, cancellation of the displayed ring isomorphism, and gluing; it assumes no affineness of $V$ or of intersections of opens of $J$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1, lemma-morphism-into-affine; gluing of scheme morphisms on open covers"
+   }
+  },
+  {
+   "text": "Apply step 6 for $n=2$ to $a=m_J\\circ(q\\times q)$ and $b=j\\circ m_G$. The homomorphism identity for $f$ says exactly $qb=aj^2$, so we obtain $m_H:H\\times_SH\\to H$. Apply it for $n=1$ to $a=i_Jq$ and $b=ji_G$ to obtain $i_H:H\\to H$. Set $e_H=je_G:S\\to H$. These definitions give $m_Hj^2=jm_G$, $i_Hj=ji_G$, $qe_H=e_J$, $qm_H=m_J(q\\times q)$ and $qi_H=i_Jq$; thus the proposed operations already respect $j$ and $q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent assembly of the group operations from the canonical factorization; affine adjunction as in step 6"
+   }
+  },
+  {
+   "text": "The two associativity composites $H^3\\to H$ lie over the same map $J^3\\to J$, composed with $q^3$, because $J$ is a group scheme. Their restrictions along $j^3$ agree by associativity on $G$, so uniqueness in step 6 makes them equal. The left and right unit composites on $H$ and $\\mathrm{id}_H$ lie over $q$ and agree along $j$, hence are equal by the $n=1$ case. Likewise the two inverse composites $m_H(i_H,\\mathrm{id})$ and $m_H(\\mathrm{id},i_H)$ both lie over $e_J\\circ(H\\to S)$ and restrict along $j$ to $e_H\\circ(G\\to S)$. The same uniqueness proves both inverse identities. These are all group-scheme diagrams, so the operations make $H$ an $S$-group scheme and the identities in step 7 make $j,q$ homomorphisms. No density argument for underlying points is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent verification of group diagrams using the affine-adjunction uniqueness of step 6"
+   }
+  },
+  {
+   "text": "Finally $B\\to K$ is localization at $B\\setminus\\{0\\}$: every element of $K$ is a fraction, all denominators become units, and $B$ embeds into $K$. Thus this map is flat, and $\\operatorname{Spec}K\\to S$ is flat by the affine flatness equivalence. Its base change $H_K\\to H$ is flat. Apply the degree-zero flat-base-change theorem to the qcqs map $j$ and $\\mathcal O_G$. Pulling back the unit isomorphism of step 3 yields the canonical isomorphism $\\mathcal O_{H_K}\\to(j_K)_*\\mathcal O_{G_K}$ asserted in the statement. The construction has nowhere used finite generation of the algebras $A_W$ or finite type of $H$.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology (1), i=0; localization flatness Tag 00HT (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-qcqs-relative-affinization-map",
+  "lem-trf-canonical-affine-charts-qc-open-immersion",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-qcqs-functions-local-comparison",
+  "def-weil-flat-morphism",
+  "def-sc-invertible-module",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-sfb-dedekind-torsionfree-module-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-localization-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SM canonical factorization, with agent-written extension of group operations using Tag 02KH and Tag 0AUW; no claim that 01SM states the group assertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The relative spectrum of the pushforward of the structure sheaf of a quasi affine homomorphism of flat group schemes over a Dedekind domain has a group scheme structure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine],\\n  CategoryTheory.IsPullback f X.toSpecΓ Y.toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes, and assume that $Y$ is a quasi-affine scheme. Let $\\\\text{toSpecΓ}_X: X \\\\to \\\\mathrm{Spec}(\\\\Gamma(X, \\\\mathcal{O}_X))$ and $\\\\text{toSpecΓ}_Y: Y \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) {X : AlgebraicGeometry.Scheme} [inst : X.Over S]\\n  (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.AffineSpace.homOfVector (X ↘ S) v) S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {R S : CommRingCat} (φ : R ⟶ S),\\n  AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n S).hom\\n      (CategoryTheory.CategoryStruct.comp\\n        (AlgebraicGeometry.Spec.map (CommRingCat.ofH\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ φ: R → S $, the induced morphism $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} → \\\\mathbb{A}^n_{\\\\operatorname{Spec}(R)} $ between affine s\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_SpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {R S : CommRingCat} (φ : R ⟶ S),\\n  AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n S).hom\\n      (CategoryTheory.CategoryStruct.comp\\n        (AlgebraicGeometry.Spec.map (CommRingCat.ofH\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ \\\\varphi: R \\\\to S $, and a natural number $ n $, the induced morphism between affine spaces $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: toSpecΓ is an open immersion for a quasi-affine scheme, and Hopf algebras give already affine group schemes. Neither constructs the relative group law on Spec_J(f_* O_G); the pullback square hit assumes an affine morphism already."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative affinization of a quasi affine group scheme homomorphism factors as an open immersion of groups followed by an affine homomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], AlgebraicGeometry.IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U),\\n  AlgebraicGeometry.IsOpenImmersion hU.fromSpec\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the morphism from $ \\\\operatorname{Spec}(\\\\Gamma(U)) $ to $ X $ constructed by composing the canonical isomorphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\co\"}\n  {\"name\": \"AlgebraicGeometry.isAffineOpen_opensRange\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsAffineOpen (AlgebraicGeometry.Scheme.Hom.opensRange f)\", \"doc\": \"Let $X$ and $Y$ be schemes with $X$ affine. If $f: X \\\\to Y$ is an open immersion, then the image of $f$ forms an affine open subset of $Y$.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.ofHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : AlgebraicGeometry.IsAffine X] →\\n    [inst_1 : AlgebraicGeometry.IsAffine Y] →\\n      (X ⟶ Y) → (AlgebraicGeometry.AffineScheme.of X ⟶ AlgebraicGeometry.AffineScheme.of Y)\", \"doc\": \"Given a morphism $ f : X \\to Y $ between two affine schemes $ X $ and $ Y $, this function constructs the corresponding morphism in the category of affine schemes by leveraging the fact that affine sch\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: toSpecΓ is an open immersion for a quasi-affine scheme, and Hopf algebras give already affine group schemes. Neither constructs the relative group law on Spec_J(f_* O_G); the pullback square hit assumes an affine morphism already."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group law on relative affine envelope of a flat group scheme morphism over a Dedekind ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.add_def\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"(P Q : W.Point) : P + Q = P.add Q\", \"doc\": \"The set of points on an affine Weierstrass curve $ W $ over a field $ F $ forms an additive group under the Weierstrass group law addition operation, with identity element as the zero point, inverse e\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsMultiplicative @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is multiplicative, meaning that the composition of two affine morphisms is again an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: toSpecΓ is an open immersion for a quasi-affine scheme, and Hopf algebras give already affine group schemes. Neither constructs the relative group law on Spec_J(f_* O_G); the pullback square hit assumes an affine morphism already."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Spec\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: toSpecΓ is an open immersion for a quasi-affine scheme, and Hopf algebras give already affine group schemes. Neither constructs the relative group law on Spec_J(f_* O_G); the pullback square hit assumes an affine morphism already."
+  },
+  {
+   "tool": "grep",
+   "query": "affini[sz]ation|[Hh]opf|group.*[Ss]pec",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Category.CommHopfAlgCat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"14\", \"text\": \"# The equivalence between Hopf algebras and affine group schemes\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"16\", \"text\": \"This file constructs `Spec` as a functor from `R`-Hopf algebras to group schemes over `Spec R`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"19\", \"text\": \"We want to show that affine group schemes correspond to Hopf algebras. This can easily be done\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"28\", \"text\": \"R-Hopf algebras         ⇄       Affine group schemes over Spec R\"} Search subdirectory: Mathlib/AlgebraicGeometry/Group.",
+   "date": "2026-10-24",
+   "verdict": "no match: toSpecΓ is an open immersion for a quasi-affine scheme, and Hopf algebras give already affine group schemes. Neither constructs the relative group law on Spec_J(f_* O_G); the pullback square hit assumes an affine morphism already."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative affinization of a quasi affine homomorphism of flat group schemes has a group structure",
+   "results": "Actual search log: 8 hits; AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover affine morphisms, absolute quasi-affine open immersions, structure-sheaf operations, or already supplied Hopf algebra structures; none constructs the relative group envelope"
+  },
+  {
+   "tool": "grep",
+   "query": "affini[sz]ation|[Gg]roupScheme|[Hh]opf",
+   "results": "Actual search log: 5 hits; Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover affine morphisms, absolute quasi-affine open immersions, structure-sheaf operations, or already supplied Hopf algebra structures; none constructs the relative group envelope"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative affine envelope of a quasi affine morphism of flat group schemes is a group scheme",
+   "results": "Actual search log: 8 hits; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.Flat.flat_of_affine_subset",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover affine morphisms, absolute quasi-affine open immersions, structure-sheaf operations, or already supplied Hopf algebra structures; none constructs the relative group envelope"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Spec\"",
+   "results": "Actual search log: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover affine morphisms, absolute quasi-affine open immersions, structure-sheaf operations, or already supplied Hopf algebra structures; none constructs the relative group envelope"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending multiplication to the canonical relative spectrum of the direct image structure sheaf of a group homomorphism",
+   "results": "Actual search log: 8 hits; AlgebraicGeometry.Proj.mul_apply, AlgebraicGeometry.StructureSheaf.const_mul, AlgebraicGeometry.StructureSheaf.comap, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.StructureSheaf.const_mul_cancel, AlgebraicGeometry.StructureSheaf.const_mul_cancel', AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp, AlgebraicGeometry.StructureSheaf.comap_const",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover affine morphisms, absolute quasi-affine open immersions, structure-sheaf operations, or already supplied Hopf algebra structures; none constructs the relative group envelope"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dedekind-finite-kernel-hom-affine",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction and the inherited relative-semisimple-affineness prerequisite; Conrad Proposition 6.3.16, printed p.229, quasi-finite group homomorphism assertion. Construction prerequisite before the translation argument: extend the group diagrams to the canonical relative spectrum, retaining the open immersion and generic function comparison.",
+   "via": [
+    "lem-sfb-dedekind-finite-kernel-hom-affine",
+    "lem-sfb-relative-semisimple-affineness",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-quasiaffine-group-envelope",
+  "worker": "stage1",
+  "summary": "Constructed the group operations on the canonical relative spectrum using existing DAG nodes only. Proved the structure-unit isomorphism on H, deduced flatness of H without finite generation, used successive flat base changes to control squares and cubes, and checked every group diagram by affine-chart uniqueness. The statement is unchanged.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), via the existing dedekind-finite-kernel-hom-affine prerequisite. The latest blueprint has no relative group-envelope statement: this split supplies the inherited canonical-factorization prerequisite without changing a unit route. The ancestor command returns None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-qcqs-relative-affinization-map",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-canonical-affine-charts-qc-open-immersion",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-comp",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic scheme/flat-base-change or section-map tool for the canonical relative-affinization construction; the current unit states constructible six-functor stability and supplies no replacement for this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Restriction of a morphism to an open target during the affine-chart gluing argument; a generic scheme tool absent from the six-functor stability unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-qcqs-relative-affinization-map",
+  "lem-trf-canonical-affine-charts-qc-open-immersion",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-pc-separated-quasi-separated",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-d7a08387f",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-d7a08387f (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full. The delivery creates no new nodes and leaves the statement unchanged. It gives the parent, lem-sfb-dedekind-finite-kernel-hom-affine (steps 4–5), exactly what it uses: H, j and q as homomorphisms with qj=f, q affine, j a quasi-compact open immersion, and O_{H_K}≅(j_K)_*O_{G_K}. Steps 1–2 follow Stacks 01SM (2)⇒(4) and 01LY: G and J are qcqs over the affine S, so f is qcqs, then the relative affinization map and the chart criterion give the open immersion, and separated implies quasi-separated. Step 3 is correct: the qcqs function comparison applied to j has the identity A_W→A_W as its coefficient map, so the unit β is an isomorphism, also on arbitrary opens. Step 4 is correct: G_W is flat, so its sections A_W are torsion-free over B, and over a Dedekind base (field allowed) torsion-free modules are flat, without finite generation. Step 5 uses flat base change in degree 0 along pr_1 (flat because H is flat) and pr_2 (flat because G is flat), and the base-changed maps stay qcqs. Step 6 handles overlaps through affine W''; no affineness of intersections is assumed. I recomputed the group identities in steps 7–8 (qb=av, associativity over m_J(m_J×1)q^3, unit laws, inverse over e_Jπ_H); all close by uniqueness, with no density argument. Step 9 is right: B→K is a flat localization and G×_H H_K=G_K. Edge cases checked: B a field, f the identity, f affine, empty G_W, and H not of finite type. Batch-5 flags: lem-trf-qcqs-relative-affinization-map (01LY) and lem-trf-canonical-affine-charts-qc-open-immersion (01SM) are general scheme theory, not steps of the trace formula or Poincaré duality. Their transitive closures contain no trace-formula, Lefschetz or Poincaré node and no batch-4 target, so I accept both. lem-sfb-flat-trait-group-affinization (absolute, over a DVR) and lem-trf-quasi-affine-relative-spec-embedding (no group or unit statement) are not duplicates. I accept the tool_uses (pbc, trf, pc, sc generic tools). The inherited null blueprint from.node is a base provenance matter for the maintainer."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeQuasiAffineGroupEnvelope",
+  "declaration": "AlgebraicGeometry.relative_quasiAffine_group_envelope",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeQuasiAffineGroupEnvelope.lean",
+  "statement": "theorem relative_quasiAffine_group_envelope (B : Type u) [CommRing B] [IsDedekindDomain B] (K : Type u) [Field K] [Algebra B K] [IsFractionRing B K] (G J : Over (Spec (.of B))) [GrpObj G] [GrpObj J] [Flat G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Flat J.hom] [IsSeparated J.hom] [LocallyOfFiniteType J.hom] [QuasiCompact J.hom] (f : G ⟶ J) [IsMonHom f] [IsQuasiAffineHom f.left] : (Scheme.CommAlgebraSheaf.toModule (Under.mk (⟨f.left.c⟩ : J.left.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.left.base).obj G.left.sheaf))).IsQuasicoherent ∧ ∃ (H : Over (Spec (.of B))) (_ : GrpObj H) (q : H ⟶ J) (j : G ⟶ H) (hc : j.left ≫ q.left = f.left), IsMonHom j ∧ IsMonHom q ∧ IsAffineHom q.left ∧ IsOpenImmersion j.left ∧ QuasiCompact j.left ∧ ∃ a : (Under.mk (⟨f.left.c⟩ : J.left.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.left.base).obj G.left.sheaf) : J.left.CommAlgebraSheaf) ≅ (Under.mk (⟨q.left.c⟩ : J.left.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} q.left.base).obj H.left.sheaf) : J.left.CommAlgebraSheaf), (∀ (W : J.left.Opens), IsAffineOpen W → IsIso ((q.left ⁻¹ᵁ W).toSpecΓ ≫ Spec.map (a.hom.right.hom.app (op W))) ∧ j.left.resLE (q.left ⁻¹ᵁ W) (f.left ⁻¹ᵁ W) (by rw [← Scheme.Hom.comp_preimage, hc]) ≫ (q.left ⁻¹ᵁ W).toSpecΓ ≫ Spec.map (a.hom.right.hom.app (op W)) = (f.left ⁻¹ᵁ W).toSpecΓ) ∧ IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap B K)))).map j).left.c)",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-956c5bb7d",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsDedekindDomain = Noetherian integrally closed domain of dim≤1 (fields included); K any fraction field; GrpObj over Spec B; Flat/IsSeparated/LocallyOfFiniteType+QuasiCompact on G,J; IsMonHom f + IsQuasiAffineHom f.left. A = Under.mk ⟨f.c⟩ (same as the deps' 𝒪⁎) is quasi-coherent; H is an affine q with algebra iso a: A ≅ q_*O_H, the same interface as the landed qcqs_relative_affinization_map; the chart equation forces j's ring map to be the identity (canonical j); hc qj=f; GrpObj H bound before IsMonHom j, IsMonHom q; IsAffineHom q; qc open immersion j; IsIso of (Over.pullback Spec(B→K)).map j .left.c = O_{H_K}→(j_K)_*O_{G_K}. Mathematics true (O_H≅j_*O_G already over B; flat base change to K). Edge cases: field B, f=id or affine, empty opens, nonreduced/noncommutative groups, single universe. Only the lean field changes; lean.statement verbatim; imports exist; sorry-only; source and blueprint docstrings; both report sections present; no duplicate notion; nothing landed in parallel. No file changed, so no compile. Advisory only: the chart IsIso conjunct is redundant but harmless."
+ }
+}

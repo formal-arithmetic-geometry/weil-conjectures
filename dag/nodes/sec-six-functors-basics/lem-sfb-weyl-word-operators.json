@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-weyl-word-operators",
+ "kind": "statement",
+ "title": "Cartan and raising operators on the free associative word space",
+ "statement": "Let $I$ be a finite set, $B=(b_{ij})_{i,j\\in I}$ any rational matrix, and $\\lambda=(\\lambda_i)_{i\\in I}\\in\\mathbf Q^I$. Let $A(I)$ be the rational vector space with basis all finite words in $I$, including the empty word $1$. For a basis word $w=(j_1,\\ldots,j_m)$ set $\\beta_i(w)=\\sum_{r=1}^m b_{i j_r}$, with $\\beta_i(1)=0$. For $j\\in I$, let $t_jw$ denote the word obtained by prepending $j$, and extend this operation linearly. Define rational linear endomorphisms $F_i,H_i,E_i$ of $A(I)$ by their values on basis words:\n$$F_i(w)=t_iw,\\qquad H_i(w)=(\\lambda_i-\\beta_i(w))w,$$\n$$E_i(1)=0,\\qquad E_i(t_jw)=t_jE_i(w)+\\delta_{ij}(\\lambda_i-\\beta_i(w))w.$$\nThe recursion terminates by word length. With the commutator Lie bracket on $\\operatorname{End}_{\\mathbf Q}(A(I))$ [def-wf-lie-algebra], these operators satisfy, for every $i,j\\in I$,\n$$[H_i,H_j]=0,\\quad [E_i,F_j]=\\delta_{ij}H_i,\\quad [H_i,E_j]=b_{ij}E_j,\\quad [H_i,F_j]=-b_{ij}F_j.$$\nThere is no restriction on the diagonal, signs or rank of $B$, and $I$ may be empty.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.63, first proof, printed p.504, supporting construction for the Weyl-only direct sum. These explicit word-operator formulas are supplied by the agent and are not written in Milne. WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapter VIII, section 4, no.2, the direct proof Milne cites for the Weyl presentation; report.md supplies the recursion and commutator verification motivating this statement-only prerequisite."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Construct the basis values of $E_i$ by induction on length: the empty word has value zero, and the displayed rule at $t_jw$ uses only the already constructed value at the shorter word $w$. At each stage the result is a finite linear combination of words. Extend these values, and those of $F_i,H_i$, by linearity to $A(I)$; uniqueness follows because every vector is a finite linear combination of basis words. Directly from the finite sum defining the weights, $\\beta_i(t_jw)=b_{ij}+\\beta_i(w)$ for every $w$, including $w=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed p.504: supporting word-operator construction; the following explicit calculation is supplied by Q103, not stated in Milne. Bourbaki VIII, §4, no.2 remains WANTED."
+   }
+  },
+  {
+   "text": "Use the commutator convention $[X,Y]=XY-YX$ of [def-wf-lie-algebra]. On a basis word $w$, the two composites $H_iH_j$ and $H_jH_i$ both give $(\\lambda_i-\\beta_i(w))(\\lambda_j-\\beta_j(w))w$, since rational scalars commute. Thus $[H_i,H_j]=0$ by linearity.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed p.504: supporting word-operator construction; the following explicit calculation is supplied by Q103, not stated in Milne. Bourbaki VIII, §4, no.2 remains WANTED."
+   }
+  },
+  {
+   "text": "On every basis word $w$, the defining recursion gives $E_iF_j(w)=F_jE_i(w)+\\delta_{ij}(\\lambda_i-\\beta_i(w))w$. Subtract $F_jE_i(w)$ and use the definition of $H_i$ to obtain $[E_i,F_j](w)=\\delta_{ij}H_i(w)$. The same identity holds on all vectors by linearity, with bracket as in [def-wf-lie-algebra].",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed p.504: supporting word-operator construction; the following explicit calculation is supplied by Q103, not stated in Milne. Bourbaki VIII, §4, no.2 remains WANTED."
+   }
+  },
+  {
+   "text": "The weight identity of step 1 gives $H_iF_j(w)=(\\lambda_i-\\beta_i(w)-b_{ij})t_jw$, whereas $F_jH_i(w)=(\\lambda_i-\\beta_i(w))t_jw$. Subtraction yields $[H_i,F_j](w)=-b_{ij}F_j(w)$ and hence the endomorphism identity, using the commutator definition of [def-wf-lie-algebra].",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed p.504: supporting word-operator construction; the following explicit calculation is supplied by Q103, not stated in Milne. Bourbaki VIII, §4, no.2 remains WANTED."
+   }
+  },
+  {
+   "text": "Fix $i,j$ and put $D=H_iE_j-E_jH_i$. Prove $D(w)=b_{ij}E_j(w)$ by induction on the length of the basis word $w$. At $w=1$, both sides vanish since $E_j(1)=0$ and $H_i(1)=\\lambda_i1$. For the step write the word as $F_kw$, and set $\\delta=\\delta_{jk}$. Steps 3 and 4, valid on every vector, give $E_jF_k=F_kE_j+\\delta H_j$ and $H_iF_k=F_kH_i-b_{ik}F_k$. Expanding both terms of $D(F_kw)$ with these two equations gives\n$$D(F_kw)=F_kD(w)-b_{ik}F_kE_j(w)+\\delta H_iH_j(w)-\\delta H_jH_i(w)+b_{ik}E_jF_k(w).$$\nBy step 2 the middle Cartan difference is zero, and step 3 reduces the remaining two terms to $\\delta b_{ik}H_j(w)$. Apply the induction hypothesis and $\\delta_{jk}b_{ik}=\\delta_{jk}b_{ij}$ (check $j=k$ and $j\\ne k$) to get\n$$D(F_kw)=b_{ij}F_kE_j(w)+\\delta b_{ij}H_j(w)=b_{ij}E_jF_k(w).$$\nThis completes the induction and, by linearity and [def-wf-lie-algebra], proves $[H_i,E_j]=b_{ij}E_j$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed p.504: supporting word-operator construction; the following explicit calculation is supplied by Q103, not stated in Milne. Bourbaki VIII, §4, no.2 remains WANTED."
+   }
+  },
+  {
+   "text": "The four identities have now been proved for every pair of indices. Each calculation used only the displayed rational coefficients and the word recursion: no symmetry, sign, rank or diagonal condition on $B$ was introduced. If $I$ is empty, its only word is $1$, so $A(I)=\\mathbf Q1$; there are no indexed operators or pairs of indices, and all four universal assertions are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed p.504: supporting word-operator construction; the following explicit calculation is supplied by Q103, not stated in Milne. Bourbaki VIII, §4, no.2 remains WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.63, first proof, printed p.504: supporting word-operator construction; the following explicit calculation is supplied by Q103, not stated in Milne. Bourbaki VIII, §4, no.2 remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For any rational matrix B and weight lambda the operators F_i prepend a letter H_i act by lambda_i minus word weight and E_i recursively delete letters satisfy Cartan Weyl commutator relations",
+   "results": "{\"t\": \"2026-10-24T00:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"For any rational matrix B and weight lambda the operators F_i prepend a letter H_i act by lambda_i minus word weight and E_i recursively delete letters satisfy Cartan Weyl commutator relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Relations.HF\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.lie_h_f\", \"CartanMatrix.Relations.adF\", \"CartanMatrix.Relations.HE\", \"CartanMatrix.Relations.adE\", \"CartanMatrix.Relations.HH\", \"CartanMatrix.Relations.EF\"], \"digest\": \"27b45a6136f3faf2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SerreConstruction.lean:94--147, GeckConstruction/Basic.lean:175--200 and GeckConstruction/Relations.lean:36--83. The CartanMatrix.Relations definitions specify formal relations, not operators on words or proofs that these operators satisfy them. The Geck relations are for finite matrices attached to crystallographic root pairings, not arbitrary rational B and lambda, and act on a different vector space. Module.End, FreeAlgebra has no hits. The enveloping equivalence and associative-module Lie structure give no raising-operator recursion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verma module construction on the free associative algebra with lowering operators by left multiplication and raising operators recursively satisfying e_i f_j minus f_j e_i equals delta_ij h_i",
+   "results": "{\"t\": \"2026-10-24T00:09:47Z\", \"tool\": \"leansearch\", \"query\": \"Verma module construction on the free associative algebra with lowering operators by left multiplication and raising operators recursively satisfying e_i f_j minus f_j e_i equals delta_ij h_i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeLieAlgebra\", \"FreeLieAlgebra.Rel.below.mul_left\", \"FreeAlgebra.instFree\", \"FreeAlgebra.Pre.brecOn.go\", \"FreeLieAlgebra.Rel.below.rec\", \"RootPairing.GeckConstruction.lie_e_f_same\", \"FreeLieAlgebra.universalEnvelopingEquivFreeAlgebra\", \"LieModule.ofAssociativeModule\"], \"digest\": \"21e974696a8cad8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SerreConstruction.lean:94--147, GeckConstruction/Basic.lean:175--200 and GeckConstruction/Relations.lean:36--83. The CartanMatrix.Relations definitions specify formal relations, not operators on words or proofs that these operators satisfy them. The Geck relations are for finite matrices attached to crystallographic root pairings, not arbitrary rational B and lambda, and act on a different vector space. Module.End, FreeAlgebra has no hits. The enveloping equivalence and associative-module Lie structure give no raising-operator recursion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End, FreeAlgebra",
+   "results": "{\"t\": \"2026-10-24T00:09:47Z\", \"tool\": \"loogle\", \"query\": \"Module.End, FreeAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SerreConstruction.lean:94--147, GeckConstruction/Basic.lean:175--200 and GeckConstruction/Relations.lean:36--83. The CartanMatrix.Relations definitions specify formal relations, not operators on words or proofs that these operators satisfy them. The Geck relations are for finite matrices attached to crystallographic root pairings, not arbitrary rational B and lambda, and act on a different vector space. Module.End, FreeAlgebra has no hits. The enveloping equivalence and associative-module Lie structure give no raising-operator recursion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor word representation of the Lie algebra with only Chevalley commutation relations for an arbitrary matrix no Serre relations",
+   "results": "{\"t\": \"2026-10-24T00:09:48Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor word representation of the Lie algebra with only Chevalley commutation relations for an arbitrary matrix no Serre relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Relations.HF\", \"Matrix.ToLieAlgebra\", \"CartanMatrix.Relations.toSet\", \"CartanMatrix.Relations.adF\", \"CartanMatrix.Relations.HE\", \"CartanMatrix.Relations.adE\", \"CartanMatrix.Relations.EF\", \"CartanMatrix.Relations.HH\"], \"digest\": \"6fb8fa10f1df74d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SerreConstruction.lean:94--147, GeckConstruction/Basic.lean:175--200 and GeckConstruction/Relations.lean:36--83. The CartanMatrix.Relations definitions specify formal relations, not operators on words or proofs that these operators satisfy them. The Geck relations are for finite matrices attached to crystallographic root pairings, not arbitrary rational B and lambda, and act on a different vector space. Module.End, FreeAlgebra has no hits. The enveloping equivalence and associative-module Lie structure give no raising-operator recursion."
+  },
+  {
+   "tool": "grep",
+   "query": "Verma|highest.weight|Cartan|Weyl",
+   "results": "{\"t\": \"2026-10-24T00:09:47Z\", \"tool\": \"grep\", \"query\": \"Verma|highest.weight|Cartan|Weyl\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/Rank.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"Mathlib/Algebra/Lie/Character.lean\"], \"digest\": \"8437511e24af1ff6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read SerreConstruction.lean:94--147, GeckConstruction/Basic.lean:175--200 and GeckConstruction/Relations.lean:36--83. The CartanMatrix.Relations definitions specify formal relations, not operators on words or proofs that these operators satisfy them. The Geck relations are for finite matrices attached to crystallographic root pairings, not arbitrary rational B and lambda, and act on a different vector space. Module.End, FreeAlgebra has no hits. The enveloping equivalence and associative-module Lie structure give no raising-operator recursion."
+  },
+  {
+   "tool": "grep",
+   "query": "Verma|highest.weight|Cartan|Weyl",
+   "results": "{\"t\": \"2026-10-24T00:35:51Z\", \"tool\": \"grep\", \"query\": \"Verma|highest.weight|Cartan|Weyl\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Rank.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\", \"Mathlib/Algebra/Lie/EngelSubalgebra.lean\"], \"digest\": \"9d77c6a24400b56c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/SerreConstruction.lean:94–147 (formal relation definitions and quotient, not this word representation); Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean:64–75,131–156 and Relations.lean:36–96 (root-pairing matrices with crystallographic hypotheses, different space). Free Lie recursors and instances do not prove the identities for these recursively defined endomorphisms. Loogle returned no hits. Second semantic phrasing also found no arbitrary-matrix word construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a representation of the Lie algebra with Cartan and Chevalley commutator relations on free words using recursive raising operators",
+   "results": "{\"t\": \"2026-10-24T00:35:51Z\", \"tool\": \"leansearch\", \"query\": \"Construct a representation of the Lie algebra with Cartan and Chevalley commutator relations on free words using recursive raising operators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeLieAlgebra.Rel.recOn\", \"FreeLieAlgebra\", \"FreeLieAlgebra.Rel.below.rec\", \"FreeLieAlgebra.Rel\", \"FreeLieAlgebra.Rel.rec\", \"Matrix.ToLieAlgebra\", \"FreeLieAlgebra.instLieAlgebra\", \"FreeLieAlgebra.instLieRing\"], \"digest\": \"33bad9696f4e7e91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/SerreConstruction.lean:94–147 (formal relation definitions and quotient, not this word representation); Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean:64–75,131–156 and Relations.lean:36–96 (root-pairing matrices with crystallographic hypotheses, different space). Free Lie recursors and instances do not prove the identities for these recursively defined endomorphisms. Loogle returned no hits. Second semantic phrasing also found no arbitrary-matrix word construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End, FreeAlgebra",
+   "results": "{\"t\": \"2026-10-24T00:35:51Z\", \"tool\": \"loogle\", \"query\": \"Module.End, FreeAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/SerreConstruction.lean:94–147 (formal relation definitions and quotient, not this word representation); Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean:64–75,131–156 and Relations.lean:36–96 (root-pairing matrices with crystallographic hypotheses, different space). Free Lie recursors and instances do not prove the identities for these recursively defined endomorphisms. Loogle returned no hits. Second semantic phrasing also found no arbitrary-matrix word construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary rational matrix and weight, recursive raising operators, diagonal Cartan operators and letter-prepending operators on the vector space of finite words satisfy the four Weyl commutator relations",
+   "results": "{\"t\": \"2026-10-24T00:35:53Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary rational matrix and weight, recursive raising operators, diagonal Cartan operators and letter-prepending operators on the vector space of finite words satisfy the four Weyl commutator relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"CartanMatrix.Relations.HF\", \"CartanMatrix.Relations.adE\", \"CartanMatrix.Relations.HE\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"CartanMatrix.Relations.EF\", \"CartanMatrix.Relations.adF\"], \"digest\": \"e38cb0c0ad55c386\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/SerreConstruction.lean:94–147 (formal relation definitions and quotient, not this word representation); Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean:64–75,131–156 and Relations.lean:36–96 (root-pairing matrices with crystallographic hypotheses, different space). Free Lie recursors and instances do not prove the identities for these recursively defined endomorphisms. Loogle returned no hits. Second semantic phrasing also found no arbitrary-matrix word construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recursive annihilation operators on the tensor algebra satisfy e_i f_j minus f_j e_i equals delta_ij h_i for any matrix, without Serre relations",
+   "results": "{\"t\": \"2026-10-24T00:35:54Z\", \"tool\": \"leanfinder\", \"query\": \"Recursive annihilation operators on the tensor algebra satisfy e_i f_j minus f_j e_i equals delta_ij h_i for any matrix, without Serre relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CartanMatrix.Relations.adE\", \"CartanMatrix.Relations.HE\", \"CartanMatrix.Relations.HF\", \"CartanMatrix.Relations.adF\", \"RootPairing.GeckConstruction.lie_e_f_same\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"CartanMatrix.Relations.EF\", \"RootPairing.GeckConstruction.e_lie_u\"], \"digest\": \"77dabde5403e642a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Lie/SerreConstruction.lean:94–147 (formal relation definitions and quotient, not this word representation); Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean:64–75,131–156 and Relations.lean:36–96 (root-pairing matrices with crystallographic hypotheses, different space). Free Lie recursors and instances do not prove the identities for these recursively defined endomorphisms. Loogle returned no hits. Second semantic phrasing also found no arbitrary-matrix word construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weyl-relations-free-normal-form",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Appendix C.21--C.22, printed p.612 (existence of a base); Section 23h, Theorem 23.63, first proof, printed pp.503--504, and characteristic-zero extension on p.508; the displayed Serre relations on p.504 require the sign and letter corrections recorded in report.md. Supporting argument for the rational Serre presentation: Graded triangular decomposition of a generalized Serre quotient. Supporting step: Theorem 23.63, first proof, printed p.504: the displayed Weyl-only algebra and its free negative/Cartan/free positive direct sum. The arbitrary-matrix rational form isolates the same normal-form input without using finite-type root theory. Detailed source referred to by Milne, Bourbaki, Lie Groups and Lie Algebras, Chapter VIII, §4, no.2, is WANTED; the agent checks this generality in report.md. Supporting normal-form argument: Theorem 23.63, first proof, printed p.504, supporting construction for the Weyl-only direct sum. These explicit word-operator formulas are supplied by the agent and are not written in Milne. WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapter VIII, section 4, no.2, the direct proof Milne cites for the Weyl presentation; report.md supplies the recursion and commutator verification motivating this statement-only prerequisite.",
+   "via": [
+    "lem-sfb-weyl-relations-free-normal-form",
+    "lem-sfb-serre-graded-triangular-quotient",
+    "lem-sfb-serre-rational-presentation",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weyl-word-operators",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Constructed the recursive basis endomorphisms and verified all four commutator identities explicitly. The raising/Cartan identity is proved by a complete word-length induction using the three identities already calculated. No new nodes: scalar arithmetic, basis extension, and this explicit induction have no additional non-elementary input. Rechecked Mathlib, exact project attachment, current blueprint and edge cases; source is explicitly agent-written and Bourbaki remains WANTED.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Appendix C.21--C.22, printed p.612 (existence of a base); Section 23h, Theorem 23.63, first proof, printed pp.503--504, and characteristic-zero extension on p.508; the displayed Serre relations on p.504 require the sign and letter corrections recorded in report.md. Supporting argument for the rational Serre presentation: Graded triangular decomposition of a generalized Serre quotient. Supporting step: Theorem 23.63, first proof, printed p.504: the displayed Weyl-only algebra and its free negative/Cartan/free positive direct sum. The arbitrary-matrix rational form isolates the same normal-form input without using finite-type root theory. Detailed source referred to by Milne, Bourbaki, Lie Groups and Lie Algebras, Chapter VIII, §4, no.2, is WANTED; the agent checks this generality in report.md. Supporting normal-form argument: Theorem 23.63, first proof, printed p.504, supporting construction for the Weyl-only direct sum. These explicit word-operator formulas are supplied by the agent and are not written in Milne. WANTED: Bourbaki, Lie Groups and Lie Algebras, Chapter VIII, section 4, no.2, the direct proof Milne cites for the Weyl presentation; report.md supplies the recursion and commutator verification motivating this statement-only prerequisite. This split realizes precisely the supporting explicit word-operator calculation, not the whole Weyl normal-form statement. Current latest direct-images proof (3) was read as route context. The ancestor command returns null for the existing chain; inherited null origin and via list are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-645fc0208",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-645fc0208 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to live, which still has the item unsplit; there is no repair note and no other group has split it, so the delivery is not superseded. The delivery has 6 steps and no new nodes. Its only citation, def-wf-lie-algebra, does state End(V) with [X,Y]=XY-YX, which is the only fact the steps use. I rechecked each step. Step 1: the recursion on word length is well founded, extension from the basis is unique, and beta_i(t_j w)=b_ij+beta_i(w). Steps 2-4: HH, EF and HF hold on basis words, and the HF sign is -b_ij with row i and the prepended letter j, not transposed. Step 5: I expanded HE again on F_k w using steps 3 and 4 and got the same five-term formula. The Cartan term cancels by step 2, b_ik(E_jF_k-F_kE_j)=delta b_ik H_j, delta_jk b_ik=delta_jk b_ij, and the base case w=1 holds. The induction is properly set up (D4 satisfied). Step 6: I=empty is vacuous. Small cases checked by hand: for |I|=1, E(t^2)=(2lambda-b)t, [E,F](t)=H(t) and [H,E](t^2)=bE(t^2); for i different from j, E_i(t_j)=0. The parent lem-sfb-weyl-relations-free-normal-form is a freeness statement, not a duplicate, and an rg -L search of the DAG found no other duplicate. The source is honestly marked agent-supplied (Milne Thm 23.63 p.504, Bourbaki WANTED), Milne's misprints are not copied, and no SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.WeylWordOperators",
+  "declaration": "LieAlgebra.WeylWord.commutator_relations",
+  "declarations": [
+   "LieAlgebra.WeylWord.weight",
+   "LieAlgebra.WeylWord.lowering",
+   "LieAlgebra.WeylWord.cartan",
+   "LieAlgebra.WeylWord.raisingWord",
+   "LieAlgebra.WeylWord.raising",
+   "LieAlgebra.WeylWord.commutator_relations"
+  ],
+  "file": "lean/Sheaf/Algebra/Lie/WeylWordOperators.lean",
+  "statement": "theorem commutator_relations {I : Type u} [Finite I] (B : I → I → ℚ) (lam : I → ℚ) : ∀ i j : I, ⁅cartan B lam i, cartan B lam j⁆ = 0 ∧ ⁅raising B lam i, lowering j⁆ = (if i = j then cartan B lam i else 0) ∧ ⁅cartan B lam i, raising B lam j⁆ = B i j • raising B lam j ∧ ⁅cartan B lam i, lowering j⁆ = (-B i j) • lowering j",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f45f5792",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Node unchanged vs side-live except new lean record; lean.statement verbatim in file; 6 declarations listed. Clause check exact: List I →₀ ℚ word space incl. [], weight = row-i list sum, lowering = lmapDomain cons, cartan diagonal (lam i − weight), raisingWord structural recursion with delta term on tail weight; four conjuncts [H,H]=0, [E_i,F_j]=if i=j then H_i else 0, [H_i,E_j]=B i j•E_j, [H_i,F_j]=(−B i j)•F_j via LieRing.ofAssociativeRing commutator (def-wf-lie-algebra). Only [Finite I] assumed (as node), universe u free; identities verified by hand incl. singleton example; empty I vacuous. No hollow defs, single sorry, source/blueprint docstrings and 6-step proof plan present, no pro-etale. No duplicate in Sheaf/WeilConjectures/Mathlib. Report has Worker report + Second reading by Q66. No recompile (no file changed). Minor: Classical decidability in delta if."
+ }
+}

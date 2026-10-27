@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-stack-representable-source-algebraic",
+ "kind": "statement",
+ "title": "Algebraicity ascends representable morphisms of fibred groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention]. Use categories fibred in groupoids over $S$-schemes, their morphisms, 2-fibre products and scheme-valued objects as in [def-sfb-stable-pointed-moduli-groupoids], and algebraic stacks as in [def-sfb-algebraic-moduli-stack]. Let $j:\\mathcal X\\to\\mathcal Y$ be a morphism of categories fibred in groupoids with $\\mathcal Y$ an algebraic stack. Suppose that for each $S$-scheme $T$ and object $T\\to\\mathcal Y$, the 2-fibre product $T\\times_{\\mathcal Y}\\mathcal X$ is naturally equivalent over $T$ to an algebraic space $Z_T$ [def-trf-algebraic-space]. Then $\\mathcal X$ is an algebraic stack. If, in addition, every $Z_T\\to T$ is locally of finite presentation on etale scheme charts and $\\mathcal Y\\to S$ is locally of finite presentation, then $\\mathcal X\\to S$ is locally of finite presentation. Here local finite presentation for a stack over a scheme means that a smooth surjective scheme atlas has locally finitely presented composite to that scheme [def-sbc-locally-finite-presentation]. No initial stack hypothesis on $\\mathcal X$ is needed.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 05UN (lemma-open-fibred-category-is-algebraic) and 05UM (lemma-representable-morphism-to-algebraic); local finite presentation uses stacks-morphisms.tex Tags 06Q2 (definition-locally-finite-presentation) and 06Q3 (lemma-composition-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "First check faithfulness and the relative sheaf hypothesis. If $a,b:x\\to x'$ have $j(a)=j(b)$ over $T$, then $b^{-1}a$ is an automorphism of $(\\mathrm{id}_T,x,1)$ in $h_T\\times_{\\mathcal Y}\\mathcal X$, using $jx:T\\to\\mathcal Y$. The representing equivalence with the discrete groupoid $Z_T$ forces this automorphism to be the identity, hence $a=b$. For any $y:T\\to\\mathcal Y$, the presheaf $P_y$ of classes of pairs $(x,\\phi:y|_V\\xrightarrow{\\sim}jx)$ is naturally the presheaf of $Z_T$ on $T$-schemes: these are exactly the objects of the specified 2-fibre product, and its representing equivalence identifies their classes with sections. The identification respects pullback because the equivalence is over $T$. Algebraic spaces are fppf sheaves, hence sheaves for etale coverings, which are particular fppf coverings.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tags 05UN and 02ZY (lemma-criterion-map-representable-spaces-fibred-in-groupoids), necessary direction written out"
+   }
+  },
+  {
+   "text": "The algebraic-stack hypothesis makes $\\mathcal Y$ an etale stack. Step 1 gives faithful fibre functors and etale sheaves $P_y$ for every object $y$ over every scheme. Apply faithful relative-sheaf descent to $j$. It gives etale descent for both arrows and objects in $\\mathcal X$. In particular $\\mathcal X$ is an etale stack without any initial descent assumption.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-relative-sheaf-fibred-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN (lemma-open-fibred-category-is-algebraic), stack assertion, using stacks.tex Tag 0CKJ"
+   }
+  },
+  {
+   "text": "Check the diagonal on $T\\to\\mathcal X\\times_S\\mathcal X$, given by $x_1,x_2\\in\\mathcal X(T)$. Let $B=\\operatorname{Isom}_{\\mathcal Y}(jx_1,jx_2)$ over $T$; it is an algebraic space by the diagonal condition on $\\mathcal Y$. Explicitly a diagonal fibre triple $(y,a:y\\to jx_1,b:y\\to jx_2)$ maps to $ba^{-1}$, with inverse $\\alpha\\mapsto(jx_1,1,\\alpha)$. Let $P(V)=\\operatorname{Isom}_{\\mathcal X(V)}(x_1|_V,x_2|_V)$ on $T$-schemes, with $P\\to B$ induced by $j$. For a scheme $H\\to B$ let $\\alpha:jx_1|_H\\to jx_2|_H$ be its section. The space $A=H\\times_{\\mathcal Y}\\mathcal X$ along $jx_1|_H$ has sections $s_1=(x_1|_H,1)$ and $s_2=(x_2|_H,\\alpha)$. The equalizer $E$ of these sections is the scheme pullback of the representable diagonal of the algebraic space $A$. Equality of the two sections of $A$ means existence of a unique arrow between their corresponding fibre-product objects. The arrow equation is $j(\\beta)=\\alpha$. Consequently $H\\times_BP\\cong h_E$, naturally in all scheme tests. Regard $P$ as a presheaf on $S$-schemes by retaining the map to $T$ in each section. The presheaf-over-space bootstrap, with target $B$, now makes $P$ an algebraic space. The same triple-to-$ba^{-1}$ formula for $\\mathcal X$ identifies $P$ with the chosen scheme test of its diagonal. Thus every such test is an algebraic space.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-presheaf-space-target-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 045G (lemma-representable-diagonal), (1) iff (2), verified on objects; bootstrap.tex Tag 02YS (lemma-representable-by-spaces-over-space) applied to the relative Isom presheaf"
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $V\\to\\mathcal Y$. By the hypothesis its pullback $A=V\\times_{\\mathcal Y}\\mathcal X$ is an algebraic space over $V$. The representable smooth calculus for arbitrary fibred groupoids makes $A\\to\\mathcal X$ representable by algebraic spaces, smooth and surjective, since it is a 2-base change of that atlas. Choose a representable surjective etale scheme chart $U\\to A$. The same calculus identifies its properties as a map of fibred groupoids, makes it smooth, and makes the composite $U\\to\\mathcal X$ representable, smooth and surjective. Together with steps 2 and 3 this meets all three conditions in the definition of algebraic stack.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-algebraic-space",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UM (lemma-representable-morphism-to-algebraic), pulled-back atlas, refined by an etale scheme chart; Tags 0302, 045B and 045C"
+   }
+  },
+  {
+   "text": "Under the additional hypotheses choose the atlas $V\\to\\mathcal Y$ in step 4 with $V\\to S$ locally of finite presentation, as the stated atlas definition of that hypothesis permits. The hypothesis on $Z_T\\to T$, applied with $T=V$, says precisely that $U\\to A\\to V$ is a locally finitely presented scheme map for the etale scheme chart chosen there. Composition of locally finitely presented scheme morphisms therefore makes $U\\to V\\to S$ locally of finite presentation. The smooth surjective atlas $U\\to\\mathcal X$ from step 4 with this structural composite witnesses local finite presentation of $\\mathcal X\\to S$ in the convention of the item.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06Q2 and 06Q3, with the atlas convention and morphisms.tex Tag 01TR (lemma-composition-finite-presentation)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-presheaf-space-target-bootstrap",
+  "lem-sfb-relative-sheaf-fibred-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 05UN and 05UM; diagonal checked directly by equalizers and bootstrap.tex Tag 02YS instead of the general smooth-cover bootstrap; local finite presentation on the pulled-back scheme atlas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A stack representable by algebraic spaces over an algebraic stack is algebraic and local finite presentation is preserved by composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"In the category of schemes, the property of being locally of finite type is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of finite \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFiniteType f]\\n  [hg : AlgebraicGeometry.LocallyOfFiniteType g],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite type is again locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsFinite\", \"doc\": \"The composition of two finite morphisms of schemes is again a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable morphisms of stacks with algebraic target have algebraic source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A function that converts a predicate on morphisms of schemes with affine targets into a general morphism property by asserting the existence of a proof that the target is affine, combined with the ori\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"Given a morphism property $ P $ for schemes, this constructs a property that assigns to each morphism $ X \\\\to Y $ with affine target $ Y $ the proposition $ P(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme →\\n  outParam AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Representable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|representableMorphism|representable.*algebraic",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity ascends a representable morphism of stacks in groupoids",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.stalkwise\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P : ∀ {R S : Type u} [CommRing R] [CommRing S], (R →+* S) → Prop) : MorphismProperty Scheme.{u}\", \"doc\": \"A morphism property of schemes defined by requiring that for every point $x$ in the domain scheme, the induced ring homomorphism on the stalk at $x$ satisfies the predicate $P$ applied to the correspo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderComposition @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are integral morphisms of schemes, then their composition $ g \\\\circ f: \"}\n  {\"name\": \"IsAlgebraic.algebraMap\", \"module\": \"Mathlib.RingTheory.Algebraic.Basic\", \"type\": \"{a : S} : IsAlgebraic R a → IsAlgebraic R (algebraMap S A a)\", \"doc\": \"If an element $ a $ in $ S $ is algebraic over $ R $, then its image under the canonical algebra homomorphism $ R \\to A $ is also algebraic over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.RepresentableBy (glueData hf).glued\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representable morphism to an algebraic stack has algebraic source",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.affineAnd, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsLocalAtSource, AlgebraicGeometry.stalkwise, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category fibred in groupoids representable by algebraic spaces over an algebraic stack is algebraic",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.IsPrestack, CategoryTheory.Pseudofunctor.IsStackFor",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"Representable\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|representable.*[Aa]lgebraic|[Aa]lgebraic.*[Ss]tack",
+   "results": "OK 3 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/Topology/Sheaves/Stalks.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back a smooth scheme atlas along a representable morphism gives an algebraic space cover of the source stack",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.instOverXPullbackCoverOver, AlgebraicGeometry.Scheme.instOverXPullbackCoverOver', AlgebraicGeometry.Scheme.Cover.pullbackCoverOver', AlgebraicGeometry.Scheme.Cover.pullbackCoverOver, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_X, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp, AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quot-representability",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tags 05UN (lemma-open-fibred-category-is-algebraic) and 05UM (lemma-representable-morphism-to-algebraic); local finite presentation uses stacks-morphisms.tex Tags 06Q2 (definition-locally-finite-presentation) and 06Q3 (lemma-composition-finite-presentation).",
+   "via": [
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-representable-source-algebraic",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded relative faithfulness, added the generic faithful relative-sheaf descent lemma, checked the diagonal via scheme equalizers over the target Isom algebraic space, refined the pulled-back atlas, and proved the finite-presentation clause by scheme composition. The scheme-representable descent node was not applied to algebraic-space fibres.",
+  "blueprint": "Inherited direct-image constructibility proof (3), supporting input for Quot representability: algebraicity through a representable map to an algebraic stack. Read the latest direct-images proof and unit; this is supporting moduli-stack calculus below its direct-image route, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-presheaf-space-target-bootstrap",
+    "why": "Generic presheaf over an algebraic space bootstrap for the diagonal Isom presheaf; the item unit has no other statement giving this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-presheaf-space-target-bootstrap"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-825562926",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-825562926 (reviewer sub-agent of L); spot-checked: Read Stacks 0CKJ (stacks.tex, both descent arguments) and algebraic.tex 05UM, 05UL and 05UN, plus every cited statement. New node lem-sfb-relative-sheaf-fibred-descent is exactly 0CKJ on (Sch/S)_et, with the orientation of φ inverted, which gives an isomorphic presheaf in groupoids. It is statement-only and self-contained, and it is not a restatement of the item: it is the generic stack half of 05UN, with no representability hypothesis. Small cases agree: over the terminal stack it says setoid fibred categories with a sheaf of classes are stacks; dropping faithfulness or the sheaf hypothesis gives counterexamples; for empty F both sides fail. The rg -L search for 0CKJ/05UN/05UM/05UL and for faithful+descent found no duplicate. lem-sfb-representable-fibred-category-stack only allows scheme fibres and is a special case; lem-sfb-open-stack-algebraic-lfp is the open-substack special case of the item. Step 1: faithfulness via the automorphism (id_T, b^-1 a) of (id_T, x, 1), killed by the discrete equivalence; P_y is the fibre of Z_T; étale covers are fppf covers directly from def-weil-etale-morphism and def-pc-fppf-site. Step 2: applies the new node. Step 3: with A = H x_Y X and sections s1 = (x1, 1), s2 = (x2, α), an arrow between them is a w with j(w) = α, unique by step 1, so H x_B P = h_E for E the pullback of the diagonal of A; the bootstrap node (02YS, no sheaf hypothesis on P) then applies with target B over all scheme tests. Step 4: pulled-back atlas and étale chart through the calculus clauses (base change, étale implies smooth, chart comparison, composition), meeting all three clauses of def-sfb-algebraic-moduli-stack. Step 5: existential atlas convention, chart lfp hypothesis and the 01TR Mathlib composition give U -> S lfp. No cycle; no SGA. The tool_uses entry (presheaf bootstrap, same unit) is accepted. Batch-5: the closure reaches no thm-/cor- node of trf/pd and no nt- or trace-transport node, only definitions and foundational space/projective-bundle units (sk-i-curve-zero, sk-i-additivity, sk-lem-finite). The direct cite def-trf-scheme-algebraic-space is a general definition; the calculus, the bootstrap and the moduli-groupoids definition are generic foundations, outside both assumptions. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableSourceAlgebraic",
+  "declaration": "CategoryTheory.isAlgebraicModuliStack_of_representable",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableSourceAlgebraic.lean",
+  "statement": "theorem isAlgebraicModuliStack_of_representable {S : Scheme.{u}} {X : BasedCategory.{v₁, w₁} (Over S)} {Y : BasedCategory.{v₂, w₂} (Over S)} (j : BasedFunctor X Y) (hX : IsFibredInGroupoids X) (hY : IsAlgebraicModuliStack Y) (hj : IsRepresentableByAlgebraicSpaces j) : IsAlgebraicModuliStack X ∧ ((∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) Y), ∃ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange j T t Z p ∧ ∀ (U : Over S) (b : yoneda.obj U ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b → LocallyOfFinitePresentation ((yoneda.preimage (b ≫ p)).left)) → (∃ (V : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj V)) Y), IsSmoothModuliAtlas Y V a ∧ LocallyOfFinitePresentation V.hom) → ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) X), IsSmoothModuliAtlas X U a ∧ LocallyOfFinitePresentation U.hom)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Both clauses in one conjunction; source initially only fibred in groupoids. The conditional local finite presentation clause uses projection-compatible space presentations, all etale scheme charts, and the accepted existential smooth-atlas convention. Independent object and morphism universes for source and target."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-742a3e675",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Checked every clause against the node and Stacks 05UN/05UM/06Q2/06Q3. Hypotheses: IsFibredInGroupoids X only (no stack hypothesis on X), IsAlgebraicModuliStack Y, IsRepresentableByAlgebraicSpaces j (HasSpaceBaseChange keeps the projection over T). Conclusion: IsAlgebraicModuliStack X, and conditionally an lfp smooth atlas of X, using the existential-atlas convention of openStackAlgebraicLfp and StackInfinitesimalSmoothCriterion; chart lfp is tested on (yoneda.preimage (b ≫ p)).left like SpaceMapIsSmooth. The Lean form is provable as stated. No extra assumptions; independent universes for X and Y; empty cases covered. The node copy differs from live only in lean; lean.statement matches the file verbatim. Plain imports = proof_dep modules (Fpqc, Etale, EnlargedEtaleRingedSite). Docstrings carry the source place, the blueprint id and proof steps 1-5 (minor wording slip in step 4, not blocking). One sorry theorem, no defs, no duplicate in side-live or Mathlib, no pro-etale substitute. No compile needed (no file changed)."
+ }
+}

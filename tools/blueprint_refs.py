@@ -40,10 +40,13 @@ KEYS = ("is", "from", "same_as")
 
 
 def load() -> tuple[dict[str, dict], dict[str, pathlib.Path]]:
+    if str(ROOT / "tools") not in sys.path:
+        sys.path.insert(0, str(ROOT / "tools"))
+    import nodefiles
     nodes, paths = {}, {}
     for p in sorted(NODES.rglob("*.json")):
         try:
-            d = json.loads(p.read_text())
+            d = nodefiles.read(p)
         except (OSError, json.JSONDecodeError):
             continue
         if isinstance(d, dict) and d.get("id"):

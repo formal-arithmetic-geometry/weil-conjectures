@@ -1,0 +1,102 @@
+{
+ "id": "def-pur-constant-scalar-tensor-data",
+ "kind": "definition",
+ "title": "Constant coefficient tensor data before geometric mates",
+ "statement": "Fix a prime ell, finite Q_ell-extensions E and F and an algebra map i:E→F [def-weil-l-adic-coefficient-extension]. For each scheme W use the constant ring sheaves and strict module towers of [def-cbc-strict-constant-tower-operations]. Define constantMap by constant sheafification of the actual integral inclusion, tensor as its pointwise sheafified scalar extension [lem-pur-derived-change-of-rings], and T as exact localization of tensor. Exactness follows from finite freeness of O_F over O_E. Define constants to be this constant ring sheaf with its canonical geometric inverse-image identifications. This is only the constant scalar tensor construction, not the geometric proper/open mate or compact-support comparison.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), 0940 (section-derived-limits), 0B56 (equation-projection-formula-map); sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor). Auxiliary in the item proof Steps 2--6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "existing declarations constantMap, tensor, tensor_exact, T, constants in lean/Sheaf/Paper and dag/nodes",
+   "results": "Exact declarations exist in Sheaf.Paper.ConstantScalarTowerAdjunction. The larger node includes geometric/compact-support data not used by this subset. Attach existing declarations; do not redeclare or alter Lean.",
+   "date": "2026-10-25",
+   "verdict": "Existing declaration subset extracted from coarse node; no new Lean definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact coefficient restriction preserves the universal counit for total left derived tensor extension on a sequence site",
+   "results": "General totalLeftDerivedCounit and ordinary module scalar adjunction counits; no concrete native coefficient construction.",
+   "date": "2026-10-25",
+   "verdict": "Reuse existing project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightKanExtensionUnique",
+   "results": "General Kan uniqueness, already recorded by lem-sfb-right-kan-extension-unique-iso.",
+   "date": "2026-10-25",
+   "verdict": "Does not construct the concrete coefficient data."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarReductionTowerBalancing",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Refined declaration attachment: coefficient-only prerequisites of the whole-cochain scalar balancing, before geometric compact-support comparisons.",
+   "via": [
+    "def-pur-constant-scalar-tower-adjunction",
+    "def-pur-strict-scalar-reduction-balancing",
+    "lem-pur-compact-support-strict-scalar-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ConstantScalarTowerAdjunction",
+  "file": "lean/Sheaf/Paper/ConstantScalarTowerAdjunction.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.T",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.constantMap",
+   "WeilConjectures.PurStrictScalar.tensor",
+   "WeilConjectures.PurStrictScalar.tensor_exact",
+   "WeilConjectures.PurStrictScalar.T",
+   "WeilConjectures.PurStrictScalar.constants"
+  ],
+  "statement": "def T (W : Scheme.{u}) :\n    Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤\n      Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25",
+  "note": "Existing coefficient-only declarations reattached from def-pur-constant-scalar-tower-adjunction without any Lean change; the old node retains geometric/support declarations."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T163558-L-701181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T163558-L-701181",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

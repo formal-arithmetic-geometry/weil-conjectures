@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-ordinary-supported-unit-comparison",
+ "kind": "statement",
+ "title": "The ordinary constant-object unit as an adjunction unit",
+ "statement": "Let $A$ be a commutative ring and $f:X\\to Y$ a scheme morphism. Write $C_T=A_T[0]$, let $c_f:Lf^*C_Y\\cong C_X$ be ordinaryFiniteUnitPullback [def-asd-ordinary-finite-p1-arrows], let $\\eta_f:C_Y\\to Rf_*C_X$ be supportedDerivedUnit [def-asd-ordinary-supported-kummer-system], and let $u_f$ be the unit of the specified derived adjunction $Lf^*\\dashv Rf_*$. Then $\\eta_f=(u_f)_{C_Y};Rf_*(c_f.\\mathrm{hom})$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-supported-kummer-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing proved supportedDerivedUnit_eq for the recorded ordinaryFiniteAdjunction, and unfold only that adjunction wrapper. It is the specified derivedUpperStarLowerStarAdjunction, giving exactly the stated formula. No single-object or localization construction is unfolded.",
+   "uses": [
+    "lem-sp-ordinary-finite-constant-unit-comp"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ordinary-finite-constant-unit-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image.",
+  "note": "U3 returned-delivery repair: reuse the existing proved supportedDerivedUnit_eq and unfold only ordinaryFiniteAdjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived base change map compatible adjunction unit constant sheaves",
+   "results": "8 hits: CategoryTheory.Adjunction.derived_unit, derivedη and derivedη.congr_simp; constantPresheafAdj_unit_app; condensed-category units and a sheaf-of-modules pushforward unit formula.",
+   "date": "2026-10-26",
+   "verdict": "Generic derived-unit ingredients, no etale constant-object exchange or proper-support normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change transports unit for section proper compat forgetsupports composition",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, unitToPushforwardObjUnit and their adjunction formulas; Scheme.Modules.pushforwardComp; stability under base change.",
+   "date": "2026-10-26",
+   "verdict": "Underived module-sheaf unit/composition statements, no comparison for these unbounded etale derived functors or compact supports."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMap.*unit|LowerShriek.*comp.*LowerStar",
+   "results": "msearch Mathlib grep returned 0 hits. Local searches additionally read upperStarConstantSheafIso_comp, leftDerivedUpperStar_map_singleFunctor_comp, unit_mateEquiv and rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar.",
+   "date": "2026-10-26",
+   "verdict": "Use the proved source-library constant-object composition lemmas and generic mate-unit law; isolate the proper-support normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1IntegralSectionComparison",
+  "group": "U3",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image.",
+   "via": [
+    "lem-sf-p1-integral-section-comparison",
+    "lem-sf-p1-integral-transport",
+    "lem-sf-p1-coordinate-integrals",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinarySupportedUnitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinarySupportedUnitComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.supportedDerivedUnit_eq_adjunction",
+  "statement": "theorem supportedDerivedUnit_eq_adjunction (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    supportedDerivedUnit A f =\n      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).unit.app\n          (ordinaryFiniteUnit A Y) ≫\n        (ordinaryFinitePushforward A f).map (ordinaryFiniteUnitPullback A f).hom",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8afc0",
+  "group": "U3",
+  "result": "fix",
+  "landing": "20261027T135443-L-3709832",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8afc0",
+  "group": "U3",
+  "result": "fix",
+  "landing": "20261027T135443-L-3709832",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 8 new nodes/modules vs packet; adapted SfP1IntegralTransportData vs clone (diff = endpoint repairs only); delivered Lean identical to d31b0807c07b, whose FIX was dropped; transitive user SfP1ExchangeIsoTransport + all 16 direct importers compiled against corrected set (27 files OK)"
+ }
+}

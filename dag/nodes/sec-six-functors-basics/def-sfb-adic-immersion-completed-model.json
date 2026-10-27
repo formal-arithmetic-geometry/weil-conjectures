@@ -1,0 +1,113 @@
+{
+ "id": "def-sfb-adic-immersion-completed-model",
+ "kind": "definition",
+ "title": "The specified normalized completed inverse image along an immersion",
+ "statement": "For an immersion i:S→X [def-pc-scheme], [def-weil-closed-immersion], [def-weil-open-immersion], a commutative ring A, an ideal I and an actual completed-coefficient complex K [def-sfb-adic-stratified-perfect-data], define sfbImmersionAlgebra as the algebraic lift, characterized on generalized sections and constants, of the transported geometric inverse image [lem-weil-pbc-constant-completion-equivalence]. Define sfbImmersionCompletedModel to be completedPull [lem-sfb-adic-stratum-completion-unit] of SfbCompletionNormalization.object X I K [lem-sfb-completion-normalization]. This construction takes no completeness or residue witness and makes no arbitrary selection of a perfect or local model.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-sfb-completion-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use the algebraic lift of the transported geometric inverse image, characterized on generalized sections and constants, and apply completedPull to the explicit normalized object. This defines the candidate needed by the parent, independently of completeness and residue witnesses.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sfb-adic-stratum-completion-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-stratum-completion-unit"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks Tags 03A0, 03CY, 099C and 099L; AsSmall equivalence, scalar restriction, and completion projections"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks Tags 03A0, 03CY, 099C and 099L; AsSmall equivalence, scalar restriction, and completion projections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport derived complete complexes of sheaves along an immersion preserving residue and restriction to slices",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, restrictFunctor, restrict, restrictFunctorComp_hom_app_app, restrictFunctorCongr, restrictFunctorCongr_hom_app_app; open immersion restriction comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No complete theorem. Reuse the project exact inverse image, scalar restriction, finite-comparison and local-completeness APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "SheafOfModules.pushforwardPushforwardEquivalence; pushforwardPushforwardEquivalence_unit_app_val_app; pushforwardPushforwardEquivalence_counit_app_val_app.",
+   "date": "2026-10-26",
+   "verdict": "Module equivalences exist, but do not state these completed-ring, residue or slice compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence|derivedEquivalence|mapDerivedCategoryEquivalence",
+   "results": "Mathlib/Topology/Sheaves/Module.lean:32; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:388,403,404,408,409; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:435.",
+   "date": "2026-10-26",
+   "verdict": "No completed normalization theorem; exact derived factorization and canonical module equivalences are the applicable ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionCompletedTransport",
+  "date": "2026-10-26",
+  "group": "F8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Stacks Tags 03A0, 03CY, 099C and 099L; AsSmall equivalence, scalar restriction, and completion projections"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicImmersionCompletedModel",
+  "file": "lean/Sheaf/Paper/AdicImmersionCompletedModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbImmersionCompletedModel",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfbImmersionAlgebra",
+   "AlgebraicGeometry.Scheme.sfbImmersionCompletedModel"
+  ],
+  "statement": "def sfbImmersionCompletedModel {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]\n    {A : Type (u + 1)} [CommRing A] (I : Ideal A)\n    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :\n    ConstantCompletion.D (ConstantCompletion.completed (proEtaleModelTopology S) A I)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T001524-L-6141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T001524-L-6141",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

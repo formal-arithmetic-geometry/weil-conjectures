@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-power-series-adic-gradient-control",
+ "kind": "statement",
+ "title": "Adic gradient estimates and finite-level differentiation of series",
+ "statement": "Let $F$ be a field of arbitrary characteristic, $n\\geq0$, $D=F[[t_1,\\ldots,t_n]]$ [def-weil-pbc-multivariate-power-series], $\\mathfrak n=(t_1,\\ldots,t_n)\\subset D$, $P=F[t_1,\\ldots,t_n]\\subset D$ [def-weil-pbc-mv-polynomial-ring], and $J=(t_1,\\ldots,t_n)\\subset P$. Write $\\partial_i$ for the termwise partial derivatives on $D$ [def-trf-formal-power-series-partial-derivative]. For every integer $s\\geq1$ and every $f\\in\\mathfrak n^s$, one has $\\partial_i f\\in\\mathfrak n^{s-1}$ for all $i$. In particular, for every polynomial $g\\in J^r$, $r\\geq1$, its polynomial gradient $(\\partial g/\\partial t_i)_i$ [def-weil-pbc-polynomial-partial-derivative] embedded in $D^n$ belongs to $(\\mathfrak n^{r-1})^{\\oplus n}$, and its polynomial and series partial derivatives agree. For every $h\\in D$ and $r\\geq1$, let $p_{r+1}(h)\\in P$ consist of the terms of $h$ of total degree $<r+1$. Then\n$$h-p_{r+1}(h)\\in\\mathfrak n^{r+1},\\qquad \\partial_i h-\\partial_i p_{r+1}(h)\\in\\mathfrak n^r.$$\nFor $Q_r=D/\\mathfrak n^r$, with universal derivation $\\mathrm d:Q_r\\to\\Omega_{Q_r/F}$ [def-weil-pbc-kahler-differentials], one has the finite-level identity\n$$\\mathrm d(h\\bmod\\mathfrak n^r)=\\sum_{i=1}^n(\\partial_i h\\bmod\\mathfrak n^r)\\,\\mathrm d(t_i\\bmod\\mathfrak n^r).$$\nNo division by integers or characteristic-zero assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HQ (lemma-differential-mod-power-ideal), the one-power Leibniz bound; Tag 00RX (lemma-differentials-polynomial-ring), polynomial differentiation. Agent-written total-degree coefficient and polynomial approximation argument, extracted from returned parent proof steps 3 and 7; the tags do not state the formal-series finite-level identity themselves."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-power-series-combined-ideal-coefficients] with coefficient ring $F$ and base ideal $0$: for $k\\ge1$, membership in $\\mathfrak n^k$ is equivalent to vanishing of all coefficients of total degree $<k$, since $0^{k-|E|}=0$ for $|E|<k$. If $s\\ge2$ and $|E|<s-1$, then $|E+e_i|=|E|+1<s$. By the coefficient formula in [def-trf-formal-power-series-partial-derivative], $[t^E]\\partial_i f=(E_i+1)[t^{E+e_i}]f=0$. The criterion gives $\\partial_i f\\in\\mathfrak n^{s-1}$. For $s=1$ the conclusion is simply membership in $D=\\mathfrak n^0$.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HQ (lemma-differential-mod-power-ideal), Leibniz bound; Tag 00RX (lemma-differentials-polynomial-ring), polynomial differential formula; explicit coefficient/truncation argument."
+   }
+  },
+  {
+   "text": "For a polynomial $g=\\sum_\\alpha c_\\alpha t^\\alpha$, the polynomial monomial formula [def-weil-pbc-polynomial-partial-derivative] gives coefficient $(E_i+1)c_{E+e_i}$ at $t^E$ in $\\partial_i g$, exactly the series formula [def-trf-formal-power-series-partial-derivative]. Thus the two partial derivatives agree coefficientwise. The inclusion $P\\to D$ sends every generator of $J$ into $\\mathfrak n$, so it sends every finite sum of products defining $J^r$ into $\\mathfrak n^r$. Applying Step 1 with $s=r$ to $g$ gives every asserted gradient coordinate bound.",
+   "uses": [
+    "def-weil-pbc-polynomial-partial-derivative",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HQ (lemma-differential-mod-power-ideal), Leibniz bound; Tag 00RX (lemma-differentials-polynomial-ring), polynomial differential formula; explicit coefficient/truncation argument."
+   }
+  },
+  {
+   "text": "There are finitely many multi-indices of total degree $<r+1$ (each coordinate is at most $r$), so $p=p_{r+1}(h)$ is a polynomial [def-weil-pbc-mv-polynomial-ring]. Its coefficients agree with those of $h$ below that degree. The coefficient criterion [lem-weil-pbc-power-series-combined-ideal-coefficients] with base ideal zero therefore puts $h-p$ in $\\mathfrak n^{r+1}$. Additivity of the formal partial derivatives [def-trf-formal-power-series-partial-derivative], Step 1 with $s=r+1$, and Step 2 give $\\partial_i h-\\partial_i p\\in\\mathfrak n^r$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-trf-formal-power-series-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HQ (lemma-differential-mod-power-ideal), Leibniz bound; Tag 00RX (lemma-differentials-polynomial-ring), polynomial differential formula; explicit coefficient/truncation argument."
+   }
+  },
+  {
+   "text": "Let $q:D\\to Q_r$ be the quotient map. The map $p\\mapsto\\mathrm d(q(p))$ is an $F$-derivation from $P$ to the $P$-module $\\Omega_{Q_r/F}$. By the universal property [def-weil-pbc-kahler-differentials] it factors through a $P$-linear map $\\Omega_{P/F}\\to\\Omega_{Q_r/F}$ sending $\\mathrm d t_i$ to $\\mathrm d(q(t_i))$. Apply this map to the polynomial identity of [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] for $p=p_{r+1}(h)$. Step 3 gives $q(h)=q(p)$ and $q(\\partial_i h)=q(\\partial_i p)$, yielding exactly the stated finite-level identity. If $n=0$, $D=P=F$, the variable ideals vanish, the truncation is $h$, and $\\Omega_{F/F}=0$ by its defining relations, so the same identity is the empty sum. All integer factors above are multiplications in $F$, never divisions.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HQ (lemma-differential-mod-power-ideal), Leibniz bound; Tag 00RX (lemma-differentials-polynomial-ring), polynomial differential formula; explicit coefficient/truncation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-formal-power-series-partial-derivative",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HQ (lemma-differential-mod-power-ideal), Leibniz bound; Tag 00RX (lemma-differentials-polynomial-ring), polynomial differential formula; explicit coefficient/truncation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pderiv.*(trunc|order|ideal|coeff)|trunc.*pderiv",
+   "results": "{\"t\": \"2026-10-22T06:44:46Z\", \"tool\": \"grep\", \"query\": \"pderiv.*(trunc|order|ideal|coeff)|trunc.*pderiv\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\"], \"digest\": \"370db4f6306431ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Derivative.lean has individual coefficient and rectangular truncation identities, not the combined total-degree and Kahler quotient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "partial derivatives of multivariate formal power series modulo powers of the variable ideal",
+   "results": "{\"t\": \"2026-10-22T06:44:46Z\", \"tool\": \"leansearch\", \"query\": \"partial derivatives of multivariate formal power series modulo powers of the variable ideal\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv",
+   "results": "{\"t\": \"2026-10-22T06:44:47Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.pderiv\", \"MvPowerSeries.pderiv_X_self\", \"MvPowerSeries.pderiv_X_of_ne\", \"MvPowerSeries.pderiv_one\", \"MvPowerSeries.pderiv_X\", \"MvPowerSeries.pderiv_C\", \"MvPowerSeries.pderiv_coe\", \"MvPowerSeries.pderiv_pow\"], \"digest\": \"ed4b904cf5ed1d93\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: coefficient formula, polynomial compatibility and rectangular truncation only; not the ideal-power statement and quotient differential formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "differential formula on quotient by variable ideal power from truncating series to polynomials",
+   "results": "{\"t\": \"2026-10-22T06:45:01Z\", \"tool\": \"leanfinder\", \"query\": \"differential formula on quotient by variable ideal power from truncating series to polynomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"liftOfDerivationToSquareZero_mk_apply'\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"KaehlerDifferential.derivationQuotKerTotal\", \"derivationQuotKerSq_mk\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"derivationQuotKerSq\", \"KaehlerDifferential.polynomialEquiv_D\"], \"digest\": \"5a1c3d8679f6e93b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unrelated Weierstrass remainders and ordinary derivations only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal partial derivatives lower the variable ideal filtration by one and compute differentials in truncated power series quotients",
+   "results": "{\"t\": \"2026-10-22T06:45:01Z\", \"tool\": \"leanfinder\", \"query\": \"formal partial derivatives lower the variable ideal filtration by one and compute differentials in truncated power series quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"liftOfDerivationToSquareZero_mk_apply'\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\"], \"digest\": \"d6b0dc7786ecdd3d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no total-degree ideal bound or finite-level universal differential formula"
+  },
+  {
+   "tool": "grep",
+   "query": "pderiv.*(coeff|trunc|order|ideal)|coeff.*pderiv",
+   "results": "{\"t\": \"2026-10-23T09:50:40Z\", \"tool\": \"grep\", \"query\": \"pderiv.*(coeff|trunc|order|ideal)|coeff.*pderiv\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\"], \"digest\": \"3ff3dc3544ff0c16\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give polynomial differentials or coefficient/rectangular truncation formulas, not the full formal-series ideal-power and finite-level assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kahler differential of a formal power series modulo a power of the variables ideal equals the sum of formal partial derivatives times coordinate differentials",
+   "results": "{\"t\": \"2026-10-23T09:50:40Z\", \"tool\": \"leansearch\", \"query\": \"Kahler differential of a formal power series modulo a power of the variables ideal equals the sum of formal partial derivatives times coordinate differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.polynomial_D_apply\", \"KaehlerDifferential.mvPolynomialBasis_repr_apply\", \"KaehlerDifferential\", \"CommRingCat.KaehlerDifferential\", \"KaehlerDifferential.polynomialEquiv_D\", \"CommRingCat.KaehlerDifferential.d\", \"KaehlerDifferential.D\", \"KaehlerDifferential.D_apply\"], \"digest\": \"ae94bd1e56a63fa4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give polynomial differentials or coefficient/rectangular truncation formulas, not the full formal-series ideal-power and finite-level assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.pderiv",
+   "results": "{\"t\": \"2026-10-23T09:50:41Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.pderiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.pderiv\", \"MvPowerSeries.pderiv_X_self\", \"MvPowerSeries.pderiv_X_of_ne\", \"MvPowerSeries.pderiv_one\", \"MvPowerSeries.pderiv_X\", \"MvPowerSeries.pderiv_C\", \"MvPowerSeries.pderiv_coe\", \"MvPowerSeries.pderiv_pow\"], \"digest\": \"ed4b904cf5ed1d93\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give polynomial differentials or coefficient/rectangular truncation formulas, not the full formal-series ideal-power and finite-level assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "partial derivatives lower the variable ideal filtration of multivariate formal power series and compute Kahler differentials modulo ideal powers",
+   "results": "{\"t\": \"2026-10-23T09:50:42Z\", \"tool\": \"leanfinder\", \"query\": \"partial derivatives lower the variable ideal filtration of multivariate formal power series and compute Kahler differentials modulo ideal powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.Generators.cotangentSpaceBasis_repr_tmul\", \"KaehlerDifferential.derivationQuotKerTotal\", \"Algebra.Generators.toKaehler_tmul_D\", \"Algebra.Generators.toKaehler_cotangentSpaceBasis\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"Algebra.Presentation.differentialsRelations\"], \"digest\": \"b1168064b5fda9a6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give polynomial differentials or coefficient/rectangular truncation formulas, not the full formal-series ideal-power and finite-level assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "KaehlerDifferential|ideal.*pow|pow.*ideal|pderiv_coe|theorem coeff_pderiv",
+   "results": "{\"t\": \"2026-10-23T09:51:16Z\", \"tool\": \"grep\", \"query\": \"KaehlerDifferential|ideal.*pow|pow.*ideal|pderiv_coe|theorem coeff_pderiv\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\", \"Mathlib/RingTheory/MvPowerSeries/Derivative.lean\"], \"digest\": \"2a6015153286c9cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give polynomial differentials or coefficient/rectangular truncation formulas, not the full formal-series ideal-power and finite-level assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derivations of power series rings into modules annihilated by a power of the maximal ideal computed by polynomial truncation and coordinate derivatives",
+   "results": "{\"t\": \"2026-10-23T09:51:27Z\", \"tool\": \"leanfinder\", \"query\": \"derivations of power series rings into modules annihilated by a power of the maximal ideal computed by polynomial truncation and coordinate derivatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.derivative\", \"liftOfDerivationToSquareZero_mk_apply'\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.derivative.ext\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.termD⁄dX\", \"PowerSeries.trunc_derivativeFun\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\"], \"digest\": \"a7f11d7f6ac3f848\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give polynomial differentials or coefficient/rectangular truncation formulas, not the full formal-series ideal-power and finite-level assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-power-series-continuous-free",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The Jacobian-cokernel/differential comparison in the first proof paragraph of the pointwise nodal ingredient (Curves 0C4D), specifically the continuous differentials of the ambient formal power-series ring. Total-degree derivative estimate and polynomial approximation at one higher precision: returned parent proof steps 3 and 7.",
+   "via": [
+    "lem-trf-formal-power-series-continuous-free",
+    "lem-trf-formal-power-series-continuous-differentials",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-power-series-adic-gradient-control",
+  "worker": "stage1",
+  "summary": "Q114: unchanged statement; coefficient criterion at base ideal zero proves the adic estimates, and the polynomial differential formula passes through the quotient by the universal property. All existing citations read; no new nodes and no Lean attachment. Positive-characteristic, zero-variable and first-level cases checked.",
+  "blueprint": "Realizes the inherited formal-series differential/Jacobian auxiliary calculation beneath lem-trf-local-term-locality: coefficient gradient bound and one-higher-precision truncation from the returned continuous-free proof steps 3 and 7. The current blueprint ancestor does not itself state this auxiliary commutative-algebra assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic coefficient criterion specialized to the zero base ideal; this unit has no separate ideal-power coefficient criterion. It preserves the inherited formal-series/truncation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-d4b37964a",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-d4b37964a (reviewer sub-agent of L); spot-checked: Statement and stmt_deps are unchanged against live (proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed); no new nodes; no other group has split the item. Step 1: the combined-ideal criterion with J=0 means F∈𝔫^k iff all coefficients of total degree <k vanish (k≥1); with the derivative coefficient formula (E_i+1)·coeff_{E+e_i} this gives ∂_i f∈𝔫^{s-1}, and s=1 is trivial. Step 2: from the monomial formula, the polynomial coefficient at E is (E_i+1)c_{E+e_i}, so polynomial and series derivatives agree, and J^r maps into 𝔫^r. Step 3: p_{r+1}(h) is a finite sum, h−p∈𝔫^{r+1} by the criterion, and ∂_i(h−p)∈𝔫^r by additivity and Step 1. Step 4: the universal property applied to the F-derivation p↦d q(p) transports dp=Σ∂_i p dt_i (Mathlib leaf mvPolynomialBasis, Stacks 00RX) to Q_r; it does not claim that ∂ descends to Q_r. Checked n=0, r=1, s=1 and characteristic p; no division is used. Stacks 02HQ (algebra.tex 34194) is read as context and the source is honestly marked agent-written. No SGA. No duplicate found: the truncated-differential-presentation sibling is a different statement, and the parent continuous-free uses exactly the two items' clauses, with no cycle. Accepted tool use: the pbc combined-ideal coefficient criterion, generic commutative algebra. Cosmetic: the report lists citations.json, which is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesAdicGradientControl",
+  "declaration": "MvPowerSeries.adic_gradient_control",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesAdicGradientControl.lean",
+  "statement": "theorem adic_gradient_control (F : Type u) [Field F] (n : ℕ) : (∀ s : ℕ, 1 ≤ s → ∀ f : MvPowerSeries (Fin n) F, f ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ s → ∀ i : Fin n, pderiv F i f ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ (s - 1)) ∧ (∀ r : ℕ, 1 ≤ r → ∀ g : MvPolynomial (Fin n) F, g ∈ (Ideal.span (Set.range (MvPolynomial.X : Fin n → MvPolynomial (Fin n) F))) ^ r → ∀ i : Fin n, ((MvPolynomial.pderiv i g : MvPowerSeries (Fin n) F) ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ (r - 1)) ∧ (MvPolynomial.pderiv i g : MvPowerSeries (Fin n) F) = pderiv F i (g : MvPowerSeries (Fin n) F)) ∧ (∀ (h : MvPowerSeries (Fin n) F) (r : ℕ), 1 ≤ r → (h - (truncTotal (r + 1) h : MvPowerSeries (Fin n) F) ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ (r + 1)) ∧ (∀ i : Fin n, pderiv F i h - pderiv F i (truncTotal (r + 1) h : MvPowerSeries (Fin n) F) ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ r) ∧ KaehlerDifferential.D F (MvPowerSeries (Fin n) F ⧸ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ r) (Ideal.Quotient.mk _ h) = ∑ i : Fin n, Ideal.Quotient.mk ((Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ r) (pderiv F i h) • KaehlerDifferential.D F (MvPowerSeries (Fin n) F ⧸ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ^ r) (Ideal.Quotient.mk _ (X i)))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9dc99c380",
+  "group": "Q42",
+  "result": "fix",
+  "note": "The Lean statement is exact against the node: MvPowerSeries.pderiv F i, MvPolynomial.pderiv with the coe agreement, truncTotal (r+1) = terms of degree <r+1 (coeff_truncTotal_eq_ite), and KaehlerDifferential.D F on D⧸𝔫^r with Q_r coefficients. Verified mathematically via the J=0 coefficient criterion power_series_mem_combined_ideal_pow_iff. Edge cases n=0, s=r=1 and char p checked; one universe; lean.statement equals the file signature verbatim; statement and stmt_deps match live. The def-trf pderiv dep has no lean record, as for 6 landed citers. No new defs, no duplicate found, source/blueprint docstrings present, sorry only. Sole fault H11: the 'Second reading by Q42' section is the worker's self-pass. FIX: fixes/lem-trf-power-series-adic-gradient-control.report.md keeps the worker report verbatim and adds an independent clause-by-clause second reading. No Lean changed, so no compile."
+ }
+}

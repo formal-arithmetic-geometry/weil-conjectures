@@ -91,30 +91,39 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
  "lean": {
-  "module": "Sheaf.CategoryTheory.CondensedInternalBarResolution",
+  "module": "Sheaf.CategoryTheory.CondensedInternalBarData",
   "declaration": "Profinite.CondensedAction.InternalBar.generator",
   "declarations": [
    "Profinite.CondensedAction.InternalBar.free",
    "Profinite.CondensedAction.InternalBar.freeAdjunction",
    "Profinite.CondensedAction.InternalBar.tuples",
    "Profinite.CondensedAction.InternalBar.freePower",
-   "Profinite.CondensedAction.InternalBar.generator"
+   "Profinite.CondensedAction.InternalBar.generator",
+   "Profinite.CondensedAction.InternalBar.onSections",
+   "Profinite.CondensedAction.InternalBar.basis",
+   "Profinite.CondensedAction.InternalBar.pureTensor",
+   "Profinite.CondensedAction.InternalBar.regularOne"
   ],
   "statement": "def generator (n : ℕ) (S : Profinite.{u}) (x : Fin n → C(S, G)) :\n    sectionModule R (freePower R G n) S",
   "branch": "sheaf-dag",
   "by": "NB",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Definition ownership repair H2/H4, using the existing declarations, with no new module and no second copy. The unchanged module constructs free/freeAdjunction/tuples/freePower/generator at lines 53-90 before exists_resolution; none uses or chooses from that theorem. def-sfb-condensed-equivariant-bar-data is usable and is cited for the same freeParameter body, which the consumer now uses directly. Its InternalFunctions is a specification and does not supply the canonical unit generator. This node records precisely that missing definition ownership and its supporting existing declarations; the resolution theorem remains owned by its original theorem node."
+  "note": "Definition ownership repair H2/H4, using the existing declarations, with no new module and no second copy. The unchanged module constructs free/freeAdjunction/tuples/freePower/generator at lines 53-90 before exists_resolution; none uses or chooses from that theorem. def-sfb-condensed-equivariant-bar-data is usable and is cited for the same freeParameter body, which the consumer now uses directly. Its InternalFunctions is a specification and does not supply the canonical unit generator. This node records precisely that missing definition ownership and its supporting existing declarations; the resolution theorem remains owned by its original theorem node. The section helpers onSections, basis, pureTensor and regularOne, moved verbatim with these definitions to CondensedInternalBarData, are recorded here (formerly in the lean record of lem-sfb-condensed-internal-bar-resolution).",
+  "file": "lean/Sheaf/CategoryTheory/CondensedInternalBarData.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -131,5 +140,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Re-delivery of 7f48924c H2/H4 RETURN. Lean delta: Hom source is now CondensedBar.freeParameter ⟨R.X⟩ (power G (n+1)) from def-sfb-condensed-equivariant-bar-data, body-identical to InternalBar.freePower; the generator typechecks definitionally. The theorem stmt_dep lem-sfb-condensed-internal-bar-resolution is removed. New def-sfb-condensed-free-module-generators is existing:true on unchanged CondensedInternalBarResolution (free/freeAdjunction/tuples/freePower/generator, plain defs at lines 53-90, no .choose); statement verbatim; check_existing clean; no competing owner in side-live. Item node differs from live only in stmt_deps (4 added def nodes) and lean. Clauses rechecked: arbitrary commutative R, profinite G, sole [Injective J.module], every n : ℕ, action pinned on all slices with correct inverse and order, ∃ over a normalized model unique up to iso. Edge cases n=0, G=1, zero ring, J=0, empty test, infinite G. Gates H5/H6/H8 OK. Advisory: base-era tensor-closed public import used only by the proof plan. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4920a",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261025T143431-L-1005020",
+  "kind": "interface",
+  "note": "independent cc review: exists_resolution proof, the two new sorried statements (deletion comparison, induced coordinates) and the moved InternalBar data against their nodes, the change record and the 11 direct importers (all compiled against the sandbox build)"
  }
 }

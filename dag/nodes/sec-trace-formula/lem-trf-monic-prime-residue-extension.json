@@ -1,0 +1,226 @@
+{
+ "id": "lem-trf-monic-prime-residue-extension",
+ "kind": "statement",
+ "title": "Monic relations give a finite monogenic residue-field extension",
+ "statement": "Let $k$ be a field, $B$ a commutative $k$-algebra, and $\\mathfrak q\\subset B[T]$ a prime ideal containing a monic polynomial $f=T^d+\\sum_{j<d}c_jT^j$ with $d>0$, where monic means leading coefficient $1$. Set $\\mathfrak p=\\{b\\in B:b\\in\\mathfrak q\\}$ under the constant-polynomial inclusion, $F=\\kappa(\\mathfrak p)$ and $E=\\kappa(\\mathfrak q)$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-localization-at-prime]. Using the canonical identifications $F\\cong\\operatorname{Frac}(B/\\mathfrak p)$ and $E\\cong\\operatorname{Frac}(B[T]/\\mathfrak q)$, the injective map $B/\\mathfrak p\\to B[T]/\\mathfrak q$ extends to a $k$-embedding $F\\hookrightarrow E$ sending $\\bar b/\\bar c$ to the quotient of their images. If $\\xi\\in E$ is the image of $T$, then $$E=F[\\xi],\\qquad E=\\operatorname{span}_F\\{1,\\xi,\\ldots,\\xi^{d-1}\\}.$$ Here $F[\\xi]$ is the subring of polynomials in $\\xi$ with coefficients in $F$; the second equality means every element of $E$ is an $F$-linear combination of those powers. Thus $E/F$ is finite-dimensional [def-weil-finitely-generated-module], every element of $E$ is algebraic over $F$ (satisfies a nonzero polynomial over $F$), and $$\\operatorname{trdeg}_k E=\\operatorname{trdeg}_k F$$ as cardinal transcendence degrees [def-kun-transcendence-degree]. No domain, Noetherian, or finite-type hypothesis on $B$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051P (lemma-refined-Noether-normalization), sentence that the residue extension is finite and hence has the same transcendence degree; monic-relation argument made precise."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-finitely-generated-module",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=B/\\mathfrak p$ and $D=B[T]/\\mathfrak q$. The contraction $\\mathfrak p$ is prime: $bc\\in\\mathfrak p$ implies $bc\\in\\mathfrak q$, hence $b$ or $c$ lies in $\\mathfrak p$, and $1\\notin\\mathfrak p$. The map $A\\to D$ is injective because its kernel consists exactly of constants in $\\mathfrak q$. The residue-field lemma identifies $F=\\operatorname{Frac}(A)$ and $E=\\operatorname{Frac}(D)$. Apply the fraction-field lift to $A\\hookrightarrow D\\hookrightarrow E$. It gives an embedding $F\\hookrightarrow E$ with $\\bar b/\\bar c\\mapsto\\bar b\\,\\bar c^{-1}$. On $k$ this agrees with the given coefficient map, so it is a $k$-embedding.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-weil-pbc-fraction-field-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P (lemma-refined-Noether-normalization), residue-field inclusion; local-rings paragraph identifying residue fields with fraction fields after Tag 07BI, using Tag 00CT (proposition-localize-quotient)."
+   }
+  },
+  {
+   "text": "Map the coefficients of $f$ along $B\\to A\\to F$, obtaining $g=T^d+\\sum_{j<d}\\bar c_jT^j\\in F[T]$. Its leading coefficient is still $1$, so its degree is $d$. With $\\xi$ the image of $T$ in $E$, evaluation gives $g(\\xi)=0$ since $f\\in\\mathfrak q$. Let $S=F[\\xi]\\subseteq E$. Evaluation therefore induces a surjective $F$-linear map $F[T]/(g)\\to S$: it sends the class of $\\sum a_jT^j$ to $\\sum a_j\\xi^j$, and multiples of $g$ evaluate to zero. The monic-quotient lemma gives a basis $1,T,\\ldots,T^{d-1}$ in the source. Taking images shows $S=\\operatorname{span}_F\\{1,\\xi,\\ldots,\\xi^{d-1}\\}$; by the definition of finite generation this is a finite-dimensional $F$-algebra.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P (lemma-refined-Noether-normalization), finite residue extension from the monic relation; Tag 04GG (lemma-characterize-henselian), proof of 10=>1, the finite free monic quotient."
+   }
+  },
+  {
+   "text": "The subring $S\\subseteq E$ is a commutative domain: $1\\ne0$, and a product vanishes only if one factor does, since this holds in $E$. Apply the finite-dimensional-domain lemma over the field $F$ to conclude that every nonzero element of $S$ has an inverse in $S$. The image of $D$ is contained in $S$, because a class of $\\sum b_jT^j$ maps to $\\sum\\bar b_j\\xi^j$. By the residue-field lemma every $e\\in E$ is $u/v$ with $u,v\\in D$ and $v\\ne0$. Their images belong to $S$, the image of $v$ is nonzero by injectivity, and its inverse in $S$ equals its inverse in $E$. Thus $e\\in S$. Consequently $E=S$, giving both asserted equalities and finite dimensionality.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051P (lemma-refined-Noether-normalization), finite residue-extension assertion, expanded using the finite-dimensional-domain field criterion and the residue fraction-field description."
+   }
+  },
+  {
+   "text": "Apply the finite-algebra integrality lemma to $F\\to E$, which is module-finite by steps 2 and 3. Every $e\\in E$ satisfies a monic polynomial in $F[T]$. That polynomial is nonzero because its leading coefficient is $1\\ne0$ in the field $F$. Thus every element of $E$ is algebraic over $F$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK (lemma-finite-is-integral); compare Fields Tag 09GG (lemma-finite-is-algebraic)."
+   }
+  },
+  {
+   "text": "The maps $k\\to F\\to E$ form a compatible tower by step 1. The transcendence-degree tower lemma, including its algebraicity criterion, gives $\\operatorname{trdeg}_F E=0$ by step 4 and $\\operatorname{trdeg}_k E=\\operatorname{trdeg}_k F+\\operatorname{trdeg}_F E=\\operatorname{trdeg}_k F$. These are cardinal equalities; no finiteness of either transcendence degree is used.",
+   "uses": [
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 051P (lemma-refined-Noether-normalization), sentence concluding equality of transcendence degrees; Fields Tag 030H (lemma-transcendence-degree-tower)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-kun-transcendence-degree-tower",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-fraction-field-lift",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-prime-residue-field-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051P (lemma-refined-Noether-normalization), finite residue-extension and equal-transcendence-degree sentence. Q35 supplies the explicit monogenic and power-spanning argument over arbitrary B, using the cited monic quotient, field, integrality and tower lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]inite.*[Rr]esidueField|[Rr]esidueField.*[Ff]inite|trdeg.*[Rr]esidue [Mathlib/RingTheory]",
+   "results": "Actual msearch result: 25 hits; Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean, Mathlib/RingTheory/QuasiFinite/Weakly.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general finite/algebraic residue-field instances do not give the asserted monogenic presentation and explicit power spanning set for a prime containing a given monic polynomial"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prime containing a monic polynomial has a finite monogenic residue field extension over its contracted prime and the same transcendence degree",
+   "results": "Actual msearch result: 8 hits; instIsAlgebraicResidueFieldOfIsIntegral, Algebra.QuasiFinite.instFiniteResidueField, instIsAlgebraicQuotientIdealResidueField, Polynomial.trdeg_of_isDomain, Algebra.QuasiFinite.instResidueField, Polynomial.Monic.irreducible_of_irreducible_map_of_isPrime_nilradical, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Polynomial.residueFieldMapCAlgEquiv.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: general finite/algebraic residue-field instances do not give the asserted monogenic presentation and explicit power spanning set for a prime containing a given monic polynomial"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ResidueField, Module.Finite",
+   "results": "Actual msearch result: 12 hits; instFiniteResidueField, Module.mem_support_iff_nontrivial_residueField_tensorProduct, Ideal.finrank_fiber_eq_rankAtStalk, Ideal.finrank_fiber_eq_finrank, Module.rankAtStalk_eq, Algebra.instFiniteResidueFieldOfIsUnramifiedAt, Localization.localRingHom_surjective_of_primesOver_eq_singleton, Localization.exists_awayMap_bijective_of_residueField_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: general finite/algebraic residue-field instances do not give the asserted monogenic presentation and explicit power spanning set for a prime containing a given monic polynomial"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a prime q in B[T] containing a positive degree monic polynomial the residue field of q is generated over the residue field of its contraction p by the class of T and is finite with equal transcendence degree",
+   "results": "Actual msearch result: 8 hits; Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Polynomial.residueFieldMapCAlgEquiv, instIsAlgebraicResidueFieldOfIsIntegral, Polynomial.residueFieldMapCAlgEquiv_algebraMap, IsLocalRing.ResidueField.finite_of_finite, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt",
+   "date": "2026-10-22",
+   "verdict": "no match: general finite/algebraic residue-field instances do not give the asserted monogenic presentation and explicit power spanning set for a prime containing a given monic polynomial"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*|adjoin.*|[Ff]inite.* [Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean]",
+   "results": "Actual msearch result: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: general finite/algebraic residue-field instances do not give the asserted monogenic presentation and explicit power spanning set for a prime containing a given monic polynomial"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If q is prime in B[X] and contains monic f of degree d then kappa(q) is spanned over kappa(q intersect B) by 1,x,...,x^(d-1) and has unchanged transcendence degree over a ground field",
+   "results": "Actual msearch result: 8 hits; exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top, Ideal.FinrankQuotientMap.span_eq_top, Algebra.FormallySmooth.of_algebraicIndependent, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow, Algebra.IsAlgebraic.rank_fractionRing_polynomial, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow', exists_isTranscendenceBasis_and_isSeparable_of_perfectField",
+   "date": "2026-10-22",
+   "verdict": "no match: general finite/algebraic residue-field instances do not give the asserted monogenic presentation and explicit power spanning set for a prime containing a given monic polynomial"
+  },
+  {
+   "tool": "grep",
+   "query": "span.*pow|pow.*span|trdeg_eq.*algebraic [Mathlib/RingTheory]",
+   "results": "Actual msearch result: 25 hits; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/LocalProperties/FinitePresentation.lean, Mathlib/RingTheory/LocalProperties/Submodule.lean",
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: quotient power-basis and adjoin spanning results give an ingredient, while residueFieldMapCAlgEquiv requires the extended prime and gives a transcendental rational-function field; the complete residue-field generation and stated power-spanning conclusion require the assembly proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Submodule.span",
+   "results": "Actual msearch result: 4 hits; Submodule.span_range_natDegree_eq_adjoin, Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree, Polynomial.IsWeaklyEisensteinAt.exists_mem_adjoin_mul_eq_pow_natDegree_le, Polynomial.coeff_divModByMonicAux_mem_span_pow_mul_span",
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: quotient power-basis and adjoin spanning results give an ingredient, while residueFieldMapCAlgEquiv requires the extended prime and gives a transcendental rational-function field; the complete residue-field generation and stated power-spanning conclusion require the assembly proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime ideal of B[X] containing a monic polynomial has residue field spanned by powers of X over the residue field of its contraction, with equal transcendence degree",
+   "results": "Actual msearch result: 8 hits; Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Polynomial.residueFieldMapCAlgEquiv, Polynomial.residueFieldMapCAlgEquiv_symm_X, Polynomial.residueFieldMapCAlgEquiv_algebraMap, instIsAlgebraicResidueFieldOfIsIntegral, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, instIsAlgebraicQuotientIdealResidueField",
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: quotient power-basis and adjoin spanning results give an ingredient, while residueFieldMapCAlgEquiv requires the extended prime and gives a transcendental rational-function field; the complete residue-field generation and stated power-spanning conclusion require the assembly proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The residue field of a prime in a polynomial ring containing a monic polynomial is generated by the variable and spanned by powers below its degree over the contracted residue field",
+   "results": "Actual msearch result: 8 hits; Ideal.ResidueField, IsLocalRing.ResidueField, instIsAlgebraicResidueFieldOfIsIntegral, IsLocalRing.instCommRingResidueField, AdjoinRoot.powerBasis', AdjoinRoot.isAdjoinRootMonic.congr_simp, Algebra.QuasiFinite.instResidueField, Ideal.algebraMap_quotient_residueField_mk",
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: quotient power-basis and adjoin spanning results give an ingredient, while residueFieldMapCAlgEquiv requires the extended prime and gives a transcendental rational-function field; the complete residue-field generation and stated power-spanning conclusion require the assembly proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a monic polynomial vanishing at an element x of an algebra, the subalgebra generated by x equals the span of 1,x,...,x^(degree-1)",
+   "results": "Actual msearch result: 8 hits; Submodule.span_range_natDegree_eq_adjoin, IsAdjoinRootMonic.powerBasis_gen, IsAdjoinRootMonic.basis_one, span_coeff_minpolyDiv, IsAdjoinRootMonic.basis, IsAdjoinRootMonic.basis_apply, AdjoinRoot.powerBasis'_gen, IsAdjoinRootMonic.powerBasis",
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: quotient power-basis and adjoin spanning results give an ingredient, while residueFieldMapCAlgEquiv requires the extended prime and gives a transcendental rational-function field; the complete residue-field generation and stated power-spanning conclusion require the assembly proof."
+  },
+  {
+   "tool": "grep",
+   "query": "residueFieldMapCAlgEquiv|natDegree.*|adjoin [Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean]",
+   "results": "Actual msearch result: 5 hits; 15, 35, 84, 85, 87",
+   "date": "2026-10-23",
+   "verdict": "no exact match for the item: quotient power-basis and adjoin spanning results give an ingredient, while residueFieldMapCAlgEquiv requires the extended prime and gives a transcendental rational-function field; the complete residue-field generation and stated power-spanning conclusion require the assembly proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-refined-noether-normalization-prime",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 051P (lemma-refined-Noether-normalization), sentence that the residue extension is finite and hence has the same transcendence degree; monic-relation argument made precise. This is the affine polynomial-chart ingredient of the ancestor’s recorded 057K–057L/057S route.",
+   "via": [
+    "lem-trf-refined-noether-normalization-prime",
+    "lem-trf-refined-quasi-finite-polynomial-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monic-prime-residue-extension",
+  "worker": "stage1",
+  "summary": "Kept the complete statement, including arbitrary commutative B, explicit fraction embedding and the given-degree spanning set. Five steps use existing Mathlib leaves for residue fraction fields, fraction lifting, a monic quotient power basis, finite-dimensional domains, integrality and transcendence-degree towers. No new nodes. No project declaration states the full item. Every cited statement was read and verbatim citation evidence was recorded.",
+  "blueprint": "The ancestor lem-trf-local-term-locality serves the recorded affine 057K–057L/057S flatification route; this item realizes the Tag 051P sentence used by lem-trf-refined-noether-normalization-prime (residue extension finite, then same transcendence degree). The current latest blueprint ancestor was read; its local-term theorem is not replaced by this algebraic ingredient."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-e1c2618d6",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-e1c2618d6 (reviewer sub-agent of L); spot-checked: Read the whole split (5 steps, 0 new nodes), the statement of every cited node and the Stacks source: algebra.tex label lemma-refined-Noether-normalization, which tags/tags confirms is 051P (the sentence 'κ(𝔭) ⊂ κ(𝔮) is finite, hence same trdeg'), plus 07BI and 00CT for step 1. The item's statement, stmt_deps, source and blueprint are identical to clones/live and side-live, and the item is still unsplit there, so it is not superseded. All 6 live mathlib_searches are kept, there is no repair note, and no SGA source is cited. Step checks: 1) clause (b) of the prime-residue-field node gives F=Frac(B/𝔭) and E=Frac(D); the fraction-field lift applies because B/𝔭 is a domain and A→D→E is injective; the map is k-linear through B. 2) The image of f is monic of degree d over F and vanishes at ξ; the monic-quotient basis then gives the span by 1..ξ^{d−1}, and finite generation means finite-dimensional over a field. 3) S=F[ξ] is a finite-dimensional domain, hence a field; E=Frac(D) and D lands in S, so E=S. The step never assumes F[T]/(ḡ) is a field, which matters when f is reducible. 4) The finite-algebra integrality node applies, and a monic polynomial over F is nonzero, so E/F is algebraic. 5) The trdeg tower node states both the cardinal formula and the 'trdeg 0 iff algebraic' criterion. Small cases tested: d=1; B=k[ε]/ε²; reducible f; f=1 cannot lie in 𝔮; infinite trdeg. The statement is true and not weakened. All cited nodes are Mathlib leaves, so there is no route or tool_uses issue and no cycle. proof_deps equals the union of the steps' uses. No duplicate node found."
+ }
+}

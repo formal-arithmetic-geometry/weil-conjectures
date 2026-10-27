@@ -1,0 +1,184 @@
+{
+ "id": "lem-sfb-longest-weyl-open-cell",
+ "kind": "statement",
+ "title": "Dense open Bruhat cell for the longest Weyl element",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $G$ a reductive $F$-group scheme [def-sc-group-scheme], meaning a smooth connected affine group scheme of finite type with no nontrivial smooth connected normal unipotent subgroup. Fix a split maximal torus $T\\subseteq G$, a Borel subgroup $B\\supseteq T$, its unipotent radical $U$, and the positive roots $\\Phi^+$, with these notions as in [lem-sfb-reductive-borel-pair-structure]. Let $N_G(T)$ be the subgroup scheme of $G$ normalizing $T$, and let $W=N_G(T)(F)/T(F)$ act on $X^*(T)$ by $(w\\chi)(t)=\\chi(n^{-1}tn)$ for a representative $n\\in N_G(T)(F)$. There is a unique element $w_0\\in W$ such that $w_0(\\Phi^+)=-\\Phi^+$. For every representative $n_0\\in N_G(T)(F)$ of $w_0$, the morphism of $F$-schemes\n$$j:U\\times_F B\\longrightarrow G,\\qquad (u,b)\\longmapsto u n_0 b$$\nis an open immersion with dense topological image [def-weil-open-immersion]; thus it identifies $U\\times_F B$ with a dense open subscheme of $G$. The trivial group and rank-zero case are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 21.72, Theorem 21.73(b), Theorem 21.84 and Definition 21.85, printed pp.447--451; the map (u,b) to u n_0 b is stated explicitly in the proof of Proposition 22.22, printed pp.468--469."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-bruhat-longest-cell-charts] to the given $F,G,T,B$, writing its $V$ as our $U$. Its hypotheses are exactly the reductive Borel-pair hypotheses in the statement. It gives the unique $w_0$ reversing $\\Phi^+$. Choose its system of representatives and write $n_*$ for the representative of $w_0$. Its multiplication isomorphism for $w=w_0$, together with $V^{w_0}=V$, is an isomorphism $k:U\\times_F B\\xrightarrow{\\sim}C_{w_0}$, $k(u,b)=u n_* b$, where $C_{w_0}$ is an open dense subscheme of $G$.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 21.72, Theorem 21.73(b), Theorem 21.80(b), printed pp.447--450."
+   }
+  },
+  {
+   "text": "Let $n_0$ be any representative of $w_0$. Equality of their classes in $N_G(T)(F)/T(F)$ gives $t\\in T(F)\\subseteq B(F)$ with $n_0=n_*t$. The morphism $a_t:U\\times_F B\\to U\\times_F B$, $(u,b)\\mapsto(u,tb)$, has inverse $a_{t^{-1}}$ by the group-scheme multiplication and unit identities. Thus $k\\circ a_t$ is an isomorphism onto the same $C_{w_0}$, with inverse $a_{t^{-1}}\\circ k^{-1}$. As morphisms of schemes its composite with $C_{w_0}\\hookrightarrow G$ sends $(u,b)$ to $u n_*(tb)=u n_0 b$; this is the required $j$. The identities hold on points over every $F$-algebra, including nonreduced algebras.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.80(b) and proof of Proposition 22.22, printed pp.450,468--469; elementary change of representative written out."
+   }
+  },
+  {
+   "text": "By [def-weil-open-immersion], an isomorphism onto an open subscheme followed by its inclusion is an open immersion. The preceding explicit isomorphism therefore makes $j$ an open immersion with image $|C_{w_0}|$. This image is dense by step 1, giving all the assertions. No positive rank or nonempty root set was used: the cited chart theorem applies also when $\\Phi$ is empty, so the same specialization and inverse apply to tori and to the trivial group.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.73(b), Theorem 21.80(b) and proof of Proposition 22.22, printed pp.447,450,468--469; open immersion interpreted by its cited definition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bruhat-longest-cell-charts",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 21.72, Theorems 21.73(b) and 21.80(b), and the first sentence of the proof of Proposition 22.22, printed pp.447,450,468--469."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bruhat|big.cell|open.cell|longest.*Weyl",
+   "results": "{\"t\": \"2026-10-23T13:17:46Z\", \"tool\": \"grep\", \"query\": \"Bruhat|big.cell|open.cell|longest.*Weyl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Lattice.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\"], \"digest\": \"7c873107e03f4107\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root-pairing Weyl groups, Lie modules, dominant maps, or topological CW cells; none constructs the scheme-theoretic Bruhat-cell immersion. The grep Bruhat hit in Algebra/Module/Lattice.lean is an introductory mention of the Bruhat-Tits tree; the other grep hits are CW cells."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bruhat\"",
+   "results": "{\"t\": \"2026-10-23T13:17:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bruhat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root-pairing Weyl groups, Lie modules, dominant maps, or topological CW cells; none constructs the scheme-theoretic Bruhat-cell immersion. The grep Bruhat hit in Algebra/Module/Lattice.lean is an introductory mention of the Bruhat-Tits tree; the other grep hits are CW cells."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive algebraic group and the longest Weyl group element n the multiplication map U times B to G sending (u,b) to u n b is a dense open immersion",
+   "results": "{\"t\": \"2026-10-23T13:17:53Z\", \"tool\": \"leanfinder\", \"query\": \"For a split reductive algebraic group and the longest Weyl group element n the multiplication map U times B to G sending (u,b) to u n b is a dense open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.IsDominant.of_comp_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"IsOpen.dense_iUnion_preimage_smul\"], \"digest\": \"528d55a66e181907\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root-pairing Weyl groups, Lie modules, dominant maps, or topological CW cells; none constructs the scheme-theoretic Bruhat-cell immersion. The grep Bruhat hit in Algebra/Module/Lattice.lean is an introductory mention of the Bruhat-Tits tree; the other grep hits are CW cells."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication from the unipotent radical times a Borel subgroup via the longest Weyl group representative is a dense open immersion into a reductive algebraic group",
+   "results": "{\"t\": \"2026-10-23T13:18:47Z\", \"tool\": \"leansearch\", \"query\": \"Multiplication from the unipotent radical times a Borel subgroup via the longest Weyl group representative is a dense open immersion into a reductive algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.term_''ᵁ_\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.isOpenImmersion_isMultiplicative\", \"RootPairing.weylGroup\", \"RootPairing.weylGroup_toSubmonoid\", \"Algebra.instIsStandardOpenImmersionAway\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\"], \"digest\": \"da89bdd28eaaa2a2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root-pairing Weyl groups, Lie modules, dominant maps, or topological CW cells; none constructs the scheme-theoretic Bruhat-cell immersion. The grep Bruhat hit in Algebra/Module/Lattice.lean is an introductory mention of the Bruhat-Tits tree; the other grep hits are CW cells."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The longest Weyl element has an open Bruhat cell equal to U n B for the unipotent radical of a Borel subgroup of a connected reductive group",
+   "results": "{\"t\": \"2026-10-23T13:18:52Z\", \"tool\": \"leanfinder\", \"query\": \"The longest Weyl element has an open Bruhat cell equal to U n B for the unipotent radical of a Borel subgroup of a connected reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.weylGroup.induction'\", \"RootPairing.weylGroup.induction\", \"RootPairing.range_weylGroup_weightHom\", \"RootPairing.range_weylGroupToPerm\", \"RootPairing.range_weylGroup_coweightHom\", \"RootPairing.reflection_mem_weylGroup\"], \"digest\": \"3d791a3508a420dc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract root-pairing Weyl groups, Lie modules, dominant maps, or topological CW cells; none constructs the scheme-theoretic Bruhat-cell immersion. The grep Bruhat hit in Algebra/Module/Lattice.lean is an introductory mention of the Bruhat-Tits tree; the other grep hits are CW cells."
+  },
+  {
+   "tool": "grep",
+   "query": "Bruhat|big.cell|open.cell|longest.*Weyl",
+   "results": "{\"t\": \"2026-10-23T14:47:15Z\", \"tool\": \"grep\", \"query\": \"Bruhat|big.cell|open.cell|longest.*Weyl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Topology/CWComplex/Classical/Basic.lean\", \"Mathlib/Algebra/Module/Lattice.lean\"], \"digest\": \"97b28b5e8594a7cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract root pairings or Coxeter length, topological dynamics/CW cells, or general immersion criteria; none supplies the reductive group Bruhat multiplication chart."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The longest Weyl element gives a dense open Bruhat stratum isomorphic to the unipotent radical times the Borel subgroup",
+   "results": "{\"t\": \"2026-10-23T14:47:16Z\", \"tool\": \"leansearch\", \"query\": \"The longest Weyl element gives a dense open Bruhat stratum isomorphic to the unipotent radical times the Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.IsRightDescent\", \"CoxeterSystem.exists_leftDescent_of_ne_one\", \"CoxeterSystem.length\", \"CoxeterSystem.IsReduced\", \"CoxeterSystem.length_mul_ge_max\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"RootPairing.weylGroup_toSubmonoid\", \"CoxeterSystem.exists_rightDescent_of_ne_one\"], \"digest\": \"32cc6fae9b53d35f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract root pairings or Coxeter length, topological dynamics/CW cells, or general immersion criteria; none supplies the reductive group Bruhat multiplication chart."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bruhat\"",
+   "results": "{\"t\": \"2026-10-23T14:47:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bruhat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract root pairings or Coxeter length, topological dynamics/CW cells, or general immersion criteria; none supplies the reductive group Bruhat multiplication chart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication U times B by a representative of the longest Weyl element is an open immersion with dense image into a connected reductive group",
+   "results": "{\"t\": \"2026-10-23T14:47:17Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplication U times B by a representative of the longest Weyl element is an open immersion with dense image into a connected reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.range_weylGroup_coweightHom\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"RootPairing.range_weylGroup_weightHom\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.range_weylGroupToPerm\", \"Units.isOpenEmbedding_val\", \"MulAction.IwasawaStructure.is_generator\", \"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\"], \"digest\": \"6c368036bb8ffaed\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract root pairings or Coxeter length, topological dynamics/CW cells, or general immersion criteria; none supplies the reductive group Bruhat multiplication chart."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected reductive algebraic group has an open dense orbit U n B for n reversing the positive roots of a maximal torus",
+   "results": "{\"t\": \"2026-10-23T14:47:18Z\", \"tool\": \"leanfinder\", \"query\": \"A connected reductive algebraic group has an open dense orbit U n B for n reversing the positive roots of a maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.span_orbit_eq_top\", \"IsOpen.iUnion_smul\", \"IsOpen.dense_of_preimage_smul_invariant\", \"IsOpen.dense_iUnion_smul\", \"IsOpen.dense_iUnion_preimage_smul\", \"IsOpen.exists_smul_mem\", \"IsOpen.iUnion_preimage_smul\", \"MulAction.isTopologicallyTransitive_iff_dense_iUnion_preimage\"], \"digest\": \"305e8663e75d3c3a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract root pairings or Coxeter length, topological dynamics/CW cells, or general immersion criteria; none supplies the reductive group Bruhat multiplication chart."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-induced-module-primitive-line",
+  "date": "2026-10-23",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Tensor-square rho sections have a one-dimensional invariant space. Primitive-vector input for the tensor-square invariant-line calculation: Milne 22.22 for E_B(-m rho), including the longest Weyl element and its T-weight. Supporting geometric input: the dense open orbit U n_0 B used at the start of Milne Proposition 22.22.",
+   "via": [
+    "lem-sfb-induced-module-primitive-line",
+    "lem-sfb-rho-tensor-square-invariant-line",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-longest-weyl-open-cell",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing, strictly stronger Bruhat stratification and flag-chart node instead of duplicating it. Specialized its longest stratum, wrote the change-of-representative isomorphism with its inverse over arbitrary F-algebras, and applied the definition of open immersion. No new nodes and no Mathlib leaves. Checked Milne 21.72, 21.73, 21.76--21.85 and the proof of 22.22, all cited statements, torus/trivial and SL2 cases, project attachment searches and five logged Mathlib searches.",
+  "blueprint": "The inherited blueprint.from.node is null, confirmed by blueprint_refs.py ancestor; retained its exact place and via chain. This realizes the dense U n_0 B input for Milne 22.22 within the inherited alteration/projective-moduli/Haboush chain supporting det-thm-sf-ctf-stability-direct-images proof (3). Latest-blueprint and blueprint_refs searches for Bruhat, longest and open cell found no matching imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-6bb991bf6",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-6bb991bf6 (reviewer sub-agent of L); spot-checked: PASS, no changes. The delivery is one commit: the item, now split, plus its report. It adds no new nodes, and the statement, stmt_deps and source are unchanged. proof_deps are exactly the union of the step citations. Live and side-live still have the item unsplit, and no repair note applies. Step 1 cites the existing same-unit node lem-sfb-bruhat-longest-cell-charts (Q158, on the base). Its statement strictly contains the item: unique w_0; scheme isomorphisms V^w x B -> C_w, (u,b) -> u n_w b; C_{w_0} open dense; V^{w_0}=V. Citing it instead of creating a duplicate is correct under C5. Neither cited node's dependency closure reaches the item, so there is no cycle. Step 2 is elementary and correct: n_0 = n_* t with t in T(F) inside B(F), a_t(u,b)=(u,tb) is an automorphism, and k∘a_t = j on A-points for every F-algebra A. Step 3 applies the 'equivalently' clause of def-weil-open-immersion, and density comes from step 1. Sources checked in the local Milne iAG PDF: Def 21.72, Thm 21.73(b), Thm 21.80(b) (U^w x B -> U^w n_w B is an isomorphism), Def 21.85 (big cell = B_u w_0 B), and the proof of Prop 22.22, which states that U x B -> G, (u,b) -> u w_0 b, is an open immersion. Edge cases checked: the torus and trivial group (Phi empty, j is a translation), and SL_2, where the image is D(g_21) and the U n_0 B orientation matches Milne. There are no SGA citations and no tool_uses. The report mentions a citations.json that is not in the commit; this is harmless."
+ }
+}

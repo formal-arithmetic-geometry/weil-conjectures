@@ -1,0 +1,134 @@
+{
+ "id": "def-sfb-reduced-algebraic-space",
+ "kind": "definition",
+ "title": "Reduced algebraic space",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. The algebraic space $X$ is reduced if for every scheme $T$ over $S$ and every representable etale map $h_T \\to X$, the scheme $T$ is reduced [def-pc-reduced-scheme], equivalently all its local rings have no nonzero nilpotents.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-pc-reduced-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03E8 (lemma-type-property), definition-type-property and remark-list-properties-local-etale-topology, reduced entry."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space is reduced if every etale scheme chart is reduced",
+   "results": "8 hits: AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.isReduced_of_isAffine_isReduced, Algebra.isReduced_of_isGeometricallyReduced; digest 9c02af33201ee8a8",
+   "date": "2026-10-23",
+   "verdict": "No algebraic-space reducedness definition; the nonempty results concern scheme reducedness or algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space is reduced if every etale scheme chart is reduced",
+   "results": "8 hits: AlgebraicGeometry.IsReduced, AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.isReduced_stalk_of_isReduced; digest 25fb4f3c79d427b2",
+   "date": "2026-10-23",
+   "verdict": "No algebraic-space reducedness definition; the nonempty results concern scheme reducedness or algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|reduced algebraic space|reduced.*etale.*chart",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No algebraic-space reducedness definition; the nonempty results concern scheme reducedness or algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"AlgebraicSpace|algebraic space\" lean/WeilConjectures/AlgebraicGeometry",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "No upstream algebraic-space reducedness definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"IsReduced.*EtaleSite|def .*IsReduced|reduced.*etale.*chart\" lean/Sheaf/AlgebraicGeometry",
+   "results": "No hits for algebraic-space reducedness; unrelated names include Fan.IsSmooth and scheme constructions, inspected separately.",
+   "date": "2026-10-23",
+   "verdict": "No project definition of reducedness on AlgebraicSpace."
+  },
+  {
+   "tool": "grep",
+   "query": "DAG full-text search: reduced algebraic space|space is reduced|space.*called.*reduced|reduced.*etale scheme charts; tools/blueprint_refs.py search \"reduced algebraic space\"",
+   "results": "The full-text hits are statement nodes using reducedness, including this item and lem-sfb-space-reduced-closed-support; no definition node owns reduced algebraic spaces. blueprint_refs: 0 blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "No existing definition node; provide the missing notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-smooth-reduced-locality",
+  "date": "2026-10-23",
+  "group": "Q09"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Smooth atlas topology, invariant closed subsets, and their reduced closed substacks used for the affine invariant quotient. Supporting input: reducedness of the two pullbacks of Z to R in Stacks 0509, and independence of the reduced smooth chart.",
+   "via": [
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedAlgebraicSpace",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsReduced",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedAlgebraicSpace.lean",
+  "statement": "def IsReduced {S : Scheme.{u}} (X : AlgebraicSpace S) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53a9d2b1e",
+  "group": "Q09",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53a9d2b1e",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Checked against Stacks 0GB3 (spaces-descent.tex l.948-975). MapIsLocally (@Smooth) f tests every compatible pair of representable étale charts, which is equivalent to Stacks 03ZF and not stronger. New def AlgebraicSpace.IsReduced = every EtaleSite scheme is reduced (Mathlib IsReduced), matching 03E8 / definition-type-property; it is real, and no duplicate exists in Mathlib, Sheaf or the DAG. Point-surjectivity uses the recorded pointImage. The conclusion is exactly ascent and conditional descent, with no extra hypotheses or universes; the empty and identity cases work. Live node differs only in lean and in two added stmt_deps (landed owner of MapIsLocally and the new def node), with no cycle. lean.statement verbatim; sorry only; source and blueprint docstrings and all 6 proof steps present; proof_dep imports exist in live. Advisory: Point's owner is reached only through def-a1-space-point-topology; the report's second reading is a self-review. No files changed, no compile."
+ }
+}

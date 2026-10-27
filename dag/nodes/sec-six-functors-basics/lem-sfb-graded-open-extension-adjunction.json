@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-graded-open-extension-adjunction",
+ "kind": "statement",
+ "title": "Open extension by zero and restriction for graded sheaf modules",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $X$ be a topological space and $\\mathcal O$ a sheaf of commutative rings. Let $\\mathcal A=(\\mathcal A^i)_{i\\in\\mathbf Z}$ be a family of $\\mathcal O$-module sheaves [def-weil-sheaf-of-modules-category] with associative $\\mathcal O$-bilinear multiplications $\\mathcal A^i\\times\\mathcal A^j\\to\\mathcal A^{i+j}$ and a two-sided identity section $1\\in\\Gamma(X,\\mathcal A^0)$. Write $\\operatorname{Gr}(\\mathcal A)$ for families $M^q$ of $\\mathcal O$-module sheaves with associative unital $\\mathcal O$-bilinear left actions $\\mathcal A^i\\times M^q\\to M^{i+q}$ and action-preserving degree-zero $\\mathcal O$-linear maps. No differential is included in these objects or maps. For an open inclusion $j:U\\hookrightarrow X$ put $\\mathcal A_U=\\mathcal A|_U$. For $L\\in\\operatorname{Gr}(\\mathcal A_U)$ define the graded presheaf $P_L$ by $P_L^q(V)=L^q(V)$ for $V\\subseteq U$ and $P_L^q(V)=0$ otherwise. Restrictions are those of $L$ when the source open is contained in $U$ and zero otherwise; the $\\mathcal A(V)$-action is the restricted given action or the zero action. Sheafify each degree as an $\\mathcal O$-module [def-weil-presheaf-modules-sheafification]. The resulting sheaves carry the induced graded left $\\mathcal A$-action and define a functor $j_!: \\operatorname{Gr}(\\mathcal A_U)\\to\\operatorname{Gr}(\\mathcal A)$. Its restriction to $U$ is canonically $L$. Restriction of a map to $U$ under this identification gives a natural bijection\n$$\\operatorname{Hom}_{\\operatorname{Gr}(\\mathcal A)}(j_!L,M)\\simeq\\operatorname{Hom}_{\\operatorname{Gr}(\\mathcal A_U)}(L,M|_U).$$",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FRA (lemma-extension-by-zero-graded), section-localize-graded, specialized to the open site of a topological space and degree-zero left-module maps; the preceding degreewise construction. Left actions are the left analogue of definition-gm (Tag 0FQZ), as explicitly allowed immediately after that definition."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sfb-graded-ringed-site",
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "The stated $P_L$ is a graded presheaf of $\\mathcal O$-modules: composable restrictions with source in $U$ are those of $L$, while a source outside $U$ gives a zero map, as does the composite. The same cases verify semilinearity and compatibility of the presheaf actions with restrictions. Let $E^q=(P_L^q)^\\#$ and write $\\theta_q:P_L^q\\to E^q$. Module sheafification supplies these sheaves, linear unit maps, and their universal factorization property. It also supplies the degreewise maps $E(f)^q$ induced by a morphism $f:L\\to L'$, with $E(f)^q\\theta_q=\\theta'_qP_f^q$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "section-localize-graded, degreewise construction preceding lemma-extension-by-zero-graded (Tag 0FRA); module sheafification as in Tag 03CY"
+   }
+  },
+  {
+   "text": "For every $i,q$, compose the presheaf action with $\\theta_{i+q}$ to obtain a restriction-compatible bilinear pairing $\\mathcal A^i\\times P_L^q\\to E^{i+q}$. Apply bilinear extension to this pairing over the already sheaf ring $\\mathcal O$. Since $\\mathcal A^i$ is already a sheaf, its sheafification is itself (the inverse to its unit is the unique factorization of its identity, with both inverse equations following by uniqueness). We obtain $\\mu_{i,q}:\\mathcal A^i\\times E^q\\to E^{i+q}$ with the explicit equation $\\mu_{i,q}(a,\\theta_q(p))=\\theta_{i+q}(ap)$. The extension is unique, bilinear, and compatible with restrictions.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "section-localize-graded, construction of multiplication on extension by zero, left-module version; Tag 0GMW supplies bilinear extension"
+   }
+  },
+  {
+   "text": "We will use uniqueness also after restriction to any open $V\\subseteq X$. The inclusion of the open site of $V$ in that of $X$ is continuous: an open cover stays a cover. It is cocontinuous: any cover of an open $W\\subseteq V$ in $X$ consists of opens still contained in $V$, and hence is the same cover in $V$. The sites are small in the fixed universe convention. The restriction/sheafification comparison therefore says that $E^q|_V$ is the module sheafification of $P_L^q|_V$, with precisely the restricted unit $\\theta_q|_V$. Consequently two linear maps from $E^q|_V$ agree if they agree after this unit. At $V=U$, $P_L^q|_U=L^q$ is already a sheaf; its unit is invertible by the universal property. The equation in step 2 identifies the restricted action with the given action of $L$. Thus $E|_U\\cong L$ as graded modules, canonically and naturally in $L$.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-restriction",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "lemma-extension-by-zero-graded (Tag 0FRA), localization identifications; restriction comparison from Tag 04B8"
+   }
+  },
+  {
+   "text": "Check the graded module laws without assuming any commutativity of $\\mathcal A$. On an arbitrary open $V$, fix $a\\in\\mathcal A^i(V)$ and $b\\in\\mathcal A^j(V)$. The maps $x\\mapsto\\mu_{i+j,q}(ab,x)$ and $x\\mapsto\\mu_{i,j+q}(a,\\mu_{j,q}(b,x))$ are linear sheaf maps $E^q|_V\\to E^{i+j+q}|_V$, using restrictions of $a,b$ on smaller opens. On $\\theta_q(p)$ their values are respectively $\\theta_{i+j+q}((ab)p)$ and $\\theta_{i+j+q}(a(bp))$, equal by associativity of the presheaf action (the zero module case outside $U$ included). Restricted uniqueness from step 3 proves equality. Likewise $x\\mapsto\\mu_{0,q}(1,x)$ and the identity agree on $\\theta_q(p)$, so agree everywhere. Bilinearity was supplied in step 2. Thus $E$ is an object of $\\operatorname{Gr}(\\mathcal A)$.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-restriction",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "section-localize-graded, verification that the degreewise construction is a graded module (Tag 0FRA)"
+   }
+  },
+  {
+   "text": "For a graded module map $f:L\\to L'$, compare the two bilinear maps $\\mathcal A^i\\times E^q\\to E'^{i+q}$ given by $E(f)^{i+q}\\mu_{i,q}$ and $\\mu'_{i,q}(1\\times E(f)^q)$. Precomposing with $1\\times\\theta_q$, both give $\\theta'_{i+q}f(ap)=\\theta'_{i+q}(a f(p))$. Uniqueness of bilinear extension makes the maps equal, proving action compatibility. Degreewise sheafification uniqueness shows $E(1)=1$ and $E(gf)=E(g)E(f)$: the two sides have identical composites with every $\\theta_q$. This constructs the functor $j_!$ with the specified degreewise construction.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "section-localize-graded, construction on homogeneous maps, specialized to degree zero (Tag 0FRA)"
+   }
+  },
+  {
+   "text": "Given $h:L\\to M|_U$ in graded modules, define $\\widetilde h^q:P_L^q\\to M^q$ by $h^q_V$ for $V\\subseteq U$ and by zero otherwise. This is a linear presheaf map: for a restriction whose source is outside $U$, both composites are zero; the remaining case is naturality of $h$. Its action equation holds on opens in $U$ by that of $h$, and elsewhere because the input from $P_L^q$ is zero. Sheafification yields a unique $\\bar h^q:E^q\\to M^q$ with $\\bar h^q\\theta_q=\\widetilde h^q$. The bilinear maps $(a,x)\\mapsto\\bar h^{i+q}(\\mu_{i,q}(a,x))$ and $(a,x)\\mapsto a\\bar h^q(x)$ agree on $\\mathcal A^i\\times P_L^q$ by this equation and the presheaf action equation. Bilinear-extension uniqueness proves equality on $\\mathcal A^i\\times E^q$. Hence $\\bar h$ is a graded module map. This explicitly fills the obstruction-compatibility check omitted in the proof of Tag 0FRA.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "lemma-extension-by-zero-graded (Tag 0FRA), omitted action-compatibility verification, degree-zero left-module form"
+   }
+  },
+  {
+   "text": "Restriction of a graded map $g:E\\to M$, using $E|_U\\cong L$ from step 3, gives $h=(g\\theta)|_U$. Extending this $h$ by step 6 returns $g$: on opens contained in $U$ the composites with $\\theta$ agree by definition, and on other opens $P_L$ is zero, so they also agree there; module sheafification uniqueness gives equality. Conversely $\\bar h\\theta=\\widetilde h$ restricts on $U$ to $h$, proving the other inverse equation. For $f:L'\\to L$ and $k:M\\to M'$, the presheaf formula gives $\\widetilde{(k|_U)hf}=k\\widetilde h P_f$; uniqueness yields $\\overline{(k|_U)hf}=k\\bar h\\,j_!(f)$. Thus the inverse bijections are natural in both variables and are exactly the restriction map in the statement.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "lemma-extension-by-zero-graded (Tag 0FRA), inverse equations and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-module-sheafification-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FRA (lemma-extension-by-zero-graded) and its preceding degreewise construction, specialized to a topological space and left actions; the omitted compatibility is expanded via bilinear sheafification uniqueness (Tag 0GMW), with restriction of sheafification (Tag 04B8)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Graded.*(Sheaf|sheaf)|((extensionByZero|extensionZero|extension_by_zero).*[Gg]raded)",
+   "results": "{\"t\": \"2026-10-24T08:33:52Z\", \"tool\": \"grep\", \"query\": \"Graded.*(Sheaf|sheaf)|((extensionByZero|extensionZero|extension_by_zero).*[Gg]raded)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"2d90a701f18e8871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary module sheafification (PresheafOfModules.sheafificationAdjunction, Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137), restriction left adjoint to pushforward for scheme modules (AlgebraicGeometry/Modules/Sheaf.lean:425-437), graded actions on families of types (Algebra/Module/GradedModule.lean:39-54), and unacted graded objects. None states the graded extension-by-zero action or its adjunction; the required lift is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero adjunction for sheaves of graded modules over a graded algebra",
+   "results": "{\"t\": \"2026-10-24T08:33:52Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero adjunction for sheaves of graded modules over a graded algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"DirectSum.GdistribMulAction.smul_zero\", \"TensorProduct.gradedComm_of_zero_tmul\", \"DirectSum.Gmodule.zero_smul\", \"GradedRing.projZeroRingHom\", \"AlgebraicGeometry.Proj.zero_apply\", \"CategoryTheory.GradedObject.instZeroHomOfHasZeroMorphisms\", \"CategoryTheory.GradedObject.hasZeroObject\"], \"digest\": \"25c6943b1c678942\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary module sheafification (PresheafOfModules.sheafificationAdjunction, Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137), restriction left adjoint to pushforward for scheme modules (AlgebraicGeometry/Modules/Sheaf.lean:425-437), graded actions on families of types (Algebra/Module/GradedModule.lean:39-54), and unacted graded objects. None states the graded extension-by-zero action or its adjunction; the required lift is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Graded\", \"extension\"",
+   "results": "{\"t\": \"2026-10-24T08:33:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Graded\\\", \\\"extension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary module sheafification (PresheafOfModules.sheafificationAdjunction, Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137), restriction left adjoint to pushforward for scheme modules (AlgebraicGeometry/Modules/Sheaf.lean:425-437), graded actions on families of types (Algebra/Module/GradedModule.lean:39-54), and unacted graded objects. None states the graded extension-by-zero action or its adjunction; the required lift is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction between extension by zero and restriction for graded modules without a differential",
+   "results": "{\"t\": \"2026-10-24T08:33:54Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction between extension by zero and restriction for graded modules without a differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.RestrictionCoextensionAdj.unit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.adj\"], \"digest\": \"cb95f8a625629428\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary module sheafification (PresheafOfModules.sheafificationAdjunction, Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137), restriction left adjoint to pushforward for scheme modules (AlgebraicGeometry/Modules/Sheaf.lean:425-437), graded actions on families of types (Algebra/Module/GradedModule.lean:39-54), and unacted graded objects. None states the graded extension-by-zero action or its adjunction; the required lift is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for sheaves of graded modules is left adjoint to restriction to an open subset",
+   "results": "{\"t\": \"2026-10-24T08:33:55Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero for sheaves of graded modules is left adjoint to restriction to an open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"PresheafOfModules.sheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\"], \"digest\": \"dade5c75294a7f99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give ordinary module sheafification (PresheafOfModules.sheafificationAdjunction, Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137), restriction left adjoint to pushforward for scheme modules (AlgebraicGeometry/Modules/Sheaf.lean:425-437), graded actions on families of types (Algebra/Module/GradedModule.lean:39-54), and unacted graded objects. None states the graded extension-by-zero action or its adjunction; the required lift is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Graded.*(Sheaf|sheaf)|((extensionByZero|extensionZero|extension_by_zero).*[Gg]raded)",
+   "results": "{\"t\": \"2026-10-24T08:55:43Z\", \"tool\": \"grep\", \"query\": \"Graded.*(Sheaf|sheaf)|((extensionByZero|extensionZero|extension_by_zero).*[Gg]raded)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"2d90a701f18e8871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheafification, scheme restriction left adjoint to pushforward, ring change of scalars, and graded families do not state the graded sheaf extension-by-zero adjunction. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137 and Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425-437; neither is a one-line specialization to this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero adjunction for sheaves of graded modules over a graded algebra",
+   "results": "{\"t\": \"2026-10-24T08:55:43Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero adjunction for sheaves of graded modules over a graded algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"DirectSum.GdistribMulAction.smul_zero\", \"TensorProduct.gradedComm_of_zero_tmul\", \"DirectSum.Gmodule.zero_smul\", \"GradedRing.projZeroRingHom\", \"AlgebraicGeometry.Proj.zero_apply\", \"CategoryTheory.GradedObject.instZeroHomOfHasZeroMorphisms\", \"CategoryTheory.GradedObject.hasZeroObject\"], \"digest\": \"25c6943b1c678942\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheafification, scheme restriction left adjoint to pushforward, ring change of scalars, and graded families do not state the graded sheaf extension-by-zero adjunction. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137 and Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425-437; neither is a one-line specialization to this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Graded\", \"extension\"",
+   "results": "{\"t\": \"2026-10-24T08:55:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Graded\\\", \\\"extension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheafification, scheme restriction left adjoint to pushforward, ring change of scalars, and graded families do not state the graded sheaf extension-by-zero adjunction. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137 and Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425-437; neither is a one-line specialization to this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for sheaves of graded modules is left adjoint to restriction to an open subset",
+   "results": "{\"t\": \"2026-10-24T08:55:44Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero for sheaves of graded modules is left adjoint to restriction to an open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"PresheafOfModules.sheafificationAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.PullbackConstruction.adjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\"], \"digest\": \"dade5c75294a7f99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheafification, scheme restriction left adjoint to pushforward, ring change of scalars, and graded families do not state the graded sheaf extension-by-zero adjunction. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137 and Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425-437; neither is a one-line specialization to this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction between extension by zero and restriction for graded modules without a differential",
+   "results": "{\"t\": \"2026-10-24T08:56:16Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction between extension by zero and restriction for graded modules without a differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.RestrictionCoextensionAdj.unit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.adj\"], \"digest\": \"cb95f8a625629428\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module sheafification, scheme restriction left adjoint to pushforward, ring change of scalars, and graded families do not state the graded sheaf extension-by-zero adjunction. Read Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:125-137 and Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:425-437; neither is a one-line specialization to this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graded-sheaf-module-grothendieck",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: set of acyclic extension tests before the pushout construction of 0FT0. Independent prerequisite in the injectivity-test proof: graded category used to choose a generator and apply the existing Baer criterion before forming acyclic tests. Supporting the generator construction: Stacks 0FRD, displayed Hom identification, first equality; graded open extension-by-zero adjunction of 0FRA.",
+   "via": [
+    "lem-sfb-graded-sheaf-module-grothendieck",
+    "lem-sfb-sheaf-dg-injectivity-tests",
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-graded-open-extension-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the induced action by existing bilinear sheafification extension; checked all module laws and maps through unit uniqueness; wrote the inverse Hom map and both inverse and naturality equations. No new nodes, no statement change.",
+  "blueprint": "Realizes the inherited prerequisite for det-thm-sf-ctf-stability-direct-images (3), namely the graded open adjunction used by the generator argument in Stacks 0FRD. The immediate parent is lem-sfb-graded-sheaf-module-grothendieck; the inherited ancestry has no imported blueprint node, as blueprint_refs.py ancestor confirms. The current blueprint direct-images proof (3) uses compactification and open extension; this split only supplies the recorded lower-level prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear extension through module sheafification constructs the action and verifies action-preserving maps; this unit has no separate bilinear sheafification theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheafification-restriction",
+    "why": "Generic unit-compatible restriction of module sheafification, applied only to open subspaces, proves restriction identification and supplies local hom-ext for module laws; no node in this unit supplies this general comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-module-sheafification-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NA-35bcae89b",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-35bcae89b (reviewer sub-agent of L); spot-checked: PASS with no changes. Item read in full. Statement and stmt_deps are byte-identical to clones/live, which is still unsplit with no repair note, so this is a fresh split. Source checked in Stacks sdga.tex: 0FQZ (l.125-156, left modules allowed) and the j_! construction and 0FRA (l.797-935). On a space's open site, j_! is the sheafification of the item's P_L, and the item states the degree-zero, left-module case of 0FRA. Steps 1-7 checked against the cited statements. Step 2: bilinear extension with F=A^i, G=P_L^q, H=E^{i+q}; O is commutative and a sheaf, and A^i is a sheaf, so its unit is invertible. Steps 3/4: Open(V)->Open(X) is continuous and cocontinuous, so the restriction comparison gives E|_U≅L and local uniqueness; associativity and unit follow without commutativity of A. Step 5: functoriality and action compatibility by bilinear uniqueness. Step 6 fills the obstruction check that 0FRA omits. Step 7 gives both inverse equations and naturality. Edge cases U=∅, U=X, X=∅, noncommutative A and negative degrees are fine. The parent graded-grothendieck step 4 uses exactly this bijection. The dg sibling lem-sfb-sheaf-dg-open-extension-adjunction is not a duplicate, since a graded module over a dg algebra need not be a dg module. The report wrongly says the dg node's proof depends on this item; its proof_deps do not include it, and this does not change the verdict. No new nodes. Accepted tool_uses: lem-pc-sites-module-sheafification-bilinear-extension and lem-weil-pbc-module-sheafification-restriction, both generic module-sheafification facts. No Lean in slopmaster2 states the item."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GradedOpenExtensionAdjunction",
+  "declaration": "CategoryTheory.GradedRingedSite.exists_openExtensionAdjunction",
+  "file": "lean/Sheaf/CategoryTheory/GradedOpenExtensionAdjunction.lean",
+  "statement": "theorem exists_openExtensionAdjunction : ∃ (E : Module.{u, u, w, max u w} (A.over U) ⥤ Module.{u, u, w, max u w} A) (e : ∀ q : ℤ, E ⋙ evaluation A q ≅ openExtensionDegree A U q) (ρ : E ⋙ restriction A U ≅ 𝟭 (Module.{u, u, w, max u w} (A.over U))) (adj : E ⊣ restriction A U), (∀ (L : Module.{u, u, w, max u w} (A.over U)) (i q : ℤ) (V : (Opens X)ᵒᵖ) (φ : V.unop ⟶ U) (a : (A.degree i).val.obj V) (x : (L.degree q).val.obj (op (Over.mk φ))), (E.obj L).act i q V a (openExtensionUnit A U E e L q V φ x) = openExtensionUnit A U E e L (i + q) V φ (L.act i q (op (Over.mk φ)) a x)) ∧ (∀ (L : Module.{u, u, w, max u w} (A.over U)) (q : ℤ) (V : (Opens X)ᵒᵖ) (φ : V.unop ⟶ U) (x : (L.degree q).val.obj (op (Over.mk φ))), ((ρ.hom.app L).degree q).val.app (op (Over.mk φ)) (openExtensionUnit A U E e L q V φ x) = x) ∧ (∀ (L : Module.{u, u, w, max u w} (A.over U)) (M : Module.{u, u, w, max u w} A) (g : E.obj L ⟶ M), adj.homEquiv L M g = ρ.inv.app L ≫ (restriction A U).map g)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.GradedRingedSite.opensHasSheafify",
+   "CategoryTheory.GradedRingedSite.opensLocallyBijective",
+   "CategoryTheory.GradedRingedSite.openExtensionDegree",
+   "CategoryTheory.GradedRingedSite.openExtensionUnit",
+   "CategoryTheory.GradedRingedSite.exists_openExtensionAdjunction"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c81a87c4",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Statement/proof byte-identical to live; stmt_deps add new def-sfb-graded-ringed-site (§1(A)) and landed def-weil-extension-by-zero-presheaf. New GradedRingedSite: ℤ-graded noncommutative algebra, left modules (no differential), degree-zero action-preserving Homs, evaluation and restriction via SheafOfModules.over; real data, Stacks 0FQW/0FQZ docstrings; no duplicate (existing GradedSheafAlgebra is ℕ-graded commutative on schemes; dg sheaf nodes have no Lean). Item: P_L = existing extensionByZeroPresheaf (V⟶U ⊕ = L(V) or 0, universes max u w), degreewise PresheafOfModules.sheafification; conjuncts pin action on unit sections, ρ(θx)=x on V⊆U, and adj.homEquiv g = ρ⁻¹ ≫ g|_U (node's restriction bijection). Universes X:Type u, coefficients max u w, no equality forced; Prop-valued Mathlib small-site sheafify instances. Edge cases U=∅, U=X, X=∅, zero objects, negative degrees, noncommutative A fine. Only sorry is main theorem with 7-step proof docstring; report has Worker report and Second reading sections. No files changed, no compile."
+ }
+}

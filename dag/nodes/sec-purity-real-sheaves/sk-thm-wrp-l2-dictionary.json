@@ -1,0 +1,105 @@
+{
+ "id": "sk-thm-wrp-l2-dictionary",
+ "kind": "statement",
+ "title": "$L^2$ growth and pure weights",
+ "statement": "Let $X_0/\\mathbf F_q$ be a smooth geometrically connected affine curve.\nFor every nonzero pure lisse Weil sheaf $\\mathcal G$ of weight $w$,\n\n$$\n \\nu(\\mathcal G)=w\n$$\n\nin the sense of [sk-def-wrp-l2-definition].\n\n*Complement.* Consequently, if $N\\ne0$ is lisse and pure of weight $v$ on\n$X_0$ and $S_n(N)\\le Cq^{nB}$ for every $n\\ge1$, with $C$ independent of $n$,\nthen $v\\le B-1$ ([det-l-dl-a1-energy]).",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-purity-real-sheaves/sk-thm-wrp-l2-dictionary/_section.md",
+  "place": "node sk-thm-wrp-l2-dictionary, order 3915"
+ },
+ "stmt_deps": [
+  "sk-def-wrp-l2-definition",
+  "det-l-dl-a1-energy"
+ ],
+ "proof": [
+  {
+   "text": "Suppose first that $\\mathcal G$ is real ([sk-def-wrp-real-definition]), and\nput $\\mathcal T=\\mathcal G\\otimes\\mathcal G$. For $x\\in X_0(k_n)$ we have\n$\\iota t_{\\mathcal T,n}(x)=|\\iota t_{\\mathcal G,n}(x)|^2$, because\n$\\iota t_{\\mathcal G,n}(x)$ is real. By the Euler product and the trace\nformula ([sk-thm-trace-transport]),\n\n$$\n \\varphi_{\\mathcal G}(t)=\\frac{L'(t)}{L(t)},\\qquad\n L(t)=\\frac{\\iota\\det(1-Ft\\mid H_c^1(X,\\mathcal T))}\n            {\\iota\\det(1-Ft\\mid H_c^2(X,\\mathcal T))}.\n$$",
+   "uses": [
+    "sk-def-wrp-real-definition",
+    "sk-thm-trace-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Indeed, if we group the local logarithms by degree, the coefficient of\n$t^{n-1}$ becomes the sum of the traces over $X_0(k_n)$, which is\n$S_n(\\mathcal G)$ ([lem-wf-conjugate-tensor-traces]). Since $\\mathcal T$ is\npure of weight $2w$, [sk-lem-wrp-hc2] shows that all roots of the denominator\nhave absolute value $R=q^{-w-1}$.",
+   "uses": [
+    "lem-wf-conjugate-tensor-traces",
+    "sk-lem-wrp-hc2"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "We claim that $L$ has a pole on the circle $|t|=R$. By\n[sk-lem-wrp-positive-euler], each local Euler factor of\n$\\mathcal T$ has nonnegative Taylor coefficients, and so the\ncoefficients of the full product dominate those of any one factor.\nChoose a closed point of the curve. Since $\\mathcal G$ has positive\nrank and Frobenius is invertible, its Euler factor is the reciprocal\nof a nonconstant polynomial, and hence it has infinitely many nonzero\nTaylor coefficients (a polynomial cannot be inverse to a nonconstant\npolynomial). Therefore the full Euler product is not a polynomial. It\nfollows that the rational function $L$ has a pole, and by the bound on\nthe denominator every pole lies on $|t|=R$.",
+   "uses": [
+    "sk-lem-wrp-positive-euler"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A pole of $L$ is also a pole of its logarithmic derivative: if\n$L(t)=(t-t_0)^{-a}u(t)$ near $t_0$, with $a>0$ and $u(t_0)\\ne0$, then\n$L'/L=-a/(t-t_0)+u'/u$. Thus the radius of convergence of\n$\\varphi_{\\mathcal G}$ is at most $R$. Since $\\mathcal G$ is pure of\nweight $w$, [sk-lem-wrp-l2-growth] gives the reverse inequality.\nHence the radius is $R$, and $\\nu(\\mathcal G)=w$\n([thm-wf-l2-dictionary]).",
+   "uses": [
+    "sk-lem-wrp-l2-growth",
+    "thm-wf-l2-dictionary"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary pure $\\mathcal G$, consider its real envelope\n([sk-prop-wrp-real-envelope]). The sheaf\n$\\mathcal G^0=\\mathcal G\\otimes\\mathcal B_b$ is pure of weight zero,\nand $\\nu(\\mathcal G^0)=\\nu(\\mathcal G)-w$. The real envelope\n$\\mathcal E=\\mathcal G^0\\oplus(\\mathcal G^0)^\\vee$ is nonzero, real\nand pure of weight zero, so $\\nu(\\mathcal E)=0$ by the case already\ntreated. For every $n$ and $x\\in X_0(k_n)$ we have\n$\\iota t_{\\mathcal E,n}(x)=2\\operatorname{Re}(\\iota t_{\\mathcal G^0,n}(x))$,\nand hence $S_n(\\mathcal E)\\le4S_n(\\mathcal G^0)$ and\n$\\nu(\\mathcal G^0)\\ge0$. The upper bound for pure sheaves gives the\nopposite inequality. Thus $\\nu(\\mathcal G^0)=0$, which proves the\ntheorem ([lem-wf-l2-purity-rigidity]).",
+   "uses": [
+    "lem-wf-l2-purity-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Complement.* If $S_n(N)\\le Cq^{nB}$, then $\\nu(N)\\le B-1$ by the definition\nof $\\nu$, and $\\nu(N)=v$ by the theorem.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-def-wrp-real-definition",
+  "sk-thm-trace-transport",
+  "lem-wf-conjugate-tensor-traces",
+  "sk-lem-wrp-hc2",
+  "sk-lem-wrp-positive-euler",
+  "sk-lem-wrp-l2-growth",
+  "thm-wf-l2-dictionary",
+  "lem-wf-l2-purity-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-purity-real-sheaves/sk-thm-wrp-l2-dictionary/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 3915,
+ "blueprint_uses": [
+  "sk-def-wrp-l2-definition",
+  "sk-def-wrp-real-definition",
+  "sk-lem-wrp-hc2",
+  "sk-lem-wrp-l2-growth",
+  "sk-lem-wrp-positive-euler",
+  "sk-prop-wrp-real-envelope",
+  "sk-thm-trace-transport"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "sk-thm-wrp-l2-dictionary",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-thm-wrp-l2-dictionary"
+}

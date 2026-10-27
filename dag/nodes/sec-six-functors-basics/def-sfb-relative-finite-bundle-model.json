@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-relative-finite-bundle-model",
+ "kind": "definition",
+ "title": "Finite abelian bundle sections on a profinite slice",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Use the size convention [def-weil-size-convention]. Let $P$ be a profinite space and let $T$ be a topological commutative ring. On $\\operatorname{Prof}/P$ with finite jointly surjective covers put $R_T=(\\underline T)|_P$, the restriction of the continuous-function ring sheaf [def-sfb-continuous-map-condensed-ring], so $R_T(Q\\to P)=C(Q,T)$. A finite locally constant abelian bundle on $P$ is specified by a natural number $n$, a locally constant map $c:P\\to\\{0,\\ldots,n-1\\}$ and finite abelian groups $G_i$. Its total space is $\\coprod_i c^{-1}(i)\\times G_i$, with each group discrete, mapping to $P$ by projection. For $a:Q\\to P$, define its group of continuous sections to be $\\prod_i\\operatorname{LC}(\\{q\\in Q:c(a(q))=i\\},G_i)$, with pointwise addition. Restriction along $f:Q\\to Q'$ over $P$ is precomposition on each piece. For a sheaf of modules $M$ over any ring sheaf on this slice [def-weil-sheaf-of-modules-category], a section presentation is a family of additive equivalences between $M(Q)$ and these section groups commuting with every restriction. No condition is imposed on the action beyond the module-sheaf axioms.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/ruimy-tubach-wolf-proetale-motives-solid-rigidity_arXiv-2601.07358.pdf",
+  "place": "Finite-bundle definition in lem-sfb-relative-finite-bundle-roos (agent relative version), motivated by Lemma 1.2.7, p.14; explicit finite clopen presentation of its section sheaf."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant bundles of abelian groups on a profinite space represented by a finite clopen partition and finite discrete groups",
+   "results": "{\"t\": \"2026-10-25T12:47:42Z\", \"tool\": \"leansearch\", \"query\": \"Finite locally constant bundles of abelian groups on a profinite space represented by a finite clopen partition and finite discrete groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocallyConstant.instCommGroup\", \"TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant\", \"LocallyConstant.instGroup\", \"LightCondensed.lanLightCondSet\", \"LocallyConstant.unflip\", \"Condensed.lanSheafProfinite\", \"Condensed.locallyConstantPresheaf\", \"IsLocallyConstant.isClopen_fiber\"], \"digest\": \"376046996ed786f1\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match: constant presheaves are components, not varying finite clopen abelian bundles with natural section presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant bundles of abelian groups on a profinite space and their continuous section presheaves",
+   "results": "{\"t\": \"2026-10-25T12:49:45Z\", \"tool\": \"leanfinder\", \"query\": \"Finite locally constant bundles of abelian groups on a profinite space and their continuous section presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.locallyConstantPresheaf\", \"LightCondensed.locallyConstantPresheaf\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functor\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CompHausLike.LocallyConstant.functor_obj_val\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier\", \"CompHausLike.LocallyConstantModule.functorToPresheaves\"], \"digest\": \"9ffb9d9749875bd5\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match: constant presheaves are components, not varying finite clopen abelian bundles with natural section presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*locally.*constant.*bundle|finite.*bundle.*section",
+   "results": "{\"t\": \"2026-10-25T12:49:46Z\", \"tool\": \"grep\", \"query\": \"finite.*locally.*constant.*bundle|finite.*bundle.*section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\"], \"digest\": \"8a2b529e339a4b3f\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match: constant presheaves are components, not varying finite clopen abelian bundles with natural section presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*locally.*constant.*bundle|finite.*bundle.*section in lean/WeilConjectures and lean/Sheaf; finite locally constant bundle in dag/nodes; blueprint_refs.py search finite locally constant bundle",
+   "results": "No implementation in WeilConjectures or Sheaf. DAG hits are consuming statement nodes, including the assigned item and integral scalar realization. Blueprint search: 0 blueprint nodes match. The nearest ancestor is det-sf-comp-coherence-cocycle.",
+   "date": "2026-10-25",
+   "verdict": "No existing definition node or declaration for this notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-finite-bundle-roos",
+  "date": "2026-10-25",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; local continuous relation-kernel input before applying closed-pair restriction. Auxiliary Roos exactness for finite continuous module bundles on a profinite slice. Finite bundle and continuous section notation needed to state this auxiliary Roos assertion.",
+   "via": [
+    "lem-sfb-relative-finite-bundle-roos",
+    "lem-sfb-profinite-constant-model-relation-hull",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.Topology.RelativeFiniteBundleModel",
+  "declaration": "Profinite.FiniteAbelianBundle",
+  "declarations": [
+   "Profinite.relativeContinuousRing",
+   "Profinite.FiniteAbelianBundle",
+   "Profinite.FiniteAbelianBundle.sections",
+   "Profinite.FiniteAbelianBundle.restrict",
+   "Profinite.FiniteAbelianBundle.SectionPresentation"
+  ],
+  "file": "lean/Sheaf/Topology/RelativeFiniteBundleModel.lean",
+  "statement": "structure FiniteAbelianBundle (P : Profinite.{u})",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed52e5bd7",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed52e5bd7",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item node, the new def node def-sfb-relative-finite-bundle-model, both delivered modules, the report (Worker report, New nodes and Second reading by NF present) and the stmt_dep declarations in the live tree (continuousMapRingSheafOfUniverse, towerTransitionEndomorphism = 𝟙 − Pi.lift(π(n+1)≫f n), sectionModuleEquivalence). Node diff: only lean was added and stmt_deps gained 5 used deps; statement, proof and proof_deps unchanged. Clauses match: actual C(-,T)|_P ring with no extra condition on T; exact products as HasExactLimitsOfShape (Discrete I) for every I : Type (max u v + 1), including empty I; derived product as IsLimit of the Q-mapped termwise cone; tower M : ℕᵒᵖ ⥤ SheafOfModules; ShortExact with the 1−s sign x_k − t_k x_{k+1}; IsLimit fan of the single-functor product with its actual projections; distinguished triangle with both actual arrows. The bundle is a partition c : P → Fin n with finite groups, which covers every such bundle up to isomorphism (the node's wording is coherent only for partitions; same advisory as the stage-1 reviewer). The natural additive SectionPresentation gives the continuous fibrewise additive transitions by Yoneda on the representable section presheaf, so the hypothesis is equivalent, not weaker. Edge cases checked: empty P/Q, one-point P, zero/identity/non-surjective transitions, varying fibres, zero or non-Hausdorff T, empty families. lean.statement matches the files verbatim; sorry only in the 3 theorem proofs; definitions have real data; docstrings carry source and blueprint; all imports exist. No file changed and nothing compiled; the worker reports a clean compile. Advisory: the in-report second reading is the worker's self-check, not a separate reader."
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-inertia-free-coarse-scheme",
+ "kind": "statement",
+ "title": "An inertia-free Deligne--Mumford stack equals its coarse scheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $\\mathcal X$ be a Deligne--Mumford stack over $S$ and let $c:\\mathcal X\\to h_C$ be a coarse moduli morphism to an $S$-scheme $C$, with the conventions of [def-sfb-stable-pointed-moduli-groupoids]. In particular, for every algebraic space $Z/S$ [def-trf-algebraic-space], composition with $c$ is a bijection between $S$-maps $C\\to Z$ and maps $\\mathcal X\\to Z$ up to 2-isomorphism. Suppose every object of $\\mathcal X(\\Omega)$ has trivial automorphism group for every algebraically closed field $\\Omega$ [def-weil-field, def-weil-algebraic-closure] and every $\\operatorname{Spec}\\Omega\\to S$. Then $c$ is an equivalence of categories fibred in groupoids over $\\mathit{Sch}/S$. Consequently $C$ represents the full groupoid $\\mathcal X$, and for every $S$-scheme $T$ each object of $\\mathcal X(T)$ has only the identity automorphism, including when $T$ is nonreduced. If $\\mathcal X$ is smooth and of finite type over $S$, where smoothness and local finite type are tested on smooth scheme atlases and finite type includes quasi-compactness, then $C\\to S$ is smooth and of finite type [def-sbc-smooth-morphisms, def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04SZ, proposition-algebraic-stack-no-automorphisms, with the Deligne--Mumford geometric-inertia criterion of lem-sfb-dm-geometric-inertia-trivial and the coarse universal property. Returned proof Step 4 after the geometric curve calculation and Step 5. The factorization/inverse equations and atlas argument are retained verbatim in report.md; this universal-property consequence is agent-written."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-relative-moduli-inertia"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-dm-geometric-inertia-trivial]: the hypotheses are exactly that $\\mathcal X/S$ is Deligne--Mumford and every object over every algebraically closed $S$-field has trivial automorphisms. Obtain an algebraic space $E/S$ and an equivalence $e:\\mathcal X\\simeq h_E$ over $\\mathit{Sch}/S$.",
+   "uses": [
+    "lem-sfb-dm-geometric-inertia-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04SZ, proposition-algebraic-stack-no-automorphisms; geometric-inertia corollary stated in the cited node"
+   }
+  },
+  {
+   "text": "Use the coarse universal property [def-sfb-stable-pointed-moduli-groupoids] with target $E$. It gives $a:C\\to E$ with $h_a c\\cong e$. Choose a quasi-inverse $d:h_E\\to\\mathcal X$ and put $b=cd:h_E\\to h_C$. Maps of algebraic spaces are natural transformations [def-trf-algebraic-space], so $b:E\\to C$ is such a map. Then $ab=\\mathrm{id}_E$, since $h_a cd\\cong ed\\cong\\mathrm{id}_{h_E}$ and the target is discrete. Also $(ba)c\\cong b e\\cong c$. Injectivity of the same coarse universal property, now with target the algebraic space $h_C$ [def-trf-scheme-algebraic-space], gives $ba=\\mathrm{id}_C$. Thus $b$ is an isomorphism and $c\\cong h_b e$ is an equivalence.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Agent universal-property argument after Tag 04SZ; coarse convention in def-sfb-stable-pointed-moduli-groupoids"
+   }
+  },
+  {
+   "text": "For each $T/S$, the equivalence $c_T:\\mathcal X(T)\\simeq h_C(T)$ is fully faithful and essentially surjective. The groupoid $h_C(T)$ is discrete by [def-sfb-stable-pointed-moduli-groupoids], so full faithfulness identifies each automorphism set with the singleton identity set. This proves the full-groupoid representability and the assertion for all $T$, without any reducedness hypothesis.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04SZ and the definition of representation by h_C"
+   }
+  },
+  {
+   "text": "Assume now $\\mathcal X/S$ smooth and of finite type. The assumed smoothness, tested on smooth scheme atlases, gives a smooth surjective scheme atlas $a:V\\to\\mathcal X$ with $V\\to S$ smooth [def-sbc-smooth-morphisms]: if the test is read as a condition on every smooth scheme atlas, take for $V$ an etale scheme atlas of the Deligne--Mumford stack [def-sfb-stable-pointed-moduli-groupoids], which is smooth because etale morphisms representable by algebraic spaces are smooth [lem-sfb-stack-chartwise-smooth-etale-calculus]. Put $q=ca:V\\to h_C$, a scheme map $q:V\\to C$. For a scheme $T\\to C$, the corresponding object of $\\mathcal X(T)$ given by the equivalence $c$ identifies the 2-fibre product $V\\times_{\\mathcal X}T$ with $V\\times_CT$; for $T=C$ this is $q$ itself. Since smoothness and surjectivity of $a$ are tested after such scheme base changes, $q$ is smooth and surjective, hence flat and locally of finite presentation [lem-sfb-stack-chartwise-smooth-etale-calculus]. Apply [lem-sbc-smooth-flat-surjective-source-descent] to $q$ and the structure map $C\\to S$: the composite $V\\to C\\to S$ is the smooth map $V\\to S$, so $C\\to S$ is smooth.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B5 (smooth descends along flat surjective lfp maps) as stated in lem-sbc-smooth-flat-surjective-source-descent; stack smooth-atlas convention in stacks-morphisms.tex definition-smooth with Tag 06FM, lemma-local-source-target"
+   }
+  },
+  {
+   "text": "For finite type, [lem-sfb-stack-finite-type-calculus] identifies the stack locally-finite-type and finite-type notions with the ordinary algebraic-space notions when the morphism is representable. Here $\\mathcal X\\to S$ is represented by $C\\to S$ via $c$. In particular quasi-compactness is retained, not inferred from local finite type: the affine scheme tests are the same base changes under this equivalence. Hence $C\\to S$ is locally of finite type and quasi-compact, which is finite type by [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06FM, lemma-local-source-target; section-finite-type, definition-locally-finite-type and section-quasi-compact"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dm-geometric-inertia-trivial",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sfb-stack-finite-type-calculus",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04SZ followed by the explicit coarse-universal-property inverse construction; smooth and finite-type descent in the sources of steps 4 and 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Deligne Mumford stack with trivial geometric stabilizers is represented by its coarse moduli scheme and the coarse morphism is an equivalence",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space which has a coarse moduli scheme is isomorphic to that scheme by the universal property for maps to algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIso_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], CategoryTheory.IsIso f.base\", \"doc\": \"If $ f : X \\to Y $ is an isomorphism of schemes, then the underlying continuous map $ f_{\\\\text{base}} : |X| \\to |Y| $ between the topological spaces of $ X $ and $ Y $ is a homeomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIso_toPshHom\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f], CategoryTheory.IsIso f.toPshHom\", \"doc\": \"The collection of schemes forms a category, where morphisms are morphisms of locally ringed spaces between schemes. Identity morphisms and composition are defined via the corresponding operations on t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰)\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.affine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsAffine X], CategoryTheory.IsIso X.toSpecΓ\", \"doc\": \"For any affine scheme $X$, the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, establishing a natural correspondence between affine schemes and the spectra of their \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toLRSHom f)\", \"doc\": \"The collection of schemes forms a category, where morphisms are morphisms of locally ringed spaces between schemes. Identity morphisms and composition are inherited from the category of locally ringed\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace}\\n  {local_affine :\\n    ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))}\\n  {toLocallyRingedSpace_1 : AlgebraicGeomet\", \"doc\": \"Two schemes are equal if they have the same underlying locally ringed space and satisfy the same local affine conditions, i.e., for every point, there exists an open neighborhood isomorphic to an affi\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.scheme_eq_of_locallyRingedSpace_eq\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme}, X.toLocallyRingedSpace = Y.toLocallyRingedSpace → X = Y\", \"doc\": \"If two schemes $X$ and $Y$ have equal underlying locally ringed spaces, then $X$ and $Y$ are equal as schemes, i.e., $X = Y$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.homeoOfIso\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ≅ Y) → ↥X ≃ₜ ↥Y\", \"doc\": \"Given an isomorphism $ e $ between schemes $ X $ and $ Y $, this constructs a homeomorphism between their underlying topological spaces by applying the forgetful functor to topological spaces and conv\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coarse\", \"moduli\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oarse[Mm]oduli|[Cc]oarse.moduli|[Dd]eligne.[Mm]umford|geometric.*stabilizer",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finite type Deligne Mumford stack with no geometric automorphisms and a coarse scheme is a smooth fine moduli scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "coarse.?moduli|Deligne.?Mumford|geometric.*stabilizer",
+   "results": "{\"t\": \"2026-10-23T09:41:14Z\", \"tool\": \"grep\", \"query\": \"coarse.?moduli|Deligne.?Mumford|geometric.*stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary schemes, affine schemes and initial objects; none gives this stack/coarse equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space with a coarse moduli scheme is isomorphic to its coarse scheme",
+   "results": "{\"t\": \"2026-10-23T09:41:15Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space with a coarse moduli scheme is isomorphic to its coarse scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.isoSpec\", \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine.congr_simp\", \"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.topIso\"], \"digest\": \"46f94c1a409ceb5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary schemes, affine schemes and initial objects; none gives this stack/coarse equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coarse\", \"moduli\"",
+   "results": "{\"t\": \"2026-10-23T09:41:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"coarse\\\", \\\"moduli\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary schemes, affine schemes and initial objects; none gives this stack/coarse equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford stack with trivial geometric automorphism groups and a coarse moduli scheme is equivalent to that scheme",
+   "results": "{\"t\": \"2026-10-23T09:41:24Z\", \"tool\": \"leanfinder\", \"query\": \"A Deligne Mumford stack with trivial geometric automorphism groups and a coarse moduli scheme is equivalent to that scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme\", \"AlgebraicGeometry.instHasStrictInitialObjectsScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.mk.inj\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.scheme_eq_of_locallyRingedSpace_eq\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\"], \"digest\": \"aaa0daf649255d05\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary schemes, affine schemes and initial objects; none gives this stack/coarse equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space universal for morphisms from itself to algebraic spaces is its own coarse moduli space and isomorphic to any coarse scheme",
+   "results": "{\"t\": \"2026-10-23T09:41:25Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space universal for morphisms from itself to algebraic spaces is its own coarse moduli space and isomorphic to any coarse scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasInitialScheme\", \"AlgebraicGeometry.Scheme.topIso\", \"AlgebraicGeometry.instHasTerminalScheme\", \"AlgebraicGeometry.Scheme.topIso_hom\", \"AlgebraicGeometry.instHasStrictInitialObjectsScheme\", \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"AlgebraicGeometry.isAffine_affineScheme\"], \"digest\": \"8a0dc7e69b257710\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary schemes, affine schemes and initial objects; none gives this stack/coarse equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Returned rigidification proof: Tag 04SZ, proposition-algebraic-stack-no-automorphisms, with the Deligne--Mumford geometric-inertia criterion of lem-sfb-dm-geometric-inertia-trivial and the coarse universal property. Returned proof Step 4 after the geometric curve calculation and Step 5. The factorization/inverse equations and atlas argument are retained verbatim in report.md; this universal-property consequence is agent-written. Q100: the inherited prerequisite serves paragraph (3), direct-image preservation, of the current latest blueprint; it identifies the inertia-free level stack with its coarse scheme.",
+   "via": [
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-inertia-free-coarse-scheme",
+  "worker": "stage1",
+  "summary": "Reused the existing DM geometric-inertia criterion, wrote both coarse inverse equations explicitly, and checked all-test-scheme automorphisms. Smoothness uses flat-surjective source descent along a smooth scheme atlas (reviewer fix); finite type uses existing stack/space compatibility including quasi-compactness. Statement unchanged. No new nodes. Repaired the inherited null blueprint ancestor from the explicit place and its already anchored moduli-definition sibling.",
+  "blueprint": "Inherited alteration/moduli prerequisite below det-thm-sf-ctf-stability-direct-images paragraph (3); latest proof still has (3) direct-image preservation. Steps 1-3 realize coarse/fine identification after geometric level rigidity; steps 4-5 retain smoothness and finite type. No chapter/unit route changed.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic definition: morphisms of algebraic spaces are natural transformations, as used in the explicit inverse construction."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic finite-type definition including quasi-compactness, used after representable stack/space compatibility."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme fact (Tag 05B5): smoothness descends along a flat surjective lfp map; used for the smooth atlas V->C after the stack is identified with its coarse scheme; the unit supplies no scheme descent statement."
+   },
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Generic definition regarding the scheme C as an algebraic space, so that the coarse universal property applies with target C."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-eb2f4225c",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-eb2f4225c (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, no new nodes. The statement is unchanged. Also read every cited statement, def-sfb-stable-pointed-moduli-groupoids in full (coarse, stack and DM conventions), the parent rigidification step 4, and Stacks 04SZ (algebraic.tex l.1554), 036U (descent.tex l.6928) and 06FM (stacks-morphisms.tex l.3024). Step 1: lem-sfb-dm-geometric-inertia-trivial matches the item's hypotheses exactly and gives the algebraic space E. Step 2: I checked both inverse equations (a∘b=id because the target is discrete; b∘a=id by injectivity with target C), and they are correct. Fault 1 (C1): using C as a target of the coarse universal property needs C regarded as an algebraic space, and nothing was cited for it; FIX cites def-trf-scheme-algebraic-space. Step 3: correct and elementary (discrete h_C plus full faithfulness), with nonreduced T included. Step 4, fault 2 (C1/E1): 'the étale atlas U gives U→S smooth' used étale⇒smooth without a citation, and silently read the atlas test as holding for every atlas. FIX rewrites step 4: take a smooth surjective scheme atlas V→X with V→S smooth (an étale atlas is smooth by lem-sfb-stack-chartwise-smooth-etale-calculus); through c, V→C is smooth and surjective, hence flat and lfp; lem-sbc-smooth-flat-surjective-source-descent (05B5) then gives C→S smooth. The step no longer cites lem-trf-etale-source-smoothness. Step 5: lem-sfb-stack-finite-type-calculus covers representable finite type including quasi-compactness; accepted. Batch 5: the flagged closures of lem-sfb-dm-geometric-inertia-trivial and lem-sfb-stack-finite-type-calculus reach only generic algebraic-space foundations (def-trf-algebraic-space etc.), through the base-era stmt_dep def-sfb-stable-pointed-moduli-groupoids. These are not steps of the trace-formula or Poincaré-duality proofs, so they are accepted. lem-trf-etale-source-smoothness is generic 036U, and the fix no longer cites it. Edge cases: empty X, X=h_C, BG (excluded), B(α_p) (not DM), k[ε], non-qc X, and an arbitrary non-Noetherian S. No duplicate: lem-sfb-inertia-free-finite-cover-coarse is a different finite-cover statement. The blueprint from.node repair matches the sibling definition. Accepted tool_uses: lem-sbc-smooth-flat-surjective-source-descent, def-trf-scheme-algebraic-space, def-trf-algebraic-space, def-weil-finite-type-morphism. No SGA citation. Fix: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-inertia-free-coarse-scheme.json; proof_deps equals the union of uses; no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InertiaFreeCoarseScheme",
+  "declaration": "AlgebraicGeometry.inertia_free_coarse_scheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/InertiaFreeCoarseScheme.lean",
+  "statement": "theorem inertia_free_coarse_scheme {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsDeligneMumfordModuliStack F) (C : Over S) (c : BasedFunctor F (discreteModuli (yoneda.obj C))) (hc : IsCoarseModuliScheme F C c) (hgeom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ S) (x : Functor.Fiber F.p (Over.mk a)) (α : x ⟶ x), α = 𝟙 x) : c.toFunctor.IsEquivalence ∧ IsRepresentedByScheme F C ∧ (∀ (T : Over S) (x : Functor.Fiber F.p T) (α : x ⟶ x), α = 𝟙 x) ∧ (IsSmoothModuliStack F → IsLocallyFiniteTypeModuliMap (moduliBaseStructure F) → IsQuasiCompactModuliMap (moduliBaseStructure F) → Smooth C.hom ∧ LocallyOfFiniteType C.hom ∧ QuasiCompact C.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses existing smooth-atlas, DM local-finite-type and quasi-compactness predicates and the canonical structural functor; their three landed owning definition nodes are added to stmt_deps. The TeX statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61d1a3e19",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Node diff vs live: only lean + 3 stmt_deps (algebraic-moduli-stack, dm-stack-morphism-properties, relative-moduli-inertia), all landed owners used in the signature. Read IsDeligneMumfordModuliStack, IsCoarseModuliScheme (∀ algebraic-space bijection + geometric skeleton bijection), discreteModuli, IsRepresentedByScheme, IsSmoothModuliStack, IsLocallyFiniteTypeModuliMap, IsQuasiCompactModuliMap, moduliBaseStructure (=F.p to Sch/S), dm_geometric_inertia_trivial (identical hgeom). Clauses: c.toFunctor.IsEquivalence (total equivalence over base = CFG equivalence), IsRepresentedByScheme F C, ∀ T automorphisms trivial (nonreduced included), smooth+lft+qc antecedents ⇒ Smooth ∧ LocallyOfFiniteType ∧ QuasiCompact C.hom; true (T=S gives lft, affine T gives qc, 05B5 smoothness); nothing stronger assumed; Ω : Type u forced by Spec; v,w free. Edge cases: empty stack, h_C, BG/B(α_p) excluded, dual numbers, non-Noetherian S, non-qc. Statement verbatim, one sorry, source/blueprint docstrings with 5 proof steps, no new defs, proof imports exist; no duplicate (inertiaFreeFiniteCoverCoarse is different). No change, no compile."
+ }
+}

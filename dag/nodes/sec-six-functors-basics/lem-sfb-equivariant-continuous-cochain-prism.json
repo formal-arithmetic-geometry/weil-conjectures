@@ -1,0 +1,401 @@
+{
+ "id": "lem-sfb-equivariant-continuous-cochain-prism",
+ "kind": "statement",
+ "title": "Equivariant finite-family prism homotopy on continuous cochains",
+ "statement": "Let $E$ be a topological field [def-weil-field]. For a topological group $J$ and a topological $E$-vector space $V$ with jointly continuous $E$-linear $J$-action, write $B^n(J,V)$ for the abstract $E$-vector space of jointly continuous functions $F:J^{n+1}\\to V$ with $F(ax_0,\\ldots,ax_n)=aF(x_0,\\ldots,x_n)$. Its differential is $(\\delta F)(x_0,\\ldots,x_{n+1})=\\sum_{j=0}^{n+1}(-1)^jF(x_0,\\ldots,\\widehat{x_j},\\ldots,x_{n+1})$, and it is extended by zero in negative degrees. Let $G$ be a topological group, $S$ a finite set (possibly empty), and $a_s:G\\to G$ continuous maps for $s\\in S$. Assume that for every $a\\in G$ there is a permutation $\\pi_a:S\\to S$ such that $a_s(ax)=a a_{\\pi_a(s)}(x)$ for every $s\\in S$ and $x\\in G$. For every topological $E$-vector space $V$ with jointly continuous linear $G$-action, define\n$$(L_{V,n}F)(x_0,\\ldots,x_n)=\\sum_{s\\in S}F(a_s(x_0),\\ldots,a_s(x_n)).$$\nThen $L_V$ is an $E$-linear endomorphism of $B^\\bullet(G,V)$ as a cochain complex. Set $K_{V,0}=0:B^0(G,V)\\to0$ and, for $n\\geq1$, define\n$$(K_{V,n}F)(x_0,\\ldots,x_{n-1})=\\sum_{s\\in S}\\sum_{i=0}^{n-1}(-1)^iF(x_0,\\ldots,x_i,a_s(x_i),\\ldots,a_s(x_{n-1})).$$\nThese are well-defined $E$-linear maps $B^n(G,V)\\to B^{n-1}(G,V)$, with continuous and $G$-equivariant values, and satisfy\n$$\\delta K_{V,n}+K_{V,n+1}\\delta=L_{V,n}-|S|\\,\\mathrm{id}_{B^n(G,V)}\\qquad(n\\geq0).$$\nIn degree zero the identity is $K_{V,1}\\delta F(x_0)=\\sum_s(F(a_s(x_0))-F(x_0))$. With the same finite family $(a_s)$ the construction is simultaneously natural in coefficients: for every continuous equivariant $E$-linear $b:V\\to W$, postcomposition satisfies $b_*L_{V,n}=L_{W,n}b_*$ and $b_*K_{V,n}=K_{W,n}b_*$ in every degree. No compactness of $G$, or completeness, local compactness, Hausdorffness or discreteness of $V$ is required.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Agent cochain adaptation for a permuted finite family of continuous maps: old transfer proof steps 5–7 and its coefficient naturality in step 9."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "The spaces $B^n$ are vector subspaces of all functions under pointwise operations: finite sums and scalar multiples preserve continuity and equivariance. The deletion differential preserves these subspaces for the same reason and is linear. For $0\\leq p<q\\leq n+2$, deleting positions $p$ then $q-1$, or $q$ then $p$, gives the same tuple with opposite signs $(-1)^{p+q-1}$ and $(-1)^{q+p}$. Thus $\\delta^2=0$, including the zero negative degrees. For $L$, deleting a coordinate commutes with applying $a_s$ to all coordinates; interchanging its two finite sums gives $\\delta L_n=L_{n+1}\\delta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Agent cochain adaptation for a permuted finite family of continuous maps: old transfer proof steps 5–7 and its coefficient naturality in step 9."
+   }
+  },
+  {
+   "text": "Each tuple map appearing in $L_n$ or $K_n$ has coordinates that are projections or a continuous $a_s$ composed with a projection. Composing with $F$ and taking finite signed sums proves continuity of their values, and pointwise linearity proves $E$-linearity. Fix $a\\in G$ and choose the single permutation $\\pi_a$ from the hypothesis, which works for all coordinates. Equivariance of $F$ gives\n$$F(a_s(ax_0),\\ldots,a_s(ax_n))=aF(a_{\\pi_a(s)}(x_0),\\ldots,a_{\\pi_a(s)}(x_n)),$$\nand, in a prism summand,\n$$F(ax_0,\\ldots,ax_i,a_s(ax_i),\\ldots,a_s(ax_{n-1}))=aF(x_0,\\ldots,x_i,a_{\\pi_a(s)}(x_i),\\ldots,a_{\\pi_a(s)}(x_{n-1})).$$\nReindexing $s$ by the bijection $\\pi_a$ and using linearity of the action proves equivariance of both sums. Hence the operators have exactly the stated domains and codomains, with $K_0=0$. No continuity or compatibility in $a$ of the chosen permutations is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Agent cochain adaptation for a permuted finite family of continuous maps: old transfer proof steps 5–7 and its coefficient naturality in step 9."
+   }
+  },
+  {
+   "text": "For the algebraic identity use [lem-trf-coefficient-bar-prism-homotopy]. For a fixed $s$, take both indexing categories to have object set the underlying set of $G$ and exactly one arrow between any ordered pair of objects. This is small in a universe containing $G$. The object maps $v=\\mathrm{id}$ and $w=a_s$ extend uniquely to functors, and the unique arrows $x\\to a_s(x)$ give a natural transformation: every naturality square has the same unique composite. Take $R=E$, both coefficient functors constant with value $E$ and all restriction maps identities, and $t=\\mathrm{id}$. A chain $U_q\\to\\cdots\\to U_0$ corresponds to the ordered tuple $(x_0,\\ldots,x_q)=(U_q,\\ldots,U_0)$. Concretely this direct sum consists of finitely supported coefficient families $(c_t)$ indexed by tuples $t$. The coordinate vectors $[t]$ give the unique expansion $(c_t)=\\sum_t c_t[t]$, so they form a basis in the sense of [def-weil-pbc-free-module]. Its boundary $\\partial$ is alternating deletion, since all coefficient restrictions are identities. The cited prism maps become\n$$H^s_q[x_0,\\ldots,x_q]=\\sum_{i=0}^q(-1)^i[x_0,\\ldots,x_i,a_s(x_i),\\ldots,a_s(x_q)].$$\nIts asserted chain identity is therefore $\\partial H^s_q+H^s_{q-1}\\partial=(a_s)_*-\\mathrm{id}$, where $H^s_{-1}=0$ and the unaugmented boundary out of degree zero is zero. Identity arrows and repeated vertices are allowed by the cited statement.",
+   "uses": [
+    "lem-trf-coefficient-bar-prism-homotopy",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH, example-morphism-categories, generator formula, and the explicit natural-transformation prism in lem-trf-coefficient-bar-prism-homotopy; agent specialization to the category with unique arrows."
+   }
+  },
+  {
+   "text": "For a function $F:G^{n+1}\\to V$, define evaluation on the free module by $\\widetilde F(\\sum_t c_t[t])=\\sum_t c_tF(t)$. Unique finite basis expansion in [def-weil-pbc-free-module] makes this well-defined and linear. Direct evaluation gives $\\widetilde{\\delta F}=\\widetilde F\\partial$ and, for $n\\geq1$, the single-$s$ prism operator $K^s_nF=\\widetilde F H^s_{n-1}$ on tuples. Evaluating the preceding chain identity in degree $n$ consequently gives\n$$\\delta K^s_nF+K^s_{n+1}\\delta F=F\\circ a_s^{\\times(n+1)}-F.$$\nFor $n=0$ only $H^s_0$ occurs, giving $K^s_1\\delta F(x)=F(a_s(x))-F(x)$. Sum over $s$ to obtain precisely $\\delta K_n+K_{n+1}\\delta=L_n-|S|\\,\\mathrm{id}$. By step 2 this equality of functions is an equality in $B^n$; individual $K^s_n$ need not preserve equivariance. If $S$ is empty every operator and both sides are zero.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Agent cochain adaptation for a permuted finite family of continuous maps: old transfer proof steps 5–7 and its coefficient naturality in step 9."
+   }
+  },
+  {
+   "text": "A continuous equivariant linear map $b:V\\to W$ sends $B^n(G,V)$ to $B^n(G,W)$ by composition. For each tuple, $b(\\sum_s F(a_s(x_0),\\ldots,a_s(x_n)))=\\sum_s (b\\circ F)(a_s(x_0),\\ldots,a_s(x_n))$; moving $b$ through the finite signed double sum proves the identical assertion for $K_n$, also for $K_0=0$. Thus the fixed family gives both naturalities simultaneously for every $b$. All topology arguments used only continuity of the maps, finite products and finite vector-space operations, so no stated excluded topological assumption has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Agent cochain adaptation for a permuted finite family of continuous maps: old transfer proof steps 5–7 and its coefficient naturality in step 9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-coefficient-bar-prism-homotopy",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, lemma-homotopy-s-N, preceding equation-homotopy-to-homotopy calculation; coefficient-family adaptation using the existing category-bar prism lemma as a generic tool."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "prism|homotopy.*sum|sum.*homotopy",
+   "results": {
+    "t": "2026-10-22T06:04:56Z",
+    "tool": "grep",
+    "query": "prism|homotopy.*sum|sum.*homotopy",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean"
+    ],
+    "digest": "4f98c37a616bff1e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toChainHomotopy requires a simplicial homotopy of morphisms already constructed; individual a_s are not G-equivariant, only their sum is. Constructing the continuous equivariant operators and proving their explicit formula is not a one-line specialization. DoldKan homotopies and the HomComplex differential do not state this finite-family prism theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating deletion differential prism insertion homotopy for continuous homogeneous equivariant cochains",
+   "results": {
+    "t": "2026-10-22T06:04:57Z",
+    "tool": "leansearch",
+    "query": "Alternating deletion differential prism insertion homotopy for continuous homogeneous equivariant cochains",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Homotopy",
+   "results": {
+    "t": "2026-10-22T06:04:57Z",
+    "tool": "loogle",
+    "query": "HomologicalComplex.Homotopy",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'HomologicalComplex.Homotopy'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toChainHomotopy requires a simplicial homotopy of morphisms already constructed; individual a_s are not G-equivariant, only their sum is. Constructing the continuous equivariant operators and proving their explicit formula is not a one-line specialization. DoldKan homotopies and the HomComplex differential do not state this finite-family prism theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant finite family of continuous self maps of a group gives a natural signed prism cochain homotopy from sum of pullbacks to cardinality times identity",
+   "results": {
+    "t": "2026-10-22T06:05:10Z",
+    "tool": "leanfinder",
+    "query": "Equivariant finite family of continuous self maps of a group gives a natural signed prism cochain homotopy from sum of pullbacks to cardinality times identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "AlgebraicTopology.DoldKan.hσ'_eq'",
+     "AlgebraicTopology.DoldKan.hσ'_eq",
+     "AlgebraicTopology.DoldKan.hσ",
+     "Homotopy.mkCoinductiveAux₂_add_one",
+     "AlgebraicTopology.DoldKan.Hσ"
+    ],
+    "digest": "3ae2b19ea6cbc9b0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toChainHomotopy requires a simplicial homotopy of morphisms already constructed; individual a_s are not G-equivariant, only their sum is. Constructing the continuous equivariant operators and proving their explicit formula is not a one-line specialization. DoldKan homotopies and the HomComplex differential do not state this finite-family prism theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy",
+   "results": {
+    "t": "2026-10-22T06:05:47Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy"
+    ],
+    "digest": "87be2e2461fe29b0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toChainHomotopy requires a simplicial homotopy of morphisms already constructed; individual a_s are not G-equivariant, only their sum is. Constructing the continuous equivariant operators and proving their explicit formula is not a one-line specialization. DoldKan homotopies and the HomComplex differential do not state this finite-family prism theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For alternating cochains on tuples the operator inserting both x_i and a(x_i) with sign negative one to power i satisfies delta K plus K delta equals a pullback minus identity",
+   "results": {
+    "t": "2026-10-22T06:06:02Z",
+    "tool": "leanfinder",
+    "query": "For alternating cochains on tuples the operator inserting both x_i and a(x_i) with sign negative one to power i satisfies delta K plus K delta equals a pullback minus identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "inhomogeneousCochains.d_hom_apply",
+     "inhomogeneousCochains.d",
+     "CochainComplex.HomComplex.δ_comp",
+     "CochainComplex.HomComplex.δ_v",
+     "CochainComplex.HomComplex.δ_zero_cochain_comp",
+     "HomologicalComplex.alternatingConst_d",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.objD",
+     "groupCohomology.inhomogeneousCochains.d_def"
+    ],
+    "digest": "25a09e2a078e66d6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toChainHomotopy requires a simplicial homotopy of morphisms already constructed; individual a_s are not G-equivariant, only their sum is. Constructing the continuous equivariant operators and proving their explicit formula is not a one-line specialization. DoldKan homotopies and the HomComplex differential do not state this finite-family prism theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "prism|homotopy.*sum|sum.*homotopy",
+   "results": {
+    "t": "2026-10-22T11:58:58Z",
+    "tool": "grep",
+    "query": "prism|homotopy.*sum|sum.*homotopy",
+    "sub": "AlgebraicTopology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean",
+     "Mathlib/AlgebraicTopology/SimplicialSet/Homology/HomotopyInvariance.lean"
+    ],
+    "digest": "4f98c37a616bff1e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no full match: simplicial toChainHomotopy requires a supplied simplicial homotopy; DoldKan homotopies, alternating differential formulas and homogeneous cochain definitions do not construct this permuted continuous finite-family prism with its explicit operators and coefficient naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous equivariant homogeneous group cochains prism homotopy finite sum of pullbacks",
+   "results": {
+    "t": "2026-10-22T11:58:58Z",
+    "tool": "leansearch",
+    "query": "Continuous equivariant homogeneous group cochains prism homotopy finite sum of pullbacks",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "continuousCohomology",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "inhomogeneousCochains.d_hom_apply",
+     "groupCohomology",
+     "inhomogeneousCochains.d"
+    ],
+    "digest": "dd4159fb44e3f443"
+   },
+   "date": "2026-10-22",
+   "verdict": "no full match: simplicial toChainHomotopy requires a supplied simplicial homotopy; DoldKan homotopies, alternating differential formulas and homogeneous cochain definitions do not construct this permuted continuous finite-family prism with its explicit operators and coefficient naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy",
+   "results": {
+    "t": "2026-10-22T11:58:59Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy"
+    ],
+    "digest": "87be2e2461fe29b0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no full match: simplicial toChainHomotopy requires a supplied simplicial homotopy; DoldKan homotopies, alternating differential formulas and homogeneous cochain definitions do not construct this permuted continuous finite-family prism with its explicit operators and coefficient naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant finite family of continuous group self maps induces a prism cochain homotopy between sum of pullbacks and cardinality times identity",
+   "results": {
+    "t": "2026-10-22T11:59:08Z",
+    "tool": "leanfinder",
+    "query": "Equivariant finite family of continuous group self maps induces a prism cochain homotopy between sum of pullbacks and cardinality times identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "AlgebraicTopology.DoldKan.homotopyPToId",
+     "Homotopy.mkCoinductiveAux₃",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId_hom",
+     "Homotopy.mkCoinductiveAux₂_add_one",
+     "Homotopy.mkCoinductiveAux₂",
+     "Homotopy.mkCoinductiveAux₁",
+     "Homotopy.mkCoinductive"
+    ],
+    "digest": "79865ed209d7ea31"
+   },
+   "date": "2026-10-22",
+   "verdict": "no full match: simplicial toChainHomotopy requires a supplied simplicial homotopy; DoldKan homotopies, alternating differential formulas and homogeneous cochain definitions do not construct this permuted continuous finite-family prism with its explicit operators and coefficient naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating deletion cochains on tuples: signed insertion of both x_i and a(x_i) gives delta K plus K delta equal to pullback by a minus identity",
+   "results": {
+    "t": "2026-10-22T12:00:05Z",
+    "tool": "leanfinder",
+    "query": "Alternating deletion cochains on tuples: signed insertion of both x_i and a(x_i) gives delta K plus K delta equal to pullback by a minus identity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "inhomogeneousCochains.d",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.objD",
+     "Rep.standardComplex.d",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.map",
+     "AlgebraicTopology.AlternatingFaceMapComplex.objD",
+     "inhomogeneousCochains.d_hom_apply",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.d_squared",
+     "AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq"
+    ],
+    "digest": "721748e388f92a74"
+   },
+   "date": "2026-10-22",
+   "verdict": "no full match: simplicial toChainHomotopy requires a supplied simplicial homotopy; DoldKan homotopies, alternating differential formulas and homogeneous cochain definitions do not construct this permuted continuous finite-family prism with its explicit operators and coefficient naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-cochain-finite-index-transfer",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic transfer expansion: old transfer proof steps 5–7 (continuous equivariant prism and all face cancellations), with prism naturality in step 9.",
+   "via": [
+    "lem-sfb-continuous-cochain-finite-index-transfer",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-continuous-cochain-prism",
+  "worker": "stage1",
+  "group": "Q132",
+  "summary": "Retained the entire statement. Proved continuity and finite-family equivariance explicitly, reused the existing coefficient-sensitive category-bar prism rather than creating a duplicate algebraic lemma, evaluated its free tuple identity in V, and checked degree zero, empty families and simultaneous coefficient naturality. No new nodes. Repair of the returned head a5ecf138c11: compared the retained split with the current unsplit DAG item, re-read all three dependency statements, retained their exact claims and the approved route, and made the direct-sum coordinate basis identification explicit before evaluating the prism. Delivery is rebuilt on the current origin/sheaf-dag by deliver.py.",
+  "blueprint": "Direct-images paragraph (3), auxiliary arithmetic transfer expansion: old transfer steps 5–7 and naturality in old step 9. The existing inherited from.node is null and ancestor prints None; retained the existing exact from.place and via chain. Whole-blueprint searches for prism, homotopy, coefficient bar and continuous cochain found no exact statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-coefficient-bar-prism-homotopy",
+    "why": "Its explicit signed category-bar prism identity specializes to tuples in the category with one arrow between each pair of group elements. This is a purely algebraic tool; it replaces no unit route or coefficient comparison, and the unit has no node with this explicit general prism identity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-coefficient-bar-prism-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-1bea51360",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-1bea51360 (reviewer sub-agent of L); spot-checked: PASS. S1 split with 0 new nodes and 5 steps. Compared with the returned head a5ecf138, only step 3 and split_report changed: step 3 now writes the free module as finitely supported families with the coordinate basis [t]. The statement, stmt_deps, source and blueprint fields are byte-identical to the previous head, so no target was weakened. The earlier return was the promotion fault only. I checked step 3's specialization of lem-trf-coefficient-bar-prism-homotopy: the chaotic category on G, v=id, w=a_s, η the unique arrows, R=E, constant coefficients, t=id. Since x_j=U_{n-j}, the face d_j deletes x_j and p_r gives (x0..x_r, a_s x_r..a_s x_n) with sign (-1)^r. The cited identity dH+Hd=K(w,t)-K(v,G(η)t) becomes ∂H+H∂=(a_s)_*-id, including degree 0. Step 4's evaluation through the unique basis expansion (def-weil-pbc-free-module) gives δK+Kδ=L-|S|id, and I recomputed this. Steps 1, 2 and 5 are elementary: δ²=0, δL=Lδ, continuity, equivariance via one permutation π_a and reindexing, and coefficient naturality. I worked n=0 and n=1 by hand and checked a_s=id, S empty and characteristic dividing |S|. I read Stacks simplicial.tex 4739-4860 (Tag 019S). There is no duplicate: lem-weil-pbc-simplicial-homotopy-free-chain-homotopy gives only existence of a homotopy. Batch-5 flag: I accept the citation of lem-trf-coefficient-bar-prism-homotopy. It is a generic bar-complex prism identity, unsplit, whose stmt_deps are 5 general definitions. Neither the trace-formula nor the Poincaré-duality assumption gives it, it is not a step those leaves replace, and it imports no trace-formula proof. Its tool use is declared in split_report.tool_uses for maintainer recording."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.EquivariantContinuousCochainPrism",
+  "declaration": "ContinuousCohomology.exists_equivariantContinuousPrism",
+  "declarations": [
+   "ContinuousCohomology.EquivariantContinuousPrism",
+   "ContinuousCohomology.exists_equivariantContinuousPrism"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/EquivariantContinuousCochainPrism.lean",
+  "statement": "theorem exists_equivariantContinuousPrism (hperm : ∀ g : G, ∃ π : Equiv.Perm S, ∀ (s : S) (x : G), a s (g * x) = g * a (π s) x) : ∃ D : ∀ (A : TopRep.{w} E G) (_hA : Continuous (fun p : G × A ↦ A.ρ p.1 p.2)), EquivariantContinuousPrism E G S a A, ∀ (A W : TopRep.{w} E G) (hA : Continuous (fun p : G × A ↦ A.ρ p.1 p.2)) (hW : Continuous (fun p : G × W ↦ W.ρ p.1 p.2)) (b : A ⟶ W), ∃ bStar : (D A hA).B ⟶ (D W hW).B, (∀ (n : ℕ) (f : (D A hA).B.X (n : ℤ)) (x : Fin (n + 1) → G), (D W hW).eval n ((bStar.f (n : ℤ)).hom f) x = b ((D A hA).eval n f x)) ∧ (D A hA).L ≫ bStar = bStar ≫ (D W hW).L ∧ (∀ i j : ℤ, (D A hA).prism.hom i j ≫ bStar.f j = bStar.f i ≫ (D W hW).prism.hom i j)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The structure pins the integer-indexed homogeneous complex by injective linear evaluation with exactly the jointly continuous equivariant functions as image, including its differential and negative-degree zero extension. The existence theorem supplies simultaneously natural L and K with the exact finite-sum formulas, a Homotopy from L to card(S) id, and the explicit degree-zero identity. No arbitrary construction or iterated-continuous-map identification is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64a2cbb70",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: B^n pinned by injective eval with exact range of jointly continuous equivariant functions, zero negative degrees, explicit delta/L/K formulas (insertNth i.succ checked), Homotopy L (card S • 𝟙) gives δK+Kδ=L−|S|id under Mathlib comm convention, K≤0 zero, degree-zero clause, naturality with bStar pinned by eval and commuting with L and all K. hperm and TopRep+hA joint continuity exactly the node's hypotheses; no extra topology. n=0 and n=1 checked by hand; empty S and char|S| fine. Universes bound; lean.statement verbatim; only the item's lean field is new. No Mathlib/project duplicate (Mathlib homogeneousCochains uses iterated C(G,C(G,…))). Docstrings carry source/blueprint and proof steps; sorry only. Advisory H11: second-reading section is not an independent reading, but the worker report matches the node, as in earlier PASSes."
+ }
+}

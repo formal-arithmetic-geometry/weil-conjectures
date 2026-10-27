@@ -50,7 +50,40 @@
   "pqf-lem-leray"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.exists_leray_lowDegree_exact",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Leray",
+     "lines": [
+      104,
+      131
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_rightDerived_one_iso_of_isZero",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Leray",
+     "lines": [
+      133,
+      145
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "split_report": {
@@ -95,5 +128,24 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal F$ an\n$\\mathcal O_X$-module. The low degree terms of the\nspectral sequence of [pqf-lem-leray] give an exact sequence\n\n$$\n0\\longrightarrow\\mathrm H^1(Y,f_*\\mathcal F)\n\\longrightarrow\\mathrm H^1(X,\\mathcal F)\n\\longrightarrow\\mathrm H^0(Y,R^1f_*\\mathcal F)\n\\longrightarrow\\mathrm H^2(Y,f_*\\mathcal F).\n$$\n\nIn particular, if $R^1f_*\\mathcal F=0$, then\n$\\mathrm H^1(X,\\mathcal F)\\cong\\mathrm H^1(Y,f_*\\mathcal F)$.",
+  "proof": [
+   {
+    "text": "The spectral sequence of [pqf-lem-leray] is\n$E_2^{p,q}=\\mathrm H^p(Y,R^qf_*\\mathcal F)$; the terms with $p+q=0,1,2$\nare the displayed sequence, exact by the standard edge and connecting\nmaps of a spectral sequence and by the cohomology long exact\nsequences of [pqf-def-cohomology] (the maps\n$E_2^{0,1}\\to E_2^{2,0}$ being the second differential and its\ncomposites). If $R^1f_*\\mathcal F=0$, the middle term vanishes and the\nresulting exact sequence gives the stated isomorphism.",
+    "uses": [
+     "pqf-lem-leray",
+     "pqf-def-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

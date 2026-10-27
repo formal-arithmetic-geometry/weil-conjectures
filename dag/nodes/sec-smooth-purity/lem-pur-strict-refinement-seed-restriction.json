@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-strict-refinement-seed-restriction",
+ "kind": "statement",
+ "title": "Restriction of the local identity-left proper/open seed",
+ "statement": "Let $\\ell$ be prime, let $E,F$ be finite extensions of $\\mathbf Q_\\ell$, and let $i:E\\to F$ be a $\\mathbf Q_\\ell$-algebra homomorphism [def-weil-l-adic-coefficient-extension]. Put $A=\\operatorname{ULift}(\\mathcal O_E)$ and $B=\\operatorname{ULift}(\\mathcal O_F)$, and use $D_H(Z)=D(\\operatorname{Fun}(\\mathbf N^{\\mathrm{op}},\\operatorname{Mod}(\\underline H_Z)))$ and its normalized operations $J_H,R_H$ [def-cbc-strict-constant-tower-operations]. Write $U_Z:D_B(Z)\\to D_A(Z)$ for coefficient restriction and $o_j:U_ZJ_{A,j}\\to J_{B,j}U_W$, $d_p:R_{B,p}U_T\\to U_WR_{A,p}$ for openRestriction and properRestriction [def-pur-constant-scalar-tower-mates]. Write $P_Z^{(e)}$ for positive arithmetic selection of levels $e(n+1)$, $a_p:R_{B,p}P_T^{(e)}\\to P_W^{(e)}R_{B,p}$ for reindexProper, and $b_j:J_{B,j}P_W^{(e)}\\to P_Z^{(e)}J_{B,j}$ for reindexOpen [def-pur-strict-scalar-mate-evaluation-data]. Compositions of functors in these formulas are in execution order, as in Lean. Let $k:X\\hookrightarrow W$ and $j:X\\hookrightarrow T$ be open immersions [def-weil-open-immersion] that are quasi-compact (inverse images of quasi-compact opens are quasi-compact), let $p:W\\to T$ be proper [def-weil-proper-morphism], and fix $h:kp=1_Xj$. Let\n$$s_H=(\\operatorname{rId}_H(X)^{-1}J_{H,j});\\gamma_H(k,1_X,p,j,h):J_{H,j}\\to J_{H,k}R_{H,p},$$\nwhere the first factor is the inverse identity compositor whiskered by $J_{H,j}$ and $\\gamma$ is the intrinsic clopen proper/open mate [def-cbc-strict-tower-proper-open-arrows]. For every $N\\in D_B(X)$,\n$$s_A(U_XN);R_{A,p}(o_k(N));d_p^{-1}(J_{B,k}N)=o_j(N);U_T(s_B(N)).$$\nFor every $e\\ge1$ and $N\\in D_B(X)$,\n$$P_T^{(e)}(s_B(N));a_p(J_{B,k}N);R_{B,p}(b_k(N))=b_j(N);s_B(P_X^{(e)}N).$$\nHere semicolon denotes arrows followed from left to right. Neither assertion includes any subsequent proper image or proper-composition identification.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; sites-cohomology.tex Tag 07A6; strict-diagram restriction refinement of the parent first proof step."
+ },
+ "stmt_deps": [
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Factor the identity-left proper/open square through its fibre product. Use the intrinsic clopen lift and its identity/zero projector. On ordinary modules coefficient restriction keeps both section components and the open-unit map, so the alpha comparison is unchanged. The same argument at every retained level applies to arithmetic selection, including all transitions.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-tower-mate-evaluation-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the proper-adjunction mate with the ordered units and counits. Derive the ordinary section identities on whole strict diagrams, using the unitCompatible specification of properRestriction; finite-free tensor makes coefficient restriction preserve K-injectives. The identity-proper comparison is the specified rId, giving exactly the first seed equation.",
+   "uses": [
+    "def-pur-constant-scalar-tower-mates",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For positive e use the exact left adjoint of arithmetic selection to preserve K-injectives. The ordinary identities are termwise, so their exact localization and the canonical derived-composite units give reindexOpen and reindexProper. Apply the same mate calculation, including the identity compositor, to obtain the second seed equation. No finite evaluation is used to detect equality.",
+   "uses": [
+    "lem-sp-strict-tower-arithmetic-restriction-resolution",
+    "def-pur-strict-scalar-mate-evaluation-data",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-tower-mate-evaluation-scalars",
+  "def-pur-constant-scalar-tower-mates",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-weil-pbc-exchange-mate-cube",
+  "lem-sp-strict-tower-arithmetic-restriction-resolution",
+  "def-pur-strict-scalar-mate-evaluation-data"
+ ],
+ "proof_origin": {
+  "by": "J8",
+  "kind": "agent auxiliary refinement of the existing proof",
+  "source": {
+   "document": "literature/stacks-project/more-etale.tex",
+   "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; sites-cohomology.tex Tag 07A6; strict-diagram restriction refinement of the parent first proof step."
+  },
+  "note": "A genuine component before the final proper/open refinement comparison, with its own full proof in words."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image composition compatible with exact restriction of scalars and adjunction mate",
+   "results": "PresheafOfModules.pushforward_obj_map_apply', ModuleCat.restrictScalarsComp'App_hom_naturality, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.restrictScalars, CategoryTheory.Adjunction.derivedε, SheafOfModules.pushforwardComp, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc.",
+   "date": "2026-10-26",
+   "verdict": "Generic module and adjunction constructions; no normalized strict-tower restriction identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality and eight other generic naturality lemmas.",
+   "date": "2026-10-26",
+   "verdict": "Naturality pastes the component identities; does not give either geometric identity."
+  },
+  {
+   "tool": "grep",
+   "query": "properRestriction.*composition|reindexProper.*composition|strictRefinementSeed",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "No existing named proper-composition or refinement-seed restriction identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictRefinementRestrictionSquares",
+  "date": "2026-10-26",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient change for compact support: auxiliary comparison Step 7, preservation of the normalized refinement under coefficient restriction and restriction to ramified indices. Local seed and proper-composition components.",
+   "via": [
+    "lem-pur-strict-refinement-restriction-squares",
+    "lem-pur-compact-support-strict-scalar-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictRefinementSeedRestriction",
+  "file": "lean/Sheaf/Paper/StrictRefinementSeedRestriction.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.strictRefinementSeedRestriction",
+  "statement": "theorem strictRefinementSeedRestriction\n    {X W T : Scheme.{u}} (k : X ⟶ W) (j : X ⟶ T) (p : W ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion j] [QuasiCompact k] [QuasiCompact j]\n    [IsProper p] (h : k ≫ p = (𝟙 X) ≫ j) :\n    let A := ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)\n    let B := ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)\n    let sA := Functor.whiskerRight (rId A X).inv (J A j) ≫ gamma A k (𝟙 X) p j h\n    let sB := Functor.whiskerRight (rId B X).inv (J B j) ≫ gamma B k (𝟙 X) p j h\n    (∀ N : Derived B X,\n      sA.app ((U l E F i X).obj N) ≫\n          (R A p).map ((openRestriction l E F i k).hom.app N) ≫\n          (properRestriction l E F i p).inv.app ((J B k).obj N) =\n        (openRestriction l E F i j).hom.app N ≫ (U l E F i T).map (sB.app N)) ∧\n    ∀ (e : ℕ) (he : 1 ≤ e) (N : Derived B X),\n      (subsequence l F T e).map (sB.app N) ≫\n          (reindexProper l F p e he).hom.app ((J B k).obj N) ≫\n          (R B p).map ((reindexOpen l F k e).hom.app N) =\n        (reindexOpen l F j e).hom.app N ≫ sB.app ((subsequence l F X e).obj N)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261026T195641-L-3151598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261026T195641-L-3151598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

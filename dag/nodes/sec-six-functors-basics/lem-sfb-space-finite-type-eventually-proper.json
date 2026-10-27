@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-space-finite-type-eventually-proper",
+ "kind": "statement",
+ "title": "Eventual properness for finite type algebraic spaces without finite presentation",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme] and algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme, and quasi-separated if its diagonal is quasi-compact on scheme tests. A morphism is affine if it is representable and its pullback to any affine scheme is affine. Locally finite type means that the ring maps on etale scheme charts have finitely many algebra generators. Proper means separated, of finite type and universally closed [def-sfb-space-morphism-properties]. Let $I$ be a small nonempty directed set, $(T_i)_{i\\in I}$ an inverse system of affine schemes with affine transition maps, and $T=\\varprojlim_i T_i$. Fix $i_0\\in I$. Let $h_{i_0}:W_{i_0}\\to T_{i_0}$ be a locally finite type morphism with $W_{i_0}$ quasi-compact and quasi-separated. For $i\\ge i_0$ put $W_i=W_{i_0}\\times_{T_{i_0}}T_i$, and put $W=W_{i_0}\\times_{T_{i_0}}T$. If $W\\to T$ is proper, then $W_j\\to T_j$ is proper for some $j\\ge i_0$. Neither $h_{i_0}$ nor any transition map is assumed finitely presented or flat.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 08K1 (lemma-eventually-proper), in Situation (situation-descent-property), with B_i=Y_i=T_i and X_i=W_i; local finite type version, no finite-presentation assumption."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $a=i_0$. Every $T_i$ is quasi-compact and quasi-separated since it is affine. Thus $h_a$ is quasi-compact by quasi-compact-source/quasi-separated-target permanence, and is of finite type by the assumed local finite type. The space $D_a=W_a\\times_{T_a}W_a$ is quasi-compact and quasi-separated by the fibre-product permanence statement. The diagonal $\\delta_a:W_a\\to D_a$ is representable and locally of finite type, without a finite-presentation hypothesis.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-diagonal-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1 (lemma-eventually-proper), separated-stage reduction; Tag 0851 (lemma-descend-separated-morphism), diagonal argument, using spaces-morphisms.tex Tags 073B and 03HK"
+   }
+  },
+  {
+   "text": "The base change of $\\delta_a$ to $T$ is the diagonal of $W\\to T$: on test objects both fibre squares consist of pairs of sections with equal image in the base. It is a closed immersion since $W\\to T$ is proper. Apply [lem-sfb-space-descend-closed-immersion] to $W_a\\to D_a$ over the affine base system. Its two spaces are qcqs and its morphism is locally of finite type by step 1. There is $b\\ge a$ for which $\\delta_b$ is a closed immersion, so $W_b\\to T_b$ is separated.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 08K1 and 0851 (lemma-descend-separated-morphism), via Tag 0850 (lemma-descend-closed-immersion)"
+   }
+  },
+  {
+   "text": "Restrict to indices $i\\ge b$. This is still a nonempty directed set. It has the same limit: for any original index $k$, choose an upper bound of $k,b$ and compose its cone map to $T_k$; a common upper bound shows independence of that choice and uniqueness. All $W_i$ are qcqs by fibre-product permanence applied to $W_a,T_i,T_a$. Local finite type persists by arbitrary base change, and $W_i\\to T_i$ is quasi-compact by source/target permanence, hence finite type. For $i\\ge b$ it is separated by base change from $W_b\\to T_b$. Iterated fibre products identify $W_b\\times_{T_b}T_i$ with $W_i$ and $W_b\\times_{T_b}T$ with $W$, since both represent the same compatible tuples of sections.",
+   "uses": [
+    "lem-sfb-space-qcqs-source-products",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1 (lemma-eventually-proper), replacing 0 by a separated stage"
+   }
+  },
+  {
+   "text": "Apply weak Chow to the separated finite-type map $W_b\\to T_b$, whose base is affine. It supplies an integer $n\\ge0$, a quasi-compact separated scheme $C_b$, a proper universally surjective map $\\pi_b:C_b\\to W_b$, and a quasi-compact immersion $j_b:C_b\\to P_b=\\mathbf P^n_{T_b}$ with $q_bj_b=h_b\\pi_b$. For $i\\ge b$ and for the limit put $C_i=C_b\\times_{T_b}T_i$ and $P_i=\\mathbf P^n_{T_i}$, and likewise $C,P$ over $T$. The projective-space base-change convention identifies $P_i$ with $P_b\\times_{T_b}T_i$; the maps $j_i$ are immersions by immersion base change. The maps $\\pi_i$ and $\\pi$ are proper by proper base change, and universally surjective by the universally-surjective clause of weak Chow and the associativity of fibre products.",
+   "uses": [
+    "lem-sfb-space-weak-chow",
+    "def-nagata-projective-space-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-sfb-space-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1 (lemma-eventually-proper), Chow diagram and its base changes; spaces-cohomology.tex Tag 089J (lemma-weak-chow)"
+   }
+  },
+  {
+   "text": "At the limit $C\\to W\\to T$ is proper by composition. Since $C,T$ are schemes, the representable-proper scheme-test equivalence gives properness as a scheme morphism (take the identity test of $T$). The projection $q:P=\\mathbf P^n_T\\to T$ is proper, hence separated. Scheme proper-over-separated cancellation makes $j:C\\to P$ proper, since $qj=C\\to T$. It remains an immersion by step 4; a proper immersion of schemes is a closed immersion. Thus $j$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-space-proper-composition",
+    "lem-sfb-space-representable-proper-tests",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1 (lemma-eventually-proper), the limit immersion is closed; spaces-morphisms.tex Tag 04NX (lemma-universally-closed-permanence), (2)"
+   }
+  },
+  {
+   "text": "The scheme $C_b$ is quasi-compact and separated, so it is quasi-separated: apply separated-implies-quasi-separated to its structure map to $\\operatorname{Spec}\\mathbf Z$. The projection $P_b\\to T_b$ is proper, hence quasi-compact and separated; since $T_b$ is qcqs, $P_b$ is qcqs by scheme qcqs permanence. The immersion $j_b$ is locally of finite type. Apply scheme closed-immersion descent to $j_b:C_b\\to P_b$ over $(T_i)_{i\\ge b}$, with limit base $T$. The stage base and both schemes are qcqs, and step 5 gives its closed limit base change. There is $c\\ge b$ such that $j_c$ is a closed immersion.",
+   "uses": [
+    "lem-pc-separated-quasi-separated",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1 (lemma-eventually-proper), final closed-immersion descent; limits.tex Tag 01ZP (lemma-descend-closed-immersion-finite-presentation)"
+   }
+  },
+  {
+   "text": "The closed immersion $j_c$ is proper, and $q_c:P_c\\to T_c$ is proper. Hence $p_c=q_cj_c:C_c\\to T_c$ is a proper scheme morphism. It is also proper as a morphism of algebraic spaces: every scheme test is its scheme base change, proper by scheme proper base change, so the representable-proper test equivalence applies.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-sfb-space-representable-proper-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 08K1 (lemma-eventually-proper), properness of the closed projective stage"
+   }
+  },
+  {
+   "text": "For any algebraic-space map $B\\to T_c$, the induced $\\pi_B:C_c\\times_{T_c}B\\to W_c\\times_{T_c}B$ is surjective by step 4. Its point map is continuous. If $F\\subseteq|W_c\\times_{T_c}B|$ is closed, then $\\pi_B^{-1}(F)$ is closed and has closed image under the proper base change of $p_c$; surjectivity gives $h_B(F)=p_B(\\pi_B^{-1}(F))$. Thus every $h_B$ is closed. The map $h_c$ is universally closed, and step 3 already gives that it is separated and of finite type. These are exactly the three clauses of properness, so $h_c$ is proper and $c\\ge b\\ge i_0$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-proper-base-change",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 08AJ (lemma-image-proper-is-proper), its elementary closed-image argument, as used at the end of spaces-limits.tex Tag 08K1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-sfb-space-morphism-properties",
+  "lem-a1-space-point-open-calculus",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-space-descend-closed-immersion",
+  "lem-sfb-space-diagonal-locally-finite-type",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-representable-proper-tests",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-weak-chow",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 08K1 (lemma-eventually-proper), with Tag 0851 expanded using the diagonal and Tag 08AJ closed-image argument written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Properness eventually descends along an affine inverse system for a finite type quasi separated algebraic space not necessarily finitely presented",
+   "results": "{\"t\": \"2026-10-23T15:16:40Z\", \"tool\": \"leanfinder\", \"query\": \"Properness eventually descends along an affine inverse system for a finite type quasi separated algebraic space not necessarily finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.exists_preimage_eq\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\"], \"digest\": \"e0de460e3b31176f\"}; Read returned signatures: scheme properness and its stability, projective-spectrum properness, and approximation of scheme sections/morphisms do not state eventual properness for algebraic spaces. No hit is an exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "{\"t\": \"2026-10-23T15:16:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsProper\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"AlgebraicGeometry.IsProper\"], \"digest\": \"d7b2a0aa8516be22\"}; Read returned signatures: scheme properness and its stability, projective-spectrum properness, and approximation of scheme sections/morphisms do not state eventual properness for algebraic spaces. No hit is an exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*[Pp]roper|[Pp]roper.*isLimit|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T15:16:38Z\", \"tool\": \"grep\", \"query\": \"eventually.*[Pp]roper|[Pp]roper.*isLimit|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: scheme properness and its stability, projective-spectrum properness, and approximation of scheme sections/morphisms do not state eventual properness for algebraic spaces. No hit is an exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type morphism of quasi compact quasi separated algebraic spaces whose limit is proper is eventually proper",
+   "results": "{\"t\": \"2026-10-23T15:16:38Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type morphism of quasi compact quasi separated algebraic spaces whose limit is proper is eventually proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"b4ac36970f350525\"}; Read returned signatures: scheme properness and its stability, projective-spectrum properness, and approximation of scheme sections/morphisms do not state eventual properness for algebraic spaces. No hit is an exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type algebraic space over affine inverse limit is proper if and only if its base change at a sufficiently late stage is proper",
+   "results": "{\"t\": \"2026-10-23T15:16:43Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type algebraic space over affine inverse limit is proper if and only if its base change at a sufficiently late stage is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"259f2b9daed68dae\"}; Read returned signatures: scheme properness and its stability, projective-spectrum properness, and approximation of scheme sections/morphisms do not state eventual properness for algebraic spaces. No hit is an exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*[Pp]roper|[Pp]roper.*isLimit|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T18:33:32Z\", \"tool\": \"grep\", \"query\": \"eventually.*[Pp]roper|[Pp]roper.*isLimit|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: scheme properness, projective-spectrum properness, affine/quasi-affine limit descent, or equality of scheme maps; none states eventual properness of algebraic spaces without finite presentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of a finite type algebraic space descends along an affine inverse system without finite presentation",
+   "results": "{\"t\": \"2026-10-23T18:33:33Z\", \"tool\": \"leansearch\", \"query\": \"Properness of a finite type algebraic space descends along an affine inverse system without finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.mk\"], \"digest\": \"4d1faef8c6807b89\"}; Read returned signatures: scheme properness, projective-spectrum properness, affine/quasi-affine limit descent, or equality of scheme maps; none states eventual properness of algebraic spaces without finite presentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"isLimit\"",
+   "results": "{\"t\": \"2026-10-23T18:33:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"isLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: scheme properness, projective-spectrum properness, affine/quasi-affine limit descent, or equality of scheme maps; none states eventual properness of algebraic spaces without finite presentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type quasi compact quasi separated algebraic space over an affine inverse limit is proper at some finite stage if its limit is proper",
+   "results": "{\"t\": \"2026-10-23T18:33:34Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type quasi compact quasi separated algebraic space over an affine inverse limit is proper at some finite stage if its limit is proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\"], \"digest\": \"a1fd11c172935238\"}; Read returned signatures: scheme properness, projective-spectrum properness, affine/quasi-affine limit descent, or equality of scheme maps; none states eventual properness of algebraic spaces without finite presentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type algebraic spaces proper after inverse limit of affine schemes eventual properness descent",
+   "results": "{\"t\": \"2026-10-23T18:34:52Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type algebraic spaces proper after inverse limit of affine schemes eventual properness descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"88c7953d910ad504\"}; Read returned signatures: scheme properness, projective-spectrum properness, affine/quasi-affine limit descent, or equality of scheme maps; none states eventual properness of algebraic spaces without finite presentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-module-eventually-proper-support",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 08K2 (lemma-eventually-proper-support), in Situation 084W (situation-descent-property), specialized to a finitely presented space and finitely presented module over affine bases. Proof input of Tag 08K2 after replacing the source by its closed annihilator carrier: Tag 08K1 with only local finite type, not finite presentation.",
+   "via": [
+    "lem-sfb-space-module-eventually-proper-support",
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-finite-type-eventually-proper",
+  "worker": "stage1",
+  "summary": "Checked Stacks 08K1 in Situation 084W without finite presentation. Expanded the separated-stage reduction using the locally finite type diagonal and existing 0850 node, then weak Chow and scheme closed-immersion descent. Wrote out the universally closed image argument. All inputs already exist, so no new nodes; the finitely presented eventually-proper nodes cannot be used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3): inherited supporting proper-support/Noetherian approximation branch; Tag 08K2 needs 08K1 for an annihilator carrier not assumed finitely presented. Steps 1-3 realize the separated-stage reduction, 4 weak Chow, 5-7 closed projective stage descent, 8 properness of its surjective image.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "The final elementary image argument needs continuity of arbitrary algebraic-space point maps; the unit contains no replacement for this general topological tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "The general sheaf fibre-product universal property identifies the base-changed diagonals and Chow diagrams; this is a foundational tool, not an alternative unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Tag 01ZP descends the scheme immersion in the Chow diagram using local finite type; it is a general limit tool and does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-d5c4fccd1",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-d5c4fccd1 (reviewer sub-agent of L); spot-checked: I read the whole item and all 23 cited statements. The statement is a faithful specialization of Stacks spaces-limits 08K1 in Situation 084W (l.1449, l.1790) to B_i=Y_i=T_i affine with lft, and it is unchanged from live, where the item is still unsplit with no proof, so there is no supersession. There are no new nodes. proof_deps equals the union of the step uses, and there is no SGA. Step 1: affine T_a is qcqs, so h_a is qc, D_a is qcqs (source-products) and δ_a is lft (03HK). Step 2 is the 0851 diagonal argument via the closed-immersion descent node (0850, lft only), giving W_b separated; it correctly avoids the fp-only descend-separated node. Step 3: the cofinal tail, with qcqs, lft and separatedness kept under base change. Step 4: weak Chow 089J on W_b→Spec A gives C_b qc separated, π_b proper and universally surjective, and j_b a qc immersion, followed by base changes. Step 5: 04XY, the identity scheme test, 01W6(2), and a proper immersion is closed. Step 6: 01ZP with C_b qs (separated) and P_b qcqs (q_b qc and separated), giving j_c closed. Step 7: p_c is proper as schemes, then as spaces via the representable test. Step 8 is an elementary 08AJ image argument: π_B is surjective (base change along W_c×B→W_b), p_B is closed, and h_B(F)=p_B(π_B^{-1}F), which with step 3 gives properness. The three tool_uses (point continuity, fibre products, 01ZP) are generic foundations and I accept them. For all 11 batch-5 flags, the closure reaches sec-trace-formula only through def-trf-algebraic-space, the definition. They are general algebraic-space foundations, not trace-formula or Poincaré-duality content, so I accept them. There is no duplicate: the existing eventually-proper nodes need finite presentation or are about schemes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFiniteTypeEventuallyProper",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_proper_stage_of_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFiniteTypeEventuallyProper.lean",
+  "statement": "theorem exists_proper_stage_of_locallyOfFiniteType {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (haff : ∀ i : Iᵒᵖ, IsAffine (D.obj i).left) (htrans : ∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a).left) (c : Cone D) (hc : IsLimit c) (i₀ : I) (W₀ : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (h₀ : W₀ ⟶ schemeSpace (D.obj (op i₀))) (hqc : ∃ (U : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ W₀.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : MapIsQuasiCompact (prod.lift (𝟙 W₀.obj.obj) (𝟙 W₀.obj.obj))) (hlft : MapIsLocally (@LocallyOfFiniteType) h₀) (hproper : MapIsProper (enlargedFibreProductFst (ObjectProperty.homMk (X := schemeSpace c.pt) (Y := schemeSpace (D.obj (op i₀))) ((Scheme.fppfTopology.over _).yoneda.map (c.π.app (op i₀)))) h₀)) : ∃ (j : I) (hj : i₀ ≤ j), MapIsProper (enlargedFibreProductFst (ObjectProperty.homMk (X := schemeSpace (D.obj (op j))) (Y := schemeSpace (D.obj (op i₀))) ((Scheme.fppfTopology.over _).yoneda.map (D.map (homOfLE hj).op))) h₀)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Only local finite type is assumed. The affine scheme system and its limiting cone are kept in Over Spec Z; schemeSpace and enlargedFibreProductFst give the existing actual Yoneda sheaves and base-change projections, with factors ordered base first. The added statement dependencies def-trf-scheme-algebraic-space and def-sfb-space-sheaf-fibre-product own schemeSpace and enlargedFibreProduct/enlargedFibreProductFst respectively; the enlarged-etale-ringed-site theorem conclusion is not used. This repairs H2 in returned head cae67053b4a8 without changing the Lean module or signature. Quasi-compactness is the explicit atlas condition, and the absolute diagonal over Spec Z is tested by the existing MapIsQuasiCompact predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c2a025df",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery of cae67053b4a8, which was returned for H2. The Lean file is byte-identical (sha b99ab041). Node changes are only stmt_deps (theorem lem-trf-space-enlarged-etale-ringed-site-model replaced by landed def owners def-trf-scheme-algebraic-space [schemeSpace] and def-sfb-space-sheaf-fibre-product [enlargedFibreProduct/Fst], plain defs at EnlargedEtaleRingedSite l.79/230/236) and lean.note; lean.statement is still verbatim. Statement re-read against Stacks 084W/08K1: directed nonempty I, affine system and transitions, IsLimit cone, atlas qc, absolute diagonal MapIsQuasiCompact, MapIsLocally LocallyOfFiniteType, MapIsProper of the actual sheaf pullback at the limit giving ∃ j ≥ i₀ with W_j→T_j proper; no fp, flatness or separatedness assumed. Edge cases fine. No definitions, sorry only, docstrings and 8 proof steps present, report sections present. No compile because no file changed."
+ }
+}

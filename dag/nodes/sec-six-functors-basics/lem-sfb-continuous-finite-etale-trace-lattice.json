@@ -16,49 +16,43 @@
  },
  "proof": [
   {
-   "text": "Use the continuous coefficient module equivalence to encode P and M sectionwise; the restriction and scalar-extension comparisons carry e to the pulled lattice. Normalize the finite etale trace using finite_etale_trace_image: on a split chart it is the sum of the sheet counits. The integral sheaf image there is the sum of the sheet lattices. The equivalences preserve categorical images.",
+   "text": "Obtain the epic normalized internal trace from [lem-sfb-continuous-finite-etale-trace]. This step does not use P or M being locally free.",
    "uses": [
-    "lem-sfb-finite-etale-trace-image",
-    "def-weil-pbc-continuous-coefficient-module-encoding",
-    "lem-weil-pbc-continuous-module-encoding-lattices",
-    "lem-weil-pbc-continuous-module-encoding-restriction"
+    "lem-sfb-continuous-finite-etale-trace"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Take etale splitting neighbourhoods for p. On each the integral image is the sheaf sum of the finitely many sheet lattices. Choose a pro-etale trivialization of P on each neighbourhood. The sheaf of lattice classes is a constant coset sheaf there, so each of the finitely many sheet lattices becomes a fixed algebraic lattice on a common refinement. Equality is equality of embedded images, as specified by the class-presentation normalization. Surjectivity makes the set of sheets nonempty on every nonempty chart. Inserting a rational section in one sheet and zero in the others shows that the normalized trace is locally split epic, hence epic.",
+   "text": "Apply [lem-sfb-continuous-finite-etale-trace-image-charts] to the given lattice pair and the normalized trace. On every cover member unpack its finite nonempty family of full lattices and its actual continuous-function presentation of the categorical image.",
    "uses": [
-    "lem-sfb-finite-etale-trace-image",
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "lem-weil-pbc-lattice-sheaf-locally-constant"
+    "lem-sfb-continuous-finite-etale-trace-image-charts"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The finite sum of these full lattices is finite free. The continuous sum theorem supplies a continuous linear section of the summation map and its basis homeomorphism, naturally under precomposition. Hence the sheaf sum is precisely the continuous-function sheaf of that sum lattice and is finite free on the refinement. Transport the free presentations back to internal modules and compose covers. The empty-scheme and rank-zero cases give zero modules. This proves local freeness of the actual categorical image, without asserting rationalization of its inclusion.",
+   "text": "Apply [lem-sfb-continuous-lattice-sum-internal-free] to each chart, using 0<d to provide a nonempty sheet index. Restriction along the inverse canonical coefficient isomorphism identifies normalized module pullback freeness with the raw inverse-image predicate in LocallyFree. Keep this cover and the original epic trace.",
    "uses": [
-    "lem-sfb-finite-sum-lattice",
-    "lem-sfb-continuous-lattice-sum",
-    "lem-weil-pbc-continuous-module-encoding-lattices"
+    "lem-sfb-continuous-lattice-sum-internal-free",
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "def-sfb-module-upper-star",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-finite-etale-trace-image",
-  "def-weil-pbc-continuous-coefficient-module-encoding",
-  "lem-weil-pbc-continuous-module-encoding-lattices",
-  "lem-weil-pbc-continuous-module-encoding-restriction",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-lattice-sheaf-locally-constant",
-  "lem-sfb-finite-sum-lattice",
-  "lem-sfb-continuous-lattice-sum"
+  "lem-sfb-continuous-finite-etale-trace",
+  "lem-sfb-continuous-finite-etale-trace-image-charts",
+  "lem-sfb-continuous-lattice-sum-internal-free",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "def-sfb-module-upper-star",
+  "lem-weil-pbc-condensed-lfp-local-triviality"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U8",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
-  "place": "Finite-cover trace image and its local freeness, retaining the source sheet-sum route."
+  "group": "B6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation: separate normalized rational trace and embedded integral image charts; complete the continuous-coordinate internal-freeness assembly in Lean."
  },
  "mathlib_searches": [
   {
@@ -125,13 +119,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-47bc9",
-  "group": "U8",
+  "reviewer": "COMPILER",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261021T225228-L-3801584",
+  "landing": "20261026T022850-L-489971",
   "kind": "interface",
-  "note": "independent cc review: delivered StratifiedLattice/Spectral*/ContinuousFiniteEtaleTraceLattice modules and 4 nodes vs live clone, unit sk-lem-stratified-lattice realized steps, #print axioms of the proved theorems, sandbox compile of the 4 direct importers of the item module"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

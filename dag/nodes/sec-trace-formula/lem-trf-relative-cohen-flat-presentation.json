@@ -1,0 +1,319 @@
+{
+ "id": "lem-trf-relative-cohen-flat-presentation",
+ "kind": "statement",
+ "title": "Compatible coefficient-field presentations for a flat local map with regular closed fibre",
+ "statement": "Let $f:(A,\\mathfrak m,K)\\to(B,\\mathfrak n,L)$ be a flat local homomorphism of nonzero commutative Noetherian local $\\mathbf Q$-algebras [def-weil-pbc-noetherian-ring, def-weil-pbc-flat-ring-map]; local means $f(\\mathfrak m)\\subseteq\\mathfrak n$, and $K=A/\\mathfrak m$, $L=B/\\mathfrak n$. Assume that $B/\\mathfrak mB$ is regular local [def-weil-regular-scheme] of finite Krull dimension $s$ [def-weil-pbc-krull-dimension-ring]. Write $\\widehat A=\\varprojlim_d A/\\mathfrak m^d$, $\\widehat B=\\varprojlim_d B/\\mathfrak n^d$ and $\\widehat f:\\widehat A\\to\\widehat B$ for the induced map [def-weil-pbc-adic-completion]. There are field sections $a:K\\to\\widehat A$ and $b:L\\to\\widehat B$ of the residue maps satisfying $b|_K=\\widehat f\\,a$ for the induced inclusion $K\\to L$, an integer $e\\geq0$, an ideal $I\\subseteq(X_1,\\ldots,X_e)$ of $K[[X_1,\\ldots,X_e]]$, and isomorphisms of complete local algebras\n$$\\widehat A\\simeq K[[X_1,\\ldots,X_e]]/I,\\qquad\n\\widehat B\\simeq L[[X_1,\\ldots,X_e,T_1,\\ldots,T_s]]/I L[[X_1,\\ldots,X_e,T_1,\\ldots,T_s]],$$\nwhere power series are [def-weil-pbc-multivariate-power-series], the coefficients on the right use the induced inclusion $K\\to L$, the first isomorphism is $K$-linear for the $K$-algebra structure of $\\widehat A$ given by $a$ and the second is $L$-linear for the $L$-algebra structure of $\\widehat B$ given by $b$ (so both induce the identity on residue fields), and these isomorphisms identify $\\widehat f$ with coefficient extension and the inclusion of the $X$ variables. The images of $T_1,\\ldots,T_s$ form a regular system of parameters of $\\widehat B/\\mathfrak m\\widehat B$: their classes generate its maximal ideal and their number equals its dimension. No finite type hypothesis is imposed on $A$, $B$, or the residue-field extension.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent-written coefficient-compatible refinement of Tag 07NQ (proposition-fs-flat-fibre-fs), proof of (2) implies (3), the power-series diagram and kernel identity; compare algebra.tex Tag 032A (theorem-cohen-structure-theorem). These tags are inputs, not a claim that either states this coefficient-compatible normal form verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_0=\\widehat A$, $B_0=\\widehat B$, and $f_0=\\widehat f$. The completion results give Noetherian local rings with maximal ideals $\\mathfrak m_0=\\mathfrak m A_0$ and $\\mathfrak n_0=\\mathfrak n B_0$, residue fields canonically $K,L$, and completeness for these maximal ideals. The induced map is local: its reduction is the induced field inclusion $K\\hookrightarrow L$, so an element of $\\mathfrak m_0$ has zero image residue and maps into $\\mathfrak n_0$. By flatness under completion, $f_0$ is flat. The canonical maps preserve the $\\mathbf Q$-algebra structures.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-flat-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C4G (lemma-flat-completion); algebra.tex Tags 0316, 05GG, 05GI"
+   }
+  },
+  {
+   "text": "Let $C=B/\\mathfrak mB$ with maximal ideal the image of $\\mathfrak n$. Since $f$ is local, $\\mathfrak mB\\subseteq\\mathfrak n$, so $C$ is nonzero Noetherian local. Completion of the surjection $B\\to C$ gives $B_0/(\\mathfrak mB)B_0\\simeq\\widehat C$. Since $\\mathfrak m_0=\\mathfrak m A_0$ and $f_0$ commutes with the canonical maps, $(\\mathfrak mB)B_0=\\mathfrak m_0B_0$. Write $C_0=B_0/\\mathfrak m_0B_0$. Its identification with $\\widehat C$ preserves residue fields and quotient maps. Completion preserves regularity and dimension, so $C_0$ is complete regular local of dimension $s$, with residue field $L$.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07NY (lemma-completion-regular), 07NV (lemma-completion-dimension); algebra.tex Tags 00MA and 05GG"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-compatible-coefficient-source-presentation] to $f_0:A_0\\to B_0$. Obtain compatible sections $a,b$, generators $x_i$, the local surjection $q:R=K[[X]]\\twoheadrightarrow A_0$, and $I=\\ker q\\subseteq\\mathfrak r=(X)R$. Its quotient isomorphism is $K$-linear.",
+   "uses": [
+    "lem-trf-compatible-coefficient-source-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent-formulated compatible-section and source-presentation input: Tag 032A (theorem-cohen-structure-theorem), characteristic-zero coefficient-field construction and final proof paragraph; more-algebra.tex Tag 07NJ (lemma-lift-continuous) applied to the unrestricted residue extension. Extracted from original steps 3--4 of lem-trf-relative-cohen-flat-presentation; compatibility is a refinement, not quoted verbatim from 032A."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-relative-power-series-fibre-diagram] to these data and the complete regular fibre $C_0$ of dimension $s$. It gives lifts $t_i$, the coefficient-preserving isomorphism $\\rho:L[[T]]\\simeq C_0$, the Noetherian complete local ring $S=L[[X,T]]$, local $j:R\\to S$, and surjective $v:S\\to B_0$, with $vj=f_0q$ and $\\pi v=\\rho p$, where $p$ sets $X=0$ and $\\ker p=\\mathfrak rS$. For $z\\in\\ker v$, $\\rho(p(z))=0$; injectivity of $\\rho$ gives $z\\in\\mathfrak rS$. The residues of the $t_i=v(T_i)$ generate the maximal ideal of $C_0$.",
+   "uses": [
+    "lem-trf-relative-power-series-fibre-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent-formulated coefficient-preserving presentation diagram: Tag 07NQ (proposition-fs-flat-fibre-fs), proof of (2) implies (3), special-fibre diagram before the kernel identity; algebra.tex Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2) and proof. Extracted from original steps 5--7 of lem-trf-relative-cohen-flat-presentation; explicit evaluation and setting-X-to-zero identities are the refinement."
+   }
+  },
+  {
+   "text": "Apply flat closed-fibre kernel rigidity with presentation $q:R\\twoheadrightarrow A_0$, flat map $f_0:A_0\\to B_0$, local map $j:R\\to S$ and surjection $v:S\\twoheadrightarrow B_0$. Here $R,A_0,S$ are local, $S$ is Noetherian, $vj=f_0q$, and $\\ker v\\subseteq\\mathfrak rS$ by step 4. It yields $\\ker v=(\\ker q)S=IS$. The quotient isomorphism $S/IS\\simeq B_0$ is $L$-linear for $b$, and the one for $R/I\\simeq A_0$ is $K$-linear for $a$. The equation $vj=f_0q$ identifies the induced map with coefficient extension and inclusion of the $X$ variables. A ring isomorphism preserves units, hence maximal ideals and their powers; both quotient maps are therefore homeomorphisms for the maximal-ideal-adic topologies. Modulo $\\mathfrak m_0B_0$, the images of $T_i$ are the chosen $\\bar t_i$, which generate the maximal ideal and number $s=\\dim C_0$. This proves every asserted compatibility.",
+   "uses": [
+    "lem-weil-pbc-flat-closed-fibre-kernel-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NQ (proposition-fs-flat-fibre-fs), proof of (2) implies (3), special-fibre kernel identity and Nakayama argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-compatible-coefficient-source-presentation",
+  "lem-trf-relative-power-series-fibre-diagram",
+  "lem-weil-pbc-flat-closed-fibre-kernel-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Coefficient-compatible characteristic-zero refinement of Tag 07NQ, proof of (2) implies (3); algebra.tex Tags 032A, 0322, 0C0S and more-algebra.tex Tag 07NJ supply the chosen compatible coefficient fields."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cohen|coefficientField|coefficient_field|powerSeries.*presentation|powerSeries.*Presentation",
+   "results": "{\"t\": \"2026-10-22T04:39:01Z\", \"tool\": \"grep\", \"query\": \"Cohen|coefficientField|coefficient_field|powerSeries.*presentation|powerSeries.*Presentation\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Noetherian/OfPrime.lean\"], \"digest\": \"3e4194c4b8d9d8ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned flatness, formal-smoothness lifting and completion-flatness statements do not identify the completed target or provide compatible coefficient fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat local map with regular closed fibre in characteristic zero has completed target obtained by extending a Cohen coefficient field and adjoining formal power series variables",
+   "results": "{\"t\": \"2026-10-22T04:39:01Z\", \"tool\": \"leansearch\", \"query\": \"A flat local map with regular closed fibre in characteristic zero has completed target obtained by extending a Cohen coefficient field and adjoining formal power series variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.mk\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.stalkMap\", \"RingHom.Flat.holdsForLocalizationAway\", \"AlgebraicGeometry.Flat.casesOn\", \"AdicCompletion.flat_of_isNoetherian\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\"], \"digest\": \"655e13004cb4b407\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned flatness, formal-smoothness lifting and completion-flatness statements do not identify the completed target or provide compatible coefficient fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-22T04:39:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned flatness, formal-smoothness lifting and completion-flatness statements do not identify the completed target or provide compatible coefficient fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-relative-cohen-flat-presentation: relative Cohen structure theorem, a flat deformation of a regular complete local algebra is a power series ring over the completed scalar extension of the base",
+   "results": "{\"t\": \"2026-10-22T04:39:05Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-relative-cohen-flat-presentation: relative Cohen structure theorem, a flat deformation of a regular complete local algebra is a power series ring over the completed scalar extension of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth.formallySmooth\"], \"digest\": \"bcd0c39fe7f28f08\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned flatness, formal-smoothness lifting and completion-flatness statements do not identify the completed target or provide compatible coefficient fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-relative-cohen-flat-presentation: A flat local homomorphism of noetherian local characteristic zero rings with regular closed fibre admits compatible coefficient fields on completions, and the target completion is L[[X,T]] modulo the coefficient extension of the relations of K[[X]] presenting the source completion",
+   "results": "{\"t\": \"2026-10-22T04:39:06Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-relative-cohen-flat-presentation: A flat local homomorphism of noetherian local characteristic zero rings with regular closed fibre admits compatible coefficient fields on completions, and the target completion is L[[X,T]] modulo the coefficient extension of the relations of K[[X]] presenting the source completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AdicCompletion.flat_of_isNoetherian\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.IsSmoothAt\", \"RingHom.smooth_def\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"27341e25ea811d07\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned flatness, formal-smoothness lifting and completion-flatness statements do not identify the completed target or provide compatible coefficient fields"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen|coefficientField|coefficient_field|relative.*powerSeries",
+   "results": "{\"t\": \"2026-10-22T05:01:23Z\", \"tool\": \"grep\", \"query\": \"Cohen|coefficientField|coefficient_field|relative.*powerSeries\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Noetherian/OfPrime.lean\"], \"digest\": \"3e4194c4b8d9d8ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-22T05:01:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local homomorphism of noetherian local rational algebras with regular closed fiber admits compatible coefficient fields and relative power series presentations on completion",
+   "results": "{\"t\": \"2026-10-22T05:01:26Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local homomorphism of noetherian local rational algebras with regular closed fiber admits compatible coefficient fields and relative power series presentations on completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassFactorization\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassDivision\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\"], \"digest\": \"3a32b2947dd5b472\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Cohen structure theorem compatible coefficient fields for completions of flat local ring homomorphisms with regular fibers",
+   "results": "{\"t\": \"2026-10-22T05:01:34Z\", \"tool\": \"leansearch\", \"query\": \"Relative Cohen structure theorem compatible coefficient fields for completions of flat local ring homomorphisms with regular fibers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_isLocalRing\", \"RingHom.Flat\", \"AdicCompletion.flat_of_isNoetherian\", \"IsLocalRing.ResidueField.finite_of_finite\", \"RingHom.Flat.isStableUnderBaseChange\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"RingHom.Flat.localRingHom\"], \"digest\": \"961a123fd5d56e6d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete noetherian local ring is a quotient of a power series ring over its residue field compatibly with flat local morphisms",
+   "results": "{\"t\": \"2026-10-22T05:01:36Z\", \"tool\": \"leanfinder\", \"query\": \"A complete noetherian local ring is a quotient of a power series ring over its residue field compatibly with flat local morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassFactorization\", \"IsLocalRing.finite_quotient_iff\", \"IsAdicComplete.henselianRing\", \"PowerSeries.weierstrassDistinguished\", \"isLocalRing_of_isAdicComplete_maximal\"], \"digest\": \"0ddc112153cbdbdc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern special power-series rings, Weierstrass division, or ordinary flatness; none gives the specified complete-local coefficient presentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-local-tangent-cone-extension",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Supporting relative Cohen presentation of completed flat local maps with regular closed fibre.",
+   "via": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-relative-cohen-flat-presentation",
+  "worker": "stage1",
+  "group": "Q36",
+  "summary": "Repaired the human-requested re-split without changing the statement: original steps 3--4 and 5--7 are exposed as two comparable, independent statement-only construction tasks. Completion reduction (steps 1--2) and flat kernel rigidity (old step 8) remain in the short assembly. All eight original arguments are retained verbatim with their dependency/source records in report.md. Rebased after the promotion return onto the current shared DAG, preserving its statement and all maintainer-owned fields. Re-read every cited current statement and verified all 14 retained citation quotes; the cited interfaces require no change. Clarified locality in step 1 by explicitly mapping the maximal ideal into the target maximal ideal. In this retry, step 4 explicitly derives kernel containment from the supplied closed-fibre identity and injectivity of its coordinate isomorphism, so the final rigidity application displays its exact input. Rebased again on 2026-10-23 after the repeated promotion return; made explicit that locality implies the closed fibre is nonzero and that preservation of units gives continuity of both quotient isomorphisms and their inverses.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Supporting relative Cohen presentation of completed flat local maps with regular closed fibre. Original steps 3--4 and 5--7 now have separate unsplit nodes; original steps 1--2 and 8 assemble them.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-completion",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-local-structure",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-image-noetherian",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-closed-fibre-kernel-rigidity",
+    "why": "Generic commutative-algebra input for the relative Cohen presentation, with the precise hypotheses checked in the proof step; no node of sk-i-curve-zero states this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-coefficient-residue-section",
+  "lem-weil-pbc-char-zero-field-extension-formally-smooth",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "lem-weil-pbc-power-series-universal-property-complete",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-complete-source-surjective-mod-ideal",
+  "lem-weil-pbc-flat-closed-fibre-kernel-rigidity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-b8b58d22c",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-b8b58d22c (reviewer sub-agent of L); spot-checked: Fourth push of the human's 2026-10-21 re-split. The earlier heads 54369d11, ed7b08b6 and 708994d2 were all PASSed and then came back as promotion-loop returns. The repair note is still released (stage 1, keep_plan) in live and side-live, and the live item is still the old 8-step split. The delivery differs from live only in proof, proof_deps and split_report, and neither new id exists live, so it is not superseded. Against 708994d2, both new nodes are byte-identical. The item changes in two places only. Step 2 now says that f local gives mB ⊆ n, so C is nonzero (quotient-local-structure). Step 5 now says that ring isomorphisms preserve units, so maximal ideals and their powers, so both quotient maps are homeomorphisms. Both changes are correct. Re-split compliance: old steps 3-4 (about 1377 characters) became compatible-coefficient-source-presentation and old steps 5-7 (about 1828 characters) became relative-power-series-fibre-diagram. Old steps 1, 2 and 8 stay as assemblies of existing nodes. The assembly is 2859 characters in 5 steps, nothing was dropped, and proof_deps equals the union of uses. I re-read every cited statement at this snapshot. Step 1: completion is Noetherian and local with maximal ideal mÂ, completeness comes from module-completion-complete, and f̂ is flat by flat-completion (f flat and local). Step 2: local-completion-quotient with λ: B→C and kernel mB, (mB)B̂ = m_0B̂, then regular-local and dimension give C_0 regular of dimension s. Step 4 gets ker v ⊆ (X)S from πv = ρp and ρ injective. Step 5 meets every hypothesis of flat-closed-fibre-kernel-rigidity with m_R S = (X)S, so ker v = IS. The L- and K-linearity, vj = f_0q and the T-parameter clauses then cover the whole statement. Node 1 is true: the section a comes from 032A in characteristic 0. L/K is formally smooth (0322), so 07NJ (more-algebra l.9257, J = n_B closed) lifts id_L to b with bι = fa. q is surjective, and I ⊆ r since a(c) ∈ m forces c = 0. The case e = 0 checked. Node 2 is true in any characteristic. ρ comes from regular-complete-coefficient-coordinates (0C0S(2), algebra l.45036) with c = πb. n = (f(x), t) gives v surjective, and vj = fq and πv = ρp hold by agreement on constants and variables. The case s = 0 and the non-flat K[[u]]→K (containment only) checked. Duplicate candidates were re-checked in the live DAG and none is new or a duplicate: complete-local-map-cohen-presentation, cohen-power-series-parameter-extension, coefficient-field-generator-presentation, power-series-coefficient-extension-surjection and field-extension-completion-presentation. The tool_uses are the generic completion and rigidity nodes already in the live tool_uses; accepted. No SGA is cited. No fixes. Maintainer note: this approved re-split needs promotion of the side completion into the live DAG, or it will keep returning."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeCohenFlatPresentation",
+  "declaration": "IsLocalRing.exists_relative_cohen_flat_presentation",
+  "declarations": [
+   "IsLocalRing.exists_relative_cohen_flat_presentation",
+   "MvPowerSeries.coefficientExtensionInl"
+  ],
+  "file": "lean/Sheaf/RingTheory/RelativeCohenFlatPresentation.lean",
+  "statement": "theorem exists_relative_cohen_flat_presentation (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] [Algebra ℚ A] [Algebra ℚ B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hflat : (algebraMap A B).Flat) [IsRegularLocalRing (B ⧸ (maximalIdeal A).map (algebraMap A B))] (s : ℕ) (hdim : ringKrullDim (B ⧸ (maximalIdeal A).map (algebraMap A B)) = (s : WithBot ℕ∞)) : ∃ h : AdicCompletion (maximalIdeal A) A →+* AdicCompletion (maximalIdeal B) B, (∀ (d : ℕ) (z : AdicCompletion (maximalIdeal A) A) (x : A), AdicCompletion.evalₐ (maximalIdeal A) d z = Ideal.Quotient.mk ((maximalIdeal A) ^ d) x → AdicCompletion.evalₐ (maximalIdeal B) d (h z) = Ideal.Quotient.mk ((maximalIdeal B) ^ d) (algebraMap A B x)) ∧ ∃ (a : ResidueField A →+* AdicCompletion (maximalIdeal A) A) (b : ResidueField B →+* AdicCompletion (maximalIdeal B) B), (∀ k : ResidueField A, AdicCompletion.evalOneₐ (maximalIdeal A) (a k) = k) ∧ (∀ l : ResidueField B, AdicCompletion.evalOneₐ (maximalIdeal B) (b l) = l) ∧ b.comp (ResidueField.map (algebraMap A B)) = h.comp a ∧ ∃ (e : ℕ) (I : Ideal (MvPowerSeries (Fin e) (ResidueField A))), I ≤ Ideal.span (Set.range (fun i : Fin e ↦ (MvPowerSeries.X i : MvPowerSeries (Fin e) (ResidueField A)))) ∧ ∃ (α : (MvPowerSeries (Fin e) (ResidueField A) ⧸ I) ≃+* AdicCompletion (maximalIdeal A) A) (β : (MvPowerSeries (Fin e ⊕ Fin s) (ResidueField B) ⧸ I.map (MvPowerSeries.coefficientExtensionInl (ResidueField.map (algebraMap A B)) e s)) ≃+* AdicCompletion (maximalIdeal B) B), (∀ k : ResidueField A, α (Ideal.Quotient.mk I (MvPowerSeries.C k)) = a k) ∧ (∀ l : ResidueField B, β (Ideal.Quotient.mk _ (MvPowerSeries.C l)) = b l) ∧ (∀ F : MvPowerSeries (Fin e) (ResidueField A), β (Ideal.Quotient.mk _ (MvPowerSeries.coefficientExtensionInl (ResidueField.map (algebraMap A B)) e s F)) = h (α (Ideal.Quotient.mk I F))) ∧ Ideal.span (Set.range (fun j : Fin s ↦ Ideal.Quotient.mk ((maximalIdeal A).map (h.comp (algebraMap A (AdicCompletion (maximalIdeal A) A)))) (β (Ideal.Quotient.mk _ (MvPowerSeries.X (Sum.inr j)))))) = (maximalIdeal (AdicCompletion (maximalIdeal B) B)).map (Ideal.Quotient.mk ((maximalIdeal A).map (h.comp (algebraMap A (AdicCompletion (maximalIdeal A) A))))) ∧ ringKrullDim (AdicCompletion (maximalIdeal B) B ⧸ (maximalIdeal A).map (h.comp (algebraMap A (AdicCompletion (maximalIdeal A) A)))) = (s : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q11",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c510b293c",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read the item node, all 6 statement-dependency records, the delivered module, both report sections and the Mathlib declarations (IsRegularLocalRing, AdicCompletion.evalₐ/evalOneₐ, MvPowerSeries.rename, the IsLocalRing instance on AdicCompletion). Lean matches the node clause by clause: flat local hom via algebraMap with IsLocalHom and RingHom.Flat; closed fibre B/𝔪B regular of Krull dimension s; the map h on completions is fixed at every level 𝔪^d, so it is the canonical induced map; sections a, b with evalOne identities and b∘ι = h∘a; I ≤ span X; α and β fix constants (so they are K- and L-linear); the commuting square β(j F) = h(α F); regular-system-of-parameters span and dimension clauses on B̂/𝔪B̂. Helper coefficientExtensionInl = rename Sum.inl ∘ map ι is real and has docstrings. Edge cases e = s = 0 and arbitrary L/K are covered; universes are independent; recorded statement is verbatim the signature; statement dependencies unchanged from live; live node has no lean; no duplicate in the project or Mathlib; all imported modules exist. No compile was rerun since no file changed. Advisory only: the IsRegularScheme public import is unused by the signature but is the recorded dependency module."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

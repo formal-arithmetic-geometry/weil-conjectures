@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-immersion-principal-affineness",
+ "kind": "statement",
+ "title": "Affineness from a principal affine part and a closed complementary image",
+ "statement": "Let $A$ be a commutative ring, let $V$ be a scheme [def-pc-scheme], and let $j:V\\to\\operatorname{Spec}A$ be a quasi-compact immersion [def-weil-affine-spectrum, def-weil-closed-immersion, def-weil-finite-type-morphism]. Let $f\\in A$. Suppose $j^{-1}D(f)$ is affine and the subset $j(V)\\cap V(f)$ is closed in $\\operatorname{Spec}A$. Then $V$ is affine. Here $D(f)$ is the set of primes not containing $f$ and $V(f)$ its closed complement.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABH (lemma-get-affine), statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}A$ and $C=j(V)\\cap V(f)$. By the definition of immersion, factor $j$ as a closed immersion $i:V\\to W$ followed by the inclusion of an open subscheme $W\\subseteq X$. In particular $j(V)\\subseteq W$; no assertion about a closed subscheme structure on $C$ is needed.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3A (lemma-get-affine), proof; applied with X = Spec A and U = D(f), as cited at the start of Tag 0ABH (more-groupoids-lemma-get-affine)."
+   }
+  },
+  {
+   "text": "For $x\\in W$, the principal-open basis gives $g\\in A$ with $x\\in D(g)\\subseteq W$. The localization open immersion identifies $D(g)$ with the affine scheme $\\operatorname{Spec}A_g$. The closed immersion $i$ is affine, so its inverse image of this affine open of $W$ is affine. This inverse image is exactly $j^{-1}D(g)$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3A (lemma-get-affine), proof; applied with X = Spec A and U = D(f), as cited at the start of Tag 0ABH (more-groupoids-lemma-get-affine)."
+   }
+  },
+  {
+   "text": "The open $D(f)$ is affine by the localization open immersion, and $V_f=j^{-1}D(f)$ is affine by hypothesis. Thus the restricted morphism $j_f:V_f\\to D(f)$ is affine, since both schemes are affine. In particular $D(f)$ itself is an affine neighbourhood with affine inverse image for each of its points.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3A (lemma-get-affine), proof; applied with X = Spec A and U = D(f), as cited at the start of Tag 0ABH (more-groupoids-lemma-get-affine)."
+   }
+  },
+  {
+   "text": "Let $x\\notin W\\cup D(f)$. Since $C\\subseteq W$ is closed in $X$, choose a principal neighbourhood $x\\in D(g)\\subseteq X\\setminus C$. A point of $V$ mapping into $D(g)$ cannot map into $V(f)$: otherwise its image would belong to $C\\cap D(g)$. Hence $j^{-1}D(g)=j^{-1}(D(g)\\cap D(f))$ as open subschemes. For a prime ideal $\\mathfrak p$, $fg\\notin\\mathfrak p$ iff both $f,g\\notin\\mathfrak p$, so $D(g)\\cap D(f)=D(fg)$. The localization open immersion makes $D(fg)$ affine, and it is an open subscheme of $D(f)$. As $j_f$ is affine, its inverse image of $D(fg)$ is affine. Consequently $j^{-1}D(g)$ is affine.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3A (lemma-get-affine), proof; applied with X = Spec A and U = D(f), as cited at the start of Tag 0ABH (more-groupoids-lemma-get-affine)."
+   }
+  },
+  {
+   "text": "The neighbourhoods in the preceding three cases cover $X$ by affine opens with affine inverse images. Affineness local on the target therefore makes $j$ affine. Applying the definition of affine morphism to the affine open $X$ itself gives $V=j^{-1}(X)$ affine.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3A (lemma-get-affine), proof; applied with X = Spec A and U = D(f), as cited at the start of Tag 0ABH (more-groupoids-lemma-get-affine)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C3A (lemma-get-affine), proof; applied with X = Spec A and U = D(f), as cited at the start of Tag 0ABH (more-groupoids-lemma-get-affine)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact immersion V into Spec A is affine if its inverse image of D f is affine and its image intersect V f is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsClosedImmersion fun X x f [AlgebraicGeometry.IsAffine x] =>\\n  AlgebraicGeometry.IsAffine X ∧\\n    Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Every closed immersion of schemes has the affine property, meaning that the domain scheme is affine and the induced morphism on global sections is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X],\\n  (∀ (x : ↥X), ∃ r, AlgebraicGeometry.IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) → X.IsQuasiAffine\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], AlgebraicGeometry.IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact locally closed subscheme of an affine scheme is affine when its principal open part is affine and its closed complementary part is closed in the ambient scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} (U : X.Opens) : Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    (t : X.IsQuasiAffine) →\\n      ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n        motive t\", \"doc\": \"For any scheme $X$, given a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"(X : Scheme.{u}) [CompactSpace X] (H : ∀ x : X, ∃ r : Γ(X, ⊤), IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) :\\n  IsQuasiAffine X\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [toCompactSpace : CompactSpace ↥X]\\n  [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ], X.IsQuasiAffine\", \"doc\": \"If $ X $ is a compact topological space and the canonical morphism $ X \\\\to \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    (t : X.IsQuasiAffine) →\\n      ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n        motive t\", \"doc\": \"For any scheme $X$ and a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : Set X} : IsCompact U ∧ IsOpen U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⋃ i ∈ s, i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both quasi-compact and open if and only if there exists a finite collection $ s $ of affine open subsets of $ X $ such that $ U $ is the union of all elements in $ \"}\n  {\"name\": \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : X.Opens} : IsCompact (X := X) U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⨆ i ∈ s, (i : X.Opens)\", \"doc\": \"An open subset $ U $ of a scheme $ X $ is quasi-compact if and only if there exists a finite set $ S $ of affine open subsets of $ X $ such that $ U $ equals the union of all elements in $ S $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsAffine",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "immersion.*affine|affine.*immersion",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"285\", \"text\": \"    rw [@HasAffineProperty.iff_of_isAffine @IsClosedImmersion] at this\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"315\", \"text\": \"  · rw [@HasAffineProperty.iff_of_isAffine @IsClosedImmersion] at this\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"108\", \"text\": \"  obtain ⟨V, hV⟩ := (IsOpenImmersion.affineOpensEquiv f).surjective ⟨⟨U, hU⟩, hU'⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"174\", \"text\": \"      (isLocallyNoetherian_of_isOpenImmersion (X.affineOpenCover.f i))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"48\", \"text\": \"surjective family of open immersions from affine schemes. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"114\", \"text\": \"  have : IsReduced (Y.affineCover.X i) := isReduced_of_isOpenImmersion (Y.affineCover.f i)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"line\": \"79\", \"text\": \"instance IsAffineOpen.fromSpecStalk_isPreimmersion {X : Scheme.{u}} {U : Opens X}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"line\": \"80\", \"text\": \"    (hU : IsAffineOpen U) (x : X) (hx : x ∈ U) : IsPreimmersion (hU.fromSpecStalk hx) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"line\": \"90\", \"text\": \"  IsAffineOpen.fromSpecStalk_isPreimmersion _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"35\", \"text\": \"* `AlgebraicGeometry.IsAffineOpen.fromSpec`: The immersion `Spec 𝒪ₓ(U) ⟶ X` for an affine `U`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"263\", \"text\": \"    [H : IsOpenImmersion f] : IsAffineOpen f.opensRange := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"302\", \"text\": \"    IsAffine ((Scheme.coverOfIsIso (P := @IsOpenImmersion) (𝟙 X)).X i) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"426\", \"text\": \"/-- The open immersion `Spec Γ(X, U) ⟶ X` for an affine `U`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"516\", \"text\": \"theorem _root_.AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"314\", \"text\": \"lemma PreservesLocalization.isOpenImmersion (F : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"128\", \"text\": \"      IsZariskiLocalAtTarget.iff_of_openCover (P := @IsClosedImmersion) Y.affineCover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"131\", \"text\": \"  rw [HasAffineProperty.iff_of_isAffine (P := @IsClosedImmersion),\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"185\", \"text\": \"    have inst (i) := isReduced_of_isOpenImmersion ((Y.affineCover.pullback₁ f).f i)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"53\", \"text\": \"    ∀ ⦃U₁ U₂ : Scheme⦄ (f₁ : U₁ ⟶ X) (f₂ : U₂ ⟶ X) [IsAffine U₁] [IsAffine U₂] [IsOpenImmersion f₁]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"109\", \"text\": \"    [IsAffine U] [IsOpenImmersion g]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"225\", \"text\": \"    have inst : IsReduced (X.affineCover.X i) := isReduced_of_isOpenImmersion (X.affineCover.f i)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"123\", \"text\": \"  rw [MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion (arrowIsoSpecΓOfIsAffine f)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"151\", \"text\": \"instance (priority := low) {X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsAffineHom f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"307\", \"text\": \"/-- If `f` is a closed immersion with affine target such that the induced map on global\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"309\", \"text\": \"theorem isIso_of_injective_of_isAffine [IsClosedImmersion f]\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "immersion.*affine|affine.*immersion",
+   "results": "25 hits in AlgebraicGeometry: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean. Read the returned signatures; relevant affine-local and closed-immersion facts were inspected in source.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give separate affine-morphism, quasi-affine or localization inputs; none states the principal-affine-part / closed-complement criterion, or yields it by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affineness of an immersion from an affine inverse image of an affine open and a closed image in the complement",
+   "results": "8 hits in search service: AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion; AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion; AlgebraicGeometry.IsClosedImmersion.hasAffineProperty; AlgebraicGeometry.IsAffineHom.isAffine_preimage; AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv_apply_coe_coe; AlgebraicGeometry.isAffineOpen_opensRange. Read the returned signatures; relevant affine-local and closed-immersion facts were inspected in source.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give separate affine-morphism, quasi-affine or localization inputs; none states the principal-affine-part / closed-complement criterion, or yields it by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsAffine",
+   "results": "0 hits in search service: none. Read the returned signatures; relevant affine-local and closed-immersion facts were inspected in source.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give separate affine-morphism, quasi-affine or localization inputs; none states the principal-affine-part / closed-complement criterion, or yields it by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact immersion into an affine scheme is affine if the inverse image of a principal open is affine and its image in the closed complement is closed",
+   "results": "8 hits in search service: AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.quasiCompact_iff_forall_affine; AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen; AlgebraicGeometry.instQuasiCompactOfIsAffineHom; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι. Read the returned signatures; relevant affine-local and closed-immersion facts were inspected in source.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give separate affine-morphism, quasi-affine or localization inputs; none states the principal-affine-part / closed-complement criterion, or yields it by a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isAffineHom_of|IsAffineHom.*iff|isAffine.*compl|compl.*isAffine",
+   "results": "10 hits in AlgebraicGeometry/Morphisms: Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean. Read the returned signatures; relevant affine-local and closed-immersion facts were inspected in source.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give separate affine-morphism, quasi-affine or localization inputs; none states the principal-affine-part / closed-complement criterion, or yields it by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion j into Spec A is an affine morphism when j inverse D f is affine and the part of the image where f vanishes is a closed subset of Spec A",
+   "results": "8 hits in search service: AlgebraicGeometry.IsClosedImmersion.hasAffineProperty; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom; AlgebraicGeometry.instIsAffineHomιBasicOpen; AlgebraicGeometry.isAffineOpen_opensRange; AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine. Read the returned signatures; relevant affine-local and closed-immersion facts were inspected in source.",
+   "date": "2026-10-23",
+   "verdict": "no match: the results give separate affine-morphism, quasi-affine or localization inputs; none states the principal-affine-part / closed-complement criterion, or yields it by a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-get-affine.",
+   "via": [
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-immersion-principal-affineness",
+  "worker": "stage1",
+  "summary": "Q114: retained the exact statement of Stacks 0ABH and supplied the affine-neighbourhood proof of 0C3A with U=D(f), cited explicitly by 0ABH. All inputs already exist as definitions or Mathlib leaves, so no new nodes. The complement argument uses equality of open inverse images, not factorization through a closed set. Checked all cited statements and degenerate cases; no exact project attachment or Mathlib declaration found.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration-support chain, specifically the use of more-groupoids Tag 0ABH (lemma-get-affine) in the proof of Tag 0ABI. The current latest blueprint has no separate equivalent node. The ancestry tool returns null, retained from the existing item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-9ff1cfc08",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-9ff1cfc08 (reviewer sub-agent of L); spot-checked: Read the statement against Stacks 0ABH (more-groupoids.tex 2770-2802); it is exact and unchanged, with quasi-compactness kept though unused. The proof follows Morphisms 0C3A (lines 2076-2103) with X=Spec A and U=D(f). Step 1 unpacks the immersion clause of def-weil-closed-immersion (elementary). Step 2 (x in W): the basic-open basis, Spec A_g ≅ D(g) and clause (b) closed-immersion-affine, so i^{-1}D(g)=j^{-1}D(g) is affine. Step 3 (x in D(f)): j_f is affine because source and target are affine. Step 4 (x outside W ∪ D(f)): x is not in C since C ⊆ j(V) ⊆ W; D(g) ⊆ X∖C gives j^{-1}D(g)=j^{-1}D(fg), which is affine via j_f. This is an equality of opens, so no E3 stratum fault. Step 5: 01S8 cover criterion, then the definition on X itself. All 7 proof_deps are definitions or Mathlib leaves, each cited for what its statement says, and proof_deps equals the union of the step uses. No new nodes and no tool_uses. Small cases: f=1, f nilpotent, V empty, closed immersion. The A^2∖0 example with f=x shows the closedness hypothesis is used. Grep of the DAG found no 0ABH/0C3A duplicate. The item is still unsplit live and side-live, and has no repair note. No SGA source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ImmersionPrincipalAffineness",
+  "declaration": "AlgebraicGeometry.isAffine_of_isImmersion_of_isAffineOpen_preimage_basicOpen_of_isClosed",
+  "file": "lean/Sheaf/AlgebraicGeometry/ImmersionPrincipalAffineness.lean",
+  "statement": "theorem isAffine_of_isImmersion_of_isAffineOpen_preimage_basicOpen_of_isClosed (A : Type u) [CommRing A] (V : Scheme.{u}) (j : V ⟶ Spec (CommRingCat.of A)) [QuasiCompact j] [IsImmersion j] (f : A) (hprincipal : IsAffineOpen (j ⁻¹ᵁ PrimeSpectrum.basicOpen f)) (hclosed : IsClosed (Set.range j ∩ PrimeSpectrum.zeroLocus {f})) : IsAffine V",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-662d50be2",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean; lean.statement verbatim in file. Clause check against Stacks 0ABH: (A:Type u)[CommRing A], V:Scheme.{u}, j : V ⟶ Spec (CommRingCat.of A) with [QuasiCompact j][IsImmersion j], f:A, IsAffineOpen (j ⁻¹ᵁ basicOpen f), IsClosed (Set.range j ∩ zeroLocus {f}) ⊢ IsAffine V. Exact, no extra hypotheses, universe forced by Scheme.{u}. Edge cases V empty, A=0, f=1, f nilpotent, A²∖0 with f=x are all handled correctly. No duplicate in Mathlib (QuasiAffine/Affine) or lean/Sheaf. Proof is sorry only; docstrings give the source, blueprint id and 5 proof steps; no defs; report sections present. No file changed, so no compile; the worker's compile was clean."
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-zl-frobenius-power-deck-points",
+ "kind": "statement",
+ "title": "Finite points underlying actual Frobenius translates on a constant extension",
+ "statement": "Let $k_1/k_0$ be finite fields and $c:C\\to X$ a cartesian constant-field square [def-pc-base-change]. Let $\\theta:\\bar X\\simeq\\bar C$ be its canonical geometric-fibre comparison [def-zl-source-constant-field-restriction]. For any $s:\\operatorname{Spec}\\bar k_1\\to\\bar C$ define the actual composite $T_j(s)=s\\,;\\theta^{-1}\\,;\\operatorname{Fr}_X^j\\,;\\theta$. For a finite point $t$ and its chosen geometric lift $s_t$ [def-weil-local-frobenius-trace], there exists a finite point $t\\prime$ of $C$ such that $c(t\\prime)=c(t)$, their residueCard values agree, and $T_j(s_t)$ projects to $t\\prime$. There are no coefficient objects, return-compatibility conditions or local Frobenius modules in this statement. The actual translated lift need not equal the independently chosen lift of $t\\prime$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3: original Weil returns and local Frobenius powers; geometric orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-zl-source-constant-field-restriction",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Let phi be the j-th power of the geometric Frobenius of k1/k0. Naturality of the inverse of the q-power map under the embedding k1 into the algebraic closure of k0 follows by applying the injective arithmetic Frobenius power and using preservation of powers by ring homomorphisms. Thus Spec(phi) commutes with the constant-field map and with the geometric Frobenius on the closure. Use the canonical pullback isomorphism of the cartesian square, pullback.map with identities on X and Spec(k0), and Spec(phi) on Spec(k1), to construct an actual automorphism d of C. Its projections satisfy d;c=c and d;a_C=a_C;Spec(phi).",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write P for geometricFiberToBaseChange and theta for geometricFiberBaseChangeIso. The two projection equations and naturality from the first step give Fr_X^j;P=P;d by the universal property of C. The comparison identities give theta^{-1};P=geometricFiberProj_C. Hence the actual translated lift s;theta^{-1};Fr_X^j;theta projects to s;geometricFiberProj_C;d. The chosen lift of t projects to t, so this translated lift projects to d(t), while c(d(t))=c(t).",
+   "uses": [
+    "def-pc-base-change",
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The residue-field map of the scheme isomorphism d is an isomorphism. Apply Hom.mem_finitePoints_iff_of_isIso and Hom.pointNorm_of_isIso to obtain a finite point t prime=d(t) of the same absolute residue cardinality. For each of t and t prime, equip the residue field with its structure-map algebra structure; Module.natCard_eq_pow_finrank identifies residueCard with the absolute cardinality. These facts prove all three required clauses without any new unproved statement.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-zl-source-constant-field-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3: original Weil returns and local Frobenius powers; geometric orbit step in sk-i-dl-general-real.",
+  "note": "J5: explicit pullback automorphism, Frobenius naturality and residue-cardinality proof; no new proof obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Automorphism of the constant field extension of a scheme induced by a finite field Frobenius preserves residue cardinality",
+   "results": "Eight hits including FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic and IsLocalRing.ResidueField.mapAut, but no constant-extension scheme or point statement.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field Frobenius induces a deck automorphism of a constant extension of a scheme and preserves finite residue field cardinalities",
+   "results": "Eight hits about finite-field Frobenius algebra automorphisms and arithmetic Frobenius at prime ideals. None constructs the deck automorphism on an arbitrary cartesian model of a scheme.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePoints.*(iso|map)|pointNorm_of_isIso|geometricFiberToBaseChange",
+   "results": "Remote Mathlib grep returned zero hits. Repository rg found source PointCount.pointNorm_of_isIso and geometricFiberToBaseChange projection identities; they do not construct the Frobenius deck map.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.GeometricPowerOrbitStalk",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 1--3: original Weil returns and local Frobenius powers; geometric orbit step in sk-i-dl-general-real.",
+   "via": [
+    "lem-zl-geometric-power-orbit-stalk",
+    "lem-zl-semisimple-frobenius-orbit-descent",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.FrobeniusPowerDeckPoints",
+  "file": "lean/Sheaf/DeligneLaumon/FrobeniusPowerDeckPoints.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_frobenius_power_deck_point",
+  "statement": "theorem exists_frobenius_power_deck_point\n    (hc : IsPullback c (C ↘ Spec (CommRingCat.of k₁)) (X ↘ Spec (CommRingCat.of k₀))\n      (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁))))\n    (j : ℕ) (t : C.finitePoints) :\n    ∃ t' : C.finitePoints,\n      c t'.1 = c t.1 ∧\n      (C ↘ Spec (.of k₁)).residueCard t'.1 = (C ↘ Spec (.of k₁)).residueCard t.1 ∧\n      ((frobeniusPowerTranslatePoint hc j\n          ((C ↘ Spec (.of k₁)).geometricFiberPointOfFinitePoint t)) ≫\n        (C ↘ Spec (.of k₁)).geometricFiberProj).base\n          (IsLocalRing.closedPoint (AlgebraicClosure k₁)) = t'.1",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.frobeniusPowerTranslatePoint",
+   "AlgebraicGeometry.Scheme.Hom.exists_frobenius_power_deck_point"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T065845-L-3269080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261026T222722-L-686072",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

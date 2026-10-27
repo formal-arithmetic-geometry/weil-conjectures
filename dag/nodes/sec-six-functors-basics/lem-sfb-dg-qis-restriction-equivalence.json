@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-dg-qis-restriction-equivalence",
+ "kind": "statement",
+ "title": "Restriction along a DG quasi-isomorphism is a derived equivalence",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Let $\\varphi:(A,d)\\to(B,d)$ be a homomorphism of differential graded algebras (degree-preserving, unital, multiplicative, commuting with $d$) inducing isomorphisms $H^i(A)\\xrightarrow{\\sim}H^i(B)$ for all $i\\in\\mathbf Z$. Restriction of scalars $N\\mapsto N_A$, which keeps the underlying complex of $N$ and lets $a$ act through $\\varphi(a)$, induces a functor $R:D(B,d)\\to D(A,d)$; it commutes with shifts and mapping cones on the level of modules, hence is exact. Then $R$ is an equivalence of triangulated categories. It has a left adjoint $L:D(A,d)\\to D(B,d)$, the derived tensor product $M\\mapsto M\\otimes^{\\mathbf L}_AB$, which is an exact quasi-inverse of $R$: the unit $\\mathrm{id}\\to RL$ and the counit $LR\\to\\mathrm{id}$ of the adjunction are isomorphisms, and $L$ carries distinguished triangles to distinguished triangles with shift comparisons compatible with unit and counit.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09S6, lemma-qis-equivalence (statement and proof: fully faithful by lemma-tensor-with-compact-fully-faithful, right adjoint N_A = RHom(B,N) by lemma-tensor-hom-adjoint and example-map-hom-tensor, zero kernel)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-bimodule-models"
+ ],
+ "proof": [
+  {
+   "text": "Give $B$ its $(A,B)$-bimodule structure $ab=\\varphi(a)b$. By [lem-sfb-dg-bimodule-derived-adjunction], $L=-\\otimes_A^{\\mathbf L}B$ has exact right adjoint $U_B=R\\operatorname{Hom}_B(B,-)$, with compatible shift comparisons. Restriction $R$ preserves quasi-isomorphisms because it leaves the underlying complexes unchanged, and commutes with shifts and cones, so descends as the exact functor stated in the item. For a right DG $B$-module $I$, evaluation $f\\mapsto f(1)$ identifies $\\underline{\\operatorname{Hom}}_B(B,I)$ with $I_A$ as DG $A$-modules: its inverse sends homogeneous $x$ to $(b\\mapsto xb)$, its differential evaluates to $d_Ix$ since $d_B1=0$, and $(fa)(1)=f(\\varphi(a))=f(1)\\varphi(a)$. For the homotopically injective resolution $Y\\to I$ supplied by the cited node, $Y_A\\to I_A$ is still a quasi-isomorphism. Thus the models identify $U_B$ naturally with $R$, including their shift comparisons. Transport the specified adjunction to obtain $L\\dashv R$ with exact $L,R$ and shift-compatible unit and counit.",
+   "uses": [
+    "lem-sfb-dg-bimodule-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S6, second sentence of proof; Tag 09LT, lemma-tensor-hom-adjoint, and Example 0BYX, example-map-hom-tensor (evaluation at 1)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dg-finite-cell-compact] to the right DG $B$-module $B$ with filtration $0\\subset B$ and quotient the single unshifted copy of $B$. This gives the compactness hypothesis for the bimodule $N={}_AB_B$ in $D(B,d)$.",
+   "uses": [
+    "lem-sfb-dg-finite-cell-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S6, first sentence of proof, compactness input to Tag 09R9; Tag 09R3, proposition-compact."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dg-free-module-hom-cohomology] to the right DG $B$-module $M=B$: sending a cycle $x\\in B^k$ to the class of $\\mu_x:b\\mapsto xb$ gives an isomorphism $H^k(B)\\cong\\operatorname{Hom}_{D(B,d)}(B,B[k])$ for every $k\\in\\mathbf Z$. A degree-$k$ cycle $a\\in A$ acts on $N={}_AB_B$ by the right $B$-linear map $b\\mapsto\\varphi(a)b$, which is $\\mu_{\\varphi(a)}$. Hence the left-action map $H^k(A)\\to\\operatorname{Hom}_{D(B,d)}(B,B[k])$ is the composite of $H^k(\\varphi)$ with that isomorphism, and is an isomorphism for every integer $k$ by the assumed isomorphisms on cohomology. Together with Step 2 these are precisely the two hypotheses of [lem-sfb-dg-compact-bimodule-full-faithfulness], applied to $N={}_AB_B$. It follows that $L$ is fully faithful.",
+   "uses": [
+    "lem-sfb-dg-free-module-hom-cohomology",
+    "lem-sfb-dg-compact-bimodule-full-faithfulness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S6, first sentence of proof; Tag 09R9, lemma-tensor-with-compact-fully-faithful; the identification Hom(B,B[k]) = H^k(B) by Tags 09KY and 09KM."
+   }
+  },
+  {
+   "text": "If $R(Y)\\simeq0$, all cohomology groups of its underlying complex vanish. Restriction retains that complex, so $H^k(Y)=0$ for every $k$. The map $0\\to Y$ is therefore a quasi-isomorphism and is inverted in $D(B,d)$, giving $Y\\simeq0$. Thus $R$ has zero kernel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S6, third sentence of proof (the right adjoint has zero kernel)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-exact-adjoint-zero-kernel-equivalence] with $F=L$, $G=R$: exactness and the specified adjunction are Step 1, full faithfulness is Step 3, and the zero-kernel hypothesis is Step 4. Its conclusion makes this adjunction's unit $\\mathrm{id}\\to RL$ and counit $LR\\to\\mathrm{id}$ natural isomorphisms. Thus $L$ and $R$ are inverse equivalences. The exact structures and shift compatibility already supplied in Step 1 give the asserted equivalence of triangulated categories and the final compatibility clause.",
+   "uses": [
+    "lem-sfb-exact-adjoint-zero-kernel-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09S6, last sentence of proof, invoking derived.tex Tag 09J1, lemma-fully-faithful-adjoint-kernel-zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-bimodule-derived-adjunction",
+  "lem-sfb-dg-finite-cell-compact",
+  "lem-sfb-dg-free-module-hom-cohomology",
+  "lem-sfb-dg-compact-bimodule-full-faithfulness",
+  "lem-sfb-exact-adjoint-zero-kernel-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09S6, lemma-qis-equivalence, proof; the evaluation identification and the two hypotheses of Tag 09R9 are expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -i 'differential graded|DGAlgebra|DGModule' and rg 'restrictScalars' in Mathlib/Algebra/Homology, Mathlib/CategoryTheory/Triangulated",
+   "results": "only Mathlib/Algebra/Homology/DifferentialObject.lean (differential objects, no DG algebras or modules); no restrictScalars in the homology/triangulated directories",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has no differential graded algebras or their derived module categories. Other search services unavailable to the reviewer (Codex maintainer reader, no lean-lsp)."
+  },
+  {
+   "tool": "grep",
+   "query": "DGAlgebra|DGModule|differential graded algebra",
+   "results": {
+    "t": "2026-10-23T23:52:41Z",
+    "tool": "grep",
+    "query": "DGAlgebra|DGModule|differential graded algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization theorems and differential objects do not assert a derived equivalence between DG module categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-isomorphism of differential graded algebras induces an equivalence of derived categories",
+   "results": {
+    "t": "2026-10-23T23:52:41Z",
+    "tool": "leansearch",
+    "query": "A quasi-isomorphism of differential graded algebras induces an equivalence of derived categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.isIso_Q_map_iff_quasiIso",
+     "HomologicalComplex.mem_quasiIso_iff",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ",
+     "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+     "QuasiIso",
+     "HasDerivedCategory",
+     "HomotopyCategory.mem_quasiIso_iff",
+     "DerivedCategory.isIso_Qh_map_iff"
+    ],
+    "digest": "6de7cfefa9194cc7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization theorems and differential objects do not assert a derived equivalence between DG module categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DGAlgebra\"",
+   "results": {
+    "t": "2026-10-23T23:52:42Z",
+    "tool": "loogle",
+    "query": "\"DGAlgebra\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization theorems and differential objects do not assert a derived equivalence between DG module categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-isomorphism of differential graded algebras induces an equivalence of derived module categories by extension and restriction of scalars",
+   "results": {
+    "t": "2026-10-23T23:52:43Z",
+    "tool": "leanfinder",
+    "query": "A quasi-isomorphism of differential graded algebras induces an equivalence of derived module categories by extension and restriction of scalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.isIso_Q_map_iff_quasiIso",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ",
+     "DerivedCategory.singleFunctorsPostcompQIso",
+     "DerivedCategory.isIso_Qh_map_iff",
+     "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors"
+    ],
+    "digest": "199d64e462779af4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization theorems and differential objects do not assert a derived equivalence between DG module categories."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|differential graded|DGModule|DGAlgebra",
+   "results": {
+    "t": "2026-10-23T23:53:14Z",
+    "tool": "grep",
+    "query": "DifferentialGraded|differential graded|DGModule|DGAlgebra",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean",
+     "Mathlib/Algebra/Homology/DifferentialObject.lean"
+    ],
+    "digest": "b00540e86065b3f2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization theorems and differential objects do not assert a derived equivalence between DG module categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for quasi-isomorphic DG rings is an equivalence of triangulated categories",
+   "results": {
+    "t": "2026-10-23T23:53:17Z",
+    "tool": "leanfinder",
+    "query": "Restriction of scalars for quasi-isomorphic DG rings is an equivalence of triangulated categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+     "CategoryTheory.Equivalence.IsTriangulated.mk'",
+     "CategoryTheory.Equivalence.IsTriangulated.mk''",
+     "CategoryTheory.Equivalence.IsTriangulated",
+     "CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctor",
+     "DerivedCategory.instIsTriangulated",
+     "HomologicalComplex.dgoEquivHomologicalComplex",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ"
+    ],
+    "digest": "e03b98a6187dd604"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary derived localization theorems and differential objects do not assert a derived equivalence between DG module categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-dg-countable-compact-telescope",
+  "date": "2026-10-24",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence.",
+   "via": [
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-qis-restriction-equivalence",
+  "worker": "stage1",
+  "summary": "Q89 follows Tag 09S6: constructs the tensor/restriction adjunction by evaluation, verifies compactness and the self-extension hypothesis of the general bimodule criterion, proves restriction has zero kernel, and applies the existing exact-adjoint criterion. Two statement-only DG bimodule nodes are created. Reviewer FIX: the dropped enriched-Yoneda machinery citation is replaced by a statement-only node lem-sfb-dg-free-module-hom-cohomology (Hom_{D(B,d)}(B,M[k]) = H^k(M), Stacks 09KY/09KM). No statement change, Lean edits or builds.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md, (3), beneath the inherited coherent-family/Quot effectivity route; Tag 0CRM countable-subalgebra reduction uses this Tag 09S6 equivalence. The inherited null ancestor and full via chain are retained as returned by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-6c2d526cd",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-6c2d526cd (reviewer sub-agent of L); spot-checked: Item = Stacks 09S6 over Z; statement unchanged vs live/side-live (still unsplit there). Steps follow 09S6's own proof: 1 = 09LT/0BYX evaluation Hom_B(B,I)≅I_A (checked differential and A-action), 2 = 09R3 with filtration 0⊂B, 4 elementary zero kernel, 5 = 09J1 node with hypotheses matched one by one. Tags checked in tags file. The report's source-error note on the 'left adjoint' slips in 0BYX and 09R9 is correct. Fault (route pivot): Step 3 cited the dropped enhanced-Yoneda node lem-coef-derived-enriched-yoneda (DG categories, homotopy-coherent factorizations) only to get Hom_{D(B,d)}(B,B[k])≅H^k(B). That is unjustified, and the 'dg categor' wording came only from this sentence. No sfb DAG node states this ordinary calculation. FIX: new statement-only node lem-sfb-dg-free-module-hom-cohomology (H^k(M)≅Hom_{D(B,d)}(B,M[k]) via x↦(b↦xb); source 09KY(1)+09KM, also stated in the proof of 09RA; signs checked; small cases B=0, Z with Z/2, Z[ε]/ε² tested). Step 3 now cites it and shows the action map is that iso composed with H^k(φ). Yoneda removed from proof_deps; split_report.tool_uses removed. New nodes are true and statement-only: 09LT adjunction is not a duplicate of the trf commutative-ring nodes; 09R9 compact-bimodule is a specialization of the existing lem-sfb-dg-adjunction-compact-unit (09LZ), not a duplicate, and its future proof can cite it. No SGA, no cycle.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgQuasiIsoRestrictionEquivalence",
+  "declaration": "CategoryTheory.DgAlgebra.quasiIso_restriction_equivalence",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.AlgebraMapBimoduleModel",
+   "CategoryTheory.DgAlgebra.ScalarRestrictionModel",
+   "CategoryTheory.DgAlgebra.quasiIso_restriction_equivalence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgQuasiIsoRestrictionEquivalence.lean",
+  "statement": "theorem quasiIso_restriction_equivalence (A B : Algebra.{u}) [DerivedStructure A] [DerivedStructure B] (φ : A ⟶ B) (hφ : QuasiIso φ.hom) : ∃ (N : Bimod A B) (_b : AlgebraMapBimoduleModel φ N) (F : RightModule A ⥤ RightModule B) (G : RightModule B ⥤ RightModule A) (t : BalancedTensorModel N F) (r : ScalarRestrictionModel φ G) (L : Derived A ⥤ Derived B) (R : Derived B ⥤ Derived A) (α : Q A ⋙ L ⟶ F ⋙ Q B) (ρ : Q B ⋙ R ≅ G ⋙ Q A) (_sL : L.CommShift ℤ) (_sR : R.CommShift ℤ) (adj : L ⊣ R), L.IsRightKanExtension α ∧ L.IsTriangulated ∧ R.IsTriangulated ∧ adj.CommShift ℤ ∧ IsIso adj.unit ∧ IsIso adj.counit ∧ L.IsEquivalence ∧ R.IsEquivalence ∧ (∀ (M S : RightModule A) (e : ShiftComparison A 1 M S), ∃ eF : ShiftComparison B 1 (F.obj M) (F.obj S), IsTensorShift N t 1 M S e eF ∧ L.map (DerivedStructure.shiftIso 1 M S e).hom ≫ (Functor.commShiftIso L (1 : ℤ)).hom.app ((Q A).obj M) ≫ (α.app M)⟦(1 : ℤ)⟧' = α.app S ≫ (DerivedStructure.shiftIso 1 (F.obj M) (F.obj S) eF).hom) ∧ (∀ (Y S : RightModule B) (e : ShiftComparison B 1 Y S), ∃ eG : ShiftComparison A 1 (G.obj Y) (G.obj S), eG.iso.hom ≫ (r.underlyingIso.hom.app Y)⟦(1 : ℤ)⟧' = r.underlyingIso.hom.app S ≫ e.iso.hom ∧ R.map (DerivedStructure.shiftIso 1 Y S e).hom ≫ (Functor.commShiftIso R (1 : ℤ)).hom.app ((Q B).obj Y) ≫ (ρ.hom.app Y)⟦(1 : ℤ)⟧' = ρ.hom.app S ≫ (DerivedStructure.shiftIso 1 (G.obj Y) (G.obj S) eG).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9560e55b5",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps (identical to live), landed DgAlgebraDerivedCategory, DgBimoduleModels and DgBimoduleDerivedAdjunction (all present at delivery commit 9560e55b), the delivered module and Stacks 09S6/0BYX. Record diff vs live: only lean + stmt_deps (+2 landed def nodes, both used); statement verbatim. Every clause matches: QuasiIso φ.hom; ScalarRestrictionModel pins restriction (natural underlying iso + action m·a=m·φ(a)); ρ pins R through localization; AlgebraMapBimoduleModel pins B as (A,B)-bimodule; BalancedTensorModel + IsRightKanExtension pins L = −⊗^L_A B; CommShift + IsTriangulated for L and R; degree-one shift squares only (consistent with the Q73 FIX), eG/eF uniquely determined; adj.CommShift; IsIso unit/counit (choice-independent); L,R IsEquivalence. No extra hypotheses or universe restrictions; edge cases φ=id, zero/acyclic algebras, degree-zero rings, all shifts OK. No duplicate restriction notion in Sheaf/WeilConjectures/Mathlib; helper structures are non-hollow, docstrings with source/blueprint and the 5 proof steps; sorry only on the theorem; Worker report and Second reading by Q79 present. No file changed, no compile run. Advisory only: adj existential, adequate."
+ }
+}

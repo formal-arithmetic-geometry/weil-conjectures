@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-polarized-abelian-odd-level-rigidity",
+ "kind": "statement",
+ "title": "Prime-to-characteristic level rigidity for polarized abelian varieties",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety], and let $\\lambda:A\\to A^\\vee$ be a polarization. A polarization of an abelian variety $A$ over an algebraically closed field means a homomorphism $\\lambda:A\\to A^\\vee$ induced by an ample [def-sc-ample] invertible sheaf [def-sc-invertible-module] $L$, namely $x\\mapsto[t_x^*L\\otimes L^{-1}]$, where $t_x$ is translation by $x$ and $A^\\vee=\\operatorname{Pic}^0_{A/k}$ is the dual abelian variety representing algebraically trivial invertible sheaves, rigidified at the identity. A polarization is principal when $\\lambda$ is an isomorphism. For a group automorphism $a$ of $A$ (an automorphism of the $k$-group scheme $A$ [def-sc-group-scheme]), its dual $a^\\vee$ is pullback on $A^\\vee$; preserving $\\lambda$ means $a^\\vee\\lambda a=\\lambda$. Let $n\\geq3$ be an integer invertible in $k$, let $[n]:A\\to A$ be multiplication by $n$ [def-sc-mult-n], and write $A[n](k)=\\{x\\in A(k):[n]x=0\\}$. If a $k$-group automorphism $a:A\\xrightarrow{\\sim}A$ preserves $\\lambda$ and satisfies $a(x)=x$ for every $x\\in A[n](k)$, then $a=\\mathrm{id}_A$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 14.4(b), printed p.62; polarization convention in I §11, printed p.51. We retain the prime-to-characteristic hypothesis needed when testing geometric torsion points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-sc-group-scheme",
+  "def-sc-mult-n",
+  "def-sc-group-scheme-translate",
+  "def-sc-picard-group"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-polarized-abelian-automorphisms-finite], the group $G=\\operatorname{Aut}_k(A,\\lambda)$ is finite. The given $a$ belongs to $G$. Among $1,a,a^2,\\ldots,a^{|G|}$ two powers $a^i,a^j$ with $i<j$ agree; cancellation gives $a^r=\\mathrm{id}_A$ for $r=j-i\\geq1$.",
+   "uses": [
+    "lem-sfb-polarized-abelian-automorphisms-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 14.4(b), printed p.62, using 14.4(a), 10.15, 8.12 and 14.5."
+   }
+  },
+  {
+   "text": "By [lem-sfb-abelian-hom-finite-free] with $B=A$, the $k$-group endomorphisms of $A$ form a ring $R=\\operatorname{End}_k(A)$ under pointwise addition and composition, with $1_R=\\mathrm{id}_A$, and its additive group has a finite $\\mathbf Z$-basis. The difference $f=a-1_R$ is therefore a $k$-group homomorphism. For every $x\\in A[n](k)$ the hypothesis gives $f(x)=a(x)-x=0$.",
+   "uses": [
+    "lem-sfb-abelian-hom-finite-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 14.4(b), printed p.62, using 14.4(a), 10.15, 8.12 and 14.5."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-abelian-torsion-kernel-divisibility] to $f:A\\to A$ and this same $n$. Its hypotheses hold because $k$ is algebraically closed, $n\\geq3$ implies $n\\geq1$, $n$ is invertible in $k$, and step 2 verified vanishing on every $n$-torsion point. Obtain $b\\in R$ with $f=b\\circ[n]_A=n b$. Thus $a=1_R+n b$.",
+   "uses": [
+    "lem-sfb-abelian-torsion-kernel-divisibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 14.4(b), printed p.62, using 14.4(a), 10.15, 8.12 and 14.5."
+   }
+  },
+  {
+   "text": "The ring $R$ of step 2 has a finite $\\mathbf Z$-basis, step 1 gives $a^r=1_R$ with $r\\geq1$, and step 3 gives $a=1_R+n b$ with $n\\geq3$. Applying [lem-sfb-finite-free-ring-congruence-torsion] to these objects yields $a=1_R$. Since $1_R=\\mathrm{id}_A$ as a group-scheme morphism, this is the asserted equality $a=\\mathrm{id}_A$.",
+   "uses": [
+    "lem-sfb-finite-free-ring-congruence-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 14.4(b), printed p.62, using 14.4(a), 10.15, 8.12 and 14.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polarized-abelian-automorphisms-finite",
+  "lem-sfb-abelian-hom-finite-free",
+  "lem-sfb-abelian-torsion-kernel-divisibility",
+  "lem-sfb-finite-free-ring-congruence-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 14.4(b), pp.62–63; same finite-order, divisibility and integral-eigenvalue route, expressed by the left regular representation of End(A); final finite-order semisimplicity makes the nilpotence conclusion explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Torelli|polariz.*[Aa]ut|[Aa]ut.*polariz|[Jj]acobian.*faithful|faithful.*[Jj]acobian",
+   "results": "1 hits; actual logged top results: Mathlib/RingTheory/Extension/Presentation/Core.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"polarization\"",
+   "results": "0 hits; actual logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a polarized abelian variety acting trivially on its n torsion for n at least three prime to the characteristic is identity",
+   "results": "8 hits; actual logged top results: cyclotomicCharacter.spec, modularCyclotomicCharacter.id, cyclotomicCharacter.toFun_spec, cyclotomicCharacter.toFun, modularCyclotomicCharacter'.unique', cyclotomicCharacter.toZModPow, modularCyclotomicCharacter.unique, cyclotomicCharacter.toZModPow_toFun",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Torelli|[Pp]rincipal[Pp]olar|[Pp]olarization|[Aa]belian[Vv]ariety",
+   "results": "25 hits; actual logged top results: Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polarization preserving automorphism of an abelian variety fixing all points killed by n at least three is the identity",
+   "results": "8 hits; actual logged top results: RootPairing.polarizationIn_Injective, RootPairing.PolarizationIn.congr_simp, WeierstrassCurve.Affine.Point.map_id, RootPairing.range_polarizationIn_le_span_coroot, RootPairing.Polarization_apply, CategoryTheory.Iso.conjAut_zpow, RootPairing.ker_polarization_eq_ker_rootForm, RootPairing.PolarizationEquiv.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rigidity of automorphisms preserving full level structures on abelian varieties",
+   "results": "8 hits; actual logged top results: CategoryTheory.PreGaloisCategory.autMap_unique, CategoryTheory.PreGaloisCategory.AutGalois.ext, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.exists_autMap, CategoryTheory.PreGaloisCategory.autMap, CategoryTheory.PreGaloisCategory.autMapHom_apply, CategoryTheory.PreGaloisCategory.comp_autMap, CategoryTheory.PreGaloisCategory.comp_autMap_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polarization preserving automorphism of an abelian variety fixing all n torsion for n at least three prime to the characteristic is identity",
+   "results": "8 hits; logged top results: cyclotomicCharacter.spec, modularCyclotomicCharacter.id, cyclotomicCharacter.toFun_spec, cyclotomicCharacter.toFun, modularCyclotomicCharacter'.unique', cyclotomicCharacter.toZModPow, modularCyclotomicCharacter.unique, cyclotomicCharacter.toFun_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: cyclotomic characters, formal unramifiedness, root-system polarizations and elliptic normal forms do not state polarized abelian level rigidity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"polariz\"",
+   "results": "0 hits; logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: cyclotomic characters, formal unramifiedness, root-system polarizations and elliptic normal forms do not state polarized abelian level rigidity"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]belian[Vv]ariety|polariz.*[Aa]ut|[Aa]ut.*polariz",
+   "results": "0 hits; logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: cyclotomic characters, formal unramifiedness, root-system polarizations and elliptic normal forms do not state polarized abelian level rigidity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rigidity of a full level n structure on a polarized abelian variety for n at least three",
+   "results": "8 hits; logged top results: AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.casesOn, RootPairing.PolarizationEquiv.congr_simp, RootPairing.polarizationEquiv_toLinearMap, RootPairing.finrank_range_polarization_eq_finrank_span_coroot, WeierstrassCurve.IsCharThreeJNeZeroNF.casesOn, RootPairing.ker_polarization_eq_ker_rootForm",
+   "date": "2026-10-22",
+   "verdict": "no match: cyclotomic characters, formal unramifiedness, root-system polarizations and elliptic normal forms do not state polarized abelian level rigidity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a polarized abelian variety acting trivially on its prime to characteristic torsion points of level n greater than two is trivial",
+   "results": "8 hits; logged top results: modularCyclotomicCharacter.id, cyclotomicCharacter.spec, cyclotomicCharacter.toFun, cyclotomicCharacter.toZModPow, cyclotomicCharacter.toZModPow_toFun, cyclotomicCharacter.toFun_apply, modularCyclotomicCharacter'.unique', modularCyclotomicCharacter.unique",
+   "date": "2026-10-22",
+   "verdict": "no match: cyclotomic characters, formal unramifiedness, root-system polarizations and elliptic normal forms do not state polarized abelian level rigidity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-curve-level-faithfulness",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties.",
+   "via": [
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-polarized-abelian-odd-level-rigidity",
+  "worker": "stage1",
+  "summary": "Checked Milne I 14.4(b), 14.4(a), 10.15, 8.11(f)–8.12, 10.16 and 14.5, the current direct-image blueprint route, the whole DAG and project Lean sources. Preserved the statement and exposed four independent standard inputs. The general integral-ring input makes the source's unipotence conclusion rigorous using finite order in characteristic zero; no invalid claim about arbitrary nilpotents and Rosati adjoints is used. No project attachment or Mathlib leaf was found.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli prerequisite, via geometric-curve-level-faithfulness: the polarized-abelian level stabilizer vanishes. The ancestry tool currently returns None; the inherited null root and its full via chain are retained, with exact supporting places for new nodes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-8892daa00",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-8892daa00 (reviewer sub-agent of L); spot-checked: The mathematics is sound and matches Milne AV I 14.4(b) (p.62), using 14.4(a), 10.15 (p.49), 8.11(f)/8.12 (p.39) with 10.16, and 14.5 (p.63). Four new statement-only nodes cover finiteness of Aut(A,λ), finite free Hom(A,B), divisibility of a homomorphism killing A[n](k) with n invertible, and the ring lemma u^r=1, u=1+nb, n≥3 ⇒ u=1. All four are true and strictly smaller than the item. I tested the ring lemma on Z with u=−1, Z[i] with u=i, M_2(Z) with the swap matrix and the zero ring; n=2 fails as it must. The item's four steps are a correct assembly with the hypotheses checked. The item and its citer are not dropped, and the item is not superseded on live. An rg -L search over the DAG (abelian-varieties chapter, prop-av-tate-rank, lem-sc-mult-n-*, lem-sc-isogeny-facts) found no duplicate. The report's source remarks are correct (Rosati compact sphere; the β^†β step needs normality, and the new route uses semisimplicity instead). Fixes: B3, def-sc-mult-n was not cited for [n] and A[n]; I added it to the statement and stmt_deps of lem-sfb-abelian-torsion-kernel-divisibility and of the item. I also changed the item's source.place from 'I §11, printed p.51' to p.53, which the report claimed was already done.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.PolarizedOddLevelRigidity",
+  "declaration": "AlgebraicGeometry.polarized_abelian_odd_level_rigidity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/PolarizedOddLevelRigidity.lean",
+  "statement": "theorem polarized_abelian_odd_level_rigidity {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (L : A.left.Modules) [Scheme.Modules.IsInvertible L] (hL : IsAmple A.hom L) (n : ℕ) (hn : 3 ≤ n) (hchar : IsUnit (n : k)) (a : A ≅ A) [IsMonHom a.hom] (hpolarization : ∀ x : 𝟙_ (Over (Spec (.of k))) ⟶ A, Scheme.Pic.map a.hom.left (abelianPolarizationPointMap A (Scheme.Pic.ofIsInvertible L) (x ≫ a.hom)) = abelianPolarizationPointMap A (Scheme.Pic.ofIsInvertible L) x) (hlevel : ∀ x : 𝟙_ (Over (Spec (.of k))) ⟶ A, x ≫ (𝟙 A ^ n) = 1 → x ≫ a.hom = x) : a = Iso.refl A",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.abelianPolarizationPointMap",
+   "AlgebraicGeometry.polarized_abelian_odd_level_rigidity"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48b36bf85",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery makes exactly the f5ddefc6 RETURN repair: new def node and module dropped; point map inlined as item helper abelianPolarizationPointMap = Pic.map (GrpObj.mulLeft A x).left L / L (H4 resolved), listed in lean.declarations; stmt_deps = base + def-sc-group-scheme-translate + def-sc-picard-group; only lean/stmt_deps differ from the live node. nt_incremental2.check(live, live+item) = [] (H12 reach resolved). Mathematics vs Milne AV I 14.4(b): alg-closed k, IsAbelianVariety+GrpObj, polarization as lambda_L for ample invertible L (node's definition), a^vee lambda a = lambda as the pointwise Pic identity a^*(lambda_L(ax)) = lambda_L(x) (= lambda_{a^*L}(x); equivalent to the morphism identity since A is reduced, k-points dense, A^vee separated, Pic0 in Pic injective), n>=3 with IsUnit (n:k), A[n](k) via the pointwise MonObj.Hom.monoid power 𝟙 A ^ n (same as torsionSubgroupScheme, Defs.lean:242), conclusion a = Iso.refl. Edge cases fine; statement verbatim; source/blueprint docstrings and 4 proof steps; sorry only; report sections present. No compile run (nothing changed). Advisory: source.place p.51 should be p.53; mulLeft absent from the def-sc-group-scheme-translate record."
+ }
+}

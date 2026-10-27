@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-open-coefficient-operations-existence",
+ "kind": "statement",
+ "title": "Normalized coefficient transports for the open operations",
+ "statement": "In the setting and notation of [def-sf-open-semilinear-tensor-model-data], let l be prime, E a finite extension of Q_l and j:U→X an open immersion. Given a SemilinearDerivedSectionsData on the actual quotient tower on X, there are Operations o whose openSystems equal the supplied localization at the open object, and whose completedMap is invertible. This asserts only the coefficient/module transports, with their constant, projection and section normalizations; it asserts neither the ordinary tensor formula nor the strict scalar comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula."
+ },
+ "stmt_deps": [
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete sliceEquiv and sliceFrom_cover of weakly-etale localization to identify the prescribed sliceSite, including continuity and cocontinuity. Compose the inverse sheafification compatibility for Over.forget with the forward compatibility for sliceSite, applied to each constant coefficient ring. The two sheafification-unit identities give finiteConstants, and naturality in a coefficient ring homomorphism gives every adjacent quotient square.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget commutativity in the finite comparison and assemble an isomorphism of the actual RingCat-valued quotient diagrams with NatTrans.ofOpSequence. Restriction and continuous precomposition preserve limits. Compose their preservesLimitIso maps with the limit of the diagram isomorphism to obtain the completed ring isomorphism. The fully faithful forgetful functor from commutative ring sheaves to ring sheaves lifts this isomorphism to the recorded completed commutative ring sheaves. The limit projection equations prove projections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any site equivalence and a structural ring isomorphism, construct the reverse structural map using the equivalence unit and the inverse ring map. Naturality, inverse identities, and the equivalence triangle identity prove the hypotheses of pushforwardPushforwardEquivalence. Apply it to the completed and finite ring comparisons; its forward functor is the prescribed continuous module pushforward.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the product with the natural-number category, an equivalence is representably flat. Covers are determined by vertical slices, so the covering-preserving property of the original equivalence proves continuity of the product and its inverse. Uncurry the finite diagram comparison to obtain systemMap, whose components are exactly finiteMap. Its components are invertible, hence it is an isomorphism. The same module-equivalence construction gives systems.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The evaluation ring identifications have identity components. They make the two composite structural ring maps equal, because systemMap has the prescribed finite components. Compose the pushforwardComp isomorphisms with pushforwardCongr of this equality to construct transportEvaluation. All these maps are identity on sections, proving transportSections. Equivalences preserve binary products, so their functors are additive. Insert the given sections.localization as openSystems and assemble Operations; the constructed completed isomorphism proves the final IsIso assertion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; coefficient transport substep of lem-sf-open-semilinear-ordinary-comparison. F8 implements the slice sheafification comparisons, RingCat limit transport, normalized module equivalences, and the identity-on-sections strict evaluation comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A site equivalence transports a constant ring sheaf, its inverse limit, and module sheaves",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPushforwardContinuous\", \"sheafify\"",
+   "results": "1 hits: CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence|preservesLimitIso",
+   "results": "25 hits: Mathlib/Topology/Sheaves/Module.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean, Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A site equivalence transports constant quotient ring sheaves and their inverse limit, preserving projections",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongr.functor_obj_val_obj, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr_inverse",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSemilinearOrdinaryComparison",
+  "date": "2026-10-27",
+  "group": "V4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-semilinear-ordinary-comparison",
+   "place": "Ordinary open comparison: Normalized coefficient transports for the open operations.",
+   "via": [
+    "lem-sf-open-semilinear-ordinary-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenCoefficientOperationsExistence",
+  "file": "lean/Sheaf/SixFunctors/OpenCoefficientOperationsExistence.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.openCoefficientOperationsExistence",
+  "statement": "theorem openCoefficientOperationsExistence\n    (sections : SemilinearDerivedSectionsData.{t + 1, t, max u (t + 1)}\n      (ProEt.topology X) (IntegralOpenReduction.rings l E X)\n      (IntegralOpenReduction.transitions l E X)) :\n    ∃ o : Operations l E j,\n      o.openSystems = sections.localization (IntegralOpenReduction.openObject j) ∧\n        IsIso o.completedMap",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T222804-L-696166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T012832-L-2337870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

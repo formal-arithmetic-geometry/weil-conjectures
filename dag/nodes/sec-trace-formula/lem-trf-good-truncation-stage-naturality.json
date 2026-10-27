@@ -1,0 +1,411 @@
+{
+ "id": "lem-trf-good-truncation-stage-naturality",
+ "kind": "statement",
+ "title": "Canonical good-truncation comparisons commute with stage transitions",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], with cochain complexes, homotopy category and derived localization $Q:K(\\mathcal A)\\to D(\\mathcal A)$ [def-weil-abstract-derived-category], all in a common larger universe. For a complex $M$ let $\\tau_{\\le n}M$ be its good truncation, equal to $M^j$ for $j<n$, to $\\ker(d_M^n)$ for $j=n$, and to zero for $j>n$, with the induced differential. Write $c_n^M:\\tau_{\\le n}M\\to M$ and $k_n^M:\\tau_{\\le n}M\\to\\tau_{\\le n+1}M$ for the canonical inclusions, and use the induced truncation maps [lem-weil-pbc-truncation-descends]. For $n\\ge1$ let $E_n,G_n$ be complexes, with maps $u_n:E_n\\to E_{n+1}$ and $v_n:G_n\\to G_{n+1}$. Let $X,Y$ be arbitrary complexes and let $e_n:E_n\\to X$, $g_n:G_n\\to Y$ satisfy $e_{n+1}u_n=e_n$ and $g_{n+1}v_n=g_n$. Suppose $H^j(E_n)=H^j(G_n)=0$ for $j>n$, and $H^j(e_n),H^j(g_n)$ are isomorphisms for $j\\le n$. Let $\\alpha:X\\to Y$ be a quasi-isomorphism. The canonical formulas\n$$t_n^E=Q(\\tau_{\\le n}e_n)Q(c_n^{E_n})^{-1}:QE_n\\xrightarrow{\\sim}Q(\\tau_{\\le n}X),\\qquad\n t_n^G=Q(\\tau_{\\le n}g_n)Q(c_n^{G_n})^{-1}:QG_n\\xrightarrow{\\sim}Q(\\tau_{\\le n}Y)$$\nare defined isomorphisms in $D(\\mathcal A)$ and satisfy\n$$t_{n+1}^E Q(u_n)=Q(k_n^X)t_n^E,\\qquad t_{n+1}^G Q(v_n)=Q(k_n^Y)t_n^G.$$\nWith $A_n=Q(\\tau_{\\le n}\\alpha)$, the morphisms\n$$a_n=(t_n^G)^{-1}A_nt_n^E:QE_n\\xrightarrow{\\sim}QG_n$$\nare isomorphisms and obey both identities\n$$a_{n+1}Q(u_n)=Q(v_n)a_n,\\qquad Q(g_n)a_n=Q(\\alpha)Q(e_n).$$\nAll objects in the first identity have bounded above cohomology; the second identity is in the ambient derived category and imposes no cohomological bound on $X$ or $Y$. No termwise bound on $E_n,G_n$ or resolving class is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, diagram following “The problem is that” and sentence “The exact same argument shows that these maps are also compatible as n varies”; good truncation comparison and its transition calculation. Returned parent steps 4--5."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-truncation-descends"
+ ],
+ "proof": [
+  {
+   "text": "Write $T_r=\\tau_{\\le r}$ and use right-to-left composition. The functorial truncation maps and their natural stage inclusions are supplied by [lem-weil-pbc-truncation-descends]. On complexes, for $f:M\\to N$ one has $f c_r^M=c_r^N T_r(f)$ and $c_{r+1}^M k_r^M=c_r^M$. Indeed, below the cutoff the maps are the original components of $f$ or identities; at the cutoff the equality is the defining equality of the induced map on kernels, and above it the source is zero. Likewise $T_{r+1}(f)k_r^M=k_r^N T_r(f)$: below $r$ this is $f^j=f^j$, at $r$ both maps are the restriction of $f^r$ from $\\ker d_M^r$ to $N^r$, and above $r$ the source is zero. These equalities remain true after applying $Q$.",
+   "uses": [
+    "lem-weil-pbc-truncation-descends"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical upper truncation and its cohomology formula"
+   }
+  },
+  {
+   "text": "For either $(S_n,Z,s_n)=(E_n,X,e_n)$ or $(G_n,Y,g_n)$, [lem-weil-pbc-truncation-cohomology] says $H^j(c_n^{S_n})$ and $H^j(c_n^Z)$ are isomorphisms for $j\\le n$, and the truncated complexes have zero cohomology for $j>n$. The assumed vanishing of $H^j(S_n)$ therefore makes $c_n^{S_n}$ a quasi-isomorphism. Applying $H^j$ to $s_n c_n^{S_n}=c_n^Z T_n(s_n)$ shows that $H^j(T_n(s_n))$ is an isomorphism for $j\\le n$, using precisely the assumed isomorphism of $H^j(s_n)$. For $j>n$ it is a morphism between zero objects and hence invertible. Thus $T_n(s_n)$ is also a quasi-isomorphism. The localization $Q$ in [def-weil-abstract-derived-category] inverts both maps, so $t_n^S=Q(T_n(s_n))Q(c_n^{S_n})^{-1}$ is a defined isomorphism, for each tower.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical upper truncation and its cohomology formula"
+   }
+  },
+  {
+   "text": "Fix either $(S,Z,s,w)=(E,X,e,u)$ or $(G,Y,g,v)$. Set $C_n=Q(c_n^{S_n})$ and $B_n=Q(T_n(s_n))$. Step 1 and $s_{n+1}w_n=s_n$ give the following calculation in $D(\\mathcal A)$:\n$$\\begin{aligned}\nt_{n+1}^S Q(w_n)C_n\n&=B_{n+1}C_{n+1}^{-1}Q(w_n)Q(c_{n+1}^{S_n})Q(k_n^{S_n})\\\\\n&=B_{n+1}Q(T_{n+1}(w_n))Q(k_n^{S_n})\\\\\n&=Q(T_{n+1}(s_n))Q(k_n^{S_n})\\\\\n&=Q(k_n^Z)B_n\n=Q(k_n^Z)t_n^S C_n.\n\\end{aligned}$$\nThe first equality uses $c_n^{S_n}=c_{n+1}^{S_n}k_n^{S_n}$; the second uses naturality of $c_{n+1}$; the third uses functoriality of $T_{n+1}$; the fourth uses naturality of $k_n$. Cancel the isomorphism $C_n$ proved in Step 2. This proves both required transition identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, comparison diagram after “The problem is that” and compatibility as n varies; explicit calculation of the truncation comparison"
+   }
+  },
+  {
+   "text": "The first naturality identity of Step 1 gives, for either tower,\n$$Q(c_n^Z)t_n^S=Q(c_n^Z)Q(T_n(s_n))Q(c_n^{S_n})^{-1}=Q(s_n).$$\nThis holds in the ambient derived category. It uses the inverse of $Q(c_n^{S_n})$, established in Step 2, and makes no assertion that $Q(c_n^Z)$ is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, comparison diagram after “The problem is that” and compatibility as n varies; explicit calculation of the truncation comparison"
+   }
+  },
+  {
+   "text": "Since $\\alpha$ is a quasi-isomorphism, clause (a) of [lem-weil-pbc-truncation-descends] makes $T_n(\\alpha)$ a quasi-isomorphism; [def-weil-abstract-derived-category] therefore makes $A_n=Q(T_n(\\alpha))$ an isomorphism. Naturality of the stage inclusion in [lem-weil-pbc-truncation-descends], with $q=n+1$, gives $A_{n+1}Q(k_n^X)=Q(k_n^Y)A_n$. The first identity of Step 1 applied to $\\alpha$ also gives $Q(c_n^Y)A_n=Q(\\alpha)Q(c_n^X)$.",
+   "uses": [
+    "lem-weil-pbc-truncation-descends",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, comparison diagram after “The problem is that” and compatibility as n varies; explicit calculation of the truncation comparison"
+   }
+  },
+  {
+   "text": "The morphism $a_n=(t_n^G)^{-1}A_nt_n^E$ is a composite of isomorphisms. Steps 3 and 5 give\n$$\\begin{aligned}\na_{n+1}Q(u_n)\n&=(t_{n+1}^G)^{-1}A_{n+1}Q(k_n^X)t_n^E\\\\\n&=(t_{n+1}^G)^{-1}Q(k_n^Y)A_nt_n^E\n=Q(v_n)(t_n^G)^{-1}A_nt_n^E=Q(v_n)a_n.\n\\end{aligned}$$\nHere the penultimate equality is obtained by multiplying $t_{n+1}^GQ(v_n)=Q(k_n^Y)t_n^G$ by the inverses of the two $t$'s. Step 4 gives $Q(g_n)(t_n^G)^{-1}=Q(c_n^Y)$, so Steps 5 and 4 yield\n$$Q(g_n)a_n=Q(c_n^Y)A_nt_n^E=Q(\\alpha)Q(c_n^X)t_n^E=Q(\\alpha)Q(e_n).$$\nThus the augmentation identity also holds without cancelling a map into $X$ or $Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, comparison diagram after “The problem is that” and compatibility as n varies; explicit calculation of the truncation comparison"
+   }
+  },
+  {
+   "text": "The hypotheses already give cohomological upper bounds $n$ for $E_n,G_n$, and bounds $n+1$ for $E_{n+1},G_{n+1}$. The truncations $T_nX,T_nY$ and $T_{n+1}X,T_{n+1}Y$ have the corresponding bounds by [lem-weil-pbc-truncation-cohomology]. These bounds are preserved under passage to the derived category by [def-weil-abstract-derived-category]. Hence every object in the transition calculations has bounded above cohomology. The augmentation calculation takes place in the ambient $D(\\mathcal A)$; neither it nor the construction used any termwise bound, resolving class, or cohomological bound on $X,Y$.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, comparison diagram after “The problem is that” and compatibility as n varies; explicit calculation of the truncation comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-truncation-descends",
+  "lem-weil-pbc-truncation-cohomology",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/homology.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, the omitted compatibility calculation; Tag 0118, section-truncations, canonical upper truncation. Explicit formula and inverse-cancellation argument by Q89."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ιTruncLE_naturality|truncLEMap.*ι|right_fac_of_isStrictlyLE",
+   "results": {
+    "t": "2026-10-22T06:45:43Z",
+    "tool": "grep",
+    "query": "ιTruncLE_naturality|truncLEMap.*ι|right_fac_of_isStrictlyLE",
+    "sub": "",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean"
+    ],
+    "digest": "e401d9dc4ce65271"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.lean:50--88 supplies truncation inclusions and naturality only; Fractions.lean:73--88 constructs a roof for one strictly bounded morphism. Neither states the simultaneous comparison for supplied cohomological-stage models, both transition identities and the unbounded augmentation identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\", \"naturality\"",
+   "results": {
+    "t": "2026-10-22T06:45:43Z",
+    "tool": "loogle",
+    "query": "\"truncLE\", \"naturality\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "HomologicalComplex.ιTruncLE_naturality",
+     "HomologicalComplex.truncLE'ToRestriction_naturality",
+     "HomologicalComplex.ιTruncLE_naturality_assoc",
+     "HomologicalComplex.truncLE'ToRestriction_naturality_assoc",
+     "CochainComplex.ιTruncLE_naturality",
+     "CochainComplex.ιTruncLE_naturality_assoc"
+    ],
+    "digest": "e7ae7c173f72363b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.lean:50--88 supplies truncation inclusions and naturality only; Fractions.lean:73--88 constructs a roof for one strictly bounded morphism. Neither states the simultaneous comparison for supplied cohomological-stage models, both transition identities and the unbounded augmentation identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of towers approximating good truncations of quasi-isomorphic complexes in the derived category commutes with stage transitions and augmentations",
+   "results": {
+    "t": "2026-10-22T06:45:55Z",
+    "tool": "leanfinder",
+    "query": "Canonical comparison of towers approximating good truncations of quasi-isomorphic complexes in the derived category commutes with stage transitions and augmentations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom",
+     "CochainComplex.g_shortComplexTruncLEX₃ToTruncGE",
+     "HomologicalComplex.stupidTruncMap_stupidTruncXIso_hom_assoc",
+     "CochainComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+     "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+     "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE",
+     "HomologicalComplex.stupidTruncMap_comp",
+     "HomologicalComplex.stupidTruncMap_comp_assoc"
+    ],
+    "digest": "26241caa4052b237"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.lean:50--88 supplies truncation inclusions and naturality only; Fractions.lean:73--88 constructs a roof for one strictly bounded morphism. Neither states the simultaneous comparison for supplied cohomological-stage models, both transition identities and the unbounded augmentation identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good truncation models have canonical derived isomorphisms compatible with the transition to the next truncation and with augmentations into arbitrary complexes",
+   "results": {
+    "t": "2026-10-22T06:45:58Z",
+    "tool": "leansearch",
+    "query": "Good truncation models have canonical derived isomorphisms compatible with the transition to the next truncation and with augmentations into arbitrary complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChainComplex.truncateAugment",
+     "CategoryTheory.CosimplicialObject.truncationCompTrunc",
+     "CochainComplex.augmentTruncate",
+     "HomologicalComplex.ιTruncLE",
+     "CochainComplex.ιTruncLE",
+     "HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported",
+     "HomologicalComplex.instIsIsoπTruncGEOfIsStrictlySupported",
+     "HomologicalComplex.instMonoιTruncLE"
+    ],
+    "digest": "06f334f39341aa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: CochainComplex.lean:50--88 supplies truncation inclusions and naturality only; Fractions.lean:73--88 constructs a roof for one strictly bounded morphism. Neither states the simultaneous comparison for supplied cohomological-stage models, both transition identities and the unbounded augmentation identity."
+  },
+  {
+   "tool": "grep",
+   "query": "ιTruncLE_naturality|quasiIso_truncLEMap_iff|quasiIso_ιTruncLE_iff",
+   "results": {
+    "t": "2026-10-23T21:15:14Z",
+    "tool": "grep",
+    "query": "ιTruncLE_naturality|quasiIso_truncLEMap_iff|quasiIso_ιTruncLE_iff",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+     "Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean",
+     "Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean",
+     "Mathlib/Algebra/Homology/Embedding/TruncLE.lean"
+    ],
+    "digest": "37ba3e2787d4f82f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned naturality lemmas supply the raw inclusion square only. CochainComplex.lean:57,86,280,305 supplies truncation cohomology and quasi-isomorphism criteria; DerivedCategory/Fractions.lean:73 supplies a bounded roof. None states the supplied-stage comparison formulas and their simultaneous stage and ambient augmentation identities. Read the sources; these are inputs, not a one-line specialization proving the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good truncation derived isomorphism of approximating complexes is natural in the truncation degree and in quasi-isomorphisms",
+   "results": {
+    "t": "2026-10-23T21:15:14Z",
+    "tool": "leansearch",
+    "query": "Good truncation derived isomorphism of approximating complexes is natural in the truncation degree and in quasi-isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.πTruncGE_naturality",
+     "CochainComplex.πTruncGE_naturality_assoc",
+     "HomologicalComplex.πTruncGE_naturality",
+     "CochainComplex.ιTruncLE_naturality",
+     "HomologicalComplex.ιTruncLE_naturality_assoc",
+     "CochainComplex.ιTruncLE_naturality_assoc",
+     "HomologicalComplex.ιTruncLE_naturality",
+     "CategoryTheory.CosimplicialObject.truncationCompTrunc"
+    ],
+    "digest": "86423027714f7120"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned naturality lemmas supply the raw inclusion square only. CochainComplex.lean:57,86,280,305 supplies truncation cohomology and quasi-isomorphism criteria; DerivedCategory/Fractions.lean:73 supplies a bounded roof. None states the supplied-stage comparison formulas and their simultaneous stage and ambient augmentation identities. Read the sources; these are inputs, not a one-line specialization proving the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\", \"naturality\"",
+   "results": {
+    "t": "2026-10-23T21:15:15Z",
+    "tool": "loogle",
+    "query": "\"truncLE\", \"naturality\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "HomologicalComplex.ιTruncLE_naturality",
+     "HomologicalComplex.truncLE'ToRestriction_naturality",
+     "HomologicalComplex.ιTruncLE_naturality_assoc",
+     "HomologicalComplex.truncLE'ToRestriction_naturality_assoc",
+     "CochainComplex.ιTruncLE_naturality",
+     "CochainComplex.ιTruncLE_naturality_assoc"
+    ],
+    "digest": "e7ae7c173f72363b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned naturality lemmas supply the raw inclusion square only. CochainComplex.lean:57,86,280,305 supplies truncation cohomology and quasi-isomorphism criteria; DerivedCategory/Fractions.lean:73 supplies a bounded roof. None states the supplied-stage comparison formulas and their simultaneous stage and ambient augmentation identities. Read the sources; these are inputs, not a one-line specialization proving the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison maps from cohomologically bounded stage models to good truncations in the derived category commute with stage transitions and augmentations",
+   "results": {
+    "t": "2026-10-23T21:15:15Z",
+    "tool": "leanfinder",
+    "query": "Canonical comparison maps from cohomologically bounded stage models to good truncations in the derived category commute with stage transitions and augmentations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ComplexShape.Embedding.πTruncGENatTrans",
+     "CochainComplex.g_shortComplexTruncLEX₃ToTruncGE",
+     "CochainComplex.shortComplexTruncLEX₃ToTruncGE",
+     "CochainComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+     "HomologicalComplex.ιTruncLE_naturality_assoc",
+     "CochainComplex.πTruncGE_naturality_assoc",
+     "HomologicalComplex.πTruncGE_naturality",
+     "HomologicalComplex.ιTruncLE_naturality"
+    ],
+    "digest": "3c23c6fc838affa6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned naturality lemmas supply the raw inclusion square only. CochainComplex.lean:57,86,280,305 supplies truncation cohomology and quasi-isomorphism criteria; DerivedCategory/Fractions.lean:73 supplies a bounded roof. None states the supplied-stage comparison formulas and their simultaneous stage and ambient augmentation identities. Read the sources; these are inputs, not a one-line specialization proving the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the isomorphism from a cohomological truncation model to the standard truncation, compatibility of consecutive stages and quasi-isomorphic ambient complexes",
+   "results": {
+    "t": "2026-10-23T21:16:01Z",
+    "tool": "leanfinder",
+    "query": "Naturality of the isomorphism from a cohomological truncation model to the standard truncation, compatibility of consecutive stages and quasi-isomorphic ambient complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.πTruncGE_naturality_assoc",
+     "CochainComplex.ιTruncLE_naturality_assoc",
+     "CochainComplex.ιTruncLE_naturality",
+     "HomologicalComplex.πTruncGE_naturality",
+     "CochainComplex.πTruncGE_naturality",
+     "HomologicalComplex.πTruncGE_naturality_assoc",
+     "HomologicalComplex.ιTruncLE_naturality",
+     "HomologicalComplex.ιTruncLE_naturality_assoc"
+    ],
+    "digest": "ecfcf5c3f6d3ad7f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the returned naturality lemmas supply the raw inclusion square only. CochainComplex.lean:57,86,280,305 supplies truncation cohomology and quasi-isomorphism criteria; DerivedCategory/Fractions.lean:73 supplies a bounded roof. None states the supplied-stage comparison formulas and their simultaneous stage and ambient augmentation identities. Read the sources; these are inputs, not a one-line specialization proving the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-stage-roof-comparison",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. Proof of Tag 0794: comparison of bounded-above stages by common roofs, including compatibility as the stage varies. Supporting re-split: Tag 0794, proposition-left-derived-exists, diagram following “The problem is that” and sentence “The exact same argument shows that these maps are also compatible as n varies”; good truncation comparison and its transition calculation. Returned parent steps 4--5.",
+   "via": [
+    "lem-trf-bounded-stage-roof-comparison",
+    "lem-trf-unbounded-left-derived-criterion",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-good-truncation-stage-naturality",
+  "worker": "stage1",
+  "summary": "Q89 checked Tag 0794 and Tag 0118, searched the project and Mathlib, and supplied seven proof steps with no new nodes. Reuses truncation cohomology and descent, proves all inverse cancellations explicitly, and preserves arbitrary ambient complexes and cohomologically rather than termwise bounded stages. Statement unchanged.",
+  "blueprint": "Supports lem-trf-local-term-locality proof (1)--(2) through the existing chain in blueprint.from.via; specifically realizes the Tag 0794 comparison needed in the parent bounded-stage-roof-comparison steps 4--5. The current blueprint ancestor does not state this generic auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-descends",
+    "why": "Generic functorial truncation and preservation of quasi-isomorphisms, used as a black box in Steps 1 and 5; no node of sk-i-curve-zero supplies this homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-descends"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-c23b8e460",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-c23b8e460 (reviewer sub-agent of L); spot-checked: Read the item in full; it has 7 steps and no new nodes, and its statement is unchanged. Hand-checked identities: Step 3 (C_{n+1}^{-1}Q(w_n)Q(c_{n+1}^{S_n})=Q(T_{n+1}w_n), then s_{n+1}w_n=s_n, then naturality of k, cancelling only C_n, which Step 2 proved invertible); Step 4 (Q(c^Z)t_n=Q(s_n), with c^Z never inverted); Step 6 (the transition identity, and the augmentation identity via Q(g_n)(t^G_n)^{-1}=Q(c^Y)). Step 2 is a correct 2-out-of-3 argument using lem-weil-pbc-truncation-cohomology and the vanishing above n. Step 5 uses clause (a) and the i_{n+1} naturality of lem-weil-pbc-truncation-descends. The hypotheses match Stacks 0794 (derived.tex:9384-9432: the diagram after 'The problem is that', and 'compatible as n varies'). Tag 0118 is homology.tex:3612. The parent lem-trf-bounded-stage-roof-comparison step 2 uses exactly a_n, both identities and the ambient augmentation equation for unbounded X,Y, so nothing is weakened. Edge cases tested: zero complexes, identity α, n=1 with nonzero H^1/H^2 of X, unbounded X. No duplicate in the DAG truncation/stage scan. No cycles: the closures of the three cited nodes contain neither the item nor its parent. Accepted tool_use: lem-weil-pbc-truncation-descends, generic truncation functoriality that is already a stmt_dep. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.GoodTruncationStageNaturality",
+  "declaration": "DerivedCategory.good_truncation_stage_naturality",
+  "file": "lean/Sheaf/Algebra/Homology/GoodTruncationStageNaturality.lean",
+  "statement": "theorem good_truncation_stage_naturality {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] (E G : ℕ → CochainComplex A ℤ) (uE : ∀ k : ℕ, E k ⟶ E (k + 1)) (vG : ∀ k : ℕ, G k ⟶ G (k + 1)) (X Y : CochainComplex A ℤ) (e : ∀ k : ℕ, E k ⟶ X) (g : ∀ k : ℕ, G k ⟶ Y) (he : ∀ k : ℕ, uE k ≫ e (k + 1) = e k) (hg : ∀ k : ℕ, vG k ≫ g (k + 1) = g k) (hEvanish : ∀ (k : ℕ) (j : ℤ), (k : ℤ) + 1 < j → IsZero ((E k).homology j)) (hGvanish : ∀ (k : ℕ) (j : ℤ), (k : ℤ) + 1 < j → IsZero ((G k).homology j)) (heiso : ∀ (k : ℕ) (j : ℤ), j ≤ (k : ℤ) + 1 → IsIso (HomologicalComplex.homologyMap (e k) j)) (hgiso : ∀ (k : ℕ) (j : ℤ), j ≤ (k : ℤ) + 1 → IsIso (HomologicalComplex.homologyMap (g k) j)) (α : X ⟶ Y) (hα : QuasiIso α) : ∃ (iX : ∀ k : ℕ, X.truncLE ((k : ℤ) + 1) ⟶ X.truncLE ((k : ℤ) + 2)) (iY : ∀ k : ℕ, Y.truncLE ((k : ℤ) + 1) ⟶ Y.truncLE ((k : ℤ) + 2)), (∀ k : ℕ, iX k ≫ X.ιTruncLE ((k : ℤ) + 2) = X.ιTruncLE ((k : ℤ) + 1)) ∧ (∀ k : ℕ, iY k ≫ Y.ιTruncLE ((k : ℤ) + 2) = Y.ιTruncLE ((k : ℤ) + 1)) ∧ ∃ (cE : ∀ k : ℕ, Q.obj ((E k).truncLE ((k : ℤ) + 1)) ≅ Q.obj (E k)) (cG : ∀ k : ℕ, Q.obj ((G k).truncLE ((k : ℤ) + 1)) ≅ Q.obj (G k)) (tE : ∀ k : ℕ, Q.obj (E k) ≅ Q.obj (X.truncLE ((k : ℤ) + 1))) (tG : ∀ k : ℕ, Q.obj (G k) ≅ Q.obj (Y.truncLE ((k : ℤ) + 1))) (a : ∀ k : ℕ, Q.obj (E k) ≅ Q.obj (G k)), (∀ k : ℕ, (cE k).hom = Q.map ((E k).ιTruncLE ((k : ℤ) + 1))) ∧ (∀ k : ℕ, (cG k).hom = Q.map ((G k).ιTruncLE ((k : ℤ) + 1))) ∧ (∀ k : ℕ, (tE k).hom = (cE k).inv ≫ Q.map (CochainComplex.truncLEMap (e k) ((k : ℤ) + 1))) ∧ (∀ k : ℕ, (tG k).hom = (cG k).inv ≫ Q.map (CochainComplex.truncLEMap (g k) ((k : ℤ) + 1))) ∧ (∀ k : ℕ, Q.map (uE k) ≫ (tE (k + 1)).hom = (tE k).hom ≫ Q.map (iX k)) ∧ (∀ k : ℕ, Q.map (vG k) ≫ (tG (k + 1)).hom = (tG k).hom ≫ Q.map (iY k)) ∧ (∀ k : ℕ, IsIso (Q.map (CochainComplex.truncLEMap α ((k : ℤ) + 1)))) ∧ (∀ k : ℕ, (a k).hom = (tE k).hom ≫ Q.map (CochainComplex.truncLEMap α ((k : ℤ) + 1)) ≫ (tG k).inv) ∧ (∀ k : ℕ, Q.map (uE k) ≫ (a (k + 1)).hom = (a k).hom ≫ Q.map (vG k)) ∧ (∀ k : ℕ, (a k).hom ≫ Q.map (g k) = Q.map (e k) ≫ Q.map α) ∧ (∀ k : ℕ, ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero ((homologyFunctor A j).obj (Q.obj (E k))) ∧ IsZero ((homologyFunctor A j).obj (Q.obj (G k))) ∧ IsZero ((homologyFunctor A j).obj (Q.obj (X.truncLE ((k : ℤ) + 1)))) ∧ IsZero ((homologyFunctor A j).obj (Q.obj (Y.truncLE ((k : ℤ) + 1)))))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c3a4dde5",
+  "group": "Q46",
+  "result": "pass",
+  "note": "The only change is the lean record, and its statement field matches the file exactly. Checked every clause against the node: k ↦ n=k+1 covers n≥1. Vanishing and isomorphism hypotheses are on cohomology. iX/iY are fixed by factoring through the mono ιTruncLE, the same characterization as the i of truncation_descends. cE/cG/tE/tG/a are pinned to their exact formulas. Both t transitions and both a identities are present; the augmentation identity is in the ambient D(A) with X and Y unbounded, and the bounded-above clause covers E, G and the two truncations. Universes u/v/w are independent. One notion per definition: Mathlib truncLE/ιTruncLE/truncLEMap, the same as the dependency. Stmt_deps match the node. Stacks derived.tex 9370-9440 matches the source place. Docstrings carry the source place, the blueprint tag and the 7 proof steps. The only proof is sorry. Worker report and second-reading sections are present. Not recompiled because no file changed."
+ }
+}

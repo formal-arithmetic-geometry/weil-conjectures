@@ -1,0 +1,220 @@
+{
+ "id": "lem-trf-etale-closed-support-flatness",
+ "kind": "statement",
+ "title": "Relative flatness through an etale diagram and a closed support",
+ "statement": "Let $X,S,U,T,Z$ be schemes [def-pc-scheme], with morphisms $f:X\\to S$, $a:U\\to T$, $g:U\\to X$, $e:T\\to S$ satisfying $fg=ea$. Assume $g$ and $e$ are etale [def-weil-etale-morphism], and $i:Z\\hookrightarrow U$ is a closed immersion [def-weil-closed-immersion]. Let $\\mathcal F$ and $\\mathcal G$ be quasi-coherent modules on $X$ and $Z$, respectively [pqf-def-coherent], and fix an $\\mathcal O_U$-linear isomorphism $H:=g^*\\mathcal F\\cong i_*\\mathcal G$, with pullback and pushforward as in [def-pc-module-pullback]. For $z\\in Z$, put $u=i(z)$, $x=g(u)$, $t=a(u)$, and $s=e(t)=f(x)$. Relative flatness is as in [def-pc-scheme-module-flat-over], with structure maps $f$, $a$, and $ai$. Then the following three neighbourhood conditions are equivalent: $\\mathcal F$ is flat over $S$ on an open neighbourhood of $x$; $H$ is flat over $T$ on an open neighbourhood of $u$; $\\mathcal G$ is flat over $T$ on an open neighbourhood of $z$. Separately, the following three stalk conditions are equivalent: $\\mathcal F_x$ is flat over $\\mathcal O_{S,s}$; $H_u$ is flat over $\\mathcal O_{T,t}$; $\\mathcal G_z$ is flat over $\\mathcal O_{T,t}$. Stalks [def-pc-module-stalk-functor] carry the scalar actions induced by the displayed structure maps. No cartesian-square, affineness, finite-type, finite-presentation, residue-field-isomorphism or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057U, lemma-devissage-flat; Supporting elementary-devissage flatness branch: the comparisons (1) with (4) and (4) with (2), and the corresponding first two stalk comparisons (a) with (b)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "First obtain a comparison at every point $w\\in U$, writing $v=g(w)$, $r=a(w)$ and $b=f(v)=e(r)$. By [lem-weil-pbc-module-pullback-quasi-coherent], $H=g^*\\mathcal F$ is quasi-coherent. Etaleness includes flatness by [def-weil-etale-morphism], so [lem-trf-relative-flatness-source-cover], applied to $U\\xrightarrow{g}X\\xrightarrow{f}S$, gives $\\mathcal F_v$ flat over $\\mathcal O_{S,b}$ if and only if $H_w$ is flat over $\\mathcal O_{S,b}$. Apply [lem-trf-etale-local-ring-flatness] to $e:T\\to S$, $r\\in T$, and the $\\mathcal O_{T,r}$-module $H_w$ with action through $a$. It identifies the latter condition with flatness over $\\mathcal O_{T,r}$. The restricted action is exactly the action through $fg$, since $fg=ea$. Thus these pointwise equivalences hold for every $w$, without a cartesian-square assumption.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-weil-etale-morphism",
+    "lem-trf-relative-flatness-source-cover",
+    "lem-trf-etale-local-ring-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, proof of (1) versus (4) and (a) versus (b); Tag 05BA, lemma-etale-flat-up-down-local-ring; Morphisms Tag 02JZ, lemma-flat-permanence."
+   }
+  },
+  {
+   "text": "Use the stalk characterization in [def-pc-scheme-module-flat-over]. If $\\mathcal F$ is flat over $S$ on an open $V\\ni x$, then $g^{-1}(V)$ is open and contains $u$; Step 1 at every point of this inverse image shows $H$ flat over $T$ there. Conversely, if $H$ is flat over $T$ on an open $W\\ni u$, then $g(W)$ is an open neighbourhood of $x$ by [lem-weil-pbc-etale-morphism-open-map]. Every $v\\in g(W)$ has a preimage $w\\in W$, so Step 1 shows $\\mathcal F_v$ flat over $\\mathcal O_{S,f(v)}$. Thus $\\mathcal F$ is flat over $S$ throughout $g(W)$. This proves the first two neighbourhood conditions equivalent; no deduction of neighbourhood flatness from flatness at just one point is made.",
+   "uses": [
+    "def-pc-scheme-module-flat-over",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, paragraph using openness of g and Morphisms Tag 02JZ; Morphisms Tag 03WT, lemma-etale-open."
+   }
+  },
+  {
+   "text": "A closed immersion is a homeomorphism onto its closed image by [def-weil-closed-immersion], so [lem-weil-pbc-closed-pushforward-stalks] applies to $i$ and $\\mathcal G$. At each $q\\in Z$ it gives a bijective $\\mathcal O_{U,i(q)}$-linear germ map $(i_*\\mathcal G)_{i(q)}\\to\\mathcal G_q$, with the action on the right through $i^\\sharp_q$, and it gives a zero stalk at every point outside $i(Z)$. Apply the stalk functor [def-pc-module-stalk-functor] to the given isomorphism $H\\cong i_*\\mathcal G$ and its inverse. Composing with the germ map identifies $H_{i(q)}$ with $\\mathcal G_q$, linearly over $\\mathcal O_{T,a(i(q))}$: a scalar acts on the right through $i^\\sharp_q a^\\sharp_{i(q)}=(ai)^\\sharp_q$. Hence their flatness over this same base local ring is equivalent. Indeed, tensoring an injection with isomorphic modules gives conjugate maps, so injectivity is unchanged by [def-weil-pbc-flat-ring-map]; the zero module is flat since tensoring with it gives the zero map between zero modules. Thus the marked stalk conditions for $H_u$ and $\\mathcal G_z$ are equivalent, and $H_w$ is flat over the base local ring for every $w\\notin i(Z)$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-pc-module-stalk-functor",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AE, lemma-stalks-closed-pushforward; scalar compatibility as in Modules Tag 08KS, lemma-i-star-equivalence; applied to the closed-support comparison in flat.tex Tag 057U."
+   }
+  },
+  {
+   "text": "If $H$ is flat over $T$ on an open $V\\ni u$, Step 3 at each $q\\in i^{-1}(V)$ and [def-pc-scheme-module-flat-over] show $\\mathcal G$ flat over $T$ on the open $i^{-1}(V)\\ni z$. Conversely, suppose $\\mathcal G$ is flat over $T$ on an open $W\\ni z$ in $Z$. The subspace-topology clause of [def-weil-closed-immersion] supplies an open $V\\subseteq U$ with $i^{-1}(V)=W$; it contains $u=i(z)$. At every point of $V\\cap i(Z)$, Step 3 transfers flatness from the corresponding stalk of $\\mathcal G$, and at every point of $V\\setminus i(Z)$ the stalk of $H$ is zero and flat by Step 3. The stalk characterization therefore shows $H$ flat over $T$ on $V$. This proves the last two neighbourhood conditions equivalent.",
+   "uses": [
+    "def-pc-scheme-module-flat-over",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, closed-support part of (4) versus (2); topological shrinking written out using the closed embedding and the stalk calculation of Step 3."
+   }
+  },
+  {
+   "text": "Steps 2 and 4 give all three neighbourhood conditions equivalent by transitivity. Specializing Step 1 to $w=u$ compares $\\mathcal F_x$ with $H_u$, with base points $s$ and $t$ as in the statement. Step 3 at $q=z$ compares $H_u$ with $\\mathcal G_z$ over $\\mathcal O_{T,t}$. Transitivity gives the separate three-way stalk equivalence. These are two separate equivalence assertions; none of the steps identifies flatness at a single stalk with flatness on a neighbourhood.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, assembly of the two displayed triples."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-weil-etale-morphism",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-trf-etale-local-ring-flatness",
+  "def-pc-scheme-module-flat-over",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057U, lemma-devissage-flat, etale-source and closed-support comparisons, using Tags 02JZ, 05BA, 03WT and 00AE; the closed-support neighbourhood shrinking is expanded pointwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a quasi coherent module is preserved and reflected by etale changes of source and base and by a closed immersion of its support",
+   "results": "8 hits. AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.instOfIsOpenImmersion; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Flat.flat_appLE The scheme hits concern flat morphisms, not relative flatness of arbitrary quasi-coherent modules; the module hits give algebraic descent/localization ingredients, not the etale diagram and closed-support neighbourhood/stalk theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, AlgebraicGeometry.Etale",
+   "results": "0 hits. No declarations returned. The scheme hits concern flat morphisms, not relative flatness of arbitrary quasi-coherent modules; the module hits give algebraic descent/localization ingredients, not the etale diagram and closed-support neighbourhood/stalk theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(pushforward|closedImmersion|etale)|((pushforward|closedImmersion|etale).*flat)",
+   "results": "11 hits. Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean Searched Mathlib/AlgebraicGeometry. The scheme hits concern flat morphisms, not relative flatness of arbitrary quasi-coherent modules; the module hits give algebraic descent/localization ingredients, not the etale diagram and closed-support neighbourhood/stalk theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of a quasi coherent module over the base detected after etale source pullback etale base change and closed immersion pushforward",
+   "results": "8 hits. Module.Flat.of_flat_tensorProduct; Module.Flat.isBaseChange; RingHom.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.isStableUnderBaseChange; Module.FaithfullyFlat.toFlat; Module.flat_iff_of_isLocalization; Module.Flat.of_isLocalizedModule; IsSMulRegular.of_flat_of_isBaseChange The scheme hits concern flat morphisms, not relative flatness of arbitrary quasi-coherent modules; the module hits give algebraic descent/localization ingredients, not the etale diagram and closed-support neighbourhood/stalk theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, AlgebraicGeometry.Etale",
+   "results": "0 hits; . Logged digest 4f53cda18c2baa0c. Scheme-flatness results concern morphisms rather than arbitrary quasi-coherent modules; the localization results are algebraic ingredients, and none gives both the diagram/support neighbourhood and stalk assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a quasi coherent module is equivalent through etale source pullback and an etale base morphism and a closed support",
+   "results": "8 hits; AlgebraicGeometry.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.of_stalkMap. Logged digest 58a50281c0502c2a. Scheme-flatness results concern morphisms rather than arbitrary quasi-coherent modules; the localization results are algebraic ingredients, and none gives both the diagram/support neighbourhood and stalk assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(pushforward|closedImmersion|etale)|((pushforward|closedImmersion|etale).*flat)",
+   "results": "11 hits; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean. Searched Mathlib/AlgebraicGeometry. Logged digest c573689a2fd4c7d8. Scheme-flatness results concern morphisms rather than arbitrary quasi-coherent modules; the localization results are algebraic ingredients, and none gives both the diagram/support neighbourhood and stalk assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness over a base of a quasi coherent sheaf is detected on an etale neighbourhood and agrees with flatness of the sheaf on a closed support",
+   "results": "8 hits; Module.flat_iff_of_isLocalization, Module.flat_of_isLocalized_span, Module.Flat.of_isLocalizedModule, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.flat_appLE, RingHom.Flat.propertyIsLocal. Logged digest ee57c009b8c01206. Scheme-flatness results concern morphisms rather than arbitrary quasi-coherent modules; the localization results are algebraic ingredients, and none gives both the diagram/support neighbourhood and stalk assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf is relatively flat at a point if and only if its pullback by a flat morphism is relatively flat at a lift of that point",
+   "results": "8 hits; AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat, RingHom.Flat.propertyIsLocal. Logged digest 97b40474c26e2a23. Scheme-flatness results concern morphisms rather than arbitrary quasi-coherent modules; the localization results are algebraic ingredients, and none gives both the diagram/support neighbourhood and stalk assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-elementary-devissage-flatness",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting elementary-devissage flatness branch: the comparisons (1) with (4) and (4) with (2), and the corresponding first two stalk comparisons (a) with (b).",
+   "via": [
+    "lem-trf-elementary-devissage-flatness",
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-trf-flat-finite-type-flat-point-local"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-closed-support-flatness",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five proof steps reuse flat source descent, etale base local-ring flatness, etale openness and closed-pushforward stalks. Neighbourhood comparisons are proved by inverse images/open images and the closed-subspace topology, without using openness of a flat locus. All base actions are checked. No new nodes. Fresh logged Mathlib searches with two semantic phrasings found no complete match.",
+  "blueprint": "The supporting Tag 057U branch inherited from lem-trf-local-term-locality: Steps 1-2 realize (1) versus (4) and the first stalk comparison; Steps 3-4 realize (4) versus (2) and its stalk comparison. The latest blueprint ancestor proof (1)-(2), normal-cone specialization, is read as the ancestor route; no change to that route or to the unit is made."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-c90cf4767",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-c90cf4767 (reviewer sub-agent of L); spot-checked: I read the item in full, every cited node's statement and Stacks flat.tex Tag 057U (statement and full proof). The delivery adds no new nodes and leaves the statement and stmt_deps unchanged. Step 1: lem-trf-relative-flatness-source-cover applies with h=g (étale, hence flat). lem-trf-etale-local-ring-flatness applies to H_w as an O_{T,r}-module through a^♯. The two O_{S,b}-actions agree because a^♯e^♯=(ea)^♯=(fg)^♯, and no cartesian square is used. Step 2: inverse images give one direction; the open image g(W) from lem-weil-pbc-etale-morphism-open-map gives the other, with a pointwise lift for each point. Neighbourhood flatness is never inferred from flatness at a single point. Step 3: the closed-pushforward-stalks node (Lean sorry-free) gives zero stalks off i(Z) and an O_{U,i(q)}-linear germ bijection. Restricting along a^♯ gives O_T-linearity through (ai)^♯. Step 4: the subspace-topology choice W=i^{-1}(V) is correct, and openness of i(Z)∩V is not needed. Step 5: transitivity. Edge cases tested: empty Z, identity maps, the non-flat closed immersion Spec F_2→Spec Z, and étale maps with residue-field extensions. The parent elementary-devissage-flatness uses the item consistently: it inverts the isomorphism and has ai=hπ. Duplicate search over dag/nodes: the algebraic-space lemma lem-sfb-space-closed-pushforward-relative-flatness is in a different setting, and the flattening-transfer lemmas state other things. There is no cycle and no SGA source. Accepted tool uses, both Lean-closed: lem-weil-pbc-module-pullback-quasi-coherent and lem-weil-pbc-closed-pushforward-stalks (both sk-thm-p1). All three kinds of Mathlib search are recorded, and proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedSupportFlatness",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etale_closed_support_flatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedSupportFlatness.lean",
+  "statement": "theorem etale_closed_support_flatness {X S U T Z : Scheme.{u}} (f : X ⟶ S) (a : U ⟶ T) (g : U ⟶ X) (e : T ⟶ S) (_hcomm : g ≫ f = a ≫ e) [Etale g] [Etale e] (i : Z ⟶ U) [IsClosedImmersion i] (F : X.Modules) (G : Z.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (_hiso : (tensorPullback g).obj F ≅ (pushforward i).obj G) (z : Z) : ((∃ V : X.Opens, g (i z) ∈ V ∧ ((tensorPullback V.ι).obj F).IsFlatOver (V.ι ≫ f)) ↔ (∃ V : U.Opens, i z ∈ V ∧ ((tensorPullback V.ι).obj ((tensorPullback g).obj F)).IsFlatOver (V.ι ≫ a))) ∧ ((∃ V : U.Opens, i z ∈ V ∧ ((tensorPullback V.ι).obj ((tensorPullback g).obj F)).IsFlatOver (V.ι ≫ a)) ↔ (∃ V : Z.Opens, z ∈ V ∧ ((tensorPullback V.ι).obj G).IsFlatOver (V.ι ≫ (i ≫ a)))) ∧ (Module.Flat (S.presheaf.stalk (f (g (i z)))) ((ModuleCat.restrictScalars (f.stalkMap (g (i z))).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace (g (i z))).obj F)) ↔ Module.Flat (T.presheaf.stalk (a (i z))) ((ModuleCat.restrictScalars (a.stalkMap (i z)).hom).obj ((RingedSpace.moduleStalkFunctor U.toRingedSpace (i z)).obj ((tensorPullback g).obj F)))) ∧ (Module.Flat (T.presheaf.stalk (a (i z))) ((ModuleCat.restrictScalars (a.stalkMap (i z)).hom).obj ((RingedSpace.moduleStalkFunctor U.toRingedSpace (i z)).obj ((tensorPullback g).obj F))) ↔ Module.Flat (T.presheaf.stalk ((i ≫ a) z)) ((ModuleCat.restrictScalars ((i ≫ a).stalkMap z).hom).obj ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj G)))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b6b41ee1",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Only the item's lean record differs from live; lean.statement is verbatim the file's signature. Clause by clause the Lean matches the node: Scheme.{u} X S U T Z; g ≫ f = a ≫ e; Etale g and e; IsClosedImmersion i; F and G quasi-coherent only; iso (tensorPullback g).obj F ≅ (pushforward i).obj G. Neighbourhood triple uses ∃ V, point ∈ V ∧ (tensorPullback V.ι).obj _ |>.IsFlatOver (V.ι ≫ f / a / i≫a); stalk triple restricts scalars along f.stalkMap, a.stalkMap and (i≫a).stalkMap of moduleStalkFunctor. No extra hypotheses; the two triples stay separate. Read IsFlatOver, moduleStalkFunctor, tensorPullback and pushforward; conventions match parent ElementaryDevissageFlatness. Node's generalisation of Stacks 057U is sound (étale openness, stalk flat descent, subspace topology, zero stalks off i(Z)). Edge cases empty Z, zero modules, identities, non-flat Spec F2→Spec Z, residue extensions OK. Docstrings carry source, blueprint and 5 proof steps; proof is only sorry; no duplicate found; report has both required sections. No findings."
+ }
+}

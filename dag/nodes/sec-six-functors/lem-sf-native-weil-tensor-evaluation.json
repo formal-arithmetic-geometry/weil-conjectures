@@ -1,0 +1,167 @@
+{
+ "id": "lem-sf-native-weil-tensor-evaluation",
+ "kind": "statement",
+ "title": "Forgetting preserves representative-normalized evaluation",
+ "statement": "Fix M and ordinary and native closed structures S,W [def-sf-native-weil-closed-models], a tensor comparison t, a presentation N [def-sf-native-weil-tensor-presentation] for W.monoidal and t, native adjunction normalization hW, and Hom comparison chi with NativeHomRepresentativeCompatibility. For every K,L, forgetting W.evaluation(K,L) equals t at (M.weilHom(K,L),K), followed by S.tensor applied to (chi(K,L),identity), then S.evaluation(FK,FL). All structures and comparisons are inputs: this single evaluation square asserts no existence, coherence or unit compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-sf-native-weil-tensor-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the fully proved native_weil_representative_uncurry. Its proof extends the projection-normalized Hom square to the K-flat source, compares the native and ordinary chain uncurrying maps on tensor summands, and pastes their localized normalization and model-forgetting squares.",
+   "uses": [
+    "lem-sf-native-weil-representative-uncurry",
+    "def-sf-native-weil-tensor-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+   }
+  },
+  {
+   "text": "For K-flat P and K-injective I the generic proved NativeCurrying.hom_isKInjective shows that Hom(P,I) is K-injective: currying turns a map from an acyclic complex into a map from its acyclic tensor with P to I, hence a null-homotopy. Choose a K-flat representative Q of the derived internal Hom using N.localization. K-injective fullness of localization lifts its isomorphism into Q(Hom(P,I)) to a chain map φ. Apply the preceding uncurrying identity, identify inverse transposition of this map with tensoring its representative isomorphism followed by evaluation, and cancel the invertible tensor map. This proves the evaluation square on (Q(P),Q(I)).",
+   "uses": [
+    "def-sf-native-weil-tensor-presentation",
+    "lem-sf-native-ordinary-representative-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+   }
+  },
+  {
+   "text": "K-flat localization is essentially surjective, and K-injective representatives cover all target objects. Transport the representative evaluation identity along these two isomorphisms. The private generic evaluation_of_iso proof uses only naturality of the two tensor and Hom comparisons, source naturality of evaluation, and the ordinary adjunction counit naturality; it constructs no symmetry or coherence datum. This gives the stated square for every K,L.",
+   "uses": [
+    "def-sf-native-weil-tensor-presentation",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-representative-uncurry",
+  "def-sf-native-weil-tensor-presentation",
+  "lem-sf-native-ordinary-representative-currying",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry; E3 formalization of all representative steps, reusing proved canonical Hom-complex comparison and generic currying helpers, with naturality transport proved privately without symmetry data. The Hom square, chain-summand identity and representative uncurrying are fully proved in separate modules to keep every file below the compile-time limit after improving categorical diagram inference; no new sorry is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact forgetful functor with normalized tensor and internal Hom representative comparisons preserves evaluation",
+   "results": "Found CategoryTheory.EnrichedFunctor.forget, CategoryTheory.exp.ev, CategoryTheory.Mon.forget, smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, smoothSheafCommRing.forgetStalk_hom_comp_evalHom, CategoryTheory.LeftExactFunctor.forget_obj_of, CategoryTheory.Mon.forget_faithful. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_symm_apply\"",
+   "results": "Found AddChar.toAddMonoidHomEquiv_symm_apply, AddChar.toMonoidHomEquiv_symm_apply, CategoryTheory.Functor.FullyFaithful.homEquiv_symm_apply, CategoryTheory.InducedCategory.homEquiv_symm_apply_hom, TypeCat.homEquiv_symm_apply, CategoryTheory.End.homEquiv_symm_apply_asHom, CategoryTheory.Functor.CorepresentableBy.id_homEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_symm_apply. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*(Hom|hom)|[Ee]valuation.*[Cc]ompat|ParametrizedAdjunction",
+   "results": "Found Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRingedTensorModel",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry Parent records cor-coef-verdier-weil-equivariance; blueprint_refs ancestor returns None.",
+   "via": [
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorEvaluation",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_evaluation",
+  "statement": "theorem native_weil_tensor_evaluation\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (W : CoefficientClosedStructure M.weilHom)\n    (t : W.tensor ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor)\n    (N : NativeWeilTensorPresentation k₀ l X M S W.monoidal t)\n    (hW : NativeAdjunctionNormalization (ihomBifunctor k₀ l X) N.tensor\n      (fun P ↦ N.adjunction.adj P) M.weilHom M.weilRepresentatives W\n      (NativeTensorKFlat k₀ l X N.tensor) N.model)\n    (χ : M.weilHom ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom)\n    (hχ : NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X)\n      (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n      M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) χ) :\n    ∀ K L, (nativeForget k₀ l X).map (W.evaluation K L) =\n      t.hom.app (M.weilHom.obj (op K, L), K) ≫\n        S.tensor.map\n          (X := ((nativeForget k₀ l X).obj (M.weilHom.obj (op K, L)),\n            (nativeForget k₀ l X).obj K))\n          (Y := (M.ordinaryHom.obj\n            (op ((nativeForget k₀ l X).obj K), (nativeForget k₀ l X).obj L),\n            (nativeForget k₀ l X).obj K))\n          (Prod.mkHom (χ.hom.app (op K, L)) (𝟙 ((nativeForget k₀ l X).obj K))) ≫\n          S.evaluation ((nativeForget k₀ l X).obj K) ((nativeForget k₀ l X).obj L)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-weil-ringed-tensor-model",
+  "worker": "stage3",
+  "summary": "Forgetting preserves representative-normalized evaluation. The Lean declaration and proof steps specify the exact representative interface needed by the parent tensor model.",
+  "blueprint": "Native tensor model, evaluation compatibility in step 3; Stacks 08J9, 0A97; ringed_forget_normalized_uncurry; serves the internal-Hom/evaluation/transposition paragraph of cor-coef-verdier-weil-equivariance through the parent chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-native-hom-precomposition-quasi-iso",
+    "why": "Use only contravariant Hom into a K-injective target carrying a source quasi-isomorphism to a derived isomorphism, to extend the two-injective comparison to a K-flat source; this is a generic homological tool, not any shriek-preservation step or replacement of the unit route."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Use only K-injective resolutions to choose a target representative; this generic homological input does not replace a tensor or duality step of the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T094350-L-218332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

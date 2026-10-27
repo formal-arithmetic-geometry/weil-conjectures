@@ -1,0 +1,159 @@
+{
+ "id": "lem-sp-ordered-tate-tower-cohomology",
+ "kind": "statement",
+ "title": "Ambient cohomology and finite rank of an ordered Tate tower",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and the strict varying-coefficient tower category and its exact finite evaluations [def-weil-l-adic-coefficient-extension, sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Let $X$ be a separated finite-type scheme over the algebraic closure of a finite field of characteristic different from $\\ell$ [def-weil-finite-field-fiber]. In any of the specified ordinary system coordinates [def-sp-tower-gamma-data], let $w$ be the given Tate-line presentation and let $r\\geq0$. The ordered line $L_r=A_{\\bullet,X}(r)[2r]$ has zero ambient ordinary-tower cohomology in all degrees $i\\ne-2r$. For every positive coefficient level, the evaluation of $H^{-2r}(L_r)$ is locally free of rank one. At $r=0$ this is the coefficient unit; for empty $X$ the local rank assertion is vacuous. No input normalization is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph; step 6, cohomology of the coefficient-line source alone"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-finite-field-fiber",
+  "def-sp-tower-gamma-data"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pur-twist-sheaf-locally-free] the first integral Tate line and all of its finite uniformizer reductions are locally free of rank one. Write ell as a unit times pi^a and use the coefficient quotient at a(n+1), obtaining the ell^(n+1) quotient without an unramifiedness restriction. Its positive tensor powers and its zeroth power, the unit, have local rank one by [def-coefficient-twists-detailed].",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On trivializing covers, tensor with each line is the identity and hence exact. Kernel and cokernel calculations for towers are levelwise by [det-sp-coefficient-towers-abelian]. Therefore the ordinary tensor of the unshifted line towers computes the derived tensor. Induct on the orderedLine recursion: its zero case is a sheaf in degree zero, and each shifted degree-one factor changes the sole cohomology degree by -2. All off-degree cohomology systems have zero evaluations, hence are zero systems.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact evaluation commutes with the surviving homology and identifies it with the r-th finite Tate power. Step 1 gives the required local rank one. The coefficient unit gives r=0, and the same local statement is vacuous on the empty scheme.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "step 6, cohomology of the coefficient-line source alone"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Shifted Tate coefficient towers tensor splitting and concentration in one cohomological degree",
+   "results": "8 hits on general cochain shifts and TStructure.isGE_shift_iff. No strict coefficient tower, Tate splitting, or exceptional compositor evaluation statement.",
+   "date": "2026-10-27",
+   "verdict": "no match; general shift facts alone do not identify these specified arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an iterated tensor product of locally free rank one sheaves shifted by even integers",
+   "results": "8 hits: Sheaf.H, cohomologyPresheaf, continuous homogeneous cochains, Scheme.Modules.instAbelian, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, groupCohomologyIsoExt. None states the required coefficient tower assertions.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso.of_isIso_fac_left",
+   "results": "One hit, Mathlib.CategoryTheory.Iso: if f and h are isomorphisms and f ≫ g = h then g is an isomorphism. Used in the parent to prove rho invertible; does not supply the three new statements.",
+   "date": "2026-10-27",
+   "verdict": "parent invertibility step available; no new-statement match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep towerMu|TowerSplitNormalized|orderedLine; rg orderedLine, pulled_ordered_line_single, towerRho, towerMu, TowerSplitNormalized in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search shifted Tate splitting",
+   "results": "msearch grep: no Mathlib hits. Library: original composition helper definitions, gamma data, pullback_ordered_tate_bounds, pulled_ordered_line_single. The bounds and shifted-single existence do not state local rank of the surviving homology, normalized Tate splitting, or mu evaluation. No duplicate statement found in the DAG or current blueprint.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; reuse existing data without redeclaring it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerOrientationEvaluation",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "step 6, cohomology of the coefficient-line source alone",
+   "via": [
+    "lem-sp-tower-orientation-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedTateTowerCohomology",
+  "file": "lean/Sheaf/Paper/OrderedTateTowerCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.ordered_tate_tower_cohomology",
+  "statement": "theorem ordered_tate_tower_cohomology (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    (w : SpChartAdmissibility.Twists l E X) (r : ℕ) :\n    (∀ i : ℤ, i ≠ -2 * (r : ℤ) →\n      IsZero ((DerivedCategory.homologyFunctor (SpTowerShriek.S l E X) i).obj\n        (SpTowerGamma.orderedLine l E b X w r))) ∧\n    ∀ n : ℕ, ((SpTowerShriek.ev l E X n).obj\n      ((DerivedCategory.homologyFunctor (SpTowerShriek.S l E X) (-2 * (r : ℤ))).obj\n        (SpTowerGamma.orderedLine l E b X w r))).IsFiniteLocallyFreeOfRank 1",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sp-tower-orientation-evaluation",
+  "worker": "stage3",
+  "summary": "Strict substep of the unchanged composite orientation evaluation theorem, with its exact Lean statement and a complete proof in words.",
+  "blueprint": "(1), tower paragraph; step 6, cohomology of the coefficient-line source alone",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

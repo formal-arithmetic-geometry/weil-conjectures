@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "Consider any chain $C_0\\subsetneq\\cdots\\subsetneq C_m$ of nonempty irreducible closed subsets of $S$, as in [def-kun-topological-krull-dimension]. Sobriety of $S$, proved in step 3 and defined in [def-weil-spectral-space], supplies generic points $\\eta_i\\in S$ with $C_i=\\overline{\\{\\eta_i\\}}^S$. Put $D_i=\\overline{\\{\\eta_i\\}}^X$. Each $D_i$ is nonempty irreducible closed: if it is covered by two closed sets, one contains $\\eta_i$ and therefore all of $D_i$. The subspace closure identity gives $S\\cap D_i=C_i$. Since $\\eta_i\\in C_{i+1}\\subseteq D_{i+1}$, closedness gives $D_i\\subseteq D_{i+1}$; equality would give $C_i=C_{i+1}$ on intersecting with $S$. We have therefore obtained a strict chain $D_0\\subsetneq\\cdots\\subsetneq D_m$ in $X$.",
+   "text": "Consider a strict chain C₀ ⊊ ⋯ ⊊ Cₘ of nonempty irreducible closed subsets of S. The continuous subtype inclusion sends each Cᵢ to Dᵢ = closure_X(Cᵢ), an irreducible closed subset of X. Mathlib’s IrreducibleCloseds.map_strictMono_of_isInducing proves that these form a strict chain: inverse image of each ambient closure recovers Cᵢ because the inclusion induces the subspace topology. No generic point is needed.",
    "uses": [
     "def-kun-topological-krull-dimension",
     "def-weil-spectral-space"
@@ -60,7 +60,7 @@
    }
   },
   {
-   "text": "Because $\\eta_0\\in S\\subseteq W$, there is $z\\in Z\\cap\\overline{\\{\\eta_0\\}}^X$. Put $D_{-1}=\\overline{\\{z\\}}^X$. This is nonempty irreducible closed by the singleton argument of step 4. Since $D_0$ and $Z$ are closed and contain $z$, we have $D_{-1}\\subseteq D_0\\cap Z$. This inclusion in $D_0$ is strict, because $\\eta_0\\in D_0$ but $\\eta_0\\notin Z$. Thus $D_{-1}\\subsetneq D_0\\subsetneq\\cdots\\subsetneq D_m$ has length $m+1$. The definition [def-kun-topological-krull-dimension] and $\\dim X\\le n$ give $m+1\\le n$, hence $m\\le n-1$. Every chain in $S$ has this bound, so $\\dim S\\le n-1$. If there are no chains, the same bound holds because $\\dim\\varnothing=-\\infty$.",
+   "text": "Choose any point x ∈ C₀. Since x ∈ S, choose z ∈ Z ∩ closure_X({x}). The ambient closed set D₀ contains x and therefore z. Thus E = closure_X({z}) is an irreducible closed subset of D₀. It is contained in Z by closedness of Z, whereas x ∈ D₀ lies outside Z, so E ⊊ D₀. Prepend E to the lifted strict chain, obtaining a chain of length m+1 in X. The ambient dimension bound gives m+1 ≤ n, hence m ≤ n−1. Take the supremum over all chains in S; this also covers an empty S, since then there are no chains.",
    "uses": [
     "def-kun-topological-krull-dimension"
    ],
@@ -92,7 +92,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/topology.tex",
-  "place": "Tags 0A31 (lemma-make-spectral-space), 0902 (lemma-spectral-sub), 0AP0 (lemma-make-spectral-space-minus), 0A2Z (lemma-directed-inverse-limit-spectral-spaces); dimension argument expanded from cohomology.tex Tag 0A3G (proposition-cohomological-dimension-spectral), induction step (2)"
+  "place": "Tags 0A31 (lemma-make-spectral-space), 0902 (lemma-spectral-sub), 0AP0 (lemma-make-spectral-space-minus), 0A2Z (lemma-directed-inverse-limit-spectral-spaces); dimension argument expanded from cohomology.tex Tag 0A3G (proposition-cohomological-dimension-spectral), induction step (2); Lean realization uses the inducing-subspace map on irreducible closed sets and an arbitrary point of the first member, avoiding generic-point choices in the dimension argument."
  },
  "mathlib_searches": [
   {
@@ -239,5 +239,27 @@
   "group": "NN",
   "result": "pass",
   "note": "Statement matches node clause by clause: [SpectralSpace X], n:ℕ with 1≤n, topologicalKrullDim X ≤ n, IsClosed Z, IsCompact Zᶜ; S = landed TopCat.puncturedGeneralizations Z (exact node set, subtype topology); conclusion SpectralSpace S ∧ dim S ≤ ((n-1:ℕ)) exact under hn. No extra hypotheses or universe restriction; empty/Z=X/X=∅ cases covered (⊥ dim). Record diff vs live: only lean + stmt_deps (+landed punctured-diagram def node, used, acyclic); statement verbatim; docstrings with source place, blueprint tag and 6 steps; sorry only, no defs. No public duplicate (only private dimension-only lemma in TopDegreeAbelianNeighborhoodZero). Proof-only imports exist (advisory: unused at stage 2). No compile run since no file changed; worker reports clean compile and deliver2 OK."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261023T170202-L-2073963",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

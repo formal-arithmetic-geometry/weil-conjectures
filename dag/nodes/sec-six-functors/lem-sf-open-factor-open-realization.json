@@ -1,0 +1,169 @@
+{
+ "id": "lem-sf-open-factor-open-realization",
+ "kind": "statement",
+ "title": "Fixed-presentation realization of the complete open operations",
+ "statement": "For finite-type schemes U and X over the fixed finite-field closure and an open immersion j, take the normalized reduction calculus, operations, tensor comparison and augmented-square data q of [lem-sf-open-tensor-quotient-augmentation], and the actual-unit reflector assertions rX,rU of [lem-sf-open-roos-unit-adjunction]. In the fixed coefficient presentation [def-sf-open-factor-fixed-data], there exists Open l E j. Thus the strict extension/reduction tower, its augmentation and uniqueness, extension/completion commutation and its unit characterization, restriction and extension completeness, normalized completed open pullback, section-normalized restriction isomorphism, complete Hom bijection, preservation of integral constructibility, finite scalar mate isomorphism and preservation of each individual finite-reduction interval hold. No tensor projection or Cartesian exchange assertion is included. The signatures also use [def-weil-finite-field-fiber], [def-sf-pull-completion-comparison], [def-sf-tensor-completion-comparison], [def-weil-derived-complete-integral-detailed], [def-sf-integral-open-operations], [def-sf-integral-open-reduction-comparison-data], [def-sf-open-semilinear-tensor-model-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "status": "split",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-pull-completion-comparison",
+  "def-sf-tensor-completion-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-open-factor-fixed-data",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data",
+  "def-sf-open-semilinear-tensor-model-data",
+  "lem-sf-open-tensor-quotient-augmentation",
+  "lem-sf-open-roos-unit-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Transport the normalized ordinary extension and restriction to the fixed coefficient functors. The existing c.extensionComplete and c.restrictionComplete fields, the equivalence of global completeness predicates, and naturality of the actual quotient unit transport completeness to both fixed functors. Transport q.integralGeometry through the same natural isomorphisms to prove both constructibility clauses.",
+   "uses": [
+    "lem-sf-open-factor-ordinary-transport",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the normalized strict extension tower and the fixed completed pullback realization from the two strictly smaller comparison statements. The pullback unit is the ordinary quotient unit followed by its comparison isomorphism, so restriction completeness makes it invertible on complete objects.",
+   "uses": [
+    "lem-sf-open-factor-quotient-realization",
+    "lem-sf-open-factor-pull-realization",
+    "lem-sf-open-roos-unit-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct extension-completion commutation by the two reflector Hom bijections and the ordinary open adjunction. For a complete target M, adjunction and restriction completeness identify maps from J(C K) to M with maps from J K to M. Hence J(eta_K) and eta_(J K) are two universal arrows into complete objects. Factor each through the other; the two Hom injections prove that the composites are identities, and the same injections prove naturality. The resulting isomorphism has the required actual-unit equation. Reflector injectivity proves uniqueness.",
+   "uses": [
+    "lem-sf-open-roos-unit-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ringed slice presentation of open extension to deduce full faithfulness after exact localization. Consequently the actual derived open adjunction unit is invertible. Its inverse is restrictionIso, its inverse identity gives section_unit, and the fully faithful Hom equivalence gives the requested bijection, even on all ambient inputs.",
+   "uses": [
+    "lem-sp-proetale-open-slice-presentation",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing actual scalar mate isomorphism for reduction_iso. At each quotient, its scalar-reduction presentation comparison and finiteOpenIso identify reduction of fixed J K with exact intrinsic extension of the reduction of K. Exact derived extension commutes with homology and sends zero homology to zero. This proves the support inclusion for each individual n and every a,b, including a>b, without q.finiteGeometry or a uniform-interval assumption. Assemble all fields of Open.",
+   "uses": [
+    "lem-pur-open-coefficient-comparison-isomorphism",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-weil-extension-by-zero-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-factor-ordinary-transport",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-tensor-quotient-augmentation",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sf-open-factor-quotient-realization",
+  "lem-sf-open-factor-pull-realization",
+  "lem-sf-open-roos-unit-adjunction",
+  "lem-sp-proetale-open-slice-presentation",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-pur-open-coefficient-comparison-isomorphism",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-weil-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion commutes with derived completion and preserves the completion unit",
+   "results": "ContinuousLinearMap.extend_zero, SemiNormedGrp.completion.map_zero, AdicCompletion.map_zero and topological completion extensions; none is a ringed pro-etale derived open comparison.",
+   "date": "2026-10-25",
+   "verdict": "No match. The existing project open-factor lemmas are the appropriate inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion extension by zero commutes with derived completion and completed tensor projection and base change restrict to identity",
+   "results": "AdicCompletion.ofTensorProduct_naturality and ordinary scheme open restriction; no match for strict quotient-tower or completed unit normalization.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; use the four existing open-factor lemmas and isolate their coefficient realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "Adjunction.fullyFaithfulLOfIsIsoUnit; Adjunction.restrictFullyFaithful. Generic tools only, no completed coefficient realization.",
+   "date": "2026-10-25",
+   "verdict": "No full match; unit naturality and isomorphism composition suffice for the formal assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "openFactorCoherence|OpenFactorCoherence.Open|OpenFactorCoherence.Tensor in lean/Sheaf, lean/WeilConjectures, dag/nodes; blueprint_refs search open factor / completed open / tensor restriction",
+   "results": "The assigned theorem is the only producer of its fixed Open structure. OpenTensorQuotient supplies Tensor; OpenProjectionRoos supplies a constructible-domain comparison in a different open presentation; OpenExchangeRoos uses pbcIntegralDatum. No fixed-presentation realization theorem found.",
+   "date": "2026-10-25",
+   "verdict": "The three statements are proper interface steps, not duplicates or a renamed copy of the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenFactorCoherence",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations.",
+   "via": [
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenFactorOpenRealization",
+  "file": "lean/Sheaf/SixFunctors/OpenFactorOpenRealization.lean",
+  "declaration": "WeilConjectures.OpenFactorCoherence.openFactorOpenRealization",
+  "statement": "theorem openFactorOpenRealization\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (SX : CoefficientDerivedSystemCalculus l E X)\n    (SU : CoefficientDerivedSystemCalculus l E U)\n    (o : IntegralOpenReduction.Operations l E j)\n    (st : IntegralOpenReduction.TensorComparison l E j o)\n    (AX : OpenSemilinearTensor.OrdinaryReduction l E X)\n    (AU : OpenSemilinearTensor.OrdinaryReduction l E U)\n    (m : OpenSemilinearTensor.Comparison l E j o SX SU AX AU st)\n    (c : IntegralOpenReduction.Comparison l E j o SX SU st)\n    (q : OpenTensorQuotient.Comparison l E j o SX SU AX AU st m c)\n    (F : FiniteFieldDatum.{u}) (hl : l ≠ F.p)\n    [U.Over (Spec (.of F.k))] [X.Over (Spec (.of F.k))]\n    [LocallyOfFiniteType (U ↘ Spec (.of F.k))] [QuasiCompact (U ↘ Spec (.of F.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))]\n    [j.IsOver (Spec (.of F.k))]\n    (rX : OpenRoos.ReflectorAssertions l E X) (rU : OpenRoos.ReflectorAssertions l E U) :\n    Nonempty (Open l E j)",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-856b5",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T102004-L-3764455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T050644-L-249917",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

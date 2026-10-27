@@ -1,0 +1,100 @@
+{
+ "id": "lem-sf-projection-tensor-identification-carrier",
+ "kind": "statement",
+ "title": "Carrier equality for the normalized completed tensor",
+ "statement": "The normalized completed tensor pair has the same ambient carrier as the prescribed Weil tensor on the two input carriers. Source: projection-formula proof step 13 (blueprint: fix-prop-projection-formula).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Projection-formula proof step 13; tensor comparison decomposition"
+ },
+ "stmt_deps": [
+  "def-wf-weil-category",
+  "def-wf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the object function to the completed-tensor functor equality normalized_tensor from the existing Weil tensor domain bridge, at the pair of actual rational input carriers. The definitions of completedPair and wfWeilCarrier identify precisely the two endpoints; no integral lift of the Weil automorphisms is used.",
+   "uses": [
+    "lem-sf-projection-weil-tensor-domain-bridge"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-projection-weil-tensor-domain-bridge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Weil-equivariance clause; G3 proof by existing normalized tensor transport, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized Weil tensor comparison carrier equality Frobenius structure",
+   "results": "No exact declaration found; generic category and tensor comparison tools only.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HEq wfWeilStructure wfTensorFrobenius",
+   "results": "No exact match.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor_identification|wfTensorFrobenius|completedPair",
+   "results": "Existing tensor comparison APIs in Sheaf.Paper.ProjectionWeilTensorDomainBridge and WfTensorCompletionFrobenius; no theorem for this exact component.",
+   "date": "2026-10-27",
+   "verdict": "Existing APIs are inputs; no duplicate theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFormula",
+  "date": "2026-10-27",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Projection-formula proof step 13; tensor comparison decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportProjectionFormula",
+  "file": "lean/Sheaf/Paper/CompactSupportProjectionFormula.lean",
+  "declaration": "WeilConjectures.CompactSupportPbcProjection.tensor_identification_carrier",
+  "statement": "theorem tensor_identification_carrier (R : WfTensorCompletion.RationalComparison D C Y₀ E₀) (hR : R.Normalized D C Y₀ E₀) (K L : WeilD D C Y₀ E₀) : wfWeilCarrier D C Y₀ E₀ (R.completedPair D C Y₀ E₀ K L) = (wfTensor D C Y₀ E₀).obj (wfWeilCarrier D C Y₀ E₀ K, wfWeilCarrier D C Y₀ E₀ L)"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T222705-L-682670",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T235859-L-1465195",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-arithmetic-stable-open-bounded",
+ "kind": "statement",
+ "title": "Arithmetic stable genus locus is open and bounded",
+ "statement": "Let $g\\geq2$ and let $\\mathfrak C_{\\mathbf Z}$ be the fibred groupoid of proper flat finitely presented curve families of algebraic spaces over $\\operatorname{Spec}\\mathbf Z$, with cartesian arrows [def-sfb-proper-curve-moduli]. Its full subcategory of families all of whose geometric fibres are connected stable curves of arithmetic genus $g$ is an open algebraic substack, in the sense of [def-sfb-algebraic-moduli-stack], contained in the nonempty nodal locus [def-sfb-curve-moduli-groupoids]. More explicitly, for each $X\\to T$ in $\\mathfrak C_{\\mathbf Z}$ there is an open $T_g^{\\mathrm{st}}\\subseteq T$, compatible with every base change, such that $T'\\to T$ factors through it exactly when $X_{T'}\\to T'$ is a stable unpointed genus-$g$ family in [def-sfb-stable-pointed-moduli-groupoids]. Over this open the algebraic space $X$ is a scheme and the family admits a closed embedding into the projective bundle of a finite-rank locally free module, as required by that definition. The resulting open substack is equivalent, over the category of schemes, to $\\overline{\\mathcal M}_{g,0}$ in that definition. Its field-valued point space is quasi-compact: every covering by open subsets has a finite subcover, for the topology characterized by inverse images under smooth surjective scheme atlases. A field-valued point is an object over a field, with two such objects identified when they become isomorphic over a common field extension. An open substack is a full subcategory whose scheme pullbacks are open subschemes [def-weil-open-immersion]. No field-base or Noetherian hypothesis is imposed on $T$, and the assertions include disconnected and nonreduced test schemes.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E76 (lemma-stable-curves), 0E78 (lemma-stable-one-piece-per-genus), 0E9B (lemma-stable-quasi-compact). Stable-family scheme/projective-bundle comparison: relative dualizing sheaf discussion and the stable-family discussion before 0E76; tricanonical boundedness in proof of 0E9B."
+ },
+ "stmt_deps": [
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-curve-moduli-groupoids",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-open-immersion",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}\\mathbf Z$. By [lem-sfb-arithmetic-nodal-curve-stack-smooth], $\\mathfrak C_S$ is algebraic and its nonempty nodal subcategory is open. For a family $f:X\\to T$, denote its nodal open by $N\\subseteq T$. Apply [lem-sfb-curve-h0-genus-strata] to $X_N\\to N$ and take its rank-$g$ open-and-closed locus inside the scalar-$H^0$ open; call the resulting open of $T$ $B$. Nodal fibres are geometrically reduced, so the last clause of that node identifies $B$ exactly with the locus of geometrically connected nonempty nodal fibres of arithmetic genus $g$. Both constructions commute with every base change. In particular all fibres over $B$ are schemes.",
+   "uses": [
+    "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+    "lem-sfb-curve-h0-genus-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E6U (lemma-prestable-curves) and 0E6V (lemma-prestable-one-piece-per-genus), using 0E6I, 0E6K and 0E6L"
+   }
+  },
+  {
+   "text": "On $X_B/B$, [lem-sfb-nodal-relative-dualizing-line] supplies the line $\\omega$ and identifies its geometric restrictions with the fibre dualizing lines. Apply [lem-sfb-space-relative-ample-locus] to $\\omega$, and call its open $A\\subseteq B$. It is characterized by ampleness on the geometric fibres, commutes with arbitrary base change, and $X_A$ is a scheme. By [lem-sfb-nodal-canonical-positivity-tricanonical], for each geometric fibre (connected, reduced, proper, nodal and genus $g\\geq2$), ampleness of its dualizing line is equivalent to the required component stability inequalities: a genus-zero component has at least three branches at nodes, and a genus-one component has at least one. Thus $A$ is precisely the stable fibre locus, already with schematic total space.",
+   "uses": [
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-nodal-canonical-positivity-tricanonical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E6R (lemma-gorenstein-dualizing), 0E74 (lemma-stable), 0E76 (lemma-stable-curves); spaces-descent.tex Tag 0D3D (lemma-ample-in-neighbourhood)"
+   }
+  },
+  {
+   "text": "Take $L=\\omega_{X_A/A}^{\\otimes3}$. The tricanonical clause of [lem-sfb-nodal-canonical-positivity-tricanonical] says on every geometric fibre that $L$ is very ample and $H^1(L)=0$. The morphism $X_A\\to A$ is still proper, flat and finitely presented, and has one-dimensional fibres. Therefore [lem-sfb-fibrewise-very-ample-evaluation] applies: $E=f_*L$ is finite locally free and its evaluation gives a closed immersion $X_A\\hookrightarrow\\mathbf P_A(E)$, commuting with arbitrary base change. This proves the global projective-bundle assertion even when $A$ is nonreduced, disconnected or not quasi-compact; it does not appeal to the insufficient general assertion that a relatively ample proper family over an arbitrary base is projective.",
+   "uses": [
+    "lem-sfb-nodal-canonical-positivity-tricanonical",
+    "lem-sfb-fibrewise-very-ample-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E76 (lemma-stable-curves), 0E8X (curves.tex, lemma-tricanonical); spaces-perfect.tex Tag 0CTM and spaces-more-morphisms.tex Tag 05XA for relative evaluation"
+   }
+  },
+  {
+   "text": "Set $T_g^{\\mathrm{st}}=A$. The preceding three steps show that factoring through $A$ implies every clause of an unpointed stable genus-$g$ family in [def-sfb-stable-pointed-moduli-groupoids, def-sfb-stable-pointed-curve]. Conversely, such a family is proper by [lem-trf-projective-bundle-proper], and its fibre conditions and [lem-sfb-nodal-canonical-positivity-tricanonical] force its base map to factor first through $N$, then $B$, then $A$, by their defining properties. The same reasoning applies to every $T'\\to T$, including the empty base. Uniqueness of factorization through an open identifies the scheme test of the full subcategory with $A$ [def-sfb-open-moduli-substack]. Its objects are schemes by step 2; between such objects the cartesian algebraic-space arrows are exactly the cartesian scheme arrows. The identification therefore gives the claimed equivalence with $\\overline{\\mathcal M}_{g,0}$ over schemes, respecting pullbacks and retaining all automorphisms.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-stable-pointed-curve",
+    "lem-trf-projective-bundle-proper",
+    "lem-sfb-nodal-canonical-positivity-tricanonical",
+    "def-sfb-open-moduli-substack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E76 (lemma-stable-curves), 0E78 (lemma-stable-one-piece-per-genus), and section-open: scheme-test universal property"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak M$ denote this full open subcategory of $\\mathfrak C_S$. The ambient category is algebraic by [lem-sfb-arithmetic-nodal-curve-stack-smooth]. Its every scheme test of $\\mathfrak M$ is the open just constructed, so [lem-sfb-open-stack-algebraic-lfp] proves that $\\mathfrak M$ is algebraic. Its containment in the nonempty nodal substack follows from $A\\subseteq N$. This establishes algebraicity without using quasi-compactness or an atlas of the stable moduli groupoid as an input.",
+   "uses": [
+    "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+    "lem-sfb-open-stack-algebraic-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tags 0E76 (lemma-stable-curves), 0E78 (lemma-stable-one-piece-per-genus); algebraic.tex Tag 05UN (lemma-open-fibred-category-is-algebraic)"
+   }
+  },
+  {
+   "text": "For boundedness put $n=5g-6\\geq4$ and $P(t)=(6g-6)t+1-g$. For every field-valued stable object $C/K$, [lem-sfb-stable-curve-pluricanonical-linear-series] with exponent $3$ gives a tricanonical closed immersion into $\\mathbf P^n_K$, since $h^0(\\omega_C^3)=5g-5$, with Hilbert polynomial $P$. Use [lem-sfb-projective-hilbert-polynomial-representability] for $\\mathbf P^n_S$ itself (identity closed immersion), and denote its fixed-$P$ representing scheme by $H$. Its universal closed subscheme $Z\\subset\\mathbf P^n_H$ is flat and finitely presented over $H$, is proper by [lem-trf-projective-bundle-proper], and all its geometric fibres have polynomial $P$. Since $P$ is nonzero they are nonempty; by [lem-sfb-projective-hilbert-polynomial-dimension] their dimension is one. Thus $Z/H$ is an object of $\\mathfrak C_S$, to which steps 1--4 apply. Write $V\\subseteq H$ for its stable genus-$g$ open.",
+   "uses": [
+    "lem-sfb-stable-curve-pluricanonical-linear-series",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-trf-projective-bundle-proper",
+    "lem-sfb-projective-hilbert-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E9B (lemma-stable-quasi-compact), expanding moduli.tex Tag 0E96 (lemma-bounded-polarized) through the Hilbert scheme and using the complete-system projective dimension"
+   }
+  },
+  {
+   "text": "The Hilbert node gives $H$ of finite type over $S$; [lem-weil-pbc-finite-type-over-noetherian] gives that $H$ is Noetherian, explicitly including the fact that $\\operatorname{Spec}\\mathbf Z$ is Noetherian. Its open subscheme $V$ is Noetherian and quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The universal family restricted to $V$ defines a morphism $V\\to\\mathfrak M$. It is surjective on field-valued point classes: given $C/K$, choose a basis of $H^0(C,\\omega_C^3)$; its embedding from step 6 gives a $K$-point of $H$ classifying exactly $C$ with that embedding, and this point factors through $V$ because $C$ is stable. Forgetting the embedding returns the original point of $\\mathfrak M$. No universal choice of bases, and no smoothness or surjectivity of $V\\to\\mathfrak M$ as a representable morphism, is required.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E9B (lemma-stable-quasi-compact), Hilbert argument of moduli.tex Tag 0E96; morphisms.tex Tag 01T6, properties.tex Tags 01OW and 01OZ"
+   }
+  },
+  {
+   "text": "By [lem-sfb-stack-point-topology], the point map $|V|\\to|\\mathfrak M|$ is continuous for exactly the smooth-atlas topology in the statement. For an open cover $\\{O_i\\}$ of $|\\mathfrak M|$, its inverse images cover $|V|$, hence finitely many cover $|V|$ by step 7. The point-surjectivity just proved implies that the same finite collection of $O_i$ covers $|\\mathfrak M|$. This is the asserted quasi-compactness.",
+   "uses": [
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E9B (lemma-stable-quasi-compact); stacks-properties.tex Tag 04XL (lemma-topology-points)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-open-moduli-substack",
+  "def-sfb-stable-pointed-curve",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-arithmetic-nodal-curve-stack-smooth",
+  "lem-sfb-curve-h0-genus-strata",
+  "lem-sfb-fibrewise-very-ample-evaluation",
+  "lem-sfb-nodal-canonical-positivity-tricanonical",
+  "lem-sfb-nodal-relative-dualizing-line",
+  "lem-sfb-open-stack-algebraic-lfp",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "lem-sfb-projective-hilbert-polynomial-representability",
+  "lem-sfb-space-relative-ample-locus",
+  "lem-sfb-stable-curve-pluricanonical-linear-series",
+  "lem-sfb-stack-point-topology",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E76 and 0E78; Tag 0E9B with its bounded-polarized input 0E96 expanded by the existing projective Hilbert scheme node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fixed genus stable curves form a quasi compact open substack of the moduli stack of nodal curves over arbitrary schemes",
+   "results": "{\"t\": \"2026-10-23T11:50:41Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed genus stable curves form a quasi compact open substack of the moduli stack of nodal curves over arbitrary schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\"], \"digest\": \"7973279d5e14b6fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus where a proper flat family is a stable genus g curve is open compatible with all base change and bounded",
+   "results": "{\"t\": \"2026-10-23T11:50:39Z\", \"tool\": \"leansearch\", \"query\": \"The locus where a proper flat family is a stable genus g curve is open compatible with all base change and bounded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange\"], \"digest\": \"48449cd5bb58a96e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T11:50:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiCompact\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"1f6f42fc46323d97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]table.*genus|genus.*[Ss]table|[Ss]table.*[Mm]oduli",
+   "results": "{\"t\": \"2026-10-23T11:50:38Z\", \"tool\": \"grep\", \"query\": \"[Ss]table.*genus|genus.*[Ss]table|[Ss]table.*[Mm]oduli\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stable curves moduli stack is quasi compact and the isomorphism functor of stable curves is finite unramified over an arbitrary base",
+   "results": "{\"t\": \"2026-10-23T11:45:56Z\", \"tool\": \"leanfinder\", \"query\": \"The stable curves moduli stack is quasi compact and the isomorphism functor of stable curves is finite unramified over an arbitrary base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.quasiCompact_of_isIso\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"a95c17ce2fb08c45\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stable curves form a bounded moduli problem and have finite unramified diagonal over the integers",
+   "results": "{\"t\": \"2026-10-23T11:45:48Z\", \"tool\": \"leansearch\", \"query\": \"Stable curves form a bounded moduli problem and have finite unramified diagonal over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\"], \"digest\": \"a9fe47e9a2f60d3f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; only scheme morphism properties, generic compactness, elliptic-curve isomorphisms or interpolation occur, not the specified moduli theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]table.*[Cc]urve|[Mm]oduli.*[Cc]urve|[Tt]ricanonical",
+   "results": "{\"t\": \"2026-10-23T13:35:38Z\", \"tool\": \"grep\", \"query\": \"[Ss]table.*[Cc]urve|[Mm]oduli.*[Cc]urve|[Tt]ricanonical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"01d57488495846d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; scheme properness, flatness, smoothness, open immersions, quasi-compactness, Chevalley bounds and an elliptic-curve bibliographic reference do not state the stable-curve moduli result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat family of algebraic space curves has a base change compatible open stable genus g locus",
+   "results": "{\"t\": \"2026-10-23T13:35:38Z\", \"tool\": \"leansearch\", \"query\": \"A proper flat family of algebraic space curves has a base change compatible open stable genus g locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\"], \"digest\": \"62b329838731a354\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; scheme properness, flatness, smoothness, open immersions, quasi-compactness, Chevalley bounds and an elliptic-curve bibliographic reference do not state the stable-curve moduli result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T13:35:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiCompact\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\"], \"digest\": \"1f6f42fc46323d97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; scheme properness, flatness, smoothness, open immersions, quasi-compactness, Chevalley bounds and an elliptic-curve bibliographic reference do not state the stable-curve moduli result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable curves of fixed genus form a quasi compact open algebraic substack over the integers",
+   "results": "{\"t\": \"2026-10-23T13:35:39Z\", \"tool\": \"leanfinder\", \"query\": \"Stable curves of fixed genus form a quasi compact open algebraic substack over the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\"], \"digest\": \"8d014ebaba6751c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; scheme properness, flatness, smoothness, open immersions, quasi-compactness, Chevalley bounds and an elliptic-curve bibliographic reference do not state the stable-curve moduli result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The moduli of nodal connected curves with ample dualizing line and fixed genus is bounded by tricanonical Hilbert scheme embeddings",
+   "results": "{\"t\": \"2026-10-23T13:37:30Z\", \"tool\": \"leanfinder\", \"query\": \"The moduli of nodal connected curves with ample dualizing line and fixed genus is bounded by tricanonical Hilbert scheme embeddings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"ChevalleyThm.MvPolynomialC.numBound\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"5dd4f39f4399914a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; scheme properness, flatness, smoothness, open immersions, quasi-compactness, Chevalley bounds and an elliptic-curve bibliographic reference do not state the stable-curve moduli result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-moduli-regular-universal-atlas",
+  "date": "2026-10-23",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Regular universal etale presentation of the stable moduli groupoid. Bounded open stable genus locus inside the arithmetic curve stack, used to extract finitely many affine charts.",
+   "via": [
+    "lem-sfb-stable-moduli-regular-universal-atlas",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-arithmetic-stable-open-bounded",
+  "worker": "stage1",
+  "summary": "Q98 split the arithmetic stable open and boundedness assertion using existing nodes only. The openness argument passes through the nodal and scalar-H0/genus strata, the base-change-compatible dualizing line and ample locus, and the tricanonical relative evaluation embedding. The full-subcategory scheme tests give the moduli equivalence and algebraicity. Boundedness is the fixed-polynomial Hilbert-scheme argument of 0E96 used in 0E9B: its stable open is Noetherian and point-surjects continuously onto the stable stack. Statement unchanged; zero new nodes; no Lean or compilation.",
+  "blueprint": "Retained the inherited from.place and via chain (blueprint_refs.py ancestor reports null). Read latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) and its unit. This is the bounded arithmetic stable-moduli input in the existing alteration/level-structure prerequisite chain. Searches stable genus, prestable, tricanonical and Hilbert found no equivalent blueprint node; no route above this node is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "The definition of stable family uses projective-bundle embeddings; this generic scheme theorem supplies properness both for these families and for the universal Hilbert family."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-a889a7857",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-a889a7857 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps, all 17 cited statements and 5 stmt_deps, and Stacks 0E9B and 0E96 with their proofs. One commit; no new nodes; statement and stmt_deps unchanged; proof_deps = union of uses; no cycle (only citer is lem-sfb-stable-moduli-regular-universal-atlas); no repair note, so not a re-split. Steps 1-3: nodal locus N, then the h0/rank-g locus B (its geometric-reducedness clause gives connectedness), then the ample locus A of the base-change-compatible ω. The positivity node's b_Z/g_Z conditions equal the r=0 special-point stability of def-sfb-stable-pointed-curve. The tricanonical H^1=0 and very-ampleness hypotheses of fibrewise-very-ample-evaluation hold on the scheme X_A, giving E finite locally free and a closed immersion into P_A(E) over any base. Step 4: both directions check, since factorization through an open is set-theoretic and properness comes from trf-projective-bundle-proper; automorphisms are kept. Step 5: 05UN-type algebraicity. Steps 6-8: n=5g-6 (h^0(ω^3)=5g-5) and P=(6g-6)t+1-g. The source's n=P(3)-1 is a slip, correctly noted. The Hilbert scheme H_P over Spec Z is of finite type; Z/H is proper, flat, finitely presented, with nonempty fibres of dimension 1, so it lies in C_Z; V is quasi-compact; field points map onto |M| (Hilbert polynomial of the ω^3-embedding over K is P); continuity from stack-point-topology gives a finite subcover. Small cases: g=2 gives n=4, P=6t-1; empty and nonreduced bases are fine. Field-only sibling lem-sfb-stable-and-smooth-family-open-loci is a special case, not a duplicate. Accepted tool_use: lem-trf-projective-bundle-proper (generic). Batch-5: all 13 flagged citations reach only generic trf definitions or tools (algebraic space, projective-bundle morphism, nodal fibres, forward differences, fibrewise open locality, projective-bundle quotient geometry, projective-bundle properness), none part of the trace formula or Poincaré duality. Accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArithmeticStableOpenBounded",
+  "declaration": "AlgebraicGeometry.arithmetic_stable_open_bounded",
+  "declarations": [
+   "AlgebraicGeometry.StablePointedModuli.RepresentsProperCurvePullback",
+   "AlgebraicGeometry.ProperCurveFamily.HasStableGeometricFibres",
+   "AlgebraicGeometry.arithmetic_stable_open_bounded"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArithmeticStableOpenBounded.lean",
+  "statement": "theorem arithmetic_stable_open_bounded (g : ℕ) (hg : 2 ≤ g) : ∃ U : OpenModuliSubstack (ProperCurveModuli.category (Spec (.of (ULift.{u} ℤ)))), (∀ X : ProperCurveModuli (Spec (.of (ULift.{u} ℤ))), U.property X ↔ X.family.HasStableGeometricFibres g) ∧ IsAlgebraicModuliStack U.category ∧ (∀ X : ProperCurveModuli (Spec (.of (ULift.{u} ℤ))), U.property X → X.family.HasNonemptyNodalGeometricFibres) ∧ (∃ W : ∀ X : ProperCurveModuli (Spec (.of (ULift.{u} ℤ))), X.base.left.Opens, (∀ (X : ProperCurveModuli (Spec (.of (ULift.{u} ℤ)))) (T' : Over (Spec (.of (ULift.{u} ℤ)))) (a : T' ⟶ X.base), (∃ b : T'.left ⟶ (W X).toScheme, b ≫ (W X).ι = a.left) ↔ ∃ Y : StablePointedModuli (Spec (.of (ULift.{u} ℤ))) g 0, Y.RepresentsProperCurvePullback X.family a) ∧ (∀ {X Y : ProperCurveModuli (Spec (.of (ULift.{u} ℤ)))} (a : X ⟶ Y), W X = TopologicalSpace.Opens.comap ⟨a.base.left, a.base.left.continuous⟩ (W Y)) ∧ ∀ X : ProperCurveModuli (Spec (.of (ULift.{u} ℤ))), ∃ Y : StablePointedModuli (Spec (.of (ULift.{u} ℤ))) g 0, Y.RepresentsProperCurvePullback X.family (Over.homMk (W X).ι rfl : Over.mk ((W X).ι ≫ X.base.hom) ⟶ X.base) ∧ ∃ (E : Y.base.left.Modules) (hE : E.IsQuasicoherent), E.IsFiniteLocallyFree ∧ ∃ i : Y.curve ⟶ (@SymmetricAlgebraSheaf.gradedAlgebraData Y.base.left E hE).relProj, IsClosedImmersion i ∧ i ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData Y.base.left E hE).relProjHom = Y.projection) ∧ (∃ e : BasedFunctor (BasedCategory.ofFunctor (StablePointedModuli.forget (Spec (.of (ULift.{u} ℤ))) g 0)) U.category, e.toFunctor.IsEquivalence) ∧ CompactSpace (ModuliPoints U.category)",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8eb5409c1",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: OpenModuliSubstack U with U.property ↔ HasStableGeometricFibres g (all algebraically closed Ω : Type u, actual presheaf pullback represented by a StablePointedModuli g 0 object); IsAlgebraicModuliStack; containment in HasNonemptyNodalGeometricFibres; open W X with factorisation ↔ RepresentsProperCurvePullback for every test map (base iso plus presheaf iso to the actual pullback, compatible with the second projection); W X = comap (W Y) along cartesian arrows; over W, a StablePointedModuli representative with a finite locally free E and closed immersion into the canonical relProj; BasedFunctor equivalence from StablePointedModuli.forget to U.category; CompactSpace (ModuliPoints U.category) with the landed topology. No base hypotheses (empty, nonreduced, disconnected, non-Noetherian covered); ULift.{u} ℤ. Helpers are real formulas with source and blueprint docstrings; no duplicates found. Only change besides lean: two landed def owners added to stmt_deps. Seven dep records byte-identical to side-live. lean.statement verbatim; only sorry; 8-step proof docstring. Not compiled (no file changed). No findings."
+ }
+}

@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-generic-dvr-properness-criterion",
+ "kind": "statement",
+ "title": "Properness tested on DVRs of the generic function field",
+ "statement": "Let $S$ be a locally Noetherian scheme [pqf-def-locnoeth], and let $f:R\\to S$ be separated and of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism], with $R$ integral [def-pc-integral-scheme], generic point $\\xi$ [def-sc-generic-point], and function field $L=\\kappa(\\xi)$ [def-sc-function-field]. Suppose that for every discrete valuation subring $A\\subset L$ [def-sc-discrete-valuation-ring] with fraction field $L$, and every morphism $b:\\operatorname{Spec}A\\to S$ whose generic restriction is $\\operatorname{Spec}L\\to R\\xrightarrow{f}S$, the canonical generic-point morphism $\\operatorname{Spec}L\\to R$ extends to a morphism $\\operatorname{Spec}A\\to R$ over $b$ [def-weil-affine-spectrum]. Then $f$ is proper [def-weil-proper-morphism]. Conversely properness implies this extension property. The extension, whenever it exists, is unique.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, equivalence (1) and (4), specialized to an integral source; separatedness supplies uniqueness."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Cover $S$ by Noetherian affine opens $V$. Each nonempty inverse image $R_V$ is integral with generic field $L$; the restrictions remain separated and finite type by base change. A test over $V$ extends into $R$ by hypothesis and factors through $R_V$, since its composite to $S$ factors through $V$. Empty inverse images are universally closed. Universal closedness is local here: for $T\\to S$ and closed $D\\subset R_T$, its image intersects $T_V$ in the image of the closed inverse image of $D$ in $(R_V)_{T_V}$. Closedness on this open cover implies closedness in $T$. Hence fix $V$ and rename it $S$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-proper-morphism",
+    "lem-pod-separated-finite-type-base-change",
+    "def-pc-integral-scheme",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, proof of (4) implies (1)"
+   }
+  },
+  {
+   "text": "Apply the integral Chow-envelope compactification lemma: obtain $\\pi:Y\\to R$, $j:Y\\to P$, $Y\\subset Z\\subset P$ and $U$, with $\\pi$ proper surjective, $Z$ integral Noetherian proper over $S$, and all generic maps identified over $L$.",
+   "uses": [
+    "lem-sfb-integral-chow-envelope-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, proof of (4) implies (1)"
+   }
+  },
+  {
+   "text": "If $j(Y)$ is not closed, take $z\\in Z\\setminus Y$. The generic point lies in $Y$, so $z$ is nongeneric. The same-field trait lemma gives $a_Z:\\operatorname{Spec}A\\to Z$ with closed image $z$ and canonical generic restriction over $L$; put $a=c\\circ a_Z$.",
+   "uses": [
+    "lem-sfb-nongeneric-point-same-field-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, proof of (4) implies (1)"
+   }
+  },
+  {
+   "text": "Put $b=(P\\to S)\\circ a$. The generic restriction of $b$ is the composite $\\operatorname{Spec}L\\to R\\to S$, because $Y\\to R$ is the identity over the dense open $U$. The hypothesis therefore gives $r:\\operatorname{Spec}A\\to R$ over $b$ extending the canonical generic point. Apply valuative existence to the proper map $\\pi:Y\\to R$ and the square whose generic map is the canonical $\\operatorname{Spec}L\\to Y$ and whose bottom is $r$. A DVR is a valuation ring by its defining equivalence. We obtain $h:\\operatorname{Spec}A\\to Y$ extending that generic map. The two $S$-maps $j\\circ h$ and $a$ into $P$ have equal generic restrictions. Projective space is proper, hence separated, and valuative uniqueness makes them equal. Their closed-point values cannot agree: the first is in $j(Y)$, the second is $z\\notin j(Y)$. This contradiction proves $j(Y)$ closed.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lemma-nagata-proper-valuative-criterion-existence-api",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lemma-nagata-separated-valuation-lift-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, proof of (4) implies (1)"
+   }
+  },
+  {
+   "text": "An immersion with closed image is a closed immersion, so $j:Y\\to P$ is a closed immersion. Combining properness of closed immersions, properness of $P\\to S$, and composition, $Y\\to S$ is proper.",
+   "uses": [
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, proof of (4) implies (1)"
+   }
+  },
+  {
+   "text": "For $T\\to S$ and closed $D\\subseteq R_T$, put $E=\\pi_T^{-1}(D)\\subseteq Y_T$, which is closed. Base-changed surjectivity gives equal images of $E$ and $D$ in $T$. Properness of $Y_T\\to T$ makes this image closed. Thus $R\\to S$ is universally closed on each affine $V$. Step 1 then gives universal closedness over the original $S$. Original separatedness and finite type imply properness by definition.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, proof of (4) implies (1)"
+   }
+  },
+  {
+   "text": "Conversely, properness supplies every required extension by valuative existence, since a DVR is a valuation ring with fraction field $L$. Separatedness was assumed from the start, so valuative uniqueness identifies any two extensions, independently of properness. This proves the converse and uniqueness.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lemma-nagata-proper-valuative-criterion-existence-api",
+    "lemma-nagata-separated-valuation-lift-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX5, morphisms-lemma-characterize-proper; Tag 01L0, schemes-lemma-valuative-criterion-separatedness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
+  "lem-pod-separated-finite-type-base-change",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "lem-sfb-integral-chow-envelope-compactification",
+  "lem-sfb-nongeneric-point-same-field-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208, limits-lemma-Noetherian-dvr-valuative-proper, equivalence (1) and (4), proof by Chow envelope and boundary DVR; integral refinement by reduced generic-point closure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Refined valuative criterion of properness using only discrete valuation rings of the function field of each irreducible component",
+   "results": "{\"t\": \"2026-10-22T03:44:19Z\", \"tool\": \"leansearch\", \"query\": \"Refined valuative criterion of properness using only discrete valuation rings of the function field of each irreducible component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.ofHasUnitMulPowIrreducibleFactorization\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"ValuativeRel.SRel\", \"ValuativeRel.isDiscrete_trivialRel\"], \"digest\": \"60bd32fc40638ddb\"}; no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field."
+  },
+  {
+   "tool": "grep",
+   "query": "[Vv]aluative|[Dd][Vv][Rr]|IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T03:44:19Z\", \"tool\": \"grep\", \"query\": \"[Vv]aluative|[Dd][Vv][Rr]|IsDiscreteValuationRing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"36f52f15fae1339a\"}; no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.ValuativeCriterion\"",
+   "results": "{\"t\": \"2026-10-22T03:44:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.ValuativeCriterion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\"], \"digest\": \"4b6b6faa83eee80b\"}; no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type separated morphism from an integral scheme to a Noetherian base is proper if its generic point extends over every discrete valuation ring in its function field",
+   "results": "{\"t\": \"2026-10-22T03:44:22Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type separated morphism from an integral scheme to a Noetherian base is proper if its generic point extends over every discrete valuation ring in its function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\"], \"digest\": \"b7762d9029301506\"}; no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:29-31 explicitly lists reduction to DVRs as a future project; IsProper.of_valuativeCriterion at line 341 quantifies over all valuation rings, not just DVRs in the generic function field."
+  },
+  {
+   "tool": "grep",
+   "query": "valuativeCriterion|[Dd][Vv][Rr]|discrete valuation",
+   "results": "{\"t\": \"2026-10-22T04:01:44Z\", \"tool\": \"grep\", \"query\": \"valuativeCriterion|[Dd][Vv][Rr]|discrete valuation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"6b4fcce88ec7b749\"}; no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work.",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refined valuative criterion properness discrete valuation rings generic point function field",
+   "results": "{\"t\": \"2026-10-22T04:01:44Z\", \"tool\": \"leansearch\", \"query\": \"Refined valuative criterion properness discrete valuation rings generic point function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"of_isDiscreteValuationRing\", \"IsDiscreteValuationRing\", \"IsDiscreteValuationRing.mk\", \"ValuativeRel.IsDiscrete\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"IsDiscreteValuationRing.isRankOneDiscrete\"], \"digest\": \"9f5b5adcc4c3b3ce\"}; no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work.",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ValuativeCriterion, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T04:01:44Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.ValuativeCriterion, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work.",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type morphism from an integral scheme to a locally Noetherian scheme is proper if the generic point extends over all discrete valuation subrings of its function field",
+   "results": "{\"t\": \"2026-10-22T04:01:47Z\", \"tool\": \"leanfinder\", \"query\": \"A separated finite type morphism from an integral scheme to a locally Noetherian scheme is proper if the generic point extends over all discrete valuation subrings of its function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\"], \"digest\": \"e1ccb5fd96a38dda\"}; no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work.",
+   "date": "2026-10-22",
+   "verdict": "no match: IsProper.of_valuativeCriterion requires all valuation rings (ValuativeCriterion.lean:341); lines 29-31 explicitly leave the Noetherian DVR reduction to future work."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-hom-closure",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.12, refined valuative criterion restricted to traits with generic point over the base generic point",
+   "via": [
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-generic-dvr-properness-criterion",
+  "worker": "stage1",
+  "summary": "Q100 repair of the overlong split: extracted original steps 2-3 into an independent integral Chow-envelope compactification lemma and step 4 into a same-function-field trait-centre lemma. Both new nodes are statement-only, unsplit and searched. All other arguments remain in the short assembly; the complete deferred arguments and the earlier report are retained in the report. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.12, refined valuative criterion restricted to traits with generic point over the base generic point; Steps 1-7 supply the refined criterion used by de Jong 3.12 in the high-genus Hom-closure argument; Step 8 supplies the converse and uniqueness. Repair: original steps 2-3 and 4 are delegated to the two new statement-only nodes; original steps 1 and 5-8 remain the assembly.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-c0e85e736",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-c0e85e736 (reviewer sub-agent of L); spot-checked: This is a re-split under the human's note of 2026-10-22. The note counts 5759 characters of old proof and asks for at least 2 new nodes. The old proof is NR's PASSed 8-step split, which is still the live version, so this delivery is not superseded. The item statement and its stmt_deps are byte-identical to NR's. Old steps 2-3 (integral Chow envelope Y as the reduced closure of the generic preimage, then the reduced closure Z of j(Y) in P^n_S) went to the new lem-sfb-integral-chow-envelope-compactification. Old step 4 (localizing at a boundary point and taking a same-field DVR by 00PH) went to the new lem-sfb-nongeneric-point-same-field-dvr. They carry about 1650 and 1083 characters of old argument, which is comparable. The parent is a 2846-character assembly. Old step 1 is kept with the same content: the image/open-cover equality and the factorization through R_V. Old step 5, the lifting contradiction, is verbatim. Old steps 6-8 keep the same content. This is the Q31/Q42 precedent, and no argument was blurred. Node 1: I checked it against Stacks 0200 via lem-weil-pbc-chow-noetherian. Y meets pi^{-1}U in all of it, and uniqueness of the reduced structure gives the U-isomorphism. pi is proper and surjective, Y is a dense open of the integral proper Z, and both function fields are L. It is true, and it does not duplicate the chow-noetherian, integral-chow-relatively-ample or fin-noetherian-chow nodes. Node 2: O_{Z,z} is a Noetherian local domain that is not a field, since z != eta. lem-sfb-local-domain-same-field-dvr then gives a dominating DVR inside L, and Spec A -> Spec O_{Z,z} -> Z is the required map. This matches properties 054F(2) with K=L, which I read, and Spec of a field is vacuous. It is not a duplicate of the specialization-trait or image-boundary-dvr nodes, which do not fix the fraction field. I checked items steps 1-7 against limits 0208 (lines 3925-3999); every cited statement exists and its hypotheses are met. No SGA citation; the unit, blueprint.from and via fields are inherited correctly. FIXED (2 faults): both new nodes' stmt_deps omitted definitions their own statements cite. The envelope node lacked def-weil-affine-spectrum, pqf-def-locnoeth, def-weil-proper-morphism, def-weil-finite-type-morphism, def-weil-closed-immersion and def-nagata-projective-space-base-change. The trait node lacked def-pc-integral-scheme and pqf-def-locnoeth. Corrected files are under fixes/dag/nodes/sec-six-functors-basics/. Advisory: 'Noetherian scheme' has no definition node, and def-sc-function-field is stated for curves; the item already uses it the same way.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GenericDvrPropernessCriterion",
+  "declaration": "AlgebraicGeometry.isProper_iff_generic_dvr_extensions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GenericDvrPropernessCriterion.lean",
+  "statement": "theorem isProper_iff_generic_dvr_extensions {R S : Scheme.{u}} [IsIntegral R] [IsLocallyNoetherian S] (f : R ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : (IsProper f ↔ ∀ (A : Subring R.functionField) [IsDiscreteValuationRing A] [IsFractionRing A R.functionField] (b : Spec (.of A) ⟶ S), Spec.map (CommRingCat.ofHom A.subtype) ≫ b = R.fromSpecStalk (genericPoint R) ≫ f → ∃ a : Spec (.of A) ⟶ R, Spec.map (CommRingCat.ofHom A.subtype) ≫ a = R.fromSpecStalk (genericPoint R) ∧ a ≫ f = b) ∧ (∀ (A : Subring R.functionField) [IsDiscreteValuationRing A] [IsFractionRing A R.functionField] (b : Spec (.of A) ⟶ S), Subsingleton {a : Spec (.of A) ⟶ R // Spec.map (CommRingCat.ofHom A.subtype) ≫ a = R.fromSpecStalk (genericPoint R) ∧ a ≫ f = b})",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4837cf2cc",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the item node, Stacks limits 0208 (1)<=>(4), the 8 statement dependencies and their lean/mathlib records, the module and the report. Each hypothesis matches the node: locally Noetherian S, separated f, finite type as LocallyOfFiniteType plus QuasiCompact, integral R, genericPoint R, R.functionField, DVR subrings of L with fraction field L via the subtype inclusion. The generic-restriction equation on b, the extension clause, the iff with IsProper and the Subsingleton uniqueness clause all match. No extra hypotheses and no universe restriction. The lean.statement field is verbatim; the delivered node differs from live only in lean, and the live node has no lean or reviewed_lean. The DVR dependency is a mathlib node matched to IsDiscreteValuationRing. Docstrings carry the source place, the blueprint id and all proof steps; only sorry; no definitions; no pro-etale substitute. Edge cases: empty source, a function field with no DVR subrings, fields, no-lift uniqueness. No compile, since no file was changed; the worker reports clean compiles."
+ }
+}

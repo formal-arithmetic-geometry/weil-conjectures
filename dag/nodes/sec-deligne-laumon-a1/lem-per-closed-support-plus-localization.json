@@ -1,0 +1,178 @@
+{
+ "id": "lem-per-closed-support-plus-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tags 09XQ and 0A45; original ind-etale closed support proof steps 2, 3 and 7.",
+   "via": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-per-codimension-one-costalk-reduction",
+    "def-per-potential-dualizing",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Counit-normalized localization on the actual bounded below support adjunction",
+ "statement": "Let A be a finite commutative ring, and let i:Z→T and j:U→T be complementary closed and open immersions of schemes. Use small-etale sheaves with values in ModuleCat A [def-weil-pbc-derived-categories]. Let F=D+(i_*), R=R+(closedUpperShriek A i j), and adj=derivedPlus of the canonical supported-kernel adjunction [lem-pur-etale-supported-kernel-adjunction, lem-trf-bounded-below-derived-adjunction]. For every K in D+(T), there is a distinguished triangle F R K → K → R+j_* j* K → (F R K)[1], whose first arrow is exactly adj.counit_K and second arrow is exactly the derived ordinary open unit. Moreover, for every M in D+(Z), N in D+(U), and n in Z, Hom((F M)[n], R+j_*N) is a singleton. No Noetherian or constructibility assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XQ and 0A45; original ind-etale closed support proof steps 2, 3 and 7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-trf-bounded-below-derived-adjunction",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [
+  {
+   "text": "Derive the supported-kernel adjunction with exact closed direct image on bounded below injective complexes. This is the specified adjunction and its specified counit.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-trf-bounded-below-derived-adjunction",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ; original item steps 2-3"
+   }
+  },
+  {
+   "text": "The ambient closed right adjoint preserves lower bounds: Hom(B,RK)=Hom(i_*B,K)=0 when B lies below the lower bound of K. The standard t-structure supplies this criterion. Restrict its adjunction to the full D+ subcategories, and use uniqueness of right adjoints to identify it with the specified derived support adjunction, preserving the counit.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "def-sbc-standard-tstructure-derived-category",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09XQ and 0A45; original item step 3"
+   }
+  },
+  {
+   "text": "Restrict the ambient counit-normalized support triangle along the fully faithful triangulated inclusion of D+. All its terms are bounded below: inverse images and i_* are exact and R+j_* preserves a lower bound. Transport the first term by the counit-preserving adjoint identification.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45; original item step 3"
+   }
+  },
+  {
+   "text": "Open inverse image kills every closed direct image and commutes with shifts. The derived open adjunction identifies the indicated Hom set with Hom(j*(F M)[n],N), which is a singleton since its source is zero.",
+   "uses": [
+    "lem-exc-derived-open-closed-vanishing",
+    "lem-trf-bounded-below-derived-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45; original item step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-exc-closed-ambient",
+  "def-sbc-standard-tstructure-derived-category",
+  "det-sp-unique-right-adjoint",
+  "lem-exc-closed-support-triangle",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-exc-derived-open-closed-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XQ and 0A45; original ind-etale closed support proof steps 2, 3 and 7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived localization triangle for closed immersion supported kernel right adjoint on bounded below etale module sheaves",
+   "results": "No matching etale D+ theorem. Results included CategoryTheory.Adjunction.derived and AlgebraicGeometry.Scheme.Modules.restrictAdjunction.",
+   "date": "2026-10-26",
+   "verdict": "No specialization gives this statement with the specified bounded below support functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded below supported kernel adjunction counit localization triangle complementary open orthogonality",
+   "results": "CategoryTheory.ObjectProperty.isLocal_trW, isColocal_trW and DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; no etale support comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlus|mateEquiv_vcomp|localization.*triangle (Mathlib); module and theorem names in lean/Sheaf, lean/WeilConjectures and dag/nodes",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates.mateEquiv_vcomp is the abstract pasting tool; exactFunctor localization exists but no specific geometric comparison. The upstream private generic shift proofs are reusable.",
+   "date": "2026-10-26",
+   "verdict": "Use existing abstract tools; the stated remaining geometric/normalization step has no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange",
+  "date": "2026-10-26",
+  "group": "A8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportPlusLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportPlusLocalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.closedSupportPlus_localization",
+  "statement": "theorem closedSupportPlus_localization\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (j : U ⟶ T) [IsOpenImmersion j]\n    (hij : Set.range i.base = (Set.range j.base)ᶜ) :\n    (∀ K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)),\n      ∃ δ, Triangle.mk\n        ((lowerStarClosedUpperShriekAdjunction\n          (ModuleCat.{u + 1} A) i j hij).derivedPlus.counit.app K)\n        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).derivedPlus.unit.app K)\n        δ ∈ distTriang _) ∧\n    (∀ (M : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)))\n      (N : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)))\n      (n : ℤ),\n      Subsingleton\n        (((lowerStar (ModuleCat.{u + 1} A) i).mapDerivedCategoryPlus.obj M)⟦n⟧ ⟶\n          (lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctorPlus.obj N))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T091108-L-3305170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261026T091108-L-3305170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.SfAlgebraicallyClosedCoefficients
 public import Mathlib.CategoryTheory.Pi.Basic
+public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficientStages
+
 
 /-! # Common-stage coefficients over arbitrary schemes
 
@@ -27,356 +29,203 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-universe u v
+universe d u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
+open scoped ZeroObject
 
 namespace WeilConjectures
 namespace GeneralAlgebraicallyClosedCoefficients
 
+attribute [local irreducible] ScalarLocalization.category
+
+attribute [local irreducible] sfRationalConstructibleLocalization
+  sfRationalTriangulationDatum sfRationalScalarExtension
+  sfRationalScalarComp sfRationalScalarUnit sfIntegralScalarComp sfIntegralScalarUnit
+  sfIntegralOrdinaryComparison
+
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion
   coefficientInclusion_laws)
+
+private abbrev PairCommon
+    {I : Type w} [Preorder I] {C : I → Type u} [∀ i, Category.{v} (C i)]
+    {S : StageSystem C} (A B : S.PairCategory) :=
+  {L : I // A.stage ≤ L ∧ B.stage ≤ L}
+private abbrev PairStageHom
+    {I : Type w} [Preorder I] {C : I → Type u} [∀ i, Category.{v} (C i)]
+    {S : StageSystem C} (A B : S.PairCategory) (L : PairCommon A B) :=
+  (S.T L.property.1).obj A.obj ⟶ (S.T L.property.2).obj B.obj
+private theorem generic_coordinates
+    {I : Type w} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type u} [∀ i, Category.{v} (C i)]
+    (S : StageSystem C) (A B : S.PairCategory)
+    [∀ L : PairCommon A B, AddCommGroup (PairStageHom A B L)]
+    [Nonempty (PairCommon A B)] [IsDirectedOrder (PairCommon A B)]
+    [DecidableEq (PairCommon A B)]
+    (t : ∀ L M : PairCommon A B, L ≤ M → PairStageHom A B L →+ PairStageHom A B M)
+    (ht : ∀ L M h f, t L M h f = S.tr h f)
+    (dt : DirectedSystem (PairStageHom A B) (fun {L M} h ↦ t L M h)) :
+    ∃! e : (A ⟶ B) ≃ AddCommGroup.DirectLimit (PairStageHom A B) t,
+      ∀ L hA hB f, e (StageSystem.PairCategory.mkHom L hA hB f) =
+        AddCommGroup.DirectLimit.of (PairStageHom A B) t ⟨L, hA, hB⟩ f := by
+  classical
+  let q : (A ⟶ B) ≃ _root_.DirectLimit ((PairStageHom A B))
+      (fun L M h ↦ t L M h) :=
+    { toFun := Quotient.lift
+        (fun r : StageSystem.PairCategory.Rep A B ↦
+          ⟦⟨⟨r.k, r.hX, r.hY⟩, r.u⟩⟧)
+        (by
+          rintro r s ⟨N, hr, hs, he⟩
+          apply Quotient.sound
+          refine ⟨⟨N, r.hX.trans hr, r.hY.trans hr⟩, hr, hs, ?_⟩
+          simpa only [ht] using he)
+      invFun := Quotient.lift
+        (fun r : Σ L : (PairCommon A B), (PairStageHom A B) L ↦
+          StageSystem.PairCategory.mkHom r.1.val r.1.property.1 r.1.property.2 r.2)
+        (by
+          rintro ⟨L, f⟩ ⟨M, g⟩ ⟨N, hL, hM, he⟩
+          exact (StageSystem.PairCategory.mkHom_eq_mkHom_iff' f g).2
+            ⟨N.val, hL, hM, by simpa only [ht] using he⟩)
+      left_inv := by intro f; induction f using Quotient.inductionOn; rfl
+      right_inv := by intro f; induction f using Quotient.inductionOn; rfl }
+  have : DirectedSystem ((PairStageHom A B))
+      (fun L M h ↦ (t L M h).toNatLinearMap) := by
+    constructor
+    · intro L f
+      exact @DirectedSystem.map_self _ _ ((PairStageHom A B))
+        (fun {L M} h ↦ t L M h) dt L f
+    · intro N M L h k f
+      exact @DirectedSystem.map_map _ _ ((PairStageHom A B))
+        (fun {L M} h ↦ t L M h) dt N M L h k f
+  let e : (A ⟶ B) ≃ AddCommGroup.DirectLimit (PairStageHom A B) t := q.trans
+    (Module.DirectLimit.linearEquiv ((PairStageHom A B))
+      (fun L M h ↦ (t L M h).toNatLinearMap)).symm.toEquiv
+  have he (L : I) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
+      (f : (PairStageHom A B) ⟨L, hA, hB⟩) :
+      e (StageSystem.PairCategory.mkHom L hA hB f) =
+        AddCommGroup.DirectLimit.of (PairStageHom A B) t ⟨L, hA, hB⟩ f := by
+    rfl
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Equiv.ext
+  intro f
+  induction f using StageSystem.PairCategory.hom_induction with
+  | h L hA hB f => exact (he' L hA hB f).trans (he L hA hB f).symm
+
+private theorem coordinates_add
+    {I : Type w} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type u} [∀ i, Category.{v} (C i)]
+    (S : StageSystem C) (A B : S.PairCategory)
+    [∀ L : PairCommon A B, AddCommGroup (PairStageHom A B L)]
+    [Nonempty (PairCommon A B)] [IsDirectedOrder (PairCommon A B)]
+    [DecidableEq (PairCommon A B)]
+    (t : ∀ L M : PairCommon A B, L ≤ M → PairStageHom A B L →+ PairStageHom A B M)
+    (e : (A ⟶ B) ≃ AddCommGroup.DirectLimit (PairStageHom A B) t)
+    (he : ∀ L hA hB f, e (StageSystem.PairCategory.mkHom L hA hB f) =
+      AddCommGroup.DirectLimit.of (PairStageHom A B) t ⟨L, hA, hB⟩ f)
+    (L : I) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
+    (f g : PairStageHom A B ⟨L, hA, hB⟩) :
+    letI := e.addCommGroup
+    StageSystem.PairCategory.mkHom L hA hB f +
+      StageSystem.PairCategory.mkHom L hA hB g =
+        StageSystem.PairCategory.mkHom L hA hB (f + g) := by
+  let := e.addCommGroup
+  apply e.injective
+  rw [show e (_ + _) = e _ + e _ from e.addEquiv.map_add _ _,
+    he L hA hB f, he L hA hB g, he L hA hB (f + g)]
+  exact (map_add (AddCommGroup.DirectLimit.of (PairStageHom A B) t
+    ⟨L, hA, hB⟩) f g).symm
+
+private theorem coordinates_zero
+    {I : Type w} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type u} [∀ i, Category.{v} (C i)]
+    (S : StageSystem C) (A B : S.PairCategory)
+    [∀ L : PairCommon A B, AddCommGroup (PairStageHom A B L)]
+    [Nonempty (PairCommon A B)] [IsDirectedOrder (PairCommon A B)]
+    [DecidableEq (PairCommon A B)]
+    (t : ∀ L M : PairCommon A B, L ≤ M → PairStageHom A B L →+ PairStageHom A B M)
+    (e : (A ⟶ B) ≃ AddCommGroup.DirectLimit (PairStageHom A B) t)
+    (he : ∀ L hA hB f, e (StageSystem.PairCategory.mkHom L hA hB f) =
+      AddCommGroup.DirectLimit.of (PairStageHom A B) t ⟨L, hA, hB⟩ f)
+    (L : I) (hA : A.stage ≤ L) (hB : B.stage ≤ L) :
+    letI := e.addCommGroup
+    StageSystem.PairCategory.mkHom L hA hB
+      (0 : PairStageHom A B ⟨L, hA, hB⟩) = 0 := by
+  let := e.addCommGroup
+  apply e.injective
+  rw [he L hA hB (0 : PairStageHom A B ⟨L, hA, hB⟩),
+    show e (0 : A ⟶ B) = 0 from e.addEquiv.map_zero]
+  exact map_zero (AddCommGroup.DirectLimit.of (PairStageHom A B) t ⟨L, hA, hB⟩)
+
+private theorem pair_composition_bilinear
+    {I : Type w} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type u} [∀ i, Category.{v} (C i)] [∀ i, Preadditive (C i)]
+    (S : StageSystem C) [∀ A B : S.PairCategory, AddCommGroup (A ⟶ B)]
+    (hadd : ∀ {A B : S.PairCategory} {L : I} (hA : A.stage ≤ L) (hB : B.stage ≤ L)
+      (f g : A.toStage hA ⟶ B.toStage hB),
+      StageSystem.PairCategory.mkHom L hA hB f +
+        StageSystem.PairCategory.mkHom L hA hB g =
+          StageSystem.PairCategory.mkHom L hA hB (f + g)) :
+    (∀ (A B C : S.PairCategory) (f f' : A ⟶ B) (g : B ⟶ C),
+      (f + f') ≫ g = f ≫ g + f' ≫ g) ∧
+    (∀ (A B C : S.PairCategory) (f : A ⟶ B) (g g' : B ⟶ C),
+      f ≫ (g + g') = f ≫ g + f ≫ g') := by
+  constructor
+  · intro A B C f f' g
+    obtain ⟨L, -, hA, hB, _, _, u, v, rfl, rfl⟩ :=
+      StageSystem.PairCategory.exists_common_stage f f' A.stage
+    obtain ⟨M, hLM, hB', hC, _, _, w, _, rfl, -⟩ :=
+      StageSystem.PairCategory.exists_common_stage g g L
+    rw [← StageSystem.PairCategory.mkHom_tr hLM u,
+      ← StageSystem.PairCategory.mkHom_tr hLM v, hadd,
+      StageSystem.PairCategory.mkHom_comp_mkHom,
+      StageSystem.PairCategory.mkHom_comp_mkHom,
+      StageSystem.PairCategory.mkHom_comp_mkHom, hadd, Preadditive.add_comp]
+  · intro A B C f g g'
+    obtain ⟨L, -, hB, hC, _, _, v, w, rfl, rfl⟩ :=
+      StageSystem.PairCategory.exists_common_stage g g' B.stage
+    obtain ⟨M, hLM, hA, hB', _, _, u, _, rfl, -⟩ :=
+      StageSystem.PairCategory.exists_common_stage f f L
+    rw [← StageSystem.PairCategory.mkHom_tr hLM v,
+      ← StageSystem.PairCategory.mkHom_tr hLM w, hadd,
+      StageSystem.PairCategory.mkHom_comp_mkHom,
+      StageSystem.PairCategory.mkHom_comp_mkHom,
+      StageSystem.PairCategory.mkHom_comp_mkHom, hadd, Preadditive.comp_add]
+
+private theorem stage_transport_additive
+    {I : Type w} [Preorder I] {C : I → Type u} [∀ i, Category.{v} (C i)]
+    [∀ i, Preadditive (C i)] (S : StageSystem C)
+    {i j n p : I} (hi : i ≤ n) (hj : j ≤ n) (h : n ≤ p)
+    [(S.T h).Additive] (x : C i) (y : C j) :
+    S.tr (hi := hi) (hj := hj) h (0 : (S.T hi).obj x ⟶ (S.T hj).obj y) = 0 ∧
+      ∀ f g : (S.T hi).obj x ⟶ (S.T hj).obj y,
+        S.tr h (f + g) = S.tr h f + S.tr h g := by
+  constructor
+  · simp only [StageSystem.tr, Functor.map_zero, Limits.comp_zero, Limits.zero_comp]
+  · intro f g
+    simp only [StageSystem.tr, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
+
+private theorem stage_transport_self
+    {I : Type w} [Preorder I] {C : I → Type u} [∀ i, Category.{v} (C i)]
+    (S : StageSystem C) {i j n : I} (hi : i ≤ n) (hj : j ≤ n)
+    [(S.T (le_refl n)).Faithful] (x : C i) (y : C j)
+    (f : (S.T hi).obj x ⟶ (S.T hj).obj y) : S.tr (le_refl n) f = f := by
+  apply (S.T (le_refl n)).map_injective
+  apply (StageSystem.tr_injective (S := S) (le_refl n)).mp
+  exact StageSystem.tr_tr (S := S) (le_refl n) (le_refl n) f
+
+private theorem additive_equivalence
+    {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+    [HasZeroObject C] [HasZeroObject D] [HasBinaryProducts C] (e : C ≌ D) :
+    e.functor.Additive := by
+  let : e.functor.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_preserves_initial_object
+  exact Functor.additive_of_preserves_binary_products _
 
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The specified raw rational stage, using its equivalent small coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def Stage (E : Index l Ω) :=
-  sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y
-
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stageCategory (E : Index l Ω) :
-    Category (Stage l Ω Y E) :=
-  inferInstanceAs (Category (sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y))
-
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stagePreadditive (E : Index l Ω) :
-    Preadditive (Stage l Ω Y E) :=
-  inferInstanceAs (Preadditive
-    (sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y))
-
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stageZero (E : Index l Ω) :
-    HasZeroObject (Stage l Ω Y E) :=
-  sfRationalConstructibleZero l (Coefficient.{u} l Ω E) Y
-
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stageShift (E : Index l Ω) :
-    HasShift (Stage l Ω Y E) ℤ :=
-  sfRationalConstructibleShift l (Coefficient.{u} l Ω E) Y
-
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stageShiftAdditive (E : Index l Ω) (n : ℤ) :
-    (shiftFunctor (Stage l Ω Y E) n).Additive :=
-  sfRationalConstructibleShiftAdditive l (Coefficient.{u} l Ω E) Y n
-
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stagePretriangulated (E : Index l Ω) :
-    Pretriangulated (Stage l Ω Y E) :=
-  sfRationalConstructiblePretriangulated l (Coefficient.{u} l Ω E) Y
-
-/-- Cache the existing rational stage structure on the named coefficient model.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stageTriangulated (E : Index l Ω) :
-    IsTriangulated (Stage l Ω Y E) :=
-  sfRationalConstructibleTriangulated l (Coefficient.{u} l Ω E) Y
-
-/-- The characteristic parameter affects only preservation proofs, not scalar extension.
-This identifies the datum-free transition with every allowed specialization before
-forming the common-stage system, without choosing a finite-field datum.
-Source: blueprint order 1821, scalar-transition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: unfold sfConstructibleIntegralScalarExtension. For either parameter its object
-is the same ambient completed extension with a proof of the same intrinsic predicate.
-Proof irrelevance identifies these subtype objects; the full-subcategory morphism maps
-are the same ambient maps. Functor extensionality gives the first equality. Substitute
-that equality in sfRationalScalarExtension_existsUnique: the two specifications have
-the same object formula and the same image of every pure tensor. Uniqueness gives the
-second equality. The argument includes identity coefficient maps and zero objects and
-uses no geometric hypothesis on Y. -/
-theorem scalarExtension_parameter_independent
-    (l : ℕ) [Fact l.Prime] (p q : ℕ) (hp : l ≠ p) (hq : l ≠ q)
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
-    (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u}) :
-    sfConstructibleIntegralScalarExtension p l hp E L ι Y =
-        sfConstructibleIntegralScalarExtension q l hq E L ι Y ∧
-      sfRationalScalarExtension l E Y p hp L ι =
-        sfRationalScalarExtension l E Y q hq L ι := by
-  set_option backward.isDefEq.respectTransparency false in
-    set_option backward.isDefEq.respectTransparency.types false in
-      exact ⟨rfl, rfl⟩
-
-/-- The actual completed rational scalar transition, with both coefficient identifications.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def transition (E L : Index l Ω) (h : E ≤ L) :
-    Stage l Ω Y E ⥤ Stage l Ω Y L :=
-  sfRationalScalarExtension l (Coefficient.{u} l Ω E) Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime))
-    (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h)
-
-/-- The datum-free restricted completed integral tensor transition.
-Only its preservation proof uses the zero instance of the redundant parameter.
-Source: blueprint order 1821 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable abbrev integralTransition (E L : Index l Ω) (h : E ≤ L) :=
-  sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
-    (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
-    (coefficientInclusion l Ω E L h) Y
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- The integral transition inherits the ordinary tensor shift through its canonical
-quotient-completion comparison, not through an arbitrary exact-functor witness.
-Source: blueprint order 1462, exact transition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: conjugate the ordinary derived tensor shift by sfIntegralOrdinaryComparison.
-The full intrinsic subcategory inherits the ambient shift. The inclusion's shift
-comparisons identify its shifted objects with ambient shifts on both sides. Full
-faithfulness lifts each component and its inverse. Naturality, the zero equation and
-the addition equation follow from the ordinary ones by cancellation of the comparisons.
-The formula fixes all components,
-so extensionality of natural isomorphisms and proof irrelevance prove uniqueness. -/
-theorem integralScalarCommShift_existsUnique
-    (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
-    (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u}) :
-    ∃! c : (sfConstructibleIntegralScalarExtension 0 l
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).CommShift ℤ,
-      (fun [commInst : (sfConstructibleIntegralScalarExtension 0 l
-          (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).CommShift ℤ] ↦
-        ∀ (n : ℤ) (K : sfIntegralConstructibleCategory l E Y),
-          HEq
-            ((((sfConstructibleIntegralScalarExtension 0 l
-              (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).commShiftIso n).hom.app K).hom ≫
-              ((sfIntegralConstructible l L Y).ι.commShiftIso n).hom.app
-                ((sfConstructibleIntegralScalarExtension 0 l
-                  (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).obj K))
-            ((sfIntegralOrdinaryComparison l E L ι Y).inv.app
-                ((shiftFunctor (sfIntegralConstructibleCategory l E Y) n).obj K) ≫
-              (Functor.commShiftIso
-                ((sfIntegralConstructible l E Y).ι ⋙ integralOrdinaryDerivedScalar l E L ι Y)
-                n).hom.app K ≫
-              (shiftFunctor (DerivedCategory (scalarReductionSource.{u, u} l L Y)) n).map
-                ((sfIntegralOrdinaryComparison l E L ι Y).hom.app K)))
-        (commInst := c) := by
-  sorry
-
-/-- The fixed ordinary-to-completed normalization of the integral transition shift.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance integralTransitionCommShift (E L : Index l Ω) (h : E ≤ L) :
-    (integralTransition l Ω Y E L h).CommShift ℤ :=
-  (integralScalarCommShift_existsUnique l (Coefficient.{u} l Ω E)
-    (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) Y).exists.choose
-
-/-- The rational transition shift is uniquely fixed by localizing the normalized integral
-shift. Source: blueprint order 1462, exact transition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: tensor the integral components and inverses with one. On pure tensors, integral
-naturality gives rational naturality; generation gives it on every Hom. The recorded
-rational shift and localization comparison are normalized to the integral shift and
-identity at one. Thus the displayed HEq gives the shift-by-one comparison. Iteration and
-inverse shifts give all integer comparisons and their coherence. A coherent integer-shift
-comparison is determined at one, which also proves uniqueness. -/
-theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
-    ∃! c : (transition l Ω Y E L h).CommShift ℤ,
-      (fun [commInst : (transition l Ω Y E L h).CommShift ℤ] ↦
-        ∀ K : Stage l Ω Y E,
-          HEq (((transition l Ω Y E L h).commShiftIso (1 : ℤ)).hom.app K)
-            ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) Y).map
-              (((integralTransition l Ω Y E L h).commShiftIso (1 : ℤ)).hom.app K.obj)))
-        (commInst := c) := by
-  sorry
-
-/-- The canonical, integral-image-normalized shift comparison of the rational transition.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance transitionCommShift (E L : Index l Ω) (h : E ≤ L) :
-    (transition l Ω Y E L h).CommShift ℤ :=
-  (transitionCommShift_existsUnique l Ω Y E L h).exists.choose
-
-/-- Exactness for the normalized shift comparison on the recorded intrinsic rational stages.
-Source: blueprint order 1462, exact transition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: use the exactness argument of sfScalarExtension_exact_triangulated: the Roos cone
-shift is conjugate through the quotient-completion comparison to the ordinary tensor
-shift. Full intrinsic subcategories inherit distinguished triangles, and rationalization
-has precisely the isomorphic integral image triangles. The preceding normalization is
-that same comparison, so the finite scalar transition preserves distinguished triangles
-including their connecting arrows. -/
-@[instance]
-theorem transitionExact (E L : Index l Ω) (h : E ≤ L) :
-    (transition l Ω Y E L h).IsTriangulated := by
-  sorry
-
-/-- Additivity of the published intrinsic rational scalar-extension functor.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: the transition is the published sfRationalScalarExtension. Its named
-additivity instance gives precisely the two equations for the recorded stage Hom groups. -/
-@[instance]
-theorem transitionAdditive (E L : Index l Ω) (h : E ≤ L) :
-    (transition l Ω Y E L h).Additive := by
-  set_option backward.isDefEq.respectTransparency false in
-    set_option backward.isDefEq.respectTransparency.types false in
-      have hΩ := Padic.finiteCoefficientFields_properties l Ω
-      exact hΩ.rec (fun _ _ ↦ sfRationalScalarExtension_additive l (Coefficient.{u} l Ω E) Y 0
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
-        (coefficientInclusion l Ω E L h))
-
-/-- Balanced tensor composition followed by the specified coefficient-map equality.
-This helper keeps the ordinary field structures explicit during size transport.
-Source: blueprint order 1821 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def scalarAssociator
-    (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
-    (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M]
-    (ι : E →ₐ[Padic l] L) (j : L →ₐ[Padic l] M) (k : E →ₐ[Padic l] M)
-    (h : j.comp ι = k) (Y : AlgebraicGeometry.Scheme.{u}) :
-    sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι ⋙
-        sfRationalScalarExtension l L Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) M j ≅
-      sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) M k :=
-  sfRationalScalarComp l E L ι Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) M j ≪≫
-    eqToIso (congrArg
-      (sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) M) h)
-
-/-- The scalar associator is fixed by the published balanced-tensor comparison.
-Source: blueprint order 1462, canonical composition clause
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: use sfRationalScalarComp, followed by equality transport along the actual
-coefficient-inclusion composition law, exactly scalarAssociator. The stage
-structures are the published rational structures, so this has the asserted endpoints.
-HEq specifies the entire natural isomorphism and hence proves uniqueness. -/
-theorem associator_existsUnique (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
-    ∃! a : transition l Ω Y E L h ⋙ transition l Ω Y L M k ≅
-        transition l Ω Y E M (h.trans k),
-      HEq a (scalarAssociator l (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)
-        (Coefficient.{u} l Ω M) (coefficientInclusion l Ω E L h)
-        (coefficientInclusion l Ω L M k) (coefficientInclusion l Ω E M (h.trans k))
-        ((coefficientInclusion_laws l Ω).2 E L M h k) Y) := by
-  refine ⟨_, HEq.rfl, ?_⟩
-  intro a ha
-  exact eq_of_heq ha
-
-/-- The canonical scalar associator, with its tensor-generator normalization.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def associator (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
-    transition l Ω Y E L h ⋙ transition l Ω Y L M k ≅
-      transition l Ω Y E M (h.trans k) :=
-  (associator_existsUnique l Ω Y E L M h k).exists.choose
-
-/-- The normalized scalar unit, transported through the coefficient identifications.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable def unitor (E : Index l Ω) : transition l Ω Y E E le_rfl ≅
-    𝟭 (Stage l Ω Y E) :=
-  eqToIso (congrArg (sfRationalScalarExtension l
-    (Coefficient.{u} l Ω E) Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω E))
-    ((coefficientInclusion_laws l Ω).1 E)) ≪≫
-    sfRationalScalarUnit l (Coefficient.{u} l Ω E) Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime))
-
-/-- The normalized tensor associators satisfy the stage-system cocycle.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: sfRationalScalar_coherence proves the tensor pentagon. The small
-coefficient inclusions compose by coefficientInclusion_laws. Substitution gives the
-displayed cocycle, including repeated fields and identity inclusions. -/
-theorem associator_cocycle
-    (l : ℕ) [Fact l.Prime]
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (Y : AlgebraicGeometry.Scheme.{u})
-    (E L M N : Padic.FiniteCoefficientFields l Ω)
-    (h : E ≤ L) (k : L ≤ M) (m : M ≤ N) (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E) :
-    (GeneralAlgebraicallyClosedCoefficients.transition l Ω Y M N m).map
-        ((GeneralAlgebraicallyClosedCoefficients.associator l Ω Y E L M h k).hom.app K) ≫
-        (GeneralAlgebraicallyClosedCoefficients.associator l Ω Y E M N (h.trans k) m).hom.app K =
-      (GeneralAlgebraicallyClosedCoefficients.associator l Ω Y L M N k m).hom.app
-          ((GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E L h).obj K) ≫
-        (GeneralAlgebraicallyClosedCoefficients.associator l Ω Y E L N h (k.trans m)).hom.app K :=
-            by
-  sorry
-
-/-- The tensor transitions and associators uniquely determine the stage system.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: take T to be transition and assoc to be associator; associator_cocycle is
-precisely the required coherence equation. Conversely the displayed equalities fix
-all data fields of StageSystem; the remaining cocycle proof is proof irrelevant. -/
-theorem stageSystem_existsUnique
-    (l : ℕ) [Fact l.Prime]
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (Y : AlgebraicGeometry.Scheme.{u})
-    :
-    ∃! S : StageSystem (GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y),
-      (∀ (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L), S.T h =
-          GeneralAlgebraicallyClosedCoefficients.transition l Ω Y E L h) ∧
-      (∀ (E L M : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) (k : L ≤ M),
-        HEq (S.assoc h k) (GeneralAlgebraicallyClosedCoefficients.associator l Ω Y E L M h k)) := by
-  let S : StageSystem (Stage l Ω Y) :=
-    { T := fun {E L} h ↦ transition l Ω Y E L h
-      assoc := fun {E L M} h k ↦ associator l Ω Y E L M h k
-      cocycle := fun h k m K ↦ associator_cocycle l Ω Y _ _ _ _ h k m K }
-  refine ⟨S, ⟨fun _ _ _ ↦ rfl, fun _ _ _ _ _ ↦ HEq.rfl⟩, ?_⟩
-  rintro ⟨T, a, c⟩ ⟨hT, ha⟩
-  have ht : @T = @S.T := by
-    funext E L h
-    exact hT E L h
-  cases ht
-  have he : @a = @S.assoc := by
-    funext E L M h k
-    exact eq_of_heq (ha E L M h k)
-  cases he
-  rfl
-
-/-- The stage system with exactly the specified tensor functors and associators.
-The uniqueness specification fixes every data field, retaining a small opaque interface
-for later elaboration of dependent representative types.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable abbrev stageSystem : StageSystem (Stage l Ω Y) :=
-  (stageSystem_existsUnique l Ω Y).exists.choose
-
-/-- The existing tensor functor as a transition of the uniquely fixed stage system.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable abbrev stageTransition (E L : Index l Ω) (h : E ≤ L) :=
-  (stageSystem l Ω Y).T h
-
-/-- The specified shift comparison transported by equality of the transition functors.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
-noncomputable instance stageTransitionCommShift (E L : Index l Ω) (h : E ≤ L) :
-    (stageTransition l Ω Y E L h).CommShift ℤ :=
-  cast (congrArg (fun F : Stage l Ω Y E ⥤ Stage l Ω Y L ↦ F.CommShift ℤ)
-    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E L h).symm)
-    (transitionCommShift l Ω Y E L h)
-
-/-- Exactness of the prescribed stage transition.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: stageSystem_existsUnique identifies this functor and its shift comparison
-with the specified tensor extension. Apply transitionExact. -/
-@[instance]
-theorem stageTransition_exact
-    (l : ℕ) [Fact l.Prime]
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (Y : AlgebraicGeometry.Scheme.{u})
-    (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) :
-    (GeneralAlgebraicallyClosedCoefficients.stageTransition l Ω Y E L h).IsTriangulated := by
-  sorry
-
-/-- Additivity of the prescribed stage transition.
-Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: equality of functors with transition reduces the claim to transitionAdditive. -/
-@[instance]
-theorem stageTransition_additive
-    (l : ℕ) [Fact l.Prime]
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (Y : AlgebraicGeometry.Scheme.{u})
-    (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) :
-    (GeneralAlgebraicallyClosedCoefficients.stageTransition l Ω Y E L h).Additive := by
-  unfold stageTransition
-  rw [(stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E L h]
-  exact transitionAdditive l Ω Y E L h
-
+attribute [local irreducible] stageCategory transition scalarAssociator associator
 
 /-- The upstream common-stage pair category, specialized to the specified rational stages.
 Its objects are literal pairs, and no idempotents are adjoined.
@@ -447,13 +296,8 @@ theorem transport_additive
       ∀ f g, GeneralAlgebraicallyClosedCoefficients.transport A B L M h (f + g) =
         GeneralAlgebraicallyClosedCoefficients.transport A B L M h f +
             GeneralAlgebraicallyClosedCoefficients.transport A B L M h g := by
-  set_option backward.isDefEq.respectTransparency false in
-    set_option backward.isDefEq.respectTransparency.types false in
-      constructor
-      · simp only [transport, Functor.map_zero, Limits.comp_zero, Limits.zero_comp]
-      · intro f g
-        dsimp only [transport, stageHomAddCommGroup]
-        rw [Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
+  exact stage_transport_additive (stageSystem l Ω Y)
+    L.property.1 L.property.2 h A.obj B.obj
 
 /-- The transition homomorphism of the directed Hom system.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -473,7 +317,17 @@ associators cancel. This gives identity and composition on each representative. 
 @[instance]
 theorem transportSystem (A B : Pair l Ω Y) :
     DirectedSystem (StageHom A B) (fun {L M} h ↦ transportHom A B L M h) := by
-  sorry
+  -- Faithfulness turns the cocycle's idempotent reflexive transport into the identity.
+  constructor
+  · intro L f
+    have hf : (stageTransition l Ω Y L.val L.val le_rfl).Faithful := by
+      unfold stageTransition
+      rw [(stageSystem_existsUnique l Ω Y).exists.choose_spec.1 L.val L.val le_rfl]
+      exact Functor.Faithful.of_iso (unitor l Ω Y L.val).symm
+    exact stage_transport_self (stageSystem l Ω Y)
+      L.property.1 L.property.2 A.obj B.obj f
+  · intro N M L h k f
+    exact StageSystem.tr_tr (S := stageSystem l Ω Y) h k f
 
 /-- Decidable equality is used only to realize Mathlib's algebraic direct limit.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -484,6 +338,8 @@ noncomputable instance commonDecidableEq (A B : Pair l Ω Y) :
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
 noncomputable def ColimitHom (A B : Pair l Ω Y) :=
   AddCommGroup.DirectLimit (StageHom A B) (transportHom A B)
+
+attribute [local irreducible] unitor
 
 /-- The direct limit's abelian group structure, on the fixed Hom type.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -515,7 +371,11 @@ theorem homCoordinates_existsUnique
         e (StageSystem.PairCategory.mkHom L hA hB f) =
           GeneralAlgebraicallyClosedCoefficients.colimitOf A
             B L hA hB f := by
-  sorry
+  exact @generic_coordinates (Index l Ω) inferInstance inferInstance (Stage l Ω Y)
+    (fun E ↦ stageCategory l Ω Y E)
+    (stageSystem l Ω Y) A B (stageHomAddCommGroup A B)
+    inferInstance inferInstance (commonDecidableEq A B)
+    (transportHom A B) (fun _ _ _ _ ↦ rfl) (transportSystem A B)
 
 /-- The canonical Hom coordinates, fixed on every common-stage representative.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -534,6 +394,29 @@ noncomputable abbrev ofHom (A B : Pair l Ω Y) (L : Index l Ω)
     (f : StageHom A B ⟨L, hA, hB⟩) : A ⟶ B :=
   StageSystem.PairCategory.mkHom L hA hB f
 
+private theorem mkHom_add {A B : Pair l Ω Y} {L : Index l Ω}
+    (hA : A.stage ≤ L) (hB : B.stage ≤ L)
+    (f g : A.toStage hA ⟶ B.toStage hB) :
+    StageSystem.PairCategory.mkHom L hA hB f +
+      StageSystem.PairCategory.mkHom L hA hB g =
+        StageSystem.PairCategory.mkHom L hA hB (f + g) := by
+  exact @coordinates_add (Index l Ω) inferInstance inferInstance (Stage l Ω Y)
+    (fun E ↦ stageCategory l Ω Y E)
+    (stageSystem l Ω Y) A B (stageHomAddCommGroup A B)
+    inferInstance inferInstance (commonDecidableEq A B)
+    (transportHom A B) (homCoordinates A B)
+    (homCoordinates_existsUnique A B).exists.choose_spec L hA hB f g
+
+private theorem mkHom_zero {A B : Pair l Ω Y} {L : Index l Ω}
+    (hA : A.stage ≤ L) (hB : B.stage ≤ L) :
+    StageSystem.PairCategory.mkHom L hA hB (0 : A.toStage hA ⟶ B.toStage hB) = 0 := by
+  exact @coordinates_zero (Index l Ω) inferInstance inferInstance (Stage l Ω Y)
+    (fun E ↦ stageCategory l Ω Y E)
+    (stageSystem l Ω Y) A B (stageHomAddCommGroup A B)
+    inferInstance inferInstance (commonDecidableEq A B)
+    (transportHom A B) (homCoordinates A B)
+    (homCoordinates_existsUnique A B).exists.choose_spec L hA hB
+
 /-- The fixed composition is additive in each variable.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
 Proof: represent the three maps at a common compositum. Colimit structure maps are
@@ -547,7 +430,11 @@ theorem composition_bilinear
       (f + f') ≫ g = f ≫ g + f' ≫ g) ∧
     (∀ (A B C : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) (f : A ⟶ B) (g g' : B ⟶ C),
       f ≫ (g + g') = f ≫ g + f ≫ g') := by
-  sorry
+  exact pair_composition_bilinear (stageSystem l Ω Y)
+    (fun hA hB f g ↦ mkHom_add hA hB f g)
+
+section
+attribute [local irreducible] homAddCommGroup
 
 /-- Preadditivity uses the actual colimit abelian groups.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -555,6 +442,8 @@ noncomputable instance preadditive : Preadditive (Pair l Ω Y) where
   homGroup A B := homAddCommGroup A B
   add_comp A B C f f' g := composition_bilinear.1 A B C f f' g
   comp_add A B C f g g' := composition_bilinear.2 A B C f g g'
+
+end
 
 /-- The existing upstream inclusion of the actual rational finite stage.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
@@ -573,7 +462,12 @@ theorem inclusion_additive
     {Y : AlgebraicGeometry.Scheme.{u}}
     (E : Padic.FiniteCoefficientFields l Ω) : (GeneralAlgebraicallyClosedCoefficients.inclusion E :
         GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E ⥤ _).Additive := by
-  sorry
+  constructor
+  intro X Z f g
+  rw [StageSystem.ι_map_eq le_rfl, StageSystem.ι_map_eq le_rfl,
+    StageSystem.ι_map_eq le_rfl, Functor.map_add]
+  exact (mkHom_add (l := l) (Ω := Ω) (Y := Y)
+    (A := ⟨E, X⟩) (B := ⟨E, Z⟩) le_rfl le_rfl _ _).symm
 
 /-- Every class has a finite representative, and equality is equality at a later stage.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
@@ -679,7 +573,14 @@ Proof: take the zero object at the bottom coefficient field. Every transition is
 and therefore preserves zero. At every common field its Hom groups to and from any
 object vanish. Their directed colimits vanish, giving the zero-object universal property. -/
 theorem zero_exists : HasZeroObject (Pair l Ω Y) := by
-  sorry
+  let E := Padic.finiteCoefficientBase l Ω
+  let X : Pair l Ω Y := (inclusion E).obj (0 : Stage l Ω Y E)
+  refine ⟨⟨X, ?_⟩⟩
+  rw [IsZero.iff_id_eq_zero, StageSystem.PairCategory.id_eq_mkHom X le_rfl,
+    ← mkHom_zero (A := X) (B := X) le_rfl le_rfl]
+  have hz : IsZero (X.toStage le_rfl) :=
+    Functor.map_isZero (stageTransition l Ω Y E E le_rfl) (isZero_zero _)
+  exact congrArg (StageSystem.PairCategory.mkHom E le_rfl le_rfl) (hz.eq_of_src _ _)
 
 attribute [instance] zero_exists
 
@@ -751,7 +652,30 @@ theorem commonStage_cone (A B : Pair l Ω Y) (L : Index l Ω)
     (hT : Triangle.mk u i p ∈ distTriang (Stage l Ω Y L)) :
     (stageSystem l Ω Y).commonStageCone A B L hA hB C u i p ∈
       distTriang (Pair l Ω Y) := by
-  sorry
+  apply (distinguished_iff _).2
+  refine ⟨L, Triangle.mk u i p, hT, ⟨?_⟩⟩
+  refine Triangle.isoMk _ _ ((stageSystem l Ω Y).isoToStage A hA)
+    ((stageSystem l Ω Y).isoToStage B hB) (Iso.refl _) ?_ ?_ ?_
+  · change StageSystem.PairCategory.mkHom L hA hB u ≫
+        ((stageSystem l Ω Y).isoToStage B hB).hom = _
+    rw [StageSystem.mkHom_eq_isoToStage hA hB u]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rfl
+  · exact Category.comp_id _
+  · change (((stageSystem l Ω Y).ι L).map p ≫
+        (((stageSystem l Ω Y).ι L).commShiftIso (1 : ℤ)).hom.app _ ≫
+        (shiftFunctor (Pair l Ω Y) (1 : ℤ)).map
+          ((stageSystem l Ω Y).isoToStage A hA).inv) ≫
+        (shiftFunctor (Pair l Ω Y) (1 : ℤ)).map
+          ((stageSystem l Ω Y).isoToStage A hA).hom = _
+    rw [Category.assoc, Category.assoc, ← Functor.map_comp,
+      Iso.inv_hom_id]
+    change _ = 𝟙 _ ≫
+      (((stageSystem l Ω Y).ι L).map p ≫
+        (((stageSystem l Ω Y).ι L).commShiftIso (1 : ℤ)).hom.app _)
+    simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+    exact congrArg (fun f ↦ ((stageSystem l Ω Y).ι L).map p ≫ f)
+      (Category.comp_id _)
 
 end GeneralAlgebraicallyClosedCoefficients
 
@@ -767,24 +691,82 @@ noncomputable abbrev generalAlgebraicallyClosedConstructibleCategory
 
 namespace GeneralAlgebraicallyClosedCoefficients
 
-universe d
+attribute [local irreducible] homAddCommGroup
+  SfAlgebraicallyClosedCoefficients.homAddCommGroup
+
+attribute [local irreducible] ScalarLocalization.composition
+  sfRationalScalarExtension sfRationalTriangulationDatum sfRationalConstructibleLocalization
+
+private theorem stage_equality_transport
+    {I : Type w} [Preorder I] {C : I → Type u} [cC : ∀ i, Category.{v} (C i)]
+    {S R : StageSystem C} (e : S = R)
+    {i j n p : I} (hi : i ≤ n) (hj : j ≤ n) (h : n ≤ p)
+    (x : C i) (y : C j)
+    (f : (S.T hi).obj x ⟶ (S.T hj).obj y)
+    (g : (R.T hi).obj x ⟶ (R.T hj).obj y) (hfg : HEq f g) :
+    HEq (S.tr h f) (R.tr h g) := by
+  subst R
+  cases eq_of_heq hfg
+  rfl
+
+private theorem stage_equality_pairs
+    {I : Type w} [Preorder I] [IsDirectedOrder I]
+    {C : I → Type u} [cC : ∀ i, Category.{v} (C i)]
+    {S R : StageSystem C} (e : S = R) :
+    (∀ (i : I) (x : C i),
+      (Pi.eqToEquivalence (fun T : StageSystem C ↦ T.PairCategory) e).functor.obj
+        ⟨i, x⟩ = ⟨i, x⟩) ∧
+    (∀ (A B : S.PairCategory) (n : I) (hi : A.stage ≤ n) (hj : B.stage ≤ n)
+      (f : (S.T hi).obj A.obj ⟶ (S.T hj).obj B.obj)
+      (g : (R.T hi).obj A.obj ⟶ (R.T hj).obj B.obj),
+      HEq f g → HEq
+        ((Pi.eqToEquivalence (fun T : StageSystem C ↦ T.PairCategory) e).functor.map
+          (StageSystem.PairCategory.mkHom n hi hj f))
+        (StageSystem.PairCategory.mkHom (S := R)
+          (X := ⟨A.stage, A.obj⟩) (Y := ⟨B.stage, B.obj⟩) n hi hj g)) := by
+  subst R
+  constructor
+  · intro i x
+    rfl
+  · intro A B n hi hj f g hfg
+    cases eq_of_heq hfg
+    rfl
+
+private theorem normalized_comp_parameter_independent
+    (l : ℕ) [Fact l.Prime]
+    (E L M : Type u) [Field E] [Field L] [Field M]
+    [Algebra (Padic l) E] [Algebra (Padic l) L] [Algebra (Padic l) M]
+    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L]
+    [FiniteDimensional (Padic l) M]
+    (i : E →ₐ[Padic l] L) (j : L →ₐ[Padic l] M) (k : E →ₐ[Padic l] M)
+    (h : j.comp i = k) (Y : AlgebraicGeometry.Scheme.{u})
+    (p q : ℕ) (hp : l ≠ p) (hq : l ≠ q) :
+    HEq
+      (sfRationalScalarComp l E L i Y p hp M j ≪≫
+        eqToIso (congrArg (sfRationalScalarExtension l E Y p hp M) h))
+      (sfRationalScalarComp l E L i Y q hq M j ≪≫
+        eqToIso (congrArg (sfRationalScalarExtension l E Y q hq M) h)) := by
+  unfold sfRationalScalarComp sfRationalScalarExtension sfIntegralScalarComp
+  unfold sfConstructibleIntegralScalarExtension
+  rfl
+
+private theorem normalized_unit_parameter_independent
+    (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (i : E →ₐ[Padic l] E) (h : i = AlgHom.id (Padic l) E)
+    (Y : AlgebraicGeometry.Scheme.{u}) (p q : ℕ) (hp : l ≠ p) (hq : l ≠ q) :
+    HEq
+      (eqToIso (congrArg (sfRationalScalarExtension l E Y p hp E) h) ≪≫
+        sfRationalScalarUnit l E Y p hp)
+      (eqToIso (congrArg (sfRationalScalarExtension l E Y q hq E) h) ≪≫
+        sfRationalScalarUnit l E Y q hq) := by
+  unfold sfRationalScalarUnit sfRationalScalarExtension sfIntegralScalarUnit
+  unfold sfConstructibleIntegralScalarExtension
+  rfl
+
 variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
-
-/-- The proof parameter in preservation cannot change the tensor functor.
-Source: blueprint order 1821, scalar transitions
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: the integral restrictions have the same ambient object and arrow maps;
-only their membership proofs differ, hence they agree by proof irrelevance.
-The two rational functors therefore satisfy the identical exists-unique tensor
-specification of sfRationalScalarExtension_existsUnique. Its uniqueness identifies
-these functors on objects and all pure tensors, hence on every morphism. -/
-theorem specialization_transition (E L : AlgebraicallyClosedCoefficients.Index l Ω)
-    (h : E ≤ L) :
-    transition l Ω Y E L h = SfAlgebraicallyClosedCoefficients.transition D l hl Ω Y E L h := by
-  have hΩ := Padic.finiteCoefficientFields_properties l Ω
-  exact hΩ.rec (fun _ _ ↦ rfl)
 
 /-- The normalized associator and identity comparison specialize canonically.
 Source: blueprint order 1821, canonical composition clause
@@ -801,21 +783,35 @@ theorem specialization_comparisons :
         (SfAlgebraicallyClosedCoefficients.associator D l hl Ω Y E L M h k)) ∧
     (∀ E : AlgebraicallyClosedCoefficients.Index l Ω,
       HEq (unitor l Ω Y E) (SfAlgebraicallyClosedCoefficients.unitor D l hl Ω Y E)) := by
-  sorry
+  constructor
+  · intro E L M h k
+    apply ((associator_existsUnique l Ω Y E L M h k).exists.choose_spec).trans
+    unfold scalarAssociator SfAlgebraicallyClosedCoefficients.associator
+    unfold SfAlgebraicallyClosedCoefficients.transition
+    dsimp (config := { instances := true }) only
+      [SfAlgebraicallyClosedCoefficients.stageCategory,
+        SfAlgebraicallyClosedCoefficients.Stage, FiniteFieldDatum.sfRationalCategory]
+    exact normalized_comp_parameter_independent l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω M)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L h)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω L M k)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E M (h.trans k))
+      ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k)
+      Y 0 D.p (Fact.out : l.Prime).ne_zero hl
+  · intro E
+    unfold unitor SfAlgebraicallyClosedCoefficients.unitor
+    unfold transition SfAlgebraicallyClosedCoefficients.transition
+    dsimp (config := { instances := true }) only
+      [SfAlgebraicallyClosedCoefficients.stageCategory,
+        SfAlgebraicallyClosedCoefficients.Stage, FiniteFieldDatum.sfRationalCategory]
+    exact normalized_unit_parameter_independent l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E E le_rfl)
+      ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).1 E)
+      Y 0 D.p (Fact.out : l.Prime).ne_zero hl
 
-/-- The normalized scalar shift comparisons agree under specialization.
-Source: blueprint order 1821, exact transitions
-(blueprint: def-weil-algebraically-closed-coefficients).
-Proof: the integral comparison is fixed by the same ordinary tensor shift and
-quotient-completion normalization on every object, independently of the proof
-parameter. Uniqueness identifies the two integral CommShift structures. The
-rational shift comparison is uniquely their localized image at one, with its
-coherent integer iterates, so its uniqueness gives the displayed identification. -/
-theorem specialization_transitionShift
-    (E L : AlgebraicallyClosedCoefficients.Index l Ω) (h : E ≤ L) :
-    HEq (transitionCommShift l Ω Y E L h)
-      (SfAlgebraicallyClosedCoefficients.transitionCommShift D l hl Ω Y E L h) := by
-  sorry
 
 /-- Equality of the complete normalized stage data, not merely its carriers.
 Source: blueprint order 1821, finite-stage pair construction
@@ -839,7 +835,6 @@ theorem specialization_stageSystem :
         · intro E L M h k
           exact (hOld.2 E L M h k).trans
             ((specialization_comparisons D l hl Ω Y).1 E L M h k).symm
-
 
 /-- The canonical identification is equality transport of the normalized systems.
 It preserves all pairs and representative maps; no arbitrary equivalence is chosen.
@@ -868,7 +863,9 @@ theorem specialization_pairs :
         (SfAlgebraicallyClosedCoefficients.ofHom
           (⟨A.stage, A.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y)
           (⟨B.stage, B.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y) L hA hB g)) := by
-  sorry
+  exact stage_equality_pairs (C := Stage l Ω Y)
+    (cC := fun E ↦ stageCategory l Ω Y E)
+    (specialization_stageSystem D l hl Ω Y)
 
 /-- Equality transport intertwines the actual directed Hom transition maps.
 Source: blueprint order 1821, displayed Hom colimit
@@ -888,7 +885,12 @@ theorem specialization_transport (A B : Pair l Ω Y) (L M : Common A B) (h : L �
         (⟨A.stage, A.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y)
         (⟨B.stage, B.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y)
         ⟨L.val, L.property⟩ ⟨M.val, M.property⟩ h g) := by
-  sorry
+  change HEq ((stageSystem l Ω Y).tr h f)
+    ((SfAlgebraicallyClosedCoefficients.stageSystem D l hl Ω Y).tr h g)
+  exact stage_equality_transport (C := Stage l Ω Y)
+    (cC := fun E ↦ stageCategory l Ω Y E)
+    (specialization_stageSystem D l hl Ω Y)
+    L.property.1 L.property.2 h A.obj B.obj f g hfg
 
 /-- The canonical Hom coordinates agree under specialization, including every colimit class.
 Source: blueprint order 1821, displayed Hom colimit
@@ -907,16 +909,20 @@ theorem specialization_homCoordinates (A B : Pair l Ω Y) (f : A ⟶ B) :
       (homCoordinates A B f) := by
   sorry
 
+attribute [local irreducible] specialization pairCategory
+  SfAlgebraicallyClosedCoefficients.pairCategory preadditive
+  SfAlgebraicallyClosedCoefficients.preadditive
+
 /-- Specialization is additive for the prescribed Hom colimit group laws.
 Source: blueprint order 1821, abelian Hom colimit
 (blueprint: def-weil-algebraically-closed-coefficients).
-Proof: represent two morphisms over a common field. specialization_pairs
-identifies their images with the same finite maps. Addition is stage addition
-on both sides and specialization_transport respects the same directed system.
-Every morphism has a representative, giving the additive-functor equations. -/
+Proof: both categories are preadditive with binary products and zero objects.
+The equivalence preserves the zero object and binary products, so the standard
+additivity criterion applies to its functor. The private generic proof supplies
+the zero-morphism preservation explicitly before specializing the categories. -/
 @[instance]
 theorem specialization_additive : (specialization D l hl Ω Y).functor.Additive := by
-  sorry
+  exact additive_equivalence (specialization D l hl Ω Y)
 
 /-- The shift identification is uniquely normalized to identity on shifted pairs.
 Source: blueprint order 1821, stagewise shift

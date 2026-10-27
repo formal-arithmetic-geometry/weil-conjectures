@@ -1,0 +1,304 @@
+{
+ "id": "lem-sp-finite-site-tower-paste",
+ "kind": "statement",
+ "title": "Finite-site comparison of the proper/open compatible-tower word",
+ "statement": "Let $R$ be a finite commutative ring. All schemes are Noetherian (they have finite affine covers by spectra of Noetherian rings) [def-pc-scheme, def-weil-pbc-noetherian-ring]. Work in ordinary constant-$R$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Write $N_T=\\nu_T^*$ [def-weil-pbc-site-comparison-morphism], $P_v^t=Rv_*^t$ and $J_j^t=j_!^t$ ($t=e,p$). Let $d_v:N P_v^e\\to P_v^pN$ be the specified counit mate [lem-weil-pbc-comparison-direct-image-canonical-mate], and $e_j:N J_j^e\\to J_j^pN$ the canonical open comparison [lem-cbc-proetale-extension-zero-comparison]. Let $\\kappa^t_{b,a}:P_b^tP_a^t\\cong P_{ba}^t$ be the canonical derived direct-image compositor, normalized as the inverse adjunction conjugate of composite inverse image, and $m^t_{b,a}:J_b^tJ_a^t\\cong J_{ba}^t$ the canonical open compositor [def-weil-pbc-proetale-operations, lem-cbc-extension-zero-composition]. All equations below include canonical functor associators. \nSupply schemes and morphisms\n$$X\\xrightarrow a U\\xrightarrow b\\overline X\\xrightarrow p\\overline Y\\xrightarrow q Z,\\qquad Y\\xrightarrow i\\overline Y,\\qquad s:U\\to Y,$$\nwhere $a,b,i$ are quasi-compact open immersions, $p,q,s$ are proper, $pb=is$ is Cartesian, $f=sa$ and $g=qi$. Thus $(a,s),(i,q),(ba,qp)$ compactify $f,g,gf$, respectively [def-asd-compactifiable, def-amb-etale-compact-support]. Set $F_f^t=P_s^tJ_a^t$, $F_g^t=P_q^tJ_i^t$, $F_{gf}^t=P_{qp}^tJ_{ba}^t$, and set $B_f=P_s^p(e_a)d_s(J_a^e(-))$, $B_g=P_q^p(e_i)d_q(J_i^e(-))$, $B_{gf}=P_{qp}^p(e_{ba})d_{qp}(J_{ba}^e(-))$.\nLet $\\Gamma^e:J_i^eP_s^e\\to P_p^eJ_b^e$ be the specified etale proper/open interchange, and $\\Gamma^p$ the open adjunct of inverse site-transported open-restriction exchange [lem-sp-proper-open-coefficient-mate]. For $t=e,p$ define the actual tower arrow\n$$A^t:P_q^tJ_i^tP_s^tJ_a^t\\xrightarrow{P_q^t(\\Gamma^tJ_a^t)}P_q^tP_p^tJ_b^tJ_a^t\\xrightarrow{\\kappa^t_{q,p},m^t_{b,a}}P_{qp}^tJ_{ba}^t.$$\nOn bounded-below etale inputs $A^e$ is the restriction of the normalized unbounded compact-support compositor [lem-amb-unbounded-compact-support-comparisons]. For $E\\in D^+(X_e,R)$, define the two word comparisons\n$$W_{\\rm in}=P_q^pJ_i^pP_s^p(e_a)\\circ P_q^pJ_i^p(d_sJ_a^e)\\circ P_q^p(e_iP_s^eJ_a^e)\\circ d_q(J_i^eP_s^eJ_a^e),$$\n$$W_{\\rm out}=P_q^pP_p^pJ_b^p(e_a)\\circ P_q^pP_p^p(e_bJ_a^e)\\circ P_q^p(d_pJ_b^eJ_a^e)\\circ d_q(P_p^eJ_b^eJ_a^e).$$\nThese natural maps satisfy the word equation\n$$W_{\\rm out}\\circ N_Z(P_q^e(\\Gamma^eJ_a^e))=(P_q^p(\\Gamma^pJ_a^p)N_X)\\circ W_{\\rm in}.$$\nAfter the proper and open compositors, this is the equality of named maps\n$$B_{gf}\\circ N_Z(A^e)=(A^pN_X)\\circ F_g^p(B_f)\\circ B_g(F_f^e(-)).$$\nIn particular $A^pN_X$ is invertible and equals $B_{gf}N_Z(A^e)(F_g^p(B_f)\\circ B_gF_f^e)^{-1}$. The pro-etale arrow is the open-adjunct paste above, not defined by this last transport formula. All expressions are natural in $E$; the inputs to $d$ and $\\Gamma$ have bounded-below etale witnesses, including $J_a^pN_XE$ and $F_f^pN_XE$. No special presentation of $R$ or base field is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities; Tag 0F7B (lemma-shriek-proper-and-open); agent finite-site word-pasting deduction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-pbc-proetale-operations",
+  "lem-cbc-extension-zero-composition",
+  "def-asd-compactifiable",
+  "def-amb-etale-compact-support",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sp-finite-site-word-refinement] with the given finite ring and Noetherian schemes. Put $M=J_a^eE$ and $H=J_a^pN_XE$. Both have lower bounds, and $e_a(E):N_UM\\xrightarrow{\\sim}H$ is an etale-origin witness for $H$. The etale objects $P_s^eM$, $J_i^eP_s^eM$, $J_b^eM$, and $P_p^eJ_b^eM$ are bounded below; for the last, identify $J_b^eJ_a^e$ with $J_{ba}^e$ by the stated open compositor. The witness for $P_s^pH$ is $(P_s^eM,B_f(E))$. Thus all components of $d_s,d_p,d_q,d_{qp}$ below have bounded-below etale inputs, and every pro-etale input to $\\Gamma$ has the displayed witness. The three $B$ maps are natural isomorphisms by that lemma. No coefficient extension or preservation of a lower bound under coefficient extension is being used. In Lean the three B components are composites of the specified proper comparison isomorphism and the canonical open comparison; their invertibility follows directly from these factors.",
+   "uses": [
+    "lem-sp-finite-site-word-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation."
+   }
+  },
+  {
+   "text": "Use the site clause of [lem-sp-proper-open-coefficient-mate] for $(k,r,p,i)=(b,s,p,i)$ and input $M$. The required square is Cartesian by hypothesis, its vertical maps $s,p$ are proper, and its horizontal maps $b,i$ are open. Set\n$$c_{\\rm in}=J_i^p(d_s(M))\\circ e_i(P_s^eM),\\qquad c_{\\rm out}=P_p^p(e_b(M))\\circ d_p(J_b^eM).$$\nThe cited equation is exactly\n$$c_{\\rm out}\\circ N_{\\overline Y}(\\Gamma^e(M))=\\Gamma^p(N_UM)\\circ c_{\\rm in}.$$\nHere $\\Gamma^p$ is the specified open adjunct, not an arrow chosen to force this equality.",
+   "uses": [
+    "lem-sp-proper-open-coefficient-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation."
+   }
+  },
+  {
+   "text": "Whisker the site equation of Step 2 by P_q and precompose with d_q. Apply naturality of d_q at Gamma^e(M). The definition of GP at J_a^p N_X E is the site interchange at M transported by e_a(E) and its inverse. Expand this definition and W_in/W_out, then cancel the adjacent e_a(E) followed by its inverse under the three functors. This gives the word equation for the actual specified open-adjunct paste; no additional naturality theorem for the pro-etale interchange is required.",
+   "uses": [
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation."
+   }
+  },
+  {
+   "text": "By the definitions of the three compact-support words and of $B_f,B_g$, functoriality gives\n$$F_g^p(B_f(E))\\circ B_g(F_f^eE)\n=P_q^pJ_i^pP_s^p(e_a(E))\\circ P_q^pJ_i^p(d_s(M))\\circ P_q^p(e_i(P_s^eM))\\circ d_q(J_i^eP_s^eM)=W_{\\rm in}.$$\nOnly reassociation and preservation of composition by $P_q^p,J_i^p$ are involved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation."
+   }
+  },
+  {
+   "text": "Write $C^t=P_{qp}^t(m^t_{b,a})\\circ\\kappa^t_{q,p}(J_b^tJ_a^t)$, so $A^t=C^t\\circ P_q^t(\\Gamma^tJ_a^t)$. For the two compositors apply [lem-sp-finite-site-word-refinement], whose $d,e,\\kappa,m$ have exactly the normalizations in the present statement. Put $V=J_b^eJ_a^eE$ and $h=J_b^p(e_a(E))\\circ e_b(J_a^eE)$. Naturality of $\\kappa^p$ moves $P_q^pP_p^p(h)$ to $P_{qp}^p(h)$ after $\\kappa^p$. Its proper-composition equation, evaluated at $V$, then yields\n$$C^pW_{\\rm out}=P_{qp}^p(m^p_{b,a}\\circ h)\\circ d_{qp}(V)\\circ N_Z(\\kappa^e_{q,p}(V)).$$\nThe open-composition equation says $m^p_{b,a}\\circ h=e_{ba}(E)\\circ N_{\\overline X}(m^e_{b,a}(E))$. Substitute this and use naturality of $d_{qp}$ at $m^e_{b,a}(E)$ to obtain\n$$C^pW_{\\rm out}=P_{qp}^p(e_{ba}(E))\\circ d_{qp}(J_{ba}^eE)\\circ N_Z(P_{qp}^e(m^e_{b,a}(E))\\circ\\kappa^e_{q,p}(V))=B_{gf}(E)\\circ N_Z(C^e).$$\nThus both compositor squares have been applied to the actual word, with their directions fixed.",
+   "uses": [
+    "lem-sp-finite-site-word-refinement",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation."
+   }
+  },
+  {
+   "text": "Postcompose the word equation of Step 3 with $C^p$. Substitute Step 5 on the left and Step 4 on the right. Since $A^t=C^tP_q^t(\\Gamma^tJ_a^t)$, the resulting equation is\n$$B_{gf}\\circ N_Z(A^e)=(A^pN_X)\\circ F_g^p(B_f)\\circ B_g(F_f^e(-)).$$\nThis establishes the asserted equality for the open-adjunct paste defining $A^p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation."
+   }
+  },
+  {
+   "text": "For normalization, paste the D+ inclusion compatibility squares for the proper compositor, open compositor and specified etale interchange. Construct the compatible compactification triangle with q=b and p=p and Cartesian square sq.flip. The normalized adjunct identity of the etale interchange identifies it with the exchange used by the unbounded compact-support formalism. The formalism triangle equation then identifies AEUnbounded, through rightDerivedLowerShriekIso for the three supplied compactifications, with unboundedEtaleLowerShriekCompIso. Independently, AE is invertible because its specified interchange and both compositors are isomorphisms. The three B components are invertible, hence so is D. Cancel D in the named-map equation to obtain the inverse formula and invertibility of AP. Prove naturality of B, Win, Wout and AE from naturality of their constituent transformations (using the natural etale interchange isomorphism). Finally derive naturality of AP by cancellation of D in the natural named-map equation.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sp-finite-site-word-refinement",
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sp-finite-site-word-refinement",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), four displayed equalities, using Tag 0F7B (lemma-shriek-proper-and-open); agent site-comparison pasting calculation. The site square and compositor compatibilities are the cited existing DAG statements; Stacks supplies the compatible-tower route. Stage-3 E6: explicit D+ restriction and supplied-triangle normalization, functorial word/compositor pasting, inverse formula, and naturality by cancellation. Existing public definitions and theorem statements are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale comparison pasting for a Cartesian proper open compatible compactification tower followed by direct image compositors",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux_assoc, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.IsLocallyDirected.glueDataι_naturality, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; actual answer digest 5817286954ca57d8; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.TwoSquare, CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp; actual answer digest b8ac30fd6644aa85; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|lowerShriek|compactification",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting etale proetale comparison with proper open interchange and open extension yields compact support tower composition",
+   "results": "0 hits: ; actual answer digest 4f53cda18c2baa0c; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of words of derived proper pushforwards and extension by zero commutes with the compact support tower interchange",
+   "results": "8 hits: CompactlySupportedContinuousMap.compLinearMap, CompactlySupportedContinuousMap.compLeft, CompactlySupportedContinuousMap.integralLinearMap_apply, NNRealRMK.le_rieszMeasure_of_isCompact_tsupport_subset, NNRealRMK.le_rieszMeasure_of_tsupport_subset, RealRMK.le_rieszMeasure_tsupport_subset, MeasureTheory.Integrable.exists_hasCompactSupport_integral_sub_le, RealRMK.integralPositiveLinearMap_inj; actual answer digest 69b5d6921f8d54ca; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this full assertion; generic mate/associator identities alone do not supply the specified functor-family comparison and descent."
+  },
+  {
+   "tool": "grep",
+   "query": "properOpen|lowerShriek|compactification",
+   "results": "{\"t\": \"2026-10-22T06:53:49Z\", \"tool\": \"grep\", \"query\": \"properOpen|lowerShriek|compactification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, Zariski restriction or topological compact support do not state the etale/pro-etale proper-open tower comparison.",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale proetale comparison preserves the proper open tower composition map for compact supports",
+   "results": "{\"t\": \"2026-10-22T06:53:50Z\", \"tool\": \"leansearch\", \"query\": \"Derived etale proetale comparison preserves the proper open tower composition map for compact supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"RingHom.Etale.stableUnderComposition\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.FormallyEtale.comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"Algebra.FormallyEtale.instTensorProduct\"], \"digest\": \"4ee9c2a3e688c59d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, Zariski restriction or topological compact support do not state the etale/pro-etale proper-open tower comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.TwoSquare, CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-22T06:53:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.TwoSquare, CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, Zariski restriction or topological compact support do not state the etale/pro-etale proper-open tower comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale site comparison commutes with proper open interchange and compact support composition in a compatible compactification tower",
+   "results": "{\"t\": \"2026-10-22T06:54:00Z\", \"tool\": \"leanfinder\", \"query\": \"Etale proetale site comparison commutes with proper open interchange and compact support composition in a compatible compactification tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"Condensed.profiniteSolidCounit\", \"LightCondensed.ihomPoints_symm_comp\", \"topCatToSheafCompHausLike_map_val_app\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply\", \"Condensed.profiniteSolidification\", \"Condensed.lanSheafProfinite\"], \"digest\": \"19a2ee8ec181bf81\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, Zariski restriction or topological compact support do not state the etale/pro-etale proper-open tower comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation comparing words of right derived direct images and extension by zero preserves compactly supported composition",
+   "results": "{\"t\": \"2026-10-22T06:54:38Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformation comparing words of right derived direct images and extension by zero preserves compactly supported composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.compLinearMap\", \"CompactlySupportedContinuousMap.compLeft\", \"CompactlySupportedContinuousMap.compAddMonoidHom\", \"CompactlySupportedContinuousMap.toContinuousMap_compLeft\", \"CompactlySupportedContinuousMap.coe_compLeft\", \"CompactlySupportedContinuousMap.compLeft_apply\", \"hasCompactSupport_comp_left\", \"CompactlySupportedContinuousMap.comp\"], \"digest\": \"4b9f3025937149a9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, Zariski restriction or topological compact support do not state the etale/pro-etale proper-open tower comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-finite-compact-site-coherence",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Locality paragraph: adjunctions compose and transposes of composites; finite compact-site proof Steps (4, 5, 6) of lem-sp-finite-compact-site-coherence",
+   "via": [
+    "lem-sp-finite-compact-site-coherence",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-finite-site-tower-paste",
+  "worker": "stage1",
+  "summary": "Q70 checked the full finite-ring, Noetherian compatible-tower statement. Reused existing bounded-below/compositor and proper-open site square statements. Wrote the q-whiskering/naturality calculation, identified both word comparisons under the compositors, and deduced the named transport formula and invertibility. No new nodes or statement changes.",
+  "blueprint": "det-sp-reduction-exceptional proof, Locality paragraph: adjunctions compose and transposes of composites. Realizes lem-sp-finite-compact-site-coherence Steps 4--6 for the compatible-tower composition paste.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Use naturality of the specified proper direct-image comparison; this is a generic site-comparison tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Use the existing normalized etale compact-support compositor and its invertibility, to identify the etale half of the compatible-tower paste; no same-unit statement supplies this unbounded normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-106d0e1ee",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-106d0e1ee (reviewer sub-agent of L); spot-checked: I read all 7 steps of the split in full and recomposed every word factor by factor. There are no new nodes and the statement is unchanged. The item is unsplit in both live and side-live, it is not on the 2026-10-21 re-split notes or the 2026-10-19 drop list, and there is no cycle. Step 2 is the site clause of lem-sp-proper-open-coefficient-mate with (k,r,p,i)=(b,s,p,i); the Cartesian square pb=is and the input M=J_aE in D+ both check, and the equation matches symbol for symbol. Step 3 combines naturality of d_q with naturality of Γ^p at e_a(E). Γ^p's naturality is argued from its open-adjunct construction, and this step is needed because the right-hand word has input J_a^pN E. Step 4 expands B_g∘F_g(B_f) and gets exactly W_in. Step 5 uses naturality of κ^p, the proper compositor equation of word-refinement at V=J_bJ_aE, the open equation m^p∘h=e_ba∘N(m^e) and naturality of d_qp; this gives B_gf N(C^e) with the correct directions. Step 7 matches the normalization in lem-amb-unbounded-compact-support-comparisons: its s,q,j,a are our q,s,a,ba and the interchange has the same prescription. The B maps are isos by word-refinement, which gives the transport formula. Edge cases a=b=id, i=id, E=0 and empty schemes all hold. Source: Stacks more-etale.tex lemma-shriek-composition (0F7J, tags line 19009); its tower and four equalities match the item, with 0F7B for the third equality. The proof is agent-written and cites no SGA. Accepted tool_uses: the d_v naturality node and the étale compositor normalization from sk-prop-an. Not duplicates: the cbc strict-tower pasting coherence and the generic pasting tools. Advisory only: Step 7 says the amb node's 'U' is our X, but that node has no U (its X is our X); the mapping is still unambiguous."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteSiteTowerPaste",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteSiteTower.paste",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.DE",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.DP",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.N",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.PE",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.PP",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.JE",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.JP",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.B",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.kE",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.kP",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.mE",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.mP",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.GE",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.GP",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.AE",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.AP",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.Win",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.Wout",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.D",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.AEUnbounded",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.sourceCompatibility",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.targetCompatibility",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.etale_normalization",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.compactificationF",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.compactificationG",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.compactificationGF",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.etale_compositor_normalization",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.paste",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.paste_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.word_naturality",
+   "AlgebraicGeometry.ProEtale.FiniteSiteTower.comparison_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteSiteTowerPaste.lean",
+  "statement": "theorem paste (E : DE R X) : (N R Z).map ((PE R q).map (GE R a b p i s sq E)) ≫ Wout R a b p q E = Win R a q i s E ≫ (PP R q).map (GP R a b p i s sq E) ∧ (N R Z).map (AE R a b p q i s sq E) ≫ B R (a ≫ b) (p ≫ q) E = D R a q i s E ≫ AP R a b p q i s sq E ∧ IsIso (AP R a b p q i s sq E) ∧ IsIso (D R a q i s E) ∧ IsIso (B R a s E) ∧ IsIso (B R i q ((PE R s).obj ((JE R a).obj E))) ∧ IsIso (B R (a ≫ b) (p ≫ q) E) ∧ ∀ h : IsIso (D R a q i s E), AP R a b p q i s sq E = @inv _ _ _ _ (D R a q i s E) h ≫ (N R Z).map (AE R a b p q i s sq E) ≫ B R (a ≫ b) (p ≫ q) E",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical bounded-below coordinates for the prescribed ordinary finite-ring site comparison; actual open-adjunct tower paste, inverse adjunction-conjugate proper compositors, canonical open compositors, unbounded etale normalization, word equation, compositor equation, invertibility and inverse formula, and naturality. All helper declarations belong to this node; all theorem proofs are sorry. The Q70 merged review is the stage-1 split (reviewed), not a stage-2 Lean binding (lean and reviewed_lean were absent). Review FIX (maintainer second reader, 2026-10-22): added compactificationF/G/GF (the supplied compactifications (a,s), (i,q), (a≫b,p≫q)) and etale_compositor_normalization, which identifies the bounded-below restriction of AE with the normalized unbounded compact-support compositor unboundedEtaleLowerShriekCompIso of lem-amb-unbounded-compact-support-comparisons through rightDerivedLowerShriekIso; the import of UnboundedEtaleCompactSupportComparisons is now public.",
+  "fixed_by": "NT-stage2-cc-c7c3db79a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7c3db79a",
+  "group": "Q152",
+  "result": "fix",
+  "note": "Hypotheses, B/D/Win/Wout, AE/AP, kE/kP (inverse adjunction conjugate, same as Etale.rightDerivedLowerStarComp), mE/mP (inverse of recorded open composition, matches amb), GP (dependency open adjunct properOpenSiteInterchange at witness J_aE transported along e_a, not the final formula), paste conjuncts, naturality theorems, docstrings and verbatim statement all check against the node and the side-live dependency Lean. H3 fault: etale_normalization only relates AE to a locally written unbounded word AEUnbounded, never to lem-amb's compositor unboundedEtaleLowerShriekCompIso as the node clause requires (the dependency _tower theorem is for e.restrict/chosen compactifications, not the supplied sq). FIX: added compactificationF/G/GF (supplied compactifications (a,s),(i,q),(a≫b,p≫q)) and etale_compositor_normalization identifying the D+ restriction of AE with α_{g,f} through rightDerivedLowerShriekIso; import of UnboundedEtaleCompactSupportComparisons made public; lean-record.json adds 4 declarations, statement verbatim, refit_record clean. Fixed file compiled once via nt_compile --json: clean, 23.7 s. Advisory: properOpenSiteExtensionIso owner node not a stmt_dep (reached via proper-open-coefficient-mate)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261023T231000-L-3525358",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -18,14 +18,21 @@
  ],
  "proof": [
   {
-   "text": "Choose a compatible proper/open compactification tower for h,e. Normalize the sheaf identifications into ordinary direct image; their injective images force the tower sheaf comparison to be σ.",
+   "text": "Use the concrete tower already in the definition of unboundedEtaleLowerShriekCompIso: d is the chosen compactification of e and c is the ofComp construction from the chosen compactification of h ≫ e. Set a = sigma followed by ahe(d.comp c). The three given normalization equations and n_sigma give exactly the single-tower normalization for a.",
    "uses": [
     "def-sfb-exact-compactification-unit",
-    "lem-sfb-exact-compactification-unit-refinement",
-    "lem-sfb-proper-open-tower-derived-unit",
-    "lem-weil-pbc-compatible-compactification-triangle",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-cbc-proper-support-sheaf-composition",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F7J and 0D6E"
+   }
+  },
+  {
+   "text": "Apply exactCompactificationUnit_tower to F, G, ah(c.restrict), ae(d), and a. This is the forward equality on this fixed tower. Prove separately, by localization full faithfulness and the exact-derived natural-isomorphism factorization, that the unit for a = sigma followed by ahe is D(sigma) followed by the unit for ahe.",
+   "uses": [
+    "lem-sfb-exact-compactification-unit-tower",
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
@@ -35,8 +42,11 @@
    }
   },
   {
-   "text": "Apply properOpenTowerDerivedUnit to the successive K-injective resolutions of j!J and b!I, and the lift of the resolution of i!q*I to p*M. Its equality of resolution paths identifies the successive units with the single unit after Dσ. Since b! is exact, the composite is a K-injective resolution of the composite open extension. Descend equality through localization.",
-   "uses": [],
+   "text": "Apply exactCompactificationUnit_refinement to c.restrict and the chosen compactification of h, and to d.comp c and the chosen compactification of h ≫ e. The chosen-to-itself comparison is identity by comparison coherence. Expand the actual compositor, move the e-unit across the inverse input comparison by naturality, cancel the input comparison with its inverse, and substitute the fixed-tower equation. This proves the forward square for the three inverse normalized isomorphisms.",
+   "uses": [
+    "lem-sfb-exact-compactification-unit-refinement",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
@@ -44,9 +54,9 @@
    }
   },
   {
-   "text": "Use refinement compatibility of normalized units and the tower normalization of the canonical compositor to pass to the chosen compactifications. Invert the three units and cancel their whiskerings to get the displayed isomorphism equation.",
+   "text": "A general proved categorical helper identifies the successive whiskered inverse maps with the inverse of the whiskered composite, by naturality. Cancel that inverse and the final inverse comparison to obtain the displayed isomorphism equation.",
    "uses": [],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
     "place": "Tags 0F7B, 0F7J and 0D6E"
@@ -55,17 +65,15 @@
  ],
  "proof_deps": [
   "def-sfb-exact-compactification-unit",
-  "lem-sfb-exact-compactification-unit-refinement",
-  "lem-sfb-proper-open-tower-derived-unit",
-  "lem-weil-pbc-compatible-compactification-triangle",
   "lem-amb-unbounded-compact-support-comparisons",
-  "lem-cbc-proper-support-sheaf-composition",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-sfb-exact-compactification-unit-tower",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-exact-compactification-unit-refinement"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B, 0F7J and 0D6E; source steps extracted and formalized by U1"
+  "place": "Tags 0F7B, 0F7J and 0D6E; Q1: fixed-tower forward equation, exact-source naturality, refinement transport, and categorical inversion"
  },
  "mathlib_searches": [
   {
@@ -139,13 +147,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-748a7",
-  "group": "U1",
-  "result": "fix",
-  "landing": "20261021T140922-L-2774891",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T050635-L-248120",
   "kind": "interface",
-  "note": "independent cc review: re-delivery of 5642e44c (FIX, landing failed on override name): 7 Lean files and 7 new nodes byte-identical; item node vs live (only lean/proof/proof_deps/proof_origin/statement addendum/statement_change); statement_change.citers vs the 10 live citing nodes; change record Users vs tools/downstream.py --uses and coord/claims; 7 delivered modules plus new importers EtaleClosedChartExceptionalPreservation and EtaleSumRightAdjointCoherence compiled together"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -15,118 +15,59 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-grothendieck-functorial-injective-embedding], $\\mathcal A$ has functorial injective embeddings. Apply [lem-weil-pbc-functorial-bounded-injective-resolution] to obtain one functor $I$ on bounded-below complexes and a natural quasi-isomorphism $\\eta_C:C\\to I(C)$, preserving every strict lower bound. Put $J_n=I(K([n]))$ and $u_n=\\eta_{K([n])}$. For every $\\theta:[n]\\to[m]$, set $J(\\theta)=I(K(\\theta))$. Functoriality retains every cosimplicial identity, and naturality of $\\eta$ says $J(\\theta)u_n=u_mK(\\theta)$. Thus $u:K\\to J$ is a strict map of cosimplicial complexes. Every $J_n$ is nonnegative with injective terms. The same construction applies simultaneously to an augmented diagram, including its augmentation object.",
+   "text": "Apply lem-sfb-cosimplicial-injective-total-replacement to obtain the single resolution functor I and natural columnwise quasi-isomorphism eta. Whiskering gives replacements, strict comparison lifts, and simultaneous augmented replacements. Its arbitrary-column comparison makes T(u) a quasi-isomorphism for every replacement, hence RF(QT(u)) is invertible.",
    "uses": [
-    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-    "lem-weil-pbc-functorial-bounded-injective-resolution"
+    "lem-sfb-cosimplicial-injective-total-replacement"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141, lemma-functorial-injective-resolutions (1) and remark-match; hypotheses supplied by injectives.tex, Tag 079H, theorem-injective-embedding-grothendieck"
+    "place": "Tags 0141, 015J, 070J and 070K; normalized inverse-unit argument."
    }
   },
   {
-   "text": "For $C=K,J$ form the first-quadrant double complex $D_C^{n,t}=C_n^t$ with first differential $\\delta_C=\\sum_i(-1)^i C(d^i)$ and second differential $d_C$. Paired cosimplicial identities cancel the summands of $\\delta_C^2$; the cofaces are chain maps, so $d_C\\delta_C=\\delta_Cd_C$. Therefore [def-sp-double-complex-total] gives $T(C)$ with differential $\\delta_C+(-1)^n d_C$. Naturality of $u$ makes $T(u):T(K)\\to T(J)$ a chain map. For each fixed $n$, its internal-degree column map is the quasi-isomorphism $u_n$. That comparison asks for quasi-isomorphisms along the second index ($\\mathrm{flip}.X\\,n$), so apply [lem-sc-first-quadrant-total-column-comparison] to the transposed double complexes $D_C'^{t,n}=C_n^t$, with first differential $d_C$ and second differential $\\delta_C$; its maps at fixed second index $n$ are the $u_n$. The maps $(-1)^{nt}$ on the summands $C_n^t$ give chain isomorphisms $\\operatorname{Tot}(D_C')\\cong T(C)$, natural in maps of double complexes: both differentials of $\\operatorname{Tot}(D_C')$ on $C_n^t$, namely $d_C$ and $(-1)^t\\delta_C$, become $(-1)^n d_C$ and $\\delta_C$ after the sign. Hence $T(u)$ is a quasi-isomorphism. Both indices are nonnegative, as required by that comparison.",
+   "text": "Take the summand-normalized beta, inverse derived units rho, and termwise injectivity of totals from lem-sfb-resolved-total-augmentation-square. Define chi_u = RF(QT(u)) rho_T(J) Q(beta_J), and each column comparison similarly. The inverse identities prove the two normalization equations.",
    "uses": [
-    "def-sp-double-complex-total",
-    "lem-sc-first-quadrant-total-column-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0133, lemma-double-complex-gives-resolution and finite-diagonal comparison, applied to the map of first-quadrant complexes"
-   }
-  },
-  {
-   "text": "For $r\\ge0$, $T(J)^r=\\bigoplus_{n=0}^r J_n^{r-n}$, and it is zero for $r<0$. This finite biproduct is injective: a map from the source of a monomorphism into it is a finite tuple of maps to the injective summands; extend each component across the monomorphism and combine them by the biproduct universal property. Thus [lem-sp-kinjective-computes] (2) makes $T(J)$ K-injective; it also makes every $J_n$ K-injective. Together with the preceding quasi-isomorphisms these are injective models of $T(K)$ and $K_n$. If an additional nonnegative resolution index $s$ is used while retaining original degree $q$, total degree $r$ has $n+q+s=r$; there are only finitely many such triples. Its differential has signs $\\delta+(-1)^n d_q+(-1)^{n+q}d_s$, exactly those obtained by first totaling $(q,s)$ and then $n$. No infinite product or coproduct comparison is needed.",
-   "uses": [
-    "def-sp-double-complex-total",
-    "lem-sp-kinjective-computes"
+    "lem-sfb-resolved-total-augmentation-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070J, lemma-bounded-below-injectives-K-injective; Tag 015J, lemma-two-ss-complex-functor, proof remark (3) and finite total"
+    "place": "Tags 0141, 015J, 070J and 070K; normalized inverse-unit argument."
    }
   },
   {
-   "text": "Let $\\beta_J:F(T(J))\\to T(FJ)$ be the degreewise finite-biproduct comparison. Its inverse is induced by the maps $F(\\iota_{n,t})$ into $F(T(J)^r)$, where $\\iota_{n,t}$ are the summand inclusions. The biproduct projection-inclusion identities prove that these maps are inverse. By [def-sp-left-exact-additive], $F$ preserves finite biproducts and addition, so $F(\\delta_J)=\\sum_i(-1)^iF(J(d^i))$ and $F((-1)^n d_J)=(-1)^nF(d_J)$. Checking each summand therefore proves that $\\beta_J$ is a chain isomorphism. The same summand calculation proves $T(Fg)\\beta_J=\\beta_{J'}F(T(g))$ for every strict map $g:J\\to J'$.",
+   "text": "Naturality of mapExtendFunctorNatIso and rightDerivedFunctorUnitQ proves naturality of the transported nonnegative unit. Cancel its invertible component to prove naturality of rho. Combine this with the strict replacement square and beta naturality to prove whole-total naturality. Cancel the normalized unit and beta to prove uniqueness; column naturality follows by the same unit cancellation and the replacement naturality square. This proves independence without choosing common-resolution zigzags.",
    "uses": [
-    "def-sp-left-exact-additive",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015J, lemma-two-ss-complex-functor, proof: Tot(F(I)) = F(Tot(I)), with the finite-biproduct map and its naturality expanded"
-   }
-  },
-  {
-   "text": "For a bounded-below injective complex $C$, write $\\rho_C:RF(QC)\\xrightarrow{\\sim}QF(C)$ for the inverse of the right-derived unit on $C$. The specified-resolution comparison of [lem-sp-derived-injective-resolution-naturality] gives the normalized isomorphisms $c_{u_n}=\\rho_{J_n}RF(Qu_n):RF(QK_n)\\to QF(J_n)$, compatible with every cosimplicial operator. Define the coherent total on the right of the statement to be $QT(FJ)$ with these column identifications. Define\n$$\\chi_{F,K}=Q(\\beta_J)\\,\\rho_{T(J)}\\,RF(QT(u)).$$\nAll three factors are isomorphisms by the preceding steps and [lem-sp-kinjective-computes]. This is an isomorphism of entire derived objects. Its normalization uses the given augmentation $T(u)$ and the inverse derived unit, rather than choices of isomorphisms on cohomology.",
-   "uses": [
-    "lem-sp-derived-injective-resolution-naturality",
-    "lem-sp-kinjective-computes"
+    "lem-sfb-resolved-total-augmentation-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TH, lemma-injective-acyclic; Tag 015J, lemma-two-ss-complex-functor, proof computing the whole derived object by the mapped total"
+    "place": "Tags 0141, 015J, 070J and 070K; normalized inverse-unit argument."
    }
   },
   {
-   "text": "For a strict cosimplicial chain map $f:K\\to L$, $g_n=I(f_n)$ gives a strict map $g:J_K\\to J_L$ and $g u_K=u_L f$. Totalize this square. By [lem-sp-derived-injective-resolution-naturality],\n$$QF(T(g))\\,c_{T(u_K)}=c_{T(u_L)}\\,RF(QT(f)).$$\nCompose with the chain-isomorphism naturality $QT(Fg)Q\\beta_{J_K}=Q\\beta_{J_L}QF(T(g))$ from step 4. This gives $QT(Fg)\\chi_{F,K}=\\chi_{F,L}RF(QT(f))$. Identities and composites are respected because the chain-level maps, $F$, $I$, $T$, and $RF$ respect them. Columnwise the same naturality statement identifies $QF(g_n)$ with $RF(Qf_n)$. Thus the totalized map is the coherent derived-image map specified in the statement.",
+   "text": "Use the same I on the augmentation object and eta naturality for the simultaneous augmentation square. The augmentation components, source comparison invertibility, and derived augmentation equation are exactly the fields of lem-sfb-resolved-total-augmentation-square. Its explicit totalComparison is definitionally the hom of chi above.",
    "uses": [
-    "lem-sp-derived-injective-resolution-naturality"
+    "lem-sfb-resolved-total-augmentation-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141, remark-match; naturality of the specified right-derived resolution comparison"
-   }
-  },
-  {
-   "text": "To compare any two compatible nonnegative termwise injective replacements $v:K\\to L$ and $w:K\\to M$, apply the fixed resolution functor $I$ to obtain the strict zigzag\n$$L\\xrightarrow{\\eta_L}I(L)\\xleftarrow{I(v)}I(K)\\xrightarrow{I(w)}I(M)\\xleftarrow{\\eta_M}M.$$\nEvery arrow is a columnwise quasi-isomorphism: this is true of $\\eta$, and follows for $I(v),I(w)$ from $I(v)\\eta_K=\\eta_L v$ and its analogue by two-out-of-three. All columns are bounded below and termwise injective, so [lem-sp-kinjective-computes] (1) makes these column maps homotopy equivalences; additive $F$ preserves a homotopy inverse and its homotopies. Apply [lem-sc-first-quadrant-total-column-comparison] in $\\mathcal B$, through the sign-$(-1)^{nt}$ transposition of step 2, to see that all arrows of the zigzag of $T(F(-))$ are quasi-isomorphisms. Naturality of $\\eta$ makes each leg commute with its augmentation from $K$; after totalization, [lem-sp-derived-injective-resolution-naturality] identifies each leg with the corresponding normalized comparison from $RF(QT(K))$. Hence this zigzag identifies the two displayed $\\chi$ maps. Any other zigzag commuting with the augmentations has the same identification, since it must equal $\\chi_M\\chi_L^{-1}$. This proves independence and its compatibility with the naturality equation of step 6.",
-   "uses": [
-    "lem-weil-pbc-functorial-bounded-injective-resolution",
-    "lem-sp-kinjective-computes",
-    "lem-sc-first-quadrant-total-column-comparison",
-    "lem-sp-derived-injective-resolution-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141, lemma-functorial-injective-resolutions and remark-match; common functorial-resolution zigzag, with normalized comparison by the derived unit"
-   }
-  },
-  {
-   "text": "Let $b:\\operatorname{const}(A)\\to K$ be the strict augmentation. Resolve the entire augmented diagram by $I$: its augmentation is $I(b):\\operatorname{const}(I(A))\\to J$, and $u_n b_n=I(b_n)\\eta_A$. Define $b_J:I(A)\\to T(J)$ by $I(b_0)$ into cosimplicial degree zero and zero in other cosimplicial degrees. The augmentation identities give $J(d^0)I(b_0)=J(d^1)I(b_0)$, so its coface differential is zero. It is therefore a chain map and $b_J\\eta_A=T(u)a$. By [lem-sp-derived-injective-resolution-naturality] this square gives\n$$QF(b_J)c_{\\eta_A}=c_{T(u)}RF(Qa).$$\nUnder $\\beta_J$, $F(b_J)$ is the map with $F(I(b_0))$ in cosimplicial degree zero and zero elsewhere, by its summand definition. This is exactly the totalized derived augmentation, since the column comparisons identify $F(I(b_n))$ with $RF(Qb_n)$. Therefore $\\chi_{F,K}RF(Qa)$ equals that augmentation. For a map of augmented diagrams the equalities $f_n b_n=b'_n h$ remain equalities after $I$ and $F$; in degree zero they give the total augmentation square, and in higher cosimplicial degrees both augmentation components are zero. Steps 6 and 7 transport this square through all normalized comparisons and resolution changes.",
-   "uses": [
-    "lem-weil-pbc-functorial-bounded-injective-resolution",
-    "lem-sp-derived-injective-resolution-naturality",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0141, diagramwise natural resolution including the augmentation object; naturality of the inverse derived unit; Tag 015J finite total calculation"
+    "place": "Tags 0141, 015J, 070J and 070K; normalized inverse-unit argument."
    }
   }
  ],
  "proof_deps": [
-  "def-sp-double-complex-total",
-  "def-sp-left-exact-additive",
-  "lem-sc-first-quadrant-total-column-comparison",
-  "lem-sp-derived-injective-resolution-naturality",
-  "lem-sp-kinjective-computes",
-  "lem-weil-pbc-functorial-bounded-injective-resolution",
-  "lem-weil-pbc-grothendieck-functorial-injective-embedding"
+  "lem-sfb-cosimplicial-injective-total-replacement",
+  "lem-sfb-resolved-total-augmentation-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0141, 05TH, 070J and 015J: strict cosimplicial and augmented extension of the bounded-below injective-resolution finite-total argument.",
-  "note": "Uses the existing functorial lower-bound-preserving resolution of complexes; no injectivity preservation by another exact functor or resolution in a new diagram category is asserted."
+  "place": "Tags 0141 and 015J; inverse-unit naturality and cancellation for strict finite totals.",
+  "note": "S8 directly constructs the normalized comparisons from the existing augmentation data, avoiding the separate descent interface and arbitrary-quasi-isomorphism derived-functor bridge."
  },
  "mathlib_searches": [
   {
@@ -245,46 +186,19 @@
   "date": "2026-10-22",
   "item": "lem-sfb-nonnegative-derived-totalization",
   "worker": "stage1",
-  "group": "N7",
-  "summary": "Eight-step split reusing existing functorial lower-bound-preserving injective resolutions, first-quadrant comparison, K-injective computation and normalized whole-object naturality. No new nodes. Explicit finite-biproduct chain comparison, common-resolution zigzag and augmentation equation. Statement unchanged.",
-  "blueprint": "Current main-20261015 sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), formal Cech totalization underlying open direct image. The inherited created.item chain stops at lem-sfb-admissible-direct-image and ancestor returns None; inherited from.node=null and via retained.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-first-quadrant-total-column-comparison",
-    "why": "Columnwise quasi-isomorphisms give quasi-isomorphisms of finite-diagonal totals; generic bounded-below comparison tool."
-   },
-   {
-    "node": "lem-sp-derived-injective-resolution-naturality",
-    "why": "Whole-derived-object normalized comparison commutes with specified resolution squares; needed for naturality, choice independence and augmentation, not merely a cohomology comparison."
-   },
-   {
-    "node": "lem-sp-kinjective-computes",
-    "why": "Bounded-below injectives are K-injective, compute RF, and compare by homotopy equivalences; generic derived computation tool."
-   },
-   {
-    "node": "lem-weil-pbc-functorial-bounded-injective-resolution",
-    "why": "One strict resolution functor preserves the common lower bound for all cosimplicial and augmented diagrams; no node of the assigned unit supplies this general homological tool."
-   },
-   {
-    "node": "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-    "why": "Grothendieck categories have functorial injective embeddings; generic resolution input, not a replacement for the six-functor route."
-   }
-  ]
+  "group": "Q52",
+  "summary": "Current-base repair of returned head 9d5e66c62f3 after the side/live promotion refusal. Re-read current definition and cited statements, confirmed the live eight-step proof equals retained returned-proof.json, and preserved all approved arguments and logged searches. Four statement-only tasks replace strict resolution/total comparison, finite-total normalization, common-resolution descent/naturality, and augmented comparison; the unchanged statement has a 2116-character assembly. Fresh delivery rebuilds against current origin/sheaf-dag, retaining current maintainer and Lean fields.",
+  "blueprint": "Current main-20261015 sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), formal Cech totalization underlying open direct image. The inherited created.item chain stops at lem-sfb-admissible-direct-image and ancestor returns None; inherited from.node=null and via retained. Four new lemmas distribute former steps 1-2, 3-5, 6-7 and 8; the parent is a short assembly.",
+  "tool_uses": []
  },
- "tool_uses": [
-  "lem-sc-first-quadrant-total-column-comparison",
-  "lem-sp-derived-injective-resolution-naturality",
-  "lem-sp-kinjective-computes",
-  "lem-weil-pbc-functorial-bounded-injective-resolution",
-  "lem-weil-pbc-grothendieck-functorial-injective-embedding"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N7-81c1e0b98",
-  "group": "N7",
+  "reviewer": "NT-cc-Q52-50963f19c",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-81c1e0b98 (reviewer sub-agent of L); spot-checked: I read in full the item and the statements of all 9 cited nodes, plus Stacks 015J proof remark (3) (derived.tex l.7177-7230), and compared it with side-live. Statement, stmt_deps, source and blueprint are byte-identical to side-live; there are no new nodes. The item is still unsplit in live and side-live, has no re-split note and is not on the drop list. The statement is true: the bounded-below injective total computes RF, and F(Tot J)=Tot F(J) by finite biproducts. Small cases checked: constant cosimplicial K=A gives T(K)≃A; zero K; r=0 has the single (0,0) term; r<0 is empty. Step checks: (1) I is functorial and preserves lower bounds; no additivity of I is needed, since delta_J^2=0 by functoriality alone. (3) A finite biproduct of injectives is injective, then kinjective-computes (2). (4) beta is an elementary finite-biproduct chain isomorphism. (5)/(6) chi = Q beta . c_{T(u)}, and naturality follows from the resolution-naturality node with g u_K = u_L f. (7) The zigzag maps are homotopy equivalences under K_n by kinjective-computes (1), and its legs are identified by the naturality node. (8) b_J=I(b_0) has zero coface component (d^0 b_0 = d^1 b_0), b_J eta_A = T(u) a holds, and the augmentation clause follows. Repair: lem-sc-first-quadrant-total-column-comparison (Lean quasiIso_totalMap_of_columns) takes quasi-isomorphisms at a fixed second index (flip.X n), while steps 2 and 7 have the u_n at fixed cosimplicial (first) index. I added the transposition D'^{t,n}=C_n^t with the natural sign isomorphism (-1)^{nt}: Tot(D') ≅ T(C), signs checked; no other field changed. No duplicate found in the DAG: derived-cech-image-totalization is geometric, and the CE/ce nodes are about spectral sequences. All five tool_uses are generic homological tools and accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-50963f19c (reviewer sub-agent of L); spot-checked: I read the whole delivery and am passing it with no fixes. What I checked: (1) This answers the released re-split note (7399-character, 8-step proof). Live and side-live still carry the 8-step proof, and none of the four new ids exists live. The four new node files are byte-identical to the earlier Q52 head 9d5e66c62f3b, which was PASSed and then refused at landing; the item differs only in split_report.summary. Against live, the item differs only in proof, proof_deps and split_report. (2) All 8 live step texts appear verbatim in the report. Old steps 1-2 go to cosimplicial-injective-total-replacement, 3-5 to injective-finite-total-derived-comparison, 6-7 to resolved-total-comparison-descent, and 8 to resolved-total-augmentation-square. Each argument becomes a clause of a new statement, and none of the nodes restates the item. The assembly is 4 steps and 2116 characters, one cited node per step. (3) Mathematics, checked by hand: the (-1)^{nq} transposition is a chain isomorphism on C_n^q. Columnwise qis gives total qis via the finite column filtration. Columns are natural: QF(J(theta)) c_{u_n} = c_{u_m} RF(QK(theta)). The reassociation sign delta+(-1)^n d_q+(-1)^{n+q} d_s is right. The square equation QT(Fg) chi_u = chi_v RF(QT f) follows from naturality of rho and then beta. The zigzag legs are qis by two-out-of-three plus F preserving homotopy equivalences, and e_{u,w} = chi_w chi_u^{-1} follows by composing the leg equations. In degree 0, (d^0-d^1) b_0 = 0, so a and a_J are chain maps, and chi_u RF(Qa) = Q(beta F(a_J)) c_v holds because B is K-injective. Item step 4's hypothesis u_n b_n = I(b_n) eta_A is naturality of eta. Small cases: K=0, constant K, r=0, r<0, u=w, zero augmentation. (4) Stacks places checked: 0141 (l.7623, J(0)=0, so I keeps nonnegativity), remark-match (l.7691), 015J proof (3), 05TH, 070J, 079H, 0133. No SGA source is used. (5) No duplicates among lem-cbc-cosimplicial-complex-holim, def-coef-cosimplicial-product-total, bicosimplicial-shuffle, left-resolution-totalized-augmentation, pbc-ce-totalize-augmented-comparison and pbc-functorial-bounded-injective-resolution-totalization. All stmt_deps exist, the searches cover four tools with verdicts, and blueprint.from names the places. Advisory only: node 1 leaves implicit that I lands in nonnegative complexes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.NonnegativeDerivedTotalization",
@@ -314,5 +228,27 @@
   "group": "Q12",
   "result": "fix",
   "note": "Read item, 4 stmt_deps + records, module, report, upstream rightDerivedFunctor/rightDerivedFunctorUnitQ/HasKInjectiveResolutions (Prop, Grothendieck instance)/mapExtendIso/alternatingCofaceMapComplex/TensorSigns(up ℕ) signs. All clauses match: independent universes, Additive+PreservesFiniteLimits, δ+(-1)^n d total, zero-extension localization, χ pinned by unit normalization, β pinned by summands, columns and augmentation pinned, all fields true. Gap (H3): naturality quantified over compatible g but no existence of g for each strict f, so 'natural in strict maps' could be vacuous → FIX adds field mapReplacement (∃ R S g, R.aug ≫ g = f ≫ S.aug; true by node step 1) plus docstring lines; theorem signature/lean record unchanged; fixes/NonnegativeDerivedTotalization.lean compiled clean via nt_compile --json in 3.6 s. Advisories: TotalComplex theorem-module import only for the TensorSigns(up ℕ) instance (import ComplexShapeSigns directly); unique follows from normalized."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261025T061015-L-2391746",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

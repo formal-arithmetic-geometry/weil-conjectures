@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-frobenius-contraction-scalar-pasting",
+ "kind": "statement",
+ "title": "Derived coefficient change respects contraction of an absolute-Frobenius factor",
+ "statement": "Let $p$ be prime, let $Y$ be a scheme of characteristic $p$ [def-weil-scheme-characteristic-p], let $v:Y\\to Y$ be any scheme endomorphism, let $b\\geq0$ be an integer, and put $H=F_Y^b$ for absolute Frobenius [def-weil-absolute-frobenius-scheme]. Let $u:A\\to B$ be a unital map of finite commutative rings. Use the ordinary unbounded constant-coefficient categories $D_R=D(Y_{\\mathrm{proet}},R)$ [def-weil-pbc-proetale-modules] and ordinary derived scalar extension $T:D_A\\to D_B$, $T(K)=K\\otimes_A^LB$ [lem-pur-derived-change-of-rings]. For any endomorphism $h$ of $Y$, let\n$$c_{h,K}:Lh_B^*(TK)\\xrightarrow{\\sim}T(Lh_A^*K)$$\nbe the inverse comparison of [det-prop-scalar-six-pullback] (1), transported by [lem-weil-pbc-finite-discrete-condensed-ring-constant, lem-weil-pbc-finite-discrete-scheme-ring-constant] to ordinary constant coefficients, with the normalization of [def-sp-constant-scalar-pullback-comparison]. For $R=A,B$ set $V_R=Lv_R^*$, $P_R=LH_R^*$ and $S_R=L(v\\circ H)_R^*$. Let $d_R:S_R\\xrightarrow{\\sim}P_RV_R$ be the canonical compositor [lem-weil-pbc-proetale-derived-pullback-composition], and $t_R=\\tau_R^{(b)}:P_R\\xrightarrow{\\sim}\\operatorname{id}$ the specified absolute-Frobenius trivialization [lem-trf-absolute-frobenius-site]. Define the contraction $e_R:S_R\\xrightarrow{\\sim}V_R$ by $e_{R,K}=t_{R,V_RK}\\circ d_{R,K}$. Then for every $K\\in D_A$,\n$$T(e_{A,K})\\circ c_{v\\circ H,K}=c_{v,K}\\circ e_{B,TK}$$\nas morphisms $S_BTK\\to TV_AK$ in $D_B$. This holds for arbitrary $v$, including noninvertible endomorphisms, and requires no annihilator prime to $p$, coefficient flatness, finite Tor amplitude, boundedness, or constructibility. The exponent $b=0$ is included with the canonical identity-pullback unitor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+  "place": "Final sentence of thm-trf-finite-coefficient-map.proof.md, all constructions natural in the coefficient ring: composition of the scalar/pullback square with the absolute-Frobenius trivialization in the displayed construction of prop-trf-scheme-galois-comparison.proof.md Agent-extracted intermediate assertion, not a verbatim Stacks theorem."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-characteristic-p",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-pbc-proetale-modules",
+  "lem-pur-derived-change-of-rings",
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-absolute-frobenius-site",
+  "def-trf-coefficient-frobenius-trivialization",
+  "pur713-def-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply clause (1) of [det-prop-scalar-six-pullback] to the ordered pair $H:Y\\to Y$, $v:Y\\to Y$. Its composition law, after taking inverse comparisons and using the canonical compositors $d_R$ of [lem-weil-pbc-proetale-derived-pullback-composition], reads $$T(d_{A,K})\\circ c_{v\\circ H,K}=c_{H,V_AK}\\circ P_B(c_{v,K})\\circ d_{B,TK}.$$ Here [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant] identify the finite discrete coefficient rings with the ordinary constant rings, and [def-sp-constant-scalar-pullback-comparison] fixes the normalization of the transported comparisons. Transport the entire composition equality through these same identifications. The order is $P_RV_R$, since pullback is contravariant. No inverse to $v$ is involved.",
+   "uses": [
+    "det-prop-scalar-six-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "def-sp-constant-scalar-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+    "place": "Final coefficient-naturality sentence; expanded by the compositor and Frobenius trivialization in prop-trf-scheme-galois-comparison.proof.md."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-absolute-frobenius-coefficient-naturality] with $X=Y$, exponent $b$, and object $V_AK$. It gives $$T(t_{A,V_AK})\\circ c_{H,V_AK}=t_{B,TV_AK}.$$ All its hypotheses hold: the same characteristic-$p$ scheme, finite commutative rings and unital map are in use, and its $c$ is the same normalized inverse comparison. The object $V_AK$ is unrestricted in the ordinary unbounded derived category.",
+   "uses": [
+    "lem-trf-absolute-frobenius-coefficient-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+    "place": "Final coefficient-naturality sentence; expanded by the compositor and Frobenius trivialization in prop-trf-scheme-galois-comparison.proof.md."
+   }
+  },
+  {
+   "text": "The trivialization $t_B:P_B\\Rightarrow\\operatorname{id}$ is a natural isomorphism by [lem-trf-absolute-frobenius-coefficient-naturality]. Its naturality at $c_{v,K}:V_BTK\\to TV_AK$ says $$t_{B,TV_AK}\\circ P_B(c_{v,K})=c_{v,K}\\circ t_{B,V_BTK}.$$ Expand $e_A=t_AV_A\\circ d_A$, use functoriality of $T$, and substitute Steps 1 and 2 followed by this naturality equality. The result is $$T(e_{A,K})\\circ c_{v\\circ H,K}=c_{v,K}\\circ t_{B,V_BTK}\\circ d_{B,TK}=c_{v,K}\\circ e_{B,TK}.$$ This calculation only uses composition and naturality. It includes $b=0$: Step 2 is the identity comparison with the identity-pullback unitor; Steps 1 and 3 retain their unitors. No flatness, prime-to-$p$ or boundedness assumption has entered.",
+   "uses": [
+    "lem-trf-absolute-frobenius-coefficient-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+    "place": "Final coefficient-naturality sentence; expanded by the compositor and Frobenius trivialization in prop-trf-scheme-galois-comparison.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-trf-absolute-frobenius-coefficient-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace-coeff/thm-trf-finite-coefficient-map.proof.md",
+  "place": "Final coefficient-naturality sentence; expanded by the compositor and Frobenius trivialization in prop-trf-scheme-galois-comparison.proof.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"whisker\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(whisker.*(exchange|naturality)|exchange.*whisker|hcomp.*naturality)",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality square for a composite of functor comparison isomorphisms and an endofunctor contraction to the identity",
+   "results": "8 hits: CategoryTheory.CatCommSq.iso_hom_naturality_assoc, CategoryTheory.MorphismProperty.naturalityProperty, CategoryTheory.NatTrans.naturality_2_assoc, CategoryTheory.CatCommSq.iso_hom_naturality, CategoryTheory.MorphismProperty.IsMultiplicative.naturalityProperty, CategoryTheory.Limits.prodComparisonNatIso, CategoryTheory.CatCommSq.hId, CategoryTheory.MorphismProperty.naturalityProperty.isStableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting natural isomorphisms between functors through a trivialized endofunctor preserves a coefficient comparison square",
+   "results": "8 hits: CategoryTheory.CatCommSq.iso, CategoryTheory.CatCommSq.iso_hom_naturality, CategoryTheory.CatCommSq.iso_hom_naturality_assoc, CategoryTheory.CatCommSq.vComp_iso_hom_app, CategoryTheory.CatCommSq.vInv, CategoryTheory.CatCommSq.hInv, CategoryTheory.CatCommSq.hComp_iso_hom_app, CategoryTheory.CatCommSq.vInv_iso_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "1 hits: CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|Frobenius).*(scalar|coeff|tensor|pullback)|(scalar|coeff|tensor|pullback).*(frobenius|Frobenius)",
+   "results": "0 hits: none; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with the canonical contraction from pullback along a morphism composed with absolute Frobenius to pullback along that morphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a characteristic p scheme and arbitrary endomorphism v, contraction of absolute Frobenius in pullback along v composed with Frobenius is compatible with derived extension of finite coefficient rings",
+   "results": "8 hits: RingHom.frobenius_comm, RingHom.iterateFrobenius_comm, RingHom.map_frobenius, RingHom.map_iterate_frobeniusEquiv_symm, WittVector.IsocrystalHom.frob_equivariant, RingHom.map_frobeniusEquiv_symm, MonoidHom.map_frobeniusEquiv_symm, RingHom.map_iterate_frobenius",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|Frobenius).*(scalar|coeff|tensor|pullback)|(scalar|coeff|tensor|pullback).*(frobenius|Frobenius)",
+   "results": "0 hits: none; directory Mathlib/AlgebraicGeometry; candidates are ordinary composition/pasting or unrelated Frobenius results, not the specified derived sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting naturality of a scalar pullback composition comparison with a natural trivialization of absolute Frobenius",
+   "results": "8 hits: VectorField.mpullback_smul, VectorField.mpullbackWithin_smul, VectorField.mpullback_smul_apply, VectorField.mpullbackWithin_smul_apply, Trivialization.pullback, SheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp, PresheafOfModules.pullback_comp_id; candidates are ordinary composition/pasting or unrelated Frobenius results, not the specified derived sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "1 hits: CategoryTheory.Regular.frobeniusMorphism_isPullback; candidates are ordinary composition/pasting or unrelated Frobenius results, not the specified derived sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with contraction of pullback along an endomorphism composed with absolute Frobenius",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δAux_ofComp, KaehlerDifferential.moduleBaseChange', IsPurelyInseparable.iterateFrobeniusₛₗ, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, KaehlerDifferential.tensorKaehlerEquiv_left_inv, ModuleCat.extendScalarsComp, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, LinearMap.frobenius; candidates are ordinary composition/pasting or unrelated Frobenius results, not the specified derived sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative square for a natural functor comparison remains commutative after composing a pseudofunctor compositor with a coefficient-compatible natural isomorphism from an endofunctor to the identity",
+   "results": "8 hits: CategoryTheory.Pseudofunctor.isoMapOfCommSq, CategoryTheory.Pseudofunctor.isoMapOfCommSq_eq, CategoryTheory.CatCommSq.vComp_iso_hom_app, CategoryTheory.Pseudofunctor.isoMapOfCommSq_vert_id, CategoryTheory.Pseudofunctor.isoMapOfCommSq_horiz_id, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.CatCommSq.vInv, CategoryTheory.CatCommSq.iso; candidates are ordinary composition/pasting or unrelated Frobenius results, not the specified derived sheaf comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-galois-coefficient-change",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-trace-coeff",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-finite-coefficient-map",
+   "place": "Final sentence of thm-trf-finite-coefficient-map.proof.md, all constructions natural in the coefficient ring: composition of the scalar/pullback square with the absolute-Frobenius trivialization in the displayed construction of prop-trf-scheme-galois-comparison.proof.md",
+   "via": [
+    "lem-trf-scheme-galois-coefficient-change"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-frobenius-contraction-scalar-pasting",
+  "worker": "stage1",
+  "summary": "No new nodes: composition coherence for the transported normalized scalar comparison, coefficient naturality of the absolute-Frobenius trivialization at V_A K, and naturality of t_B give the displayed three-step pasting calculation. Statement and all original metadata retained.",
+  "blueprint": "Final sentence of thm-trf-finite-coefficient-map.proof.md (naturality in the coefficient ring), applied to the displayed compositor-plus-trivialization construction of prop-trf-scheme-galois-comparison.proof.md.",
+  "tool_uses": [
+   {
+    "node": "det-prop-scalar-six-pullback",
+    "why": "Clause (1) gives the composition law for the coefficient/pullback comparisons; used as general coefficient infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Specifies the canonical compositor used in the statement; it is a generic pro-etale derived pullback tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Identifies the finite discrete coefficient ring objects before transporting the comparison."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Carries the ring-object identification onto the scheme site, preserving the monoidal comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-8601798f8",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-8601798f8 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes and its statement is unchanged (Q34 created it for lem-trf-scheme-galois-coefficient-change, which applies it with v=g^m, b=am). Step 1: clause (1) of det-prop-scalar-six-pullback says the comparison for g∘f is the composite under (gf)^*=f^*g^*. With f=H and g=v, after inverting and writing the identification as the compositor d_R, it gives T(d_A)∘c_{vH}=c_{H,V_AK}∘P_B(c_v)∘d_{B,TK}; I checked the typing of every map. The compositor lemma is stated for arbitrary ring sheaves, so it covers both the condensed and the constant side, and the transport is natural. Step 2: lem-trf-absolute-frobenius-coefficient-naturality (same unit, split) applied at V_A K needs no flatness or prime-to-p hypothesis, so this is a genuine statement-level use. Step 3: naturality of t_B at c_v plus the expansion of e_A gives the chain to c_v∘e_{B,TK}, and every equality checks. Source: the final sentence of the main-20261015 thm-trf-finite-coefficient-map proof, together with the prop-trf-scheme-galois-comparison proof (Φ=g_γF^{(q)}, LΦ^*=L(F^{(q)})^*Lg^* then the trivialization), matches e_R with v=g_γ, H=F^a. Edge cases: b=0 (unitors, reduces to c_v=c_v), v=id (the naturality node itself), non-invertible v, empty Y, B=0, non-flat Z/p^2→F_p all hold. The transitive closure over all 26195 nodes shows no cycle. det-prop sits off-route in sk-prop-scalar-six; I accept it as the recorded generic tool_use, and the sibling node already cites it. No duplicate: lem-sp-constant-scalar-pullback-cube is a Cartesian-square coherence, and lem-pur-weil-kappa-coefficient-coherence (unsplit, ℓ≠p bounded domains) is only related (advisory). The 13 Mathlib search records cover all three kinds, the blueprint fields are filled, there is no SGA, and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FrobeniusContractionScalarPasting",
+  "declaration": "AlgebraicGeometry.Scheme.frobenius_contraction_scalar_pasting",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.frobeniusContraction",
+   "AlgebraicGeometry.Scheme.frobenius_contraction_scalar_pasting"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusContractionScalarPasting.lean",
+  "statement": "theorem frobenius_contraction_scalar_pasting (p : ℕ) (hp : p.Prime) (Y : Scheme.{u}) (hY : Y.IsCharacteristic p) (v : Y ⟶ Y) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (b : ℕ) (K : proEtaleDerivedCategory Y A) : (AlgebraicGeometry.ProEtale.directImageScalarPullbackIso φ (Y.iterateFrobenius hp (hY.2 ⊤) b ≫ v)).hom.app K ≫ (AlgebraicGeometry.ProEtale.directImageScalarExtension φ Y).map ((frobeniusContraction p hp Y hY v A b).hom.app K) = (frobeniusContraction p hp Y hY v B b).hom.app ((AlgebraicGeometry.ProEtale.directImageScalarExtension φ Y).obj K) ≫ (AlgebraicGeometry.ProEtale.directImageScalarPullbackIso φ v).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The contraction is explicitly the inverse canonical constant-ring pullback compositor owned by pur713-def-pullback-comparison, whiskered with the unchanged section-normalized Frobenius trivialization owned by def-trf-coefficient-frobenius-trivialization and the functor right unitor. Coefficient naturality remains a proof dependency only. No geometric or coefficient hypotheses are added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-263f0f9ec",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Re-delivery of RETURN a549075167eb; both faults repaired, nothing else changed (module byte-identical except imports; item node changes only stmt_deps and lean). F1: theorem node lem-trf-absolute-frobenius-coefficient-naturality moved out of stmt_deps (kept in proof_deps); new node def-trf-coefficient-frobenius-trivialization is an existing:true record whose statement matches AbsoluteFrobeniusCoefficientNaturality.lean:49-53 verbatim; it has all §5 fields (3 search kinds); its stmt_deps cover every declaration the def uses (proEtaleFrobeniusDerivedIso, trivialization_pullback, proEtaleConstantRingDerivedPullback, IsCharacteristic, iterateFrobenius); the .choose is pinned by the r projection and the section-unit equation. F2: landed pur713-def-pullback-comparison added to stmt_deps, its module imported directly, report corrected. Maths re-checked: d_R = composition.symm, e_R = t_{V K}∘d_K, square c_{H≫v}≫T(e_A) = e_B≫c_v; v arbitrary, b:ℕ incl. 0, finite A,B, unbounded D, no extra hypotheses; edge cases b=0, v=id, non-invertible v, empty Y, B=0, Z/p²→F_p OK. No compile (no file changed). Advisory: the naturality node still lists coefficientFrobeniusTrivialization in its declarations, and its docstring blueprint tag names the theorem node."
+ }
+}

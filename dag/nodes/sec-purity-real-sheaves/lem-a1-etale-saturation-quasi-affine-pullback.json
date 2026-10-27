@@ -1,0 +1,242 @@
+{
+ "id": "lem-a1-etale-saturation-quasi-affine-pullback",
+ "kind": "statement",
+ "title": "Inductive off-diagonal image gives a quasi-affine saturated pullback",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $a:T'\\to T$ be an etale morphism [def-weil-etale-morphism] between affine $S$-schemes, and let $f:X\\to T$ be a morphism from an algebraic space over $S$ [def-trf-algebraic-space]. Assume that $f$ is chartwise locally quasi-finite: every representable etale scheme chart $U\\to X$ has locally quasi-finite composite $U\\to T$ [pqf-def-quasifinite]. Assume also that $f$ is separated: its diagonal $X\\to X\\times_TX$ becomes a closed immersion after every scheme base change [def-weil-closed-immersion, def-pc-fibre-product]. Put $X'=X\\times_TT'$, and let $V'\\subseteq X'$ be an open subspace represented by a scheme. An open subspace means a subfunctor whose inclusion becomes an open immersion on every scheme base change [def-weil-open-immersion]. Suppose $V'\\to T'$ is quasi-affine [def-nagata-quasi-affine-morphism]; over an affine target this means a quasi-compact open immersion into an affine scheme. Let $W\\subseteq X$ be the open image of $V'\\to X$, so that $|W|=\\operatorname{im}(|V'|\\to|X|)$; point sets and open images are as in [lem-a1-space-etale-open-image]. Put $T''=T'\\times_TT'$, with projections $\\pi_0,\\pi_1$, and let $T^*$ be the open and closed complement of the diagonal. Assume $T^*$ is affine and $b=\\pi_1|_{T^*}$ is etale. Put $X''=X\\times_TT''$, $X^*=X\\times_TT^*$, let $p_i:X''\\to X'$ be induced by $\\pi_i$, and set $Z=p_0^{-1}(V')\\cap X^*$. Then $X'\\to T'$ is separated and chartwise locally quasi-finite, and $Z$ is an open subspace of $X^*=X'\\times_{T',b}T^*$ represented by the scheme $T^*\\times_{T',\\pi_0}V'$, with quasi-affine structure map to $T^*$. Suppose the open image $H\\subseteq X'$ of $Z\\xrightarrow{p_1}X'$ is represented by a quasi-compact scheme. Then $P=W\\times_XX'=W\\times_TT'$ equals the union $V'\\cup H$ as open subspaces of $X'$, is represented by a quasi-compact scheme, and its structure map $P\\to T'$ is quasi-affine. Quasi-compactness means every open covering has a finite subcover.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XW (lemma-neighbourhood-scheme), proof, third and fourth paragraphs: induction diagram, omitted hypothesis checks, saturation identity, scheme gluing and quasi-affineness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-trf-algebraic-space",
+  "pqf-def-quasifinite",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-nagata-quasi-affine-morphism",
+  "lem-a1-space-etale-open-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-space-separated-lqf-permanence] to $f$ and $T'\\to T$: $X'\\to T'$ is separated and chartwise locally quasi-finite. On sections over any test scheme, both $X^*$ and $X'\\times_{T',b}T^*$ consist of a section $x$ of $X$ and a section $t^*$ of $T^*$ with $f(x)=a\\pi_1(t^*)$; this gives the claimed identification, since $a\\pi_0=a\\pi_1$ on $T^*$. The pullback of $V'\\subseteq X'$ along the other projection $X^*\\to X'$ is open by [lem-a1-space-open-factor-scheme-tests]. Its sections are pairs $(v,t^*)$ with the $T'$-coordinate of $v$ equal to $\\pi_0(t^*)$, so it is exactly $Z=T^*\\times_{T',\\pi_0}V'$, represented by a scheme. By [lem-trf-quasi-affine-base-change], its map to $T^*$ is quasi-affine.",
+   "uses": [
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-trf-quasi-affine-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, proof, third paragraph: induction diagram and base-change hypothesis checks"
+   }
+  },
+  {
+   "text": "Put $Q=V'\\times_X X'$. Its sections are pairs $((x,t_0),(x,t_1))$, so the fibre-product universal property identifies $Q$ with $p_0^{-1}(V')\\subseteq X''$ and its map to $X'$ with $p_1$. Since $\\operatorname{im}(|V'|\\to|X|)=|W|$, the last assertion of [lem-a1-space-open-factor-scheme-tests], applied with $G=X'$, says that the point image of $Q\\to X'$ is $|P|$, where $P=W\\times_X X'$. Associating the same coordinates identifies this pullback with $W\\times_TT'$. The assumed decomposition $T''=\\Delta(T')\\amalg T^*$ pulls back to a decomposition of $Q$: over the diagonal its restriction is $V'$ and $p_1$ is the given inclusion; over $T^*$ its restriction is $Z$. Every field-valued point lies in one of these two pieces, because the inverse images of the two clopen pieces in a field spectrum form a partition. Consequently $|P|=|V'|\\cup\\operatorname{im}(|Z|\\to|X'|)=|V'|\\cup|H|$. The open-subspace correspondence of [lem-a1-space-etale-open-image] now gives $P=V'\\cup H$ as open subspaces.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, proof, fourth paragraph: saturation identity"
+   }
+  },
+  {
+   "text": "For any scheme $A\\to P$, pulling back $V'$ and $H$ gives open subschemes of $A$ by the definition of open subspace [def-a1-space-open-subspace]. Their underlying opens cover $A$: [lem-a1-space-open-factor-scheme-tests] identifies them with inverse images of $|V'|$ and $|H|$, whose union is $|P|$ by step 2. Thus these two representable open subfunctors form a Zariski covering of $P$. The algebraic space $P$ is an fppf sheaf by [def-trf-algebraic-space], hence a Zariski sheaf by [lem-pc-zariski-coverings-are-fppf]. Apply [lem-pc-schemes-criterion] to this two-element family: $P$ is represented by a scheme over $S$. This application uses the stated representability criterion, not merely a theorem that glues algebraic spaces.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-a1-space-open-factor-scheme-tests",
+    "def-trf-algebraic-space",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, proof, fourth paragraph; spaces-properties.tex Tag 03JH (lemma-subscheme), with schemes.tex Tag 01JJ (lemma-glue-functors)"
+   }
+  },
+  {
+   "text": "The hypothesis that $V'\\to T'$ is quasi-affine, with $T'$ affine, says that $V'$ is a quasi-compact open subscheme of an affine scheme, so $|V'|$ is quasi-compact. By hypothesis $|H|$ is quasi-compact. Given any open cover of $|P|$, restrict it to these two opens, take a finite subcover on each, and combine the two finite sets. Since $P=V'\\cup H$, they cover $|P|$. Thus the representing scheme $P$ is quasi-compact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, proof, first and fourth paragraphs: quasi-compactness"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-space-separated-lqf-permanence] to the open subspace $P\\subseteq X\\times_TT'$; because $P$ is now a scheme, $P\\to T'$ is separated and locally quasi-finite as a scheme morphism. The affine scheme $T'$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Since $P$ is quasi-compact by step 4, clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes $P\\to T'$ quasi-compact. Its local quasi-finiteness gives local finite type by [lem-weil-pbc-lqf-locally-finite-type]. All four hypotheses of [lemma-nagata-quasi-affine-morphism-of-quasi-finite] now hold for this scheme morphism, so $P\\to T'$ is quasi-affine.",
+   "uses": [
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, proof, fourth paragraph; more-morphisms.tex Tag 02LR (lemma-quasi-finite-separated-quasi-affine)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-separated-lqf-permanence",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-trf-quasi-affine-base-change",
+  "lem-a1-space-etale-open-image",
+  "def-a1-space-open-subspace",
+  "def-trf-algebraic-space",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-pc-schemes-criterion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XW (lemma-neighbourhood-scheme), proof, third and fourth paragraphs; expand the omitted checks using the cited scheme and algebraic-space lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|saturat.*[Oo]pen|[Oo]pen.*saturat",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|saturat.*[Oo]pen|[Oo]pen.*saturat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open in an algebraic space covered by two quasi compact open schemes is a quasi compact scheme and a separated locally quasi finite map from it to an affine scheme is quasi affine",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"leansearch\", \"query\": \"An open in an algebraic space covered by two quasi compact open schemes is a quasi compact scheme and a separated locally quasi finite map from it to an affine scheme is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"9b81d91b821d132b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsQuasiAffine\"",
+   "results": "{\"t\": \"2026-10-22T07:56:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IsQuasiAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\"], \"digest\": \"587188b2b5e45570\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an affine etale base change of a separated locally quasi finite algebraic space the saturated pullback of an open scheme is the union of the original open and the off diagonal image and is quasi affine when the latter is a quasi compact scheme",
+   "results": "{\"t\": \"2026-10-22T07:56:24Z\", \"tool\": \"leanfinder\", \"query\": \"In an affine etale base change of a separated locally quasi finite algebraic space the saturated pullback of an open scheme is the union of the original open and the off diagonal image and is quasi affine when the latter is a quasi compact scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\"], \"digest\": \"fd48052f5d75f1fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing the diagonal and complementary images in an etale equivalence relation gives the scheme representing the saturated open pullback",
+   "results": "{\"t\": \"2026-10-22T07:56:24Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing the diagonal and complementary images in an etale equivalence relation gives the scheme representing the saturated open pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Pullback.gluing_V\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"1ed61013ac173acb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|saturat.*[Oo]pen|[Oo]pen.*saturat",
+   "results": "{\"t\": \"2026-10-23T04:14:00Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|saturat.*[Oo]pen|[Oo]pen.*saturat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme pullback/open-range lemmas do not state the algebraic-space saturation, scheme gluing and quasi-affineness assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback of the open image of a scheme under an etale projection is the union of the diagonal image and the complementary image and is quasi affine",
+   "results": "{\"t\": \"2026-10-23T04:14:00Z\", \"tool\": \"leansearch\", \"query\": \"The pullback of the open image of a scheme under an etale projection is the union of the diagonal image and the complementary image and is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.opensRange_pullbackSnd\", \"AlgebraicGeometry.IsOpenImmersion.opensRange_pullback_fst_of_right\", \"AlgebraicGeometry.IsOpenImmersion.range_pullbackFst\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left\", \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\"], \"digest\": \"f5c795d2eabd1329\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme pullback/open-range lemmas do not state the algebraic-space saturation, scheme gluing and quasi-affineness assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsQuasiAffine\"",
+   "results": "{\"t\": \"2026-10-23T04:14:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsQuasiAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme pullback/open-range lemmas do not state the algebraic-space saturation, scheme gluing and quasi-affineness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The saturated pullback of an open scheme in an etale base change of an algebraic space is the union of the original open and the off diagonal image",
+   "results": "{\"t\": \"2026-10-23T04:14:06Z\", \"tool\": \"leanfinder\", \"query\": \"The saturated pullback of an open scheme in an etale base change of an algebraic space is the union of the original open and the off diagonal image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.diagonalCoverDiagonalRange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Pullback.range_diagonal_subset_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.Scheme.Pullback.diagonalCover\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_X\", \"AlgebraicGeometry.IsOpenImmersion.range_pullback_snd_of_left\", \"AlgebraicGeometry.IsOpenImmersion.range_pullbackSnd\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_f\"], \"digest\": \"bfb63006dc4ab673\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme pullback/open-range lemmas do not state the algebraic-space saturation, scheme gluing and quasi-affineness assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-etale-quasi-affine-image-scheme",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical 03XX representability ingredient beneath lem-a1-affine-hc0; 03XW proof, third and fourth paragraphs: induction diagram, omitted hypothesis checks, saturation identity, scheme gluing and quasi-affineness",
+   "via": [
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-etale-saturation-quasi-affine-pullback",
+  "worker": "stage1",
+  "summary": "Expanded the off-diagonal base-change checks and saturation identity, verified a two-open scheme cover, proved quasi-compactness by finite subcovers, and applied existing separated quasi-finite scheme results. The statement is unchanged; no new nodes are needed.",
+  "blueprint": "Historical representability ingredient below lem-a1-affine-hc0: Stacks 03XW induction diagram and fourth-paragraph saturated pullback; retains the recorded ancestor and route. The current ancestor proof no longer spells out this historical ingredient.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-quasi-affine-base-change",
+    "why": "Generic scheme base change of quasi-affine morphisms, used with pi_0 on T^*; the current unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme implication from local quasi-finiteness to local finite type, to check the final existing quasi-affine theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-quasi-affine-base-change",
+  "lem-weil-pbc-lqf-locally-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-10de3c081",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-10de3c081 (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes and its statement is byte-identical to the one in the Q126 FIX that created it as the 'saturation node' (parent lem-a1-etale-quasi-affine-image-scheme, step 4). Re-read Stacks 03XW proof paragraphs 1-4. The item makes the omitted checks of paragraphs 3-4 explicit. Hypotheses match; nothing is weakened; no SGA. S1: X'≅X'×_{π1}T*; Z=V'×_{T',π0}T* is open by the open-factor node and quasi-affine by base change along π0 (01SO node). S2: Q=V'×_X X'=p0^{-1}(V') with map p1; the last clause of the open-factor node gives im|Q|=|P|; the clopen Δ⊔T* split gives P=V'∪H via the open-subspace bijection. S3: 01JJ criterion checked clause by clause: P is an algebraic space, so an fppf and hence Zariski sheaf; V' and H are representable; A×_P V' is an open subscheme; the two opens cover |A|. S4: V' and H are quasi-compact, so their union is, which is elementary. S5: P→T' is separated and lqf by the permanence node, qc by qcqs clause (1), lft from lqf, then quasi-affine by the Nagata lemma (the 02LR counterpart). proof_deps equals the union of uses. Edge cases: T*=∅ gives P=V'; T'=T⊔T gives H as the crossed copies, consistent; V'=∅. Duplicate search (rg -L for 03JH/02LR/01SO, related a1/trf saturation nodes): none. Accepted tool_uses: lem-trf-quasi-affine-base-change and lem-weil-pbc-lqf-locally-finite-type, both generic. Batch-5: def-trf-algebraic-space and def-a1-space-open-subspace are general definitions; lem-a1-space-separated-lqf-permanence reaches the trace-formula chapter only through that definition; lem-trf-quasi-affine-base-change is the generic Stacks 01SO fact. None of these is a statement or proof step of the trace formula or Poincaré duality. Advisory, no change: the definite descriptions 'open image' W and H presuppose étale images, which the parent supplies."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSaturationQuasiAffinePullback",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_saturation_quasi_affine_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSaturationQuasiAffinePullback.lean",
+  "statement": "theorem etale_saturation_quasi_affine_pullback {S : Scheme.{u}} (T T' : Over S) [IsAffine T.left] [IsAffine T'.left] (a : T' ⟶ T) [Etale a.left] (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (hqf : ∀ (U : Over S) (v : yoneda.obj U ⟶ X.obj.obj), IsEtale v → Scheme.Hom.IsLocallyQuasiFinite (yoneda.preimage (v ≫ f)).left) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.diagonal f)) (X' : AlgebraicSpace S) (r : X'.obj.obj ⟶ X.obj.obj) (t : X'.obj.obj ⟶ yoneda.obj T') (hX' : IsPullback r t f (yoneda.map a)) (V : OpenSubspace X') (Vscheme : Over S) (eV : yoneda.obj Vscheme ≅ V.val.toFunctor) (hV : IsQuasiAffineHom (yoneda.preimage (eV.hom ≫ V.val.ι ≫ t)).left) (W : OpenSubspace X) (hW : pointImage W.val.ι = pointImage (V.val.ι ≫ r)) (Tstar : Over S) [IsAffine Tstar.left] (i : Tstar ⟶ Limits.pullback a a) [IsOpenImmersion i.left] [IsClosedImmersion i.left] (hi : Set.range i.left = (Set.range (Limits.pullback.diagonal a).left)ᶜ) (hb : Etale (i ≫ Limits.pullback.snd a a).left) (Xstar : AlgebraicSpace S) (d₀ d₁ : Xstar.obj.obj ⟶ X'.obj.obj) (s : Xstar.obj.obj ⟶ yoneda.obj Tstar) (hstar : IsPullback d₀ s t (yoneda.map (i ≫ Limits.pullback.fst a a))) (hd₁r : d₁ ≫ r = d₀ ≫ r) (hd₁t : d₁ ≫ t = s ≫ yoneda.map (i ≫ Limits.pullback.snd a a)) : (∀ (U : Over S) (v : yoneda.obj U ⟶ X'.obj.obj), IsEtale v → Scheme.Hom.IsLocallyQuasiFinite (yoneda.preimage (v ≫ t)).left) ∧ IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.diagonal t) ∧ IsPullback d₁ s t (yoneda.map (i ≫ Limits.pullback.snd a a)) ∧ IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (V.val.preimage d₀).ι ∧ (∃ eZ : yoneda.obj (Limits.pullback (yoneda.preimage (eV.hom ≫ V.val.ι ≫ t)) (i ≫ Limits.pullback.fst a a)) ≅ (V.val.preimage d₀).toFunctor, eZ.hom ≫ (V.val.preimage d₀).ι ≫ d₀ = yoneda.map (Limits.pullback.fst _ _) ≫ eV.hom ≫ V.val.ι ∧ eZ.hom ≫ (V.val.preimage d₀).ι ≫ s = yoneda.map (Limits.pullback.snd _ _)) ∧ IsQuasiAffineHom (Limits.pullback.snd (yoneda.preimage (eV.hom ≫ V.val.ι ≫ t)) (i ≫ Limits.pullback.fst a a)).left ∧ ∀ (H : OpenSubspace X') (hH : pointImage H.val.ι = pointImage ((V.val.preimage d₀).ι ≫ d₁)) (Hscheme : Over S) (eH : yoneda.obj Hscheme ≅ H.val.toFunctor) (hHqc : CompactSpace Hscheme.left), ∃ P : OpenSubspace X', P.val = W.val.preimage r ∧ IsLUB ({V, H} : Set (OpenSubspace X')) P ∧ (∃ k : P.val.toFunctor ⟶ W.val.toFunctor, k ≫ W.val.ι = P.val.ι ≫ r ∧ IsPullback k (P.val.ι ≫ t) (W.val.ι ≫ f) (yoneda.map a)) ∧ ∃ (Pscheme : Over S) (eP : yoneda.obj Pscheme ≅ P.val.toFunctor), CompactSpace Pscheme.left ∧ IsQuasiAffineHom (yoneda.preimage (eP.hom ≫ P.val.ι ≫ t)).left",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses arbitrary fibre-product presentations characterized by IsPullback and projection equations. The open union is IsLUB in OpenSubspace, rather than the non-sheaf pointwise union of subfunctors. All scheme representatives are tied by Yoneda isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f23c2d26",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node, Stacks 03XW proof paras 3-4 via node and stage-1 review, delivered module, report, and the decls AlgebraicSpace/IsRepresentableWith/IsEtale, OpenSubspace (PartialOrder), pointImage, IsLocallyQuasiFinite (Stacks, incl. lft), IsQuasiAffineHom, Subfunctor.preimage. Every hypothesis matches: X', X* and d1 are given by IsPullback squares plus equations that fix d1 uniquely (no arbitrary maps); T* open+closed immersion with range = complement of diagonal adds nothing (diagonal open since a etale, closed since a is a map of affines). Every conclusion clause matches: X'->T' lqf and separated, X* = X' x_{T',pi1} T*, Z open, Z = V' x T* with projection equations, Z->T* quasi-affine, and for all H with point image of Z->X' via d1 and a qc scheme representative, P = W.preimage r, IsLUB {V,H} P (correct open union; no OpenSubspace sup exists; pointwise union is not a sheaf), P = W x_T T' square, P a qc scheme quasi-affine over T'. Edge cases: T* empty gives P = V'; V' empty; T' empty; disconnected X; single universe u, autoImplicit false, no extra assumptions. lean.statement verbatim, one sorry, docstrings with 03XW, blueprint id and 5 proof steps, lines <= 100, imports exist in live, only the lean field changed. Compile not reproduced per instruction; worker scompile clean. Advisory: OpenSubspace/pointImage owner nodes are reached via the stmt_dep lem-a1-space-etale-open-image, not cited directly; stage 2 cannot change stmt_deps."
+ }
+}

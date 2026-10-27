@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-flag-cohomology-finite-exact",
+ "kind": "statement",
+ "title": "Finite rational cohomology and character filtrations for homogeneous bundles",
+ "statement": "Let $F$ be an algebraically closed field of characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure], and let $S$ be a semisimple simply connected $F$-group scheme [def-sc-group-scheme], with these terms as defined in [lem-sfb-rho-section-modules]. Fix a split maximal torus $T\\subseteq B\\subseteq S$, with $B$ a Borel subgroup, and use $X=X^*(T)$, roots $\\Phi$, positive roots $\\Phi^+$ in $\\operatorname{Lie}(B)$, simple roots $\\Delta$, coroots and their pairing from [lem-sfb-reductive-borel-pair-structure]. Let $B^-$ be the Borel opposite to $B$ relative to $T$, so its roots are $-\\Phi^+$. Put $\\rho=\\frac12\\sum_{\\alpha\\in\\Phi^+}\\alpha\\in X$, $Q=\\mathbf Z\\Phi$, and $W=N_S(T)(F)/T(F)$, acting on $X$ by normalizer conjugation. Set $w\\mathbin\\cdot x=w(x+\\rho)-\\rho$, let $w_0\\Phi^+=-\\Phi^+$, and put $N=|\\Phi^+|$. A rational module for any group here is an $F$-vector space with a coassociative counital coaction into its tensor product with that group's coordinate algebra; a submodule is a coaction-stable subspace. For $x\\in X$, let $F_x$ be the one-dimensional $B^-$-module on which $T$ acts by $x$ and the unipotent radical acts trivially. For a finite-dimensional rational $B^-$-module $M$, let $\\mathcal L(M)$ be the sheaf of sections of $S\\times^{B^-}M$ on $S/B^-$: over $V\\subseteq S/B^-$ its sections are regular maps $f:\\pi^{-1}(V)\\to M$ with $f(gb)=b^{-1}f(g)$, where $\\pi:S\\to S/B^-$ is the quotient. Write $H^i(M)=H^i(S/B^-,\\mathcal L(M))$ for Zariski sheaf cohomology, with its natural left $S$-action, and $H^i(x)=H^i(F_x)$; set $H^i=0$ for $i<0$. Equivariance means a coaction identity, hence holds after every commutative $F$-algebra extension. A simple module is nonzero with no proper nonzero rational submodule, and a simple constituent means a simple subquotient. The homogeneous bundles above exist and $H^i(M)$ is a finite-dimensional rational $S$-module for every $i\\ge0$. One has $H^i(M)=0$ for $i>N$, and a short exact sequence of finite-dimensional rational $B^-$-modules induces the natural $S$-equivariant long exact cohomology sequence. Every finite-dimensional rational $B^-$-module $M$ has a finite filtration with one-dimensional quotients $F_{x_j}$, each $x_j$ being a $T$-weight of $M$. In particular, if a simple $S$-module occurs in $H^i(M)$, it occurs in $H^i(x_j)$ for at least one character quotient of any such filtration. In degree zero the section definition identifies $H^0(x)$, equivariantly, with the actual regular-function space $\\{f\\in F[S]:f(gb)=x(b)^{-1}f(g),\\ b\\in B^-\\}$. The dimension of $S/B^-$ is $N$.",
+ "source": {
+  "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+  "place": "Homogeneous bundles, p.55; exact cohomology sequences, p.56; finite B-module filtrations and dimension vanishing used on pp.57--58. Background: finite cohomology is Stacks Tag 02O6 (Coherent Cohomology, lemma-proper-over-affine-cohomology-finite); dimension vanishing is Tag 02UZ (Cohomology, proposition-vanishing-Noetherian). The source is WANTED locally; original article pp.53--59 read online at GDZ, PPN243919689_0315, scans 57--63."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-rho-section-modules",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-rational-character-filtration",
+  "def-sfb-homogeneous-vector-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-reductive-borel-pair-structure] to the semisimple group $S$ and the Borel $B^-$. It gives the proper finite-type quotient $Q=S/B^-$ and the faithfully flat right $B^-$-torsor $\\pi:S\\to Q$. The regular Noetherian geometry of this same quotient is supplied by [lem-sfb-borel-quotient-affine-cell]. The dimension clause of [lem-sfb-flag-canonical-character], applied to the Borel $B^-$, gives $\\dim Q=|{-\\Phi^+}|=N$ (its half-sum is $-\\rho$). Thus no bound inferred merely from the number of roots is being assumed.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-borel-quotient-affine-cell",
+    "lem-sfb-flag-canonical-character"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9; Section 18c; the smooth dimension clause already recorded in flag-canonical-character"
+   }
+  },
+  {
+   "text": "Use [lem-pc-fpqc-descent] on $\\pi$ to descend $\\mathcal O_S\\otimes_F M$: on $S\\times_QS=S\\times B^-$ the identification sends a vector over $g$ to $b^{-1}$ times it over $gb$. The identity and cocycle are $1m=m$ and $(bc)^{-1}m=c^{-1}b^{-1}m$. The descended module $\\mathcal E_M$ is locally free of rank $\\dim_F M$, by clause (2) of that node. The torsor is an fpqc cover: $S$ is affine of finite type, hence Noetherian by [lem-wf-affine-noetherian-components]; [lem-sfb-noetherian-space-compact-subsets] then shows that the inverse image of an affine open of $Q$ is quasi-compact; flatness and surjectivity supply the finite affine refinement in [def-weil-pbc-fpqc-covering]. Compatible maps descend uniquely. A section of $\\mathcal E_M$ over $V$ is therefore precisely a regular map $f:\\pi^{-1}V\\to M$ satisfying $f(gb)=b^{-1}f(g)$, by section descent [lem-sc-etale-qcoherent-descent-fpqc-sections]. This identifies $\\mathcal E_M$ with the specified $\\mathcal L(M)$.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "def-weil-pbc-fpqc-covering",
+    "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "lem-wf-affine-noetherian-components",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023T, proposition-fpqc-descent-quasi-coherent; Tag 05B2, lemma-finite-locally-free-descends; section descent Tag 03DT"
+   }
+  },
+  {
+   "text": "A locally free sheaf of finite rank has local affine-space bundles: on a free chart take $V\\times\\mathbf A^{\\dim M}$; on overlaps use the invertible change-of-frame matrices. These substitutions satisfy the cocycle because the changes of bases do, so [lem-weil-pbc-glue-schemes] gives a vector bundle. Pulled back to $S$ it is $S\\times M$ with the above descent relation, hence it is the associated homogeneous bundle $S\\times^{B^-}M$. The left action $a:S\\times_FQ\\to Q$ is the morphism which, by the Yoneda lemma, represents left translation on the fppf sheafification of $A\\mapsto S(A)/B^-(A)$ that $Q$ represents by [lem-sfb-borel-quotient-affine-cell]; sheafification commutes with the product by the sheaf $S$, so $\\pi$ is equivariant and identity and associativity hold as morphism equalities because they hold for $S(A)$ acting on $S(A)/B^-(A)$. Left multiplication $s(g,m)=(sg,m)$ commutes with $(g,m)b=(gb,b^{-1}m)$, so full faithfulness in [lem-pc-fpqc-descent], also on $S\\times Q$ and $S\\times S\\times Q$, descends its linearization, identity and composition. An equivariant linear map $M\\to M'$ descends to a linearized sheaf map. By [def-amb-finite-locally-free-module] these sheaves are quasi-coherent of finite type, and by [pqf-lem-coherent-ft-locnoeth] they are coherent on the Noetherian scheme $Q$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-pc-fpqc-descent",
+    "def-amb-finite-locally-free-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sfb-borel-quotient-affine-cell"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "023T and 05B2; finite local freeness and gluing; coherence uses 01XZ"
+   }
+  },
+  {
+   "text": "For a short exact sequence $0\\to M'\\to M\\to M''\\to0$, pullback of the descended sheaf sequence to $S$ is $\\mathcal O_S\\otimes_F$ that sequence. It is exact because the vector-space sequence has an $F$-linear splitting. Flat pullback is exact by [lem-weil-pbc-flat-module-pullback-exact-pushforward-injective], so its homology sheaves pull back to zero. At a lift of each point the flat local ring map is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]; [lem-sc-faithfully-flat-tensor-zero] makes each homology stalk zero, and [pqf-lem-sheaf-zero-stalks] makes the homology sheaves zero. Thus the descended sequence is short exact. Apply [lem-sfb-linearized-qcoherent-cohomology-coaction] to $G=S,Y=Q,\\mathcal E=\\mathcal L(M)$: $Q$ is proper, hence quasi-compact and separated, and the linearization was constructed above. It gives rational $S$-coactions on all $H^i(M)$ and the natural coaction-equivariant long exact sequence, including its connecting maps. This proves equivariance after every algebra extension, rather than only at $F$-points.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-sc-faithfully-flat-tensor-zero",
+    "lem-sfb-linearized-qcoherent-cohomology-coaction",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "pqf-lem-sheaf-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "02KH, lemma-flat-base-change-cohomology; naturality of connecting maps in the generic linearized-cohomology input"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-coherent-hi] with $Q\\to\\operatorname{Spec}F$ and the coherent $\\mathcal L(M)$. A field is Noetherian, so its last clause says that $H^i(M)$ is a finite $F$-module, hence a finite-dimensional vector space. Together with Step 4 this is a finite-dimensional rational $S$-module. Apply [lem-sc-noetherian-cohomology-above-dimension] to the Noetherian scheme $Q$, its quasi-coherent $\\mathcal L(M)$, and $i>N=\\dim Q$; it gives $H^i(M)=0$.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "02O6, lemma-proper-over-affine-cohomology-finite; cohomology.tex 02UZ, proposition-vanishing-Noetherian"
+   }
+  },
+  {
+   "text": "The smooth connected solvable group $B^-$ embeds in an upper triangular matrix group by [lem-sfb-lie-kolchin-triangular-embedding]. Induct on $d=\\dim_F M$. For $d=0$ take the empty filtration. For $d>0$, [lem-sfb-triangular-group-representation-eigenline] supplies a rational stable line $L\\subset M$ with character $\\chi:B^-\\to\\mathbf G_m$. Its restriction to the unipotent radical is trivial by [lem-sfb-unipotent-to-multiplicative-trivial]. Since $B^-=U^-\\rtimes T$ by [lem-sfb-reductive-borel-pair-structure], $\\chi$ is the extension of $x=\\chi|_T$, and $L\\simeq F_x$. Apply the induction hypothesis to the rational quotient $M/L$, whose dimension is $d-1$, and take inverse images of its filtration. This gives a finite character filtration of $M$. For any such filtration, every character quotient is a weight of $M$: lift a nonzero quotient vector to $M_j$ and decompose the lift into $T$-weight components by [lem-sfb-split-torus-representation-weight-decomposition]. In the quotient only the $x_j$-component can have nonzero image; this component belongs to $(M_j)_{x_j}\\subseteq M_{x_j}$.",
+   "uses": [
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-triangular-group-representation-eigenline",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.30; Proposition 16.2(c) implies (a); Theorem 12.12; no Lie-algebra characteristic-zero theorem is used"
+   }
+  },
+  {
+   "text": "Fix any character filtration $0=M_0\\subset\\cdots\\subset M_r=M$ and induct on $r$, the case $r=0$ being vacuous. Step 4 gives $H^i(M_{r-1})\\to H^i(M)\\to H^i(x_r)$ exact. Put $A$ equal to the first image and $C$ equal to the second image, so $0\\to A\\to H^i(M)\\to C\\to0$ is exact in rational modules. Write a simple constituent as $P/R$ for rational submodules $R\\subset P\\subseteq H^i(M)$. The image of $P\\cap A$ in $P/R$ is either zero or all. In the second case $P/R$ is a subquotient of $A$, hence of $H^i(M_{r-1})$ by inverse images under its surjection onto $A$; induction applies. In the first case $P\\cap A\\subseteq R$, so $P/R$ is a quotient of $P/(P\\cap A)$, which is a submodule of $C\\subseteq H^i(x_r)$. Thus the constituent occurs in one of the stated $H^i(x_j)$, without assuming a cohomology filtration with those quotients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Elementary subquotient argument applied to the exact homogeneous-bundle sequences used by Andersen, pp.57--58"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-homogeneous-line-bundle-sections] to $S,T,B^-$ and the character $x\\circ(B^-\\to T)$. Its associated line sheaf is the same $\\mathcal L(F_x)$ by the inverse-character descent relation of Step 2. It identifies $H^0(x)$ with the actual subspace of $F[S]$ satisfying $f(gb)=x(b)^{-1}f(g)$, and gives $(s f)(g)=f(s^{-1}g)$. This is the same degree-zero linearization as Step 4, hence the identification is equivariant as a coaction identity. The condition is understood on all commutative $F$-algebras, as in that node. Negative degrees are zero by convention. The zero module and the empty-root case $N=0$ are included throughout.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 22.21 and 22.48; Andersen p.55 homogeneous bundles, read online at GDZ scan 59"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-borel-quotient-affine-cell",
+  "lem-sfb-flag-canonical-character",
+  "lem-pc-fpqc-descent",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-wf-affine-noetherian-components",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-glue-schemes",
+  "def-amb-finite-locally-free-module",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-sfb-linearized-qcoherent-cohomology-coaction",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "pqf-lem-sheaf-zero-stalks",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sfb-lie-kolchin-triangular-embedding",
+  "lem-sfb-triangular-group-representation-eigenline",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-homogeneous-line-bundle-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne 16.2 and 16.30, with existing homogeneous-bundle descent and Stacks 02KH, 02O6 and 02UZ. Andersen p.55 verifies the section convention; missing local article is reported WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology modules of line bundles on flag varieties are finite dimensional vanish above the dimension and fit into long exact sequences",
+   "results": "8 hits: groupCohomology, Rep.standardResolution.extIso, groupCohomology.shortComplexH0_exact, Profinite.NobelingProof.succ_exact, groupCohomology.mapShortComplex₂, Rep.FiniteCyclicGroup.moduleCatCochainComplex, groupCohomology.mapShortComplex₃, groupCohomology.mapShortComplex₁. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional rational algebraic group modules obtained as coherent cohomology of homogeneous bundles with long exact sequences and dimension vanishing",
+   "results": "8 hits: groupCohomology.isIso_δ_of_isZero, groupCohomology, ContinuousCohomology.homogeneousCochains, Submodule.finiteDimensional_finset_sup, groupCohomology.map_cochainsFunctor_shortExact, groupCohomology.H1InfRes, groupCohomology.H1, groupCohomologyIsoExt. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"map\"",
+   "results": "4 hits: CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app, CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app_assoc, CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι, CategoryTheory.Functor.rightDerived_map_eq. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*bundle|flag.*cohomology|cohomology.*flag|derivedInduction",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group cohomology, ordinary module exactness, finite root reflections and Lie-algebra weight chains do not state this rational algebraic-group homogeneous-cohomology or affine-dot descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite rational representations on coherent sheaf cohomology of a homogeneous flag bundle and exact sequences from Borel character filtrations",
+   "results": "8 hits: ContinuousCohomology.homogeneousCochains, Profinite.NobelingProof.succ_exact, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are generic sheaf-cohomology definitions, quasicoherent finite-presentation data and continuous-group cochains; none gives rational S-actions on flag cohomology or the Borel character-filtration interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-induced-composition-linkage",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Finite rational cohomology and character filtrations for homogeneous bundles.",
+   "via": [
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flag-cohomology-finite-exact",
+  "worker": "stage1",
+  "summary": "Constructed homogeneous sheaves by effective fpqc descent, rational coactions by a generic linearized-cohomology input, and character filtrations by an eigenline induction; reused existing geometry, dimension, finiteness, vanishing, weights and section-function nodes. Two statement-only inputs, no Mathlib leaf; normalized doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "Realizes the existing from.place chain under det-thm-sf-ctf-stability-direct-images proof (3): strong-linkage prerequisite, finite rational homogeneous-bundle cohomology and character-filtration interface. Current latest blueprint read; this created item has no independent blueprint is and ancestor prints None.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic tool used in the homogeneous-bundle argument: FPQC descent for quasi-coherent modules. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "why": "Generic tool used in the homogeneous-bundle argument: FPQC descent of sections of a quasi-coherent pullback. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Generic tool used in the homogeneous-bundle argument: Glueing schemes along open subschemes. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic tool used in the homogeneous-bundle argument: Coherence on locally Noetherian schemes. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic tool used in the homogeneous-bundle argument: Flat module pullback is exact and direct image preserves injectives. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "lem-sc-faithfully-flat-tensor-zero",
+    "why": "Generic tool used in the homogeneous-bundle argument: Faithfully flat tensor reflects vanishing of modules. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic tool used in the homogeneous-bundle argument: Coherence and finiteness of higher direct images. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic tool used in the homogeneous-bundle argument: Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme. The current unit has no replacement for this input; no six-functor route step is changed."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic tool: Affine schemes of finite type are Noetherian with finitely many components. Supplies the stated local algebra or sheaf criterion; does not replace a unit-route argument."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic tool: Every subset of a Noetherian topological space is compact. Supplies the stated local algebra or sheaf criterion; does not replace a unit-route argument."
+   },
+   {
+    "node": "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "why": "Generic tool: Faithfully flat local stalk maps reflect surjectivity. Supplies the stated local algebra or sheaf criterion; does not replace a unit-route argument."
+   },
+   {
+    "node": "pqf-lem-sheaf-zero-stalks",
+    "why": "Generic tool: A sheaf with vanishing stalks is zero. Supplies the stated local algebra or sheaf criterion; does not replace a unit-route argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-weil-pbc-glue-schemes",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-sc-faithfully-flat-tensor-zero",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-wf-affine-noetherian-components",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "pqf-lem-sheaf-zero-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-92bea977b",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-92bea977b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item statement is identical to live, and live is still unsplit with no repair note, so this is a normal one-level split, not a re-split. Steps 1-8 cover every clause. Step 1: dim S/B^- = N via flag-canonical-character applied to (T,B^-). Step 2: checked the fpqc covering condition myself (S Noetherian, preimages quasi-compact, pi surjective); descent of the homogeneous sheaf with rank by 023T(1)(2); the section-descent node gives sections = equivariant maps f(gb)=b^{-1}f(g), matching the item's L(M). Step 4: exactness via flat pullback and faithfully flat local stalks; the coaction node supplies the coaction-equivariant long exact sequence including connecting maps. Step 5: 02O6 with A=F gives finite-dimensionality and 02UZ gives vanishing above dim Q = N. Step 6: Lie-Kolchin embedding, then the eigenline node, then chi trivial on U^- and extended from T, so the line is F_x; induction on dim M and the weight argument are correct. Step 7: I re-derived the simple-subquotient argument (P∩A image zero or all); it is correct. Step 8: the homogeneous-line-bundle node's sign (f(gb)=chi(b)^{-1}f(g), (sf)(g)=f(s^{-1}g)) matches the item. New eigenline node = Milne iAG Def 16.1 and Prop 16.2 (c)=>(a), pp.324-325, which I read; true over any field; tested on J=1, mu_3 in G_m over Q and Z/p in U_2, while a non-split torus or constant Z/3 over Q cannot embed in B_n. Not a duplicate of the commutative/alg-closed eigenline, the unitriangular fixed-vector, triangular-diagonal-kernel or Lie-algebra eigenvector nodes. New coaction node: true via 02KH flat base change with k[G], a theta cocycle and naturality of delta; generic, does not restate the item; torus-coherent-fixed-point-formula overlaps only inside a fixed-point formula, so not a duplicate. Batch-5 flags: each path ends in a generic node (fppf covering base change, invertible coherent on proper, schematically-dense definition, flat tensor injectivity), none of which is in the trace formula or Poincare duality statements or their proofs; accepted. The 12 split_report tool_uses (fpqc descent, coherence, flat exactness, Serre finiteness 02O6, Grothendieck vanishing 02UZ, etc.) are generic and accepted. No cycle, no SGA, uses equal proof_deps. FIX (one fault): Step 4 used an action a: S x Q -> Q that no step constructed. Step 3 now builds it by Yoneda from left translation on the fppf quotient A -> S(A)/B^-(A), which Q represents by lem-sfb-borel-quotient-affine-cell; that node is added to Step 3's uses (it was already in proof_deps). Advisory, left unchanged: the item's stmt_deps lack pqf-def-cohomology; Andersen 1980 is missing locally and recorded as WANTED.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlagCohomologyFiniteExact",
+  "declaration": "AlgebraicGeometry.flag_cohomology_finite_exact",
+  "declarations": [
+   "AlgebraicGeometry.flag_cohomology_finite_exact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlagCohomologyFiniteExact.lean",
+  "statement": "theorem flag_cohomology_finite_exact {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [Fact p.Prime] [CharP F p] (S : Grp (Over (Spec (.of F)))) [IsAffine S.X.left] (hS : IsSemisimpleGroupScheme S.X) (hsc : ∀ (S' : Over (Spec (.of F))) [GrpObj S'], IsSemisimpleGroupScheme S' → ∀ (f : S' ⟶ S.X) [IsMonHom f], Surjective f.left → IsFinite (GrpObj.ker f).hom → (∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker f) (s : StandardGroupSchemes.affine F A ⟶ S'), (x ≫ GrpObj.kerι f) * s = s * (x ≫ GrpObj.kerι f)) → IsIso f) (T B Bm : Grp (Over (Spec (.of F)))) [IsAffine T.X.left] [IsAffine Bm.X.left] (iT : T ⟶ S) (iB : B ⟶ S) (im : Bm ⟶ S) (j : T ⟶ B) (jm : T ⟶ Bm) (hpair : IsRhoBorelPair iT iB j) (hpairm : IsRhoBorelPair iT im jm) (aB : ModObj T.X B.X) (am : ModObj T.X Bm.X) (hB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (hm : am.smul = (jm.hom.hom ⊗ₘ 𝟙 Bm.X) ≫ GrpObj.conj Bm.X) (Φ : Finset (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hΦ : ∀ χ, χ ∈ Φ ↔ χ.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T B aB χ ≠ ⊥) (hopposite : ∀ χ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), χ.hom.hom ≠ 1 → (@TorusCharacterTangent.weightSpace F _ T Bm am χ ≠ ⊥ ↔ ∃ α ∈ Φ, χ.hom.hom = α.hom.hom⁻¹)) : ∃ (Q : Over (Spec (.of F))) (π : S.X ⟶ Q), IsProper Q.hom ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom ∧ Flat π.left ∧ Surjective π.left ∧ IsPullback (fst S.X Bm.X) (fst S.X Bm.X * (snd S.X Bm.X ≫ im.hom.hom)) π π ∧ topologicalKrullDim Q.left = (Φ.card : WithBot ℕ∞) ∧ ∃ D : HomogeneousVectorBundle.System S Bm im Q π, (∀ M : Representation F Bm.X, SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} (D.L M) (Module.finrank F M.space)) ∧ ∃ c : ∀ (M : Representation F Bm.X) (i : ℕ), HOver Q.hom (D.L M) i →ₗ[F] HOver Q.hom (D.L M) i ⊗[F] coordinateAlgebra S, (∀ (M : Representation F Bm.X) (i : ℕ), HopfAction.Counital F (coordinateAlgebra S) (HOver Q.hom (D.L M) i) (c M i) ∧ HopfAction.Coassociative F (coordinateAlgebra S) (HOver Q.hom (D.L M) i) (c M i) ∧ IsNaturalCoaction D M i (c M i) ∧ Module.Finite F (HOver Q.hom (D.L M) i) ∧ (Φ.card < i → Subsingleton (HOver Q.hom (D.L M) i))) ∧ (∀ (M N : Representation F Bm.X) (f : M.space →ₗ[F] N.space) (hf : IsRepresentationMap M N f) (i : ℕ), ∃ l : HOver Q.hom (D.L M) i →ₗ[F] HOver Q.hom (D.L N) i, (∀ v, l v = H.map (D.map M N f hf) i v) ∧ l.rTensor (coordinateAlgebra S) ∘ₗ c M i = c N i ∘ₗ l) ∧ (∀ (M₁ M₂ M₃ : Representation F Bm.X) (f : M₁.space →ₗ[F] M₂.space) (g : M₂.space →ₗ[F] M₃.space) (hf : IsRepresentationMap M₁ M₂ f) (hg : IsRepresentationMap M₂ M₃ g), Function.Injective f → Function.Exact f g → Function.Surjective g → ∃ hzero : D.map M₁ M₂ f hf ≫ D.map M₂ M₃ g hg = 0, ∃ hE : (ShortComplex.mk (D.map M₁ M₂ f hf) (D.map M₂ M₃ g hg) hzero).ShortExact, Function.Injective (H.map (D.map M₁ M₂ f hf) 0) ∧ ∀ i : ℕ, ∃ δ : HOver Q.hom (D.L M₃) i →ₗ[F] HOver Q.hom (D.L M₁) (i + 1), (∀ v, δ v = H.δ hE i v) ∧ δ.rTensor (coordinateAlgebra S) ∘ₗ c M₃ i = c M₁ (i + 1) ∘ₗ δ ∧ Function.Exact (H.map (D.map M₁ M₂ f hf) i) (H.map (D.map M₂ M₃ g hg) i) ∧ Function.Exact (H.map (D.map M₂ M₃ g hg) i) δ ∧ Function.Exact δ (H.map (D.map M₁ M₂ f hf) (i + 1))) ∧ (∀ M : Representation F Bm.X, Nonempty (RationalCharacterFiltration.Filtration M)) ∧ (∀ (M : Representation F Bm.X) (K : RationalCharacterFiltration.Filtration M), (∀ j : Fin K.length, (∀ (U : Grp (Over (Spec (.of F)))) (l : U ⟶ Bm), IsClosedSubgroupScheme l.hom.hom → IsNormalSubgroupScheme l.hom.hom → Smooth U.X.hom → ConnectedSpace U.X.left → SolvableGroupStructure.IsUnipotent U → l.hom.hom ≫ (K.character j).hom.hom = 1) ∧ ∃ v : M.space, v ≠ 0 ∧ (coordinateMap jm).toLinearMap.lTensor M.space (M.coaction v) = v ⊗ₜ[F] characterElement (jm ≫ K.character j)) ∧ ∀ (i : ℕ) (V : Representation F S.X), IsSimple V.coaction → IsSubquotient V.coaction (c M i) → ∃ j : Fin K.length, IsSubquotient V.coaction (c (characterModule (K.character j)) i)) ∧ ∀ χ : Bm ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), ∃ ψ : Bm ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), ψ.hom.hom = χ.hom.hom⁻¹ ∧ ∃ e : HOver Q.hom (D.L (characterModule χ)) 0 ≃ₗ[F] RhoSection.sectionModule S Bm im ψ 1, (∀ v, (e v).val = (TensorProduct.AlgebraTensorModule.rid F (RhoSection.Coordinate S.X) (RhoSection.Coordinate S.X)).toLinearMap (D.coordinate (characterModule χ) S.X (𝟙 S.X) (AssociatedCharacterLineBundle.pullTopSection π.left (D.L (characterModule χ)) (H.zeroLinearEquiv _ v)))) ∧ ((RhoSection.sectionModule S Bm im ψ 1).subtype ∘ₗ e.toLinearMap).rTensor (coordinateAlgebra S) ∘ₗ c (characterModule χ) 0 = regularLeftCoaction S ∘ₗ (RhoSection.sectionModule S Bm im ψ 1).subtype ∘ₗ e.toLinearMap ∧ RhoSection.HasRationalLeftTranslation S (RhoSection.sectionModule S Bm im ψ 1)",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a59b80747",
+  "group": "N0",
+  "result": "pass",
+  "note": "Item record differs from live only in lean and stmt_deps (+2 new def nodes); lean.statement verbatim; dependency records identical to live; plain imports = proof-dep modules; all theorems sorry, defs have data. Clauses match the node: hsc verbatim from exists_rho_section_modules; IsRhoBorelPair for both Borels; hΦ/hopposite pin Φ+ and the opposite Borel, N=Φ.card. System coordinates pin L(M) (f(gb)=b^-1 f(g), descent-unique), maps, action and linearization; IsNaturalCoaction determines c by flat base change. Finite dimension, vanishing above N, actual H.δ equivariant and exact, filtrations exist with torus-weight quotients and simple constituents for every filtration, H^0 ≃ sectionModule ψ=χ^-1 with value formula and regularLeftCoaction = f(s^-1 g), Krull dim = N. Edge cases (M=0, Φ empty, trivial character, i=0, negative degrees, universe u) OK. New nodes are not duplicates; H12 fields OK. Note: the 'Second reading by N0' is a self-review; clause matching is in the Worker report and in this review. No compile (no file changed)."
+ }
+}

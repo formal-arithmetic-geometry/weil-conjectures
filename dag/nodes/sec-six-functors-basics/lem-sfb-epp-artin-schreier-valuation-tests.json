@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-epp-artin-schreier-valuation-tests",
+ "kind": "statement",
+ "title": "Artin–Schreier pole tests over a complete DVR",
+ "statement": "Let $p$ be prime, let $R$ be a complete discrete valuation ring of characteristic $p$, let $\\pi$ be a uniformizer, and put $E=\\operatorname{Frac}(R)$ and $k=R/\\mathfrak m_R$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring, def-pc-field-extension]. For $a\\in E$ put $H=E[T]/(T^p-T-a)$, and let $D$ be the integral closure of $R$ in $H$ [def-weil-pbc-integral-closure]. The following tests hold. (A) If $a\\in R$, then $\\mathfrak m_RD_q=qD_q$ for every maximal ideal $q$ of $D$, and the corresponding residue field extension is finite separable. (B) If $a=\\pi^{-n}u$ with $u\\in R^\\times$, $n>0$ and $p\\nmid n$, then $H$ is a field of degree $p$, $D$ is a complete DVR, $D/\\mathfrak m_D=k$, and $\\mathfrak m_RD=\\mathfrak m_D^p$. (C) If $a=\\pi^{-n}u$ with $u\\in R^\\times$, $n>0$, $p\\mid n$, and $\\bar u\\notin k^p=\\{c^p:c\\in k\\}$, then $H$ is a field of degree $p$, $D=R[\\pi^{n/p}T]$ is a complete DVR, $\\mathfrak m_RD=\\mathfrak m_D$, and $D/\\mathfrak m_D=k[\\bar u^{1/p}]$ is purely inseparable of degree $p$ over $k$. Here $D_q$ denotes localization [def-weil-pbc-localization-at-prime], finite means finitely generated as a module, and purely inseparable in the last clause means that the $p$th power of every element lies in $k$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F0, lemma-pre-characteristic-p-case, implications (A), (B), (C), specialized to complete DVRs; the statement records the explicit pole criteria, not a new general normalization theorem."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "For (A), set $B=R[T]/(T^p-T-a)$. The monic power basis makes $B$ finite free of rank $p$ and identifies $B[1/\\pi]=H$. Its polynomial has derivative $-1$. In the derivative-inverse presentation the additional generator is therefore $Y=-1$; eliminating $Y$ identifies that presentation with $B$. Thus $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ is finite etale. A DVR is a PID, so the cited PID lemma makes $R$ normal and Noetherian. Apply the finite-etale normal-component theorem to $X=\\operatorname{Spec}R$: its hypotheses of integrality, normality and Noetherianity now hold. It identifies $B$ with the product of the integral closures of $R$ in the field factors of $H$. Integrality in a finite product is coordinatewise: one implication projects a monic equation, and conversely the product of the finitely many monic equations annihilating the coordinates annihilates the tuple. Hence $B=D$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sfb-finite-etale-normal-generic-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F0, lemma-pre-characteristic-p-case, Case (A); Tag 0BQL, lemma-finite-etale-covering-normal-unramified"
+   }
+  },
+  {
+   "text": "Still in (A), every element of $D$ is integral over $R$ by its definition. The integral-contraction lemma shows that a maximal ideal $q$ of $D$ contracts to the unique maximal ideal $\\mathfrak m_R$. The morphism just constructed is etale, hence unramified and locally of finite type by the definition of etale. Apply the unramified local-ring criterion at $q$ and $\\mathfrak m_R$. Since $R_{\\mathfrak m_R}=R$, its conclusion is precisely $\\mathfrak m_RD_q=qD_q$ and that $\\kappa(q)/k$ is finite separable. This allows both the split and the field case of $H$; no irreducibility has been assumed.",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "def-weil-etale-morphism",
+    "lem-trf-unramified-maximal-ideal-residue-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F0, lemma-pre-characteristic-p-case, Case (A); Tag 00U4, lemma-etale-at-prime; Tag 02GF, lemma-unramified-at-point"
+   }
+  },
+  {
+   "text": "For (B), the injective map $R\\hookrightarrow E$ makes $E$ a field of characteristic $p$, and $H$ has its canonical coefficient $E$-algebra structure. Let $v$ be the normalized additive valuation of $R$, extended to $E^\\times$ by fractions. There is no $b\\in E$ with $b^p-b=a$: $b=0$ is excluded by $a\\ne0$; for $b\\ne0$, if $v(b)\\geq0$ the left side is in $R$, whereas $v(a)=-n<0$; if $v(b)<0$, the two terms have distinct valuations $pv(b)<v(b)$ and therefore $v(b^p-b)=pv(b)$, which would give $p\\mid n$. The valuation assertion follows directly by factoring out the smaller uniformizer power: the remaining sum is a unit plus an element of the maximal ideal, hence is a unit. The converse clause of [lem-sfb-epp-artin-schreier-presentation], applied to this characteristic-$p$ field and this quotient with its coefficient structure, excludes the product case and implies that $H$ is a normal separable field extension of $E$ of degree $p$. Complete-DVR normalization gives a finite complete DVR $D$ with fraction field $H$ and a local inclusion $R\\hookrightarrow D$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-epp-artin-schreier-presentation",
+    "lem-per-complete-dvr-finite-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F0, lemma-pre-characteristic-p-case, Case (B); Tag 09DY, section-Artin-Schreier"
+   }
+  },
+  {
+   "text": "Write $z$ for the class of $T$ in $H$, and let $w$ be the normalized additive valuation of $D$. Put $e=w(\\pi)>0$. Units of $R$ remain units of $D$, since their inverses remain in $D$, so $w(a)=-ne$. The equation forces $w(z)<0$; factoring out the smaller power as in the preceding step gives $pw(z)=-ne$. Since $p\\nmid n$, this implies $p\\mid e$. Apply the Galois degree-data lemma to the normal separable degree-$p$ extension $H/E$. The integral closure is the local ring $D$, so its number $g$ of maximal ideals is $1$, and the formula is $p=ef$ with $f=[D/\\mathfrak m_D:k]\\geq1$. Consequently $e=p$ and $f=1$. The induced residue-field map is therefore an isomorphism, and $\\pi$ is a unit times a $p$th power of a uniformizer of $D$, giving $\\mathfrak m_RD=\\mathfrak m_D^p$. This proves every assertion of (B).",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-exc-dvr-galois-degree-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F0, lemma-pre-characteristic-p-case, Case (B); Tag 09EB, lemma-galois-conclusion"
+   }
+  },
+  {
+   "text": "For (C), put $h=n/p\\geq1$, $c=\\pi^{n-h}$ and $F(Y)=Y^p-cY-u$. Then $n-h=(p-1)h>0$. Set $B=R[Y]/(F)$ and let $y$ be its generator. The monic quotient lemma makes $B$ free of rank $p$ and identifies $B/\\pi B$ with $k[Y]/(Y^p-\\bar u)$. The non-$p$th-power hypothesis and the cited irreducibility theorem make the latter a field of degree $p$; its basis is $1,\\bar y,\\ldots,\\bar y^{p-1}$. The finite-free field-fibre criterion applies, so $B$ is a DVR, $R\\hookrightarrow B$ is injective, and $\\mathfrak m_B=\\pi B$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-x-pow-p-minus-t-irreducible",
+    "lem-sfb-finite-free-field-fibre-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F0, lemma-pre-characteristic-p-case, Case (C); Tag 09HF, lemma-take-pth-root"
+   }
+  },
+  {
+   "text": "The substitutions $y\\mapsto\\pi^hT$ and $T\\mapsto\\pi^{-h}y$ define inverse maps $B[1/\\pi]\\cong H$: indeed $F(\\pi^hT)=\\pi^n(T^p-T-a)$. A DVR with uniformizer $\\pi$ has fraction field $B[1/\\pi]$, so $H$ is a field. Its dimension over $E$ is $p$ by the monic power basis. View $B$ as the subring $R[\\pi^hT]$ of $H$. The inclusion $R\\hookrightarrow B$ is local because $\\mathfrak m_B=\\pi B$ and $B/\\pi B$ contains $k$ as a subfield. The uniqueness clause of complete-DVR normalization therefore identifies $B$ with $D$ and gives its completeness. Thus $\\mathfrak m_RD=\\mathfrak m_D$ and the residue field is $k[Y]/(Y^p-\\bar u)=k[\\bar u^{1/p}]$. Every element has a representative $\\sum_{i=0}^{p-1}a_i\\bar y^i$; its $p$th power is $\\sum_{i=0}^{p-1}a_i^p\\bar u^i\\in k$. Together with the degree-$p$ basis this proves the purely inseparable assertion of (C).",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-per-complete-dvr-finite-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F0, lemma-pre-characteristic-p-case, Case (C); Tag 09EM, remark-construction; Tag 09HF, lemma-take-pth-root"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sfb-finite-etale-normal-generic-components",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "def-weil-etale-morphism",
+  "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-epp-artin-schreier-presentation",
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-exc-dvr-galois-degree-data",
+  "lem-weil-pbc-x-pow-p-minus-t-irreducible",
+  "lem-sfb-finite-free-field-fibre-dvr"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F0, lemma-pre-characteristic-p-case, Cases (A), (B), (C), with explicit generic-algebra normalization and complete-DVR details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier equation over a discrete valuation ring integral coefficient is unramified and negative pole divisible by p with non pth power residue has ramification index one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdxIn_ne_zero\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [IsGaloisGroup G A B] [IsDedekindDomain B]\\n  {p : Ideal A} [p.IsPrime], p ≠ ⊥ → ∀ [IsDomain A] [Module.IsTorsionFree A B], \", \"doc\": \"Let $ A $ be an integral domain and $ B $ a Dedekind domain that is torsion-free as an $ A $-module. For any non-zero prime ideal $ \\\\mathfrak{p} $ of $ A $, the ramification index of $ \\\\mathfrak{p} $ \"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply'\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial (ZMod p)}\\n  (hQ : Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  Ideal.ramificationIdx (algebraMap ℤ (NumberField.Ri\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there is a canonical bijection between the set of prime ideals of $ \\\\math\"}\n  {\"name\": \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial ℤ}\\n  (hQ : Polynomial.map (Int.castRingHom (ZMod p)) Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  Ideal.ramificati\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there exists a canonical equivalence between the set of prime ideals of $\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsDedekindDomain S] [Algebra.EssFiniteType R S] [IsDomain R] [Module.Finite ℤ R] [CharZero R]\\n  [Algebra.IsIntegral R S],\\n  p ≠ ⊥ → (Algebra.IsUnramifiedAt R p ↔ Ide\", \"doc\": \"Let $ S $ be a Dedekind domain that is an essentially finite type algebra over a domain $ R $, where $ R $ is finitely generated as a $ \\\\mathbb{Z} $-module, has characteristic zero, and $ S $ is integ\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Galois\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {G : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G S] [IsGaloisGroup G R S] [Finite G] [IsDedekindDomain R]\\n  [IsDedekindDomain S] [Module.Finite R S] [Module.IsTorsionFree R S] (p : Ideal\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general ramification indices or unramified algebras, not the three Artin-Schreier pole tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Schreier extension valuation pole order prime to p totally ramified pole divisible by p inseparable residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \"[FormallyUnramified R S] : Algebra.IsSeparable (ResidueField R) (ResidueField S)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Field.insepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"(F : Type u) → (E : Type v) → [inst : Field F] → [inst_1 : Field E] → [Algebra F E] → Cardinal.{v}\", \"doc\": \"The inseparable degree of a field extension $ E $ over $ F $ is defined as the rank of $ E $ as a module over its separable closure in $ E $. This measures the dimension of $ E $ as a vector space ove\"}\n  {\"name\": \"IsPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(F : Type u_1) → (E : Type u_2) → [inst : CommRing F] → [inst_1 : Ring E] → [Algebra F E] → Prop\", \"doc\": \"The property that the field extension $ E $ over $ F $ is purely inseparable, meaning every element of $ E $ has a minimal polynomial over $ F $ of the form $ x^{p^n} - a $ for some $ a \\\\in F $ and pr\"}\n  {\"name\": \"WithAbs.instIsSeparable\", \"module\": \"Mathlib.Analysis.Normed.Field.WithAbs\", \"type\": \"[Algebra R R'] [Algebra.IsSeparable R R'] (v : AbsoluteValue R S) : Algebra.IsSeparable (WithAbs v) R'\", \"doc\": \"If $ R' $ is a separable algebra over $ R $, then the semiring $ R $ equipped with an absolute value $ v $ is a separable algebra over $ R' $.\"}\n  {\"name\": \"IsPurelyInseparable.sepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : sepDegree F E = 1\", \"doc\": \"If $ E/F $ is a purely inseparable field extension, then the separable degree of $ E $ over $ F $ is equal to 1, i.e., $ [E : F]_\\\\text{sep} = 1 $.\"}\n  {\"name\": \"IsPurelyInseparable.instOfHasExponent\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Exponent\", \"type\": \"[HasExponent K L] : IsPurelyInseparable K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ has a purely inseparable exponent $ n $, meaning that for every element $ \\\\alpha \\\\in L $, $ \\\\alpha^{p^n} $ lies in $ K $, where $ p $ is the character\"}\n  {\"name\": \"separableClosure.isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[Algebra.IsAlgebraic F E] : IsPurelyInseparable (separableClosure F E) E\", \"doc\": \"If $ E $ is an algebraic extension of $ F $, then the field extension from the separable closure of $ F $ in $ E $ to $ E $ is purely inseparable. Every element in $ E $ not in the separable closure h\"}\n  {\"name\": \"Ideal.card_inertia_eq_ramificationIdxIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"[IsDedekindDomain R] [IsDedekindDomain S] [Module.Finite R S] [IsTorsionFree R S] (p : Ideal R) (hp : p ≠ ⊥)\\n  (P : Ideal S) [P.LiesOver p] [P.IsMaximal] [Algebra.IsSeparable (R ⧸ p) (S ⧸ P)] :\\n  Nat.card (P.toAddSubgroup.inertia G) = Ideal.ramificationIdxIn p S\", \"doc\": \"In a finite, torsion-free extension of Dedekind domains $ R \\\\to S $, for a non-zero prime ideal $ \\\\mathfrak{p} $ of $ R $ and a maximal ideal $ \\\\mathfrak{P} $ of $ S $ lying over $ \\\\mathfrak{p} $ with\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general ramification indices or unramified algebras, not the three Artin-Schreier pole tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, ramificationIdx",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'ramificationIdx'",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general ramification indices or unramified algebras, not the three Artin-Schreier pole tests."
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]rtin.?[Ss]chreier|ramificationIdx.*eq_one",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"210\", \"text\": \"See `Ideal.ramificationIdx'_eq_one_iff_of_isDedekindDomain`. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"211\", \"text\": \"lemma ramificationIdx'_eq_one_of_map_localization\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"227\", \"text\": \"@[deprecated (since := \\\"2026-07-01\\\")] alias ramificationIdx_eq_one_of_map_localization :=\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"228\", \"text\": \"  ramificationIdx'_eq_one_of_map_localization\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"230\", \"text\": \"theorem ramificationIdx'_map_self_eq_one [IsDedekindDomain S]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/ExistsRamified.lean\", \"line\": \"93\", \"text\": \"  rwa [← Ideal.ramificationIdx_eq_one_iff,\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/ExistsRamified.lean\", \"line\": \"95\", \"text\": \"    Ideal.ramificationIdxIn_eq_ramificationIdx _ P Gal(K/ℚ), Ideal.ramificationIdx_eq_one_iff]\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"34\", \"text\": \"lemma Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"37\", \"text\": \"  p.ramificationIdx_eq_one R\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"62\", \"text\": \"  rw [← Ideal.IsDedekindDomain.ramificationIdx'_eq_one_iff hp Ideal.map_comap_le,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"65\", \"text\": \"  have := Ideal.ramificationIdx'_eq_one_of_map_localization\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Unramified.lean\", \"line\": \"92\", \"text\": \"@[deprecated \\\"Use `Ideal.ramificationIdx'_eq_one_iff` instead.\\\" (since := \\\"2026-06-30\\\")]\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"53\", \"text\": \"For the Galois group part, this is Artin-Schreier theory;\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"90\", \"text\": \"theorem ramificationIdx_eq_one [q.IsPrime] [Algebra.EssFiniteType R S]\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"97\", \"text\": \"  rw [ramificationIdx_def, ENat.toNat_eq_iff_eq_natCast, Nat.cast_one, Module.length_eq_one_iff,\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"102\", \"text\": \"@[deprecated (since := \\\"2026-07-01\\\")] alias ramificationIdx'_eq_one := ramificationIdx_eq_one\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"105\", \"text\": \"theorem ramificationIdx_eq_one_iff [q.IsPrime] [Algebra.EssFiniteType R S]\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"line\": \"108\", \"text\": \"  refine ⟨fun h ↦ ?_, fun _ ↦ ramificationIdx_eq_one q R⟩\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"line\": \"940\", \"text\": \"      · rw [← Ideal.IsDedekindDomain.ramificationIdx'_eq_one_iff hPbot Ideal.map_comap_le]\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"line\": \"950\", \"text\": \"      Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, pow_one] at h₂\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general ramification indices or unramified algebras, not the three Artin-Schreier pole tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ramification classification of z power p minus z equals a over a complete discretely valued field of characteristic p",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (n : ℕ) {m p k : ℕ} [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver (Ideal.span {↑p})]\\n  [IsCyclotomicExtension {n} ℚ K],\\n  n = p ^ (k + 1) * m →\\n    ¬p ∣ m → Ideal.ramificationIdx (\", \"doc\": \"Let $ K $ be a cyclotomic extension of $ \\\\mathbb{Q} $ generated by a root of unity of order $ n $, and let $ p $ be a prime number. Suppose $ n = p^{k+1}m $ where $ p $ does not divide $ m $. Then the\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq_of_prime_pow\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ (p k : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  [hK : IsCyclotomicExtension {p ^ (k + 1)} ℚ K] (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime]\\n  [hP₂ : P.LiesOver (Ideal.span {↑p})],\\n  Ideal.ramificationIdx (algebraMap ℤ (NumberField.Ring\", \"doc\": \"In a cyclotomic extension of the rational numbers, if a prime ideal $ P $ lies over a prime $ p $, then the ramification index of $ P $ with respect to the ring homomorphism from $ \\\\mathbb{Z} $ to the\"}\n  {\"name\": \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial ℤ}\\n  (hQ : Polynomial.map (Int.castRingHom (ZMod p)) Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  Ideal.ramificati\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there exists a canonical equivalence between the set of prime ideals of $\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_eq_of_not_dvd\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ {m : ℕ} (p : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver (Ideal.span {↑p})] [NeZero m]\\n  [hK : IsCyclotomicExtension {m} ℚ K],\\n  ¬p ∣ m → Ideal.ramificationIdx (algebraMap ℤ (\", \"doc\": \"For a prime number $ p $ not dividing $ m $, the ramification index of any prime ideal $ P $ in the ring of integers $ \\\\mathcal{O}_K $ of the $ m $-th cyclotomic field $ K = \\\\mathbb{Q}(\\\\zeta_m) $ over\"}\n  {\"name\": \"IsCyclotomicExtension.Rat.ramificationIdx_of_not_dvd\", \"module\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal\", \"type\": \"∀ {m : ℕ} (p : ℕ) [hp : Fact (Nat.Prime p)] (K : Type u_1) [inst : Field K] [inst_1 : NumberField K]\\n  (P : Ideal (NumberField.RingOfIntegers K)) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver (Ideal.span {↑p})] [NeZero m]\\n  [hK : IsCyclotomicExtension {m} ℚ K],\\n  ¬p ∣ m → Ideal.ramificationIdx (algebraMap ℤ (\", \"doc\": \"In a cyclotomic extension $ K $ of $ \\\\mathbb{Q} $ generated by $ m $-th roots of unity, if $ p $ is a prime number not dividing $ m $, then the ramification index of any prime ideal $ P $ in the ring \"}\n  {\"name\": \"NumberField.Ideal.ramificationIdx_primesOverSpanEquivMonicFactorsMod_symm_apply'\", \"module\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {θ : NumberField.RingOfIntegers K} {p : ℕ} [inst_1 : Fact (Nat.Prime p)]\\n  [inst_2 : NumberField K] (hp : ¬p ∣ RingOfIntegers.exponent θ) {Q : Polynomial (ZMod p)}\\n  (hQ : Q ∈ RingOfIntegers.monicFactorsMod θ p),\\n  Ideal.ramificationIdx (algebraMap ℤ (NumberField.Ri\", \"doc\": \"Given a prime $ p $ not dividing the exponent of $ \\\\theta $ in the ring of integers $ \\\\mathcal{O}_K $ of a number field $ K $, there is a canonical bijection between the set of prime ideals of $ \\\\math\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [IsDedekindDomain S] [inst_3 : Algebra R S]\\n  (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R] [inst_7 : Algebra R K]\\n  [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S L] [inst\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern general ramification indices or unramified algebras, not the three Artin-Schreier pole tests."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier polynomial over a complete discrete valuation ring negative pole ramification index and residue degree",
+   "results": "Eight hits, including Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing and Ideal.ramificationIdx_le_finrank (Mathlib/NumberTheory/RamificationInertia/Basic); general ramification tools, no three pole tests.",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states all three pole tests; reusable individual facts are already existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete discrete valuation ring Artin Schreier extension pole prime to characteristic totally ramified",
+   "results": "Eight hits, including IsDiscreteValuationRing.TFAE, of_isDiscreteValuationRing and local-field DVR instances; no pole test.",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states all three pole tests; reusable individual facts are already existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Ideal.ramificationIdx",
+   "results": "OK, zero hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states all three pole tests; reusable individual facts are already existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "Artin.?Schreier|ramificationIdx_mul_inertiaDeg_of_isLocalRing|X_pow_sub_C_irreducible_of_prime",
+   "results": "Eight hits, including Mathlib/NumberTheory/RamificationInertia/Basic.lean:670 and Mathlib/FieldTheory/KummerPolynomial.lean:99; general degree formula and irreducibility of a binomial, not the item.",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration states all three pole tests; reusable individual facts are already existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-artin-schreier-degree-p",
+  "date": "2026-10-24",
+  "group": "Q152"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09F1, lemma-characteristic-p-case; conclusion used only in its finite separable totally ramified form, not the stronger Galois wording. Tag 09F1 first paragraph, J empty case, and final paragraph: apply the three pole tests of Tag 09F0 to the normalized field factors.",
+   "via": [
+    "lem-sfb-epp-artin-schreier-degree-p",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-artin-schreier-valuation-tests",
+  "worker": "stage1",
+  "summary": "Checked Stacks 09F0 and its prerequisites; all three pole tests are proved using existing nodes, with no new nodes. Kept the full statement, including the possibly split algebra in (A), completeness and explicit integral order in (C). Repair after return of add8c20f2ce: compared the retained delivery with the current live item and every cited statement; revalidated the changed Artin–Schreier presentation, made its characteristic and coefficient-algebra hypotheses explicit in Step 3, and refreshed the literal citation. Its added definition references do not change the dichotomy.",
+  "blueprint": "Historical supporting algebra for det-thm-sf-ctf-stability-direct-images proof (3); current latest proof (3) uses direct-image preservation and does not itself state this auxiliary Epp calculation. The six steps realize precisely Tag 09F0 Cases (A), (B), (C) already recorded in blueprint.from.place. Ancestor command returns None; inherited from.node and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-per-complete-dvr-finite-normalization",
+    "why": "General complete-DVR normalization, completeness and uniqueness of a dominating DVR; used in (B) and (C), with no replacement of the pole calculation."
+   },
+   {
+    "node": "lem-exc-dvr-galois-degree-data",
+    "why": "General degree formula p=gef for the Artin--Schreier field in (B); no same-unit node supplies this formula."
+   },
+   {
+    "node": "lem-trf-unramified-maximal-ideal-residue-criterion",
+    "why": "Generic local-ring criterion extracts both maximal-ideal equality and finite separability from the explicitly constructed etale algebra in (A)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-exc-dvr-galois-degree-data",
+  "lem-trf-unramified-maximal-ideal-residue-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-29abc37ff",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-29abc37ff (reviewer sub-agent of L); spot-checked: PASS, no fixes, no new nodes. I read Stacks more-algebra 09F0 (lemma-pre-characteristic-p-case: the statement and the proofs of Cases A/B/C). The item's statement, stmt_deps, source and blueprint are the same as live (live is unsplit); only the split fields changed. Step 1: f'=-1 in char p, so the standard-etale presentation is B = R[T]/(f), which is finite free. The finite-etale normal-components lemma, with the PID lemma giving normal and Noetherian, plus coordinatewise integrality, gives B = D; this also covers the split case. Step 2: the maximal ideal contracts to m_R, etale gives unramified and lft, and 02GF at q with O_{S,s}=R gives (A). Step 3: valuation check (b=0; v(b)>=0; v(b)<0 gives v=p v(b), not equal to -n). The presentation converse then makes H a normal separable degree-p field, and complete-DVR normalization gives D. Step 4: p w(z) = -ne gives p | e, and gef=p with g=1 gives e=p, f=1. Step 5: n-h=(p-1)h>0, so B/piB = k[Y]/(Y^p-u-bar), which is irreducible; the field-fibre DVR criterion applies. Step 6: checked F(pi^h T) = pi^n(T^p-T-a) and the inverse map. The inclusion is local, so the uniqueness clause gives B = D, complete; the residue field is purely inseparable of degree p. Small cases tested: a=0 split, p=2 with n=1, and k=F_p(s) with n=p. Duplicate search: only the parent (artin-schreier-degree-p) cites 09F0, and it uses tests A, B and C exactly as stated. Tool uses accepted: complete-dvr-finite-normalization, exc-dvr-galois-degree-data and trf-unramified criterion, all generic black boxes. Batch-5 check: trf-unramified-maximal-ideal-residue-criterion is general Stacks 02GF, and trf-simple-separable-field-extension is a Mathlib leaf (separability of F(alpha)). Neither is part of the trace formula or the Poincare duality statement or proof, so both are OK. Dropped-route check: lem-per-complete-dvr-finite-normalization is listed in route-pivot-dropped only because of the Q144 chain where it was created. It is pure commutative algebra (09EM/09F8), with none of the Qbar duality, Gabber or alteration content the 2026-10-19 decision excludes. It is reviewed pass, its Lean statement was merged at stage 2, it is already cited by live sfb Epp nodes including the parent, and it is used at steps 3 and 6 for exactly its clauses. It does not touch the closure of lem-per-artin-gabber-affine-curve. Accepted. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ArtinSchreierValuationTests",
+  "declaration": "IsDiscreteValuationRing.artinSchreier_valuation_tests",
+  "file": "lean/Sheaf/RingTheory/ArtinSchreierValuationTests.lean",
+  "statement": "theorem artinSchreier_valuation_tests (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsAdicComplete (maximalIdeal R) R] (E : Type v) [Field E] [Algebra R E] [IsFractionRing R E] (p : ℕ) [Fact p.Prime] [CharP R p] (a : E) (H : Type v) [CommRing H] [Algebra E H] [Algebra R H] [IsScalarTower R E H] (eH : AdjoinRoot (X ^ p - X - C a) ≃ₐ[E] H) : (a ∈ Set.range (algebraMap R E) → ∀ (q : Ideal (integralClosure R H)) [q.IsMaximal], ∃ (_ : IsLocalHom (algebraMap R (Localization.AtPrime q))), (maximalIdeal R).map (algebraMap R (Localization.AtPrime q)) = q.map (algebraMap (integralClosure R H) (Localization.AtPrime q)) ∧ Module.Finite (ResidueField R) (ResidueField (Localization.AtPrime q)) ∧ Algebra.IsSeparable (ResidueField R) (ResidueField (Localization.AtPrime q))) ∧ (∀ (π : R) (_ : Irreducible π) (n : ℕ) (u₀ : Rˣ), 0 < n → ¬ p ∣ n → a = (algebraMap R E π)⁻¹ ^ n * algebraMap R E (u₀ : R) → IsField H ∧ Module.finrank E H = p ∧ ∃ (_ : IsDomain H) (_ : IsDiscreteValuationRing (integralClosure R H)) (_ : IsLocalHom (algebraMap R (integralClosure R H))), IsAdicComplete (maximalIdeal (integralClosure R H)) (integralClosure R H) ∧ Function.Bijective (algebraMap (ResidueField R) (ResidueField (integralClosure R H))) ∧ (maximalIdeal R).map (algebraMap R (integralClosure R H)) = maximalIdeal (integralClosure R H) ^ p) ∧ (∀ (π : R) (_ : Irreducible π) (n : ℕ) (u₀ : Rˣ), 0 < n → p ∣ n → (∀ c : ResidueField R, c ^ p ≠ residue R (u₀ : R)) → a = (algebraMap R E π)⁻¹ ^ n * algebraMap R E (u₀ : R) → IsField H ∧ Module.finrank E H = p ∧ integralClosure R H = Algebra.adjoin R {algebraMap E H ((algebraMap R E π) ^ (n / p)) * eH (AdjoinRoot.root (X ^ p - X - C a))} ∧ ∃ (_ : IsDomain H) (_ : IsDiscreteValuationRing (integralClosure R H)) (_ : IsLocalHom (algebraMap R (integralClosure R H))), IsAdicComplete (maximalIdeal (integralClosure R H)) (integralClosure R H) ∧ (maximalIdeal R).map (algebraMap R (integralClosure R H)) = maximalIdeal (integralClosure R H) ∧ Module.finrank (ResidueField R) (ResidueField (integralClosure R H)) = p ∧ (∀ x : ResidueField (integralClosure R H), ∃ c : ResidueField R, x ^ p = algebraMap (ResidueField R) (ResidueField (integralClosure R H)) c) ∧ ∃ (y : integralClosure R H) (e : AdjoinRoot (X ^ p - C (residue R (u₀ : R))) ≃ₐ[R] ResidueField (integralClosure R H)), (y : H) = algebraMap E H ((algebraMap R E π) ^ (n / p)) * eH (AdjoinRoot.root (X ^ p - X - C a)) ∧ e (AdjoinRoot.root (X ^ p - C (residue R (u₀ : R)))) = residue (integralClosure R H) y)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-755028b7b",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09F0 (A)/(B)/(C) clause by clause: DVR+IsAdicComplete+CharP R p+IsFractionRing E; H presented by AlgEquiv to AdjoinRoot (X^p-X-C a), no field assumption, so the split case in (A) is covered; D=integralClosure R H; (A) m_R D_q = q D_q plus finite separable kappa(q)/k; (B) IsField, finrank p, complete DVR, bijective canonical residue map, m_R D = m_D^p; (C) D = Algebra.adjoin R {pi^(n/p) T} literally, m_R D = m_D, residue degree p, x^p in k, explicit k[Y]/(Y^p - ubar) iso sending Y to the residue of pi^(n/p) T. Existential Prop witnesses (IsLocalHom/IsDomain/IsDVR) are true, only type the instances. lean.statement verbatim; node diff vs live only lean; stmt_dep records ok (DVR via mathlib_match); single sorry, docstrings with source, blueprint and all 6 steps; imports exist; no duplicate. Note: Second reading section is the worker's self-check. No compile (no fix)."
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "id": "lem-trf-compact-weil-cocycle-endomorphism-recurrence",
+ "kind": "statement",
+ "title": "The Weil cocycle yields a recurrence on compact-support endomorphisms",
+ "statement": "Fix a prime $p$, integers $a,n\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$ and its fixed algebraic closure $k$, and a prime $\\ell\\ne p$. Fix a finite extension $E/\\mathbf Q_\\ell$ in the chosen algebraic closure, its valuation ring $\\mathcal O_E$ and a uniformizer $\\varpi_E$, and put $A=\\mathcal O_E/\\varpi_E^n$. Let $X_0$ be a separated finite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$ and $s=\\operatorname{Spec}k$, and write $a_X:X\\to s$. Use $D^b_c(X,A)$ and the compact-support functor $H(M)=R\\Gamma_c(X,M)=\\operatorname{Fib}_s(Ra_{X!}M)$ of [def-trf-coefficient-conventions]. Put $\\gamma=(z\\mapsto z^q)^{-1}$, $g=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$ and $h=\\operatorname{Spec}(\\gamma)$ as in [def-trf-scheme-frobenius], and $P_r=L(g^r)^*$, $T=P_1$, with derived pullback [def-weil-derived-pullback-tensor-hom]. Fix one compactification $c_0=(X_0\\hookrightarrow\\overline X_0\\to\\operatorname{Spec}k_0)$ of $a_{X_0}$ [def-weil-compactifications-refinements], and use its base change $c$ to represent $Ra_{X!}$ for every power.\n\nFor every $r\\geq1$ let $\\tau^{(r)}_{c,M}:H(M)\\to H(P_rM)$ be the specified direct compact-support transport of [lem-trf-compact-frobenius-transport-composition]: the point transport along $h^r$ followed by the point fiber of the compactification exchange for the $r$-th-power square, using this same $c_0$. Write $\\tau_{c,M}=\\tau^{(1)}_{c,M}$ for the degree-one transport of [def-weil-frobenius-cohomology-transport].\n\nLet $(K,\\varphi)\\in D^b_{ctf,\\mathrm W}(X,A)$ be a strict Weil complex [def-trf-strict-weil-complex], with $\\varphi:TK\\xrightarrow{\\sim}K$, and use the specified iterates $\\varphi^{[r]}:P_rK\\xrightarrow{\\sim}K$ of [def-trf-iterated-weil-map]. Define endomorphisms of the compact-support coefficient complex by\n$$U_r=H(\\varphi^{[r]})\\circ\\tau^{(r)}_{c,K}\\quad(r\\geq1).$$\nThen $U_1=H(\\varphi)\\circ\\tau_{c,K}$ and, for every $r\\geq1$,\n$$U_{r+1}=U_1\\circ U_r.$$\nThe equality is an equality of morphisms of the compact-support derived coefficient complex, before applying a cohomology functor, with the actual direct transports from the retained compactification, rather than transports defined by repeated degree-one composition.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Proof, first and second sentences: application of the iterated Weil map on the coefficient complex; returned split step 4 (the explicit cocycle, naturality and transport-composition calculation); expanded in the returned DAG proof and the docstring of Sheaf/Paper/FrobeniusOperatorCompactDescription.lean, proof paragraphs 4"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-trf-scheme-frobenius",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-compactifications-refinements",
+  "lem-trf-compact-frobenius-transport-composition",
+  "def-weil-frobenius-cohomology-transport",
+  "def-trf-strict-weil-complex",
+  "def-trf-iterated-weil-map"
+ ],
+ "proof": [
+  {
+   "text": "By [def-trf-iterated-weil-map], the one-factor iterate is $\\varphi^{[1]}=\\varphi$. By [lem-trf-compact-frobenius-transport-composition], $\\tau^{(1)}_{c,K}=\\tau_{c,K}$. Substitution into the definition of $U_1$ gives $U_1=H(\\varphi)\\circ\\tau_{c,K}$.",
+   "uses": [
+    "def-trf-iterated-weil-map",
+    "lem-trf-compact-frobenius-transport-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Compact-description proof, application of the iterated Weil map; explicit coefficient-complex calculation in FrobeniusOperatorCompactDescription.lean, docstring paragraph (4)."
+   }
+  },
+  {
+   "text": "Fix $r\\geq1$. Let $b_{r,M}:TP_rM\\xrightarrow{\\sim}P_{r+1}M$ be the map denoted $c_{r,M}$ in [lem-trf-compact-frobenius-transport-composition], the inverse of the specified pullback-composition comparison. Apply that lemma at $M=K$ and $m=r$, with the retained $c_0$ of this statement. It gives $\\tau^{(r+1)}_{c,K}=H(b_{r,K})\\circ\\tau^{(1)}_{c,P_rK}\\circ\\tau^{(r)}_{c,K}$. These are the direct transports for the power squares, all formed from this same compactification.",
+   "uses": [
+    "lem-trf-compact-frobenius-transport-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Compact-description proof, application of the iterated Weil map; explicit coefficient-complex calculation in FrobeniusOperatorCompactDescription.lean, docstring paragraph (4)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-iterated-weil-cocycle] with its indices $(m,n)=(1,r)$. Its canonical pullback identification is precisely $b_{r,K}:TP_rK\\to P_{r+1}K$ from step 2. Since $\\varphi^{[1]}=\\varphi$, the cocycle, written with this identification rather than suppressing it, is $\\varphi^{[r+1]}\\circ b_{r,K}=\\varphi\\circ T(\\varphi^{[r]})$ as maps $TP_rK\\to K$. Both indices satisfy the lemma's positivity hypothesis.",
+   "uses": [
+    "lem-trf-iterated-weil-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Compact-description proof, application of the iterated Weil map; explicit coefficient-complex calculation in FrobeniusOperatorCompactDescription.lean, docstring paragraph (4)."
+   }
+  },
+  {
+   "text": "Put $u=\\varphi^{[r]}:P_rK\\to K$. Degree-one compact transport is natural in its coefficient complex by [def-weil-frobenius-cohomology-transport]. At this morphism the naturality square reads $H(Tu)\\circ\\tau^{(1)}_{c,P_rK}=\\tau^{(1)}_{c,K}\\circ H(u)$. Here both objects lie in $D^b_c(X,A)$: $K$ does by hypothesis and $P_rK$ is isomorphic to $K$ via $u$. This is naturality of the specified transport with the fixed compactification.",
+   "uses": [
+    "def-weil-frobenius-cohomology-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Compact-description proof, application of the iterated Weil map; explicit coefficient-complex calculation in FrobeniusOperatorCompactDescription.lean, docstring paragraph (4)."
+   }
+  },
+  {
+   "text": "Using steps 2, 3 and 4 in that order, functoriality of $H$ and associativity give $$\\begin{aligned}U_{r+1}&=H(\\varphi^{[r+1]})\\circ H(b_{r,K})\\circ\\tau^{(1)}_{c,P_rK}\\circ\\tau^{(r)}_{c,K}\\\\&=H(\\varphi)\\circ H(Tu)\\circ\\tau^{(1)}_{c,P_rK}\\circ\\tau^{(r)}_{c,K}\\\\&=H(\\varphi)\\circ\\tau^{(1)}_{c,K}\\circ H(u)\\circ\\tau^{(r)}_{c,K}\\\\&=U_1\\circ U_r.\\end{aligned}$$ Every arrow is a morphism of the compact-support derived coefficient complex; no cohomology functor has been applied. As $r\\geq1$ was arbitrary, this proves the required recurrence for the actual direct transports.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Compact-description proof, application of the iterated Weil map; explicit coefficient-complex calculation in FrobeniusOperatorCompactDescription.lean, docstring paragraph (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-iterated-weil-map",
+  "lem-trf-compact-frobenius-transport-composition",
+  "lem-trf-iterated-weil-cocycle",
+  "def-weil-frobenius-cohomology-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Explicit cocycle/naturality/transport-composition calculation required by the compact-description proof; the source blueprint gives the transport interpretation, and the existing Lean docstring paragraph (4) spells out this assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The iterated Weil cocycle combined with direct compact support Frobenius base change transport satisfies the endomorphism recurrence U r plus one equals U one composed with U r",
+   "results": "8 hits: WittVector.iterate_verschiebung_iterate_frobenius, PreTilt.coeff_iterate_frobenius', IsPurelyInseparable.iterateFrobeniusₛₗ, PreTilt.coeff_iterate_frobenius, PreTilt.coeff_iterate_frobeniusEquiv_symm, iterateFrobeniusEquiv_add, LinearMap.iterateFrobenius, iterateFrobeniusEquiv_add_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"iterate\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "(frobenius|Weil).*(cocycle|transport)|compact.*[Ff]robenius|[Ff]robenius.*compact",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of compact support base change and the Weil cocycle gives multiplicativity of transported coefficient endomorphisms",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given pullbacks P r and comparison b r the identity phi r plus one composed with b r equals phi composed with P one phi r combines with natural cohomology transport to give multiplicativity",
+   "results": "8 hits: groupCohomology.comp_d₁₂_eq, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁, groupCohomology.π_map, groupCohomology.comp_d₀₁_eq, groupCohomology.mapCocycles₁_comp_i, groupCohomology.comp_d₂₃_eq, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂, groupCohomology.π_map_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed results do not state this finite-coefficient compact-support transport assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Weil cocycle and natural compact support cohomology transport give U r plus one equals U one composed with U r for direct Frobenius power transport",
+   "results": "8 hits: groupCohomology.toCocycles_comp_isoCocycles₁_hom, groupCohomology.cocyclesMap_comp_isoCocycles₁_hom_apply, groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply, groupCohomology.π_map_apply, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply, ContinuousCohomology.MultiInd.d_succ, groupCohomology.cocyclesMap_cocyclesIso₀_hom_f, groupCohomology.cocyclesMap_comp_isoCocycles₁_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern ring Frobenius, group cohomology or small-object iteration, not the specified direct compact-support transport and Weil cocycle recurrence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural cohomology transport and iterated Weil isomorphisms give the recurrence on the direct compact support Frobenius endomorphism",
+   "results": "8 hits: iterateFrobenius_mul_apply, WittVector.frobenius, iterateFrobenius, iterateFrobenius_eq_pow, iterateFrobenius.congr_simp, iterateFrobenius_one, iterateFrobeniusEquiv_eq_pow, RingHom.iterate_map_frobenius",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern ring Frobenius, group cohomology or small-object iteration, not the specified direct compact-support transport and Weil cocycle recurrence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor H and a natural transformation eta from H to H composed with T an iterated structure map u from T K to K induces endomorphisms satisfying U r plus one equals U one composed with U r",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.ofNatTrans_succ, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans, CategoryTheory.SmallObject.SuccStruct.iterationFunctor_map_succ_assoc, CategoryTheory.SmallObject.SuccStruct.iterationFunctor_map_succ, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj, CategoryTheory.SmallObject.SuccStruct.ofNatTrans, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_refl, CategoryTheory.SmallObject.SuccStruct.ιIterationFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern ring Frobenius, group cohomology or small-object iteration, not the specified direct compact-support transport and Weil cocycle recurrence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-operator-compact-description",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "Proof, first and second sentences: application of the iterated Weil map on the coefficient complex; returned split step 4 (the explicit cocycle, naturality and transport-composition calculation)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-compact-weil-cocycle-endomorphism-recurrence",
+  "worker": "stage1",
+  "summary": "Proved the base case and recurrence directly from the existing compact-transport composition and iterated-Weil cocycle statements, then the stated degree-one naturality and functoriality. Kept the inverse canonical pullback comparison explicit and the same retained compactification for every direct transport. No statement changes, new nodes or Lean edits.",
+  "blueprint": "The first two sentences of lem-trf-frobenius-operator-compact-description.proof.md: application of the iterated Weil map to the coefficient complex; specifically returned step 4, expanded as the cocycle, naturality and direct-transport calculation in the existing Lean docstring paragraph (4).",
+  "tool_uses": [
+   {
+    "node": "def-weil-frobenius-cohomology-transport",
+    "why": "Uses its explicit assertion that compact-support transport is natural in the coefficient complex; the Weil-data unit supplies the composition law but no separate statement of degree-one naturality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-frobenius-cohomology-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-24754d097",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-24754d097 (reviewer sub-agent of L); spot-checked: I read the item, its 4 cited nodes, the parent node and the source in full, and the delivery checks out. Source: the blueprint proof lem-trf-frobenius-operator-compact-description.proof.md only says 'the composite is therefore the displayed one'; Lean FrobeniusOperatorCompactDescription.lean docstring paragraph (4), lines 119-122, matches steps 2-5 one for one (the Lean theorem still has sorry). The 2026-10-21 re-split rule does not apply: the item was created 2026-10-22 by NF and its proof was empty. Step 1: the iterated-Weil-map definition gives phi^[1]=phi, and the transport-composition lemma states tau^(1)=tau_c. Step 2: that lemma's hypotheses (same A=A_{E,n}, separated finite-type X_0, one retained c_0, M in D^b_c, m>=1) hold at M=K, m=r; c_{r,K}=b_{r,K}:TP_rK->P_{r+1}K is the inverse of the canonical lem-weil-pbc-proetale-derived-pullback-composition comparison for the pair (g, g^r). Step 3: the iterated-Weil cocycle at (1,r) uses the same comparison in the same direction, giving phi^[r+1]b=phi T(phi^[r]). Step 4: def-weil-frobenius-cohomology-transport explicitly states tau_c is natural in M in D^b_c(Y,Lambda), with Lambda=A_{E,n}; the square H(Tu)tau_{P_rK}=tau_K H(u) is correctly oriented and transfers to tau^(1) because tau^(1)_M=tau_{c,M} for every M. Step 5: I recomputed the chain U_{r+1}=H(phi)tau_K H(u)tau^(r)_K=U_1U_r; all domains check and it holds on complexes. gamma=Frob_q=(z^q)^{-1} is the same in all nodes. Edge cases: r=1 gives U_2=U_1^2; K=0 or empty X is trivial; on a point the recurrence is B^{r+1}=B*B^r. There is no cycle: the dependency closure contains neither the item nor its parent. No duplicate: rg -L found only lem-trf-frobenius-transport-induction and lem-trf-frobenius-compact-power-exchange, which state different claims. No new nodes, no SGA, no statement change. The worker wrote the split_report.tool_uses entry for the naturality assertion of the definition node themselves (C8); I accept it as a harmless generic tool that brings in no alternate route. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactWeilCocycleEndomorphismRecurrence",
+  "declaration": "WeilConjectures.compact_weil_cocycle_endomorphism_recurrence",
+  "declarations": [
+   "WeilConjectures.compactWeilCocycleEndomorphism",
+   "WeilConjectures.compact_weil_cocycle_endomorphism_recurrence"
+  ],
+  "file": "lean/Sheaf/Paper/CompactWeilCocycleEndomorphismRecurrence.lean",
+  "statement": "theorem compact_weil_cocycle_endomorphism_recurrence (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields C.l C.Qbar) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (c₀ : Compactification X₀.hom) (n : ℕ) (K : (TraceFormulaCoefficientConventions.mk D C E (n + 1) (Nat.succ_pos n) X₀).strictWeilComplex) : compactWeilCocycleEndomorphism D C E X₀ c₀ n K 1 (by decide) = frobeniusCompactTransportFinite D C.l C.different (Coefficient.{u} C.l C.Qbar E) X₀ c₀ n K.obj.carrier ≫ (compactPowerCohomology D C.l (Coefficient.{u} C.l C.Qbar E) X₀ c₀ n).map ((TraceFormulaCoefficientConventions.mk D C E (n + 1) (Nat.succ_pos n) X₀).strictWeilFrobenius K).hom ∧ ∀ (r : ℕ) (hr : 1 ≤ r), compactWeilCocycleEndomorphism D C E X₀ c₀ n K (r + 1) (Nat.le_trans hr (Nat.le_succ r)) = compactWeilCocycleEndomorphism D C E X₀ c₀ n K r hr ≫ compactWeilCocycleEndomorphism D C E X₀ c₀ n K 1 (by decide)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71300a95d",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Node diff lean-only; lean.statement verbatim; 8 stmt_dep records identical to live. Clause check: D/C/E/(n+1) give p,q,k0,k,l!=p,O_E/ϖ^n for every n>=1; X0 LOFT+QC+separated, nothing stronger; one c0 throughout; H=compactPowerCohomology (complexes, no cohomology functor); τ^(r)=compactPowerTransport (direct power recipe); τ_c=frobeniusCompactTransportFinite; φ=strictWeilFrobenius (TK->K); φ^[r]=iteratedWeilIsomorphism; U_r=τ^(r)≫H(pointPowerPullbackModel(g^r).hom≫φ^[r]), the model being the same unit-normalized map iteratedWeilPullbackModel uses (canonical, not free). Conjunct 1 τ_c≫Hφ true (r=1 recipe = τ_c after pow_one); conjunct 2 U(r+1)=U r≫U 1 = U1∘Ur in diagrammatic order. Edge cases r=1, n=0 (level 1), K=0, empty X0, universes ok. Not hollow, single sorry, docstrings with source/blueprint and steps 1-5. No recompile (no change; worker clean 30.1/41.9 s). Advisories: plain defs compactPowerCohomology/Transport owned by stage-1 theorem stmt_dep lem-trf-compact-frobenius-transport-composition (not added, so advisory; suggest existing:true def node); pointPowerPullbackModel owned by non-stmt_dep lem-trf-point-transport-composition (= T.iteratedWeilPullbackModel); stage 3 needs τ^(1)=τ_c identification, not stated in the dependency's Lean."
+ }
+}

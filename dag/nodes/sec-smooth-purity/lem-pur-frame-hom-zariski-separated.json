@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-frame-hom-zariski-separated",
+ "blueprint": {
+  "is": null,
+  "from": "lem-pur-frame-independence",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Zariski separation of bottom supported Hom classes",
+ "statement": "For the relative smooth pair of [lem-pur-relative-support-bottom-descent], two arbitrary supported Hom classes of degree 2c and twist c on a common etale neighbourhood agree if their restrictions agree on a Zariski neighbourhood of each point.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Restriction, elementary invariance, and final descent paragraphs"
+ },
+ "stmt_deps": [
+  "lem-pur-relative-support-bottom-descent",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-supported-cup-functoriality",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Change from the diagonal annihilating exponent to the coefficient ring characteristic using the normalized twist comparison. The normalized supported-Hom and site comparisons identify the two classes with etale supported cohomology classes, and their displayed restrictions with the derived-kernel restrictions. Choose a neighbourhood for every point, a covering family in the small etale site. Apply the separatedness clause of bottom-degree descent, then cancel the coefficient and Hom comparisons.",
+   "uses": [
+    "lem-pur-relative-support-bottom-descent",
+    "lem-pur-supported-hom-pullback",
+    "lem-pur-supported-cup-functoriality",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-relative-support-bottom-descent",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-supported-cup-functoriality",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "The indicated argument, with the concrete supported-Hom identifications spelled out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "concrete supported Kummer product naturality and Zariski separation in the bottom supported degree",
+   "results": "No theorem with the concrete frame product and chosen support comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, cupProduct",
+   "results": "No matching concrete frame comparison; use the recorded project supported cup and Hom declarations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frameBoundaryProduct.*(pullback|restrict|nat)|framePrincipalBoundary.*(pullback|restrict|nat)",
+   "results": "No existing direct declaration in the project; read supportedCupFunctoriality, supportedHom_pullback and relative_support_bottom_descent.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityFrameIndependence",
+  "date": "2026-10-25",
+  "group": "G2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrameHomZariskiSeparated",
+  "file": "lean/Sheaf/Paper/FrameHomZariskiSeparated.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.frameHom_zariski_separated",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.frameHom_zariski_separated"
+  ],
+  "statement": "theorem frameHom_zariski_separated (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}}\n    (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B)\n    [SmoothOfRelativeDimension P.level v] (i : Z ⟶ V) [IsClosedImmersion i]\n    [Smooth (i ≫ v)] (c : ℕ)\n    (hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) =\n      ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞))\n    (hfinite : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) ≠ ⊤)\n    (U : Scheme.{u}) (e : U ⟶ V) [Etale e] (f : Fin c → Γ(U, ⊤))\n    (tf : U.zeroLocusSubscheme (Set.range f) ⟶ Z)\n    (hf : IsPullback tf (U.zeroLocusSubschemeι (Set.range f)) i e)\n    (α β : cupSupportedHom P (pullback.snd i e)\n      ((cupSingle P U).obj (P.frameTwist U c)) (2 * (c : ℤ)))\n    (hlocal : ∀ x : U, ∃ W : U.Opens, x ∈ W ∧\n      ∀ sq : ChosenCartesianSquare\n        (pullback.fst (pullback.snd i e) W.ι)\n        (pullback.snd (pullback.snd i e) W.ι) (pullback.snd i e) W.ι,\n      P.functorialCupPullback true _ _ W.ι _ sq (e ≫ v ≫ b) (2 * (c : ℤ)) c α =\n      P.functorialCupPullback true _ _ W.ι _ sq (e ≫ v ≫ b) (2 * (c : ℤ)) c β) :\n    α = β",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T041157-L-1052777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T041157-L-1052777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

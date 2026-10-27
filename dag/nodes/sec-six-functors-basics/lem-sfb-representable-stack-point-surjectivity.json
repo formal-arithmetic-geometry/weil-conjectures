@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-representable-stack-point-surjectivity",
+ "kind": "statement",
+ "title": "Surjectivity on stack points detects representable surjectivity",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\mathcal X$ be an algebraic stack over $S$, let $\\mathcal Y$ be either an algebraic stack over $S$ or an algebraic space over $S$ (regarded as the category fibred in sets of its sections, with the point classes of [def-a1-algebraic-space-point-classes]), and let $f:\\mathcal Y\\to\\mathcal X$ be a morphism representable by algebraic spaces. An algebraic stack over $S$ means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; stacks, representability and 2-fibre products have the conventions of [def-sfb-stable-pointed-moduli-groupoids], smoothness is [def-sbc-smooth-morphisms], and algebraic spaces are [def-trf-algebraic-space]. In particular representability of $f$ means that $\\mathcal Y\\times_{\\mathcal X}T$ is an algebraic space for every scheme $T\\to\\mathcal X$. Use the field-valued point classes of [lem-sfb-stack-point-topology-flat-lfp-open]. Then $|f|:|\\mathcal Y|\\to|\\mathcal X|$ is surjective if and only if, for every scheme $T\\to\\mathcal X$, the projection $\\mathcal Y\\times_{\\mathcal X}T\\to T$ is surjective on underlying algebraic-space point sets. No flatness or finite-presentation hypothesis on $f$ is required.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XI (lemma-characterize-surjective), equivalence (1) <=> (2), with the scheme-base-change meaning of (2) spelled out in its proof. The case of an algebraic-space source uses that an algebraic space is an algebraic stack, algebraic.tex Tag 03YS (lemma-representable-algebraic), (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof": [
+  {
+   "text": "Assume $|f|$ is surjective. Fix a scheme map $g:T\\to\\mathcal X$ and a point $t\\in|T|$, represented by $t_0:\\operatorname{Spec}\\kappa(t)\\to T$. Representability gives the algebraic space $P=\\mathcal Y\\times_{\\mathcal X}T$. Choose a field-valued representative $y:\\operatorname{Spec}L\\to\\mathcal Y$ whose class maps to $[g t_0]$. By the definition of stack point classes in [lem-sfb-stack-point-topology-flat-lfp-open], there are a common extension field $M$ of $L$ and $\\kappa(t)$ and an isomorphism $\\alpha:f(y_M)\\xrightarrow{\\sim}g(t_{0,M})$. By the fibrewise triple definition of the 2-fibre product in [def-sfb-stable-pointed-moduli-groupoids], $(y_M,t_{0,M},\\alpha)$ is an object of $P$ over $\\operatorname{Spec}M$. Its algebraic-space point class, in the convention of [def-a1-algebraic-space-point-classes], maps to $t$: the representative $t_{0,M}$ is the restriction of $t_0$ to $M$. Thus every $t$ has a preimage. This works for each $T$ and $g$.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XI (lemma-characterize-surjective), forward implication, expanding Tag 04XH (lemma-points-cartesian) by the defining common-field 2-isomorphism and the defining 2-fibre-product triple."
+   }
+  },
+  {
+   "text": "Conversely assume every scheme base change is surjective on point sets. Represent any $x\\in|\\mathcal X|$ by $x_0:\\operatorname{Spec}K\\to\\mathcal X$, using [lem-sfb-stack-point-topology-flat-lfp-open]. Apply the hypothesis to $T=\\operatorname{Spec}K$. The unique point of $T$ has a preimage in $P=\\mathcal Y\\times_{\\mathcal X}\\operatorname{Spec}K$. Choose a representative $z:\\operatorname{Spec}M\\to P$ of that preimage, using [def-a1-algebraic-space-point-classes]. The second projection gives a field homomorphism $K\\to M$, hence an extension field. The defining triple of [def-sfb-stable-pointed-moduli-groupoids] gives an object $y_M$ of $\\mathcal Y(M)$ and an isomorphism $f(y_M)\\cong(x_0)_M$. Therefore $|f|([y_M])=[x_0]=x$. For an algebraic-space source the same argument applies to its discrete fibred groupoid: isomorphisms in its fibres are equalities, so its point classes are exactly those of [def-a1-algebraic-space-point-classes]. Both directions use representability only to make $P$ an algebraic space; neither uses flatness or finite presentation.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XI (lemma-characterize-surjective), converse implication; Tag 04XG (definition-points) and the following comparison with algebraic-space points."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-point-topology-flat-lfp-open",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XI (lemma-characterize-surjective), both implications, expanding the elementary triple construction in Tag 04XH (lemma-points-cartesian)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraic.stack|surjective_iff",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Logic/Function/Basic.lean\", \"line\": \"590\", \"text\": \"theorem surjective_iff_hasRightInverse : Surjective f ↔ HasRightInverse f :=\"}\n  {\"file\": \"Mathlib/Logic/Embedding/Basic.lean\", \"line\": \"45\", \"text\": \"theorem exists_surjective_iff {α β : Sort*} :\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Eval/Coeff.lean\", \"line\": \"116\", \"text\": \"theorem map_surjective_iff : Function.Surjective (map f) ↔ Function.Surjective f :=\"}\n  {\"file\": \"Mathlib/Logic/IsEmpty/Basic.lean\", \"line\": \"126\", \"text\": \"theorem Function.surjective_iff_isEmpty [IsEmpty α] (f : α → β) : f.Surjective ↔ IsEmpty β :=\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/Basic.lean\", \"line\": \"723\", \"text\": \"theorem lift_surjective_iff_closure_range_eq_top :\"}\n  {\"file\": \"Mathlib/GroupTheory/Generators.lean\", \"line\": \"58\", \"text\": \"  FreeGroup.lift_surjective_iff_closure_range_eq_top.mpr P.closure_eq_top\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Epi.lean\", \"line\": \"17\", \"text\": \"- `RingHom.surjective_iff_epi_and_finite`: surjective <=> epi + finite\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Epi.lean\", \"line\": \"52\", \"text\": \"lemma RingHom.surjective_iff_epi_and_finite {R S : CommRingCat} {f : R ⟶ S} :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Valued/ValuedField.lean\", \"line\": \"572\", \"text\": \"lemma valuedCompletion_surjective_iff :\"}\n  {\"file\": \"Mathlib/Condensed/Epi.lean\", \"line\": \"47\", \"text\": \"  rw [← isLocallySurjective_iff_epi', coherentTopology.isLocallySurjective_iff,\"}\n  {\"file\": \"Mathlib/Condensed/Epi.lean\", \"line\": \"48\", \"text\": \"    regularTopology.isLocallySurjective_iff]\"}\n  {\"file\": \"Mathlib/Condensed/Epi.lean\", \"line\": \"63\", \"text\": \"    ← isLocallySurjective_iff_epi']\"}\n  {\"file\": \"Mathlib/Condensed/Epi.lean\", \"line\": \"64\", \"text\": \"  exact extensiveTopology.isLocallySurjective_iff (D := A) _\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"37\", \"text\": \"lemma isLocallySurjective_iff_locallySurjective_on_lightProfinite : IsLocallySurjective f ↔\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"42\", \"text\": \"  rw [coherentTopology.isLocallySurjective_iff,\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"43\", \"text\": \"    regularTopology.isLocallySurjective_iff]\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"56\", \"text\": \"  rw [← isLocallySurjective_iff_epi']\"}\n  {\"file\": \"Mathlib/Condensed/Light/Epi.lean\", \"line\": \"57\", \"text\": \"  exact LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite _ f\"}\n  {\"file\": \"Mathlib/GroupTheory/SemidirectProduct.lean\", \"line\": \"173\", \"text\": \"  Function.surjective_iff_hasRightInverse.2 ⟨inr, rightHom_inr⟩\"}\n  {\"file\": \"Mathlib/Algebra/Exact/Basic.lean\", \"line\": \"570\", \"text\": \"lemma surjective_iff_eq_zero_of_exact (h : Function.Exact f g) :\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/DivisionRing.lean\", \"line\": \"18\", \"text\": \"* `LinearMap.surjective_iff_ne_zero`: a linear functional `f` is surjective iff `f ≠ 0`.\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/DivisionRing.lean\", \"line\": \"28\", \"text\": \"theorem surjective_iff_ne_zero [DivisionSemiring R] [Module R M] {f : M →ₗ[R] R} :\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/DivisionRing.lean\", \"line\": \"34\", \"text\": \"protected alias ⟨_, surjective⟩ := surjective_iff_ne_zero\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"line\": \"321\", \"text\": \"theorem vecMul_surjective_iff_exists_left_inverse\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"line\": \"331\", \"text\": \"theorem mulVec_surjective_iff_exists_right_inverse\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: surjective_iff and the base-change results concern schemes; they do not identify surjectivity on stack point classes with surjectivity of all algebraic-space scheme base changes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable morphism of algebraic stacks is surjective if and only if it is surjective on field valued point classes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.surjective_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Surjective f ↔ Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map between their topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f],\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.surj\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.Surjective f],\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is surjective, then the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.surjectiveOnStalks_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.SurjectiveOnStalks f ↔\\n    ∀ (x : ↥X), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is said to be surjective on stalks if and only if for every point $x \\\\in X$, the induced ring homomorphism on the stalks $f_x^\\\\#: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.SurjectiveOnStalks f] (x : ↥X),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is surjective on stalks, then for every point $ x \\\\in X $, the induced map on the stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is surjec\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.surj_on_stalks\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.SurjectiveOnStalks f] (x : ↥X),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If $f$ is surjective on stalks, then for any point $x \\\\in X$, the induced ring homomorphism on stalks $f_x^\\\\#: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: surjective_iff and the base-change results concern schemes; they do not identify surjectivity on stack point classes with surjectivity of all algebraic-space scheme base changes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of a representable map of Artin stacks can be checked on the underlying topological spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.surjective_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Surjective f ↔ Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map between their topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.surj\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.Surjective f],\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is surjective, then the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f],\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.surjective_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.Surjective =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Function.Surjective\", \"doc\": \"A morphism of schemes is surjective if and only if its underlying continuous map between topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.surjectiveOnStalks_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.SurjectiveOnStalks f ↔\\n    ∀ (x : ↥X), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is said to be surjective on stalks if and only if for every point $x \\\\in X$, the induced ring homomorphism on the stalks $f_x^\\\\#: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.SurjectiveOnStalks f] (x : ↥X),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is surjective on stalks, then for every point $ x \\\\in X $, the induced map on the stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is surjec\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i))\\n  [CategoryTheory.Presheaf.IsLocallySurjective\", \"doc\": \"The morphism from the Yoneda embedding of a glued scheme constructed via Zariski gluing data to a sheaf is locally surjective with respect to the Zariski topology. This means that for every scheme, th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: surjective_iff and the base-change results concern schemes; they do not identify surjectivity on stack point classes with surjectivity of all algebraic-space scheme base changes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of algebraic stacks representable by algebraic spaces surjectivity on points implies surjectivity after every scheme base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [Surjective f] : Function.Surjective f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.Surjective f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map on topological spaces is surjective, then $ f $ is a surjective morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.surj\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.Surjective f],\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is surjective, then the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantOfSurjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"[Surjective f] : IsDominant f\", \"doc\": \"Every surjective morphism of schemes is dominant, meaning that if a morphism $ f: X \\to Y $ is surjective on the underlying topological spaces, then its image is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.surjective_eq_topologically\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \": @Surjective = topologically Function.Surjective\", \"doc\": \"A morphism of schemes is surjective if and only if its underlying continuous map between topological spaces is surjective.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: surjective_iff and the base-change results concern schemes; they do not identify surjectivity on stack point classes with surjectivity of all algebraic-space scheme base changes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"surjective_iff\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgebraicGeometry.surjective_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Surjective f ↔ Function.Surjective ⇑f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] : AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: surjective_iff and the base-change results concern schemes; they do not identify surjectivity on stack point classes with surjectivity of all algebraic-space scheme base changes."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|StackPoint|stack.point|surjective_iff",
+   "results": "OK 13 hits; recorded top results: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheafed spaces, not field-valued point classes of algebraic stacks; inspected UnderlyingMap.lean lines 53-70 and PullbackCarrier.lean lines 434-440, whose objects are schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity on equivalence classes of field valued objects of an algebraic stack is preserved by base change to a scheme",
+   "results": "OK 8 hits; recorded top results: AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheafed spaces, not field-valued point classes of algebraic stacks; inspected UnderlyingMap.lean lines 53-70 and PullbackCarrier.lean lines 434-440, whose objects are schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"surjective\"",
+   "results": "OK 12 hits; recorded top results: AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.mk. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheafed spaces, not field-valued point classes of algebraic stacks; inspected UnderlyingMap.lean lines 53-70 and PullbackCarrier.lean lines 434-440, whose objects are schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism representable by algebraic spaces is surjective on stack point classes if and only if every scheme base change is surjective",
+   "results": "OK 8 hits; recorded top results: AlgebraicGeometry.surjective_iff, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Surjective.surj, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.Scheme.Hom.surjective, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheafed spaces, not field-valued point classes of algebraic stacks; inspected UnderlyingMap.lean lines 53-70 and PullbackCarrier.lean lines 434-440, whose objects are schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable map of Artin stacks universal surjectivity is equivalent to surjectivity on points represented by spectra of fields",
+   "results": "OK 8 hits; recorded top results: AlgebraicGeometry.surjective_iff, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.SurjectiveOnStalks.Spec_iff, AlgebraicGeometry.Surjective.surj, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.Scheme.Hom.surjective, AlgebraicGeometry.Surjective, AlgebraicGeometry.surjectiveOnStalks_iff. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern schemes or sheafed spaces, not field-valued point classes of algebraic stacks; inspected UnderlyingMap.lean lines 53-70 and PullbackCarrier.lean lines 434-440, whose objects are schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-flat-lfp-finite-type-surjectivity",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points detect surjectivity of flat locally presented maps. Supporting input for this split: Convert full point image to surjectivity after every scheme base change.",
+   "via": [
+    "lem-sfb-stack-flat-lfp-finite-type-surjectivity",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-stack-point-surjectivity",
+  "worker": "stage1",
+  "summary": "Q06 checked Stacks 04XI and expanded the common-field 2-fibre-product construction of 04XH directly into two elementary proof steps. No new nodes or Mathlib leaves are needed. The statement and original search records are preserved. New logged searches return scheme-only results.",
+  "blueprint": "Supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the existing alteration/moduli prerequisite chain recorded in blueprint.from.place: converts full stack point image to surjectivity after scheme base change. Read the latest blueprint sk-thm-sf-ctf-stability unit and direct-images proof; the latest proof (3) is now the compactification assembly. The inherited created.item chain has no surviving blueprint ancestor (blueprint_refs.py ancestor returns None); preserved its null anchor and precise historical place rather than inventing a new ancestry."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-22b1e2589",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-22b1e2589 (reviewer sub-agent of L); spot-checked: Read Stacks stacks-properties.tex 04XG (l.763), 04XH (l.802) and 04XI (l.834). The item statement is unchanged from base and live (still unsplit in live and side-live; no repair note, so this is a first split and not a re-split). It matches 04XI: f only representable, quantifier over all schemes T→X, algebraic-space source allowed via 03YS(2) with discrete fibres. Step 1 (⇒) is the 04XH two-line triple argument. It uses three cited statements: the common-extension equivalence from lem-sfb-stack-point-topology-flat-lfp-open (definition content only), the fibrewise triple 2-fibre product and representability from def-sfb-stable-pointed-moduli-groupoids, and the restriction of t0 to M from def-a1-algebraic-space-point-classes. It is acceptably elementary. Step 2 (⇐) follows 04XI 2⇒1: T=Spec K, a representative z over M, the triple giving f(y_M)≅(x0)_M; it never asserts surjectivity on K-points. Edge cases checked: empty source or target, Spec C→Spec R over R, the identity on BG. No new nodes. rg -L for 04XI/04XH/points-cartesian found only the narrower space analogue lem-a1-space-fibre-product-point, so no duplicate. The parent lem-sfb-stack-flat-lfp-finite-type-surjectivity uses the space-source case that the item covers. Route stays inside unit sk-thm-sf-ctf-stability; no tool_uses. Three search kinds are recorded with no match. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableStackPointSurjectivity",
+  "declaration": "CategoryTheory.representable_stack_point_surjectivity",
+  "declarations": [
+   "CategoryTheory.representable_stack_point_surjectivity",
+   "CategoryTheory.representable_space_stack_point_surjectivity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableStackPointSurjectivity.lean",
+  "statement": "theorem representable_stack_point_surjectivity {S : Scheme.{u}} (X : BasedCategory.{v₁, w₁} (Over S)) (hX : IsAlgebraicModuliStack X) (Y : BasedCategory.{v₂, w₂} (Over S)) (hY : IsAlgebraicModuliStack Y) (f : BasedFunctor Y X) (hf : IsRepresentableByAlgebraicSpaces f) : Function.Surjective (moduliPointMap f) ↔ ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) X) (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z p → Function.Surjective (AlgebraicSpace.mapPoint p)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dadf05f4f",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, Stacks 04XI/04XG/04XH, and every used declaration (HasSpaceBaseChange, IsRepresentableByAlgebraicSpaces, moduliTwoFiberProduct/Fst, discreteModuli, ModuliPoints/moduliPointMap, AlgebraicSpace.Point/mapPoint, moduliSpacePointMap, IsAlgebraicModuliStack). Stack and space source cases both stated; f only representable, no flat/lfp; LHS on field-valued point classes (space case via canonical moduliSpacePointMap); RHS over every scheme map t and every presentation of the actual 2-fibre product with its T-projection (presentation-independent, non-vacuous by hf). Edge cases (empty source/target/T, BG, Spec C→Spec R, universes) OK. Node differs from live only in lean + landed stmt_dep def-sfb-algebraic-moduli-stack (used explicitly); statement verbatim; no defs, sorry proofs, docstrings with source/blueprint/proof steps; report has Worker report and Second reading by NC. No compile (no change)."
+ }
+}

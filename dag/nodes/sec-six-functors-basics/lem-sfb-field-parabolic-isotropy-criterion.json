@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-field-parabolic-isotropy-criterion",
+ "kind": "statement",
+ "title": "Noncentral split torus gives a proper minimal rational parabolic",
+ "statement": "Let $k$ be any field [def-weil-field] and let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology]: smooth, affine of finite type and geometrically connected, with no nontrivial smooth connected normal unipotent subgroup after extension to an algebraic closure. Unipotent means admitting a faithful finite-dimensional matrix representation in which all geometric points are unipotent matrices. A split torus is a group scheme isomorphic over $k$ to $\\mathbf G_{m,k}^r$, $r\\geq0$, where $\\mathbf G_{m,k}=\\operatorname{Spec}k[z,z^{-1}]$ with multiplication of units. A parabolic $k$-subgroup $P\\subseteq G$ means a smooth geometrically connected closed subgroup [def-weil-closed-immersion] whose fppf right-coset sheaf $G/P$ is represented by a proper finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism]. Here the coset sheaf is the sheafification of $A\\mapsto G(A)/P(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras, and $G(A)=\\operatorname{Hom}_k(\\operatorname{Spec}A,G)$. A minimal parabolic is one containing no strictly smaller parabolic $k$-subgroup; proper means $P\\ne G$. Let $T\\subseteq G$ be a closed split torus which is noncentral: for some commutative $k$-algebra $A$, some $t\\in T(A)$ and some $g\\in G(A)$ one has $tg\\ne gt$. Then $G$ contains a proper minimal parabolic $k$-subgroup. This holds over finite and imperfect fields as well.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 25.2, printed p.545 (noncentral, not merely nontrivial, split torus); Section 25(a), Theorems 25.1 and 25.8, pp.544--546 (minimal rational parabolics). Minimality is obtained by choosing a proper parabolic of least dimension; all parabolics are smooth geometrically connected."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-parabolic-subgroup",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Choose a $k$-isomorphism $T\\simeq\\mathbf G_m^r$. Its coordinate inclusions give cocharacters $\\lambda_i:\\mathbf G_m\\to G$. For every test algebra $A$ and $(a_1,\\ldots,a_r)\\in T(A)$, its image in $G(A)$ equals $\\prod_i\\lambda_i(a_i)$. If each $\\lambda_i$ commuted with every element of $G$ after every test-algebra extension, this product would commute too. Noncentrality of $T$ therefore gives one $\\lambda=\\lambda_i$ that is noncentral as a subgroup functor. In particular $r>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 25.2, p.545: passing from a noncentral split torus to a noncentral coordinate cocharacter."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reductive-cocharacter-parabolic-geometry] to this $k$-cocharacter $\\lambda$. It gives the smooth geometrically connected closed subgroup $P_\\lambda\\subseteq G$ and represents its fppf coset sheaf by a smooth projective scheme $X_\\lambda$. By [lem-kun-projective-implies-proper], $X_\\lambda$ is proper, hence finite type by the definition of properness in [def-weil-proper-morphism]. Thus $P_\\lambda$ is a parabolic with exactly the quotient convention of the statement.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1, p.544 (parabolic quotient), as supplied in the existing cocharacter-geometry statement; projective implies proper as in Stacks Tag 01WC, lemma-locally-projective-proper."
+   }
+  },
+  {
+   "text": "Suppose $P_\\lambda=G$. The same cocharacter-geometry statement makes $U_\\lambda$ a smooth geometrically connected normal subgroup of $G$, gives a split series $U_\\lambda=U_0\\supseteq\\cdots\\supseteq U_n=1$ of smooth closed subgroups, each normal in its predecessor with represented fppf quotient $\\mathbf G_a$, and gives $G\\simeq U_\\lambda\\rtimes Z_\\lambda$; all of this commutes with extension to an algebraic closure $\\bar k$ (smoothness, flatness, surjectivity, local finite presentation and scheme-theoretic kernels are preserved by this base change). Over $\\bar k$ the trivial group is unipotent and $\\mathbf G_a$ is unipotent via $x\\mapsto\\begin{pmatrix}1&x\\\\0&1\\end{pmatrix}$, so descending induction on $j$, applying [lem-sfb-smooth-unipotent-extension] to $U_{j+1,\\bar k}\\subseteq U_{j,\\bar k}\\to\\mathbf G_{a,\\bar k}$, shows that $U_{\\lambda,\\bar k}$ is unipotent. It is smooth, connected and normal in $P_{\\lambda,\\bar k}=G_{\\bar k}$, so reductivity forces $U_{\\lambda,\\bar k}=1$, and the decomposition gives $G_{\\bar k}=Z_{\\lambda,\\bar k}$. This equality descends to $k$: the ideal defining the closed subgroup $Z_\\lambda\\subseteq G$ becomes zero after tensoring with $\\bar k$, and a $k$-vector space injects into its scalar extension (extend any nonzero vector to a basis). Thus $G=Z_\\lambda$. The functorial definition of $Z_\\lambda$ in the cited statement says precisely that all elements commute with $\\lambda$ after all algebra extensions, contradicting step 1. Hence $P_\\lambda\\ne G$.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-smooth-unipotent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 25.2, p.545: reductivity kills the normal unipotent kernel when P(lambda)=G; Theorem 13.33(b), pp.265-266; split unipotent groups are unipotent, Corollary 14.7 / Proposition 17.60."
+   }
+  },
+  {
+   "text": "Write $G=\\operatorname{Spec}R$, with $R$ a finitely generated $k$-algebra. By [lem-wf-affine-noetherian-components], descending chains of closed subsets of $G$ stabilize. Consider the nonempty collection of closed supports of parabolic $k$-subgroups contained in $P_\\lambda$; it contains the support of $P_\\lambda$. Choose a minimal member, represented by a parabolic $P\\subseteq P_\\lambda$: otherwise repeated strict descent would produce a nonstabilizing descending chain. If $Q\\subseteq P$ is another parabolic of $G$, its support belongs to the same collection and therefore equals that of $P$. Both $P$ and $Q$ are smooth over $k$, hence reduced by [sbc-lem-smooth-geometrically-reduced] applied to their structural morphisms. Uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] now gives equality of their defining ideal sheaves in $G$, so $Q=P$ as closed subgroup schemes. Thus $P$ is minimal among all parabolics of $G$, and $P\\subseteq P_\\lambda\\ne G$ makes it proper. No step assumes that $k$ is infinite or perfect.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 25(a), pp.544-546: minimal parabolics; Noetherian closed-support choice and reduced-subscheme uniqueness, Stacks Tag 056T (lemma-smooth-geometrically-normal) and Tag 01J3 (lemma-reduced-closed-subscheme)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "lem-sfb-smooth-unipotent-extension",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-wf-affine-noetherian-components",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 25.2, printed p.545, using Theorem 25.1 and Theorem 13.33(b); the final minimal choice is written explicitly using existing Noetherian and reduced-closed-subscheme lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]arabolic|[Ii]sotropic.*[Rr]eductive",
+   "results": "{\"t\": \"2026-10-24T04:43:39Z\", \"tool\": \"grep\", \"query\": \"[Pp]arabolic|[Ii]sotropic.*[Rr]eductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\"], \"digest\": \"f0660ccbca734a54\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the parabolic hits are 2 by 2 matrices and modular cusps; root-pairing anisotropy and Lie Cartan subalgebras do not assert existence of rational parabolic subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal rational parabolic subgroups exist in connected reductive groups and their flag quotients are projective",
+   "results": "{\"t\": \"2026-10-24T04:43:39Z\", \"tool\": \"leansearch\", \"query\": \"Minimal rational parabolic subgroups exist in connected reductive groups and their flag quotients are projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Module.Grassmannian.projective_quotient\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"AddSubgroup.instMin\", \"ClosedAddSubgroup.instInfClosedAddSubgroup\", \"Projectivization.Subspace.noConfusionType\", \"LinearAlgebra.Projectivization.termℙ\", \"Projectivization.Subspace.instSetLike\"], \"digest\": \"a2bf49d0acc53ce5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the parabolic hits are 2 by 2 matrices and modular cusps; root-pairing anisotropy and Lie Cartan subalgebras do not assert existence of rational parabolic subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\"",
+   "results": "{\"t\": \"2026-10-24T04:43:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.IsParabolic\", \"Matrix.parabolicEigenvalue\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Matrix.IsParabolic.neg\", \"Matrix.IsParabolic.of_neg\", \"Matrix.isParabolic_neg_iff\", \"Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero\", \"Matrix.isParabolic_iff_of_upperTriangular\"], \"digest\": \"81492834a0352a7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the parabolic hits are 2 by 2 matrices and modular cusps; root-pairing anisotropy and Lie Cartan subalgebras do not assert existence of rational parabolic subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over any field a connected reductive algebraic group has a proper parabolic subgroup exactly when it has a noncentral split torus, and has minimal parabolic subgroups",
+   "results": "{\"t\": \"2026-10-24T04:43:41Z\", \"tool\": \"leanfinder\", \"query\": \"Over any field a connected reductive algebraic group has a proper parabolic subgroup exactly when it has a noncentral split torus, and has minimal parabolic subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieSubalgebra.ne_bot_of_isCartanSubalgebra\", \"LieSubalgebra.instNontrivialSubtypeMemOfIsCartanSubalgebra\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.engel_isBot_of_isMin\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\"], \"digest\": \"4076f9af0ea581bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the parabolic hits are 2 by 2 matrices and modular cusps; root-pairing anisotropy and Lie Cartan subalgebras do not assert existence of rational parabolic subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group is anisotropic modulo center if and only if it has no proper rational parabolic subgroup",
+   "results": "{\"t\": \"2026-10-24T04:43:42Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group is anisotropic modulo center if and only if it has no proper rational parabolic subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.instIsAnisotropicOfIsCrystallographic\", \"RootPairing.IsAnisotropic\", \"RootPairing.isAnisotropic_of_isValuedIn\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"RootPairing.instIsAnisotropicOfLinearOrderedCommRing\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"LieAlgebra.IsKilling.instHasTrivialRadical\"], \"digest\": \"88ed542a3b72be39\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the parabolic hits are 2 by 2 matrices and modular cusps; root-pairing anisotropy and Lie Cartan subalgebras do not assert existence of rational parabolic subgroup schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]arabolic|[Ii]sotropic.*[Rr]eductive",
+   "results": "{\"t\": \"2026-10-24T07:00:55Z\", \"tool\": \"grep\", \"query\": \"[Pp]arabolic|[Ii]sotropic.*[Rr]eductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\"], \"digest\": \"16e120fbf15d0670\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements, modular cusps, abstract subgroup lattices and Lie-algebra/root-system results do not supply rational parabolic subgroup schemes over arbitrary fields."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A noncentral split torus in a connected reductive algebraic group gives a proper parabolic subgroup",
+   "results": "{\"t\": \"2026-10-24T07:00:55Z\", \"tool\": \"leansearch\", \"query\": \"A noncentral split torus in a connected reductive algebraic group gives a proper parabolic subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"IsSolvable.commutator_lt_top_of_nontrivial\", \"IsPGroup.bot_lt_center\", \"LieSubalgebra.IsCartanSubalgebra.casesOn\", \"QuotientGroup.nontrivial_iff\", \"Subgroup.bot_or_nontrivial\", \"QuotientAddGroup.nontrivial_iff\", \"Subgroup.nontrivial_iff_ne_bot\"], \"digest\": \"f5d463067d3d8c69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements, modular cusps, abstract subgroup lattices and Lie-algebra/root-system results do not supply rational parabolic subgroup schemes over arbitrary fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\"",
+   "results": "{\"t\": \"2026-10-24T07:00:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.IsParabolic\", \"Matrix.parabolicEigenvalue\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Matrix.IsParabolic.neg\", \"Matrix.IsParabolic.of_neg\", \"Matrix.isParabolic_neg_iff\", \"Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero\", \"Matrix.isParabolic_iff_of_upperTriangular\"], \"digest\": \"81492834a0352a7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements, modular cusps, abstract subgroup lattices and Lie-algebra/root-system results do not supply rational parabolic subgroup schemes over arbitrary fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cocharacter parabolic P lambda equals the reductive group G only when lambda is central; rational parabolics have minimal elements",
+   "results": "{\"t\": \"2026-10-24T07:00:58Z\", \"tool\": \"leanfinder\", \"query\": \"The cocharacter parabolic P lambda equals the reductive group G only when lambda is central; rational parabolics have minimal elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.engel_isBot_of_isMin\", \"LieDerivation.maxTrivSubmodule_eq_bot_of_center_eq_bot\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_bot_iff\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_apply_eq_top_iff\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\"], \"digest\": \"577c33b07364f1fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements, modular cusps, abstract subgroup lattices and Lie-algebra/root-system results do not supply rational parabolic subgroup schemes over arbitrary fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group over any field containing a noncentral split torus has a proper minimal rational parabolic subgroup",
+   "results": "{\"t\": \"2026-10-24T07:00:59Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group over any field containing a noncentral split torus has a proper minimal rational parabolic subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsRegularAtInfty\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"frattini\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieSubalgebra.instNontrivialSubtypeMemOfIsCartanSubalgebra\", \"LieSubalgebra.ne_bot_of_isCartanSubalgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"Subgroup.widthInfty\"], \"digest\": \"2f857c2e76e9e453\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix parabolic elements, modular cusps, abstract subgroup lattices and Lie-algebra/root-system results do not supply rational parabolic subgroup schemes over arbitrary fields."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-maximal-split-tori-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, proper-parabolic choice, corrected using the noncentral hypothesis of 25.2 and a minimal choice.",
+   "via": [
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-parabolic-isotropy-criterion",
+  "worker": "stage1",
+  "summary": "Read Milne 25.1-25.2 and 13.33. Chose a noncentral coordinate cocharacter; reused the existing cocharacter-parabolic geometry and proved properness by killing its normal unipotent kernel. Obtained a minimal parabolic by Noetherian closed supports, using smooth reducedness and uniqueness of the reduced induced closed subscheme. No new nodes or statement changes.",
+  "blueprint": "Supports the inherited direct-images (3) alteration/representation-theoretic prerequisite chain, specifically Milne 25.10's proper-parabolic choice. The current latest blueprint direct-images proof was read; it does not itself state this group-theoretic lemma. Retained the inherited null nearest-ancestor record and precise from.place; whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projective flag quotient is proper; generic scheme-theoretic tool, not a replacement for the unit route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Parabolic subgroups smooth over the base field are reduced; needed to recover subgroup schemes from their supports."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Uniqueness identifies two reduced closed subgroup schemes with the same support; the unit has no such generic scheme lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-cec6a3aa9",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-cec6a3aa9 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full: cocharacter-parabolic-geometry, kun-projective-implies-proper, def-weil-proper-morphism, wf-affine-noetherian-components, sbc-smooth-geometrically-reduced, pbc-reduced-induced-closed-subscheme and smooth-unipotent-extension. Checked against Milne iAG Thm 25.1 (p.544), Prop 25.2 and its proof (p.545) and Cor 14.7. There are no new nodes and the statement and stmt_deps are unchanged; the statement correctly keeps 'noncentral'. Step 1 (the noncentral torus gives a noncentral coordinate cocharacter) is correct. Step 2 is correct: the cited node holds for any field and any cocharacter, its projective (pc, i.e. H-projective and quasi-compact) implies kun-projective, which gives proper and finite type. Step 3 had one gap. The cited node only gives U_λ 'split unipotent' as a series with G_a quotients, while reductivity needs matrix unipotence. FIX: base-change the series to k̄ and induct, citing lem-sfb-smooth-unipotent-extension (same unit; the item is not in its closure). I added it to the step's uses and to proof_deps. The rest of step 3 is correct: Z_λ⊆G has zero ideal after ⊗k̄, so G=Z_λ, contradicting step 1. Step 4 is correct: Noetherian minimal support among parabolics inside P_λ, smooth implies reduced, and the reduced induced structure is unique (Stacks 01J3 (3)). Edge cases G_m, rank 0, GL_2 and finite/imperfect k all behave correctly. No duplicate among the Q47 sibling parabolic nodes. I accept the three tool_uses as generic scheme facts. Batch-5 flag: lem-trf-fppf-covering-base-change (reached via the cocharacter node) is a mathlib-status generic fact that fppf coverings are stable under base change. It is neither the trace formula nor Poincaré duality nor a step of their proofs, so the citation is kept; the new citation's closure likewise reaches only generic fppf/space lemmas. Minor: the report mentions a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FieldParabolicIsotropyCriterion",
+  "declaration": "AlgebraicGeometry.exists_proper_minimalParabolic_of_noncentral_splitTorus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FieldParabolicIsotropyCriterion.lean",
+  "statement": "theorem exists_proper_minimalParabolic_of_noncentral_splitTorus {k : Type u} [Field k] (G T : Grp (Over (Spec (.of k)))) (hG : ReductiveTorusCentralizer.IsReductive G) (i : T ⟶ G) [IsClosedImmersion i.hom.hom.left] (hT : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (hnoncentral : ∃ (A : Type u) (_ : CommRing A) (_ : Algebra k A) (t : StandardGroupSchemes.affine k A ⟶ T.X) (g : StandardGroupSchemes.affine k A ⟶ G.X), ¬ Commute (t ≫ i.hom.hom) g) : ∃ (P : Grp (Over (Spec (.of k)))) (j : P ⟶ G), IsMinimalParabolicSubgroup j ∧ ¬ IsIso j",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84831f00f",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Item Lean matches lem-sfb-field-parabolic-isotropy-criterion clause by clause: any field k; IsReductive G; closed-immersion Grp hom i : T ⟶ G; T ≅ splitTorus k r (r=0 allowed); noncentrality via ¬Commute on Spec A points for arbitrary k-algebras A : Type u; conclusion ∃ P j, IsMinimalParabolicSubgroup j ∧ ¬IsIso j. New def-sfb-parabolic-subgroup is not hollow: fppfRightCosetSheaf sheafifies the presheaf coequalizer of (g,p)↦g and (g,p)↦g·i(p) on fppfTopology.over (Spec k) in Type (u+1) via uliftYoneda; IsParabolicSubgroup = closed immersion ∧ Smooth ∧ connected over AlgebraicClosure ∧ ∃ X proper finite-type with Nonempty(coset sheaf ≅ uliftYoneda X); IsMinimalParabolicSubgroup = every parabolic factoring through P over G is iso. H4: no owner in side-live (exists_homogeneousQuotient is a theorem; IsFppfGroupQuotient covers only normal quotients). Records: item gains only lean plus stmt_deps on the new node and landed def-sfb-tori-multiplicative-type; statements verbatim; new node has H12 fields. Edge cases r=0, torus or anisotropic G, GL2, finite/imperfect k, zero/nilpotent test algebras checked. Docstrings carry source, blueprint tag and 4 proof steps; sorry only; report sections present. No files changed; not recompiled. MAINTAINER NOTE: Q05 d42626ba delivered the same item with the same new node id and module paths, PASS at 15:47 and not landed at 15:49; land only one of the two (Q134 gives the clearer representability formulation)."
+ }
+}

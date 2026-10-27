@@ -1,0 +1,211 @@
+{
+ "id": "lem-a1-constant-complex-strict-base-change",
+ "kind": "statement",
+ "title": "Strict constant-complex pullback at all quotient levels",
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal such that $A_n=R/I^n$ is finite for every $n\\ge1$, and $g:T'\\to T$ any scheme morphism [def-weil-scheme-morphism-properties]. Use small pro-etale sites [def-weil-pbc-proetale-site], their geometric inverse image $g^{-1}$ [def-weil-proetale-inverse-image], and constant sheaves $\\underline N_W$ for scalar modules $N$ [def-weil-pbc-constant-sheaf]. Put $B_W=\\varprojlim_n\\underline{A_n}_W$, with projections $\\operatorname{pr}_{W,n}$ [def-pur-sheaf-inverse-limit], for $W=T,T'$. For any cochain complex $P^\\bullet$ of $R$-modules set $D_{W,n}^\\bullet=\\underline{A_n}_W\\otimes_{\\underline R_W}\\underline{P^\\bullet}_W$, with its given differential and consecutive transitions $q_{n+1,n}\\otimes1$ [def-pur-sheaf-tensor-product]. Let $g_n^*$ be ordinary module pullback over the canonical constant-section coefficient isomorphism $g^{-1}\\underline{A_n}_T\\cong\\underline{A_n}_{T'}$ [def-weil-pbc-proetale-operations].\n\nThere is a natural isomorphism of strict towers of complexes (with semilinear quotient transitions) [def-weil-inverse-system]\n$$(g_n^*D_{T,n}^\\bullet)_{n\\ge1}\\xrightarrow{\\sim}(D_{T',n}^\\bullet)_{n\\ge1}.$$\nIts level-$n$, degree-$r$ map is the canonical constant-module inverse-image comparison followed by the inverse-image tensor comparison, with constant sections sent by $a\\otimes p\\mapsto a\\otimes p$. For any differential $d^r$, both composites send that section to $a\\otimes d^rp$; for a consecutive quotient both composites send it to $q_{n+1,n}(a)\\otimes p$. The same identities hold locally for sheaf tensor generators and so are equalities of chain and tower morphisms. The functor $g_n^*$ is exact because its coefficient map is an isomorphism, and this strict chain comparison represents the derived finite pullback comparison in the ambient module derived categories [def-weil-abstract-derived-category].\n\nThese isomorphisms are natural in all scalar chain maps. In particular, for a bounded finite-projective $P^\\bullet$ [def-pc-perfect-ring-complex] and $M_W^\\bullet=B_W\\otimes_{\\underline R_W}\\underline{P^\\bullet}_W$, use the balanced finite-reduction maps $(b\\otimes p)\\otimes a\\mapsto a\\operatorname{pr}_{W,n}(b)\\otimes p$. The induced reduction-tower maps commute with all consecutive transitions and normalized quotient units, including the unit $b\\otimes p\\mapsto(b\\otimes p)\\otimes1$. Regard each finite level as a $B_W$-module through $\\operatorname{pr}_{W,n}$ [def-pc-sheaf-restrict-scalars]. The induced map to the product of the reduction tower is annihilated by $1-s$, and hence its zero-shifted-component augmentation to the strict Roos cone $\\operatorname{Cone}(1-s)[-1]$ is a chain map [def-sf-strict-roos-functor]. This compatibility includes the original scalar differentials and is independent of finite-free splittings. No isomorphism $g^{-1}B_T\\cong B_{T'}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tag 03EL (sites-modules.tex, lemma-tensor-product-pullback); returned parent Step 5 and the strict-unit/tower coherence calculation of Step 4, with the chain-map naturality calculation of Step 6."
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-inverse-system",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sf-strict-roos-functor",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-a1-constant-complex-quotient-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply normalized_reductions_exist separately on the source and target sites. Apply normalized_finite_pullback_exists to the two normalized finite towers, and normalized_completed_pullback_exists to their normalized reductions and finite comparison. Construct the Roos augmentation by mappingCocone.lift with product coordinate Pi.lift alpha and shifted coordinate zero: compatibility of alpha makes its product composite with 1-s zero; the cone projections and mapping-cone naturality give all four normalization clauses. Exactness of constant-ring pullback is already recorded and supplies the final additive, finite-limit and finite-colimit instances. FiniteComparison.derived retains the existing exact localization.",
+   "uses": [
+    "lem-a1-constant-complex-normalized-reductions",
+    "lem-a1-constant-complex-finite-pullback",
+    "lem-a1-constant-complex-completed-pullback",
+    "def-sf-strict-roos-functor",
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-signed-mapping-cocone-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-constant-complex-normalized-reductions",
+  "lem-a1-constant-complex-finite-pullback",
+  "lem-a1-constant-complex-completed-pullback",
+  "def-sf-strict-roos-functor",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-signed-mapping-cocone-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL, 03CZ for the three source arguments; derived.tex Tags 014E and 08TC for the explicit signed-cone assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of a constant scalar complex commutes with all finite quotient reductions as a strict tower of complexes and preserves the scalar differentials",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner_naturality\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"∀ {R : Type u_1} {M : Type u_3} {M₂ : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : AddCommGroup M₂]\\n  [inst_3 : Module R M] [inst_4 : Module R M₂] (r : R) (rs : List R) (f : M →ₗ[R] M₂),\\n  ↑(Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner M₂ r rs) ∘ₗ\\n      (Ideal.ofList (r \", \"doc\": \"For any linear map $ f: M \\\\to M_2 $ between modules over a semiring $ R $, the quotient module equivalence between successive quotients by scalar multiplication ideals commutes with the induced linear\"}\n  {\"name\": \"QuotSMulTop.map_comp_mkQ\", \"module\": \"Mathlib/RingTheory/QuotSMulTop\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] (r : R) {M : Type u_1} {M' : Type u_3} [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup M'] [inst_4 : Module R M'] (f : M →ₗ[R] M'),\\n  (QuotSMulTop.map r) f ∘ₗ (r • ⊤).mkQ = (r • ⊤).mkQ ∘ₗ f\", \"doc\": \"For a linear map $ f: M \\\\to M' $ between modules over a commutative ring $ R $, the composition of the induced quotient map $ \\\\widetilde{f} $ on the quotient module $ M/(r \\\\cdot M) $ with the canonica\"}\n  {\"name\": \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.reduceModIdeal (I ^ n) f\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ between modules over a commutative ring $ R $, and for natural numbers $ m \\\\leq n $, the composition of the transition map $ M/I^nM \\\\to M/I^mM $ with the reduc\"}\n  {\"name\": \"AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_3} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  IsScalarTower R (R ⧸ I • ⊤) (M ⧸ I • ⊤)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, there is a well-defined scalar multiplication action of the quotient ring $ R/I $ on the quotient module $ M/IM $, where $ IM $\"}\n  {\"name\": \"Submodule.Quotient.restrictScalarsEquiv_symm_mk\", \"module\": \"Mathlib/LinearAlgebra/Quotient/Basic\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : Ring R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_3)\\n  [inst_3 : Ring S] [inst_4 : SMul S R] [inst_5 : Module S M] [inst_6 : IsScalarTower S R M] (P : Submodule R M)\\n  (x : M), (Submodule.Quotient.restrictScalarsEquiv S P).symm (Submodule.Quo\", \"doc\": \"Given a scalar tower $ S \\\\to R \\\\to M $, an $ R $-submodule $ P \\\\subseteq M $, and its restriction $ P_{\\\\text{restricted}} $ as an $ S $-submodule, the inverse of the linear equivalence between quotien\"}\n  {\"name\": \"TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Quotient\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (I : Ideal R),\\n  ↑(TensorProduct.quotTensorEquivQuotSMul M I).symm ∘ₗ (I • ⊤).mkQ = (TensorProduct.mk R (R ⧸ I) M) 1\", \"doc\": \"For any ideal $ I $ of a commutative ring $ R $ and $ R $-module $ M $, the composition of the inverse of the canonical $ R $-module isomorphism $ (R/I) \\\\otimes_R M \\\\cong M/(I \\\\cdot M) $ with the cano\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentInvFun_smul_mk\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] {P : Algebra.Extension R S}\\n  {Q : Algebra.Extension R T} (f : P.Hom Q) [alg : Algebra P.Ring Q.Ring]\\n  (halg : algebr\", \"doc\": \"For an algebra extension $ P \\to Q $, given a bijective lift of the kernel map, the inverse cotangent tensor function satisfies $ \\\\text{tensorCotangentInvFun}(x \\\\cdot [f(y)]) = x \\\\cdot (1 \\\\otimes y) $ \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {ι' : Type w₃} {σ : Type w₂} {σ' : Type w₄} (Q : Algebra.Generators S T ι)\", \"doc\": \"For algebra extensions $ P $ and $ P' $ generated by different index sets over a commutative ring $ R $, the composition of the connecting homomorphism $ \\\\delta_{Q,P} $ with the linear equivalence $ (\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback, abstract constant-sheaf adjunctions and scalar quotient naturality do not state the strict complex-tower comparison with differential and unit compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PresheafOfModules\", \"pullback\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (S : CategoryTheory.Functor Cᵒᵖ RingCat) : PresheafOfModules.pullback (CategoryTheory.CategoryStruct.id S) ≅ CategoryTheory.Functor.id (PresheafOfModules S)\", \"doc\": \"The pullback by the identity morphism identifies to the identity functor of the\\ncategory of presheaves of modules.\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) : CategoryTheory.ObjectProperty (PresheafOfModules S)\", \"doc\": \"Given a morphism of presheaves of rings `φ : S ⟶ F.op ⋙ R`, this is the property\\nthat the (partial) left adjoint functor of `pushforward φ` is defined\\non a certain object `M : PresheafOfModules S`.\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Categor\", \"doc\": \"The pullback functor `PresheafOfModules S ⥤ PresheafOfModules R` induced by\\na morphism of presheaves of rings `S ⟶ F.op ⋙ R`, defined as the left adjoint\\nfunctor to the pushforward, when it exists.\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C D : Type u} [CategoryTheory.SmallCategory C] [CategoryTheory.SmallCategory D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) : PresheafOfModules.pullbackObjIsDefined φ = ⊤\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C D : Type u} [CategoryTheory.SmallCategory C] [CategoryTheory.SmallCategory D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) (X : C) : PresheafOfModules.pullbackObjIsDefined φ ((PresheafOfModules.free S).ob\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"Given a morphism of presheaves of rings `S ⟶ F.op ⋙ R`, this is the adjunction\\nbetween associated pullback and pushforward functors on the categories\\nof presheaves of modules.\"}\n  {\"name\": \"PresheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) {G : Cate\", \"doc\": \"The composition of two pullback functors on presheaves of modules identifies\\nto the pullback for the composition.\"}\n  {\"name\": \"PresheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModules.pushforward φ).IsRightAdjoint] : Preshea\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {E' : Type u₄} [CategoryTheory.Category.{v₄, u₄} E'] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModulesOfCommRing.pushforward φ).IsRight\", \"doc\": \"The pullback functor induced by a morphism of presheaves of commutative rings.\"}\n  {\"name\": \"PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} (φ : S ⟶ F.op.comp R) [(PresheafOfModulesOfCommRing.pushforward φ).IsRight\", \"doc\": \"The adjunction between pullback and pushforward for modules over presheaves of\\ncommutative rings.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback, abstract constant-sheaf adjunctions and scalar quotient naturality do not state the strict complex-tower comparison with differential and unit compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Pp]ullback|[Pp]ullback.*constant|constant.*[Ii]nverseImage",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"158\", \"text\": \"`equivCommuteConstant'` above, to commute `constantSheaf` with pullback/pushforward of sheaves. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda.lean\", \"line\": \"149\", \"text\": \"We consider the pullback of `c.ι` and of the constant\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback, abstract constant-sheaf adjunctions and scalar quotient naturality do not state the strict complex-tower comparison with differential and unit compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric pullback of the quotient tower of a bounded scalar complex is the same quotient tower on the target, naturally in chain maps and consecutive coefficient transitions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.πTruncGE_naturality\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) : K.πTruncGE n ≫ truncGEMap φ n = φ ≫ L.πTruncGE n\", \"doc\": \"For any integer $ n $, the canonical morphism $ \\\\pi_{\\\\text{truncGE}}: K \\\\to K.\\\\text{truncGE}(n) $ satisfies the naturality condition $ \\\\pi_{\\\\text{truncGE}}^{K}(n) \\\\circ \\\\text{truncGEMap}(\\\\phi, n) = \\\\p\"}\n  {\"name\": \"Setoid.comapQuotientEquiv\", \"module\": \"Mathlib.Data.Setoid.Basic\", \"type\": \"(f : α → β) (r : Setoid β) : Quotient (comap f r) ≃ Set.range (@Quotient.mk'' _ r ∘ f)\", \"doc\": \"Given a function $ f : \\\\alpha \\\\to \\\\beta $ and an equivalence relation $ r $ on $ \\\\beta $, this constructs an equivalence between the quotient set $ \\\\alpha/\\\\mathrm{comap}\\\\,f\\\\,r $ (where $ \\\\mathrm{comap\"}\n  {\"name\": \"DiscreteQuotient.map_comp_ofLE\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \"(cond : LEComap f A B) (h : A' ≤ A) : map f cond ∘ ofLE h = map f (cond.mono h le_rfl)\", \"doc\": \"If $A' \\\\leq A$ is a coarser discrete quotient of $X$ and $B \\\\leq B'$ is a coarser discrete quotient of $Y$, then $A'$ is coarser than the pullback discrete quotient of $B'$ along the continuous map $f\"}\n  {\"name\": \"DiscreteQuotient.ofLE_comp_map\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \"(cond : LEComap f A B) (h : B ≤ B') : ofLE h ∘ map f cond = map f (cond.mono le_rfl h)\", \"doc\": \"If $A' \\\\leq A$ is a coarser discrete quotient of $X$ and $B \\\\leq B'$ is a coarser discrete quotient of $Y$, then $A'$ is coarser than the pullback discrete quotient of $B'$ along the continuous map $f\"}\n  {\"name\": \"Submodule.Quotient.instIsBoundedSMul\", \"module\": \"Mathlib.Analysis.Normed.Group.Quotient\", \"type\": \"(𝕜 : Type*) [SeminormedCommRing 𝕜] [Module 𝕜 M] [IsBoundedSMul 𝕜 M] [SMul 𝕜 R] [IsScalarTower 𝕜 R M] :\\n  IsBoundedSMul 𝕜 (M ⧸ S)\", \"doc\": \"Given a seminormed commutative ring $\\\\mathbb{K}$, a module $M$ over $\\\\mathbb{K}$ with bounded scalar multiplication, and a submodule $S \\\\subseteq M$, the quotient module $M/S$ inherits a bounded scala\"}\n  {\"name\": \"DiscreteQuotient.LEComap\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \": Prop\", \"doc\": \"For discrete quotients $A$ of $X$ and $B$ of $Y$, and a continuous map $f : X → Y$, this proposition asserts that $A$ is coarser than the discrete quotient obtained by pulling back $B$'s equivalence r\"}\n  {\"name\": \"DiscreteQuotient.map_ofLE\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \"(cond : LEComap f A B) (h : A' ≤ A) (c : A') : map f cond (ofLE h c) = map f (cond.mono h le_rfl) c\", \"doc\": \"If $A' \\\\leq A$ is a coarser discrete quotient of $X$ and $B \\\\leq B'$ is a coarser discrete quotient of $Y$, then $A'$ is coarser than the pullback discrete quotient of $B'$ along the continuous map $f\"}\n  {\"name\": \"DiscreteQuotient.LEComap.mono\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \"(h : LEComap f A B) (hA : A' ≤ A) (hB : B ≤ B') : LEComap f A' B'\", \"doc\": \"If $A' \\\\leq A$ is a coarser discrete quotient of $X$ and $B \\\\leq B'$ is a coarser discrete quotient of $Y$, then $A'$ is coarser than the pullback discrete quotient of $B'$ along the continuous map $f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback, abstract constant-sheaf adjunctions and scalar quotient naturality do not state the strict complex-tower comparison with differential and unit compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]heaf.*[Cc]onstant|[Cc]onstant.*[Ss]heaf",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Geometry/RingedSpace/PresheafedSpace.lean\", \"line\": \"59\", \"text\": \"/-- The constant presheaf on `X` with value `Z`. -/\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"36\", \"text\": \"/-- The presheaf on `Profinite` of locally constant functions to `X`. -/\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"37\", \"text\": \"abbrev locallyConstantPresheaf : Profinite.{u}ᵒᵖ ⥤ Type (u + 1) :=\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"42\", \"text\": \"In this declaration and `isColimitLocallyConstantPresheaf`, `coe_comp` interferes with rewriting via\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"47\", \"text\": \"The functor `locallyConstantPresheaf` takes cofiltered limits of finite sets with surjective\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Colimit.lean\", \"line\": \"50\", \"text\": \"noncomputable def isColimitLocallyConstantPresheaf (hc : IsLimit c) [∀ i, Epi (c.π.app i)] :\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"14\", \"text\": \"# The sheaf of locally constant maps on `CompHausLike P`\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"18\", \"text\": \"sheaf of locally constant maps to it, is left adjoint to the \\\"underlying set\\\" functor (evaluation\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"21\", \"text\": \"We apply this to prove that the constant sheaf functor into (light) condensed sets is isomorphic to\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"29\", \"text\": \"(e.g. a sheaf for the coherent topology). We need to define a map `LocallyConstant S Y(*) ⟶ Y(S)`.\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"39\", \"text\": \"* `presheaf_ext`: given `S`, `Y` and `f : LocallyConstant S Y(*)` like above, another presheaf\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Module.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.ConstantSheaf\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Module.lean\", \"line\": \"22\", \"text\": \"naturally isomorphic to the constant sheaf functor (and the analogues for light condensed modules).\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Module.lean\", \"line\": \"94\", \"text\": \"  rw [← constantSheafAdj_counit_w]\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Module.lean\", \"line\": \"96\", \"text\": \"  have : (constantSheaf (coherentTopology CompHaus) (Type (u + 1))).Faithful :=\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Module.lean\", \"line\": \"98\", \"text\": \"  have : (constantSheaf (coherentTopology CompHaus) (Type (u + 1))).Full :=\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.ConstantSheaf\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Basic.lean\", \"line\": \"42\", \"text\": \"The discrete condensed object associated to an object of `C` is the constant sheaf at that object.\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Basic.lean\", \"line\": \"45\", \"text\": \"noncomputable def discrete : C ⥤ Condensed.{u} C := constantSheaf _ C\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Basic.lean\", \"line\": \"60\", \"text\": \"  constantSheafAdj _ _ CompHaus.isTerminalPUnit\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Basic.lean\", \"line\": \"69\", \"text\": \"The discrete light condensed object associated to an object of `C` is the constant sheaf at that\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"45\", \"text\": \"A condensed object is *discrete* if it is constant as a sheaf, i.e. isomorphic to a constant sheaf.\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"83\", \"text\": \"    , Sheaf.IsConstant (coherentTopology Profinite)\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"88\", \"text\": \"  tfae_have 1 ↔ 2 := Sheaf.isConstant_iff_isIso_counit_app _ _ _\"}\n  {\"file\": \"Mathlib/Condensed/Discrete/Characterization.lean\", \"line\": \"90\", \"text\": \"  tfae_have 1 ↔ 4 := Sheaf.isConstant_iff_mem_essImage _ CompHaus.isTerminalPUnit adjunction _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf pullback, abstract constant-sheaf adjunctions and scalar quotient naturality do not state the strict complex-tower comparison with differential and unit compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image of constant module complexes commutes with quotient tower transitions and scalar chain maps",
+   "results": "OK 8 hits: ModuleCat.restrictScalarsComp'App_inv_naturality, Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner_naturality, CategoryTheory.ShortComplex.moduleCatCyclesIso_inv_π_apply, CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom_assoc, AdicCompletion.transitionMap_comp_reduceModIdeal, CategoryTheory.ShortComplex.moduleCatCyclesIso_inv_π_assoc_apply, HomologicalComplex.restriction.sc'Iso_inv_τ₁, QuotSMulTop.map_comp_mkQ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scalar-module quotients, free sheaf pullback or constant-sheaf composition; none states the whole normalized strict quotient-complex tower comparison and augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"pullback\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scalar-module quotients, free sheaf pullback or constant-sheaf composition; none states the whole normalized strict quotient-complex tower comparison and augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Pp]ullback|[Pp]ullback.*constant|constant.*[Ii]nverseImage",
+   "results": "OK 2 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ColimCoyoneda.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scalar-module quotients, free sheaf pullback or constant-sheaf composition; none states the whole normalized strict quotient-complex tower comparison and augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of constant sheaf tensor a scalar cochain complex is natural in differentials quotient transitions and extension of scalars units",
+   "results": "OK 8 hits: SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso_hom_naturality, PresheafOfModules.pullback, VectorField.mpullback_smul_apply, CategoryTheory.constantCommuteCompose, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, CochainComplex.HomComplex.Cochain.units_smul_v",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scalar-module quotients, free sheaf pullback or constant-sheaf composition; none states the whole normalized strict quotient-complex tower comparison and augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of constant sheaf pullback tensor comparison for inverse systems of module cochain complexes with quotient augmentation",
+   "results": "OK 8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scalar-module quotients, free sheaf pullback or constant-sheaf composition; none states the whole normalized strict quotient-complex tower comparison and augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-completed-perfect-scalar-pullback",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Lemma 6.5.9(4)-(5) and Proposition 6.6.11, finite perfect scalar models; Stacks Tag 093M (sites-modules.tex, lemma-completion-flat); agent calculation in returned proof Steps 3 and 5, including the projective-summand inverse limit and balanced-tensor identification. Re-split task: Strict constant-complex pullback at all quotient levels (returned parent Steps 5).",
+   "via": [
+    "lem-a1-completed-perfect-scalar-pullback",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-constant-complex-strict-base-change",
+  "worker": "stage1",
+  "summary": "Q58: reused existing arbitrary-constant-module and normalized tensor comparisons, checked strict differential/quotient/chain-map squares, exact derived localization, explicit balanced reductions and unit equations, projection-defined completed-coefficient map and signed Roos augmentation. No new nodes, no Lean changes. Clarified the cause of exactness and the cone/restriction conventions.",
+  "blueprint": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Lemma 6.5.9(4)-(5) and Proposition 6.6.11, finite perfect scalar models; Stacks Tag 093M (sites-modules.tex, lemma-completion-flat); agent calculation in returned proof Steps 3 and 5, including the projective-summand inverse limit and balanced-tensor identification. Re-split task: Strict constant-complex pullback at all quotient levels (returned parent Steps 5).",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact constant-coefficient inverse image and its normalized ring map, valid for any ring; no constant-ring exactness theorem is stated in this unit."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Naturality of the canonical comparison for arbitrary constant scalar modules, including the scalar differential and quotient linear maps; a generic topos tool."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "The canonical tensor comparison for an arbitrary scheme morphism, with its pure-tensor formula and naturality; a generic ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-proetale-inverse-image-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-99101e397",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-99101e397 (reviewer sub-agent of L); spot-checked: Q58 lem-a1-constant-complex-strict-base-change, head 99101e39782e. One commit on base 8ecc990 (the item JSON and the report). No new nodes, no fixes. Not superseded: in side-live the item is still unsplit and identical to its Q49 re-split base. The statement changes only make things explicit, nothing is weakened: semilinear tower transitions [def-weil-inverse-system]; finite levels restricted to B_W-modules [def-pc-sheaf-restrict-scalars]; the strict Roos cone Cone(1-s)[-1] [def-sf-strict-roos-functor]; and the exactness reason 'A_n finite' replaced by 'coefficient map is an iso', which is correct by def-weil-pbc-proetale-operations. The A_n-finite hypothesis is kept. The citer lem-a1-completed-perfect-scalar-pullback step 2 is still served. Every cited statement was read, and their hypotheses hold here: lem-pe-constant-left-module-inverse-image works for any ring and any geometric morphism; lem-sfb-geometric-inverse-image-constant-module for any R-module, natural in linear maps; lem-pur-proetale-inverse-image-tensor-comparison for any scheme morphism; the exact-functor factorization leaf for unbounded complexes. Checked by hand: R- and B-balancing of rho and both composites with its inverse (step 4); existence of c_B from the projection cone without needing an inverse, and the geometric square pr'(b'c_B(b)) x p (step 5); the unit and transition squares (step 6); the step 7 cone sign from the C(f) convention of def-weil-abstract-derived-category with shift differential -d, giving d(y,x)=(-dy-ux,dx), so (0,alpha) is a chain map exactly when (1-s)alpha=0. Transitions are B_W-linear, so the product lives in Mod(B_W). Edge cases checked: P=0, I=R (everything zero), I=0 with R finite (s=id), empty T', non-flat g. Stacks 03EL (sites-modules.tex line 3649) was checked at the cited place, and the other cited tags exist with the labels named. No duplicate among four candidates read, including lem-a1-balanced-finite-tower-generator-comparison and lem-sfb-constant-module-derived-projection-identification. The three tool_uses are generic topos comparisons and are accepted. No SGA citation. proof_deps equals the union of uses, citations match, and all three search kinds are recorded."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantComplexStrictBaseChange",
+  "declaration": "AlgebraicGeometry.ConstantComplexBaseChange.strict_constant_complex_base_change",
+  "file": "lean/Sheaf/Paper/ConstantComplexStrictBaseChange.lean",
+  "statement": "theorem strict_constant_complex_base_change\n    (R : Type u) [CommRing R] (I : Ideal R)\n    (hfinite : ∀ n : ℕ, Finite (Quotient R I n))\n    {T T' : Scheme.{u}} (g : T' ⟶ T) :\n    ∃ (dT : FiniteTower T I) (dT' : FiniteTower T' I)\n      (eT : ReductionData T I dT) (eT' : ReductionData T' I dT')\n      (f : FiniteComparison g I dT dT'),\n      dT.IsNormalized T I ∧ dT'.IsNormalized T' I ∧\n      eT.IsNormalized T I ∧ eT'.IsNormalized T' I ∧ f.IsNormalized g I ∧\n      (∃ a : RoosAugmentation T I eT, a.IsNormalized T I) ∧\n      (∃ a : RoosAugmentation T' I eT', a.IsNormalized T' I) ∧\n      (∃ e : GeometricReduction g I eT eT' f, e.IsNormalized g I) ∧\n      ∀ n : ℕ, (proEtaleConstantRingPullback (Quotient R I n) g).Additive ∧\n        PreservesFiniteLimits (proEtaleConstantRingPullback (Quotient R I n) g) ∧\n        PreservesFiniteColimits (proEtaleConstantRingPullback (Quotient R I n) g)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-08afe2be6"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08afe2be6",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Q80 lem-a1-constant-complex-strict-base-change 08afe2be. Mathematics correct and pinned: FiniteTower/ReductionData/FiniteComparison/GeometricReduction/RoosAugmentation are fixed by generator, limit-projection and naturality equations; beta is a chain map into mappingCocone(1-s) with fst = productMap and snd = 0; no g^{-1}B_T ≅ B_T' assumed; exactness clause and derived factorization present; index n = R/I^(n+1); the hfinite hypothesis is kept; edge cases P=0, I=R, I=0, non-flat g are covered; completedPullback is needed because proEtaleRingModulePullback requires an iso. FIX F1: item module used integralOperationsRoos/integralOperationsTowerStep (recorded only under the theorem node lem-pur-integral-operations-well-defined) -> integralOperationsRoosFunctor.obj and explicit C.map (homOfLE _).op (defeq, 2 lines); nt_compile --json rc 0, no warnings (def 21.1 s, item 10.3 s). FIX F2: new-node statement described RoosAugmentation/GeometricReduction/FiniteComparison, which live in the item module -> statement rewritten to its module's contents, same stmt_deps. Advisory A1: inverseSection is owned by landed def-sfb-proetale-inverse-image-unit-section, not in stmt_deps (a reviewer fix cannot add it); moving the helpers into the def module compiled at 47.9-56.9 s vs 35.3 s delivered, too close to the 60 s cap, so the move was dropped; the group should add the stmt_dep at the next touch. A2: Prop-valued integralOperationsAb* instances come from the theorem module; unused Modules abbrev; brief second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T163806-L-839447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

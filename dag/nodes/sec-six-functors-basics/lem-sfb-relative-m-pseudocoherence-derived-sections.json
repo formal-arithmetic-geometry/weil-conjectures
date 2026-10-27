@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-relative-m-pseudocoherence-derived-sections",
+ "kind": "statement",
+ "title": "Relative degreewise pseudo-coherence detected by affine derived sections",
+ "statement": "Let $f:X\\to S$ be a locally finite type morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], and fix $m\\in\\mathbf Z$. For an affine open $U=\\operatorname{Spec}A\\subseteq X$, $R\\Gamma(U,E|_U)\\in D(A)$ denotes module-valued derived sections: derived direct image along the ringed-space map $(U,\\mathcal O_U)\\to(\\{*\\},A)$ given by global sections [def-pc-ringed-spaces-derived-direct-image]. On quasi-coherent complexes it is the quasi-inverse in [lem-pc-affine-qcoh-derived-equivalence]. The following are equivalent: (1) $E$ is $m$-pseudo-coherent relative to $S$ [def-sfb-relative-pseudo-coherent-complex]; (2) there are affine open covers $S=\\bigcup_i V_i$ and $f^{-1}(V_i)=\\bigcup_j U_{ij}$ such that $R\\Gamma(U_{ij},E|_{U_{ij}})$ is $m$-pseudo-coherent relative to $\\Gamma(V_i,\\mathcal O_S)$ [def-sfb-ring-relative-m-pseudocoherent]; (3) for every affine open pair $U\\subseteq X$, $V\\subseteq S$ with $f(U)\\subseteq V$, $R\\Gamma(U,E|_U)$ is $m$-pseudo-coherent relative to $\\Gamma(V,\\mathcal O_S)$ [def-sfb-ring-relative-m-pseudocoherent]. The algebra structure is always the one induced by $f$. Covers and polynomial presentations may depend on $m$; no Noetherian or global boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VF, lemma-qcoh-relative-pseudo-coherence-characterize, equivalence (1)-(3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-sfb-ring-relative-m-pseudocoherent"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine pair $U=\\operatorname{Spec}A$, $V=\\operatorname{Spec}R$ with $f(U)\\subseteq V$. By [lem-weil-pbc-lft-affine-pairs], $A$ is a finite type $R$-algebra. Choosing finitely many generators gives a surjection $\\alpha:P=R[t_1,\\ldots,t_n]\\twoheadrightarrow A$. The affine description of relative affine space [def-nagata-relative-affine-space] and the quotient-ring characterization in [def-weil-closed-immersion] identify this with a closed immersion $i:U\\hookrightarrow T=\\mathbf A^n_V=\\operatorname{Spec}P$. Conversely any such immersion gives such a surjection. Keep the algebra actions induced by these maps throughout.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-nagata-relative-affine-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VF proof, choosing an affine pair and polynomial embedding"
+   }
+  },
+  {
+   "text": "Put $M=R\\Gamma(U,E|_U)\\in D(A)$. By [lem-pc-affine-qcoh-derived-equivalence], choose a representative module complex $M^\\bullet$ so that its termwise associated sheaf complex $F^\\bullet=\\widetilde{M^\\bullet}$ represents $E|_U$. Every term of $F^\\bullet$ is quasi-coherent. Choose a K-injective resolution $s:F^\\bullet\\to J^\\bullet$; by [def-pc-ringed-spaces-derived-direct-image], $Ri_*(E|_U)$ is represented by $i_*J^\\bullet$. The morphism $i$ is affine by [def-weil-closed-immersion], so [lem-pc-affine-pushforward-resolution-quasi-iso] makes $i_*s$ a quasi-isomorphism, with no boundedness requirement. Finally [lem-weil-pbc-pushforward-tilde-spec] gives a natural module-sheaf isomorphism $i_*\\widetilde{M^q}\\cong\\widetilde{\\operatorname{Res}_\\alpha M^q}$ for every term; naturality makes these commute with all differentials. Thus, in $D(\\mathcal O_T)$, we obtain $$Ri_*(E|_U)\\cong\\widetilde{\\operatorname{Res}_\\alpha M}.$$ This is an isomorphism of structure-module derived objects, with the $P$-action through $\\alpha$.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-weil-closed-immersion",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-weil-pbc-pushforward-tilde-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VF proof, identification of the closed pushforward with the associated scalar-restricted module complex"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-m-pseudocoherent-criterion] over $P$ to the isomorphism in step 2. It says that $Ri_*(E|_U)$ is $m$-pseudo-coherent exactly when $\\operatorname{Res}_\\alpha M$ is $m$-pseudo-coherent over $P$. Isomorphisms preserve the approximation condition: compose the approximating morphism with the isomorphism; the induced cohomology isomorphisms and surjectivity are unchanged. Taking the existential quantifier over $n$ and $\\alpha$ therefore identifies existence of a good polynomial embedding for $(U,V,E|_U)$ with relative $m$-pseudo-coherence of $M$ over $R$, by [def-sfb-ring-relative-m-pseudocoherent]. This uses the same polynomial presentation on the two sides, so no change-of-presentation theorem is being assumed.",
+   "uses": [
+    "lem-sfb-affine-m-pseudocoherent-criterion",
+    "def-sfb-ring-relative-m-pseudocoherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VF proof, final comparison using Tag 08E7 and the algebraic definition"
+   }
+  },
+  {
+   "text": "Apply step 3 on each pair in a chosen affine covering. The existential covering-and-embedding condition defining (1) in [def-sfb-relative-pseudo-coherent-complex] becomes exactly (2), proving (1)$\\Leftrightarrow$(2). If (1) holds, [lem-sfb-relative-pseudocoherence-all-affine-charts] says that for every affine pair and every polynomial closed embedding its pushforward is $m$-pseudo-coherent, and also supplies an embedding for each pair. Step 3 then gives the module condition for every pair, namely (3). Finally (3) implies (2) by choosing an affine cover of $S$ and affine covers of its inverse images in $X$. These exist by the affine-open basis property [lem-weil-pbc-affine-opens-basis]. All choices are made for the fixed integer $m$; no uniform cover as $m$ varies and no global cohomological bound is used.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex",
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VF proof, formal assembly using Tag 09UJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-nagata-relative-affine-space",
+  "def-weil-closed-immersion",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-weil-pbc-pushforward-tilde-spec",
+  "lem-sfb-affine-m-pseudocoherent-criterion",
+  "def-sfb-ring-relative-m-pseudocoherent",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VF, lemma-qcoh-relative-pseudo-coherence-characterize, proof; fixed-degree input Tag 08E7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence of a scheme complex with quasi coherent cohomology is equivalent to pseudo coherence of derived sections over polynomial presentations on affine charts",
+   "results": "OK: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, SheafOfModules.QuasicoherentData.presentation, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections identify relative degreewise pseudo coherence with bounded finite projective approximations on every affine polynomial chart",
+   "results": "OK: 8 hits; CochainComplex.IsKProjective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.isKProjective_of_projective",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent derived complex on a scheme is relatively m pseudo coherent if and only if its affine derived section modules are relatively m pseudo coherent",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.IsQuasicoherent.rec, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsQuasicoherent.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*pseudo.?coher|pseudo.?coher.*relative",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned signatures; ordinary finite-type algebras, presentations, module scalar restriction, t-structure support conditions and underived sheaf functors do not state this relative degreewise derived notion or comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[sS]trictly.?[pP]erfect|IsMPseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence for a locally finite type scheme morphism is detected by module valued derived sections on affine charts",
+   "results": "OK: 8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.affineLocally_iff_forall_isAffineOpen",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For quasi coherent derived complexes relative polynomial finite free approximations can be checked on any affine open pair of source and base",
+   "results": "OK: 8 hits; AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal, AlgebraicGeometry.affineLocally_iff_forall_isAffineOpen, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.HasAffineProperty.affineAnd_iff, AlgebraicGeometry.locallyQuasiFinite_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*pseudo.?coher|pseudo.?coher.*relative",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative m pseudo coherence of a quasi coherent derived scheme complex is equivalent to relative m pseudo coherence of its derived section modules on affine covers",
+   "results": "OK: 8 hits; SheafOfModules.IsQuasicoherent.casesOn, AlgebraicGeometry.Scheme.AffineCover.ctorIdx, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent.rec, AlgebraicGeometry.Scheme.Modules, SheafOfModules.QuasicoherentData.casesOn, SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-relative-pseudocoherent-pushforward",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, finite locally free case: applying lemma-finite-morphism-relative-pseudo-coherence to the pulled-back complex. Tag 09UK proof: translation to affine derived section modules, using the quasi-coherent form 09VF of 09UJ. This split realizes Tag 09VF proof: affine polynomial charts, associated-sheaf identification of the derived pushforward, and Tag 09UJ for the all-charts implication.",
+   "via": [
+    "lem-sfb-finite-relative-pseudocoherent-pushforward",
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-m-pseudocoherence-derived-sections",
+  "worker": "stage1",
+  "summary": "Split Stacks 09VF faithfully into affine polynomial presentations, an unbounded derived pushforward/scalar-restriction comparison, the fixed-degree absolute affine criterion, and the existing all-affine-charts locality result. Added only the fixed-m clause of 08E7, absent from the existing all-m affine criterion. Retained the statement and its hypotheses unchanged. Read every cited statement and recorded verbatim quotations; searched the whole DAG, current blueprint and live Lean source.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), supporting the inherited alteration/duality/pseudo-coherence chain described in blueprint.from.place. The ancestor tool returns None; retain the inherited null ancestor and via list. No unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Affine opens cover any open subscheme, used to choose the covers in (3) implies (2); a generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Finite type of the ring map for an arbitrary affine pair; a generic scheme tool needed to choose a polynomial presentation."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Unbounded affine module/sheaf equivalence identifying module-valued derived sections; a generic derived tool not supplied by the unit."
+   },
+   {
+    "node": "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "why": "Termwise affine pushforward of a quasi-coherent complex computes its unbounded derived image via a K-injective resolution; a generic resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-pushforward-tilde-spec",
+    "why": "Natural scalar-restriction isomorphism for associated sheaves under an affine map; its naturality identifies the full complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-weil-pbc-pushforward-tilde-spec"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-ee645b079",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-ee645b079 (reviewer sub-agent of L); spot-checked: The item statement is faithful to Stacks 09VF (more-morphisms.tex 16908): same hypotheses, clauses (1)-(3), and statement and stmt_deps identical to live. The item is still unsplit in both live and side-live, and there is no re-split note. Step 1: 01T2 gives finite type, so a surjection alpha : R[t] -> A exists, which matches a closed immersion over V via the relative-affine-space and closed-immersion definitions. Step 2: the 06Z0 equivalence gives a tilde representative of E|_U, J is a K-injective resolution, the affine resolution lemma needs no boundedness, and the natural 01I9 iso gives a chain iso, so Ri_*(E|_U) = tilde(Res_alpha M); correctly not marked elementary. Step 3: the new fixed-m 08E7 node is applied over P, isomorphism invariance is elementary, and the existential in 065I matches the one in 09UI with the same presentation on both sides. Step 4: 09UI unfolding gives (1)<=>(2), 09UJ all-charts gives (1)=>(3), and the 01IT affine basis gives (3)=>(2). New node lem-sfb-affine-m-pseudocoherent-criterion is the m-clause of perfect.tex 2223 (08E7). It is statement-only and self-contained, with both notions cited from their definitions (08CB and 064Q). Tested on a field with V infinite-dimensional in degree -1 (0-pc on both sides, not (-1)-pc), on A=0 and on A[k]. Duplicate scan over all 08E7 and pseudo-coherent-affine nodes: the existing ones (the pc-affine criterion, localization-cover and principal-model pieces) are all-degree only, so the node is not a duplicate, and it is absolute rather than a clause of the item. No cycle, no missing deps, no SGA. Accepted the five generic tool_uses (01IT, 01T2, 06Z0, the affine resolution quasi-iso, 01I9)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeMPseudoCoherenceDerivedSections",
+  "declaration": "AlgebraicGeometry.Scheme.relative_mPseudoCoherence_derivedSections_tfae",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMPseudoCoherenceDerivedSections.lean",
+  "statement": "theorem relative_mPseudoCoherence_derivedSections_tfae [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ (R : Type u) [CommRing R], HasDerivedCategory.{wA} (ModuleCat.{u} R)] {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (m : ℤ) : List.TFAE [ IsMPseudoCoherentRelativeTo f m E, (∀ s : S, ∃ V : S.Opens, ∃ hV : IsAffineOpen V, s ∈ V ∧ ∀ x : X, f x ∈ V → ∃ U : X.Opens, ∃ hU : IsAffineOpen U, x ∈ U ∧ ∃ hUV : U ≤ f ⁻¹ᵁ V, @DerivedCategory.IsMPseudoCoherentRelativeTo Γ(S, V) Γ(X, U) _ _ ((f.appLE V U hUV).hom.toAlgebra) (f.finiteType_appLE hV hU hUV) _ _ m ((RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙ ModuleCat.restrictScalars U.topIso.inv.hom).rightDerivedFunctor.obj ((derivedPullback U.ι).obj E))), (∀ (U : X.Opens) (hU : IsAffineOpen U) (V : S.Opens) (hV : IsAffineOpen V) (hUV : U ≤ f ⁻¹ᵁ V), @DerivedCategory.IsMPseudoCoherentRelativeTo Γ(S, V) Γ(X, U) _ _ ((f.appLE V U hUV).hom.toAlgebra) (f.finiteType_appLE hV hU hUV) _ _ m ((RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙ ModuleCat.restrictScalars U.topIso.inv.hom).rightDerivedFunctor.obj ((derivedPullback U.ι).obj E)))]",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c0a0ac10",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Read item node, 7 stmt_dep records, Stacks 09VF (more-morphisms.tex 16908-16923), module, report, and the exact declarations (Scheme.IsMPseudoCoherentRelativeTo, DerivedCategory.IsMPseudoCoherentRelativeTo, RingedSpace.globalSectionsFunctor, Functor.rightDerivedFunctor, derivedPullback). Snapshot node differs from live only in lean; statement verbatim. Clauses: LocallyOfFiniteType f, E with schemeDerivedQCohProperty, fixed m; (1) is the recorded relative def; (2) point-neighbourhood affine covers equivalent to indexed covers (same convention as the def); (3) all affine pairs U ≤ f⁻¹V; RΓ is the unbounded K-injective right derived functor of module-valued global sections transported along U.topIso.inv, same shape as the recorded 06Z0 quasi-inverse; algebra and finite type from f.appLE / finiteType_appLE. No extra Noetherian or boundedness assumptions; the single wA HasDerivedCategory family is harmless. Edge cases: empty S/U, zero E, any m, n=0 all fine. Docstrings have source, blueprint and proof; nothing beyond sorry; no hollow defs; report sections present. Advisory: derivedPullback owner def-pc-derived-pullback is uncited, but node text writes E|_U uncited and the cited relative def uses the same declaration. No compile (no file changed)."
+ }
+}

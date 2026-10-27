@@ -20,6 +20,8 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.CategoryTheory.LatticeDerivedInvariantsTensor
 
+public import Sheaf.CategoryTheory.LatticeAlgebraCochainMultiplication
+
 /-! # Canonical derived cups for discrete-lattice equivariant algebras
 
 Source: main-20261015 direct-image proof, paragraph (3), agent expansion
@@ -41,140 +43,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace Profinite.DiscreteLattice
 namespace DerivedCup
+
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (r : ℕ)
 
-/-- The raw cochain tensor coproducts exist in the small action category.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance actionCochainTensor (P Q : CochainComplex (Equivariant R r) ℤ) :
-    HomologicalComplex.HasTensor P Q := fun _ ↦ inferInstance
-
-/-- The raw cochain tensor coproducts exist in the original module category.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance moduleCochainTensor (P Q : CochainComplex (Modules R) ℤ) :
-    HomologicalComplex.HasTensor P Q := fun _ ↦ inferInstance
-
-/-- Closed tensor preserves the empty colimit in the fixed small universe.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleTensorLeftEmpty (P : Modules R) :
-    PreservesColimit (Functor.empty.{0} (Modules R)) (tensorLeft P) := by
-  have h : PreservesColimitsOfSize.{0, 0} (tensorLeft P) :=
-    (Adjunction.ofIsLeftAdjoint (tensorLeft P)).leftAdjoint_preservesColimits
-  exact h.preservesColimitsOfShape.preservesColimit
-
-/-- Closed tensor preserves the empty colimit in the fixed small universe.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleTensorRightEmpty (P : Modules R) :
-    PreservesColimit (Functor.empty.{0} (Modules R)) (tensorRight P) := by
-  have h : PreservesColimitsOfSize.{0, 0} (tensorRight P) :=
-    (Adjunction.ofIsLeftAdjoint (tensorRight P)).leftAdjoint_preservesColimits
-  exact h.preservesColimitsOfShape.preservesColimit
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleComplexMonoidal :
-    MonoidalCategory (CochainComplex (Modules R) ℤ) :=
-  HomologicalComplex.monoidalCategory (Modules R) (.up ℤ)
-
-/-- The signed cochain tensor projection is the existing canonical one.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleComplexMonoidalStruct :
-    MonoidalCategoryStruct (CochainComplex (Modules R) ℤ) :=
-  (moduleComplexMonoidal R).toMonoidalCategoryStruct
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleHomotopyMonoidal :
-    MonoidalCategory (HomotopyCategory (Modules R) (.up ℤ)) :=
-  HomotopyCategory.MonoidalCategory.instMonoidalCategory (Modules R) (.up ℤ)
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleDerivedMonoidal :
-    MonoidalCategory (DerivedCategory.{u + 2} (Modules R)) :=
-  DerivedCategory.instMonoidalCategory_weilConjectures (Modules R)
-
-/-- The derived tensor projection is the existing K-flat tensor projection.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleDerivedMonoidalStruct :
-    MonoidalCategoryStruct (DerivedCategory.{u + 2} (Modules R)) :=
-  (moduleDerivedMonoidal R).toMonoidalCategoryStruct
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) moduleLocalizationLax :
-    (DerivedCategory.Q.{u + 2} (C := Modules R)).LaxMonoidal :=
-  DerivedCategory.instLaxMonoidalCochainComplexIntQ_weilConjectures (Modules R)
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) actionComplexMonoidal :
-    MonoidalCategory (CochainComplex (Equivariant R r) ℤ) :=
-  HomologicalComplex.monoidalCategory (Equivariant R r) (.up ℤ)
-
-/-- The signed cochain tensor projection is the existing canonical one.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) actionComplexMonoidalStruct :
-    MonoidalCategoryStruct (CochainComplex (Equivariant R r) ℤ) :=
-  (actionComplexMonoidal R r).toMonoidalCategoryStruct
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) actionHomotopyMonoidal :
-    MonoidalCategory (HomotopyCategory (Equivariant R r) (.up ℤ)) :=
-  HomotopyCategory.MonoidalCategory.instMonoidalCategory (Equivariant R r) (.up ℤ)
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) actionDerivedMonoidal :
-    MonoidalCategory (DerivedCategory.{u + 2} (Equivariant R r)) :=
-  DerivedCategory.instMonoidalCategory_weilConjectures (Equivariant R r)
-
-/-- The derived tensor projection is the existing K-flat tensor projection.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) actionDerivedMonoidalStruct :
-    MonoidalCategoryStruct (DerivedCategory.{u + 2} (Equivariant R r)) :=
-  (actionDerivedMonoidal R r).toMonoidalCategoryStruct
-
-/-- The existing canonical tensor structure, retained by name to avoid repeated synthesis.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-instance (priority := 1200) actionLocalizationLax :
-    (DerivedCategory.Q.{u + 2} (C := Equivariant R r)).LaxMonoidal :=
-  DerivedCategory.instLaxMonoidalCochainComplexIntQ_weilConjectures (Equivariant R r)
-
 attribute [local irreducible] Functor.mapDerivedCategory
-
-/-- An algebra with lattice automorphisms is a monoid object in diagonal action modules.
-Commutativity is the existing `IsCommMonObj` predicate, imposed in the main theorem.
-Source: paragraph (3) (blueprint: def-sfb-lattice-algebra-derived-cup). -/
-abbrev Algebra := Mon (Equivariant R r)
-
-/-- The selected cochain tensor is the actual signed total tensor construction.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup).
-Proof: the monoidal structure on cochain complexes is induced from graded objects and
-its object tensor is defined to be `HomologicalComplex.tensorObj`; unfolding gives reflexivity. -/
-theorem cochainTensor_eq (P Q : CochainComplex (Equivariant R r) ℤ) :
-    HomologicalComplex.tensorObj P Q = P ⊗ Q := by
-  sorry
-
-/-- Multiplication on the raw degree-zero total tensor is uniquely determined by B.
-Source: paragraph (3), proof step 13 (blueprint: def-sfb-lattice-algebra-derived-cup).
-Proof: the two single complexes vanish outside zero, so their raw total tensor is
-concentrated in zero. The displayed pure-tensor equation fixes its only component;
-zero differentials give a chain map and the same coordinates prove uniqueness. -/
-theorem singleMultiplicationExists (B : Algebra R r) :
-    ∃! m : HomologicalComplex.tensorObj
-        ((HomologicalComplex.single (Equivariant R r) (.up ℤ) 0).obj B.X)
-        ((HomologicalComplex.single (Equivariant R r) (.up ℤ) 0).obj B.X) ⟶
-        (HomologicalComplex.single (Equivariant R r) (.up ℤ) 0).obj B.X,
-      (MonoidalCategoryStruct.tensorHom (C := Equivariant R r)
-        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B.X).inv
-        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B.X).inv) ≫
-      HomologicalComplex.ιTensorObj
-        ((HomologicalComplex.single (Equivariant R r) (.up ℤ) 0).obj B.X)
-        ((HomologicalComplex.single (Equivariant R r) (.up ℤ) 0).obj B.X) 0 0 0 rfl ≫ m.f 0 ≫
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 B.X).hom =
-        MonObj.mul (X := B.X) := by
-  sorry
 
 /-- The unique multiplication with the original B-coordinate on the zero tensor summand.
 Source: paragraph (3) (blueprint: def-sfb-lattice-algebra-derived-cup). -/

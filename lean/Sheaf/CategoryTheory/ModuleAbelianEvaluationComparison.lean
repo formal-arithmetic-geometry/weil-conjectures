@@ -252,4 +252,89 @@ theorem module_abelian_evaluation_comparison
   intro M I K φ hφ q
   exact exact_comp_comparison_formula T F hT M I K φ hφ q
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
+/-- The right derived evaluation of module sheaves agrees naturally with the right
+ derived evaluation of their underlying abelian sheaves. The equation in degree zero
+ identifies the two augmentations from sections, so the comparison is the identity
+ on sections under the canonical degree-zero identifications. The final clause characterizes
+ the canonical map by every lift from a module resolution to an abelian resolution.
+
+Source: Stacks Project, Cohomology on Sites, Tag 03FD, objectwise equality
+(blueprint: lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison).
+
+Proof: Forgetting module structure is exact by moduleSheaves_colimits_forgetful.
+The existing general-site theorem injective_module_abelian_acyclic gives positive
+abelian cohomology vanishing on forgotten injective module sheaves. The comparison
+between object cohomology and right derived evaluation turns this into evaluation
+acyclicity. Thus a forgotten injective module resolution computes abelian derived
+evaluation as well as module derived evaluation. Compose the two resolution
+isomorphisms. Their naturality for one lift of each module morphism assembles the
+components into natural isomorphisms. The canonical exact-composite comparison
+identifies their maps with the homology maps of every augmentation-compatible lift.
+In degree zero, the augmentation equation gives equality after the cycle inclusion;
+naturality of the homology projection and toRightDerivedZero_eq then prove the
+specified normalization. No injectivity after forgetting or coefficient flatness is used. -/
+theorem module_abelian_evaluation_comparison_general
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J RingCat.{u})
+    [EnoughInjectives (ringedSiteModules.{u} R)] (U : C) :
+    ∃! e : ∀ q : ℕ,
+      (SheafOfModules.toSheaf R ⋙
+        (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+          (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).rightDerived q ≅
+      SheafOfModules.toSheaf R ⋙
+        (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+          (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q,
+      ((SheafOfModules.toSheaf R ⋙
+        (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+          (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))).toRightDerivedZero ≫
+          (e 0).hom =
+        Functor.whiskerLeft (SheafOfModules.toSheaf R)
+          ((sheafToPresheaf J AddCommGrpCat.{u} ⋙
+            (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).toRightDerivedZero)) ∧
+      ∀ (M : ringedSiteModules.{u} R) (I : InjectiveResolution M)
+        (K : InjectiveResolution ((SheafOfModules.toSheaf R).obj M))
+        (φ : ((SheafOfModules.toSheaf R).mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶
+          K.cocomplex)
+        (_hφ : (SheafOfModules.toSheaf R).map (I.ι.f 0) ≫ φ.f 0 = K.ι.f 0) (q : ℕ),
+        (e q).hom.app M ≫
+            (K.isoRightDerivedObj
+              (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+                (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) q).hom =
+          (I.isoRightDerivedObj
+            (SheafOfModules.toSheaf R ⋙
+              (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+                (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U))) q).hom ≫
+            HomologicalComplex.homologyMap
+              (((sheafToPresheaf J AddCommGrpCat.{u} ⋙
+                (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex
+                  (.up ℕ)).map φ) q := by
+  let T := SheafOfModules.toSheaf R
+  let : PreservesFiniteColimits T := (moduleSheaves_colimits_forgetful R).2.2.1
+  let F := sheafToPresheaf J AddCommGrpCat.{u} ⋙
+    (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)
+  have hT (I : ringedSiteModules.{u} R) [Injective I] :
+      F.rightAcyclic (T.obj I) := forgotten_injective_evaluation_acyclic J R U I
+  refine ⟨fun q ↦ exact_comp_comparison T F hT q, ?_, ?_⟩
+  · refine ⟨exact_comp_comparison_zero T F hT, ?_⟩
+    intro M I K φ hφ q
+    exact exact_comp_comparison_formula T F hT M I K φ hφ q
+  · intro e he
+    -- A single compatible lift determines each component after cancelling its target iso.
+    funext q
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    let I := injectiveResolution M
+    let K := injectiveResolution (T.obj M)
+    let φ := InjectiveResolution.descOfQuasiIso (𝟙 (T.obj M)) K (T.mapResolution I.ι)
+    have hφ : T.map (I.ι.f 0) ≫ φ.f 0 = K.ι.f 0 := by
+      have h := InjectiveResolution.descOfQuasiIso_commutes
+        (𝟙 (T.obj M)) K (T.mapResolution I.ι)
+      simpa [φ, Functor.mapResolution] using congrArg (fun f ↦ f.f 0) h
+    apply (cancel_mono (K.isoRightDerivedObj F q).hom).1
+    exact (he.2 M I K φ hφ q).trans
+      (exact_comp_comparison_formula T F hT M I K φ hφ q).symm
+
 end CategoryTheory

@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-equalizer-point-chart-descent",
+ "kind": "statement",
+ "title": "Descent of point-indexed equalizer charts and finite étale stalks",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a $k$-scheme with a finite affine open cover $U_j=\\operatorname{Spec}B_j$ [def-weil-affine-spectrum], and $h:X\\to X$ a $k$-endomorphism preserving each $U_j$. Let $\\phi_j:B_j\\to B_j$ be the induced $k$-algebra map and $J_j=(\\phi_j(b)-b:b\\in B_j)$. Let $P$ be a set with a family of $k$-points $x_p:\\operatorname{Spec}k\\to X$ satisfying $h\\circ x_p=x_p$. Put $P_j=\\{p\\in P:x_p\\text{ factors through }U_j\\}$. Assume that each $P_j$ is finite and that the evaluations at these points induce an isomorphism of $k$-algebras $B_j/J_j\\xrightarrow{\\sim}\\prod_{p\\in P_j}k$. Let $F$ be the equalizer of $h$ and $1_X$, defined by $X\\times_{X\\times_kX,(1,h),\\Delta_X}X$ with its first projection $i:F\\to X$ [def-pc-fibre-product]. Then $P$ is finite and the unique map $\\coprod_{p\\in P}\\operatorname{Spec}k\\to F$ whose composite with $i$ on the $p$-th summand is $x_p$ is an isomorphism. Its restriction over $U_j$ is the spectrum of the prescribed evaluation isomorphism, using the canonical spectrum-of-finite-product identification. This description is compatible on all open overlaps, without assuming that the overlaps are affine or that $X$ is separated. The structure morphism of $F$ is finite [def-weil-finite-integral-morphism] and étale [def-weil-etale-morphism]. For every point $z\\in F$, the structural map $k\\to\\mathcal O_{F,z}$ is an isomorphism and $\\operatorname{length}_{\\mathcal O_{F,z}}\\mathcal O_{F,z}=1$ [def-weil-pbc-module-length]. Empty $X$ and $P$ are allowed. Here an ideal of a ring $R$ is an additive subgroup stable under multiplication by elements of $R$; $(S)$ denotes the ideal of finite sums of ring multiples of elements of $S$, and $R/L$ is the quotient by $u\\sim v\\iff u-v\\in L$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+  "place": "Steps 0 and 2, compatibility on opens and gluing the canonical point maps; Step 3, finite étale structure and length-one local rings (old expanded steps 5–6)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "Every $p\\in P$ belongs to some $P_j$, since the unique point of $\\operatorname{Spec}k$ maps into some member of the given cover; its map factors through that open by the definition of an open subscheme. Thus $P=\\bigcup_jP_j$ is a finite union of finite sets. The fibre-product universal property defining $F$ says that maps $T\\to F$ are precisely maps $a:T\\to X$ with $ha=a$: the second projection must equal $a$, and the other equation is $ha=a$. In particular $i$ is a monomorphism. Each $x_p$ therefore lifts uniquely to $y_p:\\operatorname{Spec}k\\to F$. By the coproduct mapping property these lifts define a unique map $q:D=\\coprod_{p\\in P}\\operatorname{Spec}k\\to F$ with $iq$ equal to the prescribed point map on every summand.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+    "place": "Step 0: equalizer as fibre product; Step 2: canonical point-indexed maps"
+   }
+  },
+  {
+   "text": "Put $E_j=F\\times_XU_j$ and write $\\pi_j:\\operatorname{Spec}(B_j/I_j)\\to U_j$ for the quotient map. The graph equations imply that $i:F\\to X$ is monic and equalizes $h$ and the identity. The quotient map equalizes the induced endomorphism, since each difference lies in $I_j$, so it lifts first to $F$ and then to $E_j$. Conversely, for any test scheme $T$ and map $a:T\\to U_j$ equalizing the endomorphism, naturality of the spectrum-global-sections adjunction implies that the map $B_j\\to\\Gamma(T,\\mathcal O_T)$ kills every difference, and hence $I_j$. Mathlib's Scheme.Hom.liftQuotient gives its factorization through $\\pi_j$ directly, without an affine cover of $T$. Apply this to the second projection of $E_j$ to construct the inverse. The two inverse equations follow by cancellation: $\\pi_j$ is a closed immersion and the second projection of $E_j$ is a base change of the monomorphism $i$. This constructs $e_j:\\operatorname{Spec}(B_j/I_j)\\simeq E_j$ with the required second projection.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+    "place": "Step 0: affine difference-ideal description and compatibility with open restriction; expanded universal-property argument"
+   }
+  },
+  {
+   "text": "The finite-product spectrum isomorphism sigmaSpec, followed by $\\operatorname{Spec}(\\varepsilon_j)$ and $e_j$, gives an isomorphism $v_j:D_j=\\coprod_{p\\in P_j}\\operatorname{Spec}k\\simeq E_j$. Its composite on the $p$-th summand with $E_j\\to F\\to X$ is $x_p$, by the evaluation normalization $h\\varepsilon$. Since $i:F\\to X$ is monic, this composite to $F$ is precisely the canonical lift $y_p$. Each $y_p$ is an open immersion: choose a chart containing $p$ and express it as a coprojection followed by $v_j$ and the open immersion $E_j\\to F$. These maps jointly cover $F$: choose a chart at the image of a point of $F$, lift the point to $E_j$ using the range formula for a pullback of an open immersion, and then use the isomorphism $v_j$ and the coproduct open cover. The same equality on coprojections gives exactly the required displayed chart-restriction equation for $q$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+    "place": "Step 2: evaluation projections give the canonical point maps and factors belonging to an open"
+   }
+  },
+  {
+   "text": "The open images of the $y_p$ are pairwise disjoint. Indeed, if $y_p(a)=y_r(b)=z$, choose a chart $U_j$ at $i(z)$. Since $\\operatorname{Spec}k$ has one point, both $x_p$ and $x_r$ factor through this chart by the universal property of an open immersion, so $p,r\\in P_j$. The chart equation identifies $y_p(a)$ and $y_r(b)$ with the images of the two coprojections under the injective map $D_j\\simeq E_j\\to F$. Disjointness of the coproduct summands forces $p=r$. Mathlib's isOpenImmersion_sigmaDesc now makes $q=\\operatorname{Sigma.desc}(y_p)$ an open immersion, and the preceding covering assertion makes it surjective. A surjective open immersion is an isomorphism. Finally, for arbitrary test schemes and any two chart maps whose composites to $X$ agree, cancellation of the monomorphism $i$ proves their composites to $F$ agree. This is the stated overlap compatibility and needs neither affine overlaps nor separatedness.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+    "place": "Steps 0 and 2: Zariski descent, with the explicit inverse-gluing argument"
+   }
+  },
+  {
+   "text": "Coproduct extensionality and $x_p\\circ s=1$ identify $q\\mathbin{\\gg}(i\\mathbin{\\gg}s)$ with sigmaSpec followed by the spectrum of the diagonal algebra map $k\\to\\prod_{p\\in P}k$. This is a finite ring map, since the finite product of one-dimensional $k$-modules is finite as a module. Mathlib's IsFinite.SpecMap_iff and stability under composition show that the displayed composite is finite. Composing with $q^{-1}$ proves the assertion for $i\\mathbin{\\gg}s$. The finite-product argument includes the empty index set and its zero ring.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+    "place": "Step 3: finiteness of the finite disjoint union, written using its product algebra"
+   }
+  },
+  {
+   "text": "The identity extension $k/k$ is finite separable (dimension one, with linear minimal polynomials). Apply the coproduct-of-finite-separable-field-spectra lemma with $L_p=k$ to conclude that $D\\to\\operatorname{Spec}k$ is étale, also for the empty index set. Since $q$ is a $k$-isomorphism, this is exactly the étaleness assertion for $F$.",
+   "uses": [
+    "lem-exc-etale-coproduct-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, label lemma-etale-over-field, converse direction, specialized to identity extensions; blueprint Step 3"
+   }
+  },
+  {
+   "text": "Each point of $F$ has the form $y_p(a)$ for one of the open immersions $y_p:\\operatorname{Spec}k\\to F$. The stalk map of this open immersion is an isomorphism. Naturality of germs and $y_p\\mathbin{\\gg}i\\mathbin{\\gg}s=1$ identify its composite with the structural map $k\\to\\mathcal O_{F,y_p(a)}$ with the canonical map from $k$ to the stalk of $\\operatorname{Spec}k$ at $a$. This last map is an isomorphism: the stalk is localization at a prime of $k$, and Field.localization_map_bijective says localization of a field away from zero is bijective. Cancel the isomorphism on stalks to obtain exactly the structural stalk-map isomorphism in the conclusion. Its induced ring equivalence transports the field property to the stalk; a field is simple as a module over itself, so Module.length_eq_one gives length one. The proof uses no nonempty assumption on $F$, and is vacuous when $F$ is empty.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-length",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+    "place": "Step 3: local rings and multiplicity one; expanded stalk and submodule calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-finite-integral-morphism",
+  "lem-exc-etale-coproduct-etale",
+  "def-weil-pbc-module-length"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/thm-trf-frobenius-fixed-points.proof.md",
+  "place": "Steps 0, 2 and 3; R5 Lean implementation uses Scheme.Hom.liftQuotient for arbitrary test schemes and disjoint covering open point maps instead of explicit inverse gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue the affine equalizer decompositions of an endomorphism indexed by rational points to a canonical finite etale disjoint union of field spectra without assuming separatedness",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme with a finite affine cover of its equalizer by canonical rational point components is a finite etale disjoint union of reduced points",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.IsReduced.of_openCover; AlgebraicGeometry.Scheme.mk.noConfusion; AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat; AlgebraicGeometry.Scheme.AffineCover.covers; AlgebraicGeometry.Scheme.AffineCover.mk; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.Scheme.affineOpenCover",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"equalizer\"",
+   "results": "[loogle] OK 2 hit(s); AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram; AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatEqualizerSchemeOfQuasiSeparatedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "grep",
+   "query": "equaliz.*(glue|[Ee]tale)|[Ee]tale.*equaliz",
+   "results": "[grep] OK 4 hit(s); Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:331:   Multicoequalizer.desc _ _ (fun i ↦ I.glueDataObjι i ≫ i.1.ι); Mathlib/AlgebraicGeometry/Pullbacks.lean:309:   simp_rw [Cover.fromGlued, Multicoequalizer.π_desc_assoc, gluedLift, ← Category.assoc]; Mathlib/AlgebraicGeometry/Pullbacks.lean:319:   simp_rw [Cover.fromGlued, Multicoequalizer.π_desc_assoc, gluedLift, ← Category.assoc]; Mathlib/CategoryTheory/GlueData.lean:290: theorem hasColimit_mapGlueData_diagram : HasMulticoequalizer (D.mapGlueData F).diagram :=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of compatible disjoint rational point charts along an open cover yields a global point indexed isomorphism and length one local rings",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Cover.gluedCover_t'; AlgebraicGeometry.Scheme.GlueData.openCover_I₀; AlgebraicGeometry.sigmaOpenCover_I₀; AlgebraicGeometry.Scheme.Cover.gluedCover_J; AlgebraicGeometry.Scheme.Cover.gluedCover_U; AlgebraicGeometry.Scheme.GlueData.openCover_X; AlgebraicGeometry.Scheme.GlueData.openCover_f; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this complete lemma or a one-line specialization; see report for candidate analysis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme endomorphism with finite affine equalizer charts indexed by rational points has equalizer a finite disjoint union of copies of the base field",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal, AlgebraicGeometry.exists_isAffineOpen_preimage_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits give limit constructions, affine morphisms, or restriction facts, but none states the point-indexed equalizer descent and all its conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"isLocalAtTarget\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits give limit constructions, affine morphisms, or restriction facts, but none states the point-indexed equalizer descent and all its conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|Equalizer",
+   "results": "OK 25 hits: Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/PointsPi.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/GluingOneHypercover.lean, Mathlib/AlgebraicGeometry/Gluing.lean; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits give limit constructions, affine morphisms, or restriction facts, but none states the point-indexed equalizer descent and all its conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equalizer of two morphisms between affine schemes is the spectrum of the quotient by the ideal generated by differences of their ring maps",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.coequalizer, AlgHom.coe_equalizer, AlgHom.mem_equalizer, AlgHom.equalizer.congr_simp, CategoryTheory.Limits.equalizer.ι, AlgebraicGeometry.IsImmersion.instιScheme, AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp, AlgebraicGeometry.AffineScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits give limit constructions, affine morphisms, or restriction facts, but none states the point-indexed equalizer descent and all its conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two ring homomorphisms A to B the equalizer of the induced affine scheme maps is Spec B modulo the ideal generated by their differences",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.affine_affine_hasPullback, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.IsImmersion.instιScheme, AlgebraicGeometry.pullbackSpecIso, AlgebraicGeometry.Scheme.ker_of_isAffine, AlgebraicGeometry.specTargetImageIdeal",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits give limit constructions, affine morphisms, or restriction facts, but none states the point-indexed equalizer descent and all its conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from finitely many rational points to an endomorphism equalizer is an isomorphism when it is so on every affine open chart",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso, TopCat.Presheaf.SheafConditionEqualizerProducts.fork.isoOfIso, AlgebraicGeometry.morphismRestrictEq, AlgebraicGeometry.PresheafedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.Scheme.instIsIsoSubschemeιBotIdealSheafData, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits give limit constructions, affine morphisms, or restriction facts, but none states the point-indexed equalizer descent and all its conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"equalizer\"",
+   "results": "OK 2 hits: AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatEqualizerSchemeOfQuasiSeparatedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits give limit constructions, affine morphisms, or restriction facts, but none states the point-indexed equalizer descent and all its conclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-trf-frobenius-fixed-points",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-frobenius-fixed-points",
+   "place": "Steps 0 and 2, compatibility on opens and gluing the canonical point maps; Step 3, finite étale structure and length-one local rings (old expanded steps 5–6).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-equalizer-point-chart-descent",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all imported searches. Proved the canonical map by explicit affine quotient factorization, evaluation-normalized chart isomorphisms and inverse gluing on arbitrary open overlaps. Reused existing coproduct, morphism-gluing and étale-field lemmas; finiteness and the structural stalk and length assertions are direct calculations. No new nodes, no Lean edits or compiles.",
+  "blueprint": "thm-trf-frobenius-fixed-points.proof.md Step 0 (equalizer and affine restrictions), Step 2 (evaluation-normalized point charts and open descent), Step 3 (finite étale structure and length-one local rings).",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-coproduct-etale",
+    "why": "Generic étaleness of coproducts of finite separable field spectra, applied to identity extensions; the unit has no replacement and this is exactly the geometric input of the ancestor proof Step 3."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-coproduct-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-06d46aaaa",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-06d46aaaa (reviewer sub-agent of L); spot-checked: Delivery: one commit, item plus report, 0 new nodes. Statement and stmt_deps are identical to the node created by the Q134 re-split. The live node is still unsplit, so the delivery is not superseded. The 7 steps carry every argument of the old parent steps 5-6, nothing dropped. Sources: blueprint main-20261015 thm-trf-frobenius-fixed-points Steps 0-3 read; Stacks 02GL (morphisms 8175-8200), 01JJ, 00AN and 00ED labels checked; no SGA. Statement tested: X empty; P empty (all B_j/J_j=0, F empty); repeated points (excluded by surjectivity onto k x k); A^1 with h=id (hypothesis fails, as it should); t->t^q over F_q-bar (k^q). All 7 steps checked against the cited statements. Step 2 (affine equalizer, glued to arbitrary test schemes, no affine overlaps assumed) and step 4 (inverse gluing over {E_j} and {D_j}) are correct. Steps 5 (finite), 6 (étale via lem-exc-etale-coproduct-etale with L_p=k, accepted as a generic tool use) and 7 (stalk k, length 1) are correct. One C4 fault in step 3: the claim that D_j is the open union W_j of its summands is in neither cited lemma and also needs gluing over empty overlaps. Fixed: the sentence now gives that two-line argument and step 3 uses lem-weil-pbc-scheme-morphism-gluing, which was already in proof_deps. Duplicate search over all node statements (equalizer; coproduct + field + finite étale / length) found nothing. The sibling Frobenius affine-presentation node is specific, not a duplicate. Corrected file: fixes/dag/nodes/sec-six-functors/lem-trf-equalizer-point-chart-descent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EqualizerPointChartDescent",
+  "declaration": "AlgebraicGeometry.equalizer_point_chart_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EqualizerPointChartDescent.lean",
+  "statement": "theorem equalizer_point_chart_descent (k : Type u) [Field k] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) (h : X ⟶ X) (hs : h ≫ s = s) (g : X ⟶ pullback s s) (hg₁ : g ≫ pullback.fst s s = 𝟙 X) (hg₂ : g ≫ pullback.snd s s = h) (J : Type v) [Finite J] (B : J → Type u) [∀ j, CommRing (B j)] [∀ j, Algebra k (B j)] (c : ∀ j, Spec (.of (B j)) ⟶ X) [∀ j, IsOpenImmersion (c j)] (hc : ∀ z : X, ∃ j, z ∈ Set.range (c j)) (hcs : ∀ j, c j ≫ s = Spec.map (CommRingCat.ofHom (algebraMap k (B j)))) (φ : ∀ j, B j →ₐ[k] B j) (hφ : ∀ j, Spec.map (CommRingCat.ofHom (φ j).toRingHom) ≫ c j = c j ≫ h) (I : ∀ j, Ideal (B j)) (hI : ∀ j, I j = Ideal.span (Set.range (fun b : B j ↦ φ j b - b))) (P : Type u) (x : P → (Spec (.of k) ⟶ X)) (hxs : ∀ p, x p ≫ s = 𝟙 _) (hx : ∀ p, x p ≫ h = x p) (Pj : J → Set P) (hPj : ∀ j p, p ∈ Pj j ↔ ∃ a : Spec (.of k) ⟶ Spec (.of (B j)), a ≫ c j = x p) [∀ j, Finite (Pj j)] (ε : ∀ j, (B j ⧸ I j) ≃ₐ[k] ((Pj j) → k)) (hε : ∀ j (p : Pj j), Spec.map (CommRingCat.ofHom ((Pi.evalRingHom (fun _ : Pj j ↦ k) p).comp ((ε j).toRingHom.comp (Ideal.Quotient.mk (I j))))) ≫ c j = x p.val) : Finite P ∧ ∃ q : (∐ fun _ : P ↦ Spec (.of k)) ⟶ pullback g (pullback.diagonal s), (∀ p, Sigma.ι (fun _ : P ↦ Spec (.of k)) p ≫ q ≫ pullback.fst g (pullback.diagonal s) = x p) ∧ (∀ q' : (∐ fun _ : P ↦ Spec (.of k)) ⟶ pullback g (pullback.diagonal s), (∀ p, Sigma.ι (fun _ : P ↦ Spec (.of k)) p ≫ q' ≫ pullback.fst g (pullback.diagonal s) = x p) → q' = q) ∧ IsIso q ∧ (∃ e : ∀ j, Spec (.of (B j ⧸ I j)) ≅ pullback (pullback.fst g (pullback.diagonal s)) (c j), (∀ j, (e j).hom ≫ pullback.snd (pullback.fst g (pullback.diagonal s)) (c j) = Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I j)))) ∧ (∀ j, Sigma.desc (fun p : Pj j ↦ Sigma.ι (fun _ : P ↦ Spec (.of k)) p.val) ≫ q = sigmaSpec (fun _ : Pj j ↦ CommRingCat.of k) ≫ Spec.map (CommRingCat.ofHom (ε j).toRingHom) ≫ (e j).hom ≫ pullback.fst (pullback.fst g (pullback.diagonal s)) (c j)) ∧ (∀ (T : Scheme.{u}) (j l : J) (a : T ⟶ Spec (.of (B j ⧸ I j))) (b : T ⟶ Spec (.of (B l ⧸ I l))), a ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I j))) ≫ c j = b ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I l))) ≫ c l → a ≫ (e j).hom ≫ pullback.fst (pullback.fst g (pullback.diagonal s)) (c j) = b ≫ (e l).hom ≫ pullback.fst (pullback.fst g (pullback.diagonal s)) (c l))) ∧ IsFinite (pullback.fst g (pullback.diagonal s) ≫ s) ∧ Etale (pullback.fst g (pullback.diagonal s) ≫ s) ∧ (∀ z : (pullback g (pullback.diagonal s) : Scheme.{u}), IsIso ((Scheme.ΓSpecIso (.of k)).inv ≫ (pullback.fst g (pullback.diagonal s) ≫ s).appTop ≫ (pullback g (pullback.diagonal s)).presheaf.Γgerm z) ∧ Module.length ((pullback g (pullback.diagonal s)).presheaf.stalk z) ((pullback g (pullback.diagonal s)).presheaf.stalk z) = 1)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85451c146",
+  "group": "NR",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node with AlgebraicGeometry.equalizer_point_chart_descent: field k, k-scheme (X,s), k-endomorphism h, finite open-immersion affine cover with hc/hcs, induced k-alg φ with hφ, difference ideal hI, fixed k-points x, P_j by factorization, finite P_j, ε pinned to evaluation by hε (c j mono + Spec fully faithful + mk surjective), graph g via hg₁/hg₂ (pullback.lift 𝟙 h; no extra condition), F = pullback g (diagonal s). Conclusions: Finite P; unique q with IsIso; e pinned by e.hom ≫ snd = Spec mk (snd mono); chart restriction via Mathlib sigmaSpec and Spec ε; overlap compatibility for all T; IsFinite and Etale of i≫s; IsIso of the structural map k → O_{F,z}; Module.length = 1. No extra hypotheses. Edge cases (J empty, P empty, empty charts, repeated labels) covered; P : Type u loses nothing since P is forced finite. Only the lean field changed vs the live node; statement verbatim; stmt_dep records used directly; plain imports are proof-dep modules (Gluing for morphism-gluing; EtaleCoproductOfFiniteSeparableFields for lem-exc-etale-coproduct-etale). Docstrings carry the source, the blueprint id and the 7 steps; proof sorry, no defs, lines ≤100. First S2 delivery, not superseded. No compile (no files changed). Advisory: overlap and chart clauses follow from i mono, which matches the node's own strength."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261023T124254-L-1358103",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

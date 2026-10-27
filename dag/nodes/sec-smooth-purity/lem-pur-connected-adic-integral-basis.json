@@ -1,0 +1,243 @@
+{
+ "id": "lem-pur-connected-adic-integral-basis",
+ "kind": "statement",
+ "title": "Constant values and prescribed integral bases on a connected pro-etale scheme",
+ "statement": "Let $\\ell$ be prime and let $E\\subseteq L$ be finite extensions of $\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E\\subseteq\\mathcal O_L$, compatible extending absolute values, and chosen uniformizers $t=\\varpi_E$, $v=\\varpi_L$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a connected scheme [def-weil-connected-scheme], and work on its small pro-etale site [def-weil-pbc-proetale-site]. For $H=E,L$ put $A_{H,n}=\\mathcal O_H/\\varpi_H^n\\mathcal O_H$ for $n\\geq1$, and $R_H=\\varprojlim_n(A_{H,n})_X$, with projections $\\pi_{H,n}$ [def-weil-completed-integral-coefficients, def-weil-pbc-constant-sheaf]. Write $c:R_E\\to R_L$ for the coefficient map of [def-weil-completed-integral-scalar-data]. For $a\\in\\mathcal O_H$ let $a_X\\in\\Gamma(X,R_H)$ be the compatible family of constant sections of its residues. Then the maps\n$$\\iota_H:\\mathcal O_H\\xrightarrow{\\sim}\\Gamma(X,R_H),\\qquad a\\longmapsto a_X$$\nare ring isomorphisms. For every $n\\geq1$, $\\pi_{H,n}(a_X)$ is the constant section of $a\\bmod\\varpi_H^n$, and $c_X\\iota_E(a)=\\iota_L(a)$ for $a\\in\\mathcal O_E$.\n\nLet $d=[L:E]$, and let $\\beta_1,\\ldots,\\beta_d$ be any $\\mathcal O_E$-basis of $\\mathcal O_L$, meaning every $a\\in\\mathcal O_L$ has a unique expression $\\sum_i a_i\\beta_i$ with $a_i\\in\\mathcal O_E$. With $b_i=\\iota_L(\\beta_i)$ the morphism of $R_E$-module sheaves [def-weil-sheaf-of-modules-category]\n$$R_E^{\\oplus d}\\longrightarrow\\operatorname{Res}_cR_L,\\qquad (r_i)_i\\longmapsto\\sum_i c(r_i)b_i$$\nis an isomorphism. Its columns are exactly the compatible residue sections of the prescribed $\\beta_i$. In particular the sheaf basis and the basis on global sections are the same basis under $\\iota_E,\\iota_L$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12 (p. 30), Definition 6.8.1 and Lemma 6.8.2(1) with proof (pp. 58-59); connected-scheme and prescribed-basis specialization of the inverse-limit construction"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-scalar-data",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct on the pro-etale site the presheaf of continuous functions into any discrete commutative ring, in the coefficient universe max u (t+1). The underlying-set sheaf condition follows from the fpqc continuous-function sheaf and restriction to the small pro-etale site. The constants map is locally injective: over a nonempty object evaluate at one point; over an empty object use the empty cover. It is locally surjective by the open cover of discrete fibres. Sheafification therefore identifies constant-sheaf sections with continuous functions. Over connected nonempty X every such function is constant [lem-weil-pbc-connected-locally-constant-map]; evaluation at a point proves the canonical constants map is bijective. This works without the finiteness hypothesis and handles both independent universes. Apply it to each lifted finite quotient. Naturality of sheafification gives compatibility with quotient transitions.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-connected-locally-constant-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, printed p.30, discrete-space assertion; connected specialization"
+   }
+  },
+  {
+   "text": "Define the canonical ring homomorphism from the valuation ring to completed sections using the constant-to-completion cone [def-weil-completed-integral-coefficients]. Its projections are the finite constant sections by the limit-lift projection identity and sheafification naturality, so it equals the specified integralScalarConstant [lem-weil-integral-scalar-extension-well-defined]. Invert the finite quotient section equivalences from step 1 on every completed global section. The limit cone identities give consecutive compatibility. Add the unique exponent-zero quotient and extend consecutive compatibility to all pairs of exponents. The universal ring map into AdicCompletion produces the compatible residue tuple. Part (2) of [lem-pod-adic-limit-finite-modules], for the rank-one module, identifies this completion with the valuation ring. The reconstructed integer has precisely the original section residues, so joint injectivity of sectionwise limit projections [def-pur-sheaf-inverse-limit] proves surjectivity. Adic separatedness proves injectivity. RingEquiv.ofBijective gives the two normalized ring equivalences.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-pod-adic-limit-finite-modules",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), printed pp.58-59, inverse-limit construction; algebraic completeness via Stacks algebra.tex Tag 00MA (lemma-completion-tensor)"
+   }
+  },
+  {
+   "text": "The actual coefficient map is uniquely prescribed by its quotient projections [lem-weil-finite-free-completed-scalar-comparison]. Evaluate this projection identity on each constant section and use the finite residue formula from step 2. Naturality of sheafification for the actual quotient inclusion sends the constant residue of a to the constant residue of its integral inclusion. Joint injectivity of limit projections proves compatibility of completed constants with the coefficient inclusion on every site object.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-completed-integral-scalar-data",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), printed pp.58-59, coefficient inclusion on inverse limits; DVR factorization as in Stacks algebra.tex Tag 00PD (lemma-characterize-dvr)"
+   }
+  },
+  {
+   "text": "Given the prescribed integral basis, construct its sheaf morphism directly as the sum of the product coordinate projections followed by the module homomorphisms whose global sections are the specified constant basis elements. The unit-module hom/section equivalence makes each column have exactly the displayed scalar multiplication. At X, product evaluation identifies sections of the source with tuples. Substitute the ring equivalences from step 2 and coefficient compatibility from step 3; the formula is the original integral basis map conjugated by these equivalences, hence bijective. The finite-freeness clause of [lem-weil-finite-free-completed-scalar-comparison] identifies the target sheaf with the same finite product of unit modules. For two such finite free sheaves, a map bijective on global sections is an isomorphism: global sections identify with homomorphisms from the unit since X is terminal in its site; finite products are finite coproducts, so postcomposition with the map is bijective on Hom from the free source. Lift the inverse of the known target trivialization, and use injectivity to prove both inverse identities. This argument includes rank zero. Thus asIso of the explicitly constructed map gives the requested isomorphism, its residue-column formulas, and its exact global-section formula.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), printed pp.58-59, prescribed-basis refinement of the inverse-limit construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-connected-locally-constant-map",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-pod-adic-limit-finite-modules",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-completed-integral-scalar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12 and 6.8.2(1); independent-universe continuous-function comparison, complete residue reconstruction, and change of prescribed basis via global sections of finite free sheaves. Lean proof by Q6, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]ro[Ee]tale|[Cc]ompleted.*[Cc]oefficient",
+   "results": "OK 10 hit(s): Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient bases, constant-sheaf adjunctions, and ellAdicSheaf do not identify completed integral coefficient sections together with the prescribed integral-basis columns"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global constant values and finite free integral bases for completed l-adic coefficient sheaves on a connected scheme",
+   "results": "OK 8 hit(s): CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.constantSheafΓAdj, NumberField.integralBasis, LocallyConstant.freeOfProfinite, LightCondensed.IsDiscrete, Profinite.NobelingProof.Nobeling_aux, FiniteDimensional.exists_is_basis_integral, Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient bases, constant-sheaf adjunctions, and ellAdicSheaf do not identify completed integral coefficient sections together with the prescribed integral-basis columns"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProEtale, Padic",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'ProEtale'",
+   "date": "2026-10-22",
+   "verdict": "no usable match: unknown identifier ProEtale; corrected query AlgebraicGeometry.Scheme.ProEt was run afterwards"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral basis of a finite extension of local fields induces a basis on inverse limits of constant quotient ring sheaves; constant sections over a connected scheme are the original integer rings",
+   "results": "OK 8 hit(s): NumberField.integralBasis, NumberField.basisOfFractionalIdeal, Module.Basis.ofIsCoprimeDifferentIdeal, IsLocalRing.basisQuotient_apply, IsLocalRing.basisQuotient, NumberField.RingOfIntegers.basis, Profinite.NobelingProof.GoodProducts.Basis, NumberField.integralBasis_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient bases, constant-sheaf adjunctions, and ellAdicSheaf do not identify completed integral coefficient sections together with the prescribed integral-basis columns"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a nonempty connected scheme the global sections of the completed proetale ring of integers of a finite l-adic extension are its ring of integers, and an integral coefficient basis lifts to the completed ring sheaves",
+   "results": "OK 8 hit(s): IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletionIntegers_apply, IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, BDeRhamPlus, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem, instCommRingBDeRhamPlus, IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient bases, constant-sheaf adjunctions, and ellAdicSheaf do not identify completed integral coefficient sections together with the prescribed integral-basis columns"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ProEt",
+   "results": "OK 12 hit(s): AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasFiniteLimitsProEt, AlgebraicGeometry.Scheme.ProEt.precoverage, AlgebraicGeometry.Scheme.ProEt.topology, AlgebraicGeometry.Scheme.ProEt.instSubcanonicalTopology, AlgebraicGeometry.Scheme.ProEt.forget, AlgebraicGeometry.Scheme.ProEt.forgetFullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "no match: quotient bases, constant-sheaf adjunctions, and ellAdicSheaf do not identify completed integral coefficient sections together with the prescribed integral-basis columns"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of the inverse limit of finite constant ring sheaves on a connected scheme recover the complete valuation ring, and any integral basis induces a basis of the completed coefficient sheaf",
+   "results": "OK 8 hit(s): IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.adicCompletion, IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def",
+   "date": "2026-10-22",
+   "verdict": "no match: site/sections definitions, adic-topology bases and algebraic quotient bases do not give the full connected completed-sheaf statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of completed integral coefficient sheaves on connected proetale schemes",
+   "results": "OK 8 hit(s): AlgebraicGeometry.termΓ(_,_), CategoryTheory.Sheaf.Γ, AlgebraicGeometry.Scheme.Γ, AlgebraicGeometry.Scheme.Γ_def, CategoryTheory.HasGlobalSectionsFunctor, SheafOfModules.sectionsFunctor_obj, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.Scheme.ΓSpecIso",
+   "date": "2026-10-22",
+   "verdict": "no match: site/sections definitions, adic-topology bases and algebraic quotient bases do not give the full connected completed-sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ProEt",
+   "results": "OK 12 hit(s): AlgebraicGeometry.Scheme.ProEt, AlgebraicGeometry.Scheme.instCategoryProEt, AlgebraicGeometry.Scheme.instHasFiniteLimitsProEt, AlgebraicGeometry.Scheme.ProEt.precoverage, AlgebraicGeometry.Scheme.ProEt.topology, AlgebraicGeometry.Scheme.ProEt.instSubcanonicalTopology, AlgebraicGeometry.Scheme.ProEt.forget, AlgebraicGeometry.Scheme.ProEt.forgetFullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "no match: site/sections definitions, adic-topology bases and algebraic quotient bases do not give the full connected completed-sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*basis|basis.*completed|constant.*[Cc]onnected|[Cc]onnected.*constant",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: site/sections definitions, adic-topology bases and algebraic quotient bases do not give the full connected completed-sheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed finite free basis over a complete discrete valuation ring gives a basis of inverse limits of constant quotient sheaves on a site",
+   "results": "OK 8 hit(s): Ideal.adic_module_basis, IsLocalRing.basisQuotient_apply, IsLocalRing.basisQuotient, Ideal.adic_basis, Profinite.NobelingProof.GoodProducts.Basis, IsLocalRing.basisQuotient_repr, IsAdic.hasBasis_nhds, Ideal.hasBasis_nhds_adic",
+   "date": "2026-10-22",
+   "verdict": "no match: site/sections definitions, adic-topology bases and algebraic quotient bases do not give the full connected completed-sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-finite-free-sections-tensor",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final stagewise-colimit paragraph of def-weil-finite-coefficient-point, via the integral sections comparison: old steps 1-3 of lem-weil-point-finite-free-sections-tensor (constant finite quotients, completion, and normalized integral-basis columns).",
+   "via": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-sections-scalar-extension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-connected-adic-integral-basis",
+  "worker": "stage1",
+  "summary": "Retained the full statement. Proved finite quotient sections by the continuous-function comparison and connectedness, passed to the sectionwise inverse limit using completeness, checked the actual scalar inclusion on every projection, and specialized the existing general adic basis lemma to the prescribed integral basis. No new nodes.",
+  "blueprint": "Realizes the stagewise-colimit paragraph of def-weil-finite-coefficient-point through the existing point scalar-extension chain: integral constant values, coefficient inclusion, and the prescribed basis columns.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "General local-field valuation-ring structure supplies finite residue and the unit-times-uniformizer-power factorization; it does not replace any six-functor compatibility step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N6-5f6acb350",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-5f6acb350 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and every cited statement in full. The delivery has no new nodes, leaves the statement unchanged and is not a 10-21 re-split. Step 1: lem-pur-proetale-finite-constant-sections with V=X (no qcqs hypothesis), continuous into discrete means locally constant, and lem-weil-pbc-connected-locally-constant-map makes it constant; nonemptiness comes from def-weil-connected-scheme, and finiteness of A_{H,n} from the DVR node and the finite-quotients node. Step 2: sectionwise limit (def-pur-sheaf-inverse-limit) plus lem-pod-adic-limit-finite-modules(2) for M=O_H. Step 3: DVR (5)/(1)/(4) give t=u v^e, and |t|_L=|t|_E<1 gives e>=1; the coordinates match the projections of c in def-weil-completed-integral-scalar-data (which indexes by n+1, a pure reindexing). Step 4: lem-pur-adic-basis-limit has the same projections as c, so its map is c; its columns are the residues of beta_i = iota_L(beta_i), and the global-section formula follows. Edge cases checked: empty X excluded, nonreduced X fine, ramified L/E fine, E=L fine. No duplicate: lem-pod-connected-constant-h0 is H^0 of finite-type k-schemes, and lem-sfb-local-field-integral-basis gives existence only. Sources: Bhatt-Scholze 4.2.12 and 6.8.2(1); no SGA. Batch-5 citation lem-pod-adic-limit-finite-modules: its 30-node closure is pure commutative algebra (Stacks 09B8/031B/031D, adic-tower reconstruction) with no trace-formula or Poincare-duality content, and it is already cited elsewhere in the closure, so it is accepted as outside both assumptions. The tool use of lem-weil-l-adic-extension-integers-dvr is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConnectedAdicIntegralBasis",
+  "declaration": "WeilConjectures.connected_adic_integral_basis",
+  "declarations": [
+   "WeilConjectures.connectedAdicScalarRingMap",
+   "WeilConjectures.connected_adic_integral_basis"
+  ],
+  "file": "lean/Sheaf/Paper/ConnectedAdicIntegralBasis.lean",
+  "statement": "theorem connected_adic_integral_basis (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t}) [ConnectedSpace X] : ∃ (eE : Padic.coefficientExtensionIntegers l E ≃+* (completedIntegralCoefficientSheafUnrestricted l E X).obj.obj (op (Scheme.ProEt.mk (𝟙 X)))) (eL : Padic.coefficientExtensionIntegers l L ≃+* (completedIntegralCoefficientSheafUnrestricted l L X).obj.obj (op (Scheme.ProEt.mk (𝟙 X)))), (∀ a, eE a = integralScalarConstant l E X (op (Scheme.ProEt.mk (𝟙 X))) a) ∧ (∀ a, eL a = integralScalarConstant l L X (op (Scheme.ProEt.mk (𝟙 X))) a) ∧ (∀ n a, (completedIntegralCommRingProjectionUnrestricted l E X n).hom.app (op (Scheme.ProEt.mk (𝟙 X))) (eE a) = integralScalarFiniteConstant l E X n (op (Scheme.ProEt.mk (𝟙 X))) a) ∧ (∀ n a, (completedIntegralCommRingProjectionUnrestricted l L X n).hom.app (op (Scheme.ProEt.mk (𝟙 X))) (eL a) = integralScalarFiniteConstant l L X n (op (Scheme.ProEt.mk (𝟙 X))) a) ∧ (∀ a, (completedIntegralScalarCoefficientMap l E L ι X).hom.app (op (Scheme.ProEt.mk (𝟙 X))) (eE a) = eL (integralScalarIntegerInclusion l E L ι a)) ∧ ∀ β : Fin (completedScalarRelativeDegree l E L ι) → Padic.coefficientExtensionIntegers l L, Function.Bijective (fun a : Fin (completedScalarRelativeDegree l E L ι) → Padic.coefficientExtensionIntegers l E ↦ ∑ i, integralScalarIntegerInclusion l E L ι (a i) * β i) → ∃ Φ : (∏ᶜ (fun _ : Fin (completedScalarRelativeDegree l E L ι) ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X))) ≅ (SheafOfModules.restrictScalars.{max u (t + 1)} (connectedAdicScalarRingMap l E L ι X)).obj (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l L X)), (∀ U x, Φ.hom.val.app U x = ∑ i, (connectedAdicScalarRingMap l E L ι X).hom.app U ((Pi.π (fun _ : Fin (completedScalarRelativeDegree l E L ι) ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X)) i).val.app U x) * integralScalarConstant l L X U (β i)) ∧ (∀ (U : X.ProEtᵒᵖ) (n : ℕ) (i : Fin (completedScalarRelativeDegree l E L ι)), (completedIntegralCommRingProjectionUnrestricted l L X n).hom.app U (integralScalarConstant l L X U (β i)) = integralScalarFiniteConstant l L X n U (β i)) ∧ (∀ x, Φ.hom.val.app (op (Scheme.ProEt.mk (𝟙 X))) x = eL (∑ i, integralScalarIntegerInclusion l E L ι (eE.symm ((Pi.π (fun _ : Fin (completedScalarRelativeDegree l E L ι) ↦ SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E X)) i).val.app (op (Scheme.ProEt.mk (𝟙 X))) x)) * β i))",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96bc77fe0",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Statement verbatim = file signature; only the item lean field is new. Clause-by-clause match: normalized ring equivs eE/eL pinned to integralScalarConstant at the final object ProEt.mk (𝟙 X), residue clauses at exponent n+1, coefficient compatibility via the actual integer inclusion, ∀ β with bijective-expansion hypothesis = O_E-basis, Φ : ∏ d copies of R_E ≅ restrictScalars c R_L pinned sectionwise by Σ c(r_i)·const(β_i), column residues and the global-section basis clause. Helper connectedAdicScalarRingMap = sheafCompose forget₂ of the recorded c (canonical, not hollow). No extra hypotheses; universes t/u independent; edge cases (empty X excluded, nonreduced, E=L, ramified) covered. Decls owned via def-weil-completed-integral-scalar-data reexport; no duplicate (PointFiniteFreeSectionsTensor is point-only, AdicBasisLimit general). Docstrings, sorry-only proof and report sections OK. Not recompiled per the 2026-10-21 instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261024T190710-L-19627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

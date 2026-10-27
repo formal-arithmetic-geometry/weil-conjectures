@@ -22,38 +22,20 @@
  ],
  "proof": [
   {
-   "text": "Write $T_M=B\\otimes_R M$ for the sheafified tensor. In the coequalizer of [sk-def-sfb-change-of-scalars] the middle monoid is the tensor unit $R$ of $\\mathcal A$, not an additional coefficient ring. The two arrows $B\\otimes_R R\\otimes_R M\\rightrightarrows T_M$ send a local generator $b\\otimes r\\otimes m$ respectively to $b\\varphi(r)\\otimes m$ and $b\\otimes rm$. These are equal by the balancing relation in the sectionwise tensor over $R(U)$; sheafification therefore makes the arrows equal, by [def-pur-sheaf-tensor-product, def-weil-pbc-sheafification]. If $q_M:T_M\\to E_{\\mathrm{mon}}M$ is their coequalizer, the identity of $T_M$ equalizes them and gives a unique $e_M$ with $e_Mq_M=1$. Conversely $q_Me_Mq_M=q_M$, and uniqueness in the coequalizer property gives $q_Me_M=1$. Thus $e_M$ is an isomorphism and $e_Mq_M(b\\otimes m)=b\\otimes m$.",
+   "text": "Apply the ordinary scalar comparison, including its prescribed algebra and module actions, transported coequalizer extension, natural isomorphism and local pure-tensor normalization.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sheafification"
+    "lem-sfb-ordinary-scalar-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; blueprint def-sfb-modobj-extension, coequalizer formula"
-   }
+   "elementary": false
   },
   {
-   "text": "The action on the coequalizer in [sk-def-sfb-change-of-scalars] is induced by multiplication on the first factor. Hence, after precomposition with $B\\otimes_R q_M$, both sides of the $B$-linearity equation for $e_M$ send $b'\\otimes b\\otimes m$ to $b'b\\otimes m$. Equivalently $q_M$ and its inverse respect this action, by the same coequalizer uniqueness. For a module map $f:M\\to N$, both $e_NE_{\\mathrm{mon}}(f)q_M$ and $(1_B\\otimes f)e_Mq_M$ send $b\\otimes m$ to $b\\otimes f(m)$, so they agree and coequalizer uniqueness gives naturality. These computations define maps of the sectionwise tensor presheaves and then of their sheafifications [def-pur-sheaf-tensor-product]; they do not assert that arbitrary sheaf sections are global pure tensors. We have a natural $B$-linear isomorphism $e:E_{\\mathrm{mon}}\\xrightarrow{\\sim}E_{\\mathrm{sec}}$.",
-   "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; blueprint def-sfb-modobj-extension, induced maps and first-factor action"
-   }
-  },
-  {
-   "text": "For flat $M$, the additive functor $F_M=(-)\\otimes_R M$ is exact by [def-pc-flat-sheaf-modules]. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^n(F_MK)\\cong F_M(H^nK)$ naturally in $K$. It follows that $F_M$ applied termwise preserves quasi-isomorphisms, and sends acyclic complexes to acyclic complexes. In the total tensor of [def-sfb-preserves-kflat-quasi-iso], $K\\otimes_R M[0]$ has just the summand $K^n\\otimes_R M$ in degree $n$, with differential $d_K\\otimes1$. The other order has just $M\\otimes_R K^n$ and differential $1\\otimes d_K$, since $(-1)^0=1$; the sectionwise flip $m\\otimes k\\mapsto k\\otimes m$ gives a chain isomorphism with $F_MK$ [def-pur-sheaf-tensor-product]. Thus tensoring with $M[0]$ on either side preserves every quasi-isomorphism. Tensoring any acyclic $K$ with $M[0]$ is acyclic as well. These are exactly the two required K-flat predicates [def-sfb-preserves-kflat-quasi-iso, def-pc-kflat-complex].",
+   "text": "Flatness gives finite-limit and finite-colimit preservation for siteSheafTensorRight. Transfer these through siteSheafTensorRightIso and the braiding to both tensor orders. Mathlib HomologicalComplex.quasiIso_map_of_preservesHomology then gives termwise quasi-isomorphism preservation. Conjugate by the single-complex tensor isomorphisms mapBifunctorSingle₁Iso and mapBifunctorSingle₂Iso. For the acyclicity predicate, use ShortComplex.Exact.map and transport exactness by mapBifunctorSingle₂Iso. Thus both required K-flat predicates hold.",
    "uses": [
     "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-sfb-preserves-kflat-quasi-iso",
     "def-pur-sheaf-tensor-product",
-    "def-pc-kflat-complex"
+    "def-pc-kflat-complex",
+    "def-pur-site-sheaf-tensor-presentation-data"
    ],
    "elementary": false,
    "source": {
@@ -62,11 +44,11 @@
    }
   },
   {
-   "text": "Apply [lem-pur-derived-change-of-rings] to $\\varphi:R\\to B$ on the given site. Its extension is written $(-)\\otimes_R B$; the sectionwise flip $m\\otimes b\\mapsto b\\otimes m$ identifies this with $E_{\\mathrm{sec}}$, respecting the $B$ action and the differentials [def-pur-sheaf-tensor-product]. Since $M[0]$ is K-flat in the acyclic-total-tensor sense, its identity is a K-flat resolution [def-pc-kflat-complex]. The canonical resolution comparison in [lem-pur-derived-change-of-rings] therefore says that the comparison counit at $M[0]$ is an isomorphism. Termwise scalar extension of $M[0]$ is $(E_{\\mathrm{sec}}M)[0]$, so this counit is precisely $c_{\\mathrm{sec},M}:LE_{\\mathrm{sec}}Q_R(M[0])\\to Q_B((E_{\\mathrm{sec}}M)[0])$. The cited theorem assumes no flatness of $B$.",
+   "text": "The supplied DerivedChangeOfRingsCochainModel records in its computes field that its counit is invertible on a K-flat complex. Apply it to the single complex, using the independent-coefficient K-flat predicate just proved. Compose with the canonical singleMapHomologicalComplex isomorphism to obtain the section-side invertible degree-zero counit. This uses the model data directly and no existence theorem for derived change of rings.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
     "def-pur-sheaf-tensor-product",
-    "def-pc-kflat-complex"
+    "def-pc-kflat-complex",
+    "def-sfb-derived-change-of-rings-cochain-model"
    ],
    "elementary": false,
    "source": {
@@ -99,21 +81,20 @@
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-change-of-scalars",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-sheafification",
+  "lem-sfb-ordinary-scalar-comparison",
   "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
   "def-sfb-preserves-kflat-quasi-iso",
+  "def-pur-sheaf-tensor-product",
   "def-pc-kflat-complex",
-  "lem-pur-derived-change-of-rings",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-sfb-derived-change-of-rings-cochain-model",
   "def-sfb-left-derived-functor",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03EK (section-tensor-product), 03ER (definition-flat); sites-cohomology.tex Tag 06YY and derived.tex Tag 06XN; blueprint module-object coequalizer and total-derived-counit conventions. Explicit convention comparison written by Q42."
+  "place": "Tag 03ER exactness, exact-functor homology comparison, and Stacks 06YY/06XN universal derived counit comparison. Ordinary Tag 03EK comparison separated in lem-sfb-ordinary-scalar-comparison."
  },
  "mathlib_searches": [
   {
@@ -271,13 +252,6 @@
   "module": "Sheaf.Paper.FlatSingleScalarConventions",
   "declaration": "SheafOfModules.FlatSingleScalar.flat_single_scalar_conventions",
   "declarations": [
-   "SheafOfModules.FlatSingleScalar.Modules",
-   "SheafOfModules.FlatSingleScalar.scalarAlgebra",
-   "SheafOfModules.FlatSingleScalar.tensorSection",
-   "SheafOfModules.FlatSingleScalar.Identifications",
-   "SheafOfModules.FlatSingleScalar.monExtension",
-   "SheafOfModules.FlatSingleScalar.monExtension_additive",
-   "SheafOfModules.FlatSingleScalar.projection",
    "SheafOfModules.FlatSingleScalar.degreeZeroCounit",
    "SheafOfModules.FlatSingleScalar.Normalized",
    "SheafOfModules.FlatSingleScalar.DerivedCompatible",
@@ -298,5 +272,27 @@
   "group": "Q55",
   "result": "pass",
   "note": "First S2 delivery; only the item lean field changed (11 stmt_dep records identical to side-live). Clause check: EssentiallySmall.{r} site with the same instance block as DerivedChangeOfRingsCochainModel; Modules R = ringedSiteModules; tensor = cochainModulesMonoidal (same monoidalCategory as IsKFlatIndependentCoefficients); Identifications pins η=φ, μ = B multiplication and B-action on local pure tensors (residual automorphism twist absorbed by ∃ e, coequalizer projection preserved); E_mon = Mod.extendScalars (recorded, existing), E_sec = s.E with obj_eq/map_eq = changeOfRings (B first factor, read TensorProduct.lean); e natural B-linear iso pinned by Normalized via extendπ; flat M ⇒ IsKFlatForTotalTensor ∧ IsKFlatIndependentCoefficients of single 0; independent HasDerivedCategory universes; ∀ L ε IsLeftDerivedFunctor, ∃ eL with counit equation (unique); degreeZeroCounit via singleMapHomologicalComplex; IsIso of both comparisons for flat M; displayed equation in diagram order; naturality via NatTrans; no B-flatness or local freeness. Edge cases M=0, B=0, φ=id, Z→Z/2 with Z or Z[1/2], Z/2 excluded, empty site. One sorry; docstrings with source and blueprint tag; 6-step proof; statement verbatim; all 11 declarations present; no duplicate found. Advisory: proof-only plain imports; toSheafify vs adjunction-unit styles. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9406b",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261023T104910-L-3455684",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/interface/ordinary-comparison modules and 3 node files against clones/live item module, node lem-sfb-flat-single-scalar-conventions, DerivedChangeOfRingsCochainModel and unit sk-lem-integral-models"
  }
 }

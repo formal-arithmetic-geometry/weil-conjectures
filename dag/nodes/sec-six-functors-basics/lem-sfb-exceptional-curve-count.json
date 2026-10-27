@@ -1,0 +1,353 @@
+{
+ "id": "lem-sfb-exceptional-curve-count",
+ "kind": "statement",
+ "title": "Finite exceptional-curve count and strict decrease after a target point blowup",
+ "statement": "Let $f:X\\to Y$ be a proper morphism between integral regular Noetherian schemes of dimension $2$ [def-weil-proper-morphism, def-pc-integral-scheme, def-weil-regular-scheme, pqf-def-locnoeth, def-kun-topological-krull-dimension]. Noetherian means locally Noetherian and quasi-compact. Assume $f$ is birational, meaning that it restricts to an isomorphism between dense open subschemes [def-weil-open-immersion]. Let $U_f\\subseteq Y$ be the union of the open subschemes over which $f$ is an isomorphism. Define $B(f)$ to be the set of irreducible closed subsets $C\\subset X$ of dimension $1$ for which $f(C)$ consists of one point [def-weil-irreducible-components]. Then $Y\\setminus U_f$ is a finite set of closed points $y$ with $\\dim\\mathcal O_{Y,y}=2$ [def-weil-pbc-krull-dimension-ring], $B(f)$ is finite, and $B(f)=\\varnothing$ if and only if $f$ is an isomorphism. If $y\\notin U_f$, $b:Y'=\\operatorname{Bl}_yY\\to Y$ is the blowup of the reduced closed point [def-nagata-global-blowup], and $g:X\\to Y'$ is a proper birational morphism with $f=b\\circ g$ and $Y'$ integral regular Noetherian of dimension $2$, then $B(g)\\subsetneq B(f)$, with both sets regarded as sets of closed subsets of $X$.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), first proof paragraph: the finite induction measure and its strict decrease, whose details the source omits."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-nagata-global-blowup",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "By [def-pc-integral-scheme, lem-sc-scheme-sober], $X$ and $Y$ are reduced irreducible schemes with unique generic points. The dense opens in the birationality hypothesis contain these points; the given isomorphism identifies their local rings. Thus $f$ is birational in the precise sense required by [lem-sfb-normal-modification-codimension-one]. Its source is reduced and its target is Noetherian, so that statement applies. Regularity makes each local ring regular local by [def-weil-regular-scheme]; in dimension one it is a DVR by [lem-sc-regular-dim1-dvr]. Clauses (1) and (2) of the modification criterion therefore put every point of local dimension zero or one into $U_f$. Also, [rem-pc-regular-normal] makes every local ring of $Y$ normal. By [lem-sc-scheme-stalk-dimension-generalization-chains] and the chain definition [def-kun-topological-krull-dimension], every local dimension is at most $2$, since $\\dim Y=2$. Consequently every $y\\in S:=Y\\setminus U_f$ has $\\dim\\mathcal O_{Y,y}=2$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-sc-scheme-sober",
+    "lem-sfb-normal-modification-codimension-one",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr",
+    "rem-pc-regular-normal",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (lemma-proper-birational-regular-surfaces), first paragraph; varieties.tex Tag 0BFP (lemma-modification-normal-iso-over-codimension-1), clauses (1), (2); algebra.tex Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "The set $S$ is closed, since $U_f$ is open. Every $y\\in S$ is a closed point of $Y$: if a distinct point $z$ were a specialization of $y$, a length-two chain of generalizations starting at $y$, supplied by [lem-sc-scheme-stalk-dimension-generalization-chains], could be prefixed with $z$. The closures of its four points would give a length-three chain of irreducible closed subsets in $Y$, contrary to $\\dim Y=2$. Here distinct points have distinct closures by the uniqueness in [lem-sc-scheme-sober]. Apply [lem-sc-noetherian-closed-points-finite] to the Noetherian scheme $Y$ and its closed subset $S$. It follows that $S$ is finite, proving the first assertion, including when $S$ is empty.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-sc-scheme-sober",
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph, omitted finiteness detail; properties.tex Tag 02IZ (lemma-codimension-local-ring) and Tag 0BA8 (lemma-Noetherian-irreducible-components)."
+   }
+  },
+  {
+   "text": "Put $Z=f^{-1}(S)$ as a closed subset of $X$. It is proper: the generic point of $X$ maps to the generic point of $Y$, which lies in $U_f$ by Step 1. By [lem-sc-noetherian-closed-subset-finite-components], $Z$ has finitely many irreducible components $D_1,\\ldots,D_t$, each closed in $X$. Every $D_i$ has dimension at most one. Indeed, any chain of length two inside this proper irreducible closed subset could be extended by $X$, which is irreducible, to a chain of length three in $X$, contradicting [def-kun-topological-krull-dimension] and $\\dim X=2$. The continuous image $f(D_i)$ is irreducible and is contained in the finite set of closed points $S$. Such a subset is a singleton: otherwise partition it into a point and its nonempty complement, both relatively closed since $S$ is finite and all its points are closed. Thus each one-dimensional $D_i$ belongs to $B(f)$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph, omitted finiteness detail: components of the inverse image of the bad-point set; properties.tex Tag 0BA8 (lemma-Noetherian-irreducible-components)."
+   }
+  },
+  {
+   "text": "Conversely, if $C\\in B(f)$ and $f(C)=\\{y\\}$, then $y\\notin U_f$: over $U_f$ the entire morphism is an isomorphism, so its fibre is a singleton, whereas a one-dimensional irreducible closed subset cannot be a singleton. Hence $C\\subseteq Z$. A finite irreducible-component cover of $Z$ contains $C$ in some $D_i$, by irreducibility. This containment is equality. Otherwise a length-one chain inside $C$ (which exists because $\\dim C=1$), followed by $D_i$ and then $X$, would have length three. Thus $B(f)$ is exactly the set of one-dimensional components of $Z$, a subset of the finite list in Step 3. This proves finiteness of $B(f)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph: expand the assertion that there are finitely many curves in fibres, using the finite component cover from Step 3."
+   }
+  },
+  {
+   "text": "Suppose $B(f)=\\varnothing$. Step 4 shows that every $D_i$ has dimension zero. By [lem-sc-scheme-sober] each $D_i$ has a unique generic point $\\xi_i$. If there were another point $z\\in D_i$, its closure would be a proper nonempty irreducible closed subset of $D_i$ (otherwise $z$ would be a second generic point), a chain of length one. Thus $D_i=\\{\\xi_i\\}$, and $Z$ is finite. Every fibre above $S$ is consequently finite. The local rings of $Y$ are normal by Step 1, so clause (3) of [lem-sfb-normal-modification-codimension-one] puts every point of $S$ into $U_f$. Hence $S=\\varnothing$, $U_f=Y$, and $f$ is an isomorphism. Conversely, an isomorphism has singleton fibres and contracts no one-dimensional closed subset, so $B(f)=\\varnothing$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sfb-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph, base case of the induction; varieties.tex Tag 0BFP (lemma-modification-normal-iso-over-codimension-1), clause (3)."
+   }
+  },
+  {
+   "text": "Now assume the factorization $f=b\\circ g$ in the statement. For $C\\in B(g)$, the set $C$ is still an irreducible closed subset of $X$ of dimension one and $f(C)=b(g(C))$ is a singleton. Therefore $C\\in B(f)$, proving $B(g)\\subseteq B(f)$. It remains to exhibit a curve that is contracted by $f$ and not by $g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, first paragraph: non-strict containment of the contracted-curve sets follows from the factorization."
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal O_{Y,y}$ and $\\mathfrak m$ for its maximal ideal. Step 1 gives $\\dim A=2$, and $A$ is regular local by [def-weil-regular-scheme]. The canonical map $c:\\operatorname{Spec}A\\to Y$ is flat and induces the identity on the local ring at its closed point by [lem-weil-pbc-spec-local-ring-canonical-morphism]. Its pullback of the reduced point $y$ is defined by $\\mathfrak m$. By [def-nagata-blowup-flat-base-change-map, thm-nagata-blowup-flat-base-change], the blowup $\\operatorname{Bl}_{\\mathfrak m}(\\operatorname{Spec}A)$ identifies over $\\operatorname{Spec}A$ with $\\operatorname{Spec}A\\times_Y Y'$. Taking its fibre at $\\mathfrak m$ identifies it with the fibre $E=Y'\\times_Y\\operatorname{Spec}\\kappa(y)$ of $b$, by the associativity universal property of fibre products; the residue fields agree since the local map at the closed point is the identity. By [lem-sfb-local-surface-maximal-blowup-geometry] this fibre is $\\mathbf P^1_{\\kappa(y)}$. By [def-pc-scheme-fibre] its underlying space is the closed subset $b^{-1}(y)\\subset Y'$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), clause (1), localized at y; divisors.tex Tag 0805 (lemma-flat-base-change-blowing-up)."
+   }
+  },
+  {
+   "text": "The space $E$ is irreducible and has more than one point. To check this directly, use the standard cover in [def-sc-p1-standard]: the two charts are spectra of the domains $\\kappa(y)[t]$ and $\\kappa(y)[s]$, so are irreducible by [def-pc-integral-scheme]. Their intersection is the nonempty spectrum of $\\kappa(y)[t,t^{-1}]$. Two irreducible open subsets with nonempty intersection have irreducible union: any nonempty open in either chart meets their intersection, and any two nonempty opens therefore meet there. In the first chart the distinct prime ideals $(0)$ and $(t)$ give distinct points. Thus $E$ is a nonsingleton irreducible closed subset of $Y'$. It is proper because $b$ is birational and its generic point maps to the generic point of $Y$, not to the closed point $y$. Here birationality of $b$ also follows directly from $f=b g$ and the dense-open isomorphism away from $y$ supplied by [lem-sfb-regular-point-blowup-geometry].",
+   "uses": [
+    "def-sc-p1-standard",
+    "def-pc-integral-scheme",
+    "lem-sfb-regular-point-blowup-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), clause (1): elementary properties of its projective-line exceptional fibre; Tag 0C5R, first paragraph."
+   }
+  },
+  {
+   "text": "The map $g$ is surjective: it is closed by [def-weil-proper-morphism], and its image contains a dense open by the assumed birationality, so the image is all of $Y'$. The closed subset $F=g^{-1}(|E|)\\subset X$ is proper, since $|E|$ is proper and $g$ is surjective. By [lem-sc-noetherian-closed-subset-finite-components] it has finitely many irreducible components $C_1,\\ldots,C_r$. Their images under the proper map $g$ are closed and cover $|E|$. Irreducibility of $|E|$ forces one image $g(C_j)$ to be all of $|E|$. As in Step 3, any proper irreducible closed subset of the surface $X$ has dimension at most one. Moreover $C_j$ cannot have dimension zero: by [lem-sc-scheme-sober] the dimension-zero argument of Step 5 would make it a singleton, contradicting its nonsingleton image $|E|$. Therefore $\\dim C_j=1$. Since $b(|E|)=\\{y\\}$, we have $f(C_j)=\\{y\\}$, whereas $g(C_j)=|E|$ is not a point. Thus $C_j\\in B(f)\\setminus B(g)$, which proves the strict containment together with Step 6.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R (lemma-proper-birational-regular-surfaces), first paragraph: strict decrease, expanded by the finite-component closed-image argument instead of asserting an isomorphism onto the exceptional curve."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "lem-sc-scheme-sober",
+  "lem-sfb-normal-modification-codimension-one",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-dim1-dvr",
+  "rem-pc-regular-normal",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-sfb-local-surface-maximal-blowup-geometry",
+  "def-pc-scheme-fibre",
+  "def-sc-p1-standard",
+  "lem-sfb-regular-point-blowup-geometry",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R (lemma-proper-birational-regular-surfaces), first paragraph, expanding its omitted finite induction measure, base case and strict-decrease details using Tags 0BFP, 0AGQ, 0805, 0BA8, 02IZ and 01IS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-sfb-exceptional-curve-count: finitely many curves are contracted by a proper birational morphism of regular Noetherian surfaces and factoring through a point blowup strictly reduces their number",
+   "results": "{\"t\": \"2026-10-22T05:11:11Z\", \"tool\": \"leanfinder\", \"query\": \"lem-sfb-exceptional-curve-count: finitely many curves are contracted by a proper birational morphism of regular Noetherian surfaces and factoring through a point blowup strictly reduces their number\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"WeierstrassCurve.exists_isMinimal\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\"], \"digest\": \"574ffd5962621ee6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern rational-map representatives, properness instances or Weierstrass minimal models; none counts contracted surface curves or proves strict decrease. Both source grep and the exceptional-name query returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper birational surface map has a finite exceptional set of curves and no exceptional curves precisely when it is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T05:11:00Z\", \"tool\": \"leansearch\", \"query\": \"A proper birational surface map has a finite exceptional set of curves and no exceptional curves precisely when it is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.isProper_iff\"], \"digest\": \"5660df0f9ddc1c0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern rational-map representatives, properness instances or Weierstrass minimal models; none counts contracted surface curves or proves strict decrease. Both source grep and the exceptional-name query returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"exceptional\"",
+   "results": "{\"t\": \"2026-10-22T05:11:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"exceptional\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern rational-map representatives, properness instances or Weierstrass minimal models; none counts contracted surface curves or proves strict decrease. Both source grep and the exceptional-name query returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*curve|contract.*curve|birational.*[Ff]inite|[Ff]inite.*birational",
+   "results": "{\"t\": \"2026-10-22T05:10:59Z\", \"tool\": \"grep\", \"query\": \"exceptional.*curve|contract.*curve|birational.*[Ff]inite|[Ff]inite.*birational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern rational-map representatives, properness instances or Weierstrass minimal models; none counts contracted surface curves or proves strict decrease. Both source grep and the exceptional-name query returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-sfb-exceptional-curve-count: the number of contracted curves of a proper birational surface morphism is finite and decreases after lifting to a blowup of a bad point",
+   "results": "{\"t\": \"2026-10-22T05:11:32Z\", \"tool\": \"leanfinder\", \"query\": \"lem-sfb-exceptional-curve-count: the number of contracted curves of a proper birational surface morphism is finite and decreases after lifting to a blowup of a bad point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.Affine.Point.map_some\", \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\"], \"digest\": \"dc6825240d383867\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern rational-map representatives, properness instances or Weierstrass minimal models; none counts contracted surface curves or proves strict decrease. Both source grep and the exceptional-name query returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*curve|contract.*curve|birational.*surface|surface.*birational",
+   "results": "{\"t\": \"2026-10-22T05:36:53Z\", \"tool\": \"grep\", \"query\": \"exceptional.*curve|contract.*curve|birational.*surface|surface.*birational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern normalization, rational-map representatives, properness or flat monomorphisms; none states exceptional-curve finiteness, the no-contracted-curve criterion, or strict decrease for surface blowups. The source grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper birational morphism of regular surfaces is an isomorphism if it contracts no curves",
+   "results": "{\"t\": \"2026-10-22T05:36:54Z\", \"tool\": \"leansearch\", \"query\": \"A proper birational morphism of regular surfaces is an isomorphism if it contracts no curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsProper.instCompScheme\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"b87e831c4a555ca9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern normalization, rational-map representatives, properness or flat monomorphisms; none states exceptional-curve finiteness, the no-contracted-curve criterion, or strict decrease for surface blowups. The source grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Birational, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-22T05:36:54Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Birational, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern normalization, rational-map representatives, properness or flat monomorphisms; none states exceptional-curve finiteness, the no-contracted-curve criterion, or strict decrease for surface blowups. The source grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational morphism of regular Noetherian surfaces contracts finitely many curves and a lift to the blowup of a nonisomorphism point contracts strictly fewer curves",
+   "results": "{\"t\": \"2026-10-22T05:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"A proper birational morphism of regular Noetherian surfaces contracts finitely many curves and a lift to the blowup of a nonisomorphism point contracts strictly fewer curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.isOver_iff\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"19df2f29daac9ebb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern normalization, rational-map representatives, properness or flat monomorphisms; none states exceptional-curve finiteness, the no-contracted-curve criterion, or strict decrease for surface blowups. The source grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper modification of a nonsingular two dimensional scheme the exceptional locus has finitely many irreducible one dimensional components and a nontrivial point blowup removes one component",
+   "results": "{\"t\": \"2026-10-22T05:37:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper modification of a nonsingular two dimensional scheme the exceptional locus has finitely many irreducible one dimensional components and a nontrivial point blowup removes one component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\"], \"digest\": \"b762f46a4cdf921a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern normalization, rational-map representatives, properness or flat monomorphisms; none states exceptional-curve finiteness, the no-contracted-curve criterion, or strict decrease for surface blowups. The source grep has no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-birational-surface-factorization",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Common point-blowup resolution of regular proper surfaces; Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces). First paragraph of the point-factorization proof: finite bad-curve induction, base case and strict decrease after lifting to the blowup of a bad point.",
+   "via": [
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-exceptional-curve-count",
+  "worker": "stage1",
+  "summary": "Expanded the omitted induction-measure argument into nine steps using existing DAG statements only. The bad locus is closed of codimension two, hence finite; contracted curves are precisely its inverse image’s one-dimensional components. Normal finite-fibre rigidity gives the zero-curve base case. Flat localization identifies the target blowup fibre with a projective line; a component of its inverse image dominates it by proper closedness, giving strict decrease. The statement and inherited metadata/searches are preserved. No new nodes.",
+  "blueprint": "Inherited ancestor is null (confirmed with blueprint_refs.py ancestor). Realizes the exact inherited from.place ending in Tag 0C5R, first paragraph: finite bad-curve induction, base case and strict decrease after lifting to a bad-point blowup. Searches exceptional curve, contracted, 0BFP and finite exceptional found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic local-algebra criterion used to check the DVR hypothesis of the codimension-one modification theorem; no same-unit criterion supplies it."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-implies-normal theorem used only to discharge the normal local ring hypothesis of the finite-fibre criterion."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "Generic Noetherian-scheme finiteness theorem used for the closed bad locus once every point is proved closed."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic local-scheme morphism and its flatness allow localization of the target point blowup."
+   },
+   {
+    "node": "def-nagata-blowup-flat-base-change-map",
+    "why": "Definition of the comparison to which the flat base-change theorem applies."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic flat base-change theorem used to identify the exceptional fibre with the local two-dimensional blowup fibre."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-dim1-dvr",
+  "rem-pc-regular-normal",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-9a28c1645",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-9a28c1645 (reviewer sub-agent of L); spot-checked: PASS, with no changes and no fixes/. This is a first split of the statement-only item: no new nodes and the statement is unchanged. The item is not superseded (still unsplit in live and side) and not in route-pivot-dropped, and neither are any of its deps. Source check: Stacks 0C5R first paragraph, whose omitted details ('Some details omitted') the delivery supplies; 0C5R's 'codim-1 points of V' should read 'of Y', and 0BFP is the intended reference. All nine steps hold. Steps 1-2: birationality is matched to 0BFP-node via sober generic points; clauses (1) and (2) apply, with the DVR property from lem-sc-regular-dim1-dvr. The chain lemma gives local dimension at most 2, a specialization would give a length-3 chain, so every bad point is closed and the bad set is finite by noetherian-closed-points-finite. Steps 3-4: Z=f^-1(S) is a proper subset with finitely many components of dimension at most 1, and B(f) is exactly its one-dimensional components. Step 5: B(f) empty makes the components singletons, so fibres are finite, and 0BFP(3) with regular-implies-normal gives S empty. Step 7: flat localization c (spec-local-ring-canonical-morphism (1)-(3)) plus nagata flat base change identify the fibre of b with the exceptional fibre of Bl_m Spec A, which local-surface-maximal-blowup-geometry says is P^1. Steps 8-9: P^1 is irreducible with at least two points, and |E| is a proper subset via regular-point-blowup-geometry. g is closed with dense image, hence surjective; a component C_j of g^-1|E| maps onto |E|, has dimension exactly 1, and lies in B(f) but not B(g). The argument avoids the source's 'maps isomorphically' claim. Edge cases checked: f an isomorphism; single blowup with g=id; several bad points; zero-dimensional fibre components; finite or imperfect residue fields; no excellence or catenarity assumed. Duplicate search (contracted curve, B(f), exceptional curve; point-blowup-fibre-defects, trf modification nodes, lem-per-surface-point-blowup-geometry) found none, so same_as [] stands. All six declared tool_uses are accepted as generic algebra and scheme facts. Batch-5 flags: normal-modification -> lem-trf-proper-finite-fibre-finite-near is Stacks 02UP, general scheme theory; local-surface and regular-point blowup -> lem-trf-blowup-chart-regular-sequence-presentation is 0BIQ, pure commutative algebra. Neither is the trace formula, Poincare duality or a step of their proofs, so all three citations are accepted. Advisory: the 7240-character proof has no new nodes; that is allowed for a first split. Pre-existing: the 00DV tag on lem-sc-regular-dim1-dvr is wrong (should be 00PD)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExceptionalCurveCount",
+  "declaration": "AlgebraicGeometry.exceptional_curve_count_of_proper_birational",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.isomorphismOpen",
+   "AlgebraicGeometry.Scheme.Hom.exceptionalCurves",
+   "AlgebraicGeometry.exceptional_curve_count_of_proper_birational"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ExceptionalCurveCount.lean",
+  "statement": "theorem exceptional_curve_count_of_proper_birational (X Y : Scheme.{u}) [IsIntegral X] [IsIntegral Y] [IsNoetherian X] [IsNoetherian Y] (hX : IsRegularScheme X) (hY : IsRegularScheme Y) (hdimX : topologicalKrullDim X = 2) (hdimY : topologicalKrullDim Y = 2) (f : X ⟶ Y) [IsProper f] (hbirational : ∃ (V : X.Opens) (U : Y.Opens), Dense (V : Set X) ∧ Dense (U : Set Y) ∧ ∃ e : V.toScheme ≅ U.toScheme, V.ι ≫ f = e.hom ≫ U.ι) : ((f.isomorphismOpen : Set Y)ᶜ).Finite ∧ (∀ y : Y, y ∉ f.isomorphismOpen → IsClosed ({y} : Set Y) ∧ ringKrullDim (Y.presheaf.stalk y) = 2) ∧ f.exceptionalCurves.Finite ∧ (f.exceptionalCurves = ∅ ↔ IsIso f) ∧ ∀ (y : Y), y ∉ f.isomorphismOpen → ∀ (hy : IsClosed ({y} : Set Y)) (g : X ⟶ (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowup), IsProper g → IsIntegral (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowup → IsRegularScheme (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowup → IsNoetherian (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowup → topologicalKrullDim (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowup = 2 → (∃ (V : X.Opens) (U : (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowup.Opens), Dense (V : Set X) ∧ Dense (U : Set (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowup) ∧ ∃ e : V.toScheme ≅ U.toScheme, V.ι ≫ g = e.hom ≫ U.ι) → g ≫ (Scheme.IdealSheafData.vanishingIdeal ⟨{y}, hy⟩).blowupMap = f → g.exceptionalCurves ⊂ f.exceptionalCurves",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c656f6d87",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Single new module ExceptionalCurveCount; only lean record added to the node (diffed vs side-live). Every clause matches: IsProper/IsIntegral/IsNoetherian/IsRegularScheme/topologicalKrullDim=2; birationality via dense opens with V.ι≫f=e.hom≫U.ι; U_f=sSup{U | IsIso (f∣_U)}; B(f)=closed irreducible, subspace dim 1, f''C={y}; conclusions: finite bad set, bad points closed with stalk dim 2, B(f) finite, B(f)=∅↔IsIso f, and for every bad y with Y'=(vanishingIdeal ⟨{y},hy⟩).blowup, g proper birational, Y' integral regular Noetherian dim 2, g≫blowupMap=f ⇒ B(g)⊂B(f) strictly. Statement verbatim, universes bound, no hollow defs, sorry only, docstrings with Tag 0C5R and the blueprint tag, 9-step proof docstring. No duplicate of U_f/B(f); Mathlib Birational is a different notion. No compile run: no file changed. Pre-existing: def-weil-irreducible-components has no lean record."
+ }
+}

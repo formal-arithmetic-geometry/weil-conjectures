@@ -1,0 +1,235 @@
+{
+ "id": "lem-trf-finite-projective-hom-coherent-model",
+ "kind": "statement",
+ "title": "Finite-projective Hom complex with bounded coherent cohomology",
+ "statement": "Let $B$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Let $E^\\bullet,G^\\bullet$ be cochain complexes of $B$-modules [def-pc-cochain-complex-modules] specialized to the one-point ringed site with structure ring $B$, and let $u\\leq v$ and $a\\leq b$ be integers. Assume $E^i=0$ outside $[u,v]$, each $E^i$ is finitely generated [def-weil-finitely-generated-module] and projective [def-weil-pbc-projective-module], $G^j=0$ outside $[a,b]$, and each $G^j$ is finitely generated over $B$. Let $Q_B$ denote localization into the ordinary derived category $D(B)$ [def-weil-abstract-derived-category]. Put $C^\\bullet=\\operatorname{Hom}_B^\\bullet(E^\\bullet,G^\\bullet)$, the module-valued total Hom complex [def-sc-module-total-hom-complex], so\n$$C^t=\\prod_{i\\in\\mathbf Z}\\operatorname{Hom}_B(E^i,G^{i+t}),\\qquad d_C(f)=d_Gf-(-1)^tfd_E.$$\nThe canonical comparison is an isomorphism\n$$Q_B(C^\\bullet)\\xrightarrow{\\sim}R\\operatorname{Hom}_B(Q_BE^\\bullet,Q_BG^\\bullet)\\quad\\text{in }D(B),$$\nwhere derived Hom is [def-pur-derived-internal-hom] on the one-object ringed site. Every $C^t$ is finitely generated over $B$, $C^t=0$ for $t<a-v$ or $t>b-u$, and every cohomology module $H^t(C^\\bullet)$ is finitely generated over $B$.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZK, lemma-shriek-boundedness, proof: finite-projective Hom computation; more-algebra.tex Tag 0A66, lemma-RHom-out-of-projective."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-cochain-complex-modules",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-affine-projective-complex-derived-hom] with $R=B$, $P^\\bullet=E^\\bullet$ and $L^\\bullet=G^\\bullet$: $E^\\bullet$ is bounded above by $v$ with projective terms, and $G^\\bullet$ is bounded below by $a$. Fix the resolution $\\eta:G^\\bullet\\to I^\\bullet(G)$ used in [def-pur-derived-internal-hom]. The representing comparison is induced by $\\operatorname{Hom}^\\bullet(E,\\eta)$: in degree $t$ it sends $(f_i)_i$ to $(\\eta^{i+t}\\circ f_i)_i$. Both ordinary Hom complexes have the module products and signed differential of [def-sc-module-total-hom-complex], so this is exactly the canonical comparison in the statement. The cited projective-complex Hom computation makes its localization invertible, giving $Q_BC^\\bullet\\simeq R\\operatorname{Hom}_B(Q_BE^\\bullet,Q_BG^\\bullet)$.",
+   "uses": [
+    "lem-sc-affine-projective-complex-derived-hom",
+    "def-sc-module-total-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A66, lemma-RHom-out-of-projective, and its proof; one-point ringed-site specialization."
+   }
+  },
+  {
+   "text": "Fix $i,t$ and choose generators $e_1,\\ldots,e_r$ of $E^i$ [def-weil-finitely-generated-module]. Evaluation $f\\mapsto(f(e_1),\\ldots,f(e_r))$ is a $B$-linear injection $\\operatorname{Hom}_B(E^i,G^{i+t})\\to(G^{i+t})^r$: a map zero on all generators is zero on every linear combination. The target is finite: put each of a finite list of generators of $G^{i+t}$ in each coordinate, with zero in the other coordinates. Its image submodule is finite by [lem-weil-pbc-noetherian-submodule-finite], since $B$ is Noetherian. Lift image generators along the injection; injectivity shows their lifts generate the Hom module. This also covers $r=0$ and a zero target.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, submodule assertion; explicit evaluation-on-generators application."
+   }
+  },
+  {
+   "text": "In degree $t$ every factor with $i\\notin[u,v]$ is zero, so restriction gives $C^t\\cong\\prod_{i=u}^{v}\\operatorname{Hom}_B(E^i,G^{i+t})$, with inverse extension by zero [def-sc-module-total-hom-complex]. Each factor is finite by Step 2; putting its chosen generators into its coordinate gives a finite generating set of this finite product. If $t<a-v$, then $i+t<a$ for every $i\\le v$ in the product; if $t>b-u$, then $i+t>b$ for every $i\\ge u$ in it. All target terms in the respective case vanish, proving $C^t=0$ outside $[a-v,b-u]$.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, lemma-shriek-boundedness, proof: finite-complex calculation; explicit support and generators."
+   }
+  },
+  {
+   "text": "The cycles $Z^t=\\ker(d_C^t)$ are a submodule of the finite $B$-module $C^t$, so they are finite by [lem-weil-pbc-noetherian-submodule-finite]. The cochain identity [def-pc-cochain-complex-modules] gives $\\operatorname{im}(d_C^{t-1})\\subseteq Z^t$. By the cohomology definition [def-weil-abstract-derived-category], $H^t(C^\\bullet)=Z^t/\\operatorname{im}(d_C^{t-1})$ is generated by the images of any finite generating list of $Z^t$ [def-weil-finitely-generated-module]. This proves finite generation for every $t$, including the degrees where $C^t=0$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-pc-cochain-complex-modules",
+    "def-weil-finitely-generated-module",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic; quotient generators applied to cycles modulo boundaries."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-projective-complex-derived-hom",
+  "def-sc-module-total-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/dualizing.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 0A66 (lemma-RHom-out-of-projective); Tag 0BZK (lemma-shriek-boundedness), finite-projective computation in the proof; Tag 00IK (lemma-Noetherian-basic). Evaluation and coordinate generators spell out the implicit finite-module calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring derived Hom from a bounded finite projective complex to a bounded finite module complex has bounded finitely generated cohomology",
+   "results": "8 hits; top results: instHasExtModuleCatOfSmall, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_of_projective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, isZero_Ext_succ_of_projective, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CochainComplex.IsKProjective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat. The signatures give Ext, K-projectivity, Hom-complex definitions or cohomology descriptions, not finite module terms, the stated support interval and finite cohomology together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For bounded complexes E of finite projective modules and G of finite modules the total module Hom complex represents derived Hom and has finite terms and finite homology",
+   "results": "8 hits; top results: instHasExtModuleCatOfSmall, Ext, CategoryTheory.hasExt_of_enoughProjectives, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, isZero_Ext_succ_of_projective, CategoryTheory.ProjectiveResolution.isoExt, CategoryTheory.ProjectiveResolution.extMk_hom, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective. The signatures give Ext, K-projectivity, Hom-complex definitions or cohomology descriptions, not finite module terms, the stated support interval and finite cohomology together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, CochainComplex",
+   "results": "0 hits; top results: none. The signatures give Ext, K-projectivity, Hom-complex definitions or cohomology descriptions, not finite module terms, the stated support interval and finite cohomology together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(homComplex|HomComplex)|HomComplex.*finite|RHom|perfect.*(bounded|finite)",
+   "results": "25 hits; top results: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/Bifunctor.lean. The signatures give Ext, K-projectivity, Hom-complex definitions or cohomology descriptions, not finite module terms, the stated support interval and finite cohomology together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom complex of finite projective and finite module bounded complexes over a Noetherian ring has finite homology",
+   "results": "8 hits; top results: HomologicalComplex.Hom.mk, CochainComplex.HomComplex, CategoryTheory.ProjectiveResolution.hasHomology, HomologicalComplex.Hom, HomologicalComplex.HasHomology, CochainComplex.HomComplex.leftHomologyData, CochainComplex.HomComplex.leftHomologyData', CochainComplex.HomComplex.leftHomologyData'_H_coe. The signatures give Ext, K-projectivity, Hom-complex definitions or cohomology descriptions, not finite module terms, the stated support interval and finite cohomology together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Module\\.Finite|finite_iff|isNoetherian",
+   "results": "0 hits; top results: none. The signatures give Ext, K-projectivity, Hom-complex definitions or cohomology descriptions, not finite module terms, the stated support interval and finite cohomology together.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|isKProjective_of_projective|def HomComplex",
+   "results": "Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180 (bounded model without finite-generation assertion), HomotopyCategory/KProjective.lean:113 (K-projectivity only), HomotopyCategory/HomComplex.lean:566 (additive-group Hom complex, no module finiteness). These are ingredients, not a one-line specialization of this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex.*[Ff]inite|[Ff]inite.*HomComplex|RHom",
+   "results": "25 hits; returned top results: Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean. Read HomComplex.lean:566 (AddCommGrpCat-valued complex), KProjective.lean:113 (bounded-above projective complexes are K-projective), and DerivedCategory/KProjective.lean:69 (Hom cohomology maps bijectively to shifted derived maps). These are ingredients; no hit supplies the full module-valued derived model, finite terms, exact support interval and finite cohomology. If the search returned bifunctor/tensor hits, these likewise do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded total Hom complex of finite projective modules has finitely generated cohomology over a Noetherian ring",
+   "results": "8 hits; returned top results: CochainComplex.HomComplex, CochainComplex.HomComplex.CohomologyClass.mk, CochainComplex.HomComplex.CohomologyClass, CochainComplex.HomComplex.coboundaries, HomologicalComplex.isGrothendieckAbelian, HomologicalComplex.instHasMapProdObjGradedObjectFunctorMapBifunctorXMapBifunctorMapObjπ, CochainComplex.HomComplex_X, CochainComplex.HomComplex.leftHomologyData'_H_coe. Read HomComplex.lean:566 (AddCommGrpCat-valued complex), KProjective.lean:113 (bounded-above projective complexes are K-projective), and DerivedCategory/KProjective.lean:69 (Hom cohomology maps bijectively to shifted derived maps). These are ingredients; no hit supplies the full module-valued derived model, finite terms, exact support interval and finite cohomology. If the search returned bifunctor/tensor hits, these likewise do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, CochainComplex",
+   "results": "0 hits; returned top results: none. Read HomComplex.lean:566 (AddCommGrpCat-valued complex), KProjective.lean:113 (bounded-above projective complexes are K-projective), and DerivedCategory/KProjective.lean:69 (Hom cohomology maps bijectively to shifted derived maps). These are ingredients; no hit supplies the full module-valued derived model, finite terms, exact support interval and finite cohomology. If the search returned bifunctor/tensor hits, these likewise do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total Hom complex from a bounded finite projective complex to a bounded complex of finite modules over a Noetherian ring computes derived Hom and has bounded finite cohomology",
+   "results": "8 hits; returned top results: DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, CochainComplex.isKProjective_of_projective, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, isZero_Ext_succ_of_projective, CochainComplex.IsKProjective, CategoryTheory.hasExt_of_enoughProjectives. Read HomComplex.lean:566 (AddCommGrpCat-valued complex), KProjective.lean:113 (bounded-above projective complexes are K-projective), and DerivedCategory/KProjective.lean:69 (Hom cohomology maps bijectively to shifted derived maps). These are ingredients; no hit supplies the full module-valued derived model, finite terms, exact support interval and finite cohomology. If the search returned bifunctor/tensor hits, these likewise do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def HomComplex|isKProjective_of_projective|finite.*[Hh]omology|[Hh]omology.*finite",
+   "results": "12 hits; returned top results: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean, Mathlib/Algebra/Homology/EulerCharacteristic.lean. Read HomComplex.lean:566 (AddCommGrpCat-valued complex), KProjective.lean:113 (bounded-above projective complexes are K-projective), and DerivedCategory/KProjective.lean:69 (Hom cohomology maps bijectively to shifted derived maps). These are ingredients; no hit supplies the full module-valued derived model, finite terms, exact support interval and finite cohomology. If the search returned bifunctor/tensor hits, these likewise do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom for bounded complexes of finitely generated projective modules is a bounded complex with finite module terms and finite homology",
+   "results": "8 hits; returned top results: Ext, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_of_projective, CochainComplex.IsKProjective, CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.hasExt_of_enoughProjectives, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE. Read HomComplex.lean:566 (AddCommGrpCat-valued complex), KProjective.lean:113 (bounded-above projective complexes are K-projective), and DerivedCategory/KProjective.lean:69 (Hom cohomology maps bijectively to shifted derived maps). These are ingredients; no hit supplies the full module-valued derived model, finite terms, exact support interval and finite cohomology. If the search returned bifunctor/tensor hits, these likewise do not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-upper-shriek-bounded-coherent",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. Bounded-coherence prerequisite: finite-projective Hom computation and finite cohomology (returned upper-shriek proof step 5 and first two sentences of step 6).",
+   "via": [
+    "lem-trf-upper-shriek-bounded-coherent",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-projective-hom-coherent-model",
+  "worker": "stage1",
+  "summary": "Repair of the returned head d9d1a5dc88e against the current live DAG: retained the statement, statement dependencies, four-step route and all search records; re-read all current cited statements and made Step 1 identify the canonical comparison by its degreewise formula for the fixed K-injective resolution. Evaluation and the Noetherian submodule argument give finite Hom terms, finite coordinate generators give the exact support interval, and cycles modulo boundaries give finite cohomology. No new nodes, no Lean writing or compilation.",
+  "blueprint": "lem-trf-local-term-locality proof (1)--(2), existing nearby-cycle/relative-duality prerequisite chain recorded in blueprint.from: the finite-projective Hom computation supporting lem-trf-upper-shriek-bounded-coherent. The chapter/unit route is retained; this split supplies that algebraic prerequisite, not a replacement proof of the local-term theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-projective-complex-derived-hom",
+    "why": "Generic bounded-above-projective/bounded-below derived Hom comparison on the one-point ringed site, exactly the algebraic comparison needed here; this unit has no other general projective Hom comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-projective-complex-derived-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-b49ec58de",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-b49ec58de (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. This is a re-delivery after the 04:14Z landing return (returns/NC.md:76-78: side completion never promoted; L promotes it), which names no mathematical fault. Compared with the prior PASS head d9d1a5dc88e2, only the step-1 text and split_report changed. Statement and stmt_deps are identical to the live and side-live node (status unsplit there), and there are no new nodes. Step 1: lem-sc-affine-projective-complex-derived-hom applies with P=E (bounded above, projective terms) and L=G (bounded below). Its Lean statement gives IsIso of Q.map of Hom(P,η) for every functorial K-injective η, so it is the canonical map, not just an existing iso. The new degreewise formula (f_i)↦(η^{i+t}f_i) matches def-pur-derived-internal-hom, and the total-Hom sign matches def-sc-module-total-hom-complex. Stacks 0A66 (more-algebra.tex:18708) was checked, including its proof. Step 2: evaluation at generators embeds the Hom module into (G)^r, a finite module, and the image is finite by the Noetherian submodule lemma (00IK). Step 3: the bounds check: t<a-v with i≤v gives i+t<a, and t>b-u with i≥u gives i+t>b. Step 4: Z^t is finite and H^t=Z/im is finite. Small cases: B[-v] with B[-a], and B[-u] with B[-b], attain both endpoints; G=Z/4 over Z shows G need not be projective. Source context 0BZK is in dualizing.tex. The citer lem-trf-upper-shriek-bounded-coherent step 3 uses exactly the three clauses. Duplicate candidates lem-trf-finite-module-target-rhom and lem-pc-rhom-strict-perfect-hom differ. No SGA. Accepted tool_use: the off-unit generic comparison lemma. Maintainer note: the refusal is a promotion issue, not a split fault."
+ }
+}

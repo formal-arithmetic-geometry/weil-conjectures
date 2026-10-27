@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-algebra-diagram-derived-comparisons",
+ "kind": "statement",
+ "title": "Descent of normalized restriction and scalar association",
+ "statement": "For exact pullback and scalar restriction on a compatible coefficient square, localize the ordinary restriction square with the specified factorization formula. Exact pullback preserves flat-term K-flat resolving objects and has an ambient tensor isomorphism normalized on two resolving factors. For any normalized scalar presentations on source and target, balanced scalar association descends to an extension isomorphism with exactly the stipulated cochain kappa normalization.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0G7E and 06YU; scalar-unit refinement with sites-modules.tex Tag 03EL; parent proof steps 1–6."
+ },
+ "stmt_deps": [
+  "def-pur-algebra-diagram-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "The exact-functor derived square and its factorization formula localize the ordinary restriction square.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical tensor pullback comparison and exact signed comparison for preservation of the resolving class.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-exact-pullback-signed-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On resolving complexes compose the source counit, exact pullback factorization, cochain scalar association and inverse target counit. Naturality gives an isomorphism on the resolving class. Full faithfulness of the resolving localization descends it to all unbounded objects; cancel the counits to obtain its specified formula.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-derived-exact-square-composition",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-pur-exact-pullback-signed-comparison",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit formalization of the parent scalar/unit refinement of Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with exact geometric inverse image and its tensor comparison preserves scalar extension units",
+   "results": "Ordinary ModuleCat.extendScalars identity and adjunction unit lemmas; no normalized derived ringed-site comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; reuse ordinary adjunction and localization lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived tensor with a module in degree zero and scalar extension units on ringed sites",
+   "results": "PresheafOfModules tensor definitions and SheafOfModules pullback free-module unit formulas; no derived normalized statement.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySquareIso",
+   "results": "Unknown identifier in Mathlib search; this comparison is project-local.",
+   "date": "2026-10-25",
+   "verdict": "Use existing project comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|kFlat.*single.*tensor|ScalarDerivedPresentation",
+   "results": "0 Mathlib hits; project source supplies exact localization and K-flat comparison tools.",
+   "date": "2026-10-25",
+   "verdict": "No direct Mathlib match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramPullbackExtensionCoherence",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof steps 6-7 and 10). Original normalization proof steps 1-2: scalar-unit and tensor pullback comparison.",
+   "via": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramDerivedComparisons",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramDerivedComparisons.lean",
+  "declaration": "CategoryTheory.AlgebraDiagramPullback.extension_descent",
+  "declarations": [
+   "CategoryTheory.AlgebraDiagramPullback.restriction_descent",
+   "CategoryTheory.AlgebraDiagramPullback.ambient_exists",
+   "CategoryTheory.AlgebraDiagramPullback.pullback_resolving",
+   "CategoryTheory.AlgebraDiagramPullback.extension_descent"
+  ],
+  "statement": "theorem extension_descent\n    (f : RingedPullback.{u, u, u, u, u} R S)\n    (k : Comparison.{u, u, u, u, u} f) (d : CoefficientSquare.{u, u, u, u, u} f)\n    (k' : Comparison.{u, u, u, u, u} (changed f d))\n    [HasDerivedCategory.{w} (Modules.{u, u, u} R)]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} S)]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} d.R')]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} d.S')]\n    [ExactPullback f] [ExactPullback (changed f d)]\n    [ExactRestriction d.sourceMap] [ExactRestriction d.targetMap]\n    (source : ScalarDerivedPresentation.{u, w} d.sourceMap)\n    (target : ScalarDerivedPresentation.{u, w} d.targetMap)\n    (hflat : ∀ P : CategoryTheory.CochainPullback.Complex.{u, u, u} R,\n      P.IsKFlatIndependentCoefficients →\n      (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := K) (R := R) (P.X n)) →\n      CochainComplex.IsKFlatIndependentCoefficients ((pull f).obj P)) :\n    ∃ e : ExtensionComparison f d source target,\n      IsNormalizedExtension f k d k' source target e",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e45d3",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T095621-L-3454102",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); AlgebraDiagramPullbackData vs clone's removed block (verbatim apart from dropped proof-only imports, one docstring line and a local instance attribute); ambient_balancing vs Coherence.tensor_coherence with pinned normalizations; 12 node lean.statement vs Lean files; delivered modules + importer TowerChernPullback compiled in /tmp sandbox (exit 0); #print axioms on all proved constituents"
+ }
+}

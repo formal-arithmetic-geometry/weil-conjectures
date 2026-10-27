@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-space-derived-coherator-bound",
+ "kind": "statement",
+ "title": "Uniform affine-hypercohomology bound for the space derived quasi-coherator",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and quasi-separated: it admits a surjective etale map from a quasi-compact scheme, and $U\\times_X V$ is quasi-compact for every pair of affine etale scheme charts $U,V\\to X$ [lem-trf-space-fibre-products-etale-covers]. Use the small etale structure sheaf and the equivalent small ringed model [def-sfb-space-small-ringed-model], module sheaves [def-weil-sheaf-of-modules-category], and the unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. Let $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be its full triangulated subcategory of objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Let $DQ_X$ be the right adjoint of [lem-sfb-space-derived-coherator-adjunction]. For an affine etale scheme $u:U\\to X$ and $E\\in D(\\mathcal O_X)$, write $H^i(U,E)=H^i(R\\Gamma(U,E))$, where $R\\Gamma(U,-)$ is derived evaluation on the corresponding object of the small etale ringed site, computed by termwise sections of a K-injective resolution and forgetting the section-ring action [def-pur-kinjective-complex]. There is an integer $N\\geq0$, depending only on $X$, such that for all integers $a\\leq b$ and every $E\\in D(\\mathcal O_X)$ the following implication holds: if $H^i(U,E)=0$ for every affine etale $U\\to X$ and every $i\\notin[a,b]$, then $$H^i(DQ_XE)=0\\quad\\text{for every }i\\notin[a,b+N].$$ The conclusion concerns cohomology sheaves. No quasi-coherence or boundedness of $E$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CSS (lemma-boundedness-better-coherator)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-small-ringed-model",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-derived-coherator-adjunction",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "For each qcqs etale algebraic space $W\\to X$, let $P(W)$ assert the stated uniform implication for $DQ_W$, with one $N_W\\geq0$ for all $a\\leq b$ and $E$. This property is invariant under isomorphism. Apply [lem-sfb-space-qcqs-distinguished-square-induction]: it remains to prove the affine case and closure under its elementary distinguished squares. All smaller vertices in that principle are qcqs, so their coherators exist by [lem-sfb-space-derived-coherator-adjunction].",
+   "uses": [
+    "lem-sfb-space-qcqs-distinguished-square-induction",
+    "lem-sfb-space-derived-coherator-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CSS (lemma-boundedness-better-coherator), proof."
+   }
+  },
+  {
+   "text": "If $W=\\operatorname{Spec}A$ is affine, its identity is one of the affine etale tests. Thus $R\\Gamma(W,E)$ has cohomology only in $[a,b]$. By [lem-sfb-space-affine-coherator-formula], $DQ_WE\\cong a_A R\\Gamma(W,E)$. The cohomology isomorphisms of [lem-sfb-affine-etale-derived-module-realization] give $H^i(DQ_WE)\\cong a_A H^i(R\\Gamma(W,E))$. This vanishes outside $[a,b]$, so take $N_W=0$, including the empty affine scheme.",
+   "uses": [
+    "lem-sfb-space-affine-coherator-formula",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CSS (lemma-boundedness-better-coherator), proof."
+   }
+  },
+  {
+   "text": "Consider a square $(U\\subset W,V\\to W)$ of the induction, put $T=U\\times_WV$, and assume $P(U),P(V),P(T)$. For $A=U,V,T$, restriction is exact slice restriction by [lem-sfb-space-derived-etale-chart-calculus]. It preserves K-injectives: the exact left adjoint of [lem-weil-pbc-ringed-sheaf-slice-adjunction] takes any acyclic complex $C$ to an acyclic complex, so every map $C\\to I|_A$ is null-homotopic by adjunction and [def-pur-kinjective-complex]. For any affine etale $B\\to A$, sections of $I|_A$ on $B$ equal sections of $I$ on the composite $B\\to W$. Hence $H^i(B,E|_A)=H^i(B,E)$, and $E|_A$ has the required test bounds.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open) and 0D6F (lemma-unbounded-cohomology-of-open), their adjunction and sections proofs."
+   }
+  },
+  {
+   "text": "By the three inductive hypotheses, $Q_A=DQ_A(E|_A)$ has quasi-coherent cohomology only in $[a,b+N_A]$. The maps $j_A:A\\to W$ are qcqs by [lem-sfb-space-qcqs-permanence]. As $W$ is quasi-compact, [lem-sfb-space-derived-pushforward-upper-bound] supplies $c_A\\geq1$ independent of $E,a,b$ such that $B_A=Rj_{A,*}Q_A$ vanishes in degrees $i\\geq b+N_A+c_A$. The exact restriction and derived adjunction of [lem-sfb-space-derived-etale-chart-calculus], with clause (1) of [lem-pur-exact-derived-adjunction-bounds], also give $H^i(B_A)=0$ for $i<a$.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-pur-exact-derived-adjunction-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CSS (lemma-boundedness-better-coherator), proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-coherator-distinguished-square-triangle] and the cohomology sequence of [lem-sf-derived-homology-long-exact]. Its segment is $H^{i-1}(B_T)\\to H^i(DQ_WE)\\to H^i(B_U)\\oplus H^i(B_V)$. Put $M=\\max_{A=U,V,T}(N_A+c_A-1)\\geq0$. All $B_A$ vanish outside $[a,b+M]$. If $i<a$, both ends of this segment vanish; if $i>b+M+1$, both ends again vanish. Thus $N_W=M+1$ works. It depends only on the chosen square and its three constants, not on $a,b,E$.",
+   "uses": [
+    "lem-sfb-space-coherator-distinguished-square-triangle",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CSS (lemma-boundedness-better-coherator), proof."
+   }
+  },
+  {
+   "text": "The affine and gluing conditions are now established. The induction principle [lem-sfb-space-qcqs-distinguished-square-induction] gives $P(X)$, which is exactly the assertion. Every constructed constant is nonnegative, and all restrictions and the triangle allowed arbitrary unbounded $E$.",
+   "uses": [
+    "lem-sfb-space-qcqs-distinguished-square-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CSS (lemma-boundedness-better-coherator), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-kinjective-complex",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-affine-coherator-formula",
+  "lem-sfb-space-coherator-distinguished-square-triangle",
+  "lem-sfb-space-derived-coherator-adjunction",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-derived-pushforward-upper-bound",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CSS (lemma-boundedness-better-coherator), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherator|cohomologicalAmplitude|quasi.?coherent.*bound",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or describe cohomology bounds of an object already known to be bounded; none gives uniform amplitude for the derived quasi-coherator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite cohomological amplitude of the right adjoint to quasi coherent derived inclusion for a qcqs algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or describe cohomology bounds of an object already known to be bounded; none gives uniform amplitude for the derived quasi-coherator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform boundedness of the derived quasi coherator: affine etale hypercohomology in degrees a to b implies cohomology sheaves of DQ in degrees a to b plus N",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"CochainComplex.IsKInjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A cochain complex $ X $ in an abelian category $ \\\\mathcal{C} $ is K-injective if for every acyclic cochain complex $ A $, every morphism $ A \\\\to X $ is null-homotopic. This characterizes complexes tha\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or describe cohomology bounds of an object already known to be bounded; none gives uniform amplitude for the derived quasi-coherator."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological bound for derived quasi coherator on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [X.IsStrictlyLE n] :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyLE n) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y),\\n    f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or describe cohomology bounds of an object already known to be bounded; none gives uniform amplitude for the derived quasi-coherator."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherator\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define quasi-coherence or describe cohomology bounds of an object already known to be bounded; none gives uniform amplitude for the derived quasi-coherator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform affine etale hypercohomology bounds imply a uniform cohomology bound for the derived quasi coherator of a quasi compact quasi separated algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite amplitude of the right adjoint to inclusion of the derived category with quasi coherent cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coherator\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|quasi.?coherent.*amplitude|boundedness.*coher",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform boundedness of the derived quasi coherator on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X Y : Scheme} [NoetherianSpace X] (f : X ⟶ Y) : QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizer\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": HasCoequalizer f g\", \"doc\": \"The category of locally ringed spaces has coequalizers for any pair of morphisms $ f $ and $ g $. This means that given two morphisms between locally ringed spaces, there exists a coequalizing object \"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q (C := C)).IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [QuasiCompact f] : QuasiCompact (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, then its restriction to any open subset $ V $ of $ Y $ remains quasi-compact. Specifically, the morphism $ f|_V: f^{-1}(V) \\to V $ inherits the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern ordinary quasi-coherent sheaves, scheme global sections, general derived truncations or sheaf Mayer–Vietoris; none states this small-etale derived coherator formula, triangle or uniform bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-derived-limit",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited coherent-family/Quot effectivity prerequisite in proof (3) of det-thm-sf-ctf-stability-direct-images; Stacks 0CST: Tag 0CSS (lemma-boundedness-better-coherator).",
+   "via": [
+    "lem-sfb-space-inverse-module-derived-limit",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-derived-coherator-bound",
+  "worker": "stage1",
+  "summary": "Followed Tag 0CSS by elementary-distinguished-square induction. Reused the existing induction, chart calculus, qcqs permanence and upper-bound nodes. Added only the affine DQ formula and the coherator descent triangle as statement-only nodes. Verified restriction of the affine tests explicitly via K-injectives, lower bounds by exact-pullback adjunction, and the overlap shift in the final long exact sequence. The item statement is unchanged.",
+  "blueprint": "Inherited coherent-family/Quot effectivity prerequisite in proof (3) of det-thm-sf-ctf-stability-direct-images; Tag 0CSS (lemma-boundedness-better-coherator), the affine case and distinguished-square boundedness step of its inherited Tag 0CSS prerequisite. The latest blueprint direct-image paragraph (3) is retained as provenance; this is a supporting coherent-effectivity lemma, not a replacement for the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic exact slice-extension adjunction, used only to check K-injective restriction of the affine tests; no node of this unit states the exact left adjoint."
+   },
+   {
+    "node": "lem-pur-exact-derived-adjunction-bounds",
+    "why": "Only clause (1), the generic lower-bound consequence of an exact left adjoint; the unit upper-bound node supplies no lower bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-pur-exact-derived-adjunction-bounds"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-10575476d",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-10575476d (reviewer sub-agent of L); spot-checked: I read Stacks spaces-perfect 0CSS (l.4570-4618) in full, along with 08H0, 0CR4, 0CR5 and 0CR6. The item statement matches 0CSS hypothesis by hypothesis: qcqs X, one N(X), the affine-étale H^i tests, and a conclusion about cohomology sheaves. Step 1: the induction node's (b) puts U, V and U×_W V in the domain of P, so all three are qcqs and have DQ by the adjunction node. Step 2: the identity is one of the tests, so the new affine formula plus H^i(a_A E)≅a_A H^i(E) give N=0. Step 3: restriction is exact slice restriction, and the exact j_! shows restriction keeps K-injectives; this is elementary. Step 4: qcqs permanence gives j_A qcqs and W is qc, so the upper-bound node (N≥1, for f qcqs with qc target) applies; clause (1) of lem-pur-exact-derived-adjunction-bounds gives the lower bound a. Step 5: the long exact sequence segment H^{i-1}(B_T)→H^i(DQ E)→H^i(B_U)⊕H^i(B_V) gives N_W=M+1, and I checked the arithmetic. New nodes: the affine formula I_T DQ_T≅I_T a_A RΓ is true, since a_A is exact and left adjoint to Γ and a_A RΓ is the right adjoint by uniqueness. I tested it on O_T, 0, the empty T and a non-quasi-coherent E. The coherator triangle is 0CR6 (08GW with 0CR5 three times); I tested it with U=W and with T empty. Neither node restates a clause of the item. Duplicate search over 08H0, 0CR4-6, 08GW, coherator, DQ_ and distinguished-square triangles found no duplicate. lem-sfb-space-relative-mv-exchange-triangles is the 08GW input to the triangle, without DQ, so it is not a duplicate. I accept the two declared tool_uses: the slice adjunction from pbc and clause (1) of the pur adjunction bounds, both generic. All batch-5 flags reach sec-trace-formula only through the general definitions def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors. Coherator bounds are not part of the trace formula or Poincare duality, so the flags are generic. No SGA is used. No changes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedCoheratorBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.derivedCoherator_affineHypercohomology_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedCoheratorBound.lean",
+  "statement": "theorem derivedCoherator_affineHypercohomology_bound {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : ∃ (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → IsEtale a → IsEtale b → ∃ W : Over S, Nonempty (yoneda.obj W ≅ Limits.pullback a b) ∧ CompactSpace W.left) (DQ : X.DerivedModules ⥤ X.DerivedQCoh) (adj : X.derivedQCohProperty.ι ⊣ DQ) : ∃ N : ℤ, 0 ≤ N ∧ ∀ (a b : ℤ), a ≤ b → ∀ (E : X.DerivedModules) (I : CochainComplex X.SmallModules ℤ), I.IsKInjective → Nonempty (DerivedCategory.Q.obj I ≅ E) → (∀ (U : X.SmallEtaleModel) (i : ℤ), (i < a ∨ b < i) → IsZero ((((SheafOfModules.toSheaf X.smallStructureRings ⋙ sheafToPresheaf X.smallEtaleModelTopology AddCommGrpCat.{u} ⋙ (evaluation X.SmallEtaleModelᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapHomologicalComplex (ComplexShape.up ℤ)).obj I).homology i)) → ∀ i : ℤ, (i < a ∨ b + N < i) → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj (DQ.obj E).obj)",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Affine hypercohomology is expanded directly as homology of termwise abelian sections of any K-injective representative of E on the existing small affine etale model; every affine chart is isomorphic to a chart in this skeleton. The conclusion uses cohomology sheaves of the underlying existing D_QCoh object. No new notion or additional boundedness hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-942d5c53d",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Lean statement matches the node and Stacks 0CSS (l.4570-4580) clause by clause. hqc/hqs, universes u w and the HasDerivedCategory.{w} instance are verbatim from exists_derivedCoheratorAdjunction. DQ is any right adjoint of derivedQCohProperty.ι (unique up to iso). ∃ N≥0 comes before a≤b, E and degrees. H^i(U,E) = homology of termwise abelian sections of any K-injective representative (exists; homotopy-invariant). U ranges over SmallEtaleModel = SmallModel of AffineEtaleCharts: exactly the affine étale charts up to iso. Conclusion is cohomology sheaves of DQ E for i<a or i>b+N. Only the item's lean field is new; all 10 stmt_dep records equal side-live; no module or lean record for the item in live; no new nodes. Statement deps imported publicly, 5 existing proof-dep modules as plain imports; docstrings carry source, blueprint id and the 6 proof steps; lines ≤100; statement verbatim; sorry only. Edge cases empty X, a=b, E=0, N=0 covered. No compile (no file changed)."
+ }
+}

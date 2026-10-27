@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-relative-component-lift-pullback-space",
+ "kind": "statement",
+ "title": "The relative component lift is the topological fibre product with the pulled-back structure sheaf",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme], let $P=\\pi_0(|T|)$ be its space of connected components with the quotient topology [lem-pe-spectral-components-profinite], and use the universes of [def-weil-size-convention] and the small pro-etale site $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. For a continuous map $E\\to P$ of profinite spaces, let $T\\times_P E$ be the relative component lift, the affine-transition inverse limit of the finite clopen stages [lem-zl-component-relative-profinite-site], and let $T_E$ be the affine ind-etale $T$-scheme with underlying locally ringed space $|T|\\times_P E$ and inverse-image structure sheaf from $T$ [lem-zl-affine-component-site-projection]. Then there is an isomorphism $T\\times_P E\\cong T_E$ of $T$-schemes, natural in $E\\to P$. Consequently: the underlying space of $T\\times_P E$ is the topological fibre product $|T|\\times_P E$ (subspace topology of $|T|\\times E$); its structure sheaf is the inverse image of $\\mathcal O_T$, so every stalk map of the structure morphism $T\\times_P E\\to T$ is an isomorphism $\\mathcal O_{T,x}\\to\\mathcal O_{T\\times_P E,(x,s)}$; for a map $a:E\\to E'$ over $P$ the induced morphism $T\\times_P E\\to T\\times_P E'$ has underlying map $(x,s)\\mapsto(x,a(s))$; and the second projection $|T|\\times_P E\\to E$ induces a homeomorphism $\\pi_0(|T\\times_P E|)\\cong E$. Empty $E$ and empty $T$ are allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.2.8, the more precise statement following it (S x_{pi0(X)} X is the fibre product of topological spaces ringed by the pullback of O_X) and its proof (B = colim B_i over finite-stage presentations T_i)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-zl-component-relative-profinite-site",
+  "lem-zl-affine-component-site-projection"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing component_mapping_property to the affine component-site functor, using its stated pullback homeomorphisms and stalk isomorphisms. This supplies the universal mapping property for arbitrary schemes W over T without repeating its proof.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "document",
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8, its more precise statement, and the proof by relative finite clopen presentations (printed p. 10)."
+   }
+  },
+  {
+   "text": "The relative construction already states this same mapping property for its selected coordinate. Apply the two mapping properties to each other’s coordinates to obtain maps in both directions. The uniqueness clauses make their composites identities. For each E → E′, both composites have the same E′-coordinate by coordinate naturality in the two construction theorems; uniqueness proves naturality of the isomorphism. Thus no new finite-stage or limit comparison is necessary here: it is already supplied by the relative construction’s public mapping property.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "document",
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8, its more precise statement, and the proof by relative finite clopen presentations (printed p. 10)."
+   }
+  },
+  {
+   "text": "Compose the scheme isomorphism’s underlying homeomorphism with the affine model’s pullback homeomorphism. The slice-morphism equation gives preservation of the first coordinate, and the defining lift equation gives preservation of the second. The structure morphism factors as the comparison isomorphism followed by the model’s structure morphism, hence has isomorphic stalk maps. The two coordinate identities and naturality of the relative coordinate prove the formula (x,s) ↦ (x,a(s)).",
+   "uses": [
+    "lem-zl-affine-component-site-projection",
+    "lem-zl-component-relative-profinite-site"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "document",
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8, its more precise statement, and the proof by relative finite clopen presentations (printed p. 10)."
+   }
+  },
+  {
+   "text": "For any scheme morphism f with isomorphic stalk maps, let b be the actual sheaf-adjunction transpose of f.c. The inverse-image stalk isomorphism c has its prescribed unit formula on germs. The equation unit ≫ f_*b = f.c and the germ formula imply c.hom ≫ stalk(b) = f.stalkMap at each point. Cancelling c shows stalk(b) is an isomorphism; the stalk criterion for sheaf morphisms makes b an isomorphism. Apply this to each relative structure morphism.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "document",
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8, its more precise statement, and the proof by relative finite clopen presentations (printed p. 10)."
+   }
+  },
+  {
+   "text": "The comparison homeomorphism induces a homeomorphism on connected-component quotients: use its continuous map and inverse on representatives. Compose with the affine model’s stated component homeomorphism. Its value on the class of x is the model coordinate of the comparison image, hence the second coordinate of the transported pullback homeomorphism. All arguments use universally quantified points and quotient representatives, and require no nonempty space.",
+   "uses": [
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "document",
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8, its more precise statement, and the proof by relative finite clopen presentations (printed p. 10)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-zl-affine-component-site-projection",
+  "lem-zl-component-relative-profinite-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.2.8, more precise right-adjoint characterization, printed p. 10; use the already-stated universal mapping property of the relative construction instead of repeating its finite-stage proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents.*(Profinite|pullback)|pi0.*Spec  (Mathlib, --include=*.lean); connectedComponents in Mathlib/AlgebraicGeometry",
+   "results": "0 hits for the first pattern; connectedComponents occurs only in AlgebraicGeometry/Geometrically/Connected.lean and AlgebraicGeometry/Sites/ConstantSheaf.lean, neither of which constructs a component pullback",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative profinite pullback of an affine scheme over its connected components is the topological fibre product with inverse image structure sheaf",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ",
+   "date": "2026-10-22",
+   "verdict": "no match: the affine scheme pullbacks and affine-transition-limit hits do not compare the relative component lift with its locally ringed topological pullback; CompHaus.toProfinite_obj' concerns component quotients of compact Hausdorff spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "ConnectedComponents, Profinite",
+   "results": "Hits: CompHaus.toProfinite_obj'",
+   "date": "2026-10-22",
+   "verdict": "no match: the affine scheme pullbacks and affine-transition-limit hits do not compare the relative component lift with its locally ringed topological pullback; CompHaus.toProfinite_obj' concerns component quotients of compact Hausdorff spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents.*(Profinite|pullback)|component.*(Pullback|pullback)|componentLift",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the affine scheme pullbacks and affine-transition-limit hits do not compare the relative component lift with its locally ringed topological pullback; CompHaus.toProfinite_obj' concerns component quotients of compact Hausdorff spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme associated to a profinite set over connected components is an inverse limit of finite clopen schemes and has unchanged local rings",
+   "results": "Hits: CompHaus.toProfinite_obj', Profinite.isoindexConeLift, Profinite.isIso_indexCone_lift, AlgebraicGeometry.pointsPi_surjective, LightProfinite.component, instTotallyDisconnectedSpaceCarrierToTopTrueObjProfiniteCompHausProfiniteToCompHaus, LightProfinite.instTotallyDisconnectedSpaceCarrierToTopTruePtCompHausLimitConeCompLightProfiniteToCompHaus, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: the affine scheme pullbacks and affine-transition-limit hits do not compare the relative component lift with its locally ringed topological pullback; CompHaus.toProfinite_obj' concerns component quotients of compact Hausdorff spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative profinite component lift of an affine scheme has topological fibre product and pulled back structure sheaf",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, Profinite.lift",
+   "date": "2026-10-22",
+   "verdict": "no match: the affine scheme pullbacks and affine-transition-limit hits do not compare the relative component lift with its locally ringed topological pullback; CompHaus.toProfinite_obj' concerns component quotients of compact Hausdorff spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-wstrict-common-component-hypercovers",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Bhatt–Scholze Lemma 2.2.8, its more precise statement and its proof (the colimit B=colim B_i over finite-stage presentations); needed by step 4 of lem-sfb-wstrict-common-component-hypercovers, under paragraph (3) open direct image of the via chain.",
+   "via": [
+    "lem-sfb-wstrict-common-component-hypercovers",
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-relative-component-lift-pullback-space",
+  "worker": "stage1",
+  "summary": "NY checked Bhatt–Scholze Lemma 2.2.8 and every cited statement. The original statement is unchanged. The proof compares the finite clopen stages by unique stalk-isomorphism lifts, proves the full scheme limit universal property using topological preservation of profinite limits, and obtains the natural comparison and all consequences. One new generic Mathlib leaf; no new geometric assertion.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs ancestor confirms this). Steps realize the Bhatt–Scholze finite-stage comparison required by step 4 of lem-sfb-wstrict-common-component-hypercovers under paragraph (3), open direct image, of the existing via chain. Whole-blueprint searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-affine-component-site-projection",
+    "why": "Generic affine component-test construction supplies its locally ringed topological model and component homeomorphism; the unit has no competing construction."
+   },
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic relative component-test construction supplies the finite clopen stages and their defining scheme limit; the unit has no such construction."
+   },
+   {
+    "node": "new-lem-zl-stalk-isomorphism-lifting",
+    "why": "Generic scheme lifting along a stalkwise isomorphism converts specified continuous maps into unique scheme maps; the unit has no such lifting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "The generic topological inverse-image stalk theorem, including the germ formula for commutative rings, identifies the structural stalk maps; it applies to the Zariski topological spaces, not to geometric pro-etale stalks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-affine-component-site-projection",
+  "lem-zl-component-relative-profinite-site",
+  "lem-weil-pbc-topological-inverse-image-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NY-88cb14310",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-88cb14310 (reviewer sub-agent of L); spot-checked: Read Bhatt–Scholze Lemma 2.2.8 (printed p. 10), its more precise statement and its finite-stage proof; the item states that comparison. The item's statement and stmt_deps are unchanged from the base. It is still unsplit in live and side-live and has no repair note, so it is not superseded. No SGA source is cited. It gives the parent (wstrict-common-component-hypercovers step 4) every fact that step uses. Steps 1–4 are correct against the statements of the cited nodes. Step 1: lifting along stalk isomorphisms (true for any W, since O_X = f^{-1}O_Y), with stalk isomorphisms from the unit germ formula of the inverse-image stalk node. Step 2: the finite stages Z_i are homeomorphic to |T|×_P E_i = ⊔_a (q_i c)^{-1}(f_i(a)), and transitions are fixed by lifting uniqueness. Step 3: the TopCat limit for non-Hausdorff |W|; 'over P' is checked through one index of the nonempty cofiltered category. Step 4: the two limit properties give θ_E; naturality via target-stage projections; independence of the presentation is the case a = id. Fault C3 in step 5: it said the cited construction identifies π_0(T_E) with E by the second projection, but the cited statement only says 'canonically E'; that description is in the cited node's proof. FIX: step 5 now proves it: q is continuous and surjective, its fibres are components of |T|, connected subsets map to points of E, giving a continuous bijection from compact π_0 to Hausdorff E, hence a homeomorphism. Uses unchanged. New node lem-sfb-profinite-topological-limits is a valid Mathlib leaf: Profinite.toTopCat.createsLimits (Basic.lean:214–215) plus preservesLimits_of_createsLimits_and_hasLimits (Creates.lean:376–378) and TopCat.topCat_hasLimits (TopCat/Limits/Basic.lean:178–179), all read. No duplicate found among the mathlib nodes mentioning Profinite or in live, and it does not restate a clause of the item. The four declared off-unit tool uses (affine/relative component sites, stalk-isomorphism lifting, inverse-image stalk) are accepted as generic black boxes. Edge cases checked: E empty, T empty, a point, the empty diagram.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeComponentLiftPullbackSpace",
+  "declaration": "AlgebraicGeometry.ProEtale.relative_component_lift_pullback_space",
+  "file": "lean/Sheaf/Paper/RelativeComponentLiftPullbackSpace.lean",
+  "statement": "theorem relative_component_lift_pullback_space (T : Scheme.{u}) [IsAffine T] : ∃ θ : ((component_relative_profinite_site T).choose ⋙ Scheme.ProEt.forget T) ≅ ((Scheme.ProEt.affine_component_site_projection T).choose ⋙ Scheme.ProEt.forget T), (∀ (E : Over (affineComponentSpace T)) (x : ((component_relative_profinite_site T).choose.obj E).left), (Scheme.ProEt.affine_component_site_projection T).choose_spec.choose E ((θ.hom.app E).left x) = (component_relative_profinite_site T).choose_spec.2.1.choose E x) ∧ ∃ H : ∀ E : Over (affineComponentSpace T), ((component_relative_profinite_site T).choose.obj E).left ≃ₜ {z : T × E.left | ConnectedComponents.mk z.1 = E.hom z.2}, (∀ (E : Over (affineComponentSpace T)) (x : ((component_relative_profinite_site T).choose.obj E).left), (H E x).val.1 = ((component_relative_profinite_site T).choose.obj E).hom x ∧ (H E x).val.2 = (component_relative_profinite_site T).choose_spec.2.1.choose E x) ∧ (∀ E : Over (affineComponentSpace T), IsIso (((TopCat.Sheaf.pullbackPushforwardAdjunction CommRingCat.{u} ((component_relative_profinite_site T).choose.obj E).hom.base).homEquiv T.sheaf ((component_relative_profinite_site T).choose.obj E).left.sheaf).symm ⟨((component_relative_profinite_site T).choose.obj E).hom.c⟩)) ∧ (∀ (E : Over (affineComponentSpace T)) (x : ((component_relative_profinite_site T).choose.obj E).left), IsIso (((component_relative_profinite_site T).choose.obj E).hom.stalkMap x)) ∧ (∀ (E E' : Over (affineComponentSpace T)) (a : E ⟶ E') (x : ((component_relative_profinite_site T).choose.obj E).left), (H E' (((component_relative_profinite_site T).choose.map a).left x)).val = ((H E x).val.1, a.left (H E x).val.2)) ∧ ∀ E : Over (affineComponentSpace T), ∃ e : ConnectedComponents ((component_relative_profinite_site T).choose.obj E).left ≃ₜ E.left, ∀ x : ((component_relative_profinite_site T).choose.obj E).left, e (ConnectedComponents.mk x) = (H E x).val.2",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e35239334",
+  "group": "N5",
+  "result": "pass",
+  "note": "Item lem-sfb-relative-component-lift-pullback-space: every node clause is rendered (natural iso in Over T, pinned by the profinite coordinate r∘θ=p; homeomorphism onto the subtype {z : T×E | mk z.1 = E.hom z.2} with coordinates (structure map, p); IsIso of the pullbackPushforwardAdjunction adjunct of hom.c, i.e. the canonical inverse-image sheaf map; stalkMap IsIso; map formula (x,s)↦(x,a s); π0 ≅ E normalized by e(mk x)=p x). The only hypothesis is IsAffine T, single universe u, empty E/T covered. Each clause was checked true from the two construction-theorem signatures (∃! universal property of F, stalk-iso lifting into U). lean.statement verbatim; node differs from live/side-live only in lean; stmt_deps cover all used decls (affineComponentSpace = actual π0); no defs, sorry only, docstrings and 5 proof steps present, lines ≤100, autoImplicit false; proof-only imports = proof_dep modules; no duplicate (relativeComponentLift sits in a citing module). No compile (no file changed). Advisory: Profinite.Basic import possibly transitive."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261023T131513-L-2115634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -73,16 +73,20 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "lean": {
-  "module": "Sheaf.Paper.SignedLineScalarPullbackSquare",
+  "module": "Sheaf.Paper.SignedLinePullbackNormalization",
   "declaration": "SheafOfModules.SignedLinePullbackNormalized",
   "declarations": [
    "SheafOfModules.SignedLinePullbackNormalized",
@@ -93,7 +97,8 @@
   "by": "NL",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Definition ownership only: exactly the existing published definitions listed here, with their actual data; no theorem or existence assertion and no new module. The containing theorem module is reused unchanged."
+  "note": "D6 relocation only: both predicate definitions and signatures remain verbatim, publicly re-exported by the original module to avoid an import cycle for the separate existence and naturality lemmas.",
+  "file": "lean/Sheaf/Paper/SignedLinePullbackNormalization.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -110,5 +115,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Re-delivery repairs the f56b3604 RETURN. H2: theorem stmt_deps replaced by three new existing:true def nodes (signedLinePower/SignedLineComparisonNormalized; SignedLinePullbackNormalized/SignedLineScalarPullbackSquare; siteTensorRightIso/tensorRightPresentation/siteSheafTensorRightIso), declarations and verbatim statements checked against the live modules, no existing def owner; plus def-sf-ringed-kflat-tensor-representative-data, def-pc-flat-sheaf-modules, def-pc-kflat-complex, def-sp-scalar-tensor-comparison-data, all used. H3: DerivedLineConstraints pins the derived right unitor, positive associator and evaluation via c (ResolvingNormalization) and pure-tensor ordinary maps, so they are unique and exist through Q-localization; DerivedFamilyCoherence states eta_0 vs unitors, eta_{m+1} = eta_1 . (eta_m tensor 1) . product, and F(ev) = eta_m . (eta_{-m} tensor 1) . ev for every X and m>=1; endpoints and indices checked, not tautological. Statement/proof/proof_deps unchanged vs live; lean.statement verbatim; one sorry; no hollow defs; docstrings OK. Advisory: owners of ringedSitePullback*, module_pushforward_isRightAdjoint_of_universes, changeOfRingsOfUniverses, siteSheafTensor* not in stmt_deps (as accepted before); shared C/D universes; compile 49.6/46.6 s near limit; parallel Q39 lineage. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-929d5",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T184859-L-3243522",
+  "kind": "interface",
+  "note": "independent cc review: relocated predicates vs clones/live item module (byte-identical); item proof + two split sorry statements vs nodes lem-pur-signed-line-scalar-pullback-square, lem-pur-normalized-signed-line-pullback-exists, lem-pur-signed-line-scalar-pullback-naturality; direct importers SignedLineDerivedBaseChange and IntegralTwistSchemeCompatibility compiled against the delivered modules"
  }
 }

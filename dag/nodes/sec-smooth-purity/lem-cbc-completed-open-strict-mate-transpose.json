@@ -1,0 +1,150 @@
+{
+ "id": "lem-cbc-completed-open-strict-mate-transpose",
+ "kind": "statement",
+ "title": "Unit transpose of the normalized completed-ring strict open exchange",
+ "statement": "Let d be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], and let (v:U'→U,j':U'→T',j:U→T,g:T'→T) be a cartesian open square [def-cbc-open-immersion-square]. Write R_V for the strict derived quotient reduction functor. For any K in D(Mod(d.completedRing U)), form omega_K as completedTowerPullback(g)(cbcRealizationReduction(j,K)) followed by cbcReductionStrictExchange(K) [def-cbc-completed-strict-open-exchange, def-cbc-completed-open-scalar-quotient-interface]. Under the actual open adjunction cbcRealizationTowerAdj(j'), the image of omega_K inverse is exactly CompletedOpenFiniteTranspose.unitArrow(K) [lem-cbc-completed-open-finite-transpose-coherence]. Explicitly this is the composite from completedTowerPullback(v)(R_U K) obtained by: the counit-normalized cbcDatumTowerTransport at v [def-cbc-completed-pullback-counit-transport]; v-pullback of the tower-open unit at R_U K; the inverse ringed pullback-square compositor at J_j(R_U K); and j'-pullback of g-pullback of the inverse quotient/open comparison followed by the inverse transport at g. This is an equality of morphisms in the derived category of strict completed-ring towers before evaluation, without completeness or quasi-compactness assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, lemma-extension-by-zero, explicit Hom correspondence; strict derived descent refinement of the finite-exchange construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-open-immersion-square",
+  "def-cbc-completed-strict-open-exchange",
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "def-cbc-completed-pullback-counit-transport",
+  "lem-cbc-completed-open-finite-transpose-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Use the section formula defining cbcRightExchange and the explicit open adjunction of Tag 03DI. Transposition under the composite module adjunctions sends its inverse conjugate to pullback of the open unit followed by the inverse-image square compositor. This identifies the ordinary inverse-exchange map, including its coefficient action, not merely its isomorphism class.",
+   "uses": [
+    "def-cbc-completed-strict-open-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, explicit Hom correspondence; strict derived descent refinement of the finite-exchange construction."
+   }
+  },
+  {
+   "text": "Apply the calculation simultaneously at every tower index and cochain degree. The section maps commute with transitions and differentials. Descend along the universal pullback counits using the representative normalization of completedRingStrictFiniteExchange. Uniqueness fixes cbcStrictExchange.",
+   "uses": [
+    "lem-cbc-completed-ring-strict-finite-exchange",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, explicit Hom correspondence; strict derived descent refinement of the finite-exchange construction."
+   }
+  },
+  {
+   "text": "Transport both pullback presentations by cbcDatumTowerTransport. Naturality of adjunction transposition moves the inverse source quotient/open map through the right adjoint, producing precisely the final factor in unitArrow. The inverse source quotient/open comparison is cbcRealizationReductionInv by its definition; the other factors are the unit and square compositor from the preceding calculation.",
+   "uses": [
+    "def-cbc-completed-pullback-counit-transport",
+    "def-cbc-completed-open-scalar-quotient-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, explicit Hom correspondence; strict derived descent refinement of the finite-exchange construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-completed-strict-open-exchange",
+  "lem-cbc-completed-ring-strict-finite-exchange",
+  "lem-sp-exact-derived-transformation-pasting",
+  "def-cbc-completed-pullback-counit-transport",
+  "def-cbc-completed-open-scalar-quotient-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, lemma-extension-by-zero, explicit Hom correspondence; strict derived descent refinement of the finite-exchange construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse base change map for open extension by zero is the adjoint transpose of the pulled back open unit",
+   "results": "8 results: TopCat.Presheaf.pushforwardToOfIso, IsBaseChange.toDual_apply, IsBaseChange.toDual, OpenPartialHomeomorph.extend_coe_symm, IsOpenMap.adjunctionNhds, SheafOfModules.pullbackObjUnitToUnit, Module.Dual.baseChange, Topology.IsInducing.adjunction. No strict tower or completed exchange normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taking derived inverse limit of the strict open exchange equals the canonical completed open base change morphism",
+   "results": "8 scheme pullback/gluing isomorphism results, none compares these normalized derived morphisms.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cbcStrictExchange|cbcDatumCompletedExchange|cbcRealizationLimitMap; adjunction mates and exact cubes in Mathlib, WeilConjectures, Sheaf",
+   "results": "CompletedStrictOpenExchange gives representative normalization; CompletedOpenExchangeTransport gives the completed unit equation; CompleteProetaleStrictTowerRealization defines the limit mate. Mathlib has formal mates but neither concrete normalization. ExchangeMateCube and UnboundedExactAdjunctionSquare provide the categorical cube tools.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing definitions and categorical tools; no theorem of the displayed normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedOpenStrictMateIdentification",
+  "date": "2026-10-25",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence); Tag 03DI (lemma-extension-by-zero), explicit unit transpose; finite scalar/tower refinement and ordered completed limit in old item Steps 4, 7; compare current blueprint def-cbc-completed-exchange-map, final open factor.",
+   "via": [
+    "lem-cbc-completed-open-strict-mate-identification",
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedOpenStrictMateTranspose",
+  "file": "lean/Sheaf/Paper/CompletedOpenStrictMateTranspose.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedOpenStrictMateTranspose",
+  "statement": "theorem completedOpenStrictMateTranspose (sq : OpenImmersionSquare v j' j g)\n    (K : d.derived U) :\n    ((cbcRealizationTowerAdj d j').homEquiv _ _)\n        ((completedTowerPullback g d).mapIso (cbcRealizationReduction d j K) ≪≫\n          (cbcReductionStrictExchange d sq).app K).inv =\n      CompletedOpenFiniteTranspose.unitArrow d sq K",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T201858-L-2634090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T201858-L-2634090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -128,7 +128,32 @@
   "item": "lem-weil-pbc-popescu-artinian-flat-subalgebras",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "RingHom.essFiniteType_of_artinian_local_residue"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "RingHom.essFiniteType_of_artinian_local_residue",
+     "module": "WeilConjectures.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue",
+     "lines": [
+      25,
+      97
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -170,5 +195,37 @@
   "landing": "20261013T031548-L-3573105",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R\\to S$ be a homomorphism of commutative rings, where $S$ is an Artinian local ring (a local ring in which every descending chain of ideals is eventually constant) with maximal ideal $\\mathfrak m$. If the composite $R\\to S\\to S/\\mathfrak m$ is essentially of finite type, then $R\\to S$ is essentially of finite type.",
+  "proof": [
+   {
+    "text": "*Presentation of the residue field and lifts of the generators.* Write $k=S/\\mathfrak m$ and $\\pi:S\\to k$ for the quotient map; $k$ is an $R$-algebra through $R\\to S\\xrightarrow{\\pi}k$. By hypothesis (essential finite type) there are a finite type $R$-algebra $B$, a multiplicative subset $W\\subseteq B$ and an isomorphism of $R$-algebras $\\iota:W^{-1}B\\xrightarrow{\\sim}k$; since $B$ is of finite type there are $n\\ge0$ and a surjective $R$-algebra map $\\beta:R[x_1,\\dots,x_n]\\to B$ (so $B\\cong R[x_1,\\dots,x_n]/I$ with $I=\\ker\\beta$, as in the source). Let $\\gamma:R[x_1,\\dots,x_n]\\to k$, $\\gamma(P)=\\iota(\\beta(P)/1)$, an $R$-algebra map. Since $\\pi$ is surjective, choose $f_1,\\dots,f_n\\in S$ with $\\pi(f_i)=\\gamma(x_i)$ ($i=1,\\dots,n$): the congruence classes of the $f_i$ modulo $\\mathfrak m$ correspond to the classes of the $x_i$ modulo $I$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The subring $A$ and the prime $\\mathfrak p$.* Let $\\phi:R[x_1,\\dots,x_n]\\to S$ be the $R$-algebra map with $\\phi(x_i)=f_i$, $J=\\ker\\phi$, and $A=\\phi(R[x_1,\\dots,x_n])\\cong R[x_1,\\dots,x_n]/J$, an $R$-subalgebra of $S$; $A$ is a finite type $R$-algebra (the surjection $R[x_1,\\dots,x_n]\\to A$). Let $\\mathfrak p=A\\cap\\mathfrak m$, the inverse image of the prime ideal $\\mathfrak m$ under the inclusion $A\\subseteq S$, hence a prime ideal of $A$. The two $R$-algebra maps $\\pi\\circ\\phi$ and $\\gamma$ from $R[x_1,\\dots,x_n]$ to $k$ agree on every $x_i$ (step 1), so they are equal (an $R$-algebra map from the polynomial ring is determined by the images of the variables). Hence $\\pi(\\phi(P))=\\iota(\\beta(P)/1)$ for all polynomials $P$: the image $\\pi(A)\\cong A/\\mathfrak p$ of $A$ in $k$ is the image of $B$ under $b\\mapsto\\iota(b/1)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The map $A_{\\mathfrak p}\\to S$, and $A_{\\mathfrak p}\\to S/\\mathfrak m$ is surjective.* Let $A_{\\mathfrak p}$ be the localization of $A$ at $\\mathfrak p$, local with maximal ideal $\\mathfrak pA_{\\mathfrak p}$ and residue field $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$. Every $s\\in A\\setminus\\mathfrak p$ lies in $S\\setminus\\mathfrak m$ and so is a unit of $S$ ($S$ is local with maximal ideal $\\mathfrak m$). Define $\\theta:A_{\\mathfrak p}\\to S$, $\\theta(a/s)=as^{-1}$: it is well defined, since $a/s=a'/s'$ means $u(as'-a's)=0$ for some $u\\in A\\setminus\\mathfrak p$, and $u$, $s$, $s'$ are units of $S$, so $as^{-1}=a's'^{-1}$; it is a ring map ($as^{-1}+a's'^{-1}=(as'+a's)(ss')^{-1}$, $(as^{-1})(a's'^{-1})=aa'(ss')^{-1}$, $\\theta(1/1)=1$), and $\\theta(a/1)=a$, so $R\\to A\\to A_{\\mathfrak p}\\xrightarrow{\\theta}S$ is the structure map $R\\to S$. Moreover $\\theta(\\mathfrak pA_{\\mathfrak p})\\subseteq\\mathfrak m$, so $\\pi\\circ\\theta$ induces a map of fields $\\kappa(\\mathfrak p)\\to k$. *$\\pi\\circ\\theta$ is surjective* (this is $\\kappa(\\mathfrak p)=S/\\mathfrak m$ of the source): every element of $k$ is $\\iota(b/w)$ with $b\\in B$, $w\\in W$; choose polynomials $P,Q$ with $\\beta(P)=b$, $\\beta(Q)=w$ (step 1) and put $a=\\phi(P)$, $s=\\phi(Q)\\in A$. By step 2, $\\pi(s)=\\iota(w/1)$, a unit of $k$ ($w/1$ is a unit of $W^{-1}B$), so $\\pi(s)\\neq0$, $s\\notin\\mathfrak m$, $s\\in A\\setminus\\mathfrak p$; and $\\pi(\\theta(a/s))=\\pi(a)\\pi(s)^{-1}=\\iota(b/1)\\iota(w/1)^{-1}=\\iota(b/w)$.\n\n*$S$ is a finitely generated $A_{\\mathfrak p}$-module* (part (1) of 07DT, applied to $A_{\\mathfrak p}\\to S$). Regard $S$ as an $A_{\\mathfrak p}$-algebra through $\\theta$ (step 3). $S$ is Artinian, and its Jacobson radical $J(S)$, the intersection of all maximal ideals of $S$, is $\\mathfrak m$, the only maximal ideal of the local ring $S$. By step 3, $A_{\\mathfrak p}\\to S\\to S/J(S)=S/\\mathfrak m$ is surjective, so $S/J(S)$ is generated by $1$ as an $A_{\\mathfrak p}$-module, in particular finitely generated. By the finiteness of Artinian local algebras over semiprimary rings (with $A_{\\mathfrak p}\\to S$ in place of $A\\to B$), $S$ is a finitely generated $A_{\\mathfrak p}$-module.\n\n*Both $R\\to A_{\\mathfrak p}$ and $\\theta:A_{\\mathfrak p}\\to S$ are essentially of finite type.* $A$ is a finite type $R$-algebra (step 2) and $A_{\\mathfrak p}=(A\\setminus\\mathfrak p)^{-1}A$ with the $R$-algebra structure through $R\\to A\\to A_{\\mathfrak p}$, so $R\\to A_{\\mathfrak p}$ is essentially of finite type. If $s_1,\\dots,s_t$ generate $S$ as an $A_{\\mathfrak p}$-module (step 4), the $A_{\\mathfrak p}$-algebra map $A_{\\mathfrak p}[y_1,\\dots,y_t]\\to S$, $y_j\\mapsto s_j$, is surjective (its image contains every $A_{\\mathfrak p}$-linear combination of the $s_j$), so $S$ is a finite type $A_{\\mathfrak p}$-algebra; with the multiplicative subset $\\{1\\}\\subseteq S$, $S\\cong\\{1\\}^{-1}S$ ($c\\mapsto c/1$) as $A_{\\mathfrak p}$-algebras, so $\\theta$ is essentially of finite type.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Conclusion.* By step 5 and the composite $R\\to A_{\\mathfrak p}\\xrightarrow{\\theta}S$ is essentially of finite type; by step 3 it is the structure map $R\\to S$. Hence $R\\to S$ is essentially of finite type.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

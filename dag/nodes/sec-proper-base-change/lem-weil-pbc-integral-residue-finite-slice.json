@@ -1,0 +1,148 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-integral-residue-finite-slice",
+ "kind": "statement",
+ "title": "Finite inverse-image isomorphisms descend to the actual normalized slice",
+ "statement": "Let S be a scheme, ell prime, E/Q_ell finite, d an adic datum on O_E, c an IntegralResidueCoefficientModel on S, n a natural number and Y an etale S-object. Let M,N be arbitrary objects of the large finite-coefficient derived category on S. If their finite derived inverse images to Y.left are isomorphic, then ringedSiteDerivedRestrictionOfUniverses of integralResidueFiniteModel M and integralResidueFiniteModel N to (toProEt S).obj Y are isomorphic. No constant-complex, perfectness, boundedness, uniformizer-ideal, or covering hypothesis is imposed. The finite derived category and inverse image are [def-weil-pbc-proetale-operations], the normalized finite model is [lem-weil-pbc-integral-residue-finite-reduction], and slice restriction is [def-weil-pbc-ringed-site-derived-restriction].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IX, definition-localize-ringed-site; Tag 03DH, section-localize; Sites Tag 03CE, lemma-localize-given-products in sites.tex. Apply to the finite coefficient ring comparison in Bhatt--Scholze Section 6.5."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-integral-residue-finite-reduction",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved finiteFunctionDerivedPullback comparison from IntegralResidueFiniteReduction to transport the supplied isomorphism through restriction along the canonical finite-ring comparison. This gives an isomorphism after the datum finite pullback. The rawPullbackNormalized comparison identifies that pullback with raw geometric pullback followed by restriction along the inverse coefficient isomorphism. The latter restriction is an equivalence, so reflect the isomorphism to raw pullbacks.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-finite-reduction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved chartDerivedEquivalence helper in PerfectChartTensorComparison, specialized to U=(toProEt S).obj Y and the finite datum ring R. Its natural comparison identifies raw geometric pullback followed by the derived chart equivalence with exact slice restriction. Map the raw pullback isomorphism through that equivalence and compose with its comparison components. This works for arbitrary derived objects; the helper has no immersion, perfectness or boundedness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-perfect-chart-tensor-comparison",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let b be the detailed finite integral coefficient comparison followed by c.finite n. Restriction along b inverse commutes definitionally with module slice restriction. Descend this identity using mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. The localization factorization and Q.objObjPreimageIso identify integralResidueFiniteModel with the composite derived scalar restrictions, and identify ringedSiteDerivedRestrictionOfUniverses with derived slice restriction. Transport the slice isomorphism along b inverse and compose these canonical endpoint comparisons.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-finite-reduction",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-ringed-site-derived-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-residue-finite-reduction",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-perfect-chart-tensor-comparison",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-site-derived-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IX and 03DH; Sites Tag 03CE. G3: combine the existing finite-presentation and chart-derived equivalence helpers, the scalar/slice identity, and exact localization factorization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes over a large universe ring descend to small universe under a ring equivalence, with constant sheaf realization on slice sites",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod, HasDerivedCategory, DerivedCategory, DerivedCategory.instEssSurjCochainComplexIntQ, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-27",
+   "verdict": "No exact match: generic derived-category representative APIs do not identify normalized finite coefficient presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.uliftFunctor",
+   "results": "ModuleCat.uliftFunctor, ModuleCat.fullyFaithfulUliftFunctor, ModuleCat.instFaithfulUliftFunctor, ModuleCat.instFullUliftFunctor, ModuleCat.instPreservesFiniteColimitsUliftFunctor, ModuleCat.instPreservesFiniteLimitsUliftFunctor, ModuleCat.instPreservesLimitsOfSizeUliftFunctor, ModuleCat.instPreservesInjectiveObjectsUliftFunctorOfSmall",
+   "date": "2026-10-27",
+   "verdict": "Use the full and faithful universe lift to descend bounded differentials."
+  },
+  {
+   "tool": "grep",
+   "query": "Small.*Module|Module.*Small",
+   "results": "Mathlib/Condensed/Light/Small.lean, Mathlib/Algebra/Lie/Submodule.lean, Mathlib/Algebra/Module/StablyFree/Basic.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Module/Projective.lean, Mathlib/Algebra/Module/Projective.lean, Mathlib/Algebra/Module/Projective.lean, Mathlib/Algebra/Module/Shrink.lean",
+   "date": "2026-10-27",
+   "verdict": "Use Module.Finite.small and Shrink.linearEquiv for a direct finite-projective shrinking construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-27",
+   "verdict": "Exact restriction is available; these results do not compare finite scheme inverse image with normalized actual slices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaf of modules commutes with restricting scalars along a ring isomorphism and derived extension of scalars",
+   "results": "SheafOfModules.freeFunctorCompPullbackIso, PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.restrictScalars_obj_val, SheafOfModules.pushforwardCongr, SheafOfModules.restrictScalars, ModuleCat.homEquiv_extendScalarsId, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-27",
+   "verdict": "Component scalar APIs only; no complete normalized constant realization comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueFiniteChart",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The integral-lattice step: normalize residue models on the fixed stratum; pass an isomorphism on an etale chart to the actual pro-etale slice.",
+   "via": [
+    "lem-weil-pbc-integral-residue-finite-chart",
+    "lem-weil-pbc-integral-residue-stratum-input",
+    "lem-weil-pbc-integral-residue-stratum-lift",
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueFiniteSlice",
+  "file": "lean/Sheaf/Paper/IntegralResidueFiniteSlice.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralResidueFiniteSlice",
+  "statement": "theorem integralResidueFiniteSlice\n    (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (c : IntegralResidueCoefficientModel l E d S) (n : ℕ) (Y : S.Etale)\n    (M N : FiniteCoefficientDerivedCategory S (PbcQuotient (pbcIntegralDatum l E) n))\n    (e : Nonempty\n      ((finiteCoefficientDerivedPullback S (PbcQuotient (pbcIntegralDatum l E) n)\n          Y.hom).obj M ≅\n        (finiteCoefficientDerivedPullback S (PbcQuotient (pbcIntegralDatum l E) n)\n          Y.hom).obj N)) :\n    Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing S d n)\n          ((toProEt S).obj Y) (integralResidueFiniteModel S l E d c n M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing S d n)\n          ((toProEt S).obj Y) (integralResidueFiniteModel S l E d c n N))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T065857-L-2485867",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T084412-L-3676834",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-local-frobenius-step-compatibility",
+ "kind": "statement",
+ "title": "One-step compatibility of local Frobenius return transport",
+ "statement": "Fix a finite-field datum D [def-weil-finite-field-fiber], coefficient datum c and finite coefficient field E [def-weil-l-adic-coefficient-extension], a finite-type k_0-scheme Y_0 [def-weil-scheme-morphism-properties] and a Weil complex K [def-weil-weil-sheaf-complex]. Put Y=Y_0×_(k_0)k, g=g_Y and h=g_s [def-weil-frobenius-detailed]. Let x,x':Spec(k)→Y satisfy xg=hx'. For r=n+1>0 assume xg^r=h^r x and x'g^r=h^r x'. Use exactly the rational pullback comparisons and point transports of [def-weil-local-frobenius-trace]. Define A:C_(x')→C_x by point transport on Lx'^*K, the inverse comparison for hx', the equality hx'=xg, the comparison for xg, and pullback of the Weil structure theta. Then A is invertible and A≫F_x=F_(x')≫A, where F_x and F_(x') are the prescribed length-r return operators. This compares only consecutive semilinear points; it asserts neither transitivity of residue embeddings nor conjugacy on cohomology.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/lem-weil-local-frobenius-conjugacy-class.proof.md",
+  "place": "the sentence asserting intertwining at one Frobenius translate; expanded original DAG steps 2--6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-frobenius-detailed",
+  "def-weil-local-frobenius-trace"
+ ],
+ "proof": [
+  {
+   "text": "Put s=Spec(k), h=g_s, g=g_Y, M=For(K), and r=n+1. For any point z:s→Y let J_z(N)=Fib_s(Lz^*N). Given xg=hx' define tau:J_(x')(N)→J_x(GN) by iota_(Lx'^*N) followed by c_(h,x')^(-1), the equality hx'=xg, and c_(x,g). All compositions are the specified ones in [def-weil-local-frobenius-trace]. Point-transport naturality and naturality of the integral pullback comparison, after rational localization, make tau natural in N. Its value followed by J_x(theta) is precisely localFrobeniusStepTransport, not an arbitrary fibre isomorphism.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define reparametrized successive points z_i=h^(-i)xg^i. The assumed one-step square gives z_0=x and z_1=x'. The return equation xg^r=h^r x gives z_(i+r)=z_i by commuting powers and cancellation. The same equations imply z_i g^m=z_(i+m)h^m. Define tau_i by the preceding construction. Equality of points identifies J_(i+r)=J_i and tau_(i+r)=tau_i, since all equality proofs are propositions. No false fixed-point equality xg^r=x is used.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let Q_(i,m):J_(i+m)(N)→J_i(G^mN) be the composite of the m successive tau maps, with Q_(i,0)=id. Induct on m to identify it with the specified m-fold point transport followed by composition comparison. At zero both maps are identities; at one it is the definition. In the successor step use naturality of iota to move the identification Lz_(i+1)^*G^mN≅L(h^m)^*Lz_(i+m+1)^*N past the next iota. The remaining iota composite is exactly the defining recursion for I^[m+1]. Associativity of the integral comparison, rationalized using [def-weil-derived-pullback-tensor-hom], identifies the remaining comparison with c for g^(m+1)z_i=z_(i+m+1)h^(m+1).",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put A_i=J_i(theta)tau_i(M) and P_(i,m)=A_i...A_(i+m-1). Induct to prove P_(i,m)=J_i(theta^[m])Q_(i,m)(M). The zero case is identity. In the successor case move J_(i+1)(theta^[m]) through tau_i by naturality, then combine J_i(theta) and J_i(G theta^[m]) using functoriality. The equality theta^[m+1]=theta G(theta^[m]) follows by expanding the defining recursion and reassociating its m+1 Weil factors with the coherent pullback comparisons. Together with the preceding induction, this is the required successor identity. Taking m=r and using z_(i+r)=z_i identifies P_(i,r) with the actual localFrobeniusOperator at z_i.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By periodicity A_r=A_0, so the two words P_(0,r)A_0 and A_0 P_(1,r) are equal: each is A_0 A_1 ... A_(r-1) A_0. In Lean composition order this reads A_0≫F_x=F_(x')≫A_0, the asserted equation. This also proves the r=1 case, with one Weil factor, and the zero-complex case. Invertibility of the explicitly constructed A_0 is proved separately in Lean from point-transport invertibility, instantiated on the identity finite-type model Spec(k_0), and the isomorphism factors in its definition; it is not an extra hypothesis on this equation.",
+   "uses": [
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-local-frobenius-trace",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-detailed",
+  "lem-weil-frobenius-cohomology-transport-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/lem-weil-local-frobenius-conjugacy-class.proof.md",
+  "place": "the sentence asserting intertwining at one Frobenius translate; expanded original DAG steps 2--6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localFrobeniusStep|localFrobeniusOperator|localPointTransportIterate",
+   "results": "{\"t\": \"2026-10-25T12:01:53Z\", \"tool\": \"grep\", \"query\": \"localFrobeniusStep|localFrobeniusOperator|localPointTransportIterate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern general functor composition or Witt-vector Frobenius, not the specified derived point-fibre transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.map_comp\"",
+   "results": "{\"t\": \"2026-10-25T12:01:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor.map_comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Functor.map_comp_map\", \"CategoryTheory.Functor.map_comp\", \"CategoryTheory.Functor.map_comp_assoc\", \"CategoryTheory.Functor.map_comp_heq'\", \"CategoryTheory.Functor.map_comp_heq\", \"CategoryTheory.Functor.map_comp_apply\", \"CategoryTheory.Bifunctor.map_comp_id\", \"CategoryTheory.StrictPseudofunctor.map_comp\"], \"digest\": \"5a18023a23c04d18\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern general functor composition or Witt-vector Frobenius, not the specified derived point-fibre transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one-step Frobenius transport between adjacent geometric point fibres intertwines the equal-length return operators of a Weil complex",
+   "results": "{\"t\": \"2026-10-25T12:01:54Z\", \"tool\": \"leanfinder\", \"query\": \"A one-step Frobenius transport between adjacent geometric point fibres intertwines the equal-length return operators of a Weil complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Isocrystal.term_≃ᶠⁱ[_,_]_\", \"Isocrystal.term_≃ᶠˡ[_,_]_\", \"WittVector.frobenius_frobeniusRotation\", \"PreTilt.coeff_iterate_frobeniusEquiv_symm\", \"WittVector.IsocrystalEquiv.frob_equivariant\", \"WittVector.IsocrystalHom.frob_equivariant\", \"WittVector.StandardOneDimIsocrystal.frobenius_apply\", \"WittVector.frobeniusEquiv_apply\"], \"digest\": \"bc23ec4f9d2f3248\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern general functor composition or Witt-vector Frobenius, not the specified derived point-fibre transport."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point fibre Frobenius transport intertwines the return endomorphisms for consecutive geometric points of a Weil complex",
+   "results": "{\"t\": \"2026-10-25T12:06:00Z\", \"tool\": \"leansearch\", \"query\": \"Point fibre Frobenius transport intertwines the return endomorphisms for consecutive geometric points of a Weil complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frobenius.congr_simp\", \"WittVector.IsocrystalEquiv.frob_equivariant\", \"iterateFrobenius_one\", \"WittVector.frobenius_verschiebung\", \"WittVector.frobenius\", \"WittVector.verschiebung_frobenius_comm\", \"WittVector.ghostComponent_frobenius\", \"CategoryTheory.Grothendieck.transport_fiber\"], \"digest\": \"c54feed9131c5b39\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern general functor composition or Witt-vector Frobenius, not the specified derived point-fibre transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalFrobeniusConjugacyClass",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-local-frobenius-conjugacy-class",
+   "place": "the sentence asserting intertwining at one Frobenius translate; expanded original DAG steps 2--6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalFrobeniusStepCompatibility",
+  "file": "lean/Sheaf/Paper/LocalFrobeniusStepCompatibility.lean",
+  "declaration": "WeilConjectures.localFrobeniusStepCompatibility",
+  "declarations": [
+   "WeilConjectures.localFrobeniusStepTransport",
+   "WeilConjectures.localFrobeniusStepTransport_isIso",
+   "WeilConjectures.localFrobeniusStepCompatibility"
+  ],
+  "statement": "theorem localFrobeniusStepCompatibility (n : ℕ)\n    (hx : x ≫ localPositivePower (D.geometricFrobenius Y₀).hom n =\n      localPositivePower (frobeniusPointIso D).hom n ≫ x)\n    (hx' : x' ≫ localPositivePower (D.geometricFrobenius Y₀).hom n =\n      localPositivePower (frobeniusPointIso D).hom n ≫ x') :\n    localFrobeniusStepTransport D c E Y₀ K x x' hs ≫\n        localFrobeniusOperator c.l E.val D c.different Y₀ K x n hx =\n      localFrobeniusOperator c.l E.val D c.different Y₀ K x' n hx' ≫\n        localFrobeniusStepTransport D c E Y₀ K x x' hs",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T143918-L-1108834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T143918-L-1108834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

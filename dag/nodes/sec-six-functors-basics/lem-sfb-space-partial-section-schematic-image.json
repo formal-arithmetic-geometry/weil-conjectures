@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-space-partial-section-schematic-image",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Schematic image of a partial section of a separated algebraic-space morphism",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $f:B\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Suppose $f$ is separated, meaning that its diagonal is representable by closed immersions on scheme tests [def-weil-closed-immersion]. Let $a:O\\hookrightarrow Y$ be an open immersion [def-weil-open-immersion] which is quasi-compact: its pullback to every affine scheme over $Y$ has quasi-compact source. Let $s:O\\to B$ satisfy $fs=a$. Then there exist a closed subspace $i:C\\hookrightarrow B$ and $t:O\\to C$ with $it=s$, such that $C$ is the smallest closed subspace of $B$ through which $s$ factors. Moreover the morphism $C\\times_YO\\to O$ induced by $fi$ is an isomorphism, and under this isomorphism the map $O\\to C\\times_YO$ induced by $t$ and $\\mathrm{id}_O$ is its inverse. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. No Noetherian, finite-type, reducedness, or properness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0CP3, lemma-scheme-theoretic-image-of-partial-section; existence and smallest-closed-subspace property: Tag 082X, lemma-scheme-theoretic-image; restriction used in its proof: Tag 082Z, lemma-quasi-compact-scheme-theoretic-image."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "The diagonal of $f$ is quasi-compact: after any affine scheme test it is a closed immersion, whose source is a closed subset of a quasi-compact affine spectrum, hence quasi-compact. Thus $f$ is quasi-separated. Apply [lem-sfb-space-qc-cancellation] to $O\\xrightarrow{s}B\\xrightarrow{f}Y$; its composite is the given quasi-compact $a$, so $s$ is quasi-compact. That node's quasi-compactness says that $|O\\times_BT|$ is quasi-compact for every affine scheme $T\\to B$; by [lem-sfb-qc-space-affine-etale-atlas] each such $O\\times_BT$ then has a representable surjective etale map from an affine, hence quasi-compact, scheme, which is the quasi-compactness of $s$ required by the pushforward theorem of Step 2. Also $s$ is a monomorphism: $su=sv$ implies $au=av$, hence $u=v$ since an open immersion is a subfunctor inclusion. Consequently $\\Delta_s:O\\to O\\times_BO$ is an isomorphism and is a closed immersion on scheme tests. Thus $s$ is separated.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-sfb-space-qc-cancellation",
+    "lem-sfb-qc-space-affine-etale-atlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0CP3, proof, first sentence; Tag 03KS, lemma-quasi-compact-permanence; separated implies quasi-separated by the scheme-test definition."
+   }
+  },
+  {
+   "text": "The structure modules $\\mathcal O_O$ and $\\mathcal O_B$ are quasi-coherent: each has the presentation $0\\to\\mathcal O\\xrightarrow{\\mathrm{id}}\\mathcal O\\to0$. By the quasi-compact separated pushforward theorem and Step 1, $s_*\\mathcal O_O$ is quasi-coherent. Hence the kernel theorem makes $\\mathcal I=\\ker(\\mathcal O_B\\to s_*\\mathcal O_O)$ quasi-coherent; it is an ideal because the displayed map is a ring map. The ideal/closed-subspace correspondence gives $i:C=V(\\mathcal I)\\hookrightarrow B$. Since $\\mathcal I\\to s_*\\mathcal O_O$ is zero, its factorization criterion gives $t:O\\to C$ with $it=s$.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X, lemma-scheme-theoretic-image, and 082Z, lemma-quasi-compact-scheme-theoretic-image, construction of the kernel ideal; Tag 03M9, lemma-pushforward. Kernel closure is spaces-properties.tex Tag 03M1, lemma-properties-quasi-coherent (3)."
+   }
+  },
+  {
+   "text": "Let $D\\hookrightarrow B$ be a closed subspace through which $s$ factors, and let $\\mathcal J$ be its corresponding quasi-coherent ideal. The factorization criterion says that $\\mathcal J\\to s_*\\mathcal O_O$ is zero; hence $\\mathcal J\\subseteq\\mathcal I$. The inclusion-reversing bijection gives $C=V(\\mathcal I)\\subseteq V(\\mathcal J)=D$. Thus $C$ has the required smallest-closed-subspace property.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 082X, lemma-scheme-theoretic-image; Tag 03MB, lemma-closed-immersion-ideals, inclusion-reversing bijection and factorization criterion."
+   }
+  },
+  {
+   "text": "Put $B_O=B\\times_YO$, write $q:B_O\\to B$ and $p:B_O\\to O$ for its projections, and let $g=(s,\\mathrm{id}_O):O\\to B_O$. The square with top map $g$, bottom map $B\\to B\\times_YB$ equal to $\\Delta_f$, left map $s:O\\to B$, and right map $h:B_O\\to B\\times_YB$, $h(b,o)=(b,s(o))$, is cartesian: its test sections are exactly the pairs $(b,o)$ with $b=s(o)$. Therefore $g$ is a closed immersion. Indeed on each scheme test it is a scheme base change of a test of $\\Delta_f$, and a quotient $A\\to A/J$ remains a surjective quotient after any ring base change. Also $q$ is an open immersion, directly by the scheme-test definition applied to the base change of $a$. Finally $O\\times_BB_O\\simeq O$ over $B_O$, with map $g$: its test sections have $a(o_1)=a(o_2)$, so $o_1=o_2$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0CP3, proof, section over the open; Tag 03KP, lemma-section-immersion (3), here written out as the pullback of the diagonal."
+   }
+  },
+  {
+   "text": "Restrict the ring map defining $\\mathcal I$ to the open subspace $B_O$. The direct-image restriction comparison identifies it with $\\mathcal O_{B_O}\\to g_*\\mathcal O_O$: on a scheme chart $T\\to B_O$ both direct images are compatible sections over $O\\times_BT=O\\times_{B_O}T$, using the identification in Step 4, and the ring maps send a section to its same pullback. Restriction to an open is restriction to the full subsite of charts mapping into that open, so it preserves the sectionwise kernel. Thus $\\mathcal I|_{B_O}=\\ker(\\mathcal O_{B_O}\\to g_*\\mathcal O_O)$. By the ideal correspondence and its base-change formula, the left side defines $C\\times_BB_O$ (on an open, the pulled-back ideal is its restriction), and the right side defines the closed subspace $g:O\\hookrightarrow B_O$ from Step 4. The bijection therefore identifies these two closed subspaces over $B_O$.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LX, lemma-pushforward-etale-base-change-modules, degree-zero comparison and its section formula, applied to the open restriction; spaces-morphisms.tex Tags 082Z (3) and 03MB with the inverse-image paragraph."
+   }
+  },
+  {
+   "text": "Associate the fibre products to obtain $C\\times_BB_O\\simeq C\\times_YO$. The identification of Step 5 is induced by $(t,\\mathrm{id}_O):O\\to C\\times_YO$, since after mapping to $B_O$ it is $g=(s,\\mathrm{id}_O)$ and the closed inclusion is a monomorphism. Its composite with the projection $r:C\\times_YO\\to O$ is the identity. Since it is an isomorphism, this equality makes $r$ its inverse; in particular $r$ is an isomorphism and its inverse is exactly the map required in the statement.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0CP3, lemma-scheme-theoretic-image-of-partial-section, final conclusion; fibre-product universal property gives the specified inverse."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-sfb-space-qc-cancellation",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-etale-module-pushforward-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0CP3, lemma-scheme-theoretic-image-of-partial-section, proof; the schematic image and restriction are expanded via Tags 082X, 082Z, 03MB, 03M9 and spaces-properties.tex 03LX/03M1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic image of a partial section of a separated morphism of algebraic spaces is an isomorphism over the open domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isoImage\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (U : X.Opens) → ↑U ≅ ↑((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U)\", \"doc\": \"For schemes $X$ and $Y$, a morphism $f: X \\to Y$ that is an open immersion, and an open subset $U$ of $X$, the canonical morphism from $U$ to $Y$ induced by composing the inclusion $U \\to X$ with $f$ is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIso_app\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  ∀ V ≤ AlgebraicGeometry.Scheme.Hom.opensRange f, CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.app f V)\", \"doc\": \"For an open immersion $ f: X \\\\to Y $ of schemes, if $ V $ is an open subset of $ Y $ contained within the image of $ f $, then the induced morphism on sections $ f_{\\\\#}(V): \\\\mathcal{O}_Y(V) \\\\to \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isoOpensRange\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [inst : AlgebraicGeometry.IsOpenImmersion f] → X ≅ ↑(AlgebraicGeometry.Scheme.Hom.opensRange f)\", \"doc\": \"For schemes $X$ and $Y$, if $f: X \\to Y$ is an open immersion, then $X$ is isomorphic to the open subscheme of $Y$ which is the image of $f$. This follows from the fact that the canonical inclusion of \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isoImage_hom_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : X.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.isoImage f U).hom\\n      ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U).ι =\\n    CategoryTheory.CategoryStruct.comp U.ι f\", \"doc\": \"For schemes $X$ and $Y$, an open immersion $f: X \\\\to Y$, and an open subset $U \\\\subseteq X$, the composition of the isomorphism $U \\\\to f(U)$ with the inclusion $f(U) \\\\to Y$ equals the composition of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isoImage_inv_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (U : X.Opens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.isoImage f U).inv\\n      (CategoryTheory.CategoryStruct.comp U.ι f) =\\n    ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U)\", \"doc\": \"For schemes $X$ and $Y$, an open immersion $f: X \\to Y$, and an open subset $U$ of $X$, the composition of the inverse of the isomorphism from $U$ to its image $f(U)$, followed by the inclusion morphis\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X Z : AlgebraicGeometry.Scheme} → (f : X ⟶ Z) → [H : AlgebraicGeometry.IsOpenImmersion f] → X ≅ Z.restrict ⋯\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ between schemes, this constructs an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedding $ f_{\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is separated, then the restriction of $ f $ to an open subset $ U $ of $ X $ and an open subset $ V $ of $ Y $ is also separated.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of a section over a quasi compact open in a separated algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsSeparated f] : IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} {U : X.Opens} (hU : IsCompact U.1) (hU' : IsQuasiSeparated U.1) (f : Γ(X, U)) :\\n  IsLocalization.Away f (Γ(X, X.basicOpen f))\", \"doc\": \"For a scheme $X$, if $U$ is a compact and quasi-separated open subset of $X$ and $f$ is a section of the structure sheaf over $U$, then the ring of sections over the basic open set $D(f)$ (where the g\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) (S : X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ} {y₁ : Γ(X, U₁)} {y₂ : Γ(X, U₂)} {f : Γ(X, U₁ ⊔ U₂)}\\n  {x : Γ(X, X.basicOpen f)} (h₁ : S.1 ≤ U₁) (h₂ : S.1 ≤ U₂)\\n  (e₁ : y₁ |_ X.basicOpen (f |_ U₁) = ((f |_ U₁ |_ X.basicOpen _) ^ n₁) * x |_ X.basicOpen _)\\n  (e₂ : y₂ |_ X.basicOpen (f |_\", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme.{u}) (U : X.Opens) (hU : IsCompact U.1) (hU' : IsQuasiSeparated U.1) (f : Γ(X, U))\\n  (x : Γ(X, X.basicOpen f)) : ∃ (n : ℕ) (y : Γ(X, U)), y |_ X.basicOpen f = (f |_ X.basicOpen f) ^ n * x\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} : QuasiSeparatedSpace X ↔ ∀ U V : X.affineOpens, IsCompact (U ∩ V : Set X)\", \"doc\": \"A scheme $X$ is quasi-separated if and only if for every pair of affine open subsets $U$ and $V$ of $X$, their intersection $U \\\\cap V$ is a quasi-compact subset of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "partial.section|schemeTheoreticImage|schematicImage",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of graph of a section of a separated morphism restricts to the graph on its open domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is separated, then the restriction of $ f $ to an open subset $ U $ of $ X $ and an open subset $ V $ of $ Y $ is also separated.\"}\n  {\"name\": \"LinearPMap.IsClosable.graph_closure_eq_closure_graph\", \"module\": \"Mathlib/Topology/Algebra/Module/LinearPMap\", \"type\": \"∀ {R : Type u_1} {E : Type u_2} {F : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup E] [inst_2 : AddCommGroup F]\\n  [inst_3 : Module R E] [inst_4 : Module R F] [inst_5 : TopologicalSpace E] [inst_6 : TopologicalSpace F]\\n  [inst_7 : ContinuousAdd E] [inst_8 : ContinuousAdd F] [inst_9 : Topologic\", \"doc\": \"For a closable linear map $ f : E \\to F $ between topological $ R $-modules, the topological closure of the graph of $ f $ (as a submodule of $ E \\times F $) is equal to the graph of the closure of $ f \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.lift (CategoryTheory.CategoryStruct.id X) f ⋯)\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f g : X ⟶ Y) [Y.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.equalizer.ι f g)\", \"doc\": \"If $ Y $ is a separated scheme and $ f, g : X \\\\to Y $ are morphisms of schemes, then the equalizer morphism $ \\\\iota : \\\\mathrm{Eq}(f, g) \\\\to X $ is a closed immersion. This follows from the separatedne\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic image of a partial section of a separated morphism of algebraic spaces restricts to an isomorphism on its quasi compact open domain",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.isoImage, IsOpenImmersion.isoRestrict, IsSeparated.instResLE, Scheme.Hom.toImage_app, Scheme.Hom.isIso_app, Scheme.Hom.toImage, Scheme.Hom.isoOpensRange, Scheme.Hom.imageι. Returned signatures concern schemes only.",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration states the algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"schemeTheoreticImage\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration states the algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "partial.section|schemeTheoreticImage|schematicImage",
+   "results": "[grep] OK 0 hit(s); subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration states the algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of a partial section over a quasi compact open of a separated algebraic space",
+   "results": "OK 8 hits: AlgebraicGeometry.isLocalization_basicOpen_of_qcqs; Scheme.germ_stalkClosedPointTo_assoc; Scheme.zeroLocus_isClosed; exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; IsSeparated.instMorphismRestrict; exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated; exists_of_res_eq_of_qcqs. Returned signatures are scheme localizations, restrictions and section calculations.",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration states the algebraic-space assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of graph of a section in an algebraic space recovers that section over its open domain",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Opens.range_ι, ExistsHomHomCompEqCompAux.range_g_subset, IsAffineOpen.range_fromSpec, specTargetImageFactorization, Scheme.Hom.image, Scheme.Hom.toImage_app, Scheme.Hom.toImage, Scheme.IdealSheafData.opensRange_glueDataObjMap. Returned signatures concern schemes only.",
+   "date": "2026-10-24",
+   "verdict": "no match: no returned declaration states the algebraic-space assertion or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-chow-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CP3, lemma-scheme-theoretic-image-of-partial-section; existence and smallest-closed-subspace property: Tag 082X, lemma-scheme-theoretic-image; restriction used in its proof: Tag 082Z, lemma-quasi-compact-scheme-theoretic-image.",
+   "via": [
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-partial-section-schematic-image",
+  "worker": "stage1",
+  "summary": "Split 0CP3 without new nodes: existing quasi-compact cancellation, quasi-coherent direct image and kernels, ideal/closed-subspace correspondence, and direct-image restriction give the kernel construction and restriction to the closed graph. Wrote out the graph pullback and the canonical inverse. Retained the statement and all prior searches. No project declaration states the algebraic-space result.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md (3). This is the inherited geometric prerequisite through derived Chow (0CTT) below direct-image stability, not a change of unit route. blueprint_refs ancestor returns None for this inherited chain; retain its null from.node and full via list. Whole-blueprint searches for partial section, scheme-theoretic image and 03KS find no algebraic-space duplicate; the Nagata partial-section node is for schemes.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic Stacks 03M9 theorem for quasi-compact separated algebraic-space morphisms, used on the monomorphic partial section; the current unit has no replacement statement."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic Stacks 03LX comparison with explicit compatible-section formula, used only to restrict the kernel ring map to an open subspace."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product existence and universal property (Stacks 02X2); used only to form the graph pullback and associate the final fibre products."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-6f3d36d3d",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-6f3d36d3d (reviewer sub-agent of L); spot-checked: Read Stacks 0CP3 (spaces-morphisms.tex) and its inputs 03KS/082X/082Z/03KP/03M9/03MB/03LX. The item statement is unchanged, matches 0CP3 hypothesis by hypothesis and spells out the specified inverse. I read all 6 steps against the statements of the cited nodes and they are correct. Step 1: cancellation hypotheses hold; s is mono, so it is separated. Step 2: O_B→s_*O_O has a quasi-coherent kernel ideal, V(I) exists, and t comes from the factorization criterion, which allows algebraic-space sources. Step 3: J⊆I gives V(I)⊆V(J). Step 4: the graph is the pullback of Δ_f, and O×_B B_O≅O via g. Step 5: 03LX restriction plus the ideal correspondence for an étale base change give C×_B B_O=O. Step 6: (t,id) and r are mutually inverse. Edge cases checked: O empty, O=Y, f=id, nonreduced B. One fix (C4 definitional seam): the cancellation node gives quasi-compactness in the point-topology sense, while the 03M9 node needs a surjective étale map from a quasi-compact scheme. Step 1 now cites the same-unit, reviewed node lem-sfb-qc-space-affine-etale-atlas and proof_deps is updated; this adds no cycle and no tool use. There are no new nodes. lem-sfb-stack-schematic-image-qc generalizes 082X/082Z, not 0CP3, so it is an alternative route, not a duplicate. Accepted tool_uses: 03M9 pushforward, 03LX restriction and 02X2 fibre products, all generic. Batch-5 flags: I computed the closures; they reach only definitions and generic algebraic-space foundations in sec-trace-formula (descent, quasi-coherent kernels, atlas tests). They reach no nt-assume or nt-target, sk-*, trace-transport or Poincaré-duality node, so all 6 flagged citations are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePartialSectionSchematicImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.partialSection_schematicImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePartialSectionSchematicImage.lean",
+  "statement": "theorem partialSection_schematicImage {S : Scheme.{u}} (B Y O : AlgebraicSpace S) (f : B ⟶ Y) (hsep : IsSeparatedPresheafMap f.hom.hom) (a : O ⟶ Y) (hopen : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) a.hom.hom) (hqc : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) a.hom.hom) (s : O ⟶ B) (hs : s ≫ f = a) : ∃ (C : ClosedSubspace B) (t : O ⟶ (C.val : AlgebraicSpace S)), t ≫ C.val.arrow = s ∧ (∀ D : ClosedSubspace B, (∃ v : O ⟶ (D.val : AlgebraicSpace S), v ≫ D.val.arrow = s) → C.val ≤ D.val) ∧ ∃ e : Limits.pullback (C.val.arrow ≫ f).hom a.hom ≅ O.obj, e.hom = Limits.pullback.snd (C.val.arrow ≫ f).hom a.hom ∧ e.inv ≫ Limits.pullback.fst (C.val.arrow ≫ f).hom a.hom = t.hom",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing ClosedSubspace and IsSeparatedPresheafMap definitions, whose landed definition nodes are added to stmt_deps. For the representable open immersion a, scheme-test quasi-compactness is expressed with the existing Mathlib QuasiCompact predicate. The sheaf-pullback isomorphism has forward map the second projection; its inverse has first component t, and its second component is the identity by the inverse law. The accepted natural-language statement and proof are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d5199577",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read node, all 8 stmt_dep records, module, report (Worker report + Second reading present), and side-live declarations: AlgebraicSpace, IsRepresentableWith, ClosedSubspace (Subobject plus representable closed immersion), diagonalPresheafMap/IsSeparatedPresheafMap, fibreProduct_isAlgebraicSpace, OpenSubspace. Checked clause by clause against Stacks 0CP3/082X/082Z: separated f via the exact owner IsSeparatedPresheafMap; open immersion and quasi-compactness as IsRepresentableWith IsOpenImmersion/QuasiCompact, equivalent to the node's affine-test condition for a representable map, with no global qc of O or Y; exists C : ClosedSubspace B with t, t ≫ arrow = s; minimality over all D as subobject order; e : sheaf pullback (C.arrow ≫ f) a ≅ O with e.hom = pullback.snd and e.inv ≫ fst = t.hom, so the inverse is pinned to (t, id). lean.statement verbatim in file; node differs from live only in lean plus 2 added landed def stmt_deps (no cycle). No new defs, single sorry, source/blueprint docstrings, 6-step proof docstring, autoImplicit false, proof-dep imports exist, no name clash, no pro-etale. Edge cases: O empty, O=Y, f=id, non-reduced B, non-qc Y/O. No compile (no file changed). Advisory: second reading by the same worker."
+ }
+}

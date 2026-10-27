@@ -1,0 +1,155 @@
+{
+ "id": "lem-sfb-normalized-chern-finite-boundary",
+ "kind": "statement",
+ "title": "Finite Kummer boundary from normalized Chern comparisons",
+ "statement": "Let l be prime, E a finite extension of Q_l, and T a scheme. For any existing Chern data c [def-sp-tower-class-chern] satisfying the three equations c.Normalized, the resulting actual firstChern arrows satisfy FiniteChernNormalization [def-sp-tower-class-finite]. For every line bundle and positive quotient level the evaluated, forgotten coefficient-linear arrow, precomposed with finiteQuotient, equals the evaluated positive Kummer connecting composite followed by finiteRootMap, with the exact endpoint transports recorded by finiteBoundaryEquality. No new Chern data are constructed.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-finite"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "Expand firstChernR as the inverse source comparison followed by reduction of lineBundleClass and the target comparison. Apply the reduction adjunction Hom bijection. Naturality in lineBundleClass, sourceNormalization and targetNormalization identify its composite with the integer generator with the positive Kummer composite. The specified shift-addition comparison keeps its sign.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+   }
+  },
+  {
+   "text": "For scalar extension, choose a K-flat representative and apply the representative transpose identity of ScalarData there. Naturality of the universal counit passes this equality through the resolution isomorphism to the original object; no K-flatness of an arbitrary root module concentrated in degree zero is assumed. Apply the scalar unitNormalization equation. The ordinary unit sends z to one tensor z. The universal scalar counit is exactly the lineComparison appearing in firstChern, including its shift comparison, so the resulting equality uses the actual Chern morphism.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+   }
+  },
+  {
+   "text": "Apply exact evaluation and finite forgetting, keeping their canonical single and shift comparisons. Exact functors preserve the connecting morphism of the Kummer short exact sequence. The integer map is finiteQuotient by uniqueness on constant integer sections, and the root map is finiteRootMap by uniqueness on z mapping to one tensor z. The pure-tensor equation for lineEvaluation identifies the target comparison. These equalities, with the two endpoint-transport witnesses, are precisely finiteBoundaryEquality for each line bundle and level.",
+   "uses": [
+    "def-sp-tower-class-finite",
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-chern",
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A first Chern class defined by the derived Kummer connecting morphism evaluates to the finite coefficient Kummer boundary",
+   "results": "8 hits: Algebra.Extension.H1Cotangent, groupHomology.boundaries₁, groupHomology.boundariesOfIsBoundary₁, groupCohomology.coboundaries₁_ext, groupHomology.IsBoundary₁, groupHomology.isBoundary₁_of_mem_boundaries₁, groupHomology.chains₁ToCoinvariantsKer_surjective, groupCohomology.shortComplexH1_g",
+   "date": "2026-10-27",
+   "verdict": "No match for this statement on actual ringed systems and its fixed comparison maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first Chern class from a derived Kummer connecting homomorphism equals the finite Kummer boundary after scalar extension and evaluation",
+   "results": "8 hits: Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δAux_ofComp, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.H1Cotangent.map, Algebra.H1Cotangent.exact_map_δ",
+   "date": "2026-10-27",
+   "verdict": "No corresponding theorem on the actual sheaf systems with the specified maps."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_normalizedKummerReduction|finiteChernNormalization_of_normalized|nonempty_kummerLineTwisting",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem in Mathlib; the project definitions and generic categorical APIs are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): exact finite evaluation identifies the constructed class with the finite Kummer boundary",
+   "via": [
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "file": "lean/Sheaf/Paper/NormalizedChernFiniteBoundary.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteChernNormalization_of_normalized",
+  "statement": "theorem finiteChernNormalization_of_normalized (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T) (hc : c.Normalized l E) :\n    FiniteChernNormalization l E c",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "worker": "stage3",
+  "summary": "Separate a proper step of normalized integral reduction, scalar unit normalization, finite evaluation or line twisting; retain the simultaneous-system argument and fixed signs.",
+  "blueprint": "proof (1): exact finite evaluation identifies the constructed class with the finite Kummer boundary",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T012844-L-2340165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T012844-L-2340165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

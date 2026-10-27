@@ -1,0 +1,173 @@
+{
+ "id": "lem-route-unit-mem",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-nagata-relative-proj-exists",
+   "via": [
+    "lem-nagata-proj-affine-restriction"
+   ],
+   "place": "Proof, first paragraph (local squares): the degree-zero base map on each affine chart is induced by the structural unit map from the base ring into the degree-zero graded section ring."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The structural unit of the section algebra has degree zero.",
+ "statement": "Let $X$ be a scheme and let $A$ be a quasi-coherent commutative unital graded $\\mathcal O_X$-algebra datum [def-nagata-relative-proj], in the sheaf presentation with homogeneous pieces $A_n$ and graded unit $u:\\mathcal O_X\\to A_0$ [def-weil-pbc-graded-sheaf-structures]. Write $\\mathcal B$ for its underlying algebra sheaf, $\\eta:\\mathcal O_X\\to\\mathcal B$ for its structural map, and $e:\\bigoplus_{n\\geq0}A_n\\xrightarrow{\\sim}\\mathcal B$ for the given identification of underlying module sheaves. This identification respects the graded unit and multiplication, as in the datum `RelativeProjAlgebra`. For each open $U$ let $i_{n,U}:A_n(U)\\to\\mathcal B(U)$ be the map induced by the degree-$n$ coproduct inclusion followed by $e$, so unit compatibility is $i_{0,U}(u_U(r))=\\eta_U(r)$ for $r\\in\\mathcal O_X(U)$. For an affine open $V\\subseteq X$, put $C_V=\\mathcal B(V)$ and define $\\operatorname{sectionGrade}_A(V,n)=\\operatorname{im}(i_{n,V})$ as an additive subgroup of $C_V$. Then for every affine open $V\\subseteq X$ and every $r\\in\\mathcal O_X(V)$ one has\n$$\\eta_V(r)\\in\\operatorname{sectionGrade}_A(V,0).$$",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "lem-nagata-proj-affine-restriction: the Lean of this node (its module Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction imports Sheaf.AlgebraicGeometry.RelativeProjData (1 step)) reaches AlgebraicGeometry.RelativeProjAlgebra.unit_mem, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean, declaration AlgebraicGeometry.RelativeProjAlgebra.unit_mem (module Sheaf.AlgebraicGeometry.RelativeProjData, lines 131-136, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-nagata-relative-proj",
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "proof": [
+  {
+   "text": "Apply the degree-zero unit map to the given base section r. The equation unit_eq gives exactly a preimage of its structural-algebra image under the degree-zero inclusion.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "G6",
+  "date": "2026-10-27",
+  "kind": "agent-written",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section relative-proj-via-glueing (01LH), lemma-proj-inclusion (01NO); direct Lean proof using the coproduct universal property and compact affine opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'unit_mem' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the structural unit of a graded section algebra lies in the degree zero homogeneous subgroup",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-27T10:53:06Z\", \"tool\": \"leansearch\", \"query\": \"the structural unit of a graded section algebra lies in the degree zero homogeneous subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra\", \"SetLike.algebraMap_mem_graded\", \"SetLike.GradeZero.subring\", \"GradedRing.projZeroRingHom\", \"DirectSum.GradeZero.module\", \"GradedRing.projZeroRingHom'\", \"GradedMonoid.GradeZero.monoid\", \"HomogeneousSubsemiring.toSubsemiring\"], \"digest\": \"331b1fefe6ea9550\"}",
+   "date": "2026-10-27",
+   "verdict": "no exact match: SetLike.algebraMap_mem_graded assumes a grading by base-ring submodules and GradedOne; this item concerns the explicitly defined subgroup image in the project sheaf datum. The direct unit_eq range witness needs neither those instances nor their construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the structural unit of a graded section algebra lies in the degree zero homogeneous subgroup",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-27T10:53:07Z\", \"tool\": \"leanfinder\", \"query\": \"the structural unit of a graded section algebra lies in the degree zero homogeneous subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SetLike.one_mem_graded\", \"SetLike.GradedOne.one_mem\", \"SetLike.algebraMap_mem_graded\", \"SetLike.isHomogeneousElem_one\", \"SetLike.GradeZero.coe_one\", \"SetLike.gOne\", \"SetLike.coe_gOne\", \"DirectSum.GAlgebra.map_one\"], \"digest\": \"f02e7271bf332c1d\"}",
+   "date": "2026-10-27",
+   "verdict": "no exact match: SetLike.algebraMap_mem_graded assumes a grading by base-ring submodules and GradedOne; this item concerns the explicitly defined subgroup image in the project sheaf datum. The direct unit_eq range witness needs neither those instances nor their construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubgroup.range, AlgebraHom.map_one, GradedRing.one_mem",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-27T10:53:07Z\", \"tool\": \"loogle\", \"query\": \"AddSubgroup.range, AlgebraHom.map_one, GradedRing.one_mem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AddSubgroup.range'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: invalid Loogle identifier; corrected by the later SetLike.algebraMap_mem_graded query"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionGrade|unit_eq|map_one",
+   "sub": "Mathlib/AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-27T10:53:07Z\", \"tool\": \"grep\", \"query\": \"sectionGrade|unit_eq|map_one\", \"sub\": \"Mathlib/AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: initial subdirectory included a redundant Mathlib prefix; corrected by the later logged search in Algebra/DirectSum/Internal.lean"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "image of the unit map lies in degree-zero homogeneous component of the section ring",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-27T10:53:26Z\", \"tool\": \"leanfinder\", \"query\": \"image of the unit map lies in degree-zero homogeneous component of the section ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.one_apply\", \"SetLike.algebraMap_mem_graded\", \"SetLike.isHomogeneousElem_one\", \"SetLike.one_mem_graded\", \"HomogeneousLocalization.NumDenSameDeg.num_one\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem\", \"HomogeneousLocalization.one_eq\"], \"digest\": \"30564ca796fef96f\"}",
+   "date": "2026-10-27",
+   "verdict": "no exact match: SetLike.algebraMap_mem_graded assumes a grading by base-ring submodules and GradedOne; this item concerns the explicitly defined subgroup image in the project sheaf datum. The direct unit_eq range witness needs neither those instances nor their construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SetLike.algebraMap_mem_graded",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-27T10:53:27Z\", \"tool\": \"loogle\", \"query\": \"SetLike.algebraMap_mem_graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"SetLike.algebraMap_mem_graded\", \"CliffordAlgebra.even_induction\"], \"digest\": \"c179f06d64f0a92b\"}",
+   "date": "2026-10-27",
+   "verdict": "no exact match: SetLike.algebraMap_mem_graded assumes a grading by base-ring submodules and GradedOne; this item concerns the explicitly defined subgroup image in the project sheaf datum. The direct unit_eq range witness needs neither those instances nor their construction."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_eq|sectionGrade|homogeneous",
+   "sub": "Mathlib/Algebra/GradedMonoid",
+   "results": "{\"t\": \"2026-10-27T10:53:27Z\", \"tool\": \"grep\", \"query\": \"unit_eq|sectionGrade|homogeneous\", \"sub\": \"Mathlib/Algebra/GradedMonoid\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "inconclusive: initial subdirectory included a redundant Mathlib prefix; corrected by the later logged search in Algebra/DirectSum/Internal.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_mem_graded|GradedOne|unit_eq|sectionGrade",
+   "sub": "Algebra/DirectSum/Internal.lean",
+   "results": "{\"t\": \"2026-10-27T10:57:24Z\", \"tool\": \"grep\", \"query\": \"algebraMap_mem_graded|GradedOne|unit_eq|sectionGrade\", \"sub\": \"Algebra/DirectSum/Internal.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"61\", \"62\", \"67\", \"77\", \"288\"], \"digest\": \"4d7ec4dc429278ef\"}",
+   "date": "2026-10-27",
+   "verdict": "no exact match: SetLike.algebraMap_mem_graded assumes a grading by base-ring submodules and GradedOne; this item concerns the explicitly defined subgroup image in the project sheaf datum. The direct unit_eq range witness needs neither those instances nor their construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-nagata-proj-affine-restriction",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-def-nagata-sketch-data",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.RelativeProjData",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjData.lean",
+  "declaration": "AlgebraicGeometry.RelativeProjAlgebra.unit_mem",
+  "declarations": [
+   "AlgebraicGeometry.RelativeProjAlgebra.unit_mem"
+  ],
+  "statement": "theorem unit_mem (V : X.affineOpens) (r : Γ(X, V.1)) :\n    (A.algebra.obj.hom.hom.app (op V.1)).hom r ∈ A.sectionGrade V 0 := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-unit-mem",
+  "worker": "stage1",
+  "summary": "Rewrote the provisional machine-made statement as a self-contained degree-zero range assertion for the RelativeProj graded algebra datum. The proof is one elementary step: unfold the range defining sectionGrade and use the datum’s unit_eq compatibility. No new DAG nodes are needed; the existing Relative Proj definition is the only statement dependency. Mathlib searches found only general graded-one lemmas, not this project-specific sheaf-range statement.",
+  "blueprint": "The proof realizes the Relative Proj order-12 local-chart clause that the affine structural map is induced by the unit into the degree-zero component."
+ },
+ "mathlib_candidate": {
+  "declaration": "SetLike.algebraMap_mem_graded",
+  "file": "Mathlib/Algebra/DirectSum/Internal.lean",
+  "lines": [
+   61,
+   64
+  ],
+  "reason": "Related scalar-in-degree-zero theorem for a family of submodules with GradedOne. The supplied sectionGrade is an AddSubgroup range; the direct witness proof avoids constructing submodules or using the sorried graded-ring instance."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NG-efe51ef06",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-efe51ef06 (reviewer sub-agent of L); spot-checked: I read the whole item and the Lean declaration it records (RelativeProjData.lean:36-136): the RelativeProjAlgebra structure, its unit_eq field, the definition of sectionGrade as the AddSubgroup range of (Sigma.ι piece n ≫ decomposition.hom) on sections over V.1, and unit_mem. The item statement matches unit_mem exactly, with no hypothesis added or dropped. The datum is written out inline (B, η, e, i_{n,U}, unit compatibility), so the statement is self-contained. The two stmt_deps say what the statement takes from them: def-nagata-relative-proj gives the quasi-coherent commutative unital graded algebra with unit R_V→C_{V,0}, and def-weil-pbc-graded-sheaf-structures gives the O_X-linear unit O_X→B_0. Step 1 is correctly elementary: b=u_V(r) is a witness in the range by unit_eq at U=V. It uses no sorried sibling (sectionGrade_one/_internal/GradedRing), so there is no cycle. Edge cases hold: r=0 or 1, empty V, A_0≠O_X (only membership is claimed, no isomorphism), grading concentrated in degree 0. Duplicate check: I grepped the snapshot DAG for unit_mem/sectionGrade/unitZero. The sibling lem-route-section-grade-one is a different conclusion (a consumer, not a duplicate), and no blueprint node states this, so same_as=[] is correct. blueprint.from (lemma-nagata-relative-proj-exists via lem-nagata-proj-affine-restriction, the parent that cites this item) is right. The latest blueprint def-nagata-relative-proj requires the map Spec A(V)_0→Spec Γ(V,O_X), which is this unit into degree zero. The cited 'order 12' is the master/docstring order (cosmetic). Recording SetLike.algebraMap_mem_graded (DirectSum/Internal.lean:61-64) as mathlib_candidate is correct, since it needs a submodule grading with GradedOne. There are no new nodes, no tool_uses, no SGA and no base-change content. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T112350-L-1576056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

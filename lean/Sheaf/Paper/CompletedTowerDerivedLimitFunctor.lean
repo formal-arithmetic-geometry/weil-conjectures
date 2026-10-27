@@ -10,6 +10,9 @@ public import Sheaf.Paper.BoundedConstructibleTower
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-!
 # The functorial completed-coefficient derived inverse limit
@@ -35,7 +38,13 @@ K-injective resolutions. Transport back preserves quasi-isomorphisms and homotop
 theorem completedTowers_hasKInjectiveResolutions (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     Abelian.HasKInjectiveResolutions (pbcTowers T R) := by
-  sorry
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  have : IsGrothendieckAbelian.{u + 1} (pbcTowers T R) :=
+    reductionTower_isGrothendieckAbelian T ((adicLisseForget T).obj R)
+  infer_instance
 
 /-- The limit functor on strict module towers is additive.
 Source: Stacks Tag 099N (blueprint: prop-weil-pbc-rlim-functoriality).
@@ -45,7 +54,11 @@ Both addition and the limit maps have their specified component maps, giving the
 theorem completedTowerLimit_additive (T : Scheme.{u}) :
     (lim : pbcTowers T (pbcAdicCompletion T d) ⥤
       pbcModules T (pbcAdicCompletion T d)).Additive := by
-  sorry
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  exact Functor.additive_of_preserves_binary_products _
 
 /-- Derived strict inverse limit, computed from the actual inverse-limit functor.
 Source: Stacks Tag 099N (blueprint: prop-weil-pbc-rlim-functoriality). -/
@@ -70,7 +83,11 @@ theorem completedTowerConstant_exact (T : Scheme.{u}) :
     (completedTowerConstant d T).Additive ∧
     PreservesFiniteLimits (completedTowerConstant d T) ∧
     PreservesFiniteColimits (completedTowerConstant d T) := by
-  sorry
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- Additivity of the specified constant tower functor.
 Source: blueprint order 1242 (blueprint: prop-weil-pbc-rlim-functoriality). -/
@@ -122,7 +139,39 @@ theorem completedConstantRlimUnit_exists (T : Scheme.{u}) :
                 (((completedTowerConstant d T).mapHomologicalComplex (.up ℤ)).obj C)) ≫
           (completedTowerRlim d T).map
             (((completedTowerConstant d T).mapDerivedCategoryFactors).inv.app C) := by
-  sorry
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  let Δ := completedTowerConstant d T
+  let L : pbcTowers T (pbcAdicCompletion T d) ⥤
+      pbcModules T (pbcAdicCompletion T d) := lim
+  let Q : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ ⥤
+      DerivedCategory (pbcModules T (pbcAdicCompletion T d)) := DerivedCategory.Q
+  let τ : Q ⟶ Q ⋙ (completedDerivedConstant d T ⋙ completedTowerRlim d T) :=
+    Functor.whiskerRight
+        (NatTrans.mapHomologicalComplex (completedConstantLimitUnit d T) (.up ℤ))
+        DerivedCategory.Q ≫
+      Functor.whiskerLeft (Δ.mapHomologicalComplex (.up ℤ))
+        (Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ))
+          L.rightDerivedFunctorUnit) ≫
+      Functor.whiskerRight Δ.mapDerivedCategoryFactors.inv (completedTowerRlim d T)
+  let ff := Localization.fullyFaithfulWhiskeringLeft Q
+    (HomologicalComplex.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ))
+    (DerivedCategory (pbcModules T (pbcAdicCompletion T d)))
+  let η : 𝟭 (DerivedCategory (pbcModules T (pbcAdicCompletion T d))) ⟶
+      completedDerivedConstant d T ⋙ completedTowerRlim d T :=
+    ff.preimage (X := 𝟭 _) (Y := completedDerivedConstant d T ⋙ completedTowerRlim d T) τ
+  have hη : Functor.whiskerLeft Q η = τ := ff.map_preimage (X := 𝟭 _)
+      (Y := completedDerivedConstant d T ⋙ completedTowerRlim d T) τ
+  refine ⟨η, ?_, ?_⟩
+  · intro C
+    exact NatTrans.congr_app hη C
+  · intro η' hη'
+    apply Localization.natTrans_ext Q
+      (HomologicalComplex.quasiIso (pbcModules T (pbcAdicCompletion T d)) (.up ℤ))
+    intro C
+    exact (hη' C).trans (NatTrans.congr_app hη C).symm
 
 /-- The canonical map K → Rlim ΔK, defined by its unique representative normalization.
 Source: blueprint order 1242 (blueprint: prop-weil-pbc-rlim-functoriality). -/
@@ -148,7 +197,17 @@ theorem completedTowerRlim_properties (T : Scheme.{u}) :
       RF.IsRightDerivedFunctor η
         (HomotopyCategory.quasiIso (pbcTowers T (pbcAdicCompletion T d)) (.up ℤ)) →
       Nonempty (RF ≅ completedTowerRlim d T) := by
-  sorry
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  constructor
+  · exact ⟨inferInstance, inferInstance⟩
+  · intro RF η hRF
+    exact ⟨Functor.rightDerivedUnique RF _ η
+      (lim : pbcTowers T (pbcAdicCompletion T d) ⥤
+        pbcModules T (pbcAdicCompletion T d)).rightDerivedFunctorUnit
+      (HomotopyCategory.quasiIso _ (.up ℤ))⟩
 
 /-- The functorial construction has the sequential derived-limit Roos triangle.
 Source: Stacks Tags 08TC and 0BK7 (blueprint: prop-weil-pbc-rlim-functoriality).
@@ -164,6 +223,38 @@ theorem completedTowerRlim_roos (T : Scheme.{u})
         ((completedTowerRlim d T).obj M)⟦(1 : ℤ)⟧),
       IsDerivedLimitTriangle (completedTowerDerivedStep T d M)
         ((completedTowerRlim d T).obj M) p δ := by
-  sorry
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  let B := pbcModules T (pbcAdicCompletion T d)
+  have : HasFiniteBiproducts B := CategoryTheory.Abelian.hasFiniteBiproducts
+  have : CountableAB4Star B := by
+    have : (lim (J := Discrete ℕ) (C := B)).PreservesEpimorphisms :=
+      { preserves := by
+          intro F G f hf
+          have : Epi (Limits.Pi.map (fun n : ℕ ↦ f.app ⟨n⟩)) :=
+            (ProEt.countableProducts_exact.{u, u, 0} T (pbcAdicCompletion T d)).2.2
+              ℕ (fun n ↦ F.obj ⟨n⟩) (fun n ↦ G.obj ⟨n⟩)
+              (fun n ↦ f.app ⟨n⟩) (fun n ↦ inferInstance)
+          have he : lim.map f = (Pi.isoLimit _).inv ≫
+              Limits.Pi.map (fun n ↦ f.app ⟨n⟩) ≫ (Pi.isoLimit _).hom := by
+            apply limit.hom_ext
+            intro ⟨n⟩
+            simp
+          rw [he]
+          infer_instance }
+    have := hasExactLimitsOfShape_of_preservesEpi B (Discrete ℕ)
+    exact CountableAB4Star.of_hasExactLimitsOfShape_nat B
+  have : HasCountableProducts (DerivedCategory B) :=
+    (derivedCategory_countableProducts_core.{0} B).choose
+  have : HasProduct (completedTowerDerivedSequence T d M) := by
+    change HasProduct (fun n : ℕ ↦
+      (completedTowerDerivedSequence T d M n : DerivedCategory B))
+    exact HasLimitsOfShape.has_limit (C := DerivedCategory B)
+      (Discrete.functor (fun n : ℕ ↦
+        (completedTowerDerivedSequence T d M n : DerivedCategory B)))
+  refine ⟨inferInstance, completedRlimRoosProjection T d M, ?_⟩
+  exact completedRlim_roos T d M
 
 end AlgebraicGeometry.Scheme

@@ -143,10 +143,10 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDescent",
-  "file": "lean/WeilConjectures/AlgebraicGeometry/CanonicalTensorHomUncurryDescent.lean",
+  "module": "Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescent.lean",
   "declaration": "AlgebraicGeometry.exists_tensorHomUncurry_descent",
-  "statement": "theorem exists_tensorHomUncurry_descent (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    letI := schemeDerivedTensorMonoidal X\n    ∃ t : ∀ K L M : schemeDerivedCategory X,\n      (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M),\n      (∀ (P L M : CochainComplex\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ),\n        P.IsKFlatTensor →\n        ∀ φ : P ⟶ homComplex (R := X.sheaf) L\n            ((schemeHomKInjectiveResolution X).obj M),\n          t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M)\n              (DerivedCategory.Q.map φ ≫\n                (schemeDerivedInternalHomResolutionIso X L M).inv) =\n            pullbackTensorModelMap X P L ≫\n              DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫\n                schemeHomResolutionInverse X M) ∧\n    ∀ (K K' L L' M M' : schemeDerivedCategory X)\n      (a : K' ≅ K) (b : L' ≅ L) (c : M ≅ M')\n      (f : K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op L, M)),\n      t K' L' M' (a.hom ≫ f ≫\n        (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n          X.toRingedSpace.sheaf).map (b.hom.op, c.hom)) =\n        (a.hom ⊗ₘ b.hom) ≫ t K L M f ≫ c.hom",
+  "statement": "theorem exists_tensorHomUncurry_descent (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : letI := schemeDerivedTensorMonoidal X ∃ t : ∀ K L M : schemeDerivedCategory X, (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op L, M)) → (K ⊗ L ⟶ M), (∀ (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ), P.IsAcyclicTensorKFlat → ∀ φ : P ⟶ homComplex (R := X.sheaf) L ((schemeHomKInjectiveResolution X).obj M), t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M) (DerivedCategory.Q.map φ ≫ (schemeDerivedInternalHomResolutionIso X L M).inv) = pullbackTensorModelMap X P L ≫ DerivedCategory.Q.map (schemeTensorHomUncurry X P L M φ) ≫ schemeHomResolutionInverse X M) ∧ ∀ (K K' L L' M M' : schemeDerivedCategory X) (a : K' ≅ K) (b : L' ≅ L) (c : M ≅ M') (f : K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op L, M)), t K' L' M' (a.hom ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).map (b.hom.op, c.hom)) = (a.hom ⊗ₘ b.hom) ≫ t K L M f ≫ c.hom",
   "branch": "sheaf-dag",
   "by": "E3",
   "date": "2026-10-13",
@@ -155,7 +155,18 @@
   ],
   "note": "E5 2026-10-20: quarantined Sheaf copy restored as a compatibility re-export; canonical upstream declaration uses IsKFlatTensor and has a complete proof."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-13",
   "by": "L",

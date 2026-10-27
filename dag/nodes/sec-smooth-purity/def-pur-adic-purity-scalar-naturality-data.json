@@ -1,0 +1,176 @@
+{
+ "id": "def-pur-adic-purity-scalar-naturality-data",
+ "kind": "definition",
+ "title": "Normalized integral smooth-purity comparison data",
+ "statement": "Use the fixed finite-field and coefficient data, smooth separated finite-type morphism f of dimension d, and finite coefficient fields of [def-pur-conventions]. The full uniform finite-Tor categories, ordinary scalar restriction, normalized finite exceptional realization, and source pullback/twist/shift define OperationData, ComparisonData and Data exactly as in the attached Lean module. OperationData records closure, exactness and coefficient linearity. ComparisonData additionally records natural purity isomorphisms, normalized exceptional realizations and prescribed finite reductions, canonical source and compact-support scalar comparisons, and the counit-transpose exceptional comparison. Data adds the eight equations of Coherence: the purity square, source and exceptional tensor units, source and exceptional associativity, source and exceptional shift compatibility, and purity shift compatibility. These are the existing mathematical data definitions relocated from the existing comparison interface, without an existence assertion or changed field proposition. The existing operation-property fields are stored in SourceOperationData, TargetOperationData and ScalarOperationData, inherited by OperationData, with their original propositions unchanged. SourceOperationData stores each source property family through the generic proposition-family wrapper PropertyFamily; its projection abbreviations expose the same original properties.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Integral coefficient transport and compatibility; extracted assembly below lem-pur-adic-purity-scalar-naturality"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-coefficient-twists-detailed",
+  "thm-pur-adic-reconstruction",
+  "def-weil-integral-scalar-extension",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-derived-complete-integral-detailed",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-triangulated-category",
+  "def-weil-linear-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-constructible-exceptional-adjunction-coefficients"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Integral coefficient transport and compatibility; extracted assembly below lem-pur-adic-purity-scalar-naturality"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPurityScalarNaturality",
+  "date": "2026-10-25",
+  "group": "R2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Integral coefficient transport: normalized natural comparisons and their unit, composition and shift equations",
+   "via": [
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural smooth purity isomorphism for integral adic constructible complexes compatible with extension of coefficient fields",
+   "results": "Eight hits concerning BDeRham, smooth algebras, local cohomology and adic completion.",
+   "date": "2026-10-25",
+   "verdict": "No match for normalized adic purity or its coefficient equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "Adjunction.homEquiv and constructors for adjunctions.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction bijections support the argument, but do not construct adic purity comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "adicPurity|purity.*scalar|scalar.*purity",
+   "results": "msearch: zero Mathlib hits; local rg found the existing item and its five planned dependencies.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the extracted interface transport statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral smooth cohomological purity is compatible with finite extensions of coefficient fields and ordinary tensor associators",
+   "results": "Eight hits including Algebra.Smooth.baseChange and ModuleCat.extendScalars_assoc′.",
+   "date": "2026-10-25",
+   "verdict": "Generic algebra smoothness and module scalar associators; no normalized constructible adic purity statement."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPurityScalarNaturalityData",
+  "file": "lean/Sheaf/Paper/AdicPurityScalarNaturalityData.lean",
+  "declaration": "WeilConjectures.AdicPurityScalarNaturality.Data",
+  "declarations": [
+   "WeilConjectures.AdicPurityScalarNaturality.Field",
+   "WeilConjectures.AdicPurityScalarNaturality.Cat",
+   "WeilConjectures.AdicPurityScalarNaturality.fieldStage",
+   "WeilConjectures.AdicPurityScalarNaturality.ordinary",
+   "WeilConjectures.AdicPurityScalarNaturality.ScalarClosed",
+   "WeilConjectures.AdicPurityScalarNaturality.ambientSource",
+   "WeilConjectures.AdicPurityScalarNaturality.source",
+   "WeilConjectures.AdicPurityScalarNaturality.scalar",
+   "WeilConjectures.AdicPurityScalarNaturality.associator",
+   "WeilConjectures.AdicPurityScalarNaturality.scalarUnit",
+   "WeilConjectures.AdicPurityScalarNaturality.reductionBridge",
+   "WeilConjectures.AdicPurityScalarNaturality.operation",
+   "WeilConjectures.AdicPurityScalarNaturality.target",
+   "WeilConjectures.AdicPurityScalarNaturality.targetShift",
+   "WeilConjectures.AdicPurityScalarNaturality.rawScalar",
+   "WeilConjectures.AdicPurityScalarNaturality.rawScalarShift",
+   "WeilConjectures.AdicPurityScalarNaturality.comparison",
+   "WeilConjectures.AdicPurityScalarNaturality.compactComparison",
+   "WeilConjectures.AdicPurityScalarNaturality.finiteRing",
+   "WeilConjectures.AdicPurityScalarNaturality.finiteRingFinite",
+   "WeilConjectures.AdicPurityScalarNaturality.finiteLeftFixed",
+   "WeilConjectures.AdicPurityScalarNaturality.finiteRightFixed",
+   "WeilConjectures.AdicPurityScalarNaturality.FiniteRightNormalized",
+   "WeilConjectures.AdicPurityScalarNaturality.targetReductionMap",
+   "WeilConjectures.AdicPurityScalarNaturality.scalarBridge",
+   "WeilConjectures.AdicPurityScalarNaturality.coefficientLinear",
+   "WeilConjectures.AdicPurityScalarNaturality.sourceShift",
+   "WeilConjectures.AdicPurityScalarNaturality.scalarShift",
+   "WeilConjectures.AdicPurityScalarNaturality.sourceScalarComponent",
+   "WeilConjectures.AdicPurityScalarNaturality.composeShift",
+   "WeilConjectures.AdicPurityScalarNaturality.ShiftCompatibility",
+   "WeilConjectures.AdicPurityScalarNaturality.FiniteReductions",
+   "WeilConjectures.AdicPurityScalarNaturality.CoefficientMate",
+   "WeilConjectures.AdicPurityScalarNaturality.TargetRealizationReductions",
+   "WeilConjectures.AdicPurityScalarNaturality.Coherence",
+   "WeilConjectures.AdicPurityScalarNaturality.Data",
+   "WeilConjectures.AdicPurityScalarNaturality.coefficientTriangulated",
+   "WeilConjectures.AdicPurityScalarNaturality.OperationData",
+   "WeilConjectures.AdicPurityScalarNaturality.ComparisonData",
+   "WeilConjectures.AdicPurityScalarNaturality.SourceAdditiveProperty",
+   "WeilConjectures.AdicPurityScalarNaturality.SourceExactProperty",
+   "WeilConjectures.AdicPurityScalarNaturality.SourceLinearProperty",
+   "WeilConjectures.AdicPurityScalarNaturality.TargetLinearProperty",
+   "WeilConjectures.AdicPurityScalarNaturality.TargetExactProperty",
+   "WeilConjectures.AdicPurityScalarNaturality.ScalarAdditiveProperty",
+   "WeilConjectures.AdicPurityScalarNaturality.ScalarExactProperty",
+   "WeilConjectures.AdicPurityScalarNaturality.SourceOperationData",
+   "WeilConjectures.AdicPurityScalarNaturality.TargetOperationData",
+   "WeilConjectures.AdicPurityScalarNaturality.ScalarOperationData",
+   "WeilConjectures.AdicPurityScalarNaturality.PropertyFamily",
+   "WeilConjectures.AdicPurityScalarNaturality.SourceOperationData.sourceAdditive",
+   "WeilConjectures.AdicPurityScalarNaturality.SourceOperationData.sourceExact",
+   "WeilConjectures.AdicPurityScalarNaturality.SourceOperationData.sourceLinear"
+  ],
+  "statement": "structure Data extends ComparisonData D C f d S",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-25",
+  "note": "Existing functors and normalizations relocated unchanged. Coherence is exposed for proof assembly. OperationData inherits source, target and scalar property records to bound kernel checking, retaining all field propositions. Elaboration respects local irreducibility except within reductionBridge and sourceShift."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-adcfc",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T143842-L-1091556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-adcfc",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T143842-L-1091556",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs old item module (verbatim apart from the declared Coherence expose, OperationData regrouping and transparency options); the two new sorry statements vs the old item statement (each follows from it, neither restates it); 4 direct importers compiled against the delivered modules"
+ }
+}

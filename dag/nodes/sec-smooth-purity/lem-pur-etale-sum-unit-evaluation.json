@@ -1,0 +1,358 @@
+{
+ "id": "lem-pur-etale-sum-unit-evaluation",
+ "kind": "statement",
+ "title": "Derived sum evaluation at the coefficient unit",
+ "statement": "Let $A$ be a commutative ring and $e:U\\to X$ a separated etale finite-type morphism of schemes [def-pc-scheme, def-weil-etale-morphism, def-weil-scheme-morphism-properties]. Use constant-$A$ module sheaves on the small etale sites and their ordinary unbounded derived categories [def-weil-pbc-etale-sheaves, def-weil-pbc-derived-categories]. Write $T=e^*$ for exact inverse image [prop-weil-pbc-inverse-image-modules-exact], $L=e_{\\Sigma!}$ for sheafified lift-indexed sum extension [def-weil-pbc-etale-sum-extension], and $S=D(L)\\dashv T$ for its termwise derived adjunction with sum/evaluation counit $\\operatorname{ev}$ [lem-amb-etale-adjoint-locality]. Put $\\mathbf1_X=A_X$ and $\\mathbf1_U=A_U$, constant sheaves placed in degree zero [def-kun-constant-sheaf], and let $u:T\\mathbf1_X\\xrightarrow{\\sim}\\mathbf1_U$ be the canonical coefficient-unit comparison [def-pur-etale-exact-pullback-unit-composition-comparisons]. Use derived tensor [def-kun-derived-tensor], its left unitor $\\lambda$, and the natural derived sum projection\n$$p^\\Sigma_{M,K}:SM\\otimes_A^LK\\xrightarrow{\\sim}S(M\\otimes_A^LTK),$$\nspecified on total tensor representatives by $(s,m)\\otimes k\\mapsto(s,m\\otimes s^*k)$ [lem-pur-etale-sum-tensor-totalization, lem-pur-etale-sum-flat-kflat]. Define $a_K=\\lambda_{TK}\\circ(u\\otimes1_{TK})$. Then, for every $K\\in D(X_{\\mathrm{et}},A)$,\n$$\\operatorname{ev}_K\\circ S(a_K)\\circ p^\\Sigma_{T\\mathbf1_X,K}=\\lambda_K\\circ(\\operatorname{ev}_{\\mathbf1_X}\\otimes1_K).$$\nThis is an equality of derived natural transformations from $S(T\\mathbf1_X)\\otimes_A^L(-)$ to the identity functor. On sheaves the same equality holds with ordinary tensor, the sheaf projection $p^0$ of [lem-pur-etale-sheaf-projection-map], and the sheaf sum/restriction counit: for every module sheaf $H$,\n$$\\operatorname{ev}^0_H\\circ L(a_H)\\circ p^0_{T\\mathbf1_X,H}=\\lambda_H\\circ(\\operatorname{ev}^0_{\\mathbf1_X}\\otimes1_H).$$\nThe derived counit is the image of termwise sheaf evaluation under localization, and the displayed derived equality agrees with this sheaf equality on complexes of flat terms that are K-flat. No boundedness, constructibility, coefficient finiteness, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "thm-pur-composition-coherence proof Step 1, remaining co-projection factors: coefficient-unit sum/evaluation calculation in lem-pur-co-smooth-etale-locality Step 1; returned tensor proof Steps 2–3",
+  "external": [
+   {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF, lemma-f-shriek-projection: generator map; agent expansion to the unit evaluation and unbounded descent"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-adjoint-locality",
+  "def-kun-constant-sheaf",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "def-kun-derived-tensor",
+  "lem-pur-etale-sum-tensor-totalization",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-etale-sheaf-projection-map",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "First fix the coefficient and restriction identifications. By [lem-weil-pbc-etale-inverse-image-restriction], on an etale test object $(W,s)$ over $U$ the underlying abelian sheaf $TH$ is $H(W)$, and the inverse-image unit is restriction. Its $A$-action is the inverse image of the action by [prop-weil-pbc-inverse-image-modules-exact], so this is also the module restriction identification. The section denoted $s^*h$ in the projection formula becomes $h$: the projection $W\\times_XU\\to W$ followed by its graph section is the identity. The constant-ring comparison sends a constant section $a$ to the same $a$ by that proposition, hence does so for all sections locally. Its degree-zero localization is precisely the specified $u$: [def-pur-etale-exact-pullback-unit-composition-comparisons] defines $u$ using the exact/left-derived comparison, while [lem-weil-pbc-pullback-tensor-canonical-shift-unit] identifies the canonical left-derived unit comparison with pullback of the degree-zero ring complex. Composing with the inverse exact/left-derived comparison cancels that comparison. Thus the sheaf coefficient map $u^0:T A_X\\to A_U$ and its localization are the coefficient maps used in the two assertions.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-etale-exact-pullback-unit-composition-comparisons",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, canonical coefficient-unit identification for etale normalization; agent expansion using the cited normalized comparisons"
+   }
+  },
+  {
+   "text": "Prove the sheaf equality before deriving. The stipulated sum/evaluation counit is induced on the presenting sum of [def-weil-pbc-etale-sum-extension] by $i_s(x)\\mapsto x$ under Step 1. Indeed a map out of that sum is specified by its summand maps; the identity on the restricted sheaf has these very summand maps, so its adjoint is evaluation. Unique factorization through module sheafification [def-weil-presheaf-modules-sheafification] gives the stated counit. For a local generator $(s,a)\\otimes h$ of $L(TA_X)\\otimes_A H$, [lem-pur-etale-sheaf-projection-map] gives $(s,a\\otimes s^*h)$. Applying $L(a_H)$ and then evaluation gives $ah$ under Step 1. The other composite first evaluates $(s,a)$ to $a$, and the left unitor then gives $ah$ as well. The unitors are the action maps by [lem-sf-ringed-tensor-complex-constraints]. Linearity proves equality on the presenting direct sums and pure tensors. The tensor is sheafification of the presheaf tensor [def-pur-sheaf-tensor-product]; sections of either sheafification are locally represented by presenting sections. Hence the two sheaf maps agree, including on locally glued sections, by the uniqueness clause of module sheafification. The formulas commute with restriction and every module map $H\\to H'$, so this is an equality of natural transformations.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-etale-sheaf-projection-map",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF, lemma-f-shriek-projection, pure-tensor formula; agent calculation of its unit/evaluation specialization"
+   }
+  },
+  {
+   "text": "The coefficient sheaf $A_X$ is flat because its tensor action unitor identifies $A_X\\otimes_A-$ with the identity exact functor. Also $A_X[0]$ is K-flat: its total tensor with an acyclic complex is that same complex via the action unitor, hence acyclic, exactly the definition [def-pc-kflat-complex]. The same reasoning applies on $U$ and to the isomorphic degree-zero complex $T A_X[0]$. The action unitors on complexes and their localizations are supplied by [lem-sf-ringed-derived-closed-symmetric-monoidal]. By [lem-pur-etale-sum-flat-kflat], $L(T A_X)[0]$ is flat termwise and K-flat. Now take an arbitrary complex $C$ representing $K$. By [lem-pc-kflat-resolution] choose a quasi-isomorphism $P\\to C$ with $P$ K-flat and flat termwise. This is valid on the small etale site with its constant commutative-ring sheaf and imposes no boundedness. Derived tensors with these coefficient complexes and $K$ are therefore computed by their ordinary total tensors with $P$, as in [def-kun-derived-tensor].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-etale-sum-flat-kflat",
+    "lem-pc-kflat-resolution",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKF, lemma-f-shriek-projection, followed by agent K-flat representative reduction using the cited unbounded resolution theorem"
+   }
+  },
+  {
+   "text": "Apply Step 2 in every degree to $H=P^n$. The source total tensor has only the coefficient degree $0$ in its first factor; its degree $n$ is $L(T A_X)\\otimes_A P^n$. By [lem-pur-etale-sum-tensor-totalization], the chain projection has exactly the sheaf generator formula used in Step 2 on each such summand. The coefficient comparison is Step 1, and the chain unitors are the action maps, whose localizations are the derived unitors by [lem-sf-ringed-derived-closed-symmetric-monoidal]. Thus the two chain maps from this total tensor to $P$ coincide in every degree by Step 2. The differential is respected since all maps are natural in the sheaf argument; there is no extra sign because the coefficient degree is $0$. For the counit, use the specified termwise adjunction $S\\dashv T$ of [lem-amb-etale-adjoint-locality]. The exact-derived-adjunction construction [def-weil-exact-derived-adjunction] localizes the degreewise original counit. Exactness of $L$ and $T$ therefore makes the localized chain map precisely $\\operatorname{ev}$, rather than a new choice of adjunction counit. On the models of Step 3 the specified $p^\\Sigma$, $S(a_K)$ and the right-hand tensor of evaluation are consequently represented by the very chain maps just compared. Localizing their equality proves the displayed derived identity at $QP$.",
+   "uses": [
+    "lem-pur-etale-sum-tensor-totalization",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, etale sum/restriction counit normalization; agent termwise passage of the Tag 0GKF calculation to unbounded total tensors"
+   }
+  },
+  {
+   "text": "Finally $QP\\to K$ is an isomorphism. Naturality of the specified projection, counit, coefficient map, tensor and unitors transports the equality at $QP$ to $K$: postcompose the two sides with $QP\\xrightarrow{\\sim}K$ and use their naturality squares, then cancel the induced source isomorphism. This proves every component, hence the equality of derived natural transformations. For maps between flat-term K-flat models the equality is already the chain equality of Step 4, and it remains so upon inversion of quasi-isomorphisms. The equivalence from the localization of flat-term K-flat models to the derived category in [lem-weil-pbc-site-derived-tensor-descent] ensures these compute the same derived tensor and are independent of the models. This also proves the stipulated agreement with sheaf evaluation on such complexes. All resolutions and sum/tensor comparisons used above are unbounded ones. No finite coefficient, constructibility, Noetherian, or boundedness assumption has entered.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+    "place": "Step 1, naturality of etale normalization; agent descent of the explicit unit/evaluation chain equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pc-kflat-complex",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-amb-etale-adjoint-locality",
+  "lem-pc-kflat-resolution",
+  "lem-pur-etale-sheaf-projection-map",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-etale-sum-tensor-totalization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Step 1, expanded coefficient-unit sum/evaluation calculation; projection generators from Stacks Tag 0GKF, lemma-f-shriek-projection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated etale morphism sum extension and restriction on unbounded derived module sheaves satisfy evaluation composed with the unit projection formula equals evaluation at the coefficient unit tensor identity",
+   "results": "8 hits; Profinite.NobelingProof.GoodProducts.square_commutes, SheafOfModules.Presentation.map_π_eq, smoothSheafCommRing.ι_evalHom, SheafOfModules.unitHomEquiv_symm_comp, PresheafOfModules.toFreeYonedaCoproduct_fromFreeYonedaCoproduct, smoothSheaf.ι_evalHom, ModuleCat.Tilde.toOpen_res, SheafOfModules.ιFree_freeMap",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state this normalized projection/evaluation or comparison identity; generic monoidal-adjunction identities require additional arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the tensor unit for the derived projection formula of an exact sheaf extension by sums",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, Profinite.NobelingProof.succ_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁', CategoryTheory.Abelian.Ext.contravariantSequence_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state this normalized projection/evaluation or comparison identity; generic monoidal-adjunction identities require additional arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "12 hits; CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state this normalized projection/evaluation or comparison identity; generic monoidal-adjunction identities require additional arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale sum extension evaluation and projection formula at the tensor unit",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sumExtension.*(evaluation|counit)|etale.*projection.*counit",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state this normalized projection/evaluation or comparison identity; generic monoidal-adjunction identities require additional arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sheaf sum extension projection formula composed with counit at the tensor unit equals scalar evaluation",
+   "results": "smoothSheafCommRing.ι_evalHom; smoothSheaf.ι_evalHom; smoothSheafCommRing.ι_evalHom_apply; SheafOfModules.Presentation.map_π_eq; smoothSheaf.ι_evalHom_apply; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; smoothSheafCommRing.ι_evalHom_assoc; smoothSheafCommRing.forgetStalk_inv_comp_eval_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results do not state the lift-indexed sheaf identity with its specified derived projection and counit; generic adjunction results need the generator and representative arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "sumExtension.*(evaluation|counit)|etale.*projection.*counit",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results do not state the lift-indexed sheaf identity with its specified derived projection and counit; generic adjunction results need the generator and representative arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for etale extension by sums and its counit evaluated at the coefficient tensor unit",
+   "results": "Coalgebra.sum_map_tmul_counit_eq; TensorProduct.counit_def; ModuleCat.RestrictionCoextensionAdj.counit'_app; Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap; Coalgebra.sum_counit_tmul_map_eq; ModuleCat.RestrictionCoextensionAdj.counit'; CoalgCat.MonoidalCategoryAux.counit_tensorObj; TensorProduct.counit_tmul",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results do not state the lift-indexed sheaf identity with its specified derived projection and counit; generic adjunction results need the generator and representative arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Adjunction.IsMonoidal; CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal; CategoryTheory.Adjunction.instIsMonoidal; CategoryTheory.Adjunction.instIsMonoidal_1; CategoryTheory.Adjunction.isMonoidal_comp; CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results do not state the lift-indexed sheaf identity with its specified derived projection and counit; generic adjunction results need the generator and representative arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the projection isomorphism for extension by zero with the adjunction evaluation and tensor left unitor",
+   "results": "CategoryTheory.exp.ev_coev; CategoryTheory.ihom.ev_coev; CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: returned results do not state the lift-indexed sheaf identity with its specified derived projection and counit; generic adjunction results need the generator and representative arguments"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-sum-right-adjoint-tensor",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "thm-pur-composition-coherence proof Step 1, remaining co-projection factors: coefficient-unit sum/evaluation calculation in lem-pur-co-smooth-etale-locality Step 1; returned tensor proof Steps 2–3",
+   "via": [
+    "lem-pur-etale-sum-right-adjoint-tensor",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-etale-sum-unit-evaluation",
+  "worker": "stage1",
+  "summary": "Checked the current blueprint, Tag 0GKF, project declarations and all cited statements. Proved the sheaf formula by computing both composites on lift-indexed scalar tensors, then localized that equality on unbounded flat-term K-flat models. Existing nodes supply every non-elementary ingredient, so no new nodes are needed. The statement is unchanged.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1, remaining co-projection constituents, and lem-pur-co-smooth-etale-locality proof Step 1 etale normalization: explicit coefficient-unit evaluation and its unbounded descent.",
+  "tool_uses": [
+   {
+    "node": "def-kun-derived-tensor",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Defines the sheaf tensor by presheaf tensor sheafification."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Specifies that exact-derived adjunction counits are the localized degreewise counits."
+   },
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Its universal property checks equality of maps on presenting sections and defines the sum/evaluation map."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies arbitrary unbounded flat-term K-flat representatives; no node in the unit replaces this general resolution theorem."
+   },
+   {
+    "node": "lem-pur-etale-sheaf-projection-map",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "lem-pur-etale-sum-flat-kflat",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "lem-pur-etale-sum-tensor-totalization",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic foundational definition or theorem used with its full stated hypotheses; no purity step is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-tensor-complex-constraints",
+    "why": "Gives the actual native action formula for sheaf and complex unitors."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Restriction identifies inverse-image sections and their unit; this is a generic small-etale-site calculation, not a replacement of purity."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Fixes the representative normalization of the canonical left-derived coefficient-unit comparison."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Supplies the equivalence from localized flat-term K-flat models and natural tensor computation isomorphisms."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Supplies the actual constant-ring and module inverse-image comparison and exactness for arbitrary coefficients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-derived-tensor",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-amb-etale-adjoint-locality",
+  "lem-pc-kflat-resolution",
+  "lem-pur-etale-sheaf-projection-map",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-etale-sum-tensor-totalization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-df8320843",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-df8320843 (reviewer sub-agent of L); spot-checked: I read the statement and the 5 steps in full; nothing was changed. The statement, stmt_deps and source match clones/live, where the item is unsplit. There is no repair note, so the re-split rules do not apply, and no step exceeds 2000 characters. I checked the identity on generators: both sides send (s,a)⊗h to a·h, since s*h=h (restriction along the graph composed with the projection is the identity, lem-weil-pbc-etale-inverse-image-restriction (2)). It also holds for e=id, U empty, U=X⊔X, A=0 and A=Z/4. Step 1: u=Q(c), because the definition's exact/left-derived comparison cancels against the R[0]-pullback unit of lem-weil-pbc-pullback-tensor-canonical-shift-unit; prop-weil-pbc-inverse-image-modules-exact (1),(2) gives c and the module action. Step 2: the presenting-sum counit, the projection formula quoted exactly from lem-pur-etale-sheaf-projection-map, unitor a⊗x↦ax (lem-sf-ringed-tensor-complex-constraints), and equality checked locally then extended by uniqueness of sheafification. Step 3: A_X[0] and L(TA_X)[0] are K-flat with flat terms (lem-pur-etale-sum-flat-kflat); P comes from lem-pc-kflat-resolution with no bounds; the derived tensor uses a K-flat first factor. Step 4: the first factor sits in degree 0, so each degree has a single summand and no sign; the Ψ formula of lem-pur-etale-sum-tensor-totalization applies; the counit is localized by def-weil-exact-derived-adjunction, using only the first clause of lem-amb-etale-adjoint-locality. Step 5: transport along QP≅K by naturality; lem-weil-pbc-site-derived-tensor-descent gives model independence. No cycle. All off-unit uses are declared in tool_uses and are generic foundations; I accept them. Duplicate candidates (lem-sp-etale-sum-counit-scalar, lem-sp-etale-counit-scalar-model, lem-sp-etale-sum-coefficient-computation, lem-sf-etale-unit-tensor-arbitrary-base) are scalar-extension or compact-support statements with finite/ctf hypotheses, so none duplicates the item. Sources: Stacks more-etale.tex l.1808 lemma-f-shriek-projection = 0GKF; the blueprint file lem-pur-co-smooth-etale-locality.proof.md Step 1 exists in main-20261015 and in latest. No SGA. Mathlib searches cover all 3 services (one LeanSearch was rate-limited, a later one succeeded) and none matches. review_split.py printed 'no such node' for off-chapter cites; this is a path artefact, and I read each cited node directly."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSumUnitEvaluation",
+  "declaration": "AlgebraicGeometry.Etale.etale_sum_unit_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sumUnitProjectionSource",
+   "AlgebraicGeometry.Etale.sumUnitProjectionTarget",
+   "AlgebraicGeometry.Etale.sumUnitDerivedAction",
+   "AlgebraicGeometry.Etale.sumUnitSheafAction",
+   "AlgebraicGeometry.Etale.sumUnitDerivedEvaluation",
+   "AlgebraicGeometry.Etale.sumUnitDerivedScalarEvaluation",
+   "AlgebraicGeometry.Etale.SumUnitProjectionModel",
+   "AlgebraicGeometry.Etale.etale_sum_unit_evaluation"
+  ],
+  "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleSumUnitEvaluation.lean",
+  "statement": "theorem etale_sum_unit_evaluation [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] : ∃ (Ψ : EtaleSumTensorComparison A e inferInstance) (p : sumUnitProjectionSource A e ≅ sumUnitProjectionTarget A e), EtaleSumTensorClauses A e inferInstance Ψ ∧ SumUnitProjectionModel A e Ψ p ∧ (∀ K : DerivedCategoryModule A X, sumUnitDerivedEvaluation A e p K = sumUnitDerivedScalarEvaluation A e K) ∧ (∀ H : EtaleModuleSheaf X A, (etaleLowerShriekTensorIso (ModuleCat.{u + 1} A) (inferInstance : Etale e) ((upperStar (ModuleCat.{u + 1} A) e).obj (𝟙_ (EtaleModuleSheaf X A))) H).inv ≫ (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).map (sumUnitSheafAction A e H) ≫ (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app H = ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app (𝟙_ (EtaleModuleSheaf X A))) ▷ H ≫ (λ_ H).hom) ∧ (∀ H : EtaleModuleComplex X A, (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory.map ((upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategoryFactors.hom.app H) ≫ (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategoryFactors.hom.app (((upperStar (ModuleCat.{u + 1} A) e).mapHomologicalComplex (.up ℤ)).obj H) ≫ DerivedCategory.Q.map (((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).mapHomologicalComplex (.up ℤ)).counit.app H) = (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e inferInstance).counit.app (DerivedCategory.Q.obj H))",
+  "branch": "sheaf-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published exact sum/restriction adjunction and canonical coefficient-unit comparison. The canonical natural derived projection is characterized by its square with the generator-normalized total comparison; the final square fixes the derived counit as localized termwise evaluation. These normalization squares record agreement of the derived and sheaf identities on flat K-flat representatives. No coefficient finiteness or Noetherian hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6e601b86",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Clauses match the node: hypotheses are exactly separated étale finite type with CommRing A : Type (u+1) (recorded encoding), no extra assumptions. T, L, S, counit, u and λ are the published declarations. The existential Ψ is unique by summand normalization; p is unique by the model square, since the derived-category tensor comparison is invertible on K-flat representatives, and the square is consistent for non-K-flat complexes. The counit conjunct is Mathlib localization_counit_app. The sheaf clause uses the inverse of etaleLowerShriekTensorIso, which is the proof of lem-pur-etale-sheaf-projection-map. Edge cases (A=0, U empty, e=id, unbounded inputs) covered. lean.statement verbatim; only the lean field changed; one sorry; docstrings and both report sections present; no duplicate (the existing derived projection needs Finite A and Noetherian schemes). Advisory: the adjoint-locality module is not imported, and u⁰ is the monoidal εIso; neither blocks. Not recompiled per instructions; worker compile 52.7/37.7 s and dry run OK."
+ }
+}

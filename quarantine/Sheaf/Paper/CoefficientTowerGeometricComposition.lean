@@ -46,6 +46,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+section
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 universe u
@@ -108,4 +109,4 @@ theorem geometric_calculus
 
 end AlgebraicGeometry.ProEtale.SpTowerCalculus
 
-attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+end

@@ -1,0 +1,135 @@
+{
+ "id": "lem-trf-space-line-proj-etale-descent",
+ "kind": "statement",
+ "title": "Full generation and canonical maps from etale local canonical maps",
+ "statement": "Let $S,T$ be schemes, $X$ an algebraic space over S, $f:X\\to T$, $A$ affine graded algebra data [def-nagata-relative-proj], $L$ a line module and $\\psi$ a graded line map [def-trf-space-line-module-proj-input]. Let $\\{T_i\\to T\\}_{i\\in I}$ be an etale family with fppf-local lifting on scheme tests, such that $X_i=X\\times_TT_i$ are schemes. Give coefficientwise graded pullback data $D_i$ and local line maps $\\psi_i$ that are base changes of $\\psi$. Suppose their generation loci are all $X_i$ and the supplied canonical maps $r_i$ are open immersions. Then the generation locus of $\\psi$ is all X and there is a global canonical map $r:X\\to\\operatorname{Proj}_T(A)$, representable by open immersions, whose components over every scheme test of $X_i$ agree with $r_i$ followed by $D_i.relProjComparison$. No section algebra or direct-image comparison occurs in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C, generation locus and canonical open immersion; spaces-divisors.tex Tag 0D2Z(3)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-space-line-module-proj-input",
+  "def-nagata-relative-proj",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply space_line_module_proj_map. Its base-change generation clause and the local generation assumptions show the inverse image of the global generation open U in every X_i is top.",
+   "uses": [
+    "lem-trf-space-line-module-proj-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a scheme section of X, apply hcover to its image in T. Lift each covering arrow to X_i by the source pullback square. It then belongs to U. Subsheaf membership is local, so U is top. Transport the canonical map across this equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Convert the canonical-map equations on the global and local full opens to canonical test-map equations by naturality. The test base-change theorem identifies their component morphisms. The structural clause of the global canonical map says it is over T.",
+   "uses": [
+    "lem-trf-space-line-test-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply space_map_open_proj_base_change to the compatible global and local maps. This gives representability by open immersions; retain the component equations.",
+   "uses": [
+    "lem-trf-space-map-open-proj-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-line-module-proj-map",
+  "lem-trf-space-line-test-base-change",
+  "lem-trf-space-map-open-proj-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0D3C, generation locus and canonical open immersion; spaces-divisors.tex Tag 0D2Z(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of the canonical open immersion into relative Proj of a section algebra along an etale covering",
+   "results": "8 hits, including Proj.fromOfGlobalSections, Proj.pullbackAwayιIso, Proj.instIsOpenImmersionAwayι. No section-algebra presentation or space descent theorem.",
+   "verdict": "No exact match; use the project section-algebra and canonical-map interfaces.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent graded algebra sheaf has affine homogeneous section presentations and evaluation maps compatible with etale base change",
+   "results": "8 hits on SheafOfModules.IsQuasicoherent and QuasicoherentData presentations; none treats the requested graded section-algebra adapters.",
+   "verdict": "No exact match.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subfunctor.isSheaf_iff",
+   "results": "CategoryTheory.Subfunctor.isSheaf_iff in Mathlib.CategoryTheory.Sites.Subsheaf: membership of a subsheaf is local.",
+   "verdict": "Used for the proved generation-locus descent. No graded adapter or open-map descent match.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "SectionProjModel|section_proj_etale_embedding|IsOpenImmersion.*etale|sectionGrade_internal|tensorOpenSectionIso",
+   "results": "Project: SectionProjModel only in the item; no exact comparison or restriction theorem. Existing ingredients: RelativeProjAlgebra.affineData, sectionGrade_internal, tensorOpenSectionIso, isOpenImmersion_of_etale_cover; Mathlib etale instance for open immersions.",
+   "verdict": "Ingredients found; no duplicate of a new statement.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.SectionProjEtaleEmbedding",
+  "date": "2026-10-26",
+  "group": "T1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-section-proj-etale-embedding",
+   "place": "Proof Steps 1-5, separated into independently reusable adapter and geometric steps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.SpaceLineProjEtaleDescent",
+  "file": "lean/Sheaf/TraceFormula/SpaceLineProjEtaleDescent.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_line_proj_etale_descent",
+  "statement": "theorem space_line_proj_etale_descent\n    (S : Scheme.{u}) (T : Over S) (X : AlgebraicSpace S)\n    (f : X.obj.obj ⟶ yoneda.obj T) (A : T.left.GradedAlgebraData)\n    (L : X.Modules) (hL : X.IsLineModule L)\n    (ψ : GradedLineMap f A (lineTestFamily X L hL))\n    (I : Type v) (Tᵢ Xᵢ : I → Over S) (g : ∀ i, Tᵢ i ⟶ T)\n    (hget : ∀ i, Etale (g i).left)\n    (hcover : ∀ (V : Over S) (x : V ⟶ T),\n      ∃ R : Sieve V.left, R ∈ Scheme.fppfTopology V.left ∧\n        ∀ (W : Over S) (a : W ⟶ V), R a.left →\n          ∃ (i : I) (b : W ⟶ Tᵢ i), b ≫ g i = a ≫ x)\n    (k : ∀ i, yoneda.obj (Xᵢ i) ⟶ X.obj.obj) (fᵢ : ∀ i, Xᵢ i ⟶ Tᵢ i)\n    (hcart : ∀ i, IsPullback (k i) (yoneda.map (fᵢ i)) f (yoneda.map (g i)))\n    (Aᵢ : ∀ i, (Tᵢ i).left.GradedAlgebraData)\n    (D : ∀ i, Scheme.GradedAlgebraData.PullbackData (g i).left A (Aᵢ i))\n    (ψᵢ : ∀ i, GradedLineMap (yoneda.map (fᵢ i)) (Aᵢ i)\n      ((lineTestFamily X L hL).pullback (k i)))\n    (hbase : ∀ i, ψ.IsBaseChange (k i) (g i) (D i) (ψᵢ i))\n    (rᵢ : ∀ i, Xᵢ i ⟶ projOver (Tᵢ i) (Aᵢ i))\n    (hgen : ∀ i, (ψᵢ i).IsGenerationOpen ⊤)\n    (hcanonical : ∀ i, (ψᵢ i).IsCanonicalMap ⊤\n      ((⊤ : Subfunctor (yoneda.obj (Xᵢ i))).ι ≫ yoneda.map (rᵢ i)))\n    (hopen : ∀ i, IsOpenImmersion (rᵢ i).left) :\n    ψ.IsGenerationOpen ⊤ ∧\n      ∃ r : X.obj.obj ⟶ yoneda.obj (projOver T A),\n        ψ.IsCanonicalMap ⊤ ((⊤ : Subfunctor X.obj.obj).ι ≫ r) ∧\n        IsRepresentableWith (fun _ _ q ↦ IsOpenImmersion q.left) r ∧\n        ∀ (i : I) (W : Over S) (a : W ⟶ Xᵢ i),\n          (a ≫ rᵢ i).left ≫ (D i).relProjComparison =\n            (r.app (op W) ((k i).app (op W) a)).left",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0119d",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T082953-L-2244986",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0119d",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T082953-L-2244986",
+  "kind": "interface",
+  "note": "independent cc review: item signature byte-identical to clone; relocated SectionProjModel byte-identical with change record, 0 importers; 4 new sorry statements read against SpaceSectionAlgebra/GradedAlgebraData/PullbackData/EtaleLinePresentation defs (true); #print axioms on item and descent theorem (sorryAx only via new holes/upstream)"
+ }
+}

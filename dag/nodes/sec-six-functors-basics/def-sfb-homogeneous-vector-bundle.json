@@ -1,0 +1,144 @@
+{
+ "id": "def-sfb-homogeneous-vector-bundle",
+ "kind": "definition",
+ "status": "split",
+ "import_flags": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "title": "Specified homogeneous vector-bundle sheaves and natural cohomology coactions",
+ "statement": "Let $F$ be a field [def-weil-field], $S,B$ affine $F$-group schemes with $i:B\\to S$ [def-sc-group-scheme], and $\\pi:S\\to Q$ a morphism of $F$-schemes. Use rational modules and their maps from [def-sfb-rational-representation-gzero], the coordinate Hopf algebra and character conventions of [def-sfb-rational-highest-weight-data], and canonical pullback of module sections from [def-sfb-associated-character-line-bundle]. A homogeneous vector-bundle system consists of an $\\mathcal O_Q$-module $\\mathcal L(M)$ for every finite rational $B$-module $M$, together with natural, $\\Gamma(Z,\\mathcal O_Z)$-linear coordinates $\\Gamma(Z,(\\pi g)^*\\mathcal L(M))\\simeq\\Gamma(Z,\\mathcal O_Z)\\otimes_F M$ for every $F$-scheme $Z$ and $g:Z\\to S$. Require $\\pi(gi(b))=\\pi(g)$ and require the coordinates at $gi(b)$ to be $b^{-1}$ times those at $g$, using the action obtained by evaluation of the given coordinate coaction at $b$. The coordinates commute with arbitrary pullback. A comodule map $f:M\\to N$ is assigned a sheaf map whose pullback in coordinates is $1\\otimes f$. Specify an algebraic action of $S$ on $Q$ satisfying $s\\pi(g)=\\pi(sg)$, and an inverse-action linearization $\\tau_M:a_-^*\\mathcal L(M)\\simeq\\operatorname{pr}_Q^*\\mathcal L(M)$, where $a_-(s,q)=s^{-1}q$, whose pullback at $(s,\\pi(g))$ fixes the coordinates between $s^{-1}g$ and $g$. Do not assume existence or local freeness. Zariski cohomology with the displayed structural scalar map is the existing $H^i$ of [def-pc-flat-cohomology-comparison], with zero in negative degrees [pqf-def-cohomology]. A natural cohomology coaction $c$ is normalized as follows: if $c(v)=\\sum_jv_j\\otimes a_j$, then $H^i(\\tau_M)a_-^*(v)=\\sum_j\\operatorname{pr}_S^*(a_j)\\operatorname{pr}_Q^*(v_j)$ in the cohomology of $\\operatorname{pr}_Q^*\\mathcal L(M)$. Pullback here is exact abelian-sheaf inverse image on Ext followed by the canonical adjoint coefficient map. Evaluation is the actual appTop ring map, with its scalar compatibility as a named theorem. The identity coordinate map between the canonical Hopf and algGamma scalar encodings is bijective; this named theorem determines its linear inverse. Define regular left translation on the actual regular-function space by Hopf comultiplication, antipode in the first factor, interchange of factors, and this identity scalar comparison; its formula is $f(s^{-1}g)$. All coordinates, pullbacks, casts along equality of base maps, and tensor-extension maps are the canonical constructions, not freely chosen maps.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-rational-representation-gzero",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-associated-character-line-bundle",
+  "def-pc-flat-cohomology-comparison",
+  "pqf-def-cohomology"
+ ],
+ "source": {
+  "document": "literature/andersen-strong-linkage-principle-1980.pdf",
+  "place": "p.55, Homogeneous bundles on G/B; p.56, Some exact cohomology sequences; Milne 2017 Section 18c, 22.29--22.30, 22.48; Stacks 01F7 and 02KH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated homogeneous vector bundle sheaf coaction descent presentation",
+   "results": "Eight hits: quasicoherent sheaf presentations, categorical descent and topological vector bundles; none is the associated homogeneous bundle interface.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse the existing component notions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated homogeneous vector bundle sheaf coaction descent presentation",
+   "results": "Eight hits on SheafOfModules.Presentation and topological VectorBundle; no associated homogeneous vector bundle.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse the existing component notions"
+  },
+  {
+   "tool": "grep",
+   "query": "AssociatedVector|HomogeneousVector|CharacterFiltration|IsConstituent",
+   "results": "Mathlib/AlgebraicGeometry: zero hits.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse the existing component notions"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n AssociatedVector|HomogeneousVector|CharacterFiltration|IsConstituent lean/WeilConjectures lean/Sheaf dag/nodes; blueprint_refs.py search homogeneous vector; blueprint_refs.py search character filtration",
+   "results": "Upstream Representation.IsConstituent concerns ordinary group representations; existing coaction stable/simple predicates and rational modules are reused. No associated-vector-bundle interface or coaction character filtration. Both blueprint searches returned zero nodes.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse the existing component notions"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-cohomology-finite-exact",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Finite rational cohomology and character filtrations for homogeneous bundles. p.55, Homogeneous bundles on G/B; p.56, Some exact cohomology sequences; Milne 2017 Section 18c, 22.29--22.30, 22.48; Stacks 01F7 and 02KH.",
+   "via": [
+    "lem-sfb-flag-cohomology-finite-exact",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HomogeneousVectorBundle",
+  "declaration": "AlgebraicGeometry.HomogeneousVectorBundle.System",
+  "declarations": [
+   "AlgebraicGeometry.HomogeneousVectorBundle.Coordinates",
+   "AlgebraicGeometry.HomogeneousVectorBundle.pointEvaluation_commutes",
+   "AlgebraicGeometry.HomogeneousVectorBundle.pointEvaluation",
+   "AlgebraicGeometry.HomogeneousVectorBundle.pointAction",
+   "AlgebraicGeometry.HomogeneousVectorBundle.sectionCast",
+   "AlgebraicGeometry.HomogeneousVectorBundle.pullIso",
+   "AlgebraicGeometry.HomogeneousVectorBundle.inverseAction",
+   "AlgebraicGeometry.HomogeneousVectorBundle.pullH",
+   "AlgebraicGeometry.HomogeneousVectorBundle.System",
+   "AlgebraicGeometry.HomogeneousVectorBundle.cohomology",
+   "AlgebraicGeometry.HomogeneousVectorBundle.coordinateEquiv_bijective",
+   "AlgebraicGeometry.HomogeneousVectorBundle.coordinateEquiv",
+   "AlgebraicGeometry.HomogeneousVectorBundle.regularLeftCoaction",
+   "AlgebraicGeometry.HomogeneousVectorBundle.IsNaturalCoaction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HomogeneousVectorBundle.lean",
+  "statement": "structure System (S B : Grp (Over (Spec (.of F)))) [IsAffine B.X.left] (iB : B ⟶ S) (Q : Over (Spec (.of F))) (π : S.X ⟶ Q)",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a59b80747",
+  "group": "N0",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a59b80747",
+  "group": "N0",
+  "result": "pass",
+  "note": "Item record differs from live only in lean and stmt_deps (+2 new def nodes); lean.statement verbatim; dependency records identical to live; plain imports = proof-dep modules; all theorems sorry, defs have data. Clauses match the node: hsc verbatim from exists_rho_section_modules; IsRhoBorelPair for both Borels; hΦ/hopposite pin Φ+ and the opposite Borel, N=Φ.card. System coordinates pin L(M) (f(gb)=b^-1 f(g), descent-unique), maps, action and linearization; IsNaturalCoaction determines c by flat base change. Finite dimension, vanishing above N, actual H.δ equivariant and exact, filtrations exist with torus-weight quotients and simple constituents for every filtration, H^0 ≃ sectionModule ψ=χ^-1 with value formula and regularLeftCoaction = f(s^-1 g), Krull dim = N. Edge cases (M=0, Φ empty, trivial character, i=0, negative degrees, universe u) OK. New nodes are not duplicates; H12 fields OK. Note: the 'Second reading by N0' is a self-review; clause matching is in the Worker report and in this review. No compile (no file changed)."
+ }
+}

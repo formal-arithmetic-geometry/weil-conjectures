@@ -1,0 +1,60 @@
+# Stage-1 delivery: lem-sfb-finite-curve-factor-projective-pure
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-finite-curve-factor-projective-pure.json: statement, split into seven proof steps; not a Mathlib leaf.
+- citations.json: 32 step/node entries, each quoting the cited statement verbatim.
+- No new DAG nodes and no new Mathlib leaves. The statement and its hypotheses are unchanged.
+
+## Attachments
+
+None. Searched the live WeilConjectures source by the blueprint id and by finite/projective/pure-fibre terminology. No declaration states the whole item. The existing proved affine-base projective-space theorem in WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean:117 supplies an existing dependency, lem-fin-finite-over-projective; it does not state this item.
+
+## WANTED
+
+None for this split: the Stacks sources and the projective-space source needed here are available locally. The inherited historical mention of the unavailable de Jong PDF remains in blueprint provenance, but no step of this auxiliary argument relies on that PDF.
+
+## Corrections and observations
+
+The statement is retained, including global H-projectivity, the local topological lower bound, and geometric componentwise purity without flatness or normality. The source metadata is sharpened: Tag 0B3I states projectivity in the projective-bundle convention and does not by itself provide the global H-projective assertion needed here. Instead the proof uses the existing finite-over-projective theorem only over Spec k, where its affine-base conclusion gives the global embedding. The projective-to-separated graph theorem then gives the embedding over T. This avoids confusing locally projective with globally H-projective.
+
+The upper bound needs no surjectivity of h and does not claim that every fibre component maps onto a component of X. Its finite geometric-base-change map has discrete zero-dimensional fibres. The existing finite-type fibre/image dimension bound then gives dimension at most one. The lower bound comes separately from the generic point and the upstairs open bounded-dimension locus.
+
+## Unfinished work
+
+No mathematical step remains unfinished at this level. All proof dependencies are existing DAG statements or definitions. Their later formalization/proofs remain their own items. Only stage 1 was performed; no Lean file or repository file was written and no compiler, Lake or build was run.
+
+## Not duplicates
+
+No new nodes were created. Whole-DAG searches by 01WE, 0B3I, 02FZ, 02FY, 00OK, 01KR and by projectivity/dimension terminology found the reusable dependencies. Blueprint searches for curve factor, pure curve, finite dimension, quasi finite dimension, dimension fibres, and projective finite found no equivalent blueprint statement of this item. In particular lem-trf-finite-dominant-fibre-purity concerns a finite dominant map over the same integral base; it does not give projectivity or the relative factor over T of this item. It was read as a proof comparison, not used as a replacement clause or new node.
+
+## Review by Q19
+
+I read morphisms.tex at lemma-H-projective-composition (01WE), lemma-finite-projective (0B3I), lemma-openness-bounded-dimension-fibres (02FZ), lemma-dimension-fibre-after-base-change (02FY), definition-integral (01WH), and lemma-finite-type-noetherian (01T6). I also read schemes.tex lemma-fibre-product-after-map (01KR), varieties.tex lemma-dimension-locally-algebraic (0A21) and lemma-dimension-fibres-locally-algebraic (0B2L), and algebra.tex lemma-integral-sub-dim-equal (00OK), lemma-dimension-at-a-point-preserved-field-extension and the proof of lemma-local-dimension-zero-henselian (06RS). For projectivity over the affine field base I read the actual existing node lem-fin-finite-over-projective and its local Lean reference FiniteMorphism.lean, including the affine-base restriction. No SGA source was used.
+
+Step 1 uses exactly H-projective composition, affine-base finite-over-projective, and projective-to-separated permanence. I opened these node statements. The first composes global embeddings. The second expressly yields a global embedding when its base is affine, as Spec k is; k is Noetherian, and the assumed finite-type k-schemes are quasi-compact. The third requires separatedness of T/k, which projective-proper and the definition of proper supply. It then gives the same finite-projective-space convention for g. Neither finiteness alone nor bundle projectivity is being mistaken for a global relative projective-space embedding.
+
+Step 2 uses the cancellation clause (f) of lem-weil-pbc-proper-fp-permanence, projective-proper, the proper definition, finite-type base change and finite-type over Noetherian. Each cited statement was opened: cancellation gives local finite type of g from its composite over k; projective-proper upgrades to finite type, so its fibres really satisfy the finite-type hypotheses of all dimension nodes below. Fields are Noetherian directly because their only ideals are zero and the whole field. This needs no new lemma node.
+
+Step 3 uses integral = nonempty irreducible, scheme sobriety, the definition of generic point, the fibre-projection subspace identification explicitly stated in def-pc-scheme-fibre, and lem-sbc-equidimensional-open-local-dimension. The continuity/density calculation is written in the step, so dominance gives that the total generic point maps to the generic point of T. The generic-fibre hypothesis supplies componentwise dimension one; step 2 supplies local finite type over k(T). The local-dimension theorem therefore says exactly what is needed at the point corresponding to the total generic point. No assertion about the dimension of its local ring is made.
+
+Step 4 uses the existing 02FZ node's full statement: local finite type is enough and its open locus is in Y, not in T. Since this open would contain the generic point if nonempty, and that point has dimension one, it is empty. Nonnegativity at an actual point is immediate from the definition. This proves the local lower bound for all y, not just closed points.
+
+Step 5 uses finite-morphism base change, fibre-dimension invariance, and the equidimensional-open and supremum formulas. I checked that lem-sc-fibre-dimension-after-base-change states the local topological equality, rather than a local-ring equality. Associativity of fibre products identifies the finite map with the base change of the assumed h; it is not an assumed dominance or surjectivity claim. The composite Spec Omega -> T -> S is a geometric point because Omega is algebraically closed. Thus the given hypothesis really applies to C. If B is nonempty, C is nonempty and its constant local dimension one has supremum one. All fibre identifications here are the elementary universal-property identifications of iterated pullbacks.
+
+Step 6 uses only the stated finite base-change property, lem-weil-pbc-finite-over-field-affine-finite-dim and lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum. The latter explicitly allows any local ring with one prime and any finite algebra, so it applies to R = kappa(c), including nonreduced D and D = 0. The finite-dimensional algebra obtained by the preceding node is indeed finite as an R-module. In a discrete space any nonempty irreducible subset is a singleton; the resulting zero-dimensionality is an elementary chain calculation in the cited dimension definition. Thus mere finiteness of the underlying set is not being used to infer discreteness without justification.
+
+Step 7 uses the second clause of lem-zl-finite-type-fibre-image-dimension-bounds, with field Omega, source B, target C, d = 1 and n = 0. Its statement explicitly allows non-dominant, non-flat morphisms and empty fibres. The constant-local-dimension component theorem applies to the Noetherian scheme B and its whole open subset, giving exactly componentwise purity. All uses are recorded in citations.json as verbatim parts (here whole statements) of the actual node files. Every non-elementary input has a cited node; no step exceeds 2000 characters, no new node hides the item's own conclusion, and off-unit generic tools are declared in split_report.tool_uses for maintainer review.
+
+Small cases checked: S = T = Spec k and Y = X = P^1_k with identity maps; arbitrary finite field extensions T of the point; finite inseparable maps of projective curves in positive characteristic, where geometric fibres can be nonreduced; and the empty geometric-fibre branch, whose componentwise purity is vacuous. The proof tolerates reducible and nonreduced special fibres and never uses normality. At a generic point of a curve the local ring has dimension zero, whereas every open neighbourhood has dimension one; the explicit distinction in the item and steps 3--5 is essential and has been maintained. The only correction made during this self-review was to choose the finite-discrete-fibre route for the upper bound and to state the affine-base projectivity restriction explicitly. B1--B10 and C1--C8 introduce no missing new-node duties because no new nodes exist; the self-contained old statement, exact citations, route declarations, noncircular assembly and all hypotheses were checked directly as described above.
+
+
+## Repair of returned landing (2026-10-23)
+
+The single return concerns branch head 79b882960db: the reader approved the proof, but the landing found a side-project completion that had not been promoted to the live DAG. I have not treated that side completion as a finished live item. The current readable DAG still has this item unsplit with empty proof and proof dependencies. Comparing it with the retained delivery gives exactly the worker changes: the refined source place, seven proof steps, their dependency union, agent proof origin, recorded searches, split status and split report. All other current node fields, including the statement, statement dependencies, created record, unit, chapter and blueprint ancestry, agree and are retained.
+
+I reread all 26 current proof-dependency statements, rather than assuming that the previous approval covers a new base. The 32 saved step/node quotations are still verbatim parts of those statements, so no cited conclusion or required hypothesis changed relative to the retained citation evidence. In particular, finite-over-projective still has only an affine-base global conclusion; the graph theorem still requires separated T/k; the fibre-dimension open locus is still upstairs and requires local finite type; geometric base change still preserves local topological fibre dimension; and the upper bound still requires finite-type schemes over the same field and bounded dimensions of all scheme-theoretic fibres. These are exactly the hypotheses verified in steps 1, 2, 4, 5 and 7. I also reread the statement definitions, including the general integral-scheme clause of the function-field node, so no curve hypothesis is inadvertently imposed on T.
+
+The proof remains the previously reviewed argument, with its sources and search history intact. The repair now replaces each generic off-unit explanation with its precise mathematical use and why it is a generic tool for this unit. This distinguishes, for example, affine finite-algebra description, discrete finite spectrum, and the d=1,n=0 dimension estimate, rather than describing all of them as interchangeable dimension tools. No extra lemma or new node is introduced. All seven non-elementary steps remain below 2000 characters; their arguments and the small cases in the signed review above were checked again. The retained searches.jsonl was read and its actual results reused; no unrun search was added.
+
+The required initial dry run completed successfully at d1916386f9e before this repair documentation was written. A fresh final dry run and delivery will use the delivery tool's current-server-base worktree, so the completed split is submitted for live promotion instead of replaying the refused side-project head. Promotion and review bookkeeping remain the maintainer's operations.

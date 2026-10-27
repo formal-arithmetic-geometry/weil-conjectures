@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-torus-normalizer-borel-transitivity",
+ "kind": "statement",
+ "title": "Normalizer conjugacy of Borel subgroups through a maximal torus",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group scheme isomorphic to $(\\mathbf G_m)^r$ for an integer $r\\geq0$ [def-sc-gm-ga]; a maximal torus is one not properly contained in another torus subgroup. A group is solvable if its successive scheme-theoretic commutator subgroups eventually become trivial. A Borel subgroup is a maximal smooth connected solvable subgroup. Let $G$ be smooth and connected, $T\\subseteq G$ a maximal torus, and $B_1,B_2\\subseteq G$ Borel subgroups containing $T$. Then there exists $n\\in G(k)$ such that $nTn^{-1}=T$ and $nB_1n^{-1}=B_2$ as subgroup schemes. For a subgroup $J$, the conjugate $nJn^{-1}$ has $A$-points $n_AJ(A)n_A^{-1}$ for every commutative $k$-algebra $A$, where $n_A$ is the scalar extension of $n$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.11, final assertion, printed p.355; Theorems 17.9(b) and 17.10, printed pp.354--355."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homogeneous-quotient] to $B_1\\subseteq G$, obtaining a separated finite-type quotient $p:G\\to X$, faithfully flat and of finite presentation, with $p(a)=p(b)$ precisely when $a^{-1}b\\in B_1$. As $B_1$ is smooth, connected and maximal smooth connected solvable, [lem-sfb-borel-quotient-proper-geometry] makes $X$ proper. It is nonempty since $p(1)\\in X(k)$. This quotient is canonically the represented fppf coset sheaf of [lem-sfb-homogeneous-orbit-quotient-geometry]: the map $G/B_1\\to X$ is locally surjective because $p$ is an fppf cover, and injective because its fibres are exactly the right $B_1$-cosets. The functor of points of the scheme $X$ is a sheaf for fppf coverings by [lem-weil-pbc-fpqc-representable-descent], since a flat, surjective, quasi-compact morphism is a one-member fpqc covering. Thus sheafification identifies the two quotients, compatibly with the maps from $G$. In particular every $x\\in X(k)$ lifts to $g\\in G(k)$. Left multiplication defines the action on $X$: for $u\\in G(T)$ and $x\\in X(T)$, the lifting clause of [lem-sfb-algebraic-group-homogeneous-quotient] gives an fpqc covering $\\{T_a\\to T\\}$ and $v_a\\in G(T_a)$ with $x|_{T_a}=p(v_a)$; set $u\\cdot x|_{T_a}=p(u v_a)$. Two lifts of the same section differ, by the coset criterion, by right multiplication by a section $b$ of $B_1$, and replacing $v$ by $vb$ does not change $p(uv)$; so these local sections agree on the overlaps $T_a\\times_TT_b$ and glue uniquely to a section of $X(T)$ by [lem-weil-pbc-fpqc-representable-descent], naturally in $T$. This gives a morphism $G\\times X\\to X$ with the action identities, since those identities are the multiplication identities on local representatives.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9(b), proof, p.354; Definitions 5.20 and Theorems 5.28, 7.18, pp.104--105,142."
+   }
+  },
+  {
+   "text": "Restrict this action to $B_2$. The group $B_2$ is smooth, connected and solvable, and $X$ is nonempty, proper and of finite type over the algebraically closed field $k$. By [lem-sfb-solvable-proper-fixed-point], choose an $x\\in X(k)$ fixed scheme-theoretically by $B_2$, and lift it to $g\\in G(k)$ as in step 1. For every commutative $k$-algebra $A$ and every $b\\in B_2(A)$, fixedness gives $p_A(bg_A)=p_A(g_A)$. The coset-fibre criterion of [lem-sfb-algebraic-group-homogeneous-quotient], with $a=g_A$ and $b$ there equal to $bg_A$, gives $g_A^{-1}bg_A\\in B_1(A)$. Hence $B_2\\subseteq gB_1g^{-1}$ as subgroup schemes. Conjugation by $g$ is an isomorphism with inverse conjugation by $g^{-1}$, so $gB_1g^{-1}$ is a smooth connected solvable closed subgroup: its commutator series is the conjugate of that of $B_1$. Maximality in the definition of $B_2$ now gives $gB_1g^{-1}=B_2$.",
+   "uses": [
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-algebraic-group-homogeneous-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.9(b), proof, p.354, using Corollary 17.3, p.353."
+   }
+  },
+  {
+   "text": "Put $S=gTg^{-1}$. Since $T\\subseteq B_1$ and $T\\subseteq B_2$, both $S$ and $T$ are torus subgroups of $B_2$. They are maximal there. Indeed, a torus in $B_2$ containing $T$ is a torus in $G$ and hence equals $T$. If a torus $R\\subseteq B_2$ contains $S$, its inverse conjugate $g^{-1}Rg$ is a torus in $G$ containing $T$, so equals $T$, and $R=S$. Conjugation preserves the property of being a torus because it is an isomorphism of group schemes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.11, proof, p.355: the two maximal tori in the conjugate subgroup."
+   }
+  },
+  {
+   "text": "Apply the maximal-torus conjugacy clause of [lem-sfb-borel-maximal-torus-conjugacy] to the ambient group $B_2$, and to its maximal tori $S$ and $T$. Its hypotheses hold: $B_2$ is affine and of finite type by the standing hypotheses on all groups, and is smooth and connected by the Borel hypothesis. It yields $h\\in B_2(k)$ with $hSh^{-1}=T$ as subgroup schemes. This invocation needs neither reductivity of $G$ nor reductivity of $B_2$.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.11, proof, p.355, applying Theorem 17.10 to the smooth connected group $B_2$."
+   }
+  },
+  {
+   "text": "Set $n=hg\\in G(k)$. On every commutative $k$-algebra $A$, associativity gives $n_AT(A)n_A^{-1}=h_Ag_AT(A)g_A^{-1}h_A^{-1}=T(A)$. Likewise $n_AB_1(A)n_A^{-1}=h_AB_2(A)h_A^{-1}=B_2(A)$. For the last equality, $h_A\\in B_2(A)$ and conjugation by $h_A$ and by its inverse carry the subgroup $B_2(A)$ into itself. These equalities are natural in $A$, so are the required subgroup-scheme equalities $nTn^{-1}=T$ and $nB_1n^{-1}=B_2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.11, proof and final assertion, p.355: the element $hg$."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.9(b), p.354, and Corollary 17.11, proof and final assertion, p.355; maximal-torus conjugacy Theorem 17.10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer of a maximal torus acts transitively on Borel subgroups containing the torus in a connected algebraic group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MulAction.IwasawaStructure.is_generator\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"∀ {M : Type u_1} [inst : Group M] {α : Type u_2} [inst_1 : MulAction M α] (self : MulAction.IwasawaStructure M α),\\n  iSup self.T = ⊤\", \"doc\": \"For any group $M$ acting on a type $\\\\alpha$ with an Iwasawa structure, the supremum of the subgroups $T(a)$ for all $a \\\\in \\\\alpha$ equals the entire group $M$, i.e., $\\\\bigvee_{a \\\\in \\\\alpha} T(a) = M$.\"}\n  {\"name\": \"MulAction.IwasawaStructure.is_conj\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"∀ {M : Type u_1} [inst : Group M] {α : Type u_2} [inst_1 : MulAction M α] (self : MulAction.IwasawaStructure M α)\\n  (g : M) (x : α), self.T (g • x) = MulAut.conj g • self.T x\", \"doc\": \"For any group element $g$ in $M$ and any element $x$ in $\\\\alpha$, the subgroup $T(g \\\\cdot x)$ associated with the Iwasawa structure at $g \\\\cdot x$ is equal to the conjugate of the subgroup $T(x)$ by $\"}\n  {\"name\": \"Sylow.isPretransitive_of_finite\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [hp : Fact (Nat.Prime p)] [Finite (Sylow p G)],\\n  MulAction.IsPretransitive G (Sylow p G)\", \"doc\": \"For a prime number $ p $ and a group $ G $, if the set of Sylow $ p $-subgroups of $ G $ is finite, then the action of $ G $ on its Sylow $ p $-subgroups is transitive.\"}\n  {\"name\": \"MulAction.IsQuasiPreprimitive.isPretransitive_of_normal\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} {inst : Group G} {inst_1 : MulAction G X} [self : MulAction.IsQuasiPreprimitive G X]\\n  {N : Subgroup G} [N.Normal], MulAction.fixedPoints (↥N) X ≠ Set.univ → MulAction.IsPretransitive (↥N) X\", \"doc\": \"If a group $G$ acts quasi-preprimitively on a set $X$ and $N \\trianglelefteq G$ is a normal subgroup with $\\\\mathrm{Fix}(N) \\\\neq X$ (where $\\\\mathrm{Fix}(N)$ denotes the fixed points of $N$'s action), th\"}\n  {\"name\": \"Sylow.orbit_eq_top\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [Fact (Nat.Prime p)] [Finite (Sylow p G)] (P : Sylow p G),\\n  MulAction.orbit G P = ⊤\", \"doc\": \"For a prime $ p $, a finite group $ G $, and a Sylow $ p $-subgroup $ P $ of $ G $, the orbit of $ P $ under the conjugation action of $ G $ is equal to the entire set of Sylow $ p $-subgroups of $ G \"}\n  {\"name\": \"Sylow.conj_eq_normalizer_conj_of_mem_centralizer\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [Fact (Nat.Prime p)] [Finite (Sylow p G)] (P : Sylow p G) (x g : G),\\n  x ∈ Subgroup.centralizer ↑P → g⁻¹ * x * g ∈ Subgroup.centralizer ↑P → ∃ n ∈ (↑P).normalizer, g⁻¹ * x * g = n⁻¹ * x * n\", \"doc\": \"For a prime $ p $ and finite group $ G $, if $ P $ is a Sylow $ p $-subgroup of $ G $, and $ x,g \\\\in G $ satisfy $ x \\\\in C_G(P) $ (the centralizer of $ P $) and $ g^{-1}xg \\\\in C_G(P) $, then there exi\"}\n  {\"name\": \"Sylow.conj_eq_normalizer_conj_of_mem\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] [Fact (Nat.Prime p)] [Finite (Sylow p G)] (P : Sylow p G)\\n  [_hP : IsMulCommutative ↥↑P] (x g : G), x ∈ P → g⁻¹ * x * g ∈ P → ∃ n ∈ (↑P).normalizer, g⁻¹ * x * g = n⁻¹ * x * n\", \"doc\": \"Let $G$ be a group, $p$ a prime number, and let $P$ be an abelian Sylow $p$-subgroup of $G$. Assume that the set of Sylow $p$-subgroups of $G$ is finite. For any elements $x \\\\in P$ and $g \\\\in G$, if t\"}\n  {\"name\": \"Sylow.smul_eq_iff_mem_normalizer\", \"module\": \"Mathlib/GroupTheory/Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] {g : G} {P : Sylow p G}, g • P = P ↔ g ∈ (↑P).normalizer\", \"doc\": \"For any element $g$ in a group $G$ and any Sylow $p$-subgroup $P$ of $G$, the conjugation action $g \\\\cdot P = P$ holds if and only if $g$ belongs to the normalizer of $P$ in $G$, i.e., $g \\\\in N_G(P)$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two Borel subgroups containing the same maximal torus are conjugate by an element normalizing that torus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \": Subgroup G\", \"doc\": \"For a group $G$ and a subgroup $H$, the normalizer of $H$ in $G$ is the subgroup consisting of all elements $g \\\\in G$ that preserve the set $H$ under conjugation. The underlying set is defined as $\\\\{g\"}\n  {\"name\": \"Subgroup.conjAct_pointwise_smul_eq_self\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"{H : Subgroup G} {g : G} (hg : g ∈ normalizer H) : ConjAct.toConjAct g • H = H\", \"doc\": \"For a subgroup $H$ of a group $G$ and an element $g$ in the normalizer of $H$, the conjugation action of $g$ on $H$ satisfies $g H g^{-1} = H$.\"}\n  {\"name\": \"Subgroup.conjAct_pointwise_smul_iff\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"{H : Subgroup G} {g : G} : ConjAct.toConjAct g • H = H ↔ g ∈ normalizer H\", \"doc\": \"For a subgroup $ H $ of a group $ G $ and an element $ g \\\\in G $, the conjugation by $ g $ leaves $ H $ invariant (i.e., $ gHg^{-1} = H $) if and only if $ g $ belongs to the normalizer of $ H $ in $ \"}\n  {\"name\": \"Subgroup.le_normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \": H ≤ normalizer H\", \"doc\": \"For any subgroup $ H $ of a group $ G $, $ H $ is contained in its normalizer $ N_G(H) $, i.e., $ H \\\\leq N_G(H) $.\"}\n  {\"name\": \"Subgroup.setNormalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"(S : Set G) : Subgroup G\", \"doc\": \"For any subset $ S \\\\subseteq G $, the normalizer of $ S $ in $ G $ is the subgroup consisting of all elements $ g \\\\in G $ such that conjugation by $ g $ preserves $ S $, i.e., $ g S g^{-1} = S $. This\"}\n  {\"name\": \"Subgroup.mem_normalizer_iff\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{g : G} : g ∈ H.normalizer ↔ ∀ h, h ∈ H ↔ g * h * g⁻¹ ∈ H\", \"doc\": \"An element $ g $ of the group $ G $ belongs to the normalizer of the subgroup $ H $ if and only if for every element $ h $ in $ H $, the conjugate $ g h g^{-1} $ is also in $ H $.\"}\n  {\"name\": \"AddSubgroup.normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{G : Type u_1} → [inst : AddGroup G] → AddSubgroup G → AddSubgroup G\", \"doc\": \"For an additive group $G$ and an additive subgroup $H \\\\subseteq G$, the normalizer of $H$ in $G$ is the additive subgroup consisting of all elements $a \\\\in G$ such that for every $n \\\\in G$, $n \\\\in H$ \"}\n  {\"name\": \"Subgroup.mem_normalizer_iff''\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"{g : G} : g ∈ H.normalizer ↔ ∀ h : G, h ∈ H ↔ g⁻¹ * h * g ∈ H\", \"doc\": \"An element $ g $ of the group $ G $ belongs to the normalizer of the subgroup $ H $ if and only if for every element $ h $ in $ H $, the conjugate $ g^{-1} h g $ is also in $ H $. Formally, $ g \\\\in N_\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\", \"Borel\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  },
+  {
+   "tool": "grep",
+   "query": "(normalizer.*Borel|Borel.*normalizer|borelSubgroup)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group and Lie-algebra results do not state this result for smooth affine algebraic group schemes; Borel here is an algebraic subgroup, not a measurable-space structure"
+  },
+  {
+   "tool": "grep",
+   "query": "borelSubgroup|BorelSubgroup|IsBorelGroupScheme|normalizer.*torus|torus.*normalizer",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group conjugation, Sylow and Iwasawa actions and root-pairing Lie theory do not supply Borel or maximal-torus conjugacy for affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two Borel subgroups containing a maximal torus are conjugate by a rational point normalizing the torus",
+   "results": "8 hits; Subgroup.IsArithmetic.conj, Subgroup.conjAct_pointwise_smul_eq_self, CongruenceSubgroup.IsArithmetic.conj, MulAction.IwasawaStructure.is_conj, Subgroup.quotConjEquiv, Subgroup.conjAct_pointwise_smul_iff, Subgroup.Commensurable.conj, Commensurable.quotConjEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group conjugation, Sylow and Iwasawa actions and root-pairing Lie theory do not supply Borel or maximal-torus conjugacy for affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\", \"Borel\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group conjugation, Sylow and Iwasawa actions and root-pairing Lie theory do not supply Borel or maximal-torus conjugacy for affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer of a maximal torus acts transitively on Borel subgroups containing it in a connected smooth affine algebraic group",
+   "results": "8 hits; MulAction.IwasawaStructure.is_generator, MulAction.IwasawaStructure.is_conj, CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected, MulAction.IsQuasiPreprimitive.isPretransitive_of_normal, Sylow.isPretransitive_of_finite, Sylow.orbit_eq_top, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group conjugation, Sylow and Iwasawa actions and root-pairing Lie theory do not supply Borel or maximal-torus conjugacy for affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "(maximalTorus|MaximalTorus|borel.*conj|conj.*borel)",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group conjugation, Sylow and Iwasawa actions and root-pairing Lie theory do not supply Borel or maximal-torus conjugacy for affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsBorelGroupScheme\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group conjugation, Sylow and Iwasawa actions and root-pairing Lie theory do not supply Borel or maximal-torus conjugacy for affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a smooth connected affine group scheme over an algebraically closed field conjugate Borel subgroups through the same maximal torus by an element of its normalizer",
+   "results": "8 hits; MulAction.IwasawaStructure.is_conj, RootPairing.GeckConstruction.ωConj_mem_of_mem, Subgroup.conjAct_pointwise_smul_eq_self, Sylow.conj_eq_normalizer_conj_of_mem_centralizer, Sylow.conj_eq_normalizer_conj_of_mem, MulAut.conjNormal_val, RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff, ConjClasses.mk_bijOn",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group conjugation, Sylow and Iwasawa actions and root-pairing Lie theory do not supply Borel or maximal-torus conjugacy for affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-maximal-torus-centralizer-borel",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 17.39(b), printed p.364; the proof invokes Corollaries 12.40 and 17.29. Only (b) is stated here, with the stronger base-field restriction needed by the parent proof. Supporting input for the proof of Corollary 17.29: Corollary 17.11, final assertion, printed p.355; Theorems 17.9(b) and 17.10, printed pp.354--355.",
+   "via": [
+    "lem-sfb-maximal-torus-centralizer-borel",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-normalizer-borel-transitivity",
+  "worker": "stage1",
+  "summary": "Read Milne Corollary 17.11 and Theorems 17.9--17.10. Derive Borel conjugacy from existing proper quotient and Borel fixed-point nodes, adjust the conjugating element by maximal-torus conjugacy in B_2, and compute both functorial equalities. No new nodes or statement changes. Avoid the cyclic general flag-variety node.",
+  "blueprint": "Supporting algebraic-group prerequisite in the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain; specifically the Milne Corollary 17.11 input in the proof of Corollary 17.29. Existing blueprint.from.place and via are retained. Searches of the whole imported blueprint for Borel and torus found no equivalent blueprint statement. Latest blueprint read at literature/blueprint/latest; this algebraic-group lemma has no standalone blueprint file."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-d622a142e",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-d622a142e (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Ch.17(b), Thm 17.9 with proof, Thm 17.10 with proof, Cor 17.11 with final assertion (pp.353-355). The statement matches the final assertion of 17.11 as a scheme-theoretic equality on all A-points. Proof route = 17.9(b) proof (steps 1-2: fixed point of B_2 on the proper G/B_1, then maximality) + 17.11 proof (steps 3-5: maximal-torus conjugacy inside B_2, n=hg). Every hypothesis of the 5 cited nodes was checked: quotient node (G affine hence separated), proper-geometry node (B_1 maximal smooth connected solvable), orbit-quotient node (k-point lifting), fixed-point node (B_2 smooth connected solvable; X nonempty proper finite type), torus conjugacy applied to ambient B_2 (no reductivity needed). Elementary steps 3 and 5 verified, including the directions of conjugation. Small cases: GL_2 upper/lower Borels give n = permutation matrix; torus/solvable G give n=1; G=1. No cycle: the item is not in the closure of any cited node. The excluded general-borel-flag-variety does reach the item, so re-proving 17.9(b) is justified. No new nodes. Batch-5: def-trf-scheme-algebraic-space (generic Yoneda definition), lem-trf-smooth-fpqc-base-descent and lem-trf-fppf-covering-base-change (generic Mathlib leaves) are outside the trace-formula and Poincare-duality assumptions; accepted. FIX (C1): step 1 used, without a citation, that X is a sheaf (for the coset-sheaf identification) and that morphisms into X glue along fpqc covers (for the action). I added [lem-weil-pbc-fpqc-representable-descent] (Mathlib leaf, no cycle) to the step-1 text, uses and proof_deps, and made the action's local lifts come from the fpqc lifting clause of the quotient node. Note for the future split of lem-sfb-borel-maximal-torus-conjugacy: do not cite lem-sfb-general-borel-flag-variety there (it would create a cycle through this item).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusNormalizerBorelTransitivity",
+  "declaration": "AlgebraicGeometry.torus_normalizer_borel_transitivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusNormalizerBorelTransitivity.lean",
+  "statement": "theorem torus_normalizer_borel_transitivity {k : Type u} [Field k] [IsAlgClosed k] (G T B₁ B₂ : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (i₁ : B₁ ⟶ G) (hB₁ : IsBorelGroupScheme i₁.hom.hom) (i₂ : B₂ ⟶ G) (hB₂ : IsBorelGroupScheme i₂.hom.hom) (j₁ : T ⟶ B₁) (hj₁ : j₁ ≫ i₁ = iT) (j₂ : T ⟶ B₂) (hj₂ : j₂ ≫ i₂ = iT) : ∃ n : 𝟙_ (Over (Spec (.of k))) ⟶ G.X, ∀ (A : Type u) [CommRing A] [Algebra k A], Set.range (fun t : StandardGroupSchemes.affine k A ⟶ T.X ↦ (toUnit (StandardGroupSchemes.affine k A) ≫ n) * (t ≫ iT.hom.hom) * (toUnit (StandardGroupSchemes.affine k A) ≫ n)⁻¹) = Set.range (fun t : StandardGroupSchemes.affine k A ⟶ T.X ↦ t ≫ iT.hom.hom) ∧ Set.range (fun b : StandardGroupSchemes.affine k A ⟶ B₁.X ↦ (toUnit (StandardGroupSchemes.affine k A) ≫ n) * (b ≫ i₁.hom.hom) * (toUnit (StandardGroupSchemes.affine k A) ≫ n)⁻¹) = Set.range (fun b : StandardGroupSchemes.affine k A ⟶ B₂.X ↦ b ≫ i₂.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73e7a38a6",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Snapshot vs side-live: only lean + 2 landed def stmt_deps added; statement verbatim in file. Clause check: alg-closed k; G affine+LFT+QC, smooth, connected; T,B1,B2 closed via IsMaximalTorus/IsBorelGroupScheme (affine/finite type inherited, nothing stronger); IsTorus via AlgebraicClosure equivalent over alg-closed k incl. rank 0; Borel = Milne Def 17.6 scheme-theoretic solvable maximal; containments by factorization; ∃ n : 𝟙_ ⟶ G.X, ∀ A:Type u, range-equalities nTn⁻¹=T and nB1n⁻¹=B2 on A-points with n_A = toUnit ≫ n, matching Milne Cor 17.11 and conventions of landed borel_contains_maximal_torus_and_conjugacy. Edge cases trivial G/rank-0, B1=B2, GL2, zero/nonreduced A, any char fine. No duplicate (borelGroupScheme_normalizer_iff is Lemma 17.47, different). sorry only, docstrings with source/blueprint/5 steps, imports exist, report sections present. No file changed, no compile."
+ }
+}

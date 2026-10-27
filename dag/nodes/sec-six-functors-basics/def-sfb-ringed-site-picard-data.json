@@ -1,0 +1,166 @@
+{
+ "id": "def-sfb-ringed-site-picard-data",
+ "kind": "definition",
+ "title": "Line classes, generator extensions and normalized cohomology transport on ringed sites",
+ "statement": "For a site $(C,J)$ small relative to the sheaf universe [def-weil-size-convention] [def-weil-pbc-sites-and-cohomology] and a commutative ring sheaf $A$, put $A^\\times(U)=A(U)^\\times$ additively, and let $\\operatorname{Line}(A)$ be the module sheaves [def-weil-sheaf-of-modules-category] locally free of rank one. Put $\\operatorname{Pic}(A)=\\operatorname{Line}(A)/\\cong$. A frame over $U$ is a section whose scalar-multiplication map is bijective on every $V\\to U$; equivalently it is $A|_U\\cong M|_U$. A generator-torsor presentation is a units torsor whose sections identify with these frames compatibly with restriction and multiplication by units. A generator extension is a short exact sequence $0\\to A^\\times\\to E\\to\\mathbf Z\\to0$ with the fibre over $1$ identified with the frames, compatibly with restriction and translation by units. A Picard-comparison presentation consists of an abelian group law on the actual quotient whose zero is the unit line and whose addition is the sheaf tensor product [def-pur-sheaf-tensor-product], together with an additive equivalence to $H^1(C,A^\\times)$ normalized on each line by the class of every generator extension, and existence of the generator torsors and extensions. For a ringed-topos morphism [def-weil-pbc-ringed-topos-morphism] with independent site universes [def-pur-ringed-topos-morphism-of-universes], a cohomology transport is an abelian inverse-image presentation [def-trf-abelian-inverse-image-presentation] which is additive and exact, with its integer-sheaf comparison preserving the global section $1$. Pullback on $H^n=\\operatorname{Ext}^n(\\mathbf Z,-)$ is exact-functor transport followed by precomposition with this comparison. Its resolution-computation predicate says that for any specified coefficient sheaf and every pair of injective resolutions a comparison $\\beta$ under inverse image exists, and every degree-one global cocycle $a:\\mathbf Z\\to I^1$ is sent to $\\mathbf Z\\to f^{-1}\\mathbf Z\\xrightarrow{f^{-1}a}f^{-1}I^1\\xrightarrow{\\beta^1}J^1$. A coefficient map on units is structural if its underlying value map is the inverse image of unit inclusion followed by the structural ring map. Algebraic inverse images used in tensor pullback retain their transported ring and module operations [def-weil-pbc-algebraic-inverse-image].",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-trf-abelian-inverse-image-presentation",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-ringed-topos-morphism-of-universes"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 040E (lemma-h1-invertible), 03AJ (lemma-torsors-h1); sites.tex 00YV and sites-modules.tex 03D2, 03EK for transported operations and sheafified tensor."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Picard group of locally trivial rank one module sheaves on any ringed site is the first cohomology of its sheaf of units",
+   "results": "8 hits: CommRing.Pic; CommRing.Pic.instFreeAsModuleOfNat; CommRing.Pic.subsingleton_iff; SheafOfModules.unit; CommRing.Pic.instSubsingletonOfIsLocalRing; CommRing.Pic.mk_eq_one_iff; CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum; CommRing.Pic.mk_eq_one.",
+   "date": "2026-10-23",
+   "verdict": "Ring Picard groups do not supply line isomorphism classes or generator-extension and pullback normalization on arbitrary sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard group of line modules over a commutative ringed site is isomorphic to first cohomology of units naturally under geometric pullback",
+   "results": "8 hits: CommRing.Pic.AsModule; CommRing.Pic; instCommGroupPic; Submodule.unitsToPic_apply; CommRing.Pic.mk; Submodule.unitsToPic; CommRing.Pic.mk_eq_mk_iff; CommRing.Pic.instCoeSortType.",
+   "date": "2026-10-23",
+   "verdict": "No general ringed-site presentation. Reuse existing sheaf module/torsor/tensor structures instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Pic\"",
+   "results": "1 hit: PresheafOfModules.instIsNormalEpiCategory.",
+   "date": "2026-10-23",
+   "verdict": "No general site Picard presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|classH1|[Ll]ineModule (Mathlib/CategoryTheory/Sites)",
+   "results": "0 hits from msearch.py.",
+   "date": "2026-10-23",
+   "verdict": "No presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|picard|classH1|IsInvertible (WeilConjectures and Sheaf)",
+   "results": "WeilConjectures.CategoryTheory.Sites.Torsor defines Torsor on general sites, but classH1 requires a terminal object. WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree defines general IsInvertible. WeilConjectures.AlgebraicGeometry.Sites.GmPicard gives only scheme Picard comparisons. All are reused; no general-site Picard quotient with generator-extension normalization was found.",
+   "date": "2026-10-23",
+   "verdict": "Missing composite presentation; reuse each existing component."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*ringed|ringed.*Picard|Pic.*isomorphism classes of line (dag/nodes); blueprint_refs.py search \"ringed site Picard\"",
+   "results": "DAG hits include this item, its arbitrary-site torsor/pullback prerequisites, the ringed-site cohomology module and scheme/space applications. No definition node carries these presentations. blueprint_refs.py: 0 blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "Not an existing definition node."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-picard-h1-natural",
+  "date": "2026-10-23",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Functorial Picard obstruction for square-zero thickenings of algebraic spaces. Ringed-site input: identify line-module classes with first cohomology of units, compatibly with tensor pullback.",
+   "via": [
+    "lem-sfb-ringed-site-picard-h1-natural",
+    "lem-sfb-space-picard-obstruction-natural",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RingedSitePicardData",
+  "declaration": "CategoryTheory.RingedSitePicard.Comparison",
+  "file": "lean/Sheaf/CategoryTheory/Sites/RingedSitePicardData.lean",
+  "statement": "structure Comparison (A : Sheaf J CommRingCat.{w})",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.RingedSitePicard.ring",
+   "CategoryTheory.RingedSitePicard.units",
+   "CategoryTheory.RingedSitePicard.abSets",
+   "CategoryTheory.RingedSitePicard.ringSets",
+   "CategoryTheory.RingedSitePicard.unitValues",
+   "CategoryTheory.RingedSitePicard.integers",
+   "CategoryTheory.RingedSitePicard.integerOne",
+   "CategoryTheory.RingedSitePicard.oneSection",
+   "CategoryTheory.RingedSitePicard.Line",
+   "CategoryTheory.RingedSitePicard.lineSetoid",
+   "CategoryTheory.RingedSitePicard.Pic",
+   "CategoryTheory.RingedSitePicard.lineClass",
+   "CategoryTheory.RingedSitePicard.Frame",
+   "CategoryTheory.RingedSitePicard.GeneratorTorsor",
+   "CategoryTheory.RingedSitePicard.GeneratorExtension",
+   "CategoryTheory.RingedSitePicard.tensor",
+   "CategoryTheory.RingedSitePicard.Comparison",
+   "CategoryTheory.RingedSitePicard.CohomologyTransport",
+   "CategoryTheory.RingedSitePicard.pullback",
+   "CategoryTheory.RingedSitePicard.ComputesByResolutions",
+   "CategoryTheory.RingedSitePicard.IsStructuralUnitsMap",
+   "CategoryTheory.RingedSitePicard.IsComparison"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db38740fc",
+  "group": "Q31",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db38740fc",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery of 6b5baa38cf48 (RETURN H13/H9/H4) carries out every required correction. The duplicate RingedToposMorphismOfUniverses module is dropped; the def-weil-pbc-ringed-topos-morphism record is byte-identical to live; the data module imports the landed Sheaf.Paper.SequenceSiteCompletionProjection with hasDerived switched off file-locally; the new node cites def-pur-ringed-topos-morphism-of-universes in statement and stmt_deps. The item module is byte-identical to the returned head and both lean.statement fields match their files verbatim. Independent clause-by-clause reading: Pic is the line quotient by isomorphism with the tensor group pinned; c_A is pinned by extClass = delta(1) of generator extensions whose fibre over 1 is Isom(A,L), so it is canonical; cA and cB are quantified before f; f is RingedToposMorphismOfUniverses (ring B) (ring A) with inverse from J-sheaves to K-sheaves; the integer comparison is pinned by the image of 1; ComputesByResolutions quantifies all resolutions and every beta; rho is pinned through injective unitValues; f*L is pinned to changeOfRingsOfUniverses c over f.ringMap with no flatness; the conclusion clauses are in the node's order. Edge cases (zero ring, empty site, no final object, identity morphism, non-flat Z->Z/2) are covered. No hollow definition and only the item theorem is sorry. No compile run and no file changed; the worker reports 56.1 s and 23.2 s server compiles. Advisory only: the new node still lists def-weil-pbc-ringed-topos-morphism in its stmt_deps, which is harmless."
+ }
+}

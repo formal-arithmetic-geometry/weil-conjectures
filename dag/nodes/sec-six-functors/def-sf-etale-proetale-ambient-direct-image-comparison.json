@@ -1,0 +1,120 @@
+{
+ "id": "def-sf-etale-proetale-ambient-direct-image-comparison",
+ "kind": "definition",
+ "title": "Ambient etale/pro-etale direct-image comparison as the specified counit mate",
+ "status": "split",
+ "statement": "Let $u$ be a universe, let $A$ be a commutative ring in $\\mathrm{Type}(u+1)$, and let $f:X\\to Y$ be a morphism of schemes in universe $u$ [def-pc-scheme]. Use the ordinary uncompleted derived categories $D(W_{\\mathrm{et}},A)=D(\\operatorname{Sh}(W_{\\mathrm{et}},\\operatorname{Mod}(A)))$ [def-weil-pbc-derived-categories] and their pro-etale analogues with the constant coefficient ring $A$ and the ordinary operations $Lf_{\\mathrm{pro}}^*\\dashv Rf_{\\mathrm{pro},*}$ [def-weil-pbc-proetale-operations]. Write $Lf_{\\mathrm{et}}^*\\dashv Rf_{\\mathrm{et},*}$ for the analogous ordinary etale derived adjunction, and $S_W=D(\\nu_W^*)$ for exact comparison inverse image applied termwise [def-weil-pbc-site-comparison-morphism]. Define $d_{A,f}:Lf_{\\mathrm{pro}}^*S_Y\\xrightarrow{\\sim}S_XLf_{\\mathrm{et}}^*$ by first identifying $Lf_{\\mathrm{pro}}^*$ with $D(f_{\\mathrm{pro}}^*)$, then localizing the canonical exact inverse-image square $f_{\\mathrm{pro}}^*\\nu_Y^*\\xrightarrow{\\sim}\\nu_X^*f_{\\mathrm{et}}^*$, with the canonical localization-composition identifications, and finally using $D(f_{\\mathrm{et}}^*)\\xrightarrow{\\sim}Lf_{\\mathrm{et}}^*$. Define the ambient direct-image comparison $\\delta_{A,f}:S_YRf_{\\mathrm{et},*}\\longrightarrow Rf_{\\mathrm{pro},*}S_X$ to be the mate of $d_{A,f}$ under these two geometric adjunctions [def-weil-pbc-adjunction-mate]. Thus its component at $K$ is the transpose of $Lf_{\\mathrm{pro}}^*S_YRf_{\\mathrm{et},*}K\\xrightarrow{d_{A,f}}S_XLf_{\\mathrm{et}}^*Rf_{\\mathrm{et},*}K\\xrightarrow{S_X(\\varepsilon_{\\mathrm{et},K})}S_XK$. This defines the canonical transformation on all ordinary unbounded derived objects; it does not assert invertibility of its components or require boundedness, finiteness of $A$, or quasi-compactness or quasi-separatedness of $f$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
+  "place": "The exact inverse-image square and the canonical direct-image transformation, before its bounded-below isomorphism assertion; counit-mate normalization in Sheaf.Paper.EtaleProEtaleScalarMate, directImageComparisonAmbientPullbackIso and directImageComparisonAmbient (Stacks Tag 09A6)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "directImageComparisonAmbient|comparisonUpperStarCompUpperStarIso|mateEquiv",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean. Mathlib supplies the general mate, not this specialized comparison.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing specialized definitions in Sheaf.Paper.EtaleProEtaleScalarMate; do not redefine them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical etale proetale direct image comparison is the adjunction mate of the derived inverse image comparison square",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.mateEquiv_apply; CategoryTheory.mateEquiv; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; CategoryTheory.frobeniusMorphism_mate; CategoryTheory.unit_mateEquiv; Topology.IsInducing.adjunction; TopCat.Presheaf.pushforwardPullbackAdjunction. Generic adjunction and mate constructions only; no fixed-coefficient ambient site comparison.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing specialized definitions in Sheaf.Paper.EtaleProEtaleScalarMate; do not redefine them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp. Generic adjunction and mate constructions only; no fixed-coefficient ambient site comparison.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing specialized definitions in Sheaf.Paper.EtaleProEtaleScalarMate; do not redefine them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"def directImageComparisonAmbient|comparisonUpperStarCompUpperStarIso\" lean/WeilConjectures lean/Sheaf; rg -l \"directImageComparisonAmbient\" dag/nodes; tools/blueprint_refs.py search ambient direct image; tools/blueprint_refs.py search etale proetale comparison",
+   "results": "The exact ambient definitions occur at EtaleProEtaleScalarMate.lean:139 and :158. Three theorem nodes record or mention these helpers (scalar-mate, scalar-counit-transposes, scalar-pullback-cube); no definition node owns them. The bounded-below direct-image comparison uses D+; the unbounded comparison module uses termwise pullback functors rather than this specified L-pullback presentation. The integral ambient direct-image encoding concerns coefficient models rather than the etale/pro-etale square.",
+   "date": "2026-10-22",
+   "verdict": "New DAG definition ownership for existing declarations, as required by the return; no new Lean data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dualizing-closed-descent",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraph 3, closed exceptional coefficient descent: the ambient canonical direct-image mate appearing in the normalized coefficient square.",
+   "via": [
+    "lem-coef-dualizing-closed-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleProEtaleScalarMateData",
+  "declaration": "AlgebraicGeometry.ProEtale.directImageComparisonAmbient",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbientPullbackIso",
+   "AlgebraicGeometry.ProEtale.directImageComparisonAmbient"
+  ],
+  "statement": "def directImageComparisonAmbient\n    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    R(Etale.lowerStar (ModuleCat.{u + 1} A) f) ⋙\n        (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory ⟶\n      (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙\n        R(lowerStar (ModuleCat.{u + 1} A) f)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership repair requested by the independent review of 25ffe2b79f89. Both declarations are existing plain definitions in the unchanged published module: the specified exact inverse-image square transported to L-pullbacks, and its geometric-adjunction mate. No assertion of the scalar-mate theorem is used in the consumer statement. No source module or theorem node is changed. T7: relocate these unchanged definitions to the common data module, publicly reexported by the original module, to break the Lean cycle with the scalar cube and counit-transpose results.",
+  "file": "lean/Sheaf/Paper/EtaleProEtaleScalarMateData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d53c43e84",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d53c43e84",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-delivery of 25ffe2b79f89, which was RETURNed for H2/C. The Lean module is byte-identical, so the mathematics accepted then still holds; I re-checked the normalized square, the counit equation e_B∘i_*(b)=T_P(e_A)∘(c^e)^{-1}, the site image κ₁≫b^pro≫κ₂⁻¹, c^p at Q and at K, uniqueness over all b', and the D^+ endpoints. Repair: theorem stmt_dep lem-sfb-etale-proetale-scalar-mate replaced by new def node def-sf-etale-proetale-ambient-direct-image-comparison, recorded existing:true over directImageComparisonAmbientPullbackIso and directImageComparisonAmbient in the unchanged Sheaf.Paper.EtaleProEtaleScalarMate. Its statement matches lines 139-166 (five-iso square, mateEquiv of the derived adjunctions), its lean.statement is verbatim, its stmt_deps exist live, its source _section.md and Stacks 09A6 are correct, and no definition node duplicates it. No stmt_dep was dropped from the base and the live item has no lean record, so it is not superseded. The ringed-topoi record diff is the base (Q52), the same as side-live. No compile (no file changed). Advisory: the owned declarations' docstrings still cite the scalar-mate theorem, and some inherited theorem stmt_deps supply only plain definitions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-160a9",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T000911-L-4147139",
+  "kind": "interface",
+  "note": "independent cc review: delivered files vs b8b6a6cb2792 delivery (Lean and node JSONs byte-identical; only report/change-record retry note) and vs live 9176a4f74a2 (no touched file changed since; all imports exist); axioms clean; 8 delivered modules built in sandbox; 53 direct importers compiled: 45 pass incl. EtaleOpenScalarCoherence, 1 pre-existing missing-olean failure, 7 over 60 s with no error and equally slow against the published build"
+ }
+}

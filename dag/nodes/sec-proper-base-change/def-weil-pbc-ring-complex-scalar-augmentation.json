@@ -1,0 +1,118 @@
+{
+ "id": "def-weil-pbc-ring-complex-scalar-augmentation",
+ "kind": "definition",
+ "title": "Canonical scalar extension of an augmentation",
+ "statement": "For a ring homomorphism φ:A→B and an augmentation ε:P→A[0] on the one-object bottom ring site, define the scalar augmentation of Eφ(P) by Eφ(ε), the additive-functor comparison Eφ(A[0])≅Eφ(A)[0], and multiplication B tensor_A A→B. Multiplication is the actual semilinear adjunction lift of φ. Its value on the sheafification unit of 1 tensor x is φ(ε(x)); this normalization is proved. The ring-site complexes and augmentations are those of [def-weil-pbc-ring-complex-cech-data], and Eφ is [def-weil-pbc-ring-complex-semilinear-extension].",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "lemma-torsion-change-rings, Tag 0ALZ, displayed cochain isomorphism; algebraization.tex, Tag 099D(c)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "def-weil-pbc-ring-complex-cech-data"
+ ],
+ "proof": [
+  {
+   "text": "Lift the semilinear map φ on the unit modules by ringComplexSemilinearLift, apply single in degree zero, and compose with Eφ(ε). For normalization, use the degree-zero single-map equation, naturality of the tensor sheafification unit, and ringComplexSemilinearLift_one_tmul.",
+   "uses": [
+    "def-weil-pbc-ring-complex-semilinear-extension",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "def-weil-pbc-ring-complex-cech-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0ALZ, explicit scalar-extension equality with coordinate and augmentation details"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of a localization with a base change ring is the localization at the image element",
+   "results": "IsLocalization.tensor; IsLocalization.Away.tensorEquiv; IsLocalization.tensorRight",
+   "date": "2026-10-26",
+   "verdict": "Provides the termwise localization isomorphism, not the augmented cochain comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.tensorEquiv",
+   "results": "IsLocalization.Away.tensorEquiv : S tensor_R A is isomorphic to Localization.Away (algebraMap R S r)",
+   "date": "2026-10-26",
+   "verdict": "Use this equivalence for each increasing-tuple coordinate."
+  },
+  {
+   "tool": "grep",
+   "query": "RingComplexHasCechModel|augmented.*(KFlat|kFlat); tensor.*piRight",
+   "results": "Read RingComplexCechData, GlobalSectionScalarCechModel, GlobalSectionOrderedCechTensor, and Mathlib TensorProduct/Pi. Generic roof proof and finite-product tensor equivalence available, but no scalar cochain comparison for arbitrary ring maps.",
+   "date": "2026-10-26",
+   "verdict": "Re-use the roof argument and finite tensor-product equivalences; prove the ring-map specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexCechScalarModel",
+  "date": "2026-10-26",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 0ALZ explicit localization-complex base change; Tag 099D(c) augmentation",
+   "via": [
+    "lem-weil-pbc-ring-complex-cech-scalar-model",
+    "lem-weil-pbc-ring-complex-cech-base-change",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexScalarAugmentation",
+  "file": "lean/Sheaf/Paper/RingComplexScalarAugmentation.lean",
+  "declaration": "AlgebraicGeometry.ringComplexScalarAugmentation",
+  "declarations": [
+   "AlgebraicGeometry.ringComplexScalarUnit",
+   "AlgebraicGeometry.ringComplexScalarSingle",
+   "AlgebraicGeometry.ringComplexScalarAugmentation",
+   "AlgebraicGeometry.ringComplexScalarAugmentation_one_tmul"
+  ],
+  "statement": "def ringComplexScalarAugmentation {A B : CommRingCat.{u}} (φ : A →+* B)\n    {P : CochainComplex (RingSiteModules A) ℤ} (ε : P ⟶ ringComplexSingle A) :\n    ringComplexExtensionComplex φ P ⟶ ringComplexSingle B",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T092116-L-3401753",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T092116-L-3401753",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-split-reductive-finite-type-spreading",
+ "kind": "statement",
+ "title": "Finite-type spreading of a specified pinned split reductive realization",
+ "statement": "Let $k\\subseteq K$ be an extension of fields, let $\\mathcal R=(M,\\Phi,M^\\vee,\\Phi^\\vee,\\Delta)$ be a finite reduced based root datum, and let $P_K=(G_K,T_K=D_K(M),(X_\\alpha)_{\\alpha\\in\\Delta})$ be a pinned split realization of $\\mathcal R$ over $K$, with all notions as in [def-sfb-pinned-split-root-realization]. There exist a finitely generated $k$-subalgebra $A\\subseteq K$, a pinned split realization $P_A$ over $A$ of the same abstract based datum, and a pinning-compatible isomorphism $(P_A)_K\\simeq P_K$ inducing the identity on $M$. Here $(P_A)_K$ means pullback along $A\\hookrightarrow K$ as in [lem-sfb-pinned-split-root-base-change]. The model is reductive on all of $\\operatorname{Spec}A$, its torus is exactly $D_A(M)$, and its root lines are free of rank one over $A$. No spanning condition on $\\Phi$, algebraicity of $K/k$, or positive-rank condition is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 6.2.12, first paragraph of proof, printed p.211: descent of the split triple to a finite-type Q-subalgebra of C. General field-extension version with finitely many pinning vectors and their basis identities included in the finite-presentation data. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states preservation of the split reductive structure in this spreading theorem."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-pinned-split-root-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Order the finitely generated $k$-subalgebras $A_i\\subseteq K$ by inclusion. They form a small directed set: adjoin the union of two finite generating sets for an upper bound. Their union is $K$, since each $x\\in K$ belongs to $k[x]$. This union is the ring colimit (a compatible family of maps defines its unique map element by element). Every $A_i$ is a nonzero domain. The affine limit is consequently $\\operatorname{Spec}K$ by the cited affine-limit theorem. Choose a basis of the finite-rank lattice $M$, so $A_i[M]$ has the fixed Laurent presentation $A_i[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$, also when $r=0$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, first proof paragraph, p.211; affine-limit identification: Stacks Tags 01YX, 01YW."
+   }
+  },
+  {
+   "text": "Write $G_K=\\operatorname{Spec}B_K$. Choose a finite polynomial presentation of $B_K$ and adjoin its coefficients to $k$; the same presentation defines $B_i$ with $K\\otimes_{A_i}B_i\\simeq B_K$. Apply the algebra-map descent and equality clauses to descend the comultiplication $B_K\\to B_K\\otimes_K B_K$, counit $B_K\\to K$, antipode $B_K\\to B_K$, and torus restriction $B_K\\to K[M]$. All tensor powers used here are finitely presented by the cited tensor-product lemma. The finitely many coassociativity, counit, antipode, and torus-homomorphism identities hold at a common later stage by the equality clause. Affine spectrum functoriality and the tensor pushout description of affine products turn these identities into precisely the group and homomorphism diagrams. Thus $G_i=\\operatorname{Spec}B_i$ is an affine finitely presented group, with $j_i:D_{A_i}(M)\\to G_i$, and its specified $K$-isomorphism is an isomorphism of groups restricting to the original torus map.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "lem-weil-pbc-tensor-product-finitely-presented-algebras",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, p.211, expansion of finite-presentation descent; Stacks Tag 05N9 (2),(3), label lemma-colimit-category-fp-algebras, and Tags 00F4, 05G5."
+   }
+  },
+  {
+   "text": "Make $j_i$ a closed immersion as follows. The map $B_K\\to K[M]$ is surjective. For each of the finitely many Laurent generators $z_a,z_a^{-1}$ choose a preimage, written as a polynomial in the generators of $B_K$. Adjoin the finitely many coefficients of these polynomials to $A_i$. The equations that their images are $z_a,z_a^{-1}$ hold after a further enlargement: these are finitely many polynomial equations in $A_j[M]$, whose coefficients vanish in the injective subring map $A_j\\hookrightarrow K$. Hence $B_j\\to A_j[M]$ is surjective. Its spectrum is the closed subscheme cut out by its kernel, and it is a subgroup by the descended group identities. For $r=0$ the target is $A_j$, already generated as an $A_j$-algebra by its scalars.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.2.12, p.211, keeping the specified split torus; explicit finite Laurent-generator argument."
+   }
+  },
+  {
+   "text": "The structure morphism $G_i\\to\\operatorname{Spec}A_i$ is locally of finite presentation between affine qcqs schemes, with smooth $K$-pullback. Apply smoothness descent to the affine inverse system in step 1, and replace $i$ by that stage. Apply the new reductivity limit lemma to this now smooth affine finite-presentation group. Its $K$-pullback is the given reductive $G_K$, so at a later stage $G_i$ is reductive on the entire base. These two uses distinguish smoothness from the connected-reductive-geometric-fibre requirement; finite presentation alone would not give the latter.",
+   "uses": [
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-sfb-reductivity-eventual-ring-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Stacks Tag 0C0C, label lemma-descend-smooth; Conrad Corollary 3.1.11, pp.88--89."
+   }
+  },
+  {
+   "text": "Let $F=\\operatorname{Frac}(A_i)\\subseteq K$ and $\\eta\\in\\operatorname{Spec}A_i$ its generic point. The reductive $F$-group is smooth connected affine of finite type. Under $F\\subseteq K$, the torus $T_F$ becomes the specified torus $T_K$, whose geometric fibre over an algebraic closure $\\bar K$ is maximal. The field-extension theorem for $K\\subseteq\\bar K$ gives $T_K$ maximal in $G_K$; for $F\\subseteq K$ it then says $T_F$ is maximal, and also geometrically maximal by applying that theorem to an algebraic closure of $F$. The torus-fibre openness theorem now supplies an open neighbourhood $V$ of $\\eta$ on which $j_i$ is fibrewise maximal. Choose $0\\ne f\\in A_i$ with $\\eta\\in D(f)\\subseteq V$ and replace $A_i$ by $A_i[1/f]\\subseteq K$. This remains finitely generated over $k$ (adjoin $f^{-1}$); the group remains reductive because its geometric fibres are geometric fibres of the previous model. The torus is still exactly $D_{A_i}(M)$ and is maximal in every geometric fibre.",
+   "uses": [
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-reductive-torus-fibre-openness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad Proposition 3.1.9(2), pp.85--86; Milne, Algebraic Groups, Theorem 17.82, p.379."
+   }
+  },
+  {
+   "text": "The ring $A_i$ is Noetherian by the finite-type-algebra theorem, since every ideal of the field $k$ is either $0$ or $k$. Apply the tangent-weight theorem to conjugation by $D_{A_i}(M)$, using the chosen basis $M\\simeq\\mathbf Z^r$. It gives $\\mathfrak g=\\bigoplus_m\\mathfrak g_m$, finite support, finite projective summands and arbitrary-base-change comparisons. In particular the nonzero $K$-weights have support exactly $\\Phi$, and each root summand is the given one-dimensional line; the zero-weight summand is allowed to vanish. A finite projective module is finitely presented explicitly: write it as $\\operatorname{im}p$ for an idempotent matrix on $A_i^n$, presented by the $n$ generators and the $n$ columns of $1-p$ as relations. This verifies the finite-presentation hypothesis for the next step.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-relative-tangent-weight-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad Section 4 introduction, p.107; Stacks Tag 00FN, label lemma-Noetherian-permanence; finite-idempotent presentation written explicitly."
+   }
+  },
+  {
+   "text": "For every $\\alpha\\in\\Phi$, choose an isomorphism $K\\xrightarrow{\\sim}K\\otimes_{A_i}\\mathfrak g_\\alpha$, choosing $1\\mapsto X_\\alpha$ for $\\alpha\\in\\Delta$. For every other nonzero weight in the finite support choose the isomorphism $K\\otimes\\mathfrak g_m\\simeq0$. Use the module-map descent theorem on the directed tail of finite-type subalgebras containing $A_i$: descend each chosen map and its inverse, then descend both inverse identities by the equality clause. Only finitely many maps and equalities occur, so one common stage works. Tangent-weight base change identifies their targets with the root-weight modules of the new model. Thus all prescribed root lines are free of rank one, every unwanted nonzero weight vanishes, and the chosen simple-root basis vectors pull back to the specified $X_\\alpha$, rather than merely to unspecified nonzero multiples. Reductivity and fibrewise maximality persist because geometric fibres of a pullback are geometric fibres over extensions of the earlier residue fields.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-sfb-relative-tangent-weight-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad Proposition 6.2.12, p.211, with the specified pinning retained; Stacks Tag 01ZR, label lemma-descend-modules-finite-presentation, affine map and equality clauses."
+   }
+  },
+  {
+   "text": "Apply the arbitrary-base root-line and coroot theorem to the resulting reductive model with its closed fibrewise maximal split torus. It identifies $\\mathfrak g_0=\\operatorname{Lie}(T)$, so the weight decomposition has exactly the required zero summand. On every geometric fibre the nonzero weights, already proved to be precisely $\\Phi$, are its roots. For each $\\alpha\\in\\Phi$, the same theorem supplies its canonical relative coroot, represented by a locally constant function $\\operatorname{Spec}A\\to M^\\vee$. The spectrum of the domain $A$ is connected, hence this function is constant. Its value after $A\\hookrightarrow K$ is the prescribed $\\alpha^\\vee$ by the theorem's base-change clause and the original $K$-realization. Therefore every geometric fibre has exactly the prescribed corresponding coroots. This checks coroots as integer cocharacters, not as differentials, including in small characteristic.",
+   "uses": [
+    "lem-sfb-arbitrary-base-root-lines-coroots"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad Section 4, pp.107--109, Theorem 4.2.6, pp.120--121, and Definition 5.1.1, p.136."
+   }
+  },
+  {
+   "text": "Equip the final $A$-model with the unchanged abstract base $\\Delta$ and the descended generators. Steps 4--8 verify every condition in the definition of a pinned split realization. The specified group isomorphism over $K$ from step 2 identifies its torus with the originally identified $D_K(M)$, and step 7 identifies each named pinning vector. By the pinned base-change statement this is a pinning-compatible isomorphism $(P_A)_K\\simeq P_K$ inducing the identity on $M$. All enlargements adjoined finitely many elements of $K$, including inverses of nonzero elements, so $A$ is still a finitely generated $k$-subalgebra of $K$. Empty $\\Phi$, rank zero and a non-spanning root set require no modification: empty choices disappear and the central torus is retained.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-pinned-split-root-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad Definitions 5.1.1 and 6.1.1, pp.136 and 186; final assembly of Proposition 6.2.12 spreading step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-affine-spectrum",
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-sfb-arbitrary-base-root-lines-coroots",
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-pinned-split-root-base-change",
+  "lem-sfb-reductive-torus-fibre-openness",
+  "lem-sfb-reductivity-eventual-ring-colimit",
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-tensor-product-finitely-presented-algebras"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Expansion of Proposition 6.2.12 first paragraph, p.211, using Corollary 3.1.11, Proposition 3.1.9, and the stated Stacks descent lemmas; specified pinning retained. Local Conrad copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group over a field extension descends with its root datum to a finitely generated subalgebra of the field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"{F : Type u_1} →\\n  {K : Type u_2} →\\n    (A : Type u_3) →\\n      [inst : Field F] →\\n        [inst_1 : Field K] →\\n          [inst_2 : Field A] →\\n            [inst_3 : Algebra F K] →\\n              [inst_4 : Algebra F A] →\\n                [Algebra.IsAlgebraic F K] →\\n                  (L : Type u_4) →\\n   \", \"doc\": \"Given a field extension $ L $ of $ F $ where every element of $ K $ has its minimal polynomial over $ F $ splitting in $ L $, there is a canonical equivalence between the set of $ F $-algebra homomorp\"}\n  {\"name\": \"Polynomial.lift_of_splits\", \"module\": \"Mathlib/RingTheory/Adjoin/Field\", \"type\": \"∀ {F : Type u_2} {K : Type u_3} {L : Type u_4} [inst : Field F] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra F K] [inst_4 : Algebra F L] (s : Finset K),\\n  (∀ x ∈ s, IsIntegral F x ∧ (Polynomial.map (algebraMap F L) (minpoly F x)).Splits) →\\n    Nonempty (↥(Algebra.adjoin F ↑s) →ₐ[F] L)\", \"doc\": \"Given fields $F$, $K$, and $L$ with $F$-algebra structures on $K$ and $L$, and a finite set $s \\\\subseteq K$ such that each $x \\\\in s$ is integral over $F$ and the minimal polynomial of $x$ over $F$ spl\"}\n  {\"name\": \"IntermediateField.nonempty_algHom_of_splits\", \"module\": \"Mathlib/FieldTheory/Extension\", \"type\": \"∀ {F : Type u_1} {E : Type u_2} {K : Type u_3} [inst : Field F] [inst_1 : Field E] [inst_2 : Field K]\\n  [inst_3 : Algebra F E] [inst_4 : Algebra F K],\\n  (∀ (s : E), IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) → Nonempty (E →ₐ[F] K)\", \"doc\": \"If the minimal polynomial of an element $ x $ over $ F $ splits in $ K $, then there exists an $ F $-algebra homomorphism from the intermediate field $ E $ to $ K $. This follows from the fact that sp\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"RootPairing.instFiniteSubtypeMemSubmoduleRootSpanOfFinite\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (S : Type u_6)\\n  [inst_5 : CommRing S] [inst_6 : Module S M] [Finite ι], Module.Finite S ↥(P.r\", \"doc\": \"If the index type $\\\\iota$ is finite, then the submodule generated by the roots in the root pairing is finitely generated as an $S$-module.\"}\n  {\"name\": \"IntermediateField.nonempty_algHom_of_adjoin_splits\", \"module\": \"Mathlib/FieldTheory/Extension\", \"type\": \"∀ {F : Type u_1} {E : Type u_2} {K : Type u_3} [inst : Field F] [inst_1 : Field E] [inst_2 : Field K]\\n  [inst_3 : Algebra F E] [inst_4 : Algebra F K] {S : Set E},\\n  (∀ s ∈ S, IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) →\\n    IntermediateField.adjoin F S = ⊤ → Nonempty (E\", \"doc\": \"If $ E $ is an intermediate field obtained by adjoining elements to $ F $ such that a polynomial splits in $ E $, then there exists an $ F $-algebra homomorphism from $ E $ to $ K $.\"}\n  {\"name\": \"Polynomial.SplittingField.instGroupWithZero\", \"module\": \"Mathlib/FieldTheory/SplittingField/Construction\", \"type\": \"{K : Type v} → [inst : Field K] → (f : Polynomial K) → GroupWithZero f.SplittingField\", \"doc\": \"For any polynomial $ f $ over a field $ K $, its splitting field is equipped with a group with zero structure. This means the nonzero elements form a multiplicative group, and the zero element satisfi\"}\n  {\"name\": \"exists_finite_inj_algHom_of_fg\", \"module\": \"Mathlib/RingTheory/NoetherNormalization\", \"type\": \"∀ (k : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : CommRing R] [Nontrivial R] [a : Algebra k R]\\n  [fin : Algebra.FiniteType k R], ∃ s g, Function.Injective ⇑g ∧ g.Finite\", \"doc\": \"For any finitely generated algebra $ R $ over a field $ k $, there exists a natural number $ s $ and an injective finite algebra homomorphism from the polynomial ring $ k[x_1, \\\\dots, x_s] $ to $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing combinatorics, scalar-extension or filtered-colimit declarations do not descend split reductive group schemes with pinning"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spreading out split reductive group schemes with specified maximal torus and root spaces over finite type subrings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.EmbeddedG2\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Type u_1\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the type of embedded $ G_2 $ root systems parameterized by a type $ \\\\iota $, defined ind\"}\n  {\"name\": \"RootPairing.EmbeddedG2.toIsReduced\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.EmbeddedG2],\\n  P.IsReduced\", \"doc\": \"An embedded G2 root system in a root pairing implies that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.EmbeddedG2]\\n  [P.IsIrreducible], P.IsG2\", \"doc\": \"Every irreducible root pairing satisfies the axioms defining a G2 root system.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"module\": \"Mathlib/Algebra/Lie/Weights/RootSystem\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : CharZero K] [inst_2 : LieRing L] [inst_3 : LieAlgebra K L]\\n  [inst_4 : LieAlgebra.IsKilling K L] [inst_5 : FiniteDimensional K L] (H : LieSubalgebra K L)\\n  [inst_6 : H.IsCartanSubalgebra] [inst_7 : LieModule.IsTriangularizable K (↥H) L],\\n  (\", \"doc\": \"The root system associated with a Lie algebra over a field via its non-degenerate Killing form is reduced. Specifically, for a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a Cartan subalgebra $\\\\ma\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"RootPairing.instIsRootSystemSubtypeMemSubmoduleSpanRangeCoeEmbeddingRootCorootRestrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"Given a root pairing over a field $ L $, restricting scalars to a subfield $ K $ yields a new root pairing over $ K $. The new pairing has root and coroot embeddings valued in the $ K $-span of the or\"}\n  {\"name\": \"Polynomial.splits_id_of_splits\", \"module\": \"Mathlib/Algebra/Polynomial/Splits\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R} {S : Type u_4} [inst_1 : CommRing S] [inst_2 : IsDomain S]\\n  [IsSimpleRing R] (i : R →+* S),\\n  (Polynomial.map i f).Splits → (∀ a ∈ (Polynomial.map i f).roots, a ∈ i.range) → f.Splits\", \"doc\": \"Let $ R $ and $ S $ be commutative rings, with $ R $ a simple ring and $ S $ an integral domain. For a polynomial $ f $ over $ R $ and a ring homomorphism $ i : R \\to S $, if the polynomial $ \\text{map}\"}\n  {\"name\": \"Polynomial.splits_of_comp\", \"module\": \"Mathlib/Algebra/Polynomial/Splits\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R} {S : Type u_4} [inst_1 : CommRing S] [inst_2 : IsDomain S]\\n  [IsSimpleRing R] (i : R →+* S),\\n  (Polynomial.map i f).Splits → (∀ a ∈ (Polynomial.map i f).roots, a ∈ i.range) → f.Splits\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an integral domain. If $ f $ is a polynomial over $ R $, and $ i : R \\to S $ is a ring homomorphism such that the image $ \\text{map}_i(f) $ splits in $ S $ and \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing combinatorics, scalar-extension or filtered-colimit declarations do not descend split reductive group schemes with pinning"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsReductive\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing combinatorics, scalar-extension or filtered-colimit declarations do not descend split reductive group schemes with pinning"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|root.datum.*desc|root.datum.*spread",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"14\", \"text\": \"This file is a home for lemmas about semisimple and reductive Lie algebras.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"18\", \"text\": \"  algebra with an irreducible faithful finite-dimensional representation is reductive.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"71\", \"text\": \"are called *reductive*, if the coefficients are a field of characteristic zero.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"74\", \"text\": \"the label 'reductive' should mean when the coefficients are not a field of characteristic zero. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing combinatorics, scalar-extension or filtered-colimit declarations do not descend split reductive group schemes with pinning"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split reductive group schemes descend along filtered colimits of rings with their root data",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \": IsColimit (colimitCocone.{v, u} F)\", \"doc\": \"For any filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\mathsf{CommGrp} $, if the composition of the forgetful functor $ \\\\mathsf{CommGrp} \\\\to \\\\mathsf{Grp} $ with $ F $ has a colimit in $ \\\\mathsf{Grp} $, then \"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": IsColimit <| colimitCocone.{v, u} F\", \"doc\": \"The forgetful functor from the category of commutative rings to the category of rings reflects colimits for filtered diagrams. Specifically, if a diagram in the category of commutative rings has a col\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": CommRingCat.{max v u}\", \"doc\": \"The filtered colimit of a diagram of commutative rings in the category of commutative rings, constructed by first forming the colimit in the category of additive groups via the forgetful functor and t\"}\n  {\"name\": \"RingCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": RingCat.{max v u}\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a diagram $F : \\\\mathcal{J} \\\\to \\\\text{RingCat}$, the filtered colimit of $F$ in the category of rings is constructed by first forming the colimit in th\"}\n  {\"name\": \"AddGrpCat.FilteredColimits.colimitAddGroup\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [inst_1 : CategoryTheory.IsFiltered J] →\\n      (F : CategoryTheory.Functor J AddGrpCat) → AddGroup ↑(AddGrpCat.FilteredColimits.G F)\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{AddGrpCat}$, this constructs the filtered colimit of $F$ as an additive group by equipping the colimit (computed \"}\n  {\"name\": \"CommGrpCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \": CommGrpCat\", \"doc\": \"The filtered colimit of a diagram in the category of commutative groups is constructed by composing the diagram with the forgetful functor to groups, taking the filtered colimit in the category of gro\"}\n  {\"name\": \"RingCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": Cocone F\", \"doc\": \"For a filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\text{RingCat} $, this constructs a cocone with apex given by the filtered colimit of $ F $ in the category of rings. The construction first computes the c\"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": IsColimit (colimitCocone F)\", \"doc\": \"For a ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, the filtered colimit cocone $ (\\\\varinjlim F, \\\\iota) $ satisfies the universal propert\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: root-pairing combinatorics, scalar-extension or filtered-colimit declarations do not descend split reductive group schemes with pinning"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pinned split reductive group over a field extension descends to a finitely generated subalgebra with the same root datum and pinning",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.restrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a root pairing over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings valued in the $ K $-span \"}\n  {\"name\": \"RootPairing.restrictScalars\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $, this constructs a new root pairing over a subfield $ K $ by restricting scalars. The resulting pairing has root and coroot embeddings va\"}\n  {\"name\": \"Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"{F : Type u_1} →\\n  {K : Type u_2} →\\n    (A : Type u_3) →\\n      [inst : Field F] →\\n        [inst_1 : Field K] →\\n          [inst_2 : Field A] →\\n            [inst_3 : Algebra F K] →\\n              [inst_4 : Algebra F A] →\\n                [Algebra.IsAlgebraic F K] →\\n                  (L : Type u_4) →\\n   \", \"doc\": \"Given a field extension $ L $ of $ F $ where every element of $ K $ has its minimal polynomial over $ F $ splitting in $ L $, there is a canonical equivalence between the set of $ F $-algebra homomorp\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"{ι : Type u_1} →\\n  {L : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : Field L] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : Module L M] →\\n                [inst_4 : Module L N] →\\n                  (P : RootPairing ι \", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.instIsRootSystemSubtypeMemSubmoduleSpanRangeCoeEmbeddingRootCorootRestrictScalars'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/BaseChange\", \"type\": \"∀ {ι : Type u_1} {L : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field L] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module L M] [inst_4 : Module L N] (P : RootPairing ι L M N) (K : Type u_5)\\n  [inst_5 : Field K] [inst_6 : Algebra K L] [inst_7 : Module K M] [inst_8 : Module\", \"doc\": \"Given a root pairing over a field $ L $, restricting scalars to a subfield $ K $ yields a new root pairing over $ K $. The new pairing has root and coroot embeddings valued in the $ K $-span of the or\"}\n  {\"name\": \"RootPairing.finrank_rootSpanIn\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/IsValuedIn\", \"type\": \"∀ {ι : Type u_1} {M : Type u_4} {N : Type u_5} [inst : AddCommGroup M] [inst_1 : AddCommGroup N] (K : Type u_7)\\n  {L : Type u_8} [inst_2 : Field K] [inst_3 : Field L] [inst_4 : Algebra K L] [inst_5 : Module L M]\\n  [inst_6 : Module L N] [inst_7 : Module K M] [inst_8 : Module K N] [IsScalarTower K L M\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a commutative ring $ S $ equipped with an $ S $-algebra structure on $ R $, this proposition asserts that the root pairing between $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread out a split reductive group scheme and prescribed maximal torus along a filtered union of subrings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each morphism is affine and each object is a compact space, if an open subset $U$ of an object $D(i)$ satisfies $c.\\\\pi_{i}^{-1}(U) = \\\\top$ (the entire space), \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → (self : AlgebraicGeometry.Scheme.AffineCover P S) → self.I₀ → CommRingCat\", \"doc\": \"Given a morphism property $ P $ on schemes and a scheme $ S $, this function assigns to each index in the indexing type $ I₀ $ of an affine cover satisfying $ P $ over $ S $ a commutative ring, corres\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"reductive\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|pinned.*group|root.datum.*desc",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"14\", \"text\": \"This file is a home for lemmas about semisimple and reductive Lie algebras.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"18\", \"text\": \"  algebra with an irreducible faithful finite-dimensional representation is reductive.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"71\", \"text\": \"are called *reductive*, if the coefficients are a field of characteristic zero.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"74\", \"text\": \"the label 'reductive' should mean when the coefficients are not a field of characteristic zero. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pinned split reductive group scheme over a field has a model over a finitely generated subalgebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [LocallyOfFinitePresentation f] :\\n  LocallyOfFinitePresentation (f.resLE V U e)\", \"doc\": \"If a morphism of schemes is locally of finite presentation, then its restriction to any open subsets is also locally of finite presentation.\"}\n  {\"name\": \"spinGroup.mem_pin\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.SpinGroup\", \"type\": \"{x : CliffordAlgebra Q} (hx : x ∈ spinGroup Q) : x ∈ pinGroup Q\", \"doc\": \"Every element of the Spin group associated with the quadratic form $ Q $ is also an element of the Pin group associated with $ Q $.\"}\n  {\"name\": \"Polynomial.lift_of_splits\", \"module\": \"Mathlib.RingTheory.Adjoin.Field\", \"type\": \"{F K L : Type*} [Field F] [Field K] [Field L] [Algebra F K] [Algebra F L] (s : Finset K) :\\n  (∀ x ∈ s, IsIntegral F x ∧ Splits ((minpoly F x).map (algebraMap F L))) →\\n    Nonempty (Algebra.adjoin F (s : Set K) →ₐ[F] L)\", \"doc\": \"Given fields $F$, $K$, and $L$ with $F$-algebra structures on $K$ and $L$, and a finite set $s \\\\subseteq K$ such that each $x \\\\in s$ is integral over $F$ and the minimal polynomial of $x$ over $F$ spl\"}\n  {\"name\": \"Polynomial.IsSplittingField.finiteDimensional\", \"module\": \"Mathlib.FieldTheory.SplittingField.IsSplittingField\", \"type\": \"(f : K[X]) [IsSplittingField K L f] : FiniteDimensional K L\", \"doc\": \"If $ L $ is a splitting field of a polynomial $ f $ over a field $ K $, then $ L $ is a finite-dimensional vector space over $ K $.\"}\n  {\"name\": \"pinGroup\", \"module\": \"Mathlib.LinearAlgebra.CliffordAlgebra.SpinGroup\", \"type\": \"(Q : QuadraticForm R M) : Submonoid (CliffordAlgebra Q)\", \"doc\": \"The Pin group associated with a quadratic form $ Q $ on an $ R $-module $ M $ is the submonoid of the Clifford algebra $ \\\\mathrm{Cl}(Q) $ formed by intersecting the submonoid generated by the Lipschit\"}\n  {\"name\": \"Polynomial.Gal\", \"module\": \"Mathlib.FieldTheory.PolynomialGaloisGroup\", \"type\": \"{F : Type u_1} → [inst : Field F] → Polynomial F → Type u_1\", \"doc\": \"For a field $ F $ and a polynomial $ p $ over $ F $, the Galois group $ \\text{Gal}(p/F) $ is the group of field automorphisms of the splitting field of $ p $ that fix $ F $ element-wise. This is the se\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-split-root-realization",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Rational split realization of a finite reduced root datum; Spreading the given split complex triple in Conrad Proposition 6.2.12, first proof paragraph, printed p.211; include a chosen base and generators before specializing.",
+   "via": [
+    "lem-sfb-rational-split-root-realization",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-reductive-finite-type-spreading",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded finite-presentation descent into group identities, torus immersion, eventual reductivity, maximality, weight-line and specified-pinning descent, and coroot constancy. Reused existing structural nodes and created only the fixed-model reductivity limit theorem. All searches logged; no Lean attachment.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited supporting chain through rational split realization: Conrad Proposition 6.2.12 spreading paragraph. No matching imported blueprint node; inherited null ancestor and via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fp-module-map-descent-affine",
+    "why": "Generic finite-presentation algebra, module or scheme-limit descent tool used in spreading a fixed group; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Generic finite-presentation algebra, module or scheme-limit descent tool used in spreading a fixed group; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-smooth-qcqs",
+    "why": "Generic finite-presentation algebra, module or scheme-limit descent tool used in spreading a fixed group; the unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic finite-presentation algebra, module or scheme-limit descent tool used in spreading a fixed group; the unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fp-module-map-descent-affine",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-42f3be60f",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-42f3be60f (reviewer sub-agent of L); spot-checked: I read all 9 steps, the new node lem-sfb-reductivity-eventual-ring-colimit and every cited statement. I checked the Conrad PDF fetched online: Prop 6.2.12 proof first paragraph (p.211) matches the item's route, and Cor 3.1.11 (pp.88-89, 'G reductive iff G_i reductive for large i', for a smooth affine G_{i0}) matches the new node exactly. The new node is true, not a duplicate after a full DAG scan, and not a restatement of the item. The mathematics is correct: fp-algebra descent of the Hopf structure and the torus map, a closed immersion via injectivity of A_j[M]->K[M], smoothness and reductivity descent, maximality via the field-extension and openness nodes on D(f) around the generic point, weight-space and pinning descent with the module map/equality clauses, and coroots constant on the connected Spec of a domain. Two repairs. (1) B3: the new node cited no definitions for smooth/affine/finite presentation; I added def-sbc-smooth-morphisms, pqf-def-affine-morphism and def-sbc-locally-finite-presentation to its text and stmt_deps. (2) Step 5: added the missing K⊆K̄ application of lem-sfb-maximal-torus-field-extension to get T_K maximal over K before passing to F. Batch-5: the four reached sec-trace-formula nodes (02VL smoothness fpqc-local, f.g. torsion-free groups are free, the fppf descent-datum definition, 057K open components) are generic and outside the assumed trace formula / Poincare duality, so accepted. I accept the four generic limit-descent tool_uses.; 2 file(s) fixed by the reviewer"
+ }
+}

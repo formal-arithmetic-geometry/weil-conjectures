@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-equivariant-finite-residue-domination",
+ "kind": "statement",
+ "title": "Equivariant finite covers splitting prescribed finite etale residue schemes",
+ "statement": "Let $k$ be a field, let $S$ be a normal integral projective finite-type $k$-scheme, and let a finite group $H$ act on $k$ and $S$ compatibly; the actions need not be faithful. Let $s_1,\\ldots,s_r$ be finitely many points of $S$, and for each $i$ let $E_i\\to\\operatorname{Spec}\\kappa(s_i)$ be a finite etale scheme. There exist a finite group $J$, a surjection $\\rho:J\\twoheadrightarrow H$, a normal integral projective finite-type $k$-scheme $W$ with a compatible $J$-action, and a finite surjective generically etale morphism $a:W\\to S$, equivariant through $\\rho$, such that, for $N=\\ker\\rho$,\n$$k(W)^N=k(S).$$\nFor every $i$ and every point $w\\in W$ above $s_i$, the scheme $E_i\\times_{\\kappa(s_i)}\\operatorname{Spec}\\kappa(w)$ is isomorphic over $\\kappa(w)$ to a finite disjoint union of copies of $\\operatorname{Spec}\\kappa(w)$. Empty $E_i$ and the empty list of points are allowed. Generically etale means etale over a dense open of $S$. The action on $k$ on the output is the original one composed with $\\rho$. Normal means that the local rings are integrally closed domains; $k(S)$ and $k(W)$ are the residue fields of the generic points; and the superscript $N$ denotes the subfield fixed by every element of $N$.\n\nThe notions of field, integral scheme, projectivity, finite type, finite morphism, surjectivity, etaleness, residue field, function field and fibre product are [def-weil-field], [def-pc-integral-scheme], [def-kun-projective], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-etale-morphism], [def-weil-residue-field], [def-sc-function-field] and [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.6, printed p.614, and Situation 5.3, p.613; finite-etale residue-scheme formulation obtained by taking finite separable splitting fields of the residue algebras. Normalization of the output in its function field is included. Local PDF WANTED; publisher PDF read online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-sc-function-field",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If the list of points is empty, take $W=S$, $J=H$, $\\rho=\\mathrm{id}$ and $a=\\mathrm{id}$. Then $N=1$, and every assertion follows. Otherwise put $K=k(S)$ and $A_h=(h^{-1})^*$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.6, printed p.614; assembly of the four extracted arguments."
+   }
+  },
+  {
+   "text": "Apply the local residue-polynomial lifting lemma to each $(S,s_i,E_i)$. Obtain $R_i=\\mathcal O_{S,s_i}$, $F_i=\\kappa(s_i)$, $D_i=\\prod_bF_{ib}$, a finite Galois residue splitting field $L_i=F_i(\\alpha_i)$ with minimal polynomial $q_i$, and monic lifts $f_i\\in R_i[T]$. Its generic algebra is a nonempty finite product of finite separable extensions of $K$.",
+   "uses": [
+    "lem-sfb-local-etale-residue-polynomial-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.6, printed p.614; assembly of the four extracted arguments."
+   }
+  },
+  {
+   "text": "Apply the equivariant Galois polynomial envelope to $A:H\\to\\operatorname{Aut}(K)$ and these generic algebras. It gives $M/K$ finite Galois, complete factorizations of all $f_i$ in $M$, and the finite group $J$ of compatible pairs with surjection $\\rho:J\\twoheadrightarrow H$ and $M^{\\ker\\rho}=K$.",
+   "uses": [
+    "lem-sfb-equivariant-galois-polynomial-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.6, printed p.614; assembly of the four extracted arguments."
+   }
+  },
+  {
+   "text": "Apply the semilinear normalization model to this $M$, $J$, $\\rho$ and second-projection field action. Its normalization $a:W\\to S$ is finite surjective and etale over a dense open; $W$ is normal integral projective finite-type over $k$ with the required equivariant action on $W$ and $k$. Under $k(W)=M$, the kernel fixed field is $K=k(S)$ by the envelope lemma.",
+   "uses": [
+    "lem-sfb-semilinear-normalization-finite-model",
+    "lem-sfb-equivariant-galois-polynomial-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.6, printed p.614; assembly of the four extracted arguments."
+   }
+  },
+  {
+   "text": "For every $i$, apply integral-root residue splitting to this normalization, $D_i$, $L_i$, $q_i$, $f_i$ and its complete factorization in $M$. All the hypotheses are supplied by the local-lift and envelope lemmas. At every $w$ above $s_i$ it gives $L_i\\hookrightarrow\\kappa(w)$ and an isomorphism over $\\kappa(w)$ from $E_i\\times_{F_i}\\operatorname{Spec}\\kappa(w)$ to a finite disjoint union of rational points, including the empty case. This supplies the remaining clause.",
+   "uses": [
+    "lem-sfb-integral-roots-residue-splitting",
+    "lem-sfb-local-etale-residue-polynomial-lifts",
+    "lem-sfb-equivariant-galois-polynomial-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.6, printed p.614; assembly of the four extracted arguments."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-equivariant-galois-polynomial-envelope",
+  "lem-sfb-integral-roots-residue-splitting",
+  "lem-sfb-local-etale-residue-polynomial-lifts",
+  "lem-sfb-semilinear-normalization-finite-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.6, printed p.614: proof says only Clear. The steps supply the missing argument using the cited Stacks lemmas; publisher PDF read online, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "prescri.*residue|residue.*prescri|residue.*[Gg]alois",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"grep\", \"query\": \"prescri.*residue|residue.*prescri|residue.*[Gg]alois\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite residue degree, prime conjugacy and Galois invariants are ingredients, but none supplies this global finite equivariant cover with prescribed residue splittings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite generically etale cover of a normal scheme can prescribe finite separable extensions in every residue field over finitely many points",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"leansearch\", \"query\": \"A finite generically etale cover of a normal scheme can prescribe finite separable extensions in every residue field over finitely many points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Algebra.FormallyEtale.iff_isSeparable\"], \"digest\": \"b5607741c2a513de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite residue degree, prime conjugacy and Galois invariants are ingredients, but none supplies this global finite equivariant cover with prescribed residue splittings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"residueField\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-22T03:43:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"residueField\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsFiniteFiberToSpecResidueFieldOfLocallyQuasiFiniteOfQuasiCompact\"], \"digest\": \"4b8dfab5ad3c9adb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite residue degree, prime conjugacy and Galois invariants are ingredients, but none supplies this global finite equivariant cover with prescribed residue splittings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given finitely many points of a normal variety and finite separable residue extensions there is a finite generically etale Galois cover realizing all residue extensions equivariantly",
+   "results": "{\"t\": \"2026-10-22T03:43:45Z\", \"tool\": \"leanfinder\", \"query\": \"Given finitely many points of a normal variety and finite separable residue extensions there is a finite generically etale Galois cover realizing all residue extensions equivariantly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.isSeparable_residueField_iff\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"IsGaloisGroup.of_isFractionRing\", \"instIsSeparableResidueFieldOfQuotientIdeal\"], \"digest\": \"a7c10278fc89482a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite residue degree, prime conjugacy and Galois invariants are ingredients, but none supplies this global finite equivariant cover with prescribed residue splittings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a finite group action through a finite Galois normalization so residue fields above chosen points contain specified separable extensions",
+   "results": "{\"t\": \"2026-10-22T03:43:47Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a finite group action through a finite Galois normalization so residue fields above chosen points contain specified separable extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.isPretransitive_of_isGalois\", \"IsGaloisGroup.to_isFractionRing\", \"Ideal.isPretransitive_of_isGaloisGroup\", \"Ideal.exists_map_eq_of_isGalois\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"IsGaloisGroup.iff_isFractionRing\", \"IsGaloisGroup.of_isFractionRing\", \"Ideal.exists_smul_eq_of_isGaloisGroup\"], \"digest\": \"bccf9a4019ce8fa6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite residue degree, prime conjugacy and Galois invariants are ingredients, but none supplies this global finite equivariant cover with prescribed residue splittings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generically etale equivariant covers of normal varieties splitting finitely many residue field extensions",
+   "results": "{\"t\": \"2026-10-22T04:01:21Z\", \"tool\": \"leanfinder\", \"query\": \"Finite generically etale equivariant covers of normal varieties splitting finitely many residue field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"6fea5e1d4e619415\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*residue|residue.*splitting|prescribed.*residue",
+   "results": "{\"t\": \"2026-10-22T04:01:29Z\", \"tool\": \"grep\", \"query\": \"equivariant.*residue|residue.*splitting|prescribed.*residue\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite Galois normalization of a variety can split finite etale residue schemes at any finite list of points",
+   "results": "{\"t\": \"2026-10-22T04:01:29Z\", \"tool\": \"leansearch\", \"query\": \"A finite Galois normalization of a variety can split finite etale residue schemes at any finite list of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"IsGalois.to_normal\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"IsGalois.is_separable_splitting_field\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"IsGalois.splits\"], \"digest\": \"3423d8e1d4261818\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale",
+   "results": "{\"t\": \"2026-10-22T04:01:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*[Oo]f.*[Mm]ap|[Ss]eparable.*residue|[Ss]eparable.*[Ll]ocal|[Mm]onic.*[Ss]eparable",
+   "results": "{\"t\": \"2026-10-22T04:01:54Z\", \"tool\": \"grep\", \"query\": \"separable.*[Oo]f.*[Mm]ap|[Ss]eparable.*residue|[Ss]eparable.*[Ll]ocal|[Mm]onic.*[Ss]eparable\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/DedekindDomain/Instances.lean\", \"Mathlib/RingTheory/DedekindDomain/Instances.lean\"], \"digest\": \"c985954b2ba74ce3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial over a local integral domain whose reduction modulo the maximal ideal is separable is separable over the fraction field",
+   "results": "{\"t\": \"2026-10-22T04:01:56Z\", \"tool\": \"leanfinder\", \"query\": \"A monic polynomial over a local integral domain whose reduction modulo the maximal ideal is separable is separable over the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Irreducible.separable\", \"Polynomial.generalizedEisenstein\", \"Polynomial.HasSeparableContraction\", \"Irreducible.hasSeparableContraction\", \"PerfectField.separable_of_irreducible\", \"Polynomial.separable_def'\", \"Polynomial.separable_map\", \"Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map\"], \"digest\": \"7c2aa14a698c5242\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "grep",
+   "query": "separable_of|[Ss]eparable.*[Mm]ap|[Mm]ap.*[Ss]eparable",
+   "results": "{\"t\": \"2026-10-22T04:02:06Z\", \"tool\": \"grep\", \"query\": \"separable_of|[Ss]eparable.*[Mm]ap|[Mm]ap.*[Ss]eparable\", \"sub\": \"Algebra/Polynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "grep",
+   "query": "separable|discrim",
+   "results": "{\"t\": \"2026-10-22T04:02:17Z\", \"tool\": \"grep\", \"query\": \"separable|discrim\", \"sub\": \"RingTheory/Polynomial/Resultant\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Resultant/Basic.lean\"], \"digest\": \"99df761265939240\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Polynomial.Separable",
+   "results": "{\"t\": \"2026-10-22T04:02:17Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.Monic, Polynomial.Separable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsSepClosed.of_exists_root\"], \"digest\": \"33ed8e4f249bebfb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial with separable reduction modulo a prime ideal has nonzero discriminant and is separable over the fraction field",
+   "results": "{\"t\": \"2026-10-22T04:02:18Z\", \"tool\": \"leanfinder\", \"query\": \"A monic polynomial with separable reduction modulo a prime ideal has nonzero discriminant and is separable over the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Irreducible.separable\", \"Polynomial.Separable\", \"Polynomial.generalizedEisenstein\", \"Polynomial.separable_C_mul_X_pow_add_C_mul_X_add_C'\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"IsPrimitiveRoot.separable_minpoly_mod\", \"WeierstrassCurve.isGoodReduction_iff\", \"Polynomial.separable_iff_derivative_ne_zero\"], \"digest\": \"509b0f4836430b7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The splitting field of a separable polynomial is a finite separable extension and the polynomial splits into linear factors",
+   "results": "{\"t\": \"2026-10-22T04:02:33Z\", \"tool\": \"leanfinder\", \"query\": \"The splitting field of a separable polynomial is a finite separable extension and the polynomial splits into linear factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.is_separable_splitting_field\", \"IsSepClosed.splits_of_separable\", \"IsGalois.of_separable_splitting_field\", \"IsSepClosed.factors_of_separable\", \"Polynomial.IsSplittingField.splittingField\", \"Polynomial.exists_finset_of_splits\", \"Polynomial.SplittingFieldAux.instIsSplittingFieldNatDegree\", \"Polynomial.IsSplittingField\"], \"digest\": \"cdf82de287a21e9d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the global finite equivariant normalization with all prescribed residue splittings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-finite-quasi-splitting",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, second paragraph, application of Lemma 5.6 at the maximal points of the nonsplit locus.",
+   "via": [
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-equivariant-finite-residue-domination",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return: four independently stated unsplit nodes carry all fourteen old arguments (old steps 1--4, 5--8, 9--12 and 13--14). The statement is unchanged. The complete previous argument and its source/dependency information remain verbatim in the report; the parent is now a short assembly.",
+  "blueprint": "Auxiliary to det-thm-sf-ctf-stability-direct-images proof (3), through the inherited nodal-quasi-splitting alteration chain: de Jong 5.7 application of 5.6. The ancestor command returns None; inherited from.node=null and via are retained. The item supplies the proof omitted in 5.6 without changing the unit route. The four extractions realize respectively local residue preparation, the compatible finite Galois group, equivariant normalization including dense-open etaleness, and all-point residue splitting. Inherited null ancestor is retained, as confirmed by blueprint_refs ancestor."
+ },
+ "tool_uses": [
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-sbc-generic-fibre-iso-spread-base-open",
+  "lem-weil-pbc-spread-finite-separable-extension",
+  "pqf-lem-finite-fp-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-233eac1c3",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-233eac1c3 (reviewer sub-agent of L); spot-checked: Released re-split note (human decision of 2026-10-21, applied 2026-10-22), so the delivery is judged on its merits against NW's landed 14-step proof (10202 characters). The item statement and stmt_deps are byte-identical to the base. The proof is now a 5-step assembly of about 1.7k characters citing four new unsplit, statement-only nodes. They carry old steps 1-4, 5-8, 9-12 and 13-14, of comparable size (about 2.1-2.8k characters each), and every old argument reappears in one of them; I checked this step by step. (1) local-etale-residue-polynomial-lifts: R local and R->F onto, so q lifts to a monic f; the unit discriminant (or the old fibre-criterion plus closed-image argument) makes R[T]/(f) finite free and étale; the generic algebra is a nonempty product. Source Stacks 00UD/00U3. (2) equivariant-galois-polynomial-envelope: Artin's theorem 09I3 on the faithful image, Galois closure, K-linear correction by 0BME(2), irreducible factors of f_i split in M, J of pairs with rho onto, N=Aut_K(M) and M^N=K; nonfaithful H and I empty both work. (3) semilinear-normalization-finite-model: finite by 0AVK, normal, projective over Spec k, surjective, étale over a dense open since M/K is separable; I verified that j->Spec(sigma_j^-1) is a homomorphism compatible with rho and that the induced field action is sigma. (4) integral-roots-residue-splitting: the roots are integral over O_{S,s}, reduce at every w over s and split q, so L embeds in kappa(w), and CRT splits each F_b and D; tested on P^1_Q with E=Spec Q(i). Each assembly step's hypotheses are supplied by the earlier nodes. B1-B9 pass and there is no SGA. The rg -L duplicate search found only narrower ingredients (pbc 00UD and polynomial-lift nodes, the henselian lift, semilinear-galois-alteration-domination). Maintainer note: the item's tool_uses still lists 7 tools of the old proof that the assembly no longer cites. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantFiniteResidueDomination",
+  "declaration": "AlgebraicGeometry.exists_equivariant_finite_residue_domination",
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantFiniteResidueDomination.lean",
+  "statement": "theorem exists_equivariant_finite_residue_domination (k : Type u) [Field k] (S : Scheme.{u}) (pS : S ⟶ Spec (.of k)) [IsIntegral S] [IsHProjective pS] [LocallyOfFiniteType pS] [QuasiCompact pS] (hnormal : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (H : Type v) [Group H] [Finite H] (σk : H →* (k ≃+* k)) (σS : H →* Aut S) (hsemilinear : ∀ h : H, (σS h).hom ≫ pS = pS ≫ Spec.map (CommRingCat.ofHom (σk h⁻¹).toRingHom)) (r : ℕ) (s : Fin r → S) (E : Fin r → Scheme.{u}) (e : ∀ i : Fin r, E i ⟶ Spec (S.residueField (s i))) [hefinite : ∀ i : Fin r, IsFinite (e i)] [heetale : ∀ i : Fin r, Etale (e i)] : ∃ (J : Type (max u v)) (_ : Group J) (_ : Finite J) (ρ : J →* H), Function.Surjective ρ ∧ ∃ (W : Scheme.{u}) (_ : IsIntegral W) (pW : W ⟶ Spec (.of k)) (σW : J →* Aut W) (a : W ⟶ S), IsHProjective pW ∧ LocallyOfFiniteType pW ∧ QuasiCompact pW ∧ (∀ w : W, IsDomain (W.presheaf.stalk w) ∧ IsIntegrallyClosed (W.presheaf.stalk w)) ∧ a ≫ pS = pW ∧ IsFinite a ∧ Surjective a ∧ (∃ U : S.Opens, Dense (U : Set S) ∧ Etale (a ∣_ U)) ∧ (∀ j : J, (σW j).hom ≫ pW = pW ≫ Spec.map (CommRingCat.ofHom (σk (ρ j⁻¹)).toRingHom)) ∧ (∀ j : J, (σW j).hom ≫ a = a ≫ (σS (ρ j)).hom) ∧ (∃ ha : a (genericPoint W) = genericPoint S, ∀ z : W.functionField, (∃ b : S.functionField, (S.presheaf.stalkSpecializes (specializes_of_eq ha) ≫ a.stalkMap (genericPoint W)).hom b = z) ↔ ∀ j : ρ.ker, (Scheme.functionFieldAut (σW j.val)).hom z = z) ∧ (∀ (i : Fin r) (w : W) (hw : a w = s i), ∃ (n : ℕ) (ι : pullback (e i) (Spec.map (eqToHom (congrArg S.residueField hw.symm) ≫ a.residueFieldMap w)) ≅ ∐ (fun _ : Fin n ↦ Spec (W.residueField w))), ι.hom ≫ Sigma.desc (fun _ : Fin n ↦ 𝟙 (Spec (W.residueField w))) = pullback.snd (e i) (Spec.map (eqToHom (congrArg S.residueField hw.symm) ≫ a.residueFieldMap w)))",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d4af1297",
+  "group": "NN",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node through its 10 recorded dependency declarations. The action convention is consistent: Mathlib Aut multiplication is reversed composition and the k-action uses h inverse, both in the input and in the output through rho. The fixed-field clause uses the canonical generic stalk map and the genuine upstream Scheme.functionFieldAut; the existential witness that a sends the generic point to the generic point holds for any finite surjective map. The residue clause covers every w over s_i with the correct eqToHom and residueFieldMap directions and an isomorphism over kappa(w); n=0 is allowed. Edge cases: r=0, empty E_i, non-faithful H, J in Type (max u v). The recorded statement is verbatim in the file; there is one sorry; only the lean field changed; both report sections are present. Advisory only: the upstream IsNormalScheme predicate equals the inline normality hypothesis, but the node does not cite it; Uses ids in the docstring are hyphen-wrapped across lines. No compile run, since no file was changed."
+ }
+}

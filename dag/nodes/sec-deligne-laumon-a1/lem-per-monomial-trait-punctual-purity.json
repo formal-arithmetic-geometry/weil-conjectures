@@ -19,20 +19,71 @@
  ],
  "proof": [
   {
-   "text": "First prove regularity without asserting generic smoothness over the original trait. The ring $R$ is a DVR by [lem-sc-principal-ideal-dvr]. Let $g$ be the gcd of the nonzero exponents and put $b_i=e_i/g$. By [lem-sbc-dvr-uniformizer-root-algebra], $R_g=R[u]/(u^g-\\pi)$ is a trait with uniformizer $u$. There is an explicit ring isomorphism $R_g[T_i]/(\\prod T_i^{b_i}-u)\\simeq R[T_i]/(\\prod T_i^{e_i}-\\pi)$: send $u$ to $\\prod T_i^{b_i}$ and each $T_i$ to itself, with inverse induced by the same variables. Since the nonzero $b_i$ have gcd one, at least one is nonzero in the fraction field of $R_g$ (in characteristic $p>0$, they cannot all be divisible by $p$). Thus [lem-per-primitive-monomial-trait-geometry] proves that this scheme, hence $T$, is Noetherian, integral and regular. This works for every tuple in the statement.",
+   "text": "Write $V_R(a)=\\operatorname{Spec}R[T_1,\\ldots,T_n]/(\\prod T_i^{a_i}-\\pi)$. The trait ring is a DVR by [def-sc-discrete-valuation-ring]. For any $d\\geq1$, apply [lem-sfb-eisenstein-quotient-dvr] to $Z^d-\\pi$: its constant coefficient is in $(\\pi)\\setminus(\\pi^2)$ (otherwise cancellation would make $\\pi$ a unit), and its other lower coefficients are zero. Thus $R_d=R[z]/(z^d-\\pi)$ is a DVR with uniformizer $z$, and [lem-sc-dvr-dimension-one] makes $\\operatorname{Spec}R_d$ a trait. The image of the inverse of $\\ell$ remains an inverse. There is an explicit ring isomorphism\n$$R_d[T]/(\\prod T_i^{a_i}-z)\\simeq R[T]/((\\prod T_i^{a_i})^d-\\pi):$$\nit fixes each $T_i$, sends $z$ to $\\prod T_i^{a_i}$, and its inverse sends each $T_i$ to its class. The two relations verify both composites. Hence $V_{R_d}(a)\\simeq V_R(da)$ as schemes. Punctual purity is preserved by this isomorphism: the local rings, residue fields and dimensions identify, and [lem-per-regular-immersion-class-calculus] identifies the Kummer maps under isomorphism base change.",
    "uses": [
-    "lem-sc-principal-ideal-dvr",
-    "lem-sbc-dvr-uniformizer-root-algebra",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-eisenstein-quotient-dvr",
+    "lem-sc-dvr-dimension-one",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.13(ii) and footnote viii, printed p.251; auxiliary algebra also Stacks Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, final sentence of proof, and Tag 00PD."
+   }
+  },
+  {
+   "text": "First prove regularity and integrality for every nonzero exponent vector, independently of purity. In fraction-field characteristic zero some positive exponent is invertible, so apply [lem-per-primitive-monomial-trait-geometry]. In characteristic $p>0$, let $r$ be the minimum $p$-adic valuation of the positive exponents and write $e_i=p^r a_i$ (zero entries stay zero). Some $a_i$ is prime to $p$, hence invertible in the fraction field of the root trait $R_{p^r}$ from Step 1, which still has characteristic $p$. Apply the same primitive geometry statement to $V_{R_{p^r}}(a)$ and use the explicit isomorphism of Step 1. This proves that every $V_R(e)$ under consideration is a Noetherian regular integral scheme, without any excellence or separability assumption.",
+   "uses": [
     "lem-per-primitive-monomial-trait-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 3.5.13(i)--(iii), pp.250--251, including footnote viii."
+    "place": "Lemma 3.5.13(i)--(iii), printed pp.250--251."
    }
   },
   {
-   "text": "It remains to prove punctual purity. Delete the $r$ zero exponents, leaving a nonempty positive tuple $a$. The original coordinate ring is exactly the polynomial ring in the deleted variables over the coordinate ring of $V(S,\\pi,a)$. The maps in both directions are the identity on all remaining variables and coefficients. Hence $T\\simeq\\mathbf A^r_{V(S,\\pi,a)}$. Its projection is smooth by [sbc-lem-affine-space-smooth]. Once purity has been proved for the positive tuple, [lem-per-smooth-punctual-purity-ascent] proves it for $T$: both models are regular by Step 1 and of finite type over the given trait. Hence all remaining steps treat positive exponents.",
+   "text": "For the all-one vector, [lem-per-semistable-coordinate-divisor-purity] gives the supported Kummer isomorphism for each coordinate divisor. Step 2 supplies regularity, so [lem-per-monomial-boundary-purity-criterion] gives punctual purity of $V_R(1,\\ldots,1)$. This holds over every auxiliary trait as well. Applying it over $R_d$ and using Step 1 gives punctual purity of $V_R(d,\\ldots,d)$ for every $d\\geq1$. This is an isomorphism of underlying schemes, so no descent along the possibly inseparable root-trait morphism is used.",
+   "uses": [
+    "lem-per-semistable-coordinate-divisor-purity",
+    "lem-per-monomial-boundary-purity-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.5.12 proof, all-one case and auxiliary trait, with Lemma 3.5.13(ii),(iv), printed p.251."
+   }
+  },
+  {
+   "text": "Now suppose every $a_i>0$ and $\\ell\\nmid a_i$. Put $d=\\operatorname{lcm}_i a_i$ and $b_i=d/a_i$. The map $Y=V_R(d,\\ldots,d)\\to X=V_R(a)$ sends $T_i$ to $U_i^{b_i}$. Its algebra is $\\mathcal O(X)[U_1,\\ldots,U_n]/(U_i^{b_i}-T_i)_i$: eliminating the $T_i$ leaves precisely $\\prod U_i^d-\\pi$. Iterating [lem-weil-pbc-monic-quotient-free] gives the basis $\\prod U_i^{c_i}$ with $0\\leq c_i<b_i$, hence constant positive rank $\\prod b_i$, prime to $\\ell$. Both schemes are regular by Step 2. For $H_i=V(T_i)$ the reduced inverse image is $H'_i=V(U_i)$, since the inverse image is cut out by $U_i^{b_i}$ and $\\mathcal O(Y)/(U_i)=\\kappa(s)[U_j:j\\ne i]$. These are the regular effective Cartier divisors in [lem-per-monomial-boundary-purity-criterion]. By Step 3 and that criterion all pairs $(Y,H'_i)$ are pure. Apply [lem-per-finite-flat-regular-divisor-purity-descent] to each pair, then the criterion on $X$. Thus $V_R(a)$ is punctually pure. This uses no generic-etaleness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-per-monomial-boundary-purity-criterion",
+    "lem-per-finite-flat-regular-divisor-purity-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.13(v) and its proof, using Proposition 3.4.3, printed pp.246,251."
+   }
+  },
+  {
+   "text": "For positive $e_i$, induct on $N=\\sum_i v_\\ell(e_i)$. The base $N=0$ is Step 4. If $N>0$, choose $j$ with $\\ell\\mid e_j$ and put $a_j=e_j/\\ell$, $a_i=e_i$ otherwise. The induction hypothesis gives punctual purity of $X=V_R(a)$. Set $D=V(T_j)$; the boundary criterion gives purity of $(X,D)$ and says that $D$ is regular effective Cartier. Conditions (a) and (c) of [lem-per-punctual-purity-two-of-three] therefore give punctual purity of $D$. Apply [lem-per-kummer-root-regular-divisor-purity] to the nonzerodivisor $T_j$ in the regular affine scheme $X$. Eliminating $T_j$ identifies its root algebra with $X'=V_R(e)$, and $D'=V(U)\\simeq D$. The cited root statement gives regularity of $X'$, purity of $(X',D')$, and an etale map $X'\\setminus D'\\to X\\setminus D$. Conditions (a) and (b) of two-of-three give punctual purity of $X'$ at every point of $D'$. On the complement, [lem-per-punctual-purity-etale-locality] gives purity from that of $X$; open restriction has the same local rings and Kummer maps. Thus every point of $X'$ is pure. This completes the induction; it does not assume that purity of just one boundary pair implies purity everywhere.",
+   "uses": [
+    "lem-per-monomial-boundary-purity-criterion",
+    "lem-per-punctual-purity-two-of-three",
+    "lem-per-kummer-root-regular-divisor-purity",
+    "lem-per-punctual-purity-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.13(vi), printed p.251; Proposition 3.4.5, printed pp.246--248; Proposition 3.2.3, printed p.244, spells out the boundary/complement inference."
+   }
+  },
+  {
+   "text": "Finally let $I=\\{i:e_i>0\\}$, which is nonempty, and let $m$ be the number of zero exponents. Reordering variables gives the literal polynomial-ring identification $V_R(e)\\simeq\\mathbf A^m_{V_R((e_i)_{i\\in I})}$. The positive-exponent base is regular and punctually pure by Steps 2 and 5 and is of finite type over the original trait. Its affine-space projection is smooth by [sbc-lem-affine-space-smooth], is of finite type by its finite polynomial presentation, and has Noetherian source by Step 2. Therefore [lem-per-smooth-punctual-purity-ascent] proves regularity and punctual purity of $V_R(e)$. This includes $m=0$ and proves the entire statement.",
    "uses": [
     "sbc-lem-affine-space-smooth",
     "lem-per-smooth-punctual-purity-ascent"
@@ -40,81 +91,30 @@
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proposition 3.5.12 proof, p.251, removal of zero exponents by Corollary 3.5.6."
-   }
-  },
-  {
-   "text": "For the all-one tuple the coordinate-divisor Kummer maps are isomorphisms by [lem-per-semistable-coordinate-divisor-purity]; [lem-per-monomial-boundary-purity-criterion] therefore proves punctual purity. This applies over every auxiliary trait as well. For an integer $d>0$ use the trait $R_d=R[u]/(u^d-\\pi)$ from [lem-sbc-dvr-uniformizer-root-algebra]. Eliminating $u$ gives $R_d[T_i]/(\\prod T_i-u)\\simeq R[T_i]/(\\prod T_i^d-\\pi)$, explicitly $u\\mapsto\\prod T_i$, $T_i\\mapsto T_i$, with inverse on variables. Thus the equal-exponent model $V(S,\\pi,d,\\ldots,d)$ is punctually pure for every positive $d$, even if $d$ is divisible by the residue characteristic or by $\\ell$. The coefficient prime remains invertible in the auxiliary trait.",
-   "uses": [
-    "lem-per-semistable-coordinate-divisor-purity",
-    "lem-per-monomial-boundary-purity-criterion",
-    "lem-sbc-dvr-uniformizer-root-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proposition 3.5.12 proof and Lemma 3.5.13(ii), p.251."
-   }
-  },
-  {
-   "text": "Suppose now that the positive exponents $a_i$ are all prime to $\\ell$. Put $d=\\operatorname{lcm}(a_i)$ and $q_i=d/a_i$. Map $Y=V(S,\\pi,d,\\ldots,d)$ to $X=V(S,\\pi,a_1,\\ldots,a_n)$ by $T_i\\mapsto U_i^{q_i}$. Over the coordinate ring $B$ of $X$, its algebra is $B[U_1,\\ldots,U_n]/(U_i^{q_i}-T_i)_i$: eliminating the $T_i$ gives exactly $Y$. Successive division by these monic polynomials gives a basis $\\prod U_i^{j_i}$, $0\\le j_i<q_i$. Consequently this is a finite presentation with a finite free module of rank $N=\\prod q_i>0$; it is flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat], and has constant fibre degree $N$ by [def-pc-finite-locally-free]. Since $\\ell\\nmid d$, also $\\ell\\nmid N$. For each coordinate divisor $H_i$ of $X$, its inverse image is $U_i^{q_i}=0$, and its reduction is the coordinate divisor $U_i=0$ of $Y$, since that quotient is a polynomial ring over the residue field. The boundary criterion supplies regularity of these divisors and purity of their pairs in $Y$ by Step 3. Apply [lem-per-finite-flat-regular-divisor-purity-descent] to each pair and then [lem-per-monomial-boundary-purity-criterion] to $X$. This proves punctual purity of $X$. No generic-etaleness assumption is used.",
-   "uses": [
-    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
-    "def-pc-finite-locally-free",
-    "lem-per-finite-flat-regular-divisor-purity-descent",
-    "lem-per-monomial-boundary-purity-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 3.5.13(v) and its proof, p.251; Proposition 3.4.3, p.246."
-   }
-  },
-  {
-   "text": "For a positive tuple $a$, compare $X=V(S,\\pi,a_1,a_2,\\ldots)$ and $X'=V(S,\\pi,\\ell a_1,a_2,\\ldots)$ by $T_1=U_1^\\ell$, keeping the other coordinates. The second algebra is exactly $B[U_1]/(U_1^\\ell-T_1)$, where $B$ is the first algebra. The coordinate divisor $D=(T_1=0)$ and its root divisor $D'=(U_1=0)$ are regular effective Cartier divisors by the boundary criterion, and both have coordinate ring $\\kappa(s)[T_2,\\ldots,T_n]$. They are punctually pure by [lem-per-prime-field-punctual-purity]: the residue field, hence this regular scheme, is an algebra over its prime field. The root lemma [lem-per-kummer-root-regular-divisor-purity] identifies purity of the two pairs. Since both divisors are punctually pure, [lem-per-punctual-purity-two-of-three] says that purity at all points of $D$ is equivalent to purity of the first pair, and similarly for $D'$ and the second pair. Thus purity along the whole first divisor is equivalent to purity along the whole second divisor. Off these divisors the same root lemma gives a surjective etale cover, so [lem-per-punctual-purity-etale-locality] identifies punctual purity everywhere on those complements. The closed divisors and their complements exhaust the schemes; hence $X$ is punctually pure if and only if $X'$ is. Permuting the variables gives this equivalence for multiplication of any one positive exponent by $\\ell$.",
-   "uses": [
-    "lem-per-monomial-boundary-purity-criterion",
-    "lem-per-prime-field-punctual-purity",
-    "lem-per-kummer-root-regular-divisor-purity",
-    "lem-per-punctual-purity-two-of-three",
-    "lem-per-punctual-purity-etale-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 3.5.13(vi) and its proof, p.251; Proposition 3.4.5, pp.246--248."
-   }
-  },
-  {
-   "text": "For the original positive tuple write $a_i=\\ell^{v_i}b_i$, where $v_i\\ge0$, $b_i>0$ and $\\ell\\nmid b_i$. Apply the equivalence established in Step 5 to divide one exponent by $\\ell$ whenever its $v_i$ is positive. Induct on the nonnegative integer $\\sum_i v_i$: division decreases it by one and the base tuple has every exponent prime to $\\ell$. Step 4 proves purity for that base tuple, so the equivalences prove it for the original positive tuple. Step 2 restores all zero exponents; regularity and Noetherianity were proved in Step 1. Thus every clause of the statement holds without any excellence, completeness or henselianity assumption.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Final paragraph of Proposition 3.5.12 proof, p.251."
+    "place": "Proposition 3.5.12 proof, zero-exponent reduction using Corollary 3.5.6, printed pp.249,251."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-finite-locally-free",
-  "lem-per-finite-flat-regular-divisor-purity-descent",
-  "lem-per-kummer-root-regular-divisor-purity",
-  "lem-per-monomial-boundary-purity-criterion",
-  "lem-per-prime-field-punctual-purity",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-eisenstein-quotient-dvr",
+  "lem-sc-dvr-dimension-one",
+  "lem-per-regular-immersion-class-calculus",
   "lem-per-primitive-monomial-trait-geometry",
-  "lem-per-punctual-purity-etale-locality",
-  "lem-per-punctual-purity-two-of-three",
   "lem-per-semistable-coordinate-divisor-purity",
-  "lem-per-smooth-punctual-purity-ascent",
-  "lem-sbc-dvr-uniformizer-root-algebra",
-  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
-  "lem-sc-principal-ideal-dvr",
-  "sbc-lem-affine-space-smooth"
+  "lem-per-monomial-boundary-purity-criterion",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-per-finite-flat-regular-divisor-purity-descent",
+  "lem-per-punctual-purity-two-of-three",
+  "lem-per-kummer-root-regular-divisor-purity",
+  "lem-per-punctual-purity-etale-locality",
+  "sbc-lem-affine-space-smooth",
+  "lem-per-smooth-punctual-purity-ascent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI Proposition 3.5.12 and Lemma 3.5.13, pp.250--251; Corollary 3.5.6; Propositions 3.4.3 and 3.4.5."
+  "place": "Expose XVI Proposition 3.5.12 proof and Lemma 3.5.13(i)--(vi), printed pp.250--251; boundary/complement inference expanded using Proposition 3.2.3 and Proposition 3.4.5."
  },
  "mathlib_searches": [
   {
@@ -180,62 +180,46 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-monomial-trait-punctual-purity",
   "worker": "stage1",
-  "summary": "Repaired the retained incomplete split against ILO XVI: regularity uses a gcd and auxiliary root trait, not unconditional generic smoothness; six statement-only supporting inputs replace the absent five older children. The proof constructs the coordinate-power finite-free cover, proves the one-coordinate root equivalence pointwise, and inducts on the sum of the original exponent valuations. Statement unchanged; no SGA source selected.",
-  "blueprint": "Historical lem-per-artin-gabber-affine-curve proof Step 3, through the recorded ancestors: supplies the monomial purity proposition cited at the end of ILO XVI Theorem 3.6.2, p.253. Current imported ancestor has no substantive proof; no new route above the node is introduced.",
+  "group": "Q91",
+  "summary": "Reconstructed the ILO XVI assembly using the six re-admitted UNSPLIT source interfaces, with an explicit root-trait substitution, characteristic-power regularity reduction, monic power-map basis and prime-to-ell descent, induction on ell-valuations using two-of-three and etale locality on the complement, and smooth ascent for zero exponents. No new nodes or theorem attachments; statement, source, stmt_deps, searches and blueprint provenance preserved.",
+  "blueprint": "Retains the historical ancestor/via provenance of the regular finite-coefficient input, specifically the ILO XVI Theorem 3.6.2 final reduction to Proposition 3.5.12 recorded in blueprint.from.place. Realizes Proposition 3.5.12 by Lemma 3.5.13(i)--(vi). The current latest ancestor text is provenance only: this split does not invoke the discarded Artin-Gabber proof or arbitrary-field adic duality.",
   "tool_uses": [
    {
-    "node": "lem-sc-principal-ideal-dvr",
-    "why": "Generic characterization converts the inline trait hypotheses to the DVR input; no purity route is replaced."
+    "node": "lem-sfb-eisenstein-quotient-dvr",
+    "why": "Generic algebra supplies the auxiliary root trait for the explicit source ring substitution; no purity or perverse statement is imported."
    },
    {
-    "node": "lem-sbc-dvr-uniformizer-root-algebra",
-    "why": "Generic root-uniformizer trait construction, used in ILO XVI Lemma 3.5.13(ii); not smooth-base-change reasoning."
-   },
-   {
-    "node": "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
-    "why": "Generic finite-free modules are flat; applies to the displayed monic-polynomial basis without a curve-estimate argument."
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness of a finite affine-space projection verifies the hypothesis of the unit-local smooth punctual-purity ascent input."
    }
   ]
  },
  "tool_uses": [
-  "lem-sc-principal-ideal-dvr",
-  "lem-sbc-dvr-uniformizer-root-algebra",
-  "lem-sc-affine-standard-cover-finite-free-local-fp-flat"
+  "lem-sfb-eisenstein-quotient-dvr",
+  "sbc-lem-affine-space-smooth"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q36-6e53d985f",
-  "group": "Q36",
+  "reviewer": "NT-cc-Q91-2931226bf",
+  "group": "Q91",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-6e53d985f (reviewer sub-agent of L); spot-checked: I read the full item and all six new nodes against ILO XVI pp.245-251 (Prop. 3.4.3, 3.4.5, Cor. 3.5.6, Def. 3.5.11, Prop. 3.5.12 with its proof, Lemma 3.5.13(i)-(vi) and footnotes viii-ix). The item statement is unchanged and matches 3.5.12. Step 1: g = gcd of the nonzero exponents, auxiliary trait R_g = R[u]/(u^g - pi); I checked the isomorphism on generators. gcd(b) = 1, so the primitive node applies; this fixes the inseparable (p) case in characteristic p. Step 2: zero exponents give A^r over V(a); smoothness from the Lean-closed sbc node, then the ascent node (3.5.6), whose finite-type and regular hypotheses hold. Step 3: semistable node plus the boundary criterion give V(1,...,1), and the root trait R_d gives V(d,...,d). Step 4: the map T_i -> U_i^{q_i} is finite free with a monomial basis of rank prod q_i, prime to ell; the reduced preimage of H_i is V(U_i); descent (3.4.3) and the criterion finish. Step 5: Kummer root (3.4.5) with f = T_1, prime-field purity of D and D' (both kappa(s)[T_2..]), two-of-three along D, and pointwise etale locality on the surjective etale complement cover; this is more careful than the source. Step 6: the induction on the sum of ell-valuations is properly set up. All six new nodes are true and match their source places: the primitive node (Eisenstein domain, pi not in m^2, Jacobian check), 3.4.3, 3.4.5 (V(U) = reduced preimage, extra clauses true), 3.5.6, 3.5.13(iv) (special fibre inside the union of the H_i, generic fibre pure by prime-field purity), and the semistable pair form, equivalent via the criterion to the Illusie 2004 / Rapoport-Zink input. They are statement-only and self-contained, cited ids exist, blueprint.from and via are set, and all three search kinds are recorded. No duplicates in the DAG (existing nodes cover 3.2.3, 3.2.5, 3.5.5, 3.5.7 and etale locality only), no restated clause, no cycle, no SGA. I accept the declared tool uses: principal-ideal DVR, root algebra, the finite-free flatness Mathlib leaf, and the Lean-closed affine-space smoothness. Batch-5 flags: all three cited nodes reach only generic sec-trace-formula/pod infrastructure, namely the D+ adjunction for an exact left adjoint, the closed-immersion strict-localisation fibre product, and site, topos and projective-bundle geometry. None is part of the trace formula or Poincare duality. regular-immersion-class-calculus only defines the Kummer class and was already a stmt_dep of the item. All accepted. Advisory for the maintainer: Illusie 2004 and Rapoport-Zink are not in literature/; the later split of lem-per-semistable-coordinate-divisor-purity will need them as WANTED. The primitive node lists krull-dimension in stmt_deps without a bracket citation (it is used implicitly by 'dimension one')."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.MonomialTraitPunctualPurity",
-  "declaration": "AlgebraicGeometry.Etale.monomial_trait_punctual_purity",
-  "declarations": [
-   "AlgebraicGeometry.Etale.monomialTraitRing",
-   "AlgebraicGeometry.Etale.monomial_trait_punctual_purity"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/MonomialTraitPunctualPurity.lean",
-  "statement": "theorem monomial_trait_punctual_purity (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (ℓ : ℕ) (hℓ : ℓ.Prime) (hunit : IsUnit (ℓ : R)) (n : ℕ) (hn : 1 ≤ n) (e : Fin n → ℕ) (he : ∃ i, e i ≠ 0) : ∃ (_hN : IsNoetherian (Spec (.of (monomialTraitRing R π n e)))), IsRegularScheme (Spec (.of (monomialTraitRing R π n e))) ∧ IsPunctuallyPure ℓ hℓ (Spec (.of (monomialTraitRing R π n e)))",
-  "branch": "newtargets-dag",
-  "by": "Q49",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.MonomialTraitPunctualPurity deleted (dead: no target reaches it); this node is not reached either."
- },
- "reviewed_lean": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-da39aed6b",
-  "group": "Q49",
-  "result": "pass",
-  "note": "Re-delivery fixes both earlier faults: uses the landed IsPunctuallyPure (def-per-punctual-purity added to stmt_deps) and contains no dependency module or rewritten record. Node record differs from live only in lean and that stmt_dep; other node files identical to live. Every clause matches ILO XVI 3.5.11-3.5.13: trait (Noetherian local domain, ringKrullDim 1, maximal ideal = span{π}), ℓ prime and unit in R, n≥1, exponents not all zero with zero exponents kept; conclusions Noetherian, IsRegularScheme, IsPunctuallyPure at every point; no extra assumptions or universe restriction. Compile: normal 60 s limit timed out on dependency RegularImmersionClassCalculus at load 108; with a 560 s limit, RICC 71.9 s, PunctualPurity 42.5 s, item 4.5 s, rc 0, no warnings. Advisories: monomialTraitRing is a reducible duplicate of AlgebraicGeometry.monomialTraitAlgebra, owned by theorem node lem-per-regular-log-smooth-monomial-chart (a later def node should own one); four landed proof-dep modules not imported (H9)."
- },
- "lean_audit": {}
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-2931226bf (reviewer sub-agent of L); spot-checked: Read ILO XVI 3.5.11, 3.5.12 and 3.5.13(i)-(vi) with fn viii (pp.250-251) and every cited statement; the item statement matches 3.5.12 and is unchanged. Without new nodes, the six steps realize (iii), (ii), the all-one case, (v), (vi) and the 3.5.6 zero-exponent reduction. The six source interfaces are unsplit on this base, so the NR 79925f64 obstruction is gone; no cycle (BFS). Steps checked: Step 1, Eisenstein Z^d-pi and the explicit iso V_{R_d}(a)=V_R(da). Step 2, the char-p reduction e=p^r a feeding primitive geometry. Step 4, rank prod(d/a_i) prime to ell and reduced pullback V(U_i). Step 5, induction on sum v_ell, two-of-three (a)+(c) then (a)+(b), and etale locality on the complement. Step 6, A^m over the base and smooth ascent. Edge cases checked: e=1, e=ell, zero exponents, p-divisible exponents, (2,3). Batch-5 flag: two-of-three and etale-locality reach sec-trace-formula only via class-calculus -> regular-flag-blowup -> def-trf-canonical-symmetric-graded-algebra. That is a general symmetric-algebra definition, not part of the trace formula or Poincare duality, and class-calculus is already a stmt_dep of the item, so the citations are outside the assumptions. Accepted tool_uses: lem-sfb-eisenstein-quotient-dvr and sbc-lem-affine-space-smooth; the worker wrote tool_uses themselves (C8), but the content is acceptable. No changes."
+ }
 }

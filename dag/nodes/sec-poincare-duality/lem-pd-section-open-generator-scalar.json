@@ -1,0 +1,154 @@
+{
+ "id": "lem-pd-section-open-generator-scalar",
+ "kind": "statement",
+ "title": "The canonical internal open generator is semilinear",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion], and use small pro-etale sites [def-weil-pbc-proetale-site]. Write $R_T=p_T^*\\Lambda$ and $E_T$ for the reconstructed section-module equivalence [def-pd-section-module-operations-data]. Let $F$ be an internal $R_U$-module, $V$ an object of $U_{\\mathrm{proet}}$, and $jV$ its image in the ambient site. Define $\\iota_{F,V}:F(V)\\to(E_Xj_{!,\\mathrm{int}}F)(jV)$ by the specified abelian open-adjunction unit followed by the canonical pullback-to-restriction comparison [sk-def-sfb-module-lower-shriek]. For $r\\in R_X(jV)$, let $a\\in R_U(V)$ be its inverse restriction comparison followed by the actual coefficient morphism $\\alpha_j$ [sk-def-sfb-coefficient-morphisms]. Then for every $m\\in(E_UF)(V)$ one has $r\\iota_{F,V}(m)=\\iota_{F,V}(a m)$. This is an ordinary scalar identity and assumes no derived category or resolution.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, lemma-extension-by-zero, first proof paragraph; internal projection-formula action comparison in Steps 2--3 of lem-pd-section-derived-open-adjunction-normalization."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-pd-section-module-operations-data",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-coefficient-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Identify the small pro-etale site of U with the localization of the ambient site at the open. The abelian extension-by-zero adjunction unit, followed by the canonical restriction comparison, sends m to the summand injection indexed by the structure map V to U.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let a be the inverse restriction comparison applied to r. Expand the canonical projection map as the adjunct of the tensor of the pullback unit and the open unit. On local pure tensors it takes the summand generator of a tensor m to r tensor the summand generator of m. This is an equality for the specified projection map, since its adjunction transpose is exactly the tensor of the specified units. Check it before abelian sheafification; tensor is sheafified objectwise tensor.",
+   "uses": [
+    "sk-def-sfb-transport",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By definition the internal extension action is the inverse of that projection map followed by extension of the action of F restricted along alpha_j. Thus the action of r on the generator of m is the generator of alpha_j(a) times m. Restriction of scalars uses the actual condensedPullbackHom, so alpha_j(a) is exactly the displayed coefficient section. Module sheafification preserves this equality. The zero module and empty open give zero on both sides; the identity open gives the usual scalar law.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-coefficient-morphisms",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "def-weil-extension-by-zero-presheaf",
+  "sk-def-sfb-transport",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI, lemma-extension-by-zero, first proof paragraph; internal projection-formula action comparison in Steps 2--3 of lem-pd-section-derived-open-adjunction-normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unit of extension by zero along an open immersion is linear over restricted coefficients on each sheaf section",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, restrict, restrictAdjunction_counit_app_app and SheafOfModules.unitToPushforwardObjUnit. These concern structural-sheaf restriction or pullback, not the condensed internal open-extension generator.",
+   "date": "2026-10-26",
+   "verdict": "no matching statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, HSMul.hSMul",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no matching statement"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*smul|mapModLeftAdjunction_unit_app_hom|generator.*smul",
+   "results": "6 hits, all unrelated generator lemmas in Cyclic.lean, FreeAlgebra.lean and PrincipalIdealDomain.lean. The adopted source separately provides mapModLeftAdjunction_unit_app_hom, but its section-level restriction and coefficient compatibility still require the stated calculation.",
+   "date": "2026-10-26",
+   "verdict": "no matching Mathlib statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionDerivedOpenAdjunctionNormalization",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original Steps 2--3 of lem-pd-section-derived-open-adjunction-normalization: the scalar action on the internal open-extension summand generator; seeded nt-target-poincare-isiso, Step 2. No imported ancestor exists.",
+   "via": [
+    "lem-pd-section-derived-open-adjunction-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionOpenGeneratorScalar",
+  "file": "lean/Sheaf/Paper/SectionOpenGeneratorScalar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionOpenGenerator_scalar",
+  "statement": "theorem sectionOpenGenerator_scalar {U X : Scheme.{u}} (j : U ⟶ X)\n    [IsOpenImmersion j] (F : internalModules Λ U) (V : U.ProEt)\n    (r : (ring Λ X).obj.obj (op (openSectionObject j V)))\n    (m : ((equivalence Λ U).functor.obj F).val.obj (op V)) :\n    r • internalOpenGenerator Λ j F V m =\n      internalOpenGenerator Λ j F V (openCoefficientSection Λ j V r • m)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.openSectionObject",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalOpenGenerator",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.openCoefficientSection",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionOpenGenerator_scalar"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d6ee9",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T081206-L-1861456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d6ee9",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T081206-L-1861456",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs unchanged lem-pd-section-derived-open-adjunction-normalization statement; new sorry sectionOpenGenerator_scalar vs first conjunct of the item and its node; moved helpers vs clone (verbatim, re-exported, no importers)"
+ }
+}

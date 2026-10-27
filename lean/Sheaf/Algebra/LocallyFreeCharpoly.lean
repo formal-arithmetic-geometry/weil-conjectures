@@ -6,6 +6,10 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.Algebra.CharpolyLocallyFree
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.LinearAlgebra.Charpoly.BaseChange
+import Mathlib.Algebra.Ring.ULift
+import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Characteristic polynomial of a finite locally free module of constant rank
 
@@ -22,6 +26,23 @@ open scoped TensorProduct
 namespace Algebra
 
 variable {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
+
+private theorem charpoly_baseChange_tower
+    {S T : Type*} [CommRing S] [CommRing T]
+    [Algebra A S] [Algebra A T] [Algebra S T] [IsScalarTower A S T]
+    {n : ℕ} (b : Module.Basis (Fin n) S (S ⊗[A] M))
+    (e : Module.Basis (Fin n) T (T ⊗[A] M)) (φ : M →ₗ[A] M) :
+    (LinearMap.toMatrix b b (φ.baseChange S)).charpoly.map (algebraMap S T) =
+      (LinearMap.toMatrix e e (φ.baseChange T)).charpoly := by
+  have := Module.Free.of_basis b
+  have := Module.Finite.of_basis b
+  have := Module.Free.of_basis e
+  have := Module.Finite.of_basis e
+  let L := _root_.TensorProduct.AlgebraTensorModule.cancelBaseChange A S T T M
+  rw [LinearMap.charpoly_toMatrix, LinearMap.charpoly_toMatrix,
+    ← LinearMap.charpoly_baseChange, LinearMap.baseChange_baseChange]
+  change (L.symm.conj (φ.baseChange T)).charpoly = _
+  exact LinearEquiv.charpoly_conj _ _
 
 /-- The characteristic polynomial of a finite locally free module of constant rank.
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)
@@ -69,7 +90,36 @@ theorem locallyFreeCharpoly_spec {n r : ℕ} (f : Fin r → A)
         ∑ k : Fin n, Polynomial.C (c k) * Polynomial.X ^ (k : ℕ)) ∧
     (∀ e : Module.Basis (Fin n) A M,
       locallyFreeCharpoly f hgen hfree φ = (LinearMap.toMatrix e e φ).charpoly) := by
-  sorry
+  classical
+  obtain ⟨χ, hχ, hexp, hfreeχ⟩ :=
+    charpoly_locallyFree_exists_unique.{u, v, w} f hgen hfree φ
+  have hlow : ∀ (S : Type u) [CommRing S] (ρ : A →+* S),
+      letI : Algebra A S := ρ.toAlgebra;
+      ∀ b : Module.Basis (Fin n) S (S ⊗[A] M),
+        χ.map ρ = (LinearMap.toMatrix b b (φ.baseChange S)).charpoly := by
+    intro S _ ρ
+    let : Algebra A S := ρ.toAlgebra
+    intro b
+    let T := ULift.{w} S
+    let q : S →+* T := ULift.ringEquiv.symm.toRingHom
+    let : Algebra S T := q.toAlgebra
+    let : Algebra A T := (q.comp ρ).toAlgebra
+    let : Module S T := Algebra.toModule
+    let : Module A T := Algebra.toModule
+    let : SMul S T := (inferInstance : Module S T).toSMul
+    let : SMul A T := (inferInstance : Module A T).toSMul
+    have : IsScalarTower A S T :=
+      IsScalarTower.of_algebraMap_eq (R := A) (S := S) (A := T) fun x ↦ rfl
+    let e := (b.baseChange T).map
+      (_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange A S T T M)
+    apply Polynomial.map_injective q ULift.ringEquiv.symm.injective
+    rw [Polynomial.map_map]
+    exact (hχ.1 T (q.comp ρ) e).trans (charpoly_baseChange_tower b e φ).symm
+  have hχeq : χ = locallyFreeCharpoly f hgen hfree φ :=
+    (Classical.choose_spec
+      (charpoly_locallyFree_exists_unique.{u, v, u} f hgen hfree φ)).1.2 χ hlow
+  rw [← hχeq]
+  exact ⟨hχ, hexp, fun e ↦ hfreeχ ⟨e⟩ e⟩
 
 /-- Over a nonzero ring the module determines its constant rank.
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)
@@ -88,7 +138,39 @@ theorem locallyFree_constantRank_eq [Nontrivial A] {n m r s : ℕ}
     (hgfree : ∀ j : Fin s,
       ∃ _e : Module.Basis (Fin m) (Localization.Away (g j))
         (LocalizedModule.Away (g j) M), True) : n = m := by
-  sorry
+  classical
+  obtain ⟨p, hp⟩ := Ideal.exists_maximal A
+  have : p.IsMaximal := hp
+  let K := A ⧸ p
+  let : Field K := Ideal.Quotient.field p
+  have rank_of_cover {d t : ℕ} (a : Fin t → A)
+      (hgen : Ideal.span (Set.range a) = ⊤)
+      (hfree : ∀ i : Fin t,
+        ∃ _e : Module.Basis (Fin d) (Localization.Away (a i))
+          (LocalizedModule.Away (a i) M), True) :
+      Module.finrank K (K ⊗[A] M) = d := by
+    obtain ⟨i, hi⟩ : ∃ i, a i ∉ p := by
+      by_contra h
+      have hle : Ideal.span (Set.range a) ≤ p :=
+        Ideal.span_le.mpr (by
+          rintro _ ⟨i, rfl⟩
+          exact not_not.mp (fun hi ↦ h ⟨i, hi⟩))
+      exact hp.ne_top (top_le_iff.mp (hgen ▸ hle))
+    let S := Localization.Away (a i)
+    let q : S →+* K := IsLocalization.Away.lift (a i)
+      (show IsUnit (algebraMap A K (a i)) from
+        isUnit_iff_ne_zero.mpr (by
+          change Ideal.Quotient.mk p (a i) ≠ 0
+          exact fun h ↦ hi (Ideal.Quotient.eq_zero_iff_mem.mp h)))
+    let : Algebra S K := q.toAlgebra
+    have : IsScalarTower A S K :=
+      IsScalarTower.of_algebraMap_eq fun x ↦ (IsLocalization.Away.lift_eq (a i) _ x).symm
+    let b := (hfree i).choose.map
+      (LocalizedModule.isBaseChange (Submonoid.powers (a i)) M).equiv.symm
+    let e := (b.baseChange K).map
+      (_root_.TensorProduct.AlgebraTensorModule.cancelBaseChange A S K K M)
+    simpa only [Fintype.card_fin] using Module.finrank_eq_card_basis e
+  exact (rank_of_cover f hfgen hffree).symm.trans (rank_of_cover g hggen hgfree)
 
 /-- Independence of both the trivializing cover and the stated constant rank.
 Source: Stacks Project, Tag 09XI, proof of (3)⇒(1)

@@ -14,9 +14,86 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $E=k$, choose $x=0$ and $\\epsilon=1$: every $x^\\prime\\in E$ generates the same closed subfield $k=E$, whose valuation-ring inclusion is the identity, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). The residue-prescribed clause has empty hypothesis. Henceforth assume $E\\ne k$. By [lem-trf-analytic-type-alternatives] we have precisely cases (2), (3), (4), with algebraically closed residue field and divisible ground value group.",
+   "uses": [
+    "lem-trf-analytic-type-alternatives",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§6.2, pp. 41–42; trivial extension treated separately."
+   }
+  },
+  {
+   "text": "In case (2), choose the separating residue coordinate $u$ of [lem-trf-analytic-type-alternatives] and lift it to $x\\in E^\\circ$. In case (3), choose $x\\in E$ with $|x|=r$ for the cyclic value coordinate there. Both lie outside $k$, so [lem-trf-analytic-parameter-finiteness] gives $L=k(x)^\\wedge\\subseteq E$ finite. In case (2) $\\widetilde L=\\widetilde k(u)$ and $\\Gamma_L=\\Gamma_k$: normalize the coefficients of any polynomial in $x$ by a coefficient of largest norm; its nonzero reduction cannot vanish at transcendental $u$, so its norm is that largest norm. Apply this to numerator and denominator. In case (3) the distinct monomials of a polynomial have distinct norms: equality would imply $r^n\\in\\Gamma_k$, hence $r\\in\\Gamma_k$ by divisibility. Thus the unique largest term gives the norm, $\\Gamma_L=\\Gamma_k r^{\\mathbf Z}$ and $\\widetilde L=\\widetilde k$. These statements persist on completion: approximate any nonzero element within its own norm, and any unit within distance less than one. Therefore $L$ satisfies the respective hypothesis of [lem-trf-analytic-type23-stability]. Its stability gives $[E:L]=[\\Gamma_E:\\Gamma_L][\\widetilde E:\\widetilde L]=[\\widetilde E:\\widetilde L]$. The residue extension is separable in case (2) by the choice of $u$, and is the identity in case (3). By [lem-trf-analytic-etale-residue-degree] the valuation-ring inclusion is etale.",
+   "uses": [
+    "lem-trf-analytic-type-alternatives",
+    "lem-trf-analytic-parameter-finiteness",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-etale-residue-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, p. 49; proof of Theorem 2.1.10(iii), p. 51; Gauss-norm calculation written out."
+   }
+  },
+  {
+   "text": "In case (4), [lem-trf-analytic-immediate-rationality] supplies $x\\in E\\setminus k$ with $E=k(x)^\\wedge$. The extension has degree one and equal residue fields, so [lem-trf-analytic-etale-residue-degree] gives the required etale valuation-ring inclusion. We have now constructed $x\\notin k$ in every nontrivial case. Write $L=k(x)^\\wedge$. By [lem-trf-analytic-etale-residue-degree] its finite extension to $E$ has degree equal to the separable residue degree.",
+   "uses": [
+    "lem-trf-analytic-immediate-rationality",
+    "lem-trf-analytic-etale-residue-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, type 4 paragraph, p. 50; Lemmas 2.1.5(ii), 2.1.6."
+   }
+  },
+  {
+   "text": "Since $k$ is complete, it is closed in $E$ and $x\\notin k$ has $r=\\inf_{a\\in k}|x-a|>0$. Set $\\epsilon=r/4$. For $|x-x^\\prime|<\\epsilon$, substitution $x\\mapsto x^\\prime$ defines a $k$-isomorphism on rational fields: $x^\\prime\\notin k$, hence both elements are transcendental over algebraically closed $k$. For a linear factor $T-a$ the relative error is less than $1/4$. For products it stays at most $1/4$ by the ultrametric inequality and $|v^\\prime|=|v|$ whenever $|v-v^\\prime|<|v|$; for inverses use $|v^{-1}-(v^\\prime)^{-1}|=|v-v^\\prime|/(|v||v^\\prime|)$. Factor numerator and denominator over $k$ to obtain $|f(x)-f(x^\\prime)|\\le|f(x)|/4$ and $|f(x)|=|f(x^\\prime)|$. Extend by limits of Cauchy sequences to the closures, obtaining an isometric isomorphism $\\phi:L\\to L^\\prime=k(x^\\prime)^\\wedge$ with $|a-\\phi(a)|\\le|a|/4$. Apply [lem-trf-analytic-close-embedding-degree] to the two embeddings $L\\hookrightarrow E$ and $L\\xrightarrow\\phi L^\\prime\\hookrightarrow E$. Thus $[E:L^\\prime]=[E:L]$. For any integral $a$, $|a-\\phi(a)|<1$; the inverse has the same bound, so $\\widetilde L=\\widetilde {L^\\prime}$ as subfields of $\\widetilde E$. The degree and separable residue extension from Step 3 therefore persist, and [lem-trf-analytic-etale-residue-degree] gives the desired etaleness for every such $x^\\prime$.",
+   "uses": [
+    "lem-trf-analytic-close-embedding-degree",
+    "lem-trf-analytic-etale-residue-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 2.1.10(ii), p. 51; polynomial argument of Lemma 6.3.2, p. 48."
+   }
+  },
+  {
+   "text": "Finally let $x\\in E^\\circ$ have the residue required in the last clause. It lies outside $k$, so [lem-trf-analytic-parameter-finiteness] gives $L=k(x)^\\wedge\\subseteq E$ finite. The case (2) calculation of Step 2 gives $\\widetilde L=\\widetilde k(\\bar x)$ and $\\Gamma_L=\\Gamma_k$; in particular $L$ has residue transcendence degree one. Apply [lem-trf-analytic-type23-stability] to $L/k$ and its finite extension $E/L$. By [lem-trf-analytic-type-alternatives], $\\widetilde E\\ne\\widetilde k$ forces case (2), so $\\Gamma_E=\\Gamma_k=\\Gamma_L$. Consequently $[E:L]=[\\widetilde E:\\widetilde L]$. This residue extension is separable by hypothesis, so [lem-trf-analytic-etale-residue-degree] makes the valuation-ring inclusion etale. This proves the last clause for every permitted lift, not just for the coordinate chosen in Step 2.",
+   "uses": [
+    "lem-trf-analytic-parameter-finiteness",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-type-alternatives",
+    "lem-trf-analytic-etale-residue-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 2.1.10(iii), p. 51."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-analytic-type-alternatives",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-analytic-parameter-finiteness",
+  "lem-trf-analytic-type23-stability",
+  "lem-trf-analytic-etale-residue-degree",
+  "lem-trf-analytic-immediate-rationality",
+  "lem-trf-analytic-close-embedding-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 6.3.1 and proof of Theorem 2.1.10, printed pp. 48–51; paper read online, archival copy WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -92,5 +169,40 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-analytic-uniformization",
+  "worker": "stage1",
+  "summary": "Split through type alternatives, stability, immediate rationality, parameter finiteness, close-embedding degree invariance, and the etale residue-degree criterion. Wrote the Gauss-norm and substitution arguments explicitly; handled the trivial extension. Six supporting statements remain unsplit; no Lean attachment or Mathlib match found. The cited PDF is missing from the read clone; author PDF was read online.",
+  "blueprint": "Historical semistable-alteration branch in blueprint.from.place; current latest lem-trf-local-term-locality uses the contracting-correspondence route, which this supporting item does not alter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Only the generic fact that an identity (an open immersion) is etale, for E=k; no analytic input or replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-4aa24493a",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-4aa24493a (reviewer sub-agent of L); spot-checked: PASS, no changes. Temkin arXiv:0707.3953v3 is not in literature/, so I fetched the arXiv PDF and ran pdftotext on it. I read Thm 2.1.10, Lemmas 2.1.5(ii) and 2.1.6, §6.2 with Remark 6.2.2, and §6.3 (Thm 6.3.1 and its full proof, Lemmas 6.3.2 and 6.3.3, Cor 6.3.4, and the proof of 2.1.10 on p. 51). The item's statement is unchanged from live. The E=k case (y in k) is handled separately in Step 1 through the Mathlib-status cancellation(1) node, declared in tool_uses. Step 2: the Gauss-norm calculations (case 2 residue k~(u); case 3 distinct monomial norms, using divisibility of Gamma_k) give L the hypotheses of type23-stability, so [E:L]=[E~:L~]; the etale-residue-degree criterion then gives etaleness. Step 3 (type 4) uses immediate-rationality. I checked that algebraically closed k satisfies 6.2.1(ii), so the type-4 proof on p. 50 applies. Step 4 is Lemma 6.3.2 with eps=r/4 and the weak bound, then close-embedding-degree (6.3.3 restated with <= c|a|, which corrects the source's strict inequality at a=0) and equality of residue fields. Step 5 is 2.1.10(iii): residue field different from k~ forces type 2. All six new nodes are true as stated, are smaller than the item and do not restate it. The type-3 cyclic value group is justified by finite generation plus torsion-freeness. Each node is self-contained, statement-only and unsplit, with five recorded searches. A duplicate search over every 0707.3953 node, and over defectless, Cartesian, immediate and Gauss norm, found nothing. The Temkin ancestry is inherited from base. Minor: the new nodes lack lean_audit, which has precedent in landed nodes."
+ }
 }

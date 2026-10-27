@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-closed-immersion-finite-presentation-ideal",
+ "kind": "statement",
+ "title": "Finite presentation of a closed immersion and finite type of its ideal",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], with quasi-coherent ideal sheaf $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf]. Then $i$ is of finite presentation (locally of finite presentation, quasi-compact and quasi-separated) [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism, def-weil-quasi-separated-morphism] if and only if $\\mathcal I$ is of finite type as an $\\mathcal O_X$-module, meaning that every point of $X$ has an open neighbourhood on which finitely many sections generate $\\mathcal I$. No Noetherian, quasi-compactness or separatedness hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the Mathlib instances IsClosedImmersion -> IsAffineHom -> QuasiCompact and Mono -> QuasiSeparated. These give the two nonlocal finiteness conditions without assumptions on X.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof)."
+   }
+  },
+  {
+   "text": "The module realization of any ideal sheaf is quasi-coherent: it is the kernel of the structure sheaf map to the pushforward of the structure sheaf of its closed subscheme. The source and target are quasi-coherent by the unit instance and quasi-coherent pushforward along a closed immersion; apply closure under kernels.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof)."
+   }
+  },
+  {
+   "text": "For each affine open U, the section inclusion of i.ker.toModules is injective and has range i.ker.ideal U. Its range restriction is therefore a linear bijection. Module.Finite.iff_fg identifies finiteness of its section module with finite generation of this ideal. Scheme.Hom.ker_apply identifies this ideal with the kernel of i.app U.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof)."
+   }
+  },
+  {
+   "text": "For a surjective ring map f:R->S, finite presentation is equivalent to finite generation of its kernel. Forward: equip S with f.toAlgebra and apply Algebra.FinitePresentation.ker_fG_of_surjective to Algebra.ofId R S, using finite presentation of R over itself. This Mathlib strengthening of the polynomial-kernel lemma avoids the zero-variable polynomial equivalence. Reverse: use RingHom.FinitePresentation.of_surjective. Apply this to i.app U, surjective for affine U.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof)."
+   }
+  },
+  {
+   "text": "For the forward implication, local finite presentation gives finite presentation of i.app U because the full preimage of each affine open is affine. The preceding ring and section equivalences give finite section modules on the cover of all affine opens. Apply quasicoherent_finite_type_affine, clause (c), to conclude that i.ker.toModules is of finite type.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof)."
+   }
+  },
+  {
+   "text": "Conversely, finite type of the quasi-coherent kernel module gives finite section modules on every affine open by finite_sections_of_finiteType. The section and ring equivalences make each i.app U finitely presented. Around z choose an affine open U containing i(z), with affine inverse image. These witness HasRingHomProperty.iff_exists_appLE for local finite presentation. Combine with the instances from step 1.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TV, lemma-closed-immersion-finite-presentation (statement and proof). Lean proof by U7, 2026-10-26, using the existing Mathlib and source-library APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion of schemes is of finite presentation if and only if its quasi-coherent ideal sheaf is of finite type",
+   "results": "{\"t\": \"2026-10-23T11:11:19Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion of schemes is of finite presentation if and only if its quasi-coherent ideal sheaf is of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"7ee091713af07b3b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; generic morphism properties, ring presentations, or ideal data do not state the scheme-level finite-presentation/ideal equivalence or the smooth-pair blowup comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T11:11:19Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation|FinitePresentation|FG|finiteType",
+   "results": "{\"t\": \"2026-10-23T11:11:19Z\", \"tool\": \"grep\", \"query\": \"finitePresentation|FinitePresentation|FG|finiteType\", \"sub\": \"AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"10\", \"408\", \"409\", \"411\", \"413\"], \"digest\": \"03b9645a506d5095\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; generic morphism properties, ring presentations, or ideal data do not state the scheme-level finite-presentation/ideal equivalence or the smooth-pair blowup comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion has finite presentation precisely when its ideal sheaf is finitely generated",
+   "results": "{\"t\": \"2026-10-23T11:11:20Z\", \"tool\": \"leansearch\", \"query\": \"A closed immersion has finite presentation precisely when its ideal sheaf is finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\"], \"digest\": \"ab212ddad465b9f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; generic morphism properties, ring presentations, or ideal data do not state the scheme-level finite-presentation/ideal equivalence or the smooth-pair blowup comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*ker|ker.*finitePresentation|finitePresentation_iff",
+   "results": "{\"t\": \"2026-10-23T11:17:48Z\", \"tool\": \"grep\", \"query\": \"finitePresentation.*ker|ker.*finitePresentation|finitePresentation_iff\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/RingTheory/LocalProperties/FinitePresentation.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\", \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean\", \"Mathlib/RingTheory/Regular/Free.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/FinitePresentation.lean\"], \"digest\": \"d37f72d5edfba7df\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; generic morphism properties, ring presentations, or ideal data do not state the scheme-level finite-presentation/ideal equivalence or the smooth-pair blowup comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-closed-immersion-finite-presentation-ideal: the kernel ideal of a closed subscheme is locally finitely generated exactly when the immersion is finitely presented",
+   "results": "{\"t\": \"2026-10-23T11:17:48Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-closed-immersion-finite-presentation-ideal: the kernel ideal of a closed subscheme is locally finitely generated exactly when the immersion is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"Algebra.Generators.fg_ker_of_finitePresentation\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\"], \"digest\": \"a318ee72f2780353\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; generic morphism properties, ring presentations, or ideal data do not state the scheme-level finite-presentation/ideal equivalence or the smooth-pair blowup comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion is finitely presented if and only if its defining quasi-coherent ideal is locally finitely generated",
+   "results": "{\"t\": \"2026-10-23T12:00:52Z\", \"tool\": \"leanfinder\", \"query\": \"A closed immersion is finitely presented if and only if its defining quasi-coherent ideal is locally finitely generated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\"], \"digest\": \"a48c94cc9c4a4db7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned morphism finite-type instances and sheaf finite-presentation notions do not assert the closed-immersion/finite-type-ideal equivalence; relevant sources inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation|FinitePresentation|FG|finiteType",
+   "results": "{\"t\": \"2026-10-23T12:01:33Z\", \"tool\": \"grep\", \"query\": \"finitePresentation|FinitePresentation|FG|finiteType\", \"sub\": \"AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"10\", \"408\", \"409\", \"411\", \"413\"], \"digest\": \"03b9645a506d5095\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned morphism finite-type instances and sheaf finite-presentation notions do not assert the closed-immersion/finite-type-ideal equivalence; relevant sources inspected"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quasi-coherent ideal of a closed subscheme is of finite type exactly when the embedding is of finite presentation",
+   "results": "{\"t\": \"2026-10-23T12:01:34Z\", \"tool\": \"leansearch\", \"query\": \"The quasi-coherent ideal of a closed subscheme is of finite type exactly when the embedding is of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"5952dbfc32c04ccc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned morphism finite-type instances and sheaf finite-presentation notions do not assert the closed-immersion/finite-type-ideal equivalence; relevant sources inspected"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-23T12:01:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration returned"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-pair-blowup-local-models",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-center blowups and reduced strict transforms. Re-split of lem-trf-smooth-center-blowup-geometry: old steps 1--2 and the etale base-change identification in old step 4; finite-presentation justification for a closed immersion once its ideal is locally finitely generated (Stacks 01TV).",
+   "via": [
+    "lem-trf-smooth-pair-blowup-local-models",
+    "lem-trf-smooth-center-blowup-geometry",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-closed-immersion-finite-presentation-ideal",
+  "worker": "stage1",
+  "summary": "Checked Stacks 01TV and exposed both affine reductions and the automatic quasi-compactness and quasi-separatedness. Reused existing nodes for the affine finite-type criterion, finite-presentation kernel theorem, and affine-pair finite-presentation theorem; no new node or statement correction is needed. Retained inherited metadata and searches, adding logged searches for this item.",
+  "blueprint": "Supports the historical smooth-pair blowup finite-presentation input recorded in blueprint.from.place and the created.item chain. The current latest lem-trf-local-term-locality proof (1)--(2) uses the normal-cone route and contains no closed-immersion finite-presentation assertion; no claim of a new current-blueprint clause or unit-route change is made.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-7b70b0997",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-7b70b0997 (reviewer sub-agent of L); spot-checked: I read Stacks morphisms.tex 4207-4227 (Tag 01TV, statement and proof). The item statement, stmt_deps and blueprint are unchanged from the earlier dagsnap; the delivery adds only proof, proof_deps, split_report and logged searches. There are no new nodes and no re-split repair note. Step 1: a closed immersion is quasi-compact because the preimage of an affine open is affine (def-weil-closed-immersion, affine-scheme-qcqs, def-weil-finite-type-morphism). It is quasi-separated because 01QU(a) makes it separated, so its diagonal is a closed immersion and hence quasi-compact (def-weil-proper-morphism, def-weil-quasi-separated-morphism). No hypothesis on X is used. Step 2 is elementary: def-sbc-closed-immersion-ideal-sheaf states I(U)=J, I|_U=J~ and quasi-coherence explicitly. Step 3: R/J is finitely presented over R iff J is finitely generated, using the 00R2 node with n=0 and the 00F3 definition (n=0, m relations). Step 4: 01TQ on the affine pair (i^{-1}U, U), then step 3, then quasi-coherent-finite-type-affine (c) on an affine cover. Step 5: restrict to U, apply (a), then step 3, then use the affine pair (i^{-1}U, U) as the witness in def-sbc-locally-finite-presentation; together with step 1 this gives finite presentation. Each cited statement says what its step uses. The item's inline 'finite type' is the same notion as pqf-def-coherent (2). Small cases checked: J=0, J=R, empty X, a non-quasi-compact disjoint union of affines, and the non-f.g. ideal (x_1,x_2,...) in k[x_1,x_2,...]. Duplicate check: an rg -L for 01TV finds the tag only inside steps of 4 other nodes (one is the parent), and no node states the equivalence. Mathlib searches are logged with no match (loogle 0 hits). The cited tools are generic mathlib-status or Lean-closed foundation nodes, the unit route is unchanged and tool_uses is empty. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionFinitePresentationIdeal",
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.finitePresentation_iff_isFiniteType_ker",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionFinitePresentationIdeal.lean",
+  "statement": "theorem IsClosedImmersion.finitePresentation_iff_isFiniteType_ker {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : (LocallyOfFinitePresentation i ∧ QuasiCompact i ∧ QuasiSeparated i) ↔ i.ker.toModules.IsFiniteType",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5fc1031e",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 01TV: [IsClosedImmersion i] only, no hypotheses on X; LHS = LocallyOfFinitePresentation ∧ QuasiCompact ∧ QuasiSeparated (node's full fp convention); RHS i.ker.toModules.IsFiniteType, the O_X-module form named by the def-sbc-closed-immersion-ideal-sheaf record (real kernel construction, affine sections = ideal); Mathlib IsFiniteType universe is pinned to the site object universe, so no stray universe parameter. lean.statement verbatim, single sorry, no definitions, node changed only by lean record, report has Worker report + Second reading by Q08, docstrings carry source/blueprint and 5 proof steps. Edge cases (empty, Z=X, empty Z, non-qc X, non-f.g. ideal) covered. No duplicate in Mathlib/project. No findings; no compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261026T092814-L-3468416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

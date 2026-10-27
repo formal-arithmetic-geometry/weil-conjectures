@@ -1,0 +1,360 @@
+{
+ "id": "lem-sf-adic-common-stage-descent-equivalence",
+ "kind": "statement",
+ "title": "Exact descent of a continuous realization cocone through common finite stages",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T$ be a separated finite-type $k$-scheme. On its small pro-etale site [def-weil-pbc-proetale-site], for each finite $E\\subset\\Omega$ put $B_{E,T}=\\varprojlim_{n\\ge1}(\\mathcal O_E/\\varpi_E^n)_T$ [def-weil-completed-integral-coefficients], $E_T=B_{E,T}[1/\\varpi_E]$, and $R_T=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ valued in one finite subextension [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal C_E(T)=D^b_c(T,E)$ for the raw rationalization of derived-complete integral constructible complexes, with its specified completed finite scalar transitions $S_{F/E}$ [def-weil-rationalization-karoubi]. Write $\\mathcal C_T$ for the common-stage pair category of these $\\mathcal C_E(T)$, with Hom groups the directed colimits over common finite fields [def-weil-algebraically-closed-coefficients]. For $A=E_T,R_T$, let $\\mathcal D_T(A)$ be the full subcategory of $D(\\operatorname{Mod}(A))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] of bounded objects whose cohomology sheaves have a finite locally closed stratification on each stratum of which they are pro-etale locally finite free over $A$.\n\nSuppose for every finite $E$ one is given the exact $E$-linear equivalence $J_{E,T}:\\mathcal C_E(T)\\simeq\\mathcal D_T(E_T)$ induced by $E_T\\otimes^L_{B_{E,T}}-$, together with the natural scalar comparisons $j_{F/E}:J_{F,T}S_{F/E}\\simeq(F_T\\otimes^L_{E_T}-)J_{E,T}$ induced by the specified quotient-completion comparison and balanced multiplication. Assume their identity and tower equations with the actual scalar transitions [lem-weil-scalar-extension-composition], including after extension to $R_T$.\n\nThe formulas $\\rho_T(E,K)=R_T\\otimes^L_{E_T}J_{E,T}K$ and, on an arrow represented by $u$ over $F$, scalar extension of $J_{F,T}(u)$ conjugated by these comparisons, define a functor independent of the chosen common field and of the representative arrow. Its maps on Hom groups are the canonical bijections\n$$\\varinjlim_{F\\supset E,E'}\\operatorname{Hom}_{\\mathcal C_F(T)}(S_{F/E}K,S_{F/E'}L)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(R_T)}(\\rho_T(E,K),\\rho_T(E',L)).$$\nEvery object of $\\mathcal D_T(R_T)$ is isomorphic to some $\\rho_T(E,K)$. The functor preserves shifts and distinguished triangles with their finite-stage normalization: a distinguished triangle represented over one finite field is sent to its derived scalar extension. Consequently $\\rho_T:\\mathcal C_T\\simeq\\mathcal D_T(R_T)$ is an exact equivalence with these specified object and arrow formulas.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Proposition 6.8.14; HRS Proposition 5.2 and Lemma 7.9; common-stage object, Hom and triangle descent, old steps 4--6; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-scalar-extension-composition",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-sf-rational-coefficient-inclusion",
+  "def-constructible-stratification",
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-sf-completed-scalar-comparison-data",
+  "def-weil-completed-integral-scalar-data",
+  "def-weil-proetale-inverse-image",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-adic-lisse-module",
+  "def-pc-kflat-complex",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "The scheme $\\operatorname{Spec}k$ is Noetherian: its affine ring has only the ideals $0,k$. Finite type over a Noetherian scheme makes $T$ Noetherian. Its underlying space is Noetherian: by the definition of finite type, $T$ has a finite cover by affine opens $\\operatorname{Spec}B_i$ with $B_i$ a finitely generated $k$-algebra, and each $\\operatorname{Spec}B_i$ is a Noetherian space because the one-point space $\\operatorname{Spec}k$ is. An ascending chain of opens of $T$ stabilizes on each of the finitely many $\\operatorname{Spec}B_i$, hence on $T$. A subspace $Z$ of a Noetherian space is Noetherian: if $Z\\cap U_1\\subset Z\\cap U_2\\subset\\cdots$ with $U_n$ open, put $V_n=U_1\\cup\\cdots\\cup U_n$; then $Z\\cap V_n=Z\\cap U_n$ and the chain $V_n$ stabilizes. So every locally closed stratum is topologically Noetherian. Also $T$ is qcqs because it is separated of finite type over the affine scheme $\\operatorname{Spec}k$. Thus the Noetherian and qcqs hypotheses of the coefficient comparison and descent results below hold, including on every stratum.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 5.2 and Lemma 7.9, hypotheses; verification for the present finite-type schemes"
+   }
+  },
+  {
+   "text": "Identify the coefficient rings before comparing categories. The pulled-back coefficient identities give $p_T^*\\underline{\\mathcal O_E}\\cong B_{E,T}$ and $p_T^*\\underline E\\cong B_{E,T}[1/\\ell]$. In the DVR $\\mathcal O_E$, write $\\ell=u\\varpi_E^e$ with $u$ a unit and $e>0$; hence inverting $\\ell$ or $\\varpi_E$ has the same universal property. This identifies $p_T^*\\underline E$ with the actual $E_T$, and the closure ring is exactly $R_T=p_T^*\\underline\\Omega$, with finite-extension-valued sections. Use the internal-module/section-module equivalence to pass from the module objects in the condensed descent theorem to ordinary ring-sheaf modules. It leaves the underlying sheaves and arrows unchanged. Its exact tensor comparison sends a local pure tensor to the same pure tensor and preserves K-flat complexes; consequently termwise localization identifies derived scalar extension with the ordinary ringed-site derived scalar extension used here. For change of rings, both balanced maps send $b\\otimes m$ to $b\\otimes m$; their inverses have the same formula, so the scalar comparison and its multiplication transitivity maps agree. All sites are taken small in the coefficient universe as in the cited module equivalence.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, continuous coefficient rings; ordinary internal-to-section module identification and balancing argument"
+   }
+  },
+  {
+   "text": "Under step 2, the bounded constructible categories in the condensed two-colimit theorem are precisely $\\mathcal D_T(E_T)$ and $\\mathcal D_T(R_T)$. Indeed the finite-field local-triviality lemma converts local finite presentations into finite free modules on each Noetherian stratum; the algebraic-closure local-triviality lemma does the same for $R_T$, using exactly the finite-extension-valued coefficient ring. Conversely a finite free module has the finite presentation $A^0\\to A^r\\to A^r\\to0$, including $r=0$. The module equivalence preserves cohomology because it is exact, so boundedness and both stratified conditions coincide. The condensed two-colimit theorem therefore applies to these full subcategories and the actual derived scalar-extension functors, with the balanced multiplication comparisons identified in step 2.",
+   "uses": [
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 5.2, Lemma 7.9; BS Definition 6.8.8; constructibility comparison via the cited local-triviality statements"
+   }
+  },
+  {
+   "text": "Put $G_E=R_T\\otimes^L_{E_T}J_{E,T}$. The given $j_{F/E}$ followed by balanced multiplication gives $\\gamma_{F/E,K}:G_F(S_{F/E}K)\\xrightarrow{\\sim}G_EK$. For $u:S_{F/E}K\\to S_{F/E'}L$, put $X_F=G_F(u)$ and define its image as $\\gamma_{F/E',L}\\circ X_F\\circ\\gamma_{F/E,K}^{-1}$. For $F\\subset H$, let $a_K=\\gamma_{H/F,S_{F/E}K}$ and $a_L=\\gamma_{H/F,S_{F/E'}L}$, identifying iterated transitions with direct ones by the specified composition maps. Naturality gives $a_L\\circ X_H=X_F\\circ a_K$. The assumed tower equation gives $\\gamma_{H/E,K}=\\gamma_{F/E,K}\\circ a_K$ and $\\gamma_{H/E',L}=\\gamma_{F/E',L}\\circ a_L$. Substituting $X_H=a_L^{-1}\\circ X_F\\circ a_K$ into the formula at $H$ cancels both $a$ factors, giving exactly the formula at $F$. Equivalent representatives agree at a common further field by the pair-category definition, so have equal images. For composable arrows, move both to one common field; the adjacent factors $\\gamma_{F/E',L}^{-1}\\circ\\gamma_{F/E',L}$ cancel, leaving the formula for their composite by functoriality of $G_F$. The identity equation gives preservation of identities. Thus this is the asserted functor with the specified arrow formula.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 7.9, normalized cocone assembly; explicit ordinary-category argument using the assumed identity and tower equations"
+   }
+  },
+  {
+   "text": "At each common finite $F$, full faithfulness of the assumed $J_{F,T}$ and conjugation by $j_{F/E},j_{F/E'}$ identify the source Hom group with $\\operatorname{Hom}_{\\mathcal D_T(F_T)}(F_T\\otimes^L_{E_T}J_{E,T}K,F_T\\otimes^L_{E'_T}J_{E',T}L)$. Naturality and the assumed tower equations identify the transition maps on these groups. Thus these bijections induce inverse bijections on the directed colimits, by applying them to representatives. The Hom-surjectivity and eventual-equality clauses of the condensed two-colimit theorem, applied after step 3, identify this latter colimit with $\\operatorname{Hom}_{D(R_T)}(G_EK,G_{E'}L)$. Its map sends a representative to its scalar extension conjugated by multiplication. Step 2 and the definition of $\\gamma$ identify that map with the formula of step 4. Hence these are the claimed canonical Hom bijections, and $\\rho_T$ is fully faithful.",
+   "uses": [
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 5.2, full faithfulness; Lemma 7.9, finite coefficient-field specialization"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathcal D_T(R_T)$, step 3 and object descent supply a finite $E$ and $N\\in\\mathcal D_T(E_T)$ with $R_T\\otimes^L_{E_T}N\\cong M$. Essential surjectivity of the assumed $J_{E,T}$ gives $K\\in\\mathcal C_E(T)$ with $J_{E,T}K\\cong N$. Applying derived scalar extension yields $\\rho_T(E,K)\\cong M$. Full faithfulness from step 5 and these object isomorphisms produce a quasi-inverse: choose such a preimage for each object, and lift each conjugated arrow through the unique inverse of its Hom bijection. Uniqueness gives the functor laws and the two inverse natural isomorphisms.",
+   "uses": [
+    "prop-weil-pbc-qbar-condensed-two-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 5.2, essential surjectivity; Lemma 7.9; elementary quasi-inverse assembly"
+   }
+  },
+  {
+   "text": "Derived change of rings $R_T\\otimes^L_{E_T}-$ is exact for the canonical shift comparison, and $J_{E,T}$ is exact by hypothesis; so $G_E$ is exact with the composite shift comparison $\\tau_{E,K}:G_E(K[1])\\cong G_E(K)[1]$, and it sends each finite-stage distinguished triangle to its derived scalar extension, with its connecting morphism. The comparisons $\\gamma$ commute with these shift comparisons. On a K-flat integral representative $P$ of $K$, the quotient-completion comparison inside $j_{F/E}$ satisfies $\\alpha_{1,P}\\chi_{P[1]}=\\chi_P[1]$, where $\\alpha$ is the shift comparison of the cone model of the integral scalar extension, which rationalizes to the shift comparison $\\sigma_{F/E}$ of $S_{F/E}$; balanced multiplication and derived change of rings are computed termwise on the K-flat complexes $P$ and $P[1]$, so they commute with the termwise shift identifications; rationalization does not change objects. Hence $\\tau_{E,K}\\circ\\gamma_{F/E,K[1]}=\\gamma_{F/E,K}[1]\\circ\\tau_{F,S_{F/E}K}\\circ G_F(\\sigma_{F/E,K})$, so $\\tau$ is natural for the arrows of step 4, not only for arrows over one field. Shifts and distinguished triangles of the pair category are represented over one finite field. Applying step 4 to those representatives gives precisely these shifted objects and these scalar-extended triangles; isomorphic triangles have isomorphic images. Thus $\\rho_T$ with $\\tau$ preserves shifts and distinguished triangles with the stated finite-stage normalization. Finally its essential image is the full category $\\mathcal D_T(R_T)$ by step 6; this full subcategory is triangulated: lift the endpoints and arrow of a cone by full faithfulness, take its finite-stage cone in the source, and use the just-proved exactness to identify its image with an ambient cone. This proves the asserted exact equivalence.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-point-completed-scalar-shift",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14, triangulated comparisons; ordinary K-flat scalar extension and finite-stage distinguished triangles"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-over-affine",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-weil-point-completed-scalar-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 5.2 and Lemma 7.9; BS Definition 6.8.8 and Proposition 6.8.14. Explicit transport through the given J and j, conjugation formulas, and triangle normalization assembled by NY from existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent finite coefficient realization cocone descends to an exact equivalence from the common stage constructible l adic pair category",
+   "results": "[leanfinder] OK 8 hit(s); localCohomology.hasColimitDiagram: ∀ {R : Type (max u v)} [inst : CommRing R] {D : Type v} [inst_1 : CategoryTheory.SmallCategory D]\n  (I : CategoryTheory.Functor D (Ideal R)) (i : ℕ), CategoryTheory.Limits.HasColimit (localCohomology.diagram I i); localCohomology.ofDiagram: {R : Type (max u v)} →\n  [inst : CommRing R] →\n    {D : Type v} →\n      [inst_1 : CategoryTheory.SmallCategory D] →\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R); RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit: ∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I; localCohomology.isoOfFinal: {R : Type (max u v v')} →\n  [inst : CommRing R] →\n    {D : Type v} →\n      [inst_1 : CategoryTheory.SmallCategory D] →\n        {E : Type v'} →\n          [inst_2 : CategoryTheory.SmallCategory E] →\n            (I' : CategoryTheory.Functor E D) →\n              (I : CategoryTheory.Functor D (Ideal R)) ; AdicCompletion.map_exact: ∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N ; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit: ∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I; LightProfinite.Extend.isColimitCocone: {F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} →\n  (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite)) →\n    {C : Type u_1} →\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\n        (G : CategoryTheory.Functor LightProfiniteᵒᵖ C) →\n          CategoryTheory.Limits.IsLimit c →\n   ; localCohomology.isoSelfLERadical: {R : Type u} →\n  [inst : CommRing R] →\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Equivalence\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*colimit|colimit.*constructible|adic.*equivalence",
+   "results": "[grep] OK 9 hit(s); Mathlib/CategoryTheory/Monad/Adjunction.lean:273:     (Monad.comparison (monadicAdjunction R)).IsEquivalence :=; Mathlib/CategoryTheory/Monad/Adjunction.lean:305:     (Comonad.comparison (comonadicAdjunction L)).IsEquivalence :=; Mathlib/RingTheory/DedekindDomain/AdicValuation.lean:611: /-- `adicCompletion.toCompletion` and `adicCompletion.ofCompletion` as an equivalence. -/; Mathlib/Algebra/Homology/LocalCohomology.lean:232: def SelfLERadical.castEquivalence (hJK : J.radical = K.radical) :; Mathlib/Algebra/Homology/LocalCohomology.lean:239: instance SelfLERadical.cast_isEquivalence (hJK : J.radical = K.radical) :; Mathlib/Algebra/Homology/LocalCohomology.lean:240:     (SelfLERadical.cast hJK).IsEquivalence :=; Mathlib/RingTheory/Valuation/Basic.lean:37: sense. Note that we use 1.27(iii) of [wedhorn_adic] as the definition of equivalence.; Mathlib/LinearAlgebra/QuadraticForm/Radical.lean:53: /-- The radical of a quadratic form is preserved by isometry equivalences. -/; Mathlib/LinearAlgebra/QuadraticForm/Radical.lean:59: /-- The rank of the radical of a quadratic map is invariant under equivalences. -/",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common stage constructible complexes over finite extensions are equivalent to bounded constructible continuous algebraic closure coefficient modules",
+   "results": "[leansearch] OK 8 hit(s); Topology.IsConstructible: (s : Set X) : Prop; algebraicClosure.algEquivOfAlgEquiv: (i : E ≃ₐ[F] K) : algebraicClosure F E ≃ₐ[F] algebraicClosure F K; ContinuousCohomology.MultiInd.complex: : CochainComplex (Action (TopModuleCat R) G ⥤ Action (TopModuleCat R) G) ℕ; separableClosure.algEquivOfAlgEquiv: (i : E ≃ₐ[F] K) : separableClosure F E ≃ₐ[F] separableClosure F K; AlgEquiv.algebraicClosure: {F : Type u_1} →\n  {E : Type u_2} →\n    [inst : Field F] →\n      [inst_1 : Field E] →\n        [inst_2 : Algebra F E] →\n          {K : Type u_3} →\n            [inst_3 : Field K] →\n              [inst_4 : Algebra F K] → (E ≃ₐ[F] K) → ↥(algebraicClosure F E) ≃ₐ[F] ↥(algebraicClosure F K); Submodule.mem_closure_iff: {x : M} {s : Submodule R M} : x ∈ s.closure ↔ x ∈ s.topologicalClosure; normalClosure.algHomEquiv: : (K →ₐ[F] normalClosure F K L) ≃ (K →ₐ[F] L); algebraicClosure.isAlgebraic: : Algebra.IsAlgebraic F (algebraicClosure F E)",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full faithfulness and essential surjectivity of the continuous algebraic closure coefficient scalar extension realization on common finite stages",
+   "results": "[leansearch] OK 8 hit(s); FintypeCat.toProfiniteFullyFaithful: : toProfinite.FullyFaithful; CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContAction: : (functorToContAction F).EssSurj; CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContActionOfFiberFunctor: {F : C ⥤ FintypeCat.{u₁}} [FiberFunctor F] : (functorToContAction F).EssSurj; IsAlgClosed.surjective_restrictDomain_of_isAlgebraic: {E : Type*} [Field E] [Algebra K E] [Algebra L E] [IsScalarTower K L E] [Algebra.IsAlgebraic L E] :\n  Function.Surjective fun φ : E →ₐ[K] M ↦ φ.restrictDomain L; Sequential.fullyFaithfulSequentialToTop: : sequentialToTop.FullyFaithful; Valued.instFaithfulSMulCompletionOfUniformContinuousConstSMul: {R : Type*} [CommSemiring R] [Algebra R K] [UniformContinuousConstSMul R K] [FaithfulSMul R K] : FaithfulSMul R (hat K); Ring.instFaithfulSMulSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure: : FaithfulSMul S E; algebraicClosure.le_restrictScalars: [Algebra E K] [IsScalarTower F E K] : algebraicClosure F K ≤ (algebraicClosure E K).restrictScalars F",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*colimit|colimit.*constructible|adic.*equivalence",
+   "results": "Actual NY search: 9 hits: Mathlib/RingTheory/Valuation/Basic.lean, Mathlib/LinearAlgebra/QuadraticForm/Radical.lean, Mathlib/LinearAlgebra/QuadraticForm/Radical.lean, Mathlib/RingTheory/DedekindDomain/AdicValuation.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/CategoryTheory/Monad/Adjunction.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general algebra, topology or condensed categories, not this constructible adic realization equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common stage constructible complexes over finite extensions are equivalent to bounded constructible continuous algebraic closure coefficient modules",
+   "results": "Actual NY search: 8 hits: Topology.IsConstructible, algebraicClosure.algEquivOfAlgEquiv, ContinuousCohomology.MultiInd.complex, separableClosure.algEquivOfAlgEquiv, AlgEquiv.algebraicClosure, Submodule.mem_closure_iff, normalClosure.algHomEquiv, algebraicClosure.isAlgebraic. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general algebra, topology or condensed categories, not this constructible adic realization equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Equivalence\"",
+   "results": "Actual NY search: 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general algebra, topology or condensed categories, not this constructible adic realization equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent finite coefficient realization cocone descends to an exact equivalence from the common stage constructible l adic pair category",
+   "results": "Actual NY search: 8 hits: localCohomology.hasColimitDiagram, AdicCompletion.piEquivFin, AdicCompletion.piEquivOfFintype_apply, Condensed.fintypeCatAsCofanIsColimit, localCohomology.ofDiagram, AdicCompletion.piEquivFin_apply, AdicCompletion.sumEquivOfFintype_apply, AdicCompletion.map_exact. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general algebra, topology or condensed categories, not this constructible adic realization equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full faithfulness and essential surjectivity of the continuous algebraic closure coefficient scalar extension realization on common finite stages",
+   "results": "Actual NY search: 8 hits: FintypeCat.toProfiniteFullyFaithful, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContActionOfFiberFunctor, IsAlgClosed.surjective_restrictDomain_of_isAlgebraic, Sequential.fullyFaithfulSequentialToTop, Valued.instFaithfulSMulCompletionOfUniformContinuousConstSMul, Ring.instFaithfulSMulSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure, algebraicClosure.le_restrictScalars. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern general algebra, topology or condensed categories, not this constructible adic realization equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The native obligation has no imported blueprint ancestor (ancestor prints None); supplied provenance is the evaluation/biduality clause of thm-coef-qbar-verdier. This node carries returned realization proof steps 4,5,6: Exact descent of a continuous realization cocone through common finite stages.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-common-stage-descent-equivalence",
+  "worker": "stage1",
+  "summary": "No new nodes: reused the existing condensed coefficient two-colimit theorem and both local-triviality comparisons after checking their full statements and their acyclic dependency closures. Proved the normalized cocone formula directly from the assumed finite realization equivalences and tower identities; obtained canonical Hom bijections and objects by transport, and checked finite-stage shift and triangle normalization. Statement unchanged; no Lean was written or compiled. Repair of the 2026-10-22 return: compared every saved full-statement citation with the current DAG (all unchanged), retained the statement and seven-step route, and expanded step 4 into the explicit tower/naturality cancellation equations before rebuilding on current origin/sheaf-dag.",
+  "blueprint": "Native node: blueprint_refs ancestor prints None, as already recorded. Serves thm-coef-qbar-verdier evaluation/biduality descent via lem-sf-adic-qbar-constructible-realization; realizes its former steps 4--6 (common-field objects, Hom groups and triangles). The current blueprint qbar Verdier theorem supplies the common-stage route, not a second formulation of this realization equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherianity used only to check the hypotheses of coefficient descent. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic qcqs criterion for separated finite-type schemes over a field. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Identifies the completed integral, rational and finite-extension-valued closure coefficient ring sheaves. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The unit-times-uniformizer-power expression identifies inversion of ell with inversion of the chosen uniformizer. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Exact, K-flat-preserving conversion between internal and section modules, with the identical balanced tensor maps. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "prop-weil-pbc-qbar-condensed-two-colimit",
+    "why": "Generic coefficient-field object and Hom descent for condensed module categories; the given J and j transport it to this raw common-stage diagram. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-lfp-local-triviality",
+    "why": "Converts the finite-field stratified finite-presentation condition of the descent theorem to the item's finite-free condition. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "why": "The analogous conversion for the specified finite-extension-valued algebraic-closure ring. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic exactness of ordinary ringed-site derived scalar extension, for finite-stage triangle normalization. The biduality unit has no separate coefficient-descent result."
+   },
+   {
+    "node": "lem-sfb-finite-type-noetherian-spectrum",
+    "why": "Reviewer repair: Noetherian spectrum of a finitely generated algebra over a Noetherian-space base, to get the topological Noetherianity required by the descent and local-triviality results. Generic commutative algebra; the biduality unit has no such result."
+   },
+   {
+    "node": "lem-weil-point-completed-scalar-shift",
+    "why": "Reviewer repair: the specified quotient-completion comparison chi commutes with cochain shift, needed for the shift comparison of rho_T to be natural across finite coefficient fields. The biduality unit has no separate coefficient-shift result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-over-affine",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pe-internal-section-tensor-comparison",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-weil-point-completed-scalar-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NY-c4f6a58b3",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-c4f6a58b3 (reviewer sub-agent of L); spot-checked: I read the whole item (no new nodes, statement and stmt_deps unchanged from the base, no re-split note), every cited statement, BS 1309.1198 Def 6.8.6/6.8.8, Prop 6.8.11/6.8.14 with proofs and Rem 6.8.15, and HRS 2305.18131 Prop 5.2, Thm 7.7 and Lemma 7.9. Against the earlier head 88881318b6c4 only step 4 changed. Its explicit equations are correct: naturality gives a_L X_H = X_F a_K, the tower equation gives γ_{H/E}=γ_{F/E}a_K, and substituting cancels the a factors. Steps 2-6 hold. (2) sk-prop-sfb-qlbar-colimit-x matches B_{E,T}, and its p_X^* is the same construction as that of def-weil-pbc-condensed-e-module-category; ℓ=uϖ^e with e>0, so [1/ℓ]=[1/ϖ]; the internal/section tensor comparison preserves K-flatness. (3) Both lfp local-triviality lemmas apply on Noetherian strata. (5)/(6) Hom descent, eventual equality and object descent of prop-weil-pbc-qbar-condensed-two-colimit, transported through J and j. The two repairs of the earlier FIX were lost in the re-delivery; I re-applied them on top of the new step 4. C1, step 1: 'every stratum is topologically Noetherian' had no citation; added lem-sfb-finite-type-noetherian-spectrum plus the finite-cover and subspace argument. E5, step 7: exactness of ρ_T needs γ and j to commute with shifts across fields, and neither the hypotheses nor naturality gives this; added lem-weil-point-completed-scalar-shift (α χ_{P[1]} = χ_P[1]), the termwise K-flat argument, and the explicit τ-naturality equation. Both nodes are acyclic and recorded in tool_uses; proof_deps equals the union of the step uses; I accepted the worker's generic tool_uses. No SGA. Fix file: fixes/dag/nodes/sec-six-functors/lem-sf-adic-common-stage-descent-equivalence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfAdicCommonStageDescentEquivalence",
+  "declaration": "WeilConjectures.SfAdicCommonStageDescent.commonStageDescentEquivalence",
+  "declarations": [
+   "WeilConjectures.SfAdicCommonStageDescent.coefficient",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteRing",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteStageLinear",
+   "WeilConjectures.SfAdicCommonStageDescent.fieldScalarSections",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteModuleLinear",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteDerivedLinear",
+   "WeilConjectures.SfAdicCommonStageDescent.closure_commutative",
+   "WeilConjectures.SfAdicCommonStageDescent.closureRing",
+   "WeilConjectures.SfAdicCommonStageDescent.presentation_existsUnique",
+   "WeilConjectures.SfAdicCommonStageDescent.presentation",
+   "WeilConjectures.SfAdicCommonStageDescent.integralMap",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteMap",
+   "WeilConjectures.SfAdicCommonStageDescent.closureMap",
+   "WeilConjectures.SfAdicCommonStageDescent.integralMap_comp",
+   "WeilConjectures.SfAdicCommonStageDescent.closureMap_comp",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteMap_comp",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteMap_id",
+   "WeilConjectures.SfAdicCommonStageDescent.scalarShiftNormalized",
+   "WeilConjectures.SfAdicCommonStageDescent.scalarShift_existsUnique",
+   "WeilConjectures.SfAdicCommonStageDescent.scalarCommShift",
+   "WeilConjectures.SfAdicCommonStageDescent.constructible",
+   "WeilConjectures.SfAdicCommonStageDescent.extended",
+   "WeilConjectures.SfAdicCommonStageDescent.extendedCommShift",
+   "WeilConjectures.SfAdicCommonStageDescent.gamma",
+   "WeilConjectures.SfAdicCommonStageDescent.coherent",
+   "WeilConjectures.SfAdicCommonStageDescent.scalarNormalized",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteCoherent",
+   "WeilConjectures.SfAdicCommonStageDescent.finiteIdentity",
+   "WeilConjectures.SfAdicCommonStageDescent.commonStageDescentEquivalence"
+  ],
+  "file": "lean/Sheaf/Paper/SfAdicCommonStageDescentEquivalence.lean",
+  "statement": "theorem commonStageDescentEquivalence (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (a : T ⟶ Spec (CommRingCat.of D.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (J : ∀ E : PadicAlgCl.FiniteIntermediateField l, GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) T E ⥤ DerivedCategory (pbcModules T (finiteRing l T E))) [∀ E, (J E).CommShift ℤ] (hJ : ∀ E, (J E).IsTriangulated ∧ (∀ K L, Function.Bijective ((J E).map : (K ⟶ L) → (_ ⟶ _))) ∧ ∀ M, constructible T (finiteRing l T E) M ↔ ∃ K, Nonempty ((J E).obj K ≅ M)) (hlinear : ∀ (E : PadicAlgCl.FiniteIntermediateField l) (K L : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) T E) (f : K ⟶ L) (b : Localization.Away (Padic.coefficientExtensionUniformizer l (coefficient.{u} l E))), (J E).map (b • f) = sfRationalCoefficientEquiv l (coefficient.{u} l E) b • (J E).map f) (α : ∀ E : PadicAlgCl.FiniteIntermediateField l, sfRationalConstructibleLocalization l (coefficient.{u} l E) T ⋙ J E ≅ ObjectProperty.ι (sfIntegralConstructible l (coefficient.{u} l E) T) ⋙ pbcDerivedExtend (integralMap l T E)) (hα : ∀ E, (α E).hom.CommShift ℤ) (j : ∀ (E F : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F), GeneralAlgebraicallyClosedCoefficients.stageTransition l (PadicAlgCl l) T E F h ⋙ J F ≅ J E ⋙ pbcDerivedExtend (finiteMap l T h)) (hn : scalarNormalized l T J α j) (hidentity : finiteIdentity l T J j) (hfinite : finiteCoherent l T J j) (hj : coherent l T J j) : ∃ ρ : GeneralAlgebraicallyClosedCoefficients.Pair l (PadicAlgCl l) T ⥤ DerivedCategory (pbcModules T (closureRing l T)), (∀ A, ρ.obj A = (extended l T J A.stage).obj A.obj) ∧ (∀ (A B : GeneralAlgebraicallyClosedCoefficients.Pair l (PadicAlgCl l) T) (F : PadicAlgCl.FiniteIntermediateField l) (hA : A.stage ≤ F) (hB : B.stage ≤ F) (f : A.toStage hA ⟶ B.toStage hB), HEq (ρ.map (StageSystem.PairCategory.mkHom F hA hB f)) ((gamma l T J j A.stage F hA A.obj).inv ≫ (extended l T J F).map f ≫ (gamma l T J j B.stage F hB B.obj).hom)) ∧ (∀ A B, Function.Bijective (fun z : GeneralAlgebraicallyClosedCoefficients.ColimitHom A B ↦ ρ.map ((GeneralAlgebraicallyClosedCoefficients.homCoordinates A B).symm z))) ∧ (∀ M, constructible T (closureRing l T) M ↔ ∃ A, Nonempty (ρ.obj A ≅ M)) ∧ (∃ e : GeneralAlgebraicallyClosedCoefficients.Pair l (PadicAlgCl l) T ≌ (constructible T (closureRing l T)).FullSubcategory, Nonempty (e.functor ⋙ (constructible T (closureRing l T)).ι ≅ ρ)) ∧ ∃ c : ρ.CommShift ℤ, (fun [commInst : ρ.CommShift ℤ] ↦ ρ.IsTriangulated ∧ ∀ (E : PadicAlgCl.FiniteIntermediateField l) (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) T E) (m : ℤ), HEq (ρ.map (((GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := PadicAlgCl l) (Y := T) E).commShiftIso m).hom.app K) ≫ (ρ.commShiftIso m).hom.app ((GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := PadicAlgCl l) (Y := T) E).obj K)) (((extended l T J E).commShiftIso m).hom.app K)) (commInst := c)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of immutable head 4017973c0e18: cite definition owners, reexport the published completed scalar maps through definition-owned aliases, and register scalarCommShift only locally. All mathematical hypotheses and conclusions are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-184fde136",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Re-delivery of returned 4017973c fixes all three return points; only the dependency records, two aliases and the shift instance changed, statement unchanged. (1) The four locally finite realization helpers are cited from landed def-sf-locally-finite-adic-realization-data. (2) completedIntegralScalarCoefficientMap is the landed def-weil-completed-integral-scalar-data alias; the new node def-sf-completed-scalar-comparison-data owns an alias of completedScalarComparison with the same type and the same normalization, no invertibility claim, no other owner and no name clash. (3) The new node def-sf-rational-coefficient-inclusion records the published rationalBalancedCoefficient as existing; its signature is word-for-word the live source. scalarCommShift is now a definition used as a local instance, so importers get no second global shift instance on pbcDerivedExtend; the five advisory owners were added. Re-read the statement against the node: hypotheses, conclusions and edge cases unchanged and correct; recorded signature matches the file; report sections present. Minor, not blocking: integralRationalCoefficientMap's owner def-sfb-continuous-coefficient-pullback-maps is reached only through the new node; lem-weil-scalar-extension-composition stays a theorem dependency cited only by the node text; completedDerivedScalarExtension is still defined in a theorem's module. No compile run, as no file was changed; worker reports clean compiles (8.7 s and 36.4 s)."
+ }
+}

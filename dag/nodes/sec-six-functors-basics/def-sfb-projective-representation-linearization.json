@@ -1,0 +1,127 @@
+{
+ "id": "def-sfb-projective-representation-linearization",
+ "kind": "definition",
+ "title": "The coordinate-specified dual tautological linearization and vector orbit morphism",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a $k$-group scheme [def-sc-group-scheme], and let $I$ be a finite set. Let $\\rho:G\\to\\operatorname{GL}(k^I)$ be a homomorphism of group schemes [def-sc-general-linear-group]. Let $Y$ be a $k$-scheme [def-pc-scheme], and $j:Y\\to\\mathbf P_{\\mathrm{lines}}(k^I)$ a morphism. Put $L=j^*\\mathcal O(1)$, using the dual tautological twist [def-pc-projective-space-twist] and module pullback [def-pc-module-pullback], and write $s_i=j^*T_i$ for its coordinate sections. A linearized embedding datum consists of an algebraic left $G$-action $a$ on $Y$ and a linearization $D$ of $L$ [def-sfb-group-scheme-linearization] such that for every test $k$-scheme $T$, every $g\\in G(T)$, $x\\in Y(T)$ and $i\\in I$,\n$$D(g,x)(x^*s_i)=\\sum_{l\\in I}\\rho(g^{-1})_{il}(gx)^*s_l.$$\nHere the matrix entries are the pullbacks of the coordinate functions on $\\operatorname{GL}(k^I)$. This formula specifies both equivariance of $j$ and the induced dual tautological linearization. For a $k$-vector space $V$ with basis $b=(b_i)_{i\\in I}$ and $y\\in Y(k)$, a vector $v\\in V$ lifts $j(y)$ if there is an isomorphism $e:y^*L\\simeq k$ such that $e(y^*s_i)=b_i^\\vee(v)$ for every $i$. For such a based representation define its vector orbit morphism $\\alpha_v:G\\to\\mathbf A^I_k$ [def-nagata-relative-affine-space] by the coordinate functions\n$$\\alpha_v^*T_i=\\sum_{l\\in I}\\rho_{il}\\, b_l^\\vee(v).$$\nThe affine space is the spectrum of $\\operatorname{Sym}_k V^\\vee$ in the chosen basis. All actions and line maps are tested on arbitrary schemes, including nonreduced schemes. These constructions are defined for arbitrary $j$; the term embedding applies when $j$ is a closed immersion.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-general-linear-group",
+  "def-pc-scheme",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-sfb-group-scheme-linearization",
+  "def-nagata-relative-affine-space"
+ ],
+ "source": {
+  "document": "literature/mumford-fogarty-kirwan-geometric-invariant-theory.pdf",
+  "place": "Chapter 1, Section 1 (linearization) and Chapter 2, Section 1, Proposition 2.2 (vector lift and orbit morphism). Local book WANTED; coordinate reconstruction following Morrison, https://arxiv.org/pdf/0810.2340, Sections 2.1--2.2, printed pp.4--7."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Induced dual tautological linearization on a closed projective subscheme of a rational representation by coordinate transformation",
+   "results": "{\"t\": \"2026-10-24T07:27:04Z\", \"tool\": \"leansearch\", \"query\": \"Induced dual tautological linearization on a closed projective subscheme of a rational representation by coordinate transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.dualMap\", \"IsBaseChange.dual\", \"Module.Dual.congr\", \"LinearMap.dualMap\", \"Projectivization.map_id\", \"IsBaseChange.toDual_apply\", \"Projectivization.map\", \"Module.dual_projective\"], \"digest\": \"2f9872860ce8c5aa\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact scheme-theoretic induced linearization or vector-orbit construction. The hits concern abstract dual linear maps, projectivization of vector spaces, or projective objects in representation categories. Existing group-scheme stability, twisting sheaves and affine-space coordinate morphisms are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induced linearization of O(1) for a group scheme rational representation projective embedding",
+   "results": "{\"t\": \"2026-10-24T07:27:05Z\", \"tool\": \"leanfinder\", \"query\": \"Induced linearization of O(1) for a group scheme rational representation projective embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.free_projective\", \"Rep.instProjective\", \"Rep.leftRegular_projective\", \"Rep.diagonal_succ_projective\", \"Projectivization.smul_def\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"instLinearRep\", \"Rep.coe_linearization_obj\"], \"digest\": \"c52735d4a79d12c8\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact scheme-theoretic induced linearization or vector-orbit construction. The hits concern abstract dual linear maps, projectivization of vector spaces, or projective objects in representation categories. Existing group-scheme stability, twisting sheaves and affine-space coordinate morphisms are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "tautological|linearization|orbitMap",
+   "results": "{\"t\": \"2026-10-24T07:27:06Z\", \"tool\": \"grep\", \"query\": \"tautological|linearization|orbitMap\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact scheme-theoretic induced linearization or vector-orbit construction. The hits concern abstract dual linear maps, projectivization of vector spaces, or projective objects in representation categories. Existing group-scheme stability, twisting sheaves and affine-space coordinate morphisms are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-stability-affine-orbit-proper",
+  "date": "2026-10-24",
+  "group": "Q79"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The induced dual tautological linearization, choice of vector spanning j(y), and actual vector orbit morphism in lem-sfb-projective-stability-affine-orbit-proper. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Projective stability and properness of the affine vector orbit map.",
+   "via": [
+    "lem-sfb-projective-stability-affine-orbit-proper",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveRepresentationLinearization",
+  "declaration": "AlgebraicGeometry.ProjectiveRepresentation.LinearizedEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveRepresentationLinearization.lean",
+  "statement": "structure LinearizedEmbedding (ρ : G.X ⟶ GeneralLinearGroup idx k) (j : Y ⟶ (ℙ(idx; Spec (.of k))).asOver (Spec (.of k)))",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveRepresentation.entry",
+   "AlgebraicGeometry.ProjectiveRepresentation.line",
+   "AlgebraicGeometry.ProjectiveRepresentation.coordinate",
+   "AlgebraicGeometry.ProjectiveRepresentation.LinearizedEmbedding",
+   "AlgebraicGeometry.ProjectiveRepresentation.IsVectorLift",
+   "AlgebraicGeometry.ProjectiveRepresentation.vectorOrbit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c4968b9d",
+  "group": "Q79",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c4968b9d",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read item, new def node and module, all stmt_dep records and the dependency Lean (GroupSchemeLinearization IsStable/stabilizer, LinearGroupSchemes.specialLinear, upstream GeneralLinearGroup coord and comul, ProjectiveSpace twist/twistOneSection, tensorPullbackSectionAdjunction pinned unit). Every clause matches: alg-closed k, r>=2, SL of rank finrank E, nonzero V with basis, rho with IsMonHom, IsHProjective Y, closed immersion j, k-point y with IsVectorLift, IsStable <-> IsProper vectorOrbit. Checked coordinate conventions: vectorOrbit pulls T_i back to sum_l rho_il v_l (= g v); the linearization formula with rho(g^-1)_il is the correct dual-tautological action and, because the s_i generate L, forces equivariance of j on all test schemes without adding a hypothesis. New node has all required fields and no duplicate; definitions are non-hollow; the only sorry is the theorem's. Item changed only in lean and stmt_deps (+ new node); both lean.statement fields verbatim; docstrings give source and blueprint ids and the 9 proof steps; report has both sections. Notes: IsStable, fieldTest and GL are reached only transitively through the new node's stmt_deps; hv is implied by hlift."
+ }
+}

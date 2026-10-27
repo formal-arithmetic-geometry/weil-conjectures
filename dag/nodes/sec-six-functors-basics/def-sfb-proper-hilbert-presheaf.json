@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-proper-hilbert-presheaf",
+ "kind": "definition",
+ "title": "The Hilbert presheaf of proper flat finitely presented closed families",
+ "status": "split",
+ "statement": "Let $w:W\\to S$ be a morphism of schemes [def-pc-scheme]. For each $S$-scheme $T$ let $W_T=W\\times_ST$ [def-pc-fibre-product]. Define $\\operatorname{Hilb}^{\\mathrm{proper}}_{W/S}(T)$ to be the set of closed subschemes $D\\subset W_T$ [def-weil-closed-immersion] such that $D\\to T$ is proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation]. A closed subscheme is represented by its quasi-coherent ideal sheaf; the structure map is its inclusion followed by the projection. On $T\\prime\\to T$, the presheaf map is pullback of that ideal sheaf along $W_{T\\prime}\\to W_T$. Properness supplies quasi-compactness and quasi-separatedness, so finite presentation is equivalently local finite presentation here. There is no finite-degree or finite-fibre condition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0CZY, quot-situation-hilb, the displayed functor; applied without a finiteness assumption on the ambient morphism as in Tags 0D1A and 0D1B."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hilbert functor of proper flat finitely presented closed subschemes and relative morphism functor of schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(Y : Scheme.{u}) : (IdealSheafData Y)ᵒᵖ ⥤ Over Y\", \"doc\": \"For a scheme $Y$, this functor maps each ideal sheaf data $\\\\mathcal{I}$ on $Y$ to its associated closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ equipped with the canonical morphism to $Y$, a\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact existing definition. Returned declarations give scheme/fibre-product/ideal-sheaf building blocks, not these two presheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative morphism functor on schemes over S, taking T to morphisms from Z base changed to T into X base changed to T",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.asOver\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X.Hom Y) →\\n    (S : AlgebraicGeometry.Scheme) →\\n      [inst : X.Over S] →\\n        [inst_1 : Y.Over S] → [f.IsOver S] → CategoryTheory.OverClass.asOver X S ⟶ CategoryTheory.OverClass.asOver Y S\", \"doc\": \"The function constructs a morphism in the over category $\\\\mathcal{C}/S$ by taking a morphism $f : X \\\\to Y$ in the original category that commutes with the structure maps to $S$, forming the correspond\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Over\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The type of morphisms from a scheme $S$ to a scheme $X$ in the category of schemes, where morphisms are morphisms of locally ringed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.CanonicallyOver\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The abbreviation denotes the class of schemes equipped with a canonical morphism to a given scheme $X$, forming the over category of schemes over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.asOver\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"(X S : AlgebraicGeometry.Scheme) → [X.Over S] → CategoryTheory.Over S\", \"doc\": \"Given a scheme $X$ and a scheme $S$ with a morphism $X \\\\to S$, this constructs the corresponding object $(X, f)$ in the over category $\\\\mathbf{Sch}/S$, where $f$ is the structure morphism from $X$ to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.asOverProp\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {X Y : AlgebraicGeometry.Scheme} →\\n    (f : X.Hom Y) →\\n      (S : AlgebraicGeometry.Scheme) →\\n        [inst : X.Over S] →\\n          [inst_1 : Y.Over S] →\\n            [f.IsOver S] → {hX : P (X ↘ S)} → {hY : P (Y ↘ S)} → X.asOverProp S\", \"doc\": \"Given schemes $X$ and $Y$ over a base scheme $S$ with morphisms $X \\to S$ and $Y \\to S$, and a morphism $f: X \\to Y$ that commutes with the structure maps to $S$, this constructs the corresponding morphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] → {f : T ⟶ S} → (CategoryTheory.Limits.pullback (M ↘ S) f).CanonicallyOver T\", \"doc\": \"For any scheme $M$ equipped with a morphism to a base scheme $S$, and for any morphism $f : T \\to S$ between schemes, the cospan diagram formed by $M \\to S$ and $T \\to S$ admits a pullback in the categor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.IsOver\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.Hom Y → (S : AlgebraicGeometry.Scheme) → [X.Over S] → [Y.Over S] → Prop\", \"doc\": \"Given a morphism $ f: X \\\\to Y $ between schemes and a base scheme $ S $, with $ X $ and $ Y $ equipped with morphisms to $ S $, this is the proposition that the triangle formed by $ f $, the morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.asOverProp\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (X S : AlgebraicGeometry.Scheme) → [inst : X.Over S] → P (X ↘ S) → P.Over ⊤ S\", \"doc\": \"Given a scheme $X$ over $S$ with a morphism $X \\to S$ and a proof that the object $(X, f)$ in the over category $\\\\mathbf{Sch}/S$ satisfies a property $P$, this constructs the corresponding property $P$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No exact existing definition. Returned declarations give scheme/fibre-product/ideal-sheaf building blocks, not these two presheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "properHilbert|relativeMorphisms|HilbertFunctor|HomScheme",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No exact existing definition. Returned declarations give scheme/fibre-product/ideal-sheaf building blocks, not these two presheaves."
+  },
+  {
+   "tool": "rg",
+   "query": "properHilbert|relativeMorphismsPresheaf|lem-sfb-graphs-open-in-hilbert|HomScheme",
+   "results": "No matches.",
+   "date": "2026-10-22",
+   "verdict": "No existing graph/Hom presheaf or full proper Hilbert presheaf in the project."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graphs-open-in-hilbert",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; The Hilbert presheaf of proper flat finitely presented closed families",
+   "via": [
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperHilbertPresheaf",
+  "declaration": "AlgebraicGeometry.properHilbertPresheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperHilbertPresheaf.lean",
+  "statement": "def properHilbertPresheaf {W S : Scheme.{u}} (w : W ⟶ S) : (Over S)ᵒᵖ ⥤ Type u",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.IsProperHilbertFamily",
+   "AlgebraicGeometry.properHilbertPresheaf"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fced69a4",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fced69a4",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read item, all 9 stmt_deps, the 2 new def nodes, the 3 delivered modules, and quot.tex 0CZY/0D1A/0D1B plus spaces-more-morphisms 05XD. Hypotheses are exactly IsProper/Flat/LFP on z and IsSeparated on x (proper makes LFP = fp); universe u throughout. relativeMorphismsPresheaf = (Over.pullback z ⋙ Over.map z).op ⋙ yoneda.obj (Over.mk x) with the real graph and projections. properHilbertPresheaf = IdealSheafData proper/flat/LFP over T, maps by comap along baseChangeMap (pullback.map), complete permanence proofs. γ components pinned to graph ker; injective; IsOpenImmersion.over.presheaf; universal open locus tested on all T'→T; recovery l∘k⁻¹; representing-Hilb clause with open M, γ-compatibility and evaluation. No duplicate: fixed-degree hilbertPresheaf and NE's RelativeHomSchemeData are different notions. lean.statement fields verbatim; vs live only lean and stmt_deps (+2 new used def nodes) differ; one sorry; docstrings have source, blueprint and 6 proof steps. Advisories: ProperHilbertPresheaf docstrings cite 0D1A not the node's 0CZY; baseChangeMap from PicardFunctor is outside stmt_deps; second reading is a self-reading. No compile run (no file changed)."
+ }
+}

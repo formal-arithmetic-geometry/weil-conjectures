@@ -1,0 +1,443 @@
+{
+ "id": "lem-trf-resolving-roof-ambient-compatibility",
+ "kind": "statement",
+ "title": "Resolving roofs detect augmentation compatibility with unbounded targets",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], with integer-indexed cochain complexes, homotopy categories and derived localizations $Q_A,Q_B$ in a common larger universe [def-weil-abstract-derived-category]. Let $\\mathcal P$ contain zero, be closed under isomorphisms and finite biproducts, and have every object of $\\mathcal A$ as an epimorphic image of an object of $\\mathcal P$. Let $\\mathcal R\\subset K(\\mathcal A)$ be the full subcategory of bounded above complexes whose terms are in $\\mathcal P$, and let $D^-(\\mathcal A)\\subset D(\\mathcal A)$ be the full subcategory of objects with cohomology vanishing above some integer. Let $E,G\\in\\mathcal R$, let $Y$ be any complex, and let $b:E\\to Y$, $c:G\\to Y$ be chain maps. Suppose $a:Q_AE\\xrightarrow{\\sim}Q_AG$ is a derived isomorphism with\n$$Q_A(c)a=Q_A(b)\\quad\\text{in }D(\\mathcal A).$$\nThere exist $L\\in\\mathcal R$ and quasi-isomorphisms $p:L\\to E$, $q:L\\to G$ such that\n$$a=Q_A(q)Q_A(p)^{-1},\\qquad cq\\simeq bp,$$\nwhere $\\simeq$ means chain-homotopy: there are maps $h^j:L^j\\to Y^{j-1}$ with $(cq-bp)^j=d_Y^{j-1}h^j+h^{j+1}d_L^j$ for every $j$.\nMoreover, let $F:\\mathcal A\\to\\mathcal B$ be additive and preserve quasi-isomorphisms between objects of $\\mathcal R$. Suppose $S:D^-(\\mathcal A)\\to D(\\mathcal B)$ is any functor equipped with isomorphisms $\\rho_M:S(Q_A M)\\xrightarrow{\\sim}Q_B(F(M))$ for all $M\\in\\mathcal R$, satisfying $\\rho_N S(Q_A(f))=Q_B(F(f))\\rho_M$ for every chain map $f:M\\to N$ in $\\mathcal R$. Then the derived isomorphism\n$$\\Theta=\\rho_G S(a)\\rho_E^{-1}:Q_B(F(E))\\xrightarrow{\\sim}Q_B(F(G))$$\nsatisfies\n$$\\Theta Q_B(F(p))=Q_B(F(q)),\\qquad Q_B(F(c))\\Theta=Q_B(F(b)).$$\nIn particular these identities hold for any such $S$ and $\\rho$; $Y$ need not have bounded above cohomology, and preservation by $F$ is required only for quasi-isomorphisms between bounded above $\\mathcal P$-complexes.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, common roof L, resolving roof R and the displayed cohomology square before passage to colimits; derived form of the square. Supporting Categories Tags 04VI/04VJ and Derived Categories Tag 05T7. Returned parent steps 7--8."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the right calculus of quasi-isomorphisms in $K(\\mathcal A)$ and right-fraction representation to $a$. Choose a complex $T$ and chain representatives $s:T\\to E$, $t:T\\to G$, with $s$ a quasi-isomorphism and $a=Q_A(t)Q_A(s)^{-1}$. Thus $Q_A(t)=aQ_A(s)$ is invertible. Since each cohomology functor factors through $Q_A$, every $H^j(t)$ is invertible, so $t$ is also a quasi-isomorphism. Choose an upper term bound $N$ for $E$; then $H^j(T)\\cong H^j(E)=0$ for $j>N$. No bound on $Y$ has been used.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-representation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VI (categories-lemma-morphisms-right-localization) and 04VJ; Derived Tag 05RT (derived-lemma-acyclic)."
+   }
+  },
+  {
+   "text": "Multiplying $Q_A(c)a=Q_A(b)$ on the right by $Q_A(s)$ gives $Q_A(ct)=Q_A(bs)$. Apply common refinement in the ambient category $K(\\mathcal A)$ to the fractions $(1_T,ct)$ and $(1_T,bs)$ from $T$ to $Y$. It supplies $u_1,u_2:U\\to T$ with $1_Tu_1=1_Tu_2$ a quasi-isomorphism and $(ct)u_1=(bs)u_2$ in $K(\\mathcal A)$. Set $u=u_1=u_2$ and choose a chain representative. Equality in the homotopy category gives maps $k^j:U^j\\to Y^{j-1}$ such that $(ctu-bsu)^j=d_Y^{j-1}k^j+k^{j+1}d_U^j$. The fraction theorem applies to arbitrary objects of $K(\\mathcal A)$, so it applies to this $Y$.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-right-fraction-common-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VJ, categories-lemma-equality-morphisms-right-localization, with common denominator the identity."
+   }
+  },
+  {
+   "text": "Since $u$ is a quasi-isomorphism, $H^j(U)\\cong H^j(T)=0$ for $j>N$. Use exactly the resolution clause of [lem-trf-resolving-class-derived-descent]: it gives a quasi-isomorphism $r:L\\to U$ with $L^j\\in\\mathcal P$ and $L^j=0$ for $j>N$. Thus $L\\in\\mathcal R$. Set $p=sur$ and $q=tur$. On cohomology these are composites of isomorphisms, so both are quasi-isomorphisms. Cancelling $Q_A(ur)$ gives $Q_A(q)Q_A(p)^{-1}=Q_A(t)Q_A(s)^{-1}=a$. Put $h^j=k^jr^j$. Since $d_U^jr^j=r^{j+1}d_L^j$, precomposition of the preceding homotopy equation gives $(cq-bp)^j=d_Y^{j-1}h^j+h^{j+1}d_L^j$, as required.",
+   "uses": [
+    "lem-trf-resolving-class-derived-descent",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution (2); Tag 0794, proposition-left-derived-exists, replacement of the roof source by a bounded above resolving complex."
+   }
+  },
+  {
+   "text": "Write $P=Q_B(F(p))$ and $R=Q_B(F(q))$. Both are invertible by the preservation hypothesis, since $L,E,G\\in\\mathcal R$. All arrows in $aQ_A(p)=Q_A(q)$ lie in the full subcategory $D^-(\\mathcal A)$. The assumed naturality for $p$ and $q$ reads $\\rho_ES(Q_A(p))=P\\rho_L$ and $\\rho_GS(Q_A(q))=R\\rho_L$. Therefore $\\Theta P=\\rho_GS(a)\\rho_E^{-1}P=\\rho_GS(a)S(Q_A(p))\\rho_L^{-1}=\\rho_GS(Q_A(q))\\rho_L^{-1}=R$. This proves the first compatibility for the specified, arbitrary $S$ and $\\rho$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, common-roof comparison; elementary functoriality and the naturality hypotheses."
+   }
+  },
+  {
+   "text": "Apply $F$ to the homotopy components: additivity and preservation of composition give $(F(c)F(q)-F(b)F(p))^j=d_{F(Y)}^{j-1}F(h^j)+F(h^{j+1})d_{F(L)}^j$. Thus these composites are homotopic and have equal images under $Q_B$. Consequently $Q_B(F(c))R=Q_B(F(b))P$. Substituting $R=\\Theta P$ and cancelling the invertible $P$ gives $Q_B(F(c))\\Theta=Q_B(F(b))$. Only $p,q$ were required to remain quasi-isomorphisms under $F$; neither $F(u)$ nor $F(r)$ was inverted. This proves the last assertion without exactness of $F$ or any cohomological bound on $Y$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, displayed cohomology square; elementary chain-homotopy calculation in its derived form."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-right-fraction-representation",
+  "def-weil-abstract-derived-category",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-trf-resolving-class-derived-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Expansion of the common-roof argument of Tag 0794 using Categories Tags 04VI/04VJ and Derived Tags 05RT/05T7; the specified arbitrary S is handled directly by its assumed naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightFraction|right_fraction|right_fac|mapHomologicalComplexUpToQuasiIso",
+   "results": {
+    "t": "2026-10-22T06:45:43Z",
+    "tool": "grep",
+    "query": "rightFraction|right_fraction|right_fac|mapHomologicalComplexUpToQuasiIso",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions/ComposableArrows.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions/Fractions.lean"
+    ],
+    "digest": "9e585a79def137cf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: RightFraction.map_eq_iff is a general common-refinement tool, and Fractions.lean:73--88 only bounds a roof without putting terms in P or equalizing the maps to an arbitrary target. InjectiveResolution comparison results require injective resolutions. ExactFunctor.lean requires exactness of F, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightFraction\", \"map\"",
+   "results": {
+    "t": "2026-10-22T06:45:43Z",
+    "tool": "loogle",
+    "query": "\"RightFraction\", \"map\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "CategoryTheory.MorphismProperty.RightFraction.map",
+     "CategoryTheory.MorphismProperty.RightFraction.instIsIsoMapSOfIsLocalization",
+     "CategoryTheory.MorphismProperty.RightFraction.map_ofHom",
+     "CategoryTheory.MorphismProperty.RightFraction.map_eq_iff",
+     "CategoryTheory.MorphismProperty.RightFraction.map_hom_ofInv_id",
+     "CategoryTheory.MorphismProperty.RightFraction.map_ofInv_hom_id",
+     "CategoryTheory.MorphismProperty.RightFraction.op_map",
+     "CategoryTheory.MorphismProperty.RightFraction.map_hom_ofInv_id_assoc"
+    ],
+    "digest": "2da175e1e751a6d1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: RightFraction.map_eq_iff is a general common-refinement tool, and Fractions.lean:73--88 only bounds a roof without putting terms in P or equalizing the maps to an arbitrary target. InjectiveResolution comparison results require injective resolutions. ExactFunctor.lean requires exactness of F, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived morphism between bounded above resolving class complexes with an equality into an unbounded target admits a common resolving roof making the augmentation maps chain homotopic",
+   "results": {
+    "t": "2026-10-22T06:45:55Z",
+    "tool": "leanfinder",
+    "query": "A derived morphism between bounded above resolving class complexes with an equality into an unbounded target admits a common resolving roof making the augmentation maps chain homotopic",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.descHomotopyZeroOne",
+     "CategoryTheory.InjectiveResolution.descHomotopyZeroSucc",
+     "CategoryTheory.InjectiveResolution.descHomotopyZeroZero",
+     "CategoryTheory.InjectiveResolution.descHomotopy",
+     "CategoryTheory.InjectiveResolution.descFSucc",
+     "CategoryTheory.InjectiveResolution.desc",
+     "CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc",
+     "CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc"
+    ],
+    "digest": "50921c43d7421a15"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: RightFraction.map_eq_iff is a general common-refinement tool, and Fractions.lean:73--88 only bounds a roof without putting terms in P or equalizing the maps to an arbitrary target. InjectiveResolution comparison results require injective resolutions. ExactFunctor.lean requires exactness of F, absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equality of augmented derived roofs can be refined by a quasi-isomorphism from a bounded above resolving class complex before applying an additive functor",
+   "results": {
+    "t": "2026-10-22T06:45:58Z",
+    "tool": "leansearch",
+    "query": "An equality of augmented derived roofs can be refined by a quasi-isomorphism from a bounded above resolving class complex before applying an additive functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+     "DerivedCategory.isIso_Q_map_iff_quasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+     "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh.congr_simp"
+    ],
+    "digest": "39ae121fe5917159"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: RightFraction.map_eq_iff is a general common-refinement tool, and Fractions.lean:73--88 only bounds a roof without putting terms in P or equalizing the maps to an arbitrary target. InjectiveResolution comparison results require injective resolutions. ExactFunctor.lean requires exactness of F, absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "right_fac_of_isStrictlyLE|map_eq_iff|resolvingClass",
+   "results": {
+    "t": "2026-10-23T21:17:17Z",
+    "tool": "grep",
+    "query": "right_fac_of_isStrictlyLE|map_eq_iff|resolvingClass",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+     "Mathlib/RingTheory/Polynomial/IntegralNormalization.lean",
+     "Mathlib/RingTheory/Valuation/Extension.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Operations.lean",
+     "Mathlib/RingTheory/Ideal/Maps.lean",
+     "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+     "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+     "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean"
+    ],
+    "digest": "8d83ee73d150aa24"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: broad pattern returned unrelated map_eq_iff hits; followed with restricted DerivedCategory and Localization searches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equality of derived morphisms into an unbounded complex is represented by chain homotopic maps after a quasi-isomorphism from a bounded above quotient generating class complex",
+   "results": {
+    "t": "2026-10-23T21:17:17Z",
+    "tool": "leansearch",
+    "query": "An equality of derived morphisms into an unbounded complex is represented by chain homotopic maps after a quasi-isomorphism from a bounded above quotient generating class complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.Q_map_eq_of_homotopy",
+     "HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy",
+     "ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization",
+     "HomologicalComplexUpToQuasiIso",
+     "CategoryTheory.ShortComplex.QuasiIso.isIso",
+     "HomologicalComplexUpToQuasiIso.Q",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "QuasiIsoAt.congr_simp"
+    ],
+    "digest": "2d3242ad39df0eeb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: general fraction, homotopy, or exact-derived-functor tools do not state the arbitrary quotient-generating-class roof plus ambient-target and specified-comparison compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RightFraction\", \"map\"",
+   "results": {
+    "t": "2026-10-23T21:17:17Z",
+    "tool": "loogle",
+    "query": "\"RightFraction\", \"map\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "CategoryTheory.MorphismProperty.RightFraction.map",
+     "CategoryTheory.MorphismProperty.RightFraction.instIsIsoMapSOfIsLocalization",
+     "CategoryTheory.MorphismProperty.RightFraction.map_ofHom",
+     "CategoryTheory.MorphismProperty.RightFraction.map_eq_iff",
+     "CategoryTheory.MorphismProperty.RightFraction.map_hom_ofInv_id",
+     "CategoryTheory.MorphismProperty.RightFraction.map_ofInv_hom_id",
+     "CategoryTheory.MorphismProperty.RightFraction.op_map",
+     "CategoryTheory.MorphismProperty.RightFraction.map_hom_ofInv_id_assoc"
+    ],
+    "digest": "2da175e1e751a6d1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: general fraction, homotopy, or exact-derived-functor tools do not state the arbitrary quotient-generating-class roof plus ambient-target and specified-comparison compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived isomorphism between bounded above resolving class complexes has a common resolving roof compatible up to homotopy with maps to an arbitrary unbounded complex",
+   "results": {
+    "t": "2026-10-23T21:17:24Z",
+    "tool": "leanfinder",
+    "query": "A derived isomorphism between bounded above resolving class complexes has a common resolving roof compatible up to homotopy with maps to an arbitrary unbounded complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.left_fac",
+     "DerivedCategory.right_fac",
+     "CategoryTheory.Abelian.LeftResolution.chainComplexXIso",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso",
+     "CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj"
+    ],
+    "digest": "72ed707c08865527"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: general fraction, homotopy, or exact-derived-functor tools do not state the arbitrary quotient-generating-class roof plus ambient-target and specified-comparison compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma map_eq_iff|theorem map_eq_iff|def RightFraction",
+   "results": {
+    "t": "2026-10-23T21:17:51Z",
+    "tool": "grep",
+    "query": "lemma map_eq_iff|theorem map_eq_iff|def RightFraction",
+    "sub": "CategoryTheory/Localization",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean",
+     "Mathlib/CategoryTheory/Localization/CalculusOfFractions/Fractions.lean"
+    ],
+    "digest": "3c19a6ca733d3450"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: general fraction, homotopy, or exact-derived-functor tools do not state the arbitrary quotient-generating-class roof plus ambient-target and specified-comparison compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "right_fac_of_isStrictlyLE|map_eq_iff|exists_rightFraction",
+   "results": {
+    "t": "2026-10-23T21:17:51Z",
+    "tool": "grep",
+    "query": "right_fac_of_isStrictlyLE|map_eq_iff|exists_rightFraction",
+    "sub": "Algebra/Homology/DerivedCategory",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean"
+    ],
+    "digest": "384d53a02151d9bb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: general fraction, homotopy, or exact-derived-functor tools do not state the arbitrary quotient-generating-class roof plus ambient-target and specified-comparison compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replace a common refinement of derived fractions by a bounded above complex in an arbitrary epimorphism generating class, then apply an additive functor and a natural comparison",
+   "results": {
+    "t": "2026-10-23T21:17:55Z",
+    "tool": "leanfinder",
+    "query": "Replace a common refinement of derived fractions by a bounded above complex in an arbitrary epimorphism generating class, then apply an additive functor and a natural comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app"
+    ],
+    "digest": "d95a45e8d2b479fb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: general fraction, homotopy, or exact-derived-functor tools do not state the arbitrary quotient-generating-class roof plus ambient-target and specified-comparison compatibilities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-stage-roof-comparison",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. Proof of Tag 0794: comparison of bounded-above stages by common roofs, including compatibility as the stage varies. Supporting re-split: Tag 0794, proposition-left-derived-exists, common roof L, resolving roof R and the displayed cohomology square before passage to colimits; derived form of the square. Supporting Categories Tags 04VI/04VJ and Derived Categories Tag 05T7. Returned parent steps 7--8.",
+   "via": [
+    "lem-trf-bounded-stage-roof-comparison",
+    "lem-trf-unbounded-left-derived-criterion",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-resolving-roof-ambient-compatibility",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Built an ambient right-fraction roof, equalized its augmentations using the identity-denominator case of common refinement, then replaced the source by the existing bounded-cohomology resolving-class resolution. Wrote the precomposed chain homotopy, the naturality calculation for an arbitrary given S and rho, and the additive-functor homotopy calculation and cancellation. Existing nodes suffice; no new nodes. All five cited node statements were read, and the item was searched with all four logged Mathlib services, including a second semantic phrasing.",
+  "blueprint": "lem-trf-local-term-locality, latest proof (1)--(2), specialization route; inherited nearby-cycle and cotangent-transitivity support chain recorded in blueprint.from.via. At the immediate parent lem-trf-bounded-stage-roof-comparison this is the roof and ambient augmentation compatibility used in steps 7--8 of its earlier proof and its current final step. Steps 1--3 expand the common-roof refinement of Tag 0794; steps 4--5 prove the derived version of its displayed square."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-978811782",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-978811782 (reviewer sub-agent of L); spot-checked: Zero-new-node split: the statement and stmt_deps are unchanged, and proof_deps equals the union of the 5 steps' uses. Stacks sources checked: derived.tex 9333 proposition-left-derived-exists (0794), the D^- paragraph and the L/R roof diagram; 3670 lemma-acyclic (05RT); 5302 lemma-subcategory-left-resolution (05T7); categories 4619/4642 (04VI/04VJ). Step 1: the right fraction a=Q(t)Q(s)^{-1} comes from the lem-pc right-fraction leaf and the multiplicative-system leaf. t is a quasi-isomorphism because H^j factors through Q. H^j(T) vanishes above the term bound N of E. Step 2: Q(ct)=Q(bs). Common refinement of (1_T,ct) and (1_T,bs) gives u_1=u_2 quasi-iso and ctu=bsu in K(A), which is a chain homotopy k. Y is arbitrary, which the leaf allows. Step 3: the cohomological-bound resolution clause of the same-unit lem-trf-resolving-class-derived-descent (unsplit, no proof_deps, so no cycle) gives r:L→U with L in R. p=sur and q=tur, Q(q)Q(p)^{-1}=a. h=kr is checked using d_U r=r d_L. Step 4: naturality for p,q gives ΘQ_B F(p)=Q_B F(q) for an arbitrary S on D^-. Step 5: F additive gives a termwise homotopy F(c)F(q)≃F(b)F(p). Cancelling the invertible Q_B F(p) gives Q_B F(c)Θ=Q_B F(b). Edge cases checked: Y=0, Y unbounded, E or G zero, F=0, P all objects or non-projective, negative N. Duplicate search over the DAG ('common roof', 'resolving roof', the item's formulas, right-fraction citers) finds no restatement. lem-sfb-subcategory-left-resolution needs term-bounded input, so the descent node's cohomological clause is the right citation. The parent lem-trf-bounded-stage-roof-comparison step 4 instantiation matches. No SGA source, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ResolvingRoofAmbientCompatibility",
+  "declaration": "DerivedCategory.exists_resolving_roof_ambient_compatibility",
+  "declarations": [
+   "DerivedCategory.resolvingRoofQMinus",
+   "DerivedCategory.exists_resolving_roof_ambient_compatibility"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ResolvingRoofAmbientCompatibility.lean",
+  "statement": "theorem exists_resolving_roof_ambient_compatibility {A : Type u₁} [Category.{v₁} A] [Abelian A] [HasDerivedCategory.{w} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [HasDerivedCategory.{w} B] (P : ObjectProperty A) [P.ContainsZero] [P.IsClosedUnderIsomorphisms] (h_sum : ∀ (U V : A), P U → P V → P (U ⊞ V)) (h_epi : ∀ X : A, ∃ (T : A) (_ : P T) (e : T ⟶ X), Epi e) (E G : CochainComplex.Minus A) (hE : ∀ j : ℤ, P (E.obj.X j)) (hG : ∀ j : ℤ, P (G.obj.X j)) (Y : CochainComplex A ℤ) (b : E.obj ⟶ Y) (c : G.obj ⟶ Y) (a : Q.obj E.obj ≅ Q.obj G.obj) (ha : a.hom ≫ Q.map c = Q.map b) : ∃ (L : CochainComplex.Minus A) (p : L.obj ⟶ E.obj) (q : L.obj ⟶ G.obj), (∀ j : ℤ, P (L.obj.X j)) ∧ QuasiIso p ∧ QuasiIso q ∧ Q.map p ≫ a.hom = Q.map q ∧ Nonempty (Homotopy (q ≫ c) (p ≫ b)) ∧ ∀ (F : A ⥤ B) [F.Additive], (∀ (M N : CochainComplex.Minus A), (∀ j : ℤ, P (M.obj.X j)) → (∀ j : ℤ, P (N.obj.X j)) → ∀ f : M.obj ⟶ N.obj, QuasiIso f → QuasiIso ((F.mapHomologicalComplex (.up ℤ)).map f)) → ∀ (S : DerivedCategory.Minus A ⥤ DerivedCategory B) (ρ : ∀ (M : CochainComplex.Minus A) (_ : ∀ j : ℤ, P (M.obj.X j)), S.obj ((resolvingRoofQMinus A).obj M) ≅ Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj M.obj)), (∀ (M N : CochainComplex.Minus A) (hM : ∀ j : ℤ, P (M.obj.X j)) (hN : ∀ j : ℤ, P (N.obj.X j)) (f : M.obj ⟶ N.obj), S.map ((resolvingRoofQMinus A).map (ObjectProperty.homMk f)) ≫ (ρ N hN).hom = (ρ M hM).hom ≫ Q.map ((F.mapHomologicalComplex (.up ℤ)).map f)) → (Q.map ((F.mapHomologicalComplex (.up ℤ)).map p) ≫ (ρ E hE).inv ≫ S.map (ObjectProperty.homMk (X := (resolvingRoofQMinus A).obj E) (Y := (resolvingRoofQMinus A).obj G) a.hom) ≫ (ρ G hG).hom = Q.map ((F.mapHomologicalComplex (.up ℤ)).map q)) ∧ ((ρ E hE).inv ≫ S.map (ObjectProperty.homMk (X := (resolvingRoofQMinus A).obj E) (Y := (resolvingRoofQMinus A).obj G) a.hom) ≫ (ρ G hG).hom ≫ Q.map ((F.mapHomologicalComplex (.up ℤ)).map c) = Q.map ((F.mapHomologicalComplex (.up ℤ)).map b))",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44f7c63aa",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Node diff vs side-live: lean field only; lean.statement verbatim; declarations listed. Every clause checked against the node and Stacks 0794/05T7 (derived.tex:9333/5302). P: zero, iso-closed, binary biproducts, epi cover. R = CochainComplex.Minus + P terms. Y unbounded. ha = Q(c)a=Q(b). Roof in cancellation form (p quasi-iso). Homotopy (q≫c)(p≫b) matches (cq-bp). F preservation only on R. S on DerivedCategory.Minus (same Mathlib decl as def-weil-pbc-bounded-derived-subcategories) with arbitrary ρ and naturality. Θ identities in Lean order. ∃ roof before ∀F,S,ρ. Mathematics verified true as typed. Helper resolvingRoofQMinus has real data (Q.obj/Q.map; bound only in proof); no existing restricted Q found in Mathlib/project. Docstrings carry source+blueprint and the proof plan; sorry only; independent universes, common w for derived homs; report has Worker report and Second reading. No changes, no compile."
+ }
+}

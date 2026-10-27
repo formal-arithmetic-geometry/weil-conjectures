@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-reduced-flat-pullback-recognition",
+ "kind": "statement",
+ "title": "Recognition of a reduced flat pullback by its ideal and closed support",
+ "statement": "Let $i:T\\hookrightarrow X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], with ideal sheaf $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_T)$ [def-sbc-closed-immersion-ideal-sheaf] and closed image $Z=i(T)$. Let $g:Y\\to X$ be flat [def-weil-flat-morphism], and write $P=T\\times_XY$ and $q:P\\to Y$ for the pullback and its projection [def-pc-fibre-product]. Assume that $P$ is reduced [def-pc-reduced-scheme]. Then $q$ is a closed immersion with image $g^{-1}(Z)$, and the canonical map $g^*\\mathcal I\\to\\mathcal O_Y$ [def-pc-module-pullback, def-sfb-tensor-pullback-structure-sheaf-map] is injective with image equal to the vanishing ideal $\\mathcal I_{g^{-1}(Z)}$ [lem-weil-pbc-reduced-induced-closed-subscheme]. There is a unique isomorphism $e:P\\xrightarrow{\\sim}(g^{-1}(Z))_{\\mathrm{red}}$ over $Y$, so that $i_{g^{-1}(Z)}\\circ e=q$, where $i_{g^{-1}(Z)}$ is the reduced induced closed immersion. No reducedness of $T$ or Noetherian hypothesis on $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JY (lemma-base-change-immersion), 01JT (lemma-points-fibre-product), and 01J3 (lemma-reduced-closed-subscheme), combined with the flat ideal formula of lem-pc-closed-imm-base-change; extracted from item proof step 1."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-pc-closed-subscheme-base-change-ideal-image to i and g. It gives the closed pullback immersion and its kernel ideal as the image of the pulled-back ideal inclusion followed by the adjoint structure map. Compare its adjunction with the one defining tensorPullbackObjUnitToUnit using leftAdjointUniq. Naturality makes the composites differ by precomposition with an isomorphism, so their image subobjects agree. The structure map is an isomorphism by lem-weil-pbc-module-pullback-structure-sheaf.",
+   "uses": [
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By lem-weil-pbc-flat-module-pullback-exact-pushforward-injective, tensor pullback along g preserves finite limits and hence monomorphisms. Thus the pulled-back ideal inclusion followed by the structure isomorphism is monic. Its image equality from step 1 gives an isomorphism to the kernel ideal module over Y, compatible with inclusion. Evaluating this isomorphism on any open and composing with the injective kernel ideal inclusion proves injectivity there.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Scheme.Pullback.range_snd, the whole-source specialization of lem-weil-pbc-base-change-image, to obtain range(q) = preimage(g, range(i)). The support_ker formula and closedness of the range of i identify this with the closed subset W = preimage(g, support(ker(i))). Apply the uniqueness clause of lem-weil-pbc-reduced-induced-closed-subscheme to q, whose source is reduced by hypothesis. It gives ker(q) = vanishingIdeal(W) and the unique isomorphism over Y. Substitute that ideal equality into the image subobject identity of step 1.",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/modules.tex",
+  "place": "Tags 01JU (lemma-fibre-product-immersion), 01JT and 01J3 (lemma-reduced-closed-subscheme); Modules 02N4. K8 assembles the existing ideal-image, flat-exactness, structure-map and reduced-induced declarations, normalizing the adjunction by leftAdjointUniq."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vanishingIdeal.*(comap|pullback)|(?:comap|pullback).*vanishingIdeal|range.*pullback.*(fst|snd)",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean. Subdirectory: AlgebraicGeometry. These give support/comap or pushforward vanishing ideals, not the module-pullback identification and reduced closed-subscheme recognition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat base change of a closed subscheme, if reduced, is canonically the reduced induced closed subscheme on the inverse image of its support.",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.Flat.casesOn. These give support/comap or pushforward vanishing ideals, not the module-pullback identification and reduced closed-subscheme recognition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"vanishingIdeal\", \"comap\"",
+   "results": "1 hits; PrimeSpectrum.vanishingIdeal_range_comap. These give support/comap or pushforward vanishing ideals, not the module-pullback identification and reduced closed-subscheme recognition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism of schemes and a closed immersion whose base change is reduced, identify the pulled back ideal with the vanishing ideal of the inverse image of the closed support.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.preimage_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.comap, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_ideal, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal. These give support/comap or pushforward vanishing ideals, not the module-pullback identification and reduced closed-subscheme recognition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced closed immersion obtained by flat base change has ideal equal to the vanishing ideal of the inverse image of the original closed support.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_ideal, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Scheme.IdealSheafData.le_support_iff_le_vanishingIdeal, MvPolynomial.pointToPoint_zeroLocus_le. These give support/comap or pushforward vanishing ideals, not the module-pullback identification and reduced closed-subscheme recognition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "range_pullback|range.*pullback|pullback.*range",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean. Read PullbackCarrier.lean:328,337 (range_fst/snd): support only, not the flat module-pullback injection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"vanishingIdeal\", \"comap\"",
+   "results": "1 hits; PrimeSpectrum.vanishingIdeal_range_comap. PrimeSpectrum.vanishingIdeal_range_comap concerns affine spectra and radical kernels, not the module-pullback injection.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced flat base change of a closed immersion is the reduced induced closed subscheme on the inverse image of its image, with ideal given by module pullback.",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, Module.Flat.isBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.IdealSheafData.comapIso, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.IsClosedImmersion.lift. Read IdealSheaf/Functorial.lean:40-54 and 86-90: comapIso and ker_fst_of_isClosedImmersion describe ideal comap, not injectivity of tensor module pullback.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism of schemes and a closed immersion whose base change is reduced, the pulled back ideal injects into the structure sheaf and equals the vanishing ideal of the inverse image of the closed support.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.Scheme.IdealSheafData.comap. Read IdealSheaf/Functorial.lean:40-90: support/comap and kernel formulas; equal-kernel isomorphism lemmas cover recognition only. No hit gives the complete item including the flat module map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor pullback of the kernel ideal sheaf of a closed immersion is its base change kernel when the morphism is flat, and a reduced closed subscheme is determined uniquely by its underlying closed set.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.IsClosedImmersion.isIso_lift, AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq, AlgebraicGeometry.Scheme.ker_of_isAffine, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop. Read IdealSheaf/Functorial.lean:40-90: support/comap and kernel formulas; equal-kernel isomorphism lemmas cover recognition only. No hit gives the complete item including the flat module map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-reduced-cartier-descent",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of lem-trf-free-characteristic-regular-boundary, step 10: descent of the reduced local parameter equations; item proof step 1, identification by the closed pullback ideal, its image and reduced-induced uniqueness.",
+   "via": [
+    "lem-trf-etale-reduced-cartier-descent",
+    "lem-trf-free-characteristic-regular-boundary"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-reduced-flat-pullback-recognition",
+  "worker": "stage1",
+  "summary": "Kept the complete statement unchanged. Proved the three clauses using existing nodes for the flat base-change ideal formula, set-theoretic base-change image, and uniqueness of the reduced induced closed subscheme. Read each cited statement and the Stacks sources; checked empty and nonreduced-source cases. No new nodes.",
+  "blueprint": "Realizes the closed pullback ideal/image/uniqueness identification used in step 1 of lem-trf-etale-reduced-cartier-descent, within step 10 of lem-trf-free-characteristic-regular-boundary, descending from lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic flat base-change ideal formula; the curve-zero unit has no ideal computation of its own."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic recognition by reducedness and closed image; supplies the uniqueness fact used in the specified etale Cartier descent route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-2ac73d42f",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-2ac73d42f (reviewer sub-agent of L); spot-checked: I read the delivery in full; it is sound and needs no changes. Scope: no new nodes. The item's statement, stmt_deps, source and blueprint are byte-identical to live, where the item is still unsplit with no repair note and no other group's split. The proof is a three-step assembly. Step 1: lem-pc-closed-imm-base-change (its general clause plus its flat clause, Stacks 01JU(1) with 02N4) shows q is a closed immersion and that g^*I->O_Y is injective with image equal to the ideal ker(O_Y->q_*O_P) of def-sbc-closed-immersion-ideal-sheaf. Step 2: lem-weil-pbc-base-change-image (a Mathlib leaf, 01JT) with C=T gives q(P)=g^{-1}(Z), which is closed because g is continuous. Step 3: clause (3) of lem-weil-pbc-reduced-induced-closed-subscheme (01J3), applied to q, which is a closed immersion with reduced source P and image W, gives that the ideal of q equals I_W and that there is a unique e with i_W∘e=q. Every hypothesis is checked and the steps use only the statements of the cited nodes. The parent lem-trf-etale-reduced-cartier-descent step 1 uses exactly these conclusions. Edge cases checked: T empty; X=Spec k[ε]/ε² with g=id, where Y is not reduced; the non-flat closed immersion V(t)->A^1, which shows flatness is needed; g=id with T=V(t²), which shows reducedness of P is needed; no Noetherian hypothesis is used anywhere. Duplicate search with rg -L over the DAG for 'reduced induced' with 'flat' and for statements that a pullback is the reduced induced subscheme found no duplicate. I accept the declared tool_uses: lem-pc-closed-imm-base-change (sk-thm-picard-rr) and lem-weil-pbc-reduced-induced-closed-subscheme (sk-thm-p1) are generic scheme tools. No coefficient category or six-functor base-change morphism is involved, and no SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedFlatPullbackRecognition",
+  "declaration": "AlgebraicGeometry.reduced_flat_pullback_recognition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedFlatPullbackRecognition.lean",
+  "statement": "theorem reduced_flat_pullback_recognition {T X Y : Scheme.{u}} (i : T ⟶ X) [IsClosedImmersion i] (g : Y ⟶ X) [Flat g] [IsReduced (pullback i g)] : IsClosedImmersion (pullback.snd i g) ∧ Set.range (pullback.snd i g) = g ⁻¹' Set.range i ∧ (∀ U : Y.Opens, Function.Injective (((Scheme.Modules.tensorPullback g).map i.ker.toModulesι ≫ Scheme.Modules.tensorPullbackObjUnitToUnit g).app U)) ∧ imageSubobject ((Scheme.Modules.tensorPullback g).map i.ker.toModulesι ≫ Scheme.Modules.tensorPullbackObjUnitToUnit g) = Subobject.mk (Scheme.IdealSheafData.vanishingIdeal (i.ker.support.preimage g.continuous)).toModulesι ∧ ∃! e : pullback i g ≅ (Scheme.IdealSheafData.vanishingIdeal (i.ker.support.preimage g.continuous)).subscheme, e.hom ≫ (Scheme.IdealSheafData.vanishingIdeal (i.ker.support.preimage g.continuous)).subschemeι = pullback.snd i g",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-119e0eedf",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery of RETURN H2 ea215bf: the only node changes are the added stmt_dep def-sfb-tensor-pullback-structure-sheaf-map, its citation at the canonical map via a §1(C) statement_change (old_statement, old_stmt_deps, source 01JU/0096), and the lean record; proof and proof_deps unchanged. Citer audit complete (rg over side-live: etale-reduced-cartier-descent and resolution-word-finite-history-comparison, both holds:true). Lean is unchanged from the reviewed head and matches every clause: IsClosedImmersion snd, range = g⁻¹ range i, sectionwise injectivity on all opens, imageSubobject = vanishingIdeal(support.preimage) subobject (support_ker gives closure(range) = range), ∃! iso over Y with e.hom ≫ subschemeι = snd. Only P is assumed reduced; no Noetherian or other extra hypothesis. Edge cases fine; one sorry; docstrings carry sources and blueprint id; report has both sections. Advisory: the stage-1 base theorem stmt_dep lem-weil-pbc-reduced-induced-closed-subscheme is not added by this delivery and not flagged by the tool, so it is not returned. Nothing compiled because no file changed.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q12 stage 2",
+  "old_statement": "Let $i:T\\hookrightarrow X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], with ideal sheaf $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_T)$ [def-sbc-closed-immersion-ideal-sheaf] and closed image $Z=i(T)$. Let $g:Y\\to X$ be flat [def-weil-flat-morphism], and write $P=T\\times_XY$ and $q:P\\to Y$ for the pullback and its projection [def-pc-fibre-product]. Assume that $P$ is reduced [def-pc-reduced-scheme]. Then $q$ is a closed immersion with image $g^{-1}(Z)$, and the canonical map $g^*\\mathcal I\\to\\mathcal O_Y$ [def-pc-module-pullback] is injective with image equal to the vanishing ideal $\\mathcal I_{g^{-1}(Z)}$ [lem-weil-pbc-reduced-induced-closed-subscheme]. There is a unique isomorphism $e:P\\xrightarrow{\\sim}(g^{-1}(Z))_{\\mathrm{red}}$ over $Y$, so that $i_{g^{-1}(Z)}\\circ e=q$, where $i_{g^{-1}(Z)}$ is the reduced induced closed immersion. No reducedness of $T$ or Noetherian hypothesis on $X$ is assumed.",
+  "what": "H2 repair of returned immutable head ea215bf4c973: the canonical ideal map uses Scheme.Modules.tensorPullbackObjUnitToUnit, whose owning definition node def-sfb-tensor-pullback-structure-sheaf-map was omitted from stmt_deps and the statement citation. def-pc-module-pullback does not record this map. Add the owning node and cite it at the canonical map; all mathematical hypotheses, conclusions, and the Lean signature remain unchanged.",
+  "source": {
+   "document": "literature/stacks-project/schemes.tex; literature/stacks-project/sheaves.tex",
+   "place": "Schemes Tag 01JU (lemma-fibre-product-immersion), part (1), the canonical map g*I to O_Y; Sheaves Tag 0096 (lemma-adjoint-pullback-pushforward-modules), applied to g-sharp, as recorded by def-sfb-tensor-pullback-structure-sheaf-map."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-etale-reduced-cartier-descent",
+    "holds": true,
+    "note": "Step 1 still applies recognition to the flat etale pullback with reduced source; the canonical-map citation adds no hypothesis and changes no conclusion."
+   },
+   {
+    "id": "lem-trf-resolution-word-finite-history-comparison",
+    "holds": true,
+    "note": "Step 6 still identifies the extended stratum ideal under smooth flat pullback; the additional citation only records the existing canonical structure-sheaf map."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-weil-closed-immersion",
+   "def-sbc-closed-immersion-ideal-sheaf",
+   "def-weil-flat-morphism",
+   "def-pc-fibre-product",
+   "def-pc-reduced-scheme",
+   "def-pc-module-pullback",
+   "lem-weil-pbc-reduced-induced-closed-subscheme"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T082416-L-2171795",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

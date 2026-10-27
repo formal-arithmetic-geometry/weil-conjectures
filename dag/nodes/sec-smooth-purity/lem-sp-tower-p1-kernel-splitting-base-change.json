@@ -1,0 +1,143 @@
+{
+ "id": "lem-sp-tower-p1-kernel-splitting-base-change",
+ "kind": "statement",
+ "title": "Normalized tower projective-line splittings and their forward base-change square",
+ "statement": "Fix a prime l, a finite extension E of Q_l, an arbitrary scheme S on which l is invertible, and a Presentation p of the actual coefficient-tower operations and tower Kummer classes [def-sp-tower-p1-adjunction-data, det-sp-tower-classes]. There exists KernelSplittingData k [def-sp-tower-p1-kernel-scalar-data], with the specified coefficient and roots pullback maps, unit/Chern splitting at q and both projections, and traceQ = p.trace. For both a : Bool the forward square pull(q)(k.splittingQ.hom) followed by k.exchange(a) equals k.sumComparison followed by k.splittingProjection(a). The canonical sourceUnitAt map for p_a Delta = id on the coefficient unit is an isomorphism. This asserts neither finite normalization nor the diagonal scalar identities.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities, trace base change"
+ },
+ "stmt_deps": [
+  "def-sp-tower-p1-kernel-scalar-data",
+  "def-sp-p1-projective-coordinates",
+  "def-sp-tower-p1-adjunction-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $D_T=A_T(1)[2]\\oplus A_T$ and let $s_r:D_T\\xrightarrow{\\sim}Rr_{*,\\bullet}A_{\\mathbf P^1_T}(1)[2]$ be the twisted form of the unit/Chern splitting of [det-sp-tower-classes](4); its second projection after inversion is $t_r$. Fix $i$ and put $j=3-i$. Regard $p_i$ as the base change of $q$ by $q$, with other edge $p_j$. The proper exchange and twist identifications give an isomorphism $E_i:q_\\bullet^*Rq_{*,\\bullet}A_P(1)[2]\\to Rp_{i*,\\bullet}A_W(1)[2]$ by [lem-sp-tower-p1-etale-origin-comparisons], applied to $M=A_P$ with witnesses $(B_n)_P[0]$. The hyperplane pulls back by $p_j$ to the relative hyperplane for $p_i$: on the two projective charts, pullback sends the basis $e_a$ to $1\\otimes e_a$ and its transition $(x_a/x_b)$ to the same ratio. This uses precisely the gluing definition [def-pc-projective-space-twist], on affine base opens and then its compatible global gluing. Apply [lem-sp-tower-chern-pullback] to that line bundle and $p_j$: it identifies the actual pulled-back tower Chern morphism with the relative hyperplane Chern morphism.",
+   "uses": [
+    "det-sp-tower-classes",
+    "lem-sp-tower-p1-etale-origin-comparisons",
+    "def-pc-projective-space-twist",
+    "lem-sp-tower-chern-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Base change of the projective-line trace: hyperplane component"
+   }
+  },
+  {
+   "text": "Here is the adjunction calculation comparing the two components, before any level evaluation. Denote the square's pullback/direct-image adjunctions by $L\\dashv R$ and $L'\\dashv R'$, its horizontal pullbacks by $v,w$, and identify $L'v=wL$ by the canonical compositor. By [lem-coef-semilinear-derived-sections], its specified exchange is the mate $E_Y=R'(w\\varepsilon_Y)\\eta'_{vRY}$. For $a:X\\to RY$, naturality of $\\eta'$ gives\n$$E_Yv(a)=R'(w\\varepsilon_Y)R'(L'v(a))\\eta'_{vX}=R'(w(\\varepsilon_YL(a)))\\eta'_{vX}.$$\nThus the adjunct of $a$ is pulled back to the adjunct of $E_Yv(a)$. For the unit component the adjunct is the identity; for the Chern component it is the hyperplane Chern map, identified in step 1. Twists and shifts use the specified tensor comparisons from the same system calculus. The two component equations give $E_iq_\\bullet^*s_q=s_{p_i}d_i$, where $d_i:q_\\bullet^*D_S\\xrightarrow{\\sim}D_P$ is the sum of the canonical twist and coefficient identifications.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Base change of trace: unit and Chern adjuncts"
+   }
+  },
+  {
+   "text": "The sourceUnitAt word is the direct-image composition isomorphism for p_a Delta = id; its inverse comes from the identity and composition comparisons of the normalized derived adjunctions.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sp-tower-p1-etale-origin-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-classes",
+  "lem-sp-tower-p1-etale-origin-comparisons",
+  "def-pc-projective-space-twist",
+  "lem-sp-tower-chern-pullback",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Reduction of the triangle identities, trace base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The trace of the diagonal class of the projective line is the identity in the derived category of coefficient towers",
+   "results": "RootPairing.GeckConstruction.trace_h_eq_zero, Algebra.trace_self, Algebra.normalizedTrace_self, RootPairing.GeckConstruction.trace_toEnd_eq_zero, Algebra.traceMatrix_localizationLocalization, Algebra.normalizedTrace_algebraMap_eq_id, LinearMap.IsProj.trace, Algebra.trace_self_apply",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"singleFunctor\"",
+   "results": "DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.singleFunctorIsoCompQ_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*trace|trace.*diagonal|WordComparison|singleFunctor",
+   "results": "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/LinearAlgebra/Matrix/Hadamard.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit and first Chern class splitting of projective line cohomology commutes with base change for sheaf towers",
+   "results": "IsBaseChange.pi, KaehlerDifferential.cotangentComplexBaseChange, KaehlerDifferential.mapBaseChange, KaehlerDifferential.cotangentComplexBaseChange_tmul, IsBaseChange.of_comp, KaehlerDifferential.tensorKaehlerEquivBase, LinearMap.baseChange_baseChange, IsBaseChange.tensorEquiv",
+   "date": "2026-10-25",
+   "verdict": "No exact match: algebraic trace and tensor-base-change results do not identify the normalized projective-line tower maps; singleFunctor full faithfulness is used only for the final algebraic assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1KernelScalarNormalization",
+  "date": "2026-10-25",
+  "group": "V4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities, trace base change",
+   "via": [
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1KernelSplittingBaseChange",
+  "file": "lean/Sheaf/Paper/TowerP1KernelSplittingBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.towerP1KernelSplittingBaseChange",
+  "statement": "theorem towerP1KernelSplittingBaseChange (S : Scheme.{u})\n    (hS : IsUnit (l : Γ(S, ⊤))) (p : Presentation l E S hS) :\n    ∃ k : KernelSplittingData l E p,\n      (∀ a : Bool, (SpTowerShriek.pull l E p.classes.base\n        (p.operations.geometry (ProjectiveLine S ↘ S))).map k.splittingQ.hom ≫\n          k.exchange l E a = k.sumComparison l E ≫ (k.splittingProjection a).hom) ∧\n      (∀ a : Bool, IsIso (p.sourceUnitAt l E a\n        (unit (ProjectiveLine S) (Arings l E (ProjectiveLine S)))))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93df5",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164600-L-1037403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-93df5",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164600-L-1037403",
+  "kind": "interface",
+  "note": "independent cc review: relocated data module vs clone item module (verbatim); item proof vs two new sorried lemmas and their nodes; item node fields vs Lean proof"
+ }
+}

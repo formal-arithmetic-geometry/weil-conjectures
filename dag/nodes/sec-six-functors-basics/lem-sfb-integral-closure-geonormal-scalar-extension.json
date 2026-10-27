@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-integral-closure-geonormal-scalar-extension",
+ "kind": "statement",
+ "title": "Integral closure with geometrically normal scalar extensions",
+ "statement": "Let $k$ be a field and $A$ a finitely generated commutative $k$-algebra which is geometrically integral: $A\\otimes_k L$ is an integral domain (a nonzero ring without zero divisors) for every field extension $L/k$. Let $F=\\operatorname{Frac}(A)$ and let $B\\subset F$ be the integral closure of $A$ in $F$, consisting of the elements satisfying monic polynomials over $A$. Suppose $B$ is finite as an $A$-module and geometrically normal over $k$: every local ring of $\\operatorname{Spec}(B\\otimes_k L)$ is an integrally closed domain for every field extension $L/k$. For every such $L$, the natural map $B\\otimes_k L\\to\\operatorname{Frac}(A\\otimes_k L)$ is injective and identifies its source with the integral closure of $A\\otimes_k L$ in its fraction field. In particular $B\\otimes_k L$ is an integrally closed domain, finite over $A\\otimes_k L$. These identifications commute with homomorphisms of extension fields over $k$ and with principal localization $A\\to A[1/f]$ for $0\\ne f\\in A$.\n\nThe field and algebra notions use [def-weil-field], [def-pc-field-extension], [def-weil-pbc-finite-type-algebra], [def-weil-pbc-module-tensor-product], [def-weil-pbc-integral-closure], [def-weil-pbc-module-localization], [def-weil-finitely-generated-module] and [def-weil-pbc-normal-ring], [def-pc-scheme] and [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3N, lemma-normalization-and-change-of-fields, affine comparison A-prime tensor K to B-prime: the argument when A-prime tensor K is normal applies to any extension with that property. Agent algebraic refinement, including localization compatibility."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-normal-ring",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Fix $L/k$ and write $C=A\\otimes_kL$, $D=B\\otimes_kL$, $E=\\operatorname{Frac}(C)$ and $S=A\\setminus\\{0\\}$. The algebra tensor product has multiplication $(a\\otimes\\lambda)(a\\prime\\otimes\\mu)=aa\\prime\\otimes\\lambda\\mu$. Since $L$ is flat over $k$, tensoring the inclusions $A\\subset B\\subset F$ gives inclusions $C\\subset D\\subset F\\otimes_kL$. Localization over the first factor identifies $F\\otimes_kL=S^{-1}C$: $(a/s)\\otimes\\lambda\\mapsto(a\\otimes\\lambda)/(s\\otimes1)$. The map $A\\to C$ is injective: choose a $k$-linear functional $L\\to k$ taking $1$ to $1$ and tensor it with $A$ to obtain a retraction. Thus each $s\\otimes1$ is nonzero. As $C$ is a domain by hypothesis, $S^{-1}C\\to E$, $c/s\\mapsto c/s$, is injective by the fraction equivalence relation. Composing gives the required canonical injection $j_L:D\\hookrightarrow E$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), affine comparison; algebra Tags 00DK/00D2 for tensor localization"
+   }
+  },
+  {
+   "text": "Choose $A$-module generators $b_1,\\ldots,b_r$ of $B$. If $b=\\sum_i a_i b_i$, then $b\\otimes\\lambda=\\sum_i(a_i\\otimes\\lambda)(b_i\\otimes1)$. Since pure tensors generate $D$, the $b_i\\otimes1$ generate it as a $C$-module. Hence $D$ is finite over $C$, and the finite-algebra integrality lemma says that every element of $D$ satisfies a monic polynomial over $C$. Applying $j_L$ to this equation shows that $j_L(D)$ is contained in the integral closure of $C$ in $E$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK (lemma-finite-is-integral); elementary finite generating-set calculation"
+   }
+  },
+  {
+   "text": "The inclusions $C\\subset D\\subset E$ show that $D$ is a domain and its fraction field is $E$: every $c/c\\prime\\in E$, with $c,c\\prime\\in C$ and $c\\prime\\ne0$, is already a fraction of elements of $D$, while any fraction of elements of $D$ lies in $E$. For every prime $\\mathfrak q\\subset D$, the affine-stalk theorem identifies $D_{\\mathfrak q}$ with $\\mathcal O_{\\operatorname{Spec}D,\\mathfrak q}$. These local rings are integrally closed domains by the geometric normality hypothesis on $B$. Thus $D$ is a normal ring. The normal-ring total-fractions theorem applies, and, since $D$ is a domain and its total fraction ring is $E$, it is integrally closed in $E$.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), normal tensor algebra comparison; algebra Tag 034M (lemma-normal-ring-integrally-closed)"
+   }
+  },
+  {
+   "text": "Let $x\\in E$ be integral over $C$. Its monic equation over $C\\subset D$ is also a monic equation over $D$. The integral closedness proved in Step 3 therefore gives $x\\in j_L(D)$. Combined with Step 2 this proves equality with the integral closure, as subrings of the specified fraction field. The finiteness and domain assertions were established in Steps 2 and 3.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), equality of the normal tensor algebra with the integral closure"
+   }
+  },
+  {
+   "text": "For a $k$-homomorphism $u:L\\to M$ of extension fields, $A\\otimes_kL\\to A\\otimes_kM$ is injective: a linear retraction $M\\to L$ of the inclusion $u(L)\\subset M$, after identifying $L$ with its image, tensors to a retraction. Thus there is a map of fraction fields $E_L\\to E_M$, $c/d\\mapsto u_A(c)/u_A(d)$. Write an element $b\\in B$ as $a/s\\in F$. Then $j_L(b\\otimes\\lambda)=(a\\otimes\\lambda)/(s\\otimes1)$. Both composites from $B\\otimes_kL$ to $E_M$ send it to $(a\\otimes u(\\lambda))/(s\\otimes1)$. Additivity and generation by pure tensors prove equality on all elements. Images of monic equations are monic equations, so the fraction-field map restricts to the integral closures. Since the identifications of Step 4 are these actual embeddings, this proves their naturality, including identities and composition.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), canonical affine maps; agent extension: explicit field-homomorphism square"
+   }
+  },
+  {
+   "text": "For $0\\ne f\\in A$, let $g=f\\otimes1\\in C$, which is nonzero by Step 1. Apply integral-closure localization first to $A\\subset F$ and then to $C\\subset E$. Since nonzero $f$ and $g$ are already units in the respective fields, it identifies the two localized integral closures as $B[1/f]\\subset F$ and $D[1/g]\\subset E$. Principal algebra localization under base change gives $A[1/f]\\otimes_kL=C[1/g]$ and $B[1/f]\\otimes_kL=D[1/g]$, with $(b/f^n)\\otimes\\lambda\\mapsto(b\\otimes\\lambda)/g^n$. Under these maps the localized comparison sends this tensor to $j_L(b\\otimes\\lambda)/g^n$. This is also its image via the comparison constructed from $A[1/f]\\subset F$. Thus the localization square commutes on pure tensors and hence everywhere. The same formula with $\\lambda$ replaced by $u(\\lambda)$ shows compatibility with field homomorphisms simultaneously. No assumption that localized $B$ is geometrically normal is needed for this comparison: its integral-closure description follows directly from the localization lemma.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0307 (lemma-integral-closure-localize), with Tags 00DK/00DL for the principal algebra localization comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-algebra-localization-away-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3N, affine normal-tensor comparison, extended from the separable case to the assumed geometrically normal normalization; explicit naturality and localization argument using algebra Tags 034M and 0307."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalization.*[Bb]ase|[Bb]ase.*normalization",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth normalization base change and integral-closure comparison maps do not give this arbitrary field-extension assertion under geometric normality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite birational geometrically normal model over a geometrically integral scheme commutes with arbitrary extension fields.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"Normal.of_equiv_equiv\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth normalization base change and integral-closure comparison maps do not give this arbitrary field-extension assertion under geometric normality"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyNormal, AlgebraicGeometry.IsFinite",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GeometricallyNormal'\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth normalization base change and integral-closure comparison maps do not give this arbitrary field-extension assertion under geometric normality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite birational morphism to a geometrically integral variety, whose source is geometrically normal, remains the normalization after every extension of the base field.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth normalization base change and integral-closure comparison maps do not give this arbitrary field-extension assertion under geometric normality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A is geometrically integral and its integral closure B in the fraction field is finite and geometrically normal then B tensor L is the integral closure of A tensor L for every field extension L.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"Algebra.IsIntegral.tensorProduct\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"IsIntegral.tmul\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"RingHom.isIntegral_isStableUnderBaseChange\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth normalization base change and integral-closure comparison maps do not give this arbitrary field-extension assertion under geometric normality"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Bb]ase|[Bb]ase.*normalization",
+   "results": "{\"t\": \"2026-10-23T09:32:37Z\", \"tool\": \"grep\", \"query\": \"normalization.*[Bb]ase|[Bb]ase.*normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Algebra/Basic.lean\", \"Mathlib/Tactic/NormNum/Core.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"06989d4cf705369e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits supply algebraic ingredients or smooth base change, not arbitrary extension fields under geometric normality plus the two compatibility clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure commutes with field extension when the normalization is geometrically normal.",
+   "results": "{\"t\": \"2026-10-23T09:33:16Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure commutes with field extension when the normalization is geometrically normal.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"Ring.instIsIntegrallyClosedNormalClosure\", \"Ring.NormalClosure\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"NumberField.RingOfIntegers.instIsIntegralClosure\", \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"IsIntegrallyClosed.instIsIntegralClosure\", \"IsIntegrallyClosed.of_isIntegrallyClosedIn\"], \"digest\": \"252cfb7ba2205ca9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits supply algebraic ingredients or smooth base change, not arbitrary extension fields under geometric normality plus the two compatibility clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.toIntegralClosure",
+   "results": "{\"t\": \"2026-10-23T09:33:16Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct.toIntegralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_smooth\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_tower\"], \"digest\": \"a935f45cd469c5d8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits supply algebraic ingredients or smooth base change, not arbitrary extension fields under geometric normality plus the two compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the normalization B of a geometrically integral k-algebra A is finite and geometrically normal, then B tensor L is the integral closure of A tensor L for every field extension L.",
+   "results": "{\"t\": \"2026-10-23T09:33:22Z\", \"tool\": \"leanfinder\", \"query\": \"If the normalization B of a geometrically integral k-algebra A is finite and geometrically normal, then B tensor L is the integral closure of A tensor L for every field extension L.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"Algebra.IsIntegral.tensorProduct\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\"], \"digest\": \"c6a69c5191453d2e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits supply algebraic ingredients or smooth base change, not arbitrary extension fields under geometric normality plus the two compatibility clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "of_isLocalization_maximal|of_localization|toIntegralClosure_bijective_of_isLocalization|tensorProduct.*[Ii]njective|[Ff]inite.*[Bb]ase[Cc]hange",
+   "results": "{\"t\": \"2026-10-23T09:33:50Z\", \"tool\": \"grep\", \"query\": \"of_isLocalization_maximal|of_localization|toIntegralClosure_bijective_of_isLocalization|tensorProduct.*[Ii]njective|[Ff]inite.*[Bb]ase[Cc]hange\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\"], \"digest\": \"7b58f213294e245e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits supply algebraic ingredients or smooth base change, not arbitrary extension fields under geometric normality plus the two compatibility clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal intermediate integral algebra between a domain and its fraction field equals its normalization; scalar extension preserves this when the tensor algebra is a normal domain.",
+   "results": "{\"t\": \"2026-10-23T09:37:19Z\", \"tool\": \"leanfinder\", \"query\": \"A normal intermediate integral algebra between a domain and its fraction field equals its normalization; scalar extension preserves this when the tensor algebra is a normal domain.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instAlgebraNormalClosure_1\", \"Ring.instAlgebraNormalClosure\", \"Ring.instIsIntegralClosureNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"IsIntegralClosure.of_isIntegrallyClosed\", \"Ring.instAlgebraNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"Ring.instIsFractionRingNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\", \"IsLocalization.Away.integralClosure\", \"Ring.instIsScalarTowerNormalClosureSubtypeAlgebraicClosureFractionRingMemIntermediateFieldNormalClosure\"], \"digest\": \"6fc58846faa8bae2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits supply algebraic ingredients or smooth base change, not arbitrary extension fields under geometric normality plus the two compatibility clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-marked-generic-normalization",
+  "date": "2026-10-23",
+  "group": "Q135"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Steps 1–4: smooth normalization, reduction of the marking, invariant compositum, separability and tensor-product function field. Subargument: affine integral-closure identification after further scalar extension, used to retain the same normalized curve while enlarging the constants",
+   "via": [
+    "lem-sfb-invariant-marked-generic-normalization",
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-closure-geonormal-scalar-extension",
+  "worker": "Q93",
+  "summary": "Split the arbitrary-field-extension integral-closure assertion into injection by flat tensoring and localization, finite generators and integrality, normality via affine stalks, equality inside the fraction field, and explicit field-map and principal-localization compatibility. All required general lemmas already exist; no new nodes. Statement unchanged.",
+  "blueprint": "Retains the item’s recorded alteration-preparation ancestry below det-thm-sf-ctf-stability-direct-images (3): affine normalization after further extension of constants. Read the latest direct-images proof; this split supplies the recorded generic-normalization subargument without changing the unit route. blueprint_refs.py ancestor returns None on the inherited ancestry; from.node and via are retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "General commutative-algebra tool: local normality implies integral closedness in total fractions; the current unit has no replacement for this algebraic criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-ring-integrally-closed-total"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-49d1a435e",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-49d1a435e (reviewer sub-agent of L); spot-checked: PASS, no fixes; full checks are in review.md. The item statement is unchanged and the delivery adds no new nodes. proof_deps equals the union of the step uses, every cited node exists, and no SGA source is cited. I read Stacks varieties.tex Tag 0C3N. Its separable-case argument ('A'⊗K normal ⇒ B'=A'⊗K') is exactly the argument the item uses, with the assumed geometric normality in place of separability, so recording it as an agent refinement is correct and the target is not weakened. Step 1: flatness of L plus the flat-tensor injection gives C⊂D⊂F⊗L. The localization-over-base node with R=k, T=A∖0 gives F⊗L=S⁻¹C, and S⁻¹C embeds in E because C is a domain and s⊗1≠0 (by the retraction argument). Step 2: the generators b_i⊗1 make D finite over C, and lem-weil-pbc-finite-algebra-is-integral gives integrality. Step 3: D is a domain with Frac D=E; affine stalks plus geometric normality make D a normal ring; 034M (declared in tool_uses, generic) then makes D integrally closed in Q(D)=E. Step 4: a monic equation over C is also one over D, so the closure equals D. Step 5: the field-map square agrees on pure tensors and A⊗L→A⊗M is injective via a linear retraction. Step 6: integral-closure localization (0307) applied to A⊂F and to C⊂E, plus localization-away base change, makes the square commute on (b/f^n)⊗λ. Small cases checked: A=B=k, the cusp k[t²,t³] with B=k[t], f a unit, purely inseparable L. Not duplicates: lem-trf-normalization-inseparable-base-change (finite purely inseparable extensions only), lem-weil-pbc-reduced-algebraic-normalization-field-change (separable extensions only), lem-per-normalization-field-extension-homeomorphism (universal homeomorphism only). The parent lem-sfb-invariant-marked-generic-normalization uses the item with matching hypotheses. Batch 5: lem-trf-flat-tensor-preserves-injection is the generic Mathlib leaf Module.Flat.lTensor_preserves_injective_linearMap. It is not a statement or proof step of the trace formula or of Poincaré duality, so the citation is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralClosureGeonormalScalarExtension",
+  "declaration": "integralClosure.geonormal_scalar_extension",
+  "file": "lean/Sheaf/RingTheory/IntegralClosureGeonormalScalarExtension.lean",
+  "statement": "theorem geonormal_scalar_extension (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A] (hft : RingHom.FiniteType (algebraMap k A)) (B : Subalgebra A (FractionRing A)) (hB : B = integralClosure A (FractionRing A)) [Module.Finite A B] (hgi : ∀ (L : Type (max u v w)) [Field L] [Algebra k L], IsDomain (A ⊗[k] L)) (hgn : ∀ (L : Type (max u v w)) [Field L] [Algebra k L] (p : Ideal (B ⊗[k] L)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : ∃ j : ∀ (L : Type (max u v w)) [Field L] [Algebra k L], B ⊗[k] L →ₐ[k] FractionRing (A ⊗[k] L), (∀ (L : Type (max u v w)) [Field L] [Algebra k L], Function.Injective (j L) ∧ (∀ x : FractionRing (A ⊗[k] L), (∃ b : B ⊗[k] L, j L b = x) ↔ IsIntegral (A ⊗[k] L) x) ∧ IsDomain (B ⊗[k] L) ∧ IsIntegrallyClosed (B ⊗[k] L) ∧ RingHom.Finite (Algebra.TensorProduct.map (IsScalarTower.toAlgHom k A B) (AlgHom.id k L)).toRingHom ∧ (∀ (b : B) (a s : A), s ≠ 0 → (b : FractionRing A) * algebraMap A (FractionRing A) s = algebraMap A (FractionRing A) a → ∀ l : L, j L (b ⊗ₜ[k] l) * algebraMap (A ⊗[k] L) (FractionRing (A ⊗[k] L)) (s ⊗ₜ[k] (1 : L)) = algebraMap (A ⊗[k] L) (FractionRing (A ⊗[k] L)) (a ⊗ₜ[k] l))) ∧ (∀ (L M : Type (max u v w)) [Field L] [Field M] [Algebra k L] [Algebra k M] (t : L →ₐ[k] M), ∃ q : FractionRing (A ⊗[k] L) →ₐ[k] FractionRing (A ⊗[k] M), (∀ c : A ⊗[k] L, q (algebraMap (A ⊗[k] L) (FractionRing (A ⊗[k] L)) c) = algebraMap (A ⊗[k] M) (FractionRing (A ⊗[k] M)) (Algebra.TensorProduct.map (AlgHom.id k A) t c)) ∧ (∀ d : B ⊗[k] L, q (j L d) = j M (Algebra.TensorProduct.map (AlgHom.id k B) t d))) ∧ (∀ (L : Type (max u v w)) [Field L] [Algebra k L] (f : A), f ≠ 0 → ∃ (aLoc : Localization.Away f ⊗[k] L →ₐ[k] FractionRing (A ⊗[k] L)) (bLoc : Localization.Away (algebraMap A B f) ⊗[k] L →ₐ[k] FractionRing (A ⊗[k] L)), Function.Injective aLoc ∧ Function.Injective bLoc ∧ (∀ (a : A) (l : L), aLoc (algebraMap A (Localization.Away f) a ⊗ₜ[k] l) = algebraMap (A ⊗[k] L) (FractionRing (A ⊗[k] L)) (a ⊗ₜ[k] l)) ∧ (∀ (b : B) (l : L), bLoc (algebraMap B (Localization.Away (algebraMap A B f)) b ⊗ₜ[k] l) = j L (b ⊗ₜ[k] l)) ∧ (∀ x : FractionRing (A ⊗[k] L), (∃ b : Localization.Away (algebraMap A B f) ⊗[k] L, bLoc b = x) ↔ aLoc.toRingHom.IsIntegralElem x))",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f5cd1de1",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read node, 10 stmt_dep records, Stacks 0C3N, module and report. Every clause matches: hft RingHom.FiniteType, hB integral closure, Module.Finite, hgi and hgn (recorded inline normal-ring form at every prime of B⊗L) quantified over L : Type (max u v w); conclusion: j fixed by the fraction formula j(b⊗l)(s⊗1)=a⊗l (unique since s⊗1≠0 and A⊗L is a domain), injective, range = IsIntegral (A⊗L), B⊗L integrally closed domain finite over A⊗L, field-hom square with q fixed by extending id⊗t, localization square with aLoc/bLoc fixed by generator values and range bLoc = aLoc-integral closure. All true, none weaker or stronger. Edge cases A=0 and f=0 excluded as in the node; A=B=k, cusp, purely inseparable L, unit f checked. Only the lean field differs from side-live; statement verbatim; no name collision; no duplicate (Mathlib toIntegralClosure is smooth/localization only). No defs, sorry only, docstrings with source, blueprint tag and 6 proof steps. Not recompiled (no change)."
+ }
+}

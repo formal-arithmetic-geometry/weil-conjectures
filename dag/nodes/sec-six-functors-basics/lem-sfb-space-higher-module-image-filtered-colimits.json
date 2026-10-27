@@ -1,0 +1,333 @@
+{
+ "id": "lem-sfb-space-higher-module-image-filtered-colimits",
+ "kind": "statement",
+ "title": "Higher module direct images on spaces preserve filtered colimits",
+ "statement": "Work in the fixed universes [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], and the canonical module direct image [def-trf-space-etale-module-functors]. Suppose $f$ is quasi-compact (its pullback by every affine scheme over $Y$ has quasi-compact source) and quasi-separated (its relative diagonal is quasi-compact). Let $J$ be a small filtered category (nonempty, and every finite diagram admits a cocone), and $(M_j)_{j\\in J}$ a diagram in $\\operatorname{Mod}(\\mathcal O_X)$. Its colimit is taken in all module sheaves [def-weil-pbc-category-colimit]. For every integer $p\\geq0$, the canonical map $$\\varinjlim_{j\\in J} R^pf_*M_j\\longrightarrow R^pf_*\\left(\\varinjlim_{j\\in J} M_j\\right)$$ is an isomorphism of $\\mathcal O_Y$-modules. Here $R^pf_*$ is computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. The maps are induced by the colimit injections. Neither quasi-coherence of the $M_j$ nor quasi-compactness of $X$ or $Y$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07U6, lemma-colimit-cohomology, module version via sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree) on slice sites and module sheafification."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-category-colimit",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Use the enlarged etale ringed sites $\\mathcal C_X,\\mathcal C_Y$ in the common sheaf universe. Their equivalences with the small sites extend structure sheaves and module sheaves. The base-change functor $u(V)=X\\times_YV$ presents the canonical ringed-topos morphism. The chart-limit comparison identifies its module direct image with precisely the specified $f_*$. Equivalences preserve colimits by their universal property and preserve injectives, so derived direct image computed using these models represents the same functor. Module sheaves over each ring sheaf are Grothendieck and hence have enough injectives; abelian sheaves have enough injectives as well.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03G1 (lemma-compare-etale-sites), 03G2 (lemma-functoriality-etale-site), 03G8 (lemma-morphism-ringed-topoi); injectives.tex Tag 079Q"
+   }
+  },
+  {
+   "text": "Put $M=\\varinjlim_J M_j$ and $F_j=(M_j)_{ab}$. Exact scalar forgetting preserves all small colimits, so $M_{ab}=\\varinjlim_J F_j$ with the original coprojections. All colimits here and below are sheaf colimits, not sectionwise presheaf colimits.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits)"
+   }
+  },
+  {
+   "text": "For any object $W$ of $\\mathcal C_X$, restriction of abelian sheaves to $\\mathcal C_X/W$ preserves colimits. Indeed set $\\lambda:\\mathcal C_X/W\\to\\mathcal C_X$ to be the forgetful functor and $\\beta(T)=(T\\times_XW\\to W)$. The universal property of the fibre product gives $\\lambda\\dashv\\beta$. Precomposition with $\\lambda$ preserves sheaves since slice coverings are underlying coverings; precomposition with $\\beta$ preserves sheaves since covers and their overlaps pull back to covers and overlaps. The adjoint-continuous-restriction theorem therefore makes restriction $\\lambda^s$ a left adjoint to $\\beta^s$. Left adjoints preserve the given $J$-colimit. Thus $(\\varinjlim_JF_j)|_W=\\varinjlim_J(F_j|_W)$ with the restricted coprojections.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00XX (lemma-have-functor-other-way), 09VQ (lemma-adjoint-functors), parts (4)-(5); localization and base-change coverings; spaces-properties.tex Tag 03G2 (lemma-functoriality-etale-site), finite limits"
+   }
+  },
+  {
+   "text": "Let $V\\to Y$ be an affine etale scheme and put $W=X\\times_YV$. It is quasi-compact by the stated affine-test hypothesis on $f$. To check quasi-separatedness on affine tests, take affine schemes $T,T'$ mapping to $W$. Their maps to $V$ give an affine scheme $T\\times_VT'$. The map $T\\times_WT'\\to T\\times_VT'$ is the base change of $\\Delta_f:X\\to X\\times_YX$, hence its source is quasi-compact by the quasi-compactness hypothesis on $\\Delta_f$ and this affine test. This is exactly the affine-test criterion for the absolute diagonal of $W$ to be quasi-compact. Thus $W$ is qcqs. This checks the definitions directly and uses no qcqs assumption on $X$ or $Y$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U6 (lemma-colimit-cohomology), proof: affine V has qcqs pullback; scheme-test verification of that assertion"
+   }
+  },
+  {
+   "text": "The enlarged-site localization identifies $\\mathcal C_X/W$ with the etale site of $W$ up to the stated equivalence. Cohomology over $W$ is cohomology of the restricted abelian sheaf on that slice, naturally in coefficients. Apply qcqs-space cohomology continuity to $W$ and $(F_j|_W)_{j\\in J}$, which is a small filtered diagram. Using step 3, its canonical comparison is\n$\\varinjlim_JH^p(W,F_j)\\xrightarrow{\\sim}H^p(W,M_{ab})$.\nThe module/abelian evaluation comparison at the object $W$ is natural in the module and is the identity in degree zero. Apply it to every $M_j$ and to $M$. Naturality for each coprojection $M_j\\to M$ identifies the preceding map with\n$\\varinjlim_JH^p_{\\mathrm{Mod}}(W,M_j)\\to H^p_{\\mathrm{Mod}}(W,M)$.\nThus this specific module-cohomology comparison is an isomorphism. No assertion that a forgotten injective module is injective is used.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-cohomology-over-object-localization",
+    "lem-sfb-space-cohomology-filtered-colimit",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 073E (lemma-colimits); sites-cohomology.tex Tags 03F3 (lemma-cohomology-of-open), 03FD (lemma-cohomology-modules-abelian-agree)"
+   }
+  },
+  {
+   "text": "Every object of $\\mathcal C_Y$ has a cover by affine etale schemes, by taking a scheme chart and its affine-open cover. Use these objects as $\\mathcal B$ in the ringed-site higher-image colimit criterion. Step 5 verifies its comparison hypothesis for every member of $\\mathcal B$, with $u(V)=W$, in the fixed degree $p$. Step 1 supplies the ringed-site model and enough injectives. The criterion now gives the required isomorphism of structure-module sheaves. Under the equivalences in step 1 it is the canonical comparison in the statement: on each $j$-th colimit leg it is $R^pf_*(M_j\\to M)$, because the criterion and all coefficient comparisons above use those same coprojections. Equality on all colimit legs identifies the maps. The argument works for every $p\\geq0$.",
+   "uses": [
+    "lem-trf-space-enlarged-site-scheme-density",
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-ringed-site-higher-image-colimit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U6 (lemma-colimit-cohomology), proof; sites-cohomology.tex Tag 0H7B (lemma-higher-direct-image-colimit)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-sfb-space-cohomology-filtered-colimit",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-ringed-site-higher-image-colimit-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07U6 (lemma-colimit-cohomology), with the ringed-site version of 0H7B and the module/abelian comparison 03FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of sheaves of structure modules under quasi compact quasi separated algebraic space morphisms commute with filtered colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.pushforward_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"The composition of pushforward functors for sheaves of modules, induced by continuous functors between sites with Grothendieck topologies and ring sheaf morphisms, satisfies an associativity condition\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived pushforward of module sheaves preserves filtered colimits in each nonnegative degree on small etale sites of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) [CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [J.WEqualsLocallyBijective AddCommGrpCat] (K : Type w) [inst_3 : CategoryTheory.Category.{w', w} K]\\n  [Cat\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"instHasColimitsCondensedMod\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.Limits.HasColimits (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ has all colimits.\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) [CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [J.WEqualsLocallyBijective AddCommGrpCat]\\n  [CategoryTheory.Limits.HasColimitsOfSize.{w', w, max u' v, max\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat),\\n  CategoryTheory.Limits.PreservesFiniteColimits (PresheafOfModules.toPresheaf R)\", \"doc\": \"The forgetful functor from presheaves of modules over a presheaf of rings $ R $ to presheaves of abelian groups preserves finite colimits.\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_preservesColimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R))\\n  [∀ {X Y : Cᵒᵖ} (f : X ⟶ Y),\\n      CategoryTheory.Limits.PreservesColimit (F.comp (\", \"doc\": \"The forgetful functor that maps presheaves of modules over a presheaf of rings $ R $ to presheaves of abelian groups (by forgetting the $ R $-module structure while retaining the additive group struct\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"PreservesFilteredColimits\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*direct.*image.*colimit|pushforward.*filtered|rightDerived.*[Cc]olimit",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"63\", \"text\": \"lemma HasPointwiseRightDerivedFunctorAt.hasColimit\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images on algebraic spaces commute with filtered colimits of sheaves of modules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) : colimit (limit F) ≅ limit (colimit F.flip)\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"ModuleCat.FilteredColimits.M.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": (Σ j, F.obj j) → M F\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R$, this constructs the filtered colimit of $F$ in the category of left $R$-modules by first forming t\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"(J : Type w) [Category.{w'} J] [Small.{v} J] [HasLimitsOfShape Jᵒᵖ C] : HasColimitsOfShape J (SheafedSpace.{_, _, v} C)\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and the opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfSize.{w', w} (PresheafOfModules.{v} R.val)] : HasColimitsOfSize.{w', w} (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings has colimits of a given size, then the category of sheaves of modules over the corresponding sheaf of rings also has colimits of that \"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": ModuleCat.{max v u, u} R\", \"doc\": \"For any ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, this constructs the filtered colimit of $ F $ in the category of $ R $-modules by f\"}\n  {\"name\": \"ModuleCat.FilteredColimits.M\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": AddCommGrpCat\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R$, this constructs the filtered colimit of $F$ in the category of left $R$-modules by first forming t\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \"[HasLimits C] {X Y : SheafedSpace C} (f g : X ⟶ Y) : Epi (coequalizer.π f g).hom.base\", \"doc\": \"If $ \\\\mathcal{J} $ is a small category and its opposite category $ \\\\mathcal{J}^{\\\\text{op}} $ has all limits of shape $ \\\\mathcal{J} $, then the category of sheafed spaces over a category $ \\\\mathcal{C} \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived adjunctions, existence of colimits, or generic derived-category support and Kan extensions, not this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact quasi separated morphisms of algebraic spaces have higher direct images of arbitrary module sheaves commuting with filtered colimits",
+   "results": "[\"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.pushforward_assoc\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphism properties, underived module pushforward, colimit existence, or pointwise Kan extensions; none states module higher-image continuity for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"PreservesFilteredColimits\"",
+   "results": "[]",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphism properties, underived module pushforward, colimit existence, or pointwise Kan extensions; none states module higher-image continuity for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*direct.*image.*colimit|pushforward.*filtered|rightDerived.*[Cc]olimit",
+   "results": "[\"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphism properties, underived module pushforward, colimit existence, or pointwise Kan extensions; none states module higher-image continuity for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images on small etale sites of qcqs algebraic space morphisms commute with filtered colimits",
+   "results": "[\"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Limits.ι_colimitLimitIso_limit_π_assoc\", \"CategoryTheory.Limits.colimitLimitIso.congr_simp\", \"CommRingCat.FilteredColimits.colimit\", \"CategoryTheory.Limits.pointwiseProductCompEvaluation\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CommGrpCat.FilteredColimits.colimit\", \"CommSemiRingCat.FilteredColimits.colimit\"]",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphism properties, underived module pushforward, colimit existence, or pointwise Kan extensions; none states module higher-image continuity for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-pushforward-coproducts",
+  "date": "2026-10-23",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Higher module direct images on spaces preserve filtered colimits.",
+   "via": [
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-higher-module-image-filtered-colimits",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed 07U6 on enlarged etale sites, verified qcqs affine pullbacks by the relative-diagonal affine test, transferred 073E through 03FD and slice colimit preservation, and applied a new general ringed-site local cohomology criterion. One statement-only node, no Mathlib leaf.",
+  "blueprint": "Supplies the inherited 07U6 input of 08FB for derived coproducts under the direct-images branch of det-thm-sf-ctf-stability-direct-images (3). The latest direct-images proof was read; this is generic auxiliary cohomology infrastructure below that route. Inherited null ancestor and via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-enlarged-site-scheme-density",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-over-object-localization",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic site, ringed-module, or algebraic-space infrastructure for the local cohomology proof; no statement of the constructible direct-image unit supplies this tool and its geometric route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-trf-space-enlarged-site-scheme-density",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-adjoint-continuous-restriction-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-cohomology-over-object-localization",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-a1-space-affine-etale-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-b879f67f8",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-b879f67f8 (reviewer sub-agent of L); spot-checked: PASS with no fixes. Statement and route: the item's statement is unchanged and matches Stacks 07U6 (spaces-cohomology.tex lemma-colimit-cohomology, read lines 480-511), upgraded to module coefficients. Its six steps follow the 07U6 proof, with modules in place of abelian sheaves.\n\nNew node: lem-sfb-ringed-site-higher-image-colimit-criterion is the module form of Stacks 0H7B (sites-cohomology.tex lemma-higher-direct-image-colimit, read lines 2822-2852). Its proof would go: R^pf_* is the sheafification of V -> H^p(u(V),-) (Stacks 072W, module form); module sheafification is a left adjoint; and a presheaf map that is an isomorphism on a covering collection B becomes an isomorphism after sheafification. So the statement is true without filteredness of J and without fibre-product closure of B, as the node says. I tested p=0, empty J, a singleton J and an empty B. The node is self-contained and every notion cites its definition node. It is a generic site-level tool smaller than the item, not a restatement. Greps for 0H7B and 072W, and a scan of statements combining R^q f_* with colim, found no duplicate.\n\nSteps:\n- Step 1: the enlarged ringed-site model and the chart-limit identification of D_f with Q_f give exactly the specified f_*. Enough injectives holds for any ring sheaf.\n- Step 2: forgetting scalars commutes with colimits, by clause (3) of the cited node.\n- Step 3: checked lambda left adjoint to beta and that both precompositions preserve sheaves, so restriction to the slice preserves the J-colimit.\n- Step 4 (marked elementary): checked that T x_W T' is the pullback of Delta_f over the affine T x_V T'. The passage to the diagonal of W, absolute or over S, takes a few lines, so elementary is acceptable.\n- Step 5: localization, the topos equivalence C_W with W_et, 073E on the qcqs space W with filtered J, and the module/abelian evaluation comparison, natural along each coprojection, give the module comparison.\n- Step 6: affine etale schemes over Y form a covering collection by the a1 cover node, and the new criterion gives the item's map on the same colimit legs.\n\nBatch-5 check: the four sec-trace-formula nodes (enlarged-etale-ringed-site-model, chart-limit-enlarged-sections, enlarged-site-scheme-density, chartwise-etale-permanence) are generic algebraic-space etale-site foundations cited by about 70 nodes, not trace-formula or Poincare-duality steps. lem-sfb-space-cohomology-filtered-colimit and lem-a1-space-affine-etale-cover reach that chapter only through the definition def-trf-algebraic-space. Both conclusions: outside the assumptions, acceptable. The 13 off-unit tool_uses are generic infrastructure and are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceHigherModuleImageFilteredColimits",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_moduleHigherDirectImage_filteredColimit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.moduleHigherDirectImage",
+   "AlgebraicGeometry.AlgebraicSpace.isIso_moduleHigherDirectImage_filteredColimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceHigherModuleImageFilteredColimits.lean",
+  "statement": "theorem isIso_moduleHigherDirectImage_filteredColimit {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hqc : MapIsQuasiCompact f.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (J : Type u) [SmallCategory J] [IsFiltered J] (M : J ⥤ X.Modules) (p : ℕ) (c : Cocone M) (hc : IsColimit c) (d : Cocone (M ⋙ moduleHigherDirectImage f p)) (hd : IsColimit d) : IsIso (hd.desc ((moduleHigherDirectImage f p).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The higher-image helper conjugates Mathlib rightDerived by the existing small-model restriction equivalences, retaining the original module categories and coefficient universe. Colimits are expressed by arbitrary colimit cocones, so the canonical map is exactly hd.desc of the image cocone. The three added statement dependencies are already landed nodes supplying the small ringed model, its direct-image conjugate and affine-test quasi-compactness. No statement correction or additional mathematical hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c172774e",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Stacks 07U6+03FD: S : Scheme.{u}, f : X ⟶ Y AlgebraicSpace S; hqc = MapIsQuasiCompact f.hom.hom (affine-test compact point space, ProperCurveModuli:55); hqs = MapIsQuasiCompact of the relative pullback.diagonal (definitionally the landed StackQcqsMorphism.MapIsQuasiSeparated); J : Type u SmallCategory IsFiltered; M : J ⥤ X.Modules without qcoh; p : ℕ; arbitrary colimit cocones c/d; canonical map hd.desc of mapCocone (legs R^p f_*(c.ι j) by fac); IsIso in Y.Modules. moduleHigherDirectImage = restriction ⋙ (smallModuleDirectImage f).rightDerived p ⋙ inverse, with HasInjectiveResolutions from SheafOfModules.isGrothendieckAbelian; smallModuleDirectImage is the conjugate of the chart-limit moduleDirectImage; same expression as landed isZero_moduleHigherDirectImage_of_affine. No space-module higher image duplicate or name collision in side-live. Added stmt_deps (small-ringed-model, derived-module-calculus, proper-curve-moduli) are landed defs, each used. Snapshot node differs from side-live only in lean/stmt_deps; dependency records identical. Statement verbatim; docstrings carry source and blueprint; six-step proof docstring; sorry only; imports exist; report has Worker report and Second reading by Q50. Edge cases p=0, empty J excluded by IsFiltered, singleton J, non-qc X/Y. No compile (no FIX file; brief says not to repeat the per-file compile)."
+ }
+}

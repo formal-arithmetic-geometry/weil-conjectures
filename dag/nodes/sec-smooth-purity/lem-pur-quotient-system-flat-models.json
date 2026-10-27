@@ -1,0 +1,295 @@
+{
+ "id": "lem-pur-quotient-system-flat-models",
+ "kind": "statement",
+ "title": "Strict flat quotient systems compute simultaneous tensor and geometric inverse image",
+ "statement": "Let $\\mathcal C,\\mathcal C'$ be sites small relative to their module universes, $R$ a sheaf of commutative rings on $\\mathcal C$, and $R\\to B_n$ compatible algebra maps to a strict ring tower $B_{n+1}\\to B_n$ indexed by $n\\ge1$ [def-weil-pbc-sites-and-cohomology, def-weil-inverse-system, def-weil-sheaf-of-modules-category]. Let $\\mathscr S(B)$ be the category of whole semilinear module systems, with componentwise exactness, tensor and its ordinary unbounded derived category [lem-coef-semilinear-derived-sections]. Let $\\mathcal P(R)$ be the full category of unbounded cochain complexes of $R$-modules which are K-flat and have flat terms [def-pc-cochain-complex-modules, def-pc-kflat-complex, def-pc-flat-sheaf-modules]. For $P\\in\\mathcal P(R)$ set $D_B(P)_n=P\\otimes_RB_n$, with the quotient-induced transitions $1\\otimes(B_{n+1}\\to B_n)$ [def-pur-sheaf-tensor-product]. Then $D_B(P)$ is a K-flat complex with flat terms in $\\mathscr S(B)$, and every level is K-flat with flat terms over $B_n$. The functor $D_B$ takes quasi-isomorphisms in $\\mathcal P(R)$ to componentwise quasi-isomorphisms and computes coherent derived scalar extension of the constant system $P$ to $B_\\bullet$.\n\nFor $P,Q\\in\\mathcal P(R)$ the strict system\n$$Z_T(P,Q)_n=\\operatorname{Tot}\\bigl((P\\otimes_RB_n)\\otimes_{B_n}(Q\\otimes_RB_n)\\bigr)$$\ncomputes the tensor of their coherent derived reductions in $D(\\mathscr S(B))$, with direct-sum total tensor [def-pc-tensor-complex-sheaves]. Let $u:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ be a geometric morphism, meaning an adjoint pair $u^{-1}\\dashv u_*$ whose inverse image preserves finite limits, and put $C_n=u^{-1}B_n$. The strict system $Z_F(P)_n=u^{-1}(P\\otimes_RB_n)$ computes the whole-system derived inverse image of that reduction in $D(\\mathscr S(C))$.\n\nThese computations come with representative comparison isomorphisms natural for all cochain maps of the displayed inputs, as isomorphisms of whole derived systems [def-weil-abstract-derived-category]. The transition of $Z_T$ sends $a\\otimes b$ to $\\tau_P(a)\\otimes\\tau_Q(b)$, and the transition of $Z_F$ is $u^{-1}\\tau_P$. The maps induced by cochain maps commute strictly with these transitions. Both $Z_T$ and $Z_F$ carry quasi-isomorphisms of the good inputs to componentwise quasi-isomorphisms. No flatness or surjectivity of the ring transitions is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent extraction of original step 1 and the strict transition-square calculation in original step 3 of lem-pur-completed-primitive-counit-comparison, below the natural coefficient-twist comparison of def-weil-frobenius-coefficient-twists. Resolution and change-of-ring inputs: Tags 06YS (lemma-K-flat-resolution) and 0G7E (lemma-pullback-K-flat); the simultaneous system assertion is an agent-formulated refinement, not the literal statement of either tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-inverse-system",
+  "lem-coef-semilinear-derived-sections",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-quotient-reduction-core"
+ ],
+ "proof": [
+  {
+   "text": "Use the unchanged constant-ring, ring-map, reduction and tensor constructions from def-pur-quotient-reduction-core. Instantiate the existing normalized scalar model on the sequence ring map and at every level. Translate its unit and cochain transpose equations to ScalarData. The ordinary slice comparison is precisely lem-pur-quotient-ordinary-models.",
+   "uses": [
+    "def-pur-quotient-reduction-core",
+    "lem-pur-system-scalar-model",
+    "lem-pur-quotient-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant functor sends a good input to a flat-term K-flat complex by lem-pur-quotient-constant-kflat. Apply scalar-extension K-flat preservation to its prescribed object and map functions. Flatness of each term is preserved by the ordinary scalar flatness lemma. This constructs good. Evaluate this whole-system good complex using lem-pur-system-evaluation-kflat to construct level_good. Transport along the canonical complex isomorphism induced by the evaluation-functor equality, using invariance of K-flatness and flatness under isomorphism.",
+   "uses": [
+    "lem-pur-quotient-constant-kflat",
+    "lem-sfb-scalar-extension-kflat",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-pur-system-evaluation-kflat",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant functor is exact, so it preserves a quasi-isomorphism. The existing scalar model preserves this map between K-flat constant complexes and its counit is invertible on each K-flat constant complex. Exact evaluation gives the componentwise quasi-isomorphism clause. These construct quasiIso and computes without a second derived pullback choice.",
+   "uses": [
+    "def-pur-quotient-constant-system",
+    "lem-pur-derived-change-of-rings",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For tensor_quasiIso factor the map of whole-system tensors as tensor(f,id) followed by tensor(id,g). Apply the proved Generic.kflat helper giving both fixed-factor K-flat preservation clauses of lem-weil-pbc-total-tensor-homotopy-cone-signs to the good reductions. Composition is a quasi-isomorphism, and exact evaluation preserves it.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation preserves the countable coproducts defining total tensor, because strict-system colimits are componentwise and the strict-system/sequence-site equivalence preserves colimits. In each degree define the inverse of the recorded chain comparison by the coproduct of its ordinary tensor comparison. Its two inverse identities are checked after the total-summand inclusions using TensorComparisonModel.summand and the ordinary inverse identities. Thus tensor_level holds for all complexes. The recorded tensorModelIso then supplies quotientTensorComparison.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pur-system-level-left-extension-basic",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual scalar-extension section equals the ordinary adjunction unit by unit_section and cancellation of the model object equality. Naturality of that sheaf map on the horizontal arrow gives reduction_transition, since the constant input has identity horizontal maps. The already proved tensor transition formula is presheaf tensor restriction followed by the sheafification unit. Exact inverse image and its normalized ordinary evaluation comparison give quotientSystemInverseImage as before.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-pur-quotient-constant-system",
+    "lem-coef-semilinear-derived-sections",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-quotient-reduction-core",
+  "lem-pur-system-scalar-model",
+  "lem-pur-quotient-ordinary-models",
+  "lem-pur-quotient-constant-kflat",
+  "lem-sfb-scalar-extension-kflat",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-pur-system-evaluation-kflat",
+  "lem-pur-system-ringed-sequence-site",
+  "def-pur-quotient-constant-system",
+  "lem-pur-derived-change-of-rings",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-coef-semilinear-system-models",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-system-level-left-extension-basic",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "F2, 2026-10-26: original ringed projection route through Tags 0G7E, 06YY and 06YP; ordinary normalized vertical evaluation isolated. Tensor evaluation proved directly by coproduct inverses. No unit-level step bypassed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|K.flat",
+   "results": "3 hits: Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness under ordinary module base change and underived module-sheaf presentations do not assert this unbounded K-flat whole-system model, its simultaneous operations and strict transition comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict systems of quotient coefficient module sheaves and K-flat derived tensor product",
+   "results": "8 hits: CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, SheafOfModules.mk, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.QuasicoherentData.I, SheafOfModules.Presentation, Module.Flat.iff_lTensor_preserves_shortComplex_exact, SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness under ordinary module base change and underived module-sheaf presentations do not assert this unbounded K-flat whole-system model, its simultaneous operations and strict transition comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness under ordinary module base change and underived module-sheaf presentations do not assert this unbounded K-flat whole-system model, its simultaneous operations and strict transition comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient reduction systems of flat term K-flat sheaf complexes compute simultaneous derived tensor and geometric inverse image with strict quotient transitions",
+   "results": "8 hits: SheafOfModules.Presentation.map, CategoryTheory.compatiblePreservingOfFlat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.Tor'",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness under ordinary module base change and underived module-sheaf presentations do not assert this unbounded K-flat whole-system model, its simultaneous operations and strict transition comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat K-flat complexes remain K-flat after change of coefficient ring; whole sequence tensor is computed componentwise",
+   "results": "8 hits: Module.Flat.baseChange, RingHom.Flat.isStableUnderBaseChange, Module.Flat.of_flat_tensorProduct, Module.Flat.isBaseChange, Module.Flat.instTensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_flat_tensorProduct, Module.Flat.trans",
+   "date": "2026-10-22",
+   "verdict": "no match: flatness under ordinary module base change and underived module-sheaf presentations do not assert this unbounded K-flat whole-system model, its simultaneous operations and strict transition comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes with flat terms under scalar extension of sheaves of rings on a topos of inverse systems",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, CategoryTheory.compatiblePreservingOfFlat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_lTensor_exact', Module.Flat.of_flat_tensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-flatness and site-covering results do not state unbounded K-flat models or whole semilinear derived systems."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|K.flat|StrictRingSystem",
+   "results": "3 hits: Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-flatness and site-covering results do not state unbounded K-flat models or whole semilinear derived systems."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product and exact inverse image of semilinear module sheaf towers computed on unbounded K-flat complexes",
+   "results": "8 hits: Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_rTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-flatness and site-covering results do not state unbounded K-flat models or whole semilinear derived systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-flatness and site-covering results do not state unbounded K-flat models or whole semilinear derived systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves K-flat complexes and quasi-isomorphisms between flat term complexes of sheaf modules",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.of_flat_tensorProduct, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Module.Flat.iff_lTensor_exact', Module.Flat.iff_flat_tensorProduct, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned ordinary module-flatness and site-covering results do not state unbounded K-flat models or whole semilinear derived systems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-primitive-counit-comparison",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "via": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "place": "Agent extraction of original step 1 and the strict transition-square calculation in original step 3 of lem-pur-completed-primitive-counit-comparison, below the natural coefficient-twist comparison of def-weil-frobenius-coefficient-twists. Resolution and change-of-ring inputs: Tags 06YS (lemma-K-flat-resolution) and 0G7E (lemma-pullback-K-flat); the simultaneous system assertion is an agent-formulated refinement, not the literal statement of either tag."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-quotient-system-flat-models",
+  "worker": "stage1",
+  "group": "NW",
+  "summary": "Statement preserved. Seven proof steps construct the sequence-topos projection, apply existing general ringed-topos K-flat and derived-pullback theorems, compute whole-system tensor and exact inverse image, and check strict quotient-transition squares. All needed non-elementary statements already exist; no new nodes. Existing Mathlib searches retained and five logged searches added. No Lean writing or compilation.",
+  "blueprint": "The natural Weil twist comparison in def-weil-frobenius-coefficient-twists, especially compatibility with finite reduction and scalar extension; through lem-pur-derived-pullback-tensor-iso, lem-pur-completed-operation-tower-substitution and lem-pur-completed-primitive-counit-comparison. Steps 1-4 and 6 supply the original flat representative step 1; step 7 expands its original step 3 transition squares.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "General ordinary ringed-system realization, componentwise exactness and exact geometric system inverse image, for arbitrary sites and coefficient towers; supplies the system ambient category without changing the purity unit route."
+   },
+   {
+    "node": "lem-pur-system-ringed-sequence-site",
+    "why": "General small coefficient sequence-site presentation used only to apply ordinary ringed-site theorems to whole systems."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic K-flat and flat-term preservation for arbitrary morphisms of ringed topoi, applied to the explicitly constructed projection and identity coefficient maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic normalized derived-pullback comparison and preservation of quasi-isomorphisms on good representatives; no proper-base-change conclusion is used."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic localization construction and natural K-flat representative comparison for tensor on an arbitrary ringed site."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic closure of unbounded flat-term K-flat complexes under direct-sum total tensor on an arbitrary ringed site."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "Generic fixed-factor K-flat tensor preservation of quasi-isomorphisms in both variables; only this clause is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-1b28966a9",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-1b28966a9 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, the full statements of all 9 cited nodes (plus def-coef-ringed-sequence-site), the parent's step 1 and Stacks sites-cohomology 0G7E (l.3508), 06YP, 07A2 and 06YY, with tags checked against labels. The item has no re-split note and is not in the dropped list; it has no new nodes and its statement and stmt_deps are unchanged. The mathematics checks. Step 1: Δ ⊣ lim is a geometric morphism, and with vertical covers sheaves are levelwise. Step 2: the K-flat pullback lemma applies to (p, ΔR→B_•) and to (id, R→B_n) with no flatness or surjectivity hypothesis, and sheafification is levelwise. Step 3: the derived-pullback iso and the q-iso clause give whole-system q-isos, which are componentwise by lem-coef. Step 4: the tensor-descent comparison holds on the sequence site, and Tot is levelwise. Step 5: the fixed K-flat factor preserves q-isos. Step 6: V is exact and termwise, and C_n=u^{-1}B_n. Step 7: strict squares were checked on local tensors. Edge cases tested: P=0, P=R[0], ℤ→ℤ/2^n (non-flat), a non-surjective tower, u=id, unbounded P. lem-pe-kflat-scalar-tower-realization and lem-pe-kflat-roos-representative-invariance are levelwise D(R) results and not duplicates (advisory). There is no cycle. All 7 generic tool_uses are accepted. FIX: (1) the step-2 source label sites-modules definition-tensor-product does not exist; corrected to Tag 03EK, section-tensor-product. (2) Step 5's 'componentwise' claim had no citation; it now cites the componentwise exactness of lem-coef-semilinear-derived-sections.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientSystemFlatModels",
+  "declaration": "WeilConjectures.SemilinearSections.quotientSystemFlatModels",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.QuotientSystemFlatModels",
+   "WeilConjectures.SemilinearSections.quotientTensorComparison",
+   "WeilConjectures.SemilinearSections.quotientTensor_transition",
+   "WeilConjectures.SemilinearSections.quotientInverseImage",
+   "WeilConjectures.SemilinearSections.quotientInverseImageComparison",
+   "WeilConjectures.SemilinearSections.quotientSystemFlatModels",
+   "WeilConjectures.SemilinearSections.quotientSystemInverseImage"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientSystemFlatModels.lean",
+  "statement": "theorem quotientSystemFlatModels (A : Data.{c, v, r} J B τ) : Nonempty (QuotientSystemFlatModels.{c, v, r} J R B τ α hα A)",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main existence statement is accompanied by its actual strict reduction, tensor and inverse-image functors, their canonical whole-derived-system comparisons, the tensor-transition formula and inverse-image quasi-isomorphism clause. All are listed in declarations; the packaging uses the recorded semilinear calculus and its normalized scalar and tensor models."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbaaaf92a",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read the item node (statement, 7 steps, source), the full module, report.md and the dependency declarations (ScalarData, DerivedChangeOfRingsCochainModel, Data, Geometry, CoefficientTensorModels, transition, tensorEvaluationModel). Every clause matches: D_B is pinned on generators 1⊗x, the 1⊗τ transition is pinned, K-flat and flat terms hold on whole systems and at every level, quasi-isomorphisms become componentwise, and 'computes' is the universal counit being invertible on ΔP. Z_T is the recorded total tensor with a natural comparison, the level formula through the evaluation chain map, the pure-tensor transition and the quasi-isomorphism clause. Z_F is G.pull termwise with the canonical mapDerivedCategoryFactors comparison; C_n and transitions are pinned by Geometry. Edge cases (0, R[0], non-flat or non-surjective towers, u=id, empty site, unbounded) are covered. No duplicate: the StrictQuotientOrdinaryFlatPresentation construction is private and single-universe. No hollow definitions, all proofs sorry, docstrings and lines OK. Advisories: def-coef-semilinear-* declarations used outside stmt_deps (H2 does not allow adding them at stage 2), C' universes inherited from Geometry, and proof-dependency imports kept for stage 3. No compile was run because I changed nothing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-58b99",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T023109-L-519959",
+  "kind": "interface",
+  "note": "independent cc review: moved QuotientReductionCore block vs clone original (byte-identical); item statement vs base; new sorry quotientOrdinaryModels vs ScalarData/obj_eq + vertical slice sheafification; item node proof_deps vs Lean uses; importer MixedReductionUnitComposition compiled against delivered modules (16.3 s)"
+ }
+}

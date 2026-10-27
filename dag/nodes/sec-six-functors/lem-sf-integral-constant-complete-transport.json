@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-integral-constant-complete-transport",
+ "kind": "statement",
+ "title": "Complete integral objects in canonical constant coefficient coordinates",
+ "statement": "Fix a prime l and a finite-dimensional field extension E/Q_l, and let X be any scheme. Use the completed integral coefficient sheaf and its actual positive quotient tower [def-weil-completed-integral-coefficients], the bounded constructible derived-complete integral category [def-weil-derived-complete-integral-detailed], and the canonical restriction functor H and constant coefficient datum [def-sf-constant-completed-reduction-transport], on the published small-site model with its local ideal-completeness predicate [def-zl-compact-support-small-site-morphism], [def-pur-adic-site-strict-quotient-interface]. For every object K of that integral category, H(K) is locally derived complete for the lifted uniformizer ideal on the small site. For any two objects K,L of that category, the actual map Hom(K,L) to Hom(H(K),H(L)) induced by H is bijective. There are no finite-field, Tor-amplitude, morphism, compactification, or word hypotheses.",
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-constant-completed-reduction-transport",
+  "def-zl-compact-support-small-site-morphism",
+  "def-pur-adic-site-strict-quotient-interface"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, lemma-restriction-derived-complete-equivalence; proetale.tex Tag 099M, lemma-naive-completion. Canonical model transport required by integral bridge Steps 1 and 8."
+ },
+ "proof": [
+  {
+   "text": "Apply the pointwise completeness transport to each object K.",
+   "uses": [
+    "lem-sf-integral-constant-complete-transport-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the pointwise Hom-bijection transport to each pair K,L.",
+   "uses": [
+    "lem-sf-integral-constant-complete-transport-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-constant-complete-transport-complete",
+  "lem-sf-integral-constant-complete-transport-hom"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I and proetale.tex Tag 099M, assembled from pointwise transport statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars along adic completion is fully faithful on derived complete modules",
+   "results": "Eight algebraic adic-completion results, including AdicCompletion.of_bijective and AdicCompletion.module; none for derived module sheaves or the fixed functor H.",
+   "date": "2026-10-26",
+   "verdict": "No matching derived sheaf theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful functor gives a unique lift of a morphism between its images",
+   "results": "Functor.FullyFaithful.preimage, map_preimage, map_injective and generic full-functor results. These supply the categorical Hom API, but do not establish full faithfulness of H.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical API only."
+  },
+  {
+   "tool": "grep",
+   "query": "FullyFaithful.*homEquiv|map_bijective",
+   "results": "Twenty-five Mathlib hits on generic fully faithful functors and algebraic completion. Local rg found ConstantCompletion.equivalence and sfCbcModelModules_derived, but no identification with the IsSfDerivedComplete locus and H.map.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate fixed-coefficient transport statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralCompactificationComparisonBridge",
+  "date": "2026-10-26",
+  "group": "S8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Compatibility of the integral compact-support comparison with its constant-coefficient coordinates, Steps 1 and 8 of the bridge.",
+   "via": [
+    "lem-sf-identification-coefficient-transport",
+    "lem-sf-integral-compactification-comparison-bridge"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralConstantCompleteTransport",
+  "file": "lean/Sheaf/SixFunctors/IntegralConstantCompleteTransport.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.integralConstantCompleteTransport",
+  "statement": "theorem integralConstantCompleteTransport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :\n    (∀ K : sfIntegralConstructibleCategory l E X,\n      (sfCbcSite X).IsComplete _ (sfCbcModelIdeal (constantDatum l E))\n        ((H l E X).obj K.obj)) ∧\n    (∀ K L : sfIntegralConstructibleCategory l E X,\n      Function.Bijective (fun m : K.obj ⟶ L.obj ↦ (H l E X).map m))",
+  "branch": "sheaf-dag",
+  "by": "S8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9dcd8",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203151-L-2788743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T001607-L-12266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

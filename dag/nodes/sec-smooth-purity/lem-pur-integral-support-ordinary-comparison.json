@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-integral-support-ordinary-comparison",
+ "kind": "statement",
+ "title": "Unique ordinary integral-support comparison",
+ "status": "split",
+ "statement": "In the setting of [def-pur-integral-support-comparison-data], there exists exactly one Ordinary record: the section-normalized open and proper push comparisons and their open inverse-image and extension-by-zero Hom transposes. This statement involves only ordinary module functors, with no chain maps or derived comparisons.",
+ "stmt_deps": [
+  "def-pur-integral-support-comparison-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Outer Hom comparisons and final unit/counit paragraph; canonical comparison specified by Zheng Constructions 4.1 and 5.15, Lemma 4.10, and the universal-unit characterization in integralExceptionalComparison_characterization."
+ },
+ "proof": [
+  {
+   "text": "On sequence-site direct-image sections the coordinate map is the identity, is linear, and commutes with every quotient transition. Express this map using rightEvaluation and rightUnderlying to obtain the two ordinary push comparisons; their inverses are the inverse section identifications.",
+   "uses": [
+    "def-pur-adic-exceptional-system-realization",
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the inverse/direct adjunction through the coordinate equivalences. Uniqueness of the left adjoint gives openPull with its stated transpose equation. Transport extension/restriction a second time to get openExtension with the displayed Hom-transpose equation.",
+   "uses": [
+    "def-pur-adic-exceptional-system-realization",
+    "def-pur-semilinear-compact-support-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel rightUnderlying and rightEvaluation and use section extensionality to identify push maps in any two records. Evaluate the two transpose equations on identity morphisms to identify the other comparison components; naturality and proof irrelevance identify the Ordinary records.",
+   "uses": [
+    "def-pur-integral-support-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-exceptional-system-realization",
+  "def-pur-semilinear-compact-support-coefficient-transport",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-pur-integral-support-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Outer Hom comparisons and final unit/counit paragraph; canonical comparison specified by Zheng Constructions 4.1 and 5.15, Lemma 4.10, and the universal-unit characterization in integralExceptionalComparison_characterization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalences transport adjunctions and uniquely identify left adjoints from an isomorphism of right adjoints",
+   "results": "Adjunction.leftAdjointUniq_trans, leftAdjointUniq_trans_assoc; rightAdjointUniq and unit normalization lemmas.",
+   "date": "2026-10-25",
+   "verdict": "General adjoint uniqueness tools, not the section-normalized geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of natural isomorphisms of right derived functors determined by the universal unit",
+   "results": "CategoryTheory.Functor.rightDerivedUnique; rightDerived_ext; rightDerivedNatIso; isRightDerivedFunctor_iff_of_iso; rightDerivedNatTrans_fac.",
+   "date": "2026-10-25",
+   "verdict": "No complete ordinary or derived geometric package; use universal-derived APIs in the derived step."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_ext|natTrans_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:94; Mathlib/CategoryTheory/Localization/Predicate.lean:286. Local source search: no separate owner of Ordinary or Derived.",
+   "date": "2026-10-25",
+   "verdict": "Extensionality tools exist; the geometric section and unit comparison is not a Mathlib leaf."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralSupportComparison",
+  "date": "2026-10-25",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Outer Hom display, comparison of compact support through strict quotient coordinates: Unique ordinary integral-support comparison",
+   "via": [
+    "def-pur-integral-support-coordinate-comparison",
+    "lem-pur-integral-reconstructed-representing-pair",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralSupportOrdinaryComparison",
+  "file": "lean/Sheaf/Paper/PurIntegralSupportOrdinaryComparison.lean",
+  "declaration": "WeilConjectures.PurIntegralSupportComparison.ordinary_existsUnique",
+  "statement": "theorem ordinary_existsUnique : ∃! B : Ordinary l E S G H D, True",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1a67",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T101306-L-3680017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1a67",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T101306-L-3680017",
+  "kind": "interface",
+  "note": "independent cc review: published PurIntegralSupportComparison records vs delivered Data module (byte-identical but for blueprint tags); new ordinary/derived ∃! statements vs their nodes and the published normalized_existsUnique; item node vs sheaf-dag (only lean/proof fields); importer PurIntegralRepresentingPair compiled on delivered modules"
+ }
+}

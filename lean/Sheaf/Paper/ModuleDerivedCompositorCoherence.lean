@@ -9,12 +9,9 @@ public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.RingedDerivedCompositionCocycle
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.AlgebraicGeometry.CondensedModulePullbackExact
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
+import Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact
 
 /-!
 # Coherence of the unbounded module direct-image compositor
@@ -34,11 +31,77 @@ convention: Scheme.{u}, abelian coefficients in u + 1, and the induced derived c
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u
 
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+private lemma derivedComp_post
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) {H H' : C ⥤ E}
+    [F.Additive] [G.Additive] [H.Additive] [H'.Additive]
+    [F.PreservesKInjectiveComplexes] (e : F ⋙ G ≅ H) (d : H ≅ H') :
+    Functor.rightDerivedFunctorCompIso' F G (e ≪≫ d) =
+      Functor.rightDerivedFunctorCompIso' F G e ≪≫ Functor.rightDerivedFunctorNatIso d := by
+  apply Iso.ext
+  simp [Functor.rightDerivedFunctorCompIso', Functor.rightDerivedFunctorNatIso,
+    Functor.rightDerivedFunctorNatTrans_comp]
+
+private lemma derivedId_eq
+    (C : Type*) [Category C] [Abelian C] [HasDerivedCategory C]
+    [Abelian.HasKInjectiveResolutions C] :
+    (𝟭 C).rightDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso C =
+      Functor.rightDerivedFunctorIdIso C := by
+  apply Iso.ext
+  apply (𝟭 C).rightDerivedFunctor.rightDerived_ext (𝟭 C).rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso C (.up ℤ))
+  ext K : 2
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.whiskerLeft_app, ← Category.assoc,
+    Functor.rightDerivedFunctorIdIso_fac_app]
+  have hf := congr_app (𝟭 C).rightDerivedFunctorIsoMapDerivedCategory_hom_fac K
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hf
+  erw [hf]
+  have h := congrArg (fun e ↦ e.hom.app K) (Functor.mapDerivedCategoryIdIso_factorsh C)
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app,
+    Functor.mapHomotopyCategoryIdIso_hom_app_eq_id] at h
+  erw [Category.comp_id, Category.comp_id, DerivedCategory.Qh.map_id,
+    Category.comp_id] at h
+  erw [h, Iso.inv_hom_id_app]
+
+private lemma derivedId_objQ
+    (C : Type*) [Category C] [Abelian C] [HasDerivedCategory C]
+    [Abelian.HasKInjectiveResolutions C] (I : CochainComplex C ℤ) [I.IsKInjective] :
+    (Functor.rightDerivedFunctorIdIso C).hom.app (DerivedCategory.Q.obj I) =
+      ((𝟭 C).rightDerivedFunctorObjQIso I).hom ≫
+        DerivedCategory.Q.map ((Functor.mapHomologicalComplexIdIso C (.up ℤ)).hom.app I) := by
+  have hn := (Functor.rightDerivedFunctorIdIso C).hom.naturality
+    ((DerivedCategory.quotientCompQhIso C).inv.app I)
+  dsimp only [Functor.id_map] at hn
+  rw [← cancel_mono ((DerivedCategory.quotientCompQhIso C).inv.app I), ← hn]
+  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.app_inv, Iso.app_hom, asIso_inv, Category.assoc]
+  congr 1
+  rw [← cancel_epi ((𝟭 C).rightDerivedFunctorUnit.app
+    ((HomotopyCategory.quotient _ _).obj I)), IsIso.hom_inv_id_assoc]
+  erw [Functor.rightDerivedFunctorIdIso_fac_app]
+  rw [← DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+  dsimp only [Functor.id_obj]
+  erw [Iso.hom_inv_id_app, Category.comp_id]
+  have hi := Functor.mapHomotopyCategoryIdIso_hom_app_eq_id C (.up ℤ)
+    ((HomotopyCategory.quotient _ _).obj I)
+  rw [Functor.mapHomotopyCategoryIdIso_hom_app] at hi
+  have hq := congrArg (fun t ↦ DerivedCategory.Qh.map t) hi
+  conv_rhs at hq => erw [CategoryTheory.Functor.map_id]
+  exact hq.symm
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -117,7 +180,18 @@ theorem module_derived_compositor_normalization (ℓ : ℕ) [Fact ℓ.Prime]
         DerivedCategory.Q.mapIso
           (((Functor.mapHomologicalComplexCompIso (lowerStarComp Λ f g) (.up ℤ)).symm).app
             I) := by
-  sorry
+  have _ := hΛ
+  let := (upperStarLowerStarAdjunction Λ f).preservesKInjectiveComplexes
+  apply Iso.ext
+  simp only [moduleDerivedCompositor, Functor.rightDerivedFunctorCompIso', Iso.trans_inv,
+    Iso.symm_inv,
+    moduleDerivedIteratedObjIso, Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.mapIso_hom, Category.assoc]
+  erw [CategoryTheory.UnboundedSectionsLocalization.compIso_objQ
+    (lowerStar Λ f) (lowerStar Λ g) I]
+  rw [Functor.rightDerivedFunctorNatIso,
+    Functor.rightDerivedFunctorNatTrans_app_Q_obj]
+  congr 2
 
 /-- Associativity of the normalized module-object derived compositor, including
 functor associators and transport along associativity of scheme-map composition.
@@ -145,8 +219,50 @@ theorem module_derived_compositor_coherence (ℓ : ℕ) [Fact ℓ.Prime]
         moduleDerivedCompositor Λ f (g ≫ h) ≪≫
         Functor.isoWhiskerLeft (lowerStar Λ f).rightDerivedFunctor
           (moduleDerivedCompositor Λ g h) := by
-  sorry
+  have _ := hΛ
+  let := (upperStarLowerStarAdjunction Λ f).preservesKInjectiveComplexes
+  let := (upperStarLowerStarAdjunction Λ g).preservesKInjectiveComplexes
+  let := (upperStarLowerStarAdjunction Λ (f ≫ g)).preservesKInjectiveComplexes
+  have ho := congrArg (fun e ↦ e.hom) (lowerStarComp_assoc Λ f g h)
+  have hc := Functor.rightDerivedFunctorCompIso'_assoc
+    (lowerStar Λ f) (lowerStar Λ g) (lowerStar Λ h)
+    (lowerStar Λ (f ≫ g)) (lowerStar Λ (g ≫ h)) (lowerStar Λ (f ≫ g ≫ h))
+    (lowerStarComp Λ f g) (lowerStarComp Λ g h)
+    (lowerStarComp Λ (f ≫ g) h ≪≫ lowerStarCongr Λ (Category.assoc f g h))
+    (lowerStarComp Λ f (g ≫ h)) (by
+      apply NatTrans.ext
+      funext M
+      have hm := congr_app ho M
+      simpa using hm.symm)
+  rw [derivedComp_post] at hc
+  have hci :
+      Functor.isoWhiskerRight
+          (Functor.rightDerivedFunctorCompIso' (lowerStar Λ f) (lowerStar Λ g)
+            (lowerStarComp Λ f g)) (lowerStar Λ h).rightDerivedFunctor ≪≫
+        Functor.rightDerivedFunctorCompIso' (lowerStar Λ (f ≫ g)) (lowerStar Λ h)
+          (lowerStarComp Λ (f ≫ g) h) ≪≫
+        Functor.rightDerivedFunctorNatIso (lowerStarCongr Λ (Category.assoc f g h)) =
+      Functor.isoWhiskerLeft (lowerStar Λ f).rightDerivedFunctor
+          (Functor.rightDerivedFunctorCompIso' (lowerStar Λ g) (lowerStar Λ h)
+            (lowerStarComp Λ g h)) ≪≫
+        Functor.rightDerivedFunctorCompIso' (lowerStar Λ f) (lowerStar Λ (g ≫ h))
+          (lowerStarComp Λ f (g ≫ h)) := Iso.ext hc
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply (cancel_epi
+    ((Functor.rightDerivedFunctorNatIso (lowerStarCongr Λ (Category.assoc f g h))).inv.app
+      M)).1
+  have hi := congrArg (fun e ↦ e.inv.app M) hci
+  simp only [Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
+    Category.assoc] at hi
+  simp only [moduleDerivedCompositor, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom, Category.comp_id]
+  simpa only [Iso.inv_hom_id_app_assoc, Category.assoc] using hi
 
+set_option linter.unusedSectionVars false in
 /-- The identity comparison is induced by the termwise sectionwise identity.
 Source: Stacks 0D6E and blueprint det-sf-comp-coherence-cocycle, Refinement isomorphisms
 (blueprint: lem-sfb-module-derived-compositor-coherence).
@@ -167,7 +283,14 @@ theorem module_derived_identity_normalization (ℓ : ℕ) [Fact ℓ.Prime]
         DerivedCategory.Q.mapIso
           ((NatIso.mapHomologicalComplex (lowerStarId Λ T) (.up ℤ)).app I) ≪≫
         DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexIdIso _ (.up ℤ)).app I) := by
-  sorry
+  have _ := hΛ
+  apply Iso.ext
+  simp only [moduleDerivedIdentity, derivedId_eq, Iso.app_hom,
+    Iso.trans_hom, NatTrans.comp_app, Functor.rightDerivedFunctorNatIso]
+  rw [derivedId_objQ, ← Category.assoc,
+    Functor.rightDerivedFunctorNatTrans_app_Q_obj]
+  simp only [Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+  rfl
 
 /-- Both identity compositor constraints become identities under the canonical
 identity comparison and scheme-map equality identifications.
@@ -195,6 +318,49 @@ theorem module_derived_compositor_units (ℓ : ℕ) [Fact ℓ.Prime]
           (moduleDerivedIdentity Λ Y) ≪≫
         Functor.rightUnitor (lowerStar Λ f).rightDerivedFunctor =
       Functor.rightDerivedFunctorNatIso (lowerStarCongr Λ (Category.comp_id f))) := by
-  sorry
+  have _ := hΛ
+  let := (upperStarLowerStarAdjunction Λ f).preservesKInjectiveComplexes
+  let := (upperStarLowerStarAdjunction Λ (𝟙 X)).preservesKInjectiveComplexes
+  constructor
+  · have he : lowerStarComp Λ (𝟙 X) f ≪≫ lowerStarCongr Λ (Category.id_comp f) =
+        Functor.isoWhiskerRight (lowerStarId Λ X) (lowerStar Λ f) ≪≫
+          Functor.leftUnitor (lowerStar Λ f) := by
+      rw [lowerStarComp_id_left]
+      simp only [Iso.trans_assoc, Iso.symm_self_id, Iso.trans_refl]
+    have hc := Functor.rightDerivedFunctorCompIso'_hom_of_iso_id_left
+      (lowerStar Λ (𝟙 X)) (lowerStar Λ f) (lowerStarId Λ X)
+    rw [← he, derivedComp_post] at hc
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (cancel_epi
+      ((Functor.rightDerivedFunctorCompIso' (lowerStar Λ (𝟙 X)) (lowerStar Λ f)
+        (lowerStarComp Λ (𝟙 X) f)).hom.app M)).1
+    have hm := congr_app hc M
+    simp only [moduleDerivedCompositor, moduleDerivedIdentity,
+      derivedId_eq, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+      Functor.leftUnitor_hom_app, Iso.hom_inv_id_app_assoc]
+    simpa using hm.symm
+  · have he : lowerStarComp Λ f (𝟙 Y) ≪≫ lowerStarCongr Λ (Category.comp_id f) =
+        Functor.isoWhiskerLeft (lowerStar Λ f) (lowerStarId Λ Y) ≪≫
+          Functor.rightUnitor (lowerStar Λ f) := by
+      rw [lowerStarComp_id_right]
+      simp only [Iso.trans_assoc, Iso.symm_self_id, Iso.trans_refl]
+    have hc := Functor.rightDerivedFunctorCompIso'_hom_of_iso_id_right
+      (lowerStar Λ f) (lowerStar Λ (𝟙 Y)) (lowerStarId Λ Y)
+    rw [← he, derivedComp_post] at hc
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (cancel_epi
+      ((Functor.rightDerivedFunctorCompIso' (lowerStar Λ f) (lowerStar Λ (𝟙 Y))
+        (lowerStarComp Λ f (𝟙 Y))).hom.app M)).1
+    have hm := congr_app hc M
+    simp only [moduleDerivedCompositor, moduleDerivedIdentity,
+      derivedId_eq, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+      Functor.rightUnitor_hom_app, Category.assoc, Iso.hom_inv_id_app_assoc]
+    simpa using hm.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing

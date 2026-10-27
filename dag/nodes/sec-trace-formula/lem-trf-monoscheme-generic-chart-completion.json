@@ -1,0 +1,144 @@
+{
+ "id": "lem-trf-monoscheme-generic-chart-completion",
+ "kind": "statement",
+ "title": "Intrinsic affine chart completions and generic group stalks of monoschemes",
+ "statement": "Let $M$ be a fine monoscheme with finite affine cover, and let $C$ be a torsion-free connected component with its canonical generic point $\\eta$ [def-trf-monoscheme-toric-realization]. Write $S=\\mathcal M_\\eta$ for its unsharpened monoid stalk and $L=S^{\\rm gp}$ for its group completion. Then the canonical map $S\\to L$ is a monoid isomorphism. For every nonempty monoid affine open $U$ lying in $C$, the intrinsic section monoid $P_U=\\mathcal M(U)$ is fine [def-trf-fine-fan-blowup], and there is a group isomorphism $P_U^{\\rm gp}\\simeq L$ whose value on the canonical image of $p\\in P_U$ is the image in $L$ of the germ of $p$ at $\\eta$. The assertions quantify over components and hence allow the empty monoscheme; no global torsion-freeness assumption on $M$ is required.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.2--3.1.4(i),(iii), 3.1.9 and 3.2.4, printed pp.98--99,103. Intrinsic affine section and generic-stalk part of Step 3 of lem-trf-monoscheme-finite-chart-components."
+ },
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "def-trf-fine-fan-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Choose a presentation of U by Spec_mon Q with Q fine. The closed point consists of the nonunits. Its smallest neighbourhood is the whole spectrum: every principal open containing this point is D(a) for a unit a, hence is the whole spectrum. Every covering of this affine open has a member equal to the whole open, so the sheafification unit is bijective on its sections (local surjectivity supplies a representative on that member, and local injectivity gives uniqueness). Constant numerator sections identify these sections with Q, since localization at the unit face changes nothing. Transport along the chart isomorphism to identify the intrinsic section monoid P_U with Q. Finite generation and injectivity into the group completion are invariant under this monoid isomorphism, so P_U is fine.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At the empty prime, apply monoidPrime_minimal_neighborhood to a finite generating tuple of Q. The product a of the generators defines the smallest neighbourhood of the empty prime. Its local-fraction sections are Q localized at a: the inverse of a generator is the product of the other generators divided by a, so this is Q^gp. The smallest-neighbourhood sheafification unit is bijective by the same local representative argument as in Step 1. The empty prime is the generic point in this chart; because the intrinsic component generic point lies in every component chart, T0 uniqueness of the generic point identifies it with eta. Transport the section identification through the chart isomorphism.",
+   "uses": [
+    "lem-trf-monoid-prime-minimal-neighborhood",
+    "def-trf-monoscheme-toric-realization",
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A smallest neighbourhood is terminal in the opposite neighbourhood category, so its map to the stalk colimit is an isomorphism (CategoryTheory.Limits.isIso_ι_of_isTerminal). Consequently the stalk S is a group. Its canonical map to S^gp is bijective, with inverse sending a quotient s/t to s times the inverse of t. The germ P_U to S extends uniquely to group completions and is an isomorphism by Step 2. Compose this with S to S^gp. Its value on every numerator p is exactly the defining germ formula for degree. The trivial monoid and the empty generating family give the trivial group; there is no component in the empty case.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-monoid-prime-minimal-neighborhood"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.2--3.1.4(i),(iii), 3.1.9 and 3.2.4, printed pp.98--99,103. Intrinsic affine section and generic-stalk part of Step 3 of lem-trf-monoscheme-finite-chart-components.",
+  "note": "P5: expanded the source local-section and generic-stalk computation into the intrinsic chart statement; source read in the PDF, printed pp.98--103."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a fine monoid scheme the generic stalk is the group completion of the intrinsic sections of each affine chart",
+   "results": "8 hits: Scheme.germ_stalkClosedPointTo_assoc, Scheme.instFieldCarrierResidueField, Scheme.fromSpecStalk, stalkClosedPointIso, IsAffineOpen.isLocalization_stalk, Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, StructureSheaf.IsLocalization.to_stalk, TopCat.Presheaf.submonoidPresheafOfStalk_obj. These are ring-scheme stalk statements or general presheaf constructions.",
+   "date": "2026-10-26",
+   "verdict": "no match: no intrinsic unsharpened monoscheme section/generic-completion comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical group completion of affine chart sections is the group stalk at the generic point of a fine monoscheme",
+   "results": "8 hits, including IsAffineOpen.isLocalization_stalk and isLocalization_stalk', Scheme.germToFunctionField, Γ_restrict_isLocalization, StructureSheaf.toOpen_Γgerm_apply, localizationToStalk_mk', toStalk and IsAffineOpen.fromSpecStalk. All concern ring spectra.",
+   "date": "2026-10-26",
+   "verdict": "no match: ring localization is not the unsharpened monoid sheaf of the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Monoscheme|generic_chart_completion|monoid.*stalk",
+   "results": "5 Mathlib hits: Topology/Sheaves/CommRingCat.lean submonoidPresheafOfStalk and its uses, and AlgebraicGeometry/Spec.lean algebraMap_pushforward_stalk. Local rg of the two library roots found no generic_chart_completion. Read MonoidSpectrumHomUniversal and AffineFanLocalizationSections: the former provides local morphism formulas; the latter is the sharpened fan and quotients by units, so neither states this unsharpened comparison. blueprint_refs.py search monoscheme returned zero blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "no match; the parent contains the pending comparison as only part of its algebra conjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MonoschemeFiniteChartComponents",
+  "date": "2026-10-26",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Remark 3.1.4 and 3.1.10(ii), Proposition 3.2.2 and 3.2.4--3.2.5, printed pp.98--100,103; smooth torus input in 2.3.16--2.3.17 and application in 3.2.19. No Stacks tag states the complete monoscheme realization assertion. New subargument: Expose VIII, Remark 3.1.4(i)--(ii), 3.1.9, Remark 3.1.10(ii), Proposition 3.2.2 and 3.2.4, printed pp.98--100,103; affine domain input in Lemma 3.2.12(ii), p.104. Re-split of returned parent Steps 1--4. No Stacks tag states this monoscheme gluing result. Intrinsic affine-sections and generic-stalk calculation, Step 3 of lem-trf-monoscheme-finite-chart-components; ILO VIII 3.1.4(i),(iii).",
+   "via": [
+    "lem-trf-monoscheme-finite-chart-components",
+    "lem-trf-toric-realization-finite-type",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MonoschemeGenericChartCompletion",
+  "file": "lean/Sheaf/AlgebraicGeometry/MonoschemeGenericChartCompletion.lean",
+  "declaration": "AlgebraicGeometry.Monoscheme.generic_chart_completion",
+  "statement": "theorem generic_chart_completion (M : Fine.{u})\n    (C : ToricComponent M) :\n    (∃ e : FineFan.stalk M.space.presheaf C.genericPoint ≃* C.lattice,\n      e.toMonoidHom = Algebra.GrothendieckGroup.of) ∧\n    ∀ U : ComponentAffineOpens C,\n      FineFan.IsFine (M.space.presheaf.obj (op U.1.1)) ∧\n      ∃ e : Algebra.GrothendieckGroup (M.space.presheaf.obj (op U.1.1)) ≃* C.lattice,\n        ∀ p, e (Algebra.GrothendieckGroup.of p) = degree C U p",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092226-L-3414131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261026T092226-L-3414131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

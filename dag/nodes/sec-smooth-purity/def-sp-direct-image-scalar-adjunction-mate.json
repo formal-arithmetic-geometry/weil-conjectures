@@ -1,0 +1,118 @@
+{
+ "id": "def-sp-direct-image-scalar-adjunction-mate",
+ "kind": "definition",
+ "title": "Canonical constant-coefficient geometric adjunction and scalar direct-image mate",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A,B$ be arbitrary commutative rings of universe $u$, let $\\varphi:A\\to B$ be a unital ring homomorphism, and let $f:T\\to V$ be a morphism of schemes of universe $u$. Use the ordinary uncompleted unbounded derived categories of modules over the constant ring sheaves on the small pro-etale sites, with the canonical constant-section coefficient identifications [def-weil-pbc-proetale-operations]. The coefficient maps are the actual constant-ring maps induced by $\\varphi$ [def-sp-proetale-constant-coefficient-ring-map]. Write $S_W:D(W,A)\\to D(W,B)$, $Rf_*^R:D(T,R)\\to D(V,R)$ and $f_R^*:D(V,R)\\to D(T,R)$, and let $\\lambda_f:f_B^*S_V\\xrightarrow{\\sim}S_Tf_A^*$ be the canonical scalar/pullback comparison [def-sp-constant-scalar-pullback-comparison]. Define $f_R^*\\dashv Rf_*^R$ for $R=A,B$ to be the canonical derived ringed adjunction of [def-weil-pbc-proetale-operations] specialized to these constant rings and their fixed coefficient identifications; retain its unit and counit $\\eta^R,e^R$. Define $\\gamma_f:S_VRf_*^A\\to Rf_*^BS_T$ as the mate of $\\lambda_f$ under these two adjunctions [def-weil-pbc-adjunction-mate]. Explicitly, for $N\\in D(T,A)$ its component is the composite $S_VRf_*^AN\\xrightarrow{\\eta^B}Rf_*^Bf_B^*S_VRf_*^AN\\xrightarrow{Rf_*^B(\\lambda_{f,Rf_*^AN})}Rf_*^BS_Tf_A^*Rf_*^AN\\xrightarrow{Rf_*^BS_T(e^A_N)}Rf_*^BS_TN$. No finiteness, flatness, boundedness or properness assumption is imposed, and $\\gamma_f$ is a natural transformation, with no invertibility assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sp-proetale-constant-coefficient-ring-map",
+  "def-sp-constant-scalar-pullback-comparison",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, lemma-adjoint, and Tag 07A7, remark-base-change: the canonical derived adjunction and its counit-transpose comparison; constant-coefficient scalar square used in blueprint det-sp-tower-gluing, Levels paragraph."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived constant coefficient geometric adjunction and its direct image scalar comparison mate on proetale schemes",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.constantSheafΓAdj; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.constantSheafAdj_counit_app; CategoryTheory.Adjunction.derivedε; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; CategoryTheory.Adjunction.derivedε.congr_simp; CategoryTheory.Adjunction.derivedη_fac_app_assoc; ModuleCat.restrictCoextendScalarsAdj.",
+   "date": "2026-10-24",
+   "verdict": "Generic constant-sheaf, sheaf-module and derived-adjunction constructors; no exact normalized pro-etale specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar extension direct image comparison is the mate of the canonical scalar pullback isomorphism under the geometric adjunctions",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; ModuleCat.homEquiv_extendScalarsComp; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction.",
+   "date": "2026-10-24",
+   "verdict": "No exact constant-ring unbounded pro-etale construction; reuse published Sheaf definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "directImageConstantAdjunction, directImageScalarComparison",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'directImageConstantAdjunction'",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep directImageConstantAdjunction|directImageScalarComparison",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n directImageConstantAdjunction|directImageScalarComparison lean/WeilConjectures lean/Sheaf; rg -n same names dag/nodes; definition-node lean ownership scan; blueprint_refs.py search direct-image scalar",
+   "results": "No WeilConjectures matches. Sheaf/SecSmoothPurity/DirectImageScalarOperations.lean defines directImageConstantAdjunction at line 52 and directImageScalarComparison at line 84, with consumers elsewhere. DAG occurrences include the theorem lem-fix-direct-image-scalar-exchange and its consumers; scanning all kind=definition lean records finds no owner for either declaration. 0 blueprint nodes match direct-image scalar.",
+   "date": "2026-10-24",
+   "verdict": "Existing published definitions have no definition-node owner. Bind both with existing:true; do not duplicate code."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-proper-scalar-counit-square",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Levels paragraph: canonical geometric counits and the scalar direct-image mate in the proper factor of the coefficient transition transpose.",
+   "via": [
+    "lem-sp-proper-scalar-counit-square",
+    "lem-sp-restriction-transition-transpose",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.DirectImageScalarOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.directImageConstantAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.directImageConstantAdjunction",
+   "AlgebraicGeometry.ProEtale.directImageScalarComparison"
+  ],
+  "statement": "def directImageConstantAdjunction (A : Type u) [CommRing A]\n    {T V : Scheme.{u}} (f : T ⟶ V) :\n    Scheme.proEtaleConstantRingDerivedPullback A f ⊣ directImageConstantPush A f",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by the return of immutable head 9538609d1e34. Reuse both published definitions unchanged: the actual normalized constant-coefficient geometric adjunction and the mateEquiv construction of the scalar direct-image comparison. No existing definition node owns these declarations; no theorem about scalar exchange is used as a definition."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c22fb0eb3",
+  "group": "Q115",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c22fb0eb3",
+  "group": "Q115",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 9538609d (H2): the Lean module is byte-identical and its maths is re-verified: gamma transpose and naturality, composite-counit equation, scalar counit square, K-injective inverse-of-h_*(j) clause; no extra hypotheses. The item's stmt_deps swap is exactly as prescribed: theorem nodes lem-fix-direct-image-scalar-exchange and lem-sp-stratum-scalar-extension removed; def-sp-proetale-constant-coefficient-ring-map, def-sp-constant-scalar-pullback-comparison and the new existing:true def-sp-direct-image-scalar-adjunction-mate added. The new node is faithful to side-live directImageConstantAdjunction and to the mateEquiv construction directImageScalarComparison, and no definition node owns either declaration on side-live. FIX: the new node's source.place cited 'Tag 0E47, remark-base-change', but remark-base-change is Tag 07A7 (0E47 is remark-compose-base-change-horizontal); corrected in fixes/def-sp-direct-image-scalar-adjunction-mate.json (whole node, flat, JSON only, nothing to compile)."
+ }
+}

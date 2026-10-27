@@ -1,0 +1,225 @@
+{
+ "id": "lem-coef-sequence-adjunction-cochain-transposes",
+ "kind": "statement",
+ "title": "Cochain unit and counit for simultaneous derived scalar extension",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $B_1\\leftarrow B_2\\leftarrow\\cdots$ a sequence of sheaves of commutative rings, and $A$ a sheaf of commutative rings with compatible homomorphisms $A\\to B_n$. Let $\\mathscr S(B)$ be the category of strict semilinear module systems, identified with modules over $B$ on the sequence site $\\mathcal T=\\mathcal C\\times\\mathbf N_{\\ge1}$, with componentwise exactness [lem-pur-system-ringed-sequence-site]. Use ordinary unbounded derived categories and write $[K]$ for the derived object of a complex and $[f]$ for the class of a chain map [def-weil-abstract-derived-category]. Let $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ have constant inverse image and the displayed structural maps, and use the canonical adjunction $\\mathcal R=Lp^*\\dashv Rp_*$, with unit $\\eta$ and counit $\\varepsilon$, normalized by the ordinary tensor/limit Hom correspondence [lem-coef-sequence-projection-derived-adjunction]. Write $U_0$ for termwise scalar restriction [def-pc-sheaf-restrict-scalars], so $p_*I=\\lim U_0I$. For every $n$, derived scalar extension $T_n=-\\otimes_A^LB_n$ [lem-pur-derived-change-of-rings] is left adjoint to exact restriction $\\operatorname{Res}_n$. Under its canonical K-flat comparison, the adjunct of a chain map $f:Q\\otimes_A B_n\\to K$ is represented by $x\\mapsto f(x\\otimes1)$ for every flat-term K-flat $A$-complex $Q$ and arbitrary $B_n$-complex $K$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules, def-pur-sheaf-tensor-product].\nFor such a $Q$, put $M=(Q\\otimes_A B_n)_n$. For every K-injective system resolution $a:M\\to I$ [def-pur-kinjective-complex], the unit $\\eta_{[Q]}$, in the model $Rp_*M=[\\lim U_0I]$, is the class of the chain map\n$$Q\\longrightarrow\\lim U_0I,\\qquad x\\longmapsto(a_n(x\\otimes1))_n.$$\nFor every K-injective system complex $I$ and every flat-term K-flat resolution $q:Q\\to p_*I$, the counit $\\varepsilon_{[I]}$, in the model $\\mathcal R Rp_*[I]=[(Q\\otimes_A B_n)_n]$, is represented by the strict system chain map whose components are\n$$Q\\otimes_A B_n\\longrightarrow I_n,\\qquad x\\otimes b\\longmapsto b\\operatorname{pr}_n^{U_0I}(q(x)).$$\nAll formulas use the canonical resolution identifications and are natural as derived morphisms, independently of the chosen resolutions. No K-injectivity of $U_0I$ or $I_n$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPI (lemma-adjoints-push-pull-compatibility), K-flat/K-injective representative counit; agent specializes the canonical module adjunction to the sequence-site projection and also records its unit and level scalar transposes."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-pur-system-ringed-sequence-site",
+  "def-weil-abstract-derived-category",
+  "lem-coef-sequence-projection-derived-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing normalized sequence projection adjunction and retain all its ordinary presentations, derived universal properties, K-flat comparisons, K-injective comparison and normalized Hom identity. For a system chain map a, choose its ordinary cochain transpose h. Apply the ordinary inverse-transpose section formula in each degree with scalar 1 and cancel the inverse Hom equivalence. The resulting equation gives pi_n(h(x)) = a_n(1 tensor x). The normalized derived Hom identity is exactly the asserted unit equation, by the adjunction formula homEquiv(f) = unit followed by R(f).",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For q:Q to FI, choose the inverse ordinary cochain transpose v. The ordinary inverse-transpose section formula degree by degree gives v_n(b tensor x) = b pi_n(q(x)). Apply the normalized derived Hom identity to v and cancel the ordinary Hom equivalence. Applying the inverse derived Hom equivalence gives L([q] followed by eta_I) followed by the counit = epsilon_Q followed by [v]. This uses only the already specified comparisons and no injectivity assertion for an individual level.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At level n apply the existing derived coefficient adjunction, which also supplies exact restriction and the normalized ordinary adjunction for s.E. The derived change-of-rings theorem supplies a pointwise homotopy-category universal pair LF, epsilon_h; its ordinary functor equals s.E because their prescribed object and map equations agree. Precompose its pointwise right Kan extension with the full essentially surjective homotopy quotient and transport through the quotient/localization factorization isomorphisms. This gives a cochain universal pair LF, beta. Uniqueness of the left derived functor gives c:LF isomorphic to s.T with c followed by s.epsilon = beta. Transport the derived coefficient adjunction along c. The coefficient theorem gives the normalized derived unit on a K-flat Q. The quotient unit equation and the compatibility of exact restriction with the two localization factorizations give its cochain version. Compose with restriction of [f] and use naturality of mapDerivedCategoryFactors to obtain the asserted Hom identity for arbitrary target K. Finally, apply the ordinary coefficient adjunction section formula in every degree; the image of 1 tensor x is tensorSection at 1 because scalar multiplication by 1 is the identity. Invertibility of s.epsilon on Q is the existing model field s.computes.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0FPI; normalized sequence Hom identity and scalar coefficient adjunction. Cochain/homotopy comparison uses the existing pointwise derived-change-of-rings construction and uniqueness of universal left derived pairs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|IsKFlat.*[Aa]dj|[Aa]dj.*IsKFlat|derived.*[Cc]ounit",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: totalLeftDerivedCounit is the universal derived-functor comparison, not the counit of the scalar-system adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension restriction scalar adjunction unit counit cochain representative K-flat K-injective module sheaf systems",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedAdjunction",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Adjunction.derivedAdjunction'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|derived.*[Aa]djunction|[Aa]djunction.*derived",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read CategoryTheory/Functor/Derived/Adjunction.lean:37-158; abstract adjunction API does not establish these K-flat/K-injective scalar-system models"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived'_counit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Adjunction.derived and derivedη_fac_app/derivedε_fac_app; their extra postcomposition-derivedness assumptions are not supplied automatically for the ringed-system representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit and counit of the derived simultaneous extension of scalars adjunction computed on K-flat source and K-injective coefficient system by x tensor b maps to b times the nth limit projection",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"comonadicExtendScalars\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor_obj\", \"Ext\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar units and Tor do not give the two unbounded sequence-resolution formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cochain representative formulas for derived adjunction of extension of scalars to a sequence of coefficient sheaves, including scalar transposition for arbitrary target complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictionCoextensionAdj.app'\", \"CochainComplex.HomComplex.instModuleCochain\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"ModuleCat.RestrictionCoextensionAdj.unit'_app\", \"ChainComplex.linearYonedaObj\", \"CategoryTheory.Sheaf.H\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: coextension/restriction formulas and sheaf cohomology are different from simultaneous derived scalar extension"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_unit|derived_counit|extendRestrictScalarsAdj_unit_app_apply",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf adjunction formulas do not give the unbounded ringed-sequence K-flat/K-injective representative calculations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cochain formulas for unit and counit of derived tensor scalar extension and inverse limit adjunction for coefficient systems",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"CategoryTheory.Adjunction.derivedη\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Derived/Adjunction.lean; abstract derived transformations require derivedness hypotheses and do not supply the ringed-sequence cochain models"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_unit",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_unit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Derived/Adjunction.lean; abstract derived transformations require derivedness hypotheses and do not supply the ringed-sequence cochain models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars to an inverse sequence of ring sheaves adjoint to derived inverse limit, unit and counit on K-flat and K-injective complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.derivedε_fac_app\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Derived/Adjunction.lean; abstract derived transformations require derivedness hypotheses and do not supply the ringed-sequence cochain models"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|derivedη_fac_app|derivedε_fac_app",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Derived/Adjunction.lean; abstract derived transformations require derivedness hypotheses and do not supply the ringed-sequence cochain models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed topos map compute derived adjunction unit by a K-injective resolution of pullback, counit by a K-flat resolution of direct image",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derivedη\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.Adjunction.derived_unit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Derived/Adjunction.lean; abstract derived transformations require derivedness hypotheses and do not supply the ringed-sequence cochain models"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-sequence-pushforward-limit-projections",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2 and following paragraph, derived coefficient adjunction and finite units/counits: the untransported K-flat/K-injective representative calculations and scalar transposition (old item steps 4, 6, 7).",
+   "via": [
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-sequence-adjunction-cochain-transposes",
+  "worker": "stage1",
+  "summary": "Retained the statement and all imported metadata. Reused the general ring-sheaf scalar adjunction and the normalized sequence-projection adjunction; proved the cochain cone/strictness identities, then calculated unit and counit by applying the normalized Hom bijection to a and q. Explicitly tracked both resolution isomorphisms, arbitrary scalar targets, and independence of choices. No new nodes.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, proof paragraph 2 and following paragraph: derived coefficient adjunction and its finite units/counits; the untransported cochain calculations of the current blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Only its general ringed-topos convention that total direct images are computed on K-injective complexes is used to normalize beta_I; this is a generic derived-functor tool, not a replacement for the coefficient-system route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-a7af79f99",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-a7af79f99 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no fault, so no fixes were written. The item is a statement-only node from the 2026-10-22 re-split of lem-coef-sequence-pushforward-limit-projections. It has no repair note of its own, so the re-split rules do not apply; this is its ordinary first split with 6 steps, 4810 characters and no new nodes. Statement, stmt_deps, blueprint, source and created are unchanged from the base; no SGA citation; all three kinds of Mathlib search are present. Steps: (1) The scalar adjunct of [f]c equals [x↦f(x⊗1)] by the unit and adjunct clauses of lem-pur-sheaf-ring-derived-coefficient-adjunction, with an arbitrary target. (2) I checked every cone, semilinear-strictness (ρ), differential and inverse identity by hand. (3) Φ([v]c_Q)=β_J[h_v] is what lem-coef-sequence-projection-derived-adjunction says for chain maps, and β_J=id for K-injective J; the declared tool use of lem-weil-pbc-ringed-topoi-derived-pushforward-composition, for the K-injective direct-image convention only, is accepted as generic. (4) Unit: Φ(j)=Rp*(j)η with j=[a]c_Q, and Rp*(j) is the named model identification. (5) Counit: first-variable naturality gives Φ([v_q]c_Q(Lp*k)^{-1})=1, which matches the proof of Stacks 0FPI (sites-cohomology.tex, lemma-adjoints-push-pull-compatibility). (6) Independence of choices holds and no K-injectivity of U_0I or I_n is used. Small cases tested: Z→Z/2^n over a point (unit Z→Z_2), constant towers, a non-flat A→B_n, zero complexes. Candidates checked and ruled out as duplicates: lem-pur-sequence-adjoint-resolution-shifts (W_proet, specific), lem-sf-sequence-tensor-augmentation-unit, lem-coef-restricted-tower-resolution-acyclicity. The parent's steps 3 and 4 use exactly the clauses proved here. Route: the item's unit sk-prop-sf-biduality-general uses sk-def-sf-operations."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SequenceAdjunctionCochainTransposes",
+  "declaration": "SheafOfModules.SequenceProjection.adjunctionCochainTransposes",
+  "declarations": [
+   "SheafOfModules.SequenceProjection.adjunctionCochainTransposes",
+   "SheafOfModules.SequenceProjection.scalarCochainTranspose"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SequenceAdjunctionCochainTransposes.lean",
+  "statement": "theorem adjunctionCochainTransposes (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) [HasDerivedCategory.{d} (Modules A)] [HasDerivedCategory.{d} (StrictRingSystem B)] : ∃ (G : Modules A ⥤ StrictRingSystem B) (F : StrictRingSystem B ⥤ Modules A) (_ : G.Additive) (_ : F.Additive) (e : ∀ (M : Modules A) (n : ℕ), (G.obj M).level n ≅ changeOfRings (α.app (op n)) M) (π : ∀ (N : StrictRingSystem B) (n : ℕ), F.obj N ⟶ (restriction A B α n).obj (N.level n)) (adj : G ⊣ F), (∀ {M M' : Modules A} (f : M ⟶ M') (n : ℕ), (G.map f).app n ≫ (e M' n).hom = (e M n).hom ≫ changeOfRingsHom (α.app (op n)) M f) ∧ (∀ (M : Modules A) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), ((G.obj M).transition h).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = (e M m).inv.val.app U (tensorSection (α.app (op m)) M U ((B.map (homOfLE h).op).hom.app U b) x)) ∧ (∀ {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ), F.map f ≫ π N' n = π N n ≫ (restriction A B α n).map (f.app n)) ∧ (∀ (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : (F.obj N).val.obj U), (π N m).val.app U x = (N.transition h).val.app U ((π N n).val.app U x)) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (f : ∀ n : ℕ, M ⟶ (restriction A B α n).obj (N.level n)), (∀ {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : M.val.obj U), (f m).val.app U x = (N.transition h).val.app U ((f n).val.app U x)) → ∃! h : M ⟶ F.obj N, ∀ n : ℕ, h ≫ π N n = f n) ∧ (∀ (M : Modules A) (N : StrictRingSystem B) (h : M ⟶ F.obj N) (n : ℕ) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : M.val.obj U), (((adj.homEquiv M N).symm h).app n).val.app U ((e M n).inv.val.app U (tensorSection (α.app (op n)) M U b x)) = @SMul.smul ((B.obj (op n)).obj.obj U) ((N.level n).val.obj U) inferInstance b ((π N n).val.app U (h.val.app U x))) ∧ ∃ (L : DerivedCategory.{d} (Modules A) ⥤ DerivedCategory.{d} (StrictRingSystem B)) (R : DerivedCategory.{d} (StrictRingSystem B) ⥤ DerivedCategory.{d} (Modules A)) (ε : DerivedCategory.Q ⋙ L ⟶ G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ R) (derivedAdj : L ⊣ R), L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (Modules A) (.up ℤ)) ∧ R.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (StrictRingSystem B) (.up ℤ)) ∧ (∀ (Q : CochainComplex (Modules A) ℤ), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → IsIso (ε.app Q)) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ), I.IsKInjective → IsIso (η.app I)) ∧ (∀ (P Q : CochainComplex (Modules A) ℤ) (q : Q ⟶ P), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → QuasiIso q → ∃ c : L.obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj Q), L.map (DerivedCategory.Q.map q) ≫ c.hom = ε.app Q) ∧ (∀ (Q : CochainComplex (Modules A) ℤ) (I : CochainComplex (StrictRingSystem B) ℤ) (f : (G.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I), derivedAdj.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I) (ε.app Q ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫ η.app I) ∧ (∀ (Q : CochainComplex (Modules A) ℤ), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → ∀ (I : CochainComplex (StrictRingSystem B) ℤ) [I.IsKInjective] (a : (G.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I) [QuasiIso a], ∃ h : Q ⟶ (F.mapHomologicalComplex (.up ℤ)).obj I, derivedAdj.unit.app (DerivedCategory.Q.obj Q) ≫ R.map (ε.app Q ≫ DerivedCategory.Q.map a) = DerivedCategory.Q.map h ≫ η.app I ∧ ∀ (i : ℤ) (n : ℕ) (U : Cᵒᵖ) (x : (Q.X i).val.obj U), (π (I.X i) n).val.app U ((h.f i).val.app U x) = ((a.f i).app n).val.app U ((e (Q.X i) n).inv.val.app U (tensorSection (α.app (op n)) (Q.X i) U 1 x))) ∧ (∀ (I : CochainComplex (StrictRingSystem B) ℤ) [I.IsKInjective] (Q : CochainComplex (Modules A) ℤ), Q.IsKFlatIndependentCoefficients → (∀ i : ℤ, (Q.X i).IsFlatOnSite) → ∀ (q : Q ⟶ (F.mapHomologicalComplex (.up ℤ)).obj I) [QuasiIso q], ∃ v : (G.mapHomologicalComplex (.up ℤ)).obj Q ⟶ I, L.map (DerivedCategory.Q.map q ≫ η.app I) ≫ derivedAdj.counit.app (DerivedCategory.Q.obj I) = ε.app Q ≫ DerivedCategory.Q.map v ∧ ∀ (i : ℤ) (n : ℕ) (U : Cᵒᵖ) (b : (B.obj (op n)).obj.obj U) (x : (Q.X i).val.obj U), ((v.f i).app n).val.app U ((e (Q.X i) n).inv.val.app U (tensorSection (α.app (op n)) (Q.X i) U b x)) = @SMul.smul ((B.obj (op n)).obj.obj U) (((I.X i).level n).val.obj U) inferInstance b ((π (I.X i) n).val.app U ((q.f i).val.app U x)))",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e05eb630",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Single module SequenceAdjunctionCochainTransposes.lean; node differs from base only in lean; statement field verbatim; not landed live, not route-pivot dropped, no repair note. adjunctionCochainTransposes retains SequenceProjection.derivedAdjunction verbatim (pins G,F,e,π,adj,L,R,ε,η,derivedAdj) and adds unit clause unit≫R(ε_Q≫[a])=[h]≫η_I with π_n h(x)=a_n(1⊗x) (h unique by ∃! cone) and counit clause L([q]≫η_I)≫counit=ε_Q≫[v] with v_n(b⊗x)=b·π_n q(x), matching node and Stacks 0FPI proof; hypotheses flat-term K-flat Q, K-injective I, QuasiIso a/q only. scalarCochainTranspose: exact Res_n, a:s.E⊣Res_n pinned by f(1⊗x), dAdj pinned on chain maps for arbitrary K. Universes: site/coeff independent, single localization universe d as in dependency. No new defs, sorry only, docstrings with Stacks places/blueprint/6 proof steps. Advisory: plain proof-dep imports unused by statement. Not recompiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261022T113749-L-235830",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -26,68 +26,51 @@
  ],
  "proof": [
   {
-   "text": "Give $Z$ its reduced induced closed subscheme structure $Z_{\\mathrm{red}}$ [lem-weil-pbc-reduced-induced-closed-subscheme]; composing the closed immersion [def-weil-closed-immersion] with $X\\to\\operatorname{Spec}k$ shows that $Z_{\\mathrm{red}}$ is locally of finite type over $k$, and it is irreducible. Choose an affine open $U=\\operatorname{Spec}R\\subseteq X$ meeting $Z$, and put $V=U\\cap Z$. By part (1) of [lem-weil-pbc-reduced-induced-closed-subscheme], the open subscheme $V$ of $Z_{\\mathrm{red}}$ is $\\operatorname{Spec}A$ with $A=R/I$, where $I$ is the radical ideal with $V(I)=V$; $A$ is a finitely generated $k$-algebra [def-weil-pbc-finite-type-algebra], and since $V$ is irreducible the radical ideal $I$ is prime, so $A$ is a domain. Applying [lem-sc-dimension-locally-algebraic] to $Z_{\\mathrm{red}}$ shows that $V$ has positive dimension, so $A$ has positive Krull dimension [def-weil-pbc-krull-dimension-ring]. The closed points of $V$ correspond to maximal ideals of $A$, whose inverse images in $R$ are maximal ideals.",
+   "text": "The locally finite type structure morphism makes X a Jacobson space by [lem-sc-lft-over-field-jacobson-space] (Mathlib: LocallyOfFiniteType.jacobsonSpace). Its closed subspace Z is Jacobson by JacobsonSpace.of_isClosedEmbedding applied to the subtype inclusion.",
    "uses": [
-    "lem-sc-dimension-locally-algebraic",
-    "def-weil-finite-type-morphism",
-    "def-weil-irreducible-components",
-    "def-weil-affine-spectrum",
-    "def-weil-closed-immersion",
-    "def-kun-topological-krull-dimension",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), part (3), reduction to a nonempty affine open of the irreducible locally algebraic closed subset"
-   }
-  },
-  {
-   "text": "By [lem-sc-fg-domain-positive-dimension-infinite-maximals], the positive-dimensional finitely generated domain $A$ has infinitely many maximal ideals. These give infinitely many closed points of $V$, and their inverse images are closed points of the affine open $U$.",
-   "uses": [
-    "lem-sc-fg-domain-positive-dimension-infinite-maximals",
-    "def-weil-affine-spectrum",
-    "def-weil-closed-points"
+    "lem-sc-lft-over-field-jacobson-space"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "the affine positive-dimension argument following Algebra Lemma 00G1"
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478, part (2); Mathlib.Topology.JacobsonSpace, JacobsonSpace.of_isClosedEmbedding"
    }
   },
   {
-   "text": "Each inverse-image point is a closed point of $U$, so it is a closed point of $X$ by [lem-sc-affine-maximal-points-closed-in-lft-scheme]. Since the points lie in $V\\subseteq Z$, they are infinitely many closed points of $X$ contained in $Z$.",
+   "text": "Suppose Z intersect closedPoints X [def-weil-closed-points] is finite. Pull back along the injective subtype inclusion Z -> X. For this closed embedding, IsClosedEmbedding.preimage_closedPoints identifies the pullback with closedPoints Z, so Z has finitely many closed points. Mathlib JacobsonSpace.discreteTopology then gives the discrete topology on Z.",
    "uses": [
-    "lem-sc-affine-maximal-points-closed-in-lft-scheme",
     "def-weil-closed-points"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson)"
+    "place": "Tag 0478, Jacobson-space consequence; Mathlib.Topology.JacobsonSpace, IsClosedEmbedding.preimage_closedPoints and JacobsonSpace.discreteTopology"
+   }
+  },
+  {
+   "text": "A discrete space has topological Krull dimension [def-kun-topological-krull-dimension] at most zero (Mathlib topologicalKrullDim_zero_of_discreteTopology), because each nonempty irreducible subset is a singleton. This contradicts the assumed positive dimension of Z. Thus Z intersect closedPoints X is infinite. Irreducibility is not required in this stronger topological argument, but its hypothesis in the declaration is kept unchanged.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478, Jacobson-space consequence; Mathlib.Topology.KrullDimension, topologicalKrullDim_zero_of_discreteTopology"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-dimension-locally-algebraic",
-  "def-weil-finite-type-morphism",
-  "def-weil-irreducible-components",
-  "def-weil-affine-spectrum",
-  "def-weil-closed-immersion",
-  "def-kun-topological-krull-dimension",
-  "lem-sc-fg-domain-positive-dimension-infinite-maximals",
+  "lem-sc-lft-over-field-jacobson-space",
   "def-weil-closed-points",
-  "lem-sc-affine-maximal-points-closed-in-lft-scheme",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "def-weil-pbc-finite-type-algebra",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-kun-topological-krull-dimension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "W6",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0478 and 0A21, with the affine positive-dimension argument in Algebra"
+  "place": "Tag 0478, part (2), followed by Mathlib Jacobson-space finiteness and discrete-space dimension lemmas",
+  "note": "Shorter topological route; no reduced induced subscheme or affine coordinate ring is needed."
  },
  "mathlib_searches": [
   {
@@ -134,11 +117,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sc-dimension-locally-algebraic",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-sc-dimension-locally-algebraic"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -166,5 +145,26 @@
   "result": "fix",
   "note": "k field -> [Field k]; X lft over k -> [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] (FIX from explicit f); Z irreducible closed -> IsClosed Z, IsIrreducible Z (nonempty); positive dim -> 0 < topologicalKrullDim Z (subspace); conclusion -> (Z ∩ closedPoints X).Infinite, ambient closedness"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261023T110057-L-3645251",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

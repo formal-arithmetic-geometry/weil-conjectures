@@ -1,0 +1,73 @@
+{
+ "id": "lem-sf-total-bifunctor-signed-flip",
+ "kind": "statement",
+ "title": "Signed flip of the total complex of an additive bifunctor",
+ "statement": "Let $C_1,C_2$ and $D$ be preadditive categories [def-weil-preadditive-category], and let $B:C_1\\times C_2\\to D$ be a bifunctor additive in each variable. Let $P,Q$ be integer cochain complexes (with $d^2=0$) in $C_1,C_2$. Suppose the coproducts defining the direct-sum total complex exist. Write $\\operatorname{Tot}_B(P,Q)^n=\\bigoplus_{p+q=n}B(P^p,Q^q)$, with differential $B(d_P,1)+(-1)^pB(1,d_Q)$ on the $(p,q)$ summand, and $B^{\\mathrm{flip}}(Y,X)=B(X,Y)$. There is a natural chain isomorphism $s:\\operatorname{Tot}_{B^{\\mathrm{flip}}}(Q,P)\\xrightarrow{\\sim}\\operatorname{Tot}_B(P,Q)$. On the $(q,p)$ summand its hom is $(-1)^{pq}$ times the inclusion of $B(P^p,Q^q)$ into the $(p,q)$ summand. Its inverse has the same signed-inclusion formula with the indices interchanged. Naturality is with respect to maps of both complexes. In particular this is an isomorphism of complexes, rather than merely an isomorphism of their graded objects.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNG, section-sign-rules, item-flip-tensor-product; the additive-bifunctor generalization is Mathlib/Algebra/Homology/BifunctorFlip.lean:49,54,62,77 and ComplexShapeSigns.lean:348-350"
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "There is a natural signed isomorphism between total complexes of a bifunctor applied in the two opposite argument orders; the bidegree p q summand is multiplied by minus one to p times q",
+   "results": "HomologicalComplex₂.totalFlipIsoX, HomologicalComplex₂.totalFlipIso, HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex₂.flip_totalFlipIso, HomologicalComplex.mapBifunctorFlipIso_flip, HomologicalComplex.ι_mapBifunctorFlipIso_hom, HomologicalComplex₂.ιTotal_totalFlipIso_f_hom, HomologicalComplex₂.totalFlipIso_hom_f_D₂",
+   "date": "2026-10-27",
+   "verdict": "match: mapBifunctorFlipIso and its inclusion/naturality lemmas, with the integer-cochain sign instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorFlipIso",
+   "results": "HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_flip, HomologicalComplex.mapBifunctorFlipIso_hom_naturality, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom, HomologicalComplex.ι_mapBifunctorFlipIso_hom_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_inv, HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc",
+   "date": "2026-10-27",
+   "verdict": "match: mapBifunctorFlipIso and its inclusion/naturality lemmas, with the integer-cochain sign instance"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapBifunctorFlipIso|lemma ι_mapBifunctorFlipIso|lemma mapBifunctorFlipIso_hom_naturality|σ p q",
+   "results": "Mathlib/Algebra/Homology/ComplexShapeSigns.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean; grep directory Mathlib/Algebra/Homology",
+   "date": "2026-10-27",
+   "verdict": "match: mapBifunctorFlipIso and its inclusion/naturality lemmas, with the integer-cochain sign instance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total complex of the flipped bifunctor is isomorphic to the original total complex by the Koszul sign on each summand",
+   "results": "HomologicalComplex.ι_mapBifunctorFlipIso_hom, HomologicalComplex.mapBifunctorFlipIso, HomologicalComplex.mapBifunctorFlipIso_flip, HomologicalComplex₂.totalFlipIso, HomologicalComplex₂.totalFlipIsoX, HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom_assoc, HomologicalComplex₂.flip_totalFlipIso",
+   "date": "2026-10-27",
+   "verdict": "match: mapBifunctorFlipIso and its inclusion/naturality lemmas, with the integer-cochain sign instance"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.mapBifunctorFlipIso",
+  "file": "Mathlib/Algebra/Homology/BifunctorFlip.lean",
+  "line": 49,
+  "how": "specializes in one line: take all shapes ComplexShape.up ℤ; additive functors preserve zero morphisms. The inclusion formulas and naturality are ι_mapBifunctorFlipIso_hom (line 54), ι_mapBifunctorFlipIso_inv (line 62), and mapBifunctorFlipIso_hom_naturality (line 77); the cochain symmetry instance in Algebra/Homology/ComplexShapeSigns.lean:348-350 has σ p q=(p*q).negOnePow."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-native-section-closed-forgetful",
+  "date": "2026-10-27",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native section closed transport, homogeneous representative square: exchanging the two totalization indices requires the Koszul factor (-1)^(pq); current cor-coef-verdier-weil-equivariance.proof.md, evaluation and tensor compatibility paragraph",
+   "via": [
+    "lem-route-native-section-closed-forgetful",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

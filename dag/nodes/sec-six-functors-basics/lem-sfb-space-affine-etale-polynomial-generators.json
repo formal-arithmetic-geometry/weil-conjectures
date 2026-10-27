@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-space-affine-etale-polynomial-generators",
+ "kind": "statement",
+ "title": "Polynomial generators for an affine etale chart algebra",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Regard $X$ as an algebraic space over $\\operatorname{Spec}\\mathbf Z$ through $X\\to S\\to\\operatorname{Spec}\\mathbf Z$, with the same etale scheme charts and small etale ringed site. Let $V$ be an affine scheme and $f:X\\to V$ an absolute morphism, that is, a morphism of algebraic spaces over $\\operatorname{Spec}\\mathbf Z$, whose diagonal is a closed immersion on scheme tests [def-weil-closed-immersion, def-pc-fibre-product]. Let $\\varphi:U\\to X$ be representable surjective etale with $U=\\operatorname{Spec}B$ affine. Use small-etale module direct image [def-trf-space-etale-module-functors] and quasi-coherence [def-trf-space-quasi-coherent-module]. Then $\\varphi_*\\mathcal O_U$ is quasi-coherent and there are $m\\ge0$ and elements $g_1,\\ldots,g_m\\in B=\\Gamma(X,\\varphi_*\\mathcal O_U)$ such that the evaluation map of sheaves of $\\mathcal O_X$-algebras $$e:\\mathcal O_X[z_1,\\ldots,z_m]\\longrightarrow\\varphi_*\\mathcal O_U,\\qquad z_i\\longmapsto g_i,$$ is surjective, and its kernel as a module sheaf is quasi-coherent. Here the polynomial sheaf is the free commutative $\\mathcal O_X$-algebra on $m$ global indeterminates; as a module it is the coproduct of one copy of $\\mathcal O_X$ for each monomial. No cohomology vanishing or finite-type hypothesis on $X$ or $V$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V6 (proposition-vanishing-affine), proof from the choice of U through the surjectivity checked on U; kernel from spaces-properties.tex Tag 03M1 (lemma-properties-quasi-coherent). Change of base scheme: spaces.tex Tag 04SG (lemma-category-of-spaces-over-smaller-base-scheme)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-change-base-to-integers",
+  "def-sfb-space-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Work over $\\operatorname{Spec}\\mathbf Z$ as stipulated in the statement, so the separated morphism $f$ and all its charts have a common base. Write $V=\\operatorname{Spec}A$. Apply [lem-trf-space-separated-affine-chart-overlap] to the two copies $U_0,U_1$ of $U$: $R=U_0\\times_XU_1$ is an affine scheme, its projections $p_i$ are etale, and $j:R\\to U_0\\times_VU_1$ is a closed immersion. Put $C=\\Gamma(R,\\mathcal O_R)$, and let $t,s:B\\to C$ be induced by $p_0,p_1$, respectively. By [lem-weil-pbc-fibre-product-affine-spectra] the target of $j$ has ring $B\\otimes_A B$, with the two factor maps specified there. The affine description in [def-weil-closed-immersion] therefore gives a surjection $q:B\\otimes_A B\\twoheadrightarrow C$, $q(b\\otimes b\\prime)=t(b)s(b\\prime)$.",
+   "uses": [
+    "lem-trf-space-separated-affine-chart-overlap",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6 (proposition-vanishing-affine), proof, from the choice of U through the surjectivity checked on U."
+   }
+  },
+  {
+   "text": "The map $p_0:R\\to U_0$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], since both schemes are affine. It is the base change of $\\varphi$ along the surjective etale chart $U_0\\to X$. Thus [lem-sfb-space-affine-locality] makes $\\varphi$ affine, hence quasi-compact and separated. The module $\\mathcal O_U$ is quasi-coherent by its one-generator free presentation in [def-trf-space-quasi-coherent-module]. Apply [lem-trf-space-qc-separated-quasi-coherent-pushforward] to $\\varphi$ and $\\mathcal O_U$: $\\mathcal F=\\varphi_*\\mathcal O_U$ is quasi-coherent. This uses no finiteness property of $f$ or of $X\\to V$.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-sfb-space-affine-locality",
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6 (proposition-vanishing-affine), proof, from the choice of U through the surjectivity checked on U."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-algebra-finite-presentation-localization], clause (1), to the etale affine scheme map $p_0:\\operatorname{Spec}C\\to\\operatorname{Spec}B$ from step 1. Hence $C$ is a finitely presented, in particular finitely generated, algebra via $t:B\\to C$. Choose finitely many algebra generators $c_1,\\ldots,c_r$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6 (proposition-vanishing-affine), proof, from the choice of U through the surjectivity checked on U."
+   }
+  },
+  {
+   "text": "Lift each $c_j$ through $q$ and express its lift as a finite sum $\\sum_k b_{jk}\\otimes b\\prime_{jk}$. Collect the finitely many second entries $b\\prime_{jk}$ into a list $g_1,\\ldots,g_m$ in $B$. Then $c_j=\\sum_k t(b_{jk})s(b\\prime_{jk})$, so every $c_j$ lies in the $t(B)$-subalgebra generated by the $s(g_i)$. As the $c_j$ generate $C$, so do the $s(g_i)$. An empty list is allowed, in particular if $C$ is already generated by its coefficient ring.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6 (proposition-vanishing-affine), proof, from the choice of U through the surjectivity checked on U."
+   }
+  },
+  {
+   "text": "Each $g\\in B$ gives a global section of $\\mathcal F$: in every chart diagram of [def-trf-space-etale-module-functors], pull back $g$ along the chart map to the source $U$; these sections commute with all chart restrictions, hence define the required cones and compatible sections on $X$. Conversely the identity chart of $U$ recovers $g$ from such a global family, giving $\\Gamma(X,\\mathcal F)=B$. The free-algebra property in the statement defines $e:\\mathcal P=\\mathcal O_X[z_1,\\ldots,z_m]\\to\\mathcal F$. By [lem-trf-space-etale-module-pushforward-restriction], its restriction to $U_0$ has target $(p_0)_*\\mathcal O_R$ and sends $z_i$ to $s(g_i)$: the section comes from $U_1$, so it pulls back along $p_1$. For any affine etale scheme $T=\\operatorname{Spec}D\\to U_0$, [lem-weil-pbc-fibre-product-affine-spectra] identifies $T\\times_XU_1=R\\times_{U_0}T$ with $\\operatorname{Spec}(C\\otimes_{B,t}D)$. The section formula in the restriction node identifies $\\mathcal F(T)$ with this ring. Each element is a finite sum of $c\\otimes d$. Expressing $c$ as a polynomial in the $s(g_i)$ over $t(B)$ rewrites it as a polynomial in $s(g_i)\\otimes1$ over $D$. This polynomial gives a section of $\\mathcal P(T)$ (coefficients in $\\mathcal O_X(T)=D$ and the specified global variables), whose image is the given section. Thus $e(T)$ is surjective on these tests; no claim that arbitrary sheaf sections are globally pure tensors is needed.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6 (proposition-vanishing-affine), proof, from the choice of U through the surjectivity checked on U."
+   }
+  },
+  {
+   "text": "For any scheme object $W\\to X$ of the small etale site, [lem-trf-space-fibre-products-etale-covers] gives the surjective etale scheme cover $W\\times_XU_0\\to W$. Use [lem-weil-pbc-affine-opens-basis] to cover its source by affine open schemes $T_a$. The projections $T_a\\to U_0$ are etale: both projections of the fibre product are etale, and the open inclusions are etale by [lem-weil-pbc-open-immersion-etale]. Thus these are tests from step 5. More formally, the base-change and composition assertions of [lem-trf-space-chartwise-etale-permanence] give both this etaleness and the composite covering family $\\{T_a\\to W\\}$. Every section of $\\mathcal F(W)$ consequently lifts through $e$ on that cover. By [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective], $e$ is surjective as a map of sheaves. It is also surjective as a map of algebra sheaves: two algebra maps agreeing after $e$ agree locally on these lifts, and therefore agree by the sheaf condition.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6 (proposition-vanishing-affine), proof, from the choice of U through the surjectivity checked on U."
+   }
+  },
+  {
+   "text": "The structure module $\\mathcal O_X$ is quasi-coherent by its free presentation in [def-trf-space-quasi-coherent-module]. The polynomial algebra $\\mathcal P$, as a module, is the small direct sum of one copy of $\\mathcal O_X$ for each monomial, exactly as specified in the statement. The direct-sum assertion of [lem-sfb-space-qcoh-kernels-colimits] makes $\\mathcal P$ quasi-coherent. Its target $\\mathcal F$ is quasi-coherent by step 2. Apply the kernel assertion of that same node to the underlying module map of $e$ to obtain the required quasi-coherent kernel. No cohomology vanishing has been used.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03M1 (lemma-properties-quasi-coherent), parts (1) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-sfb-space-affine-locality",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sfb-space-qcoh-kernels-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V6 (proposition-vanishing-affine), proof, from the choice of U through the surjectivity checked on U."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine surjective etale chart U of a separated algebraic space X the pushforward of O U is a finite type O X algebra generated by finitely many global sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is locally of finite type, $ U $ is an affine open subset of $ Y $, and $ V $ is an affine open subset of $ X $ contained in the preimage of $ U $ under $ f $, \"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type. For any affine open subset $U \\\\subseteq Y$ and affine open subset $V \\\\subseteq X$ contained in $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, meaning that $ \\\\Gamma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes that is locally of finite type, if $ U $ is an affine open subset of $ Y $ and $ V $ is an affine open subset of $ X $ contained in $ f^{-1}(U) $, then the indu\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generators of an affine etale equivalence relation algebra descend to polynomial generators of the direct image algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePresentation.toPresentation_val\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (a : Fin 2),\\n  P.toPresentation.val a =\\n    (P.lift P.x ⋯)\\n      (P.equivMvPolynomialQuotient.symm\\n        ((Ideal.Quotient.mk\\n            (Ideal.span\\n              \", \"doc\": \"Given a standard étale presentation $ P $ of an $ R $-algebra $ S $, the $ i $-th generator ($ i = 0, 1 $) of the algebra presentation corresponds to the image of $ X_i $ in the quotient ring $ R[X_0,\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → StandardEtalePresentation R S → Algebra.Presentation R S (Fin 2) (Fin 2)\", \"doc\": \"The algebra presentation of $ S $ over a commutative ring $ R $ using two generators and two relations derived from a standard étale pair $ (f, g) $. Specifically, it constructs $ S $ as the quotient \"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_σ'\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\\\sigma' $ associated to the presentation\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_relation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (a : Fin (Nat.succ 1)),\\n  P.toPresentation.relation a =\\n    ![(Polynomial.Bivariate.equivMvPolynomial R) (Polynomial.C P.f),\\n        (Polynomial.Bivariate.equivMvPol\", \"doc\": \"For a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, the relations defining the quotient ring are given by the polynomial $ f $ and the equation $ Yg - 1 $, where $ Y $\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_algebra_algebraMap_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (p : MvPolynomial (Fin 2) R),\\n  Algebra.algebraMap p =\\n    MvPolynomial.eval₂ (algebraMap R S)\\n      ((⇑(P.lift P.x ⋯) ∘\\n          ⇑P.equivMvPolynomialQuotient.symm \", \"doc\": \"The algebra map from a commutative ring $ R $ to an $ R $-algebra $ S $, when applied to a multivariate polynomial $ p $ in two variables, corresponds to evaluating $ p $ with coefficients mapped via \"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation\", \"doc\": \"For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePresentation.P\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_4} →\\n  {S : Type u_5} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → StandardEtalePresentation R S → StandardEtalePair R\", \"doc\": \"Given a standard étale presentation of an algebra $ S $ over a commutative ring $ R $, this function constructs the corresponding standard étale pair, which encodes the polynomial ring over $ R $, a l\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsQuasicoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|etale.*polynomial.*surject|pushforward.*algebra.*generat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine etale presentation of separated algebraic space direct image algebra finitely generated by global sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $X$ is affine if the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, where $\\\\Gamma(X)$ denotes the ring of global sections of $X$.\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsAffineHom (f ≫ g)] [IsSeparated g] : IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms or ring algebras only; no theorem for algebraic spaces or one-line specialization gives this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|etale.*polynomial.*surject|pushforward.*algebra.*generat",
+   "results": "{\"t\": \"2026-10-23T12:00:22Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|etale.*polynomial.*surject|pushforward.*algebra.*generat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms or ring algebras, not algebraic-space sheaf polynomial generators"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a separated algebraic space an affine surjective etale chart has direct image algebra generated by finitely many global sections",
+   "results": "{\"t\": \"2026-10-23T12:00:23Z\", \"tool\": \"leansearch\", \"query\": \"For a separated algebraic space an affine surjective etale chart has direct image algebra generated by finitely many global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\"], \"digest\": \"c2bafe3edd06d821\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms or ring algebras, not algebraic-space sheaf polynomial generators"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsQuasicoherent\"",
+   "results": "{\"t\": \"2026-10-23T12:00:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsQuasicoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms or ring algebras, not algebraic-space sheaf polynomial generators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite global polynomial generators for pushforward of the structure sheaf of an affine etale chart of a separated algebraic space",
+   "results": "{\"t\": \"2026-10-23T12:00:32Z\", \"tool\": \"leanfinder\", \"query\": \"Finite global polynomial generators for pushforward of the structure sheaf of an affine etale chart of a separated algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.P\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePresentation\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.exists_subalgebra_fg\", \"StandardEtalePresentation.toPresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"6a8a6220c0cb16ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms or ring algebras, not algebraic-space sheaf polynomial generators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generators from the second factor of an affine etale equivalence relation give a surjective polynomial sheaf algebra on an algebraic space",
+   "results": "{\"t\": \"2026-10-23T12:01:43Z\", \"tool\": \"leanfinder\", \"query\": \"Generators from the second factor of an affine etale equivalence relation give a surjective polynomial sheaf algebra on an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePresentation.toSubmersivePresentation\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.toPresentation_val\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardEtale.of_surjective\"], \"digest\": \"1002d76ea391c1b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme morphisms or ring algebras, not algebraic-space sheaf polynomial generators"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-serre-affineness",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. The affine etale presentation and polynomial-algebra surjection in Tag 07V6, before using H^1 to lift sections.",
+   "via": [
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-etale-polynomial-generators",
+  "worker": "stage1",
+  "summary": "Q65 expanded Stacks 07V6 into the closed affine-overlap quotient, etale finite generation, finite second-factor extraction, explicit affine-test lifting and covering argument, and quasi-coherent kernel. Reuses existing nodes throughout; no new nodes, no statement correction, no Lean attachment. Read sources and all cited node statements; no cohomology or finite-type hypothesis added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. The affine etale presentation and polynomial-algebra surjection in Tag 07V6, before using H^1 to lift sections.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-separated-affine-chart-overlap",
+    "why": "Generic Affine overlaps of affine charts of a separated space over an affine base input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic The fibre product of affine schemes is the spectrum of the tensor product input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic A morphism between affine schemes is affine (Stacks 01SH) input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic Quasi-compact separated direct image preserves quasi-coherence on spaces input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "why": "Generic An etale algebra is finitely presented, and its principal localizations are etale input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic Etale localization commutes with direct image of arbitrary space modules input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic Chartwise etale permanence for algebraic spaces input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Generic A morphism of sheaves of sets on a site is an epimorphism iff it is locally surjective input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic The affine opens of a scheme form a basis of its topology (Stacks 01IT) input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic An open immersion of schemes is etale input for the Stacks 07V6 affine-chart argument; no node of this unit states this prerequisite, and the alteration/direct-image route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-7e8e72d1a",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-7e8e72d1a (reviewer sub-agent of L); spot-checked: Read the whole item, all 16 cited node statements and Stacks 07V6 (spaces-cohomology.tex 2953-2975). The 7 steps follow the source exactly, from the choice of U up to the surjectivity checked on U; the H^1 lifting is left to the citer lem-sfb-space-serre-affineness, which uses it correctly. Statement and stmt_deps are unchanged against side-live, live is still unsplit, there is no repair note and no new node. Step checks: (1) the overlap node with S=Spec Z gives R affine and j a closed immersion; the affine-spectra node and the affine clause of 01QO give q: B⊗_A B ->> C, b⊗b' -> t(b)s(b'). (2) R->U_0 is the base change of phi and affine by 01SH; affine-locality makes phi affine, hence qc and separated; the pushforward node then gives phi_*O_U quasi-coherent. (3) Etale implies finite presentation. (4) The elementary extraction of second factors checks out, and m=0 is allowed. (5) Sections over T are C⊗_{B,t}D via pushforward-restriction plus affine spectra over Spec B, and the polynomial rewriting is correct. (6) Cover by W×_X U_0, then affine opens, then the locally-surjective epi criterion. (7) The polynomial algebra is a small direct sum, and the kernel clause gives a quasi-coherent kernel. Edge cases X empty, X affine with U=X, and a finite disjoint union all hold. No unused hypothesis. Batch-5: none of the 5 flagged trf nodes (separated-affine-chart-overlap, qc-separated-qcoh-pushforward, etale-module-pushforward-restriction, fibre-products-etale-covers, chartwise-etale-permanence) reaches any trf/pd theorem node, nt-assume, nt-target or trace-transport. They are generic algebraic-space foundations and are accepted. The declared tool_uses are generic and accepted. No SGA cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineEtalePolynomialGenerators",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_etale_polynomial_generators",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.absoluteBaseChangeToIntegers",
+   "AlgebraicGeometry.AlgebraicSpace.PolynomialAtlasPresentation",
+   "AlgebraicGeometry.AlgebraicSpace.affine_etale_polynomial_generators"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtalePolynomialGenerators.lean",
+  "statement": "theorem affine_etale_polynomial_generators {S : Scheme.{u}} (X : AlgebraicSpace S) (V : Scheme.{u}) [IsAffine V] (f : absoluteBaseChangeToIntegers X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from V))) (hf : IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) (Limits.pullback.diagonal f.hom.hom)) (U : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) [IsAffine U.left] (p : schemeSpace U ⟶ absoluteBaseChangeToIntegers X) (hp : IsEtale p.hom.hom) (hs : IsSurjective p.hom.hom) : Nonempty (PolynomialAtlasPresentation U p)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The output witness fixes the direct-image algebra by all its existing chart projections and fixes the polynomial algebra by its monomial coproduct universal property. The algebra evaluation and its underlying module map agree on every section. The two added statement dependencies are landed interfaces; no source statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40121cc7e",
+  "group": "NC",
+  "result": "pass",
+  "note": "All hypotheses and conclusion clauses match the node and Stacks 07V6/03M1: absolute f to an affine V with closed-immersion diagonal (IsRepresentableWith, identical to the MapIsSeparated body); U affine, surjective etale; quasiCoherent on moduleDirectImage p; globals B ≃ sections fixed on every chart; F's algebra structure fixed by the existing direct-image projections; P fixed as the free algebra by monomial_eq and the SheafOfModules coproduct; evaluation is an Under-category (O_X-algebra) map with z_i ↦ g_i; locally surjective; kernel of evaluationModule ≫ underlying is quasi-coherent; m=0 allowed; no extra hypotheses. Mechanical theorem stmt_dep lem-sfb-space-change-base-to-integers: the statement uses the functor J that the theorem's conclusion constructs (Classical.choose of exists_spaceChangeBase, fixed up to unique iso by the sigma/projection/restriction formulas), so PASS on that point. The added def-sfb-space-quasi-coherent-algebra is correct. lean.statement is verbatim; the node copy differs from live only in lean and stmt_deps; imports exist live; docstrings and the 7-step proof are present; only sorry. Advisory: hf inlines MapIsSeparated; the Second reading section is a self-check. No compile (no change)."
+ }
+}

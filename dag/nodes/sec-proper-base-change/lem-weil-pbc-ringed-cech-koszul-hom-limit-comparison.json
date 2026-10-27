@@ -12,46 +12,46 @@
  ],
  "proof": [
   {
-   "text": "1. Compose the augmentation-compatible colimit isomorphism for the positive Koszul diagram with the telescope-to-colimit quasi-isomorphism. Apply Hom into a functorial K-injective replacement. Each finite Hom identifies with tensor by the dual by evaluation, with its total-complex sign.",
+   "text": "1. Take the augmentation-compatible colimit isomorphism alpha. Contravariant Hom of alpha followed by the ordinary-limit evaluation isomorphism gives a natural chain isomorphism v:Hom(Cech,-) ≅ lim T(-). The augmentation equation and the ordinary-limit unit equation identify inverse unit evaluation, augmentation precomposition and v with the actual ordinary-limit unit.",
    "uses": [
     "lem-weil-pbc-ringed-cech-koszul-colimit-iso",
-    "lem-pc-complex-hocolim-colimit",
-    "lem-weil-pbc-split-perfect-tensor-kinjective"
+    "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit"
    ],
    "elementary": false
   },
   {
-   "text": "2. Hom of the telescope is the fibre of one minus shift on the product of those Hom complexes. They are K-injective, so their products compute derived products. The strict-tower Roos comparison computes the derived inverse limit. The right-derived universal property and D.comparison identify it with D.inverseLimit, while D.tensorFactors identifies the descended actual tower.",
+   "text": "2. Use the canonical functorial K-injective resolution I and its quasi-isomorphism eta. The fixed localization factorization of derived internal Hom identifies Q followed by Cech completion with Q Hom(Cech,I(-)). Compose with v, D.comparison at T(I(-)), and the inverse of D.tensorFactors. The acyclicity lemma makes the middle comparison invertible. Finally invert D.completion(Q(eta)) to obtain an isomorphism Q followed by Cech completion ≅ Q followed by D.completion. Fully faithful precomposition by Q descends this natural isomorphism.",
    "uses": [
-    "lem-pc-ringed-space-product-kinjective",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-pbc-ringed-koszul-system"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "3. All comparisons are natural chain comparisons and hence descend through localization. The augmentation sends x to the fibre coordinate (0,(x)_m), exactly the compatible degree-zero dual Koszul units. This proves the unit equation on representative complexes, and the representative isomorphisms in D.unit transport it to every object.",
-   "uses": [
+    "lem-weil-pbc-ringed-koszul-tensor-tower-limit-acyclic",
     "def-pur-derived-internal-hom",
     "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Naturality of the chain isomorphism and evaluation at one makes the ordinary-limit unit natural; combine with naturality of D.comparison and D.tensorFactors to show D.unitOnComplex is natural. Evaluate the descended isomorphism on the chosen representative of E. Naturality of the product-localization factorization moves augmentation precomposition past it; its inverse cancels the factorization. The ordinary-limit unit equation from step 1 replaces the remaining chain map. Naturality of D.unitOnComplex moves Q(eta) past the unit and cancels its inverse. Finally naturality of the descended comparison and of precomposition transports the equation along Q.objObjPreimageIso E, giving exactly D.unit E.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit",
+    "def-weil-pbc-ringed-koszul-system",
+    "def-pur-derived-internal-hom",
+    "lem-sc-hom-complex-unit-evaluation-naturality"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ringed-cech-koszul-colimit-iso",
-  "lem-pc-complex-hocolim-colimit",
-  "lem-weil-pbc-split-perfect-tensor-kinjective",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit",
+  "lem-weil-pbc-ringed-koszul-tensor-tower-limit-acyclic",
+  "def-pur-derived-internal-hom",
   "def-weil-pbc-ringed-koszul-system",
-  "def-pur-derived-internal-hom"
+  "lem-sc-hom-complex-unit-evaluation-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0A0A and 0941; more-algebra.tex Tag 0913; derived.tex Tag 0949",
-  "note": "Separated from the normalized comparison existence argument; finite-complex and categorical glue are written explicitly in Lean."
+  "place": "Tags 0A0A and 0941, with ordinary-complex evaluation and limit-acyclicity separated",
+  "note": "The Lean proof constructs and descends the natural isomorphism and proves its unit normalization explicitly. Two strictly smaller chain/acyclicity statements remain."
  },
  "mathlib_searches": [
   {
@@ -110,7 +110,18 @@
   "by": "C1",
   "date": "2026-10-18"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-19",
   "by": "L",
@@ -122,12 +133,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "A8",
   "result": "pass",
-  "landing": "20261019T005258-L-2747351",
+  "landing": "20261025T142801-L-764548",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

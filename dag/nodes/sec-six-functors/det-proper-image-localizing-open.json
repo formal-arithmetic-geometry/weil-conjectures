@@ -21,81 +21,119 @@
  ],
  "proof": [
   {
-   "text": "The exact additive module-object extension by zero induces the triangulated functor J = D(j_!) by [lem-sf-exact-functor-derived-triangulated]. Its existing cohomology comparison identifies H^n(J K) with j_! H^n(K), so the existing bounded_mapDerivedCategory_obj lemma preserves boundedness. Use the derived adjunction already constructed from [sk-def-sfb-module-lower-shriek]; its left adjoint J preserves colimits of every discrete shape by [lem-weil-pbc-left-adjoint-preserves-colimits], including empty and larger-indexed existing coproducts.",
+   "text": "Put $E=j_!$, $R=j^*$ and $J=D(E)$. [sk-def-sfb-module-lower-shriek] gives exactness and the adjunction. [lem-sf-exact-functor-derived-triangulated] makes $J$ triangulated; [lem-weil-pbc-exact-functor-bounded-below] gives $H^q(JK)\\simeq E H^q(K)$ and preservation of every cohomological interval.",
    "uses": [
     "sk-def-sfb-module-lower-shriek",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; blueprint Formal properties paragraph"
-   }
-  },
-  {
-   "text": "Apply [det-def-localizing-closure-existence] to the generating predicates on U and X. It supplies the actual localizing closures as replete triangulated subcategories and supplies the ambient small coproducts. For the final restriction, closure under object-universe existing coproducts implies closure under each smaller Discrete I by the equivalence with Discrete (ULift I). Mathlib full-subcategory inclusions therefore create and preserve these coproducts.",
-   "uses": [
-    "det-def-localizing-closure-existence",
-    "sk-def-localizing-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tags 079Q (remark-existence-D), 07D9 (lemma-derived-products), together with categories.tex Tag 0038 (lemma-adjoint-exact); blueprint Formal properties paragraph"
-   }
-  },
-  {
-   "text": "For a bounded constructible finite-Tor object K, boundedness follows from step 1. The standing finite-type scheme U is qcqs, so its constant-model constructibility hypothesis supplies an actual Scheme.Stratification of each H^n(K). Copy the stratification fields into a finite locally closed stratification, retaining the constructibility proof separately. Apply [lem-sf-open-extension-zero-constant-model-constructible] to those fields and the finite constant local models. That declaration gives constructibility of j_!H^n(K). Transfer the same stratification and scalar models along the inverse-image images of the cohomology isomorphism from step 1. This gives constantModelBoundedConstructible for J K.",
-   "uses": [
-    "sk-def-sfb-constructible",
-    "lem-sf-open-extension-zero-constant-model-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
-    "place": "entire proof (extension of a constructible stratification by the reduced closed complement); blueprint Constructibility paragraph"
-   }
-  },
-  {
-   "text": "Use the existing proved source-library open projection comparison isIso_openImmersionProjectionComparison (WeilConjectures.PoincareDuality.ProjectionFormula) for arbitrary commutative condensed coefficients; this is the open special case of the argument in the source locally closed projection-formula argument. Given a Tor interval [a,b] for K and any module M on X, the exactness comparison Lj^*(M[0]) ≅ D(j^*)(M[0]) ≅ (j^*M)[0] identifies the Tor test object. The projection comparison yields J(K tensor Lj^*(M[0])) ≅ J K tensor M[0]. The source Tor hypothesis and homologyConcentratedIn_mapDerivedCategory_obj show the first object concentrated in [a,b]; transfer across the isomorphism. The same interval works for every M, without an integral Dctf=Dbc assertion.",
-   "uses": [
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-module-lower-shriek"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-projection.proof.md",
-    "place": "Derived version and open immersion case; blueprint Finite Tor amplitude paragraph, replacing its unsupported integral equality"
-   }
-  },
-  {
-   "text": "Implement directly the defining intersection argument of [sk-def-localizing-closure]. The inverse image under J of the target localizing closure is triangulated and replete by Mathlib inverse-image instances. It is closed under every existing object-universe coproduct because J is a left adjoint: transfer the target closure property across preservesColimitIso. Step 4 maps every generator into the target generators and hence into their closure. Evaluating membership in the source intersection on this inverse-image candidate gives the required object map h. The canonical lift is triangulated by the Mathlib lift instance. Both inclusions create and preserve the smaller-indexed coproducts by step 2; their composite with J preserves them, and the target inclusion reflects them, proving preservation by the lift.",
-   "uses": [
-    "sk-def-localizing-closure",
-    "det-def-localizing-closure-existence",
-    "lem-weil-pbc-left-adjoint-preserves-colimits"
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
-    "place": "Localizing categories paragraph"
+    "place": "Formal properties; Stacks Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "[det-def-localizing-closure-existence] supplies ambient sums and localizing closures. Termwise sums and [lem-weil-pbc-left-adjoint-preserves-colimits] for $E\\dashv R$ give preservation by $J$: the degreewise comparisons form a chain isomorphism respecting coprojections. [lem-sf-full-subcategory-universe-coproduct-lift] supplies the ULift reindexing and inherited sums for both closures.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sf-full-subcategory-universe-coproduct-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "Formal properties; returned step 2"
+   }
+  },
+  {
+   "text": "For $K\\in\\Dctf(U,\\Lambda)$, use [sk-def-sfb-constructible] and the witness conversion of [lem-sf-constant-model-stratification-transport] on $U$. Apply [lem-sf-open-extension-zero-constant-model-constructible] to $H^q(K)$ with those witnesses. Apply the transport assertion to $EH^q(K)\\simeq H^q(JK)$ from step 1. It gives the same finite scalar models on the extended strata and bounded constructibility of $JK$.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-sf-constant-model-stratification-transport",
+    "lem-sf-open-extension-zero-constant-model-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "Constructibility; returned step 3"
+   }
+  },
+  {
+   "text": "The two counits [def-sfb-upper-star-tensor-counit, def-sfb-derived-pullback-tensor-left-counit], [lem-sfb-derived-pullback-tensor-left-derived] and [lem-sfb-derived-pullback-tensor-comparison-iso] give $m$, with $\\mu=m^{-1}$ by [lem-sfb-derived-pullback-strong-monoidal]. Transport via [def-sfb-left-derived-exact] and the canonical coefficient identification of [def-sfb-condensed-pullback-tensor-comparison]. Its unique localization equation is the same counit equation defining $m$, so the transported $m$ is $t^D$. Thus [def-sfb-open-closed-internal-hom-comparisons] defines precisely the mate of $\\eta_K\\otimes1$ followed by $\\mu$. [lem-weil-pbc-qcqs-morphism-permanence](1) gives quasi-compactness of $j$ ($U$ qc, $X$ separated). Choose the reduced closed complement supplied in step 3. [lem-sfb-condensed-support-projection-formula] makes this mate $q_{K,L}:J(K\\otimes^LLj^*L)\\to JK\\otimes^LL$ invertible.",
+   "uses": [
+    "def-sfb-upper-star-tensor-counit",
+    "def-sfb-derived-pullback-tensor-left-counit",
+    "lem-sfb-derived-pullback-tensor-left-derived",
+    "lem-sfb-derived-pullback-tensor-comparison-iso",
+    "lem-sfb-derived-pullback-strong-monoidal",
+    "def-sfb-left-derived-exact",
+    "def-sfb-condensed-pullback-tensor-comparison",
+    "def-sfb-open-closed-internal-hom-comparisons",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-condensed-support-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "Finite Tor amplitude: canonical open support projection; Stacks Tags 09AA (lemma-closed-immersion), 09BN (lemma-open-immersion), 0G7D (lemma-factor-through-K-flat)."
+   }
+  },
+  {
+   "text": "Use $P=Lj^*$ and its exact comparison [def-sfb-left-derived-exact]. Step 4 is precisely the projection hypothesis of [lem-sf-exact-adjoint-derived-tor-tests]. Its derived isomorphism identifies $JK\\otimes^LN[0]$ with $J(K\\otimes^L(j^*N)[0])$ for every module $N$ on $X$ and preserves the Tor interval from [sk-def-sfb-constructible]. Together with step 3 this proves $JK\\in\\Dctf(X,\\Lambda)$.",
+   "uses": [
+    "def-sfb-left-derived-exact",
+    "lem-sf-exact-adjoint-derived-tor-tests",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "Finite Tor amplitude; returned step 4"
+   }
+  },
+  {
+   "text": "By [sk-def-localizing-closure], target generators belong to their closure. Steps 1, 2 and 5 meet [det-proper-image-localizing-principle], which gives the object map into the target closure via its inverse-image intersection criterion. Apply [lem-sf-full-subcategory-universe-coproduct-lift] to the canonical lift: the inclusions create and preserve the smaller sums and the target inclusion reflects them. Its exactness and sum preservation follow.",
+   "uses": [
+    "sk-def-localizing-closure",
+    "det-proper-image-localizing-principle",
+    "lem-sf-full-subcategory-universe-coproduct-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
+    "place": "Localizing categories; returned step 5"
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-module-lower-shriek",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "det-def-localizing-closure-existence",
-  "sk-def-localizing-closure",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-full-subcategory-universe-coproduct-lift",
   "sk-def-sfb-constructible",
-  "lem-sf-open-extension-zero-constant-model-constructible"
+  "lem-sf-constant-model-stratification-transport",
+  "lem-sf-open-extension-zero-constant-model-constructible",
+  "def-sfb-upper-star-tensor-counit",
+  "def-sfb-derived-pullback-tensor-left-counit",
+  "lem-sfb-derived-pullback-tensor-left-derived",
+  "lem-sfb-derived-pullback-tensor-comparison-iso",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "def-sfb-left-derived-exact",
+  "def-sfb-condensed-pullback-tensor-comparison",
+  "def-sfb-open-closed-internal-hom-comparisons",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-sf-exact-adjoint-derived-tor-tests",
+  "sk-def-localizing-closure",
+  "det-proper-image-localizing-principle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.proof.md",
-  "place": "Formal properties, Constructibility, Finite Tor amplitude and Localizing categories; X5 Lean implementation using the proved open projection comparison and the closure intersection directly"
+  "place": "All four paragraphs, preserving the returned proof route; scalar constant-model witness, universe-lift, and canonical derived Tor-test arguments are now statement-only nodes."
  },
  "mathlib_searches": [
   {
@@ -160,6 +198,128 @@
    "results": "SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, ComplexShape.Embedding.extendFunctor_obj, HomologicalComplex.instIsStrictlySupportedExtend, HomologicalComplex.map_isStrictlySupported, HomologicalComplex.isZero_extend_X, SheafOfModules.isQuasicoherent",
    "date": "2026-10-16",
    "verdict": "no match: results concern local finite presentation of module sheaves and extension of complex shapes, not preservation of constructibility and Tor amplitude by an open immersion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves constructible finite Tor complexes, coproducts, and the localizing closure of these complexes",
+   "results": "CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.TStructure.t, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, complex-extension, presheaf colimit or t-structure results do not state extension by zero on constant-model finite-Tor constructible localizing categories"
+  },
+  {
+   "tool": "grep",
+   "query": "extension.?by.?zero|openImmersionLowerShriek|constructibleTor",
+   "results": "",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, complex-extension, presheaf colimit or t-structure results do not state extension by zero on constant-model finite-Tor constructible localizing categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero preserves constructible complexes of finite Tor dimension and direct sums",
+   "results": "HomologicalComplex.extend.d, HomologicalComplex.extendMap_zero, HomologicalComplex.extend.X, HomologicalComplex.instHasZeroObject, HomologicalComplex.extend.instHasHomology, HomologicalComplex.extend_single_d, CategoryTheory.Abelian.Ext.comp_zero, HomologicalComplex.extend",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, complex-extension, presheaf colimit or t-structure results do not state extension by zero on constant-model finite-Tor constructible localizing categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"PreservesColimits\"",
+   "results": "CategoryTheory.Presheaf.preservesColimitsOfSize_leftKanExtension, CategoryTheory.Presheaf.preservesColimitsOfSize_of_isLeftKanExtension, CategoryTheory.Presheaf.isLeftKanExtension_of_preservesColimits, CategoryTheory.Presheaf.instIsLeftKanExtensionFunctorOppositeTypeIdCompUliftYonedaOfPreservesColimitsOfSizeOfHasPointwiseLeftKanExtension, CategoryTheory.Presheaf.isLeftAdjoint_of_preservesColimits, PresheafOfModules.toPresheaf_preservesColimitsOfSize, PresheafOfModules.toPresheaf_preservesColimitsOfShape, PresheafOfModules.evaluation_preservesColimitsOfSize",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, complex-extension, presheaf colimit or t-structure results do not state extension by zero on constant-model finite-Tor constructible localizing categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension by zero functor for sheaves of modules maps finite Tor amplitude constructible objects and their localizing closure to the corresponding target subcategories",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.isHomological_of_localization, ModuleCat.localizedModule_functor_map_exact, DerivedCategory.isGE_Q_obj_iff, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact-functor, complex-extension, presheaf colimit or t-structure results do not state extension by zero on constant-model finite-Tor constructible localizing categories"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimitsOfShape_mapDerivedCategory",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the item; logged repair search for an independently missing intermediate argument. Generic search hits are discussed in report.md."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"mapDerivedCategory\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the item; logged repair search for an independently missing intermediate argument. Generic search hits are discussed in report.md."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between monoidal abelian categories with an exact right adjoint satisfying the derived projection formula preserves each Tor amplitude interval",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor",
+     "CategoryTheory.Tor",
+     "CategoryTheory.Tor'",
+     "CategoryTheory.Functor.mapExactFunctor_smul",
+     "CategoryTheory.Functor.map_distinguished_exact",
+     "CategoryTheory.Functor.exact_tfae",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the item; logged repair search for an independently missing intermediate argument. Generic search hits are discussed in report.md."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedUnderColimitsOfShape.*(equivalence|of_equivalence)|of_equivalence|createsColimitsOfShapeFullSubcategory",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Limits/FullSubcategory.lean",
+     "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+     "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+     "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+     "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+     "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean",
+     "Mathlib/CategoryTheory/Limits/Preserves/Filtered.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the item; logged repair search for an independently missing intermediate argument. Generic search hits are discussed in report.md."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full subcategory closed under coproducts indexed in a larger universe inherits coproducts indexed by smaller sets via equivalence with ULift and the inclusion creates them",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.hasCoproducts_shrink",
+     "CategoryTheory.MorphismProperty.coproducts_of_small",
+     "CategoryTheory.Limits.createsColimitsOfShapeFullSubcategoryInclusion",
+     "CategoryTheory.Limits.createsColimitFullSubcategoryInclusionOfClosed",
+     "CategoryTheory.Limits.hasColimitsOfShape_of_closedUnderColimits",
+     "CategoryTheory.Limits.hasColimit_of_closedUnderColimits",
+     "CategoryTheory.Limits.hasCoproductsOfShape_of_small",
+     "CategoryTheory.Limits.createsColimitFullSubcategoryInclusion"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the item; logged repair search for an independently missing intermediate argument. Generic search hits are discussed in report.md."
   }
  ],
  "mathlib_match": null,
@@ -180,52 +340,106 @@
  "chapter": "sec-six-functors",
  "unit": "sk-lem-sf-open-ctf",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "det-proper-image-localizing-open",
   "worker": "stage1",
-  "summary": "Made the source standing scheme setting and ordinary module-object categories explicit; supplied exactness, arbitrary derived coproducts, bounded constructibility and a uniform Tor-interval proof from existing nodes. No new nodes. Recorded the omitted-setting issue and the unsupported integral equality in the report. Maintainer-reader repair (2026-10-17): step 3 now proves constructibility in the constant-local-model sense of sk-def-sfb-constructible through the new statement node lem-sf-open-extension-zero-constant-model-constructible (lem-sfb-dc-open-lower-shriek-preserves only gives the weaker locally-finitely-presented constructibility of sk-def-sfb-bounded-constructible); step 2 cites det-def-localizing-closure-existence (1) instead of re-proving Grothendieck abelianness and derived coproducts inline.",
-  "blueprint": "Steps 1-2 realize Formal properties; step 3 realizes Constructibility (the exactness identity and the stratification of X by the strata of U and the closed complement) through lem-sf-open-extension-zero-constant-model-constructible; step 4 realizes Finite Tor amplitude uniformly by its open tensor argument; step 5 realizes Localizing categories. The chapter and unit route are unchanged.",
+  "summary": "Repair of D1 and C3/C4: three new independently stated arguments of comparable size retain the stratification adapter, the ULift/Discrete full-subcategory inheritance and reflection argument, and the canonical all-module Tor-test comparison. The five maintainer-added tensor nodes are consumed in constructing the specific canonical projection mate, which is used in the next step. Existing exactness, coproduct existence, heart extension-by-zero and localizing-generation statements are cited without duplication. Statement and Lean record unchanged. Repair of the batch-5 route return: replace the PD projection citation by the existing canonical condensed support projection formula in sec-six-functors-basics. Match its tensor comparison to the five retained counit/derived-comparison inputs by the defining localization equation, and verify quasi-compactness using qcqs-morphism-permanence. Three original new statement-only nodes retained unchanged.",
+  "blueprint": "Steps 1-2: Formal properties (old steps 1-2); step 3: Constructibility, including the omitted adapter; steps 4-5: Finite Tor amplitude through the actual Lj^* projection mate; step 6: Localizing categories, retaining the old inverse-image intersection and canonical-lift sum argument through the cited statements.",
   "tool_uses": [
    {
-    "node": "det-def-localizing-closure-existence",
-    "why": "Clause (1) gives all small direct sums of the ambient module-object derived categories, computed termwise; a generic existence statement of the localizing-closure definition, not a constructibility result of another unit."
-   },
-   {
     "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Derives the exact additive sheaf functor as a triangulated functor; this general categorical construction is not a separate result of this unit."
+    "why": "Generic exact-functor localization to a triangulated functor."
    },
    {
     "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Turns the existing sheaf-level open adjunction into preservation of all small coproducts; this is a generic categorical tool."
+    "why": "Generic categorical colimit preservation applied to the sheaf-level open adjunction."
    },
    {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Identifies the coefficient pullback with exact inverse image for the Tor test sheaf; it is a generic coefficient-compatibility tool."
-   },
-   {
-    "node": "det-lem-int-tensor-projection",
-    "why": "The general module-object locally closed projection formula, specialized to an open immersion, proves the Tor interval without assuming the unsupported integral equality."
+    "node": "det-def-localizing-closure-existence",
+    "why": "Existence and termwise computation of ambient derived coproducts."
    },
    {
     "node": "det-proper-image-localizing-principle",
-    "why": "The exact sum-preserving functor criterion for localizing closures is the final formal argument explicitly required by the blueprint proof."
+    "why": "The exact sum-preserving restriction criterion explicitly required by the blueprint final paragraph."
+   },
+   {
+    "node": "def-sfb-upper-star-tensor-counit",
+    "why": "Existing generic exact/derived tensor comparison used explicitly for the derived pullback and the Tor test; retains the maintainer-recorded upstream dependency."
+   },
+   {
+    "node": "lem-sfb-derived-pullback-tensor-left-derived",
+    "why": "Existing generic exact/derived tensor comparison used explicitly for the derived pullback and the Tor test; retains the maintainer-recorded upstream dependency."
+   },
+   {
+    "node": "def-sfb-derived-pullback-tensor-left-counit",
+    "why": "Existing generic exact/derived tensor comparison used explicitly for the derived pullback and the Tor test; retains the maintainer-recorded upstream dependency."
+   },
+   {
+    "node": "lem-sfb-derived-pullback-tensor-comparison-iso",
+    "why": "Existing generic exact/derived tensor comparison used explicitly for the derived pullback and the Tor test; retains the maintainer-recorded upstream dependency."
+   },
+   {
+    "node": "lem-sfb-derived-pullback-strong-monoidal",
+    "why": "Existing generic exact/derived tensor comparison used explicitly for the derived pullback and the Tor test; retains the maintainer-recorded upstream dependency."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Its unbounded cohomology comparison supplies exact-functor cohomological intervals."
+   },
+   {
+    "node": "def-sfb-left-derived-exact",
+    "why": "The canonical exact-derived comparison identifies the derived pullback with its termwise functor."
+   },
+   {
+    "node": "def-sfb-condensed-pullback-tensor-comparison",
+    "why": "The unique normalized pullback tensor comparison identifies the five required derived tensor inputs after exact-functor transport."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Clause (1) verifies quasi-compactness of the open map from its quasi-compact source and separated target."
+   },
+   {
+    "node": "lem-sfb-condensed-support-projection-formula",
+    "why": "Generic normalized open support projection on ordinary unbounded condensed module objects; its adjunction mate is exactly the q required for the Tor test. This is a basic open-localization tool, outside the PD route."
    }
   ]
  },
  "tool_uses": [
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "det-def-localizing-closure-existence"
+  "det-def-localizing-closure-existence",
+  "det-proper-image-localizing-principle",
+  "def-sfb-upper-star-tensor-counit",
+  "lem-sfb-derived-pullback-tensor-left-derived",
+  "def-sfb-derived-pullback-tensor-left-counit",
+  "lem-sfb-derived-pullback-tensor-comparison-iso",
+  "lem-sfb-derived-pullback-strong-monoidal",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "def-sfb-left-derived-exact",
+  "def-sfb-condensed-pullback-tensor-comparison",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-condensed-support-projection-formula"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q125-bf61a7891",
-  "group": "Q125",
+  "reviewer": "NT-cc-O2-75f1be1bf",
+  "group": "O2",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-bf61a7891 (reviewer sub-agent of L); spot-checked: Read the item, the main-20261015 blueprint statement and proof of det-proper-image-localizing-open, the unit sk-lem-sf-open-ctf, and every cited node statement. Steps 1, 4 and 5 are correct. Step 4 specializes det-lem-int-tensor-projection with u=j, i=id_X; its tensor and u_! agree with the Tor definition of sk-def-sfb-constructible, so it proves the Tor interval for all admissible Λ in the module-object category. Step 5 meets every hypothesis of det-proper-image-localizing-principle. Fault 1, step 3 (C4/E6): lem-sfb-dc-open-lower-shriek-preserves only gives constructibility in the locally-finitely-presented sense (sk-def-sfb-bounded-constructible / def-sfb-constructible-module). Dctf of sk-def-sfb-constructible needs finite constant local models, which det-def-sfb-constructible-local-model says is strictly stronger, so JK∈Dctf(X) was not proved. Repair: new statement-only node lem-sf-open-extension-zero-constant-model-constructible (unit sk-lem-sf-open-ctf, from = the blueprint 'Constructibility' paragraph). It says the strata of U plus the reduced complement X∖U stratify X, (j_!M)|_{U_a}≅M|_{U_a} and (j_!M)|_Z=0. Tested on U=∅, U=X and M=0. Step 3 now uses this node with H^r(JK)≅j_!H^r(K) from step 1. Fault 2, step 2 (2201 characters): it proved inline the Grothendieck property and the termwise derived coproducts, which det-def-localizing-closure-existence (1) already states. It now cites that node (checked: no cycle), and what remains (1288 characters) is the routine argument that j_! commutes with coproducts. split_report tool_uses and proof_deps are updated. The maintainer should drop the stale top-level tool_uses entries for lem-sfb-dc-open-lower-shriek-preserves, def-weil-pbc-internal-abelian-sheaf-module-equivalence, lem-weil-pbc-ring-sheaves-grothendieck and lem-kun-grothendieck-derived-coproducts. Route: lem-trf-open-ctf works in a different finite-torsion coefficient category, so the uniform Tor argument is accepted. det-thm-sf-ctf-stability-direct-images (2) generalizes clause 1 but lies downstream, so it is not cited. The statement is unchanged and no target is weakened.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-75f1be1bf (reviewer sub-agent of L); spot-checked: Third delivery. I diffed it against the returned head db4a673e. The three new nodes are byte-identical, and only step 4, proof_deps and split_report changed; the statement, stmt_deps and Lean record are unchanged. The batch-5 fault of db4a is repaired: the PD node lem-pd-condensed-open-exceptional-projection-formula is no longer cited. Step 4 now cites lem-sfb-condensed-support-projection-formula (basics, generic, with several basics citers) through def-sfb-open-closed-internal-hom-comparisons. I checked that its map is the Tor-test q term for term. The five Lj^* tensor nodes give m by (counits;c)∘m=c' and μ=m^{-1}. Transported along the canonical α of def-sfb-left-derived-exact (counit corresponds to fac), composing with Q(d) gives exactly the left-to-right normalization of def-sfb-condensed-pullback-tensor-comparison for all complexes A,B. Uniqueness gives m=t^D, so the open projection, defined as the adjunct of (η⊗1) followed by (t^D)^{-1} with the adjunction transported from j_!⊣upperStar, is ε∘J(μ)∘J(η⊗1). Hypotheses: Λ is a commutative condensed ring; j is quasi-compact by lem-weil-pbc-qcqs-morphism-permanence(1) (U finite type, X separated); the reduced complement Z=X∖U is stated by lem-sf-open-extension-zero-constant-model-constructible. The formula holds for all unbounded objects. Edge cases U=∅ and U=X checked. Closure recomputed: 855 nodes (824 without the step-4 additions); the 31 added are closed-support, étale-algebra and pro-étale infrastructure, with no pd, pod, poincare or trf node. Steps 1-3, 5 and 6 and the three new nodes were re-read and are true and not duplicates. The re-split note is met: 3 statement-only nodes of about 2k characters each, a 2847-character assembly, every old argument mapped to a new or existing node. No SGA. Accepted tool_uses: the support projection formula, the exact-functor/left-adjoint/localizing-closure/localizing-principle nodes and the five tensor nodes. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.OpenImmersionLocalizing",
   "declaration": "AlgebraicGeometry.ProEtale.openImmersionLowerShriek_localizing",

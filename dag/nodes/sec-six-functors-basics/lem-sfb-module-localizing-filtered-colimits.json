@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-module-localizing-filtered-colimits",
+ "kind": "statement",
+ "title": "Module localizing subcategories are closed under directed colimits of modules",
+ "statement": "Let $R$ be a commutative ring and let $D(R)$ be its ordinary unbounded module derived category [def-weil-abstract-derived-category]. Let $\\mathcal L$ be a full subcategory closed under isomorphisms, integer shifts, distinguished triangles, retracts, and set-indexed coproducts. Let $I$ be a nonempty small partially ordered set such that every pair of elements has an upper bound, and let $(M_i,u_{ij})_{i\\le j}$ be a directed system of $R$-modules: $u_{ii}=1$ and $u_{jk}u_{ij}=u_{ik}$. Write $M=\\varinjlim_{i\\in I}M_i$ for the colimit in $R$-modules [def-weil-pbc-category-colimit], characterized by its compatible universal cocone. If $M_i[0]\\in\\mathcal L$ for every $i$, then $M[0]\\in\\mathcal L$. All indexing sets and coproducts lie in the fixed universe of the modules. No Noetherian hypothesis and no injectivity of the transition maps are required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00DB (lemma-directed-colimit-exact), exactness of directed module colimits; agent bar-resolution corollary for localizing subcategories, not the verbatim statement of that tag. Its independent proof is supplied in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Let $D:I\\to\\mathrm{CoCh}(\\operatorname{Mod}(R))$ send $i$ to $M_i[0]$ and $i\\le j$ to $u_{ij}[0]$. Colimits of complexes are computed degreewise, so $(M[0],(q_i[0])_i)$ is a colimit cocone of $D$ [def-weil-pbc-category-colimit]. By [lem-weil-pbc-ring-modules-grothendieck-abelian] the module category is abelian, has all small coproducts and colimits, and its filtered colimits are exact; $I$ is a nonempty directed poset, hence a filtered category, so colimits of shape $I$ are exact. Let $B^\\bullet$ be the bar total of $D$ [def-sc-preorder-bar-total]. Since every $D(i)$ is concentrated in degree $0$, its degree $-n$ term is $B^{-n}=B_n=\\bigoplus_{i_0\\leq\\cdots\\leq i_n}M_{i_0}$ for $n\\geq0$ (chains with repeated indices included), and its positive terms vanish. By [lem-sc-preorder-bar-filtered-augmentation] the canonical augmentation $\\epsilon:B^\\bullet\\to M[0]$ of the colimit cocone is a quasi-isomorphism. No monicity of $u_{ij}$ is used.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "def-sc-preorder-bar-total",
+    "lem-sc-preorder-bar-filtered-augmentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/PreorderBarFilteredAugmentation.lean",
+    "place": "CategoryTheory.PreorderBar.augmentation_quasiIso, applied to the single-degree diagram of modules; Stacks Tag 00DB (algebra-lemma-directed-colimit-exact) for exactness of directed module colimits."
+   }
+  },
+  {
+   "text": "The module category is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian]. Apply [lem-kun-grothendieck-derived-coproducts] to the family $M_{i_0}[0]$ indexed by all chains of length $n+1$. Its termwise sum is $B_n[0]$, so $B_n[0]\\in\\mathcal L$ by the hypothesis on every $M_i[0]$ and closure under coproducts. Finite powers of the small set $I$, and their subsets of chains, lie in the stipulated universe.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0A5L (lemma-direct-sums), 0152 (lemma-derived-canonical-delta-functor), 0949 (lemma-colim-hocolim); agent assembly with the explicit bar augmentation"
+   }
+  },
+  {
+   "text": "For $n\\geq0$ let $F_n$ be the brutal subcomplex of $B^\\bullet$ in degrees $[-n,0]$: use $B^r$ and its differential there and zero terms elsewhere. Inductively $Q(F_n)\\in\\mathcal L$. The base is $F_0=B_0[0]$. For $n\\geq1$ there is the degreewise split short exact sequence $0\\to F_{n-1}\\to F_n\\to B_n[n]\\to0$; its quotient has the single term $B_n$ in degree $-n$. By [lem-pc-cone-short-exact-quasi-iso], its cone triangle becomes a distinguished triangle with third term $B_n[n]$ after localization [def-weil-abstract-derived-category]. Shift closure and the preceding step put this third term in $\\mathcal L$, so triangle closure gives the inductive step.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0A5L (lemma-direct-sums), 0152 (lemma-derived-canonical-delta-functor), 0949 (lemma-colim-hocolim); agent assembly with the explicit bar augmentation"
+   }
+  },
+  {
+   "text": "The inclusions $F_n\\to B^\\bullet$ and $F_n\\to F_{n+1}$ are degreewise injective and compatible. Each degree $r\\leq0$ is already exhausted when $n\\geq-r$, and every positive degree is zero. Thus [lem-pc-derived-module-filtration-telescope], applied to these subcomplexes, supplies a coproduct $S$ of the $Q(F_n)$ and a distinguished triangle $S\\to S\\to Q(B^\\bullet)\\to S[1]$. The index $\\operatorname{ULift}\\mathbf N$ remains in the module universe. Both copies of $S$ lie in $\\mathcal L$ by coproduct closure, hence $Q(B^\\bullet)\\in\\mathcal L$ by triangle closure.",
+   "uses": [
+    "lem-pc-derived-module-filtration-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0A5L (lemma-direct-sums), 0152 (lemma-derived-canonical-delta-functor), 0949 (lemma-colim-hocolim); agent assembly with the explicit bar augmentation"
+   }
+  },
+  {
+   "text": "Localization inverts the quasi-isomorphism $\\epsilon$ of step 1 [def-weil-abstract-derived-category]. Therefore $Q(B^\\bullet)\\cong M[0]$, and closure under isomorphisms gives $M[0]\\in\\mathcal L$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0A5L (lemma-direct-sums), 0152 (lemma-derived-canonical-delta-functor), 0949 (lemma-colim-hocolim); agent assembly with the explicit bar augmentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "def-sc-preorder-bar-total",
+  "lem-sc-preorder-bar-filtered-augmentation",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-module-filtration-telescope"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Q43 bar-resolution assembly; Tags 0152 and 0949 for finite subcomplex triangles and exhaustive telescopes, together with the existing preorder bar augmentation lemma lem-sc-preorder-bar-filtered-augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A localizing subcategory of the derived category of modules is closed under filtered colimits of modules concentrated in degree zero",
+   "results": "{\"t\": \"2026-10-23T18:07:17Z\", \"tool\": \"leanfinder\", \"query\": \"A localizing subcategory of the derived category of modules is closed under filtered colimits of modules concentrated in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor\", \"Condensed.instAB5CondensedMod\", \"HasDerivedCategory.standard\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"HasDerivedCategory\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"25414b612ce712c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|filtered.*(derived|homotopy)|homotopy.*colimit",
+   "results": "{\"t\": \"2026-10-23T18:10:35Z\", \"tool\": \"grep\", \"query\": \"localizing|localising|filtered.*(derived|homotopy)|homotopy.*colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/Condensed/Light/Monoidal.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\"], \"digest\": \"9aa59e7db03a1fbe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing subcategories of the derived category of modules are closed under filtered direct limits of degree zero modules",
+   "results": "{\"t\": \"2026-10-23T18:10:35Z\", \"tool\": \"leansearch\", \"query\": \"Localizing subcategories of the derived category of modules are closed under filtered direct limits of degree zero modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.FilteredColimits.colimit\", \"HasDerivedCategory.standard\", \"CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal\", \"HomologicalComplex.instHasFilteredColimitsOfSize\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HasDerivedCategory\", \"ModuleCat.FilteredColimits.M\", \"ModuleCat.FilteredColimits.M.mk\"], \"digest\": \"1b673e2c43d4e7c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-23T18:10:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered direct limit of modules lies in any triangulated subcategory of the module derived category closed under coproducts that contains all modules of the diagram",
+   "results": "{\"t\": \"2026-10-23T18:10:36Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered direct limit of modules lies in any triangulated subcategory of the module derived category closed under coproducts that contains all modules of the diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"92e729b8de14bf29\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|filtered.*colimit|homotopy.*colimit",
+   "results": "{\"t\": \"2026-10-23T18:11:47Z\", \"tool\": \"grep\", \"query\": \"localizing|localising|filtered.*colimit|homotopy.*colimit\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\", \"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\", \"Mathlib/Algebra/Homology/GrothendieckAbelian.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Plus.lean\"], \"digest\": \"7db16bee81f2f34b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|hocolim|filtered.*colimit",
+   "results": "{\"t\": \"2026-10-23T18:11:47Z\", \"tool\": \"grep\", \"query\": \"localizing|localising|hocolim|filtered.*colimit\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\"], \"digest\": \"0cc8d9b37c0b28c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|hocolim|filtered.*colimit",
+   "results": "{\"t\": \"2026-10-23T19:11:09Z\", \"tool\": \"grep\", \"query\": \"localizing|localising|hocolim|filtered.*colimit\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean\"], \"digest\": \"0cc8d9b37c0b28c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; ordinary filtered-colimit objects and derived t-structure/localization infrastructure do not assert closure of coproduct-closed triangulated subcategories under directed module colimits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-23T19:11:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; ordinary filtered-colimit objects and derived t-structure/localization infrastructure do not assert closure of coproduct-closed triangulated subcategories under directed module colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated subcategory of the unbounded derived category of modules closed under coproducts is closed under filtered direct limits of modules in degree zero",
+   "results": "{\"t\": \"2026-10-23T19:11:13Z\", \"tool\": \"leanfinder\", \"query\": \"A triangulated subcategory of the unbounded derived category of modules closed under coproducts is closed under filtered direct limits of modules in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.TStructure.t\", \"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"], \"digest\": \"f6cf65301501d333\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; ordinary filtered-colimit objects and derived t-structure/localization infrastructure do not assert closure of coproduct-closed triangulated subcategories under directed module colimits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing subcategories of derived module categories contain filtered colimits of their degree zero objects",
+   "results": "{\"t\": \"2026-10-23T19:11:39Z\", \"tool\": \"leansearch\", \"query\": \"Localizing subcategories of derived module categories contain filtered colimits of their degree zero objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasFilteredColimitsOfSize\", \"ModuleCat.FilteredColimits.colimit\", \"ModuleCat.FilteredColimits.colimitModule\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"ModuleCat.FilteredColimits.M.mk\", \"ModuleCat.FilteredColimits.M\", \"HasDerivedCategory.standard\", \"AddMonCat.FilteredColimits.colimit\"], \"digest\": \"dfb9e08eceb130ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; ordinary filtered-colimit objects and derived t-structure/localization infrastructure do not assert closure of coproduct-closed triangulated subcategories under directed module colimits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of degree zero modules belong to the localizing triangulated subcategory generated by the terms of the directed diagram",
+   "results": "{\"t\": \"2026-10-23T19:11:40Z\", \"tool\": \"leanfinder\", \"query\": \"Filtered colimits of degree zero modules belong to the localizing triangulated subcategory generated by the terms of the directed diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.IsGE\", \"DerivedCategory.IsLE\", \"DerivedCategory.TStructure.t\", \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.instIsLEObjSingleFunctor\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\"], \"digest\": \"b60cb89f68dccdd6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; ordinary filtered-colimit objects and derived t-structure/localization infrastructure do not assert closure of coproduct-closed triangulated subcategories under directed module colimits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-full-support-localizing-generation",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial dual detects maps between relatively perfect complexes. Supporting input: Noetherian full-support generation, used before extension back to the arbitrary base. Supporting input: closure under the directed union of the finitely generated submodules of the torsion quotient of a domain fraction field.",
+   "via": [
+    "lem-sfb-noetherian-full-support-localizing-generation",
+    "lem-sfb-relative-perfect-polynomial-dual-detection",
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-module-localizing-filtered-colimits",
+  "worker": "stage1",
+  "summary": "Kept the full statement, including arbitrary small directed posets and noninjective transitions. Resolved the colimit by the preorder bar total of the single-degree diagram (existing lem-sc-preorder-bar-filtered-augmentation), built each finite brutal subcomplex from its module terms, then applied the existing exhaustive-module-filtration telescope. Reviewer FIX: the delivered statement-only bar-augmentation node duplicated that Lean-closed existing node and was dropped; all infrastructure is reused.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md clause (3), supporting alteration/duality prerequisites in the inherited creation chain: localizing generation uses directed unions of finitely generated modules. ancestor command returns null for this inherited non-blueprint chain; preserved that provenance and filled the precise bar construction place.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic termwise coproduct theorem, specialized to ordinary modules; no result of this unit states that universal property."
+   },
+   {
+    "node": "lem-pc-derived-module-filtration-telescope",
+    "why": "Generic exhaustive subcomplex telescope, specialized to brutal subcomplexes of the bar complex; no result of this unit supplies that triangle."
+   },
+   {
+    "node": "lem-sc-preorder-bar-filtered-augmentation",
+    "why": "Generic, Lean-closed preorder bar augmentation for exact colimits of shape I, specialized to a directed system of modules in degree 0; replaces the duplicate new node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pc-derived-module-filtration-telescope",
+  "lem-sc-preorder-bar-filtered-augmentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-71dac83a4",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-71dac83a4 (reviewer sub-agent of L); spot-checked: Read the item, the new node, all six cited statements and Stacks 00DB/00D6/00D7 (algebra.tex), 0949/0152 (derived.tex). The item statement is unchanged and correct. Steps 2-5 check out. Step 2: termwise coproduct over chains via lem-kun-grothendieck-derived-coproducts. Step 3: the brutal subcomplex F_{n-1} sits inside F_n with quotient B_n[n], via the cone short-exact lemma. The induction is set up correctly. Step 4: the hypotheses of the module filtration telescope hold (monos, degreewise exhaustion), giving S->S->Q(B)->S[1]. Step 5: localization and iso closure. I checked the new node by hand: d^2=0, the contraction with the appended endpoint k, and the degree-0 kernel via 00D7. It is true, but it duplicates an existing node (C5). The existing Lean-closed lem-sc-preorder-bar-filtered-augmentation (CategoryTheory.PreorderBar.augmentation_quasiIso, no sorry) works for any preorder I and abelian A with coproducts and exact colimits of shape I. Applied to D(i)=M_i[0], its bar total (def-sc-preorder-bar-total) is exactly the delivered B^• with augmentation epsilon. FIX: step 1 now cites def-weil-pbc-category-colimit (the colimit cocone M[0], computed degreewise; directed implies filtered), lem-weil-pbc-ring-modules-grothendieck-abelian (exact filtered colimits, coproducts), def-sc-preorder-bar-total and lem-sc-preorder-bar-filtered-augmentation. I updated proof_deps to the union of uses, the split_report summary and tool_uses, and dropped the new node. There is no cycle (the closure of the sc nodes does not contain the item). There is no repair note and no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleLocalizingFilteredColimits",
+  "declaration": "DerivedCategory.moduleLocalizing_filtered_colimit",
+  "file": "lean/Sheaf/CategoryTheory/ModuleLocalizingFilteredColimits.lean",
+  "statement": "theorem moduleLocalizing_filtered_colimit (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] (P : ObjectProperty (DerivedCategory (ModuleCat.{max u v} R))) [P.IsClosedUnderIsomorphisms] [P.IsTriangulated] [P.IsStableUnderRetracts] [∀ J : Type (max u v), P.IsClosedUnderColimitsOfShape (Discrete J)] (I : Type (max u v)) [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (M : I ⥤ ModuleCat.{max u v} R) (hM : ∀ i : I, P ((singleFunctor (ModuleCat.{max u v} R) 0).obj (M.obj i))) : P ((singleFunctor (ModuleCat.{max u v} R) 0).obj (colimit M))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfa498bc5",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Clause audit vs node: R CommRing; Mathlib DerivedCategory with HasDerivedCategory.{w}; P ObjectProperty with IsClosedUnderIsomorphisms, IsTriangulated (ContainsZero implied by empty coproduct closure), IsStableUnderRetracts, coproduct closure over Discrete J for J : Type (max u v); I PartialOrder+Nonempty+IsDirected in the module universe; M functor, no mono; canonical colimit M; singleFunctor 0 hypothesis and conclusion all match. Universes generalize (modules max u v); the telescope dep's binders are identical. Only the lean field changed vs side-live; statement verbatim; stmt_deps existing:true Mathlib; proof-dep modules exist; docstrings carry source 00DB, blueprint id and the 5-step plan; sorry only; no definitions. Item not yet landed live. Advisory: the second-reading section is the worker's self-audit."
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "def-sfb-relative-external-sections",
+ "kind": "definition",
+ "title": "Relative external sections and induced rational coactions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring and let $X,Y$ be schemes over $\\operatorname{Spec}R$ [def-pc-scheme, def-weil-affine-spectrum]. For a module sheaf $F$ on $X$ [def-weil-sheaf-of-modules-category], let $\\Gamma_R(X,F)$ be $\\Gamma(X,F)$ with scalars restricted along $R\\simeq\\Gamma(\\operatorname{Spec}R,\\mathcal O)\\to\\Gamma(X,\\mathcal O)$. Pullback of a section along $a$ is the section $1\\otimes s$ in the tensor pullback [def-pc-module-pullback], restricted from $a^{-1}(X)$ to the top open. For $P=X\\times_RY$ [def-pc-fibre-product] with projections $p_X,p_Y$, put $E(F,G)=p_X^*F\\otimes p_Y^*G$ using the existing sheaf tensor [def-pur-sheaf-tensor-product], and define $e(s,t)=p_X^*s\\otimes p_Y^*t\\in\\Gamma(P,E(F,G))$. The comparison of pullbacks across a commutative square is the composite of the section-normalized composition identifications and the equality of composite scheme maps. For $a:X'\\to X,b:Y'\\to Y$ over $R$, define $(a\\times b)^*E(F,G)\\simeq E(a^*F,b^*G)$ by the section-normalized tensor comparison [lem-weil-pbc-module-pullback-tensor] and the two projection squares. Let $H$ be an affine group scheme over $R$ with canonical coordinate Hopf algebra $C=R[H]$ [def-sfb-affine-coordinate-hopf-algebra]. If $H$ acts on $X,Y$, use the action-groupoid presentation [def-sfb-equivariant-coherent-gzero] and the existing groupoid module [def-sfb-scheme-groupoid-module] for a quasi-coherent linearized module: its descent isomorphism is $\\beta_F:a_X^*F\\simeq\\operatorname{pr}_X^*F$, the inverse of the forward linearization. The diagonal action on $P$ is the unique map with components $a_X\\circ(1_H\\times p_X)$ and $a_Y\\circ(1_H\\times p_Y)$. Its external descent is the tensor of $\\beta_F,\\beta_G$ pulled back along $1_H\\times p_X,1_H\\times p_Y$, with the above composition and tensor comparisons. A rational coaction means the existing counital coassociative $R$-linear right coaction [def-sfb-affine-group-distribution-calculus], using module tensor products [def-weil-pbc-module-tensor-product]. It is induced by a descent isomorphism $\\beta$ if for every finite presentation $\\rho(s)=\\sum_i s_i\\otimes c_i$ one has $\\beta(a^*s)=\\sum_i\\operatorname{pr}_H^*(S(c_i))\\operatorname{pr}_X^*(s_i)$, where $S$ is the antipode of $C$; thus $\\rho$ is the right coaction of the left module $(h\\cdot s)(x)=s(h^{-1}x)=\\sum_ic_i(h)s_i(x)$, which is what makes it compatible with $(\\rho\\otimes1)\\rho=(1\\otimes\\Delta)\\rho$ for a left action of a noncommutative $H$. These are definitions of actual sections, comparisons, and the induced-coaction predicate; no section base-change isomorphism is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-sfb-equivariant-coherent-gzero",
+  "def-sfb-scheme-groupoid-module",
+  "def-sfb-affine-group-distribution-calculus",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, maps preceding equation-kunneth-on-cech; the ring-base degree-zero formulas. Groupoids, Tag 03LF, definition-groupoid-module: inverse linearization and induced coordinate coactions."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Definitions of global sections of a sheaf of modules over a scheme over a commutative ring as modules over the base ring and external tensor sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.termΓ(_,_)\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Lean.ParserDescr✝\", \"doc\": \"The notation $\\\\Gamma(A, B)$ denotes the global sections of the sheaf $B$ over the scheme $A$.\"}\n  {\"name\": \"SheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules.{v} R) : Type _\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections of a sheaf of modules $M$ over $R$ consist of families of elements $s_X \\\\in M(X)\"}\n  {\"name\": \"ModuleCat.tildeInModuleCat\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \": TopCat.Presheaf (ModuleCat R) (PrimeSpectrum.Top R)\", \"doc\": \"The sheaf $\\\\widetilde{M}$ associated to an $R$-module $M$ over $\\\\operatorname{Spec}(R)$, constructed by localizing $M$ in the Zariski topology and restricting scalars via the global sections of the st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ(Spec R, ⊤) ≅ R\", \"doc\": \"The global sections of the structure sheaf on the scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"PresheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \"(M : PresheafOfModules.{v} R) : Type _\", \"doc\": \"For a presheaf of modules $ M $ on a category $\\\\mathcal{C}$, the sections of $ M $ consist of all families of elements $ s_X \\\\in M(X) $ assigned to each object $ X $ in $\\\\mathcal{C}$, such that for ev\"}\n  {\"name\": \"ModuleCat.tilde\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \": (Spec <| .of R).Modules\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-module $ M $, the tilde sheaf $ \\\\widetilde{M} $ on $ \\\\operatorname{Spec}(R) $ is constructed by localizing $ M $ over open sets in the Zariski topology. Sec\"}\n  {\"name\": \"SheafOfModules.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        (val : PresheafOfModules R.val) → CategoryTheory.Presheaf.IsSheaf J val.presheaf → SheafOfModules R\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, if a presheaf of modules over the underlying presheaf of $R$ satisfies the sheaf condition wi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact ring-base external-section interface: search returns ordinary sections/restriction of scalars/tensor facts; the project externalGlobalSectionsTensor and scalarObj require a field. The existing ring-base IsCoordinateCoaction is reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictScalars, TensorProduct",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"ModuleCat.extendScalarsComp_hom_app_one_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R₁ R₂ R₃ : Type u₁} [CommRing R₁] [CommRing R₂] [CommRing R₃] (f₁₂ : R₁ →+* R₂) (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendScalarsComp f₁₂ f₂₃).hom.app M)) (1 ⊗ₜ[R₁] m) = 1 ⊗ₜ[R₂] (1 ⊗ₜ[R₁] m)\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.ExtendScalars.smul_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {M : ModuleCat R} (s s' : S) (m : ↑M) : s • s' ⊗ₜ[R] m = (s * s') ⊗ₜ[R] m\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {Y : ModuleCat S} (a : TensorProduct R S ↑Y) : (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a = (TensorProduct.lift { toFun := fun s => { toFun := fun y => s • y, map_add' := ⋯, map_smul' := ⋯ }, map_add' :\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \" {R : Type u₁} {S : Type u₂} [CommRing R] [CommRing S] (f : R →+* S) {X : ModuleCat R} {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y) (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj ↧S) ↑X) : (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars \", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendsScalars_map_leftUnitor_inv_one_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction\", \"type\": \" {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendScalars f).map (CategoryTheory.MonoidalCategoryStruct.leftUnitor M).inv)) (1 ⊗ₜ[R] m) = 1 ⊗ₜ[R] (1 ⊗ₜ[R] m)\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.extendsScalars_map_rightUnitor_inv_one_tmul\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction\", \"type\": \" {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M) : (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendScalars f).map (CategoryTheory.MonoidalCategoryStruct.rightUnitor M).inv)) (1 ⊗ₜ[R] m) = 1 ⊗ₜ[R] (m ⊗ₜ[R] 1)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact ring-base external-section interface: search returns ordinary sections/restriction of scalars/tensor facts; the project externalGlobalSectionsTensor and scalarObj require a field. The existing ring-base IsCoordinateCoaction is reused."
+  },
+  {
+   "tool": "grep",
+   "query": "externalGlobalSections|relativeGlobalSections|IsCoordinateCoaction",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact ring-base external-section interface: search returns ordinary sections/restriction of scalars/tensor facts; the project externalGlobalSectionsTensor and scalarObj require a field. The existing ring-base IsCoordinateCoaction is reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-external-invertible-global-sections",
+  "date": "2026-10-24",
+  "group": "Q154"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Ring-base canonical external section and linearization/coaction interfaces for the integral two-equalizer argument.",
+   "via": [
+    "lem-sfb-dvr-external-invertible-global-sections",
+    "lem-sfb-dvr-rho-tensor-square-eventual-detection",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeExternalSections",
+  "declaration": "AlgebraicGeometry.RelativeExternalSections.sections",
+  "declarations": [
+   "AlgebraicGeometry.RelativeExternalSections.sections",
+   "AlgebraicGeometry.RelativeExternalSections.pullSection",
+   "AlgebraicGeometry.RelativeExternalSections.coefficients",
+   "AlgebraicGeometry.RelativeExternalSections.pure",
+   "AlgebraicGeometry.RelativeExternalSections.square",
+   "AlgebraicGeometry.RelativeExternalSections.pullTensor",
+   "AlgebraicGeometry.RelativeExternalSections.pullCoefficients",
+   "AlgebraicGeometry.RelativeExternalSections.diagonalAction",
+   "AlgebraicGeometry.RelativeExternalSections.externalDescent",
+   "AlgebraicGeometry.RelativeExternalSections.descent",
+   "AlgebraicGeometry.RelativeExternalSections.IsRational",
+   "AlgebraicGeometry.RelativeExternalSections.coordinateAntipode",
+   "AlgebraicGeometry.RelativeExternalSections.IsInduced"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeExternalSections.lean",
+  "statement": "def sections (R : CommRingCat.{u}) (X : Over (Spec R)) (F : X.left.Modules) : ModuleCat R",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2de37596",
+  "group": "Q154",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2de37596",
+  "group": "Q154",
+  "result": "fix",
+  "note": "H3/H5 in new node def-sfb-relative-external-sections: IsInduced combined right-coaction coassociativity (IsCoordinateCoaction) with beta(a^*s)=sum pr_H^*(c_i) pr_X^*(s_i) for the LEFT ModObj action; with Mathlib's Delta(c)(g,h)=c(gh) this forces H commutative (F=O, X=H=GL2 counterexample), so dvr_external_sections_coaction was vacuous for nonabelian groups. FIX: new helper coordinateAntipode (antipode of canonical coordinateHopfInstance) used in IsInduced, (h.s)(x)=s(h^-1 x); node statement sentence and lean.declarations updated in fixes/def-sfb-relative-external-sections.json; item module docstring only (signatures unchanged, diagonal c_i d_j still right since S multiplicative). Checked everything else: DVR/qc/separated/flat/invertible hypotheses exact, no Nonempty, pure-tensor-pinned K, naturality via normalized pullTensor (module_pullback_tensor pins on local pure tensors) and square comparisons, ActionGroupoidModel comp pinned, OverClass.fromOver gives the canonical Algebra R Gamma(H), single universe u, lean.statement verbatim, only sorry, docstrings with source/blueprint. nt_compile --json of both fixed modules rc=0; one later docstring line re-wrap not recompiled."
+ }
+}

@@ -1,0 +1,165 @@
+{
+ "id": "lem-sf-cyclic-derived-right-action",
+ "kind": "statement",
+ "title": "Right-derived transport commutes with cyclic conjugation",
+ "statement": "Let C and D be Grothendieck abelian categories [def-sp-grothendieck-abelian], F and G additive autoequivalences with their fixed-pair categories [def-weil-endofunctor-fixed-pair-category], and use chosen ordinary derived categories in independent morphism universes [def-weil-abstract-derived-category]. Let L:C→D be additive left exact, and e:L⋙G≅F⋙L. Let hF and hC be arbitrary witnesses that every complex in C^F, respectively C, admits a quasi-isomorphism into a K-injective complex. Write J=R(mapOfNatIso e) and H=RL for the recorded universal right-derived functors [def-sfb-right-derived-functor], and alpha=cyclicDerivedRightForgetComparison for the unique unit-normalized comparison of [def-sf-cyclic-derived-hom-data]. Equip H with any coherent integer-shift structure for which its recorded computation unit commutes with shifts. Write tr for cyclicDerivedHomTransport with this structure and alpha. For every M,N in D(C^F), integer r and u in V^r(M,N), one has tr(T^r(u))=T^r(tr(u)), with T the conjugation action of [def-sf-cyclic-derived-hom-data]. No boundedness is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of the right-derived companion proof plan in CyclicDerivedHomExactSequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-sf-cyclic-derived-hom-data"
+ ],
+ "proof": [
+  {
+   "text": "Resolve complexes representing M and N by K-injective fixed-pair complexes. Exact forgetting preserves K-injectives by [lem-sf-fixed-pair-derived-forget-comparison], and exact autoequivalences do likewise. Compute the recorded derived functors on these models using their invertible computation units [def-sfb-right-derived-functor].",
+   "uses": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of the right-derived companion proof plan in CyclicDerivedHomExactSequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+   }
+  },
+  {
+   "text": "The unit equation for alpha identifies the underlying computation with L(UI). At each model the equality defining mapOfNatIso e identifies the target structure isomorphism with L(theta) composed with e. Applying the inverse gives the analogous formula for the inverse structure. These formulas are natural in homotopy morphisms.",
+   "uses": [
+    "lem-sf-fixed-pair-derived-forget-comparison",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of the right-derived companion proof plan in CyclicDerivedHomExactSequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+   }
+  },
+  {
+   "text": "Represent the underlying degree-r morphism by a homotopy class into the shifted K-injective target using [lem-weil-pbc-kinjective-hom-derived]. Unit shift compatibility identifies its shifted computation with that of the target. Expand the two occurrences of T using [def-sf-cyclic-derived-hom-data]. Substitute the structure equations at M and N; naturality of e, associativity and the inverse identities cancel all comparison factors. This proves tr(Tu)=T(tr(u)). Naturality of the units and alpha transports the equality along the model isomorphisms. No boundary assertion or cohomological bound is used.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sf-cyclic-derived-hom-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of the right-derived companion proof plan in CyclicDerivedHomExactSequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "def-sfb-right-derived-functor",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-sf-cyclic-derived-hom-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of the right-derived companion proof plan in CyclicDerivedHomExactSequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorOfQuasiIsoResolutions|isLeftKanExtension.*[Ss]hift",
+   "results": "{\"t\": \"2026-10-27T11:41:52Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorOfQuasiIsoResolutions|isLeftKanExtension.*[Ss]hift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits cover ordinary exact-functor Ext maps, shifts or SES triangles, not the specified right-derived fixed-pair comparison and strict off-diagonal class."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"IsLeftKanExtension\"",
+   "results": "{\"t\": \"2026-10-27T11:41:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"CommShift\\\", \\\"IsLeftKanExtension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits cover ordinary exact-functor Ext maps, shifts or SES triangles, not the specified right-derived fixed-pair comparison and strict off-diagonal class."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A total right derived additive functor has coherent shift comparison compatible with its unit and preserves connecting morphisms of degreewise split exact complexes",
+   "results": "{\"t\": \"2026-10-27T11:41:53Z\", \"tool\": \"leanfinder\", \"query\": \"A total right derived additive functor has coherent shift comparison compatible with its unit and preserves connecting morphisms of degreewise split exact complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\"], \"digest\": \"f7e2de6538b426ee\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits cover ordinary exact-functor Ext maps, shifts or SES triangles, not the specified right-derived fixed-pair comparison and strict off-diagonal class."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangleOfSESδ\"",
+   "results": "{\"t\": \"2026-10-27T11:44:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"triangleOfSESδ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSESδ\", \"DerivedCategory.triangleOfSESδ_naturality\", \"DerivedCategory.triangleOfSESδ_naturality_assoc\", \"DerivedCategory.descShortComplex_triangleOfSESδ\", \"DerivedCategory.descShortComplex_triangleOfSESδ_assoc\", \"CategoryTheory.DerivedCategory.map_triangleOfSESδ\"], \"digest\": \"80180295862bca99\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits cover ordinary exact-functor Ext maps, shifts or SES triangles, not the specified right-derived fixed-pair comparison and strict off-diagonal class."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived equivariant functors commute with conjugation on derived Hom for an additive autoequivalence and preserve off diagonal extension presentations",
+   "results": "{\"t\": \"2026-10-27T11:44:23Z\", \"tool\": \"leanfinder\", \"query\": \"Derived equivariant functors commute with conjugation on derived Hom for an additive autoequivalence and preserve off diagonal extension presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapExtAddHom_apply\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapExtAddHom\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapExtLinearMap_apply\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\"], \"digest\": \"8e763684a7e38968\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits cover ordinary exact-functor Ext maps, shifts or SES triangles, not the specified right-derived fixed-pair comparison and strict off-diagonal class."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived functors of equivariant additive left exact functors preserve conjugation on shifted derived Hom and off diagonal extension connecting maps",
+   "results": "{\"t\": \"2026-10-27T11:44:33Z\", \"tool\": \"leansearch\", \"query\": \"Right derived functors of equivariant additive left exact functors preserve conjugation on shifted derived Hom and off diagonal extension connecting maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.mapExtAddHom.congr_simp\", \"CategoryTheory.Functor.mapExtAddHom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapExtLinearMap\"], \"digest\": \"f4f4e58a95b4f999\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits cover ordinary exact-functor Ext maps, shifts or SES triangles, not the specified right-derived fixed-pair comparison and strict off-diagonal class."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CyclicDerivedHomExactSequence",
+  "date": "2026-10-27",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final exceptional-adjunction sentence of cor-coef-verdier-weil-equivariance.proof.md; right-derived compatibility in native cyclic Hom foundation, the parent right-derived companion proof plan.",
+   "via": [
+    "lem-sf-cyclic-derived-hom-exact-sequence",
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CyclicDerivedRightAction",
+  "file": "lean/Sheaf/CategoryTheory/CyclicDerivedRightAction.lean",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedHomTransport_rightDerived_action",
+  "statement": "theorem cyclicDerivedHomTransport_rightDerived_action\n    (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)\n    (u : CyclicDerivedHom F M N r) :\n    cyclicDerivedHomTransport F G\n      ((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutions hF)\n      (L.rightDerivedFunctorOfQuasiIsoResolutions hC)\n      (fun r ↦ (L.rightDerivedFunctorOfQuasiIsoResolutions hC).commShiftIso r)\n      (cyclicDerivedRightForgetComparison F G L e hF hC) M N r\n      (cyclicDerivedHomAction F M N r u) =\n      cyclicDerivedHomAction G\n        (((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutions hF).obj M)\n        (((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutions hF).obj N) r\n        (cyclicDerivedHomTransport F G\n          ((mapOfNatIso e).rightDerivedFunctorOfQuasiIsoResolutions hF)\n          (L.rightDerivedFunctorOfQuasiIsoResolutions hC)\n          (fun r ↦ (L.rightDerivedFunctorOfQuasiIsoResolutions hC).commShiftIso r)\n          (cyclicDerivedRightForgetComparison F G L e hF hC) M N r u)",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-27",
+  "note": "The section assumption hσ is included explicitly with include hσ; it requires the chosen underlying shift structure to commute with the recorded right-derived unit. All four localization universes remain independent."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T123506-L-2308789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T123506-L-2308789",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "def-per-cartier-fraction-cover",
+ "kind": "definition",
+ "title": "Cartier fraction covers and strict-local Weil coefficients",
+ "status": "split",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme]. A Cartier fraction cover is a presentation by open sets $U_x$ containing each $x\\in Y$, with sections $n_x,d_x\\in\\mathcal O_Y(U_x)$ whose germs are non-zero-divisors at every point of $U_x$. On every overlap require $n_xd_t=u_{xt}n_td_x$ in each stalk for some regular unit $u_{xt}$. This is cover data presenting a Cartier divisor; different presentations are not new divisor objects. A presentation has coefficients $W:Y\\to\\mathbf Z$ if, for every codimension-one $z\\in U_x$ (meaning $\\dim\\mathcal O_{Y,z}=1$), $\\operatorname{ord}_{\\mathcal O_{Y,z}}(n_x)-\\operatorname{ord}_{\\mathcal O_{Y,z}}(d_x)=W(z)$, where order is quotient-module length (its finite natural-number value, or zero if infinite) as in [def-trf-affine-weil-divisor-class-group]. It is an effective presentation if $d_x=1$ for every $x$; its support is the set where $n_x/d_x$ is not a regular unit. An algebraic cycle with integral coefficients $E$ on $Y$ is the existing locally finitely supported integer-valued function on its points; a Weil cycle is supported at codimension-one points. Say $aE$ is Cartier when a fraction cover has coefficients $aE$. For $f:V\\to Y$, define its etale pullback coefficient at $z$ to be $E(f(z))$ if $\\dim\\mathcal O_{V,z}=1$, and zero otherwise. For a stalk algebra $\\varphi:\\mathcal O_{Y,y}\\to H$ and a height-one prime $q$ of $H$, define its strict-local coefficient as $E$ evaluated at the image of $\\varphi^{-1}(q)$ under $\\operatorname{Spec}\\mathcal O_{Y,y}\\to Y$. Say $aE$ is strictly locally principal if for every $y$, residue separable closure $K$, and strict henselization presentation $H$ [def-sc-ring-strict-henselization], $H$ is a Noetherian normal domain and there is $c\\in\\operatorname{Frac}(H)^\\times$ whose existing normalized height-one orders [def-trf-height-one-fraction-order] equal $a$ times these coefficients. The algebra universe may be any universe containing that of $Y$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-affine-weil-divisor-class-group",
+  "def-sc-ring-strict-henselization",
+  "def-trf-height-one-fraction-order"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex; literature/stacks-project/algebra.tex",
+  "place": "Divisors Tags 02OX (regular meromorphic sections), the local fraction definition in lem-per-weil-divisor-strict-local-cartier-test, 01WQ (effective Cartier equations), 0BE3 (orders of principal divisors), 0BE8 (regular units detected by orders), 0EBM (normal divisorial modules); Algebra Tag 04GW (pointed-etale strict henselization)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartier divisor local fractional equations regular unit ratios open cover scheme",
+   "results": "{\"t\": \"2026-10-24T03:00:24Z\", \"tool\": \"leansearch\", \"query\": \"Cartier divisor local fractional equations regular unit ratios open cover scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover\", \"AlgebraicGeometry.Scheme.AffineOpenCover.openCover\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"ModuleCat.Tilde.isLocallyFraction_pred\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\"], \"digest\": \"ad1378c5683d7c09\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Cartier fraction-cover presentation. Reuse the returned open-cover API and the existing affine Weil orders; none supplies unit-compatible fraction data on an arbitrary scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "CartierFractionCover, CartierDivisor",
+   "results": "{\"t\": \"2026-10-24T03:06:19Z\", \"tool\": \"loogle\", \"query\": \"CartierFractionCover, CartierDivisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CartierFractionCover'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Cartier fraction-cover presentation. Reuse the returned open-cover API and the existing affine Weil orders; none supplies unit-compatible fraction data on an arbitrary scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "CartierFractionCover|CartierDivisor|IsCartierWeilMultiple",
+   "results": "{\"t\": \"2026-10-24T03:06:19Z\", \"tool\": \"grep\", \"query\": \"CartierFractionCover|CartierDivisor|IsCartierWeilMultiple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Cartier fraction-cover presentation. Reuse the returned open-cover API and the existing affine Weil orders; none supplies unit-compatible fraction data on an arbitrary scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l CartierFractionCover|IsCartierWeilMultiple|IsStrictLocallyPrincipalWeilMultiple dag/nodes lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search \"Cartier fraction\"",
+   "results": "No rg hits. 0 blueprint nodes match 'Cartier fraction'. Concept search finds def-sfb-integral-cartier-divisor (only integral schemes) and def-sfb-space-divisors (algebraic-space small etale quotient sheaf). These are abstract Cartier-divisor objects, not a fraction-cover presentation on an arbitrary, possibly empty or disconnected scheme. Reuse Ring.weilOrder and Ring.weilFractionOrder from the existing nodes.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate presentation node or declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-weil-divisor-strict-local-cartier-test",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, the regular-pair modification input: ILO VIII 5.3.8, printed p.125, sentence beginning “it suffices to check this étale-locally at a point”; strict-local test for a fixed multiple, rather than only its support. Local fraction presentations and coefficient pullback for the strict-local test.",
+   "via": [
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierFractionCover",
+  "declaration": "AlgebraicGeometry.Scheme.CartierFractionCover",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CartierFractionCover",
+   "AlgebraicGeometry.Scheme.CartierFractionCover.HasCoefficients",
+   "AlgebraicGeometry.Scheme.CartierFractionCover.IsEffective",
+   "AlgebraicGeometry.Scheme.CartierFractionCover.support",
+   "AlgebraicGeometry.Scheme.IsCartierWeilMultiple",
+   "AlgebraicGeometry.Scheme.etaleWeilCoefficient",
+   "AlgebraicGeometry.Scheme.localWeilCoefficient",
+   "AlgebraicGeometry.Scheme.IsStrictLocallyPrincipalWeilMultiple"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierFractionCover.lean",
+  "statement": "structure CartierFractionCover (Y : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e300cba5",
+  "group": "Q92",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e300cba5",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Read item, new node def-per-cartier-fraction-cover, both modules, deps (IsNoetherian/IsLocallyNoetherian, inline normal form, StrictHenselizationPresentionIn with actual universal cocone, Ring.weilOrder/weilFractionOrder/WeilHeightOnePrime, Mathlib Ring.ord, AlgebraicCycle, fromSpecStalk). All clauses match: fixed a>0 iff, every y and separable closure K and presentation H in max u v, contracted coefficient rule, étale pullback + strict-local compatibility, Noetherian normal local domain plus finite support, effective cover with support ⋃ closures, r∈H nonzero, single non-zero-divisor equation on a pointed étale neighbourhood (determined by orders on normal V). Edge cases empty Y, E=0, disconnected Y, negative coefficients, field strict ring covered. No duplicate: existing Cartier nodes are effective ideal sheaves, integral-scheme or algebraic-space divisors; Mathlib Scheme.ord needs integral. Statement verbatim, docstrings/blueprint tags, sorry-only proofs, proof_dep imports exist, report sections present. Not recompiled (no fix). Advisory only: s is fixed by its orders rather than tied explicitly to C."
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-sp-qbar-positive-root-basis",
+ "kind": "statement",
+ "title": "Positive signed degrees from a compatible algebraic-closure root tower",
+ "statement": "Fix X, ell, W, compatible sections zeta_n and normalized module isomorphisms e_n as in lem-sp-qbar-root-basis. For every natural number d, the prescribed algebraic-closure twist in signed degree d+1 restricted to W is isomorphic to its degree-zero coefficient unit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), positive tensor powers of the compatible root basis"
+ },
+ "stmt_deps": [
+  "sk-def-sp-tate-twist"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a natural isomorphism between the rational coefficient diagram and the rational twist diagram after restriction to W, with components linear over each finite coefficient field. This is the finite-stage compatibility step; it takes no field colimit.",
+   "uses": [
+    "lem-sp-rational-root-diagram-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), positive tensor powers of the compatible root basis"
+   }
+  },
+  {
+   "text": "Slice restriction preserves colimits: Over.forget W is left adjoint to the product functor and the induced continuous sheaf pushforwards are adjoint. Pull back the coefficient colimit cocone and the twist colimit cocone to the slice. Precompose the latter by the rational diagram isomorphism, and use uniqueness of colimits to identify their points. To prove linearity, precompose the two proposed action maps by the diagonal tensor of the coefficient colimit cocone with itself. Siftedness and preservation of colimits by tensor make this a colimit cocone. The resulting stage equations are exactly finite-stage linearity, the multiplication formula for coefficient inclusions, and the defining diagonal formula for the actual Qbar twist action. Reconstruct the sectionwise module isomorphism; its target is the regular coefficient unit.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), positive tensor powers of the compatible root basis"
+   }
+  },
+  {
+   "text": "Apply the existing linePowerOverUnit construction to the degree-one isomorphism. Its induction uses restriction of sheaf tensor products, tensor congruence and the unit isomorphism. Unfolding spSignedTwist in nonnegative degrees yields the asserted degree d+1 isomorphism.",
+   "uses": [
+    "lem-weil-signed-line-tensor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), positive tensor powers of the compatible root basis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-rational-root-diagram-basis",
+  "sk-def-sp-tate-twist",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-signed-line-tensor-equivalence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H4",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), positive tensor powers of the compatible root basis",
+  "note": "Lean reduction proves colimit transport, compatibility with the actual action, section reconstruction and tensor powers; only the normalized rational-stage diagram is split off."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SpQbarRootBasis",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-qbar-root-basis",
+   "via": [
+    "sk-def-sp-tate-twist"
+   ],
+   "place": "clause (3), positive tensor powers"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpQbarPositiveRootBasis",
+  "file": "lean/Sheaf/Paper/SpQbarPositiveRootBasis.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spQbarPositiveRootBasis",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spQbarPositiveRootBasis"
+  ],
+  "statement": "theorem spQbarPositiveRootBasis\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]\n    [∀ x : X, Invertible (ℓ : X.residueField x)] (W : X.ProEt)\n    (ζ : ∀ n : ℕ, (Scheme.purTwistRootsModule X ℓ n).val.obj (op W))\n    (e : ∀ n : ℕ,\n      (SheafOfModules.unit (Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n))).over W ≅\n        (Scheme.purTwistRootsModule X ℓ n).over W)\n    (hζ : ∀ n : ℕ,\n      (Scheme.proEtaleRootsOfUnityTransition X (ℓ ^ (n + 1)) (ℓ ^ (n + 2))\n        (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)\n        (pow_dvd_pow ℓ (Nat.le_succ (n + 1)))).hom.app (op W) (ζ (n + 1)) = ζ n)\n    (he : ∀ (n : ℕ) (V : (Over W)ᵒᵖ)\n      (a : ((Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n)).over W).obj.obj V),\n      (e n).hom.val.app V a =\n        a • (Scheme.purTwistRootsModule X ℓ n).val.map V.unop.hom.op (ζ n))\n    (d : ℕ) :\n    Nonempty ((spSignedTwist X _ (spQbarTwist X ℓ) (d + 1)).over W ≅\n      (spSignedTwist X _ (spQbarTwist X ℓ) 0).over W)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T222657-L-680958",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T235905-L-1466217",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

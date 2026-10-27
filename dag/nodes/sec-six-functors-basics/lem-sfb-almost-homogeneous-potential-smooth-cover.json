@@ -1,0 +1,480 @@
+{
+ "id": "lem-sfb-almost-homogeneous-potential-smooth-cover",
+ "kind": "statement",
+ "title": "Potential smooth equivariant cover of an almost homogeneous scheme",
+ "statement": "Let $R$ be a Noetherian integrally closed domain of Krull dimension one with finitely many maximal ideals [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], $K=\\operatorname{Frac}R$, and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $G\\to S$ be a separated flat group scheme of finite type, and $X\\to S$ a separated flat scheme of finite presentation [def-pc-scheme, def-weil-flat-morphism, def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. A group scheme has multiplication, identity and inverse satisfying the group identities; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Suppose $G$ acts on $X$ and $X$ is a finite union of invariant open subschemes $X_j$ for which $G\\times_S X_j\\to X_j\\times_S X_j$, $(g,x)\\mapsto(gx,x)$, is surjective as an fppf sheaf morphism [def-pc-fibre-product, def-pc-fppf-site]. Then there exist a finite field extension $L/K$, the integral closure $R'$ of $R$ in $L$ (the elements of $L$ satisfying monic polynomials over $R$), $T=\\operatorname{Spec}R'$, a smooth separated finite-type $T$-group scheme $H$ with geometrically connected fibres (for every field $\\Omega$ and every morphism $\\operatorname{Spec}\\Omega\\to T$ the fibre $H_\\Omega=H\\times_T\\operatorname{Spec}\\Omega$ is connected), and a smooth separated finite-type $T$-scheme $Y$ with an $H$-action [def-sbc-smooth-morphisms, def-weil-connected-scheme]. The ring $R'$ is again a Noetherian integrally closed domain of dimension one with finitely many maximal ideals. There is a $T$-morphism $Y\\to X\\times_ST$ whose composite $q:Y\\to X$ is integral, surjective and has finite underlying fibres [def-weil-finite-integral-morphism]. For every algebraically closed field $\\Omega$ and map $\\operatorname{Spec}\\Omega\\to T$, the fibre $Y_\\Omega$ is a finite disjoint union of open $H_\\Omega$-orbits: each nonempty piece is open and any two of its points with values in any algebraically closed extension of $\\Omega$ are related by an element of $H$ over that extension. Empty $X$, empty fibres and pieces with only generic support are allowed. No commutativity, excellence, smoothness of $G$ or $X$, or finiteness of $R'$ as an $R$-module is assumed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Proposition 4.2.3 (OCR 4,2,5), printed pp.58–59, conclusions (i),(ii) and proof; Appendix II Corollaries 2 and 3, printed p.73: finite normalization after a finite fraction-field extension. Take the neutral component of the smooth normalized group; the proof identifies its geometric orbits with the connected components of the smooth normalized space. Krull–Akizuki for the semilocal integral closure; the projection to X is a finite normalization followed by an integral base change, not asserted finite over X. Local archive WANTED; primary scan read at https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-connected-scheme",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type generic fibres of $G$ and $X$ are Noetherian and have finitely many irreducible components. Apply [lem-pur-finite-inseparable-geometric-reduction] to their disjoint union to choose a finite purely inseparable $K_0/K$ for which both reduced generic fibres are geometrically reduced. Put $S_0=\\operatorname{Spec}R_0$, with $R_0$ the integral closure of $R$ in $K_0$. By [lem-sc-integral-closure-dedekind-surjective-fibres], $R_0$ is Dedekind and $S_0\\to S$ is surjective with finite fibres and finite residue extensions. Each maximal ideal of $R_0$ lies over one of the finitely many maximal ideals of $R$ (integrality); hence $R_0$ is semilocal. Its localizations at maximal ideals are DVRs by [lem-sc-normal-dim1-dvr].",
+   "uses": [
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 p.58, initial finite radicial extension; Stacks 04KT and 09IG for the generic reduction and base normalization."
+   }
+  },
+  {
+   "text": "Write $G_0=(G_{S_0})_{\\mathrm{red}}$ and $Z_0=(X_{S_0})_{\\mathrm{red}}$. They are separated finite type. They remain flat: locally on each DVR, the original affine algebra $B$ is torsion free by flatness. If $ab$ is nilpotent with nonzero base element $a$, then $a^nb^n=0$ implies $b^n=0$; thus $B/\\sqrt0$ is torsion free and therefore flat by [lem-weil-pbc-pid-torsion-free-module-flat] and the affine criterion. A flat affine algebra over a domain embeds in its generic localization; consequently a flat scheme with reduced generic fibre is reduced. This applies also to products of $G_0$ and $Z_0$: their affine tensor algebras are flat (tensoring two flat modules preserves injections successively), and their generic fibres are reduced by geometric reducedness. Hence multiplication, inverse, identity and the action factor uniquely through the reductions by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme]. The diagrams hold after the closed immersions, so define a group $G_0$ acting on $Z_0$. The same reducedness argument remains valid after further normalized finite base extension.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sc-normal-dim1-dvr",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sfb-flat-geometrically-reduced-pullback",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 p.58, reduced flat models and restriction of the action; Stacks 0356 for factorization into reductions."
+   }
+  },
+  {
+   "text": "For every algebraically closed field over $S_0$, the reduced models have the same field-valued points as the original base changes, by [lem-weil-pbc-reduction-universal-homeomorphism]. The given fppf-surjectivity therefore implies transitivity on each nonempty inherited open piece: the fibre of the action relation over a pair is a nonempty finite-type scheme over that algebraically closed field, so a maximal ideal in a nonzero affine chart gives a rational point by [lem-weil-pbc-zariski-lemma]. This also works after any algebraically closed extension. Invariant open pieces with a common geometric point are the same orbit; discard repetitions, obtaining finitely many disjoint open orbits. In particular this conclusion holds on the generic fibre. The geometrically reduced generic group $(G_0)_{K_0}$ is smooth by [lem-sfb-geometrically-reduced-group-smooth]. Apply [lem-sfb-finite-equivariant-open-orbits] with $P=Q=(G_0)_{K_0}$, $V=W=(Z_0)_{K_0}$ and both finite maps the identities. It gives smoothness of $(Z_0)_{K_0}$. Thus both generic fibres are geometrically normal by [lem-trf-smooth-geometrically-normal].",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-sfb-finite-equivariant-open-orbits",
+    "lem-trf-smooth-geometrically-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 p.58, smooth generic fibres and fibrewise almost homogeneity; Milne 1.65–1.66 for the field orbit argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-semitrait-potential-reduced-normalization] to the two schemes $G_0,Z_0$ over $S_0$. Obtain a finite extension $L/K_0$, its normalized base $T$, and finite surjective normalization maps $A\\to G_{0,T}$ and $B\\to Z_{0,T}$; $A,B$ are normal, flat, separated and finite type over $T$, with geometrically reduced fibres and generic-fibre normalization maps isomorphisms. The ring of $T$ is also the integral closure $R'$ of $R$ in $L$: integrality is transitive (finitely many coefficients of a monic equation lie in a finite $R$-module subalgebra, which together with the element is again finite), while an equation over $R$ is also one over $R_0$. The finite extension $L/K$ therefore has the required normalized semilocal Dedekind base by [lem-sc-integral-closure-dedekind-surjective-fibres], exactly as in step 1. Both models are locally of finite presentation by [lem-weil-pbc-finite-type-noetherian-finite-presentation].",
+   "uses": [
+    "lem-sfb-semitrait-potential-reduced-normalization",
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Appendix II Corollary 2 p.73, applied simultaneously; Prop.4.2.3 pp.58–59, normalized models."
+   }
+  },
+  {
+   "text": "Cover the semilocal one-dimensional normal base $T$ by its open traits $T_{\\mathfrak m}=\\operatorname{Spec}R'_{\\mathfrak m}$: this is the complement of the other closed points, and distinct such opens meet in $\\operatorname{Spec}L$. Apply [lem-sfb-trait-normalization-group-structure] on every trait to $G_{0,T}$ and its normalization $A$. The model $G_{0,T}$ is already reduced by step 2; its generic fibre is smooth, and the finite normalization $A$ is flat with geometrically reduced special fibre by step 4. All hypotheses of that node hold. Its unique group laws agree on overlaps because the generic normalization is the identity. Glue them by [lem-weil-pbc-scheme-morphism-gluing], obtaining a group structure on $A$ and a finite surjective homomorphism $A\\to G_{0,T}$. Every field-valued fibre of $A$ is a geometrically reduced finite-type group and hence smooth by [lem-sfb-geometrically-reduced-group-smooth]. Flatness and local finite presentation from step 4 give smoothness of $A/T$ by [sbc-lem-smooth-criterion].",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "lem-sfb-trait-normalization-group-structure",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Appendix II Corollary 3 p.73 and Prop.4.2.3 pp.58–59, smooth normalized group; trait-local gluing gives the semilocal case."
+   }
+  },
+  {
+   "text": "Let $Z=Z_{0,T}$. Via $A\\to G_{0,T}$, $A$ acts on $Z$. Both the projection $\\pi:A\\times_TZ\\to Z$ and the action $a:A\\times_TZ\\to Z$ are smooth: $a$ is projection after the isomorphism $(g,z)\\mapsto(g,gz)$ with inverse $(g,z)\\mapsto(g,g^{-1}z)$, and $\\pi$ is a base change of $A/T$. Apply [lem-sfb-componentwise-normalization-smooth-pullback] first to $\\pi$ and then to $a$. It identifies $(A\\times_TZ)^\\nu$ with $A\\times_TB$ over $A\\times_TZ$, and its projection to $B$ using $a$ defines the lifted action $A\\times_TB\\to B$. This is equivariant for $B\\to Z$. The action diagrams hold generically, where both normalizations are isomorphisms, and hence globally by [lemma-nagata-ext-scheme-theoretically-dominant-separated]. Indeed $B$ is separated over $T$, and every source in the diagrams is flat over $T$ (products of the flat models); on affine charts the injection into generic localization proves scheme-theoretic density. Thus $B$ carries an actual $A$-action, without choosing an orbit or a point.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 p.59, extension of the action to the normalization; Stacks 035R/normalization and smooth base change, using the existing canonical normalization-pullback node. Milne Lemma 1.64 gives the projection/action isomorphism."
+   }
+  },
+  {
+   "text": "For any field $k$ over $T$, apply [lem-sfb-finite-equivariant-open-orbits] to $P=A_k$, $Q=(G_{0,T})_k$, $V=B_k$ and $W=Z_k$. The two maps are finite surjective by step 4 and base change, the first is a group homomorphism by step 5, and equivariance is step 6. The source $B_k$ is geometrically reduced by step 4, $A_k$ is smooth by step 5, and $Z_k$ has the required open geometric orbits by step 3. The lemma gives smoothness of $B_k$ and identifies its geometric connected components with the open orbits of $A_k^0$. Since $B/T$ is flat and locally of finite presentation, [sbc-lem-smooth-criterion] now proves that $Y=B$ is smooth over $T$. It was already separated and finite type.",
+   "uses": [
+    "lem-sfb-finite-equivariant-open-orbits",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 p.59, geometric orbits of the normalized group and smoothness of the normalized space."
+   }
+  },
+  {
+   "text": "On each open trait of step 5 take the subgroup supplied by [lem-sfb-smooth-group-relative-neutral-open] for $A$. The subgroups agree over $\\operatorname{Spec}L$ because that node commutes with field base change and specifies the identity component; equivalently their underlying opens are the fibrewise identity components. Glue these opens and the restricted group maps to obtain an open subgroup $H\\subseteq A$. The same node ensures that every field fibre of $H$ is geometrically connected and every geometric fibre is the identity component of the corresponding fibre of $A$. The scheme $A$ is Noetherian (finite type over $T$), so [lem-sfb-noetherian-open-immersion-qc] makes $H\\to A$ quasi-compact; it is locally of finite type and hence finite type. It is separated as an open subscheme of $A$, and smooth by [lem-pc-open-immersion-smooth-composition]. Restrict the action on $Y$ to $H$. Step 7 now gives exactly the requested finite disjoint union of open $H$-orbits, including transitivity after all algebraically closed extensions.",
+   "uses": [
+    "lem-sfb-smooth-group-relative-neutral-open",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 pp.58–59, passage to the neutral open subgroup; existing trait-neutral-component theorem, glued over the semilocal base."
+   }
+  },
+  {
+   "text": "Define $Y\\to X_T$ as $B\\to Z_{0,T}\\to X_T$. The latter arrow is the base change of the reduction $Z_0\\hookrightarrow X_{S_0}$, so is a surjective closed immersion. The former arrow is finite surjective. Thus $Y\\to X_T$ is finite surjective (affine-locally a finite module over a quotient is finite over the original ring), in particular integral. The map $X_T\\to X$ is integral: it is obtained by tensoring the integral extension $R\\subseteq R'$ with each affine $R$-algebra, using [lem-weil-pbc-integral-base-change]. Their composite $q$ is integral by [lem-trf-integral-morphism-composition] and surjective because $T\\to S$ is surjective, and a fibre remains nonempty after extending a residue field (tensor with a field extension is faithfully flat). This proves all the required morphism clauses except finiteness of the underlying fibres.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-integral-base-change",
+    "lem-trf-integral-morphism-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 and its use in 4.2.2, pp.57–59; Appendix II Corollary 2, finite normalization followed by integral base change."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ over $s\\in S$. By [lem-sc-integral-closure-dedekind-surjective-fibres], there are finitely many $t\\in T$ over $s$, and each $\\kappa(t)/\\kappa(s)$ is finite. The fibre $(X_T)_x$ has underlying points in the finite union of $\\operatorname{Spec}(\\kappa(x)\\otimes_{\\kappa(s)}\\kappa(t))$. Each displayed algebra is finite-dimensional over $\\kappa(x)$ and hence has finitely many prime ideals: descending chains of ideals terminate, every prime quotient is an Artinian domain and thus a field, and distinct maximal ideals give independent nonzero factors, bounded by vector-space dimension. Each point of $(X_T)_x$ has finitely many inverse images in $Y$, by finiteness of $Y\\to X_T$ and [lem-weil-pbc-finite-closed-map-finite-fibres]. Therefore $q^{-1}(x)$ is finite. These constructions also work for empty $X$, empty fibres, or components supported only over the generic point: reduction, normalization and the field lemma allow the empty scheme, and the flatness arguments never assert a nonempty special fibre. No module-finiteness of $R'/R$ has been used.",
+   "uses": [
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Prop.4.2.3 pp.58–59 and integral-cover use in 4.2.2; Krull–Akizuki finite residue extensions rather than module-finiteness of the normalized base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-finite-equivariant-open-orbits",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sfb-semitrait-potential-reduced-normalization",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-trait-normalization-group-structure",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-sfb-componentwise-normalization-smooth-pullback",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sfb-smooth-group-relative-neutral-open",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-integral-base-change",
+  "lem-trf-integral-morphism-composition",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Prop.4.2.3 pp.58–59 and Appendix II Corollaries 2–3 p.73, read in the primary Numdam scan; local archive WANTED. Assembly and explicit finite-fibre argument by Q02."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "After a finite extension of a semilocal Dedekind fraction field a flat almost homogeneous scheme admits an integral surjective smooth equivariant normalization cover with finite fibres",
+   "results": "{\"t\": \"2026-10-24T12:37:56Z\", \"tool\": \"leanfinder\", \"query\": \"After a finite extension of a semilocal Dedekind fraction field a flat almost homogeneous scheme admits an integral surjective smooth equivariant normalization cover with finite fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"70f52e0b612822c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization instances concern integrality or commutation with an already smooth base change, not existence of a potentially smooth equivariant model or its orbit decomposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Potential smoothness of normalization of homogeneous spaces over a discrete valuation ring after finite field extension",
+   "results": "{\"t\": \"2026-10-24T12:37:57Z\", \"tool\": \"leansearch\", \"query\": \"Potential smoothness of normalization of homogeneous spaces over a discrete valuation ring after finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"RingHom.smooth_def\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"2ff7f3cbb7428ff6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization instances concern integrality or commutation with an already smooth base change, not existence of a potentially smooth equivariant model or its orbit decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-24T12:37:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\"], \"digest\": \"4d5f27beaecd7cf5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization instances concern integrality or commutation with an already smooth base change, not existence of a potentially smooth equivariant model or its orbit decomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "almost.homogeneous|equivariant.*normali|normali.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-24T12:37:57Z\", \"tool\": \"grep\", \"query\": \"almost.homogeneous|equivariant.*normali|normali.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"4a81930aa9b27ea7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization instances concern integrality or commutation with an already smooth base change, not existence of a potentially smooth equivariant model or its orbit decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Anantharaman smooth normalization of a group action after finite extension of a trait",
+   "results": "{\"t\": \"2026-10-24T12:38:07Z\", \"tool\": \"leanfinder\", \"query\": \"Anantharaman smooth normalization of a group action after finite extension of a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.normal\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"Algebra.intNormAux\", \"prod_galRestrict_eq_norm\", \"Ideal.relNorm_smul\", \"spectralNorm_eq_invariantExtension\", \"Representation.norm_ofMulDistribMulAction_eq\", \"Algebra.norm_localization\"], \"digest\": \"a3d1cbf2e008dd4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization instances concern integrality or commutation with an already smooth base change, not existence of a potentially smooth equivariant model or its orbit decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An almost homogeneous flat scheme over a semilocal Dedekind scheme admits a smooth equivariant cover after finite field extension",
+   "results": "{\"t\": \"2026-10-24T13:33:26Z\", \"tool\": \"leanfinder\", \"query\": \"An almost homogeneous flat scheme over a semilocal Dedekind scheme admits a smooth equivariant cover after finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"febdfe593d5c71fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization maps and smoothness definitions do not give potential smooth equivariant covers or their geometric orbit decomposition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Anantharaman proposition: after a finite extension of the fraction field, normalization of an almost homogeneous flat group scheme and scheme is smooth with connected fibres",
+   "results": "{\"t\": \"2026-10-24T13:25:17Z\", \"tool\": \"leansearch\", \"query\": \"Anantharaman proposition: after a finite extension of the fraction field, normalization of an almost homogeneous flat group scheme and scheme is smooth with connected fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"RingHom.Smooth\"], \"digest\": \"37886a46011d44e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization maps and smoothness definitions do not give potential smooth equivariant covers or their geometric orbit decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsSmooth, IsConnected",
+   "results": "{\"t\": \"2026-10-24T13:25:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsSmooth, IsConnected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization maps and smoothness definitions do not give potential smooth equivariant covers or their geometric orbit decomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|IsSmooth|IsConnected",
+   "results": "{\"t\": \"2026-10-24T13:25:18Z\", \"tool\": \"grep\", \"query\": \"normalization|IsSmooth|IsConnected\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\"], \"digest\": \"b1f37e82f37930ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization maps and smoothness definitions do not give potential smooth equivariant covers or their geometric orbit decomposition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait group descent; Anantharaman 4.2.2 proof, printed pp.57–59; Proposition 4.2.3 (OCR 4,2,5), printed pp.58–59, conclusions (i),(ii) and proof; Appendix II Corollaries 2 and 3, printed p.73: finite normalization after a finite fraction-field extension. Take the neutral component of the smooth normalized group; the proof identifies its geometric orbits with the connected components of the smooth normalized space. Krull–Akizuki for the semilocal integral closure; the projection to X is a finite normalization followed by an integral base change, not asserted finite over X.",
+   "via": [
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-almost-homogeneous-potential-smooth-cover",
+  "worker": "stage1",
+  "summary": "Q02 read Anantharaman Prop.4.2.3 and Appendix II Corollaries 2–3 in the primary scan, checked generic reduction, normalization, group/action lifting, orbit comparison, neutral subgroup and integral finite-fibre composite. Two genuinely smaller statement-only nodes; relative identity component and all normalization functoriality reused. No attachment; no statement change. Mathlib searches logged and read.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), strict-local trait descent; realizes the smooth equivariant normalization cover needed for Anantharaman 4.2.2. Current latest blueprint searched; no equivalent node. Preserve the imported null ancestry and its complete via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Generic tool: Finite inseparable extension making a reduction geometrically reduced; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6); used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finite-components",
+    "why": "Generic tool: Finitely many irreducible components; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic tool: Integral closure of a one-dimensional Noetherian domain in a finite extension; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic tool: One-dimensional normal local rings; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic tool: Base change of a flat morphism of schemes is flat; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-pid-torsion-free-module-flat",
+    "why": "Generic tool: A torsion-free module over a principal ideal domain is flat; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic tool: Flatness of a scheme morphism on affine charts; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic tool: A map from a reduced scheme factors through a closed subscheme exactly set-theoretically; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic tool: Finite-type morphisms are stable under composition and base change; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic tool: The reduction of a scheme is reduced and a universal homeomorphism; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic tool: Zariski's lemma: a field of finite type over a field is a finite extension; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic tool: Smooth schemes over fields are geometrically normal; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic tool: Finite type over a Noetherian ring is finite presentation; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic tool: Morphisms of schemes glue along an open cover; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic tool: Smoothness by flatness and smooth fibres; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Generic tool: Smooth ring maps are stable under base change and composition; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Generic tool: Morphisms into a separated target agreeing on a scheme-theoretically dominant subscheme; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic tool: Base change, affineness and properness for finite morphisms; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Generic tool: An open immersion into a smooth morphism has smooth composite; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic tool: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-base-change",
+    "why": "Generic tool: Base change of an integral algebra is integral; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-trf-integral-morphism-composition",
+    "why": "Generic tool: Composition of integral scheme morphisms is integral; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic tool: A finite morphism is separated, universally closed and has finite fibres; used only for the indicated geometric/base-change operation in the Anantharaman normalization route, not as an alternative to the unit proof. No node of this unit supplies this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-integral-base-change",
+  "lem-trf-integral-morphism-composition",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-f2a6ed241",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-f2a6ed241 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps, both new nodes and all 32 cited statements in full. Source checked in the Numdam scan of Anantharaman, Mém. SMF 33: Prop. 4.2.3 (OCR 4,2,5), pp.58–59, and App. II Thm 1/Cor. 2–3, p.73. The steps follow the source's route: radicial K0, reduced flat models with group law and action, normalization after a finite extension, lifted action, orbits equal to components, written out in detail. Hypotheses checked per step: torsion-free reductions are flat and reduced and products have reduced generic fibres (step 2); fppf-surjectivity gives transitivity on geometric points via Zariski's lemma (step 3); the base T is the integral closure of R in L and the T_m are open (steps 4–5); every hypothesis of trait-normalization-group-structure holds; the action lifts through smooth-pullback normalization and the identities extend by separated density (step 6); every hypothesis of the field node holds in step 7; the relative neutral open glues over the generic point (step 8); integral, surjective and finite-fibre arguments for q are correct (steps 9–10). New node finite-equivariant-open-orbits is true: proved by the dimension count and Milne's orbit lemma; tested on empty V, P=Q, finite P and non-reduced Q; it is a field-level lemma used twice and does not restate the item. New node semitrait-potential-reduced-normalization is App. II Cor. 2 applied to the disjoint union, with no hidden excellence; the extra conclusions follow from finiteness and normality. No duplicates among complete-trait-normalized-reduced-fibres, trait-group-finite-smooth-cover, geonormal-normalization-field-extension and fpqc-finite-presentation-normalization-model. Batch-5 flags: lem-trf-smooth-geometrically-normal, lem-trf-integral-morphism-composition, and the trf section-component nodes under lem-sfb-smooth-group-relative-neutral-open are generic algebraic geometry, not steps of the trace formula or Poincaré duality, and the closure has no PD node or target, so all are accepted. The worker's own 24 tool_uses are all generic and accepted. Minor: step 2 does not name the flat-geometrically-reduced-pullback node in its text; citations.json is absent. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlmostHomogeneousPotentialSmoothCover",
+  "declaration": "AlgebraicGeometry.exists_almostHomogeneous_potential_smooth_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlmostHomogeneousPotentialSmoothCover.lean",
+  "statement": "theorem exists_almostHomogeneous_potential_smooth_cover (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsIntegrallyClosed R] (hdim : ringKrullDim R = 1) (hmax : Set.Finite {m : Ideal R | m.IsMaximal}) (G X : Over (Spec (.of R))) [GrpObj G] [ModObj G X] [IsSeparated G.hom] [Flat G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated X.hom] [Flat X.hom] [LocallyOfFinitePresentation X.hom] [QuasiCompact X.hom] (n : ℕ) (V : Fin n → Over (Spec (.of R))) [∀ j, ModObj G (V j)] (inc : ∀ j, V j ⟶ X) [∀ j, IsModHom G (inc j)] [∀ j, IsOpenImmersion (inc j).left] (hcover : ∀ x : X.left, ∃ j, x ∈ Set.range (inc j).left) (hhomogeneous : ∀ j, Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of R))) (yoneda.map (ModObj.leftSMul G (V j)))) : ∃ (L : Type u) (_ : Field L) (_ : Algebra (FractionRing R) L) (_ : Algebra R L) (_ : IsScalarTower R (FractionRing R) L), FiniteDimensional (FractionRing R) L ∧ IsNoetherianRing (integralClosure R L) ∧ IsIntegrallyClosed (integralClosure R L) ∧ ringKrullDim (integralClosure R L) = 1 ∧ Set.Finite {m : Ideal (integralClosure R L) | m.IsMaximal} ∧ ∃ (H Y : Over (Spec (.of (integralClosure R L)))) (_ : GrpObj H) (_ : ModObj H Y), Smooth H.hom ∧ IsSeparated H.hom ∧ LocallyOfFiniteType H.hom ∧ QuasiCompact H.hom ∧ (∀ (Ω : Type u) [Field Ω] (t : Spec (.of Ω) ⟶ Spec (.of (integralClosure R L))), ConnectedSpace (pullback (C := Scheme.{u}) H.hom t)) ∧ Smooth Y.hom ∧ IsSeparated Y.hom ∧ LocallyOfFiniteType Y.hom ∧ QuasiCompact Y.hom ∧ ∃ p : Y ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L))))).obj X, IsIntegralHom (p.left ≫ pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L))))) ∧ Surjective (p.left ≫ pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L))))) ∧ (∀ x : X.left, Set.Finite ((p.left ≫ pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap R (integralClosure R L))))) ⁻¹' {x})) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of (integralClosure R L))), ∃ (m : ℕ) (U : Fin m → (pullback (C := Scheme.{u}) Y.hom t).Opens), (∀ z : pullback (C := Scheme.{u}) Y.hom t, ∃ j, z ∈ U j) ∧ Pairwise (fun i j ↦ Disjoint (U i) (U j)) ∧ ∀ (E : Type u) [Field E] [IsAlgClosed E] (c : Spec (.of E) ⟶ Spec (.of Ω)) (j : Fin m) (x : Over.mk (c ≫ t) ⟶ Y), (∃ a : Spec (.of E) ⟶ pullback (C := Scheme.{u}) Y.hom t, a ≫ pullback.snd Y.hom t = c ∧ a ≫ pullback.fst Y.hom t = x.left ∧ ∀ z : Spec (.of E), a z ∈ U j) → ∀ y : Over.mk (c ≫ t) ⟶ Y, (∃ b : Spec (.of E) ⟶ pullback (C := Scheme.{u}) Y.hom t, b ≫ pullback.snd Y.hom t = c ∧ b ≫ pullback.fst Y.hom t = y.left ∧ ∀ z : Spec (.of E), b z ∈ U j) ↔ ∃ g : Over.mk (c ≫ t) ⟶ H, g • x = y",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4b1e7235",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read node, 13 stmt_deps, report, module, Mathlib ModObj.leftSMul/SMul/Over-pullback cartesian instance/fppfTopology. Hypotheses exact: Noetherian normal dim-1 semilocal domain; GrpObj G separated flat finite type (LOFT+QC); X separated flat LOFP+QC; ModObj action, invariant open pieces via ModObj+IsModHom on open immersions, cover; fppf surjectivity = IsLocallySurjective of yoneda.map leftSMul on fppfTopology.over (subcanonical, so sheaf epi). Conclusions exact: finite L/K, R'=integralClosure R L with Noetherian/normal/dim1/finite max ideals, smooth separated finite-type H,Y over Spec R' with GrpObj/ModObj, connected field fibres of H, q=p.left≫pullback.fst integral surjective with finite point fibres (not finite), finite disjoint open cover of geometric fibres whose pieces are H(E)-orbits for all alg. closed E (invariance+transitivity). Edge cases (empty X/fibres/pieces, generic-only components, universes) covered. Node copy differs from side-live only in lean; statement verbatim; no defs, single sorry, docstrings with source and 10 proof steps. No changes, not recompiled."
+ }
+}

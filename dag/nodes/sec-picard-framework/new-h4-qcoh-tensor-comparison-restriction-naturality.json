@@ -104,14 +104,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
+  "existing": true,
   "module": "Sheaf.AlgebraicGeometry.QCohTensorResolutionComparisonRestrictionNaturality",
   "file": "lean/Sheaf/AlgebraicGeometry/QCohTensorResolutionComparisonRestrictionNaturality.lean",
   "declaration": "AlgebraicGeometry.tensorResolutionComparison_restriction",
   "statement": "theorem tensorResolutionComparison_restriction {X Y : Scheme.{u}}\n    (j : X ⟶ Y) [IsOpenImmersion j]\n    (E K M F N : CochainComplex Y.Modules ℤ)\n    (E' K' M' F' N' : CochainComplex X.Modules ℤ)\n    (r : E ⟶ M) (q : K ⟶ M) (s : F ⟶ N)\n    (r' : E' ⟶ M') (q' : K' ⟶ M') (s' : F' ⟶ N')\n    (hE : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) E)\n    (hK : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) K)\n    (hF : CochainComplex.IsAcyclicTensorKFlat (R := Y.sheaf) F)\n    (hE' : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) E')\n    (hK' : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) K')\n    (hF' : CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) F')\n    (hr : QuasiIso r) (hq : QuasiIso q) (hs : QuasiIso s)\n    (hr' : QuasiIso r') (hq' : QuasiIso q') (hs' : QuasiIso s')\n    (e : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj E ⟶ E')\n    (k : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj K ⟶ K')\n    (m : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj M ⟶ M')\n    (f : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj F ⟶ F')\n    (t : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj N ⟶ N')\n    (hrr : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).map r ≫ m =\n      e ≫ r')\n    (hqq : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).map q ≫ m =\n      k ≫ q')\n    (hss : ((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).map s ≫ t =\n      f ≫ s') (i : ℤ) :\n    (Scheme.Modules.restrictFunctor j).map\n        (tensorResolutionComparison Y.sheaf E K M F N r q s hE hK hF hr hq hs i).hom ≫\n      (((CochainComplex.mapBifunctor K N (curriedTensor Y.Modules)).sc i).mapHomologyIso\n        (Scheme.Modules.restrictFunctor j)).inv ≫\n      HomologicalComplex.homologyMap (tensorResolutionRestrictionTensorMap j K N K' N' k t) i =\n    (((CochainComplex.mapBifunctor E N (curriedTensor Y.Modules)).sc i).mapHomologyIso\n        (Scheme.Modules.restrictFunctor j)).inv ≫\n      HomologicalComplex.homologyMap (tensorResolutionRestrictionTensorMap j E N E' N' e t) i ≫\n      (tensorResolutionComparison X.sheaf E' K' M' F' N' r' q' s'\n        hE' hK' hF' hr' hq' hs' i).hom",
   "branch": "sheaf-dag",
   "by": "H4",
-  "date": "2026-10-15"
+  "date": "2026-10-15",
+  "note": "F4 quarantine repair, 2026-10-22: attach the existing source-library theorem. Its statement differs from the archived Sheaf copy only by IsKFlatTensor in place of IsAcyclicTensorKFlat, whose defining acyclic-tensor conditions are identical; its proof is verbatim identical. Restore the historical Sheaf path as a public compatibility import. All mathematical statement and proof dependencies remain unchanged."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -124,14 +125,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "X-693ce",
-  "group": "H4",
+  "reviewer": "C-53823",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261015T095527-L-1336309",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all five DAG nodes, unchanged existing interfaces, documented definition changes, compilation, and permitted axioms."
+  "landing": "20261022T113952-L-452251",
+  "kind": "proof",
+  "note": "independent cc review: compatibility module re-export + node lean record (existing:true) vs WC QCohTensorResolutionComparisonRestrictionNaturality source (statement substring match, quarantined theorem+proof identical modulo IsAcyclicTensorKFlat→IsKFlatTensor, predicates' bodies identical); no live importers"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

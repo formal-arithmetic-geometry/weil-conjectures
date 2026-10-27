@@ -1,0 +1,117 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectionRefinementDescent",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Refinement and compactification independence; lem-sf-projection-refinement-descent",
+   "via": [
+    "lem-sf-projection-refinement-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*tensor|tensor.*boundedConstructible|RefinementFiniteLevelOrigin",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"boundedConstructible\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible derived complex tensor a finite Tor amplitude complex has bounded constructible cohomology on a scheme",
+   "results": "8 hits: HomologicalComplex.tensorObj, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, HomologicalComplex.instHasLimit, HomologicalComplex.tensorUnit, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.instHasTensorTensorUnit",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  }
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "U1 proof using existing declarations and the explicitly described normalization step.",
+  "by": "agent"
+ },
+ "id": "lem-sf-projection-refinement-inputs",
+ "kind": "statement",
+ "title": "Bounded projection inputs have origins and stable tensor domain",
+ "statement": "Let D be a finite-field datum, C a coefficient prime different from its characteristic, E/Q_C.l a finite extension and n≥0. Fix a SixFunctorOperationDatum S at level n+1. Let X,Y be finite-type schemes over D.k without absolute separatedness hypotheses, and f:X→Y separated of finite type. At coefficient level n+1, every boundedConstructible object K on X admits O:RefinementFiniteLevelOrigin and an actual isomorphism fixed(O)≅K. For every such K and finiteTor object L on Y, tensorInput(f,K,L) is boundedConstructible on X. There is no Tor hypothesis on K.",
+ "stmt_deps": [
+  "def-sf-projection-refinement-domains"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Definitions and proof steps 1--3"
+ },
+ "proof": [
+  {
+   "text": "Extract a cohomological interval from bounded support. Apply the finite-ring constructible derived origin theorem to obtain a bounded constructible etale G and an actual comparison isomorphism. Regard G as bounded below and retain its tautological etale witness. The coefficient realization and mapDerivedCategoryCompIso give fixed(O) isomorphic to K.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-sf-projection-refinement-domains",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize K,L in intrinsic coefficient coordinates. CompactSupportFiniteProjection.domains preserves finite Tor amplitude under S.finite.pull and gives bounded constructibility of the tensor. S.finitePullback, exact pullback comparison, mapDerivedCategoryCompIso and the realization units identify this tensor with the realization of tensorInput. Transport its constructibility through that actual isomorphism. No Tor condition is imposed on K.",
+   "uses": [
+    "def-sf-constructible-projection-mates",
+    "def-fix-six-functor-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-sf-projection-refinement-domains",
+  "def-sf-constructible-projection-mates",
+  "def-fix-six-functor-datum",
+  "def-sp-finite-intrinsic-direct-adjunction"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectionRefinementInputs",
+  "file": "lean/Sheaf/SixFunctors/ProjectionRefinementInputs.lean",
+  "declaration": "WeilConjectures.ProjectionRefinementDescent.tensor_and_origins",
+  "statement": "theorem tensor_and_origins\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra ℚ_[C.l] E] [FiniteDimensional ℚ_[C.l] E]\n    (n : ℕ) (S : SixFunctorOperationDatum D C E (n + 1) (Nat.succ_pos n))\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :\n    (∀ K : (boundedConstructible C.l E n X).FullSubcategory,\n      ∃ O : RefinementFiniteLevelOrigin C.l E (n + 1) (Nat.succ_pos n) X,\n        Nonempty (refinementFiniteLevelFixedObject C.l E (n + 1) (Nat.succ_pos n) X O ≅\n          K.obj)) ∧\n    ∀ (K : (boundedConstructible C.l E n X).FullSubcategory)\n      (L : (finiteTor C.l E n Y).FullSubcategory),\n      boundedConstructible C.l E n X (tensorInput C.l E n f K.obj L.obj)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "independent cc review: finite_descent proof, the moved ProjectionRefinementData declarations (spellings that unfold to the old ones) and the new hole normalized_refinement_inverse, against node lem-sf-projection-refinement-descent, the change record, the 5 new nodes and the published clone; importers FiniteProjectionFromDescent and FiniteProjectionCompactificationSquare compiled OK against the delivered modules"
+ }
+}

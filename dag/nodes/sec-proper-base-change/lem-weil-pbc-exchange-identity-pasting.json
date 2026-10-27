@@ -125,7 +125,18 @@
   "lemma-weil-pbc-derived-exchange-replacement"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-def-exchange",
  "split_report": {
@@ -168,5 +179,38 @@
   "landing": "20261018T062807-L-654978",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "The transformation $\\Ex_{\\square}$ of the derived exchange morphism\n[def-weil-pbc-derived-exchange] is the identity for an identity\nsquare, modulo the identity isomorphisms $\\mathrm{id}^{-1}\\cong\\mathrm{id}$ of\nthe inverse images. For horizontally or vertically pasted commutative squares\n(for instance cartesian squares [def-weil-pbc-cartesian-square]), the exchange morphism of the outer\nrectangle equals the composite of the exchange morphisms of the two inner\nsquares after inserting the canonical associativity isomorphisms for inverse\nand derived direct images.",
+  "proof": [
+   {
+    "text": "Both equations are checked with the uniqueness part of\n[lemma-weil-pbc-derived-exchange-replacement]: a natural transformation\n$g^{-1}Rf_*\\to Rf'_*g'^{-1}$ is the derived exchange morphism\n[def-weil-pbc-derived-exchange] as soon as its composite with $g^{-1}\\eta_K$ is\nthe underived exchange morphism $\\Ex^0_{\\square,K}$ followed by the canonical\nmap $f'_*g'^{-1}K\\to Rf'_*g'^{-1}K$; and since every object of $\\Dplus$ is\nisomorphic to a bounded below complex of injectives, on which the canonical\nmaps $\\eta$ are isomorphisms, it suffices to check this on such complexes $I$.",
+    "uses": [
+     "lemma-weil-pbc-derived-exchange-replacement",
+     "def-weil-pbc-derived-exchange"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Identity square.* For the identity square ($g=\\mathrm{id}_Y$,\n$g'=\\mathrm{id}_X$, $f'=f$) the square isomorphism $\\theta_\\square$ is the\ncomposite of the unit isomorphisms $\\mathrm{id}^{-1}\\cong\\mathrm{id}$, by the\ncompatibility with identities recorded in [def-weil-pbc-cartesian-square].\nIts mate $\\Ex^0_\\square:\\mathrm{id}^{-1}f_*\\to f_*\\mathrm{id}^{-1}$ is therefore\nthe identity of $f_*$ modulo these unit isomorphisms (the triangle identity\nof $f^{-1}\\dashv f_*$). The transformation $\\mathrm{id}^{-1}Rf_*\\cong\nRf_*\\cong Rf_*\\mathrm{id}^{-1}$ made of the unit isomorphisms satisfies the\ncharacterizing identity, by naturality of $\\mathrm{id}^{-1}\\cong\\mathrm{id}$\nwith respect to $\\eta_K$; so it is $\\Ex_\\square$.",
+    "uses": [
+     "def-weil-pbc-cartesian-square"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Pasting.* For horizontally or vertically pasted squares, consider the\ncomposite $\\Phi$ of the two derived exchange morphisms with the associativity\nisomorphisms. On a bounded below complex $I$ of injectives, all derived direct\nimages that occur are computed by underived direct images: $f_*I$ is again a\ncomplex of injectives because $f_*$ is right adjoint to the exact functor\n$f^{-1}$, and the characterizing identities for the two inner squares (the\nsecond one applied to $f_*I$, resp. to $g'^{-1}I$) identify $\\Phi_I\\circ\\eta_I$\nwith the canonical map following the composite of the two underived exchange\nmorphisms and the associativity isomorphisms. That underived composite is\n$\\Ex^0$ of the outer rectangle: each $\\Ex^0$ is the mate of a square\nisomorphism, the square isomorphism of the outer rectangle is the composite of\nthe two inner ones modulo composition isomorphisms\n[def-weil-pbc-cartesian-square], and forming mates is compatible with pasting\n(the triangle identities cancel the adjacent unit–counit pairs). Hence $\\Phi$\nsatisfies the characterizing identity of the outer rectangle and equals its\nderived exchange morphism.",
+    "uses": [
+     "def-weil-pbc-cartesian-square"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -25,111 +25,36 @@
  ],
  "proof": [
   {
-   "text": "First check the coefficient identifications in the compositor. Apply [lem-trf-constant-coefficient-composition] with the two maps $h$ and $h^m$ and with the finite ring $A_n$. It gives $c_{m+1,n}d_{m,B_n}=c_{1,n}F_1(c_{m,n})$. The finite identifications commute with coefficient reduction by [lem-weil-proetale-isomorphism-inverse-image](3). For completed coefficients, compose the analogous asserted equality with every $\\pi_n$ and use $\\pi_nc_{r,\\widehat R}=c_{r,n}F_r(\\pi_n)$ from [def-weil-inverse-image-pullback-comparison]. Each composite is the finite equality just proved, so the universal property of the coefficient limit proves the completed equality too. Consequently the reindexing identification $F_1F_m=F_{m+1}$ respects transported module actions and restriction of scalars. Here and below finite module pullbacks are read through the specified $j_r$, never identified with inverse image by an arbitrary isomorphism.",
+   "text": "Use [lem-trf-point-power-strict-insertion-specialization] for the section-normalized compositors P and strict insertion identity. This is the specialization of the original insertion-composition step to the recursive Frobenius powers and the original unique transports.",
    "uses": [
-    "lem-trf-constant-coefficient-composition",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-inverse-image-pullback-comparison"
+    "lem-trf-point-power-strict-insertion-specialization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CB (lemma-composition-morphisms-sites), 0H7J (example-constant-sheaf); coefficient-limit extension of the constant-section calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-trf-point-sheaf-insertion-calculus] with $A=A_n$ to each sheaf $M_n^i$. Its normalized reindexing isomorphism identifies the insertion recipe of [lem-trf-point-system-transport-descent] with restriction along $h^r$. Successive restrictions give $\\operatorname{res}_h\\operatorname{res}_{h^m}=\\operatorname{res}_{h^m\\circ h}=\\operatorname{res}_{h^{m+1}}$. In the tensor presentation, the inverse of the canonical pullback-composition isomorphism sends $(x\\otimes1)\\otimes1$ to $x\\otimes1$, as in that insertion-calculus identity. Thus $u_{m+1,n}^i=\\Gamma(t_{m,M_n^i})u_{1,G_mM_n^i}u_{m,n}^i$. The identification is with the $t_m$ in the statement: [lem-weil-pbc-proetale-derived-pullback-composition] specifies the canonical termwise pullback compositor, and the pullbacks along isomorphisms here are exact, as in [def-weil-inverse-image-pullback-comparison](a).",
+   "text": "Apply [lem-trf-point-power-roos-comparison-specialization] to the site, system and scalar-restriction section equations of P, obtaining one normalization N and one comparison family A with its three compositor identities. This carries out the original normalized comparison construction and its product/cone/derived compositor assembly.",
    "uses": [
-    "lem-trf-point-sheaf-insertion-calculus",
-    "lem-trf-point-system-transport-descent",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "def-weil-inverse-image-pullback-comparison"
+    "lem-trf-point-power-roos-comparison-specialization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers: compatibility with composition; explicit point restriction and tensor-unit calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "This is equality of strict tower chain maps. Indeed [lem-trf-point-system-transport-descent] supplies the original quotient-linear transition squares and differential commutation. On the transition $v_n$, either insertion path sends $(x\\otimes1)\\otimes1$ to $v_n(x)\\otimes\\rho_n(1)=v_n(x)\\otimes1$; Step 1 supplies its completed scalar compatibility. The compositor commutes with $v_n$ and $d^i$ by its naturality. Equality of all the components in Step 2 is therefore equality in the category of complexes of strict $R$-module towers. Localize this equality. By the same descent node, the localized $u_r$ is precisely $I_r$, and the exact functors preserve quasi-isomorphisms. Since localization preserves composition, it gives $I_{m+1,C}=\\Gamma_\\bullet(t_{m,C})I_{1,G_mC}I_{m,C}$ on the ordinary derived SYSTEM category.",
+   "text": "Apply the proved [lem-trf-point-power-derived-transport-coherence] to the strict insertion identity. Its proof uses the defining representative equation of [lem-trf-point-system-transport-descent] and faithfulness of precomposition with localization. Pair the resulting derived insertion identity with the strict identity and the product, cone and derived comparison identities for each m >= 1.",
    "uses": [
-    "lem-trf-point-system-transport-descent"
+    "lem-trf-point-power-derived-transport-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers, retaining transitions before localization"
-   }
-  },
-  {
-   "text": "Put $X=U_sM$ for a strict representative $M$ of $C$, and identify $U_sG_rM$ with $F_rX$ through the coefficient maps checked in Step 1. By [lem-weil-proetale-countable-products-exact] countable products of completed-module sheaves are sectionwise and exact. By [lem-weil-proetale-isomorphism-inverse-image] the reindexing functor is exact and preserves products; transporting scalars through a ring isomorphism changes no underlying kernel, cokernel or product, as specified in [def-weil-inverse-image-pullback-comparison]. Thus [lem-cbc-exact-product-functor-strict-limit] applies to $F_r$ on the entire unbounded module category. Write $\\theta_X:R\\lim X\\xrightarrow{\\sim}H(X)$ for its normalized Roos coordinates, $\\phi_{r,X}:F_rP_X\\to P_{F_rX}$ for the canonical product map and $\\kappa_{r,X}:F_rH(X)\\to H(F_rX)$ for that map on both coordinates. The specified comparison is $a_{r,C}=\\theta_{F_rX}^{-1}\\kappa_{r,X}F_r(\\theta_X)$. Naturality of these identifications and diagonal maps is supplied by [lem-weil-strict-roos-comparison] and [lem-cbc-exact-product-functor-roos-chain-maps].",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-strict-roos-comparison",
-    "lem-cbc-exact-product-functor-roos-chain-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, proof; normalized exact-product comparison specified by the cited nodes"
-   }
-  },
-  {
-   "text": "Let $T=U_st_{m,M}:F_1F_mX\\to F_{m+1}X$ in the identifications of Step 4. It is the degreewise compositor, and let $P(T)$ be its product map. In every degree the product maps satisfy\n$$\\phi_{m+1,X}d_{m,P_X}=P(T)\\phi_{1,F_mX}F_1(\\phi_{m,X}).$$\nTo verify this, compose the left side with the $n$th product projection. Its value is $F_{m+1}(\\mathrm{pr}_n)d_{m,P_X}=T_nF_1F_m(\\mathrm{pr}_n)$ by naturality of $d_m$. On the right the two defining product-projection equations give $T_nF_1(F_m(\\mathrm{pr}_n))$, the same map. Product uniqueness proves the equality. The projection equations used here are exactly those of [lem-cbc-exact-product-functor-roos-chain-maps]. In the reindexing model both are the twice-reindexed projection; on finite tensor presentations Step 2 multiplies the two inserted units. The calculation is at the level of products of complexes, before derived localization.",
-   "uses": [
-    "lem-cbc-exact-product-functor-roos-chain-maps"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers; product-projection calculation for the canonical inverse-image comparison"
-   }
-  },
-  {
-   "text": "Use the signed coordinates of [lem-cbc-exact-product-functor-strict-limit]: $H(X)^i=P_X^i\\oplus P_X^{i-1}$ and $D(x,y)=(dx,(1-s_X)x-dy)$. The functorial cone maps of [lem-weil-strict-roos-comparison] send a strict tower map $f$ to the diagonal map with entries $P(f)$. Since $T$ commutes with the actual transitions, $P(T)s_{F_1F_mX}=s_{F_{m+1}X}P(T)$; this follows by composing with $\\mathrm{pr}_n$ and using $T_nv_n=v'_nT_{n+1}$. The same projection calculation shows the product comparisons commute with the shifts $s$. They therefore commute with $1-s$, and the displayed differential verifies they are cone chain maps. Step 5 applied in degrees $i$ and $i-1$ proves\n$$\\kappa_{m+1,X}d_{m,H(X)}=H(T)\\kappa_{1,F_mX}F_1(\\kappa_{m,X}).$$\nBoth sides have the same diagonal entries, and both off-diagonal entries are zero. This proves equality on the entire cone, including its shifted coordinate.",
-   "uses": [
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers; the same product calculation on both signed Roos coordinates"
-   }
-  },
-  {
-   "text": "Finally conjugate Step 6 by the specified normalized Roos identifications of [lem-cbc-exact-product-functor-strict-limit]. Naturality of $d_m$ gives $F_{m+1}(\\theta_X)d_{m,R\\lim X}=d_{m,H(X)}F_1F_m(\\theta_X)$. Substituting the formula for $a$ from Step 4 into the left side of the required identity, Step 6 gives\n$$\\theta_{F_{m+1}X}^{-1}H(T)\\kappa_{1,F_mX}F_1(\\kappa_{m,X})F_1F_m(\\theta_X).$$\nOn the right, naturality of $\\theta$ from [lem-weil-strict-roos-comparison] gives $\\mathcal L_s(t_m)=\\theta_{F_{m+1}X}^{-1}H(T)\\theta_{F_1F_mX}$. Substitution cancels $\\theta_{F_1F_mX}\\theta_{F_1F_mX}^{-1}$ and $F_1(\\theta_{F_mX})F_1(\\theta_{F_mX}^{-1})$, giving exactly the same displayed expression. This is the desired compositor identity. All these cone constructions descend naturally by the cited Roos comparison, so the calculation holds for every $C$ and naturally for its derived morphisms. Only strict product and cone equalities were localized; no faithfulness of derived evaluations or constructibility of $\\mathcal L_sC$ was used.",
-   "uses": [
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-    "place": "Step 1, Global powers; normalized whole-cone compositor calculation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-trf-constant-coefficient-composition",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-trf-point-sheaf-insertion-calculus",
-  "lem-trf-point-system-transport-descent",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-weil-strict-roos-comparison",
-  "lem-cbc-exact-product-functor-roos-chain-maps"
+  "lem-trf-point-power-strict-insertion-specialization",
+  "lem-trf-point-power-roos-comparison-specialization",
+  "lem-trf-point-power-derived-transport-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
-  "place": "Step 1, Global powers: explicit strict-system and normalized Roos-cone refinement of the composition sentence; supporting Stacks Tags 03CB, 0H7J and 0941."
+  "place": "Step 1, Global powers; assembly through specialized strict and Roos arguments and localization of the recorded strict transport."
  },
  "mathlib_searches": [
   {
@@ -240,10 +165,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-trf-point-system-power-roos-coherence",
   "worker": "stage1",
-  "summary": "Q126: reused the finite insertion calculus and constant-coefficient compositor; proved the strict tower identity, localized it, and checked the normalized inverse-image comparison on both product coordinates by projection uniqueness and explicit cancellation. No new nodes and no statement change.",
+  "summary": "Q129 repair of the 2026-10-22 re-split return: preserve the statement, extract two independent statement-only tasks of comparable argument size (returned Steps 1-3 and 5-7), and keep the existing normalized-comparison theorem as the assembly for returned Step 4. All seven old arguments are retained verbatim in report.md and mapped to the tasks.",
   "blueprint": "thm-trf-l-function-euler-product, Step 1, Global powers, sentence asserting composition of the g_gamma compact transport maps; this item supplies its point-system and whole-Roos comparator coherence.",
   "tool_uses": [
    {
@@ -252,10 +177,6 @@
    },
    {
     "node": "def-weil-inverse-image-pullback-comparison",
-    "why": "Generic exactness, product preservation or canonical module-pullback comparison used on point module towers; this is a tool inside the prescribed transport argument, not a replacement of a unit step."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
     "why": "Generic exactness, product preservation or canonical module-pullback comparison used on point module towers; this is a tool inside the prescribed transport argument, not a replacement of a unit step."
    },
    {
@@ -271,8 +192,8 @@
     "why": "Generic normalized total-derived-limit and diagonal Roos comparison calculus used on point module towers; this is a tool inside the prescribed transport argument, not a replacement of a unit step."
    },
    {
-    "node": "lem-cbc-exact-product-functor-roos-chain-maps",
-    "why": "Generic normalized total-derived-limit and diagonal Roos comparison calculus used on point module towers; this is a tool inside the prescribed transport argument, not a replacement of a unit step."
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic identification of U_s as termwise scalar restriction on the entire ordinary derived-system category; used only for the exact functor hypothesis of the Roos compositor tool."
    }
   ]
  },
@@ -283,49 +204,21 @@
   "lem-weil-proetale-countable-products-exact",
   "lem-cbc-exact-product-functor-strict-limit",
   "lem-weil-strict-roos-comparison",
-  "lem-cbc-exact-product-functor-roos-chain-maps"
+  "lem-cbc-exact-product-functor-roos-chain-maps",
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q126-bfd568af7",
-  "group": "Q126",
+  "reviewer": "NT-cc-Q129-317293f03",
+  "group": "Q129",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-bfd568af7 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full against the statements of the cited nodes. The delivery has no new nodes, and the item statement and stmt_deps are byte-identical to the base. The item is still unsplit in live and side-live; there is no repair note and nothing cited is on the dropped list. Step 1: lem-trf-constant-coefficient-composition with (h, h^m), plus iso-inverse-image (3) and the pi_n c = c_n g^{-1}(pi_n) equation of the inverse-image comparison definition, gives the completed coefficient compositor. Step 2: insertion-calculus j_{m+1}=T_m j_{1,H_m} j_m. I checked the site directions: res_h res_{h^m} is the morphism h^{m+1}. The compositor is the termwise (h^{m+1})^* ~ h^*(h^m)^* of pbc-derived-pullback-composition. Step 3: descent-node transitions and differentials, then localization of a strict equality; no use of evaluation detection. Step 4: every hypothesis of lem-cbc-exact-product-functor-strict-limit holds (exact countable products on the pro-étale site, F_r an equivalence preserving limits), and its lambda = theta^{-1} kappa F(theta) is exactly a_{r,C}. Step 5: I recomputed both sides on each pr_n; with T_n = d_{m,X_n} both give T_n F_1F_m(pr_n). Step 6: the cone maps are diagonal with zero off-diagonal entries and commute with s and the signed differential. Step 7: I redid the conjugation algebra and the two sides agree, with matching types. Edge cases checked: m=1, the zero system, non-surjective transitions, and complexes in a single degree. The route is fine because sk-d-weil is cited by the unit. I accept the 7 declared tool uses (generic exactness, product and Roos normalization lemmas). Duplicates: point-transport-composition (finite D^b_c case), point-system-roos-transport (single r), integral-inverse-image-comparison-composition (the kappa/Lg^* compositor) and the cone-descent and strict-quotient nodes are all different from the item. Source check: the quoted Global-powers sentence is in thm-trf-l-function-euler-product.proof.md Step 1, which proof_origin, the step sources and blueprint.from all name. Advisory only: the item's source.document, inherited from Q89, still names prop-trf-rational-frobenius-integral-model.proof.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-317293f03 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the human's re-split note of 2026-10-22, which asked to cut a 6532-character, 7-step proof into new nodes. The re-split is done correctly. The item's statement is unchanged and its proof is now a 3-step, 2049-character assembly. Old Steps 1-3 went into the new node lem-trf-point-system-insertion-composition (A, about 2625 characters of old argument). Old Steps 5-7 went into the new node lem-trf-roos-cone-compositor-descent (B, about 2819 characters). Old Step 4, the check of the hypotheses of lem-cbc-exact-product-functor-strict-limit, stays as item Step 2, and its naturality claim moved into B. No argument was dropped or blurred. A and B are of comparable size, do not depend on each other, and neither restates the item: A is the strict and localized insertion compositor for any automorphism h of Spec k; B is a generic lemma for exact product-preserving functors with coherent b, d, t. A's hypotheses hold for h = Spec(gamma) with l invertible. Its u_r recipe, read through j_r, is the u_r of lem-trf-point-system-transport-descent. For B I recomputed all three identities: the product identity by pr_n plus naturality of d plus the b-d-t hypothesis at level n; the cone identity diagonally, using psi F(s) = s psi from naturality of b; and the derived identity by naturality of theta and cancellation. The derived maps descend to D(S). Both statements are true as written. The item's Step 3 hypotheses (U_s exact, F_i exact and product-preserving, the compatibility equation) all come from Steps 1-2 and A. Sources checked: the Global-powers sentence is at thm-trf-l-function-euler-product.proof.md lines 35-52, and Stacks tags 03CB, 0H7J and 0941 have the cited labels (0941 read at sites-cohomology.tex line 5067). No SGA source is used. Duplicate search found no node stating A or B. lem-pur-roos-comparison-horizontal-coherence states the b-free cone identity and is an ingredient for B's future proof, not a duplicate. I accept the declared tool uses, which are generic exactness, product, Roos-normalization and U_s tools. FIX, one fault class (B3): both new nodes cited nodes in their statements that were missing from stmt_deps. A was missing lem-weil-proetale-isomorphism-inverse-image, def-weil-inverse-image-pullback-comparison, def-trf-coefficient-tower-operations, lem-weil-point-proetale-sections-exact, def-weil-frobenius-point-transport and lem-trf-point-sheaf-insertion-calculus. B was missing def-weil-abstract-derived-category, def-weil-inverse-system and lem-weil-tower-category-levelwise-abelian. I added them in the corrected node files under fixes/dag/nodes/sec-trace-formula/; a reachability check over the snapshot shows no cycle. Advisory: the item's source.document still names the rational-integral-model proof file instead of the Euler-product proof file, as earlier reviews also noted.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PointSystemPowerRoosCoherence",
   "declaration": "WeilConjectures.PointSystemTransport.PowerRoos.point_system_power_roos_coherence",
   "declarations": [
-   "WeilConjectures.PointSystemTransport.PowerRoos.F",
-   "WeilConjectures.PointSystemTransport.PowerRoos.Fc",
-   "WeilConjectures.PointSystemTransport.PowerRoos.Ft",
-   "WeilConjectures.PointSystemTransport.PowerRoos.Uc",
-   "WeilConjectures.PointSystemTransport.PowerRoos.Gc",
-   "WeilConjectures.PointSystemTransport.PowerRoos.coordinates",
-   "WeilConjectures.PointSystemTransport.PowerRoos.Compositors",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasSiteSections",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasSystemSections",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasRestrictionSections",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasTensorUnits",
-   "WeilConjectures.PointSystemTransport.PowerRoos.RoosNormalization",
-   "WeilConjectures.PointSystemTransport.PowerRoos.toRoos",
-   "WeilConjectures.PointSystemTransport.PowerRoos.Comparisons",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasProducts",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasFirstCoordinate",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasSecondCoordinate",
-   "WeilConjectures.PointSystemTransport.PowerRoos.HasDerivedModel",
-   "WeilConjectures.PointSystemTransport.PowerRoos.tc",
-   "WeilConjectures.PointSystemTransport.PowerRoos.td",
-   "WeilConjectures.PointSystemTransport.PowerRoos.dc",
-   "WeilConjectures.PointSystemTransport.PowerRoos.dd",
-   "WeilConjectures.PointSystemTransport.PowerRoos.u",
-   "WeilConjectures.PointSystemTransport.PowerRoos.I",
-   "WeilConjectures.PointSystemTransport.PowerRoos.StrictTransportCoherence",
-   "WeilConjectures.PointSystemTransport.PowerRoos.DerivedTransportCoherence",
-   "WeilConjectures.PointSystemTransport.PowerRoos.ProductCoherence",
-   "WeilConjectures.PointSystemTransport.PowerRoos.ConeCoherence",
-   "WeilConjectures.PointSystemTransport.PowerRoos.DerivedComparisonCoherence",
    "WeilConjectures.PointSystemTransport.PowerRoos.point_system_power_roos_coherence"
   ],
   "file": "lean/Sheaf/Paper/PointSystemPowerRoosCoherence.lean",
@@ -342,5 +235,27 @@
   "group": "Q01",
   "result": "fix",
   "note": "Mathematics and records correct. Item changes only lean + added landed def stmt_dep def-weil-strict-roos-model (used for roosF/roosP/roosPmap/roosχ/roosι/roosLimitFunctor); statement verbatim; nothing dropped; no cycle. Clause check: only hl : l ≠ D.p, independent universes t,u; all five coherence clauses (strict u, derived I, product, cone, a_{m+1}d_m = L(t_m)a_1F_1(a_m)) match the node in diagrammatic order for all m ≥ 1. Every existential witness is uniquely pinned: d/t/b identity on sections via HEq over propositionally equal Over objects (h commutes with h^m); tensor via iso j's; ordinary by projections; unit on K-injectives; theta via theta_normalization; psi by projections; kappa by both coordinates (off-diagonals 0); a by HasDerivedModel on every Q(M). The theorem stmt_dep lem-trf-point-system-transport-descent is genuine (derivedTransport is .choose of its main theorem); the owners of other decls are in the transitive closure (advisory). No duplicate found, no hollow data, single sorry, docstrings and line lengths fine. Finding H11: the second reading was not clause by clause. FIX: fixes/lem-trf-point-system-power-roos-coherence.report.md keeps the Worker report and the original paragraphs verbatim and adds a clause-by-clause subsection; no Lean change, no compile needed. Advisories: source.document names prop-trf-rational-frobenius-integral-model instead of thm-trf-l-function-euler-product (maintainer field); tensor compositor identified with the canonical pullback composition only via its unit property, because the dependency's canonical map is single-universe and derived-level."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b8ac7",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T070427-L-3586572",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointSystemPowerRoosData vs clone item module (verbatim extraction), item theorem vs the two new specialization statements + proved derived_transport_coherence_from_strict, nodes vs Lean"
  }
 }

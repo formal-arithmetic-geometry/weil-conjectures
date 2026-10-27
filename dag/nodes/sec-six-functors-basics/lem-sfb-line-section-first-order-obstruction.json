@@ -1,0 +1,426 @@
+{
+ "id": "lem-sfb-line-section-first-order-obstruction",
+ "kind": "statement",
+ "title": "First-order line-section obstruction and its Serre-dual multiplication formula",
+ "statement": "Let $k$ be algebraically closed [def-weil-field, def-weil-algebraic-closure], let $C/k$ be a smooth projective connected curve [def-sc-curves, def-kun-projective], and let $L$ be an invertible module [def-sc-invertible-module]. Set $A=k[\\epsilon]/(\\epsilon^2)$ [def-sc-dual-numbers], $C_A=C\\times_k\\operatorname{Spec}A$, and let $L_A$ be an invertible module on $C_A$ with a fixed identification $L_A/\\epsilon L_A\\simeq L$. If $t_{ij}$ are transition functions of $L$ and the transitions of $L_A$ are $t_{ij}(1+\\epsilon a_{ij})$, let $v=[a_{ij}]\\in H^1(C,\\mathcal O_C)$; the cohomology is ordinary Zariski module cohomology [def-sc-ringed-space-module-cohomology]. Write $\\partial_v:H^0(C,L)\\to H^1(C,L)$ for the boundary of $0\\to L\\xrightarrow{\\epsilon}L_A\\to L\\to0$. Then $\\partial_v(s)$ is the class of the Cech cocycle $a_{ij}s_j$, interpreted using the transition functions of $L$. With $\\omega_C=\\Omega^1_{C/k}$ [def-sc-kahler-differentials] $L^{-1}:=L^{\\vee}$ [def-sc-invertible-module], and the Serre trace pairings $\\langle-,-\\rangle_{\\mathcal M}:H^1(C,\\mathcal M)\\otimes_kH^0(C,\\mathcal M^{\\vee}\\otimes\\omega_C)\\to k$ of [det-thm-picard-duality] (cup product, evaluation, then the residue trace $t_C$) for $\\mathcal M=\\mathcal O_C$ and $\\mathcal M=L$, one has\n$$\\langle\\partial_v(s),t\\rangle_L=\\langle v,s t\\rangle_{\\mathcal O_C}\\quad\\text{for }t\\in H^0(C,\\omega_C\\otimes L^{-1}).$$\nA simultaneous opposite convention for the boundary and Cech differential changes both sides by the same sign. More precisely, if $R\\Gamma(C_A,L_A)$ in the derived category [def-pc-derived-category] is represented by a two-term finite free $A$-complex $[E_A^0\\xrightarrow{d_A}E_A^1]$ [def-amb-finite-locally-free-module], with reduction $[E^0\\xrightarrow{d_0}E^1]$, the map $\\ker d_0\\to\\operatorname{coker}d_0$ sending $x$ to the class of $\\epsilon^{-1}d_A(\\widetilde x)$ is $\\partial_v$ under the natural cohomology identifications. Here $\\widetilde x$ is any lift, and $\\epsilon E_A^1$ is identified with $E^1$; this is independent of the lift and the complex model.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0C6R (lemma-picard-group-first-order-thickening), split dual-number case; curves.tex Tags 0BS2 (lemma-duality-dim-1) and 0BS4 (remark-rework-duality-locally-free) for natural Serre duality. The section-boundary and two-term-model formulas are an agent expansion, not an assertion that 0C6R states them verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-invertible-module",
+  "def-sc-dual-numbers",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-kahler-differentials",
+  "def-pc-derived-category",
+  "def-amb-finite-locally-free-module",
+  "det-thm-picard-duality"
+ ],
+ "proof": [
+  {
+   "text": "Use the split projection $p:C_A\\to C$. The spaces $C_A$ and $C$ have the same opens: on $U=\\operatorname{Spec}R$, every prime of $R[\\epsilon]/\\epsilon^2$ contains $\\epsilon$, and basic opens correspond under reduction. On this space $\\mathcal O_{C_A}=\\mathcal O_C\\oplus\\epsilon\\mathcal O_C$. Thus restriction of scalars $p_*$ on modules is exact; its left adjoint $p^*$ is exact as well, being extension by this free rank-two algebra. By [lem-sp-right-adjoint-preserves-injectives], $p_*$ preserves injectives. An injective resolution on $C_A$ therefore also computes derived global sections after restriction to $C$, with the same sections and differentials. This identifies the derived sections and the boundaries, not only their dimensions. Locally $L_A$ is free of rank one, and reduction gives the exact sequence $0\\to L\\xrightarrow{\\iota}p_*L_A\\to L\\to0$, where $\\iota(u)=\\epsilon\\widetilde u$ for any lift. It is well-defined since two lifts differ by $\\epsilon L_A$ and $\\epsilon^2=0$; its image is precisely the kernel of reduction.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z, lemma-adjoint-preserve-injectives; more-morphisms.tex Tag 0C6R, split thickening, with the displayed affine calculation"
+   }
+  },
+  {
+   "text": "Fix the transition convention $e_j=t_{ij}e_i$ for frames of $L$ and $e_{A,j}=t_{ij}(1+\\epsilon a_{ij})e_{A,i}$ for the chosen lifts. Write $s=s_i e_i=s_j e_j$, so $s_i=t_{ij}s_j$, and choose $\\widetilde s_i=s_i e_{A,i}$. On an overlap $\\widetilde s_j-\\widetilde s_i=\\epsilon t_{ij}a_{ij}s_j e_{A,i}$. Under $\\iota^{-1}$ this is $a_{ij}s_i e_i=a_{ij}s_j e_j$. The triple-overlap equation for the transitions gives $a_{ik}=a_{ij}+a_{jk}$, since $\\epsilon^2=0$. Consequently these differences are precisely the image of the additive cocycle $(a_{ij})$ under the sheaf map $m_s:\\mathcal O_C\\to L$, $u\\mapsto us$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0C6R, lemma-picard-group-first-order-thickening, proof: units 1+f; explicit transition calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-boundary-cech-compatibility] to the exact sequence of step 1 and its local lifts from step 2. Its sign is lift on $U_j$ minus lift on $U_i$. It identifies the image of $(a_{ij}s_j)$ under the canonical Cech comparison with $\\partial_v(s)$. By [lem-sc-cech-h1-map-natural], applying $m_s$ to the cocycle and then comparing equals first comparing and applying $H^1(m_s)$. Since $v$ is the comparison image of $(a_{ij})$, we obtain $\\partial_v(s)=H^1(m_s)(v)$. No claim that the chosen cover computes all cohomology is required.",
+   "uses": [
+    "lem-sc-boundary-cech-compatibility",
+    "lem-sc-cech-h1-map-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EQ, lemma-cech-cohomology, canonical natural comparison; Tag 0B8S, lemma-boundary-derivation-over-cup-product, local-lift calculation, with the sign convention fixed by the cited boundary node"
+   }
+  },
+  {
+   "text": "The curve $C$ is integral: its local rings are domains by [lem-sc-smooth-regular], so two irreducible components cannot meet (a common point would have a local ring with two minimal primes); $C$ is Noetherian, so its finitely many components are open and closed, and connectedness leaves one. It has dimension one by [def-sc-curves], and it is proper over $k$ by [lem-kun-projective-implies-proper]. Hence [det-thm-picard-duality] applies with $n=1$. Use its naturality clause with $\\mathcal F=\\mathcal O_C$, $\\mathcal G=L$, $q=1$, and $\\varphi=m_s$; both are finite locally free. The dual map $m_s^{\\vee}\\otimes1:L^{\\vee}\\otimes\\omega_C\\to\\mathcal O_C^{\\vee}\\otimes\\omega_C=\\omega_C$ sends $t$ to $st$: in the frame $e_i$, a dual section is $b_i e_i^{\\vee}\\otimes\\eta_i$ and its image is $s_i b_i\\eta_i$. Therefore $\\langle\\partial_v(s),t\\rangle_L=\\langle H^1(m_s)v,t\\rangle_L=\\langle v,st\\rangle_{\\mathcal O_C}$, for exactly the trace pairings of the statement. No comparison with another normalization of Serre duality is used.",
+   "uses": [
+    "lem-sc-smooth-regular",
+    "def-sc-curves",
+    "lem-kun-projective-implies-proper",
+    "det-thm-picard-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2, lemma-duality-dim-1, clause (5), and Tag 0BS4, remark-rework-duality-locally-free; naturality as explicitly stated in the latest blueprint det-thm-picard-duality"
+   }
+  },
+  {
+   "text": "Let $f:C_A\\to Y=\\operatorname{Spec}A$ and let $T$ be the canonical coefficient triangle $k\\to A\\to k\\to k[1]$ in $D(A)$ of $0\\to k\\xrightarrow{1\\mapsto\\epsilon}A\\to k\\to0$, supplied by [lem-weil-pbc-complex-ses-triangle]. On an affine trivializing open with ring $R\\otimes_k A$, [lem-pc-affine-derived-pullback-tensor-tilde](2) gives $Lf^*\\widetilde M\\cong\\widetilde{M\\otimes^{\\mathbf L}_A(R\\otimes_kA)}$; as $R\\otimes_kA$ is $A$-free (by a $k$-basis of $R$) there is no higher Tor, so $Lf^*\\widetilde k=\\mathcal O_C$ and $Lf^*\\widetilde A=\\mathcal O_{C_A}$, regarded as $\\mathcal O_{C_A}$-modules. The line module $L_A$ is flat, so $L_A\\otimes^{\\mathbf L}$ of these is computed termwise: the three terms are $L$, $L_A$, $L$, and the first map is $r\\mapsto\\epsilon r$, exactly $\\iota$. These identifications agree on overlaps. Thus $L_A\\otimes^{\\mathbf L}Lf^*T$ is the canonical triangle of $0\\to L\\xrightarrow{\\iota}L_A\\to L\\to0$; the exactness, signed shifts, and preservation of the connecting arrow for these derived tensor functors are supplied by [lem-weil-pbc-ringed-projection-mate-exact].",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; sites-cohomology.tex Tag 06YU, definition-derived-tor, canonical exact tensor functor"
+   }
+  },
+  {
+   "text": "The morphism $f$ is quasi-compact and quasi-separated (it is projective, hence proper by [lem-kun-projective-implies-proper]), and $L_A$ is quasi-coherent. Apply [lem-pc-projection-formula] to $f$, $L_A[0]$, and the three coefficient objects $\\widetilde k,\\widetilde A,\\widetilde k$ of $\\widetilde T$, all of which have quasi-coherent cohomology. Its canonical maps are isomorphisms. By [lem-weil-pbc-ringed-projection-mate-exact] these very maps, defined as counit mates, give a morphism of triangles including the connecting square, with the identity at the coefficient unit $A$. By [lem-pc-derived-direct-image-preserves-qcoh], $Rf_*L_A\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$, so the triangulated equivalence of [lem-pc-affine-qcoh-derived-equivalence] writes it as $\\widetilde{K}$ with $K=R\\Gamma(Y,Rf_*L_A)$, and [lem-pc-affine-derived-pullback-tensor-tilde](3) gives $\\widetilde K\\otimes^{\\mathbf L}\\widetilde M\\cong\\widetilde{K\\otimes^{\\mathbf L}_AM}$. By [lem-pc-ringed-spaces-derived-direct-image-composition], $R\\Gamma(Y,-)\\circ Rf_*\\cong R\\Gamma(C_A,-)$. Applying $R\\Gamma(Y,-)$ thus identifies $R\\Gamma(C_A,L_A)\\otimes^{\\mathbf L}_AT$ with the derived-global-sections triangle of step 5. By the injective-resolution identification in step 1 and [def-sc-module-cohomology-boundary], its degree-zero boundary is exactly $\\partial_v$, with end groups $H^0(C,L)$ and $H^1(C,L)$. In particular the identifications with the reduced model are the canonical ones from this coefficient triangle, rather than arbitrary vector-space isomorphisms.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-pc-projection-formula",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "def-sc-module-cohomology-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EU, lemma-cohomology-base-change; Tag 06Z0, lemma-affine-compare-bounded; sites-cohomology.tex Tag 0B56, equation-projection-formula-map, its exact counit-mate construction"
+   }
+  },
+  {
+   "text": "Write $E_A=[E_A^0\\xrightarrow{d_A}E_A^1]$ for the specified model and $E=E_A\\otimes_Ak$. By [lem-pc-module-bounded-flat-kflat], this bounded finite free complex is K-flat, so $E_A\\otimes^{\\mathbf L}_AT$ is computed termwise, and by the signed-shift compatibility of [lem-weil-pbc-ringed-projection-mate-exact] it is the canonical triangle of the degreewise exact sequence $S_E:0\\to E\\xrightarrow{\\epsilon}E_A\\to E\\to0$ of $A$-complexes; the first map sends $x$ to $\\epsilon\\widetilde x$ and the differential it induces on each end is $d_0$. Restriction of scalars to $k$ is exact; by [lem-sf-exact-functor-derived-triangulated] it induces a functor on derived categories computed termwise. It sends the mapping cone of $S_E$, its quasi-isomorphism to $E$ and its projection to $E[1]$ to the same constructions for the underlying $k$-sequence, so it carries the canonical cone boundary of $S_E$ to that of the $k$-sequence, and it does not change cohomology. Over $k$ the sequence splits degreewise by the finite free bases, with section $x\\mapsto\\widetilde x$ and retraction $\\epsilon\\widetilde y\\mapsto y$ on $\\epsilon E_A$. By [lem-sc-p1-split-ses-boundary-comparison] the cone boundary is $Q$ of the chain map $\\pi d_A s$. For $x\\in\\ker d_0$ with lift $\\widetilde x$, $d_A(\\widetilde x)\\in\\epsilon E_A^1$, so $H^0$ of this boundary sends $x$ to the class of $\\epsilon^{-1}d_A(\\widetilde x)$ in $\\operatorname{coker}d_0$. By step 6 this is $\\partial_v$; the end groups are $\\ker d_0$ and $\\operatorname{coker}d_0$ since the model is in degrees 0 and 1.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sc-p1-split-ses-boundary-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011J and 011K, lemma-ses-termwise-split-cochain and lemma-ses-termwise-split-long-cochain; more-algebra.tex Tag 064K, lemma-derived-tor-quasi-isomorphism; sites-cohomology.tex Tag 06YU"
+   }
+  },
+  {
+   "text": "If another lift is $\\widetilde x+\\epsilon z$, its image after division by $\\epsilon$ differs by $d_0(\\bar z)$, which is zero in the cokernel. For independence of the model, a specified derived isomorphism $E_A\\simeq R\\Gamma(C_A,L_A)$ induces, by functoriality of derived tensor, an isomorphism of its coefficient triangles, including their connecting arrows; the exact tensor and naturality assertions used in steps 5--7 are those of [lem-weil-pbc-ringed-projection-mate-exact]. The boundary is thus unchanged under the induced cohomology identifications, as required. Finally, the opposite simultaneous convention is obtained by negating the degree-one Cech-to-cohomology comparison and the boundary. It negates both $v$ and $\\partial_v(s)$, so bilinearity negates the two sides of the pairing equality together; it does not assert that one can negate the boundary while fixing the convention for $v$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor, independence and functoriality of the derived tensor construction; homology.tex Tags 011J and 011K, lift formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sc-boundary-cech-compatibility",
+  "lem-sc-cech-h1-map-natural",
+  "lem-sc-smooth-regular",
+  "def-sc-curves",
+  "lem-kun-projective-implies-proper",
+  "det-thm-picard-duality",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pc-projection-formula",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "def-sc-module-cohomology-boundary",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sc-p1-split-ses-boundary-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0C6R supplies the deformation context. Agent expansion using cohomology.tex 01EQ and 0B8S, curves.tex 0BS2/0BS4, perfect.tex 08EU/06Z0, and homology.tex 011J/011K; the sources do not state the whole item verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Picard|cupProduct|firstOrder|first_order|SerreDual",
+   "results": "Actual search: 3 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derivative of the determinant of cohomology at a line bundle with one section is the Serre duality pairing with the product of its section and a dual section",
+   "results": "Actual search: 8 hits; Matrix.derivative_det_one_add_X_smul_aux, exteriorPower.pairingDual_ιMulti_ιMulti, MDifferentiableAt.inner_bundle, Bundle.mdifferentiableOn_zeroSection, Bundle.mdifferentiableWithinAt_zeroSection, MDifferentiableOn.inner_bundle, mDifferentiableOn_sub_section, MDifferentiableWithinAt.change_section_trivialization",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"tangent\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle on a smooth projective curve the obstruction to lifting a section through a first order deformation is cup product with its class in H1 of the structure sheaf",
+   "results": "Actual search: 8 hits; Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent.δ, Algebra.H1Cotangent.map, Algebra.Extension.tensorH1Cotangent",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connecting homomorphism for a first order deformation of an invertible sheaf on a projective curve is cup product and is dual to multiplication of sections by Serre duality",
+   "results": "Actual search: 8 hits; Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.H1Cotangent.δ, Algebra.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δAux, Algebra.Generators.H1Cotangent.δ_eq_δ",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent-complex connecting maps, ordinary matrix derivatives, and ring Picard groups do not state deformation of sections of curve line bundles or its Serre pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a line bundle on a smooth projective curve the connecting map for a deformation over dual numbers is multiplication by its first cohomology deformation class and is Serre dual to multiplication of sections",
+   "results": "Actual search: 8 hits; Algebra.Generators.H1Cotangent.δ_map, Algebra.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ, Algebra.Extension.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.Generators.H1Cotangent.δ_comp_equiv",
+   "date": "2026-10-23",
+   "verdict": "no match: snake-lemma maps supply general homological tools only; cotangent cohomology and dual-number algebra maps do not state the line-section, Serre pairing, and geometric complex-model comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "SerreDual|serreDual|lineBundle.*deform|section.*obstruction",
+   "results": "Actual search: 0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: snake-lemma maps supply general homological tools only; cotangent cohomology and dual-number algebra maps do not state the line-section, Serre pairing, and geometric complex-model comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex\", \"δ\"",
+   "results": "Actual search: 12 hits; CategoryTheory.ShortComplex.SnakeInput.δ, CategoryTheory.ShortComplex.SnakeInput.epi_δ, CategoryTheory.ShortComplex.SnakeInput.mono_δ, CategoryTheory.ShortComplex.SnakeInput.δIso, CategoryTheory.ShortComplex.SnakeInput.isIso_δ, CategoryTheory.ShortComplex.SnakeInput.op_δ, CategoryTheory.ShortComplex.SnakeInput.L₀_g_δ, CategoryTheory.ShortComplex.SnakeInput.δ_L₃_f",
+   "date": "2026-10-23",
+   "verdict": "no match: snake-lemma maps supply general homological tools only; cotangent cohomology and dual-number algebra maps do not state the line-section, Serre pairing, and geometric complex-model comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The obstruction to lifting a global section of an invertible sheaf on a smooth projective curve over dual numbers is cup product with the deformation class",
+   "results": "Actual search: 8 hits; DualNumber.lift, DualNumber.lift_apply_eps, DualNumber.coe_lift_symm_apply, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.Extension.H1Cotangent, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.Extension.h1Cotangentι, AlgebraicGeometry.FormallyUnramified.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: snake-lemma maps supply general homological tools only; cotangent cohomology and dual-number algebra maps do not state the line-section, Serre pairing, and geometric complex-model comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality on a proper smooth curve is natural in a finite locally free sheaf so the dual of a first order section obstruction is multiplication by the section",
+   "results": "Actual search: 8 hits; Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Generators.H1Cotangent.δ, Algebra.H1Cotangent.δ, Algebra.H1Cotangent, sectionOfRetractionKerToTensorAux, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d, Algebra.smoothLocus_eq_compl_support_inter",
+   "date": "2026-10-23",
+   "verdict": "no match: snake-lemma maps supply general homological tools only; cotangent cohomology and dual-number algebra maps do not state the line-section, Serre pairing, and geometric complex-model comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-degree-gminusone-theta",
+  "date": "2026-10-24",
+  "group": "Q146"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative theta autoduality of smooth curve Picard spaces. Supporting input: The degree-g-minus-one Picard torsor and its determinant theta divisor. Supporting input: first-order obstruction to extending a section, used to verify multiplicity one of the geometric determinant zero divisor.",
+   "via": [
+    "lem-sfb-relative-degree-gminusone-theta",
+    "lem-sfb-relative-jacobian-theta-polarization",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-line-section-first-order-obstruction",
+  "worker": "stage1",
+  "summary": "Eight steps give the transition calculation, its canonical Cech comparison, natural Serre pairing, and the coefficient-triangle computation in any specified two-term finite free model. Existing generic nodes suffice; no new nodes and no statement change. Checked local-lift signs, coefficient-triangle connecting compatibility, and independence under the induced model identifications. Maintainer reader fix (2026-10-24): the statement's pairings are now the trace pairings of det-thm-picard-duality (whose naturality step 4 uses); steps 4-7 cite integrality/properness, the affine tilde tensor formulas, D_QCoh preservation, direct-image composition, and the split cone-boundary comparison.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), via the inherited alteration/stable-curve/Picard/theta prerequisite chain in blueprint.from.place and via. This item verifies the first-order multiplicity-one test needed by lem-sfb-relative-degree-gminusone-theta. Ancestor command returns None for the inherited created.item chain; retain the existing explicit place and via list. Latest det-thm-picard-duality supplies the naturality tool.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic exact-adjunction tool identifies derived sections after restricting from the split thickening to the original curve."
+   },
+   {
+    "node": "lem-sc-boundary-cech-compatibility",
+    "why": "Generic module-cohomology boundary computation from local lifts; the six-functor unit has no such Zariski module assertion."
+   },
+   {
+    "node": "lem-sc-cech-h1-map-natural",
+    "why": "Generic naturality of the canonical Cech comparison, used for the multiplication map of a section."
+   },
+   {
+    "node": "det-thm-picard-duality",
+    "why": "Generic natural Serre duality on finite locally free curve modules, with the exact morphism pairing formula absent from the smaller thm-sc-serre-duality-curve statement."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic canonical triangle of a short exact sequence, used on the dual-number coefficient extension."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ringed-topos theorem for canonical derived tensors and the projection mate, including its connecting square, applied to the ordinary Zariski ringed sites."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Generic qcqs quasi-coherent projection formula; all three coefficient objects satisfy its hypotheses."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic triangulated equivalence on the affine coefficient base, identifies derived pushforward and global A-module sections."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded free model is K-flat, allowing the ordinary tensor computation of its coefficient triangle."
+   },
+   {
+    "node": "lem-sc-smooth-regular",
+    "why": "Generic: local rings of a smooth curve are domains, used to see that the connected curve is integral, the n=1 setting of det-thm-picard-duality."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic: projective morphisms (def-kun-projective convention) are proper; properness of C over k and qcqs of f."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine formulas: derived pullback and derived tensor of tilde complexes, used to compute the pulled-back coefficient triangle and to pass from O_Y to A-modules."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic: qcqs Rf_* preserves D_QCoh, so Rf_*L_A lies in the domain of the affine equivalence."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "why": "Generic composition of derived direct images, R Gamma(Y,-) o Rf_* = R Gamma(C_A,-)."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic: an exact functor (restriction of scalars A to k) acts termwise on derived categories."
+   },
+   {
+    "node": "lem-sc-p1-split-ses-boundary-comparison",
+    "why": "Generic: the canonical cone boundary of a degreewise split short exact sequence of complexes is Q(pi d s)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-sc-boundary-cech-compatibility",
+  "lem-sc-cech-h1-map-natural",
+  "det-thm-picard-duality",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pc-projection-formula",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sc-smooth-regular",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sc-p1-split-ses-boundary-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-7656a9825",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-7656a9825 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, its 8 steps, every cited node, the sources at the cited places, and the parent that cites it. There are no new nodes. Steps 1-3 and 8 are correct. I recomputed the step-2 transitions (s_i = t_ij s_j, lift difference = iota(a_ij s), a_ik = a_ij + a_jk). The step-3 Cech sign agrees with lem-sc-boundary-cech-compatibility. I found three repairable faults, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-line-section-first-order-obstruction.json. (1) C4/E5, step 4: the statement takes its pairings from thm-sc-serre-duality-curve. Its live statement gives only an isomorphism built through pi_t and P1 duality, with no trace pairing and no naturality. Step 4 proves the formula for the trace pairing of det-thm-picard-duality and asserts without support that the two have 'the same trace normalization'. Fix: the statement now names the trace pairings of det-thm-picard-duality (stmt_deps changed to match). Step 4 now checks that node's hypotheses: C integral via lem-sc-smooth-regular, dimension 1, proper via lem-kun-projective-implies-proper. (2) C1, steps 5-6: Lf^* of tilde modules, tensor compatibility of tilde, Rf_* preserving D_QCoh and RGamma(Y,Rf_*)=RGamma(C_A) were used with no node. They now cite lem-pc-affine-derived-pullback-tensor-tilde (2) and (3), lem-pc-derived-direct-image-preserves-qcoh and lem-pc-ringed-spaces-derived-direct-image-composition. (3) C4, step 7: the boundary of the canonical triangle was identified with the long-exact-sequence formula, and the splitting exists only over k. Step 7 now restricts scalars to k (lem-sf-exact-functor-derived-triangulated, which carries the cone boundary to the cone boundary) and applies lem-sc-p1-split-ses-boundary-comparison (delta = Q(pi d s)). The connecting-formula node is dropped. proof_deps is set to the union of the uses; tool_uses are updated. Small cases checked: genus 1 with L=O, s=1 gives partial_v(1)=v; the model [A -(eps b)-> A] gives x -> bx; a=0, s=0, t=0, P1 and characteristic 2 all behave as expected. No cycles. No SGA source. Maintainer note: the citer lem-sfb-relative-degree-gminusone-theta step 7 should cite det-thm-picard-duality for the perfection of the trace pairing on H^1(O) x H^0(omega).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LineSectionFirstOrderObstruction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.line_section_first_order_obstruction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.lineDualBase",
+   "AlgebraicGeometry.Scheme.Modules.lineDualProjection",
+   "AlgebraicGeometry.Scheme.Modules.lineDualStructure",
+   "AlgebraicGeometry.Scheme.Modules.lineDual_zero_condition",
+   "AlgebraicGeometry.Scheme.Modules.lineDualZero",
+   "AlgebraicGeometry.Scheme.Modules.lineDual_zero_projection",
+   "AlgebraicGeometry.Scheme.Modules.lineReductionOnBase",
+   "AlgebraicGeometry.Scheme.Modules.lineReduction",
+   "AlgebraicGeometry.Scheme.Modules.lineDualScalars",
+   "AlgebraicGeometry.Scheme.Modules.lineEpsilon",
+   "AlgebraicGeometry.Scheme.Modules.lineInclusion_existsUnique",
+   "AlgebraicGeometry.Scheme.Modules.lineInclusion",
+   "AlgebraicGeometry.Scheme.Modules.lineInclusion_reduction",
+   "AlgebraicGeometry.Scheme.Modules.lineEpsilonSequence",
+   "AlgebraicGeometry.Scheme.Modules.lineEpsilonSequence_shortExact",
+   "AlgebraicGeometry.Scheme.Modules.lineSectionBoundary",
+   "AlgebraicGeometry.Scheme.Modules.lineCech",
+   "AlgebraicGeometry.Scheme.Modules.lineCechComponent",
+   "AlgebraicGeometry.Scheme.Modules.lineCechComparison",
+   "AlgebraicGeometry.Scheme.Modules.lineDeformationClass",
+   "AlgebraicGeometry.Scheme.Modules.LineTransitionData",
+   "AlgebraicGeometry.Scheme.Modules.lineCurve_relativeDimension",
+   "AlgebraicGeometry.Scheme.Modules.lineResidueTrace",
+   "AlgebraicGeometry.Scheme.Modules.lineSectionMap",
+   "AlgebraicGeometry.Scheme.Modules.line_section_first_order_obstruction",
+   "AlgebraicGeometry.Scheme.Modules.lineUnderlyingComplex",
+   "AlgebraicGeometry.Scheme.Modules.lineReducedComplex",
+   "AlgebraicGeometry.Scheme.Modules.lineTermReduction",
+   "AlgebraicGeometry.Scheme.Modules.lineScalarCech",
+   "AlgebraicGeometry.Scheme.Modules.lineScalarCechMap",
+   "AlgebraicGeometry.Scheme.Modules.IsLineModelComparison",
+   "AlgebraicGeometry.Scheme.Modules.lineAPresheaf",
+   "AlgebraicGeometry.Scheme.Modules.lineACech",
+   "AlgebraicGeometry.Scheme.Modules.lineACech_forget_existsUnique",
+   "AlgebraicGeometry.Scheme.Modules.lineACechForget",
+   "AlgebraicGeometry.Scheme.Modules.lineForgetModel",
+   "AlgebraicGeometry.Scheme.Modules.lineDerivedSectionsA",
+   "AlgebraicGeometry.Scheme.Modules.lineModel_chainRepresentative",
+   "AlgebraicGeometry.Scheme.Modules.lineModel_specifiedComparison",
+   "AlgebraicGeometry.Scheme.Modules.lineModel_reduction_existsUnique",
+   "AlgebraicGeometry.Scheme.Modules.lineModel_reducedComparison",
+   "AlgebraicGeometry.Scheme.Modules.lineModel_cohomologyComparison",
+   "AlgebraicGeometry.Scheme.Modules.lineModel_kernelCokernel",
+   "AlgebraicGeometry.Scheme.Modules.line_section_first_order_obstruction_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LineSectionFirstOrderObstruction.lean",
+  "statement": "theorem line_section_first_order_obstruction (f : C ⟶ Spec (.of k)) [IsAlgClosed k] [IsConnectedCurve f] [Smooth f] [IsHProjective f] (L : C.Modules) [L.IsInvertible] (LA : (lineDualBase f).Modules) [LA.IsInvertible] (e : (tensorPullback (lineDualZero f)).obj LA ≅ L) {ι : Type u} (U : ι → C.Opens) (hU : iSup U = ⊤) (a : (lineCech U (𝟙_ C.Modules)).cycles 1) (_frames : LineTransitionData f L LA e U a) (s : scalarCohomology f L 0) : letI : MonoidalCategory (SheafOfModules.{u} C.ringCatSheaf) := SheafOfModules.monoidalCategory C.sheaf; (∃ z : (lineCech U L).cycles 1, (∀ y : Fin 2 → ι, lineCechComponent U L 1 ((lineCech U L).iCycles 1 z) y = (unitSectionsEquiv (∏ᶜ fun j : Fin 2 ↦ U (y j))).symm (lineCechComponent U (𝟙_ C.Modules) 1 ((lineCech U _).iCycles 1 a) y) • L.presheaf.map (homOfLE le_top).op (scalarGlobalSectionsEquiv f L s)) ∧ lineCechComparison U hU L ((lineCech U L).homologyπ 1 z) = lineSectionBoundary f L LA e s) ∧ lineSectionBoundary f L LA e s = scalarCohomologyMap f (lineSectionMap f L s) 1 (lineDeformationClass f U hU a) ∧ (∀ t : scalarCohomology f (dual L ⊗ f.relativeDifferentials) 0, picardTracePairing f f.relativeDifferentials 1 (lineResidueTrace f) L 1 (lineSectionBoundary f L LA e s) t = picardTracePairing f f.relativeDifferentials 1 (lineResidueTrace f) (𝟙_ C.Modules) 1 (lineDeformationClass f U hU a) (scalarCohomologyMap f (dualMap (lineSectionMap f L s) ▷ f.relativeDifferentials) 0 t)) ∧ (∀ t : scalarCohomology f (dual L ⊗ f.relativeDifferentials) 0, picardTracePairing f f.relativeDifferentials 1 (lineResidueTrace f) L 1 (-(lineSectionBoundary f L LA e s)) t = picardTracePairing f f.relativeDifferentials 1 (lineResidueTrace f) (𝟙_ C.Modules) 1 (-(lineDeformationClass f U hU a)) (scalarCohomologyMap f (dualMap (lineSectionMap f L s) ▷ f.relativeDifferentials) 0 t))",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main declaration gives the Cech representative, cohomological multiplication and the residue-normalized Serre pairing, including the simultaneous opposite sign. The companion line_section_first_order_obstruction_model gives the any-lift formula in every two-term finite-free A-model. Canonical epsilon/reduction, normalized scalar comparisons, derived-model realization and kernel/cokernel identifications are stated in this owning module; all postponed facts have source and proof docstrings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1c60d3de",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Read node, all 11 stmt-dep records, the delivered module (44 decls), and the report. Only `lean` differs from the live node; no statement_change or new nodes. Hypotheses are exactly IsAlgClosed, IsConnectedCurve, Smooth, IsHProjective, IsInvertible for L and L_A, and the identification e along the canonical zero section. ε-inclusion pinned by ∃!. Boundary is the recorded moduleCohomologyBoundary. Čech comparisons are pinned by IsModuleCechComparison and IsPicardScalarCechComparison. Trace is pinned by the residue normalization of picard_duality_one. The adjunction choice only reparametrizes e (Aut = k^×). LineTransitionData t(1+εa) is general. Recomputed s̃_j−s̃_i = ε a t s_j e_i ↦ a·s: sign agrees with boundary_cech_compatibility. Pairing clause uses the exact picardTracePairing with (m_s^∨⊗ω)(t) = st. Model clause: φ quasi-iso to the affine Čech complex (chainRepresentative/specifiedComparison realize every derived model); β pinned by ∃!, c₀/c₁ pinned; snake sign checked; holds for every lift and model. Edge cases a=0, s=0, char 2, rank 0 and universes are fine. Gates pass: no hollow defs, docstrings present, all sorry, statement verbatim, decl list matches, imports exist. No compile run (no file changed). Note: the second-reading section is a self-review."
+ }
+}

@@ -1,0 +1,206 @@
+{
+ "id": "lem-sfb-power-series-axis-coordinate-change",
+ "kind": "statement",
+ "title": "Triangular coordinate change makes a formal series regular on an axis",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak m$ a maximal ideal of $A$, and $d\\geq1$. Put $B=A[[X_1,\\ldots,X_d]]$ [def-weil-pbc-multivariate-power-series]. For $f\\in B$, write $\\bar f\\in(A/\\mathfrak m)[[X_1,\\ldots,X_d]]$ for coefficientwise reduction. If $\\bar f\\ne0$, there are integers $e_i\\geq2$ for $1\\leq i<d$ such that the substitutions $X_i\\mapsto X_i+X_d^{e_i}$ and $X_d\\mapsto X_d$ define an $A$-algebra automorphism $\\sigma$ of $B$, with inverse given by $X_i\\mapsto X_i-X_d^{e_i}$ and $X_d\\mapsto X_d$, and $\\overline{\\sigma(f)}(0,\\ldots,0,X_d)\\ne0$. Substitution is interpreted by coefficientwise summation in the variable-adic topology. The case $d=1$ uses the identity automorphism. No infinitude or perfection assumption on $A/\\mathfrak m$ is imposed.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "WANTED locally. EGA IV4, proof of Theorem 21.14.1, paragraph reducing the complete power-series case to one variable; cites Bourbaki, Algebre commutative VII, §3 no.7 Lemma 3 (also WANTED). Read the online English translation. No Stacks tag for this coordinate-change statement was located.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\bar f=\\sum_\\beta c_\\beta X^\\beta$ and let $S=\\{\\beta\\in\\mathbf N^d:c_\\beta\\ne0\\}$, which is nonempty. Choose $\\alpha$ by successively minimizing the first coordinate in $S$, then the second among those with the chosen first coordinate, and so on. Every restricted set is nonempty; after $d$ choices $\\alpha\\in S$. Every $\\beta\\in S\\setminus\\{\\alpha\\}$ has a first differing coordinate $j$ with $\\beta_j\\ge\\alpha_j+1$. Set $w_d=1$ and, backwards for $i<d$, set $w_i=2+\\sum_{k>i}w_k\\alpha_k$. For that first differing $j$, $$\\sum_iw_i(\\beta_i-\\alpha_i)\\ge w_j-\\sum_{k>j}w_k\\alpha_k>0.$$ For $j=d$ the right side is $1$; otherwise it is $2$. Thus $\\alpha$ is the unique member of $S$ of minimal weight. Put $e_i=w_i\\ge2$. This is successive minimization in $\\mathbf N$ followed by the displayed integer inequality; it requires neither finiteness of $S$ nor any assumption on the coefficients.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07NL (lemma-power-series-ring-over-Cohen-fs), proof, universal property; 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, perturbed variable map. Agent argument for the coordinate trick cited in EGA IV4, Theorem 21.14.1, reduction to one variable; Bourbaki VII §3 no.7 Lemma 3 is WANTED."
+   }
+  },
+  {
+   "text": "Put $J=(X_1,\\ldots,X_d)\\subset B$. By [lem-weil-pbc-power-series-variables-complete], $B$ is $J$-adically complete. Apply [lem-weil-pbc-power-series-adic-evaluation] with $C=A$, $T=B$, the constant coefficient inclusion, and the tuples $b_i^+=X_i+X_d^{e_i}$, $b_i^-=X_i-X_d^{e_i}$ for $i<d$, and $b_d^+=b_d^-=X_d$. Every entry belongs to $J$. We obtain continuous ring maps $\\sigma,\\tau:B\\to B$ fixing $A$, hence $A$-algebra maps, with the prescribed generator values. Their explicit truncation formulas are precisely coefficientwise substitution: modulo $J^N$ only input monomials of total degree less than $N$ contribute.",
+   "uses": [
+    "lem-weil-pbc-power-series-variables-complete",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07NL (lemma-power-series-ring-over-Cohen-fs), proof, universal property; 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, perturbed variable map. Agent argument for the coordinate trick cited in EGA IV4, Theorem 21.14.1, reduction to one variable; Bourbaki VII §3 no.7 Lemma 3 is WANTED."
+   }
+  },
+  {
+   "text": "Both composites $\\sigma\\tau$ and $\\tau\\sigma$ are continuous and fix constants. They fix $X_d$, and on $X_i$ for $i<d$ the two corrections cancel: $\\sigma(X_i-X_d^{e_i})=X_i+X_d^{e_i}-X_d^{e_i}=X_i$, and $\\tau(X_i+X_d^{e_i})=X_i-X_d^{e_i}+X_d^{e_i}=X_i$. The uniqueness assertion of [lem-weil-pbc-power-series-adic-evaluation] for the tuple $(X_i)$ identifies both composites with the identity. Thus $\\sigma$ is an automorphism with inverse $\\tau$. For $d=1$ both tuples are $(X_1)$, so the same uniqueness gives the identity directly.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07NL (lemma-power-series-ring-over-Cohen-fs), proof, universal property; 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, perturbed variable map. Agent argument for the coordinate trick cited in EGA IV4, Theorem 21.14.1, reduction to one variable; Bourbaki VII §3 no.7 Lemma 3 is WANTED."
+   }
+  },
+  {
+   "text": "Let $k=A/\\mathfrak m$ and $T=k[[t]]$. It is $(t)$-adically complete by [lem-weil-pbc-power-series-variables-complete]. Coefficientwise reduction and setting $X_1,\\ldots,X_{d-1}$ to zero and $X_d=t$ are ring maps: coefficientwise this follows by distributing the finite convolution sums in [def-weil-pbc-multivariate-power-series]. Write $q:B\\to T$ for their composite. It sends $J^N$ into $(t)^N$, so it is continuous. The composite $q\\sigma$ agrees on $A$ and the variables with the evaluation map of [lem-weil-pbc-power-series-adic-evaluation] for the tuple $(t^{w_1},\\ldots,t^{w_d})$. By uniqueness the maps agree. Its truncation formula therefore gives, for each $N\\ge0$, $$[t^N]q\\sigma(f)=\\sum_{\\beta:\\,\\sum_iw_i\\beta_i=N}c_\\beta.$$ Indeed use truncation modulo $(t)^{N+1}$; weights are positive, so every exponent in this sum has $|\\beta|\\le N$, and the finite polynomial truncation suffices. A multiple of $t^{N+1}$ has no coefficient in degree $N$, directly from the convolution definition.",
+   "uses": [
+    "lem-weil-pbc-power-series-variables-complete",
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07NL (lemma-power-series-ring-over-Cohen-fs), proof, universal property; 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, perturbed variable map. Agent argument for the coordinate trick cited in EGA IV4, Theorem 21.14.1, reduction to one variable; Bourbaki VII §3 no.7 Lemma 3 is WANTED."
+   }
+  },
+  {
+   "text": "Take $N=\\sum_iw_i\\alpha_i$. Step 1 shows that among the nonzero $c_\\beta$ exactly $c_\\alpha$ occurs in the sum of Step 4. Consequently $[t^N]q\\sigma(f)=c_\\alpha\\ne0$. Since $q\\sigma(f)$ is exactly $\\overline{\\sigma(f)}(0,\\ldots,0,t)$, this proves the required nonvanishing. The argument uses only the nonempty support and finite sums, so works over finite or imperfect residue fields as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07NL (lemma-power-series-ring-over-Cohen-fs), proof, universal property; 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, perturbed variable map. Agent argument for the coordinate trick cited in EGA IV4, Theorem 21.14.1, reduction to one variable; Bourbaki VII §3 no.7 Lemma 3 is WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-power-series-variables-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07NL (lemma-power-series-ring-over-Cohen-fs), proof, universal property; 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof, perturbed variable map. Agent argument for the coordinate trick cited in EGA IV4, Theorem 21.14.1, reduction to one variable; Bourbaki VII §3 no.7 Lemma 3 is WANTED. The successive-minimum and weight argument is written here, not asserted to occur in those Stacks tags."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A formal change of variables makes a nonzero multivariate power series regular in the last variable over any field",
+   "results": "Hits: MvPowerSeries.HasSubst.X_pow, MvPowerSeries.X_mem_nonzeroDivisors, MvPowerSeries.mem_nonZeroDivisorsRight_of_constantCoeff, MvPolynomial.isRegular_X_pow, PowerSeries.HasSubst.monomial, MvPowerSeries.HasSubst.X, MvPolynomial.isRegular_X, MvPowerSeries.mem_nonZeroDivisorsLeft_of_constantCoeff. Substitution operations and HasSubst lemmas exist; none chooses triangular exponents to make a prescribed nonzero series nonzero on an axis.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noether normalization formal power series change variables x_i to x_i plus powers of last variable distinguished series",
+   "results": "Hits: PowerSeries.HasSubst.X', MvPowerSeries.HasSubst.X, PowerSeries.HasSubst, MvPowerSeries.HasSubst.X_pow, PowerSeries.HasSubst.X, PowerSeries.IsWeierstrassDivision, PowerSeries.IsWeierstrassDivisionAt, MvPowerSeries.hasSubst_of_constantCoeff_nilpotent. Substitution operations and HasSubst lemmas exist; none chooses triangular exponents to make a prescribed nonzero series nonzero on an axis.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coordinate change sends any nonzero multivariate formal series over a field to a series nonzero on the last coordinate axis",
+   "results": "Hits: MvPolynomial.coeff_rename_ne_zero, MvPowerSeries.subst, PowerSeries.HasSubst.of_constantCoeff_zero, MvPowerSeries.map, MvPowerSeries.subst_X, PowerSeries.subst, MvPowerSeries.map_subst, FormalMultilinearSeries.changeOrigin_eval_of_finite. Substitution operations and HasSubst lemmas exist; none chooses triangular exponents to make a prescribed nonzero series nonzero on an axis.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.subst",
+   "results": "Hits: MvPowerSeries.subst, MvPowerSeries.subst_self, MvPowerSeries.subst_X, MvPowerSeries.continuous_subst, MvPowerSeries.subst_eq_eval₂, MvPowerSeries.le_order_subst, MvPowerSeries.summable_subst, MvPowerSeries.le_weightedOrder_subst_of_forall_ne_zero. Substitution operations and HasSubst lemmas exist; none chooses triangular exponents to make a prescribed nonzero series nonzero on an axis.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "automorphism|regular.*variable|change.*variable",
+   "results": "Hits: . Substitution operations and HasSubst lemmas exist; none chooses triangular exponents to make a prescribed nonzero series nonzero on an axis.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-normal-horizontal-primes-principal",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4, proof of Theorem 21.14.1, complete power-series case: paragraph beginning “Let us first show that one can reduce to the case where n=1”, the automorphism of the reduced series.",
+   "via": [
+    "lem-sfb-complete-normal-horizontal-primes-principal",
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-power-series-axis-coordinate-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps give successive coordinate minima, recursively chosen separating weights, continuous substitutions and their two-sided inverse, and an explicit surviving coefficient after reduction and axis evaluation. Reuses the existing arbitrary-ring evaluation and completeness nodes; no new nodes. Checked project Lean, the whole DAG, blueprint, and actual logged Mathlib searches.",
+  "blueprint": "The inherited external-source ancestry has from.node=null (blueprint_refs.py ancestor confirms None). This fills the EGA IV4 21.14.1 one-variable reduction cited by the complete-normal-horizontal-primes-principal parent. Read the latest sec-six-functors-basics chapter and sk-thm-sf-ctf-stability unit and proof; no unit route changes. Global blueprint searches find no matching coordinate lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic continuous evaluation and uniqueness for power series over arbitrary commutative rings, used to construct and compare substitutions; the item unit contains no such algebraic universal-property result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-2a565cb02",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-2a565cb02 (reviewer sub-agent of L); spot-checked: Read the item in full. The delivery adds no new nodes; compared with the base copy in the Q30 snapshot, only the proof, proof_deps, proof_origin, status and split_report fields are new, and the statement, sources and searches are byte-identical. No repair note exists for this item. Step 1 takes the lexicographically least supported exponent alpha and sets w_d=1, w_i=2+sum_{k>i} w_k alpha_k; the weight gap is at least 1 or 2, so alpha is the unique weight minimiser and e_i>=2. Steps 2-3 apply lem-weil-pbc-power-series-adic-evaluation (C=A, T=B, I=J): the entries lie in J, B is J-complete by the variables-complete leaf, and the uniqueness clause gives the two-sided inverse. The composites are continuous because the forall-N-exists-M continuity condition composes. Step 4: q: B->k[[t]] is a ring map (on-axis convolution) with q(J^N) in (t)^N. By uniqueness q.sigma equals evaluation at t^{w_i}, and truncation modulo t^{N+1} gives coefficient sum_{w.beta=N} c_beta; since every w_i>=1, all such beta have |beta|<=N and are included. Step 5 leaves only c_alpha nonzero. Tested d=1, a nonzero constant, X_1-X_2^2 in characteristic 2 (image t^4-t^2) and X_1X_2. The parent's step 2 needs exactly sigma as an automorphism plus axis nonvanishing, which the item gives. Not duplicates: lem-per-weierstrass-henselian-cylinder does the same trick inline only under complete Noetherian local domain hypotheses, and lem-trf-formal-transverse-shift-calculus is characteristic 0 only. No cycle (the cited closure has 6 nodes). Accepted tool_use: lem-weil-pbc-power-series-adic-evaluation as a generic universal property. EGA IV4 21.14.1 and Bourbaki AC VII are not in the local literature (EGA IV1-IV3 only), so the item is correctly marked WANTED with proof_origin by=agent. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesAxisCoordinateChange",
+  "declaration": "MvPowerSeries.exists_triangular_axis_coordinate_change",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesAxisCoordinateChange.lean",
+  "statement": "theorem exists_triangular_axis_coordinate_change {A : Type u} [CommRing A] (m : Ideal A) [m.IsMaximal] (n : ℕ) (f : MvPowerSeries (Fin (n + 1)) A) (hf : MvPowerSeries.map (Ideal.Quotient.mk m) f ≠ 0) : ∃ e : Fin n → ℕ, (∀ i : Fin n, 2 ≤ e i) ∧ ∃ σ : MvPowerSeries (Fin (n + 1)) A ≃ₐ[A] MvPowerSeries (Fin (n + 1)) A, (∀ g : MvPowerSeries (Fin (n + 1)) A, σ g = MvPowerSeries.subst (Fin.lastCases (MvPowerSeries.X (Fin.last n)) (fun i : Fin n => MvPowerSeries.X i.castSucc + MvPowerSeries.X (Fin.last n) ^ e i)) g) ∧ (∀ g : MvPowerSeries (Fin (n + 1)) A, σ.symm g = MvPowerSeries.subst (Fin.lastCases (MvPowerSeries.X (Fin.last n)) (fun i : Fin n => MvPowerSeries.X i.castSucc - MvPowerSeries.X (Fin.last n) ^ e i)) g) ∧ MvPowerSeries.subst (fun i : Fin (n + 1) => if i = Fin.last n then (PowerSeries.X : PowerSeries (A ⧸ m)) else 0) (MvPowerSeries.map (Ideal.Quotient.mk m) (σ f)) ≠ 0 ∧ (n = 0 → σ = AlgEquiv.refl)",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1d43acc6",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: arbitrary CommRing A (Type u), maximal m, d=n+1 covers all d>=1, reduction via map (Ideal.Quotient.mk m), e : Fin n -> N with e i >= 2, sigma : B ≃ₐ[A] B pinned on all g by Mathlib subst of the Fin.lastCases tuple X_i + X_d^e_i (order and sign checked), sigma.symm by the minus tuple, axis condition = subst (0,...,0,PowerSeries.X) of map mk (sigma f) ≠ 0, n=0 -> refl. HasSubst holds (zero constant coeffs, finite index), so subst is the real substitution, not the fallback. Re-checked the lex-min/weight proof and edge cases (d=1, A=0, non-local A, char-2 X1-X2^2, infinite support). lean.statement verbatim; stmt_dep Mathlib MvPowerSeries; no duplicate in side-live/Mathlib; no defs, one theorem := sorry, docstrings with source and blueprint plus 5 proof steps; report has both sections (second reading is the worker's own pass, disclosed). No fixes; not recompiled."
+ }
+}

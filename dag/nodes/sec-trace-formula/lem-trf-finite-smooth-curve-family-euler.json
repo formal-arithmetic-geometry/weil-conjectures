@@ -1,0 +1,306 @@
+{
+ "id": "lem-trf-finite-smooth-curve-family-euler",
+ "kind": "statement",
+ "title": "Euler characteristic of finite images of a family of smooth proper curves",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $X$ be a proper $k$-scheme [def-weil-proper-morphism], and let $I$ be a finite set. For each $i\\in I$, let $C_i$ be a smooth proper connected curve over $k$ [def-sc-curves] and let $h_i:C_i\\to X$ be a finite $k$-morphism [def-weil-finite-integral-morphism]. Put $C=\\coprod_{i\\in I}C_i$, let $h:C\\to X$ restrict to $h_i$ on $C_i$, and put $G_i=h_{i,*}\\mathcal O_{C_i}$ and $B=h_*\\mathcal O_C$, where direct image means sections $G_i(U)=\\mathcal O_{C_i}(h_i^{-1}U)$ in the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Then $G_i$ and $B$ are coherent [pqf-def-coherent], and restriction to the summands induces an isomorphism of $\\mathcal O_X$-modules\n$$B\\xrightarrow{\\ \\sim\\ }\\prod_{i\\in I}G_i=\\bigoplus_{i\\in I}G_i.$$\nFor every $q\\ge0$, the edge map $e_{h_i,\\mathcal O_{C_i}}$ of [def-weil-pbc-module-cohomology-fmap](c), induced by the $h_i$-map $\\mathrm{id}_{G_i}$, is a $k$-linear isomorphism\n$$H^q(X,G_i)\\xrightarrow{\\ \\sim\\ }H^q(C_i,\\mathcal O_{C_i})$$\n[def-sc-ringed-space-module-cohomology]. The structure map $k\\to H^0(C_i,\\mathcal O_{C_i})$ is an isomorphism, and $H^q(C_i,\\mathcal O_{C_i})=0$ for $q>1$. Writing $g_i=\\dim_kH^1(C_i,\\mathcal O_{C_i})$ [def-sc-genus], the Euler characteristics [def-pc-euler-characteristic] satisfy\n$$\\chi(X,G_i)=\\chi(C_i,\\mathcal O_{C_i})=1-g_i,\\qquad\\chi(X,B)=|I|-\\sum_{i\\in I}g_i.$$\nThis includes the empty family, for which $B=0$ and $\\chi(X,B)=0$. No component-embedding, birationality, reducedness or dimension hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 089W (lemma-relative-affine-cohomology), affine edge isomorphisms; varieties.tex Tag 08AA (lemma-euler-characteristic-additive), finite-sum additivity; curves.tex Tag 0BY7 (definition-genus)."
+ },
+ "stmt_deps": [
+  "def-pc-euler-characteristic",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-algebraic-closure",
+  "def-weil-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-proper-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "The structure module $\\mathcal O_Y$ is invertible: its identity trivialization is a rank-one trivialization [def-sc-invertible-module]. Apply [lem-trf-proper-field-invertible-coherent] with $Y=X$ and with $Y=C_i$. Thus $X,C_i$ are Noetherian and their structure modules are coherent. Since $h_i$ is finite and $X$ is locally Noetherian, [lem-weil-pbc-finite-pushforward-coherent] makes $G_i=h_{i,*}\\mathcal O_{C_i}$ coherent. In particular $\\mathcal O_{C_i}$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth].",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian) and 01Y6 (lemma-finite-pushforward-coherent)."
+   }
+  },
+  {
+   "text": "For each open $U\\subseteq X$, the opens $h_i^{-1}U$ form a disjoint open cover of $h^{-1}U$. The sheaf axiom gives $\\mathcal O_C(h^{-1}U)\\cong\\prod_i\\mathcal O_{C_i}(h_i^{-1}U)$ by restriction; its inverse glues the given sections, whose compatibility on empty intersections is automatic. Restriction commutes with restriction to smaller $U$, and the scalar action in each coordinate is through $h_i^\\sharp$. These are therefore the asserted $\\mathcal O_X$-linear sheaf isomorphism. For finite $I$, a tuple is the sum of its coordinate inclusions, so this product is also the direct sum. Binary sum closure in [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1), iterated over the finite set, gives coherence of $B$; the empty sum is the zero coherent module directly from the definition.",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01Y0 (lemma-coherent-abelian-Noetherian); product identification is the sheaf axiom on the disjoint union."
+   }
+  },
+  {
+   "text": "Finite morphisms are affine by [def-weil-finite-integral-morphism]. Apply [lem-weil-pbc-affine-morphism-cohomology-edge] to $h_i$ and the quasi-coherent module $\\mathcal O_{C_i}$. Its statement identifies exactly the identity-$h_i$-map edge map in the question and makes it an isomorphism linear over $\\Gamma(X,\\mathcal O_X)$. Restrict scalars along $k\\to\\Gamma(X,\\mathcal O_X)$: because $h_i$ is a $k$-morphism, the composite into $\\Gamma(C_i,\\mathcal O_{C_i})$ is its structure map. Thus these are precisely the stated $k$-linear isomorphisms in every degree.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-cohomology-edge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 089W (lemma-relative-affine-cohomology), via Tag 01XC and Cohomology Tag 01F4; linearity is scalar restriction."
+   }
+  },
+  {
+   "text": "For each $i$, [lem-sc-global-functions] explicitly includes proper smooth connected curves over an algebraically closed field, so its structure map $k\\to H^0(C_i,\\mathcal O_{C_i})$ is an isomorphism. By [def-sc-curves], $\\dim C_i=1$. The Noetherianity from Step 1 permits [lem-sc-noetherian-cohomology-above-dimension] with $\\mathcal F=\\mathcal O_{C_i}$ and any $q>1$, giving the required vanishing.",
+   "uses": [
+    "lem-sc-global-functions",
+    "def-sc-curves",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 02UZ (proposition-vanishing-Noetherian); global functions as in varieties.tex, lemma-proper-geometrically-reduced-global-sections."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-euler-characteristic-well-defined] to $G_i$ on $X$ and to $\\mathcal O_{C_i}$ on $C_i$, both coherent and proper as established above. The Euler sums are finite. The $k$-linear isomorphisms of Step 3 equate every dimension and therefore equate the sums. On $C_i$, Step 4 makes the degree-zero dimension $1$ and all degrees above one zero. The remaining dimension is $g_i$ by [def-sc-genus]. Substitution into [def-pc-euler-characteristic] yields $\\chi(X,G_i)=\\chi(C_i,\\mathcal O_{C_i})=1-g_i$.",
+   "uses": [
+    "lem-pc-euler-characteristic-well-defined",
+    "def-sc-genus",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY7 (definition-genus) and the following arithmetic-genus formula; finiteness as in varieties.tex, definition-euler-characteristic."
+   }
+  },
+  {
+   "text": "For coherent modules $F,G$ the maps $f\\mapsto(f,0)$ and $(f,g)\\mapsto g$ give the split short exact sequence $0\\to F\\to F\\oplus G\\to G\\to0$. Apply the short-exact-sequence clause of [lem-pc-euler-additive] on the proper scheme $X$ and induct on the finite set $I$, using the coherent partial sums from Step 2. This gives $\\chi(X,B)=\\sum_i\\chi(X,G_i)=\\sum_i(1-g_i)=|I|-\\sum_i g_i$. If $I$ is empty, the sheaf axiom on the empty cover makes every section module of $B$ zero; a zero injective resolution computes zero cohomology, so its Euler sum is zero. This supplies the induction base and the stated empty-family case.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "def-pc-euler-characteristic",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AA (lemma-euler-characteristic-additive), applied to the displayed split sequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-euler-characteristic",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-euler-additive",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-sc-global-functions",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Assembly from Tags 01XZ, 01Y6, 01Y0, 089W; cohomology.tex Tag 02UZ; curves.tex Tag 0BY7; varieties.tex Tag 08AA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "genus|eulerChar|eulerCharacteristic|affine.*cohomology",
+   "results": "{\"t\": \"2026-10-22T06:10:28Z\", \"tool\": \"grep\", \"query\": \"genus|eulerChar|eulerCharacteristic|affine.*cohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: Scheme finite coproducts, finite coproduct desc morphisms, properness of finite morphisms and additive module pushforward provide infrastructure only. No result computes coherent cohomology, genus or this Euler sum. The second phrasing returned elliptic-curve and function-field definitions. Loogle and the AlgebraicGeometry genus/Euler/cohomology grep found no match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "{\"t\": \"2026-10-22T06:10:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"genus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read all returned signatures: Scheme finite coproducts, finite coproduct desc morphisms, properness of finite morphisms and additive module pushforward provide infrastructure only. No result computes coherent cohomology, genus or this Euler sum. The second phrasing returned elliptic-curve and function-field definitions. Loogle and the AlgebraicGeometry genus/Euler/cohomology grep found no match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology and Euler characteristic of finite pushforwards from smooth proper connected curves and finite coproducts",
+   "results": "{\"t\": \"2026-10-22T06:10:29Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology and Euler characteristic of finite pushforwards from smooth proper connected curves and finite coproducts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"CompHausLike.finiteCoproduct.isColimit\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.IsFinite.instDescScheme\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesFiniteCoproducts\"], \"digest\": \"1c2c268c74d79b34\"}; Read all returned signatures: Scheme finite coproducts, finite coproduct desc morphisms, properness of finite morphisms and additive module pushforward provide infrastructure only. No result computes coherent cohomology, genus or this Euler sum. The second phrasing returned elliptic-curve and function-field definitions. Loogle and the AlgebraicGeometry genus/Euler/cohomology grep found no match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective connected curve over an algebraically closed field has structure sheaf Euler characteristic one minus genus",
+   "results": "{\"t\": \"2026-10-22T06:10:42Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth projective connected curve over an algebraically closed field has structure sheaf Euler characteristic one minus genus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField.classNumber\", \"WeierstrassCurve.Affine.CoordinateRing.instSubsingleton\", \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.instIsEllipticOfJ\", \"WeierstrassCurve\", \"WeierstrassCurve.natDegree_preΨ\"], \"digest\": \"62cddd2e8b5ae2f6\"}; Read all returned signatures: Scheme finite coproducts, finite coproduct desc morphisms, properness of finite morphisms and additive module pushforward provide infrastructure only. No result computes coherent cohomology, genus or this Euler sum. The second phrasing returned elliptic-curve and function-field definitions. Loogle and the AlgebraicGeometry genus/Euler/cohomology grep found no match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Euler characteristic of the direct image of the structure sheaf along a finite map from a finite disjoint union of smooth proper connected curves equals the number of curves minus the sum of their genera",
+   "results": "{\"t\": \"2026-10-22T06:10:43Z\", \"tool\": \"leanfinder\", \"query\": \"The Euler characteristic of the direct image of the structure sheaf along a finite map from a finite disjoint union of smooth proper connected curves equals the number of curves minus the sum of their genera\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instDescScheme\", \"CategoryTheory.PreGaloisCategory.card_fiber_coprod_eq_sum\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\", \"AlgebraicGeometry.instFinitaryExtensiveScheme\"], \"digest\": \"d3797002ae2db5b2\"}; Read all returned signatures: Scheme finite coproducts, finite coproduct desc morphisms, properness of finite morphisms and additive module pushforward provide infrastructure only. No result computes coherent cohomology, genus or this Euler sum. The second phrasing returned elliptic-curve and function-field definitions. Loogle and the AlgebraicGeometry genus/Euler/cohomology grep found no match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar|eulerCharacteristic|genus|affine.*cohomology",
+   "results": "{\"t\": \"2026-10-23T09:47:38Z\", \"tool\": \"grep\", \"query\": \"eulerChar|eulerCharacteristic|genus|affine.*cohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: coproduct geometry, finite affine maps, additive pushforward/pullback, and cochain infrastructure only; none computes coherent genus or the stated Euler characteristic.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a finite morphism applied to a structure sheaf on a smooth proper curve and additivity of Euler characteristic",
+   "results": "{\"t\": \"2026-10-23T09:47:39Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology of a finite morphism applied to a structure sheaf on a smooth proper curve and additivity of Euler characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.IsFinite.recOn\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_add\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.IsFinite.mk\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"8e9f23f4d031d1da\"}; Read the returned signatures: coproduct geometry, finite affine maps, additive pushforward/pullback, and cochain infrastructure only; none computes coherent genus or the stated Euler characteristic.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"eulerChar\"",
+   "results": "{\"t\": \"2026-10-23T09:47:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"eulerChar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: coproduct geometry, finite affine maps, additive pushforward/pullback, and cochain infrastructure only; none computes coherent genus or the stated Euler characteristic.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Euler characteristic of a finite pushforward from a finite disjoint union of smooth proper connected curves equals the number of curves minus the sum of their genera",
+   "results": "{\"t\": \"2026-10-23T09:47:41Z\", \"tool\": \"leanfinder\", \"query\": \"The Euler characteristic of a finite pushforward from a finite disjoint union of smooth proper connected curves equals the number of curves minus the sum of their genera\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFinitaryExtensiveScheme\", \"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"AlgebraicGeometry.disjoint_opensRange_sigmaι\", \"IncidenceAlgebra.eulerChar_prod\", \"CategoryTheory.PreGaloisCategory.card_fiber_coprod_eq_sum\", \"AlgebraicGeometry.IsFinite.instDescScheme\", \"AlgebraicGeometry.instMonoCoprodScheme\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\"], \"digest\": \"ee58ba6510ee0d26\"}; Read the returned signatures: coproduct geometry, finite affine maps, additive pushforward/pullback, and cochain infrastructure only; none computes coherent genus or the stated Euler characteristic.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism has vanishing higher direct images of quasi-coherent sheaves and its canonical cohomology edge maps are linear isomorphisms",
+   "results": "{\"t\": \"2026-10-23T09:47:42Z\", \"tool\": \"leanfinder\", \"query\": \"An affine morphism has vanishing higher direct images of quasi-coherent sheaves and its canonical cohomology edge maps are linear isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\", \"AlgebraicGeometry.targetAffineLocally_affineAnd_iff'\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.targetAffineLocally_affineAnd_iff\"], \"digest\": \"48c7fa0c7b1257aa\"}; Read the returned signatures: coproduct geometry, finite affine maps, additive pushforward/pullback, and cochain infrastructure only; none computes coherent genus or the stated Euler characteristic.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-reduced-curve-normalization-genus",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Appendix B, Lemma B.1 and its normalization exact sequence, printed p. 57; same Euler-characteristic identity for possibly disconnected curves. Returned proof steps 8--10 of lem-trf-reduced-curve-normalization-genus: the normalized-component Euler contribution.",
+   "via": [
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-smooth-curve-family-euler",
+  "worker": "stage1",
+  "summary": "Q69 checked the full statement, source tags, existing Lean, and every cited node statement. No statement change and no new nodes: coherence, sectionwise disjoint-union decomposition, the canonical linear affine edge map, global functions, dimension-one vanishing, and finite-sum Euler additivity give a six-step assembly, including the empty family.",
+  "blueprint": "Historical exceptional-fibre Appendix B normalization-Euler calculation inherited through lem-trf-reduced-curve-normalization-genus, steps 8--10. Current latest lem-trf-local-term-locality follows contracting correspondences and no longer contains that historical reduction; this split handles only its already-created coherent-curve tool and does not change the current unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Proper-field Noetherianity and structure-module coherence prepare the finite-image calculation; this generic preparation already belongs to this unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-coherent",
+    "why": "Finite direct images preserve coherence over the locally Noetherian target; a generic coherent-sheaf tool, not a replacement of the trace unit route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherence supplies quasi-coherence for the affine cohomology theorem."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Binary sums of coherent modules are coherent; used only to form finite partial sums."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "The actual identity-h-map edge isomorphism for arbitrary quasi-coherent modules, including its global scalar linearity."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "The stated smooth proper connected curve case gives the structure-map isomorphism, not merely an abstract one-dimensionality claim."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Zariski cohomological dimension bound applied in dimension one."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Finiteness of coherent cohomology on proper schemes justifies the Euler sums."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Only its short-exact coherent additivity clause is used, on split binary-sum sequences."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-sc-global-functions",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-euler-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-086bc51ac",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-086bc51ac (reviewer sub-agent of L); spot-checked: I read all six steps and all 15 cited statements; nothing needed changing. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit; there are no new nodes, no repair note and no SGA. The statement checks out on small cases: an empty family (B=0, χ=0), the identity map C=X, and a hyperelliptic double cover C→ℙ¹ (χ=1−g, with no degree factor). Step 1: proper-field coherence plus lem-weil-pbc-finite-pushforward-coherent (finite map, locally Noetherian X) give G_i coherent; Stacks 01XZ, 01Y6. Step 2: the disjoint-cover sheaf iso is elementary, and coherence of B comes from clause (1) of the coherent-kernel-cokernel lemma, iterated (01Y0). Step 3: finite ⇒ affine; lem-weil-pbc-affine-morphism-cohomology-edge names exactly the edge map e_{h,F} of fmap(c) and makes it O_S(S)-linear, and k-linearity follows because each h_i is a k-morphism (089W). The cohomology used by the edge, well-definedness and vanishing lemmas (pqf-def-cohomology) is the same O-module derived-functor cohomology the item uses, so no comparison is hidden. Step 4: the smooth clause of lem-sc-global-functions gives H^0=k; Noetherian dimension-one vanishing covers every q>1 (02UZ). Step 5: χ is well defined and def-sc-genus gives g_i, so χ=1−g_i (0BY7). Step 6: the split exact sequence and the short-exact clause of lem-pc-euler-additive give the sum by induction, with the empty case as base (08AA). There is no cycle (the closure of 1360 nodes excludes the item). The nodal-normalization Euler node is not a duplicate. I accept all 9 generic tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FiniteSmoothCurveFamilyEuler",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_smooth_curve_family_euler",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.finiteCurveFamilyRestrictionComponent",
+   "AlgebraicGeometry.Scheme.Modules.finiteCurveFamilyRestriction",
+   "AlgebraicGeometry.Scheme.Modules.finite_smooth_curve_family_euler"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FiniteSmoothCurveFamilyEuler.lean",
+  "statement": "theorem finite_smooth_curve_family_euler (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (I : Type v) [Fintype I] (C : I → Scheme.{u}) [∀ i, (C i).Over (Spec (.of k))] [∀ i, IsConnectedCurve (C i ↘ Spec (.of k))] [∀ i, Smooth (C i ↘ Spec (.of k))] [∀ i, IsProper (C i ↘ Spec (.of k))] (h : ∀ i, C i ⟶ X) [∀ i, IsFinite (h i)] [∀ i, (h i).IsOver (Spec (.of k))] : (∀ i, RingedSpace.IsCoherent X.toRingedSpace ((pushforward (h i)).obj (unit (C i)))) ∧ RingedSpace.IsCoherent X.toRingedSpace ((pushforward (Sigma.desc h)).obj (unit (∐ C))) ∧ IsIso (finiteCurveFamilyRestriction C h) ∧ Nonempty ((∏ᶜ (fun i ↦ (pushforward (h i)).obj (unit (C i)))) ≅ ∐ (fun i ↦ (pushforward (h i)).obj (unit (C i)))) ∧ (∀ (i : I) (q : ℕ), ∃ e : (ModuleCat.restrictScalars (Scheme.globalSectionsRingHom k (X := X))).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj ((pushforward (h i)).obj (unit (C i)))) ≅ (ModuleCat.restrictScalars (Scheme.globalSectionsRingHom k (X := C i))).obj ((RingedSpace.moduleCohomology (C i).toRingedSpace q).obj (unit (C i))), (forget₂ (ModuleCat k) AddCommGrpCat).map e.hom = moduleCohomologyEdgeMap (h i) (unit (C i)) q) ∧ (∀ i : I, (∃ e : k ≃ₗ[k] (ModuleCat.restrictScalars (Scheme.globalSectionsRingHom k (X := C i))).obj ((RingedSpace.moduleCohomology (C i).toRingedSpace 0).obj (unit (C i))), ∀ a : k, e a = ((RingedSpace.globalSectionsFunctor (C i).toRingedSpace).toRightDerivedZero.app (unit (C i))) (Scheme.globalSectionsRingHom k (X := C i) a)) ∧ (∀ q : ℕ, 1 < q → Subsingleton ((RingedSpace.moduleCohomology (C i).toRingedSpace q).obj (unit (C i)))) ∧ (C i ↘ Spec (.of k)).genus = Module.finrank k ((ModuleCat.restrictScalars (Scheme.globalSectionsRingHom k (X := C i))).obj ((RingedSpace.moduleCohomology (C i).toRingedSpace 1).obj (unit (C i)))) ∧ eulerChar k ((pushforward (h i)).obj (unit (C i))) = eulerChar k (unit (C i)) ∧ eulerChar k (unit (C i)) = 1 - ((C i ↘ Spec (.of k)).genus : ℤ)) ∧ eulerChar k ((pushforward (Sigma.desc h)).obj (unit (∐ C))) = (Fintype.card I : ℤ) - ∑ i : I, ((C i ↘ Spec (.of k)).genus : ℤ) ∧ (IsEmpty I → IsZero ((pushforward (Sigma.desc h)).obj (unit (∐ C))) ∧ eulerChar k ((pushforward (Sigma.desc h)).obj (unit (∐ C))) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical coproduct restriction is constructed using unitToPushforwardObjUnit, pushforwardComp, pushforwardCongr and Pi.lift. The edge isomorphism has the recorded moduleCohomologyEdgeMap as its underlying additive map, with k-scalars restricted along the structure map. Includes the genus/H1 identification and empty family. No statement change or extra hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8af21115b",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records and their Lean owners (eulerChar, IsConnectedCurve/IsCurve, Hom.genus, moduleCohomology, moduleCohomologyEdgeMap=FMap of 𝟙, RingedSpace.IsCoherent listed by pqf-def-coherent), the module and the report (Worker report + Second reading by Q155 present). Every hypothesis matches the node (alg. closed k; proper X with no extra hypotheses; Fintype I in a free universe; IsConnectedCurve+Smooth+IsProper C_i; IsFinite+IsOver h_i), and so does every clause: coherence of G_i and B; IsIso of the canonical Pi.lift restriction (built from unitToPushforwardObjUnit ι_i, pushforwardComp, pushforwardCongr ι_desc); the k-linear iso whose underlying map is the recorded edge map, all q; structure map k→H^0 pinned; Subsingleton for q>1; genus=finrank H^1; χ(G_i)=χ(O_Ci)=1−g_i; χ(B)=card I−Σg_i; empty family IsZero B and χ=0. lean.statement is verbatim, single sorry, real helper data with docstrings. Notes only: Nonempty(∏≅∐) is weak but harmless; Hom.genus is the Ω¹ form, so stage 3 needs Serre duality (genus_eq_arithmeticGenus, still sorry); Ext-H vs moduleCohomology comparison is proof work. No file changed, no compile run."
+ }
+}

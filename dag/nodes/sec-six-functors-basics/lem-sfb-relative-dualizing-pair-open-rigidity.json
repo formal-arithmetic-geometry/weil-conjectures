@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-relative-dualizing-pair-open-rigidity",
+ "kind": "statement",
+ "title": "Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases",
+ "statement": "Let $f:X\\to S$ be a separated flat locally finitely presented morphism of arbitrary schemes [def-pc-scheme], [def-weil-proper-morphism], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. Suppose $(K,\\xi)$ and $(L,\\eta)$ are supplied coherent relative dualizing pairs [def-trf-coherent-relative-dualizing-pair], with diagonal $\\Delta:X\\to X\\times_SX$ and first projection $p_1$. For every open $U\\subset X$, their restrictions are coherent relative dualizing pairs for $U/S$. The scalar map $\\mathcal O_X\\to R\\mathcal Hom_X(K,K)$ [def-pur-derived-internal-hom] is an isomorphism in $D(\\mathcal O_X)$ [def-pc-derived-category]. There is exactly one isomorphism $\\alpha:K\\to L$ satisfying $(Lp_1^*\\alpha)\\xi=\\eta$ [def-pc-derived-pullback]. These assertions hold after every open restriction, including the empty open. If $V\\subset S$ is open and $f$ factors through $V$, the same pairs and comparisons are obtained using $X/V$ instead of $X/S$. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2V (lemma-relative-dualizing-RHom) and 0E2W (lemma-uniqueness-relative-dualizing); open-restriction observation in 0E2X (lemma-existence-relative-dualizing)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-pur-derived-internal-hom",
+  "def-pc-relative-mv-maps",
+  "def-sfb-module-base-change-map",
+  "def-sfb-tensor-pullback-structure-sheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "For an open $j:U\\hookrightarrow X$ put $Y_U=U\\times_SU\\subset Y$; $\\Delta^{-1}(Y_U)=U$ and the restricted closed subscheme is the diagonal of $U/S$, so $f|_U$ is separated. It is flat (same stalk maps) and locally of finite presentation by [lem-weil-pbc-lfp-affine-opens-finite-presentation] on affine charts inside $U$. On an open $H\\subset Y_U$, $(\\Delta_*\\mathcal O_X)(H)=\\mathcal O_X(\\Delta^{-1}H)=\\mathcal O_U(\\Delta_U^{-1}H)$, identifying the restricted diagonal algebra with $\\Delta_{U*}\\mathcal O_U$, with its product and unit. Since $p_1|_{Y_U}=j\\circ p_{1,U}$, [lem-pc-affine-derived-pullback-tensor-tilde](1) gives $(Lp_1^*K)|_{Y_U}\\cong Lp_{1,U}^*(K|_U)$ (defining $\\xi_U$) and restriction comparisons $m_0$ for derived tensors. On a K-flat $P$ (restriction keeps it K-flat by [lem-sfb-ringed-site-restriction-kflat]) and any $N$, $m_0$ is induced by the termwise equality $\\operatorname{Tot}(P\\otimes N)|_{Y_U}=\\operatorname{Tot}(P|_{Y_U}\\otimes N|_{Y_U})$, so it is strong monoidal and carries the localization map $\\mu_Y$ of [def-pc-derived-pullback-tensor-comparison] to $\\mu_{Y_U}$; hence it carries the derived multiplication of $\\Delta_*\\mathcal O_X$ to that of $\\Delta_{U*}\\mathcal O_U$. Let $r$ be restriction and $c=e_U^{-1}(\\mu_{m_0};r(e(1)))$; it is an isomorphism by [lem-pc-open-restriction-evaluation-mate-is-iso], and naturality of the tensor--Hom bijections [def-pc-canonical-derived-tensor-hom-bijection] gives $e_U(r\\varphi;c)=\\mu_{m_0};r(e\\varphi)$ for every $\\varphi$. Applied to multiplication by $\\xi$, this gives $c\\circ r(m_\\xi)=m_{\\xi_U}$, an isomorphism. Pseudo-coherence restricts by restricting the local finite-free models. For finite Tor amplitude, on an amplitude neighbourhood $T$ extend a test $(f^{-1}\\mathcal O_S)|_{T\\cap U}$-module by zero; restriction is exact and keeps K-flatness [lem-sfb-ringed-site-restriction-kflat], so restricting the tensor gives the test tensor and the bound persists. So $K|_U,L|_U$ satisfy the supplied-pair predicate.",
+   "uses": [
+    "def-trf-coherent-relative-dualizing-pair",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "lem-sfb-ringed-site-restriction-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2X, open-restriction observation; Tag 0E2T, supplied-pair conditions."
+   }
+  },
+  {
+   "text": "Take the basis $\\mathcal B$ of affine opens of $X$ mapping into affine opens of $S$; around any point of any open one first chooses an affine target neighbourhood and then an affine source neighbourhood inside its inverse image. For $U=\\operatorname{Spec}A$ over $V=\\operatorname{Spec}R$, the affine-realization node gives $M,N$, the classes $\\gamma,\\theta$, and their multiplication isomorphisms, with $R\\to A$ flat finitely presented. The algebraic homothety node applies to $M$ and identifies its scalar map with an isomorphism. By the affine-realization node its sheafification is the scalar map of $K|_U$. By the unit law of the strong monoidal $m_0$ of step 1, $c\\circ r(s_K)=s_{K|_U}$ for the scalar map $s_K$ of $K$, with $c$ the isomorphism of step 1 [lem-pc-open-restriction-evaluation-mate-is-iso]; so $r(s_K)$ is an isomorphism on every $U\\in\\mathcal B$. The cone of that scalar map has zero cohomology on this covering basis, hence its cohomology sheaves vanish, proving the asserted isomorphism globally. The same algebraic node and affine Hom comparison give $\\operatorname{Hom}(K|_U,K|_U[i])=0$ for $i<0$.",
+   "uses": [
+    "lem-sfb-arbitrary-base-affine-dualizing-realization",
+    "lem-sfb-arbitrary-ring-relative-dualizing-homothety",
+    "lem-pc-open-restriction-evaluation-mate-is-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2V, affine reduction to dualizing.tex Tag 0E2G."
+   }
+  },
+  {
+   "text": "On a basis open retain the preceding notation. Algebraic uniqueness supplies an unmarked isomorphism $b:M\\to N$. The multiplication isomorphism defined by $\\theta$ identifies $\\operatorname{Hom}_{D(B)}(A[0],N_1)=H^0R\\operatorname{Hom}_B(A,N_1)$ with $A$, sending $\\theta$ to $1$; the same holds for $\\gamma$. Because $b_1$ is invertible, $b_1\\gamma$ is also a basis, so $b_1\\gamma=u\\theta$ for a unique $u\\in A^\\times$. Set $a=u^{-1}b$. Linearity gives $a_1\\gamma=\\theta$. If $a'$ is another such isomorphism, the homothety node writes $a^{-1}a'=v\\,\\mathrm{id}_M$ uniquely with $v\\in A^\\times$. Its action on the basis $\\gamma$ is trivial, so $v=1$ and $a'=a$. The affine comparison transfers this to exactly one class-preserving isomorphism $\\alpha_U:K|_U\\to L|_U$.",
+   "uses": [
+    "lem-sfb-arbitrary-base-affine-dualizing-realization",
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+    "lem-sfb-arbitrary-ring-relative-dualizing-homothety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, first two paragraphs: affine existence followed by normalization by a unit."
+   }
+  },
+  {
+   "text": "Apply the diagonal-class basis descent node to $\\mathcal B$. Its multiplication hypothesis is the supplied-pair condition for $\\eta$; step 2 gives negative self-Ext on every basis open and step 3 gives the unique class-preserving local isomorphism. Its conclusion gives the unique global isomorphism $\\alpha$, with $(Lp_1^*\\alpha)\\xi=\\eta$. Repeat steps 2--4 for each open restriction, whose supplied-pair condition was proved in step 1. For the empty open the module derived category is the zero category, so both the scalar map and the only map between the two restricted objects are isomorphisms, and class preservation is automatic.",
+   "uses": [
+    "lem-trf-diagonal-class-basis-descent",
+    "def-trf-coherent-relative-dualizing-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W, gluing paragraph; Tag 0E2X, open restrictions."
+   }
+  },
+  {
+   "text": "If $f$ factors through an open $V\\subset S$, the universal property identifies $X\\times_VX$ with $X\\times_SX$: two maps to $X$ have the same composite to $S$ exactly when their composites to $V$ agree, since an open immersion is a monomorphism. Under this identification the diagonal, first projection and both classes are identical. Moreover $f^{-1}\\mathcal O_S$ equals the inverse image of $\\mathcal O_V$, so the test modules and finite-Tor condition are identical. The pseudo-coherent condition is intrinsic to $X$. Hence precisely the same supplied-pair predicate and scalar map are obtained. Uniqueness from step 4 identifies the comparison isomorphisms for the two bases.",
+   "uses": [
+    "def-trf-coherent-relative-dualizing-pair"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2X, first paragraph: V-perfect equals S-perfect and the two fibre products agree."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-open-restriction-evaluation-mate-is-iso",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-arbitrary-base-affine-dualizing-realization",
+  "lem-sfb-arbitrary-ring-relative-dualizing-homothety",
+  "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+  "lem-trf-diagonal-class-basis-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2V, 0E2W and the open-restriction and base-open observations of 0E2X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented scheme morphism supplied relative dualizing pairs are uniquely isomorphic preserving the diagonal class and have scalar derived endomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso], P.diagonal.toProperty.RespectsIso\", \"doc\": \"If a morphism property $P$ for schemes with affine targets respects isomorphisms, then the diagonal property derived from $P$ (which asserts preservation under pullbacks along open immersions from aff\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f] [CategoryTheory.Mono f], CategoryTheory.IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state flatness, ordinary scheme properties or extension of sections, not rigidity of relative dualizing pairs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing complexes uniqueness rigid diagonal class open restriction non Noetherian schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.inj\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace}\\n  {local_affine :\\n    ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))}\\n  {toLocallyRingedSpace_1 : AlgebraicGeomet\", \"doc\": \"Two schemes are equal if they have the same underlying locally ringed space and satisfy the same local affine conditions, i.e., for every point, there exists an open neighborhood isomorphic to an affi\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state flatness, ordinary scheme properties or extension of sections, not rigidity of relative dualizing pairs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"iso\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state flatness, ordinary scheme properties or extension of sections, not rigidity of relative dualizing pairs"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingPair|dualizing.*unique",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state flatness, ordinary scheme properties or extension of sections, not rigidity of relative dualizing pairs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complex unique class preserving isomorphism flat finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": RespectsIso Flat\", \"doc\": \"If $ f : R \\\\to S $ is a flat ring homomorphism between commutative rings, then composing $ f $ with a ring isomorphism on either the source or target preserves the flatness property. Specifically, for\"}\n  {\"name\": \"RingHom.finitePresentation_respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \": RingHom.RespectsIso @RingHom.FinitePresentation\", \"doc\": \"For any commutative rings $R, S, T$, if a ring homomorphism $f : R \\\\to S$ is finitely presented, then the composition of $f$ with a ring isomorphism $e : S \\\\cong T$ is also finitely presented. Similar\"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[RepresentablyFlat F] {G : C ⥤ D} (α : F ≅ G) : RepresentablyFlat G\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat and there exists an isomorphism $ \\\\alpha : F \\\\cong G $ between $ F $ and another functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the\"}\n  {\"name\": \"Module.FaithfullyFlat.of_linearEquiv\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"{N : Type*} [AddCommGroup N] [Module R N] [FaithfullyFlat R M] (e : N ≃ₗ[R] M) : FaithfullyFlat R N\", \"doc\": \"If $ N $ is a module over a commutative ring $ R $ that is linearly isomorphic to a faithfully flat $ R $-module $ M $, then $ N $ is also a faithfully flat $ R $-module. This follows because the prop\"}\n  {\"name\": \"HomologicalComplex₂.total.mapIso\", \"module\": \"Mathlib.Algebra.Homology.TotalComplex\", \"type\": \": K.total c₁₂ ≅ L.total c₁₂\", \"doc\": \"Given an isomorphism $ e: K \\\\cong L $ between bicomplexes in a preadditive category, the total complex construction induces an isomorphism $ K_{\\\\text{total}} \\\\cong L_{\\\\text{total}} $ between their tot\"}\n  {\"name\": \"quasiIsoAt_of_isIso\", \"module\": \"Mathlib.Algebra.Homology.QuasiIso\", \"type\": \"(f : K ⟶ L) [IsIso f] (i : ι) [K.HasHomology i] [L.HasHomology i] : QuasiIsoAt f i\", \"doc\": \"If $ f : K \\to L $ is an isomorphism of homological complexes and both $ K $ and $ L $ have homology at index $ i $, then the induced map on homology $ H_i(f) : H_i(K) \\to H_i(L) $ is an isomorphism. Th\"}\n  {\"name\": \"HomologicalComplex.instRespectsIsoQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.QuasiIso\", \"type\": \": (quasiIso C c).RespectsIso\", \"doc\": \"Every isomorphism in the category of homological complexes is a quasi-isomorphism, meaning that if a morphism is an isomorphism, then its induced maps on all homology groups are isomorphisms.\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"{K L : HomologicalComplex C c} (f : K ⟶ L) : IsIso (Q.map f) ↔ HomologicalComplex.quasiIso C c f\", \"doc\": \"A morphism $ f $ between homological complexes becomes an isomorphism in the derived category $ \\\\mathcal{D} = \\\\mathcal{K}[\\\\text{QuasiIso}^{-1}] $ if and only if $ f $ is a quasi-isomorphism (i.e., ind\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits state flatness, ordinary scheme properties or extension of sections, not rigidity of relative dualizing pairs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing complexes for flat finitely presented algebras over arbitrary rings have scalar derived endomorphisms and are isomorphic",
+   "results": "8 hits: IsBaseChange.toDualBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.Extension.tensorH1Cotangent, Module.Flat.iff_characterModule_injective, Module.Flat.iff_characterModule_baer, KaehlerDifferential.endEquiv, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Module.Flat.self; digest=e4728ce990b04cae; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|RelativeDualizing|dualizing.*[Uu]niq|[Hh]omothety",
+   "results": "25 hits: Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/Transvection/Generation.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean, Mathlib/LinearAlgebra/AffineSpace/MidpointZero.lean; digest=b85b881582a7b804; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complexes for flat finitely presented algebras are unique and their derived endomorphisms are scalars",
+   "results": "8 hits: RingHom.Flat, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, RingHom.FaithfullyFlat, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, DualNumber.algHom_ext, Algebra.Smooth.flat, Module.flat_iff_of_isLocalization, RingHom.flat_algebraMap_iff; digest=27be7af85051a484; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semidualizing complex of a flat finitely presented algebra is unique up to isomorphism and its derived endomorphism ring is the algebra",
+   "results": "8 hits: IsAzumaya, IsAzumaya.id, IsMoritaEquivalent.refl, IsAzumaya.toProjective, IsMoritaEquivalent, Algebra.formallySmooth_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, Module.free_of_flat_of_isLocalRing; digest=a19ebebbc5cd07e9; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary flatness, scheme diagonal, underived adjunction or linear-algebra declarations; none states this derived relative duality result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases.",
+   "via": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-dualizing-pair-open-rigidity",
+  "worker": "stage1",
+  "summary": "Read the arbitrary-base Stacks statements. Reused class-basis descent and restriction coherence; supplied arbitrary-ring affine realization, unmarked algebraic uniqueness, and homothety inputs rather than incorrectly applying their existing Noetherian special cases. Kept the imported statement and checked empty opens and open-base factorization.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) support chain: relative dualizing input to the stable-curve parameter construction. The current blueprint no longer contains the old alteration paragraph; no chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-diagonal-class-basis-descent",
+    "why": "Generic basis gluing for marked diagonal classes with negative self-Ext; independent of the base and no same-unit node supplies it."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic localization of modules over any ringed site, applied to the ring f inverse O_S on the source; justifies restricting the relative Tor tests."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic identification of derived pullback and derived tensor with open restriction; defines the restricted diagonal class (already an accepted tool use in this unit)."
+   },
+   {
+    "node": "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "why": "Generic invertibility of the open-restriction evaluation mate for the canonical strong monoidal restriction; carries multiplication and scalar maps to the restricted ones."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-diagonal-class-basis-descent",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-open-restriction-evaluation-mate-is-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-edbfcfe00",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-edbfcfe00 (reviewer sub-agent of L); spot-checked: Ordinary S1 split; no repair note, and live is still unsplit. Read against Stacks duality 0E2T/0E2U/0E2V/0E2W/0E2X and dualizing 0E2C/0E2D/0E2G. The item statement is unchanged; the only edit is the added stmt_dep def-pur-derived-internal-hom. The item strictly generalizes the Noetherian lem-trf-relative-dualizing-pair-rigidity. Three new statement-only nodes, each a separate Stacks lemma for arbitrary rings and none restating the item, all searched, tested on R=A, k->k[x] with M=A[1], and A=0: affine realization (0E2U plus perfect 0A6H(3)(a); the boundedness and pseudo-coherence hypotheses check out), homothety (0E2G), unmarked uniqueness (0E2D). Steps 3-5 are correct: the unit normalization b_1 gamma = u theta, a = u^-1 b, uniqueness by v gamma = gamma; every hypothesis of lem-trf-diagonal-class-basis-descent checked; the V-base step is elementary. FIX (C4/E5) in step 1: the delivered step cited no node for restricting the first pullback, and it took the restricted class multiplication from lem-sc-derived-restriction-tensor-hom-coherence, whose families t,h exist without any compatibility with the localization map mu or with units. I rewrote step 1 along the route of the reviewed Noetherian sibling lem-trf-relative-pair-localization-affine-realization: lem-pc-affine-derived-pullback-tensor-tilde(1), a canonical strong monoidal m_0 carrying mu (def-pc-derived-pullback-tensor-comparison), c iso by lem-pc-open-restriction-evaluation-mate-is-iso, naturality of def-pc-canonical-derived-tensor-hom-bijection giving c o r(m_xi) = m_xi_U, and finite presentation on the opens from leaf lem-weil-pbc-lfp-affine-opens-finite-presentation. Step 2's unjustified sentence 'sheafification = restriction of the scalar map' now follows from the unit law of m_0. proof_deps and split_report.tool_uses updated; the restriction-coherence node is dropped as unused. Batch 5: def-trf-coherent-relative-dualizing-pair and def-trf-affine-diagonal-module-data are definitions, so generic. lem-trf-diagonal-class-basis-descent is generic derived basis gluing: its 516-node closure reaches no nt-assume or target node and no trace-formula or Poincare step. All three accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDualizingPairOpenRigidity",
+  "declaration": "AlgebraicGeometry.relativeDualizingPair_open_rigidity",
+  "declarations": [
+   "AlgebraicGeometry.relativeDualizingOpenSquare",
+   "AlgebraicGeometry.relativeDualizingOpenRestriction",
+   "AlgebraicGeometry.relativeDualizingOpenRestriction_additive",
+   "AlgebraicGeometry.relativeDualizingOpenRestriction_limits",
+   "AlgebraicGeometry.relativeDualizingOpenRestriction_colimits",
+   "AlgebraicGeometry.relativeDualizingOpenPullbackIso",
+   "AlgebraicGeometry.relativeDualizingOpenDiagonalModuleMap",
+   "AlgebraicGeometry.relativeDualizingOpenDiagonalMap",
+   "AlgebraicGeometry.relativeDualizingOpenDiagonalMap_isIso",
+   "AlgebraicGeometry.relativeDualizingOpenFirstProjectionIso",
+   "AlgebraicGeometry.relativeDualizingOpenClass",
+   "AlgebraicGeometry.relativeDualizingPair_open_rigidity",
+   "AlgebraicGeometry.relativeDualizingPair_open_base_iff"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDualizingPairOpenRigidity.lean",
+  "statement": "theorem relativeDualizingPair_open_rigidity {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] (K L : schemeDerivedCategory X) (ξ : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj K) (η : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj L) (hK : IsCoherentRelativeDualizingPair f K ξ) (hL : IsCoherentRelativeDualizingPair f L η) : IsIso (relativeDualizingScalarMap X K) ∧ (∃! α : K ≅ L, ξ ≫ (derivedPullback (pullback.fst f f)).map α.hom = η) ∧ ∀ (X' S' : Scheme.{u}) (f' : X' ⟶ S') (j : X' ⟶ X) (b : S' ⟶ S) [IsOpenImmersion j] [IsOpenImmersion b] [IsSeparated f'] [Flat f'] [LocallyOfFinitePresentation f'] (h : f' ≫ b = j ≫ f), IsIso (relativeDualizingOpenDiagonalMap f f' j b h) ∧ IsCoherentRelativeDualizingPair f' ((relativeDualizingOpenRestriction j).mapDerivedCategory.obj K) (relativeDualizingOpenClass f f' j b h K ξ) ∧ IsCoherentRelativeDualizingPair f' ((relativeDualizingOpenRestriction j).mapDerivedCategory.obj L) (relativeDualizingOpenClass f f' j b h L η) ∧ IsIso (relativeDualizingScalarMap X' ((relativeDualizingOpenRestriction j).mapDerivedCategory.obj K)) ∧ (∃! β : (relativeDualizingOpenRestriction j).mapDerivedCategory.obj K ≅ (relativeDualizingOpenRestriction j).mapDerivedCategory.obj L, relativeDualizingOpenClass f f' j b h K ξ ≫ (derivedPullback (pullback.fst f' f')).map β.hom = relativeDualizingOpenClass f f' j b h L η) ∧ ∀ α : K ≅ L, ξ ≫ (derivedPullback (pullback.fst f f)).map α.hom = η → relativeDualizingOpenClass f f' j b h K ξ ≫ (derivedPullback (pullback.fst f' f')).map ((relativeDualizingOpenRestriction j).mapDerivedCategory.map α.hom) = relativeDualizingOpenClass f f' j b h L η",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b24157b1",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery of H2-RETURNed aa0a3512 applies exactly the prescribed fix. The Lean module is byte-identical (sha f929fb1b). The item stmt_dep lem-weil-pbc-module-base-change-map-open-restriction is replaced by def-sfb-module-base-change-map, whose record is byte-identical to the landed side-live record (Q51, existing:true, moduleBaseChangeMap). All 11 stmt_deps are definition nodes. The 10 other dep records are identical to live. The item differs from live only in stmt_deps and lean, and the statement is verbatim. Live is still split with no lean record, so the item is not superseded. Independent re-read: arbitrary separated/flat/lfp f with no Noetherian or nonempty hypothesis; IsIso of the scalar map; ∃! α : K ≅ L with ξ≫Lp1*α=η; all open squares (U=⊥ included) give both restricted pairs, the scalar iso, ∃! β and restriction of α; base-open iff lemma for the V-factorization. Transports are canonical (leftAdjointUniq, moduleBaseChangeMap, tensorPullbackObjUnitToUnit, relativeMVComp, inv of a specified map with a named postponed IsIso theorem). No hollow defs; 3 sorries, all with proof docstrings; source/blueprint docstrings present; report sections present. No compile: no file changed."
+ }
+}

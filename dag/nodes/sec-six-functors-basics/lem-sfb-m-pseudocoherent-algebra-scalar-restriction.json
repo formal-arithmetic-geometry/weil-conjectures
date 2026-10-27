@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-m-pseudocoherent-algebra-scalar-restriction",
+ "kind": "statement",
+ "title": "Fixed-degree pseudo-coherence under restriction through a pseudo-coherent algebra",
+ "statement": "Let $f:S\\to T$ be a homomorphism of commutative rings such that $T[0]$, with its $S$-module structure through $f$, is pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. For every $m\\in\\mathbf Z$ and $K\\in D(T)$ [def-weil-abstract-derived-category], $$K\\text{ is }m\\text{-pseudo-coherent over }T\\quad\\Longleftrightarrow\\quad f_*K\\text{ is }m\\text{-pseudo-coherent over }S$$ [def-pc-ring-m-pseudo-coherent]. Here $f_*$ is restriction of scalars, induced termwise on representing complexes by keeping the additive groups and differentials and setting $s\\cdot k=f(s)k$. This exact functor preserves quasi-isomorphisms. No flatness, surjectivity, Noetherian, or cohomological boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064Z, lemma-finite-push-pseudo-coherent, equivalence (1) and (2) for a fixed integer m."
+ },
+ "stmt_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Restriction keeps the additive groups, differentials, kernels and images, so $H^i(f_*L)=f_*H^i(L)$ for every complex $L$. Thus it preserves and reflects cohomology vanishing and preserves quasi-isomorphisms, giving a functor on the localizations $D(T)\\to D(S)$. It commutes with shifts and with the cone formula $C(u)^i=L^i\\oplus E^{i+1}$, $d(x,y)=(d_Lx+u(y),-d_Ey)$. Since distinguished triangles are isomorphic to images of cone triangles, it preserves them. Fix a bounded-above finite free $S$-complex $P^\\bullet$ modeling $f_*T[0]$. For every finite $r\\geq0$, $(P^\\bullet)^{\\oplus r}$ models $f_*T^{\\oplus r}[0]$: kernels and images of its differential are the corresponding finite direct sums, so its cohomology is the direct sum of the cohomology of $P$. It is bounded above and finite free termwise. Hence every finite free $T$-module is pseudo-coherent after restriction, including rank zero.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, lemma-finite-push-pseudo-coherent, scalar-restriction identifications and the terms of the finite free approximation; definitions in Tag 064Q."
+   }
+  },
+  {
+   "text": "Consequently, for any bounded finite free $T$-complex $E^\\bullet$, every term of $f_*E^\\bullet$ is pseudo-coherent as an $S$-module by Step 1. The complex is bounded above. Apply [lem-sfb-pseudocoherent-terms-bounded-above] over $S$ to obtain pseudo-coherence of $f_*E^\\bullet$. By [lem-pc-ring-pseudo-coherent-iff-all-m] it is $q$-pseudo-coherent over $S$ for every integer $q$. Over $T$, the identity of $E^\\bullet$ itself witnesses $q$-pseudo-coherence for every $q$.",
+   "uses": [
+    "lem-sfb-pseudocoherent-terms-bounded-above",
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, proof of (1) implies (2), using Tag 064Y, lemma-complex-pseudo-coherent-modules, and Tag 064U, lemma-pseudo-coherent."
+   }
+  },
+  {
+   "text": "Suppose $K$ is $m$-pseudo-coherent over $T$. Choose its witness $\\alpha:E^\\bullet\\to K$ and complete it to a distinguished triangle $E^\\bullet\\to K\\to C\\to E^\\bullet[1]$. In the long exact sequence, for every $i\\geq m$, $H^i(\\alpha)$ is surjective and $H^{i+1}(\\alpha)$ is injective. Exactness gives $H^i(C)=0$ for $i\\geq m$. Step 1 gives the restricted distinguished triangle and the same vanishing for $f_*C$. The map from the zero finite free complex to $f_*C$ is therefore an $m$-pseudo-coherent witness. Step 2 makes $f_*E$ $m$-pseudo-coherent. The middle-vertex clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] over $S$ now makes $f_*K$ $m$-pseudo-coherent.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent",
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, proof of (1) implies (2); Tag 064W, lemma-recognize-pseudo-coherent (1), here proved by the zero witness; Tag 064R, lemma-cone-pseudo-coherent (2)."
+   }
+  },
+  {
+   "text": "For the converse, suppose $f_*K$ is $m$-pseudo-coherent. Its bounded finite free witness has an upper degree bound $d$; the isomorphisms above $m$ imply $H^i(f_*K)=0$ for $i>\\max(d,m)$. Thus $K$ also has a cohomological upper bound. Prove the following uniform assertion by induction on the natural number $n-m+1$: whenever $n\\geq m-1$, $H^i(L)=0$ for $i>n$ and $f_*L$ is $m$-pseudo-coherent, then $L$ is $m$-pseudo-coherent over $T$. The base $n=m-1$ holds because all cohomology in degrees $\\geq m$ vanishes, so the zero finite free complex is a witness. An upper bound for $K$ can be enlarged to be at least $m-1$, so this assertion will apply to $K$. No largest nonzero cohomology group is required.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, proof of (2) implies (1), induction on the upper cohomological degree; Tag 064W (1), zero-witness base case. Agent-explicit uniform induction including the acyclic complex."
+   }
+  },
+  {
+   "text": "Let $n\\geq m$ and assume the assertion of Step 4 for upper bound $n-1$. Consider $L$ with the hypotheses for upper bound $n$. The same $m$-pseudo-coherent witness for $f_*L$ is an $n$-pseudo-coherent witness: its cohomology maps are isomorphisms for $i>n$, and at $n$ they are surjective (an isomorphism if $n>m$). Apply [lem-sc-finite-cohomology] with ring $S$ and cutoff $n$, using $H^i(f_*L)=0$ for $i>n$. Choose finite $S$-generators $[z_1],\\ldots,[z_r]$ of $H^n(f_*L)$ and cycle representatives $z_j\\in L^n$ in a representing $T$-complex. These classes also generate $H^n(L)$ over $T$: an expression $\\sum s_j[z_j]$ becomes $\\sum f(s_j)[z_j]$. Set $E=T^{\\oplus r}[-n]$, concentrated in degree $n$, and define a chain map $u:E\\to L$ by sending the basis vectors to $z_j$. The cycle equations give $d_Lu=0$, and $H^n(u)$ is surjective.",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, proof of (2) implies (1), upper-degree induction; agent refinement using Tag 064S, lemma-finite-cohomology (1), to choose a one-degree finite free top approximation."
+   }
+  },
+  {
+   "text": "Form the cone triangle $E\\xrightarrow{u}L\\to C(u)\\to E[1]$. For $i=n$, $H^n(E)\\to H^n(L)$ is surjective and $H^{n+1}(E)=0$, so the long exact sequence gives $H^n(C(u))=0$. For $i>n$, both $H^i(L)$ and $H^{i+1}(E)$ vanish, so exactness again gives $H^i(C(u))=0$. Hence $C(u)$ has upper cohomological bound $n-1$. Step 1 carries this cone triangle and its cohomology to the corresponding objects over $S$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, proof of (2) implies (1), cone with lower upper cohomological bound; agent refinement using the cycle map of Step 5."
+   }
+  },
+  {
+   "text": "Step 2, applied to the one-degree bounded finite free $T$-complex $E$, says that $f_*E$ is $(m+1)$-pseudo-coherent over $S$. Since $f_*L$ is $m$-pseudo-coherent, the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] over $S$ makes $f_*C(u)$ $m$-pseudo-coherent. Step 6 verifies the other hypothesis for the induction assertion at $n-1$, so $C(u)$ is $m$-pseudo-coherent over $T$. Finally $E$ is $m$-pseudo-coherent over $T$ by its identity witness. The middle-vertex clause of the same triangle lemma, now over $T$, makes $L$ $m$-pseudo-coherent. This completes the induction and the converse for $K$.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064Z, proof of (2) implies (1), two applications of Tag 064R, lemma-cone-pseudo-coherent, and the induction hypothesis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-pseudocoherent-terms-bounded-above",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "def-pc-ring-m-pseudo-coherent",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-sc-finite-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064Z, lemma-finite-push-pseudo-coherent: forward implication follows its proof; converse refines its upper-degree induction by finite top-cohomology generators from Tag 064S instead of tensoring a whole approximation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If an algebra T is pseudo coherent as a module over S then for every integer m a derived T module is m pseudo coherent if and only if its scalar restriction to S is",
+   "results": "{\"t\": \"2026-10-23T22:20:31Z\", \"tool\": \"leanfinder\", \"query\": \"If an algebra T is pseudo coherent as a module over S then for every integer m a derived T module is m pseudo coherent if and only if its scalar restriction to S is\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.moduleCatRestrictScalarsPseudofunctor\", \"Algebra.FormallyUnramified.projective_of_restrictScalars\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"CondensedMod.IsSolid\", \"CondensedMod\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor_obj\", \"CommRingCat.moduleCatRestrictScalarsPseudofunctor_obj\"], \"digest\": \"e0d198e4bce276a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free approximations to a complex above a fixed cohomological degree are preserved and reflected by restriction through a pseudo coherent algebra",
+   "results": "{\"t\": \"2026-10-23T22:20:32Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free approximations to a complex above a fixed cohomological degree are preserved and reflected by restriction through a pseudo coherent algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"CochainComplex.ConnectData.restrictionGEIso\", \"CochainComplex.isLE_of_le\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"CochainComplex.cm5b.instIsStrictlyGEI\"], \"digest\": \"0e614fd6d5848fdd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a pseudo coherent ring algebra preserves and reflects m pseudo coherent complexes",
+   "results": "{\"t\": \"2026-10-23T22:20:30Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars along a pseudo coherent ring algebra preserves and reflects m pseudo coherent complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalars\", \"AlgHom.restrictScalars\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"ModuleCat.instModuleCarrierObjRestrictScalars\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\"], \"digest\": \"a7c92964c8dbbe61\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"restrictScalars\"",
+   "results": "{\"t\": \"2026-10-23T22:20:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", \\\"restrictScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|mPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T22:20:29Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|mPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived scalar restriction, ordinary finite presentations, smoothness, or cohomological truncation, and do not assert finite free approximation in a fixed cohomological degree."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|mPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T23:28:17Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|mPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scalar restriction, ordinary finite presentation, exact functors or support bounds; none supplies fixed-degree finite free approximations for this equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"restrictScalars\"",
+   "results": "{\"t\": \"2026-10-23T23:28:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", \\\"restrictScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scalar restriction, ordinary finite presentation, exact functors or support bounds; none supplies fixed-degree finite free approximations for this equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars through a pseudo coherent algebra preserves and reflects m pseudo coherence of derived complexes at every fixed integer m",
+   "results": "{\"t\": \"2026-10-23T23:28:18Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars through a pseudo coherent algebra preserves and reflects m pseudo coherence of derived complexes at every fixed integer m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.moduleCatRestrictScalarsPseudofunctor\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"219455d9386c3a6d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scalar restriction, ordinary finite presentation, exact functors or support bounds; none supplies fixed-degree finite free approximations for this equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free approximations to complexes in a fixed cohomological degree are preserved and reflected by restriction through a pseudo coherent ring algebra",
+   "results": "{\"t\": \"2026-10-23T23:28:36Z\", \"tool\": \"leansearch\", \"query\": \"Finite free approximations to complexes in a fixed cohomological degree are preserved and reflected by restriction through a pseudo coherent ring algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesHomologyOfExact\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"HomologicalComplex.instHasFiniteLimits\", \"SheafOfModules.mapFree\", \"HomologicalComplex.instPreservesFiniteLimitsSingle\", \"HomologicalComplex.instPreservesFiniteColimitsEvalOfHasFiniteColimits\", \"CategoryTheory.ShortComplex.instPreservesHomologyModuleCatAbForget₂\", \"CochainComplex.ConnectData.restrictionLEIso\"], \"digest\": \"f2ff63d81f3795e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scalar restriction, ordinary finite presentation, exact functors or support bounds; none supplies fixed-degree finite free approximations for this equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex is of type FP n over a finite homologically finitely presented algebra if and only if its underlying base ring complex is of type FP n",
+   "results": "{\"t\": \"2026-10-23T23:28:37Z\", \"tool\": \"leanfinder\", \"query\": \"A complex is of type FP n over a finite homologically finitely presented algebra if and only if its underlying base ring complex is of type FP n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"Algebra.FinitePresentation.of_finitePresentation\", \"isFinitelyPresentable\", \"instFinitePresentation\", \"instFinitePresentationForall\", \"Module.FinitePresentation.trans\", \"Algebra.Presentation.finitePresentation_of_isFinite\"], \"digest\": \"76c9e7843c99a37d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scalar restriction, ordinary finite presentation, exact functors or support bounds; none supplies fixed-degree finite free approximations for this equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-algebra-relative-m-pseudocoherence",
+  "date": "2026-10-24",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, finite locally free case: applying lemma-finite-morphism-relative-pseudo-coherence to the pulled-back complex. Tag 09UK proof: the algebraic finite-extension input 0673, before translation into schemes. Supporting input: Tag 0673 proof: apply the fixed-m part of 064Z to the finite free polynomial subalgebra and to each monic quotient.",
+   "via": [
+    "lem-sfb-finite-algebra-relative-m-pseudocoherence",
+    "lem-sfb-finite-relative-pseudocoherent-pushforward",
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-m-pseudocoherent-algebra-scalar-restriction",
+  "worker": "stage1",
+  "summary": "Proved both fixed-m implications using existing nodes only. Restriction preserves cones and cohomology; pseudo-coherent terms handle restricted bounded finite free complexes. Reflection is a uniform induction on an upper cohomological bound using finite S-generators of top cohomology as T-generators. All cone cutoffs and both triangle-closure clauses are explicit; no statement or hypotheses changed. No attachment or Mathlib match found.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) algebra prerequisite: the fixed-m part of Stacks 064Z used in 0673 for the finite free polynomial subalgebra and monic quotients. Read latest blueprint. The ancestor tool returns None for the inherited created-node chain, so retain its null from.node and explicit place/via.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic ring-complex characterization used to convert pseudo-coherence of the restricted finite free approximation to every finite cutoff; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "why": "Generic ring-complex triangle closure with the exact m and m+1 bounds, used in both directions; no change to the geometric unit route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic derived-category long exact cohomology sequence, used to lower the top cohomological degree of the cone; the unit has no separate ring-level statement."
+   },
+   {
+    "node": "lem-sc-finite-cohomology",
+    "why": "Generic finite top cohomology theorem at cutoff n, used to choose the finite set of obstruction generators; this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sc-finite-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-6f6f3bdcc",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-6f6f3bdcc (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited node's statement against Stacks 064Z (more-algebra.tex l.16283), 064R l.15910, 064S l.15965, 064Y l.16231 and 064W l.16158, with the tags checked in tags/tags. The statement matches 064Z for fixed m with no added hypotheses. The stmt_deps are exactly the notions used, and nothing is weakened. There are no new nodes and no repair note. The only related existing node is lem-sfb-pseudocoherent-algebra-scalar-restriction, which states only the full pseudo-coherence clause, so the item is not a duplicate. Step 1: restriction keeps groups, differentials, cones and shifts, so it preserves and reflects cohomology and triangles, and P^{⊕r} models T^r (elementary). Step 2: the 064Y node plus iff-all-m make the restriction of a bounded finite free T-complex q-pseudo-coherent for every q. Step 3: the cone of the witness α has H^{≥m}=0, because H^i(α) is onto and H^{i+1}(α) is injective for i≥m; the zero witness and 064R clause 2 over S then finish the forward direction. Steps 4-7: the converse is a properly set-up uniform induction on n-m+1 with base n=m-1, which also covers the acyclic case. The m-witness of f_*L is an n-witness (onto at n=m, an isomorphism for n>m). 064S over S with cutoff n gives finitely many generators, which generate over T, and the cycle chain map T^r[-n]→L has a cone bounded by n-1 (I checked the LES at i=n and at i>n). 064R clause 1 over S, then the induction hypothesis, then clause 2 over T finish the step. This replaces the source's E⊗_A B and Tor spectral sequence with a sound, more elementary argument, and proof_origin=agent records it. Edge cases checked: zero ring, r=0, n=m, unbounded-below K, and non-flat Z→Z/2. I accept the four generic tool_uses (iff-all-m, the triangle lemma, the LES and finite-cohomology): the 064Z proof itself needs them and the unit has no ring-level replacement. No SGA is cited, and A-F show no faults. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MPseudoCoherentScalarRestriction",
+  "declaration": "DerivedCategory.isMPseudoCoherent_restrictScalars_iff",
+  "file": "lean/Sheaf/RingTheory/MPseudoCoherentScalarRestriction.lean",
+  "statement": "theorem isMPseudoCoherent_restrictScalars_iff {S : Type uS} {T : Type uT} [CommRing S] [CommRing T] (f : S →+* T) [HasDerivedCategory.{wS} (ModuleCat.{max uS uT v} S)] [HasDerivedCategory.{wT} (ModuleCat.{max uS uT v} T)] (hT : IsPseudoCoherent ((singleFunctor (ModuleCat.{max uS uT v} S) 0).obj ((ModuleCat.restrictScalars f).obj (ModuleCat.of T (ULift.{max uS v} T))))) (m : ℤ) (K : DerivedCategory (ModuleCat.{max uS uT v} T)) : IsMPseudoCoherent m K ↔ IsMPseudoCoherent m ((ModuleCat.restrictScalars f).mapDerivedCategory.obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d383526a1",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read the node against Stacks 064Z (more-algebra.tex l.16283) and the landed IsPseudoCoherent/IsMPseudoCoherent defs. Lean: CommRing S T, f : S →+* T, hT = IsPseudoCoherent of the S-restricted regular T module in degree 0 (ULift is a canonical size transport only), m : ℤ, unbounded K in D(T), IsMPseudoCoherent m K ↔ IsMPseudoCoherent m ((restrictScalars f).mapDerivedCategory.obj K). Matches every clause with no extra hypotheses; universes independent and bound. Edge cases ok (zero rings, acyclic K, any m, non-flat f). Node unchanged except the new lean record (live lean null); statement verbatim; no new nodes or stmt_dep changes; no duplicate in Sheaf/WeilConjectures. Docstrings carry source, blueprint and all 7 steps; proof is sorry only; report has Worker report and Second reading by Q09. No compile run (no file changed)."
+ }
+}

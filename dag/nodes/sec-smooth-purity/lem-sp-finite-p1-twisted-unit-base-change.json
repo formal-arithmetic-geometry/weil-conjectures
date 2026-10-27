@@ -1,0 +1,151 @@
+{
+ "id": "lem-sp-finite-p1-twisted-unit-base-change",
+ "kind": "statement",
+ "title": "Exchange for the shifted twisted unit of the projective line",
+ "statement": "Let N>0, let A be a commutative ring killed by N, and let t be any normalized ordinary finite twist transport [def-asd-ordinary-finite-p1-arrows]. For every f:Sprime->S between schemes where N is invertible, f-star of the shifted twisted unit A_S(1)[2]->Rq_*A_P(1)[2], followed by projective-line exchange and the shifted line comparison on P, equals the shifted line comparison on S followed by the shifted twisted unit on Sprime. This is an equation of single components; it asserts neither a Chern family nor a splitting.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-nagata-projective-space-base-change",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "proof": [
+  {
+   "text": "The roots inclusion is monic and pure-tensor generators determine the line comparison. Thus ordinaryFiniteTwistTransport_unique identifies t with the normalized transport of etaleFiniteTwistPullback. Its composition law gives the sheaf-level line comparison square around f_P,q,qprime,f.",
+   "uses": [
+    "lem-amb-ordinary-finite-twist-transport-uniqueness",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+   }
+  },
+  {
+   "text": "Pass the sheaf composition law through the canonical degree-zero embeddings using mapDerivedCategoryNatIso_comp_hom_app_singleFunctor. Establish the composition formula for the transported object morphisms in arbitrary abelian categories before specializing to schemes. Shift by 2 using compatibility of the derived composition comparisons with shifts. Cancelling the comparison along one path gives the exact derived shifted-line square. Private generic lemmas perform the composition calculation. The ordinary definition modules cache their canonical single-degree functor and comparisons definitionally, preventing repeated expansion of concrete localization instances.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-kummer-class",
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+   }
+  },
+  {
+   "text": "The exchange is by definition the right mate of the exact inverse-image square. The mate-unit identity, followed by the line transport square and naturality of the qprime-unit, gives the exact twisted-unit equation. A generic cancellation lemma then transports this equation through the exact/left-derived comparison, using the normalized units and shifted-line comparisons. This gives precisely the asserted equality of the original components. No exchange isomorphism or splitting is invoked.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-kun-unbounded-exchange",
+  "lem-amb-ordinary-finite-twist-transport-uniqueness",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-mate-unit-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3 The degree-zero functor and comparison caches preserve the original constructed data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projective line twisted unit and Kummer Chern adjoint commute with arbitrary scheme base change",
+   "results": "Eight hits concerning base change of projective Weierstrass curve formulae; none concerning derived etale exchange.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived projective line twisted unit naturality base change adjunction mate",
+   "results": "Found CategoryTheory.unit_mateEquiv, unit_mateEquiv_symm and mateEquiv; no normalized shifted-line or Chern component theorem.",
+   "date": "2026-10-26",
+   "verdict": "Generic mate identity is a needed step, not the entire statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "One exact generic mate-unit identity.",
+   "date": "2026-10-26",
+   "verdict": "Does not include the derived finite-line normalization or identify its square."
+  },
+  {
+   "tool": "grep",
+   "query": "chern.*baseChange|twisted.*unit.*baseChange",
+   "results": "No Mathlib hits. Local library search found OrdinaryFiniteP1KummerBaseChange, which instead concerns the constant unit and the negative-twist evaluation adjunct, and OrdinaryFiniteP1KummerMaps, whose naturality clause requires Noetherian bases.",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem. Separate positive-twist component equations remain necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1KummerNaturality",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Finite projective-line classes used by the levelwise diagonal check; Exchange for the shifted twisted unit of the projective line",
+   "via": [
+    "lem-sp-finite-p1-kummer-naturality",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1TwistedUnitBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1TwistedUnitBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_twisted_unit_baseChange",
+  "statement": "theorem ordinaryFiniteP1_twisted_unit_baseChange\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hS' : IsUnit (N : Γ(S', ⊤))) :\n    (ordinaryFinitePullback A f).map (ordinaryFiniteP1Unit A N hA t S hS) ≫\n        ordinaryFiniteP1Exchange A f\n          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n        (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n          (ordinaryFiniteShiftedLinePullback A N hA t\n            (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n            ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n              hS.map (ProjectiveLine S ↘ S).appTop.hom)).hom =\n      (ordinaryFiniteShiftedLinePullback A N hA t f hS).hom ≫\n        ordinaryFiniteP1Unit A N hA t S' hS'",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T001453-L-2127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f5bb",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T065000-L-2652866",
+  "kind": "interface",
+  "note": "independent cc review: item proof and the 3 adapted unclaimed modules (OrdinaryFiniteP1Kummer, OrdinaryFiniteP1Arrows, EvenLineProductIntegrationMaps) against node lem-sp-finite-p1-twisted-unit-base-change, def-asd-ordinary-finite-p1-arrows/kummer-class, change record A2-finite-p1-cached-degree-zero, and upstream singleFunctorCompLeftDerivedFunctorIso definition (definitionally identical factorization)"
+ }
+}

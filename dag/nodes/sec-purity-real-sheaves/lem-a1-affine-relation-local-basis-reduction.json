@@ -1,0 +1,333 @@
+{
+ "id": "lem-a1-affine-relation-local-basis-reduction",
+ "kind": "statement",
+ "title": "Local infinite-residue-field basis reduction for affine groupoids",
+ "statement": "Let $U=\\operatorname{Spec}A$, $R=\\operatorname{Spec}B$ be affine schemes [def-weil-affine-spectrum], with $A\\ne0$, and let $s,t,e,i,c$ make them an absolute groupoid scheme [def-a1-groupoid-scheme]. Assume $s,t$ are finite locally free [def-pc-finite-locally-free]. Set $\\sigma=s^\\sharp$, $\\tau=t^\\sharp$ and $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$. Assume the homomorphism $\\phi:A\\otimes_C A\\to B$, $a\\otimes a'\\mapsto\\sigma(a)\\tau(a')$, is surjective [def-weil-pbc-module-tensor-product]. For every prime ideal $\\mathfrak p$ of $C$ there exists a flat local homomorphism $C_{\\mathfrak p}\\to D$ of nonzero local rings, with infinite residue field; every such homomorphism is faithfully flat [def-weil-pbc-flat-ring-map, def-weil-pbc-faithfully-flat-ring-map]. Here $C_{\\mathfrak p}$ is the localization by $C\\setminus\\mathfrak p$. For any such choice let $\\mathfrak m$ be the maximal ideal of $D$, $E=A\\otimes_C D$, $F=B\\otimes_C D$, and $\\sigma_D,\\tau_D:E\\to F$ the induced homomorphisms. The induced groupoid has finite locally free projections and invariant ring exactly $D$. The ring $E$ is semilocal (it has finitely many maximal ideals), $\\mathfrak mE$ is contained in their intersection, and all its maximal points belong to one orbit. The source projection has the same degree $r\\geq1$ at every point of $\\operatorname{Spec}E$: this degree is the dimension of the fibre coordinate algebra over the residue field of that point. There exist $x_1,\\ldots,x_r\\in E$ such that $\\tau_D(x_1),\\ldots,\\tau_D(x_r)$ is an $E$-basis of $F$ via $\\sigma_D$, and $x_1,\\ldots,x_r$ is a $D$-basis of $E$. In particular $E$ is finite free over $D$, and\n$$\\phi_D:E\\otimes_D E\\longrightarrow F,\\qquad x\\otimes y\\longmapsto\\sigma_D(x)\\tau_D(y)$$\nis an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BM (proposition-finite-flat-equivalence), proof fourth and final paragraphs; rank invariance as in Tag 03BI (lemma-finite-locally-free-disjoint-free). Algebraic input: algebra.tex Tag 03C3 (lemma-flat-local-given-residue-field), Tag 03C1 (lemma-semi-local-module-basis-in-submodule); final basis conclusion Tag 03C8 (lemma-basis)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-pc-finite-locally-free",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset C$ and write $k=\\kappa(\\mathfrak p)$. Apply the flat local residue-extension lemma to the local ring $C_{\\mathfrak p}$ and the infinite field extension $k(T)/k$. This gives a nonzero local ring $D$ with infinite residue field and a flat local map $C_{\\mathfrak p}\\to D$. The flat-local faithful-flatness lemma applies to every such choice, not just the constructed one, so each is faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, fourth paragraph; algebra.tex Tag 03C3 (lemma-flat-local-given-residue-field)."
+   }
+  },
+  {
+   "text": "For any chosen $D$, its flatness over $C_{\\mathfrak p}$ implies its flatness over $C$ by the flat-over-localization equivalence, applied to $C\\to C_{\\mathfrak p}$. The sequence $0\\to C\\to A\\xrightarrow{\\sigma-\\tau}B$ is exact by the definition of $C$. Flat tensor exactness gives $0\\to D\\to E\\xrightarrow{\\sigma_D-\\tau_D}F$ exact. Thus $D\\to E$ is injective and its image is exactly the invariant ring. In particular $E\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK (lemma-invariants-base-change), proof of (3)."
+   }
+  },
+  {
+   "text": "The groupoid-base-change lemma supplies the induced groupoid on $\\operatorname{Spec}E,\\operatorname{Spec}F$ and its finite locally free projections. Apply integral invariants to this groupoid, using the identification of its invariant ring with $D$ from step 2: $E$ is integral over $D$. Apply orbit fibres to the same groupoid: $\\operatorname{Spec}E\\to\\operatorname{Spec}D$ is surjective and two points above the same prime of $D$ are joined by an arrow of $\\operatorname{Spec}F$.",
+   "uses": [
+    "lem-a1-affine-groupoid-basechange-polynomial-norm",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-affine-groupoid-orbit-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK (1); Tags 03BJ (lemma-integral-over-invariants), 03BL (lemma-points)."
+   }
+  },
+  {
+   "text": "By maximal contraction for integral extensions, every maximal ideal of $E$ contracts to the unique maximal ideal $\\mathfrak m$ of $D$, hence contains $\\mathfrak mE$. Conversely, every prime above $\\mathfrak m$ is maximal by the prime-over-maximal lemma. Surjectivity in step 3 gives one such maximal point $u$. Every maximal point $v$ is in the orbit of $u$, hence is the target of an arrow whose source is $u$. The source fibre is finite, because the source morphism is finite. Consequently there are finitely many maximal points of $E$, all in one orbit, and $\\mathfrak mE$ is contained in their intersection.",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, final paragraph, semilocality argument."
+   }
+  },
+  {
+   "text": "Apply invariant rank strata to the base-changed affine groupoid. Its source degree is a positive integer and its rank strata are invariant open-and-closed subsets. Since all maximal points form one orbit, they lie in a single rank stratum, say the stratum of rank $r\\ge1$. Every prime ideal of $E$ lies in a maximal ideal. An open-and-closed rank stratum containing that maximal point contains its generalizations, so every point belongs to the rank-$r$ stratum. This proves constant degree on all of $\\operatorname{Spec}E$, with degree interpreted as fibre dimension exactly as in the cited statement.",
+   "uses": [
+    "lem-a1-affine-groupoid-invariant-rank-strata"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (lemma-finite-locally-free-disjoint-free); Tag 03BM, third and final paragraphs."
+   }
+  },
+  {
+   "text": "For the source $g:\\operatorname{Spec}F\\to\\operatorname{Spec}E$, apply finite flat pushforward to the rank-one module $\\mathcal O_{\\operatorname{Spec}F}$. Its pushforward is finite locally free. The affine-sections lemma implies that its global sections $P=F$, viewed as an $E$-module via $\\sigma_D$, are finite projective. The standard-free-cover lemma gives a finite principal-open cover on which $P$ is finite free. At every point its rank equals the source fibre dimension, which is $r$ by step 5: reducing a free chart modulo the point identifies its basis with a basis of that fibre. Thus $P$ is finite locally free of constant rank $r$ in the module sense required by the semilocal basis lemma.",
+   "uses": [
+    "lem-pc-finite-flat-pushforward-locally-free",
+    "lem-pc-finite-flat-affine-sections-projective",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, final paragraph; morphisms.tex Tag 02KB (lemma-finite-flat), affine module interpretation."
+   }
+  },
+  {
+   "text": "Right exactness of tensor product preserves the surjectivity of $\\phi$ after tensoring over $C$ with $D$. The resulting source $(A\\otimes_C A)\\otimes_C D$ identifies with $E\\otimes_D E$ by $(a\\otimes b)\\otimes d\\mapsto(a\\otimes d)\\otimes(b\\otimes1)$; the inverse sends $(a\\otimes d)\\otimes(b\\otimes d')$ to $(a\\otimes b)\\otimes dd'$. The balancing relations show these formulas are well-defined and inverse. Under them the map is $\\phi_D$. Therefore every element of $F$ is a finite sum $\\sum_j\\sigma_D(y_j)\\tau_D(z_j)$. Put $N=\\tau_D(E)\\subseteq P$. Since $\\tau_D$ agrees with $\\sigma_D$ on $D$, $N$ is a $D$-submodule, and the displayed expressions say its $E$-linear span is $P$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, final paragraph, surjective tensor comparison and its generating submodule."
+   }
+  },
+  {
+   "text": "Apply the semilocal submodule basis lemma with local ring $D$, semilocal algebra $E$, module $P=F$ via $\\sigma_D$, and submodule $N=\\tau_D(E)$. Its hypotheses are respectively the chosen infinite residue field, the Jacobson-radical containment from step 4, constant rank $r\\ge1$ from steps 5-6, and generation from step 7. Obtain a basis $n_1,\\ldots,n_r\\in N$ and choose $x_j\\in E$ with $\\tau_D(x_j)=n_j$. Apply groupoid basis descent to this same groupoid and its invariant ring $D$: $x_1,\\ldots,x_r$ is a $D$-basis of $E$ and $\\phi_D$ is an isomorphism. This proves finite freeness and all the asserted conclusions.",
+   "uses": [
+    "lem-a1-semilocal-submodule-basis",
+    "lem-a1-affine-groupoid-basis-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, final paragraph; algebra.tex Tag 03C1; groupoids.tex Tag 03C8 (lemma-basis)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-a1-affine-groupoid-basechange-polynomial-norm",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-a1-affine-groupoid-invariant-rank-strata",
+  "lem-pc-finite-flat-pushforward-locally-free",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-a1-semilocal-submodule-basis",
+  "lem-a1-affine-groupoid-basis-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BM (proposition-finite-flat-equivalence), fourth and final paragraphs, with flat invariants from 03BK and rank strata from 03BI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite locally free groupoid with surjective invariant tensor comparison becomes finite free with an isomorphic comparison after flat local extension with infinite residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any commutative ring $ R $ and a commutative $ R $-algebra $ A $ that is smooth over $ B $, there exists a finitely generated $ R $-subalgebra $ A_0 $ of $ A $ such that $ A_0 $ is smooth over $ B\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give smooth descent, local flat module freeness, rank continuity or finite-group invariants. They do not give semilocality and a basis from target pullbacks for an internal scheme groupoid."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a local invariant ring with infinite residue field an affine finite flat groupoid has a semilocal object algebra and a basis selected from target pullbacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.FinitePresentation R M] [Module.Flat R M], IsLocallyConstant (Module.rankAtStalk M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"RingHom.Smooth.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The property of a ring homomorphism between commutative rings being smooth (i.e., flat with the module of differentials $\\\\Omega_{S/R}$ locally free of finite rank) is local, meaning it can be checked \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give smooth descent, local flat module freeness, rank continuity or finite-group invariants. They do not give semilocality and a basis from target pullbacks for an internal scheme groupoid."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite flat groupoid invariant algebra finite free over a local ring with infinite residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R P] [Flat R P] : Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n  {\"name\": \"Algebra.QuasiFinite.recOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure and satisfying the quasi-finite condition, meaning $ S $ is finitely generated\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"Module.free_of_flat_of_finrank_eq\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] [Flat R M] (n : ℕ) (rk : ∀ P : MaximalSpectrum R, finrank (R ⧸ P.1) ((R ⧸ P.1) ⊗[R] M) = n) :\\n  Free R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely generated flat $ R $-module. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the rank of the tensor product $ (R/\\\\mathfrak{p}) \\\\otimes_R M $ \"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"[Module.Finite R S] (hfin : Finite (ResidueField R)) : Finite (ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral_of_profinite\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \"[Algebra.IsInvariant A B G] : Algebra.IsIntegral A B\", \"doc\": \"If the algebra $ A $ over $ B $ is invariant under the action of a group $ G $, then every element of $ A $ is integral over $ B $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give smooth descent, local flat module freeness, rank continuity or finite-group invariants. They do not give semilocality and a basis from target pullbacks for an internal scheme groupoid."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Basis\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give smooth descent, local flat module freeness, rank continuity or finite-group invariants. They do not give semilocality and a basis from target pullbacks for an internal scheme groupoid."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*basis|basis.*groupoid|invariant.*[Ff]ree|[Ss]emi[Ll]ocal.*[Bb]asis",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"line\": \"27\", \"text\": \"`Rep.coinvariantsTensorFreeLEquiv`. If we conjugate the $n$th differential in $(A \\\\otimes_k P)_G$\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"line\": \"144\", \"text\": \"    d A n = (coinvariantsTensorFreeLEquiv A (Fin (n + 1) → G)).toModuleIso.inv ≫\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"line\": \"146\", \"text\": \"      (coinvariantsTensorFreeLEquiv A (Fin n → G)).toModuleIso.hom := by\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"line\": \"191\", \"text\": \"    apply (coinvariantsTensorFreeLEquiv A (Fin i → G)).toModuleIso.symm\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"35\", \"text\": \"* `Rep.coinvariantsTensorFreeLEquiv A α`: given a representation `A` and a type `α`, this is the\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"463\", \"text\": \"noncomputable def coinvariantsTensorFreeToFinsupp :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"472\", \"text\": \"lemma coinvariantsTensorFreeToFinsupp_mk_tmul_single (x : A) (i : α) (g : G) (r : k) :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"474\", \"text\": \"      (coinvariantsTensorFreeToFinsupp A α) (Coinvariants.mk _ (x ⊗ₜ single i (.single g r))) =\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Coinvariants.lean\", \"line\": \"476\", \"text\": \"  simp [coinvariantsTensorFreeToFinsupp, Representation.finsuppTensorRight]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/StrongRankCondition.lean\", \"line\": \"18\", \"text\": \"`InvariantBasisNumber`: the rank of a finitely generated free module is well defined.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give smooth descent, local flat module freeness, rank continuity or finite-group invariants. They do not give semilocality and a basis from target pullbacks for an internal scheme groupoid."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*basis|basis.*groupoid|invariants.*baseChange|invariants.*base_change",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state the affine scheme groupoid basis reduction; module freeness hits require finiteness and flatness over the invariant ring, which this item proves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Basis\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state the affine scheme groupoid basis reduction; module freeness hits require finiteness and flatness over the invariant ring, which this item proves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite flat affine groupoid finite free over its local invariant ring with infinite residue field",
+   "results": "OK 8 hits: Module.free_of_flat_of_isLocalRing, Module.free_of_flat_of_finrank_eq, IsLocalRing.finite_residueField_of_compactSpace, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.isFinite_iff, Module.FaithfullyFlat.instOfNontrivialOfFree, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state the affine scheme groupoid basis reduction; module freeness hits require finiteness and flatness over the invariant ring, which this item proves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free affine groupoid with surjective invariant tensor comparison becomes finite free after flat local base change with infinite residue field",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, RingHom.EssFiniteType.isStableUnderBaseChange, RingHom.finite_isStableUnderBaseChange, RingHom.finiteType_isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Algebra.QuasiFinite.baseChange, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state the affine scheme groupoid basis reduction; module freeness hits require finiteness and flatness over the invariant ring, which this item proves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine groupoid with finite locally free source has semilocal object algebra over a local invariant ring and a basis from target pullbacks",
+   "results": "OK 8 hits: AlgebraicGeometry.sourceAffineLocally_isLocal, AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal, AlgebraicGeometry.affineAnd_isLocal, AlgebraicGeometry.affineAnd_isLocal_of_propertyIsLocal, AlgebraicGeometry.targetAffineLocally_affineAnd_eq_affineLocally, AlgebraicGeometry.HasAffineProperty.of_isLocalAtTarget, AlgebraicGeometry.HasAffineProperty.isLocal_affineProperty",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state the affine scheme groupoid basis reduction; module freeness hits require finiteness and flatness over the invariant ring, which this item proves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-flat-affine-relation-quotient",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Supporting affine quotient input along the inherited via-chain through lem-a1-separated-etale-space-scheme, lem-a1-separated-locally-qf-space-representable and lem-a1-finite-flat-affine-relation-quotient: Stacks Tag 03BM (proposition-finite-flat-equivalence), fourth and final proof paragraphs, using Tags 03BI, 03BK, 03C1, 03C3 and 03C8. The current main-20261015 ancestor lem-a1-affine-hc0 has no proof paragraph containing this result; the via-chain records indirect DAG provenance, not a textual occurrence there.",
+   "via": [
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-relation-local-basis-reduction",
+  "worker": "stage1",
+  "summary": "Read Stacks 03BM, 03BK, 03BI, 03C1 and 03C3; reuse existing integral, orbit, rank, semilocal-basis and basis-descent nodes. Eight explicit steps prove all clauses without new nodes or statement changes; make equalizer base change, finite-fibre semilocality, rank propagation and generation explicit. Searched project Lean for exact attachment and Mathlib by four tools, two semantic phrasings.",
+  "blueprint": "Supporting affine quotient theorem along the inherited provenance chain from lem-a1-affine-hc0; this item realizes Stacks 03BM local infinite-residue-field reduction and final basis argument. The current main-20261015 ancestor has only its H_c^0 statement, so the inherited reference to its fourth proof paragraph was stale; corrected from.place explicitly distinguishes indirect DAG provenance from blueprint text.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "why": "Generic algebraic/geometric input in steps 1; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic algebraic/geometric input in steps 1; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-localization",
+    "why": "Generic algebraic/geometric input in steps 2; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic algebraic/geometric input in steps 2; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "why": "Generic algebraic/geometric input in steps 4; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "why": "Generic algebraic/geometric input in steps 4; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic algebraic/geometric input in steps 4; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-finite-flat-pushforward-locally-free",
+    "why": "Generic algebraic/geometric input in steps 6; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "Generic algebraic/geometric input in steps 6; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Generic algebraic/geometric input in steps 6; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Generic algebraic/geometric input in steps 7; used only for its stated conclusion in the Stacks 03BM argument, not as a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-pc-finite-flat-pushforward-locally-free",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-e31d0d875",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-e31d0d875 (reviewer sub-agent of L); spot-checked: I read the whole delivery and accept it unchanged; review.md has the step-by-step checks. It is one commit with the item and its report, no new nodes, and the statement and stmt_deps unchanged. Live and side-live still show the item as unsplit, with no repair note, so it is not superseded and not a 2026-10-21 re-split order. Sources read: Stacks groupoids 03BM (l.4816, whole proof), 03C8 (l.4745) with its proof, 03BI and 03BK, and algebra 03C3. The item takes the module via sigma with submodule tau(E), matching 03C8 and lem-a1-affine-groupoid-basis-descent. Step 1 gets D from 03C3 with residue field k(T), which is infinite, and faithful flatness from 00HR for every choice. Step 2 uses the iff clause of flat-over-localization in the right direction; sigma-tau is C-linear because sigma and tau agree on C, and tensoring the equalizer with D shows the invariant ring is D and E is nonzero. Step 3 takes the base-changed groupoid from basechange-polynomial-norm. That node states the groupoid only over D, while integral-invariants and orbit-fibres need an absolute one. I checked this is elementary: an H-point makes H a D-scheme, and s_D, t_D are over D. Step 4: maximal ideals lie over m (00OI, 00GS) and are all t of the finite fibre of s over one maximal point u, so E is semilocal with mE in Jac(E). Step 5: the rank strata satisfy s^-1(U_r)=t^-1(U_r), so they are invariant; the single orbit of maximal points lies in one stratum, and open strata are closed under generalization, so the rank is a constant r>=1. Step 6: finite-flat pushforward, projective affine sections and 00NX give a principal-open free cover with fibre rank r; empty charts are trivially rank r, a case the step does not write out. Step 7: I checked the reassociation (A⊗A)⊗D to E⊗_D E; it shows tau_D(E) is a D-submodule whose E-span is F. Step 8 checks every hypothesis of semilocal-submodule-basis, then applies basis-descent with invariant ring D. Small cases checked: the identity groupoid (r=1), the swap action of Z/2 on k×k (r=2), and a trivial group action (excluded because phi is not surjective). No duplicate found among the 03BM or infinite-residue-field nodes; comparison-preparation, which assumes an equivalence relation, is rightly not cited. The 11 declared off-unit tool uses are generic black boxes; accepted. No SGA citation. The parent finite-flat-affine-relation-quotient step 2 uses exactly the item's conclusion."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelationLocalBasisReduction",
+  "declaration": "AlgebraicGeometry.affineGroupoid_local_basis_reduction",
+  "declarations": [
+   "AlgebraicGeometry.affineGroupoidInvariantTensorComparison",
+   "AlgebraicGeometry.IsAffineGroupoidLocalBasisData",
+   "AlgebraicGeometry.affineGroupoid_local_basis_reduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRelationLocalBasisReduction.lean",
+  "statement": "theorem affineGroupoid_local_basis_reduction (A B : CommRingCat.{u}) [Nontrivial A] (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (_hG : IsGroupoidScheme s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] (_hφ : Function.Surjective (affineGroupoidInvariantTensorComparison s t)) : ∀ p : PrimeSpectrum ((Spec.preimage s).hom.eqLocus (Spec.preimage t).hom), (∃ (D : Type u) (_ : CommRing D) (_ : IsLocalRing D) (f : Localization.AtPrime p.asIdeal →+* D), IsLocalHom f ∧ f.Flat ∧ Infinite (IsLocalRing.ResidueField D)) ∧ (∀ (D : Type v) [CommRing D] [IsLocalRing D] (f : Localization.AtPrime p.asIdeal →+* D), IsLocalHom f → f.Flat → Infinite (IsLocalRing.ResidueField D) → f.FaithfullyFlat ∧ IsAffineGroupoidLocalBasisData s t p D f)",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67ec6ae70",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Statement matches node lem-a1-affine-relation-local-basis-reduction clause by clause: A≠0 via Nontrivial; IsGroupoidScheme and IsFiniteLocallyFree are the recorded dep declarations; C is RingHom.eqLocus of the Spec.preimage maps; phi is productMap σ τ (real map); C_p is Localization.AtPrime; there is a flat local D in Type u with infinite residue field, and every such D in any universe v is FaithfullyFlat with the full data: rightAlgebra E,F; σD,τD fixed by pure-tensor formulas; injective D→E with eqLocus = range; Finite MaximalSpectrum; mE ≤ jacobson ⊥; one orbit via comaps; base-changed IsGroupoidScheme (operations unique because F≅E⊗_D E makes the arrow scheme a kernel pair); finite locally free projections; 1≤r with IsFiniteLocallyFreeOfDegree r (fibre dimension at every point); shared x with ∃! σD/τD expansion and a D-basis; Finite+Free; φD ≃+* with formula. Node unchanged vs side-live apart from lean; statement verbatim; one sorry; helper defs non-hollow with source/blueprint docstrings; 8-step proof docstring; imports are recorded proof-dep modules; not superseded. Checked against Stacks 03BM final paragraph. Edge cases A=0, r≥1, universes. No compile (no change). Advisory: the Second reading section is the author's self-check."
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedBridge",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Nearest blueprint ancestor lookup for lem-sf-native-weil-tensor-ringed-bridge returns None. Source paragraph: cor-coef-verdier-weil-equivariance, internal Hom/evaluation and normalized action-site restriction. Native ringed bridge step 2; normalized action-site Hom comparison and equivalence unit/counit identities.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-native-inverse-hom-square",
+ "kind": "statement",
+ "title": "Inverse Hom comparisons across the normalized restriction square",
+ "statement": "Fix an ordinary NativeFrobeniusRingedModel A and a twisted action-site Presentation P. For every equivalence K from action-site modules to native Weil sheaves whose forward functor is A.toWeil P, put U equal to action restriction. There exist a square K.inverse followed by U isomorphic to native forgetting followed by A.E.inverse, a native inverse Hom comparison, and an ordinary inverse Hom comparison, such that their Hom square commutes with exactly P.hom on the restriction edge. This asserts neither ordinary tensor coherence, a coefficient-unit comparison, nor preservation of complexes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native ringed bridge step 2; normalized action-site Hom comparison and equivalence unit/counit identities."
+ },
+ "stmt_deps": [
+  "lem-sf-native-frobenius-ringed-model",
+  "def-sf-twisted-action-presentation-data",
+  "def-sf-native-weil-closed-models",
+  "lem-sf-native-action-site-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Normalize inverse_hom_comparison: after applying the forward equivalence and composing with the given forward Hom component, it is the counit at Hom followed by Hom of the source counit and target inverse counit. Expand the specified inverse comparison, use counit naturality and cancel the forward unit/counit triangle.",
+   "uses": [
+    "lem-sf-native-weil-ringed-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native ringed bridge step 2; normalized action-site Hom comparison and equivalence unit/counit identities."
+   }
+  },
+  {
+   "text": "Choose the square component as A.E.unitIso followed by the ordinary inverse image of K.counitIso. Counit naturality proves its naturality; the ordinary equivalence triangle gives E(square) followed by the ordinary counit equals the underlying native counit. Its inverse and inverse-counit versions follow by cancellation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native ringed bridge step 2; normalized action-site Hom comparison and equivalence unit/counit identities."
+   }
+  },
+  {
+   "text": "Transport both normalized forward Hom comparisons with inverse_hom_comparison. Apply the faithful ordinary equivalence to the desired Hom square and postcompose with A.hom. Naturality of A.hom, followed by the inverse comparison normalizations, expresses both sides using the counits.",
+   "uses": [
+    "lem-sf-native-normalized-action-hom",
+    "lem-sf-native-normalized-ordinary-hom",
+    "lem-sf-native-weil-ringed-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native ringed bridge step 2; normalized action-site Hom comparison and equivalence unit/counit identities."
+   }
+  },
+  {
+   "text": "Commute Hom precomposition past postcomposition by naturality. Combine the source maps using contravariant Hom composition, and the target maps using functoriality. The two square/counit cancellation identities give exactly the ordinary counit and its inverse. The final equality is definitional.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native ringed bridge step 2; normalized action-site Hom comparison and equivalence unit/counit identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-normalized-action-hom",
+  "lem-sf-native-normalized-ordinary-hom",
+  "lem-sf-native-weil-ringed-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native ringed bridge step 2; normalized action-site Hom comparison and equivalence unit/counit identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between categories of modules compatible with internal Hom preserves tensor unit and restriction along action site preserves tensor and Hom",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, Rep.MonoidalClosed.linearHomEquivComm, Rep.MonoidalClosed.linearHomEquiv, Rep.instIsRightAdjointActionModuleCatRes, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, Rep.instIsLeftAdjointActionModuleCatRes, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, CategoryTheory.Mod_.comap_obj_mod",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized action-site Hom comparison. Reuse the proved action_hom_component and prove its bifunctorial normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "results": "12 hits: CategoryTheory.Equivalence, CategoryTheory.Equivalence.refl, CategoryTheory.Equivalence.instInhabited, CategoryTheory.Equivalence.instPowInt, CategoryTheory.Equivalence.instCategory, CategoryTheory.Equivalence.pow, CategoryTheory.Equivalence.powNat, CategoryTheory.Equivalence.functor",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized action-site Hom comparison. Reuse the proved action_hom_component and prove its bifunctorial normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesKInjectiveComplexes|tensorHomEquiv",
+   "results": "17 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized action-site Hom comparison. Reuse the proved action_hom_component and prove its bifunctorial normalization."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilInverseHomSquare",
+  "file": "lean/Sheaf/Paper/NativeWeilInverseHomSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_inverse_hom_square",
+  "statement": "theorem native_inverse_hom_square\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))]\n    (A : NativeFrobeniusRingedModel k₀ l X)\n    (P : TwistedActionRingedSite.Presentation A.J A.s A.R A.a) :\n    letI := P.category\n    let U := P.modules.functor ⋙ TwistedActionRingedSite.forgetPairs\n      (TwistedActionRingedSite.sigma A.J A.s A.R A.a)\n    ∀ K : TwistedActionRingedSite.Modules P.coefficient ≌ ProEtaleWeilSheaf k₀ l X,\n      K.functor = A.toWeil P →\n    ∃ square : K.inverse ⋙ U ≅\n        Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X) ⋙ A.E.inverse,\n    ∃ nativeHom : Functor.uncurry.obj (ihomBifunctor k₀ l X) ⋙ K.inverse ≅\n        (K.inverse.op.prod K.inverse) ⋙\n          Functor.uncurry.obj (SheafOfModules.homFunctor (R := P.coefficient)),\n    ∃ ordinaryHom : Functor.uncurry.obj\n        (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ⋙\n          A.E.inverse ≅ (A.E.inverse.op.prod A.E.inverse) ⋙\n            Functor.uncurry.obj (SheafOfModules.homFunctor (R := A.R)),\n      ∀ M N : ProEtaleWeilSheaf k₀ l X,\n        U.map (nativeHom.hom.app (op M, N)) ≫\n          (P.hom (K.inverse.obj M) (K.inverse.obj N)).hom ≫\n          SheafOfModules.homObjMap (R := A.R) (square.inv.app M) (square.hom.app N) ≫\n          ordinaryHom.inv.app (op M.carrier, N.carrier) =\n        square.hom.app (ihom k₀ l X M N)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "independent cc review: delivered BridgeData structure+attributes vs published item (byte-identical); underived_restriction vs Presentation fields (tensor_pure/unit_sections/evaluation/symmetry) and Underived/TensorCoherence; new node records vs Lean; 2 direct importers compiled OK against delivery"
+ }
+}

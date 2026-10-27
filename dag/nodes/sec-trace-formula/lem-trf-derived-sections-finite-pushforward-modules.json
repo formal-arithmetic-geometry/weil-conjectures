@@ -19,112 +19,91 @@
  ],
  "proof": [
   {
-   "text": "The underlying abelian direct image along a finite morphism is exact by [lemma-weil-pbc-finite-direct-image-exact]. The module direct image has exactly this underlying functor by [lem-weil-pbc-module-direct-image-left-exact]. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting module scalars is faithful and preserves kernels and cokernels: it therefore reflects exactness, since the homology of a sequence has zero underlying abelian sheaf exactly when it is zero. Consequently finite direct image is exact on module sheaves. This is an underived argument only.",
+   "text": "Use the existing finite direct-image exactness instance with ModuleCat coefficients directly. Exact inverse image and its specified adjunction show that direct image preserves injective objects. No passage to underlying abelian sheaves is needed.",
    "uses": [
     "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-right-adjoint-preserves-injectives"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero; module direct image is sites-cohomology.tex Tag 071J (section-derived-functors), and coefficient forgetting is sites-modules.tex Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)."
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, and derived.tex Tag 015M (lemma-compose-derived-functors): module-valued bounded-complex specialization with explicit unit/counit normalization. No abelian-sheaf-only derived Leray statement is used."
    }
   },
   {
-   "text": "For every scheme morphism $u$, [prop-weil-pbc-inverse-image-modules-exact] and [lem-sp-right-adjoint-preserves-injectives] show that $u_*$ preserves injective module sheaves. Use [lem-weil-pbc-module-sheaves-enough-injectives, lem-weil-pbc-dplus-injective-representative] to choose a bounded-below injective representative $L$ of $M$. The comparison $M\\to L$ may be represented by a quasi-isomorphism of module complexes by [lem-weil-pbc-kinjective-hom-derived]. By Step 1, $p_*L$ represents $p_*M$ and is termwise injective. Both $R\\Gamma$ functors are computed on these module complexes by [def-kun-rgamma-unbounded, lem-weil-pbc-right-derived-plus-injective]. The equality $\\Gamma(Y,p_*L)=\\Gamma(Z,L)$ is an equality of complexes of $\\Lambda$-modules, with the same differential. It gives $\\lambda_{p,M}$. To compare choices, a map into another injective representative is a unique homotopy class by [lem-weil-pbc-kinjective-hom-derived]; applying $p_*$ and then sections gives the same map as taking sections on $Z$. Hence these identifications commute with comparison maps and with morphisms of $M$, proving canonicity, naturality and the claimed normalization.",
+   "text": "A bounded-below termwise-injective complex is K-injective. Direct image preserves its lower bound, quasi-isomorphisms and injective terms, so its sections unit is invertible as well. Expand the defining right-derived composition comparison and its unit factorization; transport from the homotopy quotient to complexes to obtain finite Leray normalization. Naturality and cancellation of Q(i) and its inverse prove the normalization for every resolution appearing in the unchanged statement. Use the existing exposed comp_fac and comp_unit_app helpers of Sheaf.Paper.DerivedLerayComp.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
     "def-kun-rgamma-unbounded",
-    "lem-weil-pbc-right-derived-plus-injective"
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-derived-leray-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 070I (lemma-K-injective), and 015M (lemma-compose-derived-functors), applied in module categories"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, and derived.tex Tag 015M (lemma-compose-derived-functors): module-valued bounded-complex specialization with explicit unit/counit normalization. No abelian-sheaf-only derived Leray statement is used."
    }
   },
   {
-   "text": "Finite morphisms are stable under arbitrary base change by [lem-trf-finite-radicial-basechange], so Steps 1 and 2 apply to $p'$. Exactness of $g^{-1}$ preserves the lower bound. By [lem-weil-pbc-dplus-injective-representative, lem-weil-pbc-kinjective-hom-derived] choose a bounded-below injective module complex $J$ on $Z'$ and a module-linear quasi-isomorphism $t:g^{-1}L\\to J$. Then $p'_*J$ is termwise injective and $p'_*t$ is a quasi-isomorphism, so it computes $R\\Gamma(Y',p'_*g^{-1}L)$. The bottom-right comparison $\\lambda_{p',g^{-1}L}$ is the identity $\\Gamma(Y',p'_*J)=\\Gamma(Z',J)$ from Step 2. In particular all four corners have module-complex models; no assertion that an underlying abelian complex is K-injective has entered.",
+   "text": "The ordinary direct-image composition and terminal-section comparisons associate: after evaluating on the terminal object both maps are equal by terminality. Apply rightDerived_ext with the iterated composite right-derived unit. The derived unit factorization equations reduce both resulting maps to the localized ordinary equality. Conjugacy of composition identifies this canonical derived comparison with rightDerivedLowerStarComp. Combining its unit-conjugation equation with naturality of Leray proves composition of the unit-Leray restriction transformations. Import the already proved comp_fac and comp_unit_app from Sheaf.Paper.DerivedLerayComp, and its derived_comp_eq generalized in place to any Grothendieck abelian coefficient category. Only the remaining module-coefficient composition and restriction arguments need private helpers here; the AddCommGrp theorem in the imported module retains its original signature.",
    "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-kun-rgamma-unbounded",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-derived-leray-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, and derived.tex Tag 015M (lemma-compose-derived-functors): module-valued bounded-complex specialization with explicit unit/counit normalization. No abelian-sheaf-only derived Leray statement is used."
+   }
+  },
+  {
+   "text": "Compare the finite exact derived adjunction with the exact-left/right-derived adjunction transported along the exact direct-image comparison. Localization extensionality and the two unit-factorization equations identify their units, hence the adjunctions. Its triangle identity identifies restriction along a finite map followed by sections of its counit with the published finite Leray comparison.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-rgamma-unbounded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, and derived.tex Tag 015M (lemma-compose-derived-functors): module-valued bounded-complex specialization with explicit unit/counit normalization. No abelian-sheaf-only derived Leray statement is used."
+   }
+  },
+  {
+   "text": "The derived square is the descent of the two inverse-image composition isomorphisms, so composition of restriction gives its restriction-square equation. In the desired mate square substitute the counit formula for finite Leray on the base-changed map. Naturality carries the mate through restriction; mateEquiv_counit replaces its transpose by the square comparison followed by pullback of the original counit. The restriction-square equation, naturality, and the original counit description of finite Leray give exactly the stated equality. Finite base change supplies finiteness of the new vertical map; no invertibility of the mate is assumed or proved.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
     "lem-trf-finite-radicial-basechange",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "def-weil-pbc-adjunction-conjugate"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective); finite base change is morphisms.tex Tag 01WL (lemma-base-change-finite)"
-   }
-  },
-  {
-   "text": "Use the inverse-image composition comparison of [lem-weil-pbc-inverse-image-composition] to identify $(p')^{-1}h^{-1}$ with $g^{-1}p^{-1}$. This comparison also applies to constant-$\\Lambda$ modules: its naturality commutes with each scalar endomorphism, and [prop-weil-pbc-inverse-image-modules-exact] supplies the transported actions and the identical underlying units and counits. A section of a constant ring sheaf is locally a constant scalar [def-weil-pbc-constant-sheaf], so commuting with constant scalars proves module linearity locally and hence globally. The comparison's unit equation remains the same equation after forgetting scalars, and faithfulness in [lem-weil-pbc-module-sheaves-colimits-forgetful] proves it in module sheaves. Define $\\beta_F$ by the module adjunction from $g^{-1}\\varepsilon_{p,F}$ with this comparison. Thus $\\beta$ is a natural transformation of module functors, and is the canonical mate in the statement.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "section-pullback: adjunction-mate construction; module linearity follows from naturality and the constant-ring actions"
-   }
-  },
-  {
-   "text": "Write $e_u$ for the underived unit section map. We verify $\\Gamma(Y',\\beta_F)e_h(p_*F)=e_g(F)$ under the section identifications, for a module sheaf $F$ on $Z$. A section $s\\in\\Gamma(Y,p_*F)$ is, by adjunction, the same section $\\widetilde s\\in\\Gamma(Z,F)$. Equivalently, viewing sections as linear maps from the regular constant module, its transpose is $\\widetilde s=\\varepsilon_{p,F}\\circ p^{-1}s$, with the constant-module identifications. Pulling $s$ along $h$ and applying $\\beta_F$ has transpose under $(p')^{-1}\\dashv p'_*$ equal to\n$$g^{-1}(\\varepsilon_{p,F})\\circ g^{-1}p^{-1}(s)=g^{-1}(\\varepsilon_{p,F}\\circ p^{-1}s)=g^{-1}\\widetilde s.$$\nThe first equality is the defining counit formula for $\\beta$ from Step 4 and the unit equation for the composition comparison; the last expression is precisely $e_g(F)(\\widetilde s)$. This proves the equality on every section as $\\Lambda$-linear maps, before deriving. Applied to each $F=L^n$ it proves an equality of chain maps, since all constituent sheaf maps are natural and commute with the differentials.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "section-pullback: unit/counit mate formula, expanded on a global section"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-module-derived-restriction-resolution] first to $u=h$, $I=p_*L$, target $p'_*J$, and $a=p'_*t\\circ\\beta_L$. It says that the left vertical composite, after the resolution identifications, is the class in $D(\\operatorname{Mod}\\Lambda)$ of\n$$\\Gamma(Y,p_*L)\\xrightarrow{e_h}\\Gamma(Y',h^{-1}p_*L)\\xrightarrow{\\Gamma(\\beta_L)}\\Gamma(Y',p'_*g^{-1}L)\\xrightarrow{\\Gamma(p'_*t)}\\Gamma(Y',p'_*J).$$\nApply the same node to $u=g$, $I=L$, target $J$, and $a=t$. The right vertical composite is the class of $\\Gamma(Z',t)\\circ e_g(L)$. The horizontal maps are identities on the section-complex models by Steps 2 and 3. Step 5 identifies the first three terms of the upper expression with $e_g(L)$, and $\\Gamma(Y',p'_*t)=\\Gamma(Z',t)$. Thus the two composites are equal as module-linear chain maps and consequently in the module derived category. Naturality of $\\beta$ and exactness of all four underived functors identify its component at $M$ with its component at $L$ under $M\\to L$, so this proves exactly the displayed square for $M$. No isomorphism assertion for $\\beta$ is needed.",
-   "uses": [
-    "lem-trf-module-derived-restriction-resolution",
-    "def-kun-rgamma-unbounded",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J6 (remark-before-Leray); module unit-section resolution formula plus the explicit mate calculation of Step 5"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, and derived.tex Tag 015M (lemma-compose-derived-functors): module-valued bounded-complex specialization with explicit unit/counit normalization. No abelian-sheaf-only derived Leray statement is used."
    }
   }
  ],
  "proof_deps": [
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-sp-right-adjoint-preserves-injectives",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived",
   "def-kun-rgamma-unbounded",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-trf-finite-radicial-basechange",
   "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
-  "lem-trf-module-derived-restriction-resolution"
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-derived-leray-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08J6 and cohomology.tex Tags 01F8/01FB give the ringed-site/module resolution route. Steps 4-6 write the finite-pushforward mate square as an equality of module-linear chain maps; no abelian derived pullback or composition theorem is invoked."
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015M and 09T5, with the terminal-section identification of sites-cohomology.tex Tag 08J6. H6 proves the unit normalization and mate compatibility directly from right-derived comparison factorization, composition conjugacy and adjunction identities; module-resolution restriction is unnecessary. Returned-delivery repair: reuse the exposed existing comparison helpers in Sheaf.Paper.DerivedLerayComp, generalizing derived_comp_eq there to Grothendieck abelian coefficients instead of duplicating it."
  },
  "mathlib_searches": [
   {
@@ -286,5 +265,26 @@
   "result": "pass",
   "note": "Clause-by-clause check of the item against node and Stacks 03QP/015M: arbitrary Λ (u+1 Λ-module convention), finite p, bounded-below M; exactness and injective preservation; λ is the published canonical finite Leray iso; normalization is universal over bounded-below injective resolutions with both section comparisons' invertibility as conclusions; arbitrary h with pullback.fst/snd, IsFinite p' inferred; β = mateEquiv of the canonical squareUpperStarIso, direction checked against Mathlib, only a Plus version exists upstream; the section-comparison helper equals rightDerivedFunctorObjQIso.inv by unfolding. The supplied prerequisite module matches its stage-1 node exactly (α orientation, w fixed by hw, no QuasiIso on a). Node copies match the side DAG; the item's stmt_deps gains the self-stated prerequisite, which stage2_delivery.py allows. lean.statement fields verbatim, no name clashes, no hollow definitions, only two sorrys, source/blueprint docstrings throughout. nt_compile.py --json on both modules: exit 0, no diagnostics (13.0 s / 9.1 s). Notes needing no change: NU's unreviewed delivery of the same prerequisite has an identical theorem; the Q48 second reading was by the same worker and says so."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261023T231430-L-3593856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

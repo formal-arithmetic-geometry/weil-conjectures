@@ -24,155 +24,56 @@
   "lem-weil-strict-roos-comparison",
   "lem-cbc-exact-product-functor-strict-limit",
   "lem-pur-integral-operations-well-defined",
-  "def-trf-integral-comparison-realization-models"
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-isomorphism-strict-quotient-models",
+  "def-trf-integral-pullback-descent-model"
  ],
  "proof": [
   {
-   "text": "The site equivalence for $g$ identifies $(g^{-1}M)(U\\to X)$ with $M(U\\to X\\xrightarrow gY)$, naturally in $M$ and $U$. Its underlying abelian-sheaf functor is additive and exact. Transporting a module action through the ring isomorphism $c$ changes neither the underlying maps nor their kernels and cokernels, so $G$ is additive and exact also for completed coefficients, as in the stated inverse-image comparison construction. Products of module sheaves are sectionwise. Consequently the product comparison on $U$ is the identification $\\prod_nD_n(U\\xrightarrow gY)\\to\\prod_nD_n(U\\xrightarrow gY)$, with action transported through $c_U^{-1}$ on both sides. It is invertible and has $n$th projection $G(\\operatorname{pr}_n)$. The same argument applies in each degree to every tower complex, and to the finite biproduct defining its cone.",
+   "text": "Apply strict quotient multiplication to obtain j with both sheafified unit-generator formulas. Apply quotient Roos comparison to obtain invertibility of phi, the difference square and eta with both specified cone coordinates. Obtain the normalized representative completion isomorphism rho. Exactness and additivity are the existing inverse-image instances.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-trf-isomorphism-strict-quotient-multiplication",
+    "lem-trf-isomorphism-quotient-roos-comparison",
+    "lem-trf-strict-quotient-completion-realization",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker j by H, compose with eta inverse, then whisker by derived localization to obtain c from the actual pullback-on-good functor to G of the quotient Roos functor. Whisker rho by derived G, follow by G.mapDerivedCategoryFactors and c inverse. This is a natural isomorphism e-prime from q followed by completion and derived G to the existing pullback-on-good functor.",
+   "uses": [
     "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2): exact equivalence fixing coefficients; explicit module and product calculation"
-   }
-  },
-  {
-   "text": "Choose the flat-term K-flat resolution $q:Q\\to N$. The derived-system evaluation calculus represents $\\mathcal R_YN$ by the single strict system $(Q_n)_n$, not by unrelated choices of its evaluations. Thus $D=U_Y(Q_n)_n$ represents its restricted strict tower. The definition of the ambient completed pullback represents $P_gN$ by $H(C)$, and the normalized strict Roos comparison represents $\\mathcal L_Y\\mathcal R_YN$ by $H(D)$. Its hypotheses hold on both sites: they are small in the fixed module universe and countable products of modules over either completed ring sheaf are exact. Neither identification requires $N$ to be derived complete or bounded.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-pur-integral-derived-operations",
-    "lem-weil-strict-roos-comparison",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0941 (lemma-derived-limit-is-ok); ambient operations and system-evaluation models"
-   }
-  },
-  {
-   "text": "Apply scalar extension through the ring-sheaf isomorphism $c_n$ to $M=g^{-1}Q_n$. Its specified multiplication isomorphism sends $x\\otimes a$ to $c_n^{-1}(a)x$, which is the notation $ax$ in $GD_n$; its inverse sends $x$ to $x\\otimes1$. For a completed scalar $r$, the hypothesis $\\pi_{X,n}c=c_ng^{-1}\\pi_{Y,n}$ gives $c_n^{-1}(\\pi_{X,n}(r))=g^{-1}\\pi_{Y,n}(c^{-1}(r))$. Hence this multiplication and its inverse are $\\widehat R_X$-linear after restriction. The two composites are the identity: $j_ni_n(x)=x$, and $i_nj_n(x\\otimes a)=c_n^{-1}(a)x\\otimes1=x\\otimes a$. These identities concern sheaf tensor products: the cited lemma constructs the maps after sheafification. Naturality in module maps gives compatibility with restrictions and with each differential $g^{-1}d\\otimes1$.",
-   "uses": [
-    "lem-weil-sheaf-scalar-extension-ring-iso",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), Tag 03EK (section-tensor-product); invertible coefficient map and scalar compatibility"
-   }
-  },
-  {
-   "text": "Write $r_{W,n}:B_{W,n+1}\\to B_{W,n}$ for coefficient reduction. The coefficient structure maps obey $r_{X,n}c_{n+1}=c_ng^{-1}r_{Y,n}$. The actual transition of $C$ sends $x\\otimes a$ to $g^{-1}(\\tau_n)(x)\\otimes r_{X,n}(a)$. Therefore\n$$j_nt_n(x\\otimes a)=c_n^{-1}(r_{X,n}(a))g^{-1}(\\tau_n)(x)=g^{-1}(\\tau_n)(c_{n+1}^{-1}(a)x)=G(\\tau_n)j_{n+1}(x\\otimes a).$$\nThe middle equality uses the displayed coefficient compatibility and the $g^{-1}r_{Y,n}$-semilinearity of $g^{-1}\\tau_n$. These equalities on the presheaf tensor generators give equal sheaf maps by sheafification. Thus $j$ is a strict tower chain isomorphism; its inverse is automatically strict by multiplying the equality by $j_n^{-1},j_{n+1}^{-1}$. For a chain map $h:Q\\to Q'$, $h_n=h\\otimes1$ commutes with quotient transitions, and $j'_n(g^{-1}h_n\\otimes1)(x\\otimes a)=c_n^{-1}(a)g^{-1}h_n(x)=G(h_n)j_n(x\\otimes a)$. This proves naturality of the entire strict tower isomorphism.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2): compatibility with reductions and transitions, expanded on tensor generators"
-   }
-  },
-  {
-   "text": "Let $P_D=\\prod_nD_n$. The equality $\\phi_DG(s_D)=s_{GD}\\phi_D$ follows after every product projection, since both composites have $n$th projection $G(\\tau_n)G(\\operatorname{pr}_{n+1})$. Additivity then gives $\\phi_DG(1-s_D)=(1-s_{GD})\\phi_D$. Define $\\eta_D$ by $\\phi_D$ on the degree $i-1$ and degree $i$ coordinates of $GH(D)^i$. Its chain-map equation is, in the canonical biproduct identifications,\n$$d\\eta_D(b,a)=(-d\\phi_D(b)-(1-s_{GD})\\phi_D(a),d\\phi_D(a))=\\eta_D(-Gd(b)-G(1-s_D)(a),Gd(a)).$$\nIt is an isomorphism since both diagonal entries are; its other entries are zero. To identify its derived class with the specified exact-product derived-limit comparison, apply that comparison theorem to $F=G$. All its exactness and product hypotheses were checked in Steps 1–2. That theorem uses signed coordinates $(x,y)$ with differential $(dx,(1-s)x-dy)$. The chain isomorphism $(b,a)\\mapsto(a,-b)$ converts the present convention to that one, preserves the strict augmentation, and conjugates the diagonal $\\phi_D$ map to itself. The normalized strict Roos identifications therefore identify our $\\eta_D$ with precisely that canonical comparison.",
-   "uses": [
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok); specified exact-product comparison, including its signed normalization"
-   }
-  },
-  {
-   "text": "For the strict tower map $j$ put $J=\\prod_nj_n$. Its transition equality in Step 4 gives $J(1-s_C)=(1-s_{GD})J$ after every projection. Thus $H(j)(b,a)=(Jb,Ja)$ is a chain map for the displayed differential, with inverse $H(j^{-1})$. Define $\\Theta_Q=\\eta_D^{-1}H(j)$. On the two product coordinates it is $\\phi_D^{-1}J$, with zero off-diagonal entries. It is an isomorphism of complexes. For $h:Q\\to Q'$, Step 4 gives the commuting square for $J$, and naturality of $\\phi$ follows from its product-projection equations. Composing these squares gives\n$$G H(D(h))\\Theta_Q=\\Theta_{Q'}H(C(h))$$\nas actual maps of complexes. This uses whole strict quotient towers throughout.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2)-(3): strict quotient cone comparison, using the cone convention of def-weil-inverse-image-pullback-comparison"
-   }
-  },
-  {
-   "text": "Consider the full homotopy subcategory $\\mathcal P$ of flat-term K-flat $\\widehat R_Y$-complexes. The two constructions $Q\\mapsto H(C(Q))$ and $Q\\mapsto GH(D(Q))$, followed by derived localization on $X$, respect homotopies. Indeed a cochain homotopy $h$ induces $h_n=h\\otimes1$ on each quotient, commuting with its transitions. For either strict tower, with $T=1-s$, the product homotopy $k=\\prod h_n$ obeys $kT=Tk$, and the homotopy on $H$ is $K(b,a)=(-kb,ka)$. Direct substitution gives $d_HK+Kd_H$ equal to the diagonal product of $dh_n+h_nd$; the cross term is $kT-Tk=0$. Termwise application of additive $G$ preserves this equation. The natural chain isomorphism in Step 6 consequently gives a natural isomorphism on $\\mathcal P$ after target localization.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YU (definition-derived-tor), 0941 (lemma-derived-limit-is-ok); explicit strict homotopy calculation"
-   }
-  },
-  {
-   "text": "The functors just used invert every quasi-isomorphism in $\\mathcal P$. For $H(C(-))$ this is clause (1) of the well-definedness theorem for the ambient operations. For $GH(D(-))$, the derived-system calculus identifies $D(-)$ on this class with the restriction of the functor $U_Y\\mathcal R_Y$, the normalized strict Roos construction is a functor on the derived tower category, and exact $G$ sends quasi-isomorphisms to quasi-isomorphisms. Thus the canonical comparisons identify these two functors with the restrictions of $P_g$ and $G\\mathcal L_Y\\mathcal R_Y$ respectively. These are comparisons of functors on strict systems and their localizations, not a claim that individual projections determine maps between derived limits.",
-   "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-strict-roos-comparison",
-    "def-weil-inverse-image-pullback-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 0941 (lemma-derived-limit-is-ok); canonical resolution comparisons"
-   }
-  },
-  {
-   "text": "Apply the ringed-site K-flat localization theorem with the small site $Y_{\\mathrm{proet}}$ and ring sheaf $\\widehat R_Y$. It identifies the localization of $\\mathcal P$ at its quasi-isomorphisms with $D(\\widehat R_Y)$. Its natural-transformation extension assertion applies also to one variable, by taking bifunctors constant in the second variable and then evaluating that variable at the zero complex. Apply it to the restrictions of $P_g$ and $G\\mathcal L_Y\\mathcal R_Y$ identified in Step 8 and to $\\Theta_Q$ from Steps 6–7. It supplies a unique natural transformation $\\Theta_{g,-}$ on the ordinary unbounded derived category with those representative components. Applying the same assertion to the inverse chain isomorphisms extends their inverses; uniqueness, applied to their two composites, makes both composites the identity. Hence the transformation is a natural isomorphism.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-pur-integral-operations-well-defined"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YU (definition-derived-tor); resolving-class localization and natural transformations"
-   }
+   "elementary": true
   },
   {
-   "text": "If $q:Q\\to N$ is any allowed resolution, identify the source and target of the component constructed in Step 9 by the canonical comparisons with $H(C(Q))$ and $GH(D(Q))$. By its defining restriction this component is $[\\Theta_Q]$. Consequently choosing a different resolution gives the same component through those canonical identifications. This proves exactly the asserted resolution independence. Naturality of that transformation gives, for every morphism $f:N\\to N'$ in the derived category,\n$$\\Theta_{g,N'}P_g(f)=G(\\mathcal L_Y\\mathcal R_Y(f))\\Theta_{g,N}.$$\nThe localization step includes inverses of quasi-isomorphisms and their composites, so this assertion covers all derived morphisms. No passage in the proof uses a completeness, constructibility or boundedness hypothesis on $N$.",
+   "text": "Apply the normalized pullback universal property, packaged from integralOperationsWellDefined to e-prime. It gives Theta whose restriction composed with e-prime is the defining pullback comparison. Evaluate at a good P, postcompose with c, and cancel c inverse followed by c. Functoriality of Q gives exactly the representative equation for H(j) followed by eta inverse.",
    "uses": [
     "lem-pur-integral-operations-well-defined",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "def-trf-integral-pullback-descent-model"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2)-(3): naturality and resolution independence of the integral reduction-system comparison"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Cancel the invertible G(rho) and mapDerivedCategoryFactors in the representative equation to solve for Theta at Q(P). For any isomorphism e:Q(P) to N, naturality of Theta gives Theta_N=P_g(e inverse) Theta_Q(P) (completion followed by G)(e). Substitute the solved representative equation and associate compositions. This proves the requested formula for every representative and derived object, without extra resolution or completeness assumptions.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-trf-isomorphism-strict-quotient-multiplication",
+  "lem-trf-isomorphism-quotient-roos-comparison",
+  "lem-trf-strict-quotient-completion-realization",
   "lem-weil-proetale-isomorphism-inverse-image",
   "def-weil-inverse-image-pullback-comparison",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-pc-kflat-resolution",
-  "lem-coef-derived-system-evaluation-calculus",
-  "def-pur-integral-derived-operations",
-  "lem-weil-strict-roos-comparison",
-  "lem-weil-sheaf-scalar-extension-ring-iso",
-  "def-pur-sheaf-tensor-product",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "def-weil-abstract-derived-category",
   "lem-pur-integral-operations-well-defined",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "def-trf-integral-pullback-descent-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "(2)-(3), explicit strict-tower, signed-cone and localization expansion; supporting Stacks Tags 03CZ, 03EK, 06YS, 06YT, 06YU, 0G7D, 0941, 08TC"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT, 0G7D and 0941: strict comparisons separated into three genuine steps; normalized descent is proved using the existing integralOperationsWellDefined uniqueness clause, and resolution independence follows by naturality. V2, 2026-10-26."
  },
  "mathlib_searches": [
   {
@@ -337,13 +238,6 @@
   "module": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
   "declaration": "WeilConjectures.isomorphismMultiplicationConeDescent",
   "declarations": [
-   "WeilConjectures.trfQuotientTowerFunctor",
-   "WeilConjectures.trfInverseImageComplex",
-   "WeilConjectures.trfInverseImageTower",
-   "WeilConjectures.trfQuotientDifference",
-   "WeilConjectures.trfInverseQuotientDifference",
-   "WeilConjectures.trfQuotientProductComparison",
-   "WeilConjectures.TrfCompletionRoosNormalized",
    "WeilConjectures.isomorphismMultiplicationConeDescent"
   ],
   "file": "lean/Sheaf/TraceFormula/IsomorphismMultiplicationConeDescent.lean",
@@ -352,7 +246,7 @@
   "by": "NZ",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The multiplication is fixed on the canonical sheafified unit generators; bundled completed linearity and local surjectivity of the coefficient projection give the formula on every finite scalar tensor. Both mapping-cocone projections fix the entire diagonal product comparison. The additional landed definition node supplies the K-injective-normalized strict Roos realization used to state the completion comparison. All resolution equations concern the original strict quotient systems."
+  "note": "The seven unchanged strict-system definitions are now publicly re-exported from Sheaf.TraceFormula.IsomorphismStrictQuotientModels, attached to def-trf-isomorphism-strict-quotient-models. The original theorem signature is unchanged. V2 proves the assembly, descent and every-resolution formula from three strictly smaller strict-comparison statements."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -361,5 +255,27 @@
   "group": "NZ",
   "result": "pass",
   "note": "Only the item's lean and stmt_deps changed; the added stmt_dep def-trf-integral-comparison-realization-models is a landed definition node, which the brief allows. lean.statement is verbatim and all 8 declarations exist. Docstrings carry source and blueprint id; the theorem docstring gives the node's 10 steps; the only proof is sorry. The report has Worker report and Second reading sections. Clause check: G is inverseImageIntegralModules and is additive and exact. phi is piComparison and is an iso for good Q. j is a natural iso of strict towers, fixed on the unit generators (same convention the dependency uses for its pullback transition), with inverse x->x⊗1. eta is fixed by mappingCocone fst and snd, so it is the diagonal phi. rho is fixed by TrfCompletionRoosNormalized, the same every-presentation pattern as the landed IsIntegralComparisonPullbackNormalized; r is fixed on K-injectives, and presentations exist for good P. Theta goes from integralDerivedPullback to G of L_Y R_Y and is fixed as Q of H(j) followed by eta inverse; the equation for every N, P, e gives resolution independence. No completeness or boundedness hypothesis; universes t and u independent. Edge cases g=id, N=0, exponent one, empty scheme, non-complete N all fine. Advisory: trfQuotientTowerFunctor duplicates clopenStrictReductionFunctor (owned by a theorem outside the stmt_deps) and IntegralOnSlice.tower none (equal only by a private lemma); not a fault. No file changed, so no compile run."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29c11",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T092852-L-3475163",
+  "kind": "interface",
+  "note": "independent cc review: elaborated type hashes of integralDerivedPullback(+Comparison), the 7 relocated defs and isomorphismMultiplicationConeDescent (published build vs delivered/fixed sandbox); the 3 sorry lemmas vs the original item conclusion and node; importers compiled against the fixed files"
  }
 }

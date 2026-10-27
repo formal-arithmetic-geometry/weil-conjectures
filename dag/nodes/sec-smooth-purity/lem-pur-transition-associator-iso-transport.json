@@ -1,0 +1,280 @@
+{
+ "id": "lem-pur-transition-associator-iso-transport",
+ "kind": "statement",
+ "title": "Transport of coherent transition associators and units along functor isomorphisms",
+ "statement": "Let $I$ be a preordered set and $\\mathcal A_i$ categories [def-nagata-category]. Composition is functional, with the rightmost map applied first. For every $i\\leq j$ let $B_{ji},C_{ji}:\\mathcal A_i\\to\\mathcal A_j$ be functors with specified natural isomorphisms $\\chi_{ji}:B_{ji}\\cong C_{ji}$. Suppose given natural isomorphisms $d_{kji}:B_{kj}B_{ji}\\cong B_{ki}$ and $\\lambda_i:B_{ii}\\cong1_{\\mathcal A_i}$ such that for all $i\\leq j\\leq k\\leq l$ and $K\\in\\mathcal A_i$,\n$$d_{lki,K}\\circ B_{lk}(d_{kji,K})=d_{lji,K}\\circ d_{lkj,B_{ji}K},$$\n$$d_{jii,K}=B_{ji}(\\lambda_{i,K}),\\qquad d_{jji,K}=\\lambda_{j,B_{ji}K}.$$\nUse canonical functor reassociations throughout; none of $B_{ii}$, $C_{ii}$ or their unitors is assumed to be an identity. Define\n$$z_{kji,K}=\\chi_{kj,C_{ji}K}\\circ B_{kj}(\\chi_{ji,K}),\\qquad a_{kji,K}=\\chi_{ki,K}\\circ d_{kji,K}\\circ z_{kji,K}^{-1},\\qquad u_{i,K}=\\lambda_{i,K}\\circ\\chi_{ii,K}^{-1}.$$\nThe maps $a_{kji}$ and $u_i$ are natural isomorphisms and satisfy\n$$a_{lki,K}\\circ C_{lk}(a_{kji,K})=a_{lji,K}\\circ a_{lkj,C_{ji}K},$$\n$$a_{jii,K}=C_{ji}(u_{i,K}),\\qquad a_{jji,K}=u_{j,C_{ji}K}.$$\nIn particular they are coherent for arbitrary finite chains, and replacing each $C_{ii}$ by the identity using $u_i$ gives a normalized diagram whose associators with a repeated adjacent index are identities. The comparisons with the ordinary diagram are the specified $\\chi$, with $a_{kji}z_{kji}=\\chi_{ki}d_{kji}$ and $u_i\\chi_{ii}=\\lambda_i$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final scalar convention; general categorical transport argument extracted by the agent from original parent steps 5 and 9. This lemma is not asserted as a numbered result in the source."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "We use the category laws of [def-nagata-category]. A functor preserves identities and composition; thus for an invertible morphism $v$, the map $F(v^{-1})$ is inverse to $F(v)$, by applying $F$ to $vv^{-1}=1$ and $v^{-1}v=1$. For a natural transformation $t:F\\to G$, naturality means $G(f)t_X=t_YF(f)$. If all $t_X$ are invertible, multiplication on both sides gives $F(f)t_X^{-1}=t_Y^{-1}G(f)$, so the componentwise inverse is natural. Composites are natural by substituting these equations, and their inverses are the reversed composites of the inverses. These are direct uses of the definitions (Stacks Tags 0014, 0017, 001B, 001I, labels definition-category, definition-isomorphism, definition-functor, definition-transformation-functors in categories.tex).",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: componentwise category and naturality conventions"
+   }
+  },
+  {
+   "text": "For $f:K\\to L$, apply naturality of $\\chi_{ji}$ and then of $\\chi_{kj}$ to get $$C_{kj}C_{ji}(f)z_{kji,K}=\\chi_{kj,C_{ji}L}B_{kj}(C_{ji}(f))B_{kj}(\\chi_{ji,K})=z_{kji,L}B_{kj}B_{ji}(f).$$ Its inverse is $$z_{kji,K}^{-1}=B_{kj}(\\chi_{ji,K}^{-1})\\chi_{kj,C_{ji}K}^{-1}.$$ Multiplying either way gives the identity by step 1. Hence $z_{kji}$ is a natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: naturality and invertibility of the two-arrow comparison"
+   }
+  },
+  {
+   "text": "By step 1, the displayed composites defining $a$ and $u$ are natural. Their componentwise inverses are $z_{kji,K}d_{kji,K}^{-1}\\chi_{ki,K}^{-1}$ and $\\chi_{ii,K}\\lambda_{i,K}^{-1}$, respectively; multiplying proves both inverse equations. Their definitions also give $$a_{kji,K}z_{kji,K}=\\chi_{ki,K}d_{kji,K},\\qquad u_{i,K}\\chi_{ii,K}=\\lambda_{i,K}.$$ These are exactly the asserted comparison equations, with the specified $\\chi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: construction of the associator and actual unit"
+   }
+  },
+  {
+   "text": "Fix $i\\le j\\le k\\le l$ and $K\\in\\mathcal A_i$. Set $$T_K=\\chi_{lk,C_{kj}C_{ji}K}\\,B_{lk}(\\chi_{kj,C_{ji}K})\\,B_{lk}B_{kj}(\\chi_{ji,K}).$$ It is an isomorphism from $B_{lk}B_{kj}B_{ji}K$ to $C_{lk}C_{kj}C_{ji}K$ by step 1. In particular equality after precomposition by $T_K$ implies equality, by postcomposing on the right with $T_K^{-1}$. Here and below juxtaposition has the functional composition convention of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: common invertible comparison for a three-arrow chain"
+   }
+  },
+  {
+   "text": "Naturality of $\\chi_{lk}$ at $a_{kji,K}$ and then step 3 give $$C_{lk}(a_{kji,K})T_K=\\chi_{lk,C_{ki}K}B_{lk}(a_{kji,K}z_{kji,K})=z_{lki,K}B_{lk}(d_{kji,K}).$$ Thus the left side of the required associativity equation, precomposed by $T_K$, is $$a_{lki,K}C_{lk}(a_{kji,K})T_K=\\chi_{li,K}d_{lki,K}B_{lk}(d_{kji,K}).$$ Each product is well typed; for example $a_{kji,K}$ has source $C_{kj}C_{ji}K$ and target $C_{ki}K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: left path of transported associativity"
+   }
+  },
+  {
+   "text": "First use step 3 at $C_{ji}K$, and then naturality of $d_{lkj}$ at $\\chi_{ji,K}$, to obtain $$a_{lkj,C_{ji}K}T_K=\\chi_{lj,C_{ji}K}d_{lkj,C_{ji}K}B_{lk}B_{kj}(\\chi_{ji,K})=z_{lji,K}d_{lkj,B_{ji}K}.$$ Consequently the precomposed right path is $$a_{lji,K}a_{lkj,C_{ji}K}T_K=\\chi_{li,K}d_{lji,K}d_{lkj,B_{ji}K}.$$ The assumed associativity of $d$ identifies this with step 5. Cancel $T_K$ as in step 4 to prove the required equation for $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: right path and cancellation against ordinary associativity"
+   }
+  },
+  {
+   "text": "For the repeated source index, naturality of $\\chi_{ji}$ at $u_{i,K}:C_{ii}K\\to K$ gives $$C_{ji}(u_{i,K})z_{jii,K}=\\chi_{ji,K}B_{ji}(u_{i,K})B_{ji}(\\chi_{ii,K})=\\chi_{ji,K}B_{ji}(\\lambda_{i,K}).$$ By the assumed source-unit law this is $\\chi_{ji,K}d_{jii,K}=a_{jii,K}z_{jii,K}$. Cancel $z_{jii,K}$ to get $a_{jii,K}=C_{ji}(u_{i,K})$. No identity assumption on $B_{ii}$ or $C_{ii}$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: source-unit equation with the completion unit retained"
+   }
+  },
+  {
+   "text": "For the repeated target index, substitute the definitions and use naturality of $\\lambda_j$ at $\\chi_{ji,K}$: $$u_{j,C_{ji}K}z_{jji,K}=\\lambda_{j,C_{ji}K}B_{jj}(\\chi_{ji,K})=\\chi_{ji,K}\\lambda_{j,B_{ji}K}=\\chi_{ji,K}d_{jji,K}=a_{jji,K}z_{jji,K}.$$ Cancellation proves $a_{jji,K}=u_{j,C_{ji}K}$. This applies also when $i=j$, so the two unit formulas agree on the fully repeated chain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: target-unit equation and the fully repeated case"
+   }
+  },
+  {
+   "text": "For each parenthesized word p, use Word.reduction, recursively whiskering the reductions of both children and then applying a at their endpoint bounds; nil uses the inverse of the actual unit and edge uses identity. Show that every generating Path edge commutes with this reduction. For reassoc, expand both reductions, use naturality of the third reduction at a on the first two bounds, and apply the four-index law. For leftUnit, naturality of the word reduction at the inverse unit and the source-unit law cancel the inverse unit against the unit; rightUnit uses the target-unit law and inverse cancellation. Contract and unit edges cancel immediately. Induct on Path: trans composes the commuting equations, symm cancels the invertible edge, and whisker uses naturality of the second path at the first target reduction and the two induction hypotheses. Thus every path hom followed by the target reduction hom equals the source reduction hom. Cancel the target reduction to obtain FiniteCoherent, including empty chains and repeated indices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: explicit finite-chain induction for associators"
+   }
+  },
+  {
+   "text": "Normalize by an explicit dependent pair: for i=j choose the identity functor together with the actual unit u_i as the comparison rho_ii, and otherwise choose C_ji with its identity comparison. Let N and rho be the projections of this pair. The defining equations give N_ii=identity, rho_ii=u_i, and the off-diagonal identities, including the stated heterogeneous equalities. Apply the proved transport calculation of steps 1–8 to (C,N,rho,a,u), obtaining Coherent N. Apply step 9 to obtain FiniteCoherent N. The normalized unit is rho_ii inverse followed by u_i, hence the identity. Substitute N_ii=identity in each of the two unit laws; functor preservation of identity identifies the repeated-index associators with the canonical left and right functor unitors. All constructions are valid in a preorder without antisymmetry and when the index type is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient convention; agent expansion: unit normalization and arbitrary finite chains including units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), coefficient conventions; the stated componentwise transport calculations, with direct induction on Path for finite coherence and an explicit dependent-pair diagonal normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms between transition functors transport coherent associators and units of a pseudofunctor on a preorder and preserve the pentagon",
+   "results": "CategoryTheory.LocallyDiscrete.mkPseudofunctor_mapComp; CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.map_eq_pullHom_assoc; CategoryTheory.Pseudofunctor.mapComp'; CategoryTheory.Pseudofunctor.mapComp; CategoryTheory.Functor.toPseudoFunctor'_mapComp; CategoryTheory.Functor.toPseudoFunctor_mapComp; CategoryTheory.Pseudofunctor.mapComp'₀₁₃_hom; CategoryTheory.Pseudofunctor.mapComp'_eq_mapComp",
+   "date": "2026-10-22",
+   "verdict": "no match: Pseudofunctor supplies the structure and its coherence hypotheses; monoidal-functor transport concerns a different structure and does not specialize in one line to replacing every transition functor of varying categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the multiplication and unit isomorphisms of a category valued pseudofunctor along natural isomorphisms of its arrow functors",
+   "results": "CategoryTheory.LocallyDiscrete.mkPseudofunctor_map; CategoryTheory.LocallyDiscrete.mkPseudofunctor_mapComp; CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso; CategoryTheory.Pseudofunctor.Grothendieck.map; CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_map₂; CategoryTheory.Pseudofunctor.Grothendieck.mapCompIso; CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat.map_eq_pullHom; CategoryTheory.Bicategory.Pith.pseudofunctorToPith_toPrelaxFunctor_toPrelaxFunctorStruct_map₂_iso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: Pseudofunctor supplies the structure and its coherence hypotheses; monoidal-functor transport concerns a different structure and does not specialize in one line to replacing every transition functor of varying categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport coherent functor composition associators and units along natural isomorphisms",
+   "results": "CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.associator; CategoryTheory.Oplax.OplaxTrans.associator; CategoryTheory.Functor.Monoidal.transport; CategoryTheory.Functor.Monoidal.transport_η_assoc; CategoryTheory.Functor.Monoidal.transport_μ_assoc; CategoryTheory.Functor.Monoidal.transport_ε; CategoryTheory.Functor.Monoidal.transport_δ_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: Pseudofunctor supplies the structure and its coherence hypotheses; monoidal-functor transport concerns a different structure and does not specialize in one line to replacing every transition functor of varying categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor",
+   "results": "CategoryTheory.Pseudofunctor; CategoryTheory.Pseudofunctor.id; CategoryTheory.Pseudofunctor.instInhabited; CategoryTheory.Pseudofunctor.toLax; CategoryTheory.Pseudofunctor.toOplax; CategoryTheory.Pseudofunctor.toPrelaxFunctor; CategoryTheory.Pseudofunctor.hasCoeToLax; CategoryTheory.Pseudofunctor.hasCoeToOplax",
+   "date": "2026-10-22",
+   "verdict": "no match: Pseudofunctor supplies the structure and its coherence hypotheses; monoidal-functor transport concerns a different structure and does not specialize in one line to replacing every transition functor of varying categories"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudofunctor|pseudonatural|transport.*associat|associat.*transport",
+   "results": "Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/Action/Basic.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Join/Pseudofunctor.lean; Mathlib/CategoryTheory/Join/Pseudofunctor.lean; Mathlib/CategoryTheory/Join/Pseudofunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Pseudofunctor supplies the structure and its coherence hypotheses; monoidal-functor transport concerns a different structure and does not specialize in one line to replacing every transition functor of varying categories"
+  },
+  {
+   "tool": "grep",
+   "query": "(def|theorem|lemma).*([Cc]opy|[Tt]ransport)|of.*Iso|iso.*[Cc]onj",
+   "results": "Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/StrictlyUnitary.lean; Mathlib/CategoryTheory/Bicategory/Functor/StrictPseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/StrictPseudofunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: Pseudofunctor supplies the structure and its coherence hypotheses; monoidal-functor transport concerns a different structure and does not specialize in one line to replacing every transition functor of varying categories"
+  },
+  {
+   "tool": "grep",
+   "query": "transport|ofIso|copy",
+   "results": "Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/LocallyDiscrete.lean; Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean; Mathlib/CategoryTheory/Bicategory/Functor/Oplax.lean; Mathlib/CategoryTheory/Bicategory/Functor/StrictlyUnitary.lean; Mathlib/CategoryTheory/Bicategory/Functor/Lax.lean; Mathlib/CategoryTheory/Bicategory/Functor/Cat.lean; Mathlib/CategoryTheory/Bicategory/Functor/Cat/ObjectProperty.lean; source directory CategoryTheory/Bicategory/Functor",
+   "date": "2026-10-22",
+   "verdict": "no match: constructor search finds mkOfLax/mkOfOplax and mkPseudofunctor, which require coherence; first broad query also matched Copyright and is inconclusive on its own"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport pseudofunctor coherence along natural isomorphisms of the arrow functors",
+   "results": "CategoryTheory.Functor.Monoidal.coreMonoidalTransport; CategoryTheory.Functor.Monoidal.transport; CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_hom; CategoryTheory.Pseudofunctor.StrongTrans.naturality_naturality_iso; CategoryTheory.Pseudofunctor.mapComp'_naturality_2_assoc; CategoryTheory.Pseudofunctor.mapComp'_naturality_1; CategoryTheory.Pseudofunctor.ObjectProperty.mapComp; CategoryTheory.Pseudofunctor.mapComp'_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: monoidal transport has different input data; strong-transformation naturality presupposes pseudofunctor structures on both sides"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor",
+   "results": "CategoryTheory.Pseudofunctor; CategoryTheory.Pseudofunctor.id; CategoryTheory.Pseudofunctor.instInhabited; CategoryTheory.Pseudofunctor.toLax; CategoryTheory.Pseudofunctor.toOplax; CategoryTheory.Pseudofunctor.toPrelaxFunctor; CategoryTheory.Pseudofunctor.hasCoeToLax; CategoryTheory.Pseudofunctor.hasCoeToOplax",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck comparison and pseudofunctor constructors do not transport arbitrary transition functors or prove the required unit normalization in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport composition and identity isomorphisms of a category-valued pseudofunctor along natural isomorphisms of its transition functors",
+   "results": "CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso; CategoryTheory.Pseudofunctor.Grothendieck.mapCompIso; CategoryTheory.Pseudofunctor.CoGrothendieck.compIso_hom_app; CategoryTheory.Pseudofunctor.ObjectProperty.mapComp; CategoryTheory.Functor.toPseudoFunctor_mapComp; CategoryTheory.Pseudofunctor.ObjectProperty.mapComp_hom_app; CategoryTheory.WithTerminal.pseudofunctor_mapComp; CategoryTheory.Pseudofunctor.presheafHomObjHomEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck comparison and pseudofunctor constructors do not transport arbitrary transition functors or prove the required unit normalization in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "([Tt]ransport|ofIso|conjug|def copy|def mk)",
+   "results": "Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Bicategory/Functor/LocallyDiscrete.lean; Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean; Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean; Mathlib/CategoryTheory/Bicategory/Functor/StrictlyUnitary.lean; source directory CategoryTheory/Bicategory/Functor",
+   "date": "2026-10-22",
+   "verdict": "no match: constructor search finds mkOfLax/mkOfOplax and mkPseudofunctor, which require coherence; first broad query also matched Copyright and is inconclusive on its own"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replacing the maps of a pseudofunctor by isomorphic functors preserves the associativity pentagon and both unit laws",
+   "results": "CategoryTheory.LocallyDiscrete.mkPseudofunctor_map; CategoryTheory.pseudofunctorOfIsLocallyDiscrete_map; CategoryTheory.Pseudofunctor.toPrelaxFunctor; CategoryTheory.LocallyDiscrete.mkPseudofunctor_mapComp; CategoryTheory.Pseudofunctor.mk.inj; CategoryTheory.pseudofunctorOfIsLocallyDiscrete_mapComp; CategoryTheory.LocallyDiscrete.mkPseudofunctor_obj; CategoryTheory.pseudofunctorOfIsLocallyDiscrete_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: Grothendieck comparison and pseudofunctor constructors do not transport arbitrary transition functors or prove the required unit normalization in one specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-line-tensor-coherence",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final coefficient conventions: coherent scalar associators and actual completion units (parent old steps 5 and 9).",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-transition-associator-iso-transport",
+  "worker": "stage1",
+  "summary": "Q160: checked the general transport formulas and supplied componentwise naturality, the two three-arrow associativity paths, both non-strict unit cancellations, a finite-chain induction and explicit unit normalization. The statement is unchanged. All steps are elementary computations from the hypotheses and category definitions; no new nodes. Repeated Mathlib searches with two phrasings found structures requiring coherence rather than a transport theorem.",
+  "blueprint": "det-def-sp-tate-twist-locally-free Proof (3), passage through integral/rational coefficient conventions, as extracted in parent lem-pur-completed-line-tensor-coherence old steps 5 and 9: steps 1–3 construct the comparison; 4–6 prove associativity; 7–8 retain actual units; 9–10 prove finite-chain and normalized coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-f7f2dd1bb",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-f7f2dd1bb (reviewer sub-agent of L); spot-checked: I read all ten steps in full and checked each by hand; the full review is in review.md. The statement is unchanged and every map in it is well typed; it is the standard transport of a pseudofunctor's associators and units along chi: B≅C. Small case checked: B=C=id, d=λ=1, chi_ji=c_ji gives a_kji=c_ki/(c_kj c_ji) and u_i=1/c_ii, which satisfy associativity and both unit laws. Steps 5-6 (with T=chi_lk·B_lk(z_kji) = z_lkj·B_lk B_kj(chi_ji)): naturality of chi_lk at a, and of d_lkj at chi_ji, reduce both sides to chi_li composed with the two sides of the assumed d-associativity. Steps 7-8 use naturality of chi_ji at u_i and of λ_j at chi_ji at the correct objects, so units are not assumed to be identities. Step 9 sets up a real induction (D4) and I redid the inductive step via the interchange law and the four-index law at (t,r,s-1,s); uniqueness of paths follows from R(S')e=R(S) for every edge. Step 10's substitution is valid: the new unit is u u^{-1}=1 and the new z is ρ*ρ. The only citation is def-nagata-category, a Mathlib leaf for Tag 0014. Tags 0017/001B/001I are definitions with no DAG node, so naming them in an elementary step is acceptable under C1. Not a 2026-10-21 human re-split (the item was created unsplit by Q61 on 2026-10-22) and not in any dropped list. Duplicate search found nothing: I read lem-sfb-coherent-hom-transition-laws, lem-coef-pseudofunctor-split-family-strictification, new-e5-normalized-fibre-comparisons, def-zl-open-diagram-comparison-transport, lem-sp-proetale-coefficient-tower-normalization and lem-sp-site-coherence-descent. Blueprint sk-def-sp-tate-twist-locally-free Proof (3), lines 26-38, matches the source place; proof_origin is agent; no SGA. No Lean declaration exists. The report mentions citations.json and searches.jsonl, which are not in the commit; these are worker logs, not a fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TransitionAssociatorIsoTransport",
+  "declaration": "CategoryTheory.TransitionIsoTransport.transport",
+  "declarations": [
+   "CategoryTheory.TransitionIsoTransport.comparison",
+   "CategoryTheory.TransitionIsoTransport.associator",
+   "CategoryTheory.TransitionIsoTransport.unitIso",
+   "CategoryTheory.TransitionIsoTransport.Coherent",
+   "CategoryTheory.TransitionIsoTransport.Word",
+   "CategoryTheory.TransitionIsoTransport.Word.bounds",
+   "CategoryTheory.TransitionIsoTransport.Word.eval",
+   "CategoryTheory.TransitionIsoTransport.Word.reduction",
+   "CategoryTheory.TransitionIsoTransport.Path",
+   "CategoryTheory.TransitionIsoTransport.Path.eval",
+   "CategoryTheory.TransitionIsoTransport.FiniteCoherent",
+   "CategoryTheory.TransitionIsoTransport.transport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TransitionAssociatorIsoTransport.lean",
+  "statement": "theorem transport (B C : ∀ {i j : I}, i ≤ j → (A i ⥤ A j)) (χ : ∀ {i j : I} (h : i ≤ j), B h ≅ C h) (d : ∀ {i j k : I} (hij : i ≤ j) (hjk : j ≤ k), B hij ⋙ B hjk ≅ B (le_trans hij hjk)) (ε : ∀ i : I, B (le_refl i) ≅ 𝟭 (A i)) (hB : Coherent B d ε) : Coherent C (associator B C χ d) (unitIso B C χ ε) ∧ (∀ {i j k : I} (hij : i ≤ j) (hjk : j ≤ k) (K : A i), (comparison B C χ hij hjk).hom.app K ≫ (associator B C χ d hij hjk).hom.app K = (d hij hjk).hom.app K ≫ (χ (le_trans hij hjk)).hom.app K) ∧ (∀ (i : I) (K : A i), (χ (le_refl i)).hom.app K ≫ (unitIso B C χ ε i).hom.app K = (ε i).hom.app K) ∧ FiniteCoherent C (associator B C χ d) (unitIso B C χ ε) ∧ ∃ (N : ∀ {i j : I}, i ≤ j → (A i ⥤ A j)) (ρ : ∀ {i j : I} (h : i ≤ j), C h ≅ N h), (∀ i : I, N (le_refl i) = 𝟭 (A i)) ∧ (∀ {i j : I} (hij : i ≤ j), i ≠ j → N hij = C hij) ∧ (∀ i : I, HEq (ρ (le_refl i)) (unitIso B C χ ε i)) ∧ (∀ {i j : I} (hij : i ≤ j), i ≠ j → HEq (ρ hij) (Iso.refl (C hij))) ∧ Coherent N (associator C N ρ (associator B C χ d)) (unitIso C N ρ (unitIso B C χ ε)) ∧ FiniteCoherent N (associator C N ρ (associator B C χ d)) (unitIso C N ρ (unitIso B C χ ε)) ∧ (∀ i : I, HEq (unitIso C N ρ (unitIso B C χ ε) i) (Iso.refl (𝟭 (A i)))) ∧ (∀ {i j : I} (hij : i ≤ j), HEq (associator C N ρ (associator B C χ d) (le_refl i) hij) (Functor.leftUnitor (N hij))) ∧ (∀ {i j : I} (hij : i ≤ j), HEq (associator C N ρ (associator B C χ d) hij (le_refl j)) (Functor.rightUnitor (N hij)))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper definitions give the displayed z, a, actual unit, component laws, and finite-chain syntax/evaluation for this same transport lemma. The theorem includes both comparison equations and explicit unit normalization. No hypotheses of strict identity transitions, antisymmetry, directedness or nonemptiness are imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9a069147",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Lean-only delivery (node differs from live only in lean). Statement verbatim in file, one sorry. z/a/u match node formulas and diagrammatic order (isoWhiskerRight χ_ji B_kj ≫ isoWhiskerLeft C_ji χ_kj; z⁻¹≫d≫χ; χ⁻¹≫λ); Coherent renders four-index law and both non-strict unit laws for input and output; comparison equations z≫a=d≫χ, χ≫u=ε. FiniteCoherent (Word/Path with reassoc, unitors, unit insertion, whiskering, inverses) checked constructor-by-constructor to be true and non-vacuous. Normalization ∃N ρ fully pinned (N_ii=𝟭, N_ji=C_ji off-diagonal, ρ_ii≍u_i, ρ_ji≍refl), transported a,u reused, unit≍refl, repeated associators≍unitors; HEq only across N_ii=𝟭 and provable. Edge cases: empty I, i=j=k=l, mutually comparable i≠j, empty/one-arrow chains, scalar example. No Mathlib/project match. Docstrings with source place and blueprint tag; both report sections present; citers unaffected. No findings; no compile needed (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261023T103428-L-3136948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

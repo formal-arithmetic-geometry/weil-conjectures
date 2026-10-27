@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-lattice-support-coefficient-retraction",
+ "kind": "statement",
+ "title": "Lattice-supported formal series as a module retract",
+ "statement": "Let $L$ be a commutative ring, $r\\geq0$ an integer, $M\\subseteq\\mathbf Z^r$ an additive subgroup, and $Q=M\\cap\\mathbf N^r$. Put $A=L[[X_1,\\ldots,X_r]]$ [def-weil-pbc-multivariate-power-series] and\n$$A_Q=\\{F\\in A:c_e(F)=0\\text{ whenever }e\\notin Q\\}.$$\nThen $A_Q$ is an $L$-subalgebra of $A$. The coefficient map\n$$\\pi:A\\to A_Q,\\qquad c_e(\\pi F)=\\begin{cases}c_e(F)&e\\in Q,\\\\0&e\\notin Q,\\end{cases}$$\nis additive, fixes $A_Q$ pointwise, and satisfies $\\pi(ab)=a\\pi(b)$ for all $a\\in A_Q$ and $b\\in A$. More generally, for every commutative $L$-algebra $R$ and injective $L$-algebra homomorphism $\\varphi:R\\to A$ with image exactly $A_Q$, there is a unique additive map $\\rho:A\\to R$ such that $\\varphi(\\rho(b))=\\pi(b)$ for all $b\\in A$ (viewing $A_Q$ inside $A$). It satisfies\n$$\\rho(\\varphi(t)b)=t\\rho(b)\\quad(t\\in R,\\ b\\in A),\\qquad \\rho\\varphi=\\operatorname{id}_R.$$\nThus $\\rho$ is an $R$-linear retraction when $A$ is an $R$-module through $\\varphi$. No completeness, locality or finite-generation hypothesis on $L$ or $Q$ is required.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p.70 gives motivating completed monoid models only; the independent subgroup-support convolution and retraction argument is auxiliary agent algebra from original steps 8--9 of lem-trf-completed-monoid-support-projection."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Since $M$ is a subgroup, $0\\in Q$ and $u,v\\in Q$ imply $u+v\\in Q$. Moreover, for $u\\in Q$ and $v\\in\\mathbf N^r$, one has $u+v\\in Q$ if and only if $v\\in Q$: the forward implication follows from $v=(u+v)-u\\in M$, and the reverse from addition in $M$. All these vectors are nonnegative by hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p.70 (PDF p.76), is motivation only. Auxiliary agent coefficient argument for the subgroup-supported retraction, refining old steps 8--9 of lem-trf-completed-monoid-support-projection."
+   }
+  },
+  {
+   "text": "Use the coefficientwise addition and finite convolution product of [def-weil-pbc-multivariate-power-series]. Zero, sums and negatives of series supported on $Q$ remain supported there. Constants are supported at $0\\in Q$. If $a,b\\in A_Q$ and $e\\notin Q$, each summand $c_u(a)c_v(b)$ with $u+v=e$ vanishes: if both $u,v$ belonged to $Q$, Step 1 would put $e$ in $Q$. Thus $ab\\in A_Q$. These closure properties make $A_Q$ an $L$-subalgebra.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p.70 (PDF p.76), is motivation only. Auxiliary agent coefficient argument for the subgroup-supported retraction, refining old steps 8--9 of lem-trf-completed-monoid-support-projection."
+   }
+  },
+  {
+   "text": "A series is a family of coefficients by [def-weil-pbc-multivariate-power-series], so the displayed coefficient rule defines $\\pi F$ uniquely and gives an element of $A_Q$. For $e\\in Q$ the rule preserves addition of coefficients; for $e\\notin Q$ both sides have coefficient zero. Thus $\\pi$ is additive. If $F\\in A_Q$, the discarded coefficients already vanish, so $\\pi F=F$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p.70 (PDF p.76), is motivation only. Auxiliary agent coefficient argument for the subgroup-supported retraction, refining old steps 8--9 of lem-trf-completed-monoid-support-projection."
+   }
+  },
+  {
+   "text": "Fix $a\\in A_Q$, $b\\in A$ and $e\\in\\mathbf N^r$. In the finite convolution formula of [def-weil-pbc-multivariate-power-series], discard terms with $u\\notin Q$ since $c_u(a)=0$. For every remaining pair $u+v=e$, Step 1 gives $e\\in Q\\iff v\\in Q$. Consequently\n$$c_e(\\pi(ab))=\\mathbf1_{e\\in Q}\\sum_{u+v=e}c_u(a)c_v(b)=\\sum_{u+v=e}c_u(a)\\mathbf1_{v\\in Q}c_v(b)=c_e(a\\pi(b)).$$\nHere each indicator is $1$ or $0$ in $L$. Equality of coefficient families proves $\\pi(ab)=a\\pi(b)$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p.70 (PDF p.76), is motivation only. Auxiliary agent coefficient argument for the subgroup-supported retraction, refining old steps 8--9 of lem-trf-completed-monoid-support-projection."
+   }
+  },
+  {
+   "text": "For each $b\\in A$, the image hypothesis and $\\pi(b)\\in A_Q$ give an $x\\in R$ with $\\varphi(x)=\\pi(b)$; injectivity makes $x$ unique. Define $\\rho(b)=x$. Additivity of $\\pi$ gives $\\varphi(\\rho(b+b'))=\\varphi(\\rho(b)+\\rho(b'))$, hence additivity of $\\rho$. Step 4 and multiplicativity of $\\varphi$ give\n$$\\varphi(\\rho(\\varphi(t)b))=\\pi(\\varphi(t)b)=\\varphi(t)\\pi(b)=\\varphi(t\\rho(b)).$$\nInjectivity yields $\\rho(\\varphi(t)b)=t\\rho(b)$. Also $\\varphi(\\rho(\\varphi(t)))=\\pi(\\varphi(t))=\\varphi(t)$ by Step 3, so $\\rho\\varphi=\\operatorname{id}_R$. Any other map satisfying the displayed defining equation agrees pointwise by injectivity. For the action $t\\cdot b=\\varphi(t)b$, additivity and the scalar identity are exactly $R$-linearity. Only finite sums and subgroup subtraction were used; no topological or finiteness assumptions are needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.6(i)--(ii), printed p.70 (PDF p.76), is motivation only. Auxiliary agent coefficient argument for the subgroup-supported retraction, refining old steps 8--9 of lem-trf-completed-monoid-support-projection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.6(i)--(ii), printed p.70 (PDF p.76), is motivation only. Auxiliary agent coefficient argument for the subgroup-supported retraction, refining old steps 8--9 of lem-trf-completed-monoid-support-projection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictSupport|support.*[Pp]rojection|[Pp]rojection.*support|filter.*(mul|[Ll]inear)|[Ll]inear.*filter",
+   "results": "No hits. Coefficient and monomial maps give only L-linearity, while the graded-algebra projections require an internal direct-sum decomposition. A formal series may have infinitely many quotient-group degrees. None states the subgroup-supported module projection with its transported retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient projection onto formal series supported in a subgroup intersection is an additive retraction linear over the supported subalgebra",
+   "results": "Actual returned candidates: MvPowerSeries.coeff, HahnSeries.coeff.addMonoidHom, GradedAlgebra.proj, Submodule.IsCompl.projection, Finsupp.lsubtypeDomain, PowerSeries.coeff_toSubring, MvPolynomial.restrictSupport, HahnSeries.coeff.linearMap. Coefficient and monomial maps give only L-linearity, while the graded-algebra projections require an internal direct-sum decomposition. A formal series may have infinitely many quotient-group degrees. None states the subgroup-supported module projection with its transported retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, LinearMap",
+   "results": "Actual returned candidates: MvPowerSeries.coeff, MvPowerSeries.monomial, MvPowerSeries.coeff_apply, MvPowerSeries.monomial_def, MvPowerSeries.coeff_comp_monomial, MvPowerSeries.X_def, MvPowerSeries.coeff_index_single_self_X, MvPowerSeries.coeff_zero. Coefficient and monomial maps give only L-linearity, while the graded-algebra projections require an internal direct-sum decomposition. A formal series may have infinitely many quotient-group degrees. None states the subgroup-supported module projection with its transported retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In multivariate formal power series, projection retaining exponents in the intersection of an additive subgroup of Z^r with N^r is linear over the subalgebra supported on that intersection",
+   "results": "Actual returned candidates: MvPowerSeries.weightedHomogeneousComponent, MvPowerSeries.homogeneousComponent, MvPowerSeries.coeff_comp_monomial, HVertexOperator.coeff_of_coeff, HVertexOperator.of_coeff, GradedAlgebra.proj, MvPowerSeries.isHomogeneous_homogeneousComponent, MvPowerSeries.monomial. Coefficient and monomial maps give only L-linearity, while the graded-algebra projections require an internal direct-sum decomposition. A formal series may have infinitely many quotient-group degrees. None states the subgroup-supported module projection with its transported retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero component projection for the quotient group grading of a formal power series ring is a module retraction over its degree zero subalgebra, using finite convolution sums",
+   "results": "Actual returned candidates: GradedAlgebra.proj_recompose, GradedAlgebra.proj_apply, GradedAlgebra.proj, GradedRing.proj_recompose, GradedRing.projZeroRingHom_apply, GradedRing.proj_apply, GradedRing.projZeroRingHom'_apply_coe, GradedRing.projZeroRingHom. Coefficient and monomial maps give only L-linearity, while the graded-algebra projections require an internal direct-sum decomposition. A formal series may have infinitely many quotient-group degrees. None states the subgroup-supported module projection with its transported retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def proj|theorem proj|lemma proj|weightedHomogeneousComponent",
+   "results": "No hits. Coefficient and monomial maps give only L-linearity, while the graded-algebra projections require an internal direct-sum decomposition. A formal series may have infinitely many quotient-group degrees. None states the subgroup-supported module projection with its transported retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proj",
+   "results": "Actual returned candidates: Mathlib/RingTheory/GradedAlgebra/Noetherian.lean, Mathlib/RingTheory/GradedAlgebra/AlgHom.lean, Mathlib/RingTheory/GradedAlgebra/AlgHom.lean, Mathlib/RingTheory/GradedAlgebra/Basic.lean, Mathlib/RingTheory/GradedAlgebra/Basic.lean, Mathlib/RingTheory/GradedAlgebra/Basic.lean, Mathlib/RingTheory/GradedAlgebra/Basic.lean, Mathlib/RingTheory/GradedAlgebra/Basic.lean. Coefficient and monomial maps give only L-linearity, while the graded-algebra projections require an internal direct-sum decomposition. A formal series may have infinitely many quotient-group degrees. None states the subgroup-supported module projection with its transported retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictSupport|support.*[Pp]rojection|filter.*mul|subgroup",
+   "results": "Returned 3 hits: Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean, Mathlib/RingTheory/MvPowerSeries/Restricted.lean. Read the candidate sources: Restricted imposes a norm decay condition; truncFinset has polynomial target and finite support; weightedHomogeneousComponent selects a natural-number degree. None states this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal power series supported on a subgroup form a subalgebra and deleting all other coefficients is a module linear retraction",
+   "results": "Returned 8 hits: MvPolynomial.supported, MvPolynomial.restrictSupport, MvPowerSeries.instNontrivialSubalgebraOfNonempty, PowerSeries.coeff_toSubring, PowerSeries.toSubring, PowerSeries.instNontrivialSubalgebra, MvPowerSeries.toSubring, MvPolynomial.supportedEquivMvPolynomial. Polynomial support constructions concern finite support; toSubring restricts coefficient values rather than exponent support. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, LinearMap",
+   "results": "Returned 12 hits: MvPowerSeries.coeff, MvPowerSeries.monomial, MvPowerSeries.coeff_apply, MvPowerSeries.monomial_def, MvPowerSeries.coeff_comp_monomial, MvPowerSeries.X_def, MvPowerSeries.coeff_index_single_self_X, MvPowerSeries.coeff_zero. The coefficient and monomial maps give only L-linearity, not linearity over A_Q.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection of multivariate formal power series onto exponents in an additive subgroup intersection with the positive orthant is linear over the supported subalgebra",
+   "results": "Returned 8 hits: MvPowerSeries.coeff, MvPowerSeries.weightedHomogeneousComponent, MvPowerSeries.homogeneousComponent, MvPowerSeries.trunc', MvPowerSeries.trunc, MvPowerSeries.truncFun', MvPowerSeries.truncFun, HahnEmbedding.Seed.coeff'. The homogeneous and truncation maps select natural-number degrees or finitely many exponents; none gives arbitrary subgroup support with A_Q-linearity and transport.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filter|restrict|proj",
+   "results": "Returned 25 hits: Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Rename.lean, Mathlib/RingTheory/MvPowerSeries/Trunc.lean, Mathlib/RingTheory/MvPowerSeries/Trunc.lean, Mathlib/RingTheory/MvPowerSeries/Trunc.lean, Mathlib/RingTheory/MvPowerSeries/Trunc.lean. Read the candidate sources: Restricted imposes a norm decay condition; truncFinset has polynomial target and finite support; weightedHomogeneousComponent selects a natural-number degree. None states this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coefficientwise filter on formal power series selecting the degree zero part for a quotient group grading commutes with multiplication by degree zero power series",
+   "results": "Returned 8 hits: PowerSeries.divXPowOrderHom, MvPowerSeries.coeff_mul_left_one_sub_of_lt_order, MvPowerSeries.homogeneousComponent_mul_of_le_order, MvPowerSeries.coeff_mul_right_one_sub_of_lt_order, MvPowerSeries.coeff_mul_prod_one_sub_of_lt_order, MvPowerSeries.homogeneousComponent, PowerSeries.coe_divXPowOrderHom, PowerSeries.coeff_mul_prod_one_sub_of_lt_order. The homogeneous and truncation maps select natural-number degrees or finitely many exponents; none gives arbitrary subgroup support with A_Q-linearity and transport.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def (weightedHomogeneousComponent|homogeneousComponent)|theorem.*homogeneousComponent|def coeff|def toSubring|def truncFinset|def restrictSupport|def supported",
+   "results": "Returned 25 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/MvPowerSeries/Order.lean, Mathlib/RingTheory/MvPowerSeries/Order.lean, Mathlib/RingTheory/MvPowerSeries/Order.lean, Mathlib/RingTheory/MvPowerSeries/Order.lean, Mathlib/RingTheory/MvPowerSeries/Order.lean, Mathlib/RingTheory/PowerSeries/Basic.lean, Mathlib/RingTheory/PowerSeries/Basic.lean. Read the candidate sources: Restricted imposes a norm decay condition; truncFinset has polynomial target and finite support; weightedHomogeneousComponent selects a natural-number degree. None states this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-completed-monoid-support-projection",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry through the log-regular divisorial and saturation-normality lemmas: the supported-series realization of the completed monoid model in Expose VI 1.6(i)--(ii), printed p. 70, and its module-linear coefficient retraction. Subgroup-supported coefficient convolution and transport through an algebra identification: old steps 8--9 of the auxiliary completion-comparison lemma.",
+   "via": [
+    "lem-trf-completed-monoid-support-projection",
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lattice-support-coefficient-retraction",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement in five explicit elementary steps: subgroup subtraction, subalgebra closure, coefficientwise additive projection, finite convolution linearity, and transport by unique preimages under the specified injective algebra map. No new nodes: these are direct calculations from the existing power-series definition. Searched the project Lean source, whole DAG, blueprint and Mathlib; no attachment or exact Mathlib match. ILO VI 1.6 is motivating context, not a claim that the auxiliary coefficient proof occurs there. Checked rank zero, trivial/full/nonprimitive subgroups, the zero ring, and nonmultiplicativity of the projection.",
+  "blueprint": "Auxiliary completed-monoid algebra in the nearby-duality alteration ancestry of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-completed-monoid-support-projection, whose old steps 8--9 this item states. The five steps expand precisely the subgroup coefficient projection and its transported module retraction; the unit and chapter route are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-aa6f177d1",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-aa6f177d1 (reviewer sub-agent of L); spot-checked: I read the item in full: 0 new nodes and 5 elementary steps, with the statement and stmt_deps unchanged. proof_deps equals the union of the step uses (def-weil-pbc-multivariate-power-series only). The cited definition's statement gives coefficientwise addition, the finite convolution product and constants r x^0, which is what steps 2-4 take from it. Step 1: for u in Q and v in N^r, u+v is in M exactly when v is. Step 2: A_Q is closed under sums, negatives, constants and products, so it is an L-subalgebra. Step 3: pi is well defined, additive and the identity on A_Q. Step 4: the convolution identity uses the indicator swap 1_{e in Q}=1_{v in Q} when u is in Q, and is exact. Step 5: phi(t) lies in A_Q, so pi(phi(t)b)=phi(t)pi(b), and injectivity gives rho(phi(t)b)=t rho(b), rho phi=id and uniqueness. Small cases agree with the statement: r=0, M=0, M=Z^r, M=Z(1,-1) and L=0. For M=2Z, pi(X*X)=X^2 while pi(X)pi(X)=0, so pi is not multiplicative and the statement correctly asks only linearity over A_Q. The only citer is the parent lem-trf-completed-monoid-support-projection, step 4. It applies the item with R=T and phi=iota, where its steps 2-3 give iota injective with image exactly A_Q, so the hypotheses match and there is no cycle. Source: ILO VI 1.6 (PDF p.76) gives only completed monoid models, and the node records it as motivation with proof_origin agent; no SGA citation. Duplicate search with rg -L over the DAG: the Kummer group-algebra node, the formal-monoid implicit elimination node, the toric boundary-class node and the block-straightening node do not state this retraction, so same_as [] is right; the Mathlib candidates are correctly rejected. No re-split note applies, there is no tool use from another unit, and I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LatticeSupportCoefficientRetraction",
+  "declaration": "MvPowerSeries.lattice_support_coefficient_retraction",
+  "file": "lean/Sheaf/RingTheory/LatticeSupportCoefficientRetraction.lean",
+  "statement": "theorem lattice_support_coefficient_retraction (L : Type u) [CommRing L] (r : ℕ) (M : AddSubgroup (Fin r → ℤ)) : ∃ S : Subalgebra L (MvPowerSeries (Fin r) L), (∀ F : MvPowerSeries (Fin r) L, F ∈ S ↔ ∀ e : Fin r →₀ ℕ, (fun i ↦ (e i : ℤ)) ∉ M → coeff e F = 0) ∧ ∃ π : MvPowerSeries (Fin r) L →+ S, (∀ (F : MvPowerSeries (Fin r) L) (e : Fin r →₀ ℕ), (((fun i ↦ (e i : ℤ)) ∈ M → coeff e (π F : MvPowerSeries (Fin r) L) = coeff e F) ∧ ((fun i ↦ (e i : ℤ)) ∉ M → coeff e (π F : MvPowerSeries (Fin r) L) = 0))) ∧ (∀ a : S, π (a : MvPowerSeries (Fin r) L) = a) ∧ (∀ (a : S) (b : MvPowerSeries (Fin r) L), π ((a : MvPowerSeries (Fin r) L) * b) = a * π b) ∧ ∀ (R : Type v) [CommRing R] [Algebra L R] (φ : R →ₐ[L] MvPowerSeries (Fin r) L), Function.Injective φ → Set.range φ = (S : Set (MvPowerSeries (Fin r) L)) → ∃ ρ : MvPowerSeries (Fin r) L →+ R, (∀ b : MvPowerSeries (Fin r) L, φ (ρ b) = (π b : MvPowerSeries (Fin r) L)) ∧ (∀ (t : R) (b : MvPowerSeries (Fin r) L), ρ (φ t * b) = t * ρ b) ∧ (∀ t : R, ρ (φ t) = t) ∧ ∀ ρ' : MvPowerSeries (Fin r) L →+ R, (∀ b : MvPowerSeries (Fin r) L, φ (ρ' b) = (π b : MvPowerSeries (Fin r) L)) → ρ' = ρ",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5db5cf944",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Node record unchanged vs landed S1 record except new lean field; lean.statement verbatim equal to the file signature. Clauses checked against def-weil-pbc-multivariate-power-series (MvPowerSeries): L CommRing only, r : ℕ, M : AddSubgroup (Fin r → ℤ), Q via cast of e : Fin r →₀ ℕ into M; S pinned by carrier iff; π : A →+ S pinned by both coefficient branches; fixes S; π(ab)=aπ(b) for a ∈ S; ρ for every commutative L-algebra R : Type v and φ injective with range = S, with φρ=π, ρ(φt·b)=tρ(b), ρφ=id, uniqueness among additive ρ' with the defining equation only. Edge cases r=0, L=0, M=⊥/⊤, Z(1,-1) covered; no multiplicativity claimed. No defs (nothing hollow), sorry only, source/blueprint docstrings with proof plan, no duplicate declaration in lean/Sheaf; the parent citer's step 4 (R=T, φ=ι) fits. Report has Worker report and Second reading by Q27. No compile run (no changes)."
+ }
+}

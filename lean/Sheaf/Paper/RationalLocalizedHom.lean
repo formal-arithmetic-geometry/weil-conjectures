@@ -28,6 +28,7 @@ import Sheaf.Paper.ContinuousConstructibleIntegralModel
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.IntegralModelsOperations
 import Sheaf.SixFunctors.IntegralModelsGenerators
+import Sheaf.AlgebraicGeometry.PadicIntegersBoundedTriangulated
 
 /-! # Rational Hom groups from integral models
 
@@ -727,7 +728,7 @@ private theorem tensorHom_unshifted (X : Scheme.{u}) [IsNoetherian X]
   let K' : P.FullSubcategory := ⟨K, hK⟩
   let L' : P.FullSubcategory := ⟨L, hL⟩
   let F := boundedConstructibleExtendScalars X ℓ E
-  have : P.IsTriangulated := isTriangulated_boundedConstructible _
+  have : P.IsTriangulated := inferInstance
   have : F.Additive := by
     let e := boundedConstructibleExtendScalarsCompatibility X ℓ E
     have : (F ⋙ (boundedConstructible _).ι).Additive :=
@@ -816,7 +817,7 @@ theorem rationalLocalizedHom
       let := rationalHomModule T ℓ E ((extend T ℓ E).obj K)
         (((extend T ℓ E).obj L)⟦q⟧)
       have : (integralConstructible T ℓ E).IsTriangulated :=
-        isTriangulated_boundedConstructible _
+        inferInstance
       have hLq : integralConstructible T ℓ E (L⟦q⟧) :=
         (integralConstructible T ℓ E).le_shift q L hL
       have ht := tensorHom_unshifted T ℓ E K (L⟦q⟧) hK hLq

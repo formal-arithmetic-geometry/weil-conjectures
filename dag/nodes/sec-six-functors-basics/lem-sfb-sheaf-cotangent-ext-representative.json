@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-sheaf-cotangent-ext-representative",
+ "kind": "statement",
+ "title": "Conormal representatives of sheaf cotangent Ext classes after changing generators",
+ "statement": "Let $\\mathcal C$ be a small site in the chosen universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], let $A\\to B$ be a homomorphism of sheaves of commutative rings, and let $G$ be a $B$-module sheaf [def-weil-sheaf-of-modules-category]. Use $\\mathrm{NL}_{B/A}$ and, for a sheaf of sets $E$ over $B$, the sheaf polynomial presentation $P_E\\to B$, its kernel $J_E$, the complex $K_E=[J_E/J_E^2\\to\\Omega_{P_E/A}\\otimes_{P_E}B]$ and its canonical comparison $\\lambda_E$ from [lem-sfb-sheaf-polynomial-cotangent-comparison]. Use derived Ext [def-weil-abstract-derived-category] and the boundary $\\partial_E$ of [lem-sfb-two-term-derived-hom-boundary]. For every $\\xi\\in\\operatorname{Ext}^1_B(\\mathrm{NL}_{B/A},G)$, there exist a sheaf of sets $E$, a map $E\\to B$ inducing a surjection of sheaves $A[E]\\to B$, and a $B$-linear sheaf map $\\delta:J_E/J_E^2\\to G$ such that\n$$\\xi=\\partial_E(\\delta)\\circ\\lambda_E^{-1}\\quad\\text{in }\\operatorname{Hom}_{D(\\operatorname{Mod}(B))}(\\mathrm{NL}_{B/A},G[1]).$$",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "lem-sfb-two-term-derived-hom-boundary"
+ ],
+ "proof": [
+  {
+   "text": "Start with $E=B$ and $\\alpha=\\mathrm{id}$. Evaluation is sectionwise surjective, since a section $b$ is the image of the variable $[b]$. Use the comparison node to form $M=J_E/J_E^2$, $F=\\Omega_{P_E/A}\\otimes B$, $K=K_E$ and $\\lambda=\\lambda_E$. Set $x=\\xi\\lambda\\in\\operatorname{Hom}_D(K,G[1])$. The new polynomial-differentials lemma identifies $F$ naturally with $B^{(E)}$; let $i:E\\to|F|$ send $e$ to $\\mathrm d[e]\\otimes1$.",
+   "uses": [
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-sheaf-polynomial-differentials-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi), proof"
+   }
+  },
+  {
+   "text": "Let $j:F[0]\\to K$ be the inclusion and $q:K\\to M[1]$ the quotient. The cone of the chain map $d:M[0]\\to F[0]$ has terms $M,F$ in degrees $-1,0$ with differential $d$, hence is $K$ by the cone formula in the derived-category definition. Its distinguished cone triangle, rotated once, has first two maps $j$ and $\\epsilon q$, with $\\epsilon\\in\\{1,-1\\}$ depending only on the fixed cone convention. Exactness of Hom out of a distinguished triangle says that any $y:K\\to G[1]$ with $yj=0$ is $b\\epsilon q$ for some $b:M[1]\\to G[1]$. Shifting identifies $b$ with a derived map $M[0]\\to G[0]$; the degree-zero isomorphism in the two-term boundary node, applied to $[0\\to M]$, identifies this with an actual module map. Absorbing $\\epsilon$ in that map gives $y=\\partial_E(\\delta)$. Thus it suffices to kill the obstruction $\\eta=xj\\in\\operatorname{Ext}^1_B(F,G)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-sfb-two-term-derived-hom-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi), proof"
+   }
+  },
+  {
+   "text": "The category of $B$-module sheaves is abelian by the module-category node. The degree-one Yoneda/derived comparison represents $\\eta$ by a short exact sequence $0\\to G\\to H\\xrightarrow{p}F\\to0$. Define the sheaf $E'=E\\times_{|F|}|H|$ using $i$ and $p$, with projection $v:E'\\to E$ and second projection $a:E'\\to|H|$. These are sectionwise fibre products of sheaves, so they are sheaves, and $pa=iv$. The underlying abelian map of $p$ is epic: its cokernel is the same sheafified sectionwise quotient as the cokernel of $p$ in modules, by the module-category node. The general-site abelian epimorphism lemma therefore gives local lifts in $H$ of every $i(e)$, hence local lifts in $E'$ of every $e\\in E(U)$. Put $\\alpha'=\\alpha v$. Since $E=B$, every local section $b$ of $B$ locally lifts to $e'\\in E'$ with $\\alpha'(e')=b$. Evaluation $A[E']\\to B$ is consequently surjective as a sheaf map.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-coef-yoneda-derived-ext-comparison",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi), proof"
+   }
+  },
+  {
+   "text": "Form $K'=K_{E'}$, $F'=\\Omega_{P_{E'}/A}\\otimes B$ and $t=K(v):K'\\to K$. Let $f=F(v):F'\\to F$. By natural freeness and the free-module universal property, $a:E'\\to|H|$ extends to a $B$-linear map $s:F'\\to H$. On a generator $e'=(e,h)$ one has $p s(\\mathrm d[e']\\otimes1)=p(h)=i(e)=f(\\mathrm d[e']\\otimes1)$; uniqueness in the same universal property gives $ps=f$. The pullback extension $0\\to G\\to H\\times_F F'\\to F'\\to0$ is split by $z\\mapsto(s(z),z)$. Naturality of the Yoneda/derived comparison and its split-zero clause give $\\eta f=0$ in $\\operatorname{Ext}^1_B(F',G)$.",
+   "uses": [
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-sheaf-polynomial-differentials-free",
+    "lem-trf-free-module-sheaf-universal-property",
+    "lem-coef-yoneda-derived-ext-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi), proof"
+   }
+  },
+  {
+   "text": "Write $j':F'[0]\\to K'$ for the inclusion. The chain map $t$ has degree-zero component $f$, so $tj'=jf$. Hence $(xt)j'=xjf=\\eta f=0$. Apply the exactness argument of step 2 to $K'$ to obtain a module map $\\delta:J_{E'}/J_{E'}^2\\to G$ with $xt=\\partial_{E'}(\\delta)$. The comparison node gives $\\lambda_{E}t=\\lambda_{E'}$, and therefore $\\xi\\lambda_{E'}=\\xi\\lambda_Et=xt=\\partial_{E'}(\\delta)$. Compose on the right with $\\lambda_{E'}^{-1}$ and rename $E'$ as $E$. This is the required equality with a surjective polynomial presentation.",
+   "uses": [
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-two-term-derived-hom-boundary",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "lem-sfb-sheaf-polynomial-differentials-free",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sfb-two-term-derived-hom-boundary",
+  "def-weil-sheaf-of-modules-category",
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-trf-free-module-sheaf-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 08UJ (lemma-NL-represent-ext-class-ringed-topoi), proof, with the Hom exactness and split pullback written explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every Ext one class of the naive cotangent complex of sheaves is represented by a conormal map after changing sheaf polynomial generators",
+   "results": "8 hits; recorded top results: Algebra.Extension.H1Cotangent, Algebra.Extension.H1Cotangent.map, Algebra.SubmersivePresentation.cotangentEquiv_apply, Algebra.Extension.h1Cotangentι_apply, Algebra.Generators.cotangentCompAwaySec, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Extension.h1Cotangentι, Algebra.H1Cotangent",
+   "date": "2026-10-23",
+   "verdict": "No match: Algebra.Extension.H1Cotangent and Ideal.Cotangent describe conormal modules and cotangent homology of rings. They do not represent global derived Ext classes of module sheaves after a change of sheaf generators. The ring cotangentComplex and presheaf differential source inspected for the comparison node do not state this existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"Ext\"",
+   "results": "12 hits; recorded top results: Algebra.Extension.Cotangent, Algebra.Extension.instAddCommGroupCotangent, Algebra.Extension.Cotangent.module, Algebra.Extension.Cotangent.of, Algebra.Extension.Cotangent.val, Algebra.Extension.Cotangent.of_val, Algebra.Extension.instModuleCotangent, Algebra.Extension.Cotangent.val_of",
+   "date": "2026-10-23",
+   "verdict": "No match: Algebra.Extension.H1Cotangent and Ideal.Cotangent describe conormal modules and cotangent homology of rings. They do not represent global derived Ext classes of module sheaves after a change of sheaf generators. The ring cotangentComplex and presheaf differential source inspected for the comparison node do not state this existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "represent.*[Ee]xt.*class|[Ee]xt.*class.*represent|cotangent.*[Ee]xt",
+   "results": "25 hits; recorded top results: Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: Algebra.Extension.H1Cotangent and Ideal.Cotangent describe conormal modules and cotangent homology of rings. They do not represent global derived Ext classes of module sheaves after a change of sheaf generators. The ring cotangentComplex and presheaf differential source inspected for the comparison node do not state this existence theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Represent cotangent Ext one by a map from I modulo I squared after refining polynomial presentation of ring sheaves",
+   "results": "8 hits; recorded top results: Ideal.Cotangent, Ideal.toCotangent, IsLocalRing.CotangentSpace, Ideal.instInhabitedCotangent, Ideal.toCotangent_apply, Ideal.toCotangent_range, Ideal.instModuleQuotientCotangent, Ideal.cotangentIdeal",
+   "date": "2026-10-23",
+   "verdict": "No match: Algebra.Extension.H1Cotangent and Ideal.Cotangent describe conormal modules and cotangent homology of rings. They do not represent global derived Ext classes of module sheaves after a change of sheaf generators. The ring cotangentComplex and presheaf differential source inspected for the comparison node do not state this existence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose a sheaf of generators so a cotangent cohomology class is a conormal linear map",
+   "results": "8 hits; recorded top results: Algebra.Extension.H1Cotangent, Algebra.Extension.h1Cotangentι, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.H1Cotangent, Algebra.Extension.h1Cotangentι_apply, Algebra.Extension.cotangentComplex, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Extension.H1Cotangent.map",
+   "date": "2026-10-23",
+   "verdict": "No match: Algebra.Extension.H1Cotangent and Ideal.Cotangent describe conormal modules and cotangent homology of rings. They do not represent global derived Ext classes of module sheaves after a change of sheaf generators. The ring cotangentComplex and presheaf differential source inspected for the comparison node do not state this existence theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-algebra-extension-ext",
+  "date": "2026-10-23",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 0GQ5 (lemma-extensions-of-relative-ringed-topoi), 0GQ6 (remark-extensions-of-relative-ringed-topoi), 0GQ7 (lemma-extensions-of-relative-ringed-topoi-functorial), 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), and 08UG (lemma-huge-diagram-ringed-topoi), clause (2), with identity underlying topos. Supporting input: Conormal representatives of sheaf cotangent Ext classes after changing generators.",
+   "via": [
+    "lem-sfb-etale-algebra-extension-ext",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-sheaf-cotangent-ext-representative",
+  "worker": "stage1",
+  "summary": "Followed Tag 08UJ: exposed the polynomial-differential/free-module comparison, used the existing Yoneda and Hom-triangle nodes, and wrote the fibre-product generator replacement and its splitting explicitly. No statement change, no new representative-existence restatement.",
+  "blueprint": "Supporting step of the alteration/tangent-space branch recorded in blueprint.from.place: represent cotangent Ext classes by conormal maps. Latest blueprint unit and direct-image proof read; this is a source-level supporting lemma below that route.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-yoneda-derived-ext-comparison",
+    "why": "Generic degree-one Yoneda/derived Ext identification and its naturality/split-zero clause; the current unit does not state this homological-algebra tool."
+   },
+   {
+    "node": "lem-trf-free-module-sheaf-universal-property",
+    "why": "Generic free module sheaf adjunction on any small ringed site, used to extend the generator-lift map and compare maps on generators; the current unit gives no such universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-yoneda-derived-ext-comparison",
+  "lem-trf-free-module-sheaf-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-ecf1d003d",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-ecf1d003d (reviewer sub-agent of L); spot-checked: Item statement and stmt_deps are byte-identical to live; this is a first delivery with no re-split note, and the item is not split elsewhere. Read Stacks 08UJ (defos.tex), statement and full proof; the 5 steps follow it. Step 2: C(d) is exactly K under the cone formula of def-weil-abstract-derived-category. The rotated triangle F[0]→K→(−q)M[1] plus hom-out-of-triangle (i) gives y=b(εq). The degree-0 clause of the two-term boundary node on [0→M] makes b a module map, so y=∂(δ); the boundary node's middle exactness is correctly not used. Step 3: Yoneda Ext¹ (def-pc-ext = Hom_D) gives H. E'=E×_{|F|}|H| is a sectionwise sheaf. Cokernels are the same in Mod and Ab, so p is Ab-epi and is locally surjective by the site epi leaf. With E=B, A[E']→B is surjective, as the comparison node requires. Step 4: s comes from Φ_{E'} and the free-module UP. ps=f is checked on generators and follows by uniqueness. The pullback extension is split, so ηf=0. Step 5: tj'=jf and λ_E t=λ_{E'} (comparison node with E and E' swapped) give ξλ_{E'}=∂_{E'}(δ). New node lem-sfb-sheaf-polynomial-differentials-free states Φ_E: B^{(E)} ≅ Ω_{P_E/A}⊗B with naturality. It comes from the first paragraph of the 08UJ proof and is true: sectionwise the module is free on d[e], then sheafify. Tested on E=∅, B=0 and a single variable. It is statement-only, self-contained and not an item clause. No duplicate found among trf geometric-standard-differential, cotangent-bar-term, sfb standard-sheaf-cotangent flat model/augmentation, polynomial-differential-base-change, or trf free-module. Batch-5 flags (item and new node → lem-trf-free-module-sheaf-universal-property): generic Stacks 04BL free-module UP whose proof_deps are three definitions, not part of the trace-formula or Poincaré proofs, so accepted. tool_uses (coef Yoneda comparison, trf free module) are generic tools and accepted. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafCotangentExtRepresentative",
+  "declaration": "CategoryTheory.SheafPolynomialCotangent.sheaf_cotangent_ext_representative",
+  "file": "lean/Sheaf/CategoryTheory/SheafCotangentExtRepresentative.lean",
+  "statement": "theorem sheaf_cotangent_ext_representative {C : Type u} [SmallCategory C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) (A B : Sheaf J.toGrothendieck CommRingCat.{u}) (f : A ⟶ B) (D : Comparison f) (G : ringedSiteModules.{u} (siteModuleRings B)) (ξ : (localization B).obj (D.models (canonical f)).complex ⟶ ((localization B).obj ((CochainComplex.singleFunctor _ 0).obj G))⟦(1 : ℤ)⟧) : ∃ (P : Presentation f) (δ : (D.models P).complex.X (-1) ⟶ G), ξ = (D.lambda P).inv ≫ @DerivedCategory.twoTermSupportedBoundary _ _ _ (HasDerivedCategory.standard _) (D.models P).complex (D.models P).supported G δ",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the dependency Comparison data explicitly, for every such normalized model, rather than making an uncharacterized choice from its existence theorem. Presentation bundles exactly E, its map to B, and sheaf-surjectivity of polynomial evaluation. The conormal module is the comparison model degree -1 term, whose local quotient and kernel are specified by the dependency. Derived Ext is written as derived Hom into G[1] with HasDerivedCategory.standard. The item module contains the canonical supported-complex boundary helpers; the recorded two-term boundary dependency and its module remain unchanged.",
+  "declarations": [
+   "DerivedCategory.twoTermSupportedQuotient",
+   "DerivedCategory.twoTermSupportedBoundary",
+   "CategoryTheory.SheafPolynomialCotangent.sheaf_cotangent_ext_representative"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-158469c82",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Re-delivery after the H13 return on 8104b388a872. The dep record lem-sfb-two-term-derived-hom-boundary is identical to live; only the item's lean field changed; lean.statement matches the file verbatim. Helpers twoTermSupportedQuotient/Boundary are in the item module, declared and tagged. q = Q(mkHomToSingle at -1 with id) followed by shiftIso(1,-1,0).inv, and ∂δ = q ≫ (single₀ δ)⟦1⟧', the same formula as the dep. Any cone-sign difference is absorbed by the existential. Clause by clause: small site at u; f : A ⟶ B of CommRingCat sheaves; D : Comparison f with pinned models and λ, so ∀ D is equivalent; ξ : Q(K_B) ⟶ G[1] (standard); ∃ Presentation (locally surjective evaluation), ∃ B-linear δ : X(-1) ⟶ G; ξ = λ⁻¹ ≫ ∂δ. Edge cases (G=0, B=0, empty site, empty E) are covered; no extra hypotheses; no name clashes in live; imports exist. No file changed, so no compile."
+ }
+}

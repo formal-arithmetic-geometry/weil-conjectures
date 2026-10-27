@@ -16,130 +16,62 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open neighbourhood $X^0$ of $x$. The restricted morphism $Y^0=f^{-1}(X^0)\\to X^0$ is proper by [lem-weil-pbc-proper-base-change]. Its fibre over $x$ and the restricted invertible module give the original fibre and module. It suffices to produce the required open $U\\subseteq X^0$, since every affine open of $U$ and its inverse image are the same in the original schemes. Rename this restriction $f:Y\\to X$. The affine base $X$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs].",
+   "text": "Choose an affine open neighbourhood $X^0$ of $x$. By [lem-weil-pbc-proper-base-change], the restriction $Y^0=f^{-1}(X^0)\\to X^0$ is proper. Its fibre and restricted module at $x$ identify with the original ones by the fibre-product universal property. An open $U\\subseteq X^0$ and its inverse images are also the corresponding opens in the original schemes, so it suffices to work over $X^0$. Rename the restricted data $f:Y\\to X$ and $M$.",
    "uses": [
     "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-affine-scheme-qcqs"
+    "def-pc-fibre-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0D2S, first sentence of proof; Tag 01W4 for proper base change."
+    "place": "Tag 0D2S, first sentence of proof."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-proper-limit-noetherian] to obtain a small nonempty directed system $f_i:Y_i\\to X_i$ with affine transitions, proper $f_i$, affine $X_i$ of finite type over $\\operatorname{Spec}\\mathbf Z$, and limits $Y$ and $X$ with projections $a_i:Y\\to Y_i$, $b_i:X\\to X_i$ satisfying $f_i a_i=b_i f$. By [lem-weil-pbc-finite-type-over-noetherian], each $X_i$ is Noetherian and each $Y_i$ is Noetherian, since proper means finite type [def-weil-proper-morphism]. In particular $Y_i$ is quasi-compact; it is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated].",
+   "text": "Apply [lem-trf-invertible-proper-noetherian-models] to the proper $f$, affine $X$, and invertible $M$. Obtain the small directed system with least element $0$, proper $f_i:Y_i\\to X_i$, Noetherian stages, affine transitions and projections $a_i,b_i$, and invertible $M_0$ on $Y_0$. Put $M_i=q_{i0}^*M_0$; the cited statement gives $a_i^*M_i\\cong M$ and $f_i a_i=b_i f$, as well as both limit cone properties.",
    "uses": [
-    "lem-weil-pbc-proper-limit-noetherian",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-locally-noetherian-quasi-separated"
+    "lem-trf-invertible-proper-noetherian-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0D2S, approximation paragraph, invoking Limits Tag 0A0P; Tags 01T6 and 01OY for the stage hypotheses."
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood, proof: approximation and compatible invertible modules, through the sentence beginning Let y_i; includes affine projections and restriction to a directed tail."
    }
   },
   {
-   "text": "Apply [lem-trf-invertible-affine-limit-descent] to $(Y_i)$ and $\\mathcal M$ to obtain $i_0$, an invertible module $M_0$ on $Y_{i_0}$, and $a_{i_0}^*M_0\\cong\\mathcal M$. For $i\\geq i_0$ define $M_i=q_{i i_0}^*M_0$. These modules are invertible, their further pullbacks agree with the $M_j$, and $a_i^*M_i\\cong\\mathcal M$, by the invertible-pullback and composition clauses of [lem-weil-pbc-invertible-pullback-tensor]. Work on the directed tail $i\\geq i_0$. It retains the same limits: for a cone on the tail, its component at an arbitrary $i$ is the component at any $j\\geq i,i_0$ followed by the transition to $i$; the cone identities and a common upper bound show independence of $j$. This extends cones uniquely and proves the required universal properties.",
+   "text": "For the point $x$, Step 2 supplies every hypothesis of [lem-trf-model-fibre-ample-open], including the compatible line bundle and the Noetherian bases. The original hypothesis is precisely that $M|_{Y_x}$ is ample. Thus there are $i$ and an affine open neighbourhood $V_i$ of $x_i=b_i(x)$ with $M_i|_{f_i^{-1}(V_i)}$ ample in the absolute sense.",
    "uses": [
-    "lem-trf-invertible-affine-limit-descent",
-    "lem-weil-pbc-invertible-pullback-tensor"
+    "lem-trf-model-fibre-ample-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0D2S, descent of the invertible modules via Limits Tag 0B8W."
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood, proof: residue-field colimit, descent of fibre ampleness, and the Noetherian affine neighbourhood V_i."
    }
   },
   {
-   "text": "Put $x_i=b_i(x)$ and $F_i=(Y_i)_{x_i}$. By [lem-weil-pbc-limit-residue-field], $\\operatorname{Spec}\\kappa(x)$ is the compatible limit of the $\\operatorname{Spec}\\kappa(x_i)$. Thus [lem-weil-pbc-limit-fibre-products] identifies $Y_x$ with $\\varprojlim F_i$ and gives affine transition maps on the $F_i$. Each $F_i\\to\\operatorname{Spec}\\kappa(x_i)$ is proper by [lem-weil-pbc-proper-base-change], hence of finite type and separated. Consequently each $F_i$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine]. The restriction of $M_0$ to $F_{i_0}$ pulls back to $M_i|_{F_i}$ and to $\\mathcal M|_{Y_x}$, by the commuting fibre squares and the pullback composition isomorphisms of [lem-weil-pbc-invertible-pullback-tensor].",
+   "text": "Apply [lem-trf-affine-square-ample-neighbourhood-transfer] to $a_i:Y\\to Y_i$, $b_i:X\\to X_i$, $f$, $f_i$, $M_i$, $M$, and $V_i$. Step 2 gives the affine horizontal maps, commuting equation and pullback isomorphism; Step 3 gives the ample restriction. It follows that $U=b_i^{-1}(V_i)$ is affine, $f^{-1}(U)$ is quasi-compact, and $M$ is ample on the inverse image of every affine open of $U$. Since $b_i(x)=x_i\\in V_i$, $x\\in U$. Together with Step 1 this proves the original statement.",
    "uses": [
-    "lem-weil-pbc-limit-residue-field",
-    "lem-weil-pbc-limit-fibre-products",
-    "lem-weil-pbc-proper-base-change",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-qcqs-over-affine",
-    "lem-weil-pbc-invertible-pullback-tensor"
+    "lem-trf-affine-square-ample-neighbourhood-transfer"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0D2S, residue-field colimit and the application of Limits Tag 09MT; Limits Tag 0CUG and lemma-limit-fibre-product."
-   }
-  },
-  {
-   "text": "The hypothesis makes $\\mathcal M|_{Y_x}$ ample. The pullback isomorphism of Step 4 and [lem-sc-ample-iso] therefore satisfy the hypothesis of [lem-trf-ample-affine-limit-descent] for the system $(F_i)$ and $M_0|_{F_{i_0}}$. Obtain $i\\geq i_0$ such that $M_i|_{F_i}$ is ample. The base $X_i$ is Noetherian by Step 2 and $f_i$ is proper, so [lem-trf-noetherian-fibre-ample-neighbourhood] gives an affine open neighbourhood $V_i$ of $x_i$ with $M_i|_{f_i^{-1}(V_i)}$ ample in the absolute sense.",
-   "uses": [
-    "lem-sc-ample-iso",
-    "lem-trf-ample-affine-limit-descent",
-    "lem-trf-noetherian-fibre-ample-neighbourhood"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0D2S, invoking Limits Tag 09MT and Cohomology of Schemes Tag 0D2N."
-   }
-  },
-  {
-   "text": "Set $U=b_i^{-1}(V_i)$. It is open and contains $x$. The projection $b_i$ is affine by [lem-weil-pbc-limit-affine-transition]; since $V_i$ is affine, $U$ is affine by [lem-weil-pbc-affine-morphism-permanence](2). The projection $a_i$ is also affine by [lem-weil-pbc-limit-affine-transition]. The commuting equation $f_i a_i=b_i f$ gives $f^{-1}(U)=a_i^{-1}(f_i^{-1}(V_i))$. Hence $a_i$ restricts to an affine morphism $a:Y_U\\to f_i^{-1}(V_i)$ by base-change stability [lem-weil-pbc-affine-morphism-permanence](1). Pull back the ample module of Step 5 along $a$ using [lem-weil-pbc-pullback-ample-invertible]. By the pullback composition comparison [lem-weil-pbc-invertible-pullback-tensor] and the isomorphism of Step 3, this pullback is $\\mathcal M|_{Y_U}$. It is ample by [lem-sc-ample-iso]. Its absolute ampleness includes quasi-compactness of $Y_U$ by [def-weil-pbc-ample-invertible-module].",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-pullback-ample-invertible",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-sc-ample-iso",
-    "def-weil-pbc-ample-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0D2S, final paragraph; this uses the affine projections directly on inverse images of an affine $V_i$, without a Cartesian approximation assumption."
-   }
-  },
-  {
-   "text": "For any affine open $W\\subseteq U$, the inclusion $W\\to U$ is a morphism between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Its base change $Y_W\\to Y_U$ is affine by [lem-weil-pbc-affine-morphism-permanence](1). Apply [lem-weil-pbc-pullback-ample-invertible] to the ample $\\mathcal M|_{Y_U}$ of Step 6. Its pullback is $\\mathcal M|_{Y_W}$ by [def-pc-module-pullback], and [lem-sc-ample-iso] gives ampleness. This proves ampleness over every affine open of $U$, together with the quasi-compactness of $f^{-1}(U)$ already obtained.",
-   "uses": [
-    "lem-weil-pbc-morphism-affine-schemes-affine",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-pullback-ample-invertible",
-    "def-pc-module-pullback",
-    "lem-sc-ample-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0D2S, final hints; Morphisms Tags 01SH and 0892 (affine pullback)."
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood, final paragraph and hints, implemented using the restricted affine horizontal maps after choosing affine V_i."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-weil-pbc-ample-invertible-module",
-  "def-weil-proper-morphism",
-  "lem-sc-ample-iso",
-  "lem-trf-ample-affine-limit-descent",
-  "lem-trf-invertible-affine-limit-descent",
-  "lem-trf-noetherian-fibre-ample-neighbourhood",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-limit-fibre-products",
-  "lem-weil-pbc-limit-residue-field",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-morphism-affine-schemes-affine",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-proper-limit-noetherian",
-  "lem-weil-pbc-pullback-ample-invertible",
-  "lem-weil-pbc-qcqs-over-affine"
+  "def-pc-fibre-product",
+  "lem-trf-affine-square-ample-neighbourhood-transfer",
+  "lem-trf-invertible-proper-noetherian-models",
+  "lem-trf-model-fibre-ample-open",
+  "lem-weil-pbc-proper-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, proof. After choosing affine V_i, its final hints are implemented directly by restricting the affine limit projections and then pulling back along affine opens of U."
+  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, proof, split into three independent subsidiary arguments; final paragraph implemented by restricting affine projections."
  },
  "mathlib_searches": [
   {
@@ -243,71 +175,25 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-ample-neighbourhood",
   "worker": "stage1",
-  "summary": "Followed Stacks 0D2S by Noetherian approximation, descent of the invertible module, limits of residue fields and fibres, descent of fibre ampleness, the Noetherian cohomological case, and affine pullback on an affine neighbourhood and all its affine subopens. Three statement-only children isolate 0B8W(2), 09MT, and 0D2N. Item statement and statement dependencies unchanged; every cited statement read.",
+  "summary": "Repair of the 2026-10-22 re-split return: three independent statement-only children distribute compatible Noetherian models with the invertible module, descent of ample limit fibres to Noetherian affine neighbourhoods, and transfer across an affine commutative square. All seven old steps are preserved verbatim and allocated in report.md; the parent is a four-step assembly. Statement and statement dependencies unchanged.",
   "blueprint": "Realizes the existing fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality, through lem-trf-proper-fibrewise-ample-projective: its application of 0D2S is now expanded using that tag's Noetherian approximation route. The unit and chapter records are unchanged.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-ample-iso",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Ampleness is invariant under isomorphisms of invertible modules. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-affine-morphism-permanence",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-affine-scheme-qcqs",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Affine schemes are quasi-compact and quasi-separated. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-invertible-pullback-tensor",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Pullback and tensor product of invertible modules, and their fibres. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-limit-affine-transition",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Limits of schemes along affine transition morphisms. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-limit-fibre-products",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Fibre products commute with limits along affine transition morphisms. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-limit-residue-field",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A point of a limit is the limit of its images. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A locally Noetherian scheme is quasi-separated (Stacks 01OY). No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A morphism between affine schemes is affine (Stacks 01SH). No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-proper-base-change",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Properness is stable under base change. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-proper-limit-noetherian",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A proper morphism is a limit of proper morphisms over schemes of finite type over Z. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-pullback-ample-invertible",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: Pullback of an ample invertible module. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-over-affine",
-    "why": "Generic scheme/line-bundle tool in the 0D2S Noetherian approximation proof: A scheme separated and of finite type over an affine scheme is quasi-compact and quasi-separated. No node of sk-i-curve-zero supplies this statement; this does not replace the contracting-correspondence route."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sc-ample-iso",
@@ -326,12 +212,12 @@
   "lem-weil-pbc-qcqs-over-affine"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NU-f07ccd9cd",
-  "group": "NU",
+  "reviewer": "NT-cc-Q66-7b09cb17b",
+  "group": "Q66",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-f07ccd9cd (reviewer sub-agent of L); spot-checked: Read all required instructions, the item, three new nodes, cited DAG nodes, unit route, and Stacks sources. Verified every proof step, hypotheses, affine/base-change morphisms, ampleness transfers, edge cases, searches, uniqueness, and duplicate checks. No forbidden machinery or citations; review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-7b09cb17b (reviewer sub-agent of L); spot-checked: Faithful re-split of Stacks 0D2S (more-morphisms.tex l.14154; source read in full) answering the human's 2026-10-21 re-split note. The statement and stmt_deps are unchanged. Parent Step 1 keeps the reduction to an affine base. The parent proof is 1677 chars: that reduction plus three citations. Old steps 2-3 become lem-trf-invertible-proper-noetherian-models: 0A0P affine-base models, 0B8W descent of M, Noetherian and qs stages, affine projections, a directed tail with least element. Old steps 4-5 become lem-trf-model-fibre-ample-open: kappa(x)=colim kappa(x_i), fibre limit with affine transitions (checked independently), 09MT ample descent, 0D2N affine absolutely ample V_i. Old steps 6-7 become lem-trf-affine-square-ample-neighbourhood-transfer: U=b^{-1}V affine, f^{-1}U=a^{-1}g^{-1}V qc, pullback along affine maps is ample, plus the affine-W clause. Every old argument is a child statement. The children are of comparable size (about 1.2-1.5k chars of old text each) and none restates the item. I checked all three statements against the cited nodes (proper-limit-noetherian affine clause, invertible and ample limit descent, noetherian-fibre-ample-neighbourhood, limit-residue-field, limit-fibre-products, pullback-ample-invertible): all true. Edge cases checked: empty Y, zero ring, constant systems, empty V, identity horizontal maps, non-Cartesian square. The parent steps match the child hypotheses exactly, and x is in U because b_i(x)=x_i. The DAG scan for ample/limit/affine/fibre-neighbourhood statements found no duplicates. The item is not dropped. Batch-5 flags on the three new children: generic scheme theory (approximation, ampleness descent, affine ample pullback). None is a statement given by the trace formula or Poincare duality or a step specific to their proofs, same as earlier accepted sk-i-curve-zero splits. Their stmt_deps are definitions only, so the batch-5 closure gains no trace or duality node. Accepted. No fixes."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.AmpleNeighbourhood",

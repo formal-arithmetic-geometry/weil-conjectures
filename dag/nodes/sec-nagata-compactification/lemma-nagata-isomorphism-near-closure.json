@@ -136,40 +136,77 @@
   "AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure",
+     "module": "WeilConjectures.Compactification.IsomorphismNearClosure",
+     "lines": [
+      733,
+      750
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.exists_isIso_strictTransformMap_isoNearClosureBlowup",
+     "module": "WeilConjectures.Compactification.IsomorphismNearClosure",
+     "lines": [
+      709,
+      731
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-near-closure",
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $X$ be quasi-compact and quasi-separated, let $q\\colon Z\\to X$ be\nproper, let $V\\subseteq X$ be a quasi-compact open, and let $T\\subseteq V$ be\nclosed in $V$. If $q$ is an isomorphism over an open neighbourhood of $T$ in\n$X$, then there exist a $V$-admissible blow-up $\\pi\\colon X'\\to X$ and an\nopen $N'\\subseteq X'$ containing the closure of $\\pi^{-1}(T)$ such that the\nstrict transform of $q$ along $\\pi$ (relative to the complement of the\ncentre) restricts to an isomorphism over $N'$.",
   "proof": [
    {
-    "text": "We show that $\\pi=\\mathsf{IsoBl}_{V,T}(q)\\to X$ of\n[def-nagata-isomorphism-near-closure] has this property; we use the\nnotation of that construction: $U=q^{-1}(V)$, $E\\subseteq V$ the complement\nof $\\operatorname{IsoOpen}(U\\to V)$, the separated pair $(T_c,E_c)$, the\nblow-up $X_1$, and $X_0=X_1\\setminus\\overline E_c$. Its hypotheses hold:\nif $N$ is an open neighbourhood of $T$ in $X$ over which $q$ is an\nisomorphism, then $U\\to V$ is an isomorphism over the open neighbourhood\n$N\\cap V$ of $T$ in $V$.",
+    "text": "We show that $\\pi=\\mathsf{IsoBl}_{V,T}(q)\\to X$ of\n[def-nagata-isomorphism-near-closure] has this property, using the notation\nof that construction. By [lemma-nagata-maximal-isomorphism-open] the\nassumed isomorphism neighbourhood of $T$ is contained in\n$\\operatorname{IsoOpen}(q)$, so $T$ and $E$ are disjoint and the construction\napplies; moreover $V_2=V\\setminus E_c\\subseteq\\operatorname{IsoOpen}(q)$, so $q$\nis an isomorphism over $V_2$. Since $\\pi_1$ is an isomorphism over $V$, the\nstrict transform $\\lambda_1$ is an isomorphism over $\\pi_1^{-1}(V_2)$ by\n[lemma-nagata-strict-transform-over-complement]. It is proper: its composite\nwith $\\pi_1$ is $q$ composed with the proper blow-up $Z_1\\to Z$, and $\\pi_1$ is\nseparated.",
     "uses": [
-     "def-nagata-isomorphism-near-closure"
+     "def-nagata-isomorphism-near-closure",
+     "lemma-nagata-maximal-isomorphism-open",
+     "lemma-nagata-strict-transform-over-complement"
     ],
     "elementary": false
    },
    {
-    "text": "By [lemma-nagata-maximal-isomorphism-open], the assumed isomorphism\nneighbourhood is contained in $\\operatorname{IsoOpen}(U\\to V)$; hence the\nbad locus $E$ is disjoint from $T$. The two separation steps make\n$\\overline T_c$ and $\\overline E_c$\ndisjoint in $X_1$, so $X_0$ contains an open neighbourhood of\n$\\overline T_c$, hence of $\\overline T$. On\n$V\\setminus E_c$ the restricted proper map is already an isomorphism.",
-    "uses": [
-     "lemma-nagata-maximal-isomorphism-open"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "By [lemma-nagata-elimination-indeterminacy], the strict transform after\nthe constructed blow-up of $X_0$ is an open immersion. The strict transform\nis proper because it is a closed subscheme of the base change of the proper\nmorphism $q$ (use the closed-chart model in\n[prop-nagata-strict-transform-closed-fiber-product]); hence\n[lemma-nagata-proper-open-dense-iso] applies once density is checked.\nThe open $V\\setminus E_c$ is scheme-theoretically dense in $X_0$ by the\ndensity-preservation clause for admissible blow-ups, and its pullback is the\npreserved isomorphism open by\n[lemma-nagata-strict-transform-over-complement]. Thus the strict\ntransform over $X_0$ is an isomorphism. The extension construction has\nunit center on $X_1\\setminus X_0$ and restricts canonically to the preceding\nblow-up on $X_0$ by\n[lemma-nagata-extend-admissible-blowup]; the restriction and inverse\nmaps therefore transport across the canonical strict-transform comparison.\nSince $\\overline T\\subset X_0$, this transported isomorphism holds on an\nopen neighbourhood of $\\overline T$. Finally\n[lemma-nagata-admissible-blowup-comp] identifies the composite with one\n$V$-admissible blow-up $\\pi\\colon X'\\to X$. As $\\pi$ is an isomorphism over\n$V\\supseteq T$, the closure of $\\pi^{-1}(T)$ in $X'$ is the closure of the\ncopy of $T$ considered above; so the open neighbourhood just obtained is an\nopen $N'$ containing the closure of $\\pi^{-1}(T)$ over which the strict\ntransform of $q$ along $\\pi$ is an isomorphism.",
+    "text": "By [lemma-nagata-elimination-indeterminacy], applied to $\\lambda_1$ over the\nqcqs scheme $X_1$ and the quasi-compact open $\\pi_1^{-1}(V_2)$, the strict\ntransform of $\\lambda_1$ along the elimination blow-up is an open immersion.\nThe centre $D$ agrees on $A$ with the elimination centre\n([lemma-nagata-extend-admissible-blowup]), so over the inverse image of $A$\nin $\\operatorname{Bl}_D(X_1)$ the strict transform of $\\lambda_1$ is again an\nopen immersion. By [lemma-nagata-admissible-blowup-comp] the blow-up\n$X'=\\operatorname{Bl}_K(X)$ is identified with $\\operatorname{Bl}_D(X_1)$ over\n$X$, compatibly with the strict transforms of $q$ and of $\\lambda_1$. Let\n$A'\\subseteq X'$ be the inverse image of $A$. Over $A'$ the strict transform\n$q'$ of $q$ along $\\pi$ is an open immersion, and it is proper, being a\nclosed subscheme of a base change of $q$\n([prop-nagata-strict-transform-closed-fiber-product]). Let $N'\\subseteq A'$\nbe the image of $q'$ over $A'$; it is open, and $q'$ restricts to an\nisomorphism over $N'$.",
     "uses": [
      "lemma-nagata-elimination-indeterminacy",
-     "prop-nagata-strict-transform-closed-fiber-product",
-     "lemma-nagata-proper-open-dense-iso",
-     "lemma-nagata-strict-transform-over-complement",
      "lemma-nagata-extend-admissible-blowup",
-     "lemma-nagata-admissible-blowup-comp"
+     "lemma-nagata-admissible-blowup-comp",
+     "prop-nagata-strict-transform-closed-fiber-product"
     ],
     "elementary": false
+   },
+   {
+    "text": "It remains to see that $N'$ contains the closure of $\\pi^{-1}(T)$. This\nclosure lies over $\\overline{\\pi_1^{-1}(T)}\\subseteq\n\\overline{\\pi_1^{-1}(T_c)}\\subseteq A$, hence in $A'$. The range of $q'$ is\nclosed because $q'$ is proper, and it contains $\\pi^{-1}(T)$ because $\\pi$\nis an isomorphism over $V\\supseteq T$ and $q$ is an isomorphism over a\nneighbourhood of $T$. Hence the closure of $\\pi^{-1}(T)$ lies in the range\nof $q'$ over $A'$, which is $N'$.",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

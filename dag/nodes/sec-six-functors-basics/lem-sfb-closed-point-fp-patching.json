@@ -1,0 +1,416 @@
+{
+ "id": "lem-sfb-closed-point-fp-patching",
+ "kind": "statement",
+ "title": "Finite-presentation patching at a closed point with property detection",
+ "statement": "Let $D$ be a Noetherian commutative ring (every ideal is finitely generated), $\\mathfrak m$ a maximal ideal, $S=\\operatorname{Spec}D$, $s\\in S$ its closed point, $U=S\\setminus\\{s\\}$, $T=\\operatorname{Spec}D_{\\mathfrak m}$ and $V=T\\setminus\\{\\mathfrak mD_{\\mathfrak m}\\}$ [def-weil-affine-spectrum, def-weil-pbc-localization-at-prime]. For a scheme $Z$, let $\\mathrm{FP}(Z)$ be the category of schemes of finite presentation over $Z$ and their $Z$-morphisms [def-pc-scheme, def-sbc-locally-finite-presentation]; finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. Let $\\mathcal P$ be the category of triples $(X_U,X_T,\\alpha)$ with $X_U\\in\\mathrm{FP}(U)$, $X_T\\in\\mathrm{FP}(T)$ and an isomorphism $\\alpha:X_U\\times_UV\\simeq X_T\\times_TV$; its arrows are pairs of morphisms over $U$ and $T$ commuting with $\\alpha$ [def-pc-fibre-product]. The restriction functor $\\mathrm{FP}(S)\\to\\mathcal P$ is an equivalence: every such triple is induced by an $S$-scheme of finite presentation, and every compatible pair of arrows between two restrictions lifts to a unique $S$-morphism. A scheme $X\\in\\mathrm{FP}(S)$ is smooth over $S$ if and only if $X_U$ and $X_T$ are smooth over their bases [def-sbc-smooth-morphisms]. It is separated over $S$ if and only if both restrictions are separated, where separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. For a morphism $a:X\\to Y$ in $\\mathrm{FP}(S)$, $a$ is an open immersion if and only if $a_U$ and $a_T$ are open immersions [def-weil-open-immersion]; likewise $a$ is a closed immersion if and only if $a_U$ and $a_T$ are closed immersions.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0BPA (lemma-glueing-near-closed-point); property detection as in Tag 0EY3 (lemma-glueing-near-point-properties), using Tags 0C0C (lemma-descend-smooth), 01ZQ (lemma-descend-separated-finite-presentation), 0EUU (lemma-descend-open-immersion), 01ZP (lemma-descend-closed-immersion-finite-presentation). Noetherian specialization ensures that arrows between the objects are locally of finite presentation."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the directed set of affine open neighbourhoods $W$ of $s$, ordered by shrinking. Since $D$ is Noetherian, $S$ is locally Noetherian by its one affine chart, and is quasi-compact and quasi-separated by the affine-scheme lemma. Thus $S$ is Noetherian. Every $W$ and $W\\cap U$ is Noetherian by the open-subscheme lemma, and hence quasi-compact and quasi-separated. The local-ring canonical-morphism lemma identifies $\\operatorname{Spec}\\mathcal O_{S,s}$ with $T=\\operatorname{Spec}D_{\\mathfrak m}$. The affine-neighbourhood limit lemma gives $T=\\varprojlim_W W$ with affine transitions. The only prime of $D_{\\mathfrak m}$ contracting to $\\mathfrak m$ is $\\mathfrak mD_{\\mathfrak m}$: such a prime contains this maximal ideal and hence equals it. Consequently $T\\times_SU=V$. Apply the open-restriction clause of the affine-transition limit lemma to obtain $V=\\varprojlim_W(W\\cap U)$ with affine transitions; pullback by an open subscheme is the corresponding inverse-image open. All indexing sets here are sets of opens of the fixed space $S$, so they are small.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0BPA (lemma-glueing-near-closed-point), proof, the two neighbourhood limits; Tags 01YX and 01YW for limits and restriction to opens"
+   }
+  },
+  {
+   "text": "Given $(X_U,X_T,\\alpha)$, apply clause (1) of finite-presentation spreading to $T=\\varprojlim W$: choose $W_0$ and $X_0\\to W_0$ of finite presentation with $(X_0)_T\\simeq X_T$. For $W\\subseteq W_0$, both $(X_U)_{W\\cap U}$ and $(X_0)_{W\\cap U}$ have finite presentation by base-change permanence. At the limit $V$, the given $\\alpha$ and its inverse are arrows between these two fixed models. Apply clause (2) of spreading twice to the system $(W\\cap U)$, then take a common smaller neighbourhood to obtain arrows $b$ and $c$ lifting $\\alpha$ and $\\alpha^{-1}$. Apply clause (3) to $cb$ and the identity, and to $bc$ and the identity. After a common further shrinking both identities hold. We have obtained an isomorphism $\\beta:(X_U)_{W\\cap U}\\simeq(X_0)_ {W\\cap U}$ whose restriction to $V$ is the prescribed $\\alpha$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0BPA, proof, finite-presentation descent on both limits; Tag 01ZM (lemma-descend-finite-presentation), clauses (1), (2), (3)"
+   }
+  },
+  {
+   "text": "Now $S=U\\cup W$. Apply relative Zariski gluing to $X_U\\to U$ and $X_W=(X_0)_W\\to W$, with transition $\\beta$ on $U\\cap W$. For a two-member covering the self transitions are identities and the two distinct transitions are $\\beta$ and $\\beta^{-1}$, so the cocycle equations are exactly the inverse identities already imposed. The gluing lemma gives an $S$-scheme $X$ restricting to $X_U$ and $X_W$ compatibly with $\\beta$. Its restriction to $T$ is $X_T$, because $T\\to S$ factors through $W$; its induced overlap identification is the given $\\alpha$.",
+   "uses": [
+    "lem-galois-glue",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0BPA, proof, first paragraph; constructions.tex, Relative glueing, Tag 01LG (section-relative-glueing)"
+   }
+  },
+  {
+   "text": "Check that this glued $X\\to S$ has finite presentation, rather than only gluing its underlying schemes. The finite-presentation-at-a-point charts for $X_U\\to U$ and $X_W\\to W$ are also charts for $X\\to S$: an affine open in either base open is an affine open in $S$. This gives local finite presentation by its definition, and, by the affine-open finite-presentation lemma, finite polynomial presentations on every affine chart; forgetting their relations gives local finite type. Since $U,W$ are quasi-compact and the two structure maps are quasi-compact, $X_U,X_W$ are quasi-compact by qcqs permanence. Their union $X$ is quasi-compact (combine finite subcovers on the two pieces), and the same permanence lemma makes $X\\to S$ quasi-compact since $S$ is quasi-separated. Thus $X\\to S$ is of finite type. The finite-type-over-Noetherian lemma makes $X$ Noetherian. In particular $X$ is quasi-separated, and qcqs permanence makes $X\\to S$ quasi-separated. Together with local finite presentation this proves $X\\in\\mathrm{FP}(S)$. This proves essential surjectivity. Base-change permanence also ensures that restriction defines the stated functor on every object of $\\mathrm{FP}(S)$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0BPA, the restriction to schemes of finite presentation; properties.tex Tags 01OV and 01OY, morphisms.tex Tag 01T6; finite presentation is Definition 01TP"
+   }
+  },
+  {
+   "text": "For full faithfulness fix $X,Y\\in\\mathrm{FP}(S)$ and a compatible pair $a_U:X_U\\to Y_U$, $a_T:X_T\\to Y_T$. Restrict the fixed global models to the affine neighbourhoods $W$. Clause (2) of spreading over $T=\\varprojlim W$ gives a lift $a_W:X_W\\to Y_W$ of $a_T$ after shrinking $W$. On $W\\cap U$ the arrows $a_W$ and $a_U$ have equal base change to $V$, by compatibility of the pair. Clause (3) of spreading over $V=\\varprojlim(W\\cap U)$ makes them equal after shrinking $W$ again. Their source and target models have finite presentation by base-change permanence. Glue $a_U$ and $a_W$ by the scheme-morphism gluing lemma. Their composites with $Y\\to S$ equal $X\\to S$ on this open covering, so uniqueness of gluing makes the resulting map an $S$-map. Its pullback to $T$ is $a_T$. Conversely, if two global $S$-maps have equal restrictions to $U$ and $T$, clause (3) for the system $W$ makes them equal on one smaller $W$, and they are equal on $U$ already. Uniqueness in morphism gluing makes them equal on $X$. Thus every compatible pair lifts to exactly one arrow, proving the claimed equivalence.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0BPA, final formal-combination sentence, expanded using Tag 01ZM (2),(3); schemes.tex Tag 01JA for morphism gluing"
+   }
+  },
+  {
+   "text": "For the detection clauses keep the same directed neighbourhood system and start from the fixed global finite-presentation schemes. The affine stages $W$ are qcqs, and $X_W,Y_W$ are qcqs by qcqs permanence. Their structure maps are locally of finite presentation. Any arrow $a:X\\to Y$ over $S$ is locally of finite presentation by the over-base finite-presentation lemma: $X\\to S$ is locally of finite presentation and $Y\\to S$ is locally of finite type (forget the relations in its finite polynomial presentations). Its restrictions $a_W$ are locally of finite presentation by base-change permanence, and in particular locally of finite type. Thus the local-finite-presentation hypothesis for smooth/open-immersion descent and the local-finite-type hypothesis for closed-immersion descent are available. Separated descent needs no finiteness hypothesis on the arrow. None of these applications requires $X$ or $Y$ to be separated.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-a1-map-over-base-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 081D (situation-descent-property) and Tag 02FV (morphisms-lemma-finite-presentation-permanence); hypotheses for Tags 0C0C, 0EUU, 01ZP, 01ZQ"
+   }
+  },
+  {
+   "text": "Suppose $X_T\\to T$ is smooth. Apply smooth descent to $X_W\\to W$ and $T=\\varprojlim W$ to obtain an affine neighbourhood $W$ over which $X_W\\to W$ is smooth. If $X_U\\to U$ is also smooth, the open-restriction smoothness lemma (its composition-with-the-base-open clause) makes $X_U\\to S$ and $X_W\\to S$ smooth. Smoothness on an open cover of the source then makes $X\\to S$ smooth, as $X=X_U\\cup X_W$. Conversely smooth base change gives smoothness of both $X_U\\to U$ and $X_T\\to T$.",
+   "uses": [
+    "lem-weil-pbc-descend-smooth-qcqs",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY3, proof (1) with property smooth and Tag 0C0C; morphisms.tex Tags 01V6, 01VA, 01VC and 01VB"
+   }
+  },
+  {
+   "text": "Suppose $X_T\\to T$ is separated. Apply separated descent to the structure morphisms $X_W\\to W$, taking the target model to be $W$ itself, to get a neighbourhood $W$ with $X_W\\to W$ separated. If $X_U\\to U$ is separated too, the base-changed-diagonal criterion says that the restrictions of $\\Delta:X\\to X\\times_SX$ over $U$ and $W$ are closed immersions. These are restrictions over the open cover $(X\\times_SX)_U\\cup(X\\times_SX)_W=X\\times_SX$. The closed-immersion target-locality lemma makes $\\Delta$ a closed immersion, hence $X\\to S$ separated. Conversely, if $\\Delta$ is closed, its base changes along $U\\to S$ and $T\\to S$ are closed by closed-immersion base change; the same diagonal criterion gives separatedness of the two restrictions.",
+   "uses": [
+    "lem-weil-pbc-descend-separated",
+    "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY3, proof (1), using Tag 01ZQ; locality of the closed diagonal and its base-change comparison"
+   }
+  },
+  {
+   "text": "Let $a:X\\to Y$ be the arrow of the statement. If $a_T$ is an open immersion, apply open-immersion descent to the fixed arrows $a_W:X_W\\to Y_W$ to obtain a neighbourhood $W$ on which $a_W$ is an open immersion. If instead $a_T$ is a closed immersion, apply closed-immersion descent to obtain $W$ on which $a_W$ is a closed immersion. The qcqs and local finite presentation/type hypotheses were verified in step 6. Thus in either case the local restriction on $T$ has been replaced by a restriction on an actual open neighbourhood $W$ of $s$.",
+   "uses": [
+    "lem-weil-pbc-descend-open-immersion-qcqs",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY3, proof (2) with the two immersion properties, using Tags 0EUU and 01ZP"
+   }
+  },
+  {
+   "text": "The target opens $Y_U,Y_W$ cover $Y$, and their inverse images under the $S$-arrow $a$ are exactly $X_U,X_W$. If $a_U$ and $a_W$ are closed immersions, target locality of closed immersions therefore makes $a$ a closed immersion. Conversely both $a_U$ and $a_T$ are closed immersions when $a$ is one, by closed-immersion base change.",
+   "uses": [
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY3, proof (2), target-local assembly after Tag 01ZP"
+   }
+  },
+  {
+   "text": "If $a_U$ and $a_W$ are open immersions, their open images together form the image of $a$, which is open in $Y$. The map $a$ is injective: two points over the same $y$ both lie over any one of $Y_U,Y_W$ containing $y$, and the restriction there is injective. On these target opens $a$ has continuous inverse onto its image and induces an isomorphism of structure sheaves. The inverses and the sheaf isomorphisms agree on intersections because they are inverses to the same map. Hence $a$ is an isomorphism onto that open image, which is precisely the definition of open immersion. Conversely open-immersion base change gives both $a_U$ and $a_T$ when $a$ is an open immersion.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0EY3, proof (2), open-immersion assembly from its definition; schemes.tex Tag 01JY for base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-galois-glue",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-descend-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0BPA, proof, and Tag 0EY3, proof (1),(2), with smooth/open/closed descent supplied by Tags 0C0C, 0EUU and 01ZP and the formal combination written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "glueingNear|gluingNear|RelativeGluing|GlueData|punctured",
+   "results": "{\"t\": \"2026-10-24T07:31:40Z\", \"tool\": \"grep\", \"query\": \"glueingNear|gluingNear|RelativeGluing|GlueData|punctured\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\"], \"digest\": \"81fa4ebb7f390672\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-cover scheme gluing, relative gluing over a Zariski cover, and finite-presentation or Hom-continuity declarations do not give patching across the complement of a closed point and its local spectrum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue schemes of finite presentation from the complement of one closed point and the spectrum of the local ring at that point with a common restriction on the punctured local scheme",
+   "results": "{\"t\": \"2026-10-24T07:31:40Z\", \"tool\": \"leansearch\", \"query\": \"Glue schemes of finite presentation from the complement of one closed point and the spectrum of the local ring at that point with a common restriction on the punctured local scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Pullback.gluedIsLimit\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.GlueData.mk\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\"], \"digest\": \"946364702130e954\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-cover scheme gluing, relative gluing over a Zariski cover, and finite-presentation or Hom-continuity declarations do not give patching across the complement of a closed point and its local spectrum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"RelativeGluing\"",
+   "results": "{\"t\": \"2026-10-24T07:31:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme\\\", \\\"RelativeGluing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.equifibered\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.toBase\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsLocallyDirectedI₀CompFunctorForgetOfIsThin\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instLocallyDirectedIsOpenImmersionCover\"], \"digest\": \"4c2b3b34b73971a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-cover scheme gluing, relative gluing over a Zariski cover, and finite-presentation or Hom-continuity declarations do not give patching across the complement of a closed point and its local spectrum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation schemes over a Noetherian base are equivalent to schemes over the complement of a closed point and over its local ring with an identification on the punctured local scheme; smoothness separatedness and open or closed immersions can be tested on those two pieces",
+   "results": "{\"t\": \"2026-10-24T07:31:41Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation schemes over a Noetherian base are equivalent to schemes over the complement of a closed point and over its local ring with an identification on the punctured local scheme; smoothness separatedness and open or closed immersions can be tested on those two pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.isOpen_smoothLocus\"], \"digest\": \"65fe0569b4a3d0ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-cover scheme gluing, relative gluing over a Zariski cover, and finite-presentation or Hom-continuity declarations do not give patching across the complement of a closed point and its local spectrum."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.point|closedPoint|punctured|local.*ring",
+   "results": "{\"t\": \"2026-10-24T07:32:32Z\", \"tool\": \"grep\", \"query\": \"closed.point|closedPoint|punctured|local.*ring\", \"sub\": \"AlgebraicGeometry/RelativeGluing.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed fibre patching equivalence for finitely presented schemes: replace one fibre using a model over a local ring with a specified isomorphism over the punctured spectrum",
+   "results": "{\"t\": \"2026-10-24T07:32:34Z\", \"tool\": \"leanfinder\", \"query\": \"Closed fibre patching equivalence for finitely presented schemes: replace one fibre using a model over a local ring with a specified isomorphism over the punctured spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Hom.asFiber\", \"AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\"], \"digest\": \"ae58c17f4b9e48e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-cover scheme gluing, relative gluing over a Zariski cover, and finite-presentation or Hom-continuity declarations do not give patching across the complement of a closed point and its local spectrum."
+  },
+  {
+   "tool": "grep",
+   "query": "glueingNear|gluingNear|RelativeGluing|punctured",
+   "results": "{\"t\": \"2026-10-24T08:12:28Z\", \"tool\": \"grep\", \"query\": \"glueingNear|gluingNear|RelativeGluing|punctured\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"2ad3610a6c2437bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary Zariski gluing or local finite presentation, not the closed-point/local-spectrum patching equivalence with property detection."
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*[Gg]lu|[Gg]lu.*finitePresentation|closedPoint.*[Gg]lu|[Pp]atch",
+   "results": "{\"t\": \"2026-10-24T08:12:28Z\", \"tool\": \"grep\", \"query\": \"finitePresentation.*[Gg]lu|[Gg]lu.*finitePresentation|closedPoint.*[Gg]lu|[Pp]atch\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary Zariski gluing or local finite presentation, not the closed-point/local-spectrum patching equivalence with property detection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation schemes over a scheme are equivalent to compatible schemes on the punctured complement and the local spectrum at a closed point",
+   "results": "{\"t\": \"2026-10-24T08:12:28Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation schemes over a scheme are equivalent to compatible schemes on the punctured complement and the local spectrum at a closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\"], \"digest\": \"0d50e4991ad1b604\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary Zariski gluing or local finite presentation, not the closed-point/local-spectrum patching equivalence with property detection."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"glue\"",
+   "results": "{\"t\": \"2026-10-24T08:12:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"glue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.Cover.instIsOpenImmersionFromGlued\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.Cover.fromGlued\", \"AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram\"], \"digest\": \"c23ac0f3193bd096\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary Zariski gluing or local finite presentation, not the closed-point/local-spectrum patching equivalence with property detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation objects and morphisms descend from a localization to an open neighbourhood and glue by Zariski descent",
+   "results": "{\"t\": \"2026-10-24T08:12:30Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation objects and morphisms descend from a localization to an open neighbourhood and glue by Zariski descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\"], \"digest\": \"5d1ee95e806dfb7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary Zariski gluing or local finite presentation, not the closed-point/local-spectrum patching equivalence with property detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schemes of finite presentation can be glued from the complement of a closed point and the spectrum of its local ring",
+   "results": "{\"t\": \"2026-10-24T08:12:31Z\", \"tool\": \"leanfinder\", \"query\": \"Schemes of finite presentation can be glued from the complement of a closed point and the spectrum of its local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\"], \"digest\": \"17a3624daa06464b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary Zariski gluing or local finite presentation, not the closed-point/local-spectrum patching equivalence with property detection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-connected-model-globalization",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 9, implication (b) to (a), printed pp.294–295 (PDF pp.300–301), with the component-chart gluing detailed in Proposition 7, printed p.293. General finite-presentation patching used to spread and compare the finite-type open charts in the component-chart construction.",
+   "via": [
+    "lem-sfb-neron-connected-model-globalization",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-closed-point-fp-patching",
+  "worker": "stage1",
+  "summary": "Expanded closed-point finite-presentation patching into object, isomorphism, morphism and equality descent followed by Zariski gluing; checked finite presentation of the glued scheme and all four property-detection clauses. Reused existing nodes throughout (no new nodes). Repaired doubled TeX escapes without changing the mathematical statement and added the explicit quasi-compact/quasi-separated definition dependencies.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), the recorded trait-extension prerequisite through the Neron connected-model globalization chain: realizes the general closed-point chart-patching tool and its smoothness, separatedness and immersion detection. The item has no imported blueprint id and blueprint_refs.py ancestor returns None; the inherited from.node and via provenance are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "General scheme-limit, descent, or gluing tool used with exactly its stated hypotheses in the closed-point patching argument; the current unit supplies no replacement for this foundational scheme-theoretic result."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "General scheme-limit, descent, or gluing tool used with exactly its stated hypotheses in the closed-point patching argument; the current unit supplies no replacement for this foundational scheme-theoretic result."
+   },
+   {
+    "node": "lem-galois-glue",
+    "why": "General scheme-limit, descent, or gluing tool used with exactly its stated hypotheses in the closed-point patching argument; the current unit supplies no replacement for this foundational scheme-theoretic result."
+   },
+   {
+    "node": "lem-weil-pbc-descend-smooth-qcqs",
+    "why": "General scheme-limit, descent, or gluing tool used with exactly its stated hypotheses in the closed-point patching argument; the current unit supplies no replacement for this foundational scheme-theoretic result."
+   },
+   {
+    "node": "lem-weil-pbc-descend-separated",
+    "why": "General scheme-limit, descent, or gluing tool used with exactly its stated hypotheses in the closed-point patching argument; the current unit supplies no replacement for this foundational scheme-theoretic result."
+   },
+   {
+    "node": "lem-weil-pbc-descend-open-immersion-qcqs",
+    "why": "General scheme-limit, descent, or gluing tool used with exactly its stated hypotheses in the closed-point patching argument; the current unit supplies no replacement for this foundational scheme-theoretic result."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "General scheme-limit, descent, or gluing tool used with exactly its stated hypotheses in the closed-point patching argument; the current unit supplies no replacement for this foundational scheme-theoretic result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-galois-glue",
+  "lem-weil-pbc-descend-smooth-qcqs",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-491ed7beb",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-491ed7beb (reviewer sub-agent of L); spot-checked: I read all 11 steps against the cited node statements and against Stacks limits.tex 0BPA (l.5002, and its proof), 0EY3 (l.5185) and 0GWT. The item's statement is the base text with the doubled backslashes reduced; the base text was taken from the Q63 parent snapshot. The only other change adds the def-weil-finite-type-morphism and def-weil-quasi-separated-morphism dependencies. The item specializes 0BPA to Noetherian D, where U->S is quasi-compact automatically. The smooth, separated, open-immersion and closed-immersion clauses are true in both directions. Steps 1-11 check out: limits T=lim W and V=lim(W cap U) via the open-restriction clause of 01YX; 01ZM (1)-(3) with all stages qcqs; lifting alpha and its inverse, then equalizing both composites; the two-member cocycle in lem-galois-glue; finite presentation of the glued X, including quasi-separatedness via 01T6/01OY; full faithfulness through morphism gluing with S in N_s; lfp of arrows from 02FV; descent by 0C0C, 01ZQ (diagonal over S, target model W), 0EUU and 01ZP from stage S; then target or source locality plus base-change converses. Step 11 (open-immersion target locality) is acceptably elementary; I found no dedicated node for it. Edge cases checked: D a field, D local, empty schemes. No new nodes. I searched for 0BPA, 0E90, 0F21, 0EY3 and 0GWT and found no duplicate; lem-per-finite-point-fp-gluing is a different, restricted statement. I accept the seven declared tool_uses. The other off-unit nodes are slopmaster2-closed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPointFPPatching",
+  "declaration": "AlgebraicGeometry.finitePresentation_closedPoint_patching",
+  "declarations": [
+   "AlgebraicGeometry.overPullbackOverlapIso",
+   "AlgebraicGeometry.finitePresentation_closedPoint_patching"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPointFPPatching.lean",
+  "statement": "theorem finitePresentation_closedPoint_patching (D : Type u) [CommRing D] [IsNoetherianRing D] (m : Ideal D) [m.IsMaximal] (U : (Spec (CommRingCat.of D)).Opens) (hU : (U : Set (Spec (CommRingCat.of D))) = {⟨m, inferInstance⟩}ᶜ) : (∀ (XU : Over U.toScheme) (XT : Over (Spec (.of (Localization.AtPrime m)))), (LocallyOfFinitePresentation XU.hom ∧ QuasiCompact XU.hom ∧ QuasiSeparated XU.hom) → (LocallyOfFinitePresentation XT.hom ∧ QuasiCompact XT.hom ∧ QuasiSeparated XT.hom) → ∀ α : (Over.pullback (pullback.fst U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))))).obj XU ≅ (Over.pullback (pullback.snd U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))))).obj XT, ∃ X : Over (Spec (.of D)), (LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom) ∧ ∃ (eU : (Over.pullback U.ι).obj X ≅ XU) (eT : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).obj X ≅ XT), (Over.pullback (pullback.fst U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))))).map eU.hom ≫ α.hom = (overPullbackOverlapIso U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))) X).hom ≫ (Over.pullback (pullback.snd U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))))).map eT.hom) ∧ (∀ (X Y : Over (Spec (.of D))), (LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom) → (LocallyOfFinitePresentation Y.hom ∧ QuasiCompact Y.hom ∧ QuasiSeparated Y.hom) → ∀ (aU : (Over.pullback U.ι).obj X ⟶ (Over.pullback U.ι).obj Y) (aT : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).obj X ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).obj Y), (Over.pullback (pullback.fst U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))))).map aU ≫ (overPullbackOverlapIso U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))) Y).hom = (overPullbackOverlapIso U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))) X).hom ≫ (Over.pullback (pullback.snd U.ι (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m)))))).map aT → ∃! a : X ⟶ Y, (Over.pullback U.ι).map a = aU ∧ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).map a = aT) ∧ (∀ X : Over (Spec (.of D)), (LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom) → (Smooth X.hom ↔ Smooth ((Over.pullback U.ι).obj X).hom ∧ Smooth ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).obj X).hom) ∧ (IsSeparated X.hom ↔ IsSeparated ((Over.pullback U.ι).obj X).hom ∧ IsSeparated ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).obj X).hom)) ∧ (∀ (X Y : Over (Spec (.of D))), (LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom) → (LocallyOfFinitePresentation Y.hom ∧ QuasiCompact Y.hom ∧ QuasiSeparated Y.hom) → ∀ a : X ⟶ Y, (IsOpenImmersion a.left ↔ IsOpenImmersion ((Over.pullback U.ι).map a).left ∧ IsOpenImmersion ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).map a).left) ∧ (IsClosedImmersion a.left ↔ IsClosedImmersion ((Over.pullback U.ι).map a).left ∧ IsClosedImmersion ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D (Localization.AtPrime m))))).map a).left))",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The equivalence is expressed by essential surjectivity and unique lifting of compatible arrows. Over.pullback uses Mathlib fibre products; U ×_S Spec D_m is canonically the punctured local spectrum. The sole helper constructs the canonical overlap comparison from Over.pullbackComp and the pullback-square equation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c3f05bd6",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_dep lean records, Stacks limits.tex 0BPA (l.5002) and 0EY3 (l.5185), the module and the report (Worker report and Second reading by Q69 present). Lean matches clause by clause: Noetherian D, maximal m, U given by hU as complement of {m}, T = Spec D_m via algebraMap, overlap = pullback U.ι j (canonically V per node step 1 and 0BPA cartesian squares), FP = lfp ∧ qc ∧ qs on Over.hom; essential surjectivity with α induced (fst^*eU ≫ α = overlapIso ≫ snd^*eT); compatible pairs have ∃! lift; Smooth/IsSeparated iff on X; IsOpenImmersion/IsClosedImmersion iff on a.left; no extra hypotheses, single universe u. Helper overPullbackOverlapIso is canonical (pullbackComp + eqToIso pullback.condition), not hollow. lean.statement verbatim (script-checked); proof is sorry; docstrings carry the source place, blueprint id and all 11 steps; imports exist in side-live; no duplicate found. Edge cases (field, local D, empty schemes, non-separated objects) covered. Note: IsSeparated has no DAG def node, but the item defines separated inline as diagonal closed immersion, which is Mathlib's definition. No compile run (nothing changed); worker reports clean compile and dry run."
+ }
+}

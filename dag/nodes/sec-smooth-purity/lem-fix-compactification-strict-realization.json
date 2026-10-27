@@ -1,0 +1,186 @@
+{
+ "id": "lem-fix-compactification-strict-realization",
+ "kind": "statement",
+ "title": "Strict proper/open reconstruction with the recorded finite projections",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "statement": "Let k be a field and l a prime invertible in k, E/Q_l finite, and f:X→Y a separated finite-type morphism of finite-type k-schemes with compactification c=(j,p), j quasi-compact. Use the actual completed coefficient categories and reduction functors [lem-fix-compactification-completed-realization-data]. There is a coherent coefficient reduction calculus S on Y for which j!K is integral constructible for every integral constructible K. Its strict reduction of Rp*j! is naturally isomorphic, by beta, to the recorded compact-support strict tower. The recorded integral compact-support functor is naturally isomorphic, by gamma, to the total limit of that tower. The projections of gamma are exactly the finite scalar-adjunction units followed by restriction of the recorded finite reduction isomorphisms. The recorded canonical realization equals the reduction/limit unit followed by limit(beta) and gamma inverse. Evaluation of beta is strictEvaluation followed by restriction of the scalar reduction of that canonical realization and its recorded finite reduction isomorphism. No tensor, projection formula, Tor-amplitude condition, or claim of faithfulness of evaluation is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Paragraph 2 and final paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-fix-compactification-completed-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=j_!K$. The DVR and standard-quotient results make $A=\\mathcal O_E$ Noetherian with finite perfect quotients and torsion residue field. Finite type over the Noetherian field makes the schemes Noetherian. Strict open reduction gives $H_n\\cong j_{!,n}K_n$ and completeness of $H$; finite open extension preserves constructibility and the common interval of the $K_n$, hence $H\\in D^b_c$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-open-finite-constructibility-interval",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ordinary $Rp_{*,R}$ to the actual completion unit of $H$, then its strict direct-image/limit comparison. Coefficient restriction gives $a_H:Rp_{*,R}H\\cong R\\lim\\operatorname{Res}_nRp_{*,n}H_n$. Apply proper image to $r_j(K)$ to obtain the strict tower isomorphism $\\beta_\\bullet$. The proper-image tower lemma identifies its transitions with the defining compact-support transitions. Set $d_c=R\\lim(\\beta_\\bullet)a_H$.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-compact-support-proper-image-tower",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Integral direct-image constructibility applied to $p,H$ identifies this limit with a constructible complete object with a uniform bound. The direct-image/limit theorem identifies its augmented reduction diagram with perfect projection; the evaluation adjunction identifies its projections with reduction adjuncts. Composing with $r_j(K)_n$ gives exactly the ordered proper-projection/open-tensor comparison induced by $d_c$.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "def-weil-derived-direct-image",
+    "prop-weil-pbc-direct-image-limits",
+    "lemma-weil-pbc-perfect-projection-formula",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-open-reduction-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-sf-compact-support-proper-image-tower",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Paragraph 2 and final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper direct image of extension by zero of complete constructible sheaf is inverse limit of finite quotient compact support",
+   "results": "8 hits; Condensed.lanSheafProfinite, Condensed.ofSheafForgetProfinite, Condensed.isColimitLocallyConstantPresheaf_desc_apply, CondensedMod.ofSheafProfinite, Condensed.isSheafProfinite, Condensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, LightCondensed.lanLightCondSet",
+   "date": "2026-10-24",
+   "verdict": "No match for the prescribed strict quotient-system realization or the finite proper/open counit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"unit\"",
+   "results": "12 hits; CategoryTheory.isUnit_iff_isIso, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence_1, CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful",
+   "date": "2026-10-24",
+   "verdict": "No match for the prescribed strict quotient-system realization or the finite proper/open counit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*(limit|complet)|shriek.*(limit|complet)",
+   "results": "25 hits; Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/Dynamics/OmegaLimit.lean, Mathlib/Dynamics/OmegaLimit.lean, Mathlib/Dynamics/OmegaLimit.lean, Mathlib/Dynamics/OmegaLimit.lean, Mathlib/Dynamics/OmegaLimit.lean",
+   "date": "2026-10-24",
+   "verdict": "No match for the prescribed strict quotient-system realization or the finite proper/open counit normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized finite coefficient tower of proper pushforward after extension by zero identifies with derived scalar reduction of compact support, compatibly with its adjunction unit and projections",
+   "results": "8 hits; PresheafOfModules.instIsRightAdjointPushforward, ModuleCat.RestrictionCoextensionAdj.unit', AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, PresheafOfModules.pushforward, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, DFinsupp.isScalarTower, PresheafOfModules.pushforward_obj_obj",
+   "date": "2026-10-24",
+   "verdict": "No match for the prescribed strict quotient-system realization or the finite proper/open counit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"tensor\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No match for the prescribed strict quotient-system realization or the finite proper/open counit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of the counit-defined projection formula morphism commutes with the tensor comparison and coefficient-change mate for compact support",
+   "results": "8 hits; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, LightCondensed.ihomPoints_symm_comp, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, TensorProduct.counit_def",
+   "date": "2026-10-24",
+   "verdict": "No match for the prescribed strict quotient-system realization or the finite proper/open counit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(comp|tensor)|tensor.*mateEquiv",
+   "results": "15 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-24",
+   "verdict": "No match for the prescribed strict quotient-system realization or the finite proper/open counit normalization."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "strict proper; counit projection; compactification realization",
+   "results": "0 blueprint nodes for each of the three searches. Ancestor query identifies lem-fix-operation-reduction.",
+   "date": "2026-10-24",
+   "verdict": "No separate blueprint statement; this is a sourced helper of the existing reduction proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactificationCompletedRealization",
+  "date": "2026-10-24",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-operation-reduction",
+   "place": "Proof paragraph 2: proper perfect-coefficient projection and extension by zero; final paragraph: compatibility of the specified tensor, unit and counit maps.",
+   "via": [
+    "lem-fix-compactification-completed-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactificationStrictRealization",
+  "file": "lean/Sheaf/Paper/CompactificationStrictRealization.lean",
+  "declaration": "WeilConjectures.CompactificationCompletedRealization.strictRealization",
+  "statement": "theorem strictRealization [QuasiCompact c.i] :\n    ∃ S : CoefficientDerivedSystemCalculus l E Y,\n    Nonempty (CoefficientDerivedSystemCoherence l E Y S) ∧\n    (∀ K : sfIntegralConstructibleCategory l E X,\n      sfIntegralConstructible l E c.Z\n        ((openExtension (completed l E) c.i).mapDerivedCategory.obj K.obj)) ∧\n    ∃ (β : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ⋙\n          strictReduction l E Y S ≅\n        (sfIntegralConstructible l E X).ι ⋙ supportTower l E c k hl)\n      (γ : sfCompactSupportFiniteIntegralFunctor l k hl c E ⋙\n          (sfIntegralConstructible l E Y).ι ≅\n        (sfIntegralConstructible l E X).ι ⋙ supportTower l E c k hl ⋙\n          coefficientConstantTowerLimit l E Y),\n    (∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),\n      γ.hom.app K ≫ (coefficientConstantTowerProjection l E Y n).app\n          ((supportTower l E c k hl).obj K.obj) ≫\n          (supportEvaluation l E c k hl n).hom.app K.obj =\n        (coefficientFiniteAdjunction l E Y n).unit.app\n            ((sfCompactSupportFiniteIntegralFunctor l k hl c E).obj K).obj ≫\n          (scalarReductionDerivedRestriction l E Y n).map\n            (sfCompactSupportFiniteReductionIso l k hl c E K n).hom) ∧\n    (∀ K : sfIntegralConstructibleCategory l E X,\n      (sfQcqsCompactSupportRealization l E k hl c).hom.app K =\n        S.adjunction.unit.app ((image (completed l E) c).obj K.obj) ≫\n          (coefficientConstantTowerLimit l E Y).map (β.hom.app K) ≫ γ.inv.app K) ∧\n    (∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),\n      (coefficientConstantTowerEvaluation l E Y n).map (β.hom.app K) ≫\n          (supportEvaluation l E c k hl n).hom.app K.obj =\n        (strictEvaluation l E S n).hom.app ((image (completed l E) c).obj K.obj) ≫\n          (scalarReductionDerivedRestriction l E Y n).map\n            ((scalarReductionDerivedExtension l E Y n).map\n                ((sfQcqsCompactSupportRealization l E k hl c).hom.app K) ≫\n              (sfCompactSupportFiniteReductionIso l k hl c E K n).hom))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-19185",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T041139-L-1025551",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-19185",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T041139-L-1025551",
+  "kind": "interface",
+  "note": "independent cc review: completedRealization signature and the 13 extracted helper defs byte-identical to the clone; the strictRealization and finiteProjectionModels sorry statements read against the item's clauses and their nodes; 3 direct importers plus the delivered modules compiled in sandbox, axioms probed"
+ }
+}

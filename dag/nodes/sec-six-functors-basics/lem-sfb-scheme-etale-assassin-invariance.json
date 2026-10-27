@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-scheme-etale-assassin-invariance",
+ "kind": "statement",
+ "title": "Etale pullback preserves and reflects associated points of quasi-coherent scheme modules",
+ "statement": "Let $h:V\\to U$ be an etale morphism of schemes [def-pc-scheme, def-weil-etale-morphism]. Assume $U$ and $V$ are locally Noetherian [pqf-def-locnoeth]. Let $G$ be any quasi-coherent $\\mathcal O_U$-module [pqf-def-coherent], and let $h^*G$ be its Zariski tensor pullback [def-pc-module-pullback]. Use the element-annihilator definition of associated points [def-trf-relative-assassin]. Then for every $v\\in V$, with $u=h(v)$, one has $v\\in\\operatorname{Ass}_V(h^*G)$ if and only if $u\\in\\operatorname{Ass}_U(G)$. No finite-generation assumption on $G$ and no surjectivity or quasi-compactness assumption on $h$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex; literature/stacks-project/divisors.tex",
+  "place": "Tag 05FP (flat-lemma-etale-weak-assassin-up-down), combined with Tag 05AR (divisors-lemma-ass-weakly-ass), last sentence, on the two locally Noetherian schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-trf-relative-assassin"
+ ],
+ "proof": [
+  {
+   "text": "Fix $v\\in V$ and $u=h(v)$. Choose affine opens $U_0=\\operatorname{Spec}A\\subseteq U$ containing $u$ and $V_0=\\operatorname{Spec}B\\subseteq h^{-1}(U_0)$ containing $v$. By [lem-a1-etale-open-restriction], $h_0:V_0\\to U_0$ is etale. By [pqf-lem-affine-open-locnoeth], both $A$ and $B$ are Noetherian. Let $\\mathfrak q\\subset B$ correspond to $v$, and let $\\mathfrak p\\subset A$ correspond to $u$; then $\\mathfrak p=h_0^{\\sharp,-1}(\\mathfrak q)$ by the spectrum description of an affine scheme morphism.",
+   "uses": [
+    "lem-a1-etale-open-restriction",
+    "pqf-lem-affine-open-locnoeth",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FP (lemma-etale-weak-assassin-up-down), proof, reduction to affine neighbourhoods; Tag 02GJ (morphisms-lemma-etale-characterize)."
+   }
+  },
+  {
+   "text": "Put $H=G|_{U_0}$ and $M=\\Gamma(U_0,H)$. The restriction $H$ is quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits]. Pullback along an open inclusion is this restriction: the latter is left adjoint to open direct image by that node, as is tensor pullback by [def-pc-module-pullback], so uniqueness of left adjoints identifies them. Pullback composition [lem-pc-module-pullback-identity-composition] therefore gives $(h^*G)|_{V_0}\\cong h_0^*H$. The map $h_0$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Apply [new-p4-locally-quasicoherent-affine-pullback-sections] with its target open equal to all of $U_0$: it gives a $B$-linear isomorphism $\\Gamma(V_0,h_0^*H)\\cong B\\otimes_A M$. Also $h^*G$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent].",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "new-p4-locally-quasicoherent-affine-pullback-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I9 (lemma-widetilde-pullback), part (1); Modules Tag 01BG (lemma-pullback-quasi-coherent)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-weakass-invariance] to $A\\to B$, $M$, and $\\mathfrak q$ from step 1. It gives $\\mathfrak q\\in\\operatorname{WeakAss}_B(M\\otimes_A B)$ if and only if $\\mathfrak p\\in\\operatorname{WeakAss}_A(M)$. The flip $m\\otimes b\\mapsto b\\otimes m$, with inverse $b\\otimes m\\mapsto m\\otimes b$, is $B$-linear by the tensor balancing relation. Composing it with step 2 identifies $M\\otimes_A B$ with $N=\\Gamma(V_0,h^*G)$. A linear isomorphism preserves each element annihilator, and hence preserves weak association. Thus $\\mathfrak q\\in\\operatorname{WeakAss}_B(N)$ if and only if $\\mathfrak p\\in\\operatorname{WeakAss}_A(M)$.",
+   "uses": [
+    "lem-trf-etale-weakass-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FP (lemma-etale-weak-assassin-up-down), affine module formulation."
+   }
+  },
+  {
+   "text": "Since $A$ and $B$ are Noetherian, the ideals $\\mathfrak p$ and $\\mathfrak q$ are finitely generated. Apply [lem-sc-ass-weakass-fg-prime] to $(A,M,\\mathfrak p)$ and $(B,N,\\mathfrak q)$: step 3 is equivalent to $\\mathfrak q\\in\\operatorname{Ass}_B(N)$ if and only if $\\mathfrak p\\in\\operatorname{Ass}_A(M)$. Apply [lem-sfb-affine-associated-points-primes] to the affine opens $V_0\\subseteq V$ and $U_0\\subseteq U$, using quasi-coherence from step 2. The two sides are respectively $v\\in\\operatorname{Ass}_V(h^*G)$ and $u\\in\\operatorname{Ass}_U(G)$. This proves the claimed equivalence for every $v$. All module inputs above allow arbitrary modules, so no finite generation of $G$ has been used; the neighbourhood choices use no surjectivity or quasi-compactness of $h$.",
+   "uses": [
+    "lem-sc-ass-weakass-fg-prime",
+    "lem-sfb-affine-associated-points-primes",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OK (lemma-associated-affine-open); Tag 05AR (lemma-ass-weakly-ass) via Algebra Tag 058A (lemma-ass-weakly-ass)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-etale-open-restriction",
+  "pqf-lem-affine-open-locnoeth",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "new-p4-locally-quasicoherent-affine-pullback-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-etale-weakass-invariance",
+  "lem-sc-ass-weakass-fg-prime",
+  "lem-sfb-affine-associated-points-primes",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex; literature/stacks-project/divisors.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 05FP (lemma-etale-weak-assassin-up-down), affine reduction; Tag 05AR (lemma-ass-weakly-ass) via Tag 058A (lemma-ass-weakly-ass); Tag 02OK (lemma-associated-affine-open); affine pullback Tag 01I9 (lemma-widetilde-pullback)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "associatedPrimes|associatedPoints|WeakAss|weakly.*assassin",
+   "results": "{\"t\": \"2026-10-23T22:59:31Z\", \"tool\": \"grep\", \"query\": \"associatedPrimes|associatedPoints|WeakAss|weakly.*assassin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"Mathlib/RingTheory/Regular/LinearMap.lean\"], \"digest\": \"13b67e5b441edc1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism of locally Noetherian schemes the associated points of a quasi coherent module pullback are exactly the points over associated points",
+   "results": "{\"t\": \"2026-10-23T23:01:56Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale morphism of locally Noetherian schemes the associated points of a quasi coherent module pullback are exactly the points over associated points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"e8fe0af45b80f088\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale weakly associated points up down",
+   "results": "{\"t\": \"2026-10-23T23:01:57Z\", \"tool\": \"leansearch\", \"query\": \"Etale weakly associated points up down\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"Algebra.isOpen_etaleLocus\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.IsEtaleAt\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"b2e3f6a02e091ea6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly associated points under etale morphisms of schemes",
+   "results": "{\"t\": \"2026-10-23T23:01:58Z\", \"tool\": \"leanfinder\", \"query\": \"Weakly associated points under etale morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.mem_etaleLocus_iff\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus\"], \"digest\": \"34e372717caad881\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T23:01:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "WeakAss|associatedPoints|[Ee]tale.*associatedPrimes|associatedPrimes.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T23:01:59Z\", \"tool\": \"grep\", \"query\": \"WeakAss|associatedPoints|[Ee]tale.*associatedPrimes|associatedPrimes.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned etale permanence/locus and algebraic associated-prime or localization facts do not state associated-point invariance for quasi-coherent sheaves; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence, tensor base change, and quasi-coherence results do not assert associated-point invariance for arbitrary quasi-coherent modules"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPoints|[Ee]tale.*associatedPrimes|associatedPrimes.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"grep\", \"query\": \"associatedPoints|[Ee]tale.*associatedPrimes|associatedPrimes.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence, tensor base change, and quasi-coherence results do not assert associated-point invariance for arbitrary quasi-coherent modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly associated points of quasi coherent modules under etale morphisms of schemes",
+   "results": "{\"t\": \"2026-10-23T23:30:43Z\", \"tool\": \"leansearch\", \"query\": \"Weakly associated points of quasi coherent modules under etale morphisms of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"SheafOfModules.isQuasicoherent\", \"RingHom.Etale\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"e7a58d630e7d04ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence, tensor base change, and quasi-coherence results do not assert associated-point invariance for arbitrary quasi-coherent modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated points of arbitrary quasi coherent sheaves on locally Noetherian schemes are invariant under etale pullback",
+   "results": "{\"t\": \"2026-10-23T23:30:56Z\", \"tool\": \"leanfinder\", \"query\": \"Associated points of arbitrary quasi coherent sheaves on locally Noetherian schemes are invariant under etale pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"14c91ee63f6a5ecb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence, tensor base change, and quasi-coherence results do not assert associated-point invariance for arbitrary quasi-coherent modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated primes of tensor products under etale ring homomorphisms over Noetherian rings",
+   "results": "{\"t\": \"2026-10-23T23:33:05Z\", \"tool\": \"leanfinder\", \"query\": \"Associated primes of tensor products under etale ring homomorphisms over Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.instTensorProduct\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.IsEtaleAt.comp\", \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"Module.comap_freeLocus_le\"], \"digest\": \"dfe71ccae5990f15\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence, tensor base change, and quasi-coherence results do not assert associated-point invariance for arbitrary quasi-coherent modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-fibre-assassin-etale-atlas",
+  "date": "2026-10-24",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: sentence identifying the fibre assassin with its image from the chosen affine etale cover. Scheme comparison input to the two projections of the common etale refinement; Stacks 05FP and 05AR.",
+   "via": [
+    "lem-sfb-space-fibre-assassin-etale-atlas",
+    "lem-sfb-space-assassin-containment-constructible",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-etale-assassin-invariance",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing affine etale weak-assassin invariance, affine associated-point dictionary, arbitrary-module Ass/WeakAss comparison, and tensor-pullback section comparison. Four assembly steps, no new nodes. The structure-sheaf-only Ass/WeakAss node is deliberately not applied to G.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: sentence identifying the fibre assassin with its image from the chosen affine etale cover. Scheme comparison input to the two projections of the common etale refinement; Stacks 05FP and 05AR. Current latest blueprint sk-thm-sf-ctf-stability proof, third paragraph, compactification/direct-image preservation; this is a generic algebraic-geometric subinput in its inherited alteration prerequisites. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic Identity and composition for tensor-formula module pullback input for the affine proof of 05FP/05AR; no statement of this unit supplies this tool, and no unit proof step is replaced."
+   },
+   {
+    "node": "new-p4-locally-quasicoherent-affine-pullback-sections",
+    "why": "Generic Affine pullback section equivalence requiring quasi-coherence only on the chosen open input for the affine proof of 05FP/05AR; no statement of this unit supplies this tool, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic The pullback of a quasi-coherent module is quasi-coherent input for the affine proof of 05FP/05AR; no statement of this unit supplies this tool, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-trf-etale-weakass-invariance",
+    "why": "Generic Weak association is preserved and reflected by etale algebra maps input for the affine proof of 05FP/05AR; no statement of this unit supplies this tool, and no unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-ass-weakass-fg-prime",
+    "why": "Generic A finitely generated prime is associated exactly when it is weakly associated input for the affine proof of 05FP/05AR; no statement of this unit supplies this tool, and no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-identity-composition",
+  "new-p4-locally-quasicoherent-affine-pullback-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-etale-weakass-invariance",
+  "lem-sc-ass-weakass-fg-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-535f1e90d",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-535f1e90d (reviewer sub-agent of L); spot-checked: Read the item in full; it adds no new nodes. Statement, stmt_deps and source are byte-identical to the item as created in the Q127 snapshot, so no target was weakened. No SGA anywhere, and there is no repair note for this item. Sources checked: Stacks 05FP (flat.tex lemma-etale-weak-assassin-up-down) and 05AR (divisors lemma-ass-weakly-ass), via Algebra 058A and Divisors 02OK. Step 1: lem-a1-etale-open-restriction applies because h(V_0) ⊆ U_0, and pqf-lem-affine-open-locnoeth makes A and B Noetherian; p is the contraction of q via def-weil-affine-spectrum. Step 2: restriction and j^* agree by uniqueness of left adjoints, and the pullback-composition node gives (h^*G)|_{V_0} ≅ h_0^*H. new-p4 then applies with U = Y = U_0 and needs only H quasi-coherent, giving B⊗_A M ≅ N. h^*G is quasi-coherent by 01BG. Step 3: lem-trf-etale-weakass-invariance applies to an arbitrary module; the switch to its M⊗B convention (the tensor flip) and the matching WeakAss definitions are elementary. Step 4: Noetherian rings give finitely generated primes, so 058A turns WeakAss into Ass on both charts, and 02OK on each chart gives the associated points. Small cases checked: G = 0, open immersions, Spec ℤ[i][1/2] → Spec ℤ with ℚ/ℤ⊕𝒪, and infinite direct sums. Duplicates: the structure-sheaf-only Ass=WeakAss node was rightly not used; lem-trf-flat-pullback-associated-points (05DB) is stronger but is not a restatement. Batch-5 flag on lem-trf-etale-weakass-invariance: it is the affine module form of Stacks 05FP. Its 27-node closure is pure commutative algebra, contains no assumption leaf and no trace-formula or Poincaré-duality node, so it is outside the assumed statements; accepted. The generic tools listed in tool_uses are accepted, and no step of the unit's own route is replaced."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAssociatedPoints",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.associatedPoints_tensorPullback_iff_of_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAssociatedPoints.lean",
+  "statement": "theorem associatedPoints_tensorPullback_iff_of_etale {V U : Scheme.{u}} (h : V ⟶ U) [Etale h] [IsLocallyNoetherian U] [IsLocallyNoetherian V] (G : U.Modules) (hG : G.IsQuasicoherent) (v : V) : v ∈ associatedPoints ((tensorPullback h).obj G) ↔ h v ∈ associatedPoints G",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-167d9c337",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Theorem associatedPoints_tensorPullback_iff_of_etale matches the node clause by clause: Etale h, IsLocallyNoetherian U and V, G : U.Modules with IsQuasicoherent only, (tensorPullback h).obj G, associatedPoints (element-annihilator Ass of the stalk maximal ideal, Stacks 02OJ), ∀ v: v ∈ Ass ↔ h v ∈ Ass. No finite-type, surjectivity or quasi-compactness binder. lean.statement verbatim; one universe u. Sources 05FP + 05AR (last sentence) give exactly this. Edge cases empty V, G=0, open immersions, non-f.g. G fine. Dependency records used as recorded (tensorPullback and SheafOfModules.IsQuasicoherent are in the declarations lists). No duplicate: only a docstring citer in LogMonoidalAssociatedPoints. Proof is sorry with the 4-step proof docstring; source and blueprint docstrings present; all imports exist in side-live; report has both required sections. No file changed, not recompiled."
+ }
+}

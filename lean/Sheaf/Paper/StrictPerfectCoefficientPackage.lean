@@ -15,6 +15,8 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 
+import Mathlib.Algebra.Category.ModuleCat.Products
+
 /-!
 # Strict-perfect coefficient packages
 
@@ -174,7 +176,12 @@ Source: proper base change, definition 1263
 (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 Proof: evaluate the two maps at any object; both are the original sum of linear maps. -/
 theorem strictPerfectConstantPresheaf_additive :
-    (strictPerfectConstantPresheaf (C := C) Λ).Additive := sorry
+    (strictPerfectConstantPresheaf (C := C) Λ).Additive := by
+  constructor
+  intro M N f g
+  apply PresheafOfModules.hom_ext
+  intro X
+  rfl
 
 attribute [instance] strictPerfectConstantPresheaf_additive
 
@@ -193,7 +200,12 @@ Source: proper base change, definition 1263
 (blueprint: def-weil-pbc-strict-perfect-coefficient-package).
 Proof: the constant presheaf functor is additive componentwise. Module sheafification
 preserves finite products and the zero object, so it is additive; compose these functors. -/
-theorem strictPerfectConstantSheaf_additive : (strictPerfectConstantSheaf J Λ).Additive := sorry
+theorem strictPerfectConstantSheaf_additive : (strictPerfectConstantSheaf J Λ).Additive := by
+  have : (PresheafOfModules.sheafification
+      (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)))).Additive :=
+    (PresheafOfModules.sheafificationAdjunction _).left_adjoint_additive
+  unfold strictPerfectConstantSheaf
+  infer_instance
 
 attribute [instance] strictPerfectConstantSheaf_additive
 
@@ -219,7 +231,8 @@ theorem strictPerfectConstantCoordinateComponent_map_add (n : ℕ) (k : Fin n)
     (X : Cᵒᵖ) (v w : Fin n → Λ) :
     (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X ((v + w) k) =
       (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X (v k) +
-        (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X (w k) := sorry
+        (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X (w k) := by
+  exact map_add _ _ _
 
 /-- Coordinate evaluation followed by the coefficient-ring unit respects scalar multiplication.
 Source: proper base change, definition 1263
@@ -231,7 +244,8 @@ theorem strictPerfectConstantCoordinateComponent_map_smul (n : ℕ) (k : Fin n)
     (X : Cᵒᵖ) (r : Λ) (v : Fin n → Λ) :
     (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X ((r • v) k) =
       (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X r *
-        (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X (v k) := sorry
+        (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).app X (v k) := by
+  exact map_mul _ _ _
 
 /-- A coordinate component, linear for the sheafification unit on coefficient rings.
 Source: proper base change, definition 1263
@@ -266,7 +280,12 @@ theorem strictPerfectConstantCoordinate_naturality (n : ℕ) (k : Fin n)
       ((PresheafOfModules.restrictScalars
         (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)))).obj
           (SheafOfModules.unit ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))).val).map f :=
-  sorry
+  by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro v
+    exact ConcreteCategory.congr_hom
+      ((toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))).naturality f) (v k)
 
 /-- A coordinate map, obtained from the constant presheaf coordinate by module sheafification.
 Source: proper base change, definition 1263
@@ -296,7 +315,91 @@ coefficient ring. Sheafification preserves finite products (including the empty 
 and sheafifying the coefficient ring gives the constant ring sheaf. The displayed map is
 precisely the comparison induced by these projections. Thus it is an isomorphism. -/
 theorem strictPerfectConstantFiniteFreeComparison_isIso (n : ℕ) :
-    IsIso (strictPerfectConstantFiniteFreeComparison J Λ n) := sorry
+    IsIso (strictPerfectConstantFiniteFreeComparison J Λ n) := by
+  let A := (constantSheaf J RingCat.{u}).obj (RingCat.of Λ)
+  let η := toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))
+  let P := (strictPerfectConstantPresheaf (C := C) Λ).obj (ModuleCat.of Λ Λ)
+  let a : P ⟶ (PresheafOfModules.restrictScalars η).obj (unit A).val :=
+    { app := fun X => ModuleCat.ofHom
+        (X := P.obj X)
+        (Y := ((PresheafOfModules.restrictScalars η).obj (unit A).val).obj X)
+        { toFun := η.app X
+          map_add' := map_add _
+          map_smul' := by
+            change ∀ r x : Λ, η.app X (r * x) = η.app X r * η.app X x
+            exact (η.app X).hom.map_mul }
+      naturality := by
+        intro X Y f
+        apply ModuleCat.hom_ext
+        apply LinearMap.ext
+        intro x
+        exact ConcreteCategory.congr_hom (η.naturality f) x }
+  let e : (strictPerfectConstantSheaf J Λ).obj (ModuleCat.of Λ Λ) ⟶ unit A :=
+    (PresheafOfModules.sheafificationHomEquiv η).symm a
+  let g := (PresheafOfModules.toPresheaf _).map a
+  have : Presheaf.IsLocallyInjective J g := by
+    constructor
+    intro X x y h
+    exact Presheaf.equalizerSieve_mem J η x y h
+  have : Presheaf.IsLocallySurjective J g := by
+    constructor
+    intro X x
+    exact Presheaf.imageSieve_mem J η x
+  let q := (toSheaf A).map e
+  have hfac : toSheafify J P.presheaf ≫ q.hom = g := by
+    exact congrArg ((PresheafOfModules.toPresheaf _).map)
+      ((PresheafOfModules.sheafificationHomEquiv η
+        (P := P) (F := unit A)).apply_symm_apply a)
+  have : Presheaf.IsLocallySurjective J (toSheafify J P.presheaf) :=
+    (J.W_toSheafify P.presheaf).isLocallySurjective
+  have : Presheaf.IsLocallyInjective J q.hom :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective_fac J g hfac
+  have : Presheaf.IsLocallySurjective J q.hom :=
+    Presheaf.isLocallySurjective_of_isLocallySurjective_fac J hfac
+  have : IsIso q := (Sheaf.isLocallyBijective_iff_isIso q).mp
+    ⟨inferInstance, inferInstance⟩
+  have : IsIso e := isIso_of_reflects_iso e (toSheaf A)
+  let G := strictPerfectConstantSheaf J Λ
+  let t := G.mapIso (ModuleCat.piIsoPi (fun _ : Fin n => ModuleCat.of Λ Λ)).symm ≪≫
+    PreservesProduct.iso G (fun _ : Fin n => ModuleCat.of Λ Λ) ≪≫
+      Pi.mapIso (fun _ : Fin n => asIso e)
+  have ht : t.hom = strictPerfectConstantFiniteFreeComparison J Λ n := by
+    apply Pi.hom_ext
+    intro k
+    have hk : t.hom ≫ Pi.π _ k =
+        G.map (ModuleCat.ofHom (LinearMap.proj k)) ≫ e := by
+      simp only [t, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc,
+        Pi.mapIso_hom_π, PreservesProduct.iso_hom, piComparison_comp_π_assoc,
+        asIso_hom]
+      rw [← G.map_comp_assoc, ModuleCat.piIsoPi_inv_kernel_ι]
+    rw [hk]
+    change G.map (ModuleCat.ofHom (LinearMap.proj k)) ≫ e =
+      Pi.lift (strictPerfectConstantCoordinate J Λ n) ≫ Pi.π _ k
+    rw [Pi.lift_π]
+    let c := (strictPerfectConstantPresheaf (C := C) Λ).map
+      (ModuleCat.ofHom (LinearMap.proj k) : ModuleCat.of Λ (Fin n → Λ) ⟶
+        ModuleCat.of Λ Λ)
+    have hc : c ≫ a =
+        { app := strictPerfectConstantCoordinateComponent J Λ n k
+          naturality := strictPerfectConstantCoordinate_naturality J Λ n k } := by
+      apply PresheafOfModules.hom_ext
+      intro X
+      rfl
+    have h := (PresheafOfModules.sheafificationAdjunction η).homEquiv_naturality_left_symm
+      (Y := unit A) c a
+    rw [hc] at h
+    have heq (M : PresheafOfModules.{u} ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))) :
+        (PresheafOfModules.sheafificationAdjunction η).homEquiv M (unit A) =
+          PresheafOfModules.sheafificationHomEquiv η := by
+      apply Equiv.ext
+      intro f
+      exact PresheafOfModules.sheafificationAdjunction_homEquiv_apply η f
+    rw [heq, heq] at h
+    dsimp only [G, strictPerfectConstantSheaf, Functor.comp_map,
+      strictPerfectConstantCoordinate, e]
+    exact h.symm
+  rw [← ht]
+  infer_instance
 
 attribute [instance] strictPerfectConstantFiniteFreeComparison_isIso
 
@@ -311,7 +414,10 @@ theorem strictPerfectConstant_splitting {F : CochainComplex (ModuleCat.{u} Λ) �
       strictPerfectConstantFiniteFreeComparison J Λ (P.N r)) ≫
       (inv (strictPerfectConstantFiniteFreeComparison J Λ (P.N r)) ≫
         (strictPerfectConstantSheaf J Λ).map (P.p r)) =
-      𝟙 ((strictPerfectConstantComplex J Λ F).X r) := sorry
+      𝟙 ((strictPerfectConstantComplex J Λ F).X r) := by
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  rw [← Functor.map_comp, P.splitting]
+  exact (strictPerfectConstantSheaf J Λ).map_id (F.X r)
 
 /-- The associated constant package: sheafify the complex and both splitting maps termwise,
 then identify the constant finite tuples with finite tuples of the constant ring sheaf.
@@ -335,7 +441,14 @@ are respectively `p_r ≫ i_r`, `p_r` and `i_r`. -/
 theorem StrictPerfectCoefficientPackage.identities {R : Sheaf J RingCat.{u}}
     {F : CochainComplex (SheafOfModules.{u} R) ℤ}
     (P : StrictPerfectCoefficientPackage R F) (r : ℤ) :
-    P.e r ≫ P.e r = P.e r ∧ P.e r ≫ P.p r = P.p r ∧ P.i r ≫ P.e r = P.i r := sorry
+    P.e r ≫ P.e r = P.e r ∧ P.e r ≫ P.p r = P.p r ∧ P.i r ≫ P.e r = P.i r := by
+  dsimp [StrictPerfectCoefficientPackage.e]
+  constructor
+  · simp only [Category.assoc, ← Category.assoc (P.i r), P.splitting,
+      Category.id_comp]
+  constructor
+  · rw [Category.assoc, P.splitting, Category.comp_id]
+  · rw [← Category.assoc, P.splitting, Category.id_comp]
 
 end SheafOfModules
 
@@ -356,6 +469,13 @@ Proof: reassociate each composite, replace the middle `i_r ≫ p_r` by the ident
 and remove the identity. -/
 theorem StrictPerfectCoefficientPackage.identities {F : CochainComplex (ModuleCat.{u} Λ) ℤ}
     (P : StrictPerfectCoefficientPackage F) (r : ℤ) :
-    P.e r ≫ P.e r = P.e r ∧ P.e r ≫ P.p r = P.p r ∧ P.i r ≫ P.e r = P.i r := sorry
+    P.e r ≫ P.e r = P.e r ∧ P.e r ≫ P.p r = P.p r ∧ P.i r ≫ P.e r = P.i r := by
+  dsimp [StrictPerfectCoefficientPackage.e]
+  constructor
+  · simp only [Category.assoc, ← Category.assoc (P.i r), P.splitting,
+      Category.id_comp]
+  constructor
+  · rw [Category.assoc, P.splitting, Category.comp_id]
+  · rw [← Category.assoc, P.splitting, Category.id_comp]
 
 end ModuleCat

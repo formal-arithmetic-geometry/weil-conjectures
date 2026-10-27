@@ -1,0 +1,106 @@
+{
+ "id": "lem-sf-tensor-completion-chain-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness of the two-coordinate tensor-chain augmentation",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a scheme X. Let a and b be natural transformations from the signed total tensor of complexes to the specified quotient-tensor Roos complex [lem-fix-constructible-tensor-completion]. If both satisfy IsTensorChain [def-sf-tensor-completion-comparison], then a=b. The hypotheses specify both the actual quotient pure-tensor coordinate and the zero shifted coordinate.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Coefficient presentation of the projection map; the explicit quotient augmentation is the one of Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5, as retained in def-sf-projection-tensor-coefficient-comparison"
+ },
+ "stmt_deps": [
+  "def-sf-tensor-completion-comparison",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "proof": [
+  {
+   "text": "Fix the input complexes. Compare the first coordinate after every countable-product projection, in each degree. Total-coproduct extensionality reduces to a homogeneous tensor summand; tensor/sheafification extensionality reduces to local pure tensors, where the first normalization clause gives equality.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The second normalization clause sets both shifted coordinates to zero. The identity decomposition mappingCocone.id_X expresses every component as the sum of its first and shifted projections followed by their inclusions. Substitute the equal coordinates to get equality degreewise. Complex and natural-transformation extensionality finish.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": "D6, 2026-10-27: extracted a strict subargument of the integral normalized coefficient comparison; see the declaration docstring for the full argument.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "morphism into a mapping cocone determined by its first and shifted projections",
+   "results": "Eight results, with no theorem for the project-specific quotient-completion normalization. General localization/adic-completion results only.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project constructions; no direct library match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.id_X",
+   "results": "Found CochainComplex.mappingCocone.id_X in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "Reused as the generic extensionality/localization tool."
+  },
+  {
+   "tool": "grep",
+   "query": "IsTensorChain|tensorCompletionModel_nonempty|tensorCompletionChain_unique",
+   "results": "Repository search found only the definition IsTensorChain in OpenFactorTensorModel, and no corresponding existence or chain-uniqueness API. The ambient operation models contain the underlying normalized completion comparison.",
+   "date": "2026-10-27",
+   "verdict": "Extract the normalized model bridge and the chain-coordinate uniqueness lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionTensorCoefficientComparison",
+  "date": "2026-10-27",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof step 13: canonical comparison of the framework and PBC tensor presentations; Integral comparison: nonvacuity of the normalization and independence of the two Roos coordinates",
+   "via": [
+    "def-sf-projection-tensor-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TensorCompletionChainUniqueness",
+  "file": "lean/Sheaf/SixFunctors/TensorCompletionChainUniqueness.lean",
+  "declaration": "WeilConjectures.OpenFactorCoherence.tensorCompletionChain_unique",
+  "statement": "theorem tensorCompletionChain_unique\n    (a b : constructibleTensorTotal l E X ⟶\n      integralOperationsTensorComplexFunctor.{u, u} l E X)\n    (ha : IsTensorChain l E X a) (hb : IsTensorChain l E X b) : a = b",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T194738-L-2534206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T194738-L-2534206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

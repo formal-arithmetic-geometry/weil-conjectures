@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-space-supported-adic-existence",
+ "kind": "statement",
+ "title": "Proper-support Grothendieck existence for algebraic spaces",
+ "statement": "Work over a scheme $S$ [def-pc-scheme], with algebraic spaces over $S$ [def-trf-algebraic-space] and universes as in [def-weil-size-convention]. Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $I\\subseteq A$ be an ideal, and suppose $A\\to\\varprojlim_{n\\geq1}A/I^n$ is an isomorphism. Give $\\operatorname{Spec}A$ a specified map to $S$ [def-weil-affine-spectrum]. Let $p:Y\\to\\operatorname{Spec}A$ be a separated finite-type morphism of algebraic spaces [def-sfb-space-morphism-properties]. Put $Y_n=Y\\times_A\\operatorname{Spec}(A/I^n)$ [lem-trf-space-fibre-products-etale-covers], and let $j_n:Y_n\\to Y_{n+1}$ be the canonical closed immersion. Modules are on the small etale ringed site, with quasi-coherence and tensor pullback as in [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it is the cokernel of a map between finite rank free modules. A finite type quasi-coherent module $F$ on an algebraic space $Y$ has support proper over a scheme $T$ if there exist a closed immersion $i:Z\\hookrightarrow Y$, with $Z\\to T$ proper, and a finite type quasi-coherent module $G$ on $Z$ with $i_*G\\simeq F$ [def-sfb-space-proper-quot-functor]. Let $\\mathcal D$ be the category whose objects are finitely presented quasi-coherent $\\mathcal O_Y$-modules with support proper over $\\operatorname{Spec}A$, and whose morphisms are all module homomorphisms. Let $\\widehat{\\mathcal D}$ have objects systems $(F_n,\\alpha_n)_{n\\geq1}$, where $F_n$ is finitely presented quasi-coherent on $Y_n$, $\\alpha_n:j_n^*F_{n+1}\\xrightarrow{\\sim}F_n$, and $F_1$ has support proper over $\\operatorname{Spec}(A/I)$. Morphisms are families of module homomorphisms commuting with the $\\alpha_n$. Then the tensor restriction functor $\\mathcal D\\to\\widehat{\\mathcal D}$ is an equivalence of categories. No flatness hypothesis on $Y$, on $F$, or on the $F_n$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 08BE (theorem-grothendieck-existence), 08BF (remark-reformulate-existence-theorem); the finite-presentation formulation uses spaces-cohomology.tex, lemma-coherent-Noetherian, and proper support is expressed by its closed-carrier convention."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-module-tensor-composition",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Write $J=I\\mathcal O_Y$. The Noetherian-coherent finiteness theorem makes $Y$ and its closed subspaces Noetherian and identifies finite presentation with coherence. The proper-carrier theorem identifies the support condition with properness of the scheme-theoretic support. Apply the closed-adic dictionary termwise: $F_n$ is sent to its pushforward to $Y$, killed by $J^n$, and the adjacent restriction isomorphisms become quotient transition isomorphisms. This identifies the target category with the proper-support subcategory of $\\mathrm{Coh}(Y,J)$, on arrows as well as objects, and identifies tensor restriction with completion. Completion lands in this subcategory: if $w:W\\hookrightarrow Y$ is a proper closed carrier of $F$, the ideal of $W$ kills $F$ (it acts through $\\mathcal O_Y\\to w_*\\mathcal O_W$), so the closed-adic dictionary writes $F=w_*G$ with $G$ coherent and $F/J^nF\\simeq w_*(G/(J\\mathcal O_W)^nG)$, which has the same proper carrier $W$. Properness over $A/I$ and over $A$ agrees for a closed subspace factoring through $\\operatorname{Spec}(A/I)$: one direction is proper composition, and the other is the proper cancellation theorem with the separated closed base immersion.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-sfb-space-closed-adic-dictionary",
+    "def-sfb-space-coherent-adic-system",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-proper-composition",
+    "lem-sfb-space-proper-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 08B7, 08B8 and 08BF; translation of support and of the functor."
+   }
+  },
+  {
+   "text": "For coherent $F,G$ with proper support, put $\\mathcal H=\\mathcal Hom(F,G)$. The completion-Hom lemma makes $\\mathcal H$ coherent. By the carrier theorem choose a closed immersion $i:Z\\hookrightarrow Y$ with $Z\\to\\operatorname{Spec}A$ proper and $F\\simeq i_*F'$; the ideal $K_Z$ of $Z$ acts on $i_*F'$ through $\\mathcal O_Y\\to i_*\\mathcal O_Z$, so $K_ZF=0$. For local sections $a$ of $K_Z$ and $\\varphi$ of $\\mathcal H$, $(a\\varphi)(s)=\\varphi(as)=0$, so $K_Z\\mathcal H=0$. The closed-adic dictionary ($Z$ is Noetherian) gives a coherent $Q$ on $Z$ with $\\mathcal H\\simeq i_*Q$ and $i_*(Q/I^nQ)\\simeq\\mathcal H/J^n\\mathcal H$ compatibly with the transitions, and its thickening clause identifies $Q/I^nQ$ with the tensor restriction of $Q$ to $Z\\times_A\\operatorname{Spec}(A/I^n)$. Sections of a direct image over $Y$ are sections over the whole source, so quotient global sections on $Y$ equal those on $Z$. Proper coherent higher images and affine-chart calculus make $\\Gamma(Z,Q)$ a finite $A$-module: it is the sections of the coherent zeroth direct image on $\\operatorname{Spec}A$. It is complete by finite-module completeness over a complete Noetherian ring. Formal functions at degree zero therefore identifies $\\Gamma(Y,\\mathcal H)$ with $\\varprojlim_n\\Gamma(Y,\\mathcal H/J^n\\mathcal H)$. Composing with completion-Hom gives a bijection $\\operatorname{Hom}_Y(F,G)\\to\\operatorname{Hom}(\\widehat F_J,\\widehat G_J)$; the compatibility clause says this is the actual completion map. This proves full faithfulness for every separated finite-type $Y$ over $A$, before any existence argument.",
+   "uses": [
+    "lem-sfb-space-completion-internal-hom",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-sfb-space-closed-adic-dictionary",
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "lem-sfb-space-affine-formal-functions",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BE first paragraph, expanding Tag 08B9 via 08B6 and formal functions."
+   }
+  },
+  {
+   "text": "It remains to prove essential surjectivity. For a quasi-coherent ideal $L\\subseteq\\mathcal O_Y$, let $P(L)$ say every proper-support $J$-system annihilated termwise by $L$ is algebraizable with proper support. The empty space and the zero system are immediate. If $P(0)$ fails, the ascending chain condition gives a maximal ideal $L$ for which $P(L)$ fails. By the closed-adic dictionary replace $Y$ by $V(L)$; its coherent modules and systems are precisely those killed by $L$ on the old space, and proper support is preserved. Every nonzero quasi-coherent ideal of this quotient corresponds to an ideal $L'\\supsetneq L$, so $P(L')$ holds by maximality. The algebraization it gives lies on $V(L')$: let $M'$ be killed by $L'$ and $F$ coherent with proper support with $\\widehat F_J\\simeq M'$. Then $L'(F/J^nF)=0$, so $L'F\\subseteq J^nF$ for all $n$. The quotient $\\pi:F\\to F'=F/L'F$ is killed by the ideal of a proper carrier of $F$, so it has that carrier by the closed-adic dictionary, and $F'/J^nF'=F/(L'F+J^nF)=F/J^nF$; thus $\\widehat\\pi$ is the identity on each level. Step 2 gives $\\sigma:F'\\to F$ with $\\widehat\\sigma=\\widehat\\pi^{-1}$, and injectivity of the step-2 bijection gives $\\sigma\\pi=1$ and $\\pi\\sigma=1$. Hence $L'F=0$, and the closed-adic dictionary puts $F$ and the isomorphism on $V(L')$. Full faithfulness on this quotient and on all its closed subspaces is already step 2. Fix a proper-support system $M$ on this quotient; algebraizing it will contradict the choice of $L$.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-sfb-space-closed-adic-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BE, maximal bad ideal and replacement by its closed subspace."
+   }
+  },
+  {
+   "text": "For this nonempty quotient $Y$, the dense-open Chow modification supplies $q:V\\to Y$, with $V$ a Noetherian scheme immersed over $A$ into finite projective space, and $q$ an isomorphism over a dense open $U$. The tensor pullback system $q^*M$ is a coherent $I\\mathcal O_V$-system because tensor pullback of a finite presentation remains a finite presentation: it preserves the finite free terms and their cokernel; quotient transitions are preserved by associativity of tensor product. Its first term has support proper over $A$. Let $c:C\\hookrightarrow Y$ be a proper closed carrier of $M_1$ with ideal $K_C$, so $K_CM_1=0$. Let $V_C=V\\times_YC\\hookrightarrow V$ be the base-changed closed immersion. Its ideal is $K_C\\mathcal O_V$: on etale charts, the base change of $\\operatorname{Spec}(R/K)\\to\\operatorname{Spec}R$ along $R\\to B$ is $\\operatorname{Spec}(B/KB)$. Sections of $q^{-1}K_C$ act by zero on $q^{-1}M_1$, so $K_C\\mathcal O_V$ kills $q^*M_1$. Base change makes $V_C\\to C$ proper, and proper composition makes $V_C\\to\\operatorname{Spec}A$ proper. After the Zariski--etale passage below, the scheme proper-support criterion (a closed subscheme proper over $A$ whose ideal kills the module) shows that $\\operatorname{Supp}(q^*M_1)$ is proper over $A$. By the support-pullback formula this support is $|q|^{-1}(\\operatorname{Supp}M_1)$. Use the scheme Zariski--etale equivalence termwise, including its natural tensor-pullback comparison, to regard $q^*M$ as a Zariski coherent formal system on the actual scheme $V$. Apply new-chow-algebraization-core with its scheme $Z=V$, its proper map the identity of $V$, and the immersion just obtained. It gives a coherent $E$ on $V$ with proper support over $A$ and a compatible isomorphism $\\beta:q^*M\\simeq\\widehat E$. Bring $E$ and $\\beta$ back through the same scheme-site equivalence. No assertion that $Y$ is a scheme is used.",
+   "uses": [
+    "lem-sfb-space-chow-dense-modification",
+    "def-sfb-space-coherent-adic-system",
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-sfb-space-finite-type-support-pullback",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-proper-composition",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "new-chow-algebraization-core",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BE, Chow and projective algebraization paragraphs, reusing the existing scheme compactification/algebraization input."
+   }
+  },
+  {
+   "text": "Let $K$ cut out the reduced closed complement $Y\\setminus U$; existence of this closed subspace and its quasi-coherent ideal is the closed-support convention. Its restriction to $U$ is the unit ideal. Since $U$ is dense in nonempty $Y$, it is nonempty, so $K^e\\ne0$ for every $e\\geq1$ (its stalk on $U$ is the unit ideal). Step 3 therefore algebraizes every proper-support system killed by $K^e$ by a coherent module killed by $K^e$. The closed-adic dictionary and step 2 upgrade this to an equivalence for completion on every $V(K^e)$: essential surjectivity is step 3 and full faithfulness is step 2.",
+   "uses": [
+    "lem-sfb-space-closed-adic-dictionary",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BE, final paragraph: the exceptional ideal and the induction hypothesis on its powers."
+   }
+  },
+  {
+   "text": "Set $H=q_*E$. Proper coherent higher images makes $H$ coherent. To check its proper support rather than assume it: through the scheme-site equivalence, $E$ is a coherent Zariski module on the scheme $V$ with support proper over $A$. The scheme proper-support criterion gives a closed subscheme $c_E:C_E\\hookrightarrow V$, proper over $A$, whose ideal $K_E$ kills $E$. Apply the proper schematic-image theorem to $q\\circ c_E:C_E\\to Y$ over $\\operatorname{Spec}A$. The target morphism is separated and locally of finite type, so $qc_E$ factors through a closed subspace $z:Z\\hookrightarrow Y$ proper over $A$. Let $K_Z$ be the ideal of $Z$. The factorization means $q^\\sharp(K_Z)\\subseteq K_E$. By the defining chart-limit description of $q_*$, a local section $a$ of $K_Z$ acts on each chart value $E(T)$ through $q^\\sharp(a)$, hence by zero: $K_ZH=0$. The closed-adic dictionary writes $H\\simeq z_*Q$ with $Q$ coherent on $Z$. Thus $Z$ is a proper closed carrier of $H$, and $H$ has proper support over $A$.",
+   "uses": [
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-sfb-space-proper-schematic-image",
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-closed-adic-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BE, last paragraph: coherence and proper support of the comparison target."
+   }
+  },
+  {
+   "text": "The modification comparison applied to $q$, $J$, $K$, $M$, $E$ and $\\beta$ gives $a:M\\to\\widehat H_J$ with uniformly $K$-power-annihilated component kernels and cokernels. Its hypotheses hold: $q$ is representable proper, both spaces are Noetherian, and $q$ is an isomorphism over $Y\\setminus V(K)=U$. Step 6 gives proper support of $H$; step 5 gives the completion equivalence on every $V(K^e)$. These are exactly the hypotheses of bounded-exceptional-torsion devissage. It yields a coherent $F$ with proper support and $\\widehat F_J\\simeq M$, contradicting the chosen maximal failure. Consequently there is no bad ideal and every proper-support system on the original $Y$ is algebraizable.",
+   "uses": [
+    "lem-sfb-space-adic-modification-push-pull",
+    "lem-sfb-space-adic-torsion-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BE, final application of Tags 08BD and 08BC."
+   }
+  },
+  {
+   "text": "Full faithfulness from step 2 and essential surjectivity from step 7 give the required equivalence: choose an algebraization and a compatible isomorphism for each system; lift each morphism uniquely by the Hom bijection. Injectivity of that bijection proves the identity and composition laws and the naturality of the chosen isomorphisms. The closed-adic dictionary of step 1 identifies these isomorphisms with all the specified adjacent tensor restrictions. No step assumed flatness of the spaces or modules.",
+   "uses": [
+    "lem-sfb-space-closed-adic-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BF: return from coherent adic systems to the stated categories."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-noetherian-coherent-acc",
+  "lem-sfb-space-closed-adic-dictionary",
+  "def-sfb-space-coherent-adic-system",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-space-proper-cancellation",
+  "lem-sfb-space-completion-internal-hom",
+  "lem-sfb-space-proper-coherent-higher-images",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-sfb-space-affine-formal-functions",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-chow-dense-modification",
+  "lem-sfb-space-finite-type-support-pullback",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "new-chow-algebraization-core",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-sfb-space-proper-schematic-image",
+  "lem-sfb-space-adic-modification-push-pull",
+  "lem-sfb-space-adic-torsion-devissage"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 08BE (theorem-grothendieck-existence), 08BF (remark-reformulate-existence-theorem), and 08B9 (lemma-fully-faithful); existing scheme Chow algebraization reused in the projective pullback subargument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck existence equivalence for finitely presented quasi coherent modules with proper support on a separated finite type algebraic space over a complete Noetherian ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the module-sheaf hits define finite presentation or quasi-coherence, without proper-support algebraization or an equivalence of adic systems."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraization of compatible coherent sheaves with proper support on infinitesimal thickenings of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) : IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the module-sheaf hits define finite presentation or quasi-coherence, without proper-support algebraization or an equivalence of adic systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the module-sheaf hits define finite presentation or quasi-coherence, without proper-support algebraization or an equivalence of adic systems."
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*existence|coherent.*proper.*support|algebrai[sz].*coherent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the module-sheaf hits define finite presentation or quasi-coherence, without proper-support algebraization or an equivalence of adic systems.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck existence equivalence for finitely presented quasi coherent modules with proper support on a separated finite type algebraic space over a complete Noetherian ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation/quasi-coherence definitions only; none algebraizes proper-support systems on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraization of compatible coherent sheaves with proper support on infinitesimal thickenings of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) : IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation/quasi-coherence definitions only; none algebraizes proper-support systems on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation/quasi-coherence definitions only; none algebraizes proper-support systems on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck.*existence|coherent.*proper.*support|algebrai[sz].*coherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation/quasi-coherence definitions only; none algebraizes proper-support systems on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-formal-effectivity",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W9 (lemma-coherent-existence), Situation 08KB (situation-coherent). Subargument in quot.tex Tag 08W9: the fixed-base Grothendieck-existence equivalence in the second paragraph.",
+   "via": [
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-supported-adic-existence",
+  "worker": "stage1",
+  "group": "Q73",
+  "summary": "Retained the complete finite-presentation, closed-carrier and nonflat statement. Split Stacks 08BE/08BF into the coherent-system dictionary, Hom/formal-functions full faithfulness, maximal-bad-ideal induction, Chow pullback algebraization using the existing scheme core, and the 08BD/08BC comparison and devissage. Seven new supporting nodes; no new Mathlib leaf.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W9 (lemma-coherent-existence), Situation 08KB (situation-coherent). Subargument in quot.tex Tag 08W9: the fixed-base Grothendieck-existence equivalence in the second paragraph. The source implementation is 08BE first paragraph (steps 1-2), maximal bad ideal (3), Chow/projective pullback (4), exceptional thickenings (5), proper support (6), and comparison/devissage (7), returned to 08BF in step 8. The inherited from.node is null, matching blueprint_refs ancestor; no new blueprint identity is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "why": "Generic A finite module over a Noetherian ring complete along an ideal is complete used for the proper-support Grothendieck-existence subargument; the inherited unit supplies no alternative for this foundational operation."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially used for the proper-support Grothendieck-existence subargument; the inherited unit supplies no alternative for this foundational operation."
+   },
+   {
+    "node": "new-chow-algebraization-core",
+    "why": "Generic Core coherent algebraization on a fixed projective modification used for the proper-support Grothendieck-existence subargument; the inherited unit supplies no alternative for this foundational operation."
+   },
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "Generic Canonical etale module functors of algebraic spaces used for the proper-support Grothendieck-existence subargument; the inherited unit supplies no alternative for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-module-support-proper-over-base",
+    "why": "Generic scheme criterion (Stacks 0CYS) that a finite type module has support proper over the base iff a proper closed subscheme's ideal kills it; used on the Chow scheme V in steps 4 and 6, where no node of the unit states it for schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "new-chow-algebraization-core",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-module-support-proper-over-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-c4d2e5b8d",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-c4d2e5b8d (reviewer sub-agent of L); spot-checked: The split follows Stacks 08BE/08BF (spaces-more-morphisms section-existence-proper), read in full together with 08B6, 08B9, 08BA, 08BC, 08BD and Chow 088U. The item statement is unchanged and faithful to 08BF, with no weakening and no flatness hypothesis. The 7 new nodes are true, statement-only and self-contained: the Coh(X,I) definition; 07UB/07UJ/04ZK; the 08AM adic dictionary; 08B6; 088U; 08BD; 08BC. None restates an item clause, and none duplicates an existing node: the existing 08BC/08BD/08B6 nodes are scheme lemma-weil-pbc nodes. Three repairable faults, fixed in the item's proof only. (1) C1/C4: steps 1, 2 and 4 went from a support set to a proper carrier, which needs |Z_M| = Supp M or 0CZI(1)<=>(2) for spaces; no node states this. I replaced it with annihilator arguments through lem-sfb-space-closed-adic-dictionary: Hom(F,G) is killed by the carrier ideal of F, and K_C O_V kills q^*M_1. Step 4 now cites the scheme criterion lem-weil-pbc-module-support-proper-over-base (0CYS). (2) Step 6 picked a carrier for E without citing the scheme criterion, and ended on the same support-set gap. It now cites 0CYS and the schematic image 0AGD to get q^#(K_Z) in K_E, hence K_Z q_*E = 0, and the dictionary then gives the carrier. (3) D5: steps 3/5 never showed that the algebraization of a system killed by L' is itself killed by L'. This is needed for V(K^e) and for the devissage. I added the argument: L'F is in J^nF for all n, F -> F/L'F completes to the identity, and step-2 full faithfulness makes it an isomorphism. Tool uses accepted: 00MA completeness, the 03DX Zariski-etale equivalence, new-chow-algebraization-core (088E) and the etale module functors definition; I added 0CYS. Batch-5 check: every flagged trf/pod citation is a definition or a Stacks foundation (sk-i-curve-zero descent and space basics, the sk-lem-finite lisse lemmas). There is no trace-formula or Poincare-duality step and no nt-*/sk-thm-trace node in the closure, so the citations are legitimate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSupportedAdicExistence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestriction_isEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SupportedAdicProperSupport",
+   "AlgebraicGeometry.AlgebraicSpace.SupportedAdicModules",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicBase",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicTest",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicQuotientStep",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicBaseStep_w",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicBaseStep",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicTestStep_w",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicTestStep",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicThickening",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicProjection",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicStep",
+   "AlgebraicGeometry.AlgebraicSpace.SupportedAdicFamilies",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicShift",
+   "AlgebraicGeometry.AlgebraicSpace.IsSupportedAdicSystem",
+   "AlgebraicGeometry.AlgebraicSpace.SupportedAdicSystems",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestrictionFamily",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestrictionIso",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestrictionObject",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestrictionMap_w",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestrictionMap",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestrictionLaws",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestrictionAmbient",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestriction_admissible",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.supportedAdicRestriction_isEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSupportedAdicExistence.lean",
+  "statement": "theorem supportedAdicRestriction_isEquivalence [IsNoetherianRing A] [IsAdicComplete I A] (hsep : MapIsSeparated p) (hft : MapIsFiniteType p) : (supportedAdicRestriction a I p).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two categories and the canonical tensor restriction functor explicitly introduced in this node are constructed in this module. Systems use Mathlib Endofunctor.Algebra on the dependent product of the actual thickening module categories; invertible structure maps are precisely the adjacent restriction isomorphisms. Proper support uses the closed-carrier convention from ProperQuotient.properSupport, with no flatness. All definitions contain real data, and named proof obligations establish only their required triangle, naturality, functoriality and admissibility properties. Index n is positive level n+1. No statement correction or dependency-interface repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d9a84b49",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery of 951f9080f471 (returned H2). Lean byte-identical; the node diff vs side-live is only the new lean record plus the two requested landed stmt_deps (def-sfb-space-module-tensor-composition, def-trf-scheme-algebraic-space), with no cycle; proof and proof_deps unchanged. All statement declarations are owned by cited nodes (algebraic-space, etale-module-functors, proper-quot-functor, morphism-properties, scheme-algebraic-space, module-tensor-composition) or Mathlib. H3 clause match is complete: IsNoetherianRing + IsAdicComplete; separated + finite type; Y_n via properQuotFibre at level n+1; closed-carrier proper support as in ProperQuotient.properSupport with no flatness; D is the qc ∧ fp ∧ support full subcategory; D-hat is Endofunctor.Algebra with iso structure maps and level-1 support over Spec(A/I); the functor uses the pinned moduleTensorComposition; the conclusion is IsEquivalence of the specified functor. Edge cases are OK. The statement is verbatim. No hollow defs; docstrings and all 8 proof steps present; report sections present. No compile needed (no file changed)."
+ }
+}

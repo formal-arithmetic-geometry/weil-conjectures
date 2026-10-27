@@ -1,0 +1,352 @@
+{
+ "id": "lem-trf-normalized-projective-closure",
+ "kind": "statement",
+ "title": "Normalization of a specified projective closure of an affine curve",
+ "statement": "Let $k$ be a perfect field, meaning that every algebraic extension of $k$ is separable [def-weil-field]. Let $U$ be an affine integral scheme of finite type over $k$ with $\\dim U=1$ [def-weil-affine-spectrum, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension], and fix a closed immersion $i:U\\hookrightarrow\\mathbb A^n_k$ over $k$ for some $n\\ge0$ [def-weil-closed-immersion, def-nagata-relative-affine-space]. Use the standard affine chart $D_+(T_0)\\cong\\mathbb A^n_k$ of $\\mathbb P^n_k$ from the relative-Proj interface [def-nagata-relative-projective-space], with the same projective space over $k$ as in [def-nagata-projective-space-base-change], and let $X$ be the scheme-theoretic closure of the composite immersion $U\\to\\mathbb P^n_k$ [def-nagata-scheme-theoretic-closure]. Then $X$ is integral, projective over $k$, and of dimension one [def-kun-projective], and the factorization $j:U\\hookrightarrow X$ is a dense open immersion [def-weil-open-immersion]. Let $\\nu:C=X^\\nu\\to X$ be normalization in $k(X)$ [def-sc-normalization]. Then $C$ is integral, smooth, proper and of finite type over $k$, with $\\dim C=1$ [def-sbc-smooth-morphisms, def-weil-proper-morphism]. The maps $j$ and $\\nu$ send generic points to generic points and induce $k$-isomorphisms $j^*:k(X)\\xrightarrow{\\sim}k(U)$ and $\\nu^*:k(X)\\xrightarrow{\\sim}k(C)$ of the generic stalks [def-sc-function-field]. Thus $j^*\\circ(\\nu^*)^{-1}:k(C)\\xrightarrow{\\sim}k(U)$ is a $k$-isomorphism for these specified constructions.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (theorem-curves-rational-maps), final compactify-then-normalize alternative, and Tag 0BY3 (lemma-nonsingular-model-smooth). Reducedness of the actual scheme-theoretic closure: literature/stacks-project/morphisms.tex, Tag 056B (lemma-scheme-theoretic-image-reduced)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-closed-immersion",
+  "def-nagata-relative-affine-space",
+  "def-nagata-relative-projective-space",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-theoretic-closure",
+  "def-kun-projective",
+  "def-weil-open-immersion",
+  "def-sc-normalization",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-sc-function-field"
+ ],
+ "proof": [
+  {
+   "text": "$\\operatorname{Spec}k$ is Noetherian: its only affine section ring is the field $k$, whose ideals are $0$ and $k$. Apply [det-nagata-affine-opens-projective] to the given affine $U$, finite-type structure morphism, and closed immersion $i$ (in particular an immersion). Its construction uses precisely the standard affine chart in the statement, so its $\\overline U$ is the specified $X$. It gives projectivity, properness, and the dense open immersion $j:U\\to X$. Properness includes finite type by [def-weil-proper-morphism].",
+   "uses": [
+    "det-nagata-affine-opens-projective",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (theorem-curves-rational-maps), final compactify-then-normalize alternative; specified closure supplied by det-nagata-affine-opens-projective"
+   }
+  },
+  {
+   "text": "By [def-pc-integral-scheme], $U$ is nonempty, reduced and irreducible. Apply [lem-trf-reduced-scheme-image] to $U\\to\\mathbb P^n_k$: the specified $X$ is reduced and its underlying space is the closure of the image of $U$. This closure is nonempty and irreducible: any two opens meeting it pull back to nonempty opens of $U$, whose intersection is nonempty. Thus $X$ is integral by [def-pc-integral-scheme].",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-trf-reduced-scheme-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056B (lemma-scheme-theoretic-image-reduced); integrality criterion Tag 01ON (properties-lemma-characterize-integral)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-integral-locally-algebraic-opens-dimension] to the integral finite-type $k$-scheme $X$ and its nonempty open $j(U)\\cong U$. It gives $\\dim X=\\dim U=1$.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), part (3)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-normalization-exists] to this $X$: $\\nu$ is finite and surjective, $C$ is proper, and $\\dim C=\\dim X=1$; properness includes finite type by [def-weil-proper-morphism]. Put $K=k(X)$ with generic point $\\eta$. By [def-fin-normalization-extension] with $L=K$ (which is [def-sc-normalization]), every nonempty affine open $V=\\operatorname{Spec}A\\subseteq X$ has $\\nu^{-1}V=\\operatorname{Spec}A'$, $A'$ the integral closure of $A$ in $K$. By [lem-sc-integral-function-field-affine-fraction], $A$ is a domain with fraction field $K$ (via germs), so $A\\subseteq A'\\subseteq K$ and $A'$ is a domain with fraction field $K$. So $\\nu^{-1}V$ is irreducible, nonempty ($\\nu$ surjective), with generic point $\\xi_V=(0)$, and $\\nu(\\xi_V)=\\eta$ as $(0)\\cap A=(0)$. If $V'\\subseteq V$ are nonempty affine opens, the nonempty open $\\nu^{-1}V'$ of the irreducible $\\nu^{-1}V$ contains $\\xi_V$, so $\\xi_{V'}=\\xi_V$. Any two nonempty affine opens of the irreducible $X$ contain a common one, so all $\\xi_V$ are one point $\\xi$, lying in every nonempty open of $C$. Hence $C$ is nonempty, irreducible and reduced (covered by spectra of domains): integral by [def-pc-integral-scheme], with generic point $\\xi$ over $\\eta$. By [lem-sc-integral-function-field-affine-fraction] for $C$ and $\\nu^{-1}V$, $k(C)=\\mathcal O_{C,\\xi}=\\operatorname{Frac}A'$. The stalk map $\\nu^*:\\mathcal O_{X,\\eta}\\to\\mathcal O_{C,\\xi}$ is compatible with the germ maps and $A\\subseteq A'$, so it is the map $\\operatorname{Frac}A\\to\\operatorname{Frac}A'$ induced by inclusion, i.e. the identity of $K$: an isomorphism.",
+   "uses": [
+    "lem-sc-normalization-exists",
+    "def-weil-proper-morphism",
+    "def-fin-normalization-extension",
+    "def-sc-normalization",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035H (definition-normalization-X-in-Y) and 0BXC (lemma-normalization-birational); affine description of normalization; generic stalk computation written out"
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sc-normalized-curve-smooth] now hold: $X$ is integral, finite type over the perfect field $k$, and has dimension one. It gives smoothness of the specified $C=X^\\nu$ over $k$.",
+   "uses": [
+    "lem-sc-normalized-curve-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY3 (lemma-nonsingular-model-smooth), following Tag 0BY1 normalization alternative"
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-sober], $U$ and $X$ have unique generic points. The generic point of $U$ belongs to every nonempty open of $U$; since $j(U)$ is dense open, its image meets every nonempty open of $X$, and is therefore the generic point of $X$. By [def-weil-open-immersion], $U$ has the restricted structure sheaf of $X$. Opens contained in $j(U)$ are cofinal among neighbourhoods of its generic point, so the actual stalk map $j^*$ is an isomorphism: both stalks are the same colimit of sections on those neighbourhoods. This is the function-field map by [def-sc-function-field]. For $\\nu$, Step 4 showed that $\\nu$ sends the generic point $\\xi$ of $C$ to the generic point $\\eta$ of $X$ and that the generic-stalk map $\\nu^*:k(X)\\to k(C)$ is an isomorphism.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-weil-open-immersion",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01RW (definition-function-field), 01RO (definition-birational) and 0BXC (lemma-normalization-birational); open-stalk argument from the definition of open immersion"
+   }
+  },
+  {
+   "text": "Both morphisms are over $k$. On generic stalks, functoriality therefore gives $j^*(a\\cdot1)=a\\cdot1$ and $\\nu^*(a\\cdot1)=a\\cdot1$ for every $a\\in k$. Applying the inverse of $\\nu^*$ gives the same equality for $(\\nu^*)^{-1}$. Consequently $j^*\\circ(\\nu^*)^{-1}:k(C)\\to k(U)$ is a $k$-isomorphism for these specified maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY1 (theorem-curves-rational-maps), induced maps of function fields over k"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-nagata-affine-opens-projective",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "lem-trf-reduced-scheme-image",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-sc-normalization-exists",
+  "lem-sc-normalized-curve-smooth",
+  "lem-sc-scheme-sober",
+  "def-weil-open-immersion",
+  "def-sc-function-field",
+  "def-fin-normalization-extension",
+  "def-sc-normalization",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0BY1 (theorem-curves-rational-maps), final compactify-then-normalize alternative, and 0BY3 (lemma-nonsingular-model-smooth); closure reducedness 056B; dimension 0A21; normalization 0BXR, 0BXC; integrality and generic stalk of the normalization from its affine description. Elementary generic-stalk and scalar checks written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactif|projective.*closure|closure.*projective",
+   "results": "{\"t\": \"2026-10-22T07:35:22Z\", \"tool\": \"grep\", \"query\": \"compactif|projective.*closure|closure.*projective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\"], \"digest\": \"c5d2ecb60f7475bd\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic closure of an integral affine variety in projective space is integral of the same dimension and has the same function field",
+   "results": "{\"t\": \"2026-10-22T07:35:23Z\", \"tool\": \"leansearch\", \"query\": \"The scheme theoretic closure of an integral affine variety in projective space is integral of the same dimension and has the same function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"ProjectiveSpectrum.vanishingIdeal_closure\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"ProjectiveSpectrum.zeroLocus_vanishingIdeal_eq_closure\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"9ea3a1c861c71628\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProjective",
+   "results": "{\"t\": \"2026-10-22T07:35:23Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsProjective'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: query identifier not recognized by Loogle; other recorded searches supply the no-match assessment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral affine finite type scheme over a field has an integral projective completion of the same dimension with a dense open immersion inducing an isomorphism of function fields",
+   "results": "{\"t\": \"2026-10-22T07:35:32Z\", \"tool\": \"leanfinder\", \"query\": \"An integral affine finite type scheme over a field has an integral projective completion of the same dimension with a dense open immersion inducing an isomorphism of function fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"2b2f8c65283f71f0\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProjectiveHom",
+   "results": "{\"t\": \"2026-10-22T07:36:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsProjectiveHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsProjectiveHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "unavailable: query identifier not recognized by Loogle; other recorded searches supply the no-match assessment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a projective compactification of an affine integral variety preserving dimension and rational function field",
+   "results": "{\"t\": \"2026-10-22T07:36:31Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of a projective compactification of an affine integral variety preserving dimension and rational function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"ddae0c3e9ed9bd0c\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|[Pp]erfect[Ff]ield",
+   "results": "{\"t\": \"2026-10-22T07:37:22Z\", \"tool\": \"grep\", \"query\": \"normalization|[Pp]erfect[Ff]ield\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"d220230665f0bd6c\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of the projective closure of an affine integral curve over a perfect field is smooth proper integral of dimension one with the same function field",
+   "results": "{\"t\": \"2026-10-22T07:37:22Z\", \"tool\": \"leansearch\", \"query\": \"Normalization of the projective closure of an affine integral curve over a perfect field is smooth proper integral of dimension one with the same function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\"], \"digest\": \"1f7a24ad1ea4cede\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "{\"t\": \"2026-10-22T07:37:22Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.Scheme.Hom.normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\"], \"digest\": \"4d5f27beaecd7cf5\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let U be an integral affine curve over a perfect field. The normalization of its scheme theoretic projective closure is a smooth proper integral curve with the same generic local ring as U",
+   "results": "{\"t\": \"2026-10-22T07:37:24Z\", \"tool\": \"leanfinder\", \"query\": \"Let U be an integral affine curve over a perfect field. The normalization of its scheme theoretic projective closure is a smooth proper integral curve with the same generic local ring as U\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.integralModel\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"e81eb7336d7f6529\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect ground field, take an affine integral one dimensional finite type scheme, its projective closure and then normalization; the result is smooth proper and birational to the affine scheme",
+   "results": "{\"t\": \"2026-10-22T07:40:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a perfect ground field, take an affine integral one dimensional finite type scheme, its projective closure and then normalization; the result is smooth proper and birational to the affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"f941c47c86c62244\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, PerfectField",
+   "results": "{\"t\": \"2026-10-22T07:42:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, PerfectField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No full match: projective Proj properness and relative normalization exist, but the searches do not give smoothness of this normalized projective closure or the complete stated construction. Loogle identifier errors are recorded in the exact log. Read Normalization.lean:15-24, 348-359 and 581-633: the Smooth normalization instance concerns base change, not smoothness of a normal curve over a perfect field. ProjectiveSpectrum/Topology.lean:312-325 concerns vanishing ideals, not scheme compactifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|[Pp]rojective[Cc]losure",
+   "results": "{\"t\": \"2026-10-23T09:49:08Z\", \"tool\": \"grep\", \"query\": \"normalization|[Pp]rojective[Cc]losure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"d3a37eb2d6b30722\"}; Read Mathlib/AlgebraicGeometry/Normalization.lean:340-366 and 581-633. Relative normalization integrality and smooth base-change compatibility do not state smoothness of a normalized curve or this specified projective closure package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral affine curve over a perfect field has a smooth proper normalization of its projective closure with canonical isomorphic function fields",
+   "results": "{\"t\": \"2026-10-23T09:49:08Z\", \"tool\": \"leansearch\", \"query\": \"An integral affine curve over a perfect field has a smooth proper normalization of its projective closure with canonical isomorphic function fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"f39eabed537becb4\"}; Read Mathlib/AlgebraicGeometry/Normalization.lean:340-366 and 581-633. Relative normalization integrality and smooth base-change compatibility do not state smoothness of a normalized curve or this specified projective closure package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Smooth",
+   "results": "{\"t\": \"2026-10-23T09:49:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\"], \"digest\": \"4d5f27beaecd7cf5\"}; Read Mathlib/AlgebraicGeometry/Normalization.lean:340-366 and 581-633. Relative normalization integrality and smooth base-change compatibility do not state smoothness of a normalized curve or this specified projective closure package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization in its function field of the specified scheme theoretic projective closure of an affine integral curve over a perfect field is smooth proper integral one dimensional and has the same function field",
+   "results": "{\"t\": \"2026-10-23T09:49:12Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization in its function field of the specified scheme theoretic projective closure of an affine integral curve over a perfect field is smooth proper integral one dimensional and has the same function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.FunctionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"WeierstrassCurve.integralModel\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"1057b65743a58664\"}; Read Mathlib/AlgebraicGeometry/Normalization.lean:340-366 and 581-633. Relative normalization integrality and smooth base-change compatibility do not state smoothness of a normalized curve or this specified projective closure package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a closed embedding of an affine integral curve in affine space over a perfect field, its closure in projective space is integral and normalization is a smooth proper birational curve",
+   "results": "{\"t\": \"2026-10-23T09:54:05Z\", \"tool\": \"leanfinder\", \"query\": \"Given a closed embedding of an affine integral curve in affine space over a perfect field, its closure in projective space is integral and normalization is a smooth proper birational curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"5aacdfecfa894256\"}; Read Mathlib/AlgebraicGeometry/Normalization.lean:340-366 and 581-633. Relative normalization integrality and smooth base-change compatibility do not state smoothness of a normalized curve or this specified projective closure package.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algclosed-curve-model",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting input to lem-trf-local-term-locality in the inherited Temkin branch: old steps 3--4 and 6 of lem-trf-algclosed-curve-model, projective scheme-theoretic closure, integrality, properness, normalization and its generic-stalk identification and smoothness.",
+   "via": [
+    "lem-trf-algclosed-curve-model",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normalized-projective-closure",
+  "worker": "stage1",
+  "summary": "Assembled the specified closure and normalization using existing nodes only. Checked integral closure reducedness, finite-type dimension comparison, finiteness and properness of normalization, its integrality and actual induced generic-stalk map (written out from the affine description of the normalization; review FIX 2026-10-23 removed the dropped-route node lem-per-finite-curve-normalization-regular), smoothness over a perfect field, and k-linearity. Statement unchanged; no new nodes.",
+  "blueprint": "Supporting geometric input to lem-trf-local-term-locality in the inherited Temkin branch: projective closure, normalization, and generic-stalk identifications extracted through lem-trf-algclosed-curve-model. Follows its compactify-then-normalize route.",
+  "tool_uses": [
+   {
+    "node": "det-nagata-affine-opens-projective",
+    "why": "Generic specified affine-piece projective compactification, used with base Spec k; this unit has no independent projective closure construction."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic dimension invariance for nonempty opens of integral locally algebraic schemes, needed to check dimension of the chosen closure."
+   },
+   {
+    "node": "lem-sc-normalization-exists",
+    "why": "Generic finite-type normalization theorem supplies finiteness, properness, dimension and birationality for this specified closure."
+   },
+   {
+    "node": "lem-sc-normalized-curve-smooth",
+    "why": "Generic normalization smoothness over a perfect field; specializes the prescribed compactify-then-normalize route without changing any cohomological route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-nagata-affine-opens-projective",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-sc-normalization-exists",
+  "lem-sc-normalized-curve-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-a79c09097",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-a79c09097 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps against the cited statements and against Stacks 0BY1 (the compactify-then-normalize remark), 0BY3, 056B, 01RO, 035H and 0BXC. There are no new nodes and the statement and stmt_deps are unchanged. Steps 1-3, 5 and 7 are correct. Step 1: det-nagata-affine-opens-projective applies with S=Spec k, its scheme-theoretic image is the item's closure, and its projectivity implies def-kun-projective. Step 2: integrality via reduced image plus an elementary irreducibility argument. Step 3: dimension via the locally-algebraic opens lemma. Step 5: smoothness keeps the perfect-field hypothesis. Edge cases checked: n=0 is vacuous, A^1 gives P^1, the cusp gives C=P^1, non-geometrically-integral U is fine, and imperfect k is excluded where it matters. No SGA anywhere. Mechanical finding: Step 4 cited lem-per-finite-curve-normalization-regular, a Q08 node on the route dropped on 2026-10-19 (via lem-per-qbar-middle-tstructure). It was used only for a generic fact, integrality of C and the iso nu*, but a dropped node cannot stay cited. FIX: Step 4 now proves both facts itself. By def-fin-normalization-extension (L=K) and lem-sc-integral-function-field-affine-fraction, nu^{-1}(Spec A)=Spec A' with A' the integral closure of A in K, so A ⊆ A' ⊆ K. The affine pieces share one generic point, so C is integral, and nu* is the identity of K. Step 6 now uses Step 4 for nu instead of an unstated meaning of 'birational'. Removed lem-per-finite-curve-normalization-regular and lem-weil-pbc-finite-type-over-noetherian from proof_deps; added def-fin-normalization-extension, def-sc-normalization and lem-sc-integral-function-field-affine-fraction. Removed the matching tool_uses entry. Accepted tool_uses: det-nagata-affine-opens-projective, lem-sc-integral-locally-algebraic-opens-dimension, lem-sc-normalization-exists, lem-sc-normalized-curve-smooth. Fixed file: fixes/dag/nodes/sec-trace-formula/lem-trf-normalized-projective-closure.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedProjectiveClosure",
+  "declaration": "AlgebraicGeometry.normalized_projective_closure",
+  "declarations": [
+   "AlgebraicGeometry.NormalizedProjectiveClosure.embedding",
+   "AlgebraicGeometry.NormalizedProjectiveClosure.scheme",
+   "AlgebraicGeometry.NormalizedProjectiveClosure.ι",
+   "AlgebraicGeometry.NormalizedProjectiveClosure.toBase",
+   "AlgebraicGeometry.normalized_projective_closure"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedProjectiveClosure.lean",
+  "statement": "theorem normalized_projective_closure {k : Type u} [Field k] [PerfectField k] {U : Scheme.{u}} (p : U ⟶ Spec (.of k)) [IsAffine U] [IsIntegral U] [LocallyOfFiniteType p] [QuasiCompact p] (hdim : topologicalKrullDim U = 1) (n : ℕ) (i : U ⟶ 𝔸(ULift.{u} (Fin n); Spec (.of k))) [IsClosedImmersion i] (hi : i ≫ (𝔸(ULift.{u} (Fin n); Spec (.of k)) ↘ Spec (.of k)) = p) : ∃ _hX : IsIntegral (scheme n i), IsHProjective (toBase n i) ∧ topologicalKrullDim (scheme n i) = 1 ∧ IsOpenImmersion (ι n i) ∧ DenseRange (ι n i) ∧ ∃ _hC : IsIntegral (scheme n i).normalization, Smooth ((scheme n i).fromNormalization ≫ toBase n i) ∧ IsProper ((scheme n i).fromNormalization ≫ toBase n i) ∧ LocallyOfFiniteType ((scheme n i).fromNormalization ≫ toBase n i) ∧ QuasiCompact ((scheme n i).fromNormalization ≫ toBase n i) ∧ topologicalKrullDim (scheme n i).normalization = 1 ∧ ∃ (hj : (ι n i) (genericPoint U) = genericPoint (scheme n i)) (hν : (scheme n i).fromNormalization (genericPoint (scheme n i).normalization) = genericPoint (scheme n i)), ∃ (ej : (scheme n i).functionField ≅ U.functionField) (eν : (scheme n i).functionField ≅ (scheme n i).normalization.functionField), ej.hom = (ι n i).functionFieldMap hj ∧ eν.hom = (scheme n i).fromNormalization.functionFieldMap hν ∧ ((Scheme.ΓSpecIso (.of k)).inv ≫ (toBase n i).appTop ≫ (scheme n i).presheaf.germ ⊤ (genericPoint (scheme n i)) trivial) ≫ ej.hom = (Scheme.ΓSpecIso (.of k)).inv ≫ p.appTop ≫ U.presheaf.germ ⊤ (genericPoint U) trivial ∧ ((Scheme.ΓSpecIso (.of k)).inv ≫ (toBase n i).appTop ≫ (scheme n i).presheaf.germ ⊤ (genericPoint (scheme n i)) trivial) ≫ eν.hom = (Scheme.ΓSpecIso (.of k)).inv ≫ ((scheme n i).fromNormalization ≫ toBase n i).appTop ≫ (scheme n i).normalization.presheaf.germ ⊤ (genericPoint (scheme n i).normalization) trivial ∧ ((Scheme.ΓSpecIso (.of k)).inv ≫ ((scheme n i).fromNormalization ≫ toBase n i).appTop ≫ (scheme n i).normalization.presheaf.germ ⊤ (genericPoint (scheme n i).normalization) trivial) ≫ (eν.symm ≪≫ ej).hom = (Scheme.ΓSpecIso (.of k)).inv ≫ p.appTop ≫ U.presheaf.germ ⊤ (genericPoint U) trivial",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The closure is the canonical image of the given embedding followed by the published coordinate chart T_i/T_0, in the base-change realization of projective space. The four abbreviations only name these specified constructions. The existential IsIntegral witnesses are conclusions needed to type the canonical normalizations and generic stalks, not additional hypotheses. The two function-field isomorphisms equal the actual functionFieldMap maps; commutative scalar diagrams express k-linearity, including for their composite."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c981e682",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read item node, all 16 stmt_dep records, report (Worker report + Second reading by Q77 present), module, and upstream decls (toRelativeProjectiveSpace = T_i/T_0 chart onto D+(T0) of base-change P(Option n;S); Scheme.normalization in k(X) needs IsIntegral, supplied by existential witnesses; functionFieldMap = actual generic stalk map; IsHProjective). Every hypothesis matches (PerfectField, IsAffine/IsIntegral, LOFT+QC, dim=1, closed immersion over k via hi); no extra assumptions; universes bound. All conclusions present: X integral/H-projective/dim 1, j open immersion+DenseRange, C integral/smooth/proper/finite type/dim 1, hj/hν generic points, ej/eν pinned to functionFieldMap, three k-scalar squares incl. composite eν.symm≪≫ej. Only lean field changed; statement verbatim; one sorry; H8 docstring. Advisories: chart owner lemma-nagata-relative-affine-space-open-immersion not a stmt_dep (same as landed det-nagata-affine-opens-projective; S2 cannot add stmt_deps); functionFieldMap has no def node (accepted f^*); proof must re-run det-nagata construction for the given i. No compile (no change)."
+ }
+}

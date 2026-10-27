@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-section-ring-proj-affine-base",
+ "kind": "definition",
+ "title": "Affine-base structure on the Proj of an invertible section ring",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be an affine scheme and $f:X\\to S$ a scheme morphism [def-pc-scheme], and let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Write $A=\\Gamma_*(X,L)$ with its graded commutative ring structure [def-sc-invertible-section-ring]. The degree-zero coefficient map $c:\\Gamma(X,\\mathcal O_X)\\to A_0$ places a function in the zeroth direct summand through the canonical identification $L^{\\otimes0}=\\mathcal O_X$; it preserves zero, one, addition and multiplication, and is regarded as a ring homomorphism. Define the affine-base structure map $p:\\operatorname{Proj}(A)\\to S$ [def-pc-proj] to be the composite of $\\operatorname{Proj}(A)\\to\\operatorname{Spec}(A_0)$, $\\operatorname{Spec}(c\\circ f^\\#):\\operatorname{Spec}(A_0)\\to\\operatorname{Spec}\\Gamma(S,\\mathcal O_S)$, and the inverse of the canonical affine isomorphism $S\\simeq\\operatorname{Spec}\\Gamma(S,\\mathcal O_S)$. If all positive-power section nonvanishing opens cover $X$ [def-weil-pbc-ample-invertible-module], denote by $r:X\\to\\operatorname{Proj}(A)$ the normalized canonical morphism of [lem-sc-ample-proj-canonical-map], with its prescribed inverse-image and fraction formulas. This definition uses those formulas to specify $r$ uniquely; it imposes no ampleness hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-pc-proj",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-proj-canonical-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/properties.tex; literature/stacks-project/constructions.tex",
+  "place": "Tag 01PZ, lemma-map-into-proj; Tag 01N8, lemma-converse-construction, section algebra and its degree-zero coefficients"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sectionRingZero|sectionRingProj|fromOfGlobalSections_toSpecZero",
+   "results": "{\"t\": \"2026-10-24T14:02:31Z\", \"tool\": \"grep\", \"query\": \"sectionRingZero|sectionRingProj|fromOfGlobalSections_toSpecZero\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\"], \"digest\": \"a48c4c086ef31086\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match. toSpecZero is the general graded-ring structure map; fromOfGlobalSections_toSpecZero concerns a graded ring map into ordinary global functions, not sections of all tensor powers of a line bundle. Use toSpecZero and the existing section ring and normalized canonical map; add only the coefficient and affine-base interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The section ring of an invertible sheaf has a degree zero coefficient ring homomorphism and its Proj has a canonical structure morphism to any affine base",
+   "results": "{\"t\": \"2026-10-24T14:02:31Z\", \"tool\": \"leansearch\", \"query\": \"The section ring of an invertible sheaf has a degree zero coefficient ring homomorphism and its Proj has a canonical structure morphism to any affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.toSpec\\u0393\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec\", \"AlgebraicGeometry.StructureSheaf.toOpen_apply\", \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\", \"AlgebraicGeometry.Proj.basicOpenToSpec\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.stalkToFiberRingHom\"], \"digest\": \"24d9779ea2a9d83f\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match. toSpecZero is the general graded-ring structure map; fromOfGlobalSections_toSpecZero concerns a graded ring map into ordinary global functions, not sections of all tensor powers of a line bundle. Use toSpecZero and the existing section ring and normalized canonical map; add only the coefficient and affine-base interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.toSpecZero",
+   "results": "{\"t\": \"2026-10-24T14:02:32Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Proj.toSpecZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.toSpecZero\", \"AlgebraicGeometry.Proj.away\\u03b9_toSpecZero\", \"AlgebraicGeometry.Proj.away\\u03b9_toSpecZero_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"91adbc7c9e945322\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match. toSpecZero is the general graded-ring structure map; fromOfGlobalSections_toSpecZero concerns a graded ring map into ordinary global functions, not sections of all tensor powers of a line bundle. Use toSpecZero and the existing section ring and normalized canonical map; add only the coefficient and affine-base interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg sectionRingZero|sectionRingProj(Map|Structure|BaseChange)|section-ring-proj-affine-base lean/WeilConjectures lean/Sheaf dag/nodes; blueprint_refs.py search section ring",
+   "results": "No matches in the live Lean library or DAG; blueprint search returned zero nodes.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate coefficient or affine-base interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-action-proj-translation-extension",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Affine-base structure of the section-ring Proj and the canonical map needed to form P_B and r_B in Guo section 6.1 and Proposition 6.2, first assertion.",
+   "via": [
+    "lem-sfb-square-action-proj-translation-extension",
+    "lem-sfb-square-action-proj-immersion-locus-stable",
+    "lem-sfb-square-action-affine-orbit-criterion",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionRingProjOverBase",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.sectionRingProjStructure",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.sectionRingZeroCoefficient",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingZeroCoefficient_laws",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingZeroRingHom",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingProjMap",
+   "AlgebraicGeometry.Scheme.Modules.sectionRingProjStructure"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingProjOverBase.lean",
+  "statement": "def sectionRingProjStructure {X S : Scheme.{u}} [IsAffine S] (f : X ⟶ S) (L : X.Modules) [L.IsInvertible] : Proj (sectionRingGrade L) ⟶ S",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17d497d5a",
+  "group": "Q25",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17d497d5a",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after H13 (95cf): the only changes vs side-live are the item lean + stmt_dep and the new def node def-sfb-section-ring-proj-affine-base with its two modules; the dep records lem-sc-ample-proj-canonical-map and def-sc-invertible-section-ring are unchanged vs live. Item statement unchanged; the Lean matches every clause: affine S; GrpObj/ModObj H over S, smooth + separated + LFP + qc, fibres ConnectedSpace; X separated + LFP + qc; invertible M; hsquare over all B with Nonempty iso τ_gh^*M_B⊗M_B≅(τ_g^*⊗τ_h^*)⊗q^*N, τ via lift((snd≫g)•fst, snd); positive-degree cover; ∀ affine smooth B and g; ∃ rB pinned by both pullback projections (true since p∘r=f); U, U' contain im r_B via factorization; σ over B; rU≫σ=τ≫rU'. New def node: real degree-zero coefficient data (DirectSum.of 0 ∘ unitSectionsEquiv), laws stated in the node and true (GMul (0,0) = unitor∘tmul), r = choose of the normalized ∃ theorem, structure map = toSpecZero≫Spec(c∘f#)≫isoSpec.inv; no existing owner on live. Statement fields verbatim, docstrings OK, only sorry, report has Worker report + Second reading. No recompile; worker dry run OK."
+ }
+}

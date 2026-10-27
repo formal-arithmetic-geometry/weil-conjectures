@@ -1,0 +1,238 @@
+{
+ "id": "lem-pur-kummer-product-shear-homotopy",
+ "kind": "statement",
+ "title": "Elementary-shear interpolation for supported Kummer products",
+ "statement": "Fix the finite datum $k,\\ell,E,n,A=A_{E,n}$ of [def-pur-conventions], with arbitrary $n\\geq1$, and the twists $A(r)$ of [def-coefficient-twists-detailed]. Let $X$ be any $k$-scheme and $c\\geq0$. For an ordered tuple $h=(h_1,\\ldots,h_c)$ of global regular functions on $X$, let $C_h\\hookrightarrow X$ be the closed subscheme locally defined by the ideal $(h_1,\\ldots,h_c)$, and put $D_a(h)=V(h_a)$ and $W_a(h)=X\\setminus D_a(h)$. Using the concrete Kummer classes of [def-pur-frame-class], the localization boundaries of [thm-pur-with-support-exactness], and the ordered supported cup product of [def-pur-supported-cup], write\n$$K_X(h)=\\mathop{\\bigcup}_{a=1}^c\\partial_{D_a(h)}\\kappa_{W_a(h)}(h_a|_{W_a(h)})\\in H^{2c}_{C_h}(X_{\\mathrm{proet}},A(c)),$$\nwhere supported cohomology is [def-pur-support-cohomology]. The product is left-associated; at $c=0$ it is $1\\in H^0(X,A)$ with $C_h=X$. This formula uses arbitrary functions, without smoothness, regularity, finite-type or separatedness hypotheses on $X$.\n\nSuppose $c\\geq2$, choose distinct indices $i,j$ and $a\\in\\Gamma(X,\\mathcal O_X)$, and let $h'$ be obtained by replacing $h_i$ by $h_i+a h_j$ and leaving the other entries fixed. Put $T=\\mathbf A^1_X$ with projection $p$, coordinate $t$, and zero and unit sections $s_0,s_1:X\\to T$ ([def-sbc-affine-space]). Define $H_b=p^*h_b$ for $b\\ne i$ and $H_i=p^*h_i+t(p^*a)(p^*h_j)$. Then $C_{h'}=C_h$ and $C_H=T\\times_X C_h$ as closed subschemes. The explicit class\n$$\\eta=K_T(H)\\in H^{2c}_{T\\times_X C_h}(T_{\\mathrm{proet}},A(c))$$\nis defined by the same individual-boundary product formula, and satisfies\n$$s_0^*\\eta=K_X(h),\\qquad s_1^*\\eta=K_X(h'),\\qquad s_0^*\\eta=s_1^*\\eta.$$\nAll pullbacks use their inverse-image supports and the canonical twist identifications. Consequently $K_X(h')=K_X(h)$. In particular, on an etale frame neighborhood this gives invariance under a single elementary shear, without requiring $T$ itself to be an etale frame neighborhood.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "'Elementary shears'; returned proof steps 5--6, with fixed scheme-theoretic total support, endpoint naturality and projection homotopy invariance. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-frame-class",
+  "thm-pur-with-support-exactness",
+  "def-pur-supported-cup",
+  "def-pur-support-cohomology",
+  "def-sbc-affine-space",
+  "def-pur-supported-class-operations"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open $\\operatorname{Spec}R\\subset X$, write $I=(h_1,\\ldots,h_c)$. Because $i\\ne j$, $h_j$ is unchanged, and $h_i=(h_i+ah_j)-ah_j$. Thus every generator of $I$ belongs to $(h'_1,\\ldots,h'_c)$; the reverse inclusion follows from $h'_i=h_i+ah_j$. Hence these ideals are equal, giving $C_{h'}=C_h$ scheme-theoretically. By [def-sbc-affine-space], the inverse image of this open in $T$ is $\\operatorname{Spec}R[t]$. There the same two inclusions, using $h_i=H_i-taH_j$, give $(H_1,\\ldots,H_c)=IR[t]$. The fibre product with $\\operatorname{Spec}(R/I)$ is $\\operatorname{Spec}(R[t]\\otimes_R R/I)=\\operatorname{Spec}(R[t]/IR[t])$. These equalities of ideal sheaves agree on overlaps, so $C_H=T\\times_X C_h$. No division or reducedness is used.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Elementary shears': interpolate the equations, keep their total support fixed, and compare t=0 and t=1 by supported affine-line invariance."
+   }
+  },
+  {
+   "text": "The displayed formula defines a class for any tuple $g_1,\\ldots,g_c$ on any $k$-scheme $Y$: on $Y\\setminus V(g_b)$ the function $g_b$ has inverse $1/g_b$, so the arbitrary-unit construction in [def-pur-frame-class] gives $\\kappa(g_b)$ with the specified finite coefficients for every $n\\geq1$. Apply the pro-etale localization boundary of [thm-pur-with-support-exactness] to obtain a class of degree $2$ supported on $V(g_b)$. Take their ordered left-associated product using [def-pur-supported-cup]. After the first $b$ factors its support is the closed subscheme with ideal $(g_1,\\ldots,g_b)$, its degree is $2b$, and its coefficient is $A(b)$. For the coefficients, [lem-pur-twist-sheaf-locally-free](3) makes $A(1)$ a locally free rank-one finite sheaf; its finite tensor powers are again locally free, so the derived tensors here are the ordinary tensor powers identified with $A(b)$ by [def-coefficient-twists-detailed]. The initial factor has exactly these properties at $b=1$, and each cup adds one support ideal, degree $2$, and one twist. Thus the formula gives $K_Y(g)$ as stated, with no frame hypothesis. Apply this construction to $Y=T$ and $g=H$; Step 1 places the resulting $\\eta$ in the claimed support group. The empty tuple instead gives the specified unit with full support.",
+   "uses": [
+    "def-pur-frame-class",
+    "thm-pur-with-support-exactness",
+    "def-pur-supported-cup",
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Elementary shears': interpolate the equations, keep their total support fixed, and compare t=0 and t=1 by supported affine-line invariance."
+   }
+  },
+  {
+   "text": "On every $R[t]$ chart of [def-sbc-affine-space], $s_0$ and $s_1$ are the evaluations $t\\mapsto0$ and $t\\mapsto1$, and both are the identity on $R$. Therefore $s_0^*H_b=h_b$ for all $b$, while $s_1^*H_b=h'_b$ for all $b$. Pulling back a principal ideal $(H_b)$ along these ring maps gives $(h_b)$ or $(h'_b)$ respectively; hence the individual divisors and their open complements pull back to the corresponding endpoint divisors and complements. Pulling back the total ideal $IR[t]$ gives $I$ at either endpoint, so both total inverse-image supports are $C_h$, with the second also identified with $C_{h'}$ by Step 1.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Elementary shears': interpolate the equations, keep their total support fixed, and compare t=0 and t=1 by supported affine-line invariance."
+   }
+  },
+  {
+   "text": "For $\\epsilon=0,1$ put $g^{(0)}=h$ and $g^{(1)}=h'$. For each $b$, restrict $s_\\epsilon$ to the inverse-image open complement from Step 3. The Kummer naturality and localization-boundary compatibility of [lem-pur-supported-cup-functoriality] give\n$$s_\\epsilon^*\\bigl(\\partial_{V(H_b)}\\kappa(H_b)\\bigr)=\\partial_{V(g^{(\\epsilon)}_b)}\\kappa(g^{(\\epsilon)}_b).$$\nHere each Kummer class is taken on its own open complement, and every boundary has degree $1\\to2$ with twist $A(1)$. To pass to the ordered products, start with this equality for the first factor. If it holds for the product of the first $b$ factors, the cup-pullback identity of the same cited node applies to that degree-$2b$, twist-$b$ class and the next degree-$2$, twist-$1$ class, proving it for $b+1$. This finite induction keeps the original left association and uses no permutation or sign change. Consequently $s_0^*\\eta=K_X(h)$ and $s_1^*\\eta=K_X(h')$, in the common supported group of Step 3. The cited naturality assertions hold on the pro-etale site for arbitrary morphisms of $k$-schemes and the concrete coefficients used here.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Elementary shears': interpolate the equations, keep their total support fixed, and compare t=0 and t=1 by supported affine-line invariance."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-supported-affine-line-homotopy] with its base $X$, closed subscheme $C=C_h$, degree $q=2c$, and twist $r=c$. Its hypotheses allow arbitrary $k$-schemes and every $n\\geq1$, so they apply to the present data. Its specific projection pullback $p^*$ is an isomorphism, and its statement says that both section pullbacks are its inverse, with inverse-image support $C_h$. Thus $s_0^*\\eta=s_1^*\\eta$. Combining with Step 4 gives $K_X(h)=K_X(h')$, hence the claimed invariance. An etale frame neighborhood is a particular $k$-scheme with such a tuple; applying the same argument there proves the last assertion. At no point is the interpolation space $T$ required to be an etale frame neighborhood.",
+   "uses": [
+    "lem-pur-supported-affine-line-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Elementary shears': interpolate the equations, keep their total support fixed, and compare t=0 and t=1 by supported affine-line invariance."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-pur-frame-class",
+  "thm-pur-with-support-exactness",
+  "def-pur-supported-cup",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed",
+  "lem-pur-supported-cup-functoriality",
+  "lem-pur-supported-affine-line-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "'Elementary shears': interpolate the equations, keep their total support fixed, and compare t=0 and t=1 by supported affine-line invariance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Replacing an equation f_i by f_i plus a times f_j preserves its supported Kummer boundary product, by interpolating on the affine line with constant total support",
+   "results": "8 hits: RootPairing.chainBotCoeff_mul_chainTopCoeff, xInTermsOfW_aux, MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination, ChevalleyThm.MvPolynomialC.numBound_casesOn_succ, WittVector.mul_polyOfInterest_aux3, Algebra.SubmersivePresentation.sum_jacobianRelationsOfHasCoeffs_mul_relationOfHasCoeffs, WittVector.mul_polyOfInterest_aux4, ChevalleyThm.MvPolynomialC.numBound_succ.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an ideal generated by functions on a scheme, the localization Kummer cup product is unchanged under the elementary addition f_i to f_i plus a f_j using affine line homotopy with supports",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.const_add, Algebra.Generators.cotangentCompAwaySec_apply, Algebra.Generators.cotangentCompAwaySec, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, Algebra.Generators.map_comp_cotangentCompAwaySec, Algebra.Generators.cMulXSubOneCotangent_eq, Algebra.Generators.cMulXSubOneCotangent.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine line interpolation of elementary shears gives equal zero and unit section restrictions of the product of Kummer localization boundaries",
+   "results": "0 hits: none. service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, \"homotopy\"",
+   "results": "0 hits: none.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*(shear|homotopy)|supported.*homotopy|frame.*shear",
+   "results": "0 hits: none.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*(shear|homotopy)|supported.*homotopy|frame.*shear",
+   "results": "0 hits: none. Read the returned signatures. No matching source text.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine line homotopy gives equal zero and unit section pullbacks of supported Kummer cup products",
+   "results": "8 hits: ContinuousMap.Homotopy.affine, ContinuousMap.Homotopy.affine_apply, ContinuousMap.Homotopy.affine.congr_simp, CochainComplex.IsKProjective.homotopyZero, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, ContinuousAffineMap.coe_lineMap_eq, ContinuousAffineMap.lineMap_toAffineMap, affineSpan_eq_affineSpan_lineMap_units. Read the returned signatures. Returned topological affine homotopies, a K-projective homotopy, an affine pullback instance and affine-line-map formulas; none states the supported etale/pro-etale Kummer assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, \"kummer\"",
+   "results": "0 hits: none. Read the returned signatures. No matching declarations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of localization connecting maps and cup products for cohomology with closed support under scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.appLE_map, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map_assoc, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc. Read the returned signatures. Returned naturality of structure-sheaf restriction maps, not cohomology pullbacks, Kummer boundaries or supported cup products.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replacing one regular function by itself plus a multiple of another preserves the supported Kummer boundary cup product by affine line homotopy",
+   "results": "8 hits: groupHomology.single_ρ_self_add_single_inv_mem_boundaries₁, groupHomology.single_inv_ρ_self_add_single_mem_boundaries₁, groupHomology.single_one_fst_sub_single_one_fst_mem_boundaries₂, groupHomology.single_one_fst_sub_single_one_snd_mem_boundaries₂, groupHomology.single_one_snd_sub_single_one_fst_mem_boundaries₂, groupHomology.single_one_snd_sub_single_one_snd_mem_boundaries₂, groupHomology.isBoundary₁_iff, groupHomology.isBoundary₂_iff. Read the returned signatures. Returned group-homology bar-boundary identities, not supported Kummer cohomology.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-frame-independence",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "'Elementary shears'; returned proof steps 5--6, with fixed scheme-theoretic total support, endpoint naturality and projection homotopy invariance.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-kummer-product-shear-homotopy",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the shear interpolation into equality of ideal sheaves, construction of the concrete class for arbitrary tuples, endpoint substitution, factorwise Kummer/boundary/cup naturality, and equality of the two section pullbacks by the existing supported affine-line theorem. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Realizes lem-pur-frame-independence, 'Elementary shears', from f(t)=(f_1+tuf_2,f_2,...,f_c) to equality at t=0 and t=1. Uses the already reviewed supported affine-line invariance in place of the blueprint's unjustified constant-sheaf inference.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Step 2 uses clause (3), the locally free rank-one finite twist A(1), to identify derived tensor powers with the ordinary powers defining A(c). This is a coefficient flatness tool, not a replacement for the unit affine-line/Kummer route; the unit does not state this coefficient-sheaf theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-sheaf-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NP-49e7e3327",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-49e7e3327 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full, together with the main-20261015 frame-independence paragraph 'Elementary shears' (lines 33-50). The statement and stmt_deps are byte-identical to side-live, there are no new nodes, the item is not dropped, it is unsplit on live and side-live, and it cites no SGA. Step 1: the equalities of ideals (h)=(h') and (H)=IR[t] need only i!=j. Step 2: def-pur-frame-class gives kappa for any unit on any k-scheme. thm-pur-with-support-exactness gives the pro-etale boundary. def-pur-supported-cup gives the ideal-sum support and the degree. lem-pur-twist-sheaf-locally-free(3) gives A(1) locally free, so A(b) is in degree 0; that tool use is accepted, since def-pur-frame-class already cites it. Step 3: s_0 and s_1 pull back each divisor, each complement and IR[t] scheme-theoretically. Step 4: lem-pur-supported-cup-functoriality supplies Kummer, boundary and cup naturality for arbitrary morphisms, applied factorwise with an ordered induction and no sign. Step 5: lem-pur-supported-affine-line-homotopy (reviewed PASS Q16) gives s_0^*=s_1^*=(p^*)^{-1} on H^{2c}_{T x C_h} for any k-scheme. This replaces the blueprint's constant-sheaf argument, which needed Kunneth and a finite-type, strictly local setting. Small cases checked: the origin in A^2, a=0, h_j a unit, the all-zero tuple, non-reduced X. A DAG-wide search found no duplicate. Batch 5: the closure added by the two flagged cites in sec-poincare-duality/sec-trace-formula is empty. lem-poincare-compatible-primitive-roots is already reached through the stmt_dep def-pur-frame-class and is a twist foundation (local trivialization of roots of unity), not a step of Poincare duality; both flagged nodes are generic naturality and A^1-homotopy results, outside the assumptions."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KummerProductShearHomotopy",
+  "declaration": "WeilConjectures.PurityFiniteSetting.kummerProduct_shear_homotopy",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.kummerShearTuple",
+   "WeilConjectures.PurityFiniteSetting.kummerShearHomotopyTuple",
+   "WeilConjectures.PurityFiniteSetting.kummerTuplePullback",
+   "WeilConjectures.PurityFiniteSetting.kummerShearHomotopyClass",
+   "WeilConjectures.PurityFiniteSetting.kummerShearedProduct",
+   "WeilConjectures.PurityFiniteSetting.kummerProduct_shear_homotopy"
+  ],
+  "file": "lean/Sheaf/Paper/KummerProductShearHomotopy.lean",
+  "statement": "theorem kummerProduct_shear_homotopy (P : PurityFiniteSetting.{u}) {X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k)) (c : ℕ) (_hc : 2 ≤ c) (h : Fin c → Γ(X, ⊤)) (i j : Fin c) (_hij : i ≠ j) (a : Γ(X, ⊤)) : ∃ (e : X.zeroLocusSubscheme (Set.range (kummerShearTuple h i j a)) ≅ X.zeroLocusSubscheme (Set.range h)) (he : e.hom ≫ X.zeroLocusSubschemeι (Set.range h) = X.zeroLocusSubschemeι (Set.range (kummerShearTuple h i j a))), (∃ eT : (AffineSpace (ULift.{u} (Fin 1)) X).zeroLocusSubscheme (Set.range (kummerShearHomotopyTuple h i j a)) ≅ pullback (X.zeroLocusSubschemeι (Set.range h)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X), eT.hom ≫ pullback.snd (X.zeroLocusSubschemeι (Set.range h)) (AffineSpace (ULift.{u} (Fin 1)) X ↘ X) = (AffineSpace (ULift.{u} (Fin 1)) X).zeroLocusSubschemeι (Set.range (kummerShearHomotopyTuple h i j a))) ∧ ∃ (g0 g1 : X.zeroLocusSubscheme (Set.range h) ⟶ (AffineSpace (ULift.{u} (Fin 1)) X).zeroLocusSubscheme (Set.range (kummerShearHomotopyTuple h i j a))) (sq0 : ChosenCartesianSquare g0 (X.zeroLocusSubschemeι (Set.range h)) ((AffineSpace (ULift.{u} (Fin 1)) X).zeroLocusSubschemeι (Set.range (kummerShearHomotopyTuple h i j a))) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) X)) (sq1 : ChosenCartesianSquare g1 (X.zeroLocusSubschemeι (Set.range h)) ((AffineSpace (ULift.{u} (Fin 1)) X).zeroLocusSubschemeι (Set.range (kummerShearHomotopyTuple h i j a))) (AffineSpace.oneSection (ULift.{u} (Fin 1)) X)), P.kummerTuplePullback ((AffineSpace (ULift.{u} (Fin 1)) X ↘ X) ≫ aX) h (kummerShearHomotopyTuple h i j a) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) X) g0 sq0 (P.kummerShearHomotopyClass aX h i j a) = P.frameBoundaryProduct X aX c h ∧ P.kummerTuplePullback ((AffineSpace (ULift.{u} (Fin 1)) X ↘ X) ≫ aX) h (kummerShearHomotopyTuple h i j a) (AffineSpace.oneSection (ULift.{u} (Fin 1)) X) g1 sq1 (P.kummerShearHomotopyClass aX h i j a) = P.kummerShearedProduct aX h i j a e he ∧ P.kummerTuplePullback ((AffineSpace (ULift.{u} (Fin 1)) X ↘ X) ≫ aX) h (kummerShearHomotopyTuple h i j a) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) X) g0 sq0 (P.kummerShearHomotopyClass aX h i j a) = P.kummerTuplePullback ((AffineSpace (ULift.{u} (Fin 1)) X ↘ X) ≫ aX) h (kummerShearHomotopyTuple h i j a) (AffineSpace.oneSection (ULift.{u} (Fin 1)) X) g1 sq1 (P.kummerShearHomotopyClass aX h i j a) ∧ P.kummerShearedProduct aX h i j a e he = P.frameBoundaryProduct X aX c h",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses frameBoundaryProduct for arbitrary tuples, including its empty supported unit, and the published normalized functorialCupPullback. The existential isomorphisms over the ambient scheme express equality of the scheme-theoretic closed supports. Endpoint squares identify their inverse-image supports with C_h before stating all three endpoint equalities and shear invariance. Helper definitions only construct the specified tuple, eta, pullback and support transport."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba954cd83",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery of H2 RETURN f914c635e976: Lean file byte-identical; only item change is stmt_deps lem-pur-supported-cup-functoriality -> def-pur-supported-class-operations (existing:true owner of functorialCupPullback/Exchange/TwistPullback on Sheaf.Paper.SupportedCupFunctoriality, record identical to side-live, no cycle); theorem retained in proof_deps; report has Worker report, Returned-delivery repair and Second reading sections. Other 7 stmt_dep records identical to side-live; item not landed by another group; no repair note; no route-pivot import. Substance re-checked clause by clause (frameBoundaryProduct K and eta, shear tuple, H_i, C_h'=C_h and C_H=TxC_h as isos over the ambient scheme, uniquely determined endpoint ChosenCartesianSquares, canonical functorialCupPullback, four conclusions) plus edge cases (c=0/1, a=0, unit h_j, zero tuple, nonreduced/empty X, n=1) and universes: correct. No compile run (no file changed); worker reports clean 15.6/15.5 s."
+ }
+}

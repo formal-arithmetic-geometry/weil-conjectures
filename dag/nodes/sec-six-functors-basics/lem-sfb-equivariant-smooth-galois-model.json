@@ -30,151 +30,72 @@
  ],
  "proof": [
   {
-   "text": "Write $B=\\coprod_{j=1}^n B_j$ using the given finite disjoint integral components. Apply the Galois component presentation to each $B_j$. It gives $e_{0j}/e$, a normal geometrically integral proper $e_{0j}$-scheme $X_j$, its finite group $H_j$, and $u_j:X_j\\to B_j$. In particular $u_j$ is finite etale surjective and its geometric fibres are single $H_j$-orbits. The pullback of $C_B$ is an $H_j$-stable Cartier support $Z_j$. This also verifies the nowhere dense hypothesis: in an integral local domain a nonzero Cartier equation does not vanish at the generic point. The faithful semilinear action and geometric integrality are exactly the hypotheses of the nodal-tower input, not properties inferred merely from the notation $B_{e_{0j}}$.",
+   "text": "Write $B=\\coprod_jB_j$ as given. For each $B_j$ apply the Galois component presentation, obtaining $e_{0j},X_j,H_j,u_j$. Let $Z_j$ be the support of the invariant Cartier pullback $u_j^*C_B$. It is nowhere dense: a Cartier equation is nonzero in the integral local domains, hence is nonzero at the generic point.",
    "uses": [
     "lem-sfb-galois-component-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, p.150, geometric component and decomposition subgroup."
+    "place": "X 2.3 Step 2, p.150, geometric components and decomposition groups."
    }
   },
   {
-   "text": "For each $(X_j/e_{0j},H_j,Z_j)$ apply the equivariant marked plurinodal alteration. Denote its constants by $F_j$, its group by $J_j$, the surjection by $\\rho_j:J_j\\to H_j$, and its tower and marked closed sets by $T_{ji},Z_{ji}$. We obtain an equivariant projective generically finite surjection $a_j:T_{jd_j}\\to X_j$, with $a_j^{-1}Z_j\\subseteq Z_{jd_j}$. Over a dense open of $X_j$, every geometric fibre is one orbit under $N_j=\\ker\\rho_j$. Retain this orbit assertion when making the following birational modifications; it will control the full quotient, rather than only the degree of the alteration.",
+   "text": "Apply the marked plurinodal alteration to $(X_j/e_{0j},H_j,Z_j)$, obtaining $F_j,J_j,\\rho_j:J_j\\twoheadrightarrow H_j$, tower $(T_{ji},Z_{ji})$ and alteration $a_j$. Resolve this quasi-split marked tower by the tower-resolution node. Write $r_j:S_j\\to T_{jd_j}$ for its top modification. It is birational, $S_j/F_j$ is integral smooth projective, and $D_j=((u_ja_jr_j)^{-1}C_B)_{\\rm red}$ is relative SNC, since $a_j^{-1}Z_j\\subseteq Z_{jd_j}$.",
    "uses": [
-    "lem-sfb-equivariant-plurinodal-field-alteration"
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-quasi-split-tower-smooth-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.2 proof, p.149, application of Vidal 4.4.3."
+    "place": "X Lemma 2.2 proof, pp.149--150; returned Steps 2--4."
    }
   },
   {
-   "text": "Resolve the tower by induction on $i$. The induction data are a smooth integral projective $F_j$-scheme $S_{j,i-1}$ with an equivariant projective birational map to $T_{j,i-1}$ and relative SNC boundary equal to the reduced preimage of $Z_{j,i-1}$. Start with $S_{j0}=\\operatorname{Spec}F_j$ and empty boundary. Apply the one-curve resolution lemma to $f_{ji}:T_{ji}\\to T_{j,i-1}$, $D=Z_{j,i-1}$, its marked sections and the already constructed base modification $S_{j,i-1}\\to T_{j,i-1}$. Its conclusion resolves the fibre product and makes the composite back to $T_{ji}$ projective birational and surjective, giving $S_{ji}$ and precisely that induction datum with $i$ in place of $i-1$. The projectivity clause of the lemma applies because the preceding base is projective over $F_j$. At the top obtain $S_j=S_{jd_j}$, smooth integral projective over $F_j$, with equivariant birational $r_j:S_j\\to T_{jd_j}$ and relative SNC boundary $E_j=(r_j^{-1}Z_{jd_j})_{\\mathrm{red}}$. The lemma gives regular local rings and parameter equations for $E_j$. Length zero requires no resolution. Each modification induces equality of function fields; thus $a_jr_j$ remains dominant and generically finite.",
-   "uses": [
-    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
-    "lem-sfb-equivariant-plurinodal-field-alteration"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.2 proof, p.149 last paragraph--p.150, successive applications of Vidal 4.4.4."
-   }
-  },
-  {
-   "text": "The reduced inverse image $D_j$ of $C_B$ in $S_j$ is a sub-divisor of $E_j$, not necessarily the whole marked boundary. Indeed, the composite $S_j\\to B_j$ is dominant, so a local Cartier equation $c$ on $B_j$ pulls back to a nonzero element in the integral local ring of $S_j$. Off $E_j$ it is a unit, since its zero set is contained in $E_j$. At a point, write the boundary equations as distinct regular parameters $t_1,\\ldots,t_r$. The cited regular-local UFD factorization gives $c=u\\prod t_i^{a_i}$. Its reduced zero divisor is therefore cut out by $\\prod_{a_i>0}t_i$. Globally these are a subset of the finitely many components of $E_j$. Their intersections are among the same smooth intersections, with the same codimensions, so $D_j$ is relative strict normal crossings. If $c$ is a unit, this subset is empty.",
-   "uses": [
-    "lem-trf-regular-local-ufd-boundary-factorization",
-    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
-    "def-trf-smooth-strict-normal-crossings-divisor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.2 proof, p.149, the reduced inverse image is a subdivisor of the resolved marked boundary."
-   }
-  },
-  {
-   "text": "Put $v_j=u_ja_jr_j:S_j\\to B_j$. It is $J_j$-invariant since $u_j$ is $H_j$-invariant. At a geometric generic point of $B_j$, its lifts to $X_j$ form one $H_j$-orbit by the component presentation. Above each such lift, the geometric generic fibre of $a_jr_j$ is one $N_j$-orbit: the birational map $r_j$ induces equality of generic residue fields, and hence changes none of these geometric generic fibres. Given two points, first lift an element of $H_j$ carrying their images to one another along the surjection $\\rho_j$, then use an element of $N_j$ in that fibre. Thus the whole geometric generic fibre of $v_j$ is one $J_j$-orbit. All generic residue extensions remain finite, and every generic point maps to the generic point of $B_j$.",
+   "text": "Put $v_j=u_ja_jr_j$. Its geometric generic fibre is a single $J_j$-orbit: the images in $X_j$ form one $H_j$-orbit; lift an element of $H_j$ along $\\rho_j$ to match two images, then use $\\ker\\rho_j$ to match the points. Birational $r_j$ leaves the generic fields and these generic fibres unchanged. Thus $v_j$ is invariant and surjective and sends its generic point to that of $B_j$ with finite residue extension.",
    "uses": [
     "lem-sfb-galois-component-presentation",
     "lem-sfb-equivariant-plurinodal-field-alteration",
-    "lem-sfb-equivariant-nodal-smooth-pair-resolution"
+    "lem-sfb-quasi-split-tower-smooth-resolution"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.2(iii) and X 2.3 Step 2, before (2.b): two-stage orbit argument."
+    "place": "X 2.2(iii) and X 2.3 Step 2; returned Step 5."
    }
   },
   {
-   "text": "Apply common-field semilinear induction to the finite family $(F_j,J_j,S_j,v_j)$. Obtain one finite normal $K/e$, one finite group $G$ acting on $K$, and the induced schemes $Y_j$ with invariant maps to $B_j$. Set $Y=\\coprod_jY_j$ and $h=\\coprod_j(Y_j\\to B_j)$. The induction lemma gives $K^G/e$ purely inseparable, single $G$-orbit geometric generic fibres, and finite residue extensions at every generic point. Every summand of $Y$ is a scalar twist of $S_j\\times_{F_j}K$. Consequently $Y$ is smooth projective over $K$ and the reduced inverse image of $C_B$ is relative SNC: field extension preserves smoothness and all the intersection codimensions; any components that split are disjoint smooth components, so taking the reduced irreducible components gives the same condition. Twisting changes only the scalar structure. Finite disjoint unions preserve these properties (embed the finitely many projective summands in disjoint linear subspaces of one sufficiently large projective space). The map $h$ is surjective since each $v_j$ is surjective, the field base changes are surjective, and every coset family is nonempty.",
+   "text": "Apply common-field semilinear induction to $(F_j,J_j,S_j,v_j)$. It supplies $K,G,\\Gamma_j,Y_j$ and $Y=\\coprod_jY_j$ with invariant $h:Y\\to B$, purely inseparable $K^G/e$, and the required generic-point and geometric generic orbit assertions. Apply geometric permanence for this induced family: $Y/K$ is smooth projective, $Y/e$ is projective, $h$ is projective surjective, and $(h^{-1}C_B)_{\\rm red}$ is relative SNC.",
    "uses": [
     "lem-sfb-common-field-semilinear-induction",
-    "def-trf-smooth-strict-normal-crossings-divisor",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-sc-fibre-dimension-after-base-change",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-kun-projective"
+    "lem-sfb-snc-projective-semilinear-induction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, diagram (2.b); finite-family common normal constants and induced conjugate copies."
+    "place": "X 2.3 Step 2, diagram (2.b), pp.150--151; returned Steps 6--7."
    }
   },
   {
-   "text": "The projective $K$-scheme $Y$ is also H-projective over $e$. The finite map $\\operatorname{Spec}K\\to\\operatorname{Spec}e$ is projective-bundle by the finite-morphism lemma; $\\mathcal O$ is ample on the affine point (the section $1$ has affine nonvanishing locus), so the ample-base conversion makes it H-projective, and H-projective composition applies. Choose $i:Y\\hookrightarrow\\mathbf P^m_e$. Since $B$ is proper over $e$, its diagonal is closed. The graph $Y\\to Y\\times_eB$ of $h$ is its base change, and $i\\times\\mathrm{id}_B$ is also a closed immersion by base change. Their composite embeds $Y$ into $\\mathbf P^m_e\\times_eB=\\mathbf P^m_B$ over $B$. Thus $h$ is H-projective and therefore projective in the projective-bundle convention as well (use the free module $\\mathcal O_B^{m+1}$). This establishes projectivity even though $B$ need not itself be projective over $e$.",
+   "text": "Apply the generic-orbit quotient node to this $Y,G,h,B$. Its hypotheses, including reducedness of $Y$, hold by the preceding steps. It gives all subgroup quotients, with orbit geometric fibres, invariant structure sheaves and categorical factorization, and a dense open meeting every component over which $Y/G\\to B$ is finite and a universal homeomorphism. Together with the preceding $K,G,Y,h$ and boundary this is every assertion of the item.",
    "uses": [
-    "lem-trf-finite-projective-bundle",
-    "def-weil-pbc-ample-invertible-module",
-    "lem-trf-projective-bundle-to-h-projective",
-    "lem-trf-h-projective-composition",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-closed-immersion-comp",
-    "def-nagata-projective-space-base-change",
-    "def-kun-projective",
-    "def-trf-projective-bundle-morphism"
+    "lem-sfb-generic-orbit-dense-quotient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, projectivity of the induced alteration (graph verification)."
-   }
-  },
-  {
-   "text": "Apply finite quotient existence over $e$ to $Y$ and to every subgroup of $G$; the preceding projective embedding supplies its quasi-projective admission hypothesis. This gives all the finite categorical geometric quotients and their orbit and invariant-sheaf properties. In particular $h$ factors through $Q=Y/G$. For each $B_j$, choose a nonempty affine open $\\operatorname{Spec}A_j$. It is Noetherian by the component preparation. The morphism $h$ is projective and its generic fibre is zero-dimensional, since its finitely many generic residue extensions are finite. The projective-generically-finite lemma gives a nonempty open on which $h$ is finite; shrink this to a principal affine open in $\\operatorname{Spec}A_j$. The quotient lemma then gives finiteness of $Q\\to B$ there. These finitely many opens together meet every component. The generic fibre of $Q\\to B_j$ is reduced, since invariant subrings of reduced rings are reduced, and has one geometric point by the orbit calculation. The radicial criterion applies also over the generic field: two distinct field-valued lifts would remain distinct over an algebraic closure, contradicting the one-point geometric fibre. Thus this generic morphism is radicial. Its reduced finite coordinate algebra has a single prime ideal, which is zero; being a finite-dimensional domain, it is a field, purely inseparable over $\\kappa(B_j)$ by the same criterion.",
-   "uses": [
-    "lem-sfb-admissible-finite-type-field-quotient",
-    "lem-sfb-galois-component-presentation",
-    "lem-fin-projective-generically-finite",
-    "def-weil-radicial-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, p.151, full quotient is generically radicial; retain actual finite quotients."
-   }
-  },
-  {
-   "text": "Here is the dense-open radicial verification. On one of the preceding affine opens write $A\\subseteq L=\\operatorname{Frac}A$ and $Q=\\operatorname{Spec}R$ with $R$ finite over $A$. Its generic algebra $R\\otimes_A L$ is the purely inseparable field just found. Choose finitely many algebra generators $b_i$ of $R$. In characteristic $p>0$, choose a common $q=p^r$ with $b_i^q\\in L$ in the generic algebra. Clear the finitely many denominators and annihilators of $b_i^q-a_i$ to obtain one nonzero $s\\in A$ and $a_i\\in A[1/s]$ such that $b_i^q=a_i$ in $R[1/s]$. In characteristic zero the generic field equals $L$ and the same argument uses $q=1$. For any field $M$ over $A[1/s]$, an $M$-valued point of $Q$ must send each $b_i$ to the unique possible root of $T^q-a_i$ in $M$. Hence there is at most one such point. The cited radicial criterion proves universal injectivity. Surjectivity holds because both $h$ and the quotient map are surjective. The integral-radicial-surjective lemma now makes this finite morphism a universal homeomorphism. Taking the union of these principal opens gives the required dense $U$ meeting every component. This last shrinking changes none of $Y,K,G,h$ or the boundary.",
-   "uses": [
-    "def-weil-radicial-morphism",
-    "lem-pc-integral-radicial-surjective-universal-homeomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, p.151, verification of the universal-homeomorphism assertion on a dense open."
+    "place": "X 2.3 Step 2, p.151; returned Steps 8--9."
    }
   }
  ],
  "proof_deps": [
-  "def-kun-projective",
-  "def-nagata-projective-space-base-change",
-  "def-trf-projective-bundle-morphism",
-  "def-trf-smooth-strict-normal-crossings-divisor",
-  "def-weil-pbc-ample-invertible-module",
-  "def-weil-proper-morphism",
-  "def-weil-radicial-morphism",
-  "lem-fin-projective-generically-finite",
-  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-sc-fibre-dimension-after-base-change",
-  "lem-sfb-admissible-finite-type-field-quotient",
   "lem-sfb-common-field-semilinear-induction",
-  "lem-sfb-equivariant-nodal-smooth-pair-resolution",
   "lem-sfb-equivariant-plurinodal-field-alteration",
   "lem-sfb-galois-component-presentation",
-  "lem-trf-finite-projective-bundle",
-  "lem-trf-h-projective-composition",
-  "lem-trf-projective-bundle-to-h-projective",
-  "lem-trf-regular-local-ufd-boundary-factorization",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-closed-immersion-comp"
+  "lem-sfb-generic-orbit-dense-quotient",
+  "lem-sfb-quasi-split-tower-smooth-resolution",
+  "lem-sfb-snc-projective-semilinear-induction"
  ],
  "proof_origin": {
   "by": "agent",
@@ -248,78 +169,8 @@
   "date": "2026-10-22",
   "item": "lem-sfb-equivariant-smooth-galois-model",
   "worker": "stage1",
-  "summary": "Split the prime-free model by Galois geometric components, a marked equivariant nodal tower, induction of one-curve resolutions, Cartier-support extraction, a common normal constant field and semilinear induction, then the finite full quotient and explicit generic radicial spreading. Five statement-only prerequisites; no statement change, no Lean or compiler.",
-  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images (3), via the alteration/tame-boundary reduction: ILO X 2.2 proof and 2.3 Step 2 through (2.b), before the Sylow choice. The existing ancestor command returns None; retain its existing null ancestor and full via chain.",
-  "tool_uses": [
-   {
-    "node": "def-kun-projective",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "def-nagata-projective-space-base-change",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "def-trf-projective-bundle-morphism",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "def-trf-smooth-strict-normal-crossings-divisor",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "def-weil-pbc-ample-invertible-module",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "def-weil-proper-morphism",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "def-weil-radicial-morphism",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-fin-projective-generically-finite",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-pc-integral-radicial-surjective-universal-homeomorphism",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-sc-fibre-dimension-after-base-change",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-trf-finite-projective-bundle",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-trf-h-projective-composition",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-trf-projective-bundle-to-h-projective",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-trf-regular-local-ufd-boundary-factorization",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-base-change",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-comp",
-    "why": "Generic scheme/commutative-algebra tool used for the local Cartier factorization, graph projectivity, generic finiteness or radicial criterion; this unit has no replacement and its ILO alteration route is unchanged."
-   }
-  ]
+  "summary": "Q01 repair of the human workload re-split return: extracted three independent statement-only arguments (quasi-split tower resolution and Cartier sub-boundary; geometric permanence and projectivity of semilinear induction; generic-orbit quotient and dense-open radicial spreading). Parent statement unchanged. All nine returned arguments are preserved verbatim in report.md, with allocation to the new nodes or assembly steps. Corrected the old use of a split/trivial-stabilizer resolution lemma on quasi-split input by stating the exact weaker-input tower theorem of ILO X 2.2.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images (3), via the alteration/tame-boundary reduction: ILO X 2.2 proof and 2.3 Step 2 through (2.b), before the Sylow choice. The existing ancestor command returns None; retain its existing null ancestor and full via chain.; parent assembly now realizes ILO X 2.2/2.3 using three extracted arguments; nearest imported ancestor is null as returned by blueprint_refs.py."
  },
  "tool_uses": [
   "def-kun-projective",
@@ -343,10 +194,10 @@
  "reviewed": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NK-dcd9fa8b4",
-  "group": "NK",
+  "reviewer": "NT-cc-Q01-9df7adb6e",
+  "group": "Q01",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-dcd9fa8b4 (reviewer sub-agent of L); spot-checked: Live item, not on side-live route-pivot-dropped.txt, still unsplit in live with the same statement; this is the 8th push. No dropped id is cited and the closure is clean. The new lem-sfb-admissible-finite-type-field-quotient states a true field-level admissible quotient for separated, locally finite-type schemes: finite categorical quotient, orbit fibres, sections are invariants, and finite over U when v^{-1}U is finite. The proof is invariant affine charts (Stacks 03JE/03BJ/03BL) plus Noether finiteness, and the finiteness-over-U clause holds without B Noetherian because invariants are integral and of finite type. It is the field case of dropped 1397/1939, not 1814, and asserts no projectivity. It differs from the NC 7dad copy because it is restricted to exactly the Step 8 use. No live existence node exists, and the item states quotient existence itself, so I accept it with a maintainer note. The other four new nodes are true and none restates an item clause: Galois component presentation (e'=H^0 separable, Galois closure, Stacks 0551/033C); Vidal 4.4.3 plurinodal alteration and 4.4.4 smooth-pair resolution step, matching ILO X 2.2 proof pp.149-150 (read); common normal-field contracted-product induction (compatible pairs, K^{Aut}/e purely inseparable, orbit transfer). Item Steps 1-9 checked: Step 3 induction datum matches the resolution conclusion (Z_i recursion); Step 4 c is a unit in A[1/T], then u∏t_i^{a_i}; Step 6 SNC survives scalar extension; Step 7 graph gives H-projectivity over proper B; Step 8 generic-fibre dimension 0, then finiteness over an open, then a reduced invariant generic algebra that is a purely inseparable field; Step 9 common q-th powers in R[1/s] give radicial, then finite+radicial+surjective gives a universal homeomorphism. Edge cases checked: empty C_B, dim 0, disconnected B, characteristic 0, inseparable K/e. Batch-5: def-trf SNC/projective-bundle definitions, trf finite-projective-bundle/h-projective conversion and composition, regular-local UFD factorization, and lem-fin-projective-generically-finite (via lem-trf-proper-finite-fibre-finite-near) are all generic scheme theory outside the trace-formula and Poincare-duality proofs, so all accepted. Generic tool_uses accepted."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-9df7adb6e (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and the source in full. This answers the human's re-split note of 2026-10-21. Item statement is byte-identical to the base. The new proof is 5 assembly steps (2030 characters). The 9 old steps (8713 characters, checked verbatim against the live node) are all accounted for: old 1, 2 and 5 are now parent Steps 1-3; old 3-4 went to the new lem-sfb-quasi-split-tower-smooth-resolution; old 6-7 to the new lem-sfb-snc-projective-semilinear-induction; old 8-9 to the new lem-sfb-generic-orbit-dense-quotient. The three nodes take about 2000/2000/2600 characters of the old proof, so they are comparable, and none restates the item. Each is a conditional lemma on supplied data (a tower, induction data, an invariant projective map). Nothing was shortened or dropped. The split also corrects a fault in old Step 3: it applied nodal-smooth-pair-resolution, which needs split fibres with legs fixed by stabilizers, to the quasi-split towers that the live plurinodal node supplies, so that hypothesis was not available. The tower node takes exactly the plurinodal hypotheses, including the quasi-split condition, and it is true. ILO X 2.2 pp.149-150 says so (I read the local PDF): Vidal 4.4.4 is applied successively, giving X2 smooth over S1 with a relative snc divisor, and the reduced (ba)^{-1}(Z) is a subdivisor of it. Toric resolution over the smooth SNC chart works over an imperfect F. An I1-type fibre (irreducible nodal component) is fixed by blowing up the node, which gives strict SNC; only SNC of the reduced divisor is claimed, not reduced fibres. The Cartier sub-boundary clause follows from the UFD local rings, and C empty and d=0 are covered. The semilinear-induction node holds: base change to K and the twisted coset copies keep smoothness, and components of one smooth divisor that split are disjoint. Projectivity over e follows because K/e is finite, and h is projective by the graph construction over separated B. The generic-orbit quotient node holds and matches ILO p.151: the generic fibre is finite, projective plus generically finite gives finite over a dense open, and quotients come from the admissible-quotient node. The reduced generic algebra has one geometric point, so it is a purely inseparable field. Spreading by a common q-th power gives a radicial map over A[1/s], and with Stacks 04DF a universal homeomorphism. Reducedness of Y is needed and is assumed. Every parent step meets every hypothesis of what it cites. Batch-5 flags: def-trf-projective-bundle-morphism, def-trf-nodal-geometric-fibres and def-trf-smooth-strict-normal-crossings-divisor are general definitions, not part of the trace formula or Poincare duality, so I accept them. No SGA source; the new nodes reach no dropped id. Notes for the maintainer: (1) nodal-smooth-pair-resolution is now uncited. Its earlier reviewer noted its proof never uses the split hypothesis, so weaken it to quasi-split and let the tower node's split cite it. (2) The item closure reaches the dropped def-weil-pbc-trivial-kan-fibration through the base plurinodal -> single-curve-nodal-reduction -> trf cotangent chain. That is inherited from the base, not from this delivery."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EquivariantSmoothGaloisModel",
@@ -365,5 +216,17 @@
   "group": "NC",
   "result": "pass",
   "note": "Clause-by-clause match of exists_equivariant_smooth_galois_model to the node and ILO X 2.2/2.3: normal (stalks domain and integrally closed), finite disjoint integral opens, proper and geometrically reduced, Cartier IsInvertible used only through comap.radical (reduced preimage; Mathlib comap = ker of pullback.fst). K finite over e, ρ into K≃ₐ[e]K, fixed field purely inseparable. Smooth+IsHProjective p, IsProjectiveBundle+Surjective h, base equation. Semilinear ρ g⁻¹ consistent as a left action (Aut mul and Spec contravariance checked), matches the SemilinearSylowGoodComponents interface. Generic points with finite residue maps. SNC predicate handles the empty divisor and empty intersections. All subgroup quotients: IsAdmissibleFiniteSchemeQuotient (affine-orbit clause true since Y is projective over e), categorical ∃!, Ω-point surjectivity and orbit fibres (SGA1 V 2.2), q≫d=h. Dense U containing generic points; finite universal homeomorphism of d⊤.resLE. Live diff: only lean plus added stmt_dep def-per-admissible-finite-scheme-quotient (live, Lean landed and reviewed). Item and dep not dropped. Statement verbatim; docstrings carry source place, blueprint tag and 9 proof steps; sorry only. Not recompiled per instruction. Advisory: unused plain proof-dep imports."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

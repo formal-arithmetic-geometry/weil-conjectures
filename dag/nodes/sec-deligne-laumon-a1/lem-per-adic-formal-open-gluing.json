@@ -1,0 +1,254 @@
+{
+ "id": "lem-per-adic-formal-open-gluing",
+ "kind": "statement",
+ "title": "Open gluing for Noetherian adic formal schemes and ideals",
+ "statement": "A Noetherian adic formal scheme means a locally topologically ringed space with a finite cover by $\\operatorname{Spf}R$, for Noetherian rings $R$ complete and separated for powers of a finitely generated ideal; its structure sheaf is the inverse limit of the sheaves on the quotient spectra [def-per-adic-formal-geometry]. Morphisms are continuous local morphisms of these topologically ringed spaces. A coherent ideal is locally the completed-localization sheaf of a finitely generated ring ideal. Let $(\\mathfrak T_i)_{i\\in E}$ be a finite family of such formal schemes, including the empty family. For each $i,j$, let $\\mathfrak T_{ij}\\subseteq\\mathfrak T_i$ be open and let $\\phi_{ij}:\\mathfrak T_{ij}\\xrightarrow{\\sim}\\mathfrak T_{ji}$ be an isomorphism. Assume $\\mathfrak T_{ii}=\\mathfrak T_i$, $\\phi_{ii}=1$, $\\phi_{ji}=\\phi_{ij}^{-1}$, and that $\\phi_{ij}$ identifies $\\mathfrak T_{ij}\\cap\\mathfrak T_{ik}$ with $\\mathfrak T_{ji}\\cap\\mathfrak T_{jk}$, with $\\phi_{jk}\\phi_{ij}=\\phi_{ik}$ on this triple overlap. There is a Noetherian adic formal scheme $\\mathfrak T$, unique up to unique isomorphism respecting the gluing maps, with open immersions $u_i:\\mathfrak T_i\\to\\mathfrak T$ covering $\\mathfrak T$ and identifying precisely the indicated overlaps. Compatible morphisms from these pieces to any adic formal scheme glue uniquely, and equality of morphisms is local on a formal open cover of the source. Compatible coherent ideals glue uniquely as ideal subsheaves; compatible ideals of definition glue to an ideal of definition, and compatible open coherent ideals glue to an open coherent ideal. The resulting objects, morphisms and ideals commute with restriction to open subsets and refinement of covers. Overlaps need not be affine.",
+ "source": {
+  "document": "literature/stacks-project/formal-spaces.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 0AHY, section-formal-schemes-EGA, definition as locally topologically ringed spaces and affine-open gluing; Tag 01JA, section-glueing-schemes, topological and sheaf gluing construction (applied to the complete topological ring sheaves of the formal charts). Coherence and openness are the local predicates explicitly specified here."
+ },
+ "stmt_deps": [
+  "def-per-adic-formal-geometry",
+  "def-weil-pbc-noetherian-ring",
+  "def-per-topological-formal-open-data"
+ ],
+ "proof": [
+  {
+   "text": "Form $T=(\\coprod_i|\\mathfrak T_i|)/\\sim$, where $(i,x)\\sim(j,y)$ means $x\\in\\mathfrak T_{ij}$ and $y=\\phi_{ij}(x)$. Reflexivity is the diagonal identity, symmetry is the inverse identity, and transitivity follows because $\\phi_{ij}(x)\\in\\mathfrak T_{ji}\\cap\\mathfrak T_{jk}$ forces $x\\in\\mathfrak T_{ij}\\cap\\mathfrak T_{ik}$ and then $\\phi_{jk}\\phi_{ij}(x)=\\phi_{ik}(x)$. Give $T$ the topology in which $W$ is open precisely when all $u_i^{-1}W$ are open. Write $U_i=u_i(|\\mathfrak T_i|)$. Each $u_i$ is injective, $u_j^{-1}U_i=\\mathfrak T_{ji}$, and $u_j^{-1}u_i(V)=\\phi_{ji}^{-1}(V\\cap\\mathfrak T_{ij})$ for open $V\\subseteq|\\mathfrak T_i|$. Thus $u_i$ identifies its source homeomorphically with the open $U_i$, and $U_i\\cap U_j=u_i(\\mathfrak T_{ij})$. This uses no affine property of the overlaps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 01JB, lemma-glue, quotient-space construction; Tag 0AHY, section-formal-schemes-EGA, topological sheaves and locally topologically ringed spaces"
+   }
+  },
+  {
+   "text": "Transport $\\mathcal O_{\\mathfrak T_i}$ along $u_i$ to $U_i$. The structure maps of $\\phi_{ij}$, inverted if necessary to orient descent from $i$ to $j$, give isomorphisms of sheaves of topological rings on $U_i\\cap U_j$; the given cocycle gives their cocycle. Apply [lem-per-topological-ring-sheaf-open-descent] to obtain $\\mathcal O_T$, with its matching-tuples section topology and compatible topological ring sheaf isomorphisms on the $U_i$. For $x=u_i(y)$ the open-neighbourhood germ identification gives $\\mathcal O_{T,x}\\cong\\mathcal O_{\\mathfrak T_i,y}$, so the stalk is local. Hence $(T,\\mathcal O_T)$ is locally topologically ringed, the $u_i$ are open immersions, and their overlap maps are exactly $\\phi_{ij}$.",
+   "uses": [
+    "lem-per-topological-ring-sheaf-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 01JB, lemma-glue, quotient-space construction; Tag 0AHY, section-formal-schemes-EGA, topological sheaves and locally topologically ringed spaces"
+   }
+  },
+  {
+   "text": "Choose the finite formal affine cover of each $\\mathfrak T_i$ in the definition [def-per-adic-formal-geometry]. Its images under the open isomorphisms $u_i$ are the same formal affine topological ringed spaces in $T$. The union of these finitely many finite covers is finite and covers $T$, so $\\mathfrak T=(T,\\mathcal O_T)$ is a Noetherian adic formal scheme. All complete coordinate rings, ideals of definition and quotient-limit presentations are unchanged on these charts. If the family is empty, $T=\\varnothing$ and the unique sheaf of topological rings has the one-element ring on its only open. It has the empty formal affine cover and satisfies the conclusion; empty individual pieces cause no change.",
+   "uses": [
+    "def-per-adic-formal-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 01JB, lemma-glue, quotient-space construction; Tag 0AHY, section-formal-schemes-EGA, topological sheaves and locally topologically ringed spaces"
+   }
+  },
+  {
+   "text": "For compatible morphisms $f_i:\\mathfrak T_i\\to\\mathfrak Y$, define $f(u_i(x))=f_i(x)$. Compatibility makes this well defined; the topology of Step 1 makes it continuous. On an open $V\\subseteq\\mathfrak Y$, send $s\\in\\mathcal O_{\\mathfrak Y}(V)$ to the tuple $(f_i^\\sharp(s))_i$ on $f_i^{-1}V$. This tuple is compatible and gives $f^\\sharp_V(s)\\in\\mathcal O_T(f^{-1}V)$ by the section formula in [lem-per-topological-ring-sheaf-open-descent]. Each coordinate is continuous, so this map into the product, and then its subspace of compatible tuples, is continuous. Ring operations and restriction commute coordinatewise. The stalk map at $u_i(x)$ is the local stalk map of $f_i$, hence $f$ is a formal morphism. A second extension has the same point map and the same section coordinates, so equals $f$. The same argument on any open cover of a source proves locality of equality. Applying this to the two sets of gluing maps for two candidate gluings gives inverse morphisms, since their composites restrict to identities. This proves uniqueness up to unique isomorphism respecting all charts.",
+   "uses": [
+    "lem-per-topological-ring-sheaf-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 01JB, lemma-glue, quotient-space construction; Tag 0AHY, section-formal-schemes-EGA, topological sheaves and locally topologically ringed spaces"
+   }
+  },
+  {
+   "text": "Identify each local ideal with an ideal subsheaf $\\mathcal J_i\\subseteq\\mathcal O_T|_{U_i}$. Define $\\mathcal J(W)=\\{s\\in\\mathcal O_T(W):s|_{W\\cap U_i}\\in\\mathcal J_i(W\\cap U_i)\\text{ for all }i\\}$. Restrictions preserve this condition. If sections in $\\mathcal J$ agree on an open cover of $W$, their unique glue in $\\mathcal O_T(W)$ belongs to $\\mathcal J$: on every $W\\cap U_i$ this follows from the sheaf axiom of $\\mathcal J_i$. Addition and multiplication by ring sections preserve the condition, so $\\mathcal J$ is an ideal subsheaf. On $W\\subseteq U_i$ compatibility of the ideals says exactly that the condition for $i$ implies all the others; hence $\\mathcal J|_{U_i}=\\mathcal J_i$. Conversely, membership in any ideal subsheaf with these restrictions is this same condition, by its sheaf axiom. This proves equality uniqueness as subsheaves, rather than just abstract isomorphism uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 00AL, sheaves.tex lemma-glue-sheaves, matching sections specialized to subobjects"
+   }
+  },
+  {
+   "text": "The given coherence convention is local: near each point in some $U_i$, the restriction of $\\mathcal J$ is exactly the completed-localization sheaf of the given finitely generated ring ideal representing $\\mathcal J_i$. Thus the glued ideal is coherent. Here an open ideal is locally an ideal containing a power of the chart ideal of definition, and an ideal of definition is locally an open ideal whose powers generate the given adic topology. These are the usual local predicates on a formal scheme, not a demand that sections on every non-quasi-compact open have one uniform adic exponent. For the glued ideal the same charts and powers that verify either predicate for $\\mathcal J_i$ verify it for $\\mathcal J$. Therefore compatible ideals of definition give an ideal of definition, and compatible open coherent ideals give an open coherent ideal. No ideal-algebraization, formal-functions theorem or extension from the overlap to a whole affine chart is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA, ideals of definition and section topologies; local coherence convention of the item"
+   }
+  },
+  {
+   "text": "For an open $W\\subseteq T$, use the restricted pieces $u_i^{-1}W$, the restricted transition maps, and $\\mathcal O_T|_W$. The underlying quotient, section tuples, morphism coordinates and ideal membership formula of Steps 1, 2, 4 and 5 are exactly their restrictions to $W$. The restrictions are again Noetherian formal schemes: in any original $\\operatorname{Spf}(R,K)$, cover its part of $W$ by principal opens $D(s)\\cap V(K)$. By [lem-per-formal-affine-principal-refinement] each is $\\operatorname{Spf}R_{\\{s\\}}$ with Noetherian coordinate ring $R_{\\{s\\}}$, the $KR_s$-adic completion of $R_s$. Since $KR_s$ is finitely generated, [lem-weil-pbc-module-completion-complete] (with $A=M=R_s$, $I=KR_s$) shows $R_{\\{s\\}}$ is complete and separated for the finitely generated ideal $KR_{\\{s\\}}$, so each is a formal affine open. Only finitely many are needed: the ideal generated by all these $s$ is finitely generated, and writing finitely many generators as finite sums selects finitely many original $s$ with the same generated ideal [def-weil-pbc-noetherian-ring]; their union of principal opens is therefore the same. There are only finitely many original charts. Thus restriction remains inside the finite-cover convention, even though the overlaps were not assumed affine.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 01JB, lemma-glue, quotient-space construction; Tag 0AHY, section-formal-schemes-EGA, topological sheaves and locally topologically ringed spaces"
+   }
+  },
+  {
+   "text": "For any refinement, the original gluing with its refined open charts satisfies the refined overlap conditions. The canonical map from a gluing of the refined data to $\\mathfrak T$ is obtained from the inclusions by Step 4. Conversely glue the refined charts lying in each original piece, and apply Step 4 first there and then on all original pieces to obtain the reverse map. Both composites are identities because they are identities on the refined open cover. These isomorphisms identify the maps and ideal subsheaves, since their restrictions agree and Step 4 and Step 5 give uniqueness. For successive restrictions or refinements, both comparison composites have these same local restrictions and hence coincide. This proves the claimed compatibility, including its coherence for successive refinements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 01JB, lemma-glue, quotient-space construction; Tag 0AHY, section-formal-schemes-EGA, topological sheaves and locally topologically ringed spaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-topological-ring-sheaf-open-descent",
+  "def-per-adic-formal-geometry",
+  "lem-per-formal-affine-principal-refinement",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/sheaves.tex; literature/stacks-project/formal-spaces.tex",
+  "place": "Tag 01JB quotient-space proof, Tags 00AL/00AM/00AN matching-section descent and mapping property, and Tag 0AHY topological sheaves; explicit adaptation and local-ideal arguments by Q61"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gluing locally Noetherian adic formal schemes and coherent ideals along open subspaces",
+   "results": "8 hits; AlgebraicGeometry.Scheme.GlueData; AlgebraicGeometry.Scheme.GlueData.gluedScheme; AlgebraicGeometry.Scheme.GlueData.glued; AlgebraicGeometry.Scheme.GlueData.toGlueData; AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData; AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued; AlgebraicGeometry.Scheme.IsLocallyDirected.glueData; AlgebraicGeometry.Scheme.Cover.gluedCover",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib glues ordinary locally ringed spaces and schemes, but does not provide topological structure sheaves, formal spectra and coherent formal-ideal descent as a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GlueData\"",
+   "results": "12 hits; CategoryTheory.GlueData; CategoryTheory.GlueData'; CategoryTheory.GlueData.J; CategoryTheory.GlueData'.J; CategoryTheory.GlueData.ofGlueData'; CategoryTheory.GlueData.U; CategoryTheory.GlueData'.U; CategoryTheory.GlueData.diagram",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib glues ordinary locally ringed spaces and schemes, but does not provide topological structure sheaves, formal spectra and coherent formal-ideal descent as a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "GlueData|glueData",
+   "results": "5 hits; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean; Mathlib/Geometry/RingedSpace/PresheafedSpace/Gluing.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib glues ordinary locally ringed spaces and schemes, but does not provide topological structure sheaves, formal spectra and coherent formal-ideal descent as a one-line specialization",
+   "subdirectory": "Geometry/RingedSpace"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic formal schemes glue uniquely along open isomorphisms satisfying the cocycle condition with coherent ideals",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.gluing; AlgebraicGeometry.Scheme.GlueData.glued; AlgebraicGeometry.Scheme.GlueData; AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle; AlgebraicGeometry.Scheme.Cover.gluedCover; AlgebraicGeometry.Scheme.LocalRepresentability.glueData; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V; AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib glues ordinary locally ringed spaces and schemes, but does not provide topological structure sheaves, formal spectra and coherent formal-ideal descent as a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally topologically ringed spaces modelled on formal spectra glue along open covers with coherent sheaves",
+   "results": "8 hits; AlgebraicGeometry.LocallyRingedSpace.GlueData; AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData; AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData; AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData; AlgebraicGeometry.Scheme.GlueData; AlgebraicGeometry.Spec.toLocallyRingedSpace; AlgebraicGeometry.Spec.sheafedSpaceObj; AlgebraicGeometry.Scheme.GlueData.isoLocallyRingedSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib glues ordinary locally ringed spaces and schemes, but does not provide topological structure sheaves, formal spectra and coherent formal-ideal descent as a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "FormalScheme|formal.scheme|formal.spectrum|\\bSpf\\b",
+   "results": "{\"t\": \"2026-10-24T07:01:39Z\", \"tool\": \"grep\", \"query\": \"FormalScheme|formal.scheme|formal.spectrum|\\\\bSpf\\\\b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme or locally ringed-space gluing does not give the stated formal objects with topological ring sheaves and ideal clauses in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic formal schemes glue along open subsets with coherent ideal sheaves",
+   "results": "{\"t\": \"2026-10-24T07:01:40Z\", \"tool\": \"leansearch\", \"query\": \"Adic formal schemes glue along open subsets with coherent ideal sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\"], \"digest\": \"8e06d3c9fca170a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme or locally ringed-space gluing does not give the stated formal objects with topological ring sheaves and ideal clauses in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormalScheme\"",
+   "results": "{\"t\": \"2026-10-24T07:01:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormalScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme or locally ringed-space gluing does not give the stated formal objects with topological ring sheaves and ideal clauses in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open gluing of Noetherian adic formal schemes and compatible coherent ideals along arbitrary open overlaps",
+   "results": "{\"t\": \"2026-10-24T07:01:41Z\", \"tool\": \"leanfinder\", \"query\": \"Open gluing of Noetherian adic formal schemes and compatible coherent ideals along arbitrary open overlaps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.glueData\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"AlgebraicGeometry.Scheme.GlueData.f_open\"], \"digest\": \"1af59c124534dfe8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme or locally ringed-space gluing does not give the stated formal objects with topological ring sheaves and ideal clauses in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally topologically ringed spaces locally isomorphic to formal spectra descend on open covers",
+   "results": "{\"t\": \"2026-10-24T07:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"Locally topologically ringed spaces locally isomorphic to formal spectra descend on open covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.toLocallyRingedSpaceGlueData\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData\", \"AlgebraicGeometry.Scheme.GlueData.isoLocallyRingedSpace\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.openCover_X\", \"AlgebraicGeometry.Scheme.GlueData\"], \"digest\": \"e04276c01f1a3855\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme or locally ringed-space gluing does not give the stated formal objects with topological ring sheaves and ideal clauses in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-formal-open-blowup-base-change",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-local-model/purity branch, through the formal-resolution descendants; formal open blowup construction in Temkin §§2.4.4–2.4.6: completion and change of formal affine chart.",
+   "via": [
+    "lem-per-formal-open-blowup-base-change",
+    "lem-per-rig-formal-resolution-gluing",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-adic-formal-open-gluing",
+  "worker": "stage1",
+  "summary": "No project attachment. Construct the quotient space explicitly, descend its topological ring sheaf by a genuinely smaller fixed-space sheaf-descent lemma, check formal affineness and morphisms, and construct the glued ideal by sectionwise membership. Restriction and refinement are checked without affine-overlap hypotheses; principal refinements are reused from the DAG. Empty gluing and local meanings of open/defining ideals are explicit. Statement unchanged.",
+  "blueprint": "Newest blueprint Step 3 of lem-per-artin-gabber-affine-curve, through the regular-local-model/purity descendants and formal resolution gluing, as recorded in blueprint.from; this split supplies the open formal gluing used there. No chapter or unit route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-622b59000",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-622b59000 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node; the statement is unchanged. Step 1 matches the Stacks 01JB quotient construction; I checked transitivity against the triple-overlap hypothesis and the inverse-image formula u_j^{-1}u_i(V)=phi_ji^{-1}(V∩T_ij). Steps 2 and 4 use only the statement of the new node lem-per-topological-ring-sheaf-open-descent: O_T(W) as compatible tuples with the subspace-of-product topology, the e_a, and gluing of morphisms. Stalks are local, maps are continuous coordinatewise, and uniqueness up to unique isomorphism holds. Step 3: images of the finite formal-affine covers give a finite cover, and the empty family gives T=∅. Steps 5-6: the ideal subsheaf defined by local membership is correct, with uniqueness as an equality of subsheaves; coherence, open and of-definition are local predicates. Step 8: refinement maps come from Step 4. The new node is true: the tuple topology is initial for the double-indexed restrictions, which is exactly the 0AHY equalizer condition; e_a has a continuous inverse; morphisms glue as in 00AN; empty cover and empty opens are fine. It carries only a statement, is self-contained, has all three search kinds recorded, and is strictly smaller than the item. It is not a duplicate: lem-pe-site-sheaf-gluing and lem-pe-set-sheaf-cover-descent (04TR) glue sheaves of sets only, and no DAG node glues topological ring sheaves or formal schemes. No cycle (checked by reachability); everything stays in the unit's route or cites Mathlib leaves and definitions; no tool_uses. FIX (C4, Step 7): the principal-refinement node gives Spf R_{s} with R_{s} Noetherian, but says nothing about R_{s} being complete and separated for KR_{s}, which a formal affine open requires. I added the Mathlib leaf lem-weil-pbc-module-completion-complete (A=M=R_s, I=KR_s finitely generated) to Step 7's text, its uses and the item's proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdicFormalOpenGluing",
+  "declaration": "AlgebraicGeometry.FormalOpen.adicFormal_open_gluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdicFormalOpenGluing.lean",
+  "statement": "theorem adicFormal_open_gluing (D : GlueData.{u}) : ∃ τ : SectionTopology D.data.toGlueData.glued, Realizes D D.data.toGlueData.glued τ D.data.toGlueData.ι ∧ CoverDescent τ D.data.U D.pieceTopology D.data.toGlueData.ι ∧ StableDescent D.data.toGlueData.glued τ ∧ ∀ (X : RingedSpace.{u}) (σ : SectionTopology X) (v : ∀ i : D.data.J, D.data.U i ⟶ X), Realizes D X σ v → ∃! e : D.data.toGlueData.glued ≅ X, IsMorphism τ σ e.hom ∧ IsMorphism σ τ e.inv ∧ ∀ i : D.data.J, D.data.toGlueData.ι i ≫ e.hom = v i",
+  "branch": "sheaf-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-404a3d7c2",
+  "group": "Q85",
+  "result": "fix",
+  "note": "Lean and records exact: lean.statement verbatim; item record only adds lean and stmt_dep def-per-topological-formal-open-data (new node: 20 real-data declarations over Mathlib SheafedSpace.GlueData, recorded adicFormalSpec/adicFormalSectionTopology/IsNoetherianAdicFormalScheme, no duplicate in lean/Sheaf, lean/WeilConjectures or Mathlib). Every node clause checked: IsTopologicalSheaf with initial cover topology, local stalks, finite Noetherian atlas, continuous local morphisms, GlueData identities and cocycle, actual glued object with cartesian overlap squares, tau forced by the uniqueness clause, unique iso respecting gluing maps, morphism gluing to any adic target, locality of equality via StableDescent with w = identity, coherent ideal subsheaves glued with equality uniqueness, open/definition ideals preserved, restriction/refinement via StableDescent. Edge cases: empty family, empty covers, non-affine overlaps, single universe u. Only fault H11: the Second reading section is a self-audit; fixes/lem-per-adic-formal-open-gluing.report.md keeps the worker report and New nodes section and adds a real clause-by-clause second reading. Advisories: new node uses IsNoetherianRing without citing def-weil-pbc-noetherian-ring; exists-unique ranges over coherent ideals, which is equivalent. No Lean changed, so nothing compiled."
+ }
+}

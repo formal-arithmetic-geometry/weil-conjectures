@@ -1,0 +1,263 @@
+{
+ "id": "lem-weil-pbc-generated-ideal-quotient-colimit",
+ "kind": "statement",
+ "title": "Quotients by approximating generated ideal sheaves",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal S$ a quasi-coherent commutative $\\mathcal O_X$-algebra [def-weil-pbc-quasi-coherent-algebra], and $\\mathcal J\\subseteq\\mathcal S$ a quasi-coherent sheaf of ideals. Let $K$ be a nonempty directed preordered set and $(\\mathcal E_k,\\eta_{lk})_{k\\le l}$ a system of quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent, def-weil-sheaf-of-modules-category]. Suppose compatible module maps $\\varepsilon_k:\\mathcal E_k\\to\\mathcal J$ exhibit $\\mathcal J$ as their colimit in $\\mathcal O_X$-modules [def-weil-pbc-category-colimit]. Write $\\mathcal I_k=(\\varepsilon_k(\\mathcal E_k))\\subseteq\\mathcal S$ for the generated ideal sheaf and $\\mathcal Q_k=\\mathcal S/\\mathcal I_k$ for the sheaf quotient. Then the natural quotient maps $\\mathcal Q_k\\to\\mathcal S/\\mathcal J$ exhibit $\\mathcal S/\\mathcal J$ as the colimit of the diagram $(\\mathcal Q_k)_{k\\in K}$ in all sheaves of commutative $\\mathcal O_X$-algebras, and also in their full quasi-coherent subcategory. In particular, on every affine open $U$, these maps identify $\\varinjlim_k\\mathcal Q_k(U)$ with $\\mathcal S(U)/\\mathcal J(U)$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Tag 086N, lemma-finite-algebra-directed-colimit-finite-finitely-presented, proof: A = colim Sym(F)/(E_i) since J = colim E_i; used again in Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof, final colimit equality."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:\\mathcal J\\hookrightarrow\\mathcal S$ and $e_k=j\\varepsilon_k$. By [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b), each $\\mathcal I_k=(e_k(\\mathcal E_k))$ and $\\mathcal Q_k$ is quasi-coherent, and its projection $q_k:\\mathcal S\\to\\mathcal Q_k$ has the universal property for killing $e_k$. Apply the same result with $\\mathcal E=\\mathcal J$ and $e=j$: the generated ideal is $\\mathcal J$ itself, since $\\mathcal J$ is an ideal containing its own sections and every ideal containing those sections contains $\\mathcal J$. Thus $\\mathcal Q=\\mathcal S/\\mathcal J$ is quasi-coherent with projection $q$. Compatibility $e_k=e_l\\eta_{lk}$ for $k\\le l$ gives $\\mathcal I_k\\subseteq\\mathcal I_l\\subseteq\\mathcal J$. The quotient universal properties give unique $t_{lk}:\\mathcal Q_k\\to\\mathcal Q_l$ and $r_k:\\mathcal Q_k\\to\\mathcal Q$ with $t_{lk}q_k=q_l$ and $r_kq_k=q$. Their identity, composition and cocone equations follow by uniqueness after precomposing with $q_k$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 086N, lemma-finite-algebra-directed-colimit-finite-finitely-presented, proof: A = colim Sym(F)/(E_i) since J = colim E_i; used again in Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof, final colimit equality."
+   }
+  },
+  {
+   "text": "Let $(\\alpha_k:\\mathcal Q_k\\to\\mathcal C)$ be any algebra-sheaf cocone, with $\\mathcal C$ arbitrary, as in [def-weil-pbc-category-colimit]. Set $h_k=\\alpha_kq_k$. For $k\\le l$, the cocone equation gives $h_k=\\alpha_l t_{lk}q_k=\\alpha_lq_l=h_l$. Choose $k_0\\in K$, possible by nonemptiness, and put $h=h_{k_0}$. For every $k$, choose $l\\ge k,k_0$ by directedness. Then $h_k=h_l=h_{k_0}=h$. This uses only the preorder, without antisymmetry.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 086N, lemma-finite-algebra-directed-colimit-finite-finitely-presented, proof: A = colim Sym(F)/(E_i) since J = colim E_i; used again in Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof, final colimit equality."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-comm-algebra-sheaf], $h$ is $\\mathcal O_X$-linear on underlying modules: $h(as)=h(a)h(s)=a h(s)$ for local $a\\in\\mathcal O_X$. For every $k$ we have $(hj)\\varepsilon_k=he_k=h_k e_k=\\alpha_kq_ke_k=0$. The assumed module colimit and [def-weil-pbc-category-colimit] imply $hj=0$: $hj$ and the zero module map out of $\\mathcal J$ have identical composites with all $\\varepsilon_k$, hence are equal. Now [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b), applied with $e=j$, gives a unique algebra map $\\bar h:\\mathcal Q\\to\\mathcal C$ satisfying $\\bar hq=h$.",
+   "uses": [
+    "def-weil-pbc-comm-algebra-sheaf",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 086N, lemma-finite-algebra-directed-colimit-finite-finitely-presented, proof: A = colim Sym(F)/(E_i) since J = colim E_i; used again in Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof, final colimit equality."
+   }
+  },
+  {
+   "text": "For each $k$, $(\\bar h r_k)q_k=\\bar hq=h=\\alpha_kq_k$, so uniqueness in the quotient property [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b) gives $\\bar h r_k=\\alpha_k$. If $v:\\mathcal Q\\to\\mathcal C$ is another map with these equations, then $vq=v r_{k_0}q_{k_0}=\\alpha_{k_0}q_{k_0}=h$, so the quotient property for $q$ gives $v=\\bar h$. This is exactly the colimit property [def-weil-pbc-category-colimit] in all algebra sheaves. Since all $\\mathcal Q_k$ and $\\mathcal Q$ are quasi-coherent, the identical factorization proves the colimit property in the full quasi-coherent subcategory [def-weil-pbc-quasi-coherent-algebra].",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 086N, lemma-finite-algebra-directed-colimit-finite-finitely-presented, proof: A = colim Sym(F)/(E_i) since J = colim E_i; used again in Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof, final colimit equality."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-quasi-coherent-algebra-colimit] to the directed diagram $(\\mathcal Q_k,t_{lk})$. It supplies an algebra-sheaf colimit $(\\mathcal A,c_k)$ and, on every affine open $U$, an isomorphism $\\varinjlim_k\\mathcal Q_k(U)\\to\\mathcal A(U)$ induced by $c_{k,U}$. The two colimit properties [def-weil-pbc-category-colimit] give the unique isomorphism $u:\\mathcal A\\to\\mathcal Q$ with $uc_k=r_k$. Explicitly, the universal properties give $u$ and $v:\\mathcal Q\\to\\mathcal A$; the composites $uv$ and $vu$ fix all cocone maps, so uniqueness makes them identities. Evaluation takes its inverse to an inverse of $u_U$, so composing the displayed affine isomorphism with $u_U$ identifies the affine ring colimit with $\\mathcal Q(U)$ through the required maps $r_{k,U}$: on each stage, $u_U c_{k,U}=r_{k,U}$. Finally [lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal](b), with $e=j$, identifies $\\mathcal Q(U)=\\mathcal S(U)/\\mathcal J(U)$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Tag 086N, lemma-finite-algebra-directed-colimit-finite-finitely-presented, proof: A = colim Sym(F)/(E_i) since J = colim E_i; used again in Tag 0817, lemma-integral-algebra-directed-colimit-finite, proof, final colimit equality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 086N, lemma-finite-algebra-directed-colimit-finite-finitely-presented, proof: the assertion A = colim Sym(F)/(E_i). The omitted universal-property argument is supplied explicitly, using existing quasi-coherent quotient and colimit nodes; no qcqs or finite-type hypothesis is needed for this subargument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Qq]uotient.*[Cc]olimit|[Cc]olimit.*[Qq]uotient|Quotient.*iSup",
+   "results": "1 hits: Mathlib/RingTheory/KrullDimension/NonZeroDivisors.lean (searched RingTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match: module or ring quotient tools do not identify this quasi-coherent algebra-sheaf colimit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient sheaf of algebras is the directed colimit of quotients by approximating generated ideal sheaves",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient, DirectLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: module or ring quotient tools do not identify this quasi-coherent algebra-sheaf colimit"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uotient|[Ii]deal",
+   "results": "0 hits:  (searched Algebra/Category/AlgebraCat)",
+   "date": "2026-10-22",
+   "verdict": "no match: module or ring quotient tools do not identify this quasi-coherent algebra-sheaf colimit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient sheaf algebra by a quasi-coherent ideal is the filtered colimit of quotients by ideals generated by a directed module approximation",
+   "results": "8 hits: localCohomology.ofDiagram, SheafOfModules.Presentation.isColimit, localCohomology.hasColimitDiagram, localCohomology, localCohomology.ringModIdeals, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.QuasicoherentData.presentation, localCohomology.ofSelfLERadical",
+   "date": "2026-10-22",
+   "verdict": "no match: module or ring quotient tools do not identify this quasi-coherent algebra-sheaf colimit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-coherent ideal J equal to colimit E_k, the algebra sheaf quotients S divided by the ideal generated by E_k have colimit S divided by J",
+   "results": "8 hits: localCohomology.hasColimitDiagram, SheafOfModules.Presentation.isColimit, localCohomology.ofDiagram, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, localCohomology.ringModIdeals, SheafOfModules.isColimitFreeCofan",
+   "date": "2026-10-22",
+   "verdict": "no match: module or ring quotient tools do not identify this quasi-coherent algebra-sheaf colimit"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientMap",
+   "results": "12 hits: Ideal.quotientMap, Ideal.quotientMap_comp_mk, Ideal.quotientMap_surjective, Ideal.quotientMap_injective', Ideal.quotientMap_mk, Ideal.quotientMap_algebraMap, Ideal.quotientMap_injective, Ideal.quotientEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: module or ring quotient tools do not identify this quasi-coherent algebra-sheaf colimit"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*colimit|colimit.*quotient|generated.*ideal",
+   "results": "18 hits: Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/Colimits.lean, Mathlib/Algebra/Category/Grp/LargeColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/Colimits.lean, Mathlib/Algebra/Category/Ring/Colimits.lean, Mathlib/Algebra/Category/Ring/Colimits.lean (Mathlib/Algebra/Category)",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation cokernels, generic sheafification colimits, ring colimit constructions and local cohomology do not state the directed generated-ideal quotient comparison for algebra sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf algebra quotient by a directed union of ideals is the colimit of the quotient algebra sheaves",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.colimit, SheafOfModules.Presentation.isColimit, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, CategoryTheory.Sheaf.isColimitSheafifyCocone, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, AlgebraicGeometry.LocallyRingedSpace.coproductCofan, AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit, AlgebraicGeometry.LocallyRingedSpace.instHasColimits",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation cokernels, generic sheafification colimits, ring colimit constructions and local cohomology do not state the directed generated-ideal quotient comparison for algebra sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientMap, CategoryTheory.Limits.IsColimit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation cokernels, generic sheafification colimits, ring colimit constructions and local cohomology do not state the directed generated-ideal quotient comparison for algebra sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a sheaf of algebras by an ideal which is a directed module colimit is the colimit of the quotients by the generated ideals",
+   "results": "8 hits: SheafOfModules.Presentation.isColimit, localCohomology.hasColimitDiagram, SheafOfModules.isColimitFreeCofan, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, localCohomology.ofDiagram, PresheafOfModules.isColimitColimitCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation cokernels, generic sheafification colimits, ring colimit constructions and local cohomology do not state the directed generated-ideal quotient comparison for algebra sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed diagram of quotients of a fixed commutative ring sheaf has quotient by the union of the ideals as its categorical colimit",
+   "results": "8 hits: localCohomology.hasColimitDiagram, localCohomology.ofDiagram, CommRingCat.Colimits.ColimitType, AlgebraicGeometry.Scheme.Modules.instHasColimits, SheafOfModules.Presentation.isColimit, CommRingCat.FilteredColimits.colimit, CommRingCat.Colimits.colimitIsColimit, Ring.DirectLimit.quotientMk_of",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation cokernels, generic sheafification colimits, ring colimit constructions and local cohomology do not state the directed generated-ideal quotient comparison for algebra sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitSheafifyCocone",
+   "results": "3 hits: 188, 213, 220 (Mathlib/CategoryTheory/Sites/Limits.lean)",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation cokernels, generic sheafification colimits, ring colimit constructions and local cohomology do not state the directed generated-ideal quotient comparison for algebra sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isColimit|def isColimit",
+   "results": "0 hits:  (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean)",
+   "date": "2026-10-22",
+   "verdict": "no match: presentation cokernels, generic sheafification colimits, ring colimit constructions and local cohomology do not state the directed generated-ideal quotient comparison for algebra sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The finite-pushforward approximation in the current main-20261015 proof of lemma-weil-pbc-h1-constructible-representation, paragraph 3: \"The finite-pushforward lemma gives a monomorphism\". This algebra approximation supplies the integral-to-finite approximation below that lemma, through the recorded via chain; its source is Stacks Properties, Tag 0817. Technical subargument: Quotients by approximating generated ideal sheaves.",
+   "via": [
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-generated-ideal-quotient-colimit",
+  "worker": "stage1",
+  "summary": "Q150 repair of returned head b089c3c8ebd: rebased the retained split onto the current unsplit DAG item and reread every cited statement. All original citation quotes remain verbatim and the statement is unchanged. Expanded the elementary equality of the ideal generated by J with J and the inverse and stage-map equations for the affine colimit comparison. Retained all searches and the five-step universal-property route; no new nodes or Mathlib leaves.",
+  "blueprint": "The main-20261015 ancestor lemma-weil-pbc-h1-constructible-representation, finite-pushforward paragraph (The finite-pushforward lemma gives a monomorphism), through the existing integral-algebra approximation chain recorded in blueprint.from.via. The split expands the quotient-colimit assertion in Stacks 086N, also used in 0817, below that step."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-69ab4699f",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-69ab4699f (reviewer sub-agent of L); spot-checked: I read the item, all five proof steps and every cited statement in full. This is a promotion re-delivery after the landing refusal of b089c3c8ebde, which was PASSed. It has one commit, adds no new nodes and has no repair note. Live and side-live still have the item unsplit. Against the live record, only split-owned fields differ (proof, proof_deps, proof_origin, status, split_report, mathlib_searches); the statement, stmt_deps, source and blueprint fields are byte-identical, so no target was weakened. Changes from the PASSed head: Step 1 now explains why the ideal generated by j: J -> S is J (J is an ideal containing its own sections, and it is minimal). Step 5 now constructs both comparison maps u and v, shows uv and vu are identities by uniqueness, and states u_U c_{k,U} = r_{k,U}. Both are correct. Steps 2-4 and all uses and sources are unchanged. The cited statements kernel-image-ideal, quasi-coherent-algebra-colimit, category-colimit, comm-algebra-sheaf and quasi-coherent-algebra are byte-identical to the previous snapshot. Kernel-image-ideal (b) gives the generated ideal, the quotient, the affine quotient formula and a unique factorization for any target algebra sheaf C. The colimit node gives the colimit in all algebra sheaves and the affine-section isomorphism; a directed preorder is allowed. Step checks: (1) apply (b) to e_k = j eps_k and to e = j; I_k is contained in I_l, which is contained in J; t_lk and r_k come from uniqueness. (2) nonemptiness and directedness make all alpha_k q_k one map h. (3) h is O_X-linear, h j eps_k = alpha_k q_k e_k = 0, so the module colimit gives h j = 0, and (b) gives h-bar. (4) The cocone equations and uniqueness follow from quotient uniqueness; fullness gives the colimit in the quasi-coherent subcategory. (5) The two colimits are compared by u, and (b) gives Q(U) = S(U)/J(U); evaluation is never assumed to preserve colimits. Source: properties.tex l.3381ff, Tag 086N proof, 'J = colim E_i, A_i = Sym(F)/(E_i), A = colim A_i'. The qcqs and finite-type hypotheses there are needed only to produce the E_i and for finiteness, so dropping them is sound. The proof_deps closure has 167 nodes and does not contain the item. No SGA is cited. Edge cases checked: singleton K, J = 0, J = S, empty X, a preorder with equivalent indices, non-injective eps_k, non-quasi-coherent C. Maintainer note: L should promote the item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeneratedIdealQuotientColimit",
+  "declaration": "AlgebraicGeometry.Scheme.CommAlgebraSheaf.generatedIdealQuotient_colimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeneratedIdealQuotientColimit.lean",
+  "statement": "theorem generatedIdealQuotient_colimit {X : Scheme.{u}} (S : X.CommAlgebraSheaf) (hS : X.IsQuasiCoherentAlgebra S) (J : X.Modules) (hJ : J.IsQuasicoherent) (j : J ⟶ S.toModule) (L : ∀ U : X.Opens, Ideal (S.right.obj.obj (op U))) (hj : ∀ U : X.Opens, Function.Injective (j.app U) ∧ Set.range (j.app U) = (L U : Set (S.right.obj.obj (op U)))) (K : Type u) [Preorder K] [IsDirected K (· ≤ ·)] [Nonempty K] (E : K ⥤ X.Modules) (hE : ∀ k : K, (E.obj k).IsQuasicoherent) (ε : E ⟶ (Functor.const K).obj J) (hε : IsColimit (Cocone.mk J ε)) : ∃ (F : K ⥤ QuasiCoherentAlgebra X) (c : Cocone F) (q : (Functor.const K).obj S ⟶ F ⋙ (X.IsQuasiCoherentAlgebra).ι) (p : S ⟶ c.pt.obj), (∀ (k : K) (U : X.Opens), IsAffineOpen U → Function.Surjective ((q.app k).right.hom.app (op U)) ∧ RingHom.ker ((q.app k).right.hom.app (op U)).hom = Ideal.span (Set.range ((ε.app k ≫ j).app U) : Set (S.right.obj.obj (op U)))) ∧ (∀ k : K, q.app k ≫ (c.ι.app k).hom = p) ∧ Nonempty (IsColimit c) ∧ Nonempty (IsColimit ((X.IsQuasiCoherentAlgebra).ι.mapCocone c)) ∧ (∀ (U : X.Opens), IsAffineOpen U → Function.Surjective (p.right.hom.app (op U)) ∧ RingHom.ker (p.right.hom.app (op U)).hom = L U ∧ Nonempty (IsColimit (((evaluation X.Opensᵒᵖ CommRingCat).obj (op U)).mapCocone ((sheafToPresheaf (Opens.grothendieckTopology X) CommRingCat).mapCocone ((Under.forget X.sheaf).mapCocone ((X.IsQuasiCoherentAlgebra).ι.mapCocone c))))))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a59fd4c5",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause against the node, Stacks Tag 086N (properties.tex l.3381ff) and the live dependencies generated_ideal_quotient_quasiCoherent and quasiCoherentAlgebra_colimit. Quotients are fixed by affine surjectivity/kernel conditions (span of ε_k≫j sections; L U for S/J), quasi-coherent vertices and factorization q_k≫c.ι_k=p, so they are unique up to unique iso, not arbitrary. Both the quasi-coherent and ambient IsColimit clauses and the affine ring-colimit clause are present. Hypotheses no stronger: directed nonempty preorder without antisymmetry, K : Type u by project convention. Statement verbatim in file; node differs from live only in lean; no defs; sorry only; docstrings carry source, blueprint tag and 5 proof steps; report sections present. Edge cases (single index, J=0, J=S, empty X, non-injective ε) not excluded. Advisories: CommAlgebraSheaf is reached through a transitive dependency; private proof imports unused. No file changed, so no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261023T132044-L-2193851",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.generatedIdealQuotient_colimit"
+  ],
+  "sorry_after": []
+ }
+}

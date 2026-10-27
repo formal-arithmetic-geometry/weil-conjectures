@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-parameter-product-closure-kernel",
+ "kind": "statement",
+ "title": "Parameter-product closure kernels and flat extension",
+ "statement": "Let $C$ be a commutative Noetherian regular ring [def-weil-pbc-noetherian-ring, def-weil-regular-scheme], let $r\\ge0$, let $a,z_1,\\ldots,z_r\\in C$, and assume that in each local ring $C_y$ the nonunit members of this indexed list occur at distinct positions in a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. Fix $e\\ge1$, and put $P=\\prod_{j=1}^r z_j$, $f=a^eP$, with empty product $1$. Let $T=\\operatorname{Spec}((C/(f))[1/a])\\to\\operatorname{Spec}C$ be the locally closed immersion of $V(f)$ restricted to $D(a)$. Its scheme-theoretic closure [def-nagata-scheme-theoretic-image] is $V(P)$, with ideal\n$$K=\\ker(C\\to(C/(f))[1/a])=\\{h\\in C:\\exists n\\ge0,\\ a^nh\\in(f)\\}=(P).$$\nFor every prime $y$ and $S=C_y$ one has\n$$KS=\\{h\\in S:\\exists n\\ge0,\\ a^nh\\in fS\\}=PS.$$\nHere quotient and localization use the images of $a,f$ in the corresponding rings. More generally, for any flat homomorphism $C\\to E$ (meaning $E$ is a flat $C$-module), write $a_E,f_E,P_E$ for their images. Then\n$$\\ker(E\\to(E/(f_E))[1/a_E])=KE=P_EE,$$\nand the closure of $T\\times_{\\operatorname{Spec}C}\\operatorname{Spec}E$ in $\\operatorname{Spec}E$ is $V(P_E)$. These equalities concern ideals and closed subschemes, not just underlying closed sets. No regularity or Noetherian hypothesis on $E$ is required. In particular, if $C$ is an $A$-algebra and $B_0$ is a flat $A$-algebra, the same kernel formula holds for $E=C\\otimes_A B_0$, with the canonical images of $a,f,P$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080D, definition-strict-transform; morphisms.tex Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, and Tag 081I, lemma-flat-base-change-scheme-theoretic-image; more-algebra.tex Tag 0AG0, lemma-regular-local-UFD; algebra.tex Tag 00HD, lemma-flat. The parameter-product saturation is the explicit UFD consequence used in ILO VIII 4.1.8 and 4.2.9."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-module-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For any commutative ring $R$, ideal $I$ and $b\\in R$, apply the fraction equivalence in [def-weil-pbc-module-localization] to $M=R/I$ and the powers of $b$. The class of $h$ maps to zero in $(R/I)[1/b]$ exactly when $b^nh\\in I$ for some $n\\ge0$, since the kernel of $R\\to R/I$ is $I$ by [def-weil-pbc-algebra-hom-quotient]. This proves the displayed kernel-as-saturation description both over $C$ and over each $S=C_y$, without any regularity assumption.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CM, fraction equivalence and localization map, Definition 07JZ (definition-localization-module); quotient construction."
+   }
+  },
+  {
+   "text": "Fix $y$ and $S=C_y$. Regularity means precisely that $S$ is regular local. Permute a parameter system to put all nonunit members of $(a,z_1,\\ldots,z_r)$ first. Apply part (b) of [lem-sfb-transverse-prime-ideal-parameters] to that list and its sublist of nonunit $z_j$. It gives $PS=\\bigcap_{z_j\\notin S^\\times}(z_j)S$, and these coordinate ideals, together with $(a)S$ if $a$ is a nonunit, are incomparable primes. Unit $z_j$ do not change the product ideal. In particular $a\\notin(z_j)S$ for every nonunit $z_j$: for unit $a$ this holds because the ideal is proper; otherwise it follows from incomparability. If $a^nh\\in fS\\subseteq PS$, primality applied repeatedly gives $h\\in(z_j)S$ for every such $j$, hence $h\\in PS$. Conversely $h=Pv$ implies $a^eh=fv\\in fS$. Therefore the saturation over $S$ is $PS$. If there are no nonunit $z_j$, the empty intersection is $S$ and the same converse proves the assertion.",
+   "uses": [
+    "lem-sfb-transverse-prime-ideal-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NQ (lemma-regular-ring-CM), 00NP (lemma-regular-domain); etale.tex Tag 0BIA (lemma-strict-normal-crossings), parameter-product calculation. Agent expansion of ILO VIII 4.1.8 and 4.2.9."
+   }
+  },
+  {
+   "text": "If $h\\in K$, Step 1 gives $a^nh\\in(f)$, and Step 2 gives $h/1\\in PS$ for every $S=C_y$, in particular at every maximal ideal. Apply [lem-weil-pbc-ideal-membership-at-maximal-localizations] to $J=(P)$ to obtain $h\\in(P)$. Conversely $h=Pv$ gives $a^eh=fv$, so $h\\in K$. Thus $K=(P)$, and extending this equality to $S$ gives $KS=PS$, which by Steps 1--2 is also the local saturation. This proves all local equalities without assuming that saturation commutes with localization.",
+   "uses": [
+    "lem-weil-pbc-ideal-membership-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HN (lemma-characterize-zero-local), applied to the class of h in C/(P)."
+   }
+  },
+  {
+   "text": "Put $Q=C/(f)$ and $L=Q[1/a]$. Step 3 says the $C$-module sequence $0\\to K\\to C\\to L$ is exact. Tensor it with the flat $C$-module $E$ using [lem-weil-pbc-flat-tensor-exact]. The image of $E\\otimes_CK\\to E\\otimes_CC=E$ consists of finite sums $\\sum u_i k_i$, hence is exactly $KE$. Its kernel conclusion is therefore $\\ker(E\\to E\\otimes_CL)=KE$. By [lem-weil-pbc-tensor-quotient-base-change], $D=E\\otimes_CQ=E/(f_E)$. The tensor associativity identification $E\\otimes_CL=D\\otimes_QL$ sends $u\\otimes(q/a^n)$ to $(u\\otimes q)/a_E^n$: [lem-weil-pbc-localization-base-change], applied to $Q\\to L$ and $Q\\to D$, identifies its target with $D[1/a_E]$. Both comparisons send $u\\otimes1$ to the class of $u$, so the map whose kernel was just computed is exactly $E\\to(E/(f_E))[1/a_E]$. Since $K=(P)$, its kernel is $KE=(P_E)$. No property of $E$ beyond its flatness was used.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HD (lemma-flat), 00DF (lemma-tensor-product-exact); Section 00CM, universal property of localization. Algebraic proof of morphisms.tex Tag 081I (lemma-flat-base-change-scheme-theoretic-image) in this affine case."
+   }
+  },
+  {
+   "text": "For a ring map $R\\to H$, inverse images of basic opens $D(c)\\subseteq\\operatorname{Spec}R$ are the spectra $\\operatorname{Spec}(H[1/c])$. They are quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Thus $\\operatorname{Spec}H\\to\\operatorname{Spec}R$ is quasi-compact (check on this affine basis). By [lem-weil-pbc-scheme-image-qc-kernel], with the global affine open $\\operatorname{Spec}R$, its scheme-theoretic image has ideal exactly $\\ker(R\\to H)$; global sections and the map are identified by [def-weil-affine-spectrum]. Apply this first to $C\\to L$: Step 3 gives the closed subscheme $V(P)$. Apply it also to $E\\to(E/(f_E))[1/a_E]$: Step 4 gives $V(P_E)$. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] and the actual ring comparison in Step 4 identify this second source, with its map to $\\operatorname{Spec}E$, with $T\\times_{\\operatorname{Spec}C}\\operatorname{Spec}E$. These images are the closures by [def-nagata-scheme-theoretic-image], because the maps are the locally closed immersions specified in the statement. Thus the conclusions are equalities of ideals and of closed subschemes.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "morphisms.tex Tags 01R8 (lemma-quasi-compact-scheme-theoretic-image), 056A (example-scheme-theoretic-image); affine scheme fibre products and basic-open localizations."
+   }
+  },
+  {
+   "text": "Finally suppose $A\\to C$ and $B_0$ is flat over $A$. By [lem-weil-pbc-flat-module-base-change], $C\\otimes_A B_0$ is flat as a $C$-module through $c\\mapsto c\\otimes1$. Apply Steps 4--5 to precisely this map. They give the stated tensor-base kernel formula and closure, with $a,f,P$ sent to $a\\otimes1,f\\otimes1,P\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HI (lemma-flat-base-change), non-faithful case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-localization",
+  "lem-sfb-transverse-prime-ideal-parameters",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-ideal-membership-at-maximal-localizations",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-tensor-quotient-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 4.1.8 and Lemma 4.2.9, printed pp.118 and 121, chart calculation; agent supplies the saturation and flat-tensor details from the cited Stacks results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "saturation.*(span|mul)|ker.*(baseChange|tensor)|strictTransform|strict_transform",
+   "results": "{\"t\": \"2026-10-22T05:58:47Z\", \"tool\": \"grep\", \"query\": \"saturation.*(span|mul)|ker.*(baseChange|tensor)|strictTransform|strict_transform\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Grassmannian.lean\", \"Mathlib/RingTheory/Grassmannian.lean\", \"Mathlib/RingTheory/Grassmannian.lean\", \"Mathlib/RingTheory/Grassmannian.lean\", \"Mathlib/RingTheory/MatrixAlgebra.lean\", \"Mathlib/RingTheory/MatrixAlgebra.lean\", \"Mathlib/RingTheory/MatrixAlgebra.lean\", \"Mathlib/RingTheory/MatrixAlgebra.lean\"], \"digest\": \"85a15a52b94be765\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturation of the principal ideal a to the m times a product of distinct regular parameters by a is generated by that product, compatible with flat base change",
+   "results": "{\"t\": \"2026-10-22T05:58:48Z\", \"tool\": \"leansearch\", \"query\": \"Saturation of the principal ideal a to the m times a product of distinct regular parameters by a is generated by that product, compatible with flat base change\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.saturation, Module.Flat",
+   "results": "{\"t\": \"2026-10-22T05:58:48Z\", \"tool\": \"loogle\", \"query\": \"Ideal.saturation, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.saturation'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a regular Noetherian ring C let f equal a power of a times a product P of coordinate parameters distinct from a. The closure of V(f) off V(a) has kernel (P), and this closure kernel commutes with flat scalar extension",
+   "results": "{\"t\": \"2026-10-22T05:58:59Z\", \"tool\": \"leanfinder\", \"query\": \"In a regular Noetherian ring C let f equal a power of a times a product P of coordinate parameters distinct from a. The closure of V(f) off V(a) has kernel (P), and this closure kernel commutes with flat scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"Algebra.Generators.sq_ker_comp_le_ker_compLocalizationAwayAlgHom\", \"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"Algebra.Extension.ker_infinitesimal\", \"Algebra.Extension.Cotangent.ker_mk\", \"PrimeSpectrum.closure_range_comap\", \"Algebra.Generators.comp_localizationAway_ker\", \"PrimeSpectrum.mem_image_comap_zeroLocus_sdiff\"], \"digest\": \"214c2d3f8904f160\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of C mapping to the localization of C modulo a power of a times P is generated by P when P is a product of prime parameters not associated to a, and flat tensor preserves this kernel",
+   "results": "{\"t\": \"2026-10-22T05:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of C mapping to the localization of C modulo a power of a times P is generated by P when P is a product of prime parameters not associated to a, and flat tensor preserves this kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.comp_localizationAway_ker\", \"Algebra.Generators.sq_ker_comp_le_ker_compLocalizationAwayAlgHom\", \"Algebra.Generators.ker_localizationAway\", \"Ideal.ker_tensorProductMk_quotient\", \"MvPolynomial.ker_eval₂Hom_universalFactorizationMap\", \"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"RingHom.toKerIsLocalization\", \"AlgHom.toKerIsLocalization_apply\"], \"digest\": \"f3c9f411e5a666c3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of R to the localization of R modulo a power of a times a product P of distinct regular parameters is the ideal generated by P and is preserved under flat extension",
+   "results": "{\"t\": \"2026-10-23T09:33:39Z\", \"tool\": \"leanfinder\", \"query\": \"Kernel of R to the localization of R modulo a power of a times a product P of distinct regular parameters is the ideal generated by P and is preserved under flat extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.sq_ker_comp_le_ker_compLocalizationAwayAlgHom\", \"Algebra.Generators.comp_localizationAway_ker\", \"Algebra.Generators.ker_localizationAway\", \"RingHom.toKerIsLocalization\", \"AlgHom.toKerIsLocalization_isLocalizedModule\", \"AlgHom.toKerIsLocalization_apply\", \"AlgHom.toKerIsLocalization\", \"IsLocalization.ker_map\"], \"digest\": \"c6ea1be28c32bd5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization kernels, Dedekind multiplicities or flatness permanence, not the regular-parameter saturation with all flat extensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, RingHom.ker",
+   "results": "{\"t\": \"2026-10-23T09:33:39Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.Away, RingHom.ker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsLocalization.away_of_isIdempotentElem\", \"IsLocalization.Away.of_surjective\", \"IsLocalization.Away.of_surjective_of_isScalarTower\", \"Algebra.Generators.sq_ker_comp_le_ker_compLocalizationAwayAlgHom\"], \"digest\": \"5c777ce56cd6b874\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization kernels, Dedekind multiplicities or flatness permanence, not the regular-parameter saturation with all flat extensions"
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*(localization|away)|saturation",
+   "results": "{\"t\": \"2026-10-23T09:33:39Z\", \"tool\": \"grep\", \"query\": \"ker.*(localization|away)|saturation\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"Mathlib/RingTheory/Localization/Algebra.lean\", \"Mathlib/RingTheory/Localization/Algebra.lean\"], \"digest\": \"3f04d1836d6775d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization kernels, Dedekind multiplicities or flatness permanence, not the regular-parameter saturation with all flat extensions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Saturation of a principal ideal generated by a power times a product of pairwise nonassociated prime elements removes exactly the factors of the inverted prime",
+   "results": "{\"t\": \"2026-10-23T09:35:18Z\", \"tool\": \"leanfinder\", \"query\": \"Saturation of a principal ideal generated by a power times a product of pairwise nonassociated prime elements removes exactly the factors of the inverted prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.count_associates_eq\", \"Ideal.count_associates_eq'\", \"IsDedekindDomain.HeightOneSpectrum.maxPowDividing\", \"Ideal.mem_prime_of_mul_mem_pow\", \"Ideal.finprod_not_dvd\", \"irreducible_pow_sup\", \"FractionalIdeal.finprod_heightOneSpectrum_factorization_principal_fraction\", \"Ideal.IsPrime.mul_mem_pow\"], \"digest\": \"3028e8233054f190\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization kernels, Dedekind multiplicities or flatness permanence, not the regular-parameter saturation with all flat extensions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme theoretic closure of a parameter product divisor away from one regular parameter commutes with flat base change",
+   "results": "{\"t\": \"2026-10-23T09:35:19Z\", \"tool\": \"leansearch\", \"query\": \"Scheme theoretic closure of a parameter product divisor away from one regular parameter commutes with flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"fadd714baa4fc477\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization kernels, Dedekind multiplicities or flatness permanence, not the regular-parameter saturation with all flat extensions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nc-coordinate-blowup-branch-drop",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 4.1.8 and Lemma 4.2.9, printed pp. 118 and 121: the blowup-chart computation showing that the strict transform of the deepest stratum divisor has depth one smaller. Old proof steps 4, 5 and 7: scheme-theoretic closure, local saturation and flat tensor of its kernel.",
+   "via": [
+    "lem-trf-nc-coordinate-blowup-branch-drop",
+    "lem-trf-nc-maximal-branch-blowup",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-parameter-product-closure-kernel",
+  "worker": "stage1",
+  "summary": "Preserved the statement and inherited fields. Searched project Lean and all Mathlib search services. Reused existing parameter-prime/intersection, local ideal-membership, flat exactness, quotient tensor, localization base change, affine scheme-image and flat module-base-change nodes. Wrote the actual saturation and map-compatible tensor calculation, with no new nodes. Checked empty products, units, zero rings, disconnected regular bases, and arbitrary non-Noetherian flat targets.",
+  "blueprint": "Realizes the inherited ancestor lem-trf-local-term-locality through the recorded alteration/strictification chain: ILO VIII 4.1.8 and 4.2.9 chart computation; parent lem-trf-nc-coordinate-blowup-branch-drop step 2 closure and step 4 flat base change. The newest blueprint has no separate node stating this algebraic tool.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-transverse-prime-ideal-parameters",
+    "why": "Part (b) is a generic regular-local algebra tool giving incomparable coordinate primes and their product intersection; the trace-formula unit has no such general parameter-family statement. This does not replace the geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-transverse-prime-ideal-parameters"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-8301407e5",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-8301407e5 (reviewer sub-agent of L); spot-checked: Read the item's whole proof and every cited statement. The statement is unchanged from base (diffed against side-live). The item was unsplit with no proof and is not superseded live. No new nodes. Only definition stmt_deps were added, and proof_deps equals the union of the step uses. Step 1: localization zero criterion plus quotient kernel, elementary. Step 2: lem-sfb-transverse-prime-ideal-parameters (b), applied to permuted initial blocks, gives PS=∩(z_j)S and a∉(z_j)S, and primality strips a^n. I accept this declared off-unit tool use as generic regular-local algebra. Step 3: membership at maximal localizations gives K=(P) without commuting saturation with localization. Step 4: flat tensor of 0→K→C→L plus the quotient and localization base-change leaves, with the canonical map checked, gives kernel KE=P_E E. Step 5: Spec H→Spec R is quasi-compact; clause (1) of lem-weil-pbc-scheme-image-qc-kernel on the global affine, plus the affine fibre product, gives V(P) and V(P_E) as closed subschemes. Step 6: flat-module-base-change for C⊗_A B_0. Tested C=k[x,y] with a=x, P=y; r=0; a a unit; the repeated-position exclusion; and the non-flat counterexample E=C/(x). ILO VIII 4.1.8 and Lemma 4.2.9 read: the source has only a 'usual local computation with charts', so the agent origin is correct. All Stacks tags exist and there is no SGA. No duplicates: lemma-nagata-scheme-image-affine-saturation needs a to be a unit, and lemma-nagata-dense-flat-pullback covers only the dense case. Parent branch-drop steps 2 and 4 use the item exactly as stated. Cosmetic only: the document field of steps 2 and 5 says algebra.tex for etale/morphisms tags."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ParameterProductClosureKernel",
+  "declaration": "AlgebraicGeometry.ParameterProductClosure.parameter_product_closure_kernel",
+  "declarations": [
+   "AlgebraicGeometry.ParameterProductClosure.quotientAwayMap",
+   "AlgebraicGeometry.ParameterProductClosure.parameter_product_closure_kernel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ParameterProductClosureKernel.lean",
+  "statement": "theorem parameter_product_closure_kernel {C : Type u} [CommRing C] [IsRegularRing C] (r : ℕ) (a : C) (z : Fin r → C) (e : ℕ) (he : 1 ≤ e) (P f : C) (hP : P = ∏ j, z j) (hf : f = a ^ e * P) (hparameters : ∀ (p : Ideal C) [p.IsPrime], ∃ t : List (Localization.AtPrime p), IsLocalRing.IsRegularSystemOfParameters t ∧ ∃ ι : {i : Fin (r + 1) // ¬ IsUnit (algebraMap C (Localization.AtPrime p) (Fin.cases a z i))} ↪ Fin t.length, ∀ i, t.get (ι i) = algebraMap C (Localization.AtPrime p) (Fin.cases a z i.val)) : (RingHom.ker (quotientAwayMap a f) : Set C) = {h : C | ∃ n : ℕ, a ^ n * h ∈ Ideal.span {f}} ∧ RingHom.ker (quotientAwayMap a f) = Ideal.span {P} ∧ (Spec.map (CommRingCat.ofHom (quotientAwayMap a f))).ker = (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {P})))).ker ∧ (∀ (p : Ideal C) [p.IsPrime], ((RingHom.ker (quotientAwayMap a f)).map (algebraMap C (Localization.AtPrime p)) : Set (Localization.AtPrime p)) = {h : Localization.AtPrime p | ∃ n : ℕ, (algebraMap C (Localization.AtPrime p) a) ^ n * h ∈ Ideal.span {algebraMap C (Localization.AtPrime p) f}} ∧ (RingHom.ker (quotientAwayMap a f)).map (algebraMap C (Localization.AtPrime p)) = Ideal.span {algebraMap C (Localization.AtPrime p) P}) ∧ (∀ (E : Type u) [CommRing E] [Algebra C E] [Module.Flat C E], RingHom.ker (quotientAwayMap (algebraMap C E a) (algebraMap C E f)) = (RingHom.ker (quotientAwayMap a f)).map (algebraMap C E) ∧ (RingHom.ker (quotientAwayMap a f)).map (algebraMap C E) = Ideal.span {algebraMap C E P} ∧ (pullback.snd (Spec.map (CommRingCat.ofHom (quotientAwayMap a f))) (Spec.map (CommRingCat.ofHom (algebraMap C E)))).ker = (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {algebraMap C E P})))).ker) ∧ (∀ (A B₀ : Type u) [CommRing A] [CommRing B₀] [Algebra A C] [Algebra A B₀] [Module.Flat A B₀], RingHom.ker (quotientAwayMap (algebraMap C (C ⊗[A] B₀) a) (algebraMap C (C ⊗[A] B₀) f)) = (RingHom.ker (quotientAwayMap a f)).map (algebraMap C (C ⊗[A] B₀)) ∧ (RingHom.ker (quotientAwayMap a f)).map (algebraMap C (C ⊗[A] B₀)) = Ideal.span {algebraMap C (C ⊗[A] B₀) P})",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-255581886",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Every node clause and edge case matches the Lean: Mathlib IsRegularRing (includes Noetherian), parameter hypothesis as an injection of nonunit indices into RSOP positions, saturation and K=(P) as kernels of the real quotientAwayMap, local KS=saturation=PS, flat-E kernel clauses plus closure as pullback.snd.ker, and C⊗[A]B₀ clause; closures stated as kernel ideal sheaves, which are closed subschemes via Scheme.Hom.image. Edge cases r=0, units, field localization, zero ring, e=1/n=0 ok. lean.statement verbatim; node differs from side-live only in lean; no new nodes; helper is real with docstrings; sorry only. Notes: E/A/B₀ share universe u, needed for the scheme pullback and stated in the report; the second-reading section is the worker's own pass."
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedBridge",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Nearest blueprint ancestor lookup for lem-sf-native-weil-tensor-ringed-bridge returns None. Source paragraph: cor-coef-verdier-weil-equivariance, internal Hom/evaluation and normalized action-site restriction. Sheaf tensor-Hom adjunction and uniqueness of left adjoints; Stacks 03EO.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-sheaf-hom-identity-unit",
+ "kind": "statement",
+ "title": "Recognize the sheaf tensor unit by its internal Hom",
+ "statement": "For any small ringed site (J,R), if the internal-Hom endofunctor Hom(M,-) of a specified sheaf M is naturally isomorphic to the identity, then M is isomorphic to the genuine coefficient tensor unit. No native realization or action-site existence is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Sheaf tensor-Hom adjunction and uniqueness of left adjoints; Stacks 03EO."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Curry the specified uncurried Hom isomorphism. Compose the sheaf tensor-Hom adjunction with this right-adjoint isomorphism to make tensorLeft M left adjoint to the identity. Uniqueness of left adjoints identifies tensorLeft M with the identity. Evaluate at the tensor unit and precompose with the inverse right unitor. The resulting isomorphism identifies M with the coefficient unit, including for the zero ring and empty site.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Sheaf tensor-Hom adjunction and uniqueness of left adjoints; Stacks 03EO."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Sheaf tensor-Hom adjunction and uniqueness of left adjoints; Stacks 03EO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between categories of modules compatible with internal Hom preserves tensor unit and restriction along action site preserves tensor and Hom",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, Rep.MonoidalClosed.linearHomEquivComm, Rep.MonoidalClosed.linearHomEquiv, Rep.instIsRightAdjointActionModuleCatRes, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, Rep.instIsLeftAdjointActionModuleCatRes, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, CategoryTheory.Mod_.comap_obj_mod",
+   "date": "2026-10-27",
+   "verdict": "No exact recognition or normalized-component statement among these hits. Use tensor-Hom adjunction, uniqueness of adjoints, or NatIso.ofComponents with the given component maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence",
+   "results": "12 hits: CategoryTheory.Equivalence, CategoryTheory.Equivalence.refl, CategoryTheory.Equivalence.instInhabited, CategoryTheory.Equivalence.instPowInt, CategoryTheory.Equivalence.instCategory, CategoryTheory.Equivalence.pow, CategoryTheory.Equivalence.powNat, CategoryTheory.Equivalence.functor",
+   "date": "2026-10-27",
+   "verdict": "No exact recognition or normalized-component statement among these hits. Use tensor-Hom adjunction, uniqueness of adjoints, or NatIso.ofComponents with the given component maps."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesKInjectiveComplexes|tensorHomEquiv",
+   "results": "17 hits: Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/TensorProduct/Associator.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact recognition or normalized-component statement among these hits. Use tensor-Hom adjunction, uniqueness of adjoints, or NatIso.ofComponents with the given component maps."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHomAdjunction",
+   "results": "WeilConjectures/Algebra/Category/ModuleCat/Sheaf/MonoidalClosed.lean:180 defines the existing adjunction. Compose with the specified Hom identity and use Adjunction.leftAdjointUniq.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing proved API; only naturality assembly or uniqueness of adjoints remains."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheafHomIdentityUnit",
+  "file": "lean/Sheaf/CategoryTheory/SheafHomIdentityUnit.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.unit_iso_of_identity_hom",
+  "statement": "theorem unit_iso_of_identity_hom\n    {C : Type v} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{v}) (M : TwistedActionRingedSite.Modules R)\n    (h : Prod.sectR (op M) _ ⋙\n      Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)) ≅ 𝟭 _) :\n    Nonempty (M ≅ SheafOfModules.unit (TwistedActionRingedSite.ring R))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "independent cc review: delivered BridgeData structure+attributes vs published item (byte-identical); underived_restriction vs Presentation fields (tensor_pure/unit_sections/evaluation/symmetry) and Underived/TensorCoherence; new node records vs Lean; 2 direct importers compiled OK against delivery"
+ }
+}

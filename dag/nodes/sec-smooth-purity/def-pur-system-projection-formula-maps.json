@@ -1,0 +1,114 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemProjectionFormulaCoherence",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula maps commute with changes of compactification and with compatible triangles of compactifications on derived semilinear coefficient systems",
+   "results": "Eight hits about homology, projective resolutions and profinite projections; no compact-support or semilinear-system projection result.",
+   "date": "2026-10-26",
+   "verdict": "No matching geometric projection transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates, a generic mate-pasting identity.",
+   "date": "2026-10-26",
+   "verdict": "Useful categorical tool; does not state the geometric compact-support equation."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*evaluation|evaluation.*projection",
+   "results": "One hit, Mathlib/Topology/LocallyConstant/Basic.lean:278, locally constant evaluation.",
+   "date": "2026-10-26",
+   "verdict": "No matching strict-system compactification projection theorem."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "projection",
+   "results": "418 blueprint nodes match; includes general projection definitions and coherence statements, but none states either concrete-word specialization in the actual Operations realization.",
+   "date": "2026-10-26",
+   "verdict": "No exact blueprint duplicate for these concrete-word steps. Nearest blueprint ancestor: prop-pur-adic-reconstruction-trace-coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "id": "def-pur-system-projection-formula-maps",
+ "kind": "definition",
+ "title": "Specified system projection and graph-refinement composition words",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and simultaneous system operations $o$ with compositors $c$, open comparisons $a$, canonical bridge $b$ and proper/open coherence $q$ [def-sf-integral-system-operations, def-sf-integral-system-canonical-bridge, def-sf-integral-system-realization-data]. For a compactification $d=(i_d,g_d)$ of $f:X\\to Y$ [def-weil-compactifications-refinements], put $\\operatorname{support}_d=i_{d,!};g_{d,*}$ on derived strict semilinear coefficient systems. For a refinement $r:d\\to e$, define $\\operatorname{refinement}_r:\\operatorname{support}_e\\to\\operatorname{support}_d$ as the composite of the canonical identity direct-image inverse, the proper/open mate $q.\\gamma(i_d,1_X,r,i_e)$, the proper compositor, and the equality transport $r;g_e=g_d$. If $f$ is quasi-compact, use its canonical graph common refinement $d\\wedge e$ and define $\\operatorname{change}_{d,e}(M)=\\operatorname{refinement}_{\\mathrm{infFst}}(M);\\operatorname{inverseOnDomain}(\\operatorname{refinement}_{\\mathrm{infSnd}}(M))$, where inverseOnDomain is the actual categorical inverse for an isomorphism, and the zero morphism otherwise. For a compatible triangle $T$ [def-pur-compatible-compactification-triangle], define $\\operatorname{triangleWord}_T$ by whiskering its intrinsic proper/open mate with the first open extension and last proper direct image, then applying the open and proper compositors and the equations $T.i_q,T.p_g$. Define compositorAlong by these same four factors for an explicit triangle parameter. For compactifications $c_f,c_g,c_{gf}$ of quasi-compact maps $f,g,gf$, define $\\alpha_{g,f,M}$ by change from $c_f,c_g$ to the canonical compatible triangle, its triangleWord, and change to $c_{gf}$. Define $\\operatorname{projection}_d$ as the specified proper-counit projection followed by the open tensor comparison and pullback-compositor identification. Finally, leftMap is the two successive projections followed by $\\alpha$ and the inverse pullback compositor; rightMap is $\\alpha\\otimes1$ followed by the composite projection. Tensor and pullback are the fixed derived operations [def-weil-derived-pullback-tensor-hom]. Every composition is in the simultaneous system presentation and uses its specified equality transports; these are the unchanged explicit constructions extracted from the parent module.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7J: refinement maps and the four compact-support composition identifications; sites-cohomology.tex Tag 0B56: counit projection."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-realization-data",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-compatible-compactification-triangle"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "the strict-system projection and compositor words required before the inverse-limit comparison",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemProjectionFormulaMaps",
+  "file": "lean/Sheaf/Paper/SystemProjectionFormulaMaps.lean",
+  "declaration": "WeilConjectures.SystemProjectionFormula.compositor",
+  "declarations": [
+   "WeilConjectures.SystemProjectionFormula.inverseOnDomain",
+   "WeilConjectures.SystemProjectionFormula.support",
+   "WeilConjectures.SystemProjectionFormula.refinement",
+   "WeilConjectures.SystemProjectionFormula.change",
+   "WeilConjectures.SystemProjectionFormula.triangleWord",
+   "WeilConjectures.SystemProjectionFormula.compositorAlong",
+   "WeilConjectures.SystemProjectionFormula.compositor",
+   "WeilConjectures.SystemProjectionFormula.projection",
+   "WeilConjectures.SystemProjectionFormula.leftMap",
+   "WeilConjectures.SystemProjectionFormula.rightMap"
+  ],
+  "statement": "def compositor (o : Operations l E) (c : Compositors l E o)\n    (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)\n    (q : ProperOpenCoherence l E o c a b)\n    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}\n    [QuasiCompact f] [QuasiCompact g]\n    (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))\n    (M : System l E X) :\n    (support l E o cg).obj ((support l E o cf).obj M) ⟶ (support l E o cfg).obj M",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1d96e",
+  "group": "U6",
+  "result": "fix",
+  "landing": "20261025T213040-L-278775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1d96e",
+  "group": "U6",
+  "result": "fix",
+  "landing": "20261025T213040-L-278775",
+  "kind": "interface",
+  "note": "independent cc review: the 4 delivered modules and 4 nodes with lem-pur-system-level-projection-formula-coherence, the published module and node, the change record, and the 2 direct importers compiled in one sandbox"
+ }
+}

@@ -12,45 +12,44 @@
  ],
  "proof": [
   {
-   "text": "The coefficient family in step 1 is compatible with pullback: the universe-general canonicalAbelianMap_naturality of [lem-sf-finite-discrete-encoding-naturality] says that its section maps commute with the direct-image coefficient map for every scheme morphism and every test object. For $h:U\\to T$, write $b_h:h^{-1}A_T\\xrightarrow{\\sim}A_U$ for the canonical constant-sheaf map. The cited section equation says $\\eta_h c_T=(h_*c_U)\\eta_h^{\\mathrm{const}}$. Taking adjoint transposes gives $c_U b_h=\\alpha_h(h^{-1}c_T)$, an equality of maps $h^{-1}A_T\\to p_U^*\\underline A$. In the formulas of [sk-def-sfb-module-pushforward-pullback] and [def-weil-pbc-proetale-operations], both pullbacks are the inverse-image abelian sheaf with scalars extended along this same ring map. Using the balanced tensor comparison of step 5 gives $E_Uh^*\\cong h^*E_T$. This applies to every covering map and locally closed stratum, with no finiteness or smoothness condition on $h$.",
+   "text": "Rewrite finite constant local models using finiteConstantLocalModel_iff_exists_cover from [det-def-sfb-constructible-local-model], retaining the same cover. On each member U choose an encoding using [lem-sf-finite-discrete-normalized-encoding]. Apply finite_scalar_model_iff_constant from [lem-pe-finite-discrete-scalar-constant-models] to the internal inverse image. Compose its model isomorphism with encoding_pullback_fixed from [lem-pe-finite-discrete-encoding-pullback-fixed] in the appropriate direction. This gives the ordinary finite constant local model on exactly that cover, in both directions.",
    "uses": [
-    "lem-sf-finite-discrete-encoding-naturality",
-    "sk-def-sfb-module-pushforward-pullback",
-    "def-weil-pbc-proetale-operations"
+    "det-def-sfb-constructible-local-model",
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-pe-finite-discrete-scalar-constant-models",
+    "lem-pe-finite-discrete-encoding-pullback-fixed"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Ringed-topos pullback formula; coefficient-section compatibility from the cited node, using Bhatt-Scholze Lemma 5.4.1 only as geometric context"
-   }
+   "elementary": false
   },
   {
-   "text": "For a finitely presented $A$-module $P$, choose a finite presentation $A^r\\xrightarrow{B}A^s\\to P\\to0$ with scalar matrix $B$. By steps 2, 5 and 8 the local model $(p_U^*\\underline A)\\otimes_A P$ is sent to the cokernel of the identical matrix $A_U^r\\xrightarrow{B}A_U^s$, namely the constant module sheaf $P_U$: the constant presheaf has this cokernel objectwise, and sheafification preserves its cokernel universal property by its left adjunction [def-weil-pbc-sheafification]. Conversely the inverse equivalence uses the identical presentation. Thus the same pro-etale cover trivializes the model in either description. Applying this on the same constructible locally closed strata proves equivalence of the constructibility predicates in [sk-def-sfb-constructible], on qcqs schemes and affine-locally on arbitrary schemes. Step 4 handles bounded cohomology and step 7 handles the Tor interval, so $D(E_T)$ identifies their bounded constructible finite-Tor subcategories. Finite $A$ makes every finitely presented $P$ finite; conversely a finite module over the finite ring $A$ has a finite presentation, since the kernel of a finite free surjection is a finite set and therefore finitely generated.",
+   "text": "Ordinary local models are invariant under isomorphism: apply inverse image to the isomorphism and compose with the displayed constant model. Consequently the ordinary stratification and constructibility predicates are invariant under isomorphism. Apply the preceding local-model equivalence to each immersion of the same finite stratification and use encoding_pullback_fixed. In the non-qcqs branch apply this stratification equivalence after each affine-open inverse image, again using encoding_pullback_fixed. Thus IsConstantModelConstructible and ordinaryConstructible correspond, with both branches of the defining conditional preserved.",
    "uses": [
     "sk-def-sfb-constructible",
-    "def-sfb-finitely-presented-module",
-    "def-weil-pbc-sheafification"
+    "lem-pe-finite-discrete-encoding-pullback-fixed"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
-    "place": "Coefficient identification in the parent split, step 8; explicit finite-presentation argument"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Let F be the composite ordinary and fixed encoding functor. Its actual mapDerivedCategory is definitionally Encoding.fixedDerived.functor. It is an additive equivalence, hence exact and faithful. The proved exact-functor API in [lem-weil-pbc-exact-functor-bounded-below] supplies mapDerivedCategoryHomologyFunctorIso, bounded_mapDerivedCategory_obj and bounded_of_bounded_mapDerivedCategory_obj: the latter reflects homology vanishing through faithfulness. For every degree compose the constructibility equivalence of the preceding step with the homology comparison, using isomorphism invariance. Combine this degreewise equivalence with preservation and reflection of boundedness to obtain the second conjunct.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-finite-discrete-encoding-naturality",
-  "sk-def-sfb-module-pushforward-pullback",
-  "def-weil-pbc-proetale-operations",
+  "det-def-sfb-constructible-local-model",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-pe-finite-discrete-scalar-constant-models",
+  "lem-pe-finite-discrete-encoding-pullback-fixed",
   "sk-def-sfb-constructible",
-  "def-sfb-finitely-presented-module",
-  "def-weil-pbc-sheafification"
+  "lem-weil-pbc-exact-functor-bounded-below"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
-  "place": "Strict component of lem-sf-module-object-ordinary-coefficient-equivalence.",
-  "note": "The original public statement is unchanged. This node isolates a proper part of its argument. The displayed proof in words is the corresponding part of the original twelve-step argument; it remains a named proof obligation."
+  "place": "Coefficient-identification argument, steps 8--9, without the separately treated Tor condition.",
+  "note": "F1, 2026-10-22: complete Lean proof from the already proved normalized pullback, scalar constant model and scalar-cover comparisons; finite stratifications and the affine-local branch are preserved. No new proof obligations or changed statements."
  },
  "mathlib_searches": [
   {
@@ -122,13 +121,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-caefd",
-  "group": "K1",
+  "reviewer": "COMPILER",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261021T061419-L-1771997",
-  "kind": "interface",
-  "note": "independent cc review: delivered item theorem signature (md5) and the 17 moved defs vs live lean/ (= quarantine/) text, verbatim apart from blueprint ids; the three sorry components vs the item's clauses and CondensedConstantConstructibility definitions; importers FiniteLocalizingExceptionalPreservation and TowerCompactSupportProjectionFormula compiled with the delivered modules"
+  "landing": "20261022T143559-L-1175884",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

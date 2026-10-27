@@ -1,0 +1,179 @@
+{
+ "id": "lem-sfb-listed-coefficient-ctf",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Preservation and reduction to elementary maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Admissibility and scalar preservation for listed coefficient presentations",
+ "statement": "Let ell be prime and a : Λ → Λ' satisfy ListedCoefficientMap ell a, with the exact coefficient presentations and sectionwise map normalizations of def-sfb-listed-coefficient-maps. Both Λ and Λ' satisfy IsLocalizingAdmissibleCoefficient ell. For every positive-characteristic field k of characteristic different from ell and every separated finite-type k-scheme X, the actual ordinary unbounded derived extension scalarSixChange a X sends bounded constant-model constructible complexes of finite Tor amplitude to complexes with these same two properties.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Preservation; elementary coefficient cases"
+ },
+ "stmt_deps": [
+  "def-sfb-listed-coefficient-maps",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-coefficient-change"
+ ],
+ "proof": [
+  {
+   "text": "For each primitive listed map identify its endpoint ring objects with the corresponding admissible continuous-function objects. For finite rings use a Type 0 finite ring isomorphic to the given Type u ring, with the discrete topology. Constant-to-continuous finite comparison and postcomposition identify the prescribed map, including the zero ring. The equalities in the integral, field, localization and algebraic-closure constructors identify the remaining maps. The endpoint isomorphisms prove the disjunctions defining admissibility.",
+   "uses": [
+    "def-sfb-listed-coefficient-maps",
+    "def-sfb-listed-scalar-coefficient-maps",
+    "sk-def-localizing-closure",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "coefficient list and Preservation"
+   }
+  },
+  {
+   "text": "For each nonidentity primitive use scalarSixCtf clause (3) after the preceding change of presentation. Exact scalar equivalences preserve finite constant presentations, bounds and Tor tests: for Tor amplitude transport an arbitrary test sheaf through the inverse equivalence and use its monoidal tensor comparison. The algebraic-closure identity acts through the scalar unit isomorphism and preserves all these predicates.",
+   "uses": [
+    "det-prop-scalar-six-ctf",
+    "det-prop-scalar-six-pullback",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Preservation and scalar-six-ctf (3)"
+   }
+  },
+  {
+   "text": "Induct on finite composites. The induction hypotheses retain the two outer endpoint assertions and send a finite-Tor bounded constructible input successively to two objects of the same kind. The canonical scalarSixTower associator identifies this composite with extension along the composite map. Transport both predicates along that isomorphism.",
+   "uses": [
+    "def-sfb-listed-coefficient-maps",
+    "det-prop-scalar-six-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Preservation, composites"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-listed-coefficient-maps",
+  "def-sfb-listed-scalar-coefficient-maps",
+  "sk-def-localizing-closure",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "det-prop-scalar-six-ctf",
+  "det-prop-scalar-six-pullback",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Explicit presentation transports for the existing elementary comparison and preservation theorems"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars preserves bounded constructible sheaves of finite Tor amplitude for listed condensed coefficient ring maps",
+   "results": "ModuleCat.ExtendScalars.obj', ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.extendRestrictScalarsAdj, SheafOfModules.restrictScalars; none states the derived constructibility or normalized mate result.",
+   "date": "2026-10-26",
+   "verdict": "no match: underived scalar interfaces only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite ring coefficient map or finite extension or localization gives an isomorphism of the canonical derived direct image counit mate",
+   "results": "CategoryTheory.mateEquiv_counit (Mathlib.CategoryTheory.Adjunction.Mates), GammaSpec counit invertibility, discrete condensed-module counits; none proves scalar/direct-image invertibility.",
+   "date": "2026-10-26",
+   "verdict": "no match: mate calculus supplies equations, not invertibility in these coefficient cases"
+  },
+  {
+   "tool": "grep",
+   "query": "rg (condensed|Condensed).*(Tor|constructible)|scalar.*direct.*image|ListedCoefficient in Mathlib/Condensed and Mathlib/Algebra/Category/ModuleCat/Sheaf; rg scalarDirectImageMate|ListedCoefficientMap in lean/WeilConjectures and lean/Sheaf; search DAG and latest blueprint for listed coefficient preservation and elementary direct image cases",
+   "results": "Mathlib has no match. Existing scalarSixCtf uses IsListedScalarCoefficientMap (Type 0 topological presentations); existing finiteRingRelativeScalarComparison uses fixed-module sheaves; finiteFreeDirectImageCoherence uses section-ring modules. No existing declaration matches the specified presentation transports.",
+   "date": "2026-10-26",
+   "verdict": "no exact duplicate; the new lemmas isolate presentation transport and the elementary cases, without composites or direct-image preservation/coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ScalarSixDirectImage",
+  "date": "2026-10-26",
+  "group": "B5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ListedCoefficientCtf",
+  "file": "lean/Sheaf/SixFunctors/ListedCoefficientCtf.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.listedCoefficientCtf",
+  "statement": "theorem listedCoefficientCtf (ell : ℕ) [Fact ell.Prime]\n    {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (ha : ListedCoefficientMap ell a) :\n    IsLocalizingAdmissibleCoefficient ell Λ.X ∧\n    IsLocalizingAdmissibleCoefficient ell Λ'.X ∧\n    (∀ (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]\n      (X : Over (Spec (.of k)))\n      [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]\n      (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left)),\n      (constantModelBoundedConstructible Λ.X X.left K ∧\n        DerivedCategory.finiteTorAmplitude _ K) →\n      constantModelBoundedConstructible Λ'.X X.left ((scalarSixChange a X.left).obj K) ∧\n        DerivedCategory.finiteTorAmplitude _ ((scalarSixChange a X.left).obj K))",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-listed-coefficient-ctf",
+  "worker": "stage3",
+  "summary": "Isolate the presentation transport required to apply the published statements without changing their or the item's signatures. The original module supplies preservation assembly, coefficient-composite induction and ambient coherence.",
+  "blueprint": "Current scalar-six direct-image proof: Preservation and primitive coefficient cases, before the coefficient-composite reduction.",
+  "tool_uses": [
+   {
+    "node": "sk-def-localizing-closure",
+    "why": "Use the published The localizing closure interface as a generic coefficient/derived-functor comparison; retain the scalar-six elementary-map route and its actual normalized mate."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "why": "Use the published Finite discrete condensed rings are constant interface as a generic coefficient/derived-functor comparison; retain the scalar-six elementary-map route and its actual normalized mate."
+   },
+   {
+    "node": "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "why": "Use the published Constant coefficient rings under scheme inverse image interface as a generic coefficient/derived-functor comparison; retain the scalar-six elementary-map route and its actual normalized mate."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Use the published Local models and constructible sheaves interface as a generic coefficient/derived-functor comparison; retain the scalar-six elementary-map route and its actual normalized mate."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c3ce",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T201426-L-2501254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8c3ce",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T201426-L-2501254",
+  "kind": "interface",
+  "note": "independent cc review: delivered ScalarSixDirectImage proof + 2 new sorried statement modules/nodes vs published item statement, ListedCoefficientMap, scalarSixCtf, scalarDirectImageMateCoherence, IsLocalizingAdmissibleCoefficient, unit sk-prop-scalar-six (realized empty); sandbox compile of 3 delivered modules + 7 direct importers OK, axioms only sorryAx via cited sorried statements"
+ }
+}

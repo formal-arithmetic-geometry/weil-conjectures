@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-integral-constructible-reduction-hom",
+ "kind": "statement",
+ "title": "Reconstructing a constructible integral morphism from compatible reductions",
+ "statement": "Let D be a finite-field datum, l a prime different from D.p, E a finite extension of Q_l, and X a separated finite-type D.k-scheme. For K,M in the intrinsic completed bounded constructible category [def-weil-derived-complete-integral-detailed], write r_n for derived reduction at exponent n+1 [def-weil-integral-derived-reduction] and t_M(m,n):r_m M → Res r_n M for the normalized DVR reduction transition [lem-coef-normalized-dvr-effectivity]. Given f_n:r_n K → r_n M for every n≥0, assume f_m followed by t_M(m,n) equals t_K(m,n) followed by Res(f_n) whenever n≤m. Then there is a unique g:K→M with r_n(g)=f_n for every n. The compatibility refers to actual derived maps; no assertion that all maps of arbitrary derived towers are determined by evaluations is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: reconstruction of the counit-normalized integral map; the existing u_existsUnique proof docstring makes its Milnor uniqueness argument explicit."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "lem-coef-normalized-dvr-effectivity"
+ ],
+ "proof": [
+  {
+   "text": "On a K-flat representative identify the intrinsic derived quotient transition with restriction of normalizedDVRReductionTransition followed by normalizedDVRResCompletedComp. Use the existing private representative_isIso and transition_eq from SfDerivedCompleteLegacyComparison, the normalizedDVRKFlatUnit normalization, and normalizedDVR_kflat_transition. Naturality transports the equation to the given derived object. This is an equality of the actual maps, not a faithfulness claim about derived restriction.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-coef-normalized-dvr-kflat-transition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral residue Tor to the reductions of K[1] and M. Shift stability of integral constructibility provides uniform intervals. The existing private intrinsic_hom_finite in CompactSupportTermHomFinite makes Hom(r_n(K[1]),r_n(M)) finite by etale origin, finite-Tor internal Hom, and direct-image finiteness over the algebraically closed point. Transport this finiteness through the normalized reduction/restriction adjunction to Hom(K[1],Res_n r_n(M)). No compact-support target is used.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-coef-integral-residue-tor",
+    "lem-sf-compact-support-term-hom-finite",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining Roos completeness of M gives IsHomotopyLimit for sfIntegralReductionCone(M). Use the adopted source theorem CategoryTheory.Pretriangulated.IsHomotopyLimit.bijective_milnorMap in WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor. Its required shifted Hom groups are finite by the preceding step. This is precisely finite Mittag-Leffler vanishing and the Hom exact sequence of the specified Roos triangle; no enriched mapping-complex comparison or arbitrary strictification of evaluated tower maps is needed.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-pbc-mittag-leffler"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose each f_n by the normalized scalar adjunction. Applying the adjunction unit formula to hf for adjacent levels, and the transition identity in step 1, gives a compatible family of maps K to Res_n r_n(M). Surjectivity of the Milnor map supplies g. Its projection equalities and naturality of the units, followed by injectivity of the finite adjunction Hom bijection, give r_n(g)=f_n. For another such g, all Milnor projections agree by unit naturality, so injectivity of the Milnor map gives equality. Zero objects, the first positive quotient and the empty scheme require no exceptions.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "lem-coef-integral-residue-tor",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-coef-normalized-dvr-kflat-transition",
+  "lem-sf-compact-support-term-hom-finite",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-mittag-leffler"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Normalized finite-reduction mapping argument, implemented directly using the specified Roos triangle and the adopted source HomotopyLimit.Milnor theorem; group M2, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For constructible derived complete adic sheaves on a finite type scheme over an algebraically closed field, Hom is the inverse limit of Hom between finite reductions",
+   "results": "8 hits, including Scheme.Modules.Hom, AdicCompletion, sheafHom and SheafOfModules.hasLimit; no derived constructible reduction theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic gives ordinary adjunction naturality, not the geometric finite quotient reconstruction or counit coherence.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizing_reduction_coherent|integralConstructibleReductionHom|DualizingDatum",
+   "results": "msearch grep: zero Mathlib hits. Project rg found the existing definitions in CoefIntegralFiniteExtension; integralSystemReduction_fullyFaithful concerns coherent system morphisms, not their separate finite evaluations. NormalizedDVRTowerEvaluation_full only gives existence and explicitly does not claim uniqueness. Blueprint search for finite reduction Hom: zero matches.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "date": "2026-10-25",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 3-4: reconstruction of the counit-normalized integral map; the existing u_existsUnique proof docstring makes its Milnor uniqueness argument explicit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleReductionHom",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleReductionHom.lean",
+  "declaration": "WeilConjectures.integralConstructibleReductionHom",
+  "statement": "theorem integralConstructibleReductionHom (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (K M : sfIntegralConstructibleCategory l E X) (f : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj K.obj ⟶ (scalarReductionDerivedExtension l E X n).obj M.obj) (hf : ∀ {m n : ℕ} (h : n ≤ m), f m ≫ normalizedDVRReductionTransition l E X D hl h M.obj = normalizedDVRReductionTransition l E X D hl h K.obj ≫ (normalizedDVRRes l E X h).map (f n)) : ∃! g : K.obj ⟶ M.obj, ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).map g = f n",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-56002",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261025T164906-L-1121390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261025T202552-L-2729346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

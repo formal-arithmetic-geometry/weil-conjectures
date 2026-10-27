@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-descent-saturation-invariant-open",
+ "kind": "statement",
+ "title": "Restriction of a descent datum to a saturated open",
+ "statement": "Let $p:A\\to B$ be a flat [def-weil-flat-morphism], surjective [def-weil-surjective-morphism] morphism of finite presentation between affine schemes [def-pc-scheme]; finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $\\pi:V\\to A$ be a scheme over $A$ with a descent datum $\\phi:V\\times_B A\\xrightarrow{\\sim}A\\times_B V$ satisfying the cocycle $\\phi_{02}=\\phi_{12}\\circ\\phi_{01}$ [def-pd-descent-datum, def-pc-fibre-product]. For an affine open subscheme $C\\subset V$ [def-weil-open-immersion], define $r_C:C\\times_B A\\to V$ as the inclusion into $V\\times_B A$, followed by $\\phi$ and the projection to $V$, and put $W_C=\\operatorname{im}(|r_C|)\\subset |V|$. Suppose $W_C$ is open and give it its open subscheme structure. Then $\\phi$ restricts to an isomorphism $\\phi_C:W_C\\times_B A\\xrightarrow{\\sim}A\\times_B W_C$ over $A\\times_B A$ satisfying the same cocycle. Here, for a test scheme $Z$, maps $a,b:Z\\to A$ with $p\\circ a=p\\circ b$ and $z:Z\\to V$ with $\\pi\\circ z=a$, the *transport of $z$ from $a$ to $b$* for $\\phi$ is the $V$-component of $\\phi\\circ(z,b):Z\\to A\\times_BV$; it lies over $b$. Transport for $\\phi_C$ is defined in the same way. Moreover, for every test scheme $Z$, maps $a,b:Z\\to A$ with $p\\circ a=p\\circ b$, and $v:Z\\to W_C$ with $\\pi\\circ\\iota_C\\circ v=a$, transport from $a$ to $b$ for $\\phi_C$, followed by the inclusion $\\iota_C:W_C\\hookrightarrow V$, equals transport of $\\iota_C\\circ v$ for $\\phi$. No separatedness, local quasi-finiteness or quasi-compactness hypothesis on $V\\to A$ is imposed. All schemes lie in the universes of [def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02W8, lemma-separated-locally-quasi-finite-morphisms-fppf-descend, second paragraph, the equality phi(W times A) = A times W and the restricted descent datum (old step 4)"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "def-weil-size-convention",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put R = V ×_B A, s = pullback.fst and t = D.toHom. The universal transport D.univ of the proved source-library invariant-open API is definitionally D.toHom. The cartesian square and universal point are those of def-pc-fibre-product and def-pd-descent-datum.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let m be the map C ×_B A → R induced by C.ι, id_A and id_B. Mathlib Scheme.Pullback.range_map, the chosen-pullback form of base-change image, gives range(m) = s⁻¹(C), since the second factor map is the identity. Taking the range of m ≫ t yields W = t(s⁻¹(C)).",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For r with s(r) in W choose r₀ with s(r₀) in C and t(r₀)=s(r). Apply descent_orbit_saturated at c=s(r₀): r belongs to s⁻¹(O_c), hence to t⁻¹(O_c). Choose r₁ with s(r₁)=c and t(r₁)=t(r). Since c is in C, this witnesses t(r) in W. By the proved source-library isInvariant_iff this pointwise property is D.IsInvariant W. This is exactly the orbit-union argument, without assuming a common residue field.",
+   "uses": [
+    "lem-pd-descent-orbit-saturated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved source-library construction D.restrict W hInv (WeilConjectures.AlgebraicGeometry.EffectiveDescent.Invariant). Its restrictTransport factors each transported map through W.ι using IsOpenImmersion.lift. Its naturality, identity and cocycle proofs cancel W.ι, an open-immersion monomorphism. Thus it realizes the restriction and cocycle directly in transport form, without constructing a second pullback isomorphism.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose E = D.restrict W hInv. The proved restrict_transport_left_ι lemma gives exactly the required equality for every Z,a,b,h,v; its Over.homMk (v.left ≫ W.ι) is definitionally v ≫ Over.homMk W.ι rfl.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-pd-descent-orbit-saturated",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-monomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02W8, second paragraph: saturation is invariant by the cocycle and the descent datum restricts. Lean proof reuses the proved source-library invariant-open restriction and the existing point-orbit saturation theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "saturat|invariant|restrict",
+   "results": "{\"t\": \"2026-10-22T05:59:41Z\", \"tool\": \"grep\", \"query\": \"saturat|invariant|restrict\", \"sub\": \"AlgebraicGeometry/Descent\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentData\"",
+   "results": "{\"t\": \"2026-10-22T05:59:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData\", \"CategoryTheory.Pseudofunctor.DescentData.instCategory\", \"CategoryTheory.Pseudofunctor.DescentData.Hom\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\"], \"digest\": \"7e926cccd8f606db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of an open subset under a scheme descent relation is invariant under transport by the cocycle, and the descent datum restricts to its saturated open",
+   "results": "{\"t\": \"2026-10-22T05:59:51Z\", \"tool\": \"leanfinder\", \"query\": \"The image of an open subset under a scheme descent relation is invariant under transport by the cocycle, and the descent datum restricts to its saturated open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.GlueData.ι_image_preimage_eq\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_X\", \"AlgebraicGeometry.Scheme.GlueData.openCover_f\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.preimage_toBase_eq_range_ι\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_f\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst\"], \"digest\": \"4bda832bf716c9ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism V times B A to A times B V satisfying a descent cocycle, the saturation of any open in V is stable under the descent datum",
+   "results": "{\"t\": \"2026-10-22T05:59:52Z\", \"tool\": \"leanfinder\", \"query\": \"For an isomorphism V times B A to A times B V satisfying a descent cocycle, the saturation of any open in V is stable under the descent datum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq\", \"TopCat.Presheaf.isGluing_iff_pairwise\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map\", \"CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff\", \"CategoryTheory.Precoverage.mem_toGrothendieck_iff\", \"CategoryTheory.Coverage.Saturate.hcongr_5\", \"CategoryTheory.Coverage.mem_toGrothendieck\"], \"digest\": \"2e7daa91677f5856\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*descent|descent.*saturat|invariant.*open|open.*invariant",
+   "results": "{\"t\": \"2026-10-22T06:00:11Z\", \"tool\": \"grep\", \"query\": \"saturat.*descent|descent.*saturat|invariant.*open|open.*invariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme descent datum restricts to the saturated image of an open subscheme; the cocycle proves invariance",
+   "results": "{\"t\": \"2026-10-22T06:00:21Z\", \"tool\": \"leansearch\", \"query\": \"A scheme descent datum restricts to the saturated image of an open subscheme; the cocycle proves invariance\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "saturat.*descent|descent.*saturat|restrict.*[Dd]escent",
+   "results": "{\"t\": \"2026-10-22T07:07:31Z\", \"tool\": \"grep\", \"query\": \"saturat.*descent|descent.*saturat|restrict.*[Dd]escent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: open restriction or gluing alone does not prove saturation invariance"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentData\"",
+   "results": "{\"t\": \"2026-10-22T07:07:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData\", \"CategoryTheory.Pseudofunctor.DescentData.instCategory\", \"CategoryTheory.Pseudofunctor.DescentData.Hom\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorIdIso\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj\", \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\"], \"digest\": \"7e926cccd8f606db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: open restriction or gluing alone does not prove saturation invariance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme descent datum restricts to the open saturation of an open subscheme, with the same transport and cocycle",
+   "results": "{\"t\": \"2026-10-22T07:07:39Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme descent datum restricts to the open saturation of an open subscheme, with the same transport and cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.restrict\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_I₀\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_X\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_f\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.opensDiagramι\", \"AlgebraicGeometry.opensDiagram\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\"], \"digest\": \"59a3c38a67400459\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: open restriction or gluing alone does not prove saturation invariance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a scheme descent datum to its saturated open subscheme satisfies the cocycle",
+   "results": "{\"t\": \"2026-10-22T07:16:21Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of a scheme descent datum to its saturated open subscheme satisfies the cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\"], \"digest\": \"f62092edf53c32fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: open restriction or gluing alone does not prove saturation invariance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The saturation under a descent cocycle is an invariant open subset and the descent isomorphism restricts to it",
+   "results": "{\"t\": \"2026-10-22T07:16:23Z\", \"tool\": \"leanfinder\", \"query\": \"The saturation under a descent cocycle is an invariant open subset and the descent isomorphism restricts to it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_f\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_right_as\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_left\", \"TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map\", \"TopCat.Presheaf.generateEquivalenceOpensLe_counitIso\", \"TopCat.Presheaf.generateEquivalenceOpensLe_unitIso\"], \"digest\": \"77342aad48d595e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: open restriction or gluing alone does not prove saturation invariance"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|theorem lift_fac|theorem lift_uniq",
+   "results": "{\"t\": \"2026-10-22T07:26:27Z\", \"tool\": \"grep\", \"query\": \"def lift|theorem lift_fac|theorem lift_uniq\", \"sub\": \"AlgebraicGeometry/OpenImmersion.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"701\", \"705\", \"708\"], \"digest\": \"730342bb554e9782\"}",
+   "date": "2026-10-22",
+   "verdict": "helper match, reused existing node lem-weil-pbc-morphism-factors-through-open-subscheme; not a match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For schemes an open immersion j and morphism f with range f contained in range j there is a unique lift through j",
+   "results": "{\"t\": \"2026-10-22T07:26:28Z\", \"tool\": \"leansearch\", \"query\": \"For schemes an open immersion j and morphism f with range f contained in range j there is a unique lift through j\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\", \"AlgebraicGeometry.IsOpenImmersion.lift_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.IsOpenImmersion.lift_fac\"], \"digest\": \"205c8e75bf805612\"}",
+   "date": "2026-10-22",
+   "verdict": "helper match, reused existing node lem-weil-pbc-morphism-factors-through-open-subscheme; not a match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.lift",
+   "results": "{\"t\": \"2026-10-22T07:26:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.IsOpenImmersion.instLift\", \"AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id\", \"AlgebraicGeometry.IsOpenImmersion.lift_fac\", \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.IsOpenImmersion.lift_fac_assoc\", \"AlgebraicGeometry.IsOpenImmersion.comp_lift\", \"AlgebraicGeometry.IsOpenImmersion.comp_lift_assoc\"], \"digest\": \"20da397df3ed4a5f\"}",
+   "date": "2026-10-22",
+   "verdict": "helper match, reused existing node lem-weil-pbc-morphism-factors-through-open-subscheme; not a match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes whose image is contained in an open subscheme factors uniquely through that open subscheme",
+   "results": "{\"t\": \"2026-10-22T07:26:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of schemes whose image is contained in an open subscheme factors uniquely through that open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.lift_fac\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.Scheme.homOfLE\", \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.Scheme.Hom.toImage_imageι\", \"AlgebraicGeometry.Scheme.Opens.instIsOverι\", \"AlgebraicGeometry.Scheme.Hom.isoOpensRange_hom_ι\", \"AlgebraicGeometry.instIsOpenImmersionHomOfLE\"], \"digest\": \"143fde4e4938b395\"}",
+   "date": "2026-10-22",
+   "verdict": "helper match, reused existing node lem-weil-pbc-morphism-factors-through-open-subscheme; not a match for the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separated-lqf-fppf-effective-descent",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The geometric quotient-presentation support for the local-term specialization chain: Tag 0265, first and third representability steps, applications of effective fppf descent to the base changes of t and of the relation monomorphism j. In the supporting Tag 02W8 proof: the equality phi(W times A) = A times W and the restricted descent datum (old step 4).",
+   "via": [
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-descent-saturation-invariant-open",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proves invariance by expressing the saturation as a union of the existing saturated point-orbits, then constructs the restriction and its inverse using existing Mathlib leaves and verifies the cocycle and every test-scheme transport. No new nodes.",
+  "blueprint": "Realizes the Tag 02W8 geometric descent support in the retained from/via chain below lem-trf-local-term-locality: second-paragraph equality phi(W times A)=A times W and the resulting restricted datum.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-descent-orbit-saturated",
+    "why": "Generic point-orbit saturation for an arbitrary scheme descent datum; used only to prove invariance of the union of orbits, with no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-descent-orbit-saturated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NI-534fa1a22",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-534fa1a22 (reviewer sub-agent of L); spot-checked: I read the whole delivery and accept it. It is a split with no new nodes, and the item is still unsplit in live and side-live, so no other group has superseded it. Compared with side-live, the statement, stmt_deps and blueprint fields are unchanged; only the proof, proof_deps, proof_origin, searches, split_report and status changed. The source, Stacks 02W8 (more-morphisms.tex, second paragraph), says the restriction holds 'by the cocycle condition', and the delivery writes that argument out. Step 1: the transport form t∘(z,b) of φ follows from def-pd-descent-datum, and the cocycle on the diagonal gives D_aa=1; this is elementary. Step 2: C×_B A is the pullback of R along C↪V, and lem-weil-pbc-base-change-image (image_preimage_eq_of_isPullback) gives image s⁻¹|C|, so W_C is the union of the orbits O_c. Step 3: lem-pd-descent-orbit-saturated, whose only hypotheses are a scheme map and a transport datum, gives s⁻¹O_c=t⁻¹O_c, and the union is then invariant; there is no cycle. Step 4: j_0 and j_1 are open immersions with images s⁻¹W and pr_V⁻¹W, φ and φ⁻¹ preserve these by step 3, and the factorization goes through IsOpenImmersion.lift, so it does not factor through a bare image. Step 5: cancelling the monomorphisms gives the inverse, composing with (v,b) gives the transport clause, and the cocycle follows through the universal point. Edge cases checked: C empty, p the identity, and a datum swapping two copies of A. A duplicate search for invariant/saturated descent data found only finite-p pd nodes, the consumer lem-pd-effective-invariant-open-cover, and lem-trf-invariant-open-image-pullback, which descends an already-invariant open; none duplicates the item. I accept the declared tool use of lem-pd-descent-orbit-saturated (unit sk-prop-jacobian-descent) as a generic black box. The searches include all three kinds, and no SGA source is cited. Maintainer note: lem-pd-descent-orbit-saturated cites Tag 0H8K where Tag 0APF is meant; that is the other node's fault and not used here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescentSaturationInvariantOpen",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_descentDatum_saturation_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescentSaturationInvariantOpen.lean",
+  "statement": "theorem exists_descentDatum_saturation_open {A B : Scheme.{u}} [IsAffine A] [IsAffine B] (p : A ⟶ B) [Flat p] [Surjective p] [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] {V : Over A} (D : Over.DescentDatum p V) (C : V.left.Opens) (_hC : IsAffineOpen C) (W : V.left.Opens) (_hW : (W : Set V.left) = Set.range (pullback.map (C.ι ≫ V.hom ≫ p) p (V.hom ≫ p) p C.ι (𝟙 A) (𝟙 B) (by simp) (by simp) ≫ D.toHom)) : ∃ E : Over.DescentDatum p (Over.mk (W.ι ≫ V.hom)), ∀ (Z : Scheme.{u}) (a b : Z ⟶ A) (h : a ≫ p = b ≫ p) (v : Over.mk a ⟶ Over.mk (W.ι ≫ V.hom)), (E.transport a b h v).left ≫ W.ι = (D.transport a b h (v ≫ Over.homMk W.ι rfl)).left",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f7421fb4",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of lem-trf-descent-saturation-invariant-open matches the Lean: affine A,B; Flat/Surjective/LocallyOfFinitePresentation/QuasiCompact/QuasiSeparated p; V : Over A with the recorded Over.DescentDatum D; affine open C; W pinned to Set.range (pullback.map (C.ι ≫ V.hom ≫ p) p … ≫ D.toHom), where toHom is the V-component of φ on V ×_B A; conclusion ∃ E : DescentDatum on W.ι ≫ V.hom with (E.transport v).left ≫ W.ι = (D.transport (v ≫ homMk W.ι)).left for all Z,a,b, which pins E because W.ι is mono. Nothing is assumed about V → A, and one universe u covers all schemes. Edge cases (C/V/A empty, p = id, swap datum, non-closed points, non-reduced Z) are fine. Only the item's lean record changed relative to side-live; lean.statement is verbatim. The plain imports are the proof-dependency modules (brief §3 rule 7). Docstrings carry source place, blueprint id and the five proof steps; no line exceeds 100 chars; proof is sorry only; no new nodes. Searches of all three kinds are recorded; the item is not landed elsewhere. No file changed, so no compile; the worker reports a clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261023T103005-L-3030304",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

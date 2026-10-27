@@ -1,0 +1,373 @@
+{
+ "id": "lem-sfb-quotient-system-projection-lift",
+ "kind": "statement",
+ "title": "Coefficient-system lift of the augmented ambient projection mate",
+ "statement": "Let $f:(\\mathscr X,R_X)\\to(\\mathscr Y,R_Y)$ be a morphism of ringed topoi presented by sites small in the coefficient universe, with a specified ring isomorphism $f^{-1}R_Y\\cong R_X$ [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism]. Let $J=\\mathbf N_{\\ge1}^{\\mathrm{op}}$ and let $Q_{Y,\\bullet}$ be a strict inverse system of commutative $R_Y$-algebra sheaves with unital algebra transitions; put $Q_{X,\\bullet}=f^{-1}Q_{Y,\\bullet}$ with its pulled-back structure. A $Q_T$-module system is a strict family of $Q_{T,n}$-module sheaves whose transitions are linear along the ring transitions. Realize these as modules over $Q_T$ on the small diagram topos [lem-weil-pbc-diagram-site-realization], and use ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $U_T$ for exact restriction from $Q_T$-module systems to strict $R_T$-module towers [def-pc-sheaf-restrict-scalars]. Let $F=f^*$ be exact ambient pullback, $G=Rf_*$ its derived right adjoint, and let $F_Q\\dashv G_Q$ be the induced derived adjunction on the ringed diagram topoi [lem-weil-pbc-ringed-projection-mate-exact]. For $K\\in D(R_T)$ set $\\mathcal B_TK=\\Delta K\\otimes^L_{\\Delta R_T}Q_T$ as a $Q_T$-module system [lem-pur-derived-change-of-rings]. Then $B_T=U_T\\mathcal B_T$ is the strict reduction functor, with quotient augmentation $i_T$, of [lem-weil-pbc-reduction-pullback-derived-tower].\n\nThe canonical derived scalar/pullback isomorphism $\\tau^Q:F_Q\\mathcal B_Y\\cong\\mathcal B_XF$, normalized by $f^{-1}(x\\otimes q)\\mapsto f^{-1}x\\otimes f^{-1}q$ on flat-term K-flat representatives, defines by adjunction a natural morphism of derived $Q_Y$-module systems\n$$\\beta_K:\\mathcal B_Y(GK)\\longrightarrow G_Q\\mathcal B_XK,$$\nwhose transpose is $\\mathcal B_X(\\varepsilon_K)\\tau^Q_{GK}$ for the ambient counit $\\varepsilon:FG\\to1$. Under the canonical restriction/direct-image comparison $d:U_YG_Q\\cong G^{\\rm Tow}U_X$ [lem-pur-diagram-ring-restriction-pushforward], one has\n$$d\\,U_Y(\\beta_K)=h_K,$$\nwhere $h_K:B_Y(GK)\\to G^{\\rm Tow}B_XK$ is precisely the augmented ambient projection mate [lem-weil-pbc-augmented-diagram-projection-mate]. Evaluation identifies $\\beta_{K,n}$ in $D(Q_{Y,n})$ with the $Q_{Y,n}$-linear adjunct of the tensor-pullback comparison followed by $\\varepsilon_K\\otimes1$, and its restriction to $D(R_Y)$ with the evaluated ambient projection map. These are comparisons of derived strict systems before evaluation. They commute with all $Q_{Y,b}\\to Q_{Y,a}$ and satisfy, after restriction,\n$$d\\,U_Y(\\beta_K)i_{Y,GK}=G^{\\rm Tow}(i_{X,K})\\chi_K,$$\nwith the canonical constant-tower comparison $\\chi$ in the augmented-mate node. If every evaluation of $h_K$ is an isomorphism, then $\\beta_K$ and each $\\beta_{K,n}$ are isomorphisms. No perfectness, flatness of $R_T\\to Q_{T,n}$, completeness, or boundedness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map; Tag 0D6E, lemma-derived-pushforward-composition, on the ringed diagram sites; coefficient-linear refinement of the augmented mate, not a verbatim single Stacks lemma"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "def-sfb-quotient-system-projection-data",
+  "def-sfb-quotient-system-evaluation-data",
+  "def-sfb-quotient-system-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Work on the small diagram topoi. Put $A_T=\\Delta R_T$, $E_T=(-\\otimes^L_{A_T}Q_T)$ and $F_A=F^{\\rm Tow}$, so $\\mathcal B_T=E_T\\Delta_T$. The scalar map $A_T\\to Q_T$ gives a ringed-topos morphism with identity underlying topos, whose derived pullback is $E_T$ and whose derived direct image is the exact $U_T$. Hence $E_T\\dashv U_T$ is the canonical ringed derived adjunction. The two factorizations of the ringed diagram morphism from $(\\mathscr X^J,Q_X)$ to $(\\mathscr Y^J,A_Y)$ give $c:F_QE_Y\\cong E_XF_A$ and $d:U_YG_Q\\cong G^{\\rm Tow}U_X$. Apply the canonical derived-composition comparisons: they identify the two composite adjunctions, not merely their object assignments. The $d$ here is the specified restriction/direct-image comparison, since both are normalized by those same composition maps. All these sites are small, and both geometric inverse images are exact because both structural coefficient maps are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-diagram-ring-restriction-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); apply to the identity-topos scalar morphisms and their composite with f"
+   }
+  },
+  {
+   "text": "Compose $c$ with $F_A\\Delta_Y=\\Delta_XF$ to define $\\tau^Q:F_Q\\mathcal B_Y\\cong\\mathcal B_XF$. On a flat-term K-flat representative $P$, the comparison is the $Q_X$-linear map $f^{-1}(x\\otimes q)\\mapsto f^{-1}x\\otimes f^{-1}q$. It is compatible with a transition $q\\mapsto\\rho_{ba}(q)$: either composite sends the displayed tensor to $f^{-1}x\\otimes f^{-1}\\rho_{ba}(q)$. These are maps on the diagram site. Canonical K-flat scalar representatives and the normalized pullback-composition comparisons descend them to the derived diagram categories. Their restrictions are exactly the representative-normalized comparison $\\tau$ of the reduction-pullback node: both conjugate this same ordinary tensor map by the resolution comparisons. Consequently, writing $a:F_AU_Y\\cong U_XF_Q$ for the inverse-image/restriction identification, $U_X(\\tau^Q)\\,a_{\\mathcal B_Y}=\\tau$, under $U_T\\mathcal B_T=B_T$. No flatness of $A_T\\to Q_T$ is used: only the chosen source representative is K-flat.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-reduction-pullback-derived-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product), with their flat-term K-flat representative normalization"
+   }
+  },
+  {
+   "text": "Here is the counit calculation needed for restricting a mate. Denote the units of $E_T\\dashv U_T$ by $u_T$, and the counits of $F_A\\dashv G^{\\rm Tow}$ and $F_Q\\dashv G_Q$ by $\\varepsilon_A,\\varepsilon_Q$. By the composite-adjunction compatibility from step 1, the mate of $c$ has the following formula for each $N$:\n$$d_N=G^{\\rm Tow}U_X(\\varepsilon_{Q,N})\\,G^{\\rm Tow}U_XF_Q(v_Y)\\,G^{\\rm Tow}U_X(c^{-1})\\,G^{\\rm Tow}(u_X)\\,\\eta_{A,U_YG_QN},$$\nwhere $v_Y:E_YU_Y\\to1$ is the scalar counit; the omitted subscripts are the unique well-typed ones. The middle three arrows compose to $G^{\\rm Tow}(a_{G_QN})$: before applying $G^{\\rm Tow}$ the map is\n$$F_AU_YM\\xrightarrow{u_X}U_XE_XF_AU_YM\\xrightarrow{U_Xc^{-1}}U_XF_QE_YU_YM\\xrightarrow{U_XF_Q(v_Y)}U_XF_QM.$$\nIt is $a_M$. Apply the scalar-adjunct formula of [lem-coef-sequence-adjunction-cochain-transposes] on the diagram site, with the constant sequence $B_n=Q_T$ over $A_T$: the derived adjunct of a chain map $g:P\\otimes_{A_T}Q_T\\to K$ is represented by $x\\mapsto g(x\\otimes1)$ for every flat-term K-flat $A_T$-complex $P$. This is the canonical adjunction $E_T\\dashv U_T$ of step 1, as both are derived from the ordinary scalar adjunction. Hence on a flat-term K-flat representative $P\\to U_YM$, $u_X$ is $x\\mapsto x\\otimes1$ on $F_AP$ and $v_Y$ is multiplication. By step 1, $c^{-1}$ is the ordinary pullback reassociation on these representatives, so the composite sends $f^{-1}x$ to $f^{-1}x\\otimes1$, then to $f^{-1}(x\\otimes1)$, and then to $f^{-1}x$. Thus $d_N=G^{\\rm Tow}(U_X\\varepsilon_{Q,N}\\,a_{G_QN})\\eta_{A,U_YG_QN}$. Taking the inverse Hom bijection gives\n$$\\varepsilon_{A,U_XN}\\,F_A(d_N)=U_X(\\varepsilon_{Q,N})\\,a_{G_QN}.$$\nThis is a formal composite-adjunction and triangle-identity calculation; it does not assume that derived scalar restriction is faithful.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-weil-pbc-composite-adjunction",
+    "lem-coef-sequence-adjunction-cochain-transposes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), 0FPI (lemma-adjoints-push-pull-compatibility); expansion of the two normalized composite Hom bijections"
+   }
+  },
+  {
+   "text": "For $K\\in D(R_X)$ define $t_K=\\mathcal B_X(\\varepsilon_K)\\tau^Q_{GK}$ and let $\\beta_K$ be its adjunct under $F_Q\\dashv G_Q$. This is a morphism in $D(Q_Y)$ on the diagram topos. Both factors of $t_K$ are natural in $K$, so naturality of the adjunction Hom bijection makes $\\beta$ natural. Its defining transpose is precisely $t_K$, rather than an arbitrary coefficient-linear lift of an ambient arrow.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint) and 0B56 (equation-projection-formula-map), construction by adjunction on the ringed diagram topoi"
+   }
+  },
+  {
+   "text": "Compute the $F_A\\dashv G^{\\rm Tow}$ transpose of $d\\,U_Y(\\beta_K)$. Step 3 and naturality of $a$ give, with $N=\\mathcal B_XK$,\n$$\\varepsilon_A F_A(d\\,U_Y\\beta_K)=U_X(\\varepsilon_Q)\\,a_{G_QN}F_A(U_Y\\beta_K)=U_X(t_K)\\,a_{\\mathcal B_YGK}.$$\nStep 2 identifies this with $B_X(\\varepsilon_K)\\tau_{GK}$. The augmented ambient-mate node states that $h_K$ is the adjunct of this very map. Injectivity of the adjunction Hom bijection therefore gives $d\\,U_Y(\\beta_K)=h_K$ as derived strict-system morphisms. The equality has been proved in the ambient derived diagram category, before evaluation.",
+   "uses": [
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), uniqueness under the adjunction Hom bijection; Tags 07A6 and 0FPI for its normalization"
+   }
+  },
+  {
+   "text": "Apply the algebra-diagram evaluation/adjunction-normalization node with $A=\\mathbf Z$, $u=f$, $B_T=Q_T$ and $J=\\mathbf N_{\\ge1}^{\\rm op}$. Every commutative ring sheaf is canonically a constant-$\\mathbf Z$ algebra, so this application imposes no condition that $R_T$ be constant. It supplies $e_{Y,n}G_Q\\cong G_{Q_n}e_{X,n}$ and the formula that evaluation takes an actual transpose to the levelwise transpose. The evaluation/scalar comparison $e_{T,n}\\mathcal B_TK\\cong K\\otimes^L_{R_T}Q_{T,n}$ is the pullback-composition comparison for the ringed evaluation morphism: its inverse image on $Q_T$-modules is exact evaluation, and composing it with scalar extension and $\\Delta_T$ has structural ring map $R_T\\to Q_{T,n}$. The canonical composition theorem computes it by the same flat-term tensor representatives. Applying these comparisons to $t_K$ therefore gives the tensor-pullback comparison followed by $\\varepsilon_K\\otimes1$. Hence the evaluated $\\beta_{K,n}$ is its $Q_{Y,n}$-linear adjunct. Evaluating the equality in step 5 gives its stated ambient restriction, using the ambient evaluation normalization and evaluated formula for $h$ in the augmented-mate node.",
+   "uses": [
+    "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition); cartesian algebra-diagram evaluation normalization"
+   }
+  },
+  {
+   "text": "The construction uses adjunctions on the diagram topoi throughout. Therefore the source, target and $\\beta$ are strict derived systems, and the transition compatibility is that of a morphism in their derived system category. The evaluation comparisons used in step 6 are natural for the semilinear coefficient transitions. Finally substitute step 5 into the augmentation equality of the augmented-mate node:\n$$d\\,U_Y(\\beta_K)i_{Y,GK}=h_Ki_{Y,GK}=G^{\\rm Tow}(i_{X,K})\\chi_K.$$\nThis derives the augmentation identity as an equality of derived strict towers, without attempting to infer an equality of morphisms from equality of evaluations.",
+   "uses": [
+    "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map); unitality and the augmented diagram mate identity"
+   }
+  },
+  {
+   "text": "Suppose every evaluation of $h_K$ is invertible. Evaluation is jointly conservative on derived strict systems, so $h_K$ is invertible as an ambient tower morphism. Step 5 and invertibility of $d$ make $U_Y\\beta_K$ invertible. Exact scalar restriction reflects acyclicity: it changes neither the underlying sheaf of abelian groups nor kernels and cokernels, so $U_YH^r(C)=H^r(U_YC)$, and $U_YH^r(C)=0$ implies $H^r(C)=0$. Apply this to the cone of $\\beta_K$ to conclude that $\\beta_K$ is invertible. Every evaluation functor preserves isomorphisms, so each $\\beta_{K,n}$ is invertible as well. This proves the last assertion for all the unbounded inputs allowed in the statement.",
+   "uses": [
+    "lem-pur-system-derived-evaluation",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 05RR (derived categories); exact scalar restriction and levelwise homology of strict coefficient systems"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+  "lem-pur-system-derived-evaluation",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-coef-sequence-adjunction-cochain-transposes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56, 07A6, 0D6D, 0D6E and 0FPI; formal coefficient-linear diagram refinement using existing normalized ringed-topos comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(projection.*[Mm]ate|[Mm]ate.*projection|quotient.*[Tt]ower|[Tt]ower.*quotient|[Aa]ugmented.*[Tt]ower)",
+   "results": "Actual search: 25 hits; top results: Mathlib/NumberTheory/RamificationInertia/Inertia.lean, Mathlib/NumberTheory/RamificationInertia/Inertia.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean, Mathlib/Topology/Algebra/ConstMulAction.lean, Mathlib/FieldTheory/Galois/IsGaloisGroup.lean, Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar quotient towers, ordinary module scalar adjunctions, sheafification and abstract derived adjunctions do not identify a varying-ring derived-system mate with the augmented ambient strict-tower projection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived counit tensor projection morphism lifts to the derived category of strict systems of quotient ring modules and becomes the augmented ambient tower mate under restriction of scalars",
+   "results": "Actual search: 8 hits; top results: ModuleCat.RestrictionCoextensionAdj.counit', CategoryTheory.Adjunction.derivedε, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, CategoryTheory.Adjunction.derivedη, Derivation.restrictScalars. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar quotient towers, ordinary module scalar adjunctions, sheafification and abstract derived adjunctions do not identify a varying-ring derived-system mate with the augmented ambient strict-tower projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Adjunction",
+   "results": "Actual search: 0 hits; top results: . loogle: unknown identifier 'Adjunction'",
+   "date": "2026-10-22",
+   "verdict": "no match: invalid identifier in this attempted query; corrected by CategoryTheory.Adjunction, CategoryTheory.Sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift the derived projection formula mate from strict towers of modules to systems of quotient ring modules using adjunction, with quotient transitions and augmentation compatibility",
+   "results": "Actual search: 8 hits; top results: IsAdicComplete.StrictMono.mkQ_comp_lift, IsAdicComplete.mkQ_comp_lift, AdicCompletion.eval_comp_of, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, Submodule.factorPowSucc, IsAdicComplete.StrictMono.factorPow_comp_extend. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar quotient towers, ordinary module scalar adjunctions, sheafification and abstract derived adjunctions do not identify a varying-ring derived-system mate with the augmented ambient strict-tower projection"
+  },
+  {
+   "tool": "grep",
+   "query": "(projection|[Tt]ower|[Mm]ate|restrictScalars)",
+   "results": "Actual search: 10 hits; top results: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar quotient towers, ordinary module scalar adjunctions, sheafification and abstract derived adjunctions do not identify a varying-ring derived-system mate with the augmented ambient strict-tower projection"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "Actual search: 12 hits; top results: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar quotient towers, ordinary module scalar adjunctions, sheafification and abstract derived adjunctions do not identify a varying-ring derived-system mate with the augmented ambient strict-tower projection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation of derived inverse sequences of ring module sheaves obtained as the adjoint of the reduction of a pushforward counit, preserving the quotient unit",
+   "results": "Actual search: 8 hits; top results: SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. ",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar quotient towers, ordinary module scalar adjunctions, sheafification and abstract derived adjunctions do not identify a varying-ring derived-system mate with the augmented ambient strict-tower projection"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|adjunction|counit)",
+   "results": "Actual Q142 search: 21 hits; top results: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean.  Subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module-sheaf or scalar adjunctions, restricted scheme comparisons, or abstract category theory; none states the coefficient-linear augmented strict-system projection lift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived projection morphism for a geometric morphism and a sheaf of algebras is linear over the algebra and compatible with restriction of scalars",
+   "results": "Actual Q142 search: 8 hits; top results: PresheafOfModules.restrictScalarsObj, Derivation.coe_restrictScalars, ContinuousLinearMap.restrictScalarsₗ, SheafOfModules.restrictScalars, Derivation.restrictScalars, Derivation.restrictScalars.congr_simp, PresheafOfModules.restrictScalars, CommRingCat.KaehlerDifferential.map. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module-sheaf or scalar adjunctions, restricted scheme comparisons, or abstract category theory; none states the coefficient-linear augmented strict-system projection lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "Actual Q142 search: 12 hits; top results: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module-sheaf or scalar adjunctions, restricted scheme comparisons, or abstract category theory; none states the coefficient-linear augmented strict-system projection lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension along a diagram of ring sheaves commutes with exact inverse image, and its adjoint projection map is compatible with restriction of scalars",
+   "results": "Actual Q142 search: 8 hits; top results: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module-sheaf or scalar adjunctions, restricted scheme comparisons, or abstract category theory; none states the coefficient-linear augmented strict-system projection lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of restriction of scalars and geometric inverse image preserves the derived adjunction counit and its adjoint morphisms",
+   "results": "Actual Q142 search: 8 hits; top results: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, ModuleCat.ExtendRestrictScalarsAdj.counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, ModuleCat.ExtendRestrictScalarsAdj.counit. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module-sheaf or scalar adjunctions, restricted scheme comparisons, or abstract category theory; none states the coefficient-linear augmented strict-system projection lift"
+  },
+  {
+   "tool": "grep",
+   "query": "(projection|derived|mate)",
+   "results": "Actual Q142 search: 0 hits; top results: .  Subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module-sheaf or scalar adjunctions, restricted scheme comparisons, or abstract category theory; none states the coefficient-linear augmented strict-system projection lift"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-ambient-tower-comparison",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Integral paragraph: reduction commutes with ordinary direct image; lift the perfect reduction comparison to quotient-linear strict systems and its quotient augmentation (old comparison steps 5-6)",
+   "via": [
+    "lem-sfb-integral-ambient-tower-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-quotient-system-projection-lift",
+  "worker": "stage1",
+  "summary": "Constructed the quotient-linear mate on the ringed diagram topos, expanded the composite-adjunction restriction calculation, identified its actual ambient transpose, and applied evaluation normalization with base Z. Reused existing nodes throughout: no new nodes, no change to statement or statement dependencies. Checked arbitrary sheaf-ring coefficients, nonflat quotients, strict transitions and augmentation before evaluation, and conservativity without derived faithfulness.",
+  "blueprint": "lem-sfb-dc-lower-star-preserves: integral reduction/direct-image comparison isolated by lem-sfb-integral-ambient-tower-comparison; realizes its coefficient-linear strict-system lift and quotient augmentation (parent old steps 5-6).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Small diagram-topos model used to carry varying coefficient rings and strict systems; the open-finiteness route has no diagram-site construction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Unbounded scalar extension on a ringed diagram site computed on K-flat representatives, including nonflat coefficient maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Canonical unbounded ringed-topos derived adjunction used to take the coefficient-linear transpose."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Canonical pullback and pushforward composition comparisons preserve the composite adjunction and its units/counits for arbitrary ring sheaves."
+   },
+   {
+    "node": "lem-pur-diagram-ring-restriction-pushforward",
+    "why": "Identifies the specified canonical restriction/direct-image comparison on diagram topoi before evaluation."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-pullback-derived-tower",
+    "why": "Pins the ambient comparison by its tensor representatives so restriction gives the prescribed tau."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Explicit composite Hom bijection and counit formula for the formal mate calculation."
+   },
+   {
+    "node": "lem-weil-pbc-augmented-diagram-projection-mate",
+    "why": "The already established augmented ambient mate is the underlying map that the coefficient-linear lift must recover."
+   },
+   {
+    "node": "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+    "why": "Evaluation respects the varying-ring derived adjunction counit. Applied with base Z, not with a falsely constant ambient R."
+   },
+   {
+    "node": "lem-pur-system-derived-evaluation",
+    "why": "Joint conservativity of exact evaluation for arbitrary ring-sheaf sequences."
+   },
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "Underlying-sheaf description proves scalar restriction is exact and reflects zero homology."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Cohomology and cone interpretation for the elementary conservativity argument."
+   },
+   {
+    "node": "lem-coef-sequence-adjunction-cochain-transposes",
+    "why": "Representative formula x->g(x(x)1) for the derived scalar-extension/restriction adjunct over an arbitrary small site and ring map; step 3 uses it for the units u_X and counits v_Y. No node of the unit states it. Added by the cc reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+  "lem-pur-system-derived-evaluation",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-coef-sequence-adjunction-cochain-transposes"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-d12e15bdd",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-d12e15bdd (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the statements of all 12 cited nodes and the Stacks sources (0B56 equation-projection-formula-map; 0FPI lemma-adjoints-push-pull-compatibility). The statement and stmt_deps are unchanged (same hash as the Q73 unsplit node). There are no new nodes, no cycle and no SGA citation: the only 'sga' match is inside 'IsGaloisGroup' in a search record. Checks by step. (1) c and d come from the two factorizations of (X^J,Q_X)->(Y^J,A_Y) through the comparisons node; they are conjugate, and d is the restriction-pushforward node's d. (2) The uniqueness clause of the reduction-pullback node gives U_X(tau^Q)a = tau. (3) I re-derived the five-factor mate formula from def-weil-pbc-composite-adjunction and checked the transpose. (5) The augmented-mate node states that h_K is the adjoint of B_X(eps)tau, so the Hom-bijection injectivity argument is valid before evaluation. (6) The evaluation node with A=Z is used only for the B-coefficient beta_j and transpose formulas, so A=Z is harmless; the restriction clause comes from evaluating step 5. (8) Conservativity follows from lem-pur-system-derived-evaluation plus exactness of restriction on underlying sheaves. Edge cases checked: f=id, zero rings, nonflat Z->Z/2, non-surjective transitions. One fault (C1/C4): step 3 identified the middle composite with a_M using the representative unit and counit of derived E -| U (Stacks 0FPI-type), which no cited node states. FIX: step 3 now cites lem-coef-sequence-adjunction-cochain-transposes (arbitrary small site, constant sequence B_n=Q_T over A_T, adjunct x->g(x(x)1)) and writes out the composite f^{-1}x -> f^{-1}x(x)1 -> f^{-1}(x(x)1) -> f^{-1}x. The node is also added to proof_deps and split_report.tool_uses; all of the worker's tool_uses are accepted as generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.QuotientSystemProjectionLift",
+  "declaration": "CategoryTheory.QuotientProjection.quotientSystemProjectionLift",
+  "declarations": [
+   "CategoryTheory.QuotientProjection.beta",
+   "CategoryTheory.QuotientProjection.restrictedBeta",
+   "CategoryTheory.QuotientProjection.underlyingTensor",
+   "CategoryTheory.QuotientProjection.LiftAssertions",
+   "CategoryTheory.QuotientProjection.quotientSystemProjectionLift"
+  ],
+  "file": "lean/Sheaf/SixFunctors/QuotientSystemProjectionLift.lean",
+  "statement": "theorem quotientSystemProjectionLift (f : RingedPullback R S) [IsIso f.coefficient] [f.V.Additive] [PreservesFiniteLimits f.L] [PreservesFiniteColimits f.L] (k : Comparison f) (Q : CommMon (ℕᵒᵖ ⥤ Modules R)) (MY : RingedModel Q.X (MonObj.one (X := Q.X))) (MX : RingedModel (Q.X ⋙ f.L) (pulledUnit f.L (moduleUnit f k) Q.X (MonObj.one (X := Q.X)))) (tau : MY.B ⋙ (termwise f.L).mapDerivedCategory ≅ f.L.mapDerivedCategory ⋙ MX.B) (htau : IsNormalized f.L Q.X (MonObj.one (X := Q.X)) (moduleUnit f k) (flatRepresentatives R) (flatRepresentatives S) MY MX k.mu k.naturality tau) (P : AugmentedProjectionDirectImage f.L f.V f.moduleAdj) : ∃ m : f.L.CoreMonoidal, (∀ M N : Modules R, m.μIso M N = (k.mu M N).symm) ∧ m.εIso = (moduleUnit f k).symm ∧ letI := m.toMonoidal ∀ [HasDerivedCategory.{wQY} (Systems Q.X)] [HasDerivedCategory.{wQX} (Systems ((termwise f.L).obj Q.X))] [∀ n : ℕᵒᵖ, HasDerivedCategory.{wLY} (Level Q.X n)] [∀ n : ℕᵒᵖ, HasDerivedCategory.{wLX} (Level ((termwise f.L).obj Q.X) n)], (∃ L : Lift Q.X f k MY MX P, IsNormalizedLift Q.X f k MY MX P L) ∧ ∀ L : Lift Q.X f k MY MX P, IsNormalizedLift Q.X f k MY MX P L → LiftAssertions Q.X f k MY MX P tau L",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The coefficient categories are the existing internal module-object categories over the actual algebra tower; universal scalar models and counit-normalized comparisons specify the canonical lift before evaluation. The monoidal presentation is supplied in the conclusion, not assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f706d6d3",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read item node, 3 new def nodes, all 4 modules, deps AugmentedProjectionDirectImage/augmentedDiagramProjectionMate (identical signature f,k,Q,MY,MX,tau,htau,P), Comparison/moduleUnit, CochainComparisonMonoidalEquations (CoreMonoidal mk' with k.mu.symm exists, so the ∃ m conjunct is true), StrictRingSystem. Every clause is rendered: beta = unit≫G(tauQ)≫G(B ε) with its transpose equation; restrictedBeta = augmentedDiagramProjection before evaluation; evaluated Q_n-linear adjunct via EvaluationLift plus IsLeftDerivedFunctor clauses; augmentation identity; iso conditional. Lift data is pinned up to unique compatible iso: ScalarModel by universal property and representative pin, ordinaryTau = k.mu, tau on flat K-flat reps, d by counit transpose, EvaluationPullbackData via underlying/free pin, gamma by counit, so ∀ normalized L → assertions is sound. No extra assumptions; universes independent and bound; statements verbatim; docstrings with source and blueprint; only sorry is the theorem; no hollow defs. Advisory: Mod(ℕᵒᵖ⥤Modules R) Q used instead of StrictRingSystem (stage 3 needs the equivalence); d pinned by counit rather than via diagramRingRestrictionPushforward (different model); evaluated-restriction clause follows from the strict equality; probably unused plain imports. No compile run (no file changed)."
+ }
+}

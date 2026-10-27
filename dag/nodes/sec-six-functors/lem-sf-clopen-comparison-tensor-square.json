@@ -1,0 +1,213 @@
+{
+ "id": "lem-sf-clopen-comparison-tensor-square",
+ "kind": "statement",
+ "title": "Tensor squares for open base change and the clopen comparison",
+ "statement": "Let $A,B,C,D$ be schemes and $k:A\\hookrightarrow B$, $i:C\\hookrightarrow D$ quasi-compact open immersions, $r:A\\to C$, $p:B\\to D$ proper, with $pk=ir$ [def-weil-scheme-morphism-properties]. Put $B_C=B\\times_D C$, with $b:B_C\\to B$, $q:B_C\\to C$, and $s=(k,r):A\\to B_C$ [def-pc-fibre-product]. Work either on their small pro-etale sites [def-weil-pbc-proetale-site], or on their vertical sequence sites with sheaves of commutative rings (strict semilinear module systems) [def-coef-semilinear-system-models]. Choose a ring sheaf $O_D$, a ring sheaf $O_B$ and a structural map $p^{-1}O_D\\to O_B$; use $O_C=i^{-1}O_D$, $O_{B_C}=b^{-1}O_B$, $O_A=k^{-1}O_B$ and the induced structural maps. In the sequence case these are ring systems and compatible structural maps, with arbitrary coefficient transitions. Use ordinary unbounded derived categories of module sheaves, $P_h=Lh^*$, canonical tensor comparison $\\mu_h:P_h(F\\otimes^LG)\\cong P_hF\\otimes^LP_hG$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and exact open extensions. For any open $j$, let $\\delta_j(U,V):j_!U\\otimes^LV\\cong j_!(U\\otimes^LP_jV)$ and the open base-change map $\\beta:P_pi_!\\cong b_!P_q$ have the open-unit normalization of [lem-sf-open-tensor-normalization]. The clopen immersion $s$ and projection $\\rho_s:F\\to s_!P_sF$, identity on $s(A)$ and zero on its complementary open, are as in [lem-cbc-strict-tower-proper-open-calculus]. Set $\\alpha=b_!(\\rho_sP_q)\\beta$, followed by $b_!s_!\\cong k_!$ and $P_sP_q\\cong P_r$.\nFor arbitrary $H\\in D(O_C)$ and $N\\in D(O_D)$ put $X=P_iN$, $Y=P_pN$, $T=P_rX=P_kY$, using the canonical ringed pullback identifications. The following three equalities hold naturally in the derived categories themselves:\n(1) $b_!(\\mu_q)\\beta_{H\\otimes^LX}P_p(\\delta_i)=\\delta_b(\\beta_H\\otimes1_Y)\\mu_p$, with $P_qX=P_bY$; both sides have source $P_p(i_!H\\otimes^LN)$ and target $b_!(P_qH\\otimes^LP_bY)$.\n(2) For arbitrary $F\\in D(O_{B_C})$, $V\\in D(O_{B_C})$ one has $s_!(\\mu_s)\\rho_{s,F\\otimes^LV}=\\delta_s(\\rho_{s,F}\\otimes1_V)$. Under the canonical compositors the composite open tensor comparison for $b,s$ equals $\\delta_k$.\n(3) Consequently the full comparison satisfies\n$$k_!(\\mu_r)\\alpha_{H\\otimes^LX}P_p(\\delta_i)=\\delta_k(\\alpha_H\\otimes1_Y)\\mu_p,$$\nas maps $P_p(i_!H\\otimes^LN)\\to k_!(P_rH\\otimes^LT)$. All equations use the specified tensor/pullback compositors and hold also on the ringed sequence sites before evaluation. There is no boundedness, flatness, constructibility or Tor-amplitude condition on $H,N,F,V$; no proper projection isomorphism is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, lemma-shriek-proper-and-open (open-immersion case); agent tensor refinement of the normalized clopen comparison, from returned lem-sf-proper-open-projection-mate steps 1–3. Tensor foundations: sites-cohomology.tex Tags 07A4 (lemma-pullback-tensor-product) and 0GL1 (lemma-j-shriek-and-tensor)."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Construct the simultaneous normalized data by [lem-sf-clopen-comparison-tensor-data-existence]. For every such datum, apply [lem-sf-clopen-comparison-tensor-square-equations], which proves the clopen and composite-open squares and pastes them with the Cartesian square. Pair these two conclusions. All original hypotheses, definitions and the target statement remain unchanged.",
+   "uses": [
+    "lem-sf-clopen-comparison-tensor-data-existence",
+    "lem-sf-clopen-comparison-tensor-square-equations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-clopen-comparison-tensor-data-existence",
+  "lem-sf-clopen-comparison-tensor-square-equations"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0GL1; formal decomposition and assembly of the original seven-step proof, D6 2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "clopen projection following open base change commutes with derived tensor pullback comparison",
+   "results": "8 hits; AlgebraicGeometry.pullbackSpecIso_hom_base, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.pullbackSpecIso_hom_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.NatTrans",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*tensor|tensor.*clopen|open.*baseChange.*tensor",
+   "results": "0 hits; ; searched Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero open base change tensor compatibility clopen projection",
+   "results": "8 hits; LinearMap.baseChange_zero, ContMDiff.extend_zero, HasCompactSupport.continuous_extend_zero, AlgebraicGeometry.RingedSpace.res_zero, ContinuousLinearMap.extend_zero, HasCompactSupport.tsupport_extend_zero, PrimeSpectrum.isClopen_basicOpen_of_mul_add, HasCompactSupport.extend_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor linearity of the natural transformation pullback open extension to open extension pullback",
+   "results": "8 hits; SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern ordinary pullbacks, categorical mates or monoidal counits, not this mixed tensor-action square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "clopen projection following open base change commutes with derived tensor pullback comparison",
+   "results": "8 hits; AlgebraicGeometry.pullbackSpecIso_hom_base, SheafOfModules.conjugateEquiv_pullbackComp_inv, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.pullbackSpecIso_hom_fst",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback and free-module formulas or unrelated extension/topology lemmas do not state the derived clopen tensor identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Monoidal.NatTrans, CategoryTheory.Adjunction",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Monoidal.NatTrans'",
+   "date": "2026-10-22",
+   "verdict": "no match: invalid identifier diagnostic; no absence conclusion drawn from this query; valid Loogle and semantic queries also run"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*tensor|tensor.*clopen|open.*baseChange.*tensor",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback and free-module formulas or unrelated extension/topology lemmas do not state the derived clopen tensor identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero open base change tensor compatibility clopen projection",
+   "results": "8 hits; LinearMap.baseChange_zero, ContMDiff.extend_zero, HasCompactSupport.continuous_extend_zero, AlgebraicGeometry.RingedSpace.res_zero, ContinuousLinearMap.extend_zero, HasCompactSupport.tsupport_extend_zero, PrimeSpectrum.isClopen_basicOpen_of_mul_add, HasCompactSupport.extend_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback and free-module formulas or unrelated extension/topology lemmas do not state the derived clopen tensor identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.NatTrans",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback and free-module formulas or unrelated extension/topology lemmas do not state the derived clopen tensor identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor linearity of the natural transformation pullback open extension to open extension pullback",
+   "results": "8 hits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, PresheafOfModules.pullbackComp, TopCat.Presheaf.pullbackObjObjOfImageOpen, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.conjugateEquiv_pullbackComp_inv, TopCat.Sheaf.pullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module pullback and free-module formulas or unrelated extension/topology lemmas do not state the derived clopen tensor identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-proper-open-projection-mate",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\"; returned item steps 1–3: open base-change tensor square, component projection (1,0), and composite-open normalization",
+   "via": [
+    "lem-sf-proper-open-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-clopen-comparison-tensor-square",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing nodes only: ringed tensor composition coherence, fully faithful open restriction for the Cartesian tensor square, exact clopen gluing and its derived Hom adjunction, and explicit naturality/pasting for the full comparison. Preserved the statement and original search records. No Lean attachment or Mathlib match covers the item.",
+  "blueprint": "fix-prop-projection-formula.proof.md: sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\". The seven steps supply the tensor compatibility of the open-base-change and clopen-projection factors used in refinement coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Uses only coefficient-independent clopen geometry of a proper/open square; no projection isomorphism or constant-coefficient transport is invoked."
+   },
+   {
+    "node": "lem-pur-clopen-ringed-module-gluing",
+    "why": "Generic arbitrary-ring-sheaf gluing across two clopen components. Step 3 writes out its extension to semilinear transitions."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open-unit-normalized base change, tensor isomorphisms and full faithfulness, explicitly valid on arbitrary ringed sequence sites."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-structure",
+    "why": "Generic tensor compatibility with normalized pullback compositors for canonical ringed tensor models; no geometric projection-formula theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic unbounded derived tensor pullback on arbitrary ringed sites, applied also to the ringed sequence site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-ringed-projection-tensor-structure",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-92af03396",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-92af03396 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, plus the full statements of all 7 cited nodes (and the corner scope of lem-sfb-ringed-projection-tensor-structure via lem-weil-pbc-ringed-projection-mate-exact). No new nodes. statement/stmt_deps/blueprint are byte-identical to the unsplit copy in an earlier snapshot. proof_deps = union of uses. No cycle (DFS over an 11,615-node closure); no SGA. Duplicate search found nothing stating (1)-(3): system-clopen and proper-open tensor compatibility depend on the parent, the other candidates are different statements. Step 1: the Cartesian square (i,p,b,q) has the right ring data for lem-sf-open-tensor-normalization, which covers arbitrary rings and sequence sites; the cbc node is used only for the clopen geometry. Step 2: P_b is bijective on Homs between objects in the image of b_!, and both routes reduce to mu_q∘P_q((u^-1⊗1)mu_i)∘theta by the 'identity after restriction' clauses and composition coherence. Steps 3-5: arbitrary-ring clopen gluing (extended to systems), the localized exact adjunction s^-1 ⊣ s_! with unit (1,0) and counit the inverse open unit, and the transpose computation, which I redid. Step 6 uses full faithfulness of k_! and mu_k=mu_s∘P_s mu_b. Step 7 (elementary): I re-derived k_!mu_r alpha P_p delta_i = delta_k(alpha_H⊗1)mu_p from (1), (2), step 6 and naturality of rho_s and delta_b. Edge cases checked: A, C_0, C empty and zero rings. Stacks tags 07A4/0GL1/04TS/0F7B verified with their labels. Five tool_uses accepted (the unit has no uses). Advisory only: the inherited statement says rho_s is 'as in' the constant-B node; step 3 gives its arbitrary-ring meaning."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ClopenComparisonTensorSquare",
+  "declaration": "SheafOfModules.ClopenComparisonTensorSquare.clopenComparisonTensorSquare",
+  "declarations": [
+   "SheafOfModules.ClopenComparisonTensorSquare.clopenComparisonTensorSquare"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ClopenComparisonTensorSquare.lean",
+  "statement": "theorem clopenComparisonTensorSquare (m : Mode) {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (R : Sheaf (topology m D) CommRingCat.{u + 1}) (S : Sheaf (topology m B) CommRingCat.{u + 1}) (c : R ⟶ ((baseChange m p).sheafPushforwardContinuous CommRingCat.{u + 1} (topology m D) (topology m B)).obj S) (t : SiteSquare (input m p i R S c)) (o : Operations (input m p i R S c) t) (a : Assertion o) : Nonempty (Data o (AlgebraicGeometry.ProEtale.StrictTower.squareLift k r p i h)) ∧ ∀ v : Data o (AlgebraicGeometry.ProEtale.StrictTower.squareLift k r p i h), Equations a v",
+  "branch": "sheaf-dag",
+  "by": "Q140",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem covers both Mode values on the ordinary unbounded ringed-site derived categories. The helpers package the specified canonical comparisons, retaining ordinary pure-section/unit and flat K-flat signed-total representative normalizations. The k and r operations use their canonical composite-adjunction presentations J_s then J_b and P_q then P_s; theta is written explicitly in the tensor identities. Data existence is a conclusion, and all normalized choices satisfy Equations. No derived-object or coefficient flatness condition is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45f126cf7",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Hypotheses: k,i qc open immersions, r,p proper, h : k ≫ p = r ≫ i. Geometry: B_C = pullback p i; s = squareLift (clopen). Both Modes; arbitrary R,S in the same universes as the dep Input. Conjuncts 1-4 = (1), (2a), (2b) and (3), with θ written out. Every Data field is pinned: PullTensor by pure_unit and the flat K-flat representative square (same as the ringedTopoiCanonicalDerivedTensorPullback ∃!), OpenTensor deltas by their transposes, deltaK by the composite-adjunction transpose, rho by the reverse-adjunction counit = inverse open unit. Nonempty Data is a conclusion; t, o, a are pinned dep inputs. Edge cases covered: empty A, C or complement, zero rings, nonflat maps, unbounded objects. Statement verbatim; 8 declarations present; max line 100; docstrings with source and blueprint; 7 steps in the theorem docstring. Plain imports are exactly the proof_dep modules, as brief-stage2 §3 requires; the earlier interrupted draft's FIX dropping them was wrong and is deleted, fixes/ is empty. Advisory: owner def nodes outside stmt_deps; composite presentation of k_!/P_r/μ_r; PullTensor/OpenTensor repackage the canonical constructions. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, moved Data block and 3 new sorry leaves vs clone ClopenComparisonTensorSquare.lean, OpenTensorNormalizationData (Operations/Assertion/Pullback/OpenExtension) and node files"
+ }
+}

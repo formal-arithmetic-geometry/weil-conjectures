@@ -1,0 +1,136 @@
+{
+ "id": "def-sp-purity-bc-tower-data",
+ "kind": "definition",
+ "title": "Named-compactification coordinates for the two tower purity factors",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, the section-preserving tower operations b,o and original strict-tower coordinates q [det-sp-tower-gamma, det-sp-tower-exceptional-bc]. For a compactification c of f:X to Y and published finite-level adjunction data, TowerPurityAt is the published SpTowerGamma.Purity transported only along c.comm. towerTensorMap is its actual inverse-projection/counit transpose; towerGamma is tensoring its orientation followed by that transpose. For a Cartesian square and the supplied adjunction data a, towerExchange is the realization of the actual counit mate, preceded by the realization counit inverse. towerPullSquare is the inverse-image square compositor followed by the realization counit inverse on v*K. towerTensorComparison is the monoidal pullback comparison followed by towerPullSquare tensor identity. towerUnitIdentification is the inverse realization of pullback of the unit realization counit followed by a specified unit comparison s. towerUnitExchange is towerExchange at the original coefficient unit followed by exceptional pullback of towerUnitIdentification. These are the same specified maps as the existing constructions of det-sp-purity-bc-factors, in a separate module. Gamma is written directly as its orientation/tensor composite, avoiding the old dependent compactification elimination; after eliminating c, the two constructions reduce to the same defining formula. The two elementary API equations expand gamma into its factors and express naturality of towerTensorComparison in its second tensor input.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Definitions preceding (1) and (2), and the final composition paragraph"
+ },
+ "stmt_deps": [
+  "det-sp-tower-gamma",
+  "det-sp-tower-exceptional-bc"
+ ],
+ "proof": [
+  {
+   "text": "Transport the published purity and tensor transpose definitions along c.comm. Eight constructor bodies are the originals. Construct gamma directly by tensoring its orientation followed by towerTensorMap: after eliminating c, this is the defining formula of the published SpTowerGamma.gamma, so the map is unchanged. No chosen existence witness is introduced.",
+   "uses": [
+    "det-sp-tower-gamma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the published mate and the square compositor by the fixed realization counits. Form tensor and unit comparisons by functoriality.",
+   "uses": [
+    "det-sp-tower-exceptional-bc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The gamma expansion is now rfl without eliminating c. Naturality of tensorPullback at (identity,h), followed by functoriality of the tensor bifunctor and the product composition law, gives towerTensorComparison_naturality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-gamma",
+  "det-sp-tower-exceptional-bc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Definitions preceding (1) and (2), and the final composition paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity orientation and tensor counit maps commute with base change in derived coefficient towers",
+   "results": "Only cotangent and Kaehler base-change matches; no result about the specified coefficient tower maps.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp supplies the elementary final composition rule, not the normalized tower orientation or tensor/counit factor.",
+   "date": "2026-10-27",
+   "verdict": "partial tool only; no match for the tower factors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between shifted coefficient sheaf towers can be compared levelwise, and the smooth purity orientation and counit tensor map commute with base change",
+   "results": "Found exact functor commShift tools, adjunction shift compatibility, and algebraic base change; no tower factor theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "towerTensorComparison|tensorCounitExchangeCalculus|tower_orientation_transport",
+   "results": "No Mathlib hits. Library contains generic tensor/counit calculus and conditional orientation transport; neither has the named compactification/WordComparison factor statement.",
+   "date": "2026-10-27",
+   "verdict": "no match for the specialized factor statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "C3",
+  "item": "Sheaf.Paper.SmoothPurityBaseChangeFactors",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Definitions preceding (1) and (2), and the final composition paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityBaseChangeData",
+  "file": "lean/Sheaf/Paper/SmoothPurityBaseChangeData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.TowerPurityAt",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.TowerPurityAt",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerFactorizationLevels",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerTensorMap",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerGamma",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerGamma_eq",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerExchange",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerPullSquare",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerTensorComparison",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerUnitIdentification",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerUnitExchange",
+   "AlgebraicGeometry.ProEtale.SmoothPurityBaseChange.towerTensorComparison_naturality"
+  ],
+  "statement": "def TowerPurityAt : Type _",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d9a02",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T021300-L-2752542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d9a02",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T021300-L-2752542",
+  "kind": "interface",
+  "note": "independent cc review: tower_factors split into tower_factor_orientation (first three conjuncts verbatim) + tower_factor_tensor (all s pinned by the unit WordComparison) against the published tower_factors; towerGamma factor formula against SpTowerGamma.gamma (old=new by rcases c; rfl, compiled); importer FinitePurityCounitSystem compiled against the delivered modules"
+ }
+}

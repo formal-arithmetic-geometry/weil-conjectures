@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-space-perfect-limit-category",
+ "kind": "statement",
+ "title": "Perfect derived objects are continuous under affine limits of qcqs spaces",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use quasi-coherent modules [def-trf-space-quasi-coherent-module] and canonical tensor pullback [def-trf-space-etale-module-functors]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme, and quasi-separated if its diagonal is quasi-compact on scheme tests. An affine morphism is representable and has affine source after pullback to any affine scheme test. Use the unbounded module derived categories [def-weil-abstract-derived-category] and K-flat derived tensor pullback with flat terms. An object is perfect if etale locally it is isomorphic in the derived category to a bounded complex of direct summands of finite free structure modules. Let $I$ be a small nonempty directed set, $(X_i,q_{ji})$ an inverse system of quasi-compact quasi-separated algebraic spaces with affine transitions $q_{ji}:X_j\\to X_i$ for $j\\ge i$, and $X=\\varprojlim_iX_i$ with projections $q_i$. Derived pullback preserves perfect objects. Every perfect $E\\in D(\\mathcal O_X)$ is isomorphic to $Lq_i^*E_i$ for some $i$ and perfect $E_i\\in D(\\mathcal O_{X_i})$. For fixed perfect $E_i,F_i$, the canonical map $\\operatorname{colim}_{j\\ge i}\\operatorname{Hom}_{D(\\mathcal O_{X_j})}(Lq_{ji}^*E_i,Lq_{ji}^*F_i)\\to\\operatorname{Hom}_{D(\\mathcal O_X)}(Lq_i^*E_i,Lq_i^*F_i)$ is a bijection. Here the Hom sets are taken in the derived categories, and iterated pullbacks use their canonical composition isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "First derived pullback preserves perfectness. On a local strict-perfect model, [lem-weil-pbc-strict-perfect-ringed-pullback-model] computes derived pullback by termwise pullback and preserves the finite-free retract splittings and degree bounds. Restriction to the pulled-back slice commutes with derived pullback by [lem-sbc-ringed-topos-sheaf-slice-derived-comparison]. The inverse images of the local covering form a covering, so these are local strict-perfect models for the pullback, as required by the definition.",
+   "uses": [
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08H6 (lemma-perfect-pullback), local strict-perfect argument"
+   }
+  },
+  {
+   "text": "For fixed perfect $E_i,F_i$, the latter has quasi-coherent cohomology by [lem-sfb-space-perfect-objects-compact]. Apply [lem-sfb-space-perfect-source-hom-continuity] with $P_i=E_i$ and $K_i=F_i$. This gives exactly the claimed bijection, with its canonical transition maps. We shall also use this bijection after replacing the base by any qcqs etale space over a fixed stage. In particular, a morphism at the limit descends; two stage morphisms with the same pullback become equal at a common later stage, by the equality relation defining a directed colimit of sets.",
+   "uses": [
+    "lem-sfb-space-perfect-objects-compact",
+    "lem-sfb-space-perfect-source-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RJ (lemma-perfect-on-limit), proof"
+   }
+  },
+  {
+   "text": "Fix a stage $i_0$. For a qcqs etale object $T_0\\to X_{i_0}$, put $T_j=X_j\\times_{X_{i_0}}T_0$ and $T=X\\times_{X_{i_0}}T_0$. The base-change limit identity and affine projections are supplied by [lem-sfb-space-affine-limits-schematic-stages]. Use the property $P(T_0)$ that every perfect object on $T$ descends to a perfect object on some $T_j$, $j\\ge i_0$. These spaces are qcqs: pull back a finite affine etale atlas of $T_0$ along the affine projection. The resulting atlas is still a finite union of affines, and its overlaps are affine over the original quasi-compact overlaps, hence quasi-compact. This verifies quasi-compactness and the diagonal criterion for quasi-separatedness. Thus Step 2 applies to these systems. We verify the affine case and distinguished-square implication required by [lem-sfb-space-qcqs-distinguished-square-induction]. The directed tail is small, nonempty and cofinal, so it does not change any limit or the descent assertion.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-qcqs-distinguished-square-induction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RJ (lemma-perfect-on-limit), proof"
+   }
+  },
+  {
+   "text": "If $T_0$ is affine, all $T_j$ and $T$ are affine schemes, since their maps to $T_0$ are affine. Write $T_j=\\operatorname{Spec}A_j$ and $T=\\operatorname{Spec}A$; [lem-weil-pbc-limit-affine-transition] identifies $A=\\operatorname{colim}_{j\\ge i_0}A_j$. For perfect $E$ on $T_{\\mathrm{et}}$, its quasi-coherent cohomology allows the equivalence [lem-sfb-derived-etale-zariski-equivalence] to write $E\\simeq\\epsilon_T^*E^{\\mathrm{Zar}}$; [lem-sfb-etale-detects-perfect] makes $E^{\\mathrm{Zar}}$ perfect. By [lem-pc-perfect-affine-bounded-projective] it is represented by $\\widetilde{P^\\bullet}$ for a bounded finite-projective $A$-complex. Apply [lem-pc-affine-perfect-colimit-descent] to obtain $P_j^\\bullet\\otimes_{A_j}A\\cong P^\\bullet$. Set $E_j=\\epsilon_{T_j}^*\\widetilde{P_j^\\bullet}$. It is perfect by the affine criterion and etale detection. Finite projective terms are flat and the bounded model is K-flat; the affine pullback computation [lem-pc-affine-derived-pullback-tensor-tilde] and the pullback comparison of [lem-sfb-derived-etale-zariski-equivalence] give $L(T\\to T_j)^*E_j\\simeq E$. For the empty affine the same construction uses the zero complex.",
+   "uses": [
+    "lem-sfb-space-perfect-objects-compact",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-detects-perfect",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-affine-perfect-colimit-descent",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RJ (lemma-perfect-on-limit), proof"
+   }
+  },
+  {
+   "text": "For the induction implication, take an elementary distinguished square $(U_0\\subset W_0,V_0\\to W_0)$ with $U_0$ qc and $V_0$ affine, and suppose $P$ holds on $U_0,V_0,U_0\\times_{W_0}V_0$. Let $E$ be perfect on $W=\\lim W_j$. The properties on $U_0,V_0$ give, at a common stage $i$, perfect $A_i,B_i$ and isomorphisms $\\alpha:LA_i\\simeq E|_U$, $\\beta:LB_i\\simeq E|_V$. On $T=U\\times_WV$ form $c_\\infty=\\beta^{-1}\\alpha$. Step 2 on the qcqs overlap, whose limit is $T=\\varprojlim_jT_j$ by [lem-sfb-space-affine-limits-schematic-stages], with the restrictions of $LA_i,LB_i$ to $T$ identified with the pullbacks of $A_i|_{T_i},B_i|_{T_i}$ by the comparison $\\theta$ of [lem-sbc-ringed-topos-sheaf-slice-derived-comparison], descends $c_\\infty$ and its inverse to some $T_j$. The two composites pull back to the identity; injectivity in the same directed Hom colimits makes both inverse equations hold after increasing $j$. Thus obtain an actual stage isomorphism $c_j:A_j|_{T_j}\\simeq B_j|_{T_j}$ pulling back to $c_\\infty$. Here $A_j,B_j$ are the derived pullbacks of the chosen models and remain perfect by Step 1.",
+   "uses": [
+    "lem-sfb-space-perfect-source-hom-continuity",
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-perfect-objects-compact",
+    "lem-sfb-space-qcqs-distinguished-square-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RJ (lemma-perfect-on-limit), proof"
+   }
+  },
+  {
+   "text": "Write $q:W\\to W_j$ and $M=Rq_*E$. Adjunction $Lq^*\\dashv Rq_*$ gives maps $a:A_j\\to M|_{U_j}$ and $b:B_j\\to M|_{V_j}$ adjoint to $\\alpha$ and $\\beta$. The restriction/direct-image comparisons and their mate identity in [lem-sbc-ringed-topos-sheaf-slice-derived-comparison] identify their restrictions to $T_j$ with the adjoints of $\\alpha|_T$ and $\\beta|_T$. Since $\\beta|_T\\circ Lc_j=\\alpha|_T$, naturality of this adjunction yields $a|_{T_j}=b|_{T_j}\\circ c_j$. The unbounded adjunction is the one specified in [lem-weil-pbc-ringed-projection-mate-exact]; no flatness of $q$ and no boundedness of $M$ is required. The base-changed square is elementary distinguished by [lem-sfb-space-distinguished-derived-gluing]. Apply its gluing assertion with target $M$ to obtain $E_j$, local isomorphisms to $A_j,B_j$, and $d:E_j\\to Rq_*E$ restricting to $a,b$ under those isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-sfb-space-distinguished-derived-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RJ (lemma-perfect-on-limit), proof"
+   }
+  },
+  {
+   "text": "The two maps $U_j\\to W_j$ and $V_j\\to W_j$ cover $W_j$: on the complement of $U_j$, the second is an isomorphism. Thus the local models $A_j,B_j$ show that $E_j$ is perfect. The adjoint $Lq^*E_j\\to E$ of $d$ restricts to $\\alpha$ and $\\beta$, composed with the pulled-back gluing isomorphisms, by the mate identity in [lem-sbc-ringed-topos-sheaf-slice-derived-comparison]. It is therefore an isomorphism: its cone has cohomology sheaves restricting to zero on the etale cover $U,V$, so these sheaves are zero. This proves the distinguished-square implication. The affine case and [lem-sfb-space-qcqs-distinguished-square-induction] now give $P(X_{i_0})$. Taking $T_0=X_{i_0}$ descends every perfect object on $X$. Together with Steps 1 and 2 this proves all clauses.",
+   "uses": [
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-sfb-space-qcqs-distinguished-square-induction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09RJ (lemma-perfect-on-limit), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-sfb-space-perfect-objects-compact",
+  "lem-sfb-space-perfect-source-hom-continuity",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-detects-perfect",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-space-distinguished-derived-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09RJ (lemma-perfect-on-limit), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes on a quasi compact quasi separated algebraic space inverse limit with affine transitions are the filtered colimit of perfect complexes on its stages",
+   "results": "{\"t\": \"2026-10-23T13:21:52Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect complexes on a quasi compact quasi separated algebraic space inverse limit with affine transitions are the filtered colimit of perfect complexes on its stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\"], \"digest\": \"39384728e0434908\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-23T13:21:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|perfect.*(descen|limit)|Dperf",
+   "results": "{\"t\": \"2026-10-23T13:21:53Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|perfect.*(descen|limit)|Dperf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every perfect derived complex on an inverse limit of algebraic spaces with affine transition maps descends to a finite stage",
+   "results": "{\"t\": \"2026-10-23T13:21:53Z\", \"tool\": \"leansearch\", \"query\": \"Every perfect derived complex on an inverse limit of algebraic spaces with affine transition maps descends to a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"HomologicalComplex.instHasLimitsOfShape\", \"DerivedCategory\", \"HasDerivedCategory.standard\", \"Profinite.hasLimits\", \"HomologicalComplex.instEpiFOfHasFiniteColimits\", \"HomologicalComplex.instHasFiniteLimits\", \"Profinite.isIso_asLimitCone_lift\"], \"digest\": \"d7b1043d857cd1dd\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of the category of perfect derived objects under affine inverse limits of quasi compact quasi separated algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T13:22:37Z\", \"tool\": \"leanfinder\", \"query\": \"Continuity of the category of perfect derived objects under affine inverse limits of quasi compact quasi separated algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\"], \"digest\": \"4fae6182939c109d\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect derived complexes on a qcqs algebraic space inverse limit with affine transitions descend to a stage and their Hom sets commute with the limit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Dperf|perfect.*(descen|limit)",
+   "results": "[grep] OK 0 hit(s)\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuity of perfect derived categories under inverse limits of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"instHasLimitsOfShapeCondensed\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A J : Type*} [Category* A] [Category* J] [HasLimitsOfShape J A] : HasLimitsOfShape J (Condensed.{u} A)\", \"doc\": \"For any category $ \\\\mathcal{A} $ and any diagram shape $ \\\\mathcal{J} $, if $ \\\\mathcal{A} $ has all limits of shape $ \\\\mathcal{J} $, then the category of condensed objects over $ \\\\mathcal{A} $, defined\"}\n  {\"name\": \"perfectSpace_of_module\", \"module\": \"Mathlib.Topology.Algebra.Module.PerfectSpace\", \"type\": \": PerfectSpace E\", \"doc\": \"The topological space $E$ is perfect, meaning every point in $E$ is a limit point of $E$.\"}\n  {\"name\": \"InfiniteGalois.mulEquivToLimit_symm_continuous\", \"module\": \"Mathlib.FieldTheory.Galois.Profinite\", \"type\": \"[IsGalois k K] : Continuous (mulEquivToLimit k K).symm\", \"doc\": \"The inverse of the isomorphism between the infinite Galois group $\\\\text{Gal}(K/k)$ and the inverse limit of the profinite Galois groups of its finite Galois subextensions is continuous with respect to\"}\n  {\"name\": \"Profinite.hasLimits\", \"module\": \"Mathlib.Topology.Category.Profinite.Basic\", \"type\": \": Limits.HasLimits Profinite\", \"doc\": \"The category of profinite spaces has all limits.\"}\n  {\"name\": \"CategoryTheory.instIsContinuousOverLeftDiscretePUnitIteratedSliceBackwardOver\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"{X : C} (f : Over X) : f.iteratedSliceBackward.IsContinuous (J.over _) ((J.over _).over _)\", \"doc\": \"For any object $X$ in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and any morphism $f : t \\\\to X$, the iterated slice backward functor from $\\\\mathcal{C}/f.\\\\text{left}$ to $\\\\mathc\"}\n  {\"name\": \"instHasFiniteLimitsCondensed\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A : Type*} [Category* A] [HasFiniteLimits A] : HasFiniteLimits (Condensed.{u} A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite limits, then the category of condensed objects over $\\\\mathcal{A}$, denoted $\\\\text{Condensed}\\\\, \\\\mathcal{A}$, also has finite limits. This follows from the fact t\"}\n  {\"name\": \"instContinuousInvMulOpposite\", \"module\": \"Mathlib.Topology.Algebra.Group.Basic\", \"type\": \"[Inv α] [ContinuousInv α] : ContinuousInv αᵐᵒᵖ\", \"doc\": \"If a topological space $\\\\alpha$ has a continuous inverse operation, then the opposite category $\\\\alpha^{\\\\mathrm{op}}$ also has a continuous inverse operation with respect to the topology induced by th\"}\n  {\"name\": \"LinearMap.IsContPerfPair.ext_iff\", \"module\": \"Mathlib.Topology.Algebra.Module.PerfectPairing\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {inst : CommRing R} {inst_1 : TopologicalSpace R}\\n  {inst_2 : AddCommGroup M} {inst_3 : Module R M} {inst_4 : TopologicalSpace M} {inst_5 : AddCommGroup N}\\n  {inst_6 : Module R N} {inst_7 : TopologicalSpace N} {p : M →ₗ[R] N →ₗ[R] R} {x y : p.IsContPerf\", \"doc\": \"Given a commutative ring $ R $ with topology and topological $ R $-modules $ M $ and $ N $, a bilinear map $ M \\\\times N \\\\to R $ is a continuous perfect pairing if the induced linear maps $ M \\\\to \\\\math\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite projective complexes and derived morphisms under directed unions of rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Let $ f : A \\\\to B $ be a finitely presented ring homomorphism between commutative rings, and let $ c $ be a colimit cocone for a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRing} $. If $ g : S \\\\to c.\\\\text\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology.hasColimitDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type (max u v)} [inst : CommRing R] {D : Type v} [inst_1 : CategoryTheory.SmallCategory D]\\n  (I : CategoryTheory.Functor D (Ideal R)) (i : ℕ), CategoryTheory.Limits.HasColimit (localCohomology.diagram I i)\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, the diagram constructed via the $ i $-th extension functor $ \\\\text{Ext}^i_R $ app\"}\n  {\"name\": \"CochainComplex.isKProjective_of_projective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (K : CochainComplex C ℤ) (d : ℤ) [K.IsStrictlyLE d] [∀ (n : ℤ), CategoryTheory.Projective (K.X n)], K.IsKProjective\", \"doc\": \"In an abelian category, if a cochain complex $ K $ is strictly supported (via the embedding $ \\\\text{embeddingUpIntLE}(d) $) and every object $ K^i $ in the complex is projective, then $ K $ satisfies \"}\n  {\"name\": \"Module.projective_of_localization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Projective\", \"type\": \"∀ {R : Type u_1} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  (∀ (I : Ideal R) (x : I.IsMaximal), Module.Projective (Localization.AtPrime I) (LocalizedModule I.primeCompl M)) →\\n    ∀ [Module.FinitePresentation R M], Module.Projective R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ a finitely presented $ R $-module. If for every maximal ideal $ I $ of $ R $, the localization of $ M $ at $ I $ is a projective module over the localized rin\"}\n  {\"name\": \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additi\", \"doc\": \"For an additive functor $ F : C \\\\to D $ between abelian categories with enough projectives, the $(n+1)$-th left-derived functor $ L^{n+1}F $ evaluated at any projective object $ X \\\\in C $ yields a zer\"}\nRead the returned signatures: scheme sections/morphisms, generic gluing data, field perfection and unrelated topology do not state this algebraic-space derived assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-flat-proper-model",
+  "date": "2026-10-23",
+  "group": "Q148"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian). Supporting limit input: Tag 09RJ (lemma-perfect-on-limit), in Situation 09RH (situation-descent); derived pullback preserves perfect objects by sites-cohomology.tex Tag 08H6 (lemma-perfect-pullback).",
+   "via": [
+    "lem-sfb-space-perfect-flat-proper-model",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-perfect-limit-category",
+  "worker": "stage1",
+  "summary": "Followed Stacks 09RJ distinguished-square induction, explicitly descended the overlap isomorphism and its inverse equations, and glued the models together with their adjoint map to the fixed derived direct image. Two new statement-only inputs: 09RI (1) and 08HB with 08GN base-change stability. Existing scheme and ringed-site inputs reused; no statement change.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting perfect-limit input in the existing recorded approximation chain. Stacks 09RJ first paragraph gives Step 2, final affine paragraph Step 4, and the middle gluing paragraph Steps 5-7. The ancestor search returns null for this created-node chain, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "why": "Generic ringed-site or affine-scheme input for the Stacks 09RJ proof: Specified strict-perfect models under arbitrary ringed-topos derived pullback. No node in this unit states this canonical comparison or affine algebra fact."
+   },
+   {
+    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "why": "Generic ringed-site or affine-scheme input for the Stacks 09RJ proof: Canonical unbounded derived adjunction comparisons on arbitrary sheaf slices. No node in this unit states this canonical comparison or affine algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic ringed-site or affine-scheme input for the Stacks 09RJ proof: Limits of schemes along affine transition morphisms. No node in this unit states this canonical comparison or affine algebra fact."
+   },
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "Generic ringed-site or affine-scheme input for the Stacks 09RJ proof: Perfect objects on an affine scheme are bounded finite projective complexes. No node in this unit states this canonical comparison or affine algebra fact."
+   },
+   {
+    "node": "lem-pc-affine-perfect-colimit-descent",
+    "why": "Generic ringed-site or affine-scheme input for the Stacks 09RJ proof: Affine descent of a perfect complex along a filtered colimit. No node in this unit states this canonical comparison or affine algebra fact."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic ringed-site or affine-scheme input for the Stacks 09RJ proof: Affine computation of derived pullback and derived tensor product. No node in this unit states this canonical comparison or affine algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ringed-site or affine-scheme input for the Stacks 09RJ proof: Exactness data for the ringed-topos projection mate. No node in this unit states this canonical comparison or affine algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-50f6e4ad4",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-50f6e4ad4 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-perfect.tex in full: 09RH, 09RI (with proof), 09RJ (full proof), the elementary-square definition, 08GN, the induction principle and 08HB (both clauses and proof). The item statement is unchanged and matches 09RJ in the 09RH setting with no weakening. Steps 1-7 check against the statements they cite. Step 1: the strict-perfect pullback model plus the slice comparison θ. Step 2: perfect-objects-compact states that perfect objects have quasi-coherent cohomology, so the new 09RI(1) node gives the Hom bijection. Step 3: the qcqs check and cofinality are correct. Step 4: the affine case goes through the étale–Zariski equivalence, étale detection of perfectness, a bounded finite-projective model, colimit descent of the whole complex and the tilde pullback. Step 5: it descends the overlap isomorphism and its inverse, and gets both inverse identities at a common stage. Steps 6-7: the mate identity gives a|=b|∘c_j, 08HB's moreover clause supplies the map into Rq_*E, and the cone vanishes on the étale cover. New node lem-sfb-space-perfect-source-hom-continuity is 09RI(1) exactly. It is not a duplicate: lem-pc-perfect-hom-continuity and lem-pc-perfect-descend-morphisms are scheme-only. New node lem-sfb-space-distinguished-derived-gluing is 08HB+08GN(2) with matching conventions. It is not a duplicate of lem-sc-derived-open-gluing (opens of a ringed space), lem-sp-ringed-topos-binary-descent (subterminal covers only) or lem-sfb-space-elementary-shriek-exact. Small cases checked (constant system; U=W, V=∅; U=∅). Batch-5 flags: every def-trf/trf/pod citation is a general definition or the general Zariski/étale comparison, not a trace-formula or Poincaré-duality step; accepted. The seven declared tool_uses are generic ringed-topos or affine-scheme lemmas; accepted. No SGA citation. FIX 1: Step 5 now cites lem-sbc-ringed-topos-sheaf-slice-derived-comparison (θ) and lem-sfb-space-affine-limits-schematic-stages for the limit identification on the overlap; proof_deps are unchanged. FIX 2: the gluing node took its definition from the theorem node lem-sfb-space-qcqs-distinguished-square-induction; it now cites def-a1-space-open-subspace, lem-sfb-space-reduced-closed-support and def-a1-space-point-topology, with the same mathematical content.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectLimitCategory",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.perfect_descent_affineLimit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.perfectLimitPullbackComparison",
+   "AlgebraicGeometry.AlgebraicSpace.isPerfect_spaceDerivedPullback",
+   "AlgebraicGeometry.AlgebraicSpace.perfect_descent_affineLimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectLimitCategory.lean",
+  "statement": "theorem perfect_descent_affineLimit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (hqc : ∀ i : Iᵒᵖ, ∃ (U : Over (Spec (.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ (D.obj i).obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ i : Iᵒᵖ, IsAbsolutelyQuasiSeparated (D.obj i)) (haff : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), MapIsAffine (D.map f)) (c : Cone D) (hc : IsLimit c) [∀ i : Iᵒᵖ, HasDerivedCategory.{w} (D.obj i).SmallModules] [HasDerivedCategory.{w} c.pt.SmallModules] : (∀ E : c.pt.DerivedModules, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} c.pt.smallStructureSheaf E → ∃ (i : I) (E_i : (D.obj (op i)).DerivedModules), SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} (D.obj (op i)).smallStructureSheaf E_i ∧ Nonempty ((spaceDerivedPullback (X := c.pt) (c.π.app (op i))).obj E_i ≅ E)) ∧ (∀ (i : I) (E_i F_i : (D.obj (op i)).DerivedModules), SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} (D.obj (op i)).smallStructureSheaf E_i → SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} (D.obj (op i)).smallStructureSheaf F_i → (∀ f : (spaceDerivedPullback (X := c.pt) (c.π.app (op i))).obj E_i ⟶ (spaceDerivedPullback (X := c.pt) (c.π.app (op i))).obj F_i, ∃ (j : I) (hij : i ≤ j) (f_j : (spaceDerivedPullback (D.map (homOfLE hij).op)).obj E_i ⟶ (spaceDerivedPullback (D.map (homOfLE hij).op)).obj F_i), (perfectLimitPullbackComparison D c hij E_i).inv ≫ (spaceDerivedPullback (X := c.pt) (c.π.app (op j))).map f_j ≫ (perfectLimitPullbackComparison D c hij F_i).hom = f) ∧ (∀ f g : E_i ⟶ F_i, (spaceDerivedPullback (X := c.pt) (c.π.app (op i))).map f = (spaceDerivedPullback (X := c.pt) (c.π.app (op i))).map g → ∃ (j : I) (hij : i ≤ j), (spaceDerivedPullback (D.map (homOfLE hij).op)).map f = (spaceDerivedPullback (D.map (homOfLE hij).op)).map g))",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing small ringed model, local finite-free-retract perfectness predicate and canonical derived tensor pullback. The Hom-colimit bijection is rendered equivalently by morphism descent and eventual equality at every stage, with the canonical composition comparison. Pullback preservation is a separate theorem. Added stmt_deps cite already landed definition owners; no new notion or source statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-364f8b440",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Read the item node (only lean and stmt_deps changed vs live; no statement_change), Stacks 09RH/09RJ/08H6, the module, the report (Worker report and Second reading by Q98 present) and the owner defs (IsAbsolutelyQuasiSeparated, MapIsAffine, IsEtale/IsSurjective, IsPerfectOnRingedSiteOfUniverses, spaceDerivedPullback/Comp, DerivedModules, SmallModules). Hypotheses match the node with nothing stronger: Spec ULift Z base; nonempty directed preorder in universe u; inline qc atlas; recorded qs and affine-transition defs; HasDerivedCategory.{w} only on participating categories. Pullback preserves perfectness as a separate theorem for any f. Object descent is a derived Nonempty iso. The Hom bijection is stated as descent plus eventual equality, conjugated by perfectLimitPullbackComparison (canonical composition iso plus eqToIso of c.w, correct direction); equivalent to the bijection by applying injectivity at later stages to the pulled-back perfect pairs. Statement field verbatim; 5 added stmt_deps are landed owners; 9 private proof imports exist on live; docstrings carry source and blueprint; sorry only; nothing hollow. Advisory: def-sfb-space-small-ringed-model (SmallModules/smallStructureSheaf) is cited only through def-sfb-space-derived-module-calculus, as in 9 of 14 landed citers. No compile run (no file changed)."
+ }
+}

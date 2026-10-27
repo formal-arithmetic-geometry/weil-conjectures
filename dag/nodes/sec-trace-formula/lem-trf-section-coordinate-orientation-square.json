@@ -1,0 +1,156 @@
+{
+ "id": "lem-trf-section-coordinate-orientation-square",
+ "kind": "statement",
+ "title": "Fibre square for the two counit-normalized section chart orientations",
+ "statement": "For the finite coefficients, Noetherian smooth section and centred etale chart c of [def-trf-section-centred-chart-data], fix counit-normalized affine adjunctions for c.T and A1(c.T), in the sense of [def-trf-coordinate-counit-arrows]. Let oC and oF be the actual localSourceMap and localFamilyMap defined by [def-trf-section-centred-chart-data]. Let a:A1(c.T)→c.T and i1 its section at one. Then i1*(oF), followed by the inverse canonical Tate pullback along a and the canonical section compositor i1*a*≅id, equals restrictedTheta followed by oC. All maps are those of [def-trf-section-local-comparison-data] and [def-pur-noetherian-section-specialization-arrows]. This is an equality of actual derived morphisms, without inverting either orientation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, standard model, and orientation-charts Step 3; parent counit-normalization Steps 2–5."
+ },
+ "stmt_deps": [
+  "def-trf-coordinate-counit-arrows",
+  "def-trf-section-centred-chart-data",
+  "def-trf-section-local-comparison-data",
+  "def-pur-noetherian-section-specialization-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Factor localSourceMap and localFamilyMap as sourceMap/familyMap followed by the standard zero-section affineSectionIso. This is unfolding chartMap and transporting along the two proved centre equations.",
+   "uses": [
+    "def-trf-section-coordinate-chart-maps",
+    "def-trf-section-local-comparison-data",
+    "def-trf-section-centred-chart-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+   }
+  },
+  {
+   "text": "Use the existing standard affine counit theorem, extracted to the standard module to avoid its parent import cycle. Normalization identifies the prescribed affineDualizingIso maps with the witnesses. Naturality of the section compositor and cancellation give the fixed-presentation standard square.",
+   "uses": [
+    "lem-trf-standard-affine-section-orientation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+   }
+  },
+  {
+   "text": "Map the family factorization through i1 pullback. Apply the standard square to its final orientation factors, then the orientation-free chart restriction square to the first two factors. Associativity gives precisely restrictedTheta followed by localSourceMap.",
+   "uses": [
+    "lem-trf-standard-affine-section-orientation",
+    "lem-trf-section-coordinate-chart-restriction",
+    "def-trf-section-coordinate-chart-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-section-coordinate-chart-maps",
+  "def-trf-section-local-comparison-data",
+  "def-trf-section-centred-chart-data",
+  "lem-trf-standard-affine-section-orientation",
+  "lem-trf-section-coordinate-chart-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The two counit-normalized source and deformation chart orientations commute with restriction to the fibre at one",
+   "results": "8 manifold/vector-bundle chart hits, including FiberBundle.extChartAt; none concerns etale derived orientations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id",
+   "results": "Iso.inv_hom_id supplies the cancellation used in the parent, not the orientation square.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "localFamilyMap|sectionCoordinateOrientation",
+   "results": "msearch: zero hits. Direct rg finds localFamilyMap definition in SectionCentredChartData, no proved square for it.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionCoordinateCounitNormalization",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Parent counit-normalization Steps 2–5, the non-inverted fibre square before the final cancellation.",
+   "via": [
+    "lem-trf-section-coordinate-counit-normalization",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionCoordinateOrientationSquare",
+  "file": "lean/Sheaf/Paper/SectionCoordinateOrientationSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.sectionCoordinateOrientation_square",
+  "statement": "theorem sectionCoordinateOrientation_square (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    {V S : Scheme.{u}} [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]\n    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]\n    (hs : s ≫ g = 𝟙 S)\n    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]\n    (c : Chart d g s hs)\n    (adjC : rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n      (AffineSpace (ULift.{u} (Fin d)) c.T ↘ c.T) ⊣ affineRight A N hA c.T d)\n    (adjF : rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n      (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin 1)) c.T) ↘ _) ⊣\n        affineRight A N hA (AffineSpace (ULift.{u} (Fin 1)) c.T) d)\n    (hC : @CoordinateCounitArrows.IsNormalized N hN A _ _ hA t D c.T\n      (chartGeometry d g s hs c).noethT (invertibleOnSource N c.b hS) d adjC)\n    (hF : @CoordinateCounitArrows.IsNormalized N hN A _ _ hA t D\n      (AffineSpace (ULift.{u} (Fin 1)) c.T) (chartGeometry d g s hs c).noethLine\n      (invertibleOnSource N (AffineSpace (ULift.{u} (Fin 1)) c.T ↘ c.T)\n        (invertibleOnSource N c.b hS)) d adjF) :\n    (upperStar (ModuleCat.{u + 1} A)\n      (AffineSpace.oneSection (ULift.{u} (Fin 1)) c.T)).leftDerivedFunctor.map\n        (localFamilyMap A N hN hA hS d g s hs c adjF) ≫\n      (upperStar (ModuleCat.{u + 1} A)\n        (AffineSpace.oneSection (ULift.{u} (Fin 1)) c.T)).leftDerivedFunctor.map\n          (tatePullback A N hN hA (AffineSpace (ULift.{u} (Fin 1)) c.T ↘ c.T)\n            (invertibleOnSource N c.b hS)\n            (invertibleOnSource N (AffineSpace (ULift.{u} (Fin 1)) c.T ↘ c.T)\n              (invertibleOnSource N c.b hS)) d).inv ≫\n      (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)\n        (AffineSpace.oneSection (ULift.{u} (Fin 1)) c.T)\n        (AffineSpace (ULift.{u} (Fin 1)) c.T ↘ c.T)\n        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) c.T)).hom.app\n          (SectionLocalDualizingComparisons.tateObject A N hA c.T d) =\n      restrictedTheta A g s hs c.b ≫ localSourceMap A N hN hA hS d g s hs c adjC",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T123458-L-1873463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-bf585",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T021319-L-2756451",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules + parent extraction vs clone 7dea68d and their DAG nodes; sandbox compile of 5 delivered modules + AffineDiagonalTraceRestriction (43.3 s OK) + #print axioms"
+ }
+}

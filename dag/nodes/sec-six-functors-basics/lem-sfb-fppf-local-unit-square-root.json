@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-fppf-local-unit-square-root",
+ "kind": "statement",
+ "title": "Fppf local square roots of units",
+ "statement": "Let $T$ be any scheme [def-pc-scheme] and $s\\in\\Gamma(T,\\mathcal O_T)^\\times$ a global unit. There is an fppf covering $\\{f_i:T_i\\to T\\}_{i\\in I}$ [def-pc-fppf-site] and units $r_i\\in\\Gamma(T_i,\\mathcal O_{T_i})^\\times$ such that $r_i^2=f_i^*s$ for every $i$. No invertibility assumption on $2$ and no reducedness hypothesis on $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Tag 040N, lemma-kummer-sequence-syntomic, surjectivity of the power map for n=2; proof by the finite free cover defined by T^2-s."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\Gamma(T,\\mathcal O_T)$, let $\\alpha:A\\to B=A[x]/(x^2-s)$ be the quotient structure map, and write $b$ for the class of $x$. Then $b^2=\\alpha(s)$. Apply [lem-sfb-monic-quotient-faithful-tensor-coordinates] with $d=2$, $a_0=-s$ and $a_1=0$: $A\\to B$ is faithfully flat, including when $A$ is the zero ring. The quotient and its relation are those of [def-weil-pbc-algebra-hom-quotient].",
+   "uses": [
+    "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof of local surjectivity with n=2; the fppf assertion only needs flatness and finite presentation."
+   }
+  },
+  {
+   "text": "Let $q=\\operatorname{Spec}\\alpha:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Faithful flatness implies flatness [def-weil-pbc-faithfully-flat-ring-map], so $q$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine], and $q$ is surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. The single-generator single-relation presentation $B=A[x]/(x^2-s)$ makes $q$ locally of finite presentation directly by [def-sbc-locally-finite-presentation], taking the whole affine source and target as neighbourhoods at every source point. Thus $\\{q\\}$ is an fppf covering by [def-pc-fppf-site].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof of local surjectivity with n=2; the fppf assertion only needs flatness and finite presentation."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-morphism-into-affine-scheme], the identity of $A$ gives $j:T\\to\\operatorname{Spec}A$ with $j^*\\varepsilon_A=\\mathrm{id}_A$, where $\\varepsilon_A:A\\cong\\Gamma(\\operatorname{Spec}A,\\mathcal O)$ is the canonical isomorphism. Form $V=T\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$ with projections $f:V\\to T$ and $h:V\\to\\operatorname{Spec}B$, so $jf=qh$ [def-pc-fibre-product]. The singleton $\\{f\\}$ is an fppf covering by [lem-trf-fppf-covering-base-change] applied to $\\{q\\}$ and $j$.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-fibre-product",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof of local surjectivity with n=2; the fppf assertion only needs flatness and finite presentation."
+   }
+  },
+  {
+   "text": "Put $r=h^*\\varepsilon_B(b)\\in\\Gamma(V,\\mathcal O_V)$. The naturality formula $q^*\\varepsilon_A=\\varepsilon_B\\alpha$ of [lem-weil-pbc-spec-map-global-sections] and the pullback square give $r^2=h^*\\varepsilon_B(b^2)=h^*\\varepsilon_B\\alpha(s)=h^*q^*\\varepsilon_A(s)=f^*j^*\\varepsilon_A(s)=f^*s$. Since $s$ is a unit, $r\\,\\bigl(r f^*(s^{-1})\\bigr)=r^2f^*(s^{-1})=f^*(ss^{-1})=1$, so $r$ is a unit with the displayed inverse. Take $I$ to be a singleton and $(T_i,f_i,r_i)=(V,f,r)$. These calculations also apply to the empty scheme, and use neither division by $2$ nor reducedness.",
+   "uses": [
+    "lem-weil-pbc-spec-map-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof of local surjectivity with n=2; the fppf assertion only needs flatness and finite presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-monic-quotient-faithful-tensor-coordinates",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-pc-fibre-product",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-spec-map-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 040N, lemma-kummer-sequence-syntomic, proof of local surjectivity with n=2; the fppf assertion only needs flatness and finite presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fppf|faithfullyFlat|FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T08:40:04Z\", \"tool\": \"grep\", \"query\": \"fppf|faithfullyFlat|FaithfullyFlat\", \"sub\": \"RingTheory/AdjoinRoot\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field square roots require field hypotheses; standard etale/smooth algebra definitions and flat-affine criteria do not assert an fppf covering with a square root in characteristic two."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The squaring map on the multiplicative group scheme is faithfully flat and locally of finite presentation",
+   "results": "{\"t\": \"2026-10-24T08:40:05Z\", \"tool\": \"leansearch\", \"query\": \"The squaring map on the multiplicative group scheme is faithfully flat and locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Flat\", \"QuadraticMap.sq\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat\"], \"digest\": \"384fcffd46ae4b51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field square roots require field hypotheses; standard etale/smooth algebra definitions and flat-affine criteria do not assert an fppf covering with a square root in characteristic two."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnit\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-24T08:40:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUnit\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field square roots require field hypotheses; standard etale/smooth algebra definitions and flat-affine criteria do not assert an fppf covering with a square root in characteristic two."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a unit a in a commutative ring the algebra R[T]/(T^2-a) is a faithfully flat finitely presented algebra with an invertible square root",
+   "results": "{\"t\": \"2026-10-24T08:40:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a unit a in a commutative ring the algebra R[T]/(T^2-a) is a faithfully flat finitely presented algebra with an invertible square root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsStandardEtale\", \"StandardEtalePair.instAlgebraRing\", \"StandardEtalePresentation\", \"Algebra.Etale\", \"Algebra.IsQuadraticExtension\", \"Algebra.IsStandardSmooth\", \"StandardEtalePair.instCommRingRing\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"acde5bca32fab53d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field square roots require field hypotheses; standard etale/smooth algebra definitions and flat-affine criteria do not assert an fppf covering with a square root in characteristic two."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unit on a scheme has a square root locally for the fppf topology including characteristic two",
+   "results": "{\"t\": \"2026-10-24T08:40:10Z\", \"tool\": \"leanfinder\", \"query\": \"Every unit on a scheme has a square root locally for the fppf topology including characteristic two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.exists_eq_mul_self\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.basicOpen_pow\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\"], \"digest\": \"f1cabf4df0498582\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: field square roots require field hypotheses; standard etale/smooth algebra definitions and flat-affine criteria do not assert an fppf covering with a square root in characteristic two."
+  },
+  {
+   "tool": "grep",
+   "query": "square.root|exists.*pow.*appTop|kummer",
+   "results": "{\"t\": \"2026-10-24T09:01:22Z\", \"tool\": \"grep\", \"query\": \"square.root|exists.*pow.*appTop|kummer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot constructions, affine flatness criteria and units facts are ingredients; none states existence of an fppf cover with a square root for an arbitrary scheme, including characteristic two."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf locally a unit in any commutative ring has a square root by adjoining a root of X squared minus the unit",
+   "results": "{\"t\": \"2026-10-24T09:01:23Z\", \"tool\": \"leansearch\", \"query\": \"Fppf locally a unit in any commutative ring has a square root by adjoining a root of X squared minus the unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.root\", \"AdjoinRoot.isAdjoinRoot\", \"AdjoinRoot.instInhabited\", \"AdjoinRoot\", \"IsAdjoinRootMonic.toIsAdjoinRoot\", \"AdjoinRoot.isAdjoinRootMonic\", \"AdjoinRoot.finitePresentation\", \"isUnit_mul_self_iff\"], \"digest\": \"2f65802730a429f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot constructions, affine flatness criteria and units facts are ingredients; none states existence of an fppf cover with a square root for an arbitrary scheme, including characteristic two."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsUnit",
+   "results": "{\"t\": \"2026-10-24T09:01:23Z\", \"tool\": \"loogle\", \"query\": \"AdjoinRoot, IsUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot constructions, affine flatness criteria and units facts are ingredients; none states existence of an fppf cover with a square root for an arbitrary scheme, including characteristic two."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every global unit on a scheme has an invertible square root after an fppf covering, without assuming 2 is invertible",
+   "results": "{\"t\": \"2026-10-24T09:01:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every global unit on a scheme has an invertible square root after an fppf covering, without assuming 2 is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.basicOpen_of_isUnit\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"25bab210ac009d9e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot constructions, affine flatness criteria and units facts are ingredients; none states existence of an fppf cover with a square root for an arbitrary scheme, including characteristic two."
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat_of_monic|finitePresentation",
+   "results": "{\"t\": \"2026-10-24T09:03:02Z\", \"tool\": \"grep\", \"query\": \"faithfullyFlat_of_monic|finitePresentation\", \"sub\": \"RingTheory/AdjoinRoot.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"12\", \"55\", \"159\", \"160\"], \"digest\": \"ba10bd0865fe1ee3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot constructions, affine flatness criteria and units facts are ingredients; none states existence of an fppf cover with a square root for an arbitrary scheme, including characteristic two."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free algebra of positive rank given by a monic polynomial yields a flat surjective finitely presented map on spectra",
+   "results": "{\"t\": \"2026-10-24T09:03:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite free algebra of positive rank given by a monic polynomial yields a flat surjective finitely presented map on spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.out\", \"Algebra.IsStandardSmooth.finitePresentation\", \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"Module.FaithfullyFlat.of_specComap_surjective\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"RingHom.FinitePresentation.polynomial_induction\", \"Algebra.Smooth.flat\", \"PrimeSpectrum.specComap_surjective_of_faithfullyFlat\"], \"digest\": \"3c6173719c45981a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AdjoinRoot constructions, affine flatness criteria and units facts are ingredients; none states existence of an fppf cover with a square root for an arbitrary scheme, including characteristic two."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-lifted-root-gauss-relations",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. Supporting subargument: Lemma 4.3.3 and proof, printed pp.128--129, followed by equation (4.3.1) and its removal of the unit condition, printed pp.129--130. Prerequisite: Fppf local square roots of units.",
+   "via": [
+    "lem-sfb-sl2-lifted-root-gauss-relations",
+    "lem-sfb-relative-sl2-central-extension-splitting",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fppf-local-unit-square-root",
+  "worker": "stage1",
+  "summary": "Q139 splits the local square-root construction of Stacks 040N using only existing nodes. The positive-rank monic-quotient tensor-coordinate node supplies faithful flatness including the zero ring; the affine presentation supplies local finite presentation; base change along the canonical map to the spectrum of global sections supplies a single fppf cover. The last step writes the square-root equation and explicit inverse. Statement unchanged; no new nodes.",
+  "blueprint": "The inherited from.place locates this prerequisite beneath det-thm-sf-ctf-stability-direct-images (3), through the rank-one SL2 Gauss-relations argument. Steps 1-4 realize the stated prerequisite, fppf-local square roots, by Stacks 040N. The current blueprint has no separate node for it; whole-blueprint searches for square root, Kummer and monic quotient found no general fppf square-root replacement. The inherited null from.node and via chain are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-dac877b3e",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-dac877b3e (reviewer sub-agent of L); spot-checked: Read the item and all 12 cited statements in full, plus Stacks 040N (etale-cohomology.tex:2921, lemma-kummer-sequence-syntomic). The delivery creates no new nodes and leaves the statement unchanged. The 4 steps build the 040N cover globally as T ×_{Spec Γ} Spec Γ[x]/(x^2-s). Step 1: lem-sfb-monic-quotient-faithful-tensor-coordinates with d=2, a0=-s, a1=0 gives faithful flatness, including the zero ring. Step 2: flatness comes from the def plus lem-weil-pbc-flat-ring-map-iff-flat-affine, surjectivity from lem-weil-pbc-faithfully-flat-surjective-spectrum, and local finite presentation from def-sbc-locally-finite-presentation using the n=1, m=1 presentation; so {q} is an fppf covering. Step 3: j comes from lem-weil-pbc-morphism-into-affine-scheme applied to id_A, together with the fibre product and base change of the covering. Step 4: Γ-naturality gives r^2 = f^*s, and the explicit inverse r·f^*(s^{-1}) is checked. All steps are correct. Small cases checked: T = ∅; F_2 with s=1 (nonreduced B); Z with s=-1; nonaffine T. Searched the DAG for fppf square roots: the only Kummer/root nodes are étale with n invertible (lem-sc-kummer-exact, the sbc root-split charts), so there are no duplicates. Batch-5 flag on lem-trf-fppf-covering-base-change: it is a Mathlib leaf (Precoverage.mem_coverings_of_isPullback) with no proof_deps and only generic definition stmt_deps. It is general fppf base-change stability, not a step of the trace formula or of Poincaré duality, so I accept it. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfUnitSquareRoot",
+  "declaration": "AlgebraicGeometry.Scheme.exists_fppf_unit_square_root",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfUnitSquareRoot.lean",
+  "statement": "theorem exists_fppf_unit_square_root (T : Scheme.{u}) (s : Γ(T, ⊤)ˣ) : ∃ (I : Type u) (T' : I → Scheme.{u}) (f : ∀ i : I, T' i ⟶ T), Presieve.ofArrows T' f ∈ fppfPrecoverage T ∧ ∃ r : ∀ i : I, Γ(T' i, ⊤)ˣ, ∀ i : I, (r i : Γ(T' i, ⊤)) ^ 2 = (f i).appTop (s : Γ(T, ⊤))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-890102c47",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Only change vs live: lean record on the item node plus new module Sheaf.AlgebraicGeometry.FppfUnitSquareRoot (absent from live). Clause check vs node and Stacks 040N (etale-cohomology.tex:2921, n=2): arbitrary T : Scheme.{u}; s : Γ(T,⊤)ˣ; ∃ I : Type u, T', f with ofArrows ∈ fppfPrecoverage T (Mathlib: jointly surjective ⊓ Flat ⊓ LocallyOfFinitePresentation, via precoverage and ofArrows_mem_precoverage_iff = node's 021L covering); ∃ unit r_i with (r i)^2 = (f i).appTop s. No 2-invertible, reduced, affine or Nonempty assumption. Edge cases: empty T, char 2 nonreduced cover; Type u index suffices because the source cover is a singleton. lean.statement verbatim in file; stmt_deps def-pc-scheme and def-pc-fppf-site used via their recorded Mathlib owners; Source and blueprint docstrings present, 4 proof steps in the declaration docstring; sorry only; no definitions. Report has a Worker report and a Second reading section. Searched Mathlib and live Sheaf/WeilConjectures: no duplicate. No changes, no compile."
+ }
+}

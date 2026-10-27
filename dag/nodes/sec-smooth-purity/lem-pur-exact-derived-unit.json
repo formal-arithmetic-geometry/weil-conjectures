@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-exact-derived-unit",
+ "kind": "statement",
+ "title": "Invertibility of the total right-derived unit of an exact functor",
+ "statement": "Let C,D be abelian categories with chosen derived categories, and assume C has K-injective resolutions [def-weil-abstract-derived-category]. If F:C→D is additive and exact, its total right-derived unit F_K⋙Qh→Qh⋙RF is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma lemma-right-derived-exact-functor, especially part (4): every complex computes the total right derived functor of an exact functor."
+ },
+ "proof": [
+  {
+   "text": "An exact additive functor preserves homology and quasi-isomorphisms, so it induces a functor D(F) on derived categories, with an invertible factorization F_K⋙Qh≅Qh⋙D(F).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "An invertible factorization through localization exhibits D(F) as a right derived functor. Uniqueness gives RF≅D(F) compatible with the units.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The unit for RF composed with the uniqueness isomorphism is the invertible factorization above. Cancel this isomorphism to prove the original unit invertible.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma lemma-right-derived-exact-functor, especially part (4): every complex computes the total right derived functor of an exact functor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso_rightDerivedFunctorUnit|rightDerivedFunctorIsoMapDerivedCategory",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib statement; the source library already proves the stated result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit from an exact additive functor to its total right derived functor is an isomorphism",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.totalRightDerivedUnit",
+     "CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence",
+     "CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc",
+     "CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+     "CategoryTheory.instIsIsoFunctorFromLeftDerivedZero",
+     "CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc",
+     "CategoryTheory.Functor.instIsIsoAppLanUnit_1"
+    ],
+    "digest": "cc73fe09b2ad2427"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib statement; the source library already proves the stated result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnit\", \"IsIso\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No matching Mathlib statement; the source library already proves the stated result."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactPointSourceNormalization",
+  "date": "2026-10-23",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 2: identify the section-normalized compact source of the origin with A[0]",
+   "via": [
+    "lem-pur-compact-point-source-normalization",
+    "lem-pur-origin-class-projective-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory",
+  "declaration": "CategoryTheory.Functor.isIso_rightDerivedFunctorUnit",
+  "statement": "instance isIso_rightDerivedFunctorUnit : IsIso F.rightDerivedFunctorUnit",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-23",
+  "note": "Existing proved source-library instance; no Lean declaration or proof hole is added."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020711-L-2648655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020711-L-2648655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

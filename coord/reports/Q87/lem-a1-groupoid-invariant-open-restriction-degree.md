@@ -1,0 +1,40 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-purity-real-sheaves/lem-a1-groupoid-invariant-open-restriction-degree.json`: statement, split; seven proof steps, no Mathlib match.
+- `citations.json`: one verbatim statement quote for each of the 18 step/node citations.
+- `report.md`: this report. No new DAG nodes and no Mathlib leaves.
+
+Attachments: none. I searched the read-only project `lean/WeilConjectures/` by the exact blueprint tag and by groupoid, invariant-open and restriction terminology. Effective-descent restriction concerns a special descent datum and does not state this theorem for arbitrary groupoid schemes; the other hits do not supply its clauses. No Lean was written or compiled.
+
+WANTED: none. All mathematical sources needed here are present locally.
+
+The item was statement-only, with no prior sandbox proof or report to recover and no released repair note. Its statement is unchanged. The five statement dependencies are exactly the scheme, groupoid, open-immersion, fibre-product and finite-locally-free notions it uses. In particular, the source and target need not be finite locally free before restriction. Only the last two steps assume the restricted source has the asserted degree.
+
+I searched the whole DAG for the source labels/tags, invariant-open restriction, degree transport, and open-factorization facts, and ran `tools/blueprint_refs.py search` for restriction and degree formulations. The field-extension and fppf-cover groupoid restriction nodes have extra hypotheses and conclusions and do not state this item; they are not used. The necessary scheme tools already exist as `lem-weil-pbc-morphism-factors-through-open-subscheme` and `lem-weil-pbc-open-immersion-monomorphism`. Every other part is an explicit calculation with the existing definitions, so no auxiliary node is justified.
+
+The existing historical Mathlib searches are retained. The new actual msearch.py log contains two LeanFinder phrasings, a valid quoted-name Loogle search, a LeanSearch search and two Mathlib grep queries. I read the hits: scheme morphism restriction and manifold structure-groupoid restriction do not state the theorem. One initial unquoted Loogle query returned a syntax diagnostic; it is recorded as unavailable/invalid and was replaced with the valid `"Groupoid", "restrict"` query. No search is claimed without a corresponding logged invocation.
+
+The current latest blueprint is `literature/blueprint/latest/` (main-20261024). I read its `sk-lem-wrp-hc2/lem-a1-affine-hc0.proof.md`, the item's chapter and assigned unit record, and its direct parent `lem-a1-affine-groupoid-invariant-rank-strata`. The current ancestor proof no longer contains the historical affine-quotient paragraph named by the item's provenance; the direct parent's last step still needs precisely this invariant-open restriction tool. I record this historical provenance mismatch without editing the fixed chapter, the unit, or the item's maintainer-owned fields. This split changes no proof route of the unit. The two off-unit scheme tools are declared in `split_report.tool_uses`; neither replaces a unit step.
+
+Nothing remains unfinished in this one-level split. The independent maintainer review remains part of the delivery process.
+
+## Not duplicates
+
+No new nodes, so there are no new/existing tag pairs requiring comparison. In particular I did not introduce a second restriction-groupoid theorem or a separate isomorphism-invariance lemma for the final elementary calculation.
+
+## Review by Q87
+
+I read Stacks `groupoids.tex`, Tag 02VB (`lemma-restrict-groupoid`), whose proof is omitted, Tag 03BC (`definition-invariant-open`) with its following identification of the restriction arrow scheme, and Tag 03BI (`lemma-finite-locally-free-disjoint-free`), especially its final inverse-transport sentence. These sources justify the intended construction and comparison, but do not provide the expanded proof in this delivery; `proof_origin.by=agent` acknowledges that expansion. I also read Schemes Tag 01HI (`lemma-restrict-map-to-opens`) and its following factorization paragraph, and Tag 01L7 (`lemma-immersions-monomorphisms`), and checked their tag/label mapping. For the final property calculation I read Morphisms Tags 01WH (`definition-integral`, finite clause), 01U3 (`definition-flat`), 01TP (`definition-finite-presentation`) and the finite-locally-free definition/equivalence. No SGA source is used.
+
+For step 1 I opened the two existing scheme lemmas: the first explicitly gives a unique factorization when the image is in an open subscheme, including simultaneous source/target restriction, and the second explicitly gives cancellation for every test scheme. Here both images lie in W by the stated equality of inverse-image opens. Thus this is not the false general assertion that any immersion admits image-based factorization.
+
+For step 2 I opened `def-a1-groupoid-scheme`: it supplies se=id and si=t. Those equations put e(W) and i(V) inside the actual open V, so the same factorization lemma gives morphisms and their uniqueness. Step 3 uses that definition's sc=s pr_1, not a theorem hidden in its proof; the fibre-product node explicitly supplies the universal map lambda with its two projections. Its common-endpoint equation is over W and becomes the required equation over U after j. The composite therefore lands in V and the cited factorization lemma applies again.
+
+Step 4 is an elementary equation check from the cited groupoid definition, fibre-product universal property and open-immersion monomorphism statement. I checked the source/target order: for c(a,b), s(a)=t(b), the source is s(b) and the target t(a). The endpoint, unit, inverse and associativity equations are checked after the relevant monomorphism, and naturality comes from precomposition. This covers all clauses of the groupoid definition and does not assume that ordinary underlying scheme points detect morphisms. The two-sided restrictions are never replaced by an unjustified fibre-product identity.
+
+Step 5 uses the full groupoid-on-every-test-scheme clause of the same definition: inverse of inverse is the original arrow. Taking the universal R-point gives an equality of scheme morphisms, and the cited monomorphism lemma cancels k. This proves that the restricted inverse is an actual involutive isomorphism, with the previously checked equation s_W i_W=t_W over W.
+
+Step 6 cites the actual definitions of finite locally free, finite, flat, and locally of finite presentation. I checked each of their clauses: isomorphic inverse images of base affine opens give finite coordinate modules; the local ring isomorphism is linear over the same base local ring; and affine finite-presentation charts have the same generators and relations after the source isomorphism. No base-change preservation theorem or unstated Noetherian hypothesis is used. Step 7 uses the fibre-product node's functorial universal property to construct the fibre isomorphism, with the same involution as inverse. It is over the identity of the residue field, so the induced section-ring isomorphism is linear over that field and preserves the dimension in the finite-locally-free degree definition. Thus degree, not only finiteness, is checked.
+
+I checked the small cases W empty (then V empty, all maps unique, degree condition vacuous), W=U, the unit groupoid (all restrictions identity, degree one on a nonempty W), and the pair groupoid (a nonempty proper W is generally not invariant, so its exclusion is necessary). Rank zero over a nonempty W cannot occur because e_W is a section, but the implication in the statement remains valid, and the empty case permits every rank. Disconnected W and variable ranks outside W cause no issue because no global rank assumption was used. No new statements were introduced. Every proof step is shorter than 2000 characters. The B--E checks required no statement correction; the main improvement was to spell out the omitted construction and the actual finite/flat/presentation and fibre-degree comparisons instead of invoking an uncited 'transport'.

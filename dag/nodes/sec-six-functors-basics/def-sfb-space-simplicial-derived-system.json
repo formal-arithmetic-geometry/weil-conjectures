@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-space-simplicial-derived-system",
+ "kind": "definition",
+ "title": "Coherent simplicial derived systems on algebraic spaces",
+ "status": "split",
+ "statement": "Use algebraic spaces over a scheme S [def-trf-algebraic-space], their existing unbounded derived categories and quasi-coherent cohomology predicate [def-sfb-space-derived-module-calculus], and the canonical derived pullbacks with their fixed unit and composition comparisons [def-sfb-space-derived-pullback]. For U a simplicial object in the slice over X [def-weil-pbc-simplicial-object], a SpaceDerivedSystem consists of objects K_n in D(O_(U_n)) with quasi-coherent cohomology, and isomorphisms θ_φ:Lh_φ*K_m≅K_n for every order map φ:[m]→[n], including degeneracies. The identity transition equals the canonical unit after transporting U(id)=id. For composable φ,ψ, θ_(φψ) equals the canonical pullback composition comparison followed by Lh_ψ*(θ_φ) and θ_ψ. No structure map is assumed flat. Define equality transport of derived pullbacks by eqToIso. The augmentation comparison Lu_n*≅Lu_m* Lh_φ* is given by the slice equality h_φ u_m=u_n and the fixed composition comparison. For M,N in D(O_X), a:Lu_0*M→Lu_0*N, and i=0,1, define its degree-one restriction as the conjugate of Ld_i*(a) by these augmentation comparisons, an arrow Lu_1*M→Lu_1*N. All comparisons use the actual structure maps.",
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/spaces-simplicial.tex",
+  "place": "spaces-simplicial.tex, definition-cartesian-derived-modules, Tags 0DLA and 0DL9; sites-cohomology.tex Tag 0D6D."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent simplicial family of derived quasicoherent objects pullback isomorphisms identity composition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullback_comp_id\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"{X Y : C} (f : X ⟶ Y) :\\n  (J.overMapPullbackComp A f (𝟙 Y)).inv ≫\\n      Functor.whiskerRight (J.overMapPullbackId A Y).hom _ ≫ (Functor.leftUnitor _).hom =\\n    (overMapPullbackCongr _ _ (by simp)).hom\", \"doc\": \"For a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, an object $ A $, and a morphism $ f : X \\\\to Y $, the composition of the pullback functor $ J.\\\\text{overMapPullback}(f) $ with the ident\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.overMapPullback_id_comp\", \"module\": \"Mathlib.CategoryTheory.Sites.Over\", \"type\": \"{X Y : C} (f : X ⟶ Y) :\\n  (J.overMapPullbackComp A (𝟙 X) f).inv ≫\\n      Functor.whiskerLeft _ (J.overMapPullbackId A X).hom ≫ (Functor.rightUnitor _).hom =\\n    (overMapPullbackCongr _ _ (by simp)).hom\", \"doc\": \"For a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, an object $ A $, and a morphism $ f : X \\\\to Y $, the composition of the pullback functor induced by the identity morphism $ \\\\mathrm{id}\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ≅ forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"CategoryTheory.Functor.IsFibered.pullbackPullbackIso\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.Fibered\", \"type\": \"{p : 𝒳 ⥤ 𝒮} [IsFibered p] {R S T : 𝒮} {a : 𝒳} (ha : p.obj a = S) (f : R ⟶ S) (g : T ⟶ R) :\\n  pullbackObj ha (g ≫ f) ≅ pullbackObj (pullbackObj_proj ha f) g\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $, given composable morphisms $ f : R \\\\to S $ and $ g : T \\\\to R $ in $ \\\\mathcal{S} $, and an object $ a \\\\in \\\\mathcal{X} $ with $ p(a) = S $, the\"}\n  {\"name\": \"PresheafOfModules.pullbackId\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullback.{v} (F := 𝟭 C) (𝟙 S) ≅ 𝟭 _\", \"doc\": \"The pullback functor associated to the identity functor and identity natural transformation is naturally isomorphic to the identity functor on the category of presheaves of modules over a presheaf of \"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"{K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] : IsIso (Q.map f)\", \"doc\": \"In the derived category of an abelian category, the localization functor $ Q $ maps quasi-isomorphisms between cochain complexes to isomorphisms. Specifically, for any quasi-isomorphism $ f: K \\to L $ \"}\n  {\"name\": \"FreeSimplexQuiver.homRel.δ_comp_σ_succ\", \"module\": \"Mathlib.AlgebraicTopology.SimplexCategory.GeneratorsRelations.Basic\", \"type\": \"∀ {n : ℕ} {i : Fin (n + 1)},\\n  FreeSimplexQuiver.homRel\\n    (CategoryTheory.CategoryStruct.comp ((CategoryTheory.Paths.of FreeSimplexQuiver).map (FreeSimplexQuiver.δ i.succ))\\n      ((CategoryTheory.Paths.of FreeSimplexQuiver).map (FreeSimplexQuiver.σ i)))\\n    (CategoryTheory.CategoryStruct.id ((Cate\", \"doc\": \"For all $n \\\\in \\\\mathbb{N}$ and $i \\\\in \\\\{0, 1, \\\\dots, n\\\\}$, the composition of the face map $\\\\delta_{i+1}: n \\\\to n+1$ and the degeneracy map $\\\\sigma_i: n+1 \\\\to n$ in the free simplex quiver satisfies t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match: ordinary tensor comparisons or general simplicial constructions only. Reuse those building blocks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived pullback coherent simplicial systems and fppf hypercovers of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            (self : AlgebraicGeometry.ExistsHomHomCom\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function construc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackCover'\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.Precoverage C} →\\n      {S T : C} →\\n        [J.IsStableUnderBaseChange] →\\n          (f : S ⟶ T) →\\n            (E : J.ZeroHypercover T) → [∀ (i : E.I₀), CategoryTheory.Limits.HasPullback (E.f i) f] → J.ZeroHypercover \", \"doc\": \"Given a morphism $ f : S \\to T $ in a category $\\\\mathcal{C}$ with a precoverage $J$ stable under base change, and a zero hypercover $E$ of $T$, if all pullbacks of the morphisms $E.f(i)$ along $f$ exis\"}\n  {\"name\": \"CategoryTheory.instHasPullbacksToPreOneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {S : C} (E : CategoryTheory.PreZeroHypercover S)\\n  [inst_1 : E.HasPullbacks], E.toPreOneHypercover.HasPullbacks\", \"doc\": \"Given a pre-zero hypercover $ E $ of an object $ S $ in a category $ \\\\mathcal{C} $ with pullbacks, the pre-one hypercover constructed from $ E $ inherits the pullback property. Specifically, if $ E $ \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.mk'\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {S : C} →\\n        (E : CategoryTheory.PreOneHypercover S) →\\n          [inst_1 : E.HasPullbacks] →\\n            E.sieve₀ ∈ J S →\\n              (∀ (i₁ i₂ : E.I₀), E.sieve₁' i₁ i₂ ∈ J (Ca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and an object $S$, this constructs a one-step hypercover of $S$ by verifying: (1) the sieve $\\\\mathrm{sieve}_0$ generated by the zeroth c\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.pullbackCoverOfLeft\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {X : C} →\\n      (E : CategoryTheory.PreZeroHypercover X) →\\n        {Y Z : C} →\\n          (f : X ⟶ Z) →\\n            (g : Y ⟶ Z) →\\n              [inst_1 : CategoryTheory.Limits.HasPullback f g] →\\n                [∀ (i : E.I₀), CategoryTh\", \"doc\": \"Given a pre-zero hypercover $ E $ of an object $ X $ in a category $ \\\\mathcal{C} $, and morphisms $ f: X \\\\to Z $ and $ g: Y \\\\to Z $ with a pullback $ P = X \\\\times_Z Y $, this constructs a new pre-zero\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.pullbackCoverOfRight\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {Y : C} →\\n      (E : CategoryTheory.PreZeroHypercover Y) →\\n        {X Z : C} →\\n          (f : X ⟶ Z) →\\n            (g : Y ⟶ Z) →\\n              [inst_1 : CategoryTheory.Limits.HasPullback f g] →\\n                [∀ (i : E.I₀), CategoryTh\", \"doc\": \"Given a pre-zero hypercover $ E $ of an object $ Y $ in a category $ \\\\mathcal{C} $, and morphisms $ f: X \\\\to Z $ and $ g: Y \\\\to Z $, this function constructs a new pre-zero hypercover of the pullback \"}\n  {\"name\": \"CategoryTheory.Precoverage.ZeroHypercover.isPullback_of_forall_isPullback\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.Precoverage C}\\n  [J.toGrothendieck.Subcanonical] [inst_2 : CategoryTheory.Limits.HasPullbacks C] [J.IsStableUnderBaseChange]\\n  {P X Y Z : C} (fst : P ⟶ X) (snd : P ⟶ Y) (f : X ⟶ Z) (g : Y ⟶ Z) (𝒰 : J.ZeroHypercover X),\\n  (∀\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$, a zero hypercover $\\\\mathcal{U}$ of $X$, and the condition that for every element $i$ in the zeroth component of $\\\\mathcal{U}$\"}\n  {\"name\": \"CategoryTheory.Precoverage.ZeroHypercover.pullback₂\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Zero\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.Precoverage C} →\\n      {S T : C} →\\n        [J.IsStableUnderBaseChange] →\\n          (f : S ⟶ T) →\\n            (E : J.ZeroHypercover T) → [∀ (i : E.I₀), CategoryTheory.Limits.HasPullback (E.f i) f] → J.ZeroHypercover \", \"doc\": \"Given a morphism $ f : S \\to T $ in a category $\\\\mathcal{C}$ with a precoverage $J$ stable under base change, and a zero hypercover $E$ of $T$, if all pullbacks of the morphisms $E.f(i)$ along $f$ exis\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match: ordinary tensor comparisons or general simplicial constructions only. Reuse those building blocks."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSpaceFppfHypercover|SpaceDerivedSystem|spaceDerivedPullback|smallModuleTensorPullback",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No exact match: ordinary tensor comparisons or general simplicial constructions only. Reuse those building blocks."
+  },
+  {
+   "tool": "rg",
+   "query": "IsSpaceFppfHypercover|SpaceDerivedSystem|spaceDerivedPullback|smallModuleTensorPullback in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search hypercover and derived pullback",
+   "results": "No exact declaration or definition node. Existing AlgebraicSpaceDerivedModules provides DerivedModules and derivedQCohProperty; AlgebraicSpaceModuleOperations provides ordinary tensor pullback and pure sections; SiteHypercoverDisjointUnion provides IsProperFaceMatchingArrow. These are reused. Blueprint search found scheme/pro-etale hypercovers and scheme derived pullbacks, not the missing algebraic-space notions.",
+   "date": "2026-10-23",
+   "verdict": "Add only the three missing notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-negative-ext-hyperdescent",
+  "date": "2026-10-23",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Definition used to state negative-Ext hyperdescent.",
+   "via": [
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedSystem",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SpaceDerivedSystem",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceDerivedPullbackCongr",
+   "AlgebraicGeometry.AlgebraicSpace.spaceAugmentationComparison",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSystemIdentityComparison",
+   "AlgebraicGeometry.AlgebraicSpace.spaceSystemCompositionComparison",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceDerivedSystem",
+   "AlgebraicGeometry.AlgebraicSpace.spaceDegreeOneRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedSystem.lean",
+  "statement": "structure SpaceDerivedSystem {X : AlgebraicSpace S} (U : SimplicialObject (Over X))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-511da50fa",
+  "group": "NN",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-511da50fa",
+  "group": "NN",
+  "result": "fix",
+  "note": "Re-delivery of 034a follows the return recipe. SpaceDerivedPullback imports O3 SpaceDerivedTensorPullback; spaceDerivedPullback = abbrev derivedTensorPullback.{u,w,w}; counit = O3 totalLeftDerivedCounit; local smallModuleTensorPullback/complex copies and the chart-composite duplicate removed; moduleTensorComposition reused. Comp/id comparisons canonical (associators, smallModuleEquivalence unit/counit, ∃!-normalized multiplication iso, leftDerivedUnique of actual counits); sorried IsLeftDerivedFunctor obligations true (06YY/0D6D). 0 live hits for the 15 new names. Item, system, hypercover modules and records byte-identical to 034a, whose clause table (0DLA/0DL9, edge cases) I re-confirmed. FIX (JSON only): def-sfb-space-derived-pullback cited theorem lem-sfb-space-flat-direct-image-base-change only for the plain def moduleTensorComposition (choose of a local ∃!); swapped to its existing:true owner def-sfb-space-module-tensor-composition (landed 15:13 UTC, before base 16:15 UTC) in stmt_deps, statement bracket and lean.note in fixes/def-sfb-space-derived-pullback.json. No Lean change, so nothing compiled; worker compiles clean."
+ }
+}

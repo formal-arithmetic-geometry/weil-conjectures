@@ -21,98 +21,29 @@
  ],
  "proof": [
   {
-   "text": "First identify sections with the inverse image of a ringed topos point, at finite coefficients. In [lem-fix-geometric-stalk-topos-point] take the geometric point $\\operatorname{id}_s$ of $s=\\operatorname{Spec}k$. The pointed-neighbourhood category has initial object $(s,\\operatorname{id}_s)$: its map to $(U,u)$ is precisely the specified lift $u:s\\to U$. Its opposite therefore has terminal object $(s,\\operatorname{id}_s)$, so the stalk colimit is $\\mathcal F(s)$. Thus $p^{-1}=\\Gamma(s,-)$. For $A=A_{E,n}$ and any constant $A$-module $M$, [lem-weil-proetale-constant-sheaf-stalk] identifies $\\Gamma(s,\\underline M)=M$ through the constant-section map. Give $p$ the ring map $p^{-1}A_s=A\\xrightarrow{1}A$. Its module pullback is $A\\otimes_A\\Gamma(s,-)=\\Gamma(s,-)$, which is exact on the entire ambient module category by [lem-weil-point-proetale-sections-exact].",
+   "text": "Apply [lem-pod-point-dual-coefficient-domains] to the stated $C$ and $Q$. It gives the specified natural isomorphisms $t_{Q,C}$ and $t_{Q,D_sC}$, including the finite-quotient map, and places $D_sC$, $Q_sC$ and $D_s(Q_sC)$ in the required finite-Tor domains. This also fixes the normalization of $\\delta_{Q,C}$.",
    "uses": [
-    "lem-fix-geometric-stalk-topos-point",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0991, section-points; sites.tex Tag 00Y8, lemma-point-pushforward-sheaf; Tag 098H, lemma-w-contractible-is-weakly-contractible"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pullback] to this ringed point. On a K-flat flat-term resolution its comparison is termwise sections; exactness from step 1 identifies $Lp^*$ with ambient derived sections. Now use [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] with $G=(A_{E,m})_s$, regarded as an $A_{E,n}$-module. It gives, for $1\\leq m\\leq n$ and any ambient complex $B$,\n$$\\Gamma(s,B\\otimes^L_{A_{E,n}}(A_{E,m})_s)\\cong\\Gamma(s,B)\\otimes^L_{A_{E,n}}A_{E,m}.$$\nThe inverse is exactly $t_{Q,B}$: the tensor-pullback map on resolutions is the balanced map induced by tensoring sections, and the identification of $\\Gamma(s,(A_{E,m})_s)$ is the constant-section map of step 1. This proves the missing invertibility assertion, including for $B=C,D_sC$ once their domains are checked below. The theorem applies on unbounded ambient categories, so no finite-Tor hypothesis on $A_{E,m}$ over $A_{E,n}$ is needed; such a hypothesis would be false when $m<n$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change; Tag 07A4, lemma-pullback-tensor-product; Tag 0G7E, lemma-pullback-K-flat"
-   }
-  },
-  {
-   "text": "For integral reduction, [lem-pod-point-sections-derived-reduction] gives the stipulated $t_{Q,B}$ as an isomorphism. For integral scalar extension, [lem-weil-point-sections-scalar-extension] gives $t_{Q,B}=\\varphi^{-1}$, explicitly the canonical sections-tensor map followed by the completion comparison, and gives its rationalized version at a common coefficient field. For rationalization the two fibre functors give the same module complex by [def-weil-finite-coefficient-point], so $t$ is the identity. Use [lem-sf-point-fibre-derived-tensor] for the fibre tensor isomorphisms, their unit constraints, and their compatibility with these coefficient maps. In particular the comparisons used here are the actual specified maps, with $\\varphi$ inverted in the stated direction, rather than unspecified objectwise isomorphisms.",
-   "uses": [
-    "lem-pod-point-sections-derived-reduction",
-    "lem-weil-point-sections-scalar-extension",
-    "def-weil-finite-coefficient-point",
-    "lem-sf-point-fibre-derived-tensor"
+    "lem-pod-point-dual-coefficient-domains"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
-    "place": "second paragraph: site-perfect coefficient compatibility at the point"
+    "place": "second paragraph, site-perfect compatibility"
    }
   },
   {
-   "text": "The domains required in steps 2--3 hold. The isomorphism $u_\\Lambda:\\omega_{s,\\Lambda}\\to\\Lambda_s$ is the identity-adjunction normalization of [lem-pod-point-dualizing-complex]. Hence $D_sC$ is internal Hom of $C$ into the coefficient unit. The unit has Tor interval $[0,0]$ by the definition [def-weil-finite-tor-amplitude]. For the finite stage, apply (ii) and (vii) of [thm-sf-ctf-stability] to $X=s$, and its integral and field-stage assertions to the other stages. They put $D_sC$, $Q_sC$ and $D_s(Q_sC)$ in the required bounded constructible finite-Tor categories. The evaluation compatibility in (vii), with [lem-fix-operation-reduction] on its stated domains, applies to the canonical internal-Hom arrow $\\delta_{Q,C}$. We do not infer that arbitrary constructible finite-Tor sheaves on a positive-dimensional scheme are site-perfect, nor use the site-perfect formula outside its domain.",
+   "text": "Put $d=F_\\Lambda D_sC$ and $e=e_{\\Lambda,C}:d\\otimes^Lc\\to\\Lambda$. By [lem-pod-point-dual-evaluation-transport], $\\operatorname{ev}_c\\circ(j_{\\Lambda,C}\\otimes1)=e$, with the corresponding target identity. Its coefficient-pairing equality says\n$$e'\\circ((F_{\\Lambda'}\\delta_{Q,C}\\circ t_{Q,D_sC})\\otimes t_{Q,C})=E,\\qquad E=q(e)\\circ\\nu_q,$$\nwhere $e'=e_{\\Lambda',Q_sC}$ and $\\nu_q:qd\\otimes^Lqc\\to q(d\\otimes^Lc)$ is the coefficient tensor constraint.",
    "uses": [
-    "lem-pod-point-dualizing-complex",
-    "def-weil-finite-tor-amplitude",
-    "thm-sf-ctf-stability",
-    "lem-fix-operation-reduction"
+    "lem-pod-point-dual-evaluation-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
-    "place": "second paragraph: site-perfect coefficient compatibility at the point"
+    "place": "second paragraph, site-perfect compatibility"
    }
   },
   {
-   "text": "Fix notation for evaluation and the canonical identifications. Put $d=F_\\Lambda(D_sC)$, and let $\\mu_\\Lambda:d\\otimes^L c\\xrightarrow{\\sim}F_\\Lambda(D_sC\\otimes^L C)$ be the inverse tensor comparison of [lem-sf-point-fibre-derived-tensor]. Let $e_\\Lambda:d\\otimes^Lc\\to\\Lambda$ be $F_\\Lambda(u_\\Lambda\\circ\\operatorname{ev}_C)\\circ\\mu_\\Lambda$, with the fibre unit identified with $\\Lambda$. Unpack the specified canonical internal-Hom identification $j_{\\Lambda,C}$ of [lem-pod-point-dualizing-complex]: its map into the coefficient Hom is the tensor--Hom transpose of evaluation after sections, followed by $u_\\Lambda$. Thus\n$$\\operatorname{ev}_c\\circ(j_{\\Lambda,C}\\otimes1_c)=e_\\Lambda.$$\nThis is the defining adjunct identity, not an extra isomorphism theorem. On Hom-complex representatives [def-pur-hom-complex] it says that a degree-$r$ family $f$ acts on a section $x$ by $u_\\Lambda(f(x))$; the differential on both sides is $d f-(-1)^r f d$. The same description defines $j$ after rationalization and at a common field stage. Use the symmetry constraint if evaluation is written with the input first. The adjunction inverse identities of [lem-pod-closed-uncurry-laws] give precisely the displayed identity, and give the corresponding identity for $j_{\\Lambda',Q_sC}$.",
-   "uses": [
-    "lem-sf-point-fibre-derived-tensor",
-    "lem-pod-point-dualizing-complex",
-    "def-pur-hom-complex",
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
-    "place": "second paragraph: site-perfect coefficient compatibility at the point"
-   }
-  },
-  {
-   "text": "Write $\\nu_q:qd\\otimes^L qc\\xrightarrow{\\sim}q(d\\otimes^Lc)$ for the scalar-extension tensor constraint and put $E=q(e_\\Lambda)\\circ\\nu_q$, with $q\\Lambda=\\Lambda'$. Let $e' = e_{\\Lambda'}$ be the pairing of step 5 for $Q_sC$. The definition of the canonical internal-Hom comparison $\\delta_{Q,C}$ as the transpose of coefficient-changed evaluation gives\n$$\\operatorname{ev}_{Q_sC}\\circ(\\delta_{Q,C}\\otimes1)=Q_s(\\operatorname{ev}_C)\\circ\\nu_{Q_s},$$\nincluding the stipulated comparison on the dualizing objects. After $u_{\\Lambda'}$ this comparison is $Q_su_\\Lambda$, since it is the identity-adjunction coefficient comparison. Apply $F_{\\Lambda'}$ to this equality. Naturality of $t$ for $u_\\Lambda\\circ\\operatorname{ev}_C$, and the tensor and unit compatibility of [lem-sf-point-fibre-derived-tensor], give\n$$e'\\circ\\bigl((F_{\\Lambda'}(\\delta_{Q,C})\\circ t_{Q,D_sC})\\otimes t_{Q,C}\\bigr)=E.$$\nHere preservation of evaluation under coefficient change is supplied on the finite-Tor domains by [thm-sf-ctf-stability](vii), and at the other stated coefficient passages by [lem-fix-operation-reduction]. This proves an equality of the actual pairings before taking transposes.",
-   "uses": [
-    "lem-sf-point-fibre-derived-tensor",
-    "thm-sf-ctf-stability",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
-    "place": "second paragraph: site-perfect coefficient compatibility at the point"
-   }
-  },
-  {
-   "text": "Let $L$ denote the left side of the asserted equation. Its tensor--Hom transpose is a pairing $qd\\otimes^L qc\\to\\Lambda'$. Precomposition by $t_{Q,C}$ in the dual means that this pairing is\n$$\\operatorname{ev}_{F_{\\Lambda'}Q_sC}\\circ\\bigl((j_{\\Lambda',Q_sC}\\circ F_{\\Lambda'}\\delta_{Q,C}\\circ t_{Q,D_sC})\\otimes t_{Q,C}\\bigr).$$\nBy step 5 this is the left side of the last equality in step 6, hence is $E$. This uses only the evaluation formula for uncurrying and its naturality in [lem-pod-closed-uncurry-laws]; no invertibility of $\\delta$ or of a dual-base-change arrow is used.",
-   "uses": [
-    "lem-pod-closed-uncurry-laws"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
-    "place": "second paragraph: site-perfect coefficient compatibility at the point"
-   }
-  },
-  {
-   "text": "Let $R=b_{Q,c}\\circ q(j_{\\Lambda,C})$. By definition the canonical module-dual comparison $b_{Q,c}$ is the transpose of coefficient-changed module evaluation. Its evaluation identity is\n$$\\operatorname{ev}_{qc}\\circ(b_{Q,c}\\otimes1_{qc})=q(\\operatorname{ev}_c)\\circ\\nu_{q,c^\\vee,c}.$$\nNaturality of the tensor constraint therefore makes the transpose of $R$ equal to\n$$q\\bigl(\\operatorname{ev}_c\\circ(j_{\\Lambda,C}\\otimes1_c)\\bigr)\\circ\\nu_q=q(e_\\Lambda)\\circ\\nu_q=E,$$\nby step 5. The same adjunction bijection [lem-pod-closed-uncurry-laws] gives equal morphisms from equal transposes, so $L=R$. The calculation takes place in each stipulated coefficient category; at $\\overline{\\mathbf Q}_\\ell$ it is performed at a common finite coefficient field, as prescribed in [def-weil-finite-coefficient-point]. Both sides then represent the same morphism in the common-stage category. This proves the square for every listed $Q$.",
+   "text": "Let $L$ be the asserted left composite. Uncurrying by [lem-pod-closed-uncurry-laws] gives\n$$\\operatorname{ev}_{c'}\\circ((j_{\\Lambda',Q_sC}\\circ F_{\\Lambda'}\\delta_{Q,C}\\circ t_{Q,D_sC})\\otimes t_{Q,C}),\\quad c'=F_{\\Lambda'}Q_sC.$$\nThe target evaluation identity in step 2 turns this into its pairing equality, so this transpose is $E$. For $R=b_{Q,c}\\circ q(j_{\\Lambda,C})$, the definition of $b$ as the transpose of scalar-changed module evaluation gives\n$$\\operatorname{ev}_{qc}\\circ(b_{Q,c}\\otimes1)=q(\\operatorname{ev}_c)\\circ\\nu_{q,c^\\vee,c}.$$\nNaturality of the coefficient tensor constraint makes the transpose of $R$ equal to\n$$q(\\operatorname{ev}_c\\circ(j_{\\Lambda,C}\\otimes1))\\circ\\nu_q=q(e)\\circ\\nu_q=E.$$\nThe tensor--Hom adjunction is a bijection, so equal transposes imply $L=R$. No invertibility of $\\delta$ or $b$ is needed. At $\\overline{\\mathbf Q}_\\ell$ this calculation is performed at a common finite field stage and represents equality in its finite-stage category [def-weil-finite-coefficient-point].",
    "uses": [
     "lem-pod-closed-uncurry-laws",
     "def-weil-finite-coefficient-point"
@@ -120,26 +51,15 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-global-verdier-duality.proof.md",
-    "place": "second paragraph: site-perfect coefficient compatibility at the point"
+    "place": "second paragraph, site-perfect compatibility"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
   "def-weil-finite-coefficient-point",
-  "def-weil-finite-tor-amplitude",
-  "lem-fix-geometric-stalk-topos-point",
-  "lem-fix-operation-reduction",
   "lem-pod-closed-uncurry-laws",
-  "lem-pod-point-dualizing-complex",
-  "lem-pod-point-sections-derived-reduction",
-  "lem-sf-point-fibre-derived-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-point-sections-scalar-extension",
-  "lem-weil-proetale-constant-sheaf-stalk",
-  "thm-sf-ctf-stability"
+  "lem-pod-point-dual-coefficient-domains",
+  "lem-pod-point-dual-evaluation-transport"
  ],
  "proof_origin": {
   "by": "agent",
@@ -266,54 +186,13 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pod-point-duality-coefficient-compatibility",
   "worker": "stage1",
-  "group": "Q85",
-  "summary": "Kept the precise statement and all coefficient functors unchanged. Proved finite-quotient sections comparison through the ambient ringed geometric point, then expanded the coefficient square into the equality of its two evaluation transposes. Reused existing sections, tensor, point-duality, and finite-Tor stability nodes; no new nodes. Checked all cited statements and canonical arrow directions, including the inverse of the integral sections scalar comparison.",
-  "blueprint": "Realizes the second paragraph of thm-pod-global-verdier-duality.proof.md: the point identification used in the global duality composite commutes with coefficient changes. Steps 1--3 give the actual sections comparisons, step 4 verifies domains, and steps 5--8 identify both composites by evaluation.",
-  "tool_uses": [
-   {
-    "node": "lem-fix-geometric-stalk-topos-point",
-    "why": "Constructs the ringed topos point used for the ambient finite-quotient comparison."
-   },
-   {
-    "node": "lem-fix-operation-reduction",
-    "why": "Supplies evaluation preservation for the stipulated coefficient changes."
-   },
-   {
-    "node": "lem-pod-point-sections-derived-reduction",
-    "why": "Supplies the specified integral reduction sections comparison."
-   },
-   {
-    "node": "lem-sf-point-fibre-derived-tensor",
-    "why": "Uses its stated canonical comparison as a generic tool; no step of the package route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Supplies the actual K-flat-resolution comparison for the ringed point."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Gives ambient tensor compatibility, where the quotient coefficient module need not have finite Tor amplitude."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Identifies derived inverse image with exact ambient sections."
-   },
-   {
-    "node": "lem-weil-point-sections-scalar-extension",
-    "why": "Supplies the specified completed scalar sections comparison and its rationalization."
-   },
-   {
-    "node": "lem-weil-proetale-constant-sheaf-stalk",
-    "why": "Identifies the coefficient ring and finite quotient under that point."
-   },
-   {
-    "node": "thm-sf-ctf-stability",
-    "why": "Uses its stated canonical comparison as a generic tool; no step of the package route is replaced."
-   }
-  ]
+  "group": "Q14",
+  "summary": "Repair of batch5 re-split return: unchanged statement; two comparable statement-only obligations carry all of former steps 1--6, with the full former arguments retained verbatim and allocated in report.md. Parent is a short assembly of their conclusions by the original transpose calculation (former steps 7--8). No new proof is marked split and no Lean is written.",
+  "blueprint": "Second paragraph of thm-pod-global-verdier-duality: canonical point-dual identification commutes with coefficient passage. New domains node carries returned steps 1--4, new evaluation node carries returned steps 5--6, parent step 3 retains steps 7--8.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-fix-geometric-stalk-topos-point",
@@ -328,12 +207,23 @@
   "thm-sf-ctf-stability"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q85-1999098a8",
-  "group": "Q85",
+  "reviewer": "NT-cc-Q14-92f4b8a56",
+  "group": "Q14",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-1999098a8 (reviewer sub-agent of L); spot-checked: I read the item in full: all 8 steps, the statements of all 15 cited nodes, the unit sk-thm-sf-package, and the blueprint main-20261015 proofs of thm-pod-global-verdier-duality (second paragraph) and lem-pod-point-dualizing-complex. The delivery has no new nodes; the statement, stmt_deps and blueprint ancestry are unchanged; there is no cycle and no SGA citation; proof_deps equals the union of uses; every step is under 2000 characters. Step 1: (s,id) is the initial pointed neighbourhood, so p^{-1}=Γ(s,-); constant-sheaf-stalk gives Γ((A_m)_s)=A_m. Step 2: the ambient tensor-pullback theorem covers unbounded categories, so it applies to the quotient A_m, which has no finite Tor amplitude over A_n. I checked from that node's proof steps 5–6 that its canonical arrow is the inverse of the map that tensors sections, so it is the item's t. Restriction of scalars is conservative, so t is invertible over A_m. Step 3: the directions of t are right (φ is inverted; rationalization is the identity). Step 4: the domains follow from thm-sf-ctf-stability (ii) and (vii) at X=s and lem-fix-operation-reduction. Step 5: j is the transpose of evaluation after sections, followed by u. This matches the adjunction m↦v_s(1⊗m) and the Hom-complex signs in steps 3, 6 and 7 of lem-pod-point-dualizing-complex. Steps 6–8: I recomputed the pairing chain using the definition of δ, the fibre tensor compatibility with reduction and scalar extension, naturality of t and unit compatibility. Both transposes equal q(e)∘ν_q, and no step uses invertibility of δ or b. Edge cases checked: C=0, the unit and its shifts, m=n, A_2→A_1, L=E, rationalization and the common stage at Q̄ℓ. Minor remarks, not faults: in steps 2 and 5 the canonical arrows are identified from the cited nodes' constructions; the evaluation-preservation citations in step 6 are not needed; and lem-trf-point-sections-finite-reduction could serve as an alternative existence citation for step 2. I accept all 10 declared tool_uses as generic tools. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-92f4b8a56 (reviewer sub-agent of L); spot-checked: Re-split note checked (clones/live/coord/repair-notes, at least 2 nodes, old proof 7509 characters, PASSed by Q85 1999098a8). Every old step now has a home. Old steps 1-4 went to the new node lem-pod-point-dual-coefficient-domains: the topos point and exact sections via lem-sf-point-ringed-evaluation-model; t for finite reduction as the inverse of the ringed-topoi derived-tensor comparison with G=(A_m)_s, on unbounded complexes and with no Tor hypothesis; t=phi^{-1} for scalar extension, the identity for rationalization, and lem-pod-point-sections-derived-reduction for integral reduction; the duality domains and the normalization of delta. Old steps 5-6 went to the new node lem-pod-point-dual-evaluation-transport: ev∘(j⊗1)=e, with e=F(u∘ev)∘mu, and the pairing-transport equation. Old steps 7-8 stay almost verbatim as parent step 3 (uncurry, the b evaluation identity, naturality of nu, uncurrying as a bijection, the Qbar common stage). The parent is 1785 characters. The children's statements are 2873 and 3317 characters, so they are comparable; neither restates the item, since the evaluation node stops before the transpose and does not involve b. The item statement is unchanged and only the proof, proof_deps and split_report fields changed. There is no cycle and no SGA. I checked the directions of all maps against the cited statements (pbc derived-tensor-pullback, ringed-evaluation-model, sections-derived-reduction, point-sections-scalar-extension phi). I checked e against proof step 6 of lem-pod-point-dualizing-complex, where j(f)(x)=u(f(x)). Small cases checked: m=n, the non-flat case n=2,m=1, C=Lambda_s, C=0. Duplicate candidates: lem-coef-finite-point-internal-hom-evaluation is a partial overlap at the finite stage only, so advisory; lem-pod-point-scalar-hom-evaluation, completed-evaluation and global-duality-map-identification are not duplicates. Batch 5: the delivered closure minus the base closure is exactly the two new nodes. Dualizing-complex and sections-derived-reduction were cited directly by the base item. Ringed-evaluation-model and def-trf-geometric-morphism (a general definition) were already in the base closure. All of these are generic point and six-functor normalizations, not steps of the proof of Poincare duality or of the trace formula, so they are accepted. Advisory for the maintainer: the evaluation formula for j is fixed only by the proof of lem-pod-point-dualizing-complex, as it already was in the old PASSed step 5."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

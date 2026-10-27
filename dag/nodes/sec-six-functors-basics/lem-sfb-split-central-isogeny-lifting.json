@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-split-central-isogeny-lifting",
+ "kind": "statement",
+ "title": "Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings",
+ "statement": "Let $A$ be a nonzero commutative ring. Let $(G_i,T_i=D_A(M_i))$, $i=0,1$, be split realizations in the sense of [def-sfb-pinned-split-root-realization], with reduced root data $(M_i,\\Phi_i,M_i^\\vee,\\Phi_i^\\vee)$; no bases or pinning generators are specified. Suppose $h:M_0\\hookrightarrow M_1$ is an injective homomorphism with finite cokernel and $b:\\Phi_1\\to\\Phi_0$ is a bijection satisfying\n$$h(b(\\alpha))=\\alpha,\\qquad h^\\vee(\\alpha^\\vee)=b(\\alpha)^\\vee\\quad(\\alpha\\in\\Phi_1).$$\nHere $h^\\vee$ is restriction of integer-valued functionals. There exists a homomorphism $f:G_1\\to G_0$ whose restriction to $T_1$ is the specified constant monomial map $D_A(h):T_1\\to T_0$ [def-sfb-ring-diagonalizable-group]. It is finite, faithfully flat and finitely presented, with central scheme-theoretic kernel $D_A(M_1/h(M_0))\\subseteq T_1$. Finite means affine with finite coordinate module over the target; faithfully flat means flat [def-weil-flat-morphism] and surjective. In particular, when $h$ is an isomorphism, $f$ is an isomorphism. The tangent map of every such $f$ restricts to an $A$-module isomorphism $\\mathfrak g_{1,\\alpha}\\simeq\\mathfrak g_{0,b(\\alpha)}$ for each root. For any two such homomorphisms $f,F$ inducing the same $h,b$, there exists a unique $t\\in(T_0/Z(G_0))(A)$ with $F=c_t\\circ f$, where $c_t$ is the action on $G_0$ descended from conjugation. Here $Z(G_0)$ is the subgroup functor commuting with every point after every algebra extension, and $T_0/Z(G_0)$ denotes the fppf sheaf quotient (sheafification of the pointwise quotient for flat finitely presented jointly surjective covers). These statements allow disconnected and nonreduced $A$, empty roots, and rank zero; the kernel need not be smooth.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 6.1.16(1), printed p.196, proved in Section 6.2, pp.204--210, restricted to root exponents one; Definition 6.1.8 and Example 6.1.9, p.191; Lemma 6.1.4, pp.187--189; Corollary 6.1.15, pp.195--196; Proposition 3.3.10, p.103. Read online; local PDF WANTED. No Stacks tag states this group-scheme isogeny theorem."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a base $\\Delta_1$ using [lem-sfb-small-centralizer-hom-amalgamation]. Since $h$ has finite cokernel, $h_{\\mathbf Q}$ is an isomorphism, and $h(b(\\alpha))=\\alpha$ shows that $\\Delta_0=b(\\Delta_1)$ is rationally independent and gives the same signed integral expansions of all roots. Thus it is a base by [def-sfb-pinned-split-root-realization]. Choose generators of the finitely many simple-root modules on both sides. For $J\\subseteq\\Delta_1$, form the centralizers $G_{1,J}$ and $G_{0,b(J)}$ of [lem-sfb-small-centralizer-hom-amalgamation]. They retain the full tori, their root modules and the inherited generators. Their root sets are matched by $b$, since $h_{\\mathbf Q}$ identifies the rational spans, and the original coroot equality still holds. For $|J|\\leq2$, [lem-sfb-low-rank-pinned-root-hom] gives normalized maps $g_J:G_{1,J}\\to G_{0,b(J)}$ with torus restriction $D_A(h)$. Its restriction clause gives $g_J|_{G_{1,I}}=g_I$ for $I\\subseteq J$. Compose each with $G_{0,b(J)}\\hookrightarrow G_0$ and apply the amalgamation assertion to obtain $f:G_1\\to G_0$. Its restriction to $G_{1,\\varnothing}=T_1$ is exactly $D_A(h)$. The empty-base case uses $G_i=T_i$ and just this monomial map.",
+   "uses": [
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "def-sfb-pinned-split-root-realization",
+    "lem-sfb-low-rank-pinned-root-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proof of Isogeny Theorem, Step 1, printed pp.204--205; Corollary 6.2.7; Example 6.2.6 and Lemma 6.2.8 for its low-rank inputs."
+   }
+  },
+  {
+   "text": "In fact take any homomorphism $g:G_1\\to G_0$ with the specified torus restriction and lattice data. At every algebraically closed $A$-field $\\Omega$, [lem-sfb-root-monomial-kernel-coordinates] applies to $g_\\Omega$, with every root exponent $q_\\alpha=1$. It gives surjectivity and a finite kernel whose open-cell coordinates have all additive factors trivial: the kernel is exactly $\\ker(D_\\Omega(h))$ inside $T_{1,\\Omega}$. Every source root is $h(b(\\alpha))$, so every source root character is trivial on that torus kernel. Consequently it lies in $D_\\Omega(M_1/\\mathbf Z\\Phi_1)=Z(G_{1,\\Omega})$ by [lem-sfb-adjoint-torus-root-coordinates]. Thus all geometric fibres of $g$ have finite central kernel. Apply [lem-sfb-fibral-central-isogeny-recognition] to conclude that $g$, in particular the map constructed in step 1, is finite, flat, surjective and finitely presented, with central kernel. This uses fibrewise recognition over arbitrary $A$, rather than inferring a scheme-theoretic equality merely from agreement on geometric points.",
+   "uses": [
+    "lem-sfb-root-monomial-kernel-coordinates",
+    "lem-sfb-adjoint-torus-root-coordinates",
+    "lem-sfb-fibral-central-isogeny-recognition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 6.1.9, printed pp.191--192; Proposition 3.3.10, pp.103--104."
+   }
+  },
+  {
+   "text": "The central kernel $K$ is contained in $Z(G_1)\\subseteq T_1$ by [lem-sfb-adjoint-torus-root-coordinates]. Hence $K=\\ker(g|_{T_1})$ scheme-theoretically: on every algebra, an element of the latter kernel is killed by $g$, while every element killed by $g$ lies in $T_1$. The kernel formula in [lem-sfb-relative-diagonalizable-character-duality] now gives $K=D_A(M_1/h(M_0))$ with precisely the indicated embedding. If $h$ is an isomorphism, $K=1$. The quotient description of [lem-sfb-fibral-central-isogeny-recognition] then identifies $G_1\\times_{G_0}G_1$ with $G_1\\times_A1$, and its projection to $G_1$ is an isomorphism. This projection is the pullback of $g$ along $g$, a finite faithfully flat, hence quasi-compact, cover. Isomorphism descent [lem-weil-pbc-fpqc-descend-isomorphism] therefore makes $g$ an isomorphism.",
+   "uses": [
+    "lem-sfb-adjoint-torus-root-coordinates",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-fibral-central-isogeny-recognition",
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 6.1.9, printed pp.191--192; Appendix B.1; Proposition 3.3.10 and the preceding fppf quotient discussion; Stacks Tag 02L4 (descent of isomorphisms)."
+   }
+  },
+  {
+   "text": "By step 2 every homomorphism in question is a quasi-finite surjection. Apply [lem-sfb-quasifinite-root-map-rigidity]: in chosen generators its differential on each root module is multiplication by a unit $a_\\alpha$. Multiplication by $a_\\alpha^{-1}$ is the inverse, proving the asserted tangent isomorphisms. For two such maps $f,F$, retain the bases and simple-root generators of step 1 and write $df(X_{1,\\alpha})=a_\\beta X_{0,\\beta}$ and $dF(X_{1,\\alpha})=A_\\beta X_{0,\\beta}$, where $\\beta=b(\\alpha)$. Set $r_\\beta=A_\\beta a_\\beta^{-1}$. Since $\\Delta_0$ is a base, $Q_0=\\mathbf Z\\Phi_0=\\bigoplus_{\\beta\\in\\Delta_0}\\mathbf Z\\beta$: signed integral expansions give spanning, and rational independence gives integral independence. The formula $t(\\sum n_\\beta\\beta)=\\prod r_\\beta^{n_\\beta}$ defines a unique homomorphism $Q_0\\to A^\\times$. By [lem-sfb-adjoint-torus-root-coordinates] it gives $t\\in(T_0/Z(G_0))(A)$, and $c_t$ fixes $T_0$ and multiplies the $\\beta$-root module by $r_\\beta$. Thus $d(c_t\\circ f)(X_{1,\\alpha})=r_\\beta a_\\beta X_{0,\\beta}=A_\\beta X_{0,\\beta}$. The two maps also have the same torus restriction, so pinning rigidity gives $F=c_t\\circ f$.",
+   "uses": [
+    "lem-sfb-quasifinite-root-map-rigidity",
+    "lem-sfb-adjoint-torus-root-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 6.1.4, pp.188--189; Proposition 6.1.13(2), pp.194--195; proof of Corollary 6.1.15, pp.195--196."
+   }
+  },
+  {
+   "text": "If another $s\\in(T_0/Z(G_0))(A)$ satisfies $F=c_s\\circ f$, then [lem-sfb-adjoint-torus-root-coordinates] gives $s(\\beta)a_\\beta=A_\\beta$ for every simple root. As each $a_\\beta$ is a unit, $s(\\beta)=r_\\beta=t(\\beta)$, and the basis of $Q_0$ in step 4 forces $s=t$. All these are identities over the whole ring and on all algebra extensions. For empty roots, $Q_0=0$ and the conjugating torus is trivial; for rank zero both groups are trivial. None of the arguments inverts the order of the finite lattice cokernel; for example the power map on $\\mathbf G_m$ can have kernel $\\mu_p$ in characteristic $p$, which is allowed.",
+   "uses": [
+    "lem-sfb-adjoint-torus-root-coordinates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proof of Corollary 6.1.15, printed pp.195--196; empty-root specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-small-centralizer-hom-amalgamation",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-low-rank-pinned-root-hom",
+  "lem-sfb-root-monomial-kernel-coordinates",
+  "lem-sfb-adjoint-torus-root-coordinates",
+  "lem-sfb-fibral-central-isogeny-recognition",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-sfb-quasifinite-root-map-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly following Corollary 6.2.7 and proof of Theorem 6.1.16(1), pp.204--209, and proof of Corollary 6.1.15, pp.195--196; Conrad read online, local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Central isogeny theorem for split reductive group schemes over an arbitrary ring with specified finite index character lattice map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))) (x : V),\\n  SpecialLinearGroup.centerEquivRootsOfUnity g • x = (fun x => ↑↑g x) x\", \"doc\": \"For any element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and any vector $ x \\\\in V $, the isomorphism between the center and the group of $ n $-th \"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (r : ↥(rootsOfUnity (max (Module.finrank R V) 1) R)),\\n  ↑↑↑(SpecialLinearGroup.centerEquivRootsOfUnity.symm r) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] →\\n      {R : Type v} →\\n        [inst_2 : CommRing R] →\\n          ↥(Subgroup.center (Matrix.SpecialLinearGroup n R)) ≃* ↥(rootsOfUnity (max (Fintype.card n) 1) R)\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and commutative ring $R$, there is a canonical group isomorphism between the center of the special linear group $\\\\text{SL}(n, R)$ and the group of $\\\\max(\\\\#\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(rootsOfUnity (max (Module.finrank R V) 1) R) → ↥(Subgroup.center (SpecialLinearGroup R V))\", \"doc\": \"The inverse function of the equivalence between the center of the special linear group $\\\\text{SL}(V)$ and the group of $n$-th roots of unity in $R$, where $n$ is the finite rank of the free $R$-module\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing, Lie-algebra or abstract-group results do not state this assertion about reductive group schemes over arbitrary rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a morphism of root data with root exponents one to a homomorphism of reductive group schemes unique up to adjoint torus conjugation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.Equiv.toHom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given commutative rings $ R $, $ R $-modules $ M, N $, and $ M', N' $, this defines the type of homomorphisms between root pairings $ (M, N) $ and $ (M', N') $, preserving the $ R $-module structures \"}\n  {\"name\": \"RootPairing.Hom.weightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given commutative rings $ R $, $ R $-modules $ M, N $, and $ M', N' $, and homomorphisms between root pairings $ (M, N) $ and $ (M', N') $, this is the linear map component of the homomorphism that ma\"}\n  {\"name\": \"RootPairing.Hom\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given commutative rings $ R $, $ R $-modules $ M, N $, and $ M', N' $, this defines the type of homomorphisms between root pairings $ (M, N) $ and $ (M', N') $, preserving the $ R $-module structures \"}\n  {\"name\": \"RootPairing.Hom.coweightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given homomorphisms between root pairings $(M,N)$ and $(M',N')$ over a commutative ring $R$, this is the linear map from $N'$ to $N$ that preserves the $R$-module structure, forming part of the data e\"}\n  {\"name\": \"RootPairing.Hom.root_weightMap\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  [inst_5 : AddCommGroup M₂] [inst_6 : Module R M₂] [inst_7 : AddCommGro\", \"doc\": \"For any homomorphism $ f : P \\\\to Q $ between root pairings over a commutative ring $ R $, the composition of the weight map $ f_{\\\\text{weight}} $ with the root embedding $ \\\\Phi_P : \\\\iota \\\\to M $ of $ \"}\n  {\"name\": \"RootPairing.map\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"Given a root pairing $ P $ between $ R $-modules $ M $ and $ N $ with index set $ \\\\iota $, and equivalences $ e : \\\\iota \\\\simeq \\\\iota_2 $, $ f : M \\\\simeq_R M_2 $, and $ g : N \\\\simeq_R N_2 $, this const\"}\n  {\"name\": \"RootPairing.Hom.comp\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₁ : Type u_5} \", \"doc\": \"Given root pairings $P$, $P_1$, and $P_2$ over a commutative ring $R$, and homomorphisms $f:P\\\\to P_1$ and $g:P_1\\\\to P_2$, their composition $g\\\\circ f:P\\\\to P_2$ is defined by composing the weight maps \"}\n  {\"name\": \"RootPairing.Hom.root_weightMap_apply\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  [inst_5 : AddCommGroup M₂] [inst_6 : Module R M₂] [inst_7 : AddCommGro\", \"doc\": \"For root pairings $P$ and $Q$ over a commutative ring $R$, and a homomorphism $f : P \\to Q$, applying the weight map component $f_{\\\\text{weight}}$ of $f$ to the root element $P.\\\\text{root}(i)$ yields t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing, Lie-algebra or abstract-group results do not state this assertion about reductive group schemes over arbitrary rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing, Lie-algebra or abstract-group results do not state this assertion about reductive group schemes over arbitrary rings"
+  },
+  {
+   "tool": "grep",
+   "query": "central.isogen|isogeny.*root|split.*reductive",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing, Lie-algebra or abstract-group results do not state this assertion about reductive group schemes over arbitrary rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isogeny theorem split reductive group schemes and root data over arbitrary commutative rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootDatum\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"(X₁ X₂ : Type*) [AddCommGroup X₁] [AddCommGroup X₂]\", \"doc\": \"A root datum is a root pairing between two additive commutative groups $X_1$ and $X_2$ over the integers $\\\\mathbb{Z}$, where each group is equipped with its canonical $\\\\mathbb{Z}$-module structure. Th\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).root i = P.root i\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"RootSystem.ext\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [Finite ι] [CharZero R] [IsDomain R]\\n  [Module.IsTorsionFree R M] {P₁ P₂ : RootPairing ι R M N} [P₁.IsRootSystem] [P₂.Is\", \"doc\": \"Let $ R $ be a commutative ring with characteristic zero and a domain, and let $ M $, $ N $ be torsion-free $ R $-modules. For any two root systems $ P_1 $, $ P_2 $ over a finite index set $ \\\\iota $, \"}\n  {\"name\": \"RootPairing.rootSpan_eq_top_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Nondegenerate\", \"type\": \": P.rootSpan R = ⊤ ↔ P.corootSpan R = ⊤\", \"doc\": \"For a root pairing $ P $ between $ R $-modules $ M $ and $ N $, the submodule of $ M $ generated by the roots is equal to the entire module $ M $ if and only if the submodule of $ N $ generated by the\"}\n  {\"name\": \"RootPairing.mk.hcongr_17\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Basic\", \"type\": \"∀ (ι ι' : Type u_1),\\n  ι = ι' →\\n    ∀ (R R' : Type u_2),\\n      R = R' →\\n        ∀ (M M' : Type u_3),\\n          M = M' →\\n            ∀ (N N' : Type u_4),\\n              N = N' →\\n                ∀ (inst : CommRing R) (inst' : CommRing R'),\\n                  inst ≍ inst' →\\n                    ∀ (inst_1 \", \"doc\": \"Given commutative rings $ R $ and $ R' $, additive commutative groups $ M, N $ and $ M', N' $ with compatible module structures, and congruent linear maps, roots, coroots, and reflection permutations \"}\n  {\"name\": \"RootPairing.IsNotG2.toIsReduced\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.G2\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N} [self : P.IsNotG2],\\n  P.IsReduced\", \"doc\": \"For any commutative ring $ R $, additive commutative $ R $-modules $ M $ and $ N $, and a root pairing $ P $ between them, if $ P $ does not satisfy the $ G_2 $ root system conditions, then $ P $ sati\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIso_toLRSHom\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] : IsIso f.toLRSHom\", \"doc\": \"The collection of schemes forms a category, where morphisms are morphisms of locally ringed spaces between schemes. Identity morphisms and composition are inherited from the category of locally ringed\"}\n  {\"name\": \"Polynomial.Splits.map_roots\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R} [inst_1 : IsDomain R] {S : Type u_4} [inst_2 : CommRing S]\\n  [inst_3 : IsDomain S] [IsSimpleRing R],\\n  f.Splits → ∀ (i : R →+* S), (Polynomial.map i f).roots = Multiset.map (⇑i) f.roots\", \"doc\": \"If a polynomial $ f $ splits over a commutative ring $ R $, then for any ring homomorphism $ i : R \\\\to S $ to another commutative ring $ S $, the roots of the polynomial $ \\\\text{map } i f $ (obtained \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root-pairing, Lie-algebra or abstract-group results do not state this assertion about reductive group schemes over arbitrary rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Central isogeny lifting between split reductive group schemes over arbitrary rings unique up to adjoint torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autMap_unique\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] {A B : C}\\n  [inst_2 : CategoryTheory.PreGaloisCategory.IsConnected A] [inst_3 : CategoryTheory.PreGaloisCategory.IsGalois B]\\n  (f : A ⟶ B) (σ : CategoryTheory.Aut A) (τ : CategoryTheory.Aut B),\\n  C\", \"doc\": \"For any connected object $A$ and Galois object $B$ in a category $\\\\mathcal{C}$, given a morphism $f : A \\\\to B$ and an automorphism $\\\\sigma \\\\in \\\\text{Aut}(A)$, there exists a unique automorphism $\\\\tau \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_autMap\", \"module\": \"Mathlib/CategoryTheory/Galois/GaloisObjects\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] {A B : C}\\n  (f : A ⟶ B) [CategoryTheory.PreGaloisCategory.IsConnected A] [CategoryTheory.PreGaloisCategory.IsGalois B]\\n  (σ : CategoryTheory.Aut A),\\n  ∃! τ, CategoryTheory.CategoryStruct.comp f τ.h\", \"doc\": \"For any connected object $A$ and Galois object $B$ in a category $\\\\mathcal{C}$, given a morphism $f : A \\\\to B$ and an automorphism $\\\\sigma \\\\in \\\\text{Aut}(A)$, there exists a unique automorphism $\\\\tau \"}\n  {\"name\": \"CategoryTheory.Center.isoMk_hom\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Center\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X Y : CategoryTheory.Center C} (f : X ⟶ Y) [inst_2 : CategoryTheory.IsIso f.f],\\n  (CategoryTheory.Center.isoMk f).hom = f\", \"doc\": \"For any isomorphism $ f : X \\to Y $ in the center of a monoidal category $ \\\\mathcal{C} $, the underlying morphism of the isomorphism constructed by `isoMk` is $ f $ itself, i.e., $ \\\\text{hom}(\\\\text{iso\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.AutGalois.ext\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) {f g : CategoryTheory.PreGaloisCategory.AutGalois F},\\n  (∀ (A : CategoryTheory.PreGaloisCategory.PointedGaloisObject F),\\n      (CategoryTheory.PreGaloisC\", \"doc\": \"The group homomorphism that evaluates a compatible family of automorphisms (section) in the pre-Galois category at the specific pointed Galois object $ A $, mapping each section to its corresponding a\"}\n  {\"name\": \"CategoryTheory.Center.isIso_of_f_isIso\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Center\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  {X Y : CategoryTheory.Center C} (f : X ⟶ Y) [CategoryTheory.IsIso f.f], CategoryTheory.IsIso f\", \"doc\": \"The center of a monoidal category $\\\\mathcal{C}$ forms a category, where objects are pairs $(X, \\\\beta_X)$ consisting of an object $X \\\\in \\\\mathcal{C}$ and a half-braiding $\\\\beta_X$, and morphisms are mo\"}\n  {\"name\": \"CategoryTheory.CatCenter.smul_iso_hom_eq\", \"module\": \"Mathlib/CategoryTheory/Center/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (z : (CategoryTheory.CatCenter C)ˣ) {X Y : C} (f : X ≅ Y),\\n  (z • f).hom = CategoryTheory.CategoryStruct.comp f.hom ((↑z).app Y)\", \"doc\": \"For any invertible element $ z $ in the center of a category $ \\\\mathcal{C} $ and any isomorphism $ f : X \\\\cong Y $, the homomorphism component of the scalar multiplication $ z \\\\cdot f $ is equal to th\"}\n  {\"name\": \"Subgroup.centerCongr\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] → {H : Type u_2} → [inst_1 : Group H] → G ≃* H → ↥(Subgroup.center G) ≃* ↥(Subgroup.center H)\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq^* H $ between groups $ G $ and $ H $, this constructs an induced group isomorphism $ \\\\text{center}(G) \\\\simeq^* \\\\text{center}(H) $ between their centers. The ce\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "central.isogen|isogeny.*root|split.*reductive",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift finite index root datum map to split reductive group scheme homomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.Hom.mk.noConfusion\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        {inst : CommRing R} →\\n          {inst_1 : AddCommGroup M} →\\n            {inst_2 : Module R M} →\\n              {inst_3 : AddCommGroup N} →\\n                {inst_4 : Module R N} →\\n                  {ι₂ : Type u_5} \", \"doc\": \"A homomorphism between root pairings $(M, N)$ and $(M', N')$ over a commutative ring $R$ consists of a pair of $R$-linear maps $M \\to M'$ and $N' \\to N$, an equivalence between the index sets, and compa\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_root\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).root i = P.root i\", \"doc\": \"For any index $i$, the root embedding of the scalar-restricted root pairing $(P.restrictScalars' K)$ at $i$ coincides with the original root embedding $P.root(i)$ in the module $N$.\"}\n  {\"name\": \"RootPairing.Hom.root_weightMap_apply\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Hom\", \"type\": \"{ι₂ M₂ N₂ : Type*} [AddCommGroup M₂] [Module R M₂] [AddCommGroup N₂] [Module R N₂] (P : RootPairing ι R M N)\\n  (Q : RootPairing ι₂ R M₂ N₂) (i : ι) (f : Hom P Q) : f.weightMap (P.root i) = Q.root (f.indexEquiv i)\", \"doc\": \"For root pairings $P$ and $Q$ over a commutative ring $R$, and a homomorphism $f : P \\to Q$, applying the weight map component $f_{\\\\text{weight}}$ of $f$ to the root element $P.\\\\text{root}(i)$ yields t\"}\n  {\"name\": \"RootPairing.Hom.root_weightMap\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {ι₂ : Type u_5} {M₂ : Type u_6} {N₂ : Type u_7}\\n  [inst_5 : AddCommGroup M₂] [inst_6 : Module R M₂] [inst_7 : AddCommGro\", \"doc\": \"For any homomorphism $ f : P \\\\to Q $ between root pairings over a commutative ring $ R $, the composition of the weight map $ f_{\\\\text{weight}} $ with the root embedding $ \\\\Phi_P : \\\\iota \\\\to M $ of $ \"}\n  {\"name\": \"Polynomial.SplittingField.lift\", \"module\": \"Mathlib.FieldTheory.SplittingField.Construction\", \"type\": \": SplittingField f →ₐ[K] L\", \"doc\": \"Given a splitting field $ L $ of a polynomial $ f $ over a field $ K $, and another field $ F $ where $ f $ splits, there exists a $ K $-algebra homomorphism from $ L $ to $ F $. This homomorphism is \"}\n  {\"name\": \"IsAdjoinRoot.liftHom\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \": S →ₐ[R] T\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ S $ generated by adjoining a root $ \\\\alpha $ of a polynomial $ f \\\\in R[x] $, and a commutative ring $ T $ with a ring homomorphism $ i : R \\\\to T $ sa\"}\n  {\"name\": \"IsAdjoinRoot.lift_self_apply\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \"(x : S) : h.lift (algebraMap R S) h.root h.aeval_root_self x = x\", \"doc\": \"For any element $x$ in the semiring $S$ generated by adjoining a root of a polynomial $f$ over a commutative semiring $R$, the lift homomorphism constructed from the algebra map $R \\\\to S$, the adjoine\"}\n  {\"name\": \"RootPairing.restrictScalars_coe_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"(i : ι) : (P.restrictScalars' K).coroot i = P.coroot i\", \"doc\": \"For each index $ i $, the coroot embedding of the root pairing after restricting scalars from $ L $ to $ K $ at $ i $ is equal to the original coroot embedding at $ i $. This equality demonstrates tha\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, root pairings, Lie algebras or general scheme morphisms, not this theorem about reductive group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pinned-split-root-classification",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings",
+   "via": [
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-central-isogeny-lifting",
+  "worker": "stage1",
+  "group": "Q155",
+  "summary": "Checked Conrad online, retained the statement, constructed the map by rank-at-most-two centralizer amalgamation, recognized every candidate fibrewise, computed the toral kernel, and proved adjoint-torus ambiguity from root-unit ratios and pinning rigidity. Added four strictly smaller statement-only inputs; avoided field/Noetherian hypothesis mismatches.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/moduli/reductive-group chain: supporting input to the pinned split classification. The local node route is Conrad rank-two centralizer reduction, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-isomorphism",
+    "why": "Generic descent of isomorphisms for the finite faithfully flat group quotient with trivial kernel; no group-theoretic input replaces this descent fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-9069a0338",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-9069a0338 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the cited source; the mathematics is correct and I made no changes. review.md in the run directory is EMPTY: the root disk is full (ENOSPC, 0 bytes free) and the write failed. The full review is at /tmp/q155-review/review.md; please copy it in. SOURCE: Conrad, Reductive group schemes, is not in literature/. I fetched a read-only copy and checked Prop 3.3.10 (p.103), Lemma 6.1.4 (pp.188-189), Ex 6.1.9, Prop 6.1.13(2), Cor 6.1.15 (pp.195-196), Thm 6.1.16(1), Ex 6.2.6, Cor 6.2.7 (p.204), Steps 1-4 of the Isogeny Theorem proof and Lemma 6.2.8. Every cited place is correct and no SGA is cited. ITEM: statement, stmt_deps and blueprint are identical to the Q156 snapshot; only the proof fields changed, and the old proof was empty. There is no repair note, so this is not a re-split. STEPS: (1) Delta_0=b(Delta_1) is a base because h_Q is an isomorphism. The centralizers Z(D(M/L_J)), with L_J the saturated span of J, are Conrad's T_ab. The low-rank restriction clause gives g_J|G_I=g_I, and the amalgamation into the affine G_0 is valid. (2) For each geometric point, root-monomial-kernel-coordinates with q=1 gives K = ker D(h), which lies in the torus. The roots h(b(alpha)) are trivial on it, so it lies in D(M/ZPhi)=Z. Fibral recognition then gives finite flat surjective with central kernel. (3) Character duality gives K=D(M1/hM0). When h is an isomorphism, the torsor isomorphism and fpqc isomorphism descent along the finite, hence quasi-compact, g finish the proof. (4) Lemma 6.1.4 with q=1 gives the unit a_alpha. t is defined on the Z-basis Delta_0 of Q_0, the adjoint-torus node supplies c_t, and rigidity applies to c_t∘f. (5) Uniqueness is elementary. NEW NODES: all four are statement-only, carry four search kinds and are strictly smaller than the item. None duplicates an existing node: the nearby nodes are field-only or Noetherian-only, and integral-root-datum-isogenies would make a cycle through the parent. Tested cases: a torus, Delta empty, rank 0, SL2->PGL2 over F_2 (kernel mu_2, not smooth), and disconnected A. The low-rank node is the rank-2 case that Conrad himself calls the main work. The item still adds a genuine arbitrary-rank reduction, the kernel computation, the descent step and the ambiguity argument, so this is not D1/D2. Note for its future split: Conrad's Step 4 defers the rank-2 details to SGA3 XXIII 4.1, which the route lock forbids, so another source or an agent proof is needed. BATCH-5: the three flagged closures end in the Mathlib leaves lem-trf-smooth-fpqc-base-descent, lem-trf-smooth-composition and lem-trf-fppf-covering-is-fpqc. These are generic scheme facts, not steps of the trace-formula or Poincaré-duality proofs, so I accepted them. tool_use lem-weil-pbc-fpqc-descend-isomorphism (Mathlib leaf, generic descent): accepted."
+ }
+}

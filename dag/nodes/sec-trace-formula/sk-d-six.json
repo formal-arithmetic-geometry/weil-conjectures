@@ -19,7 +19,8 @@
   "def-weil-proper-morphism",
   "def-weil-pbc-cartesian-square",
   "def-sfb-strong-monoidal-functor",
-  "thm-sf-ctf-stability"
+  "thm-sf-ctf-stability",
+  "def-trf-geometric-comparison-data"
  ],
  "proof": [],
  "proof_deps": [],
@@ -92,7 +93,34 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-trace-formula",
  "unit": "sk-d-six",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.GeometricOperations"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.externalProduct",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExternalProduct",
+     "lines": [
+      41,
+      61
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.GeometricOperations"
+   ],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-d-six",
@@ -107,5 +135,39 @@
   "group": "Q47",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-305ff8eac (reviewer sub-agent of L); spot-checked: Read in full: the definition item sk-d-six (no new nodes, no proof steps), the current blueprint main-20261015 sk-d-six (order 2612) diffed against the master copy, the six cited definition nodes, and the slopmaster2 Defs.lean GeometricOperations fields. Every clause agrees with the main-20261015 source. The D^b_ctf domains, ω_X∈D^b_ctf, the strong braided pullback on D(-,A), and the composites replacing the source's ill-typed 'identity isomorphisms' are correct clarifications: they match Lean fields ctf_dualizing, projectionFormula, upperStarMonoidal, dualizingBase_eq, properComparison_id and dualizingComp_id, and the report names them under Source error. Checked the biduality map against curry(β≫ev); the two agree because the braiding is symmetric. Checked the Künneth–Verdier composite step by step (base change orientation for the product square, trace, α_M, evaluation, adjunct), and it matches kunnethVerdierMapOf. The definition is not a target and is not weakened. Checked possible duplicates (def-trf-dualizing-complex, def-trf-external-product, sk-def-sf-kv-maps, def-sf-datum, sk-def-ops): none restates the package. No cycle. Small cases: over X=Y=s with perfect complexes, and with zero objects, the maps are the standard ones. One repairable fault, now fixed: α_M applies the exceptional adjunction, which the node itself restricts to D^b_ctf, to p_X^*M⊗p_Y^*ω_Y. sk-d-setup gives only f^* and Rf_! stability, so the well-definedness claim was uncited. I added one sentence citing thm-sf-ctf-stability (i),(ii), plus the elementary fact A_s∈D^b_ctf, and added it to stmt_deps; sk-def-sf-operations already depends on that theorem, so the dependency is acyclic. Maintainer note: the unit record's statement text is still the stale master version; the worker cannot change it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricOperations",
+  "declaration": "WeilConjectures.GeometricOperations",
+  "declarations": [
+   "WeilConjectures.GeometricOperationPackage.Comparisons.exceptionalId",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.exceptionalComp",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.dual",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.evaluation",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.biduality",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.productSquare",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.trace",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.alpha",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.compactlySupported",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.external",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.kunnethVerdier",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.supportCongr",
+   "WeilConjectures.GeometricOperationPackage.Comparisons.Coherence",
+   "WeilConjectures.GeometricOperations"
+  ],
+  "file": "lean/Sheaf/Paper/GeometricOperations.lean",
+  "statement": "structure GeometricOperations (F : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ F.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (G : TraceFormulaCoefficientSetup F l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))) (A : GeometricOperationPackage.ExceptionalAdjunctions F l hl E n G)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58cdc8651",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read item, new node def-trf-geometric-comparison-data, all 8 stmt_deps and both modules (GeometricComparisonData, GeometricOperations) against sk-d-setup (TraceFormulaCoefficientSetup), DerivedPullbackTensorHom, FiniteTorStability (sfStabilityFiniteExceptional = etale-transported Rf^!), ChosenCartesianSquare, RingedDerivedTensorSymmetryModel and Mathlib CoreMonoidal. Every node clause matches: geometric schemes = separated LFT QC over Spec k, A = O_E/ϖ^{n+1}, recorded operations rather than supplied functors, exceptional adjunction given on Ctf only, omega data, proper/composition/identity (compositor oriented R(gf)!→Rg!Rf!), base change g*Rf!≅Rf'!g'* (square orientation checked), projection formula with naturality, CoreMonoidal ambient pullback with Koszul-pinned braiding (no existing rival), unit/identity/normalization/composition/pasting coherence via adjoint mates, biduality = transpose(β≫ev), trace/alpha/KV composites step by step, IsIso fields over all chosen product squares. Edge cases: empty schemes, zero objects, char 2, universes kept. No sorry, no hollow defs, docstrings present, lean.statement verbatim. Advisory only: unitDomain (A_s ∈ D^b_ctf) is a true Prop field. No compile needed (no file changed)."
  }
 }

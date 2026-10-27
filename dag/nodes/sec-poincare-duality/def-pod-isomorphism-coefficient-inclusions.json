@@ -1,0 +1,113 @@
+{
+ "id": "def-pod-isomorphism-coefficient-inclusions",
+ "kind": "definition",
+ "title": "Shared small-coefficient inclusions and their integral structural maps",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "statement": "For a prime ell, an algebraic closure Omega/Q_ell and finite subextensions E≤L, present the existing size-transported coefficient inclusion [def-weil-algebraically-closed-coefficients] with the semiring structures projected from the existing coefficient fields. The map is exactly the existing inclusion. Its identity and composition laws are the existing inclusion laws at those same explicit structures. No field, inclusion or scalar transition is newly selected. The shared integral unitor and associator are exactly scalar completion unit/composition conjugated by those same inclusion equalities; the original public names are aliases, so no structural map changes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "Finite-coefficient models of the automorphism pullback family; an interface presentation of the existing coefficient inclusions, not a new mathematical assertion."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Define the inclusion as the existing coefficientInclusion, with its AlgHom semiring parameters explicitly the projections of the existing Field instances. Reuse coefficientInclusion_laws directly for identity and composition. This is a definitionally equal presentation and does not alter any coefficient map. Define the shared integral adapters by the existing sfIntegralScalarUnit and sfIntegralScalarComp followed by eqToIso of the corresponding inclusion law. These are exactly the original adapter bodies, without a new choice.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-constructible-truncations.proof.md",
+  "place": "S5 implementation of the existing finite-coefficient model interface; parent scalar-coherence clauses"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 normalization-of-schemes hits; none concerns completed constructible complexes",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"IsTriangulated\"",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift",
+   "date": "2026-10-26",
+   "verdict": "generic exact-adjunction API, no specified completed pullback or scalar normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(scalar|tExact)|scalar.*(tower|unit)",
+   "results": "25 unrelated algebraic scalar-tower and completion hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme isomorphism completed constructible integral pullback normalized exact shifts rational scalar extension unit tower coherence",
+   "results": "8 hits: scheme normalization, isomorphisms as affine or closed immersions, ideal-sheaf comap, and CategoryTheory.pullbackShiftIso.",
+   "date": "2026-10-26",
+   "verdict": "no match: pullbackShiftIso changes the indexing monoid of a shift action; none of the hits treats completed constructible pullback, rational localization, or its coefficient coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismPullbackTExactCoefficients",
+  "date": "2026-10-26",
+  "group": "S5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pod-isomorphism-pullback-texact-coefficients"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismCoefficientInclusions",
+  "file": "lean/Sheaf/Paper/IsomorphismCoefficientInclusions.lean",
+  "declaration": "WeilConjectures.isomorphismCoefficientInclusion",
+  "declarations": [
+   "WeilConjectures.isomorphismCoefficientInclusion",
+   "WeilConjectures.isomorphismCoefficientInclusion_laws",
+   "WeilConjectures.isomorphismCoefficientIntegralUnitor",
+   "WeilConjectures.isomorphismCoefficientIntegralAssociator"
+  ],
+  "statement": "def isomorphismCoefficientInclusion\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (E L : Index l Ω) (h : E ≤ L) :\n    @AlgHom ℚ_[l] (Coefficient.{u} l Ω E) (Coefficient.{u} l Ω L)\n      inferInstance\n      (show Field (Coefficient.{u} l Ω E) from inferInstance).toSemiring\n      (show Field (Coefficient.{u} l Ω L) from inferInstance).toSemiring\n      inferInstance inferInstance",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4d672",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261026T002644-L-105314",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembled from raw-stage (proved) + 4 sorried sub-statements vs node lem-pod-isomorphism-pullback-texact-coefficients steps; adapter/inclusion changes vs change record (defeq aliases); importer IsomorphismFieldTransport compiled against the delivered modules"
+ }
+}

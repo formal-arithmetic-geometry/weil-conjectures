@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-ring-cech-coordinate-tensor-step",
+ "kind": "statement",
+ "title": "Adjoining one two-term localization factor to ordered coordinates",
+ "statement": "Let A be a commutative ring, r a natural number and f:Fin(r+1) to A a list. Work with module sheaves on the one-object bottom-topology ring site [def-weil-pbc-ring-complex-cech-data]. Let K be any nonnegative augmented integer cochain complex K to A[0]. Suppose K has degree-zero coordinate e0, positive ordered localization coordinates e, face A-algebra maps l and the diagonal, alternating differential and augmentation equations for the tail i maps to f(i+1), exactly as in the coordinate part of [def-weil-pbc-ring-complex-cech-data]. Let P be the actual two-term complex [A to A[1/f(0)]] of [def-weil-pbc-ringed-extended-cech], and let b:P tensor K to A[0] be the tensor of the two augmentations followed by the left unitor. Then the positive terms of P tensor K admit ordered localization coordinates e and face A-algebra maps for the full list f. Its first differential has coordinates the diagonal localization of the actual degree-zero augmentation value b(x), and its later differential has the alternating face-sum coordinates. No degree-zero equivalence or assertion that b is a degree-zero isomorphism is part of this conclusion. This statement treats one tensor operation, assumes all tail coordinates, and makes no assertion about recursively tensoring an arbitrary list or about negative-degree terms.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099D(d); induction adjoining one localization factor in assigned node proof steps 1-2. Algebraic coordinate conventions: literature/stacks-project/more-algebra.tex, section-alternating-cech."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof": [
+  {
+   "text": "Apply the evaluated two-row tensor lemma to obtain the actual tensor complex degree-zero coordinate z, positive block coordinates c_q, and the augmentation and differential matrix equations. This lemma uses no generating list or ordered coordinates.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-tensor-blocks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the supplied e0 and e_q into degreewise equivalences C_n from the evaluated tail to the algebraic ordered tail terms. Conjugate each tail differential D_n by C_n to define d_n. The supplied hd0 and hd prove the diagonal and alternating formulas for d_n. Apply the algebraic localization-cone coordinate lemma to obtain E_q and the full face algebra maps.",
+   "uses": [
+    "lem-weil-pbc-ring-cech-algebraic-cone-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor C_n with the identity on S, take its product with C_(n+1), and compose this equivalence with c_q and E_q. Prove tensor naturality for the conjugated differential by induction on tensors, using d_n(C_n x)=C_(n+1)(D_n x). The block equations then give the full alternating differential. At the first differential use the block formula, the diagonal formula for E_0, and ha together with b(x)=a(z(x)). This proves the original existential and both equations without changing any hypotheses. The degree-zero block comparison is used only internally to verify the first differential.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-tensor-blocks",
+    "lem-weil-pbc-ring-cech-algebraic-cone-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-localization-tensor-blocks",
+  "lem-weil-pbc-ring-cech-algebraic-cone-coordinates"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0996 and 099D(d); more-algebra.tex section-alternating-cech",
+  "note": "Complete Lean reduction separating the actual evaluated tensor-total matrix from the purely algebraic ordered-subset/localization calculation. The conjugation and tensor-naturality argument is proved in the assigned module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring an ordered localization Cech complex with a two term localization complex adjoins one generator",
+   "results": "HomologicalComplex.tensorObj, tensorHom, ιTensorObj; IsLocalization.tensor, tensorProduct_isLocalizedModule and localization tensor-map instances.",
+   "date": "2026-10-26",
+   "verdict": "Generic tensor and localization APIs; no signed ordered-subset one-factor coordinate theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor a nonnegative ordered localization Cech complex by A to A[1/f] and split subsets by whether they contain the first generator",
+   "results": "HomologicalComplex.ιTensorObj, tensorObj, tensor-unit HasTensor instances; IsLocalization.tmul_mk' and unrelated Proj tensor map surjectivity.",
+   "date": "2026-10-26",
+   "verdict": "No one-factor ordered-coordinate theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Localization.Away",
+   "results": "OK 0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching combined tensor/localization interface."
+  },
+  {
+   "tool": "grep",
+   "query": "ordered.*[Cc]ech|[Cc]ech.*tensor",
+   "results": "msearch Mathlib: OK 0 hits. Repository search finds the assigned module, scalar extension consumers, and a different geometric ordered Cech construction; no one-factor tensor coordinate comparison. Blueprint search localization tensor: 0 matching blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of this single tensor-operation assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "J5",
+  "item": "Sheaf.Paper.RingTensorCechCoordinates",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Assigned node lem-weil-pbc-ring-tensor-cech-coordinates, proof steps 1-2, induction adjoining one factor. Inherited ancestry has null node: created.item chain stops at a module. The same global augmented Cech construction is retained.",
+   "via": [
+    "lem-weil-pbc-ring-tensor-cech-coordinates",
+    "lem-weil-pbc-global-section-ordered-cech-tensor",
+    "lem-weil-pbc-global-section-scalar-cech-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingCechCoordinateTensorStep",
+  "file": "lean/Sheaf/Paper/RingCechCoordinateTensorStep.lean",
+  "declaration": "CategoryTheory.ringCechCoordinates_tensor_step",
+  "statement": "theorem ringCechCoordinates_tensor_step (A : CommRingCat.{u}) (r : ℕ)\n    (f : Fin (r + 1) → A)\n    (K : CochainComplex (RingSiteModules A) ℤ) (a : K ⟶ ringComplexSingle A)\n    (e₀ : (K.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A] A)\n    (e : ∀ q : ℕ, (K.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]\n      ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, f (t i).succ)))\n    (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n      Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i)).succ) →ₐ[A]\n        Localization.Away (∏ i, f (t i).succ))\n    (hneg : ∀ n : ℤ, n < 0 → CategoryTheory.Limits.IsZero (K.X n))\n    (hd₀ : ∀ (x : (K.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin r),\n      e 0 ((K.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t =\n        algebraMap A (Localization.Away (∏ i, f (t i).succ)) (e₀ x))\n    (hd : ∀ (q : ℕ) (x : (K.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩))\n      (t : Fin (q + 2) ↪o Fin r),\n      e (q + 1) ((K.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app\n          (op ⟨PUnit.unit⟩) x) t =\n        ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n          l q t j (e q x ((Fin.succAboveOrderEmb j).trans t)))\n    (ha : ∀ x : (K.X 0).val.obj (op ⟨PUnit.unit⟩),\n      ringComplexAugmentationValue a x = e₀ x) :\n    let O := CochainComplex.onePointRingSheaf A\n    letI : IsGrothendieckAbelian.{u} (RingSiteModules A) :=\n      SheafOfModules.isGrothendieckAbelian _\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.symmetricCategory O\n    letI := Classical.choice (SheafOfModules.tensorClosed O).1\n    letI := Classical.choice (SheafOfModules.tensorClosed O).2.1\n    let s : (O.obj ⋙ forget CommRingCat).sections := ⟨fun _ ↦ f 0, fun _ ↦ rfl⟩\n    let P := ringedLocalizationTwoTerm O s\n    let L := HomologicalComplex.tensorObj P K\n    let b : L ⟶ ringComplexSingle A :=\n      HomologicalComplex.tensorHom (ringedLocalizationTwoTermAugmentation O s) a ≫\n        (HomologicalComplex.leftUnitor (ringComplexSingle A)).hom\n    ∃ (e : ∀ q : ℕ, (L.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]\n        ((t : Fin (q + 1) ↪o Fin (r + 1)) → Localization.Away (∏ i, f (t i))))\n      (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin (r + 1)) (j : Fin (q + 2)),\n        Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A]\n          Localization.Away (∏ i, f (t i))),\n      (∀ (x : (L.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin (r + 1)),\n        e 0 ((L.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t =\n          algebraMap A (Localization.Away (∏ i, f (t i)))\n            (ringComplexAugmentationValue b x)) ∧\n      (∀ (q : ℕ) (x : (L.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩))\n        (t : Fin (q + 2) ↪o Fin (r + 1)),\n        e (q + 1) ((L.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app (op ⟨PUnit.unit⟩) x) t =\n          ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n            l q t j (e q x ((Fin.succAboveOrderEmb j).trans t)))",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringCechCoordinates_tensor_step"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261026T091825-L-3379240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T104422-L-813305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

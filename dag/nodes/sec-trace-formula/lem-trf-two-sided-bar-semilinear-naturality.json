@@ -1,0 +1,301 @@
+{
+ "id": "lem-trf-two-sided-bar-semilinear-naturality",
+ "kind": "statement",
+ "title": "Semilinear functoriality of the two-sided bar augmentation roof",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $\\mathcal D$ be a small ordinary category, $R$ a commutative ring, $F:\\mathcal D\\to\\operatorname{Mod}_R$ a covariant functor, and $Q:\\Delta^{\\mathrm{op}}\\to\\mathcal D$ a simplicial object [def-weil-pbc-simplicial-object]. For $p,q\\geq0$ put\n$$A_{p,q}=\\bigoplus_{T_0\\to\\cdots\\to T_p\\xrightarrow f Q_q}F(T_0).$$\nHorizontal faces delete $T_i$, applying $F(T_0\\to T_1)$ when $i=0$ and composing with $f$ when $i=p$; vertical operators postcompose $f$ with the operators of $Q$. Let $\\partial_h,\\partial_v$ be the alternating face sums in positive respective indices, zero at index zero. Put $A_{p,q}$ in cochain bidegree $(-p,-q)$ and use finite-diagonal total differential $\\partial_h+(-1)^p\\partial_v$ [def-sp-double-complex-total]. Put $S^{-q}=F(Q_q)$ with alternating-face differential and zero positive terms. Put $B^{-p}=\\bigoplus_{T_0\\to\\cdots\\to T_p}F(T_0)$, zero in positive degrees, with alternating faces deleting $T_i$ and applying $F$ only at the first face. Complexes and their derived categories mean [def-weil-abstract-derived-category]. Let $\\mathcal D',R',F',Q',A',S',B',e'_Q,e'_B$ be defined by the same formulas with primed data; $e_Q$ is zero for $p>0$ and sends $(T\\xrightarrow fQ_q,x)$ to $F(f)x$, and $e_B$ is zero for $q>0$ and forgets $f$ on $q=0$, with the same definitions for the primed maps. Let $u:\\mathcal D\\to\\mathcal D'$ be a functor, $\\rho:R\\to R'$ a ring map, $\\theta:F\\to\\operatorname{Res}_\\rho(F'\\circ u)$ a natural transformation, and $k:uQ\\to Q'$ a simplicial morphism. Then\n$$(T_0\\to\\cdots\\to T_p\\xrightarrow fQ_q,x)\\longmapsto(uT_0\\to\\cdots\\to uT_p\\xrightarrow{k_q u(f)}Q'_q,\\theta_{T_0}x)$$\ndefines a morphism of commuting double complexes and hence a total chain map $V:\\operatorname{Tot}A\\to\\operatorname{Res}_\\rho\\operatorname{Tot}A'$. Define $t:S\\to\\operatorname{Res}_\\rho S'$ by $t^{-q}=F'(k_q)\\theta_{Q_q}$ and $b:B\\to\\operatorname{Res}_\\rho B'$ by $(T_0\\to\\cdots\\to T_p,x)\\mapsto(uT_0\\to\\cdots\\to uT_p,\\theta_{T_0}x)$. They are chain maps and satisfy\n$$e'_QV=t e_Q,\\qquad e'_BV=b e_B$$\nafter restriction of scalars. These constructions preserve identities and composition, with the usual identifications of iterated restriction of scalars. Degreewise restriction preserves direct sums, kernels, images and quasi-isomorphisms, identifies the displayed total and edge complexes with their restrictions, and takes inverses of localized quasi-isomorphisms to their inverses. Thus these two strict squares remain the same squares in $D(R)$. No representable contractibility assumption on $Q,Q'$ or $uQ$ is needed for these assertions. The formula for $V$ and both strict squares involve no choice of contracting homotopies.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PH (example-morphism-categories), 08PD (remark-morphism-fibred-categories), and 08Q9 (lemma-compute-by-cosimplicial-resolution). Agent-written strict two-sided-bar version, including semilinear coefficients and degreewise scalar restriction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-simplicial-object",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\operatorname{Res}_\\rho M$ for the same abelian group as $M$, with $r x=\\rho(r)x$, and restrict maps by retaining their underlying functions. The direct sum of modules is the group of finite-support tuples with coordinatewise scalar action, so the identity on tuples gives $\\bigoplus_i\\operatorname{Res}_\\rho M_i\\cong\\operatorname{Res}_\\rho(\\bigoplus_iM_i)$, including empty sums. Kernels and images are the same subsets before and after restriction; cokernels are the same quotient groups with the restricted action. Finite products also have the same coordinatewise action. Thus restriction is additive and preserves finite limits and finite colimits: products and kernels of differences describe the former, finite sums and cokernels describe the latter. In particular restriction is exact. All indexing sets here are small, since the category is small and strings have finite length.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "First check that the displayed differentials define commuting double complexes. Horizontal faces obey $d_i d_j=d_{j-1}d_i$ for $i<j$: deleting distinct internal vertices amounts to composing the same arrows in either order; at the first vertex this is $F(ba)=F(b)F(a)$, and at the last vertex it is associativity of the composite with $f$. Vertical faces obey the same relations because $Q$ is a functor on $\\Delta^{op}$. For either alternating differential, the two occurrences corresponding to $i<j$ have signs $(-1)^{i+j}$ and $(-1)^{i+j-1}$, so they cancel; at degrees zero and one its square is zero by the zero outgoing differential at index zero. Horizontal deletion commutes with postcomposition of $f$: at the last vertex both orders give $Q(\\alpha)fa$, at the first vertex postcomposition does not change the coefficient map. Hence $\\partial_h\\partial_v=\\partial_v\\partial_h$, as required by the commuting convention. The identical argument gives the complexes $S,B$ and all primed complexes.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "Each summand map defining $V_{p,q}$ is $R$-linear into the restricted target: $\\theta_T(rx)=\\rho(r)\\theta_T(x)$. It extends uniquely by finite sums even when different strings acquire the same image. For a horizontal first face $a:T_0\\to T_1$, the two coefficient values agree by $\\theta_{T_1}F(a)=F'(u(a))\\theta_{T_0}$. Internal faces commute with $u$ because $u(ba)=u(b)u(a)$. For the last face with $a:T_{p-1}\\to T_p$, both final arrows are $k_q u(f)u(a)=k_q u(fa)$. Thus $V$ commutes with every horizontal face, and hence with $\\partial_h$; at $p=0$ both horizontal differentials are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "For every simplicial operator $\\alpha$ taking degree $q$ to $r$, the morphism condition on $k$ is $Q'(\\alpha)k_q=k_r u(Q(\\alpha))$. Postcomposing with $u(f)$ proves that $V$ commutes with that operator, including degeneracies; its coefficient stays $\\theta_{T_0}x$. Thus $V\\partial_v=\\partial'_vV$. On the summand in total degree $-p-q$, $V$ preserves $p$, so it commutes with the sign $(-1)^p$ as well. The finite sum of the $V_{p,q}$ therefore commutes with $\\partial_h+(-1)^p\\partial_v$. The total differential squares to zero: its mixed terms have coefficients $(-1)^{p-1}$ and $(-1)^p$, which cancel, and its two unmixed squares vanish by step 2. Each diagonal has $p+q=-n$ and only $-n+1$ possible pairs when $n\\leq0$, so the total is defined without an infinite diagonal sum.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "For a face $d_i:Q_q\\to Q_{q-1}$, naturality of $\\theta$ followed by naturality of $k$ gives\n$$F'(d'_i)F'(k_q)\\theta_{Q_q}=F'(k_{q-1})F'(u(d_i))\\theta_{Q_q}=F'(k_{q-1})\\theta_{Q_{q-1}}F(d_i).$$\nTaking alternating sums proves that $t$ is a chain map (outgoing differentials at degree zero are zero). For $b$, the first face commutes by $F'(u(a))\\theta_{T_0}=\\theta_{T_1}F(a)$, and every other face commutes by functoriality of $u$; summing proves that $b$ is a chain map. Both maps are $R$-linear by the same coefficient calculation as in step 3.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "The edge maps themselves are chain maps. For $e_Q$, on the $p=0$ edge the vertical differential is unsigned and commutes with evaluation because $F(Q(\\alpha)f)=F(Q(\\alpha))F(f)$. The only horizontal contribution entering that edge comes from $p=1$: its two evaluations are $F(f)F(a)x$ and $F(fa)x$, equal and with opposite signs. At $p>1$ both evaluations are zero. For $e_B$, on the $q=0$ edge forgetting $f$ commutes with every horizontal face. The only vertical contribution entering that edge is from $q=1$, where forgetting either $d_0f$ or $d_1f$ gives the same string and coefficient; their difference, even multiplied by $(-1)^p$, is zero. At $q>1$ both composites vanish. The primed edge maps satisfy the same checks.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "Check the two strict squares on each summand. On $p=0$ the evaluation square is the identity\n$$F'(k_q u(f))\\theta_Tx=F'(k_q)\\theta_{Q_q}F(f)x,$$\nby naturality of $\\theta$ for $f:T\\to Q_q$. On $p>0$ both sides vanish, since $V$ preserves $p$. On $q=0$ the forgetful square sends a generator on either path to $(uT_0\\to\\cdots\\to uT_p,\\theta_{T_0}x)$; on $q>0$ both sides vanish. Equality on summands gives $e'_QV=t e_Q$ and $e'_BV=b e_B$ as chain-map equalities. These calculations use neither contractibility nor contracting homotopies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "For second data $(v,\\sigma,\\psi,l)$ with $l:vQ'\\to Q''$, the composite data are $(vu,\\sigma\\rho,\\chi,m)$ with $\\chi_T=\\psi_{uT}\\theta_T$ and $m_q=l_qv(k_q)$. Composing the two $V$ formulas sends a generator to the string $vuT_0\\to\\cdots\\to vuT_p$ ending by $l_qv(k_q)vu(f)$ and coefficient $\\psi_{uT_0}\\theta_{T_0}x$, exactly the formula for the composite data. The same coefficient equality proves composition for $b$. For $t$, naturality of $\\psi$ for $k_q$ gives\n$$F''(l_q)\\psi_{Q'_q}F'(k_q)\\theta_{Q_q}=F''(l_qv(k_q))\\psi_{uQ_q}\\theta_{Q_q}.$$\nFor identity data the formulas fix every string and coefficient. Restricting successively along $\\sigma$ then $\\rho$ gives $r x=\\sigma(\\rho(r))x$, the action for $\\sigma\\rho$; all identity and composition equalities are therefore under the stated iterated restriction identification.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to $\\operatorname{Res}_\\rho:\\operatorname{Mod}_{R'}\\to\\operatorname{Mod}_R$, additive and preserving finite limits and finite colimits by step 1. It supplies preservation of quasi-isomorphisms and the functor $D(R')\\to D(R)$ represented on every complex by degreewise restriction, together with its natural localization comparison. By step 1 the direct sums defining $A',B'$ are identified by the identity on finite-support tuples with their restricted versions; $S'$ is identified degreewise in the same way. Their face maps retain the same underlying functions and the total sign is unchanged. Finite diagonal sums thus give the identical restriction comparison for $\\operatorname{Tot}A'$. In particular the strict squares of step 7 have precisely the displayed objects and maps after restriction and localization.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PD/08PH, change-of-category maps; derived passage supplied by derived.tex, Tag 015F (lemma-right-derived-exact-functor)"
+   }
+  },
+  {
+   "text": "Let $s$ be any quasi-isomorphism of primed complexes. Its localized image is invertible, and functoriality gives\n$$\\operatorname{Res}_\\rho(Q'(s)^{-1})\\operatorname{Res}_\\rho(Q'(s))=1=\\operatorname{Res}_\\rho(Q'(s))\\operatorname{Res}_\\rho(Q'(s)^{-1}).$$\nConsequently the image of the inverse is the inverse of the image, under the natural localization comparison of step 9. Applying the localization functor to the equal composites in each strict square preserves those equalities. Applying it also to step 8 preserves identities and composition. This proves all derived assertions, without asserting that either edge augmentation is a quasi-isomorphism for arbitrary $Q$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), generator formula; agent-written two-sided semilinear refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PH and 08PD for the one-sided generator rule; explicit two-sided, semilinear, edge and scalar-restriction verification by NJ. Tag 08Q9 supplies the comparison context, not a contractibility hypothesis for this lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Semilinear change of coefficients and functors of categories induce a natural map on a two sided bar roof compatible with both edge augmentations and exact restriction of scalars",
+   "results": "8 hits; top=['CategoryTheory.Mod_.scalarRestriction_hom', 'classifyingSpaceUniversalCover.compForgetAugmented.toModule', \"ModuleCat.restrictScalarsComp'App_hom_naturality\", \"ModuleCat.CoextendScalars.map'\", \"ModuleCat.restrictScalarsComp'App_hom_naturality_assoc\", \"ModuleCat.CoextendScalars.map'_hom_apply_apply\", 'ModuleCat.ExtendRestrictScalarsAdj.Unit.map', \"ModuleCat.restrictScalarsComp'App_inv_naturality\"]; note=; digest=4cc11a73746de199. Full returned types in search-naturality-0.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: restrictScalars coherence, generic bicomplex morphism laws and Dold-Kan naturality do not give the two-sided bar generator map and its two augmentation squares. Read ModuleCat/ChangeOfRingsExact.lean and the displayed returned types."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reindexing strings in a two sided bar bicomplex commutes with augmentation to evaluation on simplicial objects and augmentation to the category homology bar complex",
+   "results": "8 hits; top=['HomologicalComplex₂.comm_f', 'HomologicalComplex₂.d_comm', 'HomologicalComplex₂.shiftFunctor₁₂CommIso', 'HomologicalComplex₂.d_comm_assoc', 'Rep.barComplex.isoStandardComplex', 'HomologicalComplex.forgetEval', 'HomologicalComplex₂.shiftFunctor₁XXIso.congr_simp', 'HomologicalComplex₂.totalShift₁Iso_hom_totalShift₂Iso_hom']; note=; digest=ebd63c195d29350d. Full returned types in search-naturality-1.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: restrictScalars coherence, generic bicomplex morphism laws and Dold-Kan naturality do not give the two-sided bar generator map and its two augmentation squares. Read ModuleCat/ChangeOfRingsExact.lean and the displayed returned types."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bar\", \"map\"",
+   "results": "3 hits; top=['Lean.PersistentHashMap.subarrayMeasure', 'Mathlib.Tactic.Echelon.BareissData.mapM', 'isOpenMap_barycentric_coord']; note=; digest=4b0882f887e2e2e7. Full returned types in search-naturality-2.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: restrictScalars coherence, generic bicomplex morphism laws and Dold-Kan naturality do not give the two-sided bar generator map and its two augmentation squares. Read ModuleCat/ChangeOfRingsExact.lean and the displayed returned types."
+  },
+  {
+   "tool": "grep",
+   "query": "two.sided.*bar|bar.*naturality|bar.*[Rr]estrict[Ss]calars",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full returned types in search-naturality-3.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: restrictScalars coherence, generic bicomplex morphism laws and Dold-Kan naturality do not give the two-sided bar generator map and its two augmentation squares. Read ModuleCat/ChangeOfRingsExact.lean and the displayed returned types."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation and a simplicial morphism induce commuting squares for the two sided categorical bar comparison roof under restriction of scalars",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app', 'AlgebraicTopology.DoldKan.Γ₂N₂.natTrans_app_f_app', 'AlgebraicTopology.DoldKan.N₂_map_f_f', 'AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app', 'AlgebraicTopology.DoldKan.compatibility_Γ₂N₁_Γ₂N₂_natTrans', 'AlgebraicTopology.DoldKan.Q_f_naturality', 'AlgebraicTopology.DoldKan.P_f_naturality', 'AlgebraicTopology.DoldKan.Γ₂N₂.natTrans']; note=; digest=d445a877b0a30221. Full returned types in search-naturality-4.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: restrictScalars coherence, generic bicomplex morphism laws and Dold-Kan naturality do not give the two-sided bar generator map and its two augmentation squares. Read ModuleCat/ChangeOfRingsExact.lean and the displayed returned types."
+  },
+  {
+   "tool": "grep",
+   "query": "two.sided.*bar|bar.*semilinear|bar.*naturality",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Actual results read from the msearch output.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic alternating-face-map functoriality, Dold-Kan maps, restriction of linear maps, and bifunctor totalization do not state the categorical two-sided bar generator construction and both augmentation squares. Exact derived passage is reused via the existing Mathlib leaf, not claimed as a new result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functoriality of a two sided bar bicomplex under a functor of categories and change of coefficient ring",
+   "results": "8 hits; top=['CategoryTheory.Functor.mapBifunctorHomologicalComplex.congr_simp', 'CategoryTheory.Functor.mapBifunctorHomologicalComplexObj', 'CategoryTheory.Functor.mapBifunctorHomologicalComplex', 'CategoryTheory.Functor.mapBifunctorHomologicalComplex_obj_obj_d_f', 'CategoryTheory.Functor.map₂CochainComplex', 'CategoryTheory.Functor.mapBifunctorHomologicalComplex_map_app_f_f', 'HomologicalComplex.mapBifunctorMap', 'CategoryTheory.Functor.map₂HomologicalComplex']; note=; digest=2e0060013f4054e1. Actual results read from the msearch output.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic alternating-face-map functoriality, Dold-Kan maps, restriction of linear maps, and bifunctor totalization do not state the categorical two-sided bar generator construction and both augmentation squares. Exact derived passage is reused via the existing Mathlib leaf, not claimed as a new result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"map\"",
+   "results": "12 hits; top=['LinearMap.restrictScalars_id', 'LinearMap.restrictScalars', 'LinearMap.restrictScalars_injective', 'LinearMap.restrictScalars_self', 'LinearMap.restrictScalars_inj', 'LinearMap.coe_restrictScalars', 'LinearMap.restrictScalars_apply', 'LinearMap.restrictScalars_zero']; note=; digest=2eb195f538d57e12. Actual results read from the msearch output.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic alternating-face-map functoriality, Dold-Kan maps, restriction of linear maps, and bifunctor totalization do not state the categorical two-sided bar generator construction and both augmentation squares. Exact derived passage is reused via the existing Mathlib leaf, not claimed as a new result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semilinear natural transformation and a simplicial morphism induce a map of the two sided categorical bar double complex commuting with both edge augmentations",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.N₂_map_f_f', 'AlgebraicTopology.AlternatingFaceMapComplex.map', 'AlgebraicTopology.DoldKan.N₁_map_f', 'AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app', 'AlgebraicTopology.NormalizedMooreComplex.map_f', 'AlgebraicTopology.DoldKan.MorphComponents.φ', 'AlgebraicTopology.DoldKan.natTransPInfty', 'AlgebraicTopology.AlternatingFaceMapComplex.map_f']; note=; digest=6ecf4116a075a019. Actual results read from the msearch output.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic alternating-face-map functoriality, Dold-Kan maps, restriction of linear maps, and bifunctor totalization do not state the categorical two-sided bar generator construction and both augmentation squares. Exact derived passage is reused via the existing Mathlib leaf, not claimed as a new result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindex strings ending in a simplicial object in a two sided bar construction and prove naturality of evaluation and forgetful chain augmentations with semilinear coefficients",
+   "results": "8 hits; top=['classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule', 'AlgebraicTopology.DoldKan.Γ₂N₁.natTrans_app_f_app', 'AlgebraicTopology.DoldKan.PInfty_f_naturality_assoc', 'AlgebraicTopology.DoldKan.Γ₂N₁.natTrans', 'AlgebraicTopology.DoldKan.PInfty_f_naturality', 'AlgebraicTopology.DoldKan.P_f_naturality_assoc', 'AlgebraicTopology.DoldKan.natTransP_app', 'AlgebraicTopology.DoldKan.Q_f_naturality']; note=; digest=9f1a628bd39704f9. Actual results read from the msearch output.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic alternating-face-map functoriality, Dold-Kan maps, restriction of linear maps, and bifunctor totalization do not state the categorical two-sided bar generator construction and both augmentation squares. Exact derived passage is reused via the existing Mathlib leaf, not claimed as a new result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-derived-colimit-computation",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Contractible representable evaluations compute derived colimits, with reindexing naturality. Two-sided-bar re-split: Semilinear functoriality of the two-sided bar augmentation roof (old proof steps 7 and 8).",
+   "via": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-two-sided-bar-semilinear-naturality",
+  "worker": "stage1",
+  "summary": "Kept the statement and its four notion dependencies. Gave ten explicit steps checking finite-support scalar restriction, commuting face sums and total signs, semilinear maps, edge chain-map conditions, both strict squares and composition. Reused the existing exact-functor-derived-factorization Mathlib leaf; no new nodes or unproved subclaims were introduced.",
+  "blueprint": "Realizes the supporting two-sided-bar naturality input in the inherited blueprint.from.place, originating in lem-trf-local-term-locality proof (1)--(2); checked the latest blueprint. In the immediate parent lem-trf-simplicial-derived-colimit-computation this is the re-split input for old steps 7 and 8. The item is below the unit route and changes no chapter or unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-aafef605b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-aafef605b (reviewer sub-agent of L); spot-checked: Read the whole delivery. It has 0 new nodes, and the statement is byte-identical to live. Live and side-live still show the item unsplit, and there is no repair note for it. The parent's landed re-split gives old steps 7-8 (V, t, b, both strict squares, scalar restriction) to this node, and the item covers all of them. I re-derived all ten steps by hand: (1) Res_ρ is exact by same subsets and quotients, with no flatness; (2) face identities and commutation of the horizontal and vertical differentials; (3)-(4) V commutes with the faces by naturality of θ, functoriality of u and naturality of k (Q'(α)k_q=k_r u(Qα)), and the mixed total-sign terms cancel, giving -n+1 pairs on each finite diagonal, checked directly rather than through the first-quadrant def-sp-double-complex-total; (5) t and b are chain maps; (6) the edge cancellations for e_Q (p=1: F(f)F(a)-F(fa)) and e_B (q=1: d_0f and d_1f forgotten); (7) the squares, via F'(k_q u f)θ_T=F'(k_q)θ_{Q_q}F(f); (8) composition, via naturality of ψ at k_q; (9) the Mathlib leaf lem-weil-pbc-exact-functor-derived-factorization (I read ExactFunctor.lean:25-56; its hypotheses are exactly those proved in step 1); (10) inverses are preserved by functoriality. Source: Stacks 08PD l.9944 and 08PH l.10117 give the one-sided rule, and the two-sided version is correctly marked agent-written. Edge cases: zero ring, identity data, and a discrete two-object category where e_B is not a quasi-isomorphism (the statement does not claim it is). Duplicates checked and none found: derived-colimit-bar, bar-scalar-restriction-coherence, the horizontal-augmentation sibling, coef ordinary two-sided/evaluation/comma nodes, and derived-colimit-scalar-coherence. Route: only a Mathlib leaf plus definitions, no tool_uses needed, no SGA. Two harmless cosmetic points left unchanged: the step 9 source names derived.tex 015F inside a sites-cohomology field, and step 10 reuses the letter Q for localization."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TwoSidedBarSemilinearNaturality",
+  "declaration": "CategoryTheory.TwoSidedBar.system_exists",
+  "declarations": [
+   "CategoryTheory.TwoSidedBar.delete",
+   "CategoryTheory.TwoSidedBar.firstArrow",
+   "CategoryTheory.TwoSidedBar.lastArrow",
+   "CategoryTheory.TwoSidedBar.Index",
+   "CategoryTheory.TwoSidedBar.term",
+   "CategoryTheory.TwoSidedBar.barTerm",
+   "CategoryTheory.TwoSidedBar.horizontalFace",
+   "CategoryTheory.TwoSidedBar.verticalOperator",
+   "CategoryTheory.TwoSidedBar.horizontalD",
+   "CategoryTheory.TwoSidedBar.verticalD",
+   "CategoryTheory.TwoSidedBar.barD",
+   "CategoryTheory.TwoSidedBar.evaluate",
+   "CategoryTheory.TwoSidedBar.forgetLast",
+   "CategoryTheory.TwoSidedBar.evaluationComplex",
+   "CategoryTheory.TwoSidedBar.evaluationCoordinates",
+   "CategoryTheory.TwoSidedBar.Model",
+   "CategoryTheory.TwoSidedBar.totalGenerator",
+   "CategoryTheory.TwoSidedBar.reindex",
+   "CategoryTheory.TwoSidedBar.barReindex",
+   "CategoryTheory.TwoSidedBar.restriction",
+   "CategoryTheory.TwoSidedBar.SemilinearMap",
+   "CategoryTheory.TwoSidedBar.identityCoefficient",
+   "CategoryTheory.TwoSidedBar.compositeCoefficient",
+   "CategoryTheory.TwoSidedBar.System",
+   "CategoryTheory.TwoSidedBar.system_exists",
+   "CategoryTheory.TwoSidedBar.operator_naturality",
+   "CategoryTheory.TwoSidedBar.restriction_exact",
+   "CategoryTheory.TwoSidedBar.restriction_quasiIso",
+   "CategoryTheory.TwoSidedBar.restriction_inverse",
+   "CategoryTheory.TwoSidedBar.localized_squares"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TwoSidedBarSemilinearNaturality.lean",
+  "statement": "theorem system_exists : Nonempty (System.{u})",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Concrete coproducts and generator maps; Model and System package simultaneous realizations and the specified laws, with no data chosen from system_exists. Additional named statements operator_naturality, restriction_exact, restriction_quasiIso, restriction_inverse and localized_squares render the remaining clauses. Every theorem is sorry-only as required for stage 2; the accepted natural-language split is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57720e0e5",
+  "group": "N8",
+  "result": "pass",
+  "note": "Only the lean record changes vs side-live; statement verbatim at l.346. Clause-by-clause match: Index/term = ⊕ F(T0) over strings with an arrow to Q_q; delete/firstArrow/lastArrow give correct first/last-vertex faces; horizontalD/verticalD alternating; Mathlib total sign (-1)^{-p} = (-1)^p in bidegree (-p,-q); evaluationComplex = alternatingFaceMapComplex extended to -q; e_Q/e_B pinned on all summands (edge + off-edge zero); reindex/barReindex/t formulas pinned on every coordinate and totalGenerator; both strict squares are chain-map equalities; identity (restrictScalarsId), composition (restrictScalarsComp, whiskerRight k v ≫ l), scalarRestriction IsIso, restriction_exact/quasiIso/inverse, localized_squares via mapDerivedCategoryFactors. Everything is pinned, so Nonempty System is not hollow; identity, composition and IsIso clauses checked true. No duplicates (parent now uses a projective roof; DerivedColimitBar bar is inside a theorem package; coef bars are different notions). Stacks 08PD/08PH/08Q9 at sites-cohomology l.9944/10117/10229. Docstrings ok, sorry-only, no extra hypotheses. Advisory: redundant DoubleComplexTotal import; proof-dep Mathlib decls in derived clauses; second-reading section is a placeholder under direct-delivery policy. No compile (no file changed)."
+ }
+}

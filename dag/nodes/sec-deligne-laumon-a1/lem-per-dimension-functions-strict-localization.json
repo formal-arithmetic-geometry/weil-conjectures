@@ -196,17 +196,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-89d0cdfe5 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and matches ILO XIV Def. 2.1.1/Prop. 2.1.3 (printed pp.209-210; immediate means the closure in X_(ybar) has dimension 1) and Def. 2.1.8 with the paragraph after it (pp.211-212; delta(special)=delta(general)-1, etale restriction), as used at the strict-local opening of Prop. 2.5.4 (p.217). I tested it on a field, the empty scheme, a trait, nilpotents and a larger Omega. The direction (<=) holds because immediate geometric specializations are defined inside strict localizations. Step 1 is correct: pi factors through an affine U containing t (local-spectrum argument), the chart lemma applies (Omega algebraically closed, e=id), so the ind-etale invariance hypothesis holds on all of L, and functoriality (1) gives the closed lift c. Step 2 is correct: invariance at b gives L_(b) iso T_(pi b) over T, which carries the closure and the closed point. Step 3 is correct, but it said the closed-point iteration gives an isomorphism L_(c)->L 'over L'. The cited invariance statement (its proof step 5 confirms) only gives the canonical phi: L_(c)->T_(tbar)=L over T, and the step also mixed v with its lift (C3/C4 imprecision). FIX: Step 3 is rewritten with v'=phi^{-1}(v) and pi(j v')=pi(phi v')=pi(v). Step 2 now cites functoriality clause (1) for the closed-point images, which is added to its uses. There are no new nodes. The rg duplicate search over dag/nodes found related nodes (local-dimension-function-calculus, finite-type-dimension-function, immediate-specialization-criterion, geometric-immediate-catenary) but none states strict-localization restriction or testing. There is no cycle; the only citer is lem-per-regular-dimension-function-pullback. The three declared tool_uses are accepted: generic strict-henselization algebra from sk-thm-p1 and sk-i-curve-zero that replaces no unit step. No SGA source is used. Batch-5 flag: the citation of lem-trf-ind-etale-strict-local-invariance is accepted. It is Stacks 05WR/0GIP plus Olivier's theorem, general commutative algebra outside both assumed statements, and its 253-node closure contains no other trace-formula or Poincare node, no sk-thm-trace node and no nt-assume leaf. Corrected node: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-dimension-functions-strict-localization.json.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.DimensionFunctionsStrictLocalization",
-  "declaration": "AlgebraicGeometry.Scheme.isGeometricDimensionFunction_iff_strictLocalization",
-  "file": "lean/Sheaf/AlgebraicGeometry/DimensionFunctionsStrictLocalization.lean",
-  "statement": "theorem isGeometricDimensionFunction_iff_strictLocalization (T : Scheme.{u}) [IsNoetherian T] (hT : ∀ U : T.affineOpens, IsExcellent Γ(T, U)) (d : T → ℤ) : IsGeometricDimensionFunction T d ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (barT : Spec (.of Ω) ⟶ T), IsGeometricDimensionFunction (strictHenselizationScheme barT) (fun x ↦ d (strictHenselizationStructuralMap barT x))",
-  "branch": "newtargets-dag",
-  "by": "NZ",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.DimensionFunctionsStrictLocalization deleted (dead: no target reaches it); this node is not reached either."
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -215,5 +205,23 @@
   "result": "pass",
   "note": "Item node differs from live only in lean + added landed stmt_dep def-per-geometric-dimension-function; statement unchanged, not yet landed. Lean matches the node clause by clause: IsNoetherian T, IsExcellent on affine opens, arbitrary d : T → ℤ, landed IsGeometricDimensionFunction on T iff on strictHenselizationScheme barT with d ∘ strictHenselizationStructuralMap for all algebraically closed Ω : Type u. Both directions are true (ind-étale invariance; closed-lift iteration); edge cases empty/field/nilpotent/larger Ω fine; no extra hypotheses or universe restriction beyond the landed def. Proof sorry only; docstrings carry source place, blueprint id and the 3 steps; proof-dep imports plain; lines ≤ 100; statement verbatim. No duplicate. nt_compile --json clean (1.6 s, rc 0). Advisory: structural-map owner node not in stmt_deps (reached via the def node; S2 fix cannot change stmt_deps)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/DimensionFunctionsStrictLocalization.lean",
+  "module": "Sheaf.AlgebraicGeometry.DimensionFunctionsStrictLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.isGeometricDimensionFunction_iff_strictLocalization",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

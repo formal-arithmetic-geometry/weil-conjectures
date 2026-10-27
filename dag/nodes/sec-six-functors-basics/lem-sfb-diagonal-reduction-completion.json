@@ -1,0 +1,202 @@
+{
+ "id": "lem-sfb-diagonal-reduction-completion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Proof step 4: scalar restriction, total derived strict inverse limits, and the integral completion reflector",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Total derived limit of simultaneous reduction is integral derived completion",
+ "statement": "For a prime ell, any scheme W and the derived-category universe choices in [def-sfb-diagonal-system-interface], every simultaneous derived reduction D of the integral-to-discrete-Z_ell scalar extension satisfies DiagonalCompletionSpec. Thus an integral simultaneous reduction I and total right derived limits RF and RZ exist, D.T followed by RF and scalar forgetting is naturally isomorphic to I.T followed by RZ, this common functor has ell-complete outputs in the right-orthogonality sense, and a natural unit induces a bijection on maps to every such complete object.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Proof step 4: scalar restriction, total derived strict inverse limits, and the integral completion reflector"
+ },
+ "proof": [
+  {
+   "text": "Use the exact Z-to-Z_ell scalar extension and its levelwise right adjoint. Construct both total right derived limits from K-injective resolutions. The right adjoint preserves K-injectives because scalar extension is exact; its ordinary limit comparison gives the derived-limit comparison.",
+   "uses": [
+    "lem-sfb-diagonal-derived-reduction-exists",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-pur-kinjective-degreewise-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every integral quotient is killed by ell^(n+1), so equip its actual sections with the canonical ZMod action and restrict the p-adic action through toZModPow. Any additive map out of an ell-power killed p-adic module is p-adic linear, by the approximation congruence. The scalar adjunction therefore identifies the two quotient universal properties. Cokernel uniqueness supplies a natural isomorphism of the whole ordinary towers; cancel quotient epimorphisms to prove every transition square and naturality. Derive this comparison: the exact tower restriction has a derived right adjoint, so it preserves the pointwise right Kan extension defining the left derived functor. Uniqueness of left derived functors gives the derived tower isomorphism.",
+   "uses": [
+    "lem-sfb-diagonal-derived-reduction-exists",
+    "lem-sc-localization-nested-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the integral strict completion reflector to the integral reduction and total derived limit. Whisker and compose the two preceding isomorphisms, transport its natural unit, transfer output orthogonality using the induced injective Hom equivalence, and compose the universal Hom bijection with the induced source Hom equivalence.",
+   "uses": [
+    "lem-sfb-integral-strict-completion-reflector"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-sc-localization-nested-adjunction-mate",
+  "lem-sfb-diagonal-derived-reduction-exists",
+  "lem-sfb-integral-strict-completion-reflector",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Explicit ordinary torsion quotient comparison, preservation of pointwise derived Kan extension by the exact derived right adjoint, total derived limit comparison, and transport of the integral reflector"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A simultaneous left derived reduction functor into strict inverse systems of torsion sheaves, whose derived inverse limit is completion",
+   "results": "8 hits: localCohomology.diagram, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, BDeRhamPlus",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.IsLeftDerivedFunctor'",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalDerivedReduction|diagonalTowerSystem",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of abelian sheaves as total derived inverse limit of simultaneous prime power quotient towers, with constant p-adic scalar action",
+   "results": "8 hits: BDeRhamPlus, BDeRham, instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.ofSheafProfinite, localCohomology.diagram, LightCondAb.ofSheafLightProfinite, AdicCompletion",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.exists_quasiIso_flat_kFlat",
+   "results": "0 hits: ; loogle: unknown identifier 'CochainComplex.exists_quasiIso_flat_kFlat'",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalCompletionSpec|DiagonalCycleSystemSpec|DerivedReduction",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient tower of integral sheaves, derived by one resolution, has a natural unit into its derived inverse limit and gives derived completion",
+   "results": "8 hits: AdicCompletion.of_apply, BDeRhamPlus, AdicCompletion.eval_comp_of, AdicCompletion, AdicCompletion.factorₐ_evalₐ_one, AdicCompletion.eval_of, AdicCompletion.incl, IsAdicComplete.of_lift",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "One simultaneous derived reduction to a strict tower of prime power quotients, computed on torsion free complexes",
+   "results": "8 hits: Module.torsion_by_prime_power_decomposition, Submodule.exists_isInternal_prime_power_torsion_of_pid, Submodule.exists_isInternal_prime_power_torsion, DerivedCategory.right_fac_of_isStrictlyLE, Submodule.isInternal_prime_power_torsion_of_is_torsion_by_ideal, Submodule.QuotientTorsion.instIsTorsionFree, instIsScalarTowerAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, instIsTorsionFreeLocalizationAlgebraMapSubmonoidPrimeCompl_2",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer reduction of the integral Cartier boundary in the derived category of strict inverse systems of modules",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp, KummerDedekind.quotMapEquivQuotQuotMap.congr_simp, WeierstrassCurve.reduction, Condensed.instAB4CondensedMod, AlgebraicTopology.DoldKan.toKaroubiCompN₂IsoN₁_inv_app, Condensed.instAB4StarCondensedMod",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total derived inverse limit of prime power reductions of abelian sheaves is the derived completion reflector",
+   "results": "8 hits: AdicCompletion, AdicCompletion.subring, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Presheaf.isSheaf_of_isSheaf_comp, AdicCompletion.sumInv_comp_sum, ProfiniteGrp.isIso_toLimit, Profinite.asLimitConeIso, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext.mapExactFunctor",
+   "results": "0 hits: ; loogle: unknown identifier 'Ext.mapExactFunctor'",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer exact sequence identifies the reduction of the Cartier extension boundary with the finite cycle class",
+   "results": "8 hits: Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Extension.H1Cotangent.map, Algebra.Generators.H1Cotangent.exact_δ_map",
+   "date": "2026-10-24",
+   "verdict": "No direct match. Use project resolving-class, Cartier and completion declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec in Mathlib, WeilConjectures and Sheaf",
+   "results": "No Mathlib or WeilConjectures declaration of the simultaneous predicate. Existing Sheaf declarations are this item and its consumers. Mathlib supplies cokernels, functor-category evaluation, and localization universal properties.",
+   "date": "2026-10-24",
+   "verdict": "Construct the simultaneous functor and use the existing source lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerSystem",
+  "date": "2026-10-24",
+  "group": "H9"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalReductionCompletion",
+  "file": "lean/Sheaf/Paper/DiagonalReductionCompletion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonal_reduction_completion",
+  "statement": "theorem diagonal_reduction_completion (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W)) :\n    DiagonalCompletionSpec ℓ W D",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb77b",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T101147-L-3663305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb77b",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T101147-L-3663305",
+  "kind": "interface",
+  "note": "independent cc review: Delivered interface vs published DiagonalTowerSystem.lean (diff); DiagonalCycleSystemSpec old/new forms via normalizedBoundarySystem_iff_target; sorry statements vs Stacks 099M/091S/091Z and the old spec; nodes vs Lean; 6 delivered modules + 9 direct importers compiled clean (400 s limit); #print axioms"
+ }
+}

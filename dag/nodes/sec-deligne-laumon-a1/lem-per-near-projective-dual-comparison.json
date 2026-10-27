@@ -1,0 +1,270 @@
+{
+ "id": "lem-per-near-projective-dual-comparison",
+ "kind": "statement",
+ "title": "Duals and pullback comparison for finite near-projective modules",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $J\\subseteq A$ an ideal, and $M$ a finite $A$-module [def-weil-finitely-generated-module]. Suppose that for each $a\\in J$ there are an integer $r_a\\geq0$ and maps $f_a:M\\to A^{\\oplus r_a}$, $g_a:A^{\\oplus r_a}\\to M$ with $g_af_a=a\\operatorname{id}_M$. Then $N=\\operatorname{Hom}_A(M,A)$ is finite, and each $a\\in J$ acts on $N$ through a finite free $A$-module. For any scheme $Z$ [def-pc-scheme] and morphism $g:Z\\to\\operatorname{Spec}A$, put $P=g^*\\widetilde M$ and $F=g^*\\widetilde N$, using associated module sheaves [def-weil-pbc-associated-module] and ordinary module pullback [def-pc-module-pullback]. Let $G=\\mathcal Hom_{\\mathcal O_Z}(P,\\mathcal O_Z)$, the sheaf whose sections on $U\\subseteq Z$ are $\\mathcal O_U$-linear maps $P|_U\\to\\mathcal O_U$. The canonical comparison\n$$\\alpha:F\\longrightarrow G$$\nis induced by evaluation: locally $(b\\otimes\\lambda)(b'\\otimes m)=bb'\\,g^\\sharp(\\lambda(m))$. Both $\\ker\\alpha$ and $\\operatorname{coker}\\alpha$, formed in module sheaves [def-weil-sheaf-of-modules-category], are annihilated by the extended ideal $J\\mathcal O_Z$. For every $m\\in M$, evaluation of $\\alpha$ at the pulled-back section $m$ equals the pullback of $N\\to A$, $\\lambda\\mapsto\\lambda(m)$. No flatness assumption on $g$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0GAB (remark-duals), together with more-algebra.tex Tag 0G96 (lemma-dual-near-projective); the same finite-free comparison argument for an arbitrary scheme over Spec A."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-scheme",
+  "def-weil-pbc-associated-module",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose generators $x_1,\\ldots,x_s$ of $M$. The map $N\\to A^{\\oplus s}$, $\\lambda\\mapsto(\\lambda(x_j))_j$, is injective: a functional zero on the generators is zero on every $\\sum_jb_jx_j$. Its image is an $A$-submodule of the finite module $A^{\\oplus s}$. By [lem-weil-pbc-noetherian-submodule-finite] this image is finite. Transporting its finite generators along the injection proves that $N$ is finite.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, second assertion"
+   }
+  },
+  {
+   "text": "Fix $a\\in J$ and a factorization $M\\xrightarrow{f}A^{\\oplus r}\\xrightarrow{g_a}M$ with $g_af=a\\operatorname{id}_M$. For the standard basis write $m_i=g_a(e_i)$ and $\\lambda_i=\\operatorname{pr}_i\\circ f\\in N$. Thus $\\sum_i\\lambda_i(m)m_i=am$ for every $m\\in M$. For every $\\lambda\\in N$ it follows, by evaluation on $m$, that $\\sum_i\\lambda(m_i)\\lambda_i=a\\lambda$. Consequently the maps $N\\to A^{\\oplus r}$, $\\lambda\\mapsto(\\lambda(m_i))_i$, and $A^{\\oplus r}\\to N$, $(c_i)_i\\mapsto\\sum_ic_i\\lambda_i$, compose to multiplication by $a$. This proves the asserted finite-free factorization on $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0G96, lemma-dual-near-projective, taking duals of a finite-free factorization"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-associated-module-pullback], with $S=\\Gamma(Z,\\mathcal O_Z)$, $P$ and $F$ are canonically the associated sheaves of $S\\otimes_A M$ and $S\\otimes_A N$, respectively; the comparison sends pulled-back sections to $1\\otimes m$ and $1\\otimes\\lambda$. The same description holds after restricting to any open $U$: apply that lemma to $g|_U$, using the composition law of [def-pc-module-pullback]. The construction in [def-weil-pbc-associated-module] and the bijection in [lem-weil-pbc-associated-module-hom] imply that an $\\mathcal O_U$-linear map out of either restricted sheaf is determined by its values on the sections $1\\otimes m$ or $1\\otimes\\lambda$: their $\\Gamma(U,\\mathcal O_Z)$-linear span is the corresponding tensor module. In these descriptions the prescribed evaluation comparison is $\\alpha_U(b\\otimes\\lambda)(b^{\\prime}\\otimes m)=bb^{\\prime}g^\\sharp(\\lambda(m))$. The displayed pairing is balanced over $A$ and linear over $\\mathcal O_Z$; for a fixed $\\lambda$ it therefore defines a map $P\\to\\mathcal O_Z$ by the cited associated-sheaf Hom bijection. These maps are $A$-linear in $\\lambda$, so the same bijection for $F$ constructs $\\alpha:F\\to G$. Restriction uses the same formula, proving that this construction is the stated comparison.",
+   "uses": [
+    "lem-weil-pbc-associated-module-pullback",
+    "def-pc-module-pullback",
+    "def-weil-pbc-associated-module",
+    "lem-weil-pbc-associated-module-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BJ, lemma-restrict-quasi-coherent; Tag 01BH, lemma-construct-quasi-coherent-sheaves, construction (3) and assertion (4)"
+   }
+  },
+  {
+   "text": "For the fixed $a$ and the coordinates of Step 2, denote the pulled-back sections by $\\bar m_i$ and $\\bar\\lambda_i$. Define on every open $U$ an $\\mathcal O_Z(U)$-linear map $\\beta_U:G(U)\\to F(U)$ by $\\beta_U(\\varphi)=\\sum_i\\varphi_U(\\bar m_i|_U)\\bar\\lambda_i|_U$. This formula commutes with restriction, since $\\varphi$ is a morphism of restricted sheaves and all the displayed global sections restrict compatibly. Hence it defines a sheaf morphism $\\beta:G\\to F$. For any $m\\in M$, $\\alpha_U(\\beta_U(\\varphi))$ evaluated on $\\bar m|_U$ equals $\\sum_i\\varphi_U(\\bar m_i)g^\\sharp(\\lambda_i(m))=\\varphi_U(\\overline{\\sum_i\\lambda_i(m)m_i})=g^\\sharp(a)\\varphi_U(\\bar m)$. The determination of sheaf maps by these sections from Step 3, applied on every subopen of $U$, gives $\\alpha\\beta=a\\operatorname{id}_G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAB, remark-duals, the finite-free factorization argument, expanded in coordinates for an arbitrary scheme over Spec A"
+   }
+  },
+  {
+   "text": "For $\\lambda\\in N$, evaluate the other composite on its pulled-back section: $\\beta\\alpha(\\bar\\lambda)=\\sum_i g^\\sharp(\\lambda(m_i))\\bar\\lambda_i=\\overline{\\sum_i\\lambda(m_i)\\lambda_i}=a\\bar\\lambda$, by Step 2. By the determination of maps out of $F$ in Step 3 this proves $\\beta\\alpha=a\\operatorname{id}_F$. Therefore for a section $v\\in\\ker\\alpha$ we have $av=\\beta\\alpha(v)=0$. For a section $w\\in G$ we have $aw=\\alpha\\beta(w)$, so multiplication by $a$ on the sectionwise quotient $G/\\operatorname{im}\\alpha$ is zero and remains zero after sheafification. By [def-weil-sheaf-of-modules-category], that sheafification is the cokernel. This holds for every $a\\in J$, so local finite sums of their $\\mathcal O_Z$-multiples also annihilate both sheaves: the annihilator contains $J\\mathcal O_Z$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAB, remark-duals, the finite-free factorization argument, expanded in coordinates for an arbitrary scheme over Spec A"
+   }
+  },
+  {
+   "text": "For fixed $m\\in M$, evaluation of $\\alpha$ on $\\bar m$ sends $b\\otimes\\lambda$ to $b\\,g^\\sharp(\\lambda(m))$. The pullback of the map $N\\to A$, $\\lambda\\mapsto\\lambda(m)$, has exactly this formula by the naturality and normalized section formula in [lem-weil-pbc-associated-module-pullback]. Equality on these sections determines equality on $F$ as in Step 3. This proves the final compatibility. Every construction used ordinary tensor pullback, and none used preservation of injections by tensoring.",
+   "uses": [
+    "lem-weil-pbc-associated-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0GAB, remark-duals, the finite-free factorization argument, expanded in coordinates for an arbitrary scheme over Spec A"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-associated-module-pullback",
+  "def-pc-module-pullback",
+  "def-weil-pbc-associated-module",
+  "lem-weil-pbc-associated-module-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0GAB remark-duals, expanded into the two explicit scalar composite calculations; dual factorization follows more-algebra.tex Tag 0G96 and finiteness uses algebra.tex Tag 00IK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module whose scalar multiplications factor through finite free modules, the base change map from its dual to the dual of its base change has kernel and cokernel annihilated by those scalars",
+   "results": "{\"t\": \"2026-10-24T08:43:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite module whose scalar multiplications factor through finite free modules, the base change map from its dual to the dual of its base change has kernel and cokernel annihilated by those scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.dual\", \"IsBaseChange.toDualBaseChange_tmul\", \"IsBaseChange.toDualBaseChange\", \"Module.Dual.baseChange_baseChange\", \"IsBaseChange.toDual\", \"IsBaseChange.toDual_apply\", \"Module.Dual.baseChange\", \"IsBaseChange.toDual_comp_apply\"], \"digest\": \"ad3347ccf42166e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dual/BaseChange.lean supplies the comparison and a finite-free isomorphism (Free and Module.Finite hypotheses at line 121), not the annihilator bound for near-projective modules or its sheaf version."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Almost projective finite module dual base change comparison kernel cokernel annihilated by ideal",
+   "results": "{\"t\": \"2026-10-24T08:43:02Z\", \"tool\": \"leansearch\", \"query\": \"Almost projective finite module dual base change comparison kernel cokernel annihilated by ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.dual\", \"IsBaseChange.toDual_apply\", \"IsBaseChange.toDual\", \"Module.dual_projective\", \"Module.dual_finite\", \"Module.Dual.baseChange\", \"IsBaseChange.toDualBaseChange\", \"Submodule.dualAnnihilator\"], \"digest\": \"1e152618c2d820d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dual/BaseChange.lean supplies the comparison and a finite-free isomorphism (Free and Module.Finite hypotheses at line 121), not the annihilator bound for near-projective modules or its sheaf version."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Dual\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-24T08:43:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.Dual\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.dualDistrib\", \"TensorProduct.AlgebraTensorModule.dualDistrib_apply\"], \"digest\": \"4bdfe90b540ff384\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dual/BaseChange.lean supplies the comparison and a finite-free isomorphism (Free and Module.Finite hypotheses at line 121), not the annihilator bound for near-projective modules or its sheaf version."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*base.?change|base.?change.*dual|near.?projective|almost.?projective",
+   "results": "{\"t\": \"2026-10-24T08:43:01Z\", \"tool\": \"grep\", \"query\": \"dual.*base.?change|base.?change.*dual|near.?projective|almost.?projective\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\"], \"digest\": \"36f1fdce0639f076\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dual/BaseChange.lean supplies the comparison and a finite-free isomorphism (Free and Module.Finite hypotheses at line 121), not the annihilator bound for near-projective modules or its sheaf version.",
+   "subdirectory": "LinearAlgebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural map B tensor Hom A M A to Hom B (B tensor M) B is an almost isomorphism when multiplication on M factors through finite free A modules",
+   "results": "{\"t\": \"2026-10-24T08:43:06Z\", \"tool\": \"leanfinder\", \"query\": \"The natural map B tensor Hom A M A to Hom B (B tensor M) B is an almost isomorphism when multiplication on M factors through finite free A modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"Algebra.TensorProduct.liftEquiv\", \"Algebra.TensorProduct.cancelBaseChange\", \"Algebra.TensorProduct.lmulEquiv_eq_lidOfCompatibleSMul\", \"Module.Flat.toAlgebra\", \"LinearMap.tensorEqLocusEquiv\", \"Module.Invertible.instTensorProduct_1\", \"IsBaseChange.tensorEquiv\"], \"digest\": \"8d0d91c907f064a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Dual/BaseChange.lean supplies the comparison and a finite-free isomorphism (Free and Module.Finite hypotheses at line 121), not the annihilator bound for near-projective modules or its sheaf version."
+  },
+  {
+   "tool": "grep",
+   "query": "near.?projective|dual_finite|dual.*base.?change|base.?change.*dual",
+   "results": "{\"t\": \"2026-10-24T09:10:28Z\", \"tool\": \"grep\", \"query\": \"near.?projective|dual_finite|dual.*base.?change|base.?change.*dual\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\"], \"digest\": \"ff474f65179471b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply finite-free base change or dual finiteness under projectivity; none states the near-projective annihilator estimate for ordinary sheaf pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dual of finite module pullback comparison annihilated ideal finite free factorization",
+   "results": "{\"t\": \"2026-10-24T09:10:29Z\", \"tool\": \"leansearch\", \"query\": \"Dual of finite module pullback comparison annihilated ideal finite free factorization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.FGModuleCatDual\", \"Module.finite_dual_iff\", \"Submodule.dualAnnihilator\", \"Module.dual_finite\", \"Module.dual_free\", \"Module.IsReflexive.of_finite_of_free\", \"Module.dual_projective\", \"Module.dual_rank_eq\"], \"digest\": \"f1ddf58262b3c98d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply finite-free base change or dual finiteness under projectivity; none states the near-projective annihilator estimate for ordinary sheaf pullback."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Dual\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-24T09:10:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.Dual\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Module.Dual.baseChange\", \"Module.Dual.baseChange_apply_tmul\", \"Module.Dual.baseChange_baseChange\"], \"digest\": \"74387c394a23bca4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply finite-free base change or dual finiteness under projectivity; none states the near-projective annihilator estimate for ordinary sheaf pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module whose scalar multiplications factor through finite free modules the pullback dual comparison has kernel and cokernel killed by those scalars",
+   "results": "{\"t\": \"2026-10-24T09:10:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite module whose scalar multiplications factor through finite free modules the pullback dual comparison has kernel and cokernel killed by those scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.exactPairing\", \"IsBaseChange.dual\", \"Module.dual_finite\", \"FGModuleCat.rightDual\", \"FGModuleCat.rightRigidCategory\", \"Module.finite_dual_iff\", \"FGModuleCat.FGModuleCatDual_coe\", \"FGModuleCat.FGModuleCatDual\"], \"digest\": \"bf9fdbdd4c3349ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply finite-free base change or dual finiteness under projectivity; none states the near-projective annihilator estimate for ordinary sheaf pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a times the identity of M factors as M to A to the r to M the evaluation map from pullback Hom M A to sheaf Hom pullback M O has an inverse up to a",
+   "results": "{\"t\": \"2026-10-24T09:12:55Z\", \"tool\": \"leanfinder\", \"query\": \"If a times the identity of M factors as M to A to the r to M the evaluation map from pullback Hom M A to sheaf Hom pullback M O has an inverse up to a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"4b3b76009ebf4062\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results supply finite-free base change or dual finiteness under projectivity; none states the near-projective annihilator estimate for ordinary sheaf pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-graded-near-projective-hom-divisibility",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization dependency below ancestor Step 3, through the rig-smooth perturbation branch; precise analytic input to Stacks 0GAQ proof, the linear obstruction bound, here obtained from local-cohomology lemma-factor-hom with a harmless larger loss. The current latest ancestor Step 3 concerns Verdier exchange and does not itself assert this algebraization lemma. More precisely, the 0GAC finite-sum Hom-divisibility input before composing with the specified differential splittings. Supporting input: Tag 0GAB (remark-duals), together with more-algebra.tex Tag 0G96 (lemma-dual-near-projective); the same finite-free comparison argument for an arbitrary scheme over Spec A.",
+   "via": [
+    "lem-per-graded-near-projective-hom-divisibility",
+    "lem-per-graded-power-split-linear-factorization",
+    "lem-per-power-split-uniform-adic-map-lifting",
+    "lem-per-rig-smooth-presentation-perturbation",
+    "lem-per-g-ring-rig-smooth-algebraization",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-near-projective-dual-comparison",
+  "worker": "stage1",
+  "summary": "Read Stacks 0GAB, 0G96, 00IK, 01BH and 01BJ. Reused the existing Noetherian submodule and normalized associated-sheaf pullback/Hom nodes. Proved the dual factorization and both scalar composites explicitly, with no new node, flatness or unjustified stalk/internal-Hom interchange. Replaced the inaccurate coherent-definition citation for associated sheaves by its actual construction node.",
+  "blueprint": "The inherited algebraization branch below lem-per-artin-gabber-affine-curve Step 3, via the listed ancestors: realizes the 0GAC Hom-divisibility input through 0GAB dual comparison. The latest ancestor Step 3 itself concerns Verdier exchange and asserts no such commutative-algebra fact; no new blueprint identification or route change is claimed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-associated-module-pullback",
+    "why": "Generic normalized pullback description of associated module sheaves (Stacks 01BJ), used for arbitrary schemes; the perverse-curve unit has no replacement for this ordinary module tool."
+   },
+   {
+    "node": "lem-weil-pbc-associated-module-hom",
+    "why": "Generic associated-sheaf Hom bijection (Stacks 01BH), used only to detect equality from canonical generating sections; no perverse-curve unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-associated-module-pullback",
+  "lem-weil-pbc-associated-module-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-27677f83f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-27677f83f (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. Sources checked against the item: local-cohomology.tex remark-duals 0GAB and more-algebra.tex lemma-dual-near-projective 0G96. Step 2 matches the dualized factorization in 0G96. The proof is agent-written and generalizes 0GAB to an arbitrary g:Z→Spec A. Instead of Stacks' 'can is an iso on free modules' argument, it builds an explicit β with αβ=a and βα=a; I checked both computations sectionwise. Step 1 uses the 00IK Mathlib leaf correctly through N↪A^s. Step 3 uses the cited nodes for exactly what their statements say: associated-module-pullback (01BJ: θ iso, normalized section formula, naturality) and associated-module-hom (01BH(4) bijection, which determines maps by their values on 1⊗m). Step 5's cokernel argument rests on def-weil-sheaf-of-modules-category, which states that the cokernel is the sheafification of the sectionwise cokernel. Statement change: the base cited pqf-def-coherent for \\widetilde M, but that node does not define it; the delivery replaces it by def-weil-pbc-associated-module and changes nothing else, and the report names the change. Edge cases checked: Z empty, A=0, M=0, J=0, r=0, J=A (β is an inverse), and a nonflat example A=Z/4, M=A/2, J=(2), Z=Spec F_2, where α=0 and J O_Z=0 kills its nonzero kernel and cokernel. No cycle: the item is not reachable from its own dependencies (125 nodes checked). No earlier LAND in svc.log. Accepted tool_uses: lem-weil-pbc-associated-module-pullback and lem-weil-pbc-associated-module-hom (generic ordinary-module tools of sk-thm-p1), as recorded in split_report."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NearProjectiveDualComparison",
+  "declaration": "AlgebraicGeometry.NearProjectiveDualComparison.nearProjective_dual_comparison",
+  "declarations": [
+   "AlgebraicGeometry.NearProjectiveDualComparison.associated",
+   "AlgebraicGeometry.NearProjectiveDualComparison.pulledSection",
+   "AlgebraicGeometry.NearProjectiveDualComparison.scalar",
+   "AlgebraicGeometry.NearProjectiveDualComparison.structureLinear",
+   "AlgebraicGeometry.NearProjectiveDualComparison.structureMap",
+   "AlgebraicGeometry.NearProjectiveDualComparison.pullbackStructureMap",
+   "AlgebraicGeometry.NearProjectiveDualComparison.pulled",
+   "AlgebraicGeometry.NearProjectiveDualComparison.dualSheaf",
+   "AlgebraicGeometry.NearProjectiveDualComparison.pulledEvaluation",
+   "AlgebraicGeometry.NearProjectiveDualComparison.nearProjective_dual_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NearProjectiveDualComparison.lean",
+  "statement": "theorem nearProjective_dual_comparison (A : CommRingCat.{u}) [IsNoetherianRing A] (J : Ideal A) (M : ModuleCat.{u} A) [Module.Finite A M] (hM : ∀ a ∈ J, ∃ (r : ℕ) (f : M →ₗ[A] (Fin r → A)) (h : (Fin r → A) →ₗ[A] M), h.comp f = a • LinearMap.id) : Module.Finite A (Module.Dual A M) ∧ (∀ a ∈ J, ∃ (r : ℕ) (f : Module.Dual A M →ₗ[A] (Fin r → A)) (h : (Fin r → A) →ₗ[A] Module.Dual A M), h.comp f = a • LinearMap.id) ∧ ∀ (Z : Scheme.{u}) (g : Z ⟶ Spec A), ∃! α : pulled A g (ModuleCat.of A (Module.Dual A M)) ⟶ dualSheaf A g M, (∀ (U : Z.Opens) (b b' : Γ(Z, U)) (l : Module.Dual A M) (m : M), PresheafOfModules.homObjEvalId (R := Z.sheaf.obj) (pulled A g M).val (SheafOfModules.unit Z.ringCatSheaf).val U (α.app U (b • pulledSection A g (ModuleCat.of A (Module.Dual A M)) U l)) (b' • pulledSection A g M U m) = b * b' * scalar A g U (l m)) ∧ (∀ (U : Z.Opens) (a : A), a ∈ J → ∀ x : Γ(kernel α, U), scalar A g U a • x = 0) ∧ (∀ (U : Z.Opens) (a : A), a ∈ J → ∀ x : Γ(cokernel α, U), scalar A g U a • x = 0) ∧ (∀ (m : M) (U : Z.Opens) (x : Γ(pulled A g (ModuleCat.of A (Module.Dual A M)), U)), PresheafOfModules.homObjEvalId (R := Z.sheaf.obj) (pulled A g M).val (SheafOfModules.unit Z.ringCatSheaf).val U (α.app U x) (pulledSection A g M U m) = (pulledEvaluation A g M m).app U x)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6b7bfef0",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Read node, 6 stmt_deps records, module, report, and the exact upstream decls (associatedModuleFunctor/CanonicalSection, associatedModuleHom_bijective, tensorPullbackSectionAdjunction, tensorPullbackObjUnitToUnit via unit-normalized exists_tensorPullbackAdjunction, SheafOfModules.homObj, homObjEvalId). Every hypothesis/clause matches: Noetherian A, ideal J, finite M, Fin r→A factorizations; Dual finite + dual factorization; all Z, g with no flatness; ∃! α pinned by the local evaluation formula bb'·g♯(λ(m)) (uniqueness valid by local generation); categorical kernel/cokernel in Z.Modules killed by g♯(a), a∈J (≡ J O_Z); evaluation clause via pullback of applyₗ m composed with canonical g^*Ã→O_Z. Helpers canonical, not hollow; only the theorem is sorry. Edge cases A=0, M=0, r=0, J=0, J=A, empty Z, nonflat ℤ/4 example ok; single universe u forced by g. lean.statement verbatim; only item lean changed; docstrings/H8/H9 ok. Advisories: Tilde import redundant; second-reading section nominal (dispatcher policy, Worker report matches clauses); statement uses owners not in stmt_deps (lem-weil-pbc-associated-module-hom proof_dep, def-sfb-tensor-pullback-structure-sheaf-map, homObj): upstream, no cycle; maintainer may add stmt_dep later. No changes, so no compile."
+ }
+}

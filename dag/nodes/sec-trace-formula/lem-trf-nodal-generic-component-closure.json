@@ -27,9 +27,181 @@
   "def-weil-etale-morphism",
   "def-pc-integral-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The closure of the nonempty irreducible space $|A|$ is irreducible by [lem-weil-pbc-irreducible-closure]. By its reduced induced structure $H$ is reduced, hence integral by [def-pc-integral-scheme]. Its closed immersion into the proper $S$-scheme $Z$ makes $H\\to S$ proper by [lem-weil-pbc-closed-immersion-proper]. The valuation ring $R$ is normal by [lem-weil-pbc-valuation-ring-normal]; each localization is again a valuation ring (the valuation alternative persists) and hence normal as well.",
+   "uses": [
+    "lem-weil-pbc-irreducible-closure",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-valuation-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Initial closure and properness; algebra.tex Tag 00IC (lemma-valuation-ring-normal), morphisms.tex Tag 01W5 (lemma-closed-immersion-proper)."
+   }
+  },
+  {
+   "text": "At each nonsmooth point of $N/S$, [lem-trf-nodal-family-etale-local-model] gives etale charts $U\\to N$, $V\\to S$, $U\\to\\operatorname{Spec}_V\\mathcal O_V[u,v]/(uv-a)$. Restrict to affine neighbourhoods. Since $S$ is normal integral with separably closed function field, [sbc-lem-etale-over-normal](1) applies to the separated etale affine map $V\\to S$. Restricting to one of its open-immersion components identifies $V$ with an open of $S$. Every nonempty open of the finite chain $\\operatorname{Spec}R$ is principal: if its complement is nonempty, choose an element in the least omitted prime and outside the largest retained prime; if the complement is empty use $1$. Thus $V=\\operatorname{Spec}R_r$ after shrinking, a normal valuation domain. At smooth points [sbc-thm-etale-local-normal-form] instead gives etale polynomial charts over an open of $S$. All resulting $U\\to N$ form a jointly surjective etale family.",
+   "uses": [
+    "lem-trf-nodal-family-etale-local-model",
+    "sbc-lem-etale-over-normal",
+    "sbc-thm-etale-local-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY (lemma-etale-local-structure-nodal-family); etale-cohomology.tex Tag 09Z9 (lemma-etale-over-normal); smooth etale polynomial charts Tag 054L."
+   }
+  },
+  {
+   "text": "Closure and reduction commute with the etale source charts just chosen. Indeed, for any open map $e:U\\to N$ and subset $T\\subset N$, one has $e^{-1}\\overline T=\\overline{e^{-1}T}$: every open neighbourhood of a point on the left has open image meeting $T$, and thus meets $e^{-1}T$; the reverse inclusion is continuity. The charts are open by [lem-weil-pbc-etale-morphism-open-map]. Their pullbacks of reduced closed subschemes are reduced by [etale-proposition-etale-reduced]. Uniqueness of reduced induced closed structures in [lem-weil-pbc-reduced-induced-closed-subscheme](3) therefore identifies $H_U$ with the reduced closure of $A\\times_NU$, and $J_U$ with the reduced closure of $U\\setminus H_U$. This argument requires no quasi-compactness of $N\\setminus H$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY charts; topology of open maps, and schemes.tex Tags 01J3/01J4 (reduced induced structure)."
+   }
+  },
+  {
+   "text": "Write a chart as $U=\\operatorname{Spec}C$ over $\\operatorname{Spec}D\\subset S$ and put $F=\\operatorname{Frac}D=L$. The closed generic subcurve $A_U$ is reduced: its map to $A$ is etale, so [etale-proposition-etale-reduced] applies. It is smooth of pure relative dimension one by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and [lem-sbc-smooth-relative-dimension-permanence](2). The generic ambient chart is a reduced pure curve: it is etale over a polynomial curve or over $F[u,v]/(uv-a)$, whose irreducible components are one-dimensional; etale local rings have the same Krull dimension by [lem-sc-etale-local-dimension]. The corresponding components have dimension one by the local-dimension criterion for locally algebraic schemes [lem-sc-dimension-locally-algebraic]. These finite-type field schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Consequently [lem-trf-complementary-pure-subcurve-components] makes $A_U$ a reduced union of generic components. The ideal of its closure is the contraction of the intersection of the corresponding minimal primes: a section vanishes on the closure exactly when its generic restriction vanishes on those components, by the vanishing description of [lem-weil-pbc-reduced-induced-closed-subscheme](1). Apply [lem-trf-generic-subcurve-nodal-chart-ideals] to this subset.",
+   "uses": [
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-complementary-pure-subcurve-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-trf-generic-subcurve-nodal-chart-ideals",
+    "lem-sc-etale-local-dimension",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Relative contraction of generic component ideals in Tag 0CBY charts; Tag 0E38 (lemma-closed-subscheme-nodal-curve), component-union argument."
+   }
+  },
+  {
+   "text": "On the smaller principal charts supplied by the ideal lemma, $H_U$ is empty, all of $U$, or one coordinate axis of a persistent model $uv=0$. The first two cases are flat and locally finitely presented over the base: they are empty or restrictions of the given flat locally finitely presented $N/S$. In the axis case $C/(u)$ is etale over $D[v]$, or $C/(v)$ over $D[u]$, by [lem-weil-pbc-etale-ring-base-change]. The affine line is smooth by [sbc-lem-affine-space-smooth]; composition with the etale axis map is smooth by [lem-sbc-smooth-relative-dimension-permanence](2), hence flat and locally finitely presented by [sbc-lem-smooth-criterion]. Flatness descends from this surjective etale source cover by [lem-pc-flat-source-descent], and local finite presentation by [lem-trf-lfp-fppf-source-locality]. Finally properness gives quasi-compactness and separatedness, hence quasi-separatedness; together with local finite presentation this is finite presentation [def-weil-pbc-scheme-conventions].",
+   "uses": [
+    "lem-trf-generic-subcurve-nodal-chart-ideals",
+    "lem-weil-pbc-etale-ring-base-change",
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-flat-source-descent",
+    "lem-trf-lfp-fppf-source-locality",
+    "def-weil-pbc-scheme-conventions",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY model; descent.tex Tag 036K (lemma-flat-fpqc-local-source) and Tag 036N (lemma-locally-finite-presentation-fppf-local-source)."
+   }
+  },
+  {
+   "text": "These local forms persist after every residue-field extension. The full chart contributes the given nodal geometrically reduced pure curve; an axis contributes a smooth reduced pure curve; empty charts contribute nothing. Pure dimension one and nodal completed local rings descend along the geometric etale chart cover by [lem-trf-etale-cover-field-curve-nodality], and reducedness is local on these faithfully flat charts (injection into the reduced local chart rings). Thus $H/S$ has the required fibres. The same forms show that each $H_u$ is a reduced closed union of whole components of $Z_u$: at full-chart points it equals the ambient fibre locally, and at an axis it is a whole branch, never an isolated point or a proper closed piece of a branch. Equivalently apply [lem-trf-complementary-pure-subcurve-components] to the reduced pure curves $Z_u,H_u$, which are Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "lem-trf-etale-cover-field-curve-nodality",
+    "lem-trf-complementary-pure-subcurve-components",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38, reduced pure subcurves and their nodal fibres; Tag 0CBY chart calculation after residue-field extension."
+   }
+  },
+  {
+   "text": "Compute $J_U$ from the open complement, using Step 3. Where the ideal of $H_U$ is $0$ or $1$, the complementary closure is respectively empty or all of $U$, so $B_U$ is empty. Where that ideal is $(u)$ in $C$ etale over $D[u,v]/(uv)$, the complementary reduced closure has ideal $(v)$: the basis $1,u^i,v^j$ of [lem-sfb-binomial-laurent-normal-form] shows $\\operatorname{ann}(u^n)=(v)$ for every $n>0$ (multiplication shifts the $u$ coefficients and kills precisely the positive $v$ coefficients), which remains true after flat etale base change by [lem-weil-pbc-flat-tensor-exact]; hence $\\ker(C\\to C[1/u])=(v)$. Its quotient is reduced by [etale-proposition-etale-reduced], since $C/(v)$ is etale over the reduced polynomial ring. The swapped case is identical. Thus $B_U=\\operatorname{Spec}C/(u,v)$, etale over $\\operatorname{Spec}D$ by [lem-weil-pbc-etale-ring-base-change]. On $H_U$ this is the zero section in its smooth axis, so it lies in the relative smooth locus. Descent through the covering $B_U\\to B$ using [lem-trf-etale-descent-through-source-cover] makes $B/S$ etale; smoothness along its support descends by [lem-trf-etale-source-smoothness].",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "etale-proposition-etale-reduced",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-trf-etale-descent-through-source-cover",
+    "lem-trf-etale-source-smoothness",
+    "lem-sfb-binomial-laurent-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY persistent model uv=0 and Tag 0E38 complementary-branch intersection; algebra.tex flat tensor exactness."
+   }
+  },
+  {
+   "text": "The same calculation proves the asserted geometric-fibre equality, without asserting that every complementary closure commutes with base change. On a full or empty chart both boundaries are empty after any field extension. On an axis chart the complementary fibrewise closure is the other entire axis, and their intersection is $u=v=0$. Etale maps are open, so Step 3's neighbourhood argument applies also on geometric fibres. These equalities of supports can be checked on their surjective etale cover; they give $|B_{\\bar u}|=|H_{\\bar u}\\cap\\overline{N_{\\bar u}\\setminus H_{\\bar u}}|$. Moreover, on the relative smooth locus of $N/S$ only the full and empty cases occur, by the smooth polynomial case of [lem-trf-generic-subcurve-nodal-chart-ideals]. Hence $H$ restricts there to an open-and-closed subscheme. It follows that $Q\\times_NH$ is open and closed in $Q$, is etale over $S$ by [lem-weil-pbc-etale-composition-cancellation](1)--(2), and lies in the relative smooth locus of $H$. It is disjoint from $B$, whose nonempty charts lie at $u=v=0$, the nonsmooth points of $N/S$.",
+   "uses": [
+    "lem-trf-generic-subcurve-nodal-chart-ideals",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 fibrewise complementary boundary; smooth polynomial charts from Tag 054L; Tag 0CBY node charts."
+   }
+  },
+  {
+   "text": "Both $B$ and $Q\\times_NH$ are closed subschemes of $H$: they are the pullbacks of the closed immersions $J\\hookrightarrow N$ and $Q\\hookrightarrow N$, respectively [lem-weil-pbc-closed-immersion-base-change]. They are therefore proper over $S$ by [lem-weil-pbc-closed-immersion-proper]. An etale morphism is locally quasi-finite, by the zero-dimensional-fibre statement [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]; the proper quasi-finite criterion [cor-pqf-proper-quasifinite-finite] now makes both finite. This criterion imposes no Noetherian hypothesis on $S$. Finally $S=\\operatorname{Spec}R$ is connected: its generic point is dense, so any nonempty open contains it and there is no disconnection. Apply [lem-weil-pbc-finite-etale-trace-degree](a)--(b) separately to the two finite etale schemes. Their geometric point counts are constant, including degree zero. Adding these two constants and using Step 8's support identification proves precisely the displayed integer formula, including equality with the geometric generic value.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "cor-pqf-proper-quasifinite-finite",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "more-morphisms.tex Tag 02LS (lemma-characterize-finite); finite-etale geometric degree over a connected base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-irreducible-closure",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-trf-nodal-family-etale-local-model",
+  "sbc-lem-etale-over-normal",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-complementary-pure-subcurve-components",
+  "lem-trf-generic-subcurve-nodal-chart-ideals",
+  "lem-sc-etale-local-dimension",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-weil-pbc-etale-ring-base-change",
+  "sbc-lem-affine-space-smooth",
+  "lem-pc-flat-source-descent",
+  "lem-trf-lfp-fppf-source-locality",
+  "def-weil-pbc-scheme-conventions",
+  "sbc-lem-smooth-criterion",
+  "lem-trf-etale-cover-field-curve-nodality",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-trf-etale-source-smoothness",
+  "lem-sfb-binomial-laurent-normal-form",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "cor-pqf-proper-quasifinite-finite",
+  "lem-weil-pbc-finite-etale-trace-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Relative generic-subcurve closure calculation reconstructed from the local models of Tag 0CBY and the fibrewise subcurve argument of Tag 0E38. The additional local algebra lemma is stated separately; no global relative closure theorem is attributed to either tag."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +237,73 @@
    "results": "8 hits; top=['AlgebraicGeometry.Scheme.Hom.normalization', 'AlgebraicGeometry.Scheme.Hom.toNormalization', 'AlgebraicGeometry.Scheme.Hom.normalizationDesc', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc', 'AlgebraicGeometry.Scheme.Hom.ι_fromNormalization', 'AlgebraicGeometry.Scheme.Hom.normalizationOpenCover']; note=; digest=0d230c0b8193f995. The semantic hits define smoothness, flatness and etaleness or construct ordinary normalization; none asserts flat finite-presentation component closure with conserved boundary. Loogle nodal hits are Lagrange interpolation polynomials. The scheme-source grep has no hits.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of a union of generic irreducible components in an etale algebra over R[x,y]/(xy-a), for a valuation domain R, is etale locally empty, the whole chart, or one axis when a is zero",
+   "results": "{\"t\": \"2026-10-24T08:03:23Z\", \"tool\": \"leanfinder\", \"query\": \"The schematic closure of a union of generic irreducible components in an etale algebra over R[x,y]/(xy-a), for a valuation domain R, is etale locally empty, the whole chart, or one axis when a is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"StandardEtalePair\", \"StandardEtalePair.hasMap_X\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.mem_etaleLocus_iff\", \"StandardEtalePair.instEtaleRing\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"988d54845ff82bc0\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal.*closure|closure.*nodal|generic.*component.*closure",
+   "results": "{\"t\": \"2026-10-24T08:04:14Z\", \"tool\": \"grep\", \"query\": \"nodal.*closure|closure.*nodal|generic.*component.*closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of a generic irreducible component in a nodal curve family over a valuation ring has finite etale boundary",
+   "results": "{\"t\": \"2026-10-24T08:04:14Z\", \"tool\": \"leansearch\", \"query\": \"Schematic closure of a generic irreducible component in a nodal curve family over a valuation ring has finite etale boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"genericPoints.component\", \"genericPoints.ofComponent\", \"IsIrreducible.genericPoint_closure_eq\", \"genericPoints.isGenericPoint_ofComponent\", \"IsIrreducible.closure_genericPoint\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"IsIrreducible.isGenericPoint_genericPoint_closure\"], \"digest\": \"b8ac7f0e74cc2d7e\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"irreducibleComponents\"",
+   "results": "{\"t\": \"2026-10-24T08:04:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"irreducibleComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal domain A and an etale algebra over A[u,v]/(uv-a), the closure of a clopen part of the generic fibre is locally either empty, the whole scheme, or a coordinate axis when a is zero",
+   "results": "{\"t\": \"2026-10-24T08:04:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a normal domain A and an etale algebra over A[u,v]/(uv-a), the closure of a clopen part of the generic fibre is locally either empty, the whole scheme, or a coordinate axis when a is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\"], \"digest\": \"19b7dfbdab039063\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|binomial.*normal|generic.*component.*closure|closure.*generic.*component",
+   "results": "{\"t\": \"2026-10-24T08:08:49Z\", \"tool\": \"grep\", \"query\": \"nodal|binomial.*normal|generic.*component.*closure|closure.*generic.*component\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a normal domain the ideals of closures of generic components in an etale algebra over xy=a are locally zero, the unit ideal, or one coordinate axis",
+   "results": "{\"t\": \"2026-10-24T08:08:49Z\", \"tool\": \"leansearch\", \"query\": \"Over a normal domain the ideals of closures of generic components in an etale algebra over xy=a are locally zero, the unit ideal, or one coordinate axis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"Algebra.unramifiedLocus\", \"Algebra.IsEtaleAt.comp\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_of_isEtaleAt\", \"Ring.instIsDedekindDomainNormalClosure\", \"FractionalIdeal.le_one_of_extendedHomₐ_le_one\", \"Algebra.etaleLocus\"], \"digest\": \"b6df9f8fdcc668f0\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-24T08:08:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of a generic component in a proper nodal curve over a valuation ring is flat of finite presentation and its intersections with other components form a finite etale scheme",
+   "results": "{\"t\": \"2026-10-24T08:08:51Z\", \"tool\": \"leanfinder\", \"query\": \"Closure of a generic component in a proper nodal curve over a valuation ring is flat of finite presentation and its intersections with other components form a finite etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"0b273eef3669a008\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-exceptional-component-specialization",
@@ -99,5 +334,70 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-nodal-generic-component-closure",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reduced to smooth and nodal charts over open valuation bases using 09Z9, isolated one general contraction-of-generic-component-ideals lemma, and proved the global geometry, complementary boundary, marking restriction, proper quasi-finite finiteness and conserved point count. Checked cited statements and small cases; no project attachment or Mathlib match.",
+  "blueprint": "The inherited semistable-alteration provenance refers to an older nearby-cycle branch of lem-trf-local-term-locality. Read the current latest blueprint: its proof now uses Varshavsky directly and does not contain that former alteration branch. This delivery splits only the already assigned auxiliary node and changes no chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "General scheme or algebra tool used for the precise statement quoted in citations.json; it does not replace a unit step."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "General scheme or algebra tool used for the precise statement quoted in citations.json; it does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "General scheme or algebra tool used for the precise statement quoted in citations.json; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "General scheme or algebra tool used for the precise statement quoted in citations.json; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "General scheme or algebra tool used for the precise statement quoted in citations.json; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "General scheme or algebra tool used for the precise statement quoted in citations.json; it does not replace a unit step."
+   },
+   {
+    "node": "lem-sfb-binomial-laurent-normal-form",
+    "why": "General scheme or algebra tool used for the precise statement quoted in citations.json; it does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-valuation-ring-normal",
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-etale-local-dimension",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sfb-binomial-laurent-normal-form"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-cf988dc44",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-cf988dc44 (reviewer sub-agent of L); spot-checked: I read all nine steps, the new node and all 32 cited statements in full, and checked the Stacks sources curves.tex 0E38 (l.4577) and 0CBY (l.5077). The statement is unchanged and no DAG node duplicates it: lem-trf-nodal-subcurve-boundary and lem-trf-stacks-nodal-closed-subcurve are only the fibrewise 0E38. Step 2: 09Z9(1) applies because V is affine étale over affine S, hence separated, and S is normal with separably closed function field. A nonempty open of the finite prime chain equals D(r) for r in p_k minus p_{k-1}. Step 3: closure commutes with pullback along open maps, and uniqueness of the reduced induced structure identifies H_U and J_U. Step 4: A_U is a reduced union of generic components with contracted ideal, so the new node applies over D=R_r. Step 5: flatness and finite presentation descend along the étale chart cover (036K, the fppf-source node), and proper plus lfp gives fp. Step 6: purity, nodality and reducedness transfer through the chart cover by lem-trf-etale-cover-field-curve-nodality and faithful flatness. Step 7: ann_E(u^n)=(v) in D[u,v]/(uv) by the binomial basis, kept after flat tensoring, so the boundary is C/(u,v), étale over D, and étaleness descends through the source cover. Step 8: the geometric supports agree by the same computation over Ω, H is clopen on the smooth locus so Q×H is clopen in Q, and B sits at nonsmooth points. Step 9: cor-pqf with no base hypothesis gives finiteness, and the finite-étale degree lemma over the connected Spec R gives the constant count. The new node lem-trf-generic-subcurve-nodal-chart-ideals is true. For polynomial E or a≠0, E is a normal domain (I checked the grading argument), C is a normal ring with finitely many generic minimal primes and so a product of domains (030C), giving (0,1) or (1,0). For a=0, the axes are locally domains, the minimal primes are uC_f and vC_f, and uC∩vC=0 by flatness, giving the four pairs. Edge cases n=0, A a field and a a unit also hold. The node is statement-only, self-contained, has three kinds of search, and is a strictly smaller local-algebra lemma, not a clause of the item. All proof deps lie on the transitive route of sk-i-curve-zero, so the 7 declared tool_uses are unnecessary but harmless. Minor: step 2 does not write out that the geometric fibres of N are pure of dimension 1, which follows from fibre dimension being invariant under field extension. The ancestor branch is obsolete (reported by the worker); its reachability is for the queue. No changes made."
+ }
 }

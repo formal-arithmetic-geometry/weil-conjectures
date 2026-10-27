@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-inertia-locally-quasifinite-diagonal",
+ "kind": "statement",
+ "title": "Relative inertia detects a locally quasi-finite diagonal",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic stacks mean [def-sfb-algebraic-moduli-stack], fibred groupoids and $2$-fibre products mean [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces mean [def-trf-algebraic-space]. A representable map is representable by algebraic spaces; its local quasi-finiteness means local quasi-finiteness after every scheme base change on etale scheme charts [pqf-def-quasifinite]. Let $f:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks over $S$. The relative inertia $I_{\\mathcal X/\\mathcal Y}$ has objects $(x,\\alpha)$ over $T$, with $x\\in\\mathcal X(T)$ and $\\alpha\\in\\operatorname{Aut}(x)$ satisfying $f(\\alpha)=1_{f(x)}$; its arrows $v:(x,\\alpha)\\to(x\\prime,\\alpha\\prime)$ satisfy $v\\alpha=\\alpha\\prime v$. The projection $I_{\\mathcal X/\\mathcal Y}\\to\\mathcal X$ and the diagonal $\\Delta_f:\\mathcal X\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ are representable by algebraic spaces. The projection is locally quasi-finite if and only if $\\Delta_f$ is locally quasi-finite. When $\\mathcal Y=S$, the relative inertia is the ordinary automorphism inertia of $\\mathcal X$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), part (5), with quasi-DM expanded as local quasi-finiteness of the relative diagonal."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "pqf-def-quasifinite",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-relative-inertia-second-diagonal-geometry], the relative diagonal and the inertia projection $p$ are representable by algebraic spaces, with exactly the objects and arrows stated here. Its last clause also identifies relative and ordinary inertia when $\\mathcal Y=S$. It remains to prove the local quasi-finiteness equivalence.",
+   "uses": [
+    "lem-sfb-relative-inertia-second-diagonal-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 04XS (lemma-properties-diagonal), 050Q (lemma-inertia), and the paragraph preceding 0CL0 (lemma-diagonal-diagonal)."
+   }
+  },
+  {
+   "text": "Write $C=\\mathcal X\\times_{\\mathcal Y}\\mathcal X$. Fix a scheme test $t=(a,b,\\alpha):T\\to C$, so $\\alpha:f(a)\\xrightarrow{\\sim}f(b)$. Its diagonal fibre is the sheaf $J$ of isomorphisms $\\phi:a\\xrightarrow{\\sim}b$ with $f(\\phi)=\\alpha$. Indeed a fibre object is $(z,i:z\\xrightarrow{\\sim}a,j:z\\xrightarrow{\\sim}b)$ with $f(j)=\\alpha f(i)$; send it to $ji^{-1}$. The inverse sends $\\phi$ to $(a,1,\\phi)$, and $i$ is the unique compatible arrow to that triple. These formulas commute with pullback since functors preserve composition and inverses. Likewise $T\\times_{b,\\mathcal X}I_{\\mathcal X/\\mathcal Y}$ is the sheaf $H=\\{\\gamma\\in\\operatorname{Aut}(b):f(\\gamma)=1\\}$. For an object $(x,\\delta,\\theta:x\\xrightarrow{\\sim}b)$ send it to $\\theta\\delta\\theta^{-1}$; the inverse uses $(b,\\gamma,1)$. Conjugation preserves the kernel condition and commutes with pullback. With $(a,b,\\alpha)=(b,b,1)$, the first identification also realizes $H$ as a diagonal fibre.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (lemma-diagonal-diagonal), proof of (4),(5), the two cartesian squares; explicit fibre calculations."
+   }
+  },
+  {
+   "text": "Suppose $\\Delta_f$ is locally quasi-finite. For every scheme $T\\to\\mathcal X$, represented by $b$, step 2 identifies the scheme base change of $p$ with the scheme base change of $\\Delta_f$ along $(b,b,1):T\\to C$. Both identifications are over $T$, so their etale scheme charts have the same projections to $T$. The latter projections are locally quasi-finite by hypothesis. This verifies every scheme test in the definition of local quasi-finiteness for $p$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (lemma-diagonal-diagonal), proof of (5), diagonal and inertia scheme tests."
+   }
+  },
+  {
+   "text": "Conversely suppose $p$ is locally quasi-finite and fix $T,a,b,\\alpha,J,H$ as in step 2. Apply [lem-sfb-stack-relative-diagonal-finite-type] to the original morphism $f$, first at $(a,b,\\alpha)$ and then at $(b,b,1)$. It states explicitly that each scheme test of $\\Delta_f$ is an algebraic space locally of finite type over its testing scheme. Thus $J\\to T$ and $H\\to T$ are locally of finite type, without any finite type hypothesis on $f$ or $T$. The second identification in step 2 and the hypothesis on $p$ make $H\\to T$ locally quasi-finite. Composition, identity and inversion in $\\operatorname{Aut}(b)$ preserve $f(\\gamma)=1$ and respect pullback; these formulas make $H$ a group algebraic space.",
+   "uses": [
+    "lem-sfb-stack-relative-diagonal-finite-type",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04XS (lemma-properties-diagonal), parts (1),(2), applied to the two tests in the proof of 0CL0(5)."
+   }
+  },
+  {
+   "text": "The action $H\\times_TJ\\to J$ is $(\\gamma,\\phi)\\mapsto\\gamma\\phi$: its image satisfies $f(\\gamma\\phi)=1\\alpha=\\alpha$, and the action laws are composition and identity in the fibre groupoid. The map $(\\gamma,\\phi)\\mapsto(\\gamma\\phi,\\phi)$ from $H\\times_TJ$ to $J\\times_TJ$ has inverse $(\\psi,\\phi)\\mapsto(\\psi\\phi^{-1},\\phi)$. Indeed $f(\\psi\\phi^{-1})=\\alpha\\alpha^{-1}=1$, and both composites cancel adjacent inverses. For any $u:T'\\to T$, pullback preserves these products and inverses; hence the displayed maps are inverse natural transformations, thus inverse algebraic-space morphisms. This proves the pseudo-torsor condition, including when $J$ is empty. No local section of $J$ is required.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CPK (lemma-isom-pseudo-torsor-aut-over-space), part (4), composition action expanded directly; used by 0CL0(5)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-locally-quasifinite-pseudo-torsor] with base $B=T$, group $G=H$ and pseudo-torsor $X=J$. Step 4 verifies local finite type for both spaces and local quasi-finiteness for the group; step 5 verifies the required action isomorphism. Thus $J\\to T$ is locally quasi-finite. Since $T,a,b,\\alpha$ were arbitrary, step 2 identifies all scheme base changes of $\\Delta_f$ with such maps. Testing their etale scheme charts proves that $\\Delta_f$ is locally quasi-finite.",
+   "uses": [
+    "lem-sfb-locally-quasifinite-pseudo-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSK (lemma-pseudo-torsor-implications), part (2), as used in the proof of 0CL0(5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-inertia-second-diagonal-geometry",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-relative-diagonal-finite-type",
+  "lem-sfb-locally-quasifinite-pseudo-torsor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), part (5), proof via relative Isom pseudo-torsors and spaces-groupoids.tex Tag 0DSK(2); fibre and action formulas written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"inertia\", \"diagonal\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia|quasi.?DM|AlgebraicStack",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inertia morphism of an algebraic stack is locally quasi finite if and only if the diagonal is locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative inertia of a morphism of algebraic stacks is locally quasi finite if and only if its diagonal is locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.quasiSeparated_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack is quasi Deligne Mumford exactly when all its automorphism group spaces are locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme morphism properties or ordinary inertia groups, not this algebraic-stack statement"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeInertia|inertiaStack|AlgebraicStack",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative inertia projection is locally quasi finite if and only if the diagonal of an algebraic stack morphism is locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.locallyQuasiFinite_iff, RingHom.QuasiFinite.propertyIsLocal, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\", \"diagonal\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative inertia of an algebraic stack morphism is locally quasi finite exactly when its relative diagonal is locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi Deligne Mumford morphism of Artin stacks is detected by locally quasi finite relative automorphism groups",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphisms, ring maps or topological group actions do not state this algebraic-space/stack assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 0CL0 (lemma-diagonal-diagonal), part (5), with quasi-DM expanded as local quasi-finiteness of the relative diagonal.",
+   "via": [
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-inertia-locally-quasifinite-diagonal",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved both directions on arbitrary scheme tests; expanded the relative Isom and automorphism identifications and the pseudo-torsor action/inverse. Reused relative-inertia geometry and the explicit scheme-test local-finite-type theorem. Created one general statement-only locally quasi-finite pseudo-torsor lemma (0DSK(2)), distinct from the existing unramified 0DSK(1) node. Searched the live project, whole DAG, current blueprint and Mathlib; no attachment or Mathlib match.",
+  "blueprint": "The inherited from.place locates this input under det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration/moduli/finite-inertia construction chain. The current latest proof (3) was read. No route is replaced. ancestor returns None, matching the inherited null from.node; its full precise place and via are retained. Steps 1–6 supply the 0CL0(5) input used by the flat locally quasi-finite presentation node. Whole-blueprint searches inertia, pseudo torsor, 0CL0, 0DSK, quasi-DM and locally quasi-finite found no equivalent imported statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-95a9f2a3d",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-95a9f2a3d (reviewer sub-agent of L); spot-checked: PASS with no fixes. The item is Stacks 0CL0(5) (stacks-morphisms.tex, lemma-diagonal-diagonal); its statement is unchanged from base and the live item is still unsplit, with no repair note. Steps: (1) relative-inertia-second-diagonal-geometry gives representability and the case Y=S. (2) The diagonal fibre at (a,b,α) is J={φ:a→b with f(φ)=α}, via (z,i,j)↦ji⁻¹ with inverse (a,1,φ); the inertia fibre at b is H=ker(Aut b→Aut f(b)), via conjugation; checked against the 2-fibre-product definition. (3) ⇒ holds because H is the diagonal fibre at (b,b,1). (4) stack-relative-diagonal-finite-type gives J and H locally of finite type over T for any f; H is locally quasi-finite by hypothesis and a group. (5) The pseudo-torsor inverse is (ψ,φ)↦(ψφ⁻¹,φ), the orientation of 0CPK(4), and it holds when J is empty. (6) The new node applies with B=T. The new node lem-sfb-locally-quasifinite-pseudo-torsor states exactly 0DSK(2) (spaces-groupoids.tex) with the 04TW pseudo-torsor condition. It has a statement only and searches of all three kinds. It is not a duplicate: the unramified 0DSK(1) sibling, 050N, 06MF and 0CL0(4) nodes are different statements. Tested on X empty, X=G, trivial G, μ_p and G_a. Batch-5: def-trf-algebraic-space is a general definition and lem-trf-space-fibre-products-etale-covers is a generic fibre-product fact, cited in stmt_deps only; neither is part of the proofs of the trace formula or Poincaré duality, so all four flagged citations are accepted. No cycle, no off-unit statements, no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InertiaLocallyQuasiFiniteDiagonal",
+  "declaration": "CategoryTheory.relative_inertia_locallyQuasiFinite_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/InertiaLocallyQuasiFiniteDiagonal.lean",
+  "statement": "theorem relative_inertia_locallyQuasiFinite_diagonal {S : AlgebraicGeometry.Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (f : BasedFunctor F G) (hF : IsAlgebraicModuliStack F) (hG : IsAlgebraicModuliStack G) : IsRepresentableByAlgebraicSpaces (relativeModuliInertiaProjection f) ∧ IsRepresentableByAlgebraicSpaces (moduliRelativeDiagonal f) ∧ (ModuliSpaceTest @AlgebraicGeometry.Scheme.Hom.IsLocallyQuasiFinite (relativeModuliInertiaProjection f) ↔ ModuliSpaceTest @AlgebraicGeometry.Scheme.Hom.IsLocallyQuasiFinite (moduliRelativeDiagonal f)) ∧ (relativeModuliInertiaToAbsolute (moduliBaseStructure F)).toFunctor.IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b9462609",
+  "group": "NP",
+  "result": "pass",
+  "note": "Node diff vs live: only stmt_deps (+def-sfb-relative-moduli-inertia, +def-sfb-dm-stack-morphism-properties, both landed on base, every used declaration recorded) and the new lean record; first S2 push, no name clash in live lean/Sheaf. Statement matches Stacks 0CL0(5) clause by clause: hF/hG IsAlgebraicModuliStack, f unconstrained; representability of relativeModuliInertiaProjection and moduliRelativeDiagonal; ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite iff on both (every étale chart of every scheme base change, same predicate as landed IsLocallyQuasiFiniteModuliMap); Y=S clause is the canonical inclusion relativeModuliInertiaToAbsolute (moduliBaseStructure F) IsEquivalence, identical to the landed relative_moduli_inertia_absolute. Universes independent, lean.statement verbatim, sorry only, no new defs, docstrings carry source, blueprint and the 6 proof steps. Edge cases covered: empty stack, identity map, BG with G_a/μ_p, large stacks. No compile run (no file changed)."
+ }
+}

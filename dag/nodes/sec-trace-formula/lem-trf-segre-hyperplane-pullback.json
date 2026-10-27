@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-segre-hyperplane-pullback",
+ "kind": "statement",
+ "title": "Pullback of the hyperplane module under the Segre embedding",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $m,n\\geq0$, and $P=\\mathbf P^m_S\\times_S\\mathbf P^n_S$ with projections $p_1,p_2$ [def-pc-fibre-product, def-nagata-relative-projective-space]. Let $\\sigma:P\\to\\mathbf P^{(m+1)(n+1)-1}_S$ be the Segre morphism [def-chow-segre]. Write $\\mathcal O_{\\mathbf P^r_S}(1)$ for the invertible module whose restriction over each affine open $\\operatorname{Spec}A\\subseteq S$ is the degree-one twisting module on $\\operatorname{Proj}(A[T_0,\\ldots,T_r])$ [def-pc-projective-space-twist, def-sc-invertible-module]. Then there is an isomorphism of $\\mathcal O_P$-modules $$\\sigma^*\\mathcal O_{\\mathbf P^{(m+1)(n+1)-1}_S}(1)\\cong p_1^*\\mathcal O_{\\mathbf P^m_S}(1)\\otimes_{\\mathcal O_P}p_2^*\\mathcal O_{\\mathbf P^n_S}(1),$$ where pullback and tensor product are [def-pc-module-pullback, def-pur-sheaf-tensor-product]. The assertion includes empty $S$ and $m=0$ or $n=0$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01WD, lemma-segre-embedding, proof: the displayed invertible sheaf pr_1^*O(1) tensor pr_2^*O(1) and its product generating sections; the pullback identification in lemma-projective-space (the projective-space representability lemma)."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-nagata-relative-projective-space",
+  "def-chow-segre",
+  "def-pc-projective-space-twist",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-symmetric-proj-tautological-chart-gluing] to the free modules of ranks $m+1$ and $n+1$. Their tautological quotient sections are the standard coordinates $X_i$ and $Y_j$ of the affine-local degree-one twists in this statement. Apply the quotient-pair bijection of [lem-trf-projective-bundle-quotient-geometry] to the $S$-morphisms $p_1,p_2$: their pulled quotient maps are surjective, so the sections $x_i=p_1^*X_i$ and $y_j=p_2^*Y_j$ generate $A=p_1^*\\mathcal O(1)$ and $B=p_2^*\\mathcal O(1)$. These are invertible, and $L=A\\otimes B$ is invertible by [lem-weil-pbc-invertible-pullback-tensor](1).",
+   "uses": [
+    "lem-trf-symmetric-proj-tautological-chart-gluing",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01WD (lemma-segre-embedding), first construction paragraph; 01OA (section-projective-bundle), quotient-functor discussion; 01OE (lemma-projective-space-bundle)."
+   }
+  },
+  {
+   "text": "By [lem-sc-tensor-generating-sections] for two factors, the $(m+1)(n+1)$ sections $s_{ij}=x_i\\otimes y_j$ generate $L$. Thus [def-weil-pbc-generating-sections] gives a surjection $q:h^*\\mathcal O_S^{\\oplus((m+1)(n+1))}\\twoheadrightarrow L$, sending the $(i,j)$-th basis section to $s_{ij}$, where $h:P\\to S$ is the structure map. Here the source is the free module on these basis sections, using $h^*\\mathcal O_S\\cong\\mathcal O_P$.",
+   "uses": [
+    "lem-sc-tensor-generating-sections",
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD (lemma-segre-embedding), product generating sections; modules.tex Tag 01AO (lemma-tensor-product-globally-generated)."
+   }
+  },
+  {
+   "text": "Use [lem-trf-line-quotient-homogeneous-fraction-map] on this $q$ to obtain $F:P\\to\\mathbf P^{(m+1)(n+1)-1}_S$. The morphism $\\sigma$ of [def-chow-segre] is defined on the base-change projective spaces $\\mathbf P(\\{0,\\ldots,r\\};S)$; transport it to the relative-Proj spaces of the statement through the canonical isomorphisms $\\theta$ of [lem-trf-free-projective-bundle-base-change-space] for $r=m,n,(m+1)(n+1)-1$. Over an affine open $U=\\operatorname{Spec}R\\subseteq S$ each $\\theta$ is the Proj comparison fixing every coordinate, so on $D_+(X_i)\\times_U D_+(Y_j)$ the transported $\\sigma$ maps into $D_+(Z_{ij})$ by $Z_{kl}/Z_{ij}\\mapsto(X_k/X_i)(Y_l/Y_j)$, the multihomogeneous coordinates of [def-chow-segre]. Cover $P$ by affine opens $W=\\operatorname{Spec}C$ over such $U$ on which $A,B$ have frames $e,f$; write $x_k=a_ke$, $y_l=c_lf$ and take $l=e\\otimes f$, so $s_{ij}=b_{ij}l$ with $b_{ij}=a_ic_j$. By the frames and transitions $X_k=(X_k/X_i)X_i$ of [lem-trf-symmetric-proj-tautological-chart-gluing], $D(a_i)=W\\cap p_1^{-1}D_+(X_i)$ and $X_k/X_i$ pulls back to $a_k/a_i$ there; likewise for $c$. Hence $D(b_{ij})=D(a_i)\\cap D(c_j)$ and on it $\\sigma$ is the $U$-morphism into $D_+(Z_{ij})$ given by $Z_{kl}/Z_{ij}\\mapsto(a_k/a_i)(c_l/c_j)=b_{kl}/b_{ij}$. That is exactly the ring map $\\rho_{ij}$ defining $F$ on $D(b_{ij})$. The $D(b_{ij})$ cover $W$ (step 2), and these $W$ cover $P$, so $F=\\sigma$ as morphisms on the relative-Proj spaces of the statement.",
+   "uses": [
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "def-chow-segre",
+    "lem-trf-free-projective-bundle-base-change-space",
+    "lem-trf-symmetric-proj-tautological-chart-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01WD (lemma-segre-embedding), product sections and displayed chart map; Tag 01O9 (lemma-invertible-map-into-relative-proj), affine homogeneous-fraction characterization.; Tag 01NF (definition-projective-space): projective space over S as the base change of the one over Z, as in the 01WD proof's reduction to S=Spec(Z)."
+   }
+  },
+  {
+   "text": "For the free module of rank $(m+1)(n+1)$, [lem-trf-projective-bundle-quotient-geometry] identifies the target and its tautological twist with exactly the relative projective space and affine-local twist used here. The morphism it attaches to $(L,q)$ is the canonical relative-Proj morphism of the graded map $h^*\\operatorname{Sym}\\to\\bigoplus_dL^{\\otimes d}$ with degree-one part $q$; by [lem-trf-line-quotient-homogeneous-fraction-map] that graded map is the unique $\\psi$ there and $F=r_{L,\\psi}$, so $F$ is the morphism attached to $(L,q)$. Its quotient-compatible isomorphism gives $F^*\\mathcal O(1)\\cong L$. Substitute $F=\\sigma$ and $L=p_1^*\\mathcal O(1)\\otimes p_2^*\\mathcal O(1)$. All applications allow arbitrary base schemes. If $S$ is empty the construction is on the empty scheme; if $m=0$ or $n=0$ the corresponding generating family has one member. Hence the same proof includes all stated boundary cases.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OA (section-projective-bundle), quotient-pair bijection; Tag 01NE (lemma-projective-space) and subsequent pullback characterization; Tag 01OE (lemma-projective-space-bundle)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-symmetric-proj-tautological-chart-gluing",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-tensor-generating-sections",
+  "def-weil-pbc-generating-sections",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "def-chow-segre",
+  "lem-trf-free-projective-bundle-base-change-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01WD (lemma-segre-embedding), first half of proof, using Section 01OA quotient-functor discussion and Tags 01O9, 01OE to keep the relative-Proj and twist identifications explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "segre|twistRestrict|nonempty_twistRestrict_segre_iso",
+   "results": "{\"t\": \"2026-10-23T04:36:45Z\", \"tool\": \"grep\", \"query\": \"segre|twistRestrict|nonempty_twistRestrict_segre_iso\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The Proj basic-open pullback comparisons and Over-category tensor formulas concern schemes, not the Segre hyperplane module isomorphism. Loogle and the source grep have no Segre/twist result. The exact project declaration is recorded separately as a Lean candidate.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Segre embedding pullback O(1) is the external tensor product O(1,1)",
+   "results": "{\"t\": \"2026-10-23T04:36:46Z\", \"tool\": \"leansearch\", \"query\": \"Segre embedding pullback O(1) is the external tensor product O(1,1)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso\", \"CategoryTheory.Over.tensorObj_hom\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"CategoryTheory.Over.tensorObj_left\", \"Bundle.pullbackTotalSpaceEmbedding\", \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"AlgebraicGeometry.Scheme.monObjAsOverPullback\"], \"digest\": \"8d299d00b940a094\"}; The Proj basic-open pullback comparisons and Over-category tensor formulas concern schemes, not the Segre hyperplane module isomorphism. Loogle and the source grep have no Segre/twist result. The exact project declaration is recorded separately as a Lean candidate.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"segre\"",
+   "results": "{\"t\": \"2026-10-23T04:36:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"segre\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The Proj basic-open pullback comparisons and Over-category tensor formulas concern schemes, not the Segre hyperplane module isomorphism. Loogle and the source grep have no Segre/twist result. The exact project declaration is recorded separately as a Lean candidate.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of the twisting sheaf O(1) along the Segre embedding of two projective spaces is the tensor product of the pullbacks of O(1) along the two projections",
+   "results": "{\"t\": \"2026-10-23T04:36:47Z\", \"tool\": \"leanfinder\", \"query\": \"The pullback of the twisting sheaf O(1) along the Segre embedding of two projective spaces is the tensor product of the pullbacks of O(1) along the two projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\"], \"digest\": \"f5fdd91e6753022e\"}; The Proj basic-open pullback comparisons and Over-category tensor formulas concern schemes, not the Segre hyperplane module isomorphism. Loogle and the source grep have no Segre/twist result. The exact project declaration is recorded separately as a Lean candidate.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The line bundle O(1,1) on a product of projective spaces is the inverse image of the hyperplane line bundle under the Segre map",
+   "results": "{\"t\": \"2026-10-23T04:38:39Z\", \"tool\": \"leanfinder\", \"query\": \"The line bundle O(1,1) on a product of projective spaces is the inverse image of the hyperplane line bundle under the Segre map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\"], \"digest\": \"f4c30ddd672877dd\"}; The Proj basic-open pullback comparisons and Over-category tensor formulas concern schemes, not the Segre hyperplane module isomorphism. Loogle and the source grep have no Segre/twist result. The exact project declaration is recorded separately as a Lean candidate.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "segre|Segre|twist.*pullback",
+   "results": "{\"t\": \"2026-10-23T10:05:15Z\", \"tool\": \"grep\", \"query\": \"segre|Segre|twist.*pullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits concern scheme fibre products, basic opens of Proj, or Picard groups of ring modules, not the stated Segre pullback of sheaf twists.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Segre morphism inverse image of O(1) equals tensor product of the two pulled back twisting sheaves",
+   "results": "{\"t\": \"2026-10-23T10:05:15Z\", \"tool\": \"leansearch\", \"query\": \"Segre morphism inverse image of O(1) equals tensor product of the two pulled back twisting sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst\", \"AlgebraicGeometry.pullbackSpecIso_inv_snd\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\"], \"digest\": \"f09fa67520754714\"}; Hits concern scheme fibre products, basic opens of Proj, or Picard groups of ring modules, not the stated Segre pullback of sheaf twists.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"segre\"",
+   "results": "{\"t\": \"2026-10-23T10:05:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"segre\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits concern scheme fibre products, basic opens of Proj, or Picard groups of ring modules, not the stated Segre pullback of sheaf twists.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the hyperplane line bundle along the Segre embedding of relative Proj projective spaces is O(1,1)",
+   "results": "{\"t\": \"2026-10-23T10:05:17Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of the hyperplane line bundle along the Segre embedding of relative Proj projective spaces is O(1,1)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\"], \"digest\": \"e9ad988ab9c47792\"}; Hits concern scheme fibre products, basic opens of Proj, or Picard groups of ring modules, not the stated Segre pullback of sheaf twists.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tautological twisting module of degree one pulls back under a bilinear projective coordinate map to the external tensor product line bundle",
+   "results": "{\"t\": \"2026-10-23T10:06:24Z\", \"tool\": \"leanfinder\", \"query\": \"The tautological twisting module of degree one pulls back under a bilinear projective coordinate map to the external tensor product line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"CommRing.Pic.mk_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\"], \"digest\": \"a52998fe57cbc5e5\"}; Hits concern scheme fibre products, basic opens of Proj, or Picard groups of ring modules, not the stated Segre pullback of sheaf twists.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-eventual-power-immersion",
+  "date": "2026-10-23",
+  "group": "Q154"
+ },
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.ProjectiveSpace.nonempty_twistRestrict_segre_iso",
+   "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist",
+   "lines": [
+    115,
+    181
+   ],
+   "kind": "theorem",
+   "sorry": false,
+   "note": "Read the full declaration and proof in lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/SegreTwist.lean:115-181. Exact isomorphism, stated for arbitrary coordinate types n,m and base S; specialize to the finite coordinate types of projective spaces. No sorry in the proof. Maintainer to verify the transitive sorry audit before attachment. The archived local/sorry_map_slopmaster2_liveb2378f05.jsonl.gz record has s=false and ts=false for this declaration (module SegreTwist, source record lines 103-181), supporting the exact attachment."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Auxiliary relative-ampleness argument: returned proof of lem-trf-relative-ample-very-ample, old steps 4, 5. All sufficiently large ample powers embed over an affine base. Final paragraph of Stacks 01VS: product of the one-power immersion and the morphism from generating sections, followed by the Segre embedding.",
+   "via": [
+    "lem-trf-affine-eventual-power-immersion",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-segre-hyperplane-pullback",
+  "worker": "stage1",
+  "summary": "Kept the statement and prior searches/candidate history; rejected the model-mismatched Lean attachment. Split Stacks 01WD into product quotient sections, coordinate-ratio identification of Segre, and the existing relative-Proj quotient pullback isomorphism. All needed facts already have DAG nodes; no new nodes.",
+  "blueprint": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Auxiliary relative-ampleness argument: returned proof of lem-trf-relative-ample-very-ample, old steps 4, 5. All sufficiently large ample powers embed over an affine base. Final paragraph of Stacks 01VS: product of the one-power immersion and the morphism from generating sections, followed by the Segre embedding.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic closure of invertible modules under pullback and tensor; the unit has no replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-sc-tensor-generating-sections",
+    "why": "Generic two-family tensor-generation lemma; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-tensor-generating-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-8d36910e0",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-8d36910e0 (reviewer sub-agent of L); spot-checked: Read the item, all 7 proof_deps statements, and Stacks constructions.tex 01WD (lemma-segre-embedding) with 01NE/01OA/01O9/01OE. The item is still unsplit in live and side-live and has no repair note. The statement is unchanged and true: tested S empty, m=0/n=0 and S=Spec Z/4. Steps 1, 2 and 4 use what their cited statements say: the chart-gluing free-module clause, the surjectivity of the quotient-pair pullback, invertible-pullback-tensor (1), and tensor generating sections for two factors. Fault C1/C4 in step 3: def-chow-segre defines σ on the base-change spaces S×_Z P^n_Z (stmt_dep def-nagata-projective-space-base-change; its blueprint_update says 'by base change'), but the step equated it with the relative-Proj fraction-map morphism F with no cited comparison ('formulas compatible with affine base restriction'). Its uniqueness sentence also checked σ only on product frames. FIX: step 3 now cites lem-trf-free-projective-bundle-base-change-space (θ, same unit, reviewed PASS, no cycle) to move σ to relative Proj. It also cites lem-trf-symmetric-proj-tautological-chart-gluing for the frames and transitions, so D(a_i)=W∩p_1^{-1}D_+(X_i) and X_k/X_i pulls back to a_k/a_i. Then σ and Spec ρ_ij agree on the cover D(b_ij). Step 4 now states F=r_{L,ψ}, the quotient-geometry morphism of (L,q), citing the fraction-map node. proof_deps is updated to the union of all uses. The tool_uses lem-weil-pbc-invertible-pullback-tensor and lem-sc-tensor-generating-sections are accepted. No duplicate: lem-chow-segre states only the closed immersion and very-ampleness. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.nonempty_twistRestrict_segre_iso",
+  "statement": "theorem nonempty_twistRestrict_segre_iso :\n    Nonempty (twistRestrict (segre n m S) 1 ≅\n      twistRestrict (pullback.fst (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S)) 1 ⊗\n        twistRestrict (pullback.snd (ℙ(n; S) ↘ S) (ℙ(m; S) ↘ S)) 1)",
+  "branch": "slopmaster2",
+  "by": "Q131",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing upstream theorem, read in full at SegreTwist.lean:103-181. Namespace binders are (n m : Type u) (S : Scheme.{u}); specialize to ULift (Fin (m+1)) and ULift (Fin (n+1)). twistRestrict is pullback of twist; the target coordinates are the product of the coordinate types. The base-change model and its twist express the same projective space and affine-local degree-one twisting module as the node, by the coordinate-preserving canonical Proj identification. No restriction on the base or nonemptiness hypothesis. No new Lean module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ca0c38fd",
+  "group": "Q131",
+  "result": "pass",
+  "note": "existing:true binding to ProjectiveSpace.nonempty_twistRestrict_segre_iso (SegreTwist.lean:115, sorry-free, statement verbatim, side-live = slopmaster2). Checked each clause: S arbitrary with no hypotheses; coordinates ULift.{u} (Fin (m+1)) and ULift.{u} (Fin (n+1)) with no universe restriction; segre, twist and the tensor product are the recorded declarations of def-chow-segre, def-pc-projective-space-twist and def-pur-sheaf-tensor-product; Nonempty iso = node's existence claim; empty S and m=0/n=0 covered. Base-change ℙ model instead of relative Proj accepted: twist/segre records exist only on ℙ, def-nagata-projective-space-base-change is 'the same scheme', canonical θ (node step 3), existence conclusion unchanged under transport; precedent lem-sfb-hilbert-uniform-section-bound. Only change vs live is the item's lean field. Advisories: ProjectiveSpace owner not a direct stmt_dep; Mathlib pullback vs recorded tensorPullback (both left adjoints of the same pushforward, canonically isomorphic). Second reading uses the accepted dispatcher wording; the one citer (affine-eventual-power-immersion step 5) only needs the iso to exist. No compile needed (no file changed)."
+ }
+}

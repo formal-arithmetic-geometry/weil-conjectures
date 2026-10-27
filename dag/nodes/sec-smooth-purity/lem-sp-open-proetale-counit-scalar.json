@@ -26,67 +26,22 @@
  ],
  "proof": [
   {
-   "text": "Put $C_T^R=\\nu_T^*$ and use superscripts $e,p$ for the two sites. Finite-type schemes over a field are Noetherian, and finite rings are Noetherian, so the finite-Tor comparison equivalence applies. Given $M\\in\\mathcal C_{X,A}$ choose $K\\in\\mathcal C^e_{X,A}$ and $C_X^AK\\simeq M$. Choose a bounded flat representative $P$ of $K$ by the finite-coefficient input-model lemma. Its scalar extensions and site pullbacks are K-flat bounded flat representatives, even when $B/A$ is not flat. Restriction carries the finite constructible stratification to its intersections with $U$; the ringed pullback theorem carries $P$ to a K-flat flat representative on $U$. Apply the compact-support-domain lemma to $j$ with identity proper factor to see that $J_R^e$ preserves the finite-Tor constructible subcategories and that all scalar-extended inputs used below remain bounded. The same follows on the pro-etale side by the specified site comparison. Thus the open adjunctions below restrict to the full categories in the statement.",
+   "text": "Use the finite-Tor open domains and etale essential surjectivity of lem-sp-etale-open-counit-flat-models to choose an etale origin K of M and certify its restriction. Its proved coefficientMap_eq identifies the identity-proper coefficient arrow with openScalarExtension.hom. The open-unit identity scalarOpen_unit in lem-pur-etale-open-scalar-exchange identifies properOpenCoefficientOpenIso with this same balancing isomorphism by injectivity of the open adjunction transpose. The counit clause of lem-coef-etale-open-tensor, with openScalarRestriction_eq from the open-scalar-exchange proof, gives the etale scalar-counit equation. Transport upper-star coordinates to exact restriction using upperStarIsoOpenImmersionRestriction. The derived counit formula follows by localization extensionality, the published exact-derived counit formula, and equality of the ordinary sheaf counits degreewise. The unbounded transport lemma identifies the actual open adjunctions and counits via the specified e_R and r_R.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-sp-finite-coefficient-input-models",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sp-finite-compact-support-domains"
+    "lem-sp-etale-open-counit-flat-models",
+    "lem-sp-unbounded-open-counit-site-transport",
+    "lem-sf-proper-open-coefficient-refinement",
+    "lem-pur-etale-open-scalar-exchange",
+    "lem-coef-etale-open-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Locality, with finite-Tor domains from Stacks more-etale.tex, remark-Rf-lower-shriek-change-of-rings"
+    "place": "Locality: transfer the ordinary open sum equation to the actual pro-etale adjunction; retained Step 12, middle paragraph"
    }
   },
   {
-   "text": "On the etale site the extension/restriction adjunction has counit induced on each extension summand by $s\\mapsto s$; on an object with no factorization through $U$ its source is zero. On the pro-etale site the defined sheafified extension by zero is likewise the exact left adjoint of restriction. Indeed, a map from its presheaf to $H$ is precisely a compatible family of maps $F(V\\to U)\\to H(V\\to X)$; sheafification extends it uniquely. Taking $F=j^*H$ and the identity family gives the actual pro-etale counit $v_R^p$, with this same evaluation formula. Exact extension and restriction induce degreewise adjunctions on complexes. Their units and counits descend through localization: the two triangle identities are identities of chain maps, and localization preserves their compositions. The resulting counits are therefore precisely $v_R^e,v_R^p$, rather than separately chosen transformations.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-cbc-proetale-extension-zero",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI, 03DJ: lemma-extension-by-zero, lemma-extension-by-zero-exact; their degreewise localization"
-   }
-  },
-  {
-   "text": "Write $e_R:C_X^RJ_R^e\\simeq J_R^pC_U^R$ for the specified open site comparison and $r_R:C_U^RU_R^e\\simeq U_R^pC_X^R$ for the canonical restriction comparison. Its unit normalization is\n$$U_R^p(e_R)\\circ r_R(J_R^e-)\\circ C_U^R(\\eta_R^e)=\\eta_R^p C_U^R.$$\nFor an etale complex $H$, transpose $h=C_X^R(v_{R,H}^e)\\circ e_R(U_R^eH)^{-1}$ under the actual pro-etale open adjunction. Substitution of this unit identity gives\n$$U_R^p(h)\\circ\\eta_R^p\n=U_R^pC_X^R(v_R^e)\\circ r_R(J_R^eU_R^eH)\\circ C_U^R(\\eta_R^e)\n=r_R(H),$$\nthe last equality being naturality of $r_R$ and $U_R^e(v_R^e)\\circ\\eta_R^e U_R^e=1$. Hence\n$$v_{R,C_X^RH}^p\\circ J_R^p(r_R(H))\\circ e_R(U_R^eH)=C_X^R(v_{R,H}^e).$$\nThis is first an equality on sheaves and then on complexes and their localizations by Step 2. For the identity proper factor, the fixed compact-support site comparison is exactly $e_R$: its proper counit mate is the identity, and the definition retains the open comparison. The finite-Tor equivalence of Step 1 therefore identifies the transported etale adjunction, including its counit, with the actual pro-etale one. This also fixes the counit intended by the adjunction-transfer statement.",
-   "uses": [
-    "lem-sf-open-comparison-unit-normalization",
-    "def-sp-fixed-compact-support-comparison",
-    "det-sp-et-proet-adjunction-transfer"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison; unit-normalized comparison and explicit counit calculation"
-   }
-  },
-  {
-   "text": "Consider first the identity-factor compactification of $j$ on the etale site. An open immersion is etale; it is separated of finite type here because it is quasi-compact and the ambient schemes are Noetherian. The etale-sum normalization clause of the coefficient-compatibility lemma identifies its specified compact-support coefficient map $\\beta_j$ with the summandwise map $t_j:T_X^eJ_A^e\\simeq J_B^eT_U^e$. On the bounded flat representative $P$ of Step 1, restriction and extension by zero are the degreewise functors, and $J_A^eU_A^eP$ is K-flat by the open scalar/site lemma applied to the restricted bounded flat complex. Thus all tensors in the following equation compute derived scalar extension. Let $a_j^e$ be the inverse of the etale scalar/pullback isomorphism in [def-pur-etale-scalar-pullback-iso]. Its prescribed K-flat restriction comparison retains $s\\otimes b$. On an extension summand both composites send $s\\otimes b$ to $s\\otimes b$ in $(P\\otimes_A B)(V)$; on an empty summand both are zero. These maps respect balancing and restrictions, so the equality descends through sheafification and degreewise localization. We obtain\n$$v_{B,T_X^eK}^e\\circ J_B^e(a_{j,K}^e)\\circ\\beta_j(U_A^eK)=T_X^e(v_{A,K}^e).$$",
-   "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "lem-sp-et-proet-coefficient-compatibility",
-    "lem-sp-open-scalar-site-coherence",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "def-pur-etale-scalar-pullback-iso",
-    "lem-weil-pbc-qc-open-immersion-finite-type"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Locality: extension by zero commutes with coefficient extension; integral evaluation calculation"
-   }
-  },
-  {
-   "text": "Set $\\delta_T:T_T^pC_T^A\\simeq C_T^BT_T^e$. For $L\\in\\mathcal C^e_{U,A}$ the coefficient/site square, specialized to the identity-factor compactification, is\n$$J_B^p(\\delta_U)\\circ b_j(C_U^AL)\\circ T_X^p(e_A(L))\n=e_B(T_U^eL)\\circ C_X^B(\\beta_j(L))\\circ\\delta_X(J_A^eL).$$\nIn particular this compares the named $b_j$, not an arbitrary tensor isomorphism. The scalar/pullback cube, specialized to $j$ and inverted in its pullback comparisons, gives\n$$U_B^p(\\delta_X(K))\\circ a_{j,C_X^AK}^p\\circ T_U^p(r_A(K))\n=r_B(T_X^eK)\\circ C_U^B(a_{j,K}^e)\\circ\\delta_U(U_A^eK).$$\nHere $a_j^p$ is exactly the inverse of the $\\lambda_j$ of the stated scalar/restriction definition: both use the same constant-ring maps and balanced K-flat comparison. The cube has no flatness hypothesis. All its inversions are inversions of canonical pullback or tensor isomorphisms, not inversions of counits.",
+   "text": "Set $\\delta_T:T_T^pC_T^A\\simeq C_T^BT_T^e$. For $L\\in\\mathcal C^e_{U,A}$ the coefficient/site square, specialized to the identity-factor compactification, is\n$$J_B^p(\\delta_U)\\circ b_j(C_U^AL)\\circ T_X^p(e_A(L))\n=e_B(T_U^eL)\\circ C_X^B(\\beta_j(L))\\circ\\delta_X(J_A^eL).$$\nIn particular this compares the named $b_j$, not an arbitrary tensor isomorphism. The scalar/pullback cube, specialized to $j$ and inverted in its pullback comparisons, gives\n$$U_B^p(\\delta_X(K))\\circ a_{j,C_X^AK}^p\\circ T_U^p(r_A(K))\n=r_B(T_X^eK)\\circ C_U^B(a_{j,K}^e)\\circ\\delta_U(U_A^eK).$$\nHere $a_j^p$ is exactly the inverse of the $\\lambda_j$ of the stated scalar/restriction definition: both use the same constant-ring maps and balanced K-flat comparison. The cube has no flatness hypothesis. All its inversions are inversions of canonical pullback or tensor isomorphisms, not inversions of counits. In the identity compactification, coefficientMap_eq from the proved flat-model module removes the proper identity factors and identifies the normalized etale arrow with properOpenCoefficientOpenIso.hom. The two definitions of compact-support site comparison agree by naturality of the bounded-below direct-image inclusion and the inclusion formulas for exact composition and natural-isomorphism comparisons.",
    "uses": [
     "lem-sp-et-proet-coefficient-compatibility",
     "lem-sfb-etale-proetale-scalar-pullback-cube",
@@ -99,7 +54,7 @@
    }
   },
   {
-   "text": "For clarity the cancellation proving the desired pro-etale equation is as follows. Put $L=U_A^eK$ and\n$$D=T_X^p\\bigl(J_A^p(r_A(K))\\circ e_A(L)\\bigr):T_X^pC_X^AJ_A^eL\\xrightarrow{\\sim}T_X^pJ_A^pU_A^pC_X^AK.$$\nPrecompose the asserted equation at $C_X^AK$ by $D$ and postcompose by $\\delta_X(K)$. Naturality of $b_j$ moves $T_X^pJ_A^p(r_A)$ across $b_j$; the first square of Step 5 replaces $J_B^p(\\delta_U)b_jT_X^p(e_A)$, and its second square replaces $U_B^p(\\delta_X)a_j^pT_U^p(r_A)$. Naturality of $v_B^p$ moves $\\delta_X(K)$ through the counit. The result for the left side is\n$$C_X^B\\bigl(v_B^e\\circ J_B^e(a_j^e)\\circ\\beta_j(U_A^eK)\\bigr)\\circ\\delta_X(J_A^eU_A^eK),$$\nusing naturality of $e_B$ and the counit equation of Step 3 over $B$. For the right side, Step 3 over $A$ followed by naturality of $\\delta_X$ gives\n$$C_X^B(T_X^e(v_A^e))\\circ\\delta_X(J_A^eU_A^eK).$$\nStep 4 equates these. Cancel the invertible $D$ and $\\delta_X(K)$ to obtain the required equation at $C_X^AK$. Naturality along $C_X^AK\\simeq M$ proves it at the original $M$.",
+   "text": "For clarity the cancellation proving the desired pro-etale equation is as follows. Put $L=U_A^eK$ and\n$$D=T_X^p\\bigl(J_A^p(r_A(K))\\circ e_A(L)\\bigr):T_X^pC_X^AJ_A^eL\\xrightarrow{\\sim}T_X^pJ_A^pU_A^pC_X^AK.$$\nPrecompose the asserted equation at $C_X^AK$ by $D$ and postcompose by $\\delta_X(K)$. Naturality of $b_j$ moves $T_X^pJ_A^p(r_A)$ across $b_j$; the first square of Step 2 replaces $J_B^p(\\delta_U)b_jT_X^p(e_A)$, and its second square replaces $U_B^p(\\delta_X)a_j^pT_U^p(r_A)$. Naturality of $v_B^p$ moves $\\delta_X(K)$ through the counit. The result for the left side is\n$$C_X^B\\bigl(v_B^e\\circ J_B^e(a_j^e)\\circ\\beta_j(U_A^eK)\\bigr)\\circ\\delta_X(J_A^eU_A^eK),$$\nusing naturality of $e_B$ and the counit equation of Step 1 over $B$. For the right side, Step 1 over $A$ followed by naturality of $\\delta_X$ gives\n$$C_X^B(T_X^e(v_A^e))\\circ\\delta_X(J_A^eU_A^eK).$$\nStep 1 equates these. Cancel the invertible $D$ and $\\delta_X(K)$ to obtain the required equation at $C_X^AK$. Naturality along $C_X^AK\\simeq M$ proves it at the original $M$.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -108,7 +63,7 @@
    }
   },
   {
-   "text": "The refinement equality of the coefficient-compatibility lemma identifies $b_j$ for every common-refinement comparison with the one just computed using the identity proper factor. Conjugating Step 6 by these fixed identifications preserves the equation; the counits remain those of Step 3. Finally the mate definition says that the transpose of the right mate of $b_j^{-1}:J_BT_U\\to T_XJ_A$ is $T_X(v_A)\\circ b_j(U_A-)^{-1}$. Step 6, composed with $b_j(U_A-)^{-1}$, says exactly that this transpose is $v_B\\circ J_B(a_j)$. Injectivity of the adjunction bijection identifies that mate with $a_j$. The argument includes zero summands, zero complexes, identity opens and empty opens; it used bounded flat representatives of inputs, never flatness of the coefficient map.",
+   "text": "The refinement equality of the coefficient-compatibility lemma identifies $b_j$ for every common-refinement comparison with the one just computed using the identity proper factor. Conjugating Step 3 by these fixed identifications preserves the equation; the counits remain those of Step 1. Finally the mate definition says that the transpose of the right mate of $b_j^{-1}:J_BT_U\\to T_XJ_A$ is $T_X(v_A)\\circ b_j(U_A-)^{-1}$. Step 3, composed with $b_j(U_A-)^{-1}$, says exactly that this transpose is $v_B\\circ J_B(a_j)$. Injectivity of the adjunction bijection identifies that mate with $a_j$. The argument includes zero summands, zero complexes, identity opens and empty opens; the flat-model declaration supplies the finite-Tor domains and etale origin, while the etale equation uses the proved balancing comparison counit and its prescribed inverse-mate normalization; no flatness of the coefficient map is used.",
    "uses": [
     "lem-sp-et-proet-coefficient-compatibility",
     "def-weil-pbc-adjunction-mate"
@@ -121,33 +76,20 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "det-pe-finite-tor-comparison-noetherian",
-  "lem-sp-finite-coefficient-input-models",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sp-finite-compact-support-domains",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-cbc-proetale-extension-zero",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-sf-open-comparison-unit-normalization",
-  "def-sp-fixed-compact-support-comparison",
-  "det-sp-et-proet-adjunction-transfer",
-  "lem-weil-pbc-open-immersion-etale",
+  "lem-sp-etale-open-counit-flat-models",
+  "lem-sp-unbounded-open-counit-site-transport",
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-pur-etale-open-scalar-exchange",
+  "lem-coef-etale-open-tensor",
   "lem-sp-et-proet-coefficient-compatibility",
-  "lem-sp-open-scalar-site-coherence",
-  "lem-pur-derived-change-of-rings",
-  "def-pur-etale-scalar-pullback-iso",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
   "lem-sfb-etale-proetale-scalar-pullback-cube",
   "def-sp-constant-scalar-pullback-comparison",
   "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Locality paragraph, expanded using the cited Stacks open-adjunction and comparison statements"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality paragraph; F3 formal assembly using proved etale balancing/unit normalization, exact-derived counit transport, and canonical identity-factor cancellation"
  },
  "mathlib_searches": [
   {
@@ -241,71 +183,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-open-proetale-counit-scalar",
   "worker": "stage1",
-  "summary": "Unchanged statement. Identified the actual degreewise pro-etale evaluation counit with transport of the etale counit by a unit-normalization calculation; proved the scalar equation on bounded flat etale models and pasted the specified left scalar/site square and restriction cube. Retained the identity-factor and common-refinement normalization. No new nodes and no Lean changes.",
-  "blueprint": "det-sp-reduction-exceptional, Locality paragraph: extension by zero commutes with scalar extension and its actual open adjunction gives the restriction mate; unit sk-lem-sp-reduction, second step.",
+  "summary": "Repair of the human re-split return: unchanged statement; extracted two comparable independent statement-only jobs, carrying old Steps 1+4 (2247 proof characters) and 2+3 (2071 characters). The parent retains the explicit scalar/site squares, cancellation, refinement and mate assembly in fewer than 3000 characters. The report retains all seven old arguments verbatim and maps them to the new jobs or assembly.",
+  "blueprint": "det-sp-reduction-exceptional Locality paragraph; unit sk-lem-sp-reduction step 2. New flat-model/etale calculation and actual unbounded adjunction-transport jobs serve this same route.",
   "tool_uses": [
-   {
-    "node": "det-pe-finite-tor-comparison-noetherian",
-    "why": "Finite-Tor etale/pro-etale equivalence supplies etale inputs for the Locality calculation; it does not replace the unit coefficient route."
-   },
-   {
-    "node": "lem-sp-finite-coefficient-input-models",
-    "why": "Generic Finite coefficient and site extension on bounded flat input models used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-sp-finite-compact-support-domains",
-    "why": "Generic Compact support and coefficient extension retain the finite-Tor domain used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-adjunction",
-    "why": "Generic Extension by zero is left adjoint to restriction (étale site) used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero",
-    "why": "Generic Extension by zero on the pro-etale site used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic Restriction and extension by zero for modules on a localized site used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-sf-open-comparison-unit-normalization",
-    "why": "Its specified open site comparison unit equation identifies the actual evaluation counit, the normalization needed by the unit."
-   },
-   {
-    "node": "det-sp-et-proet-adjunction-transfer",
-    "why": "Generic Transfer of adjunctions from étale to pro-étale finite coefficients used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
    {
     "node": "lem-sp-et-proet-coefficient-compatibility",
     "why": "Generic Finite coefficient compact-support comparison respects site transport, refinement and composition used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
    },
    {
-    "node": "lem-sp-open-scalar-site-coherence",
-    "why": "Generic Open extension scalar/site square on flat models used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used as its stated interface in the open counit calculation; no alternative exceptional or purity route is used."
-   },
-   {
     "node": "lem-sfb-etale-proetale-scalar-pullback-cube",
     "why": "Generic scalar/site/restriction cube identifies the right comparison; the unit supplies no separate normalization cube."
-   },
-   {
-    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
-    "why": "Quasi-compact opens are finite type, verifying the hypothesis of the etale-sum normalization tool without changing the unit route."
    }
   ]
  },
@@ -327,12 +217,61 @@
   "lem-weil-pbc-qc-open-immersion-finite-type"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N7-f47c97c53",
-  "group": "N7",
+  "reviewer": "NT-cc-Q05-733a53a7c",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-f47c97c53 (reviewer sub-agent of L); spot-checked: The statement is unchanged, there are no new nodes and no SGA is used. The route is the main-20261015 sk-lem-sp-reduction-exceptional Locality paragraph (b compatible with u_!). The 7 steps were recomputed. Step 3: the unit normalization of lem-sf-open-comparison-unit-normalization, followed by naturality of r and the triangle identity, gives v^p∘J^p(r)∘e = C_X(v^e), which is the det-sp-et-proet-adjunction-transfer counit with c = e for the identity proper factor. Step 4: the etale-sum clause β_j = summandwise t_j holds on the K-flat P from input-models plus open-scalar-site-coherence, and a^e_j is the inverse of def-pur-etale-scalar-pullback-iso. Step 5: the coefficient/site square (j,id) and the inverted scalar-pullback cube were checked against the node equations, with d = r^{-1} and c^{e,p} = a^{-1}. Step 6: the cancellation was redone and is correct. Step 7: the mate transpose T_X(v_A)∘b_j^{-1} = v_B∘J_B(a_j) is correct per def-weil-pbc-adjunction-mate. Edge cases U empty, j = id and the non-flat Z/ℓ²→Z/ℓ case are fine. Stacks 03DI/03DJ/09AF/remark-Rf-lower-shriek-change-of-rings were read. No duplicate was found (def-sf-open-reduction-coefficient-mate is integral and a definition only). The batch-5 flags are accepted: lem-pod-lisse-tensor-and-scalar-extension and lem-pd-module-ringed-topos-derived-comparison are generic coefficient foundations, not steps of the trace formula or Poincaré duality. All declared tool_uses are accepted. The live item is still unsplit. A parallel Q15 delivery a1c47de0 of the same item is pending; the second to land is superseded."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-733a53a7c (reviewer sub-agent of L); spot-checked: I read the mathematics in full. The re-split follows the human's 2026-10-21 note. The live item is still the N7 7-step split and no other group has re-split it since. The statement is byte-identical; only proof, proof_deps and split_report changed. Old Steps 1+4 (2247 characters) became lem-sp-etale-open-counit-flat-models, which states the finite-Tor domains for J/U/T on both sites, C as an equivalence (det-pe-finite-tor-comparison-noetherian, X qcqs), M≅C_X K, the flat P in [a,b] and K-flat models (input-models), beta_j summandwise (etale-sum clause of lem-sp-et-proet-coefficient-compatibility), and the etale equation v_B∘J_B(a^e)∘beta_j=T_X(v_A). Old Steps 2+3 (2071 characters) became lem-sp-unbounded-open-counit-site-transport, which states the actual degreewise adjunctions on C/K/D, the unit equation (lem-sf-open-comparison-unit-normalization, degreewise), the counit equation v^p∘J^p(r)∘e=C_X(v^e), which I type-checked and derived again, and fixed comparison = e for the identity factor (def-sp, D^+ inputs, inverse orientation noted). Stacks 0GL6 (more-etale l.3739) and 09AF (proetale l.5076) checked; 03DI/03DJ (sites-modules) are cited and match the standard extension-by-zero adjunction. Old Steps 5–7 are verbatim as parent Steps 2–4 (difflib: only renumbering), so the parent is a 2997-character assembly. I redid the cancellation and the mate: the transpose of mate(b^{-1}) is T_X(v_A)∘b(U_A)^{-1}=v_B∘J_B(a), so the mate is a_j. Edge cases U=∅, j=id and Z/ℓ²→Z/ℓ are fine. There are no cycles and every citation exists. Batch-5 flag: det-sp-scalar-extension-functor and coefficient-compatibility reach sec-trace-formula only through lem-trf-site-functorial-flat-resolution, a generic fact that sites have functorial flat resolutions, so I accept it. Both were already cited on the base, and the closure diff of the item adds no trace-formula or Poincaré node. Advisory: lem-coef-etale-open-tensor (etale counit equation for q_j) and lem-amb-open-site-evaluation-counit (D^+ counit equation) are partial generalisations or special cases that whoever splits these nodes can cite; they are not duplicates. The new nodes lack a lean_audit field, which is cosmetic."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenProEtaleCounitScalar",
+  "declaration": "AlgebraicGeometry.ProEtale.openProEtaleCounitScalar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.openCounitSupportIdentity",
+   "AlgebraicGeometry.ProEtale.openCounitScalarMap",
+   "AlgebraicGeometry.ProEtale.openCounitRestrictionModel",
+   "AlgebraicGeometry.ProEtale.openCounitRestrictionScalarIso",
+   "AlgebraicGeometry.ProEtale.openProEtaleCounitScalar",
+   "AlgebraicGeometry.ProEtale.openProEtaleCounitScalar_site",
+   "AlgebraicGeometry.ProEtale.openProEtaleCounitScalar_transport"
+  ],
+  "file": "lean/Sheaf/Paper/OpenProEtaleCounitScalar.lean",
+  "statement": "theorem openProEtaleCounitScalar {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] (n : ℕ) (_hA : (ell ^ n : A) = 0) (_hB : (ell ^ n : B) = 0) (φ : A →+* B) {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of k))] (M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (_hBounded : _root_.DerivedCategory.TStructure.t.bounded M) (_hConstructible : ∀ q : ℤ, IsConstructibleProEtaleFixedModuleSheaf X (ULift.{u + 1, u} A) ((_root_.DerivedCategory.homologyFunctor _ q).obj M)) (_hTor : ∃ a b : ℤ, HasFixedCoefficientProEtaleTorAmplitude X (ULift.{u + 1, u} A) M a b) : ∃ e : (liftedScalarExtension φ X).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.obj ((openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.obj M)) ≅ (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).mapDerivedCategory.obj ((liftedScalarExtension φ U).obj ((openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.obj M)), e.hom = (openCounitScalarMap φ j).app ((openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).mapDerivedCategory.obj M) ∧ (e.hom ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).mapDerivedCategory.map ((openCounitRestrictionScalarIso φ j).hom.app M) ≫ (unboundedOpenProEtaleAdjunction (ULift.{u + 1, u} B) j).counit.app ((liftedScalarExtension φ X).obj M) = (liftedScalarExtension φ X).map ((unboundedOpenProEtaleAdjunction (ULift.{u + 1, u} A) j).counit.app M)) ∧ (unboundedOpenProEtaleAdjunction (ULift.{u + 1, u} B) j).homEquiv _ _ (e.inv ≫ (liftedScalarExtension φ X).map ((unboundedOpenProEtaleAdjunction (ULift.{u + 1, u} A) j).counit.app M)) = (openCounitRestrictionScalarIso φ j).hom.app M",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The named compact-support arrow is proEtaleCoefficientMap, the genuine transport of reductionDirectImageComparison, conjugated only by the canonical identity proper-factor isomorphism. The ambient actual open evaluation adjunction is the published unboundedOpenProEtaleAdjunction. Finite-Tor inputs use intrinsic fixed-module constructibility and the recorded universal ordered Tor interval. Additional declarations state the left-map site square and the actual counit/Hom/fixed-support site transport."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-960413418",
+  "group": "NV",
+  "result": "pass",
+  "note": "Clause-by-clause match to node: k char p>0, ℓ≠p, separated finite type over k, qc open j, finite A,B killed by ℓ^n (n=0 allowed), M ∈ D^b_ctf via recorded fixed-module constructible + Tor predicates; b_j = transported recorded reductionDirectImageComparison (via proEtaleCoefficientMap) at the identity proper factor via rightDerivedLowerStarId; a_j = inverse of actual scalar mate (scalarPullbackProEtaleIso, the def node's 'equivalently' form of λ_j); v_R = framework openImmersionLowerShriekAdjunction.mapDerivedCategoryAdjunction; counit equation types checked, mate conjunct = homEquiv form; _site = node Step-2 square, _transport = counit/Hom/fixed-comparison identification. Edge cases U=∅, j=id, n=0, non-flat φ OK; no extra universe restriction. Item differs from live only in lean (live lean None); no dep record changed; statement verbatim; 7 decls exist; ≤100 chars; 3 sorry in theorems only; real def data; docstrings/proof steps present; repair note resolved; no cycle, no duplicate. No compile (no file changed). Advisories: theorem-owned unboundedOpen*/proEtaleCoefficientMap/scalarPullbackProEtaleIso and def-owned liftedScalarExtension/pbcComparisonReduction/properOpenCoefficientOpenIso used outside stmt_deps; a_j not a transport of the recorded directImageScalarPullbackIso; _transport restates landed unboundedOpenCounitSiteTransport clauses on étale finite-Tor inputs; proof-plan/stmt_dep imports unused in signature."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T095208-L-3313777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

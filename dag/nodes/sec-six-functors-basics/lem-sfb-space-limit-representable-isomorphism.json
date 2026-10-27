@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-space-limit-representable-isomorphism",
+ "kind": "statement",
+ "title": "Representable locally finitely presented isomorphisms descend along space limits",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use algebraic spaces over $S$ with their fppf sheaves and small etale structure sheaves [def-trf-algebraic-space]. All indexing sets are small in the universes of [def-weil-size-convention]. A space is quasi-compact if it admits a surjective etale chart from a quasi-compact scheme; a morphism is quasi-compact if its pullback over every affine scheme test has quasi-compact source. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$, respectively the relative diagonal for a morphism, is quasi-compact. A morphism is affine if it is representable and its pullback over every affine scheme test has affine scheme source [pqf-def-affine-morphism]. Let $I$ be a small nonempty directed set, $(X_i)_{i\\in I}$ an inverse system of quasi-compact and quasi-separated algebraic spaces over $S$ with affine transition morphisms, and suppose the fppf sheaf $X=\\varprojlim_i X_i$ is an algebraic space with its specified projections. Fix $i_0\\in I$. Let $Y_0\\to X_{i_0}$ and $T_0\\to X_{i_0}$ be representable morphisms of algebraic spaces, with $Y_0$ and $T_0$ quasi-compact and quasi-separated. Let $g_0:Y_0\\to T_0$ be an $X_{i_0}$-morphism locally of finite presentation, meaning that it is locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. If $g_0\\times_{X_{i_0}}X$ is an isomorphism, there exists $i\\ge i_0$ such that $g_0\\times_{X_{i_0}}X_i$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 084S (lemma-descend-equality), with all hypotheses of Situation 084R (situation-descent) explicit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to $J=\\{i\\in I:i\\ge i_0\\}$. It is nonempty and directed. Any compatible family over $J$ extends uniquely over $I$: at $j\\in I$, choose $k\\ge j,i_0$ and project the $k$-component; a common upper bound makes this independent of $k$. Thus the given limit is unchanged. Choose a representable surjective etale atlas $a:U_0\\to X_{i_0}$ with $U_0$ affine using [lem-trf-space-qc-finite-affine-atlas-refinement]. For $i\\in J$ put $U_i=X_i\\times_{X_{i_0}}U_0$. The maps $U_i\\to X_i$ are surjective etale by [lem-trf-space-fibre-products-etale-covers]. Each $U_i$ is an affine scheme: it is the pullback of the affine map $X_i\\to X_{i_0}$ to the affine scheme $U_0$. Likewise $U_i\\to U_j$ is affine for $i\\ge j\\ge i_0$, being the pullback of $X_i\\to X_j$ to $U_j$. Here the statements that the pullbacks are schemes and affine are exactly the representability and affine scheme-test conditions, as in [def-trf-algebraic-space].",
+   "uses": [
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084S (lemma-descend-equality), proof, affine etale reduction; Situation 084R."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-limit-affine-transition] the scheme limit $L=\\varprojlim_{i\\in J}U_i$ exists. It represents $U=X\\times_{X_{i_0}}U_0$. Indeed, for each scheme $V$ over $S$, a point of $U(V)$ is a point $u_0\\in U_0(V)$ together with a compatible family $x_i\\in X_i(V)$ whose $i_0$-component is $a(u_0)$. This is precisely a compatible family of points of $U_i(V)$, and hence, by the scheme-limit universal property, a unique map $V\\to L$. These correspondences commute with every map of test schemes and with the projections, so identify $h_L$ with $U$ as fppf sheaves. Use this identification to write $U=\\varprojlim U_i$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084S (lemma-descend-equality), proof, affine etale reduction; Situation 084R."
+   }
+  },
+  {
+   "text": "Put $P_0=Y_0\\times_{X_{i_0}}U_0$ and $Q_0=T_0\\times_{X_{i_0}}U_0$. Both are schemes by representability of $Y_0,T_0$ over $X_{i_0}$ [def-trf-algebraic-space]. The affine scheme $U_0$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]; thus $P_0,Q_0$ are qcqs by the fibre-product assertion of [lem-sfb-space-qcqs-source-products], applied over $X_{i_0}$. The map $Q_0\\to T_0$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. Apply [lem-sfb-space-local-properties-chart-test] to $g_0$ with target chart $Q_0\\to T_0$ and source chart $1_{P_0}:P_0\\to Y_0\\times_{T_0}Q_0=P_0$. It says exactly that $h_0:P_0\\to Q_0$ is locally of finite presentation as a scheme morphism.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084S (lemma-descend-equality), proof, affine etale reduction; Situation 084R."
+   }
+  },
+  {
+   "text": "Every $U_i$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-sfb-scheme-limit-isomorphism-descent] to the system $(U_i)_{i\\in J}$, with initial base $U_0$ and the morphism $h_0:P_0\\to Q_0$. Its limit base change is the pullback to $U=X\\times_{X_{i_0}}U_0$ of the assumed isomorphism over $X$, so is an isomorphism. The theorem gives $i\\ge i_0$ such that $h_i:P_0\\times_{U_0}U_i\\to Q_0\\times_{U_0}U_i$ is an isomorphism. The fibre-product universal property identifies this map with the pullback of $g_i:Y_0\\times_{X_{i_0}}X_i\\to T_0\\times_{X_{i_0}}X_i$ along $U_i\\to X_i$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-scheme-limit-isomorphism-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084S (lemma-descend-equality), proof, affine etale reduction; Situation 084R."
+   }
+  },
+  {
+   "text": "Write $Y_i=Y_0\\times_{X_{i_0}}X_i$, $T_i=T_0\\times_{X_{i_0}}X_i$. For a scheme $V$ and $t\\in T_i(V)$, its image in $X_i(V)$ lifts to $U_i$ on an fppf cover $V^{\\prime}\\to V$ by [lem-a1-representable-etale-fppf-local-lifting]. Over this cover the inverse of $h_i$ gives a lift of $t$ to $Y_i$. On the double overlap the same $U_i$-lift from either projection may be used to compare any two lifts: the base change of $g_i$ to $U_i$ is invertible, so those lifts agree. Therefore the sheaf condition for $Y_i$ glues the lift uniquely over $V$. Similarly any two lifts over $V$ agree after the cover and hence agree. The resulting bijections $Y_i(V)\\to T_i(V)$ commute with restriction, since the lifts are unique. They give an inverse natural transformation to $g_i$, hence an isomorphism of algebraic spaces [def-trf-algebraic-space]. This is the required finite stage.",
+   "uses": [
+    "lem-a1-representable-etale-fppf-local-lifting",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084S (lemma-descend-equality), proof, second omitted detail: spell out gluing of the unique local inverse in the fppf sheaves."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-scheme-limit-isomorphism-descent",
+  "lem-a1-representable-etale-fppf-local-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 084S (lemma-descend-equality), proof; omitted scheme-limit comparison and inverse gluing expanded explicitly. Scheme input: limits.tex Tag 081E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between representable finitely presented objects over an inverse limit of qcqs algebraic spaces is an isomorphism at a finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) {V : AlgebraicGeometry.Scheme} (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ V)\\n  (g : V ⟶ AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing })\\n  [AlgebraicGeometry.IsImmersion g] [CompactSpace ↥V],\\n  CategoryTheory.CategoryStruct.c\", \"doc\": \"Let $ V $ be a scheme, and let $ f: \\\\coprod_{i} \\\\operatorname{Spec}(R_i) \\\\to V $ and $ g: V \\\\to \\\\operatorname{Spec}\\\\left( \\\\prod_{i} R_i \\\\right) $ be morphisms of schemes. If $ g $ is an immersion, $ V\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} [Finite ι] (R : ι → CommRingCat), CategoryTheory.IsIso (AlgebraicGeometry.sigmaSpec R)\", \"doc\": \"For any finite index set $\\\\iota$ and a family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, if two compact open subsets $U$ and $V$ of an object $D(i)$ have equal preimages under the cone projection map $c.\\\\pi.app_\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"LightCondensed.isoFinYonedaComponents\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n    (X : LightProfinite) →\\n      [Finite ↑X.toTop] → F.obj (Opposite.op X) ≅ ↑X.toTop → F.obj (Opposite.op (LightProfinite.of PUnit.{u + 1}))\", \"doc\": \"For any finite object $X$ in the category $\\\\mathbf{LightProfinite}$ and any functor $F : \\\\mathbf{LightProfinite}^\\\\text{op} \\\\to \\\\mathbf{Type}_{u_1}$ preserving finite products, there is a canonical iso\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented morphisms between qcqs spaces representable over a fixed stage which become isomorphisms at the limit are eventually isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"IsLimit\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "grep",
+   "query": "(exists|eventually).*([Ii]so|[Ii]somorphism)|descend.*[Ii]so",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"160\", \"text\": \"    X.affineBasisCover_is_basis.exists_subset_of_mem_open (SetLike.mem_coe.2 x.prop) U.isOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"178\", \"text\": \"    obtain ⟨k, hki, hkj, yk, hyk⟩ := 𝒰.exists_lift_trans_eq ((iso.hom ≫ pullback.snd _ _) x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"612\", \"text\": \"  apply IsZariskiLocalAtTarget.of_forall_exists_morphismRestrict (P := .isomorphisms _) fun x ↦ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"208\", \"text\": \"    Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"343\", \"text\": \"    S.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (sX x)) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"119\", \"text\": \"lemma Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"187\", \"text\": \"  exact MorphismProperty.of_isPullback_of_descendsAlong (P := .isomorphisms _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"206\", \"text\": \"lemma Scheme.Hom.exists_isIso_morphismRestrict_toNormalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"211\", \"text\": \"    f.exists_mem_and_isIso_morphismRestrict_toNormalization x x.2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"312\", \"text\": \"  obtain ⟨U, hU, e⟩ := Scheme.Hom.exists_isIso_morphismRestrict_toNormalization f\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"line\": \"97\", \"text\": \"    Y).exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"line\": \"108\", \"text\": \"    (IsQuasiAffine.isBasis_basicOpen X).exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"318\", \"text\": \"    (D.obj i).isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (c.π.app i x)) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"751\", \"text\": \"      (D.obj i).isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"999\", \"text\": \"      (IsQuasiAffine.isBasis_basicOpen c.pt).exists_subset_of_mem_open hxU (c.π.app i ⁻¹ᵁ U).isOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1080\", \"text\": \"lemma Scheme.exists_isOpenCover_and_isAffine_of_finite [IsCofiltered I]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1105\", \"text\": \"lemma Scheme.exists_isOpenCover_and_isAffine [IsCofiltered I]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"392\", \"text\": \"    Scheme.exists_affine_mem_range_and_range_subset (U := ⟨_, H.base_open.isOpen_range⟩) ⟨x, rfl⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"162\", \"text\": \"    X.isBasis_affineOpens.exists_subset_of_mem_open (a := x) (by trivial) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"33\", \"text\": \"* `exists_isIntegral`: any Weierstrass curve is isomorphic to one given by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"35\", \"text\": \"* `exists_isMinimal`: any Weierstrass curve is isomorphic to one given by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"135\", \"text\": \"    simpa using X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"374\", \"text\": \"      X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"617\", \"text\": \"      X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"762\", \"text\": \"    Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ\"}\n\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of an isomorphism of representable objects over inverse limits of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.RepresentableBy.ofIsoObj\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \"{F : Cᵒᵖ ⥤ Type w} {X Y : C} (R : F.RepresentableBy X) (e : Y ≅ X) : F.RepresentableBy Y\", \"doc\": \"Given a contravariant functor $ F : \\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathrm{Type}\\\\,v $, objects $ X, Y \\\\in \\\\mathcal{C} $, and an isomorphism $ e : Y \\\\cong X $, if $ F $ is representable by $ X $, then thi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.iso\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              (D : F.DescentData f) →\\n   \", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, a family of objects $X_i \\\\to S$, and descent data \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.instIsIsoαCategoryObjLocallyDiscreteOppositeCatMkOpHom\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{Y : C} (q : Y ⟶ S) {i₁ i₂ : ι} (f₁ : Y ⟶ X i₁) (f₂ : Y ⟶ X i₂) (hf₁ : f₁ ≫ f i₁ = q) (hf₂ : f₂ ≫ f i₂ = q) :\\n  IsIso (D.hom q f₁ f₂ hf₁ hf₂)\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X: \\\\iota \\\\to \\\\mathcal{C}$\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.isoMk_hom_hom\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {ι : Type t} {S : C}\\n  {X : ι → C} {f : (i : ι) → X i ⟶ S} {D₁ D₂ : F.DescentData f} (e : (i : ι) → D₁.obj i ≅ D₂.obj i)\\n  (comm :\\n    autoParam\\n     \", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.respectsIso\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": RespectsIso F.relativelyRepresentable\", \"doc\": \"For any functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the property of being relatively representable with respect to $ F $ holds for all isomorphisms in $ \\\\mathcal{D} $. That is, every isomorphism $ f \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.isoMk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {D₁ D₂ : F.DescentData f} →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Limits.LimitPresentation.ofIso\", \"module\": \"Mathlib.CategoryTheory.Limits.Presentation\", \"type\": \"(P : LimitPresentation J X) {Y : C} (e : X ≅ Y) : LimitPresentation J Y\", \"doc\": \"Given a limit presentation structure for an object $X$ in category $\\\\mathcal{C}$ with diagrams of shape $\\\\mathcal{J}$, and an isomorphism $e: X \\\\cong Y$ in $\\\\mathcal{C}$, this constructs a limit prese\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"IsLimit\", \"Scheme\"",
+   "results": "msearch.py: OK 0 hits; returned names/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: eventual equality of existing morphisms and existence of a map are not eventual invertibility of a locally finitely presented morphism. The finite-presentation base-change results do not assert eventual invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ii]so|[Ii]so.*exists|descend.*[Ii]so",
+   "results": "msearch.py: OK 5 hits; returned names/files: 318; 751; 999; 1080; 1105; directory Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: eventual equality of existing morphisms and existence of a map are not eventual invertibility of a locally finitely presented morphism. The finite-presentation base-change results do not assert eventual invertibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented morphism becomes an isomorphism at some finite stage if its base change to an inverse limit of schemes is an isomorphism",
+   "results": "msearch.py: OK 8 hits; returned names/files: AlgebraicGeometry.LocallyOfFinitePresentation.recOn; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage; AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation; AlgebraicGeometry.LocallyOfFinitePresentation; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: eventual equality of existing morphisms and existence of a map are not eventual invertibility of a locally finitely presented morphism. The finite-presentation base-change results do not assert eventual invertibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inverse system of qcqs schemes with affine transition morphisms, a locally finitely presented morphism of qcqs schemes over a fixed stage which becomes an isomorphism over the limit is an isomorphism at a finite stage",
+   "results": "msearch.py: OK 8 hits; returned names/files: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.exists_map_eq_top; AlgebraicGeometry.exists_map_preimage_eq_map_preimage; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: eventual equality of existing morphisms and existence of a map are not eventual invertibility of a locally finitely presented morphism. The finite-presentation base-change results do not assert eventual invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "descend.*[Ii]so|[Ii]so.*(limit|stage)|eventually.*[Ii]so",
+   "results": "msearch.py: OK 25 hits; returned names/files: Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean; Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/OpenImmersion.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: eventual equality of existing morphisms and existence of a map are not eventual invertibility of a locally finitely presented morphism. The finite-presentation base-change results do not assert eventual invertibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphisms spread out from the inverse limit of quasi compact quasi separated schemes to a sufficiently large index for a morphism locally of finite presentation",
+   "results": "msearch.py: OK 8 hits; returned names/files: AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.exists_map_eq_top; AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "date": "2026-10-23",
+   "verdict": "no match: eventual equality of existing morphisms and existence of a map are not eventual invertibility of a locally finitely presented morphism. The finite-presentation base-change results do not assert eventual invertibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-limits-schematic-stages",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 07SF/07SQ/07SR: affine projections, eventual affine bases, and eventual schematic fibres; applies before any scheme-only limit lemma. Supporting lemma for the 07SF/07SQ/07SR proof: Representable locally finitely presented isomorphisms descend along space limits.",
+   "via": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-limit-representable-isomorphism",
+  "worker": "stage1",
+  "summary": "Followed Stacks 084S: reduce by one affine etale atlas to the scheme isomorphism descent theorem 081E. Expanded the two omitted details, checked qcqs and representability of the pulled-back objects, and used the chart criterion for local finite presentation. One new statement-only scheme theorem; no change to the item statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 07SF/07SQ/07SR: affine projections, eventual affine bases, and eventual schematic fibres; applies before any scheme-only limit lemma. Supporting lemma for the 07SF/07SQ/07SR proof: Representable locally finitely presented isomorphisms descend along space limits. The five steps realize the 084S supporting reduction on the existing 07SF/07SQ/07SR route; no modification of the chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic Finite affine refinement of an atlas of a quasi-compact algebraic space used in the affine etale reduction of Stacks 084S; the unit concerns functors and has no replacement for this geometric/sheaf tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings used in the affine etale reduction of Stacks 084S; the unit concerns functors and has no replacement for this geometric/sheaf tool."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic Limits of schemes along affine transition morphisms used in the affine etale reduction of Stacks 084S; the unit concerns functors and has no replacement for this geometric/sheaf tool."
+   },
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "Generic Representable surjective etale scheme maps give fppf local lifts used in the affine etale reduction of Stacks 084S; the unit concerns functors and has no replacement for this geometric/sheaf tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-a1-representable-etale-fppf-local-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-c4b4b004b",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-c4b4b004b (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. Item: it is faithful to Stacks spaces-limits 084S in Situation 084R (spaces-limits.tex:1033,1096) and keeps every hypothesis (a)-(d), with no finite presentation of Y_0 or T_0 added; the statement is unchanged. Both 'details omitted' passages are written out. Step 1 takes a cofinal tail, an affine atlas (03H6 node) and U_i affine by the affine scheme-test clause. Step 2 identifies the scheme limit of the U_i (01YX) with U sectionwise, correctly marked elementary. Step 3 gets P_0 and Q_0 as schemes from representability, qcqs from 073B(3), and h_0 lfp from the chart test with the identity source chart (Y_0 x_{T_0} Q_0 = P_0). Step 4 applies the new node over U_i with h_L the pullback of g_X. Step 5 lifts fppf-locally; injectivity uses the same U_i-lift for both preimages, then the fppf sheaf condition glues. New node lem-sfb-scheme-limit-isomorphism-descent: limits 081E in 081D (limits.tex:1739,1967), statement-only and self-contained. It assumes all B_i qcqs, which only narrows it, and the use site has every B_i affine. Small cases: a constant system; Spec Z[1/2]->Spec Z over Spec Z[1/(p_1...p_i)]; the non-lfp map Spec Q->Spec Z shows the lfp hypothesis is needed. No DAG node has 081E. Descend-open-immersion-qcqs (0EUU) plus descend-surjective (07RR) is a route for the later worker, not a duplicate. Lean exists_iso_of_isPullback (slopmaster2 AffineTransitionLimit.lean:2525) proves a different statement. No cycle. Batch 5: the two trf space lemmas (03H6 atlas, 02X2 fibre products), the chart test and the fppf local lifting are generic; their closures reach only def-trf-algebraic-space, generic trf space lemmas and lem-pod-separated-finite-type-base-change, and no nt-* assumption or trace/duality theorem. Accepted the four generic split_report.tool_uses. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceLimitRepresentableIsomorphism",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_isIso_representable_stage_of_fppf_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceLimitRepresentableIsomorphism.lean",
+  "statement": "theorem exists_isIso_representable_stage_of_fppf_limit {S : Scheme.{u}} {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ AlgebraicSpace S) (hqc : ∀ i : Iᵒᵖ, ∃ (U : Over S) (a : yoneda.obj U ⟶ (D.obj i).obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hqs : ∀ i : Iᵒᵖ, IsAbsolutelyQuasiSeparated (D.obj i)) (haff : ∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) (D.map a).hom.hom) (c : Cone D) (hc : IsLimit ((ObjectProperty.ι _).mapCone c)) (i₀ : I) (Y₀ T₀ : Over (D.obj (op i₀))) (g₀ : Y₀ ⟶ T₀) (hYrep : IsRepresentable Y₀.hom.hom.hom) (hTrep : IsRepresentable T₀.hom.hom.hom) (hYqc : ∃ (U : Over S) (a : yoneda.obj U ⟶ Y₀.left.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hYqs : IsAbsolutelyQuasiSeparated Y₀.left) (hTqc : ∃ (U : Over S) (a : yoneda.obj U ⟶ T₀.left.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) (hTqs : IsAbsolutelyQuasiSeparated T₀.left) (hlfp : MapIsLocallyOfFinitePresentation g₀.left) (hX : IsIso (((Over.pullback (c.π.app (op i₀)).hom).map ((Over.post (ObjectProperty.ι _)).map g₀)).left)) : ∃ (i : I) (hi : i₀ ≤ i), IsIso (((Over.pullback (D.map (homOfLE hi).op).hom).map ((Over.post (ObjectProperty.ι _)).map g₀)).left)",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The cone becomes a limit in fppf sheaves under the full-subcategory inclusion. Quasi-compactness uses exactly the scheme-atlas condition and quasi-separatedness uses the recorded absolute predicate. Canonical base changes are Mathlib Over.pullback applied to Over.post of the inclusion into fppf sheaves; no additional helper dependency. The fixed index supplies nonemptiness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ddd9c604",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Read the node, all 7 statement-dependency records, Stacks spaces-limits 084R/084S (l.1032/1096), the module and the report. Each 084S hypothesis (a)-(d) and each 084R assumption has a matching Lean hypothesis: quasi-compactness by a CompactSpace etale surjective atlas (node's own definition), absolute quasi-separatedness (IsAbsolutelyQuasiSeparated), affine transitions via IsRepresentableWith IsAffineHom (equivalent to the affine-test definition), limit taken in fppf sheaves via ObjectProperty.ι mapCone, Y0 and T0 representable over X_i0 and qcqs, MapIsLocallyOfFinitePresentation for g0. Hypothesis (d) and the conclusion are the canonical Over.pullback base change of g0 itself; quantifiers in order; nonemptiness from i0. Edge cases checked: constant system, i=i0, empty spaces, S not quasi-separated, lfp needed (Spec Q -> Spec Z). Added statement dependencies def-sfb-space-absolute-quasi-separated (Q09) and def-sfb-space-morphism-properties (Q104) are landed owners; no DAG cycle. lean.statement matches the file verbatim. No duplicate definitions; spaceBaseChangeMap avoided because its owner is downstream. Proof is only sorry; docstrings give source place, blueprint id and the 5 proof steps; all imported modules exist; report has Worker report and Second reading by Q45 (a self-review). No compile run because nothing changed. No findings."
+ }
+}

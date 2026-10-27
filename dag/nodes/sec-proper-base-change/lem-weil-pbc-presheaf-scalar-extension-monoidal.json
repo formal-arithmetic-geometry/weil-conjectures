@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-presheaf-scalar-extension-monoidal",
+ "kind": "statement",
+ "title": "Normalized strong monoidal scalar extension for module presheaves",
+ "statement": "Let C be a small category, R and S presheaves of commutative rings on C, and phi a morphism from R to S. The chosen left adjoint to coefficient restriction along phi, with the site functor equal to the identity, admits a strong monoidal structure for the sectionwise tensor products. The transpose of its inverse unit constraint, evaluated at X on r in R(X), is phi_X(r). No topology, flatness, nonzero-ring or nonempty-category hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CS, section-presheaves-modules, change of coefficients and its sectionwise tensor adjunction; Tag 03EL, lemma-tensor-product-pullback, tensor compatibility"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-presheaf-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Regard the presheaves as sheaves for the bottom topology and use the existing changeOfRingsPresheaf construction. Its restrictions send s tensor m to the tensor of the two restrictions. The morphism action is ordinary extension of scalars sectionwise, with naturality supplied by changeOfRingsHom_naturality. The ordinary scalar-extension Hom equivalences assemble into an adjunction: naturality of a forward map follows on 1 tensor m, and naturality of an inverse map follows by ExtendScalars.hom_ext on those generators.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-scalar-extension-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse unit and tensor isomorphisms of ordinary ModuleCat.extendScalars on each section. The unit comparison commutes with restrictions by naturality of phi; the tensor comparison commutes because restrictions send 1 tensor (m tensor n) to 1 tensor (M(f)m tensor N(f)n). The tensor Hom universal property reduces this check to pure tensors. All five oplax coherence and naturality laws are precisely the corresponding ordinary-module laws evaluated on each object. CoreMonoidal.mk′ packages them into a strong monoidal structure.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-pur-presheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructed sectionwise adjunction and the chosen pullback adjunction have the same right adjoint. Transport the monoidal structure along leftAdjointUniq. The compatibility of its inverse with the adjunction units identifies the transpose of the transported inverse unit with the original sectionwise transpose, namely r maps to phi(r).",
+   "uses": [
+    "lem-weil-pbc-scalar-extension-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-scalar-extension-hom",
+  "def-weil-module-base-change",
+  "def-pur-presheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CS and 03EL",
+  "note": "Formal sectionwise construction using the existing source-library tensor presheaf and Mathlib monoidal scalar extension; transport uses uniqueness of adjoints."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars presheaf of modules strong monoidal sheafification",
+   "results": "Sheafify and sheafification results, and a monoidal light-condensed sheafification instance; no direct presheaf scalar-extension monoidal theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Monoidal.transport",
+   "results": "Service returned unknown identifier, no hits. The declaration was subsequently read in the pinned Mathlib source.",
+   "date": "2026-10-26",
+   "verdict": "unknown identifier in search service"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationMonoidal|leftAdjointOplaxMonoidal|pushforward₀OfCommRingCat",
+   "results": "Seven hits including Adjunction.leftAdjointOplaxMonoidal and the strong monoidal reindexing functor. Read ModuleCat.Monoidal.Adjunction and the source TensorProduct module to construct the required comparison.",
+   "date": "2026-10-26",
+   "verdict": "used source APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalSectionModuleOplaxNormalized",
+  "date": "2026-10-26",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-global-section-module-monoidal-oplax",
+   "place": "Sectionwise extension-of-scalars tensor comparison, before the constant-functor and sheafification steps. The inherited earlier blueprint ancestry stops at a module name.",
+   "via": [
+    "lem-weil-pbc-global-section-module-monoidal-oplax"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.ScalarExtensionMonoidal",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/ScalarExtensionMonoidal.lean",
+  "declaration": "PresheafOfModules.exists_pullback_monoidal_normalized",
+  "declarations": [
+   "PresheafOfModules.exists_pullback_monoidal_normalized"
+  ],
+  "statement": "theorem exists_pullback_monoidal_normalized\n    {C : Type u} [SmallCategory C]\n    (R S : Cᵒᵖ ⥤ CommRingCat.{u})\n    (φ : (R ⋙ forget₂ CommRingCat.{u} RingCat.{u}) ⟶\n      (𝟭 C).op ⋙ (S ⋙ forget₂ CommRingCat.{u} RingCat.{u})) :\n    ∃ mon : (pullback.{u} φ).Monoidal,\n      letI := mon\n      ∀ (X : Cᵒᵖ) (r : R.obj X),\n        ((pullbackPushforwardAdjunction φ).homEquiv _ _\n          (Functor.OplaxMonoidal.η (pullback φ))).app X r = φ.app X r",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T130612-L-3481778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261026T130612-L-3481778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

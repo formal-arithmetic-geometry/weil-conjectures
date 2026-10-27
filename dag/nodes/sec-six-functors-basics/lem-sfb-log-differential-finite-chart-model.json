@@ -1,0 +1,511 @@
+{
+ "id": "lem-sfb-log-differential-finite-chart-model",
+ "kind": "statement",
+ "title": "Finite chart models and etale localization of logarithmic differentials",
+ "statement": "Let $f:(X,M)\\to(Y,N)$ be a morphism of locally Noetherian fs log schemes [def-trf-fs-log-blowup], whose underlying scheme map is locally of finite presentation [def-sbc-locally-finite-presentation]. Define $\\omega_f$ on the small etale site [def-weil-pbc-etale-site] by sheafifying [def-weil-pbc-sheafification] the $\\mathcal O_X$-module on symbols $da$ for functions and $d\\log m$ for log sections, with relations: $d$ is additive, $d(ab)=a\\,db+b\\,da$, $d\\log(mm')=d\\log m+d\\log m'$, $d\\alpha(m)=\\alpha(m)d\\log m$, and $dc=d\\log n=0$ for functions and log sections pulled back from $Y$.\n\nEvery geometric point [def-weil-pbc-geometric-stalks] has a pointed etale neighbourhood $U=\\operatorname{Spec}A\\to X$ mapping to an affine etale neighbourhood $V=\\operatorname{Spec}R\\to Y$, with pulled-back log structures and a chart $P\\to M|_U$ by a finitely generated integral monoid, and a finitely presented $A$-module $W$ such that $\\omega_{U/V}(\\operatorname{Spec}B)\\cong B\\otimes_AW$ for every affine etale $\\operatorname{Spec}B\\to U$. Here finitely presented means the cokernel of a map $A^u\\to A^v$ for finite $u,v$. These isomorphisms respect restriction, scalar multiplication, and the symbols $da,d\\log m$; thus they identify $\\omega_{U/V}$ with the module sheaf given by this tensor formula.\n\nMore generally, for any commutative square $f':X'\\to Y'$, $g:X'\\to X$, $h:Y'\\to Y$, $hf'=fg$, where $g,h$ are etale [def-weil-etale-morphism] and both log structures are pulled back, the canonical map $g^*\\omega_f\\to\\omega_{f'}$ is an isomorphism. Its formulas are $1\\otimes da\\mapsto d(g^\\sharp a)$ and $1\\otimes d\\log m\\mapsto d\\log(g^\\flat m)$. Here $g^*\\omega_f=\\mathcal O_{X'}\\otimes_{g^{-1}\\mathcal O_X}g^{-1}\\omega_f$. No infinitesimal lifting or smoothness assumption is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.6.3 proof, printed p.252 (log differential sheaf). Precise general input: Kato, Logarithmic structures of Fontaine--Illusie, 1.7, 2.1 and chart discussion 2.9, printed pp.195--200; WANTED locally, primary source read online. Etale localization uses the ordinary formally etale differential comparison.",
+  "external": "https://math.uchicago.edu/~drinfeld/p-adic_periods/Kato_log-structures.pdf"
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-geometric-stalks",
+  "def-per-log-differential-sheaf",
+  "def-per-etale-differential-pullback-presentation",
+  "def-trf-log-ideal-chart-presentation",
+  "def-sfb-log-infinitesimal-lifting-properties"
+ ],
+ "proof": [
+  {
+   "text": "First record an ordinary etale calculation that will be used below. If $R\\to A\\to B$ are ring maps with $A\\to B$ etale, and $H$ is any $B$-module, restriction gives a bijection $\\operatorname{Der}_R(B,H)\\to\\operatorname{Der}_R(A,H)$. Indeed form the ring $B\\oplus H$ with $(b,h)(b',h')=(bb',bh'+b'h)$, square-zero ideal $0\\oplus H$, and $A$-structure $a\\mapsto(\\bar a,D(a))$. The unique infinitesimal lifting property of the etale map gives a unique $A$-map $B\\to B\\oplus H$ lifting $\\mathrm{id}_B$. It has the form $b\\mapsto(b,\\widetilde D(b))$, and the ring-map equations say exactly that $\\widetilde D$ is an $R$-derivation extending $D$. The cited lifting theorem applies because etale implies flat and unramified; it requires no Noetherian condition on the test ring. In particular derivations over an etale base vanish. If also $R\\to R'$ is etale and $R'\\to B$ is compatible, every extended $R$-derivation of $B$ kills $R'$: its restriction to $R'$ and zero are the two lifts of the zero derivation on $R$, hence agree.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Definition 02HG (definition-formally-etale); square-zero calculation from the unique-lifting statement of lem-weil-pbc-flat-unramified-formally-etale"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ of $X$. By the definition of an fs log scheme choose an affine pointed etale chart neighbourhood $V\\to Y$ of $f(\\bar x)$ with chart $Q$, and a pointed etale chart neighbourhood of $\\bar x$ over $X\\times_Y V$ with chart $P$. The fibre-product point is the pair of the chosen lifts. Etale base change and composition ensure that the latter neighbourhood is etale over $X$. These charts may be refined by affine opens. Both $P$ and $Q$ are finitely generated integral monoids. All log structures in these choices are the pulled-back ones. Every map here is a scheme morphism, hence representable by algebraic spaces over $Y$; thus the current representability hypothesis of the cited calculus holds.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1--1.2, charts of fine log structures; explicit neighbourhood refinement below the chart discussion used in XVI 3.6.3"
+   }
+  },
+  {
+   "text": "Choose monoid generators $q_1,\\ldots,q_s$ of $Q$ and write $m_i=f^\\flat(q_i)$ on the source chart neighbourhood. The associated-log description says that the germ of each $m_i$ has the form $[v_i,u_i]$ with $v_i\\in P$ and $u_i$ an invertible function germ. The stalk colimit and cofilteredness let us lift these finitely many units and equalities simultaneously to one pointed etale refinement. Equivalently the local-section description of sheafification gives representatives $m_i=[v_i,u_i]$ there. Shrink further so all $u_i$ remain units. We do not assert a homomorphism $Q\\to P$ or select compatible lifts of the relations of $Q$; only the finitely many displayed log sections are used.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1--1.2, associated log structure and chart pushout; simultaneous refinement by the geometric-stalk definition"
+   }
+  },
+  {
+   "text": "After these refinements the underlying map to $V$ is locally of finite presentation, by the base-change and composition calculus and the fact that etale morphisms are locally of finite presentation. Its definition allows us to replace the two neighbourhoods by affine opens $U=\\operatorname{Spec}A$ and $V=\\operatorname{Spec}R$ with $A=R[x_1,\\ldots,x_n]/(F_1,\\ldots,F_l)$. All previously chosen charts and identities restrict to these opens. The source $U$ is locally Noetherian: $U\\to X$ is etale, hence locally of finite type, and $X$ is locally Noetherian. Therefore $A$ is Noetherian by the affine-open theorem, applied to the whole of $U$. This is the only use of Noetherianity below.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-etale-morphism",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Local finite presentation and locally Noetherian sources; apply the cited definitions and permanence statements after chart refinement"
+   }
+  },
+  {
+   "text": "Let $\\beta:P\\to A$ be the source chart, and let $[p]\\in P^{\\rm gp}$ denote the class of $p$. Form\n$$E=\\Omega_{A/R}\\oplus(A\\otimes_{\\mathbf Z}P^{\\rm gp}).$$\nWrite $\\lambda_p=(0,1\\otimes[p])$. Define $W$ as the quotient of $E$ by the $A$-submodule generated by\n$$(d\\beta(p),0)-\\beta(p)\\lambda_p\\quad(p\\in P),\\qquad (u_i^{-1}du_i,0)+\\lambda_{v_i}\\quad(1\\le i\\le s).$$\nWe use the same notation for the images of $da$ and $\\lambda_p$ in $W$. Thus the construction imposes the source structural relations and kills the chosen generators of the base log structure. It does not use a lifting or smoothness hypothesis.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Explicit chart quotient derived from the defining log-differential relations; agent calculation supplementing XVI 3.6.3"
+   }
+  },
+  {
+   "text": "The Leibniz and additivity relations show that $\\Omega_{A/R}$ is generated by $dx_1,\\ldots,dx_n$: differentiate a polynomial expression for any $a\\in A$, with $dr=0$ for $r\\in R$. If $p_1,\\ldots,p_t$ generate $P$, then their classes generate $P^{\\rm gp}$ as an abelian group, so the $\\lambda_{p_j}$ generate $A\\otimes_{\\mathbf Z}P^{\\rm gp}$. Consequently $W$ is generated by the images of these $n+t$ elements. The cited Noetherian finite-module theorem now gives a finite presentation $A^u\\to A^v\\to W\\to0$. There is no need to claim that the displayed possibly infinite set of structural relations itself is finite, nor to assume $P^{\\rm gp}$ is torsion-free.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-trf-fs-log-blowup",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite generation from the universal differential relations; Noetherian finite presentation (lemma-Noetherian-finite-type-is-finite-presentation, part (1))"
+   }
+  },
+  {
+   "text": "Let $\\mathcal H=(\\widetilde W)_{\\rm et}$. The affine associated-module theorem supplies the quasi-coherent sheaf $\\widetilde W$ with $\\Gamma(U,\\widetilde W)=W$ (take the principal open $D(1)$). Quasi-coherent etale descent makes $T\\mapsto\\Gamma(T,t^*\\widetilde W)$ a sheaf on $U_{\\rm et}$. For every affine etale $t:T=\\operatorname{Spec}B\\to U$, affine pullback sections give\n$$\\mathcal H(T)=B\\otimes_AW,$$\nwith the map on a pure tensor equal to multiplication by $b$ of the pulled-back section $w$. These identifications are natural in $W$. Restrictions between affine objects are $b\\otimes w\\mapsto\\rho(b)\\otimes w$: the pullback of a section pulled back from $U$ is its pullback along the composite, and the scalar action restricts by $\\rho$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-etale-qcoherent-descent",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "lemma-spec-sheaves and Lemma 01I9 (lemma-widetilde-pullback); etale sheaf descent as stated in lem-sc-etale-qcoherent-descent"
+   }
+  },
+  {
+   "text": "For an affine etale $T=\\operatorname{Spec}B\\to U$, extend the derivation $A\\to B\\otimes_AW$, $a\\mapsto1\\otimes da$, uniquely to an $R$-derivation $D_B:B\\to B\\otimes_AW$ using step 1. For a map of affine etale $U$-objects with ring map $B\\to C$, the two derivations from $B$ to $C\\otimes_AW$ obtained by restricting $D_C$ or extending scalars in $D_B$ agree on $A$, hence agree by step 1. Thus these are a derivation of sheaves $D:\\mathcal O_U\\to\\mathcal H$, with the analogous formula on nonaffine objects obtained by gluing on affine opens.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Application of the etale extension calculation of step 1, with the universal derivation into the explicitly constructed quotient"
+   }
+  },
+  {
+   "text": "On a local representative $[p,u]$ of the source associated log structure define\n$$\\delta([p,u])=1\\otimes\\lambda_p+u^{-1}D(u).$$\nThis is well defined on its pushout: for $e$ with $\\beta(e)$ a unit, the relation in $W$ gives $1\\otimes\\lambda_e=\\beta(e)^{-1}D(\\beta(e))$, so the representatives $[pe,u]$ and $[p,\\beta(e)u]$ have the same value. The Leibniz rule gives $(uv)^{-1}D(uv)=u^{-1}D(u)+v^{-1}D(v)$, hence additivity under monoid multiplication. Also\n$$D(\\beta(p)u)=\\beta(p)u\\bigl(1\\otimes\\lambda_p+u^{-1}D(u)\\bigr).$$\nThe associated-log node identifies $M|_U$ with the sheafification of these pushouts. The displayed maps respect restrictions, so sheafification extends them uniquely to $\\delta:M|_U\\to\\mathcal H$ satisfying $D\\alpha(m)=\\alpha(m)\\delta(m)$. In particular the calculation proves the extension across logification rather than invoking an unnamed log-differential comparison theorem.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1--1.2 associated-log pushout, explicit derivation calculation; the quotient relations are those suggested by the log differential in XVI 3.6.3"
+   }
+  },
+  {
+   "text": "The pair $(D,\\delta)$ kills the base ring and base log sections, including those defined only etale locally on $V$. Indeed any such function is locally on an affine etale $\\operatorname{Spec}R'\\to V$; its pullback has derivative zero by the last assertion of step 1. Any base log section is etale locally $[q,c]$ in the associated-log chart $Q$, with $c$ a unit of such an $R'$. Since $q$ is a product of the $q_i$, its image has $\\delta$ equal to the sum of the $\\delta(m_i)$, each zero by the second family of relations defining $W$. The unit contributes $c^{-1}D(c)=0$. Local representatives suffice because the target $\\mathcal H$ is a sheaf. This checks all base relations, not just the global functions in $R$ or the selected $q_i$.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Explicit verification of all base relations for the chart quotient, including etale-local base functions and units"
+   }
+  },
+  {
+   "text": "Send each differential symbol $db$ to $D(b)$ and each log symbol $d\\log m$ to $\\delta(m)$. Steps 8--10 verify additivity, Leibniz, monoid additivity, the structural relation and all base relations. The maps commute with restrictions, so the universal property of sheafification gives a map $\\Phi:\\omega_{U/V}\\to\\mathcal H$. Conversely send $da\\in W$ to the differential of $a$ in $\\omega_{U/V}(U)$ and $\\lambda_p$ to $d\\log p$. The universal property of $\\Omega_{A/R}$ supplies the first summand's map. The defining relations of $W$ hold in $\\omega_{U/V}$; for the second family use $d\\log m_i=0$ and $d\\log u_i=u_i^{-1}du_i$. This gives $W\\to\\omega_{U/V}(U)$. On affine etale $T$ extend it by $b\\otimes w\\mapsto b\\,w|_T$. The tensor restriction formula in step 7 makes these maps compatible; affine cover density and the sheaf gluing axiom extend them uniquely to $\\Psi:\\mathcal H\\to\\omega_{U/V}$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Construction of the two comparison maps from the symbol relations; agent proof supplementing the log-differential use in XVI 3.6.3"
+   }
+  },
+  {
+   "text": "The composite $\\Phi\\Psi$ fixes $1\\otimes da$ and $1\\otimes\\lambda_p$, hence every $b\\otimes w$. For $\\Psi\\Phi$, the induced derivation on an affine etale $B$ with values in $\\omega_{U/V}(\\operatorname{Spec}B)$ agrees with $b\\mapsto db$ on $A$; uniqueness in step 1 makes it agree on every $b\\in B$. On a log representative $[p,u]$ it gives $d\\log p+u^{-1}du=d\\log[p,u]$, since $du=u\\,d\\log u$ for a unit. Local representatives and sheaf gluing give equality on every log symbol. The composites are therefore identities. Hence $\\omega_{U/V}\\simeq\\mathcal H$ on the entire small etale site, with affine sections $B\\otimes_AW$ and the required scalar, restriction and symbol formulas.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Verification of the inverse maps on functions and associated-log representatives; no smoothness assumption"
+   }
+  },
+  {
+   "text": "We also check that the chart computation calculates the restriction of the original $\\omega_f$. For the etale map $j:U\\to X$, the inverse-image restriction theorem identifies $j^{-1}\\omega_f$ with $\\omega_f|_U$. The same restriction identifies $j^{-1}\\mathcal O_X$ with $\\mathcal O_U$, since on $T\\to U$ both assign $\\Gamma(T,\\mathcal O_T)$; hence the tensor formula gives $j^*\\omega_f=\\omega_f|_U$. The etale slice equivalence identifies the local source symbols with those on $U_{\\rm et}$. Restriction of their sheafification has the same local generators and relations: sections of a sheafification are locally represented, and equality of two representatives is local, by the cited local-section theorem. The maps and inverse check of steps 8--12 thus work for $\\omega_f|_U$ as well. Here $R$ and the $q_i$ already define base symbols through the etale object $V\\to Y$. For any other base symbol on an etale $Z\\to Y$, pull back along $Z\\times_YV\\to V$ and refine by affine opens; this is etale over $V$, so step 10 kills that symbol too. Therefore the canonical identifications are $j^*\\omega_f\\simeq\\omega_{U/V}\\simeq\\mathcal H$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03S2 (section-extension-by-zero), inverse image is restriction; Sites Section 00XZ (section-localize); local representatives and equalities in sheafification as quoted in lem-weil-pbc-site-sheafification-sections-local"
+   }
+  },
+  {
+   "text": "Now take the general square in the statement. Etale locally on $X'$ and $Y'$ refine the above chart neighbourhoods to affine compatible neighbourhoods $U'=\\operatorname{Spec}B$ and $V'=\\operatorname{Spec}R'$ mapping to $U$ and $V$, with $A\\to B$ and $R\\to R'$ etale. Explicitly choose an affine pointed refinement $V'$ of $Y'\\times_YV$, then an affine pointed refinement $U'$ of $X'\\times_{Y'}V'\\times_{X\\times_YV}U$. The map to $U$ is etale: before the open refinements it is a composite of base changes of $g$ and $V'\\to V$. Thus both ring maps are etale. Because the log structures are pulled back, $P$ and $Q$ remain charts and the base log generators are still $[v_i,u_i|_{U'}]$. Step 1 gives a bijection between $R'$-derivations of $B$ and $R$-derivations of $A$ with values in any $B$-module: extension along $A\\to B$ is unique, and it kills $R'$ by etaleness of $R\\to R'$. For the log part the formula in step 9 adjoins precisely the new units, with their forced values $u^{-1}D(u)$. If $\\beta(p)$ becomes a unit only in $B$, the scalar-extended structural relation forces $\\lambda_p=\\beta(p)^{-1}D(\\beta(p))$, so logification still respects that relation. For any $B$-module $H$, a map $B\\otimes_AW\\to H$ is exactly an $R$-derivation of $A$ and an additive map $P^{\\rm gp}\\to H$ satisfying the two relation families of step 5. Extend the derivation uniquely to $B$ and extend the log map by the unit formula of step 9; these satisfy all $R'$ and base-log relations by step 10. Conversely restriction recovers the two maps and their relations. The extensions are unique and inverse to restriction. Thus the same quotient relations as in step 5, extended to $B$, give the symbol sheaf for $U'/V'$; the explicit inverse-map verification in steps 8--12 applies unchanged and identifies it with $(\\widetilde{B\\otimes_AW})_{\\rm et}$. This argument does not assume that the square is cartesian.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-associated-log-universal-stalks",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Etale localization of the symbol construction: source and base derivation comparisons and the associated-log unit formula, proved explicitly"
+   }
+  },
+  {
+   "text": "The quasi-coherent change-of-topology comparison identifies the ringed-etale tensor pullback of $(\\widetilde W)_{\\rm et}$ with the etale sheaf associated to the ordinary module pullback of $\\widetilde W$. Affine tilde pullback identifies the latter with $(\\widetilde{B\\otimes_AW})_{\\rm et}$. Combined with steps 13--14 this makes the canonical map $g^*\\omega_f\\to\\omega_{f'}$ an isomorphism on the chosen neighbourhoods. It is the canonical map because its effect is $1\\otimes da\\mapsto d(g^\\sharp a)$ and $1\\otimes d\\log m\\mapsto d\\log(g^\\flat m)$. The same formulas hold on overlaps and determine the maps on local symbol generators, so the local inverses agree on overlaps and glue uniquely to a global inverse. This also shows that every identification respects scalar multiplication and restriction, and completes both assertions.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Lemma 01I9 (lemma-widetilde-pullback), with the canonical etale pullback comparison in lem-trf-scheme-zariski-etale-quasi-coherent-equivalence; equality and gluing on symbol generators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "def-trf-fs-log-blowup",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-trf-associated-log-universal-stalks",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-tilde-pullback-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1--1.2 and XVI 3.6.3, printed p.252, supply the chart context, not this complete lemma. Explicit symbol-and-unit proof by Q03 using the cited Stacks inputs. Kato 1.7 and 2.1 WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogDifferential|LogarithmicDifferential",
+   "results": "{\"t\": \"2026-10-22T05:32:39Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogDifferential|LogarithmicDifferential\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary Kahler differentials, ordinary smoothness or module presentations, without log structures, monoid symbols or their relations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The chart presentation of log differentials is a finitely presented module and commutes with etale localization of fine log schemes",
+   "results": "{\"t\": \"2026-10-22T05:32:40Z\", \"tool\": \"leansearch\", \"query\": \"The chart presentation of log differentials is a finitely presented module and commutes with etale localization of fine log schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationLocalizationLocalizedModule\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"KaehlerDifferential.isLocalizedModule\", \"Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"cb823225b0cab695\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary Kahler differentials, ordinary smoothness or module presentations, without log structures, monoid symbols or their relations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"FinitePresentation\"",
+   "results": "{\"t\": \"2026-10-22T05:32:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"FinitePresentation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\"], \"digest\": \"ead6974278a8cd7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary Kahler differentials, ordinary smoothness or module presentations, without log structures, monoid symbols or their relations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of fine log schemes logarithmic Kähler differentials have a finite presentation in monoid charts and commute with strict etale localization",
+   "results": "{\"t\": \"2026-10-22T05:32:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of fine log schemes logarithmic Kähler differentials have a finite presentation in monoid charts and commute with strict etale localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.finite\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.Etale.finitePresentation\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"digest\": \"b9a19f7c7459f802\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary Kahler differentials, ordinary smoothness or module presentations, without log structures, monoid symbols or their relations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of ordinary Kahler differentials plus the tensor of a chart monoid group completion by the d alpha equals alpha dlog relations represents logarithmic differentials",
+   "results": "{\"t\": \"2026-10-22T05:33:53Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of ordinary Kahler differentials plus the tensor of a chart monoid group completion by the d alpha equals alpha dlog relations represents logarithmic differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationQuotKerTotal\", \"Algebra.Generators.H1Cotangent.δAux\", \"KaehlerDifferential\", \"KaehlerDifferential.derivationQuotKerTotal_apply\", \"Algebra.Presentation.differentialsSolution\", \"KaehlerDifferential.quotKerTotalEquiv_apply\", \"KaehlerDifferential.quotKerTotalEquiv_symm_apply\", \"CommRingCat.KaehlerDifferential.d\"], \"digest\": \"279f1aadccb00c3c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary Kahler differentials, ordinary smoothness or module presentations, without log structures, monoid symbols or their relations"
+  },
+  {
+   "tool": "grep",
+   "query": "instFinitePresentationKaehlerDifferentialOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-22T05:36:19Z\", \"tool\": \"grep\", \"query\": \"instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"sub\": \"RingTheory/Extension/Cotangent/Basic.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the actual output concerns ordinary Kahler differentials, without log structures or monoid relations"
+  },
+  {
+   "tool": "grep",
+   "query": "isBaseChange_of_formallyEtale|tensorKaehlerEquivOfFormallyEtale",
+   "results": "{\"t\": \"2026-10-22T05:36:19Z\", \"tool\": \"grep\", \"query\": \"isBaseChange_of_formallyEtale|tensorKaehlerEquivOfFormallyEtale\", \"sub\": \"RingTheory/Etale/Kaehler.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"38\", \"47\", \"49\", \"50\"], \"digest\": \"47a379aa9385f1f6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the actual output concerns ordinary Kahler differentials, without log structures or monoid relations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of fine log schemes locally of finite presentation over locally noetherian schemes the logarithmic differential sheaf is finitely presented and commutes with strict etale localization",
+   "results": "{\"t\": \"2026-10-22T06:21:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of fine log schemes locally of finite presentation over locally noetherian schemes the logarithmic differential sheaf is finitely presented and commutes with strict etale localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.Etale.finitePresentation\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.isOpen_etaleLocus\", \"KaehlerDifferential.finite\", \"Algebra.FormallyEtale.of_isLocalization\"], \"digest\": \"cb0033c86d011a46\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Kahler differentials, ordinary derivations or differential fields, not the logarithmic chart-and-etale sheaf statement"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogDifferential|LogarithmicDifferential",
+   "results": "{\"t\": \"2026-10-22T06:22:20Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogDifferential|LogarithmicDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no prelog/log-structure or logarithmic-differential development in the source searched"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logarithmic differential module of fine log schemes is coherent and commutes with etale restriction",
+   "results": "{\"t\": \"2026-10-22T06:22:21Z\", \"tool\": \"leansearch\", \"query\": \"Logarithmic differential module of fine log schemes is coherent and commutes with etale restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Differential.logDeriv_algebraMap\", \"KaehlerDifferential.isLocalizedModule_map\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"RingHom.Etale\"], \"digest\": \"5a327a3f2019acd0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Kahler differentials, ordinary derivations or differential fields, not the logarithmic chart-and-etale sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"FormallyEtale\"",
+   "results": "{\"t\": \"2026-10-22T06:22:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"FormallyEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"29c4cb60d87f5b73\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Kahler differentials, ordinary derivations or differential fields, not the logarithmic chart-and-etale sheaf statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logification of a prelog ring does not change the module of logarithmic derivations with coefficients in an arbitrary module",
+   "results": "{\"t\": \"2026-10-22T06:25:45Z\", \"tool\": \"leanfinder\", \"query\": \"Logification of a prelog ring does not change the module of logarithmic derivations with coefficients in an arbitrary module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"algebraMap.coe_logDeriv\", \"KaehlerDifferential.linearMapEquivDerivation\", \"Differential.logDeriv_algebraMap\", \"KaehlerDifferential.linearMapEquivDerivation_apply_apply\", \"KaehlerDifferential.endEquivDerivation'\", \"Derivation.liftKaehlerDifferential\", \"KaehlerDifferential.derivationQuotKerTotal\", \"ModuleCat.Derivation.desc_d\"], \"digest\": \"37900490177604e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Kahler differentials, ordinary derivations or differential fields, not the logarithmic chart-and-etale sheaf statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T06:27:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration for logarithmic structures"
+  },
+  {
+   "tool": "grep",
+   "query": "LogDerivation|Prelog|LogStructure|logification",
+   "results": "{\"t\": \"2026-10-22T06:27:40Z\", \"tool\": \"grep\", \"query\": \"LogDerivation|Prelog|LogStructure|logification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no prelog/log-structure or logarithmic-differential development in the source searched"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log derivations of a prelog ring and its associated log structure are naturally equivalent",
+   "results": "{\"t\": \"2026-10-22T06:27:40Z\", \"tool\": \"leansearch\", \"query\": \"Log derivations of a prelog ring and its associated log structure are naturally equivalent\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a prelog ring P to A log derivations extend uniquely to the associated log monoid P pushout A units by delta p u equals delta p plus u inverse D u",
+   "results": "{\"t\": \"2026-10-22T06:27:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a prelog ring P to A log derivations extend uniquely to the associated log monoid P pushout A units by delta p u equals delta p plus u inverse D u\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.liftOfRightInverse_apply\", \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"derivationOfSectionOfKerSqZero_apply_coe\", \"Derivation.liftOfRightInverse\", \"derivationOfSectionOfKerSqZero\", \"ModuleCat.Derivation.desc_d\", \"Derivation.liftKaehlerDifferential_comp_D\", \"liftOfDerivationToSquareZero_apply\"], \"digest\": \"e9b7480a3c0cca69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary Kahler differentials, ordinary derivations or differential fields, not the logarithmic chart-and-etale sheaf statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lifting-log-differential-calculus",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Infinitesimal characterization of logarithmic chart smoothness used in the two-stage lifting proof of composition and the strict pullback proof. Supporting input: Logarithmic differentials and derivations from strict infinitesimal lifts. Finite chart model of logarithmic differentials, before applying strict infinitesimal lifting.",
+   "via": [
+    "lem-sfb-lifting-log-differential-calculus",
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-log-differential-finite-chart-model",
+  "worker": "Q03 stage1",
+  "summary": "Constructed W explicitly from ordinary differentials and the finite source chart group, with relations killing a finite generating tuple of the base chart represented by chart elements times units. Proved its finite presentation using the existing Noetherian theorem, constructed inverse sheaf maps on all symbols, and proved the noncartesian strict etale comparison through unique ordinary etale derivation extension. No new nodes; all few-line chart and unit calculations are proof steps. Statement unchanged. Explicitly checked that the chart sheaf is the etale tensor restriction of the original symbol sheaf, avoiding a circular use of the general etale-comparison conclusion. Repair of returned head 546fc07e843: rebased against the current live unsplit node, re-read the changed quasi-coherent comparison dependency, and expanded step 14 to specify both directions of the scalar-extension correspondence for arbitrary test modules. Renewed landing repair against live b65fee8ec149: retained the prior repair, compared the latest returned head 97567d8027b with the live DAG (no cited node changed), and made the two compatible pointed fibre-product refinements of step 14 explicit. Landing-return repair 2026-10-23: compared the retained delivery with the current live unsplit item; re-read the changed chartwise-calculus and associated-log nodes; verified representability in step 2 and made the newly invertible chart-image relation under etale scalar extension explicit in step 14.",
+  "blueprint": "Nearest recorded blueprint ancestor is null (blueprint_refs.py ancestor); retain the inherited det-thm-sf-ctf-stability-direct-images (3) alteration route and ILO XVI 3.6.3 differential-basis context. Steps 1--12 provide the finite chart model before the lifting input in lem-sfb-lifting-log-differential-calculus; step 13 relates the chart model to the original sheaf; steps 14--15 supply its etale-localization clause. Whole-blueprint searches for logarithmic differential, log differential, logarithmic, prelog, associated log, chart and derivation found no node stating this lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Ordinary etale maps have unique square-zero lifts; used only to extend ordinary derivations, not as a logarithmic lifting assumption."
+   },
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "The associated-log chart is the sheafification of the explicit monoid-unit pushout; the unit route has no substitute for this construction."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Represent log sections by chart elements and units etale locally; this is the sheafification tool rather than a cohomological route."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Take one common pointed refinement for finitely many base-chart generator representatives."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Refine pointed etale chart neighbourhoods by affine ones."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "An etale neighbourhood of the locally Noetherian source is locally Noetherian."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "The coordinate ring of the chosen affine locally Noetherian source is Noetherian."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent",
+    "why": "The associated quasi-coherent tensor formula is already a sheaf on the small etale site."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Computes that sheaf on affine etale objects as B tensor W, with the normalized section formula."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Compares ordinary and ringed-etale tensor pullback of the model sheaf; no log-theoretic conclusion is taken from it."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Pulls the associated module W to the associated scalar-extended module on an affine source."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Computes etale inverse image as restriction; the ringed tensor pullback then collapses because the restricted structure sheaf is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Identifies the small etale site of a chart neighbourhood with the slice, so the local symbol constructions can be compared."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Refines arbitrary etale base symbols to fibre products with the chosen chart without imposing a cartesian hypothesis on f itself."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-base-change-finite-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-26015f9fe",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-26015f9fe (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement, all 15 steps and the statements of all 26 cited nodes. I also read ILO XVI 3.6.3 at PDF p.258, which only gives the log-smooth context, so the proof is correctly agent-written. There are no new nodes. This is a landing re-push in the side-completion promotion loop (heads 546fc07e, 212d09d3 and 2920b496 were all PASS). Live and side-live still have the item unsplit, and there is no repair or re-split note. Against 2920b496 only two steps changed. Step 2 now states that every map is a scheme morphism, hence representable, which is the current hypothesis of the chartwise calculus node. Step 14 adds that if β(p) becomes a unit only in B, then λ_p=β(p)^{-1}Dβ(p); this follows from the relation dβ(p)=β(p)λ_p in B⊗W. I re-checked every step. Step 1: unique derivation extension along an étale map, through B⊕H with an arbitrary B-module H; it also kills an étale R'. Step 3: germs m_i=[v_i,u_i] from the pushout stalk isomorphism, with no map Q→P assumed. Step 4: U→V is locally of finite presentation, and A is Noetherian by 01T6 and the affine-open lemma. Steps 5-6: W=(Ω_{A/R}⊕A⊗P^gp)/(dβ(p)−β(p)λ_p, u_i^{-1}du_i+λ_{v_i}), finitely presented over the Noetherian ring A. Step 9: δ is well defined on the generating pushout relation, and D(β(p)u)=β(p)uδ. Step 10: étale-local base functions and base log sections [q,c] are killed. Steps 11-12: Φ and Ψ are inverse, using step-1 uniqueness. Step 13 is not circular: functions of R are sections of f^{-1}O_Y, since V is étale over Y. Step 14: U'→U is étale and W'_{B/R'}=B⊗_AW, with no cartesian hypothesis. Step 15: uses only the pullback clause of the Zariski/étale comparison, plus tilde base change. Edge cases checked: trivial log structure, the identity (W=0), the standard log point (W free of rank 1), k[t] with β(1)=t, torsion in P^gp, positive characteristic. Duplicate candidates (lem-per-infinitesimal-log-differential-calculus, lem-sfb-chart-log-smooth-deformation-calculus, def-per-log-differential-stalk, lem-per-log-smooth-differential-generators) are all log-smooth or stalkwise, so none is a duplicate. Batch-5 check: the chartwise calculus reaches sec-trace-formula only through def-trf-algebraic-space and generic algebraic-space lemmas. The associated-log node is the general monoid-sheafification construction. The Zariski/étale node is the generic quasi-coherent descent equivalence. No closure contains a trace-formula, Poincaré-duality or nt-assume node, so all three citations are accepted as generic. All 14 declared tool_uses are accepted as generic black boxes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogDifferentialFiniteChartModel",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.logDifferential_finite_chart_model",
+  "declarations": [
+   "AlgebraicGeometry.logDifferentialScalarExtension",
+   "AlgebraicGeometry.logDifferentialPureTensor",
+   "AlgebraicGeometry.EtaleLogMap.HasFiniteAffineDifferentialModel",
+   "AlgebraicGeometry.EtaleLogMap.HasEtaleDifferentialComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogDifferentialFiniteChartModel.lean",
+  "statement": "theorem EtaleLogHom.logDifferential_finite_chart_model {X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y) [LocallyOfFinitePresentation f.base] : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), ∃ (U V : FineSaturatedLogScheme.{u}) (g : EtaleLogHom U X) (h : EtaleLogHom V Y) (f₀ : EtaleLogHom U V), g.toLogMap.IsStrictEtale ∧ h.toLogMap.IsStrictEtale ∧ g.toLogMap.CompositesEq f.toLogMap f₀.toLogMap h.toLogMap ∧ IsAffine U.scheme ∧ IsAffine V.scheme ∧ ∃ (t₀ : Spec (.of Ω) ⟶ U.scheme), t₀ ≫ g.base = t ∧ ∃ (P : Type u) (_ : CommMonoid P) (β : P →* U.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 U.scheme)))), (∃ S : Finset P, Submonoid.closure (S : Set P) = ⊤) ∧ Function.Injective (Algebra.GrothendieckGroup.of (M := P)) ∧ U.logStructure.IsChart (Scheme.Etale.mk (𝟙 U.scheme)) β ∧ f₀.toLogMap.HasFiniteAffineDifferentialModel) ∧ ∀ (X' Y' : FineSaturatedLogScheme.{u}) (g : EtaleLogHom X' X) (h : EtaleLogHom Y' Y) (f' : EtaleLogHom X' Y'), g.toLogMap.IsStrictEtale → h.toLogMap.IsStrictEtale → g.toLogMap.CompositesEq f.toLogMap f'.toLogMap h.toLogMap → f.toLogMap.HasEtaleDifferentialComparison g.toLogMap f'.toLogMap",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fadceba2",
+  "group": "Q07",
+  "result": "pass",
+  "note": "First stage-2 delivery: only the lean record and 4 additive stmt_deps on landed definition owners differ from side-live; no cycle. Clause check OK: FineSaturatedLogScheme/EtaleLogHom with [LocallyOfFinitePresentation f.base] only; omega = landed EtaleLogMap.differentialSheaf with sheafD/sheafDLog; Type-u geometric points; strict-etale g,h with CompositesEq g f f0 h (order checked), affine U,V, point lift, fg integral chart via IsChart at the terminal object (saturation not imposed); W = terminal sections, Module.FinitePresentation, tensor equivalence pinned on all pure tensors (canonical, gives restriction/scalar/symbol compatibility); comparison = EtaleDifferentialPullbackPresentation (exists-unique universal property) + sheaf iso pinned on both symbols, so canonical, not Nonempty; noncartesian squares allowed. Edge cases: empty X, identity/trivial log, torsion P^gp, any characteristic, single universe u. Statement verbatim; 15 proof steps in docstring; proof is sorry; helper data real; all imports exist; no duplicate found. No file changed, no compile."
+ }
+}

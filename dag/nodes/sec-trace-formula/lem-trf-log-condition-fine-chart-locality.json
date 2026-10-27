@@ -1,0 +1,242 @@
+{
+ "id": "lem-trf-log-condition-fine-chart-locality",
+ "kind": "statement",
+ "title": "Etale locality of the log condition and fine or saturated charts",
+ "statement": "Let $T$ be a locally Noetherian scheme [pqf-def-locnoeth], with small etale site [def-weil-pbc-etale-site] and a jointly surjective etale covering $\\{T_a\\to T\\}_{a\\in I}$. Let $M$ be a sheaf of commutative monoids on that site (its underlying set presheaf is a sheaf [def-weil-pbc-etale-sheaf-of-sets], its sections are commutative monoids and its restrictions preserve multiplication and identity), and let $\\alpha:M\\to(\\mathcal O_T,\\cdot)$ be a homomorphism. Use slice-site restrictions [def-pur-localized-ringed-site] and the log and chart definitions of [def-trf-fs-log-blowup]. Suppose $(M|_{T_a},\\alpha|_{T_a})$ is a log structure for each $a$. Then $\\alpha^{-1}(\\mathcal O_T^\\times)\\to\\mathcal O_T^\\times$ is an isomorphism of monoid sheaves, so $(M,\\alpha)$ is a log structure on $T$. Suppose further that for every $a$ there is an etale covering $\\{V_{a\\lambda}\\to T_a\\}_{\\lambda\\in J_a}$ and a chart $P_{a\\lambda}\\to M|_{V_{a\\lambda}}$, where $P_{a\\lambda}$ is finitely generated and integral, meaning its canonical map to its group completion is injective. Then the composites $V_{a\\lambda}\\to T$ cover $T$ and these same maps are charts for $M$; hence $M$ is fine. Charts on a log structure isomorphic over $\\mathcal O_{V_{a\\lambda}}$ to $M|_{V_{a\\lambda}}$ give such charts by composition with the isomorphism to $M|_{V_{a\\lambda}}$, with the same chart monoid. If every $P_{a\\lambda}$ is also saturated (if $ng\\in P_{a\\lambda}$ for $g\\in P_{a\\lambda}^{\\rm gp}$ and an integer $n>0$, then $g\\in P_{a\\lambda}$), $M$ is fine saturated.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.1, printed p. 69 (etale-local fine/fs charts); Expose VIII, Remark 3.3.4(ii) and 3.3.8, printed p. 107 (strict etale chart descent). The local log-unit verification is expanded in the repair report."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pur-localized-ringed-site",
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-log-etale-descent-datum",
+  "def-trf-log-etale-restriction-stalk-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For every global geometric point t, choose a point in a member U_a of the cover and lift t to s:Spec Omega -> U_a with s composed with U_a -> T equal to t, using [lem-weil-pbc-etale-cover-geometric-point-lift]. Pointed etale neighbourhoods of s are equivalent to the slice of pointed etale neighbourhoods of t over (U_a,s); the inverse reads an arrow to U_a as an etale U_a-scheme. The forgetful functor from this slice is initial because the pointed-neighbourhood category is cofiltered. Its opposite is final, and Functor.Final.colimitIso gives canonical monoid- and ring-stalk isomorphisms for restriction [def-trf-log-etale-restriction-stalk-comparison], with the same germs [def-weil-pbc-geometric-stalks]. Their structural maps commute, as is checked on each colimit injection. The local log structure has exactly the restricted prelog data. Transport reflection of units and bijectivity on unit groups through these isomorphisms to obtain the global stalkwise log axioms [def-trf-fs-log-blowup].",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-trf-log-etale-restriction-stalk-comparison",
+    "def-weil-pbc-geometric-stalks",
+    "def-pur-localized-ringed-site",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1, printed p. 69 (etale-local fine/fs charts); Expose VIII, Remark 3.3.4(ii) and 3.3.8, printed p. 107 (strict etale chart descent). The local log-unit verification is expanded in the repair report."
+   }
+  },
+  {
+   "text": "Construct the global EtaleLogStructure N with underlying prelog structure exactly M and the two proof fields obtained in the first step; no data is selected from an existence theorem. For any etale test W and unit-valued log section m, apply [lem-trf-log-unit-section-lift] to the ring unit represented by alpha(m). Uniqueness identifies all sections over that unit, which gives injectivity of unitSectionMap. Apply the same lemma to any ring unit section to obtain a log section with exactly that image, which gives surjectivity. Pair this sectionwise bijectivity with N and its definitional equality to M.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-unit-section-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1, printed p. 69 (etale-local fine/fs charts); Expose VIII, Remark 3.3.4(ii) and 3.3.8, printed p. 107 (strict etale chart descent). The local log-unit verification is expanded in the repair report."
+   }
+  },
+  {
+   "text": "For a single chart on N_a identified with M restricted to U_a, fix a geometric point with a lift to V_aj and compose the lift with V_aj -> U_a. The prelog isomorphism induces a monoid-stalk isomorphism by HasColimit.isoOfNatIso. Combine it with the restriction comparisons of step 1. Structural compatibility and uniqueness of log units identify the two unit inclusions. The chart product maps commute with the monoid-stalk isomorphism and the product of identity on P with the ring-units isomorphism. This preserves surjectivity. To compare kernels, use Con.comap_conGen_equiv: the generating relation (p,1)~(1,a) holds precisely when alpha(p)=a, and the ring isomorphism preserves and reflects this equality. Thus the transported section is a chart on the composite test object, with no finiteness assumption. Compose the two covers pointwise [lem-weil-pbc-etale-covering-composition]; lift any geometric point through the composite covering [lem-weil-pbc-etale-cover-geometric-point-lift]. The selected chart with the original finite-generation and integrality witnesses gives IsFine [def-trf-fine-log-etale-descent-datum], and the identical witnesses with saturation give IsFineSaturated [def-trf-fs-log-blowup].",
+   "uses": [
+    "def-trf-log-etale-restriction-stalk-comparison",
+    "def-weil-pbc-geometric-stalks",
+    "def-trf-fine-log-etale-descent-datum",
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-etale-covering-composition",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI, 1.1, printed p. 69 (etale-local fine/fs charts); Expose VIII, Remark 3.3.4(ii) and 3.3.8, printed p. 107 (strict etale chart descent). The local log-unit verification is expanded in the repair report."
+   }
+  },
+  {
+   "text": "Finally let $e:N\\xrightarrow{\\sim}M|_V$ be an isomorphism of log structures over $\\mathcal O_V$ and $c:P\\to N$ a chart. At a geometric point of $V$, compatibility with $\\mathcal O_V$ leaves $\\beta:P\\to A$ unchanged. The map required in the chart definition [def-trf-fs-log-blowup] for $e\\circ c$ is the composite $P\\oplus_{\\beta^{-1}(A^\\times)}A^\\times\\xrightarrow{\\sim}N_{\\bar v}\\xrightarrow{e_{\\bar v}}M_{\\bar v}$. Both arrows are isomorphisms, the second having inverse induced by $e^{-1}$. Thus $e\\circ c$ is a chart with the identical monoid $P$, preserving all three monoid hypotheses.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1 and VIII Remark 3.3.4(i)-(ii); elementary composition in the explicit chart definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "def-trf-log-etale-restriction-stalk-comparison",
+  "def-weil-pbc-geometric-stalks",
+  "def-pur-localized-ringed-site",
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-unit-section-lift",
+  "def-trf-fine-log-etale-descent-datum",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1 and VIII 3.3.4(ii), 3.3.8; G5 2026-10-26: canonical pointed-neighbourhood slice comparisons transfer the stalkwise log axioms and charts. The existing lem-trf-log-unit-section-lift supplies the stalk-to-section passage. Both previously open declarations are proved; no statement or definition changes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The log unit condition and charts by finitely generated integral saturated monoids are local for the etale topology",
+   "results": "{\"t\": \"2026-10-22T06:04:52Z\", \"tool\": \"leansearch\", \"query\": \"The log unit condition and charts by finitely generated integral saturated monoids are local for the etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"Algebra.FormallyEtale.of_isLocalization\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"Algebra.Etale.of_isLocalizationAway\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"ba3affd4a1e7d27c\"}; Read the hits: these are ordinary etale topology or morphism-locality results; no log-unit or fine/fs-chart theorem occurs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prelog structure is a fine or fine saturated log structure if its restrictions to an etale covering have that property",
+   "results": "{\"t\": \"2026-10-22T06:05:02Z\", \"tool\": \"leanfinder\", \"query\": \"A prelog structure is a fine or fine saturated log structure if its restrictions to an etale covering have that property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\"], \"digest\": \"50e338c219d4e26e\"}; Read the hits: these are ordinary etale topology or morphism-locality results; no log-unit or fine/fs-chart theorem occurs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|PrelogStructure|IsFineSaturated|fine.*chart",
+   "results": "{\"t\": \"2026-10-22T06:05:13Z\", \"tool\": \"grep\", \"query\": \"LogStructure|PrelogStructure|IsFineSaturated|fine.*chart\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: these are ordinary etale topology or morphism-locality results; no log-unit or fine/fs-chart theorem occurs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LogStructure, IsFine",
+   "results": "{\"t\": \"2026-10-22T06:05:13Z\", \"tool\": \"loogle\", \"query\": \"LogStructure, IsFine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LogStructure'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: these are ordinary etale topology or morphism-locality results; no log-unit or fine/fs-chart theorem occurs.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log structures with finitely generated integral saturated charts are local for the etale topology",
+   "results": "{\"t\": \"2026-10-23T11:21:05Z\", \"tool\": \"leansearch\", \"query\": \"Log structures with finitely generated integral saturated charts are local for the etale topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.LocallyRingedSpace\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"89f52debdec1817e\"}; Read returned hits: ordinary etale sites and locality, ringed-space unit tests, and submonoid presheaves do not state log-unit descent together with fine/fs charts. No logarithmic chart declaration was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LogStructure, IsFine",
+   "results": "{\"t\": \"2026-10-23T11:21:05Z\", \"tool\": \"loogle\", \"query\": \"LogStructure, IsFine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'LogStructure'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: ordinary etale sites and locality, ringed-space unit tests, and submonoid presheaves do not state log-unit descent together with fine/fs charts. No logarithmic chart declaration was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|PrelogStructure|fine.*saturated|fine.*chart",
+   "results": "{\"t\": \"2026-10-23T11:21:05Z\", \"tool\": \"grep\", \"query\": \"LogStructure|PrelogStructure|fine.*saturated|fine.*chart\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: ordinary etale sites and locality, ringed-space unit tests, and submonoid presheaves do not state log-unit descent together with fine/fs charts. No logarithmic chart declaration was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prelog structure is logarithmic and fine saturated when these properties hold on an etale covering",
+   "results": "{\"t\": \"2026-10-23T11:21:06Z\", \"tool\": \"leanfinder\", \"query\": \"A prelog structure is logarithmic and fine saturated when these properties hold on an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"4164caf92778cab4\"}; Read returned hits: ordinary etale sites and locality, ringed-space unit tests, and submonoid presheaves do not state log-unit descent together with fine/fs charts. No logarithmic chart declaration was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoid sheaf mapping to a ring sheaf satisfies the logarithmic unit axiom if the inverse image of the units maps isomorphically after a covering",
+   "results": "{\"t\": \"2026-10-23T11:21:40Z\", \"tool\": \"leanfinder\", \"query\": \"A monoid sheaf mapping to a ring sheaf satisfies the logarithmic unit axiom if the inverse image of the units maps isomorphically after a covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.SubmonoidPresheaf\", \"SheafOfModules.unit_val\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ\", \"AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen\", \"AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ\", \"AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self\", \"NumberField.mixedEmbedding.logMap_unit_smul\"], \"digest\": \"379695d20b2d381e\"}; Read returned hits: ordinary etale sites and locality, ringed-space unit tests, and submonoid presheaves do not state log-unit descent together with fine/fs charts. No logarithmic chart declaration was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fine-log-structure-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Expose VIII 3.3.8 final sentence: fine logarithmic structures and morphisms descend from strict etale charts as sheaves of monoids. Old proof steps 4--5: verify the log-unit axiom and retain fine/fs charts across the covering.",
+   "via": [
+    "lem-trf-fine-log-structure-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-log-condition-fine-chart-locality",
+  "worker": "stage1",
+  "group": "Q63",
+  "summary": "Proved the log-unit condition by unique local lifts and the sheaf equalizer, composed the etale chart covers using existing Mathlib leaves, and wrote the chart-isomorphism transport explicitly. No new nodes or statement changes. Reviewer FIX (Q63 maintainer read): step 2's separatedness of the etale structure sheaf now cites the representable-sheaf node with A^1_T (declared tool use) and the affine adjunction leaf.",
+  "blueprint": "The inherited place names old fine-log-descent proof steps 4--5 (log units and retention of fine/fs charts), below lem-trf-local-term-locality. The current latest blueprint proof of that ancestor treats contracting correspondences and contains no logarithmic descent paragraph; retain the inherited genealogy without claiming a new literal blueprint occurrence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Step 2 needs only that the etale structure sheaf U -> Gamma(U,O_U) is separated for etale coverings (fpqc descent, generic subcanonicity of the small etale site via the representable A^1_T); no node of sk-i-curve-zero states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-9bbd8e1e3",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-9bbd8e1e3 (reviewer sub-agent of L); spot-checked: Read the item in full (no new nodes) against ILO VI 1.1 (printed p.69) and VIII 3.3.4(ii)/3.3.8 (printed p.107), and Stacks 00VM and 0217. The live and side-live copies of the item are still unsplit, with the same statement, and there is no repair note. Step 1: base change of the cover; W_a and its overlaps are objects over T_a, so the slice isomorphism gives bijections there. Correct. Step 2: unique local lifts, injectivity on overlaps, equalizer gluing, separatedness of M; the inverse is natural and multiplicative by uniqueness. Correct. One fault (C1): 'separatedness of the structure sheaf' on étale covers had no node. FIX: step 2 now cites lem-weil-pbc-small-etale-representable-presheaf-sheaf for X = T x Spec Z[x], with def-pc-fibre-product and the leaf lem-a1-locally-ringed-space-affine-adjunction giving h_X = Gamma(-,O). proof_deps is now the union of all uses, and the tool use is declared. Step 3: covering composition, and relocalization makes the given charts literally charts of M|_V. Fine and fs then follow by definition. Step 4: an isomorphism over O_V keeps beta, and e sends iota_N(u) to iota_M(u) by the log axiom, so the chart map is a composite of isomorphisms. Edge cases checked: empty cover, identity cover, trivial log structure, and <2,3> (fine but not saturated, so no fs claim). The parent lem-trf-fine-log-structure-etale-descent step 4 is served exactly. Advisory: the slice-site reading of 'log structure on T_a' is stated in the item, and the parent identifies the slice with the small étale site of T_a via lem-weil-pbc-etale-site-localization-open.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogConditionFineChartLocality",
+  "declaration": "AlgebraicGeometry.logCondition_etale_local",
+  "declarations": [
+   "AlgebraicGeometry.EtalePrelogStructure.unitSectionMap",
+   "AlgebraicGeometry.fineChart_etale_local",
+   "AlgebraicGeometry.EtaleLogStructure.isChart_comp_prelogIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogConditionFineChartLocality.lean",
+  "statement": "theorem logCondition_etale_local {T : Scheme.{u}} [IsLocallyNoetherian T] {ι : Type v} (U : ι → T.Etale) (hcover : ∀ x : T, ∃ (a : ι) (y : (U a).left), (U a).hom y = x) (M : EtalePrelogStructure T) (hlocal : ∀ a : ι, ∃ N : EtaleLogStructure (U a).left, N.toEtalePrelogStructure = M.etaleRestrict (U a)) : (∀ W : T.Etale, Function.Bijective (M.unitSectionMap W)) ∧ ∃ N : EtaleLogStructure T, N.toEtalePrelogStructure = M",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 return of lem-trf-free-log-chart-ordinary-parameters, head 260b15ceef6c: this theorem-owned module formerly also owned AlgebraicGeometry.EtalePrelogStructure.etaleRestrict, so citing its record to obtain only the definition introduced an unnecessary theorem statement dependency. That helper is moved unchanged to def-trf-log-etale-restriction-stalk-comparison / Sheaf.AlgebraicGeometry.LogEtaleRestrictionStalkComparison. This module publicly imports the new owner and retains every other declaration, theorem signature and proof unchanged; the lean-only repair removes the moved declaration from this record."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d100743a3",
+  "group": "Q38",
+  "result": "pass",
+  "note": "The item node diff vs side-live is only lean plus the added stmt_dep def-trf-fine-log-etale-descent-datum, which is landed, owns IsFine and EtalePrelogStructure.Iso, and creates no cycle; dep records match side-live; lean.statement is verbatim in the file; both sections of report.md are present. The Lean matches the node clause by clause: IsLocallyNoetherian T; a jointly surjective cover U : ι → T.Etale with ι free; etaleRestrict is the canonical restriction (Sheaf.over through overEquiv) with the same alpha; hlocal is equality with an EtaleLogStructure; the conclusions are unitSectionMap bijective on every étale object (the sheaf isomorphism) and ∃ log N = M. fineChart_etale_local: composite covers, IsChart of M at Etale.mk (V≫U) for e∘β with the same monoid, IsFine, and IsFineSaturatedMonoid ⇒ IsFineSaturated. isChart_comp_prelogIso covers the general isomorphism clause. Edge cases checked: empty ι and J, the identity cover, the trivial log structure, the non-saturated ⟨2,3⟩, universes u/v/w. No hollow definitions, only sorry, no pro-étale substitute. Not recompiled (no change); the worker's deliver2 dry run was OK. Advisory: a public import (PushforwardContinuous) is kept only for the dependency record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T091621-L-3358031",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

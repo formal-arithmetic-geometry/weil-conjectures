@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-space-relative-perfect",
+ "kind": "definition",
+ "title": "Relative perfectness of an algebraic-space complex over a scheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let S be a scheme and f:X to Y a morphism of algebraic spaces with Y a scheme [def-pc-scheme] [def-trf-algebraic-space], regarded as an algebraic space by its representable sheaf [def-trf-scheme-algebraic-space]. Use the unbounded derived module category and the canonical derived restriction to each etale scheme chart [def-sfb-space-derived-module-calculus]. Define a complex K to be Y-perfect by the equivalent affine-chart criterion: K has quasi-coherent cohomology; on every affine etale scheme chart T to X, its derived Zariski restriction is pseudo-coherent [def-pur-pseudo-coherent-complex] and has finite Tor dimension over the inverse-image structure sheaf of the scheme map T to Y [def-pc-finite-tor-dimension-over]. Thus pseudo-coherence means locally a bounded-above finite-free complex; the Tor test ranges over all modules over that inverse-image ring sheaf and one finite interval on each affine chart. Bounds may depend on the chart. On a flat locally finitely presented morphism this is exactly pseudo-coherence and locally finite relative Tor dimension of Tag 0DKN, since pseudo-coherence implies quasi-coherent cohomology and the affine chart is quasi-compact.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-derived-module-calculus",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-finite-tor-dimension-over"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DKN definition-relatively-perfect, and lemma-affine-locally-rel-perfect; sites-cohomology.tex Tor-amplitude definition"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Small affine etale site of an algebraic space equivalence module sheaves derived tensor internal Hom",
+   "results": "8 hits: Scheme.smallEtaleTopology, Scheme.AffineZariskiSite.sheafEquiv, sheafHom, Scheme.smallEtalePretopology, Equivalence.sheafCongr, Sheaf.isGrothendieckAbelian_of_essentiallySmall, Scheme.Modules.instCategory, SheafOfModules.instCategory. General pieces only; no algebraic-space derived calculus.",
+   "date": "2026-10-23",
+   "verdict": "no exact match; reuse the general pieces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat finitely presented algebraic space affine base right adjoint of structure sheaf is relatively perfect and scalar derived endomorphism map is an isomorphism",
+   "results": "8 hits concerning scheme Flat, UniversallyOpen.of_flat, HasAffineProperty and FormallyUnramified; none states algebraic-space derived duality.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AlgebraicSpace, DerivedCategory",
+   "results": "OK 0 hits; unknown identifier AlgebraicGeometry.AlgebraicSpace",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affineAdjoint|relativeDualizing|relativelyPerfect|semidualizing; IsPerfectRelative|SmallEtaleModel|smallModuleRestriction|QCohDirectImagePresentation; Mathlib/AlgebraicGeometry, WeilConjectures/AlgebraicGeometry, Sheaf/AlgebraicGeometry; DAG and blueprint_refs searches",
+   "results": "Mathlib grep 0 hits for first query. Project has scheme/algebra relative dualizing-pair comparisons but no algebraic-space relative perfectness or small-model calculus. DAG definition-title/statement search gives no matching node; blueprint_refs search gives 0 for relative perfect, derived module calculus and small affine etale derived module calculus.",
+   "date": "2026-10-23",
+   "verdict": "no duplicate; use recorded scheme and general ringed-site APIs"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-adjoint-unit-properties",
+  "date": "2026-10-23",
+  "group": "Q115"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical derived-module and relative-perfectness notions used by Stacks 0E5V clauses (1)-(3), in the affine adjoint-unit construction.",
+   "via": [
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceRelativePerfect",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsPerfectRelativeToScheme",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsPerfectRelativeToScheme"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceRelativePerfect.lean",
+  "statement": "def IsPerfectRelativeToScheme {S : Scheme.{u}} {X : AlgebraicSpace S} (Y : Over S) (f : X ⟶ schemeSpace Y) [HasDerivedCategory.{w} X.SmallModules] (K : X.DerivedModules) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f0f35306",
+  "group": "Q115",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f0f35306",
+  "group": "Q115",
+  "result": "fix",
+  "note": "Item matches node and Stacks 0E5V clause by clause: affine Y; proper, flat, locally finitely presented f (finite presentation via proper ⇒ qcqs); Rf_* on D_QCoh pinned by an iso to the canonical K-injective direct image; arbitrary right adjoint. (1) Y-perfect = 0DKN by the affine-chart criterion with V=Y; (2) cohomology sheaves of Rf_*W vanish for i>0; (3) IsIso of the actual scalar map, pinned by the duality model's uncurry/unit/symmetry formulas. Three new def nodes are not duplicates (none in side-live/live; runs dir has only stage-1 sibling splits, no competing stage-2 delivery); data real; 7 sorry'd obligations true and stated in the nodes; dependency records identical to side-live; no recompile, as instructed. FIX: theorem stmt_dep lem-trf-space-enlarged-etale-ringed-site-model, used only for the plain def schemeSpace, replaced by its def owner def-trf-scheme-algebraic-space in fixes/def-sfb-space-derived-module-calculus.json; the same citation added in fixes/def-sfb-space-relative-perfect.json. JSON only. lem-sfb-ringed-site-duality-maps kept (Classical.choice of the theorem)."
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "id": "lem-trf-straightened-regular-stratum-comparison",
+ "kind": "lemma",
+ "title": "Uniform regular Taylor stratum and its straightened extension",
+ "statement": "Let k be a characteristic-zero field, U a smooth affine finite-type k-scheme and i:X->U a closed immersion with coherent ideal, a in X [def-sbc-smooth-morphisms] [def-weil-finite-type-morphism] [def-weil-closed-immersion] [pqf-def-coherent]. Let j:N->U be smooth closed over k with b0 in N and j(b0)=i(a). Fix etale coordinates coord=(w,z) on U over k and etale restricted coordinates w on N [def-weil-etale-morphism]. Fix regular coordinate derivations der annihilating k and with der_l(coord_r)=delta_lr [def-trf-formal-power-series-partial-derivative]. Let TU_y and TN_b be the centered residue-field-valued Taylor maps, and straight_b a ring homomorphism with the same scalar and residue values, sending w_l to w_l(b)+W_l and z_l to rename(TN_b(j^*z_l))+Z_l [def-weil-residue-field] [def-trf-regular-hilbert-coefficient-datum]. Set K_b=map(straight_b)(ker i^*). Let D be monotone with ordered minimal vertices (0,alpha_i), with exactly the essential transverse variables [def-trf-formal-initial-diagram] [def-trf-supported-homogeneous-division]. Suppose f_{i,b} belongs to K_b for every b. At b0 assume order(f_i)=|alpha_i|, homogeneous division for every degree prefix, supported generation of K_b0, and initial diagram D after renaming Fin m+Fin n to Fin(m+n). Fix Q>=|alpha_i|-1. At every b and each occurring degree d, assume the vertex-derivative block and unit-Jacobian hypotheses and the later-generator restricted-diagram derivative conditions through Q as in [lem-trf-formal-hilbert-stratum-minors]. There is q0>=|alpha_i|-1 independent of a finite regular generating list of ker i^*, such that for every q>=q0 and every such list generators, there exists an open V containing i(a) on which, writing J_q for its cumulative regular Taylor-rank minor ideal through q [def-trf-taylor-rank-minor-ideals],\nJ_q is contained in ker(ev_y) iff extendedHilbert(map(TU_y)(ker i^*))(t)=hilbertCount(D,t) for every t,\nand map(straight_b0)(J_q)=lowDerivativeIdeal(alpha,f_b0).\nNo coefficient expansion or coefficient-order conditions are assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997 Theorem 7.14, Remarks 9.1 and 9.5, completion of Theorem 9.6, pp.265--268,275--277,282. Returned step 11. ILO VIII 2.3.11--2.3.13 is the route reference; BM is read online, absent locally. No single Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "pqf-def-coherent",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-supported-homogeneous-division",
+  "def-trf-formal-power-series-partial-derivative",
+  "def-trf-minor-ideal",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-trf-formal-initial-diagram",
+  "def-trf-taylor-rank-minor-ideals"
+ ],
+ "proof": [
+  {
+   "text": "Supported division and the initial-diagram identity identify the central Hilbert function with hilbertCount(D). Apply [lem-trf-jet-diagram-hilbert-control] to the coherent ideal on the affine chart: its Taylor diagrams, and therefore its Hilbert functions, take finitely many local values. For one finite regular generating list, apply the equality-germ clause of [lem-trf-formal-hilbert-stratum-minors] to a cutoff distinguishing the central function from all these other functions. Enlarge that cutoff to at least all vertex degrees minus one.",
+   "uses": [
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-formal-hilbert-stratum-minors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translation followed by truncation is multiplicative; two generating lists give the same truncated translated submodule. For positive central quotient dimension identify its rank-minor ideal with the corresponding presentation Fitting ideal and apply [lem-trf-fitting-ideal-independence-base-change]. For zero central quotient dimension both rank-minor ideals are zero by oversizing. Thus the individual regular minors, and the cutoff chosen with one generating list, work for every list.",
+   "uses": [
+    "lem-trf-fitting-ideal-independence-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The straight map has the triangular coordinate change fixing W and adding the restricted Taylor series to Z; [lem-trf-implicit-taylor-coordinate-calculus] identifies it with the invertible straightening of the usual Taylor map. On each truncated translation module substitute F(X+Y)-F(X) in Y; its inverse comes from F inverse. The substitution is linear over the ambient Taylor ring and preserves the presented quotient. Fitting invariance, the regular-to-formal Taylor-minor identity and formal generator independence identify map(straight)(J_q) with formalStratumIdeal(f_b0,q). Ordered minimal vertices imply the degree order and incomparability needed by the formal stratum theorem. Apply it with the given central supported generation and block derivative hypotheses to obtain lowDerivativeIdeal. The natural bound d_i-1 implies the corresponding integer bound, including d_i=0.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "lem-trf-formal-hilbert-stratum-minors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fitting-ideal-independence-base-change",
+  "lem-trf-formal-hilbert-stratum-minors",
+  "lem-trf-implicit-taylor-coordinate-calculus",
+  "lem-trf-jet-diagram-hilbert-control"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997 Theorem 7.14, Remarks 9.1 and 9.5, completion of Theorem 9.6, pp.265--268,275--277,282. Returned step 11. ILO VIII 2.3.11--2.3.13 is the route reference; BM is read online, absent locally. No single Stacks tag states this result. Explicit specialization and glue split in stage 3 by U9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ideals of low derivatives of multivariate formal power series equal the transverse variable ideal plus the derivatives of their coefficient series",
+   "results": "8 hits: PowerSeries.maximalIdeal_eq_span_X, PowerSeries.derivativeFun, HasFPowerSeriesAt.deriv, PowerSeries.derivative, PowerSeries.derivative.ext, PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem, PowerSeries.coeff_mul_mem_ideal_mul_ideal_of_coeff_mem_ideal, MvPowerSeries.LinearTopology.basis. None states the coefficient-ideal identity or the regular stratum/descent comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; univariate derivative and topology facts do not supply the three comparison steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat Taylor extension contracts equality of coherent ideals to one open neighbourhood and vanishing of coefficient derivatives detects local maximal ideal powers",
+   "results": "8 hits including Ideal.comap_map_eq_self_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom. The ideal contraction lemma is relevant after constructing and identifying the stalk Taylor map; it does not provide that identification or the support comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the regular coefficient descent or its maximal-ideal-power support condition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal changes of coordinates preserve the determinantal ideals of truncated Taylor translation presentations and regular Hilbert Samuel strata",
+   "results": "8 submersive-presentation hits, including Algebra.PreSubmersivePresentation.jacobian_reindex, Algebra.SubmersivePresentation.aevalDifferentialEquiv and invJacobianOfHasCoeffs. None concerns rank minors of translated truncated power series.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.map",
+   "results": "5 hits: MvPowerSeries.coeff_mem_of_mem_map_C, ker_map_of_fg, mem_map_C_of_forall_coeff_mem, mem_map_C_iff_of_fg, ker_mapAlgHom_of_fg. These treat coefficientwise ideal extension, not differentiation, chart changes or regular supports.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "lowDerivativeIdeal|coefficient.*[Oo]rder.*[Hh]ilbert; killCompl.*ker|ker.*killCompl; coefficient derivative; Taylor minors",
+   "results": "msearch grep: 0 Mathlib hits for the coefficient-order/Hilbert query. Local rg finds lowDerivativeIdeal only in FormalHilbertStratumMinors and the assigned item. PowerSeriesQuotientVariables gives a proved killed-variable kernel computation, usable within the formal calculation. The project formal-minors, implicit-Taylor, etale-coordinate and normal-cone statements were read; their remaining specializations are not declared. blueprint_refs.py search returned 0 blueprint nodes for both coefficient derivative and Taylor minors.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate. Reuse the existing comparison theorems inside the new proof plans; the three stated conclusions are the missing glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientOrderHilbertEquality",
+  "date": "2026-10-26",
+  "group": "U9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Subargument of lem-trf-coefficient-order-hilbert-equality: Uniform regular Taylor stratum and its straightened extension. BM 1997 Remark 9.5 and completion of Theorem 9.6; ILO VIII 2.3.11--13 is the inherited route referral.",
+   "via": [
+    "lem-trf-coefficient-order-hilbert-equality",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StraightenedRegularStratumComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/StraightenedRegularStratumComparison.lean",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.straightened_regular_stratum_comparison",
+  "statement": "theorem straightened_regular_stratum_comparison\n    {k : Type u} [Field k] [CharZero k]\n    (U X N : Scheme.{u}) [IsAffine U]\n    (p : U ⟶ Spec (CommRingCat.of k)) [Smooth p] [LocallyOfFiniteType p] [QuasiCompact p]\n    (i : X ⟶ U) [IsClosedImmersion i]\n    (hcoherent : RingedSpace.IsCoherent U.toRingedSpace i.ker.toModules)\n    (a : X) (j : N ⟶ U) [IsClosedImmersion j] [Smooth (j ≫ p)]\n    (b₀ : N) (hb₀ : j b₀ = i a) {m n s : ℕ}\n    (coord : MvPolynomial (Fin m ⊕ Fin n) k →+* Γ(U, ⊤))\n    (hetale : Etale (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom coord)))\n    (hover : U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (coord.comp MvPolynomial.C)) = p)\n    (w : MvPolynomial (Fin m) k →+* Γ(N, ⊤))\n    (hw : w = j.appTop.hom.comp (coord.comp (MvPolynomial.rename Sum.inl).toRingHom))\n    (hetaleW : Etale (N.toSpecΓ ≫ Spec.map (CommRingCat.ofHom w)))\n    (der : (Fin m ⊕ Fin n) → Derivation ℤ Γ(U, ⊤) Γ(U, ⊤))\n    (hderk : ∀ (l : Fin m ⊕ Fin n) (r : k), der l (coord (MvPolynomial.C r)) = 0)\n    (hderx : ∀ l r : Fin m ⊕ Fin n,\n      der l (coord (MvPolynomial.X r)) = if l = r then 1 else 0)\n    (TU : ∀ y : U, Γ(U, ⊤) →+* MvPowerSeries (Fin m ⊕ Fin n) (U.residueField y))\n    (hTU : ∀ y : U, isTaylorMap coord (U.Γevaluation y).hom (TU y))\n    (TN : ∀ b : N, Γ(N, ⊤) →+* MvPowerSeries (Fin m) (N.residueField b))\n    (hTN : ∀ b : N, isTaylorMap w (N.Γevaluation b).hom (TN b))\n    (straight : ∀ b : N, Γ(U, ⊤) →+*\n      MvPowerSeries (Fin m ⊕ Fin n) (N.residueField b))\n    (hres : ∀ (b : N) (r : Γ(U, ⊤)),\n      MvPowerSeries.constantCoeff (straight b r) = N.Γevaluation b (j.appTop r))\n    (hk : ∀ (b : N) (r : k), straight b (coord (MvPolynomial.C r)) =\n      MvPowerSeries.C (N.Γevaluation b (j.appTop (coord (MvPolynomial.C r)))))\n    (hW : ∀ (b : N) (l : Fin m), straight b (coord (MvPolynomial.X (Sum.inl l))) =\n      MvPowerSeries.C (N.Γevaluation b (w (MvPolynomial.X l))) +\n        MvPowerSeries.X (Sum.inl l))\n    (hZ : ∀ (b : N) (l : Fin n), straight b (coord (MvPolynomial.X (Sum.inr l))) =\n      MvPowerSeries.rename Sum.inl (TN b (j.appTop (coord (MvPolynomial.X (Sum.inr l))))) +\n        MvPowerSeries.X (Sum.inr l))\n    (α : Fin s → Fin n →₀ ℕ) (D : Set (Fin (m + n) →₀ ℕ))\n    (hmonotone : MonomialDiagram.IsMonotone D)\n    (hvertices : MonomialDiagram.IsOrderedVertexFamily D\n      (fun l ↦ Finsupp.mapDomain finSumFinEquiv (fullVertex m (α l))))\n    (hessential : ∀ l : Fin n, ∃ v : Fin s, 0 < α v l)\n    (f : ∀ b : N, Fin s → MvPowerSeries (Fin m ⊕ Fin n) (N.residueField b))\n    (hmember : ∀ (b : N) (l : Fin s),\n      f b l ∈ taylorIdeal (RingHom.ker i.appTop.hom) (straight b))\n    (horder : ∀ l : Fin s, (f b₀ l).order = ((α l).degree : ℕ∞))\n    (hdivision : homogeneousDivision α (f b₀))\n    (hgeneration : ∀ h ∈ taylorIdeal (RingHom.ker i.appTop.hom) (straight b₀),\n      ∃ g : Fin s → MvPowerSeries (Fin m ⊕ Fin n) (N.residueField b₀),\n        h = ∑ l : Fin s, g l * f b₀ l ∧\n          ∀ l : Fin s, supported (g l) (inDelta (fun v ↦ fullVertex m (α v)) l))\n    (hinitial : MonomialDiagram.initialDiagram\n      (Ideal.map (MvPowerSeries.renameEquiv (N.residueField b₀) finSumFinEquiv).toRingHom\n        (taylorIdeal (RingHom.ker i.appTop.hom) (straight b₀))) = D)\n    (Q : ℕ) (hQ : ∀ l : Fin s, (α l).degree - 1 ≤ Q)\n    (hblocks : ∀ (b : N) (d : ℕ), (∃ l : Fin s, (α l).degree = d) →\n      ∃ (pick : {l : Fin n // essential α d l} → Fin s)\n        (β : {l : Fin n // essential α d l} → Fin n →₀ ℕ),\n        (∀ l, α (pick l) = β l + Finsupp.single l.val 1 ∧\n          (α (pick l)).degree ≤ d ∧\n          iteratedPartial (fullVertex m (β l)) (f b (pick l)) ∈ transverseIdeal α d) ∧\n        IsUnit (Matrix.det (fun l r : {l : Fin n // essential α d l} ↦\n          MvPowerSeries.constantCoeff (MvPowerSeries.pderiv (N.residueField b) (Sum.inr r.val)\n            (iteratedPartial (fullVertex m (β l)) (f b (pick l)))))))\n    (hlater : ∀ (b : N) (d : ℕ), (∃ l : Fin s, (α l).degree = d) →\n      ∀ l : Fin s, d < (α l).degree → ∀ δ : Fin n →₀ ℕ,\n        δ.degree ≤ Q → (∀ r : Fin n, δ r ≠ 0 → essential α d r) →\n        inDiagram α d δ → iteratedPartial (fullVertex m δ) (f b l) ∈ transverseIdeal α d) :\n    ∃ q₀ : ℕ, (∀ l : Fin s, (α l).degree - 1 ≤ q₀) ∧\n      ∀ q : ℕ, q₀ ≤ q → ∀ (r : ℕ) (generators : Fin r → Γ(U, ⊤)),\n        Ideal.span (Set.range generators) = RingHom.ker i.appTop.hom →\n        ∃ V : U.Opens, i a ∈ V ∧\n          (∀ y : U, y ∈ V →\n            ((⨆ t ∈ Finset.range (q + 1),\n              regularJetMinorIdeal coord der generators (U.Γevaluation (i a)).hom t) ≤\n                RingHom.ker (U.Γevaluation y).hom ↔\n              ∀ t : ℕ, extendedHilbert\n                (taylorIdeal (RingHom.ker i.appTop.hom) (TU y)) t =\n                  (MonomialDiagram.hilbertCount D t : ℕ∞))) ∧\n          Ideal.map (straight b₀)\n            (⨆ t ∈ Finset.range (q + 1),\n              regularJetMinorIdeal coord der generators (U.Γevaluation (i a)).hom t) =\n            lowDerivativeIdeal α (f b₀)",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261026T092825-L-3470852",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261026T092825-L-3470852",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

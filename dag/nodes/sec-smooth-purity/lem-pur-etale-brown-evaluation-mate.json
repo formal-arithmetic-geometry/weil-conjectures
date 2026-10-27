@@ -1,0 +1,173 @@
+{
+ "id": "lem-pur-etale-brown-evaluation-mate",
+ "kind": "statement",
+ "title": "Insertion and evaluation comparisons are canonical mates",
+ "statement": "Let O be a commutative ring, t in O, c a compactification of a scheme morphism, S a StrictEtaleCompactSupport presentation, and B its StrictEtaleBrownConstruction [lem-pur-etale-system-brown-construction]. At each level n, the mate of the inverse open-extension evaluation comparison under the system and finite open adjunctions equals the specified inverse-image evaluation comparison. The mate of the inverse left-extension comparison under the two extension/evaluation adjunctions equals the inverse compact-support evaluation comparison. These are equations of natural transformations on the entire ordinary unbounded derived categories.",
+ "stmt_deps": [
+  "lem-pur-etale-system-brown-construction",
+  "def-pur-coefficient-system-image-data",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized derived-mate comparison to the exact ordinary open-extension adjunctions. On every complex representative, the recorded transpose and evaluation equations identify the inverse mate of inverse-image evaluation with inverse open-extension evaluation. Cancel the evaluation factorization isomorphisms, then use localization extensionality.",
+   "uses": [
+    "lem-pur-etale-system-brown-construction",
+    "def-pur-coefficient-system-image-data",
+    "def-pur-etale-brown-projection-realization",
+    "lem-pur-derived-mate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Lemma 5.22 and its derivation from (5.16.2), with the amplitude of Construction 5.15 (printed pp. 35–36); agent extraction of returned item steps 4 and 5, including the transition-transpose equality and truncation argument."
+   }
+  },
+  {
+   "text": "Use openInsertion_conjugate and the iterated-mate identity to identify the open insertion mate with the same inverse evaluation. For the proper factor, properInsertionMate_def and properInsertion_conjugate identify its double mate with inverse proper evaluation. Paste the two squares by mateEquiv_vcomp; leftExtension_def and the explicit definition of S.evaluation identify their composites.",
+   "uses": [
+    "lem-pur-etale-system-brown-construction",
+    "def-pur-coefficient-system-image-data",
+    "def-pur-etale-brown-projection-realization",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Lemma 5.22 and its derivation from (5.16.2), with the amplitude of Construction 5.15 (printed pp. 35–36); agent extraction of returned item steps 4 and 5, including the transition-transpose equality and truncation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-system-brown-construction",
+  "def-pur-coefficient-system-image-data",
+  "def-pur-etale-brown-projection-realization",
+  "lem-pur-derived-mate-comparison",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1, Construction 5.15 and Lemmas 5.16, 5.22; explicit comparison-normalization argument extracted from evaluation-bound proof."
+ },
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22 and its derivation from (5.16.2), with the amplitude of Construction 5.15 (printed pp. 35–36); agent extraction of returned item steps 4 and 5, including the transition-transpose equality and truncation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iterated_mateEquiv|mateEquiv_vcomp|isGE_iff_orthogonal",
+   "results": {
+    "ok": true,
+    "n_hits": 14,
+    "top": [
+     "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+     "Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean"
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic mate and monoidal tools only; none states the normalized strict etale comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic mate and monoidal tools only; none states the normalized strict etale comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mates preserve coefficient tensor unit and associativity and evaluation transitions",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.leftAdjointMate_comp_evaluation_assoc",
+     "CategoryTheory.leftAdjointMate",
+     "CategoryTheory.Adjunction.unit_app_unit_comp_map_η_assoc",
+     "CategoryTheory.rightAdjointMate",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+     "CategoryTheory.rightAdjointMate_comp_evaluation",
+     "CategoryTheory.FunctorToTypes.adj",
+     "CategoryTheory.rightAdjointMate_comp_evaluation_assoc"
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic mate and monoidal tools only; none states the normalized strict etale comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemEvaluationBound",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before derived inverse limit; Lemma 5.22 and its derivation from (5.16.2), with the amplitude of Construction 5.15 (printed pp. 35–36); agent extraction of returned item steps 4 and 5, including the transition-transpose equality and truncation argument.",
+   "via": [
+    "lem-pur-etale-system-evaluation-bound",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownEvaluationMate",
+  "file": "lean/Sheaf/Paper/EtaleBrownEvaluationMate.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownEvaluationMate",
+  "statement": "theorem etaleBrownEvaluationMate (n : ℕ) :\n    (mateEquiv S.derivedOpenAdjunction (S.levelDerivedOpenAdjunction n)\n      (.mk _ _ _ _ (S.openDerivedEvaluation n).inv)).natTrans =\n        (S.openDerived.inverseEvaluation n).hom ∧\n    (mateEquiv (S.PX.derivedAdj n) (S.PY.derivedAdj n)\n      (.mk _ _ _ _ (B.leftExtension n).inv)).natTrans = (S.evaluation n).inv",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T005401-L-3474615",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T005401-L-3474615",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

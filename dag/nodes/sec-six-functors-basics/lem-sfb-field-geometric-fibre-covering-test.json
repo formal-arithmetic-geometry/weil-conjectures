@@ -1,0 +1,478 @@
+{
+ "id": "lem-sfb-field-geometric-fibre-covering-test",
+ "kind": "statement",
+ "title": "Split geometric fibres and the finite fpqc covering test",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "statement": "Let $k$ be a field, $\\Omega/k$ a separable closure [def-pd-separable-closure], and $G=\\operatorname{Aut}_k(\\Omega)$ with the Krull topology. Use [def-weil-size-convention]. For an ind-etale $k$-algebra $B$ [def-weil-pbc-ind-etale-algebra], put $B_\\Omega=\\Omega\\otimes_kB$ and $F_k(B)=\\operatorname{Hom}_{k\\text{-alg}}(B,\\Omega)$, topologized by restriction to finite etale subalgebras, with left action $g\\cdot f=g\\circ f$. Spectra and affine fibre products have their usual meanings [def-weil-affine-spectrum, def-pc-fibre-product].\n\nThe algebra $B_\\Omega$ is ind-etale over $\\Omega$. Every point of $\\operatorname{Spec}B_\\Omega$ has residue field canonically isomorphic to $\\Omega$ as an $\\Omega$-algebra. The assignment\n$$f\\longmapsto\\ker\\bigl(B_\\Omega\\to\\Omega,\\ a\\otimes b\\longmapsto a f(b)\\bigr)$$\nis a homeomorphism from $F_k(B)$ onto $|\\operatorname{Spec}B_\\Omega|$. It is natural under all $k$-algebra maps between ind-etale algebras. The corresponding natural homeomorphism $F_\\Omega(B_\\Omega)\\cong F_k(B)$ is given by restriction along $b\\mapsto1\\otimes b$; on the right the $G$-action is forgotten. Here $F_\\Omega$ uses the identical finite-subalgebra construction with the separably closed field $\\Omega$ as its own separable closure.\n\nFor an arbitrary small family of $k$-algebra maps $B\\to B_a$ between ind-etale algebras, the scheme family $\\{\\operatorname{Spec}B_a\\to\\operatorname{Spec}B\\}_a$ is an fpqc covering [def-weil-pbc-fpqc-covering] if and only if some finite subfamily of the induced maps $F_k(B_a)\\to F_k(B)$ is jointly surjective. Empty algebras, empty families, and the empty target are included. All assertions also apply with $k=\\Omega$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 4.1.1 and Example 4.1.10, pp. 27–28: split base change, spectrum topology, and fpqc coverings."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\Omega\\otimes_kB$. By [lem-weil-pbc-ind-etale-stability], $A$ is ind-etale over $\\Omega$. Apply [lem-sfb-field-geometric-fibre-construction] with base field $\\Omega$ and separable closure $\\Omega$ to write $A$ as the directed union of its finite etale $\\Omega$-subalgebras $C$. Each $C$ is $\\Omega^n$, including $n=0$, by clause 1 of [det-pe-condensed-point-basis]. For a prime $q$ of $A$, its contraction to $C$ is a coordinate kernel by [lem-weil-pbc-spec-finite-product-fields]. Hence $C/(q\\cap C)=\\Omega$ through the structural map. Every element of $A/q$ is represented in some $C$, so $\\Omega\\to A/q$ is surjective; it is injective because $q$ is proper and $\\Omega$ is a field. Thus $A/q=\\Omega$ canonically as an $\\Omega$-algebra. In particular $q$ is maximal and its residue field is canonically $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-sfb-field-geometric-fibre-construction",
+    "det-pe-condensed-point-basis",
+    "lem-weil-pbc-spec-finite-product-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, expanded finite-splitting argument"
+   }
+  },
+  {
+   "text": "On $C\\cong\\Omega^n$, an $\\Omega$-algebra map to $\\Omega$ sends the orthogonal coordinate idempotents to zeros and ones, and exactly one to one, because their sum is one. It is that coordinate projection. Thus the kernel map identifies $\\operatorname{Hom}_{\\Omega\\text{-alg}}(C,\\Omega)$ with $\\operatorname{Spec}C$, with both finite discrete topologies; discreteness on the spectrum is [lem-weil-pbc-spec-finite-product-fields]. These identifications commute with restriction: $\\ker(h\\circ u)=u^{-1}(\\ker h)$. By [lem-sfb-field-geometric-fibre-construction], $F_\\Omega(A)$ is the inverse limit of these finite Hom sets, and by [lem-a1-filtered-spectrum-topological-limit] $|\\operatorname{Spec}A|$ is the inverse limit of the spectra, since $A=\\varinjlim C$. The coordinate kernel maps therefore induce a homeomorphism $F_\\Omega(A)\\to|\\operatorname{Spec}A|$, sending $h$ to $\\ker h$.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-product-fields",
+    "lem-sfb-field-geometric-fibre-construction",
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, expanded finite-splitting argument"
+   }
+  },
+  {
+   "text": "Define $R(h)(b)=h(1\\otimes b)$ and $S(f)(a\\otimes b)=a f(b)$. The latter extends to $A$ because the displayed formula is $k$-balanced and multiplicative, preserves one, and is $\\Omega$-linear. The identities $RS(f)=f$ and $SR(h)(a\\otimes b)=a h(1\\otimes b)=h(a\\otimes b)$ show they are inverse. To check both topologies, use the finite-subalgebra bases from [lem-sfb-field-geometric-fibre-construction]. For a finite $k$-subalgebra $B_i$, choose a finite generating list. The images $1\\otimes b$ of that list lie in one finite $\\Omega$-subalgebra $C$ of $A$; thus $R(h)|_{B_i}$ is determined by $h|_C$, so $R$ is continuous. Conversely, take a finite generating list for a finite $\\Omega$-subalgebra $C\\subset A$, and write its generators as finite sums $\\sum a_j\\otimes b_j$. The finitely many $b_j$ lie in one finite etale $k$-subalgebra $B_i\\subset B$. Then $S(f)|_C$ is determined by $f|_{B_i}$, so $S$ is continuous. These are maps between finite discrete restriction sets, hence the stated factorisations prove continuity. Composing $S$ with step 2 gives exactly the homeomorphism $f\\mapsto\\ker(a\\otimes b\\mapsto a f(b))$.",
+   "uses": [
+    "lem-sfb-field-geometric-fibre-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, expanded finite-splitting argument"
+   }
+  },
+  {
+   "text": "For a $k$-algebra map $\\alpha:B\\to D$, direct evaluation on pure tensors gives $S_B(f\\circ\\alpha)=S_D(f)\\circ(\\mathrm{id}_\\Omega\\otimes\\alpha)$. Taking kernels contracts primes along $\\mathrm{id}_\\Omega\\otimes\\alpha$, which is the corresponding spectrum map [def-weil-affine-spectrum]. Restriction satisfies $R_B(h\\circ(\\mathrm{id}\\otimes\\alpha))=R_D(h)\\circ\\alpha$. Thus both homeomorphisms are natural, with precisely the claimed restriction map and underlying space $F_k(B)$ after forgetting its action. The calculations also apply for $k=\\Omega$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, p. 28, expanded finite-splitting argument"
+   }
+  },
+  {
+   "text": "Every map $B\\to B_a$ is ind-etale by [lem-weil-pbc-ind-etale-stability], since both algebras are ind-etale over $k$. It is consequently weakly etale. Under [def-weil-pbc-ind-etale-algebra] this means its induced affine scheme morphism is weakly etale, and by [def-weil-weakly-etale-morphism] that morphism is flat. This applies to every index, not only the eventual finite selection, and to the base-changed algebras over $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-ind-etale-algebra",
+    "def-weil-weakly-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.4 and 4.1.10; Definition 4.1.1, pp. 27–28"
+   }
+  },
+  {
+   "text": "For this family of flat maps between affines, the definition [def-weil-pbc-fpqc-covering] implies that any fpqc covering has a finite subfamily jointly surjective on $\\operatorname{Spec}B$: take its affine open $V=\\operatorname{Spec}B$ and enlarge the finitely many source opens to their whole source schemes. Conversely, suppose a finite set $J$ of indices is jointly surjective. For any affine open $V=\\operatorname{Spec}D\\subset\\operatorname{Spec}B$, the inverse image of $V$ in $\\operatorname{Spec}B_a$ is the open fibre product by [lem-weil-pbc-open-immersion-base-change], affine with ring $B_a\\otimes_BD$ by [lem-weil-pbc-fibre-product-affine-spectra]. For $a\\in J$ these finitely many affine opens map onto $V$ jointly. Together with step 5 this is exactly the fpqc definition for the entire family. The argument works verbatim over $\\Omega$.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 022B, definition-fpqc-covering; Tag 01I4, lemma-fibre-product-affine-schemes"
+   }
+  },
+  {
+   "text": "Suppose the original family is fpqc. Choose the finite set $J$ of step 6. The subfamily indexed by $J$ is itself fpqc by that step. Its base change to $\\operatorname{Spec}A$ remains fpqc by clause (3) of [lem-weil-pbc-fpqc-covering-axioms]. By [lem-weil-pbc-fibre-product-affine-spectra], its source over index $a$ is $\\operatorname{Spec}(\\Omega\\otimes_k B_a)$: the tensor identification sends $(a\\otimes b)\\otimes d$ to $a\\otimes\\alpha_a(b)d$, with inverse $a\\otimes d\\mapsto(a\\otimes1)\\otimes d$. This finite family is jointly surjective on spectra by the covering definition [def-weil-pbc-fpqc-covering]. The natural kernel homeomorphisms of steps 2–4 identify its point maps with $F_k(B_a)\\to F_k(B)$, so this same finite $J$ is jointly surjective on the geometric fibres.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, finite covering criterion; base-change axiom from Stacks 022D"
+   }
+  },
+  {
+   "text": "Conversely, suppose a finite $J$ is jointly surjective on the $F_k$ spaces. Steps 2–4 make the corresponding maps $\\operatorname{Spec}(\\Omega\\otimes_kB_a)\\to\\operatorname{Spec}A$ jointly surjective. The map $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k$ is surjective since each field spectrum has one point [def-weil-affine-spectrum]. By [lem-weil-pbc-surjective-base-change] and [lem-weil-pbc-fibre-product-affine-spectra], its base change $\\operatorname{Spec}A\\to\\operatorname{Spec}B$ is surjective. Given $p\\in\\operatorname{Spec}B$, choose a point $q$ above it and then a point above $q$ in one source with index $a\\in J$. Its projection to $\\operatorname{Spec}B_a$ maps to $p$, by the commuting base-change square. Thus $J$ is jointly surjective on the original spectra, and step 6 proves that the whole family is fpqc. If $B=0$, all $B_a=0$, every spectrum and fibre is empty, and $J=\\varnothing$ satisfies both tests. If $B\\ne0$, [lem-sfb-field-geometric-fibre-construction] gives $F_k(B)\\ne\\varnothing$, so an empty family satisfies neither test. Zero source algebras contribute empty spaces. This also checks all assertions for $k=\\Omega$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-field-geometric-fibre-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10, descent of covering detection; Stacks 01S1, lemma-base-change-surjective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-sfb-field-geometric-fibre-construction",
+  "det-pe-condensed-point-basis",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 4.1.1 and Example 4.1.10, pp. 27–28, with the finite-splitting and tensor formulas expanded; Stacks 022B, 022D, 01I4, 01S1, 0CUE and 0CUF for generic inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an ind etale algebra over a field base change to a separable closure has spectrum homeomorphic to its geometric fibre and finite joint surjectivity of geometric fibres detects fpqc covers",
+   "results": {
+    "t": "2026-10-22T06:05:55Z",
+    "tool": "leanfinder",
+    "query": "For an ind etale algebra over a field base change to a separable closure has spectrum homeomorphic to its geometric fibre and finite joint surjectivity of geometric fibres detects fpqc covers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "Algebra.IsEtaleAt.comp",
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "RingHom.Etale.isStableUnderBaseChange",
+     "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable",
+     "Algebra.Etale.comp"
+    ],
+    "digest": "367e2651949eb792"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for split-spectrum comparison and geometric-fibre detection of finite fpqc coverings; general fpqc definitions and purely inseparable spectrum maps do not state this"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Surjective\", \"Spec\"",
+   "results": {
+    "t": "2026-10-22T06:05:36Z",
+    "tool": "loogle",
+    "query": "\"Surjective\", \"Spec\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.MorphismProperty.surjective_respectsIso",
+     "PrimeSpectrum.sigmaToPi_not_surjective_of_infinite",
+     "PrimeSpectrum.comap_injective_of_surjective",
+     "PrimeSpectrum.comap_surjective_of_faithfullyFlat",
+     "MaximalSpectrum.finite_of_toPiLocalization_surjective",
+     "PrimeSpectrum.finite_of_toPiLocalization_surjective",
+     "PrimeSpectrum.isMaximal_of_toPiLocalization_surjective",
+     "PrimeSpectrum.piLocalizationToMaximal_surjective"
+    ],
+    "digest": "179d6f7346f4cd53"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for split-spectrum comparison and geometric-fibre detection of finite fpqc coverings; general fpqc definitions and purely inseparable spectrum maps do not state this"
+  },
+  {
+   "tool": "grep",
+   "query": "(fpqc|ProEtale|proetale).*(cover|surject|[Ff]ield)|(cover|surject|[Ff]ield).*(fpqc|ProEtale|proetale)",
+   "results": {
+    "t": "2026-10-22T06:05:36Z",
+    "tool": "grep",
+    "query": "(fpqc|ProEtale|proetale).*(cover|surject|[Ff]ield)|(cover|surject|[Ff]ield).*(fpqc|ProEtale|proetale)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean"
+    ],
+    "digest": "d39e5f31e556c20b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for split-spectrum comparison and geometric-fibre detection of finite fpqc coverings; general fpqc definitions and purely inseparable spectrum maps do not state this"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separable closure base change identifies the spectrum of a weakly etale algebra with its embedding space and detects finite covering families of affine schemes",
+   "results": {
+    "t": "2026-10-22T06:05:37Z",
+    "tool": "leansearch",
+    "query": "Separable closure base change identifies the spectrum of a weakly etale algebra with its embedding space and detects finite covering families of affine schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SeparableClosure",
+     "separableClosure",
+     "separableClosure.isSepClosure",
+     "IsSepClosure.mk",
+     "IsSepClosure.recOn",
+     "separableClosure.isSeparable",
+     "IsSepClosure.separable",
+     "IsSepClosure.self_of_isSepClosed"
+    ],
+    "digest": "8f0ef1c11b384ef1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for split-spectrum comparison and geometric-fibre detection of finite fpqc coverings; general fpqc definitions and purely inseparable spectrum maps do not state this"
+  },
+  {
+   "tool": "grep",
+   "query": "IndEtale|ind[Ee]tale|fpqc.*[Ff]inite|[Ff]inite.*fpqc",
+   "results": {
+    "t": "2026-10-22T10:38:13Z",
+    "tool": "grep",
+    "query": "IndEtale|ind[Ee]tale|fpqc.*[Ff]inite|[Ff]inite.*fpqc",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: finite split rational-point equivalences and etale field structure are finite-stage inputs only; no ind-etale topological comparison with the finite fpqc family criterion is stated by these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split etale algebras over a separably closed field and finite jointly surjective covers of their prime spectra",
+   "results": {
+    "t": "2026-10-22T10:38:13Z",
+    "tool": "leansearch",
+    "query": "Split etale algebras over a separably closed field and finite jointly surjective covers of their prime spectra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyEtale.of_isSeparable",
+     "Algebra.FormallyEtale.of_isSeparable_aux",
+     "Algebra.Etale",
+     "IsSepClosed.factors_of_separable",
+     "IsSepClosed.splits_of_separable",
+     "IsSepClosed.casesOn",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "Algebra.Etale.iff_exists_algEquiv_prod"
+    ],
+    "digest": "ddd00a81f6bfd6a0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: finite split rational-point equivalences and etale field structure are finite-stage inputs only; no ind-etale topological comparison with the finite fpqc family criterion is stated by these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"AlgHom\"",
+   "results": {
+    "t": "2026-10-22T10:38:14Z",
+    "tool": "loogle",
+    "query": "\"PrimeSpectrum\", \"AlgHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Algebra.IsFiniteSplit.algHomEquivPrimeSpectrum",
+     "Algebra.IsFiniteSplit.coe_algHomEquivPrimeSpectrum"
+    ],
+    "digest": "79333f14cefb1a44"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: finite split rational-point equivalences and etale field structure are finite-stage inputs only; no ind-etale topological comparison with the finite fpqc family criterion is stated by these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum of an ind etale algebra after separable closure base change is homeomorphic to its space of algebra homomorphisms, with fpqc coverings detected by finite joint surjectivity",
+   "results": {
+    "t": "2026-10-22T10:38:18Z",
+    "tool": "leanfinder",
+    "query": "Spectrum of an ind etale algebra after separable closure base change is homeomorphic to its space of algebra homomorphisms, with fpqc coverings detected by finite joint surjectivity",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SpectrumRestricts.homeomorph",
+     "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable",
+     "PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable",
+     "StandardEtalePair.homEquiv",
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePair.homEquiv_apply_coe"
+    ],
+    "digest": "5f3375aba93d771c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: finite split rational-point equivalences and etale field structure are finite-stage inputs only; no ind-etale topological comparison with the finite fpqc family criterion is stated by these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "algHomEquivPrimeSpectrum|IsFiniteSplit|fpqc",
+   "results": {
+    "t": "2026-10-22T10:40:47Z",
+    "tool": "grep",
+    "query": "algHomEquivPrimeSpectrum|IsFiniteSplit|fpqc",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/TotallySplit.lean",
+     "Mathlib/RingTheory/TotallySplit.lean",
+     "Mathlib/RingTheory/TotallySplit.lean",
+     "Mathlib/RingTheory/TotallySplit.lean",
+     "Mathlib/RingTheory/TotallySplit.lean",
+     "Mathlib/RingTheory/Etale/Finite.lean"
+    ],
+    "digest": "2033e0e0ad745391"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: finite split rational-point equivalences and etale field structure are finite-stage inputs only; no ind-etale topological comparison with the finite fpqc family criterion is stated by these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prime spectrum of a filtered union of finite split algebras is the inverse limit of their finite sets of rational points; affine flat covering families have a finite jointly surjective subfamily",
+   "results": {
+    "t": "2026-10-22T10:40:48Z",
+    "tool": "leanfinder",
+    "query": "The prime spectrum of a filtered union of finite split algebras is the inverse limit of their finite sets of rational points; affine flat covering families have a finite jointly surjective subfamily",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "PrimeSpectrum.finite_of_toPiLocalization_surjective",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+     "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.pointsPi_surjective_of_isAffine",
+     "PrimeSpectrum.specComap_surjective_of_faithfullyFlat"
+    ],
+    "digest": "ea0c4b9364eea51f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: finite split rational-point equivalences and etale field structure are finite-stage inputs only; no ind-etale topological comparison with the finite fpqc family criterion is stated by these hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-profinite-galois-site",
+  "date": "2026-10-22",
+  "group": "Q82"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), separable-closure descent input below the coefficient-topology comparison: geometric field-site presentation, before any derived or coefficient assertion. Re-split of lem-sfb-field-profinite-galois-site: returned proof steps 6–7 (tensor base change and covering detection; affine-open density retained in the parent).",
+   "via": [
+    "lem-sfb-field-profinite-galois-site",
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-field-geometric-fibre-covering-test",
+  "worker": "stage1",
+  "summary": "Expanded the separable-closure spectrum and covering test in eight explicit steps, using existing DAG nodes only. Preserved the statement and statement dependencies. Checked finite split spectra, canonical residue identifications, both directions of restriction continuity, tensor naturality, flatness of every arrow, finite affine refinements, base-change detection and all empty cases. No exact completed project declaration or full Mathlib match was found.",
+  "blueprint": "The inherited nearest blueprint ancestor is null (blueprint_refs.py ancestor prints None). This item realizes parent lem-sfb-field-profinite-galois-site old step 6 and the covering portion of old step 7, in Paragraph (3) of the separable-closure descent branch recorded in blueprint.from.place. Whole-blueprint searches for ind-etale, geometric fibre, finite split, affine fibre and fpqc found inputs but no duplicate of the complete item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Base change and arrows between ind-etale algebras; generic algebra stability input to the field-site route. No node in the present unit replaces this generic input."
+   },
+   {
+    "node": "det-pe-condensed-point-basis",
+    "why": "Only clause 1, finite etale algebras over a separably closed field split as finite powers; not the field-site or covering assertion. No node in the present unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Coordinate description and discrete topology of the spectrum at finite split stages. No node in the present unit replaces this generic input."
+   },
+   {
+    "node": "lem-a1-filtered-spectrum-topological-limit",
+    "why": "Generic spectrum-of-directed-colimit topology, used on the finite subalgebras; the unit supplies no other spectrum-limit statement. No node in the present unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Only stability of covering families under base change; generic topology axiom required by the source descent argument. No node in the present unit replaces this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability",
+  "det-pe-condensed-point-basis",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "lem-weil-pbc-fpqc-covering-axioms"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-32e6130c4",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-32e6130c4 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and all eight steps, the statements of its 6 stmt_deps and 13 proof_deps, the parent lem-sfb-field-profinite-galois-site (its old steps 6-7 are carried here in full), the unit sk-thm-sf-ctf-stability, and Bhatt-Scholze Example 4.1.10 on p. 28. The delivery has no new nodes and makes no unit change. Step checks: step 1 shows Omega⊗B is ind-etale and a directed union of copies of Omega^n (finite etale algebras over a separably closed field, n=0 allowed), so A/q = Omega canonically. Step 2 identifies Hom with Spec at the finite stages by the idempotent argument, with compatible kernels, and applies the filtered-spectrum limit to a small, nonempty directed poset. Step 3 checks that S(f)(a⊗b) = a f(b) is k-balanced, that RS and SR are identities, and that R and S are continuous through finite generators. Step 4 checks naturality on pure tensors, which is Spec(id⊗α). Step 5 gets flatness of every arrow from the ind-etale stability node and the 'equivalently flat' clause. Step 6 proves fpqc iff finite joint surjectivity: the preimage of an affine open is open (open-immersion base change) and equals Spec(D⊗_B B_a). Step 7 uses base change of the finite subfamily (axioms clause 3) and the tensor identification (a⊗b)⊗d ↦ a⊗α(b)d, which I checked against the projections. Step 8 lifts points through the surjective Spec A → Spec B. Edge cases checked: B=0 (all B_a=0, J empty), the empty family with B nonzero (F_k(B) is nonempty), k=Omega, B=k, and B a finite separable L. No SGA is cited and there is no cycle. Duplicate search (rg -L for tensor/fibre and finite-subfamily phrasing, plus lem-exc-etale-field-gsets, lem-weil-pbc-geometric-field-profinite-dense-subsite, lem-sfb-separable-cover-finite-coordinates, det-pe-condensed-point-basis and the sibling construction node) found no node stating the item. I accept the five generic tool_uses: ind-etale-stability, det-pe clause 1, spec-finite-product-fields, a1-filtered-spectrum-limit and fpqc-covering-axioms clause (3). Advisory only: the item has no lean_audit field, and step 5 reaches flatness through def-weil-weakly-etale-morphism, which is harmless because the ind-etale definition's 'equivalently flat' clause already gives flatness."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldGeometricFibreCoveringTest",
+  "declaration": "AlgebraicGeometry.ProEtale.field_geometric_fibre_covering_test",
+  "file": "lean/Sheaf/Paper/FieldGeometricFibreCoveringTest.lean",
+  "statement": "theorem field_geometric_fibre_covering_test (k : Type u) (Ω : Type v) (B : Type w) [Field k] [Field Ω] [Algebra k Ω] [IsSepClosure k Ω] [CommRing B] [Algebra k B] (hB : RingHom.IndEtaleAcrossUniverses (algebraMap k B)) : RingHom.IndEtaleAcrossUniverses (algebraMap Ω (Ω ⊗[k] B)) ∧ (∀ q : PrimeSpectrum (Ω ⊗[k] B), Function.Bijective (algebraMap Ω q.asIdeal.ResidueField)) ∧ @IsHomeomorph (B →ₐ[k] Ω) (PrimeSpectrum (Ω ⊗[k] B)) (⨅ (D : Subalgebra k B) (_ : Module.Finite k D) (_ : Algebra.Etale k D), TopologicalSpace.induced (fun f : B →ₐ[k] Ω ↦ f.comp D.val) ⊥) inferInstance (fun f ↦ PrimeSpectrum.comap ((AlgHom.liftEquiv k Ω B Ω) f).toRingHom ⊥) ∧ @IsHomeomorph ((Ω ⊗[k] B) →ₐ[Ω] Ω) (B →ₐ[k] Ω) (⨅ (D : Subalgebra Ω (Ω ⊗[k] B)) (_ : Module.Finite Ω D) (_ : Algebra.Etale Ω D), TopologicalSpace.induced (fun f : (Ω ⊗[k] B) →ₐ[Ω] Ω ↦ f.comp D.val) ⊥) (⨅ (D : Subalgebra k B) (_ : Module.Finite k D) (_ : Algebra.Etale k D), TopologicalSpace.induced (fun f : B →ₐ[k] Ω ↦ f.comp D.val) ⊥) (AlgHom.liftEquiv k Ω B Ω).symm ∧ (∀ (D : Type w) [CommRing D] [Algebra k D], RingHom.IndEtaleAcrossUniverses (algebraMap k D) → ∀ α : B →ₐ[k] D, (∀ f : D →ₐ[k] Ω, PrimeSpectrum.comap ((AlgHom.liftEquiv k Ω B Ω) (f.comp α)).toRingHom ⊥ = PrimeSpectrum.comap (Algebra.TensorProduct.map (AlgHom.id Ω Ω) α).toRingHom (PrimeSpectrum.comap ((AlgHom.liftEquiv k Ω D Ω) f).toRingHom ⊥)) ∧ (∀ h : (Ω ⊗[k] D) →ₐ[Ω] Ω, (AlgHom.liftEquiv k Ω B Ω).symm (h.comp (Algebra.TensorProduct.map (AlgHom.id Ω Ω) α)) = ((AlgHom.liftEquiv k Ω D Ω).symm h).comp α)) ∧ (∀ (I : Type t) (Ba : I → Type w) [∀ a, CommRing (Ba a)] [∀ a, Algebra k (Ba a)] (α : ∀ a, B →ₐ[k] Ba a), (∀ a, RingHom.IndEtaleAcrossUniverses (algebraMap k (Ba a))) → (Presieve.ofArrows (fun a ↦ Spec (.of (Ba a))) (fun a ↦ Spec.map (CommRingCat.ofHom (α a).toRingHom)) ∈ Scheme.fpqcPrecoverage (Spec (.of B)) ↔ ∃ J : Finset I, ∀ f : B →ₐ[k] Ω, ∃ a ∈ J, ∃ g : Ba a →ₐ[k] Ω, g.comp (α a) = f))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dddd06cb",
+  "group": "N6",
+  "result": "pass",
+  "note": "Clause-by-clause match with node (ind-etale base change, canonical residue bijectivity, kernel homeomorphism via AlgHom.liftEquiv + comap ⊥, restriction homeomorphism liftEquiv.symm, both naturality equations correctly directed along id⊗α, fpqcPrecoverage ofArrows ↔ ∃ Finset J jointly surjective on F_k). No extra hypotheses; universes u v w t independent; empty/zero/k=Ω cases covered. F_k topology inline = node's restriction-generated topology (defining node lem-sfb-field-geometric-fibre-construction has no lean record). Dep records verified; lean.statement verbatim; docstrings with source/blueprint and 8-step plan; proof sorry only; report has Worker report and Second reading by N6. No fixes."
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-structural-evaluation-bidual-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the structural common-stage evaluation transpose",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne D.p$, an evaluation-normalized realization family $R$, and a separated finite-type model $X$ [lem-sf-adic-qbar-constructible-realization, lem-sf-weil-native-exceptional-forgetful]. Let $Y=X\\times_{D.k_0}D.k$ and let $A$ be a datum of [def-sf-weil-dual-realization-comparison-data]: in particular it specifies a normalized exceptional system $S$ for the geometric structure map, a compactification $c$, and the actual coefficient unit $\\Omega$. Put $\\omega=(S_c)^!\\Omega$. Suppose the literal Hom pairs $(M,\\omega)$ are permitted for all common-stage constructible $M$. Let $H(M)=R\\mathcal Hom(M,\\omega)$ be the recorded common-stage internal Hom, with the specified tensor-Hom adjunction and Koszul symmetry. For every $M$, the actual evaluation transpose $\\delta_M:M\\to H(H(M))$, obtained by transposing the signed-symmetry composite $M\\otimes H(M)\\to H(M)\\otimes M\\to\\omega$, is an isomorphism. This is an assertion entirely in the geometric coefficient category, not about native Weil morphisms or natural transformations. In Lean the arrow is `NativeBidualRealization.commonBidual D l R X A hp M`.",
+ "stmt_deps": [
+  "def-sf-weil-dual-realization-comparison-data",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-weil-native-exceptional-forgetful",
+  "lem-sf-weil-bidual-evaluation-realization"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Paragraph 1: underlying biduality with the exceptional dualizing object and the evaluation transpose; also sk-prop-sf-biduality-general.proof.md, final coefficient-transports paragraph."
+ },
+ "proof": [
+  {
+   "text": "Apply the common-stage Verdier theorem on Y. Its duality is evaluation-normalized, and its dualizing identification identifies its omega with the structural exceptional image of the coefficient unit. The normalization of the specified exceptional system identifies its left compact-support functor with this one, so uniqueness of right adjoints and the point-unit comparison give the dualizing-object isomorphism.",
+   "uses": [
+    "thm-coef-qbar-verdier",
+    "lem-sf-weil-native-exceptional-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the tensor-Hom adjunction along that dualizing isomorphism. Its evaluation square, followed by the signed braiding, identifies the displayed transpose with coefficient biduality conjugated by the two Hom comparisons. All three factors are invertible. Therefore this actual transpose is invertible, including for zero objects and on the empty scheme.",
+   "uses": [
+    "thm-coef-qbar-verdier",
+    "lem-sf-weil-bidual-evaluation-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-coef-qbar-verdier",
+  "lem-sf-weil-native-exceptional-forgetful",
+  "lem-sf-weil-bidual-evaluation-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Evaluation and biduality descend; the exceptional-adjoint identification of the dualizing object. The native parent uses only the underlying coefficient biduality, as in cor-coef-verdier-weil-equivariance.proof.md, paragraph 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Verdier biduality for bounded constructible derived Weil sheaves",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE and generic derived bounds/condensed closed structures; no geometric evaluation-biduality statement.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.ofComponents\"",
+   "results": "NatIso.ofComponents and variants support assembly only; no structural evaluation invertibility.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|dualizingComplex",
+   "results": "Mathlib hits concern normed-space biduals. Project commonBidual is constructed and compared by NativeBidualEvaluationRealization, but no existing theorem asserts its invertibility for the literal structural exceptional system.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The evaluation transpose into the structural exceptional dualizing complex is an isomorphism on constructible complexes",
+   "results": "Eight linear-algebra dual/transpose/perfect-pairing hits, including Module.evalEquiv and LinearMap.IsPerfPair.dualEval. None concerns common-stage constructible sheaves or the specified exceptional image.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-27",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-weil-verdier-biduality",
+   "place": "proof step 4: invertibility of the common-stage evaluation transpose for the specified structural exceptional system",
+   "via": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.StructuralBidualInvertible",
+  "file": "lean/Sheaf/WeilSheaf/StructuralBidualInvertible.lean",
+  "declaration": "WeilConjectures.NativeBidualRealization.isIso_commonBidual",
+  "declarations": [
+   "WeilConjectures.NativeBidualRealization.isIso_commonBidual"
+  ],
+  "statement": "theorem isIso_commonBidual\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] [Fact (l ≠ D.p)]\n    (R : Family l D) (X : Space D) (A : Datum D l R X)\n    (hp : Permitted D l R X A) (M : C D l X) :\n    IsIso (commonBidual D l R X A hp M)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

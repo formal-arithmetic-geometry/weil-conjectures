@@ -1,0 +1,398 @@
+{
+ "id": "lem-sfb-affine-groupoid-etale-invariant-comparison",
+ "kind": "statement",
+ "title": "Etale invariant spectra for cartesian stabilizer-preserving affine groupoids",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $F:(U',R',s',t',e',i',c')\\to(U,R,s,t,e,i,c)$ be a morphism of groupoid schemes over $S$, meaning maps $a:U'\\to U$ and $b:R'\\to R$ commuting with all operations of [def-a1-scheme-groupoid-laws]. Assume $U,R,U',R'$ are affine [def-weil-affine-spectrum], all four source and target maps are finite locally free [def-pc-finite-locally-free], and $a$ is etale [def-weil-etale-morphism]. Put $G=R\\times_{(s,t),U\\times_SU,\\Delta_U}U$ and $G'=R'\\times_{(s',t'),U'\\times_SU',\\Delta_{U'}}U'$ [def-pc-fibre-product]. Assume the three natural squares with horizontal maps $b,a$, and respectively vertical maps $(s',s)$, $(t',t)$, and $(G'\\to U',G\\to U)$, are cartesian; in the last square the upper horizontal map is $G'\\to G$. Define $C=\\{f\\in\\Gamma(U,\\mathcal O_U):s^*f=t^*f\\}$ and $C'=\\{f\\in\\Gamma(U',\\mathcal O_{U'}):(s')^*f=(t')^*f\\}$. Then the induced map $\\operatorname{Spec}C'\\to\\operatorname{Spec}C$ is etale, and the natural map $U'\\to U\\times_{\\operatorname{Spec}C}\\operatorname{Spec}C'$ is an isomorphism. Empty schemes and variable finite locally free ranks are allowed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0DT9, lemma-etale, assumptions (1)--(4) and conclusion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-scheme-groupoid-laws",
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $U=\\operatorname{Spec}A$, $R=\\operatorname{Spec}B$, and similarly with primes, and put $M=\\operatorname{Spec}C$, $M\\prime=\\operatorname{Spec}C\\prime$. The operations commute with the maps to $M$, since $s^*c=t^*c$ for $c\\in C$. For any flat $C$-algebra $D$, apply [lem-weil-pbc-flat-tensor-exact] to $0\\to C\\to A\\xrightarrow{s^*-t^*}B$. It identifies the invariants in $A\\otimes_C D$ with $D$. Applied instead to $0\\to C\\prime\\to A\\prime\\to B\\prime$ over $C$, it identifies the primed invariants with $C\\prime\\otimes_C D$. Thus the two invariant spectra after flat base change really are $\\operatorname{Spec}D$ and $M\\prime\\times_M\\operatorname{Spec}D$. Tensoring the local finite free presentations preserves finite locally free source and target; etaleness of $a$ survives base change by [lem-weil-pbc-etale-base-change-finite-limits]. The three cartesian squares and all groupoid identities survive by the universal property of fibre products. We may therefore use the same hypotheses after any flat affine base change.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; flat base change paragraph; Tag 03BK (lemma-invariants-base-change), flat case"
+   }
+  },
+  {
+   "text": "First suppose $C$ strictly henselian local with maximal ideal $\\mathfrak m$, and fix $p\\prime\\in M\\prime$ above its closed point. Apply [lem-sfb-groupoid-strict-local-reduced-orbit]. Its hypotheses are exactly the three cartesian squares and etaleness of $a$, together with the finite locally free affine presentations assumed here. With $J=\\sqrt{\\mathfrak m A}$ and $J\\prime$ the radical ideal of the closed orbit $Z\\prime=U\\prime_{p\\prime}$, it gives an isomorphism $A/J\\to A\\prime/J\\prime$ and a bijection of those orbit points with $U_{\\mathfrak m}$, with the same residue fields. In particular the inverse of this isomorphism, composed with the quotient $A\\prime\\to A\\prime/J\\prime$, is an $A$-algebra map $\\bar\\sigma:A\\prime\\to A/J$.",
+   "uses": [
+    "lem-sfb-groupoid-strict-local-reduced-orbit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; claim, first part and reduced quotient identification"
+   }
+  },
+  {
+   "text": "By [lem-a1-affine-groupoid-integral-invariants], $A$ is integral over $C$. Since $C$ is henselian local, [lem-weil-pbc-integral-over-henselian-pair] makes $(A,\\mathfrak m A)$ henselian. The map $A\\to A\\prime$ is etale, so [lem-sfb-henselian-pair-radical-etale-section] lifts $\\bar\\sigma$ to a retraction $\\sigma:A\\prime\\to A$. Apply [lem-weil-pbc-etale-section-idempotent-splitting] to this retraction: $A\\prime\\simeq A\\times A^{\\prime\\prime}$ over $A$. Denote by $W\\simeq U$ the corresponding clopen subscheme of $U\\prime$. The reduction of $\\sigma$ is the specified inverse on $A/J$; hence $W$ contains every point of $Z\\prime$, and its intersection with the inverse image of the closed point of $M$ is precisely $Z\\prime$.",
+   "uses": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lem-sfb-henselian-pair-radical-etale-section",
+    "lem-weil-pbc-etale-section-idempotent-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; claim, second part, henselian splitting"
+   }
+  },
+  {
+   "text": "The clopen $W$ is invariant. Indeed, $(s\\prime)^{-1}W$ is finite over $W\\simeq U$, so its ring is finite over $A$ and integral over $A$ by [lem-weil-pbc-finite-algebra-is-integral], hence integral over $C$ by [lem-weil-pbc-integral-transitive]. Apply [lem-weil-pbc-integral-over-henselian-pair] and [lem-weil-pbc-henselian-pair-prime-connected] to see that every point of this source component has a specialization over the closed point of $M$: the closed set of specializations meeting the closed fibre is nonempty. Its specialized source belongs to $Z\\prime$. Since invariant functions agree on the two endpoints of an arrow, the specialized target also lies over $p\\prime$, hence belongs to $Z\\prime\\subset W$. Clopenness now forces the original target to lie in $W$. Inversion gives the reverse inclusion, so $(s\\prime)^{-1}W=(t\\prime)^{-1}W$. Their common clopen component maps isomorphically to $R$ by the source cartesian square and $W\\simeq U$. The object and arrow isomorphisms respect all operations because $F$ does. Thus the whole groupoid splits as $(U,R)\\amalg(U^{\\prime\\prime},R^{\\prime\\prime})$ over $(U,R)$. Taking the equalizer in these two product rings gives $C\\prime\\simeq C\\times C^{\\prime\\prime}$. The point $p\\prime$ belongs to the first factor: the nonempty orbit $Z\\prime$ lies in $W$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lem-weil-pbc-henselian-pair-prime-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; end of claim; explicit specialization argument for invariance"
+   }
+  },
+  {
+   "text": "Return to arbitrary $C$ and $p\\prime\\mapsto p$. Take a separable closure of $\\kappa(p)$ and the strict henselization $H$ supplied by [lem-weil-pbc-strict-henselization-triples]. Use a small skeleton of the pointed etale algebras: their finite presentations and residue embeddings form a set. Thus $H$ is a small filtered colimit of pointed etale $C$-algebras $C_i$, and is strictly henselian. Each $C_i$ is flat over $C$ by [lem-weil-pbc-etale-algebra-flat]. The elementwise description [lem-pc-filtered-colimit-commrings-elementwise] also gives the colimit of the underlying $C$-modules: a compatible family of linear maps acts on a representative at a stage, and equality at a later stage makes it well defined. Therefore [lem-weil-pbc-filtered-colimit-flat-modules] makes $C\\to H$ flat. Choose $p\\prime_H$ over $p\\prime$ and the closed point of $\\operatorname{Spec}H$: the tensor product of their residue fields over $\\kappa(p)$ is nonzero. Step 1 and steps 2--4 yield a section $U_H\\to U\\prime_H$ with clopen invariant image $W_H\\simeq U_H$ through that orbit.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; strict henselization base change paragraph"
+   }
+  },
+  {
+   "text": "Descend this section algebraically. Its retraction is determined by the $A$-algebra map $A\\prime\\to A\\otimes_C H$. The universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] identifies $A\\otimes_C H$ with the filtered colimit of the $A\\otimes_C C_i$: a compatible cocone is exactly a fixed map from $A$ and a compatible cocone from the $C_i$. Since $A\\prime$ is finitely presented over $A$ by [lem-weil-pbc-etale-algebra-finite-presentation-localization](1), [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] factors this map through $A\\otimes_C C_i$. Extending $C_i$-linearly gives a retraction $A\\prime\\otimes_C C_i\\to A\\otimes_C C_i$. By [lem-weil-pbc-etale-section-idempotent-splitting] its image on spectra is clopen $W_i\\simeq U_i$, described by an idempotent $\\epsilon_i\\in A\\prime\\otimes_C C_i$. At the limit its invariance is $(s\\prime)^*\\epsilon_i=(t\\prime)^*\\epsilon_i$ in $B\\prime\\otimes_C H$. The same universal property identifies $B\\prime\\otimes_C H$ with the filtered colimit of the $B\\prime\\otimes_C C_i$, and the images of $\\epsilon_i$ in $A\\prime\\otimes_C H$ are the idempotent of the section over $H$, since the factorized retraction base changes to the given one. By [lem-pc-filtered-colimit-commrings-elementwise](2), this equation holds at a later stage. Thus the groupoid splits there with first component $(U_i,R_i)$, and step 1 gives $C\\prime\\otimes_C C_i=C_i\\times D_i$. The clopen factor $N_i=\\operatorname{Spec}C_i\\subset M\\prime\\times_M\\operatorname{Spec}C_i$ contains the image of $p\\prime_H$. Its composite $N_i\\to M\\prime$ is etale (open immersion followed by base change of $\\operatorname{Spec}C_i\\to M$) and has $p\\prime$ in its image. Its composite to $M$ is etale as well.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-etale-section-idempotent-splitting",
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; descent of the decomposition, by finite presentation of the section and descent of one idempotent equation"
+   }
+  },
+  {
+   "text": "Choose these charts for all $p\\prime\\in M\\prime$. Their coproduct $N\\to M\\prime$ exists by [lem-weil-pbc-scheme-coproduct-family], is surjective, and both $N\\to M\\prime$ and $N\\to M$ are etale by [lem-weil-pbc-etale-local-on-source]. Apply [lem-trf-etale-descent-through-source-cover] with $p:N\\to M\\prime$ surjective etale and $h:M\\prime\\to M$, whose composite $h\\circ p:N\\to M$ is etale. It follows that $M\\prime\\to M$ is etale. The comparison $d:U\\prime\\to U\\times_M M\\prime$ is consequently etale by base change and cancellation, since its composite to $U$ is the given etale map $a$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-trf-etale-descent-through-source-cover",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; conclusion of the descent paragraph and final paragraph"
+   }
+  },
+  {
+   "text": "To finish the omitted details, fix an algebraically closed field $\\Omega$ and an $\\Omega$-point $(u,y)$ of $U\\times_M M\\prime$ with image $p\\in M$. Choose the strict henselization $H$ at the separable closure of $\\kappa(p)$ inside $\\Omega$, with its map to $\\Omega$. After this flat base change, apply [lem-sfb-groupoid-strict-local-reduced-orbit] to the point of $M\\prime_H$ underlying $y$. It identifies its orbit with $U_{H,\\mathfrak m_H}$ bijectively with identical residue fields. Each residue field of this latter fibre is algebraic over the separably closed residue field of $H$, by [lem-a1-affine-groupoid-integral-invariants] and [lem-a1-integral-residue-extension-algebraic]. Every finite subextension has a unique embedding into $\\Omega$ by [lem-weil-pbc-sepclosed-finite-extension-unique-embedding](b). Those maps agree on composita, so their union is the unique embedding of the whole residue field. The orbit bijection and the identical residue fields therefore give exactly one $\\Omega$-point above $(u,y)$; the compatibility with $y$ holds because the two embeddings of its algebraic residue field into $\\Omega$ agree by the same finite-subextension argument. Thus $d$ is bijective on $\\Omega$-points for every algebraically closed $\\Omega$. Two points over any field become equal after passage to its algebraic closure and hence were equal already, so [def-weil-radicial-morphism] makes $d$ radicial. It is surjective on points by the same geometric-point existence. By [lem-weil-pbc-radicial-etale-open] it is an open immersion; a surjective open immersion is an isomorphism. Empty schemes make these checks vacuous. No constant-rank or Noetherian assumption was used.",
+   "uses": [
+    "lem-sfb-groupoid-strict-local-reduced-orbit",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-integral-residue-extension-algebraic",
+    "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+    "def-weil-radicial-morphism",
+    "lem-weil-pbc-radicial-etale-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0DT9 (lemma-etale), proof; final paragraph, expanding \"some details omitted\" by residue-field maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-weil-radicial-morphism",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-integral-residue-extension-algebraic",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-sfb-groupoid-strict-local-reduced-orbit",
+  "lem-sfb-henselian-pair-radical-etale-section",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-radicial-etale-open",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0DT9 (lemma-etale), with explicit finite-data descent and geometric-point details"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale cartesian stabilizer preserving map of finite locally free affine groupoids induces an etale map of invariant spectra and a cartesian square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale permanence, ring actions and manifold groupoids do not state the finite locally free scheme-groupoid invariant comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariant\", \"etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale permanence, ring actions and manifold groupoids do not state the finite locally free scheme-groupoid invariant comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*invariant|invariant.*[eE]tale|[eE]tale.*invariant",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"512\", \"text\": \"theorem liftPropAt_chart [HasGroupoid M G] (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"516\", \"text\": \"theorem liftPropOn_chart [HasGroupoid M G] (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"520\", \"text\": \"theorem liftPropAt_chart_symm [HasGroupoid M G] (hG : G.LocalInvariantProp G Q)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"524\", \"text\": \"theorem liftPropOn_chart_symm [HasGroupoid M G] (hG : G.LocalInvariantProp G Q)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/LocalInvariantProperties.lean\", \"line\": \"528\", \"text\": \"theorem liftPropAt_of_mem_groupoid (hG : G.LocalInvariantProp G Q) (hQ : ∀ y, Q id univ y)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Defs.lean\", \"line\": \"154\", \"text\": \"    (contDiffGroupoid 1 I).LocalInvariantProp (contDiffGroupoid 1 I')\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"15\", \"text\": \"of `StructureGroupoid.LocalInvariantProp`) property `P` on the model spaces of `M` and `M'`. For\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"21\", \"text\": \"`StructureGroupoid.LocalInvariantProp`: that is, showing that a differential-geometric \\\"locally\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"26\", \"text\": \"* `StructureGroupoid.LocalInvariantProp.localPredicate`: the `TopCat.LocalPredicate` (in the\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"29\", \"text\": \"* `StructureGroupoid.LocalInvariantProp.sheaf`: the sheaf-of-types of functions `f : M → M'`\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Basic.lean\", \"line\": \"38\", \"text\": \"open Set TopologicalSpace StructureGroupoid StructureGroupoid.LocalInvariantProp Opposite\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"19\", \"text\": \"types using the construction `StructureGroupoid.LocalInvariantProp.sheaf` from the file\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"113\", \"text\": \"  TopCat.stalkToFiber (StructureGroupoid.LocalInvariantProp.localPredicate M N _) x\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"119\", \"text\": \"  TopCat.stalkToFiber (StructureGroupoid.LocalInvariantProp.localPredicate M N _) x\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"102\", \"text\": \"    (contDiffGroupoid n I).LocalInvariantProp (contDiffGroupoid n I')\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"144\", \"text\": \"    (contDiffGroupoid n I).LocalInvariantProp (contDiffGroupoid n I')\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Defs.lean\", \"line\": \"689\", \"text\": \"  StructureGroupoid.LocalInvariantProp.liftPropWithinAt_mono_of_mem_nhdsWithin\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale permanence, ring actions and manifold groupoids do not state the finite locally free scheme-groupoid invariant comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale equivariant morphism preserving stabilizers descends to etale morphism of affine quotient schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] (e : A ≃ₐ[R] B) : FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $ and there exists an algebra equivalence $ e : A \\\\simeq_R B $, then $ B $ is also formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] (e : A ≃ₐ[R] B) : Etale R B\", \"doc\": \"If $ A $ and $ B $ are algebras over a commutative ring $ R $, and there exists an $ R $-algebra equivalence $ A ≃ₐ[R] B $, then $ A $ being étale over $ R $ implies $ B $ is also étale over $ R $. Th\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardEtale\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"[IsStandardEtale R S] : Algebra.Etale R S\", \"doc\": \"Every standard étale algebra over a commutative ring is an étale algebra. Specifically, if an algebra $ S $ over a commutative ring $ R $ is isomorphic to a localization of a polynomial ring over $ R \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale permanence, ring actions and manifold groupoids do not state the finite locally free scheme-groupoid invariant comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale maps between finite flat affine groupoids preserving source target and stabilizers descend along invariant subrings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"RingHom.Etale.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The composition of two étale ring homomorphisms is again an étale ring homomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary etale permanence, ring actions and manifold groupoids do not state the finite locally free scheme-groupoid invariant comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Invariant-ring quotient of a stack with a finite flat affine cover. Supporting input: Etale invariant spectra for cartesian stabilizer-preserving affine groupoids.",
+   "via": [
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-groupoid-etale-invariant-comparison",
+  "worker": "stage1",
+  "group": "NI",
+  "summary": "Followed Stacks 0DT9 via reduced closed orbit, henselian splitting, invariance, descent of the section over U_i and its invariant idempotent, and explicit geometric-point comparison. Two statement-only supporting nodes; statement unchanged.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisite named in inherited from.place. The inherited created.item chain has no machine-resolvable blueprint ancestor (ancestor returns None).",
+  "tool_uses": [
+   {
+    "node": "def-pc-finite-locally-free",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "def-weil-radicial-morphism",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-integral-invariants",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-a1-integral-residue-extension-algebraic",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic Stacks 036W scheme fact (etale is etale-local on the source, singleton surjective etale cover); replaces the algebraic-space detour; neither the trace formula nor Poincare duality nor their proofs."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-flat",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-on-source",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-idempotent-splitting",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-flat-modules",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-pair-prime-connected",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-over-henselian-pair",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-integral-transitive",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-radicial-etale-open",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic foundational scheme, ring or etale-descent tool used with its stated hypotheses; this six-functor unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-finite-locally-free",
+  "def-weil-radicial-morphism",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-integral-residue-extension-algebraic",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-radicial-etale-open",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-741deb242",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-741deb242 (reviewer sub-agent of L); spot-checked: The proof follows Stacks 0DT9 (groupoids.tex lemma-etale), which I read in full along with More on Algebra 09XI and 09XJ. The item statement matches hypotheses (1)-(4) and the conclusion and is unchanged. I checked all 8 steps against the exact statements of the cited nodes. Step 1: flat base change of invariants via flat-tensor-exact. Steps 2-3: the reduced-orbit isomorphism, then integral over henselian, the new radical-section lift and idempotent splitting. Step 4: invariance of W, using prime-connected for the specialization to the closed fibre, generization into the open W, and the source square for the arrow component. Step 5: the strict henselization is flat. Step 6: the retraction is descended by finite presentation, and the idempotent equation descends to a finite stage. Step 7: étaleness of M'->M. Step 8: Stacks' omitted details are written out via Ω-points, unique embeddings, radicial and étale, then open immersion. Both new nodes are true, self-contained and not restatements of the item. lem-sfb-groupoid-strict-local-reduced-orbit is the first part of the 0DT9 claim, checked by finiteness, closedness, bijection and CRT, and on the empty, identity and disjoint-copy cases. lem-sfb-henselian-pair-radical-etale-section is 09XJ plus 09XI (1)=>(2); the DAG has only the converse and the local rational-point version, so it is not a duplicate. FIX 1, step 7: the algebraic-space detour (def-trf-scheme-algebraic-space, lem-trf-space-etale-source-atlas-detection(1), lem-trf-space-representable-etale-scheme-tests) is replaced by the existing direct scheme node lem-trf-etale-descent-through-source-cover (Stacks 036W), which atlas-detection itself cites; proof_deps and tool_uses are updated. FIX 2, step 6: added that B'⊗_C H is the colimit of B'⊗_C C_i and that ε_i maps to the H-level idempotent of the section. Batch-5 flags: the three trf citations are generic algebraic-space foundations, not the trace formula, Poincaré duality or their proofs; their closures contain no nt-assume, sk-thm-trace-transport or sec-poincare-duality node. All three are removed by the fix, and the replacement 036W node is generic with an equally clean closure. Cycle check is clear. The off-unit generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidEtaleInvariantComparison",
+  "declaration": "AlgebraicGeometry.affineGroupoid_etale_invariant_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidEtaleInvariantComparison.lean",
+  "statement": "theorem affineGroupoid_etale_invariant_comparison (S U R U' R' : Scheme.{u}) (π : U ⟶ S) (π' : U' ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (s' t' : R' ⟶ U') (e' : U' ⟶ R') (i' : R' ⟶ R') (c' : pullback s' t' ⟶ R') (_hG : Scheme.IsGroupoid s t e i c) (_hG' : Scheme.IsGroupoid s' t' e' i' c') (_hS : s ≫ π = t ≫ π) (_hS' : s' ≫ π' = t' ≫ π') (a : U' ⟶ U) (b : R' ⟶ R) (_ha : a ≫ π = π') (_he : e' ≫ b = a ≫ e) (_hi : i' ≫ b = b ≫ i) (_hc : ∀ (H : Scheme.{u}) (p' : H ⟶ pullback s' t') (p : H ⟶ pullback s t), p' ≫ pullback.fst s' t' ≫ b = p ≫ pullback.fst s t → p' ≫ pullback.snd s' t' ≫ b = p ≫ pullback.snd s t → p' ≫ c' ≫ b = p ≫ c) [IsAffine U] [IsAffine R] [IsAffine U'] [IsAffine R'] [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] [s'.IsFiniteLocallyFree] [t'.IsFiniteLocallyFree] [Etale a] (_hs : IsPullback b s' s a) (_ht : IsPullback b t' t a) (_hstab : ∀ (H : Scheme.{u}) (x : H ⟶ U') (r : H ⟶ R), r ≫ s = x ≫ a → r ≫ t = x ≫ a → ∃! r' : H ⟶ R', r' ≫ b = r ∧ r' ≫ s' = x ∧ r' ≫ t' = x) : ∃ φ : s.appTop.hom.eqLocus t.appTop.hom →+* s'.appTop.hom.eqLocus t'.appTop.hom, (s'.appTop.hom.eqLocus t'.appTop.hom).subtype.comp φ = a.appTop.hom.comp (s.appTop.hom.eqLocus t.appTop.hom).subtype ∧ Etale (Spec.map (CommRingCat.ofHom φ)) ∧ IsPullback a (U'.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (s'.appTop.hom.eqLocus t'.appTop.hom).subtype)) (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (s.appTop.hom.eqLocus t.appTop.hom).subtype)) (Spec.map (CommRingCat.ofHom φ))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1b7d4f21",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Statement matches Stacks 0DT9 (groupoids.tex l.4569-4600). Hypotheses: affine (4), finite locally free s,t,s',t' (FiberDegree class, no rank restriction), Etale a, all present; source/target squares IsPullback b s' s a / b t' t a correctly oriented; stabilizer square stated by points on every test scheme, ∃! over the full conjunction, equals cartesianness of G'→G×_U U'; operations preserved (_he,_hi,_hc not vacuous). C,C' are eqLocus of appTop; φ unique via subtype injectivity (canonical, not arbitrary); Etale Spec φ and IsPullback a q' q (Spec φ) equivalent to the comparison isomorphism. Empty and variable-rank cases allowed, all variables bound. lean.statement verbatim in file; node changed only in its lean field; stmt_deps unchanged; one sorry, no defs, no pro-etale; docstrings carry source place, blueprint tag and all 8 steps; report has Worker report and Second reading sections; 8 private proof-input imports exist. No files changed, so no compile. No findings."
+ }
+}

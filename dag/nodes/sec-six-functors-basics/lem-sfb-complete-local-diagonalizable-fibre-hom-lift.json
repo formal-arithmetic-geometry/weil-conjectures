@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+ "kind": "statement",
+ "title": "Lifting diagonalizable homomorphisms over a complete local base",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring] such that $A\\to\\varprojlim_{n\\geq1}A/\\mathfrak m^n$ is an isomorphism [def-weil-pbc-adic-completion], and put $k=A/\\mathfrak m$ and $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. An $S$-group scheme is a group object in schemes over $S$; homomorphisms respect multiplication, identity and inverse. Let $G=\\operatorname{Spec}B$ be an affine $S$-group scheme with $B$ a finitely generated $A$-algebra which is flat as an $A$-module [def-weil-pbc-flat-ring-map]. Assume $G_k=G\\times_S\\operatorname{Spec}k$ [def-pc-base-change] is of multiplicative type: on an fppf covering of $\\operatorname{Spec}k$ [def-pc-fppf-site] it is isomorphic to $D(M')$ for finitely generated abelian groups $M'$. Here $D_A(M)=\\operatorname{Spec}A[M]$ has the group-algebra Hopf operations of [def-sfb-ring-diagonalizable-group]. For every finitely generated abelian group $M$, restriction is a bijection\n$$\\operatorname{Hom}_{S\\text{-}\\mathrm{gp}}(D_A(M),G)\\ \\longrightarrow\\ \\operatorname{Hom}_{k\\text{-}\\mathrm{gp}}(D_k(M),G_k).$$\nIf $j_0:D_k(M)\\xrightarrow{\\sim}G_k$ is an isomorphism, its unique lift $j:D_A(M)\\to G$ is an open and closed immersion [def-weil-open-immersion, def-weil-closed-immersion]. Neither smoothness nor commutativity of $G$ is assumed, and torsion in $M$ is allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem B.3.2(2), printed pp.288-290, split source, including both the Hom bijection and the open-and-closed-immersion assertion. WANTED locally as literature/conrad-reductive-group-schemes.pdf; online statement and proof read. No Stacks tag states this structural result."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-base-change",
+  "def-pc-fppf-site",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=D_A(M)$, $A_n=A/\\mathfrak m^n$ and $S_n=\\operatorname{Spec}A_n$ for $n\\geq1$. For any $A$-algebra $R$, the inverse maps $A[M]\\otimes_A R\\leftrightarrows R[M]$, $e_m\\otimes r\\leftrightarrow re_m$, identify $H_R$ and its three group operations with $D_R(M)$, by the affine fibre-product formula. Finite generators $m_1,\\ldots,m_t$ of $M$ give algebra generators $e_{m_i},e_{-m_i}$ of $A[M]$. The finite-type/Noetherian result makes both this algebra and $B$ finitely presented over $A$. Their quotients over $A_n$ remain finitely presented by reducing generators and relations. Flat module base change makes $B\\otimes_A A_n$ flat over $A_n$. The ideal $\\mathfrak m/\\mathfrak m^n$ is nilpotent with quotient $k$, so [lem-sfb-nilpotent-flat-multiplicative-deformation] makes $G_n$ of multiplicative type, for every $n$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-sfb-nilpotent-flat-multiplicative-deformation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+   }
+  },
+  {
+   "text": "We verify that reduction $\\operatorname{Hom}(H_n,G_n)\\to\\operatorname{Hom}(H_1,G_1)$ is bijective. Choose an fppf cover of $S_n$ diagonalizing $G_n$ and refine it by affine opens. On each such affine $U=\\operatorname{Spec}R$, the target is $D_R(N)$ and the source is $D_R(M)$. The inverse image $U_1$ is defined by the nilpotent ideal $\\mathfrak mR$, so $|U_1|=|U|$: every prime contains that ideal, and the closed subset is the whole spectrum. The character-duality statement [lem-sfb-relative-diagonalizable-character-duality] identifies homomorphisms over $U$ with locally constant character maps $N\\to M$; reduction does not change these maps or their underlying open decompositions. Thus any given special-fibre homomorphism lifts uniquely over $U$. On pairwise overlaps the two lifts agree: refine again by affine opens and use the same character-duality argument; the target is already diagonalized by restriction of either trivialization. Uniqueness on these opens gives equality on the overlap by morphism gluing. The cover after pullback to $H_n$ is fppf, hence fpqc. Representable fpqc descent glues the local maps to $H_n\\to G_n$. The three homomorphism equations and the prescribed reduction hold after that same covering, hence hold by uniqueness of descent. The same local uniqueness proves uniqueness of the global lift.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+   }
+  },
+  {
+   "text": "Given $u_1:H_1\\to G_1$, let $u_n$ be its unique lift over $S_n$ from Step 2. Reduction of $u_{n+1}$ to $S_n$ has special fibre $u_1$, so uniqueness in Step 2 makes it equal to $u_n$. Apply [lem-sfb-adic-diagonalizable-hom-effectivity] to this compatible family, using precisely the complete Noetherian local ring $A$, finitely generated $M$, and affine finite-type target $G$ in our hypotheses. It gives a unique $u:H\\to G$ reducing to every $u_n$, in particular to the prescribed $u_1$. Conversely any two lifts of $u_1$ have equal reductions at every $n$ by Step 2 and are equal by the injectivity in effectivity. This proves the asserted Hom bijection.",
+   "uses": [
+    "lem-sfb-adic-diagonalizable-hom-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+   }
+  },
+  {
+   "text": "Now let $j_0:H_k\\xrightarrow{\\sim}G_k$ and let $j:H\\to G$ be its lift. Define its kernel by $K=H\\times_{G,e_G}S$. On rings this is $\\operatorname{Spec}(A[M]/I)$, where $I=(j^*(b)-\\epsilon_G(b):b\\in B)$. It is a closed subgroup of $H$, and $K_k=1_k$ since $j_0$ is an isomorphism, by the fibre-product formula. Choose generators of $M$ to give a surjection $\\mathbf Z^t\\twoheadrightarrow M$; the resulting surjection $A[\\mathbf Z^t]\\twoheadrightarrow A[M]$ embeds $H$ as a closed subgroup of the displayed split torus in [lem-sfb-local-torus-subgroup-special-trivial]. Thus the same node applies to $K$ as a closed subgroup of that torus and gives $K=1_S$. The composite coordinate quotient is surjective, so closedness here is the affine quotient criterion, without a flatness assumption on $K$. For any $S$-scheme $T$, $j(h)=j(h')$ implies $h(h')^{-1}\\in K(T)=\\{1\\}$, hence $h=h'$. Thus $j$ is a monomorphism in the required functor-of-points sense.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "lem-sfb-local-torus-subgroup-special-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+   }
+  },
+  {
+   "text": "The source $H=D_A(M)$ is a multiplicative-type group of finite presentation by Step 1, and the target $G$ is affine of finite presentation there. The monomorphism of Step 4 is therefore a closed immersion by [lem-sfb-affine-multiplicative-type-monomorphism-closed]. Write it as $\\operatorname{Spec}(B/L)\\hookrightarrow\\operatorname{Spec}B$ for an ideal $L\\subseteq B$. Both $H$ and $G$ are flat over $A$: $A[M]$ is free on its basis, and $B$ is flat by hypothesis; use the flat affine criterion. Apply [lem-sfb-flat-closed-family-ideal-base-change] with $T=S$, $X=G$, $Z=H$. Its exact ideal sequence after base change to $k$ identifies $L/\\mathfrak mL$ with the kernel of $B/\\mathfrak mB\\to (B/L)/\\mathfrak m(B/L)$. This map is the coordinate isomorphism of $j_0$, so $L/\\mathfrak mL=0$, that is, $L=\\mathfrak mL$. The Noetherian finite-type theorem makes $B$ Noetherian, so $L$ is a finite $B$-module.",
+   "uses": [
+    "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-sfb-flat-closed-family-ideal-base-change",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+   }
+  },
+  {
+   "text": "Apply the annihilator form of Nakayama to the finite $B$-module $L$ and the ideal $\\mathfrak mB$. It supplies $f\\in1+\\mathfrak mB$ with $fL=0$. Therefore on the principal open $V=D(f)\\subseteq G$ the quotient $B_f\\to(B/L)_f$ is an isomorphism: $L_f=0$. This gives a factorization $V\\to H\\hookrightarrow G$. Moreover $V$ contains the entire identity section: the augmentation $\\epsilon_G:B\\to A$ sends $f$ to $1+\\mathfrak m$, a unit in the local ring $A$ (a nonunit lies in its unique maximal ideal). Thus the identity map $S\\to G$ factors through $V$. The principal open and its structure sheaf are exactly $\\operatorname{Spec}B_f$ by the basic-open spectrum description.",
+   "uses": [
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+   }
+  },
+  {
+   "text": "Finally apply [lem-sfb-flat-subgroup-identity-neighbourhood-open] to the closed subgroup $j:H\\hookrightarrow G$ and the open $V$ from Step 6. The factorization through $H$ and the identity factorization are supplied there. The source $H\\to S$ is flat by Step 5 and locally finitely presented by Step 1. The lemma makes $j$ an open immersion, while Step 5 already made it a closed immersion. This is the required open-and-closed assertion. None of the steps imposed smoothness or commutativity on $G$, or excluded torsion in $M$.",
+   "uses": [
+    "lem-sfb-flat-subgroup-identity-neighbourhood-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-sfb-nilpotent-flat-multiplicative-deformation",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-adic-diagonalizable-hom-effectivity",
+  "def-weil-closed-immersion",
+  "lem-sfb-local-torus-subgroup-special-trivial",
+  "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-sfb-flat-closed-family-ideal-base-change",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-sfb-flat-subgroup-identity-neighbourhood-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Theorem B.3.2(2), printed pp.289-290; agent assembly of nilpotent deformation, existing character duality and effectivity, and an affine ideal/translation proof of openness. Local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat affine finite type group over a complete noetherian local ring with multiplicative type special fibre admits unique lifts of homomorphisms from diagonalizable groups",
+   "results": "{\"t\": \"2026-10-24T10:00:45Z\", \"tool\": \"leanfinder\", \"query\": \"Flat affine finite type group over a complete noetherian local ring with multiplicative type special fibre admits unique lifts of homomorphisms from diagonalizable groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.lift_unique'\", \"Algebra.FormallyUnramified.lift_unique\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"0543168bb3d26ce8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: Algebra.FormallyUnramified.lift_unique', Algebra.FormallyUnramified.lift_unique, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, Algebra.FormallyUnramified.lift_unique_of_ringHom, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A special fibre isomorphism from a split group of multiplicative type to a flat affine group uniquely lifts to an open and closed immersion over a complete noetherian local ring",
+   "results": "{\"t\": \"2026-10-24T10:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"A special fibre isomorphism from a split group of multiplicative type to a flat affine group uniquely lifts to an open and closed immersion over a complete noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom\", \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_over\"], \"digest\": \"8875a68af8133715\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom, AlgebraicGeometry.IsClosedImmersion.isIso_lift, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.AffineSpace.SpecIso_inv_over concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms from diagonalizable group schemes to flat affine groups with multiplicative type special fibre lift uniquely over complete local rings",
+   "results": "{\"t\": \"2026-10-24T10:01:11Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms from diagonalizable group schemes to flat affine groups with multiplicative type special fibre lift uniquely over complete local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.liftAlgHom\", \"Hausdorffification.lift_eq\", \"IsLocalRing.ResidueField.mapAut\", \"IsAdicComplete.liftRingHom.congr_simp\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.StrictMono.liftRingHom.congr_simp\"], \"digest\": \"8c76d609577c7e68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: Algebra.FormallySmooth.lift, AdicCompletion.liftAlgHom, IsAdicComplete.liftAlgHom, Hausdorffification.lift_eq, IsLocalRing.ResidueField.mapAut, IsAdicComplete.liftRingHom.congr_simp, IsAdicComplete.liftRingHom, IsAdicComplete.StrictMono.liftRingHom.congr_simp concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T10:00:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T10:01:10Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"diagonalizable\"",
+   "results": "{\"t\": \"2026-10-24T10:04:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"diagonalizable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A special fibre isomorphism from a diagonalizable group lifts to an open and closed subgroup over a complete noetherian local ring",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"leansearch\", \"query\": \"A special fibre isomorphism from a diagonalizable group lifts to an open and closed subgroup over a complete noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\", \"ULift.sub\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.stalkClosedPointIso\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\"], \"digest\": \"a62f9981b7437d9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a diagonalizable group to a flat affine group with multiplicative type closed fibre uniquely lift over a complete local ring",
+   "results": "{\"t\": \"2026-10-24T11:20:08Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms from a diagonalizable group to a flat affine group with multiplicative type closed fibre uniquely lift over a complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.lift_unique\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallyUnramified.lift_unique'\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"IsAdicComplete.liftAlgHom\"], \"digest\": \"fd69dd6445813b88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A special fibre isomorphism from a diagonalizable group lifts to an open and closed subgroup over a complete noetherian local ring",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"leansearch\", \"query\": \"A special fibre isomorphism from a diagonalizable group lifts to an open and closed subgroup over a complete noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\", \"ULift.sub\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.stalkClosedPointIso\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.IsOpenImmersion.isoRestrict\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\"], \"digest\": \"a62f9981b7437d9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T11:20:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a diagonalizable group to a flat affine group with multiplicative type closed fibre uniquely lift over a complete local ring",
+   "results": "{\"t\": \"2026-10-24T11:20:08Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms from a diagonalizable group to a flat affine group with multiplicative type closed fibre uniquely lift over a complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.lift_unique\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallyUnramified.lift_unique'\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"IsAdicComplete.liftAlgHom\"], \"digest\": \"fd69dd6445813b88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth/unramified algebra lifting and scheme open immersion declarations do not give lifting of possibly nonsmooth group homomorphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-commutative-multiplicative-extension",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. Supporting generic input after the commutator has been killed: Conrad Corollary B.4.2(2), commutative extensions over arbitrary schemes. Supporting input: Theorem B.3.2(2), printed pp.288-290, split source, including both the Hom bijection and the open-and-closed-immersion assertion.",
+   "via": [
+    "lem-sfb-relative-commutative-multiplicative-extension",
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+  "worker": "stage1",
+  "summary": "Q44 keeps the statement and its dependencies; proves finite-level Hom bijectivity by nilpotent multiplicative-type deformation and character duality, uses existing adic effectivity, detects the kernel inside a split torus, and proves openness by the ideal sequence, Nakayama and translation. Two new statement-only prerequisites; no Lean written.",
+  "blueprint": "Inherited supporting chain for det-thm-sf-ctf-stability-direct-images, proof (3), through relative commutative multiplicative extensions. The current latest blueprint direct-images proof was read. This item realizes Conrad B.3.2(2). The inherited created.item chain is broken at a module-name record, so blueprint_refs ancestor returns null; from.node and via are preserved, and the new nodes extend that via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic Affine refinement of an fppf covering used as a black box in the local group-scheme argument; it supplies no replacement for the constructible-direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-975d29adb",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-975d29adb (reviewer sub-agent of L); spot-checked: Read Conrad's Theorem B.3.2 (pp.288-290) and Corollary B.2.6 in the public PDF. The item is B.3.2(2) with split source D_A(M); statement and stmt_deps are unchanged, with no weakening (torsion allowed, G need not be smooth). The worker was right that B.2.6 needs a smooth target, so Conrad's p.289 square-zero step is isolated in lem-sfb-nilpotent-flat-multiplicative-deformation. That node is true: lift characters to the smooth G_m by B.2.6, their uniqueness gives the torsion relations, and a map that is an isomorphism modulo a nilpotent ideal between flat groups is an isomorphism. Steps 1-7 checked against each cited statement: base change and finite presentation; finite-level Hom bijection by character duality, |U_1|=|U|, affine overlaps and fppf->fpqc representable descent; adic effectivity; kernel K in a split torus is trivial by local-torus-subgroup-special-trivial (no flatness needed), so j is a monomorphism; closed immersion by the monomorphism-closed node; L=mL from exactness of the ideal base change along Spec k; Nakayama gives f in 1+mB with fL=0 and the identity section lies in D(f); the translation node gives open. The translation node is true: (h,v)->i(h)v is flat, lfp and open, its image is i(H), and faithful flatness kills the ideal; it is distinct from lem-pe-flat-lfp-monomorphism-open, which needs i itself flat. No cycle. Not using the fibral-criterion node for Step 1: it is an unsplit sibling in the same creation chain and its proof would go through B.3.2. Batch-5 citations: lem-trf-fppf-covering-base-change and lem-trf-fppf-covering-is-fpqc are generic Mathlib leaves, and character-duality and monomorphism-closed reach the trace-formula chapter only through them; none is a step of the trace-formula or Poincare-duality proofs, so all are accepted. Tool use lem-pc-fppf-affine-refinement accepted. FIX (B2): the deformation node's inline definition of multiplicative type used an undefined V; it now names the fppf cover {V_alpha->U} and the groups N_alpha. The statement is the only field changed; the corrected node is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteLocalDiagonalizableFibreHomLift",
+  "declaration": "AlgebraicGeometry.completeLocal_diagonalizable_fibre_hom_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteLocalDiagonalizableFibreHomLift.lean",
+  "statement": "theorem completeLocal_diagonalizable_fibre_hom_lift (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (G : Grp (Over (Spec (.of A)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [Flat G.X.hom] (hG : ∃ (I : Type u) (R : I → CommRingCat.{u}) (f : ∀ i : I, Spec (R i) ⟶ Spec (.of (IsLocalRing.ResidueField A))), Presieve.ofArrows (fun i : I ↦ Spec (R i)) f ∈ Scheme.fppfPrecoverage (Spec (.of (IsLocalRing.ResidueField A))) ∧ ∀ i : I, ∃ (N : Type u) (_ : AddCommGroup N) (_ : AddGroup.FG N), Nonempty ((Over.pullback (f i)).mapGrp.obj ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).mapGrp.obj G) ≅ ringDiagonalizableGroup (R i) N)) (M : Type u) [AddCommGroup M] [AddGroup.FG M] : Function.Bijective ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).mapGrp.map (X := ringDiagonalizableGroup A M) (Y := G)) ∧ ∀ j : ringDiagonalizableGroup A M ⟶ G, IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).mapGrp.map j) → IsOpenImmersion j.hom.hom.left ∧ IsClosedImmersion j.hom.hom.left",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-47135b8b0",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Node differs from live only in lean; lean.statement verbatim. Clauses match the node: Noetherian local A with IsAdicComplete (maximalIdeal A) = A->lim A/m^n iso; G : Grp(Over Spec A) affine, LocallyOfFiniteType and Flat (finite-type flat B, no smoothness or commutativity). hG gives an affine fppfPrecoverage family over Spec k (jointly surjective, flat, lfp) with group isos to ringDiagonalizableGroup (R i) N, N finitely generated; affine refinement loses nothing. First conjunct: bijectivity of mapGrp.map of Over.pullback along Spec(residue), source fibre (D_A M)_k = D_k M. Second conjunct: for all j with IsIso restriction, open and closed immersion, equivalent to the node given the bijection. Torsion M allowed; single universe u harmless. Multiplicative type stated inline as the node does; the only def node with Lean (def-sfb-tori-multiplicative-type) is field-only and phrased via an embedding over k-bar, IsRelativeTorus covers tori only, no duplicate. Docstrings carry source and blueprint id plus the 7-step proof; proof is sorry; no hollow definition. Report has both required sections. No file changed, no compile run; worker's scompile clean. Advisory: unused public BaseChangeConventions import."
+ }
+}

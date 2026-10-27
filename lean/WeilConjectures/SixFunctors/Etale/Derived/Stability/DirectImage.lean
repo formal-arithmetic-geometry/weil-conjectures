@@ -9,8 +9,15 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+import Sheaf.AlgebraicGeometry.TorsionObjectConstantProjection
+import Sheaf.AlgebraicGeometry.Sites.TorsionAbelianDirectImageVanishing
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import Sheaf.CategoryTheory.BoundedHeartAmplitude
+import Sheaf.AlgebraicGeometry.EtaleStalkTorTest
+import Sheaf.SixFunctors.GeometricStalkTensorConstantSingle
 
 /-!
 # Stability of `Dctf`: direct image and internal hom
@@ -61,32 +68,96 @@ can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽
 so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and over a
 general Noetherian base étale cohomology need not vanish above twice the dimension. -/
 
+private theorem torsion_forget_of_nsmul_id_eq_zero
+    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (N : ℕ) [NeZero N]
+    (hN : N • 𝟙 F = 0) :
+    ((sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).IsTorsion := by
+  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
+  refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨N, Nat.pos_of_ne_zero (NeZero.ne N), ?_⟩
+  let ev := sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+    (evaluation X.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj U
+  have h := congrArg ev.map hN
+  rw [Functor.map_nsmul, ev.map_id, Functor.map_zero] at h
+  have hx := congrArg (fun g : ev.obj F ⟶ ev.obj F ↦ g x) h
+  simpa using hx
+
+private theorem torsion_heart_direct_image_bound
+    (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) (d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hF : ((sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).IsTorsion)
+    (q : ℤ) (hq : q < 0 ∨ (2 * d : ℤ) < q) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
+  rcases hq with hq | hq
+  · have := isGE_rightDerivedLowerStar_obj Λ f
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0
+    exact (_root_.DerivedCategory.isGE_iff _ 0).1 this q hq
+  · have hn (L : Type u) [Field L] (s : Spec (.of L) ⟶ Spec (.of k))
+        {P : Scheme.{u}} (p₁ : P ⟶ X) (p₂ : P ⟶ Spec (.of L))
+        (hP : IsPullback p₁ p₂ aX s) :
+        topologicalKrullDim P ≤ (d : WithBot ℕ∞) := by
+      rw [IsHomeomorph.topologicalKrullDim_eq _ hP.isoPullback.hom.homeomorph.isHomeomorph]
+      exact (topologicalKrullDim_pullback_le_of_field aX s).trans hd
+    have hz := isZero_torsion_higherDirectImage_of_forall_field_dimension_le
+      aX aY f hf d hn _ hF q hq
+    obtain ⟨e⟩ := nonempty_higherDirectImage_forget_iso Λ f q F
+    have hz' := hz.of_iso e
+    let Φ := sheafCompose Y.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+    have hmod : IsZero (higherDirectImage Λ f q F) := by
+      rw [IsZero.iff_id_eq_zero]
+      apply Φ.map_injective
+      simpa using hz'.eq_of_src (Φ.map (𝟙 _)) (Φ.map 0)
+    have hq0 : 0 ≤ q := by omega
+    have heq : (q.toNat : ℤ) = q := Int.toNat_of_nonneg hq0
+    rw [← heq] at hmod ⊢
+    exact hmod.of_iso (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ f F _)
+
 section Torsion
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
 /-! #### Direct image -/
 
+omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
 
-Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, and let `K` be a bounded constructible
-complex on `X_ét` killed by an integer `N` invertible on `Y`. Then `Rf_* K` is bounded
-constructible on `Y_ét`. The coefficients are noetherian: subobjects of finitely generated
-objects of `A` are finitely generated (`CategoryTheory.ConcreteCategory.FinitelyGeneratedOfMono`,
-which holds for `ModuleCat Λ` with `Λ` noetherian).
+Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, let `Λ` be a noetherian ring and `J` an
+ideal of `Λ` with `Λ ⧸ J` finite, and let `K` be a bounded constructible complex of étale sheaves
+of `Λ`-modules on `X` killed by `J`, where `J` contains an integer `N` invertible on `Y`. Then
+`Rf_* K` is bounded constructible on `Y_ét`. For a finite `Λ` one may take `J = 0`; the case of an
+infinite `Λ` is used at the integral stage `Λ = 𝒪_E`, for the reductions modulo `Iⁿ⁺¹`. This is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`.
 
 Each hypothesis is needed. Without torsion the statement fails, `H³(ℙ¹, ℤ)` containing
-`ℚ_ℓ/ℤ_ℓ`; without the noetherian hypothesis it fails for a rank-one local system on `𝔾_m` with
-stalk `𝔽_ℓ[x, y₁, y₂, …]/(xˡ, x yᵢ)` and monodromy `1 + x`, whose `H⁰` is the non-finitely
-generated annihilator of `x`; and for `N = p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite
-(Artin–Schreier). -/
-theorem boundedConstructible_rightDerivedLowerStar [ConcreteCategory.FinitelyGeneratedOfMono A]
-    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-    [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (N : ℕ) [NeZero N]
-    (hN : N • 𝟙 K = 0) (hNY : IsUnit (N : Γ(Y, ⊤))) (hbc : boundedConstructible A X K) :
-    boundedConstructible A Y ((R((f)_*[A])).obj K) :=
-  sorry
+`ℚ_ℓ/ℤ_ℓ`; and for `N = p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier). -/
+theorem boundedConstructible_rightDerivedLowerStar [IsNoetherianRing Λ] (J : Ideal Λ)
+    [Finite (Λ ⧸ J)] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)
+    [NeZero N] (hNJ : (N : Λ) ∈ J) (hNY : IsUnit (N : Γ(Y, ⊤))) (hJ : ∀ r ∈ J, r • 𝟙 K = 0)
+    (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) Y ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have : QuasiCompact f := by
+    subst hf
+    have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+    have : IsNoetherian Y := {}
+    exact QuasiCompact.of_comp f aY
+  have : HasInvertibleExponent (Λ ⧸ J) X :=
+    ⟨N, Nat.pos_of_ne_zero (NeZero.ne N), by
+      rw [← map_natCast (Ideal.Quotient.mk J), Ideal.Quotient.eq_zero_iff_mem]
+      exact hNJ, by simpa using hNY.map f.appTop.hom⟩
+  exact boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero J f aX aY hf hbc hJ
 
 /-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude.
 
@@ -135,8 +206,78 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRi
     (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have hbounded : ∃ c d : ℤ, K.IsGE c ∧ K.IsLE d :=
+    (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded K).2 hbc.1
+  have hK := _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn hta
+  have hTor := DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2 hta
+  apply DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1
+  by_cases hab : a ≤ b
+  · let : X.Over (Spec (.of k)) := ⟨aX⟩
+    let : Y.Over (Spec (.of k)) := ⟨aY⟩
+    have : LocallyOfFiniteType (X ↘ Spec (.of k)) := ‹LocallyOfFiniteType aX›
+    have : QuasiCompact (X ↘ Spec (.of k)) := ‹QuasiCompact aX›
+    have : LocallyOfFiniteType (Y ↘ Spec (.of k)) := ‹LocallyOfFiniteType aY›
+    have : QuasiCompact (Y ↘ Spec (.of k)) := ‹QuasiCompact aY›
+    have : f.IsOver (Spec (.of k)) := ⟨hf⟩
+    have hconstant (M : ModuleCat.{u + 1} Λ) (i : ℤ)
+        (hi : i < a ∨ b + 2 * (d : ℤ) < i) :
+        IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
+          (((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj
+            ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K)).obj
+            (constantSingle (ModuleCat.{u + 1} Λ) Y M))) := by
+      have := isIso_rightDerivedLowerStarProjectionMap_constant_of_torsion_object
+        Λ k f K hbounded a b hab hTor N
+        (Nat.pos_of_ne_zero (NeZero.ne N)) hN hNY M
+      let E := (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj
+        (constantSingle (ModuleCat.{u + 1} Λ) X M))
+      have hEN : N • 𝟙 E = 0 := by
+        have h := congrArg
+          ((tensorRight (constantSingle (ModuleCat.{u + 1} Λ) X M)).map) hN
+        rw [Functor.map_nsmul, (tensorRight _).map_id, Functor.map_zero] at h
+        exact h
+      have hE (r : ℤ) (hr : r < a ∨ b < r) :
+          IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj E) :=
+        hTor _ r hr
+      have hES (r : ℤ) := torsion_forget_of_nsmul_id_eq_zero Λ
+        ((_root_.DerivedCategory.homologyFunctor _ r).obj E) N (by
+          have h := congrArg ((_root_.DerivedCategory.homologyFunctor _ r).map) hEN
+          rw [Functor.map_nsmul,
+            (_root_.DerivedCategory.homologyFunctor _ r).map_id, Functor.map_zero] at h
+          exact h)
+      let S : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) → Prop := fun F ↦
+        ((sheafCompose X.smallEtaleTopology
+          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).IsTorsion
+      have hz := _root_.DerivedCategory.bounded_heart_amplitude _ _
+        (R((f)_*[ModuleCat.{u + 1} Λ])) S
+        (fun F G e hF ↦ Sheaf.IsTorsion.of_iso
+          ((sheafCompose X.smallEtaleTopology
+            (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapIso e) hF)
+        (torsion_forget_of_nsmul_id_eq_zero Λ _ N ((isZero_zero _).eq_of_src _ _))
+        0 (2 * d) (by omega)
+        (torsion_heart_direct_image_bound Λ aX aY f hf d hd)
+        a b hab E hE hES i (by simpa using hi)
+      exact hz.of_iso ((_root_.DerivedCategory.homologyFunctor _ i).mapIso
+        (asIso (((rightDerivedLowerStarProjectionMap
+          (ModuleCat.{u + 1} Λ) f).app K).app
+            (constantSingle (ModuleCat.{u + 1} Λ) Y M)) ≪≫
+          (R((f)_*[ModuleCat.{u + 1} Λ])).mapIso
+            (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).mapIso
+              (leftDerivedUpperStarSingleConstantSheafIso _ f M))))
+    apply (geometricStalk_torAmplitude_test Λ Y _ a (b + 2 * (d : ℤ)) (by omega)).1.2
+    intro Ω _ _ y M i hi
+    let F := (pointSmallEtale y).sheafFiber (A := ModuleCat.{u + 1} Λ)
+    have hz := (F.map_isZero (hconstant M i hi)).of_iso
+      ((F.mapDerivedCategoryHomologyFunctorIso i).app _).symm
+    exact hz.of_iso ((_root_.DerivedCategory.homologyFunctor _ i).mapIso
+      (geometricStalk_tensor_constant_single Λ y _ M).some).symm
+  · have : K.IsGE a := hK.1
+    have : K.IsLE b := hK.2
+    have hz : IsZero K := _root_.DerivedCategory.TStructure.t.isZero K b a (by omega)
+    intro F i _
+    exact (_root_.DerivedCategory.homologyFunctor _ i).map_isZero
+      ((tensorRight ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).map_isZero
+        ((R((f)_*[ModuleCat.{u + 1} Λ])).map_isZero hz))
 
 omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.

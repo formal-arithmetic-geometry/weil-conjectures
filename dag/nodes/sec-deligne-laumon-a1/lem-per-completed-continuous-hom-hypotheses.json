@@ -1,0 +1,253 @@
+{
+ "id": "lem-per-completed-continuous-hom-hypotheses",
+ "kind": "statement",
+ "title": "Completed-to-continuous coefficient verification of Hom localization hypotheses",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $A=\\mathcal O_E$ and $\\varpi$ a uniformizer [def-weil-l-adic-coefficient-extension]. Let $X$ be a noetherian finite-dimensional scheme with $\\ell$ invertible [def-pc-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site] put $B_X=\\varprojlim_{n\\ge1}(A/\\varpi^n)_X$ [def-weil-pbc-adic-coefficient-datum] and $A_X(U)=C(|U|,A)$, the sheaf of continuous $A$-valued functions [def-weil-pbc-continuous-constructible-module]. Let $e:B_X\\xrightarrow{\\sim}A_X$ be the quotient-projection-normalized coefficient identification of [lem-per-rational-module-realization-functor]. Use module sheaves, derived categories and cohomology [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-derived-cohomology-sheaves]. Write $\\mathcal C_X\\subset D(B_X)$ for the full completed bounded constructible category, including compatible etale-origin witnesses [def-weil-pbc-bounded-constructible-complete]. Restriction of scalars [def-pc-sheaf-restrict-scalars] along $e^{-1}$ induces an $A$-linear equivalence $T_e:D(B_X)\\simeq D(A_X)$ preserving cohomological bounds, integer shifts and coproducts. For $K\\in\\mathcal C_X$ its image belongs to the same completed integral category under $e$. For every small countable family $(M_i)$ in $D(B_X)$ with a common cohomological lower bound and every $q\\in\\mathbf Z$, $T_e$ identifies the two shifted-coprojection comparison maps\n$$\\bigoplus_i\\operatorname{Hom}(K,M_i[q])\\longrightarrow\\operatorname{Hom}(K,(\\bigoplus_iM_i)[q]),\\qquad\n\\bigoplus_i\\operatorname{Hom}(T_eK,T_eM_i[q])\\longrightarrow\\operatorname{Hom}(T_eK,(\\bigoplus_iT_eM_i)[q]),$$\nand both are isomorphisms of $A$-modules. The empty family is allowed. Every $L\\in\\mathcal C_X$ is bounded, hence bounded below, and every $L[q]$ again belongs to $\\mathcal C_X$. No flatness or projectivity of the cohomology modules of $L$ is required. No assertion is made for families without a common lower bound.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), Proposition 6.8.11(3), Lemma 6.8.12, pp. 58-61; coefficient and boundedness obligations extracted from retained proof steps 1-2 of lem-per-constructible-rational-hom-comparison (human re-split order, 2026-10-22)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-per-rational-module-realization-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Finite quotient normalization identifies the projections of the inverse image of a continuous constant with those of the completed scalar section. The canonical scalar-to-limit comparison gives its projection equation. The sectionwise inverse-limit universal property identifies these sections. Restriction leaves arrows unchanged, so this equality proves ordinary coefficient linearity. Exact derivation preserves linearity.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-rational-category",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply derivedRestrictIso_isEquivalence to the inverse coefficient isomorphism. Exact restriction commutes with cohomology and preserves bounds; its faithful ordinary arrow map reflects zero cohomology, hence reflects bounds. Equivalences preserve arbitrary coproduct cocones, including empty ones.",
+   "uses": [
+    "lem-pbc-scalar-coefficient-equivalence",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The specified reverse restriction composed with transport is naturally isomorphic to the identity by pbcDerivedRestrictComp and coefficientDerivedRestrictIdentity. The full completion predicate is closed under isomorphism by the uniform-complete triangulated theorem, so round-trip membership retains all witnesses. The stratified perfect characterization gives boundedness and its closure theorem gives all integer shifts.",
+   "uses": [
+    "lem-pbc-scalar-coefficient-equivalence",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply integralConstructible_hom_sums directly in completed coefficients to K, the countable common-lower-bounded family, the integer shift, and the arbitrary colimit cofan. This proves bijectivity of the completed comparison.",
+   "uses": [
+    "lem-weil-pbc-integral-constructible-hom-sums"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let c be the unique isomorphism between the transported cofan and the supplied continuous coproduct. Define phi by the linear arrow equivalence followed by commShiftIso, and psi by the same formula followed by c[q]. Shift naturality and the coprojection equations for c give the generator square. DirectSum.linearMap_ext extends it to the direct sums; DirectSum.lmap is bijective because each phi is. Conjugating the completed comparison by this bijection and psi proves bijectivity of the continuous comparison, including the empty family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-rational-category",
+  "lem-pbc-scalar-coefficient-equivalence",
+  "lem-per-rational-module-realization-functor",
+  "lem-weil-pbc-integral-constructible-hom-sums",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-uniform-complete-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "T9 Lean proof: finite quotient normalization and inverse-limit section uniqueness; exact restriction and its inverse; Proposition 6.8.11(3) for boundedness and shifts; Lemma 6.8.12 first in completed coefficients, then the explicit linear direct-sum comparison square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A completed constructible adic complex has countable bounded below Hom continuity under the continuous coefficient identification, and the integral category is bounded and shift stable",
+   "results": "8 hits: LightCondensed.instCountableAB4StarLightCondMod, IsAdicComplete, AdicCompletion, IsAdicComplete.toIsPrecomplete, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, Condensed.instAB5CondensedMod, Hausdorffification. Generic completion, shift and sheaf pushforward interfaces do not identify the completed constructible category or verify its bounded-below Hom continuity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ring.*[Ii]so.*[Dd]erived|[Dd]erived.*ring.*[Ii]so|[Pp]reserves.*[Cc]oproduct",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean. Generic completion, shift and sheaf pushforward interfaces do not identify the completed constructible category or verify its bounded-below Hom continuity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Equivalence",
+   "results": "0 hits: . Generic completion, shift and sheaf pushforward interfaces do not identify the completed constructible category or verify its bounded-below Hom continuity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The continuous and completed coefficient presentations of bounded constructible adic complexes identify their derived Hom coprojection maps, and the category is bounded and closed under integer shifts",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CochainComplex.HomComplex.Cochain.shift_v', CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.commShiftMapCochainComplex, CochainComplex.instQuasiIsoIntMapHomologicalComplexUpShiftFunctor, CochainComplex.HomComplex.Cochain.shift. Generic completion, shift and sheaf pushforward interfaces do not identify the completed constructible category or verify its bounded-below Hom continuity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Hh]om|[Hh]om.*constructible|[Ss]heaf.*[Ee]quivalence|[Ee]quivalence.*[Ss]heaf",
+   "results": "0 hits: . Generic completion, shift and sheaf pushforward interfaces do not identify the completed constructible category or verify its bounded-below Hom continuity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along an isomorphism of sheaves of rings gives a t exact derived equivalence preserving coproducts and their shifted Hom comparison maps",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pushforwardNatIso, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso_inv. Generic completion, shift and sheaf pushforward interfaces do not identify the completed constructible category or verify its bounded-below Hom continuity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed constructible adic complexes have bounded below countable Hom coproduct continuity invariant under an isomorphism of coefficient sheaves",
+   "results": "8 hits: LightCondensed.instCountableAB4StarLightCondMod, IsAdicComplete, CondensedMod.IsSolid, Condensed.instAB5CondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, AdicCompletion.sumInv, AdicCompletion.map_exact, instHasColimitsCondensedMod. Read the search output. Ordinary scalar restriction, exact derived functors, and condensed completion results do not supply the constructible adic Hom-continuity assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*hom|hom.*constructible|restrictScalars.*[Ee]quivalence",
+   "results": "25 hits: Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean. Read the search output. Ordinary scalar restriction, exact derived functors, and condensed completion results do not supply the constructible adic Hom-continuity assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits: SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val. Read the search output. Ordinary scalar restriction, exact derived functors, and condensed completion results do not supply the constructible adic Hom-continuity assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along an isomorphism of sheaves of rings preserves bounded constructible derived complexes and their countable bounded below Hom sums",
+   "results": "8 hits: RestrictScalars, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, ModuleCat.restrictScalarsId', RingCat.moduleCatRestrictScalarsPseudofunctor, PresheafOfModules.restrictScalars. Read the search output. Ordinary scalar restriction, exact derived functors, and condensed completion results do not supply the constructible adic Hom-continuity assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient ring by an isomorphism induces an exact equivalence of derived sheaf module categories with isomorphic Hom direct sum comparison maps",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, SheafOfModules.instCategory, SheafOfModules.pushforwardNatIso, SheafOfModules.instAbelian, CategoryTheory.Abelian.Ext.mapExactFunctor_hom. Read the search output. Ordinary scalar restriction, exact derived functors, and condensed completion results do not supply the constructible adic Hom-continuity assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-constructible-rational-hom-comparison",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Compactness verifies the rational derived Hom comparison. Retained item proof steps 4. Retained proof steps 1-2: coefficient identification, shifted coprojection maps, actual boundedness and shift closure.",
+   "via": [
+    "lem-per-constructible-rational-hom-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-completed-continuous-hom-hypotheses",
+  "worker": "stage1",
+  "summary": "Proved the coefficient/Hom obligations with five explicit steps and no new nodes. Reused normalized ring-isomorphism transport, the witness-sensitive stratified characterization, and the shifted Hom-sums theorem. Wrote the coproduct universal-property and shifted-coprojection square calculations. Statement unchanged; no Lean writing or compilation.",
+  "blueprint": "lem-per-smooth-pullback-t-exact: first pullback/cohomology paragraph, continuous coefficient realization; specifically retained coefficient and boundedness steps 1-2 of lem-per-constructible-rational-hom-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ring-iso-derived-transport",
+    "why": "General exact derived change of ring along an isomorphism, used with e; this coefficient tool is not a purity theorem and does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Witness-sensitive boundedness, shift closure, and local model characterization for the completed integral category; generic coefficient tool not supplied in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-integral-constructible-hom-sums",
+    "why": "General constructible adic shifted Hom continuity for common-lower-bound families, needed to verify the localization hypotheses; no result of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-integral-constructible-hom-sums"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-e59c2b341",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e59c2b341 (reviewer sub-agent of L); spot-checked: There are no new nodes and the statement is unchanged; the 5 steps were read in full against the cited statements. Source: Bhatt–Scholze 1309.1198. Lemma 6.8.2(1) gives O_E,X=lim O_E/ϖ^n (coefficient identification e). Prop 6.8.11(3) gives constructible ⇔ bounded with constructible cohomology. Lemma 6.8.12 gives RHom(K,−) commuting with sums in D^{≥0}; the item limits this to countable families with a common lower bound, matching the hom-sums node and the parent. Step 1: lem-per-rational-module-realization-functor gives the quotient-projection e, which is the same canonical iso as the one hom-sums uses. lem-pur-ring-iso-derived-transport applies with R=B_X, S=A_X, α=e and T=(e^{-1})_*, the right direction. The site is 𝒱-small. A-linearity holds because e preserves constants. Step 2 (elementary): termwise cohomology, shifts and coproduct preservation by an equivalence, empty family included. Step 3: the full statement of lem-weil-pbc-integral-stratified-perfect-characterization ((i)⇔(iii) with witnesses, boundedness, shift closure) gives membership of TK, boundedness and L[q]∈C_X. Its hypotheses are exactly the item's and no flatness is used. Step 4: the hom-sums node in D(A_X) gives exactly the second shifted-coprojection map, with the common lower bound carried over by step 2. Step 5: recomputed ψ(ι_i[q]u)=j_i[q]φ_i(u) by naturality of s and cTι_i=j_i. Edge cases checked: X empty, K=0, empty or singleton family, torsion A/ϖ cohomology, both signs of q. The closures of the cited nodes do not contain the item, so there is no cycle. Batch-5 flag: the ring-iso transport reaches lem-trf-localization-essentially-surjective, a Mathlib leaf (Localization.essSurj; Stacks 04VH/04VK) of pure category theory. It is neither the trace formula nor Poincaré duality nor a step of their proofs, so it is genuinely outside the assumptions. The three other-unit tool_uses (ring-iso transport, integral characterization, hom-sums) are generic and accepted. Maintainer note: H^q of the existing lem-weil-pbc-integral-constructible-bounded-below-compactness would give the D(B_X) Hom clause more directly; the delivered route is correct."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedContinuousHomHypotheses",
+  "declaration": "AlgebraicGeometry.Scheme.completedContinuousHomHypotheses",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.continuousIntegralSections",
+   "AlgebraicGeometry.Scheme.continuousIntegralLinear",
+   "AlgebraicGeometry.Scheme.continuousIntegralDerivedLinear",
+   "AlgebraicGeometry.Scheme.completedContinuousTransport",
+   "AlgebraicGeometry.Scheme.completedContinuousTransportShift",
+   "AlgebraicGeometry.Scheme.CompletedContinuousHomHypotheses",
+   "AlgebraicGeometry.Scheme.completedContinuousHomHypotheses"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedContinuousHomHypotheses.lean",
+  "statement": "theorem completedContinuousHomHypotheses (R : RationalModuleRealization l E X) : Nonempty (CompletedContinuousHomHypotheses l E X R)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper declarations belong to this coefficient/Hom transport assertion. The canonical transport is pbcDerivedRestrict integralIso.inv; its linearity uses constant continuous sections. Full completion membership is retained in inverse coefficient coordinates; the comparison square specifies the actual shifted coprojection maps, for arbitrary coproduct cocones and including empty families."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a945dbaa8",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Item node differs from live only in the new lean record; the 11 stmt_dep nodes are identical to live; lean.statement is verbatim. Binders (prime, finite E/Q_l, noetherian, finite dimension, stalkwise l invertible) equal those of the RationalModuleRealization and integralConstructible_hom_sums dependencies, nothing stronger. e = R.integralIso is fixed uniquely by integral_normalization, and the realization dependency proves Nonempty, so quantifying over R is not vacuous. T = pbcDerivedRestrict e.inv, the canonical restriction in the right direction. Fields equivalence, linear (constant-section action, no existing duplicate instance), bounds (preserve and reflect), canonical CommShift, coproducts for any cofan including empty, integral (full PbcIsBoundedConstructibleComplete predicate after transport back along e), bounded, shifts and comparison (unique normalized c; phi and psi pinned to the step-5 formulas; generator square; both DirectSum.toModule maps bijective; countable I : Type (u+1) with common lower bound; no Nonempty binder). Edge cases checked: empty and singleton I, K=0, empty X, every q, torsion cohomology, universes. Docstrings carry the source place, the blueprint tag and the 5 proof steps; only the item theorem is sorry. Advisories: the integral clause is near-tautological, as is the node's own clause; pbcRestrict, pbcDerivedRestrict, pbcModules and integralCoefficientSheaf are owned by nodes outside stmt_deps (base-era conventions also used by the dependencies); continuousIntegralDerivedLinear is a redundant inferInstance. No file changed, so no compile; the worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261027T084457-L-3684849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

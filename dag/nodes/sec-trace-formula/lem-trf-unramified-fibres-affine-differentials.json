@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-unramified-fibres-affine-differentials",
+ "kind": "statement",
+ "title": "Affine fibre charts with vanishing differentials",
+ "statement": "Let $h:Z\\to B$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism], and suppose that every scheme-theoretic fibre $Z_s\\to\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre] is unramified [def-weil-unramified-morphism]. For every affine open $V=\\operatorname{Spec}R\\subseteq B$ [def-weil-affine-spectrum] there is an affine open covering $h^{-1}(V)=\\bigcup_i U_i$, with $U_i=\\operatorname{Spec}A_i$, such that the induced ring map $R\\to A_i$ is finitely generated (there are finitely many elements generating $A_i$ as an $R$-algebra). For every $i$ and every prime $\\mathfrak p\\subset R$, let $s\\in V$ correspond to $\\mathfrak p$ and put $C_{i,\\mathfrak p}=A_i\\otimes_R\\kappa(\\mathfrak p)$, the fibre ring of [def-weil-pbc-localization-at-prime]. There is an isomorphism over $\\operatorname{Spec}\\kappa(\\mathfrak p)$, with $\\kappa(s)$ identified with $\\kappa(\\mathfrak p)$, $$U_i\\times_B\\operatorname{Spec}\\kappa(s)\\cong\\operatorname{Spec}C_{i,\\mathfrak p}.$$ The natural map of this fibre into $Z_s$ is an open immersion [def-weil-open-immersion], with image the inverse image of $U_i$ under $Z_s\\to Z$. Moreover, $\\operatorname{Spec}C_{i,\\mathfrak p}\\to\\operatorname{Spec}\\kappa(\\mathfrak p)$ is unramified and $\\Omega_{C_{i,\\mathfrak p}/\\kappa(\\mathfrak p)}=0$ [def-weil-pbc-kahler-differentials].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 02G8 (lemma-unramified-etale-fibres), part (2), affine-chart reduction; Definition Tag 01T1 (definition-finite-type) and Lemma Tag 01T2 (lemma-locally-finite-type-characterize), affine-cover characterization; Lemma Tag 02G6 (lemma-unramified-characterize), restriction clause and affine criterion; Schemes, Lemmas Tags 01JQ (lemma-fibre-product-affines) and 01JR (lemma-open-fibre-product), literature/stacks-project/schemes.tex"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-unramified-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-open-immersion",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Fix $V=\\operatorname{Spec}R\\subseteq B$. By the affine-cover definition of locally finite type in [def-weil-finite-type-morphism], choose $h^{-1}(V)=\\bigcup_i U_i$ with $U_i=\\operatorname{Spec}A_i$ and $A_i$ finitely generated over $R$. The index set need not be finite. Fix $i$ and $\\mathfrak p\\in\\operatorname{Spec}R$, corresponding to $s\\in V$.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition Tag 01T1 (definition-finite-type), Lemma Tag 01T2 (lemma-locally-finite-type-characterize), (1)--(2)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-stalk-localization], the germ map identifies $\\mathcal O_{B,s}$ with $R_{\\mathfrak p}$ as an $R$-algebra. Quotienting by their corresponding maximal ideals identifies $\\kappa(s)$ with $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ [def-weil-residue-field] [def-weil-pbc-localization-at-prime]. Thus the canonical map $\\operatorname{Spec}\\kappa(s)\\to B$ defining the fibre [def-pc-scheme-fibre] factors through $V$, and its map to $V$ is induced by $R\\to R_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$: both maps on $R$ send a section to its germ modulo the maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field",
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Lemma Tag 01HV (lemma-spec-sheaves), stalk and germ descriptions on an affine open"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-open-fibre-product] with ambient maps $Z\\to B$ and $\\operatorname{Spec}\\kappa(s)\\to B$, and open subschemes $U_i$, $V$ and the whole $\\operatorname{Spec}\\kappa(s)$. It identifies $D=U_i\\times_V\\operatorname{Spec}\\kappa(s)$ with the open inverse image of $U_i$ in $Z_s$, compatibly with both projections. Applied with ambient maps $U_i\\to B$ and $\\operatorname{Spec}\\kappa(s)\\to B$, and the same base open $V$ and whole source opens, it identifies $D$ with all of $U_i\\times_B\\operatorname{Spec}\\kappa(s)$. Finally [lem-weil-pbc-fibre-product-affine-spectra] identifies $D$ with $\\operatorname{Spec}(A_i\\otimes_R\\kappa(\\mathfrak p))$. Its second-projection formula makes this an isomorphism over $\\operatorname{Spec}\\kappa(\\mathfrak p)$, not just an abstract scheme isomorphism.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product) and 01JQ (lemma-fibre-product-affines)"
+   }
+  },
+  {
+   "text": "The morphism $Z_s\\to\\operatorname{Spec}\\kappa(s)$ is unramified by hypothesis. By clause (2) of [lem-weil-pbc-unramified-base-change-open], its restriction to the open subscheme $D$ from step 3, with the whole target retained, is unramified. Under the base-compatible affine identification in step 3 this is the structure map of $\\operatorname{Spec}C_{i,\\mathfrak p}$. Apply the forward direction of [lem-weil-pbc-unramified-ring-map-iff-unramified-affine] to $\\kappa(\\mathfrak p)\\to C_{i,\\mathfrak p}$: it gives $\\Omega_{C_{i,\\mathfrak p}/\\kappa(\\mathfrak p)}=0$. Since $i$ and $\\mathfrak p$ were arbitrary, all required clauses hold.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G6 (lemma-unramified-characterize), restriction clause and affine criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01T1, 01T2 and 02G6; Schemes Tags 01HV, 01JQ and 01JR, affine-chart reduction used in Tag 02G8(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fiber.*(Spec|iso)|Spec.*(fiber|pullback)|exists.*(affine|finiteType)",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; searched Mathlib/AlgebraicGeometry; read relevant hits: finiteType_appLE gives finite generation on an already chosen chart, Spec.fiberToSpecResidueFieldIso gives the affine fibre comparison, and formallyUnramified_appLE assumes unramifiedness of its input morphism. None states the compatible covering and passage from unramified fibres to all chart fibre differentials; this requires constructing and comparing the pullbacks and restricting each fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine local charts for a locally finite type morphism with unramified fibres and their base change to residue fields",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.FormallyUnramified",
+   "results": "4 hits; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified.instIsSeparableCarrierResidueFieldCoeContinuousMapCarrierCarrierCommRingCatHomTopCatBaseOfLocallyOfFiniteType, AlgebraicGeometry.Etale.of_comp, AlgebraicGeometry.Etale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; read relevant hits: finiteType_appLE gives finite generation on an already chosen chart, Spec.fiberToSpecResidueFieldIso gives the affine fibre comparison, and formallyUnramified_appLE assumes unramifiedness of its input morphism. None states the compatible covering and passage from unramified fibres to all chart fibre differentials; this requires constructing and comparing the pullbacks and restricting each fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally finite type morphism with unramified ordinary fibres admits affine charts of finite type whose residue field fibre is the spectrum of the tensor product and is an open subscheme of the original unramified fibre",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, Algebra.instFiniteResidueFieldOfFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.instFormallyUnramifiedResidueField_1; read relevant hits: finiteType_appLE gives finite generation on an already chosen chart, Spec.fiberToSpecResidueFieldIso gives the affine fibre comparison, and formallyUnramified_appLE assumes unramifiedness of its input morphism. None states the compatible covering and passage from unramified fibres to all chart fibre differentials; this requires constructing and comparing the pullbacks and restricting each fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formallyUnramified_iff|of_fiber|fiberToSpecResidueField|finiteType_appLE|pullbackSpecIso",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; searched Mathlib/AlgebraicGeometry/Morphisms; read relevant hits: finiteType_appLE gives finite generation on an already chosen chart, Spec.fiberToSpecResidueFieldIso gives the affine fibre comparison, and formallyUnramified_appLE assumes unramifiedness of its input morphism. None states the compatible covering and passage from unramified fibres to all chart fibre differentials; this requires constructing and comparing the pullbacks and restricting each fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a locally finite type scheme morphism admits affine source and target charts around each point compatible with residue field fibres and restriction of unramified fibre morphisms",
+   "results": "8 hits; AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.FormallyUnramified; read relevant hits: finiteType_appLE gives finite generation on an already chosen chart, Spec.fiberToSpecResidueFieldIso gives the affine fibre comparison, and formallyUnramified_appLE assumes unramifiedness of its input morphism. None states the compatible covering and passage from unramified fibres to all chart fibre differentials; this requires constructing and comparing the pullbacks and restricting each fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formallyUnramified.*appLE|fiberToSpecResidueFieldIso|finiteType_appLE",
+   "results": "16 hits; Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean, Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; searched Mathlib/AlgebraicGeometry; read relevant hits: finiteType_appLE gives finite generation on an already chosen chart, Spec.fiberToSpecResidueFieldIso gives the affine fibre comparison, and formallyUnramified_appLE assumes unramifiedness of its input morphism. None states the compatible covering and passage from unramified fibres to all chart fibre differentials; this requires constructing and comparing the pullbacks and restricting each fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing Kahler differentials of residue field fibres on compatible finite type affine source target charts of a scheme morphism with unramified ordinary fibres",
+   "results": "8 hits; AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, Algebra.unramifiedLocus, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset; read relevant hits: finiteType_appLE gives finite generation on an already chosen chart, Spec.fiberToSpecResidueFieldIso gives the affine fibre comparison, and formallyUnramified_appLE assumes unramifiedness of its input morphism. None states the compatible covering and passage from unramified fibres to all chart fibre differentials; this requires constructing and comparing the pullbacks and restricting each fibre.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally finite type morphism with unramified fibres has finite type affine charts whose residue field fibres are open subschemes and have zero Kahler differentials",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.IsEtale, Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.IsEtale.of_comp, Algebra.Unramified.finiteType, AlgebraicGeometry.IsEtale.instFormallyUnramified. Read FiniteType.lean:43--54, Fiber.lean:79--93 and FormallyUnramified.lean:53--79: these give chart finite type, affine fibre comparison and the affine formal-unramified condition separately. None supplies the whole compatible-cover conclusion from unramified ordinary fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.FormallyUnramified",
+   "results": "4 hits: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified.instIsSeparableCarrierResidueFieldCoeContinuousMapCarrierCarrierCommRingCatHomTopCatBaseOfLocallyOfFiniteType, AlgebraicGeometry.Etale.of_comp, AlgebraicGeometry.Etale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified. Read FiniteType.lean:43--54, Fiber.lean:79--93 and FormallyUnramified.lean:53--79: these give chart finite type, affine fibre comparison and the affine formal-unramified condition separately. None supplies the whole compatible-cover conclusion from unramified ordinary fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteType_appLE|fiberToSpecResidueFieldIso|formallyUnramified_appLE",
+   "results": "16 hits: Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean. Read FiniteType.lean:43--54, Fiber.lean:79--93 and FormallyUnramified.lean:53--79: these give chart finite type, affine fibre comparison and the affine formal-unramified condition separately. None supplies the whole compatible-cover conclusion from unramified ordinary fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type affine charts of a scheme morphism with unramified residue field fibres and vanishing differentials",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.iff_unramified_and_smooth, RingHom.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.mk, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.IsFinite.toIsAffineHom. Read FiniteType.lean:43--54, Fiber.lean:79--93 and FormallyUnramified.lean:53--79: these give chart finite type, affine fibre comparison and the affine formal-unramified condition separately. None supplies the whole compatible-cover conclusion from unramified ordinary fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine covering of a locally finite type scheme morphism and restriction of each unramified fibre to those affine charts",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.Scheme.affineOpenCover_f, AlgebraicGeometry.Scheme.AffineCover.I₀, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S. Read FiniteType.lean:43--54, Fiber.lean:79--93 and FormallyUnramified.lean:53--79: these give chart finite type, affine fibre comparison and the affine formal-unramified condition separately. None supplies the whole compatible-cover conclusion from unramified ordinary fibres.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-unramified-ordinary-fibre-criterion",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), normal-cone specialization and nearby-duality alteration reduction: the nodal-family ordinary-fibre criterion (Stacks 02G8(2)), affine cover, fibre tensor-product identification, open fibre inclusion and vanishing fibre differentials (returned ordinary-fibre proof step 1 and the first sentence of step 2).",
+   "via": [
+    "lem-trf-unramified-ordinary-fibre-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-unramified-fibres-affine-differentials",
+  "worker": "stage1",
+  "summary": "Q09: unchanged statement; four steps assemble the finite-type cover, the residue-field identification via affine-open stalk localization, the open fibre comparison and affine tensor-product projections, and restriction of unramified fibres followed by the affine differential criterion. All dependencies already exist; no new nodes. Checked each cited statement verbatim and read the Stacks labels. No Lean writing or compilation.",
+  "blueprint": "Proof (1)--(2), normal-cone specialization and nearby-duality alteration reduction: the nodal-family ordinary-fibre criterion (Stacks 02G8(2)), affine cover, fibre tensor-product identification, open fibre inclusion and vanishing fibre differentials (returned ordinary-fibre proof step 1 and the first sentence of step 2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "Only its general open-restriction clause (2) is used on each unramified fibre. This generic scheme-theoretic tool is not supplied by sk-i-curve-zero; it does not replace the normal-cone or trace route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-unramified-base-change-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-8a3c52e4a",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-8a3c52e4a (reviewer sub-agent of L); spot-checked: I read the item's statement and all four steps and checked them against Stacks morphisms.tex 02G6 (lines 7668-7697: the (1)<=>(2) affine criterion and the 'Moreover' open-restriction clause), 02G8(2) (line 7828), 01T1/01T2, and schemes.tex 01JQ/01JR (lines 3180-3215). The delivery adds no new nodes, leaves the statement unchanged and has proof_deps equal to the union of the step uses. Step 1 is the affine-cover definition of locally finite type (def-weil-finite-type-morphism), with no finiteness of the cover assumed. Step 2 uses clause (c) of lem-weil-pbc-affine-open-stalk-localization: it gives kappa(s)=kappa(p), and Spec kappa(s)->B factors through V as Spec(R->R_p->kappa(p)); this is elementary. Step 3 applies lem-weil-pbc-open-fibre-product twice. In the first application f(U_i)⊆V comes from step 1 and the point map lands in V by step 2; the image is p^{-1}(U_i). The second application, with whole source opens, gives U_i x_V = U_i x_B. lem-weil-pbc-fibre-product-affine-spectra then gives Spec(A_i ⊗_R kappa(p)) over Spec kappa(p) through its projection formulas. Step 4 restricts the unramified fibre using clause (2) of lem-weil-pbc-unramified-base-change-open, then applies the forward direction of the affine criterion to get Omega_{C/kappa(p)}=0. The declared tool use of lem-weil-pbc-unramified-base-change-open (unit sk-thm-p1, off the route of sk-i-curve-zero) is accepted: only its generic 02G6 open-restriction clause is used. I tested the edge cases: empty preimage, R=0, the identity, a closed immersion, and A^1, which fails the hypothesis as it should. There is no cycle: the item cites neither its parent nor its sibling. My search of node statements found no duplicate. No sources are SGA. There is no re-split note for this item. In the live and side-live clones the item is still unsplit, so no other group has delivered it."
+ }
+}

@@ -1,0 +1,329 @@
+{
+ "id": "lem-trf-simple-residue-extension-hilbert-comparison",
+ "kind": "statement",
+ "title": "Simple residue-field extension: Hilbert--Samuel comparison and equality of standard degrees",
+ "statement": "Let $k$ be a field and $(R,\\mathfrak m)$ a nonzero commutative Noetherian local $k$-algebra [def-weil-pbc-noetherian-ring], with residue field $L=R/\\mathfrak m$. Fix $\\alpha\\in L$, put $k'=k(\\alpha)\\subseteq L$ [def-pc-field-extension], and let $e=0$ if $\\alpha$ is algebraic over $k$ and $e=1$ otherwise [def-kun-transcendence-degree]. Form $D=k'\\otimes_kR$ [def-weil-pbc-module-tensor-product], the surjection $\\epsilon:D\\to L$, $a\\otimes r\\mapsto a\\bar r$, and the local ring\n$$R'=D_{\\ker\\epsilon}$$\n[def-weil-pbc-localization-at-prime]. For any ideal $I\\subseteq\\mathfrak m$ let $I'=IR'$, $A=R/I$ and $A'=R'/I'$, with their induced local structures. Then $R'$ and $A'$ are Noetherian local rings with residue field $L$, and, writing $h_T(n)=\\operatorname{length}_T(T/\\mathfrak m_T^{n+1})$ and $\\Lambda f(n)=\\sum_{j=0}^n f(j)$ [def-weil-pbc-module-length], one has\n$$ (\\Lambda^e h_A)(n)\\le h_{A'}(n)\\qquad(n\\ge0).$$\nIf $R$ is regular local [def-weil-regular-scheme] and $h_{A'}=\\Lambda^e h_A$, then $R'$ is regular local and $\\nu^*(R,I)=\\nu^*(R',I')$. Here, for a regular local ring $(T,\\mathfrak b,\\kappa)$ and an ideal $K\\subseteq\\mathfrak b$, set $E(T,K)=\\ker(\\operatorname{gr}_{\\mathfrak b}T\\to\\operatorname{gr}_{\\mathfrak b/K}(T/K))$ [def-weil-pbc-associated-graded-ring]; $\\nu^*(T,K)$ lists each $d\\ge1$ with multiplicity\n$$\\dim_\\kappa\\left(E(T,K)_d\\Big/\\sum_{j=1}^d(\\operatorname{gr}_{\\mathfrak b}T)_jE(T,K)_{d-j}\\right),$$\nsorted increasingly and padded by infinitely many $\\infty$'s.",
+ "source": {
+  "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+  "place": "Hironaka, Certain numerical characters of singularities (1970), (9.1)--(9.6), pp.162--164; Proposition 10, pp.164--165; Proposition 11 and Lemma 12, pp.165--167; residue-extension reduction in Remark (12.2), pp.167--168. Local algebra form, also for a general ideal in a Noetherian local algebra; read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. No Stacks tag states this comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-length",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-associated-graded-ring",
+  "def-trf-adic-initial-ideal-generator-degrees",
+  "def-trf-hilbert-samuel-invariant",
+  "def-trf-local-quotient-hilbert-function"
+ ],
+ "proof": [
+  {
+   "text": "The quotient $A=R/I$ is nonzero local by [lem-weil-pbc-quotient-local-structure] and Noetherian by [lem-weil-pbc-surjective-image-noetherian]. Its residue field is $L$: the induced quotient $A\\to L$ has kernel $\\mathfrak m/I$. Choose $u\\in R$ with residue $\\alpha$ and write $v$ for its image in $A$. Put $S=R[V]_{(\\mathfrak m,V)}$ with maximal ideal $\\mathfrak N$, and $C=A[V]_{(\\mathfrak m/I,V)}$ with maximal ideal $\\mathfrak n$. By [lem-trf-local-polynomial-tangent-extension], these are Noetherian local rings with residue field $L$, and $S$ is regular when $R$ is regular. The quotient $S/IS$ is canonically $C$: on fractions it sends $f(V)/s(V)$ to $\\bar f(V)/\\bar s(V)$. A denominator is outside $(\\mathfrak m,V)$ exactly when its constant coefficient is outside $\\mathfrak m$, a property unchanged modulo $I$; quotienting the fractions therefore gives exactly $C$.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-trf-local-polynomial-tangent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "We identify the scalar-extension rings explicitly, using [def-weil-pbc-module-tensor-product] and [def-weil-pbc-localization-at-prime]. If $\\alpha$ is transcendental, write $k'=k(t)$. Its tensor product with $R$ is $R[t]$ with every nonzero $k[t]$ polynomial inverted: the maps $a(t)\\otimes r\\mapsto a(t)r$ and $t\\mapsto t\\otimes1$, $r\\mapsto1\\otimes r$ are inverse by bilinearity and inversion. The residue map is $t\\mapsto\\alpha$; its kernel in $R[t]$ becomes $(\\mathfrak m,V)$ after $t=V+u$, since reduction sends $V$ to zero. All nonzero $k[t]$ polynomials have nonzero value at $\\alpha$, so the final localization is $S$. Thus $R'=S$ and $A'=C$. If $\\alpha$ is algebraic, let $p\\in k[t]$ be its monic minimal polynomial. Evaluation identifies $k[t]/(p)$ with the field $k(\\alpha)$: divide a polynomial by $p$ to compute the kernel; the irreducibility of $p$ gives inverses of nonzero remainder classes by Bezout. Consequently the maps on coefficients and on $t$ identify $k'\\otimes_kR$ with $R[t]/(p)$. Let $g(V)=p(V+u)$ in $R[V]$ and let $h$ be its image in $A[V]$. Localizing at the residue kernel gives $R'=S/gS$, $A'=C/hC$. The same fraction formulas give the quotient identifications. Here $g\\in\\mathfrak N$ and $h\\in\\mathfrak n$ because $p(\\alpha)=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "It follows from steps 1--2 and [lem-weil-pbc-quotient-local-structure, lem-weil-pbc-surjective-image-noetherian] that $R'$ and $A'$ are Noetherian local with residue field $L$ in both cases: their quotient ideals are contained in the maximal ideals of $S$ and $C$, and all residue maps are evaluation at $V=0$ followed by reduction. The quotient $R'/IR'$ is exactly the displayed $A'$.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "Write $G=\\operatorname{gr}_{\\mathfrak m}R$ and $B=\\operatorname{gr}_{\\mathfrak m/I}A$. The new polynomial tangent-cone lemma identifies $\\operatorname{gr}_{\\mathfrak N}S=G[Z]$ and $\\operatorname{gr}_{\\mathfrak n}C=B[Z]$ compatibly with the quotient map. By [lem-trf-maximal-adic-graded-length-bridge], all pieces have finite dimension and $h_C(n)=\\sum_{r=0}^n\\dim_L(B[Z])_r$. Since $(B[Z])_r=\\bigoplus_{j=0}^rB_j Z^{r-j}$, rearranging this finite sum gives $h_C(n)=\\sum_{a=0}^nh_A(a)=(\\Lambda h_A)(n)$. The same bridge applies to $A'$ and to every quotient below. We use the convention $h_C(-1)=0$, so $h_C(n)-h_C(n-1)=h_A(n)$ for every $n\\ge0$.",
+   "uses": [
+    "lem-trf-local-polynomial-tangent-extension",
+    "lem-trf-maximal-adic-graded-length-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "In the transcendental case step 2 gives $A'=C$, hence $h_{A'}=\\Lambda h_A$ as required for $e=1$. If $R$ is regular then $R'=S$ is regular by step 1. The equality of the standard-degree sequences in this case will follow directly from the polynomial kernel calculation in step 9.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "In the algebraic case multiplication by $h\\in\\mathfrak n$ defines\n$$C/\\mathfrak n^n\\xrightarrow{h}C/\\mathfrak n^{n+1}\\longrightarrow A'/\\mathfrak m_{A'}^{n+1}\\longrightarrow0.$$\nIts kernel is $K_n=(\\mathfrak n^{n+1}:h)/\\mathfrak n^n$: this follows by writing out when $ha$ lies in $\\mathfrak n^{n+1}$. Its cokernel is $C/(hC+\\mathfrak n^{n+1})$, exactly the displayed quotient of $A'$. A module over the quotient $A'$ has the same submodules over $C$ and over $A'$, since all quotient scalars lift, so its two lengths agree by [def-weil-pbc-module-length]. Apply [lem-weil-pbc-length-additive-short-exact] to the kernel-image and image-cokernel sequences. All lengths are finite by step 4 and passage to subquotients. We obtain\n$$h_C(n)-h_C(n-1)=h_{A'}(n)-\\operatorname{length}_C K_n.$$\nStep 4 turns this into $h_{A'}(n)=h_A(n)+\\operatorname{length}_C K_n\\ge h_A(n)$, the desired inequality for $e=0$. At $n=0$, $C/\\mathfrak n^0=0$ and $K_0=0$, so the formula also holds there.",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "Assume now that $R$ is regular and $h_{A'}=h_A$ in the algebraic case. Step 6 gives $\\operatorname{length}K_1=0$, hence $K_1=0$: a nonzero module has the strict chain $0\\subsetneq M$. If $h\\in\\mathfrak n^2$, multiplication $C/\\mathfrak n\\to C/\\mathfrak n^2$ would vanish, making $K_1=C/\\mathfrak n=L\\ne0$, a contradiction. Thus $h\\notin\\mathfrak n^2$, and $g\\notin\\mathfrak N^2$ because $S\\to C$ sends $\\mathfrak N^2$ into $\\mathfrak n^2$. In particular $g\\ne0$. Applying [lem-sfb-regular-hypersurface-initial-form] to the regular local ring $S$ shows that $R'=S/gS$ is regular local.",
+   "uses": [
+    "lem-sfb-regular-hypersurface-initial-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "Still in this equality case, extend the nonzero class of $g$ to an $L$-basis of $\\mathfrak N/\\mathfrak N^2$. By [lem-weil-pbc-regular-local-cotangent-dimension] this basis has $\\dim S$ elements. Choose lifts in $\\mathfrak N$; by [lem-weil-pbc-nakayama-local-generators] they generate $\\mathfrak N$ (a finite $S$-module since $S$ is Noetherian). Thus they form a regular system of parameters, with $g$ first. Step 4 and the equality assumption give $h_{S/IS}=h_C=\\Lambda h_A=\\Lambda h_{A'}$. Apply [lem-trf-linear-sections-hilbert-standard-degrees] with ambient ring $S$, ideal $IS$, $q=1$ and parameter $g$. Its section quotient is $S/gS=R'$ and the section of $IS$ is $I'$. Its equality clause gives $\\nu^*(S,IS)=\\nu^*(R',I')$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-trf-linear-sections-hilbert-standard-degrees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  },
+  {
+   "text": "For regular $R$, let $E=\\ker(G\\to B)=E(R,I)$. By the quotient compatibility in [lem-trf-local-polynomial-tangent-extension], the kernel for $S\\to S/IS=C$ is $E[Z]\\subseteq G[Z]$: a polynomial maps to zero precisely when each coefficient is in $E$. Write $G_+=\\bigoplus_{d>0}G_d$ and $P_+=(G[Z])_+$. Since $P_+=(G_+,Z)$, taking the constant coefficient induces the degree-preserving isomorphism\n$$E[Z]/P_+E[Z]\\simeq E/G_+E.$$\nIndeed every term of positive $Z$-degree lies in $ZE[Z]$, and the constant terms of $G_+E[Z]$ are exactly $G_+E$. The degree-$d$ dimensions on the two sides are exactly the multiplicities defining $\\nu^*(S,IS)$ and $\\nu^*(R,I)$. They agree for every $d\\ge1$, so sorting and adding the infinite tails gives equality of these sequences. Combine this with $R'=S$ in step 5 or the section equality of step 8. This proves every asserted equality, including $I=0$ (both kernels vanish and both sequences consist entirely of $\\infty$).",
+   "uses": [
+    "lem-trf-local-polynomial-tangent-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+    "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-trf-local-polynomial-tangent-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-sfb-regular-hypersurface-initial-form",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-trf-linear-sections-hilbert-standard-degrees"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+  "place": "Hironaka, Certain numerical characters of singularities (1970), (9.6), Cases 1--3, Proposition 10 and Remark (10.1), pp.164--165; Proposition 11 and Lemma 12, pp.166--167. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. Agent expansion by a multiplication exact sequence; no Stacks tag asserts this full comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|hilbert.*(baseChange|base_change|inseparable)|standard.?base.*initial",
+   "results": "{\"t\": \"2026-10-23T20:09:24Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|hilbert.*(baseChange|base_change|inseparable)|standard.?base.*initial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar-extension maps, cotangent-space dimension, DVR and Krull-dimension facts, or no hits; none compares all maximal-adic lengths or minimal initial-ideal generator degrees under this residue-field scalar extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel functions under scalar extension by a simple subfield of the residue field of a local algebra",
+   "results": "{\"t\": \"2026-10-23T20:09:24Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert Samuel functions under scalar extension by a simple subfield of the residue field of a local algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.extendScalars\", \"AlgHom.extendScalarsOfSurjective_apply\", \"AlgHom.restrictScalars_extendScalarsOfSurjective\", \"IsLocalizedModule.mapExtendScalars.congr_simp\", \"LinearMap.extendScalarsOfIsLocalization_apply\", \"AlgEquiv.extendScalarsOfSurjective_apply\", \"Algebra.Generators.extendScalars\", \"IsLocalRing.ResidueField.finite_of_module_finite\"], \"digest\": \"3894e8b85acc3b9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar-extension maps, cotangent-space dimension, DVR and Krull-dimension facts, or no hits; none compares all maximal-adic lengths or minimal initial-ideal generator degrees under this residue-field scalar extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalRing\", \"Hilbert\"",
+   "results": "{\"t\": \"2026-10-23T20:09:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalRing\\\", \\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar-extension maps, cotangent-space dimension, DVR and Krull-dimension facts, or no hits; none compares all maximal-adic lengths or minimal initial-ideal generator degrees under this residue-field scalar extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-simple-residue-extension-hilbert-comparison: For a Noetherian local algebra over a field and a simple subextension of its residue field, localization after extending scalars increases the Hilbert Samuel function by at least the transcendence summation; equality preserves tangent ideal generator degrees in a regular ambient ring",
+   "results": "{\"t\": \"2026-10-23T20:09:25Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-simple-residue-extension-hilbert-comparison: For a Noetherian local algebra over a field and a simple subextension of its residue field, localization after extending scalars increases the Hilbert Samuel function by at least the transcendence summation; equality preserves tangent ideal generator degrees in a regular ambient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDeg_le_finrank\", \"IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"Ideal.inertiaDeg\"], \"digest\": \"219dde77669857d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar-extension maps, cotangent-space dimension, DVR and Krull-dimension facts, or no hits; none compares all maximal-adic lengths or minimal initial-ideal generator degrees under this residue-field scalar extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-simple-residue-extension-hilbert-comparison: adjoining an element of the residue field as a coefficient field gives a Hilbert Samuel inequality, and equality preserves degrees of a minimal standard basis of an ideal in a regular local ring",
+   "results": "{\"t\": \"2026-10-23T20:11:01Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-simple-residue-extension-hilbert-comparison: adjoining an element of the residue field as a coefficient field gives a Hilbert Samuel inequality, and equality preserves degrees of a minimal standard basis of an ideal in a regular local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDeg_le_finrank\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Ideal.inertiaDeg\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\"], \"digest\": \"2c29ae9a81fe3ece\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scalar-extension maps, cotangent-space dimension, DVR and Krull-dimension facts, or no hits; none compares all maximal-adic lengths or minimal initial-ideal generator degrees under this residue-field scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|[Ss]tandard[Bb]asis|standard.?base|hilbert.*[Rr]esidue",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|[Ss]tandard[Bb]asis|standard.?base|hilbert.*[Rr]esidue\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned inertia-degree, residue-field, cotangent-dimension and regular-sequence dimension statements do not compare Hilbert--Samuel functions or initial-ideal generator degrees; grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel functions of a local ring after adjoining a residue element as a scalar",
+   "results": "{\"t\": \"2026-10-23T21:20:05Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert Samuel functions of a local ring after adjoining a residue element as a scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.residue\", \"IsLocalRing.instIsScalarTowerResidueField\", \"IsLocalRing.ResidueField.lift_residue_apply\", \"IsLocalRing.instFiniteResidueField\", \"IsLocalRing.ResidueField.instIsScalarTower_1\", \"AdjoinRoot.isScalarTower_right\", \"IsLocalRing.ResidueField.algebra\", \"IsLocalRing.instIsScalarTowerResidueFieldCotangentSpace\"], \"digest\": \"9151c0db17050293\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned inertia-degree, residue-field, cotangent-dimension and regular-sequence dimension statements do not compare Hilbert--Samuel functions or initial-ideal generator degrees; grep and Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"IsLocalRing\"",
+   "results": "{\"t\": \"2026-10-23T21:20:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\", \\\"IsLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned inertia-degree, residue-field, cotangent-dimension and regular-sequence dimension statements do not compare Hilbert--Samuel functions or initial-ideal generator degrees; grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-simple-residue-extension-hilbert-comparison: Hilbert Samuel length inequality for extending scalars by a simple subfield of a local algebra residue field, equality preserves minimal tangent ideal generator degrees",
+   "results": "{\"t\": \"2026-10-23T21:20:09Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-simple-residue-extension-hilbert-comparison: Hilbert Samuel length inequality for extending scalars by a simple subfield of a local algebra residue field, equality preserves minimal tangent ideal generator degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.inertiaDeg_le_finrank\", \"Ideal.inertiaDeg\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\"], \"digest\": \"ac639202e5d7f17c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned inertia-degree, residue-field, cotangent-dimension and regular-sequence dimension statements do not compare Hilbert--Samuel functions or initial-ideal generator degrees; grep and Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-simple-residue-extension-hilbert-comparison: changing the coefficient field inside the residue field gives a Hilbert Samuel bound; at equality regular local ambient initial ideals have the same generator degree sequence",
+   "results": "{\"t\": \"2026-10-23T21:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-simple-residue-extension-hilbert-comparison: changing the coefficient field inside the residue field gives a Hilbert Samuel bound; at equality regular local ambient initial ideals have the same generator degree sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsLocalization.AtPrime.inertiaDeg_map_eq_inertiaDeg\", \"IsLocalRing.ResidueField.finite_of_finite\", \"Ideal.inertiaDeg\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\"], \"digest\": \"9738e4aa29cf6592\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned inertia-degree, residue-field, cotangent-dimension and regular-sequence dimension statements do not compare Hilbert--Samuel functions or initial-ideal generator degrees; grep and Loogle returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-cone-hilbert-standard-degrees",
+  "date": "2026-10-24",
+  "group": "Q36"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Theorem III, p.156, with the definition of the degree sequence and standard bases on p.155; proof summarized on p.187; local chart form of the regular ambient embedding; Q76 refinement: Lemma 8, pp.160--162; (9.1)--(9.6), pp.162--164; Propositions 10--11 and Lemma 12, pp.164--167; second part of Remark (12.2), pp.167--168; Q36 refinement: Hironaka (9.1)--(9.6), three simple residue-extension cases, Propositions 10--11, Lemma 12 and Remark (12.2), pp.162--168.",
+   "via": [
+    "lem-trf-projective-cone-hilbert-standard-degrees",
+    "lem-trf-permissible-blowup-standard-degrees",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-simple-residue-extension-hilbert-comparison",
+  "worker": "stage1",
+  "summary": "Compared the local algebra statement with Hironaka pp.164--168. Replaced three extension cases by the explicit polynomial presentation and the kernel-length formula, valid also for mixed inseparability. Created one lower polynomial tangent-cone lemma, and reused the existing linear-section equality theorem. Statement unchanged; no Lean writing or compilation.",
+  "blueprint": "Realizes the inherited historical resolution branch of lem-trf-local-term-locality through the projective-cone Hilbert/standard-degree comparison. Read latest lem-trf-local-term-locality.proof.md: its present contracting-correspondence route no longer uses the historical resolution branch. Only the assigned existing algebraic descendant is refined, with no unit/chapter change. Hironaka polynomial tangent cone, (9.6), and Lemma 12 are the precise local algebra input.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-regular-hypersurface-initial-form",
+    "why": "Generic regular-local hypersurface criterion used only to infer regularity of S/gS from g outside its maximal-ideal square; no same-unit node gives this ambient criterion."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Generic Nakayama generation criterion lifts a basis of the cotangent space to parameters of S; no same-unit node gives it."
+   },
+   {
+    "node": "lem-weil-pbc-length-additive-short-exact",
+    "why": "Generic module-length additivity applied to the displayed multiplication sequence; not a replacement of any unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-local-structure",
+    "why": "Generic local quotient structure for R/I and polynomial hypersurface quotients."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-image-noetherian",
+    "why": "Generic descent of Noetherianity to the displayed quotient rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-regular-hypersurface-initial-form",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-35baa537e",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-35baa537e (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-trf-local-polynomial-tangent-extension, every cited statement, the unit sk-i-curve-zero and the parent projective-cone steps 5-6 (the parent uses the item exactly as stated; the statement is unchanged). The Hironaka PDF is absent from literature/; the proof is marked agent-written with WANTED, so I checked every step mathematically. Step 2: k(t) tensor R is a localization of R[t] and R'=R[V]_(m,V); k[t]/(p) tensor R = R[t]/(p) and R'=S/gS. Step 4: gr C = B[Z] gives h_C = Lambda h_A. Step 6: the kernel of multiplication by h is (n^{n+1}:h)/n^n, giving h_A' = h_A + len K_n. Step 7: equality forces K_1=0, so h is not in n^2, g is not in N^2, and the regular-hypersurface criterion makes R' regular. Step 8: a cotangent basis plus Nakayama gives a regular system of parameters starting with g; the linear-sections node with V=S, b=IS, q=1 has premise h_C = Lambda h_A' and gives nu*(S,IS)=nu*(R',I'). Step 9: E(S,IS)=E[Z] and E[Z]/P_+E[Z] = E/G_+E. Small cases: transcendental field case, alpha in k, purely inseparable alpha^p=s (strict inequality), C/R, I=0. New node: true (q^n/q^{n+1} splits by V-degree, quotient naturality is coefficientwise, regular T gives dimension d+1 with d+1 generators); tested on T=kappa and T=kappa[eps]/eps^2. It is a strictly lower input, not a restated clause. No duplicate (smooth-local-tangent-cone-extension is Q-only, the others are power-series, regular-sequence or normal-flat statements). Searches recorded, statement only. No SGA. Tool use of lem-sfb-regular-hypersurface-initial-form accepted; the other declared tools are Mathlib leaves. No cycle, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SimpleResidueExtensionHilbertComparison",
+  "declaration": "Hironaka.simpleResidueExtensionHilbertComparison",
+  "declarations": [
+   "Hironaka.simpleResidueTensor",
+   "Hironaka.simpleResidueEvaluation",
+   "Hironaka.simpleResidueExtension",
+   "Hironaka.simpleResidueExtensionMap",
+   "Hironaka.simpleResidueExtensionHilbertComparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/SimpleResidueExtensionHilbertComparison.lean",
+  "statement": "theorem simpleResidueExtensionHilbertComparison [IsNoetherianRing R] (α : IsLocalRing.ResidueField R) (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) : IsNoetherianRing (simpleResidueExtension k R α) ∧ IsLocalRing (simpleResidueExtension k R α) ∧ IsNoetherianRing ((simpleResidueExtension k R α) ⧸ I.map (simpleResidueExtensionMap k R α)) ∧ IsLocalRing ((simpleResidueExtension k R α) ⧸ I.map (simpleResidueExtensionMap k R α)) ∧ (∃ ρ : simpleResidueExtension k R α →+* IsLocalRing.ResidueField R, ρ.comp (algebraMap (simpleResidueTensor k R α) (simpleResidueExtension k R α)) = (simpleResidueEvaluation k R α).toRingHom ∧ Function.Surjective ρ ∧ RingHom.ker ρ = IsLocalRing.maximalIdeal (simpleResidueExtension k R α) ∧ ∃ σ : ((simpleResidueExtension k R α) ⧸ I.map (simpleResidueExtensionMap k R α)) →+* IsLocalRing.ResidueField R, σ.comp (Ideal.Quotient.mk (I.map (simpleResidueExtensionMap k R α))) = ρ ∧ Function.Surjective σ ∧ RingHom.ker σ = (IsLocalRing.maximalIdeal (simpleResidueExtension k R α)).map (Ideal.Quotient.mk (I.map (simpleResidueExtensionMap k R α)))) ∧ (∀ n : ℕ, ((AlgebraicGeometry.HilbertSamuel.summation^[ if IsAlgebraic k α then 0 else 1]) (quotientHilbertFunction (IsLocalRing.maximalIdeal R) I)) n ≤ quotientHilbertFunction (IsLocalRing.maximalIdeal (simpleResidueExtension k R α)) (I.map (simpleResidueExtensionMap k R α)) n) ∧ (IsRegularLocalRing R → quotientHilbertFunction (IsLocalRing.maximalIdeal (simpleResidueExtension k R α)) (I.map (simpleResidueExtensionMap k R α)) = (AlgebraicGeometry.HilbertSamuel.summation^[if IsAlgebraic k α then 0 else 1]) (quotientHilbertFunction (IsLocalRing.maximalIdeal R) I) → IsRegularLocalRing (simpleResidueExtension k R α) ∧ nuStar I = nuStar (I.map (simpleResidueExtensionMap k R α)))",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70ef926c2",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Clause-by-clause match. Objects are canonical: k(α)=IntermediateField.adjoin k {α}, ε=productMap(val, toAlgHom), R'=Localization.AtPrime(ker ε) via ker_isPrime, I'=I.map of the canonical R→R'. R',A' Noetherian and local; residue field L pinned by ρ with ρ∘loc=ε and ker ρ = m, and σ induced from ρ. Inequality Λ^e h_A ≤ h_{A'} for all n, with e = if IsAlgebraic then 0 else 1 and no separability assumption. Equality case: IsRegularLocalRing R and h_{A'}=Λ^e h_A give IsRegularLocalRing R' and nuStar I = nuStar I'. Bodies of quotientHilbertFunction, nuStar, adicInitialIdeal and summation read against the node; they match. Edge cases n=0, I=0, α∈k, transcendental, inseparable, independent universes u,v: OK. lean.statement verbatim. New node def-trf-local-quotient-hilbert-function is an existing:true ownership record of the unchanged real-data def (same pattern as landed def-trf-adic-initial-ideal-generator-degrees), text matches the body, no parallel owner. The other two added stmt_deps are landed def nodes; statement text unchanged vs live. Docstrings and 9-step proof present; sorry only; report has both sections. Advisory: 3 private imports look unused. No compile: no file changed."
+ }
+}

@@ -1,0 +1,322 @@
+{
+ "id": "lem-trf-scheme-galois-comparison-normal-form",
+ "kind": "statement",
+ "title": "Normal form of the specified positive-iterate scheme/Galois comparison",
+ "statement": "Fix a prime $p$, an integer $a\\geq1$, $q=p^a$, a finite field $k_0=\\mathbf F_q$ and its fixed algebraic closure $k$ [def-weil-finite-field-fiber]. Let $X_0$ be a finite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, and let $\\Phi$, $g_\\sigma$, and $g=g_\\gamma=g_\\sigma^{-1}$ be its scheme, arithmetic Galois, and geometric Galois Frobenii [def-trf-scheme-frobenius]. Write $F_X$ for absolute $p$-power Frobenius [def-weil-absolute-frobenius-scheme]. Let $R$ be a finite commutative ring annihilated by an integer prime to $p$, and work in $D_R=D(X_{\\mathrm{proet}},R)$ [def-weil-pbc-proetale-modules]. For $m\\geq1$, put $H=F_X^{am}$. Then $X$ has characteristic $p$ [def-weil-scheme-characteristic-p] and\n$$\\Phi^m=g^m\\circ H=H\\circ g^m.$$\nLet $d_R:L(\\Phi^m)_R^*\\xrightarrow{\\sim}LH_R^*L(g^m)_R^*$ be the canonical pullback-composition isomorphism of [lem-weil-pbc-proetale-derived-pullback-composition] for $\\Phi^m=g^m\\circ H$, using canonical constant-section coefficient identifications. Let $\\tau_R^{(am)}:LH_R^*\\xrightarrow{\\sim}\\operatorname{id}_{D_R}$ be the specified iterated absolute-Frobenius trivialization of [lem-trf-absolute-frobenius-site]. For the specified multiplicative comparison $\\kappa_R^{(m)}$ of [prop-trf-scheme-galois-comparison], normalized by that same trivialization, one has\n$$\\kappa^{(m)}_{R,K}=\\tau^{(am)}_{R,L(g^m)_R^*K}\\circ d_{R,K}$$\nfor every $K\\in D_R$. The equality concerns the specified multiplicative iterate and the single exponent $am$ trivialization, including $m=1$; all scheme-map equalities are equalities of underlying scheme morphisms and impose no $k$-linearity on $g$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+  "place": "Final sentence of thm-trf-finite-coefficient-map.proof.md, coefficient naturality of the Frobenius operators: geometric normal form supplied by prop-trf-scheme-galois-comparison.proof.md, both paragraphs and its displayed construction Agent-extracted intermediate assertion, not a verbatim Stacks theorem."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-scheme-frobenius",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-scheme-characteristic-p",
+  "def-weil-pbc-proetale-modules",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-absolute-frobenius-site",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The field $k_0$ has characteristic $p$ by [def-weil-finite-field-q-elements]. The composite structure morphism $X\\to\\operatorname{Spec}k\\to\\operatorname{Spec}k_0$ from [def-weil-finite-field-fiber] gives a unital map $k_0\\to\\mathcal O_X(U)$ for each open $U$. It takes $p\\cdot1=0$ to $p\\cdot1=0$. Thus $X$ has characteristic $p$ in [def-weil-scheme-characteristic-p], including when $X$ is empty.",
+   "uses": [
+    "def-weil-finite-field-q-elements",
+    "def-weil-finite-field-fiber",
+    "def-weil-scheme-characteristic-p"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+    "place": "First paragraph: applicability of absolute Frobenius to the geometric fibre"
+   }
+  },
+  {
+   "text": "For every $r\\geq1$, put $H_r=F_X^{ar}$. By [def-weil-absolute-frobenius-scheme] this is absolute $q^r$-power Frobenius. The statement of [prop-trf-frobenius-factorization] gives $H_r=g_\\sigma^r\\circ\\Phi^r=\\Phi^r\\circ g_\\sigma^r$. The maps $g$ and $g_\\sigma$ of [def-trf-scheme-frobenius] are inverse: on each base-changed affine chart their ring maps are $u\\otimes b\\mapsto u\\otimes\\sigma^{-1}(b)$ and $u\\otimes b\\mapsto u\\otimes\\sigma(b)$, whose composites fix every tensor. Therefore $\\Phi^r=g^r\\circ H_r=H_r\\circ g^r$, by composing the two factorization equalities with $g^r$. In particular $H_n$ commutes with $g^m$ for all $m,n\\geq1$: $H_n=H_1^n$, and $H_1$ commutes with $g$. These are underlying scheme-map equalities.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "prop-trf-frobenius-factorization",
+    "def-trf-scheme-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+    "place": "First paragraph: factorization; second paragraph: the same factorization for positive powers"
+   }
+  },
+  {
+   "text": "Use the canonical constant-section coefficient maps, which are isomorphisms by [prop-weil-pbc-proetale-constant-ring-map]. Their identification for a composite is the composite identification, by [lem-trf-constant-coefficient-composition]. Hence [lem-weil-pbc-proetale-derived-pullback-composition] applies to all the endomorphisms above with this one coefficient convention. Its comparisons satisfy the associativity equation in [lem-trf-derived-pullback-coherence]. Consequently expanding a composite of three or more maps by successive binary comparisons is independent of parenthesization: apply that equation to change one adjacent parenthesization at a time. Below all identifications of words of pullback functors mean these comparisons, and interchanging two commuting maps means comparing both words with the pullback of their common composite.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-trf-constant-coefficient-composition",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+    "place": "First paragraph: functoriality of pullback, with canonical coefficient and composition normalization; Stacks Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "Write $T_r=L(\\Phi^r)_R^*$, $P_r=L(H_r)_R^*$ and $G_r=L(g^r)_R^*$. Step 2 and Step 3 give $d_r:T_r\\xrightarrow{\\sim}P_rG_r$; this is exactly $d_R$ when $r=m$. Let $t_r=\\tau_R^{(ar)}:P_r\\xrightarrow{\\sim}\\mathrm{id}$, using [lem-trf-absolute-frobenius-site] and the explicit relative-Frobenius normalization in [lem-pur-frobenius-trivialization-pullback]. Define the candidate $\\beta_{r,K}=t_{r,G_rK}\\circ d_{r,K}$. Each is a natural isomorphism. For $r=1$, the specified normalization in the question is precisely the source's displayed construction: first use $\\Phi=gH_1$, then cancel $H_1$ by this trivialization. Thus $\\beta_1=\\kappa_R$. It remains to show that this candidate family is multiplicative; only the multiplicative-iterate assertion, not any unstated normal-form clause, will be taken from [prop-trf-scheme-galois-comparison].",
+   "uses": [
+    "lem-trf-absolute-frobenius-site",
+    "lem-pur-frobenius-trivialization-pullback",
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+    "place": "First paragraph, displayed definition of kappa; second paragraph, candidate comparison for each power"
+   }
+  },
+  {
+   "text": "Apply the addition clause of [lem-pur-frobenius-trivialization-pullback] with $b_1=am$ and $b_2=an$. Under Step 3's comparisons it gives $t_{m+n,K}=t_{n,K}\\circ t_{m,P_nK}$. Apply its pullback-naturality clause with $X=Y$, $u=g^m$ and $b=an$. These hypotheses hold: $X$ is of characteristic $p$ by Step 1, $g^m$ is a scheme morphism by [def-trf-scheme-frobenius], and $R$ is finite commutative. No $k$-linearity is required. For the canonical interchange $e_{m,n}:G_mP_n\\xrightarrow{\\sim}P_nG_m$, the equation is\n$$t_{n,G_mK}\\circ e_{m,n,K}=G_m(t_{n,K}).$$\nThe trivializations here are the specified ones, since the cited statement identifies its $b=1$ trivialization with [lem-trf-absolute-frobenius-site] and its $b$-th one with the $b$-fold iterate.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback",
+    "def-trf-scheme-frobenius",
+    "lem-trf-absolute-frobenius-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+    "place": "Second paragraph: relative Frobenius maps compose to the corresponding power maps; Stacks Tag 0F6W, more-morphisms.tex, lemma-relative-frobenius-weakly-etale"
+   }
+  },
+  {
+   "text": "Fix $m,n\\geq1$ and $K$. By Step 2,\n$$\\Phi^{m+n}=(g^nH_n)(g^mH_m)=g^{m+n}H_{m+n}.$$\nThus [lem-trf-derived-pullback-coherence] identifies $d_{m+n}$ with the expansion\n$$T_{m+n}\\simeq T_mT_n\\xrightarrow{d_m d_n}P_mG_mP_nG_n\\xrightarrow{P_m(e_{m,n})G_n}P_mP_nG_mG_n.$$\nHere the middle interchange is exactly Step 5's comparison, because its two words represent $H_n g^m=g^mH_n$. Naturality of $t_m$ at $G_m(d_{n,K})$ moves the expansion of $T_nK$ past $t_m$. In these coordinates the composite $G_m(\\beta_{n,K})\\circ\\beta_{m,T_nK}$ is\n$$G_m(t_{n,G_nK})\\circ t_{m,G_mP_nG_nK}.$$\nStep 5 replaces its first factor by $t_{n,G_mG_nK}\\circ e_{m,n,G_nK}$. Naturality of $t_m$ at $e_{m,n,G_nK}$ gives\n$$e_{m,n,G_nK}\\circ t_{m,G_mP_nG_nK}=t_{m,P_nG_mG_nK}\\circ P_m(e_{m,n,G_nK}).$$\nThe resulting expression is therefore $t_{n,G_mG_nK}\\circ t_{m,P_nG_mG_nK}$ after that interchange. Step 5's addition law makes this $t_{m+n,G_{m+n}K}$. Restoring the comparison of domains proves\n$$\\beta_{m+n,K}=G_m(\\beta_{n,K})\\circ\\beta_{m,T_nK}.$$\nNow induct on $r\\geq1$. Step 4 gives the base $\\beta_1=\\kappa_R$. If $\\beta_r=\\kappa_R^{(r)}$, the formula just proved with $(m,n)=(r,1)$ and the multiplicative-iterate clause of [prop-trf-scheme-galois-comparison] give $\\beta_{r+1}=\\kappa_R^{(r+1)}$. Hence for $r=m$ the claimed equality is $\\kappa_{R,K}^{(m)}=t_{m,G_mK}\\circ d_{m,K}$, with the single exponent $am$ trivialization, as required.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence",
+    "prop-trf-scheme-galois-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+    "place": "Second paragraph: multiplicative iterate and addition of exponents, expanded as an explicit natural-transformation calculation and induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-characteristic-p",
+  "def-weil-absolute-frobenius-scheme",
+  "prop-trf-frobenius-factorization",
+  "def-trf-scheme-frobenius",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-derived-pullback-coherence",
+  "lem-trf-absolute-frobenius-site",
+  "lem-pur-frobenius-trivialization-pullback",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/prop-trf-scheme-galois-comparison.proof.md",
+  "place": "Both paragraphs; explicit normalization and multiplicative-iterate calculation using existing Frobenius and coherence lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"frobenius\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; 0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "invalid identifier; no mathematical absence conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "(schemeGalois|SchemeGalois|[Ff]robenius.*trivial|trivial.*[Ff]robenius)",
+   "results": "0 hits: none; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical scheme Galois comparison has normal form pullback compositor followed by absolute Frobenius trivialization",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison, CategoryTheory.Limits.instIsIsoPullbackComparison, AlgebraicGeometry.Scheme.canonicallyOverPullback, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective, CategoryTheory.GrothendieckTopology.pullbackComp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified scheme Frobenius to geometric Galois Frobenius comparison equals canonical pullback composition followed by the absolute Frobenius trivialization for each positive iterate",
+   "results": "8 hits: RingHom.map_iterate_frobeniusEquiv_symm, MonoidHom.map_iterate_frobeniusEquiv_symm, WittVector.IsocrystalHom.frob_equivariant, iterateFrobeniusEquiv_apply, coe_iterateFrobeniusEquiv, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, iterateFrobeniusEquiv_one",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "1 hits: CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The multiplicative iterate of the canonical scheme versus Galois Frobenius pullback is the single exponent absolute Frobenius trivialization composed with the derived pullback compositor",
+   "results": "iterateFrobeniusEquiv_eq_pow, iterateFrobeniusEquiv_add, coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv_apply, iterateFrobeniusEquiv_add_apply, MonoidHom.map_iterate_frobeniusEquiv_symm, RingHom.map_iterate_frobeniusEquiv_symm, iterateFrobeniusEquiv_one; ring Frobenius equivalences, not pro-etale derived comparisons",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(schemeGalois|SchemeGalois|[Ff]robenius.*trivial|trivial.*[Ff]robenius)",
+   "results": "0 hits: ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius, regular-category Frobenius, structure-sheaf module pullbacks and normalization maps do not state the pro-etale constant-coefficient comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The multiplicative scheme and Galois Frobenius comparison has normal form given by the pullback compositor followed by iterated absolute Frobenius trivialization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp, AlgebraicGeometry.Scheme.Hom.normalization, iterateFrobeniusEquiv_symm_add, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.comp_appLE",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius, regular-category Frobenius, structure-sheaf module pullbacks and normalization maps do not state the pro-etale constant-coefficient comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "1 hits: CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius, regular-category Frobenius, structure-sheaf module pullbacks and normalization maps do not state the pro-etale constant-coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme Frobenius versus geometric Galois Frobenius pullback comparison equals the absolute Frobenius trivialization after canonical pullback composition for every positive iterate",
+   "results": "8 hits: coe_iterateFrobeniusEquiv, iterateFrobeniusEquiv_one, iterateFrobeniusEquiv_apply, coe_frobeniusEquiv, iterateFrobeniusEquiv_eq_pow, frobeniusEquiv_apply, coe_frobeniusEquiv_symm_comp_coe_frobenius, coe_frobenius_comp_coe_frobeniusEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius, regular-category Frobenius, structure-sheaf module pullbacks and normalization maps do not state the pro-etale constant-coefficient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural trivialization of absolute Frobenius pullback commutes with arbitrary scheme pullback and addition of exponents giving the normal form of iterated relative Frobenius comparisons",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.pullbackSpecIso_inv_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo",
+   "date": "2026-10-22",
+   "verdict": "no match: ring Frobenius, regular-category Frobenius, structure-sheaf module pullbacks and normalization maps do not state the pro-etale constant-coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-galois-coefficient-change",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-trace-coeff",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-finite-coefficient-map",
+   "place": "Final sentence of thm-trf-finite-coefficient-map.proof.md, coefficient naturality of the Frobenius operators: geometric normal form supplied by prop-trf-scheme-galois-comparison.proof.md, both paragraphs and its displayed construction",
+   "via": [
+    "lem-trf-scheme-galois-coefficient-change"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-scheme-galois-comparison-normal-form",
+  "worker": "stage1",
+  "summary": "Q118: retained the statement; proved characteristic and both scheme-map factorizations, fixed coefficient/compositor normalization, computed multiplicativity of the normal-form candidates, and identified the specified iterates by induction. Reused existing nodes; no new nodes.",
+  "blueprint": "thm-trf-finite-coefficient-map.proof.md final sentence (specified Frobenius coefficient naturality), via the displayed construction and exponent-addition assertion in prop-trf-scheme-galois-comparison.proof.md.",
+  "tool_uses": [
+   {
+    "node": "def-weil-finite-field-q-elements",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "def-weil-finite-field-fiber",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "def-weil-scheme-characteristic-p",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "def-weil-absolute-frobenius-scheme",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "prop-trf-frobenius-factorization",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "def-trf-scheme-frobenius",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-constant-coefficient-composition",
+    "why": "Identifies the constant-section coefficient map for a composite with the composite of the two maps."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "lem-trf-derived-pullback-coherence",
+    "why": "Supplies associativity for the canonical pro-etale derived compositor with arbitrary finite constant coefficients."
+   },
+   {
+    "node": "lem-trf-absolute-frobenius-site",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   },
+   {
+    "node": "lem-pur-frobenius-trivialization-pullback",
+    "why": "Supplies pullback naturality under semilinear scheme maps and the precise exponent-addition law, beyond the absolute-site open-restriction clause."
+   },
+   {
+    "node": "prop-trf-scheme-galois-comparison",
+    "why": "Generic definition or Frobenius/composition input needed to normalize the scheme/Galois comparison; the coefficient-change unit provides no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-finite-field-q-elements",
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-characteristic-p",
+  "def-weil-absolute-frobenius-scheme",
+  "prop-trf-frobenius-factorization",
+  "def-trf-scheme-frobenius",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-trf-constant-coefficient-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-derived-pullback-coherence",
+  "lem-trf-absolute-frobenius-site",
+  "lem-pur-frobenius-trivialization-pullback",
+  "prop-trf-scheme-galois-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-a07cdcd0e",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-a07cdcd0e (reviewer sub-agent of L); spot-checked: I read all 6 steps. Q118 is a 0-new-node split. Its statement and stmt_deps are unchanged and byte-equal to the live unsplit node (created by Q34 for the lem-trf-scheme-galois-coefficient-change re-split). The item has no repair note of its own, is not in the drop list, and uses no SGA. Source: main-20261015 prop-trf-scheme-galois-comparison.proof.md. ¶1 constructs κ, and ¶2 says the same construction is the multiplicative iterate with addition of exponents; the item proves exactly that sentence. Stacks 0F6W (more-morphisms l.19215) and 0D6D (sites-cohomology l.3658) labels checked. S1: char p comes from the unital k_0→O_X(U); the empty X case is stated in def-weil-scheme-characteristic-p. S2: prop-trf-frobenius-factorization (H_r=g_σ^rΦ^r=Φ^rg_σ^r) and g=g_σ^{-1} on affine tensors give Φ^r=g^rH_r=H_rg^r; at r=1 this gives gH_1=H_1g, so H_n commutes with g^m. S3: constant-ring-map, constant-coefficient-composition and derived-pullback-coherence give the coefficient convention and parenthesization independence. S4: β_r=t_rG_r∘d_r. β_1=κ is the item's own statement-level normalization, not a hidden proof. S5: lem-pur-frobenius-trivialization-pullback, statement only. Addition with b1=am, b2=an gives t_{m+n}=t_n∘t_mP_n. Naturality with u=g^m, b=an gives t_nG_m∘e=G_mt_n. Hypotheses: X has char p, u is any morphism, R is finite commutative. S6: I redid the computation. Naturality of t_m at G_md_n and at eG_n, then S5, then the addition law, then coherence of compositor words for Φ^{m+n} give β_{m+n}=G_mβ_n∘β_mT_n for all m,n, so either composition order works. The induction (base S4, successor (r,1)) is properly set up. No D1/D4/C3 fault. Edge cases: m=1, m=n=1, empty X, a=1, nonreduced X, R=0. Accepted tool_uses (generic black boxes): prop-trf-frobenius-factorization, lem-trf-absolute-frobenius-site, prop-trf-scheme-galois-comparison, lem-pur-frobenius-trivialization-pullback, prop-weil-pbc-proetale-constant-ring-map, lem-weil-pbc-proetale-derived-pullback-composition. The sk-d-weil nodes are on route via the unit's uses. No duplicate: I searched for 'multiplicative iterate', κ^(m), F_X^{am} and τ^(am). Advisory: the proof is about 4980 characters, but no note binds the item. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SchemeGaloisComparisonNormalForm",
+  "declaration": "WeilConjectures.FiniteFieldDatum.schemeGaloisComparison_normal_form",
+  "file": "lean/Sheaf/SixFunctors/SchemeGaloisComparisonNormalForm.lean",
+  "statement": "theorem schemeGaloisComparison_normal_form (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (R : Type u) [CommRing R] [Finite R] (hR : ∃ n : ℕ, IsUnit (n : D.k) ∧ ∀ r : R, n • r = 0) (m : ℕ) (hm : 1 ≤ m) : ∃ hX : (D.geometricFiber X₀).left.IsCharacteristic D.p, ∃ w : D.schemeFrobeniusIterate X₀ m = (D.geometricFiber X₀).left.iterateFrobenius D.prime (hX.2 ⊤) (D.a * m) ≫ HPow.hPow (α := End (D.geometricFiber X₀).left) (D.geometricGaloisFrobenius X₀) m, D.schemeFrobeniusIterate X₀ m = HPow.hPow (α := End (D.geometricFiber X₀).left) (D.geometricGaloisFrobenius X₀) m ≫ (D.geometricFiber X₀).left.iterateFrobenius D.prime (hX.2 ⊤) (D.a * m) ∧ ∀ K : proEtaleDerivedCategory (D.geometricFiber X₀).left R, (D.canonicalSchemeGaloisComparison X₀ R hR m hm).hom.app K = (eqToHom (congrArg (proEtaleConstantRingDerivedPullback R) w)).app K ≫ (proEtaleConstantRingPullbackComposition ((D.geometricFiber X₀).left.iterateFrobenius D.prime (hX.2 ⊤) (D.a * m)) (HPow.hPow (α := End (D.geometricFiber X₀).left) (D.geometricGaloisFrobenius X₀) m) R).inv.app K ≫ (proEtaleFrobeniusDerivedIso R ((absoluteFrobenius_proEtale_trivialization D.p D.prime R).choose_spec.2.choose_spec.2.choose (D.geometricFiber X₀).left hX (D.a * m))).hom.app ((proEtaleConstantRingDerivedPullback R (HPow.hPow (α := End (D.geometricFiber X₀).left) (D.geometricGaloisFrobenius X₀) m)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q126",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d22159fc0",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; lean.statement verbatim in file; one sorry theorem, docstrings with source/blueprint and the 6 steps. Clause check: D/X0 finite type/geometricFiber/Phi^m/g^m/H=iterateFrobenius(a*m) from recorded deps; hR (IsUnit (n:k)) equivalent to prime-to-p and identical to the recorded kappa's hypothesis, R=0 allowed; char p is a conclusion (empty X OK); both scheme factorizations as plain Hom equalities (no k-linearity); d = eqToHom(w) then proEtaleConstantRingPullbackComposition.inv, which is the symm of the stmt_dep's proEtaleCanonicalPullbackComposition plus coefficient eqToIso, correct direction; tau = .choose of absoluteFrobenius_proEtale_trivialization at exponent a*m, uniquely pinned (r by fst projection with snd Over-fixed, tau by sectionwise unit adjunct); kappa^(m) = canonicalSchemeGaloisComparison, whose kappaiter is pinned by the same r/tau characterization, so the equation is provable and faithful. Edge cases m=1, a=1, empty X, R=0, nonreduced X; universes match the recorded interfaces. Advisory: the prop-trf Lean already pins kappaiter in normal form (dependency's Lean stronger than its node); proEtaleConstantRingPullbackComposition owned by pur713-def-pullback-comparison (not a stmt_dep, also used by the kappa dependency); ProEtaleFiniteModules public import unused in the signature. No fix, so no compile."
+ }
+}

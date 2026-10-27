@@ -249,5 +249,60 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-1bfd5ff25 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are unchanged from the import, there are no new nodes and no SGA citation, proof_deps equals the union of the step uses, and every cited id exists. Source: blueprint main-20261015 sk-lem-pe-derived-nakayama-resolution.proof.md 'On the point' l.5-13; the final sentence ('So the sequence of condensed modules is exact') is the inference this item expands, so the route stays inside unit sk-lem-pe-derived-nakayama. Stacks 03CL/03CN/03CO labels checked in sites-modules.tex. Step 1: sectionwise kernels, cokernels and image (abelian-presheaves-evaluation-exact) give the presheaf short exact sequence. Step 2: exact sheafification, abelian sheaf category (reflector lemma, after replacing the site by a small equivalent one) and the counit isomorphism with its naturality give the sheaf sequence with the given arrows U(F), U(G). Step 3: sheaf-tensor clause 2 gives colimit preservation in both variables, hence additivity (preserving-colimits-additive); this satisfies the hypotheses of modobj-abelian and of the forget-left/right-exact lemmas. Step 4: zero is preserved via the terminal object; I recomputed the inverse action equation kγ_N=γ_M(R⊗k), so U reflects isomorphisms. Step 5: hypotheses of Mathlib JointlyReflectIsomorphisms.shortExact_iff (ReflectsIso/Exact.lean:74-81) checked for the singleton family {U}; its reverse direction gives the claim. Duplicate search: no existing node states the item; forget-creates is an optional alternative, not needed. Edge cases (empty site, zero ring, identity-only covers, split sequences) pass. The declared tool uses (reflector lemma, modobj-abelian, forget-left/right-exact, forget-faithful) are generic Mathlib or Lean-closed facts; accepted. No changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalModuleSectionwiseShortExact",
+  "declaration": "CategoryTheory.Mod.shortExact_of_sectionwise",
+  "file": "lean/Sheaf/CategoryTheory/InternalModuleSectionwiseShortExact.lean",
+  "statement": "theorem shortExact_of_sectionwise {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) (R : Sheaf J AddCommGrpCat.{w}) [MonObj R] (S : ShortComplex (Mod (Sheaf J AddCommGrpCat.{w}) R)) (hS : ∀ V : C, ((S.map (forget R)).map (sheafToPresheaf J AddCommGrpCat.{w}) |>.map ((evaluation Cᵒᵖ AddCommGrpCat.{w}).obj (op V))).ShortExact) : ((S.map (forget R)).map (sheafToPresheaf J AddCommGrpCat.{w})).ShortExact ∧ (S.map (forget R)).ShortExact ∧ S.ShortExact",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical sheaf tensor is selected as an item-local instance equal to (sfbSheafTensorStructure (A := AddCommGrpCat.{w}) J).monoidal of sk-def-sfb-sheaf-tensor (= Sheaf.monoidalCategory, tensor over Z, not cartesian); sheafification (essentially small site via its small model), additivity and finite-colimit preservation of left tensor are derived from that node's recorded sfbSheafTensor_properties and sfbSheafTensor_monoidalPreadditive, as other landed modules do. A ShortComplex packages precisely the two prescribed arrows and their zero composite; its mapped short complexes keep those arrows in all conclusions. Reviewer fix: the instances were imported from Sheaf.CategoryTheory.RelativeTensorFiniteFreeCoordinates, the module of the uncited theorem node lem-sfb-relative-tensor-finite-free-coordinates; they are now stated in the item module from the cited definition node only, and that import is dropped. The theorem signature is unchanged.",
+  "declarations": [
+   "CategoryTheory.sectionwiseShortExactSheafify",
+   "CategoryTheory.sectionwiseShortExactSheafMonoidal",
+   "CategoryTheory.sectionwiseShortExactSheafSymmetric",
+   "CategoryTheory.sectionwiseShortExactSheafClosed",
+   "CategoryTheory.sectionwiseShortExactSheafPreadditive",
+   "CategoryTheory.sectionwiseShortExactSheafLeftColimits",
+   "CategoryTheory.Mod.shortExact_of_sectionwise"
+  ],
+  "fixed_by": "NT-stage2-cc-a0f4d6f9d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0f4d6f9d",
+  "group": "N5",
+  "result": "fix",
+  "note": "Statement faithful clause by clause: EssentiallySmall.{w} site, canonical sheafified Z-tensor (sfbSheafTensorStructure J .monoidal), MonObj R not assumed commutative, Mathlib Mod/Mod.forget, ShortComplex with prescribed arrows, sectionwise evaluation hypothesis, presheaf/sheaf/Mod ShortExact conclusions. Edge cases (empty site, zero ring/modules, split) covered. No hollow defs, sorry only, docstrings with source place, blueprint tag and 5 proof steps; report sections present; no existing full statement. Finding F1: tensor/sheafify/additivity instances came from importing RelativeTensorFiniteFreeCoordinates, the module of uncited theorem node lem-sfb-relative-tensor-finite-free-coordinates. Fixed by dropping that import and adding item-local instances built only from cited sk-def-sfb-sheaf-tensor declarations (sfbSheafTensorStructure, sfbSheafTensor_properties, sfbSheafTensor_monoidalPreadditive) plus hasSheafifyEssentiallySmallSite; same terms as before, theorem signature unchanged and verbatim. fixes/: InternalModuleSectionwiseShortExact.lean + lean-record.json (declarations + note). nt_compile --json of the fixed file: 6.7 s, exit 0, no errors or warnings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203024-L-2775873",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Mod.shortExact_of_sectionwise"
+  ],
+  "sorry_after": []
  }
 }

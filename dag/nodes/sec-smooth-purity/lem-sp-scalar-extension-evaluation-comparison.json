@@ -1,0 +1,123 @@
+{
+ "id": "lem-sp-scalar-extension-evaluation-comparison",
+ "kind": "statement",
+ "title": "Generator-normalized scalar-extension evaluation comparison",
+ "statement": "Let J be an essentially small site with coefficients in max(c,v,r), and let B,tau and D,sigma be inverse sequences of commutative ring sheaves. Let phi be a morphism of the corresponding ring systems with component alpha_n : B_n to D_n at each (n,U), let S be ScalarData for phi, let M be a B-system, and fix n [def-coef-semilinear-system-models]. There is an isomorphism changeOfRings(alpha_n, evaluation_n(M)) to evaluation_n(S.model.E(M)). Its morphism sends extensionUnit(alpha_n, evaluation_n(M), U, x) to scalarExtensionSection(phi,S,M,(n,U),x) on every section. The equation fixes its value on the locally generating tensors.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+ },
+ "proof": [
+  {
+   "text": "Apply the presheaf comparison [lem-sp-scalar-extension-evaluation-presheaf]. The vertical inclusion is continuous and cocontinuous. Compose the sheafification of that presheaf isomorphism with restrictionSheafificationMap and the evaluated object equality S.model.obj_eq. Naturality of the sheafification unit, the pure-tensor equation, and restrictionSheafificationMap_unit_apply give the section formula.",
+   "uses": [
+    "lem-sp-scalar-extension-evaluation-presheaf",
+    "def-coef-semilinear-derived-calculus",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-evaluation-presheaf",
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation on the sequence site commutes with extension of scalars of sheaves of modules",
+   "results": "SheafOfModules.evaluation and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; no sequence-site scalar-extension comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing sheafification and tensor adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of extension of scalars of a sheaf of modules represents linear maps with restricted scalars",
+   "results": "SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars and evalAt_apply.",
+   "date": "2026-10-27",
+   "verdict": "Algebraic ingredients only; the evaluated sheafification comparison is additional."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionSection|sheafScalar.*[Aa]djunction|evaluation.*[Aa]djunction; Mathlib module-sheaf ChangeOfRings and Presheaf.Sheafify",
+   "results": "ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.sheafificationAdjunction; fixed-coefficient evaluation adjunctions. No combined sequence-site statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerLineEvaluationUniversal",
+  "date": "2026-10-27",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "classes (2), evaluation of ordinary coefficient extension, the tensor and sheafification part of the universal property",
+   "via": [
+    "lem-sp-scalar-extension-evaluation",
+    "lem-sp-tower-line-evaluation-universal",
+    "def-sp-tower-class-diagonal"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionEvaluationComparison",
+  "file": "lean/Sheaf/Paper/ScalarExtensionEvaluationComparison.lean",
+  "declaration": "WeilConjectures.SemilinearSections.scalarExtension_evaluation_comparison",
+  "statement": "theorem scalarExtension_evaluation_comparison\n    {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]\n    (J : GrothendieckTopology C)\n    (B D : ℕ → Sheaf J CommRingCat.{max c v r})\n    (τ : ∀ n, B (n + 1) ⟶ B n) (σ : ∀ n, D (n + 1) ⟶ D n)\n    (α : ∀ n, B n ⟶ D n)\n    (φ : systemRing.{c, v, max c v r} J B τ ⟶ systemRing.{c, v, max c v r} J D σ)\n    (hφ : ∀ (n : ℕ) (U : Cᵒᵖ), φ.hom.app (op (n, U.unop)) = (α n).hom.app U)\n    (S : ScalarData.{c, v, max c v r} φ)\n    (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) :\n    ∃ e : SheafOfModules.changeOfRings.{v, c, max c v r} (α n)\n        ((evaluation.{c, v, max c v r} J B τ n).obj M) ≅\n          (evaluation.{c, v, max c v r} J D σ n).obj (S.model.E.obj M),\n      ∀ (U : Cᵒᵖ) (x : M.val.obj (op (n, U.unop))),\n        e.hom.val.app U (extensionUnit.{c, v, max c v r} (α n)\n          ((evaluation.{c, v, max c v r} J B τ n).obj M) U x) =\n        scalarExtensionSection.{c, v, r}\n          φ S M (op (n, U.unop)) x",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T021343-L-2760843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T021343-L-2760843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

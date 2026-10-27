@@ -22,86 +22,105 @@
  ],
  "proof": [
   {
-   "text": "The DVR and finite-quotient perfectness lemmas check $(R,(\\varpi))$: $R$ is Noetherian, $A_1$ is additive torsion, and every $A_n$ is finite perfect. Use [def-pur-completed-coefficient-presentation-transport] for the lifted presentation. The profinite-coefficient comparison identifies $c_u$ by every finite projection. Immersion limit preservation makes $F=u^*$ exact and product-preserving; exact descent is triangulated. By [lem-pur-roos-intrinsic-completeness-equivalence], (i)$\\Rightarrow$(iv),(v), complete $K$ is intrinsically complete and its specified quotient unit $\\operatorname{comp}_K$ is invertible. The auxiliary distinct prime in that lemma can be $2$ or $3$.",
+   "text": "Identify quotient coefficients by the unique ring equivalence induced by ULift.ringEquiv and passage to principal-ideal quotients. IntegralCoefficientPresentation.comparison gives the uniquely projection-normalized completed ring comparison. Identify actual module pullback with exact inverse image. Uniqueness of the universal left-derived pair gives derivedIso with its specified counit equation. These declarations are proved in the delivered module. The module object equality is obtained by evaluation of the existing full functor equality. The generic uniqueness and counit calculations are proved private helpers in SfImmersionRoosNormalization.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of tower pullback is definitional. Identify the actual completed object with intrinsic completion by transporting the full reduction tower and augmentation. Use the completion reflector to show that its unit uniquely determines strictIso. The actual and datum ordinary transports agree by their universal counit normalizations. Prove finite_compatibility over an arbitrary adic coefficient datum, using the same explicit unit, transition and comparison formulas, and specialize to pbcIntegralDatum. The calculation is as follows. The unit square is the scalar-extension inverse-mate unit identity, followed by cancellation of the inverse of chi. For each quotient transition, stratumReduction_evaluation identifies the finite comparison with the evaluation of stratumReductionIso. Use the existing proved ExactTowerAugmentedCounit.interchange_transition, exposed as a public API without changing its statement or proof. This is the normalized evaluation-interchange transition identity, established in its owning module by localization extensionality and the factor formulas. Obtain the all-pair evaluation comparison from the public pbc_reduction_adic_tower_laws: the semilinear transition is the adjunct of its normalization, so the adjunction inverse identities recover pbcReductionTransition; cancel the inverse evaluation isomorphisms. Thus the evaluation interchanges commute with transitions; naturality of the strict tower transition and the levelwise all-pair comparison give the square after precomposition with an isomorphism. Finally localized evaluation transitions preserve composition: use comp_liftNatTrans, whiskering, and the homological-complex functor on natural transformations. The all-pair evaluation comparison conjugates each restricted reduction transition to this strict tower transition. Cancel the finite evaluation isomorphism to obtain the quotient cocycle. These proofs include equal indices and all composites. Prove completedProjection_compatibility over an arbitrary adic coefficient datum. The canonical derived-limit projection is evaluation of the constant/limit counit. The adjunction triangle identity and naturality of constant evaluation identify its composition with the pulled augmentation. ExactTowerAugmentedCounit.constant_coherence then gives pullback of the evaluated augmentation. On a K-flat representative, the normalized reduction evaluation and augmentation counits identify this evaluated augmentation with the scalar-extension unit; cancel the computing scalar counit and use stratumModuleUnit_component. K-flat resolutions and naturality extend the equation to every derived object. For transitions combine projection_transition, the evaluation-interchange transition square and generic_evaluation_transition. Specialize these equations to pbcIntegralDatum. No new unproved statement is introduced. Prove actualCompletedProjection_compatibility by composing the strictIso unit equation with these two declarations and the naturality of scalar-extension units and quotient transitions under derivedIso. The transition naturality follows directly by adjunction and the naturality of the restriction compositor. The fully proved generic calculations are in SfImmersionFiniteNormalization; this extraction keeps each file within the compile-time limit, without changing any public item interface. The generic actual/intrinsic completion transport and its integral specialization are likewise retained as proved private helpers in SfImmersionFiniteNormalization.",
+   "uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "def-pur-completed-coefficient-presentation-transport",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-cbc-completed-extension-zero-comparison",
+    "def-wf-tensor-product",
+    "def-weil-pbc-reduction-augmentation",
+    "def-weil-pbc-four-corners",
+    "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
+    "prop-weil-pbc-levelwise-truncations",
+    "lem-sf-exact-tower-augmented-counit-evaluation",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-completed-pullback-reduction-coherence",
+    "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
+    "lem-sf-completed-reduction-augmentation-level-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove ordinaryToCompleted_eq by the general adjunction mate augmentation identity and the triangle identity. Construct roosIso from the existing additive Roos comparison and its two coordinate equations, using countable-product preservation for an immersion. The strict Roos functor, its normalized inclusion, and the universal property of the termwise limit give roosMap, roosInclusion and termwiseLimitIso with uniqueness. These declarations are proved. Prove roosRlim_exists from ExactProductsRoos.comparisonIso applied to the actual rightDerivedFunctorUnitQ of inverse limit. The proved signIso and ordinaryIso of ExactAdjointTowerModels transport its normalization to the specified positive-difference Roos complex and termwiseLimitIso. Coordinate uniqueness identifies roosMap and roosInclusion with the strict functor maps. Naturality follows from the comparison natural isomorphism. For uniqueness, the normalized inclusion is invertible on K-injectives; cancel it there, then use a functorial K-injective resolution and naturality to identify the comparison on every complex. rlimComparison_roos retains its original hole comparing the constant/limit mate to this normalized conjugate. The productComparison definition keeps its original Pi.lift formula; a proved generic projection-formula certificate identifies it with roosProductComparison, including its evaluation equality transports. modulePull has the same data and an explicit result type using the completed-coefficient aliases of the tower statements. In roosIso_exists, rewrite productComparison by that certificate and apply the generic uniqueness theorem. Use the same completed-coefficient alias for the abstract category in roosRlim_exists. The already-proved generic Roos normalization is extracted into SfImmersionRoosNormalization for kernel checking time. Its proved sfRoosComparison_ext isolates the K-injective-resolution uniqueness argument, and its private helpers preserve the original normalized existence and uniqueness proof.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence",
+    "def-weil-strict-roos-model",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-pur-roos-intrinsic-completeness-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-reduction-pullback-derived-tower] to $Q_{T,n}=(A_n)_T$: its $\\tau$ identifies the finite-ring-linear derived reductions, quotient augmentations and all transitions. Countable products are exact on both sites. Thus [lem-cbc-exact-product-functor-strict-limit] gives its specified Roos isomorphism $\\lambda_M$. On a K-injective tower resolution its augmentation clause applied to $\\gamma=\\varepsilon_{X,M}:\\Delta_XL_XM\\to M$ gives $\\lambda_M=\\beta_M$: the source adjunct is the identity, and the target adjunct is the defined mate. Its Roos projection equation gives evaluation compatibility. Use the counit-normalization node to identify actual $Lu^*$ and strict completed pullback with these exact constructions, preserving their units and evaluations.",
-   "uses": [
-    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-strict-roos-derivation",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-pur-exact-derived-mate",
     "lem-weil-proetale-countable-products-exact",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-sf-exact-pullback-counit-normalization"
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "lem-weil-pbc-exact-adjoint-tower-models",
+    "lem-sf-roos-comparison-resolution-uniqueness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
-   }
+   "elementary": false
   },
   {
-   "text": "The factorization node gives $\\alpha^F_K=\\beta_{K_\\bullet}F_D(\\operatorname{comp}_K)$. Both factors are invertible by Steps 1–2, hence so is the actual comparison. Its projections are the quotient augmentations; $\\tau$ makes the target the reduction tower of $FK$. Thus $FK$ is derived complete. The strict transition equations include all successive quotients.",
+   "text": "The final immersion_completed_pullback_comparison remains its original named hole. Its retained argument applies intrinsic-to-tower completeness to the completion unit, uses the immersion Rlim comparison and ordinaryToCompleted_eq to make ordinary-to-completed pullback invertible, and transports the strict unit and completeness through the normalized identifications. At each finite quotient, exact inverse image preserves constructibility and the supplied interval; coefficient equivalences preserve and reflect those bounds. Assemble completeness and those finite properties into the stated integral predicate, with precisely the original interval.",
    "uses": [
-    "lem-sf-completed-pullback-mate-factorization",
-    "def-weil-derived-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
-   }
-  },
-  {
-   "text": "For integral $K$, its reductions are intrinsically constructible with one interval $[r,s]$. Pass to finite etale origin on $X$, apply finite pullback preserving bounded constructibility and the same $[r,s]$, and return to intrinsic constructibility on $Y$. Step 2 identifies these with the reductions of $FK$; Step 3 supplies completeness. These are precisely the integral definition's conditions.",
-   "uses": [
+    "lem-weil-pbc-intrinsic-to-tower-complete",
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "def-weil-derived-complete",
     "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-integral-detailed-finite-reduction",
     "lem-sf-proetale-constructible-origin",
     "lem-weil-pbc-pullback-preserves-bounded-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-pur-completed-coefficient-presentation-transport",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "def-weil-pbc-completed-pullback",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-wf-tensor-product",
+  "def-weil-pbc-reduction-augmentation",
+  "def-weil-pbc-four-corners",
+  "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
+  "prop-weil-pbc-levelwise-truncations",
+  "lem-sf-exact-tower-augmented-counit-evaluation",
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "def-weil-strict-roos-model",
   "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-pur-roos-intrinsic-completeness-equivalence",
-  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-strict-roos-derivation",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-pur-exact-derived-mate",
   "lem-weil-proetale-countable-products-exact",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-sf-exact-pullback-counit-normalization",
-  "lem-sf-completed-pullback-mate-factorization",
+  "lem-weil-pbc-intrinsic-to-tower-complete",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
   "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed",
+  "lem-weil-pbc-integral-detailed-finite-reduction",
   "lem-sf-proetale-constructible-origin",
-  "lem-weil-pbc-pullback-preserves-bounded-constructible"
+  "lem-weil-pbc-pullback-preserves-bounded-constructible",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-weil-pbc-exact-adjoint-tower-models",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-completed-pullback-reduction-coherence",
+  "lem-weil-pbc-completed-reduction-augmentation-of-comparison",
+  "lem-sf-completed-reduction-augmentation-level-unit",
+  "lem-sf-roos-comparison-resolution-uniqueness"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
-  "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
+  "by": "C4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization Step 6, finite projection compatibility: evaluation of the derived adjunction counit, K-flat scalar-unit normalization and naturality of strict tower transitions. The existing rlimComparison_roos and immersion_completed_pullback_comparison holes remain."
  },
  "mathlib_searches": [
   {
@@ -273,7 +292,6 @@
  "tool_uses": [
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
   "lem-weil-pbc-constant-completion-equivalence",
@@ -287,9 +305,7 @@
   "lem-weil-pbc-standard-quotients-perfect",
   "def-weil-pbc-adic-coefficient-datum",
   "def-pur-completed-coefficient-presentation-transport",
-  "lem-pur-roos-intrinsic-completeness-equivalence",
   "lem-weil-pbc-reduction-pullback-derived-tower",
-  "lem-cbc-exact-product-functor-strict-limit",
   "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed"
  ],
@@ -366,5 +382,26 @@
   "existing": false,
   "note": "The item is stated jointly by the main theorem, finiteComparison, finite_compatibility, completedProjection_compatibility, actualCompletedProjection_compatibility, strictIso_exists, ordinaryToCompleted_eq and rlimComparison_roos. Other declarations supply their canonical coefficient and strict-Roos normalization, with choices only from unique characterizations. The base statement, dependencies and split_report are retained verbatim."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T112325-L-1570997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

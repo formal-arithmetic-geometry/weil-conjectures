@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-space-perfect-flat-proper-model",
+ "kind": "statement",
+ "title": "Etale local Noetherian model for perfect and relatively flat proper-support data",
+ "statement": "Work with a scheme $S$ [def-pc-scheme], algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use module derived categories [def-weil-abstract-derived-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and the canonical module functors [def-trf-space-etale-module-functors]. Derived pullback and tensor are computed with K-flat resolutions with flat terms, and derived direct image with K-injective resolutions. Perfect means etale locally isomorphic in the derived category to a bounded complex of direct summands of finite free structure modules. Finite presentation of a morphism means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. A module is finitely presented when it locally has a presentation $\\mathcal O^m\\to\\mathcal O^n\\to M\\to0$ with $m,n$ finite. Flatness over a base is flatness of geometric stalks over its corresponding geometric local rings. Proper means separated, of finite type and universally closed; the scheme theoretic support of a finitely presented module is the closed subspace cut out by its annihilator. Let $f:X\\to Y$ be of finite presentation, let $E\\in D(\\mathcal O_X)$ be perfect, and let $G^\\bullet$ be a bounded complex of quasi-coherent finitely presented modules, termwise flat over $Y$ with termwise support proper over $Y$. There is a jointly surjective family of etale maps $u_a:U_a=\\operatorname{Spec}R_a\\to Y$ with the following data for every $a$. Put $X_a=X\\times_YU_a$ and write $v_a:X_a\\to X$ for its projection. There are a Noetherian ring $R_{a,0}$ (every ideal is finitely generated), a ring map $R_{a,0}\\to R_a$, a finitely presented algebraic space $X_{a,0}$ over $U_{a,0}=\\operatorname{Spec}R_{a,0}$, a perfect $E_{a,0}\\in D(\\mathcal O_{X_{a,0}})$, and a bounded complex $G_{a,0}^\\bullet$ of quasi-coherent finitely presented modules, termwise flat over $U_{a,0}$ with termwise support proper over $U_{a,0}$. The space $X_{a,0}$ is locally Noetherian and the terms of $G_{a,0}^\\bullet$ are coherent, meaning their modules on affine etale charts are finitely generated over Noetherian rings. There is an isomorphism $X_a\\simeq X_{a,0}\\times_{U_{a,0}}U_a$ over $U_a$. Writing $p_a:X_a\\to X_{a,0}$ for its first projection, there are an isomorphism $Lp_a^*E_{a,0}\\simeq Lv_a^*E$ in $D(\\mathcal O_{X_a})$ and an isomorphism of cochain complexes $p_a^*G_{a,0}^\\bullet\\simeq v_a^*G^\\bullet$, where both coefficient pullbacks are ordinary termwise tensor pullbacks. The etale restrictions $Lv_a^*E$ are perfect and $v_a^*G^\\bullet$ is termwise flat over $U_a$. The models need only be algebraic spaces over $\\operatorname{Spec}\\mathbf Z$, and need not carry an $S$-structure.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-absolute-module-transport",
+  "def-sfb-space-flat-proper-coefficient",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-space-morphism-properties",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-trf-space-module-scheme-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine-component etale atlas $\\{U_a\\to Y\\}$ using [lem-a1-space-affine-etale-cover]. By base change, $f_a:X_a\\to U_a$ is finitely presented and $v_a:X_a\\to X$ is etale. The enlarged-site localization description makes restriction by $v_a$ the ordinary exact restriction of structure modules; geometric local rings and module stalks at corresponding geometric points are unchanged by etale restriction. Thus the finite presentations restrict and relative flatness of $G^n$ over $Y$ gives relative flatness of $v_a^*G^n$ over $U_a$. Perfectness also restricts: pull a local bounded finite-free-retract model back to its etale covering of $X_a$. For proper support, a proper closed carrier $Z\\hookrightarrow X$ of $G^n$ exists by [lem-sfb-space-module-proper-carrier-support]. Its base change $Z_a\\hookrightarrow X_a$ is proper over $U_a$. The ideal of $Z_a$ kills $v_a^*G^n$, since tensor pullback sends each relation $im=0$ to the same relation. On charts this module is therefore a module over the quotient by that ideal, giving a finite type module on $Z_a$. The reverse carrier implication gives proper scheme-theoretic support on $X_a$. It suffices to construct a model for these restricted data. The argument applies to each $a$ separately.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-module-proper-carrier-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0A1P (lemma-base-change-tensor-perfect), etale affine localization; spaces-perfect.tex Tag 0CZI (lemma-module-support-proper-over-base)."
+   }
+  },
+  {
+   "text": "Fix $a$ and write $U_a=\\operatorname{Spec}R$. By [lemma-nagata-noetherian-inverse-system-affine], the spectra $T_i=\\operatorname{Spec}R_i$ of finitely generated integer subrings of $R$ have limit $U_a$ and affine transitions. Their index set is small, nonempty and directed: it is a subset of the power set of $R$, contains the image of $\\mathbf Z$, and the union of two finite generating sets generates an upper bound. Each $R_i$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] applied over $\\mathbf Z$. Here $\\mathbf Z$ is Noetherian directly: a nonzero ideal is generated by its least positive element, by division with remainder; the zero ideal has empty generating set.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0A1P, paragraph beginning We write R; algebra.tex Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-fp-space-limit-category] to obtain a finitely presented $X_{i_0}\\to T_{i_0}$ and $X_a\\simeq X_{i_0}\\times_{T_{i_0}}U_a$. Put $X_i=X_{i_0}\\times_{T_{i_0}}T_i$ for $i\\ge i_0$. These maps are finitely presented by [lem-sfb-space-flat-proper-fp-locality], so each $X_i$ is qcqs by [lem-sfb-space-fp-qcqs-source]. The base-change clause of [lem-sfb-space-affine-limits-schematic-stages], applied to $T=\\lim T_i$ and $W=X_{i_0}$, identifies $X_a$ with $\\lim X_i$. The transition maps of the $X_i$ are affine: on any affine scheme test mapping to $X_i$, the transition pullback is the base change of the affine map $T_j\\to T_i$, hence affine by the affine-spectrum tensor-product formula. This is precisely an inverse system to which module and perfect continuity apply.",
+   "uses": [
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0A1P, application of Tag 07SK; spaces-limits.tex Tag 07SF (lemma-directed-inverse-system-has-limit)."
+   }
+  },
+  {
+   "text": "Choose integers $b\\le c$ outside which $G^\\bullet$ vanishes. Apply [lem-sfb-space-fp-module-limit-category] to the finitely many terms in $[b,c]$, choosing a common stage by directedness. For each differential, conjugate it by the chosen term identifications and apply the morphism-descent clause to lift it at a later stage; there are only finitely many, so take one common stage again. The composites $d^{n+1}d^n$ and the zero maps agree after limit pullback. Apply the equality clause to each of these finitely many pairs and pass to a common upper bound. Now $d^{n+1}d^n=0$ at that stage. Put zero terms and zero boundary differentials outside $[b,c]$. This produces a bounded complex $G_i^\\bullet$ of finitely presented modules and an isomorphism of cochain complexes with the restricted $G^\\bullet$ after ordinary tensor pullback. Finite-presentation modules are quasi-coherent: their local presentations are exactly local cokernel presentations in the definition [def-trf-space-quasi-coherent-module]. All further pullbacks retain the chosen chain isomorphism and the equations because pullback is a functor.",
+   "uses": [
+    "lem-sfb-space-fp-module-limit-category",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0A1P, descent of the bounded complex using Tag 07V7 (lemma-descend-modules-finite-presentation); finite number of objects, arrows and equations."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-perfect-limit-category] to $Lv_a^*E$ on $X_a=\\lim X_i$. It descends to a perfect $E_i$ at some later common stage, with a derived isomorphism $Lp_i^*E_i\\simeq Lv_a^*E$. Pull the already constructed complex to this stage. Next apply [lem-sfb-space-module-eventually-flat] to each of its finitely many terms, using their relative flatness over $U_a$ established in step 1. Take a common upper bound of the resulting flatness stages. Every term is then flat at this and all later stages. Finally apply [lem-sfb-space-module-eventually-proper-support] successively to those finitely many terms. Earlier proper supports remain proper when moving to a later stage: the carrier equivalence [lem-sfb-space-module-proper-carrier-support] converts to a proper carrier, [lem-sfb-space-flat-proper-fp-locality] preserves properness of that carrier under base change, and the quotient-module construction of step 1 gives a carrier for the tensor-pulled-back module. The carrier equivalence converts back. Module continuity preserves finite presentation, and the eventual-flatness node explicitly gives flatness at every later stage. Perfectness persists by the pullback clause of perfect continuity. Thus one stage has all required flatness and proper-support properties simultaneously. Set $R_{a,0}=R_i$, $X_{a,0}=X_i$, $E_{a,0}=E_i$, $G_{a,0}^\\bullet=G_i^\\bullet$ there. The two specified comparisons are respectively derived pullback and ordinary termwise tensor pullback, as required.",
+   "uses": [
+    "lem-sfb-space-perfect-limit-category",
+    "lem-sfb-space-module-eventually-flat",
+    "lem-sfb-space-module-eventually-proper-support",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-fp-module-limit-category",
+    "lem-sfb-space-module-proper-carrier-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0A1P, successive use of Tags 08K0, 08K2, 09RJ; persistence under further base change."
+   }
+  },
+  {
+   "text": "It remains to check local Noetherianity and the stated meaning of coherence. The affine base $T_i=\\operatorname{Spec}R_i$ is locally Noetherian by its one-chart cover [pqf-def-locnoeth]. For any etale scheme chart $V\\to X_i$, its composite to $T_i$ is locally of finite presentation by the chart definition for $f_i$, hence locally of finite type. Thus [pqf-lem-locnoeth-lft] makes $V$ locally Noetherian, proving that $X_i$ is locally Noetherian. Each affine open of $V$ has a Noetherian ring by [pqf-lem-affine-open-locnoeth]. The pullback of each $G_i^n$ to $V$ is finitely presented by module continuity. Under the Zariski/small-etale quasi-coherent equivalence, finite presentation remains finite presentation by [lem-sfb-scheme-etale-module-exact-finiteness-comparison]. On an affine open, [lem-weil-pbc-quasi-coherent-finite-type-affine] identifies this with a finitely presented ring module, which is finitely generated by its finite generating presentation. Hence the terms are coherent in exactly the chartwise sense specified in the item. No $S$-structure was descended: all models were constructed over $\\operatorname{Spec}\\mathbf Z$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sfb-space-fp-module-limit-category",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB (lemma-coherent-Noetherian), chartwise verification using spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-fp-space-limit-category",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-fp-module-limit-category",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-module-eventually-flat",
+  "lem-sfb-space-module-eventually-proper-support",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-perfect-limit-category",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian approximation, stopping before K_i; finite complex descent expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|perfect.*(descen|limit)|proper.*support|descend.*[Mm]odule",
+   "results": "Read 9 hits: Mathlib/Combinatorics/SimpleGraph/Paths.lean, Mathlib/Algebra/Group/Support.lean, Mathlib/RingTheory/Perfection.lean, Mathlib/Algebra/Order/Ring/Ordering/Basic.lean, Mathlib/Topology/LocallyFinsupp.lean, Mathlib/RingTheory/Coalgebra/Quotient.lean, Mathlib/Analysis/Convolution.lean, Mathlib/Analysis/Convolution.lean. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex and a bounded flat finite presentation complex with proper support on a finitely presented algebraic space descend to a Noetherian ring model",
+   "results": "Read 8 hits: Module.Flat.of_flat_tensorProduct, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.HasRingHomProperty.descendsAlong, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, Module.finitePresentation_of_finite, RingHom.FinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation of finite presentation algebraic spaces with a perfect complex and bounded finitely presented relatively flat modules of proper support",
+   "results": "Read 8 hits: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.FinitePresentation.of_finiteType, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgHom.FinitePresentation.of_finiteType, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"limit\"",
+   "results": "Read 12 hits: AlgebraicGeometry.PresheafedSpace.instHasColimits, AlgebraicGeometry.PresheafedSpace.forget_preservesColimits, AlgebraicGeometry.PresheafedSpace.colimit, AlgebraicGeometry.PresheafedSpace.instHasColimitsOfShape, AlgebraicGeometry.PresheafedSpace.colimitCocone, AlgebraicGeometry.PresheafedSpace.instPreservesColimitsOfShapeTopCatForget, AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit, AlgebraicGeometry.PresheafedSpace.colimitCocone_pt. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spreading out perfect derived objects and finite presentation flat proper support module complexes from an arbitrary ring to a finitely generated integer subring",
+   "results": "Read 8 hits: DerivedCategory.IsGE, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, Module.freeLocus_eq_univ, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, DerivedCategory.IsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex and bounded finitely presented relatively flat proper support sheaf complex on a finitely presented algebraic space have a Noetherian model",
+   "results": "{\"t\": \"2026-10-23T13:37:35Z\", \"tool\": \"leansearch\", \"query\": \"A perfect complex and bounded finitely presented relatively flat proper support sheaf complex on a finitely presented algebraic space have a Noetherian model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"SheafOfModules.isFinitePresentation\", \"Module.finitePresentation_of_finite\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.IsFinitePresentation.mk\", \"Module.Flat.projective_of_finitePresentation\"], \"digest\": \"e5b5c93d79aacd5a\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation for algebraic spaces together with perfect derived complexes and flat modules of proper support",
+   "results": "{\"t\": \"2026-10-23T13:37:36Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian approximation for algebraic spaces together with perfect derived complexes and flat modules of proper support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.isNoetherian_Spec\", \"AlgebraicGeometry.isNoetherian_iff\"], \"digest\": \"1743e0c77771da7e\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Noetherian.*model|perfect.*approximation",
+   "results": "{\"t\": \"2026-10-23T13:37:36Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|Noetherian.*model|perfect.*approximation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\"], \"digest\": \"555b4d8b73444510\"}; Read returned signatures: these concern scheme morphisms, algebraic modules, quasi-coherent presentations, or structure-sheaf sections, not this algebraic-space limit theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-support-tensor-perfect",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0A1P (lemma-base-change-tensor-perfect), Noetherian-approximation paragraph, only the data preceding K_i. Inputs: spaces-limits.tex Tags 07SK (lemma-descend-finite-presentation), 07V7 (lemma-descend-modules-finite-presentation), 08K0 (lemma-descend-flat), 08K2 (lemma-eventually-proper-support); spaces-perfect.tex Tag 09RJ (lemma-perfect-on-limit); spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian).",
+   "via": [
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-perfect-flat-proper-model",
+  "worker": "stage1",
+  "summary": "Followed the Noetherian-approximation paragraph of Stacks 0A1P, with finite term/differential/equation descent made explicit. Reused space and module continuity. Isolated three genuine inputs: eventual relative module flatness (not morphism flatness), eventual proper scheme-theoretic support, and derived perfect-object continuity. Verified algebraic-space scope, qcqs and affine-limit hypotheses, persistence under later base change and Noetherian chartwise coherence. Statement unchanged.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the inherited stable-curve/0E1J/0A1P chain: the present steps realize only the Noetherian approximation before K_i in 0A1P. The newest blueprint retains proper direct-image/compactification route; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic approximation, ringed-etale, scheme-module, or Noetherian chart tool used in the 0A1P approximation route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic approximation, ringed-etale, scheme-module, or Noetherian chart tool used in the 0A1P approximation route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic approximation, ringed-etale, scheme-module, or Noetherian chart tool used in the 0A1P approximation route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic approximation, ringed-etale, scheme-module, or Noetherian chart tool used in the 0A1P approximation route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic approximation, ringed-etale, scheme-module, or Noetherian chart tool used in the 0A1P approximation route; no replacement of a unit step."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic approximation, ringed-etale, scheme-module, or Noetherian chart tool used in the 0A1P approximation route; no replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lemma-nagata-noetherian-inverse-system-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-6462c8a0a",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-6462c8a0a (reviewer sub-agent of L); spot-checked: I read the source: spaces-perfect 0A1P, proof paragraph 2, up to K_i; spaces-limits 084W, 08K0, 08K2 and 07V7; spaces-perfect 09RH, 09RG and 09RJ. The item statement and stmt_deps are byte-identical to live and side-live, where the item is still unsplit; there is no repair note. Step 1: the affine étale atlas, plus étale localization through the enlarged site, carries finite presentation, relative flatness and perfectness to each U_a. Proper support uses the 0CZI carrier in both directions, with the annihilator-kills-pullback argument, so it never claims that annihilators commute with base change. Step 2: the Nagata system of finitely generated Z-subalgebras is affine and each stage is Noetherian by 00FN. Step 3: 07SK descends the space; fp-locality and 06G5 make the stages qcqs; the base-change clause of the affine-limits node gives X_a = lim X_i; the transitions are affine by the Spec(C⊗R_j) formula. Step 4 (elementary, accepted): the object, morphism and equality clauses of 07V7 over finitely many data give the complex. Step 5: 09RJ gives E_i; the module-flatness and proper-support nodes apply term by term with all hypotheses checked; persistence holds through the flatness node itself, the carrier argument, and the pullback clauses. Step 6 (elementary, accepted): 01T6 and the affine-open leaf give local Noetherianity; 03DX/05VG/01PC give finitely generated chart modules. New nodes: 08K0 module flatness over affine bases and 08K2 proper support, each stated with hypotheses stronger than the source's; 09RJ/09RG(1)/08H6 for perfect objects, stated in derived form. All three are true; I tested them on lim Z[1/n] = Q with O/p and Z/2, and on A^1_T with O/(x). None duplicates an existing node: the existing nodes are for schemes only (lem-pc-*, 09RE) or for morphisms only (lem-sfb-space-eventually-flat). None restates the item. I accept the declared tool_uses: atlas, Nagata approximation, enlarged site, fibre products, 03DX and 01PB/01PC. Batch-5: every listed trf citation is a general definition or foundational algebraic-space/quasi-coherent/site fact, and none is part of the trace formula or Poincaré duality, so the citations are acceptable. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectFlatProperNoetherianModel",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_noetherian_perfect_flat_proper_model",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.exists_etale_noetherian_perfect_flat_proper_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectFlatProperNoetherianModel.lean",
+  "statement": "theorem exists_etale_noetherian_perfect_flat_proper_model {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) [∀ (B : Scheme.{u}) (Z : AlgebraicSpace B), HasDerivedCategory.{w} Z.SmallModules] (hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (E : X.DerivedModules) (hE : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf E) (G : CochainComplex X.Modules ℤ) (hbounded : ∃ b c : ℤ, ∀ n : ℤ, n < b ∨ c < n → IsZero (G.X n)) (hG : ∀ n : ℤ, (G.X n).IsQuasicoherent ∧ (G.X n).IsFinitePresentation ∧ ModuleIsFlatOver f (G.X n) ∧ HasProperAnnihilatorSupport f (G.X n)) : ∃ (I : Type u) (R : I → CommRingCat.{u}) (s : ∀ a : I, Spec (R a) ⟶ S) (ua : ∀ a : I, schemeSpace (Over.mk (s a)) ⟶ Y), (∀ a : I, IsEtale (ua a).hom.hom) ∧ IsJointlySurjective (fun a : I ↦ (ua a).hom.hom) ∧ ∀ a : I, ∃ (Xa : AlgebraicSpace S) (va : Xa ⟶ X) (ta : Xa ⟶ schemeSpace (Over.mk (s a))), IsPullback va ta f (ua a) ∧ SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} Xa.smallStructureSheaf ((derivedTensorPullback va).obj E) ∧ (∀ n : ℤ, ModuleIsFlatOver ta ((moduleTensorPullback va).obj (G.X n))) ∧ ∃ (R0 : CommRingCat.{u}) (_ : IsNoetherianRing R0) (r : R0 ⟶ R a) (X0 : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f0 : X0 ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec R0)))) (E0 : X0.DerivedModules) (G0 : CochainComplex X0.Modules ℤ), (MapIsLocallyOfFinitePresentation f0 ∧ MapIsQuasiCompact f0.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f0.hom.hom)) ∧ SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X0.smallStructureSheaf E0 ∧ (∃ b c : ℤ, ∀ n : ℤ, n < b ∨ c < n → IsZero (G0.X n)) ∧ (∀ n : ℤ, (G0.X n).IsQuasicoherent ∧ (G0.X n).IsFinitePresentation ∧ ModuleIsFlatOver f0 (G0.X n) ∧ HasProperAnnihilatorSupport f0 (G0.X n)) ∧ (∀ T : X0.EtaleSite, IsLocallyNoetherian (X0.etaleForget.obj T)) ∧ (∀ (n : ℤ) (T : X0.EtaleSite), IsAffine (X0.etaleForget.obj T) → IsNoetherianRing Γ(X0.etaleForget.obj T, ⊤) ∧ Module.Finite Γ(X0.etaleForget.obj T, ⊤) (((schemeRestriction X0 T).obj (G0.X n)).val.obj (op ⊤))) ∧ ∃ p : absoluteSpace Xa ⟶ X0, IsPullback p (absoluteSchemeTargetMap (Over.mk (s a)) ta) f0 (ObjectProperty.homMk ⟨yoneda.map (Over.homMk (Spec.map r) (specULiftZIsTerminal.hom_ext _ _))⟩) ∧ Nonempty ((derivedTensorPullback p).obj E0 ≅ (absoluteDerivedTransport Xa).obj ((derivedTensorPullback va).obj E)) ∧ Nonempty (((moduleTensorPullback p).mapHomologicalComplex (.up ℤ)).obj G0 ≅ (((moduleTensorPullback va).mapHomologicalComplex (.up ℤ)) ⋙ (absoluteModuleEquivalence Xa).inverse.mapHomologicalComplex (.up ℤ)).obj G)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0e19ee97",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Item Lean matches node clause by clause: fp triple, IsPerfectOnRingedSiteOfUniverses (owner def-weil-pbc-strict-perfect-coefficient-package), bounded G with qcoh/fp/ModuleIsFlatOver/HasProperAnnihilatorSupport; jointly surjective affine etale family, IsPullback for X_a, perfect Lv*E and flat v*G; Noetherian R0, X0 over Spec ULift Z with fp f0, perfect E0, G0 with the same four predicates, chartwise local Noetherianity and coherence; cartesian square over Spec Z; derived iso via absoluteDerivedTransport and cochain iso via termwise moduleTensorPullback. The all-spaces HasDerivedCategory binder follows landed precedent. New def-sfb-space-absolute-module-transport has real canonical data (03I4(1) sigma presheaf, same-chart restriction with identity ring map, small-model conjugation, mapDerivedCategory); postponed laws are sorry theorems with docstrings listed in the node; no duplicate found in Mathlib or side-live/live lean/Sheaf. Statement text unchanged; lean.statement verbatim. Advisory: def node cites a theorem in stmt_deps without using its declarations; the parent uses its own private perfect predicate (parent-side issue). No files changed, no compile run."
+ }
+}

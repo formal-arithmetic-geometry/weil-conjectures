@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-cocharacter-limit-smooth-structure",
+ "kind": "statement",
+ "title": "Smooth connected cocharacter limit groups and their Lie weights",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $F$, and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga] for commutative $F$-algebras $A$. Lie algebras are tangent spaces at the identity, with the adjoint action obtained by differentiating conjugation. Let $G$ be smooth and connected and $\\lambda:\\mathbf G_m\\to G$ a group homomorphism. Define $P_\\lambda(A)$ to consist of $g\\in G(A)$ for which $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$ extends to a morphism $\\mathbf A^1_A\\to G_A$. Define $U_\\lambda(A)$ by requiring in addition that this extension has value $1$ at $0$. Define $Z_\\lambda(A)$ to consist of $g\\in G(A)$ such that $g_{A'}$ commutes with $\\lambda(s)$ for every commutative $A$-algebra $A'$ and every $s\\in(A')^\\times$. Then $P_\\lambda,U_\\lambda,Z_\\lambda$ are represented by smooth connected closed subgroups of $G$, $U_\\lambda$ is normal in $P_\\lambda$, and multiplication induces an isomorphism of group schemes $U_\\lambda\\rtimes Z_\\lambda\\xrightarrow{\\sim}P_\\lambda$. Here the semidirect product has underlying scheme $U_\\lambda\\times_F Z_\\lambda$ and multiplication $(u,z)(u',z')=(u z u' z^{-1},zz')$. The group $U_\\lambda$ is unipotent, meaning that in a faithful finite-dimensional matrix representation all its geometric points $u$ satisfy $(u-I)^N=0$ for some $N\\geq1$. If $\\mathfrak g_n=\\{v\\in\\operatorname{Lie}(G):\\operatorname{Ad}(\\lambda(t))v=t^n v\\}$ denotes the integer-character weight space, the weight decomposition and tangent subspaces are\n$$\\operatorname{Lie}(G)=\\bigoplus_{n\\in\\mathbf Z}\\mathfrak g_n,\\qquad\\operatorname{Lie}(Z_\\lambda)=\\mathfrak g_0,\\qquad\\operatorname{Lie}(U_\\lambda)=\\bigoplus_{n>0}\\mathfrak g_n,\\qquad\\operatorname{Lie}(P_\\lambda)=\\bigoplus_{n\\geq0}\\mathfrak g_n.$$\nThese are equalities of subgroup functors on all commutative test algebras and of their tangent subspaces, not just assertions on geometric points.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 13.21 and Propositions 13.23--13.24, printed pp.261--262; Proposition 13.29 and the definitions of P, U and Z, printed pp.263--264; Theorem 13.33(a)--(c),(e), printed pp.265--266; Example 14.13, printed p.283."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-torus-character-tangent-weights"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-central-torus-faithful-weight-blocks] with $H=G$ and the trivial central torus $T=1=\\mathbf G_m^0$ to choose a closed immersion $G\\hookrightarrow\\operatorname{GL}(V)$ with $\\dim V=N>0$. Apply [lem-sfb-gm-representation-weight-basis] to the representation obtained by composing $\\lambda$ with this immersion. Choose its weight basis, ordered so $m_1\\ge\\cdots\\ge m_N$. In these coordinates conjugation sends a matrix entry $g_{ij}$ to $t^{m_i-m_j}g_{ij}$. For every $F$-algebra $A$, this Laurent polynomial is polynomial precisely when $g_{ij}=0$ for $m_i<m_j$. The limit is block diagonal, with blocks indexed by equal $m_i$. Since the matrix is block upper triangular and invertible, these diagonal blocks are invertible over $A$. Thus the extended matrix lies in $\\operatorname{GL}_N(A[t])$. Its value at zero is $I$ precisely when every diagonal block is $I$. Commutation with the universal unit $t\\in A[t,t^{-1}]^\\times$ says precisely that entries with $m_i\\ne m_j$ vanish. These tests work over arbitrary $A$, by coefficient comparison in Laurent polynomials.",
+   "uses": [
+    "lem-sfb-central-torus-faithful-weight-blocks",
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33 proof, p.266, faithful embedding and diagonal coordinates; Theorem 12.12, pp.234--235."
+   }
+  },
+  {
+   "text": "The equations from step 1 give closed subschemes of $G$ representing $P_\\lambda,U_\\lambda,Z_\\lambda$: they are the intersections with the respective block upper triangular, identity-block upper triangular, and block diagonal matrix subschemes. Indeed an extension in the ambient general linear group factors through $G$: every equation of the closed immersion vanishes after inverting $t$, hence already in $A[t]$, since $A[t]\\hookrightarrow A[t,t^{-1}]$ is injective. Apply [lem-sfb-smooth-affine-concentrator] to the conjugation action on $X=G$, first with $Z=G$, then with $Z=\\{e\\}\\simeq\\operatorname{Spec}F$. Both invariant subschemes are smooth, so $P_\\lambda$ and $U_\\lambda$ are smooth. The block diagonal intersection represents the fixed subfunctor for conjugation by $\\mathbf G_m$, including the universal base-extension test. Therefore [lem-sfb-torus-fixed-scheme-smooth] with $T=\\mathbf G_m$ makes $Z_\\lambda$ smooth. The same arguments apply to $-\\lambda$.",
+   "uses": [
+    "lem-sfb-smooth-affine-concentrator",
+    "lem-sfb-torus-fixed-scheme-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 13.23--13.24 and 13.28--13.30; Theorem 13.33(a), pp.261--266."
+   }
+  },
+  {
+   "text": "Uniqueness of polynomial extension shows that products and inverses of orbit extensions are the extensions for products and inverses. Hence $P_\\lambda$ is a subgroup and evaluation $q:P_\\lambda\\to G$ at zero is a group homomorphism. In the coordinates of step 1 its image is block diagonal, so factors through $Z_\\lambda$, and it is the identity on $Z_\\lambda$. Its kernel on every test algebra is $U_\\lambda$, proving normality. The maps $(u,z)\\mapsto uz$ and $g\\mapsto(gq(g)^{-1},q(g))$ are inverse scheme morphisms between $U_\\lambda\\times Z_\\lambda$ and $P_\\lambda$. Multiplying $uz$ and $u'z'$ gives $(u(zu'z^{-1}))(zz')$, which is exactly the stated semidirect-product law.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.29 and Theorem 13.33(b), pp.264,266."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-gm-representation-weight-basis] to the differentiated conjugation action on $\\mathfrak g=T_eG$, obtaining the finite direct sum of its integer-character spaces. A tangent vector is a point over $D=F[\\epsilon]/(\\epsilon^2)$ reducing to $e$; in the embedding it is $I+\\epsilon v$. Conjugation has tangent part $\\sum_n\\epsilon t^n v_n$. Its orbit extends over $\\mathbf A^1_D$ exactly when $v_n=0$ for $n<0$, and the limit is $e$ exactly when also $v_0=0$. Its orbit is constant exactly when $v_n=0$ for every $n\\ne0$. The closed-immersion factorization argument of step 2 applies over $D$ too. Thus these three conditions compute respectively $T_eP_\\lambda,T_eU_\\lambda,T_eZ_\\lambda$ as the stated subspaces of $T_eG$. For $-\\lambda$ the weights reverse, so $T_eU_{-\\lambda}=\\bigoplus_{n<0}\\mathfrak g_n$.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(c), dual-number calculation and equations (87)--(89), pp.265--266."
+   }
+  },
+  {
+   "text": "The equations of step 1 embed $U_\\lambda$ into the upper unitriangular matrices: equal-weight blocks are identities and only strictly weight-decreasing off-diagonal blocks can be nonzero. Thus $u-I$ is strictly upper triangular and $(u-I)^N=0$ for every geometric point. Restriction of the chosen closed immersion to $U_\\lambda$ is faithful. This proves unipotence with precisely the meaning required in the statement, without a change of representation or a restriction on the characteristic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 14.13, printed p.283, and the block calculation in Theorem 13.33, p.266."
+   }
+  },
+  {
+   "text": "Let $H=U_{-\\lambda}$ and $K=P_\\lambda$. In step 1's ordered basis, $H$ has identity diagonal blocks and strictly lower off-diagonal blocks, whereas $K$ is block upper triangular. Consequently $H\\cap K=1$ on every commutative test algebra. Step 4 gives $\\operatorname{Lie}(H)\\oplus\\operatorname{Lie}(K)=\\mathfrak g$. Both groups are smooth by step 2, so [lem-sfb-transverse-subgroup-product-open] gives an open immersion $U_{-\\lambda}\\times P_\\lambda\\hookrightarrow G$.",
+   "uses": [
+    "lem-sfb-transverse-subgroup-product-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(d), printed p.266, used as in the source to prove (e)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-smooth-scheme-over-field-regular], $G$ is regular. It is connected by hypothesis and nonempty because of its identity, so [lem-sc-regular-connected-integral] makes $G$ integral, in particular irreducible. The nonempty open subscheme of step 6 is therefore irreducible and connected. Projection $U_{-\\lambda}\\times P_\\lambda\\to P_\\lambda$ has the section $p\\mapsto(e,p)$, hence is surjective on topological spaces. Its continuous image proves $P_\\lambda$ connected. Evaluation $q:P_\\lambda\\to Z_\\lambda$ also has a section, so proves $Z_\\lambda$ connected. Finally the morphism $P_\\lambda\\to U_\\lambda$, $g\\mapsto gq(g)^{-1}$, has section the inclusion $U_\\lambda\\hookrightarrow P_\\lambda$ and proves $U_\\lambda$ connected. All three are already smooth closed subgroups, and all constructions and tangent calculations were performed on arbitrary algebras.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(e), printed p.266; Stacks Tags 056S, 0569 and 033N for regularity and irreducibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-smooth-affine-concentrator",
+  "lem-sfb-torus-fixed-scheme-smooth",
+  "lem-sfb-transverse-subgroup-product-open",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.33 proof, pp.265--266, with Propositions 13.23--13.24 and Example 14.13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group the cocharacter limit group is a semidirect product of its unipotent contraction group and its centralizer with nonnegative Lie weights",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.rootSpaceWeightSpaceProduct\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"(R : Type u_1) →\\n  (L : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          (H : LieSubalgebra R L) →\\n            [inst_3 : LieRing.IsNilpotent ↥H] →\\n              (M : Type u_3) →\\n                [inst_4 : AddCommGroup M] →\\n              \", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $\\\\mathfrak{h}$, and a Lie module $M$ over $\\\\mathfrak{g}$, if weights $\\\\chi_1, \\\\chi_2, \\\\chi_3 : \\\\mathfrak{h} \\\\to R$ satisf\"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieAlgebra.rootSpaceProduct_def\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  (H : LieSubalgebra R L) [inst_3 : LieRing.IsNilpotent ↥H],\\n  LieAlgebra.rootSpaceProduct R L H = LieAlgebra.rootSpaceWeightSpaceProduct R L H L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with a subalgebra $H$, and weights $\\\\chi_1, \\\\chi_2, \\\\chi_3 : H \\\\to R$ satisfying $\\\\chi_1 + \\\\chi_2 = \\\\chi_3$, there exists an $R$-linear Lie\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M],\\n  IsComp\", \"doc\": \"In a Lie module $ M $ over a commutative ring with a nilpotent Lie algebra action, the generalized weight space associated with the zero weight function and the positive Fitting component form complem\"}\n  {\"name\": \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsNoetherian R M] [IsArtinian R M] (x : L),\\n\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and for each element $x \\\\in \\\\mathfrak{g}$, the generalized weight space $\\\\text{genWeightSpaceOf}(M, 0\"}\n  {\"name\": \"LieAlgebra.corootSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {H : LieSubalgebra R L} →\\n            [LieRing.IsNilpotent ↥H] → [H.IsCartanSubalgebra] → [IsNoetherian R L] → (↥H → R) → LieIdeal R ↥H\", \"doc\": \"The coroot space associated to a weight $\\\\alpha : \\\\mathfrak{h} \\\\to R$ is the image of the composition of maps from the tensor product of root spaces $\\\\mathfrak{g}_\\\\alpha \\\\otimes_R \\\\mathfrak{g}_{-\\\\alph\"}\n  {\"name\": \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L], (LieModule.genWeightSpace M 0).normalizer = \", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, the normalizer of the generalized weight space associated with the zero weight function $\\\\chi = 0 : \\\\\"}\n  {\"name\": \"LieAlgebra.IsKilling.isCompl_ker_weight_span_coroot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α : LieMod\", \"doc\": \"For any weight $\\\\alpha$ in the dual of the Cartan subalgebra $H$ of a Lie algebra $L$ over a field $K$ with non-degenerate Killing form, the kernel of $\\\\alpha$ and the $K$-span of the coroot of $\\\\alph\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "One parameter subgroup attracting subgroup smooth connected unipotent radical fixed subgroup Lie weight decomposition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.genWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated to $\\\\chi$ \"}\n  {\"name\": \"LieModule.weightSpace_le_genWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : weightSpace M χ ≤ genWeightSpace M χ\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the weight space corresponding to $\\\\chi$ is contai\"}\n  {\"name\": \"LieModule.Weight.ker\", \"module\": \"Mathlib.Algebra.Lie.Weights.Linear\", \"type\": \"{R : Type u_2} →\\n  {L : Type u_3} →\\n    {M : Type u_4} →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [in\", \"doc\": \"The submodule of the Lie algebra $ L $ consisting of all elements $ x $ such that the weight $ \\\\chi(x) = 0 $ in the commutative ring $ R $. This is defined as the kernel of the $ R $-linear map from $\"}\n  {\"name\": \"LieModule.shiftedGenWeightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Linear\", \"type\": \"(R : Type u_2) →\\n  (L : Type u_3) →\\n    (M : Type u_4) →\\n      [inst : CommRing R] →\\n        [inst_1 : LieRing L] →\\n          [inst_2 : LieAlgebra R L] →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [Li\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the shifted generalized weight space associated to\"}\n  {\"name\": \"LieModule.coe_genWeightSpace_of_top\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : (genWeightSpace M (χ ∘ (⊤ : LieSubalgebra R L).incl) : Submodule R M) = genWeightSpace M χ\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated with $\\\\chi\"}\n  {\"name\": \"LieModule.genWeightSpaceOf\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[LieRing.IsNilpotent L] (χ : R) (x : L) : LieSubmodule R L M\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, the generalized weight space associated to a scalar $\\\\chi \\\\in R$ and element $x \\\\in \\\\mathfrak{g}$ is \"}\n  {\"name\": \"LieModule.Weight.genWeightSpace_ne_bot'\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (self : LieModule.Weight R L M), LieModule.ge\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated to $\\\\chi$ \"}\n  {\"name\": \"LieModule.weightSpace\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : LieSubmodule R L M\", \"doc\": \"For a Lie module $ M $ over a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, and a Lie algebra homomorphism $ \\\\chi: \\\\mathfrak{g} \\\\to R $, the weight space is the intersection of eigenspac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\", \"Lie\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|limitSubgroup|contractingSubgroup",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern abstract groups, root pairings or Lie algebra modules, analytic Lie groups, or cotangent modules; none states this arbitrary-characteristic assertion about affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|concentrator|parabolic.*[Ll]ie",
+   "results": "Actual search output: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: no cocharacter limit-group result; semantic hits concern abstract Lie algebra weight theory"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "Actual search output: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: no cocharacter limit-group result; semantic hits concern abstract Lie algebra weight theory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocharacter limit subgroup of a smooth connected affine group is smooth connected with unipotent kernel and nonnegative tangent character weights",
+   "results": "Actual search output: 8 hits; LieAlgebra.exists_isCartanSubalgebra_engel, LieAlgebra.IsKilling.iInf_ker_weight_eq_bot, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, LieModule.exists_nontrivial_weightSpace_of_isSolvable, LieAlgebra.IsKilling.biSup_corootSpace_eq_top, LieModule.exists_nontrivial_weightSpace_of_lieIdeal, LieAlgebra.corootSpace. ",
+   "date": "2026-10-23",
+   "verdict": "no match: no cocharacter limit-group result; semantic hits concern abstract Lie algebra weight theory"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-cocharacter-borel-description",
+  "date": "2026-10-24",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item. Supporting input: Milne 21.29, first paragraph: limit-group representability, smoothness, connectedness, unipotence and nonnegative Lie weights, before regularity is imposed.",
+   "via": [
+    "lem-sfb-regular-cocharacter-borel-description",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cocharacter-limit-smooth-structure",
+  "worker": "stage1",
+  "summary": "Verified Milne 13.21--13.33 and 14.13, retained the statement, and wrote the arbitrary-test-algebra matrix proof, split limit homomorphism, dual-number weights, unipotence, and big-cell connectedness argument. Two independent geometric inputs are new statement-only nodes; faithful embedding, weights and fixed-scheme smoothness reuse existing nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Identify the actual Lie(B) weights with an integral positive half-space; the simple-root base is subsequently constructed in the item. Supporting input: Milne 21.29, first paragraph: limit-group representability, smoothness, connectedness, unipotence and nonnegative Lie weights, before regularity is imposed. The current blueprint direct-images proof (3) is the ultimate route; this item supplies the already recorded algebraic-group prerequisite in its alteration branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smoothness gives regularity in the big-cell connectedness argument; this generic scheme fact is not a replacement for any step of the unit."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "A nonempty connected regular scheme is integral, making the big cell connected; no algebraic-group prerequisite in the unit states this generic scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-adf18fb80",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-adf18fb80 (reviewer sub-agent of L); spot-checked: PASS: Q11 lem-sfb-cocharacter-limit-smooth-structure (adf18fb80ebd). I read Milne iAG2017 printed pp.261-266 (Def 13.21, Props 13.22-13.30 with Lemmas 13.25-13.27, Examples 13.31-13.32, Thm 13.33 and its proof). I also read every cited statement and the only citer, lem-sfb-regular-cocharacter-borel-description step 1. The item statement matches Thm 13.33(a)-(c),(e) and Prop 13.29 and is unchanged. Step 1: the central-torus node with T=1 gives a faithful closed immersion and the weight-basis node gives ordered weights m_i; I checked the t^{m_i-m_j} entry criterion, that the diagonal blocks are invertible via det, and the universal-unit test for Z over arbitrary A. Step 2: the extension factors through G by injectivity of A[t] into A[t,t^-1]; the concentrator node with Z=G and Z={e} gives P and U smooth; the torus-fixed node with T=G_m gives Z smooth. Step 3: the evaluation homomorphism q, its kernel U, the inverse maps and the semidirect law all check (Milne's printed domain G corrected to P). Step 4: the dual-number computation gives T_eP, T_eU, T_eZ and the reversal for -lambda. Step 5: U is unitriangular in the faithful embedding. Step 6: U_{-lambda} and P_lambda meet trivially on every A and their Lie algebras are complementary, so the transverse node applies. Step 7: regular plus connected gives integral, the big cell is irreducible, and the sections of the projections carry connectedness to P, Z and U. New node lem-sfb-smooth-affine-concentrator is Milne 13.21-13.24; I tested it on the trivial action, Z empty, and A^1 with weights +1 and -1. New node lem-sfb-transverse-subgroup-product-open is true: the map is a monomorphism, the tangent isomorphism translates to every point, so it is etale, and an etale monomorphism is an open immersion. Neither new node duplicates projective-attracting-cells, torus-fixed-scheme-smooth, smooth-subgroup-tangent-generation or the orbit-geometry nodes (those need a connected acting group and give no open immersion). Both are strictly smaller than the item and are statement-only with four search kinds recorded. No SGA is cited. Accepted tool_uses: lem-weil-pbc-smooth-scheme-over-field-regular and lem-sc-regular-connected-integral, both generic scheme facts used in step 7. The two Milne p.266 slips noted in the report are real (T_ii=0 should be 1; domain G should be P). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CocharacterLimitSmoothStructure",
+  "declaration": "AlgebraicGeometry.CocharacterLimit.smooth_connected_structure",
+  "declarations": [
+   "AlgebraicGeometry.CocharacterLimit.IsOrbitExtension",
+   "AlgebraicGeometry.CocharacterLimit.parabolicPoints",
+   "AlgebraicGeometry.CocharacterLimit.unipotentPoints",
+   "AlgebraicGeometry.CocharacterLimit.centralizerPoints",
+   "AlgebraicGeometry.CocharacterLimit.smooth_connected_structure"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CocharacterLimitSmoothStructure.lean",
+  "statement": "theorem smooth_connected_structure {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (lam : Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ G) : ∃ (P U Z : Grp (Over (Spec (.of k)))) (iP : P ⟶ G) (iU : U ⟶ G) (iZ : Z ⟶ G), IsClosedSubgroupScheme iP.hom.hom ∧ IsClosedSubgroupScheme iU.hom.hom ∧ IsClosedSubgroupScheme iZ.hom.hom ∧ Smooth P.X.hom ∧ Smooth U.X.hom ∧ Smooth Z.X.hom ∧ ConnectedSpace P.X.left ∧ ConnectedSpace U.X.left ∧ ConnectedSpace Z.X.left ∧ (∀ (A : CommAlgCat.{u} k) (g : StandardGroupSchemes.affine k A ⟶ G.X), (∃ p, p ≫ iP.hom.hom = g) ↔ g ∈ parabolicPoints lam A) ∧ (∀ (A : CommAlgCat.{u} k) (g : StandardGroupSchemes.affine k A ⟶ G.X), (∃ p, p ≫ iU.hom.hom = g) ↔ g ∈ unipotentPoints lam A) ∧ (∀ (A : CommAlgCat.{u} k) (g : StandardGroupSchemes.affine k A ⟶ G.X), (∃ p, p ≫ iZ.hom.hom = g) ↔ g ∈ centralizerPoints lam A) ∧ (∃ j : U ⟶ P, j ≫ iP = iU ∧ IsNormalSubgroupScheme j.hom.hom) ∧ (∃ (e : U.X ⊗ Z.X ≅ P.X) (c : Z.X ⊗ U.X ⟶ U.X), e.hom ≫ iP.hom.hom = (fst _ _ ≫ iU.hom.hom) * (snd _ _ ≫ iZ.hom.hom) ∧ c ≫ iU.hom.hom = (fst _ _ ≫ iZ.hom.hom) * (snd _ _ ≫ iU.hom.hom) * (fst _ _ ≫ iZ.hom.hom)⁻¹ ∧ ∀ (A : CommAlgCat.{u} k) (u u' : StandardGroupSchemes.affine k A ⟶ U.X) (z z' : StandardGroupSchemes.affine k A ⟶ Z.X), (lift u z ≫ e.hom) * (lift u' z' ≫ e.hom) = lift (u * (lift z u' ≫ c)) (z * z') ≫ e.hom) ∧ SolvableGroupStructure.IsUnipotent U ∧ ∃ (a : ModObj (StandardGroupSchemes.multiplicative k) G.X) (chi : ℤ → (Grp.mk (StandardGroupSchemes.multiplicative k) ⟶ Grp.mk (StandardGroupSchemes.multiplicative k))) (W : ℤ → Submodule k (GrpObj.Lie G.X)), a.smul = (fst _ _ ≫ lam.hom.hom) * (snd _ _) * (fst _ _ ≫ lam.hom.hom)⁻¹ ∧ (∀ n : ℤ, (chi n).hom.hom = (𝟙 (StandardGroupSchemes.multiplicative k)) ^ n ∧ W n = @TorusCharacterTangent.weightSpace k _ (Grp.mk (StandardGroupSchemes.multiplicative k)) G a (chi n)) ∧ DirectSum.IsInternal W ∧ (GrpObj.differential iZ.hom.hom).toLinearMap.range = W 0 ∧ (GrpObj.differential iU.hom.hom).toLinearMap.range = ⨆ (n : ℤ) (_ : 0 < n), W n ∧ (GrpObj.differential iP.hom.hom).toLinearMap.range = ⨆ (n : ℤ) (_ : 0 ≤ n), W n",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses actual affine-line orbit extensions over every commutative test algebra and universal scalar-extension centralizers. The semidirect product is expressed by its scheme isomorphism with U times Z and the explicit transported multiplication law. Integer characters and the conjugation action are pinned by equalities; their tangent weight spaces reuse the landed character-weight definition. Added two already-landed definition dependencies for the existing unipotence and weight notions. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17d53a626",
+  "group": "O3",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node (Milne 13.21-13.33, 14.13). Hypotheses exact: IsAlgClosed k; G affine (IsAffine), finite type (LocallyOfFiniteType+QuasiCompact), Smooth, ConnectedSpace; lam a Grp hom from G_m. P/U/Z functors: a real affine-line extension through Spec(toLaurentAlg); the U value at the zero section is the pinned additive identity (counit aeval 0); Z tests all algebra maps A->B and all B-units. Representability by subfunctor iff on every A; closed, smooth, connected; normality via j : U -> P; U x Z = P by the multiplication iso with pinned conjugation c and the semidirect law; IsUnipotent is the landed def. Lie: ModObj pinned to conjugation, chi n = (id)^n, W n = landed weightSpace (k-point test, valid in char p over algebraically closed k), DirectSum.IsInternal, differential ranges = W 0, sup over n>0, sup over n>=0. Records: item differs from live only in lean and stmt_deps (+2 landed def nodes used in the statement); statement verbatim; single sorry; docstrings and source places OK; no line over 100 chars; proof imports are the stated proof-dep modules (central-torus module landed after the base). No duplicate notion in the Sheaf/WeilConjectures trees or the DAG. No compile run: no file changed."
+ }
+}

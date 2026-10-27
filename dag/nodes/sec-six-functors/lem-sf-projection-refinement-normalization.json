@@ -1,0 +1,122 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectionRefinementDescent",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Refinement and compactification independence; lem-sf-projection-refinement-descent",
+   "via": [
+    "lem-sf-projection-refinement-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]efinement|[Rr]efinement.*projection",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"refinement\"",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula natural transformation compatible with proper refinements of compactifications",
+   "results": "8 hits: CategoryTheory.Abelian.LeftResolution.π_naturality, CategoryTheory.CategoryOfElements.map_π, CategoryTheory.Abelian.LeftResolution.π_naturality_assoc, CategoryTheory.Abelian.LeftResolution.π, CategoryTheory.Abelian.LeftResolution.karoubi.π', CategoryTheory.SmallObject.πObj_naturality, isProperMap_snd_of_compactSpace, CategoryTheory.Limits.Pi.map_π",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric statement; existing project declarations are used."
+  }
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Refinement and compactification independence. Reuse the proved generic retained-origin normalization in Sheaf.Paper.FiniteRefinementAmbientNormalization, then package the native finiteComparison as a natural transformation and cancel the two theta witness transports by naturality. T6, 2026-10-27.",
+  "by": "agent"
+ },
+ "id": "lem-sf-projection-refinement-normalization",
+ "kind": "statement",
+ "title": "Witnessed refinement inverse equals the canonical directed comparison",
+ "statement": "Fix finite-field data D, coefficient data C, a finite extension E/Q_l and level n+1. For finite-type quasi-compact schemes X,Y over D.k, a quasi-compact morphism f, a proper compactification refinement r:c→d, an arbitrary derived fixed-scalar object K, a retained bounded-below etale origin O and an isomorphism fixed(O)≅K, the inverse of the specified witnessed theta_r(K,O,e) equals RefinementProjection.finiteComparison D A r K. This concerns only the proper/open mate and the canonical direct-image compositor, with no tensor, projection map, constructibility or Tor-amplitude hypotheses.",
+ "stmt_deps": [
+  "def-sf-projection-refinement-domains",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Compactification refinement and independence; detailed argument of lem-sf-projection-refinement-descent"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing generic theorem CompactSupportFiniteProjection.refinementComparisonAtWitness_inv_eq at the actual finite coefficient ring and retained origin O. It identifies the inverse specified refinementComparisonAtWitness with finiteComparison at refinementFixedObject, with the same hypotheses and no absolute separatedness assumption. That theorem supplies the site-word, bounded-below inclusion, witness normalization, compositor conjugacy and index-transport calculation of the original plan.",
+   "uses": [
+    "lem-sf-finite-refinement-ambient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the exact three factors of finiteComparison as the private natural transformation comparisonNat: whisker the identity-normalized proper/open mate by the outer proper direct image, then whisker the conjugate compositor and indexIso by the first open extension. Its component is definitionally finiteComparison, as proved by comparisonNat_app. The generic categorical lemma inverseIsoTransport says that conjugating an inverse component by e and e inverse equals its component at the transported object: naturality moves e through the transformation and functoriality cancels e inverse followed by e.",
+   "uses": [
+    "lem-sf-refinement-projection-counit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private comparison_transport theorem combines the existing retained-origin normalization with inverseIsoTransport. Specialize its generic coefficient ring to Coefficient C.l E n, with the specified discrete topology. The inverse of theta is definitionally the transported isomorphism in comparison_transport, so this proves normalized_refinement_inverse with its original signature. No tensor or projection map is inverted, and the same naturality cancellation covers identity refinements, empty schemes, and zero objects.",
+   "uses": [
+    "def-sf-projection-refinement-domains",
+    "def-sf-refinement-comparison-isomorphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-refinement-ambient-normalization",
+  "lem-sf-refinement-projection-counit",
+  "def-sf-projection-refinement-domains",
+  "def-sf-refinement-comparison-isomorphism"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectionRefinementNormalization",
+  "file": "lean/Sheaf/SixFunctors/ProjectionRefinementNormalization.lean",
+  "declaration": "WeilConjectures.ProjectionRefinementDescent.normalized_refinement_inverse",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26",
+  "statement": "theorem normalized_refinement_inverse\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra ℚ_[C.l] E] [FiniteDimensional ℚ_[C.l] E]\n    (n : ℕ) {X Y : Spaces D} {f : X ⟶ Y} [QuasiCompact f.hom.left]\n    {c d : Compactification f.hom.left} (r : c.Refinement d)\n    (K : ProperOpenDerived (Coefficient C.l E n) X.obj.left)\n    (O : RefinementFiniteLevelOrigin C.l E (n + 1) (Nat.succ_pos n) X.obj.left)\n    (e : refinementFiniteLevelFixedObject C.l E (n + 1) (Nat.succ_pos n) X.obj.left O ≅ K) :\n    (theta C.l E n r K O e).inv =\n      RefinementProjection.finiteComparison D (Coefficient C.l E n) r K"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261027T050646-L-250525",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

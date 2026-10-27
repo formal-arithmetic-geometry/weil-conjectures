@@ -1,0 +1,120 @@
+{
+ "id": "lem-trf-fan-chart-germ-spreading",
+ "kind": "statement",
+ "title": "Spreading a monoid section of a characteristic stalk quotient",
+ "statement": "Let X be an fs locally Noetherian Zariski log scheme, c its fan chart to F, x a point, and L a normalized localization at c(x) [def-trf-fs-log-blowup] [def-trf-fine-fan-blowup] [lem-trf-fine-fan-point-localization]. Put R=N_Z,x and P=P_F,c(x), with canonical quotient q:R → P [lem-trf-fan-chart-stalk-model]. Every monoid section j:P → R of q spreads to a monoid homomorphism h:P → N_Z(U) on an open neighborhood U of x contained in c^{-1}(L). The morphism c|U factors as a through L; on every restricted stalk the sharpening of h(p) equals the germ of the canonical section pulled back along a, and the ordinary germ of h(p) at x equals j(p) for every p. This asserts no log-chart property and involves no group-section choice.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 3.7(a), p.75; VIII proof of 3.3.15, p.109."
+ },
+ "stmt_deps": [
+  "lem-trf-fan-chart-stalk-model"
+ ],
+ "proof": [
+  {
+   "text": "Pull back the canonical sections on the open of generalizations. Its normalized germ identifies them with the actual fan stalk. Represent the images of finitely many generators under j on a common neighborhood inside the inverse image of that open.",
+   "uses": [
+    "lem-trf-fine-fan-point-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite relation presentation. Each defining relation is true at the marked stalk, so shrink for it. The finite intersection yields a section homomorphism with the prescribed germ. Empty generating or relation tuples cause no exception.",
+   "uses": [
+    "lem-trf-fg-commutative-monoid-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sharp image of each lifted generator and the pulled-back canonical section have equal germs by the quotient-section hypothesis. Shrink for those finitely many equalities. Generation gives equality for every element. Restrict c to this neighborhood and the target open to obtain a and its factorization; naturality gives the displayed germ equalities at all points.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fine-fan-point-localization",
+  "lem-trf-fg-commutative-monoid-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 3.7(a), p.75; VIII proof of 3.3.15, p.109. Explicit subargument of lem-trf-fan-chart-local-monoid-lift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated commutative monoid homomorphism into a sheaf stalk extends to sections on a neighborhood using finite presentation",
+   "results": "Returned ring structure-sheaf germs, finite-presentation locality of ring homomorphisms, and generating sections of modules. None supplies a monoid lift with prescribed characteristic sections.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsChart\"",
+   "results": "Twelve elliptic curve normal form results, no logarithmic chart theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Presheaf.*stalk|stalk.*germ",
+   "results": "Ordinary sheaf stalks and germs, local surjectivity, and sheafification. No logarithmic characteristic comparison, finite monoid lift, or chart criterion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FanChartLocalMonoidLift",
+  "date": "2026-10-26",
+  "group": "F8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, 3.3.2--3.3.13, pp.106--109, especially 3.3.4(ii), 3.3.8--3.3.11, 3.3.13(i),(iii); finite cover as in proof of 3.3.15. Subargument: returned log-fan-chart-blowup proof step(s) 3,4,5; Expose VIII 3.1.4(iii), 3.1.8(ii), 3.1.10(ii), pp.98--100; 3.3.12--3.3.13, pp.108--109: Zariski local lift expanded using free characteristic groups (VI 1.6, p.70). Subargument: Spreading a monoid section of a characteristic stalk quotient.",
+   "via": [
+    "lem-trf-fan-chart-local-monoid-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FanChartGermSpreading",
+  "file": "lean/Sheaf/AlgebraicGeometry/FanChartGermSpreading.lean",
+  "declaration": "AlgebraicGeometry.fan_chart_germ_spreading",
+  "declarations": [
+   "AlgebraicGeometry.fan_chart_germ_spreading"
+  ],
+  "statement": "theorem fan_chart_germ_spreading\n    {X : FineSaturatedLogScheme.{u}} {F : FineFan.Fan.{u}}\n    (c : LogFanChart X F) (x : X.scheme)\n    (L : FineFan.PointLocalization F (c.map.hom.base x))\n    (j : FineFan.stalk F.space.presheaf (c.map.hom.base x) →*\n      FineFan.stalk X.logStructure.zariskiPresheaf x)\n    (hj : ∀ p, c.stalkQuotient x (j p) = p) :\n        ∃ (U : X.scheme.Opens) (hx : x ∈ U)\n          (h : FineFan.stalk F.space.presheaf (c.map.hom.base x) →*\n            X.logStructure.monoidSheaf.obj.obj (op ((logOpenEtale X.scheme).obj U)))\n          (a : X.logStructure.sharpSpace.restrict U.isOpenEmbedding ⟶\n            F.space.restrict L.openSet.isOpenEmbedding),\n          (∀ y ∈ U, c.map.hom.base y ∈ L.openSet) ∧\n          a ≫ F.space.ofRestrict L.openSet.isOpenEmbedding =\n            X.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding ≫ c.map ∧\n          (∀ (p : FineFan.stalk F.space.presheaf (c.map.hom.base x))\n            (y : X.scheme) (hy : y ∈ U),\n            FineFan.stalkMap (X.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding)\n                ⟨y, hy⟩ (FineFan.germ X.logStructure.sharpSpace.presheaf U y hy\n                  (X.logStructure.sharpSection U (h p))) =\n              FineFan.germ (X.logStructure.sharpSpace.restrict U.isOpenEmbedding).presheaf\n                ⊤ ⟨y, hy⟩ (by trivial) (FineFan.affinePullback (a ≫ L.iso.hom) p)) ∧\n          ∀ p : FineFan.stalk F.space.presheaf (c.map.hom.base x),\n            FineFan.germ X.logStructure.zariskiPresheaf U x hx (h p) = j p",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29bc9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T081837-L-2086505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29bc9",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T081837-L-2086505",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement unchanged vs clone; three relocated defs byte-identical and publicly re-exported (zero external users/importers in clone); three new holes checked true against LogFanChart (zariski field) and node statements; item node proof/proof_deps vs Lean proof"
+ }
+}

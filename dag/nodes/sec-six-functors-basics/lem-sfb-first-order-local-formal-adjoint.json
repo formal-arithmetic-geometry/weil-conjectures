@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-first-order-local-formal-adjoint",
+ "kind": "statement",
+ "title": "Local formula and uniqueness for a first order formal adjoint",
+ "statement": "Use the fields $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $U\\subset\\mathbf R^m$ be open, $m,r,s\\geq1$, and let $H_E:U\\to\\operatorname{Mat}_{r\\times r}(\\mathbf C)$ and $H_F:U\\to\\operatorname{Mat}_{s\\times s}(\\mathbf C)$ be smooth positive definite Hermitian matrix functions, giving fibre inner products $\\langle u,v\\rangle_E=u^\\dagger H_Ev$ and $\\langle w,v\\rangle_F=w^\\dagger H_Fv$ (conjugate-linear in the first argument). Let $\\rho:U\\to\\mathbf R_{>0}$ be a smooth positive density, let $A_j,B:U\\to\\operatorname{Mat}_{s\\times r}(\\mathbf C)$ be smooth, and set $Du=\\sum_{j=1}^m A_j\\partial_{t_j}u+Bu$. The unique complex-linear differential operator $D^*$ with smooth coefficients satisfying $$\\int_U\\langle Du,v\\rangle_F\\rho\\,dt=\\int_U\\langle u,D^*v\\rangle_E\\rho\\,dt$$ for all compactly supported smooth $u,v$ is of order at most one and is given, for every smooth $v$, by $$D^*v=H_E^{-1}\\left(-\\rho^{-1}\\sum_{j=1}^m\\partial_{t_j}(\\rho A_j^\\dagger H_Fv)+B^\\dagger H_Fv\\right).$$ The dagger denotes conjugate transpose. These local expressions agree under smooth changes of real coordinates and complex bundle frames. Consequently the formula defines the unique formal adjoint of a smooth complex-linear first order differential operator between finite rank Hermitian vector bundles on any smooth manifold without boundary, with any smooth positive density; its restriction to a coordinate chart is the displayed formula. Compactness and completeness are not required. Zero rank source or target bundles give zero operators.",
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Agent formulation of the integration-by-parts input underlying Kong §6.1, Lemma 6.2, printed p.21 (PDF page 21); the general weighted matrix formula and chart compatibility are supplied by the agent, not stated as such in Kong WANTED locally; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-coordinate-weighted-adjoint] with $L=D$ and the given matrices and density. Its operator $Q$ is smooth, complex-linear, and of order at most one, and satisfies the required integral identity, even when only one test section has compact support. Since $(\\rho H_E)^{-1}=\\rho^{-1}H_E^{-1}$ and real scalar multiplication commutes with every matrix, its displayed expression is exactly the asserted $D^*$. Thus the formula gives existence on every coordinate domain; no assumption on its boundary or on its compactness was used.",
+   "uses": [
+    "lem-sfb-coordinate-weighted-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+   }
+  },
+  {
+   "text": "First prove uniqueness on compactly supported inputs, on any open coordinate domain $W$. Suppose $P$ and $Q$ are two smooth differential operators satisfying the adjunction there, and fix $v\\in C_c^\\infty(W,\\mathbf C^s)$. Set $w=(P-Q)v$. Subtracting the two adjunction identities gives $\\int_W u^\\dagger H_Ew\\rho\\,dt=0$ for every $u\\in C_c^\\infty(W,\\mathbf C^r)$. For each standard basis vector $e_a$ choose $u=ge_a$, where $g$ is any smooth real scalar test with compact topological support in $W$. The continuous function $f_a=\\rho(H_Ew)_a$, extended by zero outside $W$, is locally integrable on $W$ by [lem-sfb-continuous-local-integrability]. The preceding identity is exactly $\\int_{\\mathbf R^m}g f_a=0$, since $g$ vanishes outside $W$. Apply [lem-sfb-smooth-test-ae-separation] to obtain $f_a=0$ almost everywhere on $W$, and [lem-sfb-continuous-ae-pointwise] to upgrade to every point. The zero extension need only be continuous on $W$, which it is. Because $\\rho>0$ and $H_E$ is invertible, all coordinates vanishing imply $w=0$. This works for every compactly supported $v$.",
+   "uses": [
+    "lem-sfb-continuous-local-integrability",
+    "lem-sfb-smooth-test-ae-separation",
+    "lem-sfb-continuous-ae-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+   }
+  },
+  {
+   "text": "To extend this uniqueness to every smooth local input $v$, fix $x\\in W$ and radii $0<a<b$ with $\\overline B(x,b)\\subset W$. By [lem-sfb-euclidean-smooth-bump] choose $\\beta=1$ on $\\overline B(x,a)$ with compact support $\\overline B(x,b)$. The section $\\beta v$ on $W$, extended by zero, is smooth and compactly supported: near any point outside that closed ball it is identically zero. The preceding step gives $P(\\beta v)=Q(\\beta v)$. Since a differential operator depends only on the germ of its input and $\\beta v=v$ near $x$, this equality at $x$ gives $Pv(x)=Qv(x)$. This argument allows $P$ to have any finite order. Consequently uniqueness holds among all the differential operators in the statement, not just among first order candidates.",
+   "uses": [
+    "lem-sfb-euclidean-smooth-bump"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+   }
+  },
+  {
+   "text": "Compare two coordinate and frame descriptions on an overlap, writing $y=\\phi(x)$, $u_x=P(x)u_y(\\phi(x))$, and $v_x=R(x)v_y(\\phi(x))$ with invertible smooth frame matrices $P,R$. The definitions of the metrics and the density give $H_{E,y}(\\phi(x))=P^\\dagger H_{E,x}P$, $H_{F,y}(\\phi(x))=R^\\dagger H_{F,x}R$, and $\\rho_y(\\phi(x))|\\det d\\phi_x|=\\rho_x(x)$. Thus $u_x^\\dagger H_{E,x}z_x=u_y^\\dagger H_{E,y}z_y$ when $z_x=Pz_y\\circ\\phi$, and likewise for $F$. By [lem-sfb-euclidean-jacobian-integral] the corresponding scalar integrals are equal in the two charts, including orientation-reversing transitions. The smooth transition is a diffeomorphism between the open overlap domains, precisely the hypothesis of that node; compact test supports remain compact under it. Transfer the $x$-chart operator $Q_x$ by $\\widetilde Q_y v_y=(P^{-1}Q_x(Rv_y\\circ\\phi))\\circ\\phi^{-1}$. The chain and product rules show directly that it is a smooth complex-linear differential operator of order at most one. The integral equalities just proved and the local adjunction of step 1 show that $\\widetilde Q_y$ is adjoint to $D_yu_y=(R^{-1}D_x(Pu_y\\circ\\phi))\\circ\\phi^{-1}$. Steps 2 and 3, applied to this overlap, imply $\\widetilde Q_y=Q_y$. This is the asserted compatibility.",
+   "uses": [
+    "lem-sfb-euclidean-jacobian-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+   }
+  },
+  {
+   "text": "The compatible local outputs in step 4 define $D^*v$ for a smooth section $v$ of $F$: use $Q_xv_x$ in each trivializing coordinate chart. On overlaps those expressions represent the same vector of $E$, so the glued section is smooth and unique point by point. Locally it has the formula of step 1, hence defines a smooth complex-linear differential operator of order at most one. It remains to verify the global integral identity, since two compactly supported sections need not be supported in one chart.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+   }
+  },
+  {
+   "text": "Let $u,v$ be compactly supported smooth sections on $M$ and put $K=\\operatorname{supp}u$. Cover $K$ by finitely many trivializing coordinate domains $V_i$ and put $N=\\bigcup_i V_i$. This open submanifold is Hausdorff and sigma-compact: each coordinate image is an open Euclidean set, covered by the countable family of closed rational balls contained in it, and finite unions preserve sigma-compactness. Apply [lem-sfb-smooth-subordinate-partition] on $N$ with the closed set $S=K$ and the finite open cover $(V_i)$. It gives smooth $\\varphi_i$ with $\\sum_i\\varphi_i=1$ on $K$ and closed supports contained in $V_i$. Put $u_i=\\varphi_i u$ on $N$ and extend by zero to $M$. Its support is a closed subset of $K$ contained in $V_i$, hence compact, and the zero extension is smooth since that support is contained in the open domain. Now $\\sum_i u_i=u$ everywhere. Apply [lem-sfb-coordinate-weighted-adjoint] on $V_i$ to $u_i$ and the unrestricted smooth section $v|_{V_i}$; the cited statement allows only the first input to be compactly supported. Change-of-variables compatibility from step 4 identifies these integrals with the intrinsic density integrals. Sum the finitely many identities to obtain $\\int_M\\langle Du,v\\rangle_F=\\sum_i\\int_M\\langle Du_i,v\\rangle_F=\\sum_i\\int_M\\langle u_i,D^*v\\rangle_E=\\int_M\\langle u,D^*v\\rangle_E$. Linearity also gives $\\sum_iDu_i=Du$, so no individual derivative of a partition function was discarded.",
+   "uses": [
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-coordinate-weighted-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+   }
+  },
+  {
+   "text": "If another global smooth differential operator satisfies the same identity, take both tests compactly supported inside a trivializing chart and extend them by zero. The identity restricts to that chart; steps 2 and 3 give equality on every smooth local input, and hence equality of the global operators. No completeness, total volume, or compactness of $M$ entered the construction: step 6 used only a neighborhood of the compact test support. If a bundle has rank zero, its sections are zero and both operators are zero; the assertion is interpreted without forming nonempty Gram matrices. In dimension zero the derivative sum is empty and pointwise finite-dimensional adjunction gives $D^*=H_E^{-1}B^\\dagger H_F$; compact tests at a single point verify it and give uniqueness. On an empty chart all assertions are vacuous. These cases also glue pointwise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-ae-pointwise",
+  "lem-sfb-continuous-local-integrability",
+  "lem-sfb-coordinate-weighted-adjoint",
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-euclidean-smooth-bump",
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-smooth-test-ae-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Agent argument supplying the weighted local and gluing details behind Kong §6.1, Lemma 6.2 (printed p.21); read online, absent locally. Mathlib tool sources are recorded in the cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integration by parts formula for formal adjoint of a first order differential operator on sections with variable Hermitian metric and density",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SchwartzMap.integral_clm_comp_lineDerivOp_right_eq_neg_left\", \"module\": \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv\", \"type\": \"∀ {𝕜 : Type u_2} {D : Type u_4} {V : Type u_7} {F : Type u_8} [inst : NormedAddCommGroup F] [inst_1 : NormedSpace ℝ F]\\n  [inst_2 : NormedAddCommGroup V] [inst_3 : NormedSpace ℝ V] [inst_4 : NormedAddCommGroup D] [inst_5 : NormedSpace ℝ D]\\n  [inst_6 : MeasurableSpace D] {μ : MeasureTheory.Measure D} \", \"doc\": \"For any Schwartz functions $ f : 𝓢(D, F \\\\to_L[\\\\mathbb{K}] V) $, $ g : 𝓢(D, F) $, and vector $ v \\\\in D $, the integral of $ f(x) $ evaluated at the directional derivative $ \\\\partial_v g(x) $ equals the\"}\n  {\"name\": \"SchwartzMap.integral_mul_lineDerivOp_right_eq_neg_left\", \"module\": \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv\", \"type\": \"∀ {𝕜 : Type u_2} {D : Type u_4} [inst : NormedAddCommGroup D] [inst_1 : NormedSpace ℝ D] [inst_2 : MeasurableSpace D]\\n  {μ : MeasureTheory.Measure D} [BorelSpace D] [FiniteDimensional ℝ D] [μ.IsAddHaarMeasure] [inst_6 : NormedRing 𝕜]\\n  [inst_7 : NormedSpace ℝ 𝕜] [IsScalarTower ℝ 𝕜 𝕜] [SMulCommClass \", \"doc\": \"For any Schwartz maps $ f $ and $ g $ on a real normed vector space $ D $ and any direction $ v $, the Bochner integral of $ f(x) $ multiplied by the partial derivative $ \\\\partial_v g(x) $ equals the \"}\n  {\"name\": \"SchwartzMap.integral_smul_lineDerivOp_right_eq_neg_left\", \"module\": \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv\", \"type\": \"∀ {𝕜 : Type u_2} {D : Type u_4} {F : Type u_8} [inst : NormedAddCommGroup F] [inst_1 : NormedSpace ℝ F]\\n  [inst_2 : NormedAddCommGroup D] [inst_3 : NormedSpace ℝ D] [inst_4 : MeasurableSpace D] {μ : MeasureTheory.Measure D}\\n  [BorelSpace D] [FiniteDimensional ℝ D] [μ.IsAddHaarMeasure] [inst_8 : RCLi\", \"doc\": \"For any Schwartz maps $ f $ and $ g $ between real normed vector spaces and any direction $ v $, the Bochner integral of $ f(x) $ multiplied by the directional derivative $ \\\\partial_v g(x) $ equals th\"}\n  {\"name\": \"SchwartzMap.integral_bilinear_lineDerivOp_right_eq_neg_left\", \"module\": \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv\", \"type\": \"∀ {D : Type u_4} {E : Type u_5} {V : Type u_7} {F : Type u_8} [inst : NormedAddCommGroup E]\\n  [inst_1 : NormedAddCommGroup F] [inst_2 : NormedSpace ℝ F] [inst_3 : NormedSpace ℝ E] [inst_4 : NormedAddCommGroup V]\\n  [inst_5 : NormedSpace ℝ V] [inst_6 : NormedAddCommGroup D] [inst_7 : NormedSpace ℝ D] \", \"doc\": \"Let $D$ be a finite-dimensional real normed vector space, equipped with an additive Haar measure $\\\\mu$. Let $E, F,$ and $V$ be real normed vector spaces. For any two Schwartz maps $f \\\\in \\\\mathcal{S}(D\"}\n  {\"name\": \"integral_bilinear_hasLineDerivAt_right_eq_neg_left_of_integrable_aux1\", \"module\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts\", \"type\": \"∀ {E : Type u_1} {F : Type u_2} {G : Type u_3} {W : Type u_4} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] [inst_4 : NormedAddCommGroup G] [inst_5 : NormedSpace ℝ G]\\n  [inst_6 : NormedAddCommGroup W] [inst_7 : NormedSpace ℝ W] \", \"doc\": \"Let $ (E, \\\\mu) $ be a $\\\\sigma$-finite measure space, and let $ F, G, W $ be normed $\\\\mathbb{R}$-vector spaces. For bilinear maps $ B : F \\\\times G \\\\to W $, functions $ f, f' : E \\\\times \\\\mathbb{R} \\\\to F\"}\n  {\"name\": \"SchwartzMap.integral_bilinear_deriv_right_eq_neg_left\", \"module\": \"Mathlib/Analysis/Distribution/SchwartzSpace/Deriv\", \"type\": \"∀ {E : Type u_5} {V : Type u_7} {F : Type u_8} [inst : NormedAddCommGroup E] [inst_1 : NormedAddCommGroup F]\\n  [inst_2 : NormedSpace ℝ F] [inst_3 : NormedSpace ℝ E] [inst_4 : NormedAddCommGroup V] [inst_5 : NormedSpace ℝ V]\\n  (f : SchwartzMap ℝ E) (g : SchwartzMap ℝ F) (L : E →L[ℝ] F →L[ℝ] V),\\n  ∫ (\", \"doc\": \"For Schwartz functions $ f : \\\\mathbb{R} \\\\to E $ and $ g : \\\\mathbb{R} \\\\to F $, and a continuous bilinear operator $ L : E \\\\times F \\\\to V $, the integral of $ L(f(x), g'(x)) $ over $ \\\\mathbb{R} $ equals\"}\n  {\"name\": \"integral_bilinear_hasLineDerivAt_right_eq_neg_left_of_integrable_aux2\", \"module\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts\", \"type\": \"∀ {E : Type u_1} {F : Type u_2} {G : Type u_3} {W : Type u_4} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] [inst_4 : NormedAddCommGroup G] [inst_5 : NormedSpace ℝ G]\\n  [inst_6 : NormedAddCommGroup W] [inst_7 : NormedSpace ℝ W] \", \"doc\": \"Let $ E, F, G, W $ be finite-dimensional real vector spaces, and let $ \\\\mu $ be an additive Haar measure on $ E \\\\times \\\\mathbb{R} $. For functions $ f,f': E \\\\times \\\\mathbb{R} \\\\to F $, $ g,g': E \\\\times\"}\n  {\"name\": \"integral_smul_fderiv_eq_neg_fderiv_smul_of_integrable\", \"module\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts\", \"type\": \"∀ {E : Type u_1} {G : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : NormedAddCommGroup G]\\n  [inst_3 : NormedSpace ℝ G] [inst_4 : MeasurableSpace E] {μ : MeasureTheory.Measure E} [BorelSpace E]\\n  [FiniteDimensional ℝ E] [μ.IsAddHaarMeasure] {𝕜 : Type u_5} [inst_8 : Norm\", \"doc\": \"Let $ E $ be a normed vector space over a nontrivially normed field $ \\\\mathbb{K} $, $ G $ a normed vector space, $ \\\\mu $ a measure, and $ v \\\\in E $. For differentiable functions $ f : E \\\\to \\\\mathbb{K}\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix adjoint and LinearPMap.IsFormalAdjoint results contain no differential-operator formula. IntegrationByParts.lean:179,195,212 supplies Euclidean integration by parts, but not variable fibre metrics, local uniqueness, or the bundle/chart compatibility asserted here; obtaining those requires an argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted matrix differential operator adjoint equals negative derivative of density times conjugate transpose coefficient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LineDeriv.laplacianCLM\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"(R : Type u_4) →\\n  (E : Type u_6) →\\n    (V₁ : Type u_11) →\\n      {V₂ : Type u_12} →\\n        {V₃ : Type u_13} →\\n          [inst : LineDeriv E V₁ V₂] →\\n            [inst_1 : LineDeriv E V₂ V₃] →\\n              [inst_2 : AddCommGroup V₁] →\\n                [inst_3 : AddCommGroup V₂] →\\n                  [\", \"doc\": \"The Laplacian operator is defined as the sum over all indices $i$ of the composition of two continuous linear maps: first applying the linear derivative operator $\\\\partial_{e_i}$ associated with the $\"}\n  {\"name\": \"LineDeriv.laplacianCLM_eq_sum\", \"module\": \"Mathlib/Analysis/Distribution/DerivNotation\", \"type\": \"∀ {ι : Type u_1} {E : Type u_6} {V₁ : Type u_11} {V₂ : Type u_12} {V₃ : Type u_13} [inst : LineDeriv E V₁ V₂]\\n  [inst_1 : LineDeriv E V₂ V₃] [inst_2 : AddCommGroup V₁] [inst_3 : AddCommGroup V₂] [inst_4 : AddCommGroup V₃]\\n  [inst_5 : NormedAddCommGroup E] [inst_6 : InnerProductSpace ℝ E] [inst_7 : F\", \"doc\": \"For a finite-dimensional real inner product space $ E $ with orthonormal basis $\\\\{v_i\\\\}_{i \\\\in \\\\iota}$, the Laplacian operator $\\\\Delta$ applied to a function $ f $ satisfies $\\\\Delta f = \\\\sum_{i \\\\in \\\\i\"}\n  {\"name\": \"Matrix.toEuclideanLin_conjTranspose_eq_adjoint\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Adjoint\", \"type\": \"∀ {𝕜 : Type u_1} [inst : RCLike 𝕜] {m : Type u_5} {n : Type u_6} [inst_1 : Fintype m] [inst_2 : DecidableEq m]\\n  [inst_3 : Fintype n] [inst_4 : DecidableEq n] (A : Matrix m n 𝕜),\\n  Matrix.toEuclideanLin A.conjTranspose = LinearMap.adjoint (Matrix.toEuclideanLin A)\", \"doc\": \"For any matrix $ A $ with entries in a real closed-like field $ \\\\mathbb{K} $, the linear map corresponding to the conjugate transpose of $ A $ is equal to the adjoint of the linear map associated with\"}\n  {\"name\": \"fderivInnerCLM\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Calculus\", \"type\": \"(𝕜 : Type u_1) →\\n  {E : Type u_2} →\\n    [inst : RCLike 𝕜] →\\n      [inst_1 : NormedAddCommGroup E] → [InnerProductSpace 𝕜 E] → [inst_3 : NormedSpace ℝ E] → E × E → E × E →L[ℝ] 𝕜\", \"doc\": \"For a real closed-like field $\\\\mathbb{K}$ and a normed inner product space $E$ over $\\\\mathbb{K}$, the Fréchet derivative of the inner product map $\\\\langle \\\\cdot, \\\\cdot \\\\rangle : E \\\\times E \\\\to \\\\mathbb\"}\n  {\"name\": \"integral_bilinear_hasFDerivAt_right_eq_neg_left_of_integrable\", \"module\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts\", \"type\": \"∀ {E : Type u_1} {F : Type u_2} {G : Type u_3} {W : Type u_4} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] [inst_4 : NormedAddCommGroup G] [inst_5 : NormedSpace ℝ G]\\n  [inst_6 : NormedAddCommGroup W] [inst_7 : NormedSpace ℝ W] \", \"doc\": \"Let $ E, F, G, W $ be normed vector spaces over $ \\\\mathbb{R} $, $ \\\\mu $ a measure, $ f:E\\\\to F $, $ g:E\\\\to G $, $ f',g' $ their Fréchet derivatives, and $ B:F\\\\times G\\\\to W $ a continuous bilinear map. \"}\n  {\"name\": \"integral_bilinear_fderiv_right_eq_neg_left_of_integrable\", \"module\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts\", \"type\": \"∀ {E : Type u_1} {F : Type u_2} {G : Type u_3} {W : Type u_4} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] [inst_4 : NormedAddCommGroup G] [inst_5 : NormedSpace ℝ G]\\n  [inst_6 : NormedAddCommGroup W] [inst_7 : NormedSpace ℝ W] \", \"doc\": \"Let $ E, F, G, W $ be normed vector spaces over $ \\\\mathbb{R} $, let $ f \\\\in C^1(E, F) $, $ g \\\\in C^1(E, G) $, and let $ B: F \\\\times G \\\\to W $ be a continuous bilinear map. If the functions $ x \\\\mapsto\"}\n  {\"name\": \"InnerProductSpace.laplacianWithin\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Laplacian\", \"type\": \"{E : Type u_2} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : InnerProductSpace ℝ E] →\\n      [FiniteDimensional ℝ E] →\\n        {F : Type u_3} → [inst : NormedAddCommGroup F] → [NormedSpace ℝ F] → (E → F) → Set E → E → F\", \"doc\": \"The Laplacian operator defined on an inner product space $ E $, mapping elements of $ E $ to $ F $, constructed via the second iterated Fréchet derivative tensor with respect to the canonical covarian\"}\n  {\"name\": \"gradient_eq_deriv\", \"module\": \"Mathlib/Analysis/Calculus/Gradient/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : RCLike 𝕜] {g : 𝕜 → 𝕜} {u : 𝕜}, gradient g u = (starRingEnd 𝕜) (deriv g u)\", \"doc\": \"The gradient of a function $ g $ at a point $ u $ is equal to the conjugate of its Fréchet derivative at $ u $, i.e., $ \\\\nabla g(u) = \\\\overline{Dg(u)} $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix adjoint and LinearPMap.IsFormalAdjoint results contain no differential-operator formula. IntegrationByParts.lean:179,195,212 supplies Euclidean integration by parts, but not variable fibre metrics, local uniqueness, or the bundle/chart compatibility asserted here; obtaining those requires an argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral\", \"partialDeriv\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix adjoint and LinearPMap.IsFormalAdjoint results contain no differential-operator formula. IntegrationByParts.lean:179,195,212 supplies Euclidean integration by parts, but not variable fibre metrics, local uniqueness, or the bundle/chart compatibility asserted here; obtaining those requires an argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.adjoint|integral.*(partialDeriv|fderiv)|integral.*parts",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/InformationTheory/KullbackLeibler/ChainRule.lean\", \"line\": \"62\", \"text\": \"the other terms. It is easy to see that it suffices to prove the equality of the integrals parts.\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"614\", \"text\": \"  rw [lintegral_image_eq_lintegral_abs_det_fderiv_mul volume hs\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"147\", \"text\": \"    integral_image_eq_integral_abs_det_fderiv_smul volume\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"159\", \"text\": \"    lintegral_image_eq_lintegral_abs_det_fderiv_mul volume\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/SumCoeff.lean\", \"line\": \"319\", \"text\": \"    -- For that, we cut the integral in two parts using `T` as the cutting point.\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"303\", \"text\": \"For a basis-free version, see `lintegral_pow_le_pow_lintegral_fderiv`. -/\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"304\", \"text\": \"theorem lintegral_pow_le_pow_lintegral_fderiv_aux [Fintype ι]\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"357\", \"text\": \"/-- The constant factor occurring in the conclusion of `lintegral_pow_le_pow_lintegral_fderiv`.\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"361\", \"text\": \"irreducible_def lintegralPowLePowLIntegralFDerivConst (p : ℝ) : ℝ≥0 := by\"}\n  {\"file\": \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"line\": \"374\", \"text\": \"theorem lintegral_pow_le_pow_lintegral_fderiv {u : E → F}\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"line\": \"22\", \"text\": \"* `LinearPMap.IsFormalAdjoint`: An operator `T` is a formal adjoint of `S` if for all `x` in the\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"line\": \"28\", \"text\": \"* `LinearPMap.adjoint_isFormalAdjoint`: The adjoint is a formal adjoint\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"line\": \"29\", \"text\": \"* `LinearPMap.IsFormalAdjoint.le_adjoint`: Every formal adjoint is contained in the adjoint\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"line\": \"72\", \"text\": \"/-- An operator `T` is a formal adjoint of `S` if for all `x` in the domain of `T` and `y` in the\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/LinearPMap.lean\", \"line\": \"194\", \"text\": \"/-- The adjoint is maximal in the sense that it contains every formal adjoint. -/\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/ContDiff/Convolution.lean\", \"line\": \"84\", \"text\": \"  apply hasFDerivAt_integral_of_dominated_of_fderiv_le (ball_mem_nhds _ zero_lt_one) h1 _ (h2 x₀)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/ContDiff/Convolution.lean\", \"line\": \"274\", \"text\": \"  exact hasFDerivAt_integral_of_dominated_of_fderiv_le (ball_mem_nhds _ δpos) I1 I2 I3 I4 I5 I6\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/ContinuousFunctionalCalculus/Rpow/IntegralRepresentation.lean\", \"line\": \"276\", \"text\": \"  infinity. Hence we break the integral into two parts. -/\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"149\", \"text\": \"      integral_target_eq_integral_abs_det_fderiv_smul volume\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"165\", \"text\": \"      rw [lintegral_image_eq_lintegral_abs_det_fderiv_mul volume _\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"272\", \"text\": \"    (integral_image_eq_integral_abs_det_fderiv_smul volume measurableSet_pi_polarCoord_target\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"292\", \"text\": \"    (lintegral_image_eq_lintegral_abs_det_fderiv_mul volume measurableSet_pi_polarCoord_target\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean\", \"line\": \"25\", \"text\": \"* `integral_bilinear_hasLineDerivAt_right_eq_neg_left_of_integrable`: integration by parts\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean\", \"line\": \"27\", \"text\": \"* `integral_bilinear_hasFDerivAt_right_eq_neg_left_of_integrable`: integration by parts\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LineDeriv/IntegrationByParts.lean\", \"line\": \"29\", \"text\": \"* `integral_bilinear_fderiv_right_eq_neg_left_of_integrable`: integration by parts\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix adjoint and LinearPMap.IsFormalAdjoint results contain no differential-operator formula. IntegrationByParts.lean:179,195,212 supplies Euclidean integration by parts, but not variable fibre metrics, local uniqueness, or the bundle/chart compatibility asserted here; obtaining those requires an argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The formal adjoint of A times partial differentiation with a weighted fibre inner product is obtained by differentiating the density and conjugate transpose of A",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Matrix.toLin_conjTranspose\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \"(A : Matrix m n 𝕜) : toLin v₂.toBasis v₁.toBasis Aᴴ = adjoint (toLin v₁.toBasis v₂.toBasis A)\", \"doc\": \"For finite-dimensional inner product spaces $ E $ and $ F $ over a real closed-like field $ \\\\mathbb{K} $, the linear map represented by the conjugate transpose of a matrix $ A $ (obtained by transposi\"}\n  {\"name\": \"LinearMap.toMatrix_adjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \"(f : E →ₗ[𝕜] F) : toMatrix v₂.toBasis v₁.toBasis (adjoint f) = (toMatrix v₁.toBasis v₂.toBasis f)ᴴ\", \"doc\": \"For finite-dimensional inner product spaces $E$ and $F$ over a real closed-like field $\\\\mathbb{K}$, with orthonormal bases $v_1$ and $v_2$, the matrix representation of the adjoint of a linear map $f:\"}\n  {\"name\": \"LinearPMap.IsFormalAdjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.LinearPMap\", \"type\": \"(T : E →ₗ.[𝕜] F) (S : F →ₗ.[𝕜] E) : Prop\", \"doc\": \"Given $ R $-linear maps $ T : E → F $ and $ S : F → E $ between inner product spaces over a real closed-like field $ \\\\mathbb{K} $, the proposition that $ T $ and $ S $ are formal adjoints, meaning tha\"}\n  {\"name\": \"LinearMap.adjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \": (E →ₗ[𝕜] F) ≃ₗ⋆[𝕜] F →ₗ[𝕜] E\", \"doc\": \"For finite-dimensional inner product spaces $ E $ and $ F $ over a real closed-like field $ \\\\mathbb{K} $, the adjoint operation establishes a linear equivalence between the space of linear maps $ E \\\\t\"}\n  {\"name\": \"LinearPMap.adjoint_isFormalAdjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.LinearPMap\", \"type\": \": T†.IsFormalAdjoint T\", \"doc\": \"For an $ R $-linear map $ T : E → F $ between inner product spaces over a real closed-like field $ \\\\mathbb{K} $, its adjoint $ T† : F → E $ satisfies the formal adjoint condition: for all $ x $ in the\"}\n  {\"name\": \"ContinuousLinearMap.adjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \": (E →L[𝕜] F) ≃ₗᵢ⋆[𝕜] F →L[𝕜] E\", \"doc\": \"For normed spaces $ E $ and $ F $ over a field $ \\\\mathbb{K} $, the adjoint operation establishes a linear isometric equivalence between the space of continuous linear maps $ E \\\\to F $ and the space of\"}\n  {\"name\": \"Matrix.toEuclideanLin_conjTranspose_eq_adjoint\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \"(A : Matrix m n 𝕜) : A.conjTranspose.toEuclideanLin = A.toEuclideanLin.adjoint\", \"doc\": \"For any matrix $ A $ with entries in a real closed-like field $ \\\\mathbb{K} $, the linear map corresponding to the conjugate transpose of $ A $ is equal to the adjoint of the linear map associated with\"}\n  {\"name\": \"ContinuousLinearMap.adjointAux_inner_left\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Adjoint\", \"type\": \"(A : E →L[𝕜] F) (x : E) (y : F) : ⟪adjointAux A y, x⟫ = ⟪y, A x⟫\", \"doc\": \"Let `E` and `F` be Hilbert spaces over `ℝ` or `ℂ`. Let `A: E → F` be a continuous linear map and let `A^*: F → E` be its adjoint. Then for any vectors `x ∈ E` and `y ∈ F`, the following identity holds\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix adjoint and LinearPMap.IsFormalAdjoint results contain no differential-operator formula. IntegrationByParts.lean:179,195,212 supplies Euclidean integration by parts, but not variable fibre metrics, local uniqueness, or the bundle/chart compatibility asserted here; obtaining those requires an argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weighted matrix differential operator formal adjoint on Hermitian bundles is unique and independent of coordinates",
+   "results": "Hits read: IsContMDiffRiemannianBundle.exists_contMDiff, LineDeriv.laplacianCLM, LineDeriv.laplacianCLM_eq_sum, Bundle.ContMDiffRiemannianMetric.inner, LinearPMap.adjoint_isFormalAdjoint, Bundle.ContMDiffRiemannianMetric.symm, Bundle.RiemannianMetric.inner, InnerProductSpace.instLaplacian",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap.IsFormalAdjoint and its Hilbert-space adjoint lemmas do not state the differential-operator formula, chart compatibility, or the manifold assertion; scalar integration results require the proof supplied here, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"formal\", \"adjoint\"",
+   "results": "Hits read: LinearPMap.IsFormalAdjoint, LinearPMap.IsFormalAdjoint.symm, LinearPMap.adjoint_isFormalAdjoint, LinearPMap.IsFormalAdjoint.le_adjoint",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap.IsFormalAdjoint and its Hilbert-space adjoint lemmas do not state the differential-operator formula, chart compatibility, or the manifold assertion; scalar integration results require the proof supplied here, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.adjoint|first.order.*adjoint",
+   "results": "Hits read: Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean, Mathlib/Analysis/InnerProductSpace/LinearPMap.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap.IsFormalAdjoint and its Hilbert-space adjoint lemmas do not state the differential-operator formula, chart compatibility, or the manifold assertion; scalar integration results require the proof supplied here, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal adjoint of a first order matrix differential operator on a Hermitian vector bundle with smooth density",
+   "results": "Hits read: LinearPMap.IsFormalAdjoint, LinearPMap.adjoint_isFormalAdjoint, LinearPMap.IsFormalAdjoint.symm, ContinuousLinearMap.adjointAux, ContinuousLinearMap.adjointAux_inner_left, LinearMap.adjoint, LinearPMap.adjoint, ContinuousLinearMap.adjoint_inner_left",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearPMap.IsFormalAdjoint and its Hilbert-space adjoint lemmas do not state the differential-operator formula, chart compatibility, or the manifold assertion; scalar integration results require the proof supplied here, not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kahler-first-order-commutators",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: operator identity used before deducing d-closedness by adjointness; supporting first-order input: Kong Proposition 6.12, the two commutators involving the dual Lefschetz operator, before the Laplacian comparison. Supporting input: Agent formulation of the integration-by-parts input underlying Kong §6.1, Lemma 6.2, printed p.21 (PDF page 21); the general weighted matrix formula and chart compatibility are supplied by the agent, not stated as such in Kong",
+   "via": [
+    "lem-sfb-kahler-first-order-commutators",
+    "lem-sfb-kahler-laplacian-identity",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-first-order-local-formal-adjoint",
+  "worker": "stage1",
+  "summary": "Reused the existing weighted-coordinate adjunction and subordinate partition nodes. Proved uniqueness using scalar smooth tests, continuity, and Euclidean cutoffs; compared the actual metric/density and integral transformations; glued and proved global adjunction on a sigma-compact neighborhood of the compact test support. Added five statement-only Mathlib leaves, with exact searched declarations and source lines. Statement unchanged.",
+  "blueprint": "The inherited analytic prerequisite chain serves det-thm-sf-ctf-stability-direct-images proof (3), via the first-order Kahler commutator input. This split supplies its local adjunction uniqueness and chart gluing details behind Kong §6.1 Lemma 6.2. The current latest blueprint unit was read; the inherited created.item chain has no recognized blueprint ancestor (blueprint_refs.py ancestor returns None), retained as in the live record."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-16c0f82d5",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-16c0f82d5 (reviewer sub-agent of L); spot-checked: Read the item, its 7 steps and all five new Mathlib leaves in full. Also read the full statements of lem-sfb-coordinate-weighted-adjoint and lem-sfb-smooth-subordinate-partition, and the Mathlib sources at the cited lines: LocallyIntegrable.lean:566, AEEqOfIntegralContDiff.lean:205, OpenPos.lean:116, Jacobian.lean:1225, BumpFunction/Basic.lean:70/137/157/166/203 and InnerProduct.lean:57. The split is sound. Step 1 matches the item's formula exactly, since (ρH_E)^{-1}=ρ^{-1}H_E^{-1}. Steps 2-3 prove uniqueness among operators of any finite order: the test u=g e_a, local integrability from continuity, a.e. vanishing and then pointwise vanishing, followed by bump localisation. Step 4 gets frame and chart compatibility from the transformed metrics and density (absolute Jacobian), the change-of-variables leaf, and the uniqueness already proved, so there is no circularity. Step 6 builds the global identity from a partition of unity on a σ-compact chart neighbourhood of the compact test support. The cited adjoint node allows only one compactly supported input, which is exactly what this step needs. Step 7 covers rank 0, dimension 0 and empty charts. I checked m=1 with scalar coefficients against the classical adjoint −∂(āv)+b̄v plus the log-density term, and checked an orientation reversal. There is no repair note, so this is not a re-split. No SGA is cited, and every cited node is in the same unit or is a Mathlib leaf. I searched the whole DAG and found no duplicates; lem-sfb-smooth-separating-cutoff is a different statement. FIX, statement-only and within the Mathlib matches: (1) lem-sfb-smooth-test-ae-separation: the definition of 'locally integrable' left out measurability. As written, a non-measurable indicator of a Bernstein-type set is a counterexample. I added 'Lebesgue measurable on U'. (2) lem-sfb-continuous-local-integrability: the same gloss, fixed the same way. (3) lem-sfb-euclidean-jacobian-integral: '(a bijection with C^1 inverse)' became 'φ and φ^{-1} both C^1'. The whole corrected files are in fixes/dag/nodes/sec-six-functors-basics/. The item itself is unchanged. Advisory only: the stmt_deps of the inherited base statement name no nodes for manifold, bundle or differential operator.; 3 file(s) fixed by the reviewer"
+ }
+}

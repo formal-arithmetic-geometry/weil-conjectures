@@ -23,80 +23,73 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sf-ringed-derived-closed-symmetric-monoidal] with its actual models [def-coef-ringed-tensor-hom-model]. The coefficient unit is K-flat: its tensor with an acyclic complex is the same complex by the unitor. The supplied symmetry, unitor and associator give the required coherence on K-flat representatives; total tensor preserves K-flatness. Thus all transposes below use the fixed tensor and Hom.",
+   "text": "Keep the existing transposed evaluation and signed bidual definitions, their naturality proofs, and the construction of the specified model from derived closed symmetric monoidal structure. These actual transposes define the canonical maps; no separate composition-model theorem is needed. Use the unchanged fixed ordinary-Hom comparison in its independent shared module, reexported by the duality module.",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-coef-ringed-tensor-hom-model"
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sfb-ringed-site-ordinary-hom-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9, 0A90; normalized K-flat models"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sfb-ringed-hom-composition-model] form $c$ as the transpose of two evaluations. Under $B\\cong H(O,B)$ from [lem-sc-hom-complex-unit-iso] applied to a K-injective representative of $B$, put $e_{A,B}=c_{A,O,B}$. The unit identification evaluates at $1$, so its uncurried composite is $(1_B\\otimes\\epsilon_{A,O})$ followed by the right unitor. Naturality of $c$ gives the stated two variances. Define $b_A=\\operatorname{tr}(\\epsilon_{A,O}\\circ\\sigma_{A,H(A,O)})$. For $u:A'\\to A$, the two sides of $H(H(u,1),1)b_{A'}=b_Au$ have identical uncurrying by counit and symmetry naturality. Injectivity of transposition proves covariance.",
+   "text": "Extend simultaneous K-flat tensor comparisons to natural one-K-flat comparisons by functorial flat resolution, and identify normalized generator-level constraint maps with actual complex isomorphisms. This gives full tensor coherence for the specified model while retaining its coefficient-unit identification.",
    "uses": [
-    "lem-sfb-ringed-hom-composition-model",
-    "lem-sc-hom-complex-unit-iso",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-sfb-ringed-tensor-comparison-extension",
+    "lem-sfb-ringed-tensor-constraint-completion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A98, 08JD, 0A97"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-ringed-ordinary-evaluation-localization] with the stated $E,F,D$. Its $\\theta$ is the transpose defining $e$ in step 2. Its two augmentation hypotheses and K-flat tensor comparison are precisely those in the item, so its displayed equation gives the unsigned ordinary representative, including existence and uniqueness of the chain map.",
+   "text": "The ordinary evaluation localization theorem gives the unique identity-slice formula. Naturality of the ordinary Hom projections identifies that formula with the all-slice formula in this module: compose with each slice restriction and then use Hom and tensor generator extensionality. Thus the existing chosen ordinary evaluation map is the map in the unsigned localization theorem. Apply its equation after the full coherence completion and use uniqueness to obtain the unsigned normalization.",
    "uses": [
     "lem-sfb-ringed-ordinary-evaluation-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JE; ordinary evaluation localization"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-ringed-signed-bidual-localization] to $E$. Its $b$ is the transpose of step 2; its two augmentation isomorphisms are exactly the stated identifications. Its equation therefore gives the signed ordinary bidual representative. This application uses no flatness.",
+   "text": "Use the existing signed-bidual localization family and its section-formula uniqueness to prove the existing ordinary-bidual existence/uniqueness statement, pruning its duplicate specialized differential proof while retaining the general private bidual component interface used by downstream modules. For normalization, apply signed bidual localization with the completed tensor coherence. The same uniqueness identifies the ordinary chain maps, and the fixed augmentation maps and their inverses agree with the item definitions. This proves the signed normalization without a flatness assumption.",
    "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
     "lem-sfb-ringed-signed-bidual-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A97; signed bidual localization"
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-weil-pbc-ringed-slice-evaluation-transpose] on arbitrary derived objects. Its canonical restriction comparisons preserve counits, transposition and Koszul symmetry. Its $\\rho$ is the summandwise pure-tensor isomorphism of [lem-sfb-localized-site-tensor-restriction] on K-flat flat-term models, and the associator and right unitor of [lem-sf-ringed-derived-closed-symmetric-monoidal] are induced there by the module-sheaf associativity and scalar-multiplication maps; these commute with restriction sectionwise and $r\\mathcal O[0]=\\mathcal O_U[0]$, so $\\rho$ intertwines $\\alpha$ and the unitor. Restrict the two transposed formulas in step 2: the first becomes $B|_U$ tensor coefficient evaluation followed by its unitor, and the second becomes exchanged coefficient evaluation on the slice. Their transposes are exactly $e$ and $b$ there. This proves restriction compatibility without either optional ordinary-representative hypothesis.",
+   "text": "Take the normalized slice evaluation and transpose comparisons. Their generator-level symmetries equal the actual braidings by full tensor coherence, first on K-flat representatives and then by naturality. The proved slice associator and scalar-unit lemmas complete the tensor constraints needed by the dual-evaluation transpose.",
    "uses": [
     "lem-weil-pbc-ringed-slice-evaluation-transpose",
-    "lem-sfb-localized-site-tensor-restriction",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+    "lem-sfb-ringed-slice-tensor-constraints",
+    "lem-sfb-ringed-slice-scalar-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JB; canonical tensor-Hom evaluation and symmetry under localization"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Assemble the tensor and internal-Hom comparison isomorphisms from their natural components. The preserved evaluation square and transposition give the bidual comparison; internal-Hom naturality cancels the coefficient identification and its inverse. For dual evaluation use preserved reassociation, scalar action and evaluation, then injectivity of transposition. This proves both actual map equations on every derived object.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-sfb-ringed-slice-tensor-constraints",
+    "lem-sfb-ringed-slice-scalar-unit"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-tensor-hom-model",
-  "lem-sc-hom-complex-unit-iso",
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-localized-site-tensor-restriction",
-  "lem-sfb-ringed-hom-composition-model",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "lem-sfb-ringed-tensor-constraint-completion",
   "lem-sfb-ringed-ordinary-evaluation-localization",
   "lem-sfb-ringed-signed-bidual-localization",
-  "lem-weil-pbc-ringed-slice-evaluation-transpose"
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sfb-ringed-slice-tensor-constraints",
+  "lem-sfb-ringed-slice-scalar-unit",
+  "lem-sfb-ringed-site-ordinary-hom-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0A91, 0A97, 0A98, 08JD, 08JB; short assembly after the human-requested re-split, with all former normalization arguments allocated to independent statement-only nodes."
+  "place": "Tags 08JD, 0A97, 0A98 and 08JB. Actual transposes, normalization by localization, and slice compatibility assembled from evaluation and normalized tensor constraints."
  },
  "mathlib_searches": [
   {
@@ -238,11 +231,6 @@
    "CategoryTheory.ringedSiteDualityUnit",
    "CategoryTheory.RingedSiteDualityModel",
    "CategoryTheory.ringedSiteDualityMaps_exists",
-   "CategoryTheory.ringedSiteHomAugmentation",
-   "CategoryTheory.ringedSiteHomComplexMap",
-   "CategoryTheory.ringedSiteOrdinaryHomComparison",
-   "CategoryTheory.ringedSiteOrdinaryHomComparison_isIso",
-   "CategoryTheory.ringedSiteOrdinaryHomIso",
    "CategoryTheory.RingedSiteBidualFormula",
    "CategoryTheory.ringedSiteOrdinaryBidual_existsUnique",
    "CategoryTheory.ringedSiteOrdinaryBidual",
@@ -267,14 +255,25 @@
   "note": "Item ringedSitePerfectDuality matches node/Stacks 08JJ clause by clause: small ringed site with independent universes c,v,r,w; recorded IsPerfectOnRingedSiteOfUniverses hypothesis (extra slice-sheafify instances are exactly those the predicate requires); conclusions are perfectness of derivedInternalHomOfUniverses(op P, O[0]), IsIso of the transposed signed bidual, and IsIso of the evaluation NatTrans in the dual⊗N order. The ∃ M : RingedSiteDualityModel is a presentation pinned by CoefficientTensorModels.uncurry_model plus symmetry/unit/associator normalizations on K-flats, so it is equivalent to ∀ M, not an arbitrary choice. Dependency module RingedSiteDualityMaps (lem-sfb-ringed-site-duality-maps, genuine prerequisite supplied in the same delivery): real transposes, correct signs ((i*q).negOnePow, unsigned φ(x)•y), unique-characterization choices, normalization hypotheses exactly as in the node, restriction via overFunctor (= recorded localizedModuleRestriction) with true coefficient equality; the existential evaluation-compatible restriction comparisons are acceptable because no general recorded comparison exists. merge_delivery stage 2 keeps the upstream Q41 proof of the dependency node. Statements verbatim, 31 declarations present, all sorrys named theorems with source/blueprint/proof docstrings, no pro-etale substitute, report has Worker report and Second reading by Q32. nt_compile --json of both files: rc 0, no warnings besides sorry (DualityMaps 57.2 s of the 60 s limit, PerfectDuality 3.9 s)."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Z6",
+  "reviewer": "C-bebe7",
+  "group": "U7",
   "result": "pass",
-  "landing": "20261020T235638-L-1200038",
+  "landing": "20261022T114252-L-597874",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Delivered item, 5 adapted modules, 5 new modules, 7 node files and 2 change records matched against the base in clones/live (verbatim move, identical #check signatures, import-only adaptations of unclaimed modules, unchanged statements), #print axioms in a sandbox, and the reader gate: 57 of 63 direct importers compiled against the sandbox, 3 after recompiling a stale importer, 3 not compilable against the lagging published build either"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

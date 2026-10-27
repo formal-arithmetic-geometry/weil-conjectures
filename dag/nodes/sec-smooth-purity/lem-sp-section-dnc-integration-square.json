@@ -1,0 +1,208 @@
+{
+ "id": "lem-sp-section-dnc-integration-square",
+ "kind": "statement",
+ "title": "Base change of the integrated deformation comparison for a closed section",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. All schemes in this statement are separated and of finite type over $k$, and all morphisms are $k$-morphisms [def-weil-scheme-morphism-properties]. Use the ordinary uncompleted constant-coefficient pro-etale module derived categories and their bounded constructible finite-Tor subcategories [def-weil-pbc-proetale-modules, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Pullbacks and tensor products are the ordinary derived operations [def-weil-derived-pullback-tensor-hom, def-weil-derived-tensor].\nPut $R=\\mathbf Z/\\ell^r$, $r\\ge1$. Let $g:V\\to B$ be smooth separated of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms], with a closed section $s:B\\hookrightarrow V$, $gs=1$. Let $b:B'\\to B$ be arbitrary, let $V'=V\\times_BB'$, and write $g',s'$ for the pulled-back pair. Use $\\omega_g=g_R^!R_B$ and $C_R(g,s)=s^*\\omega_g$ [def-pur-section-invariant]. The comparison $c_s:b^*C_R(g,s)\\xrightarrow{\\sim}C_R(g',s')$ is pullback along $s'$ of the counit-defined exceptional exchange for $g$ [def-pur-co-smoothness].\n\nLet $D_sV\\to\\mathbf A^1_B$ be the deformation family of [def-pur-dnc-section-family], let $\\pi_N:N_s\\to B$ be its rank-$d$ normal bundle with zero section $z$ [def-pur-normal-bundle], and use the primed versions over $B'$. The deformation families, their sections, punctured trivializations and fibers at $0,1$ are canonically identified by arbitrary base change; in particular $N_{s'}=N_s\\times_BB'$. Let\n$$\\delta_{g,s}:C_R(g,s)\\xrightarrow{\\sim}z^*\\omega_{\\pi_N}$$\nbe the coordinate-normalized DNC comparison [thm-pur-dnc-invariance], and let $b_N:\\omega_{\\pi_N}\\xrightarrow{\\sim}R_{N_s}(d)[2d]$ be the integration-normalized vector-bundle orientation [cor-pur-vector-bundle-purity], with twists [def-coefficient-twists-detailed]. Define\n$$\\psi_{g,s}=z^*b_N\\circ\\delta_{g,s}:C_R(g,s)\\xrightarrow{\\sim}R_B(d)[2d].$$\nThen, under the canonical Tate pullback identification,\n$$\\psi_{g',s'}\\circ c_s=b^*\\psi_{g,s}.$$\nThe comparison uses the actual normal bundle and the same normalized integration adjunction on it. It is valid for non-flat $b$, the rank-zero bundle and empty schemes. For the diagonal pair $g=p_1:X\\times_YX\\to X$, $s=\\Delta$ of a smooth separated map $f:X\\to Y$ of relative dimension $d$, let $b_f:p_2^*\\omega_f\\xrightarrow{\\sim}\\omega_{p_1}$ be the counit-defined exceptional exchange of the Cartesian square $fp_1=fp_2$ and put $\\kappa_f=\\Delta^*b_f^{-1}:C_R(p_1,\\Delta)\\xrightarrow{\\sim}\\omega_f$, using $p_2\\Delta=1$ [lem-pur-diagonal-base-change]. Then the composite $\\psi_{p_1,\\Delta}\\kappa_f^{-1}$ is the diagonal orientation $\\omega_f\\to R_X(d)[2d]$ of [thm-pur-diagonal-dualizing-object], with the standard-coordinate normalization of [det-sp-orientation-charts].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1), normal bundle, DNC and vector-bundle integration; old split step 2; agent-extracted self-contained interface, not a theorem quoted verbatim from the blueprint. Retained expanded argument: report.md, Appendix: inherited argument, old step(s) 2."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-tensor",
+  "def-sbc-smooth-morphisms",
+  "def-pur-section-invariant",
+  "def-pur-co-smoothness",
+  "def-pur-dnc-section-family",
+  "def-pur-normal-bundle",
+  "thm-pur-dnc-invariance",
+  "cor-pur-vector-bundle-purity",
+  "def-coefficient-twists-detailed",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-orientation-charts",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-diagonal-base-change",
+  "def-pur-conventions",
+  "def-pur-finite-smooth-canonical-interfaces",
+  "def-pur-diagonal-dnc-chart-data",
+  "def-pur-finite-ring-section-data",
+  "def-pur-section-restriction-data",
+  "def-pur-section-tate-pullback",
+  "def-pur-bundle-integration-orientation",
+  "def-pur-normal-section-integration-data"
+ ],
+ "proof": [
+  {
+   "text": "The normalized-base component of SectionRestriction.coherence, specialized to the given Cartesian pair and b, says baseComparison(sq) followed by delta_prime equals pullback(delta) followed by baseComparison(normalBaseChange(sq)).",
+   "uses": [
+    "lem-pur-section-etale-restriction-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), DNC naturality"
+   }
+  },
+  {
+   "text": "Apply normalIntegration_baseChange to the same square to obtain compatibility of the second (normal-bundle integration) factor.",
+   "uses": [
+    "lem-pur-normal-section-integration-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), vector-bundle integration"
+   }
+  },
+  {
+   "text": "Unfold psi as delta followed by normalIntegration. Reassociate, substitute the two equations, and use Functor.mapIso_trans to obtain the claimed equality. This does not change the arbitrary-base-change, rank-zero or empty-scheme cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), composition of the two naturality squares"
+   }
+  },
+  {
+   "text": "For the diagonal pair choose the existing normalized purityTwistTransport. The normalIntegration_eq_sectionOrientation formula identifies its normal factor with chartDiagonalBeta. Global diagonal DNC assembly identifies the desired orientation with alpha inverse followed by chartDiagonalDelta and chartDiagonalBeta. Apply ExistsUnique.unique to the normalization proofs of the two chosen DNC maps to equate delta and chartDiagonalDelta. The result is associativity of Iso.trans.",
+   "uses": [
+    "lem-pur-normal-section-integration-orientation",
+    "lem-pur-diagonal-dnc-assembly-global"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (1), final diagonal identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-section-etale-restriction-coherence",
+  "lem-pur-normal-section-integration-base-change",
+  "lem-pur-normal-section-integration-orientation",
+  "lem-pur-diagonal-dnc-assembly-global"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (1); N3 formal composition of DNC naturality and normal integration, followed by the existing global diagonal assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(deformation|normalBundle).*(purity|integration)|(purity|integration).*(deformation|normalBundle)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned manifold, ordinary sheaf naturality or condensed-module statements do not state the etale/pro-etale purity comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth closed section dualizing complex deformation to the normal bundle integration orientation commutes with pullback",
+   "results": "8 hits: VectorField.mpullback_smul_apply, ContMDiffWithinAt.mpullbackWithin_vectorField, VectorField.mpullback_add, VectorField.mpullback_neg_apply, ContMDiffVectorBundle.pullback, ContMDiffOn.mpullback_vectorField_preimage, MDifferentiable.mpullback_vectorField, ContMDiffSection.mdifferentiable",
+   "date": "2026-10-22",
+   "verdict": "no match: returned manifold, ordinary sheaf naturality or condensed-module statements do not state the etale/pro-etale purity comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"deformation\", \"baseChange\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned manifold, ordinary sheaf naturality or condensed-module statements do not state the etale/pro-etale purity comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under arbitrary base change of a smooth closed-section deformation comparison followed by integration-normalized vector bundle purity",
+   "results": "8 hits: inCoordinates_apply_eq₂, smoothSheaf.ι_evalHom_assoc, VectorBundleCore.inCoordinates_eq, smoothSheaf.ι_evalHom, smoothSheafCommRing.ι_evalHom_assoc, smoothSheaf.ι_evalHom_apply, smoothSheafCommGroup.compLeft, hom_chart",
+   "date": "2026-10-22",
+   "verdict": "no match: returned manifold, ordinary sheaf naturality or condensed-module statements do not state the etale/pro-etale purity comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology purity: naturality of the composite from the section dualizing invariant to a shifted Tate line through deformation to the normal cone and vector bundle integration",
+   "results": "8 hits: LightCondMod.hom_naturality_apply, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm, CategoryTheory.Sheaf.ΓHomEquiv_naturality_left, groupCohomology.infNatTrans, CondensedMod.hom_naturality_apply, AlgebraicGeometry.Scheme.Γevaluation_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: returned manifold, ordinary sheaf naturality or condensed-module statements do not state the etale/pro-etale purity comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-purity-bc-factors",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (1), normal bundle, DNC and vector-bundle integration; old split step 2",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-section-dnc-integration-square",
+  "worker": "stage1",
+  "summary": "Assembled the closed-section square from existing arbitrary-base-change DNC and integration-normalized vector-bundle compatibility statements. Made the etale/pro-etale integration and counit-mate identification explicit, expanded the inverse-orientation equation, and identified the diagonal composite through the statement of the chart-normalization node. No new nodes or changed hypotheses.",
+  "blueprint": "det-sp-purity-bc-factors, Proof (1): normal bundle and DNC base change, vector-bundle integration, and standard-coordinate orientation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic mate-pasting and conjugation calculus identifies the exceptional mate after the existing site comparison; it does not replace the geometric DNC/integration route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-bed0b5c9e",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-bed0b5c9e (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit touching only the item and its report, with no new nodes. The statement, source and stmt_deps are identical to the Q115 FIX version, so nothing was weakened. Source checked: main-20261015 sk-prop-sp-purity-bc-factors.proof.md (1) and unit step 2. Step 1: lem-pur-dnc-section-geometry (1),(5) gives the actual normal-bundle zero fibre and base change. Step 2: thm-pur-dnc-invariance holds for every k-morphism from a separated finite-type B', with no flatness; def-pur-finite-section-comparison is one of its own stmt_deps, and c_s is the co-smoothness(3) beta. Step 3: cor-pur-vector-bundle-purity is stated in the ordinary-etale realization. The step transports it to the pro-etale site through lem-pur-vector-integration-site-comparison (eta^p=C_V(eta^e), inverse = the cor's map), thm-cbc-finite-level-proetale (B qcqs, etale-origin objects) and the mate-pasting tool (1),(3), using Rf^! = nu^* f^x Rnu_*. I accept the tool use. Step 4: I re-derived the algebra; e·b^*gamma = gamma'·a implies b'·e = a·b^*b_N, and pulling back along z' gives (z'^*b')c_N = b^*(z^*b_N). Step 5: the composition is correct, and d=0, empty schemes, identity b and non-flat b are all covered. Step 6: lem-pur-diagonal-base-change gives kappa_f, and the statement of det-sp-orientation-charts defines theta_f on separated targets as beta·delta·alpha^{-1}, which equals psi·kappa^{-1}; this agrees with the blueprint_update proof of thm-pur-diagonal-dualizing-object. Route: det-sp-orientation-charts (unit sk-prop-sp-orientation) is not in the unit's uses, but the blueprint proof (1) cites it and it is already a stmt_dep; I accept it, and as a maintainer note the unit record omits that use. There are no new nodes to duplicate anything; thm-pur-smooth-base-change-coherence, det-sp-orientation-vector-bundle and lem-pur-diagonal-orientation-refinement state different facts. No SGA is used and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionDncIntegrationSquare",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionIntegration.section_dnc_integration_baseChange",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.SectionIntegration.psi",
+   "WeilConjectures.PurityFiniteSetting.SectionIntegration.section_dnc_integration_baseChange",
+   "WeilConjectures.PurityFiniteSetting.SectionIntegration.diagonalPair",
+   "WeilConjectures.PurityFiniteSetting.SectionIntegration.section_dnc_integration_diagonal"
+  ],
+  "file": "lean/Sheaf/Paper/SectionDncIntegrationSquare.lean",
+  "statement": "theorem section_dnc_integration_baseChange (P : PurityFiniteSetting.{u}) (_hE : P.extension = ⊥) (N : Etale.EtaleCompactSupportNormalization P.Coefficient) {B' B : Scheme.{u}} {d : ℕ} (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB] [LocallyOfFiniteType aB] [QuasiCompact aB] (aB' : B' ⟶ Spec (.of P.field.k)) [IsSeparated aB'] [LocallyOfFiniteType aB'] [QuasiCompact aB'] (b : B' ⟶ B) (_hb : b ≫ aB = aB') (X : Pair B d) (X' : Pair B' d) (sq : BaseChange b X' X) : baseComparison P aB aB' sq ≪≫ psi P N aB' X' = (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) b).leftDerivedFunctor.mapIso (psi P N aB X) ≪≫ OrientationRefinement.tate P b aB d",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Two theorem clauses: arbitrary-base-change square and diagonal identification. Helpers construct the actual normal-bundle integration arrow and composite using the uniquely homogeneous Rees comparison and inverse integration adjunct. Fixed finite coefficients are specialized to the bottom coefficient extension, giving Z/ell^r at every positive level. No independent orientation or exceptional exchange is assumed. Repair of H2 return on 299f163ea8cd: plain helper data are now cited through their existing definition owners and three existing:true ownership records. Lean source and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25042b912",
+  "group": "NK",
+  "result": "pass",
+  "note": "H7 re-delivery of db73: item proof_deps restored to the exact base 11-entry list and the stale lean.note clause dropped. Diff vs db73 touches only the item JSON (proof_deps, note) and the report; the Lean module and the three existing:true def records (section-restriction-data, section-tate-pullback, bundle-integration-orientation) are byte-identical and were accepted at 299f/db73. Read-only node_fields.correction_fields and check_statement_change vs live main both return []. Statement, proof and proof_deps equal base; stmt_deps only add the accepted def owners. None of the new ids and no other def owner for tate/bundleOrientation/Pair/baseComparison has landed on live; no declaration overlap with def-pur-finite-ring-section-data. Report has Worker report and Second reading by NK. No compile: nothing changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50e31",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261025T202646-L-2739006",
+  "kind": "interface",
+  "note": "independent cc review: SectionDncIntegrationSquare 50e314b5: moved normalIntegration diffed line by line against the item diff and the change record (verbatim); both item proofs read against coherence/diagonalDncAssemblyGlobal/existsUnique_dncInvariance; 2 new sorry nodes checked against normalModelSectionOrientation and ordinaryFiniteTwistTransport_unique; DAG reachability checked (no cycles); 0 importers of the item in live"
+ }
+}

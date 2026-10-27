@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-principal-regular-local-completion-dvr",
+ "kind": "statement",
+ "title": "Completion at a principal regular maximal ideal is a DVR",
+ "statement": "Let $S$ be a nonzero commutative local ring, meaning a ring with exactly one maximal ideal $\\mathfrak m$. Suppose $\\mathfrak m=tS$ for an element $t\\in S$ such that multiplication by $t$ on $S$ is injective. Write $D=\\varprojlim_{n\\geq1}S/t^nS$ for its completion [def-weil-pbc-adically-complete-ring], and $\\widehat t$ for the image of $t$ in $D$. Then $D$ is a discrete valuation ring [def-sc-discrete-valuation-ring], complete for its maximal ideal, and that maximal ideal is $\\widehat tD$, with $\\widehat t\\neq0$. Projection to the first component induces an isomorphism $D/\\widehat tD\\simeq S/tS$ compatible with the canonical map $S\\to D$. No Noetherianity, domain, or separatedness assumption on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0328 (lemma-cohen-rings-exist), proof of the completion step, generalized from the regular element p to an arbitrary regular generator t of the maximal ideal. The generalization is written by Q20; locality and the quotient of the completion are the same ones used there."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-sc-discrete-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=tS$. Since $\\mathfrak m=tS$, $I$ is finitely generated and $S/I$ is a field. The completion in the statement is the $I$-adic completion because $I^n=t^nS$. Apply [lem-weil-pbc-adic-completion-mod-ideal]: the first-coordinate projection $\\pi:D\\to S/tS$ is surjective, has kernel $ID=\\widehat tD$, and induces $D/\\widehat tD\\simeq S/tS$ compatibly with $S\\to D$; the same result says that $D$ is $ID$-adically complete.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GG, parts (1)--(2), applied to I=(t); Tag 0328, completion step"
+   }
+  },
+  {
+   "text": "The ideal $\\widehat tD=ID$ is maximal because its quotient is the field $S/tS$. The Jacobson-radical completion lemma [lem-weil-pbc-adic-complete-jacobson-radical] puts $ID$ inside every maximal ideal of $D$. Hence every maximal ideal equals $ID$, so $D$ is local with maximal ideal $\\widehat tD$. The $ID$-adic completeness from Step 1 is therefore completeness for its maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-complete-jacobson-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05GI, parts (1)--(4), and Tag 05GG, part (1)"
+   }
+  },
+  {
+   "text": "The element $t$ is nonzero: if $t=0$, injectivity of multiplication by $t$ gives $1=0$, contrary to $S\\ne0$. It is not a unit because $tS=\\mathfrak m$ is a proper maximal ideal. Also $t\\notin t^2S$: otherwise $t=t^2s$ and cancellation of the regular element $t$ gives $1=ts$, making $t$ a unit. Thus the second component of $\\widehat t$ is the nonzero class of $t$ in $S/t^2S$, so $\\widehat t\\ne0$.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0328, completion step; cancellation by the regular generator"
+   }
+  },
+  {
+   "text": "Multiplication by $\\widehat t$ on $D$ is injective. If $\\widehat t x=0$, choose a representative $a_{n+1}\\in S$ of the $(n+1)$st component of $x$. The $(n+1)$st component of the equality says $ta_{n+1}\\in t^{n+1}S$. Injectivity of multiplication by $t$ on $S$ then gives $a_{n+1}\\in t^nS$, so the $n$th component of $x$ is zero. This holds for every $n$, and equality in the inverse limit is componentwise.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0328, completion step; direct cancellation in the inverse-limit components"
+   }
+  },
+  {
+   "text": "The filtration by powers of $\\widehat tD$ is separated: the $ID$-adic completeness from Step 1 includes the assertion that an element lying in every $(\\widehat tD)^n$ is zero. Therefore a nonzero $x\\in D$ misses some power. Choose the least $r\\ge0$ with $x\\in(\\widehat tD)^r$ but $x\\notin(\\widehat tD)^{r+1}$, and write $x=\\widehat t^{\\,r}y$. Then $y\\notin\\widehat tD$, so its nonzero image in the field $D/\\widehat tD$ makes $y$ a unit (Step 2). Thus every nonzero element is a power of $\\widehat t$ times a unit.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-complete-jacobson-radical"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, unit-times-uniformizer-power argument, with separatedness from Tag 05GG"
+   }
+  },
+  {
+   "text": "If $xy=0$ and $x,y\\ne0$, factor them as $x=\\widehat t^{\\,r}u$ and $y=\\widehat t^{\\,s}v$ by Step 5. The injectivity in Step 4 makes every power of $\\widehat t$ injective, and cancellation of the units $u,v$ then contradicts $x,y\\ne0$. Hence $D$ has no zero divisors; it is nontrivial because $S/tS$ is a nonzero field. Thus $D$ is a domain. The nonzero element $\\widehat t$ lies in its maximal ideal, so $D$ is not a field.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, implications of the unit-times-uniformizer-power factorization"
+   }
+  },
+  {
+   "text": "Let $J\\subseteq D$ be an ideal. If $J=0$ it is principal. Otherwise choose a nonzero element of $J$ with least exponent $r$ in Step 5. Every nonzero $z\\in J$ has exponent $s\\ge r$, hence $z=\\widehat t^{\\,r}(\\widehat t^{\\,s-r}w)$ for a unit $w$; the chosen element generates $\\widehat t^{\\,r}D$, so $J=\\widehat t^{\\,r}D$. Therefore every ideal is principal. Together with the domain and local properties, the nonzero maximal ideal $\\widehat tD$ and the definition [def-sc-discrete-valuation-ring] show that $D$ is a discrete valuation ring. Step 1 already gives the asserted completeness and quotient compatibility.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, principal-ideal characterization of a DVR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-adic-completion-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0328, 05GG, 05GI and 00PD; direct inverse-limit cancellation supplies the arbitrary regular-generator generalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adic completion of a local ring whose maximal ideal is generated by a nonzerodivisor is a complete discrete valuation ring with the same residue field",
+   "results": "{\"t\": \"2026-10-24T02:55:01Z\", \"tool\": \"leanfinder\", \"query\": \"The adic completion of a local ring whose maximal ideal is generated by a nonzerodivisor is a complete discrete valuation ring with the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\"], \"digest\": \"b998afcd1ac175e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion locality and maximal-ideal formulas in AdicCompletion/LocalRing.lean:78-95 give only part; DVR completion-integers instances start with a Dedekind domain. They do not prove regularity survives completion of the possibly non-Noetherian S or that this completion is a domain."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T02:55:00Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion locality and maximal-ideal formulas in AdicCompletion/LocalRing.lean:78-95 give only part; DVR completion-integers instances start with a Dedekind domain. They do not prove regularity survives completion of the possibly non-Noetherian S or that this completion is a domain."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalRing_of_fg|ofHasUnitMulPow|isSMulRegular",
+   "results": "{\"t\": \"2026-10-24T02:54:59Z\", \"tool\": \"grep\", \"query\": \"isLocalRing_of_fg|ofHasUnitMulPow|isSMulRegular\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"83503b0c7c6064c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion locality and maximal-ideal formulas in AdicCompletion/LocalRing.lean:78-95 give only part; DVR completion-integers instances start with a Dedekind domain. They do not prove regularity survives completion of the possibly non-Noetherian S or that this completion is a domain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a local ring with principal maximal ideal generated by a nonzero divisor is a DVR",
+   "results": "{\"t\": \"2026-10-24T02:55:00Z\", \"tool\": \"leansearch\", \"query\": \"Completion of a local ring with principal maximal ideal generated by a nonzero divisor is a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.mk\", \"IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime\", \"exists_maximalIdeal_pow_eq_of_principal\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\", \"IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal\"], \"digest\": \"5ee76f7b4033b118\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion locality and maximal-ideal formulas in AdicCompletion/LocalRing.lean:78-95 give only part; DVR completion-integers instances start with a Dedekind domain. They do not prove regularity survives completion of the possibly non-Noetherian S or that this completion is a domain."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated complete local ring with principal maximal ideal generated by a regular element is a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T02:55:02Z\", \"tool\": \"leanfinder\", \"query\": \"A separated complete local ring with principal maximal ideal generated by a regular element is a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.instIsHausdorffMaximalIdeal\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDedekindDomainDvr\", \"of_isDiscreteValuationRing\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\"], \"digest\": \"19ae71479f508ff4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion locality and maximal-ideal formulas in AdicCompletion/LocalRing.lean:78-95 give only part; DVR completion-integers instances start with a Dedekind domain. They do not prove regularity survives completion of the possibly non-Noetherian S or that this completion is a domain."
+  },
+  {
+   "tool": "grep",
+   "query": "maximalIdeal_eq_map|maximalIdeal.*AdicCompletion|isAdicComplete_of_fg",
+   "results": "{\"t\": \"2026-10-24T03:31:01Z\", \"tool\": \"grep\", \"query\": \"maximalIdeal_eq_map|maximalIdeal.*AdicCompletion|isAdicComplete_of_fg\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"15471f7b984b16b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalRing_of_fg|ofHasUnitMulPow|isSMulRegular",
+   "results": "{\"t\": \"2026-10-24T03:31:01Z\", \"tool\": \"grep\", \"query\": \"isLocalRing_of_fg|ofHasUnitMulPow|isSMulRegular\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"83503b0c7c6064c6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a local ring with principal maximal ideal generated by a nonzero divisor is a DVR",
+   "results": "{\"t\": \"2026-10-24T03:31:02Z\", \"tool\": \"leansearch\", \"query\": \"Completion of a local ring with principal maximal ideal generated by a nonzero divisor is a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.mk\", \"IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime\", \"exists_maximalIdeal_pow_eq_of_principal\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDiscreteValuationRing.toIsPrincipalIdealRing\", \"IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal\"], \"digest\": \"5ee76f7b4033b118\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adic completion of a principal ideal local ring has field residue quotient and is complete",
+   "results": "{\"t\": \"2026-10-24T03:31:02Z\", \"tool\": \"leansearch\", \"query\": \"Adic completion of a principal ideal local ring has field residue quotient and is complete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.module\", \"AdicCompletion.instCommRing\", \"IsAdicComplete\", \"AdicCompletion.liftRingHom.congr_simp\", \"IsAdicComplete.henselianRing\", \"PadicInt.instIsAdicCompleteMaximalIdeal\", \"AdicCompletion.of_ofAlgEquiv_symm\"], \"digest\": \"39c1761c52702d8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T03:31:02Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, IsLocalRing, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T03:31:02Z\", \"tool\": \"loogle\", \"query\": \"IsAdicComplete, IsLocalRing, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adic completion of a local ring whose maximal ideal is generated by a nonzerodivisor is a complete discrete valuation ring with the same residue field",
+   "results": "{\"t\": \"2026-10-24T03:31:03Z\", \"tool\": \"leanfinder\", \"query\": \"The adic completion of a local ring whose maximal ideal is generated by a nonzerodivisor is a complete discrete valuation ring with the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instInhabitedSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"isLocalRing_of_isAdicComplete_maximal\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\"], \"digest\": \"b998afcd1ac175e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete local ring with principal maximal ideal generated by a regular element is a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T03:31:04Z\", \"tool\": \"leanfinder\", \"query\": \"A complete local ring with principal maximal ideal generated by a regular element is a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing\", \"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsDedekindDomainDvr\", \"IsDiscreteValuationRing.instIsHausdorffMaximalIdeal\", \"of_isDiscreteValuationRing\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"ValuationRing.instOfIsLocalRingOfIsBezout\"], \"digest\": \"97a29a7dab4f6b8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Dedekind-domain completion-integers instances require a Dedekind domain; IsDiscreteValuationRing.TFAE and exists_maximalIdeal_pow_eq_of_principal assume a Noetherian local domain; completion locality and maximal-ideal formulas at Mathlib/RingTheory/AdicCompletion/LocalRing.lean:78-95 and completeness at line 126 prove only part. None states the regular-generator criterion for possibly non-Noetherian S. Read LocalRing.lean:48-151 and CohenCompletionDVR.lean:51-178 (project theorem is p-adic only)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-model-potential-smooth-normalization",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Section 3.3, Proposition 3.4 and Corollary A.4, with Theorem A.6; local-extension reductions at the beginning of Section 5 and following Lemma A.9, printed pp.5-6,9,27-30; supporting input: Completion at a principal regular maximal ideal is a DVR.",
+   "via": [
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-principal-regular-local-completion-dvr",
+  "worker": "stage1",
+  "summary": "Split the completion criterion into seven explicit steps: identify the completion quotient and completeness, prove locality using the Jacobson-radical property, show the completed generator is nonzero and regular by componentwise cancellation, obtain unit-times-power factorization from separatedness, then prove the domain and principal-ideal properties defining a DVR. No new nodes were needed; the statement and hypotheses are unchanged.",
+  "blueprint": "The imported item has no mapped blueprint ancestor (blueprint_refs.py ancestor returns None). The proof realizes the source completion input used in the parent normalization route: the Tag 0328 completion step, with Tags 05GG, 05GI and 00PD supplying the quotient, locality and DVR arguments.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Its statement supplies the first-coordinate quotient, kernel equal to the extended principal ideal, and adic completeness used throughout the completion argument."
+   },
+   {
+    "node": "lem-weil-pbc-adic-complete-jacobson-radical",
+    "why": "Its statement supplies containment of the completed ideal in the Jacobson radical, needed to deduce that the field quotient gives the unique maximal ideal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-complete-jacobson-radical"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-d7f444317",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-d7f444317 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it: the item is split into 7 steps, the statement is unchanged, and there are no new nodes. All four cited nodes have mathlib status and their statements say what the steps take from them: def-weil-pbc-adically-complete-ring (completeness includes the intersection of the powers of I being 0), def-sc-discrete-valuation-ring, lem-weil-pbc-adic-completion-mod-ideal (with I finitely generated: the completion is IA^-adically complete, and the first-coordinate map is surjective with kernel IA^, compatible with A to A^) and lem-weil-pbc-adic-complete-jacobson-radical. The completion of the mod-ideal node is def-weil-pbc-adic-completion, the same inverse limit as the item's D. Step 1: I=tS is finitely generated and I^n=t^nS. Step 2: the quotient by ID is a field and ID lies in every maximal ideal, so D is local. Step 3: t is not 0 and not a unit, and t is not in t^2S, so t-hat is nonzero. Step 4: t a_{n+1} in t^{n+1}S gives a_{n+1} in t^nS by cancelling t, so t-hat is regular. Step 5: separatedness gives every nonzero element as a unit times a power of t-hat. Step 6: domain. Step 7: every ideal equals t-hat^r D. Each elementary step checks in a few lines and needs no Noetherian or domain hypothesis on S. Source: Stacks 0328 (algebra-lemma-cohen-rings-exist) read in algebra.tex; it is the p-adic Noetherian case, so proof_origin by agent is correct; tags 05GG, 05GI and 00PD checked in tags/tags; no SGA. Small cases: k[t]_(t) and a DVR with generator u·pi are consistent; a field is excluded; k[t]/(t^2) is excluded and shows regularity is needed; the report's example A semidirect K is consistent because the proof never uses S to D injective. Duplicate search over the DAG found no equivalent: lem-weil-pbc-dvr-completion-regular and lem-weil-pbc-completion-of-dvr-is-dvr start from a DVR, and lem-weil-pbc-cohen-completion-dvr is the p-adic case. The worker's two declared tool_uses (mod-ideal, jacobson-radical) are generic mathlib-status facts and are accepted. blueprint.from.node null is inherited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalRegularLocalCompletionDVR",
+  "declaration": "AdicCompletion.principalRegularLocalCompletion_dvr",
+  "file": "lean/Sheaf/RingTheory/PrincipalRegularLocalCompletionDVR.lean",
+  "statement": "theorem principalRegularLocalCompletion_dvr (S : Type u) [CommRing S] [IsLocalRing S] (t : S) (hMax : IsLocalRing.maximalIdeal S = Ideal.span {t}) (hRegular : Function.Injective (fun x : S => t * x)) : ∃ (_ : IsDomain (AdicCompletion (Ideal.span {t}) S)) (_ : IsDiscreteValuationRing (AdicCompletion (Ideal.span {t}) S)), IsAdicComplete (IsLocalRing.maximalIdeal (AdicCompletion (Ideal.span {t}) S)) (AdicCompletion (Ideal.span {t}) S) ∧ IsLocalRing.maximalIdeal (AdicCompletion (Ideal.span {t}) S) = Ideal.span {algebraMap S (AdicCompletion (Ideal.span {t}) S) t} ∧ algebraMap S (AdicCompletion (Ideal.span {t}) S) t ≠ 0 ∧ ∃ e : (AdicCompletion (Ideal.span {t}) S ⧸ Ideal.span {algebraMap S (AdicCompletion (Ideal.span {t}) S) t}) ≃+* (S ⧸ Ideal.span {t}), (∀ x : AdicCompletion (Ideal.span {t}) S, e (Ideal.Quotient.mk (Ideal.span {algebraMap S (AdicCompletion (Ideal.span {t}) S) t}) x) = AdicCompletion.evalOneₐ (Ideal.span {t}) x) ∧ (∀ s : S, e (Ideal.Quotient.mk (Ideal.span {algebraMap S (AdicCompletion (Ideal.span {t}) S) t}) (algebraMap S (AdicCompletion (Ideal.span {t}) S) s)) = Ideal.Quotient.mk (Ideal.span {t}) s)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-775987a13",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Clause-by-clause match: [CommRing S][IsLocalRing S] (Nontrivial included), maximalIdeal S = span{t}, injective t*·; conclusions: IsDomain + IsDiscreteValuationRing of AdicCompletion (span{t}) S, IsAdicComplete for its maximalIdeal, maximalIdeal = span{algebraMap t}, algebraMap t ≠ 0, e : D/(t̂) ≃+* S/(t) pinned by e∘mk = evalOneₐ (Algebra.lean:177, first-component projection) plus the S-compatibility clause. No extra hypotheses; universe u bound. Source Tag 0328 (algebra.tex 44878-44904) read. No Mathlib/project duplicate (CohenCompletionDVR is p-adic; CompletionOfDVR assumes a DVR); live item lean still null. Only the node's lean field changed; statement verbatim; docstrings carry the source place, blueprint id and 7 steps; proof is sorry only; LocalRing import is a proof-dependency import. No fixes, no compile run."
+ }
+}

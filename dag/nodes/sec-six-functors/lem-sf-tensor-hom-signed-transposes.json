@@ -1,0 +1,401 @@
+{
+ "id": "lem-sf-tensor-hom-signed-transposes",
+ "kind": "statement",
+ "title": "Signed shifts of the normalized five-arrow Hom transpositions",
+ "statement": "Fix the finite-field, scheme and operation conventions of [def-fix-six-functor-datum], a separated finite-type morphism $f:X\\to Y$ exceptionally admissible in the sense of [def-weil-exceptional-adjoint-admissibility], and finite or integral coefficients $\\Lambda$. Use the canonical cochain shifts [def-weil-triangulated-category], with $d_{K[r]}=(-1)^rd_K$ and the signed total-tensor convention. Let $M\\in D^b_{ctf}(X,\\Lambda)$ and $N,L\\in D^b_{ctf}(Y,\\Lambda)$, put $H=R\\mathcal Hom$, $A_{M,N}=Rf_*H_X(M,f^!N)$ and $B_{M,N}=H_Y(Rf_!M,N)$, and suppose all the following adjunction/projection bijections are defined on their full domains:\n$$h_{M,N,L}:\\operatorname{Hom}_Y(L,B_{M,N})\\cong\\operatorname{Hom}_Y(Rf_!M\\otimes^LL,N)\\cong\\operatorname{Hom}_Y(Rf_!(M\\otimes^LLf^*L),N)\\cong\\operatorname{Hom}_X(M\\otimes^LLf^*L,f^!N)\\cong\\operatorname{Hom}_X(Lf^*L,H_X(M,f^!N))\\cong\\operatorname{Hom}_Y(L,A_{M,N}).$$\nUse the specified adjunctions of [fix-prop-adjunctions]. The second arrow precomposes with the inverse of the actual projection transformation of [def-exchange-projection]. The right-adjoint shift structures are the transposes of those on their left adjoints, rather than independent choices.\n\nThe actual proper projection composite $(\\varepsilon_p\\otimes1)\\circ\\mu_p$ under adjunction, and its compact-support paste with extension by zero and pullback composition, commute separately with shifting either tensor input under the signed comparisons. The internal-Hom comparisons are the canonical ones\n$$H(M[r],Q)\\cong H(M,Q)[-r],\\qquad H(M,Q[r])\\cong H(M,Q)[r],$$\nwith evaluation given by the signed Hom-complex evaluation. At integral coefficients the total derived-limit construction of completed tensor [def-pur-integral-derived-operations] and its completion unit respect these shifts as well.\n\nFor every integer $r$, the resulting identifications $A_{M,N[r]}\\cong A_{M,N}[r]$ and $B_{M,N[r]}\\cong B_{M,N}[r]$ induce bijections $s_A^N,s_B^N$ from the corresponding Hom groups with test object $L$ to those with test object $L[-r]$. Similarly the identifications $A_{M[r],N}\\cong A_{M,N}[-r]$ and $B_{M[r],N}\\cong B_{M,N}[-r]$ induce $s_A^M,s_B^M$ with test object $L[r]$. These are isomorphisms in the derived categories, and the following equalities of Hom-set maps hold:\n$$s_A^N\\circ h_{M,N[r],L}=h_{M,N,L[-r]}\\circ s_B^N,\\qquad s_A^M\\circ h_{M[r],N,L}=h_{M,N,L[r]}\\circ s_B^M.$$\nThese equations concern the specified five transpositions and the actual projection map; shift compatibility of an exchange isomorphism is not an extra hypothesis.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
+  "place": "Statement, shifts; returned detailed step 8: signed evaluation, proper/open projection composite, exact completion and the two Hom-chain shift equations"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-exceptional-adjoint-admissibility",
+  "def-weil-triangulated-category",
+  "fix-prop-adjunctions",
+  "def-exchange-projection",
+  "def-pur-integral-derived-operations",
+  "def-sf-tensor-hom-transposition-data",
+  "def-sf-integral-completion-transpose",
+  "def-sf-integral-finite-tor-inclusion",
+  "def-weil-exceptional-inverse-image",
+  "def-sp-open-coefficient-adjunction-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sfb-proetale-tensor-model",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-integral-operation-shift-data",
+  "def-coef-reduction-limit-shift-data",
+  "def-nagata-compactification",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Work first at finite coefficients on the stipulated full domains. The localized total tensor shifts are those of [lem-weil-pbc-derived-tensor-shift-descent]: extracting the first shift is unsigned, and extracting a second shift r multiplies first-factor degree p by (-1)^{rp}. For the Hom differential d(h)=d_Qh-(-1)^j h d_P of [def-pur-hom-complex], use the source comparison H(P[r],Q) \\to H(P,Q)[-r] whose degree-j, index-i component is (-1)^{rj}h^{i-r}; the target comparison H(P,Q[r]) \\to H(P,Q)[r] is unsigned reindexing. Substitution in that differential checks these formulas: the source comparison's scalar in degree j+1 is (-1)^r times its scalar in degree j, while target shifting multiplies d_Q by (-1)^r. The derived isomorphisms exist without boundedness by [lem-pur-derived-internal-hom-shift-left] and [lem-pur-derived-internal-hom-shift-right]; use these explicit representative normalizations, rather than an arbitrary isomorphism between the same objects.",
+   "uses": [
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "def-pur-hom-complex",
+    "lem-pur-derived-internal-hom-shift-left",
+    "lem-pur-derived-internal-hom-shift-right"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X and 0A90, Hom differential and tensor-Hom reindexing."
+   }
+  },
+  {
+   "text": "Check the transpose using the order L tensor P, where currying is unsigned: a:L \\to Hom(P,Q) corresponds to x tensor y \\to a(x)(y). The recorded derived adjunction has exactly this normalization by [lem-sf-coefficient-tensor-curry-normalization]. For Q[r], shifting the test object to L[-r] simply reindexes a and this formula. For P[r], the shifted map L[r] \\to Hom(P,Q) in degree k is (-1)^{r(k+r)}a^{k+r}, reindexed on P. On the tensor side the map L[r] tensor P \\to L tensor P[r] obtained by extracting the first shift and reinserting it in the second input has the identical coefficient (-1)^{r(k+r)}. Thus currying commutes in both cases. Returning to the order P tensor L inserts the braiding (-1)^{ij}; its compatibility with shift extraction is precisely the signed symmetry identity of [lem-pur-total-tensor-signed-coherence]. Consequently evaluation in that order is x tensor h \\to (-1)^{ij}h(x), with i the degree of x and j the Hom degree, and both tensor-Hom arrows of h have the required shift squares. This is a calculation on every pure-tensor summand, not an assertion that arbitrary sheaf sections are pure tensors.",
+   "uses": [
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-pur-total-tensor-signed-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X and 0A90; currying on total tensor and the signed symmetry of Tag 0FPQ."
+   }
+  },
+  {
+   "text": "For any specified adjunction F left adjoint to G, write an adjunct as b \\to G(b) eta and its inverse as a \\to epsilon F(a). The right shift is the transpose of the fixed left shift by hypothesis. Hence [lem-weil-pbc-adjunction-shift-compatibility-unique] gives both the unit and counit shift equations. Substituting either expression for the adjunct, and using naturality, shows that shifting its target by r is the same as replacing its source by its shift -r; shifting the source by r is treated with the inverse comparisons. Apply this to Lf^* left adjoint to Rf_* and Rf_! left adjoint to f^! from [fix-prop-adjunctions]. It proves the third and fifth Hom-arrow squares, including the comparison f^!(N[r]) \\to (f^!N)[r]. No independently selected shift on a right adjoint is used.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8D (derived.tex, lemma-adjoint-is-exact), adjunct construction; Tag 07A6, derived adjunction."
+   }
+  },
+  {
+   "text": "Set U=Lp^*, V=Rp_* for the proper leg of a compactification. The actual transpose in [def-exchange-projection] is beta_{E,L}=(epsilon_E tensor 1) mu_{VE,L}, and its adjunct is pi_{E,L}=V(beta_{E,L}) eta_{VE tensor L}. The canonical mu commutes with shifts in both inputs by [lem-weil-pbc-pullback-tensor-canonical-shift-unit]. The counit does too by step 3. Therefore beta commutes with shifting E: substitute V(E[r]) \\to VE[r] in mu, then UVE[r] \\to UVE[r] through epsilon, and use naturality of first-input tensor shifts. It commutes with shifting L by [lem-weil-pbc-tensor-arrow-mate-naturality-shifts], taking its c to be epsilon_E. For pi the same equations follow by substitution in V(beta) eta and the unit equation of step 3. This proves both-variable compatibility for the specified counit composite itself; properness is needed only for this leg's role in compact support, not for this calculation.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-weil-pbc-tensor-arrow-mate-naturality-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, actual counit-defined projection map; Tag 07A4, normalized tensor-pullback comparison."
+   }
+  },
+  {
+   "text": "For the open leg, [lem-cbc-proetale-extension-zero] says j_! is exact, left adjoint to restriction and applied degreewise. The canonical open projection isomorphism of [lem-cbc-extension-zero-projection-formula] is the total of the ordinary map j_!P tensor Q \\to j_!(P tensor j^{-1}Q). In each bidegree it preserves that bidegree and sends the same local tensor to its restricted tensor (and to zero outside the open). Extracting a first shift is unsigned on either side; extracting the second shift multiplies both sides by (-1)^{rp}. Thus both shift squares commute already on complexes. The pullback compositor of [lem-weil-pbc-proetale-derived-pullback-composition] is likewise the termwise compositor on resolving models, so commutes with shifts. The compact-support projection in [def-exchange-projection] is pi followed by Rp_* of this open map and compositor. Composition and whiskering preserve the shift equations by [lem-weil-pbc-commshift-nattrans-comp-whisker]. Hence the actual compact-support projection commutes separately with shifts of M and L. Its inverse does as well: multiply its commuting square on both sides by the inverse components. Invertibility here is supplied by the hypothesis of this statement that the displayed five transpositions are bijections, not by a new projection-formula assertion.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-exchange-projection",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, proof using ordinary open tensor maps on K-flat models; Tag 0B56, compactification paste."
+   }
+  },
+  {
+   "text": "At integral coefficients use the actual quotient towers in [def-pur-integral-derived-operations]. Their tensor right-shift comparison, including every quotient transition, is [lem-sf-completed-tensor-shift-right]. The first-input comparison is obtained directly from the unsigned first-input finite total-tensor comparison of [lem-weil-pbc-derived-tensor-shift-descent]. Both therefore give maps of the entire strict towers. The total-limit comparison of [lem-pur-injective-tower-roos-shifts] sends (y,x) to ((-1)^r y,x) in the mapping-fiber model and preserves its kernel inclusion. The unit and counit of reduction/total limit commute with these shifts by [lem-pur-reduction-limit-shift-adjunction]. In particular the completion unit has the actual compatible quotient augmentation and no extra shifted-product component. Applying total limit to the two finite tensor comparisons proves both completed tensor shift isomorphisms and the shift square of this unit. Products are treated as derived products through the cited total-limit result; no exactness of arbitrary module-sheaf products is assumed.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-sf-completed-tensor-shift-right",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-pur-injective-tower-roos-shifts",
+    "lem-pur-reduction-limit-shift-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Bhatt-Scholze Definition 3.4.10 and Lemmas 3.4.11-12; Stacks Tag 0941 and signed Roos-cone coordinates."
+   }
+  },
+  {
+   "text": "The integral projection comparisons are the limits of their finite normalized tensor/pullback expressions: [lem-pur-completed-operation-tower-substitution] identifies the whole expressions, their quotient transitions and pullback compositors before taking total limit. The integral tensor/pullback comparison $\\mu$ is the one of [def-pur-completed-pullback-tensor-comparison]: the actual reduction/derived-limit adjunction applied to the strict levelwise ordinary comparisons, whose finite evaluations are the canonical finite $\\mu_n$. Apply step 6 to those strict shift squares and use the actual reduction/limit unit and counit. For completed pullback, localized open extension, integral proper image and completed tensor, the shift squares of the single-operation reduction-tower realization comparisons $\\mathcal L_WA(\\mathcal R_WK)\\to A(K)$ commute in every input slot, with the Koszul sign in the shifted tensor slot, by [lem-pur-integral-basic-operation-shift], whose inputs are the derived-complete constructible finite-Tor objects of this statement. Thus the tensor comparison mu and the open tensor map used in steps 4-5 have the same signed shift equations at integral coefficients. The proper projection is still the specified mate V(beta) eta, so step 4 applies to the integral adjunction without requiring a termwise description of its right adjoint. Step 2 uses ordinary internal derived Hom into the complete target, as stipulated in [def-pur-integral-derived-operations]; the completed tensor transpose is obtained by precomposing with the completion unit, whose square was just checked. Consequently the same five individual Hom-arrow squares hold integrally. This argument uses equality of actual system maps and a functor applied to it, not detection of equality of derived morphisms by their separate reductions.",
+   "uses": [
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "def-pur-integral-derived-operations",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-integral-basic-operation-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Bhatt-Scholze Definition 3.4.10, Lemma 3.4.11 (completed tensor-Hom adjunction), and the quotient/limit construction; Tag 099N for completed pullback."
+   }
+  },
+  {
+   "text": "Write h=h_5 h_4 h_3 h_2 h_1, reading the five transpositions from left to right. For N[r], the intermediate groups, after shift extraction, are successively Hom(Rf_!M tensor L[-r],N), Hom(Rf_!(M tensor Lf^*(L[-r])),N), Hom(M tensor Lf^*(L[-r]),f^!N), Hom(Lf^*(L[-r]),H(M,f^!N)), and Hom(L[-r],A). Steps 2-5 (and 6-7 integrally) say that the vertical identifications commute with each h_i; in the second square this uses the actual inverse projection map of step 5. Cancelling each adjacent pair of vertical identifications gives s_A^N h_{M,N[r],L}=h_{M,N,L[-r]} s_B^N. For M[r], move the shift out of Rf_!M[r] and M[r] tensor Lf^*L, then reinsert it in L, obtaining L[r] throughout. The source-Hom comparison in steps 1-2 identifies the endpoints with A[-r], B[-r]. The same cancellation gives s_A^M h_{M[r],N,L}=h_{M,N,L[r]} s_B^M. All vertical maps are induced by the cited derived-category isomorphisms, so these are equalities of Hom-set maps on every test morphism. Zero shifts give identity squares; negative r uses the same signs and inverse shift functors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Assembly of the five explicit Hom-arrow squares, shift clause of fix-lem-tensor-adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "def-pur-hom-complex",
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-pur-derived-internal-hom-shift-right",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "fix-prop-adjunctions",
+  "def-exchange-projection",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-tensor-arrow-mate-naturality-shifts",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "def-pur-integral-derived-operations",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-pur-reduction-limit-shift-adjunction",
+  "lem-pur-completed-operation-tower-substitution",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-integral-basic-operation-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X (section-hom-complexes), 0A90 (lemma-compose), 07A4 (lemma-pullback-tensor-product), 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor); agent expansion of the shift clause of fix-lem-tensor-adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Signed shift compatibility of tensor internal Hom adjunction projection counit and derived completion as a five arrow chain of Hom set bijections",
+   "results": "8 hits: CategoryTheory.tensorRightHomEquiv, CategoryTheory.Adjunction.shift_counit_app, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.Adjunction.shift_counit_app_assoc, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction CommShift and Hom-complex shift formulas do not give the signed proper/open projection composite or completed five-arrow Hom-chain equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of five derived tensor Hom adjunction bijections with signed shifts in both variables and completed tensor",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.CommShift₂Setup.int_ε, CategoryTheory.CommShift₂Setup.hε, CategoryTheory.TwistShiftData.shiftFunctorAdd'_hom_app, CategoryTheory.CommShift₂Setup.int, CategoryTheory.Adjunction.LeftAdjointCommShift.iso_hom_app_assoc, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_tensor",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction CommShift and Hom-complex shift formulas do not give the signed proper/open projection composite or completed five-arrow Hom-chain equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula tensor Hom chain respects both cochain shifts with negative shift in the contravariant variable",
+   "results": "8 hits: CochainComplex.HomComplex.Cochain.shift, CategoryTheory.ProjectiveResolution.Hom.hom'_f, CochainComplex.HomComplex.Cochain.leftUnshift_v, CochainComplex.HomComplex.Cochain.rightUnshift_v, CochainComplex.HomComplex.Cochain.shift_v', CochainComplex.HomComplex.Cochain.rightUnshift, CochainComplex.HomComplex.Cocycle.rightUnshift, CochainComplex.HomComplex.Cochain.rightShift_v",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction CommShift and Hom-complex shift formulas do not give the signed proper/open projection composite or completed five-arrow Hom-chain equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift",
+   "results": "12 hits: CategoryTheory.Adjunction.CommShift.instId, CategoryTheory.Adjunction.CommShift, CategoryTheory.Adjunction.commShift_of_leftAdjoint, CategoryTheory.Adjunction.commShift_of_rightAdjoint, CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.CommShift.mk', CategoryTheory.Adjunction.CommShift.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction CommShift and Hom-complex shift formulas do not give the signed proper/open projection composite or completed five-arrow Hom-chain equations"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]omm[Ss]hift.*(mate|adjunction)|[Ss]hift.*(projection|internalHom)",
+   "results": "12 hits: Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Pullback.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction CommShift and Hom-complex shift formulas do not give the signed proper/open projection composite or completed five-arrow Hom-chain equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed shift compatibility of the five tensor Hom adjunction bijections with proper projection and completed tensor",
+   "results": "8 hits: CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_symm_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: these are generic cochain or adjunction shift facts; none states the actual proper/open projection, completed unit and both specified five-arrow Hom-chain equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor internal Hom adjunction evaluation commutes with shifts of the tensor parameter and target",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.ihom.adjunction, CategoryTheory.exp.ev, CategoryTheory.ihom.ev, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.exp.adjunction, CategoryTheory.Adjunction.commShift_of_leftAdjoint, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: these are generic cochain or adjunction shift facts; none states the actual proper/open projection, completed unit and both specified five-arrow Hom-chain equations."
+  },
+  {
+   "tool": "grep",
+   "query": "commShift.*(conjugate|homEquiv)|shift.*(evaluation|eval)",
+   "results": "0 hits: ; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: these are generic cochain or adjunction shift facts; none states the actual proper/open projection, completed unit and both specified five-arrow Hom-chain equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cochain tensor Hom currying shifts source contravariantly and target covariantly with Koszul signs",
+   "results": "8 hits: HomologicalComplex.tensorHom, CochainComplex.HomComplex.Cochain.leftUnshift, CochainComplex.HomComplex.Cochain.rightUnshift, CochainComplex.mapBifunctorShift₁Iso, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso, CochainComplex.HomComplex.Cochain.leftShift, CochainComplex.HomComplex.Cochain.rightShift, CochainComplex.HomComplex.Cochain.leftUnshift_v",
+   "date": "2026-10-22",
+   "verdict": "no match: these are generic cochain or adjunction shift facts; none states the actual proper/open projection, completed unit and both specified five-arrow Hom-chain equations."
+  },
+  {
+   "tool": "grep",
+   "query": "leftShift|rightShift|shift_v|commShift_counit|conjugateEquiv",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these are generic cochain or adjunction shift facts; none states the actual proper/open projection, completed unit and both specified five-arrow Hom-chain equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-lem-tensor-adjunction",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Statement, shifts; returned detailed step 8: signed evaluation, proper/open projection composite, exact completion and the two Hom-chain shift equations",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-tensor-hom-signed-transposes",
+  "worker": "stage1",
+  "summary": "Expanded the two signed Hom-chain equations through normalized currying, the actual counit-defined proper/open projection and the strict reduction/total-limit completion unit. Reused existing general lemmas, with no new nodes and no changes to the statement. Checked all cited statements, domains, inverse direction of the projection arrow and negative/zero shifts.",
+  "blueprint": "fix-lem-tensor-adjunction, statement shift clause and proof Step 1 five-arrow Hom chain; the named signed-transposes auxiliary refines the parent split shift step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Generic Descent of the full tensor bifunctor shift structure and normalized fixed comparisons used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-left",
+    "why": "Generic Left-argument shift comparison for internal derived Hom used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-right",
+    "why": "Generic Right-argument shift comparison for internal derived Hom used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Generic Signed shift, associator and symmetry identities on total cochain tensors used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Generic Shift isomorphisms compatible with an adjunction: counit from unit, and uniqueness on the right adjoint used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Generic Adjunctions of the datum used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Generic Canonical shifts and action units of the derived pullback tensor comparison used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-arrow-mate-naturality-shifts",
+    "why": "Generic Naturality and shifts of the tensor mate of an arbitrary arrow used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic Extension by zero on the pro-etale site used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Generic Projection formula for extension by zero used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Generic Composites and whiskerings of shift-compatible natural transformations are shift-compatible used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-sf-completed-tensor-shift-right",
+    "why": "Generic Right shifts of the specified completed integral tensor product used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-pur-injective-tower-roos-shifts",
+    "why": "Generic Injective-tower Roos comparison with normalized integer shifts used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-pur-reduction-limit-shift-adjunction",
+    "why": "Generic Shift compatibility of the reduction and total-limit adjunction used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic Coherent substitution of normalized systems into completed operations used only for its stated normalized operation/shift calculation; the biduality unit does not supply this underlying categorical or ringed-site tool."
+   },
+   {
+    "node": "lem-pur-integral-basic-operation-shift",
+    "why": "Generic shift compatibility of the single-operation reduction-tower realization comparisons for integral pullback, open extension, proper image and completed tensor, used only for its stated shift squares at integral coefficients; the biduality unit does not supply this coefficient-calculus tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-pur-derived-internal-hom-shift-left",
+  "lem-pur-derived-internal-hom-shift-right",
+  "lem-pur-total-tensor-signed-coherence",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "fix-prop-adjunctions",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-tensor-arrow-mate-naturality-shifts",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-sf-completed-tensor-shift-right",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-pur-reduction-limit-shift-adjunction",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-pur-integral-basic-operation-shift"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-ecc22a7c7",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-ecc22a7c7 (reviewer sub-agent of L); spot-checked: Stage-1 split with 0 new nodes and the statement unchanged; I read all 8 steps against the statement of every cited node. Step 1: I recomputed the Hom-shift scalars (-1)^{rj} from the differential in def-pur-hom-complex; they need ε_{j+1}=(-1)^r ε_j, which holds, and the target-side comparison is unsigned. Step 2: unsigned currying matches lem-sf-coefficient-tensor-curry-normalization. In the P[r] case the Hom side and the tensor side both give the coefficient (-1)^{r(m+r)}, and the braiding comes from lem-pur-total-tensor-signed-coherence. Step 3: the right shift is the transpose of the left one, so adjunction-shift-compatibility-unique (ii)/(iii) gives the h3 and h5 squares. Step 4: tensor-arrow-mate-naturality-shifts applies with c=ε_E, and its hypotheses hold through derived-tensor-shift-descent, canonical-shift-unit (the 07A4 μ, the same one used in def-exchange-projection) and the η square from Step 3. Step 5: the open projection map and the pullback compositor are termwise, and the inverse square follows formally. Step 6: completed-tensor-shift-right, the Roos (y,x)->((-1)^r y,x) shift and reduction-limit-shift-adjunction all apply (k=F̄_q per def-weil-finite-field-fiber). Step 8: elementary cancellation of the squares; I checked the test objects L[-r] and L[r]. FIX in Step 7: tower-substitution says neither that the integral μ is the limit of the finite μ_n nor that the pullback, open and proper realization comparisons commute with shifts. I added citations to def-pur-completed-pullback-tensor-comparison and lem-pur-integral-basic-operation-shift: no cycle, 0 nodes added to the batch-5 closure, and one tool_uses entry. Batch-5 flags: both lem-pur-reduction-limit-shift-adjunction and lem-pur-completed-operation-tower-substitution are generic coefficient calculus, not steps of the trace formula or of Poincaré duality. The item's stmt_deps alone already reach the same 85 trf/pd nodes; adding the flagged citations keeps it at 85, so I accepted them. The master fix-lem-tensor-adjunction proof does not do the sign calculation, so the agent-written origin is correct. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TensorHomSignedTransposes",
+  "declaration": "WeilConjectures.TensorHomSignedTransposes.signed_transposes",
+  "declarations": [
+   "WeilConjectures.TensorHomSignedTransposes.shiftHom",
+   "WeilConjectures.TensorHomSignedTransposes.negativeShift",
+   "WeilConjectures.TensorHomSignedTransposes.fiveTransposes",
+   "WeilConjectures.TensorHomSignedTransposes.targetA",
+   "WeilConjectures.TensorHomSignedTransposes.targetB",
+   "WeilConjectures.TensorHomSignedTransposes.sourceA",
+   "WeilConjectures.TensorHomSignedTransposes.sourceB",
+   "WeilConjectures.TensorHomSignedTransposes.HomSquares",
+   "WeilConjectures.TensorHomSignedTransposes.TensorShiftData",
+   "WeilConjectures.TensorHomSignedTransposes.TensorShiftNormalization",
+   "WeilConjectures.TensorHomSignedTransposes.ProjectionSquares",
+   "WeilConjectures.TensorHomSignedTransposes.BetaSquares",
+   "WeilConjectures.TensorHomSignedTransposes.ActualProjectionShifts",
+   "WeilConjectures.TensorHomSignedTransposes.IntegralCompletionShifts",
+   "WeilConjectures.TensorHomSignedTransposes.AdjointShifts",
+   "WeilConjectures.TensorHomSignedTransposes.IntegralRealization",
+   "WeilConjectures.TensorHomSignedTransposes.signed_transposes"
+  ],
+  "file": "lean/Sheaf/SixFunctors/TensorHomSignedTransposes.lean",
+  "statement": "theorem signed_transposes (d : Model l Ω (s.stage l) (S.ring.operation c (s.stage l))) (r : RingModel l Ω f s d) (p : Projection l Ω c s r (S.ring.left c s)) (integral : IntegralRealization l Ω d) (admissible : Admissible l Ω D f c (s.stage l)) : ∃ shifts : Conclusion l Ω d, Nonempty (RingShifts l Ω r shifts) ∧ Nonempty (AdjointShifts l Ω d r shifts) ∧ HomSquares l Ω d shifts ∧ Nonempty (ActualProjectionShifts (s.coefficients l) c p.tensorX.toModel p.tensorBar p.tensorY.toModel p.pullComposition) ∧ (∀ (E : FieldStage.{u} l), s = .integral E → (∀ [∀ x : X, Invertible (l : X.residueField x)], Nonempty (IntegralCompletionShifts l E.carrier X)) ∧ (∀ [∀ y : Y, Invertible (l : Y.residueField y)], Nonempty (IntegralCompletionShifts l E.carrier Y)))",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2/H12 from 8ef8de3c1308 and H10 from c2041a3b2c0d. The three definition owners and all eleven requested existing owners are cited. The ten presentation records are real definitions in Sheaf.SixFunctors.TensorHomTranspositionData, retaining their original TensorAdjunctionExchange names. The complete Verdier definition interface is moved to Sheaf.SixFunctors.VerdierExchangeData under section 1(B). Neither quarantined exchange theorem module is imported, directly or transitively. The five Hom transpositions, both signed Hom equations, all actual projection squares and completion-unit squares are unchanged. No parent theorem or package is a premise."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de20cd085",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery after the c204 H10 return. The item module and JSON are unchanged in substance: only the docstring, one open line and lean.note differ, and the lean.statement is verbatim, so the 8ef8/c204 mathematics checks stand (five arrows, both HomSquares equations, ActualProjectionShifts, IntegralCompletionShifts, shifts as conclusions, r=0/negative r, universes u+1/u). The H10 repair: (1) TensorHomTranspositionData holds the ten records copied exactly from the quarantined TensorAdjunctionExchange source (diffed; namespace kept; parent package/theorem omitted; imports VerdierExchangeData, not the parent, so the stage-3 cycle is gone). (2) VerdierExchangeData is a §1(B) dependency module for def-sf-verdier-exchange-data (lean-only record change): definition bodies identical to quarantine/VerdierExchange.lean minus Package/Assertion/verdier_exchange and five imports; smallSite made public (EssentiallySmall is a Prop, no diamond); all 34 declarations present; statement verbatim. (3) A source import walk from the item finds no missing project source file (Weil.Definitions is in lean/Comparator) and reaches neither quarantined module. The three new definition nodes are OK; two are byte-identical to c204. The only sorry is the theorem proof; no hollow definitions; docstrings and both report sections present. Advisories: H11 self-review; restored quarantined parents must import the new modules and drop their copies; the old RingRealization heartbeat timeout is not reproduced in the worker's real compile of the new file, and the landing compile will confirm."
+ }
+}

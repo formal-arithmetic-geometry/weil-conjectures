@@ -1,0 +1,185 @@
+{
+ "id": "lem-route-pro-etale-canonical-pullback-composition-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sfb-dc-upper-star-comp",
+   "place": "Ambient comparison paragraph: descent of the degreewise ordinary composition isomorphism to the unbounded derived categories; specialized here to the normalized pro-etale module operations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The unique derived comparison with exactly the original theorem's ordinary, termwise and K-flat normalization, with the derived comparison returned fi",
+ "statement": "Let h : Z ⟶ W and k : W ⟶ V be morphisms of schemes. Let R_V, R_W and R_Z be sheaves of commutative rings on the small pro-etale sites of V, W and Z. Let c_k : k^{-1}R_V ≅ R_W and c_h : h^{-1}R_W ≅ R_Z be coefficient isomorphisms, and let c_hk : (h ≫ k)^{-1}R_V ≅ R_Z satisfy c_hk = proEtaleRingCompositeCoefficients h k R_V R_W R_Z c_k c_h, where the composite coefficient identification is the canonical inverse-image composition followed by c_k and c_h. Then there exists exactly one isomorphism of derived module-pullback functors\n\nproEtaleRingDerivedPullback (h ≫ k) R_V R_Z c_hk ≅ proEtaleRingDerivedPullback k R_V R_W c_k ⋙ proEtaleRingDerivedPullback h R_W R_Z c_h\n\nwith the following property. There are adjunctions adj_k, adj_h and adj_hk between each of the three module pullback functors and its corresponding direct-image functor, and each adjunction has the canonical tensor-unit normalization: for every module, pro-etale test object and section, its unit is proEtaleRingModuleUnitSection. There is an isomorphism d from the composite direct image (first along h, then along k) to the direct image along h ≫ k such that, for every R_Z-module N, every U in the pro-etale site of V and every section m of the composite direct image of N over U, (d.hom.app N).val.app (op U) m is N.val.map ((MorphismProperty.Over.pullbackComp h k).hom.app U).op m. There is an isomorphism a from the pullback functor for h ≫ k to the composite of the two module pullback functors whose conjugate under the three adjunctions is d. There is an isomorphism b between the induced cochain-complex functor for h ≫ k and the composite induced cochain-complex functor, and for every cochain complex K and degree n its component satisfies (b.hom.app K).f n = a.hom.app (K.X n). Finally, for every K whose terms are flat on the site and which is acyclic under tensoring with every acyclic complex, the pullback along k is again acyclic under tensoring with every acyclic complex and has flat terms on W, and the canonical derived-pullback factor maps satisfy\n\n(proEtaleRingDerivedPullbackFactors (h ≫ k) R_V R_Z c_hk).hom.app K ≫ DerivedCategory.Q.map (b.hom.app K)\n= comparison.hom.app (DerivedCategory.Q.obj K)\n  ≫ (proEtaleRingDerivedPullback h R_W R_Z c_h).map ((proEtaleRingDerivedPullbackFactors k R_V R_W c_k).hom.app K)\n  ≫ (proEtaleRingDerivedPullbackFactors h R_W R_Z c_h).hom.app (((proEtaleRingModulePullback k R_V R_W c_k).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).\n\nThe uniqueness is of comparison; the predicate only asserts existence of the displayed normalized witnesses. No properness, boundedness, or flatness assumption on h or k is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lem-pod-constant-comparison-module-localization: the Lean of this node (its module Sheaf.AlgebraicGeometry.ProEtaleConstantModuleComparisonLocalization uses) reaches AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition_existsUnique, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/AlgebraicGeometry/ProEtaleCanonicalPullbackComposition.lean, declaration AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition_existsUnique (module Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition, lines 25-96, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-proetale-composite-coefficients",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pod-canonical-module-adjunction-unit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing proEtaleRingDerivedPullbackComposition theorem in Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition to obtain the three normalized adjunctions, sectionwise direct-image compositor d, its ordinary conjugate a, its termwise compositor b, and a compatible derived isomorphism c. Reorder the existential witnesses to give existence in the requested characterization. This uses the general existence theorem underlying lem-weil-pbc-proetale-derived-pullback-composition, rather than its later canonical-selection alias.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any second witness, the unit normalization identifies each of its adjunctions with the first: apply Adjunction.ext, natural-transformation extensionality, sheaf-module extensionality, and equality of the displayed unit formulas on every section. The displayed sectionwise formula likewise identifies d. Injectivity of conjugateIsoEquiv then identifies a. HomologicalComplex.Hom.ext and the degree formula identify the forward natural transformations of b.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a flat-term K-flat complex, substitute equality of b into the two representative equations. Their left sides coincide. Cancel the two factorization-isomorphism maps on the right to identify the components of the derived comparisons on that complex.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "To extend this component equality, apply Localization.natTrans_ext for the derived localization Q. Resolve each arbitrary complex K by a quasi-isomorphism p:P→K from a K-flat complex with flat terms using lem-pc-kflat-resolution. Convert its monoidal tensor-flatness to IsFlatOnSite with the existing siteSheafTensorRightIso from lem-weil-pbc-independent-sheaf-tensor-colimits. Q(p) is an isomorphism; naturality of both comparisons and cancellation of its functorial image reduce equality at Q(K) to the equality already established at Q(P). Finally Iso.ext upgrades equality of forward natural transformations to equality of isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0D6D (lemma-derived-pullback-composition), using the flat-term K-flat representatives of Lemma 06YS (lemma-K-flat-resolution); uniqueness obtained by normalized adjunctions, component extensionality and localization naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique canonical derived pullback composition isomorphism with normalized adjunction and K-flat representative formula",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derived, and ordinary SheafOfModules.pullbackComp; none states the project-specific derived pro-etale comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "proEtaleCanonicalPullbackComposition_existsUnique, proEtaleRingDerivedPullbackComposition, DerivedCategory.Q.map",
+   "results": "0 hits; unknown project identifier in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleCanonicalPullbackComposition_existsUnique|proEtaleRingDerivedPullbackComposition in Mathlib/",
+   "results": "none; project declarations are under Sheaf/AlgebraicGeometry.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unique canonical composition isomorphism for derived pullback of pro-etale module sheaves with K-flat normalization",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, Scheme.Modules.pullbackComp and related underived comparisons; no exact project theorem.",
+   "date": "2026-10-27",
+   "verdict": "generalization: underived pullback composition only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness of derived category natural isomorphism determined on K-flat resolutions",
+   "results": "Functor.mapDerivedCategoryFactors and mapDerivedCategoryFactorsh_hom_app; these are localization factor APIs, not the project-specific uniqueness statement.",
+   "date": "2026-10-27",
+   "verdict": "generalization: localization factor APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq, Functor.mapDerivedCategoryNatIso, HomologicalComplex.Hom.ext",
+   "results": "0 hits; unknown identifier Adjunction.leftAdjointUniq in the Mathlib search service.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized module adjunction and derived pullback composition uniqueness",
+   "results": "SheafOfModules.pullbackIso, TopCat.Sheaf.pullbackIso, ChosenPullbacksAlong.pullbackComp and related generic pullback results; no exact project theorem.",
+   "date": "2026-10-27",
+   "verdict": "generalization: generic pullback comparisons only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-pod-constant-comparison-module-localization",
+  "date": "2026-10-27",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCanonicalPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition_existsUnique"
+  ],
+  "statement": "theorem proEtaleCanonicalPullbackComposition_existsUnique\n    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)\n    (R_V : Sheaf (ProEt.topology V) CommRingCat.{u + 1})\n    (R_W : Sheaf (ProEt.topology W) CommRingCat.{u + 1})\n    (R_Z : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})\n    (c_k : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj R_V ≅ R_W)\n    (c_h : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj R_W ≅ R_Z)\n    (c_hk : (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).obj R_V ≅ R_Z)\n    (hc_hk : c_hk = proEtaleRingCompositeCoefficients h k R_V R_W R_Z c_k c_h) :\n    ∃! comparison : proEtaleRingDerivedPullback (h ≫ k) R_V R_Z c_hk ≅\n        proEtaleRingDerivedPullback k R_V R_W c_k ⋙\n          proEtaleRingDerivedPullback h R_W R_Z c_h,\n    ∃ (adj_k : proEtaleRingModulePullback k R_V R_W c_k ⊣\n          proEtaleRingModuleDirectImage k R_V R_W c_k)\n      (adj_h : proEtaleRingModulePullback h R_W R_Z c_h ⊣\n          proEtaleRingModuleDirectImage h R_W R_Z c_h)\n      (adj_hk : proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk ⊣\n          proEtaleRingModuleDirectImage (h ≫ k) R_V R_Z c_hk),\n      proEtaleRingModuleAdjunctionNormalized k R_V R_W c_k adj_k ∧\n      proEtaleRingModuleAdjunctionNormalized h R_W R_Z c_h adj_h ∧\n      proEtaleRingModuleAdjunctionNormalized (h ≫ k) R_V R_Z c_hk adj_hk ∧\n      ∃ (d : proEtaleRingModuleDirectImage h R_W R_Z c_h ⋙\n            proEtaleRingModuleDirectImage k R_V R_W c_k ≅\n              proEtaleRingModuleDirectImage (h ≫ k) R_V R_Z c_hk),\n        (∀ (N : proEtaleRingModules Z R_Z) (U : V.ProEt)\n            (m : ((proEtaleRingModuleDirectImage h R_W R_Z c_h ⋙\n              proEtaleRingModuleDirectImage k R_V R_W c_k).obj N).val.obj (Opposite.op U)),\n          (d.hom.app N).val.app (Opposite.op U) m =\n            N.val.map ((MorphismProperty.Over.pullbackComp h k).hom.app U).op m) ∧\n        ∃ (a : proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk ≅\n              proEtaleRingModulePullback k R_V R_W c_k ⋙\n                proEtaleRingModulePullback h R_W R_Z c_h),\n          conjugateIsoEquiv (adj_k.comp adj_h) adj_hk a = d ∧\n          ∃ (b : (proEtaleRingModulePullback (h ≫ k) R_V R_Z c_hk).mapHomologicalComplex\n                (ComplexShape.up ℤ) ≅\n              (proEtaleRingModulePullback k R_V R_W c_k).mapHomologicalComplex\n                (ComplexShape.up ℤ) ⋙\n              (proEtaleRingModulePullback h R_W R_Z c_h).mapHomologicalComplex\n                (ComplexShape.up ℤ)),\n            (∀ (K : CochainComplex (proEtaleRingModules V R_V) ℤ) (n : ℤ),\n              (b.hom.app K).f n = a.hom.app (K.X n)) ∧\n              ∀ (K : CochainComplex (proEtaleRingModules V R_V) ℤ),\n                CochainComplex.IsAcyclicTensorKFlat K →\n                (∀ n : ℤ,\n                  SheafOfModules.IsFlatOnSite (J := ProEt.topology V) (R := R_V) (K.X n)) →\n                CochainComplex.IsAcyclicTensorKFlat\n                  (((proEtaleRingModulePullback k R_V R_W c_k).mapHomologicalComplex\n                    (ComplexShape.up ℤ)).obj K) ∧\n                (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology W) (R := R_W)\n                  ((((proEtaleRingModulePullback k R_V R_W c_k).mapHomologicalComplex\n                    (ComplexShape.up ℤ)).obj K).X n)) ∧\n                (proEtaleRingDerivedPullbackFactors (h ≫ k) R_V R_Z c_hk).hom.app K ≫\n                    DerivedCategory.Q.map (b.hom.app K) =\n                  comparison.hom.app (DerivedCategory.Q.obj K) ≫\n                    (proEtaleRingDerivedPullback h R_W R_Z c_h).map\n                      ((proEtaleRingDerivedPullbackFactors k R_V R_W c_k).hom.app K) ≫\n                    (proEtaleRingDerivedPullbackFactors h R_W R_Z c_h).hom.app\n                      (((proEtaleRingModulePullback k R_V R_W c_k).mapHomologicalComplex\n                        (ComplexShape.up ℤ)).obj K) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-route-pro-etale-canonical-pullback-composition-exists-unique",
+  "worker": "stage1",
+  "summary": "Repaired the machine-truncated imported statement against the complete Lean declaration, retained its exact ∃! comparison predicate, and added one statement-only supporting node for uniqueness of the normalized module adjunction. The existing general derived pullback composition theorem supplies existence; normalized adjunction uniqueness, sectionwise direct-image extensionality, conjugation injectivity, degreewise cochain extensionality, and K-flat localization supply uniqueness. No hypotheses on the scheme morphisms were added. Maintainer reader (2026-10-27): the new node lem-route-pro-etale-module-adjunction-normalized-unique was dropped as a two-line consequence of the existing Mathlib leaf lem-weil-pbc-adjunction-ext and sheaf-module extensionality (now step 2); step 1 now cites the nodes whose statements give each witness (canonical unit normalization, sectionwise compositor, conjugation, K-flat preservation, localization) instead of only the parent route theorem.",
+  "blueprint": "The proof realizes the pullback-composition comparison used in the finite-system coherence route: first the normalized module adjunction and direct-image compositor, then the derived K-flat comparison and its uniqueness after localization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "General pro-etale derived pullback composition is the route theorem supplying the comparison and all normalized witnesses; the current item strengthens it only by exposing uniqueness."
+   },
+   {
+    "node": "lem-sf-proetale-tensor-composition-unit",
+    "why": "Step 1 takes from its statement the sectionwise direct-image pasting isomorphism d_{h,k} (restriction along Over.pullbackComp) and its conjugacy with the tensor comparison; the pro-etale module compositor is stated by no node of the sk-lem-finite route (unit sk-thm-sf-package)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sf-proetale-tensor-composition-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NB-f4468f7de",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-f4468f7de (reviewer sub-agent of L); spot-checked: The item statement checks clause by clause against the full Lean signature of proEtaleCanonicalPullbackComposition_existsUnique: the directions of d, a and the conjugation, the Over.pullbackComp section formula, hc_hk being definitionally the composite coefficients, the degreewise b, and the K-flat factor equation. The worker's repair of the truncated imported text and of the direction of a is correct. The coefficient category and the composition morphism are those of Stacks 0D6D (sites-cohomology lemma-derived-pullback-composition), specialized to pro-etale modules with u^*F = u^{-1}F tensored with R_U over c. I tested the cases h = k = id, the empty scheme and non-flat c. No existing node duplicates the item. Fault C3/C4: step 1 cited only lem-weil-pbc-proetale-derived-pullback-composition, whose statement gives only the derived iso; the normalized adjunctions, d and a come from its proof. Step 1 now builds each witness from the node whose statement gives it: lem-pod-canonical-module-adjunction-unit, the inverse of d_{h,k} from lem-sf-proetale-tensor-composition-unit with the .hom section formula written out, conjugateIsoEquiv.symm, b degreewise, and the parent's class-of-b plus localization (2). This follows the Lean proof of proEtaleRingDerivedPullbackComposition, lines 225-290. Fault C1/D1/B9: the new node lem-route-pro-etale-module-adjunction-normalized-unique is a two-line consequence of the existing Mathlib leaf lem-weil-pbc-adjunction-ext (Adjunction.ext, Basic.lean:193) plus extensionality of sheaf-module maps, and it had blueprint.from.node null. Its argument is folded into step 2 and the node is dropped. Step 2 also cited lem-sf-proetale-tensor-composition-unit without using it; that citation moved to step 1, with a tool_uses declaration because its unit sk-thm-sf-package is off route. I accept that tool use. Step 3 is correct as delivered: resolution, equality on Q I through the invertible factor maps, naturality, then localization (3). proof_deps were recomputed. The corrected item is in fixes/; the snapshot's tools/review_split.py ignores the symlinked chapter directories, so I did not use its output.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T123454-L-2303387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

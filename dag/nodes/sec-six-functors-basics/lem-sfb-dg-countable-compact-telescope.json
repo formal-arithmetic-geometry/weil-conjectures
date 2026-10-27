@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-dg-countable-compact-telescope",
+ "kind": "statement",
+ "title": "Countable cohomology DG modules are telescopes of compact objects",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Compact means that $\\bigoplus_\\alpha\\operatorname{Hom}(Q,N_\\alpha)\\to\\operatorname{Hom}(Q,\\bigoplus_\\alpha N_\\alpha)$ is bijective for every small family [def-pc-compact-object]. Assume $H^i(A)$ is countable for every integer $i$. Let $M\\in D(A,d)$ have countable $H^i(M)$ for every integer $i$. There exist compact objects $Q_m\\in D(A,d)$, maps $u_m:Q_m\\to Q_{m+1}$ and compatible maps $b_m:Q_m\\to M$, with $b_{m+1}u_m=b_m$, and a distinguished triangle\n$$\\bigoplus_mQ_m\\xrightarrow{1-s}\\bigoplus_mQ_m\\xrightarrow{b}M\\longrightarrow(\\bigoplus_mQ_m)[1],\\qquad s\\iota_m=\\iota_{m+1}u_m,\\quad b\\iota_m=b_m.$$\nThe coproducts are indexed by $\\mathbf N$ in the fixed ambient universe and homotopy colimit has the meaning of [def-kun-truncations].",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-uniqueness-derived-colimit, for the legs."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-compact-object",
+  "def-kun-truncations",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-dg-countable-subalgebra], choose a countable DG subalgebra $A_0\\subseteq A$ inducing all cohomology isomorphisms. Apply [lem-sfb-dg-qis-restriction-equivalence] to the inclusion $A_0\\to A$. Restriction $R:D(A,d)\\to D(A_0,d)$ leaves the underlying cochain complex unchanged and commutes strictly with sums, shifts and the cone $N\\oplus K[1]$ of a module map $K\\to N$, so it is exact; that node says it is an equivalence of triangulated categories with exact quasi-inverse and left adjoint $L=-\\otimes^{\\mathbf L}_{A_0}A:D(A_0,d)\\to D(A,d)$, whose unit and counit $\\epsilon:LR\\xrightarrow{\\sim}\\mathrm{id}$ are isomorphisms commuting with the shift comparisons.",
+   "uses": [
+    "lem-sfb-dg-countable-subalgebra",
+    "lem-sfb-dg-qis-restriction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, proof (2) to (1), paragraph 'By Lemma lemma-qis-equivalence the restriction map D(A,d) -> D(A',d) is an equivalence'; Tag 09S6."
+   }
+  },
+  {
+   "text": "Choose a DG module representative $N$ of $R(M)$. Since restriction does not change the underlying complex, $H^i(N)=H^i(M)$ is countable. The algebra $A_0$ is countable as a total graded set. Thus [lem-sfb-dg-countable-semi-free-resolution] gives $q:P\\to N$, a quasi-isomorphism, and a countable homogeneous graded basis $\\{x_j\\}_{j\\in J}$ with natural-number heights $h(j)$ such that every $d(x_j)$ has finite support in strictly smaller heights.",
+   "uses": [
+    "lem-sfb-dg-countable-semi-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "For any finite set $S$ of basis labels, close it under the basis supports of $d(x_j)$. This closure is finite: induct on the maximum height of $S$; all added labels have smaller height, each support is finite, and height zero adds nothing. Its span is a DG submodule, since $d(x_ja)=d(x_j)a+(-1)^{|x_j|}x_jd(a)$ stays in that span. Choose finite sets $S_m$ increasing with union $J$ (also when $J$ is finite or empty). Let $T_0$ be the closure of $S_0$ and $T_{m+1}$ the closure of $T_m\\cup S_{m+1}$. Then $C_m=\\bigoplus_{j\\in T_m}x_jA_0$ are nested DG submodules with union $P$. Intersecting with the height filtration gives each $C_m$ a finite filtration whose quotients are finite direct sums of shifts of $A_0$: the quotient basis generators have zero differential modulo smaller heights.",
+   "uses": [
+    "lem-sfb-dg-countable-semi-free-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-dg-finite-cell-compact], the images $E_m$ of $C_m$ in $D(A_0,d)$ are compact. The module colimit of their inclusion sequence is $P$: every finite-support element is in some $C_m$. Apply [lem-sfb-dg-sequential-colimit-triangle] to these actual DG inclusions. It gives the telescope triangle with third object $P$ and legs the inclusions. Compose its third-object isomorphism with $q:P\\xrightarrow{\\sim}N\\simeq R(M)$ in the derived category, and denote the resulting legs by $c_m:E_m\\to R(M)$. Thus $c_{m+1}v_m=c_m$, and their coproduct is the second arrow of a distinguished telescope triangle with third object $R(M)$.",
+   "uses": [
+    "lem-sfb-dg-finite-cell-compact",
+    "lem-sfb-dg-sequential-colimit-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "Both equivalences preserve every small coproduct: for a family $Z_a$ in $D(A_0,d)$ and $Y$ in $D(A,d)$, the bijections $\\operatorname{Hom}(L(\\bigoplus_aZ_a),Y)\\cong\\operatorname{Hom}(\\bigoplus_aZ_a,R(Y))\\cong\\prod_a\\operatorname{Hom}(L(Z_a),Y)$ give the coproduct universal property with the images of its coprojections. Interchange $L,R$ for the other direction. The same Hom bijections and the defining compactness bijection [def-pc-compact-object] show that $Q_m=L(E_m)$ is compact: for any family $Y_a$, compute its Hom into $\\bigoplus_aY_a$ using $R(\\bigoplus_aY_a)\\cong\\bigoplus_aR(Y_a)$ and compactness of $E_m$. All index families remain small in the fixed ambient universe.",
+   "uses": [
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "def-pc-compact-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-functor-preserves-hocolim] to the exact, countable-coproduct-preserving $L$ and the triangle of step 4. The required countable coproducts in both DG derived categories exist by [lem-sfb-dg-sequential-colimit-triangle]. Define $u_m=L(v_m)$ and $b_m=\\epsilon_M L(c_m):Q_m\\to M$. Then $b_{m+1}u_m=\\epsilon_M L(c_{m+1}v_m)=b_m$. Under the coproduct comparison $\\bigoplus_mL(E_m)\\simeq L(\\bigoplus_mE_m)$, the image first arrow is $1-s$, since on its $m$-th coprojection it is the identity minus the next coprojection composed with $L(v_m)$. Identify $LR(M)$ with $M$ by $\\epsilon_M$. The second arrow now restricts to $b_m$ on every coprojection, and the resulting distinguished triangle is exactly the asserted one, with homotopy-colimit convention [def-kun-truncations].",
+   "uses": [
+    "lem-kun-functor-preserves-hocolim",
+    "lem-sfb-dg-sequential-colimit-triangle",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 0CRM, lemma-countable, proof (2) to (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-countable-subalgebra",
+  "lem-sfb-dg-qis-restriction-equivalence",
+  "lem-sfb-dg-countable-semi-free-resolution",
+  "lem-sfb-dg-finite-cell-compact",
+  "lem-sfb-dg-sequential-colimit-triangle",
+  "def-pc-compact-object",
+  "lem-kun-functor-preserves-hocolim",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 0CRM, lemma-countable, implication (2) to (1), with canonical telescope legs of Tag 0CRL and derived.tex Tags 090Z and 0CRH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "countable.*compact|compact.*countable|homotopyColimit|hocolim",
+   "results": "0 hits; Mathlib/Algebra",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective or K-projective resolutions do not give countable dg finite-cell telescopes; countable AB4 does not assert countability of cohomology sets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hocolim\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective or K-projective resolutions do not give countable dg finite-cell telescopes; countable AB4 does not assert countability of cohomology sets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable cohomology modules over a differential graded algebra admit a telescope of compact objects",
+   "results": "Hits: groupCohomology, CategoryTheory.instCountableAB4OfAB4OfSize, CategoryTheory.CountableAB4.mk, CategoryTheory.CountableAB4Star, CategoryTheory.CountableAB4.of_countableAB5, CategoryTheory.CountableAB4.casesOn, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.CountableAB4Star.ofShape",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective or K-projective resolutions do not give countable dg finite-cell telescopes; countable AB4 does not assert countability of cohomology sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded module with countable cohomology over a dg algebra with countable cohomology is a sequential homotopy colimit of compact modules",
+   "results": "Hits: CochainComplex.IsKProjective, DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.IsKProjective.leftOrthogonal, HomologicalComplex.isGrothendieckAbelian, CochainComplex.IsKInjective, CochainComplex.isKProjective_of_projective, CochainComplex.cm5b, CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective or K-projective resolutions do not give countable dg finite-cell telescopes; countable AB4 does not assert countability of cohomology sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable semi free dg module resolutions are increasing countable unions of finite cell modules",
+   "results": "Hits: ModuleCat.projectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.Abelian.LeftResolution.chainComplex, CategoryTheory.InjectiveResolution.cocomplex, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.InjectiveResolution.of, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary projective or K-projective resolutions do not give countable dg finite-cell telescopes; countable AB4 does not assert countability of cohomology sets."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ountable.*[Cc]ompact|[Cc]ompact.*[Cc]ountable|[Ss]emi[Ff]ree|[Ss]emi_free",
+   "results": "Hits: Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean, Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean, Mathlib/Geometry/Manifold/ChartedSpace.lean, Mathlib/Geometry/Manifold/ChartedSpace.lean, Mathlib/Geometry/Manifold/ChartedSpace.lean, Mathlib/Geometry/Manifold/Metrizable.lean, Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean, Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-projectivity, bounded representatives and AB4 countable sums do not supply countable compact DG telescopes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A DG module with countable cohomology is a telescope of compact differential graded modules",
+   "results": "Hits: CategoryTheory.CountableAB4Star, CategoryTheory.instCountableAB4OfAB4OfSize, CategoryTheory.instCountableAB4StarOfAB4StarOfSize, CategoryTheory.CountableAB4.mk, ContinuousCohomology.MultiInd.complex, LightCondensed.instCountableAB4StarLightCondMod, groupCohomology.shortComplexH2, groupCohomology",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-projectivity, bounded representatives and AB4 countable sums do not supply countable compact DG telescopes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hocolim\", \"Countable\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-projectivity, bounded representatives and AB4 countable sums do not supply countable compact DG telescopes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A differential graded module with countable cohomology over a dg algebra with countable cohomology is a sequential homotopy colimit of compact modules",
+   "results": "Hits: CochainComplex.IsKProjective, DerivedCategory.left_fac_of_isStrictlyGE, CochainComplex.IsKProjective.leftOrthogonal, HomologicalComplex.isGrothendieckAbelian, CochainComplex.IsKInjective, CochainComplex.isKProjective_of_projective, CochainComplex.cm5b, CochainComplex.isKProjective_iff_leftOrthogonal",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-projectivity, bounded representatives and AB4 countable sums do not supply countable compact DG telescopes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countably many finite cell DG modules can approximate a module with countable cohomology by a mapping telescope",
+   "results": "Hits: CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b.I, CochainComplex.cm5b.I_X, CochainComplex.isKInjective_of_injective_aux",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-projectivity, bounded representatives and AB4 countable sums do not supply countable compact DG telescopes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-countable-telescope",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs.",
+   "via": [
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-countable-compact-telescope",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0CRM (2) to (1), separating the countable DG subalgebra and countable semi-free inputs from finite-cell compactness and the canonical DG telescope triangle. Constructed the finite-support exhaustion explicitly, reused existing scalar-change equivalence and exact-inverse nodes, and tracked all legs through the equivalence. The statement is unchanged. Reviewer FIX (Q29 maintainer reader): the scalar-change equivalence of step 1 and step 5 is now the statement-only node lem-sfb-dg-qis-restriction-equivalence (Stacks 09S6, the lemma 0CRM itself cites), replacing the dropped dg-category/model-structure node lem-coef-dg-module-base-change and the then redundant exact-inverse citation.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), inherited coherent-family effectivity prerequisite through 0CX8/0CRW/0CRV. Realizes precisely the 0CRM countable-DG telescope input in the inherited from.place; no chapter/unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-functor-preserves-hocolim",
+    "why": "General exact-functor transport of the specified telescope triangle and legs, applied to the scalar-extension equivalence. This is the same generic tool as on the parent space-countable-telescope node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-functor-preserves-hocolim"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-b79db946d",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-b79db946d (reviewer sub-agent of L); spot-checked: FIX for the route-pivot point. The item and all 4 new nodes were read in full against Stacks dga.tex: 0CRM (whole proof), 09S6, 09R3, 0CRL, 09QI and 09KN/09KP. The item statement is unchanged and is correct for 0CRM (2)⇒(1) with the legs of 090Z/0CRH. All six steps check out. In step 3 the finite closure terminates by induction on height, the spans are DG submodules by Leibniz, and the height quotients are finite sums of shifts. In step 6 I verified α⁻¹L(1−s)α=1−s' and b_m=ε_M L(c_m) by hand. The new nodes are true and statement-only, and none duplicates or restates the item. countable-subalgebra was tested on the zero algebra and on uncountable A with countable H. countable-semi-free-resolution needs only countable H(N), with iterated cell attachment over countable A. finite-cell-compact needs no graded-split hypothesis. sequential-colimit-triangle needs no injectivity. Route-pivot point: step 1 and step 5 cited lem-coef-dg-module-base-change, which is the Toën dg-category/Quillen model-structure node that the pivot dropped, and the delivery gave no justification. The fact used is exactly Stacks 09S6 lemma-qis-equivalence, which 0CRM itself invokes, and no node states it. I created the statement-only node lem-sfb-dg-qis-restriction-equivalence (09S6; restriction is an exact equivalence with exact left-adjoint quasi-inverse ⊗^L), repointed steps 1 and 5 to it, and dropped the now-redundant lem-trf-exact-equivalence-inverse from step 1. I then recomputed proof_deps and removed the lem-coef tool_use; the vocabulary 'dg categor' disappears with the old step 1. The new node's only Mathlib search is a grep, since no lean-lsp tools were available to me; this is recorded honestly. Accepted tool use: lem-kun-functor-preserves-hocolim, as on the parent. No SGA is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgCountableCompactTelescope",
+  "declaration": "CategoryTheory.DgAlgebra.exists_compact_telescope_of_countable_cohomology",
+  "file": "lean/Sheaf/CategoryTheory/DgCountableCompactTelescope.lean",
+  "statement": "theorem exists_compact_telescope_of_countable_cohomology (A : Algebra.{u}) [DerivedStructure A] (hA : ∀ i : ℤ, Countable (A.X.homology i)) (M : Derived A) (hM : ∀ i : ℤ, Countable (((underlying A).obj ((Localization.Construction.objEquiv (quasiIsomorphisms A)).symm M)).homology i)) : ∃ (Qm : ℕ → Derived A) (um : ∀ m : ℕ, Qm m ⟶ Qm (m + 1)) (bm : ∀ m : ℕ, Qm m ⟶ M), (∀ m : ℕ, IsCompactObject.{u} (Qm m)) ∧ (∀ m : ℕ, um m ≫ bm (m + 1) = bm m) ∧ ∃ δ : M ⟶ (∐ Qm)⟦(1 : ℤ)⟧, Triangle.mk (𝟙 (∐ Qm) - Sigma.desc (fun m : ℕ ↦ um m ≫ Sigma.ι Qm (m + 1))) (Sigma.desc bm) δ ∈ distTriang (Derived A)",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed DG localization and its standard DerivedStructure; cohomology of a derived object is computed on the identical underlying DG-module object via Localization.Construction.objEquiv. The telescope legs are the actual Sigma.desc maps. Adds the already-landed def-sfb-dg-derived-category to stmt_deps; no natural-language statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4e78afe5",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0CRM (2)=>(1). It uses landed DgAlgebra.Algebra/Derived with [DerivedStructure A], which fixes the standard cone triangles and coproducts.{u}, so it adds no hypothesis; preadditive structure is unique since the category is pretriangulated. hA/hM: Countable H^i for all integers; hM reads the cohomology of the same object via Mathlib's identity-on-objects objEquiv.symm. Conclusion: IsCompactObject.{u} Q_m, um m ≫ bm (m+1) = bm m, triangle 𝟙−Sigma.desc(um≫ι(m+1)), Sigma.desc bm, ∃δ to (∐Qm)⟦1⟧, exactly the IsSequentialHomotopyColimit form with pinned legs. lean.statement verbatim; node diff vs side-live only lean plus stmt_dep def-sfb-dg-derived-category (landed, identical record). No new defs, sorry only, source/blueprint docstrings and 6 proof steps; edge cases (zero, unbounded, uncountable cochains) covered; single universe u. Proof-only deps have no Lean record, which does not affect typing. Report has Worker report and Second reading sections (the latter a self-check, advisory). No file changed, no compile."
+ }
+}

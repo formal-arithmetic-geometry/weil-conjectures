@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-rational-p1-scalar-chern-base-change",
+ "kind": "statement",
+ "title": "Exchange preserves the actual twisted-unit and Chern generators",
+ "statement": "In the setting of [lem-sfb-rational-p1-scalar-chern-splittings], but without assuming any splitting or trace equation, let F be q* and beta=secondTraceExchange [lem-sfb-rational-p1-second-pretrace]. Let uq,u2,cq,c2 be the explicit independently transported generators [def-sfb-rational-p1-scalar-chern-maps]. Then F(uq) followed by beta equals scalarQLineIso.hom followed by u2, and F(cq) followed by beta equals scalarUnitPullIso.hom followed by c2. The two completed input Chern adjuncts need only their whole-system normalized equations. There is no trace or inverse splitting in either conclusion.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-sfb-rational-p1-second-pretrace"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, scalar trace base change before tensoring with q*K."
+ },
+ "proof": [
+  {
+   "text": "Expand the geometric exchange mate. Its unit triangle identifies the twisted-unit generator under base change, with the actual root-normalized line endpoint comparison.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "def-sfb-rational-p1-scalar-chern-maps",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under the identity q model and factor-swapped p2 model, the standard section pulls back to the p2 standard section. Its equation t stays regular under arbitrary base change. Pullback of the positive Cartier roof preserves the generator +1, giving the commuting complete Kummer-system Chern diagram and all root transitions.",
+   "uses": [
+    "lem-sp-tower-integral-class-pullback",
+    "def-sfb-diagonal-coefficient-reference",
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass the entire Chern diagram through the recorded limits and unit/line comparisons, then the full-unit realization squares and scalar-extension mates. Whole-system normalization identifies the two input adjuncts; root and unit normalization identify the endpoint maps with the specified native comparisons. Use the supplied bottom finite-field to closure comparison for the closure case. This proves the Chern generator equation before applying any trace.",
+   "uses": [
+    "def-sfb-rational-p1-scalar-chern-maps",
+    "def-sfb-diagonal-coefficient-reference",
+    "def-sfb-diagonal-coefficient-diagrams",
+    "det-prop-sfb-cartesian-coefficients-twists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-sfb-rational-p1-scalar-chern-maps",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-sp-tower-integral-class-pullback",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, scalar trace base change before tensoring with q*K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unit and Chern class split the derived direct image on a projective line, with trace values zero and one",
+   "date": "2026-10-27",
+   "results": "Eight hits: projective resolutions, linear algebra direct-sum traces, and split maps of cochain complexes. No projective-line Chern splitting or sheaf trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line Chern splitting normalized trace commutes with pullback base change",
+   "date": "2026-10-27",
+   "results": "Eight hits on normalized field traces, elliptic curves and LinearMap.trace_baseChange. None for the derived geometric trace.",
+   "verdict": "No geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"biprod\", \"desc\"",
+   "date": "2026-10-27",
+   "results": "biprod.desc, inl_desc, inr_desc and their reassociations. These are used for the categorical assembly; they do not construct the geometric generators.",
+   "verdict": "Use Mathlib biproduct calculus for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*Chern|chern.*trace",
+   "date": "2026-10-27",
+   "results": "No Mathlib matches. In the project, DiagonalCompletedChernLift constructs normalized completed adjuncts, DiagonalTraceTwistedSplittingComponents proves the strict-system components, and DiagonalUniformizerTraceChernDegree proves completed Chern degree privately. DiagonalTowerCoefficients.baseChange needs two families and completed cycle systems not present in this item.",
+   "verdict": "Separate the intrinsic splittings from geometric preservation of their actual generators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondScalarTrace",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Second identity, scalar trace base change before tensoring with q*K.",
+   "via": [
+    "lem-sfb-rational-p1-second-scalar-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1ScalarChernBaseChange",
+  "file": "lean/Sheaf/Paper/RationalP1ScalarChernBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.scalar_chern_base_change",
+  "statement": "theorem scalar_chern_base_change\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    [DiagonalTraceLocalizations l Y]\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (family : Family l Y) (r : Reference l Y δ family)\n    (a : DiagonalTrace.completedUnit l Y ⟶\n      r.tq.Rc.R.obj ((DiagonalTrace.completedLine l (ProjectiveLine Y)) ⟦(2 : ℤ)⟧))\n    (ha : CompletedChernNormalized l r.tq.toPresentation a)\n    (b : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶\n      r.t₂.Rc.R.obj ((DiagonalTrace.completedLine l (diagonalSurface Y)) ⟦(2 : ℤ)⟧))\n    (hb : CompletedChernNormalized l r.t₂.toPresentation b) :\n    let Λ := (coefficient l c).X\n    let L := line l c\n    let T := fun X : Scheme.{u} ↦\n      ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj (L X)) ⟦(2 : ℤ)⟧\n    let uq := scalarTwistedUnit Λ (ProjectiveLine Y ↘ Y) (T Y) (T (ProjectiveLine Y))\n      (scalarQLineIso l c k p hpl Y)\n    let u₂ := scalarTwistedUnit Λ (secondProjection Y)\n      (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)\n    let cq := scalarQChern l c Y r a\n    let c₂ := scalarP2Chern l c Y r b\n    let F := moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)\n    F.map uq ≫ secondTraceExchange l c k p hpl Y =\n        (scalarQLineIso l c k p hpl Y).hom ≫ u₂ ∧\n      F.map cq ≫ secondTraceExchange l c k p hpl Y =\n        (scalarUnitPullIso Λ Y).hom ≫ c₂",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T112327-L-1571337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261027T112327-L-1571337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

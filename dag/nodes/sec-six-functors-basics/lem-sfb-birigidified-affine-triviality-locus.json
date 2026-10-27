@@ -1,0 +1,363 @@
+{
+ "id": "lem-sfb-birigidified-affine-triviality-locus",
+ "kind": "statement",
+ "title": "Clopen triviality locus for a doubly rigidified family on two smooth affine varieties",
+ "statement": "Let $F$ be a field [def-weil-field]. Let $U$ and $V$ be affine schemes of finite type over $F$ [def-pc-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism] which are smooth [def-sbc-smooth-morphisms] and geometrically integral [def-pc-geometrically-irreducible], meaning integral after every field extension. Fix $F$-rational points $u:\\operatorname{Spec}F\\to U$ and $v:\\operatorname{Spec}F\\to V$ [def-pc-rational-point]. Let $T$ be a smooth separated finite-type geometrically integral $F$-scheme; separated means its diagonal is a closed immersion. Let $M$ be an invertible module on $U\\times_FV\\times_FT$ [def-sc-invertible-module, def-pc-fibre-product]. Suppose its tensor pullbacks [def-pc-module-pullback] to $\\{u\\}\\times_FV\\times_FT$ and $U\\times_F\\{v\\}\\times_FT$ are trivial, where trivial means isomorphic to the structure sheaf. There exists a field extension $K/F$ [def-pc-field-extension] which is finite, meaning that $K$ is finite-dimensional as an $F$-vector space, such that the following holds. Write $U_K,V_K,T_K$ for the base changes to $K$, $M_K$ for the tensor pullback of $M$, and for $t\\in T_K$ let $(M_K)_t$ be its pullback to $U_K\\times_KV_K\\times_K\\operatorname{Spec}\\kappa(t)$, where $\\kappa(t)$ is the residue field [def-weil-residue-field]. Then\n$$E(M_K)=\\{t\\in |T_K|:(M_K)_t\\cong\\mathcal O_{U_K\\times_KV_K\\times_K\\operatorname{Spec}\\kappa(t)}\\}$$\nis open and closed in the underlying topological space of $T_K$.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Proposition 5.2, proof of Claim 5.2.1, paragraph defining E and asserting its clopenness using normal projective compactifications and see-saw (printed pp.12-13 in March 31, 2026 author version). Smooth affine specialization of the two-factor rigidified-family input. Read online; local copy WANTED. No Stacks tag is claimed to state this nonproper two-factor result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-pc-rational-point",
+  "def-sc-invertible-module",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-residue-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraic closure $k$ of $F$. Smoothness survives all field extensions and products: use smooth base change and composition. Geometric irreducibility survives products, while smoothness gives geometric reducedness and normality. Thus $X=U_k\\times_kV_k$ and $T_k$ are geometrically integral, and $T_k$ is normal. They and $X\\times_kT_k$ are locally Noetherian, since they are of finite type over a field. The projection $f:X\\times_kT_k\\to T_k$ is smooth, hence flat, and of finite type; every residue-field fibre is nonempty and integral. The point $(u,v)$ supplies a section $s$ of $f$. These are exactly the hypotheses needed later for generic-line pullback.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sc-geometrically-irreducible-product",
+    "lem-trf-smooth-geometrically-normal",
+    "pqf-lem-locnoeth-lft",
+    "lem-pc-smooth-flat",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+    "place": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3)."
+   }
+  },
+  {
+   "text": "If $M_k$ has no trivial fibre over any algebraically closed extension of $k$, take $K=F$: an actually trivial residue-field fibre of $M$ would remain trivial over an algebraic closure containing $k$, a contradiction. Thus $E(M)$ is empty. Otherwise choose an algebraically closed extension $\\Omega/k$ and a point $a\\in T_k(\\Omega)$ with $M_a$ trivial. Write $Q=\\kappa(\\eta)$ for the generic field of $T_k$. Choose an algebraically closed field $\\Lambda$ containing both $\\Omega$ and $Q$ over $k$ (take an algebraic closure of a residue field at a prime of the nonzero ring $\\Omega\\otimes_kQ$). Let $b\\in T_k(\\Lambda)$ be the generic point with this field embedding. The scheme $T_\\Lambda$ is smooth (smooth base change), of finite type (finite-type base change), separated (its diagonal is the base change of the closed immersion $\\Delta_T$, and closed immersions are stable under base change), and integral by geometric integrality, hence connected. Likewise $U_\\Lambda,V_\\Lambda$ are smooth, affine, of finite type and geometrically integral over $\\Lambda$. The two points $a,b$ of the smooth connected separated finite-type scheme $T_\\Lambda$ show, by the definition of algebraic equivalence, that $[M_b]-[M_a]$ belongs to $\\operatorname{Pic}^{\\mathrm{alg}}(U_\\Lambda\\times V_\\Lambda)$. Since $M_a$ is trivial, the product lemma gives $M_b\\cong p_U^*A\\otimes p_V^*B$.",
+   "uses": [
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "def-weil-algebraic-closure",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sc-geometrically-irreducible-product",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+    "place": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3)."
+   }
+  },
+  {
+   "text": "Restrict this exterior tensor expression to $\\{u\\}\\times V_\\Lambda$. Its class is $[B]$, since $A_u$ is a one-dimensional vector space over the field $\\Lambda$ and hence trivial. The axis hypothesis gives $B\\cong\\mathcal O$. Restriction to $U_\\Lambda\\times\\{v\\}$ similarly gives $A\\cong\\mathcal O$. Therefore $M_b$ is actually trivial. Apply field-extension detection with the algebraically closed constant field $k$, the smooth affine geometrically integral scheme $X$, and the tower $k\\subset Q\\subset\\Lambda$. It gives $M_\\eta\\cong\\mathcal O_{X_Q}$.",
+   "uses": [
+    "lem-sfb-constant-variety-picard-detection",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+    "place": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3)."
+   }
+  },
+  {
+   "text": "The generic-line pullback theorem, with all geometric hypotheses checked in step 1, gives $M_k\\cong f^*N$ for an invertible module $N$ on $T_k$. Pulling back by $s$ gives $N\\cong s^*M_k$. The latter is trivial, since $s$ factors through either trivial axis. Hence $M_k$ is globally trivial on $U_k\\times_kV_k\\times_kT_k$.",
+   "uses": [
+    "lem-sfb-normal-noetherian-generic-line-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+    "place": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3)."
+   }
+  },
+  {
+   "text": "The finite intermediate extensions $F\\subset K\\subset k$ form a directed set: a compositum is finite, and every finite subset of the algebraic extension lies in one of them. Their spectra have limit $\\operatorname{Spec}k$. Taking the product with $Z=U\\times_FV\\times_FT$ gives $Z_k=\\varprojlim_K Z_K$: on affine charts this is the identity $A\\otimes_F k=\\varinjlim_K(A\\otimes_FK)$, and these identifications agree on overlaps. Each $Z_K$ is quasi-compact and quasi-separated, being separated and of finite type over a field; the transition maps are affine, being base changes of maps between field spectra. The modules $M$ and $\\mathcal O_Z$ are finitely presented, since locally both are free of rank one. Apply the finite-presentation isomorphism descent theorem to the global trivialization in step 4 and its inverse. For some finite $K/F$ this gives $M_K\\cong\\mathcal O_{Z_K}$. Every residue-field fibre is now trivial, so $E(M_K)=|T_K|$, which is open and closed.",
+   "uses": [
+    "lem-kun-algebraic-subextensions-spec-limit",
+    "lem-trf-fp-module-limit-isomorphism-descent",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, lemma-descend-modules-finite-presentation, clauses (2)-(3), applied to the trivialization and its inverse; Guo Claim 5.2.1 perfect-closure limit reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-trf-smooth-geometrically-normal",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-smooth-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-affine-product-algebraic-equivalence",
+  "lem-sfb-constant-variety-picard-detection",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-normal-noetherian-generic-line-pullback",
+  "lem-kun-algebraic-subextensions-spec-limit",
+  "lem-trf-fp-module-limit-isomorphism-descent",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3). Detailed assembly and correction by Q94; two extracted prerequisites remain statement-only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A doubly rigidified line bundle on the product of two smooth geometrically integral varieties with a connected smooth parameter scheme is trivial if one parameter fibre is trivial",
+   "results": "{\"t\": \"2026-10-24T04:27:48Z\", \"tool\": \"leanfinder\", \"query\": \"A doubly rigidified line bundle on the product of two smooth geometrically integral varieties with a connected smooth parameter scheme is trivial if one parameter fibre is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"hom_trivializationAt\", \"hom_trivializationAt_baseSet\", \"hom_trivializationAt_target\", \"Bundle.Trivial.trivialization.isLinear\", \"hom_trivializationAt_apply\", \"Bundle.Trivial.continuousLinearEquivAt_trivialization\", \"Bundle.Trivial.symmₗ_trivialization\"], \"digest\": \"c766df7988fb2823\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.of.the.(cube|square)|rigidif|Picard|IsInvertible",
+   "results": "{\"t\": \"2026-10-24T04:30:45Z\", \"tool\": \"grep\", \"query\": \"theorem.of.the.(cube|square)|rigidif|Picard|IsInvertible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\"], \"digest\": \"6bb700cdd5010361\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trivial fibre locus of a line bundle on a product of two geometrically integral affine varieties rigidified along two rational point slices is open and closed",
+   "results": "{\"t\": \"2026-10-24T04:30:45Z\", \"tool\": \"leansearch\", \"query\": \"The trivial fibre locus of a line bundle on a product of two geometrically integral affine varieties rigidified along two rational point slices is open and closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.open_baseSet\", \"Pretrivialization.open_target\", \"Pretrivialization.open_baseSet\", \"FiberBundle.prod_trivializationAt'\", \"FiberPrebundle.isOpen_source\", \"FiberBundleCore.open_source'\", \"Trivialization.recOn\", \"VectorBundleCore.trivializationAt\"], \"digest\": \"b5d2e7e053760895\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-24T04:30:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInvertible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"VectorField.pullback_eq_of_not_isInvertible\", \"VectorField.pullbackWithin_eq_of_not_isInvertible\"], \"digest\": \"21a371168037510a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "grep",
+   "query": "rigidif|Picard|trivial.*locus|locus.*trivial",
+   "results": "{\"t\": \"2026-10-24T04:31:10Z\", \"tool\": \"grep\", \"query\": \"rigidif|Picard|trivial.*locus|locus.*trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean\", \"Mathlib/Geometry/Manifold/IntegralCurve/ExistUnique.lean\", \"Mathlib/Analysis/SpecialFunctions/Integrals/Basic.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\", \"Mathlib/Analysis/ODE/ExistUnique.lean\"], \"digest\": \"3664ea62718090c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The theorem of the cube for line bundles on smooth varieties implies a square condition after finite field extension",
+   "results": "{\"t\": \"2026-10-24T04:31:10Z\", \"tool\": \"leansearch\", \"query\": \"The theorem of the cube for line bundles on smooth varieties implies a square condition after finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.c_relation_of_char_two\", \"FiniteField.isSquare_odd_prime_iff\", \"FiniteField.isSquare_of_char_two\", \"FiniteField.isSquare_two_iff\", \"FiniteField.isSquare_iff\", \"WeierstrassCurve.c_relation_of_char_three\", \"FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp\", \"IsSepClosed.exists_eq_mul_self\"], \"digest\": \"6015ebff8fe62b3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard group of a product of two varieties modulo line bundles from either factor has no variation in a connected smooth algebraic family",
+   "results": "{\"t\": \"2026-10-24T04:31:10Z\", \"tool\": \"leansearch\", \"query\": \"Picard group of a product of two varieties modulo line bundles from either factor has no variation in a connected smooth algebraic family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.ext_iff\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mk.congr_simp\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"Submodule.unitsQuotEquivRelPic\", \"CommRing.Pic.mk_tensor\"], \"digest\": \"5f0c0121df20377b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After a finite extension of a field, the four term square difference of a line bundle on a product of three smooth geometrically integral schemes is pulled back from the first two doubled factors",
+   "results": "{\"t\": \"2026-10-24T04:31:12Z\", \"tool\": \"leanfinder\", \"query\": \"After a finite extension of a field, the four term square difference of a line bundle on a product of three smooth geometrically integral schemes is pulled back from the first two doubled factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\"], \"digest\": \"15c5f14bcfc033fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a family of invertible sheaves on two geometrically normal affine varieties trivial on both coordinate axes is trivial is open and closed in a smooth integral parameter scheme",
+   "results": "{\"t\": \"2026-10-24T04:31:13Z\", \"tool\": \"leanfinder\", \"query\": \"The locus where a family of invertible sheaves on two geometrically normal affine varieties trivial on both coordinate axes is trivial is open and closed in a smooth integral parameter scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"292072a2a954c4d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T04:32:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mul_eq_tensor\"], \"digest\": \"e7cb255b44488ed1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned scalar Picard tensor identities, topological vector-bundle trivializations, unramified loci and scheme pullback-carrier constructions do not assert a clopen locus for doubly rigidified algebraic line-bundle families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A doubly normalized invertible sheaf on a product of two smooth affine varieties has open and closed trivial fibre locus after finite extension of the ground field",
+   "results": "{\"t\": \"2026-10-24T05:37:09Z\", \"tool\": \"leanfinder\", \"query\": \"A doubly normalized invertible sheaf on a product of two smooth affine varieties has open and closed trivial fibre locus after finite extension of the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\"], \"digest\": \"940116cc5d3c865d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: clopen-spectrum topology and Picard scalar-extension functoriality do not imply the corrected geometric-family assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "After finite extension of constants the triviality locus of a birigidified invertible sheaf on an affine product is clopen",
+   "results": "{\"t\": \"2026-10-24T05:38:03Z\", \"tool\": \"leansearch\", \"query\": \"After finite extension of constants the triviality locus of a birigidified invertible sheaf on an affine product is clopen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.isClopen_iff\", \"PrimeSpectrum.isClopen_basicOpen_of_mul_add\", \"PrimeSpectrum.isClopen_iff_zeroLocus\", \"PrimeSpectrum.isClopen_iff_mul_add\", \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen\", \"LocallyConstant.ofIsClopen\", \"LocallyConstant.indicator\"], \"digest\": \"d463740734e304eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: clopen-spectrum topology and Picard scalar-extension functoriality do not imply the corrected geometric-family assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRing.Pic.mapAlgebra",
+   "results": "{\"t\": \"2026-10-24T05:39:36Z\", \"tool\": \"loogle\", \"query\": \"CommRing.Pic.mapAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapRingHom_algebraMap\", \"CommRing.Pic.mapAlgebra_self\", \"CommRing.Pic.mapAlgebra_self_apply\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"39c67557826d358b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: clopen-spectrum topology and Picard scalar-extension functoriality do not imply the corrected geometric-family assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRing.Pic, CommRing.Pic",
+   "results": "{\"t\": \"2026-10-24T05:39:36Z\", \"tool\": \"loogle\", \"query\": \"CommRing.Pic, CommRing.Pic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CommRing.Pic\", \"instCommGroupPic\", \"CommRing.Pic.AsModule\", \"CommRing.Pic.instCoeSortType\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"CommRing.Pic.instAddCommGroupAsModule\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.Pic.mk\"], \"digest\": \"a35541b7b42c212f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: clopen-spectrum topology and Picard scalar-extension functoriality do not imply the corrected geometric-family assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-square-after-finite-extension",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3).",
+   "via": [
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-birigidified-affine-triviality-locus",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the unrestricted-ground-field clopen claim is false. The report gives an explicit imperfect-field counterexample. Corrected to existence after finite extension, as in Guo Claim 5.2.1. Split via two independently stated Picard prerequisites, axis cancellation, existing generic-line pullback and existing isomorphism descent; no proper-only see-saw is applied to affine schemes. Parent step 4 needs the additional finite extension inserted.",
+  "blueprint": "Guo Proposition 5.2, proof of Claim 5.2.1, printed pp.12-13: perfect-closure reduction and the paragraph asserting clopenness via normal projective compactifications and Picard theory; supporting the historical alteration/Picard route beneath det-thm-sf-ctf-stability-direct-images, proof (3).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-kun-algebraic-subextensions-spec-limit",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-trf-fp-module-limit-isomorphism-descent",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme geometry or finite-limit module descent used only as a black box; it does not replace any alteration/Picard step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sc-geometrically-irreducible-product",
+  "lem-trf-smooth-geometrically-normal",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-smooth-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-kun-algebraic-subextensions-spec-limit",
+  "lem-trf-fp-module-limit-isomorphism-descent",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-f75999758",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-f75999758 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, the parent lem-sfb-field-square-after-finite-extension and Guo pp.11-13 (Prop 5.2, Claim 5.2.1, Variant 5.3, Remark 5.4.2). Statement correction accepted under E7. The base claim (E(M) clopen over any F) is false. I checked the report's F_3(a) wound-curve counterexample by hand: the identity w-w^p=a t^p, axis triviality, regularity of the completion at the degree-p boundary point, genus 1, the nonzero class O(h(s)-0) on G_s, and the 0BD7/section contradiction. Guo himself reduces to perfect k before E is clopen and gives an analogous counterexample in Remark 5.4.2. The correction (some finite K) is reported under ## Source error. Maintainer: the parent's step 4 must enlarge K once more before using this lemma; its conclusion already allows that. Steps 1-5 check against the cited statements: hypotheses of generic-line pullback, axis cancellation, detection with the tower k<Q<Lambda, and fp isomorphism descent along the finite subextensions. FIX: step 2 did not check that T_Lambda is separated and of finite type, which the Pic^alg definition requires. I added that check and cited lem-weil-pbc-proper-fp-permanence and lem-sfb-finite-type-composition-base-change. Both new nodes are statement-only and self-contained; I found no duplicates (the existing nodes are proper-only, abelian-variety or curve-only). affine-product-algebraic-equivalence follows from Guo's perfect-field claim by the q0/q1 difference trick. constant-variety-picard-detection was tested on A^n, G_m and E minus a point, plus the Hilbert 90 / p-torsion reasoning. Batch-5: the trf smooth-composition, smooth-geometrically-normal and fp-module-limit-descent nodes, and flat-torsionfree reached through generic-line-pullback, are generic algebra outside the trace formula and Poincare duality: accepted. The eleven generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirigidifiedAffineTrivialityLocus",
+  "declaration": "AlgebraicGeometry.exists_finite_extension_isClopen_birigidified_affine_triviality_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirigidifiedAffineTrivialityLocus.lean",
+  "statement": "theorem exists_finite_extension_isClopen_birigidified_affine_triviality_locus {F : Type u} [Field F] (U V T : Over (Spec (.of F))) [IsAffine U.left] [IsAffine V.left] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [Smooth U.hom] [Smooth V.hom] [GeometricallyIntegral U.hom] [GeometricallyIntegral V.hom] [Smooth T.hom] [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [GeometricallyIntegral T.hom] (u : 𝟙_ (Over (Spec (.of F))) ⟶ U) (v : 𝟙_ (Over (Spec (.of F))) ⟶ V) (M : ((U ⊗ V) ⊗ T).left.Modules) [M.IsInvertible] (hu : Nonempty ((Scheme.Modules.tensorPullback (lift (lift (toUnit (V ⊗ T) ≫ u) (fst V T)) (snd V T)).left).obj M ≅ SheafOfModules.unit _)) (hv : Nonempty ((Scheme.Modules.tensorPullback (lift (lift (fst U T) (toUnit (U ⊗ T) ≫ v)) (snd U T)).left).obj M ≅ SheafOfModules.unit _)) : ∃ (K : Type u) (_ : Field K) (_ : Algebra F K), Module.Finite F K ∧ IsClopen {t : pullback (C := Scheme.{u}) T.hom (Spec.map (CommRingCat.ofHom (algebraMap F K))) | Nonempty ((Scheme.Modules.tensorPullback ((pullback.snd (snd (U ⊗ V) T).left (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap F K))))).fiberι t ≫ pullback.fst (snd (U ⊗ V) T).left (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap F K)))))).obj M ≅ SheafOfModules.unit _)}",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-236cd9161",
+  "group": "Q84",
+  "result": "fix",
+  "note": "Lean statement exact against the corrected, L-reviewed node: U,V affine LFT+QC Smooth GeometricallyIntegral; u,v sections 𝟙_ Over ⟶ U/V; T Smooth IsSeparated LFT+QC GeometricallyIntegral with no extra hypothesis; M invertible on (U⊗V)⊗T; axis lifts (u,id,id) and (id,v,id) checked; ∃ K:Type u, Field, Algebra, Module.Finite; T_K = pullback T.hom (Spec.map algebraMap); fibre via Mathlib fiberι over the residue field κ(t) of Z×_T T_K → T_K composed back to Z; IsClopen of the trivial-fibre set over all points. Edge cases K=F, empty locus, imperfect F, nonclosed t covered; single universe u, all bound. Records: only the lean field added, statement verbatim, recorded dep declarations used (tensorPullback), imports exist live, no name clash, one sorry, no defs, docstrings complete. Only fault H11: the second reading is the worker's own self-check -> fixes/lem-sfb-birigidified-affine-triviality-locus.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean change, no compile needed."
+ }
+}

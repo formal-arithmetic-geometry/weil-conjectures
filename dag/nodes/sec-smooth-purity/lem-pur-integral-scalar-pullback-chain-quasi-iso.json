@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-integral-scalar-pullback-chain-quasi-iso",
+ "kind": "statement",
+ "title": "Quasi-isomorphism of the specified scalar pullback chain comparison",
+ "statement": "Let ell be prime, E and L finite extensions of Q_ell, iota:E→L a coefficient embedding, f:X→Y any scheme morphism, and P a good (K-flat and termwise-flat) complex of completed E-coefficient sheaves [lem-pur-integral-operations-well-defined]. The specified chain map scalarPullbackChain [lem-pur-integral-scalar-finite-comparison-models], obtained from the normalized strict finite-level pullback tower maps by the diagonal Roos comparison, is a quasi-isomorphism. This is the proved specialization of [lem-pur-integral-scalar-pullback-roos-quasi-iso]; its naturality is proved in the same module.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; derived.tex Tag 08TC. Specialization of the normalized cofinal-filtration comparison to the prescribed strict maps."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-scalar-finite-comparison-models"
+ ],
+ "proof": [
+  {
+   "text": "For naturality, compose the generic diagonal Roos natural transformation in ScalarRoosComparison with the specified strict tower transformation. For the quasi-isomorphism, unfold the specified scalarPullbackChain and apply integralScalarPullbackRoosQuasiIso. At each finite level, the chosen tower normalization identifies the component with scalarPullbackLevel; its chosen generator equation supplies the required generator hypothesis. The chosen scalarRoosMap normalization supplies both product-coordinate hypotheses. This is a complete Lean specialization, with no new hole.",
+   "uses": [
+    "def-sf-additive-roos-map",
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-pur-integral-scalar-pullback-roos-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0941; derived.tex Tag 08TC. Specialization of the normalized cofinal-filtration comparison to the prescribed strict maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-additive-roos-map",
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-integral-scalar-pullback-roos-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; derived.tex Tag 08TC. Specialization of the normalized cofinal-filtration comparison to the prescribed strict maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The prescribed scalar pullback chain map on a good complex is a quasi-isomorphism by its normalized finite-level generator and Roos coordinates",
+   "results": "Generic quasiIso_comp and related homology lemmas; no theorem about the prescribed scalar/reduction chain map.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing normalized Roos comparison and prove the specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"map\"",
+   "results": "Generic ShortComplex quasi-isomorphism and preserved homology maps; no specialized scalar pullback result.",
+   "date": "2026-10-26",
+   "verdict": "No independent specialized match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackChain|scalarPullbackChainQuasiIso|integralScalarPullbackRoosQuasiIso",
+   "results": "No Mathlib hits. The sandbox private specialization is relocated here for the compile-time limit; the shared source has no competing specialization.",
+   "date": "2026-10-26",
+   "verdict": "Retain the same proved specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "H1",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph, sentence: \"Their compatibility with reduction modulo $\\pi_E^n$ and with extension of scalars is a theorem ([sk-prop-scalar-six]).\" This node supplies the cofinal-filtration quasi-isomorphism for the assigned legacy finite-reduction pullback comparison.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarPullbackChainProperties",
+  "file": "lean/Sheaf/Paper/IntegralScalarPullbackChainProperties.lean",
+  "declaration": "WeilConjectures.scalarPullbackChainQuasiIso",
+  "statement": "theorem scalarPullbackChainQuasiIso {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) (P : (integralOperationsGoodComplex l E Y).FullSubcategory) : QuasiIso (scalarPullbackChain l E L ι f P.obj)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f87f7",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T021328-L-2757675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f87f7",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T021328-L-2757675",
+  "kind": "interface",
+  "note": "independent cc review: old item (clone 7dea68d0df6) vs 6 delivered modules: 23 moved decls identical in signature/body, public re-export chain item→Models→ScalarRoosComparison; new sorry integralScalarPullbackRoosQuasiIso read against its node (true: finite-free product commutation + cofinal Roos); all 51 direct importers compiled against delivered modules: 47 OK, 4 timeouts that also time out against the published original"
+ }
+}

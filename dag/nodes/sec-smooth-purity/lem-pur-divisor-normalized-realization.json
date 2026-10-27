@@ -1,0 +1,393 @@
+{
+ "id": "lem-pur-divisor-normalized-realization",
+ "kind": "statement",
+ "title": "Supported Kummer realization of a framed line bundle",
+ "statement": "Fix the finite coefficient datum $k,\\ell,E,n,A=A_{E,n}$ with $n\\geq1$ [def-pur-conventions], put $m=\\ell^n$, and let $T$ be a separated finite-type $k$-scheme. Let $i:Z\\hookrightarrow T$ be any closed immersion with complementary open $j:W\\hookrightarrow T$ [def-weil-closed-immersion, def-weil-open-immersion]. Let $L$ be an invertible $\\mathcal O_T$-module [def-sc-invertible-module], and fix a frame $s:\\mathcal O_W\\xrightarrow\\sim L|_W$. Let $P=\\underline{\\operatorname{Isom}}(\\mathcal O_T,L)$ be its $\\mathbf G_m$-torsor [lem-sc-line-bundle-torsor], with specified section $s$ [def-amb-torsor-with-section]. Write $\\beta(L,s)\\in\\operatorname{Ext}^1(i_*\\mathbf Z_Z,\\mathbf G_m)$ for the unique extension class with an equivariant map from $P$ to the fibre over the supported section one, sending $s$ to zero, as in [lem-sp-relative-torsor-extension]. Let $k_m\\in\\operatorname{Ext}^1(\\mathbf G_m,\\mu_m^{\\mathrm{et}})$ be the actual Kummer extension [lem-amb-kummer-any-base]. Use the ordinary etale derived categories [def-weil-pbc-derived-categories] and the integral-to-module realization [def-asd-ordinary-finite-p1-kummer-class].\nThere is a unique class\n$$b_A(L,s)\\in\\operatorname{Ext}^2_A(i_*A_Z,\\mu_m^{\\mathrm{et}}\\otimes_{\\mathbf Z/m}A_T)$$\nwhose abelian realization, precomposed with $i_*\\mathbf Z_Z\\to i_*A_Z$, is the roots-coefficient image of the Yoneda splice $k_m[1]\\circ\\beta(L,s)$. Its supported-Hom realization [lem-amb-closed-support-hom], followed by the canonical etale/pro-etale comparison and the coefficient morphism $\\sigma_T\\rho_T$ of [def-pur-frame-class], defines a canonical class\n$$b^{\\mathrm{pro}}_A(L,s)\\in H^2_Z(T_{\\mathrm{proet}},A(1))$$\nwith supported cohomology [def-pur-support-cohomology]. This realization uses the Yoneda extension normalization, equivalently the Ext-normalized torsor class of [lem-amb-relative-torsor-cohomology], rather than the raw signed-cone lifting cocycle. It is invariant under isomorphisms of the pair $(L,s)$, commutes with etale pullback of the pair and with enlargement of support (restriction of $s$ to a smaller complementary open), and is additive as a function of the integral extension class $\\beta$. Forgetting support gives the ordinary Kummer connecting image of the frame-torsor class $[P]$, with positive sign, followed by exactly the same roots coefficient morphism and site comparison. No module structure over $\\mathbf Z/m$ on $\\mathbf G_m$ is used. Here $Z$ need not be a Cartier divisor and $s$ need not extend to a global section of $L$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL, lemma-kummer-sequence, and Tag 0A45, lemma-cohomology-with-support-triangle. Agent-stated framed-line refinement of the relative construction in blueprint main-20261015 lem-pur-divisor-class.proof.md, first sentence and final paragraph; the scalar and site identifications are part of the assertion, not claimed verbatim in Stacks."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "lem-sc-line-bundle-torsor",
+  "def-amb-torsor-with-section",
+  "lem-sp-relative-torsor-extension",
+  "lem-amb-kummer-any-base",
+  "def-weil-pbc-derived-categories",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "lem-amb-closed-support-hom",
+  "def-pur-frame-class",
+  "def-pur-support-cohomology",
+  "lem-amb-relative-torsor-cohomology",
+  "def-pur-framed-integral-extension",
+  "def-pur-framed-scalar-maps",
+  "def-pur-framed-abelian-realization",
+  "def-pur-framed-scalar-realization",
+  "def-pur-framed-pro-realization",
+  "def-pur-frame-kummer-class",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-pur-framed-transport",
+  "def-pur-framed-pro-predicate",
+  "def-pur-framed-realization-iso",
+  "def-pur-framed-realization-additive",
+  "def-pur-framed-realization-pullback",
+  "def-pur-framed-realization-enlarge",
+  "def-pur-framed-realization-property",
+  "def-pur-framed-forget-support",
+  "def-pur-framed-etale-hom",
+  "def-pur-supported-class-operations",
+  "def-pur-supported-hom-site-comparison",
+  "def-pur-ordinary-hom-site-comparison",
+  "def-pur-supported-hom-pair"
+ ],
+ "proof": [
+  {
+   "text": "Take $G=\\mathbf G_m$. The open-closed exact sequence at $\\mathbf Z_T$ gives $0\\to j_!\\mathbf Z_W\\to\\mathbf Z_T\\to i_*\\mathbf Z_Z\\to0$. The open adjunction and the constant-integer generator identify $\\operatorname{Hom}(j_!\\mathbf Z_W,F)$ with $F(W)$, with inclusion corresponding to $1$. Thus [lem-sp-relative-torsor-extension] applies to the given frame torsor and its section, giving exactly the characterized $\\beta$. By [lem-pur-relative-extension-cohomology-normalization], its supported class is the Ext-normalized $c(P,s)$, including the specified complementary trivialization.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-sp-relative-torsor-extension",
+    "lem-pur-relative-extension-cohomology-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; relative free-extension refinement"
+   }
+  },
+  {
+   "text": "Since $\\ell\\ne\\operatorname{char}k$, $m=\\ell^n$ is invertible on $T$. Also $mA=0$: $\\ell\\in(\\varpi_E)$ implies $\\ell^n\\in(\\varpi_E^n)$. Apply the actual abelian Kummer sequence [lem-amb-kummer-any-base]. Its connecting morphism on Ext sends $\\beta$ to $k_m[1]\\circ\\beta$ by [lem-sc-p1-derived-connecting-extclass] at degree one. Write $\\gamma\\in H^2_Z(T_{\\mathrm{et}},\\mu_m^{\\mathrm{et}})$ for the supported-Hom realization of $k_m[1]\\circ\\beta$ [lem-amb-closed-support-hom]; it is natural in the derived coefficient object, so it equals the image of the realization of $\\beta$ under the map induced by the derived morphism $k_m[1]$. No identification of this postcomposition with the termwise relative connecting map of [lem-amb-relative-torsor-cohomology] is used. This uses abelian sheaves for $\\mathbf G_m$, never an $R=\\mathbf Z/m$-module structure on it.",
+   "uses": [
+    "def-pur-conventions",
+    "lem-amb-kummer-any-base",
+    "lem-sc-p1-derived-connecting-extclass",
+    "lem-amb-closed-support-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; etale-cohomology.tex Tag 03PL, lemma-kummer-sequence"
+   }
+  },
+  {
+   "text": "Put $B=\\mu_m^{\\mathrm{et}}\\otimes_{\\mathbf Z/m}A_T$ and $u(v)=v\\otimes1$. Let $x=u[2]\\circ k_m[1]\\circ\\beta\\in\\operatorname{Ext}^2_{\\mathrm{Ab}}(i_*\\mathbf Z_Z,U B)$. Apply [lem-sp-etale-supported-integral-derived-unit] with its positive integer $m$ and coefficient ring $A$. By its defining DerivedUnit bijection, with target $B[2]$, there is a unique $b_A:i_*A_Z\\to B[2]$ whose exact-forgetting image precomposed with the integral generator is $x$. This proves both existence and the precise uniqueness in the statement; it does not infer uniqueness from the forgetful functor alone.",
+   "uses": [
+    "lem-sp-etale-supported-integral-derived-unit",
+    "def-sp-exact-functor-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ relative construction; integral-to-module adjunction supplied by cited derived-unit theorem"
+   }
+  },
+  {
+   "text": "Let $\\gamma\\in H_Z^2(T_{\\mathrm{et}},\\mu_m^{\\mathrm{et}})$ be the supported realization of $k_m[1]\\circ\\beta$. Apply [lem-pur-supported-root-scalar-site-comparison] to $\\gamma$. Its scalar arrow has abelian realization $u_*\\gamma$, hence equals $b_A$ by Step 3. Its explicit equation $q\\nu^{-1}u=\\sigma_T\\rho_T$ shows that the pro-etale supported realization is exactly $(\\sigma_T\\rho_T)_*\\nu^*\\gamma$. This defines $b_A^{\\mathrm{pro}}(L,s)$ with exactly the coefficient morphism in [def-pur-frame-class]. The comparison applies because $B[0]$ is bounded below and the support is an arbitrary closed immersion.",
+   "uses": [
+    "lem-pur-supported-root-scalar-site-comparison",
+    "def-pur-frame-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ construction followed by proetale.tex Tag 099W, lemma-compare-cohomology"
+   }
+  },
+  {
+   "text": "Isomorphic framed pairs induce isomorphic framed torsors, hence the same $\\beta$ by the uniqueness in Step 1. For an etale pullback $h:T'\\to T$ or $W'\\subseteq W$, [lem-pur-relative-extension-cohomology-normalization] carries $\\beta$ to the extension of the pulled-back pair, respectively to $q^*\\beta$, the extension of the restricted pair, where $q:i'_*\\mathbf Z_{Z'}\\to i_*\\mathbf Z_Z$ is restriction. Exact inverse image carries the Kummer sequence on $T$ to that on $T'$ and preserves Yoneda composites, so $h^{-1}(k_m[1]\\circ\\beta)=k'_m[1]\\circ h^{-1}\\beta$; precomposition by $q$ commutes with postcomposition by $k_m[1]$. The supported-Hom realization commutes with etale pullback, through the closed exchange $e$, by [lem-asd-supported-kummer-support-hom-naturality]. For $W'\\subseteq W$, its normalization $z\\mapsto(z\\circ p,0)$ and $p=q\\circ p'$ show that precomposition by $q$ becomes the enlargement map $(x,y)\\mapsto(x,y|_{W'})$. The signed cone and site maps commute with coefficient morphisms, etale restriction and support enlargement by [lem-pur-divisor-relative-cone]. Step 4 therefore gives the corresponding equalities for $b_A^{\\mathrm{pro}}$. Step 3's uniqueness gives the same compatibilities for $b_A$. Additivity in $\\beta$ follows directly: shifted composition with $k_m$ and $u$ is additive, the DerivedUnit bijection is induced by additive functors and composition, and all the supported and site maps are homomorphisms.",
+   "uses": [
+    "lem-pur-relative-extension-cohomology-normalization",
+    "lem-sp-relative-torsor-extension",
+    "lem-asd-supported-kummer-support-hom-naturality",
+    "lem-pur-divisor-relative-cone",
+    "def-sp-exact-functor-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ relative functoriality; etale-cohomology.tex Tag 0A45 support triangle"
+   }
+  },
+  {
+   "text": "Forgetting support is precomposition by $\\mathbf Z_T\\to i_*\\mathbf Z_Z$ under supported-Hom. By [lem-pur-relative-extension-cohomology-normalization], precomposition sends $\\beta$ to the positive ordinary torsor class $[P]$. Naturality of composition therefore sends $k_m[1]\\circ\\beta$ to $k_m[1]\\circ[P]$, the ordinary Kummer connecting image by [lem-sc-p1-derived-connecting-extclass]. Finally the signed relative/site comparison commutes with forgetting support and with the roots coefficient morphism by [lem-pur-divisor-relative-cone]. Its result is the ordinary positive Kummer image followed by precisely the coefficient and site maps used in Step 4. No extension of $s$ to $T$ was used.",
+   "uses": [
+    "lem-pur-relative-extension-cohomology-normalization",
+    "lem-asd-supported-kummer-support-hom-naturality",
+    "lem-sc-p1-derived-connecting-extclass",
+    "lem-pur-divisor-relative-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ ordinary extension class; Tag 03PL Kummer sequence; Tag 0A45 forgetting support"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-sp-relative-torsor-extension",
+  "lem-pur-relative-extension-cohomology-normalization",
+  "def-pur-conventions",
+  "lem-amb-kummer-any-base",
+  "lem-sc-p1-derived-connecting-extclass",
+  "lem-amb-closed-support-hom",
+  "lem-sp-etale-supported-integral-derived-unit",
+  "def-sp-exact-functor-derived-unit",
+  "lem-pur-supported-root-scalar-site-comparison",
+  "def-pur-frame-class",
+  "lem-asd-supported-kummer-support-hom-naturality",
+  "lem-pur-divisor-relative-cone"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+  "place": "First sentence and final paragraph, repaired global framed-torsor and Yoneda route"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite coefficient supported Kummer class of a Cartier divisor is uniquely determined by its normalized torsor extension and realizes a supported cohomology class",
+   "results": "{\"t\": \"2026-10-22T06:12:39Z\", \"tool\": \"leansearch\", \"query\": \"A finite coefficient supported Kummer class of a Cartier divisor is uniquely determined by its normalized torsor extension and realizes a supported cohomology class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.termK[_√_]\", \"CochainComplex.HomComplex.CohomologyClass\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp\", \"MeromorphicOn.divisor_apply\", \"CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"MeromorphicOn.divisor\", \"CochainComplex.HomComplex.CohomologyClass.mk\"], \"digest\": \"2722a3190a55a709\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"hom\"",
+   "results": "{\"t\": \"2026-10-22T06:12:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ext\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddHom.ext\", \"AddMonoidHom.ext\", \"MonoidHom.ext\", \"MulHom.ext\", \"OneHom.ext\", \"ZeroHom.ext\", \"AddHom.ext_iff\", \"AddMonoidHom.ext_iff\"], \"digest\": \"7a6847773932eef9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]upportedKummer|[Dd]ivisorEtale|[Cc]artier.*[Kk]ummer|[Kk]ummer.*[Cc]artier",
+   "results": "{\"t\": \"2026-10-22T06:12:41Z\", \"tool\": \"grep\", \"query\": \"[Ss]upportedKummer|[Dd]ivisorEtale|[Cc]artier.*[Kk]ummer|[Kk]ummer.*[Cc]artier\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unique relative Cartier Kummer extension class has a canonical supported derived Hom realization and pro etale coefficient comparison",
+   "results": "{\"t\": \"2026-10-22T06:13:10Z\", \"tool\": \"leanfinder\", \"query\": \"The unique relative Cartier Kummer extension class has a canonical supported derived Hom realization and pro etale coefficient comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.hom_ext_iff\", \"StandardEtalePair.hom_ext\", \"StandardEtalePresentation\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePair.lift\"], \"digest\": \"5f30af201479f175\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar adjunction identifies degree two Ext classes of sheaves killed by an integer with normalized roots of unity supported cohomology",
+   "results": "{\"t\": \"2026-10-22T06:13:12Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar adjunction identifies degree two Ext classes of sheaves killed by an integer with normalized roots of unity supported cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.Sheaf.H\"], \"digest\": \"c2acf3a775714526\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "{\"t\": \"2026-10-22T06:16:17Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Abelian.Ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext\", \"CategoryTheory.Abelian.Ext.instAddCommGroup\", \"CategoryTheory.hasExt_iff_small_ext\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.Abelian.Ext.chgUniv\", \"CategoryTheory.Abelian.Ext.homEquiv₀\", \"CategoryTheory.Abelian.extFunctorObj_obj_coe\", \"CategoryTheory.Abelian.Ext.mk₀_bijective\"], \"digest\": \"643e62f5812dab11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any line bundle on a scheme trivialized off a closed subset the normalized relative torsor Kummer extension has a unique finite coefficient supported Ext class natural under changing support",
+   "results": "{\"t\": \"2026-10-22T06:16:19Z\", \"tool\": \"leanfinder\", \"query\": \"For any line bundle on a scheme trivialized off a closed subset the normalized relative torsor Kummer extension has a unique finite coefficient supported Ext class natural under changing support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\"], \"digest\": \"9ac127b508b1e4f3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the framed relative sheaf or smooth-pair assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeTorsor|supported.*[Ee]xt|[Ee]xt.*supported",
+   "results": "{\"t\": \"2026-10-22T07:20:44Z\", \"tool\": \"grep\", \"query\": \"relativeTorsor|supported.*[Ee]xt|[Ee]xt.*supported\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Data/Finsupp/Option.lean\", \"Mathlib/Data/Finsupp/Option.lean\", \"Mathlib/Algebra/MvPolynomial/Supported.lean\", \"Mathlib/Tactic/Widget/LibraryRewrite.lean\", \"Mathlib/Tactic/CrossRefAttribute.lean\", \"Mathlib/Algebra/Homology/Embedding/AreComplementary.lean\", \"Mathlib/Algebra/Homology/Embedding/AreComplementary.lean\", \"Mathlib/Algebra/Homology/Embedding/AreComplementary.lean\"], \"digest\": \"135080e0c8990ce1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative cohomology of an abelian sheaf identifies torsors with a chosen trivialization with extensions of the supported constant integer sheaf",
+   "results": "{\"t\": \"2026-10-22T07:20:45Z\", \"tool\": \"leansearch\", \"query\": \"Relative cohomology of an abelian sheaf identifies torsors with a chosen trivialization with extensions of the supported constant integer sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"groupCohomologyIsoExt\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.ShortComplex.ShortExact.extClass\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl\", \"CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous\", \"groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom\"], \"digest\": \"c1ff1c93f299bb6f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-22T07:20:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Abelian.Ext, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H.addEquiv₀_map\", \"CategoryTheory.Sheaf.H.addEquiv₀_map_assoc\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk₀_f_comp_biprodAddEquiv_symm_biprodIsoProd_hom\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.biprodAddEquiv_symm_biprodIsoProd_hom_toBiprod_apply\"], \"digest\": \"01879441fd20c915\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A supported Kummer class of a framed invertible sheaf has a unique module Ext lift under integral coefficient forgetting and pro etale comparison",
+   "results": "{\"t\": \"2026-10-22T07:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"A supported Kummer class of a framed invertible sheaf has a unique module Ext lift under integral coefficient forgetting and pro etale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Derivation.instSubsingletonUniversal\", \"PresheafOfModules.Derivation.Universal.mk.inj\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"CategoryTheory.Sheaf.H\", \"PresheafOfModules.Derivation'.Universal.mk\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\"], \"digest\": \"4f381527eacc270d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extensions of the closed supported constant sheaf by an abelian sheaf classify torsors with a section on the complementary open and identify connecting maps with Yoneda products",
+   "results": "{\"t\": \"2026-10-22T07:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"Extensions of the closed supported constant sheaf by an abelian sheaf classify torsors with a section on the complementary open and identify connecting maps with Yoneda products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evalEquiv\", \"TopCat.Presheaf.section_ext\", \"CategoryTheory.typesGlue\", \"CategoryTheory.sheafHomSectionsEquiv\", \"TopCat.Sheaf.extend_hom_app\", \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.evalEquiv_symm_apply\"], \"digest\": \"02f825139a5dae9a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a torsor under an abelian sheaf trivialized on an open complement, its relative extension of the supported constant integers agrees with the Ext normalized relative cohomology class",
+   "results": "{\"t\": \"2026-10-22T07:20:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a torsor under an abelian sheaf trivialized on an open complement, its relative extension of the supported constant integers agrees with the Ext normalized relative cohomology class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"groupCohomologyIsoExt\", \"CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero\"], \"digest\": \"614f879ea8ce9a6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeTorsor|torsor.*[Ee]xt|[Ee]xt.*torsor|[Ss]upport.*[Cc]ohomology",
+   "results": "{\"t\": \"2026-10-22T07:21:42Z\", \"tool\": \"grep\", \"query\": \"relativeTorsor|torsor.*[Ee]xt|[Ee]xt.*torsor|[Ss]upport.*[Cc]ohomology\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk",
+   "results": "{\"t\": \"2026-10-22T07:34:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\"], \"digest\": \"66d0342555973395\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Ext and ordinary sheaf cohomology hits do not identify the relative torsor extension, its specified complementary section, and the signed support comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-divisor-class",
+  "date": "2026-10-22",
+  "group": "Q108"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "First sentence and final paragraph: global relative torsor construction, Yoneda normalization, scalar realization and forgetting support; returned proof steps 2–5 and 8.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-divisor-normalized-realization",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the framed relative extension, abelian Kummer splice, unique integral-to-module lift, prescribed roots/site realization, functoriality and positive forget-support formula. One generic relative extension/cohomology normalization node is new. No Lean written or compiled.",
+  "blueprint": "lem-pur-divisor-class proof first sentence and final paragraph: global relative torsor construction and positive ordinary Kummer Chern class. The existing repaired parent fixes the raw-cone sign; this item retains its Yoneda normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-sp-relative-torsor-extension",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-sc-p1-derived-connecting-extclass",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-amb-relative-torsor-cohomology",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-sp-etale-supported-integral-derived-unit",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-pur-supported-root-scalar-site-comparison",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   },
+   {
+    "node": "lem-asd-supported-kummer-support-hom-naturality",
+    "why": "Generic support, derived coefficient, or Ext comparison tool used for the framed-torsor construction; this unit provides no replacement for this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-sp-relative-torsor-extension",
+  "lem-amb-kummer-any-base",
+  "lem-sc-p1-derived-connecting-extclass",
+  "lem-amb-closed-support-hom",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-sp-etale-supported-integral-derived-unit",
+  "lem-pur-supported-root-scalar-site-comparison",
+  "lem-asd-supported-kummer-support-hom-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-e795bf520",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-e795bf520 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-pur-relative-extension-cohomology-normalization, every cited statement, the related sign nodes (boundary-signs, forget-normalization, principal-torsor-yoneda-sign, per-supported-yoneda-localization), the blueprint main-20261015 lem-pur-divisor-class proof, and Stacks 03AJ/03PL/0A45. The new node is true. Resolution check: with h on the free presentation and the raw class α=(a,h(s)), extend h(s) to ỹ in I^0(T); the descended extension gives the cocycle (a−dỹ,0), which is cohomologous to α. With extMk(iCycles)=−extClass this gives Ψ(β)=−α=c. It also holds at the edge cases: W=T, W=∅, and the trivial torsor, where β is the pushout along −g and Ψβ=∂g=c. It is generic in G, not a duplicate (lem-sp-relative-torsor-extension only constructs β, lem-amb only gives c, yoneda-sign needs a global frame) and not a clause of the item. Steps 3 and 4 check against the DerivedUnit node (K=B[2], unique lift, no flatness) and the root-scalar-site comparison (any closed Z, ramified A, σρ coefficient map). FIX: Step 2 claimed with no node that Yoneda postcomposition by k_m[1] equals the termwise relative connecting map of lem-amb-relative-torsor-cohomology. That is a sign-sensitive identification; it is consistent but uncited and is not needed for the statement, and Step 5 relied on it. I removed it, and rewrote Step 5 to go through β-naturality, exact pullback of Yoneda composites, Ψ-pullback naturality (lem-asd-supported-kummer-support-hom-naturality) and the normalization z↦(z∘p,0) for enlarging the support. proof_deps are recomputed and the statement is unchanged. Batch-5: lem-sp-etale-supported-integral-derived-unit reaches lem-pod-etale-stalk-tensor-scalar, which is a generic fact about stalks of tensor products and scalar extension, not part of the Poincaré-duality or trace-formula proofs, so I accept it. The tool_uses are generic and accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DivisorNormalizedRealization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.divisor_normalized_realization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_iso",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_additive",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_pullback",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_enlarge",
+   "WeilConjectures.PurityFiniteSetting.divisor_normalized_realization"
+  ],
+  "file": "lean/Sheaf/Paper/DivisorNormalizedRealization.lean",
+  "statement": "theorem divisor_normalized_realization (P : PurityFiniteSetting.{u}) : P.DivisorNormalizedRealization",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1329c6000",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Re-delivery of the f8b5 H2 return. Lean byte-identical to the previously reviewed head (15 modules). H2 repaired: six new def nodes now cite the landed def-pur-supported-class-operations (FunctorialCupH/OrdinaryH/Forget/Pullback/ChangeSupport) and def-pur-supported-hom-site-comparison (functorialCupCompare), whose records are identical to the live clone. New existing:true owners: def-pur-ordinary-hom-site-comparison (functorialCupOrdinaryCompare, statement verbatim SupportedCupFunctoriality:1714) and def-pur-supported-hom-pair (SupportHomPair with its fields, Identification and the etale/pro-etale pairs, verbatim line 53; node text matches the structure and the normalization). Neither duplicates a live def node. No theorem node remains a stmt_dep owner of plain data. stmt_deps equal the statement citations in all 16 new nodes. The item changes only in stmt_deps (adding landed and new nodes, permitted) and its lean.statement is verbatim. No module or node collisions with live. Mathematics re-read: β characterization with f(s)=0, positive Kummer splice with the root map, unique b_A in Ext^2, b^pro in the actual supported group with a normalized-Identification predicate, iso/pullback (canonical unit-pinned tensor-pullback comparison)/enlarge/additive/forget-support clauses all faithful. Edge cases and universes OK; all 8 theorems proved by sorry; no hollow definitions; no SGA. No compile (nothing changed). Advisories: item uniqueness is stated over all three equations (full uniqueness is in divisorScalarRealization_existsUnique); four nodes reach the Identification owner only through pro-predicate; upstream owners of kummerδ₁, classH1, etaleIsoTorsor, openSectionPullback and gmSheaf are not cited; the second reading is the worker's own check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261025T143145-L-959832",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_additive",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_enlarge",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_iso",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_pullback",
+   "WeilConjectures.PurityFiniteSetting.divisor_normalized_realization"
+  ],
+  "sorry_after": [
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_additive",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_enlarge",
+   "WeilConjectures.PurityFiniteSetting.divisorRealization_pullback",
+   "WeilConjectures.PurityFiniteSetting.divisor_normalized_realization"
+  ]
+ }
+}

@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-henselian-parameter-root-regularity",
+ "kind": "statement",
+ "title": "Henselian regular parameter-root algebra with residue field and parameter basis",
+ "statement": "Let $(R,\\mathfrak m,k)$ be a henselian Noetherian regular local ring of dimension $d$ [def-weil-pbc-henselian-terminology, def-weil-regular-scheme, def-weil-residue-field]. Let $t_1,\\ldots,t_d$ be a regular system of parameters [def-weil-pbc-regular-system-of-parameters], $0\\leq r\\leq d$, and $n\\geq1$ any integer. Using multivariate polynomial rings [def-weil-pbc-mv-polynomial-ring], put\n$$B=R[x_1,\\ldots,x_r]/(x_1^n-t_1,\\ldots,x_r^n-t_r).$$\nThen $B$ is free over $R$ with basis $x^a=\\prod_{i=1}^r x_i^{a_i}$, $0\\leq a_i<n$: every element has a unique expansion $\\sum_a c_a x^a$. Thus $R\\to B$ is finite, injective and integral, and $B$ is Noetherian [def-weil-pbc-noetherian-ring]. The ring $B$ is henselian local with maximal ideal\n$$\\mathfrak n=\\mathfrak mB+(x_1,\\ldots,x_r)=(x_1,\\ldots,x_r,t_{r+1},\\ldots,t_d).$$\nIts closed fibre is $k[x_1,\\ldots,x_r]/(x_1^n,\\ldots,x_r^n)$, and the induced residue-field map $k\\to B/\\mathfrak n$ is an isomorphism. Moreover $\\dim B=d$, $B$ is a regular local domain, and $x_1,\\ldots,x_r,t_{r+1},\\ldots,t_d$ is a regular system of parameters. If $R$ is strictly henselian, so is $B$. No invertibility of $n$ and no chosen root of unity is assumed. For $r=0$, $B=R$ and the monomial basis consists of $1$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i), proof, printed p.133: simultaneous parameter-root algebra; general henselian algebra subargument of returned steps 2-4. Stacks algebra.tex Tags 04GG (lemma-characterize-henselian, monic quotient calculation), 04GH (lemma-finite-over-henselian), 00GK (lemma-finite-is-integral), 00FN (lemma-Noetherian-permanence), 00KQ (proposition-dimension), 00GQ (lemma-integral-overring-surjective), 00GU (lemma-integral-going-up), 00NP (lemma-regular-domain)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-regular-scheme",
+  "def-weil-residue-field",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-parameter-root-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For each exponent vector e, write e_i=n q_i+a_i with 0≤a_i<n. Define an R-linear normal form on MvPolynomial (Fin r) R by sending c X^e to the vector with coefficient c∏t_i^{q_i} at index a in the finitely supported coordinate module indexed by Fin r→Fin n. On a monomial multiple of X_i^n-t_i the two normal forms agree: shifting e_i by n preserves a_i and multiplies the coefficient by t_i. Polynomial expansion gives vanishing on all multiples; span induction gives vanishing on the defining ideal. Thus the normal form descends to the actual simultaneous root quotient B [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG monic quotient normal forms, applied directly to the simultaneous presentation by exponent division; explicit R-linear map and span induction."
+   }
+  },
+  {
+   "text": "The quotient relations give X^e=(∏t_i^{q_i})X^a in B, so the bounded monomials span. The descended normal form of step 1 sends each bounded monomial to its distinct coordinate vector, proving linear independence and hence the displayed basis, without constructing an iterated monic quotient. Its index set is finite. The zero exponent vector exists because n>0, and its basis vector is 1. Applying its basis coordinate to equality of scalar images gives injectivity. This construction also works when r=0 or the coefficient ring is trivial; the local-base assumptions later exclude the trivial ring.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG monic quotient normal form argument, written directly for the simultaneous quotient; exponent division and coordinate-vector independence."
+   }
+  },
+  {
+   "text": "The finite basis makes $B$ finite as an $R$-module. Apply [lem-weil-pbc-finite-algebra-is-integral] to conclude that $R\\to B$ is integral. Apply [lem-weil-pbc-finite-algebra-noetherian] to the same finite algebra, using the assumed Noetherianity of $R$, to conclude that $B$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (lemma-finite-is-integral) and 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "For the closed fibre define k→B/mB by descending the coefficient map R→B/mB. Evaluation of the variables at their classes gives C=k[X_i]/(X_i^n)→B/mB, since t_i lies in m. Conversely coefficient reduction and the labelled variables give B→C and kill mB. Both composites fix coefficients and variables, so polynomial and quotient extensionality prove they are inverse [def-weil-pbc-mv-polynomial-ring]. These maps commute with R and fix each root coordinate. The residue isomorphism is constructed after locality in step 5: modulo J=mB+(x_i), polynomial induction shows that every class is a scalar, so k→B/J is surjective, and a field homomorphism is injective.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), reduction of a monic quotient; explicit polynomial evaluation and quotient maps."
+   }
+  },
+  {
+   "text": "Put J=mB+(x_i). Evaluation at zero gives a surjective homomorphism g:B→k. It kills J. Conversely polynomial induction shows every class modulo J is a scalar, so if g(z)=0 write z=a modulo J; then the residue of a vanishes, hence a∈m and z∈J. Thus J=ker g is maximal. Every maximal ideal M of B contracts to m by [lem-weil-pbc-finite-algebra-local-radical], hence contains mB; primality and x_i^n=t_i imply x_i∈M. Therefore J⊆M and maximality gives equality. The unique-maximal-ideal criterion gives locality. Finally the induced scalar map k→B/J is surjective as above and injective because k is a field, giving the asserted coefficient residue isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-local-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (9) implies (10), maximal ideals over the local base; nilpotent images vanish in a field."
+   }
+  },
+  {
+   "text": "The map $R\\to B$ is injective by step 2 and integral by step 3. Therefore [lem-weil-pbc-integral-injective-dimension-equal] applies and gives $\\dim B=\\dim R=d$. This argument makes no assumption on the characteristic or on whether $n$ is invertible.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-dimension-equal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OK (lemma-integral-sub-dim-equal)."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-regular-system-of-parameters], $\\mathfrak m=(t_1,\\ldots,t_d)$. In $B$ we have $t_i=x_i^n$ for $i\\le r$, so $\\mathfrak mB+(x_1,\\ldots,x_r)=(x_1,\\ldots,x_r,t_{r+1},\\ldots,t_d)$: each $t_i$ for $i\\le r$ belongs to $(x_i)$ and every listed generator belongs to the left side. This is a list of exactly $d$ generators of the maximal ideal of the Noetherian local ring $B$, whose dimension is $d$ by step 6. The definitions [def-weil-regular-scheme] and [def-weil-pbc-regular-system-of-parameters] now say that $B$ is regular local and this displayed list is a regular system of parameters.",
+   "uses": [
+    "def-weil-pbc-regular-system-of-parameters",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KU (definition-regular-local), clause (2); substitution in the maximal ideal generators."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-regular-local-domain] to the regular local ring $B$ obtained in step 7; its conclusion is precisely that $B$ is an integral domain.",
+   "uses": [
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NP (lemma-regular-domain)."
+   }
+  },
+  {
+   "text": "We have proved that $B$ is a local finite $R$-algebra. Since $R$ is henselian, [lem-weil-pbc-finite-local-henselian] gives that $B$ is henselian. If $R$ is strictly henselian, its residue field $k$ is separably closed by [def-weil-pbc-henselian-terminology]. The coefficient isomorphism $k\\to B/\\mathfrak n$ of step 4 makes the latter separably closed as well: any separable polynomial over it pulls back coefficientwise to one over $k$, and a root in $k$ maps to a root. The same definition then says that $B$ is strictly henselian. When $r=0$ the construction and every map above are the identity on $R$ with basis $1$; when $n=1$ evaluation $x_i\\mapsto t_i$ identifies $B$ with $R$. No step used a root of unity or division by $n$.",
+   "uses": [
+    "lem-weil-pbc-finite-local-henselian",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GH (lemma-finite-over-henselian), part (2); Tag 04GF (definition-henselian), strict henselian clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-algebra-local-radical",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-finite-local-henselian",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1(i), printed p.133, simultaneous root presentation; Lean proof by D2 (2026-10-23) follows the stated algebra argument using direct exponent-reduction normal forms instead of iterated monic quotients. The closed-fibre and residue maps, maximal-ideal calculation and generator substitution are proved explicitly; generic finite/integral, dimension, regular-domain and henselian-ascent results are reused. No arbitrary-exponent claim is attributed to the prime-to-characteristic Kummer statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining arbitrary positive integer roots of part of a regular system of parameters to a henselian regular local ring gives a finite free henselian regular local domain with unchanged residue field",
+   "results": "{\"t\": \"2026-10-22T05:58:37Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining arbitrary positive integer roots of part of a regular system of parameters to a henselian regular local ring gives a finite free henselian regular local domain with unchanged residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.is_henselian\", \"IsAdicComplete.henselianRing\", \"Field.henselian\"], \"digest\": \"e00115b2d2be7523\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and Polynomial.Monic.free_quotient cover only ingredients; power-series Weierstrass results require completeness and do not state regularity of this simultaneous root algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-22T05:58:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and Polynomial.Monic.free_quotient cover only ingredients; power-series Weierstrass results require completeness and do not state regularity of this simultaneous root algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "(AdjoinRoot|MvPolynomial).*(IsRegularLocalRing|Henselian)|(IsRegularLocalRing|Henselian).*(AdjoinRoot|MvPolynomial)",
+   "results": "{\"t\": \"2026-10-22T05:58:26Z\", \"tool\": \"grep\", \"query\": \"(AdjoinRoot|MvPolynomial).*(IsRegularLocalRing|Henselian)|(IsRegularLocalRing|Henselian).*(AdjoinRoot|MvPolynomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and Polynomial.Monic.free_quotient cover only ingredients; power-series Weierstrass results require completeness and do not state regularity of this simultaneous root algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient R[x1,...,xr] by xi^n-ti for regular local parameters is regular local and has monomial basis and the same residue field",
+   "results": "{\"t\": \"2026-10-22T05:58:27Z\", \"tool\": \"leansearch\", \"query\": \"The quotient R[x1,...,xr] by xi^n-ti for regular local parameters is regular local and has monomial basis and the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.basisMonomials\", \"Polynomial.Sequence.basis\", \"Polynomial.Monic.free_quotient\", \"IsLocalRing.ResidueField\", \"IsLocalRing.instCommRingResidueField\", \"PowerSeries.instIsLocalRing\", \"IsLocalRing.instInhabitedResidueField\", \"AdjoinRoot.isAdjoinRootMonic.congr_simp\"], \"digest\": \"70f5a09bab419a55\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and Polynomial.Monic.free_quotient cover only ingredients; power-series Weierstrass results require completeness and do not state regularity of this simultaneous root algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient R[x1,...,xr] by xi^n-ti for regular local parameters is regular local and has monomial basis and the same residue field",
+   "results": "{\"t\": \"2026-10-22T05:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient R[x1,...,xr] by xi^n-ti for regular local parameters is regular local and has monomial basis and the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassUnit\"], \"digest\": \"1426dc2c02081d61\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing.TFAE and Polynomial.Monic.free_quotient cover only ingredients; power-series Weierstrass results require completeness and do not state regularity of this simultaneous root algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "(AdjoinRoot|MvPolynomial).*(IsRegularLocalRing|Henselian)|(IsRegularLocalRing|Henselian).*(AdjoinRoot|MvPolynomial)",
+   "results": "{\"t\": \"2026-10-22T06:55:46Z\", \"tool\": \"grep\", \"query\": \"(AdjoinRoot|MvPolynomial).*(IsRegularLocalRing|Henselian)|(IsRegularLocalRing|Henselian).*(AdjoinRoot|MvPolynomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern henselian criteria, one-variable monic power bases, or quotients by regular sequences; none states the simultaneous parameter-root regularity and all other clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining positive integer roots of regular local parameters gives a finite free regular local algebra",
+   "results": "{\"t\": \"2026-10-22T06:55:47Z\", \"tool\": \"leansearch\", \"query\": \"Adjoining positive integer roots of regular local parameters gives a finite free regular local algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdjoinRoot.mk.noConfusion\", \"IsAdjoinRoot.ctorIdx\", \"IsAdjoinRootMonic.noConfusion\", \"IsAdjoinRoot.casesOn\", \"IsAdjoinRoot\", \"IsAdjoinRoot.noConfusionType\", \"Polynomial.Monic.free_adjoinRoot\", \"IsAdjoinRootMonic.noConfusionType\"], \"digest\": \"cfc602450257d682\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern henselian criteria, one-variable monic power bases, or quotients by regular sequences; none states the simultaneous parameter-root regularity and all other clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-22T06:55:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularLocalRing\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern henselian criteria, one-variable monic power bases, or quotients by regular sequences; none states the simultaneous parameter-root regularity and all other clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular local henselian ring adjoining roots of regular parameters is finite free local regular with unchanged residue field",
+   "results": "{\"t\": \"2026-10-22T06:55:57Z\", \"tool\": \"leanfinder\", \"query\": \"A regular local henselian ring adjoining roots of regular parameters is finite free local regular with unchanged residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing\", \"instHenselianRingMaximalIdeal\", \"StandardEtalePair\", \"Field.henselian\", \"HenselianLocalRing.is_henselian\"], \"digest\": \"96525c7c6a94de99\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern henselian criteria, one-variable monic power bases, or quotients by regular sequences; none states the simultaneous parameter-root regularity and all other clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*[Rr]oot|[Rr]oot.*regular|henselian.*[Qq]uotient|[Qq]uotient.*henselian",
+   "results": "{\"t\": \"2026-10-22T06:56:16Z\", \"tool\": \"grep\", \"query\": \"regular.*[Rr]oot|[Rr]oot.*regular|henselian.*[Qq]uotient|[Qq]uotient.*henselian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/Polynomial/ScaleRoots.lean\", \"Mathlib/RingTheory/Polynomial/ScaleRoots.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"be9fe2cffed72c2e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern henselian criteria, one-variable monic power bases, or quotients by regular sequences; none states the simultaneous parameter-root regularity and all other clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian local ring the quotient by equations X_i^n minus a regular system of parameters is a regular local ring",
+   "results": "{\"t\": \"2026-10-22T06:56:27Z\", \"tool\": \"leanfinder\", \"query\": \"For a Noetherian local ring the quotient by equations X_i^n minus a regular system of parameters is a regular local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"IsLocalRing.finite_quotient_iff\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\"], \"digest\": \"d88e600478fd2272\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern henselian criteria, one-variable monic power bases, or quotients by regular sequences; none states the simultaneous parameter-root regularity and all other clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; finite-cover geometric input: prime-to-p Galois torsors on a strict-local boundary puncture are split at a finite simultaneous parameter-root level. Re-split subargument: returned proof steps 2-4, Henselian regular parameter-root algebra with residue field and parameter basis.",
+   "via": [
+    "lem-sfb-strict-local-prime-to-p-kummer-splitting",
+    "lem-sfb-lisse-lattice-potential-kummer-tameness",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-henselian-parameter-root-regularity",
+  "worker": "stage1",
+  "summary": "Expanded the simultaneous root algebra into iterated monic quotients and proved all clauses using existing nodes. The proof spells out the basis induction, both closed-fibre maps, uniqueness of the maximal ideal, dimension preservation, generator equality, regularity and henselian ascent. No new nodes, no statement change, no invertibility hypothesis.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; finite-cover geometric input: prime-to-p Galois torsors on a strict-local boundary puncture are split at a finite simultaneous parameter-root level. Re-split subargument: returned proof steps 2-4, Henselian regular parameter-root algebra with residue field and parameter basis.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic dimension preservation for an injective integral ring map; the unit has no such commutative algebra statement."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic theorem that any regular local ring is a domain; used only after regularity is proved, not as a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-henselian",
+    "why": "Generic henselian ascent for a finite local algebra; all its hypotheses are proved before use."
+   },
+   {
+    "node": "def-weil-pbc-regular-system-of-parameters",
+    "why": "The existing definition of a regular system of parameters, used to read off the conclusion from the displayed generators."
+   },
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "The existing henselian and strictly henselian definitions; needed to interpret the strict conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-finite-local-henselian",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NX-d9f4bd658",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-d9f4bd658 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and the statement of every cited node; the delivery makes no statement change and creates no new nodes. The item came in unsplit (created 2026-10-22 by NP for lem-sfb-strict-local-prime-to-p-kummer-splitting) and the snapshot has no repair note for it, so this is an ordinary one-level split. ILO IX Prop 2.1 (printed p.133) gives only the root presentation, so the proof is rightly marked agent-written. Step checks: (1) the iterated quotient equals the simultaneous quotient by the polynomial universal property; (2) the monic-quotient-free leaf is applied to X^n-t_j over A_{j-1} by induction, giving the basis, injectivity and B≠0; (3) finite gives integral and Noetherian; (4) closed fibre k[x]/(x^n) and B/q≅k; (5) every maximal ideal contains mB, and x_i^n=t_i=0 in the residue field gives a single maximal ideal q, so B is local; (6) Stacks 00OK gives dim B=d from injective plus integral; (7) t_i=x_i^n gives d generators of n, so B is regular with the stated regular system of parameters; (8) Stacks 00NP gives a domain; (9) Stacks 04GH(2) gives henselian, and the residue field ≅k gives strictness. Stacks tags and labels verified. Edge cases checked: r=0, n=1, d=0, and p|n (k[[t]][x]/(x^p-t)≅k[[x]] is regular). The parent (characteristic p, n prime to p, strictly henselian) is covered. Duplicate candidates are not the same statement: lem-per-snc-root-algebra-structure needs n invertible and a root of unity (it is a special case plus Galois data), lem-sfb-transverse-local-root-family-regular needs n a unit, and lem-sfb-henselian-parameter-root-domain-tower has no locality, residue-field or parameter clauses. I accept the tool_uses for the three generic algebra lemmas: dimension, regular local implies domain, finite local henselian ascent. No SGA is cited; Mathlib searches cover all three kinds. Maintainer note: lem-per-snc-root-algebra-structure could later cite this node."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianParameterRootRegularity",
+  "declaration": "Algebra.henselian_parameter_root_regularity",
+  "declarations": [
+   "Algebra.parameterRootCoordinate",
+   "Algebra.henselian_parameter_root_regularity",
+   "Algebra.rootCoordinate_pow",
+   "Algebra.root_basis",
+   "Algebra.rootEval",
+   "Algebra.rootEval_scalar",
+   "Algebra.rootEval_coordinate",
+   "Algebra.rootHom_ext"
+  ],
+  "file": "lean/Sheaf/RingTheory/HenselianParameterRootRegularity.lean",
+  "statement": "theorem henselian_parameter_root_regularity (R : Type u) [CommRing R] [HenselianLocalRing R] [IsRegularLocalRing R] (d : ℕ) (t : Fin d → R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t)) (r : ℕ) (hr : r ≤ d) (n : ℕ) (hn : 0 < n) : ∃ b : Module.Basis (Fin r → Fin n) R (pthRootAlgebra n r R (t ∘ Fin.castLE hr)), (∀ a, b a = ∏ i, parameterRootCoordinate (t ∘ Fin.castLE hr) n i ^ (a i).val) ∧ Module.Finite R (pthRootAlgebra n r R (t ∘ Fin.castLE hr)) ∧ Function.Injective (algebraMap R (pthRootAlgebra n r R (t ∘ Fin.castLE hr))) ∧ Algebra.IsIntegral R (pthRootAlgebra n r R (t ∘ Fin.castLE hr)) ∧ ∃ (_hreg : IsRegularLocalRing (pthRootAlgebra n r R (t ∘ Fin.castLE hr))) (_hhen : HenselianLocalRing (pthRootAlgebra n r R (t ∘ Fin.castLE hr))), IsDomain (pthRootAlgebra n r R (t ∘ Fin.castLE hr)) ∧ ringKrullDim (pthRootAlgebra n r R (t ∘ Fin.castLE hr)) = (d : WithBot ℕ∞) ∧ IsLocalRing.maximalIdeal (pthRootAlgebra n r R (t ∘ Fin.castLE hr)) = (IsLocalRing.maximalIdeal R).map (algebraMap R _) ⊔ Ideal.span (Set.range (parameterRootCoordinate (t ∘ Fin.castLE hr) n)) ∧ IsLocalRing.IsRegularSystemOfParameters (List.ofFn (parameterRootCoordinate (t ∘ Fin.castLE hr) n) ++ ((List.ofFn t).drop r).map (algebraMap R _)) ∧ (∃ e : (pthRootAlgebra n r R (t ∘ Fin.castLE hr) ⧸ (IsLocalRing.maximalIdeal R).map (algebraMap R _)) ≃ₐ[R] pthRootAlgebra n r (IsLocalRing.ResidueField R) (fun _ ↦ 0), ∀ i, e (Ideal.Quotient.mk _ (parameterRootCoordinate (t ∘ Fin.castLE hr) n i)) = parameterRootCoordinate (fun _ : Fin r ↦ (0 : IsLocalRing.ResidueField R)) n i) ∧ (∃ e : IsLocalRing.ResidueField R ≃+* IsLocalRing.ResidueField (pthRootAlgebra n r R (t ∘ Fin.castLE hr)), ∀ a : R, e (IsLocalRing.residue R a) = IsLocalRing.residue _ (algebraMap R _ a)) ∧ (IsStrictlyHenselianLocalRing R → IsStrictlyHenselianLocalRing (pthRootAlgebra n r R (t ∘ Fin.castLE hr))) ∧ (r = 0 → Function.Bijective (algebraMap R (pthRootAlgebra n r R (t ∘ Fin.castLE hr))))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7e74d7d5",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN on 8070caf8b257. The item Lean is byte-identical (same sha256). The only item-node change is in stmt_deps: lem-weil-pbc-pth-root-algebra-local is replaced by the new def-sfb-parameter-root-algebra. The new node's statement is A[X_i]/(X_i^p-a_i) for any commutative A, any p,n and any family, matching the abbrev body. Its stmt_deps are [def-weil-pbc-mv-polynomial-ring], its source is ILO IX 2.1(i) p.133, and it has 3 searches. Its lean record is existing:true on the unchanged WeilConjectures.RingTheory.PthRootAlgebraLocal, declaration Algebra.pthRootAlgebra, statement verbatim with source line 29. No live node already owns the abbrev, and the live item is still split and unlanded. Re-confirmed all clauses (basis, finite/injective/integral, regular+henselian local domain, dim d, maximal ideal, new regular system of parameters, closed fibre, canonical residue iso, strict ascent, r=0) and the edge cases r=0/d=0/n=1/r=d/p|n. Not recompiled (no change). Maintainer notes: the upstream abbrev docstring still tags the theorem node, and other pbc pth-root nodes may later cite the new def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261024T015006-L-2308572",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

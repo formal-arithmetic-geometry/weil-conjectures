@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-coefficient-heart-curve-complement",
+ "kind": "statement",
+ "title": "Finite curve complement and its coefficient-module localization sequence",
+ "statement": "Let $X$ be a Noetherian scheme (locally Noetherian and quasi-compact) of topological Krull dimension at most one [def-kun-topological-krull-dimension], and let $U\\subseteq X$ be an open subset containing the generic point of every irreducible component [def-weil-irreducible-components, def-sc-generic-point]. Let $u:U\\hookrightarrow X$ be its open immersion and let $i:Z\\hookrightarrow X$ be the reduced induced closed subscheme on $X\\setminus U$ [def-weil-open-immersion, lem-weil-pbc-reduced-induced-closed-subscheme]. Then $\\dim Z\\leq0$, its underlying set is finite, and each of its points is closed in $X$. Let $\\Lambda$ be any commutative condensed ring and $F$ any internal module over $\\Lambda_X=p_X^*\\Lambda$ on $X_{\\mathrm{proét}}$ [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. With the actual coefficient-module inverse images, direct images and open extension by zero [sk-def-sfb-module-pushforward-pullback, def-sfb-module-open-lower-shriek], the adjunction counit and unit give the short exact sequence $0\\to u_!u^*F\\to F\\to i_*i^*F\\to0$, and $u^*i_*i^*F=0$. In particular, if $u^*F$ is lisse [def-sfb-lisse-coefficient-module], this is an extension of a sheaf supported on finitely many closed points by $u_!L$, where $L=u^*F$. Empty complements, the empty scheme, nonreduced and reducible schemes, and $F=0$ are included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "Final curve paragraph: finite closed complement and canonical exact sequence; retained proof step 10. Supporting Stacks: schemes.tex Tag 01J3, lemma-reduced-closed-subscheme; properties.tex Tag 0AAX, lemma-locally-Noetherian-dimension-0; proetale.tex Tag 09AH, lemma-ses-associated-to-open."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-lisse-coefficient-module",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-module-open-lower-shriek-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Every point w of the closed complement lies in an irreducible component C. Sobriety gives a generic point η of C, and the hypothesis puts η in U. Thus η specializes to w and lies outside the complement. Apply topologicalKrullDim_lt_of_forall_exists_specializes to the closed complement inside X, with d=1 and dim X<2, to get dimension <1, hence at most zero. The closed-immersion embedding identifies Z with the complement. The zero-dimensional closed-subset theorem in the Noetherian T0 space X gives finiteness and closed singletons, and injectivity of i transfers finiteness to Z.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-zero-dim-noetherian-closed-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Stacks topology.tex Tags 004W and 0055; properties.tex Tag 0AAX; implemented using WeilConjectures.Mathlib.Topology.KrullDimension"
+   }
+  },
+  {
+   "text": "Reuse the four proved private module-support lemmas from CondensedOpenClosedRecollement via a proof-only import all: openRestrictionPushforwardZero, openUnitIsIso, moduleCounitOfAbelian and moduleUnitOfAbelian. The first gives vanishing on the complementary open. Apply moduleCounitOfAbelian to abelian_closed_counit for the closed counit. The open unit is invertible by openUnitIsIso. Use profinitePointModuleForgetPullbackIso to compare module and abelian open restrictions; abelian_closed_support and moduleUnitOfAbelian then make the closed unit invertible on every module with zero open restriction.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-proetale-abelian-closed-support",
+    "lem-weil-pbc-proetale-abelian-closed-counit",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-module-open-lower-shriek-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Stacks proetale.tex Tags 09AA, 09AH and 09BM; the four existing proved private module-support helpers in Sheaf.Paper.CondensedOpenClosedRecollement, imported rather than duplicated."
+   }
+  },
+  {
+   "text": "Complementary module restrictions jointly detect zero objects by the supported-unit assertion and the closed direct image of zero. Since both restrictions are exact, apply them to kernels and cokernels to prove joint detection of isomorphisms. The composite of the actual open counit and closed unit is zero by the two adjunctions and disjoint vanishing. Form its short complex. On the closed piece the first term is zero and the second arrow is invertible by the closed triangle identity. On the open piece the last term is zero and the first arrow is invertible by the open triangle identity. The jointly conservative exact-functor criterion reflects short exactness. The previously proved vanishing supplies the last assertion. All arguments include empty schemes and zero modules.",
+   "uses": [
+    "lem-weil-pbc-jointly-reflect-short-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Stacks proetale.tex Tag 09AH; Mathlib jointly conservative exact functor criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-proetale-abelian-closed-counit",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-open-lower-shriek-adjunction",
+  "lem-weil-pbc-jointly-reflect-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/_section.md",
+  "place": "Final curve paragraph. C1 proves dimension decrease with the existing specialization API and coefficient-module exactness by complementary restrictions, following Stacks 09AH. Return repair: reuse the four existing proved private module-support helpers from CondensedOpenClosedRecollement via import all; do not duplicate them."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "zero-dimensional|Noetherian|open closed|localization",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no usable result: the subdirectory argument accidentally repeated Mathlib/; corrected source grep below is the search used for the verdict"
+  },
+  {
+   "tool": "leansearch",
+   "query": "zero dimensional closed subset of a Noetherian scheme is finite and gives an exact open closed localization sequence of sheaves",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Noetherian, Finite, open immersion, closed immersion, exact",
+   "results": "0 hits: ; loogle: <input>:1:34: expected 'in'",
+   "date": "2026-10-22",
+   "verdict": "no usable pattern result; semantic searches and corrected qualified-name pattern below were used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zero dimensional closed subset of a Noetherian scheme is finite and gives an exact open closed localization sequence of sheaves",
+   "results": "8 hits: AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsArtinianScheme, AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_presheaf_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim|finite.*[Cc]losed|NoetherianSpace",
+   "results": "25 hits: Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/Irreducible.lean, Mathlib/Topology/PartitionOfUnity.lean, Mathlib/Topology/PartitionOfUnity.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the complement of a dense open in a Noetherian scheme of dimension at most one is finite closed points and the module localization counit unit are short exact",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian",
+   "results": "12 hits: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing, AlgebraicGeometry.isNoetherian_Spec, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.IsNoetherian.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the complement of a dense open in a Noetherian scheme of dimension at most one is finite closed points and the module localization counit unit are short exact",
+   "results": "8 hits: Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, exact_of_isLocalized_maximal, exact_of_localized_maximal, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme of dimension at most one an open containing every generic point has finite closed complement and the open closed localization sequence is short exact for internal modules over any condensed coefficient ring",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, exact_of_isLocalized_maximal, exact_of_localized_maximal, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, Module.isLocallyConstant_rankAtStalk_freeLocus, AlgebraicGeometry.exists_of_res_zero_of_qcqs, CondensedMod.IsSolid, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern Noetherian topology, affine sections or algebraic module localization; none gives the complete finite-complement and internal-coefficient exact sequence statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian",
+   "results": "12 hits: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing, AlgebraicGeometry.isNoetherian_Spec, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.IsNoetherian.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern Noetherian topology, affine sections or algebraic module localization; none gives the complete finite-complement and internal-coefficient exact sequence statement"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_compl|topologicalKrullDim|openClosed|open_closed",
+   "results": "24 hits: Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/KrullDimension.lean, Mathlib/Topology/MetricSpace/Ultra/Basic.lean, Mathlib/Topology/MetricSpace/Ultra/Basic.lean, Mathlib/Topology/MetricSpace/Ultra/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern Noetherian topology, affine sections or algebraic module localization; none gives the complete finite-complement and internal-coefficient exact sequence statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of an open containing all generic points in a one dimensional Noetherian scheme is finite and the counit unit of extension by zero and closed restriction give an exact sequence of sheaves over a ring object",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_lift_of_germInjective_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.Scheme.zero_of_zero_cover",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern Noetherian topology, affine sections or algebraic module localization; none gives the complete finite-complement and internal-coefficient exact sequence statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed localization short exact sequence for internal modules over a ring sheaf on the pro etale site of a Noetherian curve",
+   "results": "8 hits: IsLocalizedModule.map_exact, LocalizedModule.map_exact, ModuleCat.localizedModule_functor_map_exact, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop, exact_of_isLocalized_span, TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern Noetherian topology, affine sections or algebraic module localization; none gives the complete finite-complement and internal-coefficient exact sequence statement"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|ProEtale|lowerShriek|extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern Noetherian topology, affine sections or algebraic module localization; none gives the complete finite-complement and internal-coefficient exact sequence statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite complement of a dense open containing generic points of a one dimensional Noetherian scheme and localization for sheaves of modules over a sheaf of rings",
+   "results": "8 hits: ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen, ModuleCat.Tilde.stalkIso, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, AlgebraicGeometry.StructureSheaf.localizationToStalk",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern Noetherian topology, affine sections or algebraic module localization; none gives the complete finite-complement and internal-coefficient exact sequence statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-coefficient-heart",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-coefficient-heart",
+   "place": "Final curve paragraph: finite closed complement and canonical exact sequence; retained proof step 10. Supporting Stacks: schemes.tex Tag 01J3, lemma-reduced-closed-subscheme; properties.tex Tag 0AAX, lemma-locally-Noetherian-dimension-0; proetale.tex Tag 09AH, lemma-ses-associated-to-open.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coefficient-heart-curve-complement",
+  "worker": "stage1",
+  "summary": "Q66 kept the statement unchanged, proved dimension zero by a length-two chain contradiction and used the existing closed zero-dimensional subset theorem. Verified quasi-compactness of the open and qcqs of X. Expanded the coefficient and scalar actions to identify the actual adjunction maps with arbitrary-ring-object localization. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "sk-lem-coefficient-heart/_section.md, final curve paragraph; parent split retained proof step 10. The current proof.md ends at general filtration, so the curve paragraph is in the unit statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-zero-dim-noetherian-closed-finite",
+    "why": "Generic topological finite-closed-points theorem applied after the elementary chain proof; the coefficient-heart unit has no such topology lemma."
+   },
+   {
+    "node": "lem-sf-ring-sheaf-closed-localization",
+    "why": "Generic arbitrary-ring-object open/closed exact sequence with its specified unit and counit; it supplies the sheaf-theoretic tool in the unit localization route without restricting coefficients."
+   },
+   {
+    "node": "lem-sfb-proetale-sheaves-grothendieck",
+    "why": "Generic existence of abelian sheaf equalizers and coequalizers, needed to apply the scalar-change equivalences in the pro-etale abelian sheaf category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-zero-dim-noetherian-closed-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-aa35503b5",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-aa35503b5 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps in full, with each cited statement, the main-20261015 _section.md curve paragraph and Stacks 09AH (proetale.tex l.5135; needs only j quasi-compact). The item and all proof_deps are absent from the 10-19 drop list. Statement and stmt_deps are unchanged against side-live. No new nodes. Checks: step 1 gets qcqs from locally-Noetherian⇒qs plus the assumed qc, and u quasi-compact from minimal-element⇒DCC⇒every subset qc. Step 2 is a correct length-2 chain contradiction (components-cover, sober generic point in U). Step 3 gets T0 from sobriety and applies the zero-dim lemma, whose hypotheses all hold. Step 4 meets the change-of-scalars (5) hypotheses through the sheaf-tensor and Grothendieck nodes, and α is invertible for every condensed ring. Step 5 checks g^*=E_g g_B^*, g_*=g_*^B R_g (η=unit∘g_*α) and u_!=u_!^B R_u. Step 6 applies the arbitrary-B ring-sheaf localization with qcqs and qc open from step 1. Step 7 covers the empty cases. Edge cases tested: DVR, A^1 minus points, a component that is an isolated point, nonreduced X, U=∅. FIX (one C3/C4 fault): step 5 described the open counit through an uncited composite adjunction, but u_!⊣u^* is defined by def-sfb-module-open-lower-shriek-adjunction (Res⊣Coext with lin_!⊣mapMod, Coext≅Ext). The fix cites it in step 5 and proof_deps and rewrites the counit sentence. I accept the three generic tool_uses. Maintainer note: the statement's 'adjunction counit' lacks that node in stmt_deps; stage 2 should pin it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartCurveComplement",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_curve_complement",
+  "file": "lean/Sheaf/Paper/CoefficientHeartCurveComplement.lean",
+  "statement": "theorem coefficientHeart_curve_complement (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (hdim : topologicalKrullDim X ≤ 1) (U : X.Opens) (hU : ∀ C ∈ irreducibleComponents X, ∀ η : X, IsGenericPoint η C → η ∈ U) (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsReduced Z] (hi : Set.range i = (U : Set X)ᶜ) (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : topologicalKrullDim Z ≤ 0 ∧ Finite Z ∧ (∀ z : Z, IsClosed ({i z} : Set X)) ∧ Mono ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ U.ι).counit.app F) ∧ Epi ((CondensedRing.upperStarLowerStarAdjunction Λ i).unit.app F) ∧ (ComposableArrows.mk₂ ((CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ U.ι).counit.app F) ((CondensedRing.upperStarLowerStarAdjunction Λ i).unit.app F)).Exact ∧ IsZero ((CondensedRing.upperStar Λ U.ι).obj ((CondensedRing.lowerStar Λ i).obj ((CondensedRing.upperStar Λ i).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The reduced induced closed complement is specified by its exact unique characterization in lem-weil-pbc-reduced-induced-closed-subscheme: a reduced closed immersion with image the complement of U. No reduction or irreducibility of X is assumed. Short exactness is Mono of the actual open counit, Epi of the actual closed unit, and exactness of that pair. Its lisse specialization uses L = U^*F and G = i^*F; the same sequence and open-zero clause assert the stated extension and finite closed support. The already stated open adjunction node is added to stmt_deps to pin down the counit, as the stage-1 review requested."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be5ae1257",
+  "group": "NU",
+  "result": "pass",
+  "note": "Statement matches node clause by clause. Hypotheses not stronger: IsLocallyNoetherian+CompactSpace, topologicalKrullDim≤1, generic-point hU, reduced induced Z via IsClosedImmersion+IsReduced+range=Uᶜ (unique characterisation), any comm condensed ring and any Mod F. Conclusions: dim Z≤0, Finite Z, closed points, Mono of the actual openImmersionLowerShriekUpperStarAdjunction counit (right adjoint is upperStar), Epi of the upperStarLowerStarAdjunction unit, mk2 Exact, IsZero u^*i_*i^*F. The lisse 'in particular' clause is an immediate substitution, advisory only. Only node changes: lean record and added stmt_dep def-sfb-module-open-lower-shriek-adjunction (already a proof_dep, requested by stage-1 reviewer, no cycle). Live node has no lean, so no supersession. Edge cases: empty X, U=X, U=∅, F=0, non-reduced/reducible X. Single universe u as in framework. No hollow defs, sorry only, docstrings carry source+blueprint and all 7 steps, proof-plan imports exist, statement field verbatim. No compile run (not reproduced, no changes); worker reports a clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-da59e",
+  "group": "C6",
+  "result": "fix",
+  "landing": "20261024T204534-L-3791332",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefficientHeart/Closure/CurveComplement vs live clone and dep node records; 3 delivered modules + 14 direct importers compiled against sandbox .lbuild; #print axioms; unit realized list"
+ }
+}

@@ -1,0 +1,266 @@
+{
+ "id": "lem-pur-sequence-kinjective-comparison-shifts",
+ "kind": "statement",
+ "title": "K-injective quotient-projection comparison on arbitrary shifted replacements",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and a finite-type $k$-scheme $W$ [def-weil-finite-field-fiber]. On a fixed small skeleton $\\mathcal V=W_{\\mathrm{proet}}$ set $B_n=(R/t^n)_W$ for $n\\ge1$ and $A=\\lim_nB_n$. Let $\\mathcal T$ be the ringed sequence site with ring $B=(B_n)_n$, and let $\\mathscr S_W=\\operatorname{Mod}_{\\mathcal T}(B)$ be its strict quotient-semilinear module systems [def-coef-ringed-sequence-site]. Use ordinary unbounded derived categories and cochain shifts, with $d_{K[r]}=(-1)^r d_K$ [def-weil-abstract-derived-category]. Fix a supplied coefficient calculus $S$ with its coherence data, reduction $\\mathcal R$ and total limit $\\mathcal L=R\\lim D(U)$ [lem-coef-derived-system-evaluation-calculus]; $U$ is termwise scalar restriction along $A\\to B_n$.\n\nLet $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal V),A)$ be the ringed projection whose underlying inverse image is the constant-system functor $c$ and whose structural map $cA\\to B$ consists of the quotient projections [def-pur-ringed-topos-morphism-of-universes].\n\nFactor $p=g\\circ a$ through the constant ring $cA$ on $\\mathcal T$, so $a_*=U$ is exact and $g_*=\\lim$. There is a canonical natural isomorphism\n$$\\kappa:Rp_*\\xrightarrow{\\sim}Rg_*D(U)=\\mathcal L.$$\nIts normalization on every K-injective $B$-system complex $I$ [def-pur-kinjective-complex] and any K-injective replacement $j:UI\\to J$ over $cA$ is the quasi-isomorphism $\\lim j:\\lim UI\\to\\lim J$ representing $\\kappa_{[I]}$ under the canonical resolution identifications [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Here $[K]$ denotes the derived object of a complex $K$.\n\nFor every strict $B$-system complex $N$ and every simultaneous K-injective replacement $v:UN\\to J$, there is a canonical isomorphism $\\mathcal L([N])\\xrightarrow{\\sim}[\\lim J]$. It is the localization comparison followed by $R\\lim([v])$ and the canonical K-injective model comparison. For any K-injective replacement $i:N\\to I$ over $B$, there is a unique homotopy class $b:UI\\to J$ with $bUi\\simeq v$; $b$ is a quasi-isomorphism, and $\\lim b$ represents the composite $Rp_*[N]\\xrightarrow{\\kappa}\\mathcal L([N])\\xrightarrow{\\sim}[\\lim J]$ in the model $Rp_*[N]=[\\lim UI]$. These identifications are independent of $i$, natural for arbitrary derived morphisms in $N$, and satisfy the change-of-resolution cocycle formulas.\n\nFor every $r\\in\\mathbf Z$, the replacement for $I[r]$ is exactly $j[r]$, and the comparison is $\\lim(j[r])=(\\lim j)[r]$ under $\\lim(J[r])=(\\lim J)[r]$, with degree-$i$ map $\\lim j^{i+r}$. For a supplied $v$ the shifted replacement is exactly $v[r]$, with comparison class $b[r]$. These equations hold naturally for all derived inputs and maps and respect shift zero, addition and inverse shifts. No preservation of K-injectives by $U$, exactness of arbitrary products, boundedness or normalized-system hypothesis is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Old proof steps 5, 6, 8 and the right-hand part of 9: Stacks Tag 0D6E (sites-cohomology.tex, lemma-derived-pushforward-composition), with the specified replacement normalization and extension to arbitrary simultaneous replacements."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-kinjective-complex",
+  "def-pur-ringed-topos-morphism-of-universes",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-field-fiber",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof": [
+  {
+   "text": "Identify the actual coefficient restriction functor with sequence-to-strict-system equivalence followed by the sectionwise restrictionFunctor of lem-coef-restricted-tower-resolution-acyclicity. The identification uses uniqueness of coefficientSequenceRestriction: the vertical coefficient maps are both the identity on sections, and horizontal and morphism maps are the original section maps. The equivalence is additive and preserves K-injective complexes. Apply the existing restricted-tower acyclicity theorem to the identity resolution of the transported K-injective system. Transport back along the complex comparison isomorphism to obtain that lim j is a quasi-isomorphism for every supplied j:UI→J with I,J K-injective.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-pur-system-ringed-sequence-site",
+    "lem-coef-restricted-tower-resolution-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical total inverse limit after exact restriction itself as RP. Its unit on complexes is η_UI followed by Rlim of the inverse exact-localization comparison. Naturality of the derived unit and exact-localization comparison proves this is a natural transformation. The K-injective model unit is inverse to the existing rightDerivedFunctorObjQIso. Consequently the unit followed by the supplied replacementIso(v) is exactly [lim v]. Enough K-injective resolutions on the actual ringed sequence site and the preceding acyclicity show the unit invertible on every K-injective system. The K-injective derivability structure, via CategoryTheory.derives, makes this unit a right derived functor. Set κ to the identity isomorphism; right-derived uniqueness proves uniqueness from its normalization on every complex. For efficient specialization, define the general comparison and the same normalization, arbitrary-replacement, naturality, cocycle, and shift predicates for an exact additive F followed by additive G. The coefficient predicates specialize these formulas to U and lim; their quantifiers and equations are definitionally unchanged. All general calculations are proved privately in this module before specialization.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For supplied i:N→I and v:UN→J, use the Mathlib homotopy-to-derived Hom bijection into the K-injective J to lift [Ui]⁻¹[v] to a homotopy class b. The same injectivity makes precomposition by Ui injective and gives the specified iff characterization of b. Every chain representative β satisfies Ui β homotopic to v; localization and cancellation imply β is a quasi-isomorphism. The first step gives that lim β is a quasi-isomorphism. Naturality of the canonical unit and exact-localization comparison proves the displayed arbitrary-replacement formula.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-coef-restricted-tower-resolution-acyclicity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose replacementIso(v) by the invertible derived unit at J. It becomes Rlim of the exact-localization comparison followed by [v]. Thus the given equation for a derived morphism f and a comparison s proves the replacementIso naturality square by cancellation. Apply exact restriction to the equation represented by t and use the two supplied comparison homotopies to obtain equality of the classes of βs and Utβ′. The K-injective Hom injectivity gives the required homotopy. For three replacements, cancel the localized initial quasi-isomorphism to obtain composition and identity equations; Hom injectivity gives their homotopies, and additive inverse limit sends these homotopies to the displayed derived equations. The same argument with additive push proves the system-resolution cocycle.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib closure of K-injectives and quasi-isomorphisms under cochain shifts. Termwise inverse limit has the asserted components by definition, and additivity gives its differential sign. Shift the supplied comparison homotopy and precompose with the standard restriction shift isomorphism; its naturality gives the stated shifted comparison. Use the proved canonical-unit shift helper of lem-sp-canonical-right-derived-adjunction-shift: first restrict to the K-injective subcategory of the homotopy category. Its expression through the K-injective equivalence and its counit commutes with shifts by the construction of rightDerivedFunctor.CommShift. Every complex admits a quasi-isomorphism to a K-injective, so cancel its invertible image to descend unit shift compatibility. Whiskering and composing with exact-localization shift compatibility gives the unit compatibility for RP. Finally postcompose the desired replacement shift equation by the shifted invertible unit at J; unit shift compatibility, naturality of the derived shift isomorphisms, and exact-localization shift compatibility reduce both sides to the same composite. This proves the prescribed shifts using the canonical coherent Mathlib commutation structures.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-canonical-right-derived-adjunction-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-restricted-tower-resolution-acyclicity",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sp-canonical-right-derived-adjunction-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070K, 070Y; restricted-tower acyclicity specializes Tag 0D6E. Lean unit, localization, Hom-bijection, and shift calculations by T6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived|isKInjective.*shift",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean; 21 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical composite derived direct image agrees with derived inverse limit on arbitrary simultaneous K-injective replacements and shifted replacements",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "Hits: CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff; 12 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a projection of a ringed quotient sequence site, the derived direct image comparison to derived inverse limit of restriction of scalars is represented by limit j for any K-injective replacement and its shifts",
+   "results": "Hits: SheafOfModules.Presentation.map_π_eq, localCohomology.diagram, localCohomology.diagramComp, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, localCohomology.isoOfFinal, CategoryTheory.GrothendieckTopology.diagramCompIso, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac; 8 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-injective replacement of a restricted complex of ring diagram modules computes the canonical derived inverse limit comparison naturally and with additive cochain shift coherence",
+   "results": "Hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.cm5b, CochainComplex.ConnectData.restrictionGEIso, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; 8 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived|isKInjective.*shift",
+   "results": "Hits: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; 21 hits. Read KInjective.lean, ExactFunctor.lean and the generic RightDerived/PointwiseRightDerived comparison declarations. These give generic infrastructure, not the full quotient-sequence statement with arbitrary replacement and shift formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match: infrastructure only, not the whole stated comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison derived direct image composite exact restriction of scalars inverse limit K-injective resolutions",
+   "results": "Hits: CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, Module.DirectLimit.congr_symm_apply_of, DirectLimit.mk_injective, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, PresheafOfModules.limitPresheafOfModules_map, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality, PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; 8 hits. Read KInjective.lean, ExactFunctor.lean and the generic RightDerived/PointwiseRightDerived comparison declarations. These give generic infrastructure, not the full quotient-sequence statement with arbitrary replacement and shift formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match: infrastructure only, not the whole stated comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective",
+   "results": "Hits: CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, HomotopyEquiv.isKInjective, CochainComplex.isKInjective_of_iso, CochainComplex.isKInjective_iff_of_iso, CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff; 12 hits. Read KInjective.lean, ExactFunctor.lean and the generic RightDerived/PointwiseRightDerived comparison declarations. These give generic infrastructure, not the full quotient-sequence statement with arbitrary replacement and shift formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match: infrastructure only, not the whole stated comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image of a ringed sequence projection equals derived inverse limit after exact restriction of scalars, computed on arbitrary K-injective resolutions with coherent shifts",
+   "results": "Hits: localCohomology.diagram, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; 8 hits. Read KInjective.lean, ExactFunctor.lean and the generic RightDerived/PointwiseRightDerived comparison declarations. These give generic infrastructure, not the full quotient-sequence statement with arbitrary replacement and shift formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match: infrastructure only, not the whole stated comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural derived functor comparison on different K-injective replacements commutes with all integer shifts and change of resolution",
+   "results": "Hits: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh; 8 hits. Read KInjective.lean, ExactFunctor.lean and the generic RightDerived/PointwiseRightDerived comparison declarations. These give generic infrastructure, not the full quotient-sequence statement with arbitrary replacement and shift formulas.",
+   "date": "2026-10-23",
+   "verdict": "no match: infrastructure only, not the whole stated comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-sequence-adjoint-resolution-shifts",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition). Old proof steps 5, 6, 8 and the right-hand part of 9: Stacks Tag 0D6E (sites-cohomology.tex, lemma-derived-pushforward-composition), with the specified replacement normalization and extension to arbitrary simultaneous replacements.",
+   "via": [
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pur-sequence-kinjective-comparison-shifts",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Specialized the existing normalized ringed-topos composition theorem, then proved arbitrary-replacement, derived naturality, cocycle and signed shift formulas using the existing K-injective Hom and computation nodes. No new nodes are needed.",
+  "blueprint": "Latest fix-prop-coherence.proof.md, coefficient comparisons preserve evaluation and adjunction units/counits; realizes the right-derived-limit comparison in the ancestor thm-pur-rational-and-qbar-purity and the recorded chain through lem-pur-sequence-adjoint-resolution-shifts.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor localization/computation theorem, applied to scalar restriction U; it is not a change in the coefficient-comparison route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic computation and natural derived unit for an additive termwise functor on K-injectives; applied to inverse limit."
+   },
+   {
+    "node": "lem-sf-kinjective-replacement-triangulated",
+    "why": "Generic shift-stable K-injective localization equivalence; supplies coherent shifts of replacements on both ringed sites."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "The general ringed-topos composition theorem already in the statement dependencies; supplies the prescribed limit-j normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-b65cf78d2",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-b65cf78d2 (reviewer sub-agent of L); spot-checked: Read the whole item and its proof; there are no new nodes and the statement and stmt_deps are unchanged. Steps 1-7 are correct. (1) p=g∘a: a_*=U, g_*=lim (the constant-system adjunction), the structural map is cA→B, and Rg_* agrees with the Rlim of lem-weil-pbc-ringed-strict-tower-homotopy-limit. (2) The normalization of the composition node (an extension of Stacks 0D6E, sites-cohomology.tex l.4011) gives [lim j]=κ_[I]. Naturality gives η_J[lim j]=Rlim[j]η_UI, so η_UI is invertible without UI being K-injective. (3) b lifts [v][Ui]^{-1} via the Hom bijection into a K-injective target (Qh_map_bijective). Injectivity gives bUi≃v, and b is a quasi-isomorphism. (4) Recomputed c_vκ=η_J^{-1}Rlim[b]η_UI=[lim b]. (5) Recomputed [s][b]=[v']DU(f)[Ui]^{-1}=[b'][Ut]; this gives sb≃b'Ut and the cocycle. (6-7) Checked the shift signs: (−1)^r on d and on homotopies, and r+s additivity. Batch-5 flag: lem-sf-kinjective-replacement-triangulated reaches lem-trf-localization-essentially-surjective, which is the Mathlib leaf Localization.essSurj. That is generic category theory, not part of the trace formula or Poincaré duality, so it is accepted. Duplicates: lem-coef-restricted-tower-resolution-acyclicity and lem-coef-sequence-pushforward-limit-projections overlap only with the κ-normalization part of this existing item, which also proves the arbitrary-v, b, naturality, cocycle and shift assertions; not a duplicate. All four tool_uses are accepted as generic. FIX: Step 2 now cites prop-pur-kinjective-resolutions-exist to discharge the hypothesis of lem-weil-pbc-kinjective-total-derived that K-injective resolutions exist for cA-modules on T (the node is already in proof_deps). Nothing else is changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SequenceKInjectiveComparisonShifts",
+  "declaration": "WeilConjectures.SequenceKInjectiveComparison.sequenceKInjectiveComparisonShifts",
+  "declarations": [
+   "WeilConjectures.SequenceKInjectiveComparison.ReplacementShiftsFor",
+   "WeilConjectures.SequenceKInjectiveComparison.RepresentativeShiftsFor",
+   "WeilConjectures.SequenceKInjectiveComparison.SystemResolutionCocycleFor",
+   "WeilConjectures.SequenceKInjectiveComparison.ResolutionCocycleFor",
+   "WeilConjectures.SequenceKInjectiveComparison.DerivedNaturalityFor",
+   "WeilConjectures.SequenceKInjectiveComparison.ArbitraryReplacementFor",
+   "WeilConjectures.SequenceKInjectiveComparison.NormalizationFor",
+   "WeilConjectures.SequenceKInjectiveComparison.restrictedMapFor",
+   "WeilConjectures.SequenceKInjectiveComparison.comparisonIso",
+   "WeilConjectures.SequenceKInjectiveComparison.restrict",
+   "WeilConjectures.SequenceKInjectiveComparison.limitComplex",
+   "WeilConjectures.SequenceKInjectiveComparison.push",
+   "WeilConjectures.SequenceKInjectiveComparison.limitComplex_shift",
+   "WeilConjectures.SequenceKInjectiveComparison.restrict_shift",
+   "WeilConjectures.SequenceKInjectiveComparison.push_additive",
+   "WeilConjectures.SequenceKInjectiveComparison.restrictionFactors",
+   "WeilConjectures.SequenceKInjectiveComparison.limitUnit",
+   "WeilConjectures.SequenceKInjectiveComparison.replacementIso",
+   "WeilConjectures.SequenceKInjectiveComparison.restrictedMap",
+   "WeilConjectures.SequenceKInjectiveComparison.totalLimitCommShift",
+   "WeilConjectures.SequenceKInjectiveComparison.Normalization",
+   "WeilConjectures.SequenceKInjectiveComparison.ArbitraryReplacement",
+   "WeilConjectures.SequenceKInjectiveComparison.DerivedNaturality",
+   "WeilConjectures.SequenceKInjectiveComparison.ResolutionCocycle",
+   "WeilConjectures.SequenceKInjectiveComparison.RepresentativeShifts",
+   "WeilConjectures.SequenceKInjectiveComparison.ReplacementShifts",
+   "WeilConjectures.SequenceKInjectiveComparison.SystemResolutionCocycle",
+   "WeilConjectures.SequenceKInjectiveComparison.sequenceKInjectiveComparisonShifts"
+  ],
+  "file": "lean/Sheaf/Paper/SequenceKInjectiveComparisonShifts.lean",
+  "statement": "theorem sequenceKInjectiveComparisonShifts (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p) (aW : W ⟶ AlgebraicGeometry.Scheme.Spec.obj (op (CommRingCat.of D.k))) [_hW : AlgebraicGeometry.LocallyOfFiniteType aW] [_hqW : AlgebraicGeometry.QuasiCompact aW] (S : CoefficientDerivedSystemCalculus l E W) (_coherence : CoefficientDerivedSystemCoherence l E W S) : ∃ (RP : coefficientSequenceDerived l E W ⥤ DerivedCategory (scalarReductionSource l E W)) (η : (push l E W).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RP) (sRP : RP.CommShift ℤ), RP.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (coefficientSequenceModules l E W) (.up ℤ)) ∧ (∀ (I : CochainComplex (coefficientSequenceModules l E W) ℤ) [I.IsKInjective], IsIso (η.app I)) ∧ (fun [_s : RP.CommShift ℤ] ↦ NatTrans.CommShift η ℤ ∧ ∃! κ : RP ≅ coefficientSequenceLimit l E W, Normalization l E W RP η κ ∧ ArbitraryReplacement l E W RP η κ ∧ NatTrans.CommShift κ.hom ℤ ∧ DerivedNaturality l E W ∧ ResolutionCocycle l E W ∧ SystemResolutionCocycle l E W ∧ RepresentativeShifts l E W ∧ ReplacementShifts l E W) (_s := sRP)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfadfdda6",
+  "group": "Q157",
+  "result": "fix",
+  "note": "H3 fix in ArbitraryReplacement: ∃! b, (q(Ui)≫b=q v) ∧ (∀β, …) gave uniqueness only among classes also meeting the representative clauses; the node says b is the unique class with bUi≃v (needs the 070I K-injective Hom bijection, so a real weakening) → rewritten as ∃ b, (∀ b', q(Ui)≫b'=q v ↔ b'=b) ∧ …; theorem signature and lean.statement verbatim and unchanged (pinned in lean-record.json). Everything else checked and correct: hypotheses (FiniteFieldDatum with IsAlgClosure k, l≠p, finite E/ℚ_l, W finite type over k via LocallyOfFiniteType+QuasiCompact, S and coherence kept), push=U⋙lim matches the landed moduleDirect, RP characterized by IsRightDerivedFunctor + η iso on K-injectives, κ pinned by Normalization clause 1 through the Kan-extension property (∃! κ uniqueness follows by hom_ext, left unchanged), replacementIso = Rlim(rF)≫Rlim(Qv)≫η_J⁻¹ (rightDerivedFunctorObjQIso is the inverse unit), recomputed the lim j / lim β formulas, the derived-naturality square, both cocycle families, and the shift formulas ((−1)^r, i+r, CommShift); no U-preserves-K-injectives, boundedness or normalization hypothesis; universes t, u independent; only the main theorem has sorry; docstrings and both report sections present. Fixed file compiled with nt_compile --json in 21.6 s, exit 0, no errors."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bd232",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T033956-L-192086",
+  "kind": "interface",
+  "note": "independent cc review: delivered SequenceKInjectiveComparisonShifts (proof via generic F⋙G comparison + restricted-tower acyclicity) against node lem-pur-sequence-kinjective-comparison-shifts, the published statement and the old predicate bodies (Iff.rfl/rfl scratch checks), the original vs adapted PurSequenceDerivedNormalization, and the importers"
+ }
+}

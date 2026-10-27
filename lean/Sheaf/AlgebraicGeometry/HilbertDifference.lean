@@ -11,14 +11,14 @@ public import Mathlib.RingTheory.Lasker
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
-import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import Sheaf.AlgebraicGeometry.HilbertDenominatorMaps
+import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
-import Sheaf.RingTheory.HilbertAffineDenominatorModule
-import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Regular-section exact sequences give lower-dimensional differences
 
@@ -36,6 +36,56 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Topolo
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+private theorem hilbert_coherent_fp {X : Scheme.{u}} [IsLocallyNoetherian X]
+    (F : X.Modules) (hc : RingedSpace.IsCoherent X.toRingedSpace F) :
+    F.IsFinitePresentation := by
+  have hq := (isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hc
+  have hfp (U : X.affineOpens) : (F.over U.1).IsFinitePresentation := by
+    have := IsLocallyNoetherian.component_noetherian U
+    have := coherent_affine_sections_finite X F hc U.1 U.2
+    exact (((quasicoherent_finite_type_affine.{u, u} X).2 F hq.1).1 U.1 U.2).2.mpr
+      (Module.finitePresentation_of_finite Γ(X, U.1) Γ(F, U.1))
+  exact SheafOfModules.IsFinitePresentation.of_coversTop F (fun U : X.affineOpens ↦ U.1)
+    ((Opens.coversTop_iff X _).mpr (iSup_affineOpens_eq_top X))
+
+private theorem hilbert_twist_succ {X : Scheme.{u}} (L : X.Modules) [L.IsInvertible]
+    (n : ℤ) :
+    Nonempty ((L ⊗ (if 0 ≤ n then L.tensorPow n.toNat else L.dual.tensorPow (-n).toNat)) ≅
+      (if 0 ≤ n + 1 then L.tensorPow (n + 1).toNat
+        else L.dual.tensorPow (-(n + 1)).toNat)) := by
+  split_ifs with hn hn1 hn1
+  · exact ⟨eqToIso (by rw [show (n + 1).toNat = n.toNat + 1 by omega]; rfl)⟩
+  · omega
+  · have hn' : n = -1 := by omega
+    subst n
+    refine ⟨(Iso.refl L ⊗ᵢ (ρ_ L.dual)) ≪≫
+      (nonempty_tensorObj_dual_iso_unit L).some⟩
+  · have hm : (-n).toNat = (-(n + 1)).toNat + 1 := by omega
+    rw [hm, tensorPow_succ]
+    exact ⟨(α_ _ _ _).symm ≪≫
+      ((nonempty_tensorObj_dual_iso_unit L).some ⊗ᵢ Iso.refl _) ≪≫ λ_ _⟩
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem hilbert_euler_mono_tensor
+    {k : Type u} [Field k] {X : Scheme.{u}}
+    [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [IsLocallyNoetherian X] {M N : X.Modules}
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) M]
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) N]
+    (f : M ⟶ N) [Mono f] (P : X.Modules) [P.IsInvertible] :
+    eulerChar k (tensorObj N P) =
+      eulerChar k (tensorObj M P) + eulerChar k (tensorObj (cokernel f) P) := by
+  have h := eulerChar_tensorObj_sub_eulerChar_tensorObj_eq k f P
+  have hz : IsZero (kernel f ⊗ P) :=
+    (tensorRight P).map_isZero (isZero_kernel_of_mono f)
+  rw [eulerChar_eq_zero_of_isZero k hz, sub_zero] at h
+  change eulerChar k (tensorObj N P) - eulerChar k (tensorObj M P) =
+    eulerChar k (tensorObj (cokernel f) P) at h
+  exact (sub_eq_iff_eq_add.mp h).trans (add_comm _ _)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Regular meromorphic sections give coherent lower-dimensional cokernels and the
 forward-difference identity for Euler characteristics.
 Source: Stacks Project, Divisors, Tag 02P2; Varieties, Tag 0BEM
@@ -110,6 +160,62 @@ theorem hilbert_difference {k : Type u} [Field k] {X : Scheme.{u}}
               (cokernel (idealModuleProductι (pullback.fst s (toMeromorphicModule X L)) F))
               (if 0 ≤ n then L.tensorPow n.toNat
             else L.dual.tensorPow (-n).toNat)) := by
-  sorry
+  obtain ⟨jF, hjF, hmjF, hQi, hQj⟩ :=
+    hilbert_denominator_maps F hFcoh hFsupport hFnoEmbedded L s hs
+  have hden := meromorphic_denominator_ideal_nowhere_dense X L s hs
+  dsimp only at hden
+  obtain ⟨_, _, hIqc, hmi, _, ⟨Zi, hZi, hni, hvi⟩, ⟨Zj, hZj, hnj, hvj⟩⟩ := hden
+  let i := pullback.fst s (toMeromorphicModule X L)
+  let A := idealModuleProduct i F
+  let a := idealModuleProductι i F
+  have : Mono a := by dsimp [a, idealModuleProductι]; infer_instance
+  have : Mono jF := hmjF
+  have : F.IsQuasicoherent :=
+    ((isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hFcoh).1
+  have : F.IsFinitePresentation := hilbert_coherent_fp F hFcoh
+  have : (Limits.pullback s (toMeromorphicModule X L)).IsQuasicoherent := hIqc
+  have : (tensorObj (Limits.pullback s (toMeromorphicModule X L)) F).IsQuasicoherent :=
+    (quasiCoherent_tensor_product_affine_sections _ _).1
+  have : A.IsQuasicoherent := by
+    have := isQuasicoherent_cokernel (i ▷ F ≫ (λ_ F).hom)
+    have := isQuasicoherent_kernel (cokernel.π (i ▷ F ≫ (λ_ F).hom))
+    exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso
+      (Abelian.imageIsoImage (i ▷ F ≫ (λ_ F).hom)) inferInstance
+  have hA := (isCoherent_kernel_cokernel_biprod_and_submodule X).2 F A a
+    hFcoh inferInstance inferInstance
+  have : A.IsFinitePresentation := hilbert_coherent_fp A hA.1
+  have : (F ⊗ L).IsQuasicoherent := isQuasicoherent_tensorObj F L
+  have : (F ⊗ L).IsFinitePresentation := isFinitePresentation_tensorObj F L
+  have hFL : RingedSpace.IsCoherent X.toRingedSpace (tensorObj F L) :=
+    (isCoherent_iff_isQuasicoherent_and_isFiniteType X _).mpr
+      ⟨inferInstance, inferInstance⟩
+  have hcj := ((isCoherent_kernel_cokernel_biprod_and_submodule X).1
+    A (F ⊗ L) hA.1 hFL).1 jF |>.2
+  have dim_support (M : X.Modules) (Z : Set X) (hz : IsClosed Z) (hn : IsNowhereDense Z)
+      (hv : ∀ x : X, x ∉ Z → Subsingleton ((presheaf M).stalk x)) :
+      topologicalKrullDim {x : X | ¬ Subsingleton ((presheaf M).stalk x)} <
+        topologicalKrullDim X := by
+    let E := {x : X | ¬ Subsingleton ((presheaf M).stalk x)}
+    have hsub : E ⊆ Z := fun x hx ↦ by_contra fun h ↦ hx (hv x h)
+    have he : Topology.IsInducing (Set.inclusion hsub) :=
+      Topology.IsInducing.subtypeVal.of_comp_iff.mp
+        (show Topology.IsInducing ((Subtype.val : Z → X) ∘ Set.inclusion hsub) from
+          Topology.IsInducing.subtypeVal)
+    exact he.topologicalKrullDim_le.trans_lt
+      (hDim ▸ X.topologicalKrullDim_lt_of_isNowhereDense d hDim Z hz hn)
+  refine ⟨jF, hjF, ⟨inferInstance, hmjF⟩, ⟨hA.2, hcj⟩,
+    dim_support _ Zi hZi hni (fun x hx ↦ hQi x (hvi x hx)),
+    dim_support _ Zj hZj hnj (fun x hx ↦ hQj x (hvj x hx)), ?_⟩
+  intro n
+  let P := if 0 ≤ n then L.tensorPow n.toNat else L.dual.tensorPow (-n).toNat
+  have : P.IsInvertible := by dsimp [P]; split_ifs <;> infer_instance
+  have e1 := hilbert_euler_mono_tensor (k := k) a P
+  have e2 := hilbert_euler_mono_tensor (k := k) jF P
+  have e3 := eulerChar_congr k
+    ((α_ F L P) ≪≫ (Iso.refl F ⊗ᵢ (hilbert_twist_succ L n).some))
+  dsimp only [tensorObj] at e1 e2 e3 ⊢
+  change _ = _ at e3
+  dsimp only [P, a, i] at e1 e2 e3
+  omega
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-ringed-forget-tensor-left-representatives",
+ "kind": "lemma",
+ "title": "Left unit constraint for normalized ringed tensor comparison on flat-term K-flat representatives",
+ "statement": "In the setting of [lem-sf-ringed-forget-tensor-unit-representatives], [def-sf-ringed-forget-tensor-transposition-data] and [lem-sf-ringed-derived-closed-symmetric-monoidal], use the normalized unit isomorphism given by the explicit composite in the Lean declaration. Given hU, a total-tensor comparison chain and its summand formula, and a RepresentativeModel hμ as in the parent statement, for every flat-term K-flat complex P the left unit square displayed in the Lean declaration `ringed_forget_tensor_left_representatives` holds. The proof uses [lem-weil-pbc-exact-functor-derived-factorization] for the exact-functor localization factor.",
+ "stmt_deps": [
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT, with 06YU; unit verification in steps 2–3 of lem-sf-ringed-forget-tensor-coherence."
+ },
+ "proof": [
+  {
+   "text": "Apply the representative square to the degree-zero coefficient unit and P, substitute the normalized unit composite, and use the left-unitor model equations. The component calculation on the unique nonzero unit summand reduces to the corresponding underived coherence equation.",
+   "uses": [
+    "def-sf-ringed-forget-tensor-transposition-data",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT; left-unit calculation on representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*[Mm]onoidal|[Mm]onoidal.*mapHomologicalComplex",
+   "results": "0 hits; no match; no result proves the fixed-model representative constraint.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OplaxMonoidal\", \"mapHomologicalComplex\"",
+   "results": "0 hits; no match; no result proves the fixed-model representative constraint.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"braiding_naturality\"",
+   "results": "12 hits; CategoryTheory.BraidedCategory.braiding_naturality_left, CategoryTheory.BraidedCategory.braiding_naturality_right, CategoryTheory.BraidedCategory.braiding_naturality, CategoryTheory.BraidedCategory.braiding_naturality_left_assoc, CategoryTheory.BraidedCategory.braiding_naturality_right_assoc, CategoryTheory.BraidedCategory.braiding_naturality_assoc, SemimoduleCat.MonoidalCategory.braiding_naturality_left, SemimoduleCat.MonoidalCategory.braiding_naturality_right; no result proves the fixed-model representative constraint.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor tensor comparison respects associators unitors and symmetry after localization to the derived category",
+   "results": "8 hits; CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal, CategoryTheory.Localization.Monoidal.associator, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory, CategoryTheory.Localization.Monoidal.rightUnitor_hom_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Localization.Monoidal.tensorBifunctor, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc; no result proves the fixed-model representative constraint.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedForgetTensorUnitRepresentatives",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The unit check on representative complexes in steps 2–3 of lem-sf-ringed-forget-tensor-coherence, below the tensor comparison descent step.",
+   "via": [
+    "lem-sf-ringed-forget-tensor-coherence",
+    "lem-sf-ringed-forget-tensor-descent",
+    "lem-sf-ringed-forget-tensor-transposition",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedForgetTensorUnitLeftRepresentatives",
+  "file": "lean/Sheaf/Algebra/Homology/RingedForgetTensorUnitLeftRepresentatives.lean",
+  "declaration": "CategoryTheory.RingedForgetTensorTransposition.ringed_forget_tensor_left_representatives",
+  "statement": "theorem ringed_forget_tensor_left_representatives\n    (hU : ∀ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,\n      P.IsKFlatIndependentCoefficients →\n      (∀ p : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}\n        (R := R) (P.X p)) →\n      CochainComplex.IsKFlatIndependentCoefficients (R := R')\n        ((U.mapHomologicalComplex (.up ℤ)).obj P) ∧\n      ∀ p : ℤ, SheafOfModules.IsFlatOnSite.{d, vd, max d vd s, max d vd s}\n        (R := R') (U.obj (P.X p)))\n    (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅\n      ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{s, d, vd} J' R')\n    (summand : ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n      (p q n : ℤ) (hpq : p + q = n),\n      U.map (tensorSummand.{c, v, r} J R P Q p q n hpq) ≫ (chain.hom.app (P, Q)).f n =\n        u.tensor.hom.app (P.X p, Q.X q) ≫\n          tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)\n            ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq)\n    (μ : SB.tensor ⋙ U.mapDerivedCategory ≅\n      (U.mapDerivedCategory.prod U.mapDerivedCategory) ⋙ SA.tensor)\n    (hμ : RepresentativeModel.{c, v, r, d, vd, s, wb, wa}\n      J R J' R' U SB TB SA TA chain μ.hom)\n    (P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)\n    (hP : P.IsKFlatIndependentCoefficients)\n    (fP : ∀ p : ℤ, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}\n      (R := R) (P.X p)) :\n    (μ.hom.app (SB.monoidal.tensorUnit, DerivedCategory.Q.obj P) ≫\n        SA.tensor.map\n          (X := (U.mapDerivedCategory.obj SB.monoidal.tensorUnit,\n            U.mapDerivedCategory.obj (DerivedCategory.Q.obj P)))\n          (Y := (SA.monoidal.tensorUnit, U.mapDerivedCategory.obj (DerivedCategory.Q.obj P)))\n          ((U.mapDerivedCategory.mapIso cB.unitIso ≪≫\n              U.mapDerivedCategoryFactors.app (ringedTensorUnitComplex.{c, v, r} J R) ≪≫\n              DerivedCategory.Q.mapIso\n                ((HomologicalComplex.singleMapHomologicalComplex U (.up ℤ) 0).app\n                  (SheafOfModules.unit ((sheafCompose J\n                    (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))) ≪≫\n              DerivedCategory.Q.mapIso\n                ((HomologicalComplex.single _ (.up ℤ) (0 : ℤ)).mapIso u.coherence.unit) ≪≫\n              cA.unitIso.symm).hom, 𝟙 _) ≫\n        (SA.monoidal.leftUnitor (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P))).hom =\n      U.mapDerivedCategory.map (SB.monoidal.leftUnitor (DerivedCategory.Q.obj P)).hom)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T112347-L-1575623",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T112347-L-1575623",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

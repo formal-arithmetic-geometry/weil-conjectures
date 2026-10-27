@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-raw-restricted-resolution-cocycle",
+ "kind": "statement",
+ "title": "Shift and augmentation square for restricted resolution comparisons",
+ "statement": "Let $f:X\\to S$ be a scheme morphism, $q\\in\\mathbf N$, $F$ an abelian etale sheaf on $X$, $I$ an injective resolution of $F$, and $V\\to S$ etale. Put $W=V\\times_S X$, $J=I[q]$, and $T=H^0R\\Gamma(W,-|_W)$, as in [def-sbc-raw-restricted-cohomology-comparison-map]. Let $a:F[0][q]\\xrightarrow{\\sim}QJ$ be the shifted augmentation including the localization shift comparison. Let $e:H^0(\\Gamma(W,J|_W))\\xrightarrow{\\sim}H^q((f_*I)_{\\mathrm{pre}})(V)$ be the composite of the termwise sections shift, homology shift, restriction-sections comparison, and evaluation-homology comparison of [def-weil-pbc-raw-restricted-normalization-data]. Then, writing $\\delta:T(QJ)\\xrightarrow{\\sim}H^0(\\Gamma(W,J|_W))$ for resolutionSectionsIso of [lem-sbc-raw-restricted-resolution-evaluation], one has an equality of group morphisms $\\mathrm{shiftIso}.\\mathrm{hom}\\gg\\mathrm{normalizationRestrictedIso}.\\mathrm{hom}=T(a)\\gg\\delta.\\mathrm{hom}\\gg e.\\mathrm{hom}$. This statement contains no raw Hom class, chain map, generator evaluation, or higher-direct-image class.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Tag 072W, lemma-higher-direct-images; Tags 0DVC and 09T5, lemma-pre-derived-adjoint-functors and lemma-derived-adjoint-functors. Chain-level expansion of the parent proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-raw-restricted-normalization-data",
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-raw-restricted-resolution-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Write L for exact restriction to the etale chart and R for sections. The canonical right-derived unit commutes with shifts: restrict it to K-injectives, use the canonical K-injective equivalence, and descend by essential surjectivity of localization. Whiskering this unit with the exact-restriction localization comparison gives an inverse resolution comparison which commutes with shifts. Apply homology and the canonical localization-homology and homology-shift identities to obtain compatibility with every shifted augmentation. The single-complex comparison identifies the restricted augmentation with the image of the original injective-resolution augmentation, by naturality of the exact functor localization comparison. Combine these identities in arbitrary abelian categories, allowing an arbitrary final homology isomorphism. Specialize to restriction and sections on the chart, with the termwise sections comparison followed by evaluation as that final isomorphism. The parenthesized composites are precisely normalizationRestrictedIso, resolutionSectionsIso, and normalizationResolutionCocycleIso, so specialization proves the required square directly. The shifted restricted resolution is K-injective because restriction preserves injectives and K-injectivity is invariant under shift. All shifts are canonical and the argument includes q=0 and empty charts.",
+   "uses": [
+    "lem-sbc-raw-restricted-resolution-evaluation",
+    "lem-sbc-etale-abelian-restriction-injectives",
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-raw-restricted-resolution-evaluation",
+  "lem-sbc-etale-abelian-restriction-injectives",
+  "lem-weil-pbc-kinjective-shift"
+ ],
+ "proof_origin": {
+  "by": "Z5",
+  "document": "Stacks Project",
+  "place": "Tags 072W, 0DVC and 09T5; canonical derived-unit and homology-shift calculation formalized by Z5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation on a shifted injective chain representative commutes with the augmentation and the cohomology shift isomorphism",
+   "results": "OK 8 hits, including InjectiveResolution.extMk_hom, extEquivCohomologyClass_symm_mk_hom and CochainComplex.liftCycles_shift_homologyπ.",
+   "date": "2026-10-25",
+   "verdict": "Generic Ext and shift identities; none compares the prescribed etale section maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "OK 8 hits, including isoRightDerivedObj, rightDerived_app_eq, and hom/inv naturality.",
+   "date": "2026-10-25",
+   "verdict": "Resolution comparisons exist, but not the chain-evaluation normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso",
+   "results": "OK 8 hits, including ShortComplex.PreservesHomology.mapHomologyIso and LeftHomologyData.mapHomologyIso_eq.",
+   "date": "2026-10-25",
+   "verdict": "Generic homology comparisons, no etale evaluation or derived-adjunction class formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The class of a section cocycle of an injective resolution agrees with the canonical derived adjunction class of the corresponding chain map.",
+   "results": "OK 8 hits, including InjectiveResolution.extEquivCohomologyClass_extMk and extMk.",
+   "date": "2026-10-25",
+   "verdict": "Generic Ext/cocycle comparison; no match for the prescribed sectionwise sheafification and adjunction maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedResolutionClass",
+  "date": "2026-10-25",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Shift and augmentation square in the fixed-resolution part of the canonical class normalization; no raw evaluation or adjunction class is asserted.",
+   "via": [
+    "lem-weil-pbc-raw-restricted-resolution-class",
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedResolutionCocycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedResolutionCocycle.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawRestricted_resolution_shift_square",
+  "statement": "theorem rawRestricted_resolution_shift_square {X S : Scheme.{u}} (f : X ⟶ S)\n    (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution F) (V : S.Etale) :\n    let W := (MorphismProperty.Over.pullback @Etale ⊤ f).obj V\n    let T := RawRestrictedComparison.sectionsFunctor W ⋙\n      DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0\n    (RawRestrictedComparison.shiftIso f q F V).hom ≫\n        (normalizationRestrictedIso f q F I V).hom =\n      T.map (normalizationShiftedAugmentation F I q).hom ≫\n        (RawRestrictedComparison.resolutionSectionsIso W\n          (normalizationShiftedResolution F I q)).hom ≫\n        (normalizationResolutionCocycleIso f q F I V).hom",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Etale.normalizationShiftedResolution",
+   "AlgebraicGeometry.Etale.normalizationShiftedAugmentation",
+   "AlgebraicGeometry.Etale.normalizationResolutionCocycleIso",
+   "AlgebraicGeometry.Etale.normalizationShiftedResolution_restriction_isKInjective",
+   "AlgebraicGeometry.Etale.rawRestricted_resolution_shift_square"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T095515-L-3431351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T211331-L-3939039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

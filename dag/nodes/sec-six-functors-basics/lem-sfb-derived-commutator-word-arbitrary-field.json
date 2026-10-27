@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-derived-commutator-word-arbitrary-field",
+ "kind": "statement",
+ "title": "Derived subgroup and dominant finite commutator word over any field",
+ "statement": "Let $k$ be any field [def-weil-field], and let $G$ be a smooth geometrically connected [def-pc-geometrically-irreducible] affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Closed subgroups are [def-sc-group-scheme-subgroup]. The smallest closed subgroup $D(G)\\subseteq G$ through which the commutator morphism $(x,y)\\mapsto xyx^{-1}y^{-1}$ factors exists. It is normal, smooth and geometrically connected. For some integer $r\\geq1$, the morphism\n$$w_r:G^{2r}\\longrightarrow D(G),\\qquad (x_1,y_1,\\ldots,x_r,y_r)\\longmapsto\\prod_{j=1}^r x_jy_jx_j^{-1}y_j^{-1}$$\nhas dense image in the underlying topological space. Here the powers and products are over $k$ [def-pc-fibre-product]. For every extension field $K/k$ [def-pc-field-extension], the inclusion identifies $D(G)_K$ with $D(G_K)$. Every homomorphism from $G$ to a commutative affine $k$-group scheme of finite type is trivial on $D(G)$, and the represented fppf quotient $G/D(G)$ of [lem-sfb-affine-normal-quotient-geometry] is commutative. These assertions include the commutative and trivial groups, for which $D(G)=1=\\operatorname{Spec}k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 6.19(b),(d),(e), Propositions 6.20(a) and 6.21, printed pp.129-130; Theorem 16.58, general-case derived-group reduction, p.345."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-pc-field-extension",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-pc-geometrically-irreducible",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-affine-pointed-word-map"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=G\\times_kG$, $o=(e,e)$ and $c(x,y)=xyx^{-1}y^{-1}$. These are a pointed affine finite-type scheme and a morphism with $c(o)=e$, by the group operations. For every $k$-algebra $R$, $c(x,y)^{-1}=c(y,x)$, so its image is inversion stable. The projections $X\\to G$ are smooth by [lem-pc-proper-base-change](2), and $X\\to\\operatorname{Spec}k$ is smooth by [lem-trf-smooth-composition]. Thus $X$ is geometrically reduced by [sbc-lem-smooth-geometrically-reduced]. It is geometrically connected: after any field extension both factors are connected, and [lem-weil-pbc-geometrically-connected-product-components] says their product has one connected component. The identity tuple ensures nonemptiness.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2h, Propositions 2.46 and 2.48, pp.54–55; Corollary 6.19(b), p.129: hypotheses for the commutator-generated subgroup"
+   }
+  },
+  {
+   "text": "For $n\\geq1$ let $w_n:G^{2n}\\to G$ be the product of $n$ commutators and put $A=k[G]$, $B_n=k[G^{2n}]$, $I_n=\\ker(w_n^*:A\\to B_n)$ and $I=\\bigcap_{n\\geq1}I_n$. Apply [lem-sfb-affine-pointed-map-generated-subgroup] to $(X,o,c)$. It gives $D=\\operatorname{Spec}(A/I)$, the smallest closed subgroup through which $c$ factors, affine of finite type, geometrically reduced and geometrically connected. Since $D$ is a finite-type group scheme and geometrically reduced, [lem-sfb-geometrically-reduced-group-smooth] makes it smooth. This establishes existence and the geometric assertions without assuming $k$ perfect.",
+   "uses": [
+    "lem-sfb-affine-pointed-map-generated-subgroup",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 2.46, 2.48, pp.54–55; Proposition 6.18 and Corollary 6.19(b), p.129"
+   }
+  },
+  {
+   "text": "Here is the scalar-extension calculation used below. For a field extension $K/k$, [lem-weil-pbc-fibre-product-affine-spectra] identifies the pullback of $w_n$ with the coordinate map $w_n^*\\otimes_kK:A\\otimes_kK\\to B_n\\otimes_kK$. Choose a $k$-basis $(b_j)$ of $K$. Each tensor is a unique finite sum $\\sum_j a_j\\otimes b_j$, and its image is zero exactly when every $w_n^*(a_j)$ is zero. Therefore $\\ker(w_{n,K}^*)=I_n\\otimes_kK$, viewed as an ideal in $A\\otimes_kK$. The same coefficient calculation identifies $(A/I_n)\\otimes_kK$ with $(A\\otimes_kK)/(I_n\\otimes_kK)$ and reflects equality of extended subspaces of $A$ (compare coefficients of $a\\otimes1$). No exchange of an infinite intersection with tensor product is used.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.47, p.55, scalar-extension calculation made explicit for individual kernels"
+   }
+  },
+  {
+   "text": "By [lem-pc-algebraic-closure-exists-unique], choose an algebraic closure $\\bar k/k$. By [lem-pc-proper-base-change](2), $G_{\\bar k}$ is smooth; it is connected by the given geometric connectedness. Apply [lem-sfb-pointed-word-kernel-stabilization] over $\\bar k$, with source group and target group both $G_{\\bar k}$, the exponent $2$, and pointed map $c_{\\bar k}$. It gives $N\\geq1$ such that the kernels of the $w_{n,\\bar k}$ are equal for all $n\\geq N$. By step 3 and reflection of equality there, $I_n=I_N$ for all $n\\geq N$. Inserting identity pairs gives $I_{n+1}\\subseteq I_n$, so $I=I_N$. In particular $w_N$ factors through $v_N:G^{2N}\\to D$ and $v_N^*:A/I_N\\to B_N$ is injective.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-pointed-word-kernel-stabilization",
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.20(a), p.130; Section 2h scalar extension, p.55"
+   }
+  },
+  {
+   "text": "For any field extension $K/k$, construct the minimal commutator subgroup of $G_K$ by the same generated-map lemma: the pointed map is still inversion stable. Step 3 gives its defining ideal $\\bigcap_n(I_n\\otimes_kK)=I_N\\otimes_kK$, since the descending chain is constant from $N$ onward. The quotient identification in step 3 therefore identifies this subgroup with $D_K$ as a closed subgroup of $G_K$. In particular for $K=\\bar k$, [lem-sfb-pointed-word-kernel-stabilization] says that $v_{N,\\bar k}$ has dense image. The projection $D_{\\bar k}\\to D$ is surjective by [lem-weil-pbc-field-extension-base-change-faithfully-flat] and [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Every nonempty open of $D$ has a nonempty inverse image, which meets $\\operatorname{im}(v_{N,\\bar k})$; its image in $D$ is in $\\operatorname{im}(v_N)$. Thus $v_N$ has dense image. Take $r=N$.",
+   "uses": [
+    "lem-sfb-affine-pointed-map-generated-subgroup",
+    "lem-sfb-pointed-word-kernel-stabilization",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.47, p.55; Corollary 6.19(a), p.129, and Proposition 6.20(a), p.130"
+   }
+  },
+  {
+   "text": "For each $k$-algebra $R$, each $g\\in G(R)$ and $d\\in D(R)$, the commutator $[g,d]$ belongs to $D(R)$ because the commutator morphism factors through $D$. Since $D(R)$ is a subgroup, $gdg^{-1}=[g,d]d$ belongs to $D(R)$. Replacing $g$ by $g^{-1}$ gives the inverse inclusion. Hence $D$ is normal in the functor-of-points sense of [def-sc-group-scheme-subgroup]. This proves scheme-theoretic normality over arbitrary algebras, including nonreduced ones.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.18, p.129, normality of the commutator-generated subgroup"
+   }
+  },
+  {
+   "text": "Let $f:G\\to C$ be a homomorphism to a commutative affine finite-type $k$-group scheme. It kills every commutator by the group identity, so $f\\circ w_N$ is identity valued. For $j:D\\hookrightarrow G$ and $a\\in k[C]$, the difference between $(f\\circ j)^*(a)$ and the pullback by the identity-valued map $D\\to C$ becomes zero under the injective map $v_N^*$ from step 4. The difference is therefore zero. By the coordinate description of affine morphisms [def-weil-affine-spectrum], $f|_D$ is the identity-valued homomorphism.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 6.19(d), p.129, with the finite-word coordinate verification"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-normal-quotient-geometry] to the closed normal finite-type affine subgroup $D\\subseteq G$. It gives the represented fppf quotient $q:G\\to Q=G/D$ with kernel $D$ and local surjectivity. Given two sections of $Q$ over a $k$-algebra $R$, lift each to a section of $G$ after fppf covers and refine the two covers to lift both. Their commutator is the image of a commutator in $G$, hence is the identity since that commutator lies in $D=\\ker q$. Since $Q$ is a sheaf, the two original sections commute. This holds for every $R$ and proves commutativity of the quotient group scheme. If $G$ is commutative, $c=e$ factors through the identity subgroup; minimality gives $D=1$. This includes $G=1$, and $w_1$ is then the identity-valued map onto $\\operatorname{Spec}k$, with dense image.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.18 and Corollary 6.19(d), p.129; quotient sheaf of Section 5j, pp.116–118"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-affine-pointed-map-generated-subgroup",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-pointed-word-kernel-stabilization",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "lem-sfb-affine-normal-quotient-geometry"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 2h, Propositions 2.46–2.48, pp.54–55; Proposition 6.18, Corollary 6.19(a),(b),(d), and Proposition 6.20(a), pp.129–130; field-extension kernel argument expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived subgroup of a smooth geometrically connected algebraic group is smooth connected and dominated by a finite product of commutator maps",
+   "results": "{\"t\": \"2026-10-24T07:13:39Z\", \"tool\": \"leanfinder\", \"query\": \"The derived subgroup of a smooth geometrically connected algebraic group is smooth connected and dominated by a finite product of commutator maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"closureCommutatorRepresentatives\", \"derivedSeries_one\", \"derivedSeries\", \"commutator_def\", \"lowerCentralSeries_one\", \"IsSimpleGroup.derivedSeries_succ\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"image_commutatorSet_closureCommutatorRepresentatives\"], \"digest\": \"3464a281fa604972\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define commutators and derived series of abstract groups. Mathlib/AlgebraicGeometry/Group/Abelian.lean proves commutativity for proper group schemes; it does not construct this affine derived subgroup or the dominant word over arbitrary fields."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"Group\"",
+   "results": "{\"t\": \"2026-10-24T07:13:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"commutator\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubgroup.mem_centralizer_iff_addCommutator_eq_zero\", \"AddSubgroup.mem_centralizer_iff_addCommutator_eq_zero'\", \"Subgroup.mem_centralizer_iff_commutator_eq_one\", \"Subgroup.mem_centralizer_iff_commutator_eq_one'\", \"AddSubgroup.addCommutator\", \"Subgroup.commutator\", \"AddSubgroup.Normal.of_addCommutator_le\", \"Subgroup.Normal.of_commutator_le\"], \"digest\": \"384d86464863f40e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define commutators and derived series of abstract groups. Mathlib/AlgebraicGeometry/Group/Abelian.lean proves commutativity for proper group schemes; it does not construct this affine derived subgroup or the dominant word over arbitrary fields."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSubgroup|commutator|IsSolvable",
+   "results": "{\"t\": \"2026-10-24T07:13:40Z\", \"tool\": \"grep\", \"query\": \"derivedSubgroup|commutator|IsSolvable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"ef266cacf5ce3ac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define commutators and derived series of abstract groups. Mathlib/AlgebraicGeometry/Group/Abelian.lean proves commutativity for proper group schemes; it does not construct this affine derived subgroup or the dominant word over arbitrary fields."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived subgroup scheme of a smooth connected affine algebraic group is the image of a product of finitely many commutators",
+   "results": "{\"t\": \"2026-10-24T07:13:40Z\", \"tool\": \"leansearch\", \"query\": \"Derived subgroup scheme of a smooth connected affine algebraic group is the image of a product of finitely many commutators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"commutator_def\", \"commutator\", \"closureCommutatorRepresentatives\", \"Subgroup.commutator_pi_pi_le\", \"Subgroup.commutator_prod_prod\", \"commutator_eq_closure\", \"derivedSeries\", \"commutator_eq_normalClosure\"], \"digest\": \"49df47784065097c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define commutators and derived series of abstract groups. Mathlib/AlgebraicGeometry/Group/Abelian.lean proves commutativity for proper group schemes; it does not construct this affine derived subgroup or the dominant word over arbitrary fields."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic commutator subgroup over any field is generated by a dominant word morphism",
+   "results": "{\"t\": \"2026-10-24T07:13:43Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme theoretic commutator subgroup over any field is generated by a dominant word morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"closureCommutatorRepresentatives\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"image_commutatorSet_closureCommutatorRepresentatives\", \"commutatorRepresentatives\", \"commutator_def\", \"commutator_eq_closure\", \"closureCommutatorRepresentatives_fg\", \"commutator_eq_normalClosure\"], \"digest\": \"c29e6fab3393fdec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits define commutators and derived series of abstract groups. Mathlib/AlgebraicGeometry/Group/Abelian.lean proves commutativity for proper group schemes; it does not construct this affine derived subgroup or the dominant word over arbitrary fields."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedSubgroup|derivedGroup|commutator",
+   "results": "{\"t\": \"2026-10-24T07:55:36Z\", \"tool\": \"grep\", \"query\": \"derivedSubgroup|derivedGroup|commutator\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"ef266cacf5ce3ac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group commutators and derived series, Lie algebra base change, and general scheme base-change properties do not state the derived affine subgroup theorem. Read Mathlib/AlgebraicGeometry/Group/Abelian.lean:40–60 (proper groups) and Group/Smooth.lean:64–71 (geometrically reduced group smoothness, already an existing leaf)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formation of the scheme theoretic derived subgroup of an affine algebraic group commutes with extension of the base field",
+   "results": "{\"t\": \"2026-10-24T07:55:36Z\", \"tool\": \"leansearch\", \"query\": \"Formation of the scheme theoretic derived subgroup of an affine algebraic group commutes with extension of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.derivedSeriesOfIdeal_baseChange\", \"LieAlgebra.derivedSeries_baseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"3930c063b6d0d621\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group commutators and derived series, Lie algebra base change, and general scheme base-change properties do not state the derived affine subgroup theorem. Read Mathlib/AlgebraicGeometry/Group/Abelian.lean:40–60 (proper groups) and Group/Smooth.lean:64–71 (geometrically reduced group smoothness, already an existing leaf)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"Group\"",
+   "results": "{\"t\": \"2026-10-24T07:55:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"commutator\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubgroup.mem_centralizer_iff_addCommutator_eq_zero\", \"AddSubgroup.mem_centralizer_iff_addCommutator_eq_zero'\", \"Subgroup.mem_centralizer_iff_commutator_eq_one\", \"Subgroup.mem_centralizer_iff_commutator_eq_one'\", \"AddSubgroup.addCommutator\", \"Subgroup.commutator\", \"AddSubgroup.Normal.of_addCommutator_le\", \"Subgroup.Normal.of_commutator_le\"], \"digest\": \"384d86464863f40e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group commutators and derived series, Lie algebra base change, and general scheme base-change properties do not state the derived affine subgroup theorem. Read Mathlib/AlgebraicGeometry/Group/Abelian.lean:40–60 (proper groups) and Group/Smooth.lean:64–71 (geometrically reduced group smoothness, already an existing leaf)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived subgroup of a smooth geometrically connected affine group scheme is smooth and dominated by a finite commutator word over any field",
+   "results": "{\"t\": \"2026-10-24T07:55:37Z\", \"tool\": \"leanfinder\", \"query\": \"The derived subgroup of a smooth geometrically connected affine group scheme is smooth and dominated by a finite commutator word over any field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivedSeries_one\", \"derivedSeries\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Subgroup.instFiniteSubtypeMemCommutatorOfElemCommutatorSet\", \"derivedSeries_characteristic\", \"lowerCentralSeries_one\", \"derivedSeries_zero\", \"closureCommutatorRepresentatives_fg\"], \"digest\": \"18678851a9b1d59f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group commutators and derived series, Lie algebra base change, and general scheme base-change properties do not state the derived affine subgroup theorem. Read Mathlib/AlgebraicGeometry/Group/Abelian.lean:40–60 (proper groups) and Group/Smooth.lean:64–71 (geometrically reduced group smoothness, already an existing leaf)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group has a derived group defined by the kernel of a finite commutator product map",
+   "results": "{\"t\": \"2026-10-24T07:56:44Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group has a derived group defined by the kernel of a finite commutator product map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivedSeries\", \"derivedSeries_one\", \"isSolvable_def\", \"commutator_def\", \"derivedSeries_zero\", \"derivedSeries_normal\", \"Subgroup.instFiniteSubtypeMemCommutatorOfElemCommutatorSet\", \"IsSimpleGroup.derivedSeries_succ\"], \"digest\": \"81643b66e9ddf835\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group commutators and derived series, Lie algebra base change, and general scheme base-change properties do not state the derived affine subgroup theorem. Read Mathlib/AlgebraicGeometry/Group/Abelian.lean:40–60 (proper groups) and Group/Smooth.lean:64–71 (geometrically reduced group smoothness, already an existing leaf)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosenlicht-split-solvable-criterion",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 16.58 (Rosenlicht), printed p.345; split solvable convention in Section 16g, p.343; splitness of the unipotent subgroup in Proposition 16.54 and its proof, p.344. Present split of Rosenlicht 16.58: Corollary 6.19(b),(d),(e), Propositions 6.20(a) and 6.21, printed pp.129-130; Theorem 16.58, general-case derived-group reduction, p.345.",
+   "via": [
+    "lem-sfb-rosenlicht-split-solvable-criterion",
+    "lem-sfb-split-torus-no-invariants-unipotence",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-derived-commutator-word-arbitrary-field",
+  "worker": "stage1",
+  "summary": "Q156 reuses the existing pointed affine generated-subgroup theorem and algebraically closed finite-word kernel stabilization. Scalar-extension kernels are computed using a field basis; eventual equality is descended and used before tensoring the intersection. Normality is proved over all algebras, and the universal commutative quotient and the commutative/trivial edge cases are verified. No new nodes. No Lean attachment matches the full item.",
+  "blueprint": "The inherited blueprint.from.node is null, as confirmed by blueprint_refs.py ancestor. Its precise inherited place traces the direct-image alteration input to Rosenlicht 16.58; this split realizes the cited Corollary 6.19 and finite-word Proposition 6.20 supporting that derived-group reduction. Read latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3). No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme or scalar-extension tool for the commutator construction; it supplies exactly the assertion named in the proof step, and does not replace the unit direct-image route."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme or scalar-extension tool for the commutator construction; it supplies exactly the assertion named in the proof step, and does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-3bb254a1e",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-3bb254a1e (reviewer sub-agent of L); spot-checked: Read in full: the item's 8 steps, every cited statement, and Milne iAG2017 Props. 2.46–2.48 (pp.54–55) and §6d Def. 6.16–Prop. 6.21 (pp.129–130). Apart from the added def-pc-geometrically-irreducible link, the statement is word for word the base text, with nothing weakened. Step 1: inversion stability c(x,y)^{-1}=c(y,x) holds; smoothness and geometric reducedness of G×G come from smooth base change, smooth composition and smooth⇒geometrically reduced; geometric connectedness comes from the product-components leaf applied over K (G_K is geometrically connected over K). Step 2: the generated-subgroup lemma gives D=Spec(A/I) with minimality and geometric reducedness/connectedness, and the reduced⇒smooth leaf gives smoothness without perfectness. Step 3: computing over a field basis gives ker(w_{n,K}^*)=I_n⊗K, the quotient identification and reflection of equality; no infinite intersection is exchanged with ⊗. Step 4: the stabilization node applies over k̄ with J=G_k̄, r=2, φ=c; the equalities descend and the chain I_{n+1}⊆I_n gives I=I_N, matching Milne p.130. Step 5: D(G_K) has ideal I_N⊗K; density comes from the k̄ dense image and surjectivity of D_k̄→D (faithfully flat pair). Steps 6–8 are correct over all R: normality via gdg^{-1}=[g,d]d, triviality on commutative C via injective v_N^*, and commutativity of G/D via local lifts and the sheaf property; the commutative case gives D=1. Edge cases checked: imperfect and finite k, G_a, tori, G=1, GL_n→SL_n, transcendental K. Duplicates: smooth-connected-derived-subgroup (k̄ only), smooth-connected-relative-commutator (lacks the word, base-change and geometric clauses) and def-sfb-semisimple-group-scheme are not the item. No new nodes. Accepted tool_uses: lem-pc-proper-base-change and sbc-lem-smooth-geometrically-reduced (generic). Batch-5: lem-trf-smooth-composition (Stacks 01VA) and lem-trf-connected-point-geometrically-connected (reached through the stabilization node; 04KV-type) are generic scheme facts, neither an assumed statement nor a step of the trace-formula or Poincaré-duality proofs, so both citations stand. blueprint.from.node=null is inherited from the base node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.DerivedCommutatorWordArbitraryField",
+  "declaration": "AlgebraicGeometry.exists_derived_commutator_word_arbitrary_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/DerivedCommutatorWordArbitraryField.lean",
+  "statement": "theorem exists_derived_commutator_word_arbitrary_field {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) [Smooth G.X.hom] [GeometricallyConnected G.X.hom] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] : ∃ (D : Grp (Over (Spec (.of k)))) (i : D ⟶ G), IsDerivedGroupScheme i.hom.hom ∧ IsNormalSubgroupScheme i.hom.hom ∧ Smooth D.X.hom ∧ GeometricallyConnected D.X.hom ∧ IsAffine D.X.left ∧ LocallyOfFiniteType D.X.hom ∧ QuasiCompact D.X.hom ∧ (∃ (n : ℕ) (w : (∏ᶜ fun _ : Fin (n + 1) ↦ G.X ⊗ G.X) ⟶ D.X), w ≫ i.hom.hom = affinePointedWordMap (groupSchemeCommutator G.X) n ∧ DenseRange w.left) ∧ (∀ (K : Type u) [Field K] [Algebra k K], IsDerivedGroupScheme (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.map i).hom.hom)) ∧ (∀ (C : Grp (Over (Spec (.of k)))) [IsCommMonObj C.X] [IsAffine C.X.left] [LocallyOfFiniteType C.X.hom] [QuasiCompact C.X.hom] (f : G ⟶ C), i.hom.hom ≫ f.hom.hom = 1) ∧ (∃ (Q : Grp (Over (Spec (.of k)))) (q : G ⟶ Q), IsAffine Q.X.left ∧ LocallyOfFiniteType Q.X.hom ∧ QuasiCompact Q.X.hom ∧ IsFppfGroupQuotient i q ∧ IsCommMonObj Q.X) ∧ (IsCommMonObj G.X → IsIso (toUnit D.X))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses IsDerivedGroupScheme and groupSchemeCommutator from the landed semisimple definition node, and affinePointedWordMap through def-sfb-affine-pointed-word-map. The generated-subgroup theorem remains a proof dependency only. The positive length r is n + 1 and the product source is (G ×_k G)^(n + 1). H2 repair: no Lean declaration or theorem statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a626b659c",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of b7faaa (Q120 85e6 also RETURNed; neither landed, item lean null live). Lean file byte-identical to b7faaa; item diff vs live only lean + stmt_deps (adds def-sfb-semisimple-group-scheme and new def-sfb-affine-pointed-word-map; theorem lem-sfb-affine-pointed-map-generated-subgroup now proof_deps only). New def node: existing:true binding to AlgebraicGeometry.affinePointedWordMap, signature verbatim side-live AffinePointedMapGeneratedSubgroup.lean:40-43 (plain List.ofFn prod, not .choose); statement matches body and Milne 2h p.54; its 5 stmt_deps exist. All clauses checked (IsDerivedGroupScheme minimality over all closed subgroups, normal/smooth/geom. connected D, r=n+1 dense word on all points, pulled-back inclusion derived for every K:Type u, triviality to commutative affine f.t. C, commutative fppf quotient via IsFppfGroupQuotient from base stmt_dep, commutative G => D≅Spec k); edge cases G=1, G_a/tori, imperfect/finite k, transcendental K. Gates OK; no file changed, nothing compiled."
+ }
+}

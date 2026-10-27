@@ -1,0 +1,158 @@
+{
+ "id": "lem-sfb-scalar-dense-refinement-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-compact-support",
+   "place": "Independence; normalize a receiving compactification by schematic closure and paste its square with the dense-pair square",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coefficient square for refinement with dense source and arbitrary target",
+ "statement": "Fix a prime ell and a field k of positive characteristic different from ell. Let X and Y be separated finite-type k-schemes, f:X to Y a k-morphism, and a:Lambda to Lambda-prime a listed coefficient map. Let c be a compactification with quasi-compact open, d a scheme-theoretically dense compactification of f with quasi-compact open, and r:d to c a boundary-preserving refinement. For K in Dctf(X,Lambda), write C_c and C_d for the specified sfbScalarCompactComparison maps, and rho_r for compactificationRefinementComponent. Then T_Y(rho_r(K)) followed by C_d(K) equals C_c(K) followed by rho_r(T_X K). This is a morphism equality in the ordinary unbounded derived category of internal Lambda-prime modules. The target c need not be dense.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Independence: comparison with refinements; parent DAG steps 3--4, normalization through the schematic closure"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-nagata-sketch-data",
+  "def-sfb-listed-coefficient-maps",
+  "def-sfb-compactification-refinement-component",
+  "lem-sfb-scalar-composite-model-pasting"
+ ],
+ "proof": [
+  {
+   "text": "The ambient scheme of c is Noetherian, being proper over a finite-type k-scheme. Normalize c to the schematic closure c0 of X using the quasi-compact scheme-theoretic image. Its open is c.i.toImage, its closed inclusion into c.Z is c.i.imageι, and its proper map is that inclusion followed by c.g. The normalization has the canonical unbounded derived identification.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-lem-nagata-density-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence: comparison with refinements; parent DAG steps 3--4, normalization through the schematic closure"
+   }
+  },
+  {
+   "text": "Let r:d to c have dense source. Since precomposition with d.i does not change the kernel ideal of r and d.i followed by r is c.i, the kernels of r and c.i agree. The closed-immersion universal property factors r through c0. Cancel c.i.imageι to verify both triangles. Dense-source rigidity and the proper/open section lemma identify the inverse image of X with X, so this factor is a boundary-preserving refinement between dense models. The closure inclusion also preserves the open by the image factorization pullback square.",
+   "uses": [
+    "sk-def-nagata-sketch-data",
+    "lem-weil-pbc-proper-open-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence: comparison with refinements; parent DAG steps 3--4, normalization through the schematic closure"
+   }
+  },
+  {
+   "text": "Apply scalarRefinementClosureSquare to the factor between dense models and to the closure inclusion. Its final clause gives the two pushed coefficient squares. Their maps scalarRefinementPushforward equal compactificationRefinementComponent: the canonical right-derived compositor is the conjugate of the canonical derived pullback compositor, and deriving a congruence is equality transport, checked by equality induction.",
+   "uses": [
+    "lem-sfb-scalar-refinement-closure-square",
+    "def-sfb-compactification-refinement-component",
+    "det-sf-comp-coherence-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence: comparison with refinements; parent DAG steps 3--4, normalization through the schematic closure"
+   }
+  },
+  {
+   "text": "The two geometric refinements compose to r by cancellation of the closed inclusion. Transitivity of refinement components over both coefficient rings and functoriality of scalar change paste the two squares. Reassociate and substitute their composite components to obtain precisely the displayed dense-source refinement square. This uses no invertibility to paste the squares.",
+   "uses": [
+    "det-sf-comp-coherence-cocycle",
+    "lem-sfb-scalar-refinement-closure-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+    "place": "Independence: comparison with refinements; parent DAG steps 3--4, normalization through the schematic closure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-compactification-refinement-component",
+  "det-sf-comp-coherence-cocycle",
+  "det-sf-comp-coherence-refinement",
+  "lem-sfb-scalar-refinement-closure-square",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-open-section",
+  "sk-def-nagata-sketch-data",
+  "sk-lem-nagata-density-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-compact-support.proof.md",
+  "place": "Independence: comparison with refinements; parent DAG steps 3--4, normalization through the schematic closure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension comparison commutes with compactification refinement from a dense model to a possibly nondense compactification",
+   "results": "LinearEquiv.extendScalarsOfIsLocalizationEquiv (Mathlib.RingTheory.Localization.Module), AlgHom.extendScalars, and unrelated scalar localization statements.",
+   "date": "2026-10-26",
+   "verdict": "No match for the compactification refinement coefficient square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with proper pushforward and extension by zero for compact support",
+   "results": "PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp and their component equations; unrelated compactly supported continuous function postcomposition.",
+   "date": "2026-10-26",
+   "verdict": "No match: the ordinary sheaf composition statements do not give the canonical derived compactification square."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|lowerShriek|coefficient.*comparison in Mathlib (msearch.py grep) and scalarDenseRefinementSquare in lean/Sheaf, lean/WeilConjectures, dag/nodes",
+   "results": "Mathlib hits concern topological compactifications and unrelated coefficient comparisons. No existing declaration scalarDenseRefinementSquare. The existing scalarRefinementClosureSquare assumes both models dense or a closure inclusion; it does not state the arbitrary target case.",
+   "date": "2026-10-26",
+   "verdict": "No exact statement; the new lemma pastes the two cases already covered by the existing square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ScalarSixCompactSupport",
+  "date": "2026-10-26",
+  "group": "T7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarDenseRefinementSquare",
+  "file": "lean/Sheaf/SixFunctors/ScalarDenseRefinementSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarDenseRefinementSquare",
+  "statement": "theorem scalarDenseRefinementSquare\n    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]\n    {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (_ha : ListedCoefficientMap ell a)\n    {X Y : Over (Spec (.of k))}\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]\n    (f : X ⟶ Y) (c : Compactification.BoundaryCompactification f.left)\n    (d : Compactification.DenseBoundaryCompactification f.left) (r : d.obj ⟶ c)\n    (K : ConstantModelConstructibleFiniteTor Λ.X X.left) :\n    (scalarSixChange a Y.left).map (compactificationRefinementComponent Λ.X r K.obj) ≫\n        sfbScalarCompactComparison a d.obj.obj.obj.i d.obj.obj.obj.g K.obj =\n      sfbScalarCompactComparison a c.obj.obj.i c.obj.obj.g K.obj ≫\n        compactificationRefinementComponent Λ'.X r\n          ((scalarSixChange a X.left).obj K.obj)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ca66",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T211959-L-4182917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7ca66",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T211959-L-4182917",
+  "kind": "interface",
+  "note": "independent cc review: scalarSixCompactSupport clauses 1 and 3 proved (scratch #print axioms: sorryAx only via scalarDenseRefinementSquare and upstream sorries); new lemma scalarDenseRefinementSquare = item clause 2 verbatim modulo scalarCompactSupportMap_app; node proof/proof_deps vs Lean owners; removed public imports have 0 importers; unit sk-prop-scalar-six realized empty"
+ }
+}

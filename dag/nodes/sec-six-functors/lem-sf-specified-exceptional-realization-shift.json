@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-specified-exceptional-realization-shift",
+ "kind": "statement",
+ "title": "Right realization shift compatibility of the normalized relative exceptional adjunction",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let Λ be a finite commutative ring and c a specified compactification of a quasi-compact map f:X→Y with Y quasi-compact. Use fixed-module derived categories and the specified ordinary etale compact-support adjunction, with its adjoint integer shifts, to form H=Rν_Y,* ⋙ f_c^× ⋙ ν_X^* [def-weil-exceptional-inverse-image]. Let C,D be categories with integer shifts [def-weil-pbc-triangles-with-shift], RX:C→D(X_proet,Λ), RY:D→D(Y_proet,Λ) fully faithful functors commuting with these shifts, and let F:C→D commute with shifts and be adjoint to G:D→C. Suppose rF:F⋙RY≅RX⋙P_c and rG:G⋙RX≅RY⋙H are natural isomorphisms, rF commutes with shifts, every realized object is bounded below, and every realized source has an etale origin [def-weil-pbc-etale-origin-witness]. Suppose for every origin W and every a:FK→L the realized adjunction bijection satisfies RX(adj(a))⋅rG_L=specifiedExceptionalHomEquiv_W(rF_K^{-1}⋅RY(a)) [def-sf-specified-exceptional-hom-chain]. Then, with exactly the right-adjoint shifts on G induced by F⊣G, rG commutes with integer shifts. The prescribed shifts on H are exactly the composite of the comparison derived shifts and the ordinary etale adjoint shifts.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/_section.md",
+  "place": "Complement, compatibility with shifts; shift part of lem-sf-finite-restriction-normalized-adjunction proof step 3"
+ },
+ "stmt_deps": [
+  "def-sf-specified-exceptional-hom-chain",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-triangles-with-shift"
+ ],
+ "proof": [
+  {
+   "text": "The existing canonical derived-unit shift helper supplies the pro-etale unit compatibility, and the ordinary etale adjunction-induced unit shift theorem supplies the etale one. For either prescribed unbounded shift structure, restrict the defining bounded-below/unbounded comparison-unit equation to complexes of injectives, where its first factor is invertible. Its other factors commute with shifts. Every bounded-below homotopy object admits an injective representative, and Qh is essentially surjective, so compatibility descends to all bounded-below derived objects. This proves compatibility of rightDerivedFunctorPlusCompatibility without changing any shift structure. The canonicalRightDerivedAdjunctionShift theorem supplies compatibility of the comparison adjunction after its exact-left normalization.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand fixedCompactSupportComparisonIso as the exact open comparison followed by the specified proper direct-image mate. In fixedDirectImageComparisonIso insert all associators between the inclusion, exact comparison and direct-image factors; componentwise identity calculations show this is the original fixed isomorphism. The derived exact-functor comparisons, inclusion comparisons from Step 1, and the existing rightDerivedFunctorPlusBaseChange all commute with shifts. Whiskering and composition therefore prove that this precise compact-support comparison commutes with shifts.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any shift-compatible adjunction P left adjoint to H, its unit equation and naturality of H commShiftIso give adj(PcommShift(n) followed by a[n])=adj(a)[n] followed by HcommShift(n) inverse. Apply this formula to the composite of the specified ordinary etale adjunction with the comparison adjunction. For an origin W and source/target shift isomorphisms s,t, choose the shifted origin with complex W.complex[n] and isomorphism (iota followed by nu_X^*)commShift(n), followed by W.iso[n] and s inverse. Shift compatibility of the fixed comparison from Step 2, the Hom adjunction formula, and functoriality show that its specified Hom transpose is s followed by the old transpose[n], followed by the inverse exceptional shift and the image of t inverse. The shifted origin and its inverse cancel literally.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give G exactly adj.rightAdjointCommShift. For an object L put K=G(L), choose an origin for RX(K), and use its shifted origin from Step 3. The shift equation of rF identifies the shifted ambient counit input with rF inverse followed by RY of the shifted counit. Normalize both Hom transposes using the hypothesis. The transpose of the counit is the identity, while the transpose of FcommShift(n) followed by the shifted counit is GcommShift(n) inverse. Thus the resulting equality is the rG shift square precomposed by RX of this invertible morphism. Cancel it and the ambient shift isomorphisms. This proves NatTrans.CommShift rG.hom for every integer n; zero objects and empty schemes require no additional argument.",
+   "uses": [
+    "def-weil-pbc-etale-origin-witness",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-origin-witness",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/_section.md",
+  "place": "Complement, compatibility with shifts; explicit canonical-comparison and normalized-counit calculation, using Stacks derived.tex Lemma adjoint-is-exact (0A8D) and pre-derived-adjoint-functors-general (0DVC)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of a right adjoint shift structure with the canonical comparison isomorphism of a normalized etale exceptional adjunction",
+   "results": "Found CategoryTheory.Adjunction.rightAdjointCommShift, commShift_of_leftAdjoint, and RightAdjointCommShift.compatibilityUnit_iso. These construct and characterize the adjoint shifts; they do not identify this geometric relative Hom chain with those shifts.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; use the adjoint-shift uniqueness tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right",
+   "results": "One exact generic uniqueness result: compatibilityUnit_unique_right identifies two right shift isomorphisms compatible with a fixed left shift and adjunction unit. It does not prove the unit comparison for this geometric relative Hom chain.",
+   "date": "2026-10-27",
+   "verdict": "Use for the final identification; the geometric unit compatibility remains to be shown."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*[Oo]f.*[Ff]ully|[Cc]ommShift.*fullyFaithful",
+   "results": "Found Functor.CommShift.ofComp and its compatibility theorem in Mathlib/CategoryTheory/Shift/CommShift.lean, used to lift shifts through fully faithful realization.",
+   "date": "2026-10-27",
+   "verdict": "Supplies the lift, not identification with the normalized exceptional adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalFiniteRestrictionAdjunction",
+  "date": "2026-10-27",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Complement: compatibility with shifts",
+   "via": [
+    "lem-sf-finite-restriction-normalized-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpecifiedExceptionalRealizationShift",
+  "file": "lean/Sheaf/CategoryTheory/SpecifiedExceptionalRealizationShift.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.specifiedExceptionalRealization_shift",
+  "statement": "theorem specifiedExceptionalRealization_shift\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]\n    (c : Compactification f)\n    [(Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).IsLeftAdjoint] :\n    letI := (Adjunction.ofIsLeftAdjoint\n      (Etale.rightDerivedLowerShriekOfCompactification\n        (ModuleCat.{u + 1} Λ) c)).rightAdjointCommShift ℤ\n    letI : (sfFiniteExceptionalAt Λ c).CommShift ℤ :=\n      inferInstanceAs (((comparisonLowerStar (ModuleCat.{u + 1} Λ) Y).rightDerivedFunctor ⋙\n        (Etale.rightDerivedLowerShriekOfCompactification\n          (ModuleCat.{u + 1} Λ) c).rightAdjoint ⋙\n        (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory).CommShift ℤ)\n    ∀ {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]\n      [HasShift C ℤ] [HasShift D ℤ]\n      (RX : C ⥤ DerivedCategory\n        (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)))\n      (RY : D ⥤ DerivedCategory\n        (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} Λ)))\n      [RX.Full] [RX.Faithful] [RY.Full] [RY.Faithful]\n      [RX.CommShift ℤ] [RY.CommShift ℤ]\n      (F : C ⥤ D) (G : D ⥤ C) [F.CommShift ℤ] (adj : F ⊣ G)\n      (rF : F ⋙ RY ≅ RX ⋙\n        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c)\n      (rG : G ⋙ RX ≅ RY ⋙ sfFiniteExceptionalAt Λ c)\n      [rF.hom.CommShift ℤ]\n      (hX : ∀ K, DerivedCategory.TStructure.t.plus (RX.obj K))\n      (hY : ∀ L, DerivedCategory.TStructure.t.plus (RY.obj L))\n      (_origin : ∀ K, Nonempty (FixedEtaleOriginWitness X Λ ⟨RX.obj K, hX K⟩)),\n      (∀ K L (W : FixedEtaleOriginWitness X Λ ⟨RX.obj K, hX K⟩) (a : F.obj K ⟶ L),\n        RX.map (adj.homEquiv K L a) ≫ rG.hom.app L =\n          specifiedExceptionalHomEquiv Λ c ⟨RX.obj K, hX K⟩ W ⟨RY.obj L, hY L⟩\n            (rF.inv.app K ≫ RY.map a)) →\n      letI := adj.rightAdjointCommShift ℤ\n      rG.hom.CommShift ℤ",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261027T094441-L-229735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T112329-L-1571581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

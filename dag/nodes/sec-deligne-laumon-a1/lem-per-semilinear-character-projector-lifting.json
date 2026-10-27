@@ -1,0 +1,251 @@
+{
+ "id": "lem-per-semilinear-character-projector-lifting",
+ "kind": "statement",
+ "title": "Character decomposition and eigenvector lifting for semilinear local actions",
+ "statement": "Let $(A,\\mathfrak m,k)$ be a commutative local ring with residue field $k=A/\\mathfrak m$ [def-weil-residue-field]. Let $H$ be a finite abelian group of order $N\\ge1$, acting on $A$ by ring automorphisms, trivially on $k$. Suppose $N$ is a unit in $A$ and there is an $H$-fixed unit $\\zeta\\in A$ with $\\zeta^N=1$ and $1-\\zeta^a\\in A^\\times$ for $1\\le a<N$. Let $M$ be an $A$-module with an additive $H$-action satisfying $h(am)=h(a)h(m)$, and let $L\\subset M$ be an $H$-stable $A$-submodule with $\\mathfrak mM\\subseteq L$. Assume $V=M/L$ is finite-dimensional over $k$. For a group homomorphism $\\chi:H\\to\\langle\\zeta\\rangle\\subset A^\\times$, write $V_\\chi=\\{v:h(v)=\\overline{\\chi(h)}v\\text{ for all }h\\in H\\}$. Then $V=\\bigoplus_\\chi V_\\chi$. Any linearly independent list of nonzero vectors each spanning an $H$-stable line can be extended to an eigenvector basis of $V$. The additive map\n$$e_\\chi(m)=N^{-1}\\sum_{h\\in H}\\chi(h)^{-1}h(m)$$\nsatisfies $h(e_\\chi(m))=\\chi(h)e_\\chi(m)$. If the class of $m$ lies in $V_\\chi$, $e_\\chi(m)$ has the same class as $m$. Moreover $e_\\chi$ preserves every $H$-stable $A$-submodule of $M$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 5.3.5, proof: diagonalization of the cotangent representation and character averaging, printed p.124. The statement isolates the semilinear algebra used there."
+ },
+ "stmt_deps": [
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:M\\to V$ for the quotient map. Since $L$ is stable, $h(q(m))=q(h(m))$ is well-defined. For $a\\in A$, semilinearity gives $h(\\bar a q(m))=\\overline{h(a)}q(h(m))=\\bar a h(q(m))$, because $H$ acts trivially on $k$; changing $a$ by an element of $\\mathfrak m$ has no effect since $\\mathfrak mM\\subseteq L$. Thus the quotient action is $k$-linear. Put $C=\\langle\\zeta\\rangle\\subset A^\\times$. Its elements are $1,\\zeta,\\ldots,\\zeta^{N-1}$: these are distinct because $1-\\zeta^a$ is a unit for $0<a<N$. Reduction $\\iota:C\\to k^\\times$ is injective for the same reason: equality of two reductions would put the unit $1-\\zeta^a$ in $\\mathfrak m$. Hence $C$ is cyclic of order $N$, and distinct characters $H\\to C$ remain distinct after reduction. Finally $\\bar N\\ne0$, since $N$ is a unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.5, proof, printed p.124; detailed semilinear-algebra expansion by Q31."
+   }
+  },
+  {
+   "text": "Every $g\\in H$ fixes $N^{-1}$ and $\\chi(h)$, because ring automorphisms fix integers and their unit inverses and $\\chi(h)$ is a power of the fixed unit $\\zeta$. Additivity, semilinearity and the bijection $h\\mapsto t=gh$ give $$g(e_\\chi(m))=N^{-1}\\sum_h\\chi(h)^{-1}(gh)(m)=N^{-1}\\sum_t\\chi(g^{-1}t)^{-1}t(m)=\\chi(g)e_\\chi(m).$$ The map $e_\\chi$ is additive. If $P\\subset M$ is any stable $A$-submodule and $m\\in P$, every summand $\\chi(h)^{-1}h(m)$ is in $P$, so $e_\\chi(m)\\in P$. In particular $L$ is preserved and $e_\\chi$ induces $p_\\chi:V\\to V$, $p_\\chi(v)=\\bar N^{-1}\\sum_h\\iota(\\chi(h))^{-1}h(v)$. This is $k$-linear by step 1 and its image lies in $V_\\chi$ by the displayed identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.5, proof, printed p.124; detailed semilinear-algebra expansion by Q31."
+   }
+  },
+  {
+   "text": "If $q(m)=v\\in V_\\chi$, then $$q(e_\\chi(m))=p_\\chi(v)=\\bar N^{-1}\\sum_{h\\in H}\\iota(\\chi(h))^{-1}\\iota(\\chi(h))v=\\bar N^{-1}\\bar N v=v.$$ This proves the lifting assertion and also $p_\\chi|_{V_\\chi}=\\mathrm{id}$, with no assumption that the original action on $M$ is $A$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.5, proof, printed p.124; detailed semilinear-algebra expansion by Q31."
+   }
+  },
+  {
+   "text": "Apply [lem-per-finite-character-fourier-kernel] to the field $k$, the groups $H,C$ and the injection $\\iota$ from step 1; the order and nonvanishing hypotheses were verified there. Interchanging the two finite sums gives, for every $v\\in V$, $$\\sum_{\\chi:H\\to C}p_\\chi(v)=\\bar N^{-1}\\sum_{h\\in H}\\left(\\sum_\\chi\\iota(\\chi(h))^{-1}\\right)h(v)=v.$$ Each summand belongs to $V_\\chi$ by step 2, so these eigenspaces span $V$.",
+   "uses": [
+    "lem-per-finite-character-fourier-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.5, proof, printed p.124; detailed semilinear-algebra expansion by Q31."
+   }
+  },
+  {
+   "text": "For $v\\in V_\\psi$, the formula for $p_\\chi$ shows that $p_\\chi(v)$ is a scalar multiple of $v$, and hence lies in both $V_\\psi$ and $V_\\chi$. If $\\chi\\ne\\psi$, choose $g$ with $\\iota(\\chi(g))\\ne\\iota(\\psi(g))$ by step 1. A vector $w$ in the intersection satisfies $(\\iota(\\chi(g))-\\iota(\\psi(g)))w=0$, so $w=0$ over the field $k$. Thus $p_\\chi(v)=0$ for $\\chi\\ne\\psi$, while step 3 gives $p_\\chi(v)=v$ for $\\chi=\\psi$. Applying $p_\\chi$ to any finite relation $\\sum_\\psi v_\\psi=0$ isolates $v_\\chi=0$. Together with step 4 this is exactly $V=\\bigoplus_\\chi V_\\chi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.5, proof, printed p.124; detailed semilinear-algebra expansion by Q31."
+   }
+  },
+  {
+   "text": "Let $v\\ne0$ span a stable line $D=kv\\subset V$. The explicit formula for $p_\\chi$ is a linear combination of the operators $h$, so $p_\\chi(D)\\subseteq D$. Since $v=\\sum_\\chi p_\\chi(v)$ by step 4, some $p_\\chi(v)$ is nonzero. It is both a scalar multiple of $v$ and a vector of $V_\\chi$, so $v\\in V_\\chi$. Step 5 makes this character unique. Therefore every vector in the prescribed independent list is already an eigenvector for one of the indexed characters.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.5, proof, printed p.124; detailed semilinear-algebra expansion by Q31."
+   }
+  },
+  {
+   "text": "Partition the prescribed independent list according to its unique character from step 6. For each $\\chi$, this gives an independent subset of the vector space $V_\\chi$. Apply [lem-weil-pbc-vector-space-basis-through-vector] to extend that subset to a basis $B_\\chi$ of $V_\\chi$ (including the empty subset and the zero space). The union of the $B_\\chi$ spans $V$ by step 4. Any finite relation in that union separates into relations in the individual $V_\\chi$ by step 5, and each relation is zero by independence of $B_\\chi$. Thus the union is an eigenvector basis containing every prescribed vector. Since $V$ is finite-dimensional, retain the prescribed order and list the remaining finitely many basis vectors afterward.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.5, proof, printed p.124; detailed semilinear-algebra expansion by Q31."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-finite-character-fourier-kernel",
+  "lem-weil-pbc-vector-space-basis-through-vector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 5.3.5, printed p.124: character averaging and diagonalization; Q31 expands the finite Fourier and quotient computations, using the existing basis-extension leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite tame abelian group acting trivially on the residue field of a regular local ring admits eigenvector regular parameters compatible with invariant principal parameter ideals",
+   "results": "{\"t\": \"2026-10-24T00:25:37Z\", \"tool\": \"leanfinder\", \"query\": \"Finite tame abelian group acting trivially on the residue field of a regular local ring admits eigenvector regular parameters compatible with invariant principal parameter ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"IsArithFrobAt.arithFrobAt\", \"arithFrobAt\", \"IsLocalRing.ResidueField.residue_smul\", \"IsLocalRing.instFiniteResidueField\", \"IsLocalRing.ResidueField.instMulSemiringAction\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Ideal.Quotient.finite_of_isInvariant\"], \"digest\": \"8e86035cde9692d3\"}; Read the returned signatures. Representation.averageMap covers invariant linear representations, not the stated semilinear lifting plus complete character decomposition; general eigenspaces and residue actions do not give this conjunction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian finite group representation over a splitting field decomposes into character eigenspaces and eigenvectors lift by averaging",
+   "results": "{\"t\": \"2026-10-24T00:27:44Z\", \"tool\": \"leansearch\", \"query\": \"An abelian finite group representation over a splitting field decomposes into character eigenspaces and eigenvectors lift by averaging\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.averageMap\", \"Representation.averageMap_invariant\", \"Representation.isProj_averageMap\", \"Representation.averageMap_id\", \"TannakaDuality.FiniteGroup.sumSMulInv\", \"AddChar.sum_apply_eq_ite\", \"Rep.instInjective\", \"FDRep.character\"], \"digest\": \"38eba449ee723526\"}; Read the returned signatures. Representation.averageMap covers invariant linear representations, not the stated semilinear lifting plus complete character decomposition; general eigenspaces and residue actions do not give this conjunction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eigenspace|weightSpace|averageMap",
+   "results": "{\"t\": \"2026-10-24T00:29:00Z\", \"tool\": \"grep\", \"query\": \"eigenspace|weightSpace|averageMap\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Character.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\", \"Mathlib/RepresentationTheory/Invariants.lean\"], \"digest\": \"2c547b5da5983d78\"}; Read the returned signatures. Representation.averageMap covers invariant linear representations, not the stated semilinear lifting plus complete character decomposition; general eigenspaces and residue actions do not give this conjunction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"eigenspace\"",
+   "results": "{\"t\": \"2026-10-24T00:29:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Representation\\\", \\\"eigenspace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures. Representation.averageMap covers invariant linear representations, not the stated semilinear lifting plus complete character decomposition; general eigenspaces and residue actions do not give this conjunction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Character projectors split a semilinear module over a local ring and lift eigenvectors from the residue quotient",
+   "results": "{\"t\": \"2026-10-24T00:29:01Z\", \"tool\": \"leanfinder\", \"query\": \"Character projectors split a semilinear module over a local ring and lift eigenvectors from the residue quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.torsion_by_prime_power_decomposition\", \"Module.End.maxGenEigenspace_eq\", \"Module.End.maxGenEigenspaceIndex\", \"Module.End.generalized_eigenvec_disjoint_range_ker\", \"Module.End.IsFinitelySemisimple.genEigenspace_eq_eigenspace\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_forall_mapsTo\", \"jacobson_density\", \"Module.End.IsFinitelySemisimple.maxGenEigenspace_eq_eigenspace\"], \"digest\": \"04281cdd85d56d27\"}; Read the returned signatures. Representation.averageMap covers invariant linear representations, not the stated semilinear lifting plus complete character decomposition; general eigenspaces and residue actions do not give this conjunction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite abelian semilinear action on a local ring module fixing a primitive root of unity, character averaging lifts eigenvectors from a residue quotient and decomposes that quotient into eigenspaces",
+   "results": {
+    "t": "2026-10-24T01:30:54Z",
+    "tool": "leanfinder",
+    "query": "For a finite abelian semilinear action on a local ring module fixing a primitive root of unity, character averaging lifts eigenvectors from a residue quotient and decomposes that quotient into eigenspaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsArithFrobAt.arithFrobAt",
+     "IsArithFrobAt.exists_of_isInvariant",
+     "cyclotomicCharacter.spec",
+     "arithFrobAt",
+     "FDRep.average_char_eq_finrank_invariants",
+     "groupCohomology.Hilbert90.aux",
+     "groupCohomology.exists_mul_galRestrict_of_norm_eq_one",
+     "AlgHom.IsArithFrobAt.apply_of_pow_eq_one"
+    ],
+    "digest": "f4361d64607989f6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire semilinear local-module statement: Representation.averageMap and its invariance theorem are for linear representations; the residue-field Frobenius hits do not give character decomposition or the lifting conjunction. Read Invariants.lean lines 123–148."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Character averaging for semilinear group actions lifts eigenvectors from a quotient module over a residue field",
+   "results": {
+    "t": "2026-10-24T01:30:53Z",
+    "tool": "leansearch",
+    "query": "Character averaging for semilinear group actions lifts eigenvectors from a quotient module over a residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Representation.averageMap",
+     "Representation.averageMap_invariant",
+     "FDRep.average_char_eq_finrank_invariants",
+     "Representation.isProj_averageMap",
+     "Representation.ofQuotient_coe_apply",
+     "Representation.quotientToInvariants",
+     "Rep.quotientToInvariants",
+     "Representation.quotient"
+    ],
+    "digest": "7482c0f18557eb7f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire semilinear local-module statement: Representation.averageMap and its invariance theorem are for linear representations; the residue-field Frobenius hits do not give character decomposition or the lifting conjunction. Read Invariants.lean lines 123–148."
+  },
+  {
+   "tool": "grep",
+   "query": "averageMap|semilinear|eigenvector",
+   "results": {
+    "t": "2026-10-24T01:30:53Z",
+    "tool": "grep",
+    "query": "averageMap|semilinear|eigenvector",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Character.lean",
+     "Mathlib/RepresentationTheory/Character.lean",
+     "Mathlib/RepresentationTheory/Intertwining.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean",
+     "Mathlib/RepresentationTheory/Invariants.lean"
+    ],
+    "digest": "2b13d5f1a0f2719c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the entire semilinear local-module statement: Representation.averageMap and its invariance theorem are for linear representations; the residue-field Frobenius hits do not give character decomposition or the lifting conjunction. Read Invariants.lean lines 123–148."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-abelian-inert-rigidification-cover",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), strict inert rigidification input: VIII Lemma 5.3.5, proof: diagonalization of the cotangent representation and character averaging, printed p.124. The statement isolates the semilinear algebra used there.",
+   "via": [
+    "lem-per-abelian-inert-rigidification-cover",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-semilinear-character-projector-lifting",
+  "worker": "stage1",
+  "summary": "Checked ILO VIII 5.3.5 at printed p.124, current blueprint and project source. Retained the statement. Wrote quotient linearity, faithful reduction of the cyclic root group, the full semilinear averaging calculation, quotient lifting, Fourier completeness, orthogonality, stable-line eigenvectors and basis completion. Created one statement-only scalar Fourier-kernel lemma; reused the existing basis-extension Mathlib leaf. No project attachment found.",
+  "blueprint": "The inherited ancestor is lem-per-artin-gabber-affine-curve, historically proof Step 3 on the regular local model and purity; the latest proof moves the Verdier-duality regular-local-model input into Step 1. This split serves the existing abelian-inert rigidification branch through ILO VIII 5.3.5, precisely its averaging and diagonalization paragraphs. No unit or chapter route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-8ad89e0a1",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-8ad89e0a1 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-finite-character-fourier-kernel, the cited node lem-weil-pbc-vector-space-basis-through-vector and ILO VIII 5.3.4–5.3.6 (printed pp.123–125). The item's statement and stmt_deps are byte-identical to the base, checked against the Q105 run snapshot. All seven steps are correct. (1) The quotient action is k-linear, the powers of ζ are distinct and reduce injectively, and N is nonzero in k. (2) The substitution t=gh gives h(e_χ(m))=χ(h)e_χ(m), and e_χ preserves stable submodules term by term. (3) e_χ fixes the class of an eigenvector. (4) The new node gives Σ_χ p_χ = id. (5) The V_χ intersect trivially and the projectors isolate the components of a relation, so V is their direct sum. (6) A vector spanning a stable line is an eigenvector. (7) Basis extension inside each V_χ gives an eigenbasis containing the prescribed list. This is the diagonalization ILO 5.3.5 leaves out, now written in full, and it matches what the citer's step 4 uses. The new node is true: Hom(H,C) has N elements and separates points, and reindexing by a character with ψ(h)≠1 kills the sum. I tested it on the trivial group, ℤ/2 over 𝔽_3, (ℤ/2)² with ℤ/4 in 𝔽_5 and ℤ/4 over 𝔽_5. It is not a restatement of the item, not a duplicate (the closest nodes are fd-character-orthogonality, per-finite-character-annihilator-duality and sfb-character-eigenspaces-independent), and not a one-line Mathlib leaf. The node's form is right: statement only, own objects, recorded searches, correct blueprint fields. There is no SGA citation and no repair note. Note for the maintainer: the item's via chain runs through the dropped 2026-10-19 Gabber purity branch, which is a reachability question, not a fault of this split. No fixes."
+ }
+}

@@ -1,0 +1,99 @@
+{
+ "id": "lem-sf-fullcd-stone-cech-counterexample",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-fullcd-class",
+   "place": "the remark after the full-cd class theorem (blueprint rem-sf-fullcd-counterexample): the bound on R^q nu_* cannot be made uniform in all objects of the pro-etale site and all sheaves; source Bergfalk-Lambie-Hanson, arXiv:2412.19605, Theorem 4.3 (upstream declaration AlgebraicGeometry.ProEtale.exists_not_isZero_homology_rightDerivedComparisonLowerStar, recorded by the 2026-10-22 maintainer audit of upstream sorries without a DAG node)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unbounded comparison cohomology on Spec C_lc(βI×βI, K)",
+ "statement": "Let $K$ be an algebraically closed field, $I$ a discrete set of cardinality $\\aleph_\\omega$, $\\beta I$ its Stone–Čech compactification, and $U=\\operatorname{Spec}C_{\\mathrm{lc}}(\\beta I\\times\\beta I,K)$, the spectrum of the ring of locally constant $K$-valued functions, viewed as an object of the small pro-étale site of $\\operatorname{Spec}K$ [def-weil-pbc-proetale-site]. Let $\\Lambda$ be a finite field of odd characteristic and $\\nu_U\\colon U_{\\mathrm{pro\\acute et}}\\to U_{\\mathrm{\\acute et}}$ the comparison morphism [def-weil-pbc-site-comparison-morphism]. Then for every $M\\in\\mathbf N$ there are a sheaf $F$ of $\\Lambda$-modules on $U_{\\mathrm{pro\\acute et}}$ and an integer $q>M$ with $R^q\\nu_{U,*}F\\ne0$ ($R\\nu_{U,*}$ the right derived functor [def-sfb-right-derived-functor] on derived categories [def-weil-abstract-derived-category]).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/thm-sf-fullcd-class.md",
+  "place": "thm-sf-fullcd-class: the remark after the full-cd class theorem (blueprint rem-sf-fullcd-counterexample): the bound on R^q nu_* cannot be made uniform in all objects of the pro-etale site and all sheaves; source Bergfalk-Lambie-Hanson, arXiv:2412.19605, Theorem 4.3; Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/Comparison/Counterexample.lean, declaration AlgebraicGeometry.ProEtale.exists_not_isZero_homology_rightDerivedComparisonLowerStar (module WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample, lines 126-132, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stone-Cech compactification constant sheaf infinite injective dimension, nonvanishing higher direct image",
+   "results": "stoneCechObj, StoneCech, stoneCechEquivalence (Mathlib.Topology.Category.CompHaus.Basic, Mathlib.Topology.Compactification.StoneCech): topology only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "StoneCech, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'StoneCech.*Sheaf|injectiveDimension' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Dimension.lean, Algebra/Category/ModuleCat/InjectiveDimension.lean, RingTheory/LocalProperties/InjectiveDimension.lean: injective dimension of modules only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration without a DAG node (maintainer audit of dag/lean_audit.json, the human's order 2026-10-22: every sorried upstream declaration gets a node whether or not a target needs it); no sorry-free SHEAF declaration states it; recorded so that stage 1 splits it when a target reaches it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.exists_not_isZero_homology_rightDerivedComparisonLowerStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample",
+     "lines": [
+      126,
+      132
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/Counterexample.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_not_isZero_homology_rightDerivedComparisonLowerStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exists_not_isZero_homology_rightDerivedComparisonLowerStar"
+  ],
+  "statement": "theorem exists_not_isZero_homology_rightDerivedComparisonLowerStar [IsAlgClosed K]\n    (hΛ : ringChar Λ ≠ 2) (hI : Cardinal.mk I = Cardinal.aleph Ordinal.omega0) (M : ℕ) :\n    ∃ (F : Sheaf (Scheme.ProEt.topology (stoneCechProdProEt K I).left) (ModuleCat.{u + 1} Λ))\n      (q : ℤ), M < q ∧ ¬ IsZero ((DerivedCategory.homologyFunctor _ q).obj\n        ((R(ν_*((stoneCechProdProEt K I).left)[ModuleCat.{u + 1} Λ])).obj\n          ((DerivedCategory.singleFunctor _ 0).obj F))) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; no node recorded it before 2026-10-22; used only by not_exists_forall_isZero_homology_rightDerivedComparisonLowerStar in the same file (a negative remark); no target route needs it"
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-relative-finite-coefficient-transport",
+ "kind": "statement",
+ "title": "Constructed exact transport of inverse-image constant module coefficients",
+ "statement": "Let g:Y→X be a scheme morphism and B a commutative ring in the site universe. Inverse image of the constant B-ring is canonically isomorphic to the constant ring on Y. Transport to the AsSmall model and restrict the scalar action along the inverse of this comparison and the canonical constant-sheaf site comparison. This gives the explicitly defined functor relativeFiniteModelModules from modules over g⁻¹(B_X) to modules over the actual constant B-ring on the model site. It is an additive equivalence. Its induced functor on the standard derived localizations commutes with homology. No module objects are selected from an existence theorem.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-sfb-adic-finite-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "The constant-ring inverse-image map is the comparison of two left adjoints to global sections. Identify its adjunct with the constant-presheaf sheafification unit; uniqueness of left adjoints makes the map invertible.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+   }
+  },
+  {
+   "text": "Compose the inverse constant-sheaf comparison for AsSmall with transport of the inverse constant-ring map. Define the module functor by precomposition and scalar restriction along this actual ring isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+   }
+  },
+  {
+   "text": "The pushforwardPushforwardEquivalence construction provides inverses both to precomposition and to restriction along a ring isomorphism. Their composite is an equivalence, and addition of maps is sectionwise. Apply mapDerivedCategory and mapDerivedCategoryHomologyFunctorIso to this exact additive functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of sites sends inverse image constant module sheaves on slices to constant coefficient module sheaves",
+   "results": "8 hits, including CategoryTheory.Sheaf.isConstant_iff_of_equivalence and Sheaf.isConstant_iff_forget; no ringed-module comparison on these slices.",
+   "date": "2026-10-27",
+   "verdict": "Use the equivalence API, but the scalar-linear constant-module comparison still requires proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardPushforwardEquivalence\"",
+   "results": "3 hits: SheafOfModules.pushforwardPushforwardEquivalence and its unit and counit component equations.",
+   "date": "2026-10-27",
+   "verdict": "Constructs the module equivalence; does not identify the project constant module or scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|pushforwardPushforwardEquivalence",
+   "results": "7 Mathlib hits in module-sheaf pushforward, quasicoherent modules and topological sheaf modules. The homology API is in the adopted WeilConjectures tree and is used directly.",
+   "date": "2026-10-27",
+   "verdict": "The project-specific comparisons are not already present as a single Mathlib statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of ringed sites transports constant module sheaves, exact derived functors and restriction of scalars",
+   "results": "8 hits: ModuleCat.restrictScalars_isEquivalence_of_ringEquiv; SheafOfModules.restrictScalars; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; CategoryTheory.Equivalence.transportIsoSheafToPresheaf; Equivalence.sheafCongr; Equivalence.sheafCongrPrecoherent; Equivalence.sheafCongr.functor; ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive. These are ordinary module and sheaf transport APIs, not the project-specific relative constant or derived scalar comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No complete match; the relevant equivalence and restriction APIs are used in the explicit construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeFiniteCoefficientModel",
+  "date": "2026-10-27",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Proof (c), Tag 094I: coefficient-site comparison in finite refinement and nilpotent propagation",
+   "via": [
+    "lem-weil-pbc-relative-finite-coefficient-model",
+    "new-lem-weil-pbc-normalized-tower-lisse-propagation",
+    "lem-weil-pbc-normalized-tower-common-lisse-strata",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeFiniteCoefficientTransport",
+  "file": "lean/Sheaf/Paper/RelativeFiniteCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relativeFiniteModelModules_isEquivalence",
+  "statement": "instance relativeFiniteModelModules_isEquivalence {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (B : Type (u + 1)) [CommRing B] :\n    (relativeFiniteModelModules g B).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.relativeFiniteConstantInverseImage_isIso",
+   "AlgebraicGeometry.Scheme.relativeFiniteModelCoefficient",
+   "AlgebraicGeometry.Scheme.relativeFiniteModelModules",
+   "AlgebraicGeometry.Scheme.relativeFiniteModelModules_isEquivalence",
+   "AlgebraicGeometry.Scheme.relativeFiniteModelModules_additive",
+   "AlgebraicGeometry.Scheme.relativeFiniteModelDerived",
+   "AlgebraicGeometry.Scheme.relativeFiniteModelHomologyIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261027T034650-L-3672174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261027T034650-L-3672174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

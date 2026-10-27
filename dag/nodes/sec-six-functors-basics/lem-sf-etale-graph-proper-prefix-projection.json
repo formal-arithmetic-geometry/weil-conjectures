@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-etale-graph-proper-prefix-projection",
+ "kind": "statement",
+ "title": "Successive graph projection and compactification-prefix factorization",
+ "statement": "Let B be a Grothendieck abelian symmetric monoidal closed coefficient category admitting functorial flat resolutions and the exact-pullback/flatness and concrete sheaf-composition structures used by the ordinary unbounded etale six functors [def-kun-derived-tensor, def-kun-projection-formula-map, lem-pur-etale-open-derived-tensor, lem-kun-derived-pullback-composition-monoidal]. For proper a:X→W, open e:W→P, proper p:P→Y and f=a e p, construct the successive graph-word projection from Rp_*De_!Ra_*M tensor K to Rp_*De_!Ra_*(M tensor Lf*K) by the proper projection for p, the open tensor comparison for e, the proper projection for a, and the two inverse canonical pullback compositors. If f0:W→Y has a compactification c=(i,p) [def-amb-etale-compact-support] and f=a f0, this word for (a,i,p) equals PF_c on Ra M,K, followed by F_c of the proper projection for a at Lf0*K, followed by F_c Ra of M tensor the inverse compositor for a,f0. The assertion holds for arbitrary unbounded complexes and schemes, with neither quasi-compactness nor invertibility of a projection map assumed. In particular it applies to B=ModuleCat A for every commutative coefficient ring A.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56 (projection map) and 0GL1 (open projection); the canonical pullback associativity calculation in lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarCompCoherence.lean."
+ },
+ "stmt_deps": [
+  "def-sf-etale-explicit-graph-projection-word",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "def-amb-etale-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "Construct the word by composing the actual proper, open, and proper projection components and applying the two inverse pullback compositor components. This is precisely the componentwise form of the original graph-word formula: the functor associator contributes the identity. Keep the coefficient category and the three morphisms as parameters, so the construction and its API use the same derived-category structures.",
+   "uses": [
+    "def-sf-etale-explicit-graph-projection-word"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing projectionMapOfCompactification_explicit formula to c and Ra M,K. It expands PF_c as the proper projection for p, its image of the open tensor comparison, and its image of M tensor the inverse compositor for i,p.",
+   "uses": [
+    "lem-amb-compactification-projection-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the proper projection for a at the inverse compositor c_i,p moves that coefficient map past the projection. The inverse threefold pullback associativity identity La(c_i,p inverse) followed by c_a,ip inverse equals c_a,i inverse followed by c_ai,p inverse. Apply M tensor this identity, then functoriality and associativity to paste the expansion. Its right side is the successive graph word by its definition. No compactification equality is eliminated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarCompCoherence.lean",
+    "place": "map_leftDerivedUpperStarComp_inv_app_leftDerivedUpperStarComp_inv_app; ordinary naturality of rightDerivedLowerStarProjectionMap"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-etale-explicit-graph-projection-word",
+  "lem-amb-compactification-projection-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/CompactificationProjectionComposition.lean",
+  "place": "D9: reuse projectionMapOfCompactification_explicit and properProjection_naturality_right, followed by the existing source inverse pullback associativity theorem. The construction exposes explicit graph factors over a coefficient-category parameter."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Factor a successive proper open proper derived projection map through the compactification projection and the first proper projection",
+   "results": "8 unrelated hits on Profinite.IndexFunctor, LightProfinite, DiscreteQuotient and Nobeling projections. No derived sheaf projection factorization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionMapOfCompactification\"",
+   "results": "0 Mathlib hits; this constructor and its explicit equation are in the adopted source library.",
+   "date": "2026-10-26",
+   "verdict": "reuse project helpers"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*prefix|prefix.*projection|proper.*projection.*comp",
+   "results": "25 hits on initialize_simps_projections as_prefix, unrelated to the derived projection. Source search finds no existing proper-prefix factorization. Blueprint search proper prefix projection returns zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate; use the existing generic tower proof helpers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Factor a successive proper open proper derived projection map through the compactification projection and the first proper projection",
+   "results": "8 hits concerning proper maps of topological spaces, projections from compact spaces, and CompHausLike pullbacks. None concerns derived sheaf projection or compactification projection.",
+   "date": "2026-10-26",
+   "verdict": "no match; reuse project projection calculations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfGraphCompositionTailProjection",
+  "date": "2026-10-26",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The proper-prefix factorization in step 2 of the Cartesian graph-interchange projection argument.",
+   "via": [
+    "lem-sf-etale-graph-interchange-projection",
+    "lem-sf-etale-graph-composition-tail-projection",
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfGraphProjectionWord",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfGraphProjectionWord.lean",
+  "declaration": "AlgebraicGeometry.Etale.sfGraphProjectionWord_proper_prefix",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfGraphProjectionWord_proper_prefix"
+  ],
+  "statement": "theorem sfGraphProjectionWord_proper_prefix\n    {X W Y : Scheme.{u}} {f₀ : W ⟶ Y} (c : Compactification f₀)\n    (a : X ⟶ W) [IsProper a] (f : X ⟶ Y) (hf : f = a ≫ f₀)\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology B))\n    (K : DerivedCategory (Sheaf Y.smallEtaleTopology B)) :\n    let S := (lowerStar B a).rightDerivedFunctor\n    let F := rightDerivedLowerShriekOfCompactification B c\n    sfGraphProjectionWord B a c.i c.g f\n      (by rw [← c.comm, ← hf]) M K =\n      ((projectionMapOfCompactification B c).app (S.obj M)).app K ≫\n        F.map (((rightDerivedLowerStarProjectionMap B a).app M).app\n          ((upperStar B f₀).leftDerivedFunctor.obj K)) ≫\n        F.map (S.map (((derivedTensor B X).obj M).map\n          ((leftDerivedUpperStarComp B a f₀ f hf).inv.app K)))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sf-etale-graph-proper-prefix-projection",
+  "worker": "stage3 D9",
+  "summary": "Proved a strict component of the graph-composition tail calculation, using canonical supplied maps.",
+  "blueprint": "The projection and composition paragraph of thm-asd-smooth-tensor.proof.md, as recorded by the parent tail node.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-compactification-projection-composition",
+    "why": "Use only the existing generic compactification-projection expansion and proper-projection naturality helpers to prove a strict prefix factorization; no ambient-adjoint unit statement is assumed or bypassed."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30781",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T065448-L-2996235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-30781",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T065448-L-2996235",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs node lem-sf-etale-graph-composition-tail-projection; new sfGraphWordProjection body vs old (equal up to associator 𝟙 + isoWhiskerLeft components); new nodes' lean.statement vs Lean; 4 delivered modules + 8 unchanged consumers compiled in sandbox; #print axioms"
+ }
+}

@@ -20,69 +20,52 @@
  ],
  "proof": [
   {
-   "text": "Choose a representable jointly surjective etale scheme cover $V\\to X$ from the definition of an algebraic space, then refine $V$ by affine opens over affine opens of $T$ and by etale trivializations of the line module $L$. On a chart $W=\\operatorname{Spec}(B)\\to X$ over $T_0=\\operatorname{Spec}(R)$, write the trivialized line module as $\\mathcal O_W$. For every positive-degree local section $a$ of $f^*\\mathcal A_d$, its image $\\psi_d(a)$ is a function on $W$, and the locus where $a$ generates the target is the principal open $D(\\psi_d(a))$: a map to an invertible module is surjective exactly where one local image is a unit. These principal opens cover the locus where $\\psi_d$ is surjective, and their union over $d\\geq1$ is therefore open. On $V\\times_XV$ the two pullbacks of each such principal open agree, because both are defined by the pullback of the same section and surjectivity of a map of sheaves is local on the etale site. Thus the chartwise opens carry a canonical descent datum; the sheaf definition of the algebraic space gives the descended open subspace $U(\\psi)$, and its pullback to every scheme over $X$ is the same union of principal opens. On each such principal open, the affine relative-Proj construction (Constructions, Tag 01O9) gives the canonical morphism to $\\operatorname{Proj}(A)$; the affine-chart identifications in [lemma-nagata-relative-proj-exists] identify these targets with the restriction of $\\operatorname{Proj}_T(\\mathcal A)$.",
+   "text": "Construct the generation subfunctor directly by [lem-trf-space-line-generation-open]; this supplies its fppf sheaf property, algebraic-space structure, open representability and IsGenerationOpen predicate.",
    "uses": [
-    "def-trf-algebraic-space",
-    "def-sc-invertible-module",
-    "lemma-nagata-relative-proj-exists"
+    "lem-trf-space-line-generation-open"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/spaces-divisors.tex",
-    "place": "Tag 0D2Z, opening construction of U(psi); Constructions Tag 01O9, affine construction and standard opens"
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
    }
   },
   {
-   "text": "On a refinement of two affine and trivializing charts, the two local morphisms just constructed have the same homogeneous-fraction formulas on every standard Proj chart. The uniqueness clause in the affine construction therefore identifies them on overlaps, and the same equality holds after pullback to $V\\times_XV$. To descend the map, let $W\\to U(\\psi)$ be any scheme and choose an etale cover $W_i\\to W$ factoring through the presentation $V\\to X$. The local maps $W_i\\to\\operatorname{Proj}_T(\\mathcal A)$ agree on every $W_i\\times_WW_j$ by the overlap equality, so the sheaf condition for the target algebraic space glues them uniquely to a map $W\\to\\operatorname{Proj}_T(\\mathcal A)$. This construction is functorial in $W$, hence defines the unique morphism $r_{L,\\psi}$; the structural map to $T$ agrees locally and therefore globally. Pullback to the jointly surjective presentation detects equality, so both the map and its homogeneous-algebra compatibility are unique.",
+   "text": "For each section of this subfunctor on W, apply [lem-trf-space-line-test-map] to the associated generating scheme test. Precomposition preserves IsCanonicalTestMap by associativity and the test-to-base equation. Test-map uniqueness therefore makes these morphisms natural, defining r. Applying the formula to the identity test gives IsCanonicalMap. Conversely naturality transports the IsCanonicalMap formula to all further tests, so test-map uniqueness gives sectionwise uniqueness of r.",
    "uses": [
-    "def-trf-algebraic-space",
-    "lemma-nagata-relative-proj-exists",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-divisors.tex",
-    "place": "Tag 0D2Z, construction and uniqueness of r_{L,psi}; Constructions Tag 01O9, parts (1),(2),(3)"
-   }
-  },
-  {
-   "text": "For an arbitrary commutative square with $X'$ and $T'$ schemes, pullback of the local charts, the graded algebra, the line module, and $\\psi$ gives precisely $(\\mathcal A',L',\\psi')$. Surjectivity of a sheaf map and invertibility of a local generator are preserved and reflected after pullback, so the principal-open description in Step 1 gives $U(\\psi')=(g')^{-1}(U(\\psi))$. The unrestricted comparison [lemma-nagata-relative-proj-base-change-arbitrary] gives the canonical isomorphism $\\operatorname{Proj}_{T'}(\\mathcal A')\\simeq T'\\times_T\\operatorname{Proj}_T(\\mathcal A)$ for this arbitrary $g$, with no flatness assumption. On every pulled-back affine chart, the homogeneous-fraction formula is the pullback of the original formula; by the uniqueness and descent argument of Step 2 these local equalities identify $r_{L',\\psi'}$ with the base change of $r_{L,\\psi}$.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lemma-nagata-relative-proj-exists",
-    "lemma-nagata-relative-proj-base-change-arbitrary"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-divisors.tex",
-    "place": "Tag 0D2Z, part (3); Constructions Tag 01O9, part (3); relative-Proj base change"
-   }
-  },
-  {
-   "text": "When $X$ is a scheme, the small-etale line module is the usual invertible $\\mathcal O_X$-module [def-sc-invertible-module], and the tensor pullback in the statement agrees with the ordinary module pullback [def-pc-module-pullback]. The preceding affine construction is then exactly the usual canonical morphism obtained from graded maps into tensor powers of an invertible module.",
-   "uses": [
-    "def-sc-invertible-module",
-    "def-pc-module-pullback"
+    "def-trf-space-line-module-proj-input",
+    "lem-trf-space-line-test-map"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/spaces-divisors.tex",
-    "place": "Tag 0D2Z, scheme specialization; Constructions Tag 01O9"
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
+   }
+  },
+  {
+   "text": "For a base-change square, [lem-trf-space-line-test-base-change] identifies generation sets on every scheme test. Yoneda naturality identifies the composite test with that of the image section, proving IsGenerationOpen for the inverse-image subfunctor. The pulled-back family is coherent by the original identity and composition equations. Apply the preceding natural-transformation construction to obtain r′. Naturality transports the canonical-map predicate to canonical-test predicates; the test base-change comparison gives the required equality sectionwise. The same uniqueness proves the displayed unique existence of r′ and r. The identity-test formula is exactly the usual scheme construction.",
+   "uses": [
+    "def-trf-space-line-module-proj-input",
+    "lem-trf-space-line-test-map",
+    "lem-trf-space-line-test-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-sc-invertible-module",
-  "def-trf-algebraic-space",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "lemma-nagata-relative-proj-base-change-arbitrary",
-  "lemma-nagata-relative-proj-exists"
+  "def-trf-space-line-module-proj-input",
+  "lem-trf-space-line-generation-open",
+  "lem-trf-space-line-test-base-change",
+  "lem-trf-space-line-test-map"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces-divisors.tex",
-  "place": "Tag 0D2Z (lemma-invertible-map-into-relative-proj), with the affine construction of Tag 01O9; local chart and etale descent details expanded from the source's construction."
+  "place": "Tag 0D2Z, functor-of-points proof, with Constructions Tags 01NK and 01O9. Generation is proved directly; scheme construction and coefficientwise test base change are separated. N4 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -167,19 +150,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-space-line-module-proj-map",
   "worker": "stage1",
-  "summary": "Repaired the returned split against Stacks Tag 0D2Z: restored arbitrary commutative base-change squares with scheme corners, cited the existing unrestricted relative-Proj base-change node, and expanded the chartwise open-locus and etale descent arguments so the algebraic-space construction is explicit.",
-  "blueprint": "Realizes the historical polarized-descent helper recorded under lem-trf-local-term-locality: local section-algebra/relative-Proj construction, effective etale descent of the open locus and morphism, and unrestricted base-change compatibility."
+  "summary": "Re-split the returned 3708-character proof into three independent statement-only nodes: homogeneous-fraction chart construction and overlap compatibility, effective descent of an invariant open with its morphism, and arbitrary scheme pullback of generator opens and specified fraction maps. Preserved the statement, all metadata and the unrestricted base-change hypotheses; replaced the false assertion that arbitrary pullback reflects surjectivity by coefficient-ideal and local-generator compatibility.",
+  "blueprint": "The same historical polarized-descent helper under lem-trf-local-term-locality: old step 1 is carried by affine-chart-atlas plus etale-open-chart-morphism-descent; old step 2 by those two and chart-pullback; old step 3 by chart-pullback and descent equality detection; old step 4 by the affine fraction characterization and the existing cartesian line realization."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NY-664f87dd6",
-  "group": "NY",
+  "reviewer": "NT-cc-NX-8b1b9f215",
+  "group": "NX",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-664f87dd6 (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, cited nodes, and Stacks Tags 0D2Z and 01O9. The unrestricted arbitrary-base-change statement, generation-locus formula, Proj comparison, hypotheses, and coefficient category are correct. All proof steps are concrete, non-circular, below the long-step threshold, and use only cited statements; edge cases and non-flat base change were checked. No new nodes or repairs are needed. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-8b1b9f215 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, every cited statement, Stacks 0D2Z (spaces-divisors: statement, parts (2),(3) and the omitted-proof hints), and Constructions 01O9 with the 01NK construction it uses (U(psi) as the union of U_{psi(a)} over affine V and positive-degree a). The re-split is genuine. Old step 1 (local generator opens, union equal to the surjectivity locus, chart maps) went to affine-chart-atlas, and the effective open went to the descent node. Old step 2 (overlap equality, gluing on scheme tests, uniqueness) is carried by atlas-node overlaps plus the descent node's morphism, detection and over-T clauses. Old step 3 (arbitrary non-cartesian square, U(psi')=(g')^{-1}U, coefficient formula, c∘q'=q∘h) went to chart-pullback, together with the existing base-change-arbitrary and descent detection. Step 4 is still elementary. The three children are of comparable size and none restates the item or one of its clauses; the item proof is a short assembly of 2,138 characters. Checked: the stalk generation argument, where a local ring forces one image to be a unit; well-definedness of b/a^m -> psi(b)/psi(a)^m, using that a generator is a non-zero-divisor; m=0 with A_0 allowed to differ from O_T; mixed degrees agreeing on D_+(ab); invariance under a change of frame; the coequalizer R_O ⇉ O -> U, needing only the sheaf property of Z; G'=h^{-1}G via the local homomorphism O_{W,w} -> O_{W',w'}, with non-flat R -> R/I allowed; and that c restricts to D_+(a⊗1) -> D_+(a). Both Nagata lemmas used are in the transitive unit closure of sk-i-curve-zero, gluing is a Mathlib leaf, so no tool_uses are needed. No SGA citation, no cycle, the item statement and stmt_deps are unchanged, and none of the checked duplicate candidates (02WU/0262/03BZ nodes, lem-sc section-ring chart nodes, def-sfb canonical map) is a duplicate. FIX: lem-trf-line-proj-chart-pullback never introduced the frame e and did not say which frame of L' the coefficient formula h^#(alpha_a)f'^#(c) uses; for any frame other than h^*e the formula is false. The corrected statement in fixes/dag/nodes/sec-trace-formula/lem-trf-line-proj-chart-pullback.json fixes e on Spec B and takes coefficients relative to (h^*e)^{⊗d}. Only the statement changes.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.TraceFormula.SpaceLineModuleProjMap",
@@ -202,5 +185,26 @@
   "result": "pass",
   "note": "Read the full packet, immutable node/dependencies, both Lean modules, source/report/docstrings, and route-pivot records. Verified clause and hypothesis correspondence, edge cases, real definitions, canonical dependencies, required report sections, and successful per-file scompile.py compilation with no errors."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261023T151908-L-421279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

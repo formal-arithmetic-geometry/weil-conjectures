@@ -1,0 +1,156 @@
+{
+ "id": "lem-sp-tower-mu-evaluation",
+ "kind": "statement",
+ "title": "Finite evaluation of the counit-normalized tower mu map",
+ "statement": "Fix the finite-field and finite coefficient-extension setting [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension], smooth separated composable $f,g$ of pure dimensions $d,e$, and $h=gf$, between separated finite-type schemes. Use the actual strict derived-tower operations, purity records [def-sp-tower-gamma-data], and adjunction pairs [def-sp-adjoint-compositor-data]. Let $c:G_h\\simeq G_fG_g$ preserve the composite counit, where the given left compositor is the proper/open compositor of the tower calculus. Suppose the specified tensor mate $\\rho=t_{f,\\omega_g}$ is invertible and put $\\mu=c_1$ followed by $\\rho^{-1}$ [def-sp-composition-orientation-arrow-data]. At any positive level choose the three coefficient-unit identifications satisfying their normalized coefficient-unit squares. Through the associated dualizing words [def-sp-tensor-transpose-evaluation-words], the evaluation of $\\mu$ is the canonical finite exceptional congruence from $h$ to $gf$, followed by $\\mu_n=\\rho_n^{-1}c_{n,1}$. In particular $\\rho_n$ is invertible. This is a square from the dualizing object to $f^*\\omega_g\\otimes\\omega_f$; no diagonal orientation of $h$ is composed into it, and no Tate splitting or concentration is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "(1), tower paragraph; step 3, finite evaluation of mu before composing with the h orientation"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sp-tower-gamma-data",
+  "def-sp-adjoint-compositor-data",
+  "def-sp-composition-orientation-arrow-data",
+  "def-sp-tensor-transpose-evaluation-words"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sp-tower-tensor-transpose-evaluation] to f and K=omega_g. The given purity record supplies tensor-domain and projection-invertibility witnesses. Use the g right-adjoint comparison and its normalized coefficient-unit map to identify the retained origin of K with the finite omega_g. Naturality identifies evaluated rho with exactly finiteRho. The fixed comparison arrows are isomorphisms; finite smooth tensor duality [det-sp-finite-general-ring] also gives invertibility of this finite tensor map.",
+   "uses": [
+    "lem-sp-tower-tensor-transpose-evaluation",
+    "det-sp-finite-general-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [det-sp-composition-comparisons] to the three adjunction pairs. The given left-compositor equation identifies its left comparison with alpha, and uniqueness of the right adjoint under the composite-counit equation identifies its right comparison with c. Transport the unit object using the normalized unit comparisons and the canonical derived tensor-unit identification. The evaluated c at that unit is the specified finiteCompositor, preceded by the hcomp congruence.",
+   "uses": [
+    "det-sp-composition-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation preserves composition and inverses. Substitute the defining word for towerMu and the previous two squares. This gives the stated finite word comparison. The normalized adjunction comparisons preserve actual units and counits; no arbitrary-map equality is detected by evaluating.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-tensor-transpose-evaluation",
+  "det-sp-finite-general-ring",
+  "det-sp-composition-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "step 3, finite evaluation of mu before composing with the h orientation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Shifted Tate coefficient towers tensor splitting and concentration in one cohomological degree",
+   "results": "8 hits on general cochain shifts and TStructure.isGE_shift_iff. No strict coefficient tower, Tate splitting, or exceptional compositor evaluation statement.",
+   "date": "2026-10-27",
+   "verdict": "no match; general shift facts alone do not identify these specified arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an iterated tensor product of locally free rank one sheaves shifted by even integers",
+   "results": "8 hits: Sheaf.H, cohomologyPresheaf, continuous homogeneous cochains, Scheme.Modules.instAbelian, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, groupCohomologyIsoExt. None states the required coefficient tower assertions.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso.of_isIso_fac_left",
+   "results": "One hit, Mathlib.CategoryTheory.Iso: if f and h are isomorphisms and f ≫ g = h then g is an isomorphism. Used in the parent to prove rho invertible; does not supply the three new statements.",
+   "date": "2026-10-27",
+   "verdict": "parent invertibility step available; no new-statement match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep towerMu|TowerSplitNormalized|orderedLine; rg orderedLine, pulled_ordered_line_single, towerRho, towerMu, TowerSplitNormalized in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search shifted Tate splitting",
+   "results": "msearch grep: no Mathlib hits. Library: original composition helper definitions, gamma data, pullback_ordered_tate_bounds, pulled_ordered_line_single. The bounds and shifted-single existence do not state local rank of the surviving homology, normalized Tate splitting, or mu evaluation. No duplicate statement found in the DAG or current blueprint.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; reuse existing data without redeclaring it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerOrientationEvaluation",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "step 3, finite evaluation of mu before composing with the h orientation",
+   "via": [
+    "lem-sp-tower-orientation-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerMuEvaluation",
+  "file": "lean/Sheaf/Paper/TowerMuEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.tower_mu_evaluation",
+  "statement": "theorem tower_mu_evaluation\n    (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]\n    [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]\n    [QuasiCompact (Z ↘ Spec (.of D.k))]\n    [(jf ≫ pf).IsOver (Spec (.of D.k))] [(jg ≫ pg).IsOver (Spec (.of D.k))]\n    [IsSeparated (jf ≫ pf)] [IsSeparated (jg ≫ pg)]\n    [SmoothOfRelativeDimension d (jf ≫ pf)] [SmoothOfRelativeDimension e (jg ≫ pg)]\n    (hcomp : (jf ≫ pf) ≫ (jg ≫ pg) = jh ≫ ph)\n    (z : SpTowerCalculus.FiniteCoordinates l E)\n    (pres : SpTowerCalculus.Preservation l E D.k b o q)\n    (cal : SpTowerCalculus.Calculus l E D.k b o q z pres)\n    (alpha : TowerAdjointCompositor.left l E b o q Pf ⋙\n      TowerAdjointCompositor.left l E b o q Pg ≅ TowerAdjointCompositor.left l E b o q Ph)\n    (_ha : ∀ M, (alpha.hom.app M).hom =\n      (cal.composition.composition (jf ≫ pf) (jg ≫ pg) (jh ≫ ph) hcomp\n        (SpTowerGamma.factorization jf pf) (SpTowerGamma.factorization jg pg)\n        (SpTowerGamma.factorization jh ph)).hom.app M)\n    (_hc : ∀ K,\n      (TowerAdjointCompositor.left l E b o q Pf ⋙\n        TowerAdjointCompositor.left l E b o q Pg).map (c.hom.app K) ≫\n          (Pf.adj.comp Pg.adj).counit.app K =\n        alpha.hom.app (Ph.right.obj K) ≫ Ph.adj.counit.app K)\n    (hR : IsIso (towerRho l E b o q jf pf jg pg d e wf wg Pf Pg af ag))\n    (n : ℕ)\n    (uiF : (SpTowerGamma.inputWord l E b o q (SpTowerGamma.factorization jf pf)\n      Pf.closed Pf.right Pf.adj Pf.levels n\n        ⟨SpTowerGamma.originalUnit l E b q Y, af.unit_mem⟩).etale ≅\n      Etale.ordinaryFiniteUnit (SpTowerP1.levelRing l E n) Y)\n    (huF : (SpTowerP1.nu l E n Y).map uiF.hom ≫\n        (SpTowerP1.unitWord l E n Y (af.coefficientsY n)).comparison =\n      (SpTowerGamma.inputWord l E b o q (SpTowerGamma.factorization jf pf)\n        Pf.closed Pf.right Pf.adj Pf.levels n\n          ⟨SpTowerGamma.originalUnit l E b q Y, af.unit_mem⟩).comparison ≫\n        (SpTowerShriek.Ev l E Y n).map\n          ((SpTowerCalculus.realization l E b Y (q.abelian Y)).counitIso.hom.app\n            (SpTowerGamma.unit l E Y)))\n    (uiG : (SpTowerGamma.inputWord l E b o q (SpTowerGamma.factorization jg pg)\n      Pg.closed Pg.right Pg.adj Pg.levels n\n        ⟨SpTowerGamma.originalUnit l E b q Z, ag.unit_mem⟩).etale ≅\n      Etale.ordinaryFiniteUnit (SpTowerP1.levelRing l E n) Z)\n    (huG : (SpTowerP1.nu l E n Z).map uiG.hom ≫\n        (SpTowerP1.unitWord l E n Z (ag.coefficientsY n)).comparison =\n      (SpTowerGamma.inputWord l E b o q (SpTowerGamma.factorization jg pg)\n        Pg.closed Pg.right Pg.adj Pg.levels n\n          ⟨SpTowerGamma.originalUnit l E b q Z, ag.unit_mem⟩).comparison ≫\n        (SpTowerShriek.Ev l E Z n).map\n          ((SpTowerCalculus.realization l E b Z (q.abelian Z)).counitIso.hom.app\n            (SpTowerGamma.unit l E Z)))\n    (uiH : (SpTowerGamma.inputWord l E b o q (SpTowerGamma.factorization jh ph)\n      Ph.closed Ph.right Ph.adj Ph.levels n\n        ⟨SpTowerGamma.originalUnit l E b q Z, ah.unit_mem⟩).etale ≅\n      Etale.ordinaryFiniteUnit (SpTowerP1.levelRing l E n) Z)\n    (huH : (SpTowerP1.nu l E n Z).map uiH.hom ≫\n        (SpTowerP1.unitWord l E n Z (ah.coefficientsY n)).comparison =\n      (SpTowerGamma.inputWord l E b o q (SpTowerGamma.factorization jh ph)\n        Ph.closed Ph.right Ph.adj Ph.levels n\n          ⟨SpTowerGamma.originalUnit l E b q Z, ah.unit_mem⟩).comparison ≫\n        (SpTowerShriek.Ev l E Z n).map\n          ((SpTowerCalculus.realization l E b Z (q.abelian Z)).counitIso.hom.app\n            (SpTowerGamma.unit l E Z)))\n :\n    ∃ hr : IsIso (finiteRho (SpTowerP1.levelRing l E n) (jf ≫ pf) (jg ≫ pg)),\n      SpTowerP1.WordComparison l E n\n        (SpTensorTranspose.dualizingWord l E b o q jh ph\n          Ph.closed Ph.right Ph.adj Ph.levels ah.unit_mem n uiH)\n        (SpTowerP1.tensorWord l E n b (af.tensors n)\n          (SpTowerP1.pullWord l E n b (o.geometry (jf ≫ pf)) (af.geometry n)\n            (SpTensorTranspose.dualizingWord l E b o q jg pg\n              Pg.closed Pg.right Pg.adj Pg.levels ag.unit_mem n uiG))\n          (SpTensorTranspose.dualizingWord l E b o q jf pf\n            Pf.closed Pf.right Pf.adj Pf.levels af.unit_mem n uiF))\n        (towerMu l E b o q jf pf jg pg jh ph d e wf wg Pf Pg Ph af ag c hR).hom\n        ((Etale.rightDerivedUpperShriekCongr (SpTowerP1.levelRing l E n)\n            hcomp.symm).hom.app (MonoidalCategory.tensorUnit _) ≫\n          (finiteMu (SpTowerP1.levelRing l E n) (jf ≫ pf) (jg ≫ pg) hr).hom)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sp-tower-orientation-evaluation",
+  "worker": "stage3",
+  "summary": "Strict substep of the unchanged composite orientation evaluation theorem, with its exact Lean statement and a complete proof in words.",
+  "blueprint": "(1), tower paragraph; step 3, finite evaluation of mu before composing with the h orientation",
+  "tool_uses": [
+   {
+    "node": "lem-sp-tower-tensor-transpose-evaluation",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   },
+   {
+    "node": "det-sp-finite-general-ring",
+    "why": "Use the stated generic coefficient-tower/pullback/Tate comparison tool in the proof step citing it; the composition unit route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T034810-L-3687775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

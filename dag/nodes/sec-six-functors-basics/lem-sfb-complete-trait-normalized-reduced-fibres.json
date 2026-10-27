@@ -1,0 +1,424 @@
+{
+ "id": "lem-sfb-complete-trait-normalized-reduced-fibres",
+ "kind": "statement",
+ "title": "Normalized reduced base change over a complete trait",
+ "statement": "Let $D$ be a discrete valuation ring [def-sc-discrete-valuation-ring], complete for its maximal ideal [def-weil-pbc-adically-complete-ring], with fraction field $F$. Let $X\\to\\operatorname{Spec}D$ be flat, separated and of finite type [def-weil-flat-morphism, def-weil-proper-morphism, def-weil-finite-type-morphism]. There is a finite field extension $L/F$ [def-pc-field-extension], with no separability requirement, for which the following holds. Write $V\\subset L$ for the integral closure of $D$ in $L$ (the elements satisfying monic polynomials over $D$) [def-weil-pbc-integral-closure]. Then $V$ is a complete discrete valuation ring, has fraction field $L$, is finite as a $D$-module, and $D\\hookrightarrow V$ is local, meaning that the maximal ideal of $V$ contracts to that of $D$. Put $X_V=X\\times_{\\operatorname{Spec}D}\\operatorname{Spec}V$ [def-pc-base-change], let $H=(X_V)_{\\mathrm{red}}$ [def-weil-pbc-scheme-reduction], and let $\\nu:N\\to H$ be its componentwise normalization [def-weil-pbc-reduced-normalization]. The schemes $H$ and $N$ are flat, separated and of finite type over $V$, and $\\nu$ is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. The generic fibre $H_L$ is geometrically reduced, the generic fibre $N_L$ is geometrically normal, and the closed fibre $N_{V/\\mathfrak m_V}$ is geometrically reduced. Here geometrically reduced means reduced after every extension of the indicated field; geometrically normal means that after every such extension all local rings are integrally closed domains. Reduced means having no nonzero nilpotent local sections. No affineness, reducedness, irreducibility, or generic smoothness of $X$ is assumed; the empty scheme is allowed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://math.stanford.edu/~conrad/papers/qrg.pdf, Appendix by Brian Conrad, Theorem A.2 and Remark A.3, printed p.28; compare Stacks Tag 09IL (more-morphisms.tex, theorem-normalized-base-change-with-reduced-fibre), whose Nagata hypothesis holds for a complete DVR."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-pc-base-change",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "We first record the construction over any complete DVR $W$ arising as the integral closure of $D$ in a finite extension $K/F$. The complete-DVR normalization theorem gives all assertions about $W$, including finiteness, locality and fraction field $K$. Base change preserves flatness, separatedness and finite type of $X_W$. On a finite affine cover write $X_W=\\bigcup\\operatorname{Spec}T_a$; the $T_a$ are finite type and flat over $W$. They are Noetherian since a DVR is a Noetherian PID. For a uniformizer $\\rho$ and $\\rho t$ nilpotent in $T_a$, one has $\\rho^nt^n=0$ for some $n$, so flatness gives $t^n=0$. Thus $A_a=(T_a)_{\\mathrm{red}}$ is torsion free over $W$, hence flat. Its quotient presentation is finite type. The reduction immersion is finite, so $H_W=(X_W)_{\\mathrm{red}}$ is separated and finite type over $W$. This applies also to $W=D$.",
+   "uses": [
+    "lem-per-complete-dvr-finite-normalization",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-over-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Setup before Tag 09IL; reduction flatness also Conrad Appendix opening paragraph, printed p.28."
+   }
+  },
+  {
+   "text": "For this $W$, completeness implies that $W$ is Nagata and hence universally Japanese. On each chart $\\operatorname{Spec}A_a$ of $H_W$, the affine normalization formula gives $\\nu^{-1}(\\operatorname{Spec}A_a)=\\operatorname{Spec}B_a$, with $B_a=\\prod_j\\overline{A_a/\\mathfrak p_j}$, where $\\mathfrak p_j$ runs through the finitely many minimal primes and the bars mean integral closure in the respective fraction fields. Each $A_a/\\mathfrak p_j$ is a finite type domain over $W$, so universal Japaneseness says its closure in its own fraction field is finite. Consequently the finite product $B_a$ is finite over $A_a$. This proves finiteness of the componentwise normalization $N_W\\to H_W$. It is surjective and normal by the normalization-properties node. Since a finite morphism over a separated finite-type scheme has separated finite-type source, $N_W$ has both properties over $W$.",
+   "uses": [
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-per-componentwise-normalization-properties",
+    "lem-weil-pbc-finite-over-separated-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Setup before Tag 09IL; Algebra Tags 032W, 0334; Morphisms Tags 035P and 0CDV."
+   }
+  },
+  {
+   "text": "The uniformizer $\\rho$ is a nonzerodivisor on each $A_a$. The product-of-fields formula for $Q(A_a)$ shows that $\\rho$ remains a nonzerodivisor in $B_a\\subset Q(A_a)$: it is nonzero in every minimal-prime field. Thus $B_a$ is torsion free, hence flat over the PID $W$. Normalization is therefore $W$-flat. Reduction and normalization commute with inverting $\\rho$. For reduction, if $t/\\rho^m$ is nilpotent then $\\rho^rt^n=0$ for some $r,n$, and $(\\rho^rt)^n=0$, so it already lies in the localized nilradical; the converse is immediate. For normalization apply integral-closure localization to $A_a\\subset Q(A_a)$; inverting the nonzerodivisor $\\rho$ does not change the total fraction ring. Therefore $(H_W)_K=(X_K)_{\\mathrm{red}}$ and $(N_W)_K$ is its componentwise normalization. These identifications agree on overlaps by the restriction clause of normalization. All the preceding constructions allow zero rings, empty schemes and empty closed fibres.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-per-componentwise-normalization-properties",
+    "lem-sfb-normalization-affine-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Setup and normalized base-change diagram preceding Tag 09IL; Algebra Tag 0307; Morphisms Tags 035P, 035K."
+   }
+  },
+  {
+   "text": "The finite type generic fibre $X_F$ has finitely many irreducible components: take its finite affine cover, use finite type Noetherianity and finite minimal primes on each chart. Apply finite inseparable geometric reduction to obtain $F_1/F$ for which $Z=(X_{F_1})_{\\mathrm{red}}$ is geometrically reduced. Apply the geometrically-normal-normalization preparation node to $Z/F_1$, obtaining $K/F_1$ finite purely inseparable such that its normalization after base change to $K$ is geometrically normal. Here $(X_K)_{\\mathrm{red}}=Z_K$: the nilradical ideal of the Noetherian scheme $X_{F_1}$ is nilpotent; after base change its quotient $Z_K$ is reduced by geometric reducedness, so this ideal is exactly the new nilradical. Let $W_0$ be the integral closure of $D$ in $K$, and put $H_0=(X_{W_0})_{\\mathrm{red}}$ and $N_0=H_0^\\nu$. Steps 1–3 give finite flat separated finite-type models, with $(H_0)_K$ geometrically reduced and $(N_0)_K$ geometrically normal. The new field-extension normalization lemma, applied to every affine chart of $(H_0)_K$, shows that for every further field extension $M/K$, $(N_0)_M$ is the normalization of $(H_0)_M$ and is geometrically normal. The generic-fibre identifications are the actual normalization maps, not merely abstract isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-pur-finite-inseparable-geometric-reduction",
+    "lem-weil-pbc-normalization-geonormal-insep",
+    "lem-sc-reduction-nilradical-nilpotent",
+    "lem-sfb-geonormal-normalization-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09IL first paragraph, with Varieties Tags 04KT and 0BXT to prepare both generic-fibre clauses; persistence uses Tag 0C3N."
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover $N_0=\\bigcup_i\\operatorname{Spec}E_i$. Each $E_i$ is a finite type flat $W_0$-algebra with geometrically normal generic fibre. The affine Raynaud–Faltings node therefore supplies a finite extension $K_i/K$ for each $i$. Write $W_i$ for the integral closure of $W_0$ in $K_i$, and $C_i$ for the integral closure of $E_i\\otimes_{W_0}W_i$ in $E_i\\otimes_{W_0}K_i$. The cited node gives that $C_i$ is finite, normal and flat, has that very generic fibre, and has geometrically reduced special fibre. The complete-DVR normalization theorem makes every $W_i$ a finite complete DVR over $W_0$. Choose a common finite complete DVR extension $V/W_0$ receiving local maps from all $W_i$, using the common-extension node; if the cover is empty take $V=W_0$. Put $L=\\operatorname{Frac}V$. Products of finite spanning sets show $L/F$ is finite. The uniqueness clause for integral closures of complete DVRs identifies $V$ with the integral closure of $D$ in $L$, and gives all its asserted completeness, finiteness and locality properties.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-per-complete-dvr-finite-normalization",
+    "lem-per-epp-common-finite-trait-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09IL finite common extension; Conrad Appendix A.2 locally on the total space. Affine input read with its geometric-normal-generic-fibre hypothesis."
+   }
+  },
+  {
+   "text": "For each $i$ set $P_i=C_i\\otimes_{W_i}V$ and $A_i=E_i\\otimes_{W_0}V$. The ring $P_i$ is a finite $A_i$-module by tensoring a finite set of module generators. It is $V$-flat by flat base change, and its generic fibre is $E_i\\otimes_{W_0}L$, normal by Step 4. Its special fibre is $(C_i/\\mathfrak m_{W_i}C_i)\\otimes_{k_i}k_V$: the local map sends $\\mathfrak m_{W_i}$ into $\\mathfrak m_V$, so this identity follows directly from tensoring with $k_V$. It is geometrically reduced, including after any extension of $k_V$, by the affine node's conclusion. Apply the normal-generic/reduced-special DVR criterion to $P_i$ to conclude it is normal. Flatness embeds $P_i$ into its generic fibre, and hence embeds $A_i$ there too. The normal-total-fractions node implies that $P_i$ is exactly the integral closure of $A_i$ inside $E_i\\otimes_{W_0}L$: it is integral over $A_i$ because it is finite; conversely an element of this generic ring integral over $A_i$ is integral over $P_i$ and belongs to $P_i$, since the generic ring is its localization at the uniformizer. The ring $A_i$ is Noetherian and, as a subring of the normal, hence reduced, ring $E_i\\otimes_{W_0}L=A_i[1/\\pi]$, reduced; so $(N_0)_V$ is reduced and Noetherian, as the affine normalization formula requires. Since $\\pi$ is a nonzerodivisor on $A_i$, an element $a/\\pi^n$ is a nonzerodivisor of $A_i[1/\\pi]$ exactly when $a$ is one of $A_i$, so $Q(A_i)=Q(A_i[1/\\pi])$. By the normal-total-fractions node the normal ring $A_i[1/\\pi]$ is integrally closed in this common total fraction ring, so every element of $Q(A_i)$ integral over $A_i$ lies in $E_i\\otimes_{W_0}L$, hence in $P_i$. Thus, by the affine normalization formula, normalization of $(N_0)_V$ has, on this cover, the charts $\\operatorname{Spec}P_i$. In particular its closed fibre is geometrically reduced.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-sfb-dvr-normal-generic-reduced-special",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "lem-sfb-normalization-affine-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Conrad Appendix Remark A.3, persistence under further Dedekind extensions; affine normality supplied by the existing DVR criterion. Tensor and monic-polynomial argument written explicitly."
+   }
+  },
+  {
+   "text": "Finally put $H=(X_V)_{\\mathrm{red}}$ and $N=H^\\nu$ as in the statement. The flat scheme $(H_0)_V$ has reduced generic fibre $(H_0)_L$, so it is reduced: a nilpotent section maps to zero generically and is killed by a power of the uniformizer, and torsion freeness makes it zero. The nilpotent ideal of $H_0\\hookrightarrow X_{W_0}$ remains nilpotent after base change, so $(H_0)_V=H$. Normalization of $(N_0)_V$ is canonically $N$. To check this without assuming normalization commutes with arbitrary trait base change, work on any affine chart of $H_0$, with normalization rings $A\\subset B$. After tensoring with $V$ these still inject into their generic fibres. By Step 4 the map $B_L\\to A_L$ on spectra is the normalization map, so $A_L$ and $B_L$ have the same total fraction ring. Inverting the uniformizer shows $Q(A_V)=Q(B_V)$ as well. The algebra $B_V$ is finite and hence integral over $A_V$. In the common total fraction ring, their integral closures agree: integrality over $B_V$ implies integrality over $A_V$ by transitivity, and the reverse inclusion follows by using the same monic polynomial. The affine normalization formula and restriction compatibility identify the two global normalizations. Step 6 now gives the geometrically reduced closed fibre of $N$. Steps 1–3 give finite surjectivity of $\\nu$, flatness, separatedness and finite type of $H,N$; Step 4 gives their required generic-fibre properties after $K\\subset L$. This proves every clause, including $X=\\varnothing$.",
+   "uses": [
+    "lem-sc-reduction-nilradical-nilpotent",
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sfb-normalization-affine-total-fractions",
+    "lem-per-componentwise-normalization-properties",
+    "lem-sfb-geonormal-normalization-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Composition of normalized base changes preceding Tag 09IL; Conrad Appendix Remark A.3. The common-total-fractions and integral-closure comparison is written on affine charts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-scheme-reduction",
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-componentwise-normalization-properties",
+  "lem-per-epp-common-finite-trait-extension",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "lem-sfb-dvr-normal-generic-reduced-special",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-geonormal-normalization-field-extension",
+  "lem-sfb-normalization-affine-total-fractions",
+  "lem-sfb-raynaud-faltings-normalized-reduction",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-nagata-universally-japanese",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-normalization-geonormal-insep",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-separated-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09IL and its preceding normalized-base-change setup; generic geometric normality prepared by Varieties Tag 0BXT; affine reduction input and persistence as in Conrad Appendix A.2–A.3, with all assembly comparisons written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalization|geometrically.*reduced",
+   "results": "{\"t\": \"2026-10-24T05:08:06Z\", \"tool\": \"grep\", \"query\": \"normalization|geometrically.*reduced\", \"sub\": \"AlgebraicGeometry/Normalization.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"17\", \"19\", \"20\", \"24\"], \"digest\": \"e2f17bf45c1b6886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud Faltings reduced fibre theorem for normalized base change over a complete DVR",
+   "results": "{\"t\": \"2026-10-24T05:08:07Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud Faltings reduced fibre theorem for normalized base change over a complete DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.baseChange_integralModel_eq\", \"WeierstrassCurve.IsGoodReduction.mk\", \"WeierstrassCurve.exists_isMinimal\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"WeierstrassCurve.reduction\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"2be4bdf9d574c931\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-24T05:08:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finite type scheme with smooth generic fibre over a complete discrete valuation ring, a finite extension makes its normalization finite with geometrically reduced special fibre",
+   "results": "{\"t\": \"2026-10-24T05:08:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat finite type scheme with smooth generic fibre over a complete discrete valuation ring, a finite extension makes its normalization finite with geometrically reduced special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"Algebra.Smooth.exists_subalgebra_finiteType\"], \"digest\": \"501e3b5565fc51b6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After a finite extension of a complete discretely valued field the normalization of a flat scheme with smooth generic fibre has geometrically reduced special fibre",
+   "results": "{\"t\": \"2026-10-24T05:08:11Z\", \"tool\": \"leanfinder\", \"query\": \"After a finite extension of a complete discretely valued field the normalization of a flat scheme with smooth generic fibre has geometrically reduced special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"Algebra.IsGeometricallyReduced\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"WeierstrassCurve.reduction\"], \"digest\": \"0122d3b4d5cc6554\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized base change of an arbitrary flat finite type scheme over a complete DVR acquires geometrically reduced fibres after finite field extension",
+   "results": "{\"t\": \"2026-10-24T05:14:34Z\", \"tool\": \"leansearch\", \"query\": \"Normalized base change of an arbitrary flat finite type scheme over a complete DVR acquires geometrically reduced fibres after finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"Algebra.IsGeometricallyReduced\", \"Algebra.Unramified.baseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Algebra.IsGeometricallyReduced.mk\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"c27f96a33e923a32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "grep",
+   "query": "Raynaud|Faltings|reduced.*fib|fib.*reduced",
+   "results": "{\"t\": \"2026-10-24T05:14:35Z\", \"tool\": \"grep\", \"query\": \"Raynaud|Faltings|reduced.*fib|fib.*reduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"cfa3314f73b31206\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Faltings: any flat finite type scheme over a complete discrete valuation ring has after finite fraction field extension a finite normalization of its reduction with geometrically reduced special fibre and geometrically normal generic fibre",
+   "results": "{\"t\": \"2026-10-24T05:14:36Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Faltings: any flat finite type scheme over a complete discrete valuation ring has after finite fraction field extension a finite normalization of its reduction with geometrically reduced special fibre and geometrically normal generic fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"f6cf0c2bfc3cf231\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced fibre theorem for a scheme over a complete trait, allowing nonreduced generic fibre and nonaffine total space",
+   "results": "{\"t\": \"2026-10-24T05:14:37Z\", \"tool\": \"leanfinder\", \"query\": \"Reduced fibre theorem for a scheme over a complete trait, allowing nonreduced generic fibre and nonaffine total space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.Hom.fiber\"], \"digest\": \"1d0bbe85731502e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization gives integral maps and reduced total schemes, not finite extensions producing geometrically reduced special fibres; elliptic-curve good-reduction results impose unrelated Weierstrass hypotheses. The general and the smooth-generic-fibre phrasings were both read."
+  },
+  {
+   "tool": "grep",
+   "query": "Raynaud|Faltings|normalized.*base.change|reduced.*fibre",
+   "results": "{\"t\": \"2026-10-24T06:55:42Z\", \"tool\": \"grep\", \"query\": \"Raynaud|Faltings|normalized.*base.change|reduced.*fibre\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric reducedness predicates, Weierstrass good reduction and preservation under base change do not supply the finite extension and reduced normalized special fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite extension of a complete discretely valued field yields geometrically reduced special fibre of the normalized base change",
+   "results": "{\"t\": \"2026-10-24T06:55:42Z\", \"tool\": \"leansearch\", \"query\": \"A finite extension of a complete discretely valued field yields geometrically reduced special fibre of the normalized base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\"], \"digest\": \"0abd953f7bbf892a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric reducedness predicates, Weierstrass good reduction and preservation under base change do not supply the finite extension and reduced normalized special fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization, Algebra.IsGeometricallyReduced",
+   "results": "{\"t\": \"2026-10-24T06:55:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization, Algebra.IsGeometricallyReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric reducedness predicates, Weierstrass good reduction and preservation under base change do not supply the finite extension and reduced normalized special fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized base change of a flat finite type scheme over a complete discrete valuation ring acquires geometrically reduced fibres after a finite field extension",
+   "results": "{\"t\": \"2026-10-24T06:55:45Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized base change of a flat finite type scheme over a complete discrete valuation ring acquires geometrically reduced fibres after a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"WeierstrassCurve.IsGoodReduction\", \"Algebra.isGeometricallyReduced_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"7cfdd568f1204902\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric reducedness predicates, Weierstrass good reduction and preservation under base change do not supply the finite extension and reduced normalized special fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Faltings reduced fibre theorem after finite extension of complete trait without smoothness or reducedness assumptions",
+   "results": "{\"t\": \"2026-10-24T06:57:25Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud Faltings reduced fibre theorem after finite extension of complete trait without smoothness or reducedness assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.IsUnramifiedAt.of_liesOver\"], \"digest\": \"af130e9ac362f0b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: geometric reducedness predicates, Weierstrass good reduction and preservation under base change do not supply the finite extension and reduced normalized special fibre."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-group-finite-smooth-cover",
+  "date": "2026-10-24",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166: apply Raynaud affineness to the separated flat finite-type generic-image closure; Prasad–Yu Proposition 3.1 supplies the proof. Supporting input to Raynaud affineness: Proposition 3.1, first paragraph, printed p.5; Appendix Corollary A.4, printed p.29, including stability under further Dedekind extensions; the henselian extension with algebraically closed residue field used after Lemma A.9, printed pp.31-32. Use the finite normalization of the reduced base change, not the potentially non-finite ordinary smoothening of an arbitrary model. Supporting input: Conrad Appendix Theorem A.2: normalized base change acquires reduced fibres; complete-trait specialization with no generic smoothness hypothesis.",
+   "via": [
+    "lem-sfb-trait-group-finite-smooth-cover",
+    "lem-sfb-dvr-generic-affine-group-affine",
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-trait-normalized-reduced-fibres",
+  "worker": "stage1",
+  "summary": "Retained the full nonaffine, possibly nonreduced statement. Reused finite inseparable generic preparation and the existing affine Raynaud–Faltings theorem. Proved finite flat normalization over complete traits from Nagata finiteness, then assembled a finite affine cover after a common extension, proving persistence through the DVR normality criterion. One new statement-only field-extension normalization lemma handles possibly reducible geometric generic fibres without an unjustified geometric-integrality assumption.",
+  "blueprint": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166: apply Raynaud affineness to the separated flat finite-type generic-image closure; Prasad–Yu Proposition 3.1 supplies the proof. Supporting input to Raynaud affineness: Proposition 3.1, first paragraph, printed p.5; Appendix Corollary A.4, printed p.29, including stability under further Dedekind extensions; the henselian extension with algebraically closed residue field used after Lemma A.9, printed pp.31-32. Use the finite normalization of the reduced base change, not the potentially non-finite ordinary smoothening of an arbitrary model. Supporting input: Conrad Appendix Theorem A.2: normalized base change acquires reduced fibres; complete-trait specialization with no generic smoothness hypothesis. Current latest blueprint stability proof: generic algebraic-geometric tool input to the open direct-image branch. No imported blueprint ancestor exists for this chain.",
+  "tool_uses": [
+   {
+    "node": "lem-per-complete-dvr-finite-normalization",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-per-componentwise-normalization-affine-charts",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-per-componentwise-normalization-properties",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-per-epp-common-finite-trait-extension",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-pur-finite-inseparable-geometric-reduction",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-sc-reduction-nilradical-nilpotent",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-universally-japanese",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-geonormal-insep",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic algebraic-geometric tool for finite normalization, generic preparation, or common extension in the reduced-fibre argument; it is not a replacement for the six-functor stability route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-complete-dvr-finite-normalization",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-componentwise-normalization-properties",
+  "lem-per-epp-common-finite-trait-extension",
+  "lem-pur-finite-inseparable-geometric-reduction",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-nagata-universally-japanese",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-normalization-geonormal-insep",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-a24073660",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-a24073660 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node and every cited statement, plus Stacks 09IL (more-morphisms) and 0C3N (varieties, the whole proof). Conrad A.2 is not available locally (recorded as WANTED); the proof is an agent assembly in Conrad's order. Dropped-route finding: the item itself is not on the drop list. The four cited lem-per nodes (complete-dvr-finite-normalization, componentwise-normalization-affine-charts, componentwise-normalization-properties, epp-common-finite-trait-extension) are reached from nt-target-* even with the item excluded, through lem-sfb-raynaud-faltings-normalized-reduction and nodal-completed-normalization-model. Each adds 0 nodes to the target closure, and all four are generic DVR and normalization algebra, so their drop-list entries are stale and I accepted them. Batch 5: the flag through raynaud-faltings reaches only lem-trf-flat-tensor-preserves-injection, which is generic module theory and not part of the trace formula or Poincaré duality, so it is accepted. I accepted all 11 tool_uses as generic commutative algebra (Nagata, 04KT, 0BXT, nilpotence, total fraction ring). Steps 1-5 and 7 are correct: torsion-freeness of the reduction via nilpotence, finiteness of the normalization via universally Japanese, flatness and the generic fibre via ρ lying in no minimal prime, (X_K)_red=Z_K, Raynaud-Faltings applied to the charts of N_0, the uniqueness clause identifying V, and (H_0)_V=(X_V)_red with the two normalizations agreeing by transitivity. FIX (E5) in step 6: it went from the integral closure inside E_i⊗L straight to the normalization charts. The fix adds that A_i is reduced and Noetherian, that Q(A_i)=Q(A_i[1/π]) because π is a nonzerodivisor, and that the normal ring A_i[1/π] is integrally closed in that ring, so the integral closure is P_i. Text only; no change to uses or statements. New node lem-sfb-geonormal-normalization-field-extension is true: a single denominator s with sB⊆A, flatness over k, B_E finite and normal, and Q(B_E)=Q(A_E) by idempotents. It is not a duplicate: integral-closure-geonormal-scalar-extension needs geometric integrality, reduced-algebraic-normalization-field-change is separable only, and trf normalization-inseparable-base-change needs an integral scheme. It is statement-only, and its form and searches are OK.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteTraitNormalizedReducedFibres",
+  "declaration": "AlgebraicGeometry.exists_completeTrait_normalized_reduced_fibres",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.reducedTraitBaseChange",
+   "AlgebraicGeometry.Scheme.Hom.reducedTraitBaseChangeToBase",
+   "AlgebraicGeometry.Scheme.Hom.normalizedTraitBaseChangeToBase",
+   "AlgebraicGeometry.exists_completeTrait_normalized_reduced_fibres"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteTraitNormalizedReducedFibres.lean",
+  "statement": "theorem exists_completeTrait_normalized_reduced_fibres (D : Type u) [CommRing D] [IsDomain D] [IsDiscreteValuationRing D] [IsAdicComplete (IsLocalRing.maximalIdeal D) D] (F : Type u) [Field F] [Algebra D F] [IsFractionRing D F] (X : Scheme.{u}) (f : X ⟶ Spec (.of D)) [Flat f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ (L : Type u) (_ : Field L) (_ : Algebra F L) (_ : Algebra D L) (_ : IsScalarTower D F L) (_ : IsDiscreteValuationRing (integralClosure D L)), Module.Finite F L ∧ IsAdicComplete (IsLocalRing.maximalIdeal (integralClosure D L)) (integralClosure D L) ∧ IsFractionRing (integralClosure D L) L ∧ Module.Finite D (integralClosure D L) ∧ (IsLocalRing.maximalIdeal (integralClosure D L)).comap (algebraMap D (integralClosure D L)) = IsLocalRing.maximalIdeal D ∧ Flat (f.reducedTraitBaseChangeToBase L) ∧ IsSeparated (f.reducedTraitBaseChangeToBase L) ∧ LocallyOfFiniteType (f.reducedTraitBaseChangeToBase L) ∧ QuasiCompact (f.reducedTraitBaseChangeToBase L) ∧ Flat (f.normalizedTraitBaseChangeToBase L) ∧ IsSeparated (f.normalizedTraitBaseChangeToBase L) ∧ LocallyOfFiniteType (f.normalizedTraitBaseChangeToBase L) ∧ QuasiCompact (f.normalizedTraitBaseChangeToBase L) ∧ IsFinite (f.reducedTraitBaseChange L).fromReducedNormalization ∧ Surjective (f.reducedTraitBaseChange L).fromReducedNormalization ∧ GeometricallyReduced (pullback.snd (f.reducedTraitBaseChangeToBase L) (Spec.map (CommRingCat.ofHom (algebraMap (integralClosure D L) L)))) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra L Ω], ∀ z : ↥(pullback (f.normalizedTraitBaseChangeToBase L) (Spec.map (CommRingCat.ofHom ((algebraMap L Ω).comp (algebraMap (integralClosure D L) L))))), IsDomain ((pullback (f.normalizedTraitBaseChangeToBase L) (Spec.map (CommRingCat.ofHom ((algebraMap L Ω).comp (algebraMap (integralClosure D L) L))))).presheaf.stalk z) ∧ IsIntegrallyClosed ((pullback (f.normalizedTraitBaseChangeToBase L) (Spec.map (CommRingCat.ofHom ((algebraMap L Ω).comp (algebraMap (integralClosure D L) L))))).presheaf.stalk z)) ∧ GeometricallyReduced (pullback.snd (f.normalizedTraitBaseChangeToBase L) (Spec.map (CommRingCat.ofHom (IsLocalRing.residue (integralClosure D L)))))",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bfceb3fe",
+  "group": "O2",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Hypotheses: DVR D complete for its maximal ideal with fraction field F; flat, separated, finite-type X with no extra assumptions. Conclusions: finite L/F with no separability condition; V = integralClosure D L, a complete DVR with fraction field L, finite over D, with comap of maximalIdeal V equal to maximalIdeal D; H = nilradical.subscheme of the base change; N and ν = reducedNormalization and fromReducedNormalization from the recorded dependency; H and N flat, separated and finite type over V; ν finite and surjective; H_L GeometricallyReduced; N_L geometrically normal as all stalks domains and integrally closed after every field extension Ω/L; closed fibre GeometricallyReduced via the residue map. The three abbrevs are canonical constructions, not hollow, and their names are unused elsewhere. lean.statement is verbatim in the file. The node differs from live only in lean. All stmt_dep records match and all imports exist live. No existing duplicate: the Raynaud-Faltings module is the affine input. Universes: everything in u, matching Mathlib's geometrically convention; F in u is harmless. Edge cases covered: empty X, empty special fibre, inseparable extensions. Proof is sorry; docstrings give the source and blueprint id with all 7 proof steps. Second-reading section present but brief and not by a separate agent (note only). No fix, so no compile."
+ }
+}

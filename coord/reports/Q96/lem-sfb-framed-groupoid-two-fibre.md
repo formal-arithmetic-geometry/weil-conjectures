@@ -1,0 +1,55 @@
+# Q96: lem-sfb-framed-groupoid-two-fibre
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-framed-groupoid-two-fibre.json`: statement, split; no Mathlib match. Statement unchanged. Six explicit elementary categorical steps; no new nodes and no Mathlib leaves.
+- `citations.json`: seven verbatim statement quotations, one for every step/node citation.
+- `searches.jsonl`: five actual search records from this attempt. Existing 2026-10-22 Mathlib search records in the item were retained.
+
+## Attachments
+
+None. Searches of `lean/WeilConjectures/` for the exact blueprint tag and for framed objects, two-fibres and homotopy fibres found no declaration stating the item. `PicardTensorFrameCoordinates.lean` concerns tensor coordinates, not this comparison. The supplementary `lean/Sheaf/` search found torsor framed lifts and stack-chart statements, not this abstract result. No Lean was written or compiled.
+
+## WANTED
+
+WANTED: Pikaart--de Jong, *Moduli of curves with non-abelian level structure*, arXiv alg-geom/9501003, Section 2.3.3, for the item's moduli motivation. The named local PDF does not exist. I read the primary PDF online at https://arxiv.org/pdf/alg-geom/9501003, printed pp.9--10 (PDF pp.10--11). Section 2.3.3 defines abelian level structures as sheaf isomorphisms; it does not state the abstract cartesian-assignment lemma of this item. Accordingly the generalized proof is explicitly agent-written. No representability or automorphism theorem from that paper is invoked in this proof. The actual 2-product model is available locally in Stacks.
+
+## What was wrong or changed
+
+The item was an unsplit, agent-formulated prerequisite, with no proof. Its statement is true as written; no STATEMENT-DISPUTED correction was necessary. I retained its original source, statement, statement dependencies, created record and blueprint provenance. I supplied the entire transport-and-arrow argument, including identity and composition of pullbacks, rather than citing the motivating moduli representability theorem or assuming that frames kill automorphisms of the original groupoid. The proof origin now points to the local Stacks 2-product model and clearly says that the frame calculation is by the agent.
+
+The existing `def-sfb-stable-pointed-moduli-groupoids` explicitly defines categories fibred in groupoids, their lifting property, morphisms, 2-products and fibrewise pullbacks. It is therefore a sufficient citation for the model, without using its curve-specific statements. Two existing constant-sheaf coherence statements supply the only sheaf comparison equations not already stipulated in the item's hypotheses. They are declared as generic off-unit tools in `split_report.tool_uses`. Neither is a replacement for a unit step.
+
+The current blueprint was read through `literature/blueprint/latest` (snapshot `main-20261023-1620`), in particular the unit `_section.md` and direct-images proof (3). That proof does not contain the abstract framing comparison; this item is an auxiliary node along the inherited alteration/moduli branch, not a unit key theorem. `blueprint_refs.py ancestor` reports `None`, matching the inherited `blueprint.from.node: null`; its detailed `from.place` and `via` were preserved. Blueprint searches for `framed groupoid` (zero matches) and `frame` (23 matches, unrelated purity frames, traces, conventions, etc.) found no same statement. The global DAG search for 2-fibre products and framing located the parent rigidification theorem, the algebraic-stack fibre-product lemma and the smooth-marking comparison; none can replace the item's elementary computation. The parent depends on this item, so it must not be cited back.
+
+## Searches read
+
+I ran all searches using the prescribed `msearch.py Q96 lem-sfb-framed-groupoid-two-fibre` command. The precise queries and actual hit names are in the item and `searches.jsonl`; all services answered in this attempt. Two semantic phrasings were tried: homotopy fibres of categories of elements, and comma groupoids over their projection. LeanFinder returned `CategoryTheory.groupoidOfElements`, Grothendieck fibre/transport definitions and `grothendieckTypeToCat`; these construct categories or compare Grothendieck and elements constructions but do not identify the framed 2-fibre with frames of a fixed object. I read `Elements.lean` around lines 120--134 and `Grothendieck.lean` around 397--419. Loogle returned `Grpd.piIsoPi` and its projection formula (read `Groupoid/Grpd/Basic.lean` 120--132) and discreteness of a discrete category (read `Groupoid/Discrete.lean` 15--25). LeanSearch returned discrete product/function-category equivalences, `FundamentalGroupoid.punitEquivDiscretePUnit` and the ordinary finite-Galois fibre-functor pullback formula: their types do not assert this result. The extra comma and discrete functor-category candidates likewise have different domains (`Comma/Basic.lean` 504 and `Discrete/Basic.lean` 322). The logged grep for two-pullbacks, homotopy fibres and framed groupoids/objects returned no hits in `CategoryTheory`. `FiberedCategory/HasFibers.lean` describes ordinary chosen fibres, rather than proving this item's sheaf-transport equivalence. No candidate is an exact match or a one-line specialization with all the stated comparison data.
+
+## Not duplicates
+
+No new nodes. Thus there are no new/existing pairs sharing source tags. `lem-sfb-algebraic-stack-fibre-products` proves algebraicity, with hypotheses this item does not have; `lem-sfb-smooth-marking-isomorphism-fibre-comparison` concerns forgetting marked curves. The parent `lem-sfb-smooth-curve-abelian-level-rigidification` contains a specialization of this conclusion, but it cites this item as a prerequisite and also asserts substantial additional geometric facts. None supplies this independent categorical argument.
+
+## Review by Q96
+
+I read Stacks `categories.tex`, Tag 003R (`example-2-fibre-product-categories`), the triples and commuting-square formula at lines 5578--5610, and Tag 0040 (`lemma-2-product-categories-over-C`), lines 6080--6150. Those give the model used by the definition node; the proof here does not import their omitted universal-property checks as an unmentioned theorem. I also read `sites.tex`, Tag 03CB (`lemma-composition-morphisms-sites`), and the complete statements of both cited constant-comparison nodes. Pikaart--de Jong Section 2.3.3 was read only for its motivating notion of a frame. There are no new nodes requiring a separate source review.
+
+Step 1 cites the moduli-groupoid definition solely for the fibrewise triple model and chosen cartesian lifts. I checked the reversal of its comparison orientation explicitly: if the item uses phi:y -> x and psi:z -> x, its arrow equation is psi a = phi. The convention for H is contravariant on vertical arrows, so H(phi)=H(a)H(psi), and F(t)=H(phi)^{-1}lambda has the required source and target. H's identity and composition rules are hypotheses of the item, not conclusions borrowed from a definition.
+
+Step 2 uses that same definition for arrows. The equation for F(a) and the reverse construction a=psi^{-1}phi are displayed, including the frame equation H(a)mu=lambda. The comparison to x forces uniqueness; I checked that this does not require H to be faithful or any object to have trivial automorphisms.
+
+Step 3 constructs an inverse functor on objects and arrows. Its natural isomorphism has component phi. The naturality square is precisely psi a=phi, and the two triangle equations reduce to identity arrows, as written. It cites no general equivalence criterion in place of those data.
+
+Step 4 uses the definition's lifting property to define phi_V by c phi_V=phi b. Its equation for H(b) f^{-1}H(phi) is the item's assumed composition equation applied to that actual square. Multiplying by inverses produces the displayed restriction equality. All maps are on V's etale site after inverse image, and both ends of each frame have the right constant-module source. The same equation covers arrows over f, so this is more than a collection of unrelated fibre equivalences.
+
+Step 5 uses exactly the statements of `lem-weil-pbc-constant-pullback-composition-coherence` and `lem-weil-pbc-constant-pullback-identity-coherence`. Their c has the same direction as k here (constant sheaf to inverse image). Their hypotheses are schemes, arbitrary base morphisms and an abelian group, so they apply to the underlying additive group of A^n without any invertibility, finiteness, smoothness or local constancy hypothesis on H. The composition node explicitly identifies the direct comparison with the successive ones through the inverse-image associator; the identity node explicitly gives identity after the identity comparison. Equality of these module maps can be checked on the underlying abelian sheaf, so no unavailable linear coherence theorem is smuggled into the citation. The quote file contains their complete statements.
+
+Step 6 checks that E and the natural isomorphism also commute with pullback, using the very same defining equation for phi_V. The uniqueness clause of the definition identifies alternative chosen lifts and forces their comparison composites to agree. Thus the conclusion is an equivalence over Sch/T with the specified H(a), including composition, rather than only a fibrewise equivalence. For every use of the definition, citations.json includes both its lifting property and its 2-product paragraph verbatim.
+
+I checked delivery-errors B--E against the resulting files. No new elementary facts, duplicate lemmas, renamed conclusion clauses, hidden unsplit proof inside a new statement, or unrecorded Mathlib searches were introduced. All steps are elementary substitutions, cancellations or explicit functor/isomorphism data; each is under 900 characters, so no step exceeds the long-step threshold. The two non-definitional sheaf identities are cited, not asserted from the definition of inverse image. All seven citations were checked as exact substrings of the live node statements.
+
+Small-case checks: when no frame of H_x exists, any triple would transport to such a frame, so both sides are empty. For n=0 or A the zero ring, existence of a frame is still exactly the isomorphism condition and the same proof works. For a one-object groupoid BG with H constant and trivial G-action, the framed groupoid retains all of G, yet in the two-fibre a comparison phi is part of each triple and a=psi^{-1}phi is the unique arrow; its automorphism group is trivial. This directly tests the assertion that no trivial-automorphism hypothesis is needed. Nontrivial actions use the same displayed transport equation. Empty base schemes require no separate nonemptiness argument. The item never claims frame representability or surjectivity, so no local-freeness hypothesis is missing.
+
+## What could not be finished
+
+Nothing mathematical remains in this split. Independent stage-1 review remains the maintainer's task. The local motivating PDF is WANTED as above; the generalized proof uses available Stacks material and the displayed calculations.

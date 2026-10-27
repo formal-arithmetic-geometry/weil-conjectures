@@ -19,96 +19,64 @@
  ],
  "proof": [
   {
-   "text": "Form the schemes $V=\\coprod_iX_i$ and $R=\\coprod_{i,j}R_{ij}$ using [lem-weil-pbc-scheme-coproduct-family], where $R_{ij}=X_i\\times_{U_i}(U_i\\times_SU_j)$. Its source is projection to $X_i$; its target is projection to $X_j$ after $\\theta_{ij}$. The source on $R_{ij}$ is a base change of $U_j\\to S$, and the target is, up to $\\theta_{ij}$, a base change of $U_i\\to S$. Thus they are etale by [lem-weil-pbc-etale-scheme-base-change]. Their coproducts are etale: the summands are open and cover the source, so the affine-local definition of [def-weil-etale-morphism] checks this on each summand. The map $R\\to V\\times_SV$ is a monomorphism: two arrows with specified source and target have the same indices locally, the same two base maps to $U_i,U_j$, and the same $X_i$-map, hence the same map to $R_{ij}$ by the fibre-product universal property. The identity along the diagonal gives reflexivity. The cocycle with indices $(i,j,i)$ gives the inverse, and the general cocycle gives composition. These checks apply after decomposing any test scheme into the opens on which the summand indices are fixed. Consequently this is an etale equivalence relation over $S$.",
+   "text": "Use [lem-trf-polarized-scheme-charts] to obtain Y over S with chart isomorphisms over U_i inducing precisely theta. This step gives only the scheme, not its global ordinary module.",
    "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "def-weil-etale-morphism",
-    "def-pc-fibre-product"
+    "lem-trf-polarized-scheme-charts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WW (theorem-presentation), construction of its input from the given datum; affine-local etaleness and the stated identity/cocycle conditions."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-trf-etale-relation-quotient] to the relation just constructed. Write $F=V/R$ for its algebraic-space quotient and $q:V\\to F$ for the etale surjective atlas. It has $V\\times_FV=R$. Since both arrows of $R$ are over $S$, the quotient is an algebraic space over $S$. All subsequent fibre products and line modules on $F$ use [def-trf-algebraic-space].",
+   "text": "Apply [lem-trf-polarized-module-on-charts] on this fixed Y. Its invertible module, chart module isomorphisms and transition equations form a PolarizedDescentPair d with IsPolarizedDescentRealization D d.",
    "uses": [
-    "lem-trf-etale-relation-quotient",
-    "def-trf-algebraic-space"
+    "lem-trf-polarized-module-on-charts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tags 02WW (theorem-presentation) and 02WV (lemma-when-it-works-it-works)."
-   }
+   "elementary": false
   },
   {
-   "text": "The map $X_i\\to F$ and its structure map to $U_i$ give $a_i:h_{X_i}\\to F\\times_Sh_{U_i}$. To prove $a_i$ invertible, fix a test scheme $T\\to U_i$ and a section $z\\in F(T)$. By [lem-trf-etale-relation-quotient], $z$ lifts etale locally on $T$ to $V$. Refining by the open summands of $V$, write each lift as $x_j:T_a\\to X_j$, and let $u_j:T_a\\to U_j$ be its base. Apply $\\theta_{ji}$ with the pair $(u_j,u_i)$ to get $y_a:T_a\\to X_i$. On $T_a\\times_TT_b$, the two lifts form a section of $R=V\\times_FV$, so they are related by the specified $\\theta_{jk}$. The cocycle gives $\\theta_{ki}\\theta_{jk}=\\theta_{ji}$ and hence equality of the resulting maps to $X_i$. By [lem-weil-pbc-small-etale-representable-presheaf-sheaf], applied on $T_{\\mathrm{et}}$ to the scheme $T\\times_{U_i}X_i$, these maps glue uniquely to $y:T\\to X_i$. Conversely, two maps to $X_i$ with the same $F$-image give an $R_{ii}$-arrow whose two base maps to $U_i$ agree. This arrow restricts along the diagonal, where $\\theta_{ii}$ is the identity, so the maps are equal. The construction commutes with restriction of $T$ and is inverse to $a_i$. Thus $F\\times_SU_i\\simeq X_i$, with overlap identifications exactly $\\theta_{ij}$.",
+   "text": "For any candidate pair d, base change the covering U_i to d.Y and transport it through the chart isomorphisms. It is an fppf covering by [lem-trf-fppf-covering-base-change]. Representables are sheaves by [lem-weil-pbc-fpqc-representable-descent] and fppfTopology_le_fpqcTopology. Thus chartMap_ext detects equality of arbitrary maps from d.Y, with no module hypotheses.",
    "uses": [
-    "lem-trf-etale-relation-quotient",
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WW, presentation kernel pair; explicit cocycle calculation and representable sheaf gluing."
-   }
+   "elementary": false
   },
   {
-   "text": "The family $X_i\\to F$ is an etale covering: it is the atlas $V\\to F$ restricted to its open summands. Under $X_i\\times_FX_j=R_{ij}$, the given $\\lambda_{ij}$ is an isomorphism from the pullback of $L_j$ by the target to the pullback of $L_i$ by the source. Its diagonal identity and triple-overlap cocycle are precisely the hypotheses of [lem-trf-algebraic-space-invertible-descent]. That lemma therefore gives a line module $L$ on $F$ and identifications with the ordinary invertible modules $L_i$ inducing every specified $\\lambda_{ij}$.",
+   "text": "For two realizations d,d\\prime, consider test maps a:T->X_i and b:T->X_j with equal images in d.Y. Their base images in S agree. The pullback lift r into the (i,j) overlap has first X coordinate a and second U coordinate f_j b. The theta equation of d shows that its transported X_j coordinate has the same Y coordinate as b, and theta_over_left gives the same U_j coordinate. These two coordinates determine an X_j map by the pullback chart, hence the transported coordinate equals b. The theta equation of d\\prime now gives a q_i\\prime=b q_j\\prime. Representable-sheaf amalgamation therefore glues the chart maps uniquely to a:d.Y->d\\prime.Y. This is the explicit Lean proof existsUnique_chartMap.",
    "uses": [
-    "lem-trf-algebraic-space-invertible-descent"
+    "def-trf-polarized-scheme-etale-descent-datum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fpqc-representable-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-descent.tex",
-    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), rank-one case, and Tag 060X (lemma-finite-locally-free-descends)."
-   }
+   "elementary": false
   },
   {
-   "text": "Use [lem-trf-algebraic-space-ample-local] for $F\\to S$, the line module $L$, and the given etale covering $U_i\\to S$. The previous identifications make its base changes exactly $(X_i,L_i)$, and the restriction of $L_i$ to every inverse image of an affine open in $U_i$ is ample by hypothesis. Hence $F\\to S$ is representable. Testing representability on $S\\to S$ shows that $F$ itself is a scheme $X$. The restriction of $L$ is an ordinary invertible module on $X$ by the scheme-site interpretation in [lem-trf-algebraic-space-invertible-descent]. This gives the required pair and all specified descent identifications.",
+   "text": "Repeat the scheme gluing with the realizations reversed. Both composites equal identities after every chart; chartMap_ext proves both inverse identities. The same chart test proves that the resulting scheme isomorphism is over S. These are categorical composition and pullback uniqueness calculations.",
    "uses": [
-    "lem-trf-algebraic-space-ample-local",
-    "lem-trf-algebraic-space-invertible-descent"
+    "def-trf-polarized-scheme-etale-descent-datum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-descent.tex",
-    "place": "Tag 0D3C (lemma-descending-property-ample), together with Divisors on Spaces Tag 0D36 (lemma-relatively-ample-local)."
-   }
+   "elementary": true
   },
   {
-   "text": "Let $(X,L)$ and $(X',L')$ be two pairs with the specified identifications. Over $X\\times_SU_i\\simeq X_i$ define the map to $X'$ by the prescribed identification with $X'\\times_SU_i$, followed by projection. The scheme cocycle says these maps agree on every double overlap. This family is an etale covering of $X$ by [lem-weil-pbc-etale-covering-base-change], so [lem-weil-pbc-small-etale-representable-presheaf-sheaf] gives a unique scheme map $b:X\\to X'$. Interchanging the two pairs gives an inverse: each composite restricts to the identity on every member of the cover, hence equals the identity by uniqueness in that same sheaf condition. The prescribed local isomorphisms $b^*L'\\simeq L$ agree on the overlaps because both pairs induce $\\lambda_{ij}$. Full faithfulness in [lem-trf-algebraic-space-invertible-descent] glues them to a unique module map, and glues their inverses; the composites are identities by faithfulness. Thus there is exactly one compatible isomorphism of pairs.",
+   "text": "Apply [lem-trf-polarized-line-iso-descent] to the fixed scheme isomorphism to obtain its unique compatible line isomorphism, forming the required pair isomorphism. For any other pair isomorphism, scheme gluing uniqueness first identifies its scheme component. After substituting that equality, module uniqueness identifies its module component. The remaining fields are proofs and agree by proof irrelevance.",
    "uses": [
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-    "lem-trf-algebraic-space-invertible-descent"
+    "lem-trf-polarized-line-iso-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms), etale special case, and spaces-descent.tex Tag 04W8 for module full faithfulness."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "def-weil-etale-morphism",
+  "lem-trf-polarized-scheme-charts",
+  "lem-trf-polarized-module-on-charts",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-trf-polarized-scheme-etale-descent-datum",
   "def-pc-fibre-product",
-  "lem-trf-etale-relation-quotient",
-  "def-trf-algebraic-space",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-  "lem-trf-algebraic-space-invertible-descent",
-  "lem-trf-algebraic-space-ample-local",
-  "lem-weil-pbc-etale-covering-base-change"
+  "lem-trf-polarized-line-iso-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/spaces.tex",
-  "place": "Construction from Tag 02WW, followed by spaces-descent.tex Tags 04W8 and 0D3C; explicit recovery of each chart and uniqueness."
+  "document": "literature/stacks-project/descent.tex",
+  "place": "B7: polarized effectivity split into scheme charts and module effectivity; Tag 023Q is implemented directly for scheme maps with an explicit overlap lift; Tag 023T supplies the remaining module-isomorphism bridge. Spaces Tags 02WW/02WV and Spaces Descent Tags 04W8/0D3C remain in the chart-effectivity subproblem."
  },
  "mathlib_searches": [
   {
@@ -242,49 +210,28 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-polarized-scheme-etale-descent",
   "worker": "stage1",
-  "summary": "Construct the etale equivalence relation, form its algebraic-space quotient, recover each chart by the explicit cocycle calculation, descend the line module, and use etale-local ampleness to obtain a scheme. Prove uniqueness by scheme sheaf gluing and module full faithfulness. Statement unchanged.",
-  "blueprint": "Realizes the polarized scheme descent input recorded in the existing blueprint.from.place of lem-trf-local-term-locality; it supports the descent sentence through the existing fine-log and chart-construction ancestry.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-    "why": "Generic representable-sheaf gluing, needed to recover charts and prove uniqueness; this unit supplies no substitute."
-   }
-  ]
+  "summary": "Repair of the renewed live/side-DAG landing return: rebase the retained three-node extraction onto the current DAG record, preserving current statement, statement dependencies and all maintainer metadata. Reread all assembly dependencies and verify all eight literal statement quotations. Step 4 now takes its covering and both overlap projections directly from step 3 and matches the direction, diagonal identity and triple cocycle of lambda to the invertible-descent statement. Six new same-tag comparisons against four newly present nodes were read and distinguished in the report. All extracted argument material and genuine search results are retained.",
+  "blueprint": "Realizes the polarized scheme descent input recorded in the existing blueprint.from.place of lem-trf-local-term-locality; it supports the descent sentence through the existing fine-log and chart-construction ancestry. The former steps 1, 3, 6 are now the three extracted nodes; steps 4 and 5 retain their earlier arguments verbatim; step 2 retains its relative quotient argument with the current Sch/S interface explicit.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q81-5a1f6a429",
-  "group": "Q81",
+  "reviewer": "NT-cc-Q98-e3a6406b8",
+  "group": "Q98",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-5a1f6a429 (reviewer sub-agent of L); spot-checked: Read in full: the item, its six steps and all four new nodes, every cited statement, and the Stacks sources at the cited places (02WW, 02WV, 0D3C, 0D31, 0D36, 01VH; tag labels of 04W8, 060X, 025Y, 03G7, 023Q, 05VG, 0B8Q and 0409 checked). The item statement is unchanged and true: it is étale descent of schemes with a relatively ample invertible module. Step 1 checked: s and t are étale base changes, the relation is a monomorphism because theta_ij lies over U_ij, and reflexivity, symmetry and transitivity follow from the identity on the diagonal and the cocycle. Step 3 checked: the chart recovery from the kernel pair and the cocycle is correct, and injectivity comes from theta_ii being the identity on the diagonal. Steps 4 to 6 match the hypotheses of the new lemmas, and the uniqueness argument is sound. No duplicate exists anywhere in the DAG or the blueprint, no new node restates a clause of the item (D1), the unit route is respected, and nothing cites SGA. Tool use lem-weil-pbc-small-etale-representable-presheaf-sheaf accepted as generic gluing of representable sheaves. Two B3 repairs to new statement-only nodes: (1) lem-trf-etale-relation-quotient now cites def-weil-pbc-sheafification and adds it to stmt_deps; (2) lem-trf-algebraic-space-ample-local pulled back M along non-étale maps, which def-trf-algebraic-space does not define, and called étale-site line modules ample without translating them to Zariski invertible modules. It is restated so that every pullback is along an étale map and the Zariski/étale identification is explicit; it keeps the representability conclusion the item uses and remains a special case of 0D31/0D36. Item unchanged; no node dropped.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-e3a6406b8 (reviewer sub-agent of L); spot-checked: I read in full the item, all three new nodes, every cited statement, and the Stacks sources 02WW (spaces l.1603) and 0D3C (spaces-descent l.2125). I checked the labels of 02WV, 023Q, 04W8, 0D36 and 060X in tags. Delta from the previously PASSed head 1e1c10ce: the three new nodes are byte-identical. In the item, the statement, stmt_deps, proof_deps and lean record are unchanged; only the step-4 text and the split_report changed. The new step 4 takes the jointly surjective etale cover {X_i→F} and the overlaps X_i×_F X_j = R_ij with projections p_i and p_jθ_ij from the chart node, which states both as conclusions. It drops the old remark about the atlas restricted to its open summands, so no argument is lost. The cited statements are unchanged from the earlier snapshot. Mathematics, node by node. Relation node: the legs are etale base changes of U_j→S. (s,t) is a monomorphism because θ swaps the base factors. The relation is reflexive and symmetric because θ_ii = id on the diagonal and pr_13 lands in the diagonal on (i,j,i) points; it is transitive by the cocycle. Tested on the identity cover, I=∅, and a singleton non-monomorphic cover. Chart node: a_i is injective via R_ii over the diagonal. It is surjective via an etale-local lift moved to X_i by θ_ji, using qs=qt, with the unique lifts glued as sections of a sheaf. The kernel pair comes from coproduct-compatible fibre products. Gluing node: the scheme maps glue by 023Q, the module maps by 04W8 full faithfulness, and isomorphisms are local. Item steps: step 2 gets all its hypotheses from the relation node. Step 4 matches λ_ij with α_ij under X_i×_F X_j = R_ij, and the diagonal and triple-overlap conditions match. Step 5 applies ample-local with Y=S and F_i≅X_i. Step 6 gives uniqueness through the gluing node. Re-split note: base steps 1, 3 and 6 are the three comparable self-contained nodes, and the item is a short assembly that no node restates. I searched for duplicates with rg -L. The four nodes newly present on the base (a1-fppf-kernel-pair-quotient-descent, sfb-etale-affine-pinching-descent, a1-space-invariant-open-quotient and sfb-etale-local-moduli-gluing) are not duplicates. Neither are galois-fpqc-morphisms-descend (scheme maps only, singleton cover), trf-fppf-scheme-data-sheaf-gluing or def-trf-polarized-scheme-etale-descent-datum. Unit sk-i-curve-zero; no SGA. Advisory: the item's merge-owned tool_uses entry lem-weil-pbc-small-etale-representable-presheaf-sheaf is stale, and I accept it as generic gluing of representable sheaves. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.PolarizedSchemeEtaleDescent",
   "declaration": "AlgebraicGeometry.exists_polarizedScheme_of_etaleDescent",
   "declarations": [
-   "AlgebraicGeometry.polarizedOverlap",
-   "AlgebraicGeometry.polarizedOverlapX",
-   "AlgebraicGeometry.polarizedOverlapUi",
-   "AlgebraicGeometry.polarizedOverlapUj",
-   "AlgebraicGeometry.polarizedOverlapDiagonal",
-   "AlgebraicGeometry.polarizedModuleCongr",
-   "AlgebraicGeometry.polarizedPullIso",
-   "AlgebraicGeometry.polarizedPullLine",
-   "AlgebraicGeometry.polarizedTensorIdentity",
-   "AlgebraicGeometry.PolarizedSchemeEtaleDescentDatum",
-   "AlgebraicGeometry.PolarizedDescentChart",
-   "AlgebraicGeometry.PolarizedDescentPair",
-   "AlgebraicGeometry.polarizedChartMap",
-   "AlgebraicGeometry.polarizedChartLine",
-   "AlgebraicGeometry.IsPolarizedDescentRealization",
-   "AlgebraicGeometry.PolarizedDescentPairIso",
    "AlgebraicGeometry.exists_polarizedScheme_of_etaleDescent"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/PolarizedSchemeEtaleDescent.lean",
@@ -302,5 +249,26 @@
   "result": "pass",
   "note": "Audited the immutable node, dependencies, source references, Lean module, docstrings, edge cases, route-pivot compliance, and reports. scompile.py and deliver2.py dry-run both passed; review.md records all checks and no findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23251",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T081113-L-1815856",
+  "kind": "interface",
+  "note": "independent cc review: 16 relocated defs in PolarizedSchemeEtaleDescentData vs published item (verbatim); item theorem header vs clone (identical); 3 new sorried statements vs their nodes and the item conclusion (true, weaker); direct importer PolarizedFineLogEtaleDescent compiled against the delivery (OK); item node fields vs clone"
+ }
 }

@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-relative-pseudocoherence-local-on-source",
+ "kind": "statement",
+ "title": "Relative pseudo-coherence is local on the source",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes which is locally of finite type [def-pc-scheme, def-pc-morphism-conventions], let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], let $m\\in\\mathbf Z$, and let $X=\\bigcup_{k\\in I}X_k$ be a covering by open subschemes, with an arbitrary index set $I$. For each $k$ let $f_k=f|_{X_k}:X_k\\to S$ and let $E|_{X_k}=L\\iota_k^*E$ be the derived pullback [def-pc-derived-pullback] along the inclusion $\\iota_k:X_k\\to X$. If, for every $k$, $E|_{X_k}$ is $m$-pseudo-coherent relative to $S$ with respect to $f_k$ [def-sfb-relative-pseudo-coherent-complex], then $E$ is $m$-pseudo-coherent relative to $S$ with respect to $f$. Consequently, if every $E|_{X_k}$ is pseudo-coherent relative to $S$, then so is $E$. No quasi-compactness of $X$, $S$ or $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UJ, lemma-relative-pseudo-coherence-characterize: (1) => (2) for each E|_{X_k}, then (2) => (1) for E using an affine open covering of each f^{-1}(V_i) by affines contained in some X_k; this is the locality used in the first paragraph of the proof of Tag 0CSL ('show that K is pseudo-coherent relative to A in a neighbourhood of x and this will prove the lemma')."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-sfb-relative-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Fix $m$. By [lem-weil-pbc-affine-opens-basis], choose an affine open cover $S=\\bigcup_{a\\in A}V_a$. For each $a,k$, let $\\mathcal U_{ak}$ be the set of all affine opens of $X$ contained in $X_k\\cap f^{-1}(V_a)$. These form a set, since opens are subsets of the underlying set of $X$. They cover that intersection: for any point in it, the affine-basis statement supplies such a neighbourhood. Since the $X_k$ cover $X$, the family indexed by all pairs $(k,U)$ with $U\\in\\mathcal U_{ak}$ covers $f^{-1}(V_a)$. No intersection of affine opens is asserted to be affine.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UJ, lemma-relative-pseudo-coherence-characterize, affine-cover characterization; schemes.tex Tag 01IT, lemma-basis-affine-opens"
+   }
+  },
+  {
+   "text": "The restriction $f_k=f\\circ\\iota_k$ is locally of finite type [def-pc-morphism-conventions, def-weil-finite-type-morphism], as the hypothesis on $f_k$ presupposes: for an affine open $V=\\operatorname{Spec}A$ of $S$, cover $f^{-1}(V)$ by affine opens $\\operatorname{Spec}B$ with $B$ a finitely generated $A$-algebra; the principal opens $D(g)\\subset\\operatorname{Spec}B\\cap X_k$ cover $f_k^{-1}(V)$, and $B_g=B[1/g]$ is generated over $A$ by the generators of $B$ and $1/g$. For every $a,k$ and $U\\in\\mathcal U_{ak}$, apply [lem-sfb-relative-pseudocoherence-all-affine-charts] to the assumed relative $m$-pseudo-coherence of $E|_{X_k}$ for $f_k:X_k\\to S$, with affine opens $U\\subset X_k$ and $V_a\\subset S$. It supplies a closed immersion $j_{akU}:U\\hookrightarrow\\mathbf A^{n_{akU}}_{V_a}$ and says that $R(j_{akU})_*((E|_{X_k})|_U)$ is $m$-pseudo-coherent. Here $(E|_{X_k})|_U=E|_U$: for an open inclusion $h$, $\\mathcal O_U=h^{-1}\\mathcal O_X$, so the formula in [def-pc-derived-pullback] reduces to ordinary termwise restriction (derived tensor with the unit ring sheaf is the identity); restriction through two nested opens is the direct restriction. Thus the displayed pushforward is $R(j_{akU})_*(E|_U)$.",
+   "uses": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "def-pc-derived-pullback",
+    "def-pc-morphism-conventions",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UJ, implication (1) to (2); Tag 09VC, lemma-relatively-pseudo-coherent, existence of an affine-space embedding"
+   }
+  },
+  {
+   "text": "The affine base cover $\\{V_a\\}$, the source covers $\\{U\\}_{(k,U)}$ of step 1, and the embeddings with the pushforward property of step 2 are exactly the witnesses in [def-sfb-relative-pseudo-coherent-complex]. They therefore prove that $E$ is $m$-pseudo-coherent relative to $S$. The witnesses on different opens need no transition maps: the definition asks only for their existence.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UI, definition-relative-pseudo-coherence, clause (1)"
+   }
+  },
+  {
+   "text": "If every $E|_{X_k}$ is pseudo-coherent relative to $S$, then for each integer $m$ every restriction is relatively $m$-pseudo-coherent, by [def-sfb-relative-pseudo-coherent-complex]. Applying steps 1--3 separately for this $m$ proves the relative $m$-condition for $E$. Quantifying over $m$ gives relative pseudo-coherence of $E$. Covers and embeddings may vary with $m$, as the definition permits; neither a finite subcover nor a common cohomological bound is required.",
+   "uses": [
+    "def-sfb-relative-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09UI, definition-relative-pseudo-coherence, clause (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "def-pc-derived-pullback",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-pc-morphism-conventions",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09UJ, lemma-relative-pseudo-coherence-characterize, implication (1) to (2), followed by the covering definition in Tag 09UI; this justifies the neighbourhood reduction at the start of Tag 0CSL, lemma-characterize-pseudo-coherent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -il \"pseudo.?coherent\" Mathlib/ (mathlib of ~/weil-conjectures-sheaf/lean/.lake/packages)",
+   "results": "0 files",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has no notion of (relative) pseudo-coherent complex on schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"RelativelyPseudoCoherent|relPseudoCoherent|IsPseudoCoherent\" Mathlib/",
+   "results": "0 files",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"IsLocalAtSource\" Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "results": "Basic.lean:224 IsLocalAtSource for morphism properties of schemes only",
+   "date": "2026-10-23",
+   "verdict": "no match: locality on the source is stated for morphism properties, not for a property of objects of D(O_X) relative to a base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence of a complex of sheaves on schemes is local on the source for an arbitrary open cover",
+   "results": "{\"t\": \"2026-10-23T14:57:03Z\", \"tool\": \"leanfinder\", \"query\": \"Relative m pseudo coherence of a complex of sheaves on schemes is local on the source for an arbitrary open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtSource.of_openCover\", \"AlgebraicGeometry.topologically_isZariskiLocalAtSource'\", \"AlgebraicGeometry.topologically_isLocalAtSource'\", \"AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsLocalAtTarget.of_openCover\", \"AlgebraicGeometry.IsLocalAtSource.mk'\"], \"digest\": \"dd945023f40ee513\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?[Cc]oher|[Rr]elativ.*[Cc]oher",
+   "results": "{\"t\": \"2026-10-23T14:59:52Z\", \"tool\": \"grep\", \"query\": \"pseudo.?[Cc]oher|[Rr]elativ.*[Cc]oher\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"be82cc6a85b0e1b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative m pseudo coherence on schemes can be checked on an open cover of the source",
+   "results": "{\"t\": \"2026-10-23T14:59:53Z\", \"tool\": \"leansearch\", \"query\": \"Relative m pseudo coherence on schemes can be checked on an open cover of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtSource.of_openCover\", \"AlgebraicGeometry.IsLocalAtTarget.of_openCover\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtSource.of_openCover\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_openCover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover\"], \"digest\": \"9dc6cf4760cba55a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T14:59:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oher|[Ss]trictly.?[Pp]erfect",
+   "results": "{\"t\": \"2026-10-23T15:02:48Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo.?[Cc]oher|[Ss]trictly.?[Pp]erfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complex is m pseudocoherent relative to a base if on every pair of affine open subsets its pushforward under a closed immersion into relative affine space is m pseudocoherent",
+   "results": "{\"t\": \"2026-10-23T15:02:49Z\", \"tool\": \"leanfinder\", \"query\": \"A derived complex is m pseudocoherent relative to a base if on every pair of affine open subsets its pushforward under a closed immersion into relative affine space is m pseudocoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.HasAffineProperty\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.affineLocally\", \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\"], \"digest\": \"6929061ae3c7d725\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative m pseudocoherence is equivalent to the affine closed immersion test for every source affine open mapping into a target affine open",
+   "results": "{\"t\": \"2026-10-23T15:04:52Z\", \"tool\": \"leansearch\", \"query\": \"Relative m pseudocoherence is equivalent to the affine closed immersion test for every source affine open mapping into a target affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.targetAffineLocally\", \"AlgebraicGeometry.affineLocally_iff_forall_isAffineOpen\", \"AlgebraicGeometry.sourceAffineLocally\", \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.affineLocally\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\"], \"digest\": \"883fb33e63d7a7d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-23T15:04:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned generic locality/affine-chart morphism properties do not state relative pseudo-coherence of a derived object; the sole broad grep hit is relativeGluingData for quasi-coherent algebras, and the pseudo-coherent/strictly-perfect grep and Loogle queries have no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-pseudocoherent-tensor-relative-criterion",
+  "date": "2026-10-23",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent). Supporting argument in Tag 0CSL: first paragraph of the proof, reduction to a neighbourhood of x; locality of relative pseudo-coherence, Tag 09UJ, lemma-relative-pseudo-coherence-characterize.",
+   "via": [
+    "lem-sfb-pseudocoherent-tensor-relative-criterion",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-pseudocoherence-local-on-source",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused the newly available all-affine-chart criterion rather than duplicating Tag 09UJ; refined the given arbitrary source cover by affine opens over each affine base open, obtained the required embedding witnesses on each, and assembled exactly the relative-definition data. Wrote out nested derived open restriction and the all-m consequence. No new nodes, no Lean attachment, no finite-cover or quasi-coherence assumption.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) through the recorded perfect-test/Knudsen cohomology-and-base-change chain, specifically the neighbourhood-to-global reduction in 0CSL. Read the current latest blueprint direct-images proof and unit. The ancestor command returns None; retain the inherited null ancestor and precise from.place/via. Searches for relative pseudo and 09UJ found no matching blueprint node. No unit or chapter route change."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-c30d5444c",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-c30d5444c (reviewer sub-agent of L); spot-checked: Read the item and its 4 steps in full, together with the cited nodes lem-weil-pbc-affine-opens-basis, lem-sfb-relative-pseudocoherence-all-affine-charts, def-pc-derived-pullback and def-sfb-relative-pseudo-coherent-complex. Checked against the sources: Stacks 09UJ with its proof, 09UI (definition-relative-pseudo-coherence) and 01IT (schemes lemma-basis-affine-opens). The statement is correct and unchanged; no qc/qs/QCoh hypothesis is needed. Edge cases checked: empty X, S or cover; infinite covers; non-quasi-separated X; E=0; arbitrary m. Step 1 builds the affine refinement from the 01IT Mathlib leaf; as a Mathlib leaf it is a tool, so no tool_uses entry is needed. Step 2 applies 09UJ (1)=>(2) through the same-unit all-affine-charts node; nested open restriction for open immersions is elementary. Steps 3-4 assemble the existential witnesses of the definition, with covers allowed to depend on m. proof_deps equals the union of uses. There are 0 new nodes and no duplicates: rg -L for 09UI/09UJ/09VC/09UU and 'pseudo-coherent relative' finds no other source-locality node. No SGA use. One fault fixed: the step-2 hypothesis that f_k=f|X_k is locally of finite type was argued only in the report. I added a sentence (principal-open refinement, B_g finitely generated) citing def-pc-morphism-conventions and def-weil-finite-type-morphism, and added both to step-2 uses and proof_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-relative-pseudocoherence-local-on-source.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativePseudoCoherenceLocalOnSource",
+  "declaration": "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_of_iSup_eq_top",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.isMPseudoCoherentRelativeTo_of_iSup_eq_top",
+   "AlgebraicGeometry.Scheme.isPseudoCoherentRelativeTo_of_iSup_eq_top"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativePseudoCoherenceLocalOnSource.lean",
+  "statement": "theorem isMPseudoCoherentRelativeTo_of_iSup_eq_top [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (m : ℤ) (E : schemeDerivedCategory X) {I : Type v} (U : I → X.Opens) (hU : iSup U = ⊤) (hE : ∀ k : I, IsMPseudoCoherentRelativeTo ((U k).ι ≫ f) m ((derivedPullback (U k).ι).obj E)) : IsMPseudoCoherentRelativeTo f m E",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1b3ce685",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 09UJ/09UI clause by clause: LocallyOfFiniteType f, arbitrary E in schemeDerivedCategory X, m : ℤ, arbitrary {I : Type v} open cover with iSup U = ⊤, restricted maps (U k).ι ≫ f, recorded derivedPullback (U k).ι, dependency IsMPseudoCoherentRelativeTo; separate every-degree theorem via IsPseudoCoherentRelativeTo. No extra hypotheses or universe coupling. Edge cases (empty I/X/S, infinite cover, E=0, all m) covered. lean.statement matches file verbatim; node copy differs from live only in the lean record; no name clash in live trees. Sorry proofs only; docstrings carry source place, blueprint tag and proof steps; report has both required sections; no new definitions or stmt_deps; no pro-etale content. Not recompiled (no change); relied on worker scompile and deliver2 --no-push OK."
+ }
+}

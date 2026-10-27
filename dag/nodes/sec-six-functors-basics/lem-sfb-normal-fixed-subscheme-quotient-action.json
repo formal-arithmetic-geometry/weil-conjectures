@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-normal-fixed-subscheme-quotient-action",
+ "kind": "statement",
+ "title": "The quotient group acts on the fixed subscheme of a normal subgroup",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $G,Q$ be affine finite-type $k$-group schemes [def-sc-group-scheme, def-weil-finite-type-morphism], let $i:N\\hookrightarrow G$ be a closed normal subgroup scheme [def-sc-group-scheme-subgroup], and let $q:G\\to Q$ be a homomorphism representing the fppf quotient $G/N$ in the sense of [def-sfb-solvable-group-structure]: $q$ is flat, surjective and locally of finite presentation and $i$ identifies $N$ with its scheme-theoretic kernel. Let $X$ be a separated finite-type $k$-scheme, where separated means its diagonal is a closed immersion [def-weil-proper-morphism, def-weil-closed-immersion], and let $a:G\\times_kX\\to X$ be an action, meaning $a(1,x)=x$ and $a(g,a(g',x))=a(gg',x)$ as morphism identities. Products are scheme fibre products [def-pc-fibre-product]. Let $j:Y=X^N\\hookrightarrow X$ be the closed subscheme representing universal $N$-fixed points supplied by [lem-sfb-universal-fixed-subscheme]: for every commutative $k$-algebra $A$, $Y(A)$ consists of the $x\\in X(A)$ for which $a_{A'}(i(n),x_{A'})=x_{A'}$ for every commutative $A$-algebra $A'$ and $n\\in N(A')$. There exists a unique $k$-scheme action $b:Q\\times_kY\\to Y$ satisfying\n$$j\\circ b\\circ(q\\times\\mathrm{id}_Y)=a\\circ(\\mathrm{id}_G\\times j).$$\nNo smoothness or reducedness assumption on $G,N,Q,X$ is imposed, and $X$ need not be proper.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 7.1, printed pp.138–139, and the normal-series induction in Theorem 16.51, printed p.343. The quotient-action step implicit there is expanded by representable descent: Stacks Tag 023Q, descent.tex, lemma-fpqc-universal-effective-epimorphisms."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-solvable-group-structure",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "lem-sfb-universal-fixed-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "First record the covers needed for descent. The given flat, surjective, locally finitely presented map $q$ is a singleton fppf covering by [def-pc-fppf-site]. Every base change of it is fppf by [lem-trf-fppf-covering-base-change]. Such a covering is fpqc: for each affine open $V$ in its target, base change to $V$ and apply [lem-pc-fppf-affine-refinement]; its finitely many affine opens in the source have images covering $V$, exactly the second condition of [def-weil-pbc-fpqc-covering], while flatness is already part of fppf. In particular $p=q\\times\\mathrm{id}_Y:G\\times_kY\\to Q\\times_kY$ is fpqc. So are $q\\times\\mathrm{id}_{Q\\times Y}$ and $\\mathrm{id}_G\\times q\\times\\mathrm{id}_Y$, used successively to check associativity.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tags 021M (definition-fppf-covering), 021O (lemma-fppf), 021P (lemma-fppf-affine); the finite-affine refinement verifies the definition of fpqc, as in Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc)."
+   }
+  },
+  {
+   "text": "Put $c=a\\circ(\\mathrm{id}_G\\times j):G\\times_kY\\to X$. For every $k$-algebra $A$, $g\\in G(A)$, $y\\in Y(A)$, every $A$-algebra $A'$ and $n\\in N(A')$, normality [def-sc-group-scheme-subgroup] gives $g_{A'}^{-1}i(n)g_{A'}\\in i(N(A'))$. Thus the action identities and universal fixedness give\n$$i(n)\\cdot(g_{A'}\\cdot j(y_{A'}))=g_{A'}\\cdot((g_{A'}^{-1}i(n)g_{A'})\\cdot j(y_{A'}))=g_{A'}\\cdot j(y_{A'}).$$\nThese are morphism identities: restrict the domain $N\\times G\\times Y$ to any affine open and take its tautological $A$-point; equality on these opens implies equality by [lem-weil-pbc-scheme-morphism-gluing]. Apply the final, arbitrary-test-scheme factorization clause of [lem-sfb-universal-fixed-subscheme] to $W=G\\times Y$ and $u=c$, for the restricted $N$-action on $X$. It yields a morphism $\\alpha:G\\times Y\\to Y$ with $j\\alpha=c$. The factorization is unique: $j$ is injective on all algebra-valued points by the same node, hence equality after $j$ implies equality on affine charts and then globally by gluing.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-universal-fixed-subscheme",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.1, printed pp.138–139, applied to the N-action; conjugation calculation expanding the normal-series argument of Theorem 16.51, printed p.343."
+   }
+  },
+  {
+   "text": "The same injectivity after $j$ shows $\\alpha(1,y)=y$ and $\\alpha(g,\\alpha(h,y))=\\alpha(gh,y)$: after $j$ these are precisely the given action identities for $a$. It also shows $\\alpha(i(n),y)=y$, since [lem-sfb-universal-fixed-subscheme] says the restricted $N$-action on $Y$ is the projection. All formulas are identities of morphisms, with the affine-chart test justified as in step 2 by [lem-weil-pbc-scheme-morphism-gluing].",
+   "uses": [
+    "lem-sfb-universal-fixed-subscheme",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 7(a) action identities and Theorem 7.1, pp.138–139."
+   }
+  },
+  {
+   "text": "Consider the two pullbacks of $\\alpha$ to\n$$R=(G\\times Y)\\times_{Q\\times Y}(G\\times Y).$$\nAn $A$-point consists of $(g_1,g_2,y)$ with $q(g_1)=q(g_2)$. Therefore $q(g_2^{-1}g_1)=1$. The given scheme-theoretic kernel property yields a unique $n\\in N(A)$ with $g_1=g_2i(n)$, even when $A$ is nonreduced. Step 3 gives\n$$\\alpha(g_1,y)=\\alpha(g_2i(n),y)=\\alpha(g_2,\\alpha(i(n),y))=\\alpha(g_2,y).$$\nTesting on each affine open of $R$ and applying [lem-weil-pbc-scheme-morphism-gluing] proves the required equality of morphisms on $R$. No surjectivity of $G(A)\\to Q(A)$ has been used.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms: verification of its overlap condition for the quotient kernel pair."
+   }
+  },
+  {
+   "text": "The fpqc cover $p$ of step 1 and overlap identity of step 4 satisfy exactly the hypotheses of [lem-weil-pbc-fpqc-representable-descent], with target scheme $Y$. We obtain a unique scheme morphism $b:Q\\times Y\\to Y$ with $bp=\\alpha$. It is over $k$: its two candidate structure maps to $\\operatorname{Spec}k$ agree after $p$, and uniqueness in that same descent statement makes them equal. Composing $bp=\\alpha$ with $j$ gives the required displayed equation.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms, statement and first paragraph of proof, lines 4130–4154."
+   }
+  },
+  {
+   "text": "Since $q$ preserves the identity, $b(1,y)=\\alpha(1,y)=y$. For associativity, compare $b(u,b(v,y))$ and $b(uv,y)$ on $Q\\times Q\\times Y$. Pull back first by $q\\times\\mathrm{id}_{Q\\times Y}$ and then by $\\mathrm{id}_G\\times q\\times\\mathrm{id}_Y$, the two covers of step 1. On $G\\times G\\times Y$ the two maps are $\\alpha(g,\\alpha(h,y))$ and $\\alpha(gh,y)$, equal by step 3 and $q(gh)=q(g)q(h)$. Uniqueness in [lem-weil-pbc-fpqc-representable-descent] twice gives equality before either pullback. Thus $b$ is an action. For any other candidate $b'$, the required equation gives $j b'p=j\\alpha$. The injectivity of $j$ established in step 2 gives $b'p=\\alpha$, so uniqueness in the descent statement gives $b'=b$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms: uniqueness, applied to the two successive base-change covers and then to p."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "def-weil-pbc-fpqc-covering",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-universal-fixed-subscheme",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.51 normal-series induction, p.343, expanded using Theorem 7.1, pp.138–139 and Stacks Tag 023Q representable descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixed.*(quotient|normal)|(quotient|normal).*fixed",
+   "results": "{\"t\": \"2026-10-24T15:10:38Z\", \"tool\": \"grep\", \"query\": \"fixed.*(quotient|normal)|(quotient|normal).*fixed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fixedPointsSubMulOfNormal and smul_mem_fixedPoints_of_normal in Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609 concern abstract groups acting on sets; quotientToInvariants concerns modules. None constructs a scheme morphism or descends it along a represented fppf quotient. AlgebraicGeometry grep gives no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal subgroup fixed point subscheme is invariant and its action descends to the fppf quotient group",
+   "results": "{\"t\": \"2026-10-24T15:10:39Z\", \"tool\": \"leansearch\", \"query\": \"A normal subgroup fixed point subscheme is invariant and its action descends to the fppf quotient group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"vadd_mem_fixedPoints_of_normal\", \"smul_mem_fixedPoints_of_normal\", \"Rep.quotientToInvariants\", \"coe_smul_fixedPoints_of_normal\", \"Representation.quotientToInvariants\", \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\", \"FixedPoints.instIsInvariantSubfieldSubfield\"], \"digest\": \"0ff15e66a79d5b06\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fixedPointsSubMulOfNormal and smul_mem_fixedPoints_of_normal in Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609 concern abstract groups acting on sets; quotientToInvariants concerns modules. None constructs a scheme morphism or descends it along a represented fppf quotient. AlgebraicGeometry grep gives no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\", \"Normal\"",
+   "results": "{\"t\": \"2026-10-24T15:10:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"fixedPoints\\\", \\\"Normal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"fixedPointsSubAddOfNormal\", \"fixedPointsSubMulOfNormal\", \"instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal\", \"smul_mem_fixedPoints_of_normal\", \"vadd_mem_fixedPoints_of_normal\", \"coe_smul_fixedPoints_of_normal\", \"Order.IsNormal.iSup_iterate_mem_fixedPoints\", \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\"], \"digest\": \"42ca9f477af2cf35\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fixedPointsSubMulOfNormal and smul_mem_fixedPoints_of_normal in Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609 concern abstract groups acting on sets; quotientToInvariants concerns modules. None constructs a scheme morphism or descends it along a represented fppf quotient. AlgebraicGeometry grep gives no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An action on the scheme of invariants under a normal closed subgroup factors through the represented faithfully flat quotient",
+   "results": "{\"t\": \"2026-10-24T15:10:40Z\", \"tool\": \"leanfinder\", \"query\": \"An action on the scheme of invariants under a normal closed subgroup factors through the represented faithfully flat quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.quotientToInvariants\", \"Rep.quotientToInvariantsFunctor\", \"Representation.quotientToInvariants\", \"Rep.quotientToCoinvariants\", \"Rep.ofQuotient\", \"Rep.quotientToCoinvariantsFunctor\", \"Rep.toCoinvariants\", \"Rep.toCoinvariantsMkQ\"], \"digest\": \"ea763e1629a20889\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fixedPointsSubMulOfNormal and smul_mem_fixedPoints_of_normal in Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609 concern abstract groups acting on sets; quotientToInvariants concerns modules. None constructs a scheme morphism or descends it along a represented fppf quotient. AlgebraicGeometry grep gives no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic group action on a separated scheme the fixed subscheme of a normal subgroup carries an action of the quotient group scheme",
+   "results": "{\"t\": \"2026-10-24T15:10:41Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic group action on a separated scheme the fixed subscheme of a normal subgroup carries an action of the quotient group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"instSMulCommClassQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"Rep.quotientToInvariants\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\", \"coe_smul_fixedPoints_of_normal\", \"instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal\", \"fixedPointsSubMulOfNormal\"], \"digest\": \"3cdbe09888a6bf84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fixedPointsSubMulOfNormal and smul_mem_fixedPoints_of_normal in Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609 concern abstract groups acting on sets; quotientToInvariants concerns modules. None constructs a scheme morphism or descends it along a represented fppf quotient. AlgebraicGeometry grep gives no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedPointsSubMulOfNormal|smul_mem_fixedPoints_of_normal|quotientToInvariants",
+   "results": "{\"t\": \"2026-10-24T15:11:07Z\", \"tool\": \"grep\", \"query\": \"fixedPointsSubMulOfNormal|smul_mem_fixedPoints_of_normal|quotientToInvariants\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\", \"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\", \"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\", \"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\"], \"digest\": \"83b2f10f4908598a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fixedPointsSubMulOfNormal and smul_mem_fixedPoints_of_normal in Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609 concern abstract groups acting on sets; quotientToInvariants concerns modules. None constructs a scheme morphism or descends it along a represented fppf quotient. AlgebraicGeometry grep gives no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.*(normal|quotient)|(normal|quotient).*fixed",
+   "results": "{\"t\": \"2026-10-24T15:41:38Z\", \"tool\": \"grep\", \"query\": \"fixed.*(normal|quotient)|(normal|quotient).*fixed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group actions on sets or rings, representations, or Galois categories. They do not descend a scheme morphism along a represented fppf quotient. Read Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609; AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group action on the fixed subscheme of a normal subgroup descends to the fppf quotient",
+   "results": "{\"t\": \"2026-10-24T15:41:38Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group action on the fixed subscheme of a normal subgroup descends to the fppf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.quotientToInvariants\", \"Rep.quotientToInvariants\", \"coe_smul_fixedPoints_of_normal\", \"instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal\", \"smul_mem_fixedPoints_of_normal\", \"fixedPointsSubAddOfNormal\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\", \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\"], \"digest\": \"5e5e640d084c8f78\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group actions on sets or rings, representations, or Galois categories. They do not descend a scheme morphism along a represented fppf quotient. Read Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609; AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\", \"Normal\"",
+   "results": "{\"t\": \"2026-10-24T15:41:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"fixedPoints\\\", \\\"Normal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"fixedPointsSubAddOfNormal\", \"fixedPointsSubMulOfNormal\", \"instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal\", \"smul_mem_fixedPoints_of_normal\", \"vadd_mem_fixedPoints_of_normal\", \"coe_smul_fixedPoints_of_normal\", \"Order.IsNormal.iSup_iterate_mem_fixedPoints\", \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\"], \"digest\": \"42ca9f477af2cf35\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group actions on sets or rings, representations, or Galois categories. They do not descend a scheme morphism along a represented fppf quotient. Read Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609; AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal subgroup fixed subscheme carries an action of the quotient group scheme by faithfully flat descent",
+   "results": "{\"t\": \"2026-10-24T15:41:39Z\", \"tool\": \"leanfinder\", \"query\": \"A normal subgroup fixed subscheme carries an action of the quotient group scheme by faithfully flat descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"instSMulCommClassQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubringSubring\", \"Rep.quotientToInvariants\", \"instMulActionElemFixedPointsSubtypeMemSubgroupOfNormal\", \"Rep.quotientToInvariantsFunctor\", \"coe_smul_fixedPoints_of_normal\"], \"digest\": \"ae886c4724eb7341\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group actions on sets or rings, representations, or Galois categories. They do not descend a scheme morphism along a represented fppf quotient. Read Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609; AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedPointsSubMulOfNormal|smul_mem_fixedPoints_of_normal",
+   "results": "{\"t\": \"2026-10-24T15:42:14Z\", \"tool\": \"grep\", \"query\": \"fixedPointsSubMulOfNormal|smul_mem_fixedPoints_of_normal\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\", \"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\", \"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\", \"Mathlib/GroupTheory/GroupAction/SubMulAction.lean\"], \"digest\": \"83b2f10f4908598a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group actions on sets or rings, representations, or Galois categories. They do not descend a scheme morphism along a represented fppf quotient. Read Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609; AlgebraicGeometry grep has zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient algebraic group acts on the scheme representing points universally fixed by its kernel",
+   "results": "{\"t\": \"2026-10-24T15:42:15Z\", \"tool\": \"leanfinder\", \"query\": \"Quotient algebraic group acts on the scheme representing points universally fixed by its kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"MulAction.ofQuotientStabilizer\", \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"instMulSemiringActionQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"MulAction.ofQuotientStabilizer_mk\", \"instMulActionSubtypeGeneralLinearGroupFinOfNatNatRealMemSubgroupQuotientSubgroupOf\", \"MulAction.QuotientAction\", \"MulAction.ofQuotientStabilizer_smul\"], \"digest\": \"55212bec1053ab8b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract-group actions on sets or rings, representations, or Galois categories. They do not descend a scheme morphism along a represented fppf quotient. Read Mathlib/GroupTheory/GroupAction/SubMulAction.lean:595–609; AlgebraicGeometry grep has zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-solvable-rational-fixed-point",
+  "date": "2026-10-24",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90. Supporting input: Milne 22.2 and 22.18(b): obtain a multiplicity-one torus character before the scalar-endomorphism argument of 22.4. Supporting input: Proposition 16.52, forward implication, printed p.343, together with Proposition 16.2(a) implies (c), printed pp.324--325. Only the forward implication is used: its converse requires perfection. Supporting input for this split: Theorem 16.51 (fixed point theorem), printed p.343. Complete algebraic scheme means proper finite-type k-scheme; fixedness is universal group-scheme fixedness, not only fixedness under H(k). Supporting input: Milne Theorem 16.51, last paragraph: quotient action on the fixed subscheme of a normal subgroup.",
+   "via": [
+    "lem-sfb-split-solvable-rational-fixed-point",
+    "lem-sfb-split-solvable-triangular-embedding",
+    "lem-sfb-split-simple-multiplicity-one-weight",
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-fixed-subscheme-quotient-action",
+  "worker": "stage1",
+  "summary": "Expanded normality into the conjugation calculation over all algebras, constructed the restricted action by the universal fixed subscheme, checked the quotient kernel-pair equation, descended the morphism and verified its group laws and uniqueness. Reused existing covering/refinement/descent nodes; no new nodes. Statement unchanged.",
+  "blueprint": "The inherited ancestry place is retained: det-thm-sf-ctf-stability-direct-images proof (3), through Milne 16.51 normal-series induction. All six steps supply the quotient-action prerequisite of lem-sfb-split-solvable-rational-fixed-point. Whole-blueprint searches for fixed subscheme, normal subgroup, and quotient action found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement verifies the fpqc covering condition; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-c1111811e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-c1111811e (reviewer sub-agent of L); spot-checked: I read the full item (6 steps, statement unchanged, no new nodes) and every cited statement. Sources checked: Milne iAG Theorem 7.1 (pp.138–139: fixed functor over all R-algebras R', closed subscheme for separated X), Milne Theorem 16.51 (p.343: normal-series induction, which uses the quotient action only implicitly, so proof_origin=agent is right) and Stacks 023Q descent.tex lemma-fpqc-universal-effective-epimorphisms. Step 1: q is fppf and so is its base change p (lem-trf). fppf implies fpqc because the affine refinement over each affine V gives affine opens of T_i whose images cover V (Stacks 022C); the two associativity covers are also base changes of q. Step 2: normality over every k-algebra gives the conjugation identity. Tested on tautological points and glued, it gives exactly the hypothesis of the arbitrary-W factorization clause of lem-sfb-universal-fixed-subscheme, applied to N, which is separated and of finite type as a closed subgroup of affine G. Uniqueness holds because j is injective on points. Step 3: α's action laws and N-triviality, by cancelling j. Step 4: the kernel pair uses the scheme-theoretic kernel over arbitrary A, with no surjectivity of G(A)→Q(A). Step 5: singleton fpqc descent gives b; k-linearity follows from uniqueness. Step 6: unit, associativity by descent uniqueness applied twice, and uniqueness of b by cancelling j and then p. Edge cases N=1, N=G, empty X and infinitesimal α_p all work, and no smoothness or reducedness is used. Route: lem-pc-fppf-affine-refinement is accepted as a declared generic tool; the other off-unit citations are definitions or Mathlib leaves. No SGA source is cited. Batch-5: lem-trf-fppf-covering-base-change is a Mathlib leaf (Precoverage.mem_coverings_of_isPullback with fppfPrecoverage) with empty proof_deps, and the only trace-formula or Poincaré-duality node in its closure is itself. It states that fppf covers are stable under base change, a general fact that is neither a step of the trace-formula or Poincaré-duality proofs nor given by either assumption, so the citation is allowed. The closures of the other cited nodes contain no sec-trace-formula or sec-poincare-duality node. No changes."
+ }
+}

@@ -1,0 +1,300 @@
+{
+ "id": "lem-sf-general-hom-comparison-cocycles",
+ "kind": "statement",
+ "title": "General hom comparison cocycles",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. Use the small pro-etale coefficient categories and the specified six operations of [def-fix-six-functor-datum]. Finite inputs used for compact support carry compatible etale-origin witnesses; integral inputs are derived complete with compatible witnessed finite reductions, rational operations are raw localization, and algebraically closed coefficients are represented at a common finite coefficient field. All operations below are restricted to their stated constructible domains; tensor factors and comparisons have their stated finite-Tor hypotheses. Let $X$ be a separated finite-type $k$-scheme, and put $H_B(K,M)=R\\mathcal Hom_B(K,M)$ for derived internal Hom on its small pro-etale site [def-pur-derived-internal-hom]. For $n\\ge m\\ge1$ and $K,M\\in D^b_{ctf}(X,A_n)$ write $K_m=K\\otimes^L_{A_n}A_m$, likewise $M_m$, and let $v_{n,m}:H_{A_n}(K,M)\\otimes^L_{A_n}A_m\\xrightarrow{\\sim}H_{A_m}(K_m,M_m)$ be the isomorphism of [thm-coef-finite-hom]: the unique tensor-Hom transpose of coefficient change of evaluation, with its successive-quotient equation $v_{n,r}=v_{m,r}\\circ(v_{n,m}\\otimes^L A_r)$ for $m\\ge r\\ge1$. For $K,M$ in the derived category of $R_X$-modules, $R_X=\\lim_n(A_n)_X$, let $c_n:H_{R_X}(K,M)\\otimes^L_{R_X}(A_n)_X\\xrightarrow{\\sim}H_{A_n}(K_n,M_n)$ be the isomorphism of [lem-coef-integral-hom-reduction], the transpose of reduced evaluation, defined for arbitrary ambient variables. For finite extensions $E\\subset E'$ use the integral scalar-extension Hom comparisons of [lem-coef-integral-finite-extension]. Then:\n(1) $v_{n,n}=1$ under the identification $-\\otimes^L_{A_n}A_n=\\mathrm{id}$.\n(2) For $n\\ge m\\ge1$ and integral $K,M$ whose reductions $K_n,M_n$ lie in $D^b_{ctf}(X,A_n)$, under the canonical successive tensor identifications,\n$$c_m=v_{n,m}\\circ(c_n\\otimes^L_{A_n}A_m).$$\n(3) Wherever the elementary coefficient comparison for internal Hom of [lem-fix-operation-reduction] is also defined (finite quotients with site-perfect first variable, integral-to-finite reduction, rationalization and common-stage scalar extension), it equals $v_{n,m}$, $c_n$, respectively the scalar-extension comparison.\n(4) Consequently these comparisons, together with the scalar-extension comparisons, preserve evaluations and their tensor-Hom transposes and tensor reassociation, so every well-typed equation formed from these maps and from the identity and composition equations of the three cited statements is preserved; raw localization and common finite-stage passage preserve these equations on their constructible domains.\nThese assertions do not replace finite-Tor by site-perfectness, do not assert the site-perfect tensor-dual formula for arbitrary constructible objects, and do not introduce finite reduction of rational objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated sub-obligation for general internal Hom comparisons: reduced evaluation and transposition; returned proof steps 9"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-pur-derived-internal-hom",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-scalar-extension",
+  "thm-coef-finite-hom",
+  "lem-coef-integral-hom-reduction",
+  "lem-coef-integral-finite-extension",
+  "lem-fix-operation-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Prove the generic closed identity-Hom comparison by injectivity of uncurry and the normalized identity tensorator square. Specialize it to finiteUnit. Use the successive-quotient cocycle already proved by finiteCoefficient_derivedHom_change for the other finite law.",
+   "uses": [
+    "lem-sf-coefficient-tensor-normalization",
+    "thm-coef-finite-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the generic composite-Hom comparison by uncurrying both paths, evaluation naturality and cancellation of the tensorator squares. Specialize to integral reduction followed by quotient reduction, using exactly integralAssoc and the tensor normalization square. No invertibility of the ambient Hom comparisons is used.",
+   "uses": [
+    "lem-sf-coefficient-tensor-normalization",
+    "def-pur-coefficient-base-change-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The elementary finite overlap is definitional equality. Choose a and the reduction presentations from the normalized integral evaluation lemma. Uncurry integralMap and comparison; the normalization identifies them by the closed bijection. Use comparison_isIso for invertibility.",
+   "uses": [
+    "lem-sf-integral-hom-presentation-evaluation",
+    "lem-sf-integral-hom-comparison-is-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the jointly normalized ordinary presentations and e. The completion equation identifies each presentation completion isomorphism with e followed by scalarCompletionIso. Expand both completed Hom maps; factor the map on the two Hom arguments and use the ordinary Hom square. The two adjacent inverse e components cancel. The result is scalarHomCompleteInputs.hom, whose IsIso instance gives invertibility.",
+   "uses": [
+    "lem-sf-scalar-hom-presentation-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite quotients use the evaluation and compatibility conjuncts of finiteCoefficient_derivedHom_change. For integral reduction use the calculus finite_compatible field; prove evaluation existence and uniqueness directly from the closed bijection. For ordinary scalar extension use basicOperationsCoefficientReduction. The three associator laws are the tensor normalization lemma.",
+   "uses": [
+    "thm-coef-finite-hom",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-fix-operation-reduction",
+    "lem-sf-coefficient-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the raw rational Hom comparison and common-stage internal-Hom representative law supplied by basicOperationsCoefficientReduction, instantiated on the identity of X. Supply residue-field invertibility from the finite-field characteristic hypothesis. The three transport clauses follow by congrArg applied to the specified functor maps.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coefficient-base-change-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-fix-operation-reduction",
+  "lem-sf-coefficient-tensor-normalization",
+  "lem-sf-integral-hom-comparison-is-iso",
+  "lem-sf-integral-hom-presentation-evaluation",
+  "lem-sf-scalar-hom-presentation-evaluation",
+  "thm-coef-finite-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "C6 Lean reduction: generic closed identity/composition proofs; fixed tensor and presentation normalization substeps; existing evaluation, invertibility and field-transport theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "internalHom.*[Cc]oefficient|[Cc]oefficient.*internalHom|[Hh]om.*reduction.*cocycle",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of internal Hom comparison with iterated finite quotient and finite extension of l-adic coefficient fields by uniqueness of tensor Hom transpose",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop)\\n  {L₁ L₂ : FiniteGaloisIntermediateField k K} (h : L₁ ⟶ L₂),\\n  (CategoryTheory.ConcreteCategory.hom ((finGaloi\", \"doc\": \"For any element $g$ in the inverse limit profinite Galois group of a Galois extension $K/k$, and for any morphism $h:L_1 \\\\to L_2$ between finite Galois intermediate fields, applying the Galois group f\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible finite Tor derived internal Hom coefficient reduction comparison transposed from evaluation identity and successive quotient cocycles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cm5b.fac\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L),\\n  CategoryTheory.CategoryStruct.comp (CochainComplex.cm5b.i f) (CochainComplex.cm5b.p K L) = f\", \"doc\": \"For any morphism $ f $ from $ K $ to $ L $, the composition of the inclusion morphism $ i f $ into the mapping cone of the identity on the injective replacement of $ K $ and $ L $, followed by the pro\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      (K L : CochainComplex C ℤ) →\\n        (n m p : ℤ) → n + 1 = m → m + 1 = p → (HomologicalComplex.sc' (K.HomComplex L) n m p).LeftHomologyData\", \"doc\": \"The left homology data for the homomorphism complex $\\\\text{Hom}(K, L)$ of cochain complexes $K$ and $L$ in degree $m$, constructed using the cocycle subgroup $\\\\text{Cocycle}(K, L, m)$ and the cohomolo\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'_i\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n m p : ℤ) (hm : n + 1 = m) (hp : m + 1 = p),\\n  (CochainComplex.HomComplex.leftHomologyData' K L n m p hm hp).i =\\n    AddCommGrpCat.ofHom (CochainComplex.HomComplex.Cocycle.\", \"doc\": \"In the left homology data for the homomorphism complex $\\\\text{Hom}(K, L)$ of cochain complexes $K$ and $L$, the morphism $i$ is the canonical inclusion map from the subgroup of cocycles $\\\\text{Cocycle\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'_π\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n m p : ℤ) (hm : n + 1 = m) (hp : m + 1 = p),\\n  (CochainComplex.HomComplex.leftHomologyData' K L n m p hm hp).π =\\n    AddCommGrpCat.ofHom (CochainComplex.HomComplex.Cohomolo\", \"doc\": \"The projection morphism $\\\\pi$ in the left homology data for the homomorphism complex $\\\\text{Hom}(K, L)$ of cochain complexes $K$ and $L$ in degree $m$ is the canonical additive group homomorphism that\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  {R : CategoryTheory.ProjectiveResolution X} {X' : C} {R' : CategoryTheory.ProjectiveResolution X'} {f : X ⟶ X'}\\n  (φ : R.Hom R' f) (n : ℤ) (m : ℕ) (h : -↑m = n),\\n  φ.hom'.f n =\\n    CategoryTheory.C\", \"doc\": \"For integers $n$ and natural numbers $m$ satisfying $n = -m$, the $n$-th component of the cochain map $\\\\phi_{\\\\text{ext}}$ induced by a morphism $\\\\phi$ of projective resolutions is given by the composi\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n  {\"name\": \"CochainComplex.mappingCone.lift_f_snd_v\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {F G : CochainComplex C ℤ} (φ : F ⟶ G) [inst_2 : HomologicalComplex.HasHomotopyCofiber φ] {K : CochainComplex C ℤ}\\n  (α : CochainComplex.HomComplex.Cocycle K F 1) (β : CochainComplex.HomComplex.Coc\", \"doc\": \"Given a morphism $\\\\phi: F \\\\to G$ of cochain complexes in a preadditive category, a cocycle $\\\\alpha$ of degree $m$ in $\\\\text{Hom}(F)$, and a cochain $\\\\beta$ of degree $n$ in $\\\\text{Hom}(G)$ satisfying \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible finite Tor derived internal Hom coefficient reduction comparison transposed from evaluation identity and successive quotient cocycles",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.mk_coe\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {F G : CochainComplex C ℤ} {n : ℤ} (z : CochainComplex.HomComplex.Cochain F G n) (m : ℤ) (hnm : n + 1 = m)\\n  (h : CochainComplex.HomComplex.δ n m z = 0), ↑(CochainComplex.HomComplex.Cocycle.mk z m hnm \", \"doc\": \"For cochain complexes $F$ and $G$ in a preadditive category, if $z$ is a cochain of degree $n$ satisfying $\\\\delta z = 0$, then the canonical coercion of the cocycle $\\\\text{Cocycle}(F,G,n)$ constructed\"}\n  {\"name\": \"Rep.Tor\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.Basic\", \"type\": \"(n : ℕ) : Rep k G ⥤ Rep k G ⥤ ModuleCat k\", \"doc\": \"For a commutative ring $k$ and group $G$, the $n$-th Tor functor is a bifunctor from the category of representations $\\\\text{Rep}(k, G)$ to $k$-modules. It is constructed as the $n$-th left-derived fun\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.homOf_ofHom_eq_self\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(φ : F ⟶ G) : homOf (ofHom φ) = φ\", \"doc\": \"For any chain map $\\\\varphi: F \\\\to G$ between cochain complexes in a preadditive category, applying the homOf construction to the cocycle obtained from $\\\\varphi$ via ofHom recovers the original chain m\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.ofHom_homOf_eq_self\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(z : Cocycle F G 0) : ofHom (homOf z) = z\", \"doc\": \"For any degree-zero cocycle $ z $ in the homomorphism complex $ \\\\text{Hom}(F,G) $, applying the $ \\\\text{homOf} $ function followed by the $ \\\\text{ofHom} $ function results in the original cocycle $ z \"}\n  {\"name\": \"CochainComplex.HomComplex.cocycle\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": AddSubgroup (Cochain F G n)\", \"doc\": \"The cocycle in degree $n$ of the homomorphism complex $\\\\text{Hom}(F,G)$ is defined as the kernel of the differential $\\\\delta: \\\\text{Cochain}(F,G,n) \\\\to \\\\text{Cochain}(F,G,n+1)$. This consists of all c\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.toHom_mk\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology\", \"type\": \"(x : Cocycle K L n) : toHom (mk x) = (HomotopyCategory.quotient C _).map (Cocycle.equivHomShift.symm x)\", \"doc\": \"For any cocycle $x$ in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$, the image of the cohomology class $[x]$ under the induced homomorphism $\\\\text{toHom}$ is equal to the homotopy class o\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.ext_iff\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {F G : CochainComplex C ℤ} {n : ℤ} {z₁ z₂ : CochainComplex.HomComplex.Cocycle F G n}, z₁ = z₂ ↔ ↑z₁ = ↑z₂\", \"doc\": \"Two cocycles $ z_1 $ and $ z_2 $ in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(F, G) $ are equal if and only if their canonical inclusions into the cochain module $ \\\\text{Cochain}(F, G, n) \"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.cochain_ofHom_homOf_eq_coe\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \"(z : Cocycle F G 0) : Cochain.ofHom (homOf z) = (z : Cochain F G 0)\", \"doc\": \"For any degree-zero cocycle $ z $ in the homomorphism complex $ \\\\text{Hom}(F,G) $, the cochain constructed from the chain map $ \\\\text{homOf}(z) $ coincides with $ z $ when viewed as an element of the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.MonoidalClosed\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] : Type (max u v)\", \"doc\": \"A monoidal category `C` is (right) monoidal closed if every object is (right) closed.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.closed\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} {inst✝ : CategoryTheory.Category.{v, u} C} {inst✝¹ : CategoryTheory.MonoidalCategory C} [self : CategoryTheory.MonoidalClosed C] (X : C) : CategoryTheory.Closed X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.mk\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] (closed : (X : C) → CategoryTheory.Closed X := by infer_instance) : CategoryTheory.MonoidalClosed C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.internalHom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] : CategoryTheory.Functor Cᵒᵖ (CategoryTheory.Functor C C)\", \"doc\": \"The internal hom functor given by the monoidal closed structure.\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] : CategoryTheory.MonoidalCategory.curriedTensor C ⊣₂ CategoryTheory.MonoidalClosed.internalHom\", \"doc\": \"The parametrized adjunction between `curriedTensor C : C ⥤ C ⥤ C`\\nand `internalHom : Cᵒᵖ ⥤ C ⥤ C`\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] (X : Cᵒᵖ) : (CategoryTheory.MonoidalClosed.internalHom.obj X).IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Transport the property of being monoidal closed across a monoidal equivalence of categories\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.internalHom_obj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] (X : Cᵒᵖ) : CategoryTheory.MonoidalClosed.internalHom.obj X = CategoryTheory.ihom (Opposite.unop X)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] (x✝ : C) : CategoryTheory.MonoidalClosed.internalHomAdjunction₂.adj x✝ = CategoryTheory.ihom.adjunction x✝\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.internalHom_map\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] [CategoryTheory.MonoidalClosed C] {X✝ Y✝ : Cᵒᵖ} (f : X✝ ⟶ Y✝) : CategoryTheory.MonoidalClosed.internalHom.map f = CategoryTheory.MonoidalClosed.pre f.unop\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv_curry_def\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\\nresulting\"}\n  {\"name\": \"CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (F : CategoryTheory.Functor C D) {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [F.IsEquivalence] [CategoryTheory.M\", \"doc\": \"Suppose we have a monoidal equivalence `F : C ≌ D`, with `D` monoidal closed. We can pull the\\nmonoidal closed instance back along the equivalence. For `X, Y, Z : C`, this lemma describes the\\nresulting\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "identity and composition cocycle for tensor-Hom internal Hom coefficient comparison maps",
+   "results": "8 hits: CategoryTheory.ihom.coev_ev, groupCohomology.cocyclesMap_id_comp_assoc, groupCohomology.cocyclesMap_id_comp, groupCohomology.cocyclesMap_id, CochainComplex.HomComplex.Cocycle.homOf, CochainComplex.HomComplex.Cocycle.ofHom_homOf_eq_self, groupCohomology.cochainsMap_id_f_hom_eq_compLeft, CategoryTheory.ihom.coev",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: abstract transpose laws are tools, not the specified integral/finite/field comparison overlap"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom comparison maps defined by evaluation transpose preserve composition under successive scalar changes",
+   "results": "8 hits: CategoryTheory.expComparison_ev, CategoryTheory.coev_app_comp_pre_app, ModuleCat.ihom_map_apply, CategoryTheory.ihom.ev_naturality_assoc, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.coev_expComparison, CategoryTheory.MonoidalClosed.comp, CategoryTheory.ihom.coev_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: abstract transpose laws are tools, not the specified integral/finite/field comparison overlap"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|curry_injective|uncurry_injective",
+   "results": "9 hits: Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: abstract transpose laws are tools, not the specified integral/finite/field comparison overlap"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.ihomComparison",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.LaxMonoidal.ihomComparison'",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: abstract transpose laws are tools, not the specified integral/finite/field comparison overlap"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom coefficient reduction modulo powers of a uniformizer agrees with iterated reduction and with integral scalar extension",
+   "results": "8 hits: PreTilt.untiltAux_smodEq_untiltFun, PreTilt.coeff_def, PreTilt.coeff, PreTilt.coeff_pow_p, WittVector.mk_pow_fontaineTheta, PreTilt.exists_smodEq_untiltAux, WittVector.factorPowSucc_fontaineThetaModPPow_eq, PreTilt.mk_untilt_eq_coeff_zero",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: abstract transpose laws are tools, not the specified integral/finite/field comparison overlap"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.uncurry",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.uncurry, CategoryTheory.MonoidalClosed.uncurry_injective, CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.curry_uncurry, CategoryTheory.MonoidalClosed.curry_eq_iff, CategoryTheory.MonoidalClosed.eq_curry_iff, CategoryTheory.MonoidalClosed.uncurry_id_eq_ev, CategoryTheory.MonoidalClosed.uncurry_natural_left",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: abstract transpose laws are tools, not the specified integral/finite/field comparison overlap"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-coherence",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: The general Hom comparisons are defined by the same evaluation maps.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-general-hom-comparison-cocycles",
+  "worker": "stage1",
+  "summary": "Expanded the evaluation-transpose argument into identity, successive integral reduction, overlap and field-passage proofs. Reused the existing closed abstract Hom-composition node and ringed monoidal/closed statements; no new nodes and no statement change. Retained the finite-Tor versus site-perfect domain distinction.",
+  "blueprint": "fix-prop-coherence.proof.md: sentence beginning The general Hom comparisons and the following field transport; steps 1-6 give the actual comparison equations, step 7 rationalization/common-stage passage.",
+  "tool_uses": [
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic definition of raw field coefficient passage used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Generic definition of raw field coefficient passage used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-coef-integral-finite-extension",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-coef-integral-hom-reduction",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-fix-internal-hom-comparison-composition",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-fix-site-perfect-scalar-hom",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   },
+   {
+    "node": "thm-coef-finite-hom",
+    "why": "Generic evaluation/monoidal coefficient comparison or scalar-localization tool used as a black box to expand the unit's specified Hom-coherence route; no replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "lem-fix-operation-reduction",
+  "thm-coef-finite-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-242b91f29",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-242b91f29 (reviewer sub-agent of L); spot-checked: I read all 7 steps against fix-prop-coherence.proof.md (main-20261015, the sentence 'The general Hom comparisons … are defined by the same evaluation maps') and against every cited statement. The item statement is unchanged and still unsplit in live and side-live. There is no repair note, no new node, no cycle, no SGA, and proof_deps equals the union of the uses. Step 1: the opposite evaluation conventions (H⊗K for thm-coef-finite-hom, K⊗H for the composition lemma and c_n) are reconciled by symmetric strong monoidality, and the tensorator is t_h^{-1}. Step 2 (v_nn=1) follows from finite-Hom uniqueness with m=n, the P_id normalisation and evaluation as counit. Step 3: the composition lemma with F=reduction to A_n and G=A_n→A_m gives c^G=v_nm, valid because K_n,M_n are ctf by hypothesis, and c^{GF}=c_m via the monoidal c_{f,g}; no invertibility is needed. Steps 5–7 are correct: finite-extension evaluation and associator compatibility, the strict-tower functor identified with ordinary completed tensor, preservation of transposes by naturality of μ, raw localization by the semilinear extension node, rational transpose uniqueness by clearing t-torsion, and Q̄_ℓ handled through a common compositum. FIX (C3/C4): step 4 said lem-fix-site-perfect-scalar-hom 'identifies the elementary map' of lem-fix-operation-reduction, which that node's statement does not say. The step now derives the identification from operation-reduction's stated preservation of evaluation plus the closed bijection, so the map is the transpose, which is c_{K,M} of site-perfect-scalar-hom and the defining transpose of v_nm. The uses and all other fields are unchanged. Batch-5 flag on lem-fix-site-perfect-scalar-hom: it reaches sec-poincare-duality only through lem-pod-closed-uncurry-laws, a mathlib-status leaf stating generic closed-monoidal curry/uncurry laws, which is not part of Poincaré duality or of the trace formula. It is also already in the closure of the base stmt_dep lem-fix-operation-reduction. It is genuinely outside the assumptions, so I accept it. I accept all 12 declared tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralHomComparisonCocycles",
+  "declaration": "WeilConjectures.generalHomComparisonCocycles",
+  "declarations": [
+   "WeilConjectures.GeneralHomComparison.finiteUnit",
+   "WeilConjectures.GeneralHomComparison.integralAssoc",
+   "WeilConjectures.GeneralHomComparison.integralMap",
+   "WeilConjectures.GeneralHomComparison.finiteLaws",
+   "WeilConjectures.GeneralHomComparison.integralLaws",
+   "WeilConjectures.GeneralHomComparison.elementaryAgreement",
+   "WeilConjectures.GeneralHomComparison.scalarAgreement",
+   "WeilConjectures.GeneralHomComparison.tensorReassociation",
+   "WeilConjectures.GeneralHomComparison.evaluationCoherence",
+   "WeilConjectures.GeneralHomComparison.fieldTransport",
+   "WeilConjectures.generalHomComparisonCocycles"
+  ],
+  "file": "lean/Sheaf/Paper/GeneralHomComparisonCocycles.lean",
+  "statement": "theorem generalHomComparisonCocycles (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] : GeneralHomComparison.finiteLaws C.l E X ∧ GeneralHomComparison.integralLaws C.l E X D C.different ∧ GeneralHomComparison.elementaryAgreement C.l E X D C.different ∧ GeneralHomComparison.scalarAgreement C.l E X ∧ GeneralHomComparison.evaluationCoherence C.l E X ∧ GeneralHomComparison.fieldTransport C.l E X C.Qbar",
+  "branch": "sheaf-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 843f62ac9913 H3: elementaryAgreement and scalarAgreement jointly supply compatible presentations; no universal assertion over arbitrary presentation adjunctions. The integral agreement holds for every ambient K,M and identifies the c_n in integralLaws."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cf55110a",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery of 843f62ac (RETURN H3). Both false universal-presentation clauses are now in the existential form of the dependencies: elementaryAgreement = ∃ a, ∀ n, ∃ m, ∀ K M, IsIso (IntegralHom.comparison m K M) ∧ integralMap n K M = comparison (same shape as integralHomReduction and the integral Hom clause of basicOperationsCoefficientReduction; forces integralMap invertible for all ambient K,M, true since R/t^n is perfect over R; ties integralLaws' c_n to the theorem's c_n). scalarAgreement = ∀ L ι, ∃ a b, ∀ K M hK hM, IsIso v ∧ v = scalarHomCompleteInputs.hom (jointly chosen as in coef_integral_finite_extension; sign-twist counterexample no longer applies). Node record differs from side-live only in its lean field; statement verbatim in file; 11 declarations and 16 imports present; docstrings and report updated; clauses (1)-(4), edge cases (n=0, m=n, zero, empty X, identity/ramified extension, unbounded ambient inputs) and universes re-checked; only sorry; report has Worker report and Second reading sections. No compile (no file changed; worker reports a clean compile). Optional: fieldTransport congruence conjuncts are tautologies; IsIso in scalarAgreement is redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T122627-L-1791195",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

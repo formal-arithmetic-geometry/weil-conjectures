@@ -1,0 +1,245 @@
+{
+ "id": "lem-sf-normalized-integral-purity-trace",
+ "kind": "statement",
+ "title": "The specified integral purity family, inverse orientation and counit trace under reduction",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ inside a fixed algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, with valuation ring $R=\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=R/(\\varpi^n)$ for $n\\ge1$. Let $f:X\\to Y$ be smooth separated of pure relative dimension $r\\ge0$ between separated finite-type $k$-schemes. Use the actual operation datum [def-fix-six-functor-datum] and twists [def-coefficient-twists-detailed]. Integral categories mean modules over the completed coefficient sheaf, derived complete with constructible reductions in one finite cohomological interval independent of $n$; finite categories mean $D^b_{ctf}(-,A_n)$. Write $H_\\Lambda(L)=Lf^*L(r)[2r]$, $G_\\Lambda(L)=Rf^!L$, $P_\\Lambda=Rf_!$, and $\\epsilon_\\Lambda:P_\\Lambda G_\\Lambda\\to\\mathrm{id}$ for the actual exceptional counit. At finite levels use the specified smooth purity map [def-pur-smooth-purity-map] and trace [def-pur-smooth-trace].\n\nTake the integral map $\\gamma_{R,L}:H_RL\\to G_RL$ to be the component of the simultaneous normalized natural family of [lem-pur-adic-purity-scalar-naturality], with the finite reductions of [thm-pur-adic-reconstruction]. For every $L\\in D^b_c(Y,R)$ this component is defined and is an isomorphism. More precisely, if $L_1$ has cohomology in $[a,b]$, all $L_n$ have Tor amplitude in $[a,b]$, so $L$ belongs to the uniform finite-Tor domain of that family [def-weil-finite-tor-amplitude]. Put $\\eta_{R,L}=\\gamma_{R,L}^{-1}$ and $t_{R,L}=\\epsilon_{R,L}\\circ P_R(\\gamma_{R,L}):P_RH_RL\\to L$. These use this specified component throughout; no uniqueness of lifts from their finite components is asserted.\n\nFor $Q_T=(-)\\otimes^L_{R_T}(A_n)_T$ let $a_L:Q_XH_RL\\xrightarrow{\\sim}H_{A_n}Q_YL$, $b_L:Q_XG_RL\\xrightarrow{\\sim}G_{A_n}Q_YL$, and $c_N:Q_YP_RN\\xrightarrow{\\sim}P_{A_n}Q_XN$ be the canonical pullback/twist, exceptional-adjoint and support comparisons. With $\\gamma_n=\\gamma_{f,L_n}$, $\\eta_n=\\gamma_n^{-1}$ and $t_n=\\epsilon_{A_n,L_n}\\circ P_{A_n}(\\gamma_n)$, there are equalities of actual morphisms\n$$b_L Q_X(\\gamma_{R,L})=\\gamma_n a_L,\\qquad a_L Q_X(\\eta_{R,L})=\\eta_n b_L,$$\n$$Q_Y(t_{R,L})=t_n\\,P_{A_n}(a_L)\\,c_{H_RL}.$$\nThe comparisons and equations are compatible with further finite quotients $A_n\\to A_m$ for $1\\le m\\le n$, including the coefficient counits. Thus this chosen coherent integral purity realization determines an inverse orientation and a counit trace with exactly the specified finite reductions.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), integral reconstruction and compatibility with the finite smooth traces; auxiliary coefficient-domain statement extracted from the returned split"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-coefficient-twists-detailed",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-adic-reconstruction",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Apply integral_residue_tor to the constructible input. purAdicResidueInvertible supplies the coefficient unit at every point, and the equality of predicates supplies hTor. Its interval assertion is the first conjunct of the result.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "def-pur-adic-purity-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Preserve the existing quotientProjection proof, which compares the consecutive coefficient quotient sequence with the direct quotient tower and applies the inverse limit cone equation. Apply integralPurityComparisonCocycles with that projection equality to obtain all three quotient equations in the exact reductionComposition and supportComparison coordinates.",
+   "uses": [
+    "lem-sf-integral-purity-comparison-cocycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate A.finiteReductions at the finite-Tor input. It gives source and target isomorphisms and exactly the forward square for component. Reconstruction supplies finite-Tor source and target membership. Apply PurCompactSupport.reductionComparison_isIso to each; the bridges and finite realization are isomorphisms, hence so are both supportComparison maps.",
+   "uses": [
+    "lem-pur-adic-purity-scalar-naturality",
+    "thm-pur-adic-reconstruction",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use isIso_smoothPurityMap to form e from the actual finite arrow. Cancel e.hom in the inverse square, substitute the forward square, combine the mapped component inverse and hom, and cancel their composite identity. This proves the inverse equation with this very component and e.",
+   "uses": [
+    "thm-pur-finite-coefficient-smooth-purity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralPurityCounitReduction for the actual transported counit. Prove supportComparison_naturality by composing the reduction bridge, compact-support comparison, finite realization and inverse source bridge as a natural transformation. Map the definition trace=P(component) followed by counit, substitute its reduction equation, use that naturality to move component past supportComparison, and substitute the forward purity square. Functoriality gives the finite coefficient-valued smooth trace.",
+   "uses": [
+    "lem-sf-integral-purity-counit-reduction",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At every further quotient form e and e_prime from isIso_smoothPurityMap. finiteReductionOfPurity gives their forward square; cancellation as above gives the inverse square. finiteReductionOfSmoothTrace gives the trace equation, and existsUnique_finiteReductionExceptionalComparison.choose_spec.1 gives the actual counit equation. These prove FiniteEquations, including equal levels.",
+   "uses": [
+    "thm-pur-finite-coefficient-smooth-purity",
+    "thm-pur-finite-reduction-of-purity",
+    "def-pur-finite-reduction-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "def-pur-adic-purity-objects",
+  "lem-sf-integral-purity-comparison-cocycles",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-adic-reconstruction",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "lem-sf-integral-purity-counit-reduction",
+  "def-pur-smooth-trace",
+  "thm-pur-finite-reduction-of-purity",
+  "def-pur-finite-reduction-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), proof implemented by X3 using canonical comparison cocycles and counit reduction as the two residual steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "{\"t\": \"2026-10-22T06:11:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"purity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.Purity\", \"Lean.Compiler.LCNF.tacticPurity_tac\", \"Lean.Compiler.LCNF.Purity.impure\", \"Lean.Compiler.LCNF.Purity.pure\", \"Lean.Compiler.LCNF.instDecidableEqPurity\", \"Lean.Compiler.LCNF.instHashablePurity\", \"Lean.Compiler.LCNF.instInhabitedPurity\", \"Lean.Compiler.LCNF.instToStringPurity\"], \"digest\": \"667f3aa43a499f0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral adic smooth purity trace compatible with derived reduction of completed coefficient sheaves",
+   "results": "{\"t\": \"2026-10-22T06:11:28Z\", \"tool\": \"leansearch\", \"query\": \"Integral adic smooth purity trace compatible with derived reduction of completed coefficient sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.trace_quotient_mk\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"map_equiv_traceDual\", \"Algebra.algebraMap_intTrace\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"AdicCompletion.module\", \"Algebra.algebraMap_intTrace_fractionRing\"], \"digest\": \"337929a1499c006f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|smoothTrace|adic.*counit|counit.*adic",
+   "results": "{\"t\": \"2026-10-22T06:11:28Z\", \"tool\": \"grep\", \"query\": \"purity|smoothTrace|adic.*counit|counit.*adic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\"], \"digest\": \"78b74494a034320e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete integral smooth purity coherent chosen realization counit trace compatible with finite coefficient reduction",
+   "results": "{\"t\": \"2026-10-22T06:11:54Z\", \"tool\": \"leanfinder\", \"query\": \"Derived complete integral smooth purity coherent chosen realization counit trace compatible with finite coefficient reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"Condensed.profiniteSolidification\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"aedf2157f3bafb77\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|smoothTrace|adic.*counit|counit.*adic",
+   "results": "{\"t\": \"2026-10-22T07:58:52Z\", \"tool\": \"grep\", \"query\": \"purity|smoothTrace|adic.*counit|counit.*adic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\"], \"digest\": \"78b74494a034320e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity isomorphism for derived complete integral sheaves compatible with coefficient reduction and counit traces",
+   "results": "{\"t\": \"2026-10-22T07:58:53Z\", \"tool\": \"leansearch\", \"query\": \"Smooth purity isomorphism for derived complete integral sheaves compatible with coefficient reduction and counit traces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.Smooth.of_equiv\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"smoothSheafCommRing.ι_forgetStalk_hom_apply\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"RingHom.FormallySmooth.respectsIso\"], \"digest\": \"81e082b0fa532f76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "{\"t\": \"2026-10-22T07:58:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"purity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.Purity\", \"Lean.Compiler.LCNF.tacticPurity_tac\", \"Lean.Compiler.LCNF.Purity.impure\", \"Lean.Compiler.LCNF.Purity.pure\", \"Lean.Compiler.LCNF.instDecidableEqPurity\", \"Lean.Compiler.LCNF.instHashablePurity\", \"Lean.Compiler.LCNF.instInhabitedPurity\", \"Lean.Compiler.LCNF.instToStringPurity\"], \"digest\": \"667f3aa43a499f0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral adic smooth purity with derived finite reductions and compatibility of exceptional counit trace",
+   "results": "{\"t\": \"2026-10-22T07:59:03Z\", \"tool\": \"leanfinder\", \"query\": \"Integral adic smooth purity with derived finite reductions and compatibility of exceptional counit trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.smoothLocus\"], \"digest\": \"71d6863a5e9f6b1e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adic orientation isomorphism commutes with reduction modulo powers of a uniformizer and the smooth trace is the counit composed with its compact support image",
+   "results": "{\"t\": \"2026-10-22T07:59:41Z\", \"tool\": \"leansearch\", \"query\": \"An adic orientation isomorphism commutes with reduction modulo powers of a uniformizer and the smooth trace is the counit composed with its compact support image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"AdicCompletion.map_val_apply\", \"AdicCompletion.transitionMapₐ\", \"Algebra.trace_quotient_mk\", \"AdicCompletion.transitionMap_comp_eval\", \"AdicCompletion.congr\", \"AdicCompletion.pi_apply_coe\", \"AdicCompletion.evalₐ\"], \"digest\": \"6bc81286984de8f4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-normalized-orientation-perfect-duality",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (6), integral reconstruction and compatibility with the finite smooth traces",
+   "via": [
+    "lem-sf-package-normalized-orientation-perfect-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-normalized-integral-purity-trace",
+  "worker": "stage1",
+  "summary": "Preserved the specified simultaneous purity family and the statement. Reused the existing residue-Tor criterion and source/exceptional/support comparison statements. Wrote the inverse cancellation and the actual counit/naturality trace calculation explicitly; checked quotient coherence without a uniqueness-of-lifts assertion. No new nodes.",
+  "blueprint": "prop-functor-package.proof.md clause (6): integral reconstruction; final exceptional-adjunction sentence: its coefficient comparisons. This auxiliary realizes the integral-domain, inverse and finite trace details of that clause.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-adic-purity-scalar-naturality",
+    "why": "Uses its specified simultaneous integral natural isomorphism and prescribed finite reductions, exactly the family fixed in the item statement; the package unit has no separate theorem specifying this choice."
+   },
+   {
+    "node": "lem-pur-adic-source-finiteness-reductions",
+    "why": "Uses the uniform source Tor bound and canonical quotient-compatible source reductions, a technical comparison needed for the package orientation, not a replacement of its purity route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies a finite dimension bound solely to apply integral compact-support comparison; not a purity or duality argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-adic-purity-scalar-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-906eea2df",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-906eea2df (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full. There are no new nodes, and the statement and stmt_deps are byte-identical to the imported node (checked against the Q144 snapshots). This is a first delivery with no re-split note, and the dependency graph has no cycle. Source: main-20261015 prop-functor-package.proof.md clause (6) and its final exceptional-adjunction paragraph. The coefficient category matches: modules over the completed sheaf on the small pro-étale site. The integral Rf^! of def-weil-exceptional-inverse-image is R lim Res_n Rf_n^! L_n, the same object as in prop-coef-integral-exceptional-adjoint. Step 1: lem-coef-integral-residue-tor states the exact [a,b] residue clause (ℓ is invertible). Step 3: lem-pur-adic-purity-scalar-naturality plus thm-pur-adic-reconstruction give b_L Q(γ)=γ_n a_L for the fixed component, with no uniqueness claimed. Step 4 is elementary cancellation and checks out. Step 5: I typed and checked all five lines: the counit equation of the same shape as lem-coef-finite-exceptional, naturality of c, the purity square, and def-pur-smooth-trace at L_n in D^b_ctf. Step 6: the cocycles come from the source, compact-support, integral exceptional and finite exceptional nodes, plus thm-pur-finite-reduction-of-purity, which covers both γ and the traces. Edge cases L=0, X empty, f=id/r=0 and n=1 pass. No duplicate exists: lem-pur-tower-trace-purity-comparison and cor-pur-adic-and-rational-smooth-dualizing-complexes are different. FIX (E1/C4, step 2): the step chose a dimension bound only for X, but the output interval [a-2d_X,b+2d_Y] of prop-coef-integral-exceptional-adjoint also needs d_Y. Step 2 now takes d_X and d_Y from lem-kun-dimension-finite-type (0 for an empty scheme), states the intervals for G_RL and H_RL, and applies lem-coef-integral-compact-support with d=d_X. Accepted tool use: lem-pur-adic-purity-scalar-naturality (unit sk-thm-sf-compatibility is not in the unit's uses), which the statement's stmt_deps already force. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedIntegralPurityTrace",
+  "declaration": "WeilConjectures.NormalizedIntegralPurityTrace.normalizedIntegralPurityTrace",
+  "declarations": [
+   "WeilConjectures.NormalizedIntegralPurityTrace.component",
+   "WeilConjectures.NormalizedIntegralPurityTrace.counit",
+   "WeilConjectures.NormalizedIntegralPurityTrace.trace",
+   "WeilConjectures.NormalizedIntegralPurityTrace.quotientProjection",
+   "WeilConjectures.NormalizedIntegralPurityTrace.reductionComposition",
+   "WeilConjectures.NormalizedIntegralPurityTrace.supportComparison",
+   "WeilConjectures.NormalizedIntegralPurityTrace.QuotientEquations",
+   "WeilConjectures.NormalizedIntegralPurityTrace.FiniteEquations",
+   "WeilConjectures.NormalizedIntegralPurityTrace.normalizedIntegralPurityTrace"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedIntegralPurityTrace.lean",
+  "statement": "theorem normalizedIntegralPurityTrace (L : DerivedCategory (scalarReductionSource C.l E.val Y)) (hL : sfIntegralConstructible C.l E.val Y L) : (∀ (a b : ℤ), a ≤ b → (∀ i : ℤ, i ∈ proEtaleCohomologicalSupport ((scalarReductionDerivedExtension C.l E.val Y 0).obj L) → a ≤ i ∧ i ≤ b) → ∀ n : ℕ, HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing C.l E.val (n + 1)) ((scalarReductionDerivedExtension C.l E.val Y n).obj L) a b) ∧ ∃ hTor : finiteTorConstructibleIntegral C.l E.val Y L, QuotientEquations D C f r E ⟨L, hTor⟩ ∧ ∀ n : ℕ, IsIso (purAdicSourceReduction D C E.val f r L hTor n) ∧ IsIso (purAdicTargetReduction D C E.val f r L hTor n) ∧ IsIso (supportComparison D C f E (purAdicSource D C E.val f r L) n) ∧ IsIso (supportComparison D C f E (purAdicTarget D C E.val f L) n) ∧ ∃ e : (purAdicFiniteArrow D C E.val f r L hTor n).left ≅ (purAdicFiniteArrow D C E.val f r L hTor n).right, e.hom = (purAdicFiniteArrow D C E.val f r L hTor n).hom ∧ (scalarReductionDerivedExtension C.l E.val X n).map (component D C f r S A E ⟨L, hTor⟩).hom ≫ purAdicTargetReduction D C E.val f r L hTor n = purAdicSourceReduction D C E.val f r L hTor n ≫ e.hom ∧ (scalarReductionDerivedExtension C.l E.val X n).map (component D C f r S A E ⟨L, hTor⟩).inv ≫ purAdicSourceReduction D C E.val f r L hTor n = purAdicTargetReduction D C E.val f r L hTor n ≫ e.inv ∧ (scalarReductionDerivedExtension C.l E.val Y n).map (trace D C f r S A E ⟨L, hTor⟩) = supportComparison D C f E (purAdicSource D C E.val f r L) n ≫ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).map (purAdicSourceReduction D C E.val f r L hTor n) ≫ (purAdicFiniteSetting D C E.val n).coefficientValuedSmoothTrace f r ((scalarReductionDerivedExtension C.l E.val Y n).obj L) (purAdicReductionFiniteTor D C E.val Y L hTor n) ∧ (scalarReductionDerivedExtension C.l E.val Y n).map (counit D C f r S A E ⟨L, hTor⟩) = supportComparison D C f E (purAdicTarget D C E.val f L) n ≫ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).map (purAdicTargetReduction D C E.val f r L hTor n) ≫ (purAdicFiniteSetting D C E.val n).smoothExceptionalCounit f ((scalarReductionDerivedExtension C.l E.val Y n).obj L) ∧ FiniteEquations D C f r E ⟨L, hTor⟩ n",
+  "branch": "sheaf-dag",
+  "by": "Q115",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Use any specified simultaneous normalized Data family from lem-pur-adic-purity-scalar-naturality, whose existence is already recorded; its component and actual transported counit are used throughout. Includes explicit integral-to-finite equations, all further finite quotient equations, and direct/iterated source, target and support cocycles. No uniqueness of integral lifts is inferred from their reductions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b7beccb7",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Item clauses all rendered: gamma = A.gamma ≫ A.targetRealization from the specified Data argument; eta = .inv; trace = P_R(gamma) ≫ counit, where counit is the S-adjunction counit transported by S.ring.left and targetRealization, pinned via TargetRealizationReductions, Comparison.counit, QNormalized and FiniteRightNormalized. First conjunct gives the residue [a,b] Tor amplitude at every exponent n+1; ∃ hTor gives finite-Tor membership; IsIso of a, b, c; e.hom pinned to purAdicFiniteArrow; forward, inverse, trace (= c ≫ P_n(a) ≫ coefficientValuedSmoothTrace) and counit equations; QuotientEquations a/b/c cocycles and FiniteEquations for all 1≤m≤n+1. Statement verbatim; only the lean field changed; no new nodes or dep edits; docstrings and source places present; edge cases r=0, empty schemes, L=0, identity quotient, ramified E and universes OK. No compile (no file changed). Advisories: def-pur-finite-reduction-comparisons and PurCompactSupport owner decls not in stmt_deps; sorry helper quotientProjection has no node; SixFunctorOperationDatum imported but unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T003144-L-150095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

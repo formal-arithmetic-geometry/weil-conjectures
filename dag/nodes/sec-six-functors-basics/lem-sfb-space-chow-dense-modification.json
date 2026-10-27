@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-space-chow-dense-modification",
+ "kind": "statement",
+ "title": "Dense-open Chow modification of a separated algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Modules, tensor pullback and direct image are on these ringed sites [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], with a specified map $\\operatorname{Spec}A\\to S$ [def-weil-affine-spectrum]. Let $X\\to\\operatorname{Spec}A$ be separated of finite type [def-sfb-space-morphism-properties]. There exist a Noetherian scheme $V$, a representable proper surjective $A$-morphism $q:V\\to X$, a dense open subspace $U\\subseteq X$, and an immersion $e:V\\to\\mathbf P^r_A$ over $A$ for an integer $r\\geq0$ [def-nagata-projective-space-base-change], such that $q^{-1}(U)\\to U$ is an isomorphism. Here immersion means an open immersion followed by a closed immersion [def-weil-open-immersion, def-weil-closed-immersion]. No reducedness, irreducibility or flatness hypothesis is imposed. Noetherian means quasi-compact, quasi-separated and locally Noetherian on etale scheme charts [pqf-def-locnoeth].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 088U (lemma-chow-noetherian-separated), specialized to the affine Noetherian target; its application in Tag 08BE identifies the source with a scheme, the map as representable proper surjective, and the immersion as H-quasi-projective."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sfb-space-morphism-properties",
+  "def-nagata-projective-space-base-change",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-trf-scheme-algebraic-space",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Spec}A$. Its single affine chart makes it locally Noetherian by [pqf-def-locnoeth], and [lem-weil-pbc-affine-scheme-qcqs] gives quasi-compactness and quasi-separatedness. Thus $B$ is a Noetherian scheme. Apply [lem-sfb-space-dense-affine-immersion] to $f:X\\to B$, obtaining a dense quasi-compact open $U$ and $a:U\\to\\mathbf A^n_B$. By [lemma-nagata-relative-affine-space-open-immersion], the standard chart $\\mathbf A^n_B$ is open in $\\mathbf P^n_B$. A closed-then-open factorization of $a$ stays such a factorization after this open inclusion: the intermediate open in $\\mathbf A^n_B$ is also open in $\\mathbf P^n_B$. Write the resulting $B$-immersion as $a_P$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-dense-affine-immersion",
+    "lemma-nagata-relative-affine-space-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 088S (lemma-chow-noetherian), first sentence and standard affine chart; input 088N"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-blowup-embedding-extension] to the quasi-compact and quasi-separated scheme $B$, the separated finite-type map $f$, the quasi-compact open $U$, and $a_P$. It supplies $Z\\hookrightarrow\\mathbf P^n_B$, a finite-type quasi-coherent ideal $\\mathcal J$ on $Z$, its ordinary scheme blowup $Z'\\to Z$, a scheme $V$ open in $Z'$, and a representable proper $B$-map $q:V\\to X$. It also supplies the isomorphism $q^{-1}(U)\\to U$. We retain this particular $U$; its density was already established in step 1.",
+   "uses": [
+    "lem-sfb-space-blowup-embedding-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 088S (lemma-chow-noetherian), application of 088R (lemma-blowup-to-find-embedding)"
+   }
+  },
+  {
+   "text": "The closed immersion $Z\\hookrightarrow\\mathbf P^n_B$ makes $Z\\to B$ H-projective. Apply [lem-sfb-projective-affine-base-blowup] to $Z$, $A$, and $\\mathcal J$. It gives an integer $r\\geq0$ and a closed $B$-immersion $h:Z'\\hookrightarrow\\mathbf P^r_B$. Define $e=h\\circ v$, where $v:V\\hookrightarrow Z'$ is the open immersion from step 2. This is precisely an open immersion followed by a closed immersion over $B$, as required.",
+   "uses": [
+    "lem-sfb-projective-affine-base-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 088S and 088U, projectivity enhancement over the affine scheme base; divisors.tex 02NS and morphisms.tex 087S, 01WE as packaged by the cited node"
+   }
+  },
+  {
+   "text": "Properness means universal closedness, separatedness, and finite type by [def-sfb-space-morphism-properties]. In particular $q(|V|)$ is closed in $|X|$. The isomorphism over $U$ shows $|U|\\subseteq q(|V|)$. Since $U$ is dense, the only closed subset containing it is $|X|$. Hence $q$ is surjective. This also covers $X=\\varnothing$, where the empty subset is dense in the empty space.",
+   "uses": [
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 088U (lemma-chow-noetherian-separated), surjectivity of the dense-open modification from properness"
+   }
+  },
+  {
+   "text": "The maps $q$ and $f$ are of finite type, so [lem-sfb-space-finite-type-composition] gives finite type of $f q:V\\to B$. Both source and target are now schemes, and the morphism-property convention [def-sfb-space-morphism-properties] agrees with the scheme convention. Apply [lem-weil-pbc-finite-type-over-noetherian] with the Noetherian scheme $B$ from step 1: $V$ is quasi-compact and locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated], it is also quasi-separated, giving the Noetherian convention in the item. The data $V,q,U,e,r$ have all the asserted properties; reducedness, irreducibility and flatness have not been used.",
+   "uses": [
+    "lem-sfb-space-finite-type-composition",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex 01OY (lemma-locally-Noetherian-quasi-separated)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-dense-affine-immersion",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lem-sfb-space-blowup-embedding-extension",
+  "lem-sfb-projective-affine-base-blowup",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-finite-type-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 088S (lemma-chow-noetherian), using 088N and 088R, followed by the affine-scheme-base projectivity enhancement of 088U via existing lem-sfb-projective-affine-base-blowup. The affine base permits this without approximation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chow lemma for separated finite type algebraic spaces over a Noetherian affine base gives a proper surjection from a quasi projective scheme isomorphic on a dense open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.ValuativeCriterion f → AlgebraicGeometry.IsProper f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, quasi-separated, locally of finite type, and satisfies the valuative criterion, then $ f $ is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated finite type algebraic space has a projective modification which is a quasi projective scheme and unchanged over a dense open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsSeparated f] : IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]how|AlgebraicSpace|quasiProjective",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Completeness.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Completeness.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Mul.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Mul.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Prod.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Prod.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Asymptotics.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Asymptotics.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/NormedSpace.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/NormedSpace.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Bilinear.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Bilinear.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Basic.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/Basic.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/ContinuousLinearMap.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/ContinuousLinearMap.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/NNNorm.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2019 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/NNNorm.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Sequences.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2018 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Sequences.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Patrick Massot, Yury Kudryashov\"}\n  {\"file\": \"Mathlib/Topology/Defs/Sequences.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2018 Jan-David Salchow. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/Defs/Sequences.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Patrick Massot, Yury Kudryashov\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Restrict.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/PiProd.lean\", \"line\": \"4\", \"text\": \"Authors: Jan-David Salchow, Sébastien Gouëzel, Jean Lo, Yury Kudryashov, Frédéric Dupuis,\"}\n  {\"file\": \"Mathlib/Topology/Sequences.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2018 Jan-David Salchow. All rights reserved.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Chow|quasiProjective|AlgebraicSpace",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: no Chow or algebraic-space modification declaration in the geometry directory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chow lemma proper birational scheme modification of a separated finite type algebraic space over an affine Noetherian base with an immersion into projective space",
+   "results": "8 hits. AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.of_valuativeCriterion",
+   "date": "2026-10-24",
+   "verdict": "no match: searched the item; scheme-only properness and projective-spectrum results do not give a dense-open-isomorphism modification of an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsImmersion",
+   "results": "0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: searched the item; scheme-only properness and projective-spectrum results do not give a dense-open-isomorphism modification of an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "Chow|AlgebraicSpace|quasiProjective",
+   "results": "0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: searched the item; scheme-only properness and projective-spectrum results do not give a dense-open-isomorphism modification of an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-adic-existence",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph.",
+   "via": [
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-chow-dense-modification",
+  "worker": "stage1",
+  "summary": "Split the 088S construction into dense affine immersion and prescribed-open blowup extension, then use the existing H-projectivity lemma for ordinary blowups over an affine Noetherian base. Prove surjectivity from closed image containing the dense open, and Noetherianity by finite-type composition. No change to the statement. Removed unused coherent-module statement dependency. No Lean attachment states this algebraic-space theorem.",
+  "blueprint": "Read the latest sk-thm-sf-ctf-stability unit and det-thm-sf-ctf-stability-direct-images proof (3). This is the generated proper-support existence prerequisite of its recorded compactification/direct-image chain, specifically the Chow modification in 08BE. The ancestor tool prints None; JSON null and the inherited via chain are preserved. The steps realize 088S followed by the affine-base enhancement, with no change of unit route.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Foundational scheme geometry used only to verify the base or source Noetherianity and the standard affine/projective chart in the Chow construction; it replaces no six-functor or unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Foundational scheme geometry used only to verify the base or source Noetherianity and the standard affine/projective chart in the Chow construction; it replaces no six-functor or unit-level argument."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Foundational scheme geometry used only to verify the base or source Noetherianity and the standard affine/projective chart in the Chow construction; it replaces no six-functor or unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Foundational scheme geometry used only to verify the base or source Noetherianity and the standard affine/projective chart in the Chow construction; it replaces no six-functor or unit-level argument."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Foundational scheme geometry used only to verify the base or source Noetherianity and the standard affine/projective chart in the Chow construction; it replaces no six-functor or unit-level argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-1d0299f8d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-1d0299f8d (reviewer sub-agent of L); spot-checked: I read the item and both new nodes against the Stacks sources: 088R, 088S and 088U (spaces-more-morphisms) and 088N (spaces-limits); 06G4 and 085Q-085Z checked against the tag list. The item statement is true and unchanged; it is 088S plus the projectivity step of 088U over an affine Noetherian base. Dropping pqf-def-coherent from its stmt_deps is correct. Steps 1-5 are sound. The citations of locnoeth, affine qcqs, the open chart A^n in P^n, the new nodes, projective-affine-base-blowup, universal closedness and finite-type composition each say what the step takes from them; step 4 is genuinely elementary. dense-affine-immersion is a true specialization of 088N: finite presentation by 06G4, U is quasi-compact because X is Noetherian, and it is a scheme. blowup-embedding-extension is a true restatement of 088R with B a scheme. Neither new node restates the item. Searches of 088N/R/S/U and 'chow' across the DAG found no duplicate: the existing nodes are scheme-only Chow results or the space nodes for 089J/089G. One fault (C3/C4), fixed. The extension node gave J as a quasi-coherent ideal on the etale site with a blowup by etale descent. Step 3 feeds J into lem-sfb-projective-affine-base-blowup, which needs a Zariski ideal (pqf-def-coherent) and the ordinary blowup (def-nagata-global-blowup), and nothing cited proves the two agree. The fix restates the node: J is a Zariski finite-type quasi-coherent ideal of the scheme Z, and Z' = Bl_J Z is the ordinary scheme blowup, which is exactly what 088R gives. It also replaces the vague clause 'the maps of U agree under v and b' with b∘v∘s = u, and adds pqf-def-coherent to its stmt_deps. Batch-5 check: every flagged citation is a general definition or reaches only generic space or projective-geometry lemmas (fibre products, atlas tests, H-projective composition, projective bundles), never the trace formula or Poincaré duality or a step of their proofs, so all are accepted. Tool uses accepted: locnoeth, affine-scheme-qcqs, nagata relative-affine-space-open-immersion, finite-type-over-noetherian and locally-noetherian-quasi-separated, all generic scheme facts. Edge cases checked: X empty, U empty with the zero-ideal blowup, and nonreduced zero-dimensional X.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceChowDenseModification",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_chow_dense_modification",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceChowDenseModification.lean",
+  "statement": "theorem exists_chow_dense_modification {S : Scheme.{u}} (A : Type u) [CommRing A] [IsNoetherianRing A] (a : Spec (.of A) ⟶ S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace (Over.mk a)) (hsep : MapIsSeparated f) (hft : MapIsFiniteType f) : ∃ (V : Over S) (b : V ⟶ Over.mk a) (q : schemeSpace V ⟶ X) (U : OpenSubspace X) (r : ℕ) (e : V.left ⟶ ProjectiveSpace (ULift.{u} (Fin (r + 1))) (Spec (.of A))) (W : Scheme.{u}) (j : V.left ⟶ W) (i : W ⟶ ProjectiveSpace (ULift.{u} (Fin (r + 1))) (Spec (.of A))), IsNoetherian V.left ∧ IsRepresentable q.hom.hom ∧ MapIsProper q ∧ IsSurjective q.hom.hom ∧ (q ≫ f).hom.hom = yoneda.map b ∧ Dense (pointImage U.val.ι) ∧ IsIso (pullback.snd q.hom.hom U.val.ι) ∧ IsOpenImmersion j ∧ IsClosedImmersion i ∧ j ≫ i = e ∧ e ≫ (ProjectiveSpace (ULift.{u} (Fin (r + 1))) (Spec (.of A)) ↘ Spec (.of A)) = b.left",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published algebraic-space, schemeSpace, OpenSubspace, point topology, morphism-property and projective-space interfaces. The added statement dependencies are existing definition nodes; no definition or statement correction is needed. The immersion is explicitly factored open then closed, as specified by this node and Stacks 08BE."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2aa9add73",
+  "group": "ND",
+  "result": "pass",
+  "note": "Statement read clause by clause against the node and Stacks 088U/088S/08BE. S, Noetherian A, a: Spec A→S, X: AlgebraicSpace S, f: X→schemeSpace(Over.mk a) with MapIsSeparated/MapIsFiniteType (recorded owners). V: Over S with IsNoetherian V.left, equivalent to qc+qs+locally Noetherian via the locally-Noetherian quasi-separatedness instance. b: V→Over.mk a; q: schemeSpace V→X with IsRepresentable, MapIsProper, IsSurjective and (q≫f)=yoneda.map b. U: OpenSubspace X with Dense(pointImage U.val.ι). IsIso(pullback.snd q U.ι) on the whole inverse image. e = j≫i with j an open immersion and i a closed immersion into ProjectiveSpace(ULift(Fin(r+1)))(Spec A), and e≫structure map = b.left. No extra hypotheses. Edge cases X empty, A=0, r=0 (P^0), nonreduced X, single universe u: all fine. Delivery adds only lean plus three existing definition-node stmt_deps (schemeSpace, OpenSubspace, point topology); no theorem dep added or dropped. lean.statement verbatim. Live node lean is null; no duplicate declaration in side-live or Mathlib. Proof is sorry; docstrings carry source and blueprint tags and the five proof steps; all imports exist on base. Report has Worker report and Second reading sections. Not recompiled (no file changed). No findings."
+ }
+}

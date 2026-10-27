@@ -1,0 +1,185 @@
+{
+ "id": "def-sfb-cubical-rigidified-line",
+ "kind": "definition",
+ "title": "Cubical structures on rigidified invertible modules",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $p:G\\to S$ be a commutative group scheme with identity $e$: its addition, inverse and identity are $S$-morphisms satisfying the commutative group identities. Let $L$ be an invertible $\\mathcal O_G$-module [def-sc-invertible-module] with rigidification $r:e^*L\\simeq\\mathcal O_S$. All pullbacks below are tensor inverse images [def-pc-module-pullback], and tensor products are sheaf tensor products over the structure sheaf of the indicated scheme [def-pur-sheaf-tensor-product]. On $G^3=G\\times_SG\\times_SG$ [def-pc-fibre-product], write $m_I$ for the sum of coordinates indexed by $I\\subseteq\\{1,2,3\\}$, with $m_\\varnothing=e\\circ p_3$, where $p_3:G^3\\to S$ is the structure map. Put\n$$\\Theta_3(L)=m_{123}^*L\\otimes m_1^*L\\otimes m_2^*L\\otimes m_3^*L\\otimes(m_{12}^*L)^{-1}\\otimes(m_{13}^*L)^{-1}\\otimes(m_{23}^*L)^{-1}\\otimes(m_\\varnothing^*L)^{-1}.$$\nThe inverse of an invertible module is its dual $\\mathcal Hom(L,\\mathcal O_G)$. A cubical structure compatible with $r$ is a nowhere vanishing section $\\tau:\\mathcal O_{G^3}\\simeq\\Theta_3(L)$, invariant under permutations of the three coordinates, whose restriction when any coordinate is $e$ is the unit section under the cancellations induced by $r$, and satisfying the cocycle identity on $G^4$:\n$$\\tau(x,y,z)\\otimes\\tau(x+y,w,z)=\\tau(y,w,z)\\otimes\\tau(x,y+w,z).$$\nHere evaluation at $(x,y,z)$ denotes pullback along the indicated coordinate-sum map, and the equality uses the canonical identification of the tensor products after cancelling equal line factors. Thus it is an identity of sections over $G^4$, equivalently after every base change and every quadruple of generalized points. A cubical rigidified line is $(L,r,\\tau)$. Its isomorphisms are invertible-module isomorphisms preserving $r$ and carrying $\\tau$ to the other cube section under $\\Theta_3$. For a homomorphism $h:G'\\to G$ of commutative group schemes over $S$, pullback of $(L,r,\\tau)$ means $(h^*L,r',(h^3)^*\\tau)$: here $r'$ is $e_{G'}^*h^*L\\simeq e_G^*L\\xrightarrow{r}\\mathcal O_S$, and the cube section is read through $\\Theta_3(h^*L)\\simeq(h^3)^*\\Theta_3(L)$. Restriction to a subscheme $S'\\hookrightarrow S$ means the same termwise base change to $G\\times_S S'$.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "I §2, cubical structures, especially I 2.4.5; equivalent line-module formulation. Local original WANTED. Online cross-check: Kai-Wen Lan, revised thesis, §3.2.2, Definition 3.2.2.6 and (3.2.2.3)--(3.2.2.4)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cubical structure on a rigidified line bundle on a commutative group scheme is a symmetric trivialization of the alternating cube tensor satisfying the cocycle identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCocycle\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Functor Cᵒᵖ GrpCat → {I : Type w'} → (I → C) → Type (max (max (max u v) w) w')\", \"doc\": \"Given a category $\\\\mathcal{C}$, a presheaf of groups $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, an indexing type $I$, and a function assigning objects of $\\\\mathcal{C}$ to elements of $I$, this defin\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {G : CategoryTheory.Functor Cᵒᵖ GrpCat} →\\n      {I : Type w'} →\\n        {U : I → C} →\\n          CategoryTheory.PresheafOfGroups.OneCochain G U →\\n            CategoryTheory.PresheafOfGroups.OneCochain G U → CategoryTheory.PresheafOfGrou\", \"doc\": \"Given a group-valued presheaf $G$ on a category $\\\\mathcal{C}$ and a family of objects $U: I \\\\to \\\\mathcal{C}$, two 1-cocycles $\\\\gamma_1, \\\\gamma_2$ are related if there exists a zero cochain $\\\\alpha$ su\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.H1\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Functor Cᵒᵖ GrpCat → {I : Type w'} → (I → C) → Type (max (max (max u v) w) w')\", \"doc\": \"Given a category $\\\\mathcal{C}$, a presheaf of groups $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, an indexing type $I$, and a function $U: I \\\\to \\\\mathcal{C}$, the first non-abelian cohomology group $H\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCochain\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Functor Cᵒᵖ GrpCat → {I : Type w'} → (I → C) → Type (max (max (max u v) w) w')\", \"doc\": \"Given a category $\\\\mathcal{C}$, a group-valued presheaf $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, a type $I$, and a family of objects $I \\\\to \\\\mathcal{C}$, this constructs the type of 1-cocycles ass\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCocycle.ev_symm\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (G : CategoryTheory.Functor Cᵒᵖ GrpCat) {I : Type w'}\\n  (U : I → C) (γ : CategoryTheory.PresheafOfGroups.OneCocycle G U) (i j : I) ⦃T : C⦄ (a : T ⟶ U i) (b : T ⟶ U j),\\n  γ.ev i j a b = (γ.ev j i b a)⁻¹\", \"doc\": \"For any 1-cocycle $\\\\gamma$ in a group-valued presheaf $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, indexed by a family of objects $U : I \\\\to \\\\mathcal{C}$, and for any indices $i,j \\\\in I$, object $T \\\\\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCochain.instGroup\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {G : CategoryTheory.Functor Cᵒᵖ GrpCat} →\\n      {I : Type w'} → {U : I → C} → Group (CategoryTheory.PresheafOfGroups.OneCochain G U)\", \"doc\": \"For any category $\\\\mathcal{C}$, group-valued presheaf $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, index type $I$, and family of objects $U: I \\\\to \\\\mathcal{C}$, the set of 1-cocycles $\\\\text{OneCochain\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.instOneH1\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {G : CategoryTheory.Functor Cᵒᵖ GrpCat} → {I : Type w'} → {U : I → C} → One (CategoryTheory.PresheafOfGroups.H1 G U)\", \"doc\": \"For any category $\\\\mathcal{C}$, presheaf of groups $G: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, and covering family $U: I \\\\to \\\\mathcal{C}$, the first non-abelian cohomology group $H^1(G, U)$ has a can\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.OneCocycle.instOne\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (G : CategoryTheory.Functor Cᵒᵖ GrpCat) →\\n      {I : Type w'} → (U : I → C) → One (CategoryTheory.PresheafOfGroups.OneCocycle G U)\", \"doc\": \"For any category $\\\\mathcal{C}$, group-valued presheaf $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, and family of objects $U: I \\\\to \\\\mathcal{C}$, the set of 1-cocycles $\\\\text{OneCocycle}(F, U)$ has a c\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Definition of cubist invertible sheaf and cubical isomorphisms on group schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsIso φ] : (inv φ).app U = inv (φ.app U)\", \"doc\": \"For any isomorphism $\\\\phi$ between sheaves of modules over a scheme $X$ and any open subset $U \\\\subseteq X$, the inverse of $\\\\phi$ evaluated at $U$ coincides with the inverse of the section map $\\\\phi_\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.Types.sheafIso\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"{ℱ ℱ' : Sheaf K (Type v)} (i : G.op ⋙ ℱ.val ≅ G.op ⋙ ℱ'.val) : ℱ ≅ ℱ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a Grothendieck topology $J$ on $\\\\mathcal{D}$, and a cover-dense and locally full functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this constructs an iso\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inv_app\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] (U : X.Opens) :\\n  (inv f).app U =\\n    X.presheaf.map (eqToHom (show (f ≫ inv f) ⁻¹ᵁ U = U by rw [IsIso.hom_inv_id]; rfl)).op ≫ inv (f.app ((inv f) ⁻¹ᵁ U))\", \"doc\": \"Let $f: X \\\\to Y$ be an isomorphism of schemes, and let $f^{-1}: Y \\\\to X$ be its inverse. Associated with $f$ and $f^{-1}$ are morphisms of sheaves of rings, denoted $f^\\\\#$ and $(f^{-1})^\\\\#$ respective\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.isoSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \"{P : Cᵒᵖ ⥤ D} (hP : Presheaf.IsSheaf J P) : P ≅ J.sheafify P\", \"doc\": \"For a presheaf $ P $ on a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, if $ P $ satisfies the sheaf condition with respect to $ J $, then there exists an isomorphism between $\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.isoMk_inv\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C}\\n  (e : X.toPresheafedSpace ≅ Y.toPresheafedSpace),\\n  (AlgebraicGeometry.SheafedSpace.isoMk e).inv = CategoryTheory.InducedCategory.homMk e.inv\", \"doc\": \"For sheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, the inverse of the isomorphism $X \\\\cong Y$ constructed from an isomorphism $e$ between their underlying presheafed spaces is given by appl\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.sheafIso\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"{ℱ ℱ' : Sheaf K A} (i : G.op ⋙ ℱ.val ≅ G.op ⋙ ℱ'.val) : ℱ ≅ ℱ'\", \"doc\": \"Given a cover-dense and locally full functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ with respect to a Grothendieck topology $ K $ on $ \\\\mathcal{D} $, and any two sheaves $ \\\\mathcal{F}, \\\\mathcal{F}' : \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X Y : SheafedSpace C} (f : X ⟶ Y) [IsIso f] : SheafedSpace.IsOpenImmersion f\", \"doc\": \"Every isomorphism between sheafed spaces is an open immersion. Specifically, if $ f : X \\to Y $ is an isomorphism of sheafed spaces (i.e., admits an inverse morphism), then $ f $ satisfies the defining\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.Types.sheafIso_inv_val\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {D : Type u_2}\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {K : CategoryTheory.GrothendieckTopology D}\\n  {G : CategoryTheory.Functor C D} [inst_2 : G.IsCoverDense K] [inst_3 : G.IsLocallyFull K]\\n  {ℱ ℱ' : CategoryTheory.Sheaf K (Ty\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a Grothendieck topology $J$ on $\\\\mathcal{D}$, and a cover-dense and locally full functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the inverse of the she\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cubical\", \"Invertible\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|CubeStructure|CubicalStructure",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|CubeStructure|CubicalStructure",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary sheaf cocycles, ring Picard groups, symmetric monoidal sheaf categories, smooth manifold sheaves or cubic polynomials; none defines a normalized cubical line on a commutative group scheme. Read the near-match source for OneCocycle (H1.lean:123), Pic.functor (PicardGroup.lean:606), and Sheaf.symmetricCategory (Monoidal.lean:186)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cubist line bundle on a group scheme with rigidification and a symmetric cube section",
+   "results": "[leansearch] OK 8 hit(s): smoothSheafGroup, Cubic.ext_iff, WeierstrassCurve.c_relation_of_char_three, Trivialization.IsLinear, Cubic, Cubic.ext, SymmetricPower.instAddCommGroup, Cubic.toPoly_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary sheaf cocycles, ring Picard groups, symmetric monoidal sheaf categories, smooth manifold sheaves or cubic polynomials; none defines a normalized cubical line on a commutative group scheme. Read the near-match source for OneCocycle (H1.lean:123), Pic.functor (PicardGroup.lean:606), and Sheaf.symmetricCategory (Monoidal.lean:186)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cubical\", \"Invertible\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary sheaf cocycles, ring Picard groups, symmetric monoidal sheaf categories, smooth manifold sheaves or cubic polynomials; none defines a normalized cubical line on a commutative group scheme. Read the near-match source for OneCocycle (H1.lean:123), Pic.functor (PicardGroup.lean:606), and Sheaf.symmetricCategory (Monoidal.lean:186)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cubical structure on a rigidified invertible sheaf over a commutative group scheme is a symmetric normalized trivialization of the alternating cube tensor satisfying the cocycle identity",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.PresheafOfGroups.OneCocycle, CommRing.Pic.functor, CategoryTheory.PresheafOfGroups.H1, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCochain, CategoryTheory.PresheafOfGroups.ZeroCochain, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃",
+   "date": "2026-10-24",
+   "verdict": "no match: returned types concern ordinary sheaf cocycles, ring Picard groups, symmetric monoidal sheaf categories, smooth manifold sheaves or cubic polynomials; none defines a normalized cubical line on a commutative group scheme. Read the near-match source for OneCocycle (H1.lean:123), Pic.functor (PicardGroup.lean:606), and Sheaf.symmetricCategory (Monoidal.lean:186)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symmetric-ample-power-extension",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the category in which extension and uniqueness are formulated",
+   "via": [
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-cubical-rigidified-line",
+  "worker": "stage1",
+  "summary": "Checked the explicit cubical line data, symmetry, normalized identity slices, cocycle and morphisms against the cited online Lan definition and by tensor cancellation. Added the existing sheaf tensor-product definition as a direct statement dependency and made the pullback prescription explicit. No new nodes or proof obligations are introduced; unavailable local sources are reported as WANTED.",
+  "blueprint": "Searched latest blueprint and imported blueprint for cubical and rigidified; no equivalent cubical-line definition. Retained the inherited null ancestor and exact supporting-input place/via chain under det-thm-sf-ctf-stability-direct-images (3), through the symmetric ample-power extension input; this is a definition, not a replacement proof route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-3ba56c599",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-3ba56c599 (reviewer sub-agent of L); spot-checked: Read the whole definition; this is a plain one-level split. There is one commit; live and side-live still have the item unsplit with no reviewed record; there is no repair note. Compared with live, only status, statement (+ the sheaf-tensor stmt_dep, an explicit pullback/restriction prescription), mathlib_searches (appended) and split_report change. Theta_3 signs (-1)^{|I|+1} with m_empty=e∘p are correct. The cocycle tau(x,y,z)tau(x+y,w,z)=tau(y,w,z)tau(x,y+w,z) is Moret-Bailly's condition after renaming; both sides have type M_{x+y+w}M_x^{-1}M_y^{-1}M_w^{-1}M_0^2 with M=t_z^*L⊗L^{-1}. Normalization is required: the cocycle plus symmetry make the slice value a constant c, and c·tau is again cubical, so uniqueness in the citer lem-sfb-semiabelian-cubical-rigidification needs it. The phrase 'cancellations induced by r' gives the same identification as the canonical one, so it is harmless. Pullback: h∘m'_I=m_I∘h^3, including I=∅ via h e'=e; r' is correct. Restriction covers the dense-open use in lem-sfb-normal-symmetric-cubical-extension. All 5 stmt_deps say what is used; def-pur-sheaf-tensor-product is the same node def-pc-module-pullback uses, so there is no cycle. Small cases: G=S forces tau=1; trivial line with constant multiples; no division by 2. Duplicate search (rg -L over the DAG, all blueprint snapshots, the lean trees) finds only the 4 citers and theorem-of-the-cube lemmas: no duplicate, same_as [] is right. Moret-Bailly I.2.4.5 is not available locally and is WANTED; Lan §3.2.2 is online only and I did not read it. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CubicalRigidifiedLine",
+  "declaration": "AlgebraicGeometry.CubicalRigidifiedLine",
+  "declarations": [
+   "AlgebraicGeometry.CubicalLine.pullbackUnit",
+   "AlgebraicGeometry.CubicalLine.Word",
+   "AlgebraicGeometry.CubicalLine.Word.module",
+   "AlgebraicGeometry.CubicalLine.Frame",
+   "AlgebraicGeometry.CubicalLine.Frame.valid",
+   "AlgebraicGeometry.CubicalLine.Word.framed",
+   "AlgebraicGeometry.CubicalLine.Word.frameMap",
+   "AlgebraicGeometry.CubicalLine.cube",
+   "AlgebraicGeometry.CubicalLine.sumMap",
+   "AlgebraicGeometry.CubicalLine.thetaWord",
+   "AlgebraicGeometry.CubicalLine.theta",
+   "AlgebraicGeometry.CubicalLine.value",
+   "AlgebraicGeometry.CubicalLine.Framed",
+   "AlgebraicGeometry.CubicalLine.Compatible",
+   "AlgebraicGeometry.CubicalRigidifiedLine",
+   "AlgebraicGeometry.CubicalLine.Word.mapIso",
+   "AlgebraicGeometry.CubicalLine.Frame.change",
+   "AlgebraicGeometry.CubicalLine.baseCubeMap",
+   "AlgebraicGeometry.CubicalLine.PreservesSums",
+   "AlgebraicGeometry.CubicalLine.ComparisonNormalized",
+   "AlgebraicGeometry.CubicalLine.comparison_existsUnique",
+   "AlgebraicGeometry.CubicalLine.comparison",
+   "AlgebraicGeometry.CubicalLine.pullbackRigidification",
+   "AlgebraicGeometry.CubicalLine.pullbackSection",
+   "AlgebraicGeometry.CubicalLine.pullback_properties",
+   "AlgebraicGeometry.CubicalLine.hom_preservesSums",
+   "AlgebraicGeometry.CubicalLine.baseChangedGroup",
+   "AlgebraicGeometry.CubicalLine.baseChangedGroup_grpObj",
+   "AlgebraicGeometry.CubicalLine.baseChangedGroup_isCommMonObj",
+   "AlgebraicGeometry.CubicalLine.baseChange_preservesSums",
+   "AlgebraicGeometry.CubicalRigidifiedLine.Iso",
+   "AlgebraicGeometry.CubicalRigidifiedLine.pullbackOver",
+   "AlgebraicGeometry.CubicalRigidifiedLine.pullback",
+   "AlgebraicGeometry.CubicalRigidifiedLine.baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CubicalRigidifiedLine.lean",
+  "statement": "structure CubicalRigidifiedLine {S : Scheme.{u}} (G : Over S) [CommGrpObj G]",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The module defines the exact eight-factor cube, the symmetry/identity-slice/cocycle laws via finite local frames on arbitrary test schemes, rigidified lines, their isomorphisms, homomorphism pullback and termwise base change. Named helper theorems cover the uniquely frame-normalized cube comparison and preservation of the explicitly stated pullback data; each has the full natural-language proof. No canonical map is replaced by an arbitrary isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546ddfdbb",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Clause-by-clause match: CommGrpObj G in Over S, IsInvertible line, rigidification via the recorded tensorPullback along the identity, cube as a 3-fold product in Over S, sumMap including I=∅, thetaWord with signs (-1)^{|I|+1}, sectionIso as an iso; Compatible gives symmetry, identity-slice normalization and the exact cocycle τ(x,y,z)τ(x+y,w,z)=τ(y,w,z)τ(x,y+w,z); Iso, pullback (r' = node's) and arbitrary baseChange. The frame tests are frame-independent (net factor multisets recomputed: equal for symmetry and cocycle, cancelling on identity slices), so they equal the canonical cancellation identities, neither vacuous nor stronger. All comparisons are canonical (normalized-adjunction tensorPullbackSectionComp and boundaryPullbackComparison, dualEvaluation); comparison is pinned by a true ∃!. The 4 sorried helpers are true well-definedness theorems with proof docstrings, all in lean.declarations. Node identical to live apart from lean; statement verbatim; 34 declarations match; no duplicate notion; docstrings with source and blueprint tag; edge cases and single universe OK. No changes, so no compile."
+ }
+}

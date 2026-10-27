@@ -1,0 +1,356 @@
+{
+ "id": "lem-sfb-flat-semisimplicial-derived-realization",
+ "kind": "statement",
+ "title": "Realization of a flat semisimplicial derived system",
+ "statement": "Use the semisimplicial ringed total category $\\mathscr M$, component sites $(\\mathcal C_n,\\mathcal O_n)$ and module pullbacks of [lem-sfb-semisimplicial-ringed-total-category]. Assume $f_\\alpha^*$ is exact for every injection $\\alpha:[m]\\hookrightarrow[n]$ (flatness of the ringed transition). Suppose given $B_n\\in D(\\mathcal O_n)$ and isomorphisms $\\theta_\\alpha:Lf_\\alpha^*B_m\\xrightarrow{\\sim}B_n$, compatible with identities and composition through the canonical derived pullback comparisons. If $\\operatorname{Hom}_{D(\\mathcal O_n)}(B_n,B_n[t])=0$ for every $n\\ge0$ and every integer $t<0$, there is a cartesian $B\\in D(\\mathscr M)$ and isomorphisms $e_nB\\simeq B_n$ intertwining every $\\theta_\\alpha$. There is no bound on the cohomological amplitude of the $B_n$ and no quasi-coherence assumption.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D9T, lemma-cartesian-module-derived-from-simplicial, injective-order-map adaptation of the module Postnikov construction; the finite simplex resolution uses only injective simplex maps. This semisimplicial version is agent-supplied to avoid flatness of degeneracies."
+ },
+ "stmt_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact adjoints $j_{r!}\\dashv e_r$ of [lem-sfb-semisimplicial-evaluation-free-adjoint] and put $X_r=j_{r!}B_r$. For each face $\\delta_i:[r-1]\\hookrightarrow[r]$, define $d_{r,i}:X_r\\to X_{r-1}$ to be adjoint to $B_r\\xrightarrow{\\theta_{\\delta_i}^{-1}}f_{\\delta_i}^*B_{r-1}\\hookrightarrow e_rX_{r-1}$. Here exactness identifies $Lf_\\alpha^*$ with termwise $f_\\alpha^*$. Put $d_r=\\sum_{i=0}^r(-1)^id_{r,i}$. The adjunction formula says that in component $m$ the $\\alpha:[r]\\hookrightarrow[m]$ summand is carried to the $\\alpha\\delta_i$ summand by $f_\\alpha^*\\theta_{\\delta_i}^{-1}$. In all formulas use the canonical pullback composition comparisons.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9T, first proof bullet; Tag 0D9L, first paragraph, replacing all simplex maps by injections"
+   }
+  },
+  {
+   "text": "We verify $d_{r-1}d_r=0$. For $a<b$, omitting vertices $a,b$ has the two factorizations $\\delta_b\\delta_a=\\delta_a\\delta_{b-1}$. Their coefficient maps agree because $\\theta_{\\alpha\\beta}=\\theta_\\alpha f_\\alpha^*\\theta_\\beta$. Their signs in the double boundary are $(-1)^{a+b}$ and $(-1)^{a+b-1}$, so they cancel. This checks the identity on every summand of every $e_mX_r$; the derived adjunction of [lem-sfb-semisimplicial-evaluation-free-adjoint] checks the same equality directly in $D(\\mathscr M)$ by evaluating on the identity summand in degree $r$. Thus $(X_r,d_r)$ is a complex in $D(\\mathscr M)$.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9L, omitted computation following the alternating-face maps"
+   }
+  },
+  {
+   "text": "For $i>j+2$ set $a=i-j-2>0$. By derived adjunction and the finite-sum formula,\n$$\\operatorname{Hom}(X_i[a],X_j)=\\operatorname{Hom}(B_i[a],e_i j_{j!}B_j)\\simeq\\bigoplus_{\\alpha:[j]\\hookrightarrow[i]}\\operatorname{Hom}(B_i[a],f_\\alpha^*B_j).$$\nEach $\\theta_\\alpha$ identifies its target with $B_i$, so every summand is $\\operatorname{Hom}(B_i,B_i[-a])=0$. Apply [lem-sfb-countable-postnikov-extension-comparison] successively, starting with $Y_0=X_0$, to obtain a single compatible countable Postnikov system with triangles $Y_r\\to X_r\\to Y_{r-1}\\to Y_r[1]$. Put $E_r=Y_r[r]$ and use its connecting arrows $E_{r-1}\\to E_r$.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-countable-postnikov-extension-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9L, obstruction vanishing and construction of Y; Tag 0D9T, module replacements"
+   }
+  },
+  {
+   "text": "The abelian sheaves on the total site and on every component have exact filtered colimits by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. The faithful exact forgetful functors of [lem-weil-pbc-module-sheaves-colimits-forgetful] preserve these colimits, hence the module categories have exact filtered colimits too. A countable sum is a filtered colimit of its finite partial sums, so countable sums are exact. Therefore [lem-kun-derived-countable-sums-exact] supplies countable coproducts in the unbounded derived categories, computed on complexes. Choose a telescope $B=\\operatorname{hocolim}_r E_r$, namely a cone of $1-\\mathrm{successor}$ on $\\bigoplus_r E_r$. It exists by the cone axiom in [def-weil-abstract-derived-category]. Let $b:X_0=E_0\\to B$ be its zeroth leg. Evaluation $e_m$ preserves module sums: form their component sums and induced transitions, using [lem-weil-pbc-ringed-topoi-module-adjunction] for $f_\\alpha^*\\dashv f_{\\alpha,*}$ and [lem-weil-pbc-left-adjoint-preserves-colimits] for its preservation of sums; a compatible family of maps from the summands is uniquely a map of systems by [lem-sfb-semisimplicial-ringed-total-category]. The derived coproduct theorem just cited therefore gives preservation of countable derived sums. Termwise evaluation commutes with shifts and cones, hence is exact by [def-weil-abstract-derived-category]; [lem-kun-functor-preserves-hocolim] therefore identifies $e_mB$ with a telescope of $e_mE_r$, compatibly with the actual legs and hence with $e_mb$.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-kun-derived-countable-sums-exact",
+    "def-weil-abstract-derived-category",
+    "lem-kun-functor-preserves-hocolim",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9L, K = hocolim Y_n[n] and restriction commuting with that hocolim; derived.tex Tags 0A5L and 090Z"
+   }
+  },
+  {
+   "text": "Fix $m$. Put $A_{m,r}=\\bigoplus_{\\alpha:[r]\\hookrightarrow[m]}B_m$, zero for $r>m$, with alternating boundary given by precomposition with faces. The maps $v_{m,r}:e_mX_r\\simeq A_{m,r}$ are the sums of $\\theta_\\alpha$. They commute with the boundaries: on the $\\alpha$ summand the two maps to the $\\alpha\\delta_i$ summand are equal by\n$$\\theta_{\\alpha\\delta_i}\\, f_\\alpha^*(\\theta_{\\delta_i}^{-1})=\\theta_\\alpha.$$\nThere is an explicit comparison Postnikov system for this finite complex. Represent $B_m$ by a cochain complex $K_m$. For $r\\ge0$ let $T_{m,r}^q=\\bigoplus_{0\\le n\\le\\min(r,m)}\\bigoplus_{\\alpha:[n]\\hookrightarrow[m]}K_m^{q+n}$, with differential the face boundary plus $(-1)^n d_{K_m}$ on the $n$th summand. Then $T_{m,r-1}\\to T_{m,r}$ is the inclusion of a subcomplex, and its quotient is $A_{m,r}[r]$ represented with the usual shifted differential. The degreewise split short exact sequence and [lem-weil-pbc-complex-ses-triangle] give triangles $T_{m,r-1}\\to T_{m,r}\\to A_{m,r}[r]\\to T_{m,r-1}[1]$; rotation and shifting exhibit $Z_{m,r}=T_{m,r}[-r]$ as a Postnikov system. Explicitly, take $a_r:Z_{m,r}\\to A_{m,r}$ to be $(-1)^{r(r-1)/2}$ times top projection and $b_r:A_{m,r}\\to Z_{m,r-1}$ to be $(-1)^{r(r+1)/2+1}$ times the face boundary into its top summand. Since $r(r-1)+2$ is even, $a_{r-1}b_r$ is the prescribed boundary. The connecting maps $Z_{m,r-1}\\to Z_{m,r}[1]$ are the inclusions of the finite total complexes. These triangles follow by identifying $Z_{m,r}$ with $\\operatorname{Cone}(b_r)[-1]$: reorder the two finite blocks and multiply the top block by the displayed sign. This also fixes the maps from $T_{m,0}$ to $T_{m,r}$ as the literal inclusions.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9L, finite simplex complex and explicit Y prime; Tag 0D9T, replace Z by O_m; derived.tex Example 0D8Z"
+   }
+  },
+  {
+   "text": "For the two systems $e_mY_r$ and $Z_{m,r}$, the comparison obstruction groups for $i>j+1$ are\n$$\\operatorname{Hom}(e_mX_i[i-j-1],A_{m,j}).$$\nBoth arguments are finite sums of $B_m$ up to the indicated shift, so these groups vanish by the negative self-Ext hypothesis (and are zero if $i>m$). The comparison clause of [lem-sfb-countable-postnikov-extension-comparison] extends $v_{m,r}$ to isomorphisms of the systems, in particular $c_m:e_mE_m\\simeq T_{m,m}$ compatible with the maps out of $e_mX_0$. Since $e_mX_r=0$ for $r>m$, the Postnikov triangles show $e_mE_{r-1}\\to e_mE_r$ is an isomorphism for every $r>m$: the cone is $e_mX_r[r]=0$. By [lem-sfb-sequential-telescope-calculus] the actual leg $\\lambda_m:e_mE_m\\to e_mB$ is an isomorphism. Thus define $\\gamma_m:e_mB\\to B_m$ to be $\\lambda_m^{-1}$, then $c_m$, then the fold augmentation $\\epsilon_m:T_{m,m}\\to K_m$ in the derived category. It remains to check that this augmentation is an isomorphism and the $\\gamma_m$ intertwine transitions.",
+   "uses": [
+    "lem-sfb-countable-postnikov-extension-comparison",
+    "lem-sfb-sequential-telescope-calculus",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9L, comparison obstruction groups and gamma_m; injective indexing makes the evaluated tower stationary after m"
+   }
+  },
+  {
+   "text": "The augmentation $\\epsilon_m$ is a homotopy equivalence, for any (possibly unbounded) representative $K_m$. Indeed write an increasing simplex as $[v_0,\\ldots,v_n]$. On the augmented simplex chain complex set $h[v_0,\\ldots,v_n]=[0,v_0,\\ldots,v_n]$ if $v_0>0$ and $h=0$ if $v_0=0$, and send the augmented degree $-1$ to vertex $[0]$. Expanding the alternating boundary gives $\\partial h+h\\partial=1$ in the augmented complex: when $v_0>0$, the first face of $[0,v_0,\\ldots,v_n]$ is the original simplex and every other face cancels its term in $h\\partial$; when $v_0=0$, only the first face contributes, returning the original simplex. On the nonaugmented total complex this is the identity minus the vertex-zero inclusion followed by the fold. Apply this $h$ to the simplex index and the identity to $K_m$; the vertical terms cancel since $(-1)^{n+1}+(-1)^n=0$. This is a cochain homotopy between $1$ and the vertex-zero inclusion composed with $\\epsilon_m$. The opposite composite is $1$ on $K_m$. Therefore $\\epsilon_m$ and hence $\\gamma_m$ are isomorphisms, with no amplitude bound.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9B, simplex contraction, explicitly restricted to injective simplices; Tag 0D9L, augmentation of Y prime"
+   }
+  },
+  {
+   "text": "For every vertex $\\nu:[0]\\hookrightarrow[m]$, the construction of $c_m$ and the telescope legs gives $\\gamma_m\\,e_mb\\,\\iota_\\nu=\\theta_\\nu$, where $\\iota_\\nu:f_\\nu^*B_0\\to e_mX_0$ is the vertex summand. Let $\\alpha:[m]\\hookrightarrow[n]$. Naturality of the total morphism $b:X_0\\to B$ gives $B(\\alpha)f_\\alpha^*(e_mb)=e_nb\\,X_0(\\alpha)$; its component on the pulled-back $\\nu$ summand is the $\\alpha\\nu$ summand, by [lem-sfb-semisimplicial-evaluation-free-adjoint]. Compose with $\\gamma_n$. The resulting map is $\\theta_{\\alpha\\nu}$. Composing instead with $\\theta_\\alpha f_\\alpha^*\\gamma_m$ gives $\\theta_\\alpha f_\\alpha^*\\theta_\\nu=\\theta_{\\alpha\\nu}$ by the given cocycle. The common precomposition $f_\\alpha^*(e_mb\\,\\iota_\\nu)$ is an isomorphism: $\\gamma_m(e_mb\\,\\iota_\\nu)=\\theta_\\nu$ and both factors on the right and $\\gamma_m$ are isomorphisms. Cancelling gives $\\gamma_n B(\\alpha)=\\theta_\\alpha f_\\alpha^*\\gamma_m$. This proves every transition compatibility, including identity and composite injections. It also makes every $B(\\alpha)$ an isomorphism, so $B$ is cartesian by [lem-sfb-semisimplicial-ringed-total-category].",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D9L, last compatibility diagram and cancellation on one vertex summand; Tag 0D9T, module variant"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-sfb-countable-postnikov-extension-comparison",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-kun-derived-countable-sums-exact",
+  "def-weil-abstract-derived-category",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sfb-sequential-telescope-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D9T (lemma-cartesian-module-derived-from-simplicial), following the full proof of Tag 0D9L (lemma-cartesian-object-derived-from-simplicial) with injections only; explicit finite simplex contraction and componentwise stationary-tower argument supplied by Q32."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compatible semisimplicial system of objects in derived categories of modules over flat ringed topoi is realizable when all negative self Ext groups vanish",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext Y X i)) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, if for all $ i \\\\geq n $ and all objects $ Y $, the Ext group $ \\\\operatorname{Ext}^i(Y, X) $ is trivial (i.e., contains at most one element),\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext X Y i)) →\\n    CategoryTheory.HasProjectiveDimensionLT X n\", \"doc\": \"For any natural number n and object X in an abelian category C, if for all i ≥ n and any object Y in C, the Ext group in degree i between X and Y is a subsingleton, then X has projective dimension les\"}\n  {\"name\": \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (X : C) (n : ℕ)\\n  [inst_2 : CategoryTheory.HasExt C],\\n  CategoryTheory.HasInjectiveDimensionLT X n ↔\\n    ∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext Y X i), e = 0\", \"doc\": \"For an object $X$ in an abelian category $\\\\mathcal{C}$, $X$ has injective dimension less than $n$ if and only if for all integers $i \\\\geq n$ and for all objects $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\o\"}\n  {\"name\": \"CategoryTheory.hasExt_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C],\\n  CategoryTheory.HasExt C ↔\\n    ∀ (X Y : C) (n : ℤ),\\n      0 ≤ n →\\n        Small.{w, w'}\\n          ((DerivedCategory.singleFunctor C 0).obj X ⟶\\n            (CategoryTheory.\", \"doc\": \"For an abelian category $\\\\mathcal{C}$ with a derived category, the property $\\\\text{HasExt}$ holds if and only if for all objects $X, Y \\\\in \\\\mathcal{C}$ and non-negative integers $n$, the hom-set betwe\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C} {X : C} {n : ℕ}\\n  [self : CategoryTheory.HasInjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext Y X i)\", \"doc\": \"If an object $X$ in an abelian category has injective dimension less than $n$, then for all integers $i \\\\geq n$ and for any object $Y$ in the category, the Ext group $\\\\operatorname{Ext}^i(Y, X)$ is tr\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext Y X i), e = 0) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, an object $X$ has injective dimension less than $n$ if and only if for every object $Y$ in $\\\\mathcal{C}$ and every integer $i \\\\geq n$, the Ext group $\\\\operatornam\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C} {X : C} {n : ℕ}\\n  [self : CategoryTheory.HasProjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext X Y i)\", \"doc\": \"If an object $X$ in an abelian category has projective dimension strictly less than $n$, then for all $i \\\\geq n$ and any object $Y$, the Ext group $\\\\operatorname{Ext}^i(X, Y)$ is trivial (a subsinglet\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext X Y i), e = 0) →\\n    CategoryTheory.HasProjectiveDimensionLT X n\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category and $X$ an object in $\\\\mathcal{C}$. If for every integer $i \\\\geq n$ and for every object $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^i(X, Y)$ is tr\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give existence of derived categories, derivations, or injective/projective dimension; none realizes a cartesian derived system on a varying-ring total site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realization of cartesian derived module systems with vanishing negative extensions by a complex on the total site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.HasDifferentials.exists_universal_derivation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} {φ : S ⟶ F.op.comp R} [self : PresheafOfModules.HasDi\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^\\\\mathrm{op}\\\\to\\\\mathbf{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, a presheaf of commutative ri\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"PresheafOfModules.Derivation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on a category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{D} $, a derivation is a natural transform\"}\n  {\"name\": \"PresheafOfModules.Derivation.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"{C : Type u₁} →\\n  {inst : CategoryTheory.Category.{v₁, u₁} C} →\\n    {D : Type u₂} →\\n      {inst_1 : CategoryTheory.Category.{v₂, u₂} D} →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on a category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on a category $ \\\\mathcal{D} $, and a natural transformation $ \\\\var\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.instModule\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear\", \"type\": \": Module R (Ext X Y n)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^n(X,Y)$ in degree $n$ is equipped with a canonical $R$-module structure. This structure arises from the \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt\", \"type\": \"(C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C] : HasExt.{w} C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Type (max u v)\", \"doc\": \"The derived category of homological complexes with integer-indexed shapes, obtained by localizing the category of such complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give existence of derived categories, derivations, or injective/projective dimension; none realizes a cartesian derived system on a varying-ring total site"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SimplicialObject\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give existence of derived categories, derivations, or injective/projective dimension; none realizes a cartesian derived system on a varying-ring total site"
+  },
+  {
+   "tool": "grep",
+   "query": "Postnikov|semisimplicial|negative.*[Ee]xt",
+   "results": "[grep] OK 0 hit(s)\n\nDirectory: Mathlib/Algebra/Homology",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give existence of derived categories, derivations, or injective/projective dimension; none realizes a cartesian derived system on a varying-ring total site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian semisimplicial system in derived categories of modules with exact transition pullbacks and vanishing negative self extensions comes from a complex on the total ringed site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"CochainComplex.IsKInjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A cochain complex $ X $ in an abelian category $ \\\\mathcal{C} $ is K-injective if for every acyclic cochain complex $ A $, every morphism $ A \\\\to X $ is null-homotopic. This characterizes complexes tha\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize derived descent data by taking a Postnikov convolution of extension by zero from the components of a semisimplicial ringed topos",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"(M : F.obj (.mk (op S))) : F.DescentData f\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a family of morphisms $f_i: X_i \\\\to S$, this c\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.recOn\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {motive : F.DescentData f →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.toDescentData_obj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} (f : (i : ι) → X i ⟶ S) (M : ↑(F.obj { as := Opposite.op S })),\\n  (F.toDescentData f).obj M = CategoryTheory.Pseudo\", \"doc\": \"For a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and a family of morphisms $ f_i: X_i \\\\to S $, the functor from $ F(\\\\text{o\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.rec\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {motive : F.DescentData f →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{ι' : Type t'} {X' : ι' → C} (f' : ∀ i', X' i' ⟶ S) (h : Sieve.ofArrows _ f = Sieve.ofArrows _ f') :\\n  ∃ (e : F.DescentData f ≌ F.DescentData f'), Nonempty (F.toDescentData f ⋙ e.functor ≅ F.toDescentData f')\", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and two families of morphisms $ f_i: X_i \\\\to S $ and $ f'_j: X'_j \\\\to S \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.isoMk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {D₁ D₂ : F.DescentData f} →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.mk.inj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {ι : Type t} {S : C}\\n  {X : ι → C} {f : (i : ι) → X i ⟶ S} {obj : (i : ι) → ↑(F.obj { as := Opposite.op (X i) })}\\n  {hom :\\n    ⦃Y : C⦄ →\\n      (q : Y \", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SimplicialObject\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|Postnikov|cartesian.*derived",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian semisimplicial system in derived categories of modules with exact transition pullbacks and vanishing negative self extensions comes from a complex on the total ringed site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"CochainComplex.IsKInjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A cochain complex $ X $ in an abelian category $ \\\\mathcal{C} $ is K-injective if for every acyclic cochain complex $ A $, every morphism $ A \\\\to X $ is null-homotopic. This characterizes complexes tha\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize derived descent data by taking a Postnikov convolution of extension by zero from the components of a semisimplicial ringed topos",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"(M : F.obj (.mk (op S))) : F.DescentData f\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a family of morphisms $f_i: X_i \\\\to S$, this c\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.recOn\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {motive : F.DescentData f →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.toDescentData_obj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} (f : (i : ι) → X i ⟶ S) (M : ↑(F.obj { as := Opposite.op S })),\\n  (F.toDescentData f).obj M = CategoryTheory.Pseudo\", \"doc\": \"For a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and a family of morphisms $ f_i: X_i \\\\to S $, the functor from $ F(\\\\text{o\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.rec\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {motive : F.DescentData f →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{ι' : Type t'} {X' : ι' → C} (f' : ∀ i', X' i' ⟶ S) (h : Sieve.ofArrows _ f = Sieve.ofArrows _ f') :\\n  ∃ (e : F.DescentData f ≌ F.DescentData f'), Nonempty (F.toDescentData f ⋙ e.functor ≅ F.toDescentData f')\", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and two families of morphisms $ f_i: X_i \\\\to S $ and $ f'_j: X'_j \\\\to S \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.isoMk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {D₁ D₂ : F.DescentData f} →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.mk.inj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {ι : Type t} {S : C}\\n  {X : ι → C} {f : (i : ι) → X i ⟶ S} {obj : (i : ι) → ↑(F.obj { as := Opposite.op (X i) })}\\n  {hom :\\n    ⦃Y : C⦄ →\\n      (q : Y \", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SimplicialObject\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|Postnikov|cartesian.*derived",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian semisimplicial system in derived categories of modules with exact transition pullbacks and vanishing negative self extensions comes from a complex on the total ringed site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"CochainComplex.IsKInjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A cochain complex $ X $ in an abelian category $ \\\\mathcal{C} $ is K-injective if for every acyclic cochain complex $ A $, every morphism $ A \\\\to X $ is null-homotopic. This characterizes complexes tha\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective_aux\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {K L : CochainComplex C ℤ} (f : K ⟶ L) (α : CochainComplex.HomComplex.Cochain K L (-1)) (n m : ℤ),\\n  n + 1 = m →\\n    HomologicalComplex.ExactAt K m →\\n      ∀ [CategoryTheory.Injective (L.X m)],\\n     \", \"doc\": \"Let $ K $ and $ L $ be cochain complexes in a preadditive category $ \\\\mathcal{C} $ with integer indices. Suppose $ f : K \\\\to L $ is a chain map, $ \\\\alpha $ is a cochain of degree $-1$ in $ \\\\text{Hom}(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize derived descent data by taking a Postnikov convolution of extension by zero from the components of a semisimplicial ringed topos",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.ofObj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"(M : F.obj (.mk (op S))) : F.DescentData f\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a family of morphisms $f_i: X_i \\\\to S$, this c\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.recOn\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {motive : F.DescentData f →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"[F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : ∀ i, X i ⟶ S) (hf : Sieve.ofArrows _ f ∈ J S) :\\n  (F.toDescentData f).IsEquivalence\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.toDescentData_obj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} (f : (i : ι) → X i ⟶ S) (M : ↑(F.obj { as := Opposite.op S })),\\n  (F.toDescentData f).obj M = CategoryTheory.Pseudo\", \"doc\": \"For a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and a family of morphisms $ f_i: X_i \\\\to S $, the functor from $ F(\\\\text{o\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.rec\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {motive : F.DescentData f →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{ι' : Type t'} {X' : ι' → C} (f' : ∀ i', X' i' ⟶ S) (h : Sieve.ofArrows _ f = Sieve.ofArrows _ f') :\\n  ∃ (e : F.DescentData f ≌ F.DescentData f'), Nonempty (F.toDescentData f ⋙ e.functor ≅ F.toDescentData f')\", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an object $ S \\\\in \\\\mathcal{C} $, and two families of morphisms $ f_i: X_i \\\\to S $ and $ f'_j: X'_j \\\\to S \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.isoMk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {D₁ D₂ : F.DescentData f} →\", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.mk.inj\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.DescentData\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {ι : Type t} {S : C}\\n  {X : ι → C} {f : (i : ι) → X i ⟶ S} {obj : (i : ι) → ↑(F.obj { as := Opposite.op (X i) })}\\n  {hom :\\n    ⦃Y : C⦄ →\\n      (q : Y \", \"doc\": \"Given a category $\\\\mathcal{C}$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an index type $\\\\iota$, an object $S \\\\in \\\\mathcal{C}$, and a family of objects $X:\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"SimplicialObject\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|Postnikov|cartesian.*derived",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: neither ordinary stack descent nor K-injectivity realizes a cartesian system in varying-ring derived categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-negative-ext-hyperdescent",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Realization of a flat semisimplicial derived system.",
+   "via": [
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-semisimplicial-derived-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement. Adapted the Stacks module Postnikov construction to face maps, with explicit boundary cancellation, finite component convolutions, contraction and transition compatibility. Two strictly supporting statement-only nodes; reused the concurrently delivered exact free-extension lemma; existing generic exact-sum and telescope-preservation results reused. No Lean or Mathlib attachment.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/duality prerequisite: realization input in lem-sfb-space-negative-ext-hyperdescent. The module Postnikov route is kept. Computed ancestor is null, matching inherited ancestry; no chapter/unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Generic exact-filtered-colimit theorem on any small site, used for the total site and components. No node of this unit states that categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic faithful exact forgetful functor and module colimit construction for a ringed site. No node of this unit states that categorical tool."
+   },
+   {
+    "node": "lem-kun-derived-countable-sums-exact",
+    "why": "Generic derived coproduct theorem under exact countable sums, without any Kunneth input. No node of this unit states that categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic distinguished triangle of a short exact sequence of complexes, applied to finite simplex total complexes. No node of this unit states that categorical tool."
+   },
+   {
+    "node": "lem-kun-functor-preserves-hocolim",
+    "why": "Generic exact-functor comparison of actual telescope triangles and legs, without a Kunneth hypothesis. No node of this unit states that categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module adjunction on any ringed topoi, used to justify that the transition pullbacks are left adjoints. No node of this unit supplies this general categorical input."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic small-colimit preservation of left adjoints, applied only to countable sums of transition modules. No node of this unit supplies this general categorical input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-kun-derived-countable-sums-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-b101ce4ac",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-b101ce4ac (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct; one fix to a new node's statement. Item statement unchanged. Ordinary split, no re-split note. I read the full proofs of Stacks 0D9L/0D9T, 0D7Z, 0D82, 0D83 and 0D8Z; the item follows 0D9L with injections only. Step 2: d²=0 via δ_bδ_a=δ_aδ_{b-1}, the cocycle and opposite signs; equality checked by the adjunction on the identity summand. Step 3: the obstruction group is a finite sum of Hom(B_i,B_i[-a]) with a=i-j-2>0. Step 4: exact countable sums give termwise derived coproducts; e_m preserves them and is exact; lem-kun-functor-preserves-hocolim applies. Step 5: v commutes with the boundaries by the cocycle; the T_{m,r} filtration degrees are right; sign exponent r(r-1)+2 is even. Step 6: the 0D82 obstruction vanishes; e_mX_r=0 for r>m, so the tower is stationary and the telescope node makes the leg an iso. Step 7: simplex contraction checked case by case, valid for unbounded K_m. Step 8: vertex-summand cancellation as in 0D9L. Postnikov node matches 0D83/0D82/014A. Telescope node is true (0CRJ/0CRH). No duplicates: checked bounded-postnikov-extension-generation, module-object-postnikov-roos, pbc-finite-postnikov-isomorphism, semisimplicial-cartesian-simplex-filtration, pc-compact-generator-telescope-iso, sequence-relative-hom-telescope. All seven declared tool_uses accepted as generic. Fault B2/B3: lem-sfb-countable-postnikov-extension-comparison used 'map of Postnikov systems' without defining it, and steps 6/8 need compatibility with the connecting arrows. FIX: name the connecting arrow c_r and define such a map as g_r with g_0=u_0 and (g_r,u_r,g_{r-1}) a morphism of triangles. No other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatSemisimplicialDerivedRealization",
+  "declaration": "CategoryTheory.SemisimplicialRingedTotal.flat_semisimplicial_derived_realization",
+  "file": "lean/Sheaf/CategoryTheory/FlatSemisimplicialDerivedRealization.lean",
+  "statement": "theorem flat_semisimplicial_derived_realization (P : Presentation R h) (exact : ∀ {i j : SemiSimplexCategoryᵒᵖ} (a : i ⟶ j), PreservesFiniteLimits (P.pullback a).ordinary ∧ PreservesFiniteColimits (P.pullback a).ordinary) (B : ∀ i : SemiSimplexCategoryᵒᵖ, (R.fibre i).D) (theta : ∀ {i j : SemiSimplexCategoryᵒᵖ} (a : i ⟶ j), (P.pullback a).derived.obj (B j) ≅ B i) (theta_id : ∀ i : SemiSimplexCategoryᵒᵖ, (theta (𝟙 i)).hom = (P.identity i).derived.hom.app (B i)) (theta_comp : ∀ {i j k : SemiSimplexCategoryᵒᵖ} (a : i ⟶ j) (b : j ⟶ k), (theta (a ≫ b)).hom = (P.composition a b).derived.hom.app (B k) ≫ (P.pullback a).derived.map (theta b).hom ≫ (theta a).hom) (negative_self_hom : ∀ i : SemiSimplexCategoryᵒᵖ, ∀ (t : ℤ), t < 0 → ∀ (f : B i ⟶ (B i)⟦t⟧), f = 0) : ∃ (X : (R.total h).D) (e : ∀ i : SemiSimplexCategoryᵒᵖ, (P.evaluation i).derived.obj X ≅ B i), P.IsCartesian X ∧ ∀ {i j : SemiSimplexCategoryᵒᵖ} (a : i ⟶ j), (P.derivedTransition a).app X ≫ (e i).hom = (P.pullback a).derived.map (e j).hom ≫ (theta a).hom",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7eb27a219",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, Stacks 0D9T (spaces-simplicial.tex l.3322), full dependency module SemisimplicialRingedTotalCategory and free-adjoint lemma. All clauses match: arbitrary but fully pinned Presentation P; exact = PreservesFiniteLimits∧Colimits of (P.pullback a).ordinary (same form as dep cohomology_criterion; not stronger); theta : (pullback a).derived.obj (B j) ≅ B i with theta_id/theta_comp in the shape of derived_id/derived_comp (types and direction checked by hand); negative_self_hom ∀ t<0 equals the source Hom(K[t],K)=0, t>0; conclusion ∃ X, e, IsCartesian ∧ intertwining square for every face map; no amplitude/qcoh restriction; single universe u. Node differs from live only in lean; statement verbatim in file; stmt_deps unchanged; imports exist; no definitions, sorry only, docstrings with source place, blueprint tag and 8 steps; Worker report and Second reading by Q17 sections present. No findings; no file changed, no compile."
+ }
+}

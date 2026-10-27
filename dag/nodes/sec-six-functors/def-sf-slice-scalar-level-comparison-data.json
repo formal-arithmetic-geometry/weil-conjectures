@@ -1,0 +1,136 @@
+{
+ "id": "def-sf-slice-scalar-level-comparison-data",
+ "kind": "definition",
+ "title": "Data of coefficient-linear normalized scalar level comparisons",
+ "statement": "With the sites, coefficient tower, algebra maps and presentations of [def-sf-semilinear-slice-scalar-data], define sliceScalarComponentHom by transporting an actual level comparison along AX.obj_eq, AV.obj_eq and extension.obj_eq. Define SliceScalarLevelComparison to record coefficient-linear level isomorphisms, their formula on all original pure generators and uniqueness, the scalar-restriction identification preserving original summands and its uniqueness, and compatibility with all coefficient transitions and module morphisms. These are exactly the existing data declarations formerly in SliceScalarLevelComparison, with no change in their types or bodies. No existence assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03EK (tensor product of module sheaves) and 0E8I (lemma-j-shriek-and-tensor); the coefficient-generator refinement in lem-sf-semilinear-slice-scalar-generators."
+ },
+ "stmt_deps": [
+  "def-sf-semilinear-slice-scalar-data",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-ringed-slice-tensor-generators",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf extension of scalars functor along a diagram of coefficient rings with compatible units",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "ModuleCat.ExtendScalars.obj'",
+     "ModuleCat.extendScalars",
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "ModuleCat.coextendScalars",
+     "SheafOfModules.restrictScalars",
+     "ModuleCat.CoextendScalars.obj'",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "PresheafOfModules.restrictScalars"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing project scalar models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with restriction of scalars for a morphism of sheaves of rings",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.map_ιFree_mapFree_hom_assoc",
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.restrictScalars_map_val",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "ModuleCat.Tilde.res_apply",
+     "ModuleCat.Tilde.toOpen_res"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "No generator-normalized slice comparison or sheaf scalar tower.",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:124",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:126"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-27",
+   "verdict": "No duplicate; reuse the named declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SliceScalarLevelComparison",
+  "group": "P7",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-slice-scalar-level-comparison",
+   "place": "Unchanged data API extracted to meet the per-file compilation limit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SliceScalarLevelComparisonBasic",
+  "file": "lean/Sheaf/CategoryTheory/SliceScalarLevelComparisonBasic.lean",
+  "declaration": "SheafOfModules.SliceScalarLevelComparison",
+  "declarations": [
+   "SheafOfModules.sliceScalarComponentHom",
+   "SheafOfModules.SliceScalarLevelComparison"
+  ],
+  "by": "P7",
+  "date": "2026-10-27",
+  "statement": "structure SliceScalarLevelComparison",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7be4b",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261027T065859-L-2486306",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-7be4b",
+  "group": "P7",
+  "result": "fix",
+  "landing": "20261027T065859-L-2486306",
+  "kind": "interface",
+  "note": "independent cc review: item proof (Hom-equivalence/Yoneda via new SliceScalarLevelAdjunction + RingedOpenScalar.comparison) vs node lem-sf-slice-scalar-level-comparison; Basic data split vs clone f87ce49ef44 (verbatim); sandbox compile of 3 files + importer SemilinearSliceScalarGenerators OK; axioms clean"
+ }
+}

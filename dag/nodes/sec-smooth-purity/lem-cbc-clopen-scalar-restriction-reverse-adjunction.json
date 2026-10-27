@@ -1,0 +1,107 @@
+{
+ "id": "lem-cbc-clopen-scalar-restriction-reverse-adjunction",
+ "kind": "statement",
+ "title": "Reverse clopen adjunction after scalar identification",
+ "statement": "Let j : U → T be a clopen immersion of schemes. Let R and S be commutative ring sheaves on their pro-etale sites, with an isomorphism c from S to the literal restriction of R. Let F be literal module restriction followed by scalar restriction along c. For every L with adjunction L ⊣ F, there exists an adjunction F ⊣ L. Restriction and module categories are those of [def-weil-pbc-proetale-operations]; the open site composition is that of [lem-pur-proetale-open-unit-evaluation]. This includes empty U and makes no quasi-compactness hypothesis. The open-composition functor is supplied with its standard continuity instance.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-proetale-open-unit-evaluation",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TS, disjoint two-open ringed-module gluing; scalar transport and uniqueness of adjoints."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-sf-clopen-reverse-module-adjunction] in ordinary mode to obtain e and adjunctions e.ordinary ⊣ restrict and restrict ⊣ e.ordinary. Restriction of scalars along c is an equivalence E. The pushforward composition isomorphism identifies restrict followed by E.functor with F. Compose E.symm.toAdjunction with e.adjunction to obtain E.inverse followed by e.ordinary ⊣ F. Uniqueness of left adjoints identifies that composite with L. Compose the reverse adjunction with E.toAdjunction, and transport its right adjoint by this unique-left-adjoint isomorphism to get F ⊣ L.",
+   "uses": [
+    "lem-sf-clopen-reverse-module-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-clopen-reverse-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TS; purely formal scalar equivalence and adjunction transport."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteCompactSupportProetale",
+  "date": "2026-10-25",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Clopen open-to-direct-image comparison in proper/open refinement calculus.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClopenScalarRestrictionReverseAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenScalarRestrictionReverseAdjunction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.clopenScalarRestrictionReverseAdjunction",
+  "statement": "theorem clopenScalarRestrictionReverseAdjunction {U T : Scheme.{t}} (j : U ⟶ T)\n    [IsOpenImmersion j] [IsClosedImmersion j]\n    [(proEtaleOpenComposition j).IsContinuous (ProEt.topology U) (ProEt.topology T)]\n    (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})\n    (S : Sheaf (ProEt.topology U) CommRingCat.{t + 1})\n    (c : S ≅ ((proEtaleOpenComposition j).sheafPushforwardContinuous\n      CommRingCat.{t + 1} (ProEt.topology U) (ProEt.topology T)).obj R)\n    (L : proEtaleRingModules U S ⥤ proEtaleRingModules T R)\n    (adj : L ⊣ SheafOfModules.pushforward (F := proEtaleOpenComposition j)\n      ((sheafCompose (ProEt.topology U)\n        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map c.hom)) :\n    Nonempty (SheafOfModules.pushforward (F := proEtaleOpenComposition j)\n      ((sheafCompose (ProEt.topology U)\n        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map c.hom) ⊣ L)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "clopen restriction extension by zero reverse adjunction sheaves of modules",
+   "results": "8 hits including Scheme.Modules.restrictAdjunction and CondensedMod.LocallyConstant.adjunction; no clopen reverse module adjunction on the pro-etale site.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the project reverse adjunction, with a proved scalar transport wrapper."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits for Adjunction.leftAdjointUniq and its coherence equations; ofNatIsoLeft/ofNatIsoRight inspected in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-25",
+   "verdict": "These formal APIs prove the transport without a new mathematical hole."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*adjunction|proEtaleScalarEquivalence|pushforwardComp",
+   "results": "25 Mathlib hits including SheafOfModules.pushforwardComp; local rg also finds ClopenReverseModuleAdjunction and proEtaleScalarEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "Existing APIs suffice; the new module hides the ordinary/system instance package."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T124121-L-1934742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261025T144120-L-1192974",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.clopenScalarRestrictionReverseAdjunction"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "def-cbc-strict-quotient-pullback-data",
+ "kind": "definition",
+ "title": "Strict quotient representatives, resolutions and pulled augmentation data",
+ "status": "split",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], and let $(A,I)$ be the Noetherian adic coefficient datum of [def-weil-pbc-adic-coefficient-datum]. For $T=X,Y$, use its small pro-etale site and completed ring sheaf $B_T=\\varprojlim_{n\\geq1}(A/I^n)_T$ from that datum. Put $\\mathcal M_T=\\operatorname{Mod}(B_T)$, using [def-weil-sheaf-of-modules-category], and $\\operatorname{Tow}_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\mathcal M_T)$, using [def-weil-inverse-system]. All complexes are unbounded cochain complexes. Tensor products are the sheaf tensor products of [def-pur-sheaf-tensor-product].\n\nDefine a K-flat flat-term representative over $B_T$ to be the data of a complex $P$ in $\\mathcal M_T$, a proof that $P$ is K-flat [def-pc-kflat-complex], and a proof that each term $P^q$ is flat [def-pc-flat-sheaf-modules]. This data alone includes no chosen object of the derived category or identification with it.\n\nLet $\\Delta_TP$ be the strict constant tower complex with identity transitions. Let $R_T(P)$ be the actual strict quotient complex of [def-weil-pbc-adic-coefficient-datum], with level $P\\otimes_{B_T}(A/I^n)_T$ (regarded as a $B_T$-module) and transitions induced by the quotient maps. Let $a_P:\\Delta_TP\\to R_T(P)$ be the chain map whose levelwise section formula is $x\\mapsto x\\otimes1$. The coefficient-first tensor presentation writes this same scalar-extension map as $x\\mapsto1\\otimes x$.\n\nFor a K-flat flat-term representative $P$ over $B_X$, define a strict quotient resolution to be the data of a complex $H$ in $\\operatorname{Tow}_X$, a quasi-isomorphism $r:H\\to R_X(P)$, a proof that every evaluated complex $H_n$ is K-flat, and a proof that every term $H_n^q$ is flat. No lift of $a_P$ to $H$ is included, and no flatness or K-flatness of $R_X(P)$ is required.\n\nFor $g:Y\\to X$, let $G$ be the projection-defined ordinary completed module pullback of [def-weil-pbc-completed-pullback]. Define $G_C^{\\mathrm{Tow}}$ on strict tower complexes by applying $G$ levelwise and degreewise, to differentials and transitions as well as objects. Let $Q_T^{\\mathrm{Tow}}$ be the derived localizations of [def-weil-abstract-derived-category]. Given any functor $L_t:D(\\operatorname{Tow}_X)\\to D(\\operatorname{Tow}_Y)$, any K-flat flat-term representative $P$ over $B_X$, and a specified isomorphism $\\delta:L_t(Q_X^{\\mathrm{Tow}}\\Delta_XP)\\xrightarrow{\\sim}Q_Y^{\\mathrm{Tow}}G_C^{\\mathrm{Tow}}(\\Delta_XP)$, define the transported pulled augmentation to be the actual composite\n$$w_{P,\\delta}=L_t(Q_X^{\\mathrm{Tow}}a_P)\\circ\\delta^{-1}:Q_Y^{\\mathrm{Tow}}G_C^{\\mathrm{Tow}}(\\Delta_XP)\\longrightarrow L_t(Q_X^{\\mathrm{Tow}}R_X(P)).$$\nNo existence or invertibility of a derived counit is asserted by this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization Step 6, retained normalization Steps 4-5: strict representatives R(P), actual augmentation a_P, and w_P. These are the published transparent definitions in Sheaf.Paper.StrictQuotientPullbackComputation, lines 33-107; Stacks derived.tex Tag 06XN (lemma-find-existence-computes), dual, supplies the resolving-class context."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CbcStrictKFlatRepresentative|CbcStrictQuotientResolution|cbcStrictAugmentation",
+   "results": "0 hits in Mathlib. Direct rg with the same pattern in lean/WeilConjectures gave no hits; in lean/Sheaf it found the definitions in Sheaf/Paper/StrictQuotientPullbackComputation.lean:33,52,77,102 and consumers in SfCompletedAugmentationAdjunct.lean. No definition node in dag/nodes owns these declarations.",
+   "date": "2026-10-22",
+   "verdict": "Existing project definitions found; new DAG ownership only, existing: true."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat flat-term representative strict quotient resolution quotient augmentation pulled back through a counit",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.fst', CategoryTheory.ReflQuiv.adj_counit_app, CategoryTheory.LiftLeftAdjoint.counitCoequalises, CategoryTheory.representablyCoflat_op_iff, CategoryTheory.Quotient.natTransLift, ComplexShape.strictUniversalPropertyFixedTargetQuotient, HomotopicalAlgebra.CofibrantObject.HoCat.pResolutionObj, CategoryTheory.flat_iff_lan_flat",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the published project definitions rather than create copies."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict quotient complex augmentation constant tower K-flat representative resolution data",
+   "results": "8 hits: CategoryTheory.Abelian.LeftResolution.chainComplex, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.Abelian.LeftResolution, CategoryTheory.Abelian.LeftResolution.chainComplexFunctor, CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.Abelian.LeftResolution.chainComplexMap, CategoryTheory.InjectiveResolution",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the published project definitions rather than create copies."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-exact-pullback-quotient-augmentation-square",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization Step 6 via immersion-comparison normalization Step 5; old normalization proof Steps 4-5: constant-tower equality and strict quotient augmentation; the chosen K-flat representative, strict quotient resolution, and actual augmentation used to type the comparison square",
+   "via": [
+    "lem-sf-exact-pullback-quotient-augmentation-square",
+    "lem-sf-exact-pullback-counit-normalization",
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "module": "Sheaf.Paper.StrictQuotientPullbackComputation",
+  "declaration": "AlgebraicGeometry.Scheme.CbcStrictKFlatRepresentative",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CbcStrictKFlatRepresentative",
+   "AlgebraicGeometry.Scheme.CbcStrictQuotientResolution",
+   "AlgebraicGeometry.Scheme.cbcStrictReduction",
+   "AlgebraicGeometry.Scheme.cbcStrictDelta",
+   "AlgebraicGeometry.Scheme.cbcStrictAugmentation",
+   "AlgebraicGeometry.Scheme.cbcStrictPull",
+   "AlgebraicGeometry.Scheme.cbcStrictPulledAugmentation"
+  ],
+  "statement": "structure CbcStrictKFlatRepresentative (T : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Ownership repair requested in return of immutable head 43bc37ad024a: these seven existing transparent definitions are not constructed by strictQuotientPullbackComputation. This definition node owns them through the existing published module, without duplicating or relocating declarations. Read against the current live source via scompile.py --source; positive exponent n+1 is represented by n : ℕ. The theorem remains a proof dependency only."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fd441f58e",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fd441f58e",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of the 43bc37ad H2 RETURN. The Lean file is byte-identical to that head (sha256 32a19b6e), whose mathematics was accepted clause by clause, and the item's lean record is unchanged. Only stmt_deps changed: theorem lem-cbc-strict-quotient-pullback-computation is replaced by the new def-cbc-strict-quotient-pullback-data (existing:true over the unchanged Sheaf.Paper.StrictQuotientPullbackComputation) and stays in proof_deps only. The new node's declarations cover all 7 cbcStrict* declarations used by the item (regex check). Its statement matches the live definitions at lines 25-107 (representative fields, Delta, R(P), a_P, resolution data, w = delta^-1 then L_t(Q a_P)). Its TeX citations equal its 9 def stmt_deps; no cycle, no other owner, no duplicate notion (the def-pur-strict-quotient-* nodes are other interfaces). Its field set matches the landed precedent def-pur-tower-derived-localization-comparisons. No mechanical finding. The statement field is verbatim. Re-checked: _he/_hE directions, c = constantInterchange.inv, b pinned by IsConstantTowerRepresentativeNormalized, both strict-tower squares for every unbounded K, independence of resolutions and representatives, edge cases K=0, I=0, g=id, nonflat quotient levels, incomplete K. Advisories: base-era theorem stmt_dep lem-cbc-derived-constant-tower-normalization lists plain declarations (node cites it to characterise b; not added by this delivery); the chi_r->chi_s clause is formal; resolutionComparison duplicates cbcStrictResolutionMap; lem-sf-completed-augmentation-adjunct should cite the new owner. Second reading is the group's self-check. No file changed, so no compile; the worker reports clean scompile runs and deliver2 preflight."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-8980b",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T231026-L-3532278",
+  "kind": "interface",
+  "note": "independent cc review: delivered StrictQuotientPullbackComputation.lean + node lem-cbc-strict-quotient-pullback-computation vs clone/live; 3 direct importers + 1 transitive consumer compiled against delivered module (all OK); axioms traced: sorryAx only via the pre-existing hole completedTowerConstant_exact used in the statement's own definitions",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.strictQuotientPullbackComputation"
+  ],
+  "sorry_after": []
+ }
+}

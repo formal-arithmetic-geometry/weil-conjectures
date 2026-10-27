@@ -1,0 +1,279 @@
+{
+ "id": "lem-sf-native-adic-affine-open-zero-stratification",
+ "kind": "statement",
+ "title": "Affine lisse stratifications from a constructible open restriction and zero complement",
+ "statement": "Fix a prime $\\ell$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. On the small pro-etale site of any scheme $Y$, let $B_Y$ be the sheaf of locally finite continuous $\\Omega$-valued functions and let $\\mathcal A(Y)=\\operatorname{Mod}(B_Y)$, with lisse and constructible as in [def-sf-native-weil-derived-framework], applied on $Y$ itself rather than its geometric fibre. Thus lisse means locally $B^{\\oplus r}$ on a pro-etale cover, with finite rank allowed to vary among covering members, and constructible means locally on $Y$ a finite constructible locally closed partition with lisse restrictions. For a morphism $f:Y'\\to Y$, use the actual module pullback $f^*N=B_{Y'}\\otimes_{f^{-1}B_Y}f^{-1}N$, with the coefficient map given by precomposition of functions.\n\nLet $X$ be a scheme and $j:U\\hookrightarrow X$ a quasi-compact open immersion [def-weil-open-immersion, def-weil-finite-type-morphism]. Let $M\\in\\mathcal A(U)$ be constructible, and let $N\\in\\mathcal A(X)$ have an isomorphism $j^*N\\cong M$. Assume $g^*N\\cong0$ for every scheme morphism $g:W\\to X$ whose image misses $j(U)$. For every affine open immersion $v:V\\hookrightarrow X$ [def-weil-affine-spectrum], form $D=U\\times_XV$ with projections $a:D\\to V$, $b:D\\to U$, and let $z:Z\\hookrightarrow V$ be the reduced closed subscheme [def-pc-reduced-scheme] supported on $V\\setminus a(D)$. Then $D$ is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism]; the images of $a$ and $z$ are constructible [def-weil-constructible-subset], disjoint and cover $V$. There is a finite constructible locally closed stratification $D=\\coprod_rD_r$ [def-constructible-stratification] on which $b^*M$ is lisse. With $i_r:D_r\\hookrightarrow D$, the actual module pullbacks satisfy $i_r^*a^*v^*N\\cong i_r^*b^*M$ and $z^*v^*N\\cong0$. There is a finite constructible locally closed stratification of $V$ on which $v^*N$ is lisse, hence $N$ is constructible on $X$. This includes $D=\\varnothing$, $Z=\\varnothing$, and $M=0$: empty strata may be omitted and a zero restriction is lisse of rank zero.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+  "place": "IsAdicConstructibleSheaf.openImmersionLowerShriek, lines 204-242, affine-neighbourhood argument; IsAdicStratifiedLisseSheaf.of_isCompl, lines 84-105. Extracted returned proof steps 4-6, with a general sheaf N satisfying the open and disjoint restriction hypotheses."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-constructible-subset",
+  "def-constructible-stratification",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Both pullback projections are open immersions by base-change stability. The projection a : D → V is quasi-compact by base-change stability of quasi-compactness. Apply QuasiCompact.compactSpace_of_compactSpace to a and affine V to make D compact, and quasiSeparatedSpace_of_quasiSeparated to a and affine V to make D quasi-separated. No separation hypothesis on X is used.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "openImmersionLowerShriek, lines 213-219; affine intersection geometry"
+   }
+  },
+  {
+   "text": "The already proved Scheme.Hom.isConstructible_range applies to the quasi-compact open immersion a. Its complement is constructible by Topology.IsConstructible.compl. For the local-constructibility argument take the actual vanishingIdeal subscheme of the closed complement C. Its closed immersion and range C are supplied directly by Mathlib AlgebraicGeometry.IdealSheaf.Subscheme (range_subschemeι and coe_support_vanishingIdeal); neither the uniqueness nor the affine ideal description of the reduced-induced-closed-subscheme theorem is required. For any prescribed z with range C, IsCompl follows by rewriting with its range equation.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "openImmersionLowerShriek, lines 220-228; complementary reduced closed subscheme"
+   }
+  },
+  {
+   "text": "Apply the already proved native IsAdicConstructibleSheaf.upperStar to b and hM. This gives constructibility of b* M directly, with no extra finite-type or separation hypotheses. It replaces the planned manual construction of pullback strata.",
+   "uses": [
+    "lem-sf-native-adic-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "openImmersionLowerShriek, lines 230-235; Constructible.lean:220-233, local open pullback construction"
+   }
+  },
+  {
+   "text": "Use the qcqs stratification theorem on b* M. The private proved finite_stratification_of_stratified enumerates its finite index type with Fintype.equivFin: the strata are the immersion ranges, locally closed by Scheme.Hom.isLocallyClosed_range; the unique-cover property gives their union and pairwise disjointness, including an empty index type. The comparison c : a* v* N ≅ b* M is (adicUpperStarCompIso l pullback.condition.symm).app N followed by b*e. Mapping c along every stratum gives the required stratum comparisons.",
+   "uses": [
+    "lem-sf-native-adic-qcqs-stratification",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "openImmersionLowerShriek, lines 230-235; Module.lean:307-326, composition and commutative-square comparisons"
+   }
+  },
+  {
+   "text": "The image of $v z:Z\\to X$ misses $j(U)$: if $v(z(t))$ belonged to $j(U)$, then $z(t)$ would belong to $v^{-1}(j(U))=O$, contradicting $z(t)\\in C$. Apply the hypothesis on $N$ to this particular morphism $g=v z$ to get $(v z)^*N\\cong0$. The canonical pullback compositor therefore gives $z^*v^*N\\cong0$. The zero module is lisse directly from the definition, using the identity pro-etale cover and $B_Z^{\\oplus0}=0$; hence its isomorphic restriction $z^*v^*N$ is lisse of rank zero.",
+   "uses": [
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "openImmersionLowerShriek, lines 236-250; Constructible.lean:105-113, zero-rank trivialization"
+   }
+  },
+  {
+   "text": "Apply the already proved native IsAdicStratifiedLisseSheaf.of_isCompl to a and z, transferring the stratification on b* M across c.symm and using the rank-zero lisse restriction on z. This is the source implementation of the planned composition-and-adjoin construction: its of_partition proof composes the strata immersions, transports the constructible images along the retrocompact open and the closed complement, and checks the unique-cover property. Enumerate the resulting finite family with the same private finite_stratification_of_stratified proof to obtain T.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-constructible-stratification",
+    "lem-weil-pbc-constructible-image-retrocompact-open",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "of_partition, lines 47-79, specialized to an open and its complement; of_isCompl, lines 84-105"
+   }
+  },
+  {
+   "text": "For every affine chart choose the concrete vanishingIdeal closed complement, use step 6, and obtain a native stratified-lisse restriction of N. Choose an affine open neighbourhood of each x by Scheme.isBasis_affineOpens, and supply this restriction to the local definition of IsAdicConstructibleSheaf. For the certificate with any given reduced closed complement z use steps 1–6 directly. The construction does not require any space, index type, stratum, or rank to be nonempty or positive; thus empty D, Z, V and M = 0 are covered.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+    "place": "openImmersionLowerShriek, lines 208-214; local definition and empty/zero cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-constructible-subset",
+  "def-weil-closed-immersion",
+  "lem-sf-native-adic-constructible-pullback",
+  "lem-sf-native-adic-qcqs-stratification",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "def-sf-native-weil-derived-framework",
+  "def-constructible-stratification",
+  "lem-weil-pbc-constructible-image-retrocompact-open",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/ExtensionByZero.lean",
+  "place": "E1 Lean proof, 2026-10-22: apply the existing native constructible pullback, qcqs stratification and of_isCompl gluing; explicitly enumerate finite index types and build the pullback comparisons and pointwise vanishing argument. This follows openImmersionLowerShriek and of_isCompl without re-proving their generic ingredients."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsAdicConstructible|IsAdicStratifiedLisse|stratification.*[Cc]ompl|constructible.*[Cc]ompl",
+   "results": "{\"t\": \"2026-10-22T06:01:09Z\", \"tool\": \"grep\", \"query\": \"IsAdicConstructible|IsAdicStratifiedLisse|stratification.*[Cc]ompl|constructible.*[Cc]ompl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\"], \"digest\": \"0bc3df753caee1ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern constructible subsets, quasi-compact affine covers, or unrelated ring-theoretic adic notions; none states the native coefficient module stratification certificate with the actual module pullback comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"IsRetrocompact\"",
+   "results": "{\"t\": \"2026-10-22T06:01:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsConstructible\\\", \\\"IsRetrocompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsRetrocompact.isConstructible\"], \"digest\": \"b68995deaacb5090\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern constructible subsets, quasi-compact affine covers, or unrelated ring-theoretic adic notions; none states the native coefficient module stratification certificate with the actual module pullback comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves locally finite continuous coefficients finite lisse stratification on affine neighbourhood using quasi compact open and closed complement",
+   "results": "{\"t\": \"2026-10-22T06:01:10Z\", \"tool\": \"leansearch\", \"query\": \"Constructible sheaves locally finite continuous coefficients finite lisse stratification on affine neighbourhood using quasi compact open and closed complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"Topology.IsConstructible\", \"Topology.IsLocallyConstructible\", \"Topology.IsLocallyConstructible.isConstructible\", \"IsCompact.isConstructible\", \"Topology.IsConstructible.compl\", \"Topology.IsConstructible.isLocallyConstructible\", \"CondensedSet.LocallyConstant.functorFullyFaithful\"], \"digest\": \"b67f74ad30f78e4a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern constructible subsets, quasi-compact affine covers, or unrelated ring-theoretic adic notions; none states the native coefficient module stratification certificate with the actual module pullback comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module sheaf with locally finite continuous l adic coefficients is constructible if its restriction to a quasi compact open is constructible and its pullback to the closed complement vanishes",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"leanfinder\", \"query\": \"A module sheaf with locally finite continuous l adic coefficients is constructible if its restriction to a quasi compact open is constructible and its pullback to the closed complement vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"Topology.IsLocallyConstructible.isConstructible\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\"], \"digest\": \"8efb84a99c914aad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern constructible subsets, quasi-compact affine covers, or unrelated ring-theoretic adic notions; none states the native coefficient module stratification certificate with the actual module pullback comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "adic|lisse|stratified",
+   "results": "{\"t\": \"2026-10-22T06:02:09Z\", \"tool\": \"grep\", \"query\": \"adic|lisse|stratified\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\"], \"digest\": \"9548112322ac5902\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern constructible subsets, quasi-compact affine covers, or unrelated ring-theoretic adic notions; none states the native coefficient module stratification certificate with the actual module pullback comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a quasi compact open U in a scheme X and a module N on X zero off U with constructible restriction to U, each affine chart has a finite constructible lisse stratification",
+   "results": "{\"t\": \"2026-10-22T06:02:20Z\", \"tool\": \"leanfinder\", \"query\": \"Given a quasi compact open U in a scheme X and a module N on X zero off U with constructible restriction to U, each affine chart has a finite constructible lisse stratification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.isCompactOpen_iff_eq_basicOpen_union\", \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\"], \"digest\": \"9ca09f591d1cdd96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern constructible subsets, quasi-compact affine covers, or unrelated ring-theoretic adic notions; none states the native coefficient module stratification certificate with the actual module pullback comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructible\", \"image_of_isOpenEmbedding\"",
+   "results": "{\"t\": \"2026-10-22T07:20:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsConstructible\\\", \\\"image_of_isOpenEmbedding\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Topology.IsConstructible.preimage_of_isOpenEmbedding\", \"Topology.IsConstructible.image_of_isOpenEmbedding\"], \"digest\": \"4548755ebc2065b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give constructible subsets, ordinary structure-sheaf sections or finite-type modules, not the native B-module finite lisse stratification and actual pullback comparisons. The open-embedding image hit is already represented by lem-weil-pbc-constructible-image-retrocompact-open."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicConstructible|IsAdicStratified|image_of_isOpenEmbedding|isRetrocompact.*range",
+   "results": "{\"t\": \"2026-10-22T07:20:26Z\", \"tool\": \"grep\", \"query\": \"IsAdicConstructible|IsAdicStratified|image_of_isOpenEmbedding|isRetrocompact.*range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/Topology/Constructible.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"49ba1c9fb83b11b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give constructible subsets, ordinary structure-sheaf sections or finite-type modules, not the native B-module finite lisse stratification and actual pullback comparisons. The open-embedding image hit is already represented by lem-weil-pbc-constructible-image-retrocompact-open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module sheaf on a quasi compact open subset with zero pullback on the closed complement has finite lisse stratifications on affine charts",
+   "results": "{\"t\": \"2026-10-22T07:20:34Z\", \"tool\": \"leanfinder\", \"query\": \"A constructible module sheaf on a quasi compact open subset with zero pullback on the closed complement has finite lisse stratifications on affine charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.compact_open_induction_on\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"dec1366c999d3306\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give constructible subsets, ordinary structure-sheaf sections or finite-type modules, not the native B-module finite lisse stratification and actual pullback comparisons. The open-embedding image hit is already represented by lem-weil-pbc-constructible-image-retrocompact-open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module sheaf constructible on an open subset and zero on its closed complement is constructible if the open immersion is quasi compact",
+   "results": "{\"t\": \"2026-10-22T07:20:54Z\", \"tool\": \"leansearch\", \"query\": \"A module sheaf constructible on an open subset and zero on its closed complement is constructible if the open immersion is quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"Topology.IsConstructible\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"Topology.IsLocallyConstructible.isConstructible\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"43a73a048cdbfc87\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give constructible subsets, ordinary structure-sheaf sections or finite-type modules, not the native B-module finite lisse stratification and actual pullback comparisons. The open-embedding image hit is already represented by lem-weil-pbc-constructible-image-retrocompact-open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite lisse stratification of a module over locally finite continuous ell adic functions is local on the scheme and glues with a zero restriction on a constructible closed subset",
+   "results": "{\"t\": \"2026-10-22T07:22:42Z\", \"tool\": \"leanfinder\", \"query\": \"Finite lisse stratification of a module over locally finite continuous ell adic functions is local on the scheme and glues with a zero restriction on a constructible closed subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\"], \"digest\": \"048933792cbd5c7a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give constructible subsets, ordinary structure-sheaf sections or finite-type modules, not the native B-module finite lisse stratification and actual pullback comparisons. The open-embedding image hit is already represented by lem-weil-pbc-constructible-image-retrocompact-open."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-open-exact-constructible",
+  "date": "2026-10-22",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause 3 via native open localization: returned item proof steps 4-6, affine intersection geometry, qcqs finite lisse strata and zero-complement assembly. The created.item chain ends at the maintainer seed; blueprint_refs.py ancestor returns None.",
+   "via": [
+    "lem-sf-native-weil-open-exact-constructible",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-adic-affine-open-zero-stratification",
+  "worker": "stage1",
+  "summary": "Q131 expanded the affine intersection, local constructibility pullback, qcqs global stratification, actual module comparison, zero-complement and assembly arguments. Statement unchanged; all mathematical tools already have DAG nodes; no new nodes. Checked B-E, edge cases and verbatim citation excerpts.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor returns None, as in the seed. The existing from.place records package clause 3 through native open localization. Steps 1-2 realize the affine geometry in returned parent steps 4-6, steps 3-4 its qcqs finite strata and pullback comparison, and steps 5-7 its zero-complement assembly. Whole-blueprint searches stratified lisse, stratification, constructible, open restriction and zero complement found no identical statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-724cfda20",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-724cfda20 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the statement of every cited node, plus the source ExtensionByZero.lean:47-250 (of_partition, of_isCompl, exists_isAffineOpen, qcqs stratification, openImmersionLowerShriek). The statement generalizes the Lean affine-neighbourhood argument from j_!F to any N with j^*N≅M and vanishing pullbacks off j(U). The Lean proof uses exactly those two facts, and the parent (open-exact-constructible step 3) applies the item with N=j̄_!M. Coefficient category and pullback are the native Mod(B_Y) and B⊗f^{-1} conventions, the same as in the cited qcqs-stratification and pullback-exact-lisse nodes. Step checks: (1) a and b are open immersions by 01JY; D=v^{-1}(U) is qc because j is quasi-compact; D is qs through both directions of the 01KO criterion on V, with no affine-intersection assumption in X. (2) O is retrocompact by affine qcqs, so O and its complement are constructible by 005G/005H; the reduced-induced node (2) gives z with image C. (3) Local constructibility of b^*M uses the base-changed neighbourhood, the pullback-stratification node, 005J and lisse pullback. (4) The qcqs hypotheses are supplied; the comparison a^*v^*N≅b^*M uses only compositors and b^*e. (5) vz misses j(U) pointwise; zero is rank-0 lisse; elementary is justified. (6) The strata a∘i_r are immersions with constructible image by 09YD, which needs the retrocompactness from step 2; together with Z they partition V. (7) 01IT plus the local definition. Edge cases tested: Spec Z with U=Spec Z[1/p], D empty, Z empty, M=0, V empty, non-Noetherian V. No hidden Noetherian, separated or finite-type hypothesis. No new nodes. Grepping the Lean names over dag/nodes found no duplicate. All cited units (sk-thm-p1, sk-prop-h2) are on the route of sk-thm-sf-package; no SGA. Batch-5: both flagged citations reach lem-trf-geometric-inverse-image-exact. That node is Stacks 04JC, exactness of inverse image along a geometric morphism: a general sheaf fact that is neither assumption nor part of their proofs, so both citations are accepted. Advisory only: step 6 uses 'immersion' without citing def-weil-closed-immersion, which is already in stmt_deps. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NativeAdicAffineOpenZeroStratification",
+  "declaration": "AlgebraicGeometry.ProEtale.affine_open_zero_stratification",
+  "file": "lean/Sheaf/AlgebraicGeometry/NativeAdicAffineOpenZeroStratification.lean",
+  "statement": "theorem affine_open_zero_stratification (l : ℕ) [Fact l.Prime] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (M : AdicSheaf l U) (N : AdicSheaf l X) (hM : IsAdicConstructibleSheaf M) (e : Nonempty ((adicUpperStar l j).obj N ≅ M)) (hzero : ∀ (W : Scheme.{u}) (g : W ⟶ X), Disjoint (Set.range g) (Set.range j) → Nonempty ((adicUpperStar l g).obj N ≅ 0)) : IsAdicConstructibleSheaf N ∧ ∀ (V : Scheme.{u}) (v : V ⟶ X) [IsAffine V] [IsOpenImmersion v], CompactSpace ↥(pullback j v) ∧ QuasiSeparatedSpace ↥(pullback j v) ∧ Topology.IsConstructible (Set.range (pullback.snd j v)) ∧ ∀ (Z : Scheme.{u}) (z : Z ⟶ V) [IsClosedImmersion z] [IsReduced Z], Set.range z = (Set.range (pullback.snd j v))ᶜ → Topology.IsConstructible (Set.range z) ∧ IsCompl (Set.range (pullback.snd j v)) (Set.range z) ∧ (∃ S : Scheme.FiniteLocallyClosedStratification (pullback j v), (∀ r : Fin S.n, Topology.IsConstructible (S.stratum r)) ∧ (∀ r : Fin S.n, IsAdicLisseSheaf ((adicUpperStar l (S.immersion r)).obj ((adicUpperStar l (pullback.fst j v)).obj M))) ∧ (∀ r : Fin S.n, Nonempty ((adicUpperStar l (S.immersion r)).obj ((adicUpperStar l (pullback.snd j v)).obj ((adicUpperStar l v).obj N)) ≅ (adicUpperStar l (S.immersion r)).obj ((adicUpperStar l (pullback.fst j v)).obj M)))) ∧ Nonempty ((adicUpperStar l z).obj ((adicUpperStar l v).obj N) ≅ 0) ∧ (∃ T : Scheme.FiniteLocallyClosedStratification V, (∀ r : Fin T.n, Topology.IsConstructible (T.stratum r)) ∧ ∀ r : Fin T.n, IsAdicLisseSheaf ((adicUpperStar l (T.immersion r)).obj ((adicUpperStar l v).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1739c03a7",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Statement read clause-by-clause against node and ExtensionByZero.lean 47-250: AdicSheaf/adicUpperStar/IsAdicLisseSheaf/IsAdicConstructibleSheaf are the native Mod(B_Y), actual module pullback, varying-rank lisse and local finite-stratified constructible; hypotheses only IsOpenImmersion+QuasiCompact j, Nonempty j^*N≅M, hzero over all W:Scheme.{u} with Disjoint ranges (non-vacuous: j_!M satisfies it); conclusions D qc/qs, range a constructible, Z quantified via IsClosedImmersion+IsReduced+range=complement (pins reduced induced subscheme), IsCompl, constructible S on D with lisse i_r^*b^*M and i_r^*a^*v^*N≅i_r^*b^*M, z^*v^*N≅0, constructible lisse T on V, IsAdicConstructibleSheaf N. Edge cases empty D/Z/V/X, M=0, j=id OK; no extra hypotheses or universe restriction. lean.statement verbatim, sorry only, docstrings with source/blueprint/7 steps; node unchanged vs side-live except lean. Advisory: adicUpperStar owned by no stmt_dep (recorded on pullback-frobenius-mates/exact-lisse; add to framework declarations); proof-plan non-public imports; second-reading placeholder. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T143111-L-958382",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

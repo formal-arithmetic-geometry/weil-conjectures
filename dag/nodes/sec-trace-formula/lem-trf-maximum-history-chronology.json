@@ -1,0 +1,153 @@
+{
+ "id": "lem-trf-maximum-history-chronology",
+ "kind": "statement",
+ "title": "Finite stopped chronological maximum histories",
+ "statement": "Fix a totally ordered set $V$ with least element $\\bot$ and a supplied resolution invariant calculus $\\nu$ [def-trf-resolution-invariant-calculus-data] on embedded rational pairs [def-trf-labeled-embedded-resolution]. A maximum segment of length $r$ consists of raw histories $H_i$ of length $i$ for $0\\leq i\\leq r$, extensions $E_i:H_i\\subset H_{i+1}$, admissibility of every $H_i$, nonregularity of every $X_{H_i}$ for $i<r$, and the assertion that each $E_i$ is a maximum step [def-trf-admissible-embedded-history]. There exist $r\\geq0$ and such a segment with regular final transform, together with labels $l_i$ in $(V\\setminus\\{\\bot\\})^{\\mathrm{op}}$ equal to the positive greatest values of $\\nu_{H_i}$, strictly increasing in that reverse order. Every center is nonempty, regular and nowhere dense in the current strict transform, with coherent ambient and intrinsic ideals. Each intermediate ambient scheme remains smooth, separated and finite type over $\\mathbf Q$, and each intermediate strict transform is reduced. The length is zero for regular or empty inputs [def-weil-regular-scheme]. These data constitute a chronological maximum history. This statement does not assert a realization indexed by lower cuts or independence of the length from the choices.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.1, 2.3.5(ii), 2.3.11--2.3.13, printed pp.91--94; finite recursion, termination and labeling in original finite-realization Steps 1, 2 and 4; conditional argument written out by U4"
+ },
+ "stmt_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-admissible-embedded-history",
+  "def-trf-labeled-embedded-resolution",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Build the constant length-zero history on the input pair. A maximum extension appends to its finite tuple of prefixes using Fin.snoc. Transport the extension and its maximum-step proof together along the endpoint equalities. The admissibility step rule propagates admissibility and the source remains nonregular.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history",
+    "def-trf-labeled-embedded-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If no finite segment ended regularly, each segment would end nonregularly. Use maximumExists and choice to choose a next extension for each segment. Natural-number dependent recursion constructs one segment at every length, with the chosen last extension connecting consecutive last histories. These last histories and extensions contradict termination. Thus some finite segment has a regular endpoint.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the greatest positive value from each maximum-step proof. StrictProgress on consecutive steps makes the values decrease, so their reverse-order labels increase; Fin.strictMono_iff_lt_succ gives strict monotonicity. MaximumGeometry gives every center clause. NextGeometry gives the geometry at successor stages, and the initial isomorphisms transport the input geometry. A regular input rules out a first nonregular stage. An empty input is locally Noetherian by the finite-type closed immersion in the rational ambient scheme and is stalkwise regular vacuously, so also has length zero.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history",
+    "def-trf-labeled-embedded-resolution",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-admissible-embedded-history",
+  "def-trf-labeled-embedded-resolution",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.1, 2.3.5(ii), 2.3.11--2.3.13, printed pp.91--94; finite recursion, termination and labeling in original finite-realization Steps 1, 2 and 4; conditional argument written out by U4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "No infinite sequence of one step extensions implies a finite process reaches a terminal regular state",
+   "results": "{\"t\": \"2026-10-26T08:15:27Z\", \"tool\": \"leansearch\", \"query\": \"No infinite sequence of one step extensions implies a finite process reaches a terminal regular state\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Computation.Results.terminates\", \"Stream'.Seq.Terminates\", \"Stream'.Seq.length_le_iff'\", \"Stream'.Seq.not_terminates_iff\", \"Computation.terminates_def\", \"Stream'.Seq.length'_of_not_terminates\", \"Computation.Terminates\", \"Stream'.Seq.terminates_nil\"], \"digest\": \"8d6f703c1af391b8\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: the computation/sequence termination lemmas use different data; the supplied calculus termination is proved directly by dependent recursion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A process with a next step at each nonterminal state and no infinite dependent chain reaches a terminal state in finitely many steps",
+   "results": "{\"t\": \"2026-10-26T08:05:14Z\", \"tool\": \"leanfinder\", \"query\": \"A process with a next step at each nonterminal state and no infinite dependent chain reaches a terminal state in finitely many steps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Turing.mem_eval\", \"Computation.Terminates.term\", \"Computation.Results.terminates\", \"Computation.terminates_def\", \"Computation.terminates_of_mem\", \"Turing.eval_maximal\", \"Turing.eval_maximal₁\", \"Turing.Reaches.to₀\"], \"digest\": \"f772002f23aa5c94\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: Turing machine reachability and computations do not construct embedded history diagrams or maximum centers"
+  },
+  {
+   "tool": "grep",
+   "query": "dependent.*choice|exists_seq|wellFounded_iff",
+   "results": "{\"t\": \"2026-10-26T08:05:11Z\", \"tool\": \"grep\", \"query\": \"dependent.*choice|exists_seq|wellFounded_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/MeasurableSpace/MeasurablyGenerated.lean\", \"Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean\", \"Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean\", \"Mathlib/MeasureTheory/VectorMeasure/BoundedVariation.lean\", \"Mathlib/Probability/Independence/Integrable.lean\", \"Mathlib/MeasureTheory/VectorMeasure/Decomposition/Hahn.lean\", \"Mathlib/Probability/Process/LocalProperty.lean\", \"Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean\"], \"digest\": \"2017ea431478fb30\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact match: generic sequence existence and well-foundedness uses do not supply this conditional embedded-history construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fin.strictMono_iff_lt_succ",
+   "results": "{\"t\": \"2026-10-26T08:15:27Z\", \"tool\": \"loogle\", \"query\": \"Fin.strictMono_iff_lt_succ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Fin.strictMono_iff_lt_succ\"], \"digest\": \"96586bb3f1b68c2c\"}",
+   "date": "2026-10-26",
+   "verdict": "used Fin.strictMono_iff_lt_succ for the finite reverse-order label sequence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MaximumHistoryFiniteRealization",
+  "date": "2026-10-26",
+  "group": "U4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Re-split of lem-trf-embedded-resolution-ambient-comparison, old Steps 1--2: realize the maximum-center recursion, terminate it, and index it by the reverse invariant order. Further extraction: ILO VIII 2.3.1, 2.3.5(ii), 2.3.11--2.3.13, printed pp.91--94; finite recursion, termination and labeling in original finite-realization Steps 1, 2 and 4; conditional argument written out by U4",
+   "via": [
+    "lem-trf-maximum-history-finite-realization",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MaximumHistoryChronology",
+  "file": "lean/Sheaf/AlgebraicGeometry/MaximumHistoryChronology.lean",
+  "declaration": "AlgebraicGeometry.maximumHistoryChronology_exists",
+  "statement": "theorem maximumHistoryChronology_exists {V : Type w} [LinearOrder V] [OrderBot V]\n    (ν : ResolutionInvariantCalculus.{u} V) (A : EmbeddedResolutionPair.{u}) :\n    ∃ r, Nonempty (MaximumHistoryChronology ν A r)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.MaximumHistorySegment",
+   "AlgebraicGeometry.MaximumHistoryChronology",
+   "AlgebraicGeometry.maximumHistoryChronology_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T092748-L-3463822",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T092748-L-3463822",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

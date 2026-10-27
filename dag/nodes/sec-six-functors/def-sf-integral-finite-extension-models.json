@@ -1,0 +1,144 @@
+{
+ "id": "def-sf-integral-finite-extension-models",
+ "kind": "definition",
+ "title": "Specified scalar tensor and finite dualizing comparison models",
+ "statement": "For a prime l, finite l-adic coefficient extensions E⊂L and a scheme X, retain the normalized tensor models [def-sf-integral-hom-reduction-models]. The data are tensorModel, the flat representative restriction of a tensor presentation; homMap, the scalar-extended evaluation transpose; completion, the isomorphism associated to the specified completion unit on complete inputs; quotient, its finite scalar tensor-square comparison; and v, homMap conjugated by completion. Over a separated finite-type finite-field scheme, finiteRealizationRestriction is the canonical restriction/realization square, finiteEtaleU is the exceptional-adjunction transpose of inverse compact-support comparison followed by the extended dualizing counit and coefficient unit, and finiteU is its intrinsic realization through the scalar adjunction and finite origins. Completeness and existence theorems are re-exported with these data. This is a relocation of the existing definitions with identical signatures and bodies; DualizingDatum retains its separate owner [def-sf-coherent-integral-dualizing-datum]. No second construction or new choices are introduced.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 1 and 3-5: fixed completion, evaluation transpose, and finite counit comparisons."
+ },
+ "stmt_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "proof": [
+  {
+   "text": "Relocated proved theorems completion_isIso and extension_complete (on which completion, quotient and v depend): use sfDerivedComplete_iff_legacy to identify intrinsic completeness with IsDerivedCompleteUnrestricted. For the forward implication choose an auxiliary finite-field datum with prime characteristic greater than l+1; the converse unpacks its existential datum. Apply finiteFreeCompletedScalarComparison to obtain invertibility of the specified completedScalarComparison and completeness of ordinary extension. Transport the augmented distinguished Roos triangle through this comparison isomorphism, leaving its resolution and quotient tower fixed, and convert back to intrinsic completeness. This proves completion_isIso and extension_complete without a new hole.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "first paragraph: exact finite-free tensor preserves derived completeness"
+   }
+  },
+  {
+   "text": "Relocated proved theorem dualizingDatum_nonempty: choose the finite dimension bound using exists_topologicalKrullDim_le and apply prop_coef_integral_dualizing. If c_n is its normalized DVR counit and e_n its coherent finite-term origin, use the isomorphism asIso(c_n) followed by e_n. Its transition square is obtained by functoriality of restriction, the counit transition square c_m tau = transition Res(c_n), and the given origin equation tau Res(e_n) = e_m exceptionalTransition. The last exceptional transition is exactly the adjunct of integralDualizingFiniteComparison by the adjunction inverse identity. Thus the constructed data satisfy DualizingDatum.coherent.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "prop-coef-integral-dualizing",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-coef-finite-dualizing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+    "place": "third paragraph: reductions of integral dualizing objects are finite dualizing objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-finite-dualizing",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-coef-integral-dualizing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 1 and 3: proofs of the relocated completion_isIso, extension_complete and dualizingDatum_nonempty, unchanged from lem-coef-integral-finite-extension steps 10-11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For constructible derived complete adic sheaves on a finite type scheme over an algebraically closed field, Hom is the inverse limit of Hom between finite reductions",
+   "results": "8 hits, including Scheme.Modules.Hom, AdicCompletion, sheafHom and SheafOfModules.hasLimit; no derived constructible reduction theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic gives ordinary adjunction naturality, not the geometric finite quotient reconstruction or counit coherence.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizing_reduction_coherent|integralConstructibleReductionHom|DualizingDatum",
+   "results": "msearch grep: zero Mathlib hits. Project rg found the existing definitions in CoefIntegralFiniteExtension; integralSystemReduction_fullyFaithful concerns coherent system morphisms, not their separate finite evaluations. NormalizedDVRTowerEvaluation_full only gives existence and explicitly does not claim uniqueness. Blueprint search for finite reduction Hom: zero matches.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "date": "2026-10-25",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 1 and 3-5: fixed completion, evaluation transpose, and finite counit comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionModels",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionModels.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.tensorModel",
+  "statement": "def tensorModel {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : IntegralHom.TensorPresentation.{u, u} X R) : ProEtaleTensorModel X R",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.tensorModel",
+   "WeilConjectures.IntegralFiniteExtension.homMap",
+   "WeilConjectures.IntegralFiniteExtension.completion_isIso",
+   "WeilConjectures.IntegralFiniteExtension.completion",
+   "WeilConjectures.IntegralFiniteExtension.quotient",
+   "WeilConjectures.IntegralFiniteExtension.v",
+   "WeilConjectures.IntegralFiniteExtension.finiteRealizationRestriction",
+   "WeilConjectures.IntegralFiniteExtension.finiteEtaleU",
+   "WeilConjectures.IntegralFiniteExtension.finiteU",
+   "WeilConjectures.IntegralFiniteExtension.dualizingDatum_nonempty",
+   "WeilConjectures.IntegralFiniteExtension.extension_complete"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-56002",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261025T164906-L-1121390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-56002",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261025T164906-L-1121390",
+  "kind": "interface",
+  "note": "independent cc review: moved declarations in Models+item vs live CoefIntegralFiniteExtension.lean (byte-identical); new sorry statements vs nodes and Milnor/finiteness argument; 7 live importers compiled against the delivered modules (all exit 0); #print axioms on u_existsUnique and the moved theorems"
+ }
+}

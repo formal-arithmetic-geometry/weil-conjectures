@@ -124,7 +124,7 @@ theorem isIso_projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]
       (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
   let e := (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i p
     (𝟙 (ProjectiveLine S)) hi.symm).symm ≪≫ eId
-  unfold projectiveLineDiagonalAlpha supportedDerivedUnit
+  unfold projectiveLineDiagonalAlpha constantSingleSectionUnits
   exact isIso_pasted_single_units
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) p)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i) e

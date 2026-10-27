@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-space-coherent-stack-general",
+ "kind": "statement",
+ "title": "Algebraicity of flat coherent families on a general separated finitely presented space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and use algebraic spaces [def-trf-algebraic-space] and their sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Use quasi-coherent modules on small etale ringed sites and tensor pullback [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. A module is finitely presented if etale locally it is the cokernel of a map between finite rank free modules. Relative flatness means flatness of stalks on etale scheme charts over the local rings of the base [def-pc-scheme-module-flat-over]. A finite type module is etale locally finitely generated; support proper over the base means there are a closed immersion $i:Z\\hookrightarrow X$ with $Z$ proper over the base and a finite type quasi-coherent module $N$ on $Z$ with $i_*N\\simeq M$, as in [def-sfb-space-proper-quot-functor]. Let $f:X\\to B$ be a separated morphism of finite presentation of algebraic spaces over $S$; morphism properties use [def-sfb-space-morphism-properties], and finite presentation includes quasi-compactness and quasi-separatedness. Let $\\mathcal C_{X/B}(T)$ have objects $(b:T\\to B,M)$, where $M$ is a finitely presented quasi-coherent module on $X_T=X\\times_BT$, flat over $T$ with support proper over $T$. Arrows over $v:T\\to T_1$ are pullback isomorphisms $v_X^*M_1\\simeq M$ with $b=b_1v$. These categories form an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack], using the fibred groupoid conventions of [def-sfb-stable-pointed-moduli-groupoids]. If $B$ is a scheme, its structural morphism $\\mathcal C_{X/B}\\to B$ is locally of finite presentation: a smooth surjective scheme atlas has locally finitely presented composite to $B$ [def-sbc-locally-finite-presentation]. No flatness of $f$ or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 08KB (situation-coherent), 09DS (theorem-coherent-algebraic-general); for the scheme-base local-finite-presentation clause, 08KD (lemma-coherent-limits), together with the limit criterion in lem-sfb-stack-limit-preserving-lfp."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal C=\\mathcal C_{X/B}$. By [lem-sfb-space-coherent-fppf-stack] it is an fppf stack, hence an etale stack. By [lem-sfb-space-coherent-diagonal] its isomorphism presheaves are algebraic spaces, so it has the required representable diagonal. All these statements require only finite presentation of $f$. Thus the remaining algebraicity assertion is the existence of a smooth surjective scheme atlas.",
+   "uses": [
+    "lem-sfb-space-coherent-fppf-stack",
+    "lem-sfb-space-coherent-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09DS, first paragraph (Tags 08KC and 08W6)."
+   }
+  },
+  {
+   "text": "We first treat $B=\\operatorname{Spec}\\Lambda$ for a finitely generated $\\mathbf Z$-algebra $\\Lambda$, and regard the same groupoid as a groupoid on all schemes over $\\operatorname{Spec}\\mathbf Z$. Apply [lem-sfb-space-coherent-limit-preserving] with $S=\\operatorname{Spec}\\mathbf Z$: $B\\to S$ is locally finitely presented by [pqf-lem-lft-fp-locnoeth]; the base $\\operatorname{Spec}\\mathbf Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The pushout equivalence [lem-sfb-space-coherent-pushout] supplies both (RS*) for square-zero ring fibre products and the Artinian nilpotent pushouts required by the Artin criterion. By [lem-sfb-space-coherent-tangent-finite] its tangent and infinitesimal automorphism spaces are finite dimensional for every finite type field over $\\mathbf Z$. By [lem-sfb-space-coherent-formal-effectivity], every compatible complete-local adic system is effective; separatedness is used here. These are the limit, infinitesimal, tangent and formal hypotheses of [lem-sfb-artin-representable-diagonal-criterion].",
+   "uses": [
+    "lem-sfb-space-coherent-limit-preserving",
+    "lem-sfb-space-coherent-pushout",
+    "lem-sfb-space-coherent-tangent-finite",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-sfb-artin-representable-diagonal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09DS, reduction to finite type integer algebra and verification of axioms [1]--[4]."
+   }
+  },
+  {
+   "text": "For openness of versality retain this affine $B$. Take a compatible sequence $(b_n,M_n)$ over rings $R_n$ with surjective square-zero transition kernels, and put $R=\\varprojlim R_n$. Since $B$ is affine, the compatible ring maps $\\Lambda\\to R_n$ define the ring map $\\lambda\\mapsto(b_n^\\sharp(\\lambda))_n$ into $R$, hence $b:\\operatorname{Spec}R\\to B$. The space $X_R\\to\\operatorname{Spec}R$ is separated and finitely presented by [lem-sfb-space-separated-fp-composition, lem-sfb-space-flat-proper-fp-locality]. Apply [lem-sfb-space-flat-proper-support-inverse-effectivity] to this space and the given $M_n$. Square-zero ideals are locally nilpotent, so it gives $M$ with all compatible reduction isomorphisms. Thus $(b,M)$ makes the original system effective. Together with the representable diagonal, (RS*) and continuity already obtained, [lem-sfb-artin-square-zero-effectivity-openness] gives openness of versality over $\\operatorname{Spec}\\mathbf Z$. No flatness of $X_R$ was used.",
+   "uses": [
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-artin-square-zero-effectivity-openness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09DS, last paragraph; Tag 0CXB and Tag 0CXU."
+   }
+  },
+  {
+   "text": "All hypotheses of [lem-sfb-artin-representable-diagonal-criterion] now hold over $\\operatorname{Spec}\\mathbf Z$. Its size hypothesis follows from [def-weil-size-convention]: finite type fields have a set of representatives in the fixed small skeleton; finite presentations on a fixed set of etale charts, their gluing maps, and module isomorphisms form sets in the larger universe. Taking the union over that set of fields gives a common cardinal bound; the affine polynomial scheme in a set of variables of that cardinality bounds it. Apply the criterion to obtain an algebraic stack over $\\operatorname{Spec}\\mathbf Z$. Its map remembering $b$ is a map to $B$. The equivalence of [lem-sfb-algebraic-stack-change-base-to-integers] therefore regards it as an algebraic stack over $B$.",
+   "uses": [
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "def-weil-size-convention",
+    "lem-sfb-algebraic-stack-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09DS, omitted set-theoretic axiom [-1] and application of Artin criterion; Tag 04X5."
+   }
+  },
+  {
+   "text": "For any map $B'\\to B$, the groupoid for $X_{B'}/B'$ is naturally the 2-fibre product $\\mathcal C_{X/B}\\times_{h_B}h_{B'}$: an object is $(b,M,b',b=b'\\text{ followed by }B'\\to B)$, so forgetting the redundant $b$ identifies it with $(b',M)$, and the same identity identifies arrows. This identification is compatible with every pullback. For an arbitrary affine $B=\\operatorname{Spec}R$, take the directed set of finitely generated integer subalgebras $R_i\\subset R$. It is nonempty, two stages are contained in the algebra generated by their union, and every element of $R$ is in a stage. These inclusions exhibit $R$ as their colimit by [lem-weil-pbc-directed-subalgebra-ring-colimit]. By [lem-sfb-fp-space-limit-category], $X$ descends to a finitely presented $X_i/R_i$. Increase $i$ using [lem-sfb-space-descend-separated] so $X_i/R_i$ is separated. Step 4 gives algebraicity of its family stack. Its 2-base change to $B$ is algebraic by [lem-sfb-algebraic-stack-fibre-products, lem-sfb-algebraic-stack-change-base-to-integers], and the explicit equivalence just given identifies it with $\\mathcal C_{X/B}$.",
+   "uses": [
+    "lem-weil-pbc-directed-subalgebra-ring-colimit",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-space-descend-separated",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-algebraic-stack-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08LP (remark-coherent-base-change); Tag 09DS, affine Noetherian approximation paragraph."
+   }
+  },
+  {
+   "text": "For the atlas unions used next, let $W_a\\to\\mathcal F$ be representable smooth maps of schemes to a stack with representable diagonal. Form $W=\\coprod_aW_a$ using [lem-weil-pbc-scheme-coproduct-family]; its clopen pieces glue their objects to an object over $W$ by stack descent. For any scheme $T\\to\\mathcal F$, its pullback is $\\coprod_a(W_a\\times_{\\mathcal F}T)$: a map into $W$ is exactly a clopen partition with one map into each $W_a$, and the object isomorphisms restrict and glue on that partition. Each summand is an algebraic space. The coproduct is an algebraic space by [lem-trf-algebraic-space-coproduct], using etale scheme charts in the fixed universe. Its map to $T$ is smooth: choose the coproduct of smooth scheme charts of the summands, and use [lem-sfb-scheme-etale-source-target-properties] to test smoothness on this disjoint open cover and on further etale charts. Surjectivity is precisely joint field-extension local lifting for the summands. Thus a jointly surjective family yields a smooth surjective scheme atlas. This is a direct use of coproduct, stack descent and the cited chart locality statements; no algebraicity of $\\mathcal F$ is used.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09DS, affine-cover atlas assembly, with coproduct chart tests spelled out."
+   }
+  },
+  {
+   "text": "For a scheme $B$, choose an affine open cover $B=\\bigcup B_a$. Step 5 gives smooth surjective scheme atlases $W_a\\to\\mathcal C_{X_{B_a}/B_a}$. Regard each atlas over $\\operatorname{Spec}\\mathbf Z$ by [lem-sfb-algebraic-stack-change-base-to-integers]. The equivalence in step 5 identifies its target with the pullback of $B_a\\to B$, so its composite to the total $\\mathcal C_{X/B}$ is representable and smooth by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. The atlas assembly in the preceding step makes $\\coprod_aW_a\\to\\mathcal C_{X/B}$ representable, smooth and surjective. Together with the stack and diagonal from step 1 this is exactly the algebraic-stack definition [def-sfb-algebraic-moduli-stack]; [lem-sfb-algebraic-stack-change-base-to-integers] then regards it over $B$. For the original algebraic-space $B$, choose a surjective etale scheme atlas $B'\\to B$. By step 5 the pullback groupoid is $\\mathcal C_{X_{B'}/B'}$, which is algebraic by the scheme case; its projection to $\\mathcal C_{X/B}$ is representable etale surjective by the same calculus lemma. Composing a smooth surjective scheme atlas of this pullback with that projection again gives a representable smooth surjective scheme atlas. The same algebraic-stack definition gives algebraicity over the original $S$; regarding the intermediate scheme-base atlas over $S$ uses the equivalence with the common stack over $\\operatorname{Spec}\\mathbf Z$ in [lem-sfb-algebraic-stack-change-base-to-integers].",
+   "uses": [
+    "lem-sfb-algebraic-stack-change-base-to-integers",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 09DS, etale cover and affine open cover reductions, reversed to assemble the atlases."
+   }
+  },
+  {
+   "text": "Finally let $B$ be a scheme. Apply [lem-sfb-space-coherent-limit-preserving] with base scheme $S=B$ and base space $B$ with its identity morphism, which is locally finitely presented. Thus for every directed affine inverse system over $B$, objects and isomorphisms descend, with eventual equality. We have already proved that $\\mathcal C_{X/B}$ is an algebraic stack over $B$. The reverse implication of [lem-sfb-stack-limit-preserving-lfp] therefore says that $\\mathcal C_{X/B}\\to B$ is locally of finite presentation in precisely the smooth-atlas convention of the statement.",
+   "uses": [
+    "lem-sfb-space-coherent-limit-preserving",
+    "lem-sfb-stack-limit-preserving-lfp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 08KD and stacks-limits.tex Tag 0CMY; scheme-base local finite presentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-coherent-fppf-stack",
+  "lem-sfb-space-coherent-diagonal",
+  "lem-sfb-space-coherent-limit-preserving",
+  "lem-sfb-space-coherent-pushout",
+  "lem-sfb-space-coherent-tangent-finite",
+  "lem-sfb-space-coherent-formal-effectivity",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-sfb-artin-representable-diagonal-criterion",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-flat-proper-support-inverse-effectivity",
+  "lem-sfb-artin-square-zero-effectivity-openness",
+  "def-weil-size-convention",
+  "lem-sfb-algebraic-stack-change-base-to-integers",
+  "lem-weil-pbc-directed-subalgebra-ring-colimit",
+  "lem-sfb-fp-space-limit-category",
+  "lem-sfb-space-descend-separated",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-limit-preserving-lfp"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 09DS (theorem-coherent-algebraic-general), together with Tag 08KD and stacks-limits.tex Tag 0CMY for local finite presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stack of finitely presented flat quasi coherent modules with proper support for a separated finitely presented morphism of algebraic spaces is algebraic and locally of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of being locally of finite presentation for morphisms of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are morphisms of schemes that are locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [hg : AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"The composition of two morphisms of schemes that are locally of finite presentation is itself a morphism that is locally of finite presentation. This follows from the fact that the property of being l\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Moduli stack of coherent sheaves with proper support without flatness of the ambient algebraic space over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ (b : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.obj b).obj = CategoryTheory.Cat.of (Opposite.unop b.as).Modules\", \"doc\": \"For any scheme $X$ considered as an object in the locally discrete opposite category of schemes, the pseudofunctor assigns the category of modules over $X$. Specifically, applying the pseudofunctor to\"}\n  {\"name\": \"LightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [Ring R] → Type (u + 1)\", \"doc\": \"For a ring $ R $, the category of light condensed $ R $-modules, defined as the category of sheaves on the site of light profinite spaces with values in the category of left $ R $-modules. This is con\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"FinitePresentation\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "CohStack|coherentStack|stack.*coherent|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraicity of the stack of flat coherent sheaves with proper support on algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme morphism properties, module presentations, ordinary Hom or surjectivity, and abstract stack descent do not state this algebraic-space moduli or algebraic-stack theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quot-representability",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tags 08KB (situation-coherent), 09DS (theorem-coherent-algebraic-general); for the scheme-base local-finite-presentation clause, 08KD (lemma-coherent-limits), together with the limit criterion in lem-sfb-stack-limit-preserving-lfp.",
+   "via": [
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-stack-general",
+  "worker": "stage1",
+  "summary": "Split the non-flat coherent-family theorem by the Stacks 09DS Artin-criterion route. Reused the existing integer-base Artin and openness criteria, finite-presentation approximation and stack geometry. Added seven statement-only supporting inputs, including strong formal effectivity rather than the flat-ambient deformation theorem. Retained the computed null blueprint ancestor, documenting its broken created.item chain and the historical direct-image place. Statement unchanged.",
+  "blueprint": "The inherited created.item chain has no resolvable blueprint ancestor (blueprint_refs.py ancestor returns None). Its historical place is below det-thm-sf-ctf-stability-direct-images paragraph (3), compactification and direct-image preservation through the inherited alteration/moduli chain. Read the latest proof: its current paragraph delegates open direct images, so the inherited detailed alteration text is historical, not asserted to be current blueprint text.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-coherent-diagonal",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "lem-sfb-space-coherent-tangent-finite",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "lem-sfb-space-coherent-formal-effectivity",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-directed-subalgebra-ring-colimit",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic black-box input to the Stacks coherent-family algebraicity route; this unit has no substitute for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-coherent-diagonal",
+  "lem-sfb-space-coherent-tangent-finite",
+  "lem-sfb-space-coherent-formal-effectivity",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-sfb-space-flat-proper-support-inverse-effectivity",
+  "lem-weil-pbc-directed-subalgebra-ring-colimit",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-algebraic-space-coproduct"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-1183e9358",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-1183e9358 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 7 new nodes against quot.tex 08KB/08W5/08KC/08W6/08LP/08KD/08LQ/08W8/08W9/08WC/09DS, spaces-flat 0CX4/0CXB and artin 0CXT/0CXU. The item statement and stmt_deps are unchanged from base, and the item is still unsplit live, with no repair note and no supersession. The 8 steps follow the 09DS route. Step 1: fppf stack gives etale stack, plus the Isom diagonal. Step 2: criterion axioms (iii)-(vi) from the limit, pushout, tangent and formal nodes; Spec Z Noetherian and Λ finite type give lfp. Step 3: openness node checked hypothesis by hypothesis. RS* comes from the A×_D D' pushout clause; the compatible b_n give Λ→lim R_n; X_R is separated and fp by base change; square-zero kernels are locally nilpotent, so 0CXB applies; no flatness of X is used. Step 4: size bound and change of base to B. Step 5: 08LP identification, directed f.g. subalgebras, fp descent, separated descent, then fibre products. Step 6: coproduct atlas. Step 7: the arbitrary-fibred-groupoid calculus is used correctly, since the target is not yet known to be algebraic. Step 8: limit node with S=B plus the limit criterion. The new nodes are the source lemmas with all hypotheses kept. The pushout node is restricted to nilpotent thickenings, a harmless special case. They are not restatements of the item and not duplicates: tags and key words were searched in the snapshot, live and side-live. No SGA. FIX, B3 twice: (1) lem-sfb-space-coherent-pushout now cites [def-weil-closed-immersion] and [pqf-def-affine-morphism] for closed immersion and affine morphism, added to stmt_deps; (2) lem-sfb-space-coherent-formal-effectivity now cites [def-weil-finite-type-morphism] for the finite-type residue field. Whole corrected files are under fixes/dag/nodes/sec-six-functors-basics/. Tool uses accepted as generic: lem-weil-pbc-finite-type-over-noetherian, pqf-lem-lft-fp-locnoeth, lem-weil-pbc-directed-subalgebra-ring-colimit, lem-weil-pbc-scheme-coproduct-family, lem-trf-algebraic-space-coproduct. Batch-5 flags are all general foundations, not steps of the trace formula or Poincaré duality, so no RETURN: trf definitions (already in base stmt_deps), 02X2 fibre products, the algebraic-space coproduct, sfb stack lemmas reaching trf only through definitions, and 01VA smooth composition (Mathlib leaf).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceCoherentStackGeneral",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_stack_general",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.Hom",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.fibreMap_laws",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.identity",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.composition",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.category_laws",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.instCategory",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.forgetTest",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.category",
+   "AlgebraicGeometry.AlgebraicSpace.CoherentModuli.toBase",
+   "AlgebraicGeometry.AlgebraicSpace.coherent_stack_general"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceCoherentStackGeneral.lean",
+  "statement": "theorem coherent_stack_general (f : X ⟶ B) (hsep : MapIsSeparated f) (hfp : ProperQuotFinitePresentation f) : IsAlgebraicModuliStack (CoherentModuli.category f) ∧ ∀ (B₀ : Over S) (e : schemeSpace B₀ ≅ B), ∃ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) (CoherentModuli.category f)) (q : U ⟶ B₀), IsSmoothModuliAtlas (CoherentModuli.category f) U a ∧ LocallyOfFinitePresentation q.left ∧ Nonempty (ModuliTwoIso (BasedFunctor.comp a (CoherentModuli.toBase f)) (discreteModuliMap (yoneda.map q ≫ e.hom.hom.hom)))",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Concrete algebraic-space coherent-family category, with cartesian tensor-pullback isomorphisms and its canonical map to B. The scheme-base clause quantifies over every scheme presentation of B and retains a 2-isomorphism identifying the locally finitely presented atlas composite with that structural map. Added landed definition dependencies supply only the existing normalized tensor unit and composition comparisons. No statement correction or new independent notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b18c4f223",
+  "group": "N9",
+  "result": "pass",
+  "note": "First S2 delivery; live node is split with no lean and no repair note. Only lean changed, plus two added stmt_deps (def-sfb-space-module-tensor-composition, def-sfb-space-derived-pullback), both landed definition nodes used exactly for moduleTensorComposition and moduleTensorPullbackId. Statement verbatim; all 11 declarations listed. Hypotheses are exactly MapIsSeparated plus ProperQuotFinitePresentation (lfp, qc, qs): no flatness, Noetherian or properness. Object fields match the ProperQuotient conventions of def-sfb-space-proper-quot-functor (qcoh, fp, flat on every etale chart via IsFlatOver, closed-carrier proper support). Arrows: map over B plus v_X^*M1 ≅ M; identity and composition use the canonical normalized comparisons, so no arbitrary data; fibreMap_laws and category_laws are true sorry'd obligations with proof docstrings. Conclusion: IsAlgebraicModuliStack over S; scheme-base clause covers every presentation schemeSpace B0 ≅ B, giving an atlas with an lfp map q tied to toBase by a ModuliTwoIso over identities. Edge cases covered (empty X or T, zero module, empty support, B=S, nonrepresentable B). No H4 duplicate: FlatCoherentModuli is the scheme-only notion. Advisories: schemeRestriction/schemeSpace owners not cited (Q133 precedent); inline restatement of the ProperQuotient predicates; second reading is a self-check. No file changed, so no compile; worker reports a clean compile and a passing deliver2 dry run."
+ }
+}

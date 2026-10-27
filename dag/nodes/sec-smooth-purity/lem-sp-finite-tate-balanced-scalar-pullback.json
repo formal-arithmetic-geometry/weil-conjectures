@@ -1,0 +1,314 @@
+{
+ "id": "lem-sp-finite-tate-balanced-scalar-pullback",
+ "kind": "statement",
+ "title": "Balanced derived scalar comparisons of finite Tate lines commute with pullback",
+ "statement": "Let $N\\geq1$ be invertible on a scheme $T$ and let $f:T'\\to T$ be a morphism of schemes. Let $\\varphi:A\\to B$ be a unital map of finite commutative rings with $NA=NB=0$. For $V=T,T'$ work in the ordinary unbounded derived categories $D(V_{\\mathrm{et}},R)$ of constant-ring module sheaves, $R=A,B$ [def-weil-pbc-derived-categories], and set $E_V=-\\otimes^L_{A_V}B_V$ [lem-pur-derived-change-of-rings]. Regard sheaves as degree-zero complexes. Put $R_V(1)=\\mu_{N,V}\\otimes_{(\\mathbf Z/N)_V}R_V$, where $\\mu_{N,V}(U)=\\{z\\in\\Gamma(U,\\mathcal O_U)^\\times:z^N=1\\}$ and residue classes act by powers [lem-asd-finite-etale-twist-line].\n\nThe ordinary balanced maps\n$$a\\otimes b\\longmapsto\\varphi(a)b,\\qquad (z\\otimes a)\\otimes b\\longmapsto z\\otimes\\varphi(a)b$$\ninduce specified isomorphisms $\\theta^0_V:E_V(A_V)\\xrightarrow\\sim B_V$ and $\\theta^1_V:E_V(A_V(1))\\xrightarrow\\sim B_V(1)$ in these derived categories. Their ordinary inverses are $b\\mapsto1\\otimes b$ and $z\\otimes b\\mapsto(z\\otimes1)\\otimes b$. These are the comparisons obtained by deriving ordinary coefficient extension on the degree-zero sheaves. Their shifts and finite direct sums are the canonical exact additive-functor comparisons, preserving the summand inclusions and projections.\n\nWrite $u_R:f_R^*R_T(1)\\xrightarrow\\sim R_{T'}(1)$ for the roots-induced inverse-image identification [lem-asd-etale-finite-twist-pullback] and $\\lambda_M:f_B^*E_TM\\xrightarrow\\sim E_{T'}f_A^*M$ for the canonical derived tensor/pullback comparison [lem-sfb-ringed-derived-monoidal-comparisons]. Then the following equality of actual derived morphisms holds, and also holds after any common shift:\n$$\\theta^1_{T'}\\circ E_{T'}(u_A)\\circ\\lambda_{A_T(1)}=u_B\\circ f_B^*(\\theta^1_T).$$\nLikewise, writing $e_R:f_R^*R_T\\xrightarrow\\sim R_{T'}$ for the canonical unit comparison of inverse image [lem-sfb-ringed-derived-monoidal-comparisons], $$\\theta^0_{T'}\\circ E_{T'}(e_A)\\circ\\lambda_{A_T}=e_B\\circ f_B^*(\\theta^0_T),$$ also after any common shift. No flatness of $B$ over $A$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: 'free rank-one summands, whose derived extension is the ordinary one'; normalized twist identifications used in retained splitting Steps 1 and 4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-etale-scalar-pullback-iso"
+ ],
+ "proof": [
+  {
+   "text": "For $V=T,T'$ and $R=A,B$, the finite-twist-line lemma applies: $N$ is invertible on $T'$ because units remain units under a scheme morphism, and $NR=0$. Thus $R_V$ and $R_V(1)$ are flat. Their degree-zero complexes are bounded above and K-flat by the K-flat closure lemma. Apply the change-of-rings computation to the identity resolutions of $A_V[0]$ and $A_V(1)[0]$. It identifies $E_V(A_V)$ and $E_V(A_V(1))$, with their $B_V$-actions retained, with $(A_V\\otimes_{A_V}B_V)[0]$ and $(A_V(1)\\otimes_{A_V}B_V)[0]$. This uses flatness of the input over $A_V$, never flatness of $B$ over $A$.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-pc-kflat-closure",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor); identity K-flat resolutions"
+   }
+  },
+  {
+   "text": "On ordinary sheaves define $h^0_V(a\\otimes b)=\\varphi(a)b$ and $j^0_V(b)=1\\otimes b$. The relation $(aa')\\otimes b=a\\otimes\\varphi(a')b$ proves that $h^0_V$ is balanced; both maps are additive and $B_V$-linear. Their composites are the identity since $h^0_V(1\\otimes b)=b$ and $1\\otimes\\varphi(a)b=a\\otimes b$. These formulas commute with restriction, so the definition of sheaf tensor gives inverse sheaf maps. Localizing these degree-zero maps using step 1 defines the specified $\\theta^0_V$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sheafification of the ordinary balanced tensor"
+   }
+  },
+  {
+   "text": "Define $h^1_V((z\\otimes a)\\otimes b)=z\\otimes\\varphi(a)b$ and $j^1_V(z\\otimes b)=(z\\otimes1)\\otimes b$. These formulas are additive in the roots-module variable and in the coefficients. For $r\\in\\mathbf Z/N$, the inner balancing relation is respected because $z^r\\otimes\\varphi(a)b=z\\otimes r\\varphi(a)b$; outer $A$-balancing follows from $\\varphi(aa')=\\varphi(a)\\varphi(a')$. For $j^1_V$, the relation $z^r\\otimes b=z\\otimes rb$ becomes $(z^r\\otimes1)\\otimes b=(z\\otimes r1_A)\\otimes b=(z\\otimes1)\\otimes r1_Bb$. The two composites on pure tensors are $z\\otimes b$ and $(z\\otimes1)\\otimes\\varphi(a)b=(z\\otimes a)\\otimes b$. Hence these are inverse $B_V$-linear sheaf maps after sheafification. By step 1 their degree-zero derived images give precisely $\\theta^1_V$ and its asserted inverse.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); explicit double balancing for the finite roots module"
+   }
+  },
+  {
+   "text": "Use the exact constant-coefficient inverse image and its constant-section ring identifications $c_R:f^{-1}R_T\\cong R_{T'}$. Their coefficient square commutes: $c_B f^{-1}\\varphi=\\varphi c_A$, as both maps send a constant $a$ to $\\varphi(a)$, and sheafification extends this equality. Regard coefficient extension and geometric pullback as ringed-topos pullbacks. The normalized derived composition comparisons identify their two composites, since their underlying geometric morphisms and structural ring maps agree. The monoidal-comparisons lemma computes these comparisons by ordinary pullback composition on flat-term K-flat complexes. The cochain-coherence lemma gives its scalar-association map $\\kappa_K:u'^*(K\\otimes_RR')\\to(u^*K)\\otimes_SS'$ explicitly. Specialize $R=A_T,R'=B_T,S=A_{T'},S'=B_{T'}$. For either degree-zero input $P$ of step 1, this says that $\\lambda_P$ is the derived image of the $B_{T'}$-linear sheaf isomorphism $f_B^*(P\\otimes_{A_T}B_T)\\cong f_A^*P\\otimes_{A_{T'}}B_{T'}$, sending the inverse image of a pure tensor $m\\otimes b$ to $(f^{-1}m)\\otimes c_B(f^{-1}b)$. The ringed tensor-pullback lemma ensures the pulled-back representatives are still flat-term K-flat, so both iterated computations are legitimate even for nonflat $B/A$. The same normalization identifies $e_R$ with $c_R$ in degree zero.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback), scalar-association normalization"
+   }
+  },
+  {
+   "text": "Write $z'$ for the image of an inverse-image root under $f^{-1}\\mu_{N,T}\\cong\\mu_{N,T'}$. The twist-pullback lemma specifies $u_R$ by this root map, so $u_R(f^{-1}(z\\otimes a))=z'\\otimes c_R(f^{-1}a)$. On the inverse image of $((z\\otimes a)\\otimes b)$ the composite $\\theta^1_{T'}E_{T'}(u_A)\\lambda_{A_T(1)}$ therefore has value $z'\\otimes\\varphi(c_A(f^{-1}a))c_B(f^{-1}b)$. The other composite $u_B f_B^*(\\theta^1_T)$ has value $z'\\otimes c_B(f^{-1}(\\varphi(a)b))$. These are equal by the coefficient-square equality and multiplicativity of $c_B$ in step 4. The comparison there is an isomorphism from the inverse-image sheafified tensor, so checking these generating pure tensors and their balanced relations suffices. Equality extends through sheafification. Both sides are the localizations of these actual equal degree-zero sheaf maps, giving the asserted equality in $D(T'_{\\mathrm{et}},B)$, rather than just equality on cohomology.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK (section-kummer), roots-induced pullback identification; elementary coefficient-square calculation using step 4"
+   }
+  },
+  {
+   "text": "For the unit square the same calculation starts with the inverse image of $a\\otimes b$. The composite $\\theta^0_{T'}E_{T'}(e_A)\\lambda_{A_T}$ sends it to $\\varphi(c_A(f^{-1}a))c_B(f^{-1}b)$; the composite $e_Bf_B^*(\\theta^0_T)$ sends it to $c_B(f^{-1}(\\varphi(a)b))$. Step 4 identifies these expressions. They determine the same sheaf morphism by the balanced tensor construction, so their derived images are equal. This proves the unit equation with the specified canonical $e_A,e_B$, not with an arbitrarily chosen unit identification.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); elementary unit calculation with the normalized comparisons of step 4"
+   }
+  },
+  {
+   "text": "The change-of-rings functor is exact and additive. For an integer $n$, use its canonical shift comparison to define $\\theta^i_V[n]$ on $E_V(A_V(i)[n])$. On the representatives above, shifting places the single nonzero term in degree $-n$; all arrows in steps 2--6 are unchanged in that degree. Coefficient extension tensors with $B[0]$, so no interchange of two shifted factors and no extra sign occurs. The cochain scalar-association formula of step 4 has exactly these same components after shifting. Applying the localization functor to the equal shifted chain maps proves both equations after every common shift. For a finite family of shifted unit or twist summands $M_j$, additivity gives the canonical biproduct comparison $E_V(\\bigoplus_jM_j)\\cong\\bigoplus_jE_V(M_j)$: its composites with inclusions are $E_V(\\iota_j)$ and its components are $E_V(\\pi_j)$. The identities $\\pi_j\\iota_k=\\delta_{jk}$ and $\\sum_j\\iota_j\\pi_j=1$ remain identities under an additive functor. Thus the direct sum of the specified shifted $\\theta$ maps is the canonical comparison and preserves every summand inclusion and projection. The empty sum gives the zero-object comparison.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU (definition-derived-tor) and 0D6D (lemma-derived-pullback-composition); degreewise shifts and elementary finite-biproduct identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-twist-line",
+  "lem-pc-kflat-closure",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-sheaf-tensor-product",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts, free rank-one summands: explicit balanced-tensor and canonical pullback calculation, using Stacks Tags 03EK, 03EL, 06YQ, 06YU, 07A4 and 0D6D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteEtaleTate|kummer.*scalar|scalar.*kummer|chernClass",
+   "results": "{\"t\": \"2026-10-22T05:55:26Z\", \"tool\": \"grep\", \"query\": \"finiteEtaleTate|kummer.*scalar|scalar.*kummer|chernClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Balanced coefficient change of finite etale roots of unity Tate line commutes with scheme pullback",
+   "results": "{\"t\": \"2026-10-22T05:55:27Z\", \"tool\": \"leansearch\", \"query\": \"Balanced coefficient change of finite etale roots of unity Tate line commutes with scheme pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Unramified.baseChange\", \"Algebra.Etale.baseChange\", \"modularCyclotomicCharacter.toFun_spec'\", \"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"autEquivRootsOfUnity_smul\", \"restrictRootsOfUnity_coe_apply\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\"], \"digest\": \"77a2252a80dacdbe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\"",
+   "results": "{\"t\": \"2026-10-22T05:55:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Macro.State\", \"Lean.Macro.instInhabitedState\", \"Lean.Macro.State.macroScope\", \"EStateM.dummySave\", \"_private.Init.Prelude.0.Lean.Macro.State.expandedMacroDecls\", \"EStateM\", \"EStateM.Backtrackable\", \"EStateM.Result\"], \"digest\": \"7f3136703288883a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of finite coefficient rings carries the etale Tate line by the balanced root tensor map and commutes with inverse image",
+   "results": "{\"t\": \"2026-10-22T05:55:38Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of finite coefficient rings carries the etale Tate line by the balanced root tensor map and commutes with inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.comp\", \"RingHom.etale_algebraMap\", \"StandardEtalePair.HasMap.map\", \"Algebra.Extension.tensorCotangentSpace\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"102755e9ee13f4f1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T05:55:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\"], \"digest\": \"dfb1da0ac422bb0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "{\"t\": \"2026-10-22T05:55:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"rootsOfUnity\", \"rootsOfUnity_one\", \"rootsOfUnity_zero\", \"rootsOfUnity_inf_rootsOfUnity\", \"rootsOfUnity_eq_ker\", \"ker_zpowGroupHom_eq_rootsOfUnity\", \"rootsOfUnity_le_of_dvd\", \"instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat\"], \"digest\": \"b3162e76aceb5175\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On ordinary etale sheaves the derived tensor coefficient comparison of the roots of unity line agrees with its degree zero balanced map and the shifted pullback square",
+   "results": "{\"t\": \"2026-10-22T05:55:52Z\", \"tool\": \"leanfinder\", \"query\": \"On ordinary etale sheaves the derived tensor coefficient comparison of the roots of unity line agrees with its degree zero balanced map and the shifted pullback square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"digest\": \"5340a91d005c0855\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tateTwist|Tate.*[Pp]ullback|balanced.*[Ss]calar",
+   "results": "{\"t\": \"2026-10-22T06:24:46Z\", \"tool\": \"grep\", \"query\": \"tateTwist|Tate.*[Pp]ullback|balanced.*[Ss]calar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/TopologicalEntropy/Semiconj.lean\", \"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"Mathlib/Geometry/Manifold/VectorField/LieBracket.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean\", \"Mathlib/Analysis/Calculus/VectorField.lean\"], \"digest\": \"25700ec1f27909cc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme pullback, presheaf tensor, etale algebra and roots-of-unity hits do not assert this normalized derived finite-Tate coefficient/pullback square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor coefficient change of roots of unity sheaves commutes with inverse image",
+   "results": "{\"t\": \"2026-10-22T06:24:46Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor coefficient change of roots of unity sheaves commutes with inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackObjUnitToUnit\", \"PiTensorProduct.map_comp_reindex_symm\", \"SheafOfModules.pushforwardCongr_inv_app_val_app\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"LinearEquiv.coe_rTensor_symm\", \"rootsOfUnityEquivOfPrimitiveRoots_symm_apply\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app\"], \"digest\": \"aee1b893f73b8220\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme pullback, presheaf tensor, etale algebra and roots-of-unity hits do not assert this normalized derived finite-Tate coefficient/pullback square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T06:24:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModulesOfCommRing.Monoidal.tensorObj\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj\", \"PresheafOfModulesOfCommRing.tensorObj_obj\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft\", \"PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom\", \"PresheafOfModulesOfCommRing.Monoidal.tensorObjMap\", \"PresheafOfModulesOfCommRing.Monoidal.tensorHom_app\"], \"digest\": \"dfb1da0ac422bb0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme pullback, presheaf tensor, etale algebra and roots-of-unity hits do not assert this normalized derived finite-Tate coefficient/pullback square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars of locally free rank one etale sheaves agrees with ordinary tensor and commutes with pullback",
+   "results": "{\"t\": \"2026-10-22T06:24:53Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of scalars of locally free rank one etale sheaves agrees with ordinary tensor and commutes with pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Etale.baseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.FormallyEtale.instTensorProduct\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"KaehlerDifferential.moduleBaseChange'\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\"], \"digest\": \"b65382d6cb62a1e3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme pullback, presheaf tensor, etale algebra and roots-of-unity hits do not assert this normalized derived finite-Tate coefficient/pullback square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of roots of unity mu N tensor A the balanced scalar extension to B is compatible with scheme inverse image as a derived morphism",
+   "results": "{\"t\": \"2026-10-22T06:25:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf of roots of unity mu N tensor A the balanced scalar extension to B is compatible with scheme inverse image as a derived morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"224046267761d119\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or scheme pullback, presheaf tensor, etale algebra and roots-of-unity hits do not assert this normalized derived finite-Tate coefficient/pullback square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-p1-splitting-scalar",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: 'free rank-one summands, whose derived extension is the ordinary one'; normalized twist identifications used in retained splitting Steps 1 and 4",
+   "via": [
+    "lem-sp-p1-splitting-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-finite-tate-balanced-scalar-pullback",
+  "worker": "stage1",
+  "summary": "Kept the full statement, including actual derived-morphism equalities and nonflat coefficient changes. Split into K-flat degree-zero computation, two explicit balanced inverse calculations, normalized scalar/pullback comparison, two generator calculations, and shifts and biproducts. Reused all lemmas; no new nodes.",
+  "blueprint": "det-sp-reduction-exceptional, Charts: 'the splitting consists of free rank-one summands, whose derived extension is the ordinary one'; makes the two normalized coefficient identifications and their geometric pullback compatibility explicit for the retained splitting.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "General ringed-site K-flatness of bounded-above flat complexes; the coefficient-comparison unit needs this resolving-model computation and has no separate such closure statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General coefficient extension computed by K-flat resolutions, with target-ring action and exactness; the unit explicitly uses derived extension, independently of geometric purity."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "General ordinary etale constant-ring inverse image, its constant-section identification and exactness; needed to specify the coefficient square."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General normalized ringed pullback composition and unit comparisons, giving the actual canonical lambda and e used in this item."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "General scalar-association chain-map formula kappa and its componentwise normalization; fixes the coefficient/pullback comparison without any purity input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General preservation of flat-term K-flat representatives by ringed pullback, ensuring the iterated comparisons compute the derived objects."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Finite roots twist is a flat line on any scheme with N invertible, the exact input for the unit route free-line scalar computation."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "General roots-induced etale finite-twist identification; provides the specified u_A and u_B, without invoking any smooth purity result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-closure",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-26db8c319",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-26db8c319 (reviewer sub-agent of L); spot-checked: PASS, no changes. The item statement is byte-identical to the version FIXed in the Q08 review of lem-sp-p1-splitting-scalar (runs/1/Q08…a6e414). The delivery adds 7 proof steps and no new nodes. Source read: main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts paragraph (lines 20-36), the 'free rank-one summands whose derived extension is the ordinary one' sentence. Checks per step: (1) the twist-line lemma gives flat R_V and R_V(1) for R=A,B and V=T,T', with N invertible on T' because local ring maps keep units; kflat-closure gives K-flatness; derived-change-of-rings(2) computes E_V on the identity resolution in D(B_V), with no flatness of B over A. (2) and (3) Rechecked the balancing relations and inverse composites, including z^r⊗b ↦ (z⊗r1_A)⊗b = (z⊗1)⊗rb. (4) The coefficient square c_B f^{-1}φ = φc_A holds on constant sections; λ comes from the sfb composition comparisons plus its 2-isomorphism clause; κ_K of the cochain-coherence lemma with R=A_T, R'=B_T, S=A_{T'}, S'=B_{T'} is the ordinary representative of λ; e_R = c_R in degree 0. (5) and (6) Recomputed both composites on s'⊗f^{-1}((z⊗a)⊗b): z'⊗φ(c_A f^{-1}a)c_B(f^{-1}b)s' = z'⊗c_B(f^{-1}(φ(a)b))s'. The equality holds at chain level, so it is an equality of derived morphisms, not only on cohomology. (7) Shifts carry no sign since B is in degree 0; biproduct identities are kept by an additive functor. Small cases: N=1 (zero rings), A=0 forces B=0, identity f, φ=id, and nonflat Z/4→Z/2. Duplicate search: chart-counit-scalar-transport, p1-ordered-projection, p1-kummer-derived-scalar and etale-compact-scalar-coherence all differ; the pro-étale det-sp-scalar-extension-functor is on another site. All eight declared tool_uses are generic black boxes and accepted. The Stacks tags cited in the steps are all valid. No SGA. Maintainer notes: (a) lem-pc-kflat-closure cites Stacks 06YS, but the bounded-flat lemma is 06YQ (06YS is lemma-K-flat-resolution); (b) cosmetic: f_R^* is used in the statement without being named; it is P_h=Lh^* of the cited sfb node."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTateBalancedScalarPullback",
+  "declaration": "AlgebraicGeometry.Etale.finiteTateBalancedScalarPullback",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteTateBalancedSheaf",
+   "AlgebraicGeometry.Etale.finiteTateBalancedGenerator",
+   "AlgebraicGeometry.Etale.finiteTateBalancedObject",
+   "AlgebraicGeometry.Etale.finiteTateBalancedPullback",
+   "AlgebraicGeometry.Etale.finiteTateBalancedShiftIso",
+   "AlgebraicGeometry.Etale.finiteTateBalancedScalarPullback"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTateBalancedScalarPullback.lean",
+  "statement": "theorem finiteTateBalancedScalarPullback (N : ℕ) (hN : 0 < N) {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (hA : (N : A) = 0) (hB : (N : B) = 0) : ∃ (s : ∀ (T : Scheme.{u}) (i : Bool), (ProEtale.etaleSheafExtendScalars φ T).obj (finiteTateBalancedSheaf A N hA T i) ≅ finiteTateBalancedSheaf B N hB T i) (θ : ∀ (T : Scheme.{u}), (∀ t : T, IsUnit (N : T.presheaf.stalk t)) → ∀ i : Bool, (scalarExtension φ T).obj (finiteTateBalancedObject A N hA T i) ≅ finiteTateBalancedObject B N hB T i), (∀ (T : Scheme.{u}) (i : Bool) (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf N).obj.obj W), ((ProEtale.etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _ (s T i).hom).hom.app W (finiteTateBalancedGenerator A N hA T i W a z) = finiteTateBalancedGenerator B N hB T i W (φ a) z) ∧ (∀ (T : Scheme.{u}) (i : Bool) (W : T.Etaleᵒᵖ) (b : B) (z : (T.rootsOfUnitySheaf N).obj.obj W), (s T i).inv.hom.app W (finiteTateBalancedGenerator B N hB T i W b z) = b • @id (((ProEtale.etaleSheafExtendScalars φ T).obj (finiteTateBalancedSheaf A N hA T i)).obj.obj W) (((ProEtale.etaleSheafExtendScalarsAdjunction φ T).unit.app (finiteTateBalancedSheaf A N hA T i)).hom.app W (finiteTateBalancedGenerator A N hA T i W 1 z))) ∧ (∀ (T : Scheme.{u}) (hT : ∀ t : T, IsUnit (N : T.presheaf.stalk t)) (i : Bool), (θ T hT i).hom = FiniteSmoothPurity.scalarSingleMap φ T (finiteTateBalancedSheaf A N hA T i) ≫ (_root_.DerivedCategory.singleFunctor _ 0).map (s T i).hom) ∧ (∀ {T T' : Scheme.{u}} (f : T' ⟶ T) (hT : ∀ t : T, IsUnit (N : T.presheaf.stalk t)) (hT' : ∀ t : T', IsUnit (N : T'.presheaf.stalk t)), ∃ (hΓ : IsUnit (N : Γ(T, ⊤))) (hΓ' : IsUnit (N : Γ(T', ⊤))), ∀ (i : Bool) (n : ℤ), (shiftFunctor _ n).map ((scalarPullbackIso φ f).hom.app (finiteTateBalancedObject A N hA T i) ≫ (scalarExtension φ T').map (finiteTateBalancedPullback A N hN hA f hΓ hΓ' i).hom ≫ (θ T' hT' i).hom) = (shiftFunctor _ n).map ((upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctor.map (θ T hT i).hom ≫ (finiteTateBalancedPullback B N hN hB f hΓ hΓ' i).hom)) ∧ (∀ (T : Scheme.{u}) (hT : ∀ t : T, IsUnit (N : T.presheaf.stalk t)) (J : Type w) [Fintype J] (i : J → Bool) (n : J → ℤ), ∃ c : (scalarExtension φ T).obj (⨁ fun j ↦ (finiteTateBalancedObject A N hA T (i j))⟦n j⟧) ≅ ⨁ fun j ↦ (finiteTateBalancedObject B N hB T (i j))⟦n j⟧, (∀ j : J, (scalarExtension φ T).map (biproduct.ι _ j) ≫ c.hom = (finiteTateBalancedShiftIso φ T (θ T hT (i j)) (n j)).hom ≫ biproduct.ι (fun k ↦ (finiteTateBalancedObject B N hB T (i k))⟦n k⟧) j) ∧ (∀ j : J, c.hom ≫ biproduct.π _ j = (scalarExtension φ T).map (biproduct.π _ j) ≫ (finiteTateBalancedShiftIso φ T (θ T hT (i j)) (n j)).hom))",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Boolean indexing packages exactly the constant and first Tate lines. Ordinary isomorphisms are fixed on generators and inverse generators; derived isomorphisms are fixed by scalarSingleMap. Uses the published K-flat-normalized scalarPullbackIso, with both squares as actual shifted derived morphism equalities. The added definition dependency def-pur-finite-smooth-coefficient-arrows owns scalarSingleMap and scalarShiftIso; def-pur-etale-scalar-pullback-iso owns scalarPullbackIso and scalarPullbackIso_existsUnique in Sheaf.Paper.PurEtaleScalarMateProjection. The latter definition dependency replaces lem-pur-etale-scalar-mate-projection as requested by the H2 return; the import and Lean statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e176c399a",
+  "group": "Q84",
+  "result": "pass",
+  "note": "H2 re-delivery of ff78ee3f6e72. diff -r of the snapshots: the Lean file is byte-identical; the item node changes only stmt_deps (lem-pur-etale-scalar-mate-projection -> def-pur-etale-scalar-pullback-iso) and lean.note; the report adds an H2 repair section. def-pur-etale-scalar-pullback-iso is a definition node, existing:true, owning scalarPullbackIso_existsUnique and scalarPullbackIso; its snapshot copy equals live; the live signature is scalarExtension⋙Lf_B^* ≅ Lf_A^*⋙scalarExtension (the λ direction). def-pur-finite-smooth-coefficient-arrows owns scalarSingleMap/scalarShiftIso. All 12 imports exist live; the live item is still split with no lean record (no supersession). Clause audit re-confirmed: s pinned on generators and inverse, θ = scalarSingleMap ≫ single(s), both squares as actual derived equalities after every shift, biproduct ι/π pinned; edge cases N=1, A=0, empty scheme, nonflat Z/4→Z/2, empty J; no extra hypotheses; docstrings and 7 proof steps present; statement verbatim. No compile (no file changed); worker scompile clean 46.3/29.3 s. Advisory only: λ/e_R rendered via scalarPullbackIso and twist data at 0, identified by node step 4."
+ }
+}

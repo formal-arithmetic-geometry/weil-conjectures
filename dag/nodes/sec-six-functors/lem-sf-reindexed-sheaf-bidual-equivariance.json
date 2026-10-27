@@ -1,0 +1,245 @@
+{
+ "id": "lem-sf-reindexed-sheaf-bidual-equivariance",
+ "kind": "statement",
+ "title": "Bidual evaluation under reindexing and contragredient structure",
+ "statement": "Let $(\\mathcal C,J)$ be a site small in the coefficient universe [def-weil-size-convention]. Let $\\tau:\\mathcal C\\to\\mathcal C$ be an invertible functor with inverse preserving covering sieves, and assume $\\tau$ also preserves covering sieves. Let $T$ be reindexing of sheaves, $(TF)(U)=F(\\tau U)$, with its action on restrictions and maps. Let $R$ be a sheaf of commutative rings, $s:TR\\xrightarrow{\\sim}R$ a ring-sheaf isomorphism, and $M$ an $R$-module sheaf [def-weil-sheaf-of-modules-category]. Regard $TM$ as an $R$-module using $s^{-1}$. Suppose $a:TM\\xrightarrow{\\sim}M$ is $R$-linear, or equivalently $s$-semilinear for the original $TR$-action. Put $D(M)=\\mathcal Hom_R(M,R)$ [def-pur-sheaf-hom]. Reindexing slices gives the canonical comparison $TD(M)\\cong\\mathcal Hom_{TR}(TM,TR)$. Equip $D(M)$ with\n$$b:TD(M)\\xrightarrow{\\sim}D(M),\\qquad b(\\mu)=s\\circ\\mu\\circ a^{-1},$$\nand $D^2(M)$ with the twice-induced structure\n$$c:TD^2(M)\\xrightarrow{\\sim}D^2(M),\\qquad c(\\zeta)=s\\circ\\zeta\\circ b^{-1}.$$\nHere all compositions are maps on localized sites, and reindexing carries ordinary bidual evaluation to the same evaluation formula over $TR$.\n\nThe canonical evaluation $\\delta_M:M\\to D^2(M)$ satisfies\n$$c\\circ T\\delta_M=\\delta_M\\circ a.$$\nThus it is a morphism of $T$-fixed pairs [def-weil-endofunctor-fixed-pair-category], where $T$ on $R$-modules includes the coefficient identification $s$. This equivariance assertion holds for arbitrary $M$, with no local freeness assumption. Whenever $\\delta_M$ is an underlying module isomorphism, its inverse $h$ satisfies $a\\circ T(h)=h\\circ c$, and $\\delta_M,h$ define an isomorphism of fixed pairs. No $\\tau$-invariant trivializing covering is required.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/Dual.lean",
+  "place": "dualStr and dual, lines 205-235; agent generalization of the explicit double contragredient formula to any ringed-site automorphism, corresponding to returned steps 5-6 of lem-sf-weil-lisse-biduality."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "For $U\\in\\mathcal C$, the functor $\\tau_U:\\mathcal C/U\\to\\mathcal C/\\tau U$ sends $(V\\xrightarrow f U)$ to $(\\tau V\\xrightarrow{\\tau f}\\tau U)$ and arrows to their $\\tau$-images. Its inverse is obtained by applying $\\tau^{-1}$; the inverse identifications are those of the chosen inverse of $\\tau$. Covering sieves correspond since both functors preserve them. Pulling a localized map $\\mu:M|_{\\tau U}\\to R|_{\\tau U}$ back along this functor gives the map on $\\mathcal C/U$ with component $\\mu_{\\tau V\\to\\tau U}:M(\\tau V)\\to R(\\tau V)$. Pullback by the inverse recovers $\\mu$. This gives precisely $TD(M)\\cong\\mathcal Hom_{TR}(TM,TR)$, linearly over $TR$; applying the same formula after $V\\to U$ is restriction on both sides. This is a direct change of indices in the slice-Hom definition, not a claim that internal Hom commutes with an arbitrary inverse image.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04TT, section-internal-hom: localized Hom, restrictions and evaluation; direct agent calculation for reindexing and semilinear structures."
+   }
+  },
+  {
+   "text": "Explicitly, for any $R$-module sheaf $N$ define $\\delta_{N,U}(x)$ on $V\\to U$ by $\\lambda\\mapsto\\lambda_V(x|_V)$, for $\\lambda\\in D(N)(V)$. This is $R(V)$-linear in $\\lambda$: addition and scalar multiplication of localized maps are pointwise. Its compatibility with $W\\to V$ is $\\lambda_V(x|_V)|_W=\\lambda_W(x|_W)$. It is also additive and $R(U)$-linear in $x$, so the formulas define the module-sheaf morphism $\\delta_N$. Under step 1, $T\\delta_M$ is the $TR$-linear evaluation for $TM$: both formulas on $V\\to U$ are $\\mu\\mapsto\\mu_V(x|_V)$, now with $x\\in TM(U)$ and $\\mu\\in\\mathcal Hom_{TR}(TM,TR)(V)$. Thus the reindexing comparison respects evaluation on all slices.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04TT, section-internal-hom: localized Hom, restrictions and evaluation; direct agent calculation for reindexing and semilinear structures."
+   }
+  },
+  {
+   "text": "Write $t=s^{-1}$. In the localized Hom coordinates of step 1 the inverse of $b$ is $b^{-1}(\\lambda)=t\\circ\\lambda\\circ a$. Indeed, $s(t\\lambda a)a^{-1}=\\lambda$ and $t(s\\mu a^{-1})a=\\mu$, on every slice. The map $s\\mu a^{-1}$ is $R$-linear on $M$: for $r\\in R(V)$, $a^{-1}(rm)=t(r)a^{-1}(m)$, whence $s\\mu a^{-1}(rm)=r\\,s\\mu a^{-1}(m)$. Moreover $b(q\\mu)=s(q)b(\\mu)$ for $q\\in TR(V)$, so $b$ is $R$-linear when its domain has the transported action $r\\mu=t(r)\\mu$. All formulas commute with restriction because $a,s,t$ do. The identical substitution with $M,a$ replaced by $D(M),b$ shows that $c(\\zeta)=s\\zeta b^{-1}$ is a module-sheaf isomorphism with inverse $\\eta\\mapsto t\\eta b$. Thus the fixed-pair structures used in the statement are well defined.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04TT, section-internal-hom: localized Hom, restrictions and evaluation; direct agent calculation for reindexing and semilinear structures."
+   }
+  },
+  {
+   "text": "Take $x\\in TM(U)$, $V\\to U$ and $\\lambda\\in D(M)(V)$. Using steps 2 and 3 gives\n$$\\bigl(c_U(T\\delta_M)_U(x)\\bigr)_V(\\lambda)\n=s_V\\bigl((b_V^{-1}\\lambda)_V(x|_V)\\bigr)\n=s_V\\bigl(t_V(\\lambda_V(a_V(x|_V)))\\bigr)\n=\\lambda_V((a_Ux)|_V)\n=\\bigl(\\delta_{M,U}(a_Ux)\\bigr)_V(\\lambda).$$\nThe third equality uses $s_Vt_V=1$ and naturality of $a$. These equalities test every component and every argument of the localized sheaf maps, so $c\\circ T\\delta_M=\\delta_M\\circ a$. By the defining condition for fixed-pair morphisms, $\\delta_M:(M,a)\\to(D^2(M),c)$ is a morphism. No step used freeness or a chosen covering.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04TT, section-internal-hom: localized Hom, restrictions and evaluation; direct agent calculation for reindexing and semilinear structures."
+   }
+  },
+  {
+   "text": "If $\\delta_M$ is a module isomorphism, put $h=\\delta_M^{-1}$. Compose $c\\circ T\\delta_M=\\delta_M\\circ a$ on the left with $h$ and on the right with $T(h)$. Functoriality and $\\delta_Mh=1$ give $h\\circ c=a\\circ T(h)$. This is exactly the fixed-pair morphism condition for $h:(D^2(M),c)\\to(M,a)$. The two composites with $\\delta_M$ are identities on underlying sheaves, hence identities in the fixed-pair category, whose morphisms are the underlying maps satisfying the stated equation. Thus these maps give the asserted fixed-pair isomorphism.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04TT, section-internal-hom: localized Hom, restrictions and evaluation; direct agent calculation for reindexing and semilinear structures."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04TT (section-internal-hom), direct localized evaluation calculation; contragredient convention checked against lean/WeilConjectures/WeilSheaf/Dual.lean, dualStr, lines 205-235."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bidual|contragredient|doubleDual|double_dual",
+   "results": "none; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module naturality and rigid-category tensor-Hom identities do not state semilinear slice-reindexing compatibility of the specified double contragredient fixed pair."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ringed site automorphism T and a fixed pair M with theta T M isomorphic to M the natural bidual evaluation commutes with the double contragredient action",
+   "results": "Module.Dual.eval_naturality; LinearEquiv.trans_dualMap_symm_flip; Module.Dual.eval; DomAddAct.mk; Module.Dual.instIsReflecive; Module.IsReflexive.bijective_dual_eval'; Module.evalEquiv; Module.Dual.eval_comp_comp_evalEquiv_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module naturality and rigid-category tensor-Hom identities do not state semilinear slice-reindexing compatibility of the specified double contragredient fixed pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra, CategoryTheory.ihom.ev",
+   "results": "none; loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module naturality and rigid-category tensor-Hom identities do not state semilinear slice-reindexing compatibility of the specified double contragredient fixed pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation into the double internal dual is equivariant for a site automorphism with a ring sheaf identification and the inverse contragredient structure",
+   "results": "CategoryTheory.evalEquiv_apply; SheafOfModules.unitHomEquiv_symm_comp; PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply; CategoryTheory.typeEquiv_inverse_map; CategoryTheory.evalEquiv_symm_apply; CategoryTheory.typeEquiv_counitIso_inv_app_val_app; CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm; CategoryTheory.sheafSectionsNatIsoEvaluation",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module naturality and rigid-category tensor-Hom identities do not state semilinear slice-reindexing compatibility of the specified double contragredient fixed pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bidual evaluation natural transformation is compatible with transport by a monoidal equivalence and the dual action on fixed pairs",
+   "results": "CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module naturality and rigid-category tensor-Hom identities do not state semilinear slice-reindexing compatibility of the specified double contragredient fixed pair."
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|double_dual|eval_naturality",
+   "results": "none; directory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module bidual naturality lacks the ringed-site slice comparison and semilinear coefficient identification; rigid tensor-dual results require dualizability, whereas the item allows arbitrary module sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bidual evaluation of a sheaf of modules is equivariant for a semilinear automorphism with the double contragredient action",
+   "results": "Module.evalEquiv_apply; Module.Dual.eval_naturality; Module.Dual.eval_comp_comp_evalEquiv_eq; Module.Dual.congr_apply_apply; Module.evalEquiv.congr_simp; Module.apply_evalEquiv_symm_apply; Module.evalEquiv; LinearEquiv.trans_dualMap_symm_flip",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module bidual naturality lacks the ringed-site slice comparison and semilinear coefficient identification; rigid tensor-dual results require dualizability, whereas the item allows arbitrary module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual.eval_naturality",
+   "results": "Module.Dual.eval_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module bidual naturality lacks the ringed-site slice comparison and semilinear coefficient identification; rigid tensor-dual results require dualizability, whereas the item allows arbitrary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules reindexed by a site automorphism with a semilinear structure isomorphism the canonical double dual evaluation commutes with the twice contragredient structure",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.unitHomEquiv_symm_comp; SheafOfModules.pushforwardCongr; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module bidual naturality lacks the ringed-site slice comparison and semilinear coefficient identification; rigid tensor-dual results require dualizability, whereas the item allows arbitrary module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "eval_naturality|def eval|congr_apply_apply",
+   "results": "Mathlib/LinearAlgebra/Dual/Basis.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; directory Mathlib/LinearAlgebra/Dual",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module bidual naturality lacks the ringed-site slice comparison and semilinear coefficient identification; rigid tensor-dual results require dualizability, whereas the item allows arbitrary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation into the double internal Hom dual is compatible with a monoidal equivalence and contragredient transport",
+   "results": "CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.tensorLeftHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.tensorRightHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.tensorRightHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module bidual naturality lacks the ringed-site slice comparison and semilinear coefficient identification; rigid tensor-dual results require dualizability, whereas the item allows arbitrary module sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-lisse-biduality",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Recorded blueprint ancestor lem-a1-local-boundary-duality: its use of lisse biduality; lem-sf-hom-finite-projective.proof.md finite-free/locality sentences, made precise by returned steps 5-6. The computed ancestor is null because the maintainer-created parent has created.item=null.",
+   "via": [
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-reindexed-sheaf-bidual-equivariance",
+  "worker": "stage1",
+  "summary": "Retained the statement. Wrote the slice reindexing comparison, the evaluation formula, explicit inverse semilinear dual structures, the componentwise equivariance calculation, and the inverse fixed-pair equation. All five steps are elementary substitutions in the cited definitions; no new nodes. Read the current upstream dual construction and found no full attachment. Repeated logged Mathlib searches with a second phrasing; ordinary module naturality and rigid duality do not cover arbitrary module sheaves and coefficient transport.",
+  "blueprint": "Preserves the recorded provenance through lem-sf-weil-lisse-biduality to lem-a1-local-boundary-duality, and makes explicit the equivariance needed in the canonical biduality assertion of lem-sf-hom-finite-projective. The finite-free/locality sentences do not themselves prove this equivariance. Computed ancestor is null as already recorded; no chapter/unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "The generic slice-site and relocalization definitions make the reindexing formula precise; they do not replace any operation or proof route of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-localized-ringed-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-edb606b8b",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-edb606b8b (reviewer sub-agent of L); spot-checked: I read the whole split, its five elementary steps and all four cited definitions. Everything checks and no fixes were needed. Shape: one commit (item plus report), no new nodes. The statement and stmt_deps are identical to clones/live and clones/side-live, where the item is still unsplit, so no other group has superseded it. Sources: Stacks 04TT (sites-modules.tex l.3721), including 03EM and 0E8H; Dual.lean dualStr l.205-235, where b=s∘μ∘a⁻¹ matches the contragredient direction. Step 1: slice reindexing τ_U:C/U≅C/τU is a pure change of indices in the def-pur-sheaf-hom formula. Step 2: evaluation is linear and restriction-compatible, and Tδ is the evaluation for TM. Step 3: I verified the semilinearity directions a⁻¹(rm)=t(r)a⁻¹m, the inverses b⁻¹=tλa and c⁻¹=tηb, and the R-linearity of b and c. Step 4: I verified each equality of s_V((b⁻¹λ)_V(x|_V))=s_Vt_Vλ_V(a_V x|_V)=λ_V((a_Ux)|_V), using s_Vt_V=1 and naturality of a. Step 5: the inverse equation follows by cancellation through T(δh)=1. Small cases: on a one-object site with σ∈Aut K the scalar direction is correct (the opposite convention would fail); the zero module/ring and non-reflexive M also work, and only the conditional final clause needs δ invertible. Parent lem-sf-weil-lisse-biduality step 3 uses exactly cTδ=δθ. Duplicate scan: the only hits are derived Verdier or package statements, none of which states this lemma. The tool_use def-pur-localized-ringed-site (a generic definition) is accepted. blueprint.from.node=null is inherited from the parent. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ReindexedSheafBidualEquivariance",
+  "declaration": "SheafOfModules.reindexed_bidual_equivariance",
+  "file": "lean/Sheaf/CategoryTheory/ReindexedSheafBidualEquivariance.lean",
+  "statement": "theorem reindexed_bidual_equivariance {C : Type u} [Category.{u} C] (J : GrothendieckTopology C) (τ : C ≌ C) [τ.functor.IsContinuous J J] [τ.inverse.IsContinuous J J] (R : Sheaf J CommRingCat.{u}) (s : (τ.functor.sheafPushforwardContinuous RingCat.{u} J J).obj ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) ≅ (sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R) (M : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat.{u})).obj R)) (a : (pushforward (F := τ.functor) s.inv).obj M ≅ M) : (∃ q : (pushforward (F := τ.functor) s.inv).obj (homObj (R := R) M (unit _)) ≅ homObj (R := R) ((pushforward (F := τ.functor) s.inv).obj M) (unit _), ∀ (U V : C) (f : V ⟶ U) (μ : (homObj (R := R) M (unit _)).val.obj (op (τ.functor.obj U))) (x : M.val.obj (op (τ.functor.obj V))), ((q.hom.val.app (op U) μ).app (op (Over.mk f))) x = s.hom.hom.app (op V) ((μ.app (op (Over.mk (τ.functor.map f)))) x)) ∧ ∃ b : (pushforward (F := τ.functor) s.inv).obj (homObj (R := R) M (unit _)) ≅ homObj (R := R) M (unit _), ∃ c : (pushforward (F := τ.functor) s.inv).obj (homObj (R := R) (homObj (R := R) M (unit _)) (unit _)) ≅ homObj (R := R) (homObj (R := R) M (unit _)) (unit _), (∀ (U V : C) (f : V ⟶ U) (μ : (homObj (R := R) M (unit _)).val.obj (op (τ.functor.obj U))) (x : M.val.obj (op V)), ((b.hom.val.app (op U) μ).app (op (Over.mk f))) x = s.hom.hom.app (op V) ((μ.app (op (Over.mk (τ.functor.map f)))) (a.inv.val.app (op V) x))) ∧ (∀ (U V : C) (f : V ⟶ U) (ζ : (homObj (R := R) (homObj (R := R) M (unit _)) (unit _)).val.obj (op (τ.functor.obj U))) (lam : (homObj (R := R) M (unit _)).val.obj (op V)), ((c.hom.val.app (op U) ζ).app (op (Over.mk f))) lam = s.hom.hom.app (op V) ((ζ.app (op (Over.mk (τ.functor.map f)))) (b.inv.val.app (op V) lam))) ∧ (pushforward (F := τ.functor) s.inv).map (bidual M) ≫ c.hom = a.hom ≫ bidual M ∧ (∃ d : Endofunctor.IsoAlgebra.mk M a ⟶ Endofunctor.IsoAlgebra.mk (homObj (R := R) (homObj (R := R) M (unit _)) (unit _)) c, (Endofunctor.IsoAlgebra.forget _).map d = bidual M) ∧ (∀ [IsIso (bidual M)], (pushforward (F := τ.functor) s.inv).map (inv (bidual M)) ≫ a.hom = c.hom ≫ inv (bidual M) ∧ ∃ e : Endofunctor.IsoAlgebra.mk M a ≅ Endofunctor.IsoAlgebra.mk (homObj (R := R) (homObj (R := R) M (unit _)) (unit _)) c, (Endofunctor.IsoAlgebra.forget _).map e.hom = bidual M ∧ (Endofunctor.IsoAlgebra.forget _).map e.inv = inv (bidual M))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing SheafOfModules.homObj, bidual, pushforward and Endofunctor.IsoAlgebra. The comparison is expressed after the specified coefficient identification s; its all-slices formula is the raw TR-linear reindexing comparison transported to R. The existential isomorphisms b and c are completely specified by their all-slices contragredient formulas, not arbitrary maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35e604c79",
+  "group": "NE",
+  "result": "pass",
+  "note": "Each node clause matched to the Lean: T = Mathlib pushforward along τ via s.inv (direction checked); q, b and c are existential isomorphisms each fixed by a formula on every slice and argument (q: s_V(μ_{τf} x), b: s∘μ∘a⁻¹, c: s∘ζ∘b⁻¹), linearity checked by hand, so not arbitrary maps; c∘Tδ=δ∘a written as T.map δ ≫ c.hom = a.hom ≫ δ, matching Algebra.Hom.h; IsoAlgebra morphism d and conditional IsIso inverse clause with iso e (forget e.inv = inv δ). Universe u small site forced by SheafOfModules.bidual. Continuity of τ and τ⁻¹ is equivalent to cover preservation for an equivalence. No local freeness or invariant cover assumed. Edge cases checked: empty site, zero ring, zero M, nontrivial automorphism on a one-object site. Node differs from live only in lean (live lean null); lean.statement verbatim equal to the file; docstrings carry source, blueprint id and proof steps 1-5; sorry only; no H4 duplicate. Advisory: comparison stated in the s-transported form Hom_R(TM,R), equivalent and documented in lean.note; δ comes from upstream Sheaf.Bidual, recorded by no node. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261024T184730-L-3150789",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "SheafOfModules.reindexed_bidual_equivariance"
+  ],
+  "sorry_after": []
+ }
+}

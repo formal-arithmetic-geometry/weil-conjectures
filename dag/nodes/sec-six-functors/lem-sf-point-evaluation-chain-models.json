@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-point-evaluation-chain-models",
+ "kind": "statement",
+ "title": "Normalized tensor and scalar chain models for point evaluation",
+ "status": "split",
+ "statement": "For an algebraically closed field k, final-object evaluation on commutative ring sheaves has normalized TensorModel data, satisfying TensorCoherent and the degree-zero identity unit formula. For every coefficient morphism its canonical extension of scalars has ScalarModel data satisfying ScalarCoherent. These are the ordinary ambient cochain tensors and their specified pure-tensor and total-summand formulas; no coefficient flatness is assumed. Uses [def-sf-point-evaluation-tensor-data], [def-sf-point-evaluation-scalar-data] and their coherence predicates. This asserts only chain models, not the geometric point identification, derived comparison uniqueness, or completed coefficient sections.",
+ "stmt_deps": [
+  "def-sf-point-evaluation-tensor-data",
+  "def-sf-point-evaluation-tensor-coherence",
+  "def-sf-point-evaluation-scalar-data",
+  "def-sf-point-evaluation-scalar-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, total-complex construction; sites-modules.tex Tag 03EL. Original item steps 3, 5 and 6."
+ },
+ "proof": [
+  {
+   "text": "Evaluation of sheafification at the final object is bijective since every covering sieve contains its identity. Use its inverse to identify the sheaf tensor with the tensor of evaluated modules. The right-adjoint lax monoidal structure is consequently strong monoidal, with identity unit. Extend this structure to direct-sum cochain totalization; the summand map is the evaluated section tensor. Associativity and unitors are standard total constraints and symmetry has the same Koszul sign on both sides. Apply the ringed-point stalk criterion for K-flatness and flatness of module inverse image. Evaluate sheafified scalar extension to identify it with ordinary scalar extension. On pure generators its tensor square is the balanced multiplication formula; extend by tensor linearity and coproduct extensionality. Scalar extension preserves flat-term K-flat complexes by ringed pullback.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-sfb-ringed-site-point-tensor",
+    "lem-sfb-ringed-site-point-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, total-complex construction; sites-modules.tex Tag 03EL. Original item steps 3, 5 and 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-sfb-ringed-site-point-flat"
+ ],
+ "proof_origin": {
+  "kind": "decomposition",
+  "from": "lem-sf-point-ringed-evaluation-model",
+  "steps": [
+   3,
+   5,
+   6
+  ],
+  "note": "Chain construction isolated from independent geometric point, coefficient-limit and representative descent arguments."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Final object sections on the proetale site of an algebraically closed point are the exact ringed point inverse image and their derived tensor comparison has the pure tensor normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} →\\n      (t : ↥(CategoryTheory.Limits.pullback f g)) →\\n        (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).tensor ⟶\\n          (CategoryTheory.Limits.pullback f g).residueField t\", \"doc\": \"For any morphisms $f : X \\to S$ and $g : Y \\to S$ of schemes and any point $t$ in the fiber product $X \\times_S Y$, this constructs the canonical morphism from the pushout of residue field maps induced b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) → Y.residueField T.y ⟶ T.tensor\", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, this is the morphism from the residue field of $Y$ at point $T.y$ to the pushout object $T.tensor$ in the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidueField T.x)) f =\\n    CategoryTheory.CategoryStruc\", \"doc\": \"For a pullback triplet $T$ with morphisms $f: X \\to S$ and $g: Y \\to S$ in the category of schemes, the composition of the morphism $\\\\operatorname{Spec}(T.tensorInl)$ with the residue field morphism $X.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g)),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.ofPointTensor t))\\n      (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).SpecTensorTo =\\n \", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ of schemes and any point $t$ in the fiber product $X \\\\times_S Y$, the composition of the morphism $\\\\operatorname{Spec}$ induced by the tensor product \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) → X.residueField T.x ⟶ T.tensor\", \"doc\": \"Given a pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, this morphism maps the residue field $\\\\kappa(T.x)$ at the $X$-component of the triplet to the pushout ob\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Old steps 1--2 and the ambient portions of 8--9: actual ringed point and specified derived tensor maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"tensor\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Monoidal\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.MonoidalCategory A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] [CategoryTheory.LocallySmall.{w, v, u} C] [∀ (X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.tensorHom_comp_toPresheafFiber_μ_assoc\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Monoidal\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.MonoidalCategory A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] [CategoryTheory.LocallySmall.{w, v, u} C] [∀ (X\", \"doc\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Old steps 1--2 and the ambient portions of 8--9: actual ringed point and specified derived tensor maps."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|tensorHom_comp_toPresheafFiber",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"15\", \"text\": \"show that it is a right adjoint to `Φ.sheafFiber : Sheaf J A ⥤ A`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"51\", \"text\": \"the bijection `(Φ.presheafFiber.obj P ⟶ M) ≃ (P ⟶ Φ.skyscraperPresheaf M)`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"55\", \"text\": \"    (Φ.presheafFiber.obj P ⟶ M) ≃ (P ⟶ Φ.skyscraperPresheaf M) where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"57\", \"text\": \"    { app X := Pi.lift (fun x ↦ Φ.toPresheafFiber X.unop x P ≫ f)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"61\", \"text\": \"        have := Φ.toPresheafFiber_w g.unop y P\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"line\": \"152\", \"text\": \"/-- The canonical maps `P.obj (op (p.obj U)) ⟶ (ofIsCofiltered p hp).presheafFiber.obj P`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"line\": \"153\", \"text\": \"that are part of the colimit cocone `presheafFiberOfIsCofilteredCocone`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"line\": \"154\", \"text\": \"noncomputable def toPresheafFiberOfIsCofiltered (U : N) (P : Cᵒᵖ ⥤ A) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"line\": \"155\", \"text\": \"    P.obj (op (p.obj U)) ⟶ (ofIsCofiltered p hp).presheafFiber.obj P :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"line\": \"156\", \"text\": \"  (ofIsCofiltered p hp).toPresheafFiber _ (fiberMk (𝟙 _)) P\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"line\": \"18\", \"text\": \"We show that the fiber functors `Φ.presheafFiber : (Cᵒᵖ ⥤ A) ⥤ A`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"line\": \"19\", \"text\": \"and `Φ.sheafFiber : Sheaf J A ⥤ A` are monoidal.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"line\": \"36\", \"text\": \"    (Φ.presheafFiber (A := A)).OplaxMonoidal where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"line\": \"37\", \"text\": \"  η := Φ.presheafFiberDesc (fun _ _ ↦ 𝟙 _)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"line\": \"39\", \"text\": \"    Φ.presheafFiberDesc (fun X x ↦ Φ.toPresheafFiber X x P₁ ⊗ₘ Φ.toPresheafFiber X x P₂)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"line\": \"18\", \"text\": \"`(Φ.map F K).presheafFiber ≅ (Functor.whiskeringLeft _ _ A).obj F.op ⋙ Φ.presheafFiber`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"line\": \"19\", \"text\": \"and `(Φ.map F K).sheafFiber ≅ F.sheafPushforwardContinuous A J K ⋙ Φ.sheafFiber`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"line\": \"60\", \"text\": \"`P.obj (op (F.obj X)) ⟶ (Φ.map F K).presheafFiber.obj P`, which is part\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"line\": \"61\", \"text\": \"of the colimit cocone `presheafFiberMapCocone`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Map.lean\", \"line\": \"62\", \"text\": \"noncomputable def toPresheafFiberMap (P : Dᵒᵖ ⥤ A) (X : C) (x : Φ.fiber.obj X) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"line\": \"28\", \"text\": \"`Φ.presheafFiber : (Cᵒᵖ ⥤ A) ⥤ A` by taking the filtering colimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"line\": \"30\", \"text\": \"`Φ.fiber.Elementsᵒᵖ`. We define `Φ.sheafFiber : Sheaf J A ⥤ A` as the\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"line\": \"31\", \"text\": \"restriction of `Φ.presheafFiber` to the full subcategory of sheaves.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"line\": \"36\", \"text\": \"that not only `Φ.sheafFiber : Sheaf J A ⥤ A` is the restriction of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"line\": \"37\", \"text\": \"`Φ.presheafFiber` but it may also be thought as a localization\"} Searched Mathlib/CategoryTheory/Sites/Point",
+   "date": "2026-10-21",
+   "verdict": "no match: Old steps 1--2 and the ambient portions of 8--9: actual ringed point and specified derived tensor maps."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PointRingedEvaluationModel",
+  "date": "2026-10-25",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-point-ringed-evaluation-model",
+   "place": "Chain tensor and scalar construction, original steps 3,5,6"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.SixFunctors.PointEvaluationChainModels",
+  "file": "lean/Sheaf/SixFunctors/PointEvaluationChainModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.PointEvaluation.point_evaluation_chain_models",
+  "statement": "theorem point_evaluation_chain_models (k : Type u) [Field k] [IsAlgClosed k] :\n    ∃ T : ∀ B : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1},\n        TensorModel B,\n      (∀ B, TensorCoherent B (T B) ∧\n        ∀ [(pointModuleSections k B).PreservesZeroMorphisms],\n          HEq (T B).unit\n            ((HomologicalComplex.singleMapHomologicalComplex (W₁ := ModuleSheaves B)\n              (W₂ := ModuleCat.{u + 1} (sectionRing k B)) (pointModuleSections k B)\n              (.up ℤ) 0).app\n              (SheafOfModules.unit.{u, u + 1, u + 1}\n                ((sheafCompose (Scheme.ProEt.topology (Spec (.of k)))\n                  (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B)) ≪≫\n              (HomologicalComplex.single (ModuleCat.{u + 1} (sectionRing k B))\n                (.up ℤ) 0).mapIso (T B).moduleUnit)) ∧\n      ∀ (B B' : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1})\n        (a : B ⟶ B'), ∃ S : ScalarModel a (T B) (T B'), ScalarCoherent a (T B) (T B') S",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T122741-L-1802373",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261025T122741-L-1802373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

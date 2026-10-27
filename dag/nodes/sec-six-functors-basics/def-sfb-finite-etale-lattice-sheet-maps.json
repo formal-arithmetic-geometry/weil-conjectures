@@ -1,0 +1,102 @@
+{
+ "id": "def-sfb-finite-etale-lattice-sheet-maps",
+ "kind": "definition",
+ "title": "Canonical integral sheet maps and pulled-back trace-image inclusion",
+ "statement": "For commutative condensed coefficient rings R,S, a ring map a:R→S, a scheme map p:U→X, an S_X-module P, an R_U-module M and a specified scalar-extension isomorphism e:Ext(a_U)M≅p*P, construct two actual morphisms. For t:Y→U and g:Y→X with w:tp=g, the sheet embedding t*M→Res(a_Y)g*P is the pullback of latticeIntegralEmbedding followed by the inverse comapUpperStarIso and the composition comparison determined by w. For any τ:p_*p*P→P, construct g*image(latticePushedEmbedding;Res(τ))→Res(a_Y)g*P by pulling back the categorical image inclusion and applying the same coefficient comparison. The latter morphism is monic, with no finite-etale or freeness assumptions. Both are explicit composites, with no choice of data from an existence theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-lattice-intersection",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraph 1: the actual embeddings of the sheet lattices and of the trace image"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraph 1: the actual embeddings of the sheet lattices and of the trace image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of an internal lattice embedding to a sheet of a finite etale cover",
+   "results": "FirstOrder.Language.Embedding.domRestrict; Topology.IsEmbedding.restrictPreimage; Topology.IsEmbedding.codRestrict; Set.restrictPreimage_isEmbedding; Topology.IsEmbedding.restrict; Function.locallyFinsuppWithin.restrictLatticeHom_apply; Topology.IsOpenEmbedding.restrictPreimage; FirstOrder.Language.Embedding.codRestrict",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of an internal lattice embedding to a sheet of a finite etale cover",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.restrict_f; AlgebraicGeometry.opensDiagram_map; InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; AlgebraicGeometry.Scheme.ofRestrict; AlgebraicGeometry.Scheme.restrictFunctor_map_left; AlgebraicGeometry.Scheme.OpenCover.restrict_X; AlgebraicGeometry.Scheme.OpenCover.restrict_I₀",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*sheet|sheet.*lattice|trace.*[Ii]mage in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites",
+   "results": "No matching declarations. Repository search found the existing lattice-class and trace-image results in different coefficient/module encodings, and no simultaneous normalized sheet-chart or internal trace-range transport theorem. Blueprint searches for sheet lattice, embedded lattices, lattice sheet, and trace image found no separate blueprint nodes.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceImageCharts",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, paragraph 1: the actual embeddings of the sheet lattices and of the trace image",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-image-charts",
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteEtaleLatticeSheetMaps",
+  "file": "lean/Sheaf/Paper/FiniteEtaleLatticeSheetMaps.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleLatticeSheetEmbedding",
+  "statement": "def finiteEtaleLatticeSheetEmbedding (a : R ⟶ S) [IsMonHom a]\n    {X U Y : Scheme.{u}}\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X))\n    (p : U ⟶ X)\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj R U))\n    (e : (Mod.extendScalars (coefficientMap a U)).obj M ≅ (upperStar S p).obj P)\n    (g : Y ⟶ X) (t : Y ⟶ U) (w : t ≫ p = g) :\n    (upperStar R t).obj M ⟶\n      (Mod.comap (coefficientMap a Y)).obj ((upperStar S g).obj P)",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleLatticeSheetEmbedding",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleTraceImageEmbedding",
+   "AlgebraicGeometry.ProEtale.CondensedRing.finiteEtaleTraceImageEmbedding_mono"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071254-L-3908089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071254-L-3908089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

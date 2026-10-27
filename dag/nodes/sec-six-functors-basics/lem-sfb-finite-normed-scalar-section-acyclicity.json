@@ -1,0 +1,398 @@
+{
+ "id": "lem-sfb-finite-normed-scalar-section-acyclicity",
+ "kind": "statement",
+ "title": "Sectionwise acyclicity of finite norm-topological scalar coefficients",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with its extending norm topology. Let $A(S)=C(S,E)$ be the commutative condensed ring of all continuous functions [def-sfb-continuous-map-condensed-ring]. Work on the small coherent profinite site of [def-weil-size-convention], with finite jointly surjective covering families, and use internal $A$-modules [sk-def-sfb-module-objects]. Write $\\mathcal F$ for the underlying abelian sheaf of $A$ and use cohomology over an object [def-weil-pbc-sites-and-cohomology]. Then $E$ is complete. For every finite jointly surjective cover $\\mathcal U=\\{T_i\\to V\\}$ of profinite sets and every integer $q>0$,\n$$\\check H^q(\\mathcal U,\\mathcal F)=0,$$\nwith the alternating restriction Cech complex of [def-weil-pbc-site-cech-complex], and for every profinite $V$ one has\n$$H^q(V,\\mathcal F)=0\\qquad(q>0).$$\nFor any nonnegative injective resolution $A\\to I^\\bullet$ in internal $A$-modules [def-sp-injective-resolutions], transported to sectionwise modules by [def-weil-pbc-internal-abelian-sheaf-module-equivalence], the augmented complex of abelian groups\n$$0\\longrightarrow C(V,E)\\longrightarrow I^0(V)\\longrightarrow I^1(V)\\longrightarrow\\cdots$$\nis exact for every profinite $V$. Its augmentation identifies degree-zero cohomology with $C(V,E)$ itself; its positive cohomology is zero. This applies to every such resolution. Empty profinite objects and empty covers of the empty object are included. All functions are continuous with values in the fixed finite extension $E$; no locally constant restriction, norm completion of an algebraic closure, or constant discrete ring replacement is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03F9 (lemma-cech-vanish-collection) and Tag 03FD (lemma-cohomology-modules-abelian-agree), applied to all profinite objects. Analytic input: literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf Lemma 4.3.9(2)–(4), via lem-sfb-normed-scalar-profinite-cech-exact. Original steps 3–4 of lem-sfb-normed-scalar-profinite-hom-acyclic; agent formulation of the finite-family and module-resolution consequences."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Completeness is FiniteDimensional.complete over the complete field Q_ell. For a nonempty finite index type apply the scalar Cech vanishing lemma, once with index universe u for the asserted family vanishing, and once with index universe 0 for the coherent covering basis. For an empty index type every tuple-indexed cochain group is subsingleton, hence zero; its homology is zero in every degree, without using joint surjectivity. This edge case is proved by the private scalar_cech_vanishing_with_empty helper.",
+   "uses": [
+    "lem-sfb-finite-normed-scalar-cech-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the profinite finite Cech criterion to the underlying continuous-function sheaf. The categorical criterion is used at the actual coefficient universe u+1, without identifying Profinite with a small category in universe u.",
+   "uses": [
+    "lem-sfb-profinite-cech-derived-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every chosen injective resolution of the regular module, compare homology of its evaluated complex with abelian right derived evaluation by the internal-module comparison. Transport positive vanishing along that isomorphism.",
+   "uses": [
+    "lem-sfb-profinite-internal-module-evaluation-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of internal modules is additive and left exact. Map the kernel fork of the given resolution augmentation to obtain an exact short complex with monic augmentation. Convert categorical monicity and exactness to Function.Injective and Function.Exact. For each later position use positive zero homology to obtain exactness of the corresponding short complex. Finally the degree-zero quasi-isomorphism criterion reduces the homology map of the actual augmentation to the same mapped kernel universal property. Thus degree-zero normalization is proved independently of the comparison, and no assumption on abelian injectivity is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-normed-scalar-cech-vanishing",
+  "lem-sfb-profinite-cech-derived-vanishing",
+  "lem-sfb-profinite-internal-module-evaluation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C7",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03F9 and 03FD, with finite-family analytic and internal-module comparison obligations separated; kernel universal property and degree-zero criterion proved directly using Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology on profinite sets with coefficients in continuous functions into a finite extension of the p adic numbers vanishes in positive degree",
+   "results": {
+    "t": "2026-10-22T06:01:39Z",
+    "tool": "leansearch",
+    "query": "Sheaf cohomology on profinite sets with coefficients in continuous functions into a finite extension of the p adic numbers vanishes in positive degree",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"cohomology\"",
+   "results": {
+    "t": "2026-10-22T06:02:02Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"cohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed sheaves, singular homology, locally constant Nobeling sequences and formal injective-resolution exactness do not establish acyclicity on sections of C(-,E) on every profinite object"
+  },
+  {
+   "tool": "grep",
+   "query": "(Profinite|Condensed).*(acyclic|cohomology|isZero)|(acyclic|cohomology).*(Profinite|Condensed)",
+   "results": {
+    "t": "2026-10-22T06:02:02Z",
+    "tool": "grep",
+    "query": "(Profinite|Condensed).*(acyclic|cohomology|isZero)|(acyclic|cohomology).*(Profinite|Condensed)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean"
+    ],
+    "digest": "3da93693344f080e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed sheaves, singular homology, locally constant Nobeling sequences and formal injective-resolution exactness do not establish acyclicity on sections of C(-,E) on every profinite object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions into a complete finite p adic field form an acyclic sheaf on the coherent profinite site, and any injective module resolution evaluates to an exact augmented complex",
+   "results": {
+    "t": "2026-10-22T06:02:14Z",
+    "tool": "leanfinder",
+    "query": "Continuous functions into a complete finite p adic field form an acyclic sheaf on the coherent profinite site, and any injective module resolution evaluates to an exact augmented complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondAb.ofSheafLightProfinite",
+     "CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+     "LightCondMod.ofSheafLightProfinite"
+    ],
+    "digest": "d9b3c0aa0c58b531"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed sheaves, singular homology, locally constant Nobeling sequences and formal injective-resolution exactness do not establish acyclicity on sections of C(-,E) on every profinite object"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|acyclic|cohomology",
+   "results": {
+    "t": "2026-10-22T06:02:52Z",
+    "tool": "grep",
+    "query": "Cech|acyclic|cohomology",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed sheaves, singular homology, locally constant Nobeling sequences and formal injective-resolution exactness do not establish acyclicity on sections of C(-,E) on every profinite object"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf S maps to continuous maps from S to a finite extension of Q p has zero positive Cech and sheaf cohomology for finite jointly surjective covers of profinite spaces",
+   "results": {
+    "t": "2026-10-22T06:03:04Z",
+    "tool": "leanfinder",
+    "query": "The sheaf S maps to continuous maps from S to a finite extension of Q p has zero positive Cech and sheaf cohomology for finite jointly surjective covers of profinite spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondAb.ofSheafLightProfinite",
+     "Condensed.isSheafProfinite",
+     "Condensed.lanSheafProfinite",
+     "TopCat.toSheafCompHausLike",
+     "LightCondensed.ofSheafForgetLightProfinite",
+     "LightCondMod.ofSheafLightProfinite",
+     "LightCondensed.ofSheafLightProfinite",
+     "LightCondSet.ofSheafLightProfinite"
+    ],
+    "digest": "7889ebbacb1c5a89"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed sheaves, singular homology, locally constant Nobeling sequences and formal injective-resolution exactness do not establish acyclicity on sections of C(-,E) on every profinite object"
+  },
+  {
+   "tool": "grep",
+   "query": "(Profinite|Condensed).*(acyclic|cohomology)|(acyclic|cohomology).*(Profinite|Condensed)",
+   "results": {
+    "t": "2026-10-23T04:22:17Z",
+    "tool": "grep",
+    "query": "(Profinite|Condensed).*(acyclic|cohomology)|(acyclic|cohomology).*(Profinite|Condensed)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean"
+    ],
+    "digest": "3da93693344f080e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern condensed sheaf constructors, free/solid discrete-ring modules, categorical exactness or locally constant Nobeling theory; none proves acyclicity of the norm-topological sheaf C(-,E) on every profinite object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of continuous functions on profinite sets with complete p-adic field coefficients is acyclic on every profinite object",
+   "results": {
+    "t": "2026-10-23T04:22:17Z",
+    "tool": "leansearch",
+    "query": "A sheaf of continuous functions on profinite sets with complete p-adic field coefficients is acyclic on every profinite object",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed",
+     "Condensed.isSheafProfinite",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "Condensed.lanSheafProfinite",
+     "LocallyConstant.freeOfProfinite",
+     "LightCondensed.lanLightCondSet",
+     "LightCondensed.ofSheafForgetLightProfinite",
+     "LightCondensed.ofSheafLightProfinite"
+    ],
+    "digest": "899592c8678d1da4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern condensed sheaf constructors, free/solid discrete-ring modules, categorical exactness or locally constant Nobeling theory; none proves acyclicity of the norm-topological sheaf C(-,E) on every profinite object."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"cohomology\"",
+   "results": {
+    "t": "2026-10-23T04:22:17Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"cohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern condensed sheaf constructors, free/solid discrete-ring modules, categorical exactness or locally constant Nobeling theory; none proves acyclicity of the norm-topological sheaf C(-,E) on every profinite object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions from profinite sets into a finite extension of the p-adic numbers have vanishing positive Cech and sheaf cohomology",
+   "results": {
+    "t": "2026-10-23T04:22:19Z",
+    "tool": "leanfinder",
+    "query": "Continuous functions from profinite sets into a finite extension of the p-adic numbers have vanishing positive Cech and sheaf cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LocallyConstant.freeOfProfinite",
+     "Condensed.isSheafProfinite",
+     "LightProfinite.hasSheafify_type",
+     "Condensed.lanSheafProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondAb.ofSheafLightProfinite",
+     "LightCondensed.locallyConstantPresheaf"
+    ],
+    "digest": "b9448d3b7e1b37ad"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern condensed sheaf constructors, free/solid discrete-ring modules, categorical exactness or locally constant Nobeling theory; none proves acyclicity of the norm-topological sheaf C(-,E) on every profinite object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of an injective resolution of the condensed ring of continuous p-adic functions is exact on every profinite space",
+   "results": {
+    "t": "2026-10-23T04:23:55Z",
+    "tool": "leanfinder",
+    "query": "Evaluation of an injective resolution of the condensed ring of continuous p-adic functions is exact on every profinite space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteSolid",
+     "Profinite.NobelingProof.succ_exact",
+     "Condensed.instAB4StarCondensedMod",
+     "Condensed.profiniteFree",
+     "Condensed.instAB5CondensedMod",
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "CondensedMod.ofSheafProfinite",
+     "Profinite.NobelingProof.CC_exact"
+    ],
+    "digest": "7e2ebebb16260d9e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern condensed sheaf constructors, free/solid discrete-ring modules, categorical exactness or locally constant Nobeling theory; none proves acyclicity of the norm-topological sheaf C(-,E) on every profinite object."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|acyclic|cohomology",
+   "results": {
+    "t": "2026-10-23T04:23:55Z",
+    "tool": "grep",
+    "query": "Cech|acyclic|cohomology",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern condensed sheaf constructors, free/solid discrete-ring modules, categorical exactness or locally constant Nobeling theory; none proves acyclicity of the norm-topological sheaf C(-,E) on every profinite object."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normed-scalar-profinite-hom-acyclic",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: finite complete E coefficient input; finite-family Cech exactness and sectionwise resolution acyclicity (old item steps 3–4)",
+   "via": [
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-normed-scalar-section-acyclicity",
+  "worker": "stage1",
+  "summary": "Retained the complete finite-field coefficient statement. Reduced a finite covering family to one profinite surjection by an explicit isomorphism of alternating continuous-function complexes, verified all hypotheses of the existing general-site Cech vanishing criterion, transported arbitrary internal injective resolutions by the existing exact module equivalence, and applied the existing module/abelian evaluation comparison. Checked empty cases and augmentation normalization. No new nodes.",
+  "blueprint": "main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), finite E open-direct-image input: sectionwise scalar acyclicity below lem-sfb-normed-scalar-profinite-hom-acyclic. The ancestor command returns None for this existing created-item chain; its inherited from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "General-site Tag 03F9 is the coefficient-independent bridge from all covering Cech groups to derived evaluation. The unit has no substitute for this generic cohomology criterion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "General ringed-site Tag 03FD identifies cohomology of any injective module resolution with underlying abelian cohomology over an object; it does not replace the unit analytic route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-8f20c51ba",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-8f20c51ba (reviewer sub-agent of L); spot-checked: Read in full; no fixes. The item's statement, stmt_deps, source and blueprint are byte-identical to the Q54 re-split creation (all 8 earlier snapshots). The 4 steps are a one-level split of the item, citing only existing nodes. They carry old parent steps 3–4 (NY 6f0dfe97) in full and expanded, with nothing dropped. Step 1: lem-sfb-normed-scalar-profinite-cech-exact is applied to ⊔T_i→V, and T_V^{n+1}=⊔ T_{i0}×_V…×_V T_{in} over I^{n+1} matches Č^n of def-weil-pbc-site-cech-complex with matching δ_j^*; the empty cover forces V=∅. Step 2: Stacks 03F9 (sites-cohomology l.1565) via lem-weil-pbc-site-cech-vanishing-criterion, with B=Ob(C) a set, Cov all finite jointly surjective families (cofinal, closed under reindexing) and F a sheaf by def-sfb-continuous-map-condensed-ring. Step 3: the unsplit sibling lem-sfb-profinite-free-hom-resolution-evaluation (no dependency back on the item) supplies injective resolutions and an exact, injective-preserving E_A. The equivalence keeps sections, so I^•(V) is unchanged and enough injectives transfer. Stacks 03FD (l.1862) via lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison then covers any injective module resolution, with the identity in degree 0. Step 4 is an elementary kernel/image rewrite; F(∅)=0 by the empty-cover equalizer. Tested on V=∅, the empty cover, the identity cover, a cover with empty members and V=point. Bhatt–Scholze 4.3.9 is used only through the existing cech-exact node. No cycle (DFS over 517 nodes), proof_deps equals the union of the uses, no SGA. Duplicate search with rg -L (acyclic/03F9 over C(−,E)) found none. Tool uses accepted: generic 03F9 (sk-thm-p1) and 03FD (sk-thm-properbasechange), as for the parent. Advisory: blueprint.from.node is an inherited null; the report names citations.json and searches.jsonl, which are not in the commit; step 4's source.place repeats step 3's; coord/dag-sync.md is absent from the snapshot."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FiniteNormedScalarSectionAcyclicity",
+  "declaration": "Profinite.finiteNormedScalar_section_acyclicity",
+  "file": "lean/Sheaf/Topology/FiniteNormedScalarSectionAcyclicity.lean",
+  "statement": "theorem finiteNormedScalar_section_acyclicity (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [NormedAlgebra (Padic l) E] [FiniteDimensional (Padic l) E] : CompleteSpace E ∧ (∀ (V : Profinite.{u}) (T : Type u) [Finite T] (W : T → Profinite.{u}) (f : ∀ t, W t ⟶ V), (∀ v : V, ∃ t, ∃ w : W t, f t w = v) → ∀ (S : SiteCechComplex W f) (q : ℕ), 0 < q → IsZero ((S.cohomologyFunctor q).obj (continuousMapRingObjOfUniverse E).obj)) ∧ (∀ (V : Profinite.{u}) (q : ℕ), 0 < q → IsZero (((sheafToPresheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} ⋙ (evaluation Profinite.{u}ᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).rightDerived q).obj (continuousMapRingObjOfUniverse E))) ∧ (∀ (I : InjectiveResolution (Mod.regular (finiteScalarSectionRing E).X)) (V : Profinite.{u}), Function.Injective ((finiteScalarSectionEvaluation E V).map (I.ι.f 0)) ∧ Function.Exact ((finiteScalarSectionEvaluation E V).map (I.ι.f 0)) ((finiteScalarSectionEvaluation E V).map (I.cocomplex.d 0 1)) ∧ (∀ n : ℕ, Function.Exact ((finiteScalarSectionEvaluation E V).map (I.cocomplex.d n (n + 1))) ((finiteScalarSectionEvaluation E V).map (I.cocomplex.d (n + 1) (n + 2)))) ∧ IsIso (HomologicalComplex.homologyMap (((finiteScalarSectionEvaluation E V).mapHomologicalComplex (.up ℕ)).map I.ι) 0) ∧ ∀ q : ℕ, 0 < q → IsZero ((((finiteScalarSectionEvaluation E V).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology q))",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e30467a9c",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Clause-by-clause check of Profinite.finiteNormedScalar_section_acyclicity against the node: CompleteSpace E; Čech vanishing for all finite jointly surjective families (T : Type u, Finite) over every SiteCechComplex (genuine fibre-product data) in degrees q>0; H^q(V,F)=0 as rightDerived of sheafToPresheaf ⋙ eval(op V), the node's R^qΓ(V,-), same rendering as other landed modules; for every InjectiveResolution of Mod.regular and every V: injective augmentation, exactness at degree 0 and at every later degree, IsIso of the degree-0 homology map, positive homology zero. No extra hypotheses; empty T/V, identity cover and covers with empty members included; universes consistent with the parent (E : Type u, AddCommGrpCat.{u+1}). Item differs from live only by the lean record; 7 dep nodes unchanged; statement field verbatim; docstrings with source, blueprint and proof steps; sorry only; proof-dep imports allowed. Maintainer note (H4-advisory): finiteScalarSectionRing is a field-for-field copy of landed Profinite.CondensedAction.continuousScalarRing (def-sfb-bundled-continuous-scalar-ring), definitionally equal and usable by the parent; replacing it needs a stmt_dep that a stage-2 fix cannot add, so it is advisory as for earlier local ring bundles. lean record lacks a declarations list (advisory). No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261026T081310-L-1913135",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

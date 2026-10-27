@@ -1,0 +1,130 @@
+{
+ "id": "def-pur-kflat-open-model-maps",
+ "kind": "definition",
+ "title": "Canonical open cochain tensor adjunct and localization comparison maps",
+ "status": "split",
+ "statement": "For schemes $U,P$ and a morphism $j:U\\to P$, use ordinary small etale module cochain and derived categories and localization $\\ell$ [def-weil-pbc-derived-categories]. For a commutative ring $A$, let $F=j^*$, $G=j_*$ and let $F_c\\dashv G_c$ be their induced adjunction on integer cochains. The tensor is the signed direct-sum total tensor [def-pc-tensor-complex-sheaves], with the canonical strong monoidal comparison $c$ [lem-pur-cochain-pullback-tensor-coherence]. For $A$-linear cochains $Q,I,J$ and a map $a:Q\\otimes I\\to J$, define $C_j(I)=G_cF_cI$ and define $v_j(Q,I,J,a):Q\\otimes C_j(I)\\to C_j(J)$ as the adjunct of $c_{Q,C_j(I)}$ followed by $1\\otimes\\varepsilon^0_{F_cI}$, then $c_{Q,I}^{-1}$ and $F_ca$. Use the published tensor-adjunct formula [def-pur-etale-kflat-support-data], specialized to the cochain adjunction. Define the exact-pullback representative isomorphism $p_{j,I}:Lj^*(\\ell I)\\simeq\\ell(F_cI)$ as the published exact-pullback identification followed by the localization-factor isomorphism. Given $L\\in D(P_{\\mathrm{et}},A)$, $e_I:\\ell I\\simeq L$, and invertibility of the canonical right-derived comparison $\\alpha_I:\\ell C_j(I)\\to Rj_*\\ell(F_cI)$ [lem-sp-etale-derived-chain-transpose], define $d_{j,I,e_I}=Rj_*(Lj^*e_I\\circ p_{j,I}^{-1})\\circ\\alpha_I:\\ell C_j(I)\\simeq Rj_*Lj^*L$. All maps are these composites; no injectivity assumption or arbitrary comparison is supplied.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-pur-etale-kflat-support-data",
+  "lem-sp-etale-derived-chain-transpose"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 0FPI (lemma-adjoints-push-pull-compatibility); ordinary cochain adjunct and canonical comparison composites used in the open tensor specialization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kFlat.*tensor|tensor.*kFlat|tensorAdjunct",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no exact match: tensor summands, ordinary flat module kernels and generic adjunction transport do not construct this total cochain adjunct and its canonical localization comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical open cochain tensor adjunct and augmented K flat fixed factor tensor representative isomorphism",
+   "results": "[leansearch] OK 8 hit(s); CochainComplex.augmentTruncate; LinearMap.kerLTensorEquivOfSurjective; HomologicalComplex.rightUnitor'; LinearMap.tensorKerEquiv; CategoryTheory.ProjectiveResolution.cochainComplexXIso; CochainComplex.ConnectData.restrictionLEIso_hom_f; CochainComplex.isKProjective_of_iso; CochainComplex.truncateAugment",
+   "date": "2026-10-23",
+   "verdict": "no exact match: tensor summands, ordinary flat module kernels and generic adjunction transport do not construct this total cochain adjunct and its canonical localization comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical open cochain tensor adjunct and augmented K flat fixed factor tensor representative isomorphism",
+   "results": "[leanfinder] OK 8 hit(s); HomologicalComplex.ιTensorObj; HomologicalComplex.instHasTensorTensorUnit_1; HomologicalComplex.instHasTensorTensorUnit; LinearMap.tensorKerEquiv; HomologicalComplex.instHasTensorXTensorUnit; HomologicalComplex.rightUnitor'_inv; HomologicalComplex.rightUnitor'; HomologicalComplex.rightUnitor",
+   "date": "2026-10-23",
+   "verdict": "no exact match: tensor summands, ordinary flat module kernels and generic adjunction transport do not construct this total cochain adjunct and its canonical localization comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Iso",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Adjunction.ofNatIsoLeft; CategoryTheory.Adjunction.ofNatIsoRight; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoLeft_unit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.ofNatIsoRight_unit; CategoryTheory.Adjunction.compCoyonedaIso; CategoryTheory.Adjunction.compUliftCoyonedaIso",
+   "date": "2026-10-23",
+   "verdict": "no exact match: tensor summands, ordinary flat module kernels and generic adjunction transport do not construct this total cochain adjunct and its canonical localization comparisons"
+  },
+  {
+   "tool": "rg",
+   "query": "tensorAdjunct|genericTensorIdentification|openComplex|directImageIdentification in lean/WeilConjectures and lean/Sheaf; canonical.*fixed.*tensor.*identification in dag/nodes",
+   "results": "EtaleKFlatSupportData.tensorAdjunct and tensorModelOfAugmentation reused; no actual total cochain adjunct construction or comparison package with arbitrary invertible canonical right-derived comparison. Existing support third-model requires K-injectivity.",
+   "date": "2026-10-23",
+   "verdict": "use existing primitives; add only the actual cochain adjunct and its canonical representative comparison composites"
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search K-flat open tensor; ancestor lem-pur-kflat-open-projection-model",
+   "results": "0 blueprint nodes match 'K-flat open tensor'; ancestor None",
+   "date": "2026-10-23",
+   "verdict": "no existing blueprint definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-kflat-open-projection-model",
+  "date": "2026-10-23",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Finite-stage prerequisite of thm-pur-rational-and-qbar-purity, proof Steps 1–2; Locality closed-factor coefficient comparison. Tag 0FPI, label lemma-adjoints-push-pull-compatibility, the canonical derived counit square; agent-written tensor/scalar specialization of the Locality comparison, extracted from returned lem-pur-etale-kflat-support-comparison Steps 1, 6 and 7. Full argument and additional sources retained in report.md.",
+   "via": [
+    "lem-pur-kflat-open-projection-model",
+    "lem-pur-etale-kflat-support-comparison",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.PurKFlatOpenModelMaps",
+  "declaration": "AlgebraicGeometry.Etale.KFlatOpenProjection.ordinaryMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.cochainAdjunct",
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.openComplex",
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.pullbackRepresentativeIso",
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.ordinaryMap",
+   "AlgebraicGeometry.Etale.KFlatOpenProjection.directImageIdentification"
+  ],
+  "file": "lean/Sheaf/Paper/PurKFlatOpenModelMaps.lean",
+  "statement": "def ordinaryMap (j : U ⟶ P)",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11fce0d9e",
+  "group": "Q53",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11fce0d9e",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: 5 bounded-below hyps (boundedDomain), K-flat termwise-flat augmentation b, IsIso of the canonical rightDerivedFunctorUnitQ comparisons, ordinaryMap = tensorAdjunct (δ, 1◁ε, μ, F a) = adjunct of h, e_N/e_J/σ pinned to tensorModel and scalarTensorIso, τ unique via canonical scalarRestrictionDirectImageMap (IsIso asserted), τℓv=σRes(β), PF clause, derived transpose = c^der≫ε⊗1 matching rightDerivedLowerStarProjectionMap, β naturality. Checked τ clause is consistent with PF clause via scalarMate_restrict_eq_projection + scalar_tensor_pullback_square. Edge cases j=id, U=∅, L=0, zero rings, non-flat φ OK. Item changed only lean/stmt_deps (added new node + landed def-pur-etale-kflat-support-data); statements verbatim; one sorry; new def node real data, fields OK. Advisory: KFlatOpenProjection.coefficientProjection is the L-form of KFlatSupportComparison.coefficientProjection (D-form), isomorphic, not a different notion. No fixes, no compile."
+ }
+}

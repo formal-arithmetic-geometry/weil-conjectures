@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-geonormal-geoconnected-finite-type-integral",
+ "kind": "statement",
+ "title": "A finite-type geometrically connected geometrically normal scheme is geometrically integral",
+ "statement": "Let $k$ be a field and let $X$ be a nonempty scheme of finite type over $k$ [def-pc-scheme, def-weil-finite-type-morphism]. For a field extension $K/k$ [def-pc-field-extension] put $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change]. Assume that $X$ is geometrically connected over $k$, meaning that $|X_K|$ is connected for every such extension [def-pc-geometrically-irreducible, def-weil-connected-scheme], and geometrically normal over $k$, meaning that every local ring of every $X_K$ is an integral domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. Then $X$ is geometrically integral over $k$: $X_K$ is integral for every field extension $K/k$ [def-pc-integral-scheme, def-pc-geometrically-irreducible].",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 033M, lemma-normal-Noetherian, applied to the finite-type field base changes; this is the final connected-normal component argument of more-morphisms.tex, lemma-local-local-structure-finite-type."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary field extension $K/k$. By [lem-sfb-finite-type-composition-base-change](2), the projection $X_K\\to\\operatorname{Spec}K$ is of finite type. In particular it is locally of finite type and $X_K$ is quasi-compact: apply the quasi-compactness clause of [def-weil-finite-type-morphism] to the whole affine target. Every ideal of the field $K$ is either zero or the whole field (a nonzero element is invertible), so every ideal is finitely generated and $K$ is Noetherian. Thus $\\operatorname{Spec}K$ is locally Noetherian by its one-chart affine cover [pqf-def-locnoeth]. Applying [pqf-lem-locnoeth-lft] gives that $X_K$ is locally Noetherian. Together with the quasi-compactness just proved, this makes $X_K$ Noetherian.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 (lemma-base-change-finite-type) and 01T6 (lemma-finite-type-noetherian); the field is Noetherian by the elementary ideal argument written here."
+   }
+  },
+  {
+   "text": "Geometric normality gives normal-domain local rings at every point of $X_K$. Apply clause (2) of [rem-pc-regular-normal] to the Noetherian scheme of step 1: $X_K$ is a finite disjoint union of clopen normal integral components. By geometric connectedness and [def-weil-connected-scheme], $X_K$ is nonempty and connected. Choose a point and the component $C$ containing it in that decomposition. The clopen sets $C$ and $X_K\\setminus C$ partition $X_K$, so connectedness and the nonemptiness of $C$ force $X_K\\setminus C$ to be empty. Hence $X_K=C$ with its open subscheme structure, and is integral.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033M, lemma-normal-Noetherian; the final connected-normal argument of more-morphisms.tex, lemma-local-local-structure-finite-type (Tag 057K)."
+   }
+  },
+  {
+   "text": "The extension $K/k$ was arbitrary. Step 2 therefore proves that $X_K$ is integral for every field extension $K/k$, which is exactly geometric integrality in [def-pc-geometrically-irreducible].",
+   "uses": [
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 020H, definition-geometrically-integral."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "rem-pc-regular-normal",
+  "def-weil-connected-scheme",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 033M (lemma-normal-Noetherian), applied after the finite-type base changes as in more-morphisms.tex Tag 057K (lemma-local-local-structure-finite-type), final connected-normal component argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty finite type geometrically normal geometrically connected scheme over a field is geometrically integral",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of integral schemes and geometric-integrality stability do not infer integrality from connectedness and normal local rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNormal\", \"IsIntegral\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of integral schemes and geometric-integrality stability do not infer integrality from connectedness and normal local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]ormal.*[Cc]onnected|[Cc]onnected.*[Nn]ormal|[Gg]eometricallyNormal",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of integral schemes and geometric-integrality stability do not infer integrality from connectedness and normal local rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "connected noetherian normal scheme is integral and this holds after all field extensions",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically connected finite type scheme with normal local rings after every field extension is geometrically integral",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of integral schemes and geometric-integrality stability do not infer integrality from connectedness and normal local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*connected|connected.*normal|geometricallyNormal",
+   "results": "{\"t\": \"2026-10-23T09:25:45Z\", \"tool\": \"grep\", \"query\": \"normal.*connected|connected.*normal|geometricallyNormal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give integrality definitions and irreducible-plus-reduced criteria; none establishes irreducibility from connected normal local rings or the geometric implication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically connected geometrically normal finite type scheme over a field is geometrically integral",
+   "results": "{\"t\": \"2026-10-23T09:25:46Z\", \"tool\": \"leansearch\", \"query\": \"A geometrically connected geometrically normal finite type scheme over a field is geometrically integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isIntegral_of_isOpenImmersion\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.IsIntegral.mk\"], \"digest\": \"da4563bb66f51eb7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give integrality definitions and irreducible-plus-reduced criteria; none establishes irreducibility from connected normal local rings or the geometric implication."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNormal\", \"IsIntegral\"",
+   "results": "{\"t\": \"2026-10-23T09:25:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNormal\\\", \\\"IsIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give integrality definitions and irreducible-plus-reduced criteria; none establishes irreducibility from connected normal local rings or the geometric implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty connected locally Noetherian normal scheme is integral",
+   "results": "{\"t\": \"2026-10-23T09:25:46Z\", \"tool\": \"leanfinder\", \"query\": \"A nonempty connected locally Noetherian normal scheme is integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\"], \"digest\": \"24110b16100943bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give integrality definitions and irreducible-plus-reduced criteria; none establishes irreducibility from connected normal local rings or the geometric implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometrically normal scheme geometrically connected implies geometrically integral",
+   "results": "{\"t\": \"2026-10-23T09:27:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a geometrically normal scheme geometrically connected implies geometrically integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.affine_isIntegral_iff\"], \"digest\": \"0398a42ced220337\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give integrality definitions and irreducible-plus-reduced criteria; none establishes irreducibility from connected normal local rings or the geometric implication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-component-pure-transcendental",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The 057K local-structure ingredient in the inherited 057S flatification route of lem-trf-local-term-locality: 'We conclude that T is geometrically irreducible ... as a connected Noetherian normal scheme is irreducible'; returned item proof step 4, applied after every field extension and retaining reducedness.",
+   "via": [
+    "lem-trf-smooth-component-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geonormal-geoconnected-finite-type-integral",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Three-step proof: arbitrary extension preserves finite type; local Noetherianity and quasi-compactness give Noetherianity; the existing normal decomposition plus connectedness gives integrality, uniformly in the extension. All facts already have DAG nodes, so no new nodes. Checked exact cited statements and the empty/zero-dimensional and inseparable-extension cases.",
+  "blueprint": "Realizes the connected-normal conclusion of the 057K local-structure ingredient recorded in this node's blueprint.from.place, inside the inherited flatification route for lem-trf-local-term-locality; no change to its unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Only clause (2), the generic Noetherian normal component decomposition, is used. The trace-locality unit has no replacement for this Stacks 033M input to its inherited 057K local-structure argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-fbc467d15",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-fbc467d15 (reviewer sub-agent of L); spot-checked: PASS: the three-step split with no new nodes is correct, and the statement is unchanged. I read the item in full and checked every cited statement. Step 1: lem-sfb-finite-type-composition-base-change(2) (01T4, any base change) gives a finite-type X_K->Spec K, so X_K is quasi-compact by def-weil-finite-type-morphism over the affine Spec K. K is Noetherian by the written ideal argument, so pqf-def-locnoeth and pqf-lem-locnoeth-lft (01T6) make X_K locally Noetherian. That is exactly the 'Noetherian' required by rem-pc-regular-normal(2). Step 2: the normal-domain hypothesis matches clause (2), which gives finitely many disjoint clopen normal integral components. X_K is nonempty and connected, so the component C of a chosen point equals X_K and X_K is integral. No regularity is used. Step 3 is really elementary (Tag 020H). Sources read: properties.tex l.960 033M, morphisms.tex 01T4/01T6, varieties.tex 020H, more-morphisms 057K l.13486-13490. Edge cases checked: K=k, inseparable and transcendental K, Spec k, two disjoint points, two lines meeting at a node, empty X. Duplicate search over DAG statements with normal+connected+integral/irreducible and the 033M grep found no duplicate. The smooth-fibre, Stein and étale variants differ. The in-unit lem-trf-normal-topologically-noetherian-components would need an extra Noetherian-topology node. I accept the declared tool use of rem-pc-regular-normal (clause 2 only, generic 033M decomposition, the item's own source lemma). Blueprint from/via/same_as are present, there is no SGA, and proof_deps is the union of uses. No repair note applies."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GeonormalGeoconnectedFiniteTypeIntegral",
+  "declaration": "AlgebraicGeometry.geometricallyIntegral_of_geometricallyConnected_of_geometricallyNormal",
+  "file": "lean/Sheaf/TraceFormula/GeonormalGeoconnectedFiniteTypeIntegral.lean",
+  "statement": "theorem geometricallyIntegral_of_geometricallyConnected_of_geometricallyNormal {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [Nonempty X] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [GeometricallyConnected (X ↘ Spec (.of k))] (hnormal : ∀ (K : Type u) [Field K] [Algebra k K], ∀ x : ↥(Limits.pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))), IsDomain ((Limits.pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk x) ∧ IsIntegrallyClosed ((Limits.pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk x)) : GeometricallyIntegral (X ↘ Spec (.of k))",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56fad4daf",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Clause-by-clause match: k field, X:Scheme.{u} over Spec k, [Nonempty X], LOFT+QC (recorded finite-type conjunction), [GeometricallyConnected], hnormal ∀ K:Type u field with Algebra k K, ∀ x of the scheme pullback, IsDomain ∧ IsIntegrallyClosed of stalk (def-weil-pbc-normal-ring inline form); conclusion GeometricallyIntegral (Mathlib geometrically IsIntegral, same universe-u field quantifier). No extra hypotheses; edge cases (empty, K=k, inseparable/transcendental, char p) covered. No existing GeometricallyNormal notion or statement in Mathlib/project. lean.statement verbatim; non-lean node fields equal to live; def-weil-connected-scheme is a Mathlib leaf (ConnectedSpace). Docstrings with source/blueprint and 3-step proof; sorry only; worker and Q45 second-reading sections present. Not recompiled (no change)."
+ }
+}

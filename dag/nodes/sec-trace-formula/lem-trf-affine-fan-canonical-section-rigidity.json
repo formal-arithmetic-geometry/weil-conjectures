@@ -1,0 +1,187 @@
+{
+ "id": "lem-trf-affine-fan-canonical-section-rigidity",
+ "kind": "statement",
+ "title": "Recovery of affine fan morphisms on points and basic sections",
+ "statement": "Let $T$ be a topological space with a sheaf $\\mathcal A$ of commutative monoids with sharp stalks, and let $P$ be a fine sharp monoid. Put $S(P)=(\\operatorname{Spec}_{\\mathrm{mon}}P,\\overline{\\mathcal M}_P)$, with the spectrum and local-morphism conventions of [def-trf-fine-fan-blowup]. For a morphism $g:(T,\\mathcal A)\\to S(P)$ with local stalk maps, let $\\varphi_g:P\\to\\Gamma(T,\\mathcal A)$ be pullback of canonical sections. Then for every $x\\in T$ and $p\\in P$ one has $\\varphi_g(p)_x=0$ if and only if $p\\notin g(x)$, and consequently $g(x)=\\{p:\\varphi_g(p)_x\\ne0\\}$. For every $a\\in P$, using the canonical identification $\\Gamma(D(a),\\overline{\\mathcal M}_P)=P_a/P_a^\\times$ of [lem-trf-affine-fan-localization-sections], the class $\\operatorname{cl}(p-na)$ equals $\\operatorname{cl}(p)$ and its pullback by $g$ is $\\varphi_g(p)|_{g^{-1}D(a)}$. These prescribed maps on basic opens uniquely determine the sheaf map on all opens. In particular, if $g'$ is a second local morphism from $(T,\\mathcal A)$ to $S(P)$ and $\\varphi_{g'}=\\varphi_g$, then $g'=g$ as morphisms, including both their point maps and their sheaf maps.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(ii) and proof using (i), printed p.99: uniqueness of the local factorization and the section correspondence; 3.1.3--3.1.6, pp.98--99. Expands old parent Steps 5--6 (recovery). No Stacks tag states this monoidal-geometric assertion."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-localization-sections"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in T$ and put $\\mathfrak p=g(x)$. By the stalk-map and canonical-section definitions [def-trf-fine-fan-blowup], $\\varphi_g(p)_x=g_x^\\#(\\operatorname{cl}(p))$. The target stalk is sharp. The source stalk is $P_{\\mathfrak p}/P_{\\mathfrak p}^\\times$ by [lem-trf-affine-fan-localization-sections] and is sharp too: if classes of $u,v$ sum to zero, $u+v$ is a unit, so an inverse $w$ of $u+v$ makes $v+w$ an inverse of $u$; thus $\\operatorname{cl}(u)=0$. Locality therefore says that $g_x^\\#(\\operatorname{cl}(p))=0$ exactly when $\\operatorname{cl}(p)=0$. The final clause of the localization lemma makes this equivalent to $p\\notin\\mathfrak p$. Taking complements recovers $g(x)=\\{p:\\varphi_g(p)_x\\ne0\\}$.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-localization-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.5--3.1.8, printed p.99; point recovery by locality and 3.1.3--3.1.4 stalk calculation."
+   }
+  },
+  {
+   "text": "Fix $a,p\\in P$ and $n\\in\\mathbf N$. In $P_a=P-\\mathbf N a$, both $na$ and $-na$ belong to $P_a$ and are inverses. Hence $\\operatorname{cl}(p-na)=\\operatorname{cl}(p)$ by the sharpening definition [def-trf-fine-fan-blowup]. By [lem-trf-affine-fan-localization-sections], restriction of the canonical global section $p$ to $D(a)$ is exactly $\\operatorname{cl}(p)$. Compatibility of the sheaf map with restriction now gives $g_{D(a)}^\\#(\\operatorname{cl}(p-na))=\\varphi_g(p)|_{g^{-1}D(a)}$. Every element of $P_a$ has the displayed form, so this specifies the map on every basic-open section.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-trf-affine-fan-localization-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.1--3.1.3, printed p.98, and uniqueness in 3.1.8(ii), p.99; denominator classes and restriction."
+   }
+  },
+  {
+   "text": "For a fixed point map, let two sheaf maps have the same components on all $D(a)$. If $U$ is open and $s\\in\\overline{\\mathcal M}_P(U)$, naturality identifies the restrictions of its two pullbacks to $g^{-1}D(a)$ with the common basic-open pullback of $s|_{D(a)}$, for every $D(a)\\subseteq U$. The basic opens form a basis by [def-trf-fine-fan-blowup], so these inverse images cover $g^{-1}U$. The injectivity of the first map in the sheaf equalizer [def-weil-pbc-sites-and-cohomology, clause (1)] says the two pullbacks are equal. This proves uniqueness of every open component, including the empty open, whose sheaf of sections has one element.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.3--3.1.4(iii), p.98, and 3.1.8, p.99; explicit sheaf separation on the basic-open cover."
+   }
+  },
+  {
+   "text": "If $\\varphi_{g'}=\\varphi_g$, their germs are equal for every $p,x$. Step 1 gives equality of the image primes for each $x$, hence equality of the continuous maps. Under that equality, Step 2 gives equality of every basic-open sheaf component, since its value on each class is the same restricted canonical pullback. Step 3 gives equality on every open. Thus both pieces of the morphism data agree, and $g'=g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(ii), proof via (i), printed p.99; assembly of point and sheaf-map uniqueness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-localization-sections",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(ii), proof using (i), p.99; recovery calculation using 3.1.1--3.1.6, pp.98--99."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local morphisms of sharp monoidal spaces to a fine affine monoid spectrum are determined on points and on basic-open sections by pullback of canonical monoid elements",
+   "results": "{\"t\": \"2026-10-22T06:11:03Z\", \"tool\": \"leanfinder\", \"query\": \"Local morphisms of sharp monoidal spaces to a fine affine monoid spectrum are determined on points and on basic-open sections by pullback of canonical monoid elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"AlgebraicGeometry.ext_of_isAffine\", \"AlgebraicGeometry.HasRingHomProperty.iff_appLE\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.AffineTargetMorphismProperty.ext\"], \"digest\": \"ccbd76f92bb1afde\"} Read the returned signatures. The hits concern commutative rings/semirings, modules, or monoidal structures on categories of sheaves, rather than sharp commutative monoids and their monoid spectra; no exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalSpace\"",
+   "results": "{\"t\": \"2026-10-22T06:10:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declaration was returned.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidalSpace|affine.*fan|sharp.*monoid",
+   "results": "{\"t\": \"2026-10-22T06:10:47Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidalSpace|affine.*fan|sharp.*monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declaration was returned.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two local maps to the spectrum of a sharp commutative monoid are equal when their canonical global sections have equal pullbacks",
+   "results": "{\"t\": \"2026-10-22T06:10:47Z\", \"tool\": \"leansearch\", \"query\": \"Two local maps to the spectrum of a sharp commutative monoid are equal when their canonical global sections have equal pullbacks\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Service returned a rate-limit error; no absence claim is made from this unavailable search.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of the sharp monoid structure sheaf determine a morphism to Spec of a fine commutative monoid",
+   "results": "{\"t\": \"2026-10-22T06:11:56Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of the sharp monoid structure sheaf determine a morphism to Spec of a fine commutative monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"AlgebraicGeometry.StructureSheaf.to_global_factors_apply\", \"AlgebraicGeometry.ΓSpec.toSpecΓ_unop\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\"], \"digest\": \"490ca8ad0b9c2336\"} Read the returned signatures. The hits concern commutative rings/semirings, modules, or monoidal structures on categories of sheaves, rather than sharp commutative monoids and their monoid spectra; no exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "MonoidSpectrum|MonoidalSpace|KatoFan|sharp.*monoid",
+   "results": "{\"t\": \"2026-10-23T09:27:57Z\", \"tool\": \"grep\", \"query\": \"MonoidSpectrum|MonoidalSpace|KatoFan|sharp.*monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declarations returned.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two local maps to the prime spectrum of a fine sharp monoid are equal if all canonical sections have equal pullbacks",
+   "results": "{\"t\": \"2026-10-23T09:27:57Z\", \"tool\": \"leansearch\", \"query\": \"Two local maps to the prime spectrum of a fine sharp monoid are equal if all canonical sections have equal pullbacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.Hom.mk.injEq\", \"Submonoid.LocalizationMap.ext\", \"Submonoid.LocalizationMap.ext_iff\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.mk.congr_simp\", \"AddSubmonoid.LocalizationMap.ext_iff\", \"Submonoid.LocalizationMap.mk.noConfusion\", \"Submonoid.LocalizationMap.mk.injEq\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\"], \"digest\": \"acffdfa5726ddc2e\"} No exact match: ringed-space/scheme hits require commutative rings; localization-map extensionality does not recover a sharp monoidal-space morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidalSpace\"",
+   "results": "{\"t\": \"2026-10-23T09:27:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidalSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No matching declarations returned.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local morphisms of sharp monoidal spaces to a fine monoid spectrum are determined by pullback of global canonical sections",
+   "results": "{\"t\": \"2026-10-23T09:28:00Z\", \"tool\": \"leanfinder\", \"query\": \"Local morphisms of sharp monoidal spaces to a fine monoid spectrum are determined by pullback of global canonical sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_hom_c_app\"], \"digest\": \"5c16b6dc93715cae\"} No exact match: ringed-space/scheme hits require commutative rings; localization-map extensionality does not recover a sharp monoidal-space morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism to an affine Kato fan is recovered from the homomorphism on sharp monoid sections, including its point map and structure sheaf map",
+   "results": "{\"t\": \"2026-10-23T09:28:35Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism to an affine Kato fan is recovered from the homomorphism on sharp monoid sections, including its point map and structure sheaf map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ext_of_isAffine\", \"AlgebraicGeometry.AffineScheme.ofHom\", \"AlgebraicGeometry.Spec.locallyRingedSpaceMap_toHom\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"AlgebraicGeometry.Spec.sheafedSpaceMap_hom_base\", \"AlgebraicGeometry.AffineSpace.hom_ext\"], \"digest\": \"2f7336846c17ac3f\"} No exact match: ringed-space/scheme hits require commutative rings; localization-map extensionality does not recover a sharp monoidal-space morphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-fan-hom-universal",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, p.109, paragraph beginning Choose a point y, restricted to strict morphisms; affine fan interpretation: 3.1.8(ii), 3.1.10(ii). Supporting affine-target comparison: ILO VIII 3.1.8(ii), invoked in the final sentence of the point-local comparison paragraph in the proof of 3.3.15, printed p.109. Supporting argument of ILO VIII 3.1.8(ii): Expose VIII, Lemma 3.1.8(ii) and proof using (i), printed p.99: uniqueness of the local factorization and the section correspondence; 3.1.3--3.1.6, pp.98--99. Expands old parent Steps 5--6 (recovery). No Stacks tag states this monoidal-geometric assertion.",
+   "via": [
+    "lem-trf-affine-fan-hom-universal",
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-fan-canonical-section-rigidity",
+  "worker": "stage1",
+  "summary": "Read ILO VIII 3.1.1--3.1.8 and current blueprint ancestry; proved point recovery by locality, the denominator formula by units, and sheaf-map uniqueness by the sheaf equalizer on inverse images of a basis. Reused existing localization lemma and definitions; no new nodes, statement changes, Lean work or compilation. Checked empty source/open, trivial monoid and nonsaturated fine sharp monoids. Searched project, DAG, current blueprint and Mathlib; no finished attachment or Mathlib match.",
+  "blueprint": "Historical nearby-duality/alteration support branch of lem-trf-local-term-locality, proof (1)--(2), via the recorded ancestors; realizes the canonical-section recovery argument of ILO VIII 3.1.8(ii) used by 3.3.15. Current latest blueprint states contracting local terms; this supporting node preserves historical ancestry and changes no chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NC-29381e234",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-29381e234 (reviewer sub-agent of L); spot-checked: Ordinary first split with no new nodes; live and side-live both still have the item unsplit with an identical statement, and there is no repair note, so the re-split rule does not apply. I checked the source at ILO VIII 3.1.5-3.1.6 and Lemma 3.1.8(i)/(ii) with its proof, printed p.99. The source defines f(x)=P minus phi_x^{-1}(units) and calls the rest 'straightforward'; the item writes out that uniqueness half, and with sharp stalks the source's point map matches the item's formula. Step 1: the stalk map applied to the canonical germ, with both stalks sharp; the proof that the source stalk P_p/P_p^x is sharp is checked. Locality h^{-1}(0)=0 plus the last clause of lem-trf-affine-fan-localization-sections gives zero germ iff p is not in g(x). Step 2: cl(p-na)=cl(p) because na and -na are mutually inverse in P_a; restriction of the canonical section to D(a) is cl(p) by the localization lemma, and naturality gives the basic component. Step 3, elementary: the equalizer from clause (1) of def-weil-pbc-sites-and-cohomology on the cover by g^{-1}D(a), using D(a) meet D(b) = D(a+b); the empty open is covered. Step 4 compares point maps before sheaf maps. Cited statements say what each step uses (C3/C4), proof_deps equals the union of uses, there is no cycle (the parent hom-universal is not cited; the closure of the cited nodes does not contain the item), and there is no off-route statement: the sites node is a definition. Small cases P={0}, N and <2,3>, empty T and empty opens, and the need for locality were all checked. Mathlib searches cover all three kinds. No fixes."
+ }
+}

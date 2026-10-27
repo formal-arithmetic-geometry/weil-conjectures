@@ -1,0 +1,145 @@
+{
+ "id": "def-sf-completed-compactification-refinement-comparison",
+ "kind": "definition",
+ "title": "Canonical completed compactification refinement comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring with adic datum $d$ [def-weil-pbc-adic-coefficient-datum]. For a separated finite-type morphism $f:X\\to Y$, let $c_0$ refine two compactifications $c_1,c_2$ by arrows $u_1,u_2$ [def-weil-compactifications-refinements]. Use the completed support functors $F_c$ [def-sf-completed-compact-support-calculus-data]. For a finite tuple generating the adic ideal and a derived-complete object $K$ with compatible finite etale origins [def-cbc-completed-exchange-map; def-weil-pbc-etale-origin-witness], define $I_{c_1,c_2}=C_{u_1}C_{u_2}^{-1}:F_{c_1}K\\simeq F_{c_2}K$, where $C_u:F_{\\mathrm{target}(u)}K\\to F_{\\mathrm{source}(u)}K$ is the specified completed proper/open refinement map. These are the published cbcRefinementMap and cbcCompactificationComparison; no independence theorem is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-compactifications-refinements",
+  "def-sf-completed-compact-support-calculus-data",
+  "def-cbc-completed-exchange-map",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (3), proper coincidence: canonical comparison through a common refinement."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactification refinement comparisons, ordinary direct image of strict towers and its derived limit comparison, identity direct image, and recorded compact support tower evaluations",
+   "results": "{\"hits\": 8, \"top\": [\"DirectLimit.map₀\", \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"DirectLimit.map\", \"CompHaus.hasLimits\", \"TensorProduct.fromDirectLimit\", \"compHausToTop.reflective\", \"Compactum.instHasLimits\"], \"note\": \"\", \"digest\": \"2af0c58e245ecc02\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for these pro-etale derived constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compactification refinement comparisons, ordinary direct image of strict towers and its derived limit comparison, identity direct image, and recorded compact support tower evaluations",
+   "results": "{\"hits\": 8, \"top\": [\"LightProfinite.transitionMapLE\", \"IsCompactOpenCovered.of_comp\", \"Alexandrov.lowerCone_π_app\", \"AbstractCompletion.compare_comp_eq_compare\", \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Profinite.IndexFunctor.map_comp_π_app\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\"], \"note\": \"\", \"digest\": \"04e5c4b18f1b593c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "cbcCompactificationComparison|directImageRlimIso|towerPushReductionEvaluation|modulePushId|supportEvaluation",
+   "results": "{\"hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "rg",
+   "query": "cbcCompactificationComparison|directImageRlimIso|towerPushReductionEvaluation|modulePushId|supportEvaluation in lean/WeilConjectures and lean/Sheaf, and exact lean.declarations in dag/nodes",
+   "results": "No WeilConjectures hit. Published Sheaf declarations: CompleteCompactSupportProetale.lean:602; CompletedDirectImageLimits.lean:79,322,1714; CompletedOrdinaryComparisons.lean:196; CompactificationCompletedRealization.lean:204,212. Only theorem nodes own these declarations; no existing definition node does.",
+   "date": "2026-10-24",
+   "verdict": "Exact published declarations reused, existing:true."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "direct image tower; compactification comparison; support tower",
+   "results": "0 blueprint nodes match 'direct image tower'; 11 blueprint nodes match 'compactification comparison' (the matching completed comparison owner is thm-cbc-complete-proetale); 0 blueprint nodes match 'support tower'",
+   "date": "2026-10-24",
+   "verdict": "No duplicate definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-compactified-proper-tower-exchange",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (3), proper coincidence: canonical comparison through a common refinement.",
+   "via": [
+    "lem-sf-compactified-proper-tower-exchange",
+    "lem-sf-package-compactified-tower-comparisons"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.CompleteCompactSupportProetale",
+  "declaration": "AlgebraicGeometry.Scheme.cbcCompactificationComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcRefinementMap",
+   "AlgebraicGeometry.Scheme.cbcCompactificationComparison"
+  ],
+  "statement": "def cbcCompactificationComparison\n    {X Y : Scheme.{t}} {f : X ⟶ Y}\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    {c₀ c₁ c₂ : Compactification f} (u₁ : c₀.Refinement c₁) (u₂ : c₀.Refinement c₂)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)\n    (K : (cbcCompleteProperty d X r a ha).FullSubcategory)\n    (origins : PbcHasCompatibleEtaleOrigins X d K.obj) :\n    (cbcSupport d c₁).obj K.obj ≅ (cbcSupport d c₂).obj K.obj",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by returned H2 review at e15fe574d405. Re-export the exact published canonical constructions; no new Lean module, no new existence choice, no theorem promoted to a prerequisite."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c6a406b1",
+  "group": "Q46",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c6a406b1",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Re-delivery after RETURN e15f; both findings fixed. H3: θ in IntegralNormalizationSpec is now pinned at every level n to CompactSupportProperImageTower.beta.inv at j=1_X conjugated by a_X; beta direction checked (proper level to support level). A new level-n projection clause on integralProper gives α_{f,n} with the specified source/target projections; it is consistent with the total-limit equation plus finiteNormalization. The main declaration now also contains the ordinaryFiniteTransition formula, finiteNormalization, both identity-open clauses (cbcDatumCompletedExchange and cbcStrictExchange under openId/openTowerId), the completed proper mate and all-arrow refinement independence. H2: four existing:true re-export definition nodes (refinement comparison, direct-image tower/Rlim data, modulePushId, recorded supportTower/supportEvaluation) match their source declarations; their stmt_deps exist; the ids are absent from side-live. Eight existing definition owners added as stmt_deps; only lean and stmt_deps changed on the item; no dependency node changed. No hollow definitions (∃! choices with pinning conditions); 24 theorems sorry with proof docstrings; source and blueprint docstrings present; statement verbatim; declaration list matches the file. Edge cases K=0, empty schemes, f=id, n=0 and arbitrary refinement arrows OK. Advisories: cbcDatumCompletedExchange, proEtaleRingRestrictionDerivedDirectImage, cbcDerivedOpenAdjunction and completedPull still have only theorem-node owners (all present in e15f and not flagged then; canonical, uniquely fixed constructions); the helper finiteRefinement uses a theorem-owned Etale declaration; the second reading is a self-reading. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T023220-L-531509",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_functoriality",
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_isIso",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_composition_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_horizontal",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_vertical"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_composition_component",
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_identity_component",
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_isIso",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_composition_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_horizontal",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_vertical"
+  ]
+ }
+}

@@ -1,0 +1,265 @@
+{
+ "id": "lem-trf-nodal-model-etale-smooth-locus",
+ "kind": "statement",
+ "title": "Smooth locus and geometric lifts in an etale nodal model",
+ "statement": "Let $f:X\\to Y$ be a flat locally finitely presented morphism of schemes [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-pc-scheme]. Let $b:V\\to Y$ and $q:U\\to X$ be etale morphisms [def-weil-etale-morphism], and let $p:U\\to V$ satisfy $f\\circ q=b\\circ p$. Suppose $h\\in\\Gamma(V,\\mathcal O_V)$ and an etale $V$-morphism $e:U\\to W=\\operatorname{Spec}_V(\\mathcal O_V[u,v]/(uv-h))$ are given; the relative spectrum denotes the scheme obtained by gluing the indicated affine spectra [def-weil-affine-spectrum]. Put $N=V(u,v)\\subset W$, the closed subscheme defined by the two coordinate functions [def-weil-closed-immersion]. The projection identifies $N$ with the zero subscheme $V(h)\\subset V$. For every $t\\in U$, the following are equivalent: $f$ is nonsmooth at $q(t)$, $p$ is nonsmooth at $t$, $W\\to V$ is nonsmooth at $e(t)$, and $e(t)\\in N$ [def-sbc-smooth-morphisms]. For every geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$ [def-weil-geometric-point] and every $t\\in U$ over its image, there is a lift $\\bar t:\\operatorname{Spec}\\Omega\\to U$ over $\\bar x$ with image $t$. If $f$ is nonsmooth at $\\bar x$, this lift maps into $N$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9, lemma-smooth-at-point (fibre/differential criterion, applied to uv-h); descent.tex Tag 02KM, lemma-syntomic-smooth-etale-permanence; morphisms.tex Tag 02GL, lemma-etale-over-field."
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-point",
+  "def-trf-universal-nodal-model"
+ ],
+ "proof": [
+  {
+   "text": "Work over an affine open $V_0=\\operatorname{Spec}R\\subset V$, writing $h$ also for its restriction and $B=R[u,v]/(uv-h)$. By [def-weil-closed-immersion] and [def-weil-affine-spectrum], the restriction of $N$ is $\\operatorname{Spec}(B/(u,v))$. Evaluation at $u=v=0$ gives $B/(u,v)=R/(h)$: the relation $uv-h$ becomes $-h$, and the inverse sends the class of $r$ to its constant class. These maps commute with restriction to smaller affine opens, so glue to the asserted isomorphism $N\\simeq V(h)$ over $V$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V9, lemma-smooth-at-point: elementary affine preparation for uv-h; quotient calculation."
+   }
+  },
+  {
+   "text": "On $D(u)\\subset\\operatorname{Spec}B$, use the presentation $B[1/u]=R[v,w,u]/(uv-h,uw-1)$. The Jacobian minor in the first two variables $v,w$ is $\\operatorname{diag}(u,u)$, with determinant $u^2$, a unit since $uw=1$. Thus this is a standard smooth presentation by [def-weil-pbc-standard-smooth-algebra], and its ring map is smooth by [lem-weil-pbc-standard-smooth-is-smooth]. By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] its spectrum is smooth over $V_0$. The identification with $D(u)$ is the principal-localization open immersion of [lem-weil-pbc-principal-localization-open-immersion]. By [lem-weil-pbc-smooth-restrict-open-subschemes] this gives smoothness at every point of $D(u)$ for $W\\to V$. Exchanging $u,v$ gives the same result on $D(v)$. Hence $W\\to V$ is smooth outside $N$.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00T6, definition-standard-smooth, and 00T7, lemma-standard-smooth (1); explicit 2 by 2 minor."
+   }
+  },
+  {
+   "text": "Fix $w\\in N$ over $V_0$, and put $k=\\kappa(w)$. The residue map $R\\to k$ kills $h$. Set $D=k[a,b]/(a^2,b^2)$, $I=(ab)\\subset D$ and $E=D/I$. The monomials $1,a,b,ab$ are a $k$-basis of $D$, so $ab\\ne0$ and $I^2=0$. Thus $\\operatorname{Spec}E\\subset\\operatorname{Spec}D$ is a first order thickening by [def-sbc-first-order-thickening]. Give $D,E$ their $R$-structures through $k$ and define $B\\to E$ by $u\\mapsto a$, $v\\mapsto b$. This is well-defined since $ab=0$ in $E$. Both spectra have a single point, and the resulting map to $W$ has image $w$ (its residue map is the chosen $B\\to k$). Any lift over $R$ would send $u$ to $a+\\lambda ab$ and $v$ to $b+\\mu ab$ for $\\lambda,\\mu\\in k$. Their product is $ab\\ne0$, whereas the image of $h$ is zero. Therefore no lift exists. If $W\\to V$ were smooth on an open neighbourhood $O$ of $w$, [lem-weil-pbc-morphism-factors-through-open-subscheme] would factor $\\operatorname{Spec}E\\to W$ through $O$. Any lift would still have image $w$, hence factor through the affine model by the same open-factorization lemma, giving the impossible ring lift just calculated. Smoothness implies formal smoothness by [def-sbc-smooth-morphisms], contradicting the lifting requirement of [def-sbc-formally-smooth]. Thus every point of $N$ is nonsmooth. Together with step 2 this proves the model's precise smooth locus.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H0, definition-formally-smooth; explicit square-zero obstruction for uv=0 at the origin, written by Q51."
+   }
+  },
+  {
+   "text": "Fix $t\\in U$. Suppose $f$ is smooth at $q(t)$ and choose an open smooth neighbourhood $X_0$. Put $U_0=q^{-1}(X_0)$. The maps $U_0\\to X_0$ and $b:V\\to Y$ are etale: open restrictions preserve etaleness by clauses (1)--(3) of [lem-weil-pbc-etale-composition-cancellation]. Apply the commutative-square conclusion of [lem-sfb-scheme-etale-source-target-properties] with $P=$ smooth to $X_0\\to Y$, $U_0\\to X_0$, $V\\to Y$, and $p|_{U_0}$. It says $p|_{U_0}$ is smooth. Conversely, if $p$ is smooth on an open $O$ containing $t$, the same cited lemma, with $a=\\mathrm{id}_O$, says that $b\\circ p|_O$ is smooth (the postcomposition case of its locality assertion). Since $b\\circ p=f\\circ q$, [lem-trf-etale-source-smoothness], in its pointwise form applied to $q$, implies $f$ is smooth at $q(t)$. This proves $f$ smooth at $q(t)\\Longleftrightarrow p$ smooth at $t$. Applying that pointwise source lemma to the etale map $e:U\\to W$ over $V$ gives $p$ smooth at $t\\Longleftrightarrow W\\to V$ smooth at $e(t)$. Negating these equivalences and using steps 2--3 proves all four nonsmoothness equivalences.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 04QZ, definition-local-source-target; 04R1, lemma-local-source-target-characterize; 04R3, remark-list-local-source-target (smooth); source locality Tag 036U."
+   }
+  },
+  {
+   "text": "For the prescribed $\\bar x$ and $t$, apply the last, prescribed-point clause of [lem-weil-pbc-etale-cover-geometric-point-lift] to the jointly surjective family $\\{q:U\\to X,\\mathrm{id}_X:X\\to X\\}$, selecting its member $q$ and the given point $t$. The identity is etale by [lem-weil-pbc-etale-composition-cancellation] (it is an open immersion). The clause supplies $\\bar t:\\operatorname{Spec}\\Omega\\to U$ with $q\\bar t=\\bar x$ and image exactly $t$, with the original field $\\Omega$. If $f$ is nonsmooth at $\\bar x$, step 4 gives $e(t)\\in N$. The composite geometric point $e\\bar t$ factors scheme-theoretically through $N$: in an affine model, $u,v$ have zero residue at $e(t)$, hence map to zero in $\\Omega$, so its ring map kills $(u,v)$. This is the closed-subscheme quotient description of [def-weil-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PR, lemma-geometric-lift-to-cover; prescribed-point form via morphisms.tex Tag 02GL, lemma-etale-over-field (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-trf-etale-source-smoothness",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-standard-smooth-is-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit specialization of Tags 00T6/00T7 to uv-h, with the square-zero obstruction from more-morphisms.tex Tag 02H0 and the etale-locality results of descent.tex Tags 04QZ/04R1/04R3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For the scheme uv=h over a base, its nonsmooth locus is u=v=0; etale charts preserve smoothness and lift a prescribed geometric point.",
+   "results": "{\"t\": \"2026-10-22T06:10:02Z\", \"tool\": \"leanfinder\", \"query\": \"For the scheme uv=h over a base, its nonsmooth locus is u=v=0; etale charts preserve smoothness and lift a prescribed geometric point.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.smoothLocus\", \"Algebra.etaleLocus\"], \"digest\": \"c59d7360d9bf7c05\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth locus of a nodal hypersurface xy=a consists of points where x or y is nonzero, and smoothness is invariant under etale neighborhoods.",
+   "results": "{\"t\": \"2026-10-22T06:09:50Z\", \"tool\": \"leansearch\", \"query\": \"The smooth locus of a nodal hypersurface xy=a consists of points where x or y is nonzero, and smoothness is invariant under etale neighborhoods.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.isOpen_etaleLocus\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.isOpen_smoothLocus\"], \"digest\": \"19f7baf711dd9bb6\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothLocus\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T06:09:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"smoothLocus\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|smoothLocus.*[Ee]tale|[Ee]tale.*smoothLocus",
+   "results": "{\"t\": \"2026-10-22T06:09:50Z\", \"tool\": \"grep\", \"query\": \"nodal|smoothLocus.*[Ee]tale|[Ee]tale.*smoothLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures in search-results.txt: the hits concern generic smooth/etale loci or standard etale presentations, not the stated nodal-model or divisorial-chart assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|smoothLocus.*[Ee]tale|[Ee]tale.*smoothLocus",
+   "results": "{\"t\": \"2026-10-23T09:41:14Z\", \"tool\": \"grep\", \"query\": \"nodal|smoothLocus.*[Ee]tale|[Ee]tale.*smoothLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: generic smooth/etale loci and charts, elliptic-curve nonsingularity or Lagrange nodal interpolation do not state the nodal-family assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nonsmooth points of the family uv equals h are precisely the simultaneous zeros of u and v, and geometric points lift through etale maps at every point of the fibre.",
+   "results": "{\"t\": \"2026-10-23T09:41:14Z\", \"tool\": \"leansearch\", \"query\": \"The nonsmooth points of the family uv equals h are precisely the simultaneous zeros of u and v, and geometric points lift through etale maps at every point of the fibre.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.smoothLocus\", \"Algebra.etaleLocus_eq_univ_iff\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"07b2e74fef3fe4eb\"}; Read returned signatures: generic smooth/etale loci and charts, elliptic-curve nonsingularity or Lagrange nodal interpolation do not state the nodal-family assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothLocus\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-23T09:41:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"smoothLocus\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: generic smooth/etale loci and charts, elliptic-curve nonsingularity or Lagrange nodal interpolation do not state the nodal-family assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the nodal scheme xy=h smoothness fails exactly at x=y=0; etale changes of source and base preserve smoothness at a point and every prescribed point above a geometric point has a geometric lift.",
+   "results": "{\"t\": \"2026-10-23T09:41:20Z\", \"tool\": \"leanfinder\", \"query\": \"For the nodal scheme xy=h smoothness fails exactly at x=y=0; etale changes of source and base preserve smoothness at a point and every prescribed point above a geometric point has a geometric lift.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"a96a407d6069dc41\"}; Read returned signatures: generic smooth/etale loci and charts, elliptic-curve nonsingularity or Lagrange nodal interpolation do not state the nodal-family assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double.point|X.*Y.*smooth|smooth.*X.*Y",
+   "results": "{\"t\": \"2026-10-23T09:43:26Z\", \"tool\": \"grep\", \"query\": \"nodal|ordinary.double.point|X.*Y.*smooth|smooth.*X.*Y\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\"], \"digest\": \"1a5aeffdf8e2ffea\"}; Read returned signatures: generic smooth/etale loci and charts, elliptic-curve nonsingularity or Lagrange nodal interpolation do not state the nodal-family assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nodal\"",
+   "results": "{\"t\": \"2026-10-23T09:43:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"nodal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lagrange.nodalWeight\", \"Lagrange.nodal\", \"Lagrange.nodal_monic\", \"Lagrange.natDegree_nodal\", \"Lagrange.degree_nodal\", \"Lagrange.nodal_empty\", \"Lagrange.nodal_ne_zero\", \"Lagrange.eval_nodal_at_node\"], \"digest\": \"6fe8341e0729cc44\"}; Read returned signatures: generic smooth/etale loci and charts, elliptic-curve nonsingularity or Lagrange nodal interpolation do not state the nodal-family assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The affine plane curve with equation X times Y equal to a parameter is smooth away from the origin, and at the origin its formal smoothness fails by a square zero lifting obstruction.",
+   "results": "{\"t\": \"2026-10-23T09:43:36Z\", \"tool\": \"leanfinder\", \"query\": \"The affine plane curve with equation X times Y equal to a parameter is smooth away from the origin, and at the origin its formal smoothness fails by a square zero lifting obstruction.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Nonsingular\", \"WeierstrassCurve.Jacobian.nonsingularLift_zero\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.Affine.nonsingular_zero\", \"WeierstrassCurve.Affine.nonsingular_iff\", \"WeierstrassCurve.Jacobian.nonsingular_zero\", \"WeierstrassCurve.Affine.nonsingular_iff'\", \"WeierstrassCurve.Projective.nonsingular_zero\"], \"digest\": \"3636edf89cc60782\"}; Read returned signatures: generic smooth/etale loci and charts, elliptic-curve nonsingularity or Lagrange nodal interpolation do not state the nodal-family assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-etale-chart",
+  "date": "2026-10-22",
+  "group": "Q113"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input of lem-trf-local-term-locality (1)--(2), through ILO VI Proposition 1.9 equation (1.a): the geometric lift and identification of the node in old step 3 of lem-trf-nodal-etale-chart.",
+   "via": [
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-nodal-model-etale-smooth-locus",
+  "worker": "stage1",
+  "summary": "Retained the statement and all its hypotheses. Proved the relative zero-subscheme identification by an explicit quotient, the smooth locus by an invertible Jacobian and an explicit square-zero lifting obstruction, smoothness comparison by existing source-and-target etale locality, and the prescribed geometric lift by the existing Mathlib leaf. No new nodes; fresh recorded searches found only general smooth/etale infrastructure.",
+  "blueprint": "Historical nodal-chart subargument through lem-trf-nodal-etale-chart step 3 and ILO VI Proposition 1.9 equation (1.a), below lem-trf-local-term-locality. The latest ancestor instead uses contracting correspondences; this assigned existing historical auxiliary branch is preserved, not asserted to occur in that latest proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-scheme-etale-source-target-properties",
+    "why": "Generic scheme-theoretic etale source-and-target locality supplies the change-of-base comparison in step 4; the local unit has source locality only, not this target change."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine comparison of scheme smoothness with ring smoothness converts the explicit standard-smooth presentation in step 2; this comparison does not replace any unit-level proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-0be6c1c28",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-0be6c1c28 (reviewer sub-agent of L); spot-checked: Read the item's five steps in full, every cited statement, and Stacks 01V9, 02GL, 02KM, 00T6/00T7, 02H0, 03PR and 04QZ/04R1/04R3 (all tags resolve to their labels). Statement, stmt_deps and blueprint are unchanged from live, where the item is still unsplit, so no other group has split it. No new nodes, no cycle, proof_deps equals the union of the step uses, and no SGA. Step 1: B/(u,v)=R/(h), glued over affine opens. Step 2: B_u=R[v,w,u]/(uv-h,uw-1), Jacobian diag(u,u) with det u^2 a unit, so standard smooth, hence smooth, then transferred to the open D(u) by the restriction lemma; symmetric for D(v). Step 3: rechecked by hand. D=k[a,b]/(a^2,b^2), E=D/(ab), and u->a, v->b has no R-lift because (a+λab)(b+μab)=ab≠0 while h->0. Factoring through the open and the affine chart is cited, so formal smoothness fails at every point of N. Step 4: both clauses of lem-sfb-scheme-etale-source-target-properties checked verbatim. The forward direction uses the square on q^{-1}(X_0); the converse uses the a=id_O trick; then the pointwise clause of lem-trf-etale-source-smoothness for q and for e. Step 5: the prescribed-point clause of lem-weil-pbc-etale-cover-geometric-point-lift applied to the jointly surjective family {q,id_X}, then factoring through N via the residue field. Edge cases (h a unit, h=0, h nilpotent, characteristic 2, q not surjective) all hold. No duplicate: lem-sfb-nodal-graph-cone-chart states the Fitting subscheme and conormal algebra, not this equivalence. Accepted tool_uses: lem-sfb-scheme-etale-source-target-properties (needed for cancellation by the étale map b; the unit has only source locality) and lem-weil-pbc-smooth-ring-map-iff-smooth-affine (generic). Minor, not a fault: step 5 does not re-cite the open-factorisation node for passing to the affine chart."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalModelEtaleSmoothLocus",
+  "declaration": "AlgebraicGeometry.nodal_model_etale_smooth_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalModelEtaleSmoothLocus.lean",
+  "statement": "theorem nodal_model_etale_smooth_locus {X Y V U : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] (b : V ⟶ Y) [Etale b] (q : U ⟶ X) [Etale q] (p : U ⟶ V) (hq : q ≫ f = p ≫ b) (h : Γ(V, ⊤)) (e : U ⟶ (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h))) [Etale e] (he : e ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h) = p) : (∃ i : (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).zeroLocusSubscheme (Set.range (fun k : Fin 2 ↦ (pullback.fst nodalModelBaseMap (nodalBaseMap h)).appTop ((Scheme.ΓSpecIso (.of nodalModelRing)).inv (Ideal.Quotient.mk _ (MvPolynomial.X k))))) ≅ V.zeroLocusSubscheme {h}, i.hom ≫ V.zeroLocusSubschemeι {h} = (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).zeroLocusSubschemeι (Set.range (fun k : Fin 2 ↦ (pullback.fst nodalModelBaseMap (nodalBaseMap h)).appTop ((Scheme.ΓSpecIso (.of nodalModelRing)).inv (Ideal.Quotient.mk _ (MvPolynomial.X k))))) ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h)) ∧ (∀ t : U, ((¬ ∃ O : X.Opens, q t ∈ O ∧ Smooth (O.ι ≫ f)) ↔ (¬ ∃ O : U.Opens, t ∈ O ∧ Smooth (O.ι ≫ p))) ∧ ((¬ ∃ O : U.Opens, t ∈ O ∧ Smooth (O.ι ≫ p)) ↔ (¬ ∃ O : (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).Opens, e t ∈ O ∧ Smooth (O.ι ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h)))) ∧ ((¬ ∃ O : (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).Opens, e t ∈ O ∧ Smooth (O.ι ≫ pullback.snd nodalModelBaseMap (nodalBaseMap h))) ↔ e t ∈ (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).zeroLocus (Set.range (fun k : Fin 2 ↦ (pullback.fst nodalModelBaseMap (nodalBaseMap h)).appTop ((Scheme.ΓSpecIso (.of nodalModelRing)).inv (Ideal.Quotient.mk _ (MvPolynomial.X k))))))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (xbar : Spec (.of Ω) ⟶ X) (t : U), q t = xbar default → ∃ tbar : Spec (.of Ω) ⟶ U, tbar ≫ q = xbar ∧ tbar default = t ∧ ((¬ ∃ O : X.Opens, xbar default ∈ O ∧ Smooth (O.ι ≫ f)) → ∃ nbar : Spec (.of Ω) ⟶ (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).zeroLocusSubscheme (Set.range (fun k : Fin 2 ↦ (pullback.fst nodalModelBaseMap (nodalBaseMap h)).appTop ((Scheme.ΓSpecIso (.of nodalModelRing)).inv (Ideal.Quotient.mk _ (MvPolynomial.X k))))), nbar ≫ (pullback (C := Scheme.{u}) nodalModelBaseMap (nodalBaseMap h)).zeroLocusSubschemeι (Set.range (fun k : Fin 2 ↦ (pullback.fst nodalModelBaseMap (nodalBaseMap h)).appTop ((Scheme.ΓSpecIso (.of nodalModelRing)).inv (Ideal.Quotient.mk _ (MvPolynomial.X k))))) = tbar ≫ e))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-227ee1d29",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read node, all 9 stmt_deps (incl. landed def-trf-universal-nodal-model, existing:true Q113; stmt_deps may gain landed nodes), module, report. Item diff vs side-live: only lean + that stmt_dep. lean.statement verbatim. W = pullback of nodalModelBaseMap along nodalBaseMap h (a↦h) = Spec_V O_V[u,v]/(uv-h) over arbitrary V; coordinates = inlined nodalChartCoordinate body (theorem-owned def in downstream module); N = zeroLocusSubscheme of the span (non-reduced); N≅V(h) iso pinned to commute with projection; 4-way nonsmooth equivalence via 3 chained iffs, smooth-at-point = smooth open nbhd; geometric lift keeps Ω (alg. closed), tbar≫q=xbar, tbar default=t, nonsmooth ⇒ e∘tbar factors through N. Mathematics verified by hand (Jacobian on D(u),D(v), square-zero obstruction at node, étale source/target locality, separable residue embedding, reduced Spec Ω). Edge cases (empty, h unit/0/nilpotent, char 2, q non-surjective) fine; single universe u, no extra hypotheses. Docstrings carry source/blueprint and 5 proof steps; no hollow def, sorry only. Second reading is by the same worker, stated openly; substantive. No file changed, no compile."
+ }
+}

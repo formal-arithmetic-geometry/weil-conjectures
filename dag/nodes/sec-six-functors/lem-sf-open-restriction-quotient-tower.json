@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-open-restriction-quotient-tower",
+ "kind": "statement",
+ "title": "Ordinary augmented quotient tower under prescribed open restriction",
+ "statement": "Fix independent site and coefficient universes, a prime l, a finite extension E of Q_l, an open immersion e:V→W, and normalized Operations o [def-sf-integral-open-operations]. Let F be the ordinary completed-coefficient restriction of o, and G its termwise cochain functor. The actual ordinary quotient towers T_W and T_V [def-pur-integral-derived-operations] admit a natural isomorphism tau:T_W followed by termwise G ≅ G followed by T_V. For every cochain complex P and n≥0, G of the nth component of the specified quotient augmentation on W followed by tau_P at n equals the nth component of the specified quotient augmentation on V at GP. Index n denotes exponent n+1. No adic datum, boundedness, K-flatness, completeness, quasi-compactness, or nonemptiness assumption is used. This statement contains neither a Roos comparison nor a derived descent.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-tensor-product-pullback (Tag 03EL); sites-cohomology.tex lemma-pullback-tensor-product (Tag 07A4); proetale.tex lemma-pushforward-Noetherian-case (Tag 099N), proof of (5)."
+ },
+ "stmt_deps": [
+  "def-sf-integral-open-operations",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing ordinary quotient-module calculation: the specified quotient-unit map at level n is a cokernel of the (n+1)st power of the uniformizer. The existing scalar-transport calculation for normalized open restriction identifies restriction of this endomorphism with the same power on the restricted module.",
+   "uses": [
+    "lem-fix-ordinary-quotient-module-comparison",
+    "lem-sf-open-restriction-completeness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ordinary restriction is localized ringed restriction followed by an equivalence, so it preserves finite colimits. Its image quotient unit is therefore a second cokernel of the same uniformizer-power endomorphism. IsColimit.coconePointUniqueUpToIso constructs the unique component isomorphism preserving quotient units; cokernel extensionality and naturality of those units prove naturality in the module.",
+   "uses": [
+    "lem-fix-ordinary-quotient-module-comparison",
+    "def-sf-integral-open-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the module comparison termwise to complexes. The published augmentation is the quotient unit in each degree. For the consecutive transition square, cancel the image of the augmentation at n+1, an epimorphism because it is a cokernel. Both remaining composites are the level-n augmentation by the comparison unit equations and naturality of the tower augmentation. Assemble the consecutive squares with NatTrans.ofOpSequence to obtain the natural strict tower isomorphism. This includes empty and zero cases and the first quotient at n=0.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-ordinary-quotient-module-comparison",
+  "lem-sf-open-restriction-completeness",
+  "def-sf-integral-open-operations",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y9",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Cokernel proof of the ordinary balanced quotient comparison, retaining its actual quotient units; transition compatibility by epimorphic quotient augmentation, before any derived localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact open restriction functor commutes with derived quotient Roos completion and the augmentation unit",
+   "results": "8 hits: Ext.mapExactFunctor_hom, mapDerivedCategoryFactorsh and its hom-app formula, mapDerivedCategoryFactors, and right/left-derived zero identities.",
+   "date": "2026-10-27",
+   "verdict": "Generic exact-derived infrastructure only; no normalized open quotient-tower comparison. Local source inspection found the proved quotientUnit_isCokernel in OrdinaryQuotientModuleComparison and inverse_scalar/scalar_transport in OpenRestrictionCompleteness; these supply the shorter cokernel proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso",
+   "results": "12 hits, including IsColimit.coconePointUniqueUpToIso and comp_coconePointUniqueUpToIso_hom.",
+   "date": "2026-10-27",
+   "verdict": "Used to construct the quotient comparison uniquely after preservation of the uniformizer-power cokernel. Does not itself provide the geometric scalar transport."
+  },
+  {
+   "tool": "grep",
+   "query": "completionComparison|scalarRoosMap",
+   "results": "msearch Mathlib grep: 0 hits. Local rg found OpenRestrictionGoodComplex, OrdinaryQuotientModuleComparison, OpenRestrictionCompleteness, and QcqsOrdinaryQuotientRestriction. The latter assembles a normalized ordinaryPull comparison, not the supplied Operations restriction.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the proved ordinary quotient and scalar-transport helpers, and assemble their level comparison directly for the specified Operations. No new unproved statement is required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right exact additive functor preserving a scalar multiplication map commutes with the quotient cokernel, naturally and compatibly with the quotient unit.",
+   "results": "8 hits, including rightExactFunctor_le_additiveFunctor, coker.π, RightExactFunctor.of, rTensor_exact and QuotSMulTop.map.",
+   "date": "2026-10-27",
+   "verdict": "These give generic right-exactness and cokernel infrastructure, but not the normalized open coefficient transport or the prescribed augmented quotient tower. The proof uses the existing cokernel universal property and the source-library scalar normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenRoosRestrictionDescent",
+  "group": "Y9",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-roos-restriction-descent",
+   "place": "Proof steps 2 and 3, ordinary tensor and quotient-augmentation comparison before Roos and localization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenRestrictionQuotientTower",
+  "file": "lean/Sheaf/SixFunctors/OpenRestrictionQuotientTower.lean",
+  "declaration": "WeilConjectures.OpenRoosRestriction.quotientTower",
+  "statement": "theorem quotientTower :\n    ∃ τ : IntegralOnSlice.tower l E W none ⋙\n        (Functor.whiskeringRight ℕᵒᵖ _ _).obj\n          ((IntegralOpenReduction.restriction l E e o).mapHomologicalComplex (.up ℤ)) ≅\n      (IntegralOpenReduction.restriction l E e o).mapHomologicalComplex (.up ℤ) ⋙\n        IntegralOnSlice.tower l E V none,\n      ∀ (P : IntegralOnSlice.Cx l E W none) (n : ℕ),\n        ((IntegralOpenReduction.restriction l E e o).mapHomologicalComplex (.up ℤ)).map\n            (((IntegralOnSlice.augmentation l E W none).app P).app (op n)) ≫\n          (τ.hom.app P).app (op n) =\n        ((IntegralOnSlice.augmentation l E V none).app\n          (((IntegralOpenReduction.restriction l E e o).mapHomologicalComplex (.up ℤ)).obj P)).app\n            (op n)",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T112448-L-1586639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T112448-L-1586639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

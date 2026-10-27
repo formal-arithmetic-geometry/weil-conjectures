@@ -1,0 +1,178 @@
+{
+ "id": "def-sfb-curve-moduli-groupoids",
+ "kind": "definition",
+ "title": "Nonempty nodal geometric fibres of proper curve families",
+ "status": "split",
+ "statement": "Fix a scheme $S$ [def-pc-scheme] in the universes of [def-weil-size-convention] and a scheme $T$ over $S$. Let $X\\to T$ be a proper curve family in the sense of [def-sfb-proper-curve-moduli], with its specified algebraic space, projection and family properties. Define the predicate of nonempty nodal geometric fibres as follows. For every algebraically closed field $\\Omega$ [def-weil-field], [def-weil-algebraic-closure] in the scheme universe and every $a:\\operatorname{Spec}\\Omega\\to T$, form the actual presheaf pullback $X\\times_{h_T}h_{\\operatorname{Spec}\\Omega}$. Its point space [def-a1-space-point-topology] must be nonempty. For every representable etale scheme chart $U$ of this fibre [def-trf-algebraic-space], $U$ is pure of dimension one [def-weil-pure-dimension], and each point $x\\in U$ is either smooth over $\\Omega$ [def-sbc-smooth-morphisms], meaning it admits an open neighbourhood on which the structural map to $\\operatorname{Spec}\\Omega$ is smooth, or is an ordinary geometric node in the existing sense of [def-sfb-ordinary-geometric-node]. The map from $U$ to $\\operatorname{Spec}\\Omega$ is the composite with the second pullback projection. Empty etale charts are allowed, while the entire fibre must be nonempty. No connectedness, genus or characteristic restriction is imposed. This defines a predicate on the already defined ProperCurveFamily, without redefining the ambient moduli category or its cartesian arrows.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-proper-curve-moduli",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-a1-space-point-topology",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-ordinary-geometric-node",
+  "def-trf-algebraic-space"
+ ],
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DSY, lemma-nodal-curves; curves.tex, definition-nodal; nonempty-fibre open refinement of lem-sfb-nodal-curve-stack-smooth."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "moduli groupoid flat proper finitely presented algebraic spaces curves nodal fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-stack or curve-family groupoid declaration; scheme smoothness/properness is reused where appropriate"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace, IsModuliStack, IsAlgebraicStack",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicSpace'\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-stack or curve-family groupoid declaration; scheme smoothness/properness is reused where appropriate"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgebraicModuliStack|SpaceMapIsSmooth|CurveModuli",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no algebraic-stack or curve-family groupoid declaration; scheme smoothness/properness is reused where appropriate"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgebraicModuliStack|IsSmoothModuliAtlas|SpaceMapIsSmooth|\\bCurveModuli\\b in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search curves groupoid and search nodal stack; DAG definition search",
+   "results": "No existing definition of either algebraic moduli stacks with a smooth atlas or all proper flat curve families. StablePointedModuliGroupoids supplies CFG, descent, 2-base-change, diagonal and etale-atlas predicates for stable families; these are reused. AlgebraicSpacePointTopology supplies point representatives and topology, reused. NodalOpenLocus supplies IsOrdinaryNode, reused. Blueprint searches curves groupoid and nodal stack each returned 0 blueprint nodes.",
+   "date": "2026-10-22",
+   "verdict": "no exact match; reuse the listed constituents"
+  },
+  {
+   "tool": "grep",
+   "query": "HasNonemptyNodalGeometricFibres|IsOrdinaryNode|Nodal|nodal",
+   "results": "0 hits.  Read hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres, flatness, smoothness, Weierstrass-curve nonsingularity, power-series preparation, or Lagrange interpolation; none defines the algebraic-space family predicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebraic space curve with nonempty pure dimension one nodal geometric fibres",
+   "results": "8 hits.  Read hits: AlgebraicGeometry.IsSmooth, WeierstrassCurve, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.LocallyRingedSpace, WeierstrassCurve.Affine, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale, WeierstrassCurve.IsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres, flatness, smoothness, Weierstrass-curve nonsingularity, power-series preparation, or Lagrange interpolation; none defines the algebraic-space family predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsPureDimension, AlgebraicGeometry.Smooth",
+   "results": "0 hits. loogle: unknown identifier 'AlgebraicGeometry.IsPureDimension' Read hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres, flatness, smoothness, Weierstrass-curve nonsingularity, power-series preparation, or Lagrange interpolation; none defines the algebraic-space family predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonempty nodal geometric fibres of a proper flat finitely presented algebraic space curve family",
+   "results": "8 hits.  Read hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.instCanonicallyOverFiber",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres, flatness, smoothness, Weierstrass-curve nonsingularity, power-series preparation, or Lagrange interpolation; none defines the algebraic-space family predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nodal curve algebraic space singularities completed local ring power series xy equidimensional fibre",
+   "results": "8 hits.  Read hits: WeierstrassCurve.Affine.Nonsingular, WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq, PowerSeries.weierstrassDistinguished, PowerSeries.weierstrassMod, WeierstrassCurve.Jacobian.Point.nonsingular, WeierstrassCurve.Jacobian.nonsingularLift_zero, WeierstrassCurve.IsMinimal, PowerSeries.exists_isWeierstrassFactorization",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres, flatness, smoothness, Weierstrass-curve nonsingularity, power-series preparation, or Lagrange interpolation; none defines the algebraic-space family predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?space|nodal|ordinary.?node",
+   "results": "5 hits.  Read hits: Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme fibres, flatness, smoothness, Weierstrass-curve nonsingularity, power-series preparation, or Lagrange interpolation; none defines the algebraic-space family predicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Definition interface needed to state the nodal curve stack theorem.",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveModuliGroupoids",
+  "declaration": "AlgebraicGeometry.ProperCurveFamily.HasNonemptyNodalGeometricFibres",
+  "declarations": [
+   "AlgebraicGeometry.ProperCurveFamily.HasNonemptyNodalGeometricFibres"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveModuliGroupoids.lean",
+  "statement": "def HasNonemptyNodalGeometricFibres {S : Scheme.{u}} {T : Over S} (X : ProperCurveFamily T) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Maintenance registered this definition as an unstated DAG prerequisite (lean: null) to assign maintainer-owned reachability metadata. This delivery supplies ProperCurveFamily.HasNonemptyNodalGeometricFibres and the associated categories in Sheaf.AlgebraicGeometry.CurveModuliGroupoids."
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2ec12add",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Snapshot, packet and commit f2ec12ad read. Item differs from base only in lean plus 4 stmt_deps, all used: algebraic-moduli-stack, curve-moduli-groupoids, proper-curve-moduli, open-moduli-substack. The 3 helper records (one existing:true for IsOrdinaryNode, present in the commit) differ only in lean with notes; unreachable flags are in the base. Statements are verbatim, declaration lists match, the only sorry is the item theorem, docstrings carry source and blueprint, and the 8-step proof plan is present. Clauses checked against 0D5A/0DSY/0E00/026O/075U: C = Q20 ProperCurveModuli.category(Spec k); IsAlgebraicModuliStack = stack + algebraic-space diagonal + smooth surjective atlas; nonempty pure-1 nodal geometric-fibre predicate on étale charts; N algebraic; N.property = P open; IsSmoothModuliStack; K-extension clause. Edge cases OK (empty base/family, curve plus point, disconnected, char 2, single universe u). Earlier H12/H4 duplicates removed. Maintainer notes: Q17 ArtinCriterion.SpaceMapIsSmooth/IsAlgebraicModuliStack (Spec ℤ only, consistent by unfolding, theorem-owned) should later be redirected to def-sfb-algebraic-moduli-stack; Algebra k K binder unused. No compile by reviewer; worker dry run c745ef0bf76 compiled and passed preflight."
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "def-sfb-curve-moduli-groupoids",
+  "worker": "stage1",
+  "summary": "Checked the existing definition against Stacks 0DSY, 0C46 and 0C47 and every statement dependency. Retained the predicate and its existing Lean record; added a direct citation of the existing algebraic-space definition for representable etale scheme charts. No assertion of openness, base-change invariance or stack algebraicity is hidden in the definition. Re-ran logged Mathlib searches using the current predicate rather than its former groupoid title. All constituent notions already have nodes; no new nodes or proof steps are necessary.",
+  "blueprint": "The existing provenance points through the nodal-curve-stack prerequisite to det-thm-sf-ctf-stability-direct-images, proof (3). Read the latest sketch and detail proof; they concern preservation by direct images. This definition supplies the nonempty nodal-family predicate in the recorded alteration/moduli prerequisite route, not an additional claim about direct images. No blueprint node states the same predicate (searches: nodal; nodal geometric fibres; curve moduli). Retained the existing from.node and via provenance."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-4e034357e",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-4e034357e (reviewer sub-agent of L); spot-checked: PASS, no fixes. Compared with the live and side-live node, the delivery changes only three things: an inline citation [def-trf-algebraic-space] for 'representable etale scheme chart', that id added to stmt_deps, and a split_report plus new search entries. The predicate and its Lean record are unchanged, and there are no new nodes. The item is still open in stage 1: live status is split with only a stage-2 reviewed_lean and no repair note. I checked the statement against Stacks 0DSY (lemma-nodal-curves) and 0C46/0C47 (curves.tex definition-nodal). Pure dimension 1 on every etale chart is the etale-local form of equidimensionality. The nonempty-fibre clause is a deliberate refinement, consistent with its only citer lem-sfb-nodal-curve-stack-smooth. Requiring 'smooth or node' at all points is equivalent to requiring it at closed points, because the smooth locus is open and nodes are isolated. An abstract ring isomorphism of the completion with Ω[[u,v]]/(uv) is enough here because the setting is equal characteristic. Edge cases checked: empty base, empty fibre, disconnected union, curve plus a point, characteristic 2, cusp. The added stmt_dep is genuinely needed: the Lean definition (CurveModuliGroupoids.lean, read without compiling) uses AlgebraicSpace.IsEtale, which is owned by def-trf-algebraic-space. Batch-5 check: def-trf-algebraic-space is a general definition of algebraic spaces and representable etale maps. It is not a step of the trace-formula or Poincaré-duality proofs, and it was already in the item's closure through def-sfb-proper-curve-moduli and def-a1-space-point-topology, so I accept it. Duplicate search found nothing: def-trf-nodal-geometric-fibres is on scheme morphisms and requires connected fibres; def-sfb-quasi-split-nodal-fibres and def-sfb-nodal-geometric-fibre-local-rings define other things; blueprint search for 'nodal' returns 0 nodes. There is no SGA citation and no tool_uses were declared."
+ }
+}

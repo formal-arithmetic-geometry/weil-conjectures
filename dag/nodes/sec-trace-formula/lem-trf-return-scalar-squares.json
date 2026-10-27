@@ -1,0 +1,115 @@
+{
+ "id": "lem-trf-return-scalar-squares",
+ "kind": "statement",
+ "title": "Scalar compatibility of the two return words",
+ "statement": "Fix a finite-field datum D, distinct invertible prime l, finite extensions E and M of Q_l, an algebra map iota:E→M, and an integral comparison system C satisfying IntegralComparisonRealizationCoherence. For any finite-type X0 over k0 and any positive return period r+1 and scheme point z with the stated Frobenius return equality w, the specified return square commutes with scalar extension on the entire system, on the integral realization, and on its raw rationalization: SystemScalarEquation, IntegralScalarEquation and RationalScalarEquation of [def-trf-iterated-return-transport-data].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9."
+ },
+ "stmt_deps": [
+  "def-trf-iterated-return-transport-data",
+  "def-sf-integral-comparison-system-data"
+ ],
+ "proof": [
+  {
+   "text": "First use the specified integral simultaneous quotient diagrams. Write $b:T_sH_E\\xrightarrow{\\sim}H_MT_X$ for the scalar comparison for their common scheme map. The mixed composition/scalar equation of [lem-trf-integral-pullback-comparison-realization], iterated along the words $zg_s^m$ and $g^mz$, gives\n$$r_Mb=U_M^m(a)\\delta_P T_s(r_E),\\qquad s_Mb=P_M(d)a_{G_E^m}T_s(s_E).$$\nThe same $b$ occurs because $g^mz=zg_s^m$ and the cited node respects equality of maps and arbitrary finite iterations. These are its identities on the whole simultaneous quotient diagrams before realization and then on integral realizations. Multiply the first identity on the left by $s_Mr_M^{-1}$ and on the right by $T_s(r_E)^{-1}$ and substitute the second:\n$$v_MU_M^m(a)\\delta_P=s_MbT_s(r_E)^{-1}=P_M(d)a_{G_E^m}T_s(s_Er_E^{-1}).$$\nThis proves the first scalar identity, including its assertion before realization. Rationalization preserves equality, composition and inverses, and hence gives the required rational equation [def-weil-rationalization-karoubi].",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Last sentence, Frobenius transport: returned local normalization proof, Steps 2, 8, 9. Explicit specialization and Lean induction by H3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Frobenius.*(scalar|transport)|return.*pullback",
+   "results": "{\"hits\": 0, \"top\": []}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point Frobenius transport scalar compatibility and the unit and associator laws for rationalized pullback",
+   "results": "{\"hits\": 8, \"top\": [\"VectorField.mpullback_smul_apply\", \"VectorField.mpullback_smul\", \"LinearMap.frobenius\", \"CategoryTheory.Monad.transport\", \"VectorField.mpullbackWithin_smul\", \"VectorField.mpullbackWithin_smul_apply\", \"CategoryTheory.Functor.map_units_smul\", \"CategoryTheory.Functor.Monoidal.coreMonoidalTransport\"]}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"hits\": 9, \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"]}",
+   "date": "2026-10-25",
+   "verdict": "No match: generic category or scalar lemmas do not state these normalized pro-etale comparisons. Blueprint searches for return scalar, point scalar and rational scalar found no identical imported blueprint node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IteratedReturnTransportScalarCalculus",
+  "date": "2026-10-25",
+  "group": "H3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence, local transport normalization, Scalar compatibility of the two return words",
+   "via": [
+    "lem-trf-iterated-return-transport-scalar-calculus",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReturnScalarSquares",
+  "file": "lean/Sheaf/Paper/ReturnScalarSquares.lean",
+  "declaration": "WeilConjectures.returnScalarSquares",
+  "statement": "theorem returnScalarSquares\n    (hC : IntegralComparisonRealizationCoherence l E M ι C)\n    (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x)]\n    [∀ x : (D.geometricFiber X₀).left,\n      Invertible (l : (D.geometricFiber X₀).left.residueField x)]\n    (r : ℕ) (z : Spec (.of D.k) ⟶ (D.geometricFiber X₀).left)\n    (w : ((End.of (frobeniusPointIso D).hom) ^ (r + 1)) ≫ z =\n      z ≫ ((End.of (D.geometricFrobenius X₀).hom) ^ (r + 1))) :\n    SystemScalarEquation D l E X₀ M ι r z w ∧\n      IntegralScalarEquation D l E X₀ C M ι r z w ∧\n      RationalScalarEquation D l E X₀ C M ι r z w",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.Paper.IteratedReturnTransportScalarCalculus",
+  "worker": "H3",
+  "summary": "Strict subargument of the assigned six-step scalar-calculus proof, or ownership of its unchanged definitions.",
+  "blueprint": "Final sentence, local transport normalization, Scalar compatibility of the two return words"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70682",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261025T163644-L-752613",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-70682",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261025T163644-L-752613",
+  "kind": "interface",
+  "note": "independent cc review: Moved data module vs old item block (verbatim except finiteComposition ascription, isDefEq true); item theorem proof vs node proof steps; three lower sorry statements vs item clauses (return scalar squares, r=0 point square + PointScalarNormalization, one-step rational unit/tower); importer RationalReturnBlockPower compiled against delivered modules (exit 0); #print axioms item = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

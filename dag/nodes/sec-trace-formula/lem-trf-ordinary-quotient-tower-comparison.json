@@ -1,0 +1,151 @@
+{
+ "id": "lem-trf-ordinary-quotient-tower-comparison",
+ "kind": "statement",
+ "title": "Restriction of the ordinary quotient system as a strict tower",
+ "statement": "For a prime l, finite E/Q_l, scheme W and ordinary quotient model M, restricting M.quotient degreewise to completed modules and currying gives a functor naturally isomorphic to the actual strict quotient tower trfQuotientTowerFunctor on all complexes. For every strict presentation isomorphism a whose evaluations followed by kappa equal M.evaluation, restriction of a inverse followed by this natural isomorphism sends each restricted original section x to kappa(x). No derived calculus, good-complex, completion or Roos hypothesis occurs. Interfaces: [def-trf-completion-unit-models], [def-trf-isomorphism-strict-quotient-models], [def-trf-integral-comparison-realization-models].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0941, with derived.tex Tag 09T5 and sites-modules.tex Tags 03D7, 03EK; explicit strict quotient construction."
+ },
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "def-trf-isomorphism-strict-quotient-models",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Compose the restriction/evaluation natural isomorphism with the scalar restriction of M.evaluation at each level. Lift these component isomorphisms degreewise to complexes, keeping the site and coefficient universes independent. Naturality follows from the two natural isomorphisms. Use the recorded object equations for the level components, with a generic lemma identifying them with the components of the natural functor comparison.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-integral-operation-roos-effectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the strict transition with the restricted ordinary quotient mate. Local surjectivity of the completed coefficient projection makes finite scalar restriction full; therefore the quotient mate is uniquely characterized by its composite with the ordinary scalar-extension unit. On unit tensor sections the actual unrestricted transition carries 1 tensor x to 1 tensor x. Restriction/evaluation and successive restriction comparisons transport M.transition to the required square. The section-map descriptions of coefficientSequenceRestriction and coefficientSequenceTransition verify that the square uses the actual strict arrows. The composite restriction comparison is constructed from the actual coefficient projections and their limit-cone equation; the generic restriction-composition lemma identifies it with transport by coefficientRestrictionComp. No auxiliary finite-field datum is introduced.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-sequence-roos-model",
+    "lem-pur-integral-operations-well-defined",
+    "lem-trf-completion-unit-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use NatTrans.ofOpSequence for compatibility with every tower arrow and NatIso.ofComponents twice to assemble the natural isomorphism of tower functors. For any presentation a and kappa satisfying the evaluated compatibility, cancel evaluated a inverse and a. Restriction/evaluation naturality identifies the resulting degree component with the restricted map of kappa. Equality transports on module sheaves and abelian section groups identify its value on the original section with kappa applied to coefficientEvaluationSection. The same construction covers level zero, zero complexes, empty schemes and arbitrary unbounded complexes.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-pur-integral-operation-roos-effectivity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-integral-operation-roos-effectivity",
+  "lem-coef-sequence-roos-model",
+  "lem-pur-integral-operations-well-defined",
+  "def-trf-integral-comparison-realization-models",
+  "lem-trf-completion-unit-ordinary-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EK, and Stacks 0941; independent-universe adaptation of the existing finite comparison and quotient-mate arguments in IntegralOperationRoosEffectivity, S2, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism from derived completion on flat K-flat complexes to Roos limit of strict quotient tower",
+   "results": "8 hits; DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.ofComponents\"",
+   "results": "8 hits; CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.ofComponents', CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatIso.ofComponents'.app, CategoryTheory.NatIso.ofComponents'_hom_app, CategoryTheory.NatIso.ofComponents'_inv_app, CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.ofComponents_inv_app",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientReductionPresentation|TrfCompletionRoosNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation between inverse sequences assemble level isomorphisms commuting with transition maps",
+   "results": "8 hits; CategoryTheory.NatTrans.ofOpSequence, CategoryTheory.NatTrans.ofSequence, CategoryTheory.CatCommSq.iso_inv_naturality, CategoryTheory.NatTrans.isIso_iff_isIso_app, CategoryTheory.CatCommSq.iso_inv_naturality_assoc, CategoryTheory.NatTrans.CommShift.of_isIso, CategoryTheory.NatIso.hom_app_isIso, CategoryTheory.ComposableArrows.isoMk",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "ofOpSequence|mapHomologicalComplexCompIso|homEquiv_unit",
+   "results": "25 hits; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact coefficient-system comparison. Generic adjunction and sequence APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.StrictQuotientCompletionRealization",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent); extracted Normalized completion realization, original steps 2 and 8; strict quotient comparison substep",
+   "via": [
+    "lem-trf-strict-quotient-completion-realization",
+    "lem-trf-isomorphism-multiplication-cone-descent",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.OrdinaryQuotientTowerComparison",
+  "file": "lean/Sheaf/TraceFormula/OrdinaryQuotientTowerComparison.lean",
+  "declaration": "WeilConjectures.ordinaryQuotientTowerComparison",
+  "statement": "theorem ordinaryQuotientTowerComparison\n    (W : Scheme.{t}) (M : CompletionUnit.OrdinaryModel l E W) :\n    let T := (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙\n      HomologicalComplex.complexOfFunctorsToFunctorToComplex\n    ∃ θ : M.quotient l E W ⋙ T ≅ trfQuotientTowerFunctor l E W,\n    ∀ (P : CochainComplex (scalarReductionSource l E W) ℤ)\n      (C : CochainComplex (coefficientSequenceModules l E W) ℤ)\n      (a : (M.quotient l E W).obj P ≅ C)\n      (κ : ∀ n : ℕ,\n        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅\n          (unrestrictedIntegralFiniteComplex l E W n).obj P),\n      (∀ n : ℕ,\n        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).mapIso a ≪≫\n          κ n = (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P) →\n      ∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ) (x : (C.X i).val.obj (op (n, U.unop))),\n        (((T.mapIso a.symm ≪≫ θ.app P).hom.app (op n)).f i).val.app U\n            (integralComparisonRestrictedSection l E W (C.X i) n U x) =\n          ((κ n).hom.f i).val.app U\n            (coefficientEvaluationSection l E W (C.X i) n U x)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ac9fc",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261026T130628-L-3484579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T094512-L-235601",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

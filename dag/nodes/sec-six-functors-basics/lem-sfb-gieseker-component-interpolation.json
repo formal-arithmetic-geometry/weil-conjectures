@@ -1,0 +1,451 @@
+{
+ "id": "lem-sfb-gieseker-component-interpolation",
+ "kind": "statement",
+ "title": "Component interpolation under leading Hilbert weight inequalities",
+ "statement": "Let $k$ be algebraically closed, $g\\ge2$, $d>9(g-1)$ and $r=d+1-g$. Let $D\\subset\\mathbf P^{r-1}_k$ be a connected reduced nodal curve, with node model $k[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series], Hilbert polynomial $dm+1-g$, and complete nondegenerate hyperplane embedding $L=\\mathcal O_D(1)$, with $h^0(D,L)=r$ and $H^1(D,L)=0$. Assume that every weighted flag of linear forms with integral weights in $\\{0,1,2,3,4\\}$ satisfies\n$$a_F\\le\\frac d r\\sum_iw_i,$$\nwhere the leading coefficient $a_F$ is defined by [lem-sfb-bounded-hilbert-weight-polynomials]. For any reduced union $Y$ of components and any component $E$ of the normalization of its reduced complement, let $b_E$ count the preimages on $E$ of nodes joining that component to $Y$. Then either\n$$\\deg_E L\\ge b_E,$$\nor $E$ maps isomorphically to a rational normal component and $\\deg_E L=b_E-1$. A rational normal curve of degree $e$ means a smooth rational curve whose embedding in its own linear span is the complete degree-$e$ embedding of $\\mathbf P^1$. Component degrees below are degrees of the pulled-back hyperplane line on the smooth normalized components [def-sc-normalization, def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 3.2 proof of Theorem 8, step (9), printed p.14: component interpolation prerequisite before the subcurve inequality. Agent leading-weight formulation of that step (the span flags used have weights zero and one). Local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-degree-line-bundle",
+  "lem-sfb-bounded-hilbert-weight-polynomials",
+  "def-pc-reduced-scheme",
+  "def-sc-normalization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Write $T_i$ for the reduced irreducible components of $D$, and $e_i=\\deg_{\\widetilde T_i}L$. Projectivity gives properness by [lem-pc-projective-proper], and finite type over the Noetherian field gives Noetherianity by [lem-weil-pbc-finite-type-over-noetherian]. There are finitely many components, with finite smooth proper connected normalizations, by [lem-trf-reduced-curve-normalization-genus]. For every union $A$ of components, [lem-trf-nodal-subcurve-boundary] identifies its boundary with its reduced complement as finitely many distinct $k$-points, each smooth on both sides, and says $A$ is nodal. Let $k_A$ be this number and $e_A=\\sum_{T_i\\subset A}e_i$. The hyperplane line is ample: its coordinate sections have affine nonvanishing opens, the intersections of $D$ with the standard affine charts, as in [def-weil-pbc-ample-invertible-module]. Thus [lem-trf-fibre-degree-ample-criterion] gives $e_i\\ge1$.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-reduced-curve-normalization-genus",
+    "lem-trf-nodal-subcurve-boundary",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-fibre-degree-ample-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components; normalization and nodal-boundary tools cited in the step"
+   }
+  },
+  {
+   "text": "Every reduced union $A$ is nonspecial for $L|_A$. Indeed for its closed immersion $i:A\\hookrightarrow D$, [lem-pc-closed-immersion-coherent-cohomology] says $i_*(L|_A)$ is coherent and computes its cohomology on $D$. The restriction $L\\twoheadrightarrow i_*(L|_A)$ is surjective in local line-bundle trivializations. Its kernel $K$ is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth]. Now [lem-sc-noetherian-cohomology-above-dimension] gives $H^2(D,K)=0$, and the long exact sequence of [pqf-def-cohomology], together with the assumed $H^1(D,L)=0$, gives $H^1(A,L|_A)=0$. The same dimension-vanishing statement gives $H^j(A,L|_A)=0$ for $j\\ge2$. Cohomology is finite-dimensional by [lem-pc-coherent-hi], since $A$ is proper over the field. Consequently $h^0(A,L|_A)=\\chi(A,L|_A)$. This includes disconnected unions; for the empty union both sides are zero.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "pqf-def-cohomology",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01Y0, lemma-coherent-abelian-Noetherian; 089W, lemma-relative-affine-cohomology; cohomology.tex Tag 02UZ, proposition-vanishing-Noetherian"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-normalization-quotient] to each connected component of $A$, and tensor its exact sequence by $L|_A$. Tensoring by a line is exact, since locally it is tensoring by a free module of rank one. In the middle term, local trivializations identify $(\\nu_*\\mathcal O_{\\widetilde A})\\otimes L$ with $\\nu_*\\nu^*L$. The last term $Q$ has zero-dimensional support and unchanged Euler characteristic after tensoring by [lem-pc-chi-zero-dim-support]. Euler additivity [lem-pc-euler-additive], the affine cohomology comparison for the finite normalization [lem-weil-pbc-affine-morphism-cohomology-edge], and the degree definition [def-pc-degree-line-bundle] therefore give\n$$\\chi(A,L|_A)-\\chi(A,\\mathcal O_A)=\\sum_{T_i\\subset A}\\bigl(\\chi(\\widetilde T_i,\\nu_i^*L)-\\chi(\\widetilde T_i,\\mathcal O)\\bigr)=e_A.$$\nThus $h^0(A,L|_A)=e_A+\\chi(A,\\mathcal O_A)$ by step 2. The same computation for a single $T_i$ also identifies its intrinsic degree with $e_i$.",
+   "uses": [
+    "lem-trf-nodal-normalization-quotient",
+    "lem-pc-chi-zero-dim-support",
+    "lem-pc-euler-additive",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C1R, lemma-prepare-delta-invariant; 0AYT, lemma-chi-tensor-finite; curves.tex Tag 0CBW, lemma-split-node"
+   }
+  },
+  {
+   "text": "For an irreducible component $T$, put $p_T=\\dim_kH^1(T,\\mathcal O_T)\\ge0$. By [lem-sc-global-functions], $h^0(T,\\mathcal O_T)=1$, and higher cohomology vanishes by [lem-sc-noetherian-cohomology-above-dimension]. Hence $\\chi(T,\\mathcal O_T)=1-p_T$. If $T$ is outside a union $A$ and meets $A$ in $\\ell$ nodes, the formula of [lem-trf-nodal-curve-normalization-euler], summed over connected components, gives\n$$\\chi(A\\cup T,\\mathcal O)=\\chi(A,\\mathcal O_A)+1-p_T-\\ell.$$\nIn fact the component count adds, the normalized genera add, and the internal-node count adds with $\\ell$ additional nodes; self-nodes were already counted inside $T$. Step 3 consequently gives\n$$h^0(A\\cup T,L)-h^0(A,L)=e_T+1-p_T-\\ell.$$\nIf $u$ counts nodes from $T$ to the components outside $A\\cup T$, counting the three kinds of boundary edges gives $k_{A\\cup T}-k_A=u-\\ell$.",
+   "uses": [
+    "lem-sc-global-functions",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-trf-nodal-curve-normalization-euler"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Nodal normalization Euler formula, Tag 0CBW; elementary component and edge counts"
+   }
+  },
+  {
+   "text": "Put $h=g-1>0$, $\\epsilon=h/d\\in(0,1/9)$ and $q=r/d=1-\\epsilon>8/9$. Define for each reduced union\n$$\\Delta(A)=h^0(A,L|_A)-q(e_A+k_A/2).$$\nThe Hilbert-polynomial comparison [lem-sfb-projective-hilbert-polynomial-dimension] gives $\\chi(D,\\mathcal O_D(m))=dm+1-g$ at every integer $m$. Taking $m=1$ and $m=0$ and using step 3 yields $e_D=d$. Therefore $\\Delta(D)=r-qd=0$, and $\\Delta(\\varnothing)=0$. Suppose some $\\Delta(A)<0$, and choose such an $A$ maximal under inclusion among the finitely many unions. Then $A$ is nonempty and proper, and $\\Delta(A\\cup T)\\ge0$ for every component $T$ outside $A$.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/gieseker-lectures-moduli-curves-tifr69.pdf",
+    "place": "After Proposition 1.0.9, printed pp.64--65: maximal subcurve violating the subcurve inequality; leading-weight version reconstructed by NZ"
+   }
+  },
+  {
+   "text": "If each normalized component of the complement of this $A$ has degree at least its number of boundary branches to $A$, apply [lem-sfb-subcurve-span-weight-bound] with every boundary branch chosen and $X=D$. Its first alternative holds on every component, so its rational-normal exception is not being assumed. It gives a zero/one flag with quotient dimension $s\\le h^0(A,L|_A)$ and $a_F\\ge e_A+k_A/2$. The hypothesis of the item applies to this flag since $\\{0,1\\}\\subset\\{0,1,2,3,4\\}$. It gives $a_F\\le(d/r)s=s/q$, and thus $\\Delta(A)\\ge0$, a contradiction. Therefore some component $T$ outside $A$ has $e=e_T<\\ell$, where $\\ell$ counts its nodes joining $A$. These nodes are distinct smooth points on $T$, so their number agrees with the number of their preimages on its normalization. In particular $\\ell\\ge e+1\\ge2$.",
+   "uses": [
+    "lem-sfb-subcurve-span-weight-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/gieseker-lectures-moduli-curves-tifr69.pdf",
+    "place": "Proposition 1.0.7, printed pp.55--61, only the degree-bounded boundary case; maximal-subcurve argument on pp.64--65"
+   }
+  },
+  {
+   "text": "For this $T$ let $u\\ge0$ and $p=p_T\\ge0$ be as in step 4. Maximality and $\\Delta(A)<0$ give $\\Delta(A\\cup T)-\\Delta(A)>0$. On the other hand step 4 computes this difference as\n$$\\epsilon e+1-p-(1-q/2)\\ell-qu/2.$$\nSince $e\\le\\ell-1$ and $\\epsilon=1-q>0$, it is at most\n$$\\epsilon(\\ell-1)+1-p-(1-q/2)\\ell-qu/2\n=q\\bigl(1-(\\ell+u)/2\\bigr)-p\\le0,$$\nthe last inequality using $\\ell\\ge2$. This contradicts strict positivity. Thus there is no violating union:\n$$q(e_A+k_A/2)\\le h^0(A,L|_A)\\quad\\text{for every reduced union }A.$$\nThe argument allowed disconnected $A$ throughout. It used only the degree-bounded case of the span estimate, so never assumed the component interpolation being proved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/gieseker-lectures-moduli-curves-tifr69.pdf",
+    "place": "Printed pp.64--65, maximal violating subcurve; explicit difference calculation, with no finite-m error"
+   }
+  },
+  {
+   "text": "Now fix $Y$ and $E$ in the statement, and write $T$ for the irreducible component of $D$ whose normalization is $E$. Let $e=\\deg_E L$, $b=b_E$, and let $\\kappa=k_T$ count all nodes joining $T$ to other components of $D$. Since $T$ is outside $Y$, $0\\le b\\le\\kappa$. If $e\\ge b$ the first conclusion holds. Otherwise $b\\ge e+1$, so $\\kappa\\ge e+1$. Step 7 with $A=T$, and steps 3--4, give\n$$q(e+\\kappa/2)\\le h^0(T,L)=e+1-p_T.$$\nUsing $\\kappa\\ge e+1$ and $q=1-\\epsilon$, this implies\n$$(1-3\\epsilon)e\\le1+\\epsilon-2p_T.$$\nThe left side is positive, so the integer $p_T\\ge0$ is zero. If $e\\ge2$, the left side is at least $2-6\\epsilon>1+\\epsilon$ because $\\epsilon<1/9<1/7$, a contradiction. Therefore $e=1$. The same inequality before substituting $\\kappa$ gives\n$$\\kappa\\le2(1+\\epsilon)/(1-\\epsilon)<5/2.$$\nSince $\\kappa\\ge b\\ge2$ are integers, $\\kappa=b=2$. Thus $e=b-1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 3.2 Theorem 8 proof step (9), printed p.14; component consequence of the explicitly derived subcurve inequality"
+   }
+  },
+  {
+   "text": "In the exceptional case $T$ is a proper integral curve, $H^0(T,\\mathcal O_T)=k$ by step 4, $H^1(T,\\mathcal O_T)=0$ since $p_T=0$, and $\\deg_T(L|_T)=e=1$ by step 3. Hence [lem-trf-pointed-genus-zero-projective-line] gives $T\\cong\\mathbf P^1_k$. In particular $T$ is smooth. The normalization is an isomorphism over the smooth locus by [lem-trf-nodal-normalization-adjunction], so $E\\to T$ is an isomorphism. Also step 3 gives $h^0(T,L|_T)=2$. Let $U$ be the image of ambient linear forms in this space. These coordinate sections generate $L|_T$ at every point. If $\\dim U=1$, its generator is nowhere zero and trivializes $L|_T$, whose degree would then be $\\chi(\\mathcal O_T)-\\chi(\\mathcal O_T)=0$, contradicting degree one. Thus $\\dim U=2$ and $U=H^0(T,L|_T)$. Its embedding in its own linear span is therefore the complete degree-one embedding of $\\mathbf P^1$, exactly a rational normal component in the stated convention. With $e=b-1$ from step 8 this proves the second alternative. The cases $Y=\\varnothing$ or no complementary component are already covered by $b=0$ or vacuity.",
+   "uses": [
+    "lem-trf-pointed-genus-zero-projective-line",
+    "lem-trf-nodal-normalization-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C6T, lemma-genus-zero-positive-degree, degree-one projective-line characterization as stated by the cited existing node; normalization on the smooth locus"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-nodal-subcurve-boundary",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "pqf-def-cohomology",
+  "lem-pc-coherent-hi",
+  "lem-trf-nodal-normalization-quotient",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "def-pc-degree-line-bundle",
+  "lem-sc-global-functions",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "lem-sfb-subcurve-span-weight-bound",
+  "lem-trf-pointed-genus-zero-projective-line",
+  "lem-trf-nodal-normalization-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/gieseker-lectures-moduli-curves-tifr69.pdf",
+  "place": "Reconstruction from Gieseker Proposition 1.0.7 and the maximal violating subcurve argument, printed pp.55--61,64--65, read online at https://doczz.net/doc/7664568/lectures-on-moduli-of-curves---school-of-mathematics--tifr; Morrison Section 3.2 Theorem 8 step (9), read at https://arxiv.org/pdf/0810.2340. Both local PDFs WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a Hilbert numerically semistable nonspecial nodal curve each complementary component has degree at least its boundary node count, except rational normal curves of degree one less",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"ChevalleyThm.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"A function that computes a numerical bound used in the context of Chevalley's theorem for multivariate polynomials. It takes natural numbers $k$, $m$, $n$ and a multiset $d$ of elements of type $\\\\text\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℕ}, 2 < n → ↑n ≠ 0 → 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℕ),\\n  (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) (n : ℤ),\\n  (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_pos\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (W : WeierstrassCurve R) {n : ℤ}, 2 < n.natAbs → ↑n ≠ 0 → 0 < (W.preΨ n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is an integer with $ |n| > 2 $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-division polynomial $ \\\\Psi_n $ associa\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lagrange polynomial interpolation and Chevalley degree bounds do not give Gieseker component interpolation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gieseker component interpolation bound for restrictions of linear forms to normalized components of subcurves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"The function computes a degree bound for Chevalley's theorem by taking $k + n$ and a function that adds 1 to the count of each natural number obtained from mapping $\\\\text{Fin.val}$ over the multiset $\"}\n  {\"name\": \"ChevalleyThm.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (m : ℕ) → ℕ → Multiset (Fin m) → ℕ\", \"doc\": \"A function that computes a numerical bound used in the context of Chevalley's theorem for multivariate polynomials. It takes natural numbers $k$, $m$, $n$ and a multiset $d$ of elements of type $\\\\text\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (ℕ → ℕ) → ℕ → ℕ\", \"doc\": \"A function that takes a natural number $n$, a function $f : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, and another natural number $m$, returning a natural number used to establish well-founded recursion in the conte\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"ℕ → (ℕ → ℕ) → ℕ → ℕ\", \"doc\": \"A function that computes a degree bound for multivariate polynomials, taking a natural number $n$, a function $f : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, and an element of the sum type $\\\\mathbb{N} \\\\oplus \\\\mathbb\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k : ℕ) (D : ℕ → ℕ) (n : ℕ),\\n  ChevalleyThm.MvPolynomialC.numBound k D (n + 1) =\\n    ChevalleyThm.MvPolynomialC.numBound k D n * ChevalleyThm.MvPolynomialC.degBound k D n * D n\", \"doc\": \"For natural numbers $k, n$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the numerical bound at $n+1$ satisfies $\\\\text{numBound}(k, D, n+1) = \\\\text{numBound}(k, D, n) \\\\cdot \\\\text{degBound}(k, D, n) \\\\c\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_mono\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {k₁ k₂ : ℕ} {D₁ D₂ : ℕ → ℕ},\\n  k₁ ≤ k₂ →\\n    ∀ (n : ℕ),\\n      (∀ i < n, D₁ i ≤ D₂ i) → ChevalleyThm.MvPolynomialC.numBound k₁ D₁ n ≤ ChevalleyThm.MvPolynomialC.numBound k₂ D₂ n\", \"doc\": \"For natural numbers $k₁ ≤ k₂$ and functions $D₁, D₂ : ℕ → ℕ$ satisfying $D₁(i) ≤ D₂(i)$ for all $i < n$, the numerical bound function satisfies $\\\\text{numBound}(k₁, D₁, n) ≤ \\\\text{numBound}(k₂, D₂, n)\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.numBound_casesOn_succ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ (k₀ k : ℕ) (D : ℕ → ℕ) (n : ℕ),\\n  ChevalleyThm.MvPolynomialC.numBound k₀ (fun x => Nat.casesOn x k D) (n + 1) =\\n    ChevalleyThm.MvPolynomialC.numBound (k₀ * k) ((k₀ * k) ^ (k₀ * k) • D) n\", \"doc\": \"For natural numbers $k_0, k, n$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the numerical bound for $n+1$ satisfies: $$\\\\text{numBound}(k_0, \\\\text{casesOn}(k, D), n+1) = \\\\text{numBound}(k_0 \\\\cdot k, \"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_le_degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {k₁ k₂ : ℕ} {D₁ D₂ : ℕ → ℕ},\\n  k₁ ≤ k₂ →\\n    ∀ (n : ℕ),\\n      (∀ i < n, D₁ i ≤ D₂ i) → ChevalleyThm.MvPolynomialC.degBound k₁ D₁ n ≤ ChevalleyThm.MvPolynomialC.degBound k₂ D₂ n\", \"doc\": \"For natural numbers $k_1 \\\\leq k_2$, functions $D_1, D_2 : \\\\mathbb{N} \\\\to \\\\mathbb{N}$ satisfying $D_1(i) \\\\leq D_2(i)$ for all $i < n$, and any $n \\\\in \\\\mathbb{N}$, the degree bound computed with paramet\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lagrange polynomial interpolation and Chevalley degree bounds do not give Gieseker component interpolation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"interpolation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lagrange polynomial interpolation and Chevalley degree bounds do not give Gieseker component interpolation."
+  },
+  {
+   "tool": "grep",
+   "query": "Gieseker|rationalNormal|rational_normal|subcurve.*degree",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lagrange polynomial interpolation and Chevalley degree bounds do not give Gieseker component interpolation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Node evaluation interpolation and degree bounds on components of a Hilbert semistable curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Lagrange.degree_interpolate_le\", \"module\": \"Mathlib.LinearAlgebra.Lagrange\", \"type\": \"(hvs : Set.InjOn v s) : (interpolate s v r).degree ≤ ↑(#s - 1)\", \"doc\": \"For a finite set $ s $ and a function $ v $ that is injective on $ s $, the degree of the interpolating polynomial $ \\\\text{interpolate}(s, v, r) $ is at most $ |s| - 1 $, where $ |s| $ denotes the car\"}\n  {\"name\": \"Lagrange.eval_interpolate_at_node\", \"module\": \"Mathlib.LinearAlgebra.Lagrange\", \"type\": \"(hvs : Set.InjOn v s) (hi : i ∈ s) : eval (v i) (interpolate s v r) = r i\", \"doc\": \"For any finite set $ s $, injective function $ v $ on $ s $, and a function $ r $ assigning values to elements of $ s $, evaluating the interpolating polynomial $ \\\\text{interpolate}(s, v, r) $ at the \"}\n  {\"name\": \"MvPolynomial.aeval_natDegree_le\", \"module\": \"Mathlib.RingTheory.Polynomial.Basic\", \"type\": \"{R : Type*} [CommSemiring R] {m n : ℕ} (F : MvPolynomial σ R) (hF : F.totalDegree ≤ m) (f : σ → Polynomial R)\\n  (hf : ∀ i, (f i).natDegree ≤ n) : (MvPolynomial.aeval f F).natDegree ≤ m * n\", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ an index type, and $ F \\\\in R[\\\\sigma] $ a multivariate polynomial with total degree $ \\\\leq m $. If each variable in $ F $ is substituted by a univariate \"}\n  {\"name\": \"Lagrange.eval_interpolate_not_at_node'\", \"module\": \"Mathlib.LinearAlgebra.Lagrange\", \"type\": \"(hvs : Set.InjOn v s) (hs : s.Nonempty) (hx : ∀ i ∈ s, x ≠ v i) :\\n  eval x (interpolate s v r) =\\n    (∑ i ∈ s, nodalWeight s v i * (x - v i)⁻¹ * r i) / ∑ i ∈ s, nodalWeight s v i * (x - v i)⁻¹\", \"doc\": \"Let $ s $ be a non-empty finite set, $ v : \\\\iota \\\\to F $ a function injective on $ s $, and $ x \\\\in F $ such that $ x \\\\ne v(i) $ for all $ i \\\\in s $. The evaluation of the Lagrange interpolating polyn\"}\n  {\"name\": \"Lagrange.interpolate_poly_eq_self\", \"module\": \"Mathlib.LinearAlgebra.Lagrange\", \"type\": \"(hvs : Set.InjOn v s) {P : Polynomial F} (hP : P.degree < s.card) : interpolate s v (fun i => P.eval (v i)) = P\", \"doc\": \"Let $ F $ be a field, $ s $ a finite set, and $ v $ a function injective on $ s $. If $ P $ is a polynomial over $ F $ with $ \\\\deg(P) < |s| $, then the Lagrange interpolation polynomial constructed fr\"}\n  {\"name\": \"Polynomial.hilbertPoly\", \"module\": \"Mathlib.RingTheory.Polynomial.HilbertPoly\", \"type\": \"(p : F[X]) : (d : ℕ) → F[X]\", \"doc\": \"For a polynomial $ p $ and natural number $ d $, the Hilbert polynomial is defined recursively as the sum over the support of $ p $ of $ (\\\\text{coefficient of } p \\\\text{ at } i) \\\\cdot \\\\text{preHilbert\"}\n  {\"name\": \"Lagrange.eval_nodal_at_node\", \"module\": \"Mathlib.LinearAlgebra.Lagrange\", \"type\": \"{i : ι} (hi : i ∈ s) : eval (v i) (nodal s v) = 0\", \"doc\": \"For any index $i$ in the finite set $s$, evaluating the Lagrange nodal polynomial $\\\\prod_{j \\\\in s} (X - v_j) \\\\in R[X]$ at the element $v_i$ yields zero, i.e., $\\\\prod_{j \\\\in s} (v_i - v_j) = 0$.\"}\n  {\"name\": \"Lagrange.degree_interpolate_lt\", \"module\": \"Mathlib.LinearAlgebra.Lagrange\", \"type\": \"(hvs : Set.InjOn v s) : (interpolate s v r).degree < #s\", \"doc\": \"For a finite set $ s $ and a function $ v $ injective on $ s $, the degree of the Lagrange interpolating polynomial $ \\\\text{interpolate}(s, v, r) $ satisfies $ \\\\deg(\\\\text{interpolate}(s, v, r)) < \\\\#s \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: Lagrange polynomial interpolation and Chevalley degree bounds do not give Gieseker component interpolation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Hilbert numerically semistable nodal curve the degree on each normalized component is at least its boundary node count except rational normal components of degree one less",
+   "results": "{\"t\": \"2026-10-23T09:50:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a Hilbert numerically semistable nodal curve the degree on each normalized component is at least its boundary node count except rational normal components of degree one less\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"WeierstrassCurve.natDegree_preΨ_pos\", \"WeierstrassCurve.natDegree_preΨ'_pos\", \"WeierstrassCurve.natDegree_preΨ₄_le\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\"], \"digest\": \"5d9c30c7f78e4d75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "grep",
+   "query": "Gieseker|rationalNormal|rational_normal|subcurve.*degree",
+   "results": "{\"t\": \"2026-10-23T09:51:39Z\", \"tool\": \"grep\", \"query\": \"Gieseker|rationalNormal|rational_normal|subcurve.*degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert semistability bounds degree of each curve component relative to the number of attaching nodes",
+   "results": "{\"t\": \"2026-10-23T09:51:39Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert semistability bounds degree of each curve component relative to the number of attaching nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"WeierstrassCurve.natDegree_preΨ₄_le\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_Φ_le\", \"Polynomial.hilbertPoly_add_left\", \"Polynomial.natDegree_hilbertPoly_of_ne_zero\", \"WeierstrassCurve.natDegree_preΨ_le\", \"Polynomial.hilbertPoly_eq_zero_of_le_rootMultiplicity_one\"], \"digest\": \"89644856e89904c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"degree\"",
+   "results": "{\"t\": \"2026-10-23T09:51:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"degree\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.residueDegree\", \"AlgebraicGeometry.Scheme.Hom.residueDegree_id\", \"AlgebraicGeometry.Scheme.Hom.residueDegree_eq_finrank\", \"AlgebraicGeometry.AlgebraicCycle.degree\", \"AlgebraicGeometry.AlgebraicCycle.degree_single\", \"AlgebraicGeometry.AlgebraicCycle.degree_apply\", \"AlgebraicGeometry.AlgebraicCycle.degree_eq_map_of_unique\"], \"digest\": \"a8ed1556633c93bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chow semistability of a complete nonspecial nodal curve implies the balanced degree inequality for every subcurve",
+   "results": "{\"t\": \"2026-10-23T09:55:52Z\", \"tool\": \"leanfinder\", \"query\": \"Chow semistability of a complete nonspecial nodal curve implies the balanced degree inequality for every subcurve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"ChevalleyThm.numBound\", \"WeierstrassCurve.natDegree_preΨ_le\", \"ChevalleyThm.MvPolynomialC.numBound_succ\", \"ChevalleyThm.degBound\"], \"digest\": \"537cf2d4a30cdc15\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "grep",
+   "query": "genusZero|genus_zero|genus.*zero|degreeOne|degree_one",
+   "results": "{\"t\": \"2026-10-23T10:06:17Z\", \"tool\": \"grep\", \"query\": \"genusZero|genus_zero|genus.*zero|degreeOne|degree_one\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\"], \"digest\": \"8d2d4688b11e8b97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Characterization of the projective line by genus zero and an invertible sheaf of degree one",
+   "results": "{\"t\": \"2026-10-23T10:06:17Z\", \"tool\": \"leansearch\", \"query\": \"Characterization of the projective line by genus zero and an invertible sheaf of degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.smul_infty_eq_ite\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.zero_apply\", \"AlgebraicGeometry.Proj.one_apply\", \"Module.Invertible.instProjective\", \"AlgebraicGeometry.Proj.toLocallyRingedSpace\", \"LinearAlgebra.Projectivization.termℙ\"], \"digest\": \"c37d312df13a66f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "{\"t\": \"2026-10-23T10:06:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"genus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper integral curve with H1 of the structure sheaf zero and a degree one line bundle is the projective line and that bundle has two sections giving an isomorphism",
+   "results": "{\"t\": \"2026-10-23T10:06:18Z\", \"tool\": \"leanfinder\", \"query\": \"A proper integral curve with H1 of the structure sheaf zero and a degree one line bundle is the projective line and that bundle has two sections giving an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.PointClass\", \"WeierstrassCurve.Projective.toAffine\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"WeierstrassCurve.Projective.Point.fromAffine_some\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply\"], \"digest\": \"f7a7e3c4e5cce464\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive degree line bundle on a genus zero proper curve has d plus one global sections and defines a closed immersion into projective d space",
+   "results": "{\"t\": \"2026-10-23T10:12:06Z\", \"tool\": \"leansearch\", \"query\": \"Positive degree line bundle on a genus zero proper curve has d plus one global sections and defines a closed immersion into projective d space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"Polynomial.hilbertPoly_zero_left\", \"WeierstrassCurve.natDegree_preΨ_pos\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections.congr_simp\"], \"digest\": \"7433f13c1e9ccc9c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a proper genus zero curve with global functions k every positive degree invertible sheaf of degree d has d plus one sections is nonspecial and is very ample",
+   "results": "{\"t\": \"2026-10-23T10:12:07Z\", \"tool\": \"leanfinder\", \"query\": \"On a proper genus zero curve with global functions k every positive degree invertible sheaf of degree d has d plus one sections is nonspecial and is very ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\"], \"digest\": \"4fa00cefd3ae14a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "grep",
+   "query": "genus|veryAmple|very_ample",
+   "results": "{\"t\": \"2026-10-23T10:21:40Z\", \"tool\": \"grep\", \"query\": \"genus|veryAmple|very_ample\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"veryAmple\"",
+   "results": "{\"t\": \"2026-10-23T10:21:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"veryAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial, residue-degree, Proj and elliptic-curve declarations do not assert component interpolation or the genus-zero line-bundle tools examined during proof development; no new leaf is claimed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gieseker-potential-stability",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, step (9), printed p.14: component interpolation prerequisite before the subcurve inequality. Agent leading-weight formulation of that step (the span flags used have weights zero and one). Local PDF WANTED.",
+   "via": [
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-gieseker-component-interpolation",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved nonspeciality and the normalized degree/Euler identities for arbitrary unions, then derived the subcurve inequality by a maximal violating union using only the degree-bounded case of the existing span-weight estimate. Applied it to one component, forcing any exception to be a line with two attachments, and checked completeness in its own span. No new nodes and no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, step (9), printed p.14: component interpolation prerequisite before the subcurve inequality. Agent leading-weight formulation of that step (the span flags used have weights zero and one). Local PDF WANTED. Current latest blueprint direct-images proof (3) remains unchanged; this is a supporting moduli/projectivity lemma along the inherited route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-reduced-curve-normalization-genus",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-fibre-degree-ample-criterion",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-nodal-normalization-quotient",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-nodal-curve-normalization-euler",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-pointed-genus-zero-projective-line",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-nodal-normalization-adjunction",
+    "why": "Generic proper-curve, normalization, coherent-cohomology or degree tool used only for its explicitly quoted statement; this unit has no replacement for this auxiliary algebraic-geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-reduced-curve-normalization-genus",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-coherent-hi",
+  "lem-trf-nodal-normalization-quotient",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-sc-global-functions",
+  "lem-trf-nodal-curve-normalization-euler",
+  "lem-trf-pointed-genus-zero-projective-line",
+  "lem-trf-nodal-normalization-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-ee541c95a",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-ee541c95a (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged from live/side-live (still unsplit there), there are no new nodes, proof_deps equals the union of the step uses, there is no cycle and no SGA. Steps 1-4 match the cited statements: properness and Noetherianity; normalization and genus; nodal subcurve boundary; ampleness, so component degrees are positive; nonspeciality of every union through the coherent kernel, H^2 vanishing and the long exact sequence; the normalization-quotient degree identity; the nodal Euler formula. Step 5: the Hilbert-polynomial comparison holds for all m, so e_D=d and Delta(D)=Delta(empty)=0. Step 6: span-weight-bound is applied only in its first alternative; I checked each of its hypotheses, and the 0/1 flag gives Delta(A)>=0. Steps 7-8: I recomputed the defect difference eps*e+1-p-(1-q/2)l-qu/2 <= q(1-(l+u)/2)-p <= 0, and the component bound (1-3eps)e <= 1+eps-2p, which forces p=0 and e=1; kappa < 5/2 uses eps<1/9 sharply. Step 9: 0C6T-type P^1, the normalization is an isomorphism over the smooth locus, and the coordinate image U is all of H^0, so the component is a line. Small cases tested: irreducible D, a bridge line, a tail line, kappa=3 excluded. Batch-5: all 11 flagged citations are generic curve or coherent-cohomology tools (normalization genus, nodal boundary, ampleness by degree, Euler formula, genus-zero P^1, coherent finiteness, chi additivity, H^0(O)=k, Hilbert polynomial). Their closures reach no trace-formula or Poincare-duality theorem, no nt-assume leaf and no sk-thm-trace-transport (only generic pod tools and a trf definition). Tool_uses accepted as generic. Advisory: parent potential-stability step 9 now re-derives the step-7 inequality (redundant but correct). Morrison and Gieseker are absent locally (WANTED); proof_origin agent."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GiesekerComponentInterpolation",
+  "declaration": "AlgebraicGeometry.gieseker_component_interpolation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GiesekerComponentInterpolation.lean",
+  "statement": "theorem gieseker_component_interpolation (k : Type u) [Field k] [IsAlgClosed k] (g d n : ℕ) (hg : 2 ≤ g) (hd : 9 * (g - 1) < d) (hr : n + 2 + g = d + 1) (D : Scheme.{u}) [ConnectedSpace D] [IsReduced D] (i : D ⟶ ℙ(HilbertPlucker.Coordinates.{u} n; Spec (.of k))) [IsClosedImmersion i] (f : D ⟶ Spec (.of k)) (hf : i ≫ (ℙ(HilbertPlucker.Coordinates n; Spec (.of k)) ↘ Spec (.of k)) = f) [LocallyOfFinitePresentation f] (hpure : D.IsPureDimension 1) (hnodal : ∀ x : D, x ∉ f.smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (D.presheaf.stalk x)) (D.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) (hP : ProjectiveHilbertPolynomial.IsCoordinatePolynomial k (n + 1) i (Polynomial.C (d : ℚ) * Polynomial.X + Polynomial.C (1 - (g : ℚ)))) (L : D.Modules) (hL : (Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1) ≅ L) (hcomplete : Function.Bijective (fun v : HilbertPlucker.Coordinates n → k ↦ ∑ j : HilbertPlucker.Coordinates n, f.appTop.hom ((Scheme.ΓSpecIso (.of k)).inv (v j)) • hL.hom.app ⊤ (((Scheme.Modules.tensorPullbackSectionAdjunction i).unit.app (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1)).app ⊤ (ProjectiveSpace.twistOneSection (HilbertPlucker.Coordinates n) (Spec (.of k)) j)))) (h0 : Module.finrank k (UniformProjectiveFibreVanishing.cohomology k f L 0) = n + 2) (h1 : Subsingleton ((RingedSpace.moduleCohomology D.toRingedSpace 1).obj L)) (ρ : ∀ m : ℕ, ModuleCat.of k (MvPolynomial.homogeneousSubmodule (HilbertPlucker.Coordinates.{u} n) k m) ⟶ BoundedHilbertWeight.sections k n i m) (hρ : ∀ (m : ℕ) (p : MvPolynomial.homogeneousSubmodule (HilbertPlucker.Coordinates.{u} n) k m) (j : HilbertPlucker.Coordinates.{u} n), ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) (m : ℤ))).presheaf.map (homOfLE le_top).op ((UniformProjectiveFibreVanishing.zeroSections _).hom (ρ m p)) = Scheme.Modules.tensorPullbackSection i (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) (m : ℤ)) (ProjectiveSpace.standardOpen _ (Spec (.of k)) j) (ProjectiveSpace.chartRingEquiv _ k j (MvPolynomial.dehomogenizeX k j p.val) • ProjectiveSpace.twistGenerator _ (Spec (.of k)) (m : ℤ) j)) (a : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (BoundedHilbertWeight.LinearForms k n) → (HilbertPlucker.Coordinates.{u} n → ℕ) → ℚ) (ha : ∀ (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (BoundedHilbertWeight.LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ), (∀ j, w j ≤ 4) → ∃ m₀ A : ℕ, ∀ m : ℕ, m₀ ≤ m → |(BoundedHilbertWeight.weight (ρ m) b w : ℚ) - a b w * (m : ℚ)^2| ≤ (A : ℚ) * m) (hweight : ∀ (b : Module.Basis (HilbertPlucker.Coordinates.{u} n) k (BoundedHilbertWeight.LinearForms k n)) (w : HilbertPlucker.Coordinates.{u} n → ℕ), (∀ j, w j ≤ 4) → a b w ≤ (d : ℚ) / (n + 2 : ℕ) * ∑ j, (w j : ℚ)) (S : Set (Set D)) (hS : S ⊆ irreducibleComponents D) (T : Scheme.{u}) [IsIntegral T] (j : T ⟶ D) [IsClosedImmersion j] (hT : Set.range j ∈ irreducibleComponents D) (houtside : Set.range j ∉ S) (e : ℤ) (he : e = @Scheme.Modules.degree k _ T.normalization ⟨T.fromNormalization ≫ j ≫ f⟩ ((Scheme.Modules.tensorPullback (T.fromNormalization ≫ j)).obj L)) (b : ℕ) (hb : b = ((T.fromNormalization ≫ j) ⁻¹' ⋃₀ S).ncard) : (b : ℤ) ≤ e ∨ (IsIso T.fromNormalization ∧ e = (b : ℤ) - 1 ∧ ∃ φ : T ≅ ℙ(HilbertPlucker.Coordinates.{u} 0; Spec (.of k)), φ.hom ≫ (ℙ(HilbertPlucker.Coordinates 0; Spec (.of k)) ↘ Spec (.of k)) = j ≫ f ∧ Nonempty ((Scheme.Modules.tensorPullback (j ≫ i)).obj (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1) ≅ (Scheme.Modules.tensorPullback φ.hom).obj (ProjectiveSpace.twist (HilbertPlucker.Coordinates 0) (Spec (.of k)) e)) ∧ Function.Surjective (fun v : HilbertPlucker.Coordinates n → k ↦ ∑ l : HilbertPlucker.Coordinates n, (j ≫ f).appTop.hom ((Scheme.ΓSpecIso (.of k)).inv (v l)) • @id (Γ((Scheme.Modules.tensorPullback (j ≫ i)).obj (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1), ⊤)) (((Scheme.Modules.tensorPullbackSectionAdjunction (j ≫ i)).unit.app (ProjectiveSpace.twist (HilbertPlucker.Coordinates n) (Spec (.of k)) 1)).app ⊤ (ProjectiveSpace.twistOneSection (HilbertPlucker.Coordinates n) (Spec (.of k)) l))))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary restriction arrows are fixed on every standard chart, and ha characterizes the unique leading coefficients of the existing minimum monomial weights. Subcurves are arbitrary subsets of irreducible components; normalized complementary components are represented by integral closed component inclusions outside that subset. The exceptional own-span embedding is expressed by a k-isomorphism to P1, identification of the hyperplane line with O(e), and surjectivity of ambient linear forms. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-329865149",
+  "group": "NG",
+  "result": "pass",
+  "note": "Item changed only in lean + stmt_deps (+def-weil-pure-dimension, landed); lean.statement verbatim; single sorry, no defs, docstrings with source and all 9 proof steps, imports exist, lines <=100. Clause check: alg. closed k, g>=2, d>9(g-1), r=n+2 (r>=9, no case lost); closed embedding, connected, reduced, pure dim 1, node completion at non-smooth points (same form as landed GiesekerPotentialStability); coordinate Hilbert polynomial dm+1-g; L≅O(1), coordinate map k^r→Γ(D,L) bijective, h0=r, H1=0; ρ/hρ verbatim from lem-sfb-bounded-hilbert-weight-polynomials; a pinned uniquely by quadratic+O(m) estimate, existence from the dependency (B=4,c=1-g); hweight a<=d/r Σw for w<=4; arbitrary component subset S; T integral closed component outside S, E=T.normalization; degree χ(L)-χ(O) over k; b = ncard of preimage of ⋃S (excludes self-nodes); conclusion b<=e or (E≅T, e=b-1, k-iso to P1 with L|T≅O(e) and ambient forms surjective = complete degree-e embedding in own span). Edge cases Y empty/all, irreducible D, bridge/tail, g=2 d=10 checked. No existing rational-normal definition. Advisory only: plain defs (weight/sections/IsCoordinatePolynomial/Coordinates/cohomology) reached via theorem stmt_dep, as accepted in Q127. No compile (no file changed)."
+ }
+}

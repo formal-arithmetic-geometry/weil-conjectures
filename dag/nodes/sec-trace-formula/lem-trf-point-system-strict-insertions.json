@@ -1,0 +1,127 @@
+{
+ "id": "lem-trf-point-system-strict-insertions",
+ "kind": "lemma",
+ "title": "Strict natural point insertions and their tower composition",
+ "statement": "Let k be algebraically closed, h an automorphism of Spec k, l a prime and E a finite extension of Q_l. Use the fixed functors, Maps and predicates of [def-trf-point-system-insertion-data]. Let P : Maps satisfy SectionLaws. There is a family of natural transformations u_r : sections -> G_r followed by sections with the original restriction formula and tower composition clauses of StrictInsertionLaws. Concretely, u is restriction along the final-object arrow for h^(r+1), as a map of the entire original module tower. Its successive restrictions agree with direct restriction through P.t, on entire towers. No assertion about chain or derived insertions, coefficient composition or tensor-comparison existence is included.",
+ "stmt_deps": [
+  "def-trf-point-system-insertion-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+ },
+ "proof": [
+  {
+   "text": "Construct the component at each level by restriction along the final-object point arrow. Project completed scalar normalization to every finite coefficient ring; normalization of constants and limit extensionality imply linearity over the common integral scalars. Naturality of original abelian restrictions proves compatibility with every semilinear transition and every system morphism. SectionLaws identifies this map with sections of G through b. Use [def-trf-point-restriction-coordinates], [def-weil-inverse-image-pullback-comparison] and [lem-coef-semilinear-derived-sections].",
+   "uses": [
+    "def-trf-point-restriction-coordinates",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  },
+  {
+   "text": "The two restriction arrows compose to the direct power arrow. The section normalization of P.t and presheaf functoriality prove the tower identity, retaining the actual quotient-linear transitions. Extensionality in the coefficient index proves equality of tower maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-point-restriction-coordinates",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a scheme isomorphism has normalized module tensor unit and compositor compatible with coefficient restriction of towers",
+   "results": "Eight scheme pullback carrier tensorCongr and pullbackSpecIso results. These concern scheme pullbacks, not normalized comparisons of quotient-linear module systems. Existing project APIs in IsoSectionwiseInverseImage, InverseImagePullbackComparisonDerived and PointSheafInsertionCalculus were read and reused.",
+   "date": "2026-10-26",
+   "verdict": "no direct Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "Seven hits: pushforwardComp, pushforward_id_comp, pushforward_comp_id, pushforward_assoc and component equations. Read PushforwardContinuous.lean:139–151: these are the ordinary module reindexing compositors, useful ingredients but not the coefficient-system normalization or point insertion assertion.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pointSheafInsertion|mapHomologicalComplexCompIso",
+   "results": "Twenty-five Mathlib hits, including module-sheaf pushforwardComp and presheaf composition. Local rg found the point-specific one-level insertion calculus in Sheaf.AlgebraicGeometry.PointSheafInsertionCalculus; its theorem fixes the coefficient universe to the site universe and has no entire quotient-linear system. No direct theorem for the present independent universes and whole systems.",
+   "date": "2026-10-26",
+   "verdict": "no direct Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves along powers of an automorphism gives natural maps on global sections whose insertions compose",
+   "results": "Eight hits including Sheaf.ΓRes_map, Sheaf.ΓRes_naturality, Sheaf.natTransΓRes and SheafOfModules.sectionsMap_comp. These give ordinary global-to-local restriction and composition, not linearity over completed common scalars or compatibility with the original semilinear coefficient transitions.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only; no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemInsertionComposition",
+  "date": "2026-10-26",
+  "group": "R1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-point-system-insertion-composition",
+   "place": "Separation of the existing data and the sheaf-level steps from the coefficient and localization arguments."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemStrictInsertions",
+  "file": "lean/Sheaf/Paper/PointSystemStrictInsertions.lean",
+  "declaration": "WeilConjectures.PointSystemInsertion.pointSystemStrictInsertions",
+  "statement": "theorem pointSystemStrictInsertions [IsAlgClosed k] (P : Maps k h l E)\n    (_hP : SectionLaws k h l E P) :\n    ∃ u : ∀ r : ℕ, sections k l E ⟶ G k h l E r ⋙ sections k l E,\n      (∀ (r : ℕ) (M : coefficientSequenceModules l E (Spec (.of k))) (n : ℕ),\n        HEq (fun x : ((sections k l E).obj M).obj (op n) ↦\n            (((u r).app M).app (op n)) x)\n          (fun x : M.val.obj (op (n, ProEt.mk (𝟙 (Spec (.of k))))) ↦\n            M.val.presheaf.map\n              (Prod.mkHom (𝟙 n) (pointRestrictionArrow (h ^ (r + 1)).hom)).op x)) ∧\n      (∀ (m : ℕ) (M : coefficientSequenceModules l E (Spec (.of k))),\n        (u (m + 1)).app M = (u m).app M ≫ (u 0).app ((G k h l E m).obj M) ≫\n          (sections k l E).map ((P.t m).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acb6c",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070715-L-3644835",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acb6c",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070715-L-3644835",
+  "kind": "interface",
+  "note": "independent cc review: published PointSystemInsertionComposition.lean vs delivered PointSystemInsertionData.lean (verbatim extraction, only 9 private imports dropped); item proof vs node proof_deps; the two new sorry statements vs the item's existing Section/RestrictionComposition/Tensor/Transition/StrictInsertion conjuncts; sandbox compile of the 4 modules + importer LocalNormalizationStrictRealization + #print axioms"
+ }
+}

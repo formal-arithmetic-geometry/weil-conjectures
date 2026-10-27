@@ -1,0 +1,307 @@
+{
+ "id": "lem-fd-pullback-augmentation-counit-matching",
+ "kind": "statement",
+ "title": "Matching pullback quotient augmentations and entire-tower counits",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All schemes $W$ below are noetherian and finite dimensional with $\\ell$ invertible, with the meaning and the common full integral constructible categories of [lem-weil-pbc-integral-stratified-perfect-characterization]. For finite $E\\subset\\Omega$ over $\\mathbf Q_\\ell$, put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $R_{E,W}=\\lim_{n\\geq1}(A_{E,n})_W$ on the small pro-etale site, and use framework and PBC completed pullbacks $F^s_{h,E},F^p_{h,E}$ of [def-weil-derived-pullback-tensor-hom, def-weil-pbc-completed-pullback]. Write $I_{W,E}$ for restriction along the quotient-normalized coefficient identity, giving the integral identity equivalence. All equalities below use these fixed identity transports; we suppress $I$ when source and target already have the same module presentation. For a scheme isomorphism $h:U\\simeq T$, let $G_{h,E}$ be ordinary derived module pullback on the completed rings. For a flat-term K-flat representative $P$ over $R_{E,T}$ set\n$$Q_{h,E}(P)_n=\\operatorname{Res}_n h_n^*(P\\otimes_{R_{E,T}}(A_{E,n})_T),\\qquad H(Q)=\\operatorname{Cone}(1-s_Q)[-1],$$\nwith the actual quotient transitions and $s_Q((x_n)_n)=(t_nx_{n+1})_n$ [def-pur-integral-derived-operations].\nFor each such tower, use the normalized derived comparison of [lem-weil-strict-roos-comparison],\n$$\\rho_Q=[\\iota_I]^{-1}[H(q)]:H(Q)\\xrightarrow{\\sim}R\\lim Q,$$\nwhere $q:Q\\to I_\\bullet$ is a K-injective tower resolution with injective terms and $\\iota_I:\\lim I_\\bullet\\to H(I_\\bullet)$ has coordinates $z\\mapsto(0,z)$. Write $b^{\\rm amb}_{h,E}:IF^s_{h,E}\\to F^p_{h,E}I$ for this comparison with the defining realization identifications, and $b^{\\rm int}_{h,E}$ for its restriction to the full integral constructible categories.\nSupply coefficient comparison data $C_U,C_T$ of [def-fd-coefficient-comparison-datum] with these underlying identity equivalences and the specified completion scalar maps. For the quotient augmentation $\\gamma_n:G_{h,E}P\\to Q_{h,E}(P)_n$, its value on an inverse-image unit section is $\\gamma_h(p)\\mapsto\\gamma_h(p\\otimes1)\\otimes1$. The maps obey $t_n\\gamma_{n+1}=\\gamma_n$, and\n$$\\Gamma_P:G_{h,E}P\\longrightarrow H(Q),\\qquad x\\longmapsto(0,(\\gamma_nx)_n)$$\nis a chain map. If $v^p_P:G_{h,E}P\\to R\\lim Q$ is the actual PBC completion augmentation with the ordinary derived-pullback counit inserted, then $b^{\\rm amb}_{h,E,P}[\\Gamma_P]=v^p_P$. Consequently $(b^{\\rm int}_{h,E})^{-1}$, its ambient lift and its raw rationalization supply the normalized finite datum of [def-fd-finite-pullback-comparison-datum], with this actual unit-section chain map and zero shifted coordinate.\nFor $\\Delta$ the constant-tower functor, the counit transported through $\\rho_Q$ is exactly $\\epsilon_Q=[q]^{-1}\\circ[\\Delta\\lim I_\\bullet\\to I_\\bullet]$ in the derived category of entire towers. Its derived-change-of-rings adjunct is the whole quotient-system counit used in [lem-trf-integral-pullback-comparison-realization]. One simultaneous realization system of that node may be used with all these $b$; its iterated identifications are those of [lem-trf-counit-realization-substitution], retaining this counit at every intermediate constructible-complete object, for all finite coefficient fields, representatives and finite words of system operations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; agent-written extraction of returned lem-fd-whole-tower-integral-pullback-comparison proof steps 4, 5. Exact arguments retained in report.md. Supporting Stacks sources: Tag 099N, proetale.tex, lemma-pushforward-Noetherian-case (2),(5); Tag 0941, sites-cohomology.tex, lemma-derived-limit-is-ok"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-pc-kflat-complex",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "def-fd-coefficient-comparison-datum",
+  "lem-weil-strict-roos-comparison",
+  "def-fd-finite-pullback-comparison-datum",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-counit-realization-substitution",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-fd-pullback-common-strict-tower-models] with the given $h,E,P$. Its coefficient isomorphism and common strict tower identify the two realizations with $H(Q)$ and $R\\lim Q$, and identify $b^{\\rm amb}$ with $\\rho_Q=[\\iota_I]^{-1}[H(q)]$. It also supplies naturality, independence of representatives and resolutions, and restriction to the full integral constructible categories. Thus all subsequent computations may use this one quotient tower and the prescribed coefficient identity transports.",
+   "uses": [
+    "lem-fd-pullback-common-strict-tower-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; quotient augmentation and entire-tower counit normalization (agent calculation using the cited nodes)."
+   }
+  },
+  {
+   "text": "The quotient maps and module inverse image in [def-pur-integral-derived-operations, def-weil-pbc-completed-pullback] give $\\gamma_n$ by sending the unit-section generator $\\gamma_h(p)$ to $\\gamma_h(p\\otimes1)\\otimes1$; extend by the target coefficient action. Tensor balancing makes this well defined. Quotient reduction sends $1$ to $1$, so $t_n\\gamma_{n+1}=\\gamma_n$ on these generators and hence as module maps. Each map commutes with the differential, since reduction and inverse image are applied termwise. Write $a=(\\gamma_n)_n$. Then $(1-s_Q)a=0$ and $da=ad$. In the shifted-cone differential these two equations give $d\\Gamma=\\Gamma d$ for $\\Gamma=(0,a)$. Its shifted coordinate is identically zero, not a chosen homotopy. The formula for $\\gamma_n$ is functorial in chain maps $P\\to P'$ of flat-term K-flat representatives (both sides are inverse image and reduction applied termwise), so $\\Gamma$ is a natural chain map, as [def-fd-finite-pullback-comparison-datum] requires.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-pbc-completed-pullback",
+    "def-fd-finite-pullback-comparison-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; quotient augmentation and entire-tower counit normalization (agent calculation using the cited nodes)."
+   }
+  },
+  {
+   "text": "Countable products of $R_{E,U}$-modules on $U_{\\rm proet}$ are exact by [lem-weil-proetale-countable-products-exact], so [lem-weil-strict-roos-comparison] applies. More explicitly, the strict augmentation $q\\gamma:\\Delta G_{h,E}P\\to I$ factors through a chain map $\\bar\\gamma:G_{h,E}P\\to\\lim I$ by the ordinary limit universal property. The equality $H(q)\\Gamma=\\iota_I\\bar\\gamma$ holds as chain maps: both shifted coordinates vanish and the $n$-th product coordinate is $q_n\\gamma_n$. Thus $\\rho_Q[\\Gamma]=[\\bar\\gamma]$. By the strict-augmentation assertion of the Roos lemma this is the canonical derived augmentation; by the definition in [def-weil-pbc-completed-pullback] it is the actual PBC completion augmentation, including its defining ordinary derived-pullback identification. Inserting the prescribed counit/localization factors therefore gives $b^{\\rm amb}_{h,E,P}[\\Gamma_P]=v^p_P$.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; quotient augmentation and entire-tower counit normalization (agent calculation using the cited nodes)."
+   }
+  },
+  {
+   "text": "Multiply the last equality on the left by $(b^{\\rm amb})^{-1}$. This gives $(b^{\\rm amb})^{-1}v^p=[\\Gamma]$, with the ordinary derived-pullback counit and complex-localization factors still those in the defining augmentation. This is precisely the direction and normalization required by [def-fd-finite-pullback-comparison-datum]. Restrict using [lem-fd-pullback-common-strict-tower-models] and the identity transports supplied by [def-fd-coefficient-comparison-datum], obtaining $(b^{\\rm int})^{-1}$ and its stated ambient lift. In the raw localization [def-weil-rationalization-karoubi], send an integral component $f$ to $f\\otimes1$ and its inverse to $f^{-1}\\otimes1$; their composites remain identities. The integral normalization equality is carried to its rational equality by this functor. Consequently these three components, together with the actual chain map from Step 2, form the required finite datum on representatives with constructible derived image.",
+   "uses": [
+    "def-fd-finite-pullback-comparison-datum",
+    "lem-fd-pullback-common-strict-tower-models",
+    "def-fd-coefficient-comparison-datum",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; quotient augmentation and entire-tower counit normalization (agent calculation using the cited nodes)."
+   }
+  },
+  {
+   "text": "Write $c_I:\\Delta\\lim I\\to I$ for the ordinary limit cone. The whole-system counit assertion in [lem-trf-effective-comparison-realization-models] specifies $\\epsilon_Q=[q]^{-1}[c_I]$ with $R\\lim Q$ represented by $\\lim I$. Its expression on the Roos source is $[q]^{-1}[c_I]\\Delta(\\rho_Q)$. Substituting $\\rho_Q=[\\iota_I]^{-1}[H(q)]$ shows that transport back through $\\Delta(\\rho_Q)^{-1}$ gives exactly $[q]^{-1}[c_I]$; the adjacent inverse factors cancel in the derived category of towers. This calculation retains $q$ as a whole-tower quasi-isomorphism and does not infer a tower equality from its evaluations. The same cited assertion identifies the derived-change-of-rings adjunct of this arrow with the whole-system reduction/realization counit $e_Q$. The specification of [lem-trf-integral-pullback-comparison-realization] uses exactly that counit followed by the quotient-module action and tensor associators. Thus its quotient-system counit is the one just computed.",
+   "uses": [
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; quotient augmentation and entire-tower counit normalization (agent calculation using the cited nodes)."
+   }
+  },
+  {
+   "text": "Choose the simultaneous realization models of [lem-trf-effective-comparison-realization-models] for all fields and maps under consideration. They are normalized on every flat-term K-flat representative by the actual quotient transitions, quotient augmentation and zero shifted coordinate. Their $\\epsilon$ is the formula in Step 5. The natural, resolution-independent Roos comparison of [lem-weil-strict-roos-comparison] therefore identifies these defining quotient realizations with all our $b$ by the same formula $[\\iota_I]^{-1}[H(q)]$. No independent reduction isomorphisms are selected. With these primitive models, the constructions specified in [lem-trf-integral-pullback-comparison-realization] give one realization system using the same $\\epsilon$ and $e$ at every intermediate object. This supplies the claimed simultaneous system, rather than a different system for each $P$ or $E$.",
+   "uses": [
+    "lem-trf-effective-comparison-realization-models",
+    "lem-weil-strict-roos-comparison",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; quotient augmentation and entire-tower counit normalization (agent calculation using the cited nodes)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-counit-realization-substitution] to this normalized realization system, on its specified domain of normalized systems with constructible-complete intermediate realizations. For a primitive operation $O$ its comparison is $r_{O,C}=\\mathcal L(O(e_C))b_{O,\\mathcal LC}$, so the retained $e_C$ is exactly Step 5. For the empty word use the identity; appending a composable word uses $r_{vw,C}=r_{v,wC}\\widehat v(r_{w,C})$. The lemma asserts this formula independently of parenthesization and for morphisms of entire derived quotient diagrams, including inverses. Induction on the word length now gives the claimed identifications for every finite word. Its scalar-associativity and identity-inclusion clauses use the specified completion maps from the supplied coefficient data, so repeated fields and all finite coefficient extensions use the same normalization.",
+   "uses": [
+    "lem-trf-counit-realization-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence: comparison with the PBC coefficient category; quotient augmentation and entire-tower counit normalization (agent calculation using the cited nodes)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-pullback-common-strict-tower-models",
+  "def-pur-integral-derived-operations",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "def-fd-finite-pullback-comparison-datum",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-rationalization-karoubi",
+  "lem-trf-effective-comparison-realization-models",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-counit-realization-substitution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; explicit quotient-unit and normalized Roos/counit calculation, supported by Stacks Tags 099N and 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Roos realization comparison preserves the zero shifted-coordinate quotient augmentation and the entire derived-limit counit under iterated completed pullbacks",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app, localCohomology.diagramComp",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived limit comparison preserves quotient augmentations and counits",
+   "results": "8 hits: CategoryTheory.Monad.MonadicityInternal.comparisonAdjunction_counit_app, CategoryTheory.Comonad.ComonadicityInternal.counitLimitOfPreservesEqualizer, CategoryTheory.comp_comparison_hasLimit, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app, CategoryTheory.LiftLeftAdjoint.counitCoequalises, CategoryTheory.Functor.mapDerivedCategoryFactors, DerivedCategory.quotientCompQhIso, HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation.*cone|cone.*augmentation|derived.*counit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "9 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison from the homotopy inverse limit cone of a strict tower of module complexes to the K-injective derived inverse limit, preserving its augmentation",
+   "results": "8 hits: CochainComplex.cm5b, CochainComplex.cm5b.i_f_comp_assoc, HomologicalComplex.coneOfHasLimitEval_pt_d, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplex.coneOfHasLimitEval, CochainComplex.cm5b.fac, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|fullyFaithfulWhiskeringLeft",
+   "results": "15 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module/cone results do not state the specified completed pro-etale whole-tower comparison and its normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "1 hits: CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction and ordinary limit results do not supply this completed pro-etale quotient-tower comparison, chain normalization and simultaneous realization datum"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|quotient.*augmentation|augmentation.*quotient",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction and ordinary limit results do not supply this completed pro-etale quotient-tower comparison, chain normalization and simultaneous realization datum"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strict inverse sequence augmentation maps into the homotopy inverse limit cone with zero shifted coordinate",
+   "results": "8 hits: AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero, CochainComplex.augmentTruncate_inv_f_succ, CochainComplex.augmentTruncate_inv_f_zero, SSet.Augmented.StandardSimplex.shift, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, ChainComplex.augmentTruncate_inv_f_zero, CategoryTheory.Limits.limit.isoLimitCone_inv_π_assoc, CategoryTheory.CosimplicialObject.augment_hom_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction and ordinary limit results do not supply this completed pro-etale quotient-tower comparison, chain normalization and simultaneous realization datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Roos realization comparison preserves a strict quotient augmentation with zero shifted coordinate and the entire derived inverse limit counit",
+   "results": "8 hits: CategoryTheory.Idempotents.DoldKan.hη, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f, AlgebraicTopology.DoldKan.QInfty_f, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Abelian.DoldKan.comparisonN_inv_app_f, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, AlgebraicTopology.DoldKan.Q_is_eventually_constant",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction and ordinary limit results do not supply this completed pro-etale quotient-tower comparison, chain normalization and simultaneous realization datum"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of the derived constant tower inverse limit adjunction is represented by the ordinary limit cone on a K-injective tower",
+   "results": "8 hits: CategoryTheory.Limits.isLimitConeOfAdj, CategoryTheory.Adjunction.functorialityCounit', Condensed.profiniteSolidCounit, LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction, LightProfinite.isoMapCone, CategoryTheory.Limits.constLimAdj, CategoryTheory.Adjunction.functorialityCounit'_app_hom, CategoryTheory.Limits.coneOfAdj_π",
+   "date": "2026-10-22",
+   "verdict": "no match: derived adjunction and ordinary limit results do not supply this completed pro-etale quotient-tower comparison, chain normalization and simultaneous realization datum"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-whole-tower-integral-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence assigning the local Frobenius operator to the PBC Qbar coefficient category; old proof steps 7–8: identity on entire quotient towers and normalized integral coherence; returned whole-tower proof steps 4, 5",
+   "via": [
+    "lem-fd-whole-tower-integral-pullback-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-pullback-augmentation-counit-matching",
+  "worker": "stage1",
+  "summary": "Kept the statement and its entire-tower normalization. Reused the existing common-tower, Roos, effective-model and substitution statements; wrote the quotient generator and cone calculation, checked the inverse comparison orientation and raw localization, and identified the whole-system counit without using faithfulness of finite evaluation. No new nodes.",
+  "blueprint": "Final sentence of def-fd-trace-function referring to the PBC coefficient category: realizes the quotient-augmentation and counit matching extracted from whole-tower comparison steps 4 and 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact module-sheaf products verify the hypothesis of the Roos comparison; the trace-function unit contains no product theorem."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic natural Roos/derived-limit comparison with its strict-augmentation normalization; no trace-function unit result replaces this homological tool."
+   },
+   {
+    "node": "lem-trf-effective-comparison-realization-models",
+    "why": "Provides simultaneous normalized primitive realization models and the explicit whole-system counit as a generic coefficient-system tool."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Specifies the existing counit-built composition/scalar realization system, whose actual normalization is required in the item."
+   },
+   {
+    "node": "lem-trf-counit-realization-substitution",
+    "why": "Generic finite-word substitution theorem for an already supplied normalized realization system."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-trf-effective-comparison-realization-models",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-counit-realization-substitution"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-f2d63a43d",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-f2d63a43d (reviewer sub-agent of L); spot-checked: The mathematics is sound and the target is not weakened. This is a 7-step split of a statement-only Q60 child with 0 new nodes; the statement is byte-identical to live, with def-weil-rationalization-karoubi added to stmt_deps. The item is still unsplit in live and side-live, so no other group has split it; the re-split note belongs to the parent whole-tower node; there is no cycle and no SGA. Step 1: the common-tower node gives H(Q) vs R lim Q, rho_Q and b^int. Step 2 is elementary: gamma_n is balanced via c_h, t_n gamma_{n+1}=gamma_n, (1-s)a=0, and Gamma is a chain map in the (shifted, unshifted) ordering of the Roos node. FIX: I added a naturality sentence to Step 2, because def-fd-finite-pullback-comparison-datum requires a natural chain map, and added that node to the step's uses. Step 3: products-exact gives the Roos hypothesis, H(q)Gamma=iota bar-gamma on chains, the Roos augmentation clause applies, and this matches the def-weil-pbc-completed-pullback completion unit and Stacks 099N (2),(5) and 0941. Step 4: orientation checked; the datum runs PBC to framework, so (b^int)^{-1} is correct, and raw localization f maps to f tensor 1. Steps 5-7: the counit and adjunct come from effective-models and match the trf integral realization; the simultaneous models are the Roos/pullback models for the def-pur (framework) pullback; substitution is applied on its stated domain. Batch-5 flag on lem-trf-effective-comparison-realization-models: accepted. It is already in the closure of the unchanged stmt_dep lem-trf-integral-pullback-comparison-realization (the proof_deps add only the common-tower fd node), and its content is generic coefficient homological algebra, not part of the trace formula or Poincare duality. Edge cases tested: P=0, n=1, a constant tower, h=id, the empty word, E=L.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FdPullbackAugmentationCounitMatching",
+  "declaration": "WeilConjectures.fdPullbackAugmentationCounitMatching",
+  "declarations": [
+   "WeilConjectures.fdPullbackQuotientAugmentation",
+   "WeilConjectures.FdEntireTowerCounitFormula",
+   "WeilConjectures.FdRoosResolutionFormula",
+   "WeilConjectures.FdReductionCounitFormula",
+   "WeilConjectures.fdCounitRealizationModels",
+   "WeilConjectures.FdPullbackRoosMatching",
+   "WeilConjectures.fdPullbackAugmentationCounitMatching"
+  ],
+  "file": "lean/Sheaf/Paper/FdPullbackAugmentationCounitMatching.lean",
+  "statement": "theorem fdPullbackAugmentationCounitMatching : ∃ D : IntegralComparisonSystem.{u} l, (CounitRealization.WordLaws (fdCounitRealizationModels l D) ∧ CounitRealization.ScalarLaws (fdCounitRealizationModels l D)) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L), IntegralComparisonRealizationCoherence l E L ι D) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (U : Scheme.{u}) [IsNoetherian U] [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)] [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))], FdRoosResolutionFormula l E U ((D.coefficient E).roos U) ∧ FdEntireTowerCounitFormula l E U ∧ FdReductionCounitFormula l E U ((D.coefficient E).system U)) ∧ (∀ {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T] [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)] [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))] [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] (CU : FdCoefficientComparison l Ω U) (CT : FdCoefficientComparison l Ω T) (h : U ≅ T) (E : Padic.FiniteCoefficientFields l Ω), ∃ d : FdPullbackComparison l Ω CU CT h E, FdPullbackRoosMatching l Ω CU CT h E D d ∧ ∀ (P : CochainComplex (integralTowerModules l (pbcFiniteField.{u} l Ω E) T) ℤ) (n : ℕ), fdPullbackQuotientAugmentation l Ω E d.chain P (n + 1) ≫ ((fdCoefficientTransport l (pbcFiniteField.{u} l Ω E) U).mapHomologicalComplex (.up ℤ)).map (integralOperationsTowerStep ((integralOperationsPullbackTowerFunctor l (pbcFiniteField.{u} l Ω E) h.hom).obj P) n) = fdPullbackQuotientAugmentation l Ω E d.chain P n)",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d327ae08",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Item lean record only; statement and stmt_deps identical to side-live; module statement verbatim; 7 declarations listed; docstrings carry source, blueprint tag and proof steps 1-7; sorry only in the theorem; no dependency changes. Clause check: gamma on unit sections via FdPullbackChain.quotients; t_n gamma_{n+1}=gamma_n as the last conjunct; Gamma a chain map with shifted=0; b^amb[Gamma]=v via FdPullbackRoosMatching for all good P (b pinned by the PBC unit, j fixed by b, e-dependence cancels; stronger than d.normalization); exists d with b.inv HEq d.ambient, PBC-to-framework orientation correct; rho formula and entire-tower counit formula type-checked by hand; one exists-D before all quantifiers with forall E L iota coherence, which the parent FdWholeTowerIntegralComparison needs. Edge cases P=0, n=0, h=id, empty schemes, E=L, empty word; universes u+1/u and w. Advisories only: theorem-node-owned IntegralComparisonSystem and CounitRealization decls from stage-1 stmt_deps, and def-trf-integral-comparison-realization-models / def-coef-ringed-sequence-site decls not in stmt_deps; WordLaws/ScalarLaws, the reduction-counit formula, the Roos formula and gamma compatibility follow from proved results but faithfully render formal node sentences; branch field is sheaf-dag. No compile: no file changed."
+ }
+}

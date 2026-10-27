@@ -1,0 +1,266 @@
+{
+ "id": "lem-pur-coordinate-differentials-affine-chart",
+ "kind": "statement",
+ "title": "Affine chart and graph presentation for prescribed differential coordinates",
+ "statement": "Let $k$ be a field [def-weil-field], $U$ a finite-type $k$-scheme [def-weil-scheme-over-base, def-weil-finite-type-morphism] smooth over $k$ [def-sbc-smooth-morphisms], $u\\in U$, $d\\geq0$ and $h_1,\\ldots,h_d\\in\\Gamma(U,\\mathcal O_U)$. Suppose their differentials form a $\\kappa(u)$-basis of $\\Omega_{U/k,u}\\otimes_{\\mathcal O_{U,u}}\\kappa(u)$ [def-sc-relative-differential-sheaf, def-pc-module-stalk-functor, def-weil-residue-field, def-weil-module-base-change], where a basis is a linearly independent spanning family. There exist an affine open neighbourhood $W=\\operatorname{Spec}A\\subseteq U$ of $u$ [def-weil-affine-spectrum], integers $n\\geq r\\geq0$ with $n=r+d$, and a standard smooth $k$-algebra presentation [def-weil-pbc-standard-smooth-algebra] $$\\alpha:k[y_1,\\ldots,y_n]/(F_1,\\ldots,F_r)\\xrightarrow{\\sim}A.$$ Write $a_b=\\alpha(\\overline y_b)$ and let $\\mathfrak q\\subset A$ correspond to $u$. There is a canonical identification $K=\\kappa(u)=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime] and a $K$-linear isomorphism $$\\Phi:\\Omega_{A/k}\\otimes_AK\\xrightarrow{\\sim}\\Omega_{U/k,u}\\otimes_{\\mathcal O_{U,u}}K,\\qquad \\omega\\otimes\\lambda\\longmapsto\\operatorname{germ}_u(\\omega)\\otimes\\lambda,$$ with $\\Omega_{A/k}$ the module of Kähler differentials [def-weil-pbc-kahler-differentials]. It carries $d(h_j|_W)\\otimes1$ to the specified differential class, and $da_{r+1}\\otimes1,\\ldots,da_n\\otimes1$ is a $K$-basis of its source. There are polynomials $H_j\\in k[y_1,\\ldots,y_n]$ mapping to $h_j|_W$. Put $R=k[T_1,\\ldots,T_d]$ [def-weil-pbc-mv-polynomial-ring] and give $A$ its $R$-algebra structure by $T_j\\mapsto h_j|_W$. The map $y_b\\mapsto a_b$ induces an isomorphism of $R$-algebras $$R[y_1,\\ldots,y_n]/(F_1,\\ldots,F_r,H_1-T_1,\\ldots,H_d-T_d)\\xrightarrow{\\sim}A.$$ Under $\\operatorname{Spec}R=\\mathbf A^d_k$ [def-sbc-affine-space], this $R$-algebra structure gives the restriction to $W$ of the $k$-morphism with coordinate functions $h_j$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V7 (lemma-smooth-locally-standard-smooth); algebra.tex Tag 00T7 (lemma-standard-smooth), part (2); affine graph formulation for the prescribed coordinate morphism in Tag 02GU (lemma-etale-at-point), condition (8)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-stalk-functor",
+  "def-weil-residue-field",
+  "def-weil-module-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-smooth-locally-standard-smooth] to $U\\to\\operatorname{Spec}k$ at $u$. The affine target neighbourhood contains the unique point of $\\operatorname{Spec}k$, so is the whole target. Thus obtain an affine open $W=\\operatorname{Spec}A$ containing $u$, with $A$ standard smooth over $k$. Unpack [def-weil-pbc-standard-smooth-algebra] to choose $n\\ge r\\ge0$, the polynomials $F_i$, and the isomorphism $\\alpha$ of the statement. Set $a_b=\\alpha(\\overline y_b)$ and let $\\mathfrak q$ be the point corresponding to $u$. No equality $n-r=d$ has yet been assumed.",
+   "uses": [
+    "lem-weil-pbc-smooth-locally-standard-smooth",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V7 (lemma-smooth-locally-standard-smooth), with algebra.tex Definition 00T6 (definition-standard-smooth)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-stalk-localization], $A_{\\mathfrak q}\\cong\\mathcal O_{U,u}$ through the germ map. Quotient by their corresponding maximal ideals to identify $\\kappa(\\mathfrak q)$ with $K=\\kappa(u)$. Put $M=\\Omega_{A/k}$. The affine description in [def-sc-relative-differential-sheaf] identifies $\\Omega_{U/k}|_W$ with $\\widetilde M$, respecting derivations. By [lem-weil-pbc-spec-tilde-stalk-localization] its stalk is $M_{\\mathfrak q}$, and the germ of $\\omega$ corresponds to $\\omega/1$. These identifications apply to this particular standard smooth chart; they do not require choosing a different affine neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), parts (6)-(7); morphisms.tex Tags 01US (lemma-differentials-restrict-open) and 01UT (lemma-differentials-affine)"
+   }
+  },
+  {
+   "text": "The germ map induces $\\Phi:M\\otimes_AK\\to M_{\\mathfrak q}\\otimes_{A_{\\mathfrak q}}K$. Its inverse is explicitly $(\\omega/s)\\otimes\\lambda\\mapsto\\omega\\otimes\\lambda/\\overline s$, where $s\\notin\\mathfrak q$. Indeed $\\overline s\\ne0$ in $K$. Equality of fractions is respected: if $t(s\\omega\\prime-s\\prime\\omega)=0$ for some $t\\notin\\mathfrak q$, tensoring with $K$ and dividing by $\\overline t\\,\\overline s\\,\\overline{s\\prime}$ gives the same value. The formula is additive and balanced over $A_{\\mathfrak q}$, since multiplying a fraction by $a/b$ multiplies its value by $\\overline a/\\overline b$. Its two composites are the identity on pure tensors. Under Step 2 this is exactly the asserted $K$-linear isomorphism. Compatibility with derivations there sends $d(h_j|_W)\\otimes1$ to the specified class $dh_j$.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), explicit tensor calculation after parts (6)-(7); agent assembly from localization and tensor balancing"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-standard-smooth-kahler-basis], $M$ has $A$-basis $da_{r+1},\\ldots,da_n$. Their tensors with $1$ are a $K$-basis: tensor the basis coordinate maps with $K$; their coefficient functions and the finite-sum reconstruction remain inverse, by [def-weil-module-base-change]. Step 3 and the hypothesis give another basis of this same space of length $d$. The two basis coordinate isomorphisms therefore give $K^{n-r}\\cong K^d$. Since $K$ is a field, it is nontrivial, and [lem-sfb-commutative-ring-invariant-basis-number] gives $n-r=d$, hence $n=r+d$. This proves both the required size and the asserted basis in the source of $\\Phi$.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-kahler-basis",
+    "def-weil-module-base-change",
+    "lem-sfb-commutative-ring-invariant-basis-number"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2); finite basis comparison after extension to the residue field"
+   }
+  },
+  {
+   "text": "The quotient map $k[y_1,\\ldots,y_n]\\to A$ is surjective, so choose lifts $H_j$ of $h_j|_W$. Let $R=k[T_1,\\ldots,T_d]$ act on $A$ by evaluation $T_j\\mapsto h_j|_W$, using [def-weil-pbc-mv-polynomial-ring]. Put $B=R[y_1,\\ldots,y_n]/(F_i,H_j-T_j)$. Evaluation $y_b\\mapsto a_b$ kills every displayed relation, and so gives an $R$-algebra map $\\beta:B\\to A$. In the other direction the classes of $y_b$ in $B$ annihilate all $F_i$, hence define $k[y]/(F_i)\\to B$. Composing with $\\alpha^{-1}$ gives $\\gamma:A\\to B$. It is $R$-linear because $\\gamma(h_j|_W)=H_j(\\overline y)=\\overline T_j$. Now $\\beta\\gamma$ is the identity on all the $a_b$, which generate $A$ over $k$; $\\gamma\\beta$ fixes all $\\overline y_b$ and $\\overline T_j$, which generate $B$ over $k$. The polynomial universal property makes both composites identities, proving the asserted graph isomorphism.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GU (lemma-etale-at-point), condition (8), prescribed-coordinate graph formulation; explicit agent quotient calculation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-map-global-sections], the morphism $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ defined by this algebra structure pulls back $T_j$ to $h_j|_W$. With $\\operatorname{Spec}R=\\mathbf A^d_k$, these are exactly the coordinate pullbacks of the restriction of the specified $k$-morphism on $U$. Polynomial maps agreeing on the $T_j$ agree by [def-weil-pbc-mv-polynomial-ring], and their affine scheme morphisms agree by [def-weil-affine-spectrum]. This proves the last clause.",
+   "uses": [
+    "lem-weil-pbc-spec-map-global-sections",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I2 (lemma-category-affine-schemes), affine morphisms and their maps on global sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "lem-sfb-commutative-ring-invariant-basis-number",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-spec-map-global-sections",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01V7, 01UT, 02GU; algebra.tex Tag 00T7 and schemes.tex Tags 01HV, 01I2; explicit localization-tensor and graph-quotient assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_isStandardSmooth|basis_kaehlerDifferential|exists_etale_mvPolynomial",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: chart existence and standard-smoothness criteria do not include the canonical sheaf-stalk cotangent-fibre identification, basis-length comparison and graph presentation of the prescribed functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "results": "No hits; loogle: unknown identifier 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth'",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier; corrected by the recorded Smooth.exists_isStandardSmooth query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "standard smooth affine chart identify cotangent fibre with Kahler differentials tensor residue field and present prescribed functions by polynomial graph equations",
+   "results": "Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType; Algebra.FormallySmooth.iff_subsingleton_and_projective; Algebra.formallySmooth_iff; Algebra.FormallySmooth.iff_split_injection; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential",
+   "date": "2026-10-22",
+   "verdict": "no match: chart existence and standard-smoothness criteria do not include the canonical sheaf-stalk cotangent-fibre identification, basis-length comparison and graph presentation of the prescribed functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme over a field with a basis of coordinate differentials at a point admits a standard smooth affine chart of relative dimension equal to the number of coordinates and a graph presentation over their polynomial ring",
+   "results": "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.instSmoothOfIsStandardSmooth; AlgebraicGeometry.isSmoothOfRelativeDimension_iff; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.IsStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: chart existence and standard-smoothness criteria do not include the canonical sheaf-stalk cotangent-fibre identification, basis-length comparison and graph presentation of the prescribed functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth.exists_isStandardSmooth",
+   "results": "AlgebraicGeometry.Smooth.exists_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: chart existence and standard-smoothness criteria do not include the canonical sheaf-stalk cotangent-fibre identification, basis-length comparison and graph presentation of the prescribed functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine standard smooth coordinates adapted to a prescribed cotangent fibre basis, with polynomial lifts of specified functions and their graph quotient presentation",
+   "results": "Algebra.Generators.exists_presentation_of_basis_cotangent; Algebra.IsStandardSmooth; Algebra.SubmersivePresentation.isStandardSmooth; Algebra.IsStandardSmooth.out; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; Algebra.Generators.exists_presentation_of_free_cotangent; Algebra.SubmersivePresentation.basisCotangent_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: chart existence and standard-smoothness criteria do not include the canonical sheaf-stalk cotangent-fibre identification, basis-length comparison and graph presentation of the prescribed functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A standard smooth affine neighborhood of a point of a smooth scheme identifies the cotangent fibre with algebraic differentials and has a polynomial graph presentation for prescribed functions",
+   "results": "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; Algebra.IsStandardSmooth; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; StandardEtalePresentation; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-23",
+   "verdict": "no match: chart or algebraic differential criteria only; none includes the sheaf cotangent fibre, prescribed-function graph isomorphism and its geometric coordinate compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmooth, KaehlerDifferential",
+   "results": "Algebra.IsStandardSmooth.free_kaehlerDifferential; Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match: chart or algebraic differential criteria only; none includes the sheaf cotangent fibre, prescribed-function graph isomorphism and its geometric coordinate compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isStandardSmooth|basis_kaehlerDifferential|relativeDifferentialsSpecIso",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: chart or algebraic differential criteria only; none includes the sheaf cotangent fibre, prescribed-function graph isomorphism and its geometric coordinate compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth scheme affine chart Kahler differential cotangent fibre basis graph equations for coordinate functions",
+   "results": "KaehlerDifferential.mvPolynomialBasis; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; Algebra.FormallySmooth.iff_subsingleton_and_projective; Algebra.Presentation.differentialsRelations; Algebra.Generators.cotangentSpaceBasis; Algebra.Presentation.differentialsRelations_R; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.Generators.toKaehler_cotangentSpaceBasis",
+   "date": "2026-10-23",
+   "verdict": "no match: chart or algebraic differential criteria only; none includes the sheaf cotangent fibre, prescribed-function graph isomorphism and its geometric coordinate compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a smooth scheme and regular functions whose differentials form a basis at a point construct a standard smooth affine chart and an isomorphism of its graph coordinate ring",
+   "results": "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; RingHom.Smooth.locally_isStandardSmooth; Algebra.IsStandardSmooth; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; AlgebraicGeometry.isSmooth_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: chart or algebraic differential criteria only; none includes the sheaf cotangent fibre, prescribed-function graph isomorphism and its geometric coordinate compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-at-point-from-differentials",
+  "date": "2026-10-22",
+  "group": "Q121"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-regular-immersion-linearization",
+   "place": "proof, second paragraph: differential criterion for the prescribed coordinate map; affine-chart, cotangent-fibre and graph-presentation reduction (old steps 1-3 of lem-pur-etale-at-point-from-differentials)",
+   "via": [
+    "lem-pur-etale-at-point-from-differentials"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-coordinate-differentials-affine-chart",
+  "worker": "stage1",
+  "summary": "Reused the existing standard smooth chart, standard smooth differential basis, affine stalk localization and invariant basis number nodes. Wrote the localization-tensor inverse and graph quotient maps explicitly; no new nodes and no statement change. Checked arbitrary residue fields and empty coordinate/relation families.",
+  "blueprint": "Latest blueprint lem-pur-regular-immersion-linearization.proof.md, second paragraph: the coordinate map determined by a differential basis is etale; this item realizes the affine chart, cotangent fibre and polynomial graph reduction preceding its Jacobian test.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-locally-standard-smooth",
+    "why": "General affine standard-smooth chart theorem for the given smooth structure morphism; no node of sk-prop-an supplies this geometric chart."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-locally-standard-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-865ba16e1",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-865ba16e1 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the whole item and every cited statement. One commit changes only the item and the report; there are no new nodes and the statement, stmt_deps and blueprint fields are unchanged. The item is still unsplit in live and has no repair note, so it is neither superseded nor under a re-split order. Step 1: lem-weil-pbc-smooth-locally-standard-smooth (Stacks 01V7, morphisms.tex:7191) gives the chart; V=Spec k because Spec k has one point. The off-unit tool use (sk-thm-p1, generic chart lemma) is accepted. Step 2: affine-open-stalk-localization(c) gives A_q≅O_{U,u} and κ(q)≅κ(u); def-sc-relative-differential-sheaf states the affine restriction (Ω_{A/k})~ with compatible derivations; spec-tilde-stalk-localization gives M~_q≅M_q. Step 3: I re-derived that the explicit inverse (ω/s)⊗λ↦ω⊗λ/s̄ is well defined and balanced; marking it elementary is acceptable. Step 4: the standard-smooth Kähler basis da_{r+1..n} stays a basis after base change, and IBN over the field K gives n−r=d with no perfectness or rational-point assumption. Step 5: β and γ are explicit, γ is R-linear because γ(h_j)=H_j(ȳ)=T̄_j, and both composites fix generators. Step 6: spec-map-global-sections plus uniqueness in def-weil-affine-spectrum identifies the morphism with h|_W. Edge cases d=0, r=0, nonclosed points and inseparable κ(u) all hold. Duplicate search: lem-trf-affine-chart-stalk-differentials is existential, in another unit and not needed; no duplicate found. No SGA citations; proof_deps equals the union of uses; the parent's step 1 uses exactly what the item states."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoordinateDifferentialsAffineChart",
+  "declaration": "AlgebraicGeometry.Scheme.exists_coordinate_differentials_affine_chart",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.HasCoordinateDifferentialAffineChart",
+   "AlgebraicGeometry.Scheme.exists_coordinate_differentials_affine_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoordinateDifferentialsAffineChart.lean",
+  "statement": "theorem exists_coordinate_differentials_affine_chart (k : Type u) [Field k] (U : Scheme.{u}) [U.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [Smooth (U ↘ Spec (.of k))] (x : U) (d : ℕ) (h : Fin d → Γ(U, ⊤)) (hbasis : ∃ b : Module.Basis (Fin d) (IsLocalRing.ResidueField (U.presheaf.stalk x)) (IsLocalRing.ResidueField (U.presheaf.stalk x) ⊗[U.presheaf.stalk x] ((RingedSpace.moduleStalkFunctor U.toRingedSpace x).obj (U ↘ Spec (.of k)).relativeDifferentials)), ∀ j : Fin d, b j = TensorProduct.tmul (U.presheaf.stalk x) (N := (RingedSpace.moduleStalkFunctor U.toRingedSpace x).obj (U ↘ Spec (.of k)).relativeDifferentials) (1 : IsLocalRing.ResidueField (U.presheaf.stalk x)) ((U ↘ Spec (.of k)).relativeDifferentials.presheaf.germ ⊤ x trivial ((U ↘ Spec (.of k)).relativeDifferentialsDerivation.d (h j)))) : ∃ (W : U.Opens) (hW : IsAffineOpen W) (hx : x ∈ W), HasCoordinateDifferentialAffineChart k U x d h W hW hx",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary predicate expands the full conclusion with canonical scalar structures. Standard smooth and graph quotient isomorphisms are encoded by Mathlib SubmersivePresentation and Presentation data, whose quotientEquiv supplies each isomorphism. Variables are Fin (r+d); coordinate indices use ULift (Fin d) for the affine-space universe convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bb78a102",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read item, 14 stmt_dep records, module, report; upstream relativeDifferentials/moduleStalkFunctor and Mathlib SubmersivePresentation/AffineSpace APIs. Hypotheses match exactly (field, Over, LocallyOfFiniteType+QuasiCompact, Smooth, Basis of κ(x)⊗stalk Ω with b j = 1⊗germ d h_j). Conclusion pins every clause: SubmersivePresentation on Fin(r+d) with map=castAdd (Stacks 00T6), ε fixed on residues, g fixed on all D a and Φ on pure tensors (canonical), Φ(1⊗D h_j)=given class, last-d basis, lifts H_j, R-Presentation G with relations F_i and H_j−T_j, Spec-map equality with fromSpec≫homOfVector (checked true). Edge cases d=0, r=0, arbitrary κ(u), empty U, universes OK; ULift per def-sbc-affine-space convention. Statement verbatim; docstrings/source/proof steps present; only sorry; no duplicate (lem-trf-affine-chart-stalk-differentials differs); live item unsplit-lean, not superseded. Advisory: Tilde/StandardSmoothCotangent imports anticipate unrecorded proof deps. No compile (no change)."
+ }
+}

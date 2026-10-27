@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-tensor-comparison-transport",
+ "kind": "statement",
+ "title": "Transport of tensor-composition coherence along compatible functor isomorphisms",
+ "statement": "Let A, B, C be categories with bifunctors TA:A×A→A, TB:B×B→B, TC:C×C→C. Let F,F′:A→B, G,G′:B→C, H,H′:A→C be functors with isomorphisms eF:F≅F′, eG:G≅G′, eH:H≅H′. Give each functor a comparison from pullback of tensor to tensor of pullbacks, and let a:H≅F⋙G and b:F′⋙G′≅H′ be compositors. Assume each individual comparison square for eF,eG,eH commutes, a followed by the whiskered eF,eG equals eH followed by b⁻¹, and the primed comparisons satisfy tensor-composition coherence with b. Then the unprimed comparisons satisfy tensor-composition coherence with a. No monoidal associativity, unit, or symmetry structures are needed.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Naturality and inverse-compositor cancellation in Tags 07A4 and 07A7; the categorical substitution step of lem-sf-published-system-tensor-composition."
+ },
+ "proof": [
+  {
+   "text": "Whisker eG on the left by F and eF on the right by G′ to form D:F⋙G≅F′⋙G′. Naturality of eG and of the second primed tensor comparison, together with the eF and eG comparison squares, proves the composite comparison square for D.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Postcompose the desired equation with the tensor square of D followed by b, which is invertible. The compositor-identification square and primed coherence identify its left side with eH on the tensor followed by the third primed comparison. The third comparison square identifies this with the right side; cancel the invertible postcomposition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Categorical transport of the comparison diagram in Tags 07A4 and 07A7; explicit naturality/cancellation proof by U2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor composition coherence transfers along compatible natural isomorphisms of functors",
+   "results": "8 hits, including NatTrans.IsMonoidal.tensor, Functor.Monoidal.transport_μ and tensorObjComp.",
+   "date": "2026-10-27",
+   "verdict": "Related monoidal API requires more structure; the bifunctor statement follows directly by naturality and cancellation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transport tensor comparison composition coherence along natural isomorphisms of functors",
+   "results": "8 hits, including Functor.Monoidal.transport_μ_assoc, transport_δ_assoc and transport_δ.",
+   "date": "2026-10-27",
+   "verdict": "Related monoidal transport API; the present claim uses arbitrary bifunctors and two compositors, so a direct naturality calculation is shorter."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; NatTrans.naturality in Mathlib.CategoryTheory.NatTrans is the needed naturality square.",
+   "date": "2026-10-27",
+   "verdict": "Used for the functor isomorphism and second tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "transfer_tensor_composition|tensor_comparison_transport",
+   "results": "msearch grep returned 0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No existing project transport theorem under these names; prove the elementary calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PublishedSystemTensorComposition",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence of fix-prop-projection-formula, via ambient proper/open pasting: Substitution in the ambient tensor/composition equation and cancellation of inverse compositors",
+   "via": [
+    "lem-sf-published-system-tensor-composition",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TensorComparisonTransport",
+  "file": "lean/Sheaf/SixFunctors/TensorComparisonTransport.lean",
+  "declaration": "WeilConjectures.TensorComparisonTransport.transfer_tensor_composition",
+  "statement": "theorem transfer_tensor_composition\n    {A B C : Type*} [Category A] [Category B] [Category C]\n    (TA : A × A ⥤ A) (TB : B × B ⥤ B) (TC : C × C ⥤ C)\n    (F F' : A ⥤ B) (G G' : B ⥤ C) (H H' : A ⥤ C)\n    (eF : F ≅ F') (eG : G ≅ G') (eH : H ≅ H')\n    (mF : TA ⋙ F ≅ F.prod F ⋙ TB) (mG : TB ⋙ G ≅ G.prod G ⋙ TC)\n    (mH : TA ⋙ H ≅ H.prod H ⋙ TC)\n    (nF : TA ⋙ F' ≅ F'.prod F' ⋙ TB) (nG : TB ⋙ G' ≅ G'.prod G' ⋙ TC)\n    (nH : TA ⋙ H' ≅ H'.prod H' ⋙ TC)\n    (a : H ≅ F ⋙ G) (b : F' ⋙ G' ≅ H')\n    (hmF : ∀ M N, eF.hom.app (TA.obj (M, N)) ≫ nF.hom.app (M, N) =\n      mF.hom.app (M, N) ≫ TB.map\n        (Prod.mkHom (eF.hom.app M) (eF.hom.app N)))\n    (hmG : ∀ M N, eG.hom.app (TB.obj (M, N)) ≫ nG.hom.app (M, N) =\n      mG.hom.app (M, N) ≫ TC.map\n        (Prod.mkHom (eG.hom.app M) (eG.hom.app N)))\n    (hmH : ∀ M N, eH.hom.app (TA.obj (M, N)) ≫ nH.hom.app (M, N) =\n      mH.hom.app (M, N) ≫ TC.map\n        (Prod.mkHom (eH.hom.app M) (eH.hom.app N)))\n    (ha : ∀ M, a.hom.app M ≫ eG.hom.app (F.obj M) ≫\n      G'.map (eF.hom.app M) = eH.hom.app M ≫ b.inv.app M)\n    (hc : ∀ M N, G'.map (nF.hom.app (M, N)) ≫\n      nG.hom.app (F'.obj M, F'.obj N) ≫\n      TC.map (Prod.mkHom (b.hom.app M) (b.hom.app N)) =\n      b.hom.app (TA.obj (M, N)) ≫ nH.hom.app (M, N)) :\n    ∀ M N, a.hom.app (TA.obj (M, N)) ≫ G.map (mF.hom.app (M, N)) ≫\n      mG.hom.app (F.obj M, F.obj N) = mH.hom.app (M, N) ≫\n      TC.map (Prod.mkHom (a.hom.app M) (a.hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (only explicit .{u} universe annotations, same elaborated type) and vs SystemTensorComposition; 2 new sorry identifications vs Compositors (sections/conjugate/pullComp_model) and ambient pushComp/comp/derivedComp/tensorData normalizations; node records vs Lean; direct importer AmbientProperOpenPasting compiled against the 6 delivered modules (rc 0); #print axioms (transport sorry-free, sorryAx only from the 2 new holes and upstream holes)"
+ }
+}

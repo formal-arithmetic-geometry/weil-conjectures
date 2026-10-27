@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-smooth-pointed-curves-dense",
+ "kind": "statement",
+ "title": "Images of smooth pointed curves through a fixed point are dense",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $X$ be a smooth separated geometrically integral finite-type $k$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-geometrically-irreducible, def-weil-finite-type-morphism], and let $x_0\\in X(k)$ [def-pc-rational-point]. Separated means that the diagonal is a closed immersion. There exist a set $I$, smooth separated geometrically integral finite-type curves $C_i/k$ of dimension one [def-sc-curves, def-pc-geometrically-irreducible], points $c_i\\in C_i(k)$, and $k$-morphisms $u_i:C_i\\to X$ with $u_i(c_i)=x_0$, such that $\\bigcup_{i\\in I}u_i(|C_i|)$ is dense in $|X|$. Here dense means its closure is all of $|X|$. The morphisms $u_i$ need not be immersions or nonconstant; in particular this assertion includes zero-dimensional $X$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Lemmas 3.5(b) and 3.6, printed p.18, as used in the proof of Theorem 3.4 on p.19. Smooth normalization of irreducible curves nonsingular at the specified point; in dimension zero take a constant map from the affine line."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-pc-rational-point",
+  "def-sc-curves"
+ ],
+ "proof": [
+  {
+   "text": "We prove the assertion for all such pointed $Y$ by strong induction on $d=\\dim Y$, a finite nonnegative integer by [lem-sfb-point-tangent-cone-dimension]. If $d=0$, [lem-weil-pbc-finite-type-over-noetherian] (over $\\operatorname{Spec}k$) and [lem-sc-zero-dim-noetherian-finite-discrete] make $|Y|$ finite discrete. Irreducibility forces $|Y|=\\{p\\}$. Take $C=\\mathbf A^1_k$, $c=0$ and the constant map through $p$. By [sbc-lem-affine-space-smooth] this is smooth of dimension one. It is separated and finite type by its affine polynomial presentation, and geometrically integral since for every extension $K/k$ its coordinate ring $K[t]$ is a domain. If $d=1$, take $C=Y$, $c=p$, $u=1_Y$.",
+   "uses": [
+    "lem-sfb-point-tangent-cone-dimension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Lemma 3.6, printed p.18, hyperplane/tangent-cone induction; dimension zero added explicitly as allowed by the item."
+   }
+  },
+  {
+   "text": "Let $d\\ge2$ and suppose the assertion is proved in every positive dimension less than $d$. Put $E=T_{Y/k,p}$. For each linear hyperplane $H\\subset E$, [lem-sfb-smooth-prescribed-tangent-hypersurface] gives a smooth separated geometrically integral $(d-1)$-dimensional $D_H$, locally closed in $Y$ through $p$, with tangent space $H$. Apply the induction hypothesis to this pointed $D_H$ and compose its curve maps with $D_H\\to Y$. The resulting images are dense in $|D_H|$. Consequently every closed subset $F\\subseteq |Y|$ containing the images of all eligible smooth pointed curve maps contains every $|D_H|$: its inverse image in $D_H$ is closed and contains a dense subset.",
+   "uses": [
+    "lem-sfb-smooth-prescribed-tangent-hypersurface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Lemma 3.6, printed p.18, hyperplane/tangent-cone induction; dimension zero added explicitly as allowed by the item."
+   }
+  },
+  {
+   "text": "Give such an $F$ its reduced closed subscheme structure $Z$ (on each affine chart use the radical ideal of functions vanishing on $F$). It contains $p$. By [lem-sfb-point-tangent-cone-dimension], the closed cone $|C_pZ|\\subseteq E$ contains every hyperplane $H$. Since $\\dim E=d\\ge2$, every vector lies in some hyperplane: extend a nonzero vector to a basis and omit another basis vector, and put zero in any hyperplane. Thus the closed cone contains all $k$-points of $E$. It is all of $E$: a polynomial vanishing on $k^d$ is zero, by induction on the number of variables and the fact that a nonzero polynomial in one variable has finitely many roots; an algebraically closed field is infinite. Hence $C_pZ$ is a closed subscheme of the affine space associated to $E$ with the same underlying space; choosing a basis of $E^*$, that coordinate ring is the polynomial ring $k[x_1,\\ldots,x_d]$, so $\\dim C_pZ=\\dim k[x_1,\\ldots,x_d]=d$ by [lem-sf-noetherian-polynomial-dimension] (a field is Noetherian of dimension $0$). If $F\\ne|Y|$, the same cone lemma gives $\\dim C_pZ<d$, a contradiction. Therefore $F=|Y|$.",
+   "uses": [
+    "lem-sfb-point-tangent-cone-dimension",
+    "lem-sf-noetherian-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Lemma 3.6, printed p.18, hyperplane/tangent-cone induction; dimension zero added explicitly as allowed by the item."
+   }
+  },
+  {
+   "text": "For $d\\le1$ step 1 already gives a single curve with dense image. For $d\\ge2$, to obtain a set-indexed family, let $\\mathcal S\\subseteq\\mathcal P(|Y|)$ be the set of subsets that occur as images of eligible smooth pointed curve maps. It is a set, being a subcollection of the power set of $|Y|$. The closure of $\\bigcup\\mathcal S$ contains every such image, so steps 2--3 show it is $|Y|$. For every nonempty open $U\\subseteq|Y|$, choose one such curve map whose image meets $U$; such a map exists since otherwise the proper closed subset $|Y|\\setminus U$ would contain all images. Index these choices by the set of nonempty opens. Their union meets every nonempty open and is therefore dense. All chosen curves and points satisfy the required hypotheses by their eligibility. This completes the induction and, with $Y=X$ and $p=x_0$, the proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Lemma 3.6, printed p.18, hyperplane/tangent-cone induction; dimension zero added explicitly as allowed by the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-point-tangent-cone-dimension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "sbc-lem-affine-space-smooth",
+  "lem-sfb-smooth-prescribed-tangent-hypersurface",
+  "lem-sf-noetherian-polynomial-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Lemma 3.6, printed p.18, tangent-cone induction; use smooth neighbourhoods of the transverse hypersurfaces, so normalization is unnecessary. Dimension-zero constant map and set indexing are explicit additions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The images of smooth pointed curves through a fixed point of a smooth positive dimensional variety are Zariski dense",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.coborderRange f).ι\", \"doc\": \"For any immersion $ f: X \\to Y $ of schemes, the inclusion morphism of the cobord of the image of $ f $ into $ Y $ is dominant. This means the image of this open subset is dense in $ Y $, as the cobord\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern dense domains of rational maps, the definition of dominance, jointly surjective covers, or elliptic-curve point formulas; none constructs curves through a prescribed point or proves their density. The focused Bertini/pointed-curve source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an irreducible variety nonsingular at a point the union of irreducible curves through that point nonsingular there is dense",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern dense domains of rational maps, the definition of dominance, jointly surjective covers, or elliptic-curve point formulas; none constructs curves through a prescribed point or proves their density. The focused Bertini/pointed-curve source grep returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"IsClosed\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"PrimeSpectrum.isClosedMap_comap_of_isIntegral\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] (f : R →+* S) (hf : f.IsIntegral) : IsClosedMap (PrimeSpectrum.comap f)\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isClosed_comap_singleton_of_isIntegral\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] (f : R →+* S) (hf : f.IsIntegral) (x : PrimeSpectrum S) (hx : IsClosed {x}) : IsClosed {PrimeSpectrum.comap f x}\", \"doc\": \"\"}\n  {\"name\": \"PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] (f : R →+* S) (h : IsClosedMap (PrimeSpectrum.comap (Polynomial.mapRingHom f))) : f.IsIntegral\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern dense domains of rational maps, the definition of dominance, jointly surjective covers, or elliptic-curve point formulas; none constructs curves through a prescribed point or proves their density. The focused Bertini/pointed-curve source grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Curves through a smooth point are dense in an algebraic variety",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : Dense (X := X) f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"Dense\", \"module\": \"Mathlib.Topology.Defs.Basic\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space $ X $ is dense if every point $ x \\\\in X $ belongs to the closure of $ s $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": (toOpensFunctor X).IsDenseSubsite (grothendieckTopology X) (Opens.grothendieckTopology X)\", \"doc\": \"The inclusion functor from the affine Zariski site of a scheme $X$ to its open subsets category is a dense subsite with respect to the Zariski topology. This means that the collection of affine open s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [IsDominant f] : DenseRange f\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern dense domains of rational maps, the definition of dominance, jointly surjective covers, or elliptic-curve point formulas; none constructs curves through a prescribed point or proves their density. The focused Bertini/pointed-curve source grep returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth geometrically integral variety over an algebraically closed field with a rational base point, images of smooth geometrically integral pointed curves are dense, allowing constant curve maps in dimension zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsDominant f ↔ DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is dominant if and only if the underlying continuous function of its base map $ f_{\\\\text{base}} : X \\to Y $ has dense image in $ Y $, i.e., the closure of the image\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern dense domains of rational maps, the definition of dominance, jointly surjective covers, or elliptic-curve point formulas; none constructs curves through a prescribed point or proves their density. The focused Bertini/pointed-curve source grep returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The union of images of smooth pointed integral curves mapping to a smooth variety and carrying their base point to a fixed rational point is Zariski dense",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : Dense (X := X) f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.iUnion_range\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"[JointlySurjective K] {X : Scheme.{u}} (𝒰 : X.Cover K) : ⋃ i, Set.range (𝒰.f i) = Set.univ\", \"doc\": \"For any scheme $X$ and a cover $\\\\mathcal{U}$ defined by a jointly surjective precoverage $K$ on the category of schemes, the union of the images of the morphisms $\\\\mathcal{U}.f(i)$ for all indices $i$\"}\n  {\"name\": \"IsOpen.dense_iUnion_preimage_smul\", \"module\": \"Mathlib.Dynamics.Transitive\", \"type\": \"[h : IsTopologicallyTransitive M α] {U : Set α} (hUo : IsOpen U) (hUne : U.Nonempty) : Dense (⋃ m : M, (m • ·) ⁻¹' U)\", \"doc\": \"Given a topologically transitive monoid action of $M$ on a topological space $\\\\alpha$, and a non-empty open subset $U \\\\subseteq \\\\alpha$, the union of the preimages of $U$ under the action of all eleme\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsDominant f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map $ f_{\\\\text{base}} $ has dense image in $ Y $, then $ f $ is a dominant morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [IsDominant f] : DenseRange f\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsDominant f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsDominant f) →\\n        ((denseRange : DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → motive ⋯) → motive t\", \"doc\": \"For any property $ P $ of a dominant morphism $ f: X \\to Y $, if $ P $ holds under the assumption that the underlying continuous map $ f_{\\\\text{base}} $ has dense image, then $ P $ holds for all domina\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsDominant f → Sort u_1} →\\n      ((denseRange : DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → motive ⋯) →\\n        (t : AlgebraicGeometry.IsDominant f) → motive t\", \"doc\": \"For any property $ P $ of dominant morphisms $ f: X \\to Y $, if $ P $ holds whenever the underlying continuous map $ f_{\\\\text{base}} $ has dense image, then $ P $ holds for all dominant morphisms $ f $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern dense domains of rational maps, the definition of dominance, jointly surjective covers, or elliptic-curve point formulas; none constructs curves through a prescribed point or proves their density. The focused Bertini/pointed-curve source grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]urve.*[Dd]ense|[Dd]ense.*[Cc]urve|[Cc]urve.*(through|[Pp]oint)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"line\": \"50\", \"text\": \"elliptic curve, division polynomial, torsion point\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean\", \"line\": \"91\", \"text\": \"elliptic curve, division polynomial, torsion point\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"35\", \"text\": \"coordinates will be defined in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"241\", \"text\": \"`(x₂, y₂)` on a Weierstrass curve `W`, where the line through them has a slope of `ℓ`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"250\", \"text\": \"`(x₂, y₂)` on a Weierstrass curve `W`, where the line through them has a slope of `ℓ`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula.lean\", \"line\": \"259\", \"text\": \"`(x₂, y₂)` on a Weierstrass curve `W`, where the line through them has a slope of `ℓ`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"14\", \"text\": \"Let `W` be a Weierstrass curve over a commutative ring `R` with coefficients `aᵢ`. An *affine point*\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"21\", \"text\": \"will be defined in `Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean`, based on the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"32\", \"text\": \"auxiliary lemmas in the proof of `WeierstrassCurve.Affine.Point.instAddCommGroup`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"40\", \"text\": \"* `WeierstrassCurve.Affine.Point`: a nonsingular point in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"41\", \"text\": \"* `WeierstrassCurve.Affine.Point.neg`: the negation of a nonsingular point in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"42\", \"text\": \"* `WeierstrassCurve.Affine.Point.add`: the addition of a nonsingular point in affine coordinates.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"50\", \"text\": \"* `WeierstrassCurve.Affine.Point.instAddCommGroup`: the type of nonsingular points in affine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"line\": \"139\", \"text\": \"namespace WeierstrassCurve.Affine.Point\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/AddSubMap.lean\", \"line\": \"183\", \"text\": \"end WeierstrassCurve.Affine.Point\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"line\": \"14\", \"text\": \"Let `W` be a Weierstrass curve over a field `F`. The nonsingular Jacobian points on `W` can be given\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"line\": \"22\", \"text\": \"be defined in `Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"line\": \"29\", \"text\": \"defined in `Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean`, based on the formulae for\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"line\": \"34\", \"text\": \"* `WeierstrassCurve.Jacobian.PointClass`: the equivalence class of a point representative.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"line\": \"35\", \"text\": \"* `WeierstrassCurve.Jacobian.Nonsingular`: the nonsingular condition on a point representative.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"line\": \"36\", \"text\": \"* `WeierstrassCurve.Jacobian.NonsingularLift`: the nonsingular condition on a point class.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean\", \"line\": \"14\", \"text\": \"Let `W` be a Weierstrass curve over a field `F`. The nonsingular Jacobian points of `W` can be\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the curve-point hits are elliptic-curve formulas, not existence or density of smooth pointed curves; the focused Bertini/pointed-curve grep returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ertini|[Cc]urve.*[Dd]ense|[Pp]ointed.*[Cc]urve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the curve-point hits are elliptic-curve formulas, not existence or density of smooth pointed curves; the focused Bertini/pointed-curve grep returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of images of smooth integral pointed curves mapping to a smooth variety through a chosen rational point is Zariski dense",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.coborderRange f).ι\", \"doc\": \"For any immersion $ f: X \\to Y $ of schemes, the inclusion morphism of the cobord of the image of $ f $ into $ Y $ is dominant. This means the image of this open subset is dense in $ Y $, as the cobord\"}\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: dense domains and dominance do not construct pointed curves; the focused curve/Bertini grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a smooth irreducible algebraic variety over an algebraically closed field, smooth curves through any fixed point have dense union",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : Dense (X := X) f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[Smooth R A] : smoothLocus R A = Set.univ\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ coincides with the entire prime spectrum $ \\\\operatorname{Spec}(A) $, i.e., $ \\\\operatorname{smoothL\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantOfSurjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"[Surjective f] : IsDominant f\", \"doc\": \"Every surjective morphism of schemes is dominant, meaning that if a morphism $ f: X \\to Y $ is surjective on the underlying topological spaces, then its image is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": LibraryNote✝\", \"doc\": \"A note outlining the design decisions made regarding the implementation of smooth algebraic structures in the library.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: dense domains and dominance do not construct pointed curves; the focused curve/Bertini grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"DenseRange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: dense domains and dominance do not construct pointed curves; the focused curve/Bertini grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ertini|[Pp]ointed.*[Cc]urve|[Cc]urve.*[Dd]ense",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: dense domains and dominance do not construct pointed curves; the focused curve/Bertini grep has no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-product-axis-rigidity",
+  "date": "2026-10-24",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical alteration/Picard branch under det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-birigidified-affine-triviality-locus, proof step 2: algebraically trivial classes on the smooth affine product. Current latest blueprint direct-images proof (3) supplies the direct-image context, not this auxiliary Picard formula. Supporting input for Milne I.3.4, general case: Lemmas 3.5(b) and 3.6, density after passing to smooth pointed curves.",
+   "via": [
+    "lem-sfb-abelian-product-axis-rigidity",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-pointed-curves-dense",
+  "worker": "stage1",
+  "summary": "Expanded Milne I.3.6 into strong dimension induction using transverse smooth hypersurface germs and tangent-cone dimension. Created two smaller statement-only inputs, retained the dimension-zero constant-map clause, and made the family set-indexed. No statement correction or Lean attachment.",
+  "blueprint": "Milne I.3.6, printed p.18: hyperplanes through P transverse to the tangent space, followed by the tangent-cone dimension argument. Historical alteration/Picard branch serving det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-abelian-product-axis-rigidity; the latest direct-images proof no longer contains the historical auxiliary Picard argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of a finite-type scheme over the field, only for the dimension-zero case."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "The dimension-zero case has finite discrete underlying space."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "The constant curve uses smooth affine one-space of relative dimension one."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-b1ccc5a57",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-b1ccc5a57 (reviewer sub-agent of L); spot-checked: I read Milne AV I.3.6 (printed p.18, pdf p.24). The split follows its hyperplane/tangent-cone induction, except that it shrinks each hypersurface V_H to a smooth germ instead of normalizing. That is valid because the item allows arbitrary pointed maps. The item statement is unchanged.\n\nSteps 1, 2 and 4 are checked and correct. Step 1 handles d=0 (Noetherian, finite discrete, constant map from A^1, a curve per def-sc-curves) and d=1 (the identity map). Step 2 applies the induction to D_H with every hypothesis present. Step 4 is an elementary set-indexing argument.\n\nStep 3 needs dim A^d_k = d to reach the contradiction dim C_pZ < d, which is not elementary (C1). FIX: cite the Mathlib leaf lem-sf-noetherian-polynomial-dimension, which is in sk-prop-sf-rf-shriek-preservation, a unit the item's unit uses. I added it to the step's uses and to proof_deps. I also added a clarifying d<=1 sentence at the start of step 4.\n\nBoth new nodes are true, statement-only and self-contained, and neither restates the item. lem-sfb-smooth-prescribed-tangent-hypersurface: lift a cotangent form to f; O/f is regular of dimension d-1, hence smooth at the k-point; take the smooth irreducible open piece. Checked on A^2. lem-sfb-point-tangent-cone-dimension: gr O_{Y,p} = Sym E^*, gr of a quotient is a degreewise surjection, dim gr = dim R (00KQ/00P6), proper closed subsets have smaller dimension, and a reduced D lies inside Z. Edge cases Z={p}, Z=Y, the cusp and d=0 hold. Neither duplicates lem-zl-prescribed-point-smooth-member, lem-sfb-regular-hypersurface-initial-form or lem-per-associated-graded-local-dimension.\n\nThe three tool_uses (only in the d=0 case) are accepted. No cycle, no SGA. For the maintainer: the existing node lem-sfb-integral-variety-smooth-curve-interpolation (Q77, with no cycle) would also give the item almost directly. That is not a fault, so I dropped no nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPointedCurvesDense",
+  "declaration": "AlgebraicGeometry.exists_smooth_pointed_curves_dense",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPointedCurvesDense.lean",
+  "statement": "theorem exists_smooth_pointed_curves_dense {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Smooth f] [IsSeparated f] [GeometricallyIntegral f] [LocallyOfFiniteType f] [QuasiCompact f] (x₀ : f.fieldPoints k) : ∃ (I : Type u) (C : I → Scheme.{u}) (g : ∀ i : I, C i ⟶ Spec (.of k)) (c : ∀ i : I, (g i).fieldPoints k) (ι : ∀ i : I, C i ⟶ X), (∀ i : I, IsCurve (g i) ∧ Smooth (g i) ∧ GeometricallyIntegral (g i) ∧ topologicalKrullDim (C i) = 1 ∧ ι i ≫ f = g i ∧ (c i).1 ≫ ι i = x₀.1) ∧ Dense (⋃ i : I, Set.range (ι i))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b03c2a7aa",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read the item node, all 8 stmt_dep records, the report (has Worker report + Second reading by Q21) and the module. Lean exists_smooth_pointed_curves_dense matches clause by clause: IsAlgClosed k; f smooth, IsSeparated, GeometricallyIntegral, LocallyOfFiniteType+QuasiCompact; x0 : f.fieldPoints k (sections, per the Comparator def and DensePoints docs); curves = IsCurve + Smooth + GeometricallyIntegral + topologicalKrullDim = 1; c i rational points; ι i ≫ f = g i and (c i).1 ≫ ι i = x0.1; Dense of the union of ranges over all points. No extra hypotheses; I : Type u is enough (nonempty opens); dim 0 (constant map from A^1), dim 1, empty X and empty I all checked. Only the lean field differs from the live node; lean.statement matches the file verbatim; proof is sorry only; docstrings carry source place, blueprint id and proof steps 1-4; proof-dep imports exist; no duplicate declaration found. No file changed, so no compile; relied on the worker's clean compile. Minor note: the second reading is a self re-read by the same worker, disclosed in the report."
+ }
+}

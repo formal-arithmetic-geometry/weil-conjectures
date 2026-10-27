@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-arbitrary-polynomial-graph-class-base-change",
+ "kind": "statement",
+ "title": "Arbitrary-ring polynomial graph diagonal class and scalar extension",
+ "statement": "Let $R\\to B$ be a flat finitely presented homomorphism of arbitrary commutative rings [def-weil-pbc-flat-ring-map], [def-weil-pbc-finitely-presented-algebra], and fix $n\\geq0$ and a surjection $P=R[t_1,\\ldots,t_n]\\twoheadrightarrow B$ [def-weil-pbc-mv-polynomial-ring]. Work in ordinary unbounded module derived categories [def-weil-abstract-derived-category], with derived coinduction $C_D^E=R\\operatorname{Hom}_E(D,-)$ and its precomposition action [def-trf-derived-coinduction], [def-pur-derived-internal-hom], and derived tensor [lem-pc-derived-tensor-second-factor-functor]. Put $L=\\Omega^n_{P/R}[n]$, $C=C_B^P(L)$, $Q=B_1\\otimes_RB_2$, $p_1(b)=b\\otimes1$, $C_1=C\\otimes_{B,p_1}^{\\mathbf L}Q$, and let $\\delta:Q\\to B$ be multiplication [def-weil-pbc-kahler-differentials], [def-weil-pbc-exterior-algebra], [def-weil-pbc-module-tensor-product]. Set $T=P\\otimes_RB_2$, $q:T\\to Q$, and $e=\\delta q:T\\to B$, $t_i\\mapsto\\bar t_i$. The evaluation-counit exchange for the flat extension $R\\to B_2$ identifies $C_1$ with $C_Q^T(\\Omega^n_{T/B_2}[n])$ [lem-sfb-perfect-coinduction-tor-independent-exchange]. The normalized diagonal isomorphism of [def-sfb-polynomial-koszul-diagonal-data] exists over these arbitrary rings:\n$$\\kappa_P:C_B^Q(C_1)\\xrightarrow{\\sim}C_B^T(\\Omega^n_{T/B_2}[n])\\xrightarrow{\\sim}B[0].$$\nThe first map uses that exchange and the coinduction-transitivity comparison with composite evaluation counit. The second is the ordered graph Koszul trace for $t_i-\\bar t_i$, sending the dual top graph wedge paired with $dt_1\\wedge\\cdots\\wedge dt_n$ to $1$, with the cohomological tensor signs. Let $\\xi_P:B[0]\\to C_1$ in $D(Q)$ be the coinduction adjunct of $\\kappa_P^{-1}$. Its multiplication map $B\\to R\\operatorname{Hom}_Q(B,C_1)$ is an isomorphism.\nFor every homomorphism $R\\to R'$ of arbitrary commutative rings put $B'=B\\otimes_RR'$, $P'=P\\otimes_RR'$, $Q'=B'\\otimes_{R'}B'$, $L'=\\Omega^n_{P'/R'}[n]$, $C'=C_{B'}^{P'}(L')$, and $C'_1=C'\\otimes_{B',p'_1}^{\\mathbf L}Q'$. Let $c:C\\otimes_B^{\\mathbf L}B'\\xrightarrow{\\sim}C'$ be the evaluation-counit exchange, with the coefficient map carrying the ordered volume to the ordered volume. Under $B\\otimes_Q^{\\mathbf L}Q'\\simeq B'$, let $d:C_1\\otimes_Q^{\\mathbf L}Q'\\to C'_1$ be induced by $c$ and the tensor associators. Then\n$$d\\circ(\\xi_P\\otimes_Q^{\\mathbf L}Q')=\\xi_{P'}.$$\nThe equality preserves the specified class itself, respects identity and successive base extensions, and includes the empty tuple and zero rings. Neither ring is assumed Noetherian, $R\\to R'$ need not be flat, and $B$ is not assumed perfect over its self-product $Q$. No proper scheme, proper-adjoint comparison, or trace-pair base-change map is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent arbitrary-ring scalar clause of Tag 0E2E (lemma-relative-dualizing-noetherian), with Tag 0E2F (lemma-base-change-relative-dualizing), Tags 0A70/0A71 (lemma-right-adjoint, lemma-RHom-ext), and ordered volume convention of Tag 0BZI (section-relative-dualizing-complex-algebraic). Exact normalized-class compatibility is an agent enhancement of the generator claim of 0E2F."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-trf-derived-coinduction",
+  "def-pur-derived-internal-hom",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "def-sfb-polynomial-koszul-diagonal-data",
+  "def-sfb-polynomial-koszul-diagonal-system"
+ ],
+ "proof": [
+  {
+   "text": "First fix the coefficient identifications. The universal property of differentials gives $\\Omega_{P/R}=\\bigoplus_iP\\,dt_i$: a derivation is uniquely specified by its values on the $t_i$, and the inverse sends $(m_i)$ to $f\\mapsto\\sum_i(\\partial f/\\partial t_i)m_i$. The free exterior-basis formula of [lem-weil-pbc-exterior-power-free-basis] identifies $\\Omega^n_{P/R}$ with $Pv$, $v=dt_1\\wedge\\cdots\\wedge dt_n$. Over $T=B_2[t_1,\\ldots,t_n]$ and over every scalar extension use the identical formula, so the coefficient comparison carries $v$ to the ordered target volume. These maps preserve identities and composites on each $dt_i$, hence on the top wedge. Also $P$ is $R$-flat: on the monomial decomposition tensoring is a direct sum of copies of the original map. Tensoring with $T=P\\otimes_RB$ or $Q=B\\otimes_RB$ is successive tensoring with flat modules, hence preserves injections. Thus $P,T,Q,B$ are $R$-flat. This argument uses only finite-support polynomial expressions and applies to zero rings and $n=0$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-arbitrary-polynomial-dual-properties], $B[0]$ is perfect over $P$ without Noetherian hypotheses. The extension $P\\to T=P\\otimes_RB_2$ is flat: for a $P$-module $M$, $M\\otimes_PT=M\\otimes_RB_2$, so exactness is [lem-weil-pbc-flat-tensor-exact]. In particular $B$ and $T$ are Tor independent over $P$ and $B\\otimes_PT=Q$. Apply [lem-sfb-perfect-coinduction-tor-independent-exchange] to $P\\to B$, $P\\to T$, and $L$ to obtain the isomorphism $\\beta:C_1\\xrightarrow{\\sim}C_Q^T(V_T[n])$, $V_T=T v$. Its normalization is exactly extension of the evaluation-at-one counit with the coefficient map in step 1. Thus it is the exchange specified in the statement, rather than an arbitrary isomorphism of the underlying objects.",
+   "uses": [
+    "lem-sfb-arbitrary-polynomial-dual-properties",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-polynomial-graph-coinduction] with coefficient ring $B_2$, variables $t_i$, and evaluations $\\bar t_i$. It gives the augmented bounded finite-free resolution $K_T(t_i-\\bar t_i)\\to B[0]$. Therefore [lem-sfb-koszul-evaluation-pasting] gives $\\tau:C_B^T(V_T[n])\\xrightarrow{\\sim}B[0]$, sending the dual ordered top wedge paired with $v$ to $1$. The coinduction adjunctions of [lem-trf-derived-coinduction-adjunction] and right-adjoint composition [lem-cat-right-adjoint-composition] give $\\alpha:C_B^Q C_Q^T\\xrightarrow{\\sim}C_B^T$, with composite evaluation counit. Define $\\kappa=\\tau\\alpha C_B^Q(\\beta)$. Each factor is invertible. Its counit and top-wedge normalizations are precisely those of [def-sfb-polynomial-koszul-diagonal-data], so this constructs the required normalized $\\kappa_P$. No Koszul blocks have been permuted.",
+   "uses": [
+    "lem-trf-polynomial-graph-coinduction",
+    "lem-sfb-koszul-evaluation-pasting",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-cat-right-adjoint-composition",
+    "def-sfb-polynomial-koszul-diagonal-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "Let $a=\\kappa^{-1}:B[0]\\to C_B^Q(C_1)$. Under the restriction/coinduction adjunction its adjunct is $\\xi=\\epsilon^\\delta_{C_1}\\circ\\operatorname{Res}_\\delta(a)$, as required. The multiplication map of this class is $a$: the precomposition action sends $b$ to the Hom class $x\\mapsto\\xi(bx)$, which is exactly the $B$-linear adjunct of $\\xi$ because the counit is evaluation at $1$. This formula is the adjunction formula on K-injective representatives, and naturality of the adjunction gives it for the localized arrow $a$ as well. Thus the specified multiplication map is an isomorphism, since $a$ is.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "Now fix arbitrary $R\\to R'$. The algebra $B'$ is $R'$-flat by [lem-weil-pbc-flat-module-base-change], and tensoring a finite generators-and-relations presentation of $B$ gives a finite presentation of $B'$ [def-weil-pbc-finitely-presented-algebra]. Put $T'=T\\otimes_RR'$, canonically $P'\\otimes_{R'}B'_2$, and $Q'=Q\\otimes_RR'$. For any $X\\in\\{B,Q\\}$ considered as a $T$-module, [lem-sfb-flat-algebra-derived-module-tensor-exchange] for the flat algebra $T/R$ identifies the restriction of $X\\otimes_T^{\\mathbf L}T'$ with $X\\otimes_R^{\\mathbf L}R'$. Since $X$ is $R$-flat by step 1, the latter is $(X\\otimes_RR')[0]$: tensor a free $R$-resolution of $R'$ with $X$ and use [lem-weil-pbc-flat-tensor-exact]. This proves Tor independence for $T\\to Q$, $T\\to B$ after $T\\to T'$. The same calculation for the flat algebras $P/R$ and $Q/R$ gives $B\\otimes_P^{\\mathbf L}P'\\simeq B'$ and $B\\otimes_Q^{\\mathbf L}Q'\\simeq B'$, with their canonical balancing maps. In particular the exchange of step 2 for $P\\to P'$ gives exactly $c:C\\otimes_B^{\\mathbf L}B'\\xrightarrow{\\sim}C'$. No flatness of $R'$ over $R$ has been used.",
+   "uses": [
+    "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-weil-pbc-flat-module-base-change",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "Write $F$ for extension $D(Q)\\to D(Q')$ and $G$ for extension $D(B)\\to D(B')$, and set $H=C_B^Q(C_1)$, $E=C_B^T(V_T[n])$. Let $j:H\\to E$ be the composite before $\\tau$ in step 3, and let $j'$ be its primed version. Denote by $\\gamma_\\delta:G H\\to C_{B'}^{Q'}(F C_1)$ the counit exchange, which exists by [lem-sfb-perfect-coinduction-tor-independent-exchange] even though $B$ need not be perfect over $Q$. Let $\\gamma_e:G E\\to C_{B'}^{T'}(V_{T'}[n])$ be the graph exchange. Then\n$$j'\\, C_{B'}^{Q'}(d)\\,\\gamma_\\delta=\\gamma_e\\,G(j).$$\nIndeed paste the two restriction/coinduction squares for $T\\to Q\\to B$ using clause (2) of [lem-weil-pbc-mate-pasting]; [lem-cat-right-adjoint-composition] identifies their pasted counit with that for $e$. For the remaining quotient square, the exchanges along $P\\to T\\to T'$ and $P\\to P'\\to T'$ agree by the successive-extension clause of [lem-sfb-perfect-coinduction-tor-independent-exchange]. The two tensor paths have the same balancing map on pure tensors and the same coefficient volume, so their mates identify $F\\beta$ with $\\beta'd$, inserting the $q$-exchange. Substituting this in the pasted identity gives the displayed equation. This uses existence, not invertibility, of $\\gamma_\\delta$.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "The graph resolution in step 3 is finite free over $T$, and remains the augmented graph resolution after $T\\to T'$; Tor independence was checked in step 5. Hence the scalar-extension clause of [lem-sfb-koszul-evaluation-pasting], with the ordered coefficient line identified in step 1, says $\\tau'\\gamma_e=G(\\tau)$. Combining this with the equation of step 6 yields\n$$\\kappa'\\,C_{B'}^{Q'}(d)\\,\\gamma_\\delta=G(\\kappa).$$\nConsequently, for $a=\\kappa^{-1}$ and $a'=(\\kappa')^{-1}$,\n$$C_{B'}^{Q'}(d)\\,\\gamma_\\delta\\,G(a)=a'.$$\nThis is equality of the normalized derived arrows, with no undetermined unit or orientation sign: the Koszul theorem preserves the ordered top functional itself, and scalar extension changes no degree or ordering.",
+   "uses": [
+    "lem-sfb-koszul-evaluation-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "Take the adjunct of the last equation under $\\operatorname{Res}_{\\delta'}\\dashv C_{B'}^{Q'}$. The defining equation for $\\gamma_\\delta$ is $\\epsilon^{\\delta'}\\operatorname{Res}_{\\delta'}(\\gamma_\\delta)=F(\\epsilon^\\delta)\\theta_H$, where $\\theta_H$ is the Tor-independent scalar/restriction comparison. Naturality of the counit with respect to $d$ and of $\\theta$ with respect to $a$ identifies the adjunct of its left side with $d\\,F(\\epsilon^\\delta\\operatorname{Res}_\\delta(a))=d\\,F(\\xi)$. Here $\\theta_{B[0]}$ is the canonical $B\\otimes_Q^{\\mathbf L}Q'\\simeq B'$ comparison checked in step 5, so the source is exactly the source fixed in the statement. The adjunct of the right side is $\\xi'$. Bijectivity of adjunction therefore proves $d\\circ(\\xi_P\\otimes_Q^{\\mathbf L}Q')=\\xi_{P'}$. This explicitly takes the mate, rather than asserting that an arbitrary generator is preserved.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  },
+  {
+   "text": "The identity and successive-extension clauses of [lem-sfb-perfect-coinduction-tor-independent-exchange] identify the direct and successive maps $c$, and hence their first-pullback maps $d$, under the canonical tensor associators. The analogous clauses of [lem-sfb-koszul-evaluation-pasting] identify the graph traces. Mate pasting preserves these identities, so steps 6--8 respect identity and successive extensions on the specified classes. If $n=0$, the graph tuple is empty, $T=B$, and its trace is the identity, as stated by [lem-trf-polynomial-graph-coinduction]; steps 2--8 still apply to the possibly nontrivial quotient $R\\twoheadrightarrow B$. If a ring is zero all relevant module categories have only the zero object, and the formulas and invertible arrows above remain valid. The construction never invokes perfection of $B$ over $Q$, Noetherian approximation, or a proper-adjoint comparison.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-sfb-koszul-evaluation-pasting",
+    "lem-weil-pbc-mate-pasting",
+    "lem-trf-polynomial-graph-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent ordered-volume/counit refinement of Tags 0E2E and 0E2F; Tag 0A70 (lemma-right-adjoint), Tag 0A71 (lemma-RHom-ext), lemma-composition-right-adjoints; polynomial volume convention in Tag 0BZI (section-relative-dualizing-complex-algebraic)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sfb-arbitrary-polynomial-dual-properties",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-trf-polynomial-graph-coinduction",
+  "lem-sfb-koszul-evaluation-pasting",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-cat-right-adjoint-composition",
+  "def-sfb-polynomial-koszul-diagonal-data",
+  "def-trf-derived-coinduction",
+  "lem-sfb-flat-algebra-derived-module-tensor-exchange",
+  "lem-weil-pbc-flat-module-base-change",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Ordered Koszul/counit refinement of Tags 0E2E and 0E2F over arbitrary rings; exact normalized-class equality is the agent argument in steps 6--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented algebra over any commutative ring the polynomial graph Koszul diagonal class is preserved by arbitrary derived scalar extension",
+   "results": "Algebra.SubmersivePresentation.baseChange; Algebra.kerTensorProductMapIdToAlgHomEquiv; Algebra.Generators.Cotangent.exact; Algebra.Generators.CotangentSpace.exact; Algebra.IsStandardSmoothOfRelativeDimension.baseChange; Algebra.FormallyUnramified.flat_of_restrictScalars; Algebra.Extension.tensorH1Cotangent; Algebra.Smooth.flat",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Koszul graph trace coinduction evaluation counit preserves the adjunct diagonal class under nonflat scalar extension of arbitrary rings",
+   "results": "comonadicExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.RestrictionCoextensionAdj.counit'_app; ModuleCat.RestrictionCoextensionAdj.counit'; Rep.resCoindAdjunction_counit_app_hom_hom; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.counit",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coind\", \"baseChange\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc.*baseChange|baseChange.*coinduc|koszul.*[Dd]iagonal|[Dd]iagonal.*koszul",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial graph Koszul diagonal class compatible with derived base change over arbitrary commutative rings",
+   "results": "WeierstrassCurve.baseChange_Ψ; KaehlerDifferential.tensorKaehlerEquivBase; WeierstrassCurve.baseChange_preΨ₄; WeierstrassCurve.baseChange_ψ; RingHom.IsStableUnderBaseChange; CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal; KaehlerDifferential.tensorKaehlerEquiv; KaehlerDifferential.cotangentComplexBaseChange_tmul",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-polynomial-model-base-change",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Simple image of top-to-bottom line cohomology maps. Serre-duality input: canonical homogeneous line and invariant trace pairing before the elementary map-space argument. General coherent-duality input, after computing the canonical character: the smooth proper trace pairing and its compatibility with isomorphisms and scalar extension. Supporting comparison: derived relative cup and base-change mates, before taking cohomology and composing with the coherent trace. Supporting argument here: arbitrary scalar extension of the normalized polynomial model, preservation of the graph-defined diagonal class, and identification with the proper trace-pair comparison. Supporting sublemma: Arbitrary-ring graph-class normalization and scalar compatibility extracted from returned proof steps 4--6.",
+   "via": [
+    "lem-sfb-proper-flat-polynomial-model-base-change",
+    "lem-sfb-smooth-proper-coherent-trace-pairing",
+    "lem-sfb-flag-line-equivariant-serre-pairing",
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-arbitrary-polynomial-graph-class-base-change",
+  "worker": "stage1",
+  "summary": "Unchanged statement; nine proof steps using existing arbitrary-ring perfectness, counit exchange, graph Koszul trace and categorical mate-pasting nodes. Checked all four Tor-independent quotient/diagonal squares before transporting the exact normalized arrow. No new nodes; no perfection of the diagonal module is assumed.",
+  "blueprint": "Existing ancestry has from.node=null. Retained its recorded chain to det-thm-sf-ctf-stability-direct-images, proof (3), and the marked stable-curve/moduli/Serre-duality prerequisite. This split realizes the polynomial-model scalar clause through graph trace normalization and counit mates; latest blueprint has no separate statement of this algebraic lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-polynomial-graph-coinduction",
+    "why": "Generic polynomial-evaluation Koszul resolution over arbitrary rings; used as an algebraic tool in the prescribed polynomial-model route."
+   },
+   {
+    "node": "lem-trf-derived-coinduction-adjunction",
+    "why": "Generic restriction/coinduction adjunction and its evaluation counit, independent of the trace-formula route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic preservation of exact sequences by flat tensor; needed for arbitrary-base Tor independence, not a geometric route replacement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-base-change",
+    "why": "Generic module-flatness under arbitrary scalar extension; needed to apply the primed polynomial presentation, not a change in the geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-exterior-power-free-basis",
+    "why": "Generic ordered basis of a finite free exterior power; fixes the coefficient volume for the Koszul trace."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-polynomial-graph-coinduction",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a43864e96",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a43864e96 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement is unchanged against live and no new nodes are created; the only changes are the 9 proof steps, proof_deps (equal to the union of step uses), proof_origin=agent and split_report. There is no cycle, and live and side-live are still unsplit. The source is Stacks 0E2F (dualizing.tex l.5474), which only preserves a generator through Noetherian approximation. The item asks for exact equality of the class over arbitrary rings, and it is honestly labeled as agent work. Checks per step: (1) Omega_P is free and P, T, Q are R-flat. (2) P->T is flat, Q=B (x)_P T, and perfectness comes from arbitrary-polynomial-dual-properties, so beta is the counit exchange and an isomorphism. (3) Graph-coinduction with A=B_2 and a_j=bar t_j gives the quasi-isomorphism hypothesis of koszul-evaluation-pasting; tau, alpha and kappa match def-sfb-polynomial-koszul-diagonal-data (h=1). (4) The adjunct of xi is kappa^{-1}, so the multiplication map is an isomorphism. (5) flat-algebra-derived-module-tensor-exchange with K in {B,Q} and N=R' gives every Tor condition without R'/R flat; c is the exchange and an isomorphism. (6) I checked by hand that mate pasting (clause 2), right-adjoint composition and the successive-extension clause along P->T->T' and P->P'->T' give gamma_q F(beta)=beta' d and the displayed square; only the existence of gamma_delta is used. (7) The scalar clause of Koszul pasting gives tau' gamma_e=G(tau), hence C(d) gamma_delta G(a)=a'. (8) The adjunct is d F(xi) theta_B = xi', and theta_B is B' = B (x)^L_Q Q'. (9) Identity and composite base change, n=0 and zero rings hold. Small cases: Z[t] over Z with R'=F_p (nonflat base change), and k[z]/(z^2) (diagonal not perfect; never used). Batch-5: all five flagged citations (arbitrary-polynomial-dual-properties, trf-polynomial-graph-coinduction, koszul-evaluation-pasting, trf-derived-coinduction-adjunction, flat-algebra-derived-module-tensor-exchange) are generic coinduction, Koszul, adjunction and one-point-site algebra. Their closures reach no trace-formula or Poincare-duality theorem, no nt-assume leaf and no target, so the citations are accepted. The tool_uses in split_report (two sk-i-curve-zero generic tools and three Mathlib leaves) are accepted. Minor point, no fix: the identification of the Koszul line with V_T (e_i -> dt_i) is implicit in step 3, but steps 1 and 3 fix it."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ArbitraryPolynomialGraphClassBaseChange",
+  "declaration": "AlgebraicGeometry.arbitraryPolynomialGraphClass_exists",
+  "declarations": [
+   "AlgebraicGeometry.arbitraryPolynomialGraphClass_exists",
+   "AlgebraicGeometry.arbitraryPolynomialGraphClass_baseChange",
+   "AlgebraicGeometry.arbitraryPolynomialGraphClass_identity",
+   "AlgebraicGeometry.arbitraryPolynomialGraphClass_composition"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ArbitraryPolynomialGraphClassBaseChange.lean",
+  "statement": "theorem arbitraryPolynomialGraphClass_exists {R B : Type u} [CommRing R] [CommRing B] [Algebra R B] [Module.Flat R B] [Algebra.FinitePresentation R B] (C : PolynomialKoszulChart R B) (hpoly : Function.Bijective C.coordinates) : ∃ κ : C.diagonalHom ≅ koszulDiagonalUnit B, IsKoszulDiagonalNormalization C κ ∧ IsIso (relativeDualizingModuleClassMap R B C.firstPullback (C.diagonalClass κ))",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four declarations jointly state the node: normalized graph existence and multiplication, exact scalar class preservation, identity normalization and successive-exchange coherence. Polynomial charts are the existing chart notion with bijective coordinates; scalar-extended presentations are specified by the two pushout squares. The added landed definition dependency supplies only the existing canonical identity and composition scalar-extension identifications, with no Noetherian assignment assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b35f02988",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Delivery adds only the item lean record and stmt_dep def-sfb-polynomial-koszul-diagonal-system, a def node landed 2026-10-23 that is on the base, with no cycle; it supplies koszulDiagonalExtensionId and koszulDiagonalExtensionComp. Four sorry theorems, no defs. The lean.statement is verbatim the file signature. Clauses checked against def-sfb-polynomial-koszul-diagonal-data: exists = ∃κ with IsKoszulDiagonalNormalization (κ is pinned by the β counit equation and the graph trace) plus IsIso of relativeDualizingModuleClassMap of diagonalClass κ (adjunct of κ.inv, curry of mult ≫ ξ). baseChange: arbitrary R→S with polynomial charts and pushouts hbase/hquotient, so B'=B⊗S and the ambient map is forced; c is pinned by IsComparison; PreservesClass is the real equation ext ξ ≫ firstPullbackMap = d ≫ ξ' with d the single mate of b↦F.ring b. identity and composition have the landed system's field form. n=0, zero rings, non-flat R', non-perfect diagonal and no Noetherian hypothesis are covered. Not a duplicate of the Noetherian localized-chart system node. Not superseded in live or side-live. Docstrings carry sources, blueprint tag and proof steps 1-9; report sections are present. Advisory: R' is in the same universe u, inherited from the landed chart interface; the RingHom.Flat import is redundant. No compile needed (no change)."
+ }
+}

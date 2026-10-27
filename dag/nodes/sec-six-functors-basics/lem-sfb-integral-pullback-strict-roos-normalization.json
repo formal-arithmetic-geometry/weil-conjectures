@@ -25,157 +25,45 @@
  ],
  "proof": [
   {
-   "text": "Identify $R_T$ with $\\varprojlim_n A_{n,T}$ by [det-prop-sfb-qlbar-colimit-x-integral-limit], using its canonical finite projections. The coefficient datum makes $A$ a discrete valuation ring, hence a principal ideal domain; every ideal is finitely generated, so $A$ is Noetherian. Apply [lem-weil-pbc-constant-completion-equivalence] on each small pro-étale site with $I=(\\pi)$. Its flatness and quotient assertions give $R_T$ flat over $C_T$ and $R_T/\\pi^nR_T\\cong A_{n,T}$ for every $n\\geq1$, compatibly with the quotient projections. These assertions concern the entire module categories and require no completeness of $[P]$.",
+   "text": "Obtain the strict comparison record and its normalizations from [lem-sfb-integral-roos-chain-representatives]. Apply [lem-sfb-integral-roos-augmentation-localization] to these same witnesses to obtain the U and T unit identities and constant unit normalization.",
    "uses": [
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-sfb-integral-roos-chain-representatives",
+    "lem-sfb-integral-roos-augmentation-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M, lemma-completion-flat; proetale.tex Tag 099L, section-derived-completion-noetherian, opening paragraphs"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $a_C:g^{-1}C_Y\\cong C_X$ and $a_R:g^{-1}R_Y\\cong R_X$. The constant identification comes from inverse image of constant sheaves; the completed identification and exactness of module inverse image are [sk-prop-sfb-cartesian-coefficients]. If $i_T:C_T\\to R_T$ is the constant-function map, naturality of the comparison $g^{-1}p_Y^*\\cong p_X^*$ at the map from discrete $A$ to continuous $A$ gives $a_R\\,g^{-1}i_Y=i_Xa_C$ [sk-def-sfb-pullback-from-point-comp, sk-def-sfb-coefficient-morphisms]. By [sk-def-sfb-module-pushforward-pullback], $g^*H=R_X\\otimes_{g^{-1}R_Y}g^{-1}H$. Its identification with $g^{-1}H$ sends $r\\otimes h$ to $a_R^{-1}(r)h$, with inverse $h\\mapsto1\\otimes h$. The analogous formula using $a_C$ identifies $g_C^*\\operatorname{Res}_YH$ with the same abelian sheaf. The displayed coefficient-square equation makes these two $C_X$-actions identical. Define $d_H$ by the identity on that sheaf. It therefore sends each scalar-extension generator to its specified constant-coefficient generator, is invertible, and is natural in $H$. Both module inverse images therefore have the same exact underlying abelian inverse-image functor. Applying the construction in every degree gives a chain isomorphism for every complex $H$, in particular $d=d_P$.",
+   "text": "Apply [lem-sfb-integral-lambda-quotient-augmentation] in every degree. Product projection extensionality identifies the two product augmentations. The strict Roos map coordinate formula and the normalized zero first coordinates then prove alphaT followed by L equals alphaU as actual chain maps.",
    "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-pullback-from-point-comp",
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-module-pushforward-pullback"
+    "lem-sfb-integral-lambda-quotient-augmentation",
+    "def-weil-strict-roos-model",
+    "def-sfb-integral-pullback-strict-roos-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "Comparison with the Stacks Project: restriction commutes with inverse image; explicit normalized coefficient-square calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-flat-scalar-restriction-kflat] to $C_Y\\to R_Y$, flat by step 1. Since $P$ is K-flat with flat terms, $Q=\\operatorname{Res}_YP$ is K-flat with flat terms over $C_Y$. Apply the flat-term K-flat pullback assertion of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the ringed-topos morphisms with coefficients $R_Y,R_X$ and $C_Y,C_X$, respectively. It gives flat terms and K-flatness for $g^*P$ and $g_C^*Q$. These applications impose neither boundedness nor a condition on the cohomology of $P$.",
+   "text": "Naturality of kappaR at lambda gives the first localization identity; [lem-sfb-integral-roos-scalar-localization] gives the second. The U and T identities were obtained from augmentation localization. Extract K-flat preservation and the four counit isomorphisms from [lem-sfb-integral-roos-resolving-counits], and assemble the conjunctions with the same comparison witnesses.",
    "uses": [
-    "lem-weil-pbc-flat-scalar-restriction-kflat",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-sfb-integral-roos-scalar-localization",
+    "lem-sfb-integral-roos-resolving-counits",
+    "lem-sfb-integral-roos-augmentation-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E, lemma-pullback-K-flat; scalar restriction uses the K-flat tensor test of Tag 06YN, definition-K-flat"
-   }
-  },
-  {
-   "text": "For any $R_T$-module $H$, construct the underived comparison\n$$\\beta_{T,n,H}:\\operatorname{Res}_TH\\otimes_{C_T}A_{n,T}\\longrightarrow\\operatorname{Res}_T(H\\otimes_{R_T}A_{n,T}),\\qquad h\\otimes\\bar a\\longmapsto h\\otimes\\bar a.$$\nBoth sides are the cokernel of multiplication by $\\pi^n$ on the same underlying sheaf $H$: on the left use $A_{n,T}=C_T/(\\pi^n)$, and on the right use $A_{n,T}=R_T/(\\pi^n)$ from [lem-weil-pbc-constant-completion-equivalence]. The two identifications send $h\\otimes1$ to the class of $h$, so $\\beta$ is invertible. This also proves the inverse formula, including balancing by arbitrary local $R_T$-sections, without assuming that those sections are constant. Applying it degreewise gives a natural chain isomorphism. On each tensor generator both orders of reduction from $n+1$ to $n$ send $h\\otimes\\bar a$ to $h\\otimes(\\bar a\\bmod\\pi^n)$, and $\\beta$ sends the quotient augmentation $h\\mapsto h\\otimes1$ to the same augmentation. Thus all these compatibilities are strict.",
-   "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M, lemma-completion-flat; quotient tensor universal property, explicitly computed"
-   }
-  },
-  {
-   "text": "Use the ordinary balanced tensor comparison of [def-sfb-condensed-pullback-tensor-comparison] with $H=P^q$ and the coefficient module $A_{n,Y}$, and identify $g^*A_{n,Y}=A_{n,X}$ by [sk-prop-sfb-cartesian-coefficients]. Degreewise this gives $\\lambda_n:T_n\\cong U_n$. The same balanced calculation over $C$ gives $g_C^*(Q\\otimes_{C_Y}A_{n,Y})\\cong(g_C^*Q)\\otimes_{C_X}A_{n,X}$. Under inverse-coefficient transport its formula is the balanced map sending the inverse-image tensor $h\\otimes\\bar a$ to the tensor of the two inverse images; it commutes with differentials by naturality in $P^q$. Define\n$$\\theta_n=g_C^*(\\beta_{Y,n,P}^{-1})\\circ d_{P\\otimes_{R_Y}A_{n,Y}}:\\operatorname{Res}_XT_n\\xrightarrow{\\sim}V_n.$$\nHere step 2 constructs $d$ for all complexes, so it applies even though the finite tensor need not be K-flat. The formulas for $\\beta$ and $d$ show that $\\theta_n$ also sends an inverse-image tensor $h\\otimes\\bar a$ to the same tensor. For either $\\lambda$ or $\\theta$, composing in either order with the transition sends this generator to $h\\otimes(\\bar a\\bmod\\pi^n)$. Composing with the augmentation sends $h$ to $h\\otimes1$; on the source of $\\theta$ this uses $d_P(h)=h$. These generator equations prove equality of sheaf maps, hence of chain maps. Thus $\\lambda$ and $\\theta$ are isomorphisms of strict towers, preserving their specified augmentations.",
-   "uses": [
-    "def-sfb-condensed-pullback-tensor-comparison",
-    "sk-prop-sfb-cartesian-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "First paragraph: inverse image commutes with reduction; Comparison with the Stacks Project: the same reductions after scalar restriction"
-   }
-  },
-  {
-   "text": "Restriction of scalars is the identity on underlying abelian sheaves [def-pc-sheaf-restrict-scalars]. Kernels and local lifts of sections through epimorphisms are therefore unchanged, so it is exact. Products of module sheaves exist and are computed sectionwise by [lem-weil-proetale-countable-products-exact]. Consequently the canonical map $\\operatorname{Res}_X(\\prod_nT_n)\\to\\prod_n\\operatorname{Res}_XT_n$ is an isomorphism: over every site object it sends a tuple to that same tuple, and both $C_X$-actions are componentwise. It commutes with projections, differentials and $s$. Finite direct sums and their maps are unchanged as well. This fixes the product and cone identifications used for $E_P$.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "Comparison with the Stacks Project: exactness and preservation of products under restriction"
-   }
-  },
-  {
-   "text": "For $W$ put $B_W=\\prod_nW_n$ and $F_W=1-s_W$. In the coordinate order fixed in the statement,\n$$\\mathsf R(W)^q=B_W^{q-1}\\oplus B_W^q,\\qquad D_W(y,x)=(-d_Wy-F_Wx,d_Wx).$$\nLet $a=\\prod_n\\lambda_n$ and let $e=\\prod_n\\theta_n$, using step 6 for the source of $e$. Strict transition compatibility from step 5 gives $aF_T=F_Ua$ and $eF_{\\operatorname{Res}T}=F_Ve$. Define $L_P(y,x)=(ay,ax)$ and $E_P(y,x)=(ey,ex)$. For example,\n$$D_U(ay,ax)=(-a\\,d_Ty-aF_Tx,a\\,d_Tx)=L_P D_T(y,x).$$\nThe identical computation with $e$ proves the chain equation for $E_P$. Their inverses are diagonal products of the levelwise inverses and satisfy the same equations. Naturality in $P$ follows from the natural level maps and the componentwise product formulas. Thus these are precisely the asserted cochain isomorphisms, with no cone-map choice.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "First paragraph and Comparison with the Stacks Project: strict cone-and-shift calculation of the tower comparisons"
-   }
-  },
-  {
-   "text": "For a compatible augmentation $b:L\\to W$, set $b^\\Pi=(b_n)_n$. Compatibility says $F_Wb^\\Pi=0$. Hence\n$$D_W(0,b^\\Pi z)=(0,b^\\Pi d_Lz),$$\nso the specified $\\alpha_W(z)=(0,b^\\Pi z)$ is a chain map with exactly the given cone signs. Step 5 gives $a b_T^\\Pi=b_U^\\Pi$ and $e\\operatorname{Res}_X(b_T^\\Pi)=b_V^\\Pi d$. Evaluating the diagonal maps of step 7 now gives\n$$L_P\\alpha_T(z)=(0,b_U^\\Pi z)=\\alpha_U(z),\\qquad E_P\\operatorname{Res}_X(\\alpha_T)(z)=(0,b_V^\\Pi d(z))=\\alpha_Vd(z).$$\nThese are equalities of actual chain maps, rather than equalities inferred only from their finite projections.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-    "place": "First paragraph: c_K is the completion map; Comparison with the Stacks Project: its scalar restriction has the same unit"
-   }
-  },
-  {
-   "text": "It remains to identify these actual cone maps with the total derived strict-tower comparisons. By [lem-weil-proetale-countable-products-exact], products are exact for each coefficient sheaf here. Thus [lem-pe-roos-cone-calculus] applies: its reordered cone is exactly $\\mathsf R(W)$ with coordinates $(x,y)$, and its action on strict maps is the diagonal product map of step 7. For a K-injective tower resolution $W\\to I$, as used in [lem-weil-pbc-ringed-strict-tower-homotopy-limit], this gives a quasi-isomorphism $\\mathsf R(W)\\to\\mathsf R(I)$. By [lem-weil-derived-limit-roos-complex] the natural map $\\varprojlim I_n\\to\\mathsf R(I)$ is a quasi-isomorphism, explicitly $z\\mapsto(0,(z_n)_n)$. The remaining hypothesis of the K-injective Roos lemma holds: the module category on a small pro-étale skeleton is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian] and hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. The strict tower resolution is supplied by the ringed strict-tower theorem. The resulting zigzag identifies $Q\\mathsf R(W)$ with the total right derived inverse limit. For an augmented tower, both composites from $L$ to $\\mathsf R(I)$ are $(0,(L\\to W_n\\to I_n)_n)$, so this zigzag identifies the augmentation with the strict-derived-tower unit. Where the unit is defined as in [def-weil-pbc-completed-pullback], through a resolution $\\Delta L\\to I'$ and $R\\lim$ of $\\Delta L\\to W$, choose a lift $I'\\to I$; by K-injectivity of $I$ its composite with $\\Delta L\\to I'$ is homotopic to $\\Delta L\\to W\\to I$, and the diagonal product of that homotopy is a homotopy on $\\mathsf R(I)$, so both descriptions give the same map in the derived category. It is natural in strict maps; hence the localizations of $L_P,E_P$ are the claimed canonical comparisons, not arbitrary isomorphisms of Roos triangles.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-pe-roos-cone-calculus",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-derived-limit-roos-complex",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sp-grothendieck-enough-injectives",
-    "def-weil-pbc-completed-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 07KC, lemma-products, and 070M, lemma-difficulty-K-injectives; strict-tower resolution in sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok"
-   }
-  },
-  {
-   "text": "By step 3, $P$, $g^*P$, $Q$ and $g_C^*Q$ are valid flat-term K-flat representatives for their respective derived tensor calculations [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Thus $U$ computes the finite derived reductions of $g^*[P]$, and $V$ computes those of $g_C^*[Q]$ (constant-coefficient inverse image commutes with reduction by the same balanced calculation of step 5). The quotient-tower units are the derived-completion units by [lem-weil-pbc-constant-completion-equivalence], including for inputs which are not complete. In the notation of [def-weil-pbc-completed-pullback], use the identification of step 1 [det-prop-sfb-qlbar-colimit-x-integral-limit] of its $A_T=\\varprojlim_n(A_n)_T$ with $R_T$. Its structure map $c_g$ is then $a_R$ of step 2: naturality of $g^{-1}p_Y^*\\cong p_X^*$ at $\\mathcal O_E\\to\\mathcal O_E/\\pi^n$ [sk-def-sfb-pullback-from-point-comp, sk-def-sfb-coefficient-morphisms] gives the $n$-th projection of $a_R$ as the constant-sheaf comparison $g^{-1}(A_n)_Y\\cong(A_n)_X$, which, like the $n$-th component of $c_g$, sends each constant section to itself; maps into the limit agree when their projections do. So module pullback along $c_g$ is the item's $g^*$. Applying derived pullback to the augmented strict reduction tower gives the tower represented here by $T$: inverse image on $R$-modules is exact by [sk-prop-sfb-cartesian-coefficients], so it computes this operation on any representative of the tower. Step 9 identifies its chosen total derived inverse limit and unit with $Q\\mathsf R(T)$ and $Q\\alpha_T$. Therefore step 8 proves both required normalized derived identities. On derived-complete input the constant formula is precisely Stacks completed pullback (099N(2),(5)); on arbitrary input it is the same ordinary pullback followed by completion and its unit. This argument never identifies the two ambient coefficient categories, or asserts that an arbitrary $[P]$ is complete.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-completed-pullback",
-    "sk-prop-sfb-cartesian-coefficients",
-    "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "sk-def-sfb-pullback-from-point-comp",
-    "sk-def-sfb-coefficient-morphisms"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099M, lemma-naive-completion, and 099N, lemma-pushforward-Noetherian-case, clauses (2),(5); blueprint first and comparison paragraphs"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-pullback-from-point-comp",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-module-pushforward-pullback",
-  "lem-weil-pbc-flat-scalar-restriction-kflat",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-pc-sheaf-restrict-scalars",
-  "def-sfb-condensed-pullback-tensor-comparison",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-pe-roos-cone-calculus",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-derived-limit-roos-complex",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sp-grothendieck-enough-injectives",
-  "def-weil-pbc-completed-pullback"
+  "lem-sfb-integral-roos-chain-representatives",
+  "lem-sfb-integral-roos-augmentation-localization",
+  "lem-sfb-integral-lambda-quotient-augmentation",
+  "def-weil-strict-roos-model",
+  "def-sfb-integral-pullback-strict-roos-data",
+  "lem-sfb-integral-roos-scalar-localization",
+  "lem-sfb-integral-roos-resolving-counits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
-  "place": "First paragraph and Comparison with the Stacks Project, expanded into balanced-generator formulas and strict cone calculations; supporting Stacks Tags 093M, 0G7E, 07KC, 070M, 099M and 099N"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First and comparison paragraphs; assembly from the existing chain-representative, resolving-counit and augmentation-localization statements, plus the finite augmentation and scalar localization equations."
  },
  "mathlib_searches": [
   {
@@ -325,146 +213,25 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-integral-pullback-strict-roos-normalization",
   "worker": "stage1",
-  "summary": "Statement unchanged. Ten-step split using existing generic lemmas, with explicit normalized coefficient-square, underived finite tensor comparison, strict tower maps, cone signs, both chain augmentation identities, and the K-injective zigzag identifying the strict Roos model with total derived inverse limit. No new nodes. Read all cited statements and checked the unbounded/noncomplete case.",
-  "blueprint": "Steps 1-5 refine the first paragraph (finite reductions and inverse image) and the comparison paragraph (constant scalar restriction); steps 6-9 fix the strict Roos model and both actual units; step 10 identifies these with the two derived comparisons.",
-  "tool_uses": [
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Generic Grothendieck property of module sheaves on a small ringed site, to verify the Roos comparison hypotheses. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-sp-grothendieck-enough-injectives",
-    "why": "Enough injectives for a Grothendieck abelian category, used only to verify the K-injective Roos comparison hypotheses. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
-    "why": "Identification of the completed coefficient ring with its finite constant quotient limit, needed to apply the flat-completion theorem. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic flat constant-to-completed coefficient extension, finite quotients, and completion units; no constructible preservation assertion is used. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Generic Cartesian coefficient and exact inverse-image theorem, used before any constructibility or completeness conclusion. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-weil-pbc-flat-scalar-restriction-kflat",
-    "why": "Generic K-flat and termwise flat preservation under a flat extension followed by scalar restriction. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic ringed-topos flat-term K-flat pullback and derived tensor computation. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "def-sfb-condensed-pullback-tensor-comparison",
-    "why": "Specified ordinary balanced tensor comparison, including its normalization on generators. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic sectionwise exact countable products on a small pro-etale site. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-pe-roos-cone-calculus",
-    "why": "Generic strict Roos functor, including levelwise quasi-isomorphism invariance. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Total derived strict-tower model and K-injective tower resolution, used to fix functorial comparisons. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   },
-   {
-    "node": "lem-weil-derived-limit-roos-complex",
-    "why": "Canonical quasi-isomorphism from the limit of a K-injective tower to its Roos cone, with explicit augmentation. This is a generic input to unit sk-lem-int-tensor, not a replacement for its local-model or devissage route."
-   }
-  ]
+  "summary": "Repaired the returned 10684-character proof by distributing steps 1–3, 4–5, 6–9 and 10 to four self-contained statement-only unsplit nodes. The statement is unchanged; the five-step assembly retains strict map and unit normalizations. Full returned argument and provenance are retained in report.md.",
+  "blueprint": "First paragraph and Comparison with the Stacks Project: coefficient square (assembly 1), finite reductions (2), strict Roos and actual units (3–4), derived completed-pullback interpretation (5)."
  },
- "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sp-grothendieck-enough-injectives",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-flat-scalar-restriction-kflat",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-sfb-condensed-pullback-tensor-comparison",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-pe-roos-cone-calculus",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-derived-limit-roos-complex"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NO-0b41e3aa2",
-  "group": "NO",
+  "reviewer": "NT-cc-O3-31e5e0ae9",
+  "group": "O3",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-0b41e3aa2 (reviewer sub-agent of L); spot-checked: I read the item in full: 10 steps, no new nodes, statement unchanged. This is the first split of a child created by Q70's re-split of det-lem-int-tensor-pullback; live the item is unsplit with an identical statement, and no other group has split it. I read every cited statement. Cone signs: Cone[-1] has D(y,x)=(-dy-(1-s)x,dx), which matches lem-weil-derived-limit-roos-complex exactly and lem-pe-roos-cone-calculus after reordering. The augmentation (0,b) is a chain map because (1-s)b=0. Step by step: step 1 is det-prop(3) with constant-completion-equivalence (O_E is a DVR so Noetherian, the site is V-small), giving flatness and R/pi^n=A_n. In step 2 the C_X-actions agree (c.h=a_R^{-1}(i_X c)h=g^{-1}i_Y(a_C^{-1}c)h) by naturality of alpha_f, so d is the identity on underlying sheaves. Step 3 uses the explicit K-flat clauses of flat-scalar-restriction-kflat and ringed-topoi-derived-tensor-pullback. Steps 4 and 5 check beta, lambda and theta on balanced generators, including transitions and augmentations. Step 6 uses sectionwise products. Steps 7 and 8 are chain identities I recomputed. In step 9 the Roos lemma's hypotheses hold (exact products; Grothendieck so enough injectives) and it is applied only to K-injective I. Small cases checked: g=id, P=R[0], P in a negative degree, an infinite free non-complete P, empty X. Two implicit identifications repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-pullback-strict-roos-normalization.json. (a) Step 9: the unit of def-weil-pbc-completed-pullback goes through a resolution ΔL→I' and Rlim of ΔL→W. I added a lift I'→I and the homotopy from K-injectivity, and cited the def. (b) Step 10: the def's structure map c_g (built from components into lim(P_n)_T) is identified with a_R/alpha_g. Under det-prop the n-th projections agree by naturality of the point comparison at O_E→O_E/pi^n, citing det-prop, sk-def-sfb-pullback-from-point-comp and sk-def-sfb-coefficient-morphisms. Steps stay under 2000 characters; statement, stmt_deps, proof_deps and tool_uses are unchanged. The 12 declared generic tool uses are accepted: none replaces the unit's local-model or dévissage route. Advisory: chain-level overlap with the derived-level lem-weil-pbc-pulled-reduction-strict-tower-comparison (NR, merged); not a duplicate. No SGA citation.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-31e5e0ae9 (reviewer sub-agent of L); spot-checked: Re-split delivery answering the human's 2026-10-21 note, released 2026-10-22. I compared it with the 10-step proof that NO reviewed, step by step. Old steps 1–3 now form lem-sfb-integral-coefficient-square-normalization, steps 4–5 lem-sfb-integral-augmented-quotient-towers, steps 6–9 lem-sfb-augmented-scalar-roos-resolution, and step 10 lem-sfb-integral-roos-derived-pullback-unit. Packages are about 2.4k/2.4k/4.0k/1.9k characters of old work, so they are comparable. No argument was dropped or blurred. Each node is more general than its clause of the item: all complexes, any ring map i, any tower. The item keeps its statement and stmt_deps, and its proof is a pure assembly of 5 steps and 2255 characters. Checks: E_P = R(θ)c_T, with the hypothesis θ r b_T = b_V d_P taken from the towers node. I recomputed the cone signs: D(0,b^Π z) = (0,b^Π dz); the Roos homotopy needs (−h y, h x), as stated. j_I is a quasi-iso for any K-injective tower: the injective-term case plus homotopy equivalence. c_g = a_R holds through the finite projections. T computes Lg*_Tow because g* is exact. U and V are derived reductions on the K-flat g*P and g_C*Q. Small cases checked: P = R[0], P = ⊕_N R (not complete), g = id, X = ∅. Stacks sources read: 093M (completion flat), 0G7E (pullback of K-flat), 07A4, 0941, 07KC, 099M (K^∧ = Rlim), 099N(2) (completed pullback = Lf* followed by completion). These agree with the blueprint det-lem-int-tensor-pullback proof, first paragraph and 'Comparison with the Stacks Project'. Duplicate candidates read: strict-roos-comparison, pe-roos-cone-calculus, the three cbc exact-product Roos lemmas, strict-roos-normalization, strict-quotient-scalar-balancing, pulled-reduction-strict-tower-comparison, comap-upper-star-iso and others. None states a whole new node. FIX: the one-ring ρ clause of the scalar Roos node is the content of lem-weil-strict-roos-comparison, which the derived-unit node already cites. I added that citation and the stmt_dep so both nodes use the same ρ (file fixes/dag/nodes/sec-six-functors-basics/lem-sfb-augmented-scalar-roos-resolution.json). Maintainer note: the item's 12 tool_uses are now stale because the proof cites only the new nodes; re-record them on the children when those are split. No SGA.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralPullbackStrictRoosNormalization",
   "declaration": "WeilConjectures.IntegralPullbackStrictRoos.integralPullbackStrictRoosNormalization",
   "declarations": [
-   "WeilConjectures.IntegralPullbackStrictRoos.siteSmall",
-   "WeilConjectures.IntegralPullbackStrictRoos.datum",
-   "WeilConjectures.IntegralPullbackStrictRoos.R",
-   "WeilConjectures.IntegralPullbackStrictRoos.C",
-   "WeilConjectures.IntegralPullbackStrictRoos.ModR",
-   "WeilConjectures.IntegralPullbackStrictRoos.ModC",
-   "WeilConjectures.IntegralPullbackStrictRoos.res",
-   "WeilConjectures.IntegralPullbackStrictRoos.redR",
-   "WeilConjectures.IntegralPullbackStrictRoos.redC",
-   "WeilConjectures.IntegralPullbackStrictRoos.pullR",
-   "WeilConjectures.IntegralPullbackStrictRoos.pullC",
-   "WeilConjectures.IntegralPullbackStrictRoos.towerPullR",
-   "WeilConjectures.IntegralPullbackStrictRoos.towerPullC",
-   "WeilConjectures.IntegralPullbackStrictRoos.towerRes",
-   "WeilConjectures.IntegralPullbackStrictRoos.T",
-   "WeilConjectures.IntegralPullbackStrictRoos.U",
-   "WeilConjectures.IntegralPullbackStrictRoos.V",
-   "WeilConjectures.IntegralPullbackStrictRoos.complexesR",
-   "WeilConjectures.IntegralPullbackStrictRoos.complexesC",
-   "WeilConjectures.IntegralPullbackStrictRoos.pullR_additive",
-   "WeilConjectures.IntegralPullbackStrictRoos.redR_additive",
-   "WeilConjectures.IntegralPullbackStrictRoos.redR_zero",
-   "WeilConjectures.IntegralPullbackStrictRoos.U_additive",
-   "WeilConjectures.IntegralPullbackStrictRoos.U_zero",
-   "WeilConjectures.IntegralPullbackStrictRoos.cxT",
-   "WeilConjectures.IntegralPullbackStrictRoos.cxU",
-   "WeilConjectures.IntegralPullbackStrictRoos.cxV",
-   "WeilConjectures.IntegralPullbackStrictRoos.cxPullR",
-   "WeilConjectures.IntegralPullbackStrictRoos.cxPullC",
-   "WeilConjectures.IntegralPullbackStrictRoos.cxRes",
-   "WeilConjectures.IntegralPullbackStrictRoos.GoodR",
-   "WeilConjectures.IntegralPullbackStrictRoos.GoodC",
-   "WeilConjectures.IntegralPullbackStrictRoos.dComplex",
-   "WeilConjectures.IntegralPullbackStrictRoos.levelMap",
-   "WeilConjectures.IntegralPullbackStrictRoos.productMap",
-   "WeilConjectures.IntegralPullbackStrictRoos.bT",
-   "WeilConjectures.IntegralPullbackStrictRoos.bU",
-   "WeilConjectures.IntegralPullbackStrictRoos.bV",
-   "WeilConjectures.IntegralPullbackStrictRoos.lamComplex",
-   "WeilConjectures.IntegralPullbackStrictRoos.Lmap",
-   "WeilConjectures.IntegralPullbackStrictRoos.towerComplexes",
-   "WeilConjectures.IntegralPullbackStrictRoos.kappaType",
-   "WeilConjectures.IntegralPullbackStrictRoos.inclusionType",
-   "WeilConjectures.IntegralPullbackStrictRoos.limitProduct",
-   "WeilConjectures.IntegralPullbackStrictRoos.IsUnitNormalized",
-   "WeilConjectures.IntegralPullbackStrictRoos.unitR",
-   "WeilConjectures.IntegralPullbackStrictRoos.constantTowerIso",
-   "WeilConjectures.IntegralPullbackStrictRoos.towerCounit",
-   "WeilConjectures.IntegralPullbackStrictRoos.IsLambdaNormalized",
-   "WeilConjectures.IntegralPullbackStrictRoos.alphaTType",
-   "WeilConjectures.IntegralPullbackStrictRoos.alphaUType",
-   "WeilConjectures.IntegralPullbackStrictRoos.alphaVType",
-   "WeilConjectures.IntegralPullbackStrictRoos.EType",
-   "WeilConjectures.IntegralPullbackStrictRoos.IsAugmentationNormalized",
-   "WeilConjectures.IntegralPullbackStrictRoos.IsENormalized",
-   "WeilConjectures.IntegralPullbackStrictRoos.IsLocalized",
-   "WeilConjectures.IntegralPullbackStrictRoos.IsConstantUnitNormalized",
-   "WeilConjectures.IntegralPullbackStrictRoos.IsComparison",
    "WeilConjectures.IntegralPullbackStrictRoos.integralPullbackStrictRoosNormalization"
   ],
   "file": "lean/Sheaf/Paper/IntegralPullbackStrictRoosNormalization.lean",
@@ -482,5 +249,27 @@
   "group": "NZ",
   "result": "pass",
   "note": "Only the item lean field changed; 14 stmt_dep nodes identical to live; lean.statement verbatim; 59 declarations 1:1; one sorry (main theorem) with the 10-step docstring; source/blueprint docstrings; lines <=100. Hypotheses match exactly (prime l, finite E/Q_l with uniformizer datum, char k prime and != l, X/Y separated finite type over k, nothing extra on g). C = constant A, R = completedRing (limit presentation, framework convention), A_n = A/pi^(n+1), Res along exchangeScalar, completedModulePullback/PulledReduction.pull; GoodR = recorded K-flat + flat terms, no boundedness or completeness. All existential witnesses pinned: d by IsOrdinaryNormalized d.inv (1⊗x generators), lambda by its pure-tensor formula, theta = d ≫ pullC(ordinaryRho⁻¹) (rho = beta), alphas by (0, Pi.lift b) coordinates, epsilon by both cone coordinates, kappa by IsUnitNormalized (j = (0,pi), Q j ≫ kappa = limitComplexUnit). roosF = mappingCone(1 - shift)[-1] with (y,x) coordinates matches the node's signs. Chain equalities L∘alphaT = alphaU and E∘Res alphaT = alphaV∘d checked on generators; unit clauses identify alphaU with the completion unit, alphaT with completedPullbackComparison and alphaV with OrderedExchange.unit through the pinned constant balancing. Edge cases g = id, P = 0 or R[0], unbounded or noncomplete P, empty X, n+1 indexing, universes checked. No recompile per instruction (worker reports clean). Advisories: non-stmt_dep owners (PulledReduction, OrderedExchange, roosF, completedRlim, FourCorners); IsDerivedLimit, coefficientRing and mapBifunctor records not used literally; SfImmersionCompletedPullbackComparison import possibly redundant; IsLocalized clause 1 follows from naturality; trailing whitespace on lines 238 and 246."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fcf13",
+  "group": "Q5",
+  "result": "fix",
+  "landing": "20261026T070624-L-3631191",
+  "kind": "interface",
+  "note": "independent cc review: fcf1 vs 22e7 delivery (only change: public import FiniteFreeCompletedScalarComparison) and clone; 7 delivered + 4 downstream importers compiled in sandbox; gate source tools/import_prune_check.py + leanindex.closure"
  }
 }

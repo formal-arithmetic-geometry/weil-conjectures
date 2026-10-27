@@ -1,0 +1,208 @@
+{
+ "id": "lem-per-trait-test-prime-field-local-input",
+ "kind": "statement",
+ "title": "Prime-field regular local closed-point Kummer purity",
+ "statement": "Fix a prime $\\ell$, $A=\\mathbf F_\\ell$, ordinary small-etale derived categories [def-weil-pbc-derived-categories], finite Tate twists [def-asd-finite-etale-tate-twist], and the canonical Kummer class of [lem-per-regular-immersion-class-calculus], with the bounded-below closed-support adjunction [def-per-closed-support-plus-adjunction].\n\nLet $k_0$ be a prime field, namely $\\mathbf Q$ or $\\mathbf F_p$ for a prime $p$. Let $(R,\\mathfrak m)$ be a Noetherian regular local $k_0$-algebra [def-weil-regular-scheme] with $\\ell$ invertible. Put $k=R/\\mathfrak m$ [def-weil-residue-field], $d=\\dim R$ [def-weil-pbc-krull-dimension-ring], and $j:\\operatorname{Spec}k\\hookrightarrow\\operatorname{Spec}R$ [def-weil-affine-spectrum, def-weil-closed-immersion]. Then the canonical map\n$$A_k\\longrightarrow j^!A_R(d)[2d]$$\nis an isomorphism in $D^+(k_{\\mathrm{et}},A)$. This includes $d=0$ and requires neither finite type over $k_0$ nor excellence of $R$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Proposition 3.2.5, printed p.245, specialized to the closed point of a regular local prime-field algebra. This obligation records the proposition, not its old excluded proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "lem-per-regular-immersion-class-calculus",
+  "def-per-closed-support-plus-adjunction",
+  "def-weil-regular-scheme",
+  "def-weil-residue-field",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "For $d=0$, [def-weil-regular-scheme] gives $\\mathfrak m=0$, hence $R=k$ and $j=1$. The codimension-zero clause of [lem-per-regular-immersion-class-calculus] makes the required map $1$. Now let $d>0$. Apply [lem-per-trait-test-strict-completion-input] to $R$: it suffices to prove the closed-point map for $B=\\widehat{R^{\\mathrm{sh}}}$, with the same dimension and invertible $\\ell$. Its residue field $F=k^{\\mathrm{sep}}$ is separably closed. The composite $k_0\\to R\\to B$ is a unital map to a nonzero ring, so is injective; thus $B$ satisfies the equal-characteristic hypothesis of the next step.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-trait-test-strict-completion-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, printed pp.244--245; fresh agent reconstruction by strict completion, Cohen/Popescu smooth parameter models, finite-type Kummer purity and supported continuity."
+   }
+  },
+  {
+   "text": "Apply [lem-per-prime-local-smooth-parameter-models] to $B$ and $\\ell$. Set $V_a=\\operatorname{Spec}C_a$ and $Z_a=\\operatorname{Spec}D_a$. These are regular affine Noetherian pairs with compatible regular equations of length $d$, smooth over the polynomial-coordinate base, and $\\ell$ invertible. Their limiting pair is exactly $j_B:\\operatorname{Spec}F\\hookrightarrow\\operatorname{Spec}B$. Since $\\ell$ is invertible in the nonzero $k_0$-algebra $R$, it is not the characteristic $p$ when $k_0=\\mathbf F_p$, so $\\ell$ is invertible in $k_0$, as that input requires. Apply [lem-per-prime-smooth-coordinate-kummer-purity] with $c=d$ at each stage. It gives the canonical derived supported Kummer isomorphism $\\gamma_a:R\\Gamma(Z_a,A)\\to R\\Gamma_{Z_a}(V_a,A(d))[2d]$. Its coefficient ring is $\\mathbf F_\\ell$ and its ordered class uses the same equations.",
+   "uses": [
+    "lem-per-prime-local-smooth-parameter-models",
+    "lem-per-prime-smooth-coordinate-kummer-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, printed pp.244--245; fresh agent reconstruction by strict completion, Cohen/Popescu smooth parameter models, finite-type Kummer purity and supported continuity."
+   }
+  },
+  {
+   "text": "The small directed indexing poset, affine regular Noetherian stages and limits, preserved length-$d$ regular equations and invertible $\\ell$ satisfy [lem-per-trait-test-supported-kummer-continuity]. Its derived-arrow square identifies the limit with $\\gamma_B:R\\Gamma(F,A)\\to R\\Gamma_{\\operatorname{Spec}F}(\\operatorname{Spec}B,A(d))[2d]$ and proves it invertible. Under [def-per-closed-support-plus-adjunction] and [lem-amb-closed-support-hom], this is derived sections of the canonical map $A_F\\to j_B^!A_B(d)[2d]$. By [lem-exc-etale-sheaves-gsets-point], the small etale topos of the separably closed field $F$ is sets; its module sections are an exact conservative equivalence. They detect cohomology isomorphisms, hence derived isomorphisms by [lem-weil-pbc-unbounded-derived-iso-cohomology]. Thus the canonical map for $B$ is invertible, and the descent implication of Step 1 proves the required map for $R$.",
+   "uses": [
+    "lem-per-trait-test-supported-kummer-continuity",
+    "def-per-closed-support-plus-adjunction",
+    "lem-amb-closed-support-hom",
+    "lem-exc-etale-sheaves-gsets-point",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, printed pp.244--245; fresh agent reconstruction by strict completion, Cohen/Popescu smooth parameter models, finite-type Kummer purity and supported continuity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-trait-test-strict-completion-input",
+  "lem-per-prime-local-smooth-parameter-models",
+  "lem-per-prime-smooth-coordinate-kummer-purity",
+  "lem-per-trait-test-supported-kummer-continuity",
+  "def-per-closed-support-plus-adjunction",
+  "lem-amb-closed-support-hom",
+  "lem-exc-etale-sheaves-gsets-point",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Definitions 3.2.1--3.2.2, Propositions 3.2.4--3.2.5, printed pp.244--245; fresh agent reconstruction by strict completion, Cohen/Popescu smooth parameter models, finite-type Kummer purity and supported continuity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The closed point Kummer fundamental class of a regular Noetherian local algebra over a prime field is an isomorphism for invertible prime torsion etale coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"Algebra.instIsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], Algebra.IsStandardEtale R R\", \"doc\": \"The identity algebra structure on a commutative ring $ R $ is standard étale. This means $ R $, viewed as an $ R $-algebra via the identity map, satisfies the condition of being isomorphic to a locali\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.IsStandardEtale\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that an algebra $ S $ over a commutative ring $ R $ is standard étale, meaning it is isomorphic to a localization of a polynomial ring over $ R $ modulo a monic polynomial whose derivativ\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern standard etale algebras, formal smoothness/unramifiedness or a characteristic split, not the canonical closed-point purity isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equal characteristic regular local rings have absolute cohomological purity at their closed point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"split_by_characteristic_localRing\", \"module\": \"Mathlib/Algebra/CharP/MixedCharZero\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {P : Prop} [IsLocalRing R],\\n  (∀ (p : ℕ), IsPrimePow p → CharP R p → P) →\\n    (∀ (a : Algebra ℚ R), P) → (∀ (p : ℕ), Nat.Prime p → MixedCharZero R p → P) → P\", \"doc\": \"For a local ring $ R $, if $ P $ holds in three cases: (1) for every prime power $ p $ such that $ R $ has characteristic $ p $, (2) when $ R $ is a $\\\\mathbb{Q}$-algebra (characteristic zero), and (3)\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"AlgHom.IsArithFrobAt.isArithFrobAt_localize\", \"module\": \"Mathlib/RingTheory/Frobenius\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {φ : S →ₐ[R] S}\\n  {Q : Ideal S} (H : φ.IsArithFrobAt Q) [inst_3 : Q.IsPrime],\\n  H.localize.IsArithFrobAt (IsLocalRing.maximalIdeal (Localization.AtPrime Q))\", \"doc\": \"If an $ R $-algebra homomorphism $ \\\\varphi: S \\\\to S $ satisfies the arithmetic Frobenius condition at a prime ideal $ Q \\\\subseteq S $, then the induced homomorphism on the localization of $ S $ at the\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A], IsField A\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring that is formally unramified as a $ K $-algebra, then $ A $ is a field.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A],\\n  Function.Bijective ⇑(algebraMap K A)\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring, then the canonical algebra homomorphism from $ K $ to $ A $ is bijective.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern standard etale algebras, formal smoothness/unramifiedness or a characteristic split, not the canonical closed-point purity isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: service returned zero declarations for this combination of notions"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?purity|prime.field.*pur|Kummer",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"13\", \"text\": \"# Kummer-Dedekind theorem\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"15\", \"text\": \"This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"29\", \"text\": \"* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"35\", \"text\": \"* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"56\", \"text\": \"kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"28\", \"text\": \"This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean\", \"line\": \"99\", \"text\": \"This is a special case of the so-called *Kummer's lemma*. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"45\", \"text\": \"* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"50\", \"text\": \"* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"612\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"622\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"632\", \"text\": \"/-- **Kummer's Theorem**\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.KummerDedekind\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"14\", \"text\": \"# Kummer-Dedekind criterion for the splitting of prime numbers\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"16\", \"text\": \"In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"line\": \"54\", \"text\": \"open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Three.lean\", \"line\": \"45\", \"text\": \"  case of Kummer's lemma.\"}\n  {\"file\": \"Mathlib/RingTheory/AdjoinRoot.lean\", \"line\": \"829\", \"text\": \"-- `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` in `NumberTheory.KummerDedekind`\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup.lean\", \"line\": \"52\", \"text\": \"$K^\\\\times / (K^\\\\times)^n$ by the long exact sequence from Kummer theory and Hilbert's theorem 90,\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"line\": \"38\", \"text\": \"* In Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind:\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Lemmas.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.FieldTheory.KummerExtension\"}\n  {\"file\": \"Mathlib/RingTheory/RootsOfUnity/Lemmas.lean\", \"line\": \"13\", \"text\": \"(We put these in a separate file because of the `KummerExtension` import.)\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"14\", \"text\": \"# Kummer Extensions\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerExtension.lean\", \"line\": \"17\", \"text\": \"Kummer theory is about the classification of finite extensions of `L` whose Galois group is cyclic\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern Kummer field extensions, Kummer-Dedekind, binomial valuations or a valued-field completion, not supported etale fundamental classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute etale purity regular local rings containing a field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"For any commutative ring $ R $ and an $ R $-algebra $ A $, $ A $ is formally étale over $ R $ if and only if it is both formally unramified and formally smooth over $ R $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: signatures concern standard etale algebras, formal smoothness/unramifiedness or a characteristic split, not the canonical closed-point purity isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Kummer class at the closed point of a regular local algebra over a prime field is an isomorphism in the bounded below etale derived category",
+   "results": "OK 8 hits: Algebra.instIsStandardEtale, Algebra.IsEtaleAt, Algebra.Etale.of_isLocalization_Away, StandardEtalePair.instEtaleRing, Algebra.mem_etaleLocus_iff, Algebra.Etale.formallyEtale, StandardEtalePair.instFormallyEtaleRing, Algebra.instEtaleOfIsStandardEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras, spectrum points or ordinary structure-sheaf sections, not a supported derived Kummer purity isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.?purity|punctual.?purity|Kummer",
+   "results": "OK 25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras, spectrum points or ordinary structure-sheaf sections, not a supported derived Kummer purity isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute etale cohomological purity for the closed point of an equicharacteristic regular local ring",
+   "results": "OK 8 hits: IsLocalRing.closedPoint, IsLocalRing.specializes_closedPoint, IsLocalRing.comap_closedPoint, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo', Algebra.Etale.of_isLocalizationAway, Algebra.exists_etale_of_isEtaleAt, IsLocalRing.closedPoint_mem_iff, RingHom.Etale.propertyIsLocal",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras, spectrum points or ordinary structure-sheaf sections, not a supported derived Kummer purity isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Etale\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras, spectrum points or ordinary structure-sheaf sections, not a supported derived Kummer purity isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute cohomological purity: extraordinary inverse image of a constant torsion sheaf along the closed point of a regular local ring containing a field",
+   "results": "OK 8 hits: AlgebraicGeometry.StructureSheaf.res_const, ModuleCat.Tilde.isUnit_toStalk, ModuleCat.Tilde.res_const, AlgebraicGeometry.StructureSheaf.comap_const, ModuleCat.Tilde.const, ModuleCat.Tilde.exists_const, AlgebraicGeometry.StructureSheaf.exists_const, AlgebraicGeometry.StructureSheaf.locally_const_basicOpen",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale algebras, spectrum points or ordinary structure-sheaf sections, not a supported derived Kummer purity isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-punctual-purity-trait-test",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 first paragraph, printed p.254 (Fujiwara 2002 Corollary 6.1.5 reduction), with Proposition 3.2.4 (completion invariance) and Proposition 3.2.5 (prime-field/equal-characteristic case), printed pp.244--245. Complete-trait formulation obtained by first completing the strictly henselian regular local test ring. Fresh input: The equal-characteristic local case, also applied pointwise on the regular characteristic-p models.",
+   "via": [
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-trait-test-prime-field-local-input",
+  "worker": "stage1",
+  "summary": "Repair of C4/C5 and D2: removes the excluded Q45 scheme-purity theorem completely. Fresh substantive assembly reduces via the admitted strict-completion input to smooth polynomial-parameter models, applies finite-type prime-field coordinate Kummer purity, passes the actual derived Kummer arrow through admitted supported continuity, then detects isomorphy over the separably closed residue field and descends. Two statement-only inputs isolate the non-elementary algebraic approximation and finite-type geometric computation. Statement unchanged; no excellence assumed on R.",
+  "blueprint": "Proof Step 3: regular finite-torsion local purity input; ILO XVI Proposition 3.2.5 in the admitted trait-test reduction. Fresh local proof replacing excluded Q45 prime-field punctual purity.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic ordinary etale closed-support/global-sections or point-topos comparison used to detect the limiting Kummer isomorphism; no replacement of the unit route."
+   },
+   {
+    "node": "lem-exc-etale-sheaves-gsets-point",
+    "why": "Generic ordinary etale closed-support/global-sections or point-topos comparison used to detect the limiting Kummer isomorphism; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-closed-support-hom",
+  "lem-exc-etale-sheaves-gsets-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-150b2c609",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-150b2c609 (reviewer sub-agent of L); spot-checked: Read the full mathematics of the item, both new nodes and every cited statement. Source checks: ILO XVI Def. 3.2.1-3.2.2 and Props. 3.2.4-3.2.5 (printed pp.244-245); Stacks 0C0S, 032A, 0AH2 and 07GC; Milne LEC Thm 16.7 and Lemma 16.8. This repairs the earlier RETURN of 64300314e124. The excluded node lem-per-prime-field-punctual-purity is gone. The item's closure reaches no id in route-pivot-dropped.txt, there is no cycle, and the statement and stmt_deps are identical to the ce9cc357 creation. Step 1: d=0 gives R=k and class 1; for d>0, lem-per-trait-test-strict-completion-input gives the complete strictly henselian B with separably closed residue field and descent back to R, without excellence. Step 2 applies the two new nodes. lem-per-prime-local-smooth-parameter-models is true: Cohen gives B=F[[t]]; k0[T]->F[T] is regular because k0 is perfect; F[T]->F[[T]] is regular because F[T] is a G-ring; Popescu then gives the smooth stages; flatness keeps T a regular sequence; colim D_a=F; the stages are nonzero because they map to B and F. lem-per-prime-smooth-coordinate-kummer-purity is smooth-pair purity over Q or F_p, a genuine finite-type input and not a restatement of the item. The fixed-field pur nodes (thm-pur-*, cor-pur-affine-space-zero-section-purity, lem-pur-finite-type-coordinate-support-orientation) do not specialize to it. Step 3: every hypothesis of lem-per-trait-test-supported-kummer-continuity is met (affine regular Noetherian stages and limits, preserved length-d equations, l invertible). Isomorphy is then detected over the separably closed F and descended to R. Accepted tool_uses: lem-amb-closed-support-hom and lem-exc-etale-sheaves-gsets-point, both generic sheaf facts. Edge cases checked: d=0, c=0, l=p excluded, imperfect or huge residue field. FIX (C2/E1 hypothesis check): Step 2 did not verify the coordinate node's hypothesis that l is invertible in k0. I added one sentence: l is invertible in the nonzero F_p-algebra R, so l is not p. No uses or deps changed.; 1 file(s) fixed by the reviewer"
+ }
+}

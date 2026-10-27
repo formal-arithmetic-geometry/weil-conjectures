@@ -1,0 +1,171 @@
+{
+ "id": "lem-sfb-space-compact-perfect-generator",
+ "kind": "statement",
+ "title": "Compact perfect generator on a qcqs algebraic space",
+ "statement": "Work in the fixed universes [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme]. For an algebraic space $Z$ over $S$ [def-trf-algebraic-space], use its small etale structure sheaf $\\mathcal O_Z$, module sheaves [def-weil-sheaf-of-modules-category], and their unbounded derived category $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory of objects whose cohomology sheaves are quasi-coherent [def-trf-space-quasi-coherent-module]. Let $X$ be a quasi-compact and quasi-separated algebraic space over $S$; quasi-compact means every open cover of its point space has a finite subcover, and quasi-separated means its absolute diagonal is quasi-compact. A perfect object is one locally isomorphic to a bounded complex of direct summands of finite free structure modules. There exists a perfect object $P\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ which is compact [def-pc-compact-object]: for every small family $(E_i)$ in this category the canonical map $\\bigoplus_i\\operatorname{Hom}(P,E_i)\\to\\operatorname{Hom}(P,\\bigoplus_iE_i)$ is bijective. Moreover, for every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$, one has $E\\simeq0$ if and only if $\\operatorname{Hom}(P[n],E)=0$ for every integer $n$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IY, theorem-bondal-van-den-Bergh; compactness of its perfect generator by Tag 09M8, proposition-compact-is-perfect."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-size-convention",
+  "def-pc-compact-object",
+  "def-sfb-space-derived-module-calculus",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-perfect-weak-generator] to the given scheme $S$ and qcqs algebraic space $X$. Its small etale structure sheaf, module category, quasi-coherent subcategory and notion of perfect object are exactly those in the statement. Obtain a perfect $P\\in C_X=D_{\\mathrm{QCoh}}(\\mathcal O_X)$ with $E\\simeq0$ if and only if $\\operatorname{Hom}_{D(\\mathcal O_X)}(P[n],E)=0$ for every integer $n$, for all $E\\in C_X$. Keep this same $P$ in the remaining steps.",
+   "uses": [
+    "lem-sfb-space-perfect-weak-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IY, theorem-bondal-van-den-Bergh, statement."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-perfect-objects-compact] to this perfect object $P$. Both its hypotheses on $X$ (quasi-compactness and quasi-separatedness) are assumptions of the item. It asserts compactness in $C_X$, and explicitly gives the bijectivity of the canonical Hom-to-coproduct map for every family in the chosen indexing universe. No compactness in the whole ambient $D(\\mathcal O_X)$ is asserted or needed.",
+   "uses": [
+    "lem-sfb-space-perfect-objects-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09M8, proposition-compact-is-perfect, perfect-to-compact direction."
+   }
+  },
+  {
+   "text": "Since $C_X$ is a full subcategory, its Hom groups between its objects are the ambient derived-category Hom groups. Thus the compactness formula of step 2 is exactly the formula in the item, and the vanishing criterion of step 1 is exactly its final equivalence. The same object $P$ therefore satisfies all the required clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 09IY and 09M8; elementary assembly using the definition of a full subcategory."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-perfect-weak-generator",
+  "lem-sfb-space-perfect-objects-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IY, theorem-bondal-van-den-Bergh, and Tag 09M8, proposition-compact-is-perfect, perfect-to-compact direction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated algebraic space has a compact perfect generator of its derived category of quasi coherent modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned schemes with compact topological spaces, underived local module presentations, or generic derived-category constructions; none states compact perfect generation for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bondal Van den Bergh single perfect generator derived quasi coherent algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the objects indexing the local gen\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, this constructs the local generato\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned schemes with compact topological spaces, underived local module presentations, or generic derived-category constructions; none states compact perfect generation for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompact\", \"DerivedCategory\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*perfect|perfect.*generator|bondal|van.den.bergh",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"line\": \"45\", \"text\": \"* [Bondal and Van den Bergh, *Generators and representability of functors in commutative and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"line\": \"46\", \"text\": \"  noncommutative geometry*][bondal_vandenbergh_2003]\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the two hits are bibliography lines 45-46 of Mathlib/CategoryTheory/Triangulated/Generators.lean; the file defines generic strong/classical generators and does not construct a perfect generator on an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived category of quasi coherent modules on a quasi compact quasi separated algebraic space has a compact perfect generator",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_generators\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the local generators data at each index $i$ coincides with the gener\"}\n  {\"name\": \"SheafOfModules.Presentation.generators\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this function maps a presentation \"}\n  {\"name\": \"DerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Type (max u v)\", \"doc\": \"The derived category of homological complexes with integer-indexed shapes, obtained by localizing the category of such complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned schemes with compact topological spaces, underived local module presentations, or generic derived-category constructions; none states compact perfect generation for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-pushforward-right-adjoint",
+  "date": "2026-10-23",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: a single perfect generator from 09IY is compact by 09M8.",
+   "via": [
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-compact-perfect-generator",
+  "worker": "stage1",
+  "summary": "Assembled the existing algebraic-space weak-generator and perfect-object compactness nodes, after checking their statements against Stacks 09IY and 09M8. No new nodes, statement changes or Lean attachments. Repeated the recorded item searches using the required command and checked the generic Mathlib generator hit.",
+  "blueprint": "Supports inherited det-thm-sf-ctf-stability-direct-images proof (3), its alteration/deformation input, through the 0E55 Brown-representability prerequisite named in blueprint.from.place: choose the 09IY perfect generator and apply 09M8. Read blueprint/latest direct-image proof (3) and its unit. Searches for perfect generator, compact perfect and 09IY found no blueprint statement equal to the item. The inherited ancestor is null (blueprint_refs.py ancestor prints None); preserve that metadata as in the accepted review of lem-sfb-space-perfect-localizing-generation rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-554664e3e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-554664e3e (reviewer sub-agent of L); spot-checked: I read the item and both cited nodes in full, and checked them against Stacks spaces-perfect.tex 09IY theorem-bondal-van-den-Bergh (l.3674) and 09M8 proposition-compact-is-perfect (l.3879, the perfect=>compact paragraph, which gives compactness in D_QCoh only). Shape: one commit; item and report only; statement, stmt_deps and source unchanged; no new nodes; no repair note, so this is a first split; no SGA. Step 1 cites lem-sfb-space-perfect-weak-generator (unsplit, NY, same unit). Its statement matches 09IY: same S, qcqs X, small étale site, perfect notion and Hom(P[n],E) zero-detection. Step 2 cites lem-sfb-space-perfect-objects-compact (unsplit, NY, same unit), which says every perfect object lies in C_X and is compact in C_X for families in the chosen indexing universe. It is applied to the same P. Step 3 is elementary: C_X is a full subcategory, so its Homs are the ambient ones. proof_deps equals the union of the steps' uses. No cycle: both inputs have empty proof_deps, and the only citer of the item is lem-sfb-qcqs-space-pushforward-right-adjoint. The item is exactly the 09IY+09M8 conjunction that Stacks uses for the 0E55 Brown hypotheses, so a two-citation assembly is the complete proof, not a relabelling (D1/D2 fine). I found no duplicate of the item: rg -L over dag/nodes for 09IY/09M8 finds only scheme versions or these nodes. Edge cases checked: X empty gives P=0; X=Spec A gives P=O, including A=0; an empty family gives the map 0 to 0. blueprint.from.node=null is inherited from the base node, as accepted in the NY review. No tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCompactPerfectGenerator",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_compact_perfect_generator",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCompactPerfectGenerator.lean",
+  "statement": "theorem exists_compact_perfect_generator {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) : ∃ (hcoprod : HasCoproducts.{u} X.DerivedQCoh) (P : X.DerivedQCoh), SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P.obj ∧ @IsCompactObject.{u} X.DerivedQCoh _ _ hcoprod P ∧ ∀ E : X.DerivedQCoh, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (P.obj⟦n⟧ ⟶ E.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing equivalent small affine ringed model and general local strict-perfect predicate. Absolute quasi-separatedness is expressed by Stacks 0AHR affine-pair fibre products, without assuming the base scheme quasi-separated. The conclusion includes existence of small coproducts, so compactness introduces no extra hypothesis. No stage-1 split is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b33996bc7",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Snapshot vs live: only item lean+stmt_deps changed (3 landed def stmt_deps added); 10 dep records identical; one new module, single sorry theorem, no defs. Clauses: S : Scheme.{u}, X : AlgebraicSpace S, D(O_X)=DerivedCategory X.SmallModules (recorded small affine model, free w), D_QCoh=X.DerivedQCoh; qc = CompactSpace (Point X) with étale final topology; qs = 0AHR(3) affine-pair fibre products quasi-compact (equivalent to absolute diagonal, no base assumption, same form as landed coherentSubobjects_filtered_colimit); perfect = IsPerfectOnRingedSiteOfUniverses.{u,u,u,w} (bounded local finite-free-retract models via StrictPerfectCoefficientPackageOnSite); compact = recorded IsCompactObject.{u} in D_QCoh with HasCoproducts concluded (true, no extra hypothesis); zero detection iff over all n via Subsingleton Hom. Edge cases (empty X, Spec A, A=0, empty family, n=0/±) fine. Statement verbatim; docstrings have 09IY/09M8 + blueprint tag + 3-step proof. Advisory: SmallModules/Point owners reached only transitively via cited def nodes. Not recompiled per instructions."
+ }
+}

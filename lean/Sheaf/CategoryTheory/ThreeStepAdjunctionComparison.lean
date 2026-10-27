@@ -2,7 +2,7 @@
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H2 -/
 module
-public import Sheaf.Paper.FiniteDiscreteRealizationFunctor
+public import Sheaf.Paper.FiniteDiscreteRealizationCore
 public import Sheaf.CategoryTheory.AdjunctionExchangeChain
 public import Sheaf.Paper.CoefficientDerivedFunctorAPI
 /-! # Comparing the three factors of an adjunction exchange

@@ -7,11 +7,8 @@ module
 
 public import Sheaf.Paper.RingComplexSemilinearExtension
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Paper.RingComplexCechData
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.RingComplexCechScalarModel
+import Sheaf.Paper.RingComplexCechAugmentationHom
 
 /-! # Base change detected by augmented ordered localization models -/
 
@@ -71,6 +68,27 @@ theorem ringComplex_cech_baseChange_quasiIso
             ((toSheafify ⊥ (SheafOfModules.changeOfRingsPresheaf
               (ringSiteMap φ) (P.X 0)).presheaf).app (op ⟨PUnit.unit⟩)
                 ((1 : B) ⊗ₜ[A, φ] x))) = φ (ringComplexAugmentationValue εP x)) :
-    QuasiIso χ := by sorry
+    QuasiIso χ := by
+  obtain ⟨εE, hCE, hεE⟩ := ringComplex_cech_scalar_model A B φ I J h P εP hCA hP
+  have haug : χ ≫ εL = εE := by
+    apply HomologicalComplex.to_single_hom_ext
+    apply (cancel_mono (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (ringComplexUnit B)).hom).mp
+    apply ringComplexExtension_hom_ext φ (P.X 0) (ringComplexUnit B)
+    intro x
+    exact (hε x).trans (hεE x).symm
+  obtain ⟨ψ, hψ⟩ := (ringComplex_cech_augmentation_hom_bijective B J L
+    (ringComplexExtensionComplex φ P) εL εE hCB hCE).surjective
+      (DerivedCategory.Q.map εL)
+  have hright : DerivedCategory.Q.map χ ≫ ψ = 𝟙 _ := by
+    apply (ringComplex_cech_augmentation_hom_bijective B J
+      (ringComplexExtensionComplex φ P) (ringComplexExtensionComplex φ P)
+      εE εE hCE hCE).injective
+    simp only [Category.assoc, hψ, ← Functor.map_comp, haug, Category.id_comp]
+  have hleft : ψ ≫ DerivedCategory.Q.map χ = 𝟙 _ := by
+    apply (ringComplex_cech_augmentation_hom_bijective B J L L εL εL hCB hCB).injective
+    simp only [Category.assoc, ← Functor.map_comp, haug, hψ, Category.id_comp]
+  apply (DerivedCategory.isIso_Q_map_iff_quasiIso (RingSiteModules B) χ).mp
+  exact ⟨⟨ψ, hright, hleft⟩⟩
 
 end AlgebraicGeometry

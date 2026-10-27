@@ -204,7 +204,18 @@
   "def-weil-pbc-derived-categories"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -306,7 +317,11 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-5a267a268 (reviewer sub-agent of L); spot-checked: I read the item in full: the unchanged statement, all 13 steps, and every cited statement (31 proof deps, 5 statement deps; none missing, none merged). I read it against the main-20261015 blueprint, both lem-amb-cartier-kummer-map.proof.md and sk-lem-geo-cartier.proof.md. The deps match the step uses, there is no cycle, and review_split passes. Checks by step: the dual-basis transitions e_b=(f_a/f_b)e_a and s_D=f_ae_a hold. The torsor class relative to V checks against the long exact sequence (fibre over the trivial torsor is G(V)/G(T)). For the Kummer boundary, n=l^r is invertible. The support-Hom identification uses lem-amb-closed-support-hom with A=Lambda. The supported source is i_*A_D by geometric stalks (Lambda or 0) with no flatness used. A pullback of a Cartier equation is a nonzerodivisor (local unit argument). The twist step works: A(1)=M/l^rM tensor A, and ker(\\hat Z_l -> Lambda)=l^r\\hat Z_l, then clause (2) of lem-pur-twist-sheaf-locally-free applies. The pro-etale quotient needs j quasi-compact, which holds locally as D(f). Independence of r holds because (u^{l^{s-r}})^{l^r}=u^{l^s} and p_r=p_{s,r}p_s. Reduction from A_{E,b} to A_{E,a} and pro-etale pullback coherence also check. Edge cases: m=1 with e=2, D empty, and h=i (excluded because D' is not Cartier) all behave as the statement says; no e|m condition is used and no target is weakened. No new nodes. Fix: the item's blueprint.same_as was [], but sk-lem-geo-cartier states the same supported Kummer map in another form (finite twist nu^*(mu tensor Lambda)). The corrected whole JSON is in fixes/dag/nodes/sec-smooth-purity/lem-amb-cartier-kummer-map.json; nothing else changed. I accept four new generic tool uses: lem-weil-pbc-derived-module-underlying-comparison, lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-pur-kflat-change-of-rings, prop-weil-pbc-proetale-constant-ring-map. Minor note: in step 4, identifying the two cones relies on the construction described in the comparison node's statement (one injective resolution, Gamma-acyclic for both); accepted. No SGA source is cited.; 1 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $i:D\\hookrightarrow T$ be an effective Cartier divisor.\nThere is a natural morphism in the ordinary derived category\n\n$$\nc_D:i_*A_D\\longrightarrow A_T(1)[2].\n$$\n\nIts image after forgetting support is\n$c_1(\\mathcal O_T(D))$. For any base change under which\nthe pullback divisor remains Cartier, the map pulls back to\nthe corresponding map for that divisor.",
   "proof": [
    {
@@ -328,15 +343,15 @@
     "elementary": false
    },
    {
-    "text": "This identification uses the sheaf-level adjunction between\n$i_*$ and sections supported on $D$, derived by\ninjective resolutions; it does not assert a purity isomorphism.\nAll the cone maps and Kummer boundaries commute with pullback\nof the pair and its trivialized line bundle. This proves the\nasserted base-change compatibility whenever the pulled-back\npair is again the Cartier pair of\n[def-sc-effective-cartier-divisor].\nFinally apply derived scalar extension from $\\mathbf Z/n$\nto $A$. Its source is $i_*A_D$, as seen on stalks,\nand its target is $A_T(1)[2]$ by\n[def-coefficient-twists-detailed]. No flatness of $A$ over\n$\\mathbf Z/n$ is needed.",
+    "text": "This identification uses the sheaf-level adjunction between\n$i_*$ and sections supported on $D$, derived by\ninjective resolutions; it does not assert a purity isomorphism.\nAll the cone maps and Kummer boundaries commute with pullback\nof the pair and its trivialized line bundle. This proves the\nasserted base-change compatibility whenever the pulled-back\npair is again the Cartier pair of\n[def-nagata-invertible-ideal].\nFinally apply derived scalar extension from $\\mathbf Z/n$\nto $A$. Its source is $i_*A_D$, as seen on stalks,\nand its target is $A_T(1)[2]$ by\n[def-coefficient-twists-detailed]. No flatness of $A$ over\n$\\mathbf Z/n$ is needed.",
     "uses": [
-     "def-sc-effective-cartier-divisor",
+     "def-nagata-invertible-ideal",
      "def-coefficient-twists-detailed"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_lean": {
   "date": "2026-10-18",

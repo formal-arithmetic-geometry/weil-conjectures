@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-space-perfect-to-pseudocoherent-tests",
+ "kind": "statement",
+ "title": "Perfect tests suffice for pseudo-coherent tensor tests on algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived tensor uses K-flat resolutions and $R\\Gamma$ uses K-injective resolutions [def-pur-ringed-site-zeroth-hypercohomology]. A perfect object is etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Pseudo-coherent on a space means that etale locally on affine scheme charts the object is represented by a bounded-above complex of finite free structure modules; pseudo-coherent in $D(A)$ means quasi-isomorphic to a bounded-above finite-free $A$-complex [def-pc-ring-pseudo-coherent-complex]. Quasi-compact means every open cover of the point space has a finite subcover, and quasi-separated means the absolute diagonal is quasi-compact. Let $A$ be a commutative ring and $X$ a quasi-compact and quasi-separated algebraic space over $\\operatorname{Spec}A$. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and suppose $\\mathcal H^i(K)=0$ for all $i>b$, for some integer $b$. If $R\\Gamma(X,P\\otimes^{\\mathbf L}K)$ is pseudo-coherent in $D(A)$ for every perfect $P$, then $R\\Gamma(X,E\\otimes^{\\mathbf L}K)$ is pseudo-coherent in $D(A)$ for every pseudo-coherent $E\\in D(\\mathcal O_X)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CWH, lemma-perfect-enough."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put $f:X\\to Y=\\operatorname{Spec}A$. The affine-scheme qcqs lemma and space qcqs-permanence imply that $Y$ is quasi-compact and quasi-separated and $f$ is qcqs. Apply the affine-chart uniform vanishing statement with $V=Y$ and $W=X$: there is $N\\ge1$ with $R^p\\Gamma(X,M)=0$ for every quasi-coherent $M$ and $p\\ge N$. The enlarged-site equivalence identifies its $F_Y$ with global sections: $X$ is terminal in the enlarged site, and its equalizer formula computes global sections on the small site. Global sections are left exact and preserve countable products, since $\\Gamma=\\operatorname{Hom}(\\mathcal O_X,-)$ and a map into a product is a tuple of maps. The product-preserving-derived-functor bound therefore gives $H^i(R\\Gamma(X,L))=0$ for $i\\ge t+N$ if $L\\in D_{\\mathrm{QCoh}}$ has $H^q(L)=0$ for $q>t$. This also holds for $A$-module-valued derived sections: applying global sections to the same K-injective module-sheaf representative gives the same underlying abelian-group complex, and an $A$-module with zero underlying group is zero.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-sfb-space-product-preserving-derived-functor-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CWH, proof first paragraph; Tag 08FA, proof (2), using the affine-chart case of Tag 08F7(3)."
+   }
+  },
+  {
+   "text": "Fix any pseudo-coherent $E$ and any $m\\in\\mathbf Z$, and set $a=m-N-1-b$. The space perfect-approximation theorem gives a distinguished triangle $P\\xrightarrow{u}E\\to C\\to P[1]$ with $P$ perfect and all three terms in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$, with $H^i(u)$ an isomorphism for $i>a$ and $H^a(u)$ surjective. Only qcqs is needed; in particular no scheme representability or Noetherian hypothesis is introduced.",
+   "uses": [
+    "lem-sfb-space-pseudocoherent-perfect-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CWH, perfect approximation of (X,E,m-N-1-b) by Tag 08HP."
+   }
+  },
+  {
+   "text": "For $i\\ge a$ the exact row $H^i(P)\\to H^i(E)\\to H^i(C)\\to H^{i+1}(P)\\to H^{i+1}(E)$ has its first map surjective and its last map injective. Exactness forces $H^i(C)=0$. This includes $i=a$, where only surjectivity, not injectivity, of $H^a(u)$ was assumed. Thus $C$ has cohomology zero above $a-1$.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CWH, cone cohomology vanishes in degrees at least m-N-1-b."
+   }
+  },
+  {
+   "text": "Use the standard truncation description to represent $C$ by a complex zero above $a-1$ and $K$ by one zero above $b$. The bounded-above flat replacement statement, applied on the small ringed etale site, gives flat-term complexes with the same respective upper term bounds. They are K-flat by the site version of bounded-above flat K-flatness, and the site-derived-tensor model computes $C\\otimes^{\\mathbf L}K$ by their total tensor. In degree $j>a-1+b$, each summand $F^r\\otimes G^s$ with $r+s=j$ is zero: nonzero summands would require both $r\\le a-1$ and $s\\le b$. Hence $H^j(C\\otimes^{\\mathbf L}K)=0$ for $j\\ge a+b=m-N-1$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CWH, tensor upper bound; sites-cohomology.tex, lemma-bounded-flat-K-flat and lemma-K-flat-resolution."
+   }
+  },
+  {
+   "text": "The algebraic-space derived tensor closure statement applies because $C$ and $K$ have quasi-coherent cohomology. Thus $C\\otimes^{\\mathbf L}K\\in D_{\\mathrm{QCoh}}$. Apply step 1 with $t=m-N-2$, using step 4. It gives $H^i(R\\Gamma(X,C\\otimes^{\\mathbf L}K))=0$ for $i\\ge m-2$, in particular for $i\\ge m-1$. The extra degree of slack comes from choosing $N\\ge1$ with the vanishing convention $p\\ge N$; it only strengthens the bound needed here.",
+   "uses": [
+    "lem-sfb-space-derived-qcoh-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CWH, bound on derived sections of the tensor cone; Tag 08F5 for quasi-coherence."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat representative of $K$ using the site-derived-tensor equivalence. The fixed-K-flat-tensor exactness statement takes the triangle of step 2 to a distinguished triangle. The K-injective right-derived-functor statement then gives a distinguished triangle in $D(A)$ with terms $T_P=R\\Gamma(X,P\\otimes^{\\mathbf L}K)$, $T_E=R\\Gamma(X,E\\otimes^{\\mathbf L}K)$ and $T_C=R\\Gamma(X,C\\otimes^{\\mathbf L}K)$. In the cohomology exact sequence, $H^{i-1}(T_C)=H^i(T_C)=0$ for every $i\\ge m$ by step 5. Therefore $H^i(T_P)\\to H^i(T_E)$ is an isomorphism for all $i\\ge m$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CWH, high-degree comparison of tensor global sections, including both adjacent cone groups."
+   }
+  },
+  {
+   "text": "The perfect-test hypothesis makes $T_P$ pseudo-coherent. The ring all-m criterion gives a bounded finite-free complex $F$ and a map $F\\to T_P$ inducing isomorphisms above $m$ and a surjection at $m$. Compose with $T_P\\to T_E$. By step 6 the composite still induces isomorphisms above $m$ and a surjection at $m$, so it witnesses that $T_E$ is $m$-pseudo-coherent by definition. This holds for every integer $m$; the same ring criterion implies that $T_E$ is pseudo-coherent. Since $E$ was arbitrary, this proves the assertion.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CWH, final paragraph; more-algebra.tex Tag 064U, lemma-pseudo-coherent, and Tag 064Q, definition-pseudo-coherent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-affine-chart-uniform-qcoh-vanishing",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+  "lem-sfb-space-pseudocoherent-perfect-approximation",
+  "lem-sf-derived-homology-long-exact",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CWH, lemma-perfect-enough, proof, with its approximation and boundedness inputs exposed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded above quasi coherent complex on a qcqs algebraic space perfect tensor global sections pseudo coherent implies pseudo coherent tensor tests",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect approximation extends pseudo coherence of derived global tensor sections from perfect objects to pseudo coherent objects on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalCategory\\n      (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (CategoryTheory.coherentTopology LightProfinite).W.IsMonoidal\", \"doc\": \"The coherent Grothendieck topology on the opposite category of light profinite spaces, when lifted to the category of modules over a commutative ring $ R $, satisfies the monoidal property. This means\"}\n  {\"name\": \"CategoryTheory.Sheaf.monoidalCategory\", \"module\": \"Mathlib/CategoryTheory/Sites/Monoidal\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₃) →\\n        [inst_1 : CategoryTheory.Category.{v₃, u₃} A] →\\n          [inst_2 : CategoryTheory.MonoidalCategory A] →\\n            [J.W.IsMonoidal] →\\n              [Categ\", \"doc\": \"The category of sheaves on a site (a category equipped with a Grothendieck topology $J$) is endowed with a monoidal structure. This structure is obtained by localizing the monoidal category of preshea\"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.instMonoidalCategoryLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalCategory (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes suffice for pseudo coherent tensor tests on quasi compact quasi separated algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.HasOfPostcompProperty @QuasiCompact @QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [CompactSpace X] [QuasiSeparatedSpace Y] : QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*approximat|approximat.*perfect|pseudoCoherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme morphisms, ordinary module presentations, condensed tensor structures, general cohomological support or Ext dimensions; none states this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend pseudo coherent derived tensor global section tests from perfect complexes using perfect approximation",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.casesOn, DerivedCategory.right_fac_of_isStrictlyLE, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.IsQuasicoherent.mk, DerivedCategory.exists_iso_Q_obj_of_isGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.hasExt_of_enoughProjectives, CategoryTheory.IsGrothendieckAbelian.hasExt",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme affine-limit or quasi-coherent module facts and general derived-category representatives do not supply perfect approximation or the algebraic-space tensor-test criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherence of derived global sections of perfect tensor tests implies pseudo coherence for all pseudo coherent tensor tests on a qcqs algebraic space",
+   "results": "8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary scheme affine-limit or quasi-coherent module facts and general derived-category representatives do not supply perfect approximation or the algebraic-space tensor-test criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-tests-pseudocoherence",
+  "date": "2026-10-23",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CWH, lemma-perfect-enough.",
+   "via": [
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-perfect-to-pseudocoherent-tests",
+  "worker": "stage1",
+  "summary": "Followed Tag 0CWH with its qcqs cohomological bound, space-specific perfect approximation, explicit cone and total-tensor bounds, exactness, and finite-free approximation criterion. One new statement-only space approximation node; all other inputs reused. No statement change.",
+  "blueprint": "Supporting input to the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry: Tag 0CWH perfect-to-pseudo-coherent tensor tests. The current latest blueprint direct-images proof (3) gives the proper/open assembly; this node remains a foundational prerequisite of its inherited DAG route, not a replacement of that route. The ancestor command reports None, retained in blueprint.from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Affine schemes are quasi-compact and quasi-separated, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Enlarged etale ringed-site models of algebraic spaces, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Long exact cohomology sequence of a distinguished triangle in the derived category, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Bounded-above flat replacement on a ringed site, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Bounded-above flat complexes on a ringed site are K-flat, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Derived tensor and K-flat representative descent on a ringed site, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Exact descent of tensoring with a fixed K-flat complex, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated The unbounded right derived functor is triangulated, not to replace the six-functor unit route."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic foundational input in the Stacks 0CWH approximation argument; used only for its stated Pseudo-coherence is equivalent to m-pseudo-coherence for every m, not to replace the six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ring-pseudo-coherent-iff-all-m"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-b876960f2",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-b876960f2 (reviewer sub-agent of L); spot-checked: Read Stacks 0CWH (spaces-perfect.tex:6327) in full. All seven steps follow its proof. Step 1: N comes from 073B permanence plus the affine-chart vanishing lemma with V=Y=Spec A, W=X; the enlarged-site equalizer gives F_V=Γ, and the 08F7(3) upper bound applies to Γ=Hom(O,-), which is left exact and preserves products. Step 2 takes a=m-N-1-b. Step 3: for i>=a the long exact sequence gives H^i(C)=0, including the endpoint i=a where only surjectivity holds. Step 4: flat-term K-flat representatives with r<=a-1, s<=b, so the tensor vanishes for j>=m-N-1. Step 5: tensor stays in D_QCoh; step 1 with t=m-N-2 gives vanishing for i>=m-2, slack that is harmless. Step 6: triangles preserved, both adjacent T_C groups vanish, so T_P->T_E is an isomorphism for i>=m. Step 7: compose with the finite-free witness for T_P to get m-pseudo-coherence for all m. The new node lem-sfb-space-pseudocoherent-perfect-approximation equals 08HP with T=|X| in 08HJ/08HI, plus 08JL; the cone lies in D_QCoh by weak Serre closure. It is true and not a clause of the item. It generalizes the scheme lemma lem-sfb-pseudocoherent-perfect-approximation (08ES) rather than duplicating it; no space version exists in the snapshot or the live clones. Its form, searches and blueprint fields are complete; no SGA. Generic tool_uses accepted. Batch-5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions. The enlarged-site model (03G0/03G1), qcqs-permanence and D_QCoh tensor closure reach only algebraic-space foundations, not LTF or Poincaré duality steps, so all are outside both assumptions. Item is still unsplit in live and has no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePerfectToPseudoCoherentTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isPseudoCoherent_tensor_sections_of_perfect_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePerfectToPseudoCoherentTests.lean",
+  "statement": "theorem isPseudoCoherent_tensor_sections_of_perfect_tests {S : Scheme.{u}} (A : Type u) [CommRing A] (Y : Over S) (e : Y.left ≅ Spec (.of A)) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : X.IsAbsolutelyQuasiSeparated) (K : X.DerivedModules) (hK : X.derivedQCohProperty K) (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj K)) (hTests : ∀ P : X.DerivedModules, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf P → DerivedCategory.IsPseudoCoherent ((affineDerivedSections A Y e X f).obj (X.derivedDualityModel.closed.tensor.obj (P, K)))) : ∀ E : X.DerivedModules, X.IsPseudoCoherent E → DerivedCategory.IsPseudoCoherent ((affineDerivedSections A Y e X f).obj (X.derivedDualityModel.closed.tensor.obj (E, K)))",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d92122d59",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Read node, Stacks 0CWH (spaces-perfect.tex:6327), module, report and every used declaration (affineDerivedSections/affineScalarSections, derivedDualityModel.closed.tensor, derivedQCohProperty, AlgebraicSpace.IsPseudoCoherent, IsAbsolutelyQuasiSeparated, IsPerfectOnRingedSiteOfUniverses.{u,u,u,w}, DerivedCategory.IsPseudoCoherent). All hypotheses and the conclusion match: qcqs over Spec A via Y/e/f, K in D_QCoh with cohomology zero above some b, perfect tests imply pseudo-coherent tests, same tensor and A-valued RΓ. Binders match sibling exists_perfect_approximation. Edge cases (empty X, zero ring, negative b, K unbounded below) allowed; no universe restriction. Item differs from live only in lean and stmt_deps (+4 landed def nodes, allowed); statement verbatim; imports are stmt/proof-dep modules; docstrings carry source, blueprint and 7 steps; sorry only; no duplicate. Advisory: point topology (def-a1-space-point-topology) reached only transitively via def-sfb-space-absolute-quasi-separated, as in 4 landed sfb items; zeroth-hypercohomology inherited stmt_dep not used directly (correctly replaced by affineDerivedSections)."
+ }
+}

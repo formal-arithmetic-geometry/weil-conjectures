@@ -1,0 +1,136 @@
+{
+ "id": "def-sfb-smooth-dimension-strata",
+ "kind": "definition",
+ "title": "Smooth dimension strata and the sheaf of smooth complex functions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $N$ be a topological space. A smooth structure with locally varying finite dimension consists of pairwise disjoint open sets $N_n\\subseteq N$ ($n\\in\\mathbf N$) covering $N$, together with a smooth real $n$-manifold structure without boundary [def-sfb-smooth-real-manifold] on each $N_n$. No separation or countability is included. Thus dimension is locally constant and may differ between connected components. For open $U\\subseteq N$, set $\\mathcal E_N(U)=\\prod_{n\\in\\mathbf N}C^\\infty(U\\cap N_n,\\mathbf C)$, with pointwise addition and multiplication and componentwise restriction. Complex addition and multiplication are smooth as real maps; the above presheaf is a sheaf of unital rings on the open-subset site [def-weil-pbc-sites-and-cohomology]. A family of functions on the disjoint open cover is identified with its unique function $U\\to\\mathbf C$, so this is exactly the sheaf of smooth complex-valued scalar functions.",
+ "stmt_deps": [
+  "def-sfb-smooth-real-manifold",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §1 (smooth coordinate atlases); IV §4 Example (4.12), p.204; componentwise assembly as in lem-sfb-smooth-function-modules-acyclic proof step 2. Read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of smooth complex valued functions on manifolds of locally varying finite dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.sheafToType\", \"module\": \"Mathlib.Topology.Sheaves.SheafOfFunctions\", \"type\": \"(T : Type*) : Sheaf (Type _) X\", \"doc\": \"For a topological space $X$ and a fixed type $T$, this defines the sheaf on $X$ that assigns to each open subset $U \\\\subseteq X$ the set of functions from $U$ to $T$, with restriction maps given by fu\"}\n  {\"name\": \"smoothSheaf\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf (Type u) (TopCat.of M)\", \"doc\": \"The sheaf on a manifold with corners $M$ whose sections are smooth maps (infinitely differentiable functions) satisfying local compatibility conditions with respect to the model with corners structure\"}\n  {\"name\": \"smoothSheafCommGroup\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf CommGrpCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf on a topological manifold $ M $, taking values in the category of commutative groups, where sections over open subsets are smooth maps to a commutative Lie group $ A $, forming commutative g\"}\n  {\"name\": \"IsManifold.locallyRingedSpace\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.LocallyRingedSpace\", \"type\": \": LocallyRingedSpace\", \"doc\": \"The locally ringed space structure on a manifold $ M $, defined by equipping $ M $ with the sheaf of smooth $ \\\\mathbb{K} $-valued functions under the model with corners $ I_M $, where $ \\\\mathbb{K} $ i\"}\n  {\"name\": \"smoothSheafCommRing\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf CommRingCat.{u} (TopCat.of M)\", \"doc\": \"A sheaf on the topological space $M$ (a manifold with corners modeled on a normed vector space $H$ over a nontrivially normed field $\\\\mathbb{K}$) with values in the category of commutative rings. It i\"}\n  {\"name\": \"smoothSheaf.coeFun\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \"(U : (Opens (TopCat.of M))ᵒᵖ) : CoeFun ((smoothSheaf IM I M N).presheaf.obj U) (fun _ ↦ ↑(unop U) → N)\", \"doc\": \"The sheaf on a manifold with corners $ M $ whose sections are smooth maps (infinitely differentiable functions) satisfying local compatibility conditions with respect to the model with corners structu\"}\n  {\"name\": \"smoothSheafRing\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \": TopCat.Sheaf RingCat.{u} (TopCat.of M)\", \"doc\": \"The sheaf assigns to each open subset $ U $ of a manifold with corners $ M $ the ring of $ C^n $-smooth functions from $ U $ to a ring $ R $ with smooth operations. It satisfies the sheaf condition fo\"}\n  {\"name\": \"smoothSheafCommRing.coeFun\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \"(U : (Opens (TopCat.of M))ᵒᵖ) : CoeFun ((smoothSheafCommRing IM I M R).presheaf.obj U) (fun _ ↦ ↑(unop U) → R)\", \"doc\": \"For any open set $ U $ in the topological space $ M $, the sections of the smooth sheaf of commutative rings over $ U $ are canonically identified with functions from $ U $ to the commutative ring $ R\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for varying-dimensional manifolds: smoothSheaf and smoothSheafRing require a single fixed model. Reuse ChartedSpace, IsManifold, and ContMDiffMap on each open dimension stratum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth manifold with different dimensions on different connected components and sheaf of smooth scalar functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"smoothSheaf\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {EM : Type u_2} →\\n      [inst_1 : NormedAddCommGroup EM] →\\n        [inst_2 : NormedSpace 𝕜 EM] →\\n          {HM : Type u_3} →\\n            [inst_3 : TopologicalSpace HM] →\\n              ModelWithCorners 𝕜 EM HM →\\n                {E : Type u_4\", \"doc\": \"The sheaf on a manifold with corners $M$ whose sections are smooth maps (infinitely differentiable functions) satisfying local compatibility conditions with respect to the model with corners structure\"}\n  {\"name\": \"smoothSheaf.obj_eq\", \"module\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {EM : Type u_2} [inst_1 : NormedAddCommGroup EM]\\n  [inst_2 : NormedSpace 𝕜 EM] {HM : Type u_3} [inst_3 : TopologicalSpace HM] (IM : ModelWithCorners 𝕜 EM HM)\\n  {E : Type u_4} [inst_4 : NormedAddCommGroup E] [inst_5 : NormedSpace 𝕜 E] {H : Type u_5}\", \"doc\": \"For any open subset $U$ of the manifold with corners $M$, the presheaf associated to the smooth sheaf evaluated at $U$ is the space of smooth maps from $U$ to $N$ that are compatible with the model wi\"}\n  {\"name\": \"IsManifold.instOfTopWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {a : WithTop ℕ∞} [IsMan\", \"doc\": \"Given a topological space $ M $ equipped with a manifold with corners structure modeled on a space $ \\\\omega $, there exists a corresponding manifold with corners structure on $ M $ modeled on the exte\"}\n  {\"name\": \"SingularManifold\", \"module\": \"Mathlib/Geometry/Manifold/Bordism\", \"type\": \"(X : Type u_1) →\\n  [TopologicalSpace X] →\\n    WithTop ℕ∞ →\\n      {E : Type u_2} →\\n        {H : Type u_3} →\\n          [inst : NormedAddCommGroup E] →\\n            [inst_1 : NormedSpace ℝ E] →\\n              [FiniteDimensional ℝ E] →\\n                [inst_3 : TopologicalSpace H] → ModelWithCorners ℝ E H\", \"doc\": \"A singular manifold modeled on a finite-dimensional normed vector space $ E $ over $ \\\\mathbb{R} $, equipped with a topological space $ X $, a model with corners structure involving a continuous inject\"}\n  {\"name\": \"IsManifold.instOfNatWithTopENat\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M], IsManifold I 0 M\", \"doc\": \"Given a model with corners consisting of a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a topological space $H$, and a continuous injection from $H$ to $E$ that\"}\n  {\"name\": \"IsManifold\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_2} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              ModelWithCorners 𝕜 E H →\\n                WithTop ℕ∞ → (M : Ty\", \"doc\": \"A topological space $M$ is a manifold with corners modeled on $H$, equipped with a model with corners structure consisting of a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\"}\n  {\"name\": \"IsManifold.mk'\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) (n : WithTop ℕ∞)\\n  (M : Type u_4) [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] [gr : \", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a topological space $H$ with a model with corners $I$, a smoothness class $n$, and a topological space $M$ \"}\n  {\"name\": \"instIsManifoldOfNatWithTopENatOfMinSmoothness_1\", \"module\": \"Mathlib/Geometry/Manifold/VectorField/Pullback\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] [IsManifold I (minSmoot\", \"doc\": \"If a topological space $ M $ has a manifold structure with corners modeled on $ H $ with smoothness level determined by $ \\\\text{minSmoothness} \\\\, \\\\mathbb{K} \\\\, 1 $, then $ M $ also has a manifold stru\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for varying-dimensional manifolds: smoothSheaf and smoothSheafRing require a single fixed model. Reuse ChartedSpace, IsManifold, and ContMDiffMap on each open dimension stratum."
+  },
+  {
+   "tool": "grep",
+   "query": "variable.?dimension|ComponentwiseSmooth|smoothSheaf",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"17\", \"text\": \"* `smoothSheafCommRing.isUnit_stalk_iff`: The units of the stalk at `x` of the sheaf of smooth\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"57\", \"text\": \"theorem smoothSheafCommRing.isUnit_stalk_iff {x : M}\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"58\", \"text\": \"    (f : (smoothSheafCommRing IM 𝓘(𝕜) M 𝕜).presheaf.stalk x) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"59\", \"text\": \"    IsUnit f ↔ f ∉ RingHom.ker (smoothSheafCommRing.eval IM 𝓘(𝕜) M 𝕜 x) := by\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"line\": \"61\", \"text\": \"  · rintro ⟨⟨f, g, hf, hg⟩, rfl⟩ (h' : smoothSheafCommRing.eval IM 𝓘(𝕜) M 𝕜 x f = 0)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"27\", \"text\": \"* `smoothSheaf`: The sheaf of smooth functions from `M` to `N`, as a sheaf of types\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"28\", \"text\": \"* `smoothSheaf.eval`: Canonical map onto `N` from the stalk of `smoothSheaf IM I M N` at `x`,\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"30\", \"text\": \"* `smoothSheafGroup`, `smoothSheafCommGroup`, `smoothSheafRing`, `smoothSheafCommRing`: The\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"33\", \"text\": \"* `smoothSheafCommRing.forgetStalk`: Identify the stalk at a point of the sheaf-of-commutative-rings\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"36\", \"text\": \"* `smoothSheafCommRing.eval`: upgrade `smoothSheaf.eval` to a ring homomorphism when considering the\"}",
+   "date": "2026-10-24",
+   "verdict": "No match for varying-dimensional manifolds: smoothSheaf and smoothSheafRing require a single fixed model. Reuse ChartedSpace, IsManifold, and ContMDiffMap on each open dimension stratum."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothSheaf|ComponentwiseSmooth|variable.?dimension in lean/WeilConjectures and lean/Sheaf; smooth manifold in tools/blueprint_refs.py search; smooth-real-manifold in dag/nodes",
+   "results": "No project declaration for varying-dimensional smooth real manifolds or their smooth scalar ring sheaf. blueprint_refs search: 0 blueprint nodes. Existing def-sfb-smooth-real-manifold gives only the fixed-dimensional Mathlib model and is reused for each stratum. SmoothAnalytic.FunctionSheaf concerns holomorphic functions on algebraic analytifications, not arbitrary smooth real manifolds.",
+   "date": "2026-10-24",
+   "verdict": "Add one definition node assembling existing fixed-dimensional smooth structures."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-function-modules-acyclic",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Open dimension strata and smooth scalar ring sheaf needed for the arbitrary smooth-module acyclicity statement.",
+   "via": [
+    "lem-sfb-smooth-function-modules-acyclic",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.SmoothDimensionStrata",
+  "declaration": "SmoothDimensionStrata",
+  "file": "lean/Sheaf/Geometry/Manifold/SmoothDimensionStrata.lean",
+  "statement": "class SmoothDimensionStrata (N : Type u) [TopologicalSpace N]",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "complex_contMDiffRing",
+   "SmoothDimensionStrata",
+   "SmoothDimensionStrata.openInPiece",
+   "SmoothDimensionStrata.complexPresheaf",
+   "SmoothDimensionStrata.complexPresheaf_isSheaf",
+   "SmoothDimensionStrata.complexSheaf"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8677589fe",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8677589fe",
+  "group": "NH",
+  "result": "pass",
+  "note": "Clause-by-clause check of node vs Lean: T2/SecondCountable/SmoothDimensionStrata (open disjoint Euclidean C^∞ strata = smooth manifold of locally varying finite dimension), ParacompactSpace N conjunct, ∀ F : ringedSiteModules.{u} D.complexSheaf (Mathlib SheafOfModules, no finiteness), SheafOfModules.toSheaf underlying abelian sheaf, ∀ r>0 Subsingleton (Sheaf.H' … r ⊤) matching the recorded cohomology interface and the soft-acyclic proof dep exactly. New def node def-sfb-smooth-dimension-strata: notion absent (Mathlib smoothSheafRing fixed-model only; no project/DAG copy), reuses def-sfb-smooth-real-manifold; complexPresheaf data explicit (Π_n C^∞(U∩N_n,ℂ), restrictRingHom), sorried items only named Prop theorems complex_contMDiffRing (true, Mathlib has only same-field instance) and complexPresheaf_isSheaf; H12 fields OK. Item diff vs side-live only lean + added stmt_dep; dep records byte-identical; statement verbatim; docstrings/source/blueprint/proof steps present; edge cases (empty N, dim 0, unbounded dims, F=0, r=1) covered. No findings; no compile needed (no file changed)."
+ }
+}

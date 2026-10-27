@@ -133,5 +133,50 @@
   "kind": "proof",
   "note": "independent Codex review: Matched the unchanged Lean signature with the node statement, the finite-basis proof with the recorded route, and the report with the delivery; module and sole direct importer compile cleanly, all four proved declarations use only standard axioms, and all added imports are necessary."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.exists_etale_factorization_of_finite_free_constant_map"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.exists_etale_factorization_of_finite_free_constant_map",
+     "module": "WeilConjectures.AlgebraicGeometry.FiniteFreeConstantMapEtaleFactorization",
+     "lines": [
+      235,
+      318
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring, $F$ and $G$ sheaves of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-site], and $\\varphi:F\\to G$ any morphism. Let $n\\ge0$, let $Q=\\underline{\\Lambda^{n}}_X$ be the constant sheaf with value $\\Lambda^n$ [def-constructible-constant], and let $\\alpha:Q\\to G$ be a morphism. Let $x\\in X$ and let $\\bar x$ be the geometric point of $X$ at $x$ given by an algebraic closure of $\\kappa(x)$ [def-weil-pbc-geometric-stalks]. Suppose a $\\Lambda$-linear map $l:Q_{\\bar x}\\to F_{\\bar x}$ satisfies $\\varphi_{\\bar x}\\circ l=\\alpha_{\\bar x}$. Then there are an etale morphism $v:V\\to X$ whose image contains $x$ and a morphism $\\beta:v^{-1}Q\\to v^{-1}F$ with $v^{-1}\\varphi\\circ\\beta=v^{-1}\\alpha$. No monomorphism hypothesis on $\\varphi$ is required.",
+  "proof": [
+   {
+    "text": "If $n=0$, take $V=X$ and the zero map. For $n>0$, let $e_1,\\dots,e_n$ be the standard basis of $\\Lambda^n$. By the definition of geometric stalks [def-weil-pbc-geometric-stalks] as a filtered colimit over pointed etale neighbourhoods of $\\bar x$, each $l(e_m)\\in F_{\\bar x}$ is represented by a section of $F$ on some pointed etale neighbourhood; since pointed etale neighbourhoods form a cofiltered category, one common neighbourhood carries representatives $f_1,\\dots,f_n$. The equality $\\varphi_{\\bar x}\\circ l=\\alpha_{\\bar x}$ says that the germs of $\\varphi(f_m)$ and of $\\alpha(e_m)$ in $G_{\\bar x}$ agree, so on a further common refinement $v:V\\to X$ these sections agree. The universal property of the free module $\\Lambda^n$ gives a $\\Lambda$-linear map $\\Lambda^n\\to F(V)$, $e_m\\mapsto f_m|_V$, and the adjunction between constant sheaves [def-constructible-constant] and global sections, together with the identification of the pullback of a constant sheaf, turns it into $\\beta:v^{-1}Q\\to v^{-1}F$. Checking on the basis gives $v^{-1}\\varphi\\circ\\beta=v^{-1}\\alpha$. The neighbourhood is pointed over $\\bar x$, so $x$ lies in the image of $v$. No monicity of $\\varphi$ is used, and the zero ring is allowed.",
+    "uses": [
+     "def-weil-pbc-geometric-stalks",
+     "def-constructible-constant"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

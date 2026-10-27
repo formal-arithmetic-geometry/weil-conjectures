@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-proper-space-finite-image-neighbourhood",
+ "kind": "statement",
+ "title": "Finite fibre image of a proper algebraic-space family has finite closed image locally",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], and let $p:X\\to T$ and $q:Y\\to T$ be morphisms of algebraic spaces [def-trf-algebraic-space]. Let $h:X\\to Y$ satisfy $qh=p$. Assume $p$ is proper and $q$ is separated and locally of finite type. These properties use [def-sfb-space-morphism-properties]. Let $t\\in T$, choose an algebraic closure $\\Omega$ of its residue field, and form the sheaf fibre products $X_{\\bar t},Y_{\\bar t}$ [lem-trf-space-fibre-products-etale-covers]. Suppose that the image of $|h_{\\bar t}|:|X_{\\bar t}|\\to|Y_{\\bar t}|$ is finite, where point spaces use [def-a1-space-point-topology]. Then there is an affine open neighbourhood $V\\subseteq T$ of $t$, a closed subspace $j:Z\\hookrightarrow Y_V$, and a $V$-morphism $a:X_V\\to Z$ such that $h_V=ja$ and $Z\\to V$ is finite. Here a closed subspace means that every scheme test is a closed immersion [def-weil-closed-immersion]; finite means representable with every scheme base change finite in the sense of [def-weil-finite-integral-morphism]. In particular $Z$ is an affine scheme, with coordinate ring finite as a module over that of $V$. No flatness, reducedness, connectedness, or Noetherian hypothesis on $T$ is imposed; the finite image may be empty.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0AEJ, lemma-flat-proper-family-cannot-collapse-fibre, hypothesis (3)(a); shrink the resulting open base to an affine neighbourhood. Finite uses the representable convention of spaces-morphisms.tex definition-integral (Tag 03ZP)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-proper-schematic-image] to the given $p,q,h$. It gives $h=iu$ through a closed subspace $i:Z\\hookrightarrow Y$, with $r:Z\\to T$ proper and $|u|$ surjective. All hypotheses are exactly the hypotheses of the item.",
+   "uses": [
+    "lem-sfb-space-proper-schematic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0AEJ, lemma-flat-proper-family-cannot-collapse-fibre, first paragraph; Tag 0AGD"
+   }
+  },
+  {
+   "text": "The fibre-product point-image formula in [lem-a1-space-point-open-calculus] applied to $u$ and $Z_{\\bar t}\\to Z$ makes $|u_{\\bar t}|$ surjective. The point map of $i_{\\bar t}$ is injective: equality of images means equality after a common field extension, and a closed immersion is a monomorphism, as its affine scheme tests are spectra of quotient rings [def-weil-closed-immersion]. Consequently $|i_{\\bar t}|(|Z_{\\bar t}|)=\\operatorname{im}|h_{\\bar t}|$ is finite, and hence $|Z_{\\bar t}|$ is finite. This includes the empty image.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0AEJ, surjectivity on the field fibre and hypothesis (3)(a)"
+   }
+  },
+  {
+   "text": "Properness of $r$ implies separatedness and finite type by [def-sfb-space-morphism-properties]. Apply [lem-sfb-space-finite-fibre-quasifinite-criterion] to $r:Z\\to T$ and $\\Omega/\\kappa(t)$. Its condition (i) holds by step 2, so $r$ is quasi-finite at every point over $t$.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-finite-fibre-quasifinite-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0AEJ, application of decent-spaces.tex Tag 0ACK"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-quasifinite-locus-open] the quasi-finite locus $Q\\subseteq|Z|$ is open. Set $C=|Z|\\setminus Q$. Universal closedness of $r$ [def-sfb-space-morphism-properties] makes $r(C)$ closed, and step 3 gives $t\\notin r(C)$. Thus $W=T\\setminus r(C)$ is an open neighbourhood of $t$. Choose an affine open $t\\in V\\subseteq W$ by [lem-weil-pbc-affine-opens-basis]. The inverse image of $V$ lies in $Q$; the base-change equality of quasi-finite loci in the first cited node shows that every point of $Z_V$ is quasi-finite over $V$.",
+   "uses": [
+    "lem-sfb-space-quasifinite-locus-open",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0A4Y, lemma-proper-finite-fibre-finite-in-neighbourhood, proof; affine shrink by schemes.tex Tag 01IT"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-proper-base-change], $r_V:Z_V\\to V$ is proper, hence separated. Its local quasi-finiteness is exactly quasi-finiteness at all points on every etale chart [lem-sfb-space-quasifinite-locus-open, pqf-def-quasifinite]. Apply [lem-a1-separated-locally-qf-space-representable] to represent $Z_V$ by a scheme over $V$. Taking its identity chart gives a locally quasi-finite scheme map; its properness agrees with scheme properness by [def-sfb-space-morphism-properties]. Therefore [pqf-lem-proper-lqf-finite] makes $Z_V\\to V$ finite.",
+   "uses": [
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-quasifinite-locus-open",
+    "pqf-def-quasifinite",
+    "lem-a1-separated-locally-qf-space-representable",
+    "def-sfb-space-morphism-properties",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0A4Y, final sentence, with spaces-morphisms.tex Tag 0418 and scheme Tag 02LS (3) implies (1)"
+   }
+  },
+  {
+   "text": "Base-change $h=iu$ to $V$ to obtain the actual factorization $h_V=i_Vu_V$. The scheme tests of $i_V$ are scheme tests of $i$, so $i_V$ is a closed immersion. Finiteness of the scheme morphism $Z_V\\to V$ persists on all scheme base changes by [lem-trf-finite-radicial-basechange], giving the required representable-finite convention. Since $V$ is affine, [def-weil-finite-integral-morphism] says that $Z_V$ is affine with coordinate ring finite as a module over that of $V$. Rename $Z_V,i_V,u_V$ as $Z,j,a$.",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0AEJ, conclusion; spaces-morphisms.tex Tag 03ZP, definition-integral; scheme Tag 01WH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-schematic-image",
+  "lem-a1-space-point-open-calculus",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-finite-fibre-quasifinite-criterion",
+  "lem-sfb-space-quasifinite-locus-open",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-space-proper-base-change",
+  "pqf-def-quasifinite",
+  "lem-a1-separated-locally-qf-space-representable",
+  "pqf-lem-proper-lqf-finite",
+  "lem-trf-finite-radicial-basechange",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0AEJ, lemma-flat-proper-family-cannot-collapse-fibre, case (3)(a), expanding Tag 0A4Y and using Tag 0418 to apply scheme Tag 02LS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "collapse|finite.*image|image.*finite|schemeTheoreticImage",
+   "results": "23 hits; top: Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: returned finite/proper/quasi-finite declarations concern schemes; the scheme analogue at ZariskisMainTheorem.lean:424 does not specialize to spaces in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper family mapping into a separated space with finite image on a fibre has finite scheme theoretic image near that fibre",
+   "results": "8 hits; top: AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: returned finite/proper/quasi-finite declarations concern schemes; the scheme analogue at ZariskisMainTheorem.lean:424 does not specialize to spaces in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\", \"IsFinite\"",
+   "results": "6 hits; top: AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom, AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: returned finite/proper/quasi-finite declarations concern schemes; the scheme analogue at ZariskisMainTheorem.lean:424 does not specialize to spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism X to T and a separated locally finite type space Y over T, a map X to Y whose image in one geometric fibre is finite factors near that point through a closed subspace finite over T",
+   "results": "8 hits; top: AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.isProper_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: returned finite/proper/quasi-finite declarations concern schemes; the scheme analogue at ZariskisMainTheorem.lean:424 does not specialize to spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a proper algebraic space whose geometric fibre image is zero dimensional has finite schematic image over an open neighbourhood in the base",
+   "results": "8 hits; top: AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces: returned finite/proper/quasi-finite declarations concern schemes; the scheme analogue at ZariskisMainTheorem.lean:424 does not specialize to spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism of algebraic spaces whose image in one geometric fibre is finite factors near that point through a closed subspace finite over the base",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsFinite\"",
+   "results": "[loogle] OK 6 hit(s); AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.IsFinite.eq_isProper_inf_isAffineHom, AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*image|image.*finite|finite_imageι",
+   "results": "[grep] OK 22 hit(s); Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean:17, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean:35, Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean:54, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean:17, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean:346, Mathlib/AlgebraicGeometry/Fiber.lean:20, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:30, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:34, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:36, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:63, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:65, Mathlib/AlgebraicGeometry/Group/Abelian.lean:78, Mathlib/AlgebraicGeometry/Group/Abelian.lean:80, Mathlib/AlgebraicGeometry/Group/Abelian.lean:86, Mathlib/AlgebraicGeometry/Group/Abelian.lean:110, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:346, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:406, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:424, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:428, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:435, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:16, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:22",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite geometric fibre image of a proper algebraic space into a separated locally finite type space gives a finite closed image over an open neighbourhood",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper family of algebraic spaces the scheme theoretic image of a map has finite fibres near a fibre with finite image",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: all returned geometric declarations are for schemes, not algebraic spaces; no one-line specialization to this space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*locallyQuasiFinite",
+   "results": "5 hits in AlgebraicGeometry/ZariskisMainTheorem.lean; IsFinite.of_isProper_of_locallyQuasiFinite at line 373 and iff_isProper_and_locallyQuasiFinite at line 382. Read the source at lines 373-385.",
+   "date": "2026-10-23",
+   "verdict": "existing Mathlib leaf pqf-lem-proper-lqf-finite, reused only after scheme representability in step 5; no match for the algebraic-space item itself"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-abelian-pointed-rigidity",
+  "date": "2026-10-23",
+  "group": "Q119"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Pointed morphisms of relative abelian spaces are homomorphisms. Finite closed image over a neighbourhood, used to apply universal global functions without assuming a scheme target.",
+   "via": [
+    "lem-sfb-relative-abelian-pointed-rigidity",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-space-finite-image-neighbourhood",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Followed 0AEJ through the proper schematic image and expanded 0A4Y by removing the closed image of the non-quasi-finite locus. Reused the existing geometric-fibre criterion and open-locus lemma. Added only the missing algebraic-space proper-image theorem; representability followed by the existing scheme-finiteness leaf supplies the final finite model.",
+  "blueprint": "Retains the inherited precise auxiliary place for pointed relative abelian rigidity in the direct-image stability prerequisites. Current latest blueprint direct-images proof (3) is the higher-level route; this auxiliary uses the independent Stacks 0AEJ argument. blueprint_refs.py ancestor returns null; the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "General point-space fibre-product formula for algebraic spaces, used solely to base-change surjectivity; no stability-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine-basis lemma for a scheme, used only to shrink an open neighbourhood."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic scheme representability of a separated locally quasi-finite algebraic space over a scheme, used after the Stacks open-locus shrink; no stability-unit node replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-a1-separated-locally-qf-space-representable"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-6e1e6a434",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-6e1e6a434 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks 0AEJ (spaces-more-morphisms l.7931), 0A4Y (l.7906), 0A4X, 0AGD (spaces-morphisms l.8015) and 082X (l.2984). The item's statement, stmt_deps and blueprint field are unchanged from live, and on both live and side-live the item is still unsplit with no repair note. The statement matches 0AEJ (3)(a) with B=T and k=Ω, shrunk to an affine V; nothing is weakened. Step 1: the new node gives h=iu with Z→T proper and |u| surjective. Step 2: the point-image formula with X×_Z Z_t̄=X_t̄ makes |u_t̄| surjective, and a closed immersion is a monomorphism, so |i_t̄| is injective; hence |Z_t̄| is finite. This step is genuinely elementary. Step 3: the space criterion (i)⇒(ii) with K=Ω gives quasi-finiteness over t. Step 4: the 0A4Y shrink — open quasi-finite locus, closed r(C), affine V, and the base-change clause carries the locus to Z_V. I checked each part. Step 5: proper base change, then 0418 representability (separated diagonal plus chartwise local quasi-finiteness), then the Mathlib leaf IsFinite.of_isProper_of_locallyQuasiFinite; all hypotheses are present. Step 6: base-changed factorization, closed-immersion tests inherited, finite base-change leaf, and affine V gives a finite coordinate ring. The new node lem-sfb-space-proper-schematic-image is exactly 0AGD plus the 082X minimality that defines the image, specialized to a scheme base. It is self-contained, statement only, searched with five recorded queries, and is not a clause of the item. Duplicate search found no algebraic-space version of 0AGD or 0AEJ: the 0AH6/pqf-lem-image-proper/nagata image nodes are scheme-only, and lem-sfb-space-closed-subset-finite-fibre-open is a different statement. Small cases checked: empty X, empty fibre, non-reduced image, h = identity of P^1_T (item hypothesis fails), constant map. I accept the declared tool_uses: point-open calculus, 0418 representability, and the affine-basis Mathlib leaf. Batch-5: every flagged citation reaches sec-trace-formula only through def-trf-algebraic-space, the general definition of an algebraic space. They are foundational space facts, not steps of the trace formula or of Poincaré duality, so this is acceptable. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSpaceFiniteImageNeighbourhood",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_finite_closed_image_affine_neighbourhood",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.finiteImageBaseChangeMap",
+   "AlgebraicGeometry.AlgebraicSpace.exists_finite_closed_image_affine_neighbourhood"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSpaceFiniteImageNeighbourhood.lean",
+  "statement": "theorem exists_finite_closed_image_affine_neighbourhood (T : Scheme.{u}) (X Y : AlgebraicSpace T) (p : X ⟶ schemeSpace (Over.mk (𝟙 T))) (q : Y ⟶ schemeSpace (Over.mk (𝟙 T))) (h : X ⟶ Y) (w : h ≫ q = p) (hp : MapIsProper p) (hq : MapIsSeparated q) (hqlft : MapIsLocally (@LocallyOfFiniteType) q) (t : T) (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω] [IsAlgClosure (T.residueField t) Ω] (hfinite : (pointImage (finiteImageBaseChangeMap p q h w (Over.homMk (U := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)) (V := Over.mk (𝟙 T)) (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)) ≫ T.fromSpecResidueField t)))).Finite) : ∃ (V : T.Opens), t ∈ V ∧ IsAffineOpen V ∧ ∃ (Z : Over T) (g : Z ⟶ Over.mk V.ι) (j : yoneda.obj Z ⟶ Limits.pullback q.hom.hom (yoneda.map (Over.homMk (U := Over.mk V.ι) (V := Over.mk (𝟙 T)) V.ι))) (a : Limits.pullback p.hom.hom (yoneda.map (Over.homMk (U := Over.mk V.ι) (V := Over.mk (𝟙 T)) V.ι)) ⟶ yoneda.obj Z), IsRepresentableWith (fun _ _ f ↦ IsClosedImmersion f.left) j ∧ a ≫ j = finiteImageBaseChangeMap p q h w (Over.homMk (U := Over.mk V.ι) (V := Over.mk (𝟙 T)) V.ι) ∧ j ≫ pullback.snd q.hom.hom (yoneda.map (Over.homMk (U := Over.mk V.ι) (V := Over.mk (𝟙 T)) V.ι)) = yoneda.map g ∧ a ≫ yoneda.map g = pullback.snd p.hom.hom (yoneda.map (Over.homMk (U := Over.mk V.ι) (V := Over.mk (𝟙 T)) V.ι)) ∧ IsRepresentableWith (fun _ _ f ↦ IsFinite f.left) (yoneda.map g) ∧ IsAffine Z.left ∧ (g.left.appTop).hom.Finite",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-036df6fc2",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read item node (only the lean record differs from side-live), Stacks 0AEJ (3)(a), the module and the dependency declarations (AlgebraicSpace, IsRepresentableWith, MapIsProper/MapIsSeparated/MapIsLocally, pointImage/Point, schemeSpace, IsClosedImmersion, IsFinite). Every hypothesis matches with nothing stronger (proper p; separated and locally finite type q; Ω any algebraic closure in Type u); the geometric fibre is the actual presheaf pullback along Spec Ω→T via a real pullback.map helper; finite pointImage. Conclusion: affine open V∋t, closed subspace j (closed immersion on every scheme test), V-morphism a with a≫j=h_V, Z→V representable-finite, Z affine with finite appTop; quantifier order matches. Edge cases (empty image, empty X or T) covered. No duplicate in Sheaf/WeilConjectures/Mathlib; sorry-only; docstrings carry source, blueprint and steps 1-6; lean.statement verbatim. Note: schemeSpace (def-trf-scheme-algebraic-space) is not in stmt_deps, following the precedent of many landed items. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-field-groupoid-stabilizer-dimension",
+ "kind": "statement",
+ "title": "Dimension of a field groupoid equals the dimension of its stabilizer",
+ "statement": "Let $S$ be a scheme and let $(U,R,s,t,e,i,c)$ be a groupoid in algebraic spaces over $S$ [def-trf-algebraic-space], with $U=\\operatorname{Spec}K$ for a field $K$ [def-weil-field]. Here a groupoid means that these operations give a groupoid on all test-scheme points, naturally in the test scheme, with source $s$, target $t$, identity $e$, inverse $i$ and composition $c$. Assume $s,t:R\\to U$ are locally of finite type, tested on etale scheme charts using [def-weil-finite-type-morphism]. Put $G=U\\times_{\\Delta_{U/S},\\,U\\times_SU,\\,(s,t)}R$, the stabilizer algebraic space, with fibre products as in [def-pc-fibre-product]. Then $\\dim R=\\dim G$. Dimension for an algebraic space means $\\dim(X)=\\sup_{x\\in|X|}\\dim_x(X)$, where $\\dim_x(X)=\\dim_v(V)$ for any etale scheme chart $V\\to X$ and point $v$ over $x$; for a scheme, $\\dim_v(V)$ is the infimum of the Krull dimensions of open neighbourhoods of $v$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 06FF (lemma-groupoid-on-field-dimension-equal-stabilizer), in Situation situation-groupoid-on-field with B=S; dimension conventions: spaces-properties.tex, definition-dimension-at-point and definition-dimension."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-algebraic-space-etale-dimension"
+ ],
+ "proof": [
+  {
+   "text": "First record the chart calculation for $G$. For any affine etale chart $V=\\operatorname{Spec}A\\to R$, write $a,b:K\\to A$ for the maps induced by $s,t$. The pullback $W=V\\times_R G$ is the equalizer of $s|_V,t|_V$. Choose an affine open $S_0=\\operatorname{Spec}D\\subset S$ containing the image of $U$; all the maps under consideration factor through it. The affine fibre-product formula gives $W=\\operatorname{Spec}(A\\otimes_{K\\otimes_D K}K)=\\operatorname{Spec}(A/I)$, where $I=(a(\\lambda)-b(\\lambda):\\lambda\\in K)$. A finite set generating $A$ as a $K$-algebra maps to generators of $A/I$. Thus $W\\to U$ is of finite type. These $W\\to G$ are an etale covering by base change. This proves the required chart test for $G\\to U$: for any scheme chart $H\\to G$, cover $H\\times_G W$ by affine opens. Each maps etale to an affine $W$, hence is locally of finite type over $W$ (local finite presentation supplies finitely many generators), and composition gives local finite type over $K$. Descent through the resulting flat locally finitely presented surjective etale cover of $H$ gives that $H\\to U$ is locally of finite type. The groupoid operations restrict to $G$, since arrows with equal source and target are closed under identities, inverse and composition. So $G$ is a group algebraic space locally of finite type over $K$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism",
+    "def-weil-etale-morphism",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-a1-lft-flat-lfp-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 06FF (lemma-groupoid-on-field-dimension-equal-stabilizer), proof, with B=S."
+   }
+  },
+  {
+   "text": "Let $e_R\\in|R|$ and $e_G\\in|G|$ be the points of the identity. The constant-dimension lemma applied to $R$ and to the group groupoid of $G$ gives $\\dim R=\\dim_{e_R}R$ and $\\dim G=\\dim_{e_G}G$. Choose an affine etale chart $V\\to R$ and $v\\in V$ over $e_R$. Both maps $V\\to U$ are locally of finite type by hypothesis, and are of finite type since $V$ is affine and $U$ has one point. Replace $V$ by its connected component $C$ containing $v$. The finite-type component lemma, applied separately to each structural map, makes $C$ a nonempty connected open subscheme still of finite type for both structures. The restricted chart $C\\to R$ is etale. Set $T=C_{\\mathrm{red}}$. Reduction is a homeomorphism, so $T$ is nonempty and connected, and it is reduced. On affine opens its rings are quotients by the nilradical; images of finite sets of algebra generators show that the two maps $T\\to U$ are locally of finite type.",
+   "uses": [
+    "lem-sfb-field-groupoid-constant-local-dimension",
+    "def-trf-algebraic-space",
+    "def-weil-finite-type-morphism",
+    "lem-trf-finite-type-component-open-qc",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 06FF (lemma-groupoid-on-field-dimension-equal-stabilizer), proof, with B=S."
+   }
+  },
+  {
+   "text": "Write $\\rho_a,\\rho_b:K\\to\\Gamma(T,\\mathcal O_T)$ for the source and target maps. Their composites with evaluation $\\Gamma(T,\\mathcal O_T)\\to\\kappa(v)$ agree: the field-valued point of $R$ at $v$ represents the identity point, so after passing to a common field extension it equals an identity arrow; the two structural maps there coincide, and injectivity of the field extension descends the equality to $\\kappa(v)$. The scalar-field uniqueness lemma applies to the nonempty connected reduced scheme $T$ and its two locally finite type structures. It gives a common field $L=C_a=C_b\\subseteq\\Gamma(T,\\mathcal O_T)$. Evaluation restricted to $L$ is a unital map from a field to the field $\\kappa(v)$, hence injective. For every $\\lambda\\in K$, both $\\rho_a(\\lambda),\\rho_b(\\lambda)$ lie in $L$ and have equal evaluations, so they are equal. The affine-target correspondence therefore gives $s|_T=t|_T$, and $T\\to R$ factors through $G$.",
+   "uses": [
+    "lem-sfb-connected-reduced-scalar-field-uniqueness",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 06FF (lemma-groupoid-on-field-dimension-equal-stabilizer), proof, with B=S."
+   }
+  },
+  {
+   "text": "Put $W=C\\times_R G$. It is an etale scheme chart over $G$ by base change. On any affine open $D=\\operatorname{Spec}B\\subset C$, the calculation of step 1 gives $W\\times_C D=\\operatorname{Spec}(B/J)$, with $J$ generated by source-minus-target scalar differences. Step 3 says every such generator maps to zero in $B/\\sqrt{(0)}$, so $J\\subseteq\\sqrt{(0)}$. Every prime of $B$ therefore contains $J$; the quotient correspondence identifies $\\operatorname{Spec}(B/J)$ and $\\operatorname{Spec}B$ with exactly the same closed sets. These homeomorphisms agree on overlaps, so $W\\to C$ is a homeomorphism. In particular there is a unique point $w$ over $v$. It maps to $e_G$: a test-scheme point of $G=U\\times_{U\\times_SU}R$ is a pair $(u,r)$ with $\\Delta_{U/S}\\circ u=(s,t)\\circ r$, so $u=s\\circ r$ and points of $G$ are determined by their images in $R$; hence two field points of $G$ whose images in $R$ agree after a common field extension already agree after it, and $w$, whose image in $R$ is $\\varphi(v)=e_R$, the image of $e_G$, is the point $e_G$. Also $\\dim_w W=\\dim_v C$, since their open neighbourhoods and chains of irreducible closed subsets correspond. The chart convention for dimension now gives $\\dim_{e_G}G=\\dim_w W=\\dim_v C=\\dim_{e_R}R$. Together with step 2 this proves $\\dim G=\\dim R$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 06FF (lemma-groupoid-on-field-dimension-equal-stabilizer), proof, with B=S."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-sfb-field-groupoid-constant-local-dimension",
+  "def-trf-algebraic-space",
+  "lem-trf-finite-type-component-open-qc",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sfb-connected-reduced-scalar-field-uniqueness",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 06FF (lemma-groupoid-on-field-dimension-equal-stabilizer), proof, with B=S. The proof spells out the affine equalizer and the nilradical comparison at the end."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A groupoid in algebraic spaces with object scheme the spectrum of a field has the same dimension as its stabilizer when source and target are locally of finite type",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecStalk x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is a preimmersion.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [Algebra.IsStandardSmooth R S] → ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of the arrow space of an internal groupoid over a field equals the dimension of the isotropy group at the identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsManifold.toHasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {E : Type u_2} {inst_1 : NormedAddCommGroup E}\\n  {inst_2 : NormedSpace 𝕜 E} {H : Type u_3} {inst_3 : TopologicalSpace H} {I : ModelWithCorners 𝕜 E H} {n : WithTop ℕ∞}\\n  {M : Type u_4} {inst_4 : TopologicalSpace M} {inst_5 : ChartedSpace H M} [self \", \"doc\": \"If $ M $ is a manifold with corners modeled on $ H $, equipped with a model with corners structure consisting of a nontrivially normed field $ \\\\mathbb{K} $, a normed vector space $ E $ over $ \\\\mathbb{\"}\n  {\"name\": \"contDiffGroupoid_zero_eq\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H},\\n  contDiffGroupoid 0 I = continuousGroupoid H\", \"doc\": \"The groupoid of $C^0$ diffeomorphisms (continuous maps) constructed using the model with corners $I$ coincides with the continuous groupoid on the topological space $H$, i.e., $\\\\mathrm{contDiffGroupoi\"}\n  {\"name\": \"CategoryTheory.Groupoid.vertexGroup\", \"module\": \"Mathlib/CategoryTheory/Groupoid/VertexGroup\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Groupoid C] → (c : C) → Group (c ⟶ c)\", \"doc\": \"For any object $ c $ in a groupoid $ \\\\mathcal{C} $, the set of endomorphisms $ \\\\text{Hom}(c, c) $ forms a group under composition of morphisms. The group operation is composition $ \\\\circ $, the identi\"}\n  {\"name\": \"CategoryTheory.Groupoid.vertexGroup_one\", \"module\": \"Mathlib/CategoryTheory/Groupoid/VertexGroup\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (c : C), 1 = CategoryTheory.CategoryStruct.id c\", \"doc\": \"In a groupoid $\\\\mathcal{C}$, for any object $c$, the identity element $1$ of the vertex group $\\\\text{Hom}(c, c)$ coincides with the identity morphism $\\\\text{id}_c$ of the object $c$.\"}\n  {\"name\": \"hasGroupoid_model_space\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ (H : Type u_5) [inst : TopologicalSpace H] (G : StructureGroupoid H), HasGroupoid H G\", \"doc\": \"For any topological space $ H $ and its structure groupoid $ G $, the natural charted space structure on $ H $ (where $ H $ serves as its own model space via the identity map) is compatible with $ G $\"}\n  {\"name\": \"IsFreeGroupoid.endIsFreeOfConnectedFree\", \"module\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier\", \"type\": \"∀ {G : Type u} [inst : CategoryTheory.Groupoid G] [CategoryTheory.IsConnected G] [IsFreeGroupoid G] (r : G),\\n  IsFreeGroup (CategoryTheory.End r)\", \"doc\": \"In a connected free groupoid $\\\\mathcal{G}$, the endomorphism group $\\\\text{End}(r)$ of any object $r$ is a free group. This follows from the inductive definition of free groupoids and the connectedness\"}\n  {\"name\": \"contDiffGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"WithTop ℕ∞ →\\n  {𝕜 : Type u_1} →\\n    [inst : NontriviallyNormedField 𝕜] →\\n      {E : Type u_2} →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace 𝕜 E] →\\n            {H : Type u_3} → [inst_3 : TopologicalSpace H] → ModelWithCorners 𝕜 E H → StructureGroupoid H\", \"doc\": \"The groupoid generated by the pregroupoid of C^n diffeomorphisms on a topological space $H$, constructed using the model with corners $I$. This groupoid consists of open partial homeomorphisms that ar\"}\n  {\"name\": \"idGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"(H : Type u_2) → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"For a topological space $ H $, this is the structure groupoid consisting of the identity open partial homeomorphism on $ H $ and all open partial homeomorphisms with empty source domain. It satisfies \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"dimension\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*dimension|dimension.*stabilizer|AlgebraicSpace",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"33\", \"text\": \"When `L` is one-dimensional this is an abelian subgroup of the stabilizer of `L` in `SL`. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a groupoid in algebraic spaces on the spectrum of a field equals the dimension of its stabilizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmooth R S] : ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"MulAction.stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(a : α) : Subgroup G\", \"doc\": \"Given a group action of $G$ on a set $\\\\alpha$ and an element $a \\\\in \\\\alpha$, the stabilizer subgroup of $a$ is the subgroup of $G$ consisting of all elements $g$ satisfying $g \\\\bullet a = a$. This sub\"}\n  {\"name\": \"Ideal.Quotient.map_ker_stabilizer_subtype\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \": (stabilizerHom P p G).ker.map (Subgroup.subtype _) = P.toAddSubgroup.inertia G\", \"doc\": \"The kernel of the stabilizer homomorphism from the stabilizer subgroup $\\\\text{Stab}_G(P)$ of an ideal $P \\\\subseteq B$ to the automorphism group of the quotient ring $B/P$ is equal to the inertia subgr\"}\n  {\"name\": \"MulAction.stabilizer_subgroup\", \"module\": \"Mathlib.Algebra.Pointwise.Stabilizer\", \"type\": \"(s : Subgroup G) : stabilizer G (s : Set G) = s\", \"doc\": \"For a group $G$ and a subgroup $s$ of $G$, the stabilizer of $s$ (when considered as a subset of $G$) under the group action is equal to $s$ itself, i.e., $\\\\text{stabilizer}_G(s) = s$.\"}\n  {\"name\": \"AddAction.stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(G : Type u_1) → {α : Type u_2} → [inst : AddGroup G] → [AddAction G α] → α → AddSubgroup G\", \"doc\": \"For an additive group $G$ acting on a type $\\\\alpha$ and an element $a \\\\in \\\\alpha$, this constructs the additive subgroup of $G$ consisting of all elements $g \\\\in G$ satisfying $g \\\\cdot a = a$. This fo\"}\n  {\"name\": \"SubAddAction.nat_card_ofStabilizer_add_zero_eq\", \"module\": \"Mathlib.GroupTheory.GroupAction.SubMulAction.OfStabilizer\", \"type\": \"∀ (G : Type u_1) [inst : AddGroup G] {α : Type u_2} [inst_1 : AddAction G α] [Finite α] (a : α),\\n  Nat.card ↥(SubAddAction.ofStabilizer G a) + 1 = Nat.card α\", \"doc\": \"For any additive group $G$ acting on a finite set $\\\\alpha$ and any element $a \\\\in \\\\alpha$, the cardinality of the stabilizer subgroup of $a$ plus one equals the cardinality of $\\\\alpha$, i.e., $\\\\mathrm\"}\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : VAdd Γ T] [ProperlyDiscontinuousVAdd Γ T] (x : T),\\n  {γ | γ +ᵥ x = x}.Finite\", \"doc\": \"For any properly discontinuous additive action of a group $\\\\Gamma$ on a topological space $T$, and for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is\"}\n  {\"name\": \"MulAction.orbitProdStabilizerEquivGroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(b : β) : orbit α b × stabilizer α b ≃ α\", \"doc\": \"For a group $G$ acting on a set $\\\\beta$ and an element $b \\\\in \\\\beta$, there is a canonical bijection between the Cartesian product of the orbit of $b$ and the stabilizer subgroup of $b$, and the group\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space representability or internal field-groupoid dimension statement; scheme Artinian facts, ordinary groupoids and unrelated stabilizers do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a groupoid in algebraic spaces on Spec K with locally finite type source and target the arrow space and the stabilizer have equal dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [Algebra.IsStandardSmooth R S] → ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"NumberField.InfinitePlace.nat_card_stabilizer_eq_one_or_two\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra k K]\\n  (w : NumberField.InfinitePlace K),\\n  Nat.card ↥(MulAction.stabilizer Gal(K/k) w) = 1 ∨ Nat.card ↥(MulAction.stabilizer Gal(K/k) w) = 2\", \"doc\": \"For any infinite place $ w $ of a number field $ K $, the cardinality of the stabilizer subgroup $ \\\\text{Stab}(w) $ under the Galois group action is either 1 or 2.\"}\n  {\"name\": \"NumberField.InfinitePlace.card_stabilizer\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra k K]\\n  {w : NumberField.InfinitePlace K} [IsGalois k K],\\n  Nat.card ↥(MulAction.stabilizer Gal(K/k) w) = if NumberField.InfinitePlace.IsUnramified k w then 1 else 2\", \"doc\": \"Let $ K/k $ be a Galois extension of number fields, and let $ w $ be an infinite place of $ K $. The cardinality of the stabilizer subgroup $ \\\\text{Stab}(w) $ of $ w $ under the action of the Galois g\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecStalk x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is a preimmersion.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary groupoids, smooth relative dimension, field dimension and linear/Galois stabilizers do not state the algebraic-space groupoid/stabilizer comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"dimension\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary groupoids, smooth relative dimension, field dimension and linear/Galois stabilizers do not state the algebraic-space groupoid/stabilizer comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*dimension|dimension.*stabilizer|AlgebraicSpace",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean\", \"line\": \"33\", \"text\": \"When `L` is one-dimensional this is an abelian subgroup of the stabilizer of `L` in `SL`. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary groupoids, smooth relative dimension, field dimension and linear/Galois stabilizers do not state the algebraic-space groupoid/stabilizer comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a field groupoid is the dimension of its isotropy group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.SmallGroupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"(C : Type u) : Type (u + 1)\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"ringKrullDim_eq_zero_of_isField\", \"module\": \"Mathlib.RingTheory.KrullDimension.Field\", \"type\": \"{F : Type*} [CommRing F] (hF : IsField F) : ringKrullDim F = 0\", \"doc\": \"The Krull dimension of a field is zero, i.e., for any commutative ring $ F $ that is a field, its Krull dimension $ \\\\dim(F) $ satisfies $ \\\\dim(F) = 0 $.\"}\n  {\"name\": \"ringKrullDim_eq_zero_of_field\", \"module\": \"Mathlib.RingTheory.KrullDimension.Field\", \"type\": \"(F : Type*) [Field F] : ringKrullDim F = 0\", \"doc\": \"The Krull dimension of any field is zero, as fields have no nontrivial prime ideals and thus no strictly increasing chains of prime ideals.\"}\n  {\"name\": \"StructureGroupoid.mk.sizeOf_spec\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"∀ {H : Type u_2} [inst : TopologicalSpace H] [inst_1 : SizeOf H] (members : Set (OpenPartialHomeomorph H H))\\n  (trans' : ∀ (e e' : OpenPartialHomeomorph H H), e ∈ members → e' ∈ members → e.trans e' ∈ members)\\n  (symm' : ∀ e ∈ members, e.symm ∈ members) (id_mem' : OpenPartialHomeomorph.refl H ∈ memb\", \"doc\": \"The size of the structure groupoid constructed using the `mk` constructor is equal to 1 plus the size of the identity open partial homeomorphism.\"}\n  {\"name\": \"CategoryTheory.IsIso.of_groupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"(f : X ⟶ Y) : IsIso f\", \"doc\": \"In a groupoid, every morphism is an isomorphism.\"}\n  {\"name\": \"IsGaloisGroup.card_eq_finrank\", \"module\": \"Mathlib.FieldTheory.Galois.IsGaloisGroup\", \"type\": \"[IsGaloisGroup G K L] : Nat.card G = Module.finrank K L\", \"doc\": \"If $ G $ is the Galois group of the field extension $ L $ over $ K $, then the cardinality of $ G $ is equal to the dimension of $ L $ as a vector space over $ K $. Formally, $ |G| = [L : K] $, where \"}\n  {\"name\": \"FixedPoints.finrank_eq_card\", \"module\": \"Mathlib.FieldTheory.Fixed\", \"type\": \"[Fintype G] [FaithfulSMul G F] : finrank (FixedPoints.subfield G F) F = Fintype.card G\", \"doc\": \"For a finite group $ G $ acting faithfully on a field $ F $, the finite rank of the fixed subfield of $ F $ under the action of $ G $ is equal to the cardinality of $ G $.\"}\n  {\"name\": \"CategoryTheory.finrank_endomorphism_eq_one\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Schur\", \"type\": \"{X : C} (isIso_iff_nonzero : ∀ f : X ⟶ X, IsIso f ↔ f ≠ 0) [I : FiniteDimensional 𝕜 (X ⟶ X)] : finrank 𝕜 (X ⟶ X) = 1\", \"doc\": \"In a preadditive category, if every non-zero endomorphism of an object $X$ is an isomorphism and the space of endomorphisms $\\\\text{Hom}(X,X)$ is finite-dimensional over a field $\\\\mathbb{k}$, then the \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary groupoids, smooth relative dimension, field dimension and linear/Galois stabilizers do not state the algebraic-space groupoid/stabilizer comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of the arrows of an algebraic groupoid over a field equals dimension of the identity stabilizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.finrank_endomorphism_eq_one\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Schur\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (𝕜 : Type u_2)\\n  [inst_2 : Field 𝕜] [IsAlgClosed 𝕜] [inst_4 : CategoryTheory.Linear 𝕜 C] {X : C},\\n  (∀ (f : X ⟶ X), CategoryTheory.IsIso f ↔ f ≠ 0) → ∀ [I : FiniteDimensional 𝕜 (X ⟶ X)], Module.fin\", \"doc\": \"In a preadditive category, if every non-zero endomorphism of an object $X$ is an isomorphism and the space of endomorphisms $\\\\text{Hom}(X,X)$ is finite-dimensional over a field $\\\\mathbb{k}$, then the \"}\n  {\"name\": \"contDiffGroupoid_zero_eq\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H},\\n  contDiffGroupoid 0 I = continuousGroupoid H\", \"doc\": \"The groupoid of $C^0$ diffeomorphisms (continuous maps) constructed using the model with corners $I$ coincides with the continuous groupoid on the topological space $H$, i.e., $\\\\mathrm{contDiffGroupoi\"}\n  {\"name\": \"IsManifold.toHasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {E : Type u_2} {inst_1 : NormedAddCommGroup E}\\n  {inst_2 : NormedSpace 𝕜 E} {H : Type u_3} {inst_3 : TopologicalSpace H} {I : ModelWithCorners 𝕜 E H} {n : WithTop ℕ∞}\\n  {M : Type u_4} {inst_4 : TopologicalSpace M} {inst_5 : ChartedSpace H M} [self \", \"doc\": \"If $ M $ is a manifold with corners modeled on $ H $, equipped with a model with corners structure consisting of a nontrivially normed field $ \\\\mathbb{K} $, a normed vector space $ E $ over $ \\\\mathbb{\"}\n  {\"name\": \"IsFreeGroupoid.endIsFreeOfConnectedFree\", \"module\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier\", \"type\": \"∀ {G : Type u} [inst : CategoryTheory.Groupoid G] [CategoryTheory.IsConnected G] [IsFreeGroupoid G] (r : G),\\n  IsFreeGroup (CategoryTheory.End r)\", \"doc\": \"In a connected free groupoid $\\\\mathcal{G}$, the endomorphism group $\\\\text{End}(r)$ of any object $r$ is a free group. This follows from the inductive definition of free groupoids and the connectedness\"}\n  {\"name\": \"CategoryTheory.Groupoid.vertexGroup_one\", \"module\": \"Mathlib/CategoryTheory/Groupoid/VertexGroup\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Groupoid C] (c : C), 1 = CategoryTheory.CategoryStruct.id c\", \"doc\": \"In a groupoid $\\\\mathcal{C}$, for any object $c$, the identity element $1$ of the vertex group $\\\\text{Hom}(c, c)$ coincides with the identity morphism $\\\\text{id}_c$ of the object $c$.\"}\n  {\"name\": \"idGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"(H : Type u_2) → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"For a topological space $ H $, this is the structure groupoid consisting of the identity open partial homeomorphism on $ H $ and all open partial homeomorphisms with empty source domain. It satisfies \"}\n  {\"name\": \"idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"The structure groupoid on a topological space $ H $ consisting of open partial homeomorphisms that are equivalent to identity maps on open subsets of $ H $. It is closed under composition, inverses, c\"}\n  {\"name\": \"hasGroupoid_model_space\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ (H : Type u_5) [inst : TopologicalSpace H] (G : StructureGroupoid H), HasGroupoid H G\", \"doc\": \"For any topological space $ H $ and its structure groupoid $ G $, the natural charted space structure on $ H $ (where $ H $ serves as its own model space via the identity map) is compatible with $ G $\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary groupoids, smooth relative dimension, field dimension and linear/Galois stabilizers do not state the algebraic-space groupoid/stabilizer comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-identity-finite-relation",
+  "date": "2026-10-23",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF).",
+   "via": [
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-groupoid-stabilizer-dimension",
+  "worker": "stage1",
+  "summary": "Q20: split Stacks 06FF along its identity-chart proof; two statement-only inputs are constant dimension (06FD/06FE) and equality/fieldness of scalar integral closures (04MK/04MI). Proved G locally finite type chartwise, verified identity residue maps and nilradical comparison. Statement unchanged.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), direct-image preservation. Retains the inherited alteration/moduli supporting chain. The ancestor command reports from.node=None; this is inherited and not replaced by an invented ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-a1-lft-flat-lfp-source-descent",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-trf-finite-type-component-open-qc",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic algebraic-space chart, scheme finite-type, component, reduction or affine-spectrum foundation in the Stacks 06FF calculation; it does not replace any six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-trf-finite-type-component-open-qc",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-1307383c6",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-1307383c6 (reviewer sub-agent of L); spot-checked: Read Stacks 06FD, 06FE and 06FF (spaces-more-groupoids.tex) and 04MI and 04MK (varieties.tex), statements and proofs, plus every cited statement. The item statement is unchanged and matches 06FF with B=S; (s,t) instead of t×s gives the same equalizer. Step 1: the chart W=Spec(A/I) with I=(a(λ)-b(λ)) is correct, finite type passes to the quotient, and the étale cover, composition and descent nodes say what the step takes; G is locally of finite type and a group. Step 2: the constant-dimension node is applied to R and G, the finite-type component node gives the connected open C, and T=C_red is nonempty, connected and reduced. Step 3: the residue maps agree because φ(v)=e_R, using the field-point convention in lem-trf-space-fibre-products-etale-covers; the scalar node then gives a common field L that injects into κ(v); morphism-into-affine gives s|_T=t|_T. Step 4: J lies in the nilradical, so W→C is a homeomorphism. New nodes: scalar-field-uniqueness = 04MK+04MI, tested on k[x,y]/(xy), k×k, k[ε] and a quadratic extension. Constant-local-dimension = 06FD(1)+06FE(1); it is a real lemma and not an item clause. Searches over dag/nodes (rg -L) for 04MK, 04MI, 06FD, 06FE, 06FF and keywords found no duplicate; two-field-scalar-algebraicity, quasiseparated-space-atlas-dimension and fibre-dimension-supremum are weaker or different. Batch 5: def-trf-algebraic-space is a general definition; the three lem-trf nodes (space fibre products/étale covers, chartwise étale permanence, finite-type component) have closures of generic sheaf, atlas and descent foundations only, with no trace-formula or Poincaré content. Accepted, and the 8 tool_uses accepted as generic foundations. FIX: (1) item step 4 now explains why w maps to e_G: a point of G is a pair with u=s∘r, so G→R is a monomorphism. (2) The constant-dimension node now defines |X| inline, as B2/B3 require. from.node=null is inherited and is a note for the maintainer, not a fault.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGroupoidStabilizerDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fieldGroupoid_dimension_eq_stabilizer",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fieldGroupoid_dimension_eq_stabilizer"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGroupoidStabilizerDimension.lean",
+  "statement": "theorem fieldGroupoid_dimension_eq_stabilizer {S : Scheme.{u}} (K : Type u) [Field K] (b : Spec (CommRingCat.of K) ⟶ S) (R : AlgebraicSpace S) (s t : R.obj.obj ⟶ yoneda.obj (Over.mk b)) (e : yoneda.obj (Over.mk b) ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s t ⟶ R.obj.obj) (hgroupoid : IsPresheafGroupoid s t e i c) (hs : ∀ (V : Over S) (a : yoneda.obj V ⟶ R.obj.obj) (f : V ⟶ Over.mk b), IsEtale a → a ≫ s = yoneda.map f → LocallyOfFiniteType f.left) (ht : ∀ (V : Over S) (a : yoneda.obj V ⟶ R.obj.obj) (f : V ⟶ Over.mk b), IsEtale a → a ≫ t = yoneda.map f → LocallyOfFiniteType f.left) : etaleDimension R.obj.obj = etaleDimension (groupoidStabilizer s t)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d75fb4fc",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item theorem matches node/Stacks 06FF (B=S): IsPresheafGroupoid laws checked one by one (c(a,b)=a∘b; units, inverses, assoc), hs/ht required on every étale chart (equivalent for spaces, not stronger), stabilizer = actual pullback of Δ along (s,t) (same as Stacks t×s up to swap), conclusion etaleDimension R = etaleDimension G. New nodes def-sfb-algebraic-space-groupoid and def-sfb-algebraic-space-etale-dimension are justified: no algebraic-space dim_x/dim or groupoid-in-spaces definition exists (consumers use dim|X|, which Stacks warns differs; chart-invariance lemma is stalk dimension; groupoid defs are scheme-only); the sup over étale charts of topologicalKrullDimAt is real and choice-free and equals the Stacks value for spaces. Records: item differs from base only by the 2 added stmt_deps and lean; lean.statement verbatim for all 3; new-node stmt_deps match used decls. Only the main theorem is sorry; docstrings carry source and blueprint; no pro-étale substitute. Worker compile accepted, nothing recompiled. Maintainer note: from.node=null is inherited."
+ }
+}

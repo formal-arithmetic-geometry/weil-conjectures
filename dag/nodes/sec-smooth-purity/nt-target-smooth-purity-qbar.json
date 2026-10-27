@@ -30,19 +30,19 @@
  ],
  "proof": [
   {
-   "text": "Choose the normalized pair of mutually inverse maps supplied by [lem-pur-condensed-normalized-witness]. Package its two maps and the two inverse equations as a CategoryTheory Iso. The resulting isomorphism has exactly the source and target of smoothPurityIso; the constructor fields are the two maps and the stated equations.",
+   "text": "Apply the existing source-library smoothPurityIso to the given smooth morphism f of relative dimension d, and introduce that actual isomorphism as the witness of Nonempty. This is the same normalized finite-to-integral-to-condensed route through the source smoothTrace and its adjoint; it needs no separate existence-of-maps witness. The original source isIso_smoothPurityMap hole remains open, and its missing elaborated smoothness hypothesis is disputed in this delivery report.",
    "uses": [
-    "lem-pur-condensed-normalized-witness"
+    "def-pur-condensed-smooth-purity-iso"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-    "place": "Final composition of the normalized mutually inverse condensed maps"
+    "document": "lean/WeilConjectures/SmoothPurity/Defs.lean",
+    "place": "smoothPurityIso and its prescribed normalized trace/adjunction construction"
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-condensed-normalized-witness"
+  "def-pur-condensed-smooth-purity-iso"
  ],
  "mathlib_searches": [
   {
@@ -91,9 +91,9 @@
   "commit": "7347520d9"
  },
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
-  "place": "The normalized diagonal/DNC witness is packaged into the chosen ambient isomorphism."
+  "by": "E1",
+  "document": "lean/WeilConjectures/SmoothPurity/Defs.lean",
+  "place": "smoothPurityIso; specialize the existing source-library isomorphism to the explicitly smooth f and d of nonempty_smoothPurityIso. Source holes are retained, not claimed proved."
  },
  "split_report": {
   "date": "2026-10-17",
@@ -175,16 +175,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-c582798af (reviewer sub-agent of L); spot-checked: I read the whole delivery against the exact source Defs.lean:76-92 and the master UpperShriek definitions (the verbatim exhibit at lines 214-264). The target keeps every hypothesis: arbitrary field k of characteristic p>0 with p≠ℓ, X and Y separated and of finite type, f smooth of pure relative dimension d. It also keeps the finite-extension-valued padicAlgClRingObj coefficient category, the tensor unit, the chosen Nagata boundedConstructibleUpperShriek (right adjoint of Rg_* followed by j^*) and tateTwistDerived. It is not weakened, and the route cites no SGA source. Steps 2-3: lem-pur-finite-smooth-adjunction-general-base holds over any field and gives γ_n and its counit-transpose reduction compatibility; this agrees with b_{A,B} of lem-pur-finite-coefficient-adjoint-comparisons, so the transitions match. Step 5: I checked every hypothesis of case (b) of lem-pur-condensed-exceptional-reconstruction (single degree −2d, intertwined transitions, M∈I_X, L∈I_Y with their reductions). The new tower node is true: the twists are locally free of rank one and Rlim of surjective transitions is Z_ℓ(d)[2d]. It is not a duplicate, because thm-pur-adic-reconstruction is stated only for k = F̄_q (def-pur-conventions). The new realization node is true; I checked R_X/ℓ^n=(Z/ℓ^n)_X, the n=0 term, the balanced tensor and d=0. Edge cases d=0, empty schemes, n=1 and k=F_p(t) passed. I made four repairs in fixes/. (1) C4: Step 6 cited lem-weil-pbc-ringed-topoi-derived-tensor-pullback for U_Y(L)≅B_Y, which that node does not state; it now cites the realization node at d=0 and the unit clause of the reconstruction node. (2) Typo: Step 8 named the wrong steps for a and b (they are Steps 6 and 7); it is now an elementary step with empty uses, and proof_deps is recomputed. (3) Hypothesis fault: lem-pur-condensed-tate-realization allowed an arbitrary scheme, but U_X (through J_X) exists only for separated finite-type schemes over a field of characteristic p>0, p≠ℓ, and needs M_d∈I_X. I restricted the scheme to that setting, wrote U_X explicitly and made membership of M_d a hypothesis that Step 4 supplies; the conclusion is unchanged. (4) B2/B3: lem-pur-condensed-tate-integral-tower used Rf_n^! and γ_n without introducing or citing them; it is now in TeX, cites its notions in the text, and has a larger stmt_deps. Accepted tool use: prop-weil-pbc-qbar-condensed-two-colimit. The other off-unit citations are closed nodes or a Mathlib leaf.; 3 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "C-d409d",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261017T165115-L-3502871",
+  "landing": "20261026T235848-L-1461864",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered Defs/SmoothPurityQbar/NormalizedWitness and the two nodes against the clone, node statements and change record; probe #check of the upstream signatures; scratch compile of the delivered SmoothPurityQbar (axioms: propext, sorryAx, Classical.choice, Quot.sound) and NormalizedWitness; 3b importers 3 OK"
  },
  "reviewed_lean": {
   "date": "2026-10-18",

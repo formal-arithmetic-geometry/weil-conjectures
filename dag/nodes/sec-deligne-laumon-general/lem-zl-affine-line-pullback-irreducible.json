@@ -1,0 +1,138 @@
+{
+ "id": "lem-zl-affine-line-pullback-irreducible",
+ "kind": "statement",
+ "title": "A relative affine-line model preserving arithmetic lisse simplicity",
+ "statement": "Let k be a finite field, ℓ an invertible prime, C/k a smooth geometrically connected affine finite-type scheme [def-sbc-smooth-morphisms], and V an arithmetically simple nonzero lisse source Weil sheaf [def-weil-weil-sheaf-complex, def-pod-lisse-l-adic-sheaves]. There is a geometrically connected affine finite-type separated k-scheme A with irreducible geometric fiber, a smooth relative-dimension-one k-morphism p:A→C and a k-section z:C→A such that p*V is arithmetically simple lisse. The construction is the actual relative affine line, in every dimension.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual Mathlib relative affine line and zero section in a fully proved geometric existence lemma. It is affine, separated, finite-type and geometrically connected, the projection is smooth of relative dimension one, and the geometric fiber is irreducible by smoothness and geometric connectedness. Expose the scheme and morphisms through that proved interface so the native category proof does not unfold the large Scheme pullback representation. The native pullback-composition and identity functor isomorphisms identify z*p*V with V, proving nonzeroness; pullback preserves lissity.",
+   "uses": [
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "For any lisse G on this affine line, z*G=0 implies G=0. Choose a geometric point t of C from a nonzero finite stalk of V. The pullback stalk isomorphism makes G zero at z(t). The generic point of the irreducible geometric fiber specializes both to z(t) and to every other point. The proved lisse stalk-vanishing criterion therefore kills G. The proof explicitly maps the zero stalk into ModuleCat to obtain subsingleton sections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  },
+  {
+   "text": "Pull a lisse subobject i:G↪p*V back along z. Exact pullback gives a lisse monomorphism into V. Simplicity of V makes z*G zero or the pulled-back monomorphism an isomorphism. In the first case the previous stalk criterion kills G. In the second case the cokernel of i is lisse; exactness of z* identifies its restriction with the zero cokernel of an isomorphism. The criterion kills this cokernel, hence i is epi as well as mono and is an isomorphism in the abelian category. All Lean proofs are complete.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-affine-space-smooth",
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3 and 7: geometric constituents, two-point curve restriction and local Frobenius powers; geometric socle/Frobenius orbit step in sk-i-dl-general-real.",
+  "note": "K8: isolate a genuine step of the support-model reduction; affine-line simplicity is fully proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a simple lisse sheaf along affine space projection with its zero section remains simple",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackIso. No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along the projection from a relative affine line preserves irreducible lisse local systems since the projection has a section",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso, AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit. No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIrreducibleLisse|Weil.*component|component.*Weil",
+   "results": "0 hits: . No exact native Weil-category match. Project APIs were searched and read separately.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.SimpleLisseSupportModel",
+  "date": "2026-10-26",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Affine-line pullback preserves arithmetic lisse simplicity",
+   "via": [
+    "lem-zl-simple-lisse-support-model",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.AffineLinePullbackIrreducible",
+  "file": "lean/Sheaf/DeligneLaumon/AffineLinePullbackIrreducible.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.exists_affineLine_model",
+  "statement": "theorem IsIrreducibleLisse.exists_affineLine_model\n    {k : Type u} [Field k] [Finite k] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k ≠ l)] {C : Scheme.{u}}\n    [C.Over (Spec (CommRingCat.of k))] [IsAffine C]\n    [Smooth (C ↘ Spec (CommRingCat.of k))]\n    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k))]\n    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k))]\n    [QuasiCompact (C ↘ Spec (CommRingCat.of k))]\n    {V : WeilSheaf k l C} (hV : V.IsIrreducibleLisse) :\n    ∃ (A : Scheme.{u}) (_ : A.Over (Spec (.of k))) (_ : IsAffine A)\n      (_ : GeometricallyConnected (A ↘ Spec (.of k)))\n      (_ : LocallyOfFiniteType (A ↘ Spec (.of k)))\n      (_ : QuasiCompact (A ↘ Spec (.of k))) (_ : IsSeparated (A ↘ Spec (.of k)))\n      (_ : IrreducibleSpace (A ↘ Spec (.of k)).geometricFiber)\n      (p : A ⟶ C) (z : C ⟶ A) (_ : p.IsOver (Spec (.of k)))\n      (_ : z.IsOver (Spec (.of k))) (_ : SmoothOfRelativeDimension 1 p),\n      z ≫ p = 𝟙 C ∧ ((upperStar p).obj V).IsIrreducibleLisse",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T070226-L-3477383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T070226-L-3477383",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

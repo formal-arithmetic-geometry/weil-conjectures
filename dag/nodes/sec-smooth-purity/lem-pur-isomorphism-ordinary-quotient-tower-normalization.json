@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-isomorphism-ordinary-quotient-tower-normalization",
+ "kind": "statement",
+ "title": "Specified insertion isomorphism of ordinary quotient towers",
+ "statement": "For a prime l, a finite extension E of Q_l, a scheme isomorphism g:X→Y, and every arbitrary unbounded completed-coefficient complex P on Y, there is a tower isomorphism a:(tower P)⋙trfInverseImageComplex g ≅ integralOperationsPullbackTowerFunctor g P. Its component at n is exactly QuotientTensor.insertion g n applied to unrestrictedIntegralFiniteComplex n P. The constructions are those of [def-fix-qcqs-completion-ordinary-models, def-pur-integral-derived-operations, def-trf-isomorphism-strict-quotient-models, lem-trf-quotient-tensor-insertion].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03EL, specializing the adjunction and quotient insertion to expanded clause 4 of def-weil-frobenius-coefficient-twists."
+ },
+ "stmt_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations",
+  "def-trf-isomorphism-strict-quotient-models",
+  "lem-trf-quotient-tensor-insertion"
+ ],
+ "proof": [
+  {
+   "text": "The two chosen strict quotient tower presentations are definitionally equal: at none the restricted site, projection and normalized scalar-extension constructions are exactly the unrestricted constructions. Apply the existing proved unrestricted insertion_iso before restriction to Good. Its component is exactly QuotientTensor.insertion by reflexivity. No tower transport is needed.",
+   "uses": [
+    "lem-trf-isomorphism-strict-quotient-multiplication",
+    "lem-trf-quotient-tensor-insertion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-isomorphism-strict-quotient-multiplication",
+  "lem-trf-quotient-tensor-insertion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D5",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03EL; expanded coefficient-twist clause 4.",
+  "note": "Fully proved helper factored from the ordinary completion-chain argument after profiling and simplifying equality transports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of inverse sequences is determined by identity components and equality of the transition maps",
+   "results": "8 hits, mostly ComposableArrows.isoMk and OfSequence.congr_f; none provides these coefficient-specific transitions.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits including NatIso.ofComponents and its component equations; the constructor is used.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "ofOpSequence_map_homOfLE_succ",
+   "results": "7 Mathlib hits, including the OfSequence definition and sequential-product applications; supplies general sequence infrastructure only.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismOrdinaryCompletionChain",
+  "date": "2026-10-27",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-isomorphism-ordinary-completion-chain",
+   "place": "Proof steps 1–2: ordinary module normalization, strict quotient insertion and finite augmentation compatibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismOrdinaryQuotientTowerNormalization",
+  "file": "lean/Sheaf/Paper/IsomorphismOrdinaryQuotientTowerNormalization.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.isomorphismOrdinaryQuotientTowerNormalization",
+  "statement": "theorem isomorphismOrdinaryQuotientTowerNormalization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    (P : Cx l E Y none) :\n    ∃ a : (tower l E Y none).obj P ⋙ trfInverseImageComplex l E g ≅\n      (integralOperationsPullbackTowerFunctor l E g).obj P,\n      ∀ n : ℕ, a.hom.app (op n) = QuotientTensor.insertion l E g n\n        ((unrestrictedIntegralFiniteComplex l E Y n).obj P)",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T181513-L-3467157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T181513-L-3467157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

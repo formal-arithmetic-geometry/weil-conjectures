@@ -1,0 +1,194 @@
+{
+ "id": "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: the duality $D_{X,\\overline{\\mathbf Q}_\\ell}\\colon D^b_c(X,\\overline{\\mathbf Q}_\\ell)^{op}\\to D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ is the internal Hom into $\\omega_{X,\\overline{\\mathbf Q}_\\ell}=Ra_X^!\\overline{\\mathbf Q}_\\ell$ (thm-coef-qbar-verdier)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The Verdier dual of a Weil complex is a Weil complex",
+ "statement": "Let $k_0$ be a finite field, $k$ an algebraic closure, and $\\ell\\ne\\operatorname{char}k_0$ a prime. Fix $\\Omega=\\overline{\\mathbf Q}_\\ell$ and use the finite-subextension-valued condensed ring $\\underline\\Omega$ [sk-def-sfb-qlbar-condensed], not the discrete constant ring. For a finite-type $k_0$-scheme $T_0$, put $\\bar T=T_0\\times_{k_0}k$, $R_{\\bar T}=p_{\\bar T}^*\\underline\\Omega$ [sk-def-sfb-pulled-back-coefficients], $\\mathcal A_T=\\operatorname{Mod}(R_{\\bar T})$, and $P_T=g_T^*$ for geometric Galois Frobenius $g_T=1\\times\\operatorname{Spec}(\\operatorname{Frob}_q^{-1})$ [def-weil-frobenius-detailed]. Let $\\mathcal W_T=\\mathcal A_T^{P_T}$ be the category of sheaves with invertible Frobenius structure [def-weil-endofunctor-fixed-pair-category]. Define $\\mathrm{WC}(T_0)$ to be the full subcategory of the ordinary derived category $D(\\mathcal W_T)$ [def-weil-abstract-derived-category] consisting of the objects with bounded cohomology whose cohomology sheaves have constructible underlying $R_{\\bar T}$-modules, meaning a finite locally closed constructible stratification with pro-etale locally finite free restrictions [sk-def-sfb-constructible]. This is the derived-sheaf convention of the live Lean `AlgebraicGeometry.WeilComplex`, rather than the category of fixed pairs in a geometric derived category.\n\nLet $X_0$ be separated and of finite type over $k_0$, with structure morphism $a_0:X_0\\to\\operatorname{Spec}k_0$. Assume its compact-support functor $Ra_{0!}:\\mathrm{WC}(X_0)\\to\\mathrm{WC}(\\operatorname{Spec}k_0)$, formed by equivariant extension by zero and derived proper pushforward along the chosen compactification on Frobenius-equivariant sheaves [def-sf-native-weil-derived-framework] (Lean `WeilComplex.derivedLowerShriek`), has a right adjoint $Ra_0^!$ on these same categories. Put $\\omega_X=Ra_0^!\\Omega$, where $\\Omega$ denotes the constant equivariant coefficient sheaf on the geometric point in degree zero. For $K\\in\\mathrm{WC}(X_0)$ let $H_P(K,\\omega_X)$ denote the product-Hom construction of [lem-sf-weil-native-closed-forgetful]; this is the live Lean `ProEtaleWeilSheaf.derivedHom` applied to $K$ and `dualizingComplex`. Then $H_P(K,\\omega_X)$ belongs to $\\mathrm{WC}(X_0)$. Restricting the ambient contravariant Hom functor therefore defines $D_X:\\mathrm{WC}(X_0)^{\\mathrm{op}}\\to\\mathrm{WC}(X_0)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
+  "place": "thm-coef-qbar-verdier: the duality $D_{X,\\overline{\\mathbf Q}_\\ell}\\colon D^b_c(X,\\overline{\\mathbf Q}_\\ell)^{op}\\to D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ is the internal Hom into $\\omega_{X,\\overline{\\mathbf Q}_\\ell}=Ra_X^!\\overline{\\mathbf Q}_\\ell$; Lean: upstream file lean/WeilConjectures/WeilSheaf/VerdierDual.lean, declaration AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex (module WeilConjectures.WeilSheaf.VerdierDual, lines 120-123, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-frobenius-detailed",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-constructible",
+  "lem-sf-weil-native-closed-forgetful",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof": [
+  {
+   "text": "The assumed constructible right adjoint defining the actual dualizingComplex has codomain WeilComplex, so its value omega_X is a Weil complex. Apply [lem-sf-weil-geometric-hom-constructibility] to K and omega_X. Its third clause gives bounded constructibility (and finite Tor amplitude) of CondensedRing.derivedHom(UK,Uomega_X), for the specified functor U = nativeGeometricForget.",
+   "uses": [
+    "lem-sf-weil-geometric-hom-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Internal-Hom paragraph, using the inverse Weil map in the contravariant argument; the native derived-sheaf realization and finite-subextension coefficient transport are made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-native-geometric-hom-comparison] with the actual underlying derived objects K.obj and omega_X.obj. This gives an isomorphism from U(derivedHom(K,omega_X)) to the geometric derived Hom of step 1. The second well-definedness clause of [det-def-sfb-constructible-tor-amplitude] says that constantModelBoundedConstructible is invariant under isomorphism, so transport the bounded-constructible half of step 1 along the inverse isomorphism.",
+   "uses": [
+    "lem-sf-native-geometric-hom-comparison",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Internal-Hom paragraph, using the inverse Weil map in the contravariant argument; the native derived-sheaf realization and finite-subextension coefficient transport are made explicit."
+   }
+  },
+  {
+   "text": "Use the first clause of [lem-sf-weil-geometric-hom-constructibility] in the reverse direction. The bounded-constructible property just obtained is equivalent to WeilComplex.objectProperty of the native derived Hom. This proves the membership witness used by the unchanged full-subcategory lift defining verdierDual.",
+   "uses": [
+    "lem-sf-weil-geometric-hom-constructibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Internal-Hom paragraph, using the inverse Weil map in the contravariant argument; the native derived-sheaf realization and finite-subextension coefficient transport are made explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-weil-geometric-hom-constructibility",
+  "lem-sf-native-geometric-hom-comparison",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph, using the inverse Weil map in the contravariant argument; the native derived-sheaf realization and finite-subextension coefficient transport are made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality dualizing complex exceptional inverse image right adjoint of compactly supported direct image etale",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.instIsRightAdjointPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf), Equivalence.isRightAdjoint_inverse, Functor.IsLeftAdjoint.op: generic adjunctions only",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdierDual\" and \"dualizingComplex\" (name substrings)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'verdier|dualizingComplex|dualizing complex ; upperShriek|lowerShriek|LowerShriek|exceptional inverse' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only CategoryTheory/Triangulated/* (Verdier's triangulated categories, not Verdier duality); no exceptional functors",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex",
+     "module": "WeilConjectures.WeilSheaf.VerdierDual",
+     "lines": [
+      116,
+      123
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.VerdierDual",
+  "file": "lean/WeilConjectures/WeilSheaf/VerdierDual.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.objectProperty_derivedHom_dualizingComplex"
+  ],
+  "statement": "theorem objectProperty_derivedHom_dualizingComplex (K : WeilComplex k₀ l X) :\n    WeilComplex.objectProperty k₀ l X\n      ((ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj).obj (op K.obj)) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-verdier-dual-preserves-weil-complexes",
+  "worker": "stage1",
+  "summary": "Q03 executes released stage-1 re-split order: two statement-only nodes separate native module/constructibility comparison and geometric cohomology/internal-Hom finiteness. Existing coefficient-ring realization replaces the duplicate portion of old step 1; assembly retains native derived Hom comparison and full-subcategory restriction. Statement and statement dependencies unchanged.",
+  "blueprint": "lem-a1-local-boundary-duality proof opening step (duality has bounded constructible values), through the internal-Hom preservation implicit in thm-coef-qbar-verdier. Steps 1-2 fix the actual coefficient and Weil-derived models; step 3 supplies geometric preservation, step 4 the derived forgetful comparison, step 5 the restriction functor. The created.item chain ends at the maintainer-seeded item, so blueprint_refs.py ancestor reports None for new nodes. Their from.node is null and via records this item; from.place retains the exact conceptual blueprint passage.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-locally-finite-coefficient-ring-realization",
+    "why": "Generic coefficient-ring identification used in old step 1; avoids creating a duplicate. It retains the native internal-Hom route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-totally-disconnected-coefficient-realization",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "sk-lem-coefficient-heart",
+  "det-thm-sf-ctf-stability-internal-hom",
+  "lem-sf-locally-finite-coefficient-ring-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-02eeff96a",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-02eeff96a (reviewer sub-agent of L); spot-checked: I read the delivery in full and accept it. The released re-split note for this item (keep_plan true, at least 2 new nodes, proof at most 3000 characters) is identical in the live and side-live clones. I diffed the delivered item against the live node (the Q11 449ea90e FIX as landed): statement, stmt_deps, blueprint, source and proof_origin are unchanged; only the proof, proof_deps and split_report changed. How the old proof was distributed: (1a) the coefficient-ring identification R=colim E_X = B is now a citation of the existing same-unit lem-sf-locally-finite-coefficient-ring-realization, whose isomorphism theta_T: p_T^*C to B_T is exactly that fact, so no duplicate node was made. (1b) The module presentation and constructibility comparison became the new lem-sf-weil-verdier-module-constructibility-comparison. (2-3) The criterion 'M in WC iff UM in Dbc' and geometric RHom finiteness became the new lem-sf-weil-geometric-hom-constructibility. (4-5) The closed-forgetful comparison and the restriction to the full subcategory stay as assembly steps 3-4 in full. No argument was dropped or blurred. The proof is now 1545 characters and proof_deps equals the union of the uses. The new statements have 2150 and 2111 characters, so they are of comparable size, and neither restates the item (no Frobenius, omega or H_P in either). Module node checks: B_T is an Omega-algebra through the locally constant sections, so module objects in Omega-vector sheaves are the same as sectionwise modules. Lambda(*)=Omega, so a finitely presented P is Omega^r and R_V tensor P corresponds to B_V^r, including r=0. Restriction to strata is compatible by the theta naturality square. Small cases: T empty, and T = Spec k on profinite sets. Advisory: the framework's native predicate says 'locally on W-bar' while the node uses a global stratification; the two agree for qcqs Noetherian T. Geometric-Hom node checks: X-bar is separated of finite type over k with char p different from l, and Omega is admissible, so det-thm-sf-ctf-stability-internal-hom applies. sk-lem-coefficient-heart gives Dctf=Dbc at Q-bar_l. The criterion follows from the closed-forgetful statement (exact, conservative, commutes with H^i). Small cases: a point with a unipotent Jordan block, K=0, shifts. Duplicate search: lem-sf-finite-span-module-derived-comparison has the opposite orientation and no constructibility predicate. def-weil-pbc-internal-abelian-sheaf-module-equivalence is generic. lem-sfb-condensed-coefficient-presentation-identification and lem-sf-adic-qbar-constructible-realization concern other comparisons. The derived-hom-single-resolution and lisse-internal-hom-tensor-dual nodes are lisse or abstract only. The forward half of the criterion is also in closed-forgetful; this is overlap, not duplication. Biduality clause 1 restates the item and is correctly not cited (Lean cycle). Other checks: no cycles (closures computed), no SGA source, and no superseding split in live or side-live. from.node null follows the tool chain for maintainer-seeded items, as already accepted for the Q10 nodes. The declared tool use is same-unit and accepted. Note for the maintainer: the merge-owned node field tool_uses still lists the four old Q11 tool uses and could be refreshed. No fixes were written."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T103442-L-1081015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso",
+   "AlgebraicGeometry.WeilComplex.nonempty_iso_verdierDual_rightOp_comp_verdierDual"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.WeilComplex.nonempty_dualizingComplex_iso"
+  ]
+ }
+}

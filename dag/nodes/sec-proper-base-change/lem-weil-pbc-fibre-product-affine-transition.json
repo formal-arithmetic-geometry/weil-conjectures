@@ -119,7 +119,32 @@
   "item": "lem-weil-pbc-limit-fibre-products",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isAffineHom_pullback_map"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isAffineHom_pullback_map",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineFibreProductTransition",
+     "lines": [
+      27,
+      58
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -165,5 +190,37 @@
    "AlgebraicGeometry.isAffineHom_pullback_map"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X'\\to S'\\leftarrow T'$ and $X\\to S\\leftarrow T$ be diagrams of schemes [def-pc-scheme], and suppose there are compatible morphisms $X'\\to X$, $S'\\to S$, and $T'\\to T$ commuting with the two structure maps. If all three comparison morphisms are affine [pqf-def-affine-morphism], then the induced morphism $X'\\times_{S'}T'\\to X\\times_ST$ of fibre products is affine.",
+  "proof": [
+   {
+    "text": "(Notation; $S'\\to S$ is separated.) Write $f:X\\to S$, $g:T\\to S$, $f':X'\\to S'$, $g':T'\\to S'$ for the structure maps and $a:X'\\to X$, $h:S'\\to S$, $c:T'\\to T$ for the comparison morphisms, so that compatibility reads $f\\circ a=h\\circ f'$ and $g\\circ c=h\\circ g'$. The morphism $h$ is affine by hypothesis, hence separated (Morphisms, Lemma 01S7: an affine morphism is separated and quasi-compact).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(First factor: change of base from $S'$ to $S$.) Regard $X'$ and $T'$ as $S$-schemes via $h\\circ f'$ and $h\\circ g'$. Since $h$ is separated (first step), the induced morphism $j:X'\\times_{S'}T'\\to X'\\times_ST'$, with components the two projections, is a closed immersion (Schemes, Lemma 01KR: $j$ is the base change of the diagonal $\\Delta_{S'/S}:S'\\to S'\\times_SS'$ along $X'\\times_ST'\\to S'\\times_SS'$). A closed immersion is affine (Morphisms, Lemma 01SE). So $j$ is affine.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Second factor: the product of the comparison maps over $S$.) By compatibility, $f\\circ a=h\\circ f'$ and $g\\circ c=h\\circ g'$, so $a:X'\\to X$ and $c:T'\\to T$ are morphisms of $S$-schemes, $X'$ and $T'$ carrying the structure maps of the first step. Both are affine by hypothesis, so the induced morphism $k=a\\times_Sc:X'\\times_ST'\\to X\\times_ST$, with components $a\\circ\\mathrm{pr}_1$ and $c\\circ\\mathrm{pr}_2$, is affine (it is the composite of the base change of $a$ along $X\\times_ST'\\to X$ and the base change of $c$ along $X\\times_ST\\to T$; Morphisms, Lemmas 01SD and 01SC).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Conclusion.) Let $\\varphi:X'\\times_{S'}T'\\to X\\times_ST$ be the induced morphism, i.e. the unique morphism whose composites with the projections to $X$ and $T$ are $a\\circ\\mathrm{pr}_1$ and $c\\circ\\mathrm{pr}_2$. The composite $k\\circ j$ has the same two composites, since $j$ commutes with the projections to $X'$ and $T'$; by the uniqueness in the universal property of $X\\times_ST$, $\\varphi=k\\circ j$. As $j$ (second step) and $k$ (third step) are affine, $\\varphi$ is affine (Morphisms, Lemma 01SC).",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

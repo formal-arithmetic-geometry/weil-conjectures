@@ -1,0 +1,119 @@
+{
+ "id": "def-exc-proetale-scalar-balancing-data",
+ "kind": "definition",
+ "title": "Ordinary pro-etale scalar-balancing normalization data",
+ "status": "split",
+ "statement": "Let $f:X\\to Y$ be any morphism of schemes [def-pc-scheme], and let $\\varphi:A\\to B$ be a unital homomorphism of arbitrary commutative rings. Use the small pro-etale constant-ring module categories and identified-coefficient pullbacks $f_A^*,f_B^*$ of [def-weil-pbc-proetale-operations], the actual constant-ring maps $\\varphi_Z:A_Z\\to B_Z$ of [def-sp-proetale-constant-coefficient-ring-map], and the canonical constant-section comparisons $c_R:f^{-1}R_Y\\simeq R_X$ of [prop-weil-pbc-proetale-constant-ring-map]. For $Z=X,Y$, let $r_Z$ be scalar restriction, $C_Z=r_ZB_Z$, $F_Z(M)=M\\otimes_{A_Z}C_Z$, $E_Z$ ordinary extension of scalars, and $e_Z:r_ZE_Z\\simeq F_Z$ the pure-tensor-normalized identification of [def-sp-proetale-scalar-mate-identifications].\n\nDefine $\\beta:r_Xf_B^*\\simeq f_A^*r_Y$ as the inverse of the ordinary restriction/pullback mate defined in [def-weil-pbc-ring-restriction-pullback-comparison], specialized to these actual coefficient maps and $c_A,c_B$; its invertibility is the ordinary comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. For any supplied natural isomorphism $t:f_A^*F_Y\\simeq F_Xf_A^*$ and any $A_Y$-module sheaf $M$, define the underlying $A_X$-linear map\n$$b_{t,M}:r_Xf_B^*E_YM\\longrightarrow r_XE_Xf_A^*M$$\nby the composite $\\beta_{E_YM}$, $f_A^*(e_{Y,M})$, $t_M$, and $e_{X,f_A^*M}^{-1}$, in that order. This definition does not assert $B_X$-linearity.\n\nDefine $\\operatorname{IsScalarBalancing}(\\varphi,f,t)$ to mean the following equation for every $M$, every $U\\in Y_{\\mathrm{proet}}$, every $x\\in M(U)$ and every $s\\in B_Y(U)$. On $X\\times_Y U$, $t_M$ carries the inverse-image adjunction unit applied to the sheafification image of the presheaf pure tensor $x\\otimes s$ to the sheafification image of $\\eta_M(x)\\otimes c_B(f^{-1}s)$, where $\\eta$ is the canonical identified-coefficient inverse-image unit. All sections here are arbitrary local sections; no existence of a normalized $t$, scalar linearity theorem, finiteness, flatness, boundedness or geometric restriction is included in these definitions.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-operations",
+  "def-sp-proetale-constant-coefficient-ring-map",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-sp-proetale-scalar-mate-identifications",
+  "def-weil-pbc-ring-restriction-pullback-comparison",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, pure-tensor bilinear adjunction construction specialized to constant coefficients; normalization data for blueprint thm-exc-explicit-preservation proof paragraph 2."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsScalarBalancing|scalarBalancing(Map|Beta)",
+   "results": "0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib notion; reuse the existing project definitions unchanged, with definition ownership recorded here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pure tensor normalization predicate for the scalar extension pullback comparison on proetale module sheaves",
+   "results": "8 hit(s): TensorProduct.ext', PresheafOfModules.pullback, TensorProduct.nnnorm_lid, IsLocalization.moduleLid, SheafOfModules.sheafificationCompPullback, PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso, PolynomialLaw.ext",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib notion; reuse the existing project definitions unchanged, with definition ownership recorded here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars pullback comparison and pure tensor balancing predicate for constant ring sheaves on proetale sites",
+   "results": "8 hit(s): SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib notion; reuse the existing project definitions unchanged, with definition ownership recorded here."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsScalarBalancing|scalarBalancingMap|scalarBalancingBeta lean/WeilConjectures lean/Sheaf; rg -l same pattern dag/nodes",
+   "results": "No WeilConjectures hits. Sheaf has exactly the three definitions and their uses in Sheaf/SecSmoothPurity/ProEtaleScalarBalancingChain.lean. The only DAG hit is the theorem node lem-sp-proetale-scalar-balancing-chain, which also records these helpers; no definition node owns them.",
+   "date": "2026-10-23",
+   "verdict": "Reuse these three existing declarations; add ownership only, without a module, move or copy."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "scalar balancing",
+   "results": "11 blueprint hits: def-coef-normalized-dvr-tower, def-pod-dual-tate-datum, def-pur-supported-exterior-product, def-weil-derived-pullback-tensor-hom, def-weil-exceptional-inverse-image, def-weil-pbc-adic-coefficient-datum, def-weil-pbc-four-arrows, def-weil-pbc-proetale-operations, def-wf-tate-twist, det-sp-reduction-compatibilities, prop-weil-pbc-scalar-extension.",
+   "date": "2026-10-23",
+   "verdict": "None owns these three scalar-balancing definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-exc-unbounded-coefficient-pullback-model",
+  "date": "2026-10-23",
+  "group": "Q45"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-exc-explicit-preservation",
+   "place": "Proof paragraph 2, final sentences: local pure-tensor normalization for the coefficient/pullback comparison on flat-term K-flat models.",
+   "via": [
+    "lem-exc-unbounded-coefficient-pullback-model"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProEtaleScalarBalancingChain",
+  "declaration": "AlgebraicGeometry.ProEtale.IsScalarBalancing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarBalancingBeta",
+   "AlgebraicGeometry.ProEtale.scalarBalancingMap",
+   "AlgebraicGeometry.ProEtale.IsScalarBalancing"
+  ],
+  "statement": "def IsScalarBalancing {A B : Type u} [CommRing A] [CommRing B]\n    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (t : scalarMateOrdinaryTensor φ Y ⋙ proEtaleConstantRingPullback A f ≅\n      proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership requested by the maintainer on returned immutable head 7e2543702e72. These three declarations are reused byte-for-byte from their published module; no move, copy, new Lean declaration or assertion of proEtaleScalarBalancingChain. The beta definition uses the existing ordinary mate invertibility theorem to form its inverse."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0d29a352",
+  "group": "Q45",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0d29a352",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery of H2-returned 7e2543702e72. Lean diff = one import (DirectImageScalarExchange→DirectImageScalarOperations); signature/helpers unchanged (H3 verdict of prior review re-confirmed: λ_f.inv direction, α/γ explicit composites, T degreewise s.inv/s.hom, no flatness/bound). stmt_deps: lem-fix-direct-image-scalar-exchange→def-sp-constant-scalar-pullback-comparison, lem-fix-proetale-scalar-mate-normalization→def-sp-proetale-scalar-mate-identifications, lem-sp-proetale-scalar-balancing-chain→new def-exc-proetale-scalar-balancing-data, + def-sp-proetale-constant-coefficient-ring-map (advisory). New node: existing:true on unchanged ProEtaleScalarBalancingChain, decls scalarBalancingBeta/Map/IsScalarBalancing, statement verbatim, text matches β inverse mate, composite and pure-tensor predicate; no dup (strict-quotient balancing is different). Advisory: proEtaleTensorPair owner not cited by new node (body of existing def). No fixes."
+ }
+}

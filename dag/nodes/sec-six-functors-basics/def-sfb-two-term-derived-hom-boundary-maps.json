@@ -1,0 +1,150 @@
+{
+ "id": "def-sfb-two-term-derived-hom-boundary-maps",
+ "kind": "definition",
+ "title": "Canonical quotient, square map and derived Hom boundary for a two-term complex",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], and choose its derived category $D(\\mathcal A)$ with localization $Q$ and shifts [def-weil-abstract-derived-category]. For objects $M,F$ and a morphism $d:M\\to F$, let $K(d)=\\operatorname{Cone}(d[0])$, the complex $[M\\xrightarrow{d}F]$ in degrees $-1,0$. Define its positive quotient $q_d:QK(d)\\to M[1]$ to be the image of the negative of the third arrow of Mathlib's cone triangle, followed by the canonical isomorphism commuting $Q$ with shift; thus its component on the shifted source is the positive projection. For $G\\in\\mathcal A$, define the additive boundary map $\\partial_{d,G}:\\operatorname{Hom}_{\\mathcal A}(M,G)\\to\\operatorname{Hom}_{D(\\mathcal A)}(QK(d),G[1])$ by $\\phi\\mapsto\\phi[1]\\circ q_d$, using the degree-zero embedding before shifting. For another $d':M'\\to F'$ and maps $a:M\\to M'$, $b:F\\to F'$ satisfying $b\\circ d=d'\\circ a$, define the chain map $K(d)\\to K(d')$ to be the canonical cone map with components $a$ in degree $-1$ and $b$ in degree $0$. These are explicit maps; no exactness or naturality theorem is asserted.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014E (definition-cone) and Tag 014F (lemma-functorial-cone, zero homotopy); boundary composition used in Tag 0149 (lemma-representable-homological)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two term complex cone quotient shifted source additive derived Hom boundary map",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.HomComplex.Cochain.shift",
+     "CochainComplex.HomComplex.coboundaries",
+     "CochainComplex.mappingCone.map_δ",
+     "DerivedCategory.triangleOfSESδ",
+     "CochainComplex.HomComplex.Cochain.diff",
+     "HomotopyCategory.homologyShiftIso_hom_app",
+     "HomotopyCategory.commShiftQuotient",
+     "CochainComplex.mappingCone.triangle"
+    ],
+    "digest": "2cc5b092ec0e3234"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project definitions; Mathlib search does not own this interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.twoTermBoundary, DerivedCategory.twoTermQuotient, CochainComplex.mappingCone.map",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'DerivedCategory.twoTermBoundary'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project definitions; Mathlib search does not own this interface."
+  },
+  {
+   "tool": "grep",
+   "query": "twoTermBoundary|twoTermQuotient|twoTermSquareMap",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "Reuse the exact existing project definitions; Mathlib search does not own this interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'twoTermBoundary|twoTermQuotient|twoTermSquareMap' lean/WeilConjectures lean/Sheaf dag/nodes; python3 tools/blueprint_refs.py search 'two-term'",
+   "results": "No upstream WeilConjectures match. All three explicit definitions occur in Sheaf/Algebra/Homology/TwoTermDerivedHomBoundary.lean. The sole DAG match is the theorem node lem-sfb-two-term-derived-hom-boundary; no definition node owns the three maps. Five blueprint matches, none defining these maps.",
+   "date": "2026-10-24",
+   "verdict": "Register only the existing plain definitions, as requested by the immutable-head H12/H2 return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-completed-local-deformation-tangent",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The positive cone projection, boundary and square map used to normalize relation-map tangent classes and presentation comparisons in the completion/tangent calculation.",
+   "via": [
+    "lem-sfb-completed-local-deformation-tangent",
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TwoTermDerivedHomBoundary",
+  "declaration": "DerivedCategory.twoTermBoundary",
+  "declarations": [
+   "DerivedCategory.twoTermQuotient",
+   "DerivedCategory.twoTermSquareMap",
+   "DerivedCategory.twoTermBoundary"
+  ],
+  "statement": "def twoTermBoundary {M F : A} (d : M ⟶ F) (G : A) : (M ⟶ G) →+ (Q.obj (CochainComplex.mappingCone ((CochainComplex.singleFunctor A 0).map d)) ⟶ ((singleFunctor A 0).obj G)⟦(1 : ℤ)⟧)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Registers the existing explicit cone quotient, square map and additive boundary. None chooses data from a theorem; exactness and naturality remain proof dependencies."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9958fbf5b",
+  "group": "Q16",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9958fbf5b",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Lean byte-identical to 742f, whose review accepted the mathematics; I re-read both modules against the node (statement + 10 steps) and Stacks 0DYV/0GPU/0GPW/0AJR/0GAE/00MB and agree: completion functor pinned on every level with base-change naturality; complete Noetherian local full subgroupoid; tangent equivalences pinned by relation maps via the positive twoTermBoundary (onto since the differential term is free); scalarExtension pinned on all boundaries; presentation isos pinned via ConormalSquare plus the P⊗P' link. The 742f H12/H2 return is repaired: the objects node cites def-trf-naive-cotangent-comparison-data (in live); new existing:true def-sfb-two-term-derived-hom-boundary-maps owns twoTermQuotient/SquareMap/Boundary, its statement verbatim the live signature, TeX matches the code, deps def-sp-abelian + derived category, no other owner; item diff vs live is only the lean field and those two added def stmt_deps. Edge cases r=0/A a field, R=k, trivial deformation, inseparable residue fields are covered; universes common u, Homs in u+1. Advisories: the extra IsNoetherianRing A conclusion is true and harmless; the second reading is a self-check. No files changed, so nothing compiled."
+ }
+}

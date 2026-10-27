@@ -1,0 +1,113 @@
+{
+ "id": "lem-diagonal-flat-scalar-endpoint",
+ "kind": "statement",
+ "title": "Unique ordinary-unit normalized derived scalar endpoint for a flat internal module",
+ "statement": "Let Lambda and Lambda-prime be commutative condensed ring objects, a:Lambda -> Lambda-prime a ring map, X a scheme, and M an internal module over the pulled-back Lambda on X [def-sfb-diagonal-coefficient-category]. Assume M is flat, meaning tensor with M is exact. Use the actual derived extension and exact restriction scalar adjunction [def-sfb-diagonal-coefficient-endpoints]. There exists a unique isomorphism from derivedScalars(a,X)(M[0]) to the single complex of the ordinary scalar extension of M, whose adjoint is the single image of the actual ordinary extension unit followed by the inverse of the restriction/single comparison. No flatness of a is assumed.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-endpoints"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), derived scalar reduction on the flat unit and Tate line; Stacks Tag 06YY"
+ },
+ "proof": [
+  {
+   "text": "A single complex on a flat module is K-flat. The transpose of the localized cochain extension unit is invertible for the scalar adjunction with exact restriction, by the K-flat representative theorem. Compose it with the localization of the ordinary single-complex comparison.",
+   "uses": [
+    "lem-sfb-exact-right-adjoint-kflat-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary single-unit square is the unit formula in degree zero and equality from a zero source in every other degree. Naturality of the localization factor and single-functor isomorphism carries it to the derived square. This identifies the preceding composite with the adjunction transpose of exactly the displayed ordinary-unit map, proving existence of the normalized isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The adjunction Hom equivalence is injective, so any two homs with this same transpose agree. An isomorphism is determined by its hom, proving uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-exact-right-adjoint-kflat-representative"
+ ],
+ "proof_origin": {
+  "by": "K2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1); ordinary-unit normalization of the K-flat single-complex computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars carries a flat module to its ordinary extension of scalars, commutes with right derived pushforward of supported constant sheaves",
+   "results": "Eight hits, mostly ordinary algebraic flatness and exact constant-module change of coefficients. No match for the actual internal-module derived scalar adjunction and prescribed single-unit normalization. Local search found the proved K-flat transpose theorem in ExactRightDerivedAdjointKFlatRepresentative.",
+   "date": "2026-10-27",
+   "verdict": "Use that theorem and prove the ordinary/derived single-unit equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedFunctor",
+   "results": "Zero hits; unknown identifier in the Mathlib service. The project supplies its derived functor and normalized scalar adjunction.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the project adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*regular|leftDerivedFunctor.*single|comapLowerStarIso",
+   "results": "Zero service hits. Local rg found FlatScalarUnit, whose single-unit helpers are private and whose public API uses ordinary constant coefficients, and the internal K-flat representative theorem.",
+   "date": "2026-10-27",
+   "verdict": "The short proof combines the generic K-flat theorem with the single-unit calculation; it is completed in Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerScalarFrame",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-uniformizer-scalar-frame",
+   "place": "First proof step: flat scalar endpoints",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFlatScalarEndpoint",
+  "file": "lean/Sheaf/Paper/DiagonalFlatScalarEndpoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_flat_scalar_endpoint_iso",
+  "statement": "theorem diagonal_flat_scalar_endpoint_iso\n    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']\n    (a : Λ ⟶ Λ') [IsMonHom a] (X : Scheme.{u}) (M : Modules Λ X)\n    (hM : ObjectProperty.flat M) :\n    ∃! i : (derivedScalars a X).obj\n        ((DerivedCategory.singleFunctor (Modules Λ X) 0).obj M) ≅\n        (DerivedCategory.singleFunctor (Modules Λ' X) 0).obj\n          ((Mod.extendScalars (coefficientMap a X)).obj M),\n      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).homEquiv _ _\n          i.hom =\n        (DerivedCategory.singleFunctor (Modules Λ X) 0).map\n            (Mod.extendUnit (coefficientMap a X) M) ≫\n          ((Mod.comap (coefficientMap a X)).mapDerivedCategorySingleFunctor 0).inv.app\n            ((Mod.extendScalars (coefficientMap a X)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T222730-L-687372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261026T222730-L-687372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

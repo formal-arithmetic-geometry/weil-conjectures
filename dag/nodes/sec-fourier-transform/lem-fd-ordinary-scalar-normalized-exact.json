@@ -1,0 +1,124 @@
+{
+ "id": "lem-fd-ordinary-scalar-normalized-exact",
+ "kind": "statement",
+ "title": "Exactness of ordinary scalar extension with its counit-normalized shift",
+ "statement": "Fix a prime l, finite extensions E and L of Q_l and a Q_l-algebra map ι:E→L. Let T be a scheme in the same universe as the coefficient fields. Let C=completedDerivedScalarExtension l E L ι T be ordinary derived change of completed coefficient rings [lem-weil-finite-free-completed-scalar-comparison]. For any coherent integer shift structure e on C satisfying completedScalarShiftOrdinaryNormalization [def-fd-completed-scalar-shift-representative-property], C with precisely e is a triangulated functor. No constructibility, completeness, dimension or invertibility condition on T is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; Tag 06YU; parent proof step 5, counit-normalized exactness"
+ },
+ "stmt_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-fd-completed-scalar-shift-representative-property",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply ordinary derived change of rings to the actual completed coefficient map. The homotopy-level termwise tensor functor preserves shifts and cones. Its everywhere-defined left derived functor is triangulated. Keep its canonical counit-compatible shift.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each flat-term K-flat complex P its counit is invertible. The counit square solves for the derived shift component uniquely. The supplied ordinary normalization is the same square with the standard tensor and Q shift isomorphisms; cancel the shifted counit to identify its component with the canonical one.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-fd-completed-scalar-shift-representative-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every derived object has a flat-term K-flat representative. Naturality transports the component equality to every object. Consequently both shift structures give the same image triangle, so exactness for the canonical shift gives exactness for e.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-fd-completed-scalar-shift-representative-property",
+  "lem-pc-kflat-resolution",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; Tag 06YU; parent proof step 5, counit-normalized exactness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit normalized shift on ordinary derived extension of scalars is triangulated exact",
+   "results": "Adjunction.IsTriangulated.commShift and standard derived category instances; no theorem for the recorded completedScalarCounit normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "CommShift, of_core, of_iso_inv, Functor.CommShift.ofComp_compatibility; generic shift and restriction tools only.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_of_iso|liftFullSubcategory.*CommShift|completedScalar.*triangulated",
+   "results": "Mathlib/CategoryTheory/Triangulated/Functor.lean isTriangulated_of_iso; no coefficient-specific normalization.",
+   "date": "2026-10-25",
+   "verdict": "generic transfer available; normalized derived-tensor exactness is not stated"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdNormalizedIntegralCompletionComparison",
+  "date": "2026-10-25",
+  "group": "W5"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fd-normalized-integral-completion-comparison",
+   "place": "Tag 06YY, lemma-derived-base-change; Tag 06YU; parent proof step 5, counit-normalized exactness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarOrdinaryNormalizedExact",
+  "file": "lean/Sheaf/Paper/CompletedScalarOrdinaryNormalizedExact.lean",
+  "declaration": "WeilConjectures.completedScalarOrdinary_normalized_exact",
+  "statement": "theorem completedScalarOrdinary_normalized_exact\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (T : AlgebraicGeometry.Scheme.{u})\n    (e : (completedDerivedScalarExtension l E L ι T).CommShift ℤ)\n    (he : completedScalarShiftOrdinaryNormalization ι T e) :\n    (fun [_s : (completedDerivedScalarExtension l E L ι T).CommShift ℤ] ↦\n      (completedDerivedScalarExtension l E L ι T).IsTriangulated) (_s := e)",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T164704-L-1052430",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T164704-L-1052430",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

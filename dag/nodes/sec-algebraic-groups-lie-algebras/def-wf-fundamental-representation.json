@@ -25,9 +25,51 @@
   "lem-wf-arithmetic-lift-fibre-path",
   "lem-wf-fibre-functor-basepoint-transport"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reuse the germ-normalized finite, inverse-limit integral, rational and algebraic path constructions; these are reexported from the relocated data module.",
+   "uses": [
+    "new-t2-etale-adic-path-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality for the Weil descent isomorphism and the automorphism pullback square imply twisted equivariance of the prescribed Frobenius operator. Use the degree data conjugation rule to obtain T f(u) T^-1=f(s u s^-1), then apply the existing abstract kernel extension. Its kernel and degree-one formulas give the two required values, and its uniqueness proves the ExistsUnique statement.",
+   "uses": [
+    "new-t2-etale-adic-path-naturality",
+    "new-t2-etale-adic-path-pullback",
+    "new-t2-degree-kernel-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For lift change, the same descent-path square gives T_post=rho_geom(a) T. The first extension has the second extension's geometric and degree-one values, so uniqueness equates them. For basepoint change, path composition intertwines the geometric actions and the descent-path square plus the prescribed finite-path square intertwines the degree-one operators. The elements intertwined by the linear path form a subgroup containing the degree kernel and the degree-one element. Its integer powers and the decomposition w=(w s^-deg(w))s^deg(w) show that this subgroup is the whole group.",
+   "uses": [
+    "new-t2-etale-adic-path-data",
+    "new-t2-etale-adic-path-naturality",
+    "new-t2-etale-adic-path-pullback",
+    "new-t2-degree-kernel-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the unique Weil extension along the geometric kernel. The chosen representation specification gives equality with the explicit geometric representation. Build the rational monodromy homomorphism on the finite coefficient field recorded by the sheaf; the integral path identity/composition laws give its homomorphism laws. Apply rational finite-path continuity using the actual finite germ rule and integral projection equation. Choose a finite basis of that rational fibre. Base change gives a Qlbar-basis, and the existing basis-model l-adicity lemma constructs the canonical E-subspace and tensor comparison. The explicit algebraic path is precisely that scalar-extended rational action, which proves etaleFundamentalRep_isLAdic.",
+   "uses": [
+    "new-b5-rational-finite-path-continuity",
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-t2-etale-adic-path-data",
+  "new-t2-etale-adic-path-naturality",
+  "new-t2-etale-adic-path-pullback",
+  "new-t2-degree-kernel-extension",
+  "new-b5-rational-finite-path-continuity",
+  "def-pod-l-adic-representations"
+ ],
+ "proof_origin": "T2 and B5 stage 3 decomposition following Weil II (1.1.1), (1.1.6), (1.1.10)-(1.1.12). Existence/uniqueness, lift change and change of basepoint are proved from the two explicit path squares and the already proved group extension. The l-adicity proof restricts the unique extension to its geometric action, proves the rational action laws from integral paths, applies rational finite-path continuity, and supplies the complete finite-basis scalar-extension argument. Explicit categorical application normalization and local irreducibility keep path constructions from expanding during elaboration.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -83,14 +125,29 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-weil-sheaf-complex"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-d-geometry",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X_0$ be a\nseparated finite-type\n$k_0$-scheme, let $X=X_0\\times_{k_0}k$, assume that $X$ is\nconnected, and choose a geometric point $\\bar x\\to X$. Let\n$\\mathcal F_0$ be a lisse\nWeil sheaf, with underlying lisse\n$\\Qlb$-sheaf $\\mathcal F$ on $X$ in the convention of\n[def-weil-pbc-constructible-complexes]. Put\n$V=\\mathcal F_{\\bar x}$. The underlying lisse sheaf first gives the\n*geometric fundamental representation*\n\n$$\n\\rho_{\\mathrm{geom}}:\\pi_1(X,\\bar x)\\longrightarrow\\operatorname{GL}(V)\n$$\n\nby the equivalence of\n*lisse $\\Qlb$-sheaves on a connected scheme with continuous\n$\\Qlb$-representations of its etale fundamental group* of\n[cor-galois-lisse-representations], the fundamental group being the\nautomorphism group of the fibre functor as in\n[def-galois-fibre-functor]\n($k$-torsion and adic levels are as in the coefficient conventions of\n[def-weil-pbc-constructible-complexes]).\n\nThe Weil descent datum\n$\\varphi:\\Phi_X^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$, with\n$\\Phi_X$ as in [def-tw-frobenius-action], supplies the missing\ndegree-one operator. More explicitly, let\n\n$$\nW(X_0,\\bar x):=\n\\pi_1(X_0,\\bar x)\\times_{\\operatorname{Gal}(k/k_0)}\n\\langle\\Phi_X\\rangle\n$$\n\nbe the inverse image of the infinite cyclic subgroup generated by\ngeometric Frobenius, and choose a lift $s$ of $\\Phi_X$. After the\nusual transport of the stalk from $\\Phi_X(\\bar x)$ to $\\bar x$, the\ndatum $\\varphi$ gives an automorphism $T_s$ of $V$ satisfying\n\n$$\nT_s\\rho_{\\mathrm{geom}}(\\gamma)T_s^{-1}\n=\\rho_{\\mathrm{geom}}(s\\gamma s^{-1})\n\\qquad(\\gamma\\in\\pi_1(X,\\bar x)).\n$$\n\nThe *Weil fundamental representation* of $\\mathcal F_0$ is the\nextension of $\\rho_{\\mathrm{geom}}$ to $W(X_0,\\bar x)$ defined by\n\n$$\n\\rho(\\gamma s^n):=\\rho_{\\mathrm{geom}}(\\gamma)T_s^n\n\\qquad(\\gamma\\in\\pi_1(X,\\bar x),\\ n\\in\\mathbf Z).\n$$\n\nEvery later expression $\\rho:W(X_0)\\to\\operatorname{GL}(V)$ refers to\nthis extension, not merely to the geometric representation.\n\nThis formula defines a continuous representation, and the resulting\nrepresentation depends on the auxiliary choices only up to the\nchange-of-base-point isomorphism.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X_0$ be a\nseparated finite-type\n$k_0$-scheme, let $X=X_0\\times_{k_0}k$, assume that $X$ is\nconnected, and choose a geometric point $\\bar x\\to X$. For the\nrepresentations assume moreover that $X$ is regular (for instance\n$X_0$ smooth over $k_0$). Let\n$\\mathcal F_0$ be a lisse\nWeil sheaf: a lisse $\\overline{\\mathbf Q}_{\\ell,X}$-module $\\mathcal F$ on\n$X_{\\mathrm{proét}}$, i.e. locally free of finite rank for the pro-étale topology\n([sk-lem-coefficient-heart]), with a Weil structure\n$\\varphi:\\Phi_X^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$\n([sk-def-sf-weil-complexes], [def-weil-weil-sheaf-complex]). Put\n$V=\\mathcal F_{\\bar x}$. The underlying lisse sheaf first gives the\n*geometric fundamental representation*\n\n$$\n\\rho_{\\mathrm{geom}}:\\pi_1(X,\\bar x)\\longrightarrow\\operatorname{GL}(V)\n$$\n\nby the equivalence of\n[thm-lisse-qlbar-representations] between lisse $\\overline{\\mathbf Q}_{\\ell,X}$-modules on\nthe connected regular scheme $X$ and continuous finite-dimensional $\\Qlb$-representations of\n$\\pi_1(X,\\bar x)$, the fundamental group being\nthe automorphism group of the fibre functor as in\n[def-galois-fibre-functor].\n\nThe Weil descent datum\n$\\varphi:\\Phi_X^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$, with\n$\\Phi_X$ as in [def-tw-frobenius-action], supplies the missing\ndegree-one operator. More explicitly, let\n\n$$\nW(X_0,\\bar x):=\n\\pi_1(X_0,\\bar x)\\times_{\\operatorname{Gal}(k/k_0)}\n\\langle\\Phi_X\\rangle\n$$\n\nbe the inverse image of the infinite cyclic subgroup generated by\ngeometric Frobenius, and choose a lift $s$ of $\\Phi_X$. After the\nusual transport of the stalk from $\\Phi_X(\\bar x)$ to $\\bar x$, the\ndatum $\\varphi$ gives an automorphism $T_s$ of $V$ satisfying\n\n$$\nT_s\\rho_{\\mathrm{geom}}(\\gamma)T_s^{-1}\n=\\rho_{\\mathrm{geom}}(s\\gamma s^{-1})\n\\qquad(\\gamma\\in\\pi_1(X,\\bar x)).\n$$\n\nThe *Weil fundamental representation* of $\\mathcal F_0$ is the\nextension of $\\rho_{\\mathrm{geom}}$ to $W(X_0,\\bar x)$ defined by\n\n$$\n\\rho(\\gamma s^n):=\\rho_{\\mathrm{geom}}(\\gamma)T_s^n\n\\qquad(\\gamma\\in\\pi_1(X,\\bar x),\\ n\\in\\mathbf Z).\n$$\n\nEvery later expression $\\rho:W(X_0)\\to\\operatorname{GL}(V)$ refers to\nthis extension, not merely to the geometric representation.\n\nThis formula defines a continuous representation, and the resulting\nrepresentation depends on the auxiliary choices only up to the\nchange-of-base-point isomorphism.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-18",
@@ -117,18 +174,6 @@
   "module": "Sheaf.Paper.EtaleWeilFundamentalRepresentation",
   "declaration": "AlgebraicGeometry.Scheme.etaleFundamentalRep",
   "declarations": [
-   "AlgebraicGeometry.Scheme.etaleFinitePathIso_exists",
-   "AlgebraicGeometry.Scheme.etaleFinitePathIso",
-   "AlgebraicGeometry.Scheme.etaleIntegralLevel_finite",
-   "AlgebraicGeometry.Scheme.etaleIntegralPathIso_exists",
-   "AlgebraicGeometry.Scheme.etaleIntegralPathIso",
-   "AlgebraicGeometry.Scheme.etaleRationalPathIso",
-   "AlgebraicGeometry.Scheme.etaleAlgebraicPathIso",
-   "AlgebraicGeometry.Scheme.etaleAlgebraicPath",
-   "AlgebraicGeometry.Scheme.etaleAlgebraicPath_laws",
-   "AlgebraicGeometry.Scheme.etaleGeometricRep",
-   "AlgebraicGeometry.Scheme.EtaleLisseWeilSheaf",
-   "AlgebraicGeometry.Scheme.etaleAlgebraicFiberMap",
    "AlgebraicGeometry.Scheme.etaleWeilFrobenius",
    "AlgebraicGeometry.Scheme.EtaleWeilDegreeData",
    "AlgebraicGeometry.Scheme.etaleFundamentalRep_exists",
@@ -153,5 +198,15 @@
   "group": "Q60",
   "result": "pass",
   "note": "Re-delivery after L's H3 return: the item and both §1(B)-repaired dependencies (def-wf-fundamental-representation, prop-wf-weil-sheaf-representation-equivalence) now use the actual étale adic objects (LisseAlgebraicSheaf, the recorded étale automorphism pullback, lisseAlgebraicFiber); no pro-étale substitute. Node files changed only in lean, each with a note. Clause check: K finite, l prime and ≠ char, Q an algebraic closure in universe u+1; curve hypotheses as before; nonempty open immersion j; Restriction R; sections are Q⊗E⊗lim Γ (the def-pod convention, no Weil-fixedness); target is the invariants of (ρ∘R.restrict) on WU.geometric; e is pinned to germ evaluation plus the germ-normalized path; Frobenius on sections is uniquely characterized by pullback then F.str, and is intertwined with ρ(frobLift). Statement is true (connected open, surjective π1, flat scalar extensions). Conjugation convention checked: Tρ(g)T⁻¹=ρ(sgs⁻¹), matching the node and upstream frobStalkIso; liftChange is consistent. The arbitrary D does not change the content, so the statement is equivalent to the canonical case. Helper definitions are explicit data or the choice of a true ∃!; the recorded basepoint transport is only Nonempty, so the new path is a legitimate helper. Edge cases ok: rank 0, constant line with a≠1, nontrivial character, U0=C0, any t and τ, universes. Gates ok: docstrings with source and blueprint tag, six-step plan, 14/14 proofs sorry, statements verbatim, declarations match, both report sections present. nt_compile.py on all three files: exit 0, no errors or warnings, reproduced twice (5.7/4.4/7.9 s). Maintainer notes: CanonicalWeilFundamentalRepresentation.lean is orphaned and lem-dl-a1-lisse-extension-inertia still uses the old pro-étale canonicalFundamentalRep; downstream statements should pass B.weilMonodromyData.toEtale."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T163544-L-693223",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

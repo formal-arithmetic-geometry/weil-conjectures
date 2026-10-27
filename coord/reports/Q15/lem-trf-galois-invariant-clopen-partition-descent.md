@@ -1,0 +1,39 @@
+## Worker report
+
+Files written: `dag/nodes/sec-trace-formula/lem-trf-galois-invariant-clopen-partition-descent.json` (statement, split; no Mathlib match), `citations.json`, `searches.jsonl`, and this report. No new nodes and no Mathlib leaves created. The sandbox initially contained no node or earlier report. The item remains exactly as stated, with its five statement dependencies. Its proof now has four steps and three existing proof dependencies. No Lean was written or compiled.
+
+Attachments: none. I searched the live `lean/WeilConjectures/` by the exact blueprint tag and by Galois/clopen/invariant terminology. `AlgebraicGeometry.exists_closed_subset_of_galois_invariant` in `GaloisInvariantClosedSubsetDescends.lean` proves the closed-subset input, which already has its own node. The private `invariant_clopen_eq_empty_or_univ` in `GeometricallyConnectedFiniteSeparableTest.lean` assumes connectedness and proves only triviality, so does not attach to this arbitrary-scheme partition statement. The finite-invariant-partition theorem constructs a partition over a finite intermediate field; it does not state this descent result.
+
+WANTED: none. All sources used are present in `literature/stacks-project/`. No SGA source is used.
+
+What changed: the imported item had no proof. I supplied the short assembly proof using existing nodes rather than creating a duplicate of Tag 038B. There was no statement dispute, no hypothesis added or removed, and no change to the chapter or unit. The existing blueprint ancestry was retained, and its `same_as` was checked by whole-blueprint searches (`Galois invariant`, `038B`, `clopen partition`, and `field extension surjective`). The clopen-partition hits concern w-local spaces, not this statement. I read the current chapter, unit, and locality node under `literature/blueprint/latest/`; the Galois descent is an auxiliary below the recorded connected-point criterion, not a replacement for the contracting-local-term route.
+
+Unfinished: nothing within this item. The independent maintainer review and landing follow direct delivery.
+
+## Existing nodes reused
+
+`lem-weil-pbc-galois-invariant-closed-subset-descends` supplies existence of a closed subset with the prescribed preimage, for arbitrary schemes and possibly infinite Galois extensions (Stacks 038B). It is deliberately applied twice; its statement does not claim clopenness, nonemptiness, partition identities, or uniqueness. Those are proved here. This is a generic off-unit tool, declared in `split_report.tool_uses`.
+
+`lem-pc-field-extension-surjective` states surjectivity of the spectrum map for any field extension. `lem-weil-pbc-surjective-base-change` states surjectivity of its pullback projection for any morphism of schemes (Stacks 01S1). Both are existing Mathlib leaves. The order of the two factors can be exchanged by the defining symmetry of the fibre product; the projection used is always the one to X.
+
+## Mathlib searches
+
+I ran the mandated search command with LeanFinder, Loogle, grep, and LeanSearch, and recorded their exact queries in the item and in the command-generated search log. All services answered. I then tried a second semantic phrasing and a broader Galois grep restricted to AlgebraicGeometry. The first semantic result set consists mainly of affine-transition-limit declarations; the second includes purely inseparable homeomorphisms, pullback-spectrum identifications and the prime-spectrum clopen/idempotent correspondence. These do not assert Galois-invariant partition descent for arbitrary schemes. The broader Galois grep returns Galois connections for ideals/closed subsets, not Galois field actions. The valid Loogle hit is `Topology.IsQuotientMap.isClopen_preimage`, whose declaration I read in Mathlib/Topology/Clopen.lean:136: it reflects clopenness along an already supplied quotient map, and does not give saturation or descent for the present invariant subsets. Hence no hit makes the item a Mathlib leaf. Earlier recorded item searches were preserved.
+
+## Not duplicates
+
+No new node is proposed. The existing arbitrary closed-subset descent node is reused instead of being restated. The finite-invariant-partition node changes the intermediate field to make an arbitrary partition invariant; our hypothesis already supplies invariance and our conclusion is a partition on X itself. The closed-subscheme descent node assumes finite Galois extension and finite-type X and concerns scheme structure, whereas this argument needs only topological closed subsets and has neither finiteness hypothesis.
+
+## Review by Q15
+
+I read delivery-errors B through E, the current item and every statement it cites, with the Stacks sources open. The source for this item is varieties.tex Tag 038B (`lemma-closed-fixed-by-Galois`, lines 898–934), together with the sentence in Tag 038C (`lemma-tricky`) immediately following the intersection/union display. That sentence obtains a clopen partition by descending both closed members. My proof expands precisely that inference and does not use the connectedness or geometric-image construction elsewhere in 038C. There are no new nodes whose statements or sources need review.
+
+Step 1 takes only what the two surjectivity statements say: a field extension gives a surjective spectrum map, and its pullback along the given structure morphism X → Spec k is surjective. I read morphisms.tex Tag 01S1 (`lemma-base-change-surjective`), and checked that its pullback is the projection p of our statement. The field-extension map is between nonempty singleton spectra, which also checks the first leaf directly. There is no finite-degree assumption in either node. The citations quote the actual statements, not an argument inside their proofs.
+
+Step 2 takes only existence of a closed descending subset from the existing Tag 038B node. I verified the source and the node both allow infinite Galois extension and arbitrary X. The actions are literally id_X × Spec(σ), so the item's image-invariance hypotheses give the exact invariance required, separately for P and Q. Closedness is given by clopenness. I do not infer scheme-theoretic descent, or uniqueness, from that cited statement. `citations.json` quotes its invariance condition and existential conclusion verbatim.
+
+Step 3 is pointwise set reasoning: lift x using the surjectivity already proved, read both membership tests from Step 2, and apply the given disjoint exhaustive partition. This proves complementary subsets downstairs. Their closedness then gives openness of the other member by the definition of a closed subset. No quotient-map theorem, gluing theorem, quasi-compactness argument, or unlisted non-elementary lemma is hidden here.
+
+Step 4 uses actual witnesses in P and Q to obtain witnesses downstairs. It proves uniqueness point by point with the same surjective lift; equality of inverse images alone would not suffice without Step 1. Thus the ordered pair is unique even among all subsets with the given preimages. The two elementary steps use only conclusions of previous steps, so their `uses` lists are empty. The union of the other two lists is exactly `proof_deps`, and all three citations have literal quotes in `citations.json`.
+
+I checked L=k (identity projection), finite Galois and infinite Galois extensions, disconnected and nonreduced X, and arbitrary non-quasi-compact X. The reasoning is entirely on underlying sets after the two general inputs, so none of these cases changes it. For empty X or a connected base change the hypotheses cannot supply the nonempty partition; no invalid existence conclusion is being extracted in those cases. Nonemptiness of each given member is used only in Step 4. Normality and separable algebraicity are used exactly through 038B. Every step is below 2000 characters, and no comparison, gluing or algebraic subclaim has been hidden in a long step. I found no mathematical correction to make to this item's statement.

@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-noetherian-full-support-localizing-generation",
+ "kind": "statement",
+ "title": "Full-support bounded coherent complexes generate the module derived category",
+ "statement": "Let $B$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and work in the ordinary unbounded module derived category $D(B)$ [def-weil-abstract-derived-category]. Let $E\\in D(B)$ have bounded finitely generated cohomology: there exist integers $a\\le b$ such that $H^j(E)=0$ outside $[a,b]$, and each $H^j(E)$ is a finitely generated $B$-module [def-weil-finitely-generated-module]. Suppose $E\\otimes_B^{\\mathbf L}B_{\\mathfrak p}\\ne0$ for every prime ideal $\\mathfrak p\\subset B$, where $B_{\\mathfrak p}$ is the prime localization [def-weil-pbc-localization-at-prime] and derived tensor uses K-flat resolutions [def-pc-module-kflat-complex]. Let $\\operatorname{Loc}_B(E)$ denote the smallest full subcategory of $D(B)$ containing $E$ and closed under isomorphisms, shifts, distinguished triangles, retracts and set-indexed coproducts. Then $B[0]\\in\\operatorname{Loc}_B(E)$. No finite projective or injective dimension of $E$ is assumed; $B=0$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent full-support localizing-generation corollary: Tags 00L0 (lemma-filter-Noetherian-module) and 00L4 (lemma-filter-primes-in-support); derived.tex Tags 09SJ (definition-generators) and 0149 (lemma-representable-homological), and more-algebra.tex Tag 09PB (remark-P-resolution). Proof by residue-field extraction and Noetherian induction is supplied in report.md; no claim that these tags state this corollary verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal L=\\operatorname{Loc}_B(E)$. If $B=0$, then $B[0]=0$, which belongs to $\\mathcal L$ as the empty coproduct. Henceforth treat $B\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent corollary, zero-ring case"
+   }
+  },
+  {
+   "text": "For every $X\\in\\mathcal L$, the class of $N\\in D(B)$ with $X\\otimes_B^{\\mathbf L}N\\in\\mathcal L$ is closed under shifts, triangles, retracts and coproducts. Exactness is the derived-tensor functor theorem; for coproducts take K-flat representatives of the variable inputs. Their direct sum is K-flat, since tensor distributes over direct sums and sums of exact module sequences are exact; the total tensor also distributes over these sums. Termwise sums represent derived coproducts. This class contains $B[0]$, since $X\\otimes_B^{\\mathbf L}B\\cong X$, so free generation of $D(B)$ gives every $N$. Thus $\\mathcal L$ is a tensor ideal. In particular $E\\otimes_B^{\\mathbf L}\\kappa(\\mathfrak p)\\in\\mathcal L$ for every prime $\\mathfrak p$.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-pc-module-kflat-complex",
+    "lem-pc-derived-module-direct-sums",
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PB (remark-P-resolution), applied to the inverse image of the localizing subcategory under exact tensor; agent tensor-ideal argument"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p$ and put $A=B_{\\mathfrak p}$, $k=A/\\mathfrak pA$. The localization definition says $A$ is local. It is Noetherian: every ideal is the extension of its contraction (write its elements as fractions), and finitely many generators of that contraction generate its extension. Exact localization identifies $H^j(E\\otimes_B^{\\mathbf L}A)$ with $H^j(E)_{\\mathfrak p}$, so the localized object is bounded with finite cohomology, and is nonzero by hypothesis. Apply local derived-tensor nonvanishing to this object and $k[0]$ in $D(A)$: both are bounded above with finite cohomology and neither is zero. Their tensor is therefore nonzero. The extension-of-scalars isomorphism in clause (2) of derived-tensor transitivity identifies its underlying $B$-object with $E\\otimes_B^{\\mathbf L}k$: in that clause use its original ring $A=B$, its $A$-algebra $C=B_{\\mathfrak p}$ and its $C$-complex $K^\\prime=k[0]$, giving $E\\otimes_B^{\\mathbf L}k\\cong(E\\otimes_B^{\\mathbf L}B_{\\mathfrak p})\\otimes_{B_{\\mathfrak p}}^{\\mathbf L}k$. Thus $E\\otimes_B^{\\mathbf L}k$ is a nonzero object represented by a complex of $k$-vector spaces.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-flat",
+    "lem-trf-local-derived-tensor-nonvanishing",
+    "lem-pc-derived-tensor-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent residue-field extraction, using local tensor nonvanishing and the flat localization case of Tag 0BYJ"
+   }
+  },
+  {
+   "text": "By field-complex cohomology splitting, the $k$-complex just obtained is homotopy equivalent to its zero-differential cohomology complex, without a boundedness assumption on that tensor. Some cohomology vector space is nonzero. Choose a nonzero vector and extend it to a basis; inclusion of its line and the corresponding coordinate projection give a retract $k[-j]$ of that zero-differential complex. Restricting scalars retains the homotopy equivalence and the retract. Step 2, retract closure and shift closure yield $\\kappa(\\mathfrak p)[0]\\in\\mathcal L$ for every prime $\\mathfrak p$.",
+   "uses": [
+    "lem-trf-field-complex-cohomology-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent residue-field extraction; vector-space complement and coordinate-retract argument"
+   }
+  },
+  {
+   "text": "Suppose some ideal $J\\subseteq B$ has $(B/J)[0]\\notin\\mathcal L$, and choose a maximal such $J$. This is justified by the Noetherian condition: the union of an increasing chain of ideals is an ideal with finitely many generators, which all occur in one stage, so there is no infinite strict ascending chain. The unit ideal is not a counterexample. Take a prime filtration of the finite module $B/J$. Every prime $\\mathfrak q$ occurring contains $J$, because $J$ annihilates every subquotient. If $J$ were not prime, all these inclusions would be strict; maximality would put every $(B/\\mathfrak q)[0]$ in $\\mathcal L$. The triangles of the filtration short exact sequences would then put $(B/J)[0]$ there. Consequently a maximal counterexample must be a prime $\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-noetherian-module-prime-filtration",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00L0 (lemma-filter-Noetherian-module), maximal-counterexample proof adapted to localizing membership"
+   }
+  },
+  {
+   "text": "For this maximal counterexample $\\mathfrak p$, let $C=\\kappa(\\mathfrak p)/(B/\\mathfrak p)$, using the injection of the domain $B/\\mathfrak p$ into its fraction field $\\kappa(\\mathfrak p)$. Each finitely generated $B$-submodule $N\\subseteq C$ is annihilated by $\\mathfrak p$ and by some $s\\notin\\mathfrak p$: write its finitely many chosen generators as fractions modulo $B/\\mathfrak p$ and multiply their nonzero denominators. A prime filtration of $N$ has factors $B/\\mathfrak q$ with $\\mathfrak q\\supseteq\\mathfrak p+(s)$, because this ideal annihilates each factor. Thus $\\mathfrak q\\supsetneq\\mathfrak p$ and maximality puts every factor in $\\mathcal L$. The filtration triangles give $N[0]\\in\\mathcal L$. The finitely generated submodules of $C$ form a small nonempty directed poset under inclusion (upper bound $N_1+N_2$), with union $C$. Closure under directed module colimits now gives $C[0]\\in\\mathcal L$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-noetherian-module-prime-filtration",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sfb-module-localizing-filtered-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent Noetherian induction using Tag 00L0 (lemma-filter-Noetherian-module); torsion quotient and directed union"
+   }
+  },
+  {
+   "text": "The short exact sequence $0\\to B/\\mathfrak p\\to\\kappa(\\mathfrak p)\\to C\\to0$ gives a distinguished triangle. Its middle and last terms belong to $\\mathcal L$ by steps 4 and 6; rotation and shift closure imply $(B/\\mathfrak p)[0]\\in\\mathcal L$, contrary to the choice of $\\mathfrak p$. Hence every $(B/J)[0]$ belongs to $\\mathcal L$. Taking $J=0$ proves the required $B[0]\\in\\mathcal L$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent Noetherian induction, final short exact sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-module-kflat-complex",
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-derived-module-free-generation",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-trf-local-derived-tensor-nonvanishing",
+  "lem-pc-derived-tensor-transitivity",
+  "lem-trf-field-complex-cohomology-splitting",
+  "lem-weil-pbc-noetherian-module-prime-filtration",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sfb-module-localizing-filtered-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Full-support generation corollary: tensor-ideal argument from Tag 09PB, residue-field extraction, and maximal-ideal-counterexample induction using algebra.tex Tag 00L0; not a verbatim Stacks theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex with finite cohomology and full support over a commutative Noetherian ring generates the unbounded module derived category under coproducts and cones",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, HomologicalComplex.isGrothendieckAbelian, DerivedCategory.TStructure.t, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; digest=0598374401213b93; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every bounded complex of finitely generated modules with full support over a Noetherian commutative ring generates its unbounded derived category under coproducts",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.IsGE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; digest=f481adecf9c27f64; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian ring the localizing subcategory generated by a bounded coherent complex contains the ring when every prime is in its support",
+   "results": "8 hits: AlgebraicGeometry.isLocallyNoetherian_Spec, AlgebraicGeometry.isNoetherianRing_of_away, IsNoetherianRing.of_isLocalization_maximal, DerivedCategory.IsGE, LocalizedModule.subsingleton_iff_support_subset, Module.mem_support_iff, Module.notMem_support_iff, DerivedCategory.IsLE; digest=a06b4a2f011520cb; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Localizing\"",
+   "results": "1 hits: DerivedCategory.Plus.instIsVerdierRightLocalizingHomotopyCategoryIntUpPlusSubcategoryAcyclic; digest=02c395a64c574d8d; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|fullSupport|support.*generat",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; digest=ec07cfee828e92db; ",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned declarations; ordinary smooth-algebra descent, finite-presentation permanence, localization of modules and derived-category truncations do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A full support bounded complex of finitely generated modules over a commutative Noetherian ring generates the unbounded derived category as a localizing subcategory",
+   "results": "{\"t\": \"2026-10-23T18:03:36Z\", \"tool\": \"leanfinder\", \"query\": \"A full support bounded complex of finitely generated modules over a commutative Noetherian ring generates the unbounded derived category as a localizing subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"HasDerivedCategory.standard\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.IsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"ddb00928969cadb8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"localizing\"",
+   "results": "{\"t\": \"2026-10-23T18:06:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"localizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"DerivedCategory.Plus.instIsVerdierRightLocalizingHomotopyCategoryIntUpPlusSubcategoryAcyclic\"], \"digest\": \"02c395a64c574d8d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|localising|fullSupport|support.*generat",
+   "results": "{\"t\": \"2026-10-23T18:10:35Z\", \"tool\": \"grep\", \"query\": \"localizing|localising|fullSupport|support.*generat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Monoidal.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/GroupTheory/Perm/ClosureSwap.lean\", \"Mathlib/LinearAlgebra/RootSystem/CartanMatrix.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Basic.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Away.lean\", \"Mathlib/GroupTheory/MonoidLocalization/Away.lean\"], \"digest\": \"d72cbdca8aeaadcc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full support bounded coherent complexes generate the unbounded derived category of modules over a commutative Noetherian ring",
+   "results": "{\"t\": \"2026-10-23T18:10:36Z\", \"tool\": \"leansearch\", \"query\": \"Full support bounded coherent complexes generate the unbounded derived category of modules over a commutative Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory.standard\", \"DerivedCategory\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"HomologicalComplexUpToQuasiIso\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"HomologicalComplex.isGrothendieckAbelian\"], \"digest\": \"2323c1fa3c20922b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits; derived-category truncations, ordinary filtered-colimit constructions and Verdier relative-localizing predicates do not assert this localizing-closure statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-perfect-polynomial-dual-detection",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine uniqueness input: unmarked module complexes, before generator normalization. Supporting input: Polynomial dual detects maps between relatively perfect complexes. Supporting input: Noetherian full-support generation, used before extension back to the arbitrary base.",
+   "via": [
+    "lem-sfb-relative-perfect-polynomial-dual-detection",
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-noetherian-full-support-localizing-generation",
+  "worker": "stage1",
+  "summary": "Retained the full-support bounded coherent statement, including zero ring and absence of finite projective dimension. Wrote residue-field extraction and maximal-counterexample Noetherian induction. Reused existing tensor, field-splitting, prime-filtration, and free-generation nodes; created only the independent directed-module-colimit closure input.",
+  "blueprint": "Latest sec-six-functors-basics/sk-thm-sf-ctf-stability direct-images proof (3), through the existing relative dualizing polynomial detection prerequisite chain: realizes the full-support generator normalization input. Current latest blueprint has no duplicate of this affine algebra lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic ordinary-module derived-category or field-linear algebra input: Derived tensor over R with a complex of A-modules. The current unit has no statement providing this generic result."
+   },
+   {
+    "node": "lem-pc-derived-module-direct-sums",
+    "why": "Generic ordinary-module derived-category or field-linear algebra input: Termwise direct sums of complexes of modules are direct sums in D(A). The current unit has no statement providing this generic result."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Generic ordinary-module derived-category or field-linear algebra input: Generation of a module derived category by shifts of the ring. The current unit has no statement providing this generic result."
+   },
+   {
+    "node": "lem-trf-local-derived-tensor-nonvanishing",
+    "why": "Generic ordinary-module derived-category or field-linear algebra input: Tensor nonvanishing for bounded-above coherent complexes over a local ring. The current unit has no statement providing this generic result."
+   },
+   {
+    "node": "lem-pc-derived-tensor-transitivity",
+    "why": "Generic ordinary-module derived-category or field-linear algebra input: Transitivity of derived tensor products under base change. The current unit has no statement providing this generic result."
+   },
+   {
+    "node": "lem-trf-field-complex-cohomology-splitting",
+    "why": "Generic ordinary-module derived-category or field-linear algebra input: Cohomology models and retracts of complexes over a field. The current unit has no statement providing this generic result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-derived-module-free-generation",
+  "lem-trf-local-derived-tensor-nonvanishing",
+  "lem-pc-derived-tensor-transitivity",
+  "lem-trf-field-complex-cohomology-splitting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-9c4fcdb14",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-9c4fcdb14 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. The item's statement and stmt_deps are unchanged from the base (Noetherian full-support Loc generation, which is true; I checked B=0, Z with E=Z/2 excluded, and k[ε]). There is no re-split note. Step 1: B=0 is the empty coproduct. Step 2: tensor-ideal closure via K-flat P_X, termwise sums (lem-pc-derived-module-direct-sums) and free generation. Step 3: B_p is Noetherian local and E_p is bounded and nonzero; lem-trf-local-derived-tensor-nonvanishing applies to E_p and k[0]; transitivity clause (2) with R=A=B, T=B, C=B_p, K'=k[0] gives E⊗k ≅ E_p⊗k. Step 4: the field-complex splitting holds for any complex, so k[-j] is a retract and κ(p) ∈ L. Steps 5–7: the ACC maximal counterexample is prime (00L0 prime filtration, SES triangles). C=κ(p)/(B/p) is the directed union of finitely generated submodules killed by p+(s), so C ∈ L by the new node, and the triangle gives B/p ∈ L, a contradiction. The induction is not circular. New node lem-sfb-module-localizing-filtered-colimits: true by the bar resolution (00DB exactness) plus the truncation telescope. It is statement-only, self-contained, and has the three kinds of search recorded. My DAG search found no duplicate (the telescope node is sequential only), and it is not a clause of the item. Batch-5: both lem-trf-local-derived-tensor-nonvanishing (closure is pure commutative algebra, no trace-formula or Poincaré-duality theorem) and lem-trf-field-complex-cohomology-splitting (field linear algebra) are generic, lie outside both assumed statements and cannot be supplied by the leaves, so I accepted them. I accept all six declared tool_uses. Minor, unchanged: step 2 states exactness in the second variable (a one-line K-flat argument), and source.place lists unused tags 00L4, 09SJ and 0149."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NoetherianFullSupportLocalizingGeneration",
+  "declaration": "DerivedCategory.noetherian_full_support_localizing_generation",
+  "file": "lean/Sheaf/CategoryTheory/NoetherianFullSupportLocalizingGeneration.lean",
+  "statement": "theorem noetherian_full_support_localizing_generation (B : Type u) [CommRing B] [IsNoetherianRing B] [HasDerivedCategory.{w} (ModuleCat.{u} B)] (E : DerivedCategory (ModuleCat.{u} B)) (hbounded : ∃ a b : ℤ, a ≤ b ∧ ∀ j : ℤ, j < a ∨ b < j → IsZero ((homologyFunctor (ModuleCat.{u} B) j).obj E)) (hfinite : ∀ j : ℤ, Module.Finite B ((homologyFunctor (ModuleCat.{u} B) j).obj E)) (hsupport : ∀ (p : Ideal B) [p.IsPrime], ¬ IsZero (E ⊗ (singleFunctor (ModuleCat.{u} B) 0).obj (ModuleCat.of B (Localization.AtPrime p)))) (P : ObjectProperty (DerivedCategory (ModuleCat.{u} B))) [P.IsClosedUnderIsomorphisms] [P.IsTriangulated] [P.IsStableUnderRetracts] [∀ I : Type u, P.IsClosedUnderColimitsOfShape (Discrete I)] (hE : P E) : P ((singleFunctor (ModuleCat.{u} B) 0).obj (ModuleCat.of B B))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c447e889",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Item lean field only changed (diffed vs side-live). Clause-by-clause: CommRing+IsNoetherianRing B, DerivedCategory (ModuleCat.{u} B) with HasDerivedCategory.{w}, hbounded ∃a≤b vanishing outside, hfinite Module.Finite on every H^j, hsupport ¬IsZero(E ⊗ B_p[0]) with the K-flat derived tensor (hasDerivedMonoidalCategory, owner lem-sfb-derived-monoidal, same encoding as landed lem-trf-local-derived-tensor-nonvanishing), Loc_B(E) as ∀P with iso/IsTriangulated (zero+shift+triangles)/retract/Type u-coproduct closure and P E, conclusion P(B[0]). Edge cases: B=0 (vacuous hsupport, ContainsZero), u-small coproducts are at least as strong and still provable, matching moduleLocalizing_filtered_colimit. Statement verbatim; universes bound; docstrings with source place, blueprint id and 7 proof steps; sorry only; Stacks tags 00L0/00L4/09SJ/0149/09PB verified; report has both sections. No compile (no file changed). Minor: unused tags in source.place."
+ }
+}

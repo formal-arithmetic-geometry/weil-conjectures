@@ -1,0 +1,262 @@
+{
+ "id": "lem-a1-finite-clopen-relation-projection-properties",
+ "kind": "statement",
+ "title": "Finite arrows and etale projections of a clopen restriction",
+ "statement": "Let $T,U,R,B$ be schemes [def-pc-scheme], with morphisms $U\\to T$, $R\\to T$, $B\\to T$, and etale $T$-morphisms $s,t:R\\to U$ [def-weil-etale-morphism]. Assume $j=(s,t):R\\to U\\times_TU$ is a closed immersion [def-weil-closed-immersion, def-pc-fibre-product]. Set $U_B=U\\times_TB$, $R_B=R\\times_TB$, and let $s_B,t_B:R_B\\to U_B$ be the induced morphisms. Let $V\\subseteq U_B$ be open and closed with its induced scheme structure [def-weil-open-immersion], and assume the structure morphism $V\\to B$ is finite [def-weil-finite-integral-morphism]. Put\n$$C=V\\times_{U_B,s_B}R_B\\times_{t_B,U_B}V,$$\nwith its canonical endpoint maps $s_C,t_C:C\\to V$. Then the canonical map $C\\to V\\times_BV$ is a closed immersion and is finite. The scheme $V\\times_BV$ is finite over $B$, and $C\\to B$ is finite. The canonical map $C\\to R_B$ is an open immersion with open and closed image $s_B^{-1}(V)\\cap t_B^{-1}(V)$. Both endpoint maps $s_C,t_C$ are etale. These assertions require no equivalence-relation hypothesis on $(s,t)$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), closed-immersion specialization of the restricted-relation argument and finiteness of the object square; etale projection permanence as in the preceding lemma-quasi-finite-over-base."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $D=U_B\\times_BU_B$ and $E=V\\times_BV$. The universal property in [def-pc-fibre-product] identifies $D$ with $(U\\times_TU)\\times_TB$ and identifies $R_B$ with $R\\times_{U\\times_TU}D$: maps into either object specify the same compatible maps into $R$, $U$, and $B$. Likewise $C\\cong R_B\\times_DE$: a map into either side specifies $r:H\\to R_B$ and $v_1,v_2:H\\to V$ with $s_Br=iv_1$ and $t_Br=iv_2$, where $i:V\\hookrightarrow U_B$. These identifications respect both endpoint maps.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 03X5, lemma-quasi-finite-over-base-j-proper, inverse image of the object square; explicit universal-property identifications"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-closed-immersion-base-change] to $j:R\\to U\\times_TU$ along $D\\to U\\times_TU$, and then to $R_B\\to D$ along $E\\to D$. By step 1 the resulting closed immersion is exactly the canonical endpoint map $C\\to E$. By [lem-weil-pbc-closed-immersion-finite] it is finite.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR (lemma-base-change-closed-immersion), 035C (lemma-closed-immersion-finite)"
+   }
+  },
+  {
+   "text": "The projection $E=V\\times_BV\\to V$ is the base change of the given finite map $V\\to B$, so it is finite by clause (a) of [lem-weil-pbc-finite-morphism-permanence]. Compose it with $V\\to B$ using [lem-weil-pbc-finite-composition] to obtain finiteness of $E\\to B$. Compose this map with the finite map $C\\to E$ from step 2, using the same composition lemma, to obtain finiteness of $C\\to B$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 01WK (lemma-composition-finite); object-square argument of Tag 03X5"
+   }
+  },
+  {
+   "text": "Pull back $i:V\\hookrightarrow U_B$ first along $s_B$, and then along $t_B$ on that pullback. Both projections are open immersions by [lem-weil-pbc-open-immersion-base-change]. An open immersion identifies its source with the indicated open subscheme by [def-weil-open-immersion]; consequently these two pullbacks are the successive restrictions to $s_B^{-1}(V)$ and to $W=s_B^{-1}(V)\\cap t_B^{-1}(V)$. Their structure sheaves are the corresponding restrictions of $\\mathcal O_{R_B}$. Thus $C$ is precisely the open subscheme $W$ of $R_B$, with canonical map the inclusion. Since morphisms of schemes are continuous, the inverse images of the open and closed subset $V$ are open and closed; their intersection $W$ is open and closed as asserted.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY (lemma-base-change-immersion); open subscheme interpretation of the restricted relation"
+   }
+  },
+  {
+   "text": "The maps $s_B,t_B$ are base changes of $s,t$: for example $R_B\\cong R\\times_{U,s}U_B$ by the compatible-map description of [def-pc-fibre-product]. They are therefore etale by [lem-weil-pbc-etale-scheme-base-change]. Set $A_s=R_B\\times_{U_B,s_B}V$. The map $A_s\\to V$ is etale by the same lemma. The inclusion $C\\to A_s$ is an open immersion by step 4, hence etale by clause (1) of [lem-weil-pbc-etale-composition-cancellation]. Clause (2) gives that its composite $s_C:C\\to V$ is etale. Interchanging $s_B$ and $t_B$ gives the same factorization and proof for $t_C$. Every construction above uses only the two endpoint maps, not identity, inverse or composition operations of a relation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), inverse image of the object square and its finiteness; scheme permanence details from Tags 01QR, 035C, 01WL, 01WK, 01JY, 02GO, 02GP, 02GN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Rr]estrict.*[Ii]sEtale|[Ii]sEtale.*[Rr]estrict|[Rr]elation.*[Ii]sFinite",
+   "results": "{\"t\": \"2026-10-22T08:03:50Z\", \"tool\": \"grep\", \"query\": \"[Rr]estrict.*[Ii]sEtale|[Ii]sEtale.*[Rr]estrict|[Rr]elation.*[Ii]sFinite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/closed-immersion permanence and etale restriction are ingredients; no hit gives the finite arrow scheme and both etale projections of this iterated restricted relation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an etale closed scheme relation to a finite open and closed subscheme has finite arrow scheme and etale projections",
+   "results": "{\"t\": \"2026-10-22T08:03:51Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of an etale closed scheme relation to a finite open and closed subscheme has finite arrow scheme and etale projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\"], \"digest\": \"c158c15caf9796e3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/closed-immersion permanence and etale restriction are ingredients; no hit gives the finite arrow scheme and both etale projections of this iterated restricted relation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-22T08:03:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono\"], \"digest\": \"53f0cc01ae952f0b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/closed-immersion permanence and etale restriction are ingredients; no hit gives the finite arrow scheme and both etale projections of this iterated restricted relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of a closed immersion into the square of a finite scheme is finite and restriction of etale projections to a clopen piece is etale",
+   "results": "{\"t\": \"2026-10-22T08:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"The pullback of a closed immersion into the square of a finite scheme is finite and restriction of etale projections to a clopen piece is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange\", \"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.IsFinite.instSndScheme\", \"AlgebraicGeometry.instIsClosedImmersionSndScheme\", \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"7e1bf07f0b1ce130\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/closed-immersion permanence and etale restriction are ingredients; no hit gives the finite arrow scheme and both etale projections of this iterated restricted relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed relation on schemes restricted to a finite clopen object subscheme is finite over the base and its two projections remain etale",
+   "results": "{\"t\": \"2026-10-22T08:03:58Z\", \"tool\": \"leanfinder\", \"query\": \"A closed relation on schemes restricted to a finite clopen object subscheme is finite over the base and its two projections remain etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsFinite.instFstScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsFinite.instSndScheme\"], \"digest\": \"12bd73841feb5bfd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/closed-immersion permanence and etale restriction are ingredients; no hit gives the finite arrow scheme and both etale projections of this iterated restricted relation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting an etale closed relation on schemes to a finite clopen subscheme gives a finite arrow scheme with etale projections",
+   "results": "{\"t\": \"2026-10-23T04:08:51Z\", \"tool\": \"leanfinder\", \"query\": \"Restricting an etale closed relation on schemes to a finite clopen subscheme gives a finite arrow scheme with etale projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"67a2a8098c8cb815\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]elation.*[Ii]sFinite|[Rr]estrict.*[Ii]sEtale|[Ii]sEtale.*[Rr]estrict",
+   "results": "{\"t\": \"2026-10-23T04:09:28Z\", \"tool\": \"grep\", \"query\": \"[Rr]elation.*[Ii]sFinite|[Rr]estrict.*[Ii]sEtale|[Ii]sEtale.*[Rr]estrict\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"IsFinite\"",
+   "results": "{\"t\": \"2026-10-23T04:09:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"IsFinite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono\"], \"digest\": \"53f0cc01ae952f0b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed scheme relation restricted to a finite open and closed subscheme is finite over the base with etale endpoint maps",
+   "results": "{\"t\": \"2026-10-23T04:09:28Z\", \"tool\": \"leansearch\", \"query\": \"A closed scheme relation restricted to a finite open and closed subscheme is finite over the base with etale endpoint maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\"], \"digest\": \"3396a905aaff8e5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change and restriction of etale morphisms and closed immersions to open subschemes of finite schemes",
+   "results": "{\"t\": \"2026-10-23T04:11:30Z\", \"tool\": \"leanfinder\", \"query\": \"Base change and restriction of etale morphisms and closed immersions to open subschemes of finite schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"RingHom.Etale.isStableUnderBaseChange\"], \"digest\": \"748d8fda90e091ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*IsClosedImmersion|instance.*IsStableUnderBaseChange|instance.*IsFinite|instance.*IsOpenImmersion|lemma.*comp",
+   "results": "{\"t\": \"2026-10-23T04:12:32Z\", \"tool\": \"grep\", \"query\": \"instance.*IsClosedImmersion|instance.*IsStableUnderBaseChange|instance.*IsFinite|instance.*IsOpenImmersion|lemma.*comp\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\"], \"digest\": \"eafcb9d197c8ab18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStableUnderBaseChange|IsMultiplicative|IsOpenImmersion|etale_comp",
+   "results": "{\"t\": \"2026-10-23T04:13:23Z\", \"tool\": \"grep\", \"query\": \"IsStableUnderBaseChange|IsMultiplicative|IsOpenImmersion|etale_comp\", \"sub\": \"AlgebraicGeometry/Morphisms/Etale.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"63\", \"64\", \"69\", \"74\", \"75\"], \"digest\": \"be486f8ebc1b3591\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "grep",
+   "query": "isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-23T04:13:23Z\", \"tool\": \"grep\", \"query\": \"isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"382\", \"383\", \"384\", \"386\", \"388\"], \"digest\": \"9c9518ae5b3b3372\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStableUnderBaseChange|IsStableUnderComposition|IsClosedImmersion|instance.*IsFinite",
+   "results": "{\"t\": \"2026-10-23T04:13:23Z\", \"tool\": \"grep\", \"query\": \"IsStableUnderBaseChange|IsStableUnderComposition|IsClosedImmersion|instance.*IsFinite\", \"sub\": \"AlgebraicGeometry/Morphisms/Finite.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"47\", \"55\", \"56\", \"60\", \"61\"], \"digest\": \"cd864e5f3c7167cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole restricted-relation statement; hits supply the separately cited general permanence facts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-proper-etale-relation-finite-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: apply More on Groupoids lemma-quasi-finite-over-base-j-proper to the affine relation R=U×_XU. Closed-relation finite-neighbourhood subargument. Closed immersion into the finite square and etale projections (old steps 5 and 6).",
+   "via": [
+    "lem-a1-proper-etale-relation-finite-neighbourhood",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-finite-clopen-relation-projection-properties",
+  "worker": "stage1",
+  "summary": "Proved all clauses by explicit fibre-product identifications and existing Mathlib-leaf permanence results. No new nodes, no statement change, no equivalence-relation assumption. Recorded actual searches and checked citations against their statements.",
+  "blueprint": "Auxiliary to the inherited lem-a1-affine-hc0 lineage through the separated-etale-space representability and finite-neighbourhood nodes: realizes the closed-immersion-into-finite-square and etale-projection subargument named in blueprint.from.place (old finite-neighbourhood steps 5 and 6). The current main-20261015 ancestor file states H_c^0 vanishing and contains no proof; the explicit local source is Stacks 03X5. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-e5f27a640",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-e5f27a640 (reviewer sub-agent of L); spot-checked: The statement is unchanged and the delivery has no new nodes. The five steps are checked against Stacks 03X5 (more-groupoids.tex l.2347-2410: the object square j'^{-1}(U'xU') and U'xU' finite over S'). Step 1: the identifications D=(UxU)xB, R_B=R x_{UxU} D and C=R_B x_D E were checked on points. Step 2: closed-immersion base change applied twice, then closed immersion => finite. Step 3: finite base change (clause a), then composition used twice. Step 4: two pullbacks of the open immersion identify C with the open subscheme s_B^-1V ∩ t_B^-1V, which is clopen by continuity. Step 5: s_B is étale because R_B=R x_{U,s} U_B; A_s->V is étale; the open immersion C->A_s is étale and so is the composite; t_C is symmetric. All cited Mathlib-leaf statements were read and match their uses. Edge cases V empty, R empty and the diagonal of a nonreduced finite V all hold. No equivalence-relation hypothesis is used. It fits the parent lem-a1-proper-etale-relation-finite-neighbourhood step 5. The sibling clopen-relation-base-change-identification overlaps only in part and assumes an equivalence relation, so it is not citable here; this is not a fault. No SGA source is used and no repair note exists for this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClopenRelationProjectionProperties",
+  "declaration": "AlgebraicGeometry.finite_clopen_relation_projection_properties",
+  "declarations": [
+   "AlgebraicGeometry.FiniteClopenRelation.baseChangeEndpoint",
+   "AlgebraicGeometry.FiniteClopenRelation.restriction",
+   "AlgebraicGeometry.FiniteClopenRelation.source",
+   "AlgebraicGeometry.FiniteClopenRelation.target",
+   "AlgebraicGeometry.FiniteClopenRelation.toRelation",
+   "AlgebraicGeometry.FiniteClopenRelation.toSquare",
+   "AlgebraicGeometry.finite_clopen_relation_projection_properties"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClopenRelationProjectionProperties.lean",
+  "statement": "theorem finite_clopen_relation_projection_properties (T U R B : Scheme.{u}) (fU : U ⟶ T) (fR : R ⟶ T) (fB : B ⟶ T) (s t : R ⟶ U) (hs : s ≫ fU = fR) (ht : t ≫ fU = fR) [Etale s] [Etale t] [IsClosedImmersion (pullback.lift s t (hs.trans ht.symm))] (V : (pullback fU fB).Opens) (_hV : IsClosed (V : Set (pullback fU fB : Scheme.{u}))) [IsFinite (V.ι ≫ pullback.snd fU fB)] : IsClosedImmersion (toSquare fU fR fB s t hs ht V) ∧ IsFinite (toSquare fU fR fB s t hs ht V) ∧ IsFinite (pullback.fst (V.ι ≫ pullback.snd fU fB) (V.ι ≫ pullback.snd fU fB) ≫ V.ι ≫ pullback.snd fU fB) ∧ IsFinite (toRelation fU fR fB s t hs ht V ≫ pullback.snd fR fB) ∧ IsOpenImmersion (toRelation fU fR fB s t hs ht V) ∧ Set.range (toRelation fU fR fB s t hs ht V) = (baseChangeEndpoint fU fR fB s hs) ⁻¹' (V : Set (pullback fU fB : Scheme.{u})) ∩ (baseChangeEndpoint fU fR fB t ht) ⁻¹' (V : Set (pullback fU fB : Scheme.{u})) ∧ IsClopen (Set.range (toRelation fU fR fB s t hs ht V)) ∧ Etale (source fU fR fB s t hs ht V) ∧ Etale (target fU fR fB s t hs ht V)",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The six auxiliary abbreviations construct the canonical base-changed endpoint, iterated restriction, its two endpoints, map to R_B and map to V ×_B V using Mathlib pullbacks. All data and compatibility proofs are explicit; only the final theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94c6f2183",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Checked every clause of the Lean against the node: T,U,R,B schemes over T; s,t étale T-morphisms; closed pair pullback.lift s t; U_B,R_B and s_B,t_B via pullback.map; V open and closed with V→B finite; C as the iterated pullback with source/target; conclusions: toSquare closed immersion and finite, V×_BV finite over B, C→B finite, toRelation open immersion with range s_B⁻¹V∩t_B⁻¹V and clopen, both endpoints étale. All match, nothing added. Checked the mathematics against Stacks 03X5 (more-groupoids.tex 2347-2400). Statement field verbatim; node unchanged except lean; stmt_deps are all Mathlib existing:true records and are used. Abbrevs are real pullback data; only the theorem is sorry. Docstrings and five proof steps present; imports used; lines ≤100; no name clash; report sections present. Edge cases V=∅, R=∅, V=U_B, nonreduced V covered. Advisory: def-sfb-restricted-groupoid-relation (Q59, Over S) is a parallel construction, but stage 2 cannot add it to stmt_deps (H2) and the landed parent states the same object as inline scheme pullbacks; maintainer note only. No compile (no file changed)."
+ }
+}

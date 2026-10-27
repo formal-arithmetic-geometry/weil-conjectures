@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-geometric-semisimplicity-field-extension",
+ "kind": "statement",
+ "title": "Geometric semisimplicity, invariant complements and arbitrary field extension",
+ "statement": "Let $k$ be a perfect field [def-weil-field], meaning every algebraic extension is separable, let $V$ be a finite-dimensional $k$-vector space, and let $T:V\\to V$ be $k$-linear. Let $m_T\\in k[X]$ [def-weil-polynomial-ring] be the monic polynomial of least degree annihilating $T$, with $m_T=1$ when $V=0$. The following are equivalent: (i) every $T$-invariant subspace $U$ has a $T$-invariant complement $U'$ with $V=U\\oplus U'$; (ii) $m_T$ is separable, meaning that its roots in an algebraic closure are distinct; (iii) $T$ is geometrically semisimple, meaning that its scalar extension to an algebraic closure of $k$ [def-weil-algebraic-closure] has a basis of eigenvectors. For every field extension $L/k$, not necessarily perfect or algebraic, let $T_L=1\\otimes T$ on $L\\otimes_k V$, where the tensor product is universal for $k$-bilinear maps and $T_L(\\lambda\\otimes v)=\\lambda\\otimes T(v)$. Then $T_L$ is geometrically semisimple if and only if $T$ is geometrically semisimple. Geometric semisimplicity over $L$ means diagonalizability after extension to an algebraic closure of $L$. All assertions include $V=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 9(b), printed p.166, first two paragraphs: geometric semisimplicity and the minimum-polynomial criterion; Theorem 9.11, printed p.168, scalar-extension comparison. The invariant-complement formulation and the explicit arbitrary-extension equivalence are supporting linear algebra supplied by the worker, not quoted as a theorem of Milne. Mathlib/LinearAlgebra/Semisimple.lean:74-76,218-243 provides the squarefree-minpoly input."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "If $V=0$, then $L\\otimes_k V=0$: every pure tensor is zero and pure tensors span by the tensor universal property. The only subspace has the zero complement, $m_T=1$ is separable, and the empty basis is an eigenbasis over every field. Thus all assertions hold. In the remaining argument zero spaces are still permitted; the products over no eigenvalues are $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, p.166: conventions for the zero vector space, supplied explicitly."
+   }
+  },
+  {
+   "text": "First, the meaning of separability in (ii) agrees with the one in the cited nodes [def-pc-separable-polynomial], coprimality with the derivative; this holds for any field $K$ with an algebraic closure $\\Omega$ and any monic $m\\in K[X]$, in particular $m=m_T$. By [lem-weil-alg-closed-linear-factorization], $m=\\prod_{j=1}^n(X-\\gamma_j)$ in $\\Omega[X]$ with leading coefficient $1$; the roots of $m$ in $\\Omega$ are distinct exactly when no $(X-\\gamma)^2$ with $\\gamma\\in\\Omega$ divides $m$ in $\\Omega[X]$, and then the $\\gamma_j$ are pairwise distinct, since $\\gamma_i=\\gamma_j$ for $i\\ne j$ gives such a square. In that case [lem-weil-pbc-distinct-linear-factors-separable], applied to $K\\subseteq\\Omega$ and $Q=m$, makes $m$ coprime to $m'$. Conversely, if $Um+Vm'=1$ with $U,V\\in K[X]$ and $m=(X-\\gamma)^2g$ in $\\Omega[X]$, then $m'=(X-\\gamma)(2g+(X-\\gamma)g')$, so $X-\\gamma$ divides $Um+Vm'=1$, impossible. Hence below, and in steps 3-5, separable may be read in either sense. By [lem-sfb-complement-semisimple-minpoly-squarefree], condition (i) implies that $m_T$ is squarefree. Since $k$ is perfect, [lem-sfb-perfect-polynomial-squarefree-separable] makes it separable, proving (ii). Conversely, (ii) makes $m_T$ squarefree by the same polynomial lemma, and $m_T(T)=0$ by its defining property. Apply [lem-sfb-squarefree-annihilator-invariant-complements] with $p=m_T$ to obtain (i). Thus (i) and (ii) are equivalent.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "lem-weil-alg-closed-linear-factorization",
+    "lem-weil-pbc-distinct-linear-factors-separable",
+    "lem-sfb-complement-semisimple-minpoly-squarefree",
+    "lem-sfb-perfect-polynomial-squarefree-separable",
+    "lem-sfb-squarefree-annihilator-invariant-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, p.166, minimum-polynomial criterion; invariant-complement comparison uses Mathlib Semisimple.lean:74-76,218-245 and Perfect.lean:327-334."
+   }
+  },
+  {
+   "text": "We next prove (ii) $\\Leftrightarrow$ (iii) for an arbitrary field $K$, without assuming it perfect. Write $A$ for an endomorphism of a finite-dimensional $K$-space and choose an algebraic closure $\\Omega/K$. Put $B=1\\otimes A$. By [lem-sfb-endomorphism-minpoly-scalar-extension], $\\Omega\\otimes_K V$ is finite-dimensional and $m_B$ is the coefficient image of $m_A$. If $m_A$ is separable, [lem-sfb-polynomial-separability-field-map] makes $m_B$ separable; [lem-sfb-perfect-polynomial-squarefree-separable], in its implication requiring no perfectness, makes $m_B$ squarefree. It annihilates $B$, so [lem-sfb-squarefree-annihilator-invariant-complements] gives invariant complements for $B$. The algebraically closed field and finite-dimensional hypotheses now allow [lem-sfb-invariant-complements-eigenspace-span], giving a spanning set of $B$-eigenvectors. Choose finitely many of these spanning the finite-dimensional space (expand a finite spanning set as finite sums of eigenvectors), and successively remove any vector depending on the others. The resulting basis consists of eigenvectors. This proves geometric diagonalizability from separability.",
+   "uses": [
+    "lem-sfb-endomorphism-minpoly-scalar-extension",
+    "lem-sfb-polynomial-separability-field-map",
+    "lem-sfb-perfect-polynomial-squarefree-separable",
+    "lem-sfb-squarefree-annihilator-invariant-complements",
+    "lem-sfb-invariant-complements-eigenspace-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, p.166, geometric diagonalizability; supporting comparison over arbitrary K supplied by the agent, using Mathlib eigenspace-span and squarefree-annihilator leaves."
+   }
+  },
+  {
+   "text": "Conversely, keep the arbitrary field $K$ and suppose $B$ has an eigenbasis $(e_i)$ over $\\Omega$. Let $S$ be the finite set of its distinct eigenvalues and put $Q(X)=\\prod_{a\\in S}(X-a)$. For every $i$, one factor of $Q(B)e_i$ is zero, so $Q(B)=0$. Divide $Q$ by the monic polynomial $m_B$: $Q=q m_B+r$, $\\deg r<\\deg m_B$. Evaluating at $B$ gives $r(B)=0$; if $r\\ne0$, divide by its leading coefficient to obtain a monic annihilator of smaller degree, a contradiction. Thus $m_B\\mid Q$. Apply [lem-weil-pbc-distinct-linear-factors-separable] with both fields equal to $\\Omega$: the factors of $Q$ are pairwise distinct, so every divisor, in particular $m_B$, is separable. By [lem-sfb-endomorphism-minpoly-scalar-extension], this is the coefficient image of $m_A$, and [lem-sfb-polynomial-separability-field-map] reflects its separability back to $K$. This proves the converse without perfectness. Applied to $K=k$, steps 3-4 prove (ii) $\\Leftrightarrow$ (iii), completing the three-way equivalence.",
+   "uses": [
+    "lem-weil-pbc-distinct-linear-factors-separable",
+    "lem-sfb-endomorphism-minpoly-scalar-extension",
+    "lem-sfb-polynomial-separability-field-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, p.166, diagonal eigenbasis and minimum-polynomial criterion; explicit Euclidean-division argument and arbitrary-field comparison supplied by the agent. Distinct-factor criterion: Stacks 09H3 via the cited existing node."
+   }
+  },
+  {
+   "text": "Let $L/k$ be any field extension. By [lem-sfb-endomorphism-minpoly-scalar-extension], $L\\otimes_k V$ is finite-dimensional and $m_{T_L}$ is the coefficient image of $m_T$. By [lem-sfb-polynomial-separability-field-map], $m_{T_L}$ is separable if and only if $m_T$ is separable. Steps 3-4, which did not assume a perfect base, identify the first assertion with geometric diagonalizability over $L$ and the second with geometric diagonalizability over $k$. This proves preservation and reflection under arbitrary $L/k$, including imperfect or transcendental $L$, and includes $V=0$ by step 1.",
+   "uses": [
+    "lem-sfb-endomorphism-minpoly-scalar-extension",
+    "lem-sfb-polynomial-separability-field-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9b, pp.166,168: agent-supplied arbitrary-extension comparison supporting the scalar-extension use of Jordan decomposition. No invertibility assumption from Theorem 9.11 is imported."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-complement-semisimple-minpoly-squarefree",
+  "lem-sfb-perfect-polynomial-squarefree-separable",
+  "lem-sfb-squarefree-annihilator-invariant-complements",
+  "lem-sfb-endomorphism-minpoly-scalar-extension",
+  "lem-sfb-polynomial-separability-field-map",
+  "lem-sfb-invariant-complements-eigenspace-span",
+  "lem-weil-pbc-distinct-linear-factors-separable",
+  "lem-weil-alg-closed-linear-factorization",
+  "def-pc-separable-polynomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 9b, pp.166-168; detailed supporting invariant-complement and arbitrary-field arguments, with the cited Mathlib leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional endomorphism over a perfect field has invariant complements exactly when it is diagonalizable over an algebraic closure and this property is preserved under any field extension",
+   "results": "8 hits: Module.End.exists_isNilpotent_isSemisimple, Module.End.isSemisimple_iff, Module.End.isFinitelySemisimple_iff, Module.End.isSemisimple_iff', Module.End.iSup_maxGenEigenspace_eq_top, Module.End.IsFinitelySemisimple, Module.End.IsFinitelySemisimple.maxGenEigenspace_eq_eigenspace, Module.End.IsFinitelySemisimple.genEigenspace_eq_eigenspace",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.IsSemisimple.minpoly_squarefree (Semisimple.lean:243) and isSemisimple_iff (74) are relevant partial results, but do not identify complement-semisimplicity with geometric diagonalizability or prove preservation and reflection under arbitrary field extension. This comparison requires a proof, so the node remains unsplit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semisimple linear endomorphism over a perfect field has a separable annihilating polynomial and stays geometrically diagonalizable after arbitrary extension",
+   "results": "8 hits: Module.End.IsSemisimple.minpoly_squarefree, Module.End.exists_isNilpotent_isSemisimple, Module.End.IsSemisimple.of_mem_adjoin_pair, Module.End.IsSemisimple.mul_of_commute, Module.End.IsSemisimple.aeval, Module.End.isSemisimple_of_squarefree_aeval_eq_zero, Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow, Module.End.IsSemisimple.add_of_commute",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.IsSemisimple.minpoly_squarefree (Semisimple.lean:243) and isSemisimple_iff (74) are relevant partial results, but do not identify complement-semisimplicity with geometric diagonalizability or prove preservation and reflection under arbitrary field extension. This comparison requires a proof, so the node remains unsplit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically semisimple endomorphism invariant complements perfect field scalar extension",
+   "results": "8 hits: Module.End.IsSemisimple.restrict, Module.End.IsSemisimple, Module.End.isSemisimple_iff, Module.End.IsSemisimple_smul_iff, Module.End.isSemisimple_iff', Module.End.isSemisimple_restrict_iff, Module.End.IsFinitelySemisimple, Module.End.isFinitelySemisimple_iff'",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.IsSemisimple.minpoly_squarefree (Semisimple.lean:243) and isSemisimple_iff (74) are relevant partial results, but do not identify complement-semisimplicity with geometric diagonalizability or prove preservation and reflection under arbitrary field extension. This comparison requires a proof, so the node remains unsplit."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple.minpoly_squarefree",
+   "results": "1 hits: Module.End.IsSemisimple.minpoly_squarefree",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.IsSemisimple.minpoly_squarefree (Semisimple.lean:243) and isSemisimple_iff (74) are relevant partial results, but do not identify complement-semisimplicity with geometric diagonalizability or prove preservation and reflection under arbitrary field extension. This comparison requires a proof, so the node remains unsplit."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple",
+   "results": "12 hits: Module.End.IsSemisimple, Module.End.isSemisimple_id, Module.End.IsSemisimple.isFinitelySemisimple, Module.End.isFinitelySemisimple_iff_isSemisimple, Module.End.isSemisimple_neg, Module.End.isSemisimple_zero, Module.End.IsSemisimple.pow, Module.End.IsSemisimple.mul_of_commute",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.IsSemisimple.minpoly_squarefree (Semisimple.lean:243) and isSemisimple_iff (74) are relevant partial results, but do not identify complement-semisimplicity with geometric diagonalizability or prove preservation and reflection under arbitrary field extension. This comparison requires a proof, so the node remains unsplit."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emisimple.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Ss]emisimple|isSemisimple_iff|isDiagonalizable_iff",
+   "results": "5 hits: Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean; directory LinearAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.IsSemisimple.minpoly_squarefree (Semisimple.lean:243) and isSemisimple_iff (74) are relevant partial results, but do not identify complement-semisimplicity with geometric diagonalizability or prove preservation and reflection under arbitrary field extension. This comparison requires a proof, so the node remains unsplit."
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly_squarefree|separable_iff_squarefree|isSemisimple_iff",
+   "results": "6 hits: Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/Semisimple.lean, Mathlib/LinearAlgebra/JordanChevalley.lean; directory LinearAlgebra",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.End.IsSemisimple.minpoly_squarefree (Semisimple.lean:243) and isSemisimple_iff (74) are relevant partial results, but do not identify complement-semisimplicity with geometric diagonalizability or prove preservation and reflection under arbitrary field extension. This comparison requires a proof, so the node remains unsplit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dimensional endomorphism over a perfect field invariant complements, separable minimal polynomial, and diagonalizability over an algebraic closure are equivalent, and geometric diagonalizability is preserved and reflected by any field extension",
+   "results": "{\"t\": \"2026-10-24T08:51:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite dimensional endomorphism over a perfect field invariant complements, separable minimal polynomial, and diagonalizability over an algebraic closure are equivalent, and geometric diagonalizability is preserved and reflected by any field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"Module.End.IsSemisimple.minpoly_squarefree\", \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"Module.End.IsSemisimple.of_mem_adjoin_singleton\", \"Module.End.iSup_maxGenEigenspace_eq_top\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing\"], \"digest\": \"4bf770c25336ce34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: hits supply only partial semisimple or polynomial statements; scalar-extension comparison and assembly are required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant complements equivalent to geometric diagonalizability over perfect field and invariance under arbitrary scalar extension",
+   "results": "{\"t\": \"2026-10-24T08:51:58Z\", \"tool\": \"leansearch\", \"query\": \"Invariant complements equivalent to geometric diagonalizability over perfect field and invariance under arbitrary scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isSemisimple_iff\", \"Module.End.isSemisimple_iff'\", \"Module.End.invtSubmodule.isCompl_mk_iff\", \"LinearMap.IsPerfectCompl.mk\", \"Module.End.invtSubmodule.isCompl_iff\", \"Module.End.exists_isNilpotent_isSemisimple\", \"LinearMap.IsSymmetric.diagonalization.congr_simp\", \"LinearMap.IsPerfectCompl.left_top_iff\"], \"digest\": \"5e3ae462285f3c75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: hits supply only partial semisimple or polynomial statements; scalar-extension comparison and assembly are required."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple, LinearMap.baseChange",
+   "results": "{\"t\": \"2026-10-24T08:51:58Z\", \"tool\": \"loogle\", \"query\": \"Module.End.IsSemisimple, LinearMap.baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: hits supply only partial semisimple or polynomial statements; scalar-extension comparison and assembly are required."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*semisimple|semisimple.*baseChange|baseChange.*semisimple|isSemisimple_iff",
+   "results": "{\"t\": \"2026-10-24T08:51:58Z\", \"tool\": \"grep\", \"query\": \"geometric.*semisimple|semisimple.*baseChange|baseChange.*semisimple|isSemisimple_iff\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Semisimple.lean\", \"Mathlib/LinearAlgebra/Semisimple.lean\", \"Mathlib/LinearAlgebra/Semisimple.lean\", \"Mathlib/LinearAlgebra/Semisimple.lean\", \"Mathlib/LinearAlgebra/Semisimple.lean\"], \"digest\": \"592a3f464802e7da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: hits supply only partial semisimple or polynomial statements; scalar-extension comparison and assembly are required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-additive-jordan-linear-compatibility",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Propositions 17.76–17.79, printed pp.377–378, and the semisimple-centralizer case of Proposition 17.81, p.379. Use the identity component of the centralizer (Proposition 1.34, pp.16–17); it has the same Lie algebra. Nonunipotence follows from Example 17.75, p.377, and Theorem 14.5, pp.281–282. Supporting prerequisite: Proposition 17.74(a),(b), printed p.377, and the geometric faithful-matrix formulation obtained by applying it over an algebraic closure. Rational representations, not arbitrary abstract Lie representations; Sections 10a–10d give tangent injectivity and matrix differentials. The theorem is the additive counterpart of Chapter 9 and does not assert a Jordan decomposition over an imperfect base field. Supporting proof input: Preliminaries to Proposition 17.74, printed p.376, additive version of Theorem 9.11 and Propositions 9.13--9.15, pp.168--169. Tensor-sum and scalar-extension formulations are the linear-algebra input to the agent-written solution of the exercise 17.74. Supporting linear-algebra prerequisite: Comparison of geometric and invariant-complement semisimplicity, before applying polynomial Jordan decomposition and comparing scalar extensions in Milne pp.166,168,376.",
+   "via": [
+    "lem-sfb-additive-jordan-linear-compatibility",
+    "lem-sfb-algebraic-lie-additive-jordan",
+    "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-semisimplicity-field-extension",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Separated the perfect-field squarefree-to-separable passage from the arbitrary-field geometric criterion, reused the existing squarefree-annihilator, eigenspace-span and distinct-linear-factor nodes, and exposed minimum-polynomial scalar extension as a statement-only prerequisite. Added three generic Mathlib leaves after logged semantic, Loogle and source searches. Checked zero space and imperfect/transcendental extensions.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry through additive Jordan linear compatibility. Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) is the direct-image compactification step. The item is a supporting created node, not a blueprint statement; blueprint_refs ancestor returns null in the live import, which is retained. Its steps realize the supporting linear-algebra comparison at Milne pp.166,168,376 recorded in blueprint.from.place.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-d3acdbfa6",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-d3acdbfa6 (reviewer sub-agent of L); spot-checked: FIX for one C1/E6 fault, repaired in fixes/. I read the whole item, all 4 new nodes, every cited statement, Milne §9b printed p.166/168 (PDF 178-181) and the Mathlib sources at the cited lines (Semisimple.lean 74-76/233/243-245; Perfect.lean 289/327-334; Separable.lean 176-178/311-316). The fault: the item's (ii) defines separable as having distinct roots in an algebraic closure, but every cited node uses def-pc-separable-polynomial (coprime to the derivative), and no step related the two. Step 2 now opens with the bridge: lem-weil-alg-closed-linear-factorization (Mathlib leaf), then lem-weil-pbc-distinct-linear-factors-separable for distinct roots ⇒ coprime, then an elementary check that coprime excludes (X-γ)². The bridge is stated for any K, so it also covers steps 3-5. uses/proof_deps gain def-pc-separable-polynomial and lem-weil-alg-closed-linear-factorization; both are leaves/tools and no cycle arises. Steps 1-5 otherwise check out: zero space; (i)⇔(ii) through the squarefree minpoly, the perfect squarefree⇔separable clause and the annihilator node; separable⇔diagonalizable over arbitrary K through the scalar-extension node, separable_map, eigenspace-span and Euclidean division by m_B (S=∅ case fine); the L/k clause covers imperfect and transcendental L. New leaves are exact or one-line specializations (FiniteDimensional is the section variable; squarefree inline equals Mathlib's; the inline perfect-field convention matches the landed jordan-chevalley node). The unsplit lem-sfb-endomorphism-minpoly-scalar-extension is true, which I tested on a nilpotent block, a rotation ℝ→ℂ, a transcendental extension and V=0. My own grep found no Mathlib minpoly base-change theorem and no DAG duplicate. No new node restates the item. The blueprint from.node is null, inherited from the base chain. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.GeometricSemisimplicityFieldExtension",
+  "declaration": "Module.End.geometricSemisimplicity_fieldExtension",
+  "file": "lean/Sheaf/LinearAlgebra/GeometricSemisimplicityFieldExtension.lean",
+  "statement": "theorem geometricSemisimplicity_fieldExtension {k : Type u} [Field k] [PerfectField k] {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V] (T : Module.End k V) (L : Type w) [Field L] [Algebra k L] : (T.IsSemisimple ↔ (minpoly k T).Separable) ∧ ((minpoly k T).Separable ↔ ∃ (n : ℕ) (b : Module.Basis (Fin n) (AlgebraicClosure k) (AlgebraicClosure k ⊗[k] V)) (μ : Fin n → AlgebraicClosure k), ∀ i : Fin n, Module.End.HasEigenvector (T.baseChange (AlgebraicClosure k)) (μ i) (b i)) ∧ ((∃ (n : ℕ) (b : Module.Basis (Fin n) (AlgebraicClosure L) (AlgebraicClosure L ⊗[L] (L ⊗[k] V))) (μ : Fin n → AlgebraicClosure L), ∀ i : Fin n, Module.End.HasEigenvector ((T.baseChange L).baseChange (AlgebraicClosure L)) (μ i) (b i)) ↔ ∃ (n : ℕ) (b : Module.Basis (Fin n) (AlgebraicClosure k) (AlgebraicClosure k ⊗[k] V)) (μ : Fin n → AlgebraicClosure k), ∀ i : Fin n, Module.End.HasEigenvector (T.baseChange (AlgebraicClosure k)) (μ i) (b i))",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c14b8188",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Node copy differs from side-live only in lean; lean.statement verbatim in file. (i)=IsSemisimple, exactly isSemisimple_iff (Semisimple.lean:74, invariant complements); (ii)=minpoly Separable, equivalent to distinct roots per stage-1 step-2 bridge; (iii)=explicit Fin-n eigenbasis via HasEigenvector of T.baseChange (AlgebraicClosure k); TFAE as (i<->ii)/\\(ii<->iii); extension clause over arbitrary Field L/Algebra k L (no perfect/algebraic), canonical baseChange, correct direction. V=0 (n=0, minpoly 1) and universes u,v,w independent. def-wf-geometric-semisimplicity is a different notion (Weil-rep geometric semisimplicity); no duplicate in Mathlib/lean/Sheaf. stmt_deps Mathlib leaves imported; only sorry; docstrings carry Milne 9(b) place, blueprint tag and 5 proof steps; Worker report and Second reading present (self-reread, disclosed). No findings."
+ }
+}

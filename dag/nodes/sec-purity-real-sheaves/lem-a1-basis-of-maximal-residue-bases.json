@@ -1,0 +1,223 @@
+{
+ "id": "lem-a1-basis-of-maximal-residue-bases",
+ "kind": "statement",
+ "title": "A prescribed family is a basis if it is a basis in every maximal residue module",
+ "statement": "Let $E$ be a commutative ring, $P$ an $E$-module, $r\\geq0$ an integer, and $n_1,\\ldots,n_r\\in P$. For every maximal ideal $\\mathfrak q$ of $E$, write $P_{\\mathfrak q}=(E\\setminus\\mathfrak q)^{-1}P$ and $E_{\\mathfrak q}=(E\\setminus\\mathfrak q)^{-1}E$ [def-weil-pbc-module-localization], [def-weil-pbc-localization-at-prime]. Assume that $P_{\\mathfrak q}\\cong E_{\\mathfrak q}^{\\oplus r}$ for every maximal ideal $\\mathfrak q$, and that the images of $n_1,\\ldots,n_r$ form an $E/\\mathfrak q$-basis of $P/\\mathfrak qP$ for every such $\\mathfrak q$. Then the $E$-linear map $\\varphi:E^{\\oplus r}\\to P$, $(a_j)\\mapsto\\sum_j a_jn_j$, is bijective; equivalently, $n_1,\\ldots,n_r$ form an $E$-basis of $P$ [def-weil-pbc-free-module]. The assertions include the zero ring and rank zero.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 02M9 (algebra-lemma-locally-free-semi-local-free), final hint, and 03C1 (algebra-lemma-semi-local-module-basis-in-submodule), first proof sentences: lift a prescribed residue basis to a module basis."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix a maximal ideal $\\mathfrak q$ and put $S=E\\setminus\\mathfrak q$, $A=E_{\\mathfrak q}$, $M=P_{\\mathfrak q}$ and $\\mathfrak m=\\mathfrak qA$. By [def-weil-pbc-localization-at-prime], $A$ is local with maximal ideal $\\mathfrak m$. The fraction construction [def-weil-pbc-module-localization] identifies $(E^{\\oplus r})_{\\mathfrak q}$ with $A^{\\oplus r}$ by $(a_j)_j/s\\mapsto(a_j/s)_j$: a common denominator for finitely many coordinates gives the inverse. Under it, $\\varphi_{\\mathfrak q}$ is the $A$-linear map $\\psi:A^{\\oplus r}\\to M$, $(c_j)\\mapsto\\sum_jc_j(n_j/1)$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M9 (lemma-locally-free-semi-local-free), final hint; localization fractions from Tag 07JZ (definition-localization-module)."
+   }
+  },
+  {
+   "text": "The classes of $n_j/1$ generate $M/\\mathfrak mM$. Indeed, for $p/s\\in M$, the residue-basis hypothesis gives $p=\\sum_ja_jn_j+\\sum_\\ell b_\\ell p_\\ell$ with $a_j\\in E$, $b_\\ell\\in\\mathfrak q$ and $p_\\ell\\in P$. Dividing by $s$ gives $p/s=\\sum_j(a_j/s)(n_j/1)+\\sum_\\ell(b_\\ell/s)(p_\\ell/1)$; the last sum belongs to $\\mathfrak mM$. This proves generation over $A/\\mathfrak m$ directly from fractions [def-weil-pbc-module-localization].",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02M9 (lemma-locally-free-semi-local-free), final hint, and 03C1 (lemma-semi-local-module-basis-in-submodule), first proof sentences."
+   }
+  },
+  {
+   "text": "The assumed isomorphism $M\\cong A^{\\oplus r}$ makes $M$ finitely generated: transport the $r$ standard generators. Apply [lem-weil-pbc-nakayama-local-generators] to the local ring $A$, the finite module $M$, and the vectors $n_j/1$. Step 2 supplies the required residue generation, so these vectors generate $M$ and $\\psi$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK), part (8); the Nakayama invocation in Tag 03C1 (lemma-semi-local-module-basis-in-submodule)."
+   }
+  },
+  {
+   "text": "Choose an $A$-linear isomorphism $u:M\\xrightarrow{\\sim}A^{\\oplus r}$ from the hypothesis. The composite $u\\psi$ is a surjective endomorphism of the finite $A$-module $A^{\\oplus r}$. By [lem-weil-pbc-finite-module-surjective-endomorphism-bijective] it is bijective. Thus $\\psi=u^{-1}(u\\psi)$, and hence $\\varphi_{\\mathfrak q}$, is bijective.",
+   "uses": [
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05G8 (lemma-fun); details of the basis-lifting assertion in Tag 03C1 (lemma-semi-local-module-basis-in-submodule), first proof sentences."
+   }
+  },
+  {
+   "text": "This holds at every maximal ideal. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to $\\varphi$ to obtain its bijectivity, which is exactly the asserted basis property [def-weil-pbc-free-module]. The finite sums and standard generators above allow $r=0$. If $E=0$, then $p=1p=0p=0$ for every $p\\in P$, so both source and target of $\\varphi$ are zero; this also agrees with the localization criterion with no maximal ideals.",
+   "uses": [
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HN (lemma-characterize-zero-local), part (6); final conclusion of Tag 02M9 (lemma-locally-free-semi-local-free)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Details of the final hint in Tag 02M9 (lemma-locally-free-semi-local-free), as used in Tag 03C1 (lemma-semi-local-module-basis-in-submodule), first proof sentences; assembled from Tags 00DV (8), 05G8 and 00HN (6), with explicit fraction calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Vectors in a module form a basis if their images form bases modulo every maximal ideal and the module localized at every maximal ideal is free of the same finite rank",
+   "results": "{\"t\": \"2026-10-22T07:52:57Z\", \"tool\": \"leanfinder\", \"query\": \"Vectors in a module form a basis if their images form bases modulo every maximal ideal and the module localized at every maximal ideal is free of the same finite rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.basisOfFiniteTypeTorsionFree\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.exists_basis_of_basis_baseChange\", \"Module.Basis.ofIsLocalizedModule\", \"Submodule.smithNormalFormTopBasis\", \"IsLocalRing.basisQuotient\", \"Module.basisOfFiniteTypeTorsionFree'\"], \"digest\": \"3d7d0b52b4343574\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.exists_basis_of_basis_baseChange (LocalRing/Module.lean:167) assumes the ring local and finite presentation plus a tensor injectivity hypothesis. The semilocal theorem nonempty_basis_of_flat_of_finrank_eq (same file:395) chooses an unspecified basis. The given-vector global assertion requires local Nakayama, the finite endomorphism lemma and the maximal-localization criterion in combination."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting residue bases to a global basis for a module whose localizations at maximal ideals are finite free of equal rank",
+   "results": "{\"t\": \"2026-10-22T07:52:48Z\", \"tool\": \"leansearch\", \"query\": \"Lifting residue bases to a global basis for a module whose localizations at maximal ideals are finite free of equal rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.exists_basis_of_basis_baseChange\", \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"Module.lift_rank_of_isLocalizedModule_of_free\", \"Module.FinitePresentation.exists_lift_of_isLocalizedModule\", \"Module.finBasisOfFinrankEq\", \"Module.Basis.localizationLocalization_apply\", \"Module.basisOfFiniteTypeTorsionFree\"], \"digest\": \"0a9c2a6c22bdbde8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.exists_basis_of_basis_baseChange (LocalRing/Module.lean:167) assumes the ring local and finite presentation plus a tensor injectivity hypothesis. The semilocal theorem nonempty_basis_of_flat_of_finrank_eq (same file:395) chooses an unspecified basis. The given-vector global assertion requires local Nakayama, the finite endomorphism lemma and the maximal-localization criterion in combination."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, IsLocalRing.ResidueField",
+   "results": "{\"t\": \"2026-10-22T07:52:48Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, IsLocalRing.ResidueField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"Module.exists_basis_of_basis_baseChange\"], \"digest\": \"8cc28a8f5d47651d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.exists_basis_of_basis_baseChange (LocalRing/Module.lean:167) assumes the ring local and finite presentation plus a tensor injectivity hypothesis. The semilocal theorem nonempty_basis_of_flat_of_finrank_eq (same file:395) chooses an unspecified basis. The given-vector global assertion requires local Nakayama, the finite endomorphism lemma and the maximal-localization criterion in combination."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_of_basis_baseChange|span_eq_top_of_tmul_eq_basis|bijective.*(maximal|Maximal)|nonempty_basis_of_flat_of_finrank_eq",
+   "results": "{\"t\": \"2026-10-22T07:52:48Z\", \"tool\": \"grep\", \"query\": \"exists_basis_of_basis_baseChange|span_eq_top_of_tmul_eq_basis|bijective.*(maximal|Maximal)|nonempty_basis_of_flat_of_finrank_eq\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\"], \"digest\": \"740bb03cce17e642\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.exists_basis_of_basis_baseChange (LocalRing/Module.lean:167) assumes the ring local and finite presentation plus a tensor injectivity hypothesis. The semilocal theorem nonempty_basis_of_flat_of_finrank_eq (same file:395) chooses an unspecified basis. The given-vector global assertion requires local Nakayama, the finite endomorphism lemma and the maximal-localization criterion in combination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any commutative ring E and module P, prescribed r elements are an E basis if P localized at every maximal ideal is free of rank r and those elements are bases of each quotient P/qP",
+   "results": "{\"t\": \"2026-10-22T08:03:52Z\", \"tool\": \"leanfinder\", \"query\": \"For any commutative ring E and module P, prescribed r elements are an E basis if P localized at every maximal ideal is free of rank r and those elements are bases of each quotient P/qP\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.ofIsLocalizedModule\", \"Module.exists_basis_of_basis_baseChange\", \"Module.Basis.localizationLocalization\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"Module.Basis.ofIsLocalizedModule_span\", \"IsLocalRing.basisQuotient\"], \"digest\": \"61c1d9efdf694da3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.exists_basis_of_basis_baseChange (LocalRing/Module.lean:167) assumes the ring local and finite presentation plus a tensor injectivity hypothesis. The semilocal theorem nonempty_basis_of_flat_of_finrank_eq (same file:395) chooses an unspecified basis. The given-vector global assertion requires local Nakayama, the finite endomorphism lemma and the maximal-localization criterion in combination."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A family of elements of a module is a basis if it is a basis modulo every maximal ideal and all maximal localizations of the module are free of the same finite rank",
+   "results": "{\"t\": \"2026-10-24T00:33:02Z\", \"tool\": \"leansearch\", \"query\": \"A family of elements of a module is a basis if it is a basis modulo every maximal ideal and all maximal localizations of the module are free of the same finite rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.Basis\", \"finsetBasisOfLinearIndependentOfCardEqFinrank\", \"setBasisOfLinearIndependentOfCardEqFinrank\", \"Module.Free.of_basis\", \"Module.Basis.mk\", \"basisOfLinearIndependentOfCardEqFinrank\"], \"digest\": \"ee1b838adb28d7f1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local basis-lifting requires a local base; the semilocal theorem chooses an unspecified basis and assumes finite maximal spectrum and global finite flatness. The maximal-localization bijectivity criterion applies only after the local maps have been shown bijective."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, MaximalSpectrum",
+   "results": "{\"t\": \"2026-10-24T00:33:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, MaximalSpectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.nonempty_basis_of_flat_of_finrank_eq\"], \"digest\": \"0478d5fcb4b1554c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local basis-lifting requires a local base; the semilocal theorem chooses an unspecified basis and assumes finite maximal spectrum and global finite flatness. The maximal-localization bijectivity criterion applies only after the local maps have been shown bijective."
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*(maximal|residue)|bijective.*maximal",
+   "results": "{\"t\": \"2026-10-24T00:33:03Z\", \"tool\": \"grep\", \"query\": \"basis.*(maximal|residue)|bijective.*maximal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\"], \"digest\": \"edd7a8269b28b0ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local basis-lifting requires a local base; the semilocal theorem chooses an unspecified basis and assumes finite maximal spectrum and global finite flatness. The maximal-localization bijectivity criterion applies only after the local maps have been shown bijective."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed family of r vectors is a basis if the module is free of rank r at every maximal localization and the vectors form bases modulo all maximal ideals",
+   "results": "{\"t\": \"2026-10-24T00:33:04Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed family of r vectors is a basis if the module is free of rank r at every maximal localization and the vectors form bases modulo all maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.ofIsLocalizedModule\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.Basis.localizationLocalization\", \"Module.exists_basis_of_basis_baseChange\", \"IsLocalRing.basisQuotient\", \"Module.basisOfFiniteTypeTorsionFree\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.Basis.localizationLocalization_apply\"], \"digest\": \"4010ee45ccdf86cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local basis-lifting requires a local base; the semilocal theorem chooses an unspecified basis and assumes finite maximal spectrum and global finite flatness. The maximal-localization bijectivity criterion applies only after the local maps have been shown bijective."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_of_basis_baseChange|nonempty_basis_of_flat_of_finrank_eq|map_mkQ_eq_top",
+   "results": "{\"t\": \"2026-10-24T00:35:33Z\", \"tool\": \"grep\", \"query\": \"exists_basis_of_basis_baseChange|nonempty_basis_of_flat_of_finrank_eq|map_mkQ_eq_top\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"5d0da8b1cd18ed95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local basis-lifting requires a local base; the semilocal theorem chooses an unspecified basis and assumes finite maximal spectrum and global finite flatness. The maximal-localization bijectivity criterion applies only after the local maps have been shown bijective."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map from R to the power n to a module locally free of rank n is an isomorphism when reduction modulo every maximal ideal is an isomorphism",
+   "results": "{\"t\": \"2026-10-24T00:35:35Z\", \"tool\": \"leanfinder\", \"query\": \"A linear map from R to the power n to a module locally free of rank n is an isomorphism when reduction modulo every maximal ideal is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"bijective_of_localized_maximal\", \"LinearMap.split_surjective_of_localization_maximal\", \"bijective_of_isLocalized_maximal\", \"Module.free_of_flat_of_finrank_eq\", \"exists_bijective_map_powers\", \"Module.projective_of_localization_maximal'\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\"], \"digest\": \"627755a474a63e6f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local basis-lifting requires a local base; the semilocal theorem chooses an unspecified basis and assumes finite maximal spectrum and global finite flatness. The maximal-localization bijectivity criterion applies only after the local maps have been shown bijective."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-semilocal-submodule-basis",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting Tags 03C1 (algebra-lemma-semi-local-module-basis-in-submodule) and 02M9 (algebra-lemma-locally-free-semi-local-free). Supporting semilocal basis argument, original steps 6–8: local Nakayama, finite endomorphism and globalization.",
+   "via": [
+    "lem-a1-semilocal-submodule-basis",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-basis-of-maximal-residue-bases",
+  "worker": "stage1",
+  "summary": "Q93: five-step proof using existing Mathlib leaves only. Write out finite-sum localization and residue generation, apply local Nakayama, turn local surjectivity into bijectivity by the finite endomorphism theorem, then apply the maximal-localization criterion. No new nodes. Statement unchanged mathematically; add the existing basis definition citation. Check zero ring, rank zero, fields and a product ring. Search current project Lean and the whole DAG/blueprint; retain inherited searches and append searches run by Q93.",
+  "blueprint": "Inherited ancestry through lem-a1-affine-hc0: the supporting 03C1/02M9 basis-lifting argument in the affine finite-flat groupoid quotient route, specifically original steps 6–8 of lem-a1-semilocal-submodule-basis. The current latest blueprint lem-a1-affine-hc0 proof concerns compact support and contains no algebraic basis lemma; this split refines the inherited supporting algebraic dependency, without changing a chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-253b2b158",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-253b2b158 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. The delivery is one commit on 9f1530e that changes only the item and the report, with no new nodes. The item is unsplit on live, has no repair note of its own, and is the batch-5 child that step 4 of the parent lem-a1-semilocal-submodule-basis cites (the parent is split and reviewed). The statement text matches live except that it now cites def-weil-pbc-free-module, which is also added to stmt_deps; there is no mathematical change. The proof has 5 steps, and proof_deps equals the union of the uses. Step 1 (elementary): localization-at-prime makes A local with maximal ideal qA, and (E^r)_q is identified with A^r through fractions. Step 2 (elementary): a residue expansion divided by s shows that the n_j/1 generate M/mM. Step 3: the Nakayama leaf applies because A is local and M is finitely generated (it is isomorphic to A^r). Step 4: the surjective-endomorphism leaf applies to u∘psi on A^r. Step 5: bijectivity at all maximal ideals (no finiteness of P needed) gives global bijectivity, and the free-module definition turns that into a basis. All cited non-definition nodes are Mathlib leaves, so they are tools, not route departures, and there are no tool_uses and no SGA. Sources read: Stacks algebra.tex 19291 (02M9, final hint) and 19311 (03C1, opening Nakayama sentences); tags 00DV, 05G8, 00HN and 07JZ checked in tags/tags. Edge cases: E=0, r=0 (P=0 by the criterion), Z/6 with n=5 versus n=2, and Q/Z over Z (shows the local-free premise is needed). The rg -L duplicate search found no duplicate (sfb-semilocal-constant-rank-basis gives an unspecified basis). Mathlib exists_basis_of_basis_baseChange (local ring, finite presentation) and nonempty_basis_of_flat_of_finrank_eq (unspecified basis) are not one-line matches. There are 11 search records covering all three kinds. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BasisOfMaximalResidueBases",
+  "declaration": "Module.bijective_linearCombination_of_maximal_residue_bases",
+  "file": "lean/Sheaf/RingTheory/BasisOfMaximalResidueBases.lean",
+  "statement": "theorem bijective_linearCombination_of_maximal_residue_bases {E : Type u} [CommRing E] {P : Type v} [AddCommGroup P] [Module E P] (r : ℕ) (n : Fin r → P) (hfree : ∀ (q : Ideal E) [q.IsMaximal], Nonempty (Module.Basis (Fin r) (Localization.AtPrime q) (LocalizedModule q.primeCompl P))) (hres : ∀ (q : Ideal E) [q.IsMaximal], ∃ b : Module.Basis (Fin r) (E ⧸ q) (P ⧸ (q • (⊤ : Submodule E P))), ∀ i : Fin r, b i = (q • (⊤ : Submodule E P)).mkQ (n i)) : Function.Bijective (Fintype.linearCombination E n)",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e8cd7a40",
+  "group": "Q100",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean (live has lean: null); lean.statement matches the file exactly; no new nodes or dep modules. Clause check: E any CommRing (no Nontrivial), P any module in an independent universe with no finiteness added, hfree = Nonempty Basis (Fin r) over Localization.AtPrime q of LocalizedModule q.primeCompl P (unspecified iso as in the node), hres pins b i = mkQ (n i) in P/(q•⊤) over E/q (the Torsion.Basic instance), conclusion Bijective (Fintype.linearCombination E n). Source Stacks 02M9 hint / 03C1 (algebra.tex 19291-19345) read; proof leaves map_mkQ_eq_top, OrzechProperty, bijective_of_localized_maximal checked. Edge cases E=0, r=0, fields, Z/6 hold. Parent SemilocalSubmoduleBasis is a different (existential selection) statement, not a duplicate. Docstrings give source, blueprint and 5 proof steps; sorry only; imports justified. No compile (no change). No findings."
+ }
+}

@@ -31,169 +31,128 @@
  ],
  "proof": [
   {
-   "text": "Write $r_{ji}:R_i\\to R_j$ for the ordinary coefficient-ring maps. Put $M_i=L_i^{[m]}$. In a trivialization $L_i=R_i e_i$, the positive power has basis $e_i^{\\otimes m}$, the zero power has basis $1$, and the negative power has the dual basis; hence every $M_i$ is a line. Apply the tensor-power and dual scalar comparisons to $b_{ji}$ to obtain $b_{ji,m}:M_i\\otimes_{R_i}R_j\\cong M_j$. For $m<0$ its formula is characterized by $b_{ji,-r}(f\\otimes s)(b_{ji,r}(l\\otimes t))=str_{ji}(f(l))$ for $r>0$. Thus it commutes with evaluation. The iteration and unitor clauses of the cited scalar comparison give $b_{20,m}=b_{21,m}(b_{10,m}\\otimes1)$ and multiplication for $b_{ii,m}$. This includes $m=0$ and agrees with the specified $b_{ji}$ at $m=1$.",
+   "text": "Apply the ordinary line comparison to $R_i,L_i,b_{ji}$. It supplies the signed lines, exact termwise twists, evaluations, and $\\bar\\beta$ with its generator formula, tower, evaluation and ordinary unit equations.",
    "uses": [
-    "lem-sp-invertible-tensor-scalar-extension",
-    "def-pur-sheaf-hom"
+    "lem-pur-ordinary-line-derived-scalar-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EL (lemma-tensor-product-pullback) and 03EO (lemma-internal-hom-adjoint-tensor); signed-power evaluation formula is the agent expansion of blueprint Proof (3)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), termwise inverse tensor pair; old steps 1-3."
    }
   },
   {
-   "text": "The line-derived-tensor lemma, applied to $M_i$ and its dual, identifies $T_{i,m}$ with termwise tensor on arbitrary unbounded complexes and supplies its exact inverse and the specified evaluation. Choose a flat-term K-flat representative $P\\to K$. The complex $P\\otimes M_i$ is again flat-term K-flat: its terms are flat since tensor by $M_i$ is an exact equivalence, and for acyclic $A$ the complex $A\\otimes(P\\otimes M_i)\\cong(A\\otimes P)\\otimes M_i$ is acyclic. Change of rings preserves the flat-term K-flat class. The balanced map $((p\\otimes l)\\otimes s)\\mapsto(p\\otimes s)\\otimes b_{ji,m}(l\\otimes1)$ is consequently a chain isomorphism computing $B_{ji}T_{i,m}\\cong T_{j,m}B_{ji}$. Its inverse is the reverse tensor reassociation followed by $b_{ji,m}^{-1}$. These are maps of sheafified tensors by their bilinear universal property. They are natural in chain maps, commute with differentials (the line is in degree zero), and hence with the inverted quasi-isomorphisms. The K-flat localization equivalence therefore descends them to the asserted natural isomorphism $\\bar\\beta_{ji,m}$ on $D(R_i)$. Lean realization of exact: the already specified sheaf evaluations at m and -m give an equivalence by CategoryTheory.Equivalence.mk. Equivalences preserve finite limits and colimits, and finite-colimit preservation implies additivity. This avoids repeating the local rank-one argument for exactness; the later representative arguments remain as above.",
+   "text": "The line-completeness theorem applies to each signed line, using the exactness in step 1. The legacy comparison identifies its completeness predicate with the one here (choose an auxiliary finite field of characteristic different from $\\ell$). Thus $T_{i,m}K$ is complete. The finite-free comparison makes every needed $\\chi$ invertible and $B_{ji}K$ complete; its isomorphism with $C_{ji}K$ transports the completeness triangle, with identity on both products.",
    "uses": [
-    "lem-pur-line-unbounded-derived-tensor",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change) and 07A4 (lemma-pullback-tensor-product), with the displayed representative map written out."
-   }
-  },
-  {
-   "text": "Write $d_K:B_{21}B_{10}K\\cong B_{20}K$ for the normalized ordinary scalar associator. Its formula is $(p\\otimes s)\\otimes t\\mapsto p\\otimesr_{21}(s)t$. For the ordinary tower square, both paths on $((p\\otimes l)\\otimes s)\\otimes t$ give $(p\\otimesr_{21}(s)t)\\otimes b_{20,m}(l\\otimes1)$: step 1 gives exactly the equality of the two line factors. The ordinary evaluation square is checked on $((p\\otimes l)\\otimes f)\\otimes s$ with $f\\in M_i^\\vee$; both paths give $p\\otimesr_{ji}(f(l))s$. Evaluation is linear, so these computations hold after adding arbitrary scalars. Equality on the presheaf pure tensors implies equality after sheafification; the localization equivalence in step 2 then implies equality of the derived natural transformations. Thus the two displayed identities of the item hold with $B,d,\\bar\\beta$ replacing $C,a,\\beta$. The unit square is the same calculation $((p\\otimes l)\\otimes s)\\mapsto sp\\otimes l$ when the ring map is the identity.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tensor product section, before Tag 0GMW: scalar base-change and associativity identities; local evaluation calculation from blueprint Proof (3)."
-   }
-  },
-  {
-   "text": "Let $K$ be complete and write $K_n$ for its restricted derived reductions. The completeness definition supplies a distinguished triangle $K\\to\\prod_n^D K_n\\xrightarrow{1-s}\\prod_n^D K_n\\to K[1]$ with its prescribed quotient components. By the line-derived-tensor lemma, $T_{i,m}$ is a triangulated equivalence, and the equivalence-preserves-limits lemma identifies $T_{i,m}(\\prod_n^D K_n)$ with $\\prod_n^D T_{i,m}K_n$. The product existence and termwise representation hold by exact countable products and the derived-product theorem. The balanced chain formula $(p\\otimes l)\\otimes\\bar a\\mapsto(p\\otimes\\bar a)\\otimes l$ identifies the reduction tower of $T_{i,m}K$ with $(T_{i,m}K_n)_n$, including transitions and quotient maps. Under these identifications the image triangle has first map the quotient components and second map $1-s$: project to its $n$th factor to get $q_n-t_nq_{n+1}$. It is therefore the required completeness triangle for $T_{i,m}K$.",
-   "uses": [
-    "def-weil-derived-complete",
-    "lem-pur-line-unbounded-derived-tensor",
-    "lem-galois-equivalence-preserves-limits",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-existence",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.5.2 and Proposition 3.5.1, p. 24: reduction-tower completeness; preservation by the line equivalence is the agent argument."
-   }
-  },
-  {
-   "text": "The finite-free completed-scalar comparison supplies natural $\\chi_{ji}:B_{ji}\\to C_{ji}$, invertible on complete inputs, and says that $B_{ji}K$ is complete for complete $K$. Consequently $C_{ji}K$ is complete as well. Step 4 makes $\\chi_{ji,T_{i,m}K}$ invertible. Define $\\beta_{ji,m,K}=T_{j,m}(\\chi_{ji,K})\\bar\\beta_{ji,m,K}\\chi_{ji,T_{i,m}K}^{-1}$. All three factors are invertible and natural on complete inputs, giving the asserted natural isomorphism with no choice of an inverse at chain level. For later calculations put $z_K=\\chi_{21,C_{10}K}\\,B_{21}(\\chi_{10,K}):B_{21}B_{10}K\\cong C_{21}C_{10}K$. The transported associator is precisely $a_K=\\chi_{20,K}d_Kz_K^{-1}$. All components in $z$ are invertible by completeness just established. In this and the following steps juxtaposition means composition, with the rightmost map applied first. Lean realization of extension_complete: keep the same K-flat resolution and reduction tower, compose its representative isomorphism with chi, and postcompose the connecting map with the shifted chi. A triangle isomorphism, identity on both products, transports distinguishedness and preserves the canonical augmentation legs.",
-   "uses": [
+    "lem-weil-integral-line-tensor-completeness",
+    "lem-sf-derived-complete-legacy-comparison",
     "lem-weil-finite-free-completed-scalar-comparison",
     "def-weil-derived-complete"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10, Lemma 3.4.12 and Proposition 3.5.1: prescribed completion comparisons; the conjugation is the agent construction."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), integral inverse pair; old steps 4-5 and completeness part of 10."
    }
   },
   {
-   "text": "These formulas use the prescribed cone, rather than an arbitrary realization of a derived limit. On $P$ the comparison $\\chi$ has product coordinates $p\\otimes s\\mapsto p\\otimes\\bar s$ and zero shifted-product coordinate, by the finite-free comparison statement. Applying the ordinary line map before the $n$th quotient gives $(p\\otimes l)\\otimes s\\mapsto(p\\otimes\\bar s)\\otimes b_{ji,m}(l\\otimes1)$. The formula commutes with quotient transitions, since replacing $\\bar s$ by its further reduction changes only that scalar. Thus step 5 is exactly conjugation by these specified quotient-cone maps. No inference that maps in the derived category are detected by finite projections, and no inverse chain map to $\\chi$, is needed.",
+   "text": "Apply the associator-transport lemma, indexed by the distinct fields ($B,C,\\chi,d,\\lambda$ depend only on them), on the complete objects, to the ordinary associators $d$ and multiplication unitors $\\lambda$: $d$ is coherent by the successive-quotient lemma, and $d_{jii}=B_{ji}(\\lambda_i)$, $d_{jji}=\\lambda_{j,B_{ji}}$ by $s\\cdot1=s=1\\cdot s$ on $(p\\otimes s)\\otimes t\\mapsto p\\otimes st$. It gives $a$, $u_i=\\lambda_i\\chi_{ii}^{-1}$, coherence on four-field chains and both unit laws; by the $L=E$ clause of the finite-free comparison, $u_i^{-1}$ is the natural completeness map.",
+   "uses": [
+    "lem-pur-transition-associator-iso-transport",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), scalar conventions; old steps 5 and 9."
+   }
+  },
+  {
+   "text": "Apply twist/evaluation transport, indexed by $0,1,2$, on complete objects (step 2) to step 1 and these $\\chi,a,u$. Its tower hypothesis for $(2,1,0)$ is step 1; for a repeated index $d$ is a unitor and it follows from the unit equation of step 1 and naturality of $\\bar\\beta,\\lambda$. Its formula is the prescribed $\\beta$; its equations give the displayed completed identities.",
+   "uses": [
+    "lem-pur-transition-twist-evaluation-iso-transport",
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), inverse-pair compatibility; old steps 5, 7-8."
+   }
+  },
+  {
+   "text": "On $P$, $\\chi$ has quotient coordinates and zero shifted-product coordinate. Composing the ordinary generator formula with the $n$th quotient gives $(p\\otimes l)\\otimes s\\mapsto(p\\otimes\\bar s)\\otimes b_{ji,m}(l\\otimes1)$; further reduction changes only $\\bar s$. This is the specified cone comparison.",
    "uses": [
     "lem-weil-finite-free-completed-scalar-comparison",
     "def-weil-integral-scalar-extension"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.5.2, p. 24, with the strict cone and zero-component normalization specified in the cited nodes."
-   }
-  },
-  {
-   "text": "For the completed tower equation precompose both sides by $z_{T_{0,m}K}$. In the left side substitute $a\\,z=\\chi_{20}d$ and $\\beta\\,\\chi_T=T\\chi\\,\\bar\\beta$. Naturality of $\\chi_{21}$ at $\\beta_{10,m,K}$ and then naturality of $\\bar\\beta_{21,m}$ at $\\chi_{10,K}$ move the inner comparisons next to their inverses. Cancelling them leaves $T_{2,m}(\\chi_{20,K})\\,T_{2,m}(d_K)\\,\\bar\\beta_{21,m,B_{10}K}\\,B_{21}(\\bar\\beta_{10,m,K})$. The right side becomes $T_{2,m}(\\chi_{20,K})\\,\\bar\\beta_{20,m,K}\\,d_{T_{0,m}K}$. These agree by the ordinary tower equation in step 3. Since $z_{T_{0,m}K}$ is invertible, the completed equation follows.",
-   "uses": [],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence; explicit natural-isomorphism cancellation for the coefficient-line tower."
+    "place": "Strict completion normalization; old step 6."
    }
   },
   {
-   "text": "For the completed evaluation equation precompose by $\\chi_{ji,T_{i,-m}T_{i,m}K}$. Two applications of $\\beta\\,\\chi_T=T\\chi\\,\\bar\\beta$ turn the left side into $\\epsilon_{j,m,C_{ji}K}\\,T_{j,-m}T_{j,m}(\\chi_{ji,K})\\,T_{j,-m}(\\bar\\beta_{ji,m,K})\\,\\bar\\beta_{ji,-m,T_{i,m}K}$. Naturality of evaluation moves $\\chi$ to the outside. The ordinary evaluation equality of step 3 makes this $\\chi_{ji,K}\\,B_{ji}(\\epsilon_{i,m,K})$. Naturality of $\\chi_{ji}$ identifies it with $C_{ji}(\\epsilon_{i,m,K})\\,\\chi_{ji,T_{i,-m}T_{i,m}K}$, the precomposed right side. The precomposing map is invertible by step 4, so it cancels. This proves exactly the order of twists in the displayed evaluation formula, including $m<0$ and $m=0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), evaluation and inverse tensor pair; explicit naturality calculation after completion."
-   }
-  },
-  {
-   "text": "The normalized ordinary associators have coherent iteration by the successive-extension lemma. For any four-field chain indexed $0,1,2,3$, with the same notation for its coefficient maps, their pentagon can also be read on $(((p\\otimes s)\\otimes t)\\otimes u)$: either route gives $p\\otimesr_{31}(s)r_{32}(t)u$. Their multiplication units obey both unit laws by $s\\cdot1=s=1\\cdot s$. For any longer coefficient chain identify its ordinary composite with its completed composite by successive $\\chi$'s; for three arrows this identification is $\\chi_{32,C_{21}C_{10}K}\\,B_{32}(\\chi_{21,C_{10}K})\\,B_{32}B_{21}(\\chi_{10,K})$. Naturality cancels the intermediate comparisons at every edge of the completed pentagon, leaving the ordinary pentagon. Thus it commutes. If $\\lambda_i:B_{ii}\\cong1$ is multiplication, the completed unit is $u_{i,K}=\\lambda_{i,K}\\chi_{ii,K}^{-1}$. The same cancellation converts both completed unit laws to the ordinary laws. The finite-free comparison identifies $u_i^{-1}$ with the specified natural completeness map, so these are the required units even when uniformizers for repeated fields differ. Lean realization of unit_normalization substitutes the normalized ordinary unit into the identity clause of finiteFreeCompletedScalarComparison; naturality is cancellation against chi. The repeated equality unfolds beta and unit and cancels inverse chi factors using functoriality.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tensor product section, associativity and scalar base change; finite-free completion comparison for the repeated-field normalization."
-   }
-  },
-  {
-   "text": "Assume now the stated preservation of the integral constructible subcategories by $T_{i,m}$. Integral scalar extension preserves them by the cited constructibility theorem. Thus every object and component above lies in those full subcategories, so their equations restrict without alteration. The transformations are coefficient-linear: their chain formulas are linear over the target coefficient sheaf and all factors of $\\chi$ are morphisms in its module-derived category. Under rationalization each equation is sent to the same equation, since the localization sends composition to composition. On a morphism $\\sum_r f_r\\otimes a_r$ naturality is the sum of the integral naturality equations tensored by $a_r$ in the final field. Inverses remain inverses. The scalar associator and units just constructed are the ordinary tensor associator and multiplication transported by the specified completion comparison; their rationalizations are therefore the canonical scalar-extension comparisons of the cited scalar-composition theorem, using the integral-representative scalar functors in the rationalization definition. For intrinsic_complete, choose a prime different from l and the finite field ZMod q with its algebraic closure, then apply sfDerivedComplete_iff_legacy to the intrinsic completeness component. Full-subcategory isoMk restricts evaluation and beta. For rationalEpsilon and rationalBeta, localize each integral component, conjugate by the specified object equalities, prove naturality by tensor induction, and use the integral representatives for uniqueness. The rational evaluation and tower equalities are the localized integral equalities, transported with those component formulas and the scalar extension formula on 1 tensor f. The repeated-field rational equality follows similarly, including the inverses of the specified scalar-unit components. These Lean deductions use the still-stated ambient coherence assertions; they do not assert those holes closed.",
+   "text": "Under the stated preservation hypothesis all maps restrict to the full integral subcategories: scalar extension preserves them. Exact termwise twists are coefficient-linear, as are their derived functors, so semilinear scalar localization extends the comparisons and preserves all equations. On $f\\otimes a$ the extension is the integral map tensored by $a$. The associator and units are the rationalizations of ordinary reassociation and multiplication conjugated by $\\chi$, the canonical scalar comparisons in the stated rationalization convention.",
    "uses": [
     "lem-weil-integral-scalar-extension-constructible",
+    "lem-pur-line-unbounded-derived-tensor",
+    "lem-pur-semilinear-scalar-localization",
     "def-weil-rationalization-karoubi",
-    "lem-weil-scalar-extension-composition",
-    "lem-sf-derived-complete-legacy-comparison"
+    "lem-weil-scalar-extension-composition"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10 and Proposition 3.5.1, together with the rationalization and scalar-composition constructions in the DAG; agent expansion of blueprint Proof (3)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), rational coefficients; old step 10."
    }
   },
   {
-   "text": "Finally replace repeated coefficient transitions by the identity using the specified completed unit and the ordinary multiplication unitor. Substituting the conjugation formula for beta identifies its scalar-normalized component with the ordinary signed-power comparison induced by b. It need not be identity for an arbitrary prescribed b. Identify the source and target signed lines along that comparison as well; the component then is identity. For the diagonal multiplication datum b_ii this line comparison is already the identity by the ordinary pure-tensor unit square. The two scalar unit laws make associators with repeated adjacent fields identity after scalar normalization. Transporting the tower and evaluation equations along both scalar and line identifications preserves them, and rationalization preserves the transported equations. This is the normalized diagram; no strict equality of the original completion functor with the identity is used.",
-   "uses": [],
+   "text": "At a repeated field, the general unit clause of step 4 with the multiplication unitor makes the unit-normalized $\\beta$ the ordinary one, which step 1 gives as tensor with the signed-power map of $b_{ji}$. Identifying the lines along it gives identity (already so for multiplication). Step 3 normalizes repeated associators. Conjugating and rationalizing preserves both equations.",
+   "uses": [
+    "lem-pur-transition-twist-evaluation-iso-transport",
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-    "place": "Proof (3), final sentence; normalization by the explicit scalar units, not a strict identification of completion with the identity."
+    "place": "Proof (3), repeated-field normalization; old step 11."
+   }
+  },
+  {
+   "text": "The ordinary identity-scalar unitor is obtained directly from the existing chain multiplication isomorphism and the universal left-derived counit of the existing cochain model. The chain multiplication identifies the target functor with the derived localization Q, so it inverts quasi-isomorphisms and the universal derived counit is invertible. Descend the normalized cochain composite through Q using fully faithful precomposition. For uniqueness, the already proved good-complex localization theorem makes precomposition by the good-complex functor fully faithful; the prescribed component equality therefore determines the natural transformation. This proves ordinaryUnit_existsUnique without the full ordinary signed-line comparison package. The remaining steps above are still needed for the other open declarations.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06YY; localization of the chain multiplication comparison, expanded in the existing ordinaryUnit_existsUnique docstring."
    }
   }
  ],
  "proof_deps": [
-  "lem-sp-invertible-tensor-scalar-extension",
-  "def-pur-sheaf-hom",
-  "lem-pur-line-unbounded-derived-tensor",
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-derived-complete",
-  "lem-galois-equivalence-preserves-limits",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-existence",
+  "lem-pur-ordinary-line-derived-scalar-comparison",
+  "lem-weil-integral-line-tensor-completeness",
+  "lem-sf-derived-complete-legacy-comparison",
   "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-complete",
+  "lem-pur-transition-associator-iso-transport",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-transition-twist-evaluation-iso-transport",
   "def-weil-integral-scalar-extension",
   "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-line-unbounded-derived-tensor",
+  "lem-pur-semilinear-scalar-localization",
   "def-weil-rationalization-karoubi",
   "lem-weil-scalar-extension-composition",
-  "lem-sf-derived-complete-legacy-comparison"
+  "lem-pur-integral-operations-well-defined"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
-  "place": "Proof (3), final sentence: explicit line scalar/evaluation coherence for the prescribed strict completion, using Stacks 03EL, 03EO, 06YY and 07A4 and Bhatt–Scholze §§3.4–3.5. J6 partial stage-3 realization: equivalence exactness, isomorphism transport of completeness, unit cancellation, full restriction and scalar localization of evaluation, beta, tower and repeated-field equations; remaining normalization and ambient coherence steps retain their original plan."
+  "place": "Proof (3), final inverse tensor pair and integral/rational scalar conventions; Q61 finer split of all original steps following the maintainer re-split note of 2026-10-22. Non-elementary ordinary and categorical transport arguments are assigned to three statement-only nodes. T5 (2026-10-25): ordinary identity unitor proved directly by Mathlib localization and the existing good-complex localization; other open declarations retain their planned steps."
  },
  "mathlib_searches": [
   {
@@ -314,61 +273,52 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-completed-line-tensor-coherence",
   "worker": "stage1",
-  "summary": "Statement unchanged. Split into signed line base change, normalized ordinary derived comparisons, completeness by a triangulated equivalence, and explicit conjugation calculations for tower/evaluation, scalar pentagon/units, rationalization and normalization. No new nodes: all substantive tools already exist; the remaining formulas are elementary proof steps. No Lean attachment found.",
-  "blueprint": "Realizes det-def-sp-tate-twist-locally-free Proof (3), final sentence on tensor inverses through integral/rational coefficient conventions; retains the prescribed quotient-tower comparison and unnormalized completion units.",
+  "summary": "Statement and its existing correction retained verbatim. Re-split following released maintainer note: three statement-only subarguments (ordinary derived line comparison, associator/unit transport, twist/evaluation transport); completeness and rationalization reuse existing theorems. Original proof and its full argument allocation are retained in report.md.",
+  "blueprint": "Realizes det-def-sp-tate-twist-locally-free Proof (3), final inverse tensor pair and integral/rational coefficient convention; no route change.",
   "tool_uses": [
    {
-    "node": "lem-sp-invertible-tensor-scalar-extension",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
+    "node": "lem-weil-integral-line-tensor-completeness",
+    "why": "Generic completeness preservation by an invertible coefficient line; no geometry or purity route is replaced."
    },
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
-   },
-   {
-    "node": "lem-pur-kflat-change-of-rings",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
-   },
-   {
-    "node": "lem-sfb-successive-derived-quotient-normalization",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
-   },
-   {
-    "node": "lem-weil-derived-limit-existence",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
+    "node": "lem-sf-derived-complete-legacy-comparison",
+    "why": "Identifies the existing intrinsic and legacy quotient-tower completeness predicates for arbitrary schemes."
    },
    {
     "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
+    "why": "Supplies the actual quotient-cone comparison and its invertibility on complete inputs."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Supplies ordinary balanced scalar associators and their iterated coherence."
    },
    {
     "node": "lem-weil-integral-scalar-extension-constructible",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
+    "why": "Allows restriction of scalar functors to the full integral constructible categories."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Extends semilinear functors, natural comparisons and equations to raw scalar localization."
    },
    {
     "node": "lem-weil-scalar-extension-composition",
-    "why": "Generic sheaf/derived-category or coefficient scalar-extension tool used as stated to construct the line comparison; it does not replace the unit’s affine-space purity route."
+    "why": "Names the canonical rational scalar composition comparison in the project convention."
    }
   ]
  },
@@ -384,15 +334,18 @@
   "lem-weil-derived-limit-existence",
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-integral-scalar-extension-constructible",
-  "lem-weil-scalar-extension-composition"
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-integral-line-tensor-completeness",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-pur-semilinear-scalar-localization"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q44-caf0a4e63",
-  "group": "Q44",
+  "reviewer": "NT-cc-Q61-b9e4fbecc",
+  "group": "Q61",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-caf0a4e63 (reviewer sub-agent of L); spot-checked: PASS: I read the whole item and every cited statement; no fixes were needed. The delivery is one commit with the item and its report, no new nodes, and the unit record unchanged. The statement and stmt_deps are verbatim against side-live, where the item is still unsplit with an empty proof. There is no repair note and the item is not dropped. No cycle: the dependency closure (2692 nodes) contains neither the item nor its citer det-def-sp-tate-twist-locally-free. No SGA source is cited. I checked the sources: Stacks 03EL/03EO/06YY/07A4 labels, Bhatt–Scholze Def. 3.4.10, Lemma 3.4.12, Prop. 3.5.1 and Def. 3.5.2 (pp. 22–24), and blueprint main-20261015 sk-def-sp-tate-twist-locally-free Proof (3). I redid the computations: step 1 dual formula b_{-r}(f⊗s)(b_r(l⊗t))=st·r(f(l)); step 3 pure-tensor tower, evaluation and unit squares; step 4 completeness transport through the triangulated equivalence with (TK)_n≅T(K_n) and products preserved; steps 7–8 cancellations, where every χ that gets inverted is evaluated at a complete object; step 9 pentagon on four fields and a_(i,i,0)=u_C; step 11 T(u)β_ii=u_T. Edge cases tested: m=0, m<0, K=0, repeated fields with different uniformizers, ramified extensions. All 12 declared tool uses are generic and accepted. Advisory: (1) step 10 identifies the rationalized associator with the 'canonical' iso of lem-weil-scalar-extension-composition, whose statement leaves it unpinned; that node's construction (proof step 2) is this conjugated associator, and the clause belongs to the item's own unchanged statement. (2) lem-weil-integral-line-tensor-completeness overlaps step 4 as a Lean interface; writing the argument out is acceptable. (3) Q68 has a parallel delivery of the same item (6057a0e7). (4) citations.json is mentioned in the report but not delivered. (5) lem-weil-integral-twist-scalar-coherence is a special case of this item."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-b9e4fbecc (reviewer sub-agent of L); spot-checked: FIX with three step repairs; no node is dropped and no statement is changed. The delivery answers the released re-split note of 2026-10-22, and the old 11-step proof is still the live one. Statement and maintainer fields are byte-equal to live. There is no cycle: the item is not in its own closure of 11490 nodes. No SGA source is cited. Allocation of the old steps: old 1-3 go to new node A, lem-pur-ordinary-line-derived-scalar-comparison, which builds on the existing lem-pur-signed-line-scalar-tensor-tower. Old 4 goes to the existing lem-weil-integral-line-tensor-completeness plus the legacy comparison. Old 7-8 go to new node C, the twist/evaluation transport. Old 9 goes to new node B, the associator transport. Old 10 goes to the constructibility node plus lem-pur-semilinear-scalar-localization. Old 11 goes to step 7 with the general unit clauses. Nothing was blurred, and the three new nodes are of comparable size. Checks done: A's tower, evaluation, unit and arbitrary-b clauses on pure tensors, including m=0, m<0 and non-flat ring maps. B's unit law a_jii=C_ji(u_i), from naturality of chi. C's conjugation and unit clauses; the general (j,i) unit clause keeps the inherited correction with the -1 example. Duplicate candidates read and found not to state the new nodes: signed-line-derived-base-change (ring isomorphism only), integral-line-derived-comparisons, twist-derived-scalar, coherent-pair-functor-descent, split-family-strictification, fd-completion-inverse-scalar-coherence, perfect-scalar-tensor-coherence. Sources: Stacks 07A4 (lemma-pullback-tensor-product) and blueprint main-20261015 Proof (3). Repairs: (1) Step 3 now applies node B indexed by the distinct fields, checks d_jii=B(lambda_i) and d_jji=lambda_j, and cites the L=E clause of the finite-free comparison for u^-1 being the completeness map. (2) Step 4: node C needs the ordinary tower equation for every index triple, but node A states it only for (2,1,0); for repeated indices it is now derived from A's unit equation and naturality, and A is cited. (3) Step 7 had uses=[] and now cites nodes A and C. Proof length after the fix: 2864 characters. Accepted tool_uses: the seven generic coefficient tools listed in the split_report.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.CompletedLineTensorCoherence",
@@ -640,12 +593,12 @@
   ]
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J6",
+  "group": "T5",
   "result": "pass",
-  "landing": "20261021T182318-L-1175256",
+  "landing": "20261025T181137-L-4080685",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,291 @@
+{
+ "id": "lem-trf-derived-strict-open-colimit",
+ "kind": "statement",
+ "title": "Extension-by-zero colimit of a strict system of local quasi-isomorphisms",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $\\lambda$ be a set-sized ordinal, and let $(U_\\alpha)_{\\alpha<\\lambda}$ be an increasing open cover of $X$. For each $\\alpha$ let $I_\\alpha$ be an unbounded cochain complex of $\\mathcal O_{U_\\alpha}$-modules [def-pc-cochain-complex-modules]. Suppose quasi-isomorphisms [def-pc-quasi-iso-modules] $f_{\\beta\\alpha}:I_\\beta\\to I_\\alpha|_{U_\\beta}$ are given for $\\beta<\\alpha<\\lambda$, satisfying $f_{\\gamma\\alpha}=(f_{\\beta\\alpha}|_{U_\\gamma})\\circ f_{\\gamma\\beta}$ as chain maps whenever $\\gamma<\\beta<\\alpha$. Write $j_\\alpha:U_\\alpha\\hookrightarrow X$ and use normalized extension by zero $j_{\\alpha,!}$ and its adjunction unit $\\eta_\\alpha:I_\\alpha\\xrightarrow{\\sim}(j_{\\alpha,!}I_\\alpha)|_{U_\\alpha}$ [lem-weil-pbc-module-extension-by-zero-adjunction], applied termwise. For $\\beta<\\alpha$ let $T_{\\beta\\alpha}:j_{\\beta,!}I_\\beta\\to j_{\\alpha,!}I_\\alpha$ be the degreewise adjoint of $(\\eta_\\alpha|_{U_\\beta})\\circ f_{\\beta\\alpha}$. These are chain maps and satisfy $T_{\\gamma\\alpha}=T_{\\beta\\alpha}\\circ T_{\\gamma\\beta}$. Their termwise colimit $L=\\varinjlim_{\\alpha<\\lambda}j_{\\alpha,!}I_\\alpha$ exists as a cochain complex [def-weil-pbc-category-colimit]. If $c_\\alpha:j_{\\alpha,!}I_\\alpha\\to L$ are its coprojections, then $s_\\alpha=(c_\\alpha|_{U_\\alpha})\\circ\\eta_\\alpha:I_\\alpha\\to L|_{U_\\alpha}$ is a quasi-isomorphism and $s_\\beta=(s_\\alpha|_{U_\\beta})\\circ f_{\\beta\\alpha}$ as chain maps for every $\\beta<\\alpha$. Consequently $Q(s_\\alpha):QI_\\alpha\\xrightarrow{\\sim}(QL)|_{U_\\alpha}$ is an isomorphism in $D(\\mathcal O_{U_\\alpha})$ [def-pc-derived-category], where $Q$ denotes passage to the derived category. No continuity of the open cover at limit indices, no K-injectivity, and no negative-Hom vanishing are assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union), proof, extension-by-zero transition maps, termwise colimit and its stalk display, and the final colimit on X (returned steps 2, 4--6 and 9)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-module-extension-by-zero-adjunction",
+  "def-weil-pbc-category-colimit",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Put $D_\\alpha=j_{\\alpha,!}I_\\alpha$ and abbreviate restriction by $R_\\beta$. The adjunction bijection sends $T_{\\beta\\alpha}$ to $R_\\beta(T_{\\beta\\alpha})\\eta_\\beta=R_\\beta(\\eta_\\alpha)f_{\\beta\\alpha}$. Since extension by zero is additive, the adjuncts of $d_{D_\\alpha}T_{\\beta\\alpha}$ and $T_{\\beta\\alpha}d_{D_\\beta}$ agree: naturality of $\\eta_\\alpha$ moves the differential through the unit, and $d f_{\\beta\\alpha}=f_{\\beta\\alpha}d$. Injectivity of the bijection makes $T_{\\beta\\alpha}$ a chain map. For $\\gamma<\\beta<\\alpha$, the adjunct of $T_{\\beta\\alpha}T_{\\gamma\\beta}$ is\n$$R_\\gamma(T_{\\beta\\alpha})R_\\gamma(\\eta_\\beta)f_{\\gamma\\beta}=R_\\gamma(\\eta_\\alpha)(f_{\\beta\\alpha}|_{U_\\gamma})f_{\\gamma\\beta}=R_\\gamma(\\eta_\\alpha)f_{\\gamma\\alpha}.$$\nThus it equals $T_{\\gamma\\alpha}$. Add identity transitions to obtain a diagram indexed by the small ordinal $\\lambda$.",
+   "uses": [
+    "lem-weil-pbc-module-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, label lemma-glueing-increasing-union, proof: termwise extension-by-zero colimit, stalk display, and final colimit on X."
+   }
+  },
+  {
+   "text": "The small Zariski opens site has sheafification, so the module-sheaf colimit theorem gives $L^n=\\operatorname{colim}_\\alpha D_\\alpha^n$ in every integer degree. Define $d_L^n$ by $d_L^n c_\\alpha^n=c_\\alpha^{n+1}d_{D_\\alpha}^n$. Compatibility follows from Step 1. The composites $d_L^{n+1}d_L^n$ and zero agree after every coprojection and hence agree by colimit uniqueness. The $c_\\alpha$ are chain maps. A compatible family of chain maps out of the $D_\\alpha$ factors degreewise uniquely through $L$; the resulting maps commute with differentials because this can again be checked after every coprojection. Thus this is also a colimit in complexes. This construction includes $\\lambda=0$; the cover then forces $X=\\varnothing$, and all assertions indexed by $\\alpha$ are vacuous.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, termwise colimit; Modules on Sites Tag 03DB, label lemma-limits-colimits, existence of module-sheaf colimits."
+   }
+  },
+  {
+   "text": "Fix $\\alpha<\\lambda$ and $q\\in\\mathbf Z$, so $\\lambda$ is nonempty. Its ordinal order is filtered: the larger of two indices receives both arrows and there are no distinct parallel arrows. Filtered colimits of module sheaves are exact by the first assertion of [lem-pc-module-filtered-colimits-tensor], applied to the small Zariski opens site and $\\mathcal O_X$. Apply [src-weil-homology-preserves-exact-colimits] to this abelian category, this index category and the cochain shape on $\\mathbf Z$. By Step 2 its conclusion says that the maps $H^q(c_\\beta)$ exhibit $H^q(L)$ as the colimit of $H^q(D_\\beta)$, for all $\\beta<\\lambda$. There is no bound on the complexes or on $q$.",
+   "uses": [
+    "lem-pc-module-filtered-colimits-tensor",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, stalk display and exact filtered-colimit argument; Modules on Sites Tag 03DB (lemma-limits-colimits), exactness; the exact-colimit homology statement is also the three-term calculation of Algebra Tag 00DB (lemma-directed-colimit-exact)."
+   }
+  },
+  {
+   "text": "Fix $x\\in U_\\alpha$. Stalk preservation of filtered colimits applied to the cocone in Step 3 gives\n$$H^q(L)_x\\cong\\operatorname{colim}_{\\beta<\\lambda}H^q(D_\\beta)_x,$$\nwith legs $H^q(c_\\beta)_x$. Kernels, images and cokernels commute with stalks, so the formula $H^q(K)=\\ker d^q/\\operatorname{im}d^{q-1}$ gives natural identifications $H^q(K)_x\\cong H^q(K_x)$. For $\\beta\\ge\\alpha$, we have $x\\in U_\\beta$; the inside-stalk isomorphism of extension by zero identifies $(D_\\beta)_x$ with $(I_\\beta)_x$. By the adjunction formula the unit is $\\eta_\\beta=\\theta_{I_\\beta}|_{U_\\beta}$, so its stalk at any $y\\in U_\\beta$ is this inside-stalk isomorphism; by the stalk criterion on $U_\\beta$ each $\\eta_\\beta$ is an isomorphism, as written in the statement. The adjunction formula from Step 1 identifies $(T_{\\beta\\delta})_x$ with $(f_{\\beta\\delta})_x$ for $\\alpha\\le\\beta<\\delta$. Since $f_{\\beta\\delta}$ is a quasi-isomorphism, exactness of stalks makes all corresponding maps $H^q(D_\\beta)_x\\to H^q(D_\\delta)_x$ isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-filtered-colimit",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-extension-by-zero-adjunction",
+    "def-pc-quasi-iso-modules",
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, label lemma-glueing-increasing-union, proof: termwise extension-by-zero colimit, stalk display, and final colimit on X."
+   }
+  },
+  {
+   "text": "Removing indices below $\\alpha$ does not change the colimit in Step 4. Explicitly, any cocone $(m_\\beta)_{\\beta\\ge\\alpha}$ on the tail extends to the whole diagram by setting $m_\\gamma=m_{\\max(\\alpha,\\gamma)}H^q(T_{\\gamma,\\max(\\alpha,\\gamma)})_x$, with identity transitions when the indices coincide. Step 1 proves the cocone identities, and every extension is forced by the arrow $\\gamma\\to\\max(\\alpha,\\gamma)$. Thus restriction and extension of cocones are inverse, preserving the vertex and its morphisms; the universal property gives the asserted unchanged colimit and its legs.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, label lemma-glueing-increasing-union, proof: termwise extension-by-zero colimit, stalk display, and final colimit on X."
+   }
+  },
+  {
+   "text": "Write $M_\\beta=H^q(D_\\beta)_x$ on this tail, and $u_{\\beta\\delta}:M_\\beta\\to M_\\delta$ for its isomorphism transitions. The maps $u_{\\alpha\\beta}^{-1}:M_\\beta\\to M_\\alpha$ form a cocone since $u_{\\alpha\\delta}=u_{\\beta\\delta}u_{\\alpha\\beta}$. They induce $v:\\operatorname{colim}_{\\beta\\ge\\alpha}M_\\beta\\to M_\\alpha$. If $k_\\beta$ are its colimit legs, then $vk_\\alpha=1$, and $k_\\alpha v k_\\beta=k_\\alpha u_{\\alpha\\beta}^{-1}=k_\\beta$, hence $k_\\alpha v=1$. Therefore the $\\alpha$ leg is an isomorphism. Under Steps 4--5 and the unit identification this leg is precisely $H^q(s_\\alpha)_x$. This holds for every $x\\in U_\\alpha$ and integer $q$. The stalk criterion for module-sheaf isomorphisms makes every $H^q(s_\\alpha)$ an isomorphism; hence $s_\\alpha$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-module-iso-on-stalks",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, label lemma-glueing-increasing-union, proof: termwise extension-by-zero colimit, stalk display, and final colimit on X."
+   }
+  },
+  {
+   "text": "For $\\beta<\\alpha$, the cocone identity and the adjunct formula give the chain-map equality\n$$s_\\beta=R_\\beta(c_\\beta)\\eta_\\beta=R_\\beta(c_\\alpha)R_\\beta(T_{\\beta\\alpha})\\eta_\\beta=R_\\beta(c_\\alpha)R_\\beta(\\eta_\\alpha)f_{\\beta\\alpha}=(s_\\alpha|_{U_\\beta})f_{\\beta\\alpha}.$$\nRestriction is exact, so it commutes with kernels and cokernels and therefore preserves quasi-isomorphisms; it consequently descends to the derived localizations. By the definition of these localizations $Q(s_\\alpha)$ is invertible, with target $Q(L|_{U_\\alpha})=(QL)|_{U_\\alpha}$. This proves the derived assertion. The proof used only strict composition, the unit, and exact filtered colimits; no continuity condition on the cover, K-injectivity or negative-Hom vanishing entered.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-module-extension-by-zero-adjunction",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-weil-abstract-derived-category",
+    "def-pc-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B, label lemma-glueing-increasing-union, proof: termwise extension-by-zero colimit, stalk display, and final colimit on X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-extension-by-zero-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-category-colimit",
+  "lem-pc-module-filtered-colimits-tensor",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-weil-pbc-module-stalk-filtered-colimit",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-weil-abstract-derived-category",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D6B, label lemma-glueing-increasing-union, proof: termwise extension-by-zero colimit, stalk display, and final colimit on X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(colimit|directLimit).*(quasiIso|quasi_iso)|extension[Bb]y[Zz]ero|increasing.*open",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: shape-extension quasi-isomorphism lemmas extend the grading, not sheaves along opens; presheaf colimit existence does not state the quasi-isomorphism or strict coprojection assertion on nested opens"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"colimit\"",
+   "results": "12 hits; top=['PresheafOfModules.Finite.hasFiniteColimits', 'PresheafOfModules.hasColimitsOfSize', 'PresheafOfModules.hasColimitsOfShape', 'PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits', 'PresheafOfModules.toPresheaf_preservesColimitsOfSize', 'PresheafOfModules.toPresheaf_preservesColimitsOfShape', 'PresheafOfModules.Finite.evaluation_preservesFiniteColimits', 'PresheafOfModules.evaluation_preservesColimitsOfSize']; note=; digest=89c3406a36c8c8b8",
+   "date": "2026-10-22",
+   "verdict": "no match: shape-extension quasi-isomorphism lemmas extend the grading, not sheaves along opens; presheaf colimit existence does not state the quasi-isomorphism or strict coprojection assertion on nested opens"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a filtered colimit of complexes of module sheaves on increasing open subsets commutes with stalks",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For increasing open subsets and strictly composable quasi-isomorphisms of complexes, the colimit of extensions by zero restricts quasi-isomorphically to each complex",
+   "results": "8 hits; top=['HomologicalComplex.quasiIsoAt_extendMap_iff', 'HomologicalComplex.quasiIso_extendMap_iff', 'HomologicalComplex.instQuasiIsoExtendMap', 'HomologicalComplex.isSupported_iff_of_quasiIso', \"HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE'\", 'HomologicalComplex.extendHomologyIso', 'HomologicalComplex.extendOpcyclesIso', 'HomologicalComplex.pOpcycles_extendOpcyclesIso_hom']; note=; digest=cb30ff8dd69c08f3",
+   "date": "2026-10-22",
+   "verdict": "no match: shape-extension quasi-isomorphism lemmas extend the grading, not sheaves along opens; presheaf colimit existence does not state the quasi-isomorphism or strict coprojection assertion on nested opens"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise direct limit of extension by zero complexes on nested open subschemes is locally quasi-isomorphic to every term",
+   "results": "8 hits; top=['HomologicalComplex.isSupported_iff_of_quasiIso', 'HomologicalComplex.quasiIsoAt_extendMap_iff', 'HomologicalComplex.quasiIso_extendMap_iff', 'CochainComplex.cm5b.instQuasiIsoIntP', 'HomologicalComplex.instQuasiIsoExtendMap', 'HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported', 'DerivedCategory.exists_iso_Q_obj_of_isGE', 'DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE']; note=; digest=f77458b633375227",
+   "date": "2026-10-22",
+   "verdict": "no match: shape-extension quasi-isomorphism lemmas extend the grading, not sheaves along opens; presheaf colimit existence does not state the quasi-isomorphism or strict coprojection assertion on nested opens"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly composable quasi-isomorphisms on increasing open subsets give a colimit of extensions by zero locally quasi-isomorphic to each complex",
+   "results": "{\"t\": \"2026-10-23T12:17:03Z\", \"tool\": \"leanfinder\", \"query\": \"Strictly composable quasi-isomorphisms on increasing open subsets give a colimit of extensions by zero locally quasi-isomorphic to each complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.extend.rightHomologyData.isColimitCokernelCofork\", \"HomologicalComplex.extend.leftHomologyData.isColimitCokernelCofork\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"HomologicalComplex.quasiIsoAt_extendMap_iff\", \"HomologicalComplex.instQuasiIsoExtendMap\"], \"digest\": \"9c16bafc91e01d7a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned homological extensions change complex shapes, not open subsets; presheaf colimits and exact-colimit infrastructure do not state this local quasi-isomorphism and strict compatibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-23T12:17:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.Finite.hasFiniteColimits\", \"PresheafOfModules.hasColimitsOfSize\", \"PresheafOfModules.hasColimitsOfShape\", \"PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits\", \"PresheafOfModules.toPresheaf_preservesColimitsOfSize\", \"PresheafOfModules.toPresheaf_preservesColimitsOfShape\", \"PresheafOfModules.Finite.evaluation_preservesFiniteColimits\", \"PresheafOfModules.evaluation_preservesColimitsOfSize\"], \"digest\": \"89c3406a36c8c8b8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned homological extensions change complex shapes, not open subsets; presheaf colimits and exact-colimit infrastructure do not state this local quasi-isomorphism and strict compatibility theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit|directLimit).*(quasiIso|quasi_iso)|extension[Bb]y[Zz]ero",
+   "results": "{\"t\": \"2026-10-23T12:17:04Z\", \"tool\": \"grep\", \"query\": \"(colimit|directLimit).*(quasiIso|quasi_iso)|extension[Bb]y[Zz]ero\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned homological extensions change complex shapes, not open subsets; presheaf colimits and exact-colimit infrastructure do not state this local quasi-isomorphism and strict compatibility theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of extensions by zero along nested open subsets is quasi-isomorphic on each open to its given complex",
+   "results": "{\"t\": \"2026-10-23T12:17:33Z\", \"tool\": \"leansearch\", \"query\": \"A filtered colimit of extensions by zero along nested open subsets is quasi-isomorphic on each open to its given complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasFilteredColimitsOfSize\", \"CategoryTheory.Limits.colim.mapShortComplex\", \"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\", \"ModuleCat.FilteredColimits.colimit_zero_eq\", \"CategoryTheory.ShortComplex.isColimitColimitCocone\", \"CategoryTheory.ShortComplex.hasColimit_of_hasColimitπ\", \"CategoryTheory.ShortComplex.hasColimitsOfShape\", \"AddGrpCat.FilteredColimits.colimit_zero_eq\"], \"digest\": \"2672f043095b576c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned homological extensions change complex shapes, not open subsets; presheaf colimits and exact-colimit infrastructure do not state this local quasi-isomorphism and strict compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise direct limit of extension by zero complexes on nested opens restricts quasi-isomorphically to every term",
+   "results": "{\"t\": \"2026-10-23T12:17:38Z\", \"tool\": \"leanfinder\", \"query\": \"Termwise direct limit of extension by zero complexes on nested opens restricts quasi-isomorphically to every term\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.quasiIsoAt_extendMap_iff\", \"HomologicalComplex.quasiIsoAt_ιTruncLE\", \"HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE'\", \"HomologicalComplex.quasiIsoAt_πTruncGE\", \"HomologicalComplex.instQuasiIsoAtιTruncLEF\", \"HomologicalComplex.extendOpcyclesIso\", \"HomologicalComplex.instQuasiIsoExtendMap\", \"HomologicalComplex.truncLE'.quasiIsoAt_truncLE'ToRestriction\"], \"digest\": \"3fdd3145249d14c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned homological extensions change complex shapes, not open subsets; presheaf colimits and exact-colimit infrastructure do not state this local quasi-isomorphism and strict compatibility theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-basis-increasing-union",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; BBD descent for derived objects with vanishing negative self extensions. Supporting BBD descent component: Tag 0D6B (cohomology-lemma-glueing-increasing-union), specialized to the ringed space of a scheme. Re-split component: proof, extension-by-zero transition maps, termwise colimit and its stalk display, and the final colimit on X (returned steps 2, 4--6 and 9).",
+   "via": [
+    "lem-trf-derived-basis-increasing-union",
+    "lem-trf-derived-basis-bbd-descent",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-strict-open-colimit",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 0D6B strict-colimit argument into adjoint chain-map identities, termwise construction, exact-colimit cohomology, stalk comparison, explicit tail cocone equivalence, inverse cocone for isomorphic transitions, and strict compatibility in the derived category. Reused existing nodes only. No statement change or attachment.",
+  "blueprint": "Realizes the inherited supporting Tag 0D6B extension-by-zero colimit and stalk-display component below lem-trf-local-term-locality, through the blueprint.from.via chain. Read latest ancestor proof and current sk-i-curve-zero; their contracting-correspondence route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic Filtered colimits and tensor complexes of sheaves of modules input to the prescribed Tag 0D6B colimit-and-stalk argument; no node of sk-i-curve-zero states this supporting module/category fact."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic Homology preserves exact colimits of complexes input to the prescribed Tag 0D6B colimit-and-stalk argument; no node of sk-i-curve-zero states this supporting module/category fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-filtered-colimit",
+    "why": "Generic Stalks of filtered colimits of sheaves of modules are filtered colimits of stalks input to the prescribed Tag 0D6B colimit-and-stalk argument; no node of sk-i-curve-zero states this supporting module/category fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-filtered-colimits-tensor",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-weil-pbc-module-stalk-filtered-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-12522c5c5",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-12522c5c5 (reviewer sub-agent of L); spot-checked: Read Stacks 0D6B (cohomology.tex l.11343-11438). The item is the strict-colimit part of that proof: strict f given as input, so no K-injectivity, negative-Ext vanishing or continuity is needed. Coefficients are O_X-modules on Zariski opens, matching the source and the parent lem-trf-derived-basis-increasing-union. Its Steps 2-3 use only the qis property of s_α and s_β=(s_α|)f. No new nodes and no SGA. Steps 1-7 checked against each cited statement. S1: adjunct ψ↦R(ψ)η with η=θ|_U; chain-map and composition identities re-derived. S2: colimit existence from sheaves-colimits-forgetful (2). S3: λ filtered; small site, commutative O; exact filtered colimits; homology preserves exact colimits for the unbounded cochain shape. S4: stalks of the colimit; H^q commutes with stalks (stalk-exact 2-4); inside-stalk iso (3) gives (T)_x↔(f)_x on the tail. S5: tail cofinality written out via max(α,γ). S6: inverse-cocone argument verified; stalk criterion on U_α. S7: chain identity re-derived; restriction exact, so Q(s_α) invertible. Edge cases λ=0, 1, successor, discontinuous limit, empty or repeated opens, unbounded q: all OK. Duplicate search over the 0D6B family (basis-bbd-descent, increasing-union, limit-extension, ordinal-strictification) found no duplicate. Accepted tool_uses: 3 generic module/category nodes. FIX: the statement says the unit η_α is an isomorphism, but no step proved it. Added one sentence to Step 4 (η_β=θ|_{U_β}; its stalks are the adjunction (3) iso; stalk criterion gives an isomorphism) and lem-weil-pbc-module-iso-on-stalks to Step 4 uses. File: fixes/dag/nodes/sec-trace-formula/lem-trf-derived-strict-open-colimit.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedStrictOpenColimit",
+  "declaration": "AlgebraicGeometry.StrictOpenColimit.derived_strict_open_colimit",
+  "declarations": [
+   "AlgebraicGeometry.StrictOpenColimit.extension",
+   "AlgebraicGeometry.StrictOpenColimit.unit",
+   "AlgebraicGeometry.StrictOpenColimit.derived_strict_open_colimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedStrictOpenColimit.lean",
+  "statement": "theorem derived_strict_open_colimit (X : Scheme.{u}) (E : Type u) [LinearOrder E] [WellFoundedLT E] (U : E → X.Opens) (hU : Monotone U) (_hcover : iSup U = ⊤) (I : ∀ a : E, CochainComplex (SheafOfModules.{u} (X.ringCatSheaf.over (U a))) ℤ) (f : ∀ (b a : E) (h : b < a), I b ⟶ ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hU h.le))).mapHomologicalComplex (.up ℤ)).obj (I a)) (_hf : ∀ (b a : E) (h : b < a), QuasiIso (f b a h)) (_hcomp : ∀ (c b a : E) (hcb : c < b) (hba : b < a) (n : ℤ) (V : X.Opens) (hV : V ≤ U c), ((f c a (hcb.trans hba)).f n).val.app (Opposite.op (Over.mk (homOfLE hV))) = ((f c b hcb).f n).val.app (Opposite.op (Over.mk (homOfLE hV))) ≫ ((f b a hba).f n).val.app (Opposite.op (Over.mk (homOfLE (hV.trans (hU hcb.le)))))) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ a : E, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U a).toScheme.toRingedSpace))] : (∀ a : E, IsIso (unit X (U a) (I a))) ∧ ∃ (D : E ⥤ CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (e : ∀ a : E, D.obj a ≅ (extension X (U a)).obj (I a)), (∀ (b a : E) (h : b < a) (n : ℤ), (Classical.choose (Scheme.Modules.module_extensionByZero_adjunction X (U b)).2).homEquiv _ _ (((e b).inv ≫ D.map (homOfLE h.le) ≫ (e a).hom).f n) = (f b a h).f n ≫ (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hU h.le))).map ((unit X (U a) (I a)).f n) ≫ (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hU h.le))).hom.app (((extension X (U a)).obj (I a)).X n)) ∧ ∃ c : Cocone D, Nonempty (IsColimit c) ∧ (∀ n : ℤ, Nonempty (IsColimit ((HomologicalComplex.eval _ (.up ℤ) n).mapCocone c))) ∧ ∃ s : ∀ a : E, I a ⟶ (Functor.mapHomologicalComplex (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (U a)) (.up ℤ)).obj c.pt, (∀ a : E, s a = unit X (U a) (I a) ≫ (Functor.mapHomologicalComplex (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (U a)) (.up ℤ)).map ((e a).inv ≫ c.ι.app a)) ∧ (∀ a : E, QuasiIso (s a)) ∧ (∀ (b a : E) (h : b < a), s b = f b a h ≫ ((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hU h.le))).mapHomologicalComplex (.up ℤ)).map (s a) ≫ (Functor.mapHomologicalComplexCompIso (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hU h.le))) (.up ℤ)).hom.app c.pt) ∧ (∀ a : E, IsIso (DerivedCategory.Q.map (((Equivalence.functor (C := SheafOfModules.{u} (X.ringCatSheaf.over (U a))) (D := SheafOfModules.{u} (moduleRings (U a).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (U a))).mapHomologicalComplex (.up ℤ)).map (s a)) ≫ (schemeOpenRestriction X (U a)).mapDerivedCategoryFactors.inv.app c.pt))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a28bebd0d",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and all stmt_deps (extension-by-zero adjunction with its homEquiv pinned by the section formula, so unit and T are uniquely determined; overFunctorMap is identity-component and canonical; schemeOpenRestriction.mapDerivedCategoryFactors gives the canonical derived target). _hcomp sectionwise over all objects of Over (U c) in every degree equals strict chain-map composition. Existential D/e only presents objects, since T is pinned and the coprojections are written on the actual extensions. The colimit is stated both as complexes and degreewise; s is pinned; QuasiIso, the strict s-compatibility and the IsIso of the canonical derived map are all present. E : Type u with LinearOrder+WellFoundedLT, no Nonempty; empty-index case covered (X empty, clauses vacuous). No extra assumptions. lean.statement matches the file verbatim. The only stmt_deps addition is the landed node def-pc-derived-open-restriction-maps (allowed). No hollow defs, source and blueprint docstrings present, 7-step proof docstring, only sorry, report has both sections. No file changed, so no compile."
+ }
+}

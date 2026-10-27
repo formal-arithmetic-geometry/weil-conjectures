@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-noetherian-integral-colimit-image-model",
+ "kind": "statement",
+ "title": "A finite colimit algebra has a finite image-subalgebra model",
+ "statement": "Let $I$ be a small nonempty directed partially ordered set. Let $(S_i)_{i\\in I}$ and $(D_i)_{i\\in I}$ be directed systems of commutative rings, with compatible homomorphisms $S_i\\to D_i$ (every transition square commutes). Suppose every $D_i$ is integral over $S_i$, meaning that each element satisfies a monic polynomial over $S_i$ [def-weil-pbc-integral-closure]. Put $S=\\varinjlim_i S_i$ and $D=\\varinjlim_i D_i$, with their canonical compatible $S$-algebra structure [def-weil-pbc-category-colimit]. Assume $S$ is Noetherian [def-weil-pbc-noetherian-ring] and $D$ is finite as an $S$-module [def-weil-finitely-generated-module]. Then there exist $i\\in I$ and an $S_i$-subalgebra $H\\subseteq D_i$, finite as an $S_i$-module, for which the canonical multiplication map\n$$H\\otimes_{S_i}S\\longrightarrow D,\\qquad h\\otimes s\\longmapsto \\bar h s,$$\nis an isomorphism of $S$-algebras [def-weil-pbc-module-tensor-product]. Here an $S_i$-subalgebra is a subring containing the image of $S_i$ with its induced algebra structure. No injectivity, flatness, normality or finite presentation of the transition maps, and no Noetherianity of the rings $S_i,D_i$, is assumed. The conclusion concerns one finite subalgebra $H$ of a stage, not the whole ring $D_i$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N9, lemma-colimit-category-fp-algebras, finite generators and relations proof, combined with Tag 00GM, lemma-characterize-integral; image-subalgebra refinement written by the agent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite $S$-module generators of $D$. They also generate it as an $S$-algebra, since their $S$-linear span already contains every element. Thus $D$ is of finite type over the Noetherian ring $S$. Apply [lem-weil-pbc-finite-type-noetherian-finite-presentation] and choose a presentation $D\\cong S[X_1,\\ldots,X_n]/(f_1,\\ldots,f_m)$ as in [def-weil-pbc-finitely-presented-algebra]. Write $d_a$ for the image of $X_a$ in $D$. The presentation generators need not be the original module generators.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation), part (3); Tag 05N9, proof of (1), choice of finite presentation"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-filtered-colimit-commrings-elementwise](1) separately to the diagrams $S_i$ and $D_i$. Lift all $d_a$ and all coefficients occurring in the finite list $f_b$. Choose a common upper bound $i_0$ of these finitely many stages, transporting the lifts by the transition maps. Denote the resulting elements by $x_a\\in D_{i_0}$ and the lifted polynomials by $g_b\\in S_{i_0}[X_1,\\ldots,X_n]$. Then $x_a$ maps to $d_a$, and coefficientwise $g_b$ maps to $f_b$. A finite set has a common upper bound by repeated directedness; for an empty set choose any stage using nonemptiness.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), finite generators and relations proof; image-subalgebra refinement by Q82"
+   }
+  },
+  {
+   "text": "For each $b$, evaluation $g_b(x_1,\\ldots,x_n)$ maps to $f_b(d_1,\\ldots,d_n)=0$ in $D$: ring maps preserve the finite sums and products in a polynomial, and the transition squares commute. By [lem-pc-filtered-colimit-commrings-elementwise](2), comparing this evaluation with $0\\in D_{i_0}$, it vanishes at some later stage. Choose one $i\\geq i_0$ where all these finitely many evaluations vanish. Transport the $x_a$ and the $g_b$ there and keep the same notation. The resulting equations $g_b(x)=0$ hold in $D_i$. If $m=0$, take $i=i_0$.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), finite generators and relations proof; image-subalgebra refinement by Q82"
+   }
+  },
+  {
+   "text": "Let $H=S_i[x_1,\\ldots,x_n]\\subseteq D_i$, the image of polynomial evaluation over $S_i$. Every $x_a$ is integral over $S_i$ by the hypothesis on $D_i$. Hence [lem-sc-finite-generated-integral-subring] makes $H$ a finite $S_i$-module. It contains the image of $S_i$ by construction, including when the structural map is not injective. The equations $g_b(x)=0$ also hold in $H$, since its inclusion into $D_i$ is injective.",
+   "uses": [
+    "lem-sc-finite-generated-integral-subring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GM (lemma-characterize-integral), finite-adjoin argument in its proof"
+   }
+  },
+  {
+   "text": "Put $T=H\\otimes_{S_i}S$. The two compatible maps $H\\to D$ and $S\\to D$ define the $S$-algebra map $\\phi:T\\to D$, $h\\otimes s\\mapsto\\bar h s$, by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Evaluate $S[X_1,\\ldots,X_n]$ in $T$ at $X_a\\mapsto x_a\\otimes1$. Each $f_b$ evaluates to $g_b(x)\\otimes1=0$: the lifted coefficients move between tensor factors by the balancing relation. This defines an $S$-algebra map $\\psi:D\\to T$ using the chosen presentation [def-weil-pbc-finitely-presented-algebra]. Explicitly, send the class of $p$ to this evaluation of $p$; if $p-p^{\\prime}=\\sum_b q_b f_b$, their evaluations differ by $\\sum_b q_b(x\\otimes1)\\,0=0$, so the map is well defined.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), finite generators and relations proof; image-subalgebra refinement by Q82"
+   }
+  },
+  {
+   "text": "The composite $\\phi\\psi$ fixes $S$ and every $d_a$, hence fixes every polynomial in the $d_a$ and is $\\mathrm{id}_D$. For $h\\in H$ choose a polynomial $p\\in S_i[X_1,\\ldots,X_n]$ with $h=p(x)$. Then $\\psi(\\bar h)=p(x\\otimes1)=h\\otimes1$, by the balancing relation on each coefficient. Thus $\\psi\\phi(h\\otimes s)=\\psi(\\bar h s)=(h\\otimes1)(1\\otimes s)=h\\otimes s$. Pure tensors generate $T$ as a module [def-weil-pbc-module-tensor-product], so $\\psi\\phi=\\mathrm{id}_T$. The displayed canonical map is therefore an isomorphism of $S$-algebras, and $H$ has all the required properties.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), finite generators and relations proof; image-subalgebra refinement by Q82"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-sc-finite-generated-integral-subring",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00FP(3), 05N9 proof of (1), and 00GM; explicit image-subalgebra refinement and inverse construction by Q82"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ff]inite.*[Ss]ubalgebra|[Ss]ubalgebra.*[Ff]inite|[Ff]inite[Pp]resentation.*[Dd]irect[Ll]imit",
+   "results": "{\"t\": \"2026-10-24T06:59:59Z\", \"tool\": \"grep\", \"query\": \"[Ff]inite.*[Ss]ubalgebra|[Ss]ubalgebra.*[Ff]inite|[Ff]inite[Pp]resentation.*[Dd]irect[Ll]imit\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Small.lean\", \"Mathlib/RingTheory/Finiteness/NilpotentKer.lean\", \"Mathlib/RingTheory/Finiteness/Subalgebra.lean\", \"Mathlib/RingTheory/Finiteness/Subalgebra.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/EssentialFiniteness.lean\", \"Mathlib/RingTheory/EssentialFiniteness.lean\"], \"digest\": \"4c458e8c2a8efb67\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.FinitePresentation.of_finiteType supplies a finite presentation over a Noetherian base, and RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit factors a map from one fixed-base finitely presented ring. Neither gives a finite image-subalgebra model over varying coefficient rings in one line. The smooth/etale descent results require smoothness/etaleness, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, DirectLimit",
+   "results": "{\"t\": \"2026-10-24T06:59:59Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FinitePresentation, DirectLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.FinitePresentation.of_finiteType supplies a finite presentation over a Noetherian base, and RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit factors a map from one fixed-base finitely presented ring. Neither gives a finite image-subalgebra model over varying coefficient rings in one line. The smooth/etale descent results require smoothness/etaleness, absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented algebra in a directed colimit of algebras admits a model as an image subalgebra at a finite stage",
+   "results": "{\"t\": \"2026-10-24T06:59:59Z\", \"tool\": \"leansearch\", \"query\": \"Finitely presented algebra in a directed colimit of algebras admits a model as an image subalgebra at a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FinitePresentation\", \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit\", \"Algebra.Presentation.finitePresentation_of_isFinite\", \"CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable\", \"FirstOrder.Language.DirectLimit.exists_fg_substructure_in_Sigma\", \"AlgHom.FinitePresentation\", \"Module.FinitePresentation.mk\"], \"digest\": \"429bb0014a917e8d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.FinitePresentation.of_finiteType supplies a finite presentation over a Noetherian base, and RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit factors a map from one fixed-base finitely presented ring. Neither gives a finite image-subalgebra model over varying coefficient rings in one line. The smooth/etale descent results require smoothness/etaleness, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra over a Noetherian filtered colimit ring is the scalar extension of a finite subalgebra inside some stage of a compatible integral algebra diagram",
+   "results": "{\"t\": \"2026-10-24T07:00:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite algebra over a Noetherian filtered colimit ring is the scalar extension of a finite subalgebra inside some stage of a compatible integral algebra diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType\", \"Algebra.QuasiFinite\", \"fg_of_fg_of_fg\", \"AlgHom.FinitePresentation.of_finiteType\", \"Algebra.FinitePresentation.of_finiteType\", \"Algebra.EssFiniteType.of_comp\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.EssFiniteType.comp\"], \"digest\": \"5d446e1886b1f7d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.FinitePresentation.of_finiteType supplies a finite presentation over a Noetherian base, and RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit factors a map from one fixed-base finitely presented ring. Neither gives a finite image-subalgebra model over varying coefficient rings in one line. The smooth/etale descent results require smoothness/etaleness, absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generators and polynomial relations in a directed union of integral algebras descend to a finite subalgebra whose tensor product is the limit",
+   "results": "{\"t\": \"2026-10-24T07:00:05Z\", \"tool\": \"leanfinder\", \"query\": \"Finite generators and polynomial relations in a directed union of integral algebras descend to a finite subalgebra whose tensor product is the limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Smooth.exists_finiteType\", \"exists_subalgebra_of_fg\", \"Algebra.Etale.exists_subalgebra_fg\", \"exists_fg_and_mem_baseChange\", \"Algebra.FinitePresentation.baseChange\"], \"digest\": \"64b7217c65340960\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.FinitePresentation.of_finiteType supplies a finite presentation over a Noetherian base, and RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit factors a map from one fixed-base finitely presented ring. Neither gives a finite image-subalgebra model over varying coefficient rings in one line. The smooth/etale descent results require smoothness/etaleness, absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, DirectLimit",
+   "results": "{\"t\": \"2026-10-24T07:25:34Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FinitePresentation, DirectLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned smooth/etale descent theorems require additional hypotheses; finite presentation base change, finite integral adjoin, and finite-type tower lemmas do not assert an image-subalgebra model for two arbitrary compatible varying-base diagrams. Read the hit signatures; existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra over a Noetherian directed colimit ring is obtained by scalar extension from a finite subalgebra of a stage of a compatible integral algebra diagram",
+   "results": "{\"t\": \"2026-10-24T07:25:34Z\", \"tool\": \"leanfinder\", \"query\": \"A finite algebra over a Noetherian directed colimit ring is obtained by scalar extension from a finite subalgebra of a stage of a compatible integral algebra diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType\", \"fg_of_fg_of_fg\", \"Algebra.QuasiFinite\", \"Algebra.EssFiniteType.of_comp\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.EssFiniteType.comp\", \"Algebra.fg_trans'\", \"exists_subalgebra_of_fg\"], \"digest\": \"03614a5cc6c88e6c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned smooth/etale descent theorems require additional hypotheses; finite presentation base change, finite integral adjoin, and finite-type tower lemmas do not assert an image-subalgebra model for two arbitrary compatible varying-base diagrams. Read the hit signatures; existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ss]ubalgebra|[Ff]inite[Pp]resentation.*[Dd]irect[Ll]imit",
+   "results": "{\"t\": \"2026-10-24T07:25:34Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ss]ubalgebra|[Ff]inite[Pp]resentation.*[Dd]irect[Ll]imit\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PolynomialLaw/Basic.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/Finiteness/Defs.lean\", \"Mathlib/RingTheory/Finiteness/Basic.lean\"], \"digest\": \"fd3dd335976ff2c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned smooth/etale descent theorems require additional hypotheses; finite presentation base change, finite integral adjoin, and finite-type tower lemmas do not assert an image-subalgebra model for two arbitrary compatible varying-base diagrams. Read the hit signatures; existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite subalgebra of an integral algebra diagram descends finite algebra over the colimit ring by base change",
+   "results": "{\"t\": \"2026-10-24T07:25:34Z\", \"tool\": \"leansearch\", \"query\": \"Finite subalgebra of an integral algebra diagram descends finite algebra over the colimit ring by base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"Subalgebra.baseChange\", \"Algebra.FinitePresentation.baseChange\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.finite_adjoin_of_finite_of_isIntegral\", \"Algebra.QuasiFinite.baseChange\", \"Subalgebra.FG\", \"AlgHom.Finite\"], \"digest\": \"22efe333a9bb3fcf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned smooth/etale descent theorems require additional hypotheses; finite presentation base change, finite integral adjoin, and finite-type tower lemmas do not assert an image-subalgebra model for two arbitrary compatible varying-base diagrams. Read the hit signatures; existing DAG nodes supply the component facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generators and polynomial relations over a filtered colimit descend to an image subalgebra whose tensor base change is the whole algebra",
+   "results": "{\"t\": \"2026-10-24T07:28:43Z\", \"tool\": \"leanfinder\", \"query\": \"Finite generators and polynomial relations over a filtered colimit descend to an image subalgebra whose tensor base change is the whole algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.FinitePresentation.baseChange\", \"exists_fg_and_mem_baseChange\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"PolynomialLaw.exists_range_φ_eq_of_fg\", \"Algebra.SubmersivePresentation.baseChange\"], \"digest\": \"c72f6755f04cba91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned smooth/etale descent theorems require additional hypotheses; finite presentation base change, finite integral adjoin, and finite-type tower lemmas do not assert an image-subalgebra model for two arbitrary compatible varying-base diagrams. Read the hit signatures; existing DAG nodes supply the component facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-normalization-algebraic-model",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Finite-stage descent of the solution obtained only after the perfect-residue algebraic preparation. Tag 09II final three paragraphs: the finite algebra model needed before descending residue separability. Supporting input: A finite colimit algebra has a finite image-subalgebra model.",
+   "via": [
+    "lem-sfb-finite-normalization-algebraic-model",
+    "lem-sfb-dvr-normalized-finite-stage-descent",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-noetherian-integral-colimit-image-model",
+  "worker": "stage1",
+  "summary": "Gave an explicit six-step finite generators and relations argument using only existing Mathlib-leaf nodes. Lift generators and relation coefficients separately in the two ring diagrams, kill the finitely many relation evaluations at a common stage, take the finite integral adjoin, and construct a two-sided inverse to the canonical multiplication map. No new nodes and no extra hypotheses.",
+  "blueprint": "Historical auxiliary input through the recorded creation chain to det-thm-sf-ctf-stability-direct-images, proof (3). Read the current latest unit and direct-image proof: they do not state this algebra result. The inherited blueprint.from.node=null and historical from.place/via are retained; whole-blueprint searches for image-subalgebra, image subalgebra, finite subalgebra, and integral colimit found no equivalent imported node. These steps supply the finite-stage algebra model used by lem-sfb-finite-normalization-algebraic-model, not a replacement of a current unit-level argument."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-99fe67bfa",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-99fe67bfa (reviewer sub-agent of L); spot-checked: I read the item's six steps in full. The base item was unsplit with no proof, so this is not a 2026-10-21 re-split. The statement, stmt_deps and blueprint are unchanged, and the old mathlib_searches are kept with 5 more added. There are no new nodes. Every proof dependency is an existing Mathlib leaf (finite module definition, Noetherian finite type ⇒ finite presentation, finite-presentation definition, elementwise filtered ring colimit (1)/(2), finite adjoin of integral elements, algebra tensor pushout, module tensor), and each says what its step uses. Source checked: Stacks algebra.tex 05N9 (l.32178, proof of (1) lifts the presentation coefficients), 00FP (l.6088), 00GM (l.7481); the image-subalgebra refinement is correctly marked as agent-written. I checked the S_i→S→D compatibility, the vanishing of the relations at a later stage via clause (2), the balancing step f_b(x⊗1)=g_b(x)⊗1=0, and both inverse composites. Edge cases tested: S=0, m=0, n=0, a singleton index, noninjective transitions and nonflat coefficient change. No duplicate in the DAG (I read the pc tensor-model, trf flat-subring, per henselian-model and pd spreading-out nodes). The consumer lem-sfb-finite-normalization-algebraic-model uses the unchanged statement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherianIntegralColimitImageModel",
+  "declaration": "Algebra.exists_finite_subalgebra_colimit_model",
+  "file": "lean/Sheaf/RingTheory/NoetherianIntegralColimitImageModel.lean",
+  "statement": "theorem exists_finite_subalgebra_colimit_model {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S D : I ⥤ CommRingCat.{u}) (cS : Cocone S) (hS : IsColimit cS) (cD : Cocone D) (hD : IsColimit cD) [∀ i : I, Algebra (S.obj i) (D.obj i)] [∀ i : I, Algebra (S.obj i) cS.pt] [Algebra cS.pt cD.pt] (htransition : ∀ (i j : I) (h : i ≤ j), (D.map (homOfLE h)).hom.comp (algebraMap (S.obj i) (D.obj i)) = (algebraMap (S.obj j) (D.obj j)).comp (S.map (homOfLE h)).hom) (hcoeff : ∀ i : I, algebraMap (S.obj i) cS.pt = (cS.ι.app i).hom) (hcompatible : ∀ i : I, (cD.ι.app i).hom.comp (algebraMap (S.obj i) (D.obj i)) = (algebraMap cS.pt cD.pt).comp (cS.ι.app i).hom) (hintegral : ∀ (i : I) (x : D.obj i), IsIntegral (S.obj i) x) [IsNoetherianRing cS.pt] [Module.Finite cS.pt cD.pt] : ∃ (i : I) (H : Subalgebra (S.obj i) (D.obj i)), Module.Finite (S.obj i) H ∧ ∃ e : @AlgEquiv cS.pt (H ⊗[S.obj i] cS.pt) cD.pt _ _ _ (Algebra.TensorProduct.rightAlgebra (R := S.obj i) (A := H) (B := cS.pt)) _, ∀ (h : H) (s : cS.pt), e (h ⊗ₜ[S.obj i] s) = (@_root_.id cD.pt ((cD.ι.app i).hom (h : D.obj i))) * algebraMap cS.pt cD.pt s",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fbba3208",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read the node, its 5 stmt_deps, the module and the report. Every clause matches: PartialOrder/Nonempty/IsDirected index in Type u (brief l.76); S,D : I ⥤ CommRingCat.{u} with arbitrary IsColimit cocones; htransition squares in the right direction; hcoeff pins the S_i→S algebra maps to the colimit legs; hcompatible determines S→D uniquely via hS; hintegral is IsIntegral; IsNoetherianRing S and Module.Finite S D; conclusion ∃ i, H : Subalgebra S_i D_i, Module.Finite S_i H, ∃ e : H⊗[S_i]S ≃ₐ[S] D (rightAlgebra) with e(h⊗s)=ι_i(h)·s, the canonical map. No extra hypotheses. Edge cases: zero rings, singleton I, n=m=0, non-injective maps covered; empty I excluded as the node says. Docstrings carry the source, blueprint tag and 6 proof steps; proof is sorry only; lean.statement verbatim; the lean record is the only node change; the name is new; the consumer has no Lean record yet. No findings."
+ }
+}

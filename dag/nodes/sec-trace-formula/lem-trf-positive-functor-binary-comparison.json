@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-positive-functor-binary-comparison",
+ "kind": "statement",
+ "title": "Binary compatibility of recursive comparisons for a positive endofunctor family",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "statement": "Let $\\mathcal C$ be a category [def-nagata-category]. For every positive integer $r$ let $P_r:\\mathcal C\\to\\mathcal C$ be an endofunctor, and put $T=P_1$. Use the powers of [def-trf-endofunctor-powers], with $T^1=T$ and $T^{r+1}=T\\circ T^r$. Composition is in functional order. A natural transformation $u:F\\Rightarrow G$ means maps $u_M:F(M)\\to G(M)$ with $G(f)\\circ u_M=u_N\\circ F(f)$ for every $f:M\\to N$; a natural isomorphism has invertible components. For a transformation $u$, write $(uH)_M=u_{H(M)}$ and $(H(u))_M=H(u_M)$. All iterated compositions are compared by the canonical functor associators, whose components are identity maps.\nFor all positive $a,b$ suppose given natural isomorphisms $C_{a,b}:P_{a+b}\\xrightarrow{\\sim}P_a\\circ P_b$ satisfying, for every positive $a,b,c$,\n$$P_a(C_{b,c})\\circ C_{a,b+c}=(C_{a,b}P_c)\\circ C_{a+b,c}.$$\nDefine transformations recursively by\n$$d_1=\\mathrm{id}_T,\\qquad d_{r+1}=T(d_r)\\circ C_{1,r}.$$\nThen each $d_r:P_r\\xrightarrow{\\sim}T^r$ is a natural isomorphism, and for every positive $a,b$ one has the equality of natural transformations\n$$d_{a+b}=T^a(d_b)\\circ(d_aP_b)\\circ C_{a,b}:P_{a+b}\\longrightarrow T^{a+b}.$$\nThe equality uses the canonical reassociation $T^a\\circ T^b\\cong T^{a+b}$ and holds on every object and morphism of $\\mathcal C$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4)."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-trf-endofunctor-powers"
+ ],
+ "proof": [
+  {
+   "text": "Work componentwise, with functional composition throughout. By [def-trf-endofunctor-powers], induction on $a$ identifies $T^a(T^bM)$ with $T^{a+b}M$: for $a=1$ this is the successor convention; the successor follows by applying $T$ to the preceding identification. The identical induction on a morphism $f$ identifies $T^a(T^b(f))$ with $T^{a+b}(f)$. These identifications have identity components; hence all reassociations below insert only identity arrows. The associativity and identity laws of [def-nagata-category] justify suppressing them.",
+   "uses": [
+    "def-nagata-category",
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4)."
+   }
+  },
+  {
+   "text": "Construct $d_r$ by induction on $r\\geq1$. The initial $d_1$ is the identity natural isomorphism. If $d_r$ is natural, then for $f:M\\to N$ its naturality and that of $C_{1,r}$ give\n$$T^{r+1}(f)\\circ T(d_r(M))\\circ C_{1,r}(M)=T(d_r(N))\\circ T(P_r(f))\\circ C_{1,r}(M)=T(d_r(N))\\circ C_{1,r}(N)\\circ P_{r+1}(f).$$\nHere $T$ preserves composition, and step 1 supplies the power convention. Thus the prescribed $d_{r+1}$ is natural. Its inverse at $M$ is $C_{1,r}(M)^{-1}\\circ T(d_r(M)^{-1})$; both inverse identities follow by functoriality of $T$ and cancellation of each adjacent inverse pair. The inverse is natural as well: from $G(f)\\circ u_M=u_N\\circ F(f)$, composing on the left with $u_N^{-1}$ and on the right with $u_M^{-1}$ gives $F(f)\\circ u_M^{-1}=u_N^{-1}\\circ G(f)$. This proves that every $d_r$ is a natural isomorphism, without assuming that $T$ is an equivalence.",
+   "uses": [
+    "def-nagata-category",
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4)."
+   }
+  },
+  {
+   "text": "Fix an arbitrary positive $b$. Induct on the positive integer $a$, with claim $d_{a+b}=T^a(d_b)\\circ(d_aP_b)\\circ C_{a,b}$. At $a=1$, $d_1P_b$ is the identity and $T^1=T$, so the claim is exactly the defining recursion $d_{1+b}=T(d_b)\\circ C_{1,b}$. This includes $b=1$.",
+   "uses": [
+    "def-nagata-category",
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4)."
+   }
+  },
+  {
+   "text": "Suppose the claim holds for $a\\geq1$. Evaluate at any $M$ and expand the recursion and the induction hypothesis. Functoriality of $T$ yields\n$$d_{a+1+b}(M)=T^{a+1}(d_b(M))\\circ T(d_a(P_bM))\\circ T(C_{a,b}(M))\\circ C_{1,a+b}(M).$$\nThe assumed cocycle at the positive triple $(1,a,b)$ says\n$$T(C_{a,b}(M))\\circ C_{1,a+b}(M)=C_{1,a}(P_bM)\\circ C_{a+1,b}(M).$$\nSubstitute this equality in the preceding expression. The two adjacent factors $T(d_a(P_bM))\\circ C_{1,a}(P_bM)$ are precisely $d_{a+1}(P_bM)$ by its defining recursion evaluated at $P_bM$. The result is\n$$d_{a+1+b}(M)=T^{a+1}(d_b(M))\\circ d_{a+1}(P_bM)\\circ C_{a+1,b}(M),$$\nwhich is the successor claim. All equalities use only the given cocycle, recursion, functoriality, and the category laws [def-nagata-category]; the power identifications are those established in step 1.",
+   "uses": [
+    "def-nagata-category",
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4)."
+   }
+  },
+  {
+   "text": "The induction proves the binary formula for every positive $a,b$ and every object $M$. Its right side is a natural transformation: applying the naturality equations of its three factors in succession, and using that $T^a$ preserves composition, moves any $P_{a+b}(f)$ through the composite and gives $T^{a+b}(f)$ at the other end. Equality at every component therefore is equality of natural transformations, including their compatibility with every morphism $f$. Together with step 2 this gives both assertions.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+    "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "def-trf-endofunctor-powers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/lem-trf-frobenius-operator-compact-description.proof.md",
+  "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4). Explicit componentwise categorical induction by Q148; the source blueprint leaves these generic comparisons implicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For endofunctors P indexed by positive integers with associative natural isomorphisms P(a+b) to P(a) composed with P(b), the recursively constructed comparison to powers of P(1) respects every binary decomposition",
+   "results": "8 hits: PFunctor.M.Agree', CategoryTheory.Equivalence.powNat, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans_assoc, CategoryTheory.Limits.SequentialProduct.functorObj_eq_pos, PFunctor.M.Agree'.step, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans, CategoryTheory.SmallObject.SuccStruct.Iteration.mapObj_trans, CategoryTheory.SmallObject.SuccStruct.Iteration.congr_map",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence.powNat constructs powers of an equivalence; the other hits concern unrelated graded objects or transfinite iteration, not an associative comparison family and its binary compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A recursively defined comparison from a coherently multiplicative family of endofunctors to powers of its first term is compatible with addition",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"iterate\", \"add\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence.powNat constructs powers of an equivalence; the other hits concern unrelated graded objects or transfinite iteration, not an associative comparison family and its binary compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "iterate.*(add|comp).*iso|iso.*iterate|power.*(split|comparison)",
+   "results": "5 hits: Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence.powNat constructs powers of an equivalence; the other hits concern unrelated graded objects or transfinite iteration, not an associative comparison family and its binary compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative graded endofunctor composition comparisons admit a normalized multiplicative natural isomorphism to iterates of the generator",
+   "results": "8 hits: CategoryTheory.GradedObject.single_map_singleObjApplyIso_hom_assoc, CategoryTheory.Iso.map_hom_inv_id_eval_app_assoc, CategoryTheory.GradedObject.singleObjApplyIso_inv_single_map_assoc, CategoryTheory.Iso.map_inv_hom_id_eval_app_assoc, CategoryTheory.Iso.map_hom_inv_id_eval_assoc, CategoryTheory.GradedObject.single_map_singleObjApplyIso_hom, CategoryTheory.Iso.map_inv_hom_id_eval_assoc, CategoryTheory.GradedObject.single_map_singleObjApplyIsoOfEq_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: Equivalence.powNat constructs powers of an equivalence; the other hits concern unrelated graded objects or transfinite iteration, not an associative comparison family and its binary compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "iterate.*(add|iso)|power.*(comparison|split)|comparison.*power",
+   "results": "13 hits: Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Basic.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern equivalence powers, shift sequences, free monoidal coherence, slice equivalences, or ordinary monoidal functors; none supplies the stated positive-family recursion and its binary formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Recursively normalized natural isomorphisms from an associative family of endofunctors to iterates respect binary composition",
+   "results": "8 hits: Mathlib.Tactic.Monoidal.normalizeIsoComp, CategoryTheory.Functor.associator, CategoryTheory.FreeBicategory.normalizeIso, Mathlib.Tactic.BicategoryLike.normalize, Mathlib.Tactic.BicategoryLike.MonadNormalizeNaturality.rec, CategoryTheory.Functor.mapMonCompIso, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.Functor.bifunctorComp₂₃Iso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern equivalence powers, shift sequences, free monoidal coherence, slice equivalences, or ordinary monoidal functors; none supplies the stated positive-family recursion and its binary formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, \"iterate\"",
+   "results": "12 hits: CategoryTheory.Over.iteratedSliceBackward, CategoryTheory.Over.iteratedSliceForward, CategoryTheory.Over.iteratedSliceEquiv_functor, CategoryTheory.Over.iteratedSliceEquiv_inverse, CategoryTheory.Over.iteratedSliceBackward_forget, CategoryTheory.Over.iteratedSliceBackward_forget_forget, CategoryTheory.Over.iteratedSliceForward_forget, CategoryTheory.Over.iteratedSliceForwardIsoPost",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern equivalence powers, shift sequences, free monoidal coherence, slice equivalences, or ordinary monoidal functors; none supplies the stated positive-family recursion and its binary formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of endofunctors indexed by positive integers with associative multiplication comparisons has a recursive natural isomorphism to powers of its first endofunctor compatible with addition",
+   "results": "8 hits: CategoryTheory.Equivalence.powNat, CategoryTheory.Equivalence.pow, CategoryTheory.Equivalence.instPowInt, CategoryTheory.Functor.ShiftSequence.tautological, CategoryTheory.ShiftMkCore.add, CategoryTheory.Equivalence.pow_one, CategoryTheory.Functor.ShiftSequence.sequence, CategoryTheory.Functor.ShiftSequence",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern equivalence powers, shift sequences, free monoidal coherence, slice equivalences, or ordinary monoidal functors; none supplies the stated positive-family recursion and its binary formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semigroupal functor from the positive natural numbers under addition is isomorphic to tensor powers of its value at one by induction using its associativity law",
+   "results": "8 hits: CategoryTheory.MonoidalFunctor.mapPi, Action.diagonalSuccIsoTensorDiagonal, CategoryTheory.Discrete.addMonoidalFunctor_μ, CategoryTheory.GradedObject.Monoidal.instHasMapProdObjFunctorMapBifunctorCurriedTensorSingle₀TensorUnit_1, CategoryTheory.Discrete.addMonoidalFunctor_δ, CategoryTheory.instMonoidalDiscreteFunctorFunctorF, CategoryTheory.Functor.Monoidal.μNatIso, CategoryTheory.FreeMonoidalCategory.tensorFunc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern equivalence powers, shift sequences, free monoidal coherence, slice equivalences, or ordinary monoidal functors; none supplies the stated positive-family recursion and its binary formula."
+  },
+  {
+   "tool": "grep",
+   "query": "structure ShiftSequence|def tautological|def sequence|def mapPi|def addMonoidalFunctor|def tensorFunc",
+   "results": "4 hits: Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean:164 (tensorFunc), Limits/Presheaf.lean:659,683 (tautological cocones), Sites/SheafCohomology/MayerVietoris.lean:128 (sequenceIso).",
+   "date": "2026-10-22",
+   "verdict": "no match: free monoidal normalization and cocones are different constructions, not the positive-family comparison formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-pullback-comparison-coherence",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "Categorical expansion of the m-th-iterate assertion: construction of normalized comparisons and induction on the first positive summand (returned proof steps 3 and 4).",
+   "via": [
+    "lem-trf-frobenius-pullback-comparison-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-positive-functor-binary-comparison",
+  "worker": "stage1",
+  "summary": "Q148: unchanged statement. Supplies explicit componentwise construction, naturality and inverses, then a positive-index induction using the given cocycle at (1,a,b). Every step is an elementary calculation from the inline hypotheses and the two existing definition nodes. No new node is needed. Searches found no exact Mathlib or finished upstream match.",
+  "blueprint": "Expands the canonical composition implicit in the ancestor proof and sk-d-weil iterate construction; realizes the returned recursive-normalization and first-summand induction argument (parent comparison-coherence steps 3-4)."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-a75f94db2",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-a75f94db2 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the PASS needs no fixes. It is one commit that changes only the item and its report: no new nodes, and the statement and stmt_deps are unchanged. The only citer is the parent lem-trf-frobenius-pullback-comparison-coherence. Its step 3 applies the item with exactly these C_{a,b}, d_1=id and d_{r+1}=T(d_r)∘C_{1,r}, so the two match. There is no repair or re-split note, no earlier run and no Lean attachment. The cited source, main-20261015 lem-trf-frobenius-operator-compact-description.proof.md, does not state this generic induction, and proof_origin by=agent says so honestly. No SGA source is used. Every step cites only def-nagata-category (category laws) and def-trf-endofunctor-powers (T^{n+1}=T∘T^n); the C-naturality, invertibility and the cocycle are hypotheses of the item. I re-derived each step. Step 1: reassociation by induction on a, with identity components. Step 2: the naturality chain via functoriality of T and naturality of d_r and C_{1,r}; the inverse is C_{1,r}^{-1}∘T(d_r^{-1}), and no hypothesis on T is needed. Step 3: the case a=1 is the recursion. Step 4: the cocycle at (1,a,b) turns T(C_{a,b})∘C_{1,a+b} into (C_{1,a}P_b)∘C_{a+1,b}, and T(d_a P_b)∘C_{1,a}P_b is d_{a+1}P_b; I checked the type of every factor. Step 5: naturality by composing the squares. All five steps are genuinely elementary and the induction is set up correctly. Small cases checked: r=1 and r=2, and (2,1), where d_3=T(C_{1,1})C_{1,2} equals (C_{1,1}P_1)C_{2,1} by the cocycle at (1,1,1). The searches found no duplicate: refinement-independence assumes this formula, def-trf-frobenius-pullback-power-comparison only gives definitions for g, and fixed-point-stalk-transport-cocycle is a different statement."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PositiveFunctorBinaryComparison",
+  "declaration": "CategoryTheory.PositiveFunctorComparison.binary_compatibility",
+  "declarations": [
+   "CategoryTheory.PositiveFunctorComparison.powerReassoc",
+   "CategoryTheory.PositiveFunctorComparison.comparison",
+   "CategoryTheory.PositiveFunctorComparison.binary_compatibility"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PositiveFunctorBinaryComparison.lean",
+  "statement": "theorem binary_compatibility {C : Type u} [Category.{v} C] (P : ℕ → C ⥤ C) (μ : ∀ a b : ℕ, P (b + a + 1) ≅ P b ⋙ P a) (hμ : ∀ a b c : ℕ, μ a (c + b + 1) ≪≫ Functor.isoWhiskerRight (μ b c) (P a) ≪≫ Functor.associator (P c) (P b) (P a) = eqToIso (congrArg P (congrArg (fun n : ℕ => n + 1) ((Nat.add_right_comm (c + b) 1 a).trans ((congrArg (fun n : ℕ => n + 1) (Nat.add_assoc c b a)).trans (Nat.add_assoc c (b + a) 1))))) ≪≫ μ (b + a + 1) c ≪≫ Functor.isoWhiskerLeft (P c) (μ a b)) : ∀ a b : ℕ, comparison P μ (b + a + 1) = μ a b ≪≫ Functor.isoWhiskerLeft (P b) (comparison P μ a) ≪≫ Functor.isoWhiskerRight (comparison P μ b) (NaturalTransport.power (P 0) (a + 1)) ≪≫ powerReassoc (P 0) (a + 1) (b + 1) ≪≫ eqToIso (congrArg (NaturalTransport.power (P 0)) (congrArg (fun n : ℕ => n + 1) (Nat.add_right_comm b 1 a)))",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-173b169c5",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Node diff vs live: only the lean record added; lean.statement appears verbatim in PositiveFunctorBinaryComparison.lean. Checked clause by clause: P n = P_{n+1}, T = P 0; mu a b : P(b+a+1) ≅ P b ⋙ P a = C_{a+1,b+1}. Cocycle: left side mu a (c+b+1) then whiskerRight(mu b c)(P a) then associator; right side eqToIso index then mu (b+a+1) c then whiskerLeft (P c)(mu a b); exact, no stronger. comparison: refl at 0, then mu 0 n then whiskerRight(d_n)(P 0) = T(d_r)∘C_{1,r}; real data typed P n ≅ power (P 0)(n+1). Binary formula: C_{a,b}, d_a P_b, T^a(d_b), powerReassoc (unitor/associators, identity components), eqToIso; endpoints match comparison(b+a+1). Uses recorded NaturalTransport.power (T^{n+1}=T∘T^n). Edge cases A=1 and (2,1) checked; free universes; no equivalence assumption. Helpers are real, node-specified and recorded; only the theorem is sorry, with a 5-step docstring; source and blueprint docstrings present; report has both sections. No compile, since no file changed. Advisory: the parent frobenius-pullback-comparison-coherence module has its own trfPositiveFunctorPower and comparison copies."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261022T145703-L-2044433",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.PositiveFunctorComparison.binary_compatibility"
+  ],
+  "sorry_after": []
+ }
+}

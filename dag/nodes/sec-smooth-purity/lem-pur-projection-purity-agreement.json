@@ -40,249 +40,36 @@
  ],
  "proof": [
   {
-   "text": "Choose $r\\geq1$ with $\\ell^r A=0$. Apply [lem-pur-vector-integration-site-comparison] to the trivial bundle over each base used here. Its statement gives the coherent specified Tate realization, the equality of the projective-line decompositions and traces, the open-counit restriction to $I_S$, and independence of $r$. Thus the displayed definition of each affine-line $\\Gamma$ and its ordered composites is independent of $r$. This cites the coefficient and Kummer comparison as an existing lemma, rather than re-proving it using an empty divisor.",
-   "uses": [
-    "lem-pur-vector-integration-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 1: finite coefficient realization and exponent independence"
-   }
-  },
-  {
-   "text": "For $K$, choose the bounded constructible etale representative $K^e$ of [lem-sf-proetale-constructible-origin](ii). By [lem-sf-comparison-tor-amplitude](ii) it has the finite Tor interval of $K$, so [lem-pur-vector-integration-site-comparison] compares the actual projection/integration transposes on these inputs. Every scheme in the coordinate and projective compactification towers is finite type over $k$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and of finite dimension by [lem-kun-dimension-finite-type]. Their projective compactifications therefore have integer dimension bounds. The source inputs are bounded etale-origin objects, so the Hom bijections of [thm-sf-ambient-adjoint-class] apply. Empty schemes have the unique maps between zero objects.",
+   "text": "Choose a bounded etale finite-Tor presentation (Ke, eK) of the original intrinsic K, with its lower bound: [lem-sf-proetale-constructible-origin] gives a bounded constructible etale representative and [lem-sf-comparison-tor-amplitude] its finite Tor interval. The unique specification of the ordered affine map, independent of the presentation by [lem-pur-affine-ordered-integration-transposes], gives it as the intrinsic realization of projectionAffineInPresentation at (Ke, eK) [def-pur-projection-purity-coordinates]. The HEq specification identifies projectionSmoothIntrinsic with the recorded smoothPurityMap [def-pur-smooth-purity-map].",
    "uses": [
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-tor-amplitude",
-    "lem-pur-vector-integration-site-comparison",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-kun-dimension-finite-type",
-    "thm-sf-ambient-adjoint-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 1: witness, Tor and compactification domains"
-   }
-  },
-  {
-   "text": "Put $p=p_d$, $X=\\mathbf A^d_Y$ and $W=X\\times_YX$. The projection $p$ is smooth of pure relative dimension $d$ by [sbc-lem-affine-space-smooth]. The diagonal base-change isomorphism is $\\alpha:C(p_1,\\Delta)\\to\\omega_p$ of [lem-pur-diagonal-base-change]; the section invariant is [def-pur-section-invariant]. The diagonal is regular of codimension $d$, with normal bundle $T_{X/Y}$ by [lem-pur-diagonal-regular-immersion]. In coordinates $(x,y)$, the isomorphism $h(x,y)=(x,u=y-x)$ has inverse $(x,u)\\mapsto(x,x+u)$, takes $\\Delta$ to zero, and sends its conormal basis $y_i-x_i$ to $u_i$. Thus its normal-coordinate basis is unchanged. The schemes and morphisms here are separated finite type by their polynomial charts; for $d=0$ the coordinate lists are empty.",
-   "uses": [
-    "sbc-lem-affine-space-smooth",
-    "lem-pur-diagonal-base-change",
-    "def-pur-section-invariant",
-    "lem-pur-diagonal-regular-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 1: diagonal and standard-pair coordinates"
-   }
-  },
-  {
-   "text": "The extracted lemma [lem-pur-affine-translation-trace], applied over $X$ to the section $(x_1,\\ldots,x_d)$, says exactly that $h$ preserves the normalized integration. The actual site and transpose comparisons are [lem-pur-vector-integration-site-comparison] and the Hom bijections of [thm-sf-ambient-adjoint-class]. Applying those functors and bijections to the trace equality shows that the integration-transposed comparison is unchanged by $h$. This is the translation argument of the unit model paragraph, including the universal parameter and base-change normalization.",
-   "uses": [
-    "lem-pur-affine-translation-trace",
-    "lem-pur-vector-integration-site-comparison",
-    "thm-sf-ambient-adjoint-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 2: translation invariance"
-   }
-  },
-  {
-   "text": "For any rank-$d$ trivial bundle $q$, write $P_{q,K}:Lq^*K(d)[2d]\\to Rq^!K$ for the integration transpose, which is invertible by [thm-amb-vector-bundle-purity] and [lem-pur-vector-integration-site-comparison]. The integration is [def-amb-vector-integration]. Put $L=A_X(d)[2d]$, $P=P_{p,A_Y}$, $L'=A_W(d)[2d]$, and $J=P_{p_1,A_X}$. Let $B:Lp_2^*\\omega_p\\to\\omega_{p_1}$ be the specified dualizing base-change map. The trace base-change equation is [lem-amb-affine-space-top-trace], transported by the site comparison just cited. Therefore [lem-pur-trace-transpose-base-change] applied to this square gives $J=B\\circ Lp_2^*P$. In [lem-pur-diagonal-base-change], $\\alpha=(L\\Delta^*B)^{-1}$ under $p_2\\Delta=1_X$, and hence\n$$\\alpha\\circ L\\Delta^*J=P.$$\nThe ordinary Tate restriction $L\\Delta^*L'=L$ is the coherent restriction already fixed above.",
-   "uses": [
-    "thm-amb-vector-bundle-purity",
-    "lem-pur-vector-integration-site-comparison",
-    "def-amb-vector-integration",
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-trace-transpose-base-change",
-    "lem-pur-diagonal-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 3: base change of the integration transpose"
-   }
-  },
-  {
-   "text": "Apply [thm-pur-dnc-invariance] to $(p_1,\\Delta)$, obtaining $\\delta:C(p_1,\\Delta)\\xrightarrow{\\sim}C(\\pi_N,0_N)$. In the global coordinates $u_i=y_i-x_i$ this is a standard affine pair. Its deformation is given by $u_i=t v_i$ and has constant family object by the standard-pair clause of [lem-pur-dnc-section-geometry]. The normalization clause of the DNC theorem makes $\\delta$ the identity between these two standard section invariants. Write $\\beta=L0_N^*(P_{\\pi_N,A_X}^{-1})$, followed by Step 3's ordinary Tate restriction, so $\\beta:C(\\pi_N,0_N)\\to A_X(d)[2d]$. The induced normal coordinates $v_i$ use the same ordered basis as $u_i$, by Step 3. With Step 4's translation invariance, the standard-pair identity says precisely $\\beta\\delta=(L\\Delta^*J)^{-1}$. The explicitly specified diagonal/DNC normalization in the statement and in the middle arrow of [def-pur-smooth-purity-map] is $\\theta_p=\\beta\\delta\\alpha^{-1}$. By Step 5,\n$$\\theta_p=(L\\Delta^*J)^{-1}\\alpha^{-1}=P_{p,A_Y}^{-1}.$$\nThis checks the actual normalized arrows; it does not deduce equality merely from existence of isomorphisms to a twist. In rank zero the displayed coordinate lists are empty, the deformation is the constant rank-zero pair, and the same equations are identities.",
-   "uses": [
-    "thm-pur-dnc-invariance",
-    "lem-pur-dnc-section-geometry",
-    "def-pur-section-invariant",
-    "thm-amb-vector-bundle-purity",
-    "def-amb-vector-integration",
+    "lem-pur-affine-ordered-integration-transposes",
+    "def-pur-projection-purity-coordinates",
     "def-pur-smooth-purity-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.md",
-    "place": "Proof, standard-pair identity; unit Agreement on the model, final three sentences"
-   }
+   "elementary": false
   },
   {
-   "text": "The two projection maps at $(L,K)$ and $(\\omega_p,K)$ used below are invertible by [lem-weil-finite-compact-projection-formula]. Its source coefficients have bounded constructible etale witnesses: $L$ is the realized shifted Tate line, and the previous DNC computation gives $P:L\\xrightarrow{\\sim}\\omega_p$. Its base coefficient is the witness $K^e$ above, with finite Tor interval by [lem-sf-comparison-tor-amplitude](ii). The separated finite-type projection $p$ therefore satisfies every hypothesis; no Tor condition on an arbitrary source coefficient or six-functor datum is assumed.",
+   "text": "By [lem-pur-projection-intrinsic-presentation] the smooth purity map is the intrinsic realization of the same presentation composite (it transports the coordinate equation, which combines the unit-orientation comparison and the tensor integration equation). This gives the claimed equality, also in rank zero.",
    "uses": [
-    "lem-weil-finite-compact-projection-formula",
-    "lem-sf-comparison-tor-amplitude"
+    "lem-pur-projection-intrinsic-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 5: unconditional projection-formula domains"
-   }
-  },
-  {
-   "text": "By [def-pur-smooth-purity-map] and the DNC computation, smooth purity is $\\theta_{p,K}(1\\otimes P)$ after the fixed Tate reassociation. Apply [lem-pur-tensor-trace-transpose] with $t=t_p$ and $L=A_X(d)[2d]$. It identifies this map with the transpose of $(1_K\\otimes t_p)\\Pi_{L,K}$. This is exactly $P_{p,K}$, by [thm-amb-vector-bundle-purity] and [lem-pur-vector-integration-site-comparison]. Thus the smooth map equals the integration transpose for every $K$. The tensor/counit identification is now a separate lemma; it is not inferred from naturality in $K$ alone.",
-   "uses": [
-    "def-pur-smooth-purity-map",
-    "lem-pur-tensor-trace-transpose",
-    "thm-amb-vector-bundle-purity",
-    "lem-pur-vector-integration-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 5: passage from the unit orientation to arbitrary K"
-   }
-  },
-  {
-   "text": "For the coordinate tower we need projection compatibility as an identity of maps. For $f=q_d:\\mathbf A^{d+1}_Y\\to\\mathbf A^d_Y$ and $g=p_d$, compactify $g$ by $(\\mathbf P^1_Y)^d$ and take the compatible compactification triangle for $f$ supplied by [lem-weil-pbc-compatible-compactification-triangle]. All these schemes are finite type over $k$, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], so the qcqs hypothesis holds and their opens are quasi-compact. The normalized compositor of this triangle is that of [lem-amb-unbounded-compact-support-comparisons]; at the finite pro-etale level its proper/open interchange is the evaluation in [lem-cbc-strict-tower-proper-open-calculus], and with [lem-sf-class-compact-support-comparison] these are the comparisons defining the compositor $\\alpha$ of [thm-sf-comp-composition] on the witnessed inputs.",
-   "uses": [
-    "lem-weil-pbc-compatible-compactification-triangle",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-sf-class-compact-support-comparison",
-    "thm-sf-comp-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 6: compatible compactifications and the normalized compositor"
-   }
-  },
-  {
-   "text": "For the triangle of the preceding step, [lem-sf-composition-projection-mate] states, for arbitrary ambient finite-coefficient inputs and the counit-defined projection maps of [def-exchange-projection], the identity\n$$\\operatorname{PF}_{gf;M,N}(\\alpha_M\\otimes1)\n=\\alpha_{M\\otimes P_fP_gN}\\,Rg_!(\\operatorname{PF}_{f;M,P_gN})\\,\\operatorname{PF}_{g;Rf_!M,N},$$\nwith $P_u=Lu^*$ and the canonical pullback, tensor and direct-image associators inserted. By the preceding step its $\\alpha$ is the actual compositor of [thm-sf-comp-composition] on the witnessed inputs used here. No coherence of a six-functor datum is invoked. Clause 3 of [lem-pur-finite-projection-action-laws] gives the tensor-action identity for each compactification projection map.",
-   "uses": [
-    "lem-sf-composition-projection-mate",
-    "def-exchange-projection",
-    "thm-sf-comp-composition",
-    "lem-pur-finite-projection-action-laws"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 6: projection compatibility with the compact-support compositor"
-   }
-  },
-  {
-   "text": "All inverses in the tower calculation are on the domain of [lem-weil-finite-compact-projection-formula]. The source coefficients are shifted Tate lines or their products, and the affine-line direct image of such a line is $A$ by [lem-amb-affine-space-top-trace] and [lem-pur-vector-integration-site-comparison]. Base factors are $K$, its pullbacks, and their tensors with locally free Tate lines. By [lem-sf-pullback-tor-amplitude] these pullbacks are bounded constructible with the same finite Tor interval; tensor with a locally free line preserves it, and a shift translates it. Etale witnesses exist by [lem-sf-proetale-constructible-origin], and their Tor intervals are reflected by [lem-sf-comparison-tor-amplitude](ii). Thus every application of the preceding tensor-interchange and projection identities has the required witnessed bounded-below and finite-Tor inputs.",
-   "uses": [
-    "lem-weil-finite-compact-projection-formula",
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-vector-integration-site-comparison",
-    "lem-sf-pullback-tor-amplitude",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 6: domains of all projection inverses and iterated affine-line inputs"
-   }
-  },
-  {
-   "text": "Work first on the ordinary etale site. For a line projection $q$, [lem-asd-ordinary-finite-p1-adjunction] identifies the actual projective-line counit at every coefficient $K$ with coefficient tensor the normalized trace after inverse projection. The explicit affine-line adjunction of [lem-amb-affine-space-top-trace] composes it with extension by zero. Its counit is that projective-line counit composed with $Rq_*$ of the open counit. Naturality of the proper projection map in its first variable, applied to the open counit at $A(1)[2]$, and the compatibility of the open tensor isomorphism with the open counit (clause 2 of [lem-pur-finite-projection-action-laws]) identify its coefficient formula with $(1_K\\otimes I_S)\\Pi$, where $\\Pi$ is built from the compactification projection map of [def-exchange-projection] for $c=(j,q)$. The comparison [lem-pur-vector-integration-site-comparison] carries precisely this formula and its transpose to the specified pro-etale line map $\\Gamma_{q,K}$. On the originally named domain this is [def-pur-affine-line-purity-comparison]. The formulas apply at all $n\\geq1$ by the exponent independence established above.",
-   "uses": [
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-finite-projection-action-laws",
-    "lem-pur-vector-integration-site-comparison",
-    "def-pur-affine-line-purity-comparison",
-    "def-exchange-projection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 6: the affine-line counit at arbitrary coefficients"
-   }
-  },
-  {
-   "text": "On the pro-etale site use the explicit affine adjunctions, transported by [lem-pur-vector-integration-site-comparison], from the affine adjunctions $F_d\\dashv G_d$ of [lem-amb-affine-space-top-trace], where $G_dK=p_d^*K(d)[2d]$. Inductively their counits have the coefficient formula just established in rank one. Apply [lem-pur-composite-integration-counit] to $f=q_d:\\mathbf A^{d+1}_Y\\to\\mathbf A^d_Y$ and $g=p_d$, taking $L_f=A(1)[2]$ and $L_g=A(d)[2d]$. The projection hypotheses are the compositor identity and the compactification tensor-action identity of the preceding steps, on the verified domains. This lemma makes the composite counit $(1_K\\otimes t_{p_{d+1}})\\Pi$: at the tensor unit it is precisely the trace defining [lem-amb-affine-space-top-trace], and [def-amb-vector-integration] uses that trace on a trivial bundle. The induction starts from the identity adjunction at $d=0$. Thus the integration transpose $P_{p_d,K}$ is the adjunction-preserving comparison with the ordered composite of the explicit line adjunctions.",
-   "uses": [
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-composite-integration-counit",
-    "def-amb-vector-integration",
-    "lem-pur-vector-integration-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 6: coefficient factorization of the ordered composite counit"
-   }
-  },
-  {
-   "text": "The composition convention on exceptional functors is the conjugate of $\\alpha$ specified in [def-pur-affine-space-comparison], using [thm-sf-comp-composition]. Its ordered recursion uses $Rq_d^!Rp_d^!K$ instead of $G_1G_dK$. Naturality of the affine-line transpose gives\n$$\\Gamma_{q_d,Rp_d^!K}\\,Lq_d^*(P_{p_d,K})(1)[2]\n=Rq_d^!(P_{p_d,K})\\,\\Gamma_{q_d,G_dK}.$$\nIt follows from naturality of the defining projection/integration composite in [def-pur-affine-line-purity-comparison], so substitution identifies the recursion with the composite counit just computed. Here $G_dK$ has the verified finite-Tor domain, and $Rp_d^!K\\cong G_dK$ by the earlier integration comparison. The fixed Tate pullback and twist-additivity identifications are those in [def-pur-affine-space-comparison]; all shift factors have even degree. Finally [lem-pur-vector-integration-site-comparison] carries this counit equality and its transposes to the pro-etale site. Hence $P_{p_d,K}=\\Gamma_{p_d,K}$; combined with the earlier DNC calculation this is the desired agreement. In rank zero all maps are $1_K$, and the calculation also covers $K=0$.",
-   "uses": [
-    "def-pur-affine-space-comparison",
-    "thm-sf-comp-composition",
-    "def-pur-affine-line-purity-comparison",
-    "lem-pur-vector-integration-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-    "place": "Returned Step 6: conjugate composition, naturality, and ordered recursion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-vector-integration-site-comparison",
   "lem-sf-proetale-constructible-origin",
   "lem-sf-comparison-tor-amplitude",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type",
-  "thm-sf-ambient-adjoint-class",
-  "sbc-lem-affine-space-smooth",
-  "lem-pur-diagonal-base-change",
-  "def-pur-section-invariant",
-  "lem-pur-diagonal-regular-immersion",
-  "lem-pur-affine-translation-trace",
-  "thm-amb-vector-bundle-purity",
-  "def-amb-vector-integration",
-  "lem-amb-affine-space-top-trace",
-  "lem-pur-trace-transpose-base-change",
-  "thm-pur-dnc-invariance",
-  "lem-pur-dnc-section-geometry",
+  "lem-pur-affine-ordered-integration-transposes",
+  "def-pur-projection-purity-coordinates",
   "def-pur-smooth-purity-map",
-  "lem-weil-finite-compact-projection-formula",
-  "lem-pur-tensor-trace-transpose",
-  "lem-weil-pbc-compatible-compactification-triangle",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-cbc-strict-tower-proper-open-calculus",
-  "lem-sf-class-compact-support-comparison",
-  "thm-sf-comp-composition",
-  "lem-sf-composition-projection-mate",
-  "def-exchange-projection",
-  "lem-pur-finite-projection-action-laws",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "def-pur-affine-line-purity-comparison",
-  "lem-pur-composite-integration-counit",
-  "def-pur-affine-space-comparison"
+  "lem-pur-projection-intrinsic-presentation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
-  "place": "Expanded diagonal/DNC model proof; explicit finite-level counit and proper/open tensor calculation from Stacks Tags 0B56, 0F7B, 0F7J, 0E8I."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Model diagonal/DNC integration normalization and final canonical reassociations."
  },
  "mathlib_searches": [
   {
@@ -480,53 +267,26 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-smooth-purity",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-projection-purity-agreement",
   "worker": "stage1",
-  "summary": "Repair of the human re-split return: replaced returned Steps 1, 2, 3, 5 and 6 by short cited steps; used the existing vector-integration site comparison for coefficient realization and extracted five independent trace/projection/counit lemmas as statement-only unsplit nodes. Kept the exact item statement, Lean record, diagonal/DNC route and former Step 4. Every proof step is below 2000 characters. Preserved the previous proof arguments in the report for subsequent workers. Maintainer review (2026-10-17): Step 10 now cites the existing lem-sf-composition-projection-mate instead of re-deriving it by pasting; lem-pur-finite-projection-action-laws is trimmed to the tensor-action and open-counit identities the proof uses; Step 12 cites the open-counit clause.",
-  "blueprint": "Unit sk-thm-smooth-purity Agreement on the model paragraph. Steps 1--3 replace old Step 1 (coefficients, domains, diagonal coordinates); Step 4 replaces translation argument; Step 5 replaces diagonal base-change transpose; Step 6 is the original DNC computation; Steps 7--8 replace the arbitrary-K calculation; Steps 9--14 replace the proper/open projection and affine-line tower calculation. The five new statement-only nodes extract the non-elementary hidden arguments and keep the existing route.",
-  "tool_uses": [
-   {
-    "node": "lem-sf-pullback-tor-amplitude",
-    "why": "Step 6 needs the existing generic preservation of bounded constructibility and a finite Tor interval by the separated finite-type projection, to apply the next affine-line map on its stated domain."
-   },
-   {
-    "node": "lem-sf-comparison-tor-amplitude",
-    "why": "Step 1 needs reflection of the finite Tor interval onto the etale witness, so that the specific normalized vector-integration site comparison applies to K."
-   },
-   {
-    "node": "lem-cbc-strict-tower-proper-open-calculus",
-    "why": "The finite evaluation and explicit mate normalization of proper/open interchange allow its tensor compatibility to be proved from sections and counits."
-   },
-   {
-    "node": "lem-weil-pbc-compatible-compactification-triangle",
-    "why": "Generic compatible compactification geometry for expanding the coordinate-tower compact-support compositor."
-   },
-   {
-    "node": "lem-amb-unbounded-compact-support-comparisons",
-    "why": "Its explicit proper/open normalization, restricted to bounded-below finite objects, identifies the actual compositor in the calculation."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Dimension finiteness supplies the explicitly required bound for the relative constructible/etale-origin adjunction at each compactification."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Quasi-separatedness supplies the qcqs hypothesis of the compatible-compactification theorem."
-   },
-   {
-    "node": "lem-weil-finite-compact-projection-formula",
-    "why": "Unconditional finite constant-coefficient projection isomorphism on bounded constructible source inputs and finite-Tor base inputs, including their witnessed pro-etale realizations. It replaces the conditional six-functor-datum theorem without changing the diagonal/DNC model route."
-   },
-   {
-    "node": "lem-sf-composition-projection-mate",
-    "why": "Step 10 takes from its statement the finite-coefficient identity between the projection maps and the normalized compact-support compositor for a compatible compactification triangle, for arbitrary inputs; no node of sk-thm-smooth-purity states it, and the unconditional route avoids the six-functor-datum theorem."
-   }
-  ]
+  "summary": "Q87 repair of the 11802-character re-split return. Three comparable independent arguments are now statement-only unsplit nodes; all fourteen previous steps are preserved verbatim with a responsibility map in report.md. The parent statement and all maintainer-owned fields are unchanged; its four-step assembly is under 3000 characters.",
+  "blueprint": "Realizes the current blueprint diagonal/DNC paragraph and ordered-product/reassociation paragraph, together with the unit Agreement on the model: original steps 3-6 -> diagonal orientation; steps 1,2,7,8,11,12 -> coefficient normalization; steps 9,10,13,14 -> ordered transposes."
  },
  "tool_uses": [
   "fix-prop-projection-formula",
@@ -544,51 +304,42 @@
   "lem-sf-composition-projection-mate"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q21-5adce7eff",
-  "group": "Q21",
+  "reviewer": "NT-cc-Q87-219afc8cb",
+  "group": "Q87",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-5adce7eff (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps, the 5 new nodes, the statements of every cited node, the unit sk-thm-smooth-purity (including its Agreement-on-the-model paragraph) and the main-20261015 blueprint text, and checked the statement against the live node. The statement, stmt_deps and Lean record are unchanged, there is no SGA, and the route follows the unit's model paragraph. I recomputed the new lemmas: trace-transpose-base-change (eps'∘Rf'_!(B∘La*P)=Lb*t∘C_L^{-1}=t'), tensor-trace-transpose (naturality of Pi in M plus eps∘Rf_!P=t), composite-integration-counit (tensor action plus the compositor identity), and affine-translation-trace (the GL_d sibling lem-amb-linear-trace-invariance is not a duplicate). All four are true; I tested them on d=0, K=0, t=0, identity translations and identity f or g. Step 5 instantiates the base-change lemma correctly (f=b=p, a=p_2, f'=p_1, using the base-change clause of lem-amb-affine-space-top-trace), and B equals def-pur-co-smoothness(3). Step 7 meets every hypothesis of lem-weil-finite-compact-projection-formula. Repairs, 3 files in fixes/: (1) C5: delivered Steps 9-10 re-derived by pasting an identity that is exactly the existing lem-sf-composition-projection-mate, whose alpha is the thm-sf-comp-composition compositor. Step 10 now cites it. lem-sf-proper-open-projection-mate is removed from the steps, and its tool_use entry is replaced by lem-sf-composition-projection-mate (same unit sk-rem-sf-pf-done). (2) C4: Step 12 needs the compatibility of the open tensor isomorphism with the open counit, which the action-laws node did not state. lem-pur-finite-projection-action-laws is trimmed to the identities the proof uses: proper tensor action, open tensor action plus the new open-counit clause, and tensor action for PF^c, on both sites. Its unused composition clauses are dropped and its stmt_deps adjusted. (3) B2: an unbound T in lem-pur-affine-translation-trace. proof_deps is recomputed (34 ids, all existing and unmerged, no cycle), and every step is under 2000 characters. I accept 9 tool_uses. Maintainer note: the maintainer-owned tool_uses still lists fix-prop-projection-formula, lem-weil-derived-direct-image-composition, lem-weil-pbc-ringed-slice-extension-tensor and lem-pc-kflat-resolution, none of which a step cites any more; they can be dropped at merge.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-219afc8cb (reviewer sub-agent of L); spot-checked: Re-split under the released note of 2026-10-21/22. The item statement, stmt_deps and Lean record are unchanged against the live base. All 14 old steps appear verbatim in the report, each assigned to exactly one new node (1,2,7,8,11,12 coefficient; 3-6 orientation; 9,10,13,14 ordered). There are 3 statement-only unsplit nodes of comparable size (3.1-4.3k characters), and the parent is a 4-step, 1457-character assembly. Assembly check: ϑ_p=βδα⁻¹=P⁻¹ (orientation node); γ=θ(1⊗P)τ=P_{p,K} (coefficient node, the lem-pur-tensor-trace-transpose specialization with the domains discharged); P=Γ (ordered node, recursion verbatim def-pur-affine-space-comparison). Orientation node: B is co-smoothness(3) with α=(LΔ*B)⁻¹ as in lem-pur-diagonal-base-change; the J and α equalities type-check; βδ=(LΔ*J)⁻¹ follows from DNC uniqueness on the standard chart via h(x,y)=(x,y−x), translation invariance and frame-independent integration. Coefficient node: the line counit equals t_q∘Rq_*(counit)=I_S=t_{p_1}, so P=Γ in rank 1. Ordered node: compositor, projection-mate and composite-counit match thm-sf-comp-composition, lem-sf-composition-projection-mate and lem-pur-composite-integration-counit. Edge cases d=0, d=1, K=0, empty base and ramified E all check out. No cycles (closures computed). No duplicates: lem-pur-diagonal-dnc-chart-normalization and det-sp-orientation-vector-bundle cite the item; the other candidates are generic. No SGA, nothing in the dropped list. Batch 5: all six flagged citations are already stmt_deps of the item on the base, so the closure is unchanged. The chains end in lem-pod-lisse-module-sheaves-as-module-objects (a general lisse-sheaf fact) and lem-trf-fully-faithful-ess-surj-equivalence (category theory), neither a step of the trace formula or Poincaré duality; accepted. Minor, not a fault: the coefficient node bundles three related computations."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "proof"
+  ],
   "statement": "In the purity conventions of [def-pur-conventions],\nfor the projection $p_d:\\mathbf A^d_Y\\to Y$ the smooth purity map\n$\\gamma_{p_d,K}$ of [def-pur-smooth-purity-map] equals the\naffinity-space purity comparison of [cor-pur-affine-space-purity],\ni.e. the ordered composite of the $d$ affinity-line purity maps of\n[thm-pur-affine-line-purity].",
   "proof": [
    {
-    "text": "Both maps are canonical and, by [thm-pur-composition-coherence]\nand [prop-pur-affine-space-purity-compatibilities], they are\ncompatible with the tower of affine projections. It therefore suffices\nto compare them after restriction to a geometric fiber of $Y$, where\nboth are determined by the Kummer computation: the dualizing-object\nidentification of [def-pur-smooth-purity-map] for $p_d$ comes\nfrom the deformation of the diagonal $\\Delta$ and the standard-pair\ncomputation of [lem-pur-dnc-section-geometry](4) – the diagonal\nof the standard pair $(\\mathbf A^{2d}_Y,\\Delta)$ has normal bundle the\ntrivial rank-$d$ bundle $T_{p_d}$, and the DNC invariance of\n[thm-pur-dnc-invariance] is the identity on the standard pair –\nwhose class, by\n[lem-pur-dnc-section-geometry] and the definition of the\n[def-pur-frame-class] (class of a frame), is the $d$-fold\nexterior product of the rank-one Kummer boundaries, i.e. the\n$d$-fold product of the affinity-line orientations; the affinity-space\npurity of [cor-pur-affine-space-purity] is built from exactly the\nsame $d$-fold product of the affinity-line orientations. The two\nassemblies differ only by the canonical reassociations of the package\n(the Koszul signs are $+1$, since all shift factors are of even\ndegree, by [prop-pur-affine-space-purity-compatibilities]); hence\nthe maps agree.",
+    "text": "Both maps are canonical and, by [thm-pur-composition-coherence]\nand [prop-pur-affine-space-purity-compatibilities], they are\ncompatible with the tower of affine projections. It therefore suffices\nto compare them after restriction to a geometric fiber of $Y$, where\nboth are determined by the integration that normalizes them: the\ndualizing-object identification of [def-pur-smooth-purity-map] for\n$p_d$ comes from the deformation of the diagonal $\\Delta$ and the\nstandard-pair computation of [lem-pur-dnc-section-geometry](4) – the\ndiagonal of the standard pair $(\\mathbf A^{2d}_Y,\\Delta)$ has normal\nbundle the trivial rank-$d$ bundle $T_{p_d}$, and the DNC invariance of\n[thm-pur-dnc-invariance] is the identity on the standard pair – where\n$0^*\\omega_{\\mathbf A^d/Y}\\cong\\Lambda(d)[2d]$ is the vector-bundle\npurity of [cor-pur-vector-bundle-purity], the adjoint of the\nintegration $t_\\pi$ of [def-amb-vector-integration]; on the trivial\nbundle $t_\\pi$ is the ordered affine-space integration, the iterate of\nthe projective-line trace normalized by $t_q(c_1(\\mathcal O(1)))=1$.\nThe affinity-space purity of [cor-pur-affine-space-purity] is the\nordered composite of the affinity-line comparisons, each the adjoint of\nthe same projective-line-normalized trace. So both are normalized by the\nsame integration, the one sending the product of the Cartier classes of\nthe coordinate hyperplanes to $1$ (and the product of the Kummer\nboundaries of the coordinates to $(-1)^d$). The two\nassemblies differ only by the canonical reassociations of the package\n(the Koszul signs are $+1$, since all shift factors are of even\ndegree, by [prop-pur-affine-space-purity-compatibilities]); hence\nthe maps agree.",
     "uses": [
      "thm-pur-composition-coherence",
      "prop-pur-affine-space-purity-compatibilities",
      "def-pur-smooth-purity-map",
      "lem-pur-dnc-section-geometry",
      "thm-pur-dnc-invariance",
-     "def-pur-frame-class",
+     "cor-pur-vector-bundle-purity",
+     "def-amb-vector-integration",
      "cor-pur-affine-space-purity"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  },
  "lean": {
   "module": "Sheaf.Paper.ProjectionPurityAgreement",
   "declaration": "WeilConjectures.PurityFiniteSetting.projection_purity_agreement",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.projection_smooth",
-   "WeilConjectures.PurityFiniteSetting.projectionSmoothSource",
-   "WeilConjectures.PurityFiniteSetting.projectionSourceRaw",
-   "WeilConjectures.PurityFiniteSetting.ProjectionSourceIsoType",
-   "WeilConjectures.PurityFiniteSetting.projectionSourceIso_existsUnique",
-   "WeilConjectures.PurityFiniteSetting.projectionSourceIso",
-   "WeilConjectures.PurityFiniteSetting.projectionSmoothTarget",
-   "WeilConjectures.PurityFiniteSetting.projectionTargetRaw",
-   "WeilConjectures.PurityFiniteSetting.ProjectionTargetMapType",
-   "WeilConjectures.PurityFiniteSetting.projectionTargetMap_existsUnique",
-   "WeilConjectures.PurityFiniteSetting.projectionTargetMap",
-   "WeilConjectures.PurityFiniteSetting.projectionTarget_isIso",
-   "WeilConjectures.PurityFiniteSetting.projectionAffineInPresentation",
-   "WeilConjectures.PurityFiniteSetting.ProjectionIntrinsicHom",
    "WeilConjectures.PurityFiniteSetting.projectionAffineIntrinsic_existsUnique",
    "WeilConjectures.PurityFiniteSetting.projectionAffineIntrinsic",
    "WeilConjectures.PurityFiniteSetting.projectionSmoothIntrinsicRaw",
@@ -599,8 +350,8 @@
   "file": "lean/Sheaf/Paper/ProjectionPurityAgreement.lean",
   "statement": "theorem projection_purity_agreement (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum) (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E] (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (K : Scheme.proEtaleDerivedCategory Y (projectionSetting F C E n).Ring) (hK : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) Y K) (d : ℕ) : projectionSmoothIntrinsic (projectionSetting F C E n) Y aY K hK d = projectionAffineIntrinsic F C E n Y aY K hK d",
   "branch": "sheaf-dag",
-  "by": "NI",
-  "date": "2026-10-22",
+  "by": "X3",
+  "date": "2026-10-26",
   "existing": false,
   "note": "Equality of the actual normalized arrows on the original intrinsic pro-etale object at every positive coefficient level. Canonical connecting Tate and tensor coordinates are supplied by the two added definition nodes; the source and target normalizations are independent of either purity arrow."
  },
@@ -611,5 +362,15 @@
   "group": "NI",
   "result": "fix",
   "note": "Mathematics correct: every hypothesis and clause matches the node. Coefficient level n+1 covers all n>=1 with no e|n restriction. Y is separated finite type over k; d:N on the recorded ordered tower; K is intrinsic with finiteTorConstructible only. Smooth side is the recorded smoothPurityMap with the diagonal orientation the node pins as beta.delta.alpha^-1; affine side is the recorded affineSpacePurityComparison; conclusion is equality of morphisms. Source, target and root-transition coordinates are canonical (zeta -> zeta^l is Kummer-compatible, even shifts, no braiding). New nodes OK. Fault F1 (H5/H6): IsProjectionTensorStep in AffineDiagonalTensorCoordinates quantifies over G H and s : G ≅ H but pins only s by HEq; that gives only (G≅H)=(G0≅H0), so projectionTensorStep_existsUnique existence is unprovable and projectionTensorStep/projectionTensorActionIso/projectionSourceIso would be chosen from an unprovable spec. FIX in fixes/AffineDiagonalTensorCoordinates.lean adds HEq G (finiteEtaleTateTwist T (l^(n+1)) ...) and HEq H (finiteEtaleTateTwist T (l^(n+2)) ...), docstrings updated. Compiles clean with nt_compile --json (15-20 s). Probe: after the substitutions eq_of_heq hs succeeds; control without the pins fails. No record or item-module change. Advisory: second reading is a self-review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new sorried lemmas in ProjectionTensorIntegration against node lem-pur-projection-purity-agreement, smoothPurityMap/existsUnique_smoothPurityTensorMap and ordered_integration_transposes; 7 direct importers compiled"
  }
 }

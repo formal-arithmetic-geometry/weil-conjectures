@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-completed-koszul-coefficient-cone-realization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Order 1248, strict coefficient augmentation argument in the Koszul reconstruction proof; Stacks 099M, proof of lemma-naive-completion, realization of the Koszul pro-isomorphism",
+   "via": [
+    "lem-weil-pbc-completed-koszul-tensor-quotient-cone-pro-zero",
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite exact realization of the completed Koszul coefficient cones",
+ "statement": "For the completed coefficient datum and exterior Koszul tower of [lem-weil-pbc-completed-koszul-tensor-quotient-augmentation], assume a finite list generates its ideal. Put U equal to the cochain tensor unit over the completed module sheaves. Given algebraic Koszul augmentations, diagonal transitions, quotient transitions over ULift A with their component formulas and commuting squares, and any strict augmentation gamma at U normalized on the unit and zero on the nonzero exterior summands, there is an additive exact functor E from modules over ULift A to the completed module sheaves and levelwise isomorphisms E(Cone(epsilon_n)) to the actual Cone(gamma)_n. For every n<=m these isomorphisms intertwine the specified algebraic strict cone transition with the actual strict tower transition. This is a finite realization statement, without a variable complex P, K-flatness or eventual vanishing.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Order 1248, strict coefficient augmentation argument in the Koszul reconstruction proof; Stacks 099M, proof of lemma-naive-completion, realization of the Koszul pro-isomorphism; more-algebra.tex, lemma-sequence-Koszul-complexes (0921); sites-modules.tex, lemma-completion-flat (093M)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+  "def-weil-pbc-koszul-reconstruction-models",
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete constant-module/scalar-extension functor E. Obtain its additivity and exactness, its regular-module comparison c, and the normalized quotient-complex comparisons eQ from the finite quotient realization. Obtain source-complex comparisons eK, their strict transition naturality and their degree-zero unit normalization from unit tensor realization.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-finite-quotient-realization",
+    "lem-weil-pbc-completed-koszul-unit-tensor-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse exteriorPower.zeroEquiv, followed by extension, is an invertible degree-zero map vK. The hεA formula computes vK followed by the augmentation as the quotient projection. Cancel c followed by E(vK); the two normalizations and hu identify augmentation components in degree zero. A target identified with a termwise-realized extended single complex detects chain maps in degree zero, so the full augmentations agree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The algebraic augmentation is epimorphic in every degree: degree zero is a surjective quotient map composed with an exterior equivalence, and all other target terms vanish. Extension and the exact functor E preserve this epimorphy. Apply additiveConeFamilyComparison to the given strict squares, eK and eQ. It forces quotient transition naturality by epimorphism cancellation and gives the cone isomorphisms and every required strict transition identity.",
+   "uses": [
+    "lem-sfb-additive-cone-family-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-additive-cone-family-comparison",
+  "lem-weil-pbc-completed-koszul-finite-quotient-realization",
+  "lem-weil-pbc-completed-koszul-unit-tensor-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Proof of lemma-naive-completion (099M): finite source and quotient identifications isolated, augmentation equality and epimorphy proved, strict cone assembly by additiveConeFamilyComparison; M9, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact constant sheaf scalar extension identifies algebraic Koszul augmentation cones with completed coefficient cones and their strict transitions",
+   "results": "8 hits: CategoryTheory.Sheaf.coneΓ, CategoryTheory.constantSheafΓAdj, LightCondensed.lanLightCondSet, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, AlgHom.extendScalars, CondensedSet.LocallyConstant.functorFullyFaithful, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, comonadicExtendScalars",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact constant sheaf realization of a Koszul complex augmentation cone into modules over a completed coefficient sheaf",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, localCohomology.diagram, CochainComplex.cm5b.I, CochainComplex.cm5b.I_X, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.exact₀",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(cone|augment)|completed.*koszul",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*tensor|tensor.*mappingCone",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No completed exterior-Koszul model comparison; generic APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -i koszul.*(cone|augment)|completed.*koszul in Mathlib/Algebra/Homology and Mathlib/RingTheory; rg tensor cone in Mathlib/Algebra/Homology",
+   "results": "No matching declarations. Source-library analogues AdicResidueKoszulCoefficientConeComparison and FlatConstantTensorProZeroCones use respectively a different coefficient-slice/dual model and generic tensor-cone APIs, not this finite model identification.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; the cited generic APIs supply part of the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorQuotientConeProZero",
+  "date": "2026-10-27",
+  "group": "V3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulCoefficientConeRealization",
+  "file": "lean/Sheaf/Paper/CompletedKoszulCoefficientConeRealization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulCoefficientConeRealization",
+  "statement": "theorem completedKoszulCoefficientConeRealization\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)\n    (εA : ∀ n : ℕ,\n      ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A) ^ (n + 1)) ⟶\n        (ChainComplex.single₀ (ModuleCat.{t + 1} (ULift.{t + 1} A))).obj\n          (ModuleCat.of (ULift.{t + 1} A)\n            ((ULift.{t + 1} A) ⧸\n              (Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^\n                (n + 1))))\n    (sA : ∀ n m : ℕ, n ≤ m →\n      (ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A) ^ (m + 1)) ⟶\n        ExteriorAlgebra.koszulComplex (ULift.{t + 1} A) r\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A) ^ (n + 1))))\n    (qA : ∀ n m : ℕ, n ≤ m →\n      ((ChainComplex.single₀ (ModuleCat.{t + 1} (ULift.{t + 1} A))).obj\n          (ModuleCat.of (ULift.{t + 1} A)\n            ((ULift.{t + 1} A) ⧸\n              (Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^\n                (m + 1))) ⟶\n        (ChainComplex.single₀ (ModuleCat.{t + 1} (ULift.{t + 1} A))).obj\n          (ModuleCat.of (ULift.{t + 1} A)\n            ((ULift.{t + 1} A) ⧸\n              (Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^\n                (n + 1)))))\n    (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom\n      (((Ideal.span (Set.range (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^\n          (n + 1)).mkQ.comp\n        (exteriorPower.zeroEquiv (ULift.{t + 1} A) (Fin r →₀ ULift.{t + 1} A)).toLinearMap))\n    (hsA : ∀ n m h k, (sA n m h).f k = ModuleCat.ofHom\n      (exteriorPower.map k (Finsupp.linearCombination (ULift.{t + 1} A)\n        (fun i ↦ Finsupp.single i ((ULift.up (a i) : ULift.{t + 1} A) ^ (m - n))))))\n    (hqA : ∀ n m h,\n      ModuleCat.ofHom ((Ideal.span (Set.range\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (m + 1)).mkQ ≫\n        (qA n m h).f 0 = ModuleCat.ofHom ((Ideal.span (Set.range\n          (fun i ↦ (ULift.up (a i) : ULift.{t + 1} A)))) ^ (n + 1)).mkQ)\n    (hc : ∀ n m h,\n      HomologicalComplex.extendMap (sA n m h) ComplexShape.embeddingDownNat ≫\n          HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat =\n        HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat ≫\n          HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)\n    (γ : (completedKoszulTensorTower T d r a).obj\n        (𝟙_ (CochainComplex (CompletedAdicModules T d) ℤ)) ⟶\n      ((completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ)).obj\n        (𝟙_ (CochainComplex (CompletedAdicModules T d) ℤ)))\n    (hu : ∀ n : ℕ,\n      completedAdicKoszulTensorUnit T d r a _ n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map γ).app (op n) =\n        completedQuotientTensorUnit T d _ n)\n    (hz : ∀ (n : ℕ) (p q : ℤ) (_hq : q ≠ 0),\n      completedKoszulTensorSummand T d r a _ n p q ≫\n          ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map γ).app (op n)).f\n            (p + q) = 0) :\n    ∃ (E : ModuleCat.{t + 1} (ULift.{t + 1} A) ⥤ CompletedAdicModules T d)\n      (_hadd : E.Additive) (_hlim : PreservesFiniteLimits E)\n      (_hcolim : PreservesFiniteColimits E)\n      (e : ∀ n : ℕ, (E.mapHomologicalComplex (.up ℤ)).obj\n        (HomologicalComplex.homotopyCofiber\n          (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)) ≅\n            (CochainComplex.mappingCone γ).asFunctor.obj (op n)),\n      ∀ (n m : ℕ) (h : n ≤ m),\n        (E.mapHomologicalComplex (.up ℤ)).map\n          (HomologicalComplex.homotopyCofiber.mapArrowHom\n            (HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat)\n            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)\n            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)\n            (Arrow.homMk\n              (HomologicalComplex.extendMap (sA n m h) ComplexShape.embeddingDownNat)\n              (HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)\n              (hc n m h))) ≫ (e n).hom =\n          (e m).hom ≫ (CochainComplex.mappingCone γ).asFunctor.map (homOfLE h).op",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedKoszulCochainMonoidal",
+   "AlgebraicGeometry.Scheme.completedKoszulCochainMonoidalStruct",
+   "AlgebraicGeometry.Scheme.completedKoszulCoefficientConeRealization"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T012955-L-2354127",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T034713-L-3676722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

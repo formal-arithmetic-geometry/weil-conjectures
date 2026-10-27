@@ -17,87 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Extend $F$ to the enlarged etale site $\\mathcal C_X$ as the module sheaf $\\widetilde F$ using [lem-trf-space-enlarged-etale-ringed-site-model]. The same node identifies the canonical ringed-topos map for any morphism $g:A\\to Y$ with the continuous functor $V\\mapsto A\\times_YV$. Direct image is precomposition by that functor, by [def-weil-pbc-sites-and-cohomology](3), with scalars restricted along pullback of regular functions. Thus for an etale scheme $V\\to Y$ we have $(f_*F)(V)=\\widetilde F(X\\times_YV)$. Apply the same description also to $a$ and $b$ and their respective modules. These are the canonical direct images of [def-trf-space-etale-module-functors], since the model supplies precisely the canonical morphisms of ringed topoi, rather than an arbitrary choice of adjoints.",
+   "text": "For each etale scheme $V\\to Y$, put $W_V=V\\times_YX$, $Z_V=V\\times_YU$ and $Q_V=V\\times_YR$. By [lem-trf-space-atlas-base-change-cech-geometry], these are enlarged-site objects and $c_V:Z_V\\to W_V$ is a singleton covering. A test map $V'\\to V$ induces the three fibre-product maps, giving functors $W,Z,Q$ and a natural transformation $c:Z\\to W$. The lemma identifies $Q_V\\simeq Z_V\\times_{W_V}Z_V$ with both projections, naturally in $V$; thus this is the overlap functor of the kernel lemma below. It also supplies the scheme $R$ and its etale projections. ",
    "uses": [
-    "lem-trf-space-enlarged-etale-ringed-site-model",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-trf-space-etale-module-functors"
+    "lem-trf-space-atlas-base-change-cech-geometry"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03M8 (lemma-compute-pushforward), first four sentences of proof; spaces-properties.tex Tags 03H7 and 03G2/03G8 for the enlarged-site and ringed-topos interpretation"
+    "place": "Tag 03M8 (lemma-compute-pushforward), covering and overlap sentences of the proof; the overlap base is W = V times_Y X, correcting the printed subscript X."
    }
   },
   {
-   "text": "Fix $V\\to Y$ etale from a scheme and put $W=V\\times_YX$, $Z=V\\times_YU$ and $Q=V\\times_YR$. By [lem-trf-space-fibre-products-etale-covers], $W$ is an algebraic space and $Z\\to W$ is the pullback of the singleton surjective etale covering $U\\to X$, hence is a covering. The maps $Z\\to U$ and $Q\\to R$ are etale, being pullbacks of $V\\to Y$, and are schemes by representability. Likewise $R=U\\times_XU$ is a scheme and its projections are etale. The base-change and composition assertions of [lem-trf-space-chartwise-etale-permanence] put all these objects and maps in the enlarged etale sites in question. In particular $W\\to X$ is etale, and $Z\\to W$ is a scheme chart to which the sheaf axiom applies.",
+   "text": "Apply [lem-trf-space-chart-limit-enlarged-sections] to $(f,F),(a,F_U),(b,F_R)$: all three specified chart limits have small vertices in the fixed module universe and their projections are restrictions. The coefficient and source-arrow comparisons of [lem-trf-space-atlas-direct-image-section-diagram] give $\\alpha_W:(f_*F)(V)\\simeq\\widetilde F(W_V)$, $\\alpha_Z:(a_*F_U)(V)\\simeq\\widetilde F(Z_V)$ and $\\alpha_Q:(b_*F_R)(V)\\simeq\\widetilde F(Q_V)$, linear and natural in $V,F$. Pullback of regular functions gives $\\mathcal O_Y(V)\\to\\widetilde{\\mathcal O}_X(W_V)$; restrictions give the other scalar actions. Thus the three evaluated presheaves are module sheaves. For the specified atlas arrows $\\iota,r_1,r_2$ and restrictions $\\rho,d_1,d_2$, these chart-preserving comparisons satisfy $\\alpha_Z\\iota=\\rho\\alpha_W$ and $\\alpha_Qr_j=d_j\\alpha_Z$ for $j=1,2$.",
    "uses": [
-    "lem-trf-space-fibre-products-etale-covers",
-    "lem-trf-space-chartwise-etale-permanence"
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-trf-space-atlas-direct-image-section-diagram"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03M8 (lemma-compute-pushforward), covering sentence; base-change geometry is spaces-topologies.tex Tag 041F(3)"
+    "place": "Tag 03M8 (lemma-compute-pushforward), extension to X_spaces,etale and identification of the three section terms and restriction arrows."
    }
   },
   {
-   "text": "The overlap of this covering is $Z\\times_WZ\\cong Q$. Indeed a map from a test scheme $T$ into $Z\\times_WZ$ is a triple $(v,u_1,u_2)$ with $v:T\\to V$, $u_i:T\\to U$, $a u_1=a u_2$ equal to the image of $v$ in $Y$, and $p u_1=p u_2$ in $X$. The last equality gives a unique map $r:T\\to R$ with projections $u_1,u_2$, and $b r$ is the image of $v$. Thus the triple is exactly a map $T\\to V\\times_YR$, with the two projections given by $p_1,p_2$. This construction and its inverse commute with test maps, so the fibre-product universal property in [lem-trf-space-fibre-products-etale-covers] gives the asserted canonical isomorphism. The base of the overlap here is $W$, not $X$.",
+   "text": "Apply [lem-trf-space-enlarged-cover-module-kernel] with $M=\\widetilde F$, the cover and overlap functors of step 1, and the scalar maps and sheaf conditions of step 2, in the fixed small-site universe. The equations of step 2 give $\\alpha_Q((r_1-r_2)z)=(d_1-d_2)(\\alpha_Zz)$. The kernel lemma gives $(d_1-d_2)\\rho=0$; the equations of step 2 and injectivity of $\\alpha_Q$ therefore give $(r_1-r_2)\\iota=0$. Since $\\alpha_Q$ is injective, $z$ is a kernel section exactly when $\\alpha_Zz$ is a matching section. The cited lemma gives its unique antecedent $t$ with $\\rho(t)=\\alpha_Zz$; define $\\beta(z)=\\alpha_W^{-1}(t)$. Then $\\alpha_Z(\\iota\\beta(z))=\\rho(t)=\\alpha_Zz$, so $\\iota\\beta(z)=z$. For $s\\in(f_*F)(V)$, uniqueness identifies the antecedent of $\\alpha_Z\\iota(s)=\\rho\\alpha_W(s)$ with $\\alpha_W(s)$, giving $\\beta\\iota(s)=s$. The inverse is linear by the lemma and step 2. Moreover, $\\alpha_Z\\iota=\\rho\\alpha_W$ and injectivity of $\\rho,\\alpha_W$ show that $\\iota$ is injective. For $h:V'\\to V$, naturality of $\\iota$ gives $\\iota_{V'}(\\beta_V(z)|_{V'})=z|_{V'}=\\iota_{V'}\\beta_{V'}(z|_{V'})$; injectivity of $\\iota_{V'}$ proves that $\\beta$ commutes with restriction. For $m:F\\to G$, both $(f_*m)\\beta_F(z)$ and $\\beta_G((a_*p^*m)z)$ map to $(a_*p^*m)z$ under $\\iota_G$, so injectivity gives their equality. Thus these linear inverses form the required natural isomorphism of module sheaves for the specified atlas arrow, with exactness at the first two terms.",
    "uses": [
-    "lem-trf-space-fibre-products-etale-covers"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03M8 (lemma-compute-pushforward), overlap formula, correcting its printed subscript X to V times_Y X"
-   }
-  },
-  {
-   "text": "For an etale map, tensor pullback is restriction to the localized etale site by [lem-trf-space-etale-module-pushforward-restriction]. Hence $F_U=p^*F$ is the restriction of $\\widetilde F$ to $U$, and $F_R=p_1^*F_U$ is its restriction to $R$; the other restriction along $p_2$ agrees since $p p_1=p p_2$. Using the localization identifications of [lem-trf-space-enlarged-etale-ringed-site-model], step 1 consequently gives $(a_*F_U)(V)=\\widetilde F(Z)$ and $(b_*F_R)(V)=\\widetilde F(Q)$. The canonical map from $(f_*F)(V)$ is restriction along $Z\\to W$, and the two maps to $(b_*F_R)(V)$ are restriction along the two projections of step 3. The identifications preserve the specified chart projections of [def-trf-space-etale-module-functors], so they identify the canonical maps, not just the three objects.",
-   "uses": [
-    "lem-trf-space-etale-module-pushforward-restriction",
-    "lem-trf-space-enlarged-etale-ringed-site-model",
-    "def-trf-space-etale-module-functors"
+    "lem-trf-space-enlarged-cover-module-kernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03M8 (lemma-compute-pushforward), restrictions in the displayed sequence; spaces-properties.tex Tag 03LV (lemma-etale-exact-pullback) and equation 03LW (equation-restrict-modules)"
-   }
-  },
-  {
-   "text": "The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology](1), applied to the singleton cover $Z\\to W$ and the underlying abelian sheaf of $\\widetilde F$, gives injectivity of $\\widetilde F(W)\\to\\widetilde F(Z)$ and a unique antecedent for each $s\\in\\widetilde F(Z)$ whose two restrictions to $Q$ agree. For abelian groups this condition is exactly that their difference is zero. All maps are $\\mathcal O_Y(V)$-linear: restrictions are semilinear over the structure-sheaf restrictions by [def-weil-sheaf-of-modules-category], and the scalar actions here are induced from the same map to $V$. Thus the sequence of sections is exact at the first two terms as a sequence of $\\mathcal O_Y(V)$-modules.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03M8 (lemma-compute-pushforward), application of the sheaf condition and displayed sequence (exact at the first two terms only)"
-   }
-  },
-  {
-   "text": "For a map $V'\\to V$ of etale schemes over $Y$, all the maps just constructed are restrictions along the induced fibre-product maps, so functoriality of restriction makes the square for every arrow commute. For a module morphism $F\\to G$ the same assertion is its naturality on each chart, as in [def-trf-space-etale-module-functors]. The sequences of step 5 therefore form the stated sequence of module sheaves on $Y$. Kernels of module sheaves are computed sectionwise by [def-weil-sheaf-of-modules-category]. The sectionwise bijections from $f_*F$ onto the kernel give an isomorphism of module sheaves: their inverses commute with restrictions and addition and scalar multiplication by uniqueness of the sectionwise antecedent. This proves the canonical equalizer assertion and both exactness clauses.",
-   "uses": [
-    "def-trf-space-etale-module-functors",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Tag 03M8 (lemma-compute-pushforward), final sentence: functoriality in V and conclusion"
+    "place": "Tag 03M8 (lemma-compute-pushforward), sheaf-condition paragraph and final functoriality sentence, extracted as a statement for a functorial family of covers with compatible scalar actions."
    }
   }
  ],
  "proof_deps": [
-  "def-trf-space-etale-module-functors",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-sheaf-of-modules-category",
-  "lem-trf-space-chartwise-etale-permanence",
-  "lem-trf-space-enlarged-etale-ringed-site-model",
-  "lem-trf-space-etale-module-pushforward-restriction",
-  "lem-trf-space-fibre-products-etale-covers"
+  "lem-trf-space-atlas-base-change-cech-geometry",
+  "lem-trf-space-atlas-direct-image-section-diagram",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-trf-space-enlarged-cover-module-kernel"
  ],
  "proof_origin": {
   "by": "document",
@@ -203,20 +161,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-space-pushforward-atlas-equalizer",
   "worker": "stage1",
-  "summary": "Split the Stacks 03M8 atlas equalizer through the existing enlarged ringed-site model, base-change permanence, the actual overlap fibre product, etale pullback as restriction, the singleton-cover sheaf axiom, and sectionwise module kernels. Corrected the ill-typed F_R=p_1^*F to F_R=p_1^*F_U and recorded the source overlap typo; no hypotheses or conclusions are changed. No new nodes.",
-  "blueprint": "Realizes the retained historical ancestry place: Stacks 03M9 affine-target paragraph invoking 03M8 in the section-algebra descent chain under lem-trf-local-term-locality. Steps 1-4 identify the atlas diagram; steps 5-6 prove its kernel property. This does not replace any step of the current contracting-correspondence unit.",
+  "summary": "Repair of the 2026-10-22 re-split return. The statement is unchanged. Three independent statement-only nodes retain respectively old steps 2-3 (atlas geometry), old steps 1 and 4 (canonical section diagram), and old steps 5-6 (functorial module descent kernel). The parent now assembles them. The full previous arguments are preserved verbatim in the report with their new-node assignments. Repaired the refused landing against the current live DAG: re-read all current cited statements, confirmed the live parent is identical to the retained baseline, and replaced the final assembly step by the explicit canonical map and unique inverse, including restriction and scalar compatibility. The delivery is rebuilt on current origin/sheaf-dag by deliver.py. On renewed repair of returned head d424eac5c94, made the functorial cover and overlap data explicit in step 1, specified the scalar-ring map and directions of all three section identifications in step 2, and checked the inverse composites explicitly in step 3. The three helper statements, search records, statement dependencies and parent statement are retained. Repair retry 2026-10-23: compared the retained returned assembly with the current read DAG (live parent equals baseline.json), re-read every current notion dependency and the three helper statements, and rebuilt through the delivery tool on the current server base. Added explicit commuting equations for all atlas arrows and the difference map; the assembly now checks kernel membership and both inverse composites through those equations. No helper statement or search question changed. Further promotion-return repair: the current enlarged-site-model file has changed by a new split, with identical statement; all eleven dependency statements still agree with the retained snapshot. Step 3 now proves restriction and module-morphism naturality of the transported inverse using explicit equalities and injectivity of the atlas map, rather than only invoking naturality after comparison. Initial retained-work dry run passed at 47257cf22f6; final validation follows these edits. Final promotion-return repair on 2026-10-23: re-read the changed scheme and size-convention files and their current blueprint updates (statements unchanged); the universe bound remains explicit. Step 3 now derives the zero composite of the specified atlas arrow with the difference map before constructing its kernel inverse. Initial retained-work dry run passed at 0a1a4e0c687; the final delivery is rebuilt on the freshly fetched live base. Current promotion-refusal repair: initial retained-work dry run passed at 646250d5f63. Compared every dependency with the preceding snapshot; only the chartwise-etale-permanence file changed (new assembly and dependencies, unchanged statement). Re-read it and all eleven statements. Step 3 now explicitly derives injectivity of the specified atlas arrow from its comparison equation and the injectivity of the covering restriction, justifying both subsequent naturality cancellations. All statements, source routes, helper nodes and actual logged searches are retained. Latest promotion-return repair: initial dry run identified the newly landed lem-trf-space-chart-limit-enlarged-sections. Re-read its complete statement and the changed pushforward-restriction split (statement unchanged). Step 2 now directly cites that existing all-chart realization for alpha_W, retaining the distinct atlas/tensor-arrow comparison task. The report distinguishes all three tasks from the newly landed result; citations include its exact realization clause. All previous proof material and logged searches are preserved. Resumed promotion-return repair 2026-10-23: initial dry run completed at ae4a5728d68 (durable receipt checked after provider interruption). Re-read the current chart-limit node and all other cited statements. Step 2 now applies the existing all-chart theorem to all three direct images, explicitly carrying its small-vertex and specified-projection clauses; the distinct source-arrow and tensor-coefficient comparison remains the new diagram task. The earlier dependency snapshot omitted this newly cited node, so the current comparison records it in addition to every retained input. The final delivery is rebuilt on the freshly fetched current live branch.",
+  "blueprint": "Realizes the retained historical ancestry place: Stacks 03M9 affine-target paragraph invoking 03M8 in the section-algebra descent chain under lem-trf-local-term-locality. Assembly step 1 uses the geometry helper for old steps 2-3; step 2 uses the comparison helper for old steps 1 and 4; step 3 uses the module-kernel helper for old steps 5-6. The full old arguments remain verbatim in report.md. This retains the current unit and its route.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q42-812b2c486",
-  "group": "Q42",
+  "reviewer": "NT-cc-Q13-80a5e3f93",
+  "group": "Q13",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-812b2c486 (reviewer sub-agent of L); spot-checked: I read the whole item. I checked it against Stacks 03M8 (spaces-morphisms lemma-compute-pushforward, statement and proof) and against the cited places 03H7, 03G2/03G8, 03LV/03LW and 041F(3). Hypotheses: S, f, a surjective étale atlas and an arbitrary O_X-module are all kept. The extra 'U affine' comes from the import and is unused; it is harmless for the only citer (qc-separated pushforward). The coefficient category is Mod(O_X) on the small étale site, as in the source. Statement change: 'F_R=p_1^*F' was ill-typed and is now 'F_R=p_1^*F_U ≅ p_2^*F_U', which only fixes the types and is accepted. Source error confirmed: the printed (V×_YU)×_X(V×_YU)=V×_YR fails for Y=X=U=Spec k with V two points (4 points against 2); the overlap must be taken over W=V×_YX, and step 3 proves that version. Steps: (1) the enlarged-site model and the sites definition give f_*F(V)=F̃(X×_YV), consistent with the chart-limit definition of f_*. (2) The fibre-product and permanence nodes show Z→W is a covering and Z, Q, R are schemes. (3) The overlap computation is elementary and I re-derived it. (4) Étale tensor pullback is restriction, by the pushforward-restriction node and the model's localization clause. (5) The singleton-cover equalizer axiom gives the sequence, with O_Y(V)-linearity. (6) Kernels are sectionwise. Edge cases checked: empty X, F=0, the identity atlas, and the two-affine atlas of P^1. Duplicate searches (03M8 and equalizer terms over dag/nodes, and blueprint_refs) found nothing. All cited statements are in sk-i-curve-zero; the off-unit citations are definitions only, so no tool_uses. No cycle, proof_deps equals the union of uses, no new nodes, no SGA, and no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-80a5e3f93 (reviewer sub-agent of L); spot-checked: This is the eighth push of the re-split the human released on 2026-10-22. The earlier heads 17ede50f, d424eac5, 5339629a, 01d7ea5a, 1a43b6ae, 16f5317c and 60722c1c all passed; their landings were refused at promotion, not on the mathematics. clones/live and clones/side-live still hold the old six-step proof and none of the helper ids, so no other group has superseded the item. Compared with 60722c1c, the three new nodes (atlas-base-change-cech-geometry, atlas-direct-image-section-diagram, enlarged-cover-module-kernel) are byte-identical, and so is the cited lem-trf-space-chart-limit-enlarged-sections. In the item, the statement, stmt_deps, proof_deps, every step's uses and steps 1 and 3 are unchanged, and all eight notion and model dependency files are identical. The only changes are the text of step 2 and the split_report summary. Step 2 now applies the chart-limit node to (f,F), (a,F_U) and (b,F_R). Its hypotheses hold for a: U→Y and b: R→Y because schemes are spaces by def-trf-scheme-algebraic-space and the pullbacks F_U, F_R are module sheaves. It gets small vertices and restriction projections from that node, and alpha_W, alpha_Z, alpha_Q from the section-diagram helper. The helper preserves chart projections, so alpha_Z iota = rho alpha_W and alpha_Q r_j = d_j alpha_Z hold. The evaluated presheaves are sheaves because they are linearly isomorphic to the direct images, which is the hypothesis of the kernel node. I re-read step 1 (overlap over W = V x_Y X, the corrected Stacks 03M8 subscript, with the two-point V counterexample) and step 3 ((r1-r2)iota = 0, kernel membership, beta and both composites, injectivity of iota, naturality in V and F, exactness only at the first two terms). The duplicate search with rg -L over the current snapshot found only older lem-a1 nodes on representability and quotient presentations, none of them a duplicate. Batch-5 flags: geometry, section-diagram, chart-limit (proof_deps []) and the enlarged-cover kernel are generic foundations for pushforward on algebraic spaces (Stacks 03M8). None is a step of the trace-formula or duality proofs, and none has such a proof in its closure, so all four are accepted. No SGA source is used, there are no tool_uses and no fixes. The item still has to be promoted to the live DAG."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AlgebraicSpacePushforwardAtlasEqualizer",
@@ -237,5 +195,16 @@
   "result": "pass",
   "note": "Re-delivery after the H2 return of 42c5692b. The Lean module is byte-identical (sha256 f79fe776…), so the previous clause-by-clause check stands. The item's stmt_deps replace the theorem lem-trf-space-enlarged-etale-ringed-site-model with the new def-trf-scheme-algebraic-space, and the theorem stays in proof_deps; against live the item only adds that def stmt_dep. The new node matches Stacks 025Y/03G1, depends only on def-pc-scheme, def-trf-algebraic-space and def-pc-fppf-site, and has no proof deps, so no cycle. Its lean record is existing:true on the unchanged EnlargedEtaleRingedSite, lists schemeSpace and schemeSheaf_isAlgebraicSpace, and gives the def schemeSpace signature verbatim; check_existing returns no failures. schemeSpace is the only owner-module declaration the signature uses, and no other node owns it live or in runs/2. nt_compile --json is clean (4.0 s, rc 0). Advisories: the owner docstrings keep the theorem's blueprint tag, and the inherited theorem stmt_dep lem-trf-space-fibre-products-etale-covers contributes no signature declaration."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

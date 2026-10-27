@@ -188,7 +188,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-c26c28194 (reviewer sub-agent of L); spot-checked: Read the full item, blueprint route, cited DAG statements, Stacks sources (079P, 079Q, 015F, 070K, 070Y), Mathlib search results, and edge cases. All four proof steps are mathematically sound for arbitrary ring sheaves and unbounded complexes; the natural derived-unit comparison is correctly identified. No new nodes, duplicates, SGA citations, missing hypotheses, or repairs."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsDerived",
   "declaration": "AlgebraicGeometry.Scheme.ProEt.wContractible_sections_derived",
@@ -225,5 +236,34 @@
    "AlgebraicGeometry.Scheme.ProEt.wContractible_sections_derived"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring and $U$ an object of $X_{\\mathrm{proét}}$. Let\n$\\Lambda[U]$ be the free sheaf of $\\Lambda$-modules on $U$, the sheafification of the presheaf\n$V\\mapsto\\Lambda^{(\\Hom_X(V,U))}$. Then $\\Hom(\\Lambda[U],G)\\cong G(U)$, naturally in the sheaf\nof $\\Lambda$-modules $G$.\n\nIf $W$ is a weakly contractible object of $X_{\\mathrm{proét}}$\n([det-pe-weak-contractible-equivalences]), then $\\Lambda[W]$ is a projective object of the\ncategory of sheaves of $\\Lambda$-modules on $X_{\\mathrm{proét}}$. Consequently\n$H^q(W,F)=\\operatorname{Ext}^q(\\Lambda[W],F)=0$ for every sheaf of $\\Lambda$-modules $F$ and\nevery $q>0$.",
+  "proof": [
+   {
+    "text": "The natural bijection $\\Hom(\\Lambda[U],G)\\cong G(U)$ is the composite of the sheafification\nadjunction, the free–forgetful adjunction between sets and $\\Lambda$-modules (applied\nobjectwise), and the Yoneda lemma.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $W$ be weakly contractible, let $e\\colon E\\to G$ be an epimorphism of sheaves of\n$\\Lambda$-modules and $f\\colon\\Lambda[W]\\to G$. The epimorphism $e$ is locally surjective, so\nits underlying map of sheaves of sets is an epimorphism, and by condition 3 of\n[det-pe-weak-contractible-equivalences] the map $E(W)\\to G(W)$ is surjective. Under the\nbijection above, $f$ corresponds to an element of $G(W)$; a preimage in $E(W)$ corresponds to\na map $g\\colon\\Lambda[W]\\to E$, and $e\\circ g=f$ by naturality of the bijection. Hence\n$\\Lambda[W]$ is projective.",
+    "uses": [
+     "det-pe-weak-contractible-equivalences"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The cohomology $H^q(W,F)$ is $\\operatorname{Ext}^q(\\Lambda[W],F)$, the derived functors of\n$\\Hom(\\Lambda[W],-)=\\Gamma(W,-)$. Since $\\Lambda[W]$ is projective, it has projective dimension\n$0$, so $\\operatorname{Ext}^q(\\Lambda[W],F)=0$ for $q>0$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,456 @@
+{
+ "id": "lem-sfb-dm-finite-normalization-charts",
+ "kind": "statement",
+ "title": "Finite normalization of smooth Deligne--Mumford stacks and its charts",
+ "statement": "Let $k$ be a field and let $\\mathcal X$ be a smooth finite-type Deligne--Mumford stack over $k$. Let $U\\subseteq\\mathcal X$ be a dense open substack and let $V\\to U$ be a representable finite etale morphism. The meanings of stack, Deligne--Mumford stack and 2-fibre product are those spelled out in [def-sfb-stable-pointed-moduli-groupoids]. On each normal finite-type etale scheme chart $T\\to\\mathcal X$, take the integral closure of $\\mathcal O_T$ in the product of the function fields of all generic components of $V\\times_{\\mathcal X}T$. These finite $T$-schemes and their descent arrows define a normal Deligne--Mumford stack $\\mathcal N$ with a representable finite morphism $\\nu:\\mathcal N\\to\\mathcal X$. Formation of $\\mathcal N$ commutes with etale scheme charts, and there is a canonical equivalence $\\mathcal N\\times_{\\mathcal X}U\\simeq V$ over $U$.\n\nIf $k$ is perfect (every algebraic extension of $k$ is separable), formation of this normalization also commutes with extension of scalars to every field $k′/k$, using all generic components after base change. There is also the following formal-chart compatibility, under the additional hypothesis that $k$ is perfect. Let $x$ be a geometric point over an algebraically closed field $\\Omega/k$, and suppose the formal completion of $\\mathcal X_\\Omega$ along the residual gerbe of $x$ is presented as $[\\operatorname{Spf}R/H]$, with an effective morphism $\\operatorname{Spec}R\\to\\mathcal X_\\Omega$ inducing this formal chart, where $R$ is a complete regular Noetherian local $\\Omega$-algebra with residue field $\\Omega$ and $H=\\operatorname{Aut}(x)$ is a finite group. A residual gerbe here means the full substack of objects locally isomorphic to $x$; a quotient by $H$ means the groupoid of $H$-torsors with equivariant maps to the indicated formal scheme. Let $R^\\circ\\subseteq\\operatorname{Spec}R$ be the inverse image of $U_\\Omega$, let $E=V_\\Omega\\times_{U_\\Omega}R^\\circ$, and let $B$ be the integral closure of $R$ in the product of the generic fields of $E$. The completion of $\\mathcal N_\\Omega$ along its fibre over that gerbe is $[\\operatorname{Spf}B/H]$. In particular the automorphism group of a geometric point above $x$, represented by a closed point $b$ of $\\operatorname{Spec}B$, is the stabilizer $\\{h\\in H:h(b)=b\\}$. Fields, schemes, finite type, finite morphisms, etaleness and smoothness (of an etale scheme atlas over $k$) use [def-weil-field], [def-pc-scheme], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-etale-morphism] and [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 0ABP (lemma-properties-normalization) and 0BB0 (lemma-nagata-normalization-finite), applied to etale charts and their descent groupoid; formal-chart compatibility: Pikaart--de Jong, Section 2.3.6, printed p.11, the presentations Spf(A)/Aut(C) and Spf(B)/Aut(C). This stack/formal extension is agent-formulated from those arguments. Perfect-field scalar extension: Tag 038O in varieties.tex (lemma-geometrically-normal), equivalence with normality over the perfect closure; finite birational normal models give the normalization identification."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-moduli-chart-normalization",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-moduli-stack-properties",
+  "def-sfb-moduli-normalization-tests",
+  "def-sfb-formal-moduli-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite-type etale scheme charts $T\\to\\mathcal X$. They are smooth over $k$, so their stalks are normal. The normal Noetherian scheme $T$ is a finite disjoint union of normal integral components. Work on one such component. Its inverse image $T^\\circ$ of $U$ is dense, since the etale chart is flat and open; the same follows from scheme-theoretic density and flat pullback. The finite etale scheme $P=V\\times_U T^\\circ$ is a finite disjoint union of normal integral schemes. Pull back the schematically dense map $\\operatorname{Spec}k(T)\\to T^\\circ$ along the flat map $P\\to T^\\circ$: its image is schematically dense in $P$. The generic fibre algebra is a finite product of finite separable extensions of $k(T)$ by the etale-algebra-over-field theorem. Each open integral component meets this dense fibre, whose points are generic there. Thus the fields in the item are exactly these factors.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal",
+    "lem-trf-normal-topologically-noetherian-components",
+    "lem-fin-etale-normal-components",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal); normal components and flat density as in the cited nodes."
+   }
+  },
+  {
+   "text": "For an affine open $W=\\operatorname{Spec}A\\subset T$, let $L$ be the product of the rational fields of the components of $P|_W$ and let $C\\subset L$ be the integral closure of $A$. An element of $L$ integral over $A$ belongs to every local ring of $P|_W$, because those rings are normal and the same monic equation has coefficients in each of them. It is therefore a regular global function on $P|_W$. Consequently $C$ is also the integral closure of $A$ in $\\Gamma(P|_W,\\mathcal O)$, which is finite over $A$ by the cited finite-etale-open lemma. Its prime localizations are normal by the integral-closure-in-a-product lemma. Localization compatibility glues these affine schemes to a finite normal $N_T\\to T$. Each nonempty factor has the prescribed rational field by the integral-closure fraction-field lemma, so $P$ will be dense in $N_T$.",
+   "uses": [
+    "lem-sbc-finite-etale-open-integral-closure",
+    "lem-sbc-integral-closure-finite-normal-product",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-integral-closure-finite-extension-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032L, 0307 and 035L, as instantiated in the cited statements; construction on normal chart components."
+   }
+  },
+  {
+   "text": "Over an affine open $W\\subset T^\\circ$, the finite etale algebra $D$ of $P|_W$ is normal and finite over $A=\\mathcal O_T(W)$. Every element of $D$ is integral over $A$. Conversely, an element of its total rational algebra integral over $A$ is integral over $D$, hence belongs to $D$ by normality. Thus $C=D$ on these opens. These equalities give a canonical isomorphism $N_T|_{T^\\circ}\\simeq P$, including the empty-cover case. The generic-field construction and normality also show that this open is schematically dense in $N_T$.",
+   "uses": [
+    "lem-fin-etale-normal-components",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Integral-closure calculation; cf. Tag 0BQL (lemma-normal-in-finite-etale)."
+   }
+  },
+  {
+   "text": "For an affine etale change $A\\to A'$ of integral chart opens, use the etale integral-closure theorem with ambient algebra $L$, the product of generic fields from step 1. The generic algebra $A'\\otimes_A k(T)$ is a product of finite separable fields by the etale-algebra-over-field theorem. The normal-domain-factor theorem for $A'$ and flat density identify these factors with its total rational fields; applying the same field theorem after adjoining the factors of $L$ identifies $A'\\otimes_A L$ with the total rational algebra of the pulled-back open cover. Thus the base-change isomorphism for integral closures identifies $A'\\otimes_A C$ with the required new normalization algebra. For general chart maps work on these affine opens and glue. On algebraic-space overlaps use etale scheme covers. All comparisons are the canonical maps in these rational algebras, so their triple-overlap composites agree. Effective descent of finite schemes gives $\\nu:\\mathcal N\\to\\mathcal X$ representable finite, with precisely $N_T$ as atlas pullbacks; its normal atlas makes $\\mathcal N$ normal and Deligne--Mumford. Full faithfulness descends step 3 to $\\mathcal N\\times_{\\mathcal X}U\\simeq V$ and proves independence of the atlas.",
+   "uses": [
+    "lem-sfb-integral-closure-etale-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-trf-etale-normal-domain-finite-factors",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-sfb-finite-schemes-etale-stack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABP (lemma-properties-normalization); descent by Tags 0245, 02LA and 06WV."
+   }
+  },
+  {
+   "text": "Suppose $k$ is perfect and $k'/k$ is arbitrary. On an affine normal chart model $\\operatorname{Spec}C=N_T$, the perfect-closure criterion applied with perfect closure $k$ itself shows that $C\\otimes_k k'$ is normal. It is finite over the base-changed chart algebra, and its open restriction is $P_{k'}$. The open remains schematically dense by flat pullback. On each normal component the total rational algebra is consequently the product of the rational fields of $P_{k'}$, including any splitting of the original generic fields. A finite normal algebra $D$ with this total rational algebra is its integral closure over the base algebra: one inclusion is finiteness, and the reverse inclusion follows because a monic equation over the base is also monic over $D$. Thus the base-changed model is precisely the newly constructed normalization. These identifications are canonical algebra inclusions; they commute with the descent arrows of step 4 and give the asserted scalar-extension equivalence.",
+   "uses": [
+    "lem-weil-pbc-geometrically-normal-perfect-closure-criterion",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-sfb-finite-schemes-etale-stack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038O (lemma-geometrically-normal), normality over the perfect closure; affine identification by integral closure."
+   }
+  },
+  {
+   "text": "Apply step 5 with $k'=\\Omega$. For the specified effective formal chart, the completed-atlas comparison supplies an etale scheme chart $(T,t)$ over $\\mathcal X_\\Omega$ with $R\\simeq\\widehat A$, where $A=\\mathcal O_{T,t}$, compatible with the actual map to $\\mathcal X_\\Omega$. Let $C$ be the finite normal $A$-algebra of the pullback of $\\mathcal N_\\Omega$ to $\\operatorname{Spec}A$; it is normal by localization of the normal model $N_T$. The field $\\Omega$ is excellent and excellence passes to finite-type algebras and their localizations, so $A$ is excellent. The finite-algebra completion theorem identifies $D=R\\otimes_A C$ with the finite product of the completed local rings $\\widehat{C_{\\mathfrak q}}$ for primes $\\mathfrak q$ over the maximal ideal of $A$. Each $C_{\\mathfrak q}$ is a normal local domain by normality of $C$ and is excellent by the same finite-type/localization theorem. Fix such a $\\mathfrak q$ and put $C'=C_{\\mathfrak q}$ with maximal ideal $\\mathfrak n$. Being excellent, $C'$ is a G-ring by the definition of excellence, so the G-ring completion theorem (with $I=\\mathfrak n$) makes $C'\\to\\widehat{C'}$ flat, with every fibre ring $\\widehat{C'}\\otimes_{C'}\\kappa(\\mathfrak p')$ Noetherian and geometrically regular over $\\kappa(\\mathfrak p')$. Taking the trivial extension $\\kappa(\\mathfrak p')/\\kappa(\\mathfrak p')$, which is finite purely inseparable by definition, each fibre ring is regular, hence normal by the regular-ring theorem. The completion $\\widehat{C'}$ of the Noetherian ring $C'$ is Noetherian. The flat-normal-fibres theorem, applied to $C'\\to\\widehat{C'}$ with $C'$ Noetherian and normal, shows that $\\widehat{C'}$ is normal (this is the argument of Tag 0C23). Finite products of normal rings are normal. Thus $D$ is normal. By compatibility of the maps it is the coordinate algebra of $\\mathcal N_\\Omega\\times_{\\mathcal X_\\Omega}\\operatorname{Spec}R$, and hence finite over $R$.",
+   "uses": [
+    "lem-sfb-effective-formal-chart-completed-atlas",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-completion-finite-extension",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-finite-product-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-geometry.tex",
+    "place": "Tag 0DQZ (lemma-compare-versal-ring-completion); more-algebra.tex Tags 07QW, 07QU, 0C23 (lemma-completion-normal-local-ring); algebra.tex Tags 07N9, 0316 (lemma-completion-Noetherian-Noetherian) and 0C22 (lemma-normal-goes-up-noetherian)."
+   }
+  },
+  {
+   "text": "The restriction of $\\operatorname{Spec}D$ over $R^\\circ$ is $E$, by step 4 and base change. It is schematically dense: before completion the open is dense in the normal chart model, and $A\\to R$ is flat by the G-ring completion theorem, since excellence includes the G-ring property. The map $\\operatorname{Spec}D\\to\\operatorname{Spec}C$ is its base change and is flat. Flat pullback preserves this density. Hence the rational fields of all components of $E$ are exactly the total rational fields of $D$. Every element of $D$ is integral over $R$, and every element of that total rational algebra integral over $R$ is integral over $D$ and belongs to $D$, since $D$ is normal. This identifies $D$ canonically with the algebra $B$ of the statement. This is a calculation in the total rational algebra, not an assertion that integral closure commutes with arbitrary base change.",
+   "uses": [
+    "lem-weil-pbc-g-ring-completion-regular",
+    "def-exc-excellent-ring",
+    "lemma-nagata-dense-flat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C23 and algebra.tex Tag 07N9; affine normal integral-closure identification."
+   }
+  },
+  {
+   "text": "Apply the finite-formal-quotient pullback theorem to $\\mathcal N_\\Omega\\to\\mathcal X_\\Omega$. On the formal atlas its algebra is $D=B$ by steps 6--7, so its completion along the entire inverse image of the residual gerbe is $[\\operatorname{Spf}B/H]$. The $H$-action used here is the action induced by the formal descent arrows, not an arbitrarily chosen lift. Under the integral-closure identification these arrows extend the given arrows on $E$: the algebra maps agree after restriction to the dense open, hence agree in the total rational algebra. The equivalence is therefore the claimed one over the specified formal chart.",
+   "uses": [
+    "lem-sfb-finite-formal-quotient-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tags 04M9 and 044W on the infinitesimal neighbourhoods; Pikaart--de Jong Proposition 2.3.6, printed p.11, formal argument."
+   }
+  },
+  {
+   "text": "For a closed point $b$ of $\\operatorname{Spec}B$ over the closed point of $R$, its residue field is a finite extension of $\\Omega$ and is therefore $\\Omega$. In the quotient groupoid, an arrow from the object represented by this $\\Omega$-point to itself is exactly an $h\\in H$ with $h\\cdot b=b$ as an $\\Omega$-point; composition is multiplication in $H$. Since the action is $\\Omega$-linear and the residue field is $\\Omega$, fixing the closed point already fixes its $\\Omega$-valued lift. The automorphism group is thus the stated stabilizer. If $B=0$ there is no such point, so this last assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Definition of the quotient groupoid and the stabilizer; cf. Tag 044R."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-fin-etale-normal-components",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-sbc-finite-etale-open-integral-closure",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "def-weil-pbc-integral-closure",
+  "lem-sfb-integral-closure-etale-base-change",
+  "lem-trf-etale-normal-domain-finite-factors",
+  "lem-sfb-finite-schemes-etale-stack-descent",
+  "lem-weil-pbc-geometrically-normal-perfect-closure-criterion",
+  "lem-sfb-effective-formal-chart-completed-atlas",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-completion-finite-extension",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-finite-product-normal",
+  "lem-sfb-finite-formal-quotient-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 0ABP and 0BB0 chart construction; varieties.tex 038O; formal extension modeled on Pikaart--de Jong Proposition 2.3.6 (online primary PDF read, local PDF WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization of a smooth Deligne Mumford stack in a finite etale cover of a dense open commutes with etale charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) :\\n  f.normalizationOpenCover.f U ≫ f.fromNormalization = Spec.map (f.normalizationDiagramMap.app (.op U.1)) ≫ U.2.fromSpec\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.normalization ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closures in all generic field factors descend along an etale groupoid to a finite normalization of a Deligne Mumford stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"For schemes $X, Y, T, Z$ and morphisms $f: X \\to Y$, $f₁: X \\to T$, $f₂: T \\to Y$ (with $f₂$ integral), the composition of the normalization morphism $X \\to \\text{Normalization}(f)$ with the normalization \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme\", \"doc\": \"Given `f : X ⟶ Y`, `f.normalization` is the relative normalization of `Y` in `X`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"This is the open cover of `f.normalization` by `Spec` of integral closures of `Γ(Y, U)`\\nin `Γ(X, f ⁻¹ U)` where `U` ranges over all affine opens.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X] : AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X] : AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"[Stacks Tag 0AXN](https://stacks.math.columbia.edu/tag/0AXN)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The morphism from the relative normalization to itself. This map is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The dominant morphism into the relative normalization.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f] : AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"[Stacks Tag 03GP](https://stacks.math.columbia.edu/tag/03GP)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|Deligne.Mumford|normalization.*stack|stack.*normalization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative normalization finite over an excellent normal algebraic stack with recovery of the finite etale open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme normalization, scheme morphism, abstract group action or number-field inertia declarations do not state this stack/moduli assertion or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of a normal finite type scheme over a perfect field commutes with arbitrary field extension and can be computed on completed etale charts",
+   "results": "8 scheme-normalization hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, instIsIsoToNormalizationOfIsIntegralHom, toNormalization, instIsAffineHomToNormalization, normalization, ker_toNormalization, ι_toNormalization_assoc, toNormalization_normalizationDesc; Mathlib.AlgebraicGeometry.Normalization. No stack, perfect-field scalar-extension, or completed-chart comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal scheme over a perfect field is geometrically normal so finite normalization in a generically finite cover commutes with scalar extension",
+   "results": "8 scheme-normalization hits: AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, normalizationDesc, normalizationDesc_comp_assoc, instIsIntegralNormalization, normalization.hom_ext, instIsIntegralHomNormalizationDesc, normalizationDesc_comp, toNormalization_normalizationDesc; Mathlib/AlgebraicGeometry/Normalization. No geometric-normality scalar-extension or stack comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a smooth Deligne Mumford stack in a finite etale dense open cover with formal quotient charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "a5916f816cdcc7f8"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DeligneMumford\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|formalQuotient|normalization.*[Ss]tack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of an algebraic stack commutes with etale charts and completion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) :\\n  f.normalizationOpenCover.f U ≫ f.fromNormalization = Spec.map (f.normalizationDiagramMap.app (.op U.1)) ≫ U.2.fromSpec\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ f₁_1 : X ⟶ T) (e_f₁ : f₁ = f₁_1)\\n  (f₂ f₂_1 : T ⟶ Y) (e_f₂ : f₂ = f₂_1) [inst_2 : AlgebraicGeometry.IsIntegralHom f₂]\\n  (H : f =\", \"doc\": \"Given schemes $X, Y, T$ and morphisms $f: X \\\\to Y$, $f_1, f_1': X \\\\to T$, $f_2, f_2': T \\\\to Y$ such that $f_1 = f_1'$, $f_2 = f_2'$, and $f = f_1 \\\\circ f_2 = f_1' \\\\circ f_2'$, with $f$ quasi-compact, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization.ker = ⊥\", \"doc\": \"For a scheme morphism $ f: X \\to Y $, the kernel of the morphism from $ X $ to its normalization is equal to the bottom element $ \\bot $ in the relevant order structure of subschemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalizationDesc f₁ f₂ H ≫ f₂ = f.fromNormalization\", \"doc\": \"For a scheme morphism $ f $ factoring as $ f_1 $ followed by $ f_2 $, the composition of the normalization morphism $ \\\\text{normalizationDesc} $ from the normalization of $ f $ to a target scheme $ T \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "0f812645a93b45e9"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite integral closure descent for an etale presentation of an algebraic stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, abstract descent, unrelated group quotients or completion ingredients; none states this assertion or a one-line generalization",
+   "digest": "dcbc0eea6705c6fd"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-abelian-level-normalization",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts.",
+   "via": [
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dm-finite-normalization-charts",
+  "worker": "stage1",
+  "summary": "Constructed the finite normal chart algebras, recovered the original cover, descended canonical etale comparisons, and checked perfect-field scalar extension and effective formal-chart compatibility. Three general prerequisites isolate finite stack descent, the completed-atlas comparison, and finite formal quotient pullbacks. Normality of the completed finite algebra is derived directly from existing completion, excellence, G-ring, regular-ring, flat-normal-fibre (Tag 0C22) and product nodes. Existing finite integral-closure and geometric-normality statements are reused. No statement changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lemma-nagata-dense-flat-pullback",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-over-field-product",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-sbc-finite-etale-open-integral-closure",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-trf-etale-normal-domain-finite-factors",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-normal-perfect-closure-criterion",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-product-normal",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic scheme/ring input for normalization on charts; the unit gives no replacement for this algebraic or descent fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-geometrically-normal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-fin-etale-normal-components",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-sbc-finite-etale-open-integral-closure",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-trf-etale-normal-domain-finite-factors",
+  "lem-weil-pbc-geometrically-normal-perfect-closure-criterion",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-finite-product-normal",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-83fea4af3",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-83fea4af3 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and the 3 new nodes in full. The item is live: it is not in route-pivot-dropped.txt, it is still unsplit on side-live, and its statement is unchanged. There is no re-split note for it. Fault (Artin–Gabber drop-list finding): Step 6 cited the dropped lem-per-henselian-normal-completion-preparation (drop list line 1635), only for the generic clause of Stacks 0C23, that the completion of a normal excellent local ring is normal. Fixed in Step 6 with the 0C22 proof route from live nodes: C_q is excellent, so it is a G-ring (def-exc-excellent-ring); lem-weil-pbc-g-ring-completion-regular makes C_q to its completion flat with geometrically regular fibres; the trivial extension is finite purely inseparable, so the fibres are regular (def-weil-pbc-finite-purely-inseparable-extension) and hence normal (lem-weil-pbc-regular-ring-normal); the completion is Noetherian (lem-weil-pbc-adic-completion-noetherian); lem-weil-pbc-flat-normal-fibres-noetherian-normal then gives normality. proof_deps, tool_uses and the summary were updated; the dropped id is gone, and the fixed closure contains no dropped or new trf node. The other steps check out against their cited statements. Step 1: 056T normality, normal components, flat density. Step 2: finite integral closure via sbc finite-etale-open and normal-product. Step 3: elementary. Step 4: etale base change of integral closure, with finite descent via the new node. Step 5: perfect-closure criterion with P = k. Step 7: A to R flat (G-ring), density, normal plus finite gives D = B. Steps 8-9: quotient pullback and stabilizer. New nodes: finite-scheme descent over a DM atlas (0245/02LA/06WV), effective formal chart = completed etale chart (0DQZ/039M, the 2-isomorphism algebraizes via the locally finite type Isom space over complete R), and finite formal quotient pullback (04M9, (IO_Y)^n = I^nO_Y). All three are true, statement-only and self-contained. None restates a clause of the item, and none duplicates an existing node (the galois-fpqc nodes cover scheme bases only). Batch-5 flags: the trf smooth-geometrically-normal, normal-components and etale-normal-factors nodes, the exc excellence nodes, and def-sfb-stable-pointed (which reaches only a trf definition) are generic algebra or definitions, not trace-formula or Poincare-duality content, so I accept them. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "import_flags": [
+  "unreachable"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmFiniteNormalizationCharts",
+  "declaration": "AlgebraicGeometry.exists_dm_finite_normalization_charts",
+  "declarations": [
+   "AlgebraicGeometry.exists_dm_finite_normalization_charts",
+   "AlgebraicGeometry.dm_finite_normalization_formal_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DmFiniteNormalizationCharts.lean",
+  "statement": "theorem exists_dm_finite_normalization_charts (k : Type u) [Field k] (X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (U : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (V : BasedCategory.{v₃, w₃} (Over (Spec (.of k)))) (j : BasedFunctor U X) (v : BasedFunctor V U) (hX : IsDeligneMumfordModuliStack X) (hXs : HasSmoothFiniteTypeModuliAtlas X) (hU : IsModuliStack U) (hV : IsModuliStack V) (hj : IsDenseOpenModuliMap j) (hv : IsRepresentableFiniteModuliMap v) (hve : IsEtaleModuliMap v) : ∃ (N : BasedCategory.{max u v₁ v₂ v₃, max (u + 1) w₁ w₂ w₃} (Over (Spec (.of k)))) (ν : BasedFunctor N X) (i : BasedFunctor V N) (e : v.comp j ≅ i.comp ν), IsDeligneMumfordModuliStack N ∧ IsNormalModuliStack N ∧ IsRepresentableFiniteModuliMap ν ∧ IsModuliChartNormalization (v.comp j) ν i e.symm ∧ (moduliTwoFiberLift v i e).toFunctor.IsEquivalence ∧ (PerfectField k → ModuliNormalizationScalarCharts (v.comp j))",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-26fd426de",
+  "group": "NI",
+  "result": "pass",
+  "note": "Both theorems match the node clause by clause: existence of N, normal DM, finite ν, chart normalization, N×_X U≃V, perfect-field scalar charts (checked true for every k'), and the formal-chart clause stated over algebraically closed Ω, which covers X_Ω/N_Ω. The comparison data (ρB, θB, β) is fixed by the Q×_X N equivalence and equivariance. The stabilizer isomorphism has the correct composition order. The new dependency modules (normalization tests, formal quotient) are real definitions matching their nodes; both records change only lean. All lean.statement fields verbatim; the 5 added stmt_deps are used and acyclic. No hollow definitions or extra hypotheses, universes bound, the only sorry are the two theorem proofs, docstrings carry source and proof steps, and the report sections are present. No recompile (instructions); no fixes."
+ }
+}

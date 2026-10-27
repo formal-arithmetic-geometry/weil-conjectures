@@ -9,7 +9,8 @@ public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.RingTheory.FinitelyPresentedOverSubring
+import Mathlib.Algebra.Module.LocalizedModule.Submodule
+import Mathlib.RingTheory.Flat.TorsionFree
 import Sheaf.TraceFormula.ValuationFiniteTypeModulePresentation
 
 /-!
@@ -32,7 +33,6 @@ This stage-2 statement is recorded by group Q130.
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u v w
 
@@ -46,16 +46,13 @@ Source: Stacks Project, `more-algebra.tex`, Lemma Tag 0GSE
 (lemma-valuation-ring-flat-essentially-finite-type), part (2), statement and proof at lines
 6005--6044 (blueprint: lem-trf-valuation-flat-finite-module-presentation).
 
-Proof: (1) Express the essentially finite type algebra as a localization of a finite type
-polynomial algebra and localize at the inverse image of the maximal ideal, obtaining a
-surjection from a local polynomial algebra. (2) Pull back the kernel of a finite presentation
-of the module to the polynomial algebra; the resulting finite submodule is torsion-free,
-hence flat over the valuation ring, and therefore finitely presented. (3) Localize this
-presentation and transfer finite presentation across the finite type algebra map, using
-`lem-trf-module-submodule-localization`, `lem-trf-flat-module-torsionfree-domain`,
-`lem-trf-valuation-torsionfree-flat`, `lem-trf-valuation-finite-type-module-presentation`,
-`lem-trf-localization-preserves-finite-presentation`, `lem-weil-pbc-localization-module-exact`,
-and `lem-trf-finitely-presented-over-subring`.
+Proof: Choose a finite type subalgebra `C` of `B` and a submonoid `W` with
+`B` the localization of `C` at `W`. The `C`-span `N` of a finite set of `B`-module
+generators of `M` is finite over `C`. As a submodule of the flat `A`-module `M`, it is
+torsion-free over `A`, hence flat over the valuation ring. Thus
+`valuation_finite_type_module_presentation` makes `N` finitely presented over `C`.
+Localizing `N` inside `M` gives the `B`-span of the chosen generators, namely all of `M`.
+Finite presentation is preserved by this localization, yielding the result.
 -/
 theorem valuation_flat_finite_module_presentation
     (A : Type u) (B : Type v) (M : Type w)
@@ -65,7 +62,37 @@ theorem valuation_flat_finite_module_presentation
     [AddCommGroup M] [Module B M] [Module A M]
     [IsScalarTower A B M] [Module.Finite B M] [Module.Flat A M] :
     Module.FinitePresentation B M := by
-  sorry
+  classical
+  -- Use a finite type subalgebra directly, avoiding the polynomial quotient.
+  let C := EssFiniteType.subalgebra A B
+  let W := EssFiniteType.submonoid A B
+  let : Module C M := Module.compHom M (algebraMap C B)
+  have : IsScalarTower C B M := IsScalarTower.of_compHom C B M
+  have : IsScalarTower A C M := IsScalarTower.of_algebraMap_smul fun a m ↦ by
+    change (algebraMap C B (algebraMap A C a)) • m = a • m
+    rw [← IsScalarTower.algebraMap_apply A C B, algebraMap_smul B]
+  obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := B) (M := M)
+  let N : Submodule C M := Submodule.span C (s : Set M)
+  have : Module.Finite C N := Module.Finite.of_fg ⟨s, rfl⟩
+  have : Module.Flat A N :=
+    Module.Flat.flat_iff_torsion_eq_bot_of_isBezout.mpr
+      (Submodule.isTorsionFree_iff_torsion_eq_bot.mp inferInstance)
+  have : Module.FinitePresentation C N :=
+    valuation_finite_type_module_presentation A C N
+      (RingHom.finiteType_algebraMap.mpr inferInstance)
+  -- Localizing the span of the chosen generators gives the whole B-module.
+  let f : M →ₗ[C] M := LinearMap.id
+  have : IsLocalizedModule W f := isLocalizedModule_id W M B
+  let L := N.localized' B W f
+  have hL : L = ⊤ := by
+    change (Submodule.span C (s : Set M)).localized' B W f = ⊤
+    rw [Submodule.localized'_span]
+    simpa [f] using hs
+  have : Module.FinitePresentation B L :=
+    FinitePresentation.of_isBaseChange (N.toLocalized' B W f)
+      (IsLocalizedModule.isBaseChange W B _)
+  have : Module.FinitePresentation B (⊤ : Submodule B M) := hL ▸ ‹_›
+  exact Module.FinitePresentation.of_equiv Submodule.topEquiv
 
 end Algebra
 

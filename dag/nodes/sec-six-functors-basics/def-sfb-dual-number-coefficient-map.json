@@ -1,0 +1,136 @@
+{
+ "id": "def-sfb-dual-number-coefficient-map",
+ "kind": "definition",
+ "title": "Coefficientwise algebra map on dual numbers",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field], let $R,S$ be commutative $k$-algebras, and let $h:R\\to S$ be a homomorphism of $k$-algebras [def-weil-pbc-algebra-hom-quotient]. Write $R[\\epsilon],S[\\epsilon]$ for their dual-number algebras [def-sc-dual-numbers]. The induced coefficient map $h[\\epsilon]:R[\\epsilon]\\to S[\\epsilon]$ is the $k$-algebra homomorphism given by $a+b\\epsilon\\mapsto h(a)+h(b)\\epsilon$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-sc-dual-numbers"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.18--10.19, printed pp.191--192: functoriality of dual-number points under coefficient-algebra homomorphisms."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of k algebras induces a k algebra homomorphism of dual number rings by applying it to both coefficients",
+   "results": "{\"t\": \"2026-10-24T11:34:22Z\", \"tool\": \"leansearch\", \"query\": \"A homomorphism of k algebras induces a k algebra homomorphism of dual number rings by applying it to both coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.mapAlgHom\", \"DualNumber.coe_lift_symm_apply\", \"DualNumber.range_lift\", \"DualNumber.lift_apply_eps\", \"DualNumber.lift\", \"DualNumber.lift_apply_apply\", \"MvPolynomial.mapAlgHom\", \"PowerSeries.mapAlgHom\"], \"digest\": \"ef08b6263382338c\"}",
+   "date": "2026-10-24",
+   "verdict": "No direct bundled Mathlib coefficient-map match, but the exact existing project declaration is AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap in Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus. Reuse it with existing: true; no second definition or module. The recorded results are the actual searches from the first repair, reread against live source for the present repair."
+  },
+  {
+   "tool": "loogle",
+   "query": "DualNumber.mapRingHom",
+   "results": "{\"t\": \"2026-10-24T11:34:22Z\", \"tool\": \"loogle\", \"query\": \"DualNumber.mapRingHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DualNumber.mapRingHom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No direct bundled Mathlib coefficient-map match, but the exact existing project declaration is AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap in Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus. Reuse it with existing: true; no second definition or module. The recorded results are the actual searches from the first repair, reread against live source for the present repair."
+  },
+  {
+   "tool": "grep",
+   "query": "mapRingHom|mapAlgHom",
+   "results": "{\"t\": \"2026-10-24T11:36:51Z\", \"tool\": \"grep\", \"query\": \"mapRingHom|mapAlgHom\", \"sub\": \"Algebra/DualNumber.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No direct bundled Mathlib coefficient-map match, but the exact existing project declaration is AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap in Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus. Reuse it with existing: true; no second definition or module. The recorded results are the actual searches from the first repair, reread against live source for the present repair."
+  },
+  {
+   "tool": "grep",
+   "query": "rg dualMap|mapRingHom|mapAlgHom lean/WeilConjectures lean/Sheaf; rg -l dual-number-coefficient-map|dualMap dag/nodes; blueprint_refs.py search dual number",
+   "results": "The exact k-AlgHom exists as AffineGroupDualNumberCalculus.dualMap in the theorem module, owned in its lean.declarations record. Upstream DualNumber.mapRingHom at WeilConjectures/AlgebraicGeometry/DualNumbers.lean:80 is only a ring homomorphism; mapOfAlgHom in Mathlib/Algebra/DualNumber.lean upstream extension specializes the target to the base ring. No independent coefficient-map definition node; existing coefficientwise-ring-hom-map concerns polynomials and power series. Blueprint search gives 0 matches. Move the exact existing dualMap without changing its name or body.",
+   "date": "2026-10-24",
+   "verdict": "No direct bundled Mathlib coefficient-map match, but the exact existing project declaration is AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap in Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus. Reuse it with existing: true; no second definition or module. The recorded results are the actual searches from the first repair, reread against live source for the present repair."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+  "date": "2026-10-24",
+  "group": "Q151"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Propositions 17.76–17.79, printed pp.377–378, and the semisimple-centralizer case of Proposition 17.81, p.379. Use the identity component of the centralizer (Proposition 1.34, pp.16–17); it has the same Lie algebra. Nonunipotence follows from Example 17.75, p.377, and Theorem 14.5, pp.281–282. Supporting definition: coefficient extension of the dual-number tangent point in the adjoint stabilizer functor.",
+   "via": [
+    "lem-sfb-infinite-field-semisimple-centralizer-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus",
+  "declaration": "AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap",
+  "statement": "def dualMap {R S : Type u} [CommRing R] [Algebra k R]\n    [CommRing S] [Algebra k S] (h : R →ₐ[k] S) : DualNumber R →ₐ[k] DualNumber S",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Reuse the existing AlgebraicGeometry.AffineGroupDualNumberCalculus.dualMap from the live calculus module (Milne 10.18--10.19). Its full signature and coefficientwise construction give exactly this definition. Repair of returned 30450226f1f0: no replacement module, renamed declaration or second implementation is delivered. This definition node records the plain map separately from the calculus theorem, which remains only a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a70cb1fde",
+  "group": "Q151",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a70cb1fde",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Re-delivery after landing refused 30450226 (its DualNumberCoefficientMap module re-declared AffineGroupDualNumberCalculus.dualMap). Now def-sfb-dual-number-coefficient-map is existing:true (no file) pointing at the live calculus dualMap; body DualNumber.mapRingHom h.toRingHom + commutes' matches the node (a+bε↦h(a)+h(b)ε); statement verbatim in live file. Item module byte-identical to the PASSed 30450226 except it publicly imports the live calculus module; SemisimpleLieElement.lean identical; no cycle. Item record differs from side-live only in lean and 4 added def stmt_deps (wf-lie-algebra-derivation, semisimple-lie-element, dual-number-coefficient-map, tori-multiplicative-type); no theorem stmt_dep. All clauses re-checked vs node/Milne 17.74–17.81: infinite k, IsAlgClosure Ω, affine finite-type smooth connected G, hgeom on the real base change, rational semisimple noncentral X, closed proper smooth C representing Ad-stabilizer on every R (incl. R=0), K open immersion onto identity component, closed affine smooth connected, Krull dim drop, negated closed unitriangular embedding; HasDiagonalizableFaithfulLieImage non-hollow. Edge cases: disconnected C, char p/imperfect k, n=1, R=0. Neither the item nor its new nodes are landed by others (Q92 parallel retired). One sorry, docstrings/report sections present. No file changed, no compile."
+ }
+}

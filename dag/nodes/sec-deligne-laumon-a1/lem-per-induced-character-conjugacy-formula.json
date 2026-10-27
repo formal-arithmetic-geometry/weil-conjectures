@@ -1,0 +1,268 @@
+{
+ "id": "lem-per-induced-character-conjugacy-formula",
+ "kind": "statement",
+ "title": "The induced character formula for the quotient model",
+ "statement": "Let $G$ be a finite group, $H\\leq G$ a subgroup, and $W$ a finite-dimensional complex vector space with a linear $H$-action. Its character is $\\chi_W(h)=\\operatorname{tr}_{\\mathbf C}(h\\mid W)$. Form $\\operatorname{Ind}_H^G W$ by quotienting $\\mathbf C[G]\\otimes_{\\mathbf C}W$ by $[xh]\\otimes w=[x]\\otimes hw$, with $a([x]\\otimes w)=[ax]\\otimes w$. For every $g\\in G$, writing $C_G(g)=\\{x\\in G:xg=gx\\}$ and $g^G=\\{x^{-1}gx:x\\in G\\}$, one has\n$$\\chi_{\\operatorname{Ind}_H^G W}(g)=\\frac1{|H|}\\sum_{x\\in G,\\;x^{-1}gx\\in H}\\chi_W(x^{-1}gx)=\\frac{|C_G(g)|}{|H|}\\sum_{h\\in H\\cap g^G}\\chi_W(h).$$\nBoth fractions are interpreted in $\\mathbf C$; the assertion includes $H=G$, $H=\\{1\\}$ and $W=0$. Finite-dimensionality is [def-weil-finite-dimensional-subspace], and tensor and quotient modules are [def-weil-pbc-module-tensor-product] and [def-weil-pbc-quotient-module]. Trace is [def-weil-endomorphism-trace].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, printed p.138, motivation only. WANTED: Serre, Linear Representations of Finite Groups, Part I Chapter 7, induced character formula. No Stacks tag found. The quotient convention is the one in lem-per-finite-group-induction-calculus."
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-quotient-module",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof": [
+  {
+   "text": "Write $[x,w]$ for the class of $[x]\\otimes w$ in the stated quotient $U$. Tensor generators span, and quotient surjectivity shows that the $[x,w]$ span $U$. They are linear in $w$ and satisfy $[xh,w]=[x,hw]$. Left multiplication by $a\\in G$ sends the defining relation to $[axh,w]-[ax,hw]=0$, so it descends. On generators, $1[x,w]=[x,w]$ and $a(b[x,w])=(ab)[x,w]$; these also show that each action map is invertible, with inverse the action of $a^{-1}$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; generators, quotient relation and left action. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-vector-space-free], choose a basis $(b_i)_{i\\in I}$ of $W$. It is finite: take a finite spanning family from [def-weil-finite-dimensional-subspace] and let $I_0$ be the union of its finite basis supports. Every vector has support contained in $I_0$, whereas $b_i$ has support $\\{i\\}$, so $I=I_0$. Choose a set $S$ of representatives of the left cosets $G/H$. It is finite since $G$ is finite. Every $x\\in G$ is uniquely $sh$ with $s\\in S,h\\in H$: equal cosets determine $s$, then cancellation determines $h$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; finite basis and coset representatives. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  },
+  {
+   "text": "Put $D=\\bigoplus_{s\\in S}W$, with inclusions $\\iota_s$. Define $A:D\\to U$ by $A((w_s))=\\sum_s[s,w_s]$. Define a bilinear map on $\\mathbf C[G]\\times W$ by $([sh],w)\\mapsto\\iota_s(hw)$, extending linearly in the specified group-algebra basis. The tensor universal property gives a linear map on $\\mathbf C[G]\\otimes W$. For $h'\\in H$ its values on $[shh']\\otimes w$ and $[sh]\\otimes h' w$ are $\\iota_s((hh')w)$ and $\\iota_s(h(h' w))$, which agree by the action law. It kills the span of all relations, so it gives $B:U\\to D$ by $B([sh,w])=\\iota_s(hw)$: two representatives of a quotient coset differ by a vector in that span and have the same image.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; explicit maps between coset coordinates and the quotient. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  },
+  {
+   "text": "For every $s,w$, $BA(\\iota_s w)=\\iota_s w$, and for every $x=sh,w$, $AB([sh,w])=[s,hw]=[sh,w]$. These spanning generators show $BA=1$ and $AB=1$. In $D$ the vectors $\\iota_s b_i$ span by expansion in each coordinate; if a linear combination is zero, its $s$-coordinate is a zero combination of the $b_i$, forcing every coefficient to vanish. Thus $e_{s,i}=[s,b_i]$ is a basis of $U$. Its finite index set is $S\\times I$, proving that the induced representation is finite-dimensional.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; inverse checks and the exhibited basis of induction. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  },
+  {
+   "text": "Fix $g\\in G$. Write $gs=t h$ uniquely with $t\\in S,h\\in H$. Then $g e_{s,i}=[gs,b_i]=[t,hb_i]$. If $t\\ne s$, every coefficient in the $s$-block is zero. If $t=s$, equivalently $s^{-1}gs\\in H$, the diagonal coefficients in this block are those of $s^{-1}gs$ on the basis $(b_i)$ of $W$. Summing diagonal entries, exactly the trace formula of [def-weil-endomorphism-trace], gives\n$$\\chi_U(g)=\\sum_{s\\in S:\\ s^{-1}gs\\in H}\\chi_W(s^{-1}gs).$$",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; trace as the sum of diagonal matrix entries. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  },
+  {
+   "text": "For $x=sh$ put $k=s^{-1}gs$. Then $x^{-1}gx=h^{-1}kh$, which belongs to $H$ exactly when $k\\in H$. In that case the action matrices of $h^{-1}kh$ and $k$ on $W$ are conjugate by the invertible action matrix of $h$; basis independence and $\\operatorname{tr}(PAP^{-1})=\\operatorname{tr}(A)$ from [def-weil-endomorphism-trace] give equal characters. The bijection $S\\times H\\to G$, $(s,h)\\mapsto sh$, therefore rewrites the sum over all $x$ with $x^{-1}gx\\in H$ as $|H|$ times the sum in Step 5. The integer $|H|$ is positive because $1\\in H$; its image in $\\mathbf C$ is nonzero. Division proves the first equality.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; replacement of the representative sum by the all-elements average. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  },
+  {
+   "text": "For $k\\in H\\cap g^G$, choose $x_0\\in G$ with $x_0^{-1}gx_0=k$. The map $C_G(g)\\to\\{x\\in G:x^{-1}gx=k\\}$, $c\\mapsto cx_0$, is a bijection: $(cx_0)^{-1}g(cx_0)=x_0^{-1}gx_0$ when $cg=gc$; conversely, if $x^{-1}gx=k=x_0^{-1}gx_0$, then $c=xx_0^{-1}$ satisfies $c^{-1}gc=x_0x^{-1}gxx_0^{-1}=g$. Its inverse is $x\\mapsto xx_0^{-1}$. Thus every such fibre has $|C_G(g)|$ elements. Partitioning the finite set $\\{x:x^{-1}gx\\in H\\}$ by the value $k$ gives\n$$\\sum_{x:\\ x^{-1}gx\\in H}\\chi_W(x^{-1}gx)=|C_G(g)|\\sum_{k\\in H\\cap g^G}\\chi_W(k).$$\nSubstitute into the first equality to obtain the second.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; explicit conjugation-fibre bijections and finite-sum regrouping. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  },
+  {
+   "text": "No step requires positive dimension or a proper nontrivial subgroup. If $W=0$, its basis is empty, Step 4 gives $U=0$, and all traces and sums vanish. If $H=G$, take $S=\\{1\\}$, so Step 5 is $\\chi_U(g)=\\chi_W(g)$; Steps 6 and 7 still apply. If $H=\\{1\\}$, Step 5 is zero for $g\\ne1$, since $s^{-1}gs=1$ would force $g=1$; for $g=1$ each of the $|G|$ blocks is the identity of $W$, giving $|G|\\dim_{\\mathbf C}W$. This also covers the trivial group and confirms the stated edge cases.",
+   "uses": [
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Agent-written auxiliary calculation for inherited Step 3 representation input; zero space, whole and trivial subgroup cases. The blueprint does not contain this calculation; Serre Part I Chapter 7 is WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-quotient-module",
+  "lem-weil-pbc-vector-space-free",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+  "place": "Inherited Step 3 auxiliary representation input, supplied here by an explicit quotient-basis and conjugation-fibre computation. WANTED: Serre, Linear Representations of Finite Groups, Part I Chapter 7 (induced character formula); ILO Expose X Proposition 1.2, printed p.138, is motivation only."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The character of an induced representation evaluated at g equals the sum over x with x inverse g x in H of the subgroup character divided by the order of H",
+   "results": "{\"t\": \"2026-10-24T02:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"The character of an induced representation evaluated at g equals the sum over x with x inverse g x in H of the subgroup character divided by the order of H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.coindToInd_apply\", \"Representation.ind_mk\", \"FDRep.char_linHom\", \"Rep.indToCoindAux_snd_mul_inv\", \"FDRep.average_char_eq_finrank_invariants\", \"Rep.indToCoindAux_fst_mul_inv\", \"Rep.indToCoindAux\", \"Rep.indToCoindAux_mul_fst\"], \"digest\": \"493883022a8a8ddb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: induction constructions, reciprocity and coinduction comparisons do not state the trace formula for quotient induction. The character orthogonality and class-equation hits do not state this formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Character formula induction finite group sum over conjugacy class intersection subgroup",
+   "results": "{\"t\": \"2026-10-24T02:11:04Z\", \"tool\": \"leanfinder\", \"query\": \"Character formula induction finite group sum over conjugacy class intersection subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.char_orthonormal\", \"FDRep.average_char_eq_finrank_invariants\", \"FDRep.char_conj\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"FDRep.simple_iff_char_is_norm_one\", \"FDRep.char_mul_comm\", \"Group.sum_card_conj_classes_eq_card\", \"TannakaDuality.FiniteGroup.sumSMulInv_single_id\"], \"digest\": \"6f7f7236f2e0936d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: induction constructions, reciprocity and coinduction comparisons do not state the trace formula for quotient induction. The character orthogonality and class-equation hits do not state this formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.indResAdjunction",
+   "results": "{\"t\": \"2026-10-24T02:13:22Z\", \"tool\": \"loogle\", \"query\": \"Rep.indResAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Rep.indResAdjunction\", \"Rep.coindResAdjunction_counit_app\", \"Rep.coindResAdjunction_unit_app\"], \"digest\": \"20eb58853a56686a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: induction constructions, reciprocity and coinduction comparisons do not state the trace formula for quotient induction. The character orthogonality and class-equation hits do not state this formula."
+  },
+  {
+   "tool": "grep",
+   "query": "ind.*char|char.*ind|character.*induc",
+   "results": "{\"t\": \"2026-10-24T02:09:49Z\", \"tool\": \"grep\", \"query\": \"ind.*char|char.*ind|character.*induc\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\"], \"digest\": \"28fadf1a56a2ca69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: induction constructions, reciprocity and coinduction comparisons do not state the trace formula for quotient induction. The character orthogonality and class-equation hits do not state this formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "induced character formula sum conjugates subgroup finite group",
+   "results": "{\"t\": \"2026-10-24T02:09:50Z\", \"tool\": \"leansearch\", \"query\": \"induced character formula sum conjugates subgroup finite group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.sumOfConjugates\", \"LinearMap.sumOfConjugates_apply\", \"LinearMap.sumOfConjugatesEquivariant\", \"Representation.IndV\", \"Rep.coindToInd.congr_simp\", \"Rep.coindToInd_apply\", \"Rep.coindToInd_of_support_subset_orbit\", \"Rep.ind\"], \"digest\": \"fd387ead9f89977b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: induction constructions, reciprocity and coinduction comparisons do not state the trace formula for quotient induction. The character orthogonality and class-equation hits do not state this formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induced ordinary character equals centralizer order divided by subgroup order times sum character over conjugacy class intersection",
+   "results": "{\"t\": \"2026-10-24T02:13:21Z\", \"tool\": \"leansearch\", \"query\": \"Induced ordinary character equals centralizer order divided by subgroup order times sum character over conjugacy class intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IndV\", \"Rep.ind\", \"Group.nat_card_center_add_sum_card_noncenter_eq_card\", \"Representation.ind\", \"AddChar.sum_apply_eq_ite\", \"Group.card_center_add_sum_card_noncenter_eq_card\", \"AddChar.wInner_cWeight_eq_boole\", \"Representation.IndV.mk\"], \"digest\": \"7f51e578783a82db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: induction constructions, reciprocity and coinduction comparisons do not state the trace formula for quotient induction. The character orthogonality and class-equation hits do not state this formula."
+  },
+  {
+   "tool": "grep",
+   "query": "ind.*char|char.*ind|character.*induc",
+   "results": "{\"t\": \"2026-10-24T03:01:38Z\", \"tool\": \"grep\", \"query\": \"ind.*char|char.*ind|character.*induc\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean\"], \"digest\": \"28fadf1a56a2ca69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: only Hilbert90.lean:67, a comment about linear independence of characters."
+  },
+  {
+   "tool": "loogle",
+   "query": "FDRep.character, Representation.ind",
+   "results": "{\"t\": \"2026-10-24T03:01:39Z\", \"tool\": \"loogle\", \"query\": \"FDRep.character, Representation.ind\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits for this combined declaration pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Character of an induced representation of a finite group is the average of character values over conjugates lying in the subgroup",
+   "results": "{\"t\": \"2026-10-24T03:01:41Z\", \"tool\": \"leanfinder\", \"query\": \"Character of an induced representation of a finite group is the average of character values over conjugates lying in the subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.average_char_eq_finrank_invariants\", \"Rep.coindToInd_apply\", \"FDRep.char_conj\", \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"FDRep.char_orthonormal\", \"FDRep.char_linHom\", \"Representation.ind_mk\", \"FDRep.character\"], \"digest\": \"d4bab91da2736b2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Character.lean (character definition, conjugation invariance and character averages), Induced.lean (coinvariant induction with right-inverse action convention) and FiniteIndex.lean (induction/coinduction comparison); none states the quotient-model induced-character formula or its centralizer regrouping."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induced character equals centralizer cardinal divided by subgroup cardinal times character sum over conjugacy class intersection",
+   "results": "{\"t\": \"2026-10-24T03:01:58Z\", \"tool\": \"leansearch\", \"query\": \"Induced character equals centralizer cardinal divided by subgroup cardinal times character sum over conjugacy class intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.ind\", \"Representation.IndV\", \"Representation.ind\", \"Group.nat_card_center_add_sum_card_noncenter_eq_card\", \"Subgroup.nat_card_centralizer_nat_card_stabilizer\", \"Rep.coindToInd.congr_simp\", \"Subgroup.centralizer_eq_iInf\", \"Group.card_center_add_sum_card_noncenter_eq_card\"], \"digest\": \"54b78325179e39e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Character.lean (character definition, conjugation invariance and character averages), Induced.lean (coinvariant induction with right-inverse action convention) and FiniteIndex.lean (induction/coinduction comparison); none states the quotient-model induced-character formula or its centralizer regrouping."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace of finite group induction using a basis indexed by left cosets and conjugation",
+   "results": "{\"t\": \"2026-10-24T03:02:03Z\", \"tool\": \"leanfinder\", \"query\": \"Trace of finite group induction using a basis indexed by left cosets and conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.norm\", \"FDRep.character\", \"Rep.coindToInd_apply\", \"Representation.averageMap\", \"Representation.norm\", \"TannakaDuality.FiniteGroup.sumSMulInv\", \"TannakaDuality.FiniteGroup.sumSMulInv_single_id\", \"SlashInvariantForm.coe_trace\"], \"digest\": \"bfc586f9837c4e32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Character.lean (character definition, conjugation invariance and character averages), Induced.lean (coinvariant induction with right-inverse action convention) and FiniteIndex.lean (induction/coinduction comparison); none states the quotient-model induced-character formula or its centralizer regrouping."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-brauer-elementary-unit-character",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary representation input under lem-per-artin-gabber-affine-curve, Proof Step 3, via lem-per-brauer-monomial-induction; Expose X Proposition 1.2, printed p.138, before (5). The latest blueprint does not prove this auxiliary input. Specifically: The induced character formula for the quotient model.",
+   "via": [
+    "lem-per-brauer-elementary-unit-character",
+    "lem-per-brauer-monomial-induction",
+    "lem-per-cyclotomic-field-brauer-splitting",
+    "lem-per-local-cyclotomic-group-algebra-split",
+    "lem-per-tame-smooth-representation-chart",
+    "lem-per-gabber-fixed-locus-log-chart",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-induced-character-conjugacy-formula",
+  "worker": "stage1",
+  "summary": "Q97 supplies eight checked steps: finite coset-coordinate basis of the stated quotient, trace by diagonal entries, division by subgroup order, and explicit centralizer-fibre counting. Reuses existing basis and definition nodes; no new nodes or Mathlib leaves. Adds the existing trace definition to statement dependencies without changing the assertion. No exact project attachment or Mathlib formula was found.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, latest proof Step 3, through the inherited auxiliary representation chain in blueprint.from.via. This formula is an auxiliary input to that chain; the latest blueprint does not itself state or prove it. The inherited quotient-induction convention is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-c6b195b98",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-c6b195b98 (reviewer sub-agent of L); spot-checked: Read the whole item, all 8 steps, and every cited statement: tensor-product, quotient-module, direct-sum, finite-dimensional, endomorphism-trace and vector-space-free. No new nodes. The statement matches live/base except that the trace citation and its stmt_dep were added. The item is still unsplit live, so it is not superseded. The proof is an explicit coset-coordinate basis of the quotient model: B is well defined because [shh']⊗w and [sh]⊗h'w both map to ι_s(hh'w), and AB=1, BA=1 are checked on generators. Then the diagonal-block trace gives Σ_{s:s⁻¹gs∈H}χ_W(s⁻¹gs). Conjugation invariance comes from tr(PAP⁻¹)=tr(A) in the trace node, and the S×H bijection gives the factor 1/|H|. The fibre bijection c↦cx₀ from C_G(g) gives the centralizer form. All checks re-derived. On S₃ with H=⟨(12)⟩ and the sign character, both forms give (3,−1,0), which matches sign⊕standard; trivial H, H=G and W=0 also check. The citer lem-per-brauer-elementary-unit-character uses the second form exactly as stated. Searches of the DAG (rg -L) and of Mathlib RepresentationTheory found no duplicate. The cited nodes are mathlib definitions plus one Mathlib leaf, so there is no route issue and no tool_uses. The source is honestly marked agent-written (Serre Ch. 7 wanted; ILO X 1.2 motivation only); no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.InducedCharacterConjugacyFormula",
+  "declaration": "Representation.induced_character_conjugacy_formula",
+  "file": "lean/Sheaf/RepresentationTheory/InducedCharacterConjugacyFormula.lean",
+  "statement": "theorem induced_character_conjugacy_formula (G : Type u) [Group G] [Finite G] (H : Subgroup G) (W : Type v) [AddCommGroup W] [Module ℂ W] [FiniteDimensional ℂ W] (ρ : Representation ℂ H W) (g : G) : LinearMap.trace ℂ (IndV H.subtype ρ) (ind H.subtype ρ g) = (1 / (Nat.card H : ℂ)) * ∑ᶠ x : {x : G // x⁻¹ * g * x ∈ H}, LinearMap.trace ℂ W (ρ ⟨x.val⁻¹ * g * x.val, x.property⟩) ∧ (1 / (Nat.card H : ℂ)) * (∑ᶠ x : {x : G // x⁻¹ * g * x ∈ H}, LinearMap.trace ℂ W (ρ ⟨x.val⁻¹ * g * x.val, x.property⟩)) = ((Nat.card (Subgroup.centralizer ({g} : Set G)) : ℂ) / (Nat.card H : ℂ)) * ∑ᶠ h : {h : H // (h : G) ∈ conjugatesOf g}, LinearMap.trace ℂ W (ρ h.val)",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Mathlib IndV is the stated quotient under the generator relabeling [x,w] = IndV.mk H.subtype rho (x inverse) w. Its right-inverse translation is left translation in these labels; the diagonal coinvariant relation is [xh,w]=[x,rho(h)w]. Both equalities use LinearMap.trace, finite subtype finsums and complex cardinal ratios."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-590e5fdb0",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Mathlib IndV H.subtype ρ with ind is G-isomorphic to the node's quotient under [x,w]=IndV.mk x⁻¹ w (coinvariant relation gives [xh,w]=[x,ρh w]; ind_mk gives left translation; same convention as BrauerMonomialInduction). LHS is the genuine trace (IndV is finite free over ℂ). First form: finsum over {x // x⁻¹gx∈H}, divided by |H| in ℂ. Second form: |centralizer {g}|/|H| times the sum over {h:H // h∈conjugatesOf g}, i.e. H∩g^G. A=B∧B=C. Universes u,v independent; no extra hypotheses. Edge cases W=0, H=G, H=1, g=1, trivial group and disjoint class all covered; S3 sign check gives (3,-1,0). lean.statement verbatim; 4 Mathlib stmt_deps correct; live node differs only in lean, still unsplit-lean (not superseded); plain imports are proof_deps. No hollow defs, only sorry, docstrings carry source, blueprint tag and 8 steps; report sections present; no Mathlib/project duplicate. No changes, so no compile."
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "def-sf-mixed-compact-support-exchange-data",
+ "kind": "definition",
+ "title": "Canonical compact-support exchange, scalar and refinement data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a universe $u$, schemes in universe $u$, and commutative coefficient rings in universe $u+1$. Use compactifications and refinements of [def-weil-compactifications-refinements] and the constant-ring module operations underlying [def-cbc-strict-constant-tower-operations]. On the ordinary unbounded derived category of constant-ring module sheaves on the small pro-etale site, define $G_f$ as exact localization of module inverse image, $R_f$ as total right-derived module direct image, and $J_j$ as exact localization of module extension by zero. Retain their induced ordinary-adjunction normalizations. Define the source square $G_iG_r\\cong G_pG_k$ of a commuting scheme square $pk=ir$ by the canonical constant-section-normalized derived pullback compositors and equality transport. For compactifications $c=(j,p)$ and $c'=(j',p')$ with proper and open Cartesian squares, define $H_a:F_cG_a\\to G_xF_{c'}$, where $F_c=J_jR_p$ in Lean functor-composition order, as the proper adjunction mate followed by the inverse open-extension comparison of [def-exchange-projection], with the canonical associators inserted. These are ordinaryG, ordinaryR, ordinaryJ, sourceSquare and ordinaryH.\n\nFor a refinement $v:c\\to d$ and a quasi-compact original morphism, define ordinaryC to be the natural transformation $F_d\\to F_c$ obtained by inserting the inverse direct-image identity, applying the intrinsic clopen proper/open comparison for $(j_c,1_X,v,j_d)$, pushing forward along $p_d$, and applying the direct-image compositor and $vp_d=p_c$ transport. It is defined on all ordinary complexes; no Cartesian refinement square is required.\n\nFor arbitrary rings $C_n$ and transitions $C_{n+1}\\to C_n$, use the simultaneous-system operations and adjunctions of [def-sp-semilinear-constant-ring-operations] and the canonical squareP comparison of [def-sf-semilinear-proper-open-comparisons]. Define SemilinearProperOpen.exchange for any commuting square as the adjunction mate of squareP.hom under $P_p\\dashv R_p$ and $P_r\\dashv R_r$, using [def-weil-pbc-adjunction-mate].\n\nFor a prime $\\ell$, finite extensions $E,F/\\mathbf Q_\\ell$, a $\\mathbf Q_\\ell$-algebra embedding $i:E\\to F$, and a Noetherian finite-dimensional scheme $T$ on which $\\ell$ is invertible, use the raw rational categories of [def-weil-pbc-rational-category] and the canonical completed coefficient maps constructed by the valuation-ring, quotient and completion procedure of [def-weil-pbc-finite-completed-coefficient-map]. Define pbcRationalScalarExtension along $i$ by the constructible restriction of completed derived scalar extension followed by raw scalar localization; its object map is the integral derived tensor image and its morphism map is the induced localized tensor-Hom map. There is no Karoubi envelope.\n\nFinally, for an adic coefficient datum $d$, the completed compact-support operations of [def-sf-completed-compact-support-calculus-data], a quasi-compact $f$ and a refinement $v:c\\to d'$, define cbcRefinementMap at $K$ by the same identity--clopen-gamma--proper-compositor construction on completed modules, directed from $F_{d'}K$ to $F_cK$. All maps are the published constructions, not arbitrary arrows or data chosen from a pasting theorem. This definition asserts no invertibility, normalization law, or pasting equation.",
+ "stmt_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-compactifications-refinements",
+  "def-exchange-projection",
+  "def-weil-pbc-adjunction-mate",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sf-semilinear-proper-open-comparisons",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-finite-completed-coefficient-map",
+  "def-sf-completed-compact-support-calculus-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent-compatibility assembly, mixed geometric/Frobenius base-change constituent; canonical proper/open mates, coefficient passage and refinement data (Stacks 07A7, 0E47, 0F7B, 0F7F)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical ordinary compact support proper open exchange and refinement maps, simultaneous semilinear proper exchange, raw rational scalar extension and completed compact support refinement",
+   "results": "{\"t\": \"2026-10-24T17:59:09Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical ordinary compact support proper open exchange and refinement maps, simultaneous semilinear proper exchange, raw rational scalar extension and completed compact support refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TestFunction.ofSupportedInCLM\", \"TestFunction.ofSupportedInLM\", \"TestFunction.coe_ofSupportedInCLM\", \"TestFunction.coe_ofSupportedInLM\", \"TestFunction.ofSupportedIn\", \"exists_continuous_sum_one_of_isOpen_isCompact\", \"exists_continuousMap_one_of_isCompact_subset_isOpen\", \"exists_continuous_nonneg_pos\"], \"digest\": \"f583b5144e188e94\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the published project constructions and register their missing definition owner."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinaryH|ordinaryC|cbcRefinementMap|pbcRationalScalarExtension",
+   "results": "{\"t\": \"2026-10-24T18:00:05Z\", \"tool\": \"grep\", \"query\": \"ordinaryH|ordinaryC|cbcRefinementMap|pbcRationalScalarExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/HomCongr.lean\", \"Mathlib/CategoryTheory/Enriched/Limits/HasConicalTerminal.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Enrichment.lean\"], \"digest\": \"c00e304888de1029\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the published project constructions and register their missing definition owner."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical proper open compact support exchange refinement and rational scalar extension functors",
+   "results": "{\"t\": \"2026-10-24T18:00:05Z\", \"tool\": \"leansearch\", \"query\": \"Canonical proper open compact support exchange refinement and rational scalar extension functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_smul\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"TestFunction.ofSupportedInCLM\", \"TestFunction.ofSupportedInLM\", \"ModuleCat.extendRestrictScalarsAdj\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"97b5a9deec545b8a\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; use the published project constructions and register their missing definition owner."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ordinaryH|ordinaryC|cbcRefinementMap|pbcRationalScalarExtension lean/WeilConjectures; rg in lean/Sheaf and dag/nodes --glob def-*.json; tools/blueprint_refs.py search semilinear compact support operations",
+   "results": "Blueprint search: 0 matching nodes. Project Lean hits: RelativeCompactSupportPasting ordinaryG/J/R/H/sourceSquare; FiniteCompactSupportEvaluationRefinement ordinaryC; SemilinearProperOpenMatePasting exchange; PbcScalarExtension pbcRationalScalarExtension; CompleteCompactSupportProetale cbcRefinementMap. Existing definition-node hits mention these names in other contexts or review notes; none owns the requested set of declarations. The maintainer H2 return explicitly requests this definition owner.",
+   "date": "2026-10-24",
+   "verdict": "Existing Lean definitions reused verbatim; missing DAG definition ownership supplied."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-basechange-semilinear-pasting",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Canonical maps used in the mixed geometric/Frobenius base-change compatibility assembly.",
+   "via": [
+    "lem-pur-weil-basechange-semilinear-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.Paper.MixedCompactSupportExchangeData",
+  "declaration": "WeilConjectures.MixedCompactSupportData.ordinaryExchange",
+  "declarations": [
+   "WeilConjectures.MixedCompactSupportData.ordinaryExchange",
+   "AlgebraicGeometry.ProEtale.ConstantCompactificationExchange.ordinaryG",
+   "AlgebraicGeometry.ProEtale.ConstantCompactificationExchange.sourceSquare",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryJ",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryR",
+   "AlgebraicGeometry.ProEtale.RelativeCompactSupport.ordinaryH",
+   "AlgebraicGeometry.ProEtale.StrictTower.FiniteCompactSupport.ordinaryC",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.exchange",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarExtension",
+   "AlgebraicGeometry.Scheme.cbcRefinementMap"
+  ],
+  "file": "lean/Sheaf/Paper/MixedCompactSupportExchangeData.lean",
+  "statement": "abbrev ordinaryExchange (B : Type (u + 1)) [CommRing B] {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} (c : Compactification f) (c' : Compactification f') (a : Y' ⟶ Y) (x : X' ⟶ X) (z : c'.Z ⟶ c.Z) (sp : IsPullback z c'.g c.g a) (sj : IsPullback x c'.i c.i z) : (ordinaryJ B c.i ⋙ ordinaryR B c.g) ⋙ ordinaryG B a ⟶ ordinaryG B x ⋙ (ordinaryJ B c'.i ⋙ ordinaryR B c'.g)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition ownership requested by the H2 independent return of 3d868cb320cc. The primary abbreviation re-exports ordinaryH, and the nine public imported declarations are listed explicitly to own their unchanged canonical constructions. Their original source modules are RelativeCompactSupportPasting, FiniteCompactSupportEvaluationRefinement, SemilinearProperOpenMatePasting, PbcScalarExtension and CompleteCompactSupportProetale. No theorem conclusion or additional law is asserted; no existing Lean definition is copied."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed5cb436f",
+  "group": "Q56",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed5cb436f",
+  "group": "Q56",
+  "result": "pass",
+  "note": "H2 repair of 3d868cb3 verified: new def node def-sf-mixed-compact-support-exchange-data owns ordinaryG/J/R/H, sourceSquare, ordinaryC, SemilinearProperOpen.exchange, pbcRationalScalarExtension and cbcRefinementMap by public re-export (abbrev ordinaryExchange := ordinaryH, real data, no laws, statement faithful; only def owner in live DAG). Semilinear/field/completed def owners cited; lem-cbc-tower-mate-evaluation-scalars and prop-weil-pbc-descent-functors dropped. Item statement, proof and proof_deps byte-identical to main; theorem signature unchanged; module diff is imports plus ordinaryH→ordinaryExchange only, so the earlier clause-by-clause acceptance carries over. lem-weil-frobenius-square-cartesian is a genuine theorem dependency: commutation eq .2.2.2.2.1 and IsPullback .2.2.2.2.2.1 are used as witnesses in the statement. Gates OK; report sections present; no compile (no change). Advisory: fiberMap/galois/zlCompactification*/coefficientSequenceDerived are owned only via definition nodes reached indirectly."
+ }
+}

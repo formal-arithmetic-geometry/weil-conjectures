@@ -1,0 +1,107 @@
+{
+ "id": "lem-per-scalar-presentation-cokernel",
+ "kind": "statement",
+ "title": "Scalar extension of a specified finite presentation with normalized quotient generators",
+ "statement": "Let R and T be commutative rings in the same universe, f:R→T a ring homomorphism, and N an R-module with a specified right-exact presentation R^m --D--> R^n --q--> N → 0, with m,n finite [def-sc-finitely-presented-module]. There are a T-linear map p:T^n→T⊗_R N and an isomorphism v:T⊗_R N≅coker(D mapped by f), such that p(f(x_i))=1⊗q(x) for every x∈R^n and p followed by v is the specified categorical cokernel projection. No injectivity or flatness assumption is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), finite-presentation calculation; Stacks, algebra.tex lemma-tensor-product-exact; sites-modules.tex section-constant and section-tensor-product."
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Identify N with coker D using exactness and surjectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the ordinary extension/restriction scalar adjunction to preserve the cokernel. The tensor finite-power isomorphism sends 1 tensor x to (f(x_i)); conjugation identifies the extended matrix with D mapped by f.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the preserved cokernel and matrix isomorphisms and verify the projection equation by functoriality. The inverse finite-power comparison gives the original-vector normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "proof step 3: ordinary scalar extension and its finite-power normalization; explicit algebraic/categorical implementation by F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant sheaf module realization followed by scalar extension preserves a matrix cokernel and its quotient projection, and an invertible change of rows identifies the cokernel with the remaining coordinates",
+   "results": "ModuleCat.cokernelIsoRangeQuotient, ModuleCat.cokernelIsColimit, Module.Presentation.ofExact, SheafOfModules.presentationOfIsCokernelFree and related generic presentation infrastructure. No complete normalized finite-power scalar and row-operation comparison. Used categorical cokernel infrastructure.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.isColimitCokernelCofork; CategoryTheory.Limits.PreservesCokernel.iso",
+   "results": "Found ModuleCat.isColimitCokernelCofork and PreservesCokernel.iso with its projection equation. These are used to construct the normalized comparisons; neither supplies the coefficientwise finite-power normalization or the rank-tail computation.",
+   "date": "2026-10-27",
+   "verdict": "generic tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(matrix|Matrix)|rank.normal.*cokernel|tail.*(cokernel|quotient)|constant.*scalar.*cokernel",
+   "results": "Read Mathlib ModuleCat/Kernels, ChangeOfRings, TensorProduct/Pi, Matrix/ToLin, Limits/Preserves/Shapes/Kernels. Project search found the parent presentationModels hole, ScalarNormalizedConstantModels (different internal-module encoding), and IntegralScalarModelCoordinates (different discrete-model setting). No duplicate of these normalized helpers.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalStratumFiniteFreeModel",
+  "date": "2026-10-27",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-rational-stratum-finite-free-model",
+   "place": "proof step 3: ordinary scalar extension and its finite-power normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.ScalarPresentationCokernel",
+  "file": "lean/Sheaf/LinearAlgebra/ScalarPresentationCokernel.lean",
+  "declaration": "ModuleCat.scalarPresentationCokernel",
+  "statement": "theorem scalarPresentationCokernel {R T : Type u} [CommRing R] [CommRing T] (f : R →+* T) (N : ModuleCat.{u} R) (m n : ℕ) (D : Matrix (Fin n) (Fin m) R) (q : of R (Fin n → R) ⟶ N) (hex : Function.Exact (Matrix.toLin' D) q) (hsurj : Function.Surjective q) : ∃ (p : of T (Fin n → T) ⟶ (extendScalars f).obj N) (v : (extendScalars f).obj N ≅ cokernel (ofHom (Matrix.toLin' (D.map f)))), (∀ x : Fin n → R, p (fun i ↦ f (x i)) = ExtendRestrictScalarsAdj.Unit.map f (q x)) ∧ p ≫ v.hom = cokernel.π (ofHom (Matrix.toLin' (D.map f)))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261026T235858-L-1464850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

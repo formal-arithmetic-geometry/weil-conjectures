@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+ "kind": "statement",
+ "title": "Simultaneous compatible markings of a supplied normalized tower",
+ "statement": "Let X,Y be schemes, g:Y to X any morphism, d an adic coefficient datum on A, M a normalized adic tower on X as in [def-weil-pbc-bounded-constructible-tower], and U an object of Y.ProEt. Put C=AdicCompletion(d.ideal,A) and J=d.ideal*C. Supply algebraic complexes K_n in D(C/J^(n+1)) and universal consecutive arrows t_n to quotient scalar restriction. Suppose each K_n is bounded, with finite module cohomology. Suppose, for each n separately, a covering sieve T_n on U has the following property: on every W to U in T_n, constantAdicQuotientRealization(W.hom followed by g,d,n)(K_n) is isomorphic to the actual inverse image of M_n. Then there is one covering sieve T on U, with a family b_n of such isomorphisms on every W to U in T. Write R_n for restriction to C, s_n for restriction of t_n followed by the specified composition comparisons, and z_n for constantAdicQuotientRightIso followed by restriction of b_n, as in [lem-weil-pbc-constant-adic-quotient-scalar-comparison]. For every n<=m, z_m followed by restriction of the actual M transition and the finite projection restriction compositor equals constantAdicFiniteRealization of the (m,n) map in Functor.ofOpSequence(s), followed by z_n. This theorem supplies only compatible markings of a supplied tower: it constructs no K, t, bounds, finite cohomology or vanishing transfer. It has no Noetherian or immersion assumption.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BV (lemma-weird), the inverse system of isomorphism sheaves and stable images; bounded-derived adaptation and Tag 09C6, compatibility of finite reductions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct the finite etale Isom sheaves, their reduction maps and consecutive evaluation squares for the supplied levels; no compatible markings have yet been chosen.",
+   "uses": [
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-lisse tower section cover theorem to obtain affine weakly contractible V_i over U.left and compatible sections at every level. Compose with U.hom and generate a covering sieve on U. Factor any arrow in the sieve through one V_i and evaluate the sections to obtain b_n.",
+   "uses": [
+    "lem-weil-pbc-finite-lisse-tower-section-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The consecutive evaluation squares define a natural transformation using NatTrans.ofOpSequence. Apply its naturality to (homOfLE h).op and identify the target sequential map with the actual all-pairs adic transition.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-restricted-tower-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lisse-tower-isomorphism-sections",
+  "lem-weil-pbc-finite-lisse-tower-section-cover",
+  "lem-weil-pbc-constant-adic-restricted-tower-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BV (lemma-weird), the inverse system of isomorphism sheaves and stable images; bounded-derived adaptation and Tag 09C6, compatibility of finite reductions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tower of finite locally constant derived isomorphism sheaves has compatible sections on a common proetale covering, using stable images of finite stalks.",
+   "results": "8 hits on constant sheaves, condensed locally constant functors and detecting sheaf isomorphisms by stalks. None selects compatible derived markings of a normalized tower.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a sequence of finite derived isomorphism sheaves has compatible local isomorphisms on a common proetale cover by stable images",
+   "results": "8 hits about local isomorphisms and etale sites; no theorem selecting compatible derived markings.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StructuredArrow.IsUniversal\"",
+   "results": "12 hits for universal arrows, desc, fac and uniqueness; none gives simultaneous local trivialization.",
+   "date": "2026-10-27",
+   "verdict": "partial categorical tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ii]somorphism.*[Ss]heaf|compatible.*[Tt]rivialization",
+   "results": "1 vector-bundle local-frame hit; no derived isomorphism-sheaf theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerConstantStalkModels",
+  "date": "2026-10-27",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Tag 09BV (lemma-weird), the inverse system of isomorphism sheaves and stable images; bounded-derived adaptation and Tag 09C6, compatibility of finite reductions",
+   "via": [
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerCompatibleStalkMarkings",
+  "file": "lean/Sheaf/Paper/LisseTowerCompatibleStalkMarkings.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_tower_compatible_stalk_markings",
+  "statement": "theorem lisse_tower_compatible_stalk_markings\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (U : Y.ProEt)\n    (K : ∀ n : ℕ, DerivedCategory (ModuleCat.{u + 1}\n      (AdicCompletion d.ideal A ⧸\n        (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))))\n    (t : ∀ n : ℕ, K (n + 1) ⟶\n      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor\n        (Ideal.pow_le_pow_right\n          (I := d.ideal.map (algebraMap A (AdicCompletion d.ideal A)))\n          (Nat.le_succ (n + 1))))).mapDerivedCategory.obj\n          (K n))\n    (huniversal : ∀ (n : ℕ) (N : DerivedCategory (ModuleCat.{u + 1}\n        (AdicCompletion d.ideal A ⧸\n          (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)))),\n      Function.Bijective (fun k : K n ⟶ N ↦ t n ≫\n        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor\n          (Ideal.pow_le_pow_right\n            (I := d.ideal.map (algebraMap A (AdicCompletion d.ideal A)))\n            (Nat.le_succ (n + 1))))).mapDerivedCategory.map\n            k))\n    (hbounded : ∀ n : ℕ, ∃ a b : ℤ, ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (K n)))\n    (hfinite : ∀ (n : ℕ) (q : ℤ), Module.Finite\n      (AdicCompletion d.ideal A ⧸\n          (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))\n      ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸\n          (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))) q).obj (K n)))\n    (hmodels : ∀ n : ℕ, ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧\n      ∀ (W : Y.ProEt) (w : W ⟶ U), T w →\n        Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj (K n) ≅\n          (adicTowerPullback (W.hom ≫ g)\n            ((pbcAdicRings X d).obj (op n))).obj (M.level n))) :\n    let C := AdicCompletion d.ideal A\n    let J := d.ideal.map (algebraMap A C)\n    let R (n : ℕ) := ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}\n      (Ideal.Quotient.mk (J ^ (n + 1)))\n    let s (n : ℕ) := (R (n + 1)).mapDerivedCategory.map (t n) ≫\n      (Functor.mapDerivedCategoryCompIso\n        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor\n          (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1)))))\n        (R (n + 1))).inv.app (K n) ≫\n      (Functor.mapDerivedCategoryNatIso (ModuleCat.restrictScalarsComp'.{u + 1}\n        (Ideal.Quotient.mk (J ^ (n + 2)))\n        (Ideal.Quotient.factor\n          (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))\n        (Ideal.Quotient.mk (J ^ (n + 1)))\n        (Ideal.Quotient.factor_comp_mk _).symm)).inv.app (K n)\n    ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧\n      ∀ (W : Y.ProEt) (w : W ⟶ U), T w →\n      ∃ b : ∀ n : ℕ,\n          (constantAdicQuotientRealization (W.hom ≫ g) d n).obj (K n) ≅\n            (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj\n              (M.level n),\n        let a := constantAdicFiniteRealization (W.hom ≫ g) d\n        let H (n : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection (W.hom ≫ g) d n)\n        let z (n : ℕ) :=\n          (constantAdicQuotientRightIso (W.hom ≫ g) d n).hom.app (K n) ≫\n            (H n).map (b n).hom\n        ∀ (m n : ℕ) (h : n ≤ m),\n          z m ≫ (H m).map (adicTowerRestrictedTransition d (W.hom ≫ g) M m n h) ≫\n            (pbcDerivedRestrictComp\n              (constantAdicFiniteProjection (W.hom ≫ g) d m)\n              ((adicTowerInverseImage (W.hom ≫ g)).map (pbcAdicQuotient X d m n h))\n              (constantAdicFiniteProjection (W.hom ≫ g) d n)\n              (constantAdicFiniteProjection_comp (W.hom ≫ g) d m n h)).hom.app\n                ((adicTowerPullback (W.hom ≫ g)\n                  ((pbcAdicRings X d).obj (op n))).obj (M.level n)) =\n            a.map ((Functor.ofOpSequence\n              (X := fun k : ℕ ↦ (R k).mapDerivedCategory.obj (K k)) s).map\n                (homOfLE h).op) ≫ z n",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T064507-L-2189517",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T084414-L-3677261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

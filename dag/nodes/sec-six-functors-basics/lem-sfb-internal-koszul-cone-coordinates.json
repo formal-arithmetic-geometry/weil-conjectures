@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-internal-koszul-cone-coordinates",
+ "kind": "statement",
+ "title": "Singleton dual Koszul chain coordinates of the uniformizer cone",
+ "statement": "Let l be prime, E a finite extension of Q_l, and X any scheme. Let O and q be the small constant integer coefficient ring and its first residue map of [def-sfb-internal-completion-section-transport]. Suppose the singleton global section a generates kernelIdeal(q) on every slice [def-weil-pbc-ringed-ideal-generators]. Let d be an endomorphism of the regular point coefficient module, acting on every continuous section by multiplication by the chosen uniformizer, and let scalar(d,n,P) be its pulled-back (n+1)-st power [lem-pe-principal-reduction-cone-calculus]. For every integral complex P, without flatness or boundedness, and n >= 0, the exact modules functor of [def-sfb-internal-quotient-tower-model] carries Cone(scalar(d,n,P)) isomorphically onto complex(P) tensor the level-n singleton Koszul dual [def-weil-pbc-ringed-koszul-system]. There is such a chain isomorphism e for which the unshifted cone inclusion becomes the specified Koszul tensor unit, and for every integer q the shifted inclusion factors through the total-tensor inclusion of bidegree (q+1,-1). The factor z has source modules(P^(q+1)) and target complex(P)^(q+1) tensor KoszulDual^(-1). No quotient map, acyclicity, K-flatness or transition compatibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), finite free dual calculation; blueprint det-thm-sf-pf-adic-open, Reduction paragraph identifying finite reduction with a uniformizer cone."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-completion-section-transport",
+  "def-weil-pbc-ringed-ideal-generators",
+  "lem-pe-principal-reduction-cone-calculus",
+  "def-sfb-internal-quotient-tower-model",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply uniformizer_koszul_scalar_square to obtain a source change b and the commuting square from the transported uniformizer power to the singleton scalar power. The target change is the fixed inverse right unitor.",
+   "uses": [
+    "lem-sfb-internal-uniformizer-koszul-scalar-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize ringedSingletonKoszulCone to the coefficient complex I=O[0]. Conjugate its scalar by the left unitor and use its unit equation to obtain an isomorphism from the coefficient scalar cone to the singleton Koszul dual, carrying the cone inclusion to the dual unit. Only the unit part of the existing theorem is used.",
+   "uses": [
+    "lem-sfb-ringed-singleton-koszul-cone",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the coefficient isomorphism with N=complex(P). The proved upstream mapBifunctorMappingCone₂Iso identifies the tensor of the coefficient cone with the cone of ringedSingletonKoszulPower. Its inr_inv equation gives the unit formula. Its ι_ι₁ equation and the explicit right-unitor inverse give the shifted coordinate: z is (-1)^(q+1) times the coefficient cone inclusion, then the coefficient isomorphism in degree -1, after the module right unitor. Naturality of the total-tensor inclusion proves the factorization.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use mappingCone.mapHomologicalComplexIso for the exact additive modules functor. Map the scalar square to an isomorphism of cones, using b on the source and the inverse right unitor on the target, and compose with the tensor-cone comparison. The formulas for mappingCone.map and the transported cone inclusions give the asserted unit. For the shifted term precompose the previously obtained z by b in degree q+1 and the right unitor; the two inverse right unitors cancel. This argument is degreewise and requires no boundedness, flatness, or nonzero object hypothesis.",
+   "uses": [
+    "def-sfb-internal-quotient-tower-model",
+    "lem-pe-principal-reduction-cone-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma derived-completion-koszul (0A0E), finite free dual calculation; coefficient specialization followed by the proved upstream tensor-cone isomorphism. R7, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The singleton dual Koszul total tensor is isomorphic to the mapping cone of a regular uniformizer with the unshifted unit and shifted tensor summand inclusions",
+   "results": "Eight generic mapping-cone and additive-functor comparisons; none identifies the ringed singleton dual with the transported uniformizer cone.",
+   "date": "2026-10-26",
+   "verdict": "No matching coefficient Koszul comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.id_X",
+   "results": "The cone identity decomposition is available and used to prove mapped cone hom extensionality in the parent proof.",
+   "date": "2026-10-26",
+   "verdict": "Closes the parent uniqueness glue, not the new chain-coordinate calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*[Qq]uotient|[Qq]uotient.*koszul",
+   "results": "No Mathlib service hits. Local searches found existing cone-model quotient proofs, strict scalar Koszul comparison, negative Koszul duality and signed finite coordinates, but no theorem connecting the displayed internal scalar cone to the displayed singleton dual tensor.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing cone augmentation in the parent; retain only the finite chain-coordinate bridge as a new obligation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual of the two term singleton Koszul complex tensor a complex is a mapping cone with its degree zero and degree minus one summands",
+   "results": "Eight hits for mappingCone, its snd and descCochain maps, double and related generic cone constructions. No ringed singleton dual or exact coefficient transport comparison.",
+   "date": "2026-10-26",
+   "verdict": "Generic cone APIs only; no matching chain-coordinate comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalKoszulFiniteAcyclicity",
+  "date": "2026-10-26",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Reduction paragraph: the finite residue reduction is the cone of multiplication by the uniformizer; regularity and K-flat computation of one finite reduction",
+   "via": [
+    "lem-sfb-internal-koszul-finite-acyclicity",
+    "lem-sfb-internal-koszul-quotient-resolution",
+    "lem-sfb-internal-quotient-koszul-unit-comparison",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalKoszulConeCoordinates",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalKoszulConeCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.koszul_uniformizer_cone_coordinates",
+  "statement": "theorem koszul_uniformizer_cone_coordinates\n    (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)\n    (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n      IsRingedIdealGeneratingList (ring l E X)\n        (ConstantCompletion.kernelIdeal (residue l E X)).module\n        (ConstantCompletion.kernelIdeal (residue l E X)).inclusion U 1\n        (fun _ ↦ a.val (op U)))\n    (d : End (Mod.regular (DerivedNakayama.integerRing l E)))\n    (hd : ∀ (S : Profinite.{u}ᵒᵖ) (b : (DerivedNakayama.integerRing l E).obj.obj S)\n      (s : S.unop), ((d.hom.hom.app S) b).down s =\n        Padic.coefficientExtensionUniformizer l E * b.down s)\n    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) (n : ℕ) :\n    ∃ e : ((modules l E X).mapHomologicalComplex (.up ℤ)).obj\n        (CochainComplex.mappingCone (PrincipalReduction.scalar l E X d n P)) ≅\n          ((ringedKoszulTensorTower (ring l E X) 1 (fun _ ↦ a)).obj\n            (complex l E X P)).obj (op n),\n      (∀ q : ℤ,\n        (modules l E X).map\n            ((CochainComplex.mappingCone.inr (PrincipalReduction.scalar l E X d n P)).f q) ≫\n          e.hom.f q =\n        (ringedKoszulTensorUnitComponent (ring l E X) 1 (fun _ ↦ a)\n          (complex l E X P) (op n)).f q) ∧\n      (∀ q : ℤ, ∃ z : (modules l E X).obj (P.X (q + 1)) ⟶\n          ((curriedTensor _).obj ((complex l E X P).X (q + 1))).obj\n            (((ringedKoszulDualTower (ring l E X) 1 (fun _ ↦ a)).obj (op n)).X (-1)),\n        (modules l E X).map\n            ((CochainComplex.mappingCone.inl (PrincipalReduction.scalar l E X d n P)).v\n              (q + 1) q (by omega)) ≫ e.hom.f q =\n          z ≫ HomologicalComplex.ιMapBifunctor (complex l E X P)\n            ((ringedKoszulDualTower (ring l E X) 1 (fun _ ↦ a)).obj (op n))\n            (curriedTensor _) (.up ℤ) (q + 1) (-1) q (by\n              change q + 1 + -1 = q\n              omega))",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "lem-sfb-internal-uniformizer-koszul-scalar-square",
+  "lem-sfb-ringed-singleton-koszul-cone",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-pc-tensor-mapping-cone-iso",
+  "def-sfb-internal-quotient-tower-model",
+  "lem-pe-principal-reduction-cone-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261026T024046-L-634202",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261026T070848-L-3675584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

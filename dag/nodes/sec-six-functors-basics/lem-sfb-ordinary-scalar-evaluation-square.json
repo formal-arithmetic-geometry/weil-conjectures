@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9; ordinary scalar chain calculation in the flat scalar evaluation refinement. For coefficient-square pure formulas, sites-modules.tex Tags 03CY, 03CZ and sites-cohomology.tex 0A8X."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9; ordinary scalar chain calculation in the flat scalar evaluation refinement. For coefficient-square pure formulas, sites-modules.tex Tags 03CY, 03CZ and sites-cohomology.tex 0A8X."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatScalarEvaluationModel",
+  "date": "2026-10-24",
+  "group": "R2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-hom-flat-scalar-evaluation-model",
+   "place": "The chain coefficient-square calculation of step 10.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-sfb-ordinary-scalar-evaluation-square",
+ "title": "Ordinary scalar evaluation respects coefficient squares",
+ "statement": "Let E_a be normalized ordinary additive scalar extensions with adjunctions and generator-normalized strong chain tensor comparisons [def-sfb-scalar-hom-comparison-data]. Let B be a strict presentation of this family and h_b be any scalar chain evaluation with formula (s tensor x) tensor p -> s tensor b(x)(p) [lem-sfb-ordinary-scalar-evaluation-model]. For a commuting coefficient square R -> S, R -> Rprime, S -> Sprime, Rprime -> Sprime, let Q be a compatible strict coefficient square for B [lem-sfb-hom-scalar-chain-identification]. Then scalar evaluation after the tensor comparison, strict tensor base change and extended Hom comparison equals extension of scalar evaluation followed by the restriction mate and extension isomorphism of Q. The equality holds for arbitrary complexes D,P,I and chain maps b:D -> Hom(P,I), with no derived-category or flatness assumptions.",
+ "stmt_deps": [
+  "def-sfb-scalar-hom-comparison-data",
+  "lem-sfb-ordinary-scalar-evaluation-model",
+  "lem-sfb-hom-scalar-chain-identification"
+ ],
+ "proof": [
+  {
+   "text": "Cancel the presentation isomorphism at the source and transpose by the ordinary scalar adjunction. Sheafified tensor generation reduces the equality to every section (s tensor x) tensor p.",
+   "uses": [
+    "lem-sfb-hom-scalar-chain-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the first route use the normalized tensor comparison, inverse presentation formula, tensor-square compatibility, scalar evaluation formula and evaluation of the extended Hom comparison. Its value is d(s) tensor (1 tensor b(x)(p)).",
+   "uses": [
+    "lem-sfb-ordinary-scalar-evaluation-model",
+    "lem-sfb-hom-scalar-chain-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the second route use naturality of scalar-unit sections, scalar evaluation, inverse presentation, restriction mate and extension-square pure formulas. The same value results. The generator test and injectivity of adjunction transposition prove the chain equality.",
+   "uses": [
+    "lem-sfb-hom-scalar-chain-identification",
+    "lem-sfb-ordinary-scalar-evaluation-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-hom-scalar-chain-identification",
+  "lem-sfb-ordinary-scalar-evaluation-model"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary scalar extension tensor Hom evaluation complexes compatible coefficient square",
+   "results": "8 hits: HomologicalComplex.tensorHom, scalar extension composition, and universal tensor constructions; no chain evaluation coefficient-square theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.right_triangle_components",
+   "results": "Unknown identifier in search index; 0 matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chainEquiv_symm_pure|coefficientCompatibility_generic",
+   "results": "0 search-index hits. Repository search finds the proved private chain-equivalence and generic strict coefficient compatibility used by the proof.",
+   "date": "2026-10-24",
+   "verdict": "library proof helpers"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarOrdinaryEvaluationCoefficientSquare",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarOrdinaryEvaluationCoefficientSquare.lean",
+  "declaration": "CategoryTheory.ScalarOrdinaryEvaluation.coefficient_square",
+  "statement": "theorem coefficient_square (O : Scalars.{c, v, r} (J := J))\n    (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S), Tensor O a)\n    (E : Evaluation.{c, v, r} (J := J) O) (B : Presentation.{c, v, r} (J := J) O)\n    {R S R' S' : Sheaf J CommRingCat.{max c v r}}\n    (φ : R ⟶ S) (a : R ⟶ R') (d : S ⟶ S') (φ' : R' ⟶ S')\n    (Q : StrictScalarHom.CoefficientSquare.{c, v, r}\n      (B.chainData φ) (B.chainData a) (B.chainData d) (B.chainData φ'))\n    (hQ : StrictScalarHom.CoefficientCompatibility.{c, v, r} Q)\n    (P I D : StrictScalarHom.Complex.{c, v, r} R) (b : D ⟶ homComplex (R := R) P I) :\n      (B.chainIso a).hom.app ((coefficientTotalTensor.{r, c, v} J R).obj\n          ((StrictScalarHom.tensor.{c, v, r} φ).obj D, P)) ≫\n        ((μ a).complexIso ((StrictScalarHom.tensor.{c, v, r} φ).obj D) P).hom ≫\n        (coefficientTotalTensor.{r, c, v} J R').map\n          (Prod.mkHom ((B.chainIso a).inv.app ((StrictScalarHom.tensor.{c, v, r} φ).obj D))\n            ((B.chainIso a).inv.app P)) ≫\n        (coefficientTotalTensor.{r, c, v} J R').map\n          (Prod.mkHom (Q.tensorComparison D) (𝟙 ((B.chainData a).extension.complex.obj P))) ≫\n        E.scalarEvaluate φ' ((B.chainData a).extension.complex.obj P)\n          ((B.chainData a).extension.complex.obj I) ((B.chainData a).extension.complex.obj D)\n          ((B.chainData a).extension.complex.map b ≫ (B.chainData a).homComparison P I) ≫\n        (StrictScalarHom.restriction.{c, v, r} φ').map\n          ((B.chainIso φ').inv.app ((B.chainData a).extension.complex.obj I)) =\n      (B.chainData a).extension.complex.map\n          (E.scalarEvaluate φ P I D b ≫\n            (StrictScalarHom.restriction.{c, v, r} φ).map ((B.chainIso φ).inv.app I)) ≫\n        Q.restrictionMate.app ((B.chainData φ).extension.complex.obj I) ≫\n        (StrictScalarHom.restriction.{c, v, r} φ').map (Q.extensionIso.hom.app I)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f7762",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261024T190759-L-70230",
+  "kind": "interface",
+  "note": "independent cc review: ChainSquare/model_exists and lean.statement vs clones/live (annotation-only); node proof fields vs imports; new node lean records vs new modules; importer FlatInternalHomEvaluationRoof compiled against delivered modules (exit 0); #print axioms model_exists clean"
+ }
+}

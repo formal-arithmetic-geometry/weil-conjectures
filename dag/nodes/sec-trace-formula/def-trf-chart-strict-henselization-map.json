@@ -1,0 +1,131 @@
+{
+ "id": "def-trf-chart-strict-henselization-map",
+ "kind": "definition",
+ "title": "Canonical chart structural map to the strict henselization",
+ "status": "split",
+ "statement": "Let $X$ be a scheme, $M$ a log structure on $X$ as in [def-trf-fs-log-blowup], and $x:\\operatorname{Spec}\\Omega\\to X$ a geometric point [def-weil-geometric-point]. Let $W\\to X$ be an etale neighbourhood with a lift $w$ of $x$. For any additive commutative monoid $P$ and monoid homomorphism $c:P\\to M(W)$, define its strict-henselization structural map $a_{x,W,w,c}:P\\to B_x$, where $B_x=\\mathcal O^{\\mathrm{sh}}_{X,x}$ is the affine pointed-neighbourhood colimit [def-weil-pbc-strict-henselization-limit], to be the composite $P\\xrightarrow{c}M(W)\\xrightarrow{\\mathrm{germ}_{x,W,w}}M_x\\xrightarrow{\\alpha_x}\\mathcal O_{X_{\\mathrm{et}},x}\\xrightarrow{\\iota_x}B_x$. Here the stalks and germs are the colimits of [def-weil-pbc-geometric-stalks], and $\\iota_x$ is the canonical ring isomorphism induced by restricting the pointed-neighbourhood colimit to affine neighbourhoods and passing to its chosen small model. Include this canonical isomorphism as part of the construction. No chart, finiteness, sharpness or log-regularity hypothesis is needed to define the composite; for a chart $c$ it is its structural map on the strict local ring.",
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI, 1.1--1.2, printed p. 69 (structural maps and geometric germs); Exposé VIII, 3.4.1 and proof of Lemma 3.4.3, printed p. 110 (the chart structural map at the geometric stalk)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical structural map from a log chart to the strict henselization using the geometric stalk",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkMapOverInferInstanceOverClass\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"[X.Over Y] {x} : Spec.map ((X ↘ Y).stalkMap x) |>.IsOver Y\", \"doc\": \"For any scheme $ X $ and point $ x $ in $ X $, the affine scheme $ \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) $, where $ \\\\mathcal{O}_{X,x} $ is the stalk of the structure sheaf at $ x $, is equipped with \"}\n  {\"name\": \"AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"(X : Scheme.{u}) (x : X) : (Spec (X.presheaf.stalk x)).Over X\", \"doc\": \"For any scheme $X$ and a point $x$ in its underlying topological space, there is a canonical morphism of schemes from the spectrum of the stalk at $x$ to $X$. This morphism is denoted as $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply'\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) (p : PrimeSpectrum S) (x) :\\n  (stalkIso S p).inv\\n      ((Localization.localRingHom (PrimeSpectrum.comap f.hom p).asIdeal p.asIdeal f.hom rfl)\\n        ((stalkIso R (PrimeSpectrum.comap f.hom p)).hom x)) =\\n    (Spec.sheafedSpaceMap f).hom.stalkMap p x\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings. Let $\\\\varphi: \\\\mathrm{Spec}(S) \\\\to \\\\mathrm{Spec}(R)$ be the induced morphism of affine schemes. For any prime ideal $\\\\mathfrak{p} \\\\in \\\\mathrm{S\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"{X Y : LocallyRingedSpace.{u}} (f : Hom X Y) (x : X) : Y.presheaf.stalk (f.1.1 x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism of locally ringed spaces $f: X \\\\to Y$ and a point $x \\\\in X$, `stalkMap` defines the induced ring homomorphism from the stalk of the structure sheaf of $Y$ at $f(x)$, denoted $\\\\mathcal{O\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : CommRingCat.of (Localization.AtPrime x.asIdeal) ⟶ (structureSheaf R).presheaf.stalk x\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, this is the canonical ring homomorphism from the localization $ R_{\\\\mathfrak{p}} $ (at the prime ideal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(x : X) : Y.presheaf.stalk (f x) ⟶ X.presheaf.stalk x\", \"doc\": \"For a morphism $ f : X \\\\to Y $ of schemes and a point $ x \\\\in X $, this is the induced morphism between the stalk of $ Y $'s structure sheaf at $ f(x) $ and the stalk of $ X $'s structure sheaf at $ x\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : CommRingCat.of R ⟶ (structureSheaf R).presheaf.stalk x\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this is the canonical ring homomorphism from $ R $ to the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑S)\\n  (x :\\n    CategoryTheory.ToType\\n      ((AlgebraicGeometry.Spec.structureSheaf ↑R).presheaf.stalk (PrimeSpectrum.comap (CommRingCat.Hom.hom f) p))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.localizationToStalk (\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism between commutative rings, which induces a morphism of affine schemes $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$. For any prime ideal $\\\\mathfrak{p} \\\\in\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project construction recorded below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log structure chart monoid map to affine pointed etale neighbourhood strict henselization colimit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"AlgebraicGeometry.over_def\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), AlgebraicGeometry.Spec (X.presheaf.stalk x) ↘ X = X.fromSpecStalk x\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ constructed as an object in the over category $\\\\mathbf{Sch}/X$ is equal to the canonical morphism de\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ X\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, this constructs the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ by composing the morphism induced by the germ map $\\\\Gamma(U) \\\\to \\\\mathcal{O}_{X,x}$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {R : CommRingCat} →\\n    [inst : IsLocalRing ↑R] →\\n      (f : AlgebraicGeometry.Spec R ⟶ X) →\\n        X.presheaf.stalk ((CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R)) ⟶ R\", \"doc\": \"The morphism from the stalk of the structure sheaf at the closed point of $\\\\operatorname{Spec}(R)$ to $R$, constructed by composing the stalk map induced by a scheme morphism $f$ with the canonical is\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project construction recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "chartStrictHenselizationMap|strictLocalRingIsoStrictHenselization|strictLocalRing",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project construction recorded below."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n chartStrictHenselizationMap|strictLocalRingIsoStrictHenselization lean/WeilConjectures",
+   "results": "No matches.\n",
+   "date": "2026-10-23",
+   "verdict": "The only exact project constructions are the existing helper definitions in the recorded module; no definition DAG node owns them. The theorem nodes record different conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n chartStrictHenselizationMap|strictLocalRingIsoStrictHenselization lean/Sheaf",
+   "results": "lean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean:25:* `strictLocalRingIsoStrictHenselization`: canonical comparison of the two colimits.\nlean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean:26:* `EtaleLogStructure.chartStrictHenselizationMap`: the chart's structural map to that ring.\nlean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean:46:noncomputable def strictLocalRingIsoStrictHenselization {X : Scheme.{u}}\nlean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean:65:noncomputable def EtaleLogStructure.chartStrictHenselizationMap {X : Scheme.{u}}\nlean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean:71:  ((strictLocalRingIsoStrictHenselization x).hom.hom.toMonoidHom).comp\nlean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean:105:    (fun p : P ↦ X.logStructure.chartStrictHenselizationMap x W w c\nlean/Sheaf/AlgebraicGeometry/LogRegularMonoidalIdealContraction.lean:107:        (Ideal.span ((fun p : P ↦ X.logStructure.chartStrictHenselizationMap x W w c\n",
+   "date": "2026-10-23",
+   "verdict": "The only exact project constructions are the existing helper definitions in the recorded module; no definition DAG node owns them. The theorem nodes record different conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n chartStrictHenselizationMap|strictLocalRingIsoStrictHenselization dag/nodes",
+   "results": "dag/nodes/sec-trace-formula/lem-trf-log-regular-monoidal-ideal-contraction.json:175:   \"AlgebraicGeometry.strictLocalRingIsoStrictHenselization\",\ndag/nodes/sec-trace-formula/lem-trf-log-regular-monoidal-ideal-contraction.json:176:   \"AlgebraicGeometry.EtaleLogStructure.chartStrictHenselizationMap\",\ndag/nodes/sec-trace-formula/lem-trf-log-regular-monoidal-ideal-contraction.json:180:  \"statement\": \"theorem FineSaturatedLogScheme.monoidalIdeal_contraction (X : FineSaturatedLogScheme.{u}) (hregular : X.IsLogRegular) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X.scheme) {P : Type u} [AddCommMonoid P] (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale x).fiber.obj W) (c : Multiplicative P →* X.logStructure.monoidSheaf.obj.obj (op W)) (hc : X.logStructure.IsChart W c) (hsharp : Function.Bijective (fun p : P ↦ (Associates.mk (X.logStructure.toEtalePrelogStructure.germ x W w (c (Multiplicative.ofAdd p))) : X.logStructure.characteristic x))) (J : Set P) (hJ : ∀ j ∈ J, ∀ p : P, j + p ∈ J) : (fun p : P ↦ X.logStructure.chartStrictHenselizationMap x W w c (Multiplicative.ofAdd p)) ⁻¹' (Ideal.span ((fun p : P ↦ X.logStructure.chartStrictHenselizationMap x W w c (Multiplicative.ofAdd p)) '' J) : Set (Scheme.strictHenselizationRing x)) = J\",\n",
+   "date": "2026-10-23",
+   "verdict": "The only exact project constructions are the existing helper definitions in the recorded module; no definition DAG node owns them. The theorem nodes record different conclusions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-chart-strict-local-tor",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Exposé VI, 1.1--1.2, printed p. 69 (structural maps and geometric germs); Exposé VIII, 3.4.1 and proof of Lemma 3.4.3, printed p. 110 (the chart structural map at the geometric stalk).",
+   "via": [
+    "lem-trf-log-chart-strict-local-tor",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogRegularMonoidalIdealContraction",
+  "declaration": "AlgebraicGeometry.EtaleLogStructure.chartStrictHenselizationMap",
+  "declarations": [
+   "AlgebraicGeometry.strictLocalRingIsoStrictHenselization",
+   "AlgebraicGeometry.EtaleLogStructure.chartStrictHenselizationMap"
+  ],
+  "statement": "def EtaleLogStructure.chartStrictHenselizationMap {X : Scheme.{u}}\n    (M : EtaleLogStructure X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (x : Spec (.of Ω) ⟶ X) (W : X.Etale)\n    (w : (Scheme.pointSmallEtale x).fiber.obj W) {P : Type u} [AddCommMonoid P]\n    (c : Multiplicative P →* M.monoidSheaf.obj.obj (op W)) :\n    Multiplicative P →* Scheme.strictHenselizationRing x",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership added in repair of the independent stage-2 return at f11078752052. These are unchanged, already landed helper definitions, not the theorem concluded in their containing module. No module or theorem record is replaced."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c8b52d3f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c8b52d3f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of f11078752052 (H2). The item Lean file is byte-identical (sha256 d7fa72d4) and the signature equals lean.statement verbatim. The item node differs from live only in stmt_deps, where the two theorem ids are replaced by the new definition nodes def-trf-chart-strict-henselization-map (existing:true on LogRegularMonoidalIdealContraction: chartStrictHenselizationMap + strictLocalRingIsoStrictHenselization) and def-trf-monomial-quotient-tor (existing:true on LogChartFaceTorComparison: ideal/coefficients/tor). Both recorded statements equal the side-live source verbatim from def on. Both TeX statements match the bodies; the canonical final-colimit iso is used, not an arbitrary map. H12 fields complete (source place, 3 search kinds, created, blueprint.from, chapter/unit, import_flags). No competing definition owner; landed theorem records untouched. Clause-by-clause check and edge cases (empty/total/unit-meeting H, torsion group P, empty scheme, single universe u) all OK. Proof is sorry only; docstrings carry source and blueprint id; report has Worker report and Second reading by Q85. No file changed, so nothing compiled. Not superseded on side-live."
+ }
+}

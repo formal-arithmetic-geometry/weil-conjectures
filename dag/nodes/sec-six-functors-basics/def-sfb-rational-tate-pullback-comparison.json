@@ -1,0 +1,168 @@
+{
+ "id": "def-sfb-rational-tate-pullback-comparison",
+ "kind": "definition",
+ "title": "Normalized internal-module rational Tate pullback comparison",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a coefficient index $c$ that is either a finite intermediate extension $E/\\mathbf Q_\\ell$ or the algebraic-closure index. Let $\\Lambda_c$ be the continuous-function condensed ring $\\underline E$ [sk-def-sfb-condensed-ring] in the first case and the finite-subextension-valued $\\underline{\\overline{\\mathbf Q}_\\ell}$ [sk-def-sfb-qlbar-condensed] in the second, with its actual pulled-back scalar action [sk-def-sfb-pulled-back-coefficients]. Let $L_{c,X}$ be the corresponding published positive Tate line [sk-def-sp-tate-twist] as an internal module. For $f:X\\to S$ with $\\ell$ invertible in every residue field of $X$ and $S$, define the comparison\n$$Lf^*(L_{c,S}[2])\\simeq L_{c,X}[2]$$\nin the ordinary unbounded internal-module derived categories [sk-def-sfb-module-derived-pushpull]. Its degree-zero map is the unique linear lift whose underlying abelian adjunct is exactly the root-normalized rational or finite-stage-coprojection-normalized algebraic-closure map in the Cartesian comparison of [sk-prop-sfb-cartesian-coefficients]; pass to single complexes and the canonical derived shift comparison. The tensor is the existing one [sk-def-sfb-derived-tensor-hom]. A coefficient family [def-sfb-diagonal-coefficient-diagrams] is selected at exactly the same index, retaining its diagonal class and trace data. For $Y$ over a field of positive prime characteristic different from $\\ell$, the second projection of $\\mathbf P^1_Y\\times_Y\\mathbf P^1_Y$ [def-nagata-projective-space-base-change] has this comparison, using the inverses of the image of $\\ell$ from the field; no residue-field invertibility hypothesis is added to that specialization. The specialized second projection uses the actual pullback projection with the fixed diagonal-product domain [def-sfb-projective-diagonal-pullback].",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sp-tate-twist",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-nagata-projective-space-base-change",
+  "def-sfb-projective-diagonal-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.md",
+  "place": "proof steps 4 and 10, the normalized rational and algebraic-closure line comparisons"
+ },
+ "proof": [
+  {
+   "text": "Split the coefficient index. For a finite intermediate field use the existing continuous-function commutative ring-object instance; for the closure use isCommMonObj_padicAlgClRingObj. These are the actual rings in coefficient, so no new coefficient object or commutativity assumption is introduced.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unpack SpInternalCartesian to obtain the signed sectionwise comparison beta and its degree-one adjunct equation. Use the internal/sectionwise module equivalences and their identity-on-sections direct-image comparison. The bridge to the direct image for spCoefficientIso is identity on sections: both coefficient ring maps are the prescribed adjunct of alpha. Apply exists_equivalenceAdjunctionComparison to obtain the normalized left-adjoint comparison j and its full Hom equation. The preimage of j.hom followed by beta.signed(1).hom is an internal-module arrow g. Full faithfulness reflects its invertibility. Evaluate the Hom equation on sections, cancel j.inv followed by j.hom, and use the identity direct-image comparison and the given beta equation; the underlying adjunct of g equals exactly the prescribed abelian adjunct. For any other isomorphism with that adjunct, faithfulness of forgetting actions and injectivity of the module adjunction Hom equivalence give equality of homs, hence of isomorphisms. This proof applies also to zero modules and empty schemes.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-equivalence-square-inverse-mate-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Select the unique lift for the normalized rational or closure Cartesian comparison. Apply the single-complex comparison and then the canonical shift comparison to get the displayed derived isomorphism, retaining the same coefficient index for the diagonal diagram. For the characteristic-p specialization, Nat.prime_dvd_prime_iff_eq and p != ell show that p does not divide ell. CharP.isUnit_natCast_iff makes ell a unit in the base field; IsUnit.map along a.residueFieldAlgebraMap x gives the required unit in every residue field. Thus the two projective schemes satisfy exactly the invertibility instances used by secondLineComparison.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-projective-diagonal-pullback",
+    "def-sfb-diagonal-coefficient-diagrams",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-equivalence-square-inverse-mate-coherence",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.md",
+  "place": "Canonical Tate comparison used in the unit formula; agent-written Lean proof using the existing normalized sectionwise/internal adjunction comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical diagonal tensor comparison for internal derived modules is the closed projection mate; the Tate twisted projection comparison is induced by the normalized Cartesian Tate line.",
+   "results": "8 hits, including CategoryTheory.expComparison and generic algebraic tensors; none states either construction.",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointProjectionMap",
+   "results": "0 hits; unknown identifier 'CategoryTheory.Adjunction.rightAdjointProjectionMap' (it belongs to the project, not Mathlib).",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match; reuse the project projection mate."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalTensor|TateTwistedProjection|rightAdjointProjectionMap",
+   "results": "msearch.py Mathlib grep: 0 hits. Project rg finds the existing generic projection-map machinery; no concrete diagonalTensorMap or twistProjectionMap. Blueprint searches diagonal tensor comparison and twisted projection comparison found only different finite-coefficient or unrelated results.",
+   "date": "2026-10-22",
+   "verdict": "Define the missing concrete comparison using the existing machinery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-unit-counit",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "proof steps 4 and 10, the normalized rational and algebraic-closure line comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.RationalTatePullback",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.shiftedLineComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalP1.coefficient",
+   "AlgebraicGeometry.ProEtale.RationalP1.coefficient_isCommMonObj",
+   "AlgebraicGeometry.ProEtale.RationalP1.coefficient_comm",
+   "AlgebraicGeometry.ProEtale.RationalP1.line",
+   "AlgebraicGeometry.ProEtale.RationalP1.diagram",
+   "AlgebraicGeometry.ProEtale.RationalP1.linePull_existsUnique",
+   "AlgebraicGeometry.ProEtale.RationalP1.linePullIso",
+   "AlgebraicGeometry.ProEtale.RationalP1.adicComparison",
+   "AlgebraicGeometry.ProEtale.RationalP1.lineComparison",
+   "AlgebraicGeometry.ProEtale.RationalP1.shiftedLineComparison",
+   "AlgebraicGeometry.ProEtale.RationalP1.residueIsUnit",
+   "AlgebraicGeometry.ProEtale.RationalP1.secondLineComparison"
+  ],
+  "file": "lean/Sheaf/Paper/RationalTatePullback.lean",
+  "statement": "def shiftedLineComparison (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) {X S : Scheme.{u}} (f : X ⟶ S) [∀ x : X, Invertible (l : X.residueField x)] [∀ x : S, Invertible (l : S.residueField x)] : (moduleObjectDerivedPullback (coefficient l c).X f).obj (((DerivedCategory.singleFunctor (Modules (coefficient l c).X S) 0).obj (line l c S)) ⟦(2 : ℤ)⟧) ≅ ((DerivedCategory.singleFunctor (Modules (coefficient l c).X X) 0).obj (line l c X)) ⟦(2 : ℤ)⟧",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Section 1(B): retained DAG binding points to a withdrawn source module; the live source reader reports Module source unavailable. Restore the canonical construction described by this unchanged node, with fixed-map normalization and real definition data."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e328197e9",
+  "group": "NY",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery of the 69f9 H2 RETURN. Lean signature and body are byte-identical; only imports changed (5 definition modules made public imports, DiagonalTowerCoefficients made a plain proof import). stmt_deps drop det-prop-diagonal-tower-coefficients and -trace (both kept in proof_deps) and cite def-sfb-diagonal-coefficient-reference, -trace-limit-characterization, -trace-models plus three new existing:true ownership nodes (system-interface, completed-endpoints, normalized-source). check_existing is clean on all three; statements are verbatim with live; the prose matches the live declarations and the source places exist. No cycle, no theorem stmt_dep, no Lean moved. Seven dependency modules and records are unchanged from 69f9. H3 substance accepted at 69f9 still holds. Advisories: diagonalSurface in the signature is owned only by det-prop-diagonal-tower-system but is reached through the closure; second readings are self-readings; inherited ∃ CommShift in unitCounit_exact."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261023T134930-L-2814952",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

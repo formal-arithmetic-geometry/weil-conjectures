@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-scalar-six-geometry",
+ "kind": "statement",
+ "title": "Existence of normalized geometric comparisons in the scalar-six presentation",
+ "statement": "There exists ScalarSixGeometry: normalized cartesian coefficient isomorphisms, identity-on-sections direct-image comparisons, and inverse-image comparisons which are their adjunction mates, for every commutative condensed ring and every scheme morphism. Uses [def-sfb-scalar-six-coefficient-interfaces].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(1) and (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-scalar-six-coefficient-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Use the unique normalized coefficient isomorphism. Reconstruct the identity-on-sections direct-image isomorphism by the section action formula; its inverse is again identity on sections.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1) and (3)"
+   }
+  },
+  {
+   "text": "Take the conjugate under the internal and section-module geometric adjunctions. The mate equivalence proves the required normalization and uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1) and (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "Normalized coefficient and geometric comparisons; adjunction mate calculation and open/closed assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map_preimage|preimage_map|unit_mateEquiv",
+   "results": "25 hits: Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Logic/Function/FiberPartition.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of module categories transports an adjunction and determines a unique mate-normalized isomorphism of left adjoints",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.conjugateIsoEquiv",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ringed sheaf equivalence transports direct image with identity maps on all sections and transports open extension by zero by taking mates",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.comap_id', SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardId, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, SheafOfModules.pushforward_comp_id, AlgebraicGeometry.Scheme.Modules.pushforwardId, SheafOfModules.pushforward_id_comp, SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib theorem for this normalized internal-module comparison. Reuse the project declarations named in proof_deps; use Mathlib adjunction, mate and full-functor APIs for the formal assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ScalarSixPullback",
+  "date": "2026-10-24",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(1) and (3)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarSixGeometry",
+  "file": "lean/Sheaf/SixFunctors/ScalarSixGeometry.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixGeometry_exists",
+  "statement": "theorem scalarSixGeometry_exists : Nonempty ScalarSixGeometry.{u}",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-24"
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "Sheaf.SixFunctors.ScalarSixPullback",
+  "worker": "T7",
+  "summary": "Formalization of the corresponding normalized comparison step, with the published interfaces unchanged.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-cartesian-coefficients-twists",
+    "why": "Published comparison or generic transport result used by this proof step; see proof."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Published comparison or generic transport result used by this proof step; see proof."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a1985",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191254-L-290782",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a1985",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191254-L-290782",
+  "kind": "interface",
+  "note": "independent cc review: Old ScalarSixPullback interfaces vs new ScalarSixDefinitions: changed transports rfl-equal to old bodies; old ∃-form ScalarSixExtensionData ⇔ new Nonempty structure proved both ways; 9 direct importers compiled against delivered modules (rc 0); scalarSixPullback signature byte-identical; single sorry scalarSixNormalizedImmersion_exists checked as true strict part of clause (2)"
+ }
+}

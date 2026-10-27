@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-total-fractions-prime-localization",
+ "kind": "statement",
+ "title": "Total fractions of a reduced Noetherian ring after prime localization",
+ "statement": "Let $A$ be a reduced commutative Noetherian ring [def-weil-pbc-noetherian-ring], where reduced means that $a^n=0$ with $n\\geq1$ implies $a=0$. Let $\\mathfrak p\\subset A$ be a prime ideal, put $S=A\\setminus\\mathfrak p$ and $R=A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. For a commutative ring $D$, let $Q(D)=T_D^{-1}D$, where $T_D$ is the multiplicative set of non-zero-divisors (elements $t$ such that $td=0$ implies $d=0$); localizations are those of [def-weil-pbc-module-localization]. Let $S^{-1}Q(A)$ mean localization at the image of $S$ under $A\\to Q(A)$. There is a canonical isomorphism of $R$-algebras $$S^{-1}Q(A)\\xrightarrow{\\sim}Q(R).$$ It commutes with the maps from $R$: for $a\\in A$ and $s\\notin\\mathfrak p$, the element $(a/1)/(s/1)$ maps to the image of $a/s\\in R$. No assumption that $A$ is a domain is made.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02LX, label lemma-total-ring-fractions-no-embedded-points. Agent-formulated prime-localization consequence of the finite product description; its complete deduction is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=T_A$ and $E=S^{-1}Q(A)$. For $t\\in T$, if $(t/1)(a/s)=0$ in $R$, then $uta=0$ for some $u\\in S$; cancellation of $t$ gives $ua=0$, hence $a/s=0$. Thus the image of $T$ consists of nonzerodivisors of $R$. The fraction rule defines $j:R\\to E$ by $j(a/s)=(a/1)/(s/1)$: a relation $u(as^{\\prime}-a^{\\prime}s)=0$ remains a relation after mapping to $Q(A)$ and then inverting $S$. If $j(a/s)=0$, some $u\\in S$ has $ua/1=0$ in $Q(A)$, hence $tua=0$ for some $t\\in T$. Cancel $t$ to obtain $ua=0$, so $a/s=0$. Therefore $j$ is injective.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, label definition-localization: fraction equality and arithmetic; agent deduction from Tag 02LX, label lemma-total-ring-fractions-no-embedded-points."
+   }
+  },
+  {
+   "text": "Every element of $E$ has the form $x=(a/t)/(s/1)$ with $a\\in A$, $t\\in T$, $s\\in S$. The element $j(t/1)$ is a unit, with inverse $(1/t)/1$, and fraction multiplication gives $$x=j(a/s)j(t/1)^{-1}.$$ In particular every element of $E$ is a fraction of an element of $R$ by the image of an element of $T$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, label definition-localization: fraction equality and arithmetic; agent deduction from Tag 02LX, label lemma-total-ring-fractions-no-embedded-points."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-reduced-noetherian-total-ring-fractions] to the reduced Noetherian ring $A$. It identifies $Q(A)$ with a finite product of fields $\\prod_i A_{\\mathfrak q_i}$. For $q\\in Q(A)$ write its coordinates as $q_i$ and choose $v$ with coordinate $0$ if $q_i=0$, and $q_i^{-1}$ otherwise. In every coordinate $q_i^2v_i=q_i$, so $q^2v=q$. For $x=q/(s/1)\\in E$, put $y=(s/1)v/1\\in E$. Fraction multiplication gives $$x^2y=x.$$ This calculation includes zero coordinates; it makes no assumption that $A$ is a domain.",
+   "uses": [
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02LX, label lemma-total-ring-fractions-no-embedded-points, with Tags 00EU and 00EW as packaged in the cited reduced-Noetherian total-fractions node; coordinatewise reciprocal calculation by the agent."
+   }
+  },
+  {
+   "text": "Let $r\\in R$ be a nonzerodivisor and suppose $j(r)x=0$ in $E$. Write $x=j(b)j(t/1)^{-1}$ as in Step 2, with $b\\in R$ and $t\\in T$. Multiplication by the unit $j(t/1)$ gives $j(rb)=0$. Injectivity of $j$ gives $rb=0$ in $R$; regularity of $r$ gives $b=0$, hence $x=0$. Thus $j(r)$ is a nonzerodivisor of $E$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, label definition-localization: fraction equality and arithmetic; agent deduction from Tag 02LX, label lemma-total-ring-fractions-no-embedded-points."
+   }
+  },
+  {
+   "text": "For $r\\in T_R$, apply Step 3 to $z=j(r)$ and obtain $y\\in E$ with $z^2y=z$. Then $z(zy-1)=0$, and Step 4 gives $zy=1$. Thus every $j(r)$ with $r\\in T_R$ is a unit in $E$. Define $F:Q(R)\\to E$ by $F(b/r)=j(b)j(r)^{-1}$. It respects the fraction relation: if $w(br^{\\prime}-b^{\\prime}r)=0$ with $w\\in T_R$, the image of $w$ is a unit, so $j(b)j(r^{\\prime})=j(b^{\\prime})j(r)$; multiplying by the denominator inverses proves equality of the images. The sum and product formulas show that $F$ is a unital ring map extending $j$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, label definition-localization: fraction equality and arithmetic; agent deduction from Tag 02LX, label lemma-total-ring-fractions-no-embedded-points."
+   }
+  },
+  {
+   "text": "Conversely send $a/t\\in Q(A)$ to $(a/1)(t/1)^{-1}\\in Q(R)$; Step 1 makes its denominator invertible. This is a ring map by the same fraction-relation calculation as in Step 5. Its image of each $s\\in S$ is already a unit, since $s/1$ is a unit in $R$. It therefore defines $G:E\\to Q(R)$ with $$G((a/t)/(s/1))=(a/s)(t/1)^{-1}.$$ In particular $G(j(b))=b$ for $b\\in R$. Hence $GF(b/r)=b/r$. For $x=j(b)j(t/1)^{-1}$ as in Step 2, $FG(x)=j(b)j(t/1)^{-1}=x$. Thus $G$ is the desired isomorphism, inverse to $F$. Both maps respect the specified $R$-structures, and the displayed formula with $t=1$ gives precisely the required image of $(a/1)/(s/1)$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, label definition-localization: fraction equality and arithmetic; agent deduction from Tag 02LX, label lemma-total-ring-fractions-no-embedded-points."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit prime-localization deduction from Tag 02LX (lemma-total-ring-fractions-no-embedded-points), using the fraction construction of Tag 00CO (definition-localization)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isFractionRing.*[Ll]ocal|[Ll]ocal.*isFractionRing|fractionRing.*[Ll]ocal|[Ll]ocal.*fractionRing",
+   "results": "OK; 25 hits; Mathlib/RingTheory/Ideal/Norm/RelNorm.lean, Mathlib/RingTheory/Ideal/Norm/RelNorm.lean, Mathlib/RingTheory/Ideal/Norm/RelNorm.lean, Mathlib/RingTheory/ClassGroup/Basic.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean. Domain results require IsDomain, and isFractionRing_of_isLocalization at LocalizationLocalization.lean:260 requires the multiplicative set to consist of non-zero-divisors; A minus p can contain zero-divisors. Thus these do not specialize in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the total ring of fractions of a reduced Noetherian ring at a prime is the total ring of fractions of the localized ring",
+   "results": "OK; 8 hits; Localization.AtPrime, AlgebraicGeometry.StructureSheaf.Localizations, IsLocalization.localizationLocalizationAtPrimeIsoLocalization, IsFractionRing.isFractionRing_of_isLocalization, instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, instIsFractionRingAtPrimeFractionRing, LocalizedModule.AtPrime, IsLocalization.AtPrime. Domain results require IsDomain, and isFractionRing_of_isLocalization at LocalizationLocalization.lean:260 requires the multiplicative set to consist of non-zero-divisors; A minus p can contain zero-divisors. Thus these do not specialize in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing, IsLocalization",
+   "results": "OK; 12 hits; Algebra.IsAlgebraic.instIsLocalizationAlgebraMapSubmonoidNonZeroDivisors, IsFractionRing.isFractionRing_of_isDomain_of_isLocalization, IsFractionRing.isFractionRing_of_isLocalization, Localization.mapToFractionRing, Localization.subalgebra.isLocalization_subalgebra, Localization.subalgebra.isLocalization_ofField, Localization.mapToFractionRing_apply, Localization.isLocalization_range_mapToFractionRing. Domain results require IsDomain, and isFractionRing_of_isLocalization at LocalizationLocalization.lean:260 requires the multiplicative set to consist of non-zero-divisors; A minus p can contain zero-divisors. Thus these do not specialize in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total quotient ring of a reduced Noetherian ring commutes with localization at a prime ideal",
+   "results": "OK; 8 hits; instIsFractionRingAtPrimeFractionRing, IsFractionRing.instAtPrimeFractionRing, IsLocalization.instAlgebraLocalizationAtPrime, instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, AlgebraicGeometry.StructureSheaf.commRingLocalizations, instAlgebraAtPrimeFractionRing, Localization.AtPrime.liftAlgebra, instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization. Domain results require IsDomain, and isFractionRing_of_isLocalization at LocalizationLocalization.lean:260 requires the multiplicative set to consist of non-zero-divisors; A minus p can contain zero-divisors. Thus these do not specialize in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFractionRing_of_isLocalization|total quotient|total ring of fractions",
+   "results": "OK; 4 hits; Mathlib/RingTheory/Localization/AsSubring.lean, Mathlib/RingTheory/Localization/AsSubring.lean, Mathlib/RingTheory/Localization/LocalizationLocalization.lean, Mathlib/RingTheory/Localization/LocalizationLocalization.lean. Domain results require IsDomain, and isFractionRing_of_isLocalization at LocalizationLocalization.lean:260 requires the multiplicative set to consist of non-zero-divisors; A minus p can contain zero-divisors. Thus these do not specialize in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced commutative Noetherian ring A and prime p the localization of Q(A) at A minus p is canonically the total quotient ring Q(A_p), compatibly with A",
+   "results": "OK; 8 hits; IsFractionRing.instAtPrimeFractionRing, instIsFractionRingAtPrimeFractionRing, instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, IsLocalization.instAlgebraLocalizationAtPrime, Localization.AtPrime, instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization, Localization.AtPrime.liftAlgebra, IsLocalization.AtPrime. Domain results require IsDomain, and isFractionRing_of_isLocalization at LocalizationLocalization.lean:260 requires the multiplicative set to consist of non-zero-divisors; A minus p can contain zero-divisors. Thus these do not specialize in one line.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFractionRing_of_isLocalization|nonZeroDivisors.*[Ll]ocal|[Ll]ocal.*nonZeroDivisors",
+   "results": "OK; 25 hits; Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/Ideal.lean, Mathlib/RingTheory/Localization/Ideal.lean. Read the returned signatures and LocalizationLocalization.lean:260-295: fraction-ring comparison requires M contained in nonzerodivisors, and the prime instances require IsDomain. Neither applies when A minus p contains zero divisors; the reducedness-localization hit supplies only reducedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total ring of fractions of a reduced Noetherian ring commutes with localization at prime ideals",
+   "results": "OK; 8 hits; AlgebraicGeometry.StructureSheaf.Localizations, IsLocalization.localizationLocalizationAtPrimeIsoLocalization, Localization.AtPrime, instIsFractionRingAtPrimeFractionRing, LocalizedModule.AtPrime, AlgebraicGeometry.StructureSheaf.commRingLocalizations, IsFractionRing.isFractionRing_of_isLocalization, IsLocalization.isLocalization_atPrime_localization_atPrime. Read the returned signatures and LocalizationLocalization.lean:260-295: fraction-ring comparison requires M contained in nonzerodivisors, and the prime instances require IsDomain. Neither applies when A minus p contains zero divisors; the reducedness-localization hit supplies only reducedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing, IsLocalization",
+   "results": "OK; 12 hits; Algebra.IsAlgebraic.instIsLocalizationAlgebraMapSubmonoidNonZeroDivisors, IsFractionRing.isFractionRing_of_isDomain_of_isLocalization, IsFractionRing.isFractionRing_of_isLocalization, Localization.mapToFractionRing, Localization.subalgebra.isLocalization_subalgebra, Localization.subalgebra.isLocalization_ofField, Localization.mapToFractionRing_apply, Localization.isLocalization_range_mapToFractionRing. Read the returned signatures and LocalizationLocalization.lean:260-295: fraction-ring comparison requires M contained in nonzerodivisors, and the prime instances require IsDomain. Neither applies when A minus p contains zero divisors; the reducedness-localization hit supplies only reducedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced Noetherian ring A the total quotient ring of A localized at a prime p is the localization of the total quotient ring of A at A minus p",
+   "results": "OK; 8 hits; IsFractionRing.instAtPrimeFractionRing, instIsFractionRingAtPrimeFractionRing, IsLocalization.instAlgebraLocalizationAtPrime, instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, Localization.AtPrime.liftAlgebra, Localization.AtPrime, instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization, AlgebraicGeometry.StructureSheaf.commRingLocalizations. Read the returned signatures and LocalizationLocalization.lean:260-295: fraction-ring comparison requires M contained in nonzerodivisors, and the prime instances require IsDomain. Neither applies when A minus p contains zero divisors; the reducedness-localization hit supplies only reducedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total quotient ring of a localization is localization of total fractions for reduced rings with finitely many minimal primes",
+   "results": "OK; 8 hits; instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing, instIsFractionRingAtPrimeFractionRing, IsFractionRing.instAtPrimeFractionRing, IsFractionRing.isFractionRing_of_isLocalization, IsLocalization.instAlgebraLocalizationAtPrime, isReduced_localizationPreserves, instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization, AlgebraicGeometry.StructureSheaf.commRingLocalizations. Read the returned signatures and LocalizationLocalization.lean:260-295: fraction-ring comparison requires M contained in nonzerodivisors, and the prime instances require IsDomain. Neither applies when A minus p contains zero divisors; the reducedness-localization hit supplies only reducedness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-normalization-quotient-local-criterion",
+  "date": "2026-10-23",
+  "group": "Q136"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical conductor refinement recorded by the parent: affine normalization and its stalk integral-closure identification (returned conductor proof steps 1--3). The total-fraction ambient ring must be compared before applying integral-closure localization; the current contracting-correspondence blueprint contains no normalization assertion.",
+   "via": [
+    "lem-trf-finite-normalization-quotient-local-criterion",
+    "lem-trf-conductor-smooth-base-change",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-total-fractions-prime-localization",
+  "worker": "stage1",
+  "summary": "No exact sorry-free project attachment or Mathlib specialization found. Reused the existing reduced-Noetherian total-fraction product theorem and gave explicit fraction calculations, an injective map from A_p, coordinatewise inner inverses, regularity and actual mutually inverse ring maps; no new nodes.",
+  "blueprint": "Historical conductor/stalk-normalization refinement of lem-trf-local-term-locality, as already recorded by blueprint.from: compares total-fraction ambient rings before integral-closure localization. The current latest contracting-correspondence statement contains no normalization assertion; no unit/chapter statement is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic commutative algebra tool: Q(A) is a finite product of fields for reduced Noetherian A. No node of this trace-formula unit supplies that ring decomposition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-9ae2606dc",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-9ae2606dc (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery creates no new nodes, and the live item is unsplit with no repair note, so this is a first split. Only split-owned fields changed. The statement holds: both sides equal the product of κ(q_i) over the minimal primes q_i ⊆ p. I tested it on a domain, on k×k with p=0×k, and on k[x,y]/(xy) at (x,y) and at (y,x−1). I checked Stacks 02LX (algebra.tex l.4612) against the cited lem-weil-pbc-reduced-noetherian-total-ring-fractions, both clause (1), the fields, and clause (2), the product isomorphism. Step 3 is the only non-elementary step. It takes the coordinatewise quasi-inverse, so q²v=q and x²y=x, and the cited node's statement supplies this. Steps 1, 2 and 4–6 are correct fraction calculations from the localization definitions: the image of T is regular in R and j is injective; every element of E has the form j(b)j(t)^{-1}; j(r) is regular; then a unit; then F and G are mutually inverse and compatible with R. proof_deps equals the union of uses. The three kinds of Mathlib search are recorded, and Mathlib has no reduced-ring specialization. An rg search of the DAG finds no duplicate. There is no cycle. The parent's step 4 uses exactly this statement. I accept the tool use of the pbc product theorem as a generic black box."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TotalFractionsPrimeLocalization",
+  "declaration": "IsFractionRing.exists_totalFractionsPrimeLocalization_algEquiv",
+  "file": "lean/Sheaf/RingTheory/TotalFractionsPrimeLocalization.lean",
+  "statement": "theorem exists_totalFractionsPrimeLocalization_algEquiv (A : Type u) [CommRing A] [IsNoetherianRing A] [IsReduced A] (p : Ideal A) [p.IsPrime] : ∃ e : Localization (Algebra.algebraMapSubmonoid (FractionRing A) p.primeCompl) ≃ₐ[Localization.AtPrime p] FractionRing (Localization.AtPrime p), ∀ (a : A) (s : p.primeCompl), e (Localization.mk (algebraMap A (FractionRing A) a) ⟨algebraMap A (FractionRing A) s, Algebra.mem_algebraMapSubmonoid_of_mem s⟩) = algebraMap (Localization.AtPrime p) (FractionRing (Localization.AtPrime p)) (Localization.mk a s)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9cb33946",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: arbitrary universe u, CommRing+IsNoetherianRing+IsReduced, p.IsPrime, no domain/Nontrivial; FractionRing = total quotient ring; S^{-1}Q(A) = Localization (algebraMapSubmonoid (FractionRing A) p.primeCompl) without assuming S ⊆ nonzerodivisors; ≃ₐ over A_p uses Mathlib's canonical localizationAlgebra (a/s ↦ (a/1)/(s/1)), R-algebra maps out of E are unique so the existential is canonical; fraction formula clause exact; lean.statement verbatim. Statement true (both sides = ∏ κ(q), q minimal ⊆ p); edge cases domain, k×k at 0×k, k[x,y]/(xy) at two primes, zero ring, universes. Only the lean field differs from the live node, which had no prior lean record. stmt_deps are the 3 Mathlib leaves actually used; the proof-dep module ReducedNoetherianTotalRingFractions exists live and is imported non-public. No duplicate in project/Mathlib (Mathlib comparisons need M ≤ nonZeroDivisors or a domain). Docstrings carry source and blueprint tag, all 6 proof steps; no defs, only sorry. Not recompiled (no change). Advisory: truncated sentence in module docstring."
+ }
+}

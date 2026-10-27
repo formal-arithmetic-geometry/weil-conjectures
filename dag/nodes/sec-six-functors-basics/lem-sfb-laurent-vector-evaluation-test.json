@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-laurent-vector-evaluation-test",
+ "kind": "statement",
+ "title": "Nonzero-point evaluations detect vector Laurent coefficients modulo a subspace",
+ "statement": "Let $k$ be an infinite field [def-weil-field], let $r\\geq0$ be an integer, let $V$ be a $k$-vector space of arbitrary dimension, and let $W\\subseteq V$ be a $k$-linear subspace. A vector Laurent polynomial is a finite formal sum $P=\\sum_{u\\in\\mathbf Z^r}v_uz^u$ with coefficients $v_u\\in V$, all but finitely many zero. For $t=(t_1,\\ldots,t_r)\\in(k^\\times)^r$ define $P(t)=\\sum_u(\\prod_{i=1}^rt_i^{u_i})v_u$. Then $P(t)\\in W$ for every $t\\in(k^\\times)^r$ if and only if $v_u\\in W$ for every $u\\in\\mathbf Z^r$. Empty sums and $r=0$ are allowed; in the latter case $\\mathbf Z^0$ and $(k^\\times)^0$ are singleton sets and the empty product is $1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.11 and Remark 1.14, printed p.10: joint injectivity of evaluations survives scalar coefficients; split-torus coefficient formulation, followed by passage to the vector-space quotient V/W. Scalar polynomial identity input is MvPolynomial.funext_set, Mathlib/Algebra/MvPolynomial/Funext.lean:57-72."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Let $S=\\{u:v_u\\ne0\\}$, which is finite. If $S=\\varnothing$, all coefficients and all evaluations are zero, so both conditions hold. Hence assume $S\\ne\\varnothing$. For the forward implication form $U=V/W$, the vector space of cosets with $[v]+[v\\prime]=[v+v\\prime]$ and $c[v]=[cv]$, and let $q(v)=[v]$. By the coset relation $q(v)=0$ exactly when $v\\in W$. Linearity of $q$ gives $\\sum_{u\\in S}(\\prod_i t_i^{u_i})q(v_u)=q(P(t))=0$ for every nonzero tuple $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.11 and Remark 1.14, printed p.10; agent-written vector-coefficient and quotient argument spelling out joint injectivity."
+   }
+  },
+  {
+   "text": "For each coordinate choose $a_i=1+\\max(\\{0\\}\\cup\\{-u_i:u\\in S\\})$. Then $u_i+a_i\\ge1$ for every $u\\in S$. Given any linear map $\\lambda:U\\to k$, form the ordinary scalar polynomial $F_\\lambda(X)=\\sum_{u\\in S}\\lambda(q(v_u))\\prod_i X_i^{u_i+a_i}$. At a tuple $x\\in k^r$ having a zero coordinate every summand vanishes, since its exponent in that coordinate is positive. At a tuple with all coordinates nonzero, integer-power addition and linearity give $F_\\lambda(x)=(\\prod_i x_i^{a_i})\\lambda(\\sum_{u\\in S}(\\prod_i x_i^{u_i})q(v_u))=0$. Thus $F_\\lambda$ vanishes on all of $k^r$. Apply [lem-sfb-mvpolynomial-infinite-evaluation] with $D=k$, variable set $\\{1,\\ldots,r\\}$ and the zero polynomial; its infinite-domain hypothesis holds because $k$ is an infinite field. It yields $F_\\lambda=0$. The shift $u\\mapsto(u_i+a_i)_i$ is injective, so its coefficient at this shifted exponent is exactly $\\lambda(q(v_u))$, which is therefore zero for each $u\\in S$.",
+   "uses": [
+    "lem-sfb-mvpolynomial-infinite-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.11 and Remark 1.14, printed p.10; agent-written vector-coefficient and quotient argument spelling out joint injectivity."
+   }
+  },
+  {
+   "text": "If $q(v_u)\\ne0$ for some $u\\in S$, apply [lem-weil-pbc-vector-space-dual-separates] to the $k$-vector space $U$ and this vector. It produces a linear map $\\lambda:U\\to k$ with $\\lambda(q(v_u))\\ne0$, contrary to step 2. Hence $q(v_u)=0$, equivalently $v_u\\in W$, for every $u\\in S$. For $u\\notin S$ the coefficient is zero and belongs to $W$ as well. This uses no finite-dimensionality hypothesis on $V$ or $U$.",
+   "uses": [
+    "lem-weil-pbc-vector-space-dual-separates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.11 and Remark 1.14, printed p.10; agent-written vector-coefficient and quotient argument spelling out joint injectivity."
+   }
+  },
+  {
+   "text": "Conversely, if every $v_u$ lies in $W$, each scalar multiple $(\\prod_i t_i^{u_i})v_u$ belongs to $W$, and closure of a subspace under finite sums gives $P(t)\\in W$. For $r=0$ the unique exponent gives a constant polynomial in no variables; step 2 has no zero-coordinate case and its empty product is $1$, so the same proof applies. The zero vector space and the subspaces $W=0$ and $W=V$ are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.11 and Remark 1.14, printed p.10; agent-written vector-coefficient and quotient argument spelling out joint injectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-mvpolynomial-infinite-evaluation",
+  "lem-weil-pbc-vector-space-dual-separates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.11 and Remark 1.14, printed p.10; agent-written vector-coefficient and quotient argument spelling out joint injectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "span.*eval|eval.*span|eval_eq_zero.*infinite|eq_zero_of_eval",
+   "results": "25 hits: Mathlib/RingTheory/IntegralClosure/IsIntegral/Basic.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/Ideal/Maps.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean, Mathlib/RingTheory/MvPolynomial/Homogeneous.lean, Mathlib/RingTheory/Unramified/Field.lean. Subdirectory: RingTheory. Logged digest d00e442e8ed8ef65. Signatures read; MvPolynomial.funext_set was inspected at Mathlib/Algebra/MvPolynomial/Funext.lean:57-72, coeffsIn at Basic.lean:1034-1051 and LaurentPolynomial.smeval at Laurent.lean:612-614.",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar-domain polynomial extensionality, coefficientwise definitions and evaluation formulas do not state joint injectivity for arbitrary vector coefficients modulo an arbitrary subspace. Clearing negative exponents, passing to V/W and separating finitely many coefficients are additional arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"eval\", \"zero\"",
+   "results": "12 hits: MvPolynomial.eval_zero', MvPolynomial.eval_zero, MvPolynomial.eval₂_zero, MvPolynomial.eval₂Hom_zero', MvPolynomial.eval₂_mul_eq_zero_of_left, MvPolynomial.eval₂_mul_eq_zero_of_right, MvPolynomial.eval₂Hom_zero, MvPolynomial.eval₂_zero'_apply. Subdirectory: remote index. Logged digest db77986999ce894e. Signatures read; MvPolynomial.funext_set was inspected at Mathlib/Algebra/MvPolynomial/Funext.lean:57-72, coeffsIn at Basic.lean:1034-1051 and LaurentPolynomial.smeval at Laurent.lean:612-614.",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar-domain polynomial extensionality, coefficientwise definitions and evaluation formulas do not state joint injectivity for arbitrary vector coefficients modulo an arbitrary subspace. Clearing negative exponents, passing to V/W and separating finitely many coefficients are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Laurent polynomial with coefficients in a vector space over an infinite field, the linear span of its coefficients equals the span of its values on tuples of nonzero field elements",
+   "results": "8 hits: MvPolynomial.coeffsIn_eq_span_monomial, Profinite.NobelingProof.GoodProducts.span, Profinite.NobelingProof.GoodProducts.spanFin, Profinite.NobelingProof.spanFinBasis.span, Profinite.NobelingProof.Products.span_nil_eq_top, Polynomial.Sequence.span, Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval, PowerBasis.mem_span_pow. Subdirectory: remote index. Logged digest 7012fd0a6645078b. Signatures read; MvPolynomial.funext_set was inspected at Mathlib/Algebra/MvPolynomial/Funext.lean:57-72, coeffsIn at Basic.lean:1034-1051 and LaurentPolynomial.smeval at Laurent.lean:612-614.",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar-domain polynomial extensionality, coefficientwise definitions and evaluation formulas do not state joint injectivity for arbitrary vector coefficients modulo an arbitrary subspace. Clearing negative exponents, passing to V/W and separating finitely many coefficients are additional arguments."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficients of a vector valued Laurent polynomial lie in a subspace if all evaluations at nonzero points over an infinite field lie in that subspace",
+   "results": "8 hits: LaurentPolynomial.smeval_eq_sum, MvPolynomial.mem_coeffsIn_iff_coeffs_subset, MvPolynomial.eval_mem, MvPolynomial.coeffsIn, LaurentPolynomial.leval, Polynomial.int, LaurentPolynomial.smeval, LaurentPolynomial.leval_apply. Subdirectory: remote index. Logged digest 716c9b7f8d0764a7. Signatures read; MvPolynomial.funext_set was inspected at Mathlib/Algebra/MvPolynomial/Funext.lean:57-72, coeffsIn at Basic.lean:1034-1051 and LaurentPolynomial.smeval at Laurent.lean:612-614.",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar-domain polynomial extensionality, coefficientwise definitions and evaluation formulas do not state joint injectivity for arbitrary vector coefficients modulo an arbitrary subspace. Clearing negative exponents, passing to V/W and separating finitely many coefficients are additional arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "eq_zero_of_eval|eval.*eq_zero.*iff|eq_zero_iff.*eval|eval.*injective",
+   "results": "3 hits: Mathlib/Algebra/MvPolynomial/Rename.lean, Mathlib/Algebra/MvPolynomial/Rename.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean. Subdirectory: Algebra/MvPolynomial. Logged digest 2c0028ae049aac06. Signatures read; MvPolynomial.funext_set was inspected at Mathlib/Algebra/MvPolynomial/Funext.lean:57-72, coeffsIn at Basic.lean:1034-1051 and LaurentPolynomial.smeval at Laurent.lean:612-614.",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar-domain polynomial extensionality, coefficientwise definitions and evaluation formulas do not state joint injectivity for arbitrary vector coefficients modulo an arbitrary subspace. Clearing negative exponents, passing to V/W and separating finitely many coefficients are additional arguments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Laurent polynomial with coefficients in any algebra over an infinite field that vanishes at all tuples of nonzero elements has every coefficient zero",
+   "results": "8 hits: Polynomial.zero_of_eval_zero, Polynomial.toLaurent_eq_zero, MvPolynomial.funext_set, Polynomial.toLaurent_ne_zero, Polynomial.funext, MvPolynomial.funext, LaurentPolynomial.ext, LaurentPolynomial.degree_eq_bot_iff. Subdirectory: remote index. Logged digest 8f96567bd760ed89. Signatures read; MvPolynomial.funext_set was inspected at Mathlib/Algebra/MvPolynomial/Funext.lean:57-72, coeffsIn at Basic.lean:1034-1051 and LaurentPolynomial.smeval at Laurent.lean:612-614.",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar-domain polynomial extensionality, coefficientwise definitions and evaluation formulas do not state joint injectivity for arbitrary vector coefficients modulo an arbitrary subspace. Clearing negative exponents, passing to V/W and separating finitely many coefficients are additional arguments."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.funext_set",
+   "results": "{\"t\": \"2026-10-23T22:38:27Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.funext_set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MvPolynomial.funext_set\"], \"digest\": \"9cfb8e0bee6e3543\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scalar extensionality, scalar evaluation formulas, or linear separation; the arbitrary-vector Laurent criterion modulo a subspace requires the explicit exponent-shift and quotient argument in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "funext_set|exists_dual_vector|eq_zero.*dual|dual.*eq_zero",
+   "results": "{\"t\": \"2026-10-23T22:38:27Z\", \"tool\": \"grep\", \"query\": \"funext_set|exists_dual_vector|eq_zero.*dual|dual.*eq_zero\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean\", \"Mathlib/LinearAlgebra/ExteriorPower/Basis.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\"], \"digest\": \"614f7e523ccd08e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scalar extensionality, scalar evaluation formulas, or linear separation; the arbitrary-vector Laurent criterion modulo a subspace requires the explicit exponent-shift and quotient argument in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficients of a vector valued Laurent polynomial over an infinite field belong to a subspace if every evaluation at nonzero tuples belongs to the subspace",
+   "results": "{\"t\": \"2026-10-23T22:38:36Z\", \"tool\": \"leanfinder\", \"query\": \"Coefficients of a vector valued Laurent polynomial over an infinite field belong to a subspace if every evaluation at nonzero tuples belongs to the subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.coe_coeffsIn\", \"MvPolynomial.coeffsIn_le\", \"MvPolynomial.mem_coeffsIn\", \"MvPolynomial.mem_coeffsIn_iff_coeffs_subset\", \"MvPolynomial.C_mem_coeffsIn\", \"MvPolynomial.coeffsIn\", \"MvPolynomial.monomial_mem_coeffsIn\", \"MvPolynomial.coeffsIn_eq_span_monomial\"], \"digest\": \"bc6cfde95422b4b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scalar extensionality, scalar evaluation formulas, or linear separation; the arbitrary-vector Laurent criterion modulo a subspace requires the explicit exponent-shift and quotient argument in this split."
+  },
+  {
+   "tool": "grep",
+   "query": "eval.*submodule|eval.*subspace|eval.*coeff|coeff.*eval",
+   "results": "{\"t\": \"2026-10-23T22:39:03Z\", \"tool\": \"grep\", \"query\": \"eval.*submodule|eval.*subspace|eval.*coeff|coeff.*eval\", \"sub\": \"Algebra/Polynomial/Laurent.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"612\", \"614\"], \"digest\": \"c32a301277191ead\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scalar extensionality, scalar evaluation formulas, or linear separation; the arbitrary-vector Laurent criterion modulo a subspace requires the explicit exponent-shift and quotient argument in this split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vector Laurent polynomial coefficients belong to a subspace precisely when every nonzero point evaluation belongs to that subspace",
+   "results": "{\"t\": \"2026-10-23T22:39:03Z\", \"tool\": \"leansearch\", \"query\": \"Vector Laurent polynomial coefficients belong to a subspace precisely when every nonzero point evaluation belongs to that subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subspace.forall_mem_dualAnnihilator_apply_eq_zero_iff\", \"LaurentPolynomial.smeval_eq_sum\", \"MvPolynomial.eval_mem\", \"MvPolynomial.mem_vanishingIdeal_iff\", \"LaurentPolynomial.leval\", \"LaurentPolynomial.leval_apply\", \"LaurentPolynomial.smeval\", \"MvPolynomial.coeffsIn\"], \"digest\": \"4ab0c1f356fecb3b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scalar extensionality, scalar evaluation formulas, or linear separation; the arbitrary-vector Laurent criterion modulo a subspace requires the explicit exponent-shift and quotient argument in this split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of all evaluations of a finitely supported vector coefficient sum of integer monomials implies every coefficient is zero over an infinite field",
+   "results": "{\"t\": \"2026-10-23T22:39:05Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing of all evaluations of a finitely supported vector coefficient sum of integer monomials implies every coefficient is zero over an infinite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.zero_of_eval_zero\", \"MvPolynomial.sum_eval_eq_zero\", \"MvPolynomial.ker_evalₗ\", \"MvPolynomial.funext\", \"MvPolynomial.funext_set\", \"MvPolynomial.aeval_eq_zero\", \"MvPolynomial.combinatorial_nullstellensatz_exists_eval_nonzero\", \"MvPolynomial.funext_set_iff\"], \"digest\": \"1a8464fcdf6ff4fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scalar extensionality, scalar evaluation formulas, or linear separation; the arbitrary-vector Laurent criterion modulo a subspace requires the explicit exponent-shift and quotient argument in this split."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-fixed-local-ideal-jets",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 13.1, printed p.254, with proof through Theorem 13.7, printed p.256; tori are linearly reductive (opening sentence of Chapter 13, and Theorem 12.30). This is the general fixed-scheme smoothness input, not Corollary 13.10 restated. Supporting input: Lemma 13.4, printed p.255 (difference ideal); proof of Lemma 13.6, printed p.256 (rational finite jets), applied to the split torus and its schematically dense rational points. The affine coefficient interpretation identifies the scheme-theoretic fixed ideal, without assuming that the fixed scheme is reduced. Supporting coefficient argument for identifying the constant-rational-point difference ideal with the full fixed ideal: Milne Remark 1.14, printed p.10, specialized to a split torus, with arbitrary vector coefficients and a subspace quotient.",
+   "via": [
+    "lem-sfb-torus-fixed-local-ideal-jets",
+    "lem-sfb-torus-fixed-scheme-smooth",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-laurent-vector-evaluation-test",
+  "worker": "stage1",
+  "summary": "Q34: proved the vector Laurent evaluation criterion by passing to cosets, shifting every exponent to be strictly positive, applying existing scalar polynomial extensionality, and using the existing arbitrary-dimensional dual-separation leaf. Retained the statement, source and inherited search records; no new nodes.",
+  "blueprint": "Supporting coefficient argument for the torus fixed-ideal identification in lem-sfb-torus-fixed-local-ideal-jets, descending from det-thm-sf-ctf-stability-direct-images proof (3). The current blueprint proof states the direct-image assembly; this algebraic prerequisite is the descendant refinement, as recorded in blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-bac54a651",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-bac54a651 (reviewer sub-agent of L); spot-checked: I read the full proof. The delivery is one commit; the item is still unsplit live, with no repair note and no supersession. Compared with live, only proof, proof_deps, proof_origin, status, split_report and the added logged searches changed; statement, stmt_deps, source and blueprint are unchanged. There are no new nodes. Step 1 (elementary) forms the quotient V/W, so q(v)=0 exactly when v is in W. Step 2 shifts exponents by a_i=1+max({0} together with the -u_i), so F_lambda vanishes on all of k^r, including tuples with a zero coordinate. It then applies the Mathlib leaf lem-sfb-mvpolynomial-infinite-evaluation (MvPolynomial.funext; infinite domain and any index set, so r=0 is covered). Because the shift is injective, each coefficient lambda(q(v_u)) is zero. Step 3 cites the Mathlib leaf lem-weil-pbc-vector-space-dual-separates (Module.Projective.exists_dual_ne_zero, no dimension hypothesis), applied to U=V/W. Step 4 is the converse, from closure of a subspace. Small cases checked: r=0, P=0, V=0, W=0, W=V, and a Q^2 example; F_2 with z-1 shows the infinitude hypothesis is necessary. Milne iAG2017 Prop 1.11 and Rem 1.14 (printed p.10) were read: they give the scalar/algebra version, and proof_origin is correctly marked agent. The parent lem-sfb-torus-fixed-local-ideal-jets uses the lemma with V=B and W=I_0, as stated. Both citations are Mathlib-leaf tools, so there is no route issue and no tool_uses entry is needed. rg over the DAG for Laurent nodes found no duplicate. blueprint.from.node=null is inherited from Q19's split and was not touched by this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.LaurentVectorEvaluation",
+  "declaration": "Finsupp.laurent_sum_mem_submodule_iff",
+  "file": "lean/Sheaf/LinearAlgebra/LaurentVectorEvaluation.lean",
+  "statement": "theorem laurent_sum_mem_submodule_iff {k : Type u} [Field k] [Infinite k] {V : Type v} [AddCommGroup V] [Module k V] (r : ℕ) (W : Submodule k V) (P : (Fin r → ℤ) →₀ V) : (∀ t : Fin r → kˣ, P.sum (fun e x ↦ (∏ i : Fin r, (t i : k) ^ e i) • x) ∈ W) ↔ ∀ e : Fin r → ℤ, P e ∈ W",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2997beb26",
+  "group": "O4",
+  "result": "pass",
+  "note": "Only the node's lean field changed vs live; one theorem Finsupp.laurent_sum_mem_submodule_iff with sorry. Clause check: Field+Infinite k (def-weil-field), r:ℕ incl. 0, V in independent universe v with no finiteness, W : Submodule k V, P : (Fin r → ℤ) →₀ V, t : Fin r → kˣ (nonzero points), evaluation = P.sum of (∏ (t i:k)^e i) • x, iff with ∀ e, P e ∈ W. All match the node; lean.statement verbatim. Edge cases r=0, P=0, V=0, W=⊥/⊤ covered. Fits the citer torus-fixed-local-ideal-jets (V=B, W=I_0). No duplicate or name clash in Mathlib/live Sheaf/slopmaster2. Docstrings have the Milne Prop 1.11/Rem 1.14 source, blueprint tag and the 4-step proof. Report has Worker report and Second reading sections. No findings; no compile needed."
+ }
+}

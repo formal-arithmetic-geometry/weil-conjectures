@@ -1,0 +1,300 @@
+{
+ "id": "lem-wf-constructible-tensor-koszul-unit",
+ "kind": "statement",
+ "title": "Constructible ordinary tensor and its normalized intrinsic completion unit",
+ "statement": "Fix primes $p\\ne\\ell$, $q=p^a$ with $a\\ge1$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a finite intermediate field $E\\subset\\Omega$, with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $W_0$ be a separated finite-type $k_0$-scheme, $W=W_0\\times_{k_0}k$, and $B=\\varprojlim_{n\\ge1}(R/\\varpi^n)_W$ on the small pro-etale site. Use the integral bounded-constructible category $\\mathcal C_E$ underlying [def-wf-weil-category].\nFor $M,N\\in\\mathcal C_E$, put $T_{M,N}=M\\otimes_B^L N$ using ordinary derived tensor [def-wf-tensor-product], and $C(A)=A^{\\wedge}_{\\mathrm{Kos}}$ with its specified unit $\\eta_A$ [def-weil-pbc-intrinsic-completion]. Let $\\chi^{\\mathrm{quot}}_{M,N}:T_{M,N}\\to Q(T_{M,N})$ be the canonical quotient-tower map of [lem-fix-constructible-tensor-completion], where $Q(T)=R\\lim_n(T\\otimes_B^L(R/\\varpi^n)_W)$. The integral category $\\mathcal C_E$ and the integral category in that lemma coincide as full subcategories of $D(B)$ with identical reduction functors. The canonical quotient/Koszul comparison is a natural isomorphism $\\rho_T:Q(T)\\xrightarrow{\\sim}C(T)$ in $D(B)$ satisfying\n$$\\rho_{T_{M,N}}\\circ\\chi^{\\mathrm{quot}}_{M,N}=\\eta_{T_{M,N}}.$$\nBoth $T_{M,N}$ and $C(T_{M,N})$ belong to $\\mathcal C_E$, and $\\eta_{T_{M,N}}$ is an isomorphism. For any integral arrows $f:M\\to M'$ and $g:N\\to N'$ one has\n$$\\eta_{T_{M',N'}}\\circ(f\\otimes_B^L g)=C(f\\otimes_B^L g)\\circ\\eta_{T_{M,N}}.$$\nThus these assertions concern the actual quotient and intrinsic completion units, including their specified normalization, rather than an unspecified isomorphism of objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence, equivariance for Weil complexes; argument extracted from lem-wf-tensor-completion-frobenius, original steps 1–2 and the constructibility argument of step 4; Bhatt–Scholze Lemma 6.5.5"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-fix-constructible-tensor-completion",
+  "def-weil-pbc-completed-quotient-completion-unit",
+  "def-weil-pbc-uniform-reduction-profile",
+  "def-sfb-integral-completed-coefficient-transport",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-completed-rlim-functor"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the noetherian, finite-dimensional geometric fibre and stalkwise invertibility of ell from weilGeometricFiber_coefficientHypotheses. Stalkwise invertibility gives invertibility of the global section ell. Apply integralStratifiedPerfectDetailed to identify the two constructible subcategories. The existing detailedFiniteComparison gives the natural isomorphism of the positive reduction functors with the specified coefficient transport.",
+   "uses": [
+    "def-wf-weil-category",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-integral-detailed-finite-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; geometric hypotheses from Stacks Tags 01KU, 01T4 and 01T6"
+   }
+  },
+  {
+   "text": "Apply completedKoszulQuotientComparison to a chosen complex representative of each completed-coefficient derived object K. It gives e_K:C(K) ≅ Q(K), with eta_K followed by e_K equal to the actual quotient augmentation. Choose these comparisons. Their inverses send the quotient augmentation exactly to the specified intrinsic unit. To prove naturality, precompose the proposed equality first with e_K and then with eta_K. The first precomposition is injective because e_K is invertible; the second is injective by the completion reflector universal property, since the target C(L) is complete. The remaining equality is the naturality of the quotient augmentation and the reflector unit. Thus the inverses assemble into the required natural isomorphism, with its exact unit identity.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-quotient-comparison",
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099L (section-derived-completion-noetherian), 099M (lemma-naive-completion); algebraization.tex Tag 0A0E (lemma-derived-completion-koszul)"
+   }
+  },
+  {
+   "text": "For constructible M,N transport them by the inverse of purCoefficientModel to detailed objects K,L. The equivalence unit and isomorphism invariance, followed by integralStratifiedPerfectDetailed, show K,L are detailed constructible. Take the ordinary tensor model T and comparison tau of constructibleTensorCompletion. The comparison tau is invertible on K,L, and integralOperations_preserve_constructible for the identity morphism shows its completed tensor target is constructible. Hence T(K,L) is constructible. To identify its coefficient transport with the actual wfOrdinaryDerivedTensor(M,N), choose the existing flat K-flat representatives P,Q of K,L. Ring-isomorphism scalar restriction preserves termwise flatness and K-flatness. Compose the representative comparison for T, the derived coefficient-transport factorization, ProjectionTensorCoefficient.totalIso, the representative comparison of wfTensorModel, and the equivalence units for M,N. This gives an isomorphism from the coefficient transport of T(K,L) to the specified ordinary tensor. Transfer constructibility using the isomorphism-closed predicates. No quotient tensor/augmentation comparison is needed in this step.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-fix-constructible-tensor-completion",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "def-sf-projection-coefficient-tensor-total",
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "def-wf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5; transport of the explicitly retained uniform tower and etale-origin witnesses"
+   }
+  },
+  {
+   "text": "The actual ordinary tensor is now bounded constructible complete. Apply wfConstructible_complete to this object to obtain that its specified intrinsic Koszul completion unit is an isomorphism. Transfer bounded constructibility along this exact isomorphism to its intrinsic completion, using the isomorphism invariance in pbcIntegralUniformComplete_isTriangulated. This proves all three objectwise assertions without substituting a different unit.",
+   "uses": [
+    "def-wf-tensor-product",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5; transport of the explicitly retained uniform tower and etale-origin witnesses"
+   }
+  },
+  {
+   "text": "For arbitrary integral arrows f,g let h be their image under wfOrdinaryDerivedTensor. The definition of wfCompletion.map extends h followed by the intrinsic unit uniquely across the source unit. The completion reflector bijection applied to this extension gives eta_source followed by C(h) equal to h followed by eta_target. Reverse this equality to obtain exactly the displayed naturality formula, with no invertibility assumption on f or g.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-weil-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-integral-detailed-finite-reduction",
+  "lem-weil-pbc-completed-koszul-quotient-comparison",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "def-sf-projection-coefficient-tensor-total",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "def-wf-tensor-product",
+  "def-weil-pbc-bounded-constructible-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5 and Proposition 6.6.11; existing normalized completed Koszul/quotient comparison (Stacks Tags 099L, 099M and 0A0E); coefficient tensor-total comparison and reflector universal property, assembled by Y8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary derived tensor of bounded constructible adic sheaves has invertible Koszul completion unit agreeing with quotient tower completion",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived complete constructible sheaf tensor product canonical Koszul unit quotient completion",
+   "results": "SheafOfModules.unit; CategoryTheory.Sheaf.tensorUnit_isSheaf; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; HomologicalComplex.rightUnitor'; CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction; SheafOfModules.unit_val; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.tensorUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProduct_naturality",
+   "results": "AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*derived|Koszul.*tensor",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this normalized derived-sheaf tensor assertion with its Weil/localized coefficient clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary derived tensor of constructible adic sheaves is complete with canonical quotient tower and Koszul completion units",
+   "results": "AdicCompletion.ofTensorProduct_tmul; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion, ordinary sheaf tensor or unrelated category structures; no completed-coefficient derived constructible tensor with normalized Koszul and quotient units"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*derived|Koszul.*tensor",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion, ordinary sheaf tensor or unrelated category structures; no completed-coefficient derived constructible tensor with normalized Koszul and quotient units"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf tensor product derived completion canonical unit quotient Koszul",
+   "results": "SheafOfModules.unit; TopCat.Presheaf.instMonoCommRingCatToTotalQuotientPresheafPresheaf; SheafOfModules.unit_val; KaehlerDifferential.D_tensorProductTo; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.instHasTensorTensorUnit_1; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; AlgebraicGeometry.Scheme.kerAdjunction_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion, ordinary sheaf tensor or unrelated category structures; no completed-coefficient derived constructible tensor with normalized Koszul and quotient units"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProduct_naturality",
+   "results": "AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion, ordinary sheaf tensor or unrelated category structures; no completed-coefficient derived constructible tensor with normalized Koszul and quotient units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible derived category of adic coefficient sheaves closed under ordinary tensor product",
+   "results": "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategoryLightCondMod; localCohomology; LightCondensed.instMonoidalLightCondSetLightCondModFree; AdicCompletion.ofTensorProduct; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedLightCondMod; localCohomology.ofDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic completion, ordinary sheaf tensor or unrelated category structures; no completed-coefficient derived constructible tensor with normalized Koszul and quotient units"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-tensor-completion-frobenius",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof, penultimate sentence: 'Its equivariance for Weil complexes is the equivariance of the projection transformation in [lem-fix-weil-operations]'; ordinary/quotient/Koszul tensor normalization and constructibility",
+   "via": [
+    "lem-wf-tensor-completion-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-wf-constructible-tensor-koszul-unit",
+  "worker": "stage1",
+  "summary": "Assembled existing category coincidence, whole quotient-tower tensor identification, quotient/Koszul unit comparison and constructibility preservation. Wrote the actual augmentation/unit identifications and the reduction-witness transport. Statement unchanged; no new nodes.",
+  "blueprint": "fix-prop-projection-formula.proof.md, penultimate sentence on equivariance for Weil complexes; resolves the ordinary/completed tensor normalization extracted through lem-wf-tensor-completion-frobenius.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Base-change geometry of W; no geometric permanence lemma in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Checks the qcqs hypothesis of the ordinary tensor completion theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks noetherianity for the existing integral-category comparison."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Checks finite dimension for the integral-category comparison."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the two existing integral categories with identical reductions; no category comparison in this unit."
+   },
+   {
+    "node": "lem-pur-integral-ambient-operation-models",
+    "why": "Identifies whole quotient tensor towers and their augmentations, including the zero fibre component."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Supplies quotient/Koszul comparison respecting actual units in completed coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Functorial total derived inverse limits for the natural comparison."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Constructibility of the quotient-defined completed tensor."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Naturality of the Koszul completion unit on the derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-1c0b11ab2",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-1c0b11ab2 (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, no new nodes, statement unchanged, no repair note, and the unit has no steps. Read every cited statement. Step 1: the geometry lemmas make W noetherian, finite-dimensional and qcqs with ell invertible. The final clause of lem-weil-pbc-integral-stratified-perfect-characterization then identifies def-weil-pbc-bounded-constructible-complete with def-weil-derived-complete-integral-detailed (same B and reductions), so lem-fix-constructible-tensor-completion applies. Step 2: lem-pur-integral-ambient-operation-models with f=id identifies C_W(M⊗^L N)=Q(T) with the completed tensor, including its augmentation clause with the zero shifted component. So chi = theta∘chi^quot and chi^quot is invertible. Step 3: the last paragraph of lem-weil-pbc-constant-completion-equivalence gives the Koszul vs quotient comparison respecting units (A=R, I=(varpi), Â=B). The Koszul model matches def-weil-pbc-intrinsic-completion, and naturality comes from the strict tower map plus the functorial Rlim of lem-weil-pbc-ringed-strict-tower-homotopy-limit. So rho∘chi^quot = eta and eta_T is an isomorphism. Step 4: clause 2 of lem-pur-integral-operations-preserve-constructible, plus transport of the witnesses along the isomorphisms, checked against the tower and complete definitions. Step 5: naturality of the reflector unit. Sources: Bhatt–Scholze Def 6.5.1, Lemmas 6.5.3–6.5.5 and Prop 6.6.11; Stacks 099L/099M/0A0E/099B/01KU/01T4/01T6 labels verified; no SGA. No cycle. Duplicate search (rg -L for quotient/Koszul and koszul-unit; candidates regular-quotient-completion-unit, quotient-completed-compositor-unit, the bridge citer) found no restatement. Small cases: W empty, M=N=B, M=N=(R/varpi)_W, zero arrows. The cross-unit tool_uses are accepted because the unit has no steps. Advisory: the statement attributes chi^quot:T→Q(T) to lem-fix, whose chi targets the completed tensor. Step 2 fixes the relation as chi=theta∘chi^quot, so the wording is imprecise but not false."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WfConstructibleTensorKoszulUnit",
+  "declaration": "WeilConjectures.wfConstructibleTensorKoszulUnit",
+  "declarations": [
+   "WeilConjectures.wfConstructibleTensorCategories",
+   "WeilConjectures.wfConstructibleTensorKoszulComparison",
+   "WeilConjectures.wfConstructibleTensorKoszulUnit"
+  ],
+  "file": "lean/Sheaf/Paper/WfConstructibleTensorKoszulUnit.lean",
+  "statement": "theorem wfConstructibleTensorKoszulUnit : (∀ M N : PbcBoundedConstructibleComplete (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E), PbcIsBoundedConstructibleComplete (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E) ((wfOrdinaryDerivedTensor (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)).obj (M.obj, N.obj)) ∧ PbcIsBoundedConstructibleComplete (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E) ((wfCompletion (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E)).obj ((wfOrdinaryDerivedTensor (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)).obj (M.obj, N.obj))).obj ∧ IsIso (wfCompletionUnit (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E) ((wfOrdinaryDerivedTensor (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)).obj (M.obj, N.obj)))) ∧ ∀ (M M' N N' : PbcBoundedConstructibleComplete (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)) (f : M ⟶ M') (g : N ⟶ N'), (wfOrdinaryDerivedTensor (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)).map (Prod.mkHom f.hom g.hom) ≫ wfCompletionUnit (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E) ((wfOrdinaryDerivedTensor (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)).obj (M'.obj, N'.obj)) = wfCompletionUnit (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E) ((wfOrdinaryDerivedTensor (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)).obj (M.obj, N.obj)) ≫ ((wfCompletion (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E)).map ((wfOrdinaryDerivedTensor (D.geometricFiber W₀).left (pbcStageDatum.{u} c.l c.Qbar E)).map (Prod.mkHom f.hom g.hom))).hom",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9c4da180",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Re-delivery only swaps stmt_dep prop-weil-pbc-rlim-functoriality → def-pur-completed-rlim-functor (landed existing:true owner of completedRlim), as the 095b return required; statement, proof_deps and Lean byte-identical to the returned heads. Mechanical finding: the reflector theorem stmt_dep is genuine, since wfCompletion's object part uses wfCompletionReflector.1 (wfCompleteObj) and its map part uses Equiv.ofBijective on .2 (wfCompletionExtend), and the item uses wfCompletion.obj/.map/⋙ι, so PASS on that point. Maths: hypotheses match (separated + LocallyOfFiniteType + QuasiCompact, no universe equality); category iff via the canonical integralDetailedTransport plus reduction iso; ∃ρ natural iso with χquot≫ρ=η is pinned by the reflector bijection; T is the ordinary tensor; T, C(T) ∈ C_E, IsIso η_T, naturality for arbitrary f,g. Edge cases ok; no definitions; 3 sorry proofs; docstrings with source and blueprint tag; statement verbatim; imports exist; report sections present. No compile needed (no file changed). Advisories: Nonempty reduction iso; χquot attribution wording; bounded-constructible-complete and adic-coefficient-datum owners reached indirectly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T071253-L-172609",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

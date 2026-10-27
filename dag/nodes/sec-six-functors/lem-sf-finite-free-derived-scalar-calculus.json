@@ -1,0 +1,215 @@
+{
+ "id": "lem-sf-finite-free-derived-scalar-calculus",
+ "kind": "statement",
+ "title": "Exact finite-free scalar extension on the two finite-coefficient sites",
+ "statement": "Let $W$ be a Noetherian scheme, let $A\\to B$ be a homomorphism of finite commutative rings such that $B$ is free of finite rank $r$ over $A$, and choose either the small etale site or the small pro-etale site of $W$. Use constant ring sheaves, module sheaves, and their ordinary unbounded derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules, def-weil-sheaf-of-modules-category]. Write $T=-\\otimes_A^LB$ for derived change of rings [lem-pur-derived-change-of-rings] and $U$ for restriction of scalars [def-pc-sheaf-restrict-scalars]. Both ordinary scalar extension and $U$ are exact. Their termwise functors on complexes descend to the derived categories, the former identifies canonically with $T$, and the usual scalar unit and counit give $T\\dashv U$. The functor $U$ reflects zero objects and isomorphisms. A basis $b_1,\\ldots,b_r$ of $B/A$ gives the natural identification $UTK\\cong K^{\\oplus r}$, with inclusions induced by $k\\mapsto k\\otimes b_j$.\n\nFor every $K\\in D(W,A)$ and $N\\in D(W,B)$ there is a natural derived isomorphism\n$$U(TK\\otimes_B^L N)\\cong K\\otimes_A^L UN.$$\nOn K-flat representatives its forward and inverse balancing maps are $(p\\otimes b)\\otimes n\\mapsto p\\otimes bn$ and $p\\otimes n\\mapsto(p\\otimes1)\\otimes n$, respectively [def-pc-kflat-complex]. Extension of a K-flat $A$-complex is K-flat over $B$. In particular $T$ preserves bounded constructibility on the etale site [def-weil-pbc-constructible-complexes] and on the finite-coefficient pro-etale realization [def-weil-finite-torsion-constructibility]. If $K$ has Tor amplitude in $[a,b]$, meaning that $K\\otimes_A^LF$ has cohomology only in that interval for every degree-zero module sheaf $F$, then $TK$ has Tor amplitude in the same interval [def-weil-finite-tor-amplitude].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Proof paragraphs 1-2: exact finite-free scalar and restriction calculus behind additivity and tensor-Hom; returned proof step 3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-proetale-modules",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-finite-free-scalar-tensor-calculus on the small etale and small pro-etale sites. Apply lem-sf-finite-free-scalar-derived-tensor-models to both resulting ordinary scalar packages. The same generic site lemma handles rank zero and the empty site.",
+   "uses": [
+    "lem-sf-finite-free-scalar-tensor-calculus",
+    "lem-sf-finite-free-scalar-derived-tensor-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For etale bounded constructibility, apply constructibleCoefficientSheaf to every cohomology sheaf. The exact-functor homology isomorphism transfers constructibility to the cohomology of D(E)K. Exact functors preserve zero objects, hence the very same cohomological bounds. For the pro-etale essential-image predicate, choose its etale origin L and isomorphism nu_A L ≅ K. The existing ordinary scalar/comparison square induces a derived natural isomorphism D(E_et) nu_B ≅ nu_A D(E_pro). Combine this with D(E_pro) of the given origin isomorphism. The extended etale origin is bounded constructible by the preceding argument.",
+   "uses": [
+    "lem-sp-constructible-coefficient-site-square",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every degree-zero B-module sheaf F, the derived balancing isomorphism followed by the exact restriction/single-functor comparison identifies U(D(E)K tensor_B F[0]) with K tensor_A (UF)[0]. The assumed Tor interval gives concentration of the right side. Faithful exact ordinary restriction reflects concentration of cohomology by its homology comparison, so D(E)K has that same Tor interval. Fill the two FiniteFreeScalarCalculus records with these constructions; the conjunction is the requested theorem.",
+   "uses": [
+    "lem-sf-finite-free-scalar-derived-tensor-models",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-free-scalar-tensor-calculus",
+  "lem-sf-finite-free-scalar-derived-tensor-models",
+  "lem-sp-constructible-coefficient-site-square",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-free-extension.proof.md",
+  "place": "Paragraphs 1-2; scalar descent and K-flat normalized comparison split off, constructibility and Tor assembly proved in Lean by Y5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On etale and proetale module derived categories finite free scalar extension is exact left adjoint to conservative restriction and preserves constructibility and Tor amplitude",
+   "results": "8 hits. Condensed.profiniteSolidCounit; Condensed.profiniteSolid; Condensed.profiniteSolidification; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; comonadicExtendScalars; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"changeOfRings\"",
+   "results": "1 hits. ChangeOfRings.«term_⊗ₜ[_,_]_»",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*[Dd]erived|[Dd]erived.*finiteFree|changeOfRings",
+   "results": "16 hits. Mathlib/RingTheory/Morita/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On etale and proetale module derived categories finite free scalar extension is exact left adjoint to conservative restriction and preserves constructibility and Tor amplitude",
+   "results": "8 hits. ModuleCat.instIsLeftAdjointExtendScalars; ModuleCat.extendRestrictScalarsAdj; ModuleCat.restrictCoextendScalarsAdj; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction; ModuleCat.ExtendRestrictScalarsAdj.homEquiv; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free sheaf algebra extension and restriction derived adjunction with projection tensor reassociation and unchanged Tor interval",
+   "results": "8 hits. ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.counit; LightCondensed.freeForgetAdjunction; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.extendRestrictScalarsAdj; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: infrastructure only; does not state this derived sheaf comparison with its stated normalization and domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of sheaves of rings derived tensor restriction adjunction constructible Tor amplitude",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj; ModuleCat.restrictCoextendScalarsAdj; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.sheafificationAdjunction; PresheafOfModules.freeAdjunction; SheafOfModules.free; SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-22",
+   "verdict": "no match: module/sheaf infrastructure or unrelated localization results; no declaration states all the two-site derived scalar, constructibility and Tor-amplitude clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of constant ring sheaves induces exact conservative derived scalar adjunction and preserves bounded constructibility and Tor amplitude",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition'; CondensedMod.IsSolid; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: module/sheaf infrastructure or unrelated localization results; no declaration states all the two-site derived scalar, constructibility and Tor-amplitude clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension and restriction of scalars for sheaf modules localization at quasi isomorphisms tensor cancellation finite free basis",
+   "results": "8 hits: ModuleCat.localizedModule_functor_map_exact; exact_of_isLocalized_span; exact_of_localized_span; IsLocalizedModule.map_exact; LocalizedModule.map_exact; Module.mem_freeLocus_iff_tensor; exact_of_isLocalized_maximal; LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: module/sheaf infrastructure or unrelated localization results; no declaration states all the two-site derived scalar, constructibility and Tor-amplitude clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-free-extension",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-free-extension",
+   "place": "Proof paragraphs 1-2: exact finite-free scalar and restriction calculus behind additivity and tensor-Hom; returned proof step 3",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-free-derived-scalar-calculus",
+  "worker": "stage1",
+  "summary": "Checked the finite-free coefficient blueprint proof and Stacks ringed-site constructions. Expanded exactness and basis maps, localized the explicit scalar adjunction, checked unbounded conservativity by cohomology, reused general K-flat and tensor-localization nodes, and wrote the balanced chain maps with their signs. Constructibility uses the existing coefficient-site-square and a B-linear local matrix computation; Tor amplitude uses arbitrary degree-zero B-module tests. No new nodes or statement changes.",
+  "blueprint": "Realizes the finite-free additivity and tensor-Hom scalar calculus implicit in paragraphs 1-2 of lem-coef-finite-free-extension.proof.md; the two-site and interval clauses are the auxiliary item's explicit formulation of that calculus.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   },
+   {
+    "node": "lem-pur-independent-inverse-image-tensor-comparison",
+    "why": "Generic ringed-site or localization infrastructure used exactly as stated; it supplies no replacement for a step of the six-functor compatibility unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-4bb696cc8",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-4bb696cc8 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and wrote no fixes. It is one commit and only states the existing Q33 auxiliary item, which is cited by step 2 of lem-coef-finite-free-extension. There are no new nodes. The statement is unchanged and keeps the ordinary unbounded module derived categories over constant finite ring sheaves on both sites, with T from lem-pur-derived-change-of-rings. No repair note exists for the item. Step 1: the basis gives B_W≅A_W^r on presheaves, so E is exact after sheafification; U keeps the same abelian sheaf (forget node, Lean-closed). Step 2: exact descent, K-flat resolutions of unbounded complexes and change-of-rings (2) give D(E)≅T. Step 3: the explicit sheaf adjunction is localized by lem-sfb-adjunction-localization, whose p,q isomorphisms come from step 2. Step 4: H^q commutes with U and the unbounded iso criterion applies, so U reflects isomorphisms and zero objects. Step 5: the all-independent K-flat node (same unit) and ringed-pullback with u=id give flat-term K-flat EP. Step 6: the cancellation node, with symmetry, sums and exactness of E and U, shows UQ is flat-term K-flat; signs checked. Step 7: derived-tensor descent on both flat-term K-flat pairs; the balancing chain maps are inverse and I checked their differentials. Step 8: the coefficient-site-square lemma on H^q(K)[0] gives the étale clause; for pro-étale, inverse-image tensor comparison plus a B-linear basis matrix model gives intrinsic constructibility, and W empty follows the lemma's convention. Step 9: N=F[0] with step 4 reflection keeps the same Tor interval. Edge cases tested: B=A, B=0 with A nonzero, W empty, unbounded K, nilpotent A. Stacks tags 03CZ, 05V4, 06YS, 06YU, 0G7E, 05RT and 03EL resolve; no SGA is used. I accept the 7 declared tool_uses as generic infrastructure. Advisories: step 7 could also list the cancellation node in its uses (it is already in proof_deps); the pro-étale clause cites def-weil-finite-torsion-constructibility, which is written for A_{E,n}, while the proof uses the equivalent intrinsic def-weil-proetale-constructible-sheaf, and the parent's rings are of the A_{E,n} form."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeDerivedScalarCalculus",
+  "declaration": "AlgebraicGeometry.finiteFreeDerivedScalarCalculus",
+  "declarations": [
+   "AlgebraicGeometry.finiteFreeDerivedScalarCalculus"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeDerivedScalarCalculus.lean",
+  "statement": "theorem finiteFreeDerivedScalarCalculus (W : Scheme.{u}) [IsNoetherian W] (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] [Algebra A B] (r : ℕ) (basis : Module.Basis (Fin r) A B) : Nonempty (FiniteFreeScalarCalculus.{u} W.smallEtaleTopology r basis (Etale.DerivedCategory.isBoundedConstructible A W) (Etale.DerivedCategory.isBoundedConstructible B W)) ∧ Nonempty (FiniteFreeScalarCalculus.{u} (Scheme.ProEt.topology W) r basis ((Etale.DerivedCategory.isBoundedConstructible A W).map (Functor.mapDerivedCategory.{u + 1, u + 1, u + 1, u + 1, u + 2, u + 2} (ProEtale.comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} A) W))) ((Etale.DerivedCategory.isBoundedConstructible B W).map (Functor.mapDerivedCategory.{u + 1, u + 1, u + 1, u + 1, u + 2, u + 2} (ProEtale.comparisonUpperStar.{u + 2, u} (ModuleCat.{u + 1} B) W))))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The conclusion package uses the published fixed-ModuleCat sheaf presentation on both sites. Ordinary extension is composeAndSheafify of ModuleCat.extendScalars, and derived restriction is the existing exact descent. The universal field identifies exact extension descent with derived change of rings via its canonical counit. Unit, counit, basis inclusions, both local balancing formulas and the K-flat total-complex comparison are explicitly normalized. FiniteScalarDerivedTensorModels packages the derived comparison, joint naturality and cochain normalization generically, then the concrete package supplies the fixed scalar functors and its normalized sheaf balancing map. This partition of conclusions avoids expanding concrete site dictionaries and adds no hypotheses. Pro-etale bounded constructibility is the essential image of the recorded finite-value etale predicate under the published comparison. All universes of that derived comparison are explicit. No mathematical statement changes. Y5: all original conclusion data are reexported verbatim from Sheaf.Paper.FiniteFreeScalarCalculusData; theorem signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1478f7723",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Single-module delivery (Sheaf.Paper.FiniteFreeDerivedScalarCalculus); only the item lean record changed and the statement is verbatim. Every node clause is rendered and pinned: exactness of E/U; D(E) as left derived functor with the factor counit (=T); adjunction with unit/counit normalized against Sheaf.adjunction(extendRestrictScalarsAdj) on all complexes; U reflects zero and isos; basis iso pinned by inclusions unit≫U(b_j•1); sheaf balancing pinned on local pure tensors (forward and inverse formulas); derived tensor iso natural and normalized on K-flat total complexes (summand components and derived square); kFlat preserved; etale D^b_c via the recorded isBoundedConstructible; pro-etale via ObjectProperty.map along comparisonUpperStar (the def-weil-pbc-proetale-modules essential image); torAmplitudeIn with all degree-zero tests on both sites. Hypotheses no stronger than the node (A,B : Type(u+1) is the recorded encoding). Edge cases r=0, B=A, W empty, unbounded complexes covered; no site-universe equality. Helpers transparent; one sorry; 9-step docstring; Stacks tags resolve. Advisories: generic finiteScalarExtension shares its body with the per-site sheafExtendScalars/etaleSheafExtendScalars (needed for the generic structure, defeq); the change-of-rings record declarations are not used directly (same universal property on fixed-module endpoints); the intrinsic A_{E,n} constructibility record is unused (essential image used, equivalent by the finite-ring derived-origin lemma); torAmplitudeIn is not listed in the tor-amplitude record. No recompile (no file changed); worker compile clean at 15.3/13.7 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-61eb7",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261025T164826-L-1096829",
+  "kind": "interface",
+  "note": "independent cc review: delivered FiniteFreeScalarCalculusData vs clone item module (verbatim extraction, public re-export); item theorem signature vs clone (identical); two new sorried statements vs the item's FiniteFreeScalarCalculus fields; direct importers NormalizedStageCoefficientCalculus and RamifiedScalarSystemTranspose compiled against the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

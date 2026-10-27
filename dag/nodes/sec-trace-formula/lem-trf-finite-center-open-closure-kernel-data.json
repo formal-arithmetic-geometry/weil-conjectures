@@ -1,0 +1,298 @@
+{
+ "id": "lem-trf-finite-center-open-closure-kernel-data",
+ "kind": "statement",
+ "title": "Finite-center preserved opens: quasi-compact dense factor and ambient closure-kernel criterion",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme] and let $\\mathcal I\\subseteq\\mathcal O_X$ be a finite-type quasi-coherent ideal [pqf-def-coherent]. Put $U=X\\setminus V(\\mathcal I)$ and $j:\\Omega=Y\\times_XU\\hookrightarrow Y$ [def-pc-fibre-product, def-weil-open-immersion]. Write $i:S=\\operatorname{SIm}(j)\\hookrightarrow Y$ for the scheme-theoretic image [def-nagata-scheme-theoretic-image] and let $J=\\ker(\\mathcal O_Y\\to j_*\\mathcal O_\\Omega)$, where the kernel is taken as a sheaf of ideals. Then $j$ is quasi-compact [def-weil-finite-type-morphism], $J$ is quasi-coherent, and $i_*\\mathcal O_S=\\mathcal O_Y/J$ as quotient sheaves of rings. Scheme-theoretically $S\\times_Y\\Omega=\\Omega$. The induced $h:\\Omega\\to S$ is a quasi-compact open immersion, is quasi-separated (its diagonal is an isomorphism), and $\\mathcal O_S\\to h_*\\mathcal O_\\Omega$ is injective; in particular $\\operatorname{SIm}(h)=S$.\n\nMoreover, let $s:R\\hookrightarrow Y$ be any closed immersion [def-weil-closed-immersion] such that $R\\times_Y\\Omega=\\Omega$ as open subschemes, and write $h_R:\\Omega\\hookrightarrow R$ for the induced inclusion. If $\\operatorname{SIm}(h_R)=R$, then $h_R$ is quasi-compact, its structure-sheaf map is injective, and the ideal of $R$ in $Y$ is $J$, so $R=S$ as closed subschemes. For any further closed immersion $k:Y\\hookrightarrow P$ into a scheme $P$, the ideal sheaf of $k\\circ s$ is $\\ker(\\mathcal O_P\\to(k\\circ j)_*\\mathcal O_\\Omega)$, equivalently the inverse image of $k_*J$ under $\\mathcal O_P\\to k_*\\mathcal O_Y$ [def-sbc-closed-immersion-ideal-sheaf]. No quasi-compactness or quasi-separatedness of $X$ or $Y$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01R8, lemma-quasi-compact-scheme-theoretic-image, kernel and open restriction; finite-center quasi-compactness from properties.tex Tag 01PH, lemma-quasi-coherent-finite-type-ideals, proof of (4) implies (1), applied affine-locally"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For any quasi-coherent ideal sheaf J, its associated module is quasi-coherent: its definition is the kernel of O_X to the pushforward of O_{V(J)}. The unit modules are quasi-coherent, the closed inclusion is quasi-compact and quasi-separated, so apply [pqf-lem-pushforward-qcoh] and [lem-weil-pbc-quasi-coherent-module-kernel].",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every affine open V of X, [lem-weil-pbc-quasi-coherent-finite-type-affine] makes the module of sections of I finite. Its image under the ideal inclusion is precisely I(V), hence this ideal is finitely generated. Under the affine spectrum chart, V intersect (X minus support I) is the image of the complement of the zero locus of I(V). PrimeSpectrum.isCompact_isOpen_iff_ideal gives compactness of that complement (the finite union of basic opens argument). An open embedding reflects compactness on its image. Thus the complement inclusion is quasi-compact by the affine-open criterion, without any global compactness hypothesis. Empty ideals and empty schemes are covered by the same criterion.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The square isPullback_morphismRestrict f I.support.compl presents j as the base change of the complement inclusion. Thus [lem-pc-quasi-compact-base-change] makes j quasi-compact. Its image factor is a quasi-compact open immersion by [lemma-nagata-immersion-open-in-scheme-image], and the existing image API [lemma-nagata-scheme-image-ideal-qc] makes its maps on every open injective and its kernel zero.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a quasi-compact morphism a, factor a as toImage followed by image inclusion. The first map is injective on sections, so the sectionwise kernel of the composite equals the kernel of the image inclusion, namely a.ker.idealOfOpens. Apply this to j to obtain the raw kernel formula on all opens. Its ideal module is quasi-coherent by Step 1. On each affine open, j.ker.subschemeObjIso identifies the image sections with the quotient by the ideal; take its inverse. The identity subschemeι_app proves compatibility with the quotient map.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the pullback of imageι and j, monicity of imageι identifies its first projection with its second followed by toImage. The map induced by (toImage, identity) is therefore inverse to the second projection, by the two pullback projection equations. Since toImage is an open immersion it is mono, hence its diagonal is an isomorphism and is quasi-compact. This supplies quasi-separatedness.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the comparison R, base change along s makes hR quasi-compact. Its assumed scheme-theoretic dominance now implies injectivity on every open. The square gives hR followed by s equals j. Precomposition by a schematically dominant map does not change the kernel ideal, since the composite structure map has the same kernel, so s.ker equals j.ker. Apply [lem-weil-pbc-closed-immersions-equal-ideal-isomorphic] to obtain the isomorphism over Y.",
+   "uses": [
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a further closed immersion k, the same dominance cancellation gives (s followed by k).ker = (j followed by k).ker. Both j and k are quasi-compact, so apply the raw kernel formula from Step 4 to their composite on every open V. Finally the structure map of the composite is k.app V followed by j.app (k inverse image V), and the kernel of a composite ring map is the comap of the last kernel. Applying Step 4 to j identifies that last kernel with J on k inverse image V. These are identities of the actual section maps, hence compatible with restriction.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-finite-type-morphism",
+  "lem-pc-quasi-compact-base-change",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/properties.tex",
+  "place": "Tags 01R8 and 01PH, affine-local converse; Lean assembly by Y3 using the existing image API, an explicit pullback inverse, and sectionwise kernel composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Complement of a finite type ideal pulled back to an arbitrary scheme is quasi compact and schematically dense in its scheme theoretic closure with kernel of restriction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"image\", \"IsOpenImmersion\", \"QuasiCompact\"",
+   "results": "1 hits: AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toImage|ker.*comp|schemeTheoretic|schematically|isCompact.*[Ii]deal",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type ideal complement open immersion is quasi compact and dense in its scheme theoretic image with closure ideal equal to restriction kernel",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite type quasi coherent ideal the complement pullback is quasi compact and its image factor is dense open with quotient kernel and closed ambient recognition criterion",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.isLocalization_basicOpen_of_qcqs, AlgebraicGeometry.Scheme.IdealSheafData.support_map. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isRetrocompact_zeroLocus_compl_of_fg|ofFiniteType.*[Cc]ompact|[Cc]ompact.*ofFiniteType",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"ofFiniteType\"",
+   "results": "0 hits: none. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ker_comp|toImage|isOpenImmersion.*[Ii]mage",
+   "results": "15 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean. Read the returned image-factor, support and retrocompactness declarations. They assume quasi-compactness of the immersion, address an affine spectrum, or require local Noetherian hypotheses. None supplies all the finite-center arbitrary-scheme quasi-compactness, quotient and ambient-kernel recognition clauses in one line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.IsOpenImmersion",
+   "results": "12 hits; AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'.  Read Basic.lean:685-727, Subscheme.lean:727-768 and Immersion.lean:236-260. These provide component kernel/image assertions under quasi-compactness, not the entire finite-center and ambient-closure criterion. The second semantic phrasing also returned basic-open retrocompactness, not the full statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the complement of a finite type quasi coherent ideal has a quasi compact open immersion into its schematic image with injective structure sheaf and ambient ideal kernel",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion, AlgebraicGeometry.Scheme.instQuasiCompactToImage.  Read Basic.lean:685-727, Subscheme.lean:727-768 and Immersion.lean:236-260. These provide component kernel/image assertions under quasi-compactness, not the entire finite-center and ambient-closure criterion. The second semantic phrasing also returned basic-open retrocompactness, not the full statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isRetrocompact_zeroLocus_compl_of_fg|instIsOpenImmersionToImageOfQuasiCompact|ker_comp|toImage",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean.  Read Basic.lean:685-727, Subscheme.lean:727-768 and Immersion.lean:236-260. These provide component kernel/image assertions under quasi-compactness, not the entire finite-center and ambient-closure criterion. The second semantic phrasing also returned basic-open retrocompactness, not the full statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The scheme theoretic closure of a quasi compact open immersion is cut out by the kernel of restriction of structure sheaves and its open inclusion is schematically dense",
+   "results": "8 hits; AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.restrict, AlgebraicGeometry.Scheme.Opens.ι, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.Hom.ker_apply, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact.  Read Basic.lean:685-727, Subscheme.lean:727-768 and Immersion.lean:236-260. These provide component kernel/image assertions under quasi-compactness, not the entire finite-center and ambient-closure criterion. The second semantic phrasing also returned basic-open retrocompactness, not the full statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsOpenImmersionToImageOfQuasiCompact|toImage_app_injective|instQuasiCompactToImage|ker_comp",
+   "results": "12 hits; Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean.  Read Basic.lean:685-727, Subscheme.lean:727-768 and Immersion.lean:236-260. These provide component kernel/image assertions under quasi-compactness, not the entire finite-center and ambient-closure criterion. The second semantic phrasing also returned basic-open retrocompactness, not the full statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type ideal has retrocompact complement and a quasi compact open immersion factors as a schematically dense open in a closed subscheme whose ideal is the kernel of the structure sheaf restriction",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι, AlgebraicGeometry.isRetrocompact_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.isLocalization_basicOpen_of_qcqs, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat.  Read Basic.lean:685-727, Subscheme.lean:727-768 and Immersion.lean:236-260. These provide component kernel/image assertions under quasi-compactness, not the entire finite-center and ambient-closure criterion. The second semantic phrasing also returned basic-open retrocompactness, not the full statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-flat-etale-base-change",
+  "date": "2026-10-22",
+  "group": "Q24"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Ancestor coordinate-chart strict-transform argument, via lem-trf-permissible-boundary-preservation step 3; extracted item old steps 2 and 3 and the kernel/ambient-ideal argument in old step 5, also supplying old step 4 quasi-compactness after pullback.",
+   "via": [
+    "lem-trf-strict-transform-flat-etale-base-change",
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-normal-crossings-strictification",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-center-open-closure-kernel-data",
+  "worker": "stage1",
+  "summary": "Q16 wrote the full finite-center open/closure/kernel proof using existing nodes only: finite generation on arbitrary affine opens, arbitrary base change, the quasi-compact image kernel, restriction to the preserved open, density of the image factor, and sectionwise ambient recognition. No statement changed and no new nodes were needed. Added the definition dependency for the quasi-separatedness already in the statement.",
+  "blueprint": "Realizes the strict-transform closure and ambient-kernel argument in the coordinate-chart strictification route descending from lem-trf-local-term-locality, via lem-trf-strict-transform-flat-etale-base-change: the old proof steps 2 and 3, kernel argument of old step 5, and pullback quasi-compactness of old step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine finite-generation criterion proves retrocompactness of a finite-type ideal complement; the trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Generic ideal formula for a base-changed closed subscheme verifies the preserved open scheme-theoretically; the trace-formula unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-43eb67d07",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-43eb67d07 (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item and every cited statement in full. The delivery has no new nodes and the statement is byte-identical to live (live and side-live: unsplit, no repair note). The only stmt_deps addition is def-weil-quasi-separated-morphism, which the statement needs. Sources checked: Stacks 01R8 (morphisms.tex 849-884) and 01PH (properties.tex 3720-3752, converse paragraph applied affine-locally, so no qcqs hypothesis on X; correct). No SGA source is used. Step 1: (a) finite generation gives e^{-1}V = union of D(a_r), which is qc. This uses V(I) restricted to an affine V equals V(I(V)), the defining affine description (Mathlib IdealSheafData.mem_support_iff_of_mem); accepted as definitional (advisory). Steps 2-5: base changes along arbitrary f are fine. 01R8(1) gives ideal(i)=J on affine opens, hence as sheaves. J|_Omega=0 with 01JU(1) and 01HO gives S x_Y Omega = Omega. h is a qc open immersion and a monomorphism, so its diagonal is an iso and h is quasi-separated. Nagata injectivity gives SIm(h)=S. Steps 6-8: SIm(h_R)=R gives zero raw kernel on an affine basis, hence injectivity on all opens. Factoring through O_R gives ideal(s)=J, so R=S by 01HO. The ambient kernel and inverse-image form follow sectionwise. Composition of closed immersions via the affine quotient description is accepted as elementary. Edge cases I=0, I=O_X, nonreduced k[t,e]/(e^2,te), and a topologically-but-not-schematically dense R all behave correctly. Accepted tool_uses: lem-weil-pbc-quasi-coherent-finite-type-affine and lem-pc-closed-subscheme-base-change-ideal-image (generic; unit sk-i-curve-zero supplies nothing comparable). Advisory: Mathlib leaf lemma-nagata-immersion-open-in-scheme-image overlaps the h clauses; deriving them via base change is equally valid. The parent's steps 2 and 4 use exactly the proved clauses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCenterOpenClosureKernelData",
+  "declaration": "AlgebraicGeometry.finiteCenterOpen_closure_kernel_data",
+  "declarations": [
+   "AlgebraicGeometry.finiteCenterOpen",
+   "AlgebraicGeometry.finiteCenterOpen_closure_kernel_data"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCenterOpenClosureKernelData.lean",
+  "statement": "theorem finiteCenterOpen_closure_kernel_data {X Y : Scheme.{u}} (f : Y ⟶ X) (I : X.IdealSheafData) [I.toModules.IsFiniteType] : QuasiCompact (finiteCenterOpen f I).ι ∧ (finiteCenterOpen f I).ι.ker.toModules.IsQuasicoherent ∧ (∀ V : Y.Opens, (finiteCenterOpen f I).ι.ker.idealOfOpens V = RingHom.ker ((finiteCenterOpen f I).ι.app V).hom) ∧ (∀ V : Y.affineOpens, ∃ e : CommRingCat.of (Γ(Y, V) ⧸ (finiteCenterOpen f I).ι.ker.ideal V) ≅ Γ((finiteCenterOpen f I).ι.image, (finiteCenterOpen f I).ι.imageι ⁻¹ᵁ V), CommRingCat.ofHom (Ideal.Quotient.mk ((finiteCenterOpen f I).ι.ker.ideal V)) ≫ e.hom = (finiteCenterOpen f I).ι.imageι.app V) ∧ IsIso (pullback.snd (finiteCenterOpen f I).ι.imageι (finiteCenterOpen f I).ι) ∧ IsOpenImmersion (finiteCenterOpen f I).ι.toImage ∧ QuasiCompact (finiteCenterOpen f I).ι.toImage ∧ QuasiSeparated (finiteCenterOpen f I).ι.toImage ∧ IsIso (pullback.diagonal (finiteCenterOpen f I).ι.toImage) ∧ (∀ V : (finiteCenterOpen f I).ι.image.Opens, Function.Injective ((finiteCenterOpen f I).ι.toImage.app V)) ∧ IsSchemeTheoreticallyDominant (finiteCenterOpen f I).ι.toImage ∧ (∀ (R : Scheme.{u}) (s : R ⟶ Y) [IsClosedImmersion s] (hR : (finiteCenterOpen f I).toScheme ⟶ R), IsPullback hR (𝟙 (finiteCenterOpen f I).toScheme) s (finiteCenterOpen f I).ι → IsSchemeTheoreticallyDominant hR → QuasiCompact hR ∧ (∀ V : R.Opens, Function.Injective (hR.app V)) ∧ s.ker = (finiteCenterOpen f I).ι.ker ∧ (∃ e : R ≅ (finiteCenterOpen f I).ι.image, e.hom ≫ (finiteCenterOpen f I).ι.imageι = s) ∧ ∀ (P : Scheme.{u}) (k : Y ⟶ P) [IsClosedImmersion k] (V : P.Opens), (s ≫ k).ker.idealOfOpens V = RingHom.ker (((finiteCenterOpen f I).ι ≫ k).app V).hom ∧ (s ≫ k).ker.idealOfOpens V = Ideal.comap (k.app V).hom ((finiteCenterOpen f I).ι.ker.idealOfOpens (k ⁻¹ᵁ V)))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9979dd318",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records, Stacks 01R8/01PH places (via the report and node), and the delivered module. Clause-by-clause: Ω = f⁻¹ᵁ I.support.compl (support = zero locus, checked in Basic.lean); I : IdealSheafData (quasi-coherent by construction) with [I.toModules.IsFiniteType]; J is rendered as ι.ker with idealOfOpens = raw kernel on every open and IsQuasicoherent; O_Y/J ≅ i_*O_S on the affine basis compatible with the quotient and imageι.app; IsIso pullback.snd for S×_YΩ=Ω; toImage is open immersion, qc, qs and has iso diagonal, is injective on all opens, and is IsSchemeTheoreticallyDominant (ker=⊥); for R, IsPullback hR 𝟙 s ι plus dominance give qc, injectivity, s.ker=J and an iso over Y; the ambient k gives both the kernel and the comap formula on every open. Single universe u, no extra hypotheses; edge cases I=0, I=O_X, empty and non-qcqs schemes covered. finiteCenterOpen is a transparent abbrev with docstrings, listed in declarations. Only the lean field changed vs side-live; lean.statement is verbatim; one sorry; report sections present. No compile (no file changed); worker compile clean. Advisory only: unused private proof-dep imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T083543-L-2384136",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-integral-finite-dualizing-coherence",
+ "kind": "statement",
+ "title": "Finite dualizing scalar comparisons respect every target transition",
+ "statement": "Fix D,l,E⊂L,X as in [lem-coef-integral-finite-extension], and coherent integral dualizing data w_E,w_L [def-sf-coherent-integral-dualizing-datum]. Let T be the strict completed scalar extension [def-weil-integral-scalar-extension]. For n≥0 form f_n:r_n(T omega_E)→r_n omega_L as the normalized tensor quotient comparison, scalar extension of w_E.reduction_n, the counit-defined finite dualizing coefficient map finiteU, and the inverse of w_L.reduction_n, in that order [def-sf-integral-finite-extension-models]. Then for every n≤m, f_m followed by the target normalized DVR transition equals the source normalized transition followed by restriction of f_n. This assertion includes every target exponent, not only ramification multiples.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers."
+ },
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-models",
+  "def-sf-coherent-integral-dualizing-datum",
+  "lem-coef-normalized-dvr-effectivity"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose the required equality with restriction of the target reduction isomorphism. Target coherence cancels the inverse target reduction and gives the target finite exceptional transition.",
+   "uses": [
+    "def-sf-coherent-integral-dualizing-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the finite mixed quotient square to replace finiteU_m followed by the target exceptional transition. Source coherence replaces the scalar extension of its reduction followed by the exceptional transition by scalar extension of the integral reduction transition followed by restriction of the lower reduction. Naturality of scalarReductionExchange moves that reduction map across the mixed map.",
+   "uses": [
+    "lem-sf-finite-dualizing-mixed-quotient",
+    "def-sf-coherent-integral-dualizing-datum",
+    "def-sf-scalar-reduction-exchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the scalar quotient transition square to K=omega_E and its completeness proof. Functoriality and associativity identify the remaining composite with restriction of the lower finite map. Cancel the target reduction isomorphism.",
+   "uses": [
+    "lem-sf-integral-scalar-quotient-transition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-scalar-reduction-exchange",
+  "lem-sf-finite-dualizing-mixed-quotient",
+  "lem-sf-integral-scalar-quotient-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers.",
+  "note": "Explicit mixed scalar/quotient mate; two independent transition equations, pasted using both DualizingDatum coherence laws."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For constructible derived complete adic sheaves on a finite type scheme over an algebraically closed field, Hom is the inverse limit of Hom between finite reductions",
+   "results": "8 hits, including Scheme.Modules.Hom, AdicCompletion, sheafHom and SheafOfModules.hasLimit; no derived constructible reduction theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic gives ordinary adjunction naturality, not the geometric finite quotient reconstruction or counit coherence.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDualizing_reduction_coherent|integralConstructibleReductionHom|DualizingDatum",
+   "results": "msearch grep: zero Mathlib hits. Project rg found the existing definitions in CoefIntegralFiniteExtension; integralSystemReduction_fullyFaithful concerns coherent system morphisms, not their separate finite evaluations. NormalizedDVRTowerEvaluation_full only gives existence and explicitly does not claim uniqueness. Blueprint search for finite reduction Hom: zero matches.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "date": "2026-10-25",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Paragraphs 3-4: finite dualizing maps form a coherent map of normalized derived towers.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteDualizingCoherence",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteDualizingCoherence.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.finiteDualizing_reduction_coherent",
+  "statement": "theorem finiteDualizing_reduction_coherent (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (X : Scheme.{u}) (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (wE : DualizingDatum l X D hl E) (wL : DualizingDatum l X D hl L) : let f := fun n : ℕ ↦ (quotient l E L ι X n wE.omega.obj wE.omega.property.1).hom ≫ (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X n)).map (wE.reduction n).hom ≫ finiteU l E L ι X D n ≫ (wL.reduction n).inv ∀ {m n : ℕ} (h : n ≤ m), f m ≫ normalizedDVRReductionTransition l L X D hl h wL.omega.obj = normalizedDVRReductionTransition l L X D hl h ((integralScalarExtensionOfUniverses l E L ι X).obj wE.omega.obj) ≫ (normalizedDVRRes l L X h).map (f n)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-56002",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261025T164906-L-1121390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261025T202604-L-2732657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

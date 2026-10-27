@@ -1,0 +1,230 @@
+{
+ "id": "lem-trf-formal-monoid-length-filtration",
+ "kind": "statement",
+ "title": "Monomial filtration and composition length of a truncated monoid completion",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero Noetherian local commutative ring [def-weil-pbc-noetherian-ring], complete and separated for the powers of $\\mathfrak m$ [def-weil-pbc-adically-complete-ring]. Let $P$ be a finitely generated additive submonoid of a free abelian group $G\\cong\\mathbf Z^r$, where $r\\ge0$, and let $w:G\\to\\mathbf Z$ be a homomorphism strictly positive on $P\\setminus\\{0\\}$. Write $A[P]=\\bigoplus_{p\\in P}Az^p$, with $z^pz^q=z^{p+q}$, set $\\mathfrak b=(\\mathfrak m,z^p:p\\ne0)$ and $B=\\varprojlim_n A[P]/\\mathfrak b^n$ [def-weil-pbc-adic-completion]. For $p\\ne0$ let $\\nu(p)$ be the largest integer $q$ for which $p=p_1+\\cdots+p_q$ with each $p_i\\in P\\setminus\\{0\\}$, and put $\\nu(0)=0$. For every integer $n\\ge1$, the set $S_n=\\{p\\in P:\\nu(p)<n\\}$ is finite. Choose any isomorphism $G\\cong\\mathbf Z^r$, order $P$ lexicographically by $(w(p),p_1,\\ldots,p_r)$, and write $S_n=\\{t_1<\\cdots<t_N\\}$. Identify $B/\\mathfrak b^nB$ as an $A$-module with $\\bigoplus_{p\\in S_n}A/\\mathfrak m^{n-\\nu(p)}$ by its coefficients. For $1\\le j\\le N$ let $F_j$ consist of the classes whose coefficients at $t_1,\\ldots,t_{j-1}$ vanish, and set $F_{N+1}=0$. Then $F_1=B/\\mathfrak b^nB$ and every $F_j$ is a $B$-submodule. The coefficient at $t_j$ induces an isomorphism $F_j/F_{j+1}\\cong A/\\mathfrak m^{n-\\nu(t_j)}$ of $B$-modules, where the action on the right is through the constant-coefficient homomorphism $c:B\\to A$. On each such factor the $B$-submodules are exactly the $A$-submodules. Every $A/\\mathfrak m^k$, $k\\ge1$, and every $B/\\mathfrak b^nB$ has finite composition length [def-weil-pbc-module-length], and\n$$\\mathrm{length}_B(B/\\mathfrak b^nB)=\\sum_{\\nu(p)<n}\\mathrm{length}_A(A/\\mathfrak m^{n-\\nu(p)}).$$",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70, agent-supplied monomial-filtration refinement (old proof step 5 of lem-trf-formal-monoid-ring-dimension); the length-additivity input is Stacks algebra.tex Tag 00IV, lemma-length-additive."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-monoid-completion-coefficients] to the given $A,P,G,w$. Its hypotheses are exactly the assumed Noetherian locality, completeness, finite generation, embedding and positive weight. It supplies the finite set $S_n$, the coefficient ring $B=A^P$ with finite convolution sums, and the stated coefficient identification of $B/\\mathfrak b^nB$. In particular every quotient class has a representative which is a finite sum supported on $S_n$: lift its finitely many residue coefficients to $A$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70 (PDF p. 76): agent-supplied monomial-filtration refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "In the coefficient ring of step 1 put $c(b)=b_0$. If $u+v=0$ with $u,v\\in P$, positivity of $w$ forces $u=v=0$. Thus convolution gives $c(bb')=c(b)c(b')$, so $c$ is a ring homomorphism. Constants give a section $A\\to B$ of $c$. The specified lexicographic order is a total order, and $u+v>u$ whenever $v\\ne0$, since $w(v)>0$. List the finite $S_n$ in this order. Its first element is $0$, and it is nonempty because $\\nu(0)=0<n$.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70 (PDF p. 76): agent-supplied monomial-filtration refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "Fix $j\\le N$ and $x\\in F_j$. Choose the representative $f=\\sum_{i=j}^N a_i z^{t_i}$: its earlier residue coefficients vanish, so they can be lifted as zero. For $b\\in B$ and $t\\in S_n$ with $t\\le t_j$, the convolution coefficient of $bf$ sums over $t_i+v=t$, $i\\ge j$. For $v\\ne0$ this would give $t>t_i\\ge t_j$, impossible. Only $v=0$, $t_i=t$ remains. Consequently all coefficients below $t_j$ vanish and the coefficient at $t_j$ is $c(b)a_j$ modulo $\\mathfrak m^{n-\\nu(t_j)}$. Addition and additive inverses preserve the vanishing conditions. Hence $F_j$ is a $B$-submodule; $F_1$ is the whole quotient and $F_{N+1}=0$ is a submodule.",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70 (PDF p. 76): agent-supplied monomial-filtration refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "The coefficient map $F_j\\to A/\\mathfrak m^{n-\\nu(t_j)}$ is $B$-linear by step 3, where $B$ acts through $c$. Its kernel is exactly $F_{j+1}$. It is onto, since the class of $az^{t_j}$ maps to the residue of any $a\\in A$. An explicit inverse on the quotient sends this residue to $[az^{t_j}]$ modulo $F_{j+1}$; changing $a$ by the displayed ideal gives zero in the coefficient quotient of step 1. This proves the claimed factor isomorphism. For any additive subgroup of the factor, stability under $A$ implies stability under $B$ because $b$ acts as $c(b)$, and stability under $B$ implies stability under $A$ using constants. The submodule lattices therefore coincide, including all their strict chains; their lengths agree by [def-weil-pbc-module-length].",
+   "uses": [
+    "lem-trf-monoid-completion-coefficients",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70 (PDF p. 76): agent-supplied monomial-filtration refinement, not a theorem stated in ILO."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-maximal-adic-graded-length-bridge] with $R=A$; its hypotheses hold since $A$ is a nonzero Noetherian local commutative ring. It gives finite $A$-length for every $A/\\mathfrak m^k$, $k\\ge1$. Put $k_j=n-\\nu(t_j)\\ge1$. Step 4 gives $\\mathrm{length}_B(F_j/F_{j+1})=\\mathrm{length}_A(A/\\mathfrak m^{k_j})<\\infty$. Starting with $F_{N+1}=0$, apply [lem-weil-pbc-length-additive-short-exact] successively to $0\\to F_{j+1}\\to F_j\\to F_j/F_{j+1}\\to0$, for $j=N,\\ldots,1$. The inclusion is injective, the quotient map is surjective, and its kernel is $F_{j+1}$. Induction gives finite length and the sum of the factor lengths for $F_1=B/\\mathfrak b^nB$, as asserted.",
+   "uses": [
+    "lem-trf-maximal-adic-graded-length-bridge",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV, lemma-length-additive; Tag 00K8, proposition-hilbert-function-polynomial, associated-graded power-filtration input as stated in lem-trf-maximal-adic-graded-length-bridge."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-monoid-completion-coefficients",
+  "def-weil-pbc-module-length",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70 (PDF p. 76): agent-supplied monomial-filtration refinement, not a theorem stated in ILO. Length additivity follows Stacks algebra.tex Tag 00IV, lemma-length-additive."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Length of the quotient of a completed monoid algebra by maximal ideal powers is the sum of coefficient quotient lengths indexed by monomial order",
+   "results": "{\"t\": \"2026-10-22T06:13:44Z\", \"tool\": \"leanfinder\", \"query\": \"Length of the quotient of a completed monoid algebra by maximal ideal powers is the sum of coefficient quotient lengths indexed by monomial order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.ord\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"isFiniteLength_quotient_span_singleton\", \"Module.length_finsupp\", \"ringKrullDim_le_ringKrullDim_add_card\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem\", \"Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map\"], \"digest\": \"84d8bbd772928c3f\"}; No exact or one-line match. Module.length_finsupp and length_compositionSeries concern modules with a given scalar action; they do not supply the monomial filtration, its factors, or the comparison of B- and A-submodules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(length|finrank).*(monoid|Monoid|AdicCompletion)|(monoid|Monoid|AdicCompletion).*length",
+   "results": "{\"t\": \"2026-10-22T06:13:46Z\", \"tool\": \"grep\", \"query\": \"(length|finrank).*(monoid|Monoid|AdicCompletion)|(monoid|Monoid|AdicCompletion).*length\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact or one-line match. Module.length_finsupp and length_compositionSeries concern modules with a given scalar action; they do not supply the monomial filtration, its factors, or the comparison of B- and A-submodules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition length of truncated formal semigroup series equals the sum of lengths of coefficient maximal ideal quotients",
+   "results": "{\"t\": \"2026-10-22T06:13:46Z\", \"tool\": \"leansearch\", \"query\": \"Composition length of truncated formal semigroup series equals the sum of lengths of coefficient maximal ideal quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompositionSeries.Equivalent.length_eq\", \"FreeAddSemigroup.length_add\", \"Module.length_compositionSeries\", \"PowerSeries.eval₂_trunc_eq_sum_range\", \"FreeSemigroup.length_mul\", \"PowerSeries.trunc_trunc_of_le\", \"PowerSeries.trunc\", \"PowerSeries.le_order_prod\"], \"digest\": \"ddb90b9f695f820d\"}; No exact or one-line match. Module.length_finsupp and length_compositionSeries concern modules with a given scalar action; they do not supply the monomial filtration, its factors, or the comparison of B- and A-submodules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length, AdicCompletion",
+   "results": "{\"t\": \"2026-10-22T06:13:46Z\", \"tool\": \"loogle\", \"query\": \"Module.length, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact or one-line match. Module.length_finsupp and length_compositionSeries concern modules with a given scalar action; they do not supply the monomial filtration, its factors, or the comparison of B- and A-submodules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monomial filtration of the powers of the augmentation and coefficient maximal ideal computes composition length for a completed affine semigroup algebra",
+   "results": "{\"t\": \"2026-10-22T06:14:53Z\", \"tool\": \"leanfinder\", \"query\": \"Monomial filtration of the powers of the augmentation and coefficient maximal ideal computes composition length for a completed affine semigroup algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRingFiltration.toGradedMonoid\", \"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"FormalMultilinearSeries.compChangeOfVariables_length\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem\", \"CompositionAsSet.toComposition_length\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_isPrime\", \"Composition.toCompositionAsSet_length\"], \"digest\": \"36540a702913baa8\"}; No exact or one-line match. Module.length_finsupp and length_compositionSeries concern modules with a given scalar action; they do not supply the monomial filtration, its factors, or the comparison of B- and A-submodules.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(length|filtration).*(MonoidAlgebra|AdicCompletion)|(MonoidAlgebra|AdicCompletion).*(length|filtration)",
+   "results": "{\"t\": \"2026-10-23T04:15:10Z\", \"tool\": \"grep\", \"query\": \"(length|filtration).*(MonoidAlgebra|AdicCompletion)|(MonoidAlgebra|AdicCompletion).*(length|filtration)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: completion evaluation and transition maps, monoid multiplication and free-monoid word length, Noetherian power-series instances and special principal quotients do not state the ordered monomial filtration. Module.length_eq_add_of_exact is the existing length-additivity leaf used in step 5; it does not alone prove this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition length of truncated formal monoid algebra is sum of lengths of coefficient quotients",
+   "results": "{\"t\": \"2026-10-23T04:15:10Z\", \"tool\": \"leansearch\", \"query\": \"Composition length of truncated formal monoid algebra is sum of lengths of coefficient quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.mapDomainAlgHom_comp\", \"FreeAddMonoid.length_add\", \"AddMonoidAlgebra.sup_support_list_prod_le\", \"FreeMonoid.length_mul\", \"FreeAddSemigroup.length_add\", \"AddMonoidAlgebra.grade.isInternal\", \"AddMonoidAlgebra.mul_apply\", \"FreeAddMonoid.length\"], \"digest\": \"124363f787418a7d\"}; Read the returned hits: completion evaluation and transition maps, monoid multiplication and free-monoid word length, Noetherian power-series instances and special principal quotients do not state the ordered monomial filtration. Module.length_eq_add_of_exact is the existing length-additivity leaf used in step 5; it does not alone prove this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.length, AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T04:15:11Z\", \"tool\": \"loogle\", \"query\": \"Module.length, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: completion evaluation and transition maps, monoid multiplication and free-monoid word length, Noetherian power-series instances and special principal quotients do not state the ordered monomial filtration. Module.length_eq_add_of_exact is the existing length-additivity leaf used in step 5; it does not alone prove this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monomial filtration of a completed affine semigroup algebra modulo powers of the coefficient maximal ideal and positive monomials has factors coefficient ideal quotients and additive composition length",
+   "results": "{\"t\": \"2026-10-23T04:15:18Z\", \"tool\": \"leanfinder\", \"query\": \"Monomial filtration of a completed affine semigroup algebra modulo powers of the coefficient maximal ideal and positive monomials has factors coefficient ideal quotients and additive composition length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AdicCompletion.factor_evalₐ_eq_eval\", \"AdicCompletion.factor_eval_eq_evalₐ\", \"AdicCompletion.subalgebra\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.of_apply\", \"AdicCompletion.mkₐ_apply_coe\"], \"digest\": \"ec4d56298176b372\"}; Read the returned hits: completion evaluation and transition maps, monoid multiplication and free-monoid word length, Noetherian power-series instances and special principal quotients do not state the ordered monomial filtration. Module.length_eq_add_of_exact is the existing length-additivity leaf used in step 5; it does not alone prove this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "length_eq_add_of_exact|length_finsupp|length_compositionSeries",
+   "results": "{\"t\": \"2026-10-23T04:16:11Z\", \"tool\": \"grep\", \"query\": \"length_eq_add_of_exact|length_finsupp|length_compositionSeries\", \"sub\": \"RingTheory/Length.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"68\", \"103\", \"171\", \"184\"], \"digest\": \"ab747888fe725ccd\"}; Read the returned hits: completion evaluation and transition maps, monoid multiplication and free-monoid word length, Noetherian power-series instances and special principal quotients do not state the ordered monomial filtration. Module.length_eq_add_of_exact is the existing length-additivity leaf used in step 5; it does not alone prove this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite composition length of an ordered monomial quotient filtration in a completed positive monoid algebra over a complete Noetherian local ring",
+   "results": "{\"t\": \"2026-10-23T04:16:12Z\", \"tool\": \"leanfinder\", \"query\": \"Finite composition length of an ordered monomial quotient filtration in a completed positive monoid algebra over a complete Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instIsNoetherianRing\", \"isFiniteLength_quotient_span_singleton\", \"PowerSeries.isNoetherianRing\", \"ringKrullDim_succ_le_ringKrullDim_powerseries\", \"ringKrullDim_le_ringKrullDim_add_card\", \"AdicCompletion.instPowNat\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"Ring.ord\"], \"digest\": \"515b77e517f0ccd4\"}; Read the returned hits: completion evaluation and transition maps, monoid multiplication and free-monoid word length, Noetherian power-series instances and special principal quotients do not state the ordered monomial filtration. Module.length_eq_add_of_exact is the existing length-additivity leaf used in step 5; it does not alone prove this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-monoid-ring-dimension",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Independent completed-local algebra input for the toric chart case of VI 1.8: VI 1.6(i)--(ii), printed p. 70: commutative-algebra dimension input for the displayed formal monoid models (agent-supplied refinement). Hilbert--Samuel dimension theorem: Stacks algebra.tex Tag 00KQ, proposition-dimension; completion dimension: more-algebra.tex Tag 07NV, lemma-completion-dimension. Extracted argument: VI 1.6(i)--(ii), printed p. 70, agent-supplied monomial-filtration refinement (old proof step 5 of lem-trf-formal-monoid-ring-dimension); the length-additivity input is Stacks algebra.tex Tag 00IV, lemma-length-additive.",
+   "via": [
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-monoid-length-filtration",
+  "worker": "stage1",
+  "summary": "Unchanged statement; five-step coefficient-tail proof using existing coefficient completion and maximal-adic finite-length nodes, with the existing Mathlib length-additivity leaf. Checked constant action, representative independence, exact sequences, coefficient quotient exponents, rank-zero and nonfree-monoid cases. No new nodes are necessary.",
+  "blueprint": "Expands the historical formal-chart algebra input under lem-trf-local-term-locality proof (1)--(2), through the existing alteration/log-regularity/formal-monoid-dimension chain: ILO VI 1.6(i)--(ii), printed p. 70, agent-supplied coefficient-tail refinement of the dimension proof. The current blueprint locality statement has no monoid-length theorem; the inherited provenance is historical, and no unit or chapter route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-90d806f97",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-90d806f97 (reviewer sub-agent of L); spot-checked: PASS with no fixes, and all five steps are correct. This is a first split of the unsplit node that Q158 created on 2026-10-22 from old step 5 of lem-trf-formal-monoid-ring-dimension. It answers no re-split note. Against its creation-time copy, the statement, stmt_deps and blueprint are byte-identical, and no new nodes are added. proof_deps equals the union of the step uses, every cited node exists unmerged, the dependency closure (86 nodes) does not contain the item, and there is no SGA citation. Sources: ILO VI 1.6(i)-(ii), p.70 (PDF p.76), gives only the formal models, so proof_origin.by=agent is correct. Stacks 00IV (algebra.tex:12394) matches the Mathlib leaf length-additive-short-exact. Step 1 uses only the stated content of monoid-completion-coefficients (B≅A^P, finite convolution, kernel a_p∈m^{max(n-ν,0)}, finite ⊕A/m^{n-ν}); the item's hypotheses include all of its hypotheses. Step 2: u+v=0 in P gives u=v=0 by positive weight, so c(b)=b_0 is a ring map; the (w,coords) lex order is total, its minimum is 0, and u+v>u for v≠0. Step 3: with the representative f=Σ_{i≥j}a_i z^{t_i}, a term with u≠0 lands at t>t_i≥t_j. So the coefficients below t_j vanish and the coefficient at t_j is c(b)a_j; this gives B-stability. Step 4: the coefficient map is B-linear via c, surjective, with kernel F_{j+1} (0 for j=N). B- and A-submodule lattices coincide since c is surjective. Step 5: maximal-adic-graded-length-bridge (same unit, R=A nonzero Noetherian local) gives finite length of A/m^k for k≥1, and downward additivity over B gives the sum. Edge cases checked: P={0} and r=0; n=1; P=N over a field; A=k[e]/(e^2) with n=2 gives length 3=2+1; nonfree ⟨2,3⟩. The parent's step-3 use (length_H(H/n^n)=Σλ(n−ν)) is matched. Duplicate search with rg -L: positive-monoid-convolution-length, high-length-prefix-division, monoid-degree-filtration-truncations, completed-monoid-support-projection, coefficient-embedding and length-growth are not duplicates. The route stays in unit sk-i-curve-zero plus a definition and a Mathlib leaf, so no tool_uses are needed. There are 11 recorded searches across 3 kinds."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalMonoidLengthFiltration",
+  "declaration": "AddMonoidAlgebra.formalMonoid_length_filtration",
+  "declarations": [
+   "AddMonoidAlgebra.monoidFiltrationPower",
+   "AddMonoidAlgebra.monoidFiltrationQuotient"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalMonoidLengthFiltration.lean",
+  "statement": "theorem formalMonoid_length_filtration (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (P : Type v) [AddCommMonoid P] [AddMonoid.FG P] (G : Type w) [AddCommGroup G] (ι : P →+ G) (hι : Function.Injective ι) (wgt : G →+ ℤ) (hpos : ∀ p : P, p ≠ 0 → 0 < wgt (ι p)) (r : ℕ) (coordinates : G ≃+ (Fin r → ℤ)) (b : Ideal (AddMonoidAlgebra A P)) (hb : b = Ideal.map (algebraMap A (AddMonoidAlgebra A P)) (IsLocalRing.maximalIdeal A) ⊔ Ideal.span {x | ∃ p : P, p ≠ 0 ∧ x = single p (1 : A)}) : ∃ ν : P → ℕ, ν 0 = 0 ∧ (∀ p : P, IsGreatest {q : ℕ | ∃ f : Fin q → P, (∀ i : Fin q, f i ≠ 0) ∧ (∑ i, f i) = p} (ν p)) ∧ (∀ k : ℕ, 1 ≤ k → Module.length A (A ⧸ (IsLocalRing.maximalIdeal A) ^ k) < ⊤) ∧ ∃ c : AdicCompletion b (AddMonoidAlgebra A P) →ₐ[A] A, (∀ (k : ℕ) (x : AdicCompletion b (AddMonoidAlgebra A P)) (f : AddMonoidAlgebra A P), AdicCompletion.evalₐ b k x = Ideal.Quotient.mk (b ^ k) f → Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ k) (c x) = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ k) (f.coeff 0)) ∧ ∀ n : ℕ, 1 ≤ n → Set.Finite {p : P | ν p < n} ∧ ∃ e : monoidFiltrationQuotient b n ≃ₗ[A] ⨁ p : {p : P // ν p < n}, A ⧸ (IsLocalRing.maximalIdeal A) ^ (n - ν p.1), (∀ (f : AddMonoidAlgebra A P) (p : {p : P // ν p < n}), e (Ideal.Quotient.mk (monoidFiltrationPower b n) (AdicCompletion.of b (AddMonoidAlgebra A P) f)) p = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ (n - ν p.1)) (f.coeff p.1)) ∧ (∀ (N : ℕ) (t : Fin N ≃ {p : P // ν p < n}), (∀ i j : Fin N, i < j → wgt (ι (t i).1) < wgt (ι (t j).1) ∨ (wgt (ι (t i).1) = wgt (ι (t j).1) ∧ Pi.Lex (· < ·) (· < ·) (coordinates (ι (t i).1)) (coordinates (ι (t j).1)))) → ∃ F : Fin (N + 1) → Submodule (AdicCompletion b (AddMonoidAlgebra A P)) (monoidFiltrationQuotient b n), (∀ (j : Fin (N + 1)) (x : monoidFiltrationQuotient b n), x ∈ F j ↔ ∀ i : Fin N, i.val < j.val → e x (t i) = 0) ∧ F 0 = ⊤ ∧ F (Fin.last N) = ⊥ ∧ (∀ j : Fin N, F j.succ ≤ F j.castSucc) ∧ ∀ j : Fin N, ∃ φ : ((F j.castSucc) ⧸ (F j.succ).comap (F j.castSucc).subtype) ≃ₗ[A] (A ⧸ (IsLocalRing.maximalIdeal A) ^ (n - ν (t j).1)), (∀ x : F j.castSucc, φ (Submodule.Quotient.mk x) = e x.1 (t j)) ∧ (∀ (a : AdicCompletion b (AddMonoidAlgebra A P)) (x : (F j.castSucc) ⧸ (F j.succ).comap (F j.castSucc).subtype), φ (a • x) = c a • φ x) ∧ (∀ T : AddSubgroup (A ⧸ (IsLocalRing.maximalIdeal A) ^ (n - ν (t j).1)), (∀ (a : AdicCompletion b (AddMonoidAlgebra A P)) (x : A ⧸ (IsLocalRing.maximalIdeal A) ^ (n - ν (t j).1)), x ∈ T → c a • x ∈ T) ↔ (∀ (a : A) (x : A ⧸ (IsLocalRing.maximalIdeal A) ^ (n - ν (t j).1)), x ∈ T → a • x ∈ T))) ∧ Module.length (AdicCompletion b (AddMonoidAlgebra A P)) (monoidFiltrationQuotient b n) < ⊤ ∧ Module.length (AdicCompletion b (AddMonoidAlgebra A P)) (monoidFiltrationQuotient b n) = ∑ᶠ p : {p : P // ν p < n}, Module.length A (A ⧸ (IsLocalRing.maximalIdeal A) ^ (n - ν p.1))",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fc7d30cc",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. Hypotheses: Noetherian local (nonzero comes with it), IsAdicComplete, finitely generated P with injective map to G and any chosen coordinates (rank 0 allowed), positive weight, b given by its defining equation. Conclusion: ν pinned as the attained maximum with ν0=0; S_n finite; the coefficient identification e pinned on polynomial representatives; c pinned by congruences at every level, so unique; holds for every (weight, coordinates)-lex enumeration of S_n; F_j are B-submodules with F_1 = whole, F_{N+1} = 0; factor isomorphisms induced by the t_j coefficient and compatible with the action through c; B- and A-submodules agree, stated on A/m^k and transported by φ, both directions; finite lengths and the length formula as a finite sum. Edge cases P={0}/r=0, n=1, field, ⟨2,3⟩ checked. Node differs from live only in lean; lean.statement is verbatim the file signature; real abbrevs with docstrings; proof sorry only; report has both sections; no name clash, not landed elsewhere. No compile needed (no fix)."
+ }
+}

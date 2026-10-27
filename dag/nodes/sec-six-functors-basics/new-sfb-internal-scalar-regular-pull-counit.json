@@ -1,0 +1,119 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "id": "new-sfb-internal-scalar-regular-pull-counit",
+ "title": "The restricted regular coefficient comparison and the exact pullback counit",
+ "statement": "For a morphism a:Λ→Λ′ of commutative condensed rings and a scheme morphism f:X→Y, let F be ordinary Λ-module pullback. Let e:F(B₀(a,Y))≅B₀(a,X) be the ordinary restricted regular pullback comparison of [new-integral-residue-ordinary-tensor-square], and let eH be the composite of F.mapHomotopyCategoryFactors with its single-complex comparison and single.mapIso e. Then scalarTensorRegularPullIso(a,f).inv followed by L_Λ(f) applied to tensorModelCoefficientIso(B₀(a,Y)).hom and the exact pullback counit at tensorModelCoefficient(B₀(a,Y)) equals tensorModelCoefficientIso(B₀(a,X)).hom followed by Qh.map(eH.inv). The coefficient objects and the derived comparison are those of [def-sfb-internal-derived-scalar-comparisons] and [def-sfb-internal-scalar-tensor-pull-models]. No variable complex or normalized scalar base-change isomorphism enters this equation.",
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-scalar-tensor-pull-models",
+  "new-integral-residue-ordinary-tensor-square"
+ ],
+ "proof": [
+  {
+   "text": "Identify scalarTensorRegularRestriction with the exact restriction/singleFunctor comparison. Expand scalarTensorRegularPullIso, use the exact pullback unit comparison, and commute the exact restriction/pullback comparison on single objects. Naturality cancels the Y restriction/single comparison. This leaves F.singleFunctorCompLeftDerivedFunctorIso followed by single.mapIso of the ordinary restricted unit.",
+   "uses": [
+    "def-sfb-derived-comap-upper-star-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary native pullback unit equals the transported unit by functoriality on the identity of the regular module. Thus this coefficient isomorphism uses exactly e. Apply tensorModelCoefficientIso_counit with F and e.",
+   "uses": [
+    "lem-sfb-canonical-coefficient-tensor-normalization",
+    "new-integral-residue-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-derived-comap-upper-star-iso",
+  "lem-sfb-canonical-coefficient-tensor-normalization",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "Step 1, compatibility restricted to the fixed regular coefficient object."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact additive functor derived category comparison on a complex concentrated in degree zero is compatible with the derived functor counit",
+   "date": "2026-10-26",
+   "results": "8 hits, including mapDerivedCategoryFactorsh_hom_app, mapDerivedCategorySingleFunctor and DerivedCategory.singleFunctorIsoCompQ.",
+   "verdict": "Use these exact-functor and single-complex comparisons through the project tensorModelCoefficientIso_counit API."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctorCompLeftDerivedFunctorIso\"",
+   "date": "2026-10-26",
+   "results": "0 Mathlib hits.",
+   "verdict": "The needed unbounded left-derived single-object comparison is in the adopted project source library."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompLeftDerivedFunctorIso|tensorModelCoefficientIso_counit|leftDerivedUpperStarUnitIso_hom_eq",
+   "date": "2026-10-26",
+   "results": "0 Mathlib hits. Local rg finds the adopted source comparison and unit-coherence modules, and IntegralResidueTensorModel.",
+   "verdict": "Apply tensorModelCoefficientIso_counit after the explicit exact restriction/pullback calculation on the regular coefficient."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarPullRouteModel",
+  "date": "2026-10-26",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Proof paragraphs (1) and (3), identifying the canonical scalar reduction and tensor pullback maps. Step 1, compatibility restricted to the fixed regular coefficient object.",
+   "via": [
+    "lem-sfb-internal-scalar-pull-route-model"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalScalarRegularPullCounit",
+  "file": "lean/Sheaf/Paper/InternalScalarRegularPullCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalar_regular_pull_counit",
+  "statement": "theorem scalar_regular_pull_counit (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    let F := CondensedRing.upperStar Λ f\n    let e := CondensedRing.residueOrdinaryRestrictedRegularPullIso Λ Λ' a f\n    let eH := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj (B₀ a Y)) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app (B₀ a Y) ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    (scalarTensorRegularPullIso a f).inv ≫\n      (L Λ f).map (Functor.tensorModelCoefficientIso (B₀ a Y)).hom ≫\n      (pullCounit (Λ := Λ) f).app (Functor.tensorModelCoefficient (B₀ a Y)) =\n      (Functor.tensorModelCoefficientIso (B₀ a X)).hom ≫\n        DerivedCategory.Qh.map eH.inv",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065524-L-3050427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065524-L-3050427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

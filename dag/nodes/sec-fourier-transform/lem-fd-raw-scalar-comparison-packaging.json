@@ -1,0 +1,138 @@
+{
+ "id": "lem-fd-raw-scalar-comparison-packaging",
+ "kind": "statement",
+ "title": "Transport of a raw inverse scalar comparison to stage systems",
+ "statement": "Fix a prime l, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ and a noetherian finite-dimensional scheme T with l invertible. Fix stage equivalences FdRationalStageComparison l $\\Omega$ T E for every finite coefficient field E [def-fd-coefficient-comparison-datum]. Use the integral functors I_E, ordinary extension C, completed extension U, specified rational extensions scalar and P, associators and units, RationalFamily and RawComparison of [lem-fd-raw-localization-scalar-coherence], with the shift structures of [def-per-common-stage-shift-structures, def-fd-integral-scalar-shift-structures] and the specified source stage system of [def-weil-algebraically-closed-coefficients]. Suppose b:I_E C_{L/E}\\cong U_{L/E}I_L is any integral comparison. Suppose a RationalFamily fixes the supplied rational functors and all their shifts, and j:scalar_{L/E} J_L\\cong J_E P_{L/E} is a RawComparison commuting with both specified shifts, with both endpoint composites exact. Suppose j has the integral lift Q_L(b^{-1}) followed by the inverse scalar-integral comparison on every integral localization object, its identity-extension value is J_E of the framework unit, and it obeys the three-field inverse cocycle with the specified scalar associators. Then there exist a morphism F of the framework stage system to the PBC stage system and specified shifts on all F.\\Phi _E such that F.\\Phi _E and all its shifts are heterogeneously equal to the supplied rational equivalences and their shifts, F.\\Phi _E is exact, both F.\\beta  and its inverse commute with shifts, the inverse identity component of F.\\beta  has the same normalized unit value, and the forward integral-lift component of F.\\beta  is the scalar-integral comparison followed by Q_L(b). This assertion concerns packaging of given comparisons only; it assumes their existence and their three-field cocycle and does not assert a four-field formula.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-scalar-extension-composition",
+  "prop-weil-pbc-scalar-extension",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-algebraically-closed-coefficients",
+  "def-per-common-stage-shift-structures",
+  "def-fd-integral-scalar-shift-structures",
+  "lem-fd-raw-localization-scalar-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The specification of [def-weil-algebraically-closed-coefficients] identifies the source stage-system transitions and associators with the scalar functors and assoc of [lem-fd-raw-localization-scalar-coherence]. Transport j inverse along these equalities. Its supplied three-field inverse cocycle implies the forward coherence equation after cancelling the two component isomorphisms, defining F with beta equal to the transported inverse comparison. RationalFamily fixes its finite functors and their shifts to the supplied stage equivalences, so exactness and both shift squares transfer. The given identity-extension equation transfers to F beta inverse.",
+   "uses": [
+    "lem-fd-raw-localization-scalar-coherence",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  },
+  {
+   "text": "Invert the given integral-lift component equation. Functoriality sends b inverse to the inverse of Q(b), and inversion reverses the two factors. Thus the forward beta component is the scalar-integral comparison followed by Q(b). The raw object normalizations and their canonical equality casts identify its endpoints. No new comparison existence or four-field assertion is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fd-raw-localization-scalar-coherence",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion scalar comparison descends through coefficient presentation equivalence and is shift compatible coherent with tensor associators",
+   "results": "8 hits, AdicCompletion and UniformSpace.Completion scalar-action lemmas; none states the derived category presentation comparison or raw stage-system conversion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eqToHom\", \"HEq\"",
+   "results": "10 hits, including CategoryTheory.comp_eqToHom_heq, eqToHom_comp_heq and conj_eqToHom_iff_heq; useful equality-transport primitives only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|NatIso.*symm|inv.*naturality",
+   "results": "25 hits, generic naturality and inverse shift comparison lemmas; no specified integral or raw scalar comparison packaging.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse natural isomorphism between coherent scalar extension systems can be packaged as a morphism of stage systems preserving prescribed shifts",
+   "results": "8 hits including CategoryTheory.NatTrans.CommShift.of_iso_inv, CategoryTheory.NatTrans.CommShift.of_iso_symm and generic SingleFunctors inverse identities. These handle inverse shift squares, not the integral presentation or stage-system conversion.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; inverse-shift primitives are available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdCompletionInverseScalarCoherence",
+  "date": "2026-10-25",
+  "group": "H1"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Coefficient-category auxiliary retained in the parent inverse-scalar comparison: integral steps 1–6 and raw presentation transport step 7.",
+   "via": [
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdRawScalarComparisonPackaging",
+  "file": "lean/Sheaf/Paper/FdRawScalarComparisonPackaging.lean",
+  "declaration": "WeilConjectures.fdRawScalarComparisonPackaging",
+  "statement": "theorem fdRawScalarComparisonPackaging\n    (l : ℕ) [Fact l.Prime]\n    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (T : Scheme.{u}) [IsNoetherian T]\n    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)\n    (b : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n      I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L)\n    (family : RationalFamily l Ω T stage)\n    (j : RawComparison l Ω T stage family)\n    (hshift : (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n        NatTrans.CommShift (j h).hom ℤ ∧ NatTrans.CommShift (j h).inv ℤ ∧\n        (scalar l Ω T h ⋙ J l Ω T stage family L).IsTriangulated ∧\n        (J l Ω T stage family E ⋙ (P l Ω T).T h).IsTriangulated))\n    (hlift : (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)\n        (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T)\n        (K' : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),\n        HEq K' ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T).obj K) →\n        HEq ((j h).hom.app K')\n          ((pbcStageLocalization l Ω T L).map ((b h).inv.app K) ≫\n            (pbcScalarIntegralComparison l Ω T dT.out iT.out h).inv.app\n              ((I l Ω T stage E).obj K))))\n    (hunit : (∀ (E : Padic.FiniteCoefficientFields l Ω)\n        (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),\n        HEq ((j (le_refl E)).hom.app K)\n          ((J l Ω T stage family E).map\n            ((unit l Ω T E).hom.app K))))\n    (hcocycle : (∀ {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M)\n        (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),\n        (j k).hom.app ((scalar l Ω T h).obj K) ≫\n          ((P l Ω T).T k).map ((j h).hom.app K) ≫\n          ((P l Ω T).assoc h k).hom.app ((J l Ω T stage family E).obj K) =\n        (J l Ω T stage family M).map ((assoc l Ω T h k).hom.app K) ≫\n          (j (h.trans k)).hom.app K))\n    : ∃ (F : StageSystem.Morphism\n      (C := GeneralAlgebraicallyClosedCoefficients.Stage l Ω T)\n      (D := pbcStageCategory l Ω T)\n      (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω T)\n      (pbcScalarSystem l Ω T dT.out iT.out))\n      (s : ∀ E, (F.Φ E).CommShift ℤ),\n      let _ : ∀ E, (F.Φ E).CommShift ℤ := s\n      (∀ E, HEq (F.Φ E) (stage E).rational.functor) ∧\n      (∀ E (n : ℤ),\n    HEq ((F.Φ E).commShiftIso n) ((stage E).rational.functor.commShiftIso n)) ∧\n      (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),\n    NatTrans.CommShift (F.β h).hom ℤ ∧ NatTrans.CommShift (F.β h).inv ℤ) ∧\n      (∀ E, (F.Φ E).IsTriangulated) ∧\n      (∀ (E : Padic.FiniteCoefficientFields l Ω)\n    (K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),\n    HEq ((F.β (le_refl E)).inv.app K)\n      ((F.Φ E).map\n        ((GeneralAlgebraicallyClosedCoefficients.unitor l Ω T E).hom.app K))) ∧\n      (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)\n    (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T)\n    (K' : GeneralAlgebraicallyClosedCoefficients.Stage l Ω T E),\n    HEq K' ((sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T).obj K) →\n    HEq ((F.β h).hom.app K')\n      ((pbcScalarIntegralComparison l Ω T dT.out iT.out h).hom.app\n          ((stage E).integral.functor.obj K) ≫\n        (pbcStageLocalization l Ω T L).map ((b h).hom.app K)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202130-L-2677643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261025T202130-L-2677643",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

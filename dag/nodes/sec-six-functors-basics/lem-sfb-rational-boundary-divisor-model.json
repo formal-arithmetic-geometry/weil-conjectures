@@ -1,0 +1,396 @@
+{
+ "id": "lem-sfb-rational-boundary-divisor-model",
+ "kind": "statement",
+ "title": "A birational model with an invariant boundary divisor",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All schemes are separated and of finite type over $k$ [def-weil-finite-type-morphism, def-weil-proper-morphism], where separated means that the diagonal is a closed immersion. Integral means reduced and irreducible [def-pc-integral-scheme]; normal means that all local rings are integrally closed domains. Dimensions are topological Krull dimensions [def-kun-topological-krull-dimension]. Let $G$ be a smooth integral $k$-group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms], with identity $e$. Products are scheme fibre products [def-pc-fibre-product]. Let $X_0$ be normal integral and proper, and let $Y\\subseteq X_0$ be a smooth dense open subscheme [def-weil-open-immersion] with a regular $G$-action. Assume $E_0=X_0\\setminus Y$ is nonempty and every irreducible component has codimension one. A rational map means an equivalence class of morphisms on dense open subschemes, taken on its largest open domain of definition. Let $\\alpha_0:G\\times_kX_0\\dashrightarrow X_0$ be the rational extension of this action. There exist a normal integral proper $k$-scheme $X$, a proper birational morphism $b:X\\to X_0$ that is an isomorphism over $Y$, and an integral closed subscheme $D\\subseteq X\\setminus Y$ of dimension $\\dim X_0-1$. Here birational means inducing an isomorphism on dense open subschemes. Identify $Y$ with $b^{-1}(Y)$ and let $\\alpha:G\\times_kX\\dashrightarrow X$ be the rational extension of its action, with domain $U$. The intersection $U_D=U\\cap(G\\times_kD)$ is dense open in $G\\times_kD$, and $\\alpha|_{U_D}$ factors through $D$. The rational map $\\tau:G\\times_kD\\dashrightarrow G\\times_kD$, $(g,x)\\mapsto(g^{-1},\\alpha(g,x))$, is a birational involution. More precisely, there is a nonempty open $W\\subseteq U_D$ on which $\\tau$ is an isomorphism $W\\to W$ and satisfies $\\tau^2=\\mathrm{id}_W$. Also $\\dim X=\\dim X_0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, p.154, rational-action paragraph; Milne (2013), Lemma 4.4 and Proposition 4.1 proof, paragraphs beginning with an irreducible component of E and ending with the birational involution on G times D, pp.8--9. Local article WANTED; read https://arxiv.org/html/1311.6060v2. No single Stacks tag states this extraction and invariant-divisor lemma."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-open-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=\\dim X_0$. We will use the following dimension calculation on integral finite-type $k$-schemes $Q$. Every nonempty open has dimension $\\dim Q$ by [lem-sc-integral-locally-algebraic-opens-dimension]; hence $\\dim_qQ=\\dim Q$ by [def-kun-topological-dimension-at-point]. For an integral closed subset $C$ with generic point $c$, [lem-kun-dimension-formula] and [lem-sc-closed-irreducible-dimension-trdeg] give $\\dim\\mathcal O_{Q,c}=\\dim Q-\\dim C$. In particular a prime divisor has dimension $\\dim Q-1$. All schemes of finite type over $k$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The interpretation of codimension as this local-ring dimension is [lem-sc-scheme-stalk-dimension-generalization-chains].",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-kun-dimension-formula",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+   }
+  },
+  {
+   "text": "The dimension convention in [lem-sfb-scheme-product-dimension] agrees with topological dimension by [lem-pc-scheme-dimension-local-rings]. For any normal integral $k$-variety $Q$, [lem-sfb-algclosed-integral-product] makes $G\\times_kQ$ integral. Its projection to $Q$ is smooth: $Q\\to\\operatorname{Spec}k$ is flat by [lem-pc-flat-field], so [lem-sfb-scheme-lfp-smooth-flat-base-change] applies to the smooth, locally finitely presented structure map of $G$. Thus [lem-sfb-smooth-normal-ascent] makes the product normal. At each codimension-one point its local ring is a DVR by [lem-sc-normal-dim1-dvr], hence a valuation ring by [def-sc-discrete-valuation-ring]. For a proper target, [lem-sfb-rational-map-extension-valuation-point] therefore puts every such point in the maximal rational-map domain. Apply this to $Q=X_0$ and $\\alpha_0$. Choose a reduced boundary component $E_1$. Step 1 and [lem-sfb-scheme-product-dimension] show that $G\\times_kE_1$ has codimension one in $G\\times_kX_0$. Consequently $T=\\operatorname{Dom}(\\alpha_0)\\cap(G\\times_kE_1)$ is a nonempty dense open of this integral divisor, and a prime divisor in the normal integral source $V=\\operatorname{Dom}(\\alpha_0)$.",
+   "uses": [
+    "lem-sfb-algclosed-integral-product",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-flat-field",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-sfb-smooth-normal-ascent",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-rational-map-extension-valuation-point",
+    "lem-sfb-scheme-product-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+   }
+  },
+  {
+   "text": "The map $\\alpha_0:V\\to X_0$ is dominant since its restriction to $G\\times_kY$ is the action and contains $Y$ in its image. Its defined boundary points map into $E_0$: if $g\\cdot z\\in Y(k)$ for $z\\notin Y(k)$, then $g^{-1}\\cdot(g\\cdot z)$ is defined in $Y$, while [lem-sfb-rational-action-domain-laws] makes it equal to $z$, a contradiction. Closed points are dense and $k$-rational by [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base], so the inverse image of the closed set $E_0$ contains all of $T$. Apply [lem-sfb-prime-divisor-image-extraction] to $(V,X_0,\\alpha_0,T,E_0)$. Obtain $b:X\\to X_0$, an isomorphism over $Y$, normal integral proper $X$, and the integral divisor $D\\subset b^{-1}(E_0)$ of dimension $n-1$ which is the closure of the lifted image of $T$. Since $b$ is an isomorphism over the nonempty open $Y$, [lem-sc-integral-locally-algebraic-opens-dimension] gives $\\dim X=\\dim Y=\\dim X_0=n$ already at this stage.",
+   "uses": [
+    "lem-sfb-rational-action-domain-laws",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-prime-divisor-image-extraction",
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+   }
+  },
+  {
+   "text": "Let $E_1^{\\prime}$ be the strict transform of $E_1$ in $X$, namely the reduced closure of its inverse image on an isomorphism open of $b$ containing its generic point. Such an open exists by [lem-sfb-normal-modification-codimension-one], since the generic local ring of $E_1$ in normal $X_0$ is a DVR by [lem-sc-normal-dim1-dvr]. The isomorphism on these dense opens identifies $G\\times E_1^{\\prime}$ birationally with $G\\times E_1$. Let $\\alpha:G\\times X\\dashrightarrow X$ extend the action on $Y$, as in [lem-sfb-rational-action-domain-laws]. Its rational identity $\\alpha=b^{-1}\\alpha_0(1\\times b)$ follows by checking on $G\\times Y$. Thus on a dense open $R\\subset G\\times E_1^{\\prime}$ its restriction is a dominant morphism $r:R\\to D$, by the image-closure assertion of the extraction lemma. The open $U_D=\\operatorname{Dom}(\\alpha)\\cap(G\\times D)$ is dense in integral $G\\times D$: step 2 applies to normal $X$, since $D$ has codimension one by step 1.",
+   "uses": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sc-normal-dim1-dvr",
+    "lem-sfb-rational-action-domain-laws",
+    "lem-sfb-prime-divisor-image-extraction",
+    "lem-sfb-algclosed-integral-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+   }
+  },
+  {
+   "text": "The rational map $\\lambda:G\\times G\\times E_1^{\\prime}\\dashrightarrow G\\times D$, $(g,h,z)\\mapsto(g,r(h,z))$, is dominant. Indeed $r$ has scheme-theoretic image $D$ by [lem-trf-reduced-scheme-image], and its base change along the flat projection $G\\times D\\to D$ has the same property by [lemma-nagata-dense-flat-pullback]; flatness follows from the smooth projection of step 2 and [lem-pc-smooth-flat]. On a dense open of the triple product, both $g\\cdot(h\\cdot z)$ and $(gh)\\cdot z$ are defined: use dominance of $\\lambda$ for the first and the automorphism $(g,h,z)\\mapsto(g,gh,z)$ for the second. The domain laws give $g\\cdot(h\\cdot z)=(gh)\\cdot z\\in D$ on its $k$-points. These are dense by the two closed-point lemmas. Since the image of this dense open under $\\lambda$ is dense in $G\\times D$, the closed inverse image of $D$ under $\\alpha|_{U_D}$ is all of $U_D$. The source is reduced by [lem-sfb-algclosed-integral-product], so [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] gives the required scheme-theoretic factorization through $D$.",
+   "uses": [
+    "lem-trf-reduced-scheme-image",
+    "lemma-nagata-dense-flat-pullback",
+    "lem-pc-smooth-flat",
+    "lem-sfb-rational-action-domain-laws",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-algclosed-integral-product",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+   }
+  },
+  {
+   "text": "Now $\\tau(g,x)=(g^{-1},g\\cdot x)$ is a rational self-map of integral $G\\times D$. It is dominant, a point not supplied by its formula alone: on the dense triple-product open of step 5, $\\tau\\lambda(g,h,z)=(g^{-1},r(gh,z))$. The latter is dominant, since it is $\\lambda$ precomposed with the automorphism $(g,h,z)\\mapsto(g^{-1},gh,z)$, whose inverse is $(a,b,z)\\mapsto(a^{-1},ab,z)$. Thus $\\tau$ is dominant. Its square is defined on a dense open. At its $k$-points, the composition and unit identities of [lem-sfb-rational-action-domain-laws] give $g^{-1}\\cdot(g\\cdot x)=e\\cdot x=x$. The closed points are dense and $k$-rational by [lem-sc-lft-over-field-jacobson-space] and [lem-weil-pbc-closed-point-residue-field-base]. Apply [lem-sfb-relative-separated-dominant-ext] to their disjoint union mapping densely into the reduced open source; this makes $\\tau^2=1$ an equality of rational maps. The two coordinates agree, since inversion squared is the identity on $G$.",
+   "uses": [
+    "lem-sfb-algclosed-integral-product",
+    "lem-sfb-rational-action-domain-laws",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-inverse-partial-map-restrictions] to $\\tau$ and itself. It gives an isomorphism $f:A\\to B$ on dense opens with $A\\subset U_D$ and $f$ the restriction of $\\tau$; its statement does not require $B\\subset U_D$. Set $B_0=B\\cap U_D$ and $A_0=f^{-1}(B_0)$. These are dense nonempty opens and $f:A_0\\to B_0$ is an isomorphism. Its inverse agrees with $\\tau|_{B_0}$ on a dense open, because $\\tau^2=1$ as a rational map. By [lem-sfb-relative-separated-dominant-ext] the agreement holds everywhere on reduced $B_0$. Now set $W=A_0\\cap B_0\\subset U_D$. For $x\\in W$, its image under $\\tau$ lies in $B_0$ using $x\\in A_0$, and in $A_0$ using $x\\in B_0$ and the inverse description. Thus $\\tau:W\\to W$ is an isomorphism with square the identity. The open $W$ is nonempty by irreducibility of $G\\times D$. Finally $b$ identifies nonempty opens of integral $X,X_0$, so [lem-sc-integral-locally-algebraic-opens-dimension] gives $\\dim X=\\dim X_0=n$.",
+   "uses": [
+    "lem-sbc-inverse-partial-map-restrictions",
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-kun-dimension-formula",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-algclosed-integral-product",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-flat-field",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-rational-map-extension-valuation-point",
+  "lem-sfb-scheme-product-dimension",
+  "lem-sfb-rational-action-domain-laws",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-prime-divisor-image-extraction",
+  "lem-sfb-normal-modification-codimension-one",
+  "lem-trf-reduced-scheme-image",
+  "lemma-nagata-dense-flat-pullback",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-sbc-inverse-partial-map-restrictions",
+  "lem-sc-scheme-stalk-dimension-generalization-chains"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, p.154, rational-action paragraph, referring to Milne (2013), arXiv:1311.6060v2, Proposition 4.1 proof and Lemmas 4.3--4.4, pp.8--9 (read online; local article WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational algebraic group action on a normal proper variety with invariant boundary admits a birational model with an invariant prime boundary divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier_smul\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ (G : Type u_1) {H : Type u_2} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] (s : Set α) [inst_2 : Group H]\\n  [inst_3 : MulAction H α] [SMulCommClass H G α] (g : H),\\n  MeasureTheory.fundamentalFrontier G (g • s) = g • MeasureTheory.fundamentalFrontier G s\", \"doc\": \"For a group $H$ acting on a type $\\\\alpha$ with commuting actions of $H$ and $G$, the fundamental frontier of the translated set $g \\\\cdot s$ equals the translation of the fundamental frontier of $s$ by\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"MeasureTheory.mem_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalFrontier G s ↔ x ∈ s ∧ ∃ g, g ≠ 1 ∧ x ∈ g • s\", \"doc\": \"For a group $ G $ acting on a set $ s $, an element $ x $ belongs to the fundamental frontier $ \\\\text{fundamentalFrontier}(G, s) $ if and only if $ x \\\\in s $ and there exists a non-identity element $ \"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : Group G] → [MulAction G α] → Set α → Set α\", \"doc\": \"The set $ s \\\\cap \\\\bigcup_{\\\\substack{g \\\\in G \\\\\\\\ g \\\\ne 1}} g \\\\cdot s $, representing the intersection of a set $ s $ with the union of its translates under non-identity elements of the group $ G $.\"}\n  {\"name\": \"MeasureTheory.sdiff_fundamentalInterior\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ (G : Type u_1) {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] (s : Set α),\\n  s \\\\ MeasureTheory.fundamentalInterior G s = MeasureTheory.fundamentalFrontier G s\", \"doc\": \"For a group $G$ acting on a set $s$, the set difference $s \\\\setminus \\\\text{fundamentalInterior}(G, s)$ is equal to the fundamental frontier $\\\\text{fundamentalFrontier}(G, s)$. This identity characteri\"}\n  {\"name\": \"cusps_subMulAction\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) → SubMulAction (↥𝒢) (OnePoint ℝ)\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by p\"}\n  {\"name\": \"MeasureTheory.sdiff_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ (G : Type u_1) {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] (s : Set α),\\n  s \\\\ MeasureTheory.fundamentalFrontier G s = MeasureTheory.fundamentalInterior G s\", \"doc\": \"For a set $ s $ and a group $ G $, the set difference $ s \\\\setminus \\\\text{fundamentalFrontier}(G, s) $ equals the fundamental interior $ \\\\text{fundamentalInterior}(G, s) $, where the fundamental front\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern modular cusps, manifold boundaries, elliptic variable changes and function fields; none gives a birational model extracting an invariant prime divisor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"birational\", \"divisor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern modular cusps, manifold boundaries, elliptic variable changes and function fields; none gives a birational model extracting an invariant prime divisor."
+  },
+  {
+   "tool": "grep",
+   "query": "divisorial.*valuation|valuation.*divisor|rational.*action",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern modular cusps, manifold boundaries, elliptic variable changes and function fields; none gives a birational model extracting an invariant prime divisor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extract the image of a boundary divisor on a proper birational model for a rational group action",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModelWithCorners.boundary\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.InteriorBoundary\", \"type\": \": Set M\", \"doc\": \"The set of points $ x $ in a manifold with corners $ M $ such that the image of $ x $ under the extended chart at $ x $ lies in the frontier (boundary) of the model space's image in the normed vector \"}\n  {\"name\": \"groupHomology.boundaries₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \": Submodule k (G × G →₀ A)\", \"doc\": \"The submodule of 2-boundaries in group homology, consisting of all 2-chains that are images of the boundary map $ d_{3,2} $ applied to 3-chains.\"}\n  {\"name\": \"groupHomology.boundaries₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \": Submodule k (G →₀ A)\", \"doc\": \"The submodule of $ k $-linear maps $ G \\to A $ with finite support consisting of all elements in the image of the boundary map $ d_{2,1} $, which sends each finite support function $ G \\times G \\to A $ t\"}\n  {\"name\": \"MeasureTheory.addFundamentalFrontier\", \"module\": \"Mathlib.MeasureTheory.Group.FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : AddGroup G] → [AddAction G α] → Set α → Set α\", \"doc\": \"Given an additive group $G$ acting on a type $\\\\alpha$ and a subset $S \\\\subseteq \\\\alpha$, returns the frontier (boundary) of $S$ associated with the group action, defined as the set of points in $S$ th\"}\n  {\"name\": \"groupHomology.boundariesOfIsBoundary₁_coe\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \"∀ {k G A : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup A] [inst_3 : Module k A]\\n  [inst_4 : DistribMulAction G A] [inst_5 : SMulCommClass G k A] (x : G →₀ A) (hx : groupHomology.IsBoundary₁ x),\\n  ↑(groupHomology.boundariesOfIsBoundary₁ x hx) = x\", \"doc\": \"For a commutative ring $k$, group $G$, and $k$-module $A$ equipped with a compatible $G$-action, if $x$ is a 1-boundary in the group homology of $G$ with coefficients in $A$, then the canonical embedd\"}\n  {\"name\": \"ModelWithCorners.boundary_open\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.InteriorBoundary\", \"type\": \"{u : Opens M} : I.boundary u = (↑) ⁻¹' I.boundary M\", \"doc\": \"For an open subset $ u $ of a manifold with corners $ M $, the boundary of $ u $ is equal to the preimage of the boundary of $ M $ under the canonical inclusion map from $ u $ to $ M $. Formally, $ I.\"}\n  {\"name\": \"AddAction.IsBlock.image\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {X : Type u_2} [inst_1 : AddAction G X] {B : Set X} {H : Type u_3} {Y : Type u_4}\\n  [inst_2 : VAdd H Y] {φ : G → H} (j : X →ₑ[φ] Y),\\n  Function.Surjective φ → Function.Injective ⇑j → AddAction.IsBlock G B → AddAction.IsBlock H (⇑j '' B)\", \"doc\": \"Let $ G $ and $ H $ be additive groups acting on sets $ X $ and $ Y $, respectively. Suppose $ \\\\varphi : G \\\\to H $ is a surjective group homomorphism, $ j : X \\\\to Y $ is an injective $ \\\\varphi $-equiv\"}\n  {\"name\": \"ModelWithCorners.isBoundaryPoint_iff\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.InteriorBoundary\", \"type\": \"{x : M} : I.IsBoundaryPoint x ↔ extChartAt I x x ∈ frontier (range I)\", \"doc\": \"For a point $x$ in a manifold with corners, $x$ is a boundary point if and only if the image of $x$ under the extended chart at $x$ lies in the frontier of the model space's image in the normed vector\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern modular cusps, manifold boundaries, elliptic variable changes and function fields; none gives a birational model extracting an invariant prime divisor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht boundary divisor construction and birational involution g x maps to inverse g and g x",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"OnePoint.smul_infty_def\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K},\\n  g • OnePoint.infty = (OnePoint.equivProjectivization K).symm (Projectivization.mk K (↑g 0 0, ↑g 1 0) ⋯)\", \"doc\": \"For any invertible $ 2 \\\\times 2 $ matrix $ g $ over a division ring $ K $, the action of $ g $ on the point at infinity $ \\\\infty $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ corresponds\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instInv\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Inv (WeierstrassCurve.VariableChange R)\", \"doc\": \"For a Weierstrass curve over a commutative ring $ R $, every variable change has an inverse defined by inverting the scaling parameter $ u $ and negating the shift parameters $ r, s, t $ with appropri\"}\n  {\"name\": \"OnePoint.smul_infty_eq_ite\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (g : GL (Fin 2) K),\\n  g • OnePoint.infty = if ↑g 1 0 = 0 then OnePoint.infty else ↑(↑g 0 0 / ↑g 1 0)\", \"doc\": \"For any invertible $ 2 \\\\times 2 $ matrix $ g $ over a field $ K $, the action of $ g $ on the point at infinity in the one-point compactification of $ K $ is given by $ g_{00}/g_{10} $ if $ g_{10} \\\\ne\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"circleEquivGen_symm_apply\", \"module\": \"Mathlib/NumberTheory/PythagoreanTriples\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (hk : ∀ (x : K), 1 + x ^ 2 ≠ 0) (v : { p // p.1 ^ 2 + p.2 ^ 2 = 1 ∧ p.2 ≠ -1 }),\\n  (circleEquivGen hk).symm v = (↑v).1 / ((↑v).2 + 1)\", \"doc\": \"For a field $ K $ where $ 1 + x^2 \\\\neq 0 $ for all $ x \\\\in K $, the inverse of the circle equivalence maps a point $ (x, y) $ on the unit circle $ x^2 + y^2 = 1 $ with $ y \\\\neq -1 $ to $ \\\\frac{x}{y + \"}\n  {\"name\": \"WeierstrassCurve.VariableChange.inv_def\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (C : WeierstrassCurve.VariableChange R),\\n  C⁻¹ = { u := C.u⁻¹, r := -C.r * ↑C.u⁻¹ ^ 2, s := -C.s * ↑C.u⁻¹, t := (C.r * C.s - C.t) * ↑C.u⁻¹ ^ 3 }\", \"doc\": \"The inverse of a Weierstrass curve variable change $ C $ is given by $ C^{-1} = \\\\{ u = u^{-1}, r = -C.r \\\\cdot u^{-2}, s = -C.s \\\\cdot u^{-1}, t = (C.r \\\\cdot C.s - C.t) \\\\cdot u^{-3} \\\\} $, where $ u^{-1}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern modular cusps, manifold boundaries, elliptic variable changes and function fields; none gives a birational model extracting an invariant prime divisor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational algebraic group action on a proper normal variety admits a birational model with an invariant boundary prime divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"cusps_subMulAction\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) → SubMulAction (↥𝒢) (OnePoint ℝ)\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by p\"}\n  {\"name\": \"cosetToCuspOrbit_apply_mk\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [inst : 𝒢.IsArithmetic] (g : Matrix.SpecialLinearGroup (Fin 2) ℤ),\\n  cosetToCuspOrbit 𝒢 ⟦g⟧ = ⟦⟨(Matrix.SpecialLinearGroup.mapGL ℝ) g⁻¹ • OnePoint.infty, ⋯⟩⟧\", \"doc\": \"For an arithmetic subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2, \\\\mathbb{R})$ and any element $g \\\\in \\\\mathrm{SL}(2, \\\\mathbb{Z})$, applying the coset-to-cusp-orbit map to the coset $[g]$ yields the cus\"}\n  {\"name\": \"MeasureTheory.mem_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalFrontier G s ↔ x ∈ s ∧ ∃ g, g ≠ 1 ∧ x ∈ g • s\", \"doc\": \"For a group $ G $ acting on a set $ s $, an element $ x $ belongs to the fundamental frontier $ \\\\text{fundamentalFrontier}(G, s) $ if and only if $ x \\\\in s $ and there exists a non-identity element $ \"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : Group G] → [MulAction G α] → Set α → Set α\", \"doc\": \"The set $ s \\\\cap \\\\bigcup_{\\\\substack{g \\\\in G \\\\\\\\ g \\\\ne 1}} g \\\\cdot s $, representing the intersection of a set $ s $ with the union of its translates under non-identity elements of the group $ G $.\"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier_smul\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ (G : Type u_1) {H : Type u_2} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] (s : Set α) [inst_2 : Group H]\\n  [inst_3 : MulAction H α] [SMulCommClass H G α] (g : H),\\n  MeasureTheory.fundamentalFrontier G (g • s) = g • MeasureTheory.fundamentalFrontier G s\", \"doc\": \"For a group $H$ acting on a type $\\\\alpha$ with commuting actions of $H$ and $G$, the fundamental frontier of the translated set $g \\\\cdot s$ equals the translation of the fundamental frontier of $s$ by\"}\n  {\"name\": \"CuspOrbits\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"Subgroup (GL (Fin 2) ℝ) → Type\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this is the quotient of the set of cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by parabolic elements of $\\\\mathcal{G}$) by the eq\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"birational\", \"divisor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalAction|rational_action|invariant.*divisor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an invariant boundary divisor for a rational action of an algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.le_comap_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(g : G) : (invariants <| ρ.comp S.subtype) ≤ (invariants <| ρ.comp S.subtype).comap (ρ g)\", \"doc\": \"For every group element $ g \\\\in G $, the submodule of vectors invariant under the action of subgroup $ S $ is contained within the preimage under $ \\\\rho(g) $ of itself, i.e., $ V^S \\\\subseteq (\\\\rho(g))\"}\n  {\"name\": \"MulAction.IsInvariantBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(B : Set X)\", \"doc\": \"A subset $ B \\\\subseteq X $ is called invariant under the group action if for every group element $ g \\\\in G $, the image of $ B $ under the action of $ g $ is contained in $ B $. Formally, this means $\"}\n  {\"name\": \"Algebra.IsInvariant.isInvariant\", \"module\": \"Mathlib.RingTheory.Invariant.Defs\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {G : Type u_3} {inst : CommSemiring A} {inst_1 : Semiring B} {inst_2 : Algebra A B}\\n  {inst_3 : Group G} {inst_4 : MulSemiringAction G B} [self : Algebra.IsInvariant A B G] (b : B),\\n  (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b\", \"doc\": \"If an element $ b \\\\in B $ is invariant under the action of every element $ g \\\\in G $, then there exists an element $ a \\\\in A $ such that $ \\\\text{algebraMap}(A, B)(a) = b $. This characterizes the inva\"}\n  {\"name\": \"MeasureTheory.addFundamentalFrontier\", \"module\": \"Mathlib.MeasureTheory.Group.FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : AddGroup G] → [AddAction G α] → Set α → Set α\", \"doc\": \"Given an additive group $G$ acting on a type $\\\\alpha$ and a subset $S \\\\subseteq \\\\alpha$, returns the frontier (boundary) of $S$ associated with the group action, defined as the set of points in $S$ th\"}\n  {\"name\": \"AddAction.IsInvariantBlock.isBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {X : Type u_2} [inst_1 : AddAction G X] {B : Set X},\\n  AddAction.IsInvariantBlock G B → AddAction.IsBlock G B\", \"doc\": \"If $ B \\\\subseteq X $ is an invariant block under the additive action of an additive group $ G $, then $ B $ is a block under the action of $ G $. This means that whenever the action of every element $\"}\n  {\"name\": \"MulAction.IsInvariantBlock.isFixedBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {X : Type u_2} [inst_1 : MulAction G X] {B : Set X},\\n  MulAction.IsInvariantBlock G B → MulAction.IsFixedBlock G B\", \"doc\": \"If a subset $ B \\\\subseteq X $ is invariant under the action of a group $ G $, then it is a fixed block, meaning that $ g \\\\cdot B = B $ for every $ g \\\\in G $.\"}\n  {\"name\": \"MulAction.IsFixedBlock.isInvariantBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(hB : IsFixedBlock G B) : IsInvariantBlock G B\", \"doc\": \"If a subset $ B \\\\subseteq X $ is a fixed block under the group action of $ G $ (i.e., $ g \\\\cdot B = B $ for all $ g \\\\in G $), then it is also an invariant block (i.e., $ g \\\\cdot B \\\\subseteq B $ for al\"}\n  {\"name\": \"MulAction.IsInvariantBlock.isBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(hB : IsInvariantBlock G B) : IsBlock G B\", \"doc\": \"If a subset $ B \\\\subseteq X $ is invariant under the group action of $ G $, then $ B $ is a block under the action of $ G $. This means that for any $ g_1, g_2 \\\\in G $, the images $ g_1 \\\\cdot B $ and \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht rational action boundary divisor birational model involution",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"OnePoint.smul_some_eq_ite\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K} {k : K},\\n  g • ↑k = if ↑g 1 0 * k + ↑g 1 1 = 0 then OnePoint.infty else ↑((↑g 0 0 * k + ↑g 0 1) / (↑g 1 0 * k + ↑g 1 1))\", \"doc\": \"For any invertible 2×2 matrix $ g = \\\\begin{pmatrix} g_{00} & g_{01} \\\\\\\\ g_{10} & g_{11} \\\\end{pmatrix} $ over a field $ K $ and any element $ k \\\\in K $, the action of $ g $ on $ k $ in the one-point com\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), ∃ g, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"MeasureTheory.sdiff_fundamentalInterior\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ (G : Type u_1) {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] (s : Set α),\\n  s \\\\ MeasureTheory.fundamentalInterior G s = MeasureTheory.fundamentalFrontier G s\", \"doc\": \"For a group $G$ acting on a set $s$, the set difference $s \\\\setminus \\\\text{fundamentalInterior}(G, s)$ is equal to the fundamental frontier $\\\\text{fundamentalFrontier}(G, s)$. This identity characteri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational algebraic group action on a proper normal variety admits a birational model with an invariant boundary prime divisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"OnePoint.instGLAction\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"{K : Type u_1} → [inst : Field K] → [DecidableEq K] → MulAction (GL (Fin 2) K) (OnePoint K)\", \"doc\": \"The general linear group $ \\\\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\\\text{OnePoint}\\\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac\"}\n  {\"name\": \"cusps_subMulAction\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) → SubMulAction (↥𝒢) (OnePoint ℝ)\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by p\"}\n  {\"name\": \"cosetToCuspOrbit_apply_mk\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [inst : 𝒢.IsArithmetic] (g : Matrix.SpecialLinearGroup (Fin 2) ℤ),\\n  cosetToCuspOrbit 𝒢 ⟦g⟧ = ⟦⟨(Matrix.SpecialLinearGroup.mapGL ℝ) g⁻¹ • OnePoint.infty, ⋯⟩⟧\", \"doc\": \"For an arithmetic subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2, \\\\mathbb{R})$ and any element $g \\\\in \\\\mathrm{SL}(2, \\\\mathbb{Z})$, applying the coset-to-cusp-orbit map to the coset $[g]$ yields the cus\"}\n  {\"name\": \"MeasureTheory.mem_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalFrontier G s ↔ x ∈ s ∧ ∃ g, g ≠ 1 ∧ x ∈ g • s\", \"doc\": \"For a group $ G $ acting on a set $ s $, an element $ x $ belongs to the fundamental frontier $ \\\\text{fundamentalFrontier}(G, s) $ if and only if $ x \\\\in s $ and there exists a non-identity element $ \"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : Group G] → [MulAction G α] → Set α → Set α\", \"doc\": \"The set $ s \\\\cap \\\\bigcup_{\\\\substack{g \\\\in G \\\\\\\\ g \\\\ne 1}} g \\\\cdot s $, representing the intersection of a set $ s $ with the union of its translates under non-identity elements of the group $ G $.\"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier_smul\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ (G : Type u_1) {H : Type u_2} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] (s : Set α) [inst_2 : Group H]\\n  [inst_3 : MulAction H α] [SMulCommClass H G α] (g : H),\\n  MeasureTheory.fundamentalFrontier G (g • s) = g • MeasureTheory.fundamentalFrontier G s\", \"doc\": \"For a group $H$ acting on a type $\\\\alpha$ with commuting actions of $H$ and $G$, the fundamental frontier of the translated set $g \\\\cdot s$ equals the translation of the fundamental frontier of $s$ by\"}\n  {\"name\": \"CuspOrbits\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"Subgroup (GL (Fin 2) ℝ) → Type\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this is the quotient of the set of cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by parabolic elements of $\\\\mathcal{G}$) by the eq\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"birational\", \"divisor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalAction|rational_action|invariant.*divisor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an invariant boundary divisor for a rational action of an algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.le_comap_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(g : G) : (invariants <| ρ.comp S.subtype) ≤ (invariants <| ρ.comp S.subtype).comap (ρ g)\", \"doc\": \"For every group element $ g \\\\in G $, the submodule of vectors invariant under the action of subgroup $ S $ is contained within the preimage under $ \\\\rho(g) $ of itself, i.e., $ V^S \\\\subseteq (\\\\rho(g))\"}\n  {\"name\": \"MulAction.IsInvariantBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(B : Set X)\", \"doc\": \"A subset $ B \\\\subseteq X $ is called invariant under the group action if for every group element $ g \\\\in G $, the image of $ B $ under the action of $ g $ is contained in $ B $. Formally, this means $\"}\n  {\"name\": \"Algebra.IsInvariant.isInvariant\", \"module\": \"Mathlib.RingTheory.Invariant.Defs\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {G : Type u_3} {inst : CommSemiring A} {inst_1 : Semiring B} {inst_2 : Algebra A B}\\n  {inst_3 : Group G} {inst_4 : MulSemiringAction G B} [self : Algebra.IsInvariant A B G] (b : B),\\n  (∀ (g : G), g • b = b) → ∃ a, (algebraMap A B) a = b\", \"doc\": \"If an element $ b \\\\in B $ is invariant under the action of every element $ g \\\\in G $, then there exists an element $ a \\\\in A $ such that $ \\\\text{algebraMap}(A, B)(a) = b $. This characterizes the inva\"}\n  {\"name\": \"MeasureTheory.addFundamentalFrontier\", \"module\": \"Mathlib.MeasureTheory.Group.FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : AddGroup G] → [AddAction G α] → Set α → Set α\", \"doc\": \"Given an additive group $G$ acting on a type $\\\\alpha$ and a subset $S \\\\subseteq \\\\alpha$, returns the frontier (boundary) of $S$ associated with the group action, defined as the set of points in $S$ th\"}\n  {\"name\": \"AddAction.IsInvariantBlock.isBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {X : Type u_2} [inst_1 : AddAction G X] {B : Set X},\\n  AddAction.IsInvariantBlock G B → AddAction.IsBlock G B\", \"doc\": \"If $ B \\\\subseteq X $ is an invariant block under the additive action of an additive group $ G $, then $ B $ is a block under the action of $ G $. This means that whenever the action of every element $\"}\n  {\"name\": \"MulAction.IsInvariantBlock.isFixedBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {X : Type u_2} [inst_1 : MulAction G X] {B : Set X},\\n  MulAction.IsInvariantBlock G B → MulAction.IsFixedBlock G B\", \"doc\": \"If a subset $ B \\\\subseteq X $ is invariant under the action of a group $ G $, then it is a fixed block, meaning that $ g \\\\cdot B = B $ for every $ g \\\\in G $.\"}\n  {\"name\": \"MulAction.IsFixedBlock.isInvariantBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(hB : IsFixedBlock G B) : IsInvariantBlock G B\", \"doc\": \"If a subset $ B \\\\subseteq X $ is a fixed block under the group action of $ G $ (i.e., $ g \\\\cdot B = B $ for all $ g \\\\in G $), then it is also an invariant block (i.e., $ g \\\\cdot B \\\\subseteq B $ for al\"}\n  {\"name\": \"MulAction.IsInvariantBlock.isBlock\", \"module\": \"Mathlib.GroupTheory.GroupAction.Blocks\", \"type\": \"(hB : IsInvariantBlock G B) : IsBlock G B\", \"doc\": \"If a subset $ B \\\\subseteq X $ is invariant under the group action of $ G $, then $ B $ is a block under the action of $ G $. This means that for any $ g_1, g_2 \\\\in G $, the images $ g_1 \\\\cdot B $ and \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht rational action boundary divisor birational model involution",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n  {\"name\": \"OnePoint.smul_some_eq_ite\", \"module\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] {g : GL (Fin 2) K} {k : K},\\n  g • ↑k = if ↑g 1 0 * k + ↑g 1 1 = 0 then OnePoint.infty else ↑((↑g 0 0 * k + ↑g 0 1) / (↑g 1 0 * k + ↑g 1 1))\", \"doc\": \"For any invertible 2×2 matrix $ g = \\\\begin{pmatrix} g_{00} & g_{01} \\\\\\\\ g_{10} & g_{11} \\\\end{pmatrix} $ over a field $ K $ and any element $ k \\\\in K $, the action of $ g $ on $ k $ in the one-point com\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), ∃ g, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"MeasureTheory.sdiff_fundamentalInterior\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ (G : Type u_1) {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] (s : Set α),\\n  s \\\\ MeasureTheory.fundamentalInterior G s = MeasureTheory.fundamentalFrontier G s\", \"doc\": \"For a group $G$ acting on a set $s$, the set difference $s \\\\setminus \\\\text{fundamentalInterior}(G, s)$ is equal to the fundamental frontier $\\\\text{fundamentalFrontier}(G, s)$. This identity characteri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract invariant blocks, cusp actions and rational-map definitions do not construct a boundary-divisor model for a rational group-scheme action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-boundary-positive-stabilizer",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proposition 8.25, p.154, rational-action paragraph; Milne (2013), Lemma 4.4 and Proposition 4.1 proof, paragraphs beginning with an irreducible component of E and ending with the birational involution on G times D, pp.8--9. Local article WANTED; read https://arxiv.org/html/1311.6060v2. No single Stacks tag states this extraction and invariant-divisor lemma.",
+   "via": [
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-boundary-divisor-model",
+  "worker": "stage1",
+  "summary": "Followed the rational-action route of Milne (2013): extract a prime image, retain the dominant orbit parametrization, prove invariance by associativity, prove dominance of the involution by an explicit change of parameters, and shrink to an invariant open. Two statement-only tools remain. Corrected doubled TeX escapes only.",
+  "blueprint": "No matching node in latest blueprint. The existing from.node is null along the inherited created.item chain; retained it and specified the actual Milne Proposition 4.1 paragraphs. The seven steps realize its codimension-one domain, divisor extraction, orbit-envelope stability, and birational involution arguments.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in this Milne rational-action argument; no statement of the coefficient-stability unit supplies this tool."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in this Milne rational-action argument; no statement of the coefficient-stability unit supplies this tool."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in this Milne rational-action argument; no statement of the coefficient-stability unit supplies this tool."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in this Milne rational-action argument; no statement of the coefficient-stability unit supplies this tool."
+   },
+   {
+    "node": "lem-trf-reduced-scheme-image",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in this Milne rational-action argument; no statement of the coefficient-stability unit supplies this tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in this Milne rational-action argument; no statement of the coefficient-stability unit supplies this tool."
+   },
+   {
+    "node": "lem-sbc-inverse-partial-map-restrictions",
+    "why": "Generic scheme geometry used with exactly its stated hypotheses in this Milne rational-action argument; no statement of the coefficient-stability unit supplies this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-kun-dimension-formula",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-trf-reduced-scheme-image",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-sbc-inverse-partial-map-restrictions"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-9ebeb245f",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-9ebeb245f (reviewer sub-agent of L); spot-checked: I read the item's 7 steps, both new nodes and all 26 cited statements. Sources: Milne iAG2017 Prop 8.25 p.154; Milne 2013 (arXiv 1311.6060v2, read online) Def 4.2, Lemmas 4.3-4.4 and the Prop 4.1 proof; Stacks varieties.tex:85-141, Tag 05P3. Not a re-split: the item was new and had no earlier proof, and its statement is unchanged apart from the TeX escapes. Step 1: the dimension formula and trdeg give dim O_{Q,c} = dim Q - dim C. Step 2: the product is integral; it is normal because its projection is smooth (flat base change, with flatness from pc-flat-field); codimension-one local rings are DVRs, hence valuation rings, so the valuation-point extension puts these points in the domain. Step 3: the domain laws (with h=g, then g^{-1}, then the unit law) show the boundary maps into E_0, using Jacobson and k-rational closed points; every hypothesis of the extraction node holds. Step 4: normal-modification-codim-one (2) gives the strict transform; alpha = b^{-1} alpha_0 (1 x b), so r: R -> D is dominant. Step 5: lambda = 1 x r is dominant by reduced image plus nagata flat pullback; k-point density plus the reduced-source factorization give alpha(U_D) in D. Step 6: tau.lambda = lambda.sigma (checked sigma and its inverse), so tau is dominant; tau^2 = id via the unit and composition laws and separated extensionality. Step 7: W = A_0 n B_0 is stable, nonempty and satisfies tau^2 = id. New nodes: algclosed-integral-product is the integrality part of Stacks 05P3 and true. It is not a duplicate: sc-irreducible-product-over-field and wf-affine-product-reduced are partial, and integral-pullback-geometric-flat-open needs geometric integrality. prime-divisor-image-extraction is true: w = ord_T restricted to k(P) is nontrivial with center in Z; Abhyankar gives residue trdeg >= dim P - 1; blowups centred inside b^{-1}(Z) plus normalization (Kollar-Mori 2.45) leave P\\Z unchanged; the valuative criterion at the DVR O_{V,eta_T} defines f'. Its agent-written refinement is labelled as such in the source field. It does not restate the item and is not a duplicate of the trf valuation-curve nodes or cor-nagata-conrad. Batch 5: smooth-at-point fibre criterion, def-trf-valuation-ring, affine dimension inequality and reduced scheme image are generic facts or definitions, not parts of the trace-formula or Poincare-duality proofs, so I accept them. tool_uses accepted; no fixes. Maintainer notes: Milne 2013 is WANTED in the local literature. The disk was full when I first wrote review.md; it was written on retry (3178 bytes), with a copy at /tmp/nz-rbdm-review/review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalBoundaryDivisorModel",
+  "declaration": "AlgebraicGeometry.exists_rational_boundary_divisor_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalBoundaryDivisorModel.lean",
+  "statement": "theorem exists_rational_boundary_divisor_model (k : Type u) [Field k] [IsAlgClosed k] (G X₀ Y : Over (Spec (.of k))) [GrpObj G] [ModObj G Y] [IsIntegral G.left] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsIntegral X₀.left] [IsProper X₀.hom] (hX₀ : ∀ x : X₀.left, IsIntegrallyClosed (X₀.left.presheaf.stalk x)) [Smooth Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (j : Y ⟶ X₀) [IsOpenImmersion j.left] (hj : DenseRange j.left) (hE : (Set.range j.left)ᶜ.Nonempty) (hcodim : ∀ C ∈ irreducibleComponents (↥((Set.range j.left)ᶜ)), ∀ η : X₀.left, IsGenericPoint η (Subtype.val '' C) → ringKrullDim (X₀.left.presheaf.stalk η) = 1) : ∃ (X : Over (Spec (.of k))) (b : X ⟶ X₀) (jX : Y ⟶ X), IsIntegral X.left ∧ IsProper X.hom ∧ (∀ x : X.left, IsIntegrallyClosed (X.left.presheaf.stalk x)) ∧ IsProper b.left ∧ IsOpenImmersion jX.left ∧ DenseRange jX.left ∧ IsPullback jX.left (𝟙 Y.left) b.left j.left ∧ topologicalKrullDim X.left = topologicalKrullDim X₀.left ∧ ∃ (D : Over (Spec (.of k))) (d : D ⟶ X), IsIntegral D.left ∧ IsClosedImmersion d.left ∧ Set.range d.left ⊆ (Set.range jX.left)ᶜ ∧ topologicalKrullDim D.left + 1 = topologicalKrullDim X₀.left ∧ ∃ (a : (G ⊗ X).left.PartialMap X.left) (v : (G ⊗ Y).left ⟶ a.domain.toScheme), a.domain = a.toRationalMap.domain ∧ a.hom ≫ X.hom = a.domain.ι ≫ (G ⊗ X).hom ∧ v ≫ a.domain.ι = (G ◁ jX).left ∧ v ≫ a.hom = (ModObj.smul (M := G) (X := Y) ≫ jX).left ∧ ∃ (t : (G ⊗ D).left.PartialMap (G ⊗ D).left) (m : t.domain.toScheme ⟶ a.domain.toScheme), t.domain = (G ◁ d).left ⁻¹ᵁ a.domain ∧ m ≫ a.domain.ι = t.domain.ι ≫ (G ◁ d).left ∧ t.hom ≫ (snd G D).left ≫ d.left = m ≫ a.hom ∧ t.hom ≫ (fst G D).left = t.domain.ι ≫ (fst G D).left ≫ (GrpObj.inv (X := G)).left ∧ ∃ (W : (G ⊗ D).left.Opens) (hW : W ≤ t.domain) (f : W.toScheme ≅ W.toScheme), (W : Set (G ⊗ D).left).Nonempty ∧ f.hom ≫ W.ι = (G ⊗ D).left.homOfLE hW ≫ t.hom ∧ f.hom ≫ f.hom = 𝟙 W.toScheme",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e269fa5d",
+  "group": "Q30",
+  "result": "pass",
+  "note": "lean.statement verbatim equals the file signature; only the lean field differs from side-live; proof is sorry only. All node clauses match: alg closed k; GrpObj G over Spec k, smooth integral sep finite type; X0 integral, proper, normal stalks; Y smooth dense open with ModObj action; E0 nonempty; codim-1 as stalk ringKrullDim=1 at component generic points; X normal integral proper; b proper with IsPullback jX 1 b j (iso over Y, birational with dense jX); D integral closed immersion into X minus Y with dim D+1=dim X0; alpha is a maximal PartialMap (domain = toRationalMap.domain) pinned by the action on G×Y; t.domain = (G◁d)⁻¹ U is dense; factorization through D via m; tau pinned by inv and snd/d equations; nonempty W with f: W≅W restricting t and f∘f=id; dim X=dim X0. No extra hypotheses; edge cases fine; stmt_dep records and Mathlib RationalMap/ModObj read; source Milne 2013 Lemma 4.4/Prop 4.1. Minor: report calls lem-sfb-rational-action-domain-laws unstated, but it is a split node without Lean cited only in the proof (harmless). No compile per instructions; no fixes."
+ }
+}

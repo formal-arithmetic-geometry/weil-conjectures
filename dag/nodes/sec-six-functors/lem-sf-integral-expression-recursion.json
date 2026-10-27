@@ -1,0 +1,223 @@
+{
+ "id": "lem-sf-integral-expression-recursion",
+ "kind": "statement",
+ "title": "Expression-tree realization and whole-system counit substitution",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$, $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Schemes $W$ are finite type over $k$, with small pro-etale sites and $\\widehat R_W=\\lim_n(A_n)_W$ [def-weil-scheme-morphism-properties, def-weil-pbc-proetale-site]. Use the derived categories of strict semilinear systems $\\mathscr S_W$ and the actual adjunction $\\mathcal R_W\\dashv\\mathcal L_W=R\\lim\\operatorname{Res}$ with unit $u$ and counit $e$ [lem-coef-derived-system-evaluation-calculus]. Use simultaneous inverse images $P_v$, proper direct images $S_p$, quasi-compact open extensions $J_j$ and derived tensor, as in [def-sf-integral-system-operations]. Restrict inputs and intermediate systems to the domain of [def-sf-integral-system-expression-domain]: derived-complete constructible integral inputs, normalized systems with compatible etale-origin witnesses, and common finite cohomological and Tor intervals. All conclusions below are restricted to expressions satisfying these intermediate-domain conditions.\n\nLet $d_A:\\mathcal L A(\\mathcal R K_i)\\xrightarrow{\\sim}A_{\\rm int}(K_i)$ and $d_c$ be the specified primitive and compactification comparisons of [lem-sf-integral-basic-realization]. Let $r_A:\\mathcal R(A_{\\rm int}(K_i))\\to A(\\mathcal R K_i)$ be the canonical whole-system coefficient comparisons, and assume their identities\n$$r_A=e_{A(\\mathcal R K_i)}\\mathcal R(d_A^{-1}),$$\nincluding the two-input version for tensor. Suppose $\\mathcal R$ sends the complete input domain to the normalized system domain, $\\mathcal L$ sends the normalized system domain to the complete input domain, and the actual $u_K$ and $e_M$ are invertible on these respective domains. For a normalized system $M$, and two systems $M,N$ for tensor, define\n$$a_A(M)=d_A(\\mathcal L M)\\bigl(\\mathcal L A(e_M)\\bigr)^{-1},\\qquad\n a_\\otimes(M,N)=d_\\otimes(\\mathcal LM,\\mathcal LN)\\bigl(\\mathcal L(e_M\\otimes^Le_N)\\bigr)^{-1}.$$\nFor a finite typed expression $V$ in variables, $P_v,S_p,J_j$ and tensor, write $M_V=V(\\mathcal R K_1,\\ldots,\\mathcal R K_s)$ and $V_{\\rm int}$ for its integral interpretation. The recursion\n$$c_{K_i}=u_{K_i}^{-1},\\quad\n c_{AV}=A_{\\rm int}(c_V)a_A(M_V),\\quad\n c_{V\\otimes T}=(c_V\\widehat\\otimes^Lc_T)a_\\otimes(M_V,M_T)$$\ndefines natural isomorphisms $c_V:\\mathcal L M_V\\xrightarrow{\\sim}V_{\\rm int}(K_i)$ for every such expression. It is a recursion on the finite tree, with each child smaller than its parent, including repeated variables.\n\nDefine whole-system coefficient maps recursively by $r_{K_i}=1$, $r_{AV}=A(r_V)r_A(V_{\\rm int}(K_i))$, and\n$$r_{V\\otimes T}=(r_V\\otimes^Lr_T)r_\\otimes(V_{\\rm int}(K_i),T_{\\rm int}(K_i)).$$\nThey satisfy the specified equality of system maps\n$$r_V=e_{M_V}\\mathcal R(c_V^{-1})$$\nwith every quotient transition. The direct compactification comparison $d_c(K)$ agrees with the recursive $c_{S_p(J_j(K))}$, including the morphisms and all transitions specified in [def-weil-integral-rational-qbar-compact-support]. The agreement uses the same open reduction map $r_j$ and the same proper-image tower, and concerns the prescribed comparisons. At variables the reduction equality is the triangle identity $e_{\\mathcal RK}\\mathcal R(u_K)=1$; at a unary or binary node it is the corresponding counit substitution identity. No compatibility with a structural generator is assumed or concluded here.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Expression-tree recursion and counit substitution, extracted from old step 4 and the first paragraph of step 5; the same coefficient-comparison sentence. Agent-formulated obligation, not a theorem claimed to be stated in the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "lem-sf-integral-basic-realization",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-sf-integral-expression-recursion-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit natural coefficient recursion and its adjunction transpose from def-sf-integral-expression-recursion-data. The natural transformation is constructed recursively from the given primitive natural transformations, with both tensor slots retained. Its components are the given coefficientMap. The inverse hom-set equivalence proves the coefficient identity before any invertibility assumption.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By lem-sf-integral-expression-transpose-is-iso the restricted transpose has invertible components; componentwise invertibility gives an isomorphism of functors. Define c as its inverse. This is a real construction from the specified coefficient map, and the invertibility proof determines the inverse uniquely. The coefficient identity is the inverse-of-homEquiv identity, using c.inv equal to the transpose.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data",
+    "lem-sf-integral-expression-transpose-is-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sf-integral-expression-canonical-equations pointwise to this c for the displayed tree equations, retaining the domain witnesses and their invertibility clauses. Pair these equations with the coefficient identity from the preceding step.",
+   "uses": [
+    "lem-sf-integral-expression-canonical-equations",
+    "lem-sf-integral-expression-transpose-is-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sf-integral-expression-canonical-support to this same c and the supplied direct comparison dc. It identifies the one-variable compactification branch with dc using its already supplied whole-system normalization. This completes the asserted existential and both clauses.",
+   "uses": [
+    "lem-sf-integral-expression-canonical-support"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-expression-recursion-data",
+  "lem-sf-integral-expression-canonical-equations",
+  "lem-sf-integral-expression-canonical-support",
+  "lem-sf-integral-expression-transpose-is-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Recursive realization isomorphisms for finite expressions of unary functors and tensor transported through an adjoint equivalence",
+   "results": "{\"t\": \"2026-10-22T06:02:34Z\", \"tool\": \"leanfinder\", \"query\": \"Recursive realization isomorphisms for finite expressions of unary functors and tensor transported through an adjoint equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.transportStruct_tensorHom\", \"CategoryTheory.Monoidal.transportStruct_tensorObj\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Monoidal.instIsMonoidalTransportedCounitEquivalenceTransported\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse_assoc\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor\"], \"digest\": \"730bb1fe45201faf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoint equivalence counit substitution gives natural comparisons for multi input expression trees and reduction maps",
+   "results": "{\"t\": \"2026-10-22T06:02:34Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoint equivalence counit substitution gives natural comparisons for multi input expression trees and reduction maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvQPF.wrepr_wMk\", \"Mathlib.Tactic.CC.CCM.propagateBetaToEqc\", \"Mathlib.Tactic.etaReduceAll\", \"MvQPF.wrepr_equiv\", \"Mathlib.Tactic.MkIff.compactRelation\", \"CategoryTheory.Monad.comparison_obj_a\", \"QPF.Wrepr_equiv\", \"MvQPF.WEquiv.abs\"], \"digest\": \"07d7efad11d4da2e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\"",
+   "results": "{\"t\": \"2026-10-22T06:02:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreHomEquivUnitCounit\", \"CategoryTheory.Adjunction.CoreUnitCounit\", \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\"], \"digest\": \"0fe19bf188eb53ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expression.*(realization|counit)|counit.*expression|normalized.*system",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"grep\", \"query\": \"expression.*(realization|counit)|counit.*expression|normalized.*system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Expression tree evaluation and counit substitution for adjoint equivalences of categories",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"leansearch\", \"query\": \"Expression tree evaluation and counit substitution for adjoint equivalences of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.evaluationAdjunctionLeft_counit_app\", \"CategoryTheory.evaluationAdjunctionRight_counit_app_app\", \"CategoryTheory.Adjunction.adjunctionOfEquivRight_counit_app\", \"CategoryTheory.Adjunction.adjunctionOfEquivLeft_counit_app\", \"CategoryTheory.ihom.ihom_adjunction_counit\", \"CategoryTheory.Adjunction.mkOfHomEquiv_counit_app\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence\"], \"digest\": \"94347ecf4d9daee1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "expression.*(realization|counit)|counit.*expression|normalized.*system",
+   "results": "{\"t\": \"2026-10-22T06:54:46Z\", \"tool\": \"grep\", \"query\": \"expression.*(realization|counit)|counit.*expression|normalized.*system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Expression tree realization isomorphism and counit substitution for an adjoint equivalence",
+   "results": "{\"t\": \"2026-10-22T06:54:46Z\", \"tool\": \"leansearch\", \"query\": \"Expression tree realization isomorphism and counit substitution for an adjoint equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app\", \"CategoryTheory.Adjunction.toEquivalence\", \"CategoryTheory.Adjunction.adjunctionOfEquivLeft_counit_app\", \"CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence\", \"CategoryTheory.Adjunction.mkOfHomEquiv_counit_app\", \"CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv\"], \"digest\": \"b95db7a520258f99\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"counit\"",
+   "results": "{\"t\": \"2026-10-22T06:54:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreHomEquivUnitCounit\", \"CategoryTheory.Adjunction.CoreUnitCounit\", \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit\", \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\"], \"digest\": \"0fe19bf188eb53ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recursive realization isomorphisms for typed expression trees under a reduction limit adjunction with invertible unit and counit",
+   "results": "{\"t\": \"2026-10-22T06:54:56Z\", \"tool\": \"leanfinder\", \"query\": \"Recursive realization isomorphisms for typed expression trees under a reduction limit adjunction with invertible unit and counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Equivalence.adjointifyη\", \"CategoryTheory.Equivalence.adjointify_η_ε_assoc\", \"CategoryTheory.Equivalence.adjointify_η_ε\", \"MvQPF.wrepr_equiv\", \"MvQPF.wrepr_wMk\", \"AlgebraicTopology.DoldKan.Compatibility.υ\", \"CategoryTheory.Kleisli.Adjunction.toKleisliCompFromKleisliIsoSelf\", \"QPF.Wrepr_equiv\"], \"digest\": \"5ef6fa0b883d9a27\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def toEquivalence|adjointify_η_ε|transportStruct_tensorHom",
+   "results": "{\"t\": \"2026-10-22T06:55:33Z\", \"tool\": \"grep\", \"query\": \"def toEquivalence|adjointify_η_ε|transportStruct_tensorHom\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Equivalence.lean\", \"Mathlib/CategoryTheory/Equivalence.lean\"], \"digest\": \"82ee4e75000b4a8a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of counit and primitive operation comparison proves recursive comparison for unary functors and bifunctors",
+   "results": "{\"t\": \"2026-10-22T06:55:44Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of counit and primitive operation comparison proves recursive comparison for unary functors and bifunctors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvFunctor.LiftR\", \"MvFunctor.LiftR'\", \"MvQPF.recF_eq'\", \"MvQPF.recF_eq\", \"MvPFunctor.wRec_eq\", \"MvQPF.recF\", \"MvPFunctor.liftR_iff\", \"QPF.recF_eq'\"], \"digest\": \"e47174625011c917\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-compactification-system-realization",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Expression-tree recursion and counit substitution, extracted from old step 4 and the first paragraph of step 5; the same coefficient-comparison sentence.",
+   "via": [
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-expression-recursion",
+  "worker": "stage1",
+  "summary": "Q33 expands the finite typed-tree recursion, proves unary and binary counit substitution by actual counit naturality, proves the coefficient equation by simultaneous tree induction, and checks the direct compactification normalization using the canonical proper-image/limit comparison. No new nodes; no structural-generator coherence is used.",
+  "blueprint": "fix-prop-coherence coefficient-comparison sentence: expression-tree recursion and counit substitution extracted in the item source; compactification comparison uses the same open reduction and proper-image tower. The source blueprint supplies no proof of this extracted obligation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Canonical proper direct-image/strict-total-limit comparison with projection normalization, used only to identify the direct compactification map; the generic ringed-tower statement supplies this comparison."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Explicit finite compact-support coefficient-restriction isomorphism and its composition law identify all quotient transitions; this is a generic tool of the operation-definitions unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-7b0514b64",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-7b0514b64 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct, and two citations were missing (C1/C4), now added. Delivery: one commit, no new nodes, statement and stmt_deps byte-identical to live; the item is still unsplit live and has no repair note, so this is an ordinary one-level split. What I checked: I read the source sentence in fix-prop-coherence.proof.md l.9-11 (agent-formulated obligation, proof_origin=agent) and Stacks 0A07 (sites-cohomology l.5150) and 0D6E (l.4011). I read in full the statements of basic-realization, the evaluation calculus, operations, expression-domain, the tower Rf_*/Rlim tool, the compact-support def and the compact-support restriction of scalars. I recomputed every identity by hand: a_A typing; unary and binary counit substitution via counit naturality at A(e_M) and B(e_M,e_N); the leaf triangle identity; both inductive steps through naturality of r_A and r_B; c_{AV}=d_A(H)LA(r_V^{-1}); r_{J_jK}=r_j(K) by counit naturality plus the triangle identity; c_{S_pJ_jK}=Rp_*d_j(K)h_p(J_jRK). Edge cases: leaf, single operation, V⊗V with a repeated variable, identity open, empty open, zero input, m=n transition. Fault in step 9: it used S_p restricted from B_n-systems to \\hat R-towers as Rp_*^{Tow}, needed for the tower tool to apply, and supported this only by 'after the coefficient restrictions in the operation package'. FIX: cite lem-pur-completed-coefficient-pushforward-comparison (F_RV_{X,n}≅V_{Y,n}F_n as strict-diagram comparisons; F_RK≅Rlim with its projection normalization). That node is in unit sk-lem-sf-mate, which the unit cites, so it is on the route; it is split, reviewed and creates no cycle. Fault in step 11: it used the quotient-compatible evaluation identifications of S_p without citing them. FIX: cite def-sf-integral-system-operations. Tool uses accepted: tower pushforward-limit comparison and compact-support restriction of scalars. Note: lem-pur-integral-realization-recursion overlaps (same recursion as a characterization), but it depends on the parent and so cannot be cited; maintainer note. The report names a citations.json that the delivery does not contain. Fixed file: fixes/dag/nodes/sec-six-functors/lem-sf-integral-expression-recursion.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralExpressionRecursion",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.integralExpressionRecursion",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.ExpressionRecursion.integralExpressionRecursion"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralExpressionRecursion.lean",
+  "statement": "theorem integralExpressionRecursion (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) (d : Primitives l E D o) (_rec : Reconstruction l E D) (dc : DirectComparisons l E D o d.model) : ∃ c : Comparisons l E D o, (∀ {I : Type u} [Finite I] {X : I → Over (Spec (.of D.k))} {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (g : e.geometric) (K : (e.domain l E o).FullSubcategory), Equations l E d c e g K ∧ coefficientMap l E d e g K.obj = (calculus l E W.left).reduction.map ((c e g).inv.app K) ≫ (calculus l E W.left).adjunction.counit.app ((e.evaluate (systemInterpretation l E o)).obj ((inputReduction l E X).obj K.obj))) ∧ SupportAgreement l E d dc c",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Finite typed-tree recursion on the recorded full expression domains; primitive comparisons and their transpose identities are given hypotheses. Actual counit transports define a_A and a_tensor, coefficient maps are whole-system morphisms, and the direct compactification comparison retains its published normalization and finite projection equations. No structural-generator coherence is assumed or asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c05b4ce6c",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Only the lean field of the item record differs from live (statement, stmt_deps, proof and all 9 dep records byte-identical). lean.statement matches the file signature verbatim; the 20 declarations match the file exactly; one sorry, in the theorem; source/blueprint docstrings throughout; lines <=100; autoImplicit false; no hollow defs. Clause check: Unary.pull/push/shriek carry exactly the separated-finite-type, proper and qc-open hypotheses; the domains are the recorded Expression.domain and geometric; Primitives pins d_A by unary_spec/tensor_spec to exactly the HasBasicRealizations formulas (model push conjugate then inverse unit, open mate then inverse unit, Roos model inverses); r_A/r_tensor are natural transformations with the assumed transpose identity on the basic domains, and their values off the domain are fixed through naturality at c_V; Reconstruction = the node's four hypotheses; unaryA/tensorA = d at L M after the inverse of L A(e_M); Comparisons are natural isos on the full domain; Equations gives the leaf/unary/tensor/compact-support recursion; coefficientMap = R(c^-1) then e_{M_V} holds in the strict-system category; DirectComparisons copies basic realization's d_c normalization and projections; SupportAgreement composes with sfQcqsCompactSupportRealization. Hand-checked: the domain witnesses exist (limit/reduction/counit plus Good transport); the leaf case is the triangle identity; support agreement reduces to DirectNormalization through openReduction and model.push naturality and u_{LN}^-1 = L e_N. Edge cases: empty I, repeated variables, identity/empty open, zero input, n=0, m=n, hidden intermediate Z. No import cycle (closures checked); no name collision; stmt_deps unchanged so the theorem-stmt_dep rule does not apply. No compile (no changes; worker reports a 45.4 s server compile). Advisory: inverseOrZero comes from the lem-sf-generator-reduction-coherence module, not in stmt_deps (generic helper); lem-pur-integral-realization-recursion overlaps but depends on the parent; three proof-only imports are unused by the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fe0fc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T201708-L-3409391",
+  "kind": "interface",
+  "note": "independent cc review: Item theorem type byte-identical to clones/live; 19 relocated declarations byte-identical (diff) and re-exported publicly; both direct importers compile against the delivered set (lcompile --all sandbox); the two open statements are each equivalent to a conjunct of the original item via the hom-set uniqueness of the transpose; unit realized empty; axioms show only pre-existing upstream sorryAx plus the two named holes"
+ }
+}

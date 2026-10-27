@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-etale-presented-module-effective-recovery",
+ "kind": "statement",
+ "title": "Effective recovery of etale presented modules from their local cokernels",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], with its Zariski site [def-sc-zariski-site] and small etale site [def-weil-pbc-etale-site], and put $\\mathcal O_{T,\\mathrm{et}}(v:V\\to T)=\\Gamma(V,\\mathcal O_V)$. Write $L_T=\\epsilon_T^*$ for tensor pullback and $R_T=\\epsilon_{T,*}$ for restriction to open subschemes along the canonical morphism of ringed sites $\\epsilon_T:T_{\\mathrm{et}}\\to T_{\\mathrm{Zar}}$ [lem-trf-zariski-etale-tensor-sections]. Modules mean sheaves of modules [def-weil-sheaf-of-modules-category]; Zariski quasi-coherence is [pqf-def-coherent] and site quasi-coherence is [def-trf-space-quasi-coherent-module]. Let $G$ be a site quasi-coherent $\\mathcal O_{T,\\mathrm{et}}$-module. Let $\\{u_i:V_i\\to T\\}_{i\\in I}$ be a jointly surjective etale family with specified presentations $\\mathcal O_{V_i,\\mathrm{et}}^{(K_i)}\\xrightarrow{d_i}\\mathcal O_{V_i,\\mathrm{et}}^{(J_i)}\\to G|_{(V_i)_{\\mathrm{et}}}\\to0$. There exist unique maps $h_i:\\mathcal O_{V_i}^{(K_i)}\\to\\mathcal O_{V_i}^{(J_i)}$ whose $L_{V_i}$-images are $d_i$ under the canonical free-module identifications. Their cokernels $F_i$ are Zariski quasi-coherent and carry isomorphisms $b_i:L_{V_i}F_i\\simeq G|_{(V_i)_{\\mathrm{et}}}$ compatible with the cokernel projections. On $V_{ij}=V_i\\times_TV_j$, with projections $p_i,p_j$, the maps $b_j^{-1}b_i$ between the restrictions of these images lift uniquely to isomorphisms $\\phi_{ij}:p_i^*F_i\\simeq p_j^*F_j$, and on triple products $\\phi_{jk}\\phi_{ij}=\\phi_{ik}$, with the canonical pullback identifications understood. This datum is effective: there are a Zariski quasi-coherent $F$ on $T$ and isomorphisms $u_i^*F\\simeq F_i$ inducing $\\phi_{ij}$, and the resulting local maps glue uniquely to $b:L_TF\\simeq G$. Restriction of $b$ to opens identifies $F$ with $R_TG$. In particular $R_TG$ is quasi-coherent and the canonical counit $L_TR_TG\\to G$ is an isomorphism whose map on every open subscheme is the identity under these identifications.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-trf-space-quasi-coherent-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-trf-etale-presented-local-cokernels to the supplied presentations. This yields the free comparisons, unique lifts, local cokernels, quasi-coherence and normalized local tensor coordinates.",
+   "uses": [
+    "lem-trf-etale-presented-local-cokernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+   }
+  },
+  {
+   "text": "Apply lem-trf-etale-presented-descent-gluing to that fixed local datum and the jointly surjective etale family. Retain its overlap equations, cocycle, effective global module, chart identifications, normalized global tensor coordinates and uniquely glued isomorphism.",
+   "uses": [
+    "lem-trf-etale-presented-descent-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+   }
+  },
+  {
+   "text": "The normalized global unit is objectwise an isomorphism: its composite with two isomorphisms on every open is the identity. Hom.isIso_iff_isIso_app therefore makes the unit invertible. Compose its isomorphism with the restriction of the glued isomorphism to get a:F ≅ R_T G. Quasi-coherence transfers along a. The adjunction Hom equivalence gives L(a) followed by the canonical counit equal to the glued isomorphism, so the counit is invertible. Obtain normalized tensor coordinates for R_T G from lem-trf-etale-extension-free-presentations-hom; proof irrelevance identifies its context with c. Cancel the tensor/open comparisons in the unit equation and use the right triangle identity evaluated at each open to prove the specified counit_open equation. Assemble all fields of the original EtalePresentedRecovery structure, whose signature and fields are unchanged.",
+   "uses": [
+    "def-trf-etale-presented-recovery-coordinates",
+    "lem-trf-etale-extension-free-presentations-hom",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-presented-local-cokernels",
+  "lem-trf-etale-presented-descent-gluing",
+  "lem-trf-etale-extension-free-presentations-hom",
+  "pqf-def-coherent",
+  "def-trf-etale-presented-recovery-coordinates"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX, proof of (2): split the local cokernel and descent/gluing constructions; complete the restriction and counit clauses using the adjunction Hom equivalence and triangle identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Recover a quasi coherent module on the small etale site of a scheme by lifting local free presentation matrices and gluing the cokernels using fpqc descent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, this constructs the local generato\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasicoherentData only packages local presentations; affine faithfully flat comonadicity does not lift and glue arbitrary small-etale sheaf presentations over a scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale sheaves of modules with local free presentations yield effective quasi coherent descent data on pairwise fibre products of an etale cover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.presentationOfIsCokernelFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{M : SheafOfModules.{u} R} (f : free ι ⟶ free σ) (g : free σ ⟶ M) (H : f ≫ g = 0)\\n  (H' : IsColimit (CokernelCofork.ofπ g H)) : Presentation M\", \"doc\": \"Given a sheaf of modules $ M $ over a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if there exists a morphism $ g: F_\\\\sigma \\\\to M $ from a free sheaf $ F_\\\\sigma\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasicoherentData only packages local presentations; affine faithfully flat comonadicity does not lift and glue arbitrary small-etale sheaf presentations over a scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasicoherentData\", \"IsQuasicoherent\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} {inst✝¹ : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat} {inst✝² : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat} {M : Sheaf\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasicoherentData only packages local presentations; affine faithfully flat comonadicity does not lift and glue arbitrary small-etale sheaf presentations over a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale.*(descent|presentation)|descent.*(quasicoherent|module)|quasicoherent.*descent)",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"line\": \"14\", \"text\": \"# Faithfully flat descent for modules\"}\n  {\"file\": \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"line\": \"28\", \"text\": \"  descents to a function `LocalizedModule M S → LocalizedModule M S`\"}\n  {\"file\": \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"line\": \"120\", \"text\": \"`f` descents to a map `LocalizedModule M S → α`.\"}\n  {\"file\": \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"line\": \"130\", \"text\": \"`f` descents to a map `LocalizedModule M S → LocalizedModule M S → α`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Etale.Descent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"141\", \"text\": \"    Etale f ↔ Flat f ∧ FormallyUnramified f ∧ LocallyOfFinitePresentation f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"142\", \"text\": \"  rw [etale_iff, flat_iff, formallyUnramified_iff, locallyOfFinitePresentation_iff]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"287\", \"text\": \"  have 𝓟 := Classical.ofNonempty (α := StandardEtalePresentation R S)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"324\", \"text\": \"      simp [StandardEtalePresentation.baseChange, 𝓟']\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"332\", \"text\": \"        simp [← map_pow, 𝓟', StandardEtalePresentation.baseChange]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"344\", \"text\": \"    (by simp [𝓟', StandardEtalePresentation.baseChange, isIntegral_algebraMap]) Ideal.mk_ker hk\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Etale.lean\", \"line\": \"84\", \"text\": \"    f.Etale ↔ f.Flat ∧ f.FormallyUnramified ∧ f.FinitePresentation := by\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"262\", \"text\": \"structure StandardEtalePresentation (R S : Type*) [CommRing R] [CommRing S] [Algebra R S] extends\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"264\", \"text\": \"  /-- The image of X in a `StandardEtalePresentation`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"269\", \"text\": \"variable (P : StandardEtalePresentation R S)\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"271\", \"text\": \"/-- The isomorphism to the standard etale algebra given a `StandardEtalePresentation`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"272\", \"text\": \"def StandardEtalePresentation.equivRing : S ≃ₐ[R] P.Ring :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Basic.lean\", \"line\": \"219\", \"text\": \"attribute [instance] formallyEtale finitePresentation\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"58\", \"text\": \"  let P : StandardEtalePresentation R A := Nonempty.some inferInstance\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasicoherentData only packages local presentations; affine faithfully flat comonadicity does not lift and glue arbitrary small-etale sheaf presentations over a scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Essential surjectivity from ordinary quasicoherent scheme modules to quasicoherent etale module sheaves by descent of local cokernel presentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"PresheafOfModules.instIsLocallySurjectiveToSheafify\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and a natural transformation $\\\\alpha: R_0 \\\\to R$ to a sheafified ring $R$, \"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasicoherentData only packages local presentations; affine faithfully flat comonadicity does not lift and glue arbitrary small-etale sheaf presentations over a scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale.*(quasicoherent|quasiCoherent|descent)|quasicoherent.*etale|quasiCoherent.*etale)",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentation structures and general scheme pullback do not assert recovery from small-etale modules; the source grep hit concerns descent of morphism properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on the small etale site of a scheme are obtained from Zariski quasi coherent modules by tensor pullback",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.isQuasicoherent, AlgebraicGeometry.Scheme.smallEtaleTopology, SheafOfModules.QuasicoherentData.ctorIdx",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentation structures and general scheme pullback do not assert recovery from small-etale modules; the source grep hit concerns descent of morphism properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent, CategoryTheory.Functor.EssSurj",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentation structures and general scheme pullback do not assert recovery from small-etale modules; the source grep hit concerns descent of morphism properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover a quasi coherent sheaf on a scheme from local presentations on its small etale site using fully faithful tensor extension and effective descent",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.localGeneratorsData",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentation structures and general scheme pullback do not assert recovery from small-etale modules; the source grep hit concerns descent of morphism properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence between quasi coherent sheaves on the Zariski and etale ringed sites by descending free module cokernels",
+   "results": "8 hits: SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.X, SheafOfModules.isQuasicoherent, SheafOfModules.mapFree",
+   "date": "2026-10-23",
+   "verdict": "no match: local presentation structures and general scheme pullback do not assert recovery from small-etale modules; the source grep hit concerns descent of morphism properties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Zariski and small etale quasi-coherent modules agree functorially. Historical imported ancestry retained. Re-split of lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, old proof steps 5,6,7: Effective recovery of etale presented modules from their local cokernels.",
+   "via": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-presented-module-effective-recovery",
+  "worker": "stage1",
+  "summary": "Q149 split the unchanged statement by the local-presentation proof of Stacks 03DX(2). Reused existing free-module, colimit, Hom, pullback, fpqc effectivity and site-Hom gluing nodes; no new nodes. Wrote the cocycle and diagonal checks, inverse gluing and adjunction formula identifying the specified counit. Checked arbitrary small presentation sets, arbitrary etale covering families, empty and zero cases, exact statement quotations and fresh logged Mathlib searches.",
+  "blueprint": "Realizes the local presentation, overlap descent and recovery input in the parent lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (old steps 5--7). Retains the inherited lem-trf-local-term-locality ancestry and its historical specialization-chain place; the current ancestor itself is the contracting-local-term theorem, not a second assertion of this module comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-tilde-free-module",
+    "why": "Generic affine free-module identification, used with rank one to check quasi-coherence of the structure module. No node of sk-i-curve-zero supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Generic closure of quasi-coherent modules under arbitrary small coproducts, needed for the given possibly infinite free presentations. No node of sk-i-curve-zero supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "why": "Generic cokernel closure for quasi-coherent scheme modules, applied to the lifted presentation map. No node of sk-i-curve-zero supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic preservation of quasi-coherence by scheme pullback, needed for overlap Hom bijections. No node of sk-i-curve-zero supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic conversion of an etale covering family into an fpqc covering family, with no individual quasi-compactness assumption. No node of sk-i-curve-zero supplies this generic tool."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic effective descent for quasi-coherent modules with a cocycle; realizes the explicit 03DX descent step. No node of sk-i-curve-zero supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic sheaf-of-modules Hom gluing on a site, applied to compatible maps and their inverses. No node of sk-i-curve-zero supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-fpqc-descent",
+  "lem-pur-sheaf-hom-cover-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-7275c87fd",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-7275c87fd (reviewer sub-agent of L); spot-checked: I read Stacks descent.tex 03DX (proposition-equivalence-quasi-coherent) in full, including its last sentence extending the proof to the small étale site; 023T through lem-pc-fpqc-descent(1); and 03EM through lem-pur-sheaf-hom-cover-gluing. The 8 steps follow the 03DX proof. Step 1: L preserves arbitrary small coproducts and sends O to O_et, so the free modules are identified. Step 2: Hom bijection gives h_i; F_i is quasi-coherent by cokernel closure; b_i comes from uniqueness of cokernels. Step 3: phi_ij is lifted on V_ij using pullback quasi-coherence and the étale restriction identification over V_i; its inverse is lifted too. Step 4: the cocycle that 03DX omits is written out, plus diagonal normalization (e^2=e). Step 5: fpqc effectivity with no quasi-compactness assumed on the u_i; the descent orientations match. Step 6: I checked c_j=c_i on overlaps; the 03EM gluing is done at the terminal object and again for the inverses. Step 7: a=R(b)eta_F, and the adjunct formula gives b=eps_G L(a), so the canonical counit is invertible. Step 8: the triangle identity gives eps_G(W)=1 on opens. Statement and stmt_deps are byte-identical to the Q106 re-split version; old parent steps 5-7 are fully carried. proof_deps equals the union of the step uses. No cycle (213-node closure reaches neither the item nor the parent). No new nodes; no duplicate in the DAG (03DX hits are the parent, its siblings, rank-one nodes and citers). No SGA cited. Edge cases checked: empty K_i/J_i, empty T, identity cover, non-separated overlaps, infinite non-quasi-compact families. Accepted the 7 generic off-unit tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtalePresentedModuleEffectiveRecovery",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etalePresentedModule_effectiveRecovery",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.EtalePresentedRecovery",
+   "AlgebraicGeometry.Scheme.Modules.etalePresentedModule_effectiveRecovery"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePresentedModuleEffectiveRecovery.lean",
+  "statement": "theorem etalePresentedModule_effectiveRecovery (c : ∀ X : Scheme.{u}, ZariskiEtaleModuleContext X) (T : Scheme.{u}) (G : SmallEtaleModules T) [G.IsQuasicoherent] (I : Type w) (U : I → T.Etale) (cover : ∀ x : T, ∃ (i : I) (y : (U i).left), (U i).hom.base y = x) (K J : I → Type u) (d : ∀ i, SheafOfModules.free (R := smallEtaleModuleRing (U i).left) (K i) ⟶ SheafOfModules.free (J i)) (q : ∀ i, SheafOfModules.free (R := smallEtaleModuleRing (U i).left) (J i) ⟶ (presentedEtaleRestriction (U i)).obj G) (zero : ∀ i, d i ≫ q i = 0) (presentation : ∀ i, Nonempty (IsColimit (CokernelCofork.ofπ (q i) (zero i)))) : Nonempty (EtalePresentedRecovery c T G I U K J d q)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-babb00ea0",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Clause-by-clause match of node (Stacks 03DX(2), étale case) to etalePresentedModule_effectiveRecovery/EtalePresentedRecovery. Canonical free iso is pinned by its adjoint on generators. Lifts h_i are unique; cokernels F_i have the full IsColimit property and are QC; b_i are compatible with the projections. Overlap φ_ij exists and is unique and satisfies the cocycle on every étale W with chart maps (equivalent to the fibre-product form). Effective F with chartIso via the canonical tensorSectionsComp comparison; gluedIso is unique; restrictionIso = unit≫R(b); R_T G is QC; the canonical counit is IsIso and the identity on opens. Tensor coordinates are pinned by linearity plus the unit on opens. ZariskiEtaleModuleContext has only Prop fields and existence is given by deps. Edge cases checked: empty I/T, empty or infinite K/J, repeated indices, empty open, I in universe w. lean.statement is verbatim; declarations/docstrings/blueprint tags are present; only the theorem is sorried; no hollow helpers; no new nodes or dep edits; report has Worker report and Second reading by Q10 sections; no compile run since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-89aa1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T091709-L-3365885",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + EtalePresentedRecovery unchanged vs clone; new Local/Descent structures = verbatim field subsets of EtalePresentedRecovery; moved defs verbatim vs published; item node vs proof as written"
+ }
+}

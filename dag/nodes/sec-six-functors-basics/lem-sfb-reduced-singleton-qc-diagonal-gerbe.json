@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-reduced-singleton-qc-diagonal-gerbe",
+ "kind": "statement",
+ "title": "A reduced singleton stack with quasi-compact diagonal is a gerbe over a field",
+ "statement": "Let $k$ be a field [def-weil-field], and let $\\mathcal C$ be an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack]. Suppose $\\mathcal C$ is reduced, meaning that it admits a smooth surjective scheme atlas all of whose local rings have no nonzero nilpotents. Suppose the field-valued point space $|\\mathcal C|$ of [lem-sfb-smooth-presentation-closed-subsets] has exactly one point, and the diagonal $\\mathcal C\\to\\mathcal C\\times_k\\mathcal C$ is quasi-compact [def-sfb-stack-qcqs-morphism]. There exist a field extension $L/k$ and a $k$-morphism $p:\\mathcal C\\to\\operatorname{Spec}L$ [def-weil-affine-spectrum] which is a gerbe: for each scheme $T\\to\\operatorname{Spec}L$, the fibre groupoid has objects fppf locally on $T$, and any two such objects are isomorphic fppf locally on $T$ [def-pc-fppf-site]. No local Noetherianity or local finite-type hypothesis on $\\mathcal C/k$, and no algebraicity or finiteness hypothesis on $L/k$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 06RC, proposition-open-stratum, applied to a reduced singleton stack (its inertia is a base change of its quasi-compact diagonal); Tag 0DQL, lemma-gerbe-diagonal-quasi-compact. The quotient algebraic space is reduced by spaces-descent.tex Tag 0GB3, lemma-reduced-local-smooth, and a field spectrum by decent-spaces.tex Tag 047Z, lemma-when-field; quasi-separated spaces are decent by decent-spaces.tex Tag 03JX, lemma-bounded-fibres and the decency conditions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fppf-site",
+  "def-sfb-relative-moduli-inertia",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $I=I_{\\mathcal C/k}$. The definition [def-sfb-moduli-inertia] identifies $I$ with $\\mathcal C\\times_{\\mathcal C\\times_k\\mathcal C}\\mathcal C$, where both maps are the diagonal: a pair of objects with two isomorphisms is equivalent to one object with their ratio as automorphism. Thus $I\\to\\mathcal C$ is a base change of the given quasi-compact diagonal. Quasi-compactness is stable under base change directly from [def-sfb-stack-qcqs-morphism]: each quasi-compact test of the new target is the same test of the old target after composition, and the two fibre products agree.",
+   "uses": [
+    "def-sfb-moduli-inertia",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050P (lemma-diagonal-diagonal), explicit inertia square; Tag 050U, definition-quasi-compact"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reduced-qc-inertia-dense-open-gerbe] to the reduced stack $\\mathcal C$ and the inertia projection of step 1. Obtain a dense open substack $\\mathcal U$ and a gerbe $\\mathcal U\\to Q$ over an algebraic space $Q/k$. The nonempty singleton $|\\mathcal C|$ has no proper dense open subset, so $|\\mathcal U|=|\\mathcal C|$. An open immersion with full point image is an equivalence: after every scheme test its open subscheme has all points, using surjectivity of points of stack fibre products [lem-sfb-smooth-presentation-closed-subsets], and hence is the whole scheme. Thus the gerbe is $p:\\mathcal C\\to Q$.",
+   "uses": [
+    "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+    "lem-sfb-smooth-presentation-closed-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06RC (proposition-open-stratum), singleton specialization"
+   }
+  },
+  {
+   "text": "By [lem-sfb-gerbe-smooth-universal-homeomorphism], $p$ is smooth and induces a homeomorphism $|\\mathcal C|\\to|Q|$, so $|Q|$ is a nonempty singleton. Choose the reduced smooth surjective scheme atlas $V\\to\\mathcal C$ in the hypothesis. The smoothness assertion of that node, tested on this atlas, makes $V\\to Q$ smooth and surjective. Since $V$ is reduced, [lem-sfb-space-smooth-reduced-locality] implies that $Q$ is reduced. Apply [lem-sfb-gerbe-qc-diagonal-descent] to $p$; the diagonal of $Q/k$ is quasi-compact.",
+   "uses": [
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-gerbe-qc-diagonal-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tags 06R9 and 0DN8 (gerbe homeomorphism and smoothness), 0DQL; spaces-descent.tex Tag 0GB3"
+   }
+  },
+  {
+   "text": "Let $q$ be the unique point of $Q$. By [lem-sfb-qs-space-field-monomorphism], its quasi-compact diagonal supplies a field $L$ and a quasi-compact monomorphism $j:\\operatorname{Spec}L\\to Q$ over $k$. Apply [lem-sfb-reduced-singleton-field-factorization] with $X=Y=Q$ and $f=\\mathrm{id}_Q$; the reducedness and point-image hypotheses hold by step 3. Obtain $g:Q\\to\\operatorname{Spec}L$ over $k$ with $jg=\\mathrm{id}_Q$. Since $j(gj)=j$, the monomorphism property gives $gj=\\mathrm{id}_{\\operatorname{Spec}L}$. Hence $Q\\simeq\\operatorname{Spec}L$ over $k$. Its structure map makes $L$ a field extension of $k$ (a unital map between fields is injective). Compose $p$ with $g$. Under the inverse maps $j,g$, the fibre groupoids over each scheme are the same, so both fppf gerbe conditions for $p$ give those for $gp$. No finite-type property of $L/k$ has been used.",
+   "uses": [
+    "lem-sfb-qs-space-field-monomorphism",
+    "lem-sfb-reduced-singleton-field-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 03JX, 03JV (field monomorphism), 0H1T (reduced factorization); this gives the singleton-field conclusion of Tag 047Z by a retract argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-moduli-inertia",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-reduced-qc-inertia-dense-open-gerbe",
+  "lem-sfb-smooth-presentation-closed-subsets",
+  "lem-sfb-gerbe-smooth-universal-homeomorphism",
+  "lem-sfb-space-smooth-reduced-locality",
+  "lem-sfb-gerbe-qc-diagonal-descent",
+  "lem-sfb-qs-space-field-monomorphism",
+  "lem-sfb-reduced-singleton-field-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 06RC, 06R9, 0DN8, 0DQL; spaces-descent.tex 0GB3; decent-spaces.tex 03JX, 03JV and 0H1T for the explicit singleton-field retract argument (047Z)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebraic stack with one point and quasi compact diagonal is a smooth gerbe over the spectrum of a field",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsAffine, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.Scheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced singleton algebraic stack with quasi compact diagonal is universally homeomorphic and smooth over a field",
+   "results": "8 hits: AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.IsReduced.mk, Algebra.FormallyUnramified.isReduced_of_field, AlgebraicGeometry.universallyClosed_eq_universallySpecializing, AlgebraicGeometry.isReduced_of_isReduced_stalk",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"gerbe\"",
+   "results": "0 hits: . loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-23",
+   "verdict": "no match: query rejected for unknown identifier; superseded by the successful typed Loogle query recorded below"
+  },
+  {
+   "tool": "grep",
+   "query": "gerbe|AlgebraicStack|singleton.*stack",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced quasi separated algebraic space with singleton point set is the spectrum of a field and algebraic gerbes are smooth universal homeomorphisms",
+   "results": "8 hits: AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf, AlgebraicGeometry.instIsAffineTerminalScheme, AlgebraicGeometry.IsAffineOpen.of_subsingleton, AlgebraicGeometry.IsAffine, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or general topology; none gives the stated theorem about algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.QuasiCompact",
+   "results": "3 hits: AlgebraicGeometry.IsSchemeTheoreticallyDominant.isReduced, AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isDominant, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: all three results concern reduced schemes under quasi-compact scheme morphisms; none concerns gerbes or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced algebraic stack quasi compact diagonal singleton point space is a gerbe over a field",
+   "results": "8 hits: AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.QuasiSeparated.mk, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiCompactCover.singleton, AlgebraicGeometry.QuasiSeparated.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: these are results for schemes or general categories, not algebraic stacks or gerbes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universally-closed-stack-rational-point",
+  "date": "2026-10-23",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Rational objects on universally closed stacks over algebraically closed fields. Supporting gerbe input: reduced closed singleton substack, before universal closedness forces its field to be the base field.",
+   "via": [
+    "lem-sfb-universally-closed-stack-rational-point",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-reduced-singleton-qc-diagonal-gerbe",
+  "worker": "stage1",
+  "summary": "Checked the reduced singleton theorem without Noetherian or finite-type hypotheses. Reused the newly landed general gerbe inputs 06RC and 0DQL, smooth reduced descent, and field-monomorphism/factorization nodes. The quotient is a field by explicit inverse morphisms. No new nodes, statement change or Lean attachment. The two proposed nodes were removed after the final-delivery duplicate check detected equivalent Q132 nodes.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting alteration/moduli prerequisite chain recorded in blueprint.from.place. The item realizes the reduced-singleton gerbe input in the rational-object argument; steps 1-2 obtain the quotient, step 3 its properties, step 4 its field spectrum. The inherited created.item chain has no imported blueprint ancestor, as blueprint_refs.py ancestor reports; preserved its null from.node and explicit place/via."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-292a226ad",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-292a226ad (reviewer sub-agent of L); spot-checked: Read the item and all 9 cited node statements in full; the delivery adds no new nodes and does not change the statement. I checked the Stacks sources at the cited places: 06RC proposition-open-stratum (hypotheses are reduced plus qc inertia; step 1 gets qc inertia because inertia is the base change of the qc diagonal along itself, an elementary argument from def-sfb-stack-qcqs-morphism), 0DQL lemma-gerbe-diagonal-quasi-compact, 0DN8 and 06R9 (a gerbe is smooth, surjective and a universal homeomorphism), spaces-descent 0GB3 (reducedness descends along smooth surjective maps), 03JX/03JV (qc field monomorphism over S=Spec k) and 0H1T (factorization through the residual space). Step 2 is correct: a dense open subset of a nonempty singleton is everything, and the base-change-of-images clause makes U=C. Step 4 is correct: from jg=id and j a monomorphism, gj=id, so Q≅Spec L and k→L is injective; this reproduces 047Z. Small cases: Spec L for any L, BG over k, the non-reduced Spec k[ε]/ε² (excluded) and the empty stack (excluded) all behave as the statement says. No duplicate: lem-sfb-noetherian-singleton-gerbe and lem-sfb-singleton-stack-finite-field-homeomorphism are narrower, and the citer lem-sfb-universally-closed-stack-rational-point uses exactly this statement. No SGA. Batch-5: the four flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is not part of the trace formula or of Poincaré duality, so they are accepted. No tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedSingletonQcDiagonalGerbe",
+  "declaration": "CategoryTheory.reduced_singleton_qc_diagonal_gerbe",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedSingletonQcDiagonalGerbe.lean",
+  "statement": "theorem reduced_singleton_qc_diagonal_gerbe (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (hred : ∃ (U : Over (Spec (.of k))) (q : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U q ∧ AlgebraicGeometry.IsReduced U.left) (hpoint : Nonempty (ModuliPoints F) ∧ Subsingleton (ModuliPoints F)) (hdiag : IsQuasiCompactAlgebraicModuliMap.{u, v, w, v, max w u, 0, 0} (moduliRelativeDiagonal (moduliBaseStructure F))) : ∃ (L : Type u) (_ : Field L) (ι : k →+* L) (p : BasedFunctor F (discreteModuli (yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom ι)))))), (∀ (T : Over (Spec (.of k))) (a : T ⟶ Over.mk (Spec.map (CommRingCat.ofHom ι))), ∃ R : Sieve T, R ∈ (Scheme.fppfTopology.over (Spec (.of k))) T ∧ ∀ (U : Over (Spec (.of k))) (f : U ⟶ T), R f → ∃ x : BasedFunctor (discreteModuli (yoneda.obj U)) F, Nonempty (ModuliTwoIso (x.comp p) (discreteModuliMap (yoneda.map (f ≫ a))))) ∧ (∀ (T : Over (Spec (.of k))) (a : T ⟶ Over.mk (Spec.map (CommRingCat.ofHom ι))) (x y : BasedFunctor (discreteModuli (yoneda.obj T)) F), Nonempty (ModuliTwoIso (x.comp p) (discreteModuliMap (yoneda.map a))) → Nonempty (ModuliTwoIso (y.comp p) (discreteModuliMap (yoneda.map a))) → ∃ R : Sieve T, R ∈ (Scheme.fppfTopology.over (Spec (.of k))) T ∧ ∀ (U : Over (Spec (.of k))) (f : U ⟶ T), R f → Nonempty (ModuliTwoIso ((discreteModuliMap (yoneda.map f)).comp x) ((discreteModuliMap (yoneda.map f)).comp y)))",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing smooth-atlas, field-point quotient and canonical relative diagonal. The two defining fppf gerbe conditions are expanded directly using covering sieves and vertical two-isomorphisms. Added the two already landed notion nodes for the base structure and reduced schemes under brief-stage2 section 5."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6172075e8",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Node diff vs live: only lean + 2 added landed stmt_deps (moduliBaseStructure, Mathlib IsReduced), both used. lean.statement verbatim, single sorry theorem, no name clash. Clauses match: IsAlgebraicModuliStack; reduced smooth surjective atlas (IsSmoothModuliAtlas includes smooth+surjective); Nonempty∧Subsingleton ModuliPoints (same point quotient as smooth_presentation_closed_subsets); IsQuasiCompactAlgebraicModuliMap of moduliRelativeDiagonal(moduliBaseStructure F) = diagonal over k, test universes contain scheme sizes. Conclusion: arbitrary L : Type u, ι : k →+* L, p : F → h(Spec L) over k; the two gerbe conditions (06NZ) via fppfTopology.over covering sieves and vertical ModuliTwoIso; compatibility with the map to Spec L automatic since discreteModuli fibres are discrete. Edge cases (empty stack, empty T, Spec L, BG, dual numbers, any characteristic) OK. No gerbe def node or Lean predicate exists (inline expansion consistent with siblings). Docstrings/source/blueprint/proof steps present; imports fine. No file changed, no compile; worker compile + dry run evidence."
+ }
+}

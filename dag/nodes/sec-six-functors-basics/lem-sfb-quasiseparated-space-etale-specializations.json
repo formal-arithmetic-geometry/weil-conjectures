@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-quasiseparated-space-etale-specializations",
+ "kind": "statement",
+ "title": "Specialization lifting and noncollapse in etale charts of a quasi-separated space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with point topology [def-a1-space-point-topology]. Assume its diagonal $X\\to X\\times_S X$ is quasi-compact on scheme tests, meaning that inverse images of quasi-compact opens are quasi-compact. Let $a:U\\to X$ be any representable etale morphism from a scheme, in the sense of [def-trf-algebraic-space] and [def-weil-etale-morphism]. Write $p\\leadsto q$ when $q$ lies in the closure of $\\{p\\}$. Then $|a|$ is continuous. If $x\\leadsto a(u)$ for $x\\in|X|$ and $u\\in U$, there is $u'\\in U$ with $u'\\leadsto u$ and $a(u')=x$. Moreover, if $u'\\leadsto u$ and $a(u')=a(u)$, then $u'=u$. No surjectivity, finite-type, or Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tags 03IL, lemma-decent-specialization, and 03K5, lemma-decent-no-specializations-map-to-same-point; quasi-separated implies decent by Tag 03JX, lemma-bounded-fibres. Continuity is immediate from the cited final-topology definition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Continuity follows directly from [def-a1-space-point-topology]: inverse images of opens are open under every etale scheme chart, including $a$. For either specialization assertion fix $u\\in U$. Choose an affine open of $S$ containing its image and then an affine open neighbourhood $W\\subset U$ of $u$ mapping into it, using [lem-weil-pbc-affine-opens-basis]. Every generalization of $u$ in $U$ lies in $W$, since opens are stable under generalization. The restricted $p:W\\to X$ remains representable etale: on each scheme test its map is an open immersion followed by the base change of $a$, so use [lem-weil-pbc-etale-composition-cancellation]. Put $R=W\\times_XW$ with projections $s,t$. It is a scheme and $s,t$ are etale by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "def-a1-space-point-topology",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 03K2 and 03IM, beginning of each proof: replace the chart by an affine neighbourhood; the affine-base refinement retains the stated relative hypothesis."
+   }
+  },
+  {
+   "text": "The scheme projections $s,t$ are flat by [def-weil-etale-morphism], hence generalizations lift along them by [lem-weil-pbc-flat-generalizations-lift]. Their fibres are discrete by [lem-weil-pbc-etale-fibre-discrete-separable-points], together with the subspace homeomorphism of [def-pc-scheme-fibre]. Thus comparable points of $R$ having the same $s$-image, or the same $t$-image, coincide: a specialization inside a discrete subspace is equality. Also $W$ has antisymmetric specialization, since two mutually specializing points are generic points of the same irreducible singleton closure and [lem-sc-scheme-sober] makes that generic point unique.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-scheme-fibre",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Remark recall, points (1) and (2), used in Tags 03K2 and 03IM; scheme sobriety supplies antisymmetry."
+   }
+  },
+  {
+   "text": "For the lifting assertion let $x\\leadsto p(u)$. By [lem-sfb-relative-qs-affine-chart-point-fibres], the sets $A=p^{-1}(\\{x\\})$ and $B=(p s)^{-1}(\\{x\\})=(p t)^{-1}(\\{x\\})$ are finite. Set $C=\\bigcup_{w\\in A}\\overline{\\{w\\}}\\subset W$ and $D=\\bigcup_{r\\in B}\\overline{\\{r\\}}\\subset R$. These are closed, and their points are precisely the specializations of members of $A$ and $B$, respectively. This includes empty $A$ or $B$.",
+   "uses": [
+    "lem-sfb-relative-qs-affine-chart-point-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K2, lemma-specialization, finite fibre sets and the closed sets T and T-prime."
+   }
+  },
+  {
+   "text": "We have $s^{-1}(C)=D=t^{-1}(C)$. For example, continuity gives $D\\subset s^{-1}(C)$. If $s(r)\\in C$, choose $w\\in A$ with $w\\leadsto s(r)$. Flat generalization lifting [lem-weil-pbc-flat-generalizations-lift], using etaleness and [def-weil-etale-morphism], gives $r\\prime\\leadsto r$ with $s(r\\prime)=w$; then $r\\prime\\in B$, so $r\\in D$. Repeat for $t$. The continuity and point-surjectivity assertions of [lem-a1-space-point-open-calculus] apply: any two points of $W$ with the same $p$-image are the two projections of a point of $R$. Hence the equality of the two inverse images proves that $C$ is saturated for $p$: if one such point is in $C$, the other is in $C$.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-weil-etale-morphism",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K2, lemma-specialization, proof that the finite-fibre closure is invariant under the relation."
+   }
+  },
+  {
+   "text": "By [lem-a1-space-point-open-calculus], $I=p(W)$ is open in $|X|$ and $p:W\\to I$ is a continuous open surjection. As $C$ is saturated, $I\\setminus p(C)=p(W\\setminus C)$ is open in $I$. Thus $p(C)$ is closed in $I$. The open $I$ contains $p(u)$, so it contains its generalization $x$; therefore $A$ is nonempty and $x\\in p(C)$. Closedness and $x\\leadsto p(u)$ give $p(u)\\in p(C)$. Saturation now gives $u\\in C$. By the definition of $C$ some $u\\prime\\in A$ specializes to $u$, which is the required lift, also as a point of the original $U$.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K2, lemma-specialization, closed invariant set descends to the closure of the general point; saturation yields the chosen lift directly."
+   }
+  },
+  {
+   "text": "For noncollapse take $v_0=u$, $v_1=u\\prime$ with $v_1\\leadsto v_0$ and common image $y$. The fibre $p^{-1}(\\{y\\})$ is finite by [lem-sfb-relative-qs-affine-chart-point-fibres]. By [lem-a1-space-point-open-calculus] choose $r_0\\in R$ with $t(r_0)=v_0$ and $s(r_0)=v_1$. Recursively, given $r_n$ with $t(r_n)=v_n$, $s(r_n)=v_{n+1}$ and $v_{n+1}\\leadsto v_n$, lift this generalization through the flat projection $t$ by [lem-weil-pbc-flat-generalizations-lift] and [def-weil-etale-morphism]. This gives $r_{n+1}\\leadsto r_n$ with $t(r_{n+1})=v_{n+1}$. Define $v_{n+2}=s(r_{n+1})$. Continuity gives $v_{n+2}\\leadsto v_{n+1}$ and $p s=p t$ gives $p(v_{n+2})=y$. This constructs all points in the same finite fibre.",
+   "uses": [
+    "lem-sfb-relative-qs-affine-chart-point-fibres",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03IM, lemma-no-specializations-map-to-same-point, recursive tower of lifted specializations."
+   }
+  },
+  {
+   "text": "If $v_{n+2}=v_{n+1}$, then $s(r_{n+1})=s(r_n)$ and $r_{n+1}\\leadsto r_n$. By the discrete-fibre consequence in step 2, $r_{n+1}=r_n$, and applying $t$ gives $v_{n+1}=v_n$. Thus any adjacent equality propagates backwards to $v_1=v_0$. If $v_1\\ne v_0$, every adjacent pair in the chain is distinct. Any repeated pair $v_i=v_j$ with $i<j$ would, by transitivity and antisymmetry of specialization on $W$, force an adjacent equality. Consequently all $v_n$ would be distinct, contradicting the finite fibre in step 6. Hence $u\\prime=u$. The reduction to $W$ lost no comparable point because $W$ contains every generalization of $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03IM, lemma-no-specializations-map-to-same-point, propagation of equality and contradiction to finite fibres."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-point-topology",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-scheme-fibre",
+  "lem-sc-scheme-sober",
+  "lem-sfb-relative-qs-affine-chart-point-fibres",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tags 03K2 (lemma-specialization) and 03IM (lemma-no-specializations-map-to-same-point), as used by 03IL and 03K5; finiteness under the relative hypothesis uses 03W7 and 03JX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated algebraic space is sober and specializations lift to etale scheme charts with no distinct comparable points in one fibre",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Specialization lifting for etale charts of quasi separated algebraic spaces and sobriety of their point topology",
+   "results": "OK 8 hits: Specialization, PrimeSpectrum.instQuasiSeparatedSpace, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, QuasiSober.mk, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "([Ss]peciali[sz]|[Ss]ober).*(algebraic.?space|[Ee]tale)|(algebraic.?space|[Ee]tale).*([Ss]peciali[sz]|[Ss]ober)",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Specializes\", \"Etale\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a scheme atlas of a quasi separated algebraic space every generalization of an image point lifts to a generalization of the chosen scheme point and comparable points in a fibre coincide; the space is sober",
+   "results": "OK 8 hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.instIsZariskiLocalAtTargetTopologicallyGeneralizingMap, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Scheme.le_iff_specializes, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme sobriety and scheme morphism specialization results do not state the assertions for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space with quasi compact relative diagonal etale scheme charts lift generalizations and have no distinct comparable points in a fibre",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces; scheme-only lifting and discreteness results are reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebraic[Ss]pace|[Aa]lgebraic_[Ss]pace|[Aa]lgebraic [Ss]pace",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces; scheme-only lifting and discreteness results are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale morphism of schemes every generalization of the image of a point lifts to a generalization and fibres contain no strict specializations",
+   "results": "OK 8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces; scheme-only lifting and discreteness results are reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic spaces; scheme-only lifting and discreteness results are reused through existing DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-topological-dimension-local-rings",
+  "date": "2026-10-23",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Specialization lifting and noncollapse in etale charts of a quasi-separated space.",
+   "via": [
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasiseparated-space-etale-specializations",
+  "worker": "stage1",
+  "summary": "Retained the entire statement, including its relative diagonal over an arbitrary base. Wrote the finite-fibre closure descent argument and the recursive noncollapse argument in full. Created one statement-only finiteness prerequisite, with actual logged Mathlib searches; reused scheme flat lifting, fibre discreteness and space point calculus.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Specialization lifting and noncollapse in etale charts of a quasi-separated space. Steps 1-5 realize specialization lifting; steps 6-7 realize noncollapse needed by the chart dimension comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-surjectivity, continuity and openness for algebraic spaces, needed to descend the saturated fibre closure; this unit has no replacement point-calculus lemma."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme etale fibre discreteness, needed to propagate equality in the lifted tower; no theorem about six functors substitutes for this scheme fact."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Step 1 takes only that the sheaf fibre product of the affine chart with itself over the space is represented by a scheme with etale projections (foundational algebraic-space fibre products); no node of this unit states it and no trace-formula argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-7c6633554",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-7c6633554 (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full. Item statement unchanged from live (still unsplit, not superseded); it is true by 03W7 (relative qs gives Zariski-locally qs), then 03JX ζ⇒γ (decent), then 03IL/03K5. Steps 1-7 checked against the cited statements and against the proofs of 03K2/03IM. Step 1: affine W over an affine base open; open immersion composed with etale is etale; R is a scheme with etale projections. Step 2: flat lifting direction is correct; the discrete etale fibre plus def-pc-scheme-fibre's subspace homeomorphism gives equality of comparable points in one fibre; sobriety gives antisymmetry. Steps 3-5: finite A and B; s^-1(C)=D=t^-1(C); saturation via point-surjectivity of |W×_X W|; I∖p(C)=p(W∖C) checked both ways, so p(C) is closed in the open image I and u∈C gives the lift directly (a valid shortening of 03K2's second paragraph). Steps 6-7: the 03IM tower with an explicit inductive hypothesis; backward propagation of equality and antisymmetry rule out repeats, contradicting the finite fibre. New node lem-sfb-relative-qs-affine-chart-point-fibres: true by 03W7 (1)⇒(2), 03JX, 03JV(1); tested on the empty W, Spec k′/Spec k and non-qs A¹/ℤ cases; statement-only; three search kinds recorded; not a duplicate: lem-sfb-space-qc-etale-fibre-bound needs absolute qs and gives no R-fibres, and no node states 03IL/03K2/03IM. Batch 5: every cited trf node (def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, and those reached via lem-a1-space-point-open-calculus and def-a1-space-point-topology) is a general algebraic-space definition or fibre-product foundation, not part of the trace formula or Poincaré duality, so all are accepted. Tool uses lem-a1-space-point-open-calculus and lem-weil-pbc-etale-fibre-discrete-separable-points accepted. FIX: step 1 uses the off-route lem-trf-space-fibre-products-etale-covers (unit sk-i-curve-zero) without declaring it; it was added to split_report.tool_uses in the corrected item file. No SGA citations. blueprint.from.node is null on the item and the new node; this is inherited and matches blueprint_refs ancestor.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-derived-base-change-vertical-pasting",
+ "kind": "statement",
+ "title": "Derived base-change maps compose along stacked cartesian squares",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be quasi-compact and quasi-separated morphisms of schemes and let $m:Z'\\to Z$ be any morphism of schemes [def-pc-scheme]. Form $Y'=Y\\times_ZZ'$ with projections $l:Y'\\to Y$ and $g':Y'\\to Z'$, and $X'=X\\times_YY'$ with projections $k:X'\\to X$ and $f':X'\\to Y'$ [def-pc-fibre-product]; then $X'$, with $k$ and $g'\\circ f'$, is a fibre product of $g\\circ f$ and $m$. Write $\\beta^{\\mathrm{top}}_E:Ll^*Rf_*E\\to Rf'_*Lk^*E$, $\\beta^{\\mathrm{bot}}_M:Lm^*Rg_*M\\to Rg'_*Ll^*M$ and $\\beta^{\\mathrm{out}}_E:Lm^*R(g\\circ f)_*E\\to R(g'\\circ f')_*Lk^*E$ for the canonical derived base-change maps of the upper square, the lower square and the outer rectangle [def-pc-derived-base-change-map, def-pc-derived-pullback, def-pc-derived-direct-image], and $\\rho:R(g\\circ f)_*\\simeq Rg_*Rf_*$, $\\rho':R(g'\\circ f')_*\\simeq Rg'_*Rf'_*$ for the canonical composition isomorphisms [lem-pc-derived-direct-image-composition]. Then for every $E$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], for which $Rf_*E$ lies in $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [lem-pc-derived-direct-image-preserves-qcoh],\n$$\\rho'_{Lk^*E}\\circ\\beta^{\\mathrm{out}}_E=Rg'_*(\\beta^{\\mathrm{top}}_E)\\circ\\beta^{\\mathrm{bot}}_{Rf_*E}\\circ Lm^*(\\rho_E).$$\nNo Tor independence, flatness, properness or invertibility of any base-change map is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0ATL (remark-compose-base-change): the base change maps of the two stacked squares compose to the base change map of the outer rectangle; the verification is omitted there. Restricted here to quasi-compact quasi-separated f, g so that the canonical map of def-pc-derived-base-change-map is defined on the intermediate object."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-derived-direct-image-composition",
+  "def-pc-derived-category",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-sfb-normalized-direct-image-composition-iso"
+ ],
+ "proof": [
+  {
+   "text": "The outer square is cartesian directly from the universal properties: maps $a:T\\to X$, $b:T\\to Z'$ with $gfa=mb$ first determine the unique $y:T\\to Y'$ with $ly=fa$, $g'y=b$, and then the unique $x:T\\to X'$ with $kx=a$, $f'x=y$. Uniqueness follows in the same order. Put $P_h=Lh^*$ and $S_h=Rh_*$. Since $f$ is quasi-compact and quasi-separated, $M=S_fE$ has quasi-coherent cohomology, so both the top map at $E$ and the bottom map at $M$ are in the domain of the stated definition.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0ATL, remark-compose-base-change; explicit verification using the unit definition of base change and Tag 0D5T"
+   }
+  },
+  {
+   "text": "Use the canonical composition isomorphisms $\\kappa$ of [lem-pc-derived-direct-image-composition] to identify composites of the $S_h$; these are the comparisons for the derived direct images of [def-pc-derived-direct-image], characterized by the right-derived unit equation, and they are the comparisons used in [def-pc-derived-base-change-map]. Their reassociations are coherent by [lem-pc-derived-direct-image-composition-associativity]: for three composable morphisms of schemes, the two ways of passing from $S_{hgf}$ to $S_hS_gS_f$, with the transport along associativity of scheme morphisms, agree at every derived object. Thus write $S_fS_k=S_lS_{f'}$, $S_gS_l=S_mS_{g'}$, $S_{gf}=S_gS_f$, and $S_{g'f'}=S_{g'}S_{f'}$ while retaining the canonical comparisons. Concretely the first square comparison is $\\kappa_{l,f'}\\kappa_{f,k}^{-1}$ after the equality transport along $fk=lf'$; the second is $\\kappa_{m,g'}\\kappa_{g,l}^{-1}$ after $gl=mg'$, and the outer one $S_{gf}S_k\\simeq S_mS_{g'f'}$ is defined in the same way after $gfk=mg'f'$. Equality transports are natural, so the associativity law for $(k,f,g)$, $(f',l,g)$ and $(f',g',m)$ identifies the outer comparison, conjugated by $\\rho$ and $\\rho'$, with the composite $S_gS_fS_k\\simeq S_gS_lS_{f'}\\simeq S_mS_{g'}S_{f'}$ of $S_g$ of the first square comparison and the second square comparison at $S_{f'}$; the middle comparison $S_gS_{lf'}$ cancels with its inverse. This justifies all the identifications in the next two steps without asserting strict equality of chosen derived functors.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition",
+    "def-pc-derived-direct-image",
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-direct-image-composition-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0ATL, remark-compose-base-change; explicit verification using the unit definition of base change and Tag 0D5T"
+   }
+  },
+  {
+   "text": "Write $\\eta_h:1\\to S_hP_h$ for the unit of $P_h\\dashv S_h$, and abbreviate $B=\\beta^{\\mathrm{top}}_E$ and $A=\\beta^{\\mathrm{bot}}_{S_fE}$. By the defining unit formula for base change, the adjuncts of these maps are, in the coherent notation of Step 2,\n$$S_l(B)\\circ\\eta_{l,S_fE}=S_f(\\eta_{k,E}),\\qquad S_m(A)\\circ\\eta_{m,S_gS_fE}=S_g(\\eta_{l,S_fE}).$$\nFor example the first equation is an equality from $S_fE$ to $S_lS_{f'}P_kE$; the right side includes the comparison $S_fS_k\\simeq S_lS_{f'}$. These equations are the forward/inverse cancellation of the adjunction Hom bijections, not an assertion that $A$ or $B$ is invertible.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0ATL, remark-compose-base-change; explicit verification using the unit definition of base change and Tag 0D5T"
+   }
+  },
+  {
+   "text": "Take the adjunct under $P_m\\dashv S_m$ of $S_{g'}(B)\\circ A$. Its source is $S_gS_fE$ and its target is $S_mS_{g'}S_{f'}P_kE$. Functoriality and the two equations in Step 3 give\n$$\\begin{aligned}\nS_mS_{g'}(B)\\circ S_m(A)\\circ\\eta_m\n&=S_mS_{g'}(B)\\circ S_g(\\eta_l)\\\\\n&=S_g\\bigl(S_l(B)\\circ\\eta_l\\bigr)\\\\\n&=S_gS_f(\\eta_k).\n\\end{aligned}$$\nIn the middle equality the comparison $S_mS_{g'}\\simeq S_gS_l$ is natural at the morphism $B$. By the defining unit formula, the adjunct of $\\beta^{\\mathrm{out}}_E$ is $S_{gf}(\\eta_{k,E})$ followed by the outer comparison $S_{gf}S_k\\simeq S_mS_{g'f'}$ of Step 2. Hence the adjunct of $\\rho'_{P_kE}\\circ\\beta^{\\mathrm{out}}_E$ is $S_m(\\rho'_{P_kE})$ after it, while by naturality of $\\eta_m$ at $\\rho_E$ the adjunct of $S_{g'}(B)\\circ A\\circ P_m(\\rho_E)$ is the displayed composite after $\\rho_E$. Naturality of $\\rho$ at $\\eta_{k,E}$ and the identification of comparisons at the end of Step 2 show that these two adjuncts are equal. The Hom bijection is injective, so the two maps agree. Restoring the comparisons gives\n$$\\rho'_{P_kE}\\circ\\beta^{\\mathrm{out}}_E=S_{g'}(\\beta^{\\mathrm{top}}_E)\\circ\\beta^{\\mathrm{bot}}_{S_fE}\\circ P_m(\\rho_E).$$\nOnly the composition comparisons were inverted; no base-change morphism was inverted.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-base-change-map",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0ATL, remark-compose-base-change; explicit verification using the unit definition of base change and Tag 0D5T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-direct-image",
+  "def-pc-fibre-product",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-derived-direct-image-composition-associativity",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-ringed-spaces-derived-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Explicit unit/adjunction verification omitted in Tag 0ATL (remark-compose-base-change); canonical direct-image coherence from Tag 0D5T via lem-pc-derived-direct-image-composition-associativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedPushforward|baseChangeMap; theorem mateEquiv_vcomp|mateEquiv_hcomp in Mathlib/CategoryTheory",
+   "results": "0 hits for derivedPushforward|baseChangeMap; CategoryTheory/Adjunction/Mates.lean:170 mateEquiv_vcomp, :209 mateEquiv_hcomp; CategoryTheory/Bicategory/Adjunction/Mate.lean:216, :274",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has the generic pasting of mates but no derived direct image or derived base-change map of schemes; candidate ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_hcomp|derivedPushforward|schemeDerivedBaseChange",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical or underived ingredients only; no scheme-level derived base-change pasting statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change morphisms compose under vertical pasting of squares",
+   "results": "CategoryTheory.Limits.pullbackLeftPullbackSndIso, CategoryTheory.IsPullback.paste_vert, IsBaseChange.comp_iff, IsBaseChange.comp, LinearMap.baseChange_comp, CategoryTheory.Limits.leftSquareIsPullback, CategoryTheory.Square.Hom.comp, CategoryTheory.MorphismProperty.instIsStableUnderBaseChangeAlongCompOfHasPullbacksAlong",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical or underived ingredients only; no scheme-level derived base-change pasting statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical or underived ingredients only; no scheme-level derived base-change pasting statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change morphisms for sheaves of modules compose for two stacked commutative squares of schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical or underived ingredients only; no scheme-level derived base-change pasting statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the adjunction unit proves compatibility of derived pushforward base change maps with composition",
+   "results": "CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, AlgebraicGeometry.Scheme.Modules.pushforwardComp, PresheafOfModules.pushforward_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: generic categorical or underived ingredients only; no scheme-level derived base-change pasting statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-relative-nodal-perfect-duality-trace",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: the base-change map of the composite p=q∘c is the vertical paste of those of c and q, used to compare the right-adjoint base-change maps of c, q and p.",
+   "via": [
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-derived-base-change-vertical-pasting",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the omitted verification of Tag 0ATL using the horizontal unit definition of derived base change, canonical composition coherence, and injectivity of the adjunction Hom bijection. All ingredients already have DAG nodes; no new node is needed. Explicit universal-property proof of the outer cartesian square and domain check for the intermediate quasi-coherent object. No Tor or flatness assumption and no base-change invertibility used.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3): direct-image composition in the alteration/curve prerequisite chain recorded in blueprint.from.place. The imported ancestor chain terminates at null; preserved its existing from.node and via rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic coherent direct-image domain theorem supplies S_f E in D_QCoh; the constructibility unit does not replace it."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Generic scheme O-module direct-image composition is the comparison in the item, not a replacement of the alteration route."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic derived pullback/direct-image Hom bijection compares the specified maps."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition-associativity",
+    "why": "Generic associativity of the scheme derived direct-image composition comparisons justifies the canonical reassociations; the unit has no such coherence statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-derived-direct-image-composition-associativity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-3264440f0",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-3264440f0 (reviewer sub-agent of L); spot-checked: I read the item, the report, Stacks cohomology.tex Tag 0ATL (remark-compose-base-change, line 6673, verification omitted) and every cited statement. Statement and stmt_deps are unchanged against live (live item is unsplit). There are no new nodes and no repair note. The item fits its citer, lem-sfb-relative-nodal-perfect-duality-trace step 7 (f=c, g=q, p=q∘c). Types of both sides check. The qcqs hypothesis on f puts Rf_*E in D_QCoh, which the definition needs. Step 1 (cartesian outer square, via def-pc-fibre-product) and Step 3 (adjunct equations from def-pc-derived-base-change-map and lem-pc-ringed-spaces-derived-adjoint) are correct and elementary. Step 4's chain of equalities is correct. Small cases checked: identity f/g/m, E=0, non-flat m. No step uses invertibility, Tor or flatness. Duplicate search: lem-sc-derived-square-vertical-pasting concerns pullback comparisons, not base-change maps, so it is not a duplicate. FIX 1 (C1/C4): Step 2 got coherence from the ringed-topos cocycle (lem-pur-ringed-derived-composition-cocycle). That needs two bridges no cited node states: that the open-subset topos derived images are the ringed-space ones, and that the topos κ equals the canonical scheme comparison. The scheme-level node lem-pc-derived-direct-image-composition-associativity gives the coherence directly, so Step 2 now cites it and writes the three square comparisons and the associativity triples. FIX 2 (E5): Step 4's 'transported by ρ and ρ′' is replaced by the explicit naturality of η_m at ρ_E and of ρ at η_k. proof_deps are recomputed and the tool_use entry is swapped to the associativity node. Advisory: the outer square uses a non-chosen fibre product; this wording is inherited and harmless.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedBaseChangeVerticalPasting",
+  "declaration": "AlgebraicGeometry.schemeDerivedBaseChange_vertical_pasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBaseChangeVerticalPasting.lean",
+  "statement": "theorem schemeDerivedBaseChange_vertical_pasting [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] {X Y Z X' Y' Z' : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (m : Z' ⟶ Z) [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g] [QuasiSeparated g] (k : X' ⟶ X) (f' : X' ⟶ Y') (l : Y' ⟶ Y) (g' : Y' ⟶ Z') (top : IsPullback k f' f l) (bot : IsPullback l g' g m) (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (hRf : schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E)) : IsPullback k (f' ≫ g') (f ≫ g) m ∧ schemeDerivedBaseChangeMap (f ≫ g) (f' ≫ g') m k (top.paste_vert bot).w E ≫ (schemeNormalizedDirectImageCompIso f' g').inv.app ((derivedPullback k).obj E) = (derivedPullback m).map ((schemeNormalizedDirectImageCompIso f g).inv.app E) ≫ schemeDerivedBaseChangeMap g g' m l bot.w ((schemeDerivedDirectImage f).obj E) ≫ (schemeDerivedDirectImage g').map (schemeDerivedBaseChangeMap f f' l k top.w E)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing schemeNormalizedDirectImageCompIso through def-sfb-normalized-direct-image-composition-iso: its inverse is the canonical rho, fixed by the right-derived unit equation. IsPullback binders express the two fibre-product universal properties; the conclusion includes the outer universal property as well as the map equality. The square-mate theorem is not a statement dependency; its unchanged imported module remains available for the proof route."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c60727b0",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery after the 7cde H2 RETURN: theorem stmt_dep lem-sc-derived-direct-image-square-mate replaced by the new def node def-sfb-normalized-direct-image-composition-iso (existing:true, AlgebraicGeometry.schemeNormalizedDirectImageCompIso, DerivedDirectImageSquareMate.lean:31, branch slopmaster2, signature verbatim from def). Its unit equation matches exists_derivedModuleDirectImageComposition and determines the comparison uniquely, so it is not hollow; no duplicate def node. Lean module byte-identical to 7cde. Checked IsPullback orientations against the schemeDerivedBaseChangeMap h argument, paste_vert outer conjunct, ρ/ρ' direction, the ≫ order matching the Tag 0ATL display, hRf being the node's explicit clause implied by qcqs, independent universes, edge cases. The square-mate theorem shows the base-change map uses this normalized ρ, so the equation is the true one. Item diff vs live: lean field plus the added def-node stmt_dep only; proof is sorry only; docstrings OK; report sections present. Compile not re-run per instructions; worker's scompile and deliver2 dry run passed. Advisory: stage 3 should cite derivedDirectImage_square_mate."
+ }
+}

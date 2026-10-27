@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-cube-section-cubical-compatibility",
+ "kind": "statement",
+ "title": "The cube section is cubical for the induced product-group structure",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $p:G\\to S$ a commutative group scheme with identity $e$, meaning that the addition, inverse and identity morphisms over $S$ satisfy the commutative group identities. Let $\\mathcal L=(L,r,\\tau)$ be a cubical rigidified line [def-sfb-cubical-rigidified-line]. Give $G^3=G\\times_SG\\times_SG$ [def-pc-fibre-product] its componentwise group law. For each $I\\subseteq\\{1,2,3\\}$ let $m_I:G^3\\to G$ be the sum of the coordinates in $I$, with $m_\\varnothing=e\\circ p_3$, where $p_3:G^3\\to S$ is the structure map. Form the cubical rigidified line on $G^3$ \n$$\\mathcal D=\\bigotimes_{I\\subseteq\\{1,2,3\\}}(m_I^*\\mathcal L)^{\\otimes(-1)^{3-|I|}},$$\nwhere pullback is tensor inverse image [def-pc-module-pullback], the tensor product cube section and rigidification are the products of those of the factors, and exponent $-1$ means the dual line with inverse cube section and dual rigidification. The underlying line of $\\mathcal D$ is $\\Theta_3(L)$. The given section $\\tau:\\mathcal O_{G^3}\\xrightarrow{\\sim}\\Theta_3(L)$ is a cubical rigidification-preserving isomorphism from the trivial line with unit rigidification and unit cube section to $\\mathcal D$. In particular this asserts equality of cube sections on $(G^3)^3$, not merely an isomorphism of the underlying invertible modules.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "I §2, cubical structures and their cocycle coherence (especially the definition I 2.4.5); compatibility needed before I 5.5. Local original WANTED. Agent formulation of the nine-variable cube-section interchange identity."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-cubical-rigidified-line",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Every $m_I$ is a homomorphism, since $G$ is commutative, including the zero homomorphism $m_\\varnothing$. Pullback, tensor products and duals give cubical lines as follows: pull back each equality in [def-sfb-cubical-rigidified-line] along the group homomorphism; multiply the equalities for tensor products; invert them for duals. Their symmetry, identity-face restrictions and four-variable cocycle are respectively the pulled-back, multiplied or inverted equalities. The tensor and composite-pullback identifications are supplied by [lem-weil-pbc-invertible-pullback-tensor](1),(2); dual evaluation is locally the pairing of a rank-one generator with its dual. Thus the specified $\\mathcal D$ is a cubical rigidified line, and expanding its eight underlying factors gives exactly $\\Theta_3(L)$.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), supporting cubical-line input below the relative Picard ampleness route. Agent algebraic expansion of Moret–Bailly I 2.4.5 coherence; the local original is WANTED. This combinatorial integration assertion is agent-written, not an assertion in the blueprint."
+   }
+  },
+  {
+   "text": "Put $H=G^3$ and $T=H^3$, with universal coordinates $x_{ij}$ ($1\\leq i,j\\leq3$), row $i$ being the $i$th input of $H$. For subsets $R,C\\subseteq\\{1,2,3\\}$ set $s_{R,C}=\\sum_{i\\in R,j\\in C}x_{ij}$ and $\\epsilon(B)=(-1)^{3-|B|}$. By the definition of the induced cube section, the section of $\\Theta_3^H(\\mathcal D)$ to be compared with $\\Theta_3^H(\\tau)$ is\n$$u=\\bigotimes_C\\tau(s_{\\{1\\},C},s_{\\{2\\},C},s_{\\{3\\},C})^{\\epsilon(C)}.$$\nApplying the eight-factor construction to the isomorphism $\\tau$ itself gives\n$$v=\\bigotimes_R\\tau(s_{R,\\{1\\}},s_{R,\\{2\\}},s_{R,\\{3\\}})^{\\epsilon(R)}.$$\nThe two underlying lines identify, using [lem-weil-pbc-invertible-pullback-tensor](2), with\n$$Q=\\bigotimes_{R,C}s_{R,C}^*L^{\\epsilon(R)\\epsilon(C)}.$$\nThis explicitly identifies the tensor factors and their signs before comparing sections.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), supporting cubical-line input below the relative Picard ampleness route. Agent algebraic expansion of Moret–Bailly I 2.4.5 coherence; the local original is WANTED. This combinatorial integration assertion is agent-written, not an assertion in the blueprint."
+   }
+  },
+  {
+   "text": "Let $E=\\{1,2,3\\}\\times\\{1,2,3\\}$. For each $B\\subseteq E$ form $M_B=(\\sum_{(i,j)\\in B}x_{ij})^*L$ on $T$. These finitely many lines are invertible by [lem-weil-pbc-invertible-pullback-tensor](1). By the locally-free-rank-one definition [def-sc-invertible-module], choose an open cover on which they all have frames $l_B$, using finite intersections of their trivializing covers. Set $l_\\varnothing$ to the frame prescribed by $r$. On any such open $V$, for three disjoint subsets $B_1,B_2,B_3$ let $t(B_1,B_2,B_3)$ be the unit coefficient of $\\tau(\\sum_{B_1}x,\\sum_{B_2}x,\\sum_{B_3}x)$ in the frame\n$$\\frac{l_{B_1\\cup B_2\\cup B_3}l_{B_1}l_{B_2}l_{B_3}}{l_{B_1\\cup B_2}l_{B_1\\cup B_3}l_{B_2\\cup B_3}l_\\varnothing}.$$\nThe definition of $\\tau$ makes $t$ symmetric and $1$ on empty arguments. Its cocycle pulled back along the four disjoint-block sum maps gives precisely the four-subset identity of [lem-sfb-disjoint-cubic-cocycle-integration]: the frames on the two sides have identical factors, which cancel. Apply that lemma to the commutative group $\\Gamma(V,\\mathcal O_T)^\\times$. It gives units $c_B$ with $c_\\varnothing=1$; replace $l_B$ by $l'_B=c_Bl_B$. Its conclusion says exactly that every displayed disjoint-block cube section is now the unit coefficient in the new eight-factor frame.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-sc-invertible-module",
+    "lem-sfb-disjoint-cubic-cocycle-integration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), supporting cubical-line input below the relative Picard ampleness route. Agent algebraic expansion of Moret–Bailly I 2.4.5 coherence; the local original is WANTED. This combinatorial integration assertion is agent-written, not an assertion in the blueprint."
+   }
+  },
+  {
+   "text": "For each fixed $C$, the three subsets $\\{i\\}\\times C$ ($i=1,2,3$) are pairwise disjoint. Thus step 3 expresses its factor of $u$ as\n$$\\bigotimes_R(l'_{R\\times C})^{\\epsilon(R)}.$$\nFor each fixed $R$, the three subsets $R\\times\\{j\\}$ are also pairwise disjoint, so its factor of $v$ is\n$$\\bigotimes_C(l'_{R\\times C})^{\\epsilon(C)}.$$\nConsequently both $u$ and $v$ are the same frame\n$$\\bigotimes_{R,C}(l'_{R\\times C})^{\\epsilon(R)\\epsilon(C)}$$\nof $Q$. Empty $R$ or $C$ cause no exception, since $l'_\\varnothing=l_\\varnothing$ and the normalized cube sections have coefficient $1$. Reordering these finite products uses the symmetry in [lem-weil-pbc-invertible-pullback-tensor](2); in frames it is just commutativity of multiplication of units. Hence $u=v$ on each $V$. The sheaf equality axiom gives equality on $T$, proving the full nine-variable cube-section compatibility.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), supporting cubical-line input below the relative Picard ampleness route. Agent algebraic expansion of Moret–Bailly I 2.4.5 coherence; the local original is WANTED. This combinatorial integration assertion is agent-written, not an assertion in the blueprint."
+   }
+  },
+  {
+   "text": "At the identity of $H$, all eight maps $m_I$ take the value $e$. The induced rigidification of $\\mathcal D$ is obtained by applying $r$ to each signed factor. The identity-face normalization in [def-sfb-cubical-rigidified-line] therefore sends $\\tau(e,e,e)$ to $1$. Hence $\\tau$ preserves rigidifications. It is already an isomorphism of underlying lines because it is nowhere vanishing. The equality $v=u$ is exactly the condition in the same definition for that isomorphism to preserve cube sections. This proves every assertion without assuming properness, smoothness, connectedness or reducedness.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), supporting cubical-line input below the relative Picard ampleness route. Agent algebraic expansion of Moret–Bailly I 2.4.5 coherence; the local original is WANTED. This combinatorial integration assertion is agent-written, not an assertion in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cubical-rigidified-line",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-sc-invertible-module",
+  "lem-sfb-disjoint-cubic-cocycle-integration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Supporting cubical-line prerequisite of paragraph (3); local-frame and disjoint-subset integration proof by O2. Moret–Bailly I 2.4.5 original WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "biextension|cubist|cubical.*(line|invertible)|Theta3|Θ₃",
+   "results": "3 hits: Mathlib/Tactic/CategoryTheory/Coherence/Normalize.lean, Mathlib/Tactic/CategoryTheory/Coherence/Normalize.lean, Mathlib/Tactic/CategoryTheory/Coherence/Normalize.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical cube trivialization of a cubical line bundle preserves its induced cubical structure",
+   "results": "8 hits: Trivialization.instCoeFunForallProd, FiberBundleCore.localTriv, Trivialization, Bundle.Trivial.linearMapAt_trivialization, Bundle.Trivial.trivialization, Pretrivialization.ctorIdx, Trivialization.toPretrivialization, VectorBundleCore.localTriv",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cube\", \"IsInvertible\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Interchange law for cubic structures on invertible sheaves: the third alternating difference section on the three by three product is invariant under transposing the variables",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_fst, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_fst_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_snd, Projectivization.cross_comm, AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cubical line bundle cube section is a morphism of cubical line bundles from the unit to the alternating tensor product of homomorphism pullbacks",
+   "results": "8 hits: Trivialization.linearMapAt, Pretrivialization.linearMapAt, Trivialization.pullback_linear, Trivialization.coe_linearMapAt, Pretrivialization.symmₗ, Pretrivialization.continuousLinearMap.isLinear, Trivialization.linearMapAt_def_of_mem, Trivialization.coe_linearMapAt_of_mem",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; ring Picard groups, tensor powers, topological vector-bundle trivializations, ordinary pullback-triplet cocycles and syntactic coherence expressions do not state a cubical-line theorem. Two semantic phrasings were tried."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|cubist|CubeStructure|Theta3",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types. Cubical invertible sheaves and integration of a symmetric three-variable cocycle on disjoint subsets are not stated. The group-cohomology hits define two-variable cocycles or assume an existing coboundary; the powerset hits only rearrange finite products. Second semantic phrasing also searched. Read LowDegree.lean:625 and :677 and Powerset.lean:32 and :55."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symmetric normalized two cocycle in three variables gives a cube trivialization compatible with tensor pullback on a commutative group scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.IsMulCocycle₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"(f : G × G → M) : Prop\", \"doc\": \"A function $ f : G \\\\times G \\\\to M $ satisfies the 2-cocycle condition if for all $ g, h, j \\\\in G $, the equation $ f(gh, j) \\\\cdot f(g, h) = g \\\\cdot f(h, j) \\\\cdot f(g, hj) $ holds, where $ \\\\cdot $ deno\"}\n  {\"name\": \"groupCohomology.cocyclesOfIsCocycle₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{f : G × G → A} (hf : IsCocycle₂ f) : cocycles₂ (Rep.ofDistribMulAction k G A)\", \"doc\": \"For any commutative ring $k$, group $G$, and $k$-module $A$ with a $G$-action compatible with scalar multiplication, a function $f : G \\\\times G \\\\to A$ satisfying the 2-cocycle condition $f(gh, j) + f(\"}\n  {\"name\": \"groupCohomology.IsCocycle₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"(f : G × G → A) : Prop\", \"doc\": \"A function $ f : G \\\\times G \\\\to A $ satisfies the 2-cocycle condition if for all $ g, h, j \\\\in G $, the equation $ f(gh, j) + f(g, h) = g \\\\cdot f(h, j) + f(g, hj) $ holds, where $ \\\\cdot $ denotes the \"}\n  {\"name\": \"LieModule.Cohomology.mem_twoCocycle_iff\", \"module\": \"Mathlib.Algebra.Lie.Cochain\", \"type\": \"(a : twoCochain R L M) : a ∈ twoCocycle R L M ↔ d₂₃ R L M a = 0\", \"doc\": \"A bilinear map $ c : L \\\\times L \\\\to M $ satisfying $ c(x,x) = 0 $ for all $ x \\\\in L $ belongs to the space of 2-cocycles in Lie module cohomology if and only if the coboundary operator $ d_{2,3} $ app\"}\n  {\"name\": \"groupCohomology.cocyclesOfIsCocycle₂_coe\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"∀ {k G A : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : AddCommGroup A] [inst_3 : Module k A]\\n  [inst_4 : DistribMulAction G A] [inst_5 : SMulCommClass G k A] {f : G × G → A} (hf : groupCohomology.IsCocycle₂ f)\\n  (a : G × G), ↑(groupCohomology.cocyclesOfIsCocycle₂ hf) a = f a\", \"doc\": \"For any commutative ring $k$, group $G$, and $k$-module $A$ with a $G$-action compatible with scalar multiplication, a function $f : G \\\\times G \\\\to A$ satisfying the 2-cocycle condition $f(gh, j) + f(\"}\n  {\"name\": \"groupCohomology.isCocycle₂_of_mem_cocycles₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"(f : G × G → A) (hf : f ∈ cocycles₂ (Rep.ofDistribMulAction k G A)) : IsCocycle₂ f\", \"doc\": \"If a function $ f : G \\\\times G \\\\to A $ belongs to the submodule of 2-cocycles in group cohomology, then it satisfies the 2-cocycle condition $ f(gh, j) + f(g, h) = g \\\\cdot f(h, j) + f(g, hj) $ for all\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(i j k : 𝒰.I₀) :\\n  t' 𝒰 f g i j k ≫ t' 𝒰 f g j k i ≫ t' 𝒰 f g k i j ≫ pullback.fst _ _ ≫ pullback.snd _ _ =\\n    pullback.fst _ _ ≫ pullback.snd _ _\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the symmetry-adjusted pullback isomorphisms $t'$\"}\n  {\"name\": \"groupCohomology.cocyclesOfIsMulCocycle₂\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \"{f : G × G → M} (hf : IsMulCocycle₂ f) : cocycles₂ (Rep.ofMulDistribMulAction G M)\", \"doc\": \"For any group $ G $ and commutative group $ M $ equipped with a multiplicative distributive action of $ G $, any function $ f : G \\\\times G \\\\to M $ satisfying the 2-cocycle condition $ f(gh, j) \\\\cdot f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types. Cubical invertible sheaves and integration of a symmetric three-variable cocycle on disjoint subsets are not stated. The group-cohomology hits define two-variable cocycles or assume an existing coboundary; the powerset hits only rearrange finite products. Second semantic phrasing also searched. Read LowDegree.lean:625 and :677 and Powerset.lean:32 and :55."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cubical\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types. Cubical invertible sheaves and integration of a symmetric three-variable cocycle on disjoint subsets are not stated. The group-cohomology hits define two-variable cocycles or assume an existing coboundary; the powerset hits only rearrange finite products. Second semantic phrasing also searched. Read LowDegree.lean:625 and :677 and Powerset.lean:32 and :55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cubical line bundle cube section preserves the induced cubical structure on the alternating tensor product of its homomorphism pullbacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Pretrivialization.continuousLinearMap\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"{𝕜₁ : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜₁] →\\n    {𝕜₂ : Type u_2} →\\n      [inst_1 : NontriviallyNormedField 𝕜₂] →\\n        (σ : 𝕜₁ →+* 𝕜₂) →\\n          {B : Type u_3} →\\n            {F₁ : Type u_4} →\\n              [inst_2 : NormedAddCommGroup F₁] →\\n                [inst_3 : NormedSpace 𝕜₁ F\", \"doc\": \"A pretrivialization for the space of continuous linear maps between two vector bundles, constructed by composing the continuous linear maps associated to two given trivializations $e_1$ and $e_2$. Thi\"}\n  {\"name\": \"Trivialization.pullback_linear\", \"module\": \"Mathlib/Topology/VectorBundle/Constructions\", \"type\": \"∀ (𝕜 : Type u_2) {B : Type u_3} {F : Type u_4} {E : B → Type u_5} {B' : Type u_6} [inst : TopologicalSpace B']\\n  [inst_1 : TopologicalSpace (Bundle.TotalSpace F E)] [inst_2 : NontriviallyNormedField 𝕜]\\n  [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] [inst_5 : TopologicalSpace B]\\n  [inst\", \"doc\": \"Given a linear trivialization $ e $ of a vector bundle $ E $ over $ B $ and a continuous map $ f : B' \\to B $, the pullback trivialization of $ e $ along $ f $ is also linear with respect to the module\"}\n  {\"name\": \"Trivialization.linearMapAt\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : Semiring R] →\\n          [inst_1 : TopologicalSpace F] →\\n            [inst_2 : TopologicalSpace B] →\\n              [inst_3 : TopologicalSpace (Bundle.TotalSpace F E)] →\\n                [inst_4 : AddCom\", \"doc\": \"Given a linear trivialization $ e $ of a vector bundle and a base point $ b $, this function returns the linear map from the fiber $ E_b $ over $ b $ to the model fiber $ F $, induced by the trivializ\"}\n  {\"name\": \"Pretrivialization.IsLinear\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : Semiring R] →\\n          [inst_1 : TopologicalSpace F] →\\n            [inst_2 : TopologicalSpace B] →\\n              [inst_3 : AddCommMonoid F] →\\n                [Module R F] →\\n                  [inst_5 \", \"doc\": \"A predicate asserting that a pretrivialization of a fiber bundle is linear, meaning it preserves the $R$-module structure on fibers $E_x$ and the fiber $F$, where $R$ is a semiring, $B$ is a topologic\"}\n  {\"name\": \"Pretrivialization.linearMapAt\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : Semiring R] →\\n          [inst_1 : TopologicalSpace F] →\\n            [inst_2 : TopologicalSpace B] →\\n              [inst_3 : AddCommMonoid F] →\\n                [inst_4 : Module R F] →\\n                 \", \"doc\": \"Given a linear pretrivialization $ e $ of a vector bundle over base space $ B $ with fiber $ F $, and for any point $ b \\\\in B $, this function returns the linear map from the fiber $ E_b $ to $ F $. I\"}\n  {\"name\": \"Pretrivialization.continuousLinearMap.isLinear\", \"module\": \"Mathlib/Topology/VectorBundle/Hom\", \"type\": \"∀ {𝕜₁ : Type u_1} [inst : NontriviallyNormedField 𝕜₁] {𝕜₂ : Type u_2} [inst_1 : NontriviallyNormedField 𝕜₂]\\n  (σ : 𝕜₁ →+* 𝕜₂) {B : Type u_3} {F₁ : Type u_4} [inst_2 : NormedAddCommGroup F₁] [inst_3 : NormedSpace 𝕜₁ F₁]\\n  {E₁ : B → Type u_5} [inst_4 : (x : B) → AddCommGroup (E₁ x)] [inst_5 : (x : B) \", \"doc\": \"For a vector bundle with fibers over a nontrivially normed field $\\\\mathbb{K}$, the continuous linear map associated with a pretrivialization is linear over $\\\\mathbb{K}$. This holds when addition and s\"}\n  {\"name\": \"Trivialization.coe_linearMapAt\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"∀ {R : Type u_1} {B : Type u_2} {F : Type u_3} {E : B → Type u_4} [inst : Semiring R] [inst_1 : TopologicalSpace F]\\n  [inst_2 : TopologicalSpace B] [inst_3 : TopologicalSpace (Bundle.TotalSpace F E)] [inst_4 : AddCommMonoid F]\\n  [inst_5 : Module R F] [inst_6 : (x : B) → AddCommMonoid (E x)] [inst_7 \", \"doc\": \"For a linear trivialization $ e $ of a vector bundle and a base point $ b $, the coercion of the linear map $ e.linearMapAt(b) $ is equal to the function that sends $ y $ to the second component of $ \"}\n  {\"name\": \"Trivialization.IsLinear\", \"module\": \"Mathlib/Topology/VectorBundle/Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : Semiring R] →\\n          [inst_1 : TopologicalSpace F] →\\n            [inst_2 : TopologicalSpace B] →\\n              [inst_3 : TopologicalSpace (Bundle.TotalSpace F E)] →\\n                [inst_4 : AddCom\", \"doc\": \"A property of a trivialization stating that it is linear with respect to the module structures on the fibers, i.e., the local trivialization maps are linear isomorphisms between the fiber and the base\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types. Cubical invertible sheaves and integration of a symmetric three-variable cocycle on disjoint subsets are not stated. The group-cohomology hits define two-variable cocycles or assume an existing coboundary; the powerset hits only rearrange finite products. Second semantic phrasing also searched. Read LowDegree.lean:625 and :677 and Powerset.lean:32 and :55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Third finite differences of a symmetric cocycle are invariant under transposing a three by three matrix of arguments",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.cocycles₂.d₂₃_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (x : ↥(groupCohomology.cocycles₂ A)),\\n  (CategoryTheory.ConcreteCategory.hom (groupCohomology.d₂₃ A)) ⇑x = 0\", \"doc\": \"For a commutative ring $k$, group $G$, and $k[G]$-representation $A$, applying the second differential $d_{2,3}$ to any 2-cocycle $x$ results in zero, i.e., $d_{2,3}x = 0$.\"}\n  {\"name\": \"LieModule.Cohomology.d₂₃\", \"module\": \"Mathlib/Algebra/Lie/Cochain\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    (L : Type u_2) →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          (M : Type u_3) →\\n            [inst_3 : AddCommGroup M] →\\n              [inst_4 : Module R M] →\\n                [inst_5 : LieRingModule L M] →\\n                  [Li\", \"doc\": \"The linear map $ d_{2,3} $ that sends a 2-cocycle $ c : L \\\\times L \\\\to M $ to the trilinear map $ (x, y, z) \\\\mapsto [x, c(y, z)] - [y, c(x, z)] + [z, c(x, y)] - c([x, y], z) + c([x, z], y) - c([y, z],\"}\n  {\"name\": \"groupCohomology.d₂₃_hom_apply\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (A : Rep k G) (f : G × G → ↑A.V) (g : G × G × G),\\n  (ModuleCat.Hom.hom (groupCohomology.d₂₃ A)) f g =\\n    (A.ρ g.1) (f g.2) - f (g.1 * g.2.1, g.2.2) + f (g.1, g.2.1 * g.2.2) - f (g.1, g.2.1)\", \"doc\": \"For a commutative ring $k$, group $G$, and $k[G]$-representation $A$, the second differential $d_{2,3}$ is a $k$-linear map from the module of 2-cochains $G \\\\times G \\\\to A$ to the module of 3-cochains\"}\n  {\"name\": \"LieModule.Cohomology.d₂₃_apply\", \"module\": \"Mathlib/Algebra/Lie/Cochain\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (L : Type u_2) [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  (a : ↥(LieModule.Cohomology.twoCochain R L M)) (x y z : L),\\n  ((((LieModule.Co\", \"doc\": \"For a 2-cocycle $ a: L \\\\times L \\\\to M $ in Lie module cohomology and elements $ x,y,z \\\\in L $, the coboundary operator $ d_{2,3} $ satisfies:\\n$$\\n(d_{2,3}a)(x,y,z) = [x,a(y,z)] - [y,a(x,z)] + [z,a(x,y)\"}\n  {\"name\": \"groupCohomology.cocycles₂_ρ_map_inv_sub_map_inv\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (f : ↥(groupCohomology.cocycles₂ A)) (g : G),\\n  (A.ρ g) (f (g⁻¹, g)) - f (g, g⁻¹) = f (1, 1) - f (g, 1)\", \"doc\": \"For any 2-cocycle $ f : G \\\\times G \\\\to A $ and any element $ g \\\\in G $, the following identity holds: $ \\\\rho_g(f(g^{-1}, g)) - f(g, g^{-1}) = f(1, 1) - f(g, 1) $, where $ \\\\rho_g $ denotes the action o\"}\n  {\"name\": \"groupCohomology.mem_cocycles₂_def\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (f : G × G → ↑A.V),\\n  f ∈ groupCohomology.cocycles₂ A ↔ ∀ (g h j : G), (A.ρ g) (f (h, j)) - f (g * h, j) + f (g, h * j) - f (g, h) = 0\", \"doc\": \"A function $ f : G \\\\times G \\\\to A $ belongs to the submodule of 2-cocycles in group cohomology if and only if for all $ g, h, j \\\\in G $, the following identity holds: $ \\\\rho(g)(f(h, j)) - f(g h, j) + \"}\n  {\"name\": \"groupCohomology.IsCocycle₂\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"{G : Type u_1} → {A : Type u_2} → [Mul G] → [AddCommGroup A] → [SMul G A] → (G × G → A) → Prop\", \"doc\": \"A function $ f : G \\\\times G \\\\to A $ satisfies the 2-cocycle condition if for all $ g, h, j \\\\in G $, the equation $ f(gh, j) + f(g, h) = g \\\\cdot f(h, j) + f(g, hj) $ holds, where $ \\\\cdot $ denotes the \"}\n  {\"name\": \"groupCohomology.mem_cocycles₂_iff\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (f : G × G → ↑A.V),\\n  f ∈ groupCohomology.cocycles₂ A ↔ ∀ (g h j : G), f (g * h, j) + f (g, h) = (A.ρ g) (f (h, j)) + f (g, h * j)\", \"doc\": \"A function $ f : G \\\\times G \\\\to A $ belongs to the submodule of 2-cocycles in group cohomology if and only if for all $ g, h, j \\\\in G $, the cocycle condition $ f(gh, j) + f(g, h) = g \\\\cdot f(h, j) + \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned names and types. Cubical invertible sheaves and integration of a symmetric three-variable cocycle on disjoint subsets are not stated. The group-cohomology hits define two-variable cocycles or assume an existing coboundary; the powerset hits only rearrange finite products. Second semantic phrasing also searched. Read LowDegree.lean:625 and :677 and Powerset.lean:32 and :55."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cubical-symmetric-multiplication-square",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Multiplication pulls a symmetric cubical line back to its square-exponent power; coherence input: the cube section itself preserves the induced cube structures on the product group, before evaluating it on diagonal homomorphisms.",
+   "via": [
+    "lem-sfb-cubical-symmetric-multiplication-square",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-cube-section-cubical-compatibility",
+  "worker": "stage1",
+  "summary": "Kept the full general-base statement. Expanded both nine-variable sections into the same rectangle-indexed tensor. Isolated only the genuine algebraic integration lemma for symmetric cocycles on disjoint subsets, used to choose compatible local frames; equality and rigidification are then explicit. Checked live Lean/DAG/blueprint, all cited statements and Mathlib, with exact recorded searches and finite-characteristic small cases.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images paragraph (3), through the alteration/Picard/cubical supporting chain in blueprint.from.place. This split supplies the coherence prerequisite of multiplication-square step 2. The latest abelian-variety multiplication proof only gives underlying lines and is not substituted for the cubical statement. The inherited blueprint ancestor is null; ancestor command confirms it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic tensor/composite-pullback/symmetry identities and invertibility of line pullbacks, used on the nine-variable scheme. No lemma in this unit states these module identities."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-5ea53409d",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-5ea53409d (reviewer sub-agent of L); spot-checked: Read the item, the new node, all cited statements (def-sfb-cubical-rigidified-line, lem-weil-pbc-invertible-pullback-tensor (1)-(3), def-sc-invertible-module, def-pc-module-pullback, def-sfb-finite-infinite-set) and the citer multiplication-square steps 2 and 4. The statement is the unchanged seed and is not weakened: D's signs reproduce Θ_3. Steps 1-5 are correct. Step 2: u is the cube section of D read through m_C, v is Θ_3^H(τ)(1) read through m^H_R, and both land in Q via s_{R,C}. Step 3: I expanded the frame products myself; both sides of the def's cocycle give l_{UVWZ}l_Ul_Vl_Wl_Z^2/(l_{UZ}l_{VZ}l_{WZ}l_{UVW}l_∅^2), and the direction l'=c·l is right since t=δ3c. Step 4: the blocks {i}×C and R×{j} are disjoint, so u and v are the same 64-factor frame; empty R or C give l_∅. Step 5: r applied factorwise agrees with the evaluation cancellation. New node lem-sfb-disjoint-cubic-cocycle-integration: statement-only, self-contained, a real lemma rather than a restatement, and no duplicate found by rg -L over dag/nodes. Its integral induction is valid: the residual is constant on 3-block partitions by the four-block cocycle and connectivity, and δ3c satisfies the hypotheses as a coboundary in the first two variables. My own F_2/F_3 linear-algebra check for |E|≤5 found solution space = image of δ3 (dims 0,0,0,1,5,16). Moret-Bailly is not in literature/ (WANTED), so the proof is correctly marked agent-written; no SGA is cited. Tool use of lem-weil-pbc-invertible-pullback-tensor for generic pullback/tensor identities accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CubeSectionCubicalCompatibility",
+  "declaration": "AlgebraicGeometry.CubicalLine.cube_section_cubical_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.CubicalLine.cubePoints",
+   "AlgebraicGeometry.CubicalLine.cubePointsRepresentable",
+   "AlgebraicGeometry.CubicalLine.cube_commGrpObj",
+   "AlgebraicGeometry.CubicalLine.frameInverse",
+   "AlgebraicGeometry.CubicalLine.Word.tensorFrame",
+   "AlgebraicGeometry.CubicalLine.identityFrame",
+   "AlgebraicGeometry.CubicalLine.unitFrame",
+   "AlgebraicGeometry.CubicalLine.inducedCubeValue",
+   "AlgebraicGeometry.CubicalLine.InducedCubeSection",
+   "AlgebraicGeometry.CubicalLine.cube_section_cubical_compatibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CubeSectionCubicalCompatibility.lean",
+  "statement": "theorem cube_section_cubical_compatibility {S : Scheme.{u}} (G : Over S) [CommGrpObj G] (L : CubicalRigidifiedLine G) : (theta G L.line).IsInvertible ∧ ∃ (r : (Scheme.Modules.tensorPullback (η[cube G]).left).obj (theta G L.line) ≅ 𝟙_ S.Modules) (σ : 𝟙_ (cube (cube G)).left.Modules ≅ theta (cube G) (theta G L.line)) (ε : 𝟙_ (cube (cube G)).left.Modules ≅ theta (cube G) (𝟙_ (cube G).left.Modules)), r.hom = (thetaWord G).frameMap (η[cube G]).left L.line (identityFrame L) ∧ InducedCubeSection L σ ∧ Compatible σ ∧ ε.inv = ((Scheme.Modules.tensorPullbackSectionId (cube (cube G)).left).app (theta (cube G) (𝟙_ (cube G).left.Modules))).inv ≫ (thetaWord (cube G)).frameMap (𝟙 _) (𝟙_ (cube G).left.Modules) (unitFrame (cube (cube G)).left) ∧ Compatible ε ∧ (Scheme.Modules.tensorPullback (η[cube G]).left).map L.sectionIso.hom ≫ r.hom = (pullbackUnit (η[cube G]).left).hom ∧ ε ≪≫ (thetaWord (cube G)).mapIso L.sectionIso = σ",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The induced rigidification, tensor-product cube section, and unit cube section are specified by their finite local-frame formulas; the last two equations express precisely preservation by the given sectionIso. Helpers construct the componentwise group law on the existing cube and its frame evaluations. No arbitrary comparison is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ec06a04c",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read item node, report (Worker report + Second reading by Q29), delivered module CubeSectionCubicalCompatibility.lean, the dep CubicalRigidifiedLine module (identical to live) and dep records. Clause match: arbitrary S, [CommGrpObj G] on Over S, CubicalRigidifiedLine L; componentwise group law on cube G built via CommGrpObj.ofRepresentableBy (no competing instance); theta = Θ_3 with correct 8 signs incl. empty set; r pinned by frameMap at η_H with identityFrame (product/dual rigidification); σ pinned by InducedCubeSection (frames agree at s_{J,I}, = node's u), Compatible σ; ε pinned as canonical unit section, Compatible ε; last two equations are exactly CubicalRigidifiedLine.Iso.rigidification/cube with lineIso = L.sectionIso, i.e. the nine-variable u=v equality on (G^3)^3. No hollow defs (zero branches only at untested partial-frame entries), sorry only, docstrings with source/blueprint and 5-step proof, statement verbatim, node differs from side-live only in lean, no universe restriction or extra hypotheses. No file changed, no compile run. Minor: def-sc-invertible-module only transitive via cubical-line dep; acceptable."
+ }
+}

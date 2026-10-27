@@ -1,0 +1,56 @@
+# Stage-1 delivery: lem-pur-condensed-open-counit-realization
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-condensed-open-counit-realization.json`: unchanged statement, six proof steps, status split; no Mathlib match.
+- `dag/nodes/sec-smooth-purity/lem-pur-compact-support-realization-factorization.json`: one new statement-only lemma, unsplit; no Mathlib match. It records proper/open factor normalization over arbitrary positive-characteristic fields, including the reconstruction unit and the identity-proper specialization.
+- `citations.json`: a verbatim statement quotation for every node used by every item proof step.
+- `report.md`: this report.
+
+## Attachments
+
+None. I searched `lean/WeilConjectures/` both for `(blueprint: lem-pur-condensed-open-counit-realization)` and for realization/open/counit terminology. `AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenImmersionLowerShriekUpperStarAdjunction` in `SixFunctors/ProEtale/ModuleObject/Derived/OpenImmersionLowerShriek.lean` constructs the condensed adjunction but does not compare it with completed strict towers. The open projection and essential-image declarations likewise do not state the item. No project declaration found supplies every clause.
+
+## WANTED
+
+None. This is an agent-written assembly proof and explicitly says so. The new factorization statement is an agent-formulated normalization of specified comparisons, not a theorem claimed verbatim from Bhatt–Scholze.
+
+## Problems found and corrected
+
+The imported statement is retained without changes. Its empty proof omitted two substantial issues: identifying its particular map b with the ordinary scalar/open comparison, and proving the counit square for that comparison. A natural isomorphism between compact-support functors alone does not settle either issue. In particular the statement of `lem-pur-compact-support-condensed-realization` asserts a specified comparison but its ordered factorization is only exposed in its proof. I did not cite that proof as though it were a statement: the new statement-only factorization node records precisely the required interface. The similar existing factor-normalization node assumes k is an algebraic closure of a finite field, which the item does not assume.
+
+The nearest-ancestor tool prints `blueprint.from.node = None`: this item was created below a chain leading to an isolated upstream target rather than an imported blueprint node. I retained null, preserved its existing via chain, and gave a specific place in sk-thm-purity-transport proof Steps 2–3 in both blueprint.from.place fields. Whole-blueprint searches for open counit, realization counit, scalar extension, compact-support realization, factor normalization, compact support scalar, compactification coefficient and coefficient projection found no exact imported equivalent. The latest blueprint's current condensed-stage route is followed; no older blueprint snapshot or forbidden purity route is used.
+
+## Not duplicates
+
+lem-pur-compact-support-realization-factorization vs lem-zl-compact-support-realization-factor-normalization: the existing node assumes k=algebraic closure of a finite field and additionally normalizes integral word generators and their composition maps. The new node applies over every positive-characteristic field, records just the two compactification coefficient factorization equalities and their strict reduction-unit normalization, and includes identity-proper cancellation. It is needed here because the item's k need not be algebraic over a finite field; the narrower existing theorem cannot be specialized to this setting.
+
+lem-pur-compact-support-realization-factorization vs lem-pur-compact-support-condensed-realization: the latter asserts the existence of specified natural compact-support isomorphisms, reduction comparisons and coefficient coherences, but does not state their factorization through the ordinary proper/open composite, q, or the equation alpha R(q)=rho. The new node exposes that normalization as a statement. It does not assert the open-adjunction counit square or the Tate unit normalization of this item.
+
+lem-pur-compact-support-realization-factorization vs lem-sf-open-tensor-normalization: the latter supplies generic ringed open-unit adjuncts and tensor comparisons, with no completed compact-support reconstruction or identification of a and xi. Its general open comparisons are reused rather than recreated.
+
+lem-pur-compact-support-realization-factorization vs lem-sf-integral-open-reduction-comparison: the latter normalizes d_j and the actual integral open adjunction against strict reduction; it does not identify compact-support scalar realization a or the condensed field projection xi. The new factorization node uses it only for the open specialization.
+
+## Review by NB
+
+I read AGENTS.md, the worker and stage-1 contracts, the three blueprint levels in SETUP.md, GOAL.md, the chapter and unit records, and delivery-errors.md B–E in full. I also read the latest chapter and sk-thm-purity-transport statement and proof. For the item I used that proof's Steps 2–3 only as motivation; the proof below it is explicitly by an agent. I read Stacks Tag 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor) and Tag 0E8I (sites-modules.tex, lemma-j-shriek-and-tensor), including the latter's Hom-chain proof. They explain the open tensor comparison used by the existing general lemma. I read Bhatt–Scholze Definition 6.7.6, Lemma 6.7.7, Proposition 6.8.14(2) and Remark 6.8.15 for the new node, and the construction Steps 2–5, 6 and 13 of the existing compact-support realization node for its intended factorization. Those sources provide the normalization route, not an assertion that comparison formulas follow from matching endpoints.
+
+For Step 1 I opened the finite-type/noetherian, dimension, integral compact-support preservation, immersion pullback and integral open reduction statements. Finite type over a field gives exactly their noetherian finite-dimensional hypotheses; p differs from ell, and a noetherian open is quasi-compact. The preservation theorem includes compatible etale-origin witnesses. Completeness of restriction and its actual finite projections come from the immersion theorem. The bounded-constructible definition allows the elementary restriction of its local models and witness isomorphisms. The restricted condensed functor statement expressly restricts the ambient adjunctions as well as the functors. I did not silently replace a completed coefficient sheaf by the constant Z_l sheaf.
+
+For Step 2 I read the whole section-derived open-adjunction normalization statement: it supplies the specified derived Hom bijections, not only an ordinary module equivalence. The realization statement says J is actual coefficient extension. The successive scalar-extension statement gives the normalized multiplication map on flat-term K-flat representatives; the derived tensor/pullback statement guarantees the pulled-back representatives are still K-flat. These statements suffice to identify the specified s, including its coefficient maps. No finite-stage faithfulness is used.
+
+Step 3 uses the new factorization statement and the stated formula for d_j. I checked the types of q, alpha, r_j and t=d_j L(alpha)u. Naturality gives t q=d_j L(r_j)u=1, so t is exactly q inverse. It follows that the J(q inverse) factor in a cancels the V(t inverse) factor in the prescribed b. This cancellation is necessary because simply calling a natural comparison canonical would leave an arbitrary automorphism. The factorization node has no proof or proof dependencies; the source construction retained in this report tells its future worker what to establish.
+
+For Step 4 I opened the complete open tensor-normalization statement. It applies to arbitrary ring sheaves and unbounded derived categories and says that the inverse scalar/open comparison is the open-unit adjunct. That is the exact normalization used in the displayed unit identity. I compared the two maps from j_!F_Uj^*L by their adjunction transposes, wrote both transposes and used naturality and the two triangle identities. This is a formal calculation from that stated normalization, not a second new geometric lemma. There is no assumption that the coefficient map is flat or that its rings are finite.
+
+Step 5 substitutes the two scalar/open counit equations from Step 4 and uses naturality of delta for the restriction comparison. I checked the order of both b factors and both s factors: the resulting middle expression is the E-coefficient counit square, and its scalar image is V(epsilon_R). The section equivalence in Step 2 and full constructible inclusions reflect the equality. Step 1 already identifies the integral epsilon with the actual reduction/total-limit-normalized strict-system counit, so this proof does not choose lifts with prescribed evaluations.
+
+For Step 6 I opened the full Tate-realization and strong-monoidal pullback statements. The d=0 clause of the former specifies coefficient multiplication on the realized unit. Restriction of the same balanced tensor maps sends a local tensor b tensor (e tensor r) to that same tensor, whose product is ber restricted to U on both sides. The latter theorem specifies the pullback unit comparison, so the direction required here is its inverse. This verifies the item's last clause without assuming a monoidal structure on an unspecified equivalence.
+
+I checked small cases for the new node and for the assembly. For g=id the proper factors disappear and rho=r_j; for j=id the open scalar comparison is the scalar unitor. If both are identities then q is the actual reconstruction unit and alpha R(q)=1 is the adjunction triangle. For K=0 or the empty open all asserted arrows are between zero objects. If F=E the coefficient factors are units. These cases do not require nonempty schemes, positive rank, an algebraically closed base, or a finite base field. The new statement does not restate the item's counit equation or its Tate normalization. All item steps are shorter than 2000 characters; no long inline comparison lemma is hidden. Every cited node's statement was opened and is quoted verbatim in citations.json. No Lean was written or compiled, and no repository or launcher file was changed.
+
+Mathlib searches were run with the required msearch.py command, with two independent phrasings before the negative conclusion. I read the hits: ordinary module extension/restriction counits, sheaf pushforward adjunctions, discrete/solid condensed objects, Kan extensions, topological function support, and scheme normalization do not state either the new compactification factorization or the item. The file and line hits in Mathlib's ChangeOfRings.lean and Condensed/Discrete/Characterization.lean confirm those different domains. All searches recorded for the new node are actual entries in searches.jsonl; inherited item search records are preserved. No Mathlib leaf is claimed.
+
+## Unfinished work
+
+The new factorization lemma is deliberately unsplit for a future worker, as required for one-level splitting. No part of this item's assembly proof is deferred to an unstated counit-normalization assertion. Delivery validation remains to be recorded below.

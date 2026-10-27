@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-abelian-product-axis-rigidity",
+ "kind": "statement",
+ "title": "A map from a smooth product to an abelian variety is determined by its axes",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $V,W$ be smooth separated geometrically integral finite-type $k$-schemes [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-geometrically-irreducible, def-weil-finite-type-morphism], where separated means the diagonal is a closed immersion. Let $v_0\\in V(k)$ and $w_0\\in W(k)$ [def-pc-rational-point]. Let $A/k$ be an abelian variety [def-sc-abelian-variety], with identity $0:\\operatorname{Spec}k\\to A$. Suppose $h:V\\times_k W\\to A$ is a $k$-morphism [def-pc-fibre-product] whose composites with $V\\times\\{w_0\\}\\to V\\times_kW$ and $\\{v_0\\}\\times W\\to V\\times_kW$ are both the constant identity morphism. Then $h$ is the constant identity morphism on $V\\times_kW$. Neither $V$ nor $W$ is required to be proper.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Theorem 3.4, printed p.18; the proof uses Lemmas 3.5 and 3.6. Specialization to an algebraically closed ground field and identity value."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-pc-rational-point",
+  "def-sc-abelian-variety",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "We first record the geometric hypotheses for the products used below. The product of two smooth $k$-schemes is smooth: its projection is smooth by [lem-pc-proper-base-change](2), and its structure map is smooth by [lem-trf-smooth-composition]. It is of finite type when the factors are, by [lem-sfb-finite-type-composition-base-change]. In particular $V\\times_kW$ is reduced by [lem-trf-smooth-geometrically-normal]. An abelian variety is proper, hence separated and of finite type, by [def-sc-abelian-variety] and [def-weil-proper-morphism].",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-trf-smooth-geometrically-normal",
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 3.4 and its proof, printed pp.18–19; Theorem 3.2, Lemmas 3.5–3.6 and Theorem 1.1."
+   }
+  },
+  {
+   "text": "The products of separated factors below are separated. Indeed their diagonal, after reordering the four factors, is the product of the two diagonals. Affine-locally its ideal is the sum of the two pulled-back diagonal ideals: the map from the coordinate ring onto the quotient by that sum is surjective. This is precisely the affine-local criterion for a closed immersion in [def-weil-closed-immersion]. Thus the diagonal is closed, as required by [def-weil-proper-morphism]. This argument applies to $V\\times_kW$ and to $\\overline C\\times_kW$ below.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 3.4 and its proof, printed pp.18–19; Theorem 3.2, Lemmas 3.5–3.6 and Theorem 1.1."
+   }
+  },
+  {
+   "text": "Fix a smooth separated geometrically integral pointed curve $(C,c)$ over $k$ and a $k$-morphism $u:C\\to V$ with $u(c)=v_0$. Write $h_C=h\\circ(u\\times\\mathrm{id}_W)$. Both of its axis restrictions are zero by the hypotheses on $h$. By [lem-sc-compactification] choose a proper smooth connected curve $j:C\\hookrightarrow\\overline C$. The point $j(c)$ makes $\\overline C$ geometrically connected by [lem-sbc-connected-rational-point-geometrically-connected]. The product $\\overline C\\times_kW$ is nonempty and connected by [lem-weil-pbc-geometrically-connected-product-components], since $W$ is nonempty and connected. By step 1 it is smooth and of finite type. The geometric regularity in [lem-trf-smooth-geometrically-normal], at the identity field extension, makes it regular; hence [lem-sc-regular-connected-integral] makes it integral. Step 2 makes it separated. The open subscheme $C\\times_kW$ is nonempty (it has $(c,w_0)$), so it is dense in this integral product. Apply [lem-sfb-weil-extension-to-abelian-variety] to obtain $\\overline h_C:\\overline C\\times_kW\\to A$ extending $h_C$.",
+   "uses": [
+    "lem-sc-compactification",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sc-regular-connected-integral",
+    "lem-sfb-weil-extension-to-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 3.4 and its proof, printed pp.18–19; Theorem 3.2, Lemmas 3.5–3.6 and Theorem 1.1."
+   }
+  },
+  {
+   "text": "The curve $\\overline C$ itself is regular and integral: it is smooth, nonempty and connected, so [lem-trf-smooth-geometrically-normal] and [lem-sc-regular-connected-integral] apply. Consequently $j(C)$ is dense and $\\overline C$ is reduced. The maps $\\overline h_C(-,w_0)$ and $0$ agree after $j$, so [lem-sfb-relative-separated-dominant-ext] makes them equal on $\\overline C$. Now [lem-sc-rigidity] applies with $X=\\overline C$, $Y=W$, $Z=A$, and $y_0=w_0$: $X$ is proper, geometrically connected and geometrically reduced (the latter by [lem-trf-smooth-geometrically-normal]), $W$ is connected, and $A$ is separated and of finite type. It gives $\\overline h_C=g\\circ\\operatorname{pr}_W$. Restricting along $\\{j(c)\\}\\times W$ gives $g=0$, because that restriction lies in $C\\times W$ and equals $h(v_0,-)=0$. Therefore $h_C=0$.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sc-regular-connected-integral",
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-sc-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 3.4 and its proof, printed pp.18–19; Theorem 3.2, Lemmas 3.5–3.6 and Theorem 1.1."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-pointed-curves-dense] to $(V,v_0)$ and obtain $(C_i,c_i,u_i)_{i\\in I}$ with dense union of images. Fix $w\\in W(k)$ and put $h_w=h(-,w):V\\to A$. Step 4 gives $h_wu_i=0$ for every $i$. By [lem-weil-pbc-scheme-coproduct-family], the maps $u_i$ assemble to a map $u:\\coprod_i C_i\\to V$; its image is the dense union just obtained. The same universal property shows $h_wu=0u$, since the composites agree on every summand. The source $V$ is reduced (it is integral), and $A$ is separated over $k$. Thus [lem-sfb-relative-separated-dominant-ext] gives $h_w=0$ as a morphism of schemes. This holds for every $w\\in W(k)$.",
+   "uses": [
+    "lem-sfb-smooth-pointed-curves-dense",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 3.4 and its proof, printed pp.18–19; Theorem 3.2, Lemmas 3.5–3.6 and Theorem 1.1."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-rational-points-dense] to the smooth scheme $V\\times_kW$ of step 1: its $k$-rational points are dense. Each such point is a pair $(v,w)$ by the defining property of the fibre product, and step 5 gives equality of the two $k$-morphisms from $\\operatorname{Spec}k$ obtained by evaluating $h$ and $0$ at $(v,w)$. Form the coproduct of $\\operatorname{Spec}k$ over this set of rational points, using [lem-weil-pbc-scheme-coproduct-family], and its evaluation map $e$ to $V\\times_kW$. Its image is dense, and $he=0e$ by the coproduct universal property. Since $V\\times_kW$ is reduced by step 1 and $A$ is separated over $k$, [lem-sfb-relative-separated-dominant-ext] yields $h=0$. This proves equality as morphisms, including their structure-sheaf maps.",
+   "uses": [
+    "lem-pc-rational-points-dense",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Theorem 3.4 and its proof, printed pp.18–19; Theorem 3.2, Lemmas 3.5–3.6 and Theorem 1.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "lem-sc-compactification",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sc-regular-connected-integral",
+  "lem-sfb-weil-extension-to-abelian-variety",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-sc-rigidity",
+  "lem-sfb-smooth-pointed-curves-dense",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-pc-rational-points-dense"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Theorem 3.4 and its proof, printed pp.18–19; Theorem 3.2, Lemmas 3.5–3.6 and Theorem 1.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a product of smooth geometrically integral varieties to an abelian variety which is constant on both coordinate axes is constant",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.IsImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, the diagonal morphism $X \\to X \\times X$ defined by lifting the identity morphism on $X$ to the product is an immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing } ⟶ X) →\\n        (i : ι) → AlgebraicGeometry.Spec (R i) ⟶ X\", \"doc\": \"Given a morphism from the spectrum of the product ring $\\\\prod_i R_i$ to a scheme $X$, this function constructs the corresponding family of morphisms from each spectrum $\\\\operatorname{Spec}(R_i)$ to $X\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n      CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) →\\n    (∀ (i : n),\\n        (CategoryTheory\", \"doc\": \"If two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over $S$ agree on their composition with the structure morphism $\\\\mathbb{A}^n_S \\\\to S$ and induce identical maps on all coordina\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n    f\", \"doc\": \"For any morphism $ f $ and vector $ v $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the canonical structure morphism $ \\\\mathbb{A}^n_S \\\\to S $ of the affine space over $ S $ equa\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-24T07:24:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: valid source-morphism class names queried; zero hits. This is supplemental to the two semantic phrasings and the AlgebraicGeometry source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "abelian.variety|rigidity|Rigid",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a product of smooth varieties into an abelian variety decompose as sums of morphisms from each factor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.biprod.decomp_hom_from\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Biproducts\", \"type\": \"(f : X ⊞ Y ⟶ Z) : ∃ f₁ f₂, f = biprod.fst ≫ f₁ + biprod.snd ≫ f₂\", \"doc\": \"Let $\\\\mathcal{C}$ be a preadditive category, and let $X, Y, Z$ be objects in $\\\\mathcal{C}$. Suppose the biproduct $X \\\\boxplus Y$ exists, with projections $\\\\pi_1 : X \\\\boxplus Y \\\\to X$ and $\\\\pi_2 : X \\\\b\"}\n  {\"name\": \"CategoryTheory.Limits.biprod.decomp_hom_to\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Biproducts\", \"type\": \"(f : Z ⟶ X ⊞ Y) : ∃ f₁ f₂, f = f₁ ≫ biprod.inl + f₂ ≫ biprod.inr\", \"doc\": \"In a preadditive category with binary biproducts, any morphism $f : Z \\\\to X \\\\boxplus Y$ can be decomposed. Specifically, there exist morphisms $f_1 : Z \\\\to X$ and $f_2 : Z \\\\to Y$ such that $$f = (\\\\mat\"}\n  {\"name\": \"CategoryTheory.IsPushout.hom_eq_add_up_to_refinements\", \"module\": \"Mathlib.CategoryTheory.Abelian.CommSq\", \"type\": \"(h : IsPushout t l r b) {T : C} (x₄ : T ⟶ X₄) :\\n  ∃ (T' : C) (π : T' ⟶ T) (_ : Epi π) (x₂ : T' ⟶ X₂) (x₃ : T' ⟶ X₃), π ≫ x₄ = x₂ ≫ r + x₃ ≫ b\", \"doc\": \"In an abelian category, for any morphism $x_4: T \\\\to X_4$ in a pushout square, there exists an epimorphism $\\\\pi: T' \\\\to T$ and morphisms $x_2: T' \\\\to X_2$, $x_3: T' \\\\to X_3$ such that $\\\\pi \\\\circ x_4 =\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi\", \"module\": \"Mathlib.AlgebraicGeometry.PointsPi\", \"type\": \": (Spec (.of <| Π i, R i) ⟶ X) → Π i, Spec (R i) ⟶ X\", \"doc\": \"Given a morphism from the spectrum of the product ring $\\\\prod_i R_i$ to a scheme $X$, this function constructs the corresponding family of morphisms from each spectrum $\\\\operatorname{Spec}(R_i)$ to $X\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.PointsPi\", \"type\": \"[IsAffine X] : Function.Surjective (pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"CategoryTheory.Biprod.ofComponents\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Biproducts\", \"type\": \": X₁ ⊞ X₂ ⟶ Y₁ ⊞ Y₂\", \"doc\": \"Given objects $X_1, X_2, Y_1, Y_2$ in a preadditive category with binary biproducts, this morphism from $X_1 ⊞ X_2$ to $Y_1 ⊞ Y_2$ is defined as the sum of four compositions: $\\\\text{fst} \\\\circ f_{11} \"}\n  {\"name\": \"NonUnitalAlgHom.prodEquiv\", \"module\": \"Mathlib.Algebra.Algebra.NonUnitalHom\", \"type\": \": (A →ₙₐ[R] B) × (A →ₙₐ[R] C) ≃ (A →ₙₐ[R] B × C)\", \"doc\": \"There is a canonical bijection between the set of non-unital $ R $-algebra homomorphisms from $ A $ to $ B \\times C $ and pairs of non-unital $ R $-algebra homomorphisms $ (A \\to B, A \\to C) $. This equi\"}\n  {\"name\": \"Pi.addMonoidHomAddEquiv\", \"module\": \"Mathlib.Algebra.BigOperators.Pi\", \"type\": \"{ι : Type u_7} →\\n  [Fintype ι] →\\n    [DecidableEq ι] →\\n      (M : ι → Type u_8) →\\n        [inst : (i : ι) → AddCommMonoid (M i)] →\\n          (M' : Type u_9) → [inst_1 : AddCommMonoid M'] → (((i : ι) → M i) →+ M') ≃+ ((i : ι) → M i →+ M')\", \"doc\": \"For a finite index type $\\\\iota$ and a family of additive commutative monoids $\\\\{M_i\\\\}_{i \\\\in \\\\iota}$, this establishes an additive equivalence between the set of additive monoid homomorphisms from the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milne theorem 3.4 maps from a product of nonsingular varieties into an abelian variety with constant axes are constant without properness of factors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Jacobian F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For any ring homomorphism $ f : F \\\\to K $ between fields $ F $ and $ K $, and for any two nonsingular points $ P, Q : \\\\text{Fin}(3) \\\\to F $ on the Jacobian of a Weierstrass curve over $ F $, the equiv\"}\n  {\"name\": \"WeierstrassCurve.Projective.comp_equiv_comp\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {F : Type u} {K : Type v} [inst : Field F] [inst_1 : Field K] {W : WeierstrassCurve.Projective F} (f : F →+* K)\\n  {P Q : Fin 3 → F}, W.Nonsingular P → W.Nonsingular Q → (⇑f ∘ P ≈ ⇑f ∘ Q ↔ P ≈ Q)\", \"doc\": \"For a ring homomorphism $ f : F \\\\to K $ between fields and nonsingular points $ P, Q $ on a projective Weierstrass curve over $ F $, the images $ f \\\\circ P $ and $ f \\\\circ Q $ are projectively equival\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [inst_2 : CategoryTheory.IsCofiltered I]\\n  \", \"doc\": \"The image of the morphism $ g $ is contained within the diagonal open subsets of the pullback of $ f $ with itself, specifically within the diagonal cover's diagonal range constructed from the open co\"}\n  {\"name\": \"WeierstrassCurve.Projective.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R),\\n  Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Nonsingular (⇑f ∘ P) ↔ W'.Nonsingular P)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism, and let $ W' $ be a Weierstrass curve over $ A $. For a point $ P $ on $ W' $, the point $ f \\\\circ P $ is nonsingular on the projective Weierstra\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; these are tensor/Picard identities for rings, scheme fibre or Proj constructions, topological vector bundles, or biproduct decompositions, not the asserted geometric family or rigidity theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a product of smooth varieties to an abelian variety vanishing on both coordinate axes is constant",
+   "results": "{\"t\": \"2026-10-24T07:52:51Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a product of smooth varieties to an abelian variety vanishing on both coordinate axes is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.Point.toClass_eq_zero\", \"AlgebraicGeometry.pointsPi\", \"AffineMap.pi_eq_zero\", \"WeierstrassCurve.Affine.Point.map_zero\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\"], \"digest\": \"3eb9fa6318194a40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results are affine-space coordinate extensionality, elliptic-curve formulas and additive-category zero morphisms; they do not state product rigidity for arbitrary smooth schemes or abelian varieties. The name and source searches return no relevant declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AbelianVariety\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results are affine-space coordinate extensionality, elliptic-curve formulas and additive-category zero morphisms; they do not state product rigidity for arbitrary smooth schemes or abelian varieties. The name and source searches return no relevant declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rigidity|AbelianVariety|rational.*[Ee]xten",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results are affine-space coordinate extensionality, elliptic-curve formulas and additive-category zero morphisms; they do not state product rigidity for arbitrary smooth schemes or abelian varieties. The name and source searches return no relevant declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every morphism from two smooth varieties into an abelian variety with zero restrictions on the two axes is zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddCommGrpCat.instZeroHom\", \"module\": \"Mathlib.Algebra.Category.Grp.Basic\", \"type\": \"(G H : AddCommGrpCat) → Zero (G ⟶ H)\", \"doc\": \"For any two additive commutative groups $G$ and $H$, this definition provides the zero morphism $G \\to H$ in the category of additive commutative groups, which maps every element of $G$ to the zero ele\"}\n  {\"name\": \"CategoryTheory.Limits.HasZeroMorphisms.zero\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms\", \"type\": \"{C : Type u} →\\n  {inst : CategoryTheory.Category.{v, u} C} →\\n    [self : CategoryTheory.Limits.HasZeroMorphisms C] → (X Y : C) → Zero (X ⟶ Y)\", \"doc\": \"For a category equipped with zero morphisms, the zero morphism between any two objects $ X $ and $ Y $ is the zero element in the hom-set $ \\\\text{Hom}(X, Y) $, satisfying the axioms that it acts as an\"}\n  {\"name\": \"AddCommGrpCat.instZeroHom_1\", \"module\": \"Mathlib.Algebra.Category.Grp.Preadditive\", \"type\": \": Zero (M ⟶ N)\", \"doc\": \"For any two additive commutative groups $M$ and $N$, the hom-set $\\\\text{Hom}(M, N)$ in the category of additive commutative groups is equipped with a zero morphism, which is the trivial group homomorp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.zero_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (0 : M ⟶ N).app U = 0\", \"doc\": \"For any scheme $X$ and sheaves of modules $M,N$ over its structure sheaf, the component of the zero morphism $0 : M \\\\to N$ at any open subset $U \\\\subseteq X$ is the zero map between the sections $\\\\Gam\"}\n  {\"name\": \"instZeroContMDiffAddMonoidMorphism\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {n : WithTop ℕ∞} →\\n      {H : Type u_2} →\\n        [inst_1 : TopologicalSpace H] →\\n          {E : Type u_3} →\\n            [inst_2 : NormedAddCommGroup E] →\\n              [inst_3 : NormedSpace 𝕜 E] →\\n                {I : ModelWithCorners 𝕜 E \", \"doc\": \"The zero function mapping every point to the additive identity is $ C^n $-differentiable for all $ n $, i.e., the zero morphism between charted spaces $ G $ and $ G' $ modeled on corners (via $ \\\\mathr\"}\n  {\"name\": \"AddGrpCat.instZeroHom\", \"module\": \"Mathlib.Algebra.Category.Grp.Basic\", \"type\": \"(G H : AddGrpCat) → Zero (G ⟶ H)\", \"doc\": \"For any two additive groups $G$ and $H$, the zero morphism from $G$ to $H$ is the additive group homomorphism that maps every element of $G$ to the zero element of $H$. This serves as the distinguishe\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_zero\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \": mk₀ (0 : X ⟶ Y) = 0\", \"doc\": \"The zero morphism from $ X $ to $ Y $ in an abelian category maps to the zero element in the Ext group $ \\\\operatorname{Ext}^n(X, Y) $ under the canonical construction $ \\\\operatorname{mk}_0 $.\"}\n  {\"name\": \"VectorField.mpullback_zero\", \"module\": \"Mathlib.Geometry.Manifold.VectorField.Pullback\", \"type\": \": mpullback I I' f 0 = 0\", \"doc\": \"The pullback of the zero vector field under a smooth map between manifolds is equal to the zero vector field, i.e., $ f^*0 = 0 $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the results are affine-space coordinate extensionality, elliptic-curve formulas and additive-category zero morphisms; they do not state product rigidity for arbitrary smooth schemes or abelian varieties. The name and source searches return no relevant declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-product-algebraic-equivalence",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical alteration/Picard branch under det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-birigidified-affine-triviality-locus, proof step 2: algebraically trivial classes on the smooth affine product. Current latest blueprint direct-images proof (3) supplies the direct-image context, not this auxiliary Picard formula.",
+   "via": [
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-product-axis-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the statement and followed Milne I.3.4: compactify smooth test curves, apply the existing Weil extension theorem and proper rigidity, then use density to obtain equality of morphisms. Reused all existing geometric tools. One new statement-only node for density of images of smooth pointed curves, including constant maps in dimension zero. No new Mathlib leaves.",
+  "blueprint": "Historical alteration/Picard branch under det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-birigidified-affine-triviality-locus, proof step 2: algebraically trivial classes on the smooth affine product. Current latest blueprint direct-images proof (3) supplies the direct-image context, not this auxiliary Picard formula. This split supplies the Milne I.3.4 input; the latest blueprint no longer gives this historical Picard auxiliary as a separate node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Smoothness under base change is a general geometric tool used to check the product source of Weil extension."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Smooth schemes are geometrically regular and reduced; this is a generic source-hypothesis check, not a trace-formula step."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "The generic rational-section criterion verifies geometric connectedness of the compactified curve."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Arbitrary coproducts package a set of dense test maps so the existing morphism equality lemma applies; no same-unit node supplies this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-6849f50ed",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-6849f50ed (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the source in full; review.md has the step-by-step checks. Source: Milne AV I.3.4 with Lemmas 3.5 and 3.6 (printed pp.18-19). The item statement is unchanged, is the a0=0, k=k̄ case of Thm 3.4, and is not weakened. The six steps follow Milne's route and I checked each cited node's hypotheses at its step. Step 1: smooth under base change and composition, finite type, reduced. Step 2 is elementary and I accept it: a product of separated schemes has diagonal Δ×Δ, which is affine-locally I⊗B+A⊗J. Step 3: compactify C. C̄ is geometrically connected because j(c) is a k-point. C̄×W is connected by the component bijection and integral because it is regular and connected. C×W is a dense open containing (c,w0), so Weil extension applies to an integral, separated, finite-type, smooth source. Step 4: C̄ is reduced and dense-image equality gives h̄_C(-,w0)=0. All hypotheses of lem-sc-rigidity hold (C̄ proper, geometrically connected and geometrically reduced; W connected; A separated and locally of finite type), and restricting along j(c) gives g=h(v0,-)=0. Step 5: the new node and an arbitrary-index coproduct give a dense image in the reduced V, so h_w=0. Step 6: k-points of V×W are dense and V×W is reduced, so h=0 as a morphism. The new node lem-sfb-smooth-pointed-curves-dense is true: normalization of an irreducible curve through x0 is a smooth curve with a point over x0 and the same image, which is Milne 3.6 with 3.5(b). I tested it on X a point (constant map from A¹), a curve, and Aⁿ. It is statement-only, self-contained, and its definitions are cited. Scanning all node statements found no duplicate. It is not a restatement of the item, and no existing node already states the item (relative-abelian-pointed-rigidity and sc-rigidity both need properness). Batch 5: lem-trf-smooth-composition and lem-trf-smooth-geometrically-normal are general smoothness facts, and weil-extension reaches the trace-formula chapter only through the second of them. None of these is part of the trace formula or Poincaré duality or their proofs, so I accept them as generic tools; the two trf nodes are recorded in tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.ProductAxisRigidity",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.eq_identity_of_product_axes",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/ProductAxisRigidity.lean",
+  "statement": "theorem IsAbelianVariety.eq_identity_of_product_axes (k : Type u) [Field k] [IsAlgClosed k] (V W : Scheme.{u}) (fV : V ⟶ Spec (.of k)) (fW : W ⟶ Spec (.of k)) [Smooth fV] [Smooth fW] [IsSeparated fV] [IsSeparated fW] [GeometricallyIntegral fV] [GeometricallyIntegral fW] [LocallyOfFiniteType fV] [QuasiCompact fV] [LocallyOfFiniteType fW] [QuasiCompact fW] (v₀ : Spec (.of k) ⟶ V) (w₀ : Spec (.of k) ⟶ W) (hv₀ : v₀ ≫ fV = 𝟙 _) (hw₀ : w₀ ≫ fW = 𝟙 _) (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (h : pullback fV fW ⟶ A.left) (hh : h ≫ A.hom = pullback.fst fV fW ≫ fV) (hV : pullback.lift (𝟙 V) (fV ≫ w₀) (by simp only [Category.id_comp, Category.assoc, hw₀, Category.comp_id]) ≫ h = fV ≫ η[A].left) (hW : pullback.lift (fW ≫ v₀) (𝟙 W) (by simp only [Category.id_comp, Category.assoc, hv₀, Category.comp_id]) ≫ h = fW ≫ η[A].left) : h = pullback.fst fV fW ≫ fV ≫ η[A].left",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e13374b8",
+  "group": "Q07",
+  "result": "fix",
+  "note": "Lean exact vs node (Milne AV I.3.4, k=k̄, identity value): alg-closed k; V,W Smooth/IsSeparated/GeometricallyIntegral/LFT+QC on structure maps; k-points as sections (hv₀,hw₀); A : Over Spec k with [GrpObj A][IsAbelianVariety A] (proper, smooth, connected), 0 = η[A].left; h on pullback fV fW with k-morphism hh; axis lifts lift (𝟙 V) (fV≫w₀) and lift (fW≫v₀) (𝟙 W) correct; conclusion h = fst≫fV≫η[A].left is morphism equality; no properness on V,W; edge cases (dim 0, trivial A, any char, single universe u) fine; lean.statement verbatim; only lean differs from side-live; sorry only, docstrings with source, blueprint and 6 steps; no duplicate (exists_eq_snd_comp needs a proper factor). Sole fault H11: the second reading is the worker's self-check → fixes/lem-sfb-abelian-product-axis-rigidity.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean change, no compile. Note: parallel Q62 ae891c27 (same file, decl eq_const_of_product_axes, PASS, unlanded): only one may land, the later must not rebind."
+ }
+}

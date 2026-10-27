@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-curve-smooth-polarization-cover",
+ "kind": "statement",
+ "title": "Smooth local polarizations of proper flat curve families",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $f:X\\to T$ a morphism of algebraic spaces [def-trf-algebraic-space] which is proper, flat and of finite presentation. Proper means separated, of finite type and universally closed; flatness and finite presentation are tested on etale scheme charts. Suppose that every geometric fibre $X\\times_T\\operatorname{Spec}\\Omega$, for every algebraically closed field $\\Omega$ and map $\\operatorname{Spec}\\Omega\\to T$, has dimension at most one, with empty fibres allowed. Dimension is the supremum of the Krull dimensions of affine etale charts [def-kun-topological-krull-dimension], with $\\dim\\varnothing=-\\infty$. There exist a scheme $U$, a smooth surjective morphism $p:U\\to T$ [def-sbc-smooth-morphisms], and an invertible module $L$ on the scheme $Y=X\\times_TU$ [def-sc-invertible-module], such that $L|_{Y\\times_UW}$ is ample [def-weil-pbc-ample-invertible-module] for every affine open $W\\subseteq U$. Here $Y$ is a scheme representing the algebraic-space fibre product [lem-trf-space-fibre-products-etale-covers]. Surjective means that the image of $|U|$ is all of $|T|$. There is no Noetherian, connectedness, reducedness, nonempty-fibre or pure-dimension hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DQ0 (lemma-polarized-curves-over-curves), smooth surjectivity of PolarizedCurves to Curves; its scheme-atlas consequence explicitly unwound in the first paragraph of the proof of Tag 0E6F (lemma-etale-locally-scheme). PolarizedCurves objects immediately before lemma-polarized-curves-in-polarized specify schemes and relatively ample invertible modules; section-stack-curves specifies the family hypotheses."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-proper-curve-moduli",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-picard-stack-smooth] to $f$. Its geometric-fibre hypothesis is exactly the dimension hypothesis of the item, including empty fibres. Choose its smooth surjective scheme atlas $a:V\\to\\mathcal P_f$ with smooth composite $q:V\\to T$. By the definition of this Picard stack, $a$ is a line module $M$ on the algebraic space $X_V=X\\times_TV$, with cartesian pullbacks as specified in that node. At this point $X_V$ need not be a scheme.",
+   "uses": [
+    "lem-sfb-space-picard-stack-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DQ0 (lemma-polarized-curves-over-curves), smoothness paragraph; moduli.tex Tag 0DPJ."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-flat-proper-fp-locality], the base change $X_V\\to V$ is proper. Apply [lem-sfb-space-relative-ample-locus] to it and $M$. It gives an open subscheme $U\\subset V$ characterized on every scheme test $B\\to V$ by relative ampleness of $M_B$. In particular $Y=X_V\\times_VU=X\\times_TU$ is a scheme and $M_U$ corresponds to an ordinary invertible module $L$ on $Y$, ample over every affine open of $U$. This is exactly the scheme/ordinary-line convention in the statement of the ample-locus node. The composite $p:U\\hookrightarrow V\\xrightarrow{q}T$ is smooth by [lem-pc-open-immersion-smooth-composition]. It remains to prove its surjectivity.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DQ0, openness of the ample locus by spaces-descent.tex Tag 0D3D (lemma-ample-in-neighbourhood); moduli-curves.tex Tag 0E6F (lemma-etale-locally-scheme), first paragraph."
+   }
+  },
+  {
+   "text": "Fix any geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$. By [lem-sfb-space-flat-proper-fp-locality], $C=X_{\\bar t}$ is proper over $\\Omega$, hence separated and of finite type. Its dimension is at most one by hypothesis. Thus [lem-sfb-separated-space-dimension-one-scheme] makes $C$ a scheme. Apply [lem-sc-proper-dim-one-projective] to obtain a closed immersion $i:C\\hookrightarrow\\mathbf P^N_\\Omega$. By [lem-pc-very-ample-ample], $A=i^*\\mathcal O(1)$ is ample and remains ample after every field extension of $\\Omega$. Regard $A$ as a line module on the small etale site of $C$ using [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. It is an object of $\\mathcal P_f(\\Omega)$. These results permit nonreduced, disconnected and zero-dimensional $C$, as well as $C=\\varnothing$.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sc-proper-dim-one-projective",
+    "lem-pc-very-ample-ample",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DQ0, surjectivity paragraph; spaces-over-fields.tex Tag 0ADD (lemma-codim-1-point-in-schematic-locus) and varieties.tex Tag 0A26 (lemma-dim-1-proper-projective)."
+   }
+  },
+  {
+   "text": "The surjectivity clause of [lem-sfb-space-picard-stack-smooth], applied to $A\\in\\mathcal P_f(\\Omega)$, supplies a field extension $\\Omega\\hookrightarrow K$ and $v:\\operatorname{Spec}K\\to V$ over $T$ with $M_v\\cong A_K$. By [lem-pc-very-ample-ample], $A_K$ is ample on the scheme $C_K$. The etale/ordinary-module comparison of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] respects pullback, so $M_v$ is relatively ample over $\\operatorname{Spec}K$. The test-scheme characterization of [lem-sfb-space-relative-ample-locus] therefore makes $v$ factor through $U$. For each point $t\\in T$, choose an algebraic closure $\\Omega$ of $\\kappa(t)$ and apply this construction to its geometric point. The unique point of $\\operatorname{Spec}K$ maps to a point of $U$ lying over $t$. Thus $|U|\\to|T|$ is surjective. Together with step 2 this supplies $p,Y,L$ with every asserted property. If $T$ is empty the surjectivity assertion is vacuous and the same construction still applies.",
+   "uses": [
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-pc-very-ample-ample",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-relative-ample-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0DQ0, combining the two paragraphs via a Picard atlas; Tag 0E6F, first paragraph of proof (scheme-atlas consequence)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-picard-stack-smooth",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-relative-ample-locus",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-separated-space-dimension-one-scheme",
+  "lem-sc-proper-dim-one-projective",
+  "lem-pc-very-ample-ample",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0DQ0 (lemma-polarized-curves-over-curves), both proof paragraphs; Tag 0E6F (lemma-etale-locally-scheme), first paragraph. Restrict a smooth Picard atlas directly by the ample-locus scheme test."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper flat families of algebraic curves admit relative polarizations locally for the smooth topology",
+   "results": "OK: 8 hits; AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat.flat_appLE, RingHom.Flat.propertyIsLocal, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.Flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.Smooth.flat, AlgebraicGeometry.IsSmooth.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented algebraic space with geometric fibres of dimension at most one admits a smooth surjective scheme base change carrying a relatively ample invertible sheaf",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "grep",
+   "query": "PolarizedCurves|polarized.*curve|polarised.*curve|AlgebraicSpace.*IsAmple",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsAmple\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful morphism from polarized proper flat curves to all proper flat curves is smooth and surjective",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a relatively ample invertible sheaf after a smooth surjective base change for a proper flat finitely presented family of curves",
+   "results": "OK: 8 hits; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, Algebra.Smooth.baseChange, RingHom.FormallySmooth.isStableUnderBaseChange, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a relatively ample line bundle on a proper flat finitely presented family of algebraic spaces with one dimensional fibres after a smooth cover",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Flat, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource",
+   "date": "2026-10-23",
+   "verdict": "no match: hits describe smoothness, flatness, scheme etale categories or base-change stability; none constructs a polarization or a scheme model of a curve family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented algebraic space over a scheme with fibres of dimension at most one, the stack of invertible modules is algebraic and smooth over the base",
+   "results": "OK: 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, Algebra.Smooth.flat, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"IsSmooth\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "grep",
+   "query": "PicardStack|Picardstack|picard_stack|stack.*invertible|invertible.*stack",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard stack of line bundles on a flat proper finitely presented algebraic space is algebraic and is smooth when the fibres have dimension at most one",
+   "results": "OK: 8 hits; AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, CommRing.Pic.instSubsingletonOfIsLocalRing, AlgebraicGeometry.IsSmooth, CommRing.relPic, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.Pic.mapAlgebra_mapAlgebra, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stack of invertible sheaves of a flat proper finitely presented algebraic space with geometric fibres of dimension at most one admits a smooth surjective scheme atlas smooth over the base",
+   "results": "OK: 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|PolarizedCurves|polarized",
+   "results": "OK: 3 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat families of curves have a relatively ample invertible sheaf locally for a smooth surjective base cover",
+   "results": "OK: 8 hits; AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme smoothness, flatness or ring Picard groups; none gives the algebraic-space Picard stack or a local polarization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-etale-scheme-cover",
+  "date": "2026-10-23",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0.",
+   "via": [
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-smooth-polarization-cover",
+  "worker": "stage1",
+  "summary": "Four-step Picard-atlas construction following 0DQ0 and 0E6F. Reused the open ample locus, schematicity in dimension one and projectivity of proper curves. Added only the genuinely more general algebraic-space Picard-stack input, since the existing Picard-stack node assumes a scheme total space. All geometric fibres, including empty and nonreduced fibres, are covered; no Noetherian or cohomological-flatness assumption is added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Realized by the smooth Picard atlas, its ample open locus, and the geometric-fibre surjectivity argument of 0DQ0. The current latest blueprint direct-images proof was read; this remains a supporting moduli input and changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Generic projectivity theorem for arbitrary proper schemes of dimension at most one over a field, used on a geometric fibre; no curve-family moduli theorem is substituted."
+   },
+   {
+    "node": "lem-pc-very-ample-ample",
+    "why": "Generic ample restriction of O(1) to a projective scheme and field-base-change clause; used only to choose and pull back a fibrewise polarization."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Generic restriction of a smooth scheme morphism to an open subscheme, used for the ample open of the chosen atlas."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison of line modules on a scheme with its small etale site, including pullback compatibility, used to view projective fibre polarizations in the Picard stack."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-proper-dim-one-projective",
+  "lem-pc-very-ample-ample",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-5e74608a6",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-5e74608a6 (reviewer sub-agent of L); spot-checked: I read the item's 4 steps, the new node lem-sfb-space-picard-stack-smooth and the statement of every cited node. Source checks: moduli-curves 0DQ0 (l.217-251), 0E6F, quot 0D04 (l.2659, stated for algebraic spaces), moduli section-picard-stack and 0DPJ (l.1366), spaces-descent 0D3D (l.2210). The item statement and stmt_deps are unchanged from live (diffed against clones/live and clones/side-live; the base proof was empty, and there is no re-split note). The new node is the algebraic-space form of 0D04+0DPJ. The existing lem-sfb-picard-stack-curve-geometry is only the scheme special case, and cannot be used here: X is only shown to be a scheme by 0E6F (lem-sfb-curve-etale-scheme-cover), which cites this item, so using it would be circular. The Picard-sheaf nodes need O≅f_*O, so they do not apply. The new node does not restate the item, since it has no ampleness or schematicity conclusion. Its field-lifting surjectivity gloss follows from the atlas definition. Small cases checked: P^1, empty X and finite flat X. The steps follow 0DQ0: the atlas gives M; X_V proper (fp-locality); the open ample locus U gives scheme Y and ample L; p=q|_U is smooth (open-immersion composition). For surjectivity: fibre is a scheme (0ADD node), projective (0A26 node), O(1) ample after any field extension, carried into the étale Picard stack by the Zariski/étale equivalence; the lift is then factored through U by the test property. proof_deps equal the union of uses, and the closure check shows no cycle. No SGA is used, and the 4 tool_uses are generic. Batch-5: the flagged def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, lem-trf-space-enlarged-etale-ringed-site-model and lem-trf-scheme-zariski-etale-quasi-coherent-equivalence are general foundations of algebraic spaces and étale sites, not steps of the trace-formula or Poincaré-duality proofs, so they are acceptable. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveSmoothPolarizationCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_smooth_polarization_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveSmoothPolarizationCover.lean",
+  "statement": "theorem exists_smooth_polarization_cover {S : Scheme.{u}} (X : AlgebraicSpace S) (T : Over S) (f : X.obj.obj ⟶ yoneda.obj T) (hf : IsProperCurveFamily X T f) : ∃ (U : Over S) (p : U ⟶ T), Smooth p.left ∧ Surjective p.left ∧ ∃ (Y : Over S) (q : Y ⟶ U) (a : yoneda.obj Y ⟶ X.obj.obj), IsPullback a (yoneda.map q) f (yoneda.map p) ∧ ∃ L : Y.left.Modules, L.IsInvertible ∧ ∀ W : U.left.Opens, IsAffineOpen W → ∃ h : ((Scheme.Modules.tensorPullback (q.left ⁻¹ᵁ W).ι).obj L).IsInvertible, @Scheme.Modules.IsAmple (q.left ⁻¹ᵁ W).toScheme ((Scheme.Modules.tensorPullback (q.left ⁻¹ᵁ W).ι).obj L) h",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed IsProperCurveFamily predicate and explicit tensor pullback for restrictions; these existing definition nodes are added to stmt_deps. A presheaf IsPullback square gives the scheme representing X ×_T U with its projection to U. No statement correction or new definition is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92b70cbd1",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Node differs from base only in lean and stmt_deps; the two added nodes (def-sfb-proper-curve-moduli, def-pc-module-pullback) were landed before the base, which brief §5 allows. lean.statement is verbatim. Clause check vs moduli-curves 0DQ0/0E6F: IsProperCurveFamily (landed, Q20-reviewed) = flat/proper/fp with geometric-fibre topologicalKrullDim ≤ 1, empty fibres allowed; ∃ U, p with Mathlib Smooth ∧ Surjective; Y, q, a with a presheaf IsPullback square = scheme representing X×_T U; L invertible; ∀ affine W, IsAmple of tensorPullback along (q⁻¹W).ι = relative ampleness (01VG); ∃ h is only the instance argument. Edge cases (empty T, empty/0-dim fibres, empty W), single universe u, no extra hypotheses. No defs, proof is sorry, docstrings give source, blueprint id and the 4 proof steps; private imports are existing proof_dep modules; no duplicate in the project or Mathlib. No recompile per the 2026-10-21 rule; no changes."
+ }
+}

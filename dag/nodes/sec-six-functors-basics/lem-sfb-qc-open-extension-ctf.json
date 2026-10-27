@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-qc-open-extension-ctf",
+ "kind": "statement",
+ "title": "Quasi-compact open extension preserves constant-model constructibility and Tor intervals",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$. Let $\\Lambda$ be a finite commutative ring annihilated by a power of $\\ell$, or $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\overline{\\mathbf Q}_\\ell$, with exactly the discrete or induced $\\ell$-adic topological condensed-ring convention of [sk-def-localizing-closure]. For every scheme $T$ put $\\Lambda_T=p_T^*\\Lambda$ and $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$, the ordinary unbounded module-object derived category [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-derived-pushpull], with smallness fixed by [def-weil-size-convention]. Let $j:U\\hookrightarrow X$ be a quasi-compact open immersion of schemes [def-weil-open-immersion, def-weil-finite-type-morphism]. Write $J=D(j_!):D_U\\to D_X$ for exact termwise module extension by zero [sk-def-sfb-module-lower-shriek]. Use constructibility with finite constant scalar local models, imposed locally on affine opens and by a finite constructible locally closed stratification when the scheme is qcqs, and finite Tor amplitude tested against every degree-zero module sheaf [sk-def-sfb-constructible, def-weil-constructible-subset]. Then $J$ takes $\\mathrm D_{\\mathrm{ctf}}(U,\\Lambda)$ into $\\mathrm D_{\\mathrm{ctf}}(X,\\Lambda)$. More precisely, for every constructible module sheaf $M$ on $U$, $j_!M$ is constructible in this same finite constant scalar-model sense on $X$; for every $K\\in D_U$ and integer $n$ there is a natural isomorphism $H^n(JK)\\cong j_!H^n(K)$; and every cohomological interval and every Tor-amplitude interval for $K$ remains such an interval for $JK$. No Noetherian, finite-type-over-a-field, characteristic or global qcqs hypothesis is imposed on $U$ or $X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), its bounded constructible generator reduction and extension-by-zero input (old boundary-vanishing step 3). Agent formulation of the extracted argument in the full qcqs scope; not an attribution to a field-restricted theorem."
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-size-convention",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-constructible",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing finiteConstantStratified_zariski_locality implementation: constructible_affine reads either branch of IsConstantModelConstructible. For a qcqs open immersion g:W→Y, each affine chart V of W maps isomorphically to an affine open of Y (Scheme.Hom.isoImage). Pull the chart model back along that isomorphism. upperStarComp and isoImage_hom_ι identify its restriction with V* g* M. The proved stratified_of_affine_neighborhoods helper assembles these witnesses. Its stratified_pullback, stratified_of_iso and squarePullbackIso helpers use pullback stratifications and the same finite scalar models.",
+   "uses": [
+    "lem-sfb-constructible-zariski-locality",
+    "lemma-constructible-pullback-stratification",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-module-pushforward-pullback",
+    "new-unbounded-pullback-finite-constant-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), its bounded constructible generator reduction and extension-by-zero input (old boundary-vanishing step 3). Agent formulation of the extracted argument in the full qcqs scope; not an attribution to a field-restricted theorem."
+   }
+  },
+  {
+   "text": "The proved openUnit helper in CondensedSupportDerivedLocalization identifies j* j! M with M already on modules. For an affine open V of X put D=j⁻¹(V) and d:D→V. D is compact by quasi-compactness of j and quasi-separated as an open subscheme of the affine V. The preceding qcqs-open argument gives a finite constant stratification of M|D. Pullback composition and the open unit identify this with d*(j!M|V). Form the actual closed complement using vanishingIdeal of the closed subset V minus range(d); range_subschemeι and coe_support_vanishingIdeal give its complementary range. Disjoint-support vanishing makes its restriction of j!M zero. The range disjointness is proved using morphismRestrict_base_coe, including empty schemes.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-condensed-support-derived-localization",
+    "lem-sfb-internal-open-extension-disjoint-vanishing",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), its bounded constructible generator reduction and extension-by-zero input (old boundary-vanishing step 3). Agent formulation of the extracted argument in the full qcqs scope; not an attribution to a field-restricted theorem."
+   }
+  },
+  {
+   "text": "Apply the already proved Scheme.Stratification.openClosed to the finite stratification of D and the trivial stratification of its closed complement. The quasi-compact open hypothesis is exactly what that construction uses for constructibility of the strata. The private generic openClosed_property helper transfers any predicate on the actual stratum morphisms, avoiding expansion of coefficient functors in dependent reindexing. Pullback composition retains the original models on old strata. On the complement the zero module has the identity cover and the zero scalar presentation (Mod.IsFinitelyPresented.of_isZero). This proves the affine-local condition. For qcqs X, the affine-local equivalence of finiteConstantStratified_zariski_locality supplies the global finite stratification; otherwise the affine-local condition is the definition.",
+   "uses": [
+    "prop-constructible-open-closed",
+    "lem-sfb-constructible-zariski-locality",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), its bounded constructible generator reduction and extension-by-zero input (old boundary-vanishing step 3). Agent formulation of the extracted argument in the full qcqs scope; not an attribution to a field-restricted theorem."
+   }
+  },
+  {
+   "text": "Exactness of openImmersionLowerShriek supplies the inverse of mapDerivedCategoryHomologyFunctorIso in every degree, homologyConcentratedIn_mapDerivedCategory_obj for every interval, and bounded_mapDerivedCategory_obj. Isomorphism transport of finite constant models is proved directly by composing the same cover and scalar model isomorphisms. Hence bounded constructibility is preserved.",
+   "uses": [
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), its bounded constructible generator reduction and extension-by-zero input (old boundary-vanishing step 3). Agent formulation of the extracted argument in the full qcqs scope; not an attribution to a field-restricted theorem."
+   }
+  },
+  {
+   "text": "Choose the same vanishing-ideal closed complement of j and apply openClosedSupportProjectionFormula to K and F[0], for any module F on X. The exact supportPullback commutes with the degree-zero single functor by mapDerivedCategorySingleFunctor. Tensor this isomorphism with K; the Tor hypothesis gives concentration in [a,b] of K tensor supportPullback(F[0]). Exact j! preserves that interval. The projection isomorphism transfers it to j!K tensor F[0]. Quantifying over F proves the identical Tor interval. Unpack finiteTorAmplitude and combine this with bounded constructibility to obtain the final conjunction.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-condensed-support-projection-formula",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), its bounded constructible generator reduction and extension-by-zero input (old boundary-vanishing step 3). Agent formulation of the extracted argument in the full qcqs scope; not an attribution to a field-restricted theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-sfb-condensed-support-derived-localization",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-sfb-constructible-zariski-locality",
+  "lem-sfb-internal-open-extension-disjoint-vanishing",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-constructible-pullback-stratification",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "prop-constructible-open-closed",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-module-pushforward-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "W6 proof, 2026-10-24: existing open-closed stratification and affine-locality, exact-functor cohomology and support projection formula. Private generic predicate transfer avoids unfolding coefficient functors during dependent stratum reindexing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-compact open immersion extension by zero preserves bounded constructible complexes and finite Tor amplitude for condensed coefficient sheaves on arbitrary schemes",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.IsSolid; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; CondensedMod.ofSheafCompHaus; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; CondensedMod.ofSheafStonean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe scalar support, ordinary scheme restriction, condensed categories or cohomological support; none asserts constant-model constructibility and finite Tor preservation for condensed module extension by zero"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|lowerShriek|FiniteTorAmplitude",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe scalar support, ordinary scheme restriction, condensed categories or cohomological support; none asserts constant-model constructibility and finite Tor preservation for condensed module extension by zero"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along a quasi compact open immersion preserves constructible sheaves and bounded complexes of finite Tor amplitude",
+   "results": "8 hits: HasCompactSupport.extend_zero; HasCompactSupport.continuous_extend_zero; AlgebraicGeometry.RingedSpace.res_zero; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact; AlgebraicGeometry.instQuasiCompactMorphismRestrict; AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion; HomologicalComplex.extendMap_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe scalar support, ordinary scheme restriction, condensed categories or cohomological support; none asserts constant-model constructibility and finite Tor preservation for condensed module extension by zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.Triangulated",
+   "results": "loogle: unknown identifier 'CategoryTheory.Triangulated'; 0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "inconclusive: invalid identifier in this query; the corrected Loogle query was also run"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion sends constructible finite Tor dimension complexes to constructible finite Tor dimension complexes by extension by zero",
+   "results": "8 hits: DerivedCategory.isGE_Q_obj_iff; HomologicalComplex.map_isStrictlySupported; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjSingleFunctor; HomologicalComplex.isSupported_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe scalar support, ordinary scheme restriction, condensed categories or cohomological support; none asserts constant-model constructibility and finite Tor preservation for condensed module extension by zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.Functor.IsTriangulated",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe scalar support, ordinary scheme restriction, condensed categories or cohomological support; none asserts constant-model constructibility and finite Tor preservation for condensed module extension by zero"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for modules over pulled back condensed rings preserves constructibility and finite Tor amplitude along quasi compact open immersions",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.IsSolid, CondensedMod.LocallyConstant.functor, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod, CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstantModule.functor, CondensedMod.ofSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern functions, scheme opens, general abelian categories or finite presentations; none gives all clauses for ordinary derived condensed-coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.Functor",
+   "results": "12 hits: AlgebraicGeometry.Scheme.Hom.opensFunctor, AlgebraicGeometry.Scheme.IsLocallyDirected.V, AlgebraicGeometry.Scheme.IsLocallyDirected.glueData, AlgebraicGeometry.Scheme.IsLocallyDirected.cocone, AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit, AlgebraicGeometry.Scheme.IsLocallyDirected.instIsLocallyDirectedWidePushoutShapeCompForgetOfIsOpenImmersionMap, AlgebraicGeometry.Scheme.IsLocallyDirected.instCreatesColimitLocallyRingedSpaceForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.IsLocallyDirected.instPreservesColimitLocallyRingedSpaceForgetToLocallyRingedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern functions, scheme opens, general abelian categories or finite presentations; none gives all clauses for ordinary derived condensed-coefficient modules"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|openImmersionLowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern functions, scheme opens, general abelian categories or finite presentations; none gives all clauses for ordinary derived condensed-coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact open extension by zero preserves constructible condensed coefficient modules and Tor amplitude",
+   "results": "8 hits: HasCompactSupport.extend_zero, HasCompactSupport.continuous_extend_zero, AlgebraicGeometry.instQuasiCompactMorphismRestrict, AlgebraicGeometry.QuasiCompactCover.recOn, AlgebraicGeometry.QuasiCompactCover.casesOn, Condensed.instAB4CondensedMod, AlgebraicGeometry.QuasiCompactCover.instBindScheme, AlgebraicGeometry.QuasiCompactCover.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern functions, scheme opens, general abelian categories or finite presentations; none gives all clauses for ordinary derived condensed-coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact extension by zero functor on sheaves preserves finite constant local presentations and does not enlarge the derived tensor cohomology support interval",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Sheaf.H, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern functions, scheme opens, general abelian categories or finite presentations; none gives all clauses for ordinary derived condensed-coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-proper-open-boundary-vanishing",
+  "date": "2026-10-22",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms: the use of det-sf-comp-coherence-refinement (2), its bounded constructible generator reduction and extension-by-zero input (old boundary-vanishing step 3).",
+   "via": [
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qc-open-extension-ctf",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Split into restriction identities, affine-local constructible strata, unchanged scalar models, exact cohomology, and the unbounded projection-formula Tor argument. Reused all existing nodes; no new nodes or Lean changes. Reviewer Q106 (maintainer reader): added the statement-only lemma lem-sfb-constructible-zariski-locality and cited it in steps 2 and 4, since sk-def-sfb-constructible does not itself state that its affine-local and qcqs stratified readings agree.",
+  "blueprint": "Realizes the bounded constructible extension-by-zero input of det-sf-comp-coherence-refinement (2), as used in the ancestor det-sf-comp-coherence-cocycle; preserves the proper-open refinement route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Construct the actual complementary closed scheme, needed by open localization and the projection formula; generic scheme construction, not a replacement of the compactification route."
+   },
+   {
+    "node": "lem-sfb-condensed-support-derived-localization",
+    "why": "Use the invertible open extension/restriction unit for arbitrary schemes and pulled-back condensed modules; the finite-field alternative does not cover this item."
+   },
+   {
+    "node": "lem-sfb-internal-open-extension-disjoint-vanishing",
+    "why": "Use actual module inverse-image vanishing on every morphism disjoint from the open, including the affine complement; no finite-type restriction."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Use exactness of module pullback for the admissible untwisted coefficients, without invertibility of ell or hypotheses on schemes."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Topological input to turn a quasi-compact open of an affine scheme into a retrocompact open."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-open-retrocompact-iff-quasi-compact",
+    "why": "Topological retrocompactness criterion supplies the precise hypothesis of the existing constructible-image lemma."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-image-retrocompact-open",
+    "why": "Generic topology lemma preserving constructible subsets under a retrocompact open inclusion; indispensable outside Noetherian schemes."
+   },
+   {
+    "node": "lem-sfb-condensed-support-projection-formula",
+    "why": "Unbounded derived open projection formula supplies the Tor-interval argument in the full coefficient and arbitrary-scheme scope; field-restricted projection nodes are insufficient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-condensed-support-derived-localization",
+  "lem-sfb-internal-open-extension-disjoint-vanishing",
+  "lem-sfb-condensed-support-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-aeff75545",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-aeff75545 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item is unchanged, it has 6 steps and the split adds no new nodes. I read it against main-20261015 det-sf-comp-coherence-refinement.proof.md (2) and lem-sfb-dc-open-lower-shriek-preserves.proof.md, and against Stacks topology 005H, 005J, 09YD and 053W. No SGA source is used. The item is still unsplit in live and side-live, there is no repair note and there are no earlier runs. The statement is true, and j quasi-compact is a hypothesis it really needs. Edge cases checked: U empty, U=X, X empty, M=0, K=0, Lambda=0, ell equal to a residue characteristic, and non-qcqs U or X. Steps 1, 3, 5 and 6 are correct: the open unit and disjoint vanishing hold for every g; D is retrocompact in the spectral space V and 09YD applies; exact j_! commutes with H^n; the unbounded projection formula with T=F[0] and exact j^* gives the Tor interval. Step 4's local models are correct: the original scalar models are reused, and the model is zero on the reduced complement. One gap, C4/E1, affects steps 2 and 4. Step 2 took a 'finite-stratification characterization' from sk-def-sfb-constructible on the qcqs open D, which need not be affine. Step 4 concluded only the affine-local condition even when X is qcqs. That definition never says that its affine-local and stratified readings agree, or that either one passes to a quasi-compact open. When U is not qcqs, M is known only affine-locally, so getting to D needs a gluing argument, and no cited node gives one. The repair adds a statement-only lemma, lem-sfb-constructible-zariski-locality (unsplit, created.item = this item, valid for any commutative condensed Lambda). Clause (1) restricts from a qcqs scheme to a quasi-compact open, by 005J. Clause (2) glues along a finite quasi-compact open cover of a qcqs scheme, using retrocompactness of the cover members, 09YD and a disjointification. Step 2 now cites clause (1) when U is qcqs and a finite affine cover of D plus clause (2) otherwise. Step 4 adds clause (2) with W=X when X is qcqs and is no longer marked elementary. proof_deps is updated. The off-unit tool_uses are accepted: reduced induced subscheme, derived localization, disjoint vanishing, cartesian coefficients, projection formula and the generic topology lemmas. No existing node can replace the new lemma: lem-pe-coefficient-constructible-locality is about another predicate, and lem-sfb-pullback-constant-model-constructible needs the finite-subextension Qbar and qcqs schemes.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QcOpenExtensionConstantModelFiniteTor",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.qcOpenExtension_constantModelConstructible_finiteTor",
+  "file": "lean/Sheaf/Paper/QcOpenExtensionConstantModelFiniteTor.lean",
+  "statement": "theorem qcOpenExtension_constantModelConstructible_finiteTor (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] : (∀ M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U), IsConstantModelConstructible Λ U M → IsConstantModelConstructible Λ X ((openImmersionLowerShriek Λ j).obj M)) ∧ (∀ n : ℤ, Nonempty ((openImmersionLowerShriek Λ j).mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ n ≅ DerivedCategory.homologyFunctor _ n ⋙ openImmersionLowerShriek Λ j)) ∧ (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))) (a b : ℤ), DerivedCategory.homologyConcentratedIn a b K → DerivedCategory.homologyConcentratedIn a b ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K)) ∧ (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))) (a b : ℤ), DerivedCategory.torAmplitudeIn _ a b K → DerivedCategory.torAmplitudeIn _ a b ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K)) ∧ (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)), (constantModelBoundedConstructible Λ U ⊓ DerivedCategory.finiteTorAmplitude _) K → (constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K))",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9c7be4b8",
+  "group": "NS",
+  "result": "pass",
+  "note": "Only the item's lean record changed, and its statement matches the file exactly; no supersession or repair note. The conjuncts render every node clause on the recorded declarations: IsConstantModelConstructible for j_!M; a natural iso J⋙H^n ≅ H^n⋙j_! for each n; homologyConcentratedIn and torAmplitudeIn (tested against all degree-zero modules) intervals preserved; Dctf preserved via constantModelBoundedConstructible ⊓ finiteTorAmplitude. Only [IsOpenImmersion j] [QuasiCompact j] is assumed, with no Noetherian/field/char/qcqs hypothesis; universes Scheme.{u}/Profinite.{u}/Ab.{u+1} are those of the deps; the coefficient convention is the recorded IsLocalizingAdmissibleCoefficient, whose extra continuous-Q̄_ℓ case is harmless. Edge cases (empty schemes, zero objects, a>b, non-qcqs, residue char ℓ) are covered. Not duplicated: constantModelConstructible_openImmersionLowerShriek needs finite type over a field with char≠ℓ, scalarModelImmersionExtension needs Noetherian. Docstrings carry the source and six proof steps, sorry only, plain imports are all proof_dep modules, no line over 100 chars, report has both sections. No FIX, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2879d",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261024T191630-L-452518",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); #print axioms (no sorryAx); node diff vs clone (proof fields + tool_uses pruning only); unit realized/uses vs removed CartesianCoefficients import; delivered module + direct importer QcqsProperOpenBoundaryFunctor compiled together (exit 0)"
+ }
+}

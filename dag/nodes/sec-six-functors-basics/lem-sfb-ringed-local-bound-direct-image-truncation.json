@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-ringed-local-bound-direct-image-truncation",
+ "kind": "statement",
+ "title": "Unbounded direct-image truncation stability from local bounds",
+ "statement": "Let $f:(\\operatorname{Sh}(\\mathcal C),\\mathcal O)\\to(\\operatorname{Sh}(\\mathcal D),R)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism], with commutative ring sheaves on sites small relative to the module-sheaf universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Use module sheaves [def-weil-sheaf-of-modules-category], their ordinary unbounded derived categories and cohomology $H^j$ [def-weil-abstract-derived-category]. Let $\\mathcal A\\subset\\operatorname{Mod}(\\mathcal O)$ and $\\mathcal B\\subset\\operatorname{Mod}(R)$ be weak Serre subcategories, meaning strictly full subcategories containing zero and closed under kernels and cokernels of maps between their objects and under extensions. Write $D_{\\mathcal A}$ and $D_{\\mathcal B}$ for the full subcategories with all cohomology in these subcategories, and $D^+_{\\mathcal A}$ and $D^+_{\\mathcal B}$ for their bounded-below parts (cohomology zero in all degrees below some integer). A triple $(\\mathcal E,S,\\mathcal H)$ has the local bound property if there is a set $\\mathcal V\\subset\\operatorname{Ob}(\\mathcal E)$ such that every site object has a covering by members of $\\mathcal V$, and each $V\\in\\mathcal V$ admits an integer $d_V$ and a cofinal collection of covering families $\\{V_i\\to V\\}$ such that $H^p(V_i,F)=0$ for $p>d_V$ and all $F\\in\\mathcal H$. Cofinal means that every covering family has a refinement in this collection; $H^p(V_i,F)$ is right derived sections of $F$. Suppose both $(\\mathcal C,\\mathcal O,\\mathcal A)$ and $(\\mathcal D,R,\\mathcal B)$ have this property. Let $N\\in\\mathbf Z$ satisfy $R^pf_*F\\in\\mathcal B$ for all $F\\in\\mathcal A$ and $p\\geq0$, and $R^pf_*F=0$ for all $p>N$. For total derived direct image $Rf_*$, computed by K-injective resolutions, every $K\\in D_{\\mathcal A}(\\mathcal O)$ has $Rf_*K\\in D_{\\mathcal B}(R)$. For every $n\\geq0$ and $j\\geq N-n$, the map induced by good truncation $K\\to\\tau_{\\geq-n}K$ [def-kun-truncations] gives an isomorphism\n$$H^j(Rf_*K)\\longrightarrow H^j(Rf_*(\\tau_{\\geq-n}K)).$$\nNo flatness or equivalence hypothesis on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6U, lemma-olsson-laszlo-map-version-one, statement and proof; local bound hypothesis is Tag 0D6R, situation-olsson-laszlo"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-kun-truncations",
+  "def-sfb-ringed-local-bound-property"
+ ],
+ "proof": [
+  {
+   "text": "Put $T_n=\\tau_{\\geq-n}K$ and $L_n=Rf_*T_n$. Good truncation retains $H^q(K)$ for $q\\geq-n$ and gives zero below, so $T_n\\in D^+_{\\mathcal A}$. Module categories on these small ringed sites are Grothendieck and admit K-injective resolutions. Module direct image is additive by its definition. Its underlying sheaf functor is a right adjoint, so it preserves the equalizer defining a kernel: transpose an equalizing map by the sheaf adjunction, factor it uniquely through the kernel, and transpose back. The factor is module-linear because the module operations are induced by that same adjunction. Thus module direct image preserves kernels and is left exact. The bounded-below hypercohomology spectral sequence therefore gives\n$$E_2^{p,q}=R^pf_*H^q(T_n)\\Longrightarrow H^{p+q}(L_n),\\qquad p\\geq0,\\ q\\geq-n.$$\nEach $E_2$ term lies in $\\mathcal B$. Successive pages are kernels modulo images of maps between such objects, hence remain in $\\mathcal B$ by weak Serre closure; in each total degree the finite filtration supplied by convergence has these stable terms as its graded pieces. Repeated extension closure puts its abutment in $\\mathcal B$. Also no term has total degree below $-n$. Consequently $L_n\\in D^+_{\\mathcal B}$.",
+   "uses": [
+    "def-kun-truncations",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-ringed-topos-morphism",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6U, proof: the bounded-below spectral sequences and membership in the weak Serre subcategory; derived.tex Tag 015J, lemma-two-ss-complex-functor"
+   }
+  },
+  {
+   "text": "For an integer $r\\geq1$, the successive lower-truncation triangle is\n$$H^{-r}(K)[r]\\longrightarrow T_r\\longrightarrow T_{r-1}\\longrightarrow H^{-r}(K)[r+1].$$\nApply the triangulated $Rf_*$ and the long exact cohomology sequence. The shifted-single identification gives $H^a(Rf_*(H^{-r}(K)[r]))=R^{a+r}f_*H^{-r}(K)$ when $a+r\\geq0$, and zero when $a+r<0$. In particular this group is zero whenever $a+r>N$: use the given higher-image bound in nonnegative degrees, and the negative-degree vanishing otherwise. Fix $n\\geq0$ and $j\\geq N-n$. For every $r\\geq n+1$, both $j+r$ and $j+1+r$ exceed $N$. Thus the two outer groups in\n$$H^j(Rf_*(H^{-r}K[r]))\\to H^j(L_r)\\to H^j(L_{r-1})\\to H^{j+1}(Rf_*(H^{-r}K[r]))$$\nare zero. Exactness makes the middle map an isomorphism. Finite composition proves $H^j(L_m)\\to H^j(L_n)$ is an isomorphism for all $m\\geq n$ and $j\\geq N-n$. This includes the boundary $j=N-n$.",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sp-shift-identification",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6U, proof: comparison between lower truncations, expanded using successive-truncation triangles"
+   }
+  },
+  {
+   "text": "Apply the source-site reconstruction theorem to $K$ with the given local bound property for $\\mathcal A$. It identifies the canonical maps with an isomorphism $K\\xrightarrow{\\sim}R\\varprojlim_nT_n$. Represent $K$ by a complex and use its good truncations as a strict tower. Apply the ringed-topos pushforward–limit comparison to this tower (reindex $n\\geq0$ by $n+1\\geq1$). It gives\n$$Rf_*K\\xrightarrow{\\sim}R\\varprojlim_nL_n.$$\nThe comparison commutes with every projection, so the composite to $L_n$ is precisely $Rf_*$ applied to $K\\to T_n$. No exactness of module pullback or of countable products is needed.",
+   "uses": [
+    "lem-sfb-ringed-local-bound-truncation-reconstruction",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6U, first two sentences, using Tag 0D6S and Tag 0A07, lemma-Rf-commutes-with-Rlim"
+   }
+  },
+  {
+   "text": "For each $j$, choose $n_j=\\max(0,N-j)$. Step 2 says every transition of $(H^j(L_n))$ at index at least $n_j$ is an isomorphism. Step 1 puts all $L_n$ in $D^+_{\\mathcal B}$, so the target-site stationary-limit theorem applies with the given local bound property for $\\mathcal B$. It identifies the canonical projection $H^j(R\\varprojlim_mL_m)\\to H^j(L_n)$ as an isomorphism whenever $n\\geq n_j$. These sheaves lie in $\\mathcal B$, so the limit has all cohomology in $\\mathcal B$. With step 3 this proves $Rf_*K\\in D_{\\mathcal B}$. Finally, if $n\\geq0$ and $j\\geq N-n$, then $n\\geq\\max(0,N-j)=n_j$. The same projection, identified in step 3 with the canonical truncation map, proves exactly the required isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-local-bound-stationary-limit-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6U, final sentence: apply Tag 0D6T, lemma-olsson-laszlo-modified"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-ringed-local-bound-stationary-limit-cohomology",
+  "lem-sfb-ringed-local-bound-truncation-reconstruction",
+  "lem-sp-shift-identification",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6U, lemma-olsson-laszlo-map-version-one, proof; the transition comparison is expanded via successive truncation triangles instead of an implicit spectral-sequence comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of unbounded derived direct image agrees with the lower truncated complex in degree j greater than cohomological dimension minus n",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE'\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncGEHomology\", \"type\": \"(hj : ¬e.BoundaryGE j) [(K.restriction e).HasHomology j] [(K.truncGE' e).HasHomology j] :\\n  QuasiIsoAt (K.restrictionToTruncGE' e) j\", \"doc\": \"If $ j $ is not a boundary index with respect to the truncation-preserving embedding $ e $, and both the restricted complex $ K.\\\\text{restriction}(e) $ and the truncated complex $ K.\\\\text{truncGE}'(e)\"}\n  {\"name\": \"CochainComplex.quasiIso_truncGEMap_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \": QuasiIso (truncGEMap φ n) ↔ ∀ (i : ℤ) (_ : n ≤ i), QuasiIsoAt φ i\", \"doc\": \"The truncated cochain complex map $\\\\phi_{\\\\text{trunc}}$ at level $n$ is a quasi-isomorphism if and only if for every integer $i \\\\geq n$, the original morphism $\\\\phi$ induces an isomorphism on the $i$-\"}\n  {\"name\": \"CochainComplex.truncate_obj_X\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"∀ {V : Type u} [inst : CategoryTheory.Category.{v, u} V] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  (C : CochainComplex V ℕ) (i : ℕ), (CochainComplex.truncate.obj C).X i = C.X (i + 1)\", \"doc\": \"For a cochain complex $ C $ in a category $ V $ with natural number indices, the object at index $ i $ in the truncated complex $ \\\\text{truncate}(C) $ is equal to the object at index $ i + 1 $ in the \"}\n  {\"name\": \"CochainComplex.quasiIso_ιTruncLE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \": QuasiIso (K.ιTruncLE n) ↔ K.IsLE n\", \"doc\": \"The canonical morphism from the truncation of the cochain complex $ K $ at integer $ n $ to $ K $ is a quasi-isomorphism if and only if the complex $ K $ is supported under the embedding from the down\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [X.IsStrictlyLE n] :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyLE n) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y),\\n    f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"CochainComplex.truncate_obj_d\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"∀ {V : Type u} [inst : CategoryTheory.Category.{v, u} V] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V]\\n  (C : CochainComplex V ℕ) (i j : ℕ), (CochainComplex.truncate.obj C).d i j = C.d (i + 1) (j + 1)\", \"doc\": \"For a cochain complex $ C $ in a category $ V $ with natural number indices, the differential maps in the truncated complex at indices $ i $ and $ j $ are equal to the differential maps of $ C $ at in\"}\n  {\"name\": \"DerivedCategory.isZero_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (n i : ℤ) (hi : n < i) [hX : X.IsLE n] : IsZero ((homologyFunctor _ i).obj X)\", \"doc\": \"If an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $ (i.e., is isomorphic to a cochain complex strictly supported in degrees $ \\\\leq n $), then for every integer $ i \"}\n  {\"name\": \"CochainComplex.quasiIso_πTruncGE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \": QuasiIso (K.πTruncGE n) ↔ K.IsGE n\", \"doc\": \"The canonical morphism $\\\\pi_{\\\\text{truncGE}}: K \\\\to K.\\\\text{truncGE}(n)$ is a quasi-isomorphism if and only if the cochain complex $K$ is supported by the embedding translating indices by $n$ (i.e., $\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and cohomological support lemmas do not control an unbounded derived direct image from local sheaf-cohomology bounds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under local cohomological dimension bounds on two ringed sites and weak Serre subcategories, a uniform bound on higher direct images implies unbounded derived pushforward cohomology stabilizes on lower truncations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and cohomological support lemmas do not control an unbounded derived direct image from local sheaf-cohomology bounds"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"truncGE\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and cohomological support lemmas do not control an unbounded derived direct image from local sheaf-cohomology bounds"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*trunc|trunc.*rightDerivedFunctor|cohomological.*dimension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and cohomological support lemmas do not control an unbounded derived direct image from local sheaf-cohomology bounds"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-unbounded-descent-criterion",
+  "date": "2026-10-23",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: apply the general truncation-stability lemma with N = 0",
+   "via": [
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-local-bound-direct-image-truncation",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0D6U and its inputs; retained the full statement and proved the endpoint transition bound with successive-truncation triangles. Reused generic bounded-below hypercohomology and ringed-topos strict-limit comparison; exposed the two distinct local-bound inputs 0D6S and 0D6T as statement-only nodes after DAG, blueprint, Lean and Mathlib searches.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, specifically the general unbounded descent criterion (Stacks 0D7V) application of 0D6U with N=0. The current blueprint proof (3) was read; no unit route is replaced. The inherited nearest imported blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "def-kun-truncations",
+    "why": "Generic good truncations and their retained cohomology; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "Generic underlying sheaf adjunction and induced additive module direct image; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-derived-lower-truncation-step-triangle",
+    "why": "Generic successive lower-truncation triangle with canonical transition; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic exactness of total right derived functors; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology of a distinguished triangle; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-sp-shift-identification",
+    "why": "Generic cohomology of shifted single objects after a right derived functor; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic ringed-topos pushforward comparison with strict derived limits, compatible with projections; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Grothendieck module categories and K-injective resolutions on small ringed sites; the unit has no replacement for this general tool."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic bounded-below hypercohomology spectral sequence with finite abutment filtration; the unit has no replacement for this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-truncations",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-shift-identification",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "thm-sp-truncation-e2"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-62075d82d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-62075d82d (reviewer sub-agent of L); spot-checked: Read Stacks sites-cohomology 0D6R/0D6S/0D6T/0D6U in full. The item's statement and stmt_deps are byte-identical to live. Live is unsplit, there is no repair note and no Lean, so this is a first split and not a re-split. Step 1: thm-sp-truncation-e2 with v=f_*, a=-n, plus closure of the weak Serre subcategory, gives L_n in D^+_B; left exactness of f_* is derived correctly from the ringed-topos definition. Step 2: the step triangle and the shift identification (part 3 for negative degrees) give outer terms R^{j+r} and R^{j+1+r} with j+r>N for r>=n+1 and j>=N-n, so the transition maps are isomorphisms, endpoint included. Step 3: the reconstruction node (0D6S) and the generic push-forward/limit comparison, which is compatible with projections, give Rf_*K = Rlim L_n via the canonical map. Step 4: the stationary-limit node (0D6T) with n_j=max(0,N-j) gives both (a) and (b). Both new nodes are self-contained, statement-only, cite their notions, carry 4 recorded searches and the inherited null blueprint ancestor. They are not duplicates of 0D6P (lem-kun-site-truncation-derived-limit, uniform d), 0BKZ/0BKY or the exact-products nodes (lem-sfb-derived-left-complete-truncation-bound, lem-roos-eventually-constant-projection), and they are not clauses of the item. No SGA citation. The generic tool_uses are accepted. The citer lem-sfb-ringed-unbounded-descent-criterion (N=0) is unaffected. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedLocalBoundDirectImageTruncation",
+  "declaration": "CategoryTheory.ringedLocalBoundDirectImageTruncation",
+  "file": "lean/Sheaf/CategoryTheory/RingedLocalBoundDirectImageTruncation.lean",
+  "statement": "theorem ringedLocalBoundDirectImageTruncation {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (L : Precoverage D) (_hJ : J.IsSiteForCoverings) (_hL : L.IsSiteForCoverings) (O : Sheaf J.toGrothendieck RingCat.{u}) (R : Sheaf L.toGrothendieck RingCat.{u}) (_hO : ∀ (U : Cᵒᵖ) (a b : O.obj.obj U), a * b = b * a) (_hR : ∀ (U : Dᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasExt.{e} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] [HasExt.{e} (Sheaf L.toGrothendieck AddCommGrpCat.{u})] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} O)] [HasDerivedCategory.{w} (ringedSiteModules.{u, u, u, u} R)] (f : RingedToposMorphism O R) (P : ObjectProperty (ringedSiteModules.{u, u, u, u} O)) (Q : ObjectProperty (ringedSiteModules.{u, u, u, u} R)) [P.ContainsZero] [P.IsClosedUnderIsomorphisms] [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] [Q.ContainsZero] [Q.IsClosedUnderIsomorphisms] [Q.IsClosedUnderKernels] [Q.IsClosedUnderCokernels] [Q.IsClosedUnderExtensions] (_hlocalO : HasRingedLocalBoundProperty J O P) (_hlocalR : HasRingedLocalBoundProperty L R Q) (Rf : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} O) ⥤ DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} R)) (η : f.modules.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ Rf) (_hderived : Rf.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} O) (ComplexShape.up ℤ))) (_hKI : ∀ I : CochainComplex (ringedSiteModules.{u, u, u, u} O) ℤ, I.IsKInjective → IsIso (η.app I)) (N : ℤ) (_himage : ∀ F : ringedSiteModules.{u, u, u, u} O, P F → ∀ p : ℕ, Q ((DerivedCategory.homologyFunctor _ (p : ℤ)).obj (Rf.obj ((DerivedCategory.singleFunctor _ 0).obj F)))) (_hvanish : ∀ F : ringedSiteModules.{u, u, u, u} O, P F → ∀ p : ℕ, N < (p : ℤ) → IsZero ((DerivedCategory.homologyFunctor _ (p : ℤ)).obj (Rf.obj ((DerivedCategory.singleFunctor _ 0).obj F)))) (K : DerivedCategory.{w} (ringedSiteModules.{u, u, u, u} O)) (_hK : ∀ j : ℤ, P ((DerivedCategory.homologyFunctor _ j).obj K)) : (∀ j : ℤ, Q ((DerivedCategory.homologyFunctor _ j).obj (Rf.obj K))) ∧ ∀ (n : ℕ) (j : ℤ), N - (n : ℤ) ≤ j → IsIso ((DerivedCategory.homologyFunctor _ j).map (Rf.map ((DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app K)))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19228c185",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read item, all 7 stmt_deps, Stacks 0D6R/0D6U, both delivered modules, the new def node and the RingedToposMorphism/ringedSiteModules/Sheaf.H'/ObjectProperty closure declarations. Every clause matches: weak Serre P/Q (zero, iso, kernels, cokernels, extensions), local bound on both sites, Rf pinned by IsRightDerivedFunctor plus η iso on K-injectives (same interface as the landed tower comparison), _himage/_hvanish = R^p f_* hypotheses with N unrestricted, K unbounded with H^j in P, (a) Q(H^j Rf K), (b) IsIso of H^j(Rf(truncGEπ(-n))) for N-n<=j, boundary included. New def HasRingedLocalBoundProperty is equivalent to the 0D6R cofinal-system formulation (d before S, refinement by factorization, Sheaf.H' vanishing for p>d), a real Prop, not found elsewhere. Parallel N5/N9 inline the hypothesis with no clash. Statement text identical to live except the added stmt_dep; lean.statement verbatim in both files; docstrings and sorry-only gates OK. No compile because no change. No findings."
+ }
+}

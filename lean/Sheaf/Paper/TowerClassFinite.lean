@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.TowerClassProjective
 
+import Sheaf.Paper.FiniteTateLineUniversal
+
 /-! # Finite for canonical tower classes
 
 Source: blueprint main-20261015, sec-smooth-purity,
@@ -49,7 +51,7 @@ preserves both kernels and cokernels and therefore finite limits and colimits. -
 theorem finiteForget_exact (T : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (finiteForget l E T n) ∧
       PreservesFiniteColimits (finiteForget l E T n) := by
-  sorry
+  exact ⟨inferInstance, inferInstance⟩
 
 /-- Exactness on kernels, with the stated independent site sizes.
 Source: classes (2)--(3) (blueprint: def-sp-tower-class-finite). -/
@@ -80,7 +82,37 @@ theorem finiteQuotient_existsUnique (T : Scheme.{u}) (n : ℕ) :
           ((Functor.const T.ProEtᵒᵖ).obj
             (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U k))
           (k.down : (SpTowerShriek.B l E T n).obj.obj U) := by
-  sorry
+  let M := (finiteForget l E T n).obj
+    ((SpTowerShriek.ev l E T n).obj (coefficient T (Arings l E T)))
+  let p : (Functor.const T.ProEtᵒᵖ).obj
+      (AddCommGrpCat.of (ULift.{u + 1} ℤ)) ⟶ M.obj :=
+    { app := fun U ↦ AddCommGrpCat.ofHom
+        ((Int.castAddHom ((SpTowerShriek.B l E T n).obj.obj U)).comp
+          AddEquiv.ulift.toAddMonoidHom)
+      naturality := by
+        intro U V f
+        ext k
+        exact (map_intCast
+          ((SemilinearSections.ringPresheaf.{u + 1, u, u + 1}
+            (Scheme.ProEt.topology T)
+            (fun m ↦ (Arings l E T).obj (op m))
+            (fun m ↦ (Arings l E T).map (homOfLE (Nat.le_succ m)).op)).map
+              (Prod.mkHom (𝟙 n) f.unop).op).hom k.down).symm }
+  let q : (abEvaluation T n).obj (integers T) ⟶ M :=
+    ⟨sheafifyLift (Scheme.ProEt.topology T) p M.property⟩
+  have hq (U : T.ProEtᵒᵖ) (k : ULift.{u + 1} ℤ) :
+      HEq (q.hom.app U ((toSheafify (Scheme.ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj
+          (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U k))
+        (k.down : (SpTowerShriek.B l E T n).obj.obj U) := by
+    exact (congrArg (fun a ↦ a.app U k)
+      (toSheafify_sheafifyLift (Scheme.ProEt.topology T) p M.property)).heq
+  refine ⟨q, hq, ?_⟩
+  intro q' hq'
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext (Scheme.ProEt.topology T) _ _ M.property
+  ext U k
+  exact eq_of_heq ((hq' U k).trans (hq U k).symm)
 
 /-- The canonical positive-level integer quotient.
 Source: classes (2) (blueprint: def-sp-tower-class-finite). -/
@@ -100,7 +132,20 @@ theorem finiteRootMap_existsUnique (T : Scheme.{u}) (n : ℕ) :
         r.hom.app U z =
           Scheme.tateFiniteTensor T l (FiniteRing l E n) n (finiteScalar l E n)
             U.unop 1 z := by
-  sorry
+  obtain ⟨Ψ, _, hΨ⟩ :=
+    finiteTateLine_universal T l (FiniteRing l E n) n (finiteScalar l E n)
+  let r := Ψ (finiteLine l E T n) (𝟙 (finiteLine l E T n))
+  have hr (U : T.ProEtᵒᵖ) (z : ((roots l T).obj (op n)).obj.obj U) :
+      r.hom.app U z =
+        Scheme.tateFiniteTensor T l (FiniteRing l E n) n (finiteScalar l E n)
+          U.unop 1 z := by
+    simpa only [one_smul, SheafOfModules.id_val, PresheafOfModules.id_app,
+      ModuleCat.id_apply] using hΨ (finiteLine l E T n) (𝟙 _) U 1 z
+  refine ⟨r, hr, ?_⟩
+  intro r' hr'
+  apply Sheaf.hom_ext
+  ext U z
+  exact (hr' U z).trans (hr U z).symm
 
 /-- The canonical coefficient-linearization of finite roots on underlying sheaves.
 Source: classes (2)--(3) (blueprint: def-sp-tower-class-finite). -/
@@ -131,7 +176,9 @@ def forgetEvaluatedArrow {C : Type u₁} [Category.{v₁} C] [Abelian C]
     (G : D ⥤ H) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     {X Y : C} {Z : D} (e : F.obj Y ≅ Z)
     (a : (DerivedCategory.singleFunctor C 0).obj X ⟶
-      ((DerivedCategory.singleFunctor C 0).obj Y)⟦(2 : ℤ)⟧) :=
+      ((DerivedCategory.singleFunctor C 0).obj Y)⟦(2 : ℤ)⟧) :
+    (DerivedCategory.singleFunctor H 0).obj (G.obj (F.obj X)) ⟶
+      ((DerivedCategory.singleFunctor H 0).obj (G.obj Z))⟦(2 : ℤ)⟧ :=
   mapSingleArrow G (2 : ℤ)
     (mapSingleArrow F (2 : ℤ) a ≫
       ((DerivedCategory.singleFunctor D 0).map e.hom)⟦(2 : ℤ)⟧')
@@ -157,7 +204,9 @@ Source: classes (2)--(3), proof steps 6--8
 def kummerComposite {C : Type u₁} [Category.{v₁} C] [Abelian C]
     [HasDerivedCategory.{w₁} C] (s : ShortComplex C) (hs : s.ShortExact)
     {X : C} (f : (DerivedCategory.singleFunctor C 0).obj X ⟶
-      ((DerivedCategory.singleFunctor C 0).obj s.X₃)⟦(1 : ℤ)⟧) :=
+      ((DerivedCategory.singleFunctor C 0).obj s.X₃)⟦(1 : ℤ)⟧) :
+    (DerivedCategory.singleFunctor C 0).obj X ⟶
+      ((DerivedCategory.singleFunctor C 0).obj s.X₁)⟦(2 : ℤ)⟧ :=
   f ≫ hs.singleδ⟦(1 : ℤ)⟧' ≫
     (shiftFunctorAdd (DerivedCategory C) (1 : ℤ) 1).inv.app
       ((DerivedCategory.singleFunctor C 0).obj s.X₁)
@@ -170,16 +219,15 @@ Source: classes (2), proof step 8; Stacks 03PL
 (blueprint: def-sp-tower-class-finite). -/
 def FiniteChernNormalization {T : Scheme.{u}} (c : Chern l E T) : Prop :=
   ∀ (L : T.Pic) (n : ℕ),
+    let a := mapSingleArrow (finiteForget l E T n) (2 : ℤ) (evaluatedChern l E c L n)
+    let beta := mapSingleArrow (abEvaluation T n) (2 : ℤ)
+      (kummerComposite (C := Ab T)
+        (ShortComplex.mk c.kummer.inclusion c.kummer.power c.kummer.zero)
+        c.kummer.exact (lineBundleClass T L))
     finiteBoundaryEquality
       ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map (finiteQuotient l E T n))
       (((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
-        (finiteRootMap l E T n))⟦(2 : ℤ)⟧')
-      (forgetEvaluatedArrow (SpTowerShriek.ev l E T n) (finiteForget l E T n)
-        (lineEvaluation l E c n) (firstChern l E c L))
-      (mapSingleArrow (abEvaluation T n) (2 : ℤ)
-        (kummerComposite
-          (ShortComplex.mk c.kummer.inclusion c.kummer.power c.kummer.zero)
-          c.kummer.exact (lineBundleClass T L)))
+        (finiteRootMap l E T n))⟦(2 : ℤ)⟧') a beta
 
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses

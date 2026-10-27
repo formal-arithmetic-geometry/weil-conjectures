@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-perfect-finite-commutative-reduced-splitting",
+ "kind": "statement",
+ "title": "Reduced and identity-component factors of a finite commutative group over a perfect field",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic $p>0$ such that every element of $k$ is a $p$-th power. Let $G$ be a commutative finite $k$-group scheme [def-sc-group-scheme, def-weil-finite-integral-morphism]. Let $G^\\circ$ be the connected component containing its identity, endowed with its open-and-closed subscheme structure (connectedness is [def-weil-connected-scheme]), and let $G_{\\mathrm{red}}$ be the reduced closed subscheme [def-weil-pbc-scheme-reduction]: in an affine presentation $G=\\operatorname{Spec}B$ it is $\\operatorname{Spec}(B/\\sqrt{(0)})$ [def-weil-affine-spectrum, def-weil-pbc-algebra-hom-quotient]. Both $G^\\circ$ and $G_{\\mathrm{red}}$ are closed subgroup schemes [def-sc-group-scheme-subgroup]; $G_{\\mathrm{red}}$ is finite etale over $k$ [def-weil-etale-morphism]. Multiplication induces an isomorphism of $k$-group schemes $$G^\\circ\\times_k G_{\\mathrm{red}}\\xrightarrow{\\sim}G.$$ The factor $G_{\\mathrm{red}}$ is not required to be a constant group scheme over $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.3 and its proof, printed p.210; the semidirect product there is a direct product for a commutative G. Identity components with open-and-closed structure: Proposition 2.37, printed pp.51-52."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}B$ with $B$ finite-dimensional over $k$. Put $C=B/\\sqrt{(0)}$ and $R=G_{\\mathrm{red}}=\\operatorname{Spec}C$. The reduced-induced-subscheme theorem ensures that $C$ is reduced. It is finite-dimensional, being a quotient of $B$; hence the finite-reduced-perfect-algebra lemma and the affine ring-map criterion make $R$ finite etale. The tensor lemma makes $C\\otimes_kC$ reduced. Any map from $B$ to a reduced ring kills every nilpotent. Apply this to the restrictions of multiplication $R\\times_kR\\to G$, inversion $R\\to G$, and the identity $\\operatorname{Spec}k\\to G$: each factors uniquely through $R\\hookrightarrow G$. The group axioms follow after composing with this closed immersion, since on affine rings its quotient map is surjective. Thus $R$ is a closed subgroup scheme; no assertion about its being constant is used.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-a1-finite-reduced-perfect-algebra-etale",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-perfect-reduced-tensor",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3, first use of Corollary 1.39; Proposition 1.38 and its proof, printed pp.18 and 210. Algebraic inputs also Stacks 00I4 and 00U3."
+   }
+  },
+  {
+   "text": "Apply the component-scheme theorem to $G$, writing $P=\\Pi_k(G)$ and $q=q_G$. Here $G$ is affine by finiteness and separated because the diagonal of $\\operatorname{Spec}B$ is induced by the surjective multiplication map $B\\otimes_kB\\to B$. The functor $\\Pi_k$ preserves products and the terminal scheme, so applying it to multiplication, inverse, identity and each group-axiom diagram gives a commutative group scheme structure on $P$, with $q$ a homomorphism. The identity $e_P$ is an open-and-closed copy of $\\operatorname{Spec}k$ in $P$: its finite etale coordinate algebra is a product of finite separable fields, and a $k$-algebra map from such a product to $k$ selects a factor equal to $k$. Consequently $H=G\\times_{P,e_P}\\operatorname{Spec}k$ is an open-and-closed subgroup scheme. Indeed its $T$-points are the kernel of $q:G(T)\\to P(T)$ for every $k$-scheme $T$. The component-scheme theorem says that its underlying space is the connected component of the identity. The pullback of this open immersion equips it with the open subscheme structure, so $H$ is exactly the $G^\\circ$ of the item, including its possibly nonreduced structure.",
+   "uses": [
+    "lem-sfb-algebraic-scheme-etale-components",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 2.37(b,d), printed pp.51-52, deduced by applying Propositions 1.29-1.31 to the group diagrams; Proposition 1.34, pp.16-17."
+   }
+  },
+  {
+   "text": "Let $K$ be a separable closure of $k$. It is perfect: let $a\\in K$. Since $K/k$ is separable, $a$ is separable over $k$ and hence over $k(a^p)$, while it is a root of $X^p-a^p=(X-a)^p$ over $k(a^p)$; so $a\\in k(a^p)=k[a^p]$. Writing $a=\\sum_i c_ia^{pi}$ with $c_i\\in k$ and $c_i=d_i^p$, $d_i\\in k$, gives $a=(\\sum_i d_ia^i)^p$ with $\\sum_i d_ia^i\\in K$. It is algebraically closed: an irreducible polynomial over $K$ with zero derivative is, by perfectness, a $p$-th power and cannot be irreducible; otherwise it is separable and has degree one by separable closedness. The component theorem identifies $q_K$ with the component map of $G_K$. The underlying space of the finite $K$-scheme $G_K$ is finite discrete by the zero-dimensional finite-type lemma: every prime quotient of its finite-dimensional coordinate algebra is a finite-dimensional domain over $K$, hence a field (multiplication by any nonzero element is an injective, hence surjective, linear endomorphism). Its components are therefore single points. Each residue field is a finite extension of the algebraically closed field $K$, hence $K$. Thus $q_K$ gives a bijection $G(K)\\to P(K)$. Every map $B\\to K$ kills $\\sqrt{(0)}$, giving $R(K)=G(K)$. It follows that $u=q|_R:R\\to P$ is bijective on $K$-points. Both its source and target are etale. By full faithfulness of the etale geometric-point functor, the inverse of this equivariant bijection lifts to a $k$-morphism $v:P\\to R$, and faithfulness gives $uv=1$ and $vu=1$. As $u$ is a homomorphism, its inverse is a homomorphism too.",
+   "uses": [
+    "lem-sfb-algebraic-scheme-etale-components",
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-exc-etale-field-point-functor-fully-faithful",
+    "def-pd-separable-closure",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3, geometric-point comparison, printed p.210; finite discreteness is Proposition 11.2, pp.209-210. Etale full faithfulness is also Stacks 03QR."
+   }
+  },
+  {
+   "text": "Put $r=v\\circ q:G\\to R$ and let $j:R\\hookrightarrow G$ be the inclusion. The morphism $a:G\\to G$, $a(x)=xj(r(x))^{-1}$, satisfies $q(a(x))=q(x)u(r(x))^{-1}=e_P$. The kernel fibre product therefore gives a morphism $a:G\\to H$. Multiplication $m:H\\times_kR\\to G$ and $(a,r):G\\to H\\times_kR$ are inverse morphisms: $m(a(x),r(x))=x$, while for $h\\in H(T)$ and $z\\in R(T)$ one has $r(hj(z))=z$ and $a(hj(z))=h$. These identities are functorial for every test scheme $T$, so they are identities of scheme morphisms. Finally commutativity gives $(h_1j(z_1))(h_2j(z_2))=(h_1h_2)j(z_1z_2)$ on every $T$, proving $m$ is a homomorphism. Its inverse is then a homomorphism. With $H=G^\\circ$ and $R=G_{\\mathrm{red}}$ this is the asserted isomorphism of group schemes.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 11.3 and Proposition 2.34, printed pp.210 and 50: explicit inverse to the split-extension multiplication; commutativity makes it a direct product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-a1-finite-reduced-perfect-algebra-etale",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-algebraic-scheme-etale-components",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-exc-etale-field-point-functor-fully-faithful",
+  "def-pd-separable-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 11.3, printed p.210, with the component construction of Propositions 1.29-1.31, Corollary 1.39 and Proposition 2.37; explicit inverse in the commutative case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite commutative group scheme over a perfect field is the direct product of its identity component and its reduced finite etale subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PerfectRing.ofFiniteOfIsReduced\", \"module\": \"Mathlib/FieldTheory/Perfect\", \"type\": \"∀ (p : ℕ) (R : Type u_2) [inst : CommRing R] [inst_1 : ExpChar R p] [Finite R] [IsReduced R], PerfectRing R p\", \"doc\": \"Every finite commutative ring $ R $ with exponential characteristic $ p $ that is reduced (i.e., has no nonzero nilpotent elements) is a perfect ring of characteristic $ p $, meaning every element of \"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv_symm_apply\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) (R : Type u_2) [inst : Field K] [inst_1 : Fintype K] [inst_2 : CommRing R] [inst_3 : Algebra K R]\\n  (p : ℕ) [inst_4 : ExpChar R p] [inst_5 : PerfectRing R p] (b : R),\\n  (FiniteField.frobeniusAlgEquiv K R p).symm b = Function.surjInv ⋯ b\", \"doc\": \"For a finite field $ K $ with cardinality $ \\\\#K $, a commutative ring $ R $ equipped with an $ K $-algebra structure, and a prime $ p $ such that $ R $ has exponential characteristic $ p $ and is a pe\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv_apply\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"∀ (K : Type u_1) (R : Type u_2) [inst : Field K] [inst_1 : Fintype K] [inst_2 : CommRing R] [inst_3 : Algebra K R]\\n  (p : ℕ) [inst_4 : ExpChar R p] [inst_5 : PerfectRing R p] (a : R),\\n  (FiniteField.frobeniusAlgEquiv K R p) a = a ^ Fintype.card K\", \"doc\": \"For a finite field $ K $ of cardinality $ q $ and a commutative ring $ R $ with exponential characteristic $ p $, the Frobenius endomorphism defined by raising elements to the $ q $-th power is an alg\"}\n  {\"name\": \"FiniteField.frobeniusAlgEquiv\", \"module\": \"Mathlib/FieldTheory/Finite/Basic\", \"type\": \"(K : Type u_1) →\\n  (R : Type u_2) →\\n    [inst : Field K] →\\n      [Fintype K] →\\n        [inst_2 : CommRing R] →\\n          [inst_3 : Algebra K R] → (p : ℕ) → [inst_4 : ExpChar R p] → [PerfectRing R p] → R ≃ₐ[K] R\", \"doc\": \"The algebra equivalence from a $ K $-algebra $ R $ to itself defined by the Frobenius endomorphism raising elements to the power of the cardinality $ \\\\#K $ of the finite field $ K $. This equivalence \"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic etaleness and abstract group-extension splittings do not give the connected-reduced splitting of finite group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic etaleness and abstract group-extension splittings do not give the connected-reduced splitting of finite group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "connected.etale|connected.étale|reduced.*subgroup|subgroup.*reduced",
+   "results": "[grep] OK 0 hit(s) Directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic etaleness and abstract group-extension splittings do not give the connected-reduced splitting of finite group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a perfect field the connected etale exact sequence of a finite group scheme splits via the reduced subgroup",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Splitting\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → Type (max u_2 u_3)\", \"doc\": \"A splitting of the group extension given by the short exact sequence $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ is a group homomorphism $s : G \\\\to E$ such that the composition $G \\\\xrightarrow{s} E \\\\xrightarrow{\\\\pi} \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"PerfectField.ofCharZero\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"[CharZero K] : PerfectField K\", \"doc\": \"Any field with characteristic zero is a perfect field.\"}\n  {\"name\": \"PerfectRing.ofFiniteOfIsReduced\", \"module\": \"Mathlib.FieldTheory.Perfect\", \"type\": \"(R : Type*) [CommRing R] [ExpChar R p] [Finite R] [IsReduced R] : PerfectRing R p\", \"doc\": \"Every finite commutative ring $ R $ with exponential characteristic $ p $ that is reduced (i.e., has no nonzero nilpotent elements) is a perfect ring of characteristic $ p $, meaning every element of \"}\n  {\"name\": \"GroupExtension.Splitting.toSection\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → {S : GroupExtension N E G} → S.Splitting → S.Section\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ and a splitting $s : G \\\\to E$ (a group homomorphism satisfying $\\\\pi \\\\circ s = \\\\mathrm{id}_G$), this constructs the corresponding section $s : G \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  autoParam (∀ (U : X.Opens), IsReduced ↑(X.presheaf.obj (Opposite.op U)))\\n      AlgebraicGeometry.IsReduced.component_reduced._autoParam →\\n    AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $ X $ is reduced if for every open subset $ U $ of $ X $, the ring of sections $ \\\\mathcal{O}_X(U) $ is reduced (i.e., contains no nonzero nilpotent elements).\"}\n  {\"name\": \"PerfectClosure.instReduced\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \": IsReduced (PerfectClosure K p)\", \"doc\": \"For any field $ K $ of characteristic $ p $, its perfect closure (constructed as the quotient of $ \\\\mathbb{N} \\\\times K $ by the $ p $-th power equivalence relation) has no nonzero nilpotent elements. \"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic etaleness and abstract group-extension splittings do not give the connected-reduced splitting of finite group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite algebraic groups over perfect fields split as semidirect products of the connected component by the reduced group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"GroupExtension.Splitting.semidirectProductToGroupExtensionEquiv\", \"module\": \"Mathlib/GroupTheory/GroupExtension/Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : Group N] →\\n      [inst_1 : Group G] →\\n        {E : Type u_3} →\\n          [inst_2 : Group E] →\\n            {S : GroupExtension N E G} → (s : S.Splitting) → (SemidirectProduct.toGroupExtension s.conjAct).Equiv S\", \"doc\": \"Given a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ with a splitting $s : G \\\\to E$, the canonical map from the semidirect product $N \\\\rtimes_{s.\\\\text{conjAct}} G$ to $E$ defined by $(n, g) \\\\mapsto \\\\te\"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι, ∃ (x : Finite ι), ∃ f x, ∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a finite coproduct of connected objects. Specifically, there exists a finite set $\\\\iota$, a family of connected objec\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι f g x, (∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)) ∧ Finite ι\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a colimit of finitely many connected objects. Specifically, there exists a finite index set $\\\\iota$, a family of conn\"}\n  {\"name\": \"isNilpotent_of_finite_tfae\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [hG : Group G] [Finite G],\\n  [Group.IsNilpotent G, NormalizerCondition G, ∀ (H : Subgroup G), IsCoatom H → H.Normal,\\n      ∀ (p : ℕ), Fact (Nat.Prime p) → ∀ (P : Sylow p G), (↑P).Normal,\\n      Nonempty (((p : ↥(Nat.card G).primeFactors) → (P : Sylow (↑p) G) → ↥↑P) ≃* G)].TFAE\", \"doc\": \"For a finite group $G$, the following are equivalent: (1) $G$ is nilpotent; (2) $G$ satisfies the normalizer condition (every proper subgroup is properly contained in its normalizer); (3) every coatom\"}\n  {\"name\": \"frattini_nilpotent\", \"module\": \"Mathlib/GroupTheory/Frattini\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [Finite G], Group.IsNilpotent ↥(frattini G)\", \"doc\": \"For any finite group $G$, the Frattini subgroup of $G$ is nilpotent.\"}\n  {\"name\": \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"∀ (K : Type u_1) [inst : Field K], (commutator (Field.absoluteGaloisGroup K)).topologicalClosure.Normal\", \"doc\": \"The topological closure of the commutator subgroup of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is a normal subgroup under the Krull topology. This means that for any field $K$, the closu\"}\n  {\"name\": \"Field.instGroupAbsoluteGaloisGroup\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [inst : Field K] → Group (Field.absoluteGaloisGroup K)\", \"doc\": \"The absolute Galois group of a field $ K $, defined as the group of all field automorphisms of its algebraic closure that fix $ K $ element-wise, is equipped with a canonical group structure under com\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic etaleness and abstract group-extension splittings do not give the connected-reduced splitting of finite group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-additive-subgroup-perfect-decomposition",
+  "date": "2026-10-24",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 5, splitting the finite cyclic factors into their identity components and finite etale reduced subgroups over the given perfect field.",
+   "via": [
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-finite-commutative-reduced-splitting",
+  "worker": "stage1",
+  "summary": "Followed Milne 11.3: constructed the reduced subgroup using reduced tensor products, transported group operations to the finite etale component scheme, compared geometric points, and wrote the inverse product morphism. One new general scheme-level component theorem; all algebraic and etale-detection inputs reused. No mathematical statement change; normalized doubled TeX escapes and added the reduction definition citation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 5, splitting the finite cyclic factors into their identity components and finite etale reduced subgroups over the given perfect field.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "lem-a1-finite-reduced-perfect-algebra-etale",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-reduced-tensor",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "lem-exc-etale-field-point-functor-fully-faithful",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   },
+   {
+    "node": "def-pd-separable-closure",
+    "why": "General scheme/algebra tool for the Milne connected-reduced splitting; the unit concerns six-functor constructibility and supplies no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-a1-finite-reduced-perfect-algebra-etale",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-perfect-reduced-tensor",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-exc-etale-field-point-functor-fully-faithful",
+  "def-pd-separable-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-d487e6313",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-d487e6313 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-algebraic-scheme-etale-components, every cited statement and the sources: Milne iAG 1.29–1.34, 1.38/1.39, 2.34, 2.37 and 11.2–11.4 (Ex. 11.4 shows perfectness is needed). The item statement matches Milne 11.3 in the commutative case and is not weakened. Step 1: the reduced subgroup comes from 00I4 (reduced tensor) and the finite reduced perfect algebra lemma, with group maps factoring because they kill nilpotents. Step 2: P=Π(G) is a group via products, the terminal object and naturality; H is the kernel of q, i.e. the fibre over an open-closed rational point, so it is G° with its open structure; separatedness is checked by B⊗B→B. Step 3: comparison of k^s-points with the dim-zero lemma, R(K)=G(K) and 03QR full faithfulness. Step 4: I checked the explicit inverse identities on T-points; commutativity is used only for the homomorphism. New node: clauses agree with Milne 1.29–1.31; tested on the empty scheme, A^1, Spec L separable and Spec of a purely inseparable extension. No duplicate found in DAG searches for π0, identity component or reduced subgroup. No SGA anywhere. Mechanical finding: the item cited lem-per-algebraic-extension-perfect, a Mathlib leaf created under the dropped 2026-10-19 Artin–Gabber/Qbar-duality route, and the delivery did not justify it against the note. FIX: step 3 now proves perfectness of k^s inline (a is separable over k(a^p) and a root of (X-a)^p there, so a is in k[a^p]; taking p-th roots of the coefficients gives a=(Σ d_i a^i)^p). The citation is removed from uses, proof_deps and tool_uses. The other off-unit generic algebra and scheme tools are accepted. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-perfect-finite-commutative-reduced-splitting.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.PerfectFiniteCommutativeReducedSplitting",
+  "declaration": "AlgebraicGeometry.GrpObj.perfect_finite_commutative_reduced_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/PerfectFiniteCommutativeReducedSplitting.lean",
+  "statement": "theorem GrpObj.perfect_finite_commutative_reduced_splitting (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hperfect : ∀ a : k, ∃ b : k, b ^ p = a) (G : Over (Spec (.of k))) [GrpObj G] [IsCommMonObj G] [IsFinite G.hom] : IsClosedSubgroupScheme (GrpObj.identityComponentι G) ∧ ∃ (_ : GrpObj (Over.mk (G.left.nilradical.subschemeι ≫ G.hom))), IsClosedSubgroupScheme (Over.homMk G.left.nilradical.subschemeι : Over.mk (G.left.nilradical.subschemeι ≫ G.hom) ⟶ G) ∧ IsFinite (G.left.nilradical.subschemeι ≫ G.hom) ∧ Etale (G.left.nilradical.subschemeι ≫ G.hom) ∧ IsMonHom ((GrpObj.identityComponentι G ⊗ₘ (Over.homMk G.left.nilradical.subschemeι : Over.mk (G.left.nilradical.subschemeι ≫ G.hom) ⟶ G)) ≫ μ[G]) ∧ IsIso ((GrpObj.identityComponentι G ⊗ₘ (Over.homMk G.left.nilradical.subschemeι : Over.mk (G.left.nilradical.subschemeι ≫ G.hom) ⟶ G)) ≫ μ[G])",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-940b9204b",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node, 9 stmt_dep records, module, report, upstream GroupScheme/Basic (identityComponent = clopen connectedComponent of onePoint with open-subscheme structure; needs LocallyOfFiniteType/QuasiCompact, inferred from IsFinite) and Defs (IsClosedSubgroupScheme, R : Type u). Clauses match: field, CharP p with 0<p, p-th-power surjectivity, GrpObj+IsCommMonObj+IsFinite; G° closed subgroup; ∃ GrpObj on nilradical.subscheme pinned by the mono IsMonHom inclusion, closed subgroup, IsFinite+Etale; IsMonHom and IsIso of the explicit (ι°⊗ι_red)≫μ in Over(Spec k). No extra hypotheses, no constancy, universe u only. Only the item's lean field differs from live; statement verbatim in file; sorry-only proof; docstrings carry source place, blueprint id and 4 proof steps; Worker report and Second reading sections present. identityComponentι used without the def-wf-algebraic-components stmt_dep, as in landed lem-sfb-group-neutral-component-translates; not a fault. Edge cases: trivial group, α_p/μ_p, non-constant étale. No recompile (no file changed)."
+ }
+}

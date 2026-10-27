@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-connected-filtered-coalgebra-kernel-primitive",
+ "kind": "statement",
+ "title": "Primitive element in a nonzero kernel from a connected filtered coalgebra",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $C,D$ be $k$-vector spaces with linear maps $\\Delta_C:C\\to C\\otimes_k C$, $\\epsilon_C:C\\to k$ and $\\Delta_D:D\\to D\\otimes_k D$, $\\epsilon_D:D\\to k$. Tensor products have the meaning of [def-weil-pbc-module-tensor-product]. Assume for $E=C,D$ the coalgebra identities\n$$(\\Delta_E\\otimes1)\\Delta_E=(1\\otimes\\Delta_E)\\Delta_E,\\qquad(\\epsilon_E\\otimes1)\\Delta_E=(1\\otimes\\epsilon_E)\\Delta_E=1_E$$\nunder the tensor associativity and unit identifications. Fix $g\\in C$ with $\\Delta_C(g)=g\\otimes g$ and $\\epsilon_C(g)=1$. Suppose there are increasing linear subspaces $C_0\\subseteq C_1\\subseteq\\cdots$, with $C_0=kg$, $\\bigcup_{n\\ge0}C_n=C$, and\n$$\\Delta_C(C_n)\\subseteq\\sum_{i=0}^n C_i\\otimes_k C_{n-i}.$$\nEach tensor subspace denotes its image in $C\\otimes_k C$. Let $f:C\\to D$ be linear with $\\Delta_Df=(f\\otimes f)\\Delta_C$ and $\\epsilon_Df=\\epsilon_C$. If $f$ is not injective, there is $x\\ne0$ with\n$$f(x)=0,\\qquad\\epsilon_C(x)=0,\\qquad\\Delta_C(x)=x\\otimes g+g\\otimes x.$$\nNeither $C$ nor $D$ is assumed finite-dimensional; no algebra structure, cocommutativity, or characteristic hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 14.43, printed p.294, coproduct calculation, together with the connected filtration of Definition 14.4 and equation (91), printed p.281. The kernel-detection statement is an agent-written general coalgebra lemma using these structures, not a quotation of Lemma 14.44."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Noninjectivity and linearity give a nonzero element of $\\ker f$. By exhaustiveness, choose the least $n$ for which $C_n\\cap\\ker f\\ne0$, and choose $0\\ne x\\in C_n\\cap\\ker f$. Counit preservation gives $\\epsilon_C(x)=\\epsilon_D(f(x))=0$. If $n=0$, write $x=ag$ and apply $\\epsilon_C$ to obtain $a=0$, a contradiction. Thus $n\\ge1$. Put $L=C_{n-1}$, with inclusion $\\iota:L\\to C$, and $h=f\\iota:L\\to D$. Minimality gives $\\ker h=0$: an element of this kernel is an element of $C_{n-1}\\cap\\ker f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 14.4 and equation (91), printed p.281; Lemma 14.43, printed p.294, coproduct calculation. Agent-written least-filtration-degree kernel argument."
+   }
+  },
+  {
+   "text": "Define the linear map $p:C\\to C$ by $p(y)=y-\\epsilon_C(y)g$. Since $\\epsilon_C(g)=1$, $p$ kills $C_0=kg$ and preserves every $C_i$. Expanding on pure tensors, and using both counit identities, gives\n$$(p\\otimes p)\\Delta_C(x)=\\Delta_C(x)-g\\otimes x-x\\otimes g+\\epsilon_C(x)g\\otimes g=\\Delta_C(x)-g\\otimes x-x\\otimes g=:r.$$\nFor each summand $C_i\\otimes C_{n-i}$ of the filtration condition, applying $p\\otimes p$ kills it when $i=0$ or $i=n$. For $0<i<n$, both $p(C_i)$ and $p(C_{n-i})$ lie in $L$. Expressing the finitely many tensor summands as sums of pure tensors therefore gives $t\\in L\\otimes_k L$ with $(\\iota\\otimes\\iota)(t)=r$. This is an image statement and requires no injectivity of tensor subspace inclusions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 14.4 and equation (91), printed p.281; Lemma 14.43, printed p.294, coproduct calculation. Agent-written least-filtration-degree kernel argument."
+   }
+  },
+  {
+   "text": "The coalgebra-map identity and $f(x)=0$ give\n$$(f\\otimes f)(r)=\\Delta_D(f(x))-f(g)\\otimes f(x)-f(x)\\otimes f(g)=0.$$\nFunctoriality of tensor maps, checked on their pure-tensor generators, consequently gives $(h\\otimes h)(t)=0$ in $D\\otimes_kD$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 14.4 and equation (91), printed p.281; Lemma 14.43, printed p.294, coproduct calculation. Agent-written least-filtration-degree kernel argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-vector-space-tensor-family-zero-detection] to the singleton family consisting of $h$, which detects zero by step 1. Write $s=(h\\otimes1_L)(t)\\in D\\otimes_k L$. The equation from step 3 says $(1_D\\otimes h)(s)=0$. The flip maps $\\tau(u\\otimes v)=v\\otimes u$ exist by the tensor universal property and satisfy $\\tau^2=1$, as checked on generators. Thus $(h\\otimes1_D)(\\tau s)=\\tau((1_D\\otimes h)s)=0$. The cited lemma with right factor $D$ gives $\\tau s=0$, hence $s=0$. Its second application with right factor $L$ gives $t=0$. Therefore $r=(\\iota\\otimes\\iota)t=0$, so $\\Delta_C(x)=x\\otimes g+g\\otimes x$. Together with step 1, this is every required conclusion.",
+   "uses": [
+    "lem-sfb-vector-space-tensor-family-zero-detection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 14.4 and equation (91), printed p.281; Lemma 14.43, printed p.294, coproduct calculation. Agent-written least-filtration-degree kernel argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-vector-space-tensor-family-zero-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 14.4 and equation (91), printed p.281; Lemma 14.43, printed p.294, coproduct calculation. Agent-written least-filtration-degree kernel argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HopfIdeal|hopf.ideal|primitive|coradical",
+   "results": "1 hits; Mathlib/RingTheory/Coalgebra/CoassocSimps.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "grep",
+   "query": "HopfIdeal|hopf.ideal|primitive|coradical",
+   "results": "5 hits; Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism from a restricted universal enveloping Hopf algebra is injective if it is injective on the restricted Lie algebra",
+   "results": "8 hits; AlgHom.injective_codRestrict, UniversalEnvelopingAlgebra.lift_unique, LieEquiv.injective, HopfAlgCat.Hom.mk.inj, Subalgebra.map_injective, LieSubmodule.map_injective_of_injective, UniversalEnvelopingAlgebra.lift, NonUnitalAlgHom.injective_codRestrict",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialgebra\", \"injective\"",
+   "results": "1 hits; Bialgebra.algebraMap_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero Hopf ideal in a restricted symmetric algebra over a field intersects the space of primitive generators nontrivially",
+   "results": "8 hits; SymmetricAlgebra.instNontrivial, Bialgebra.nontrivial, IsSl2Triple.HasPrimitiveVectorWith.ne_zero, TensorAlgebra.ι_ne_one, TensorAlgebra.instNontrivial, ExteriorAlgebra.ι_ne_one, HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit, HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coalgebra map from a connected coalgebra is injective if it is injective on primitive elements",
+   "results": "8 hits; CoalgHom.coe_linearMap_injective, GroupLike.val_injective, CoalgCat.Hom.toCoalgHom_injective, BialgHom.coe_coalgHom_injective, CoalgHom.coe_fn_injective, CoalgEquiv.toCoalgHom_injective, CoalgEquiv.toEquiv_injective, CoalgHom.coe_addMonoidHom_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onnected|[Pp]rimitive|[Ff]iltration|[Ff]iltered",
+   "results": "1 hits; Mathlib/RingTheory/Coalgebra/CoassocSimps.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A noninjective coaugmentation preserving morphism of connected filtered coalgebras over a field has a nonzero primitive element in its kernel",
+   "results": "8 hits; CoalgHom.mk.inj, CoalgCat.Hom.mk.injEq, CoalgCat.Hom.mk.inj, CoalgHom.coe_mk, CoalgHom.coe_addMonoidHom_injective, BialgHom.coe_coalgHom_injective, BialgHom.coe_algHom_injective, CoalgHom.coe_fn_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"ker\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: injectivity of coercions between bundled coalgebra morphisms and Hopf-ideal quotient constructions do not detect nonzero kernels by primitive elements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"injective\"",
+   "results": "{\"t\": \"2026-10-24T00:26:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: coalgebra representation and group-like-element results and injectivity of bundled-morphism coercions do not assert primitive-element detection in a nonzero kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coalgebra morphism from a connected filtered coalgebra which is not injective has a nonzero primitive element in its kernel",
+   "results": "{\"t\": \"2026-10-24T00:26:41Z\", \"tool\": \"leanfinder\", \"query\": \"A coalgebra morphism from a connected filtered coalgebra which is not injective has a nonzero primitive element in its kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.Repr.induced_index\", \"IsGroupLikeElem.ne_zero\", \"Coalgebra.Repr.induced\", \"Coalgebra.Repr.arbitrary\", \"linearIndep_groupLikeVal\", \"Coalgebra.Repr.ι\", \"Coalgebra.Repr.induced_ι\", \"IsGroupLikeElem\"], \"digest\": \"ec17822cb3ea53e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: coalgebra representation and group-like-element results and injectivity of bundled-morphism coercions do not assert primitive-element detection in a nonzero kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|coradical|connected|filtered",
+   "results": "{\"t\": \"2026-10-24T00:26:58Z\", \"tool\": \"grep\", \"query\": \"primitive|coradical|connected|filtered\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/CoassocSimps.lean\"], \"digest\": \"0c0f49905d245a34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: coalgebra representation and group-like-element results and injectivity of bundled-morphism coercions do not assert primitive-element detection in a nonzero kernel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of connected filtered coalgebras is injective if its restriction to primitive elements is injective",
+   "results": "{\"t\": \"2026-10-24T00:26:59Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of connected filtered coalgebras is injective if its restriction to primitive elements is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgHom.mk.inj\", \"CategoryTheory.Endofunctor.Coalgebra.mono_of_mono\", \"CategoryTheory.MorphismProperty.injective\", \"CoalgHom.funLike\", \"CategoryTheory.Comonad.algebra_mono_of_mono\", \"CategoryTheory.Comonad.Coalgebra.Hom.mk.inj\", \"CoalgCat.Hom.mk.injEq\", \"CoalgCat.Hom.toCoalgHom_injective\"], \"digest\": \"0884166f7e78be0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: coalgebra representation and group-like-element results and injectivity of bundled-morphism coercions do not assert primitive-element detection in a nonzero kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exhaustive increasing coalgebra filtration with degree zero the span of a group like element, every nonzero kernel of a counital coalgebra map contains a primitive element",
+   "results": "{\"t\": \"2026-10-24T00:28:16Z\", \"tool\": \"leanfinder\", \"query\": \"For an exhaustive increasing coalgebra filtration with degree zero the span of a group like element, every nonzero kernel of a counital coalgebra map contains a primitive element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"linearIndepOn_isGroupLikeElem\", \"IsGroupLikeElem.ne_zero\", \"IsGroupLikeElem\", \"GroupLike.isGroupLikeElem_val\", \"IsGroupLikeElem.counit_eq_one\", \"linearIndep_groupLikeVal\", \"isGroupLikeElem_iff\", \"GroupLike.val\"], \"digest\": \"78f78088b4708161\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: coalgebra representation and group-like-element results and injectivity of bundled-morphism coercions do not assert primitive-element detection in a nonzero kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|coradical|filtration|connected",
+   "results": "{\"t\": \"2026-10-24T00:28:16Z\", \"tool\": \"grep\", \"query\": \"primitive|coradical|filtration|connected\", \"sub\": \"RingTheory/HopfAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: coalgebra representation and group-like-element results and injectivity of bundled-morphism coercions do not assert primitive-element detection in a nonzero kernel."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-primitive-frobenius-module-duality",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Smooth connected commutative exponent-p groups over a perfect field are vector groups. Supporting Milne Corollary 14.53, used after the elementary-unipotent reduction in 14.54: the full product classification is Proposition 14.52. Present split: step 1, passage from the subgroup H to its primitive-function module and evaluation reconstruction (Milne 14.46). Supporting algebra input: Lemma 14.43, printed p.294, coproduct calculation, together with the connected filtration of Definition 14.4 and equation (91), printed p.281. The kernel-detection statement is an agent-written general coalgebra lemma using these structures, not a quotation of Lemma 14.44.",
+   "via": [
+    "lem-sfb-primitive-frobenius-module-duality",
+    "lem-sfb-additive-subgroup-perfect-decomposition",
+    "lem-sfb-perfect-exponent-p-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-connected-filtered-coalgebra-kernel-primitive",
+  "worker": "stage1",
+  "summary": "Retained the statement. Proved the result by choosing the least filtration degree meeting the kernel, explicitly expanding the counit projection, and applying the existing tensor-family zero-detection lemma twice to the injective lower-degree restriction. No new nodes, no new definitions, and no finite-dimensionality assumptions. Repeated logged Mathlib searches found no exact theorem.",
+  "blueprint": "Realizes the inherited direct-images proof (3) prerequisite chain recorded in blueprint.from.place, at the supporting coalgebra input to primitive-function reconstruction. Read the latest sk-thm-sf-ctf-stability-direct-images.proof.md. The coalgebra calculation is agent-written, guided by Milne 14.4 (91) and 14.43, rather than a theorem stated in the blueprint. blueprint_refs.py ancestor returns None; retain that inherited from.node and via chain. Whole-blueprint searches coalgebra and primitive found no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NM-d6af4dee6",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-d6af4dee6 (reviewer sub-agent of L); spot-checked: Read the whole item, the cited statements (def-weil-field, def-weil-pbc-module-tensor-product, lem-sfb-vector-space-tensor-family-zero-detection; the last is Lean-closed in the same unit) and Milne iAG Def 14.4/(91) on printed p.281 and Lemma 14.43 on printed p.294. The source place correctly calls the lemma agent-written. The statement is identical to live and side-live, where it is still unsplit. stmt_deps are unchanged, there are no new nodes and no re-split note. Step 1: least filtration degree meeting ker f, counit gives ε(x)=0, n≥1, h=f|C_{n-1} injective. Step 2: (1−gε)⊗(1−gε)Δx=Δx−g⊗x−x⊗g via both counit identities; p kills C_0 and keeps each C_i; endpoint summands die; r is the image of t∈L⊗L, stated only as an image. Step 3: (f⊗f)r=0 and (h⊗h)t=0. Step 4: the zero-detection lemma is applied twice, with the singleton family {h} and right factors D (after a flip) and then L; its statement covers both uses. Edge cases checked: C=kg, n=1, the two-dimensional primitive example mapped to k by ε, D=0 excluded. Coassociativity is unused, which is harmless. The duplicate search found only the comodule-coinvariant sibling, which differs, and the citer primitive-frobenius-module-duality, which uses the statement unchanged. No SGA, no fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ConnectedFilteredCoalgebraKernelPrimitive",
+  "declaration": "Coalgebra.exists_primitive_mem_ker_of_not_injective",
+  "file": "lean/Sheaf/RingTheory/ConnectedFilteredCoalgebraKernelPrimitive.lean",
+  "statement": "theorem exists_primitive_mem_ker_of_not_injective {k : Type u} [Field k] {C : Type v} [AddCommGroup C] [Module k C] [Coalgebra k C] {D : Type w} [AddCommGroup D] [Module k D] [Coalgebra k D] (g : C) (hg_comul : comul (R := k) g = g ⊗ₜ[k] g) (hg_counit : counit (R := k) g = 1) (F : ℕ → Submodule k C) (hF_mono : Monotone F) (hF_zero : F 0 = Submodule.span k {g}) (hF_exhaustive : ∀ x : C, ∃ n : ℕ, x ∈ F n) (hF_comul : ∀ n : ℕ, (F n).map (comul (R := k) (A := C)) ≤ ⨆ i ∈ Finset.range (n + 1), LinearMap.range (TensorProduct.map (F i).subtype (F (n - i)).subtype)) (f : C →ₗ[k] D) (hf_comul : comul (R := k) (A := D) ∘ₗ f = TensorProduct.map f f ∘ₗ comul (R := k) (A := C)) (hf_counit : counit (R := k) (A := D) ∘ₗ f = counit (R := k) (A := C)) (hf : ¬ Function.Injective f) : ∃ x : C, x ≠ 0 ∧ f x = 0 ∧ counit (R := k) x = 0 ∧ comul (R := k) x = x ⊗ₜ[k] g + g ⊗ₜ[k] x",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a29c9cc59",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field k; Mathlib Coalgebra = node's Δ/ε identities; grouplike g; monotone exhaustive F with F 0 = span{g}; comul(F n) ≤ ⨆_{i≤n} range(map subtype subtype) (image interpretation); f coalgebra map (comul/counit as linear-map equalities); ¬Injective → ∃ x≠0, f x=0, ε x=0, Δx=x⊗g+g⊗x. No extra assumptions; universes u,v,w independent and bound. Math re-derived and true; edge cases n=1, zero spaces, infinite dimension, any characteristic covered. Node changed only in lean; statement verbatim; stmt_deps are Mathlib leaves; no coalgebra/primitive def node or existing theorem (H4). Docstrings with source + blueprint + 4 proof steps; sorry only; report has both sections. No findings, no compile (no file changed)."
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "id": "lem-sfb-ring-deformation-smoothness-test",
+ "kind": "statement",
+ "title": "Tangent and existence criterion for a functor of ring deformations",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $\\mathrm{Art}_k$ be the category of Artinian local commutative $k$-algebras with specified residue field $k$, and local $k$-maps respecting it; Artinian means descending chains of ideals stabilize. For any commutative $k$-algebra $B$, let $\\mathrm{Def}_B(A)$ be the groupoid of flat $A$-algebras $Q$ [def-weil-pbc-flat-ring-map] with a specified quotient $Q/\\mathfrak m_AQ\\cong B$, with isomorphisms respecting the quotient and with algebra base change between the groupoids. Its tangent space $T_B$ is the set of isomorphism classes in $\\mathrm{Def}_B(k[\\epsilon]/(\\epsilon^2))$. It is naturally the $k$-vector space $\\operatorname{Exal}_k(B,B)$: the latter means square-zero $k$-algebra extensions $0\\to B\\to E\\to B\\to0$, with the prescribed kernel module structure, modulo isomorphisms that are identity on kernel and quotient, equipped with Baer sum and scalar multiplication. The identification sends a flat dual-number deformation to the extension with kernel map $b\\mapsto\\epsilon\\widetilde b$. Let $B,C$ be commutative $k$-algebras and $F:\\mathrm{Def}_B\\to\\mathrm{Def}_C$ a functor commuting with base change. Its tangent map is $k$-linear. Suppose that (i) $T_B\\to T_C$ is surjective, and (ii) for every surjection $A'\\twoheadrightarrow A$ in $\\mathrm{Art}_k$ whose kernel $I$ has $\\dim_k I=1$ and $\\mathfrak m_{A'}I=0$, and every $Q\\in\\mathrm{Def}_B(A)$, existence of a marked flat lift of $F(Q)$ over $A'$ implies existence of a marked flat lift of $Q$. Then $F$ is smooth in the marked sense: for any surjection $A'\\twoheadrightarrow A$, any $Q\\in\\mathrm{Def}_B(A)$, and any $D\\in\\mathrm{Def}_C(A')$ with a specified isomorphism $D\\otimes_{A'}A\\cong F(Q)$, there is $Q'\\in\\mathrm{Def}_B(A')$ and isomorphisms $Q'\\otimes_{A'}A\\cong Q$ and $F(Q')\\cong D$ inducing the specified isomorphism over $A$.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DY2 (lemma-rings-RS), Tag 0DY3 (lemma-rings-TI); formal-defos.tex Tag 0DYP (lemma-easy-check-smooth), with lemma-smoothness-small-extensions and lemma-free-transitive-action."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Use $R=k$ in the Artinian test category; a field is Noetherian since its only ideals are $0,k$, and it is finite type over itself. For $A_1\\to A\\leftarrow A_2$ with $A_2\\to A$ surjective, flat algebras $Q_1,Q_2$ and a reduction isomorphism give the algebra $E=Q_1\\times_{Q_2\\otimes_{A_2}A}Q_2$. The flat-presentation node makes $E$ flat over $A_1\\times_A A_2$. The patched-module node gives its two canonical base-change isomorphisms; these are algebra isomorphisms since their maps preserve multiplication. Conversely the flat-presentation node reconstructs any flat algebra from its two base changes. Maps between the pairs induce maps of fibre products by $(q_1,q_2)\\mapsto(u_1q_1,u_2q_2)$, and the reconstruction is natural, so these constructions are inverse on arrows as well as objects. They preserve the specified special-fibre identifications. The base fibre $\\mathrm{Def}_B(k)$ has a unique arrow between any two marked objects, so $\\mathrm{Def}_B$, and likewise $\\mathrm{Def}_C$, are predeformation categories satisfying (RS).",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-local-test-algebra",
+    "lem-sfb-patched-module-base-change",
+    "lem-sfb-fibre-product-algebra-flat-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DY2 (lemma-rings-RS), using more-algebra.tex Tags 08KQ and 07RU."
+   }
+  },
+  {
+   "text": "Write $D=k[\\epsilon]/(\\epsilon^2)$. For a flat marked $D$-algebra $Q$, tensor $0\\to(\\epsilon)\\to D\\to k\\to0$ with $Q$. Flat tensor exactness and the quotient-tensor identification give $0\\to B\\xrightarrow{i}Q\\to B\\to0$, with $i(b)=\\epsilon\\widetilde b$. This is independent of the lift because $\\epsilon^2=0$, its kernel is square zero, and multiplication by a lift of $b$ on $i(c)$ is $i(bc)$. Conversely, for a square-zero extension $0\\to B\\xrightarrow{i}E\\xrightarrow{p}B\\to0$, put $\\epsilon=i(1)$ to define its $D$-algebra structure. Then $\\epsilon e=i(p(e))$, so $\\epsilon E=i(B)$ and $E/\\epsilon E=B$. Under $(\\epsilon)\\otimes_D E\\cong E/\\epsilon E\\cong B$, multiplication is the injection $i$. The quotient is flat over $k$, so the nilpotent-ideal flatness criterion with $J=(\\epsilon)$ proves $E$ flat over $D$. The two constructions undo each other and match precisely the isomorphisms fixing kernel and quotient. This proves the asserted bijection with $\\operatorname{Exal}_k(B,B)$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-sfb-nilpotent-ideal-flatness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DY3 (lemma-rings-TI), the dual-number exact sequence; algebra.tex Tag 051C (lemma-what-does-it-mean)."
+   }
+  },
+  {
+   "text": "By the tangent-tensor node and step 1, $T_B$ has its canonical $k$-vector structure. Its addition first glues $Q_1,Q_2$ over $B$ into $Q_1\\times_BQ_2$ over $k\\oplus(k\\oplus k)$, then changes base along $(a,u,v)\\mapsto a+(u+v)\\epsilon$. On the square-zero kernel $B\\oplus B$ this identifies $(i_1(b),-i_2(b))$ with zero; it is exactly pushout along addition $B\\oplus B\\to B$, hence Baer sum. Base change along $\\epsilon\\mapsto a\\epsilon$ sends the kernel element $i(b)$ to $i_a(ab)$ and fixes the quotient, hence is coefficient pushout by $a$. The square-zero-extension classification states that these operations are the vector addition and scalar action on extension classes. Thus step 2 is a vector-space identification. A functor commuting with base change preserves these vector operations: applying it to the gluing object gives an object with the same pair of restrictions, uniquely determined up to isomorphism by (RS), and it commutes with the sum and scalar base maps. Consequently $dF$ is $k$-linear, including for $a=0$.",
+   "uses": [
+    "lem-sfb-artin-rs-tangent-tensor",
+    "lem-sfb-ring-square-zero-extension-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tags 06IH (lemma-tangent-space-vector-space), 06IJ (lemma-k-linear-differential); defos.tex Tag 0GPU (remark-extensions-of-algebras)."
+   }
+  },
+  {
+   "text": "Consider a small extension $A'\\twoheadrightarrow A$ with kernel $I$, an object $Q$ over $A$, and a marked target lift $(D,\\delta)$. Hypothesis (ii) supplies a marked lift $(Q'_0,\\alpha_0)$. By step 1 and the marked-lift torsor node, the nonempty sets of source and target marked lift classes have free transitive actions of $T_B\\otimes_kI$ and $T_C\\otimes_kI$, and their map is equivariant for $dF\\otimes1_I$. There is a unique $t$ with $[D,\\delta]=F[Q'_0,\\alpha_0]+t$. Choose $0\\ne e\\in I$. Since $\\dim_k I=1$, write $t=v\\otimes e$; tangent surjectivity gives $u$ with $dF(u)=v$. A representative $(Q',\\alpha)$ of $[Q'_0,\\alpha_0]+u\\otimes e$ therefore maps to $[D,\\delta]$. Equality of these marked classes supplies an isomorphism $\\beta:F(Q')\\cong D$ with $\\delta\\circ\\beta|_A=F(\\alpha)$, using the coherent base-change comparison. This gives the specified compatibility, not merely an unmarked isomorphism.",
+   "uses": [
+    "lem-sfb-deformation-marked-lift-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DYP (lemma-easy-check-smooth), with Tags 06JI and 06JJ."
+   }
+  },
+  {
+   "text": "For an arbitrary surjection $A'\\twoheadrightarrow A$, the Artinian test-algebra node factors it as $A'=A_n\\twoheadrightarrow A_{n-1}\\twoheadrightarrow\\cdots\\twoheadrightarrow A_0=A$, each arrow a small extension; an isomorphism is the empty case. Put $D_j=D\\otimes_{A'}A_j$. Start with $Q_0=Q$ and $F(Q_0)\\cong D_0$ inverse to the given $\\delta$. Inductively suppose $Q_{j-1}$ and $\\beta_{j-1}:F(Q_{j-1})\\cong D_{j-1}$ are chosen. Apply step 4 to the target lift $D_j$, marked by $D_j|_{A_{j-1}}\\cong D_{j-1}\\xrightarrow{\\beta_{j-1}^{-1}}F(Q_{j-1})$. It gives $Q_j$, $\\alpha_j:Q_j|_{A_{j-1}}\\cong Q_{j-1}$ and $\\beta_j:F(Q_j)\\cong D_j$ with $\\beta_j|_{A_{j-1}}=\\beta_{j-1}\\circ F(\\alpha_j)$. At $j=n$, compose the $\\alpha_j$ after base change to $A$. The displayed identities give $\\delta\\circ\\beta_n|_A=F(\\alpha)$, as required. For the empty factorization take $Q'=Q\\otimes_{A,(A'\\to A)^{-1}}A'$ and transport the prescribed isomorphism. This proves marked smoothness for every surjection.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GE (lemma-factor-small-extension) and lemma-smoothness-small-extensions, induction preserving the specified arrows."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-local-test-algebra",
+  "lem-sfb-patched-module-base-change",
+  "lem-sfb-fibre-product-algebra-flat-presentation",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-sfb-nilpotent-ideal-flatness-criterion",
+  "lem-sfb-artin-rs-tangent-tensor",
+  "lem-sfb-ring-square-zero-extension-classification",
+  "lem-sfb-deformation-marked-lift-torsor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tags 0DY2 and 0DY3; formal-defos.tex Tag 0DYP and its proofs via 06JI, 06JJ and small-extension factorization; extension operations from defos.tex 0GPU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor between flat algebra deformation groupoids is smooth if it is surjective on tangent spaces and reflects existence of lifts over small Artinian extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"RingHom.Smooth.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Smooth → Algebra.Smooth R S\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is smooth, then the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is local\"}\n  {\"name\": \"RingHom.FormallySmooth.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.FormallySmooth → Algebra.FormallySmooth R S\", \"doc\": \"If $ f : R \\\\to S $ is a formally smooth ring homomorphism between commutative semirings, then the algebra structure on $ S $ over $ R $ induced by $ f $ satisfies the formal smoothness lifting propert\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyEtale R A], Algebra.FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and differential-manifold groupoids are different objects; no Artinian ring-deformation lifting criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and differential-manifold groupoids are different objects; no Artinian ring-deformation lifting criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|deformation.*(smooth|tangent)|liftability|torsor.*lift",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/FontaineTheta.lean\", \"line\": \"30\", \"text\": \"deformation-theoretic approach via the cotangent complex, as in\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and differential-manifold groupoids are different objects; no Artinian ring-deformation lifting criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tangent surjectivity and existence of lifts imply formal smoothness of a morphism of deformation categories",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_split_surjection\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(f : P →ₐ[R] A) (hf : Function.Surjective f) : FormallySmooth R A ↔ ∃ g, f.kerSquareLift.comp g = AlgHom.id R A\", \"doc\": \"Let $ R $ be a commutative ring, and let $ f : P \\to A $ be a surjective $ R $-algebra homomorphism. The $ R $-algebra $ A $ is formally smooth if and only if there exists an $ R $-algebra homomorphism\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_split_injection\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[Algebra P A] [IsScalarTower R P A] (hf : Function.Surjective (algebraMap P A)) :\\n  Algebra.FormallySmooth R A ↔ ∃ l, l ∘ₗ (kerCotangentToTensor R P A) = LinearMap.id\", \"doc\": \"Let $R, P, A$ be commutative rings such that $P$ is an $R$-algebra and $A$ is a $P$-algebra. Suppose the structure map $f: P \\\\to A$ is surjective with kernel $I$. Then, $A$ is a formally smooth $R$-al\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and differential-manifold groupoids are different objects; no Artinian ring-deformation lifting criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness criterion for deformation groupoids using transitive tangent actions on marked lifts across small extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"isLocalStructomorphOn_contDiffGroupoid_iff_aux\", \"module\": \"Mathlib/Geometry/Manifold/ContMDiff/Atlas\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {n : WithTop ℕ∞} [IsMan\", \"doc\": \"For a partial homeomorphism $ f $ between open subsets of manifolds $ M $ and $ M' $, if $ f $ satisfies the $ C^n $ local diffeomorphism condition on its source set via charts, then $ f $ is $ C^n $-\"}\n  {\"name\": \"contDiffGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"WithTop ℕ∞ →\\n  {𝕜 : Type u_1} →\\n    [inst : NontriviallyNormedField 𝕜] →\\n      {E : Type u_2} →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace 𝕜 E] →\\n            {H : Type u_3} → [inst_3 : TopologicalSpace H] → ModelWithCorners 𝕜 E H → StructureGroupoid H\", \"doc\": \"The groupoid generated by the pregroupoid of C^n diffeomorphisms on a topological space $H$, constructed using the model with corners $I$. This groupoid consists of open partial homeomorphisms that ar\"}\n  {\"name\": \"ContMDiffFiberwiseLinear.hasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} (F : Type u_4) (E : B → Type u_6) [inst : NontriviallyNormedField 𝕜]\\n  {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB] {HB : Type u_8}\\n  [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4 : TopologicalS\", \"doc\": \"The total space of a vector bundle $ E $ over a base space $ B $ is equipped with a structure groupoid consisting of $ C^n $-differentiable open partial homeomorphisms that act fiberwise linearly on t\"}\n  {\"name\": \"isLocalStructomorphOn_contDiffGroupoid_iff\", \"module\": \"Mathlib/Geometry/Manifold/ContMDiff/Atlas\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] {n : WithTop ℕ∞} [IsMan\", \"doc\": \"For an open partial homeomorphism $ f : M \\to M' $, the property of being a local structomorphism within the $ C^n $ diffeomorphism groupoid generated by model $ I $ is equivalent to the conditions tha\"}\n  {\"name\": \"contDiffPregroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"WithTop ℕ∞ →\\n  {𝕜 : Type u_1} →\\n    [inst : NontriviallyNormedField 𝕜] →\\n      {E : Type u_2} →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace 𝕜 E] →\\n            {H : Type u_3} → [inst_3 : TopologicalSpace H] → ModelWithCorners 𝕜 E H → Pregroupoid H\", \"doc\": \"This defines the pregroupoid structure on a topological space `H` corresponding to continuously differentiable maps of order `n`. A map `f: H → H` belongs to this pregroupoid on a set `s ⊆ H` if its l\"}\n  {\"name\": \"IsManifold.toHasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {E : Type u_2} {inst_1 : NormedAddCommGroup E}\\n  {inst_2 : NormedSpace 𝕜 E} {H : Type u_3} {inst_3 : TopologicalSpace H} {I : ModelWithCorners 𝕜 E H} {n : WithTop ℕ∞}\\n  {M : Type u_4} {inst_4 : TopologicalSpace M} {inst_5 : ChartedSpace H M} [self \", \"doc\": \"If $ M $ is a manifold with corners modeled on $ H $, equipped with a model with corners structure consisting of a nontrivially normed field $ \\\\mathbb{K} $, a normed vector space $ E $ over $ \\\\mathbb{\"}\n  {\"name\": \"contDiffGroupoid_zero_eq\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H},\\n  contDiffGroupoid 0 I = continuousGroupoid H\", \"doc\": \"The groupoid of $C^0$ diffeomorphisms (continuous maps) constructed using the model with corners $I$ coincides with the continuous groupoid on the topological space $H$, i.e., $\\\\mathrm{contDiffGroupoi\"}\n  {\"name\": \"contMDiffOn_of_mem_contDiffGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/ContMDiff/Atlas\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {n : WithTop ℕ∞}\\n  {e' : OpenPartialHomeomorph H H}, e' ∈ contDiffGroupoid n I → ContMDiffOn I I n\", \"doc\": \"If a partial homeomorphism $ e' $ belongs to the $ C^n $ diffeomorphism groupoid $ \\\\mathcal{G}^n(I) $, then $ e' $ is $ C^n $-differentiable on its source set $ e'.\\\\text{source} $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary smooth algebra maps and differential-manifold groupoids are different objects; no Artinian ring-deformation lifting criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-affine-completion-deformation",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. General marked smoothness criterion, used to combine the two independent completion comparisons rather than restating the isolated-singularity conclusion.",
+   "via": [
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ring-deformation-smoothness-test",
+  "worker": "stage1",
+  "summary": "Proved the dual-number extension identification and its vector operations explicitly; established (RS) from flat algebra patching, used the general marked-lift tangent torsor to adjust a chosen lift, and composed the prescribed markings along a small-extension factorization. Two supporting statement-only nodes, no restatement of the smoothness criterion.",
+  "blueprint": "Continues the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/plurinodal route recorded in blueprint.from.place, at its isolated affine completion comparison. Steps 1-3 establish its ring deformation tangent input, step 4 adjusts the target marking, and step 5 assembles arbitrary Artinian lifts. The nearest imported ancestor returned by blueprint_refs.py is null; this inherited lineage is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-37bfc3286",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-37bfc3286 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full, and checked them against Stacks: formal-defos small extensions, 06GE, smoothness-small-extensions, definition-lifts, 06JI with its proof, 06JJ and 0DYP; examples-defos 0DY2 and 0DY3; more-algebra 07RU with its 13-point proof. The item statement is identical to live and side-live, where the item is still unsplit, so this is not a re-split. Its hypotheses match 0DYP: (ii) uses small extensions with dim I=1 and m I=0, and the conclusion is the marked smoothness of the definition. Step 1 gives (RS) for Def_B: flatness and reconstruction come from the 08KQ node, the two base-change identities from the new 07RU node, and the marking survives as E⊗k≅B. Step 2 is the flat <-> exact sequence correspondence, using flat-tensor-exact, tensor-over-quotient, and the nilpotent-ideal criterion with J=(ε), εe=i(p e). Step 3: I computed the base change by (ε1−ε2)E as the Baer sum, and base change along ε↦aε as pushout along a (a=0 gives the trivial extension). dF is linear by (RS) and the naturality of the tangent-tensor node. Step 4 is 0DYP: (ii) and (D,δ) make the lift sets nonempty, and t=v⊗e with v=dF(u). Step 5 inducts over small extensions with β_j|=β_{j−1}∘F(α_j), and the empty factorization is handled. Small cases: patched module with Z→Z/2, B=Z/2; torsor with I=0, the identity H and k[ε]→k. Neither new node is a duplicate: I grepped for 06JI/06JJ/0DYP/07RU and compared the pushout and pinching nodes, minimal-liftable-ideal, tangent-ring-lift-criterion and schlessinger-hull. Neither restates the item. Mathlib searches cover three kinds, and my grep finds no match. All citations are in the same unit or are pbc Mathlib leaves, with no SGA. proof_deps equals the union of the step uses. Advisory: the torsor node takes TF's vector structure from the stmt_dep lem-sfb-artin-rs-tangent-tensor ('canonical'); that node's naturality clause determines it. No changes made."
+ }
+}

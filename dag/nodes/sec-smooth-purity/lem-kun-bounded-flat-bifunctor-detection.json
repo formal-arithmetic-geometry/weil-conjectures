@@ -1,0 +1,247 @@
+{
+ "id": "lem-kun-bounded-flat-bifunctor-detection",
+ "kind": "statement",
+ "title": "Bounded flat test pairs detect isomorphisms of exact coproduct-preserving bifunctors",
+ "statement": "Let $U,V$ be schemes, let $\\Lambda$ be a commutative ring, and use $D_U=D(U_{\\Et},\\Lambda)$ and $D_V=D(V_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories]. Write $Q_U,Q_V$ for localization from cochain complexes to these derived categories. Let $\\mathcal T$ be a triangulated category [def-weil-triangulated-category] with countable coproducts [def-weil-pbc-category-colimit]. Let $A,B:D_U\\times D_V\\to\\mathcal T$ be bifunctors exact and preserving countable coproducts separately in each variable. Give each one-variable functor its specified exact-functor shift comparisons. Let $\\alpha:A\\to B$ be a natural transformation such that, with either input fixed and the other denoted $C$, its components satisfy\n$$\\chi_{B,m,C}\\alpha_{C[m]}=\\alpha_C[m]\\chi_{A,m,C}\\quad(m\\in\\mathbf Z),\\qquad \\chi_{A,m,C}:A(C[m])\\xrightarrow{\\sim}A(C)[m],$$\nand likewise for $B$. Suppose $\\alpha_{Q_UP^\\bullet,Q_VR^\\bullet}$ is an isomorphism for every bounded cochain complex $P^\\bullet$ of flat $\\Lambda_U$-module sheaves [def-pc-flat-sheaf-modules] and every bounded cochain complex $R^\\bullet$ of $\\Lambda_V$-module sheaves. Here bounded means that the terms vanish outside some finite interval; its bounds can depend on the complex, and zero complexes are included. Then $\\alpha_{E,F}$ is an isomorphism for every $E\\in D_U$ and $F\\in D_V$, with no boundedness hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+  "place": "Proof paragraphs 2-4 of lem-kun-0f1n (Stacks Tag 0F1N): first good-truncation homotopy colimits, then bounded-above flat replacement of E and stupid truncations of both representatives; previous expanded proof Steps 4-7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Fix either input and call the resulting functors $G,H$ and transformation $\\beta:G\\to H$. For a sequence $(C_n,u_n)$ in the other derived category put $S=\\bigoplus_n C_n$, with coprojections $i_n$, and $s i_n=i_{n+1}u_n$ [def-kun-truncations]. By preservation of countable coproducts, $G(S)$ and $H(S)$ are coproducts with coprojections $G(i_n)$ and $H(i_n)$. Naturality gives $\\beta_S G(i_n)=H(i_n)\\beta_{C_n}$. If every $\\beta_{C_n}$ is invertible, the coproduct universal property gives $v:H(S)\\to G(S)$ with $vH(i_n)=G(i_n)\\beta_{C_n}^{-1}$. Restricting $v\\beta_S$ and $\\beta_S v$ to all coprojections proves that both are identities. Thus $\\beta_S$ is invertible. Exactness includes additivity [def-weil-triangulated-category], so $G(1-s)=1-G(s)$ and likewise for $H$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-pbc-category-colimit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+    "place": "Paragraphs 2-4 (Stacks Tag 0F1N, etale-cohomology-lemma-punctual-base-change-upgrade-unbounded); explicit telescope argument"
+   }
+  },
+  {
+   "text": "Suppose $C$ is any homotopy colimit, with chosen telescope triangle $S\\xrightarrow{1-s}S\\xrightarrow{p}C\\xrightarrow{q}S[1]$. The exact functors $G,H$ send this to distinguished triangles, whose last arrows are $\\chi_{G,1,S}G(q)$ and $\\chi_{H,1,S}H(q)$; these are the image telescope triangles described by [lem-kun-functor-preserves-hocolim]. Naturality at $1-s,p,q$ gives the first two squares for $(\\beta_S,\\beta_S,\\beta_C)$ and the equation $\\beta_{S[1]}G(q)=H(q)\\beta_C$. The assumed shift equation gives $\\chi_{H,1,S}\\beta_{S[1]}=\\beta_S[1]\\chi_{G,1,S}$, so also\n$$\\beta_S[1]\\chi_{G,1,S}G(q)=\\chi_{H,1,S}H(q)\\beta_C.$$\nThus these three specified components form a morphism of distinguished triangles. If all $\\beta_{C_n}$ are invertible, Step 1 makes its first two components invertible, and [lem-sf-triangle-morphism-iso] makes $\\beta_C$ invertible. This proves closure under sequential homotopy colimits in either input. No choice of a functor on cone objects is needed.",
+   "uses": [
+    "lem-kun-functor-preserves-hocolim",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+    "place": "Paragraphs 2-4 (Stacks Tag 0F1N, etale-cohomology-lemma-punctual-base-change-upgrade-unbounded); explicit telescope argument"
+   }
+  },
+  {
+   "text": "Let $P^\\bullet$ be a bounded-above complex of flat $\\Lambda_U$-module sheaves and $R^\\bullet$ a bounded-above complex of $\\Lambda_V$-module sheaves, with upper term bounds $b,c\\in\\mathbf Z$. For $n,m\\ge0$ put $P_n=\\sigma_{\\ge-n}P$ and $R_m=\\sigma_{\\ge-m}R$ [def-kun-truncations]. These are subcomplexes, with inclusion transition maps, supported in $[-n,b]$ and $[-m,c]$. Empty intervals give zero complexes. All terms of $P_n$ are flat, since they are terms of $P$ or zero (tensoring with zero is the zero exact functor). By the test-pair hypothesis $\\alpha_{Q_UP_n,Q_VR_m}$ is invertible for every $n,m$. In each fixed degree $r$, once $m\\ge\\max(0,-r)$ the $r$-th term of $R_m$ and all later transition maps are $R^r$ and its identity. The degreewise colimit is therefore $R$, with its original differential. Apply [lem-kun-complex-colimit-hocolim] to exhibit $Q_VR$ as the homotopy colimit of $(Q_VR_m)$. For each fixed $n$, Step 2 in the second input gives invertibility of $\\alpha_{Q_UP_n,Q_VR}$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-pc-flat-sheaf-modules",
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+    "place": "Paragraphs 2-4 (Stacks Tag 0F1N, etale-cohomology-lemma-punctual-base-change-upgrade-unbounded); explicit telescope argument"
+   }
+  },
+  {
+   "text": "For the same $P,R$, in each degree $r$ the terms $(P_n)^r$ stabilize to $P^r$ for $n\\ge\\max(0,-r)$, with identity transition maps; their differentials are eventually those of $P$. Hence the degreewise colimit of $(P_n)$ is $P$ [def-kun-truncations]. By [lem-kun-complex-colimit-hocolim], $Q_UP$ is a homotopy colimit of $(Q_UP_n)$. Keeping $Q_VR$ fixed, Step 2 and the invertibility obtained in Step 3 prove $\\alpha_{Q_UP,Q_VR}$ invertible for every bounded-above flat $P$ and every bounded-above $R$.",
+   "uses": [
+    "def-kun-truncations",
+    "lem-kun-complex-colimit-hocolim"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+    "place": "Paragraphs 2-4 (Stacks Tag 0F1N, etale-cohomology-lemma-punctual-base-change-upgrade-unbounded); explicit telescope argument"
+   }
+  },
+  {
+   "text": "Now let $C^\\bullet,D^\\bullet$ be arbitrary complexes of $\\Lambda_U$- and $\\Lambda_V$-module sheaves whose terms vanish above some bounds $b,c$. Apply [lem-kun-bounded-flat-replacement] to $C$, with bound $b$, obtaining a bounded-above flat complex $P$ and a quasi-isomorphism $t:P\\to C$. Localization makes $Q_U(t)$ invertible [def-weil-abstract-derived-category]. Step 4 applies to $(P,D)$. Naturality in the first input gives\n$$\\alpha_{Q_UC,Q_VD}\\,A(Q_Ut,1)=B(Q_Ut,1)\\,\\alpha_{Q_UP,Q_VD}.$$\nBoth functors carry the isomorphism $(Q_Ut,1)$ to isomorphisms (apply them to its inverse), so this equality proves $\\alpha_{Q_UC,Q_VD}$ invertible. Flat replacement has been used only in the first variable, and no flatness or finite Tor dimension is imposed on $D$.",
+   "uses": [
+    "lem-kun-bounded-flat-replacement",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+    "place": "Paragraphs 2-4 (Stacks Tag 0F1N, etale-cohomology-lemma-punctual-base-change-upgrade-unbounded); explicit telescope argument"
+   }
+  },
+  {
+   "text": "Take arbitrary $E\\in D_U$ and $F\\in D_V$, represented by complexes $C,D$ using [def-weil-pbc-derived-categories]. Set $E_n=\\tau_{\\le n}E$, $F_m=\\tau_{\\le m}F$ for $n,m\\ge0$. By [def-kun-truncations] these are represented by the good truncations of $C,D$, with zero terms above $n,m$, respectively. Step 5 proves $\\alpha_{E_n,F_m}$ invertible for every $n,m$. By [lem-kun-hocolim-truncations], a homotopy colimit of $(F_m)$ is isomorphic to $F$. Fix $n$ and apply Step 2 in the second input to that telescope; naturality at the resulting isomorphism with $F$ proves $\\alpha_{E_n,F}$ invertible. This last transport is conjugation by the two functors' images of the isomorphism, as in Step 5.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-kun-truncations",
+    "lem-kun-hocolim-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+    "place": "Paragraphs 2-4 (Stacks Tag 0F1N, etale-cohomology-lemma-punctual-base-change-upgrade-unbounded); explicit telescope argument"
+   }
+  },
+  {
+   "text": "By [lem-kun-hocolim-truncations], a homotopy colimit of $(E_n)$ is isomorphic to $E$. Keep the original arbitrary $F$ fixed and use the invertible components $\\alpha_{E_n,F}$ from Step 6. Step 2 in the first input proves invertibility at this telescope, and naturality at its isomorphism with $E$ gives invertibility of $\\alpha_{E,F}$. Both sequences are indexed by the natural numbers; only the assumed countable coproducts, exactness in each variable, and the $m=1$ instance of the stipulated shift compatibility were used.",
+   "uses": [
+    "lem-kun-hocolim-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+    "place": "Paragraphs 2-4 (Stacks Tag 0F1N, etale-cohomology-lemma-punctual-base-change-upgrade-unbounded); explicit telescope argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-pbc-category-colimit",
+  "def-weil-triangulated-category",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-sf-triangle-morphism-iso",
+  "def-pc-flat-sheaf-modules",
+  "lem-kun-complex-colimit-hocolim",
+  "lem-kun-bounded-flat-replacement",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-derived-categories",
+  "lem-kun-hocolim-truncations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+  "place": "Paragraphs 2-4, expanded using Stacks Tag 0F1N and the explicit telescope triangle of Tag 090Z; natural-transformation shift compatibility and two-out-of-three are checked explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between coproduct preserving exact bifunctors on unbounded derived categories of sheaves is an isomorphism if it is so on bounded flat complexes in the first variable and bounded complexes in the second",
+   "results": "Hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.LocalizerMorphism.Derives.isIso, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give bounded representatives, individual quasi-isomorphism criteria, induced exact functors or coproduct comparisons; none gives two-variable unbounded detection from bounded flat test pairs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived category two variable devissage using good truncation telescopes bounded above flat resolutions and stupid truncations detects natural isomorphisms",
+   "results": "Hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, HasDerivedCategory.standard, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.right_fac",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give bounded representatives, individual quasi-isomorphism criteria, induced exact functors or coproduct comparisons; none gives two-variable unbounded detection from bounded flat test pairs"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"isIso\"",
+   "results": "Hits: DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.Plus.isIso_iff, HomotopyCategory.Plus.instIsIsoAppOfInjectiveXIntAsHomologicalComplexUpHomotopicObjPlus, CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give bounded representatives, individual quasi-isomorphism criteria, induced exact functors or coproduct comparisons; none gives two-variable unbounded detection from bounded flat test pairs"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*bounded|bounded.*isIso|[Dd]evissage|[Dd]evissage|flat.*generat",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give bounded representatives, individual quasi-isomorphism criteria, induced exact functors or coproduct comparisons; none gives two-variable unbounded detection from bounded flat test pairs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Detect natural isomorphisms of exact coproduct preserving functors on sheaf derived categories by bounded complexes of flat sheaves",
+   "results": "Hits: CategoryTheory.Limits.coprodComparisonNatIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.ShortComplex.opcyclesFunctorIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh.congr_simp, CategoryTheory.Limits.PreservesCoproduct.iso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.ShortComplex.rightHomologyFunctorIso, CategoryTheory.ShortComplex.homologyFunctorIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give bounded representatives, individual quasi-isomorphism criteria, induced exact functors or coproduct comparisons; none gives two-variable unbounded detection from bounded flat test pairs"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*bounded|bounded.*isIso|[Dd]evissage|flat.*generat",
+   "results": "9 hits: Mathlib/Analysis/Normed/Group/Pointwise.lean, Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Tensor.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern individual derived morphisms, representatives, induced exact functors, coproduct comparisons or unrelated flat modules; none states detection on bounded flat test pairs for two-variable unbounded functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Detect isomorphisms of exact coproduct preserving functors on an unbounded derived category by bounded complexes of flat sheaves",
+   "results": "8 hits: CategoryTheory.Limits.PreservesCoproduct.iso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.mapHomologicalComplex_reflects_iso, CategoryTheory.Limits.reflectsFiniteCoproductsOfReflectsIsomorphisms, CategoryTheory.exactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.rightDerivedZeroIsoSelf",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern individual derived morphisms, representatives, induced exact functors, coproduct comparisons or unrelated flat modules; none states detection on bounded flat test pairs for two-variable unbounded functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"isIso\"",
+   "results": "7 hits: DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.Plus.isIso_iff, HomotopyCategory.Plus.instIsIsoAppOfInjectiveXIntAsHomologicalComplexUpHomotopicObjPlus, CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern individual derived morphisms, representatives, induced exact functors, coproduct comparisons or unrelated flat modules; none states detection on bounded flat test pairs for two-variable unbounded functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism detection by good truncation telescopes and bounded above flat resolutions in a derived category",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern individual derived morphisms, representatives, induced exact functors, coproduct comparisons or unrelated flat modules; none states detection on bounded flat test pairs for two-variable unbounded functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of exact countable coproduct preserving bifunctors on derived categories of module sheaves is invertible if invertible on bounded flat complexes in the first variable and bounded complexes in the second",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoFunctorToRightDerivedZero",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern individual derived morphisms, representatives, induced exact functors, coproduct comparisons or unrelated flat modules; none states detection on bounded flat test pairs for two-variable unbounded functors"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-0f1n",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint": {
+  "from": {
+   "node": "lem-kun-0f1n",
+   "place": "Proof paragraphs 2-4 of lem-kun-0f1n (Stacks Tag 0F1N): first good-truncation homotopy colimits, then bounded-above flat replacement of E and stupid truncations of both representatives; previous expanded proof Steps 4-7.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-kun-bounded-flat-bifunctor-detection",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Expanded detection into componentwise coproduct inverses, the specified transformation on telescope triangles, two separate stupid-truncation passages, bounded-above flat replacement only on U, and two good-truncation passages. Reused all needed existing nodes; no new nodes. Read the exact statements of each citation and logged five fresh Mathlib searches.",
+  "blueprint": "lem-kun-0f1n proof paragraph 2 is realized by Steps 1-2 and 6-7 (telescope argument and good truncations); paragraph 3 by Steps 3-5 in the U variable (flat replacement and stupid truncations); paragraph 4 by Step 3 in the V variable (stupid truncations without flat replacement)."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-1d2a8baeb",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-1d2a8baeb (reviewer sub-agent of L); spot-checked: I read the 0-new-node split of the unchanged item in full, along with every cited statement and blueprint lem-kun-0f1n.proof.md paragraphs 2-4. The route matches the blueprint exactly: good-truncation hocolims, bounded-above flat replacement on the first variable only, and stupid truncations with the degreewise colimit taken as hocolim (lem-kun-complex-colimit-hocolim). There is no repair note, so the re-split rule does not apply, and no SGA source is cited. Step 1 is genuinely elementary (coproduct inverse built on coprojections). In Step 2 the squares check: naturality at 1-s, p, q plus the m=1 shift hypothesis gives the third square of a morphism of image triangles, and lem-sf-triangle-morphism-iso (a Mathlib leaf) closes it; no cone functoriality is used. Steps 3-4: sigma_{>=-n} truncations are bounded with flat or zero terms and degreewise eventually constant, so the test hypothesis applies to every (P_n,R_m). Step 5: Q(t) of the flat replacement is inverted by localization, and the naturality square transports the result. Steps 6-7: lem-kun-hocolim-truncations holds for all objects and all Lambda, followed by conjugation by the iso. Edge cases checked: zero truncations, Lambda=0, bounds of either sign, no hypotheses on U, V or the target. No cycle (the closure excludes the item and lem-kun-0f1n), and no duplicate two-variable detection node exists. No tool_uses are needed. Minor: the report mentions a citations.json that is not in the commit; this does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundedFlatBifunctorDetection",
+  "declaration": "AlgebraicGeometry.Etale.isIso_of_bounded_flat_test_pairs",
+  "file": "lean/Sheaf/Paper/BoundedFlatBifunctorDetection.lean",
+  "statement": "theorem isIso_of_bounded_flat_test_pairs (U V : AlgebraicGeometry.Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] {T : Type uT} [Category.{vT} T] [Preadditive T] [HasZeroObject T] [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T] [CategoryTheory.IsTriangulated T] [HasCountableCoproducts T] (A B : DerivedCategoryModule Λ U ⥤ DerivedCategoryModule Λ V ⥤ T) [∀ E, (A.obj E).CommShift ℤ] [∀ E, (B.obj E).CommShift ℤ] [∀ F, (A.flip.obj F).CommShift ℤ] [∀ F, (B.flip.obj F).CommShift ℤ] [∀ E, (A.obj E).IsTriangulated] [∀ E, (B.obj E).IsTriangulated] [∀ F, (A.flip.obj F).IsTriangulated] [∀ F, (B.flip.obj F).IsTriangulated] [∀ E, PreservesColimitsOfShape (Discrete ℕ) (A.obj E)] [∀ E, PreservesColimitsOfShape (Discrete ℕ) (B.obj E)] [∀ F, PreservesColimitsOfShape (Discrete ℕ) (A.flip.obj F)] [∀ F, PreservesColimitsOfShape (Discrete ℕ) (B.flip.obj F)] (α : A ⟶ B) [∀ E, NatTrans.CommShift (α.app E) ℤ] [∀ F, NatTrans.CommShift (α.flipApp F) ℤ] (hα : ∀ (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (R : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ), (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) → (∀ i : ℤ, exactFunctor _ _ (tensorRight (P.X i))) → (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (R.X i)) → IsIso ((α.app (_root_.DerivedCategory.Q.obj P)).app (_root_.DerivedCategory.Q.obj R))) : ∀ (E : DerivedCategoryModule Λ U) (F : DerivedCategoryModule Λ V), IsIso ((α.app E).app F)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e725c490",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Lean-only delivery: the node diff vs side-live adds only the lean record; statement verbatim in the file; proof sorry. Clause check: Scheme.{u} and Λ:Type(u+1) follow the recorded def-weil-pbc-derived-categories convention (DerivedCategoryModule, DerivedCategory.Q); T is Pretriangulated+IsTriangulated+HasCountableCoproducts with free universes; A,B curried, with CommShift+IsTriangulated on each partial functor (no cross-variable shift law, as the node says); PreservesColimitsOfShape (Discrete ℕ) is formally weaker than countable preservation but equivalent via additivity, and the proof uses only ℕ-sums; NatTrans.CommShift on α.app E and α.flipApp F = the χ equation; hα has termwise boundedness ∃ a b (zero complex and empty intervals included), flatness exactFunctor(tensorRight) only for P per the def-pc-flat-sheaf-modules (B) record with landed precedents, R arbitrary; conclusion ∀ E F IsIso. Blueprint lem-kun-0f1n.proof.md paragraphs 2-4 read; no extra hypotheses. No duplicate found by rg. Docstrings carry the source, the blueprint id and steps 1-7. Private imports = the proof_dep modules. Advisory: Functor.Currying and Preserves.Shapes.Products are redundant. No recompile (no file changed); worker reports clean compiles."
+ }
+}

@@ -1,0 +1,338 @@
+{
+ "id": "lem-sfb-connected-subgroups-finite-word",
+ "kind": "statement",
+ "title": "A generating connected-subgroup family has a finite dominant word",
+ "statement": "Let $k$ be any field [def-weil-field], and let $G$ be a smooth [def-sbc-smooth-morphisms], geometrically connected [def-weil-connected-scheme, def-pc-geometrically-irreducible], affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Let $I$ be a nonempty set and $(H_i\\hookrightarrow G)_{i\\in I}$ a family of smooth geometrically connected closed $k$-subgroup schemes [def-sc-group-scheme-subgroup]. Assume that for every closed $k$-subgroup scheme $K\\subseteq G$, containment $H_i\\subseteq K$ for all $i\\in I$ implies $K=G$. Then there are an integer $n\\geq1$ and indices $i_1,\\ldots,i_n\\in I$, with repetitions allowed, such that the multiplication morphism\n$$H_{i_1}\\times_k\\cdots\\times_k H_{i_n}\\longrightarrow G,\\qquad(h_1,\\ldots,h_n)\\longmapsto h_1\\cdots h_n$$\nhas dense image in the underlying Zariski topological space of $G$. Products are scheme fibre products [def-pc-fibre-product]. The set $I$ need not be finite, the subgroups need not be normal or commute, and no infinitude or perfectness assumption is made on $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-formulated general finite-word prerequisite implicit in the proof of Corollary 17.92, printed p.382; compare section 2h, Propositions 2.50-2.53, printed pp.55-56, on generated smooth connected subgroups. The maximal-dimension word-closure argument is supplied by the worker, not claimed to be stated verbatim by Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "For each nonempty finite word $v=(j_1,\\ldots,j_r)$ in $I$, put $P_v=H_{j_1}\\times_k\\cdots\\times_kH_{j_r}$ and let $w_v:P_v\\to G$ multiply its factors in that order. By [def-weil-closed-immersion], each $H_i$ is affine, with coordinate algebra a quotient of $A=k[G]$, hence finitely generated over $k$ [def-weil-finite-type-morphism]. Repeatedly applying [lem-weil-pbc-fibre-product-affine-spectra] gives $P_v=\\operatorname{Spec}B_v$, where $B_v$ is the corresponding finite tensor product of the coordinate algebras. Its finite tensor factors have finite generating sets, whose images together generate $B_v$, so $P_v$ has finite type. Since each $H_i$ is affine and smooth over $k$ [def-sbc-smooth-morphisms], [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes $k\\to k[H_i]$ a smooth ring map; base change followed by composition in [lem-weil-pbc-smooth-ring-map-base-change-composition] makes $k\\to B_v$ smooth, and [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] again shows that $P_v$ is smooth over $k$. It has the $k$-point $o_v$ with all coordinates the identity [def-sc-group-scheme, def-pc-fibre-product]. Induct on $r$ to see that $P_v$ is connected: the one-letter case is a hypothesis, and [lem-weil-pbc-geometrically-connected-product-components] applied to $H_{j_1}$ and the remaining product gives exactly one connected component at each induction step. Its geometric-connectedness hypothesis is the given hypothesis on $H_{j_1}$; the remaining product is nonempty because of $o_v$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-sc-group-scheme",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-scheme-over-field-regular] to $P_v\\to\\operatorname{Spec}k$. In particular all local rings at closed points are regular. Thus [lem-wf-smooth-components-disjoint], with its affine and finite-type hypotheses supplied by step 1, identifies its irreducible components with its connected components. Since $P_v$ is nonempty and connected, it is irreducible. Its coordinate algebra $B_v$ is smooth over the field $k$ by step 1, so [lem-sc-smooth-algebra-reduced-field] makes it reduced. Consequently $P_v$ is integral and $B_v$ is an integral domain by [def-pc-integral-scheme]. This conclusion holds for every nonempty word, including words with repeated indices.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-wf-smooth-components-disjoint",
+    "lem-sc-smooth-algebra-reduced-field",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+   }
+  },
+  {
+   "text": "Let $J_v=\\ker(w_v^*:A\\to B_v)$ and $Z_v=\\operatorname{Spec}(A/J_v)\\subseteq G$ [def-weil-affine-spectrum, def-weil-pbc-algebra-hom-quotient, def-weil-closed-immersion]. The ideal $J_v$ is prime: its quotient embeds in the nonzero domain $B_v$. The point $(0)\\in\\operatorname{Spec}B_v$ maps to $J_v\\in\\operatorname{Spec}A$, and every point in the image of $w_v$ contains $J_v$. The closure formula in [lem-weil-pbc-spec-irreducible-closed-subsets-primes] therefore shows $\\overline{w_v(|P_v|)}=V(J_v)=|Z_v|$, and that this set is nonempty and irreducible. By [lem-kun-dimension-finite-type], the Krull dimension of $G$ is a finite integer $D$. With dimension defined by [def-kun-topological-krull-dimension], every chain in the closed subspace $Z_v$ is a chain in $G$, so $0\\leq\\dim Z_v\\leq D$. The words form a nonempty set, since $I$ is nonempty. Choose a word $v$ for which $d=\\dim Z_v$ is maximal, and fix $J=J_v$ and $Z=Z_v$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-kun-dimension-finite-type",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+   }
+  },
+  {
+   "text": "For any nonempty word $u$, inserting identity elements gives morphisms $P_v\\to P_{vu}$ and $P_u\\to P_{vu}$ whose composites with $w_{vu}$ are $w_v$ and $w_u$ [def-sc-group-scheme, def-pc-fibre-product]. Thus $Z_v\\subseteq Z_{vu}$ and $Z_u\\subseteq Z_{vu}$ on underlying spaces. If the first inclusion were proper, a chain of length $d$ in $Z_v$, followed by the irreducible closed set $Z_{vu}$, would be a chain of length $d+1$ in $Z_{vu}$, contradicting maximality. Such a length-$d$ chain exists because the finite integer $d$ is the supremum in [def-kun-topological-krull-dimension]. Hence $|Z_{vu}|=|Z|$, and the uniqueness and inclusion assertions for prime ideals in [lem-weil-pbc-spec-irreducible-closed-subsets-primes] give $J_{vu}=J$ and $J\\subseteq J_u$. In particular every word image lies in $Z$. More generally any word $t$ containing $v$ as a consecutive block has $Z_v\\subseteq Z_t$ by the same identity insertion, hence $J_t=J$ by the identical chain argument.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+   }
+  },
+  {
+   "text": "Put $X=P_v\\times_kP_v$, $o=(o_v,o_v)$, and $\\varphi(x,y)=w_v(x)w_v(y)^{-1}$, using the group morphisms and products of [def-sc-group-scheme, def-pc-fibre-product]. This is a $k$-morphism, $\\varphi(o)=e$, and for every commutative $k$-algebra $R$ the image $\\varphi(X(R))$ is inverse-stable: $\\varphi(x,y)^{-1}=\\varphi(y,x)$. If $v^{\\mathrm{rev}}$ is the word with its indices reversed, the map $(y_1,\\ldots,y_r)\\mapsto(y_r^{-1},\\ldots,y_1^{-1})$ is an isomorphism $P_v\\to P_{v^{\\mathrm{rev}}}$, its inverse given by the same reversal and inverses. Under this coordinate isomorphism, $\\varphi$ is the word map for $vv^{\\mathrm{rev}}$. For each $n\\geq1$, the map $X^n\\to G$ multiplying $n$ values of $\\varphi$ is therefore the word map for $(vv^{\\mathrm{rev}})^n$, precomposed with the product of those isomorphisms. This word contains the block $v$, so step 4 gives its kernel $J$; precomposition with an isomorphism preserves that kernel.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-pointed-map-generated-subgroup] to $X,o,\\varphi$. The ambient $G$ is affine of finite type over the field $k$. The scheme $X$ is affine of finite type by step 1, applied to the word $vv$; step 5 supplies the rational point, the identity condition, and inverse-stability for every $k$-algebra. The cited statement constructs a closed subgroup $L=\\operatorname{Spec}(A/\\bigcap_{n\\geq1}\\ker((\\varphi^n)^*))$. Every kernel in this nonempty intersection is $J$ by step 5, so $L=\\operatorname{Spec}(A/J)=Z$ as closed subschemes of $G$. Thus $Z$ is a closed $k$-subgroup scheme, not just a closed set stable on $k$-rational points.",
+   "uses": [
+    "lem-sfb-affine-pointed-map-generated-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+   }
+  },
+  {
+   "text": "For a one-letter word $(i)$, step 4 gives $J\\subseteq J_{(i)}=\\ker(A\\to k[H_i])$. Hence $a+J\\mapsto w_{(i)}^*(a)$ is a well-defined $k$-algebra map $A/J\\to k[H_i]$ [def-weil-pbc-algebra-hom-quotient]. Its spectrum is the factorization $H_i\\to Z\\to G$ [def-weil-affine-spectrum]. This says $H_i\\subseteq Z$ as closed subgroup schemes [def-weil-closed-immersion, def-sc-group-scheme-subgroup]. The generation hypothesis of the item, applied to the closed subgroup $Z$ from step 6, forces $Z=G$. Step 3 now gives $\\overline{w_v(|P_v|)}=|G|$. The chosen word was nonempty, so its length is the required $n\\geq1$, and its entries supply the required indices.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-wf-smooth-components-disjoint",
+  "lem-sc-smooth-algebra-reduced-field",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-kun-dimension-finite-type",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-affine-pointed-map-generated-subgroup",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent-supplied maximal-dimension word argument for Corollary 17.92, printed p.382, using the affine generated-subgroup construction of Proposition 2.46, printed pp.54–55."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A generating family of smooth geometrically connected closed subgroups of an affine algebraic group admits a finite word with dominant multiplication",
+   "results": "{\"t\": \"2026-10-24T08:50:45Z\", \"tool\": \"leanfinder\", \"query\": \"A generating family of smooth geometrically connected closed subgroups of an affine algebraic group admits a finite word with dominant multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"Subgroup.exists_finsupp_of_mem_closure_range\", \"Subgroup.exists_of_mem_closure_range\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"Subgroup.exists_finset_card_le_mul\", \"mul_mem_connectedComponent_one\", \"closureCommutatorRepresentatives\", \"controlled_prod_of_mem_closure\"], \"digest\": \"a3fcbb8af797c722\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits describe finite words for single elements of abstract commutative groups, topological density of quotient maps, or Cartesian products. None gives a uniform finite word dense in an algebraic group. Mathlib/AlgebraicGeometry/Group/Affine.lean:105-106 only identifies a Spec product comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite products of smooth connected closed subgroup schemes generating an affine algebraic group have dense image",
+   "results": "{\"t\": \"2026-10-24T08:49:53Z\", \"tool\": \"leanfinder\", \"query\": \"Finite products of smooth connected closed subgroup schemes generating an affine algebraic group have dense image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.denseRange_toLimit\", \"QuotientGroup.dense_image_mk\", \"Subgroup.dense_or_cyclic\", \"Subgroup.dense_of_not_isolated_one\", \"DenseRange.topologicalClosure_map_subgroup\", \"denseRange_zpow_iff_pow\", \"Subgroup.dense_iff_ne_zpowers\", \"dense_submonoidClosure_iff_subgroupClosure\"], \"digest\": \"feed01f1db1848c8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits describe finite words for single elements of abstract commutative groups, topological density of quotient maps, or Cartesian products. None gives a uniform finite word dense in an algebraic group. Mathlib/AlgebraicGeometry/Group/Affine.lean:105-106 only identifies a Spec product comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group generated by connected algebraic subgroups is the closure of one finite product of those subgroups",
+   "results": "{\"t\": \"2026-10-24T08:50:43Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group generated by connected algebraic subgroups is the closure of one finite product of those subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.closure\", \"Subgroup.closure_pi\", \"Set.subgroupClosure_mul\", \"Subgroup.closure_prod\", \"AddSubgroup.closure_prod\", \"Subgroup.closure_mul_le\", \"AddSubgroup.closure_pi\", \"closure_submonoidClosure_eq_closure_subgroupClosure\"], \"digest\": \"e8dcba2da345a8ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits describe finite words for single elements of abstract commutative groups, topological density of quotient maps, or Cartesian products. None gives a uniform finite word dense in an algebraic group. Mathlib/AlgebraicGeometry/Group/Affine.lean:105-106 only identifies a Spec product comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDominant\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T08:50:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDominant\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits describe finite words for single elements of abstract commutative groups, topological density of quotient maps, or Cartesian products. None gives a uniform finite word dense in an algebraic group. Mathlib/AlgebraicGeometry/Group/Affine.lean:105-106 only identifies a Spec product comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "generat|[Pp]rod|[Dd]ominant",
+   "results": "{\"t\": \"2026-10-24T08:50:43Z\", \"tool\": \"grep\", \"query\": \"generat|[Pp]rod|[Dd]ominant\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"939555914b6892d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits describe finite words for single elements of abstract commutative groups, topological density of quotient maps, or Cartesian products. None gives a uniform finite word dense in an algebraic group. Mathlib/AlgebraicGeometry/Group/Affine.lean:105-106 only identifies a Spec product comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of smooth geometrically connected closed subgroup schemes generating an affine algebraic group has a dominant finite product multiplication map",
+   "results": "{\"t\": \"2026-10-24T09:19:58Z\", \"tool\": \"leanfinder\", \"query\": \"A family of smooth geometrically connected closed subgroup schemes generating an affine algebraic group has a dominant finite product multiplication map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\"], \"digest\": \"be96ec69207e0326\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract subgroup words, generic dominance criteria, or affine product comparisons, not a finite dominant word for subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDominant\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T09:19:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDominant\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract subgroup words, generic dominance criteria, or affine product comparisons, not a finite dominant word for subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group generated by connected algebraic subgroups is the closure of one finite product of those subgroups",
+   "results": "{\"t\": \"2026-10-24T09:20:58Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group generated by connected algebraic subgroups is the closure of one finite product of those subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.closure\", \"Subgroup.closure_pi\", \"Set.subgroupClosure_mul\", \"Subgroup.closure_prod\", \"AddSubgroup.closure_prod\", \"Subgroup.closure_mul_le\", \"AddSubgroup.closure_pi\", \"closure_submonoidClosure_eq_closure_subgroupClosure\"], \"digest\": \"e8dcba2da345a8ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract subgroup words, generic dominance criteria, or affine product comparisons, not a finite dominant word for subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generating family of smooth geometrically connected closed subgroups of an affine algebraic group admits a finite word with dominant multiplication",
+   "results": "{\"t\": \"2026-10-24T09:20:59Z\", \"tool\": \"leanfinder\", \"query\": \"A generating family of smooth geometrically connected closed subgroups of an affine algebraic group admits a finite word with dominant multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_generator\", \"Subgroup.exists_finsupp_of_mem_closure_range\", \"Subgroup.exists_of_mem_closure_range\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"Subgroup.exists_finset_card_le_mul\", \"mul_mem_connectedComponent_one\", \"closureCommutatorRepresentatives\", \"controlled_prod_of_mem_closure\"], \"digest\": \"a3fcbb8af797c722\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract subgroup words, generic dominance criteria, or affine product comparisons, not a finite dominant word for subgroup schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "generat|[Pp]rod|[Dd]ominant",
+   "results": "{\"t\": \"2026-10-24T09:21:00Z\", \"tool\": \"grep\", \"query\": \"generat|[Pp]rod|[Dd]ominant\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"939555914b6892d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern abstract subgroup words, generic dominance criteria, or affine product comparisons, not a finite dominant word for subgroup schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cartan-product-dominance",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: apply the dominant finite product of Cartan subgroups in the proof of 17.92, following 17.91. Supporting input: Agent-formulated general finite-word prerequisite implicit in the proof of Corollary 17.92, printed p.382; compare section 2h, Propositions 2.50-2.53, printed pp.55-56, on generated smooth connected subgroups. The maximal-dimension word-closure argument is supplied by the worker, not claimed to be stated verbatim by Milne.",
+   "via": [
+    "lem-sfb-cartan-product-dominance",
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-connected-subgroups-finite-word",
+  "worker": "stage1",
+  "summary": "Q124: seven-step maximal-dimension argument entirely over k, reusing the affine pointed-map generated-subgroup construction. No new nodes; no finite-family, rational-density, commutativity, perfectness, or descent hypothesis introduced. Added the existing geometric-connectedness definition citation without altering the mathematical statement. Read every cited statement and checked source and edge cases.",
+  "blueprint": "The inherited blueprint_refs ancestor is null and the inherited via chain is retained. Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, specifically the implicit finite Cartan product in Milne 17.92. Read the latest ef6f9619fdbffa59e88528fb56483d76c70258c8 unit and direct-image proof; no unit route change. Whole-blueprint searches found no equivalent finite-word statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometrically-connected-product-components",
+    "why": "Generic product-component theorem gives connectedness of each word domain; no subgroup-generation claim or alternative unit route is taken."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-over-field regularity supplies the regular closed local rings needed for the component theorem."
+   },
+   {
+    "node": "lem-wf-smooth-components-disjoint",
+    "why": "Generic affine smooth geometry identifies irreducible components with connected components, giving irreducibility of each word domain."
+   },
+   {
+    "node": "lem-sc-smooth-algebra-reduced-field",
+    "why": "Generic smooth algebra fact makes the word coordinate algebra reduced, needed for prime kernels."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Only the finite Krull dimension of the finite-type affine ambient scheme is used, to choose a word of maximal image dimension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-wf-smooth-components-disjoint",
+  "lem-sc-smooth-algebra-reduced-field",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-e7d151519",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-e7d151519 (reviewer sub-agent of L); spot-checked: Read the whole item: the statement and all 7 steps (no new nodes), every cited statement, and Milne iAG2017 Prop 2.46–2.53 (pp.54–56) and Cor 17.92 (p.382). The statement is unchanged apart from a correct def-pc-geometrically-irreducible citation for 'geometrically connected'. It is true; I tested it on G=Spec k, all H_i trivial, infinitely many lines in G_a^2, a single H=G over F_2, and noncommuting subgroups. The proof: each word domain P_v is smooth, connected and integral; the word closure Z_v is V(ker w_v^*); a word of maximal dimension makes every word containing v have the same prime kernel J; the pointed-map generated-subgroup node, via its intersection-of-kernels formula, shows Z is a closed subgroup; generation then gives Z=G. All hypotheses check: product components with the first factor geometrically connected, regular local rings at closed points, smooth algebra reduced, and def-kun-dimension agreeing with the chain dimension. No cycle and no duplicate: pointed-word-kernel-stabilization needs k algebraically closed and a G^r domain. One FIX: step 1 moved between scheme smoothness and smooth ring maps only through the informal Stacks remark in def-sbc-smooth-morphisms. I cited the existing lem-weil-pbc-smooth-ring-map-iff-smooth-affine in both directions, in step 1 uses and in proof_deps. tool_uses accepted (generic geometry tools; unit route unchanged).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ConnectedSubgroupsFiniteWord",
+  "declaration": "AlgebraicGeometry.exists_dominant_word_of_generating_connected_subgroups",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ConnectedSubgroupsFiniteWord.lean",
+  "statement": "theorem exists_dominant_word_of_generating_connected_subgroups {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [GeometricallyConnected G.hom] {I : Type v} [Nonempty I] (H : I → Over (Spec (.of k))) [∀ i : I, GrpObj (H i)] (inc : ∀ i : I, H i ⟶ G) [∀ i : I, IsClosedSubgroupScheme (inc i)] [∀ i : I, Smooth (H i).hom] [∀ i : I, GeometricallyConnected (H i).hom] (hgen : ∀ (K : Over (Spec (.of k))) [GrpObj K] (j : K ⟶ G), IsClosedSubgroupScheme j → (∀ i : I, ∃ f : H i ⟶ K, f ≫ j = inc i) → IsIso j) : ∃ n : ℕ, 1 ≤ n ∧ ∃ word : Fin n → I, IsDominant ((List.ofFn fun a : Fin n ↦ Pi.π (fun b : Fin n ↦ H (word b)) a ≫ inc (word a)).prod).left",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46f8907f2",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Node unchanged apart from the lean record; lean.statement verbatim. Each hypothesis matches the 8 stmt_deps: Field; GrpObj over Spec k; IsAffine; LocallyOfFiniteType+QuasiCompact; Smooth; Mathlib GeometricallyConnected (project convention, same as def-weil-geometric-hypotheses); Nonempty I in free universe v; IsClosedSubgroupScheme (IsMonHom + injective + closed immersion); smooth and geometrically connected H_i. hgen ranges over all closed subgroups K in the same universe and concludes IsIso j, equivalent to the node. Conclusion: n>=1, word with repeats allowed, ordered List.prod (Hom.mul_def = lift ≫ μ) of Pi.π ≫ inc, IsDominant .left. Edge cases checked: trivial G, H_i = G, infinite or noncommuting families, imperfect or finite k, no n=0, no empty I. No definitions; proof is sorry; docstrings carry the source and all 7 steps; report sections present. No compile (no file changed). NOTE: parallel Q57 delivery 9fa8e8cad2b2 (S2 PASS, unlanded) uses the same file path with decl exists_denseRange_connectedSubgroups_word and an equivalent signature; only one should land, and the second lander must not overwrite or rebind the first."
+ }
+}

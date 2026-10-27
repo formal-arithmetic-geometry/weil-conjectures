@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-ringed-local-bound-stationary-limit-cohomology",
+ "kind": "statement",
+ "title": "Stationary tower cohomology under ringed-site local bounds",
+ "statement": "Let $\\mathcal C$ be a site small relative to the coefficient universe [def-weil-size-convention], [def-weil-pbc-sites-and-cohomology], let $\\mathcal O$ be a sheaf of commutative rings, and use module sheaves and their ordinary unbounded derived category [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category]. Let $\\mathcal S\\subseteq\\operatorname{Mod}(\\mathcal O)$ be a weak Serre subcategory: it is strictly full, contains zero, and is closed under kernels and cokernels of maps between its objects and under extensions. Write $D_{\\mathcal S}(\\mathcal O)$ for complexes whose every cohomology sheaf lies in $\\mathcal S$, and $D^+_{\\mathcal S}(\\mathcal O)$ for its bounded-below part. Suppose there is a set $\\mathcal V\\subseteq\\operatorname{Ob}(\\mathcal C)$ such that every object has a covering by members of $\\mathcal V$. For every $V\\in\\mathcal V$ suppose there are an integer $d_V$ and a cofinal collection of covering families $\\{V_i\\to V\\}$ such that $H^p(V_i,F)=0$ for every $p>d_V$ and $F\\in\\mathcal S$. Cofinal means every covering has a refinement in the collection, and $H^p(V_i,F)$ is the right derived functor of sections. Use the resolution-derived inverse limit on strict inverse sequences, whose underlying object has the Roos triangle [lem-weil-pbc-ringed-strict-tower-homotopy-limit], [def-weil-derived-limit]. Let $(L_n,u_n:L_{n+1}\\to L_n)_{n\\geq0}$ be an inverse sequence in $D^+_{\\mathcal S}(\\mathcal O)$, realized by a strict tower of complexes. The lower bound may depend on $n$. Suppose for each $j\\in\\mathbf Z$ there is $n_j\\geq0$ such that $H^j(u_n)$ is an isomorphism for all $n\\geq n_j$. Then, for every $j$ and every $n\\geq n_j$, the canonical projection induces an isomorphism\n$$H^j(R\\varprojlim_mL_m)\\xrightarrow{\\sim}H^j(L_n).$$\nIn particular $R\\varprojlim_mL_m\\in D_{\\mathcal S}(\\mathcal O)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6T, lemma-olsson-laszlo-modified, statement and proof, with its canonical projection maps; local bound hypotheses spelled out from situation-olsson-laszlo"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=R\\varprojlim L_n$ with its specified projections. For any $E\\in D(\\mathcal O)$, take a K-injective representative $I$ using [prop-pur-kinjective-resolutions-exist] and put $P_E^q(U)=H^q(\\Gamma(U,I))$. Exact abelian sheafification [lem-weil-pbc-sheafification-exact] sends the sectionwise kernel/image quotient defining $P_E^q$ to the kernel/image quotient defining $H^q(E)$. Thus $(P_E^q)^\\#=H^q(E)$ as underlying abelian sheaves. The module structure is the one on abelian sheafification [def-weil-presheaf-modules-sheafification]; kernels are sectionwise and cokernels are sheafified sectionwise [def-weil-sheaf-of-modules-category]. These identifications commute with restriction and with the induced maps of cohomology, since all maps are induced on the same kernels and quotients (using functorial resolutions before passing to the derived category).",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKV, lemma-sheafification-cohomology, proof; the kernel/image calculation, also used twice in the proof of Tag 0D6T"
+   }
+  },
+  {
+   "text": "By [lem-pc-sites-sheafification-underlying-sets], the units in Step 1 also exhibit set sheafification. Apply [lem-weil-pbc-site-sheafification-sections-local]: every section of $H^q(E)$ is locally represented by an element of $H^q(U,E)$, and a representative whose sheaf image is zero restricts to zero on a covering. We will use both assertions for $E=L$ and $E=L_N$. On an object $V\\in\\mathcal V$ these coverings, and any composite refinement used for zero detection, may be refined to a covering in the given cofinal collection. Representatives and equalities restrict along the refinement arrows.",
+   "uses": [
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6T, proof, uses of Tag 0BKV; Tag 0D6L, proof, local representatives and their refinement"
+   }
+  },
+  {
+   "text": "Fix $j$ and $V\\in\\mathcal V$, and replace $d_V$ by $d=\\max(0,d_V)$, which preserves the assumed vanishing. Choose $N_0\\geq n_j$ at least all the finitely many thresholds $n_q$ for $j-d-2\\leq q\\leq j+1$. For any $N\\geq N_0$ and $m\\geq N$, the composite $L_m\\to L_N$ induces isomorphisms in that interval. Apply [lem-sfb-ringed-bounded-below-section-window-comparison] with $a=j-1,b=j$ and $U=W$, separately for every member $W$ of every covering in the cofinal collection of $V$. Its bound holds for every sheaf in $\\mathcal S$ by hypothesis; each $L_m,L_N$ is bounded below, with no bound uniform in $m$ needed. Hence the actual transition maps on both $H^{j-1}(W,L_m)$ and $H^j(W,L_m)$ are isomorphisms throughout the tail $m\\geq N$. The same $N_0$ works for all these $W$.",
+   "uses": [
+    "lem-sfb-ringed-bounded-below-section-window-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6T, proof, first paragraph, displayed finite interval and comparison of spectral sequences"
+   }
+  },
+  {
+   "text": "For every such $W$, apply [lem-kun-site-rgamma-derived-limit] to the specified Roos triangle $L\\xrightarrow{p}\\prod^D_mL_m\\xrightarrow{1-s}\\prod^D_mL_m\\to L[1]$ of the strict tower, which is distinguished by [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and hence a derived-limit triangle in the sense of [def-weil-derived-limit]; the canonical projections are $\\operatorname{pr}_m\\circ p$. It gives a Roos triangle for $R\\Gamma(W,L)$ with the projections $R\\Gamma(W,L)\\to R\\Gamma(W,L_m)$ induced by the original projections. Consecutive composites in the triangle vanish, so the induced cohomology maps form a compatible family. They therefore define a map $b:H^j(W,L)\\to\\varprojlim_m H^j(W,L_m)$ whose $m$th component is exactly the cohomology of the canonical projection.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6K, lemma-RGamma-commutes-with-Rlim; Tag 0D6T, proof, short exact sequence comparison"
+   }
+  },
+  {
+   "text": "The eventual isomorphisms in degree $j-1$ give $R^1\\varprojlim_m H^{j-1}(W,L_m)=0$ by [lem-pc-derived-limit-eventually-iso]. Apply [lem-pc-milnor-boundary-factorization] to the triangle from Step 4: its exactness at $H^j(W,L)$, with zero left term, makes the map to the product of the $H^j(W,L_m)$ injective, and hence makes $b$ injective. Apply [lem-pc-milnor-projection-factorization] to this same $b$ and its component equations to obtain surjectivity. Projection from the inverse limit to level $N\\geq N_0$ is bijective: a level-$N$ value determines the earlier values by forward transitions and the later values uniquely by the inverse tail isomorphisms. Thus the actual projection $H^j(W,L)\\to H^j(W,L_N)$ is an isomorphism for every such $W$ and every $N\\geq N_0$.",
+   "uses": [
+    "lem-pc-derived-limit-eventually-iso",
+    "lem-pc-milnor-boundary-factorization",
+    "lem-pc-milnor-projection-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6T, proof, application of Tag 0D6K and eventual constancy; more-algebra.tex Tag 07KY, remark-compare-derived-limit"
+   }
+  },
+  {
+   "text": "Fix any $n\\geq n_j$. To show injectivity of $\\phi_n:H^j(L)\\to H^j(L_n)$, take a kernel section on any object and cover that object by members $V\\in\\mathcal V$. Choose $N\\geq\\max(n,N_0(V))$. The sheaf map $H^j(L_N)\\to H^j(L_n)$ is an isomorphism, so the section also has zero image at level $N$. By Step 2 represent it on a covering of $V$ by classes in $H^j(W,L)$; their level-$N$ images have zero sheaf image. Refine once more so those images vanish as derived section classes, then refine the composite covering to a member of the cofinal collection. On each final member $W$, Step 5 makes the projection to $H^j(W,L_N)$ injective, so the restricted representative is zero. Sheaf separatedness now kills the original kernel section. This proves injectivity on every object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6T, proof, first paragraph, injectivity via Tag 0D6L; the local representative argument of Tag 0D6L is expanded here"
+   }
+  },
+  {
+   "text": "For surjectivity, start with $\\gamma\\in H^j(L_n)(U)$ and cover $U$ by objects $V\\in\\mathcal V$. Choose $N\\geq\\max(n,N_0(V))$ and use the inverse of $H^j(L_N)\\to H^j(L_n)$ to lift $\\gamma|_V$ to a sheaf section at level $N$. By Step 2, after a refinement in the cofinal collection, represent it by classes in $H^j(W,L_N)$. Step 5 lifts each such class to $H^j(W,L)$, whose sheaf image maps to $\\gamma|_W$, by the naturality of Step 1 and compatibility of projections. Thus every target section lifts locally. Step 6 makes the local lifts agree after every common restriction, since their images agree; the sheaf axiom glues them uniquely. Hence $\\phi_n$ is bijective on sections of every object, and its inverses are restriction-compatible and $\\mathcal O$-linear. It is the required isomorphism of module sheaves. Finally $H^j(L_n)\\in\\mathcal S$ and strict fullness of $\\mathcal S$ imply $H^j(L)\\in\\mathcal S$ for every $j$, proving $L\\in D_{\\mathcal S}(\\mathcal O)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6T, proof, second paragraph, lifting a section on a cofinal covering and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sfb-ringed-bounded-below-section-window-comparison",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-limit",
+  "lem-pc-derived-limit-eventually-iso",
+  "lem-pc-milnor-boundary-factorization",
+  "lem-pc-milnor-projection-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6T, lemma-olsson-laszlo-modified, proof; expand the local injectivity argument of Tag 0D6L and use the canonical projection equations of Tags 0D6K and 07KY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "eventually.*(homology|cohomology)|((homology|cohomology).*eventually)|[Mm]ilnor",
+   "results": "3 hits; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/Geometry/Manifold/PoincareConjecture.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of homotopy inverse limit of bounded below sheaf complexes with eventually constant cohomology under local finite cohomological dimension",
+   "results": "8 hits; HomologicalComplex.instHasLimit, CategoryTheory.IsCofiltered.instHasLimitOfIsEventuallyConstant, CategoryTheory.Functor.IsEventuallyConstantTo.isLimitCone, HomologicalComplex.instHasLimitsOfShape, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instHasFiniteLimits, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology, CochainComplex.HomComplex.Cochain.InductionUp.limitSequence",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"limit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site with local cohomological bounds, an inverse sequence of bounded below complexes in a weak Serre subcategory with eventually constant cohomology has derived inverse limit with that stable cohomology",
+   "results": "8 hits; localCohomology.diagram, localCohomology.ofDiagram, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits and cohomological support results do not give the local-bound derived-limit theorem for module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*(homology|cohomology)|((homology|cohomology).*eventually)|[Mm]ilnor",
+   "results": "3 hits; Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/Geometry/Manifold/PoincareConjecture.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary limits, termwise stabilization, or definitions of sheaf cohomology; none proves local-bound stationary derived-limit cohomology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inverse tower of bounded below module sheaf complexes with eventually stationary cohomology has derived inverse limit with the stable cohomology under local cohomological dimension bounds",
+   "results": "8 hits; InverseSystem.invLimEquiv_symm_apply_coe, HomologicalComplex.instHasLimit, SheafOfModules.hasLimit, SheafOfModules.hasLimitsOfSize, InverseSystem.piEquivLim, SheafOfModules.hasLimitsOfShape, InverseSystem.invLimEquiv, localCohomology.hasColimitDiagram",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary limits, termwise stabilization, or definitions of sheaf cohomology; none proves local-bound stationary derived-limit cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"limit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary limits, termwise stabilization, or definitions of sheaf cohomology; none proves local-bound stationary derived-limit cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaves of the derived inverse limit of bounded below complexes on a ringed site with local finite cohomological bounds agree with the eventually constant cohomology sheaves of the tower",
+   "results": "8 hits; CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b.instQuasiIsoIntP, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary limits, termwise stabilization, or definitions of sheaf cohomology; none proves local-bound stationary derived-limit cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limits commute with cohomology for degreewise eventually isomorphic towers of complexes of sheaves assuming a finite local cohomological dimension bound, without exact products",
+   "results": "8 hits; CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, localCohomology.isoOfFinal, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.InjectiveResolution.isoRightDerivedObj, CochainComplex.ConnectData.homologyIsoPos, DerivedCategory.homologyFunctorFactors, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary limits, termwise stabilization, or definitions of sheaf cohomology; none proves local-bound stationary derived-limit cohomology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-local-bound-direct-image-truncation",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: apply the general truncation-stability lemma with N = 0; supporting input: target-site cohomology of an eventually stationary bounded-below tower (Stacks 0D6T)",
+   "via": [
+    "lem-sfb-ringed-local-bound-direct-image-truncation",
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-local-bound-stationary-limit-cohomology",
+  "worker": "stage1",
+  "summary": "Split Stacks 0D6T by isolating the finite-window comparison for bounded-below derived sections and reusing generic ringed-site derived-limit and sheafification inputs. Expanded local injectivity and surjectivity, kept all original hypotheses and the conclusion for every n >= n_j, and explicitly retained canonical projection maps. One new unsplit lemma, no Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: apply the general truncation-stability lemma with N = 0; supporting input: target-site cohomology of an eventually stationary bounded-below tower (Stacks 0D6T); realizes the target-site stationary-tower input in the local-bound direct-image truncation argument. The inherited nearest-blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "K-injective representatives, including the unbounded limit object; a generic resolution input, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Exact abelian sheafification for the two-line cohomology-presheaf calculation; generic site algebra absent from this unit."
+   },
+   {
+    "node": "lem-pc-sites-sheafification-underlying-sets",
+    "why": "Forget abelian structure to use local sheafification representatives on an arbitrary site; generic site tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives and local zero detection on arbitrary sites; generic sheafification tool."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Derived sections of a ringed-site Roos triangle, preserving its projections; the ringed-space variant would not apply."
+   },
+   {
+    "node": "lem-pc-derived-limit-eventually-iso",
+    "why": "Vanishing of the first derived limit for an eventually isomorphic tower of abelian groups; generic homological algebra."
+   },
+   {
+    "node": "lem-pc-milnor-boundary-factorization",
+    "why": "Injectivity of the actual projection comparison when its first-derived-limit term vanishes; generic Roos calculation."
+   },
+   {
+    "node": "lem-pc-milnor-projection-factorization",
+    "why": "Surjectivity of the inverse-limit comparison with specified projection equations; generic Roos calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Distinguishedness of the Roos triangle of the resolution-derived limit of a strict tower of module-sheaf complexes, which the item statement itself fixes as its derived limit; generic homological algebra, no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-eventually-iso",
+  "lem-pc-milnor-boundary-factorization",
+  "lem-pc-milnor-projection-factorization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-d09d81bbd",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-d09d81bbd (reviewer sub-agent of L); spot-checked: I read Stacks 0D6R/0D6T in full (sites-cohomology.tex, situation-olsson-laszlo and lemma-olsson-laszlo-modified, both proof paragraphs) and 0D6K. The item statement is unchanged from live, where the item is still unsplit with no proof. It matches the source hypothesis by hypothesis (weak Serre S, the covering set V, d_V and cofinal Cov_V, D^+_S tower with thresholds n_j, iso via the canonical projection for every n >= n_j). New node lem-sfb-ringed-bounded-below-section-window-comparison: I checked its proof myself. H^q(cone) is in S and vanishes on [a-d-1,b]; with E2^{p,q}=H^p(U,H^q C) zero outside 0<=p<=d, H^t(U,C)=0 for t in [a-1,b], so H^r(U,f) is an iso for r in [a,b]; the endpoints are correct. I tested small cases (M[-q]->0, d=0, a=b, zero objects). It is statement-only, self-contained and searched (grep, leansearch, loogle, leanfinder), and it is not a clause of the item. My DAG search (0D6T, 0D6L, 0BKV, 015J, two-ss, way-out, finite window) found no duplicate; the existing 0BKV/0D6L nodes are for ringed spaces only. Steps: step 3's window a=j-1, b=j gives exactly the source's j-d-2..j+1, and d=max(0,d_V). Steps 4-5 match the statements of lem-kun-site-rgamma-derived-limit, eventually-iso R^1lim=0, Milnor boundary injectivity and projection-factorization surjectivity. Steps 6-7 are the 0D6L local argument on a site; the refinement order and gluing are correct, and they are acceptable as elementary. No cycle; proof_deps equal the union of uses. FIX (C1/C4): step 4 used the distinguished Roos triangle of the strict-tower R lim but cited only def-weil-derived-limit, which defines the notion. It now cites lem-weil-pbc-ringed-strict-tower-homotopy-limit (also in proof_deps and split_report.tool_uses as a generic tool). No nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedLocalBoundStationaryLimitCohomology",
+  "declaration": "CategoryTheory.ringedLocalBound_stationaryLimit_cohomology",
+  "file": "lean/Sheaf/CategoryTheory/RingedLocalBoundStationaryLimitCohomology.lean",
+  "statement": "theorem ringedLocalBound_stationaryLimit_cohomology {C : Type c} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) [EssentiallySmall.{max c v r} C] [HasSheafify J.toGrothendieck AddCommGrpCat.{max c v r}] [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (R : Sheaf J.toGrothendieck RingCat.{max c v r}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasDerivedCategory.{w} (ringedSiteModules.{max c v r} R)] (P : ObjectProperty (ringedSiteModules.{max c v r} R)) [P.ContainsZero] [P.IsClosedUnderIsomorphisms] [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] (B : Set C) (_hB : ∀ U : C, ∃ S : Presieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → V ∈ B) (_hlocal : ∀ V : C, V ∈ B → ∃ d : ℤ, ∃ Cov : Set (Presieve V), (∀ S ∈ Cov, S ∈ J V) ∧ (∀ T : Presieve V, T ∈ J V → ∃ S ∈ Cov, S ≤ Sieve.generate T) ∧ ∀ S ∈ Cov, ∀ (W : C) (f : W ⟶ V), S f → ∀ (p : ℤ), d < p → ∀ (F : ringedSiteModules.{max c v r} R), P F → ∀ (K : CochainComplex (ringedSiteModules.{max c v r} R) ℤ) (ι : (CochainComplex.singleFunctor (ringedSiteModules.{max c v r} R) 0).obj F ⟶ K), K.IsKInjective → QuasiIso ι → IsZero ((((SheafOfModules.toSheaf R ⋙ sheafToPresheaf J.toGrothendieck AddCommGrpCat.{max c v r} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{max c v r}).obj (op W)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K).homology p)) (X I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r} R) ℤ) (ι : X ⟶ I) (_hI : I.IsKInjective) [QuasiIso ι] (_hbounded : ∀ n : ℕ, ∃ b : ℤ, ∀ j : ℤ, j < b → IsZero ((X.asFunctor.obj (op n)).homology j)) (_hP : ∀ (n : ℕ) (j : ℤ), P ((X.asFunctor.obj (op n)).homology j)) (threshold : ℤ → ℕ) (_hstationary : ∀ (j : ℤ) (n : ℕ), threshold j ≤ n → IsIso (HomologicalComplex.homologyMap (X.asFunctor.map (homOfLE (Nat.le_succ n)).op) j)) : (∀ (j : ℤ) (n : ℕ), threshold j ≤ n → IsIso ((DerivedCategory.homologyFunctor (ringedSiteModules.{max c v r} R) j).map (DerivedCategory.Q.map (limit.π I.asFunctor (op n)) ≫ inv (DerivedCategory.Q.map ((Functor.mapHomologicalComplex ((evaluation ℕᵒᵖ (ringedSiteModules.{max c v r} R)).obj (op n)) (ComplexShape.up ℤ)).map ι))))) ∧ ∀ j : ℤ, P ((DerivedCategory.homologyFunctor (ringedSiteModules.{max c v r} R) j).obj (DerivedCategory.Q.obj (limit I.asFunctor)))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-485ca2ca7",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read the node, all 6 stmt_deps, Stacks 0D6R/0D6T, the module and the report. Every hypothesis matches the node: weak Serre class via Mathlib ContainsZero, IsClosedUnderIsomorphisms, kernels/cokernels of maps between members, extensions; covering set B; per-V integer d and cofinal Cov with refinement S ≤ generate T; the local bound is the cohomology of sections of K-injective resolutions of F[0]; tower in D^+_S with a lower bound per level; thresholds n_j. The conclusion is the actual canonical projection (limit.π followed by the inverse of the evaluated resolution map), an iso on H^j for all n ≥ n_j, plus P on every H^j of the limit. The derived limit is the K-injective resolution limit, matching ringedStrictTowerHomotopyLimitIndependentCoefficients. Universes c, v, r, w are all bound; coefficients in max c v r follow the project's generic-site pattern and impose no equality. The statement field is verbatim (script check) and the node differs from live only in lean. Docstrings have the source, blueprint id and 7 proof steps; the report has both sections. No defs, sorry only, no pro-etale substitute. Not compiled because no file was changed. Advisory for stage 3: the dependency's Roos projection p is existential, and step 4 must relate it to limit.π."
+ }
+}

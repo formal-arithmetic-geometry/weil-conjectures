@@ -1,0 +1,284 @@
+{
+ "id": "lem-trf-quotient-tensor-insertion",
+ "kind": "statement",
+ "title": "Tensor insertion across quotient coefficient systems",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be a scheme isomorphism on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $S_{W,n}=(A_n)_W$ and $R_W=\\lim_n S_{W,n}$ for $W=X,Y$, with projections $\\pi_{W,n}$ and quotient maps $\\rho_{W,n}:S_{W,n+1}\\to S_{W,n}$ [def-weil-completed-integral-coefficients]. Use $G=g^{-1}$ with structure isomorphisms $c_R:GR_Y\\to R_X$ and $c_n:GS_{Y,n}\\to S_{X,n}$ [def-weil-inverse-image-pullback-comparison]; thus $\\pi_{X,n}c_R=c_nG\\pi_{Y,n}$. A complex means an unbounded cochain complex of module sheaves [def-weil-abstract-derived-category].\n\nLet $(M_n,w_n)$ be any strict system [def-weil-inverse-system] of $S_{Y,n}$-complexes with $\\rho_{Y,n}$-linear chain maps $w_n:M_{n+1}\\to M_n$. Put $C_n=\\operatorname{Res}_{\\pi_{X,n}}(GM_n\\otimes_{GS_{Y,n},c_n}S_{X,n})$, using sheafified tensor [def-pur-sheaf-tensor-product] and restriction of scalars [def-pc-sheaf-restrict-scalars]. Give $GM_n$ its $R_X$-action through $c_R^{-1}$ and $G\\pi_{Y,n}$. Let $j_n:GM_n\\to C_n$ be the actual sheafified insertion $x\\mapsto x\\otimes1$. The presheaf maps $x\\otimes b\\mapsto G(w_n)(x)\\otimes\\rho_{X,n}(b)$ respect balancing and restrictions and induce $R_X$-linear chain maps $v_n:C_{n+1}\\to C_n$; the maps $j_n$ are $R_X$-linear chain maps and satisfy\n$$v_nj_{n+1}=j_nG(w_n).$$\nFor any map $f_\\bullet:M_\\bullet\\to M'_\\bullet$ of such systems, the maps $f_n^g=G(f_n)\\otimes1$ commute with $v_n$, and\n$$f_n^g j_n(M)=j_n(M')G(f_n).$$\nIf $P$ is any $R_Y$-complex with $R_Y$-linear maps $r_n:P\\to M_n$ satisfying $w_nr_{n+1}=r_n$, then $\\theta_n=j_nG(r_n):GP\\to C_n$ is $R_X$-linear and $v_n\\theta_{n+1}=\\theta_n$, with $GP$ carrying the transported action through $c_R^{-1}$. All equalities are equalities of the specified sheafified chain maps before localization; no K-flatness or boundedness assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), coefficient-level tensor insertion underlying simultaneous quotient transport; returned strict-quotient proof steps 1, 2 and 5 (and augmentation in step 4)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing finite comparison complex and its formula on every inverse-image section. Repackage its underlying abelian sheaf maps as completed-linear maps: the projection equation for the completed coefficient comparison gives pi_Y,n(c_R^{-1}(a))=c_n^{-1}(pi_X,n(a)), and finite linearity supplies the required scalar equation. The differential equation is the finite comparison chain-map equation. Its formula on every section gives uniqueness of insertion.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-completed-integral-coefficients",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and change of rings; Tag 03CY (lemma-sheafification-presheaf-modules), factorization and uniqueness"
+   }
+  },
+  {
+   "text": "The site postcomposition/pullback adjunction for the scheme isomorphism is an equivalence. The constant coefficient comparison is the mate of the direct ring map, so that direct ring map is invertible. Transport module actions along the site equivalence and this ring isomorphism using Mathlib SheafOfModules.pushforwardPushforwardEquivalence. Thus finite module direct image is an equivalence; its adjunction unit is invertible. Restriction along the canonical comma arrow is invertible as well. Their composite x to x tensor 1 is therefore bijective on every section. The insertion formula now shows insertion is an isomorphism of complexes.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and change of rings; Tag 03CY (lemma-sheafification-presheaf-modules), factorization and uniqueness"
+   }
+  },
+  {
+   "text": "For arbitrary finite complexes K,L and a completed-linear reduction map w, define v=j_K^{-1} G(w) j_L. Finite comparison linearity gives x tensor b = j_K(c_{n+1}^{-1}(b)x). Coefficient naturality gives rho_Y,n(c_{n+1}^{-1}(b))=c_n^{-1}(rho_X,n(b)); applying the assumed reduction semilinearity of w proves the required formula for v on x tensor b. A competing map agrees after precomposition with the invertible j_K by evaluating its formula at b=1. This proves the exact existence-and-uniqueness statement and identifies the chosen transition.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and change of rings; Tag 03CY (lemma-sheafification-presheaf-modules), factorization and uniqueness"
+   }
+  },
+  {
+   "text": "Finite comparison naturality gives insertion naturality. The chosen transition formula at b=1 gives j_K v=G(w) j_L, since coefficient reduction preserves 1. Both are equations of completed-linear chain maps because equality is tested on every section in every degree.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and change of rings; Tag 03CY (lemma-sheafification-presheaf-modules), factorization and uniqueness"
+   }
+  },
+  {
+   "text": "For a system map f, cancel the invertible insertion at the upper source level. Apply insertion naturality, then the insertion-transition equation, apply G to the given commuting square for f and w, then use insertion naturality and the insertion-transition equation in reverse. This proves the transition naturality square. Insertion naturality itself supplies the other required system-map clause.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and change of rings; Tag 03CY (lemma-sheafification-presheaf-modules), factorization and uniqueness"
+   }
+  },
+  {
+   "text": "Expand augmentation as G(r_n) followed by insertion. Associativity and the insertion-transition equation rewrite its composite with transition as G(r_{n+1}) G(w_n) j_n. Functoriality and r_{n+1} w_n=r_n identify this with the nth augmentation. Assemble these identities into the three conjuncts of quotient_tensor_insertion. No flatness, boundedness, surjectivity, localization, or new auxiliary assumption is used.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor and change of rings; Tag 03CY (lemma-sheafification-presheaf-modules), factorization and uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK (section-tensor-product) and 03CY (lemma-sheafification-presheaf-modules), applied to the recorded finite comparison and coefficient naturality; finite tensor-unit transport proof by T2, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensor.*(insertion|quotient)|quotient.*(pullback|tensor)|sheafificationCompPullback",
+   "results": "OK 1 hits; ; hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. The hits concern ordinary module adic completion or pullback and sheafification; none gives the simultaneous completed-action and cross-coefficient insertion identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor insertion on inverse image sheaves commutes with quotient coefficients",
+   "results": "UNAVAILABLE 0 hits; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; hits: . Service unavailable, no absence conclusion.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "OK 12 hits; ; hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso. The hits concern ordinary module adic completion or pullback and sheafification; none gives the simultaneous completed-action and cross-coefficient insertion identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism of ringed sites with an inverse system of quotient coefficient sheaves, tensor insertion is linear over the completed ring and strictly commutes with reductions and maps of complexes",
+   "results": "OK 8 hits; ; hits: AdicCompletion.ofTensorProduct_naturality, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply. The hits concern ordinary module adic completion or pullback and sheafification; none gives the simultaneous completed-action and cross-coefficient insertion identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient rings commutes with the natural map from inverse image of a sheaf module to its module pullback for every map of quotient rings",
+   "results": "OK 8 hits; ; hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, ModuleCat.Tilde.res_apply, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.map_smul, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply. The hits concern ordinary module adic completion or pullback and sheafification; none gives the simultaneous completed-action and cross-coefficient insertion identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(insertion|quotient)|quotient.*(pullback|tensor)|sheafificationCompPullback",
+   "results": "OK 1 hits; ; hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. Read PullbackContinuous.lean lines 72-126: adjunction and canonical pullback/sheafification isomorphisms; no simultaneous quotient insertion theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor insertion for sheaves of modules is natural in semilinear maps of coefficient systems",
+   "results": "OK 8 hits; ; hits: PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.Monoidal.tensorObjMap, TensorProduct.map, TensorProduct.map₂, TensorProduct.rTensorHomToHomRTensor, TensorProduct.homTensorHomMap, LinearMap.lTensor, LinearMap.lTensorHom. TensorProduct.map and presheaf tensor maps cover the sectionwise algebra, not the sheafified quotient tower with completed action.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "OK 12 hits; ; hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso. Read PullbackContinuous.lean lines 72-126: adjunction and canonical pullback/sheafification isomorphisms; no simultaneous quotient insertion theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor insertion on inverse image sheaves commutes with quotient coefficient reduction and is linear over the inverse limit coefficient ring",
+   "results": "OK 8 hits; ; hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.directLimitRight_symm_of_tmul, SheafOfModules.Presentation.map_π_eq, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_tmul, PresheafOfModules.Monoidal.tensorObj. Read TensorProduct/Map.lean lines 55-64: semilinear tensor map and generator formula. Ordinary tensor algebra or adic-completion hits do not state the item for module sheaves and strict systems.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit x maps to x tensor one for extension of scalars of module sheaves is natural under changing both coefficient rings and modules",
+   "results": "OK 8 hits; ; hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalarsId_hom_app_one_tmul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply. Read ChangeOfRings.lean lines 905-916 and 1005-1010: ordinary module extension-of-scalars units and composition, not sheafified quotient towers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendRestrictScalarsAdj_unit_app_apply|extendScalarsComp_hom_app_one_tmul",
+   "results": "OK 5 hits; ; hits: 912, 1006, 1022, 1023, 1024. Read ChangeOfRings.lean lines 905-916 and 1005-1010: ordinary module extension-of-scalars units and composition, not sheafified quotient towers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def map |map_tmul|extendRestrictScalarsAdj_unit_app_apply",
+   "results": "OK 25 hits; ; hits: Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean, Mathlib/LinearAlgebra/TensorProduct/Submodule.lean, Mathlib/LinearAlgebra/TensorProduct/Submodule.lean, Mathlib/LinearAlgebra/TensorProduct/Submodule.lean. Read ChangeOfRings.lean lines 905-916 and 1005-1010: ordinary module extension-of-scalars units and composition, not sheafified quotient towers.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-transport-strict-quotient",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), coefficient-level tensor insertion underlying simultaneous quotient transport; returned strict-quotient proof steps 1, 2 and 5 (and augmentation in step 4)",
+   "via": [
+    "lem-trf-point-transport-strict-quotient",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-quotient-tensor-insertion",
+  "worker": "stage1",
+  "summary": "Expanded all quotient tensor insertion, completed scalar linearity, chain, transition, naturality, and augmentation identities directly on presheaf tensors and used the existing module sheafification interface for extension and equality. No new nodes, no statement changes, and no project attachment found.",
+  "blueprint": "Realizes the coefficient-level compatibility underlying clause (3) of prop-trf-rational-frobenius-integral-model, as isolated in the returned strict-quotient proof steps 1, 2, 5 and augmentation step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Uses coefficient naturality (3) for the reduction ring map to obtain p_n c_{n+1}=c_n G(rho_{Y,n}); this generic site-isomorphism tool is not stated by the Weil-datum unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-173666b15",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-173666b15 (reviewer sub-agent of L); spot-checked: This is a one-level split of the auxiliary node created by Q135 for the reviewed lem-trf-point-transport-strict-quotient. It adds no new nodes, the statement and stmt_deps are unchanged, the snapshot has no repair note (so no re-split order applies), and it cites no SGA. I checked all six steps by hand. Step 1: p_n c_{n+1}=c_n Gρ_{Y,n} comes from clause (3) of lem-weil-proetale-isomorphism-inverse-image (φ_X c_A=c_B g^{-1}φ_Y), c_n(Gπ_{Y,n})c_R^{-1}=π_{X,n} comes from the structure square of def-weil-inverse-image-pullback-comparison, and ρπ_{n+1}=π_n holds by the limit cone. Step 2: j_n(ax)=bx⊗1=x⊗c_n(b)=a j_n(x), and the differential G(d)⊗1 is well defined. Step 3: the balancing chain h(bx)⊗p(t)=h(x)⊗c_nq_n(b)p(t)=h(x)⊗p(c_{n+1}(b)t) is correct and R_X-linear, and lem-pc-sites-module-sheafification-interface (with O=R_X) gives the unique extension with the correct source C_{n+1}. Step 4: the chain property and v_n j_{n+1}=j_n G(w_n) hold on generators and extend by uniqueness. Step 5: naturality holds via w'f=fw. Step 6: G(r_n) is linear through c_R^{-1}, and vθ_{n+1}=θ_n. I tested g=id, n=1, the zero system, non-flat modules and non-surjective w_n, and X empty. The parent step 1 instantiation (X=Y=s, j_n=κ_{P_n}) matches the statement. Duplicate candidates read (completed-tensor-unit-insertion, pulled-reduction-strict-model-descent, derived-finite-quotient-coherence, point-system-insertion-composition, comparison (b)) do not state the item. Stacks tags 03EK and 03CY exist in sites-modules.tex. Accepted tool_use: lem-weil-proetale-isomorphism-inverse-image clause (3), a generic site-isomorphism tool. Minor notes, not faults: 'strict system' is read with levelwise S_{Y,n} categories and f_n levelwise linear, and step 1's source field names the Stacks tags."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientTensorInsertion",
+  "declaration": "WeilConjectures.QuotientTensor.quotient_tensor_insertion",
+  "declarations": [
+   "WeilConjectures.QuotientTensor.source",
+   "WeilConjectures.QuotientTensor.target",
+   "WeilConjectures.QuotientTensor.tensorSection",
+   "WeilConjectures.QuotientTensor.insertion_existsUnique",
+   "WeilConjectures.QuotientTensor.insertion",
+   "WeilConjectures.QuotientTensor.IsReductionLinear",
+   "WeilConjectures.QuotientTensor.transition_existsUnique",
+   "WeilConjectures.QuotientTensor.transition",
+   "WeilConjectures.QuotientTensor.augmentation",
+   "WeilConjectures.QuotientTensor.quotient_tensor_insertion"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientTensorInsertion.lean",
+  "statement": "theorem quotient_tensor_insertion (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (M : ∀ n : ℕ, CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) (w : ∀ n : ℕ, (integralOperationsRestrict l E Y (n + 1)).obj (M (n + 1)) ⟶ (integralOperationsRestrict l E Y n).obj (M n)) (hw : ∀ n : ℕ, IsReductionLinear l E n (M (n + 1)) (M n) (w n)) : (∀ n : ℕ, insertion l E g (n + 1) (M (n + 1)) ≫ transition l E g n (M (n + 1)) (M n) (w n) (hw n) = ((inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)).map (w n) ≫ insertion l E g n (M n)) ∧ (∀ (N : ∀ n : ℕ, CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) (w' : ∀ n : ℕ, (integralOperationsRestrict l E Y (n + 1)).obj (N (n + 1)) ⟶ (integralOperationsRestrict l E Y n).obj (N n)) (hw' : ∀ n : ℕ, IsReductionLinear l E n (N (n + 1)) (N n) (w' n)) (f : ∀ n : ℕ, M n ⟶ N n), (∀ n : ℕ, (integralOperationsRestrict l E Y (n + 1)).map (f (n + 1)) ≫ w' n = w n ≫ (integralOperationsRestrict l E Y n).map (f n)) → (∀ n : ℕ, (target l E g (n + 1)).map (f (n + 1)) ≫ transition l E g n (N (n + 1)) (N n) (w' n) (hw' n) = transition l E g n (M (n + 1)) (M n) (w n) (hw n) ≫ (target l E g n).map (f n)) ∧ (∀ n : ℕ, (source l E g n).map (f n) ≫ insertion l E g n (N n) = insertion l E g n (M n) ≫ (target l E g n).map (f n))) ∧ (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (r : ∀ n : ℕ, P ⟶ (integralOperationsRestrict l E Y n).obj (M n)), (∀ n : ℕ, r (n + 1) ≫ w n = r n) → ∀ n : ℕ, augmentation l E g (n + 1) P (M (n + 1)) (r (n + 1)) ≫ transition l E g n (M (n + 1)) (M n) (w n) (hw n) = augmentation l E g n P (M n) (r n))",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Unbounded strict quotient systems with independent scheme/coefficient universes. source is inverse image after completed scalar restriction; target is the published unit-normalized finite sheafified pullback followed by restriction. insertion and transition are fixed by unique section formulas, including arbitrary tensor scalars, before localization. All supplementary statements are the named construction/linearity clauses of this same node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75d9faa3e",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Clause-by-clause match: strict system as ρ-semilinear chain maps (IsReductionLinear + completed-linear w), C_n = finite module pullback restricted by π_X,n with the unit generator (same formula as inverseImageFiniteComparison_existsUnique), j_n, v_n and θ_n given by unique section formulas (non-hollow), v j = j G(w), both naturality clauses and the augmentation identity with correct composition order. g iso, ℓ invertible on X and Y, independent universes t/u, unbounded complexes, no flatness assumption; edge cases g=id, n=0 as A_1, empty scheme, zero systems. Snapshot nodes equal side-live apart from the item's lean key; statement verbatim; 10 declarations present; docstrings and sorry-only proofs fine. Not a duplicate: inverseImageReductionTheta and the pullback transition handle reductions of one P only. Advisory: integralOperationsLevelPullback/Generator (owner def-pur-integral-finite-pullback) and integralOperationsFiniteModules/Restrict (theorem-module decls) not in the unchanged S1 stmt_deps, same as PASSed parent Q15 5821bc63; unused plain Mathlib sheafification import kept for stage 3. Not compiled: no FIX; worker reports a clean compile in 4.6/5.1 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T071050-L-3807341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

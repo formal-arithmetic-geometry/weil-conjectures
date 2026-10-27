@@ -1,0 +1,137 @@
+{
+ "id": "stage3-pur-extension-ordinary-quotient-iso",
+ "kind": "statement",
+ "title": "Ordinary quotient association and its strict transition adjunct",
+ "statement": "Fix a prime l, finite extensions E,L of Q_l, an embedding iota:E→L and a scheme W. Let P be any cochain complex over the completed E-coefficient ring sheaf, with no flatness or boundedness requirement. Let X be a complex of actual L-coefficient sequences [def-coef-ringed-sequence-site], and let e_n identify its ordinary nth evaluated complex with the ordinary finite scalar tensor of P [lem-weil-integral-scalar-extension-well-defined]. Assume the actual successor transitions conjugate through e to the specified quotient tensor transitions. Fix n≤m and an ordinary adjunction of the recorded quotient extension [lem-coef-derived-system-evaluation-calculus] with actual scalar restriction, whose unit sends x to the sheafified 1 tensor x. Then there is an ordinary chain isomorphism a from B_n tensor_(B_m) ev_m(X) to ev_n(X) whose composite after the ordinary adjunction unit and restriction is exactly the actual m-to-n chain transition. This statement does not concern localization or derived normalization.",
+ "source": {
+  "document": "Stacks Project, Modules on Sites, Tags 03D7 and 03EK; Cohomology on Sites, Tag 0941",
+  "place": "Balanced tensor association and strict coefficient transitions; ordinary parts of steps 1--2 of stage3-pur-extension-strict-tensor-normalized."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized ordinary sheaf scalar-extension adjunction for each rho_n. The coefficient quotient commutes with rho for every n <= m, by induction from the known successor formula and quotient functoriality. Identify successive restriction with restriction along rho_n sectionwise, using restrictScalarsComp′App. Compose the rho_m adjunction with the supplied quotient adjunction and use leftAdjointUniq to obtain the ordinary natural associator. Its unit equation sends the image of the rho_m unit under the quotient unit to the rho_n unit.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual abelian section transition maps and their proved identity/composition equations. Apply the successor HEq hypothesis to the inverse evaluation image of 1 tensor x, cancel the evaluation isomorphism, and use the specified integralScalarTransition formula. Induct on n <= m to obtain the corresponding tensor-unit equality for all actual transitions. These ordinary identities are the section calculations already proved for the sequence Roos model.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-coef-sequence-roos-model",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the ordinary associator to complexes and conjugate it with e_m and e_n. To prove its restricted composite with the quotient unit is the actual transition, precompose with e_m inverse and apply the injective rho_m adjunction Hom equivalence. In every degree and on each section, naturality of the quotient unit and the associator unit equation reduce the left side to e_n inverse of 1 tensor x, and the preceding induction gives exactly the right side. The supplied hunit is unnecessary for this existential statement since the associator is constructed from the supplied adjunction.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "def-coef-ringed-sequence-site",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-sequence-roos-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-sequence-roos-model"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7, 03D8, and 03EK: compose extension/restriction adjunctions and use uniqueness of left adjoints; actual section transition formulas from the recorded coefficient sequence constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associativity of extension of scalars for sheaves of modules along ring quotient maps, unit tensor transition",
+   "results": "ModuleCat.extendScalars_assoc, extendScalars_assoc', and extendScalarsComp; ordinary module results only.",
+   "date": "2026-10-26",
+   "verdict": "No sheafified complex associator with actual strict-system transition equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars associativity for sheaves of modules and derived tensor restriction adjunction on K-flat complexes",
+   "results": "ModuleCat.extendScalars_assoc'; SheafOfModules.pullback_assoc and map_ιFree results.",
+   "date": "2026-10-26",
+   "verdict": "No direct match to the actual coefficient-sequence transition equation."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Cc]omp|extendScalarsComp|IsNormalizedCoefficientSequence; blueprint searches balanced tensor and quotient transition",
+   "results": "Mathlib ModuleCat.extendScalarsComp and its Hom equation. Project CoefficientExtensionFiniteAssociation concerns completed E to finite E to finite L, rather than completed E to B_m to B_n. No matching blueprint statement.",
+   "date": "2026-10-26",
+   "verdict": "An ordinary chain-level quotient-association step is missing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionStrictTensorNormalized",
+  "date": "2026-10-26",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Ordinary balanced tensor association and quotient-transition calculation in steps 1--2 of stage3-pur-extension-strict-tensor-normalized.",
+   "via": [
+    "stage3-pur-extension-strict-tensor-normalized",
+    "stage3-pur-extension-strict-representatives",
+    "stage3-pur-reduction-skeleton-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientExtensionOrdinaryQuotientIso",
+  "file": "lean/Sheaf/Paper/CoefficientExtensionOrdinaryQuotientIso.lean",
+  "declaration": "WeilConjectures.coefficientExtensionOrdinaryQuotientIso",
+  "statement": "theorem coefficientExtensionOrdinaryQuotientIso\n    {m n : ℕ} (h : n ≤ m)\n    (adj : coefficientFiniteQuotientExtension l L W h ⊣ normalizedDVRModuleRes l L W h)\n    (hunit : ∀ (M : normalizedDVRModules l L W m) (U : W.ProEtᵒᵖ) (x : M.val.obj U),\n      coefficientRestrictionSection (normalizedDVRQuotient l L W h)\n        ((coefficientFiniteQuotientExtension l L W h).obj M) U\n        (((adj.unit.app M).val.app U) x) = coefficientFiniteQuotientUnitSection l L W h M U x)\n    (P : CochainComplex (scalarReductionSource l E W) ℤ)\n    (X : CochainComplex (coefficientSequenceModules l L W) ℤ)\n    (e : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ)).obj X ≅\n        (integralScalarFiniteComplex l E L ι W n).obj P)\n    (htransition : ∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ)\n      (x : (((coefficientSequenceEvaluation l L W (n + 1)).obj (X.X i)).val.obj U)),\n      HEq ((((coefficientSequenceTransition l L W (Nat.le_succ n)).app\n          (X.X i)).val.app U).hom x)\n        (((((e n).inv).f i).val.app U).hom\n          ((((integralScalarTransition l E L ι W n).app P).f i).val.app U\n            ((((e (n + 1)).hom).f i).val.app U x))))\n    : ∃ a : ((coefficientFiniteQuotientExtension l L W h).mapHomologicalComplex\n          (.up ℤ)).obj\n        (((coefficientSequenceEvaluation l L W m).mapHomologicalComplex (.up ℤ)).obj X) ≅\n      ((coefficientSequenceEvaluation l L W n).mapHomologicalComplex (.up ℤ)).obj X,\n      (adj.mapHomologicalComplex (.up ℤ)).unit.app\n          (((coefficientSequenceEvaluation l L W m).mapHomologicalComplex (.up ℤ)).obj X) ≫\n        ((normalizedDVRModuleRes l L W h).mapHomologicalComplex (.up ℤ)).map a.hom =\n      (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l L W h)\n        (.up ℤ)).app X",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261026T071309-L-3911108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261026T100457-L-41512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

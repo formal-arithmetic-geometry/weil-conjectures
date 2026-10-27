@@ -1,0 +1,110 @@
+{
+ "id": "def-sfb-connected-abelian-cover-tower",
+ "kind": "definition",
+ "title": "Compatible connected finite abelian cover tower",
+ "statement": "Let $U$ be a scheme and $I$ a small nonempty directed preordered set. A connected abelian cover tower consists of an inverse system $(X_i\\to U)$ of objects of $U_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], each with nonempty connected affine source and finite etale structure morphism [def-weil-pbc-finite-etale-category]; an inverse system of finite abelian groups $\\Gamma_i$ with surjective transition homomorphisms; and actions of $\\Gamma_i$ on $X_i$ over $U$, equivariant under transitions. It includes the isomorphisms $X_i[\\Gamma_i]\\simeq X_i\\times_UX_i$ given by $(x,g)\\mapsto(x,gx)$, using the profinite test objects [def-sfb-profinite-test-objects] (for a finite group these are disjoint labelled copies). It further includes a cone $X\\to X_i$ whose underlying scheme cone is a limit, with $X$ a nonempty connected object of $U_{\\mathrm{proet}}$ and $X\\to U$ a singleton proetale covering, a limit cone $G\\to\\Gamma_i$ in profinite groups, and an isomorphism $X[G]\\simeq X\\times_UX$ with first projection $X[G]\\to X$. Its second projection, followed by $X\\to X_i$, equals the map $X[G]\\to X_i[\\Gamma_i]\\to X_i$ induced by the two limit projections and the finite comparison. Thus compatibility is imposed on the whole profinite parameter schemes.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-finite-etale-category",
+  "def-sfb-profinite-test-objects"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 4.2 and 5.1; agent-formulated finite connected abelian torsor tower, exactly the hypotheses of lem-sfb-connected-abelian-tower-normalized-descent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse systems of connected finite abelian torsors over a scheme and normalized finite sheaf descent",
+   "results": "[leansearch] OK 8 hit(s): InverseSystem.limit, InverseSystem, InverseSystem.invLimEquiv_symm_apply_coe, CategoryTheory.sheafIsAbelian, AlgebraicGeometry.Scheme.Modules.inv_app, InverseSystem.mk, InverseSystem.globalEquiv, CategoryTheory.Functor.IsCoverDense.Types.sheafIso_inv_val.",
+   "date": "2026-10-22",
+   "verdict": "No match: these generic inverse systems and sheaf-category declarations do not package connected finite abelian scheme covers and their specified compatible torsor comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite sheaves trivialized on a connected abelian Galois cover tower have unique normalized splittings, continuous monodromy and equivariant fibre maps descend",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.PreGaloisCategory.connected_component_unique; CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected; CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family; CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul; CategoryTheory.PreGaloisCategory.exists_lift_of_mono_of_isConnected; CategoryTheory.PreGaloisCategory.exists_lift_of_continuous; CategoryTheory.PreGaloisCategory.action_ext_of_isGalois; CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber.",
+   "date": "2026-10-22",
+   "verdict": "No match: abstract Galois categories do not supply these geometric tower data or a normalized sheaf descent statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Action\", \"FullyFaithful\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*splitting|abelian.*tower|Galois.*[Ss]heaf (Mathlib/CategoryTheory); connected_abelian_tower|normalized_splitting|lem-sfb-connected-abelian-tower-normalized-descent (lean/WeilConjectures and lean/Sheaf); connected abelian.*tower|abelian cover tower|finite abelian.*torsor.*tower (dag/nodes); blueprint_refs.py search \"abelian tower\"",
+   "results": "[grep] OK 0 hit(s) in Mathlib/CategoryTheory. The exact node/name searches have no Lean matches. DAG concept search finds only the item and its SNC finite-fibre parent. blueprint_refs.py: 0 blueprint nodes match abelian tower. Related SNCFiniteFibreData and PointedLimitCech provide specialized classifications and generic profinite-product helpers; neither defines a general connected abelian cover tower.",
+   "date": "2026-10-22",
+   "verdict": "No existing tower notion. Reuse the generic profinite-product helpers and recorded site definitions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-connected-abelian-tower-normalized-descent",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 7, 9, 10: Normalized finite sheaf descent on connected abelian cover towers; packaging the compatible connected finite abelian cover tower hypotheses",
+   "via": [
+    "lem-sfb-connected-abelian-tower-normalized-descent",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConnectedAbelianCoverTower",
+  "declaration": "AlgebraicGeometry.ProEtale.ConnectedAbelianCoverTower",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedAbelianCoverTower.lean",
+  "statement": "structure ConnectedAbelianCoverTower (U : Scheme.{u}) (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c0ada860",
+  "group": "Q15",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c0ada860",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read item, new def node def-sfb-connected-abelian-cover-tower, all 7 stmt_dep records, both modules, PointedLimitCech/profiniteToProEtOf/geometric-stalk sources. Records: first S2, only lean+stmt_deps changed (base 7 + new def node), statements verbatim, H12 fields OK, no line over 100 characters. H3: affine U, small nonempty directed I, connected affine finite etale levels, finite abelian groups with surjective transitions, equivariant action, (x,gx) comparisons pinned by fst/section-snd, limit cone + singleton proetale cover, ProfiniteGrp limit G, X[G] comparison pinned via compatibility. Conclusions: Yoneda-bijective universal section with germ = fibreIso (identity on fibre), unique; level-i normalized sections restrict to it with rho = rho_i∘pi_i; descent equality on all X[GxQ] gives psi(gx,q)=psi(x,rho(g)q), i.e. pr2*->pr1* is (x,g,v)->(x,g,gv); ContAction gives a continuous left action; fullyFaithful + natural fibreIso gives the Hom bijection, empty fibres included; naturality; completeness for all F; constant-map fibre determination on any connected V. Edge cases (Q empty, empty fibres, universes u/u+1) OK. Advisories: theorem-owned profiniteProduct* uncited; level-i uniqueness implied, not stated; finiteLevelStalk restates proEtaleGeometricSetStalkFunctor; Scheme.GaloisCover has (gx,x) convention and G in Type(u+1), so not H4. No changes, so no compile."
+ }
+}

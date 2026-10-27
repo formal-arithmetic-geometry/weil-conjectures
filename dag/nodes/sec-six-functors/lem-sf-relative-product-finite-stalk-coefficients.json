@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-relative-product-finite-stalk-coefficients",
+ "kind": "statement",
+ "title": "Adopted etale relative product with finite stalk coefficients",
+ "statement": "Let $A$ be a concrete Grothendieck abelian category [def-sp-grothendieck-abelian] with a closed symmetric monoidal, additive tensor structure and functorial flat resolutions. Here an object is finitely generated when a finite set of its underlying elements is contained in no proper subobject: every monomorphism into it whose underlying range contains that set is an isomorphism. Assume small-site sheafification for $A$. For a scheme $T$ [def-pc-scheme], write $D(T,A)=D(\\operatorname{Sh}(T_{\\mathrm{et}},A))$ for its ordinary unbounded derived category [def-weil-abstract-derived-category]. The tensor $\\otimes^L$ is the K-flat derived tensor [def-kun-derived-tensor], with $A$ as its coefficient category. Say that $C\\in D(T,A)$ is constructible finite-Tor if it has only finitely many nonzero cohomology sheaves, each is locally constant with finitely generated geometric stalks on a finite locally closed constructible partition, and $C\\otimes^L F[0]$ has cohomology in one fixed finite interval for every $A$-valued sheaf $F$. Say its cohomology stalks are torsion if, for each integer $i$ and geometric point $t$, there is an integer $r>0$ with $r\\operatorname{id}_{H^i(C)_t}=0$. For a compactifiable morphism $h$, choose a factorization $h=pj$ with $j$ open and $p$ proper, and set $Rh_!=Rp_*j_!$ using that chosen factorization [def-weil-compactifications-refinements]. Assume every finitely generated object of $A$ has finite underlying type. Let $f:X\\to B$ and $g:Y\\to B$ be quasi-compact compactifiable morphisms and assume the structure map $h:X\\times_B Y\\to B$ compactifiable. Let $K\\in D(X,A)$ and $M\\in D(Y,A)$ be constructible finite-Tor. With fibre-product projections $p,q$, there exists an object isomorphism $Rh_!(Lp^*K\\otimes^L Lq^*M)\\cong Rf_!K\\otimes^L Rg_!M$. This statement asserts existence of an isomorphism only.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Kunneth/Relative.lean",
+  "place": "nonempty_iso_rightDerivedLowerShriek_externalProduct, the assigned existing source declaration; ordered assembly from blueprint proof (1)--(4)"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "For each geometric homology stalk V of K or M, constructibility makes V finitely generated. The coefficient hypothesis makes its underlying type finite. Faithfulness embeds End(V) into the finite type of self-functions of that underlying type. Thus its additive group is finite and id(V) has finite additive order; choose that positive order as annihilator. This is the fully proved local lemma finite_torsion_homology_stalks in the source module.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set P=X times_B Y, p=fst, q=snd, and h=toBase. Quasi-compactness of q follows from that of f by base change. Use the objectwise composition comparison on the external object (step 1), then the projection comparison for q with M as the constructible torsion target factor (step 2). Tensor the inverse of the base-change comparison for f,K on the right with M (step 3). Apply tensor symmetry inside Rg! to change the order to M tensor Lg*Rf!K.",
+   "uses": [
+    "lem-sf-constructible-external-composition",
+    "lem-sf-constructible-compact-support-base-change",
+    "lem-sf-constructible-compact-support-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the projection comparison for g with M as its constructible torsion source factor (step 4); it does not assert that Rf!K is constructible on this arbitrary base. Apply tensor symmetry on B. Compose these object isomorphisms. The source is definitionally Rh!(externalProduct f g K M), and the target is Rf!K tensor Rg!M.",
+   "uses": [
+    "lem-sf-constructible-compact-support-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-sf-constructible-compact-support-base-change",
+  "lem-sf-constructible-compact-support-projection",
+  "lem-sf-constructible-external-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+  "place": "proof (1)--(4), on the exact signature of the adopted source declaration"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change torsion Grothendieck abelian coefficient category",
+   "results": "8 hits: abelian epimorphism stability, Grothendieck AB4, Guitart exact Kan base change and geometric properness stability; none is derived etale base change.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of derived compactly supported direct images of etale sheaves",
+   "results": "8 hits about underived continuous sheaf/module pushforward composition; none constructs the compact-support derived comparison.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula derived tensor compact support direct image constructible finite Tor",
+   "results": "8 hits about algebraic Tor and tensor direct sums; none is the etale projection formula.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerShriek\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|LowerShriek|Kunneth",
+   "results": "25 hits on compact support of topological functions; none is a sheaf-theoretic compact-support functor.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative",
+  "group": "R5",
+  "date": "2026-10-24"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-kunneth-relative",
+   "place": "proof (1)--(4), existence of the relative product isomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct",
+  "statement": "theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : Y ⟶ B) [ConcreteCategory.FiniteOfIsFinitelyGenerated A] [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g] [HasCompactification (pullback.toBase f g)] {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} {M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hK : DerivedCategory.constructibleFiniteTor A X K) (hM : DerivedCategory.constructibleFiniteTor A Y M) : Nonempty ((R(pullback.toBase f g)_![A]).obj (externalProduct A f g K M) ≅ (R(f)_![A]).obj K ⊗ (R(g)_![A]).obj M)",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-24",
+  "note": "Records the exact adopted source statement, whose body is now a complete assembly from three independent comparison lemmas. It is not an attachment for the stronger modern blueprint statement: no canonical transformation, coherence or four-stage coefficient assertion is claimed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261024T015947-L-2486729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261024T015947-L-2486729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-sheaf-dg-injectivity-tests",
+ "kind": "statement",
+ "title": "A set of acyclic monomorphisms detects dg injectivity",
+ "statement": "Let $X$ be a topological space with a sheaf of commutative rings $\\mathcal O$, in the universes of [def-weil-size-convention], and let $\\mathcal A$ be a sheaf dg $\\mathcal O$-algebra. Use left sheaf dg modules and signed homogeneous maps as in [def-sfb-sheaf-dg-module-localization]. For dg modules $M,I$ let $\\operatorname{Hom}_{\\mathcal A}^{\\bullet}(M,I)$ be the complex of global homogeneous $\\mathcal A$-linear sheaf maps, with differential $\\delta(h)=d_Ih-(-1)^{|h|}hd_M$. Call $I$ homotopically injective if this complex is acyclic for every $M$ with all underlying cohomology sheaves zero. Call $I$ graded injective if its underlying graded $\\mathcal A$-module is injective: every degree-zero graded module map from a graded submodule $N\\subseteq N'$ to $I$ extends to $N'$. There is a set $R$ of monomorphisms $a_r:E_r\\hookrightarrow F_r$ of acyclic sheaf dg $\\mathcal A$-modules such that, for every dg module $I$, the following are equivalent: (i) $I$ is graded injective and homotopically injective; (ii) for every $r\\in R$ and every degree-zero dg module map $u:E_r\\to I$ there is a degree-zero dg module map $v:F_r\\to I$ with $v a_r=u$.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FSY (lemma-better-set-of-monos); K-injective means the global Hom-complex condition of definition-K-injective, with all shifts. Left modules by the graded opposite algebra."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-sfb-sheaf-dg-homotopical-injectivity"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-graded-sheaf-module-grothendieck], choose a generator $U$ of $\\operatorname{Gr}(\\mathcal A)$. Take a set of representatives $b_t:B_t\\hookrightarrow U$ of its graded subobjects (these form a set: each is specified by subsheaves of the component sheaves on the set of opens). By [lem-pur-kinjective-characterize-injective], a graded module is injective exactly when maps from every $B_t$ extend to $U$. Use the adjunction of [lem-sfb-sheaf-dg-acyclic-hull]. It gives acyclic monomorphisms $G(b_t):G(B_t)\\hookrightarrow G(U)$, and naturality identifies their extension conditions with those for $b_t$. Thus these tests detect graded injectivity.",
+   "uses": [
+    "lem-sfb-graded-sheaf-module-grothendieck",
+    "lem-pur-kinjective-characterize-injective",
+    "lem-sfb-sheaf-dg-acyclic-hull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSN and 0FSS (lemma-characterize-injectives and lemma-characterize-graded-injectives-in-dg), their proofs"
+   }
+  },
+  {
+   "text": "Choose $\\{N_s\\}_{s\\in S}$ from [lem-sfb-sheaf-dg-small-acyclic-subobjects]. For every $s$ and $k\\in\\mathbf Z$, add the inclusion $j_{s,k}:L=N_s[k]\\hookrightarrow C(1_L)=L\\oplus L[1]$, $l\\mapsto(l,0)$, to the tests of step 1. These form a set $R=T\\amalg(S\\times\\mathbf Z)$. With the signed action and differential of [def-sfb-sheaf-dg-module-localization], the degree $-1$ map $s(x,y)=(0,x)$ satisfies $d s+s d=1$ and $s(a(x,y))=(-1)^{|a|}a s(x,y)$. Hence the cone is contractible and acyclic; its source is acyclic too.",
+   "uses": [
+    "lem-sfb-sheaf-dg-small-acyclic-subobjects",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSY (lemma-better-set-of-monos), construction of R; cone calculation written out in the stated left-module convention"
+   }
+  },
+  {
+   "text": "Assume (i). For any test $a:E\\hookrightarrow F$ and dg map $u:E\\to I$, acyclicity of $\\operatorname{Hom}^{\\bullet}_{\\mathcal A}(E,I)$ supplies a signed graded map $h$ of degree $-1$ with $\\delta h=u$. Graded injectivity also extends maps of degree $q$: such maps are degree-zero maps into the graded module underlying $I[q]$, which is injective because the signed shift is an equivalence with inverse shift $[-q]$. Extend $h$ to $h\\prime:F\\to I$. Then $v=\\delta h\\prime$ is a dg map since $\\delta^2=0$, and $va=\\delta(h\\prime a)=\\delta h=u$. This proves (ii).",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSW (lemma-first-property-dg-injective), proof, expanded shift argument"
+   }
+  },
+  {
+   "text": "Conversely assume (ii). Step 1 gives graded injectivity. For each $s,k$, every dg map $u:N_s[k]\\to I$ extends to its cone by step 2. If $v$ is the extension, then $v s j_{s,k}$ is a degree $-1$ null homotopy of $u$, since $\\delta(vs j_{s,k})=v j_{s,k}=u$. A degree $q$ cocycle $z:N_s\\to I$ is exactly a dg map $N_s[-q]\\to I$ after reindexing. A degree $-1$ null homotopy for that map is a degree $q-1$ map $h$ with $z=d_Ih+(-1)^q h d_{N_s}=\\delta h$. Thus $\\operatorname{Hom}^{\\bullet}_{\\mathcal A}(N_s,I)$ is acyclic in every degree.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSY (lemma-better-set-of-monos), converse, vanishing on the small acyclics and all their shifts"
+   }
+  },
+  {
+   "text": "For later use, if $0\\to A\\to B\\to C\\to0$ is an exact sequence of dg modules, then $0\\to\\operatorname{Hom}^{\\bullet}(C,I)\\to\\operatorname{Hom}^{\\bullet}(B,I)\\to\\operatorname{Hom}^{\\bullet}(A,I)\\to0$ is exact as a sequence of complexes of abelian groups. Indeed degree-$q$ surjectivity is graded injectivity applied to $I[q]$; a homogeneous map vanishing on $A$ factors uniquely through the graded quotient $C$. Restriction commutes with $\\delta$ by its displayed formula. This argument uses graded injectivity from step 4, and does not assert that the terms of the underlying $\\mathcal O$-complex of $I$ are injective.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSQ (remark-why-graded-injective), direct proof of the degreewise exact Hom sequence"
+   }
+  },
+  {
+   "text": "Let $M$ be any acyclic dg module. Build acyclic submodules $K_\\alpha\\subseteq M$ by transfinite recursion, with $K_0=0$. If $K_\\beta\\ne M$, the quotient $M/K_\\beta$ is nonzero and acyclic by [lem-sfb-sheaf-dg-grothendieck] and [lem-weil-pbc-complex-ses-homology-long-exact]. Apply [lem-sfb-sheaf-dg-small-acyclic-subobjects] to embed some nonzero $N_s$ in that quotient; let $K_{\\beta+1}$ be its inverse image. Then $K_{\\beta+1}/K_\\beta\\cong N_s$ and $K_{\\beta+1}$ is acyclic by the same long exact sequence. If $K_\\beta=M$, keep it unchanged. At a limit take the filtered colimit, which is still a submodule of $M$ and acyclic by the colimit and cohomology clauses of [lem-sfb-sheaf-dg-grothendieck]. Before reaching $M$ every successor strictly increases. Submodules of $M$ form a set (degreewise subsheaves on a set of opens), so this recursion must reach $M$ before the successor cardinal of that set.",
+   "uses": [
+    "lem-sfb-sheaf-dg-small-acyclic-subobjects",
+    "lem-sfb-sheaf-dg-grothendieck",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSY (lemma-better-set-of-monos), transfinite construction"
+   }
+  },
+  {
+   "text": "Prove by transfinite induction that $H_\\alpha=\\operatorname{Hom}^{\\bullet}_{\\mathcal A}(K_\\alpha,I)$ is acyclic. At zero this is immediate. At a nonconstant successor, step 5 gives $0\\to\\operatorname{Hom}^{\\bullet}(N_s,I)\\to H_{\\beta+1}\\to H_\\beta\\to0$. Its first term is acyclic by step 4 and its last by induction, so its middle term is acyclic by [lem-weil-pbc-complex-ses-homology-long-exact]. The constant successor changes nothing.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSY (lemma-better-set-of-monos), successor Hom-vanishing argument; correct contravariant order"
+   }
+  },
+  {
+   "text": "At a limit $\\lambda$, the degreewise colimit statement of [lem-sfb-sheaf-dg-grothendieck] and the universal property of a colimit give $H_\\lambda=\\varprojlim_{\\beta<\\lambda}H_\\beta$, including the differentials and signed actions. For every $\\beta<\\lambda$, the map $H_\\beta^q\\to\\varprojlim_{\\gamma<\\beta}H_\\gamma^q$ is surjective: if $\\beta=\\gamma+1$ this is restriction to $K_\\gamma$, which is surjective by graded injectivity as in step 5; if $\\beta$ is a nonzero limit it is an isomorphism by continuity of $K$; if $\\beta=0$ the target is zero. All earlier $H_\\beta$ are acyclic by induction. Apply [lem-pur-kinjective-ML-ordinals] to deduce acyclicity of $H_\\lambda$. At the stage where $K_\\alpha=M$, this says that $\\operatorname{Hom}^{\\bullet}_{\\mathcal A}(M,I)$ is acyclic. As $M$ was arbitrary, (i) follows.",
+   "uses": [
+    "lem-sfb-sheaf-dg-grothendieck",
+    "lem-pur-kinjective-ML-ordinals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FSY (lemma-better-set-of-monos), limit step; Tag 0AAT (homology-lemma-ML-over-ordinals)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-graded-sheaf-module-grothendieck",
+  "lem-pur-kinjective-characterize-injective",
+  "lem-sfb-sheaf-dg-acyclic-hull",
+  "lem-sfb-sheaf-dg-small-acyclic-subobjects",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-sheaf-dg-grothendieck",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pur-kinjective-ML-ordinals"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tag 0FSY (lemma-better-set-of-monos), expanded using 0FSS, 0FST and 0FSQ; all shifts included explicitly; cone and signed-map calculations for left modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A set of monomorphisms between acyclic sheaf differential graded modules characterizes graded injective K injective objects by extension of maps",
+   "results": "{\"t\": \"2026-10-24T07:40:02Z\", \"tool\": \"leanfinder\", \"query\": \"A set of monomorphisms between acyclic sheaf differential graded modules characterizes graded injective K injective objects by extension of maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.instMonoIntI\", \"CochainComplex.cm5b.instMonoFIntI\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\"], \"digest\": \"4935441f0a3084fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-injective complexes and injective objects against all monomorphisms do not give a set of acyclic dg-module tests. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and CategoryTheory/Preadditive/Injective/LiftingProperties.lean:32-68."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLiftingProperty\", \"Injective\"",
+   "results": "{\"t\": \"2026-10-24T07:40:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasLiftingProperty\\\", \\\"Injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Injective.hasLiftingProperty_of_isZero\", \"CategoryTheory.Injective.instHasLiftingPropertyOfMono\", \"CategoryTheory.Abelian.epiWithInjectiveKernel.hasLiftingProperty\"], \"digest\": \"e15c305f961b3886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-injective complexes and injective objects against all monomorphisms do not give a set of acyclic dg-module tests. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and CategoryTheory/Preadditive/Injective/LiftingProperties.lean:32-68."
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|HasLiftingProperty",
+   "results": "{\"t\": \"2026-10-24T07:40:01Z\", \"tool\": \"grep\", \"query\": \"KInjective|HasLiftingProperty\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"99c2209bef4befee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-injective complexes and injective objects against all monomorphisms do not give a set of acyclic dg-module tests. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and CategoryTheory/Preadditive/Injective/LiftingProperties.lean:32-68."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf differential graded module injectivity characterized by a set of acyclic monomorphisms",
+   "results": "{\"t\": \"2026-10-24T07:40:01Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf differential graded module injectivity characterized by a set of acyclic monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.injective_iff_rlp_monomorphisms_zero\", \"CategoryTheory.IsGrothendieckAbelian.enoughInjectives\", \"PresheafOfModules.injective_of_mono\", \"CategoryTheory.Sheaf.mono_of_injective\", \"SheafOfModules.Hom.mk.injEq\", \"AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi\", \"CategoryTheory.IsGrothendieckAbelian.instInjectiveZMonomorphismsRlpMonoMapFactorizationDataRlpOfNatHom\", \"CategoryTheory.Sheaf.instMonoAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\"], \"digest\": \"209e88272a5b42e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-injective complexes and injective objects against all monomorphisms do not give a set of acyclic dg-module tests. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and CategoryTheory/Preadditive/Injective/LiftingProperties.lean:32-68."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small acyclic differential graded sheaf modules detect homotopical injectivity",
+   "results": "{\"t\": \"2026-10-24T07:40:03Z\", \"tool\": \"leanfinder\", \"query\": \"Small acyclic differential graded sheaf modules detect homotopical injectivity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_iff_rightOrthogonal\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.IsKInjective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.isKInjective_of_injective_aux\"], \"digest\": \"c016c96c792a965c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary K-injective complexes and injective objects against all monomorphisms do not give a set of acyclic dg-module tests. Read Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:34-51 and CategoryTheory/Preadditive/Injective/LiftingProperties.lean:32-68."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set of monomorphisms between acyclic sheaf differential graded modules detects graded injective and K injective modules",
+   "results": "{\"t\": \"2026-10-24T08:07:48Z\", \"tool\": \"leanfinder\", \"query\": \"A set of monomorphisms between acyclic sheaf differential graded modules detects graded injective and K injective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"CochainComplex.IsKInjective\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.cm5b.instMonoIntI\"], \"digest\": \"91b4bed202c8ea4c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.lean:34-51 and LiftingProperties.lean:32-68 treat ordinary cochain complexes or lifting against all monomorphisms. They do not provide small acyclic tests for sheaf modules over a dg algebra with a nonzero differential."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small set of trivial cofibrations characterizes homotopically injective sheaf dg modules",
+   "results": "{\"t\": \"2026-10-24T08:09:51Z\", \"tool\": \"leanfinder\", \"query\": \"A small set of trivial cofibrations characterizes homotopically injective sheaf dg modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_iff_rightOrthogonal\", \"HomotopyEquiv.isKInjective\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.IsKInjective.Qh_map_bijective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b.instInjectiveXIntI\"], \"digest\": \"f635159ef338ff52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.lean:34-51 and LiftingProperties.lean:32-68 treat ordinary cochain complexes or lifting against all monomorphisms. They do not provide small acyclic tests for sheaf modules over a dg algebra with a nonzero differential."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLiftingProperty\", \"Injective\"",
+   "results": "{\"t\": \"2026-10-24T08:10:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasLiftingProperty\\\", \\\"Injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Injective.hasLiftingProperty_of_isZero\", \"CategoryTheory.Injective.instHasLiftingPropertyOfMono\", \"CategoryTheory.Abelian.epiWithInjectiveKernel.hasLiftingProperty\"], \"digest\": \"e15c305f961b3886\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.lean:34-51 and LiftingProperties.lean:32-68 treat ordinary cochain complexes or lifting against all monomorphisms. They do not provide small acyclic tests for sheaf modules over a dg algebra with a nonzero differential."
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|HasLiftingProperty",
+   "results": "{\"t\": \"2026-10-24T08:10:44Z\", \"tool\": \"grep\", \"query\": \"KInjective|HasLiftingProperty\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"c1623ce932a8e606\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.lean:34-51 and LiftingProperties.lean:32-68 treat ordinary cochain complexes or lifting against all monomorphisms. They do not provide small acyclic tests for sheaf modules over a dg algebra with a nonzero differential."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A set of acyclic monomorphisms detects graded injective homotopically injective sheaf dg modules",
+   "results": "{\"t\": \"2026-10-24T08:10:45Z\", \"tool\": \"leansearch\", \"query\": \"A set of acyclic monomorphisms detects graded injective homotopically injective sheaf dg modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.injective_iff_rlp_monomorphisms_zero\", \"CategoryTheory.Sheaf.instMonoAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization\", \"CochainComplex.IsKInjective.mk\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"HomologicalComplex.Acyclic\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms\", \"CategoryTheory.Sheaf.mono_of_injective\"], \"digest\": \"df6973d909a087fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: KInjective.lean:34-51 and LiftingProperties.lean:32-68 treat ordinary cochain complexes or lifting against all monomorphisms. They do not provide small acyclic tests for sheaf modules over a dg algebra with a nonzero differential."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-ringed-dg-pushpull",
+  "date": "2026-10-24",
+  "group": "Q138"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: set of acyclic extension tests before the pushout construction of 0FT0.",
+   "via": [
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-injectivity-tests",
+  "worker": "stage1",
+  "summary": "Expanded the actual 0FSY proof: Baer tests in the graded sheaf category, acyclic dg hull, all shifted cone tests, explicit Hom exactness, a strictly increasing acyclic filtration, and ordinal inverse-limit acyclicity. Three strictly smaller statement-only prerequisites; reused Baer, dg Grothendieck, long exact cohomology, and ordinal ML nodes. No statement change. Corrected two typographical issues in the source proof rather than reproducing them.",
+  "blueprint": "Realizes the inherited direct-image proof (3) prerequisite: the set of acyclic tests used before the 0FT0 dg injective replacement, via lem-sfb-flat-ringed-dg-pushpull. Read the current latest blueprint unit and direct-images proof; the item has no imported blueprint id or resolvable ancestor, so retained inherited from.node=null and via. Searched whole blueprint: no equivalent graded-sheaf or small-acyclic test statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-characterize-injective",
+    "why": "Generic Baer criterion for a generator in a Grothendieck category, applied to graded module sheaves; does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-pur-kinjective-ML-ordinals",
+    "why": "Generic ordinal inverse-limit acyclicity used at the continuous limit stages of the Hom-complex filtration; no lemma of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-characterize-injective",
+  "lem-pur-kinjective-ML-ordinals"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-b6d3e577f",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-b6d3e577f (reviewer sub-agent of L); spot-checked: Read sdga.tex 0FSK/0FSL (lines 3287-3400), 0FSN/0FSQ/0FSS/0FST/0FSU/0FSW/0FSY (lines 3470-3975, full proof) and the full statements of every cited node. The item statement is unchanged and faithful to 0FSY for left modules. 'Homotopically injective' is equivalent to 0FSU because acyclic modules are closed under shifts. Step 1 is the 0FSN/0FSS Baer test through the hull adjunction; the hull node gives acyclic values and mono preservation, as 0FSS uses. Step 2: I recomputed the cone contraction s(x,y)=(0,x) with the definition's signs, getting ds+sd=1 and the (-1)^{|a|} linearity. Step 3 is 0FSW; I checked the degree-q to I[q] sign identification. Step 4: delta(vsj)=v(ds+sd)j=u, and a degree-q cocycle is a dg map N_s[-q]->I; I checked the homotopy sign (-1)^q. Step 5 gives the short exact sequence of Hom complexes from graded injectivity only, without termwise injectivity. Step 6 builds the filtration: quotients and successors are acyclic by exactness of the forgetful functor plus the long exact sequence, limits are monos with vanishing H^n by Grothendieck exactness, and growth is strict by the nonzero clause. Steps 7-8 use the correctly ordered Hom sequence and the ML-over-ordinals hypothesis, verified at zero, successor and limit stages. The worker's two source corrections are right: 0FSY writes K_beta = colim K_alpha at limits and displays the successor Hom sequence in covariant order. New nodes: graded Grothendieck = 0FRD; hull = 0FSK+0FSL, where mono preservation follows from the natural extension 0->N->FG(N)->N[-1]->0; small acyclics = 0FST plus 'nonzero', which the source proof establishes and step 6 needs. All three are statement-only, true, smaller than the item and not duplicates: a tag/label grep of the whole DAG hits only this delivery, and I read the keyword hits lem-coef-dg-*, sheaf-dg-hflat and pur-kinjective-characterize-K-injective. The lem-pur tools are on-route because the unit cites sk-def-sf-operations; I accept the recorded tool_uses. The blueprint from.node=null is inherited from the item. review_split's 'no such node' messages are symlink false positives. No changes."
+ }
+}

@@ -1,0 +1,256 @@
+{
+ "id": "lem-pur-sequence-kflat-comparison-shifts",
+ "kind": "statement",
+ "title": "K-flat quotient-projection comparison and coherent shifts",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and a finite-type $k$-scheme $W$ [def-weil-finite-field-fiber]. On a fixed small skeleton $\\mathcal V=W_{\\mathrm{proet}}$ set $B_n=(R/t^n)_W$ for $n\\ge1$ and $A=\\lim_nB_n$. Let $\\mathcal T$ be the ringed sequence site with ring $B=(B_n)_n$, and let $\\mathscr S_W=\\operatorname{Mod}_{\\mathcal T}(B)$ be its strict quotient-semilinear module systems [def-coef-ringed-sequence-site]. Use ordinary unbounded derived categories and cochain shifts, with $d_{K[r]}=(-1)^r d_K$ [def-weil-abstract-derived-category]. Fix a supplied coefficient calculus $S$ with its coherence data, reduction $\\mathcal R$ and total limit $\\mathcal L=R\\lim D(U)$ [lem-coef-derived-system-evaluation-calculus]; $U$ is termwise scalar restriction along $A\\to B_n$.\n\nLet $p:(\\operatorname{Sh}(\\mathcal T),B)\\to(\\operatorname{Sh}(\\mathcal V),A)$ be the ringed projection whose underlying inverse image is the constant-system functor $c$ and whose structural map $cA\\to B$ consists of the quotient projections [def-pur-ringed-topos-morphism-of-universes].\n\nThe canonical universal left-derived comparison is a natural isomorphism $\\alpha:Lp^*\\xrightarrow{\\sim}\\mathcal R$ on $D(A)$. For every flat-term K-flat resolution $q:Q\\to P$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], both functors are identified with the same strict complex $(Q\\otimes_A B_n)_n$, with transitions induced by $B_{n+1}\\to B_n$. These identifications commute with maps of resolutions and their comparisons for a third resolution. After evaluation at every $n$ they are the canonical comparison with $P\\otimes_A^LB_n$ [lem-pur-derived-change-of-rings], without independently chosen finite resolutions or transitions.\n\nFor every integer $r$, $Q[r]$ is again K-flat with flat terms and $q[r]$ is a resolution. For any complex $T$ of $A$-modules the comparison\n$$T\\otimes_A Q[r]\\xrightarrow{\\sim}(T\\otimes_A Q)[r]$$\nis multiplication by $(-1)^{rp}$ on the summand $T^p\\otimes_A Q^{q+r}$ of the direct-sum tensor total [def-pc-tensor-complex-sheaves]. The pullback and finite scalar-extension shift comparisons on $Q[r]$ are the identity on $Q^{i+r}\\otimes_A B_n$, with differential $(-1)^r(d_Q\\otimes1)$. Thus $\\alpha$ preserves these specified shift comparisons, on maps and on quotient transitions, naturally in all derived inputs. The comparisons respect shift zero, addition $r+s$ and inverse shifts using the usual cochain identifications. No flatness of $A\\to B_n$, boundedness, completeness of $P$ or normalized-system hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Old proof steps 3, 4 and the left-hand part of 9: Stacks Tag 06YY (sites-cohomology.tex, lemma-derived-base-change), specialized to the quotient sequence projection, with the explicit cochain sign calculation."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-ringed-topos-morphism-of-universes",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-field-fiber",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-sequence-adjoint-resolution-data",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the universal normalized counit for the supplied reduction from [lem-pur-sequence-reduction-universal]. Take L to be that very reduction and alpha to be its identity. The universal property implies uniqueness of any counit-compatible alpha by leftDerived_ext. This constructs the universal comparison data without choosing a second derived functor.",
+   "uses": [
+    "lem-pur-sequence-reduction-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a resolving Q choose its representative isomorphism, whose hom is pinned by the counit equation. For q:Q→P compose it with the inverse of reduction(Qq). Prefix by alpha_P for the pullback comparison. Counit naturality and qh=vqprime give both map squares after cancellation of reduction(Qq). Finite evaluation follows from the representative presentation and naturality of reductionEvaluation at Qq. The two- and three-resolution identities cancel alpha and adjacent isomorphisms. These are the Lean helper resolutionComparison.",
+   "uses": [
+    "def-pur-sequence-kflat-comparison-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing canonical mapBifunctorShift₂Iso for tensor with Q[r]. It identifies that tensor with a shift of the tensor with Q, so shift stability of acyclicity proves K-flatness. Flat terms reindex and the standard shifted quasi-isomorphism instance applies. The canonical CommShift on map₂CochainComplex supplies zero/addition coherence. Its summand inclusion formula gives (-1)^(rp) on the actual sheafified tensor generator, and NatTrans.shift_app_comm gives naturality in the first input.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-pur-sequence-reduction-shifts] to this universal comparison for its prescribed shift squares, and assemble the three conjuncts.",
+   "uses": [
+    "lem-pur-sequence-reduction-shifts"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-reduction-universal",
+  "def-pur-sequence-kflat-comparison-data",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category",
+  "lem-pur-sequence-reduction-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Original steps 1–2 and 6–7 reduced to normalized counit and shift descent; resolution identities, K-flat shift stability and canonical Mathlib tensor shift assembled directly by J8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sequenceSite|StrictRingSystem|pullbackPushforwardAdjunction",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; 25 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Aa]djunction|[Aa]djunction.*derived|pullbackPushforwardAdjunction",
+   "results": "Hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; 25 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a ringed quotient sequence site is reduction computed on flat term K-flat resolutions, compatibly with shifts",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.Functor.leftDerived",
+   "results": "Hits: ; 0 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed sequence site of quotient rings, the geometric projection has pullback given by termwise tensor; its left derived pullback is quotient reduction on K-flat resolutions with identity cochain shift comparisons",
+   "results": "Hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.Tor, SheafOfModules.pullbackObjFreeIso, CategoryTheory.Tor', SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, CategoryTheory.Tor_obj, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso; 8 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived pullback on modules over an inverse diagram of quotient ring sheaves agrees with simultaneous derived scalar extension, with the canonical comparison commuting with all cohomological shifts",
+   "results": "Hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_assoc; 8 total hits. Read the returned candidates; they concern generic adjunction, scalar extension or K-injective infrastructure, not this normalized quotient-sequence comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the quotient-system comparison with its stated representative normalization is not supplied by these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|quotient.*sequence",
+   "results": "0 hits. Searched Mathlib/Algebra/Homology. Read the relevant generic sheaf pullback, additive cochain shift, exact derived-factorization, K-projective, and derivability-comparison candidates. None states the quotient strict-system comparison with all specified cochain signs.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic infrastructure only; the stated quotient-system comparison and its prescribed shifts require the proof written here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image of a ringed sequence topos computed by K-flat resolutions commutes with integer shifts",
+   "results": "Actual returned candidates: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CochainComplex.isKProjective_shift_iff, CochainComplex.instIsKProjectiveObjIntShiftFunctor, CategoryTheory.Equivalence.commShiftInverse, DerivedCategory.instAdditiveShiftFunctorInt; 8 hits. Read the relevant generic sheaf pullback, additive cochain shift, exact derived-factorization, K-projective, and derivability-comparison candidates. None states the quotient strict-system comparison with all specified cochain signs.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic infrastructure only; the stated quotient-system comparison and its prescribed shifts require the proof written here"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.CommShift",
+   "results": "0 hits. Read the relevant generic sheaf pullback, additive cochain shift, exact derived-factorization, K-projective, and derivability-comparison candidates. None states the quotient strict-system comparison with all specified cochain signs.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic infrastructure only; the stated quotient-system comparison and its prescribed shifts require the proof written here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback on a ringed sequence site of quotient rings agrees with simultaneous K-flat derived scalar extension and its cochain shift comparisons",
+   "results": "Actual returned candidates: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; 8 hits. Read the relevant generic sheaf pullback, additive cochain shift, exact derived-factorization, K-projective, and derivability-comparison candidates. None states the quotient strict-system comparison with all specified cochain signs.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic infrastructure only; the stated quotient-system comparison and its prescribed shifts require the proof written here"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftMapCochainComplex|pullbackIso|pullbackComp",
+   "results": "Actual returned candidates: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Topology/Gluing.lean, Mathlib/Topology/Gluing.lean, Mathlib/Topology/Gluing.lean, Mathlib/Topology/Gluing.lean, Mathlib/Topology/Gluing.lean; 25 hits. Read the relevant generic sheaf pullback, additive cochain shift, exact derived-factorization, K-projective, and derivability-comparison candidates. None states the quotient strict-system comparison with all specified cochain signs.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic infrastructure only; the stated quotient-system comparison and its prescribed shifts require the proof written here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal left derived comparison between simultaneous quotient reduction and pullback along the constant inverse system ringed topos morphism, normalized on flat K-flat cochain representatives",
+   "results": "Actual returned candidates: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Functor.leftDerived_map_eq, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; 8 hits. Read the relevant generic sheaf pullback, additive cochain shift, exact derived-factorization, K-projective, and derivability-comparison candidates. None states the quotient strict-system comparison with all specified cochain signs.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic infrastructure only; the stated quotient-system comparison and its prescribed shifts require the proof written here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-sequence-adjoint-resolution-shifts",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Unit Step 2 transport through the reduction/total-limit adjunction; coefficient-comparison sentence of fix-prop-coherence.proof.md. Extracted from returned parent proof steps 1–3 and the adjunction-identification part of step 4. Agent resolution-normalized specialization of Stacks sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition). Old proof steps 3, 4 and the left-hand part of 9: Stacks Tag 06YY (sites-cohomology.tex, lemma-derived-base-change), specialized to the quotient sequence projection, with the explicit cochain sign calculation.",
+   "via": [
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pur-sequence-kflat-comparison-shifts",
+  "worker": "stage1",
+  "summary": "Identified the supplied reduction with the universal pullback using existing ringed-topos K-flat computation and strict coefficient-system descent. Wrote the resolution-map and three-resolution equations, finite evaluation, the full tensor differential sign calculation, shifted K-flatness, and zero/addition/inverse coherence. Statement and inherited provenance retained; no new nodes needed.",
+  "blueprint": "Recorded ancestor thm-pur-rational-and-qbar-purity, inherited reduction/total-limit transport route through lem-pur-sequence-adjoint-resolution-shifts: the left-derived comparison and the left-hand shift part. In the current latest blueprint this realizes compatibility clause (7) and the coefficient-comparison sentence of fix-prop-coherence.proof.md under sk-thm-sf-compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic unbounded ringed-topos pullback and its universal K-flat representative counit; the unit only collects coefficient compatibilities."
+   },
+   {
+    "node": "lem-sp-strict-coefficient-tensor-descent",
+    "why": "Generic normalized descent of a strict semilinear scalar-extension functor, including uniqueness and derived-roof naturality; used to identify the two realizations, not to change the coefficient route."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "The supplied coefficient calculus in the statement: its reduction is the simultaneous strict K-flat quotient construction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of flat-term K-flat resolutions on a small ringed site, needed for all unbounded inputs."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic finite scalar-extension computation and canonical resolution comparisons, needed to identify each evaluation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sp-strict-coefficient-tensor-descent",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-bdf4e3064",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-bdf4e3064 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery. It has no new nodes, only a 7-step proof of the previously statement-only item; the statement, stmt_deps and provenance are unchanged, and there is no re-split note. Step 1: lem-weil-pbc-ringed-topoi-derived-pullback (Stacks 06YY, sites-cohomology.tex:3585) applies to the constant-system ringed projection; covers are vertical, so p^*Q=(Q⊗_A B_n)_n with transitions 1⊗ρ. Step 2: lem-sp-strict-coefficient-tensor-descent with R=A, S_n=B_n has a uniqueness clause for normalized descents; both Lp^* and the calculus reduction R are normalized descents of the same functor, so α=b_q^{-1}a_q. Step 3: maps of resolutions, three-resolution cancellation and finite evaluation via lem-pur-derived-change-of-rings (2) are correct. Steps 4-7: I recomputed the tensor-shift sign (-1)^{rp} on T^p⊗Q^{q+r} (source and target coefficients (-1)^{rp+r}, (-1)^{rp+r+p}). Shifted K-flatness uses the K-flat definition's Tot(F⊗K) order, which matches. F(Q[r])=F(Q)[r] is the identity since B_n is in degree 0. The zero, addition and inverse coherences hold. Small cases r=0, r=1 with p odd, r=-1, n=1 and empty W are fine. The coefficient category Mod_T(B) of strict quotient systems and the quotient-structural-map projection match the calculus and the sibling and parent nodes. No SGA is cited and no duplicate was found. Batch-5 flag: lem-trf-right-fraction-dense-subcategory is the generic Stacks 0GSL localization lemma (full subcategory with enough denominators), used only for descent uniqueness. It is neither the trace formula, Poincaré duality, nor a step of their proofs, so it is accepted. Minor reading accepted: the calculus's 'R_W represented by (Q⊗B_n)_n … functor on D' is taken as normalization on morphisms too, the same reading as in the sibling and parent nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurSequenceKFlatComparisonShifts",
+  "declaration": "WeilConjectures.purSequenceKFlatComparisonShifts",
+  "declarations": [
+   "WeilConjectures.purSequenceKFlatComparisonShifts"
+  ],
+  "file": "lean/Sheaf/Paper/PurSequenceKFlatComparisonShifts.lean",
+  "statement": "theorem purSequenceKFlatComparisonShifts (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p) [W.Over (Spec (.of F.k))] [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))] (S : CoefficientDerivedSystemCalculus l E W) (hS : CoefficientDerivedSystemCoherence l E W S) (O : PurSequenceOrdinaryAdjoints l E W) : (∃ A : PurSequenceKFlatComparison l E W S O, Nonempty (PurSequenceKFlatResolutionComparison l E W S O A) ∧ Nonempty (PurSequenceKFlatShiftComparison l E W S O A)) ∧ (∀ (P Q : CochainComplex (scalarReductionSource l E W) ℤ) (q : Q ⟶ P) [QuasiIso q] (hQ : CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q) (flatQ : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) (Q.X i)) (r : ℤ), CochainComplex.IsKFlatIndependentCoefficients (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) (Q⟦r⟧) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) ((Q⟦r⟧).X i)) ∧ QuasiIso (q⟦r⟧')) ∧ (∃ s : ∀ T : CochainComplex (scalarReductionSource l E W) ℤ, (purSequenceTensorRight l E W T).CommShift ℤ, (∀ T, PurSequenceTensorShiftFormula l E W T (s T)) ∧ ∀ (T T' : CochainComplex (scalarReductionSource l E W) ℤ) (f : T ⟶ T') (Q : CochainComplex (scalarReductionSource l E W) ℤ) (r : ℤ), (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)).map (Prod.mkHom f (𝟙 (Q⟦r⟧))) ≫ (purSequenceShiftIso (purSequenceTensorRight l E W T') (s T') r).hom.app Q = (purSequenceShiftIso (purSequenceTensorRight l E W T) (s T) r).hom.app Q ≫ ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)).map (Prod.mkHom f (𝟙 Q)))⟦r⟧')",
+  "branch": "sheaf-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed ordinary projection presentation from def-pur-sequence-adjoint-resolution-data and the actual total-tensor generators from def-coef-ringed-tensor-hom-model. Both landed definition nodes are added to stmt_deps. O packages the supplied quotient projection and its canonical ordinary module model; no derived comparison or shift compatibility is assumed. J8: unchanged comparison definitions moved verbatim to PurSequenceKFlatComparisonData and remain publicly re-exported; this module now carries the existence theorem only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0022d90cd",
+  "group": "Q155",
+  "result": "pass",
+  "note": "I read the node, all 11 stmt_deps and the declarations used (PurSequenceOrdinaryAdjoints, purSequenceShiftIso, coefficientTotalTensor/coefficientTensorGenerator, CoefficientReductionPresentation/Models, coefficientFiniteReductionModel) and the parent PurSequenceAdjointResolutionShifts. α is fixed by the universal counit and the unique clause; the calculus counit is pinned on flat-term K-flat Q at the calculus's own reductionModel strength; resolution maps, two- and three-resolution identities and finite evaluation are canonical. Q[r] K-flatness, flat terms and q[r] quasi-iso are stated. The tensor shift sign (-1)^{rp} on generators matches Mathlib's d_T+(-1)^p d_Q and r.negOnePow conventions, with naturality in T and Q. left/finite shifts are pinned by resolution squares, so the α/evaluation clauses are substantive. The added stmt_deps are landed def nodes with the used declarations recorded. No extra hypotheses, no universe restriction, a single sorry, docstrings present, statement verbatim. No fixes, so no compile; worker compile evidence accepted."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57002",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T204752-L-3007079",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); six data declarations moved to PurSequenceKFlatComparisonData vs the clone originals (verbatim except blueprint ids); the two new sorry statements vs the original conjuncts and nodes; direct importers PurSequenceComparisonTranspose and BasicRealizationShiftSquare compiled against the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

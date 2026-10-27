@@ -1,0 +1,209 @@
+{
+ "id": "lem-trf-monoscheme-toric-tower-descent",
+ "kind": "statement",
+ "title": "Unique centerwise descent of a finite equivariant toric tower to monoschemes",
+ "statement": "Let $M$ be a fine torsion-free monoscheme with finite affine cover, and let $X_0=\\mathbf Q[M]$, with the component tori, normalized towers and saturated monoscheme blowups of [def-trf-monoscheme-toric-realization]. Let $(X_i,J_i)_{0\\le i<n}$, with last scheme $X_n$, be a finite normalized blowup tower such that each coherent ring ideal $J_i$ is preserved by the original component tori acting on $X_i$, and its zero scheme is nowhere dense. Then there is a unique finite ordered saturated monoscheme blowup tower $M_n\\to\\cdots\\to M_0=M$ lifting this centered tower: each $M_i$ is fine, torsion free and has a finite affine cover; its coherent center $I_i$ is nonempty on every component; and the canonical torus-equivariant identifications $X_i\\simeq\\mathbf Q[M_i]$ identify $J_i$ with $\\mathbf Q[I_i]$ and each normalized blowup map with the realization of $M_{i+1}=\\operatorname{Bl}_{I_i}(M_i)^{\\rm sat}$. Uniqueness is with these canonical centered chart identifications and the specified base $M$, not uniqueness among arbitrary scheme isomorphisms. If $X_n$ is regular, $M_n$ is smooth.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.2.19, first half, p.106: induction descending the entire centered tower; Lemma 3.2.15, Corollary 3.2.18 and Lemma 3.2.12(ii), pp.104--106. No Stacks tag states this monoscheme result."
+ },
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "def-per-normalized-tower-descent-data",
+  "def-trf-toric-action-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a centered lift L using the construction theorem. It retains the base, every ordered center and arrow, torsion-freeness and the equivariant realization isomorphisms.",
+   "uses": [
+    "lem-trf-centered-toric-tower-lift-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VIII, 3.2.14--3.2.20, pp.105--106, with the saturated charts of 3.1.19--3.1.24, pp.101--102."
+   }
+  },
+  {
+   "text": "For every second lift L′, apply the centered-identification theorem to these two supplied lifts. This gives precisely the unique family required in the first conjunct.",
+   "uses": [
+    "lem-trf-centered-toric-tower-lift-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VIII, 3.2.14--3.2.20, pp.105--106, with the saturated charts of 3.1.19--3.1.24, pp.101--102."
+   }
+  },
+  {
+   "text": "Assume the final scheme is regular. Its realization isomorphism transports local Noetherianity by the open-immersion Noetherianity theorem. At each point its stalk map is a ring isomorphism, so IsRegularLocalRing.of_ringEquiv transports regularity to the realization stalk. Apply isSmooth_of_rational_realization_regular with the final torsion-freeness field. Its conclusion is definitionally Fine.IsSmooth. Pair this implication with the uniqueness conclusion for the chosen L.",
+   "uses": [
+    "def-trf-centered-toric-tower-lift-data",
+    "lem-trf-toric-monoid-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VIII, 3.2.14--3.2.20, pp.105--106, with the saturated charts of 3.1.19--3.1.24, pp.101--102."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-centered-toric-tower-lift-existence",
+  "lem-trf-centered-toric-tower-lift-identification",
+  "def-trf-centered-toric-tower-lift-data",
+  "lem-trf-toric-monoid-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.2.19--3.2.20, p.106, and 3.2.12(ii), pp.104--105. Lean separates construction (original steps 1--3) and centered identification (original step 4); terminal smoothness is proved via transported stalk regularity and the existing rational toric regularity theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monoscheme-toric-tower-descent: A torus invariant normalized blowup tower of the toric scheme Q[M] descends uniquely to saturated blowups of a fine torsion free monoscheme, with coherent nonempty monoid ideals and smooth terminal monoscheme.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"For a scheme morphism $ f $ factoring as $ f_1 $ followed by $ f_2 $, the composition of the normalization morphism $ \\\\text{normalizationDesc} $ from the normalization of $ f $ to a target scheme $ T \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization f)\\n      (AlgebraicGeometry.Scheme.Hom.fromNormalization f) =\\n    f\", \"doc\": \"The composition of the canonical morphism from a scheme $ X $ to the normalization of a morphism $ f: X \\\\to Y $ and the canonical morphism from the normalization to $ Y $ equals the original morphism \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-monoscheme-toric-tower-descent: Recover a monoidal blowup resolution from a torus equivariant scheme resolution, preserving ordered ideals and normalized blowup charts.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"blowup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "grep",
+   "query": "monoscheme|monoidal.*blowup|toric.*resolution",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monoscheme-toric-tower-descent: A finite equivariant resolution of Spec Q[P] uniquely determines a finite tower of saturated monoid blowups with the same centers and smooth final monoid spectra.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.ValuativeCriterion.Existence (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$ satisfies the valuative criterion for existence, provided t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization f)\\n      (AlgebraicGeometry.Scheme.Hom.fromNormalization f) =\\n    f\", \"doc\": \"The composition of the canonical morphism from a scheme $ X $ to the normalization of a morphism $ f: X \\\\to Y $ and the canonical morphism from the normalization to $ Y $ equals the original morphism \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned types; scheme normalization, pullback identities and gluing lack the monoidal spaces, ordered monoid centers and centered saturated tower assertions here"
+  },
+  {
+   "tool": "grep",
+   "query": "monoscheme|monoidal.*blowup|toric.*tower",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary scheme normalization or local scheme smoothness, not torus-invariant monoid centers, saturated monoscheme blowups, or ordered tower descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"blowup\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary scheme normalization or local scheme smoothness, not torus-invariant monoid centers, saturated monoscheme blowups, or ordered tower descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-monoscheme-toric-tower-descent: Descend a toric normalized blowup sequence to a unique ordered tower of monoid blowups with the same ideal centers.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.ker_toNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary scheme normalization or local scheme smoothness, not torus-invariant monoid centers, saturated monoscheme blowups, or ordered tower descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monoscheme-toric-tower-descent: A finite torus equivariant tower of normalized blowups over Q[M] uniquely descends center by center to saturated blowups of a fine torsion free monoscheme.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary scheme normalization or local scheme smoothness, not torus-invariant monoid centers, saturated monoscheme blowups, or ordered tower descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-monoscheme-toric-tower-descent: Invariant ideals in monoid algebras recover monoid ideals; induction identifies normalized scheme blowups with saturated monoscheme blowups and regular final realization implies smooth monoids.",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary scheme normalization or local scheme smoothness, not torus-invariant monoid centers, saturated monoscheme blowups, or ordered tower descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-functorial-fan-desingularization",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Re-split of lem-trf-functorial-fan-desingularization: old steps 1--2 and terminal smoothness in step 3.",
+   "via": [
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoscheme-toric-tower-descent",
+  "worker": "stage1",
+  "summary": "Kept the statement and its definition dependency. Expanded the centerwise finite induction and canonical uniqueness using the existing toric-monoid comparison; used the existing finite-chart component lemma for the nowhere-dense-to-nonempty inference. No new nodes or Mathlib leaves. Checked length zero, unit centers, empty monoscheme, unsaturated initial charts and multiple components.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Re-split of lem-trf-functorial-fan-desingularization: old steps 1--2 and terminal smoothness in step 3. This realizes the first-half induction of ILO VIII 3.2.19 in the historical alteration branch. The latest blueprint uses the contracting-correspondence route for local terms; this split does not change that unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-22300694c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-22300694c (reviewer sub-agent of L); spot-checked: I read the item, the definition and both cited lemmas (toric-monoid-comparison (i)-(iii), monoscheme-finite-chart-components) against ILO VIII 3.2.19/3.2.20 (p.106) and 3.2.15/3.2.18. Step 1 sets up an explicit inductive datum and its base (D4). Step 2: (i) gives J_i=Q[I_i] with I_i unique; a center empty on one component would make V(J_i) contain a nonempty clopen X_eta, contradicting nowhere density. Step 3: (ii) applies once I_i is nonempty on every component and gives X_{i+1}=Q[Bl_{I_i}(M_i)^sat], fine, torsion free, with a finite cover and the same torus. Step 4: uniqueness follows from injectivity in (i) and the canonical identification in (ii), as the statement stipulates. Step 5: regular over Q gives stalks N^r+Z^t by the last sentence of (iii). proof_deps equals the union of the uses, and there is no cycle. The statement is unchanged from live, no new nodes, no SGA, and the item has no repair note of its own. Edge cases checked: n=0, empty M, unit center, and the blowup of A^2 at the origin. No duplicate among the tower-descent, tower-comparison-coherence, toric-normalized-desingularization and torus-equivariance nodes. Advisory: the identification of the blowup map with the realized map is read off (ii) as an identification over Q[M_i]."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonoschemeToricTowerDescent",
+  "declaration": "AlgebraicGeometry.Monoscheme.exists_unique_centeredToricTowerLift",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.exists_unique_centeredToricTowerLift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonoschemeToricTowerDescent.lean",
+  "statement": "theorem exists_unique_centeredToricTowerLift (M : Fine.{u}) (hM : M.IsTorsionFree) (n : ℕ) (T : NormalizedTower.{u} n) (e₀ : T.level 0 ≅ realization (ULift.{u} ℚ) M) (hEquivariant : T.HasEquivariantToricCenters M e₀) (hNowhereDense : T.HasNowhereDenseCenters) : ∃ L : CenteredToricTowerLift M T e₀, (∀ L' : CenteredToricTowerLift M T e₀, ∃! e : ∀ i : Fin (n + 1), (L.tower.level i).space ≅ (L'.tower.level i).space, L.IsCenteredIdentification L' e) ∧ (IsRegularScheme (T.level (Fin.last n)) → (L.tower.level (Fin.last n)).IsSmooth)",
+  "branch": "newtargets-dag",
+  "by": "R5",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The theorem signature and mathematical statement are unchanged. The three existing definitions were moved verbatim to CenteredToricTowerLiftData and attached to def-trf-centered-toric-tower-lift-data, avoiding circular proof imports. The item now proves its conclusion from separate construction and centered-identification statements and proves the smoothness implication using rational toric regularity. This is one upper hole decomposed into two strictly partial obligations, not a net proof gain."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6472b0d7e",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Return L (duplicate declaration at 39a9) fixed: the separate ToricActionComparison copy is dropped and def-trf-toric-action-comparison is existing:true on the live ToricMonoidComparison toricActionDomain/toricActionBase/IsToricComparison. Its statement matches the Lean clause by clause (iterated pullback, unique lifts, three projection equations, open tori, closures) and ILO VIII 3.2.4/3.2.17-18. The item module is byte-identical to the passed 39a9 version except the import. I re-read its mathematics and edge cases (n=0, empty M, unit centers, nowhere density, single universe u): correct. The dependency file differs from live (b17affc3e81) only by one trailing blank line added to force a private recompile. The item, IsToricComparison and toric_ideal_comparison lean.statements appear word for word in their files. Item stmt_deps are all def nodes; the theorem is a proof_dep only; the theorem record lists its five theorems. The theorem json was read from the commit because the snapshot omits it. No compile (no file changed). Advisories: add def-trf-toric-action-comparison to lem-trf-toric-monoid-comparison stmt_deps (recorded in lean.note only); the reused defs' docstrings still carry the old blueprint tag."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-761b5",
+  "group": "R5",
+  "result": "fix",
+  "landing": "20261026T092450-L-3434782",
+  "kind": "interface",
+  "note": "independent cc review: live item vs delivered Data module (verbatim move, only blueprint tags differ); item signature vs live node lean.statement; new sorry statements vs ILO VIII 3.2.19–3.2.20; axioms probe in /tmp/r5mttd_761b"
+ }
+}

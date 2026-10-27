@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-tame-integral-reduction-family",
+ "kind": "statement",
+ "title": "Integral tame reductions on punctured strict-local root towers",
+ "statement": "Fix distinct primes $p,\\ell$, a characteristic-$p$ field $k$, a finite norm-topological extension $E/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_E$ and a uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $Y$ be a regular separated finite-type $k$-scheme [def-weil-regular-scheme, def-weil-scheme-morphism-properties], let $D$ be a finite reduced strict normal crossings divisor [def-trf-strict-normal-crossings-boundary], and set $W=Y\\setminus D$. Use the small pro-etale sites [def-weil-pbc-proetale-site], all-continuous coefficient rings $C_{E,X}=p_X^*C(-,E)$ and $C_{A,X}=p_X^*C(-,A)$ [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients], internal modules [sk-def-sfb-module-objects] and lisse modules [def-sfb-lisse-coefficient-module]. Let $L$ be a finite-rank lisse $C_{E,W}$-module. Suppose its pullback to every punctured strict-local full prime-to-$p$ parameter-root tower is constant; these towers use strict henselizations [def-sc-ring-strict-henselization] and the compatible-root algebra [def-sfb-strict-local-kummer-tame-module], with only parameters vanishing at the point. Suppose these punctured towers are nonempty connected and quasi-compact quasi-separated (every open cover has a finite subcover, and intersections of quasi-compact opens are quasi-compact).\nThere exist a lisse $C_{A,W}$-module $N$ and an isomorphism $N[1/\\varpi]\\cong L$. For every $n\\geq1$, $F_n=N/\\varpi^nN$ is a finite locally free sheaf over the constant ring $A/\\varpi^n$, with the actual quotient transition inducing $F_{n+1}/\\varpi^nF_{n+1}\\cong F_n$, and the natural map $N\\to\\varprojlim_nF_n$ is an isomorphism. On every such punctured strict-local tower $Z$, a chosen trivialization $L|_Z\\cong C_{E,Z}^d$ identifies the pair $(N|_Z,N|_Z[1/\\varpi]\\cong C_{E,Z}^d)$ with $(hC_{A,Z}^d,\\text{inclusion after rationalization})$ for some $h\\in\\operatorname{GL}_d(E)$. In particular $N|_Z\\cong C_{A,Z}^d$ and $F_n|_Z\\cong\\underline{(A/\\varpi^n)^d}_Z$. This includes points on fewer boundary components, rank zero and locally varying rank; on the empty $W$ all assertions are vacuous.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Paragraph (3), tame-boundary extension expansion: returned proof steps 2–3 (integral model, lattice coset rigidity and finite tame reductions). Agent-formulated consequence of Lemma 4.2.12, Lemma 6.8.2, Proposition 6.8.4 and Lemma 7.4.10; not a verbatim theorem."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-regular-scheme",
+  "def-weil-scheme-morphism-properties",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-lisse-coefficient-module",
+  "def-sc-ring-strict-henselization",
+  "def-sfb-strict-local-kummer-tame-module"
+ ],
+ "proof": [
+  {
+   "text": "The regular scheme $Y$ is locally Noetherian by definition. Since it is finite type over the field $k$, it is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; the spectrum of a field is Noetherian since its only ideals are $0$ and $k$. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], the closed subsets of $|Y|$ satisfy the descending chain condition, so its open subsets satisfy the ascending chain condition, and so do those of the open subspace $|W|$. Every open subspace of such a space is quasi-compact: otherwise successive finite unions from a cover give a strictly ascending chain of opens. Hence $W$ is Noetherian, and $|W|$ satisfies the hypothesis of [lem-sfb-noetherian-connected-components-open]. Its local rings are those of $Y$ at its points, and are normal domains by [lem-weil-pbc-regular-ring-normal], applied on the regular affine neighbourhoods in the definition of regularity. It is separated by restriction of the diagonal of $Y$. By [lem-sfb-noetherian-connected-components-open], $W$ is a finite disjoint union of nonempty open and closed connected schemes $W_a$. Their local rings and separation are inherited; they are Noetherian since open in $W$. Also $\\ell$ is invertible on them, since their local rings are $k$-algebras and $p\\ne\\ell$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-sfb-noetherian-connected-components-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; algebra.tex Tag 0567, lemma-regular-normal; topology.tex Tags 04MF, 04ME, 0052"
+   }
+  },
+  {
+   "text": "Fix one component $X=W_a$. Use [lem-sfb-embedded-lattice-coefficient-comparison] to read $L|_X$ as a lisse module over the continuous-function ring $E_X$. By [lem-sfb-integral-lisse-reduction-equivalence], the integral continuous-function ring is $B_X=\\varprojlim_n(A/\\varpi^n)_X$ and its rationalization is the continuous $E_X$. Localization at $\\ell$ and at $\\varpi$ agree: in the DVR $A$ one has $\\ell=u\\varpi^e$ for a unit $u$ and $e\\geq1$, so inverting either element inverts the other. Choose a geometric point of the nonempty $X$. All hypotheses of [lem-a1-normal-proetale-monodromy] hold by step 1, giving a finite-dimensional jointly continuous representation $V_a$ of the profinite group $\\Pi_a=\\pi_1^{\\mathrm{et}}(X)$.",
+   "uses": [
+    "lem-sfb-embedded-lattice-coefficient-comparison",
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "lem-a1-normal-proetale-monodromy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.8.2, 7.4.7 and 7.4.10; Proposition 6.8.4(1)"
+   }
+  },
+  {
+   "text": "Apply [lem-pod-profinite-stable-lattice] to $\\Pi_a$ and $V_a$. It supplies a stable finite free $A$-lattice $\\Lambda_a$ with its continuous adic action. The integral normalization in [lem-a1-normal-proetale-monodromy] constructs the lisse $B_X$-module $N_a$ from the actual finite quotient representations $\\Lambda_a/\\varpi^n\\Lambda_a$ and identifies $N_a[1/\\varpi]$ with $L|_X$. The map from $N_a$ into this rationalization is injective: on each finite-free chart it is the coordinatewise injection of continuous $A$-valued functions into continuous $E$-valued functions, and the sheaf uniqueness axiom detects injectivity on a cover. Thus it is an embedded lattice. Transport it back to internal modules using [lem-sfb-embedded-lattice-coefficient-comparison]. On the finite disjoint open-and-closed cover $W=\\coprod W_a$, assemble these modules and isomorphisms: on any site object sections are the product of the sections over its inverse images of $W_a$, with coordinatewise restriction and action. The sheaf axiom holds factorwise and the given local bases cover $W$. This gives a lisse internal $N$ with the required rationalization.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-sfb-embedded-lattice-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet, p.3; Bhatt–Scholze Lemma 7.4.7 and Proposition 6.8.4(1)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-lisse-reduction-equivalence] to $N$, through the coefficient comparison [lem-sfb-embedded-lattice-coefficient-comparison]. It states that the actual reductions $F_n=N/\\varpi^nN$ are locally finite free over the constant rings $A/\\varpi^n$, with the transition-induced quotient isomorphisms, and that the natural completion map is an isomorphism. The coefficient comparison is an equivalence identifying the inclusion and scalar extensions, so it preserves these cokernels and limits and their canonical maps by their universal properties. Thus these are the actual internal quotients and the natural map $N\\to\\varprojlim_nF_n$ appearing in the statement, rather than independently chosen models of the reductions.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "lem-sfb-embedded-lattice-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Proposition 6.8.4(1)"
+   }
+  },
+  {
+   "text": "Let $q:Z\\to W$ be any punctured strict-local tower in the hypothesis and choose the stated rational trivialization. Pullback preserves lisseness by [lem-weil-pbc-continuous-locally-free-pullback]. By [sk-prop-sfb-cartesian-coefficients], it is exact and identifies both pulled coefficient rings with those on $Z$. Consequently the inclusion $N\\subset L$ pulls back to a lattice $q^*N\\subset C_{E,Z}^d$: exactness preserves its injection and quotients; on a finite-free chart the rationalization isomorphism pulls back with the same basis and inverse matrix. Since $Z$ is qcqs, clause (1) of [det-lem-stratified-lattice-scheme] identifies this lattice with a global section of the constant set sheaf $S=\\operatorname{GL}_d(E)/\\operatorname{GL}_d(A)$. By [lem-sfb-continuous-set-descent-components], that section is a continuous map $|Z|\\to S$ with $S$ discrete. Connectedness and nonemptiness imply it has exactly one value: if two values occurred, one nonempty fibre and the union of the other open fibres would disconnect $Z$. Choose a representative $h$ of this coset. The lattice classification identifies the embedded pair with $(hC_{A,Z}^d,\\text{inclusion})$, including the specified rationalization map.",
+   "uses": [
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "det-lem-stratified-lattice-scheme",
+    "lem-sfb-continuous-set-descent-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), proof, discrete lattice-coset classification; Lemma 4.2.12, discrete and component assertions"
+   }
+  },
+  {
+   "text": "Multiplication by $h$ identifies $C_{A,Z}^d$ with $hC_{A,Z}^d$ as integral modules, so $N|_Z$ is free. Exact pullback from step 5 identifies $F_n|_Z$ with $(N|_Z)/\\varpi^n$. Taking quotients of this basis gives $F_n|_Z\\cong\\underline{(A/\\varpi^n)^d}_Z$ by the coefficient quotient isomorphism of [lem-sfb-integral-lisse-reduction-equivalence], with the actual quotient transitions. Every argument allows $d=0$: the matrix group and coset set then have one element and all modules are zero. The components $W_a$ may have different ranks. If $W$ is empty use the unique zero module; no nonempty punctured tower can map into it. At points lying on fewer components the assumption and steps 5–6 apply to their stipulated tower without introducing a missing boundary parameter.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Proposition 6.8.4(1), (6)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-embedded-lattice-coefficient-comparison",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-a1-normal-proetale-monodromy",
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-lem-stratified-lattice-scheme",
+  "lem-sfb-continuous-set-descent-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Assembly of Lemma 4.2.12, Proposition 6.8.4(1),(6), Lemmas 7.4.7 and 7.4.10; stable lattice argument also Stanford Weil II L19 Proposition 1.1.9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tame.*(lattice|lisse)|lattice.*sheaf|Kummer.*reduction",
+   "results": "{\"t\": \"2026-10-22T05:57:38Z\", \"tool\": \"grep\", \"query\": \"tame.*(lattice|lisse)|lattice.*sheaf|Kummer.*reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"18b367d4468d0d0e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral lattices and finite tame reductions of lisse l adic sheaves",
+   "results": "{\"t\": \"2026-10-22T05:57:39Z\", \"tool\": \"leansearch\", \"query\": \"Integral lattices and finite tame reductions of lisse l adic sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZLattice.FG\", \"ZLattice.module_finite\", \"ZLattice.module_free\", \"IsZLattice.mk\", \"instCountable_of_discrete_submodule\", \"Zlattice.FG\", \"IsZLattice\", \"AlgebraicGeometry.isReduced_of_isIntegral\"], \"digest\": \"fa1cb7ae3b1681f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"Module\"",
+   "results": "{\"t\": \"2026-10-22T05:57:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyConstant\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\"], \"digest\": \"7c29edb310d0014c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free lattice in a trivial p adic local system on a connected pro etale scheme is constant",
+   "results": "{\"t\": \"2026-10-22T05:57:51Z\", \"tool\": \"leanfinder\", \"query\": \"A locally free lattice in a trivial p adic local system on a connected pro etale scheme is constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.functorIsoDiscreteAux₁\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\", \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₂\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier\", \"Module.isLocallyConstant_rankAtStalk\", \"LocallyConstant.freeOfProfinite\"], \"digest\": \"2adb5b192420ca97\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rationally tame lisse l adic sheaf on a regular scheme has an integral lattice whose reductions are tame on strict local Kummer towers",
+   "results": "{\"t\": \"2026-10-22T05:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"A rationally tame lisse l adic sheaf on a regular scheme has an integral lattice whose reductions are tame on strict local Kummer towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"b420cba88f0d72eb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse.*lattice|lattice.*sheaf|Kummer.*reduction",
+   "results": "{\"t\": \"2026-10-22T07:21:33Z\", \"tool\": \"grep\", \"query\": \"lisse.*lattice|lattice.*sheaf|Kummer.*reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"18b367d4468d0d0e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rank-at-stalk, ordinary module completions, Z-lattices and general sheaf free-module constructions do not give the lisse integral tame reduction family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"Module\"",
+   "results": "{\"t\": \"2026-10-22T07:21:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocallyConstant\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\"], \"digest\": \"7c29edb310d0014c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rank-at-stalk, ordinary module completions, Z-lattices and general sheaf free-module constructions do not give the lisse integral tame reduction family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lisse l adic local system on a normal Noetherian scheme admits an integral lattice with compatible finite reductions",
+   "results": "{\"t\": \"2026-10-22T07:21:43Z\", \"tool\": \"leanfinder\", \"query\": \"A lisse l adic local system on a normal Noetherian scheme admits an integral lattice with compatible finite reductions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlmostIntegral.isIntegral\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.IsSolid\", \"IsHausdorff.of_isLocalRing\", \"Hausdorffification\", \"CondensedMod.ofSheafProfinite\", \"Profinite.NobelingProof.Nobeling_aux\", \"localCohomology.isoSelfLERadical\"], \"digest\": \"9902d9087b477bd9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rank-at-stalk, ordinary module completions, Z-lattices and general sheaf free-module constructions do not give the lisse integral tame reduction family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally free p adic sheaf on a connected normal scheme has a stable integral lattice and compatible finite quotients",
+   "results": "{\"t\": \"2026-10-22T07:34:48Z\", \"tool\": \"leansearch\", \"query\": \"A locally free p adic sheaf on a connected normal scheme has a stable integral lattice and compatible finite quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"Module.free_of_flat_of_isLocalRing\", \"ZLattice.module_free\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.freeCofan\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"PadicInt\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"6d1528daec1407be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rank-at-stalk, ordinary module completions, Z-lattices and general sheaf free-module constructions do not give the lisse integral tame reduction family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices in a constant l adic local system are classified by the discrete quotient GL n E modulo GL n O E",
+   "results": "{\"t\": \"2026-10-22T07:34:50Z\", \"tool\": \"leanfinder\", \"query\": \"Integral lattices in a constant l adic local system are classified by the discrete quotient GL n E modulo GL n O E\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.mixedEmbedding.instDiscreteTopologySubtypeMixedSpaceMemSubmoduleIntIdealLattice\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.ofLinearEquiv\", \"Hausdorffification\", \"IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion\", \"Ideal.quotientEquivPiZMod\", \"Ideal.quotientRangePowQuotSuccInclusionEquiv\"], \"digest\": \"dc7203e24fc8777a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rank-at-stalk, ordinary module completions, Z-lattices and general sheaf free-module constructions do not give the lisse integral tame reduction family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-root-tower-extension",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), tame-boundary extension expansion: returned proof steps 2–3 (integral model, lattice coset rigidity and finite tame reductions).",
+   "via": [
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-tame-integral-reduction-family",
+  "worker": "stage1",
+  "summary": "Proved using existing normal monodromy, stable lattice, reduction equivalence and lattice-coset nodes. No new nodes; statement unchanged. Every cited statement read and quoted, with no dependency path back to the item.",
+  "blueprint": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md: integral model and finite tame reductions in the tame-boundary expansion. The imported ancestry of this new-target chain has from.node null; it is retained. Steps 1–3 construct the integral model, 4 the actual reduction family, and 5–6 its constant embedded lattice on each tower.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherianity of a finite-type scheme over a field. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Descending chain condition on closed subsets of the Noetherian scheme Y, needed for the finite component decomposition of W (added by the reviewer). Generic tool; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Normality of the regular affine coordinate rings. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Finite open-and-closed component decomposition. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "lem-sfb-embedded-lattice-coefficient-comparison",
+    "why": "Identifies continuous sectionwise and pulled condensed coefficients and embedded lattice pairs. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Supplies actual finite quotient transitions and the natural completion isomorphism. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "lem-a1-normal-proetale-monodromy",
+    "why": "Normal-scheme monodromy and its integral normalization construct the lattice from a stable representation. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "Compact profinite monodromy stabilizes a finite free integral lattice. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-locally-free-pullback",
+    "why": "Lisseness survives the tower pullback. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exact pullback for the pulled coefficient rings. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   },
+   {
+    "node": "det-lem-stratified-lattice-scheme",
+    "why": "Only clause (1), the constant discrete lattice-coset classification, is used. This is a generic tool for the fixed tame-boundary route; no node of this unit supplies that statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-embedded-lattice-coefficient-comparison",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-a1-normal-proetale-monodromy",
+  "lem-pod-profinite-stable-lattice",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-lem-stratified-lattice-scheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-3d9a09670",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-3d9a09670 (reviewer sub-agent of L); spot-checked: Read the item (6 steps, no new nodes, statement unchanged) and every cited statement. The statement is true. W=Y∖D is regular, hence normal and Noetherian; lem-a1-normal-proetale-monodromy (BS 7.4.10, 6.8.4) turns L|W_a into a continuous representation of the profinite π1^et. lem-pod-profinite-stable-lattice (L19 1.1.9) gives a stable Λ, and lem-a1's integral normalization builds N with N[1/ϖ]≅L. The reduction equivalence gives the actual F_n, the transitions and completeness. On each qcqs connected tower Z, pullback is exact (cartesian-coefficients) and preserves lisseness; det-lem-stratified-lattice-scheme(1) plus continuous-set-descent make the lattice a constant coset hGL_d(A). The cases d=0, varying rank, empty W and fewer boundary components are all handled. Two repairs: (1) step 1 used topological Noetherianity of |W| (ACC on opens, needed by lem-sfb-noetherian-connected-components-open) without justification, so it now cites lem-weil-pbc-noetherian-scheme-closed-subsets-minimal, a mathlib node; (2) corrupted \\ell / \\varpi escapes (including a U+000B control character) in steps 1–2. Batch-5 flags: lem-pod-profinite-stable-lattice (closure of 25 nodes, generic compact-group lattice fact) and lem-a1-normal-proetale-monodromy → cor-galois-lisse-representations (Galois correspondence for lisse sheaves; its pod/trf closure is only foundational lisse, Galois and descent nodes) are neither assumption and not steps of the duality or trace argument, so I accepted them as generic. Not a duplicate: lem-a1-smooth-lisse-integral-lattice needs smoothness, which a regular Y over an imperfect k need not have. No SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TameIntegralReductionFamily",
+  "declaration": "AlgebraicGeometry.ProEtale.TameIntegralReduction.tame_integral_reduction_family",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.encoding",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.integralRing",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.rationalRing",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.integralEncoding",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.finiteRing",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.finiteReduction",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.finiteRestriction",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.sectionScalar",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.scalar",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.IsQuotient",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.ringInclusion",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.inclusion",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.embedding",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.pullEmbedding",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.embeddingMatrix",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.ReductionFamily",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.puncturedTower",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.HasConstantModel",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.HasConstantKummerModels",
+   "AlgebraicGeometry.ProEtale.TameIntegralReduction.tame_integral_reduction_family"
+  ],
+  "file": "lean/Sheaf/Paper/TameIntegralReductionFamily.lean",
+  "statement": "theorem tame_integral_reduction_family (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (hpl : p ≠ l) (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hY : IsRegularScheme Y) (D : Y.IdealSheafData) (hD : IsStrictNormalCrossingsBoundary D) (L : Mod (Sheaf (Scheme.ProEt.topology (Scheme.Opens.toScheme D.support.compl)) Ab.{u + 1}) (condensedRingObj (rationalRing E) (Scheme.Opens.toScheme D.support.compl))) (hL : IsLisseCoefficientModule (rationalRing E) L) (htame : IsStrictLocalKummerTameModule p (rationalRing E) D (Scheme.Opens.ι D.support.compl) L) (htowers : ∀ (κ : Type u) [Field κ] [IsAlgClosed κ] (s : Spec (.of κ) ⟶ Y) (r : ℕ) (t : Fin r → Scheme.strictHenselizationRing s), IsStrictLocalBoundaryParameters D s t → ConnectedSpace (puncturedTower p (Scheme.Opens.ι D.support.compl) s t) ∧ CompactSpace (puncturedTower p (Scheme.Opens.ι D.support.compl) s t) ∧ QuasiSeparatedSpace (puncturedTower p (Scheme.Opens.ι D.support.compl) s t)) : ∃ (N : Mod (Sheaf (Scheme.ProEt.topology (Scheme.Opens.toScheme D.support.compl)) Ab.{u + 1}) (condensedRingObj (integralRing l E) (Scheme.Opens.toScheme D.support.compl))) (e : (Mod.extendScalars (coefficientMap (inclusion l E).hom (Scheme.Opens.toScheme D.support.compl))).obj N ≅ L), IsLisseCoefficientModule (integralRing l E) N ∧ ∃ F : ReductionFamily l E (Scheme.Opens.toScheme D.support.compl) N, HasConstantKummerModels l E p D (Scheme.Opens.ι D.support.compl) N L (embedding l E N L e) F",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Real-data helpers specify the canonical internal/sectionwise transport, scalar cokernel cone and constant matrix of the actual rationalization embedding. The pullback comparison in pullEmbedding is the upstream Mod.extendScalarsIsoComapInv (condensedPullbackHom) whiskered by Functor.isoWhiskerLeft, invertible by isIso_condensedPullbackHom of sk-def-sfb-pulled-back-coefficients; sk-prop-sfb-cartesian-coefficients is not a statement dependency and its module is not imported. All positive quotient levels are indexed by n+1.",
+  "fixed_by": "NT-stage2-cc-45cbf6cc7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45cbf6cc7",
+  "group": "NW",
+  "result": "fix",
+  "note": "Re-delivery after two H2 RETURNs (bffe4f58f50a, c3f5c586b52d). The requested correction is made: stmt_deps are back to the original 11, the Sheaf.Paper.CartesianCoefficients import is dropped, and pullEmbedding inlines Functor.isoWhiskerLeft (mapMod) (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ q)), identical to cartesianCoefficientPullbackIso (CartesianCoefficients.lean:53); its IsIso is upstream isIso_condensedPullbackHom (stmt_dep sk-def-sfb-pulled-back-coefficients). The theorem-module import StratifiedLatticeScheme is replaced by def-owned LatticeSheafBasic, ContinuousCoefficientModuleEncoding and ContinuousCoefficientCommRing. Mathematics re-checked: lisse and tame both use Mod.IsFree (finite rank); boundary parameters vanish at the point; htowers = Connected/Compact/QuasiSeparated; ∃ lisse N with e out of the actual extendScalars; ReductionFamily = cokernels of ϖ^(n+1), cokernel transitions, IsLimit, finite locally free over constant A/ϖ^(n+1); HasConstantModel = constant GL_d(E) matrix of the actual pulled embedding plus free rank-d reductions. Edge cases d=0, empty W, r=0 and varying rank are covered. The signature equals lean.statement up to whitespace; the only sorry is the main theorem. FIX: fixes/lem-sfb-tame-integral-reduction-family.lean-record.json replaces the stale lean.note (it still said CartesianCoefficients was added to stmt_deps) and keeps statement verbatim; refit_record gives no refusals and changes only note. No Lean changed, no compile."
+ }
+}

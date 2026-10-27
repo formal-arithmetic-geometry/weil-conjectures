@@ -18,12 +18,10 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-etale-morphism], $q$ is locally of finite presentation, so by [def-sbc-locally-finite-presentation] every $z\\in Z$ lies in an affine open $U=\\operatorname{Spec}A$ with $q(U)$ contained in an affine open $V=\\operatorname{Spec}R$ of $X$ and $A\\cong R[t_1,\\ldots,t_n]/(f_1,\\ldots,f_m)$ as $R$-algebras. Such an $A$ is generated as an $R$-algebra by the images of the $t_i$, so $R\\to A$ is of finite type, and the pointwise criterion [lem-weil-pbc-lft-pointwise-criterion] shows that $q$ is locally of finite type [def-weil-finite-type-morphism]. Apply [pqf-lem-locnoeth-lft] to the given locally Noetherian $X$: $Z$ is locally Noetherian. Choose affine Noetherian open neighbourhoods in $Z$ by [pqf-def-locnoeth]; each has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]. Thus $Z$ is locally topologically Noetherian.",
+   "text": "Mathlib supplies LocallyOfFiniteType q for the etale morphism. LocallyOfFiniteType.isLocallyNoetherian makes Z locally Noetherian. At each point choose an affine open neighbourhood; its ring is Noetherian and noetherianSpace_of_isAffineOpen supplies the required Noetherian space.",
    "uses": [
     "def-weil-etale-morphism",
-    "def-sbc-locally-finite-presentation",
     "def-weil-finite-type-morphism",
-    "lem-weil-pbc-lft-pointwise-criterion",
     "pqf-lem-locnoeth-lft",
     "pqf-def-locnoeth",
     "lem-sc-affine-noetherian-underlying-space"
@@ -35,19 +33,7 @@
    }
   },
   {
-   "text": "Let $V\\subseteq X$ be an affine open with section ring $R$. For every prime $\\mathfrak p\\subset R$, [lem-weil-pbc-affine-open-stalk-localization] identifies $R_{\\mathfrak p}$ with a local ring of $X$. It is therefore a normal domain by hypothesis. Hence $R$ is a normal ring, exactly by [def-weil-pbc-normal-ring].",
-   "uses": [
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "def-weil-pbc-normal-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 033J, label lemma-locally-normal"
-   }
-  },
-  {
-   "text": "The affine-local description in [def-weil-etale-morphism] covers $Z$ by affine opens $W=\\operatorname{Spec}B$ mapping into affine opens $V=\\operatorname{Spec}R$ of $X$, with $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ etale. Step 2 makes $R$ normal, so [lem-weil-pbc-etale-over-normal-ring-normal] makes $B$ normal. For $z\\in W$, [lem-weil-pbc-affine-open-stalk-localization] identifies $\\mathcal O_{Z,z}$ with $B_{\\mathfrak q_z}$, a normal domain by [def-weil-pbc-normal-ring]. Consequently all stalks of $Z$ are integrally closed domains.",
+   "text": "Apply the proved source-library theorem Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain to q and the given normal stalks. Its affine-local proof uses the identification of affine stalks with prime localizations and normality ascending along etale ring maps. Thus every stalk of Z is an integrally closed domain.",
    "uses": [
     "def-weil-etale-morphism",
     "lem-weil-pbc-etale-over-normal-ring-normal",
@@ -61,16 +47,14 @@
    }
   },
   {
-   "text": "Fix $z\\in Z$ and put $A=\\mathcal O_{Z,z}$. It is a normal domain by step 3. Its prime localizations are normal domains by [lem-weil-pbc-localization-normal-domain], so $A$ is also a normal ring in the terminology of [def-weil-pbc-normal-ring]. Choose a separable closure $K$ of its residue field and a strict henselization $C$ as in [def-sc-ring-strict-henselization]. Its pointed etale indexing category is essentially small and filtered by [lem-sc-pointed-etale-small-filtered], and $C$ is local by [lem-sc-ring-strict-henselization-local-maximal-ideal]. The defining colimit is therefore a filtered colimit of etale $A$-algebras with local vertex. Apply [lem-weil-pbc-etale-colimit-normal-local-domain](a): $C$ is a normal domain. By [lem-weil-pbc-spec-domain-stalks-function-field](2), $\\operatorname{Spec}C$ is integral, hence irreducible by [def-pc-integral-scheme]. This proves the precise strict-henselization formulation of geometric unibranchness in the item, for every $z$.",
+   "text": "Fix a stalk A and a presentation with K,H in Type (max u v). The private equivalence liftBase identifies A-algebras in that universe with algebras over R = ULift A. Etaleness is preserved because A to R is an algebra isomorphism; pointedLift restricts the induced equivalence of over categories to pointed etale algebras. Transport the residue separable-closure structure along the residue-field equivalence and transport the specified colimit cocone, obtaining IsStrictHenselization R K H. The existing strict-henselization locality and pointed-etale small-filtered theorems now apply in their single common universe. Restrict the colimit to a small model of its index, transport locality to its chosen colimit, and apply the normal etale colimit theorem. R is a normal domain and its prime localizations are normal by localization of integrally closed domains. Transport the resulting domain along the specified colimit isomorphism to H. PrimeSpectrum.irreducibleSpace gives the required irreducibility.",
    "uses": [
     "lem-weil-pbc-localization-normal-domain",
     "def-weil-pbc-normal-ring",
     "def-sc-ring-strict-henselization",
     "lem-sc-pointed-etale-small-filtered",
     "lem-sc-ring-strict-henselization-local-maximal-ideal",
-    "lem-weil-pbc-etale-colimit-normal-local-domain",
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "def-pc-integral-scheme"
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
    ],
    "elementary": false,
    "source": {
@@ -79,11 +63,11 @@
    }
   },
   {
-   "text": "Let $C$ be an irreducible component of $|Z|$ and let $z\\in C$. Choose an affine Noetherian open neighbourhood $W$ of $z$ using step 1. Its stalks are the corresponding stalks of $Z$, hence normal by step 3. Apply clause (2) of [rem-pc-regular-normal] to $W$: its irreducible components are pairwise disjoint and open and closed in $W$. By [lem-sc-components-open-injection], $C\\cap W$ is one of these components, since it contains $z$. Thus $C\\cap W$ is open in $W$, hence open in $Z$. Taking the union of these neighbourhoods as $z$ ranges over $C$ proves that $C$ is open. It is closed because irreducible components are closed [def-weil-irreducible-components].",
+   "text": "A locally Noetherian scheme is locally connected (the proved source-library instance IsLocallyNoetherian.locallyConnectedSpace). Hence each connected component is clopen. Give it the corresponding open subscheme structure, and transport domain stalks along its open inclusion. The proved source-library theorem irreducibleSpace_of_isDomain_stalk then shows that this connected locally Noetherian open subscheme is irreducible. Mapping its whole space into Z shows that the connected component is irreducible as a subset.",
    "uses": [
     "pqf-def-locnoeth",
-    "rem-pc-regular-normal",
-    "lem-sc-components-open-injection",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-connected-scheme",
     "def-weil-irreducible-components"
    ],
    "elementary": false,
@@ -93,22 +77,9 @@
    }
   },
   {
-   "text": "If two irreducible components $C,D$ of $Z$ meet at $z$, choose the same $W$ as in step 5. Their restrictions are components of $W$ by [lem-sc-components-open-injection]; disjointness of the components of $W$, supplied by clause (2) of [rem-pc-regular-normal], forces $C\\cap W=D\\cap W$. Injectivity in [lem-sc-components-open-injection] then gives $C=D$. Thus the irreducible components of $Z$ are pairwise disjoint.",
-   "uses": [
-    "lem-sc-components-open-injection",
-    "rem-pc-regular-normal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 0357, label lemma-normal-locally-finite-nr-irreducibles, final sentence"
-   }
-  },
-  {
-   "text": "Let $T$ be a connected component of $|Z|$, in the nonempty convention of [def-weil-connected-scheme]. Choose $z\\in T$ and an irreducible component $C$ containing $z$, using [lem-sc-irreducible-components-cover]. By step 5, $C$ is clopen. The disjoint relatively clopen subsets $T\\cap C$ and $T\\setminus C$ partition $T$; the first is nonempty, so connectedness forces $T\\subseteq C$. Every irreducible space is connected: a partition into two nonempty clopen sets would be a union of two proper closed subsets, contrary to [def-weil-irreducible-components]. Therefore $C$ is connected and maximality of the connected component $T$ gives $T=C$. Thus $T$ is irreducible and clopen. When $Z$ is empty there are neither irreducible components nor nonempty connected components, so all assertions remain valid.",
+   "text": "For an irreducible component C choose z in C. Irreducibility implies preconnectedness; since connectedComponent z is clopen and meets C, IsPreconnected.subset_isClopen gives C contained in it. Its irreducibility and maximality of C give equality, proving C clopen. For any maximal nonempty connected subset C the same containment and maximality identify it with connectedComponent z, proving both irreducibility and clopenness. Empty sources have no such components, so the argument is vacuous there.",
    "uses": [
     "def-weil-connected-scheme",
-    "lem-sc-irreducible-components-cover",
     "def-weil-irreducible-components"
    ],
    "elementary": true,
@@ -120,32 +91,25 @@
  ],
  "proof_deps": [
   "def-weil-etale-morphism",
-  "def-sbc-locally-finite-presentation",
   "def-weil-finite-type-morphism",
-  "lem-weil-pbc-lft-pointwise-criterion",
   "pqf-lem-locnoeth-lft",
   "pqf-def-locnoeth",
   "lem-sc-affine-noetherian-underlying-space",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
   "lem-weil-pbc-affine-open-stalk-localization",
   "def-weil-pbc-normal-ring",
-  "lem-weil-pbc-etale-over-normal-ring-normal",
   "lem-weil-pbc-localization-normal-domain",
   "def-sc-ring-strict-henselization",
   "lem-sc-pointed-etale-small-filtered",
   "lem-sc-ring-strict-henselization-local-maximal-ideal",
   "lem-weil-pbc-etale-colimit-normal-local-domain",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
-  "def-pc-integral-scheme",
-  "rem-pc-regular-normal",
-  "lem-sc-components-open-injection",
-  "def-weil-irreducible-components",
   "def-weil-connected-scheme",
-  "lem-sc-irreducible-components-cover"
+  "def-weil-irreducible-components"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Tag 0357, label lemma-normal-locally-finite-nr-irreducibles (affine-open component argument), combined with algebra.tex Tag 033C and more-algebra.tex Tag 06DI; these supply the normal-base case of Bhatt-Scholze Lemma 7.4.10, p. 71."
+  "place": "Tags 033C, 033M, 0357 and 0BQ3, and more-algebra.tex Tag 06DI. Q4 uses the proved source-library normal-stalk and connected locally Noetherian irreducibility results, and writes the private universe transport and assembly."
  },
  "mathlib_searches": [
   {
@@ -298,8 +262,7 @@
   "lem-weil-pbc-etale-over-normal-ring-normal",
   "lem-sc-pointed-etale-small-filtered",
   "lem-sc-ring-strict-henselization-local-maximal-ideal",
-  "lem-weil-pbc-etale-colimit-normal-local-domain",
-  "rem-pc-regular-normal"
+  "lem-weil-pbc-etale-colimit-normal-local-domain"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -327,5 +290,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261023T232007-L-3673293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

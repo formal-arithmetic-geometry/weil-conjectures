@@ -22,10 +22,9 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-qcqs-morphism-permanence] (1), $g_0$ is quasi-compact because $U_0$ is quasi-compact and $V_0$ is quasi-separated. Choose a finite affine open cover $V_0=\\bigcup_a V_{a,0}$ so that each $V_{a,0}$ maps into an affine open $W_{a,0}\\subset S_{i_0}$: such affine neighbourhoods form a cover and quasi-compactness selects finitely many. The definition of quasi-compact morphism makes $g_0^{-1}(V_{a,0})$ quasi-compact. Choose a finite affine open cover $g_0^{-1}(V_{a,0})=\\bigcup_b U_{ab,0}$. These choices give finitely many triples $U_{ab,0}\\to V_{a,0}\\to W_{a,0}$. Their inverse images at every stage and at the limit remain open covers, since inverse image commutes with unions.",
+   "text": "Apply [lem-trf-finite-affine-limit-chart-family] with $X_0=U_0$, $Y_0=V_0$ and $f_0=g_0$. Obtain finitely many affine triples with fixed finitely presented maps $B_{a,0}\\to C_{ab,0}$ over $R_{a,0}$, coordinate systems $R_{a,i}$, and colimits $R_a$. Retain the arrow identifications and the target and source covers at every stage and at the limit.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-finite-type-morphism"
+    "lem-trf-finite-affine-limit-chart-family"
    ],
    "elementary": false,
    "source": {
@@ -34,20 +33,7 @@
    }
   },
   {
-   "text": "Fix a triple, temporarily suppressing $a,b$. Write $W_0=\\operatorname{Spec}R_0$ and let $W_i\\subset S_i$ and $W\\subset S$ be its inverse images. The transition morphisms and limit projection are affine, so [lem-weil-pbc-affine-morphism-permanence] makes every $W_i$ and $W$ affine. By [lem-weil-pbc-limit-affine-transition], $W=\\varprojlim_{i\\geq i_0}W_i=\\operatorname{Spec}R$, where $R_i=\\Gamma(W_i,\\mathcal O)$ and $R=\\varinjlim R_i$. Apply [lem-weil-pbc-affine-chart-tensor-comparison] to this fixed triple. It gives fixed $R_0$-algebras $B_0,C_0$ and a finitely presented $R_0$-algebra map $B_0\\to C_0$, and identifies each chart morphism $U_i\\to V_i$ with $\\operatorname{Spec}(R_i\\otimes_{R_0}C_0)\\to\\operatorname{Spec}(R_i\\otimes_{R_0}B_0)$, and the limit chart with the same formula using $R$. The identifications respect the displayed ring maps; no finite presentation of $B_0$ over $R_0$ is asserted.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-chart-tensor-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C3L (lemma-descend-syntomic), affine reduction, with Tags 01YX/01YW and Schemes Tags 01JR/01I4."
-   }
-  },
-  {
-   "text": "The base change $g$ of $g_0$ is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] (3). Together with the given flatness and geometric-fibre assumption this is condition (1) of [lem-trf-syntomic-geometric-fibres-affine-criterion]. Its implication (1) to (2), applied to the affine pair $U\\to V$ of each triple, says that $R\\otimes_{R_0}B_0\\to R\\otimes_{R_0}C_0$ is flat and finitely presented and that every ordinary residue-field fibre ring is a local complete intersection. This checks the ordinary, rather than merely geometric, fibre hypothesis needed for the algebraic descent lemma.",
+   "text": "The base change $g$ is locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] (3). Thus the given flatness and geometric-fibre assumption give condition (1) of [lem-trf-syntomic-geometric-fibres-affine-criterion]. Its implication (1) to (2), on the affine pairs supplied by step 1, says that $R_a\\otimes_{R_{a,0}}B_{a,0}\\to R_a\\otimes_{R_{a,0}}C_{ab,0}$ is flat and finitely presented and that every ordinary residue-field fibre is a local complete intersection. This supplies the ordinary-fibre hypothesis for ring descent.",
    "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-trf-syntomic-geometric-fibres-affine-criterion"
@@ -59,7 +45,7 @@
    }
   },
   {
-   "text": "For each of the finitely many triples apply [lem-trf-syntomic-ring-filtered-colimit-descent] to the system $R_i$, the fixed finitely presented map $B_0\\to C_0$ of step 2 and the three limit properties of step 3. Obtain an index $i_{ab}\\geq i_0$ at which $B_{i_{ab}}\\to C_{i_{ab}}$ is flat, finitely presented and has local-complete-intersection residue-field fibres. Choose a common upper bound $i$ for these finitely many indices and $i_0$. If there are no source charts, take $i=i_0$.",
+   "text": "Use the tail $I_{\\geq i_0}$, which is nonempty (it contains $i_0$) and directed: an upper bound in $I$ of two tail indices remains in the tail. Apply [lem-trf-syntomic-ring-filtered-colimit-descent] separately to each fixed finitely presented map from step 1 and its base-ring system on this tail. Step 1 gives its colimit $R_a$, and step 2 supplies its limit hypotheses, so obtain $k_{ab}\\geq i_0$ with all three ring properties. Enumerate the finitely many pairs $(a,b)$. Starting at $i_0$, successively replace the current bound by a directed upper bound of it and the next $k_{ab}$. The final index $i$ dominates every $k_{ab}$ and $i_0$; for no source charts the starting index $i_0$ already works.",
    "uses": [
     "lem-trf-syntomic-ring-filtered-colimit-descent"
    ],
@@ -70,21 +56,18 @@
    }
   },
   {
-   "text": "Fix $j\\geq i$ and a triple, and abbreviate $k=i_{ab}$. There is a canonical isomorphism $C_j\\cong B_j\\otimes_{B_k}C_k$: the map sends $(r\\otimes b)\\otimes(s\\otimes c)$ to $r\\alpha_{jk}(s)\\otimes\\varphi_0(b)c$, and its inverse sends $r\\otimes c$ to $(r\\otimes1)\\otimes(1\\otimes c)$; these formulas respect the balanced tensor relations and are inverse on pure tensors. Thus [lem-weil-pbc-flat-module-base-change] and [lem-weil-pbc-finite-presentation-base-change-composition] (1) give flatness and finite presentation of $B_j\\to C_j$. For a prime $\\mathfrak q\\subset B_j$, let $\\mathfrak p\\subset B_k$ be its inverse image. The induced field map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ gives the fibre identity\n$$C_j\\otimes_{B_j}\\kappa(\\mathfrak q)\\cong(C_k\\otimes_{B_k}\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q).$$\nBoth identifications are the associativity and cancellation of balanced tensors. The $\\kappa(\\mathfrak p)$-algebra in parentheses is of finite type, by finite presentation and [lem-weil-pbc-finite-presentation-base-change-composition] (1), and is a local complete intersection by step 4. Therefore [lem-weil-pbc-lci-field-change] makes the fibre over $\\mathfrak q$ a local complete intersection. This proves all three chart properties for every $j\\geq i$.",
+   "text": "Fix $j\\geq i$. Since $i_0\\leq k_{ab}\\leq i\\leq j$, the compatible coordinate-ring system of step 1 supplies $R_{a,0}\\to R_{a,k_{ab}}\\to R_{a,j}$. Apply [lem-trf-lci-fibre-tensor-transition] to this chain and $B_{a,0}\\to C_{ab,0}$. Step 3 supplies exactly its three hypotheses at $k_{ab}$; no flatness of the transition is needed. Its tensor and residue-field comparisons give flatness, finite presentation and local-complete-intersection residue-field fibres for $B_{a,j}\\to C_{ab,j}$. The arrow identifications of step 1 identify this map with the restricted chart map of $g_j$.",
    "uses": [
-    "lem-weil-pbc-flat-module-base-change",
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-lci-field-change"
+    "lem-trf-lci-fibre-tensor-transition"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Tag 00SN (lemma-base-change-syntomic), its three-line proof via flat base change, finite presentation base change and Tag 00SJ; tensor identifications written explicitly."
    }
   },
   {
-   "text": "At each $j\\geq i$, the affine pairs of step 2 form the target cover $V_j=\\bigcup_a V_{a,j}$ and source covers $g_j^{-1}(V_{a,j})=\\bigcup_b U_{ab,j}$ of step 1. Their ring maps have all three properties by step 5, so they satisfy condition (3) of [lem-trf-syntomic-geometric-fibres-affine-criterion]. Its implication (3) to (1) gives that $g_j$ is flat and locally of finite presentation and every geometric fibre is a local complete intersection over its algebraically closed field. These are exactly the asserted conclusions, simultaneously for every $j\\geq i$. Empty source covers and empty fibres are included in the criterion.",
+   "text": "The covers and arrow identifications of step 1 identify the chart properties of step 4 with condition (3) of [lem-trf-syntomic-geometric-fibres-affine-criterion] for $g_j$. Its implication (3) to (1) gives flatness, local finite presentation and the geometric local-complete-intersection fibre condition for every algebraically closed field. This holds for each $j\\geq i$, as required; the cited criterion allows empty source covers and empty fibres.",
    "uses": [
     "lem-trf-syntomic-geometric-fibres-affine-criterion"
    ],
@@ -96,17 +79,11 @@
   }
  ],
  "proof_deps": [
+  "lem-trf-finite-affine-limit-chart-family",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-chart-tensor-comparison",
   "lem-trf-syntomic-geometric-fibres-affine-criterion",
   "lem-trf-syntomic-ring-filtered-colimit-descent",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-lci-field-change"
+  "lem-trf-lci-fibre-tensor-transition"
  ],
  "proof_origin": {
   "by": "document",
@@ -215,38 +192,31 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-complete-intersection-fibres-limit-descent",
   "worker": "stage1",
-  "summary": "Expanded the 0C3L finite-affine proof into six steps using the existing uniform affine chart comparison. Created only the general affine-local geometric-fibre criterion and Algebra 0C33 as statement-only obligations. Proved directed-tail persistence explicitly from existing flatness, finite-presentation and lci field-change nodes. Statement and existing ancestry unchanged; no new definition or Mathlib leaf.",
+  "summary": "Repair of return L (live-DAG promotion/rebase), continued from the retained delivery. The initial fresh server dry run passed at 617447140da. Compared the sandbox with the current shared DAG: only proof, proof_deps and split_report differ; the statement, statement dependencies and all maintainer metadata agree. Re-read every current existing proof citation and Stacks 0C3L/0C33/00SN/00SJ/01UD/01UE/01UF. Assembly step 3 now explicitly constructs the common upper bound by finite iteration of directedness, including the empty-cover case; step 4 retains the compatible coordinate-ring chain and chart-arrow identification. Both statement-only obligations, citations, logged searches, and the complete original six-step handover are preserved. The required delivery tool rebuilds on its fetched current server base.",
   "blueprint": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), via the nodal local equation: realizes the syntomic descent sentence in the proof of Stacks 0C5F needed for the finite-type integer model in 0CBY. This is a supporting algebraic tool, not a replacement of the current contracting-correspondence proof.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-limit-affine-transition",
-    "why": "General existence and affine coordinate description of inverse limits, used to put each triple into the ring-colimit setting; no node of this unit supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-affine-chart-tensor-comparison",
-    "why": "General uniform chart identification for a locally finitely presented map, used as an arrow isomorphism without any etaleness conclusion; no node of this unit supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-lci-field-change",
-    "why": "Generic field-extension invariance of local complete intersections, used only for persistence of each residue-field fibre; no node of this unit supplies it."
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Its generic base-change preservation of local finite presentation supplies the limit morphism hypothesis before applying the affine geometric-fibre criterion; no lemma of this unit gives this generic permanence fact."
    }
   ]
  },
  "tool_uses": [
   "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-affine-chart-tensor-comparison",
-  "lem-weil-pbc-lci-field-change"
+  "lem-weil-pbc-lci-field-change",
+  "lem-weil-pbc-qcqs-morphism-permanence"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-N4-44fdd4150",
-  "group": "N4",
+  "reviewer": "NT-cc-Q67-7bbd60af1",
+  "group": "Q67",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-44fdd4150 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, every cited statement, and the Stacks sources: limits.tex Situation situation-descent-property and 0C3L lemma-descend-syntomic, algebra 0C33 lemma-colimit-lci, morphisms 01UD lemma-syntomic-characterize, 01UF lemma-syntomic-flat-fibres and lemma-local-complete-intersection, and algebra 00SJ lemma-lci-field-change. The item follows the 0C3L route. Step 1 builds a finite affine reduction using qc of g_0 (qcqs-permanence (1)) and the definition of a quasi-compact morphism, and never assumes affine intersections. Step 2 uses the uniform arrow isomorphism of the affine-chart tensor comparison. All of its hypotheses hold, and I checked in its proof that the finite presentation is on the ring map B to C, which is exactly 0C33 hypothesis (2). Steps 3 and 6 apply the new criterion (1)=>(2) and (3)=>(1). Step 4 is 0C33 on each chart, then one common bound i fixed before j is quantified. Step 5 is the 00SN base-change argument and is genuinely elementary: I checked C_j = B_j (x)_{B_k} C_k on pure tensors, and the fibre factors through kappa(p). Both new nodes are true. The criterion follows from 01UF, 01UD and 00SJ plus affine-locality of lci; the ring node is exactly 0C33 (syntomic case) with 00SL expanded. I tested constant systems, identity maps, zero rings and empty fibres, and non-Noetherian bases. rg over the DAG and a blueprint grep found no duplicates, so same_as [] is correct. Neither new node restates a clause of the parent, and there is no cycle. I accept the three declared tool uses (limit-affine-transition, affine-chart-tensor-comparison, lci-field-change) as generic black boxes. The item is not a target node and no SGA source is used. Fix: in lem-trf-syntomic-geometric-fibres-affine-criterion I added the missing [def-pc-fibre-product] citation for the arbitrary geometric fibre to both the statement and stmt_deps (B3). Nothing else changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-7bbd60af1 (reviewer sub-agent of L); spot-checked: Fifth push of this re-split. The four earlier pushes (2894, c708, f853, 5089) all passed. Compared with 5089, both new nodes are byte-identical. In the item only step-3 text changed: the common upper bound is now built by iterating pairwise directedness from i_0, and with no charts i_0 itself is kept. That is correct, and the statement, stmt_deps, source and ancestry are unchanged. Re-split check: old steps 1-2 are now lem-trf-finite-affine-limit-chart-family, old step 5 is now lem-trf-lci-fibre-tensor-transition, and old steps 3, 4 and 6 are assembly steps 2, 3 and 5. Nothing was dropped, the two new nodes are of comparable size (2126 and 1927 characters), and neither restates the item. Step checks: (2) qcqs-permanence (3) makes g lfp, then criterion (1)=>(2) on the limit charts gives the ordinary residue-field fibres. (3) ring-filtered-colimit-descent needs phi_0 fp over B_0, which step 1 supplies. (4) the tensor node is applied to R_{a,0}->R_{a,k}->R_{a,j}. (5) criterion (3)=>(1). The chart family is true: f_0 is quasi-compact because X_0 is qc and Y_0 is qs; take B=Gamma(V) and C=Gamma(U), which are fp by 01TQ; the limit charts follow from 01YW/01YX. The tensor node was checked by hand: theta is balanced and inverse to the stated map, B_k->kappa(q) factors through kappa(p), finite type comes from fp, and lci follows from 00SJ; this is Stacks 00SN. Sources read: limits.tex 0C3L (lines 2091-2122) and algebra.tex 00SN (lines 36478-36487). No SGA source is used. Edge cases checked: empty covers, constant system, alpha=id, R_j=0, C_k=0. Duplicates: 00SN/0C3L appear elsewhere only in nodal-family-noetherian-approximation, nodal-limit-lci-pure-stage and sfb-proper-nodal-dualizing-base-change, which are different statements, so same_as [] stands. Batch-5 flags: the item is already in the batch-5 closure through lem-sfb-proper-nodal-dualizing-base-change. Computing the closure with the old and new proof_deps, the new proof adds exactly the two new nodes and removes nothing; their stmt_deps were already in the closure and they have no proof_deps. Both are generic Stacks limits/commutative algebra, outside both assumptions and not a step of either proof, so both flagged citations are accepted. The declared tool use qcqs-morphism-permanence (Mathlib leaf) is accepted. Advisory: the base-era stmt_dep def-trf-local-complete-intersection-scheme-over-field is not bracket-cited in the item statement. Maintainer note: L should promote this side completion. No fixes."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.CompleteIntersectionFibresLimitDescent",
@@ -271,5 +241,16 @@
   "result": "fix",
   "note": "Substantive review passed; complete replacement files are in fixes/. scompile reproduced the criterion module, while sibling compilation hit an overlay/cache dependency-order error."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

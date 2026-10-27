@@ -16,84 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Put $A=C_F$. Apply [lem-sfb-condensed-derived-invariant-bar] with $G=K$ and $N=A$ with trivial action. This gives $R\\Gamma_K(A[0])\\cong\\operatorname{Tot}_{n\\ge0}R\\underline{\\operatorname{Hom}}_A(A[\\underline K^n],A[0])$, using compatible nonnegative resolutions and the inhomogeneous group-nerve faces. The unit is the invariant inclusion in bar degree zero. This is a computation in ordinary internal modules, with derived internal Hom still present.",
+   "text": "Fix $F=E$ or $\\Omega$ and put $A=C_F$. By [lem-sfb-condensed-derived-invariant-bar] with $G=K$ and trivial $N=A$, there is a normalized isomorphism $\\theta:R\\Gamma_K(A[0])\\cong\\mathscr B_F(K)$. Its degree-zero augmentation is invariant inclusion. Apply [lem-sfb-prime-to-ell-scalar-bar-model] for the same $K,F$: the canonical resolution comparison $j:Q(\\mathcal C_F^\\bullet(K))\\to\\mathscr B_F(K)$ is an isomorphism, and $jQ(u)$ is that augmentation. Thus $\\theta\\eta_{K,F}=jQ(u)$.",
    "uses": [
-    "lem-sfb-condensed-derived-invariant-bar"
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-prime-to-ell-scalar-bar-model"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the scalar tame-kernel input: derived internal bar model"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input: old steps 1–2 and 6; normalized bar comparison."
    }
   },
   {
-   "text": "For each $n$, the set $K^n$ is profinite. Apply [lem-sfb-normed-scalar-profinite-hom-acyclic] to $P=K^n$. It identifies the resolution column with $\\mathcal C_F^n(K)[0]$, with sections $C(S\\times K^n,F)$. Naturality in $P$ identifies every nerve face with precomposition; the first face is also of this form because the coefficient action is trivial. Thus the column augmentations form one map from $\\mathcal C_F^\\bullet(K)$ to the first-quadrant resolution double complex in step 1. They satisfy the chain and zero-next-resolution-differential equations since they come from the resolution augmentation. Each is a quasi-isomorphism by the cited analytic lemma. The total augmentation is a quasi-isomorphism by [lem-sc-first-quadrant-column-augmentation]. Consequently $\\mathcal C_F^\\bullet(K)$ represents the derived bar total, with its degree-zero augmentation unchanged.",
+   "text": "Use [lem-sfb-prime-to-ell-cochain-finite-quotient-descent]. Its quotient-order hypothesis is precisely ours, so its actual inclusion $\\iota:\\mathcal L_F^\\bullet(K)\\to\\mathcal C_F^\\bullet(K)$ is a quasi-isomorphism. In degree zero both are $A$ and $\\iota^0=1_A$. By [lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation], $Q(u_L):A[0]\\to Q(\\mathcal L_F^\\bullet(K))$ is an isomorphism. Since $u=\\iota u_L$, we have $Q(u)=Q(\\iota)Q(u_L)$, a composite of isomorphisms.",
    "uses": [
-    "lem-sfb-normed-scalar-profinite-hom-acyclic",
-    "lem-sc-first-quadrant-column-augmentation"
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the scalar tame-kernel input: pass from derived functions to the continuous cochain complex"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input: old steps 3–5; finite-quotient comparison and local averaging."
    }
   },
   {
-   "text": "Use the complexes $\\mathcal L_F^\\bullet(K)$ and $\\mathcal C_F^\\bullet(K)$ of [lem-sfb-prime-to-ell-cochain-finite-quotient-descent]. The finite-quotient hypothesis in that lemma is exactly the hypothesis on $K$ here. Its specified inclusion $\\iota$ is a quasi-isomorphism, and in degree zero both complexes equal $A$ and $\\iota^0=1_A$. This is the analytic comparison needed for noncomplete $F=\\Omega$; no finite-subextension-valued or completed replacement of a continuous cochain is made.",
-   "uses": [
-    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the scalar tame-kernel input: compare finite-quotient and all-continuous cochains"
-   }
-  },
-  {
-   "text": "Compute the finite-quotient complex directly. Locally on a profinite test set $S$, a section $c$ of $\\mathcal L_F^n(K)$ is represented by a function on $S\\times Q^n$, where $Q=K/U$ is finite and $U$ is open normal. If $dc=0$ after sheafification, refine the cover so this equation holds for its representative; passing to a smaller open normal subgroup accommodates any further finite quotient. Write $m=|Q|$. For $n\\ge1$ set\n$$b(s;g_1,\\ldots,g_{n-1})=\\frac{(-1)^n}{m}\\sum_{h\\in Q}c(s;g_1,\\ldots,g_{n-1},h).$$\nThis is continuous in $S$ and factors through the same finite quotient in the remaining group variables. Sum $(dc)(s;g_1,\\ldots,g_n,h)=0$ over $h$. In its penultimate term replace $g_nh$ by $h$, which permutes $Q$. The other terms are precisely the differential of the displayed sum, and the last term is $(-1)^{n+1}m c$. Hence $db=c$. For $n=1$ the same equality says that the finite-group homomorphism $c$ is zero. All operations are finite sums and multiplication by the constant $m^{-1}\\in F$, valid for both fields. The order assumption makes $m$ an $\\ell$-adic unit; no infinite averaging is used.",
-   "uses": [
-    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent"
-   ],
+   "text": "The equality from step 1 now gives $\\eta_{K,F}=\\theta^{-1}jQ(\\iota)Q(u_L)$, so the specified augmentation is an isomorphism. The degree-zero identities and resolution augmentations ensure this is the canonical invariant inclusion, rather than an unspecified isomorphism between the objects. For $K=1$ the maps reduce to the identity and its canonical resolution comparison. Repeat for each of $F=E,\\Omega$.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the scalar tame-kernel input: explicit finite averaging and its differential identity"
-   }
-  },
-  {
-   "text": "The preceding local primitives mean that the image and kernel sheaves agree in every positive degree of $\\mathcal L_F^\\bullet(K)$. There are no negative terms. In degree zero the differential is zero because the action is trivial, and $\\mathcal L_F^0(K)=A$ since $K^0=\\{1\\}$. Therefore the map $A[0]\\to\\mathcal L_F^\\bullet(K)$ which is the identity in degree zero is a quasi-isomorphism. Localization at quasi-isomorphisms as in [sk-def-sfb-derived-categories] makes it an isomorphism.",
-   "uses": [
-    "sk-def-sfb-derived-categories"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the scalar tame-kernel input: cohomology of the augmented finite-quotient complex"
-   }
-  },
-  {
-   "text": "Compose the isomorphism of step 5, $\\iota$ of step 3, the total augmentation of step 2, and the inverse bar-model isomorphism of step 1. Its first two maps are identities in degree zero, its column maps are the canonical resolution comparisons, and [lem-sfb-condensed-derived-invariant-bar] identifies the final augmentation with inclusion of invariant sections. The resulting map is thus the specified $\\eta_{K,F}$, which is an isomorphism. For $K=1$ all these augmentations reduce to the identity. The same proof applies separately to $F=E$ and $F=\\Omega$.",
-   "uses": [
-    "lem-sfb-condensed-derived-invariant-bar"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent expansion of the scalar tame-kernel input: normalization of the canonical augmentation"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), scalar tame-kernel input: old step 6; assemble the normalized maps."
    }
   }
  ],
  "proof_deps": [
   "lem-sfb-condensed-derived-invariant-bar",
-  "lem-sfb-normed-scalar-profinite-hom-acyclic",
-  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sfb-prime-to-ell-scalar-bar-model",
   "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
-  "sk-def-sfb-derived-categories"
+  "lem-sfb-prime-to-ell-finite-quotient-sheaf-augmentation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3) supplies the geometric context only. Agent proof via derived internal bar, profinite-parameter column computation, finite-quotient cochain comparison, and explicit finite averaging. The two analytic comparisons remain statement-only WANTED inputs."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is geometric motivation only; short assembly of normalized internal bar, total scalar comparison, finite-quotient descent and local finite averaging. The noncomplete Omega total comparison is an explicit unsplit WANTED obligation, not an application of the now finite-E-only column lemma."
  },
  "mathlib_searches": [
   {
@@ -194,29 +159,24 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "item": "lem-sfb-prime-to-ell-condensed-acyclicity",
   "worker": "stage1",
-  "group": "N5",
-  "summary": "Statement unchanged. Separated the derived-function computation from the continuous-cochain comparison, cited the existing normalized derived bar theorem and first-quadrant augmentation tool, and gave the finite quotient averaging calculation including its sign. The two analytic inputs are statement-only and retain the all-continuous, noncomplete Omega hypotheses; no unsupported Haar integration or colimit of finite coefficient fields is used.",
-  "blueprint": "Realizes the scalar analytic input below paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md. The source paragraph itself contains no tame-kernel calculation. blueprint_refs ancestor returns None; preserve the inherited null ancestor and via chain. Whole-blueprint searches found no equivalent node.",
-  "tool_uses": [
-   {
-    "node": "lem-sc-first-quadrant-column-augmentation",
-    "why": "Generic first-quadrant column-to-total comparison, applied to the bar resolution columns. It changes no geometric route; the unit has no separate column-augmentation statement."
-   }
-  ]
+  "group": "Q75",
+  "summary": "Human re-split repair: unchanged statement and statement dependencies; two comparable statement-only obligations extract the normalized scalar bar comparison and finite-quotient sheaf augmentation. Retains local primitive formula, refinement, cohomology, canonical normalization and both coefficient branches. Repairs obsolete use of finite-E column acyclicity for Omega by exposing the required total comparison as an open node.",
+  "blueprint": "Latest blueprint paragraph (3) only supplies compactification and coefficient context; new nodes carry the analytic obligations extracted from old steps 1–2,6 and 4–5. Old step 3 remains the existing finite-quotient descent citation. Inherited null nearest blueprint ancestor and via chain are preserved; new nodes prepend the item. Whole blueprint searches found no exact equivalent.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sc-first-quadrant-column-augmentation"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-N5-61fc616b3",
-  "group": "N5",
+  "reviewer": "NT-cc-Q75-60da353cf",
+  "group": "Q75",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-61fc616b3 (reviewer sub-agent of L); spot-checked: I read the item, both new unsplit nodes, every cited statement and paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md. That paragraph only factors Rf_*=Rp_*Rj_*, and the item and both nodes honestly mark their proofs as agent-written WANTED inputs. The item's statement and stmt_deps are identical to its base copy in the N9 snapshots. Step 1: lem-sfb-condensed-derived-invariant-bar with A=C_F and trivial N=A gives the derived bar total and the invariant-inclusion normalization. Step 2: node 1 (degree-zero concentration of RHom(A_F[P],A_F) and its naturality), applied at P=K^n, plus lem-sc-first-quadrant-column-augmentation. I checked the tool's hypotheses: the first index is the resolution degree, a composed with d_{0,1} is zero because A->J^0->J^1 is zero, and the first face commutes because A->J^0 is equivariant and A is trivial. The tool use is declared in split_report and accepted as a generic black box. Step 3: node 2's iota; in degree zero L^0=C^0=A. Step 4: I recomputed the averaging. Summing dc over h gives da=(-1)^n m c, so b=(-1)^n a/m; for n=1, c=0. This needs only m invertible, which holds in characteristic 0, so all the prime-to-ell content sits in node 2. Steps 5-6: the quasi-isomorphism A[0]->L and the composite equal eta, with K=1 the identity. New nodes: B1-B3 OK, blueprint via is the item plus the inherited chain, and searches are recorded. They are not duplicates: lem-sfb-profinite-constant-derived-functions, the root-tower nodes and lem-sfb-polynomial-derived-bar-comparison all keep RHom derived, and the curve-estimates cochain nodes are for discrete coefficients only. Small cases: node 1 holds for P empty and P finite. Node 2 holds for K finite and K=1, and fails for K=Z_ell, so its hypothesis is needed. For F=E both nodes are classical Banach-coefficient facts. For noncomplete Omega both stay open WANTED inputs. My H^1/H^2 probes for K=Z_r found no counterexample: a Baire argument forces the candidates into one finite extension. Noncomplete Omega is kept throughout, with no Haar integral; Omega-valued functions can have transcendental Haar integrals. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-60da353cf (reviewer sub-agent of L); spot-checked: Read the delivery in full against the live 6-step base and the released re-split note, which needs at least 2 new nodes and an assembly of at most 3000 characters. Live has not changed and has no parallel split; the NA and Q06 nodes are absent. The item's statement and stmt_deps are unchanged. Its 3 steps total 1354 characters, and proof_deps equals the union of uses. Step 1: lem-sfb-condensed-derived-invariant-bar (A=C_F, trivial N=A) plus the normalization clause of node 1 gives theta eta = jQ(u). Step 2: the hypotheses of lem-sfb-prime-to-ell-cochain-finite-quotient-descent are identical to the item's; L^0=C^0=A, iota^0=1 and u = iota u_L. Step 3 is elementary. Mapping of old steps: old 1 and 3 become citations of existing nodes; old 2 becomes node 1; old 4-5 become node 2; old 6 becomes item step 3 plus node 1's normalization clause. Nothing was shortened without a new node, and neither new node restates the item. Old step 2 applied lem-sfb-normed-scalar-profinite-hom-acyclic to Omega, but that node is now finite-E only; the NY Cantor-set counterexample shows H^1(S,Omega) can be nonzero. Node 1 drops the per-column claim and states only the total comparison, which repairs a live C4/E1 defect. Node 1 is provable for E from the column node plus lem-sc-first-quadrant-column-augmentation. For Omega it is open: it is equivalent to the item's Omega case given the other nodes, it has no known counterexample, and it is honestly marked WANTED. Node 2: I recomputed da = (-1)^n|Q|c, so b = (-1)^n a/|Q| and db = c; I checked n=1 (c=0), n=2, K=1, L^0=A and the joint refinement of cover and subgroup. Duplicate checks: lem-sfb-norm-algcl-bar-augmentation is for H=Z_ell; the evaluated, scalar-resolution and profinite-algcl comparisons do not specialize. Node 2's primitive clause overlaps the first part of lem-sfb-scalar-cochain-averaging-primitives but is strictly smaller than node 2, so it is not a duplicate. Both new nodes are unsplit with three kinds of search that actually ran and the correct created/blueprint fields; there is no SGA source, and paragraph (3) of the blueprint is identical in main-20261015 and latest. Maintainer notes: (1) node 2's prover should cite lem-sfb-scalar-cochain-averaging-primitives; (2) node 1's Omega branch needs a total-level route, not column acyclicity; (3) the item's maintainer tool_uses still lists the no-longer-cited first-quadrant tool. No fixes."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.PrimeToEllCondensedAcyclicity",
@@ -242,5 +202,17 @@
   "group": "Q11",
   "result": "pass",
   "note": "Only the item node and the new module differ from live. stmt_deps gains only the landed def-sfb-condensed-equivariant-bar-data, whose ActionAbelian/Equivariant/extend/resolutionComparison/Invariants are used (allowed). lean.statement is verbatim. Clauses: prime ell; normed IsAlgClosure Omega with no completeness, whose NormedAlgebra norm is the unique extension of the ell-adic norm; finite IntermediateField E, including bot; scalarRing bundles exactly the recorded continuousMapRingObjOfUniverse.{u,u} with its MonObj and comm proof; profinite K; hK quantifies over all finite discrete continuous surjective quotients with Nat.Coprime of the card and ell; trivial regular module; the augmentation is single0(unit) then singleMapHomologicalComplex.inv then Gamma(I.iota), extended and localized, then resolutionComparison.inv, with the unit forced by the transpose law; IsIso in D(Modules C_F) for E and Omega. The existentials are Prop-valued (ActionAbelian, IsGrothendieckAbelian), and Invariants is pinned up to unique iso, so it is not an arbitrary map; this matches the landed CondensedBar.Assertion. For all I is not vacuous. Edge cases K=1, finite K, K=Z_ell excluded, E=Q_ell, empty test set, noncomplete Omega. Docstrings carry source, blueprint id and the six proof steps; lines <=100; no duplicate or name collision; only sorry. No file changed, so no compile; the worker reports a clean compile. Advisory: RGamma uses Mathlib rightDerivedFunctor as in the bar-data dependency, which the sk-def-sfb-derived-categories note allows."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

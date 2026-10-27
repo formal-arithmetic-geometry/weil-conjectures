@@ -1,0 +1,100 @@
+{
+ "id": "lem-sfb-internal-complex-localization-tensor-comparison",
+ "kind": "lemma",
+ "title": "Agreement of complex and homotopy localization tensor maps",
+ "statement": "For a commutative condensed coefficient ring and two internal cochain complexes, the lax tensorator of complex localization equals the homotopy localization tensorator evaluated on their images in the homotopy category.",
+ "stmt_deps": [
+  "def-pd-section-derived-tensor-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, localization of the signed total tensor; the canonical complex-to-homotopy quotient comparison."
+ },
+ "proof": [
+  {
+   "text": "The homotopy quotient is strict monoidal. The comparison from its composite with homotopy localization to complex localization has identity components. Expanding the transported lax monoidal structure therefore identifies the complex localization tensorator with the homotopy localization tensorator.",
+   "uses": [
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-derived-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The canonical strict monoidal homotopy quotient and the identity-component quotientCompQhIso, together with the transported lax monoidal structure."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized natural scalar extension comparison under an equivalence commutes with tensor products on pure tensors and hence on direct sum total cochain complexes",
+   "results": "Eight hits, including HomologicalComplex.ιTensorObj and elementary ModuleCat scalar extension formulas. No theorem for these internal-section comparison maps.",
+   "date": "2026-10-27",
+   "verdict": "Use coproduct inclusions and the existing scalar normalization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "mapBifunctorComparison",
+   "results": "Zero hits; the identifier is in the adopted source extension rather than the Mathlib index.",
+   "date": "2026-10-27",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*tensor.*(ordinary|total)|mapBifunctorComparison_naturality",
+   "results": "Remote Mathlib search has zero hits. Local adopted source provides mapBifunctorComparison and summand formulas; geometric SectionOplaxTotalComparison supplies a model for the coproduct argument.",
+   "date": "2026-10-27",
+   "verdict": "The scalar ordinary and total squares need explicit proofs from the prescribed normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarTensorRepresentativeInternal",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-coefficient-scalar-tensor-representative-internal",
+   "place": "identifying the two localization tensorators"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalComplexLocalizationTensorComparison",
+  "file": "lean/Sheaf/Paper/InternalComplexLocalizationTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensor_complexLocalization",
+  "statement": "theorem coefficientScalarTensor_complexLocalization\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ X)]\n    (Z : Scheme.{u}) (K L : CochainComplex (ModuleRingedComparison.internalModules Λ Z) ℤ) :\n    Functor.LaxMonoidal.μ DerivedCategory.Q K L =\n      Functor.LaxMonoidal.μ DerivedCategory.Qh\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj K)\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj L)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261027T034647-L-3671841",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

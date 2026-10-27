@@ -1,0 +1,138 @@
+{
+ "id": "def-sfb-affine-point-positive-tangent-weights",
+ "kind": "definition",
+ "title": "Positive character weights at an affine rational fixed point",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field], let $A$ be a commutative $F$-algebra [def-weil-pbc-algebra-hom-quotient], and let $X=\\operatorname{Spec}A$ be its affine $F$-scheme [def-pc-scheme]. Give $X$ an action of $\\mathbf G_m$ [def-sc-gm-ga], that is, an $F$-scheme morphism $\\mathbf G_m\\times_F X\\to X$ satisfying the identity and associativity laws. For an $F$-algebra map $\\varepsilon:A\\to F$, set $\\mathfrak m=\\ker\\varepsilon$ and $T=\\operatorname{Hom}_F(\\mathfrak m/\\mathfrak m^2,F)$. For $v\\in T$, its dual-number point [def-sc-dual-numbers] sends $a\\in A$ to $\\varepsilon(a)+v(\\overline{a-\\varepsilon(a)})\\epsilon$. Its scalar extension to any commutative $F$-algebra $R$ is obtained by the coefficient map $F[\\epsilon]\\to R[\\epsilon]$. Define positive tangent character weights at $\\varepsilon$ to mean the existence of $d\\geq0$, an $F$-basis $(v_i)_{i\\in\\operatorname{Fin}(d)}$ of $T$ [def-weil-pbc-free-module], and positive integers $n_i$ such that, for every commutative $F$-algebra $R$, every $g\\in\\mathbf G_m(R)$ and every $i$, the action of the constant lift of $g$ on the dual-number point of $v_i$ equals the point obtained by replacing $\\epsilon$ by $g^{n_i}\\epsilon$. These are identities of scheme-valued points over all algebras, hence character weights rather than differentials of characters. The empty basis $d=0$ and the zero test algebra are allowed. A fixed-point hypothesis is supplied separately by consumers.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 13e, tangent action and Luna maps, printed pp.267--270; Definition 13.40 and Theorem 13.41, p.269, specialized to G_m and strictly positive characters."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-scheme",
+  "def-sc-gm-ga",
+  "def-sc-dual-numbers",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HasPositiveWeights|pointOver|positive.{0,30}tangent|tangent.{0,30}weight",
+   "results": "{\"t\": \"2026-10-24T07:32:40Z\", \"tool\": \"grep\", \"query\": \"HasPositiveWeights|pointOver|positive.{0,30}tangent|tangent.{0,30}weight\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching notion. Returned cotangent bases, affine coordinates, or unrelated characters do not give positive tangent weights for arbitrary affine scheme actions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive tangent character weights at a rational fixed point of an affine multiplicative group scheme action, expressed by a homogeneous basis of the cotangent dual over every algebra",
+   "results": "{\"t\": \"2026-10-24T07:32:40Z\", \"tool\": \"leansearch\", \"query\": \"Positive tangent character weights at a rational fixed point of an affine multiplicative group scheme action, expressed by a homogeneous basis of the cotangent dual over every algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.cotangentSpaceBasis\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.SubmersivePresentation.basisCotangent\", \"Algebra.Generators.cotangentSpaceBasis_apply\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Extension.Cotangent.val_smul'''\", \"instAddCommGroupTangentSpace\", \"Algebra.Generators.basisCotangentAway\"], \"digest\": \"5264109dea4367c5\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching notion. Returned cotangent bases, affine coordinates, or unrelated characters do not give positive tangent weights for arbitrary affine scheme actions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Positive integer character weights on the dual of the cotangent space of an affine scheme with a multiplicative group action",
+   "results": "{\"t\": \"2026-10-24T07:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"Positive integer character weights on the dual of the cotangent space of an affine scheme with a multiplicative group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CharacterModule.int\", \"AlgebraicGeometry.AffineSpace.coord\", \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"CharacterModule\", \"AlgebraicGeometry.AffineSpace\", \"modularCyclotomicCharacter'\", \"AddChar.PrimitiveAddChar.n\", \"CharacterModule.exists_character_apply_ne_zero_of_ne_zero\"], \"digest\": \"7fd80b1a3fc67b68\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching notion. Returned cotangent bases, affine coordinates, or unrelated characters do not give positive tangent weights for arbitrary affine scheme actions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n HasPositiveWeights|AffinePointTangent|positive.{0,30}tangent|tangent.{0,30}weight lean/WeilConjectures lean/Sheaf; rg -l positive.*tangent.*weights dag/nodes/*/def-*.json",
+   "results": "No exact definition. TorusCharacterTangentWeights gives Lie(H) weights only for group schemes H with an action; it does not cover arbitrary affine schemes and their fixed points. GmRepresentationWeightBasis defines equalizers for a supplied coaction, not the differentiated action at a scheme point. Reuse Mathlib ModObj, Ideal.Cotangent, Module.Basis, and upstream AlgHom.toDualNumber.",
+   "date": "2026-10-24",
+   "verdict": "New predicate specializes existing algebraic constructions to arbitrary affine fixed points; no copy of Lie-group weight spaces."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "positive tangent; positive weight; cotangent; ancestor lem-sfb-positive-weight-equivariant-inverse",
+   "results": "0 blueprint nodes match positive tangent; 0 match positive weight. Cotangent returns def-wf-lie-algebra-derivation (characteristic-zero convention, refers to tangent-space definitions) and lem-trf-local-term-locality. Ancestor is None. Exact Milne source is the inherited supporting input.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node for positive weights at arbitrary affine fixed points."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-positive-weight-equivariant-inverse",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Duality step: the highest weight of a dual simple module is the opposition of the original highest weight, and highest weight determines the simple module. Supporting input to Milne 22.18 and 22.19: Proposition 22.17, multiplicity and weight bound for a cyclic module generated by a Borel eigenvector. Ordered-root-factor input for the sentence in Milne 22.17: the opposite unipotent group is generated by negative root groups; specifically Milne 21.68(a), ordered multiplication for the Borel unipotent radical. Supporting general inverse theorem in Milne 13.42, used in the tangent-space argument of 21.68(a). Positive tangent character weights at an arbitrary affine rational fixed point.",
+   "via": [
+    "lem-sfb-positive-weight-equivariant-inverse",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-primitive-cyclic-weight-bound",
+    "lem-sfb-simple-module-dual-highest-weight",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePointTangent",
+  "declaration": "AlgebraicGeometry.AffinePointTangent.HasPositiveWeights",
+  "declarations": [
+   "AlgebraicGeometry.AffinePointTangent.pointOver",
+   "AlgebraicGeometry.AffinePointTangent.HasPositiveWeights"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePointTangent.lean",
+  "statement": "def HasPositiveWeights (ε : A →ₐ[F] F) [ModObj (StandardGroupSchemes.multiplicative F) (StandardGroupSchemes.affine F A)] : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-746b83d1c",
+  "group": "Q118",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-746b83d1c",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read item node (unchanged except lean + new stmt_dep), new def node def-sfb-affine-point-positive-tangent-weights, both Lean modules, report, and dependency declarations (StandardGroupSchemes affine/map/identitySection/multiplicative, AlgHom.cotangentDerivation/toDualNumber, DualNumber.scale/mapAlgebraMap, Mathlib Hom.smul/IsModHom). Clause match: alg-closed F; X=Spec A, Y=Spec B arbitrary affine with Smooth/ConnectedSpace/LocallyOfFiniteType+QuasiCompact per records; ModObj G_m actions; hxfixed/hyfixed orbit=constant; hpoint; IsModHom equivariance as scheme identity; hdf pins e to the dual of mapCotangent (cotangentDerivation formula + hpoint), so it is exactly 'df_x iso'; HasPositiveWeights = finite basis of Hom(m/m^2,F) with n_i>0 and character action t^n on R[eps]-points over all R (incl. R=0), equivalent to the positive weight decomposition since T_x is finite-dimensional; conclusion IsIso in Over(Spec F). Edge cases d=0, any char, universes all in u: OK. No duplicate: torus-character-tangent-weights is Lie(H) only; def-sc-scheme-tangent-space not cited by node, which defines T_x as the cotangent dual. lean.statement verbatim for both records; docstrings carry source and blueprint; proof steps in the docstring; only sorry; no hollow defs. No compile (no file changed)."
+ }
+}

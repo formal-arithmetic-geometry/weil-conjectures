@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-site-injective-sections-model",
+ "kind": "statement",
+ "title": "Injective representatives give the two ordinary site-section models",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites in the common universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], let $u:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous [def-weil-pbc-special-cocontinuous-functor](1), and let $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ be its induced geometric morphism [def-trf-geometric-morphism]. Write $L=g^{-1}:\\operatorname{Ab}(\\mathcal D)\\to\\operatorname{Ab}(\\mathcal C)$, also for its termwise and exact derived extensions. Use the ordinary bounded-below derived categories, localization $Q$, and cochain complexes [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories]. For a site object $V$, let $\\alpha^V_K:Q\\Gamma(V,K)\\to R\\Gamma(V,QK)$ be the ordinary right-derived comparison unit [lem-weil-pbc-right-derived-plus-injective], for a bounded-below complex $K$ on that site. Fix $U\\in\\mathcal C$, $M\\in D^+(\\operatorname{Ab}(\\mathcal D))$, and $a\\in\\mathbf Z$ with $\\mathcal H^n(M)=0$ for $n<a$. There exist a complex $I$ of injective abelian sheaves [def-sp-injective-resolutions], with $I^n=0$ for $n<a$, and an isomorphism $\\rho:QI\\xrightarrow{\\sim}M$. For every such pair $(I,\\rho)$, $LI$ is zero below $a$, $L\\rho:Q(LI)\\xrightarrow{\\sim}LM$, and $H^p(U,LI^n)=0$ for every $n\\in\\mathbf Z$ and $p>0$. The comparison units give isomorphisms in $D^+(\\operatorname{Ab})$\n$$a_{I,\\rho}=R\\Gamma(u(U),\\rho)\\circ\\alpha^{u(U)}_I:Q\\Gamma(u(U),I)\\xrightarrow{\\sim}R\\Gamma(u(U),M),$$\n$$b_{I,\\rho}=R\\Gamma(U,L\\rho)\\circ\\alpha^U_{LI}:Q\\Gamma(U,LI)\\xrightarrow{\\sim}R\\Gamma(U,LM).$$\nThese maps commute with chain maps $t:I\\to I'$ and isomorphisms $\\rho':QI'\\cong M'$ for which a coefficient map $f:M\\to M'$ satisfies $\\rho'\\circ Qt=f\\circ\\rho$: explicitly $R\\Gamma(u(U),f)\\circ a_{I,\\rho}=a_{I',\\rho'}\\circ Q\\Gamma(u(U),t)$ and $R\\Gamma(U,Lf)\\circ b_{I,\\rho}=b_{I',\\rho'}\\circ Q\\Gamma(U,Lt)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD8, lemma-pullback-same-cohomology, first proof sentence: bounded-below injective representative and Leray acyclicity for its inverse image"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-trf-geometric-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-sites-and-cohomology](1), $\\operatorname{Ab}(\\mathcal D)$ is abelian with enough injectives. Apply [lem-weil-pbc-dplus-injective-representative](1) to $M$ and the specified $a$. This gives $I^n=0$ for $n<a$, injective terms, and $\\rho:QI\\cong M$. Fix any pair with these properties for the remaining steps.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist (2)-(3), with the cohomological truncation in lemma-cohomology-bounded-below; enough injectives: injectives.tex, Tag 01DP, theorem-sheaves-injectives"
+   }
+  },
+  {
+   "text": "Apply [lem-pe-constant-left-module-inverse-image] to $g$ with $\\Lambda=\\mathbf Z$. An abelian sheaf has its unique integer action by repeated addition, so the forgotten functor in that statement is $L$. Hence $L$ is exact and its termwise functor induces the stated functor on $D^+$. Additivity sends zero to zero, giving $(LI)^n=0$ for $n<a$; functoriality sends $\\rho$ and its inverse to inverse maps, giving $L\\rho:Q(LI)\\cong LM$.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi (2), (6), and exactness property (epsilon)"
+   }
+  },
+  {
+   "text": "For each $n$, apply [lem-trf-site-pullback-injective-evaluation-acyclic] to the injective abelian sheaf $I^n$. Its small-site, continuity and cocontinuity hypotheses are precisely ours, so $H^p(U,LI^n)=0$ for every $p>0$.",
+   "uses": [
+    "lem-trf-site-pullback-injective-evaluation-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, abelian-sheaf specialization"
+   }
+  },
+  {
+   "text": "Evaluation at either site object is additive and left exact, with enough injectives in its source, by [def-weil-pbc-sites-and-cohomology](1)-(2). Apply [lem-weil-pbc-right-derived-plus-injective](2) to evaluation at $u(U)$ and $I$: $\\alpha^{u(U)}_I$ is invertible. Apply [src-right-derived-functor-plus-acyclic-unit] to evaluation at $U$ and $LI$, using the bound from step 2 and the vanishing from step 3: $\\alpha^U_{LI}$ is invertible. Composing with the images of $\\rho$ and $L\\rho$ under the two derived evaluation functors gives exactly the displayed isomorphisms $a_{I,\\rho}$ and $b_{I,\\rho}$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "src-right-derived-functor-plus-acyclic-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TI, lemma-enough-injectives-right-derived, and Tag 015E, lemma-leray-acyclicity; units as in the existing PlusHomology theorem"
+   }
+  },
+  {
+   "text": "The comparison $\\alpha$ is a natural transformation by [lem-weil-pbc-right-derived-plus-injective](1). For either evaluation functor $v$, its naturality reads $Rv(Qs)\\alpha_K=\\alpha_{K\\prime}Qv(s)$. If $\\eta\\prime Qs=h\\eta$, functoriality gives $Rv(h)Rv(\\eta)\\alpha_K=Rv(\\eta\\prime)Rv(Qs)\\alpha_K=Rv(\\eta\\prime)\\alpha_{K\\prime}Qv(s)$. First take $(v,K,s,\\eta,h)=(\\Gamma(u(U),-),I,t,\\rho,f)$. This is the asserted equation for $a$. Then take $(v,K,s,\\eta,h)=(\\Gamma(U,-),LI,Lt,L\\rho,Lf)$; applying $L$ to the given compatibility supplies $\\eta\\prime Qs=h\\eta$. This gives the asserted equation for $b$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 05S7, section-derived-functors, natural comparison with RF; naturality of the comparison units in Tag 05TI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-trf-site-pullback-injective-evaluation-acyclic",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "src-right-derived-functor-plus-acyclic-unit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD8, lemma-pullback-same-cohomology, first bounded-below proof sentence, expanded by Tags 013K, 0D6X, 015E, 05TI and naturality of the comparison units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusUnit\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-22T06:47:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctorPlusUnit\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι\"], \"digest\": \"dcbf96fcee69dfe5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unit and injective-complex computation alone do not state site inverse-image evaluation acyclicity or the two ordinary derived-section models"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusUnit|rightAcyclic|mapDerivedCategoryPlus",
+   "results": "{\"t\": \"2026-10-22T06:47:24Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlusUnit|rightAcyclic|mapDerivedCategoryPlus\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unit and injective-complex computation alone do not state site inverse-image evaluation acyclicity or the two ordinary derived-section models"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous cocontinuous functor of sites, choose a bounded below injective representative I of M; evaluation of inverse image of I computes derived sections at a source site object by Leray acyclicity",
+   "results": "{\"t\": \"2026-10-22T06:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous cocontinuous functor of sites, choose a bounded below injective representative I of M; evaluation of inverse image of I computes derived sections at a source site object by Leray acyclicity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\"], \"digest\": \"b1eaffb6032c3327\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unit and injective-complex computation alone do not state site inverse-image evaluation acyclicity or the two ordinary derived-section models"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusUnit|rightAcyclic|mapDerivedCategoryPlus",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlusUnit|rightAcyclic|mapDerivedCategoryPlus\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"b02070319bf4d351\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unit and injective-complex computation alone do not state site inverse-image evaluation acyclicity or the two ordinary derived-section models"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below injective complex on a site and its inverse image compute derived sections at corresponding site objects",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"leansearch\", \"query\": \"A bounded below injective complex on a site and its inverse image compute derived sections at corresponding site objects\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic resolution computes a right derived functor: the inverse image of a bounded below complex of injective abelian sheaves under a continuous cocontinuous site functor is section acyclic",
+   "results": "{\"t\": \"2026-10-22T06:47:51Z\", \"tool\": \"leanfinder\", \"query\": \"An acyclic resolution computes a right derived functor: the inverse image of a bounded below complex of injective abelian sheaves under a continuous cocontinuous site functor is section acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.Functor.leftDerived\"], \"digest\": \"d5068e72ca3825c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: unit and injective-complex computation alone do not state site inverse-image evaluation acyclicity or the two ordinary derived-section models"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusUnit\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-23T04:21:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctorPlusUnit\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsIsoPlusAppPlusRightDerivedFunctorPlusUnitObjInjectiveObjectMapCochainComplexPlusι\"], \"digest\": \"dcbf96fcee69dfe5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived sheaf adjunctions, injective-complex derived-unit computation, or degreewise derived functors, not the complete site inverse-image acyclicity and two ordinary section models with the stated compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusUnit|rightAcyclic|Cocontinuous",
+   "results": "{\"t\": \"2026-10-23T04:21:20Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlusUnit|rightAcyclic|Cocontinuous\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"b02070319bf4d351\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived sheaf adjunctions, injective-complex derived-unit computation, or degreewise derived functors, not the complete site inverse-image acyclicity and two ordinary section models with the stated compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below injective representative and its inverse image under a continuous cocontinuous site functor compute the ordinary derived sections",
+   "results": "{\"t\": \"2026-10-23T04:21:21Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded below injective representative and its inverse image under a continuous cocontinuous site functor compute the ordinary derived sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\"], \"digest\": \"f687c46dd02755b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived sheaf adjunctions, injective-complex derived-unit computation, or degreewise derived functors, not the complete site inverse-image acyclicity and two ordinary section models with the stated compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below complex of injective sheaves and its inverse image compute derived sections on corresponding objects of sites",
+   "results": "{\"t\": \"2026-10-23T04:21:26Z\", \"tool\": \"leansearch\", \"query\": \"A bounded below complex of injective sheaves and its inverse image compute derived sections on corresponding objects of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_inverse\", \"SheafOfModules.pushforwardSections\", \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map\", \"CategoryTheory.GrothendieckTopology.isoSheafify_inv\", \"CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_obj\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\"], \"digest\": \"8aaf3c8ccbcd9a85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived sheaf adjunctions, injective-complex derived-unit computation, or degreewise derived functors, not the complete site inverse-image acyclicity and two ordinary section models with the stated compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of right-derived comparison units for chain maps between bounded-below injective complexes",
+   "results": "{\"t\": \"2026-10-23T04:22:10Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of right-derived comparison units for chain maps between bounded-below injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\"], \"digest\": \"5d9fa2ac160ffee0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give underived sheaf adjunctions, injective-complex derived-unit computation, or degreewise derived functors, not the complete site inverse-image acyclicity and two ordinary section models with the stated compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-site-object-derived-sections-pullback",
+  "date": "2026-10-22",
+  "group": "Q121"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization via Orgogozo Lemma 3.1.1: the ph/etale comparison used in the first descent isomorphism; bounded-below 0DD8 injective and acyclic-complex calculation (returned proof steps 2–3)",
+   "via": [
+    "lem-trf-site-object-derived-sections-pullback",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-site-injective-sections-model",
+  "worker": "stage1",
+  "summary": "Split the injective-section-model task using existing nodes only. Preserve its statement, the prescribed lower bound, ordinary bounded-below derived categories, both specified comparison-unit maps and both naturality identities. Reuse the exact lower-bound representative, inverse-image evaluation acyclicity, and acyclic-unit nodes; expand the naturality calculation rather than create a new lemma. No Lean writing or compilation.",
+  "blueprint": "Inherited normal-cone specialization / Orgogozo first-descent comparison in lem-trf-local-term-locality: realizes the 0DD8 bounded-below injective-model input singled out in the parent proof steps 2-3. The main-20261015 unit route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact inverse image on abelian sheaves, specialized from integer-module sheaves; the trace unit has no replacement for this site-theoretic infrastructure."
+   },
+   {
+    "node": "src-right-derived-functor-plus-acyclic-unit",
+    "why": "Generic invertibility of the actual ordinary derived comparison unit on any bounded-below complex of evaluation-acyclic objects; the trace unit has no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic ordinary derived comparison unit, its naturality and injective-complex computation, used with evaluation at each site object; this infrastructure is not a trace-unit theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-constant-left-module-inverse-image",
+  "src-right-derived-functor-plus-acyclic-unit",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-6cf8365f0",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-6cf8365f0 (reviewer sub-agent of L); spot-checked: I read the delivery in full: 0 new nodes, and statement, stmt_deps and blueprint are byte-identical to the live unsplit node. It is not a re-split (no repair note) and not superseded. Source checked: Stacks 0DD8 lemma-pullback-same-cohomology, bounded-below sentence (0D6X l.9278 plus Leray 015E l.5717). Step 1: lem-weil-pbc-dplus-injective-representative(1), a Mathlib leaf (exists_injective_nonempty_iso); its hypothesis is exactly H^n(M)=0 for n<a and it gives the termwise bound. Step 2: lem-pe-constant-left-module-inverse-image with Lambda=Z, applied to g with the direction checked; exactness and L∘Q=Q∘L give LI zero below a and Lrho an iso. Step 3: lem-trf-site-pullback-injective-evaluation-acyclic has the same hypotheses, and its H^p=R^pΓ matches def-sp-acyclic. Step 4: lem-weil-pbc-right-derived-plus-injective(2) and src-right-derived-functor-plus-acyclic-unit both name Mathlib's rightDerivedFunctorPlusUnit, so they are the same alpha; domains and codomains of a and b checked. Step 5: the naturality calculation Rv(h)Rv(eta)alpha_K=Rv(eta')alpha_K'Qv(s) is verified, and the b case uses L(Qt)=Q(Lt). Edge cases: M=0, nonzero acyclic I, u=id, point site, arbitrary a, non-invertible f. There is no cycle and proof_deps equals the union of uses. No duplicates (the 0DD8 siblings, the section-pullback-normalization node and the pe slice model all state different things). Tool uses accepted as generic infrastructure: lem-pe inverse image, the src acyclic unit, and the Mathlib-leaf derived functor. No SGA. Advisory: src-right-derived-functor-plus-acyclic-unit's stmt_dep def-pc-derived-category is scheme-specific, but its content is general; this is not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.InjectiveSectionsModel",
+  "declaration": "CategoryTheory.SiteInjectiveSectionsModel.injective_sections_model",
+  "declarations": [
+   "CategoryTheory.SiteInjectiveSectionsModel.modelMap",
+   "CategoryTheory.SiteInjectiveSectionsModel.imageIso",
+   "CategoryTheory.SiteInjectiveSectionsModel.injective_sections_model"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/InjectiveSectionsModel.lean",
+  "statement": "theorem injective_sections_model {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (f : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (b : Y ⟶ X) (c : Z ⟶ X), S b → PreservesLimit (cospan b c) f) [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] [HasDerivedCategory.{w} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] [HasDerivedCategory.{w} (Sheaf K.toGrothendieck AddCommGrpCat.{u})] [HasDerivedCategory.{w} AddCommGrpCat.{u}] (U : C) (M : DerivedCategory.Plus (Sheaf K.toGrothendieck AddCommGrpCat.{u})) (a : ℤ) [M.IsGE a] : ∃ (_hc : f.IsContinuous J.toGrothendieck K.toGrothendieck), ∃ (_ha : (f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).Additive), ∃ (_hl : PreservesFiniteLimits (f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck)), ∃ (_hr : PreservesFiniteColimits (f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck)), (∃ I : CochainComplex.Plus (Sheaf K.toGrothendieck AddCommGrpCat.{u}), I.obj.IsStrictlyGE a ∧ (∀ n : ℤ, Injective (I.obj.X n)) ∧ Nonempty (DerivedCategory.Plus.Q.obj I ≅ M)) ∧ ∀ (I : CochainComplex.Plus (Sheaf K.toGrothendieck AddCommGrpCat.{u})) (_hI : I.obj.IsStrictlyGE a) (_hinj : ∀ n : ℤ, Injective (I.obj.X n)) (ρ : DerivedCategory.Plus.Q.obj I ≅ M), ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapCochainComplexPlus.obj I).obj.IsStrictlyGE a ∧ (∀ (n : ℤ) (p : ℕ), 0 < p → IsZero (((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived p).obj ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).obj (I.obj.X n)))) ∧ IsIso (modelMap (sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (f.obj U))) I M ρ) ∧ IsIso (modelMap (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapCochainComplexPlus.obj I) ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapDerivedCategoryPlus.obj M) (imageIso (f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck) I M ρ)) ∧ ∀ (M' : DerivedCategory.Plus (Sheaf K.toGrothendieck AddCommGrpCat.{u})) (I' : CochainComplex.Plus (Sheaf K.toGrothendieck AddCommGrpCat.{u})) (_hinj' : ∀ n : ℤ, Injective (I'.obj.X n)) (ρ' : DerivedCategory.Plus.Q.obj I' ≅ M') (t : I ⟶ I') (c : M ⟶ M'), DerivedCategory.Plus.Q.map t ≫ ρ'.hom = ρ.hom ≫ c → (modelMap (sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (f.obj U))) I M ρ ≫ (sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (f.obj U))).rightDerivedFunctorPlus.map c = DerivedCategory.Plus.Q.map ((sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (f.obj U))).mapCochainComplexPlus.map t) ≫ modelMap (sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Dᵒᵖ AddCommGrpCat.{u}).obj (op (f.obj U))) I' M' ρ') ∧ (modelMap (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapCochainComplexPlus.obj I) ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapDerivedCategoryPlus.obj M) (imageIso (f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck) I M ρ) ≫ (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerivedFunctorPlus.map ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapDerivedCategoryPlus.map c) = DerivedCategory.Plus.Q.map ((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).mapCochainComplexPlus.map ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapCochainComplexPlus.map t)) ≫ modelMap (sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapCochainComplexPlus.obj I') ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).mapDerivedCategoryPlus.obj M') (imageIso (f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck) I' M' ρ'))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical abelian inverse image is Mathlib precomposition, sheafPushforwardContinuous, for this cocontinuous site functor. Continuity/additivity/exactness are existentially bound proof instances, not assumptions or choices of functors. modelMap and imageIso define the specified composites using the ordinary derived unit and exact localization factorization. Naturality allows the second representative any lower bound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d2f20e4d",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read node (only lean field changed vs side-live), Stacks 0DD8 bounded-below sentence, all stmt_dep declarations (IsSiteForCoverings, IsSpecialCocontinuousForCoverings conjuncts = IsCocontinuous/hcover/hpullback, GeometricMorphism, DerivedCategory.Plus, Injective, rightDerivedFunctorPlus/Unit), and the 0D6X dependency module with the same hypotheses. Every clause matches: existence of a strictly-≥a termwise injective I with Q I ≅ M; for all (I,ρ): LI strictly ≥a, canonical imageIso via mapDerivedCategoryPlusFactorsh, positive rightDerived evaluation vanishing for all n, IsIso of modelMap = unit ≫ RF.map ρ for evaluation at f U and U, and both naturality equations in diagrammatic order. Existential Prop instances (continuity, additivity, exactness of precomposition) are true consequences, not assumptions. L = sheafPushforwardContinuous/mapDerivedCategoryPlus as in the landed consumer ObjectDerivedSectionsPullback with identical stmt_deps. No hollow defs, only the main theorem sorried, docstrings with source/blueprint/proof steps, lean.statement verbatim, 3 declarations, lines ≤100, report has Worker report + Second reading by Q20. No duplicate found. No file changed, so no compile."
+ }
+}

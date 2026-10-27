@@ -1,0 +1,477 @@
+{
+ "id": "lem-sf-integral-basic-realization",
+ "kind": "statement",
+ "title": "Primitive integral operation realization with the specified strict towers",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$, $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Schemes $W$ are finite type over $k$, with small pro-etale sites and $\\widehat R_W=\\lim_n(A_n)_W$ [def-weil-scheme-morphism-properties, def-weil-pbc-proetale-site]. Use the derived categories of strict semilinear systems $\\mathscr S_W$ and the actual adjunction $\\mathcal R_W\\dashv\\mathcal L_W=R\\lim\\operatorname{Res}$ with unit $u$ and counit $e$ [lem-coef-derived-system-evaluation-calculus]. Use simultaneous inverse images $P_v$, proper direct images $S_p$, quasi-compact open extensions $J_j$ and derived tensor, as in [def-sf-integral-system-operations]. Restrict inputs and intermediate systems to the domain of [def-sf-integral-system-expression-domain]: derived-complete constructible integral inputs, normalized systems with compatible etale-origin witnesses, and common finite cohomological and Tor intervals. All conclusions below are restricted to expressions satisfying these intermediate-domain conditions.\n\nFor $A=P_v,S_p,J_j$ or the two-input tensor operation, there are specified natural isomorphisms\n$$d_A(K_i):\\mathcal L A(\\mathcal R K_i)\\xrightarrow{\\sim}A_{\\rm int}(K_i).$$\nHere $v$ is separated finite type and $p$ proper; $A_{\\rm int}$ is completed pullback or completed tensor [def-pur-integral-derived-operations], integral proper direct image [def-weil-derived-direct-image], or localized completed-ring open extension [lem-sf-integral-open-reduction-comparison], respectively. For pullback and tensor, $d_A$ is the comparison of the strict total limit with the quotient-complex Roos formula, natural on flat-term K-flat representatives and their morphisms, using the natural Roos triangle and derived products [lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-pur-integral-operations-well-defined]. For direct image it is the comparison with the defining proper-image reduction tower, including its coefficient-restriction transitions. For open extension it is exactly\n$$d_{J_j}(K)=u_{j_!K}^{-1}\\mathcal L(r_j(K))^{-1},$$\nwhere $r_j:\\mathcal R(j_!K)\\xrightarrow{\\sim}J_j\\mathcal R K$ is the specified whole-system open reduction map; this identifies the realized open adjunction with the localized ringed-site adjunction.\n\nFor a chosen compactification $c=(j,p)$, there is also a natural direct comparison\n$$d_c(K):\\mathcal L S_pJ_j\\mathcal R K\\xrightarrow{\\sim}Rf_!^cK,\\qquad f=pj,$$\nwith exactly the functor and maps of [def-weil-integral-rational-qbar-compact-support]. For every $m\\ge n\\ge1$, its tower transition is $Rp_{*,m}j_!$ applied to $K_m\\to\\operatorname{Res}_{m,n}K_n$, followed by the coefficient-restriction isomorphism of [lem-sf-compact-support-restriction-of-scalars]. Thus $d_c$ identifies whole strict towers and their total limits, not just their evaluated objects. This assertion constructs primitive comparisons only; it asserts no expression-tree or generator coherence.\n\nThe specialized primitive input domains and the exact Lean comparison specification are named in [def-sf-integral-basic-realization-data]; their mathematical conditions are the ones stated above.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Primitive reduction-tower comparisons, extracted from old step 3; the tensor reassociation/evaluation/unit-and-counit sentence of fix-prop-coherence. Agent-formulated obligation, not a theorem claimed to be stated in the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "def-weil-compact-support-finite-action",
+  "def-sf-integral-basic-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized model from lem-sf-integral-reduction-pullback-model. The actual reconstruction unit is invertible on constructible inputs by purNormalizedReconstruction, after sfDerivedComplete_iff_legacy identifies their completeness. Map the prime unit from the finite base field to each scheme.",
+   "uses": [
+    "lem-sf-integral-reduction-pullback-model",
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+   }
+  },
+  {
+   "text": "Whisker the published pullbackTensorIntegralPullbackModel.symm and pullbackTensorIntegralTensorModel.symm by the required full input domains. Their specification equations are reflexive; no new quotient/Roos descent is needed.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-sf-integral-basic-realization-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+   }
+  },
+  {
+   "text": "Whisker model.push and compose with the inverse actual reconstruction unit to obtain the proper natural comparison. Apply the canonical constant-tower Roos triangle and transport it through the direct-image finite evaluation isomorphisms. The transition lemma verifies the transport hypothesis. Choose that total-limit object as the SfIntegralDirectImage object and d itself as its comparison, so its projection equation follows by inverse cancellation and Pi.lift_π.",
+   "uses": [
+    "lem-sf-integral-proper-tower-transition",
+    "lem-coef-constant-tower-roos",
+    "lem-sf-derived-complete-legacy-comparison",
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-basic-realization-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+   }
+  },
+  {
+   "text": "Apply the normalized open-mate lemma on the full unary domain. Its two invertibility conclusions assemble naturally via NatIso.ofComponents; applying total limit and composing with the inverse output unit gives exactly the required open comparison formula.",
+   "uses": [
+    "lem-sf-integral-open-mate-normalization",
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-basic-realization-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+   }
+  },
+  {
+   "text": "Use lem-sf-integral-support-tower-normalization for the remaining compact-support conjunct, retaining the chosen tower, all transitions, prescribed conjugate composite and scalar-adjoint projection equation.",
+   "uses": [
+    "lem-sf-integral-support-tower-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-sf-integral-basic-realization-data",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-constant-tower-roos",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-sf-integral-open-mate-normalization",
+  "lem-sf-integral-proper-tower-transition",
+  "lem-sf-integral-reduction-pullback-model",
+  "lem-sf-integral-support-tower-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Total derived inverse limit realizes integral pullback tensor proper pushforward and extension by zero compatibly with quotient towers",
+   "results": "{\"t\": \"2026-10-22T06:02:33Z\", \"tool\": \"leanfinder\", \"query\": \"Total derived inverse limit realizes integral pullback tensor proper pushforward and extension by zero compatibly with quotient towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProduct_naturality\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition\"], \"digest\": \"f0164b30fd532d5f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic coefficient systems basic operations compare naturally with completed sheaf operations through the Roos inverse limit",
+   "results": "{\"t\": \"2026-10-22T06:02:34Z\", \"tool\": \"leanfinder\", \"query\": \"Adic coefficient systems basic operations compare naturally with completed sheaf operations through the Roos inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.transitionMap_comp_eval_apply\", \"AdicCompletion.of_apply\", \"AdicCompletion.eval_apply\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.eval_of\", \"AdicCompletion.mk_apply_coe\", \"AdicCompletion.incl_apply\", \"Hausdorffification.of\"], \"digest\": \"f3c9bc12f9a51478\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "{\"t\": \"2026-10-22T06:02:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"pushforward\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀Obj\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.pushforward₀\", \"PresheafOfModules.pushforwardId\", \"PresheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀Obj_obj_carrier\", \"PresheafOfModules.pushforward₀CompToPresheaf\", \"PresheafOfModules.pushforwardCompToPresheaf\"], \"digest\": \"a5f42c6937af584c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*realization|realization.*adic|semilinear.*system|normalized.*tower",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"grep\", \"query\": \"adic.*realization|realization.*adic|semilinear.*system|normalized.*tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/Algebra/Ring/CompTypeclasses.lean\"], \"digest\": \"620f3c38340dceb4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit comparison for completed sheaf operations on normalized coefficient systems",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse limit comparison for completed sheaf operations on normalized coefficient systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.isNatEquiv_piEquivLim\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.piEquivLim.congr_simp\", \"InverseSystem.invLimEquiv.congr_simp\", \"InverseSystem.piEquivLim\", \"InverseSystem.invLimEquiv\", \"AdicCompletion\", \"Profinite.isIso_asLimitCone_lift\"], \"digest\": \"e81987b1866496e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total derived inverse limit realizes completed pullback tensor proper direct image and open extension from strict semilinear coefficient systems",
+   "results": "{\"t\": \"2026-10-22T06:54:56Z\", \"tool\": \"leanfinder\", \"query\": \"Total derived inverse limit realizes completed pullback tensor proper direct image and open extension from strict semilinear coefficient systems\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProduct_naturality\", \"AdicCompletion.ofTensorProduct\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProduct_tmul\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\"], \"digest\": \"6504e2541ca869d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"limit\"",
+   "results": "{\"t\": \"2026-10-22T06:55:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.Finite.hasFiniteColimits\", \"PresheafOfModules.hasColimitsOfSize\", \"PresheafOfModules.hasColimitsOfShape\", \"PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits\", \"PresheafOfModules.toPresheaf_preservesColimitsOfSize\", \"PresheafOfModules.toPresheaf_preservesColimitsOfShape\", \"PresheafOfModules.Finite.evaluation_preservesFiniteColimits\", \"PresheafOfModules.evaluation_preservesColimitsOfSize\"], \"digest\": \"89c3406a36c8c8b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*realization|semilinear.*system|strict.*Roos|Roos.*strict",
+   "results": "{\"t\": \"2026-10-22T06:55:19Z\", \"tool\": \"grep\", \"query\": \"adic.*realization|semilinear.*system|strict.*Roos|Roos.*strict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Ring/CompTypeclasses.lean\"], \"digest\": \"2d98c19dcf1fc6ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of quotient sheaf systems equals completed pullback and completed tensor functors",
+   "results": "{\"t\": \"2026-10-22T06:55:45Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse limit of quotient sheaf systems equals completed pullback and completed tensor functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.isNatEquiv_piEquivLim\", \"SheafOfModules.pullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.hasLimit\", \"SheafOfModules.hasLimitsOfShape\", \"PresheafOfModules.limitPresheafOfModules\", \"TensorProduct.directLimitRight\", \"InverseSystem.invLimEquiv\"], \"digest\": \"5c8c84741cfd2ac4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between total right derived inverse limit of strict towers and functorial Roos mapping fibre for sheaves",
+   "results": "{\"t\": \"2026-10-22T06:55:56Z\", \"tool\": \"leanfinder\", \"query\": \"Natural comparison between total right derived inverse limit of strict towers and functorial Roos mapping fibre for sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.isLimitMultifork\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"CategoryTheory.RanIsSheafOfIsCocontinuous.lift\", \"CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj\"], \"digest\": \"5bdcb107b85729e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-compactification-system-realization",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Primitive reduction-tower comparisons, extracted from old step 3; the tensor reassociation/evaluation/unit-and-counit sentence of fix-prop-coherence.",
+   "via": [
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-basic-realization",
+  "worker": "stage1",
+  "summary": "Constructed the primitive comparisons using existing whole-system quotient models, normalized natural Roos comparison and descent, simultaneous proper-image evaluation, and the prescribed open reduction map. Wrote all proper and compact-support quotient transitions and retained the expression-domain restrictions. No statement change and no new nodes.",
+  "blueprint": "Realizes the primitive operation part of fix-prop-coherence.proof.md, sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; stops before expression or generator coherence.",
+  "tool_uses": [
+   {
+    "node": "def-pur-integral-derived-operations",
+    "why": "Generic definition of the quotient-complex completed operations: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "def-weil-derived-direct-image",
+    "why": "Generic Derived direct image: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "def-weil-integral-rational-qbar-compact-support",
+    "why": "Generic Integral, rational, and algebraically closed compact-support functors: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic Coherent derived reduction, limit adjunction and fiberwise evaluation: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic Derived direct image and evaluation of coefficient systems: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-pur-coefficient-system-unbounded-comparison",
+    "why": "Generic Unbounded evaluation and coefficient comparison before descent: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-pur-flat-roos-functor-descent",
+    "why": "Generic Roos realization descends naturally through flat K-flat representatives: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic The towers defining integral pullback and completed tensor product are invariant under change of K-flat resolution: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-pur-quotient-system-flat-models",
+    "why": "Generic Strict flat quotient systems compute simultaneous tensor and geometric inverse image: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Generic Finite-level compact-support direct image commutes with restriction of scalars: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic Strict tower homotopy limit: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic Natural comparison of strict derived inverse limit and the product cone: used only for the primitive realization of the fixed system operations; the compatibility unit does not reconstruct this coefficient-system/derived-limit tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-kflat-resolution",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-coefficient-system-unbounded-comparison",
+  "lem-pur-flat-roos-functor-descent",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-quotient-system-flat-models",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-9cd4f2352",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-9cd4f2352 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 23 cited statements (all exist, are split and reviewed, none merged, no cycle), fix-prop-coherence.proof.md and the unit sk-thm-sf-compatibility. Delivery: one commit; statement and stmt_deps unchanged; no new nodes; proof_deps equals the union of the step uses; no SGA. There is no repair note and the item is not in a dropped list. S1-2: the quotient-system flat models (Z_F = v^{-1}(P⊗B_n), Z_T = Tot(P_n⊗Q_n)) match the representatives of def-pur-integral-derived-operations and lem-pur-integral-operations-well-defined. rho^{-1} from lem-weil-strict-roos-comparison gives the right direction, and its normalization is quoted correctly. All hypotheses of lem-pur-flat-roos-functor-descent hold (flat-term K-flat inputs, levelwise quasi-isomorphism invariance, exact pro-etale products), so the comparisons are natural on roofs and independent of resolutions. S3: the system direct image evaluates to Rp_{*,n}, and its transition is Rp_{*,m}(tau) followed by the K-injective restriction isomorphism of lem-weil-proetale-direct-image-restriction-of-scalars. That is exactly the tower recipe of def-weil-derived-direct-image. That definition (via def-weil-derived-limit) gives Rlim only as an object with a Roos triangle, so the Rlim of the D(Tow) object is a legitimate natural specification of it. S4: a direct application of lem-sf-integral-open-reduction-comparison, which states r_j, completeness of j_!K, invertible u and d_j verbatim; hypotheses (quasi-compact j, ell invertible, K complete) and the composite direction checked. S5: termwise J_j, then the proper comparison, then the composite of lem-sf-compact-support-restriction-of-scalars (j_!Res = Res j_!, then the proper restriction isomorphism, with the cocycle). This equals the transition of def-weil-integral-rational-qbar-compact-support with the same (j,p) at every level; the domain conditions come from def-sf-integral-system-expression-domain. Edge cases checked: m=n, empty open, zero input, identity j, and Spec k with K=O_E. Tool_uses accepted: generic coefficient-system, Roos and K-flat tools; no unit step is replaced. Advisory: lem-pur-completed-primitive-counit-comparison already states r_T and r_F, the inverses of d_T and d_{P_v}, with the same rho normalization. Steps 1-2 re-derive them from the same tools, so the maps agree; later citers may use that identification. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralBasicRealization",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralBasicRealization",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.integralBasicRealization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralBasicRealization.lean",
+  "statement": "theorem integralBasicRealization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) : HasBasicRealizations l E D o",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Primitive-only natural comparisons, with the canonical quotient/Roos normalization, proper defining Roos projections, actual open-adjunction mate and inverse reconstruction unit, and an isomorphism to the recorded whole compact-support strict tower with all coefficient transitions. Helpers specialize the existing expression domain; no expression-tree or generator coherence is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2aa3c3e75",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Read the node, all 18 stmt_dep records, the report (Worker report + Second reading by Q117 present), the module, and the live dependency sources: IntegralSystemOperations, CanonicalBridge, ExpressionDomain, CompletedPullbackTensorComparison, CompactSupportReductionTower(+Data), QcqsCompactSupportRealization, CompactSupportFiniteAction. The domains are exactly Expression.domain for single-symbol expressions (including the intermediate J_j bound) and geometric. o and model are canonical (universal-property/representative pinned). d_Pv and d_T are pinned to the ∃!-Roos-normalized pullbackTensorIntegral*Model.symm. d_Sp = model.push conjugate ≫ ringedPush(inv u), plus a defining SfIntegralDirectImage witness with matching projections. d_J = L(openReduction) ≫ inv u_{j_!K}, matching u^-1∘L(r_j)^-1, direction checked. d_c targets sfCompactSupportFiniteIntegralFunctor via the ∃!-normalized sfQcqsCompactSupportRealization; whole tower T,e = choose of exists_compactSupportReductionTower, with all-pairs transitions = compactSupportRestrictedTransition and evaluations pinned; the HEq is satisfiable (coefficientConstantTowerEvaluation ≡ pbcTowerEvaluation). Mechanical theorem-stmt_dep finding: genuine (.choose of the theorem; its plain defs were already moved to CompactSupportReductionTowerData) → PASS on the point. Advisory: cite def-weil-compact-support-reduction-tower-data (stage-2 fix cannot change stmt_deps); the T-transition conjunct is redundant; the open-adjunction identification is carried by the cited node. Statement verbatim; no hollow definitions; single sorry; all imports exist live; edge cases n=0, m=n, empty or identity maps checked. No compile (no changes)."
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "T1 stage 2",
+  "old_statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$, $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Schemes $W$ are finite type over $k$, with small pro-etale sites and $\\widehat R_W=\\lim_n(A_n)_W$ [def-weil-scheme-morphism-properties, def-weil-pbc-proetale-site]. Use the derived categories of strict semilinear systems $\\mathscr S_W$ and the actual adjunction $\\mathcal R_W\\dashv\\mathcal L_W=R\\lim\\operatorname{Res}$ with unit $u$ and counit $e$ [lem-coef-derived-system-evaluation-calculus]. Use simultaneous inverse images $P_v$, proper direct images $S_p$, quasi-compact open extensions $J_j$ and derived tensor, as in [def-sf-integral-system-operations]. Restrict inputs and intermediate systems to the domain of [def-sf-integral-system-expression-domain]: derived-complete constructible integral inputs, normalized systems with compatible etale-origin witnesses, and common finite cohomological and Tor intervals. All conclusions below are restricted to expressions satisfying these intermediate-domain conditions.\n\nFor $A=P_v,S_p,J_j$ or the two-input tensor operation, there are specified natural isomorphisms\n$$d_A(K_i):\\mathcal L A(\\mathcal R K_i)\\xrightarrow{\\sim}A_{\\rm int}(K_i).$$\nHere $v$ is separated finite type and $p$ proper; $A_{\\rm int}$ is completed pullback or completed tensor [def-pur-integral-derived-operations], integral proper direct image [def-weil-derived-direct-image], or localized completed-ring open extension [lem-sf-integral-open-reduction-comparison], respectively. For pullback and tensor, $d_A$ is the comparison of the strict total limit with the quotient-complex Roos formula, natural on flat-term K-flat representatives and their morphisms, using the natural Roos triangle and derived products [lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-pur-integral-operations-well-defined]. For direct image it is the comparison with the defining proper-image reduction tower, including its coefficient-restriction transitions. For open extension it is exactly\n$$d_{J_j}(K)=u_{j_!K}^{-1}\\mathcal L(r_j(K))^{-1},$$\nwhere $r_j:\\mathcal R(j_!K)\\xrightarrow{\\sim}J_j\\mathcal R K$ is the specified whole-system open reduction map; this identifies the realized open adjunction with the localized ringed-site adjunction.\n\nFor a chosen compactification $c=(j,p)$, there is also a natural direct comparison\n$$d_c(K):\\mathcal L S_pJ_j\\mathcal R K\\xrightarrow{\\sim}Rf_!^cK,\\qquad f=pj,$$\nwith exactly the functor and maps of [def-weil-integral-rational-qbar-compact-support]. For every $m\\ge n\\ge1$, its tower transition is $Rp_{*,m}j_!$ applied to $K_m\\to\\operatorname{Res}_{m,n}K_n$, followed by the coefficient-restriction isomorphism of [lem-sf-compact-support-restriction-of-scalars]. Thus $d_c$ identifies whole strict towers and their total limits, not just their evaluated objects. This assertion constructs primitive comparisons only; it asserts no expression-tree or generator coherence.",
+  "what": "Extract unchanged specification definitions into their own data module to avoid an import cycle in the proper/support component statements; add an explicit reference to that data node. Mathematical statement and Lean theorem signature unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+   "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-integral-compactification-system-realization",
+    "holds": true,
+    "note": "Only a definition-module reference was added. Existing Lean names, bodies, statement and primitive comparison specifications are unchanged."
+   },
+   {
+    "id": "lem-sf-integral-expression-recursion",
+    "holds": true,
+    "note": "Only a definition-module reference was added. Existing Lean names, bodies, statement and primitive comparison specifications are unchanged."
+   },
+   {
+    "id": "lem-sf-exceptional-integral-reconstruction",
+    "holds": true,
+    "note": "Only a definition-module reference was added. Existing Lean names, bodies, statement and primitive comparison specifications are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-finite-field-fiber",
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-scheme-morphism-properties",
+   "def-weil-pbc-proetale-site",
+   "lem-coef-derived-system-evaluation-calculus",
+   "def-sf-integral-system-operations",
+   "def-sf-integral-system-expression-domain",
+   "def-pur-integral-derived-operations",
+   "def-weil-derived-direct-image",
+   "lem-sf-integral-open-reduction-comparison",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "lem-pur-integral-operations-well-defined",
+   "def-weil-integral-rational-qbar-compact-support",
+   "lem-sf-compact-support-restriction-of-scalars",
+   "def-sf-integral-system-canonical-bridge",
+   "def-pur-completed-pullback-tensor-comparison",
+   "lem-weil-compact-support-reduction-tower-functor",
+   "def-weil-compact-support-finite-action"
+  ],
+  "old_proof": [
+   {
+    "text": "For each integral input choose one flat-term K-flat representative $P$ (and $Q$ for a second input), using lem-pc-kflat-resolution. The reduction functor of lem-coef-derived-system-evaluation-calculus is represented by the single strict system $P_n=P\\otimes_{\\widehat R} (A_n)$, with $\\tau^P_{m,n}=1\\otimes(A_m\\to A_n)$. Apply lem-pur-quotient-system-flat-models to the ringed small pro-etale sites: the whole-system pullback $P_v\\mathcal R K$ is represented by $Z_v(P)_n=v^{-1}P_n$, and the whole-system tensor of $\\mathcal R K,\\mathcal R H$ by $Z_T(P,Q)_n=\\operatorname{Tot}(P_n\\otimes_{A_n}Q_n)$. Their actual transitions are $v^{-1}\\tau^P_{m,n}$ and $a\\otimes b\\mapsto\\tau^P_{m,n}(a)\\otimes\\tau^Q_{m,n}(b)$. All these maps are defined before localization. For cochain maps $h:P\\to P'$ and $g:Q\\to Q'$, the equality $(h_n\\otimes g_n)(\\tau^P_{m,n}\\otimes\\tau^Q_{m,n})=(\\tau^{P'}_{m,n}\\otimes\\tau^{Q'}_{m,n})(h_m\\otimes g_m)$ follows on pure tensors; the inverse-image equality is $v^{-1}(h_n\\tau^P_{m,n})=v^{-1}(\\tau^{P'}_{m,n}h_m)$. Thus these are strict tower comparisons natural in the representatives, rather than unrelated identifications at each level.",
+    "uses": [
+     "lem-pc-kflat-resolution",
+     "lem-coef-derived-system-evaluation-calculus",
+     "lem-pur-quotient-system-flat-models"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tags 06YS (lemma-K-flat-resolution) and 0G7E (lemma-pullback-K-flat); simultaneous quotient-model refinement as stated in lem-pur-quotient-system-flat-models."
+    }
+   },
+   {
+    "text": "After termwise restriction to $\\widehat R$-modules, let $Z$ be either strict tower from step 1. Countable products on these pro-etale sites are exact by lem-weil-proetale-countable-products-exact. Hence lem-weil-strict-roos-comparison gives a natural projection-compatible isomorphism $\\rho_Z:\\mathsf C(Z)=\\operatorname{Cone}(1-s:\\prod Z_n\\to\\prod Z_n)[-1]\\xrightarrow{\\sim}R\\lim Z$. Fix precisely its normalization: on a K-injective tower resolution $a:Z\\to I$, use $\\mathsf C(a)$ followed by the inverse of the kernel inclusion $\\lim I\\to\\mathsf C(I)$ with zero shifted-product coordinate. By def-pur-integral-derived-operations and lem-pur-integral-operations-well-defined, $\\mathsf C(Z_v(P))$ and $\\mathsf C(Z_T(P,Q))$ are the prescribed completed pullback and tensor. Define $d_{P_v}$ and $d_T$ by $\\rho_Z^{-1}$ through the representative identifications of step 1. The hypotheses of lem-pur-flat-roos-functor-descent hold: the good representatives exist, their tower constructions preserve quasi-isomorphisms by lem-pur-quotient-system-flat-models, and products are exact. That lemma therefore descends these comparisons to natural isomorphisms on all derived input morphisms, including roofs; its uniqueness with the prescribed representative components makes them independent of resolution choices. This gives the required comparisons of functors and fixes the Roos maps, rather than choosing a filler of a triangle.",
+    "uses": [
+     "lem-weil-proetale-countable-products-exact",
+     "lem-weil-strict-roos-comparison",
+     "def-pur-integral-derived-operations",
+     "lem-pur-integral-operations-well-defined",
+     "lem-pur-flat-roos-functor-descent",
+     "lem-pur-quotient-system-flat-models"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tag 0941 (lemma-derived-limit-is-ok), proof; Tag 0940 (section-derived-limits); quotient/Roos definitions of the integral operations. The normalization and descent are the cited agent refinements."
+    }
+   },
+   {
+    "text": "For a proper $p$, retain its simultaneous derived system direct image from def-sf-integral-system-operations. The canonical evaluations and coefficient-transition comparisons of lem-pur-coefficient-system-derived-comparison and lem-pur-coefficient-system-unbounded-comparison identify its evaluation at $n$ with $Rp_{*,n}$, using the specified system resolution comparisons. In particular on $\\mathcal R K$ its restricted tower has terms $\\operatorname{Res}_nRp_{*,n}K_n$. If $\\tau_{m,n}:K_m\\to\\operatorname{Res}_{m,n}K_n$ is the input quotient map, the output arrow is $Rp_{*,m}(\\tau_{m,n})$ followed by $Rp_{*,m}\\operatorname{Res}_{m,n}\\xrightarrow{\\sim}\\operatorname{Res}_{m,n}Rp_{*,n}$. This is the restriction comparison of lem-weil-proetale-direct-image-restriction-of-scalars, with its defining resolution map. The unbounded system comparison includes the representative and transition equations, so these comparisons identify the whole restricted derived tower, not just its evaluations. These are exactly the terms and transition arrows specified in def-weil-derived-direct-image. Apply the functor $R\\lim$ of lem-weil-pbc-ringed-strict-tower-homotopy-limit to this whole-tower identification to obtain $d_{S_p}:\\mathcal L S_p\\mathcal R K\\xrightarrow{\\sim}Rp_*K$. Naturality is the naturality of that system comparison followed by a functor; no separate choice of a map between homotopy-limit triangles is involved.",
+    "uses": [
+     "def-sf-integral-system-operations",
+     "lem-pur-coefficient-system-derived-comparison",
+     "lem-pur-coefficient-system-unbounded-comparison",
+     "lem-weil-proetale-direct-image-restriction-of-scalars",
+     "def-weil-derived-direct-image",
+     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tag 0D6E (lemma-derived-pushforward-composition) for coefficient restriction; Tag 0941 for total limit. Zheng Construction 4.1 and Lemma 4.10, equation (4.10.1), give the simultaneous evaluation comparison; its unbounded representative refinement is the cited node."
+    }
+   },
+   {
+    "text": "For a quasi-compact open $j$, use exactly the specified whole-system map $r_j(K):\\mathcal R(j_!K)\\xrightarrow{\\sim}J_j\\mathcal R K$ of lem-sf-integral-open-reduction-comparison. That statement applies because $K$ is derived complete and $\\ell$ is invertible on the schemes; it asserts compatibility with every quotient transition, completeness of $j_!K$, and invertibility of the actual unit $u_{j_!K}$. Define\n$$d_{J_j}(K)=u_{j_!K}^{-1}\\circ\\mathcal L(r_j(K))^{-1}.$$\nThe inverse of $\\mathcal L(r_j(K))$ goes from $\\mathcal L J_j\\mathcal R K$ to $\\mathcal L\\mathcal R(j_!K)$, so the displayed formula has the required source and target. Both factors are natural isomorphisms. The cited node also identifies this precise comparison, including the unit and counit, with the localized completed-ring open adjunction. Thus the assertion about the open adjunction follows for these actual maps; no conclusion about faithfulness of evaluation is needed.",
+    "uses": [
+     "lem-sf-integral-open-reduction-comparison",
+     "lem-coef-derived-system-evaluation-calculus"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I; strict quotient transitions, completion and adjunction normalization supplied by lem-sf-integral-open-reduction-comparison."
+    }
+   },
+   {
+    "text": "Fix $c=(j,p)$ as in the statement. Apply the simultaneous proper-image comparison of step 3 directly to the strict system $J_j\\mathcal R K$; its levels are $j_!K_n$. This identifies the whole restricted tower of $S_pJ_j\\mathcal R K$ with $\\bigl(\\operatorname{Res}_nRp_{*,n}j_!K_n\\bigr)_n$. For $m\\ge n$, exact termwise $J_j$ takes the input transition to $j_!\\tau_{m,n}:j_!K_m\\to\\operatorname{Res}_{m,n}j_!K_n$. Applying $Rp_{*,m}$ and then its coefficient-restriction comparison gives\n$$Rp_{*,m}j_!K_m\\longrightarrow Rp_{*,m}j_!\\operatorname{Res}_{m,n}K_n\\xrightarrow{\\sim}\\operatorname{Res}_{m,n}Rp_{*,n}j_!K_n.$$\nBy lem-sf-compact-support-restriction-of-scalars, the second arrow is precisely the compact-support restriction comparison, and these comparisons compose for $r\\ge m\\ge n$. Consequently this is the defining tower, with its defining quotient arrows, of def-weil-integral-rational-qbar-compact-support. Apply total $R\\lim$ to the whole-tower comparison to define the natural $d_c:\\mathcal L S_pJ_j\\mathcal R K\\xrightarrow{\\sim}Rf_!^cK$. The same $j,p$ are retained at every level. This is a direct comparison with the defining compact-support tower, without first inserting the open unit or asserting coherence for composite expressions. All uses stay within the given expression domain; in particular the hidden open intermediate and proper output satisfy its bounds and origin conditions.",
+    "uses": [
+     "lem-pur-coefficient-system-derived-comparison",
+     "lem-pur-coefficient-system-unbounded-comparison",
+     "lem-coef-semilinear-derived-sections",
+     "lem-sf-compact-support-restriction-of-scalars",
+     "def-weil-integral-rational-qbar-compact-support",
+     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+     "def-sf-integral-system-expression-domain"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tags 0D6E (lemma-derived-pushforward-composition) and 0941 (lemma-derived-limit-is-ok); integral compact-support definition, transition paragraph; simultaneous system evaluation as in Zheng Lemma 4.10."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-pur-integral-derived-operations",
+   "def-sf-integral-system-expression-domain",
+   "def-sf-integral-system-operations",
+   "def-weil-derived-direct-image",
+   "def-weil-integral-rational-qbar-compact-support",
+   "lem-coef-derived-system-evaluation-calculus",
+   "lem-coef-semilinear-derived-sections",
+   "lem-pc-kflat-resolution",
+   "lem-pur-coefficient-system-derived-comparison",
+   "lem-pur-coefficient-system-unbounded-comparison",
+   "lem-pur-flat-roos-functor-descent",
+   "lem-pur-integral-operations-well-defined",
+   "lem-pur-quotient-system-flat-models",
+   "lem-sf-compact-support-restriction-of-scalars",
+   "lem-sf-integral-open-reduction-comparison",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "lem-weil-proetale-countable-products-exact",
+   "lem-weil-proetale-direct-image-restriction-of-scalars",
+   "lem-weil-strict-roos-comparison"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-396e2",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261025T123847-L-1909976",
+  "kind": "interface",
+  "note": "independent cc review: integralBasicRealization assembly + 4 split sorry nodes (reduction-pullback model, proper tower transition, open mate, support tower) against lem-sf-integral-basic-realization; relocated 8 defs byte-identical to clone; def-pur-conventions DAG edge cut vs Lean (PurityFiniteSetting has no TwistFrobeniusScalar import); all 6 modules + importer IntegralExpressionRecursion compiled (exit 0); axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

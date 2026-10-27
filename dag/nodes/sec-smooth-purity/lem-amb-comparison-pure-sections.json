@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; unit_app_tensor_comp_map_δ at line 1024 and unit_app_unit_comp_map_η at line 1019; source-library monoidal comparison and continuous pushforward component formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal adjunction unit on sheaves preserves pure tensor sections after restriction along a continuous functor of sites",
+   "results": "8 hits; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-27",
+   "verdict": "Use the monoidal-adjunction unit equations. The site-specific pure-section conclusion also requires the source-library comparison and pushforward component formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "results": "1 hits; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+   "date": "2026-10-27",
+   "verdict": "Use the monoidal-adjunction unit equations. The site-specific pure-section conclusion also requires the source-library comparison and pushforward component formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_app_tensor_comp_map_δ|unit_app_unit_comp_map_η",
+   "results": "7 hits; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/Functor.lean; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean; Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-27",
+   "verdict": "Use the monoidal-adjunction unit equations. The site-specific pure-section conclusion also requires the source-library comparison and pushforward component formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTateNormalizedComparisons",
+  "date": "2026-10-27",
+  "group": "K4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-finite-tate-normalized-comparisons",
+   "place": "Degree-zero and tensor-induction section equations in the normalized-comparison proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-amb-comparison-pure-sections",
+ "title": "Pure tensor and scalar sections of the site comparison adjunction",
+ "statement": "Let T be a scheme in universe u and A a commutative ring in Type(u+1). Let F and G be the etale to pro-etale comparison inverse and direct image functors on sheaves of A-modules [def-weil-pbc-site-comparison-morphism], and let eta be their adjunction unit. Use the sheafified sectionwise tensor and constant-module units [sk-def-sfb-sheaf-tensor]. For etale U, pro-etale W, f:W→toProEt(U), A-module sheaves M,N on the etale site, and sections x of M(U), y of N(U), applying the oplax tensor map F(M tensor N)→FM tensor FN to the restriction along f of eta_(M tensor N) applied to the pure tensor x tensor y gives the pure tensor of the restrictions of eta_M(x) and eta_N(y). The inverse-image unit map F(1)→1 applied to the restriction of eta_1 of the constant scalar a gives the constant scalar a on W, for every a in A. There are no finiteness, invertibility, nonemptiness or root-lifting assumptions.",
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Mathlib monoidal-adjunction unit tensor equation unit_app_tensor_comp_map_δ. Precompose by the underlying presheaf pure-tensor map. Its naturality moves the two unit components past this map; the continuous pushforward tensor component equation identifies the result with the pro-etale pure-tensor map on toProEt(U). Evaluate at x tensor y. Naturality of the oplax tensor map and the presheaf pure-tensor map along f proves the displayed equality on W. This uses the existing source-library monoidal structure on the comparison adjunction.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply unit_app_unit_comp_map_η and precompose by the underlying presheaf unit map. The continuous pushforward unit component formula identifies the resulting map with the pro-etale constant-scalar sheafification unit on toProEt(U). Evaluate at a and use naturality of both the oplax unit and the constant-presheaf sheafification unit along f.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent K4",
+  "document": "literature/stacks-project/proetale.tex; Mathlib/CategoryTheory/Monoidal/Functor.lean",
+  "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; unit_app_tensor_comp_map_δ at line 1024 and unit_app_unit_comp_map_η at line 1019; source-library monoidal comparison and continuous pushforward component formulas."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComparisonPureSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComparisonPureSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.comparison_pure_sections",
+  "statement": "theorem comparison_pure_sections (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :\n    (∀ (M N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ) (f : W.unop ⟶ (toProEt T).obj U.unop)\n    (x : M.obj.obj U) (y : N.obj.obj U),\n      (Functor.OplaxMonoidal.δ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T)\n      M N).hom.app W\n        (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj (M ⊗ N)).obj.map f.op\n          (((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app\n            (M ⊗ N)).hom.app U\n              ((Functor.LaxMonoidal.μ (sheafToPresheaf T.smallEtaleTopology\n                (ModuleCat.{u + 1} A)) M N).app U (x ⊗ₜ[A] y)))) =\n      (Functor.LaxMonoidal.μ (sheafToPresheaf (ProEt.topology T) (ModuleCat.{u + 1} A))\n        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj M)\n        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj N)).app W\n          ((((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj M).obj.map f.op\n            (((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app M).hom.app U x))\n          ⊗ₜ[A]\n          (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj N).obj.map f.op\n            (((ProEtale.comparisonAdjunction\n              (ModuleCat.{u + 1} A) T).unit.app N).hom.app U y)))) ∧\n    (∀ (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ)\n    (f : W.unop ⟶ (toProEt T).obj U.unop) (a : A),\n      (Functor.OplaxMonoidal.η (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T)).hom.app W\n      (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).obj (𝟙_ _)).obj.map f.op\n        (((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app (𝟙_ _)).hom.app U\n          ((toSheafify T.smallEtaleTopology\n            ((Functor.const T.Etaleᵒᵖ).obj (ModuleCat.of.{u + 1, u + 1} A A))).app U a))) =\n      (toSheafify (ProEt.topology T)\n        ((Functor.const T.ProEtᵒᵖ).obj (ModuleCat.of.{u + 1, u + 1} A A))).app W a)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T094434-L-226277",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T094434-L-226277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

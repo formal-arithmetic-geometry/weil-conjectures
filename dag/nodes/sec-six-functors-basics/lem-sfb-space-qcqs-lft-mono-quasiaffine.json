@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-space-qcqs-lft-mono-quasiaffine",
+ "kind": "statement",
+ "title": "Locally finite type monomorphisms between qcqs spaces are quasi-affine",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme; it is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback along every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. Local finite type and local finite presentation are tested on compatible etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type; finite presentation means quasi-compact, quasi-separated and locally of finite presentation. A morphism is quasi-affine if it is representable by schemes and every pullback along an affine scheme test is a quasi-compact open subscheme of an affine scheme. Let $A$ and $B$ be quasi-compact quasi-separated algebraic spaces and let $u:A\\to B$ be locally of finite type. If $u$ is a monomorphism, meaning that $A(T)\\to B(T)$ is injective for every $S$-scheme $T$, then $u$ is quasi-affine.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 073B (lemma-quasi-compact-quasi-separated-permanence), clause (1); 0463 (lemma-monomorphism-loc-finite-type-loc-quasi-finite); 0ABS (lemma-quasi-finite-separated-quasi-affine), final conclusion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-stack-qcqs-morphism",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The assumed quasi-compact etale atlas of $A$ makes $|A|$ quasi-compact by the last sentence of [lem-a1-space-finite-affine-subatlas]. The same last sentence, applied to an assumed quasi-compact atlas of each affine-test pullback of the absolute diagonal $B\\to B\\times_{\\operatorname{Spec}\\mathbf Z}B$, shows that these pullbacks have quasi-compact point spaces, so $B$ is quasi-separated in the point-space sense of [lem-sfb-space-qcqs-permanence]. Since $|A|$ is quasi-compact and $B$ is quasi-separated in that sense, [lem-sfb-space-qcqs-permanence] implies that $u$ is quasi-compact on affine scheme tests in the point-space sense. For each such test, [lem-sfb-qc-space-affine-etale-atlas] converts the quasi-compact point space of the pullback into an affine surjective etale atlas. Thus the atlas and point-space conventions agree for these pullbacks. Together with the assumed local finite type, this says that $u$ is of finite type in the algebraic-space convention of [lem-sfb-stack-finite-type-calculus], which explicitly agrees with the ordinary algebraic-space notion. The quasi-separatedness of $A$ and quasi-compactness of $B$ are allowed but not needed here.",
+   "uses": [
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-stack-finite-type-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), (1); spaces-properties.tex Tags 03E4 (lemma-quasi-compact-space) and 03H6 (lemma-quasi-compact-affine-cover); stacks-morphisms.tex section-finite-type, compatibility with algebraic spaces."
+   }
+  },
+  {
+   "text": "For an arbitrary $S$-scheme $T$ and a map $h_T\\to B$, form $E=A\\times_Bh_T$ using [lem-trf-space-fibre-products-etale-covers]. The map $v:E\\to h_T$ is of finite type by [lem-sfb-stack-finite-type-calculus], which gives arbitrary base-change stability and agreement with the algebraic-space notions. It is a monomorphism directly: a section over $H$ is a pair $(a,t)$ with $u(a)$ equal to the image of $t$; two such pairs with the same $t$ have the same $a$ by the injectivity of $A(H)\\to B(H)$. Thus $v$ is locally of finite type and a monomorphism, with a scheme target.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-finite-type-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0463 (lemma-monomorphism-loc-finite-type-loc-quasi-finite), reduction to scheme tests; Tag 03XH (lemma-base-change-finite-type); stacks-morphisms.tex Tag 06FU (lemma-base-change-finite-type)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-lft-monomorphism-separated-lqf] to $v:E\\to h_T$. Its hypotheses are exactly the monomorphism and chartwise local finite type proved in step 2. It gives a diagonal which is a closed immersion on every scheme base change and chartwise local quasi-finiteness. These are precisely the two hypotheses of [lem-a1-separated-locally-qf-space-representable], so there is a $T$-scheme $Z_T$ with $h_{Z_T}\\simeq E$ over $h_T$. Since $T\\to B$ was arbitrary, this proves representability of $u$ by schemes, not just representability over etale charts.",
+   "uses": [
+    "lem-sfb-space-lft-monomorphism-separated-lqf",
+    "lem-a1-separated-locally-qf-space-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 0463 (lemma-monomorphism-loc-finite-type-loc-quasi-finite) and 03XX (proposition-locally-quasi-finite-separated-over-scheme)."
+   }
+  },
+  {
+   "text": "Now let $T$ be affine. Write $v_T:Z_T\\to T$ for the represented map. Its local finite type and local quasi-finiteness follow from the chart tests of steps 2-3 by taking the identity chart of $Z_T$; its separatedness is the diagonal assertion of step 3 on scheme tests. Its source is quasi-compact since $u$ is quasi-compact and $T$ is an affine test (step 1); equivalently $v_T$ is quasi-compact, also part of its finite-type assertion in step 2. Therefore [lemma-nagata-quasi-affine-morphism-of-quasi-finite] applies to $v_T$, with all four hypotheses: separated, quasi-compact, locally quasi-finite and locally of finite type. It is a quasi-affine scheme morphism. By [def-nagata-quasi-affine-morphism], taking the affine open $T$ itself, $Z_T$ is a quasi-affine scheme: a quasi-compact open subscheme of an affine scheme. Together with representability from step 3, this is exactly the asserted quasi-affineness of $u$.",
+   "uses": [
+    "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABS (lemma-quasi-finite-separated-quasi-affine), final affine-test conclusion, using its scheme version more-morphisms.tex Tag 02LR (lemma-quasi-finite-separated-quasi-affine)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-lft-monomorphism-separated-lqf",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 073B(1), 0463 and 0ABS; the representability reduction of Tag 03XX and the scheme quasi-affineness theorem are reused as existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type monomorphism between quasi compact quasi separated algebraic spaces is quasi affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact monomorphisms of algebraic spaces locally of finite type are representable separated locally quasi finite and quasi affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mono\", \"LocallyOfFiniteType\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Mm]ono.*[Qq]uasi[Aa]ffine|[Qq]uasi[Aa]ffine.*[Mm]ono",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type monomorphism of quasi compact quasi separated algebraic spaces is a quasi affine morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffineHom f] [Y.IsQuasiAffine] : X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [Mono f] : QuasiSeparated f\", \"doc\": \"Every monomorphism $ f : X \\to Y $ of schemes is quasi-separated, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyOfFiniteType f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyOfFiniteType f) →\\n        ((finiteType_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                \", \"doc\": \"Given a property that holds for all affine open subsets $ U $ of $ Y $ and $ V $ of $ X $ with $ V $ mapping into $ U $, where the corresponding ring homomorphism is finitely generated, then the prope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [toCompactSpace : CompactSpace ↥X]\\n  [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ], X.IsQuasiAffine\", \"doc\": \"If $ X $ is a compact topological space and the canonical morphism $ X \\\\to \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, then $ X $ is quasi-affine.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms, ring maps, or general categorical limits; none states this algebraic-space theorem. Scheme-only types checked in Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-45, Noetherian.lean:266-276 and QuasiAffine.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Mm]ono.*[Qq]uasi[Aa]ffine|[Qq]uasi[Aa]ffine.*[Mm]ono",
+   "results": {
+    "t": "2026-10-23T14:55:08Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|[Mm]ono.*[Qq]uasi[Aa]ffine|[Qq]uasi[Aa]ffine.*[Mm]ono",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic results and grep yield only scheme theorems, not the algebraic-space theorem. Read Mathlib/AlgebraicGeometry/QuasiAffine.lean:29-62 and WeilConjectures/Mathlib/AlgebraicGeometry/QuasiAffine.lean:62-111; the latter is reused via its existing scheme node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mono\", \"LocallyOfFiniteType\"",
+   "results": {
+    "t": "2026-10-23T14:55:09Z",
+    "tool": "loogle",
+    "query": "\"Mono\", \"LocallyOfFiniteType\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic results and grep yield only scheme theorems, not the algebraic-space theorem. Read Mathlib/AlgebraicGeometry/QuasiAffine.lean:29-62 and WeilConjectures/Mathlib/AlgebraicGeometry/QuasiAffine.lean:62-111; the latter is reused via its existing scheme node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type monomorphism of quasi compact quasi separated algebraic spaces is quasi affine",
+   "results": {
+    "t": "2026-10-23T14:55:09Z",
+    "tool": "leanfinder",
+    "query": "A locally finite type monomorphism of quasi compact quasi separated algebraic spaces is quasi affine",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+     "AlgebraicGeometry.locallyOfFiniteType_iff",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite"
+    ],
+    "digest": "c6eb3a542ae9b6f2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic results and grep yield only scheme theorems, not the algebraic-space theorem. Read Mathlib/AlgebraicGeometry/QuasiAffine.lean:29-62 and WeilConjectures/Mathlib/AlgebraicGeometry/QuasiAffine.lean:62-111; the latter is reused via its existing scheme node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type monomorphism between quasi compact quasi separated algebraic spaces is quasi affine",
+   "results": {
+    "t": "2026-10-23T14:55:41Z",
+    "tool": "leansearch",
+    "query": "A locally finite type monomorphism between quasi compact quasi separated algebraic spaces is quasi affine",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "AlgebraicGeometry.LocallyOfFiniteType.mk",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.mk",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.rec",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation"
+    ],
+    "digest": "57084fac86ad43d8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic results and grep yield only scheme theorems, not the algebraic-space theorem. Read Mathlib/AlgebraicGeometry/QuasiAffine.lean:29-62 and WeilConjectures/Mathlib/AlgebraicGeometry/QuasiAffine.lean:62-111; the latter is reused via its existing scheme node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact monomorphism locally of finite type between algebraic spaces is representable by quasi affine schemes",
+   "results": {
+    "t": "2026-10-23T14:55:42Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact monomorphism locally of finite type between algebraic spaces is representable by quasi affine schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+     "AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff"
+    ],
+    "digest": "4905f2358b057e53"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: semantic results and grep yield only scheme theorems, not the algebraic-space theorem. Read Mathlib/AlgebraicGeometry/QuasiAffine.lean:29-62 and WeilConjectures/Mathlib/AlgebraicGeometry/QuasiAffine.lean:62-111; the latter is reused via its existing scheme node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-finite-type-fp-envelope",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: a locally finite type monomorphism at a qcqs stage is quasi-affine",
+   "via": [
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qcqs-lft-mono-quasiaffine",
+  "worker": "stage1",
+  "summary": "Q23 split the statement on arbitrary scheme tests: qcqs permanence gives quasi-compactness, finite-type base change preserves the local hypothesis, the existing scheme-target monomorphism lemma gives separated local quasi-finiteness, the existing representability theorem gives a scheme, and the closed scheme Zariski-main theorem gives quasi-affineness on affine tests. No new nodes and no statement changes. Checked all cited statements, source labels, small cases and cycle paths.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: a locally finite type monomorphism at a qcqs stage is quasi-affine The four steps retain this supporting geometric route; latest blueprint direct-images proof (3) supplies the compactification context.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Only its final continuous-surjection assertion converts the assumed quasi-compact atlas into quasi-compact point space. This is a general topological tool, not the other unit's duality argument."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic algebraic-space representability theorem 03XX on each arbitrary scheme test; the current unit has the monomorphism input but no replacement for this schemehood theorem."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only existence of algebraic-space sheaf fibre products is used to form arbitrary scheme tests. This foundational tool is independent of the trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-49e18aef6",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-49e18aef6 (reviewer sub-agent of L); spot-checked: FIX: one gap in step 1, now repaired; everything else checks out. The split follows the Stacks 0872 proof: 0463 (lft + monomorphism ⇒ separated and locally quasi-finite), then 03XX (representable by schemes), then 0ABS via the scheme result 02LR (quasi-affine). Source places read: 073B(1), 0463, 0ABS and 03H6 in spaces-morphisms/spaces-properties, 02LR in more-morphisms, 0872 in spaces-limits. There are no new nodes and the statement is unchanged. Step 1: the permanence lemma uses point-space quasi-compactness, but the step never converted B's quasi-separatedness from the item's atlas convention. I added that conversion using the last sentence of lem-a1-space-finite-affine-subatlas, which the step already cites; its citations and proof_deps are unchanged. Step 2: the fibre product E = A ×_B h_T is an algebraic space; finite type is stable under any base change and agrees with the ordinary notion (calculus lemma); E → h_T is a monomorphism because sections of the fibre product are pairs. Step 3: the outputs of lem-sfb-space-lft-monomorphism-separated-lqf match the two hypotheses of lem-a1-separated-locally-qf-space-representable word for word. Step 4: the four hypotheses of the Nagata lemma are supplied (it is Lean-closed: IsQuasiAffineHom.of_locallyQuasiFinite), and def-nagata-quasi-affine-morphism with X' = T gives the item's quasi-affine definition. Edge cases checked: empty A, identity map, open and closed immersions, and a non-quasi-compact A, which shows the hypothesis is needed. No duplicate in the DAG, no cycle, and live still has the item unsplit. The three declared tool_uses are generic foundations and I accept them. Batch 5: all six flagged citations reach the trace-formula chapter only through def-trf-algebraic-space, the general definition of algebraic spaces. None is a step of the trace formula or of Poincaré duality, so they do not force a RETURN.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsSpaceMonomorphismQuasiAffine",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isRepresentableWith_quasiAffine_of_mono_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsSpaceMonomorphismQuasiAffine.lean",
+  "statement": "theorem isRepresentableWith_quasiAffine_of_mono_locallyOfFiniteType {S : Scheme.{u}} (A B : AlgebraicSpace S) (f : A ⟶ B) (hAqc : IsQuasiCompact A.obj) (hAqs : IsAbsolutelyQuasiSeparated A) (hBqc : IsQuasiCompact B.obj) (hBqs : IsAbsolutelyQuasiSeparated B) (hft : MapIsLocally (@LocallyOfFiniteType) f) (hm : ∀ T : Over S, Function.Injective (f.hom.hom.app (op T))) : IsRepresentableWith (fun _ _ p ↦ IsQuasiAffineHom p.left) f.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed atlas-quasi-compactness, absolute quasi-separatedness and compatible etale chart predicates, added to stmt_deps. The conclusion uses existing IsRepresentableWith with scheme IsQuasiAffineHom: equivalent to representability on every scheme test and quasi-affine sources on affine tests. No new definitions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65144887a",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Re-delivery after RETURN fe4d53b8a6af; both returned points fixed (def-nagata-quasi-affine-morphism added to stmt_deps, unused FinitePresentation import removed). Checked each clause against the node and the dependency sources: IsQuasiCompact = quasi-compact surjective étale atlas; IsAbsolutelyQuasiSeparated = owned affine-test def (0AHR); MapIsLocally LocallyOfFiniteType = chart-tested local finite type; hm = injectivity on sections over every T : Over S. Conclusion IsRepresentableWith (IsQuasiAffineHom p.left) is equivalent to the node's affine-test quasi-affine condition (whole affine test as the affine open; restriction to affine opens plus pullback pasting). Node diff vs live is only lean plus four landed stmt_deps; lean.statement verbatim; no space-level quasi-affine duplicate; no defs, sorry only, docstrings with source and blueprint; Worker report and Second reading present. Edge cases (empty A, S arbitrary, single universe) fine. No compile run since no file changed."
+ }
+}

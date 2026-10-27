@@ -1,0 +1,120 @@
+{
+ "id": "lem-zl-condensed-slice-section-comparison",
+ "kind": "statement",
+ "title": "Normalized module and scalar comparisons along a profinite section",
+ "statement": "Let $\\Lambda$ be a condensed ring, $r:V\\to S$ and $s:S\\to V$ continuous maps of profinite spaces with $r\\circ s=\\operatorname{id}_S$, and let $a$ be a normalized Slice inverse image along $r$ [lem-zl-component-derived-pullback-square]. There is SectionComparison data [def-zl-condensed-generic-scalar-model-data]: a normalized Slice along $s$, the iterated test-pullback identity with its first-projection formula, its adjunction-mate identity on abelian sheaves, its lift $s^*r^*\\cong\\operatorname{id}$ on modules, and the scalar comparison $s^*q_V^*\\cong q_S^*$ with the specified underlying absolute-test map.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 4.13, paragraph following diagram (4.4), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-generic-scalar-model-data",
+  "sk-def-sfb-condensed-ring",
+  "def-zl-condensed-scalar-realization",
+  "lem-zl-component-derived-pullback-square"
+ ],
+ "proof": [
+  {
+   "text": "construct the slice inverse image along s by sheafified left Kan extension along Over.pullback s. Its standard adjunction and monoidal structure give the canonical Slice data; the absolute-test base-change isomorphism gives beta. Since s followed by r is the identity, the iterated test pullback is naturally isomorphic to the identity, with underlying map the two first projections. Take its adjunction mate to obtain abelian; the conjugate equality is the stated abelian_mate. The coefficient restrictions are all from the same Lambda, so lift abelian to the ordinary module comparison, with the same underlying map. Similarly lift inverse.beta to the scalar module comparison. Naturality and monoidality verify linearity. These constructions give all fields of SectionComparison with their specified underlying maps. Empty profinite spaces and the zero ring require no separate choices.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-zl-component-derived-pullback-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-zl-component-derived-pullback-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 4.13, irreducible case, diagram (4.4) and paragraph following it; Lemma 4.1 and Proposition 4.3(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A dualizable complex of modules on a weakly contractible site is perfect after evaluation and a split pullback has canonical composition and scalar comparisons",
+   "results": "comp_dualTensorHom; LinearMap.IsPerfPair.dualEval; Module.Dual.eval; Module.evalEquiv; HomologicalComplex.instHasBinaryBiproductObjEval. No site or scalar-realization comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "No match for any of the coefficient-compatible site and derived-category steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable condensed sheaf complex over an algebraically closed field is scalar realization of a perfect complex; a section of a profinite component map descends generic trivializations",
+   "results": "CondensedMod.ofSheafProfinite; Condensed.profiniteSolid; Condensed.profiniteFree; LightCondensed.free_internallyProjective_iff_tensor_condition; CondensedMod.ofSheafCompHaus. These construct condensed modules or discuss projectivity, not the asserted derived comparisons.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement; Loogle Functor.preimageIso finds the tool used for descent in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "generic_scalar_model|SectionComparison|pointRealization|generic_induced; geometric.*perfect.*model|contractible.*corner|slice.*section.*comparison",
+   "results": "Searched lean/Sheaf, lean/WeilConjectures and Mathlib category-theory sources. Only the parent defines these normalized interfaces; existing evaluation results use a different coefficient presentation. Blueprint search for component section scalar returned zero matching nodes. Blueprint searches for condensed perfect and profinite section also returned zero nodes.",
+   "date": "2026-10-25",
+   "verdict": "Existing general results are cited below; none states this normalized compatibility step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedIrreducibleGenericScalarModel",
+  "date": "2026-10-25",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "HRS Theorem 4.13 local scalar-model input to the field-stage projection-formula paragraph; CondensedSliceSectionComparison",
+   "via": [
+    "lem-zl-condensed-irreducible-generic-scalar-model",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CondensedSliceSectionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedSliceSectionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedGenericScalarModel.slice_section_comparison",
+  "statement": "theorem slice_section_comparison (Λ : Profinite.CondensedRing.{u}) {S V : Profinite.{u}} (r : V ⟶ S) (s : S ⟶ V) (hs : s ≫ r = 𝟙 S) (restriction : ComponentDerivedSquare.Slice Λ r) : Nonempty (SectionComparison Λ r s restriction)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0223e",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T101212-L-3670642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0223e",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T101212-L-3670642",
+  "kind": "interface",
+  "note": "independent cc review: Moved data block diffed against the clone's original (byte-identical), item node statement and stmt_deps unchanged; the 4 new sorried statements read against the pinned Corner/Slice structures and HRS Lemma 4.1(2), Prop 4.3(3), Thm 4.13 (4.4); item proof steps (splitting, delta, gamma) read against CoverModel fields"
+ }
+}

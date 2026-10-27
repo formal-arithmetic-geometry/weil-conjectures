@@ -1,0 +1,160 @@
+{
+ "id": "def-trf-presheaf-bar-complex",
+ "kind": "definition",
+ "title": "Explicit presheaf and category bar terms and maps",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the universes of [def-weil-size-convention]. For a small category $\\mathcal E$ and a commutative ring $R$, write $\\mathcal A_{\\mathcal E,R}=\\operatorname{Fun}(\\mathcal E^{op},\\operatorname{Mod}_R)$, the module sheaves [def-weil-sheaf-of-modules-category] for the constant ring on the identity-cover topology [def-weil-pbc-sites-and-cohomology]. The explicit presheaf bar terms and maps are the following constructions. For $U,V\\in\\mathcal E$ and an $R$-module $M$, put $L_U(M)(V)=\\bigoplus_{a:V\\to U}M$, with its summand inclusions, restriction $(a,x)\\mapsto(a\\circ b,x)$ along $b:W\\to V$, and coefficient map $(a,x)\\mapsto(a,f(x))$ for $f:M\\to N$. For $F\\in\\mathcal A_{\\mathcal E,R}$ and $n\\ge0$, put $B_n(F)(V)=\\bigoplus_{c=(U_n\\to\\cdots\\to U_0),\\ a:V\\to U_n}F(U_0)$ and $K_n(F)=\\bigoplus_{c=(U_n\\to\\cdots\\to U_0)}F(U_0)$, with their summand inclusions $\\iota_{a,c}$ and $\\iota_c$; include $L_{U_n}(F(U_0))(V)$ in $B_n(F)(V)$ by the same incoming-arrow summands. Restriction of $B_n(F)$ changes $a$ to $a\\circ b$, and a natural map $t:F\\to G$ acts on both sums by $x\\mapsto t_{U_0}(x)$. Use the chain deletion $\\partial_jc$ of [def-trf-derived-colimit-bar-system]: on a chain of length $n+1$, delete vertex $j$ from the left and compose adjacent arrows. The initial connecting arrow is $\\ell_j:U_{n+1}\\to(\\partial_jc)_{\\mathrm{left}}$, the identity except for $j=0$, and the terminal connecting arrow is $r_j:(\\partial_jc)_{\\mathrm{right}}\\to U_0$, the identity except for $j=n+1$. Define the evaluated face by $(a,c,x)\\mapsto(\\ell_j\\circ a,\\partial_jc,F(r_j)x)$ and the category-bar face by $(c,x)\\mapsto(\\partial_jc,F(r_j)x)$, extending linearly over direct sums. The maps $B_{n+1}(F)(V)\\to B_n(F)(V)$ and $K_{n+1}(F)\\to K_n(F)$ called differentials are the alternating sums $\\sum_{j=0}^{n+1}(-1)^jd_j$. Define the degree-zero augmentation $(a:V\\to U_0,x)\\mapsto F(a)x$, the evaluated insertion $(V\\xrightarrow a U_n\\to\\cdots\\to U_0,x)\\mapsto(V\\xrightarrow1 V\\xrightarrow a U_n\\to\\cdots\\to U_0,x)$, and the augmented insertion $x\\mapsto(1_V,x)$. The comparison $B_n(F)(V)\\to K_n(F)$ forgets $a$ and retains $x$. Write $C=\\operatorname{colim}_{\\mathcal E^{op}}$ [def-weil-pbc-category-colimit], and define $K_0(F)\\to CF$ on $(U,x)$ by the colimit cocone inclusion $\\iota_Ux$. All these are actual module terms and linear maps, allowing identity arrows and empty categories without finiteness assumptions. This definition records these terms and maps only; it does not assert a cochain realization, a contraction identity, exactness or the existence of a resolution.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-derived-colimit-bar-system",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PF (example-category-to-point) and 08PG (example-left-derived-colimits); explicit incoming-arrow presheaf terms, insertions and comparison expanded in lem-trf-augmented-presheaf-bar-resolution. Definition ownership of the published raw formulas only."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf bar complex direct sum over composable arrows contravariant module coefficients",
+   "results": "{\"t\": \"2026-10-24T13:15:00Z\", \"tool\": \"leansearch\", \"query\": \"presheaf bar complex direct sum over composable arrows contravariant module coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.presheaf\", \"Rep.barComplex\", \"PresheafOfModules.ofPresheaf\", \"PresheafOfModules.casesOn\", \"PresheafOfModules.add_app\", \"PresheafOfModules\", \"PresheafOfModules.map_comp\", \"PresheafOfModules.rec\"], \"digest\": \"3f68c15117792313\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic presheaves, group bar complexes and composable-arrow indexing do not define these formulas. Reuse the existing raw constructions in Sheaf.CategoryTheory.PresheafBarResolution without a duplicate Lean definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "ComposableArrows",
+   "results": "{\"t\": \"2026-10-24T13:15:01Z\", \"tool\": \"loogle\", \"query\": \"ComposableArrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'ComposableArrows'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Unqualified query rejected; qualified retry recorded, not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "PresheafBar|colimitTerm|simplicialReplacement",
+   "results": "{\"t\": \"2026-10-24T13:15:01Z\", \"tool\": \"grep\", \"query\": \"PresheafBar|colimitTerm|simplicialReplacement\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic presheaves, group bar complexes and composable-arrow indexing do not define these formulas. Reuse the existing raw constructions in Sheaf.CategoryTheory.PresheafBarResolution without a duplicate Lean definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ComposableArrows",
+   "results": "{\"t\": \"2026-10-24T13:15:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ComposableArrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ComposableArrows\", \"CategoryTheory.ComposableArrows.left\", \"CategoryTheory.ComposableArrows.right\", \"CategoryTheory.ComposableArrows.mk₀\", \"CategoryTheory.ComposableArrows.arrowEquiv\", \"CategoryTheory.ComposableArrows.obj'\", \"CategoryTheory.ComposableArrows.mk₁\", \"CategoryTheory.ComposableArrows.arrow\"], \"digest\": \"0ce1a911b6f11653\"}",
+   "date": "2026-10-24",
+   "verdict": "Generic presheaves, group bar complexes and composable-arrow indexing do not define these formulas. Reuse the existing raw constructions in Sheaf.CategoryTheory.PresheafBarResolution without a duplicate Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"PresheafBar|colimitTerm|simplicialReplacement\" lean/WeilConjectures lean/Sheaf",
+   "results": "No WeilConjectures matches. Sheaf matches are exactly the PresheafBarResolution declarations and uses within that module, lines 42--405.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the published constructions with existing:true; the resolution theorem node asserts their realization and is not their definition owner."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"presheaf-bar-complex|PresheafBar\" dag/nodes; tools/blueprint_refs.py search presheaf-bar-complex; tools/blueprint_refs.py search \"presheaf bar\"",
+   "results": "Only dag/nodes/sec-trace-formula/lem-trf-augmented-presheaf-bar-resolution.json names PresheafBar. Both blueprint searches return 0 matching blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node owns the raw bar constructions. New ownership node required by H2 return; no new Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coefficient-bar-prism-homotopy",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Re-split component: Coefficient-sensitive category-bar prism homotopy. Tag 08PH (example-morphism-categories), natural-transformation extension of its chain formula. Explicit prism maps, all face identities, coefficient endpoint and signs from returned steps 13 and 14; agent expansion, not asserted verbatim in Stacks. Raw presheaf and category bar terms, face maps and signed differentials used by the coefficient prism.",
+   "via": [
+    "lem-trf-coefficient-bar-prism-homotopy",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresheafBarResolution",
+  "declaration": "CategoryTheory.PresheafBar.colimitTerm",
+  "declarations": [
+   "CategoryTheory.PresheafBar.Presheaves",
+   "CategoryTheory.PresheafBar.freeTerm",
+   "CategoryTheory.PresheafBar.freeι",
+   "CategoryTheory.PresheafBar.freeRestriction",
+   "CategoryTheory.PresheafBar.term",
+   "CategoryTheory.PresheafBar.colimitTerm",
+   "CategoryTheory.PresheafBar.ι",
+   "CategoryTheory.PresheafBar.colimitι",
+   "CategoryTheory.PresheafBar.restriction",
+   "CategoryTheory.PresheafBar.termMap",
+   "CategoryTheory.PresheafBar.colimitTermMap",
+   "CategoryTheory.PresheafBar.deleteLeft",
+   "CategoryTheory.PresheafBar.deleteRight",
+   "CategoryTheory.PresheafBar.face",
+   "CategoryTheory.PresheafBar.colimitFace",
+   "CategoryTheory.PresheafBar.differential",
+   "CategoryTheory.PresheafBar.colimitDifferential",
+   "CategoryTheory.PresheafBar.augmentation",
+   "CategoryTheory.PresheafBar.contraction",
+   "CategoryTheory.PresheafBar.augmentedContraction",
+   "CategoryTheory.PresheafBar.comparison",
+   "CategoryTheory.PresheafBar.colimitAugmentation",
+   "CategoryTheory.PresheafBar.freeMap",
+   "CategoryTheory.PresheafBar.C",
+   "CategoryTheory.PresheafBar.summandMap"
+  ],
+  "statement": "def colimitTerm (F : Presheaves.{u, v} E R) (n : ℕ) : ModuleCat.{max u v} R",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership for the 25 unchanged raw definitions and abbreviations preceding Resolution in the published module. No file is copied or modified. Resolution and exists_resolution remain with lem-trf-augmented-presheaf-bar-resolution; neither is a hypothesis of the coefficient-prism statement. Follows the H2 return and the Q44 definition-ownership precedent."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5cccc92b3",
+  "group": "Q38",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5cccc92b3",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery after H2 return 54e66e. Lean module byte-identical to the reviewed head. Item stmt_deps now cite the new def-trf-presheaf-bar-complex in place of theorem node lem-trf-augmented-presheaf-bar-resolution; statement/proof/proof_deps unchanged. New node: existing:true on unchanged Sheaf.CategoryTheory.PresheafBarResolution; lists exactly the 25 def/abbrevs before Resolution (excludes Resolution/exists_resolution); colimitTerm signature verbatim; statement checked clause by clause against freeTerm..summandMap; stmt_deps = its 5 bracket citations, all definition nodes; Stacks 08PF/08PG; no rival owner in side-live. Re-checked prism maths: vertex/predAbove crossing at r=a from the left; before/after/junction index ranges incl. coefficient face; first/last with G(eta)t; dH+Hd sign matches Mathlib Homotopy convention; H_{-1}=0; D(R) equality; restrictScalars semilinear case; independent universes; no finiteness/nonempty hypotheses. Worker reports a clean scompile and a deliver2 --no-push OK; no compile by me (no change)."
+ }
+}

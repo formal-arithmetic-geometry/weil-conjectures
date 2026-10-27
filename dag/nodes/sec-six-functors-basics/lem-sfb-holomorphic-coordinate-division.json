@@ -1,0 +1,167 @@
+{
+ "id": "lem-sfb-holomorphic-coordinate-division",
+ "kind": "statement",
+ "title": "Holomorphic division by coordinate functions with parameters",
+ "statement": "Use the usual complex field $\\mathbf C$ [def-weil-field]. Let $r,d\\geq0$ be integers, and let $H$ be a germ at $(0,0)$ of a holomorphic function on $\\mathbf C^r\\times\\mathbf C^d$. Here a germ is an equivalence class of functions defined on neighbourhoods of $(0,0)$, two representatives being equivalent when they agree on a smaller neighbourhood, and holomorphic means locally given by convergent complex power series. Write $z=(z_1,\\ldots,z_r)$ and $t=(t_1,\\ldots,t_d)$. There exist holomorphic germs $H_1,\\ldots,H_r$ at $(0,0)$ such that $$H(z,t)-H(0,t)=\\sum_{j=1}^r z_jH_j(z,t).$$ The expression $H(0,t)$ on the left is pulled back along the projection $(z,t)\\mapsto t$. If $r=0$, the sum is empty and the equality is $0=0$; $d=0$ is allowed.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally: Serre, GAGA, §1 no.1, printed p.3 (holomorphic germs and induced analytic structure). Agent-formulated supporting analytic Hadamard lemma for the smooth-coordinate proof of §2 no.6 Proposition 4; not an assertion attributed verbatim to Serre. The power-series coefficient-division argument is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If r=0 there is nothing to prove, so assume r>0. Choose a representative of the germ and a polydisc centered at (0,0) on which it is represented by an absolutely convergent power series H(z,t)=sum_{alpha in N^r, beta in N^d} c_{alpha,beta} z^alpha t^beta. Shrinking the polydisc if necessary gives a common positive radius rho for all coordinates. Absolute convergence on every smaller closed polydisc permits termwise restriction and rearrangement below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: §1 no.1, printed p.3, definition of holomorphic germs by convergent power series; the absolute-convergence property is used in the agent-formulated proof."
+   }
+  },
+  {
+   "text": "Setting z=0 kills every monomial with alpha != 0, hence the pulled-back germ H(0,t) is represented by sum_beta c_{0,beta} t^beta. Therefore H(z,t)-H(0,t) is represented by the absolutely convergent subseries sum_{alpha != 0,beta} c_{alpha,beta} z^alpha t^beta.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: §1 no.1, printed p.3; restriction of a convergent power series to the coordinate subspace."
+   }
+  },
+  {
+   "text": "For each alpha != 0 let j(alpha) be the least index with alpha_j>0. For 1<=j<=r define H_j(z,t)=sum_{j(alpha)=j,beta} c_{alpha,beta} z^{alpha-e_j}t^beta. These series converge on a smaller polydisc: if all coordinates have modulus at most s<rho, the absolute value of each divided monomial is at most s^{-1}|c_{alpha,beta}|s^{|alpha|+|beta|}, and the latter terms have a convergent sum; taking a still smaller closed polydisc gives uniform absolute convergence. Thus each H_j defines a holomorphic germ at (0,0).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: §1 no.1, printed p.3; agent-formulated coefficient-division estimate for convergent multivariable power series."
+   }
+  },
+  {
+   "text": "Multiplying the j(alpha)=j summand of H_j by z_j recovers c_{alpha,beta}z^alpha t^beta. The index sets partition all alpha != 0, so absolute convergence justifies summing to obtain H(z,t)-H(0,t)=sum_{j=1}^r z_jH_j(z,t) as germs. If d=0 the same argument has no beta indices; if r=0 the initial empty case gives the required 0=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "WANTED locally: §1 no.1, printed p.3; final factorization and the stated edge cases."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED locally: Serre, GAGA, §1 no.1, printed p.3 (holomorphic germs and convergent power series). The coordinate-division proof is the agent-formulated multivariable power-series argument used for the smooth-coordinate proof of §2 no.6 Proposition 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A holomorphic germ in several complex variables vanishing on the coordinate subspace z=0 is a sum of z_j times holomorphic germs",
+   "results": "8 hits: MeromorphicNFAt, MeromorphicAt.iff_eventuallyEq_zpow_smul_analyticAt, AnalyticAt.analyticOrderAt_eq_natCast, toMeromorphicNFAt, MeromorphicAt, AnalyticAt.analyticOrderAt_ne_top, AnalyticAt.exists_eventuallyEq_pow_smul_nonzero_iff, AnalyticAt.meromorphicTrailingCoeffAt_of_ne_zero_of_eq_nhdsNE",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern one-variable meromorphic/analytic factorization, not joint multivariable coordinate division"
+  },
+  {
+   "tool": "loogle",
+   "query": "AnalyticAt, HasFPowerSeriesAt, coordinate division",
+   "results": "0 hits; query parser reported Unknown identifier coordinate",
+   "date": "2026-10-24",
+   "verdict": "no match (query parser rejected coordinate; no relevant declaration)"
+  },
+  {
+   "tool": "grep",
+   "query": "AnalyticAt.*(div|factor)|HasFPowerSeriesAt.*substitution [Analysis/Analytic]",
+   "results": "2 hits: Mathlib/Analysis/Analytic/Constructions.lean:244 (AnalyticAt.div_const), :1115 (AnalyticAt.div)",
+   "date": "2026-10-24",
+   "verdict": "no match: scalar division theorems do not state multivariable coordinate-ideal division"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hadamard lemma for a holomorphic germ vanishing on a coordinate subspace",
+   "results": "8 hits: HasFPowerSeriesAt.locally_ne_zero, HasFPowerSeriesAt.eventually_eq_zero, PowerSeries.HasSubst.of_constantCoeff_zero, natCast_le_analyticOrderAt_iff_iteratedDeriv_eq_zero, Complex.HadamardThreeLines.interpStrip_eq_of_zero, HasFPowerSeriesWithinOnBall.iteratedFDerivWithin_eq_zero, Filter.Germ.sliceLeft, HasFPowerSeriesAt.locally_zero_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: no declaration gives the required jointly holomorphic coordinate-division coefficients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-closed-ideal-local-quotient",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: Serre Proposition 11 uses Proposition 4 to identify the local analytic quotient for a closed embedding. Supporting local calculation: choose algebraic conormal equations, straighten them holomorphically, and divide by the normal coordinates.",
+   "via": [
+    "lem-sfb-analytic-closed-ideal-local-quotient",
+    "lem-sfb-analytic-closed-direct-image",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-holomorphic-coordinate-division",
+  "worker": "stage1",
+  "summary": "Filled the previously empty proof with the convergent multivariable power-series Hadamard argument: choose an absolutely convergent representative, restrict to z=0, divide each nonconstant monomial by its first nonzero coordinate, prove convergence on a smaller polydisc, and regroup. The statement and existing source/blueprint metadata are unchanged; no auxiliary nodes are needed. Small cases r=0, d=0 and monomials were checked explicitly. Mathlib searches found no joint coordinate-division theorem.",
+  "blueprint": "Supports the local analytic-coordinate calculation used in det-thm-sf-ctf-stability-direct-images proof (3), via the inherited supporting GAGA input and the smooth-coordinate proof of Serre Proposition 4."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-08bfac973",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-08bfac973 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged; review.md has the details. Scope: one commit, the item split plus its report, no new nodes, empty proof_deps. The live base still has the item unsplit with an empty proof, there is no repair note, and the only changed fields are proof, proof_origin, status, split_report and mathlib_searches. Statement, stmt_deps, source and blueprint are unchanged. Math: the statement is the parametric Hadamard lemma and is true. I tested z1z2+t, z2^2 e^t, a parameter-only H, r=0 and d=0. Steps 1-4 are a correct power-series argument and each is genuinely elementary. Step 1 needs only Abel's lemma. Step 3 picks the least index j with alpha_j>0 and uses the bound |c z^{alpha-e_j} t^beta| <= s^{-1}|c| s^{|alpha|+|beta|} with the M-test on the s-polydisc; a series centred at 0 that converges on that polydisc is holomorphic in the item's own sense. Step 4 regroups over the partition of alpha != 0. Consumer: lem-sfb-analytic-closed-ideal-local-quotient step 5 uses exactly this statement. Duplicates: holomorphic-germ-taylor-jets (no parameters, a different statement) and holomorphic-weierstrass-division (a different statement) are not duplicates, and no blueprint node states the lemma. Searches: four kinds recorded, and my own Mathlib grep found no multivariable coordinate division. Source: serre-gaga.pdf is absent, so the proof is correctly marked agent-written and the report has a WANTED line; no SGA is cited. Left as a maintainer note: GAGA should be added to LIST.md's wanted list, and the null blueprint.from.node was inherited from the O4 split that created the item, not introduced here."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.HolomorphicCoordinateDivision",
+  "declaration": "Complex.exists_holomorphic_coordinate_division",
+  "file": "lean/Sheaf/Analysis/Complex/HolomorphicCoordinateDivision.lean",
+  "statement": "theorem exists_holomorphic_coordinate_division (r d : ℕ) (H : Filter.Germ (𝓝 (0 : (Fin r → ℂ) × (Fin d → ℂ))) ℂ) (hH : ∃ f : ((Fin r → ℂ) × (Fin d → ℂ)) → ℂ, AnalyticAt ℂ f 0 ∧ Filter.Germ.ofFun f = H) : ∃ Hs : Fin r → Filter.Germ (𝓝 (0 : (Fin r → ℂ) × (Fin d → ℂ))) ℂ, (∀ j : Fin r, ∃ f : ((Fin r → ℂ) × (Fin d → ℂ)) → ℂ, AnalyticAt ℂ f 0 ∧ Filter.Germ.ofFun f = Hs j) ∧ H - H.compTendsto (fun p : (Fin r → ℂ) × (Fin d → ℂ) ↦ (0, p.2)) ((continuous_const.prodMk continuous_snd).tendsto 0) = ∑ j : Fin r, Filter.Germ.ofFun (fun p : (Fin r → ℂ) × (Fin d → ℂ) ↦ p.1 j) * Hs j",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46a525a6b",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Only the item's lean field changed (new module, existing:false, not a rebind). Clause-by-clause match: Germ (𝓝 0) ℂ on (Fin r→ℂ)×(Fin d→ℂ); holomorphic = has a representative with AnalyticAt ℂ f 0; H(0,t) = compTendsto along (z,t)↦(0,t), canonical; equality in the germ ring with sum over Fin r; no extra hypotheses or universes. Edge cases r=0, d=0, r=d=0 fine; the statement (parametric Hadamard lemma) is true. Independent H4 search (side-live Sheaf/WeilConjectures, Mathlib Analytic/Calculus) found no duplicate. Proof is sorry only, no definitions, docstrings carry source place, blueprint id and the 4 proof steps; lean.statement verbatim (script-checked); report has both sections; stmt_dep def-weil-field = ℂ; consumer AnalyticClosedIdealLocalQuotient step 5 uses exactly this statement. No recompile (no file changed)."
+ }
+}

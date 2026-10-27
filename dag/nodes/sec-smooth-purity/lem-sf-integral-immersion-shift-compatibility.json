@@ -1,0 +1,132 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralImmersionPullbackNormalization",
+  "group": "M3",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Proof, first paragraph: exact inverse images on completed integral coefficient modules and passage to derived categories; constructibility paragraph.",
+   "via": [
+    "lem-sf-integral-immersion-pullback-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pro-etale completed integral coefficient pullback preserves constant scalar sections and its derived inverse image is linear",
+   "results": "Eight hits concerning standard etale presentations and Kaehler differentials; none concerns the completed coefficient sheaf or its derived scalar action.",
+   "verdict": "No exact match; use the project coefficient constructions and Mathlib localization APIs.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\"",
+   "results": "CommShift, ofIso and NatTrans.CommShift provide abstract shift transport, not compatibility of these prescribed Roos and completion maps.",
+   "verdict": "No exact match for the prescribed normalization.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "immersion.*(linear|shift)|CoefficientNormalization",
+   "results": "Five Mathlib manifold-immersion hits, unrelated to scheme inverse image. Project search finds only the assigned Comparison clauses; no separate proof of these compatibilities.",
+   "verdict": "No duplicate; the existing lower comparison declarations are used.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image of sheaves of modules commutes with shifts on derived categories and is linear over constant scalar sections",
+   "results": "Eight hits, including SheafOfModules.pullback, DerivedCategory.instLinearShiftFunctorInt and CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. These give the abstract pullback and ordinary derived-shift APIs but do not assert the project completed-coefficient scalar normalization or compatibility of its prescribed Roos comparisons.",
+   "verdict": "Use the existing Mathlib exact derived-functor and linearity APIs in the assembly; the two normalization compatibilities remain separate strictly smaller statements.",
+   "date": "2026-10-26"
+  }
+ ],
+ "id": "lem-sf-integral-immersion-shift-compatibility",
+ "kind": "lemma",
+ "title": "The fixed integral and completion comparisons share the normalized completed shift",
+ "statement": "Fix l,E and an immersion g:Y→X. Supply the published IntegralCompletedComparison.Comparison C, completeness of back(K) for every integral constructible K, a natural isomorphism gamma from the integral functor to the strict completed functor with the exact normalization formula of [def-sf-integral-immersion-pullback-normalization-data], and a natural isomorphism c from ordinary to completed whose hom is the actual completion unit. There exists one coherent shift structure on the ambient strict completed functor for which gamma and c both commute with all integer shifts, using C.derivedShift on integral pullback and the canonical termwise ordinary shift. The isomorphisms, their naturality and normalization are hypotheses, not conclusions; exactness, linearity and constructibility are not asserted.",
+ "stmt_deps": [
+  "def-sf-integral-immersion-pullback-normalization-data",
+  "def-pod-integral-completed-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Immersion module inverse image is exact and preserves countable products. Exact products compute the strict derived limit by the normalized Roos cone. The quotient augmentation has coordinates (0,(x mod t^n)_n), and the canonical shift sends (y,x) to ((-1)^r y,x). Thus the augmentation intertwines every integer shift, with the zero and addition coherences.",
+   "uses": [
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-a1-normalized-roos-shift-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this single shift along the exact coefficient restrictions. The sectionwise-identity round trip commutes with termwise shifts. The preceding normalized augmentation square gives c compatibility. Compose C.shifts with the unit-normalized strict/reflector comparison, represented by the same quotient maps and signed Roos shift, and the round-trip square. This gives gamma compatibility for precisely the same completed shift. The hypotheses identify the actual comparison maps, so no arbitrary isomorphism is substituted.",
+   "uses": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "def-pod-integral-completed-comparison-data",
+    "def-sf-integral-immersion-pullback-normalization-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-a1-normalized-roos-shift-comparison",
+  "lem-a1-integral-pullback-completed-comparison",
+  "def-pod-integral-completed-comparison-data",
+  "def-sf-integral-immersion-pullback-normalization-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941; explicit signed Roos calculation in original normalization node step 5."
+ },
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA and 099N; sites-cohomology.tex Tag 0941; original normalization proof step 5."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralImmersionShiftCompatibility",
+  "file": "lean/Sheaf/Paper/IntegralImmersionShiftCompatibility.lean",
+  "declaration": "WeilConjectures.IntegralImmersionNormalization.immersion_comparison_shifts",
+  "statement": "theorem immersion_comparison_shifts\n    (C : IntegralCompletedComparison.Comparison l E g)\n    (hc : ∀ K : sfIntegralConstructibleCategory l E X,\n      IntegralCompletedComparison.Complete l E ((back l E X).obj K.obj))\n    (γ : (sfIntegralConstructible l E X).ι ⋙ integralDerivedPullback l E g ≅\n      (sfIntegralConstructible l E X).ι ⋙ completed l E g)\n    (hγ : ∀ K : sfIntegralConstructibleCategory l E X,\n      γ.hom.app K =\n        (integralDerivedPullback l E g).map ((roundTrip l E X).inv.app K.obj) ≫\n        (C.gamma ((back l E X).obj K.obj) (hc K)).hom ≫\n        (ImmersionCompletedPullback.transport l E Y).map\n          ((IntegralCompletedComparison.towerIso l E g).inv.app\n            ⟨(back l E X).obj K.obj, C.intrinsic ((back l E X).obj K.obj) (hc K)⟩))\n    (c : (sfIntegralConstructible l E X).ι ⋙ ordinary l E g ≅\n      (sfIntegralConstructible l E X).ι ⋙ completed l E g)\n    (hc' : c.hom = whiskerLeft (sfIntegralConstructible l E X).ι\n      (completionComparison l E g)) :\n    ∃ sc : (completed l E g).CommShift ℤ,\n      (fun [_si : (integralDerivedPullback l E g).CommShift ℤ]\n        [_sc : (completed l E g).CommShift ℤ] ↦ NatTrans.CommShift γ.hom ℤ)\n          (_si := C.derivedShift) (_sc := sc) ∧\n      (fun [_sc : (completed l E g).CommShift ℤ] ↦ NatTrans.CommShift c.hom ℤ)\n        (_sc := sc)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28c6d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070255-L-3512892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-28c6d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070255-L-3512892",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof, data-module move (verbatim diff vs published item), two new sorry lemmas and their nodes against node lem-sf-integral-immersion-pullback-normalization, IntegralCompletedComparison.Comparison and the importer compiles"
+ }
+}

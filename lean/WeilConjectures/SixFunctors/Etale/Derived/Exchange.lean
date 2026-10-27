@@ -84,8 +84,6 @@ open Scheme
 
 namespace Etale
 
-attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
-
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
 section Exchange
@@ -186,9 +184,6 @@ theorem hasProjectionFormula_of_boundedConstructible [Finite Λ]
     HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
   hasProjectionFormula_of_finite Λ f K L
 
-attribute [-instance]
-  CompactificationUpperShriek.isLeftAdjoint_rightDerivedLowerStar_of_isProper
-  CompactificationUpperShriek.isLeftAdjoint_rightDerivedLowerShriek in
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction
 
@@ -251,13 +246,9 @@ finite coefficients. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite [Finite Λ]
     (J : Ideal Λ) :
     Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
-      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) := by
-  exact ⟨Functor.isoWhiskerLeft _
-      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J Y)) ≪≫
-    asIso (rightDerivedLowerShriekReductionModIdealMap Λ J
-      (HasCompactification.compactification f)) ≪≫
-    Functor.isoWhiskerRight
-      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J X).symm) _⟩
+      reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=
+  ⟨asIso (rightDerivedLowerShriekReductionModIdealMap Λ J
+    (HasCompactification.compactification f))⟩
 
 omit [HasCompactification f] in
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
@@ -273,24 +264,12 @@ on `Λ/J`. Together with the associativity of `⊗^L` and
 makes the comparison square of the blueprint commute. -/
 theorem nonempty_iso_reductionModIdeal_leftDerivedUpperStar (J : Ideal Λ) :
     Nonempty (reductionModIdeal Λ Y J ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅
-      L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ X J) := by
-  exact ⟨Functor.isoWhiskerRight
-      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J Y)) _ ≪≫
-    leftDerivedUpperStarReductionModIdealIso Λ J f ≪≫
-    Functor.isoWhiskerLeft _
-      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J X).symm)⟩
+      L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ X J) :=
+  ⟨leftDerivedUpperStarReductionModIdealIso Λ J f⟩
 
 end Projection
 
 section LowerStar
-
-private theorem principalIdeal_property (P : Ideal Λ → Prop) (hbot : P ⊥)
-    (hpow : ∀ π : Λ, π ≠ 0 → P (Ideal.span {π} ^ 1))
-    {J : Ideal Λ} (hJ : J.IsPrincipal) : P J := by
-  obtain ⟨π, rfl⟩ := hJ.principal
-  by_cases hπ : π = 0
-  · simpa only [hπ, Ideal.span_singleton_zero] using hbot
-  · simpa only [pow_one] using hpow π hπ
 
 /-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
 ordinary direct image. Used in blueprint `sk-lem-finite`.
@@ -323,17 +302,19 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDo
     (J : Ideal Λ) (hJ : J.IsPrincipal) :
     Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ Y J ≅
       reductionModIdeal Λ X J ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) := by
-  have : IsIso (rightDerivedLowerStarReductionModIdealMap Λ J f) :=
-    principalIdeal_property Λ
-      (fun I ↦ IsIso (rightDerivedLowerStarReductionModIdealMap Λ I f))
-      (isIso_rightDerivedLowerStarReductionModIdealMap_bot Λ f)
-      (fun π hπ ↦ isIso_rightDerivedLowerStarReductionModIdealMap_span_pow
-        (mem_nonZeroDivisors_of_ne_zero hπ) 1 f) hJ
-  exact ⟨Functor.isoWhiskerLeft _
-      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J Y)) ≪≫
-    asIso (rightDerivedLowerStarReductionModIdealMap Λ J f) ≪≫
-    Functor.isoWhiskerRight
-      (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J X).symm) _⟩
+  obtain ⟨π, rfl⟩ := hJ.principal
+  by_cases hπ : π = 0
+  · have hbot : (Submodule.span Λ {π} : Ideal Λ) = ⊥ := by
+      rw [hπ]
+      exact Ideal.span_singleton_eq_bot.mpr rfl
+    rw [hbot]
+    have := isIso_rightDerivedLowerStarReductionModIdealMap_bot Λ f
+    exact ⟨asIso (rightDerivedLowerStarReductionModIdealMap Λ ⊥ f)⟩
+  · have hpow : (Submodule.span Λ {π} : Ideal Λ) = Ideal.span {π} ^ 1 := (pow_one _).symm
+    rw [hpow]
+    have := isIso_rightDerivedLowerStarReductionModIdealMap_span_pow
+      (mem_nonZeroDivisors_of_ne_zero hπ) 1 f
+    exact ⟨asIso (rightDerivedLowerStarReductionModIdealMap Λ (Ideal.span {π} ^ 1) f)⟩
 
 /-- **`Rf_!` commutes with reduction modulo a principal ideal of a domain.** This is the case of
 `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek` where `Λ/J` is a
@@ -347,22 +328,11 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal (f
       reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) := by
   let c := HasCompactification.compactification f
   obtain ⟨e⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerStar Λ c.g J hJ
-  let eoTensor :
-      derivedTensorRight (ModuleCat.{u + 1} Λ) X
-          (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J))) ⋙
-        D((c.i)_!open[ModuleCat.{u + 1} Λ]) ≅
-      D((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
-        derivedTensorRight (ModuleCat.{u + 1} Λ) c.Z
-          (constantSingle (ModuleCat.{u + 1} Λ) c.Z (ModuleCat.of Λ (Λ ⧸ J))) :=
+  let eo : reductionModIdeal Λ X J ⋙ D((c.i)_!open[ModuleCat.{u + 1} Λ]) ≅
+      D((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ c.Z J :=
     Functor.isoWhiskerRight ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).flip.mapIso
         (leftDerivedUpperStarSingleConstantSheafIso _ c.i (ModuleCat.of Λ (Λ ⧸ J)))).symm _ ≪≫
       derivedTensorRightCompOpenImmersionLowerShriekIso _ c.i _
-  let eo : reductionModIdeal Λ X J ⋙ D((c.i)_!open[ModuleCat.{u + 1} Λ]) ≅
-      D((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ c.Z J :=
-    Functor.isoWhiskerRight
-        (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J X)) _ ≪≫
-      eoTensor ≪≫ Functor.isoWhiskerLeft _
-        (eqToIso (reductionModIdeal_eq_derivedTensorRight Λ J c.Z).symm)
   exact ⟨Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ e ≪≫
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eo.symm _ ≪≫
     Functor.associator _ _ _⟩

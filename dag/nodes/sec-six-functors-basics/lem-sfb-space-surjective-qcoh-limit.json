@@ -1,0 +1,360 @@
+{
+ "id": "lem-sfb-space-surjective-qcoh-limit",
+ "kind": "statement",
+ "title": "Limits and affine sections of surjective quasi-coherent towers",
+ "statement": "Use algebraic spaces over a scheme $S$ and their small etale sites and structure sheaves [def-trf-algebraic-space, def-pc-scheme], in the universes of [def-weil-size-convention]. Module sheaves and quasi-coherence are [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module]. Write $D(\\mathcal O_Z)$ for the derived category of module sheaves [def-weil-abstract-derived-category] and $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for its full subcategory of complexes with quasi-coherent cohomology sheaves. Let $(\\mathcal M_n)_{n\\ge1}$ be an inverse sequence of quasi-coherent $\\mathcal O_Z$-modules with surjective transition morphisms, on an algebraic space $Z$ over $S$. Let $\\mathcal M=\\varprojlim_n\\mathcal M_n$ be the sectionwise inverse limit [def-pur-sheaf-inverse-limit]. For the right derived inverse limit of this strict tower, the canonical map $\\mathcal M[0]\\to R\\varprojlim_n\\mathcal M_n[0]$ is an isomorphism in $D(\\mathcal O_Z)$ [def-weil-derived-limit]; the inverse limit need not be quasi-coherent. For every affine scheme $U$ etale over $Z$, the maps $\\mathcal M_{n+1}(U)\\to\\mathcal M_n(U)$ are surjective, $H^p(U_{\\mathrm{et}},\\mathcal M_n|_U)=0$ and $H^p(U_{\\mathrm{et}},\\mathcal M|_U)=0$ for $p>0$. Here $H^p$ denotes the right derived functors of sections on the indicated slice etale site [def-weil-pbc-sites-and-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D3E (lemma-Rlim-quasi-coherent), (2), (3), and its proof for affine etale objects (surjectivity on sections and affine acyclicity)."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-base-change-comparisons",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Take $\\mathcal B$ to be the affine schemes etale over $Z$. Every scheme object $V\\to Z$ has an affine open covering, whose members are still etale over $Z$, so this collection covers every object, with no quasi-compactness assumption on $Z$. On localization at $U\\to Z$ the ringed etale site and structure sheaf are those of $U$: an object is a scheme over $U$ with its given composite to $Z$, and the coverings and ring sections agree. Restrict the local free presentations defining quasi-coherence to this localized site. Thus every $\\mathcal M_n|_U$ is quasi-coherent. Restriction on module sheaves is exact, so the transition maps remain epimorphisms on $U_{\\mathrm{et}}$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-space-quasi-coherent-module",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3E, proof, choice of the collection of affine etale objects."
+   }
+  },
+  {
+   "text": "All these sites have small skeletons in the fixed coefficient universe. Their module categories are Grothendieck abelian and hence have enough injectives. Apply the ringed-site module/abelian evaluation comparison, and the comparison with evaluation at the final object of a slice. Consequently the module cohomology over $U$ in the item agrees with the abelian cohomology of the underlying sheaf on $U_{\\mathrm{et}}$. These comparisons apply to arbitrary structure-ring sheaves, not merely constant coefficient rings.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-pe-ringed-site-derived-evaluation-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FD (module/abelian cohomology) and 03F3 (cohomology of a localization)."
+   }
+  },
+  {
+   "text": "For any quasi-coherent $E$ on $U_{\\mathrm{et}}$, the Zariski/etale quasi-coherent equivalence writes $E\\simeq F_{\\mathrm{et}}$ for a quasi-coherent Zariski module $F$, preserving its sections on opens. The natural cohomology comparison identifies $H^p(U_{\\mathrm{et}},E)$ with $H^p(U,F)$. Since $U$ is affine, affine vanishing gives zero for $p>0$. Apply this first to each $E=\\mathcal M_n|_U$; it will also apply to the transition kernels in the next step.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3E, proof, first vanishing assertion; spaces-cohomology.tex Section higher-direct-image; descent.tex Tag 03DW; coherent.tex Tag 01XB."
+   }
+  },
+  {
+   "text": "Fix $n$ and affine etale $U\\to Z$. Set $E=\\mathcal M_{n+1}|_U$, $G=\\mathcal M_n|_U$ and $K=\\ker(E\\to G)$. The scheme-etale kernel lemma makes $K$ quasi-coherent. The restricted transition is epic by step 1, so $0\\to K\\to E\\to G\\to0$ is short exact in module sheaves. Its derived-section exact sequence contains $E(U)\\to G(U)\\to H^1(U,K)$. The last term vanishes by step 3, proving $\\mathcal M_{n+1}(U)\\twoheadrightarrow\\mathcal M_n(U)$. No assumption of surjectivity on all sections was substituted for the assumed surjectivity of the transition morphism.",
+   "uses": [
+    "lem-trf-scheme-etale-quasi-coherent-kernel",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3E, proof, assertion of surjectivity of affine sections; descent.tex Tag 06VE and sites-cohomology.tex long exact cohomology sequence."
+   }
+  },
+  {
+   "text": "Fix $U\\in\\mathcal B$ and write $A_n=\\mathcal M_n(U)$ with transitions $f_n:A_{n+1}\\to A_n$, surjective by step 4. By the cited Roos computation, $R^1\\varprojlim_nA_n\\cong\\operatorname{coker}(1-s)$, where $(1-s)(x_n)_n=(x_n-f_n(x_{n+1}))_n$ on $\\prod_nA_n$. We show $1-s$ is surjective. Given $(y_n)_n\\in\\prod_nA_n$, put $x_1=0$ and, once $x_n$ is chosen, choose $x_{n+1}\\in A_{n+1}$ with $f_n(x_{n+1})=x_n-y_n$, possible since $f_n$ is surjective. Then $x_n-f_n(x_{n+1})=y_n$ for every $n$, so $(1-s)(x_n)_n=(y_n)_n$. Hence $R^1\\varprojlim_n\\mathcal M_n(U)=0$. This uses no finiteness of the section groups.",
+   "uses": [
+    "lem-pc-derived-limit-roos-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW (lemma-compute-Rlim), proof of clause (3) specialized to surjective transition maps; Roos computation of R^1 lim as coker(1-s)."
+   }
+  },
+  {
+   "text": "Apply the covering-collection criterion to $(Z_{\\mathrm{et}},\\mathcal O_Z)$ and $\\mathcal B$. Its covering hypothesis is step 1, its positive-degree stage acyclicity is step 3, and its vanishing $R^1\\lim$ hypothesis is step 5. Its ordinary limit is exactly $\\mathcal M$, since module-sheaf limits are sectionwise. It gives the asserted natural isomorphism $\\mathcal M[0]\\to R\\varprojlim_n\\mathcal M_n[0]$ and $H^p(U_{\\mathrm{et}},\\mathcal M|_U)=0$ for every affine etale $U$ and $p>0$. Together with steps 3 and 4 these are all positive assertions of the item; none asserts that this limit is quasi-coherent.",
+   "uses": [
+    "lem-sfb-site-basis-inverse-limit-acyclic",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3E, final sentence of proof, applying sites-cohomology.tex Tag 0BKY."
+   }
+  },
+  {
+   "text": "For the warning, take $Z=\\operatorname{Spec}k[t]$ over a field $k$, and let $\\mathcal M_n=(\\widetilde{k[t]/(t^n)})_{\\mathrm{et}}$. The tilde section formula gives global sections $k[t]/(t^n)$ and zero sections on $D(t)$; the etale equivalence preserves these open sections. The quotient transitions are epimorphisms: tilde preserves cokernels by its adjunction, and passage to the etale site is exact. Thus $\\mathcal M(Z)=\\lim_n k[t]/(t^n)$ is the module of formal coefficient sequences $k[[t]]$, whereas $\\mathcal M(D(t))=0$. If $\\mathcal M$ were quasi-coherent, its Zariski restriction would be quasi-coherent and affine section base change would give $\\mathcal M(D(t))=k[[t]][1/t]$. The latter is nonzero: no power of $t$ kills the series $1$. This contradiction proves the warning without any claim of quasi-coherence for infinite products.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Warning immediately before Tag 0D3E; explicit agent example using schemes.tex tilde section formulas and descent.tex Tag 06VE."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "pqf-lem-affine-vanishing",
+  "lem-trf-scheme-etale-quasi-coherent-kernel",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-sfb-site-basis-inverse-limit-acyclic",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D3E, proof of (2) and (3), with the explicitly cited Tag 0BKY criterion. Step 7 is an agent-written example for the preceding warning."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Surjective inverse sequences of quasi coherent modules on an algebraic space have no higher derived limit and their affine etale sections are surjective and acyclic",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C]\\n  {F : CategoryTheory.Functor ℕᵒᵖ (CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) (Type v))}\\n  {c : CategoryTheory.Limits.Cone F} (hc : CategoryTh\", \"doc\": \"In the coherent topology on a precoherent category, if a morphism between sheaves is locally surjective, then the projection at the zeroth component is also locally surjective.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.AffineZariskiSite}, Function.Surjective U.presieveOfSections\", \"doc\": \"For any object $U$ in the affine Zariski site of a scheme $X$, the canonical map from the presieve of sections over $U$ to the set of sections of the structure sheaf over $U$ is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (s : ↑(c.pt.presheaf.obj (O\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits and coherent-topology epimorphism results do not give quasi-coherent affine acyclicity or the derived inverse-limit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of surjective quasi coherent sheaf towers equals the ordinary inverse limit",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C]\\n  {F : CategoryTheory.Functor ℕᵒᵖ (CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) (Type v))}\\n  {c : CategoryTheory.Limits.Cone F} (hc : CategoryTh\", \"doc\": \"In the coherent topology on a precoherent category, if a morphism between sheaves is locally surjective, then the projection at the zeroth component is also locally surjective.\"}\n  {\"name\": \"SheafOfModules.createsLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {R : CategoryTheory.Sheaf J RingCat} →\\n            (F : CategoryTheory.Functor D (SheafOfModules R\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$ and $R$ a sheaf of rings on $\\\\mathcal{C}$. The forgetful functor from the category of sheaves of modules over $R$ to the category of pr\"}\n  {\"name\": \"SheafOfModules.evaluationPreservesLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the evaluation functor at $X$ preserves limits of diagrams in the category of sheaves of modules over a sheaf of rings $R$. This \"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLimitMultiforkOfIsLimit\", \"module\": \"Mathlib/CategoryTheory/Sites/Limits\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type w} →\\n        [inst_1 : CategoryTheory.Category.{w', w} D] →\\n          {K : Type z} →\\n            [inst_2 : CategoryTheory.Category.{z', z} K] →\\n              [CategoryTheory\", \"doc\": \"Given a sheaf $ F $ on a category $ \\\\mathcal{C} $ with values in $ \\\\mathcal{D} $, a cone $ E $ over $ F $ composed with the sheaf-to-presheaf inclusion, and a covering sieve $ W $ on an object $ X $, \"}\n  {\"name\": \"PresheafOfModules.isSheaf_of_isLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  {F : CategoryTheory.Functor D (PresheafOfModules R)}\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂\", \"doc\": \"If $\\\\mathcal{C}$ is a category equipped with a Grothendieck topology $J$, and $F: \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R)$ is a diagram of presheaves of modules such that each $F(j)$ is a sheaf wi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits and coherent-topology epimorphism results do not give quasi-coherent affine acyclicity or the derived inverse-limit assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Limits.IsLimit",
+   "sub": "",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.isSheaf_of_isLimit\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w} [CategoryTheory.Category.{w', w} D] {K : Type z} [CategoryTheory.Category.{z', z} K] [CategoryTheory.Limits.HasLimitsOfShape K D] (F : CategoryTheory.Functor K (CategoryTheory.Sheaf J D)) (E : C\", \"doc\": \"If `E` is a cone which is a limit on the level of presheaves,\\nthen the limit presheaf is again a sheaf.\\n\\nThis is used to show that the forgetful functor from sheaves to presheaves creates limits.\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLimitMultiforkOfIsLimit\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type w} [CategoryTheory.Category.{w', w} D] {K : Type z} [CategoryTheory.Category.{z', z} K] [CategoryTheory.Limits.HasLimitsOfShape K D] (F : CategoryTheory.Functor K (CategoryTheory.Sheaf J D)) (E : C\", \"doc\": \"If `E` is a cone of shape `K` of sheaves, which is a limit on the level of presheaves,\\nthis definition shows that the limit presheaf satisfies the multifork variant of the sheaf\\ncondition, at a given \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.isLimitMultifork\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {A : Type u_1} [CategoryTheory.Category.{v_1, u_1} A] {J : CategoryTheory.GrothendieckTopology C} {S : C} (E : J.OneHypercover S) (F : CategoryTheory.Sheaf J A) : CategoryTheory.Limits.IsLimit (E.multifork F.obj)\", \"doc\": \"If `E : J.OneHypercover S` and `F : Sheaf J A`, then `F.obj (op S)` is\\na multiequalizer of suitable maps `F.obj (op (E.X i)) ⟶ F.obj (op (E.Y j))`\\ninduced by `E.p₁ j` and `E.p₂ j`.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.CoversTop.ext\", \"module\": \"Mathlib.CategoryTheory.Sites.CoversTop.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'} [CategoryTheory.Category.{v', u'} A] {I : Type u_1} {Y : I → C} (hY : J.CoversTop Y) (F : CategoryTheory.Sheaf J A) {c : CategoryTheory.Limits.Cone F.obj} (hc : CategoryTheory.Limits.IsLimit c)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.OneHypercoverDenseData.essSurj.presheafObjIsLimit\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.OneHypercoverDense\", \"type\": \" {C₀ : Type u₀} {C : Type u} [CategoryTheory.Category.{v₀, u₀} C₀] [CategoryTheory.Category.{v, u} C] {F : CategoryTheory.Functor C₀ C} {J₀ : CategoryTheory.GrothendieckTopology C₀} {J : CategoryTheory.GrothendieckTopology C} {A : Type u'} [CategoryTheory.Category.{v', u'} A] (data : (X : C) → F.One\", \"doc\": \"The multifork `presheafObjMultifork` is a limit.\"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.SequentialLimit\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preregular C] [CategoryTheory.FinitaryExtensive C] {F : CategoryTheory.Functor ℕᵒᵖ (CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) (Type v))} {c : CategoryTheory.Limits.Cone F} (hc : CategoryTheory.Limits.IsLimit c) (hF : ∀ (\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.SequentialLimit\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preregular C] [CategoryTheory.FinitaryExtensive C] [CategoryTheory.Limits.HasLimitsOfShape ℕᵒᵖ C] (h : ∀ (G : CategoryTheory.Functor ℕᵒᵖ C), (∀ (n : ℕ), CategoryTheory.EffectiveEpi (G.map (CategoryTheory.homOfLE ⋯).op)) → CategoryTheor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLimitConeΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂} [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] [CategoryTheory.HasGlobalSectionsFunctor J A] (F : CategoryTheory.Sheaf J A) : CategoryTheory.Limits.IsLimit F.coneΓ\", \"doc\": \"The global sections cone `Sheaf.coneΓ` is limiting - that is, global sections are limits even\\nwhen not all limits of shape `Cᵒᵖ` exist in `A`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits and coherent-topology epimorphism results do not give quasi-coherent affine acyclicity or the derived inverse-limit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]lim|[Dd]erived[Ll]imit|[Qq]uasi[Cc]oherent",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"415\", \"text\": \"section IsQuasicoherent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"465\", \"text\": \"instance : (tilde M).IsQuasicoherent :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"466\", \"text\": \"  (presentationTilde.{u} _ .univ (by simp) _ (Submodule.span_eq _)).isQuasicoherent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"468\", \"text\": \"instance : ((tilde.functor R).obj M).IsQuasicoherent :=\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits and coherent-topology epimorphism results do not give quasi-coherent affine acyclicity or the derived inverse-limit assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective inverse sequences of quasi coherent modules on an algebraic space have no higher derived limit and their affine etale sections are surjective and acyclic",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure, which is established via sheaf composition, weak she\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": HasLimits AffineScheme.{u}\", \"doc\": \"The category of affine schemes has all limits, meaning that for every diagram in this category, the limit exists within it.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits and coherent-topology epimorphism results do not give quasi-coherent affine acyclicity or the derived inverse-limit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective inverse towers of quasi coherent modules on an algebraic space have acyclic inverse limit on every affine etale object",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C]\\n  {F : CategoryTheory.Functor ℕᵒᵖ (CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) (Type v))}\\n  {c : CategoryTheory.Limits.Cone F} (hc : CategoryTh\", \"doc\": \"In the coherent topology on a precoherent category, if a morphism between sheaves is locally surjective, then the projection at the zeroth component is also locally surjective.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent module inverse sequence surjective transitions ordinary limit computes homotopy limit",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C]\\n  {F : CategoryTheory.Functor ℕᵒᵖ (CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) (Type v))}\\n  {c : CategoryTheory.Limits.Cone F} (hc : CategoryTh\", \"doc\": \"In the coherent topology on a precoherent category, if a morphism between sheaves is locally surjective, then the projection at the zeroth component is also locally surjective.\"}\n  {\"name\": \"LightCondensed.epi_π_app_zero_of_epi\", \"module\": \"Mathlib/Condensed/Light/Epi\", \"type\": \"∀ (R : Type u_1) [inst : Ring R] {F : CategoryTheory.Functor ℕᵒᵖ (LightCondMod R)} {c : CategoryTheory.Limits.Cone F}\\n  (hc : CategoryTheory.Limits.IsLimit c),\\n  (∀ (n : ℕ), CategoryTheory.Epi (F.map (CategoryTheory.homOfLE ⋯).op)) → CategoryTheory.Epi (c.π.app (Opposite.op 0))\", \"doc\": \"In the category of light condensed modules, if the zeroth projection morphism of a cone is an epimorphism, then it satisfies the epimorphism condition: for any pair of morphisms with the same domain, \"}\n  {\"name\": \"PresheafOfModules.isLimitLimitCone\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n      {J : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} J] →\\n          (F : CategoryTheory.Functor J (PresheafOfModules R)) →\\n            [inst_2 :\\n                ∀ (X : C\", \"doc\": \"The limit cone for a diagram in the category of presheaves of modules over a presheaf of rings is a limit, as each evaluation at an object in the base category is a limit in the corresponding module c\"}\n  {\"name\": \"SheafOfModules.createsLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {R : CategoryTheory.Sheaf J RingCat} →\\n            (F : CategoryTheory.Functor D (SheafOfModules R\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$ and $R$ a sheaf of rings on $\\\\mathcal{C}$. The forgetful functor from the category of sheaves of modules over $R$ to the category of pr\"}\n  {\"name\": \"CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux\", \"module\": \"Mathlib/CategoryTheory/Limits/Types/Images\", \"type\": \"∀ {F : CategoryTheory.Functor ℕᵒᵖ (Type u)},\\n  (∀ (n : ℕ), Function.Surjective (F.map (CategoryTheory.homOfLE ⋯).op)) →\\n    Function.Surjective ((CategoryTheory.Limits.Types.limitCone F).π.app (Opposite.op 0))\", \"doc\": \"The projection map from the limit cone of a functor $ F $ to the zeroth component is surjective, i.e., $ \\\\pi_0 : \\\\lim F \\\\to F(0) $ is a surjective function.\"}\n  {\"name\": \"instHasLimitsCondensedMod\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.Limits.HasLimits (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ has all limits, meaning that every diagram in this category admits a limit object within the category.\"}\n  {\"name\": \"CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map\", \"module\": \"Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_2} {CC : C → Type v}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [CategoryTheory.Limits.PreservesLimitsOfShape ℕᵒᵖ (CategoryTheory.forget C)] {F : CategoryTheor\", \"doc\": \"In a concrete category where the forgetful functor preserves limits of shape $\\\\mathbb{N}^{\\\\text{op}}$, if each morphism in an inverse system indexed by $\\\\mathbb{N}$ is surjective, then the projection \"}\n  {\"name\": \"PresheafOfModules.evaluationJointlyReflectsLimits\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n      {J : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} J] →\\n          (F : CategoryTheory.Functor J (PresheafOfModules R)) →\\n            [∀ (X : Cᵒᵖ),\\n                  Sm\", \"doc\": \"Given a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $, a cone $ c $ over a functor $ F: \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R) $ is a limit if and only if its evaluation at every object $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "sub": "",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) : Prop\", \"doc\": \"A sheaf of modules is quasi-coherent if it is locally the cokernel of a\\nmorphism between coproducts of copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) [M.IsFinitePr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} {inst✝¹ : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat} {inst✝² : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat} {M : Sheaf\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (nonempty_qua\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentObjIsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : (SheafOfModules.isQuasicoherent\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.Presentation.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Limits.HasBinaryProducts C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C), CategoryTheory.HasSheafi\", \"doc\": \"If a sheaf of `R`-modules `M` has a presentation, then `M` is quasi-coherent.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent_over\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C) (Y : CategoryTheory.Over X), \", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.of_coversTop\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C) (Y : CategoryTheory.Over X), CategoryTheory.HasSheafify ((J.over X\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {D : Type u₂} [CategoryTheory.Catego\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent_pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {D : Type u₂} [CategoryTheory.Catego\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsLocallyFree\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) [h : M.IsLocallyF\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|derivedLimit|derived_limit|IsQuasicoherent",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"415\", \"text\": \"section IsQuasicoherent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"465\", \"text\": \"instance : (tilde M).IsQuasicoherent :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"466\", \"text\": \"  (presentationTilde.{u} _ .univ (by simp) _ (Submodule.span_eq _)).isQuasicoherent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"468\", \"text\": \"instance : ((tilde.functor R).obj M).IsQuasicoherent :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"line\": \"469\", \"text\": \"  inferInstanceAs <| (tilde M).IsQuasicoherent\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective inverse sequence quasi coherent modules algebraic spaces affine etale cohomology vanishing",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] {i : I} {U : (D.obj i).Opens} (hU : IsCompact (X := D.obj i) U)\\n  (s : Γ(D.obj i, U)) (hs : (c.π.app i).app U s = 0) : ∃ (j : I) (f : j ⟶ i), (D.map f).app U s = 0\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"Function.Exact.linearEquivOfSurjective_symm_apply\", \"module\": \"Mathlib.Algebra.Exact\", \"type\": \"(h : Function.Exact f g) (hg : Function.Surjective g) (x : N) :\\n  (h.linearEquivOfSurjective hg).symm (g x) = Submodule.Quotient.mk x\", \"doc\": \"Given an exact sequence of modules with surjective map $ g $, the inverse of the induced linear equivalence evaluated at $ g(x) $ equals the equivalence class of $ x $ in the quotient module $ N / \\\\te\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \"{U : X.AffineZariskiSite} : Function.Surjective (presieveOfSections U)\", \"doc\": \"For any object $U$ in the affine Zariski site of a scheme $X$, the canonical map from the presieve of sections over $U$ to the set of sections of the structure sheaf over $U$ is surjective.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary limits, quasi-coherence definitions, scheme limits or special coherent/condensed topology results do not assert this ringed-site derived-limit criterion or the algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-square-zero-effectivity",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3E (lemma-Rlim-quasi-coherent), (2), (3), and its proof for affine etale objects (surjectivity on sections and affine acyclicity).",
+   "via": [
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-surjective-qcoh-limit",
+  "worker": "stage1",
+  "summary": "Kept all mathematical clauses; added explicit definition citations for inverse limits and cohomology. Verify affine etale covering collection, module/abelian cohomology normalization, affine acyclicity, kernel-based surjectivity and Mittag-Leffler vanishing before applying one new generic ringed-site criterion (0BKY). Give an explicit non-quasi-coherent limit example.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3E (lemma-Rlim-quasi-coherent), (2), (3), and its proof for affine etale objects (surjectivity on sections and affine acyclicity). Realizes this inherited supporting-input place by the proof of Tag 0D3E. No unit route is replaced. blueprint_refs.py ancestor returns None for the existing broken ancestor chain; retained that computed value.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic Sheaves of modules on a small ringed site are Grothendieck abelian input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic Module and abelian cohomology over an object of a ringed site agree input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic Derived module evaluation is abelian cohomology on the slice input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-etale-zariski-qcoh-comparison",
+    "why": "Generic Etale and Zariski cohomology of quasi-coherent modules agree, naturally in the module input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic Vanishing of higher cohomology on affines input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-scheme-etale-quasi-coherent-kernel",
+    "why": "Generic Kernels of quasi-coherent modules on the small etale site of a scheme input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic Long exact sequence of the right derived functors of a left exact functor input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-derived-limit-roos-abelian-groups",
+    "why": "Generic Roos computation R^1 lim = coker(1-s) for towers of abelian groups, used to show surjective section towers have vanishing R^1 lim in the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-affine-section-base-change",
+    "why": "Generic Sections of a quasi-coherent module on nested affine opens satisfy tensor base change input for the affine-basis proof of Stacks 0D3E; no other node of this unit states this input, and this does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "pqf-lem-affine-vanishing",
+  "lem-trf-scheme-etale-quasi-coherent-kernel",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-weil-pbc-quasi-coherent-affine-section-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-7b3adc9f1",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-7b3adc9f1 (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps), the new node lem-sfb-site-basis-inverse-limit-acyclic, all cited statements, Stacks 0D3E (spaces-perfect lemma-Rlim-quasi-coherent with its preceding warning and its proof) and 0BKY (sites-cohomology lemma-inverse-limit-is-derived-limit); both tags checked in tags/tags. The item matches 0D3E (2),(3) for M_n[0]. Its only statement change pins the derived limit to the functorial Rlim, which is not a weakening. Steps 1-4 hold: the affine étale objects cover every object; module and abelian cohomology agree through the two ringed-site comparisons, valid for arbitrary ring sheaves; affine acyclicity comes from the trf Zariski/étale equivalence, lem-sc-etale-zariski-qcoh-comparison and 01XB; surjectivity on sections comes from the quasi-coherent kernel plus the long exact sequence, with H^1 = 0. Step 6 discharges the three 0BKY hypotheses. The step 7 example on Spec k[t] with M_n = (k[t]/t^n)~ is correct: M(D(t)) = 0 while k[[t]][1/t] is nonzero. The new node is 0BKY in content (restricted to commutative O, harmless here), self-contained, not a duplicate (snapshot and live searched for 0BKY and 0D3E) and not a restatement of the item. Batch 5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence (03DX/03LC) and lem-trf-scheme-etale-quasi-coherent-kernel (0GNB/06VE) are generic quasi-coherent descent facts, neither part of nor proved by the trace formula or Poincaré duality; accepted. Dropped route: step 5 cited lem-per-mittag-leffler-derived-limit-acyclic, which is on route-pivot-dropped.txt line 1708 (2026-10-19 artin-gabber section). The item does not touch the artin-gabber node or its route, so the citation itself is the only fault. FIX: step 5 now cites lem-pc-derived-limit-roos-abelian-groups (R^1 lim = coker(1-s)) and solves (1-s)x = y explicitly from the surjective transitions. proof_deps and the split_report.tool_uses entry are swapped to match. No other cited node is dropped, and there is no SGA citation. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-surjective-qcoh-limit.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSurjectiveQuasiCoherentLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.surjective_quasiCoherent_limit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleSections",
+   "AlgebraicGeometry.AlgebraicSpace.smallEtaleModuleCohomology",
+   "AlgebraicGeometry.AlgebraicSpace.surjectiveQCohLimitComparison",
+   "AlgebraicGeometry.AlgebraicSpace.surjective_quasiCoherent_limit",
+   "AlgebraicGeometry.AlgebraicSpace.exists_not_quasiCoherent_surjective_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSurjectiveQuasiCoherentLimit.lean",
+  "statement": "theorem surjective_quasiCoherent_limit {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{wA} X.SmallModules] [HasDerivedCategory.{wT} (ℕᵒᵖ ⥤ X.SmallModules)] (RF : DerivedCategory.{wT} (ℕᵒᵖ ⥤ X.SmallModules) ⥤ DerivedCategory.{wA} X.SmallModules) (η : (lim : (ℕᵒᵖ ⥤ X.SmallModules) ⥤ X.SmallModules).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF) (_hRF : RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ X.SmallModules) (.up ℤ))) (M : ℕᵒᵖ ⥤ X.Modules) (_hqc : ∀ n : ℕ, (M.obj (op n)).IsQuasicoherent) (_hepi : ∀ n : ℕ, Epi (M.map (homOfLE (Nat.le_succ n)).op)) : IsIso (surjectiveQCohLimitComparison X RF η M) ∧ ∀ (U : X.EtaleSite), IsAffine (X.etaleForget.obj U) → (∀ n : ℕ, Function.Surjective ((M.map (homOfLE (Nat.le_succ n)).op).val.app (op U))) ∧ (∀ (n p : ℕ), 0 < p → Subsingleton ((smallEtaleModuleCohomology X U p).obj (X.smallModuleRestriction.obj (M.obj (op n))))) ∧ (∀ p : ℕ, 0 < p → Subsingleton ((smallEtaleModuleCohomology X U p).obj (X.smallModuleRestriction.obj (limit M))))",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The fixed small ringed model implements the size convention without lifting sections. The comparison is defined from limit.post, the single/termwise-limit isomorphism and the unit of any universal total right-derived pair. The second theorem renders the non-quasi-coherence warning as an actual existential counterexample. Additional stmt_deps are existing landed interfaces used for small-model transport, its additivity and total derived-limit units."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0adfc5f6",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of dfdc5db7: theorem node lem-a1-total-limit-shift-resolution-change removed from stmt_deps along with its public import; the only Lean change is the swap of that import for a public import of WeilConjectures...ModuleCat.Sheaf.Abelian (owner of isGrothendieckAbelian, used in the exposed smallEtaleModuleCohomology). smallModuleRestriction_additive comes from the publicly imported SpaceDerivedModuleOperations (def-sfb-space-base-change-comparisons). All 12 stmt_deps are landed definition nodes. Node statement and proof identical to side-live; only lean and stmt_deps differ; lean.statement verbatim in file. Report has Worker report, Second reading by Q141 and a repair section explaining the 03FD/03F3 cohomology convention. Independent re-read: QCoh stages, Epi transitions, sectionwise limit, canonical comparison through the universal R lim pair (non-vacuous), all affine etale U, section surjectivity, H^p>0 vanishing for stages and limit, true non-QCoh existential; edge cases and universes fine, no extra hypotheses, sorry-only proofs. Not landed live, no duplicate. No file changed, so no compile."
+ }
+}

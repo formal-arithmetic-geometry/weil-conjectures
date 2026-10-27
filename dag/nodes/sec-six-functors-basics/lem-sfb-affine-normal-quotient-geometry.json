@@ -1,0 +1,443 @@
+{
+ "id": "lem-sfb-affine-normal-quotient-geometry",
+ "kind": "statement",
+ "title": "Affine normal quotients and the geometry of their exact sequences",
+ "statement": "Let $k$ be a field [def-weil-field]. All group schemes below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroup schemes are closed [def-sc-group-scheme-subgroup]. Smoothness is as in [def-sbc-smooth-morphisms], and connectedness as in [def-weil-connected-scheme]; geometrically connected means connected after extension to an algebraic closure $\\bar k$ of $k$. Let $N\\subseteq G$ be normal. The fppf sheaf quotient $Q=G/N$ is represented by an affine group scheme of finite type over $k$. Here the fppf quotient is the sheafification of $A\\mapsto G(A)/N(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras. The quotient homomorphism $q:G\\to Q$ has scheme-theoretic kernel $N$ and is faithfully flat and finitely presented. It is an $N$-torsor, meaning that $(g,n)\\mapsto(g,gn)$ induces an isomorphism $G\\times_k N\\simeq G\\times_QG$. Quotient formation commutes with every field extension: $(G/N)_K\\simeq G_K/N_K$, compatibly with the quotient maps. If $G$ is smooth (respectively geometrically connected), then $Q$ is smooth (respectively geometrically connected). If $S\\subseteq Q$ is a closed subgroup, its inverse image $P=G\\times_Q S\\subseteq G$ fits into an exact sequence $1\\to N\\to P\\to S\\to1$, with $P/N\\simeq S$; if $S$ is normal in $Q$, then $P$ is normal in $G$. If $N$ and $S$ are smooth and connected, then $P$ is smooth and connected. More generally inverse image along $q$ identifies subgroups of $Q$ with subgroups of $G$ containing $N$, preserving normal inclusions and their quotients: for $S_1\\triangleleft S_0\\subseteq Q$ and $P_i=q^{-1}(S_i)$, one has $P_0/P_1\\simeq S_0/S_1$. Exactness here means exactness as fppf sheaves of groups; in particular the rightmost homomorphism is locally surjective for the stated coverings. Faithfully flat means that the induced map on affine coordinate algebras makes the target algebra a faithfully flat module over the source algebra.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.28 and Propositions 5.24--5.29, printed pp.104--105; Section 5(j), printed pp.116--118, for sheaf quotients; Proposition 1.62, printed p.24; Proposition 5.59, printed p.114; Theorem 5.55 (correspondence theorem), printed p.113. Field base change follows from the quotient torsor and its sheaf universal property."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-normal-subgroup-representation-kernel] to obtain $\\rho:G\\to\\mathrm{GL}_{r,k}$ with kernel $N$. The coordinate presentation of $\\mathrm{GL}_r$ has finitely many variables and one inverted determinant, so it is affine of finite type. Apply [lem-sfb-affine-homomorphism-flat-image] to factor $\\rho$ as $G\\xrightarrow{q}Q\\hookrightarrow\\mathrm{GL}_{r,k}$. Thus $Q$ is affine of finite type and $q$ is faithfully flat. The closed immersion is a monomorphism, so $\\ker q=\\ker\\rho=N$ on every algebra, hence as schemes.",
+   "uses": [
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.18 and Corollary 5.19, p.103; Theorem 3.34, p.75."
+   }
+  },
+  {
+   "text": "Write $B=k[Q]$ and $C=k[G]$, finite-type $k$-algebras by [lem-pc-affine-finite-type-algebra]. The algebra $B$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. A finite list generating $C$ over $k$ also generates it over $B$, since $q$ is a $k$-map. Consequently [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes $C$ finitely presented over $B$. For every $x:\\operatorname{Spec}A\\to Q$, put $A'=A\\otimes_B C$. This is a faithfully flat, finitely presented $A$-algebra, and its canonical $C$-map gives a lift of $x$ to $G(A')$. Faithful flatness survives this base change by [lem-weil-pbc-faithfully-flat-base-change], and it implies surjectivity on spectra by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Finite presentation survives base change directly by tensoring the finite generators and relations.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 5.24--5.27, p.105, with the explicit affine lift of Corollary 3.35, p.75; finite-presentation refinement of the flat covers."
+   }
+  },
+  {
+   "text": "For any $k$-algebra $A$, $q(g)=q(h)$ if and only if $g^{-1}h\\in N(A)$. The mutually inverse natural formulas $(g,n)\\mapsto(g,gn)$ and $(g,h)\\mapsto(g,g^{-1}h)$ therefore give the asserted torsor isomorphism and identify its identity fibre with $N$. Representable functors satisfy descent by [lem-weil-pbc-fpqc-representable-descent]. The map $G(A)/N(A)\\to Q(A)$ is injective, and the cover constructed in step 2 locally puts every section of $Q$ in its image. Hence its associated fppf sheaf is $Q$: local representatives glue uniquely since their images in $Q$ agree and equality of their cosets is already detected by the displayed kernel calculation. This is exactness with local, rather than pointwise, surjectivity.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.24, p.105; Sections 5(j)--5(m), especially 5.73 and 5.79, pp.118--120."
+   }
+  },
+  {
+   "text": "For a field extension $K/k$, base change preserves faithful flatness and the finite presentation in step 2, and the formulas of step 3 give $G_K\\times_K N_K\\simeq G_K\\times_{Q_K}G_K$. For every $K$-algebra $A$, the map $G_K(A)/N_K(A)\\to Q_K(A)$ is thus injective and locally surjective by the same tensor-algebra cover. The sheaf argument of step 3 identifies $Q_K$ with $G_K/N_K$. Both identifications send the class of $g$ to $q_K(g)$, so this is the canonical comparison, compatible with the quotient maps. It applies to arbitrary, including inseparable, extensions.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1(e), p.24, exactness under field extension; Proposition 5.24 and 5.73, universal-property argument."
+   }
+  },
+  {
+   "text": "If $G$ is smooth over $k$, apply [lem-sbc-smooth-flat-surjective-source-descent] to $G\\xrightarrow{q}Q\\to\\operatorname{Spec}k$: steps 1--2 give precisely flatness, surjectivity and local finite presentation of $q$. This proves smoothness of $Q$ without assuming $N$ smooth. If $G_{\\bar k}$ is connected, step 4 and surjectivity on spectra give a continuous surjection $G_{\\bar k}\\to Q_{\\bar k}$. Its image is connected: a separation of the target into two nonempty clopen subsets would pull back to such a separation of the source. Thus $Q$ is geometrically connected.",
+   "uses": [
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(b), p.24; Proposition 5.59(b), p.114."
+   }
+  },
+  {
+   "text": "For a closed subgroup $S\\subseteq Q$, form $P=G\\times_Q S$. The group operations restrict because the image of a product, inverse or identity lies in $S$ whenever the original images do. Affinely, if $S=\\operatorname{Spec}(B/J)$, then $P=\\operatorname{Spec}(C/JC)$, a closed subscheme of $G$ of finite type over $k$. The map $P\\to S$ is the base change of $q$, hence faithfully flat and finitely presented; its kernel is $N$ and its torsor formulas are those of step 3. The same injective-coset and local-lift argument gives $P/N\\simeq S$, and hence the asserted exact sequence.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.54 and Theorem 5.55, pp.112--113, inverse-image direction; 5.73, p.118."
+   }
+  },
+  {
+   "text": "Conversely, let $H\\subseteq G$ be a closed subgroup containing $N$. Apply [lem-sfb-affine-homomorphism-flat-image] to $H\\to Q$; let its closed image factor be $I\\subseteq Q$. Its flat map $H\\to I$ is finitely presented by step 2's finite-generator argument, applied to this factorization. Certainly $H\\subseteq q^{-1}(I)$. If $g\\in G(A)$ maps into $I(A)$, lift its image locally to $h\\in H(A')$; then $g^{-1}h\\in N(A')\\subseteq H(A')$, so $g\\in H(A')$. Membership in the closed subgroup descends: the local map into $H$ glues by [lem-weil-pbc-fpqc-representable-descent], since its composites into $G$ agree and $H\\to G$ is a monomorphism. Hence $q^{-1}(I)=H$ as sheaves and schemes. The same local lifts show that the image of $q^{-1}(S)$ is exactly $S$. The two constructions are therefore inverse and preserve inclusions.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.54 and Theorem 5.55, pp.112--113; Theorem 3.34, p.75."
+   }
+  },
+  {
+   "text": "Normality is preserved in both directions. If $S\\triangleleft Q$, then $q(gpg^{-1})=q(g)q(p)q(g)^{-1}\\in S(A)$ gives $q^{-1}(S)\\triangleleft G$ on all algebras. Conversely, if $H\\triangleleft G$, lift $x\\in Q(A)$ and $y\\in I(A)$ after a common fppf refinement to $g\\in G(A')$ and $h\\in H(A')$. Then $xyx^{-1}$ is locally the image of $ghg^{-1}\\in H(A')$, so belongs to $I(A)$ by descent of membership. Common refinements are obtained by tensoring the two faithfully flat finitely presented algebras. This also proves normality for $P_1\\subseteq P_0$ when $S_1\\triangleleft S_0$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.55, p.113, and sheaf correspondence 5.76, p.119."
+   }
+  },
+  {
+   "text": "For $S_1\\triangleleft S_0\\subseteq Q$, use the quotient construction of steps 1--3 on $S_0,S_1$ and on $P_0,P_1$. The composite $P_0\\to S_0\\to S_0/S_1$ has kernel $P_1$ on every algebra. It is locally surjective: first lift a quotient section to $S_0$, then lift that section to $P_0$ after a further cover. Its associated coset sheaf is therefore $P_0/P_1$, by the argument of step 3, and is also $S_0/S_1$. This gives the claimed isomorphism, with both maps induced by $P_0\\to S_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.55, p.113; 5.73 and 5.76, pp.118--119."
+   }
+  },
+  {
+   "text": "Suppose now $N$ and $S$ are smooth. The group $N_S=N\\times_k S$ is affine, smooth and finitely presented over $S$; smooth base change is [lem-pc-proper-base-change](2), and finite presentation is the finite polynomial presentation of step 2. Left multiplication makes the represented sheaf $P$ a left $N_S$-torsor: on the fppf cover $P\\to S$, a chosen lift $p$ identifies a fibre with $N$ by $n\\mapsto np$, with inverse $p'\\mapsto p'p^{-1}$. Apply [lem-sfb-smooth-affine-group-torsor-representability]. The representing scheme is the already constructed $P$, by uniqueness of representation, so $P\\to S$ is smooth. Since $S\\to\\operatorname{Spec}k$ is smooth, their composite is smooth: affine-locally this is composition of smooth ring maps [lem-weil-pbc-smooth-ring-map-base-change-composition], using the affine-local equivalence in [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62(a), p.24, written by local torsor trivializations."
+   }
+  },
+  {
+   "text": "If also $N$ and $S$ are connected, [lem-sbc-connected-rational-point-geometrically-connected] applied to the identity of $N$ makes $N$ connected after every field extension. For $s\\in S$, let $F=P_s$ and choose an algebraic closure $\\Omega$ of $\\kappa(s)$. The faithfully flat finite-presentation map $P\\to S$ gives a nonempty affine finite-type $F_\\Omega$. A maximal ideal of its coordinate algebra gives a closed point, and [lem-weil-pbc-closed-point-residue-field-base] makes it an $\\Omega$-point $p$. The torsor formulas identify $F_\\Omega$ with $N_\\Omega$ by $n\\mapsto np$, so $F_\\Omega$ is connected. The map $F_\\Omega\\to F$ is surjective by faithful flatness of a field extension and [lem-weil-pbc-faithfully-flat-base-change, lem-weil-pbc-faithfully-flat-surjective-spectrum]. Thus $F$ is connected by the separation argument of step 5. Since $P\\to S$ is affine, flat and surjective, [lem-weil-pbc-flat-qc-surjective-quotient-map] gives the quotient topology. Apply [lem-weil-pbc-connected-fibres-quotient-preimage-connected] to the closed connected subset $S$ of itself: $P$ is connected.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-flat-qc-surjective-quotient-map",
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.59(a), p.114, via connected fibres; Corollary 1.32, p.16; Stacks Tag 0377 (lemma-connected-fibres-quotient-topology-connected-components)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-subgroup-representation-kernel",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "def-sc-general-linear-group",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "def-pc-fibre-product",
+  "def-sc-group-scheme-subgroup",
+  "lem-pc-proper-base-change",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "def-sbc-smooth-morphisms",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-flat-qc-surjective-quotient-map",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Affine quotient construction of Proposition 5.18, Corollary 5.19 and Theorem 3.34; Propositions 5.24--5.27, Theorem 5.55, Propositions 1.62 and 5.59, with explicit fppf local-lift arguments of 5.73--5.79."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of an affine algebraic group by a closed normal subgroup is affine and commutes with field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [IsTopologicalGroup G] (P : Ideal A) (Q : Ideal B) [Q.\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the quotient ring $ R/I $ has a canonical commutative semiring structure inherited from the commutative ring operations on $ R $. This structur\"}\n  {\"name\": \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [IsTopologicalGroup G] (P : Ideal A) (Q : Ideal B) [in\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the quotient ring $ R/I $ has a canonical commutative semiring structure inherited from $ R $. This structure includes commutative addition and\"}\n  {\"name\": \"ProfiniteGrp.toFiniteQuotientFunctor\", \"module\": \"Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits\", \"type\": \"(P : ProfiniteGrp.{u_1}) → CategoryTheory.Functor (OpenNormalSubgroup ↑P.toProfinite.toTop) FiniteGrp.{u_1}\", \"doc\": \"For a profinite group $P$, this functor maps each open normal subgroup $H$ of $P$ to the finite quotient group $P/H$ (considered as an object in the category of finite groups), and maps morphisms betw\"}\n  {\"name\": \"InfiniteGalois.normalAutEquivQuotient\", \"module\": \"Mathlib/FieldTheory/Galois/Infinite\", \"type\": \"{k : Type u_1} →\\n  {K : Type u_2} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          [IsGalois k K] →\\n            (H : ClosedSubgroup Gal(K/k)) →\\n              [inst_4 : (↑H).Normal] → Gal(K/k) ⧸ ↑H ≃* Gal(↥(IntermediateField.fixedField ↑H)/k)\", \"doc\": \"For an infinite Galois extension $ K/k $ and a closed normal subgroup $ H $ of the Galois group $ \\\\text{Gal}(K/k) $, the quotient group $ \\\\text{Gal}(K/k)/H $ is isomorphic to the Galois group of the f\"}\n  {\"name\": \"QuotientGroup.instIsTopologicalGroup\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] (N : Subgroup G)\\n  [inst_3 : N.Normal], IsTopologicalGroup (G ⧸ N)\", \"doc\": \"For any topological group $G$ and its normal subgroup $N$, the quotient group $G/N$ equipped with the quotient topology is a topological group. This means that the group operations (multiplication and\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"{A : Type u_1} →\\n  {B : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          {G : Type u_3} →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G B] →\\n                [SMulCommClass G A B] →\\n                  [inst_6 \", \"doc\": \"A functor from the category of open normal subgroups of a topological group $ G $ to types, where for each open normal subgroup $ N $, it constructs a type involving the fixed subalgebra of $ B $ unde\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite group quotients and quotient-ring scheme morphisms do not give affine fppf group-scheme quotients and their geometric exact sequences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an exact sequence of algebraic groups smoothness and geometric connectedness pass to quotients and extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite group quotients and quotient-ring scheme morphisms do not give affine fppf group-scheme quotients and their geometric exact sequences"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) : X ⟶ AlgebraicGeometry.Spec ↧(↑A ⧸ I)\", \"doc\": \"Given `f : X ⟶ Spec A` and some ideal `I ≤ ker(A ⟶ Γ(X, ⊤))`,\\nthis is the lift to `X ⟶ Spec (A ⧸ I)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) : CategoryTheory.CategoryStruct.comp (f.liftQuotient I hI) (Alg\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X.Hom (AlgebraicGeometry.Spec A)) (I : Ideal ↑A) (hI : I ≤ RingHom.ker (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))) {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Spec ↧↑A \", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.Surjective f] : Topology.IsQuotientMap ⇑f\", \"doc\": \"A surjective, quasi-compact, flat morphism is a quotient map.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {R : CommRingCat} (I : Ideal ↑R) : AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any ideal `I` in a commutative ring `R`, the quotient map `specObj R ⟶ specObj (R ⧸ I)`\\nis a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec\", \"module\": \"Mathlib.AlgebraicGeometry.PointsPi\", \"type\": \" {ι : Type u} (R : ι → CommRingCat) (I : Ideal ((i : ι) → ↑(R i))) (f : (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶ AlgebraicGeometry.Spec ↧(((i : ι) → ↑(R i)) ⧸ I)) (hf : CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) = AlgebraicGeometry.\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite group quotients and quotient-ring scheme morphisms do not give affine fppf group-scheme quotients and their geometric exact sequences"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|torsor",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"38\", \"text\": \"  `(map (Ideal.Quotient.mk I) (minpoly R pb.gen))` is irreducible, where `pb` is a power basis\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"72\", \"text\": \"attribute [local instance] Ideal.Quotient.field\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"80\", \"text\": \"    S ⧸ I.map (algebraMap R S) ≃+* (R ⧸ I)[X] ⧸ span {(minpoly R x).map (Ideal.Quotient.mk I)} :=\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"83\", \"text\": \"    ((Algebra.adjoin.powerBasis' hx').quotientEquivQuotientMinpolyMap I).toRingEquiv.trans <|\"}\n  {\"file\": \"Mathlib/NumberTheory/KummerDedekind.lean\", \"line\": \"88\", \"text\": \"    (quotMapEquivQuotQuotMap hx hx').symm (Q.map (Ideal.Quotient.mk I)) = Q.aeval x := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ZetaValues.lean\", \"line\": \"233\", \"text\": \"  rw [QuotientAddGroup.mk_zero, fourier_eval_zero, one_mul, ← ofReal_sub, bernoulliFun_eval_one,\"}\n  {\"file\": \"Mathlib/NumberTheory/ZetaValues.lean\", \"line\": \"313\", \"text\": \"      · rw [AddCircle.coe_period, QuotientAddGroup.mk_zero]\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Operations.lean\", \"line\": \"760\", \"text\": \"/- Note: `assert_not_exists Submodule.hasQuotient` in `Mathlib.RingTheory.Ideal.Operations`\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Operations.lean\", \"line\": \"853\", \"text\": \"section Quotient\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Operations.lean\", \"line\": \"860\", \"text\": \"This is the general form of the ideal quotient, traditionally written $I : J$.\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Operations.lean\", \"line\": \"920\", \"text\": \"end Quotient\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"38\", \"text\": \"  quotients `n / p ^ i`. This sum is expressed over the finset `Ico 1 b` where `b` is any bound\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"line\": \"570\", \"text\": \"The `p`-adic valuation of `n!` is the sum of the quotients `n / p ^ i`. This sum is expressed\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"173\", \"text\": \"      ← Submodule.rank_quotient_add_rank (cuspFormSubmodule 𝒮ℒ k), this]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"174\", \"text\": \"  apply rank_eq_one (Submodule.Quotient.mk (E hk))\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"177\", \"text\": \"    rw [Submodule.Quotient.mk_eq_zero] at h\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"179\", \"text\": \"  · refine (Submodule.Quotient.forall _).mpr fun f ↦ ⟨(qExpansion 1 f).coeff 0, ?_⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"180\", \"text\": \"    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.eq, mem_cuspFormSubmodule_iff,\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"line\": \"351\", \"text\": \"    RingHom.quotientKerEquivOfSurjective (ZMod.ringHom_surjective PadicInt.toZMod)\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Engel.lean\", \"line\": \"242\", \"text\": \"    have : Nontrivial (L' ⧸ K.toLieSubmodule) := Submodule.Quotient.nontrivial_iff.2 <| by simpa\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/NormTrace.lean\", \"line\": \"28\", \"text\": \"instance : MulAction ℋ 𝒬 := .quotient ..\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/NormTrace.lean\", \"line\": \"36\", \"text\": \"def quotientFunc (q : 𝒬) (τ : ℍ) : ℂ :=\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/NormTrace.lean\", \"line\": \"39\", \"text\": \"      rw [← Quotient.eq_iff_equiv, Quotient.eq, QuotientGroup.leftRel_apply] at hhh'\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/NormTrace.lean\", \"line\": \"43\", \"text\": \"@[simp] lemma quotientFunc_mk (h : ℋ) : quotientFunc f ⟦h⟧ = (f : ℍ → ℂ) ∣[k] h.val⁻¹ :=\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/NormTrace.lean\", \"line\": \"46\", \"text\": \"lemma quotientFunc_smul {h} (hh : h ∈ ℋ) (q : 𝒬) :\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite group quotients and quotient-ring scheme morphisms do not give affine fppf group-scheme quotients and their geometric exact sequences"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf quotient of an affine algebraic group by a closed normal subgroup is affine and commutes with field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"QuotientGroup.Quotient.commGroup\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \"{G : Type*} [CommGroup G] (N : Subgroup G) : CommGroup (G ⧸ N)\", \"doc\": \"For any abelian group $G$ and its subgroup $N$, the quotient group $G/N$ inherits a canonical commutative group structure. This follows because every subgroup of an abelian group is normal, and the gr\"}\n  {\"name\": \"QuotientGroup.instIsTopologicalGroup\", \"module\": \"Mathlib.Topology.Algebra.Group.Quotient\", \"type\": \"[N.Normal] : IsTopologicalGroup (G ⧸ N)\", \"doc\": \"For any topological group $G$ and its normal subgroup $N$, the quotient group $G/N$ equipped with the quotient topology is a topological group. This means that the group operations (multiplication and\"}\n  {\"name\": \"Rep.quotientToCoinvariants\", \"module\": \"Mathlib.RepresentationTheory.Coinvariants\", \"type\": \": Rep k (G ⧸ S)\", \"doc\": \"Given a commutative ring $k$, a group $G$, a normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $A$ of $G$, this constructs the quotient representation of the coinvariants module $A\"}\n  {\"name\": \"IsGalois.normalAutEquivQuotient\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[FiniteDimensional K L] [IsGalois K L] (H : Subgroup Gal(L/K)) [Subgroup.Normal H] :\\n  Gal(L/K) ⧸ H ≃* Gal(fixedField H/K)\", \"doc\": \"Given a Galois field extension $ L/K $ and a normal subgroup $ H $ of the Galois group $ \\\\text{Gal}(L/K) $, the quotient group $ \\\\text{Gal}(L/K)/H $ is isomorphic to the Galois group $ \\\\text{Gal}(E/K)\"}\n  {\"name\": \"QuotientGroup.Quotient.group\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \": Group (G ⧸ N)\", \"doc\": \"For any group $ G $ and its normal subgroup $ N $, the quotient set $ G/N $ of left cosets forms a group under the operation defined by $ (aN)(bN) = (ab)N $. The normality of $ N $ ensures that this o\"}\n  {\"name\": \"Representation.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [inst_4 : S\", \"doc\": \"Given a commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and a normal subgroup $S \\\\trianglelefteq G$, this constructs the representation of the \"}\n  {\"name\": \"Rep.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] → [inst_1 : Group G] → Rep k G → (S : Subgroup G) → [inst_2 : S.Normal] → Rep k (G ⧸ S)\", \"doc\": \"Given a commutative semiring $ k $, group $ G $, $ k $-module $ V $ with representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $, and a normal subgroup $ S \\\\trianglelefteq G $, this constructs the representa\"}\n  {\"name\": \"QuotientGroup.borelSpace\", \"module\": \"Mathlib.MeasureTheory.Constructions.Polish.Basic\", \"type\": \"{G : Type*} [TopologicalSpace G] [PolishSpace G] [Group G] [IsTopologicalGroup G] [MeasurableSpace G] [BorelSpace G]\\n  {N : Subgroup G} [N.Normal] [IsClosed (N : Set G)] : BorelSpace (G ⧸ N)\", \"doc\": \"If $ G $ is a Polish topological group and $ N $ is a closed normal subgroup of $ G $, then the quotient group $ G/N $ is equipped with the Borel $ \\\\sigma $-algebra generated by the quotient topology \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite group quotients and quotient-ring scheme morphisms do not give affine fppf group-scheme quotients and their geometric exact sequences"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|groupScheme|quotient.*[Gg]roup|[Gg]roup.*quotient",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract/profinite group quotients and quotient-ring scheme morphisms do not give affine fppf group-scheme quotients and their geometric exact sequences"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism of affine group schemes of finite type over a field factors through its closed scheme theoretic image by a faithfully flat homomorphism",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.isFinite_iff",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every closed normal subgroup scheme of an affine algebraic group over a field is the kernel of a finite dimensional representation",
+   "results": "8 hits; FDRep.instHasKernels, Rep.toCoinvariantsKer, Representation.ker_leftRegular_norm_eq, Representation.Coinvariants.le_comap_ker, Representation.toCoinvariantsKer, Subgroup.normalCore_isClosed, AlgebraicGeometry.Scheme.ker_toSpecΓ, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat|faithfully_flat|schemeTheoreticImage",
+   "results": "17 hits; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"kernel\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*subgroup|representation|kernel",
+   "results": "23 hits; Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every normal subgroup of an affine algebraic group is the kernel of a representation",
+   "results": "8 hits; Subgroup.Normal, Subgroup.normalCore_eq_ker, Subgroup.Normal.mk, QuotientAddGroup.ker_mk', AddSubgroup.Normal, Representation.Coinvariants.le_comap_ker, Rep.toCoinvariantsKer, MonoidHom.normal_ker",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"flat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal closed subgroup of an affine group scheme is the scheme theoretic kernel of a homomorphism to GL of a finite dimensional vector space",
+   "results": "8 hits; FDRep.instHasKernels, AlgebraicGeometry.Scheme.ker_of_isAffine, Subgroup.normalCore_eq_ker, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.Scheme.Hom.ker_apply, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.ker_toSpecΓ",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image Hopf algebra of a morphism of finitely generated commutative Hopf algebras is finitely generated and its inclusion into the codomain is faithfully flat",
+   "results": "8 hits; HopfAlgCat.category, HopfAlgCat.concreteCategory, RingHom.FaithfullyFlat.codescendsAlong_injective, Algebra.Smooth.exists_subalgebra_fg, HopfAlgCat, HopfAlgebra.ofAlgHom, HopfAlgCat.MonoidalCategory.inducingFunctorData, RingHom.FaithfullyFlat.codescendsAlong_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "Hopf.*[Ff]lat|[Ff]lat.*Hopf|range|image",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|groupScheme|GL.*ker|normal.*represent",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of affine algebraic group schemes factors as a faithfully flat homomorphism followed by a closed immersion",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.AffineScheme.ofHom, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.isAffineHom_of_isInducing",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of an affine algebraic group by a closed normal subgroup is affine with smoothness and connectedness in exact sequences",
+   "results": "8 hits; QuotientGroup.instIsTopologicalGroup, QuotientGroup.instT2Space, Rep.quotientToCoinvariants, QuotientGroup.Quotient.group, QuotientGroup.borelSpace, QuotientGroup.Quotient.commGroup, QuotientGroup.instT3Space, QuotientAddGroup.instHasQuotientAddSubgroup",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf sheaf quotient of an affine group scheme of finite type over a field by a normal closed subgroup is affine and the quotient is faithfully flat",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, Rep.quotientToInvariantsFunctor, instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups, Rep.quotientToInvariants",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Gg]roup|[Gg]roup.*quotient|[Tt]orsor",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotients by normal closed subgroup schemes of affine algebraic groups commute with field extension and preserve smoothness and geometric connectedness",
+   "results": "8 hits; InfiniteGalois.normalAutEquivQuotient, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, InfiniteGalois.normalAutEquivQuotient_apply, instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor, Ideal.Quotient.normal, CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+   "date": "2026-10-23",
+   "verdict": "no match for the affine fppf group-scheme quotient and all its geometric clauses; abstract quotient groups, category structures and individual scheme-morphism criteria are partial tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-radical-quotient",
+  "date": "2026-10-23",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences.",
+   "via": [
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-normal-quotient-geometry",
+  "worker": "stage1",
+  "summary": "Constructed the affine quotient using a representation with prescribed kernel and the faithfully flat image factorization; derived fppf representability, field base change, inverse-image correspondence and quotient comparison by explicit local lifts; checked smoothness and connectedness using existing general tools. Two smaller statement-only group-theoretic inputs; no statement change.",
+  "blueprint": "Supports the existing ancestry place: det-thm-sf-ctf-stability-direct-images proof (3), through the PGL reductivity and radical-quotient prerequisites. The latest blueprint direct-images proof was read; the affine-group prerequisites occur below its node level.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "General smooth source descent for the flat finitely presented surjection q; no quotient construction or substitute unit route is taken."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smoothness under arbitrary base change, to make N_S a smooth group over S."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Apply the rational-point criterion to the identity of connected N to control all residue-field fibres."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "General affine coordinate-algebra finite-generation criterion; needed to make the quotient map finitely presented and not a replacement for any unit argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-pc-affine-finite-type-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-83ecb536f",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-83ecb536f (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. Checked Milne iAG2017: Thm 3.34 on p.75 matches the flat-image node exactly (any field, no smoothness). Lemma 5.17, Prop 5.18 and Cor 5.19 on pp.102-103 support the representation-kernel node over any field. All 11 steps check out. Steps 1-3 build Q and show it is the fppf quotient: the representation, the 3.34 factorization, finite presentation over the Noetherian ring k[Q] with the cover A⊗_B C, injective plus locally surjective cosets, and the torsor formulas. Steps 4-5: smooth source descent needs no smooth kernel (mu_p checked). Steps 6-9: correspondence and normality by local lifts and descent of membership along a mono. Step 10: the h_P left N_S-torsor meets every hypothesis of the same-unit representability lemma, and P is the representing scheme by Yoneda. Step 11: fibres are N_Omega-translates, then quotient topology. proof_deps equals the union of uses. No SGA. The 4 declared tool_uses are accepted as generic. Batch-5 flag: the torsor-representability node reaches only def-trf-scheme-cover-descent-datum, a general descent-datum definition, so it is outside the trace-formula and Poincare assumptions. Not a return. The report missed one duplicate candidate: lem-sfb-algebraic-group-homomorphism-factorization (separated case, Milne 5.39). I keep the affine 3.34 node because Milne proves 5.39 through the affine quotient (this item), so citing it here would invert the dependency and risk a cycle. Recorded in review.md. Advisory: the item's base-era stmt_deps lack fibre-product and finite-presentation definitions. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AffineNormalQuotientGeometry",
+  "declaration": "AlgebraicGeometry.affine_normal_quotient_geometry",
+  "declarations": [
+   "AlgebraicGeometry.IsFppfGroupQuotient",
+   "AlgebraicGeometry.affine_normal_quotient_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AffineNormalQuotientGeometry.lean",
+  "statement": "theorem affine_normal_quotient_geometry {k : Type u} [Field k] (N G : Grp (Over (Spec (.of k)))) (i : N ⟶ G) [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] : ∃ (Q : Grp (Over (Spec (.of k)))) (q : G ⟶ Q), IsAffine Q.X.left ∧ LocallyOfFiniteType Q.X.hom ∧ QuasiCompact Q.X.hom ∧ IsFppfGroupQuotient i q ∧ q.hom.hom.left.appTop.hom.FaithfullyFlat ∧ Flat q.hom.hom.left ∧ Surjective q.hom.hom.left ∧ LocallyOfFinitePresentation q.hom.hom.left ∧ (∀ (K : Type u) [Field K] [Algebra k K], IsFppfGroupQuotient ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.map i) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).mapGrp.map q)) ∧ (Smooth G.X.hom → Smooth Q.X.hom) ∧ (GeometricallyConnected G.X.hom → GeometricallyConnected Q.X.hom) ∧ (∀ (S : Grp (Over (Spec (.of k)))) (j : S ⟶ Q), IsClosedSubgroupScheme j.hom.hom → ∃ (P : Grp (Over (Spec (.of k)))) (p : P ⟶ G) (h : P ⟶ S) (a : N ⟶ P), IsAffine P.X.left ∧ LocallyOfFiniteType P.X.hom ∧ QuasiCompact P.X.hom ∧ IsClosedSubgroupScheme p.hom.hom ∧ IsPullback p.hom.hom h.hom.hom q.hom.hom j.hom.hom ∧ a ≫ p = i ∧ IsFppfGroupQuotient a h ∧ (IsNormalSubgroupScheme j.hom.hom → IsNormalSubgroupScheme p.hom.hom) ∧ (Smooth N.X.hom → ConnectedSpace N.X.left → Smooth S.X.hom → ConnectedSpace S.X.left → Smooth P.X.hom ∧ ConnectedSpace P.X.left)) ∧ (∀ (H : Grp (Over (Spec (.of k)))) (b : H ⟶ G), IsClosedSubgroupScheme b.hom.hom → (∃ a : N ⟶ H, a ≫ b = i) → ∃ (S : Grp (Over (Spec (.of k)))) (j : S ⟶ Q) (h : H ⟶ S), IsClosedSubgroupScheme j.hom.hom ∧ IsPullback b.hom.hom h.hom.hom q.hom.hom j.hom.hom) ∧ (∀ (S₀ S₁ : Grp (Over (Spec (.of k)))) (j₀ : S₀ ⟶ Q) (j₁ : S₁ ⟶ Q), IsClosedSubgroupScheme j₀.hom.hom → IsClosedSubgroupScheme j₁.hom.hom → ((∀ (T : Over (Spec (.of k))) (s : T ⟶ S₀.X), ∃ t : T ⟶ S₁.X, t ≫ j₁.hom.hom = s ≫ j₀.hom.hom) ↔ (∀ (T : Over (Spec (.of k))) (g : T ⟶ G.X), (∃ s : T ⟶ S₀.X, s ≫ j₀.hom.hom = g ≫ q.hom.hom) → ∃ t : T ⟶ S₁.X, t ≫ j₁.hom.hom = g ≫ q.hom.hom))) ∧ (∀ (S₀ S₁ P₀ P₁ : Grp (Over (Spec (.of k)))) (j₀ : S₀ ⟶ Q) (j₁ : S₁ ⟶ Q) (s : S₁ ⟶ S₀) (p₀ : P₀ ⟶ G) (p₁ : P₁ ⟶ G) (h₀ : P₀ ⟶ S₀) (h₁ : P₁ ⟶ S₁) (t : P₁ ⟶ P₀), IsClosedSubgroupScheme j₀.hom.hom → IsClosedSubgroupScheme j₁.hom.hom → IsPullback p₀.hom.hom h₀.hom.hom q.hom.hom j₀.hom.hom → IsPullback p₁.hom.hom h₁.hom.hom q.hom.hom j₁.hom.hom → s ≫ j₀ = j₁ → t ≫ p₀ = p₁ → t ≫ h₀ = h₁ ≫ s → (IsNormalSubgroupScheme s.hom.hom ↔ IsNormalSubgroupScheme t.hom.hom) ∧ (IsNormalSubgroupScheme s.hom.hom → ∃ (R : Grp (Over (Spec (.of k)))) (r : S₀ ⟶ R), IsAffine R.X.left ∧ LocallyOfFiniteType R.X.hom ∧ QuasiCompact R.X.hom ∧ IsFppfGroupQuotient s r ∧ IsFppfGroupQuotient t (h₀ ≫ r)))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "IsFppfGroupQuotient packages the quotient presentation belonging to this node, with real Prop-valued data: its kernel square, canonical torsor projections, local surjectivity and sheafification universal arrow. No chosen object or theorem supplies definition data.",
+  "fixed_by": "NT-stage2-cc-5d4aba0e2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d4aba0e2",
+  "group": "NW",
+  "result": "fix",
+  "note": "Clause-by-clause match of the node (Milne 5.24-5.29, 5.55, 1.62, 5.59): fppf quotient via IsFppfGroupQuotient (kernel pullback square, fppf local surjectivity, pinned torsor iso (g,n)->(g,gn), coset coequalizer with normalized eta and the sheafification universal property), faithfully flat on coordinate rings plus locally finitely presented between affines, base change along every field K/k via mapGrp, smooth and geometrically connected descent, inverse image P with N->P->S exact, normality, smooth+connected P, correspondence (surjectivity plus order iff), normality iff, common representative R for S0/S1 and P0/P1. Recorded stmt_dep decls are used; no duplicate notion found in Mathlib, project Lean or DAG; helper is not hollow; record verbatim, only lean changed; edge cases N=1, N=G, mu_p, arbitrary K covered. H8 FIX: docstring step 7 described a closed-immersion descent route not in the node; replaced with the node's flat-image/closed-image argument. Fixed module compiled once with nt_compile --json in 3.2 s, no errors."
+ }
+}

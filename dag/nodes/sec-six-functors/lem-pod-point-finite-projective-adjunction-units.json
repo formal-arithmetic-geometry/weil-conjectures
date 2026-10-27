@@ -1,0 +1,112 @@
+{
+ "id": "lem-pod-point-finite-projective-adjunction-units",
+ "kind": "statement",
+ "title": "Normalized finite-projective point adjunction units",
+ "statement": "Let k be a field, R a commutative ring in the joint universe, B a commutative sheaf on the small pro-etale site of Spec k, and alpha:constant R to B. Use the actual extension and sections constructions [def-pod-point-derived-hom-models]. Let L be an objectwise specified extension presentation and adj:L adjoint to sections, with the explicit forward and inverse generator formulas. Suppose L and sections preserve finite limits and colimits, and the scalar map R to B(Spec k) is bijective. Then the actual adjunction unit is an isomorphism on every finite projective R-module [def-weil-pbc-projective-module], is given by x maps to 1 tensor x on every module, and there exists an isomorphism L(R) to the unit B sending b tensor r to b alpha(r), under which the unit is the scalar map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Point dualizing-complex proof, second sentence, and comparison identification proof, third paragraph: Normalized finite-projective point adjunction units"
+ },
+ "stmt_deps": [
+  "def-pod-point-derived-hom-models",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "the adjunction sends the scalar section map to the rank-one comparison.\nIts inverse is the B-linear map taking one to the global section determined by\neta_R(1); restriction from the final object defines that section. Adjunction\ninjectivity and linearity show the first inverse identity, and evaluation at one\nshows the second. Bijectivity of the scalar map therefore makes eta_R invertible.\nFinite-coproduct preservation gives the assertion for finite powers, including the\nempty power. Every finite projective module is a retract of one of these powers;\nnaturality of eta transports the inverse along the splitting. Finally the explicit\nadjunction formulas give the claimed generator and unit normalizations.",
+   "uses": [
+    "def-pod-point-derived-hom-models",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Point dualizing-complex proof, second sentence, and comparison identification proof, third paragraph: Normalized finite-projective point adjunction units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-point-derived-hom-models",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "T1: explicit reduction of the indicated part of the point finite-projective argument, using the Stacks references in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of an additive adjunction is an isomorphism on finite projective modules when it is an isomorphism on the rank one free module",
+   "results": "8 hits; CategoryTheory.Adjunction.isIso_unit_of_iso, CategoryTheory.Reflective.instIsIsoAppUnitReflectorAdjunctionA, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit, CategoryTheory.Adjunction.unitAsIsoOfIso, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence, CategoryTheory.LiftRightAdjoint.unitEqualises, CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful, AddCommMonCat.adj; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite projective complex dual tensor scalar extension sheaves canonical adjunction unit isomorphism",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Tt]ensor|[Dd]ual.*[Pp]rojective|[Dd]erived[Cc]omplete",
+   "results": "17 hits; Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean; no theorem gives the complete normalized comparison.",
+   "date": "2026-10-24",
+   "verdict": "Use the finite-projective algebra and adjunction APIs where applicable; retain the precise point presentation in the statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointProjectiveDualTensorModels",
+  "date": "2026-10-24",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph of thm-pod-identification-of-the-comparison.proof.md, actual adjunction/evaluation comparison: Normalized finite-projective point adjunction units",
+   "via": [
+    "lem-pod-point-projective-dual-tensor-models",
+    "lem-pod-point-completed-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointFiniteProjectiveAdjunctionUnits",
+  "file": "lean/Sheaf/Paper/PointFiniteProjectiveAdjunctionUnits.lean",
+  "declaration": "WeilConjectures.PointDerivedHom.point_finiteProjective_adjunction_units",
+  "statement": "theorem point_finiteProjective_adjunction_units\n    [PreservesFiniteLimits L] [PreservesFiniteLimits (sections k B α)]\n    [PreservesFiniteColimits L] [PreservesFiniteColimits (sections k B α)]\n    (hex : ExplicitAdjunction k B α L hobj adj)\n    (hscalar : Function.Bijective (scalar k B α (op (finalObject k)))) :\n    (∀ (M : ModuleCat.{max u (t + 1)} R)\n      [Module.Finite R M] [Module.Projective R M], IsIso (adj.unit.app M)) ∧\n    (∀ (M : ModuleCat.{max u (t + 1)} R) (x : M),\n      (adj.unit.app M).hom x = generator k B α L hobj M (op (finalObject k)) 1 x) ∧\n    ∃ κ : L.obj (ModuleCat.of R R) ≅ SheafOfModules.unit (ring k B),\n      (∀ (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) (b : B.obj.obj U) (r : R),\n        κ.hom.val.app U (generator k B α L hobj (ModuleCat.of R R) U b r) =\n          b * scalar k B α U r) ∧\n      ∀ r : R, κ.hom.val.app (op (finalObject k))\n        ((adj.unit.app (ModuleCat.of R R)).hom r) =\n          scalar k B α (op (finalObject k)) r",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-574f5",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T191147-L-262480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-574f5",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T191147-L-262480",
+  "kind": "interface",
+  "note": "independent cc review: removed IntrinsicFiniteTorsionConstructibility import vs public closure (SfIntegralConstructible, FiniteTorAmplitude re-export it) and the item statement's finiteTorConstructibleIntegral→sfIntegralConstructible→intrinsicFiniteTorsionConstructible; 3 sorried statements vs node statements and HomComplex sign conventions; item node diff vs clone (proof/proof_deps/proof_origin/tool_uses only); item has 0 importers"
+ }
+}

@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-lifted-relation-curvature-class",
+ "kind": "statement",
+ "title": "A lifted syzygy yields a degree-two class with prescribed curvature image",
+ "statement": "Let $q:R'\\twoheadrightarrow R$ be a surjection of commutative rings with kernel $(f)$ and $f^2=0$, and put $I=\\operatorname{Ann}_R(f)$ using the $R$-action on $(f)$ by lifts. Let $n,m\\geq0$ be integers and put $P=R[x_1,\\ldots,x_n]$, $P'=R'[x_1,\\ldots,x_n]$, with $q_P:P'\\to P$ the coefficientwise map, and let $h_1,\\ldots,h_m,r_1,\\ldots,r_m\\in P$ satisfy $\\sum_jr_jh_j=0$. Assume every coefficient of every $r_j$ lies in $I$. Set $S=P/(h_1,\\ldots,h_m)$. Suppose $h'_j,r'_j,g'\\in P'$ satisfy $q_P(h'_j)=h_j$, $q_P(r'_j)=r_j$, and $\\sum_jr'_jh'_j=g'f$. Let $(A,d,\\gamma)$ be a divided-power differential graded $R$-algebra [def-sfb-divided-power-dga], polynomial as a graded divided-power algebra with finitely many variables in each degree, equipped with an augmentation $A\\to S$ inducing $H_0(A)\\cong S$, and assume $H_1(A)=0$. Choose any graded divided-power polynomial lift $\\rho:A'\\twoheadrightarrow A$ with the same generators and any $R'$-linear degree $-1$ signed derivation $D$ reducing to $d$ and compatible with divided powers. On $B=A/IA$ let $\\theta$ be the map characterized by $D^2(a')=\\iota(\\theta(\\overline{\\rho(a')}))$, where $\\iota:B\\xrightarrow{\\sim}fA'$ sends $\\overline{\\rho(a')}$ to $fa'$ [lem-sfb-square-zero-dga-curvature]. Then there is $z\\in B_2$ with $dz=0$ and $[\\theta(z)]=\\bar g$ under $H_0(B)\\cong S/IS$, where $\\bar g$ is the image of $q_P(g')$.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PT (lemma-compute-theta), statement and proof, stated for the cycle representative and the curvature construction of Tag 09PS"
+ },
+ "stmt_deps": [
+  "def-sfb-divided-power-dga",
+  "lem-sfb-square-zero-dga-curvature"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\epsilon:A_0\\to S$ for the augmentation. Since negative degrees vanish, $H_0(A)=A_0/d(A_1)$; thus $\\epsilon$ is surjective with kernel $d(A_1)$. Choose $a_i\\in A_0$ mapping to the image of $x_i$ in $S$, and define $\\varphi:P\\to A_0$ by polynomial evaluation at the $a_i$. Then $\\varphi(h_j)\\in\\ker\\epsilon$, so choose $u_j\\in A_1$ with $du_j=\\varphi(h_j)$. By the homology and differential definitions in [def-sfb-divided-power-dga], $v=\\sum_j\\varphi(r_j)u_j$ has $dv=\\varphi(\\sum_jr_jh_j)=0$, because $d(A_0)=0$. The hypothesis $H_1(A)=0$ gives $\\xi\\in A_2$ with $d\\xi=v$.",
+   "uses": [
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PT (lemma-compute-theta), proof, first paragraph: lift the presentation and use H_1(A)=0"
+   }
+  },
+  {
+   "text": "Every $\\varphi(r_j)$ belongs to $IA_0$: express $r_j$ as a finite sum of monomials with coefficients in $I$ and evaluate. Hence $d\\xi\\in IA_1$, and the image $z$ of $\\xi$ in $B_2$ is a cycle. The induced differential on $B$ is supplied by [lem-sfb-square-zero-dga-curvature]. Moreover, directly from the homology definition in [def-sfb-divided-power-dga], $H_0(B)=A_0/(IA_0+d(A_1))=S/IS$, with the identification induced by $\\epsilon$. Indeed $d(B_1)$ is the image of $d(A_1)$, and surjectivity of $\\epsilon$ identifies the image of $IA_0$ with $IS$.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-dga-curvature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PT (lemma-compute-theta), proof, first paragraph: reduction modulo I; Tag 09PS (lemma-get-derivation), quotient DGA"
+   }
+  },
+  {
+   "text": "Use the fixed lift $A'$ and operator $D$ from the statement. Lift $a_i,u_j,\\xi$ to $a'_i\\in A'_0,u'_j\\in A'_1,\\xi'\\in A'_2$, and evaluate at the $a'_i$ to define $\\varphi':P'\\to A'_0$ with $\\rho\\varphi'=\\varphi q_P$. The polynomial description in [def-sfb-divided-power-dga] is now explicitly by successive adjunctions. The free-module descriptions in [lem-sfb-divided-power-variable-adjunction] give a monomial basis: start with ordinary polynomial monomials in degree zero; at each odd adjunction multiply the old basis by $1,T$, and at each even adjunction by $T^{[a]}$ for $a\\geq0$. At a union stage take all finite monomials, whose independence is checked in a stage containing them. Thus in each degree reduction applies $q$ coefficientwise in the same monomial bases, and its kernel is exactly $fA'_i$. Reducing $Du'_j-\\varphi'(h'_j)$ and $D\\xi'-\\sum_j\\varphi'(r'_j)u'_j$ gives zero by Step 1. Hence there are $b_j\\in A'_0,c\\in A'_1$ with $Du'_j=\\varphi'(h'_j)+fb_j$ and $D\\xi'=\\sum_j\\varphi'(r'_j)u'_j+fc$.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PT (lemma-compute-theta), proof, second paragraph: lifts and the differential error terms"
+   }
+  },
+  {
+   "text": "If $b'\\in R'$ has $q(b')\\in I$, then $b'f=0$, by the definition of the $R$-action on $(f)$ and of $I$. Thus every coefficient of $r'_j$ is killed by $f$, and $f\\varphi'(r'_j)=0$. Since $D$ vanishes on $A'_0$ and is $R'$-linear, its signed Leibniz rule applied to Step 3 gives\n$$D^2\\xi'=\\sum_j\\varphi'(r'_jh'_j)+\\sum_j f\\varphi'(r'_j)b_j+fDc=f\\varphi'(g')+fDc.$$\nBy the injective identification $\\iota$ and the curvature formula in [lem-sfb-square-zero-dga-curvature], this equality says $\\theta(z)=\\overline{\\varphi(q_P(g'))}+d\\overline{\\rho(c)}$ in $B_0$. Passing to the quotient defining $H_0$ [def-sfb-divided-power-dga] kills the boundary term. Under Step 2's identification with $S/IS$, the first term is $\\bar g$, since $\\epsilon\\varphi$ is the original quotient map $P\\to S$. This proves the required equality for the cycle $z$.",
+   "uses": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-dga-curvature"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PT (lemma-compute-theta), proof, final displayed calculation and its three terms; Tag 09PS (lemma-get-derivation), curvature identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-divided-power-dga",
+  "lem-sfb-square-zero-dga-curvature",
+  "lem-sfb-divided-power-variable-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PT (lemma-compute-theta), full proof, retaining the multiplication-by-f identification from Tag 09PS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A lifted polynomial syzygy determines a degree two cycle whose curvature derivation has prescribed degree zero homology class",
+   "results": {
+    "t": "2026-10-23T22:42:56Z",
+    "tool": "leanfinder",
+    "query": "A lifted polynomial syzygy determines a degree two cycle whose curvature derivation has prescribed degree zero homology class",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Presentation.differentialsSolution",
+     "Algebra.Generators.H1Cotangent.δ",
+     "Algebra.Generators.H1Cotangent.δ_eq_δAux",
+     "Algebra.Generators.H1Cotangent.δAux_X",
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Generators.H1Cotangent.δ_map",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff",
+     "Algebra.Presentation.differentialsRelations"
+    ],
+    "digest": "8212c097f132844c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the cotangent/Jacobi-Zariski hits and Algebra.Presentation.relationOfHasCoeffs (Extension/Presentation/Core.lean:122-131, read) lift presentation coefficients; none constructs the degree-two DGA cycle or computes its curvature image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"DividedPowers\"",
+   "results": {
+    "t": "2026-10-23T22:42:52Z",
+    "tool": "loogle",
+    "query": "\"homology\", \"DividedPowers\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the cotangent/Jacobi-Zariski hits and Algebra.Presentation.relationOfHasCoeffs (Extension/Presentation/Core.lean:122-131, read) lift presentation coefficients; none constructs the degree-two DGA cycle or computes its curvature image."
+  },
+  {
+   "tool": "grep",
+   "query": "Gulliksen|compute_theta|degree.*two.*derivation|derivation.*degree.*two",
+   "results": {
+    "t": "2026-10-23T22:42:51Z",
+    "tool": "grep",
+    "query": "Gulliksen|compute_theta|degree.*two.*derivation|derivation.*degree.*two",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the cotangent/Jacobi-Zariski hits and Algebra.Presentation.relationOfHasCoeffs (Extension/Presentation/Core.lean:122-131, read) lift presentation coefficients; none constructs the degree-two DGA cycle or computes its curvature image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting a polynomial relation computes a degree two obstruction class in homology of a divided power algebra",
+   "results": {
+    "t": "2026-10-23T22:42:52Z",
+    "tool": "leansearch",
+    "query": "Lifting a polynomial relation computes a degree two obstruction class in homology of a divided power algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DualNumber.lift",
+     "Algebra.Presentation.relationOfHasCoeffs",
+     "Polynomial.mem_lifts_iff_mem_alg",
+     "Polynomial.lifts_iff_ringHom_rangeS",
+     "Algebra.FormallySmooth.lift",
+     "QuadraticMap.canLift",
+     "DividedPowers.DPMorphism.dpow_comp",
+     "AlgHom.kerSquareLift"
+    ],
+    "digest": "b37f9f4ae147e8cf"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the cotangent/Jacobi-Zariski hits and Algebra.Presentation.relationOfHasCoeffs (Extension/Presentation/Core.lean:122-131, read) lift presentation coefficients; none constructs the degree-two DGA cycle or computes its curvature image."
+  },
+  {
+   "tool": "grep",
+   "query": "relationOfHasCoeffs",
+   "results": {
+    "t": "2026-10-23T22:44:00Z",
+    "tool": "grep",
+    "query": "relationOfHasCoeffs",
+    "sub": "RingTheory/Extension/Presentation",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean"
+    ],
+    "digest": "d7d2334d1ab18a7c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the cotangent/Jacobi-Zariski hits and Algebra.Presentation.relationOfHasCoeffs (Extension/Presentation/Core.lean:122-131, read) lift presentation coefficients; none constructs the degree-two DGA cycle or computes its curvature image."
+  },
+  {
+   "tool": "grep",
+   "query": "curvature|compute_theta|Gulliksen",
+   "results": {
+    "t": "2026-10-23T23:25:55Z",
+    "tool": "grep",
+    "query": "curvature|compute_theta|Gulliksen",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no occurrence of the curvature terminology in RingTheory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting a polynomial relation computes a degree two obstruction class in homology of a divided power algebra",
+   "results": {
+    "t": "2026-10-23T23:25:56Z",
+    "tool": "leansearch",
+    "query": "Lifting a polynomial relation computes a degree two obstruction class in homology of a divided power algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DualNumber.lift",
+     "Algebra.Presentation.relationOfHasCoeffs",
+     "Polynomial.mem_lifts_iff_mem_alg",
+     "Polynomial.lifts_iff_ringHom_rangeS",
+     "Algebra.FormallySmooth.lift",
+     "QuadraticMap.canLift",
+     "DividedPowers.DPMorphism.dpow_comp",
+     "AlgHom.kerSquareLift"
+    ],
+    "digest": "b37f9f4ae147e8cf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: relationOfHasCoeffs only lifts polynomial coefficients (Core.lean:122-131); the other hits do not involve this DP-DGA homology class."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"homology\"",
+   "results": {
+    "t": "2026-10-23T23:25:56Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"homology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no divided-power homology declaration returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial syzygy with annihilator coefficients gives a degree two homology cycle with prescribed lifted differential curvature",
+   "results": {
+    "t": "2026-10-23T23:25:57Z",
+    "tool": "leanfinder",
+    "query": "A polynomial syzygy with annihilator coefficients gives a degree two homology cycle with prescribed lifted differential curvature",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Presentation.differentialsSolution",
+     "Algebra.Presentation.differentials.hom₁_single",
+     "HomologicalComplex.liftCycles",
+     "Algebra.Presentation.differentials.hom₁",
+     "Algebra.Presentation.differentialsRelations",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux_apply",
+     "Algebra.Presentation.differentials.comm₁₂_single"
+    ],
+    "digest": "86252bb681e7d102"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cotangent relations, universal cycle lifts, or differences of ordinary ring-map lifts, not the degree-two DP-DGA curvature calculation. Read Presentation/Differentials.lean:25-90, HomologicalComplex.lean:105-111 and Derivation/ToSquareZero.lean:30-135."
+  },
+  {
+   "tool": "grep",
+   "query": "relationOfHasCoeffs",
+   "results": {
+    "t": "2026-10-23T23:26:28Z",
+    "tool": "grep",
+    "query": "relationOfHasCoeffs",
+    "sub": "RingTheory/Extension/Presentation",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean",
+     "Mathlib/RingTheory/Extension/Presentation/Core.lean"
+    ],
+    "digest": "d7d2334d1ab18a7c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read Core.lean:100-145, which concerns presentation descent, not curvature."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero ring extension defines a degree minus two derivation on the homology of a divided power differential graded algebra and computes a syzygy class",
+   "results": {
+    "t": "2026-10-23T23:26:29Z",
+    "tool": "leanfinder",
+    "query": "A square zero ring extension defines a degree minus two derivation on the homology of a divided power differential graded algebra and computes a syzygy class",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "derivationToSquareZeroOfLift",
+     "liftOfDerivationToSquareZero",
+     "Algebra.Generators.H1Cotangent.δ_eq_δAux",
+     "derivationToSquareZeroOfLift_apply",
+     "derivationQuotKerSq",
+     "liftOfDerivationToSquareZero_apply",
+     "derivationQuotKerSq_mk",
+     "derivationToSquareZeroEquivLift"
+    ],
+    "digest": "f856f224588beade"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cotangent relations, universal cycle lifts, or differences of ordinary ring-map lifts, not the degree-two DP-DGA curvature calculation. Read Presentation/Differentials.lean:25-90, HomologicalComplex.lean:105-111 and Derivation/ToSquareZero.lean:30-135."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-relation-tor-obstruction",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tag 09PT (lemma-compute-theta), statement and proof, stated for the cycle representative and the curvature construction of Tag 09PS",
+   "via": [
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-lifted-relation-curvature-class",
+  "worker": "stage1",
+  "summary": "Read Stacks 09PT and 09PS and both cited node statements. Constructed the cycle using H_1(A)=0 and computed its curvature for the arbitrarily fixed lift and operator. Expanded coefficientwise kernel lifting and both error terms, and kept the multiplication-by-f identification explicit. All remaining steps are elementary evaluation, homology definitions and the signed Leibniz rule. Statement unchanged; no new nodes and no project or Mathlib attachment. Repair of the returned delivery: re-read the changed definition, replaced its obsolete citation, and expanded Step 3 using the current existing variable-adjunction node for the monomial bases and union stages; statement and route unchanged.",
+  "blueprint": "Auxiliary Tag 09PT calculation on the existing ancestry chain supporting branch (3), proper/open direct images, of det-thm-sf-ctf-stability-direct-images in sk-thm-sf-ctf-stability; below the fibrewise complete-intersection comparison. Read the current latest blueprint unit and direct-image proof; no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-1df5436ff",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-1df5436ff (reviewer sub-agent of L); spot-checked: This re-delivers 6360534b, which got a PASS but whose landing was refused after def-sfb-divided-power-dga changed. Compared with that delivery, the item's statement, stmt_deps, source, blueprint and unit are identical. Step 3 was rewritten to cite lem-sfb-divided-power-variable-adjunction for the monomial bases (clauses 1–4: free on 1,T and on T^[a]; directed unions), and step 4 renames a_j to b_j. In clones/live the item is still unsplit, and the statements of all three cited nodes match the snapshot exactly, so the landing should not be refused again. I read Stacks dpa.tex 09PT (lemma-compute-theta) in full, with 09PS as encoded in lem-sfb-square-zero-dga-curvature. The statement agrees with the source hypothesis by hypothesis: g' in P' stands for g in R/I[x], and the H_2 class is given as a cycle in B_2. I recomputed every step. Step 1: H_0 = A_0/dA_1, and dv = phi(sum r_j h_j) = 0. Step 2: phi(r_j) lies in IA_0, and H_0(B) = A_0/(IA_0+dA_1) = S/IS. Step 3: ker rho = fA'_i, rho phi' = phi q_P, and rho D = d rho gives the error terms. Step 4: q(b') in I implies b'f = 0, so the middle term vanishes; D^2 xi' = f(phi'(g')+Dc), and iota injective gives theta(z) = phi(q_P g') + d(class of rho(c)), whose class is g-bar. Signs check, and this matches the source's three-term display. Edge cases m=0, n=0, f=0 and S=0 hold. There are no new nodes, no cycle (the only citer is lem-sfb-square-zero-relation-tor-obstruction), no SGA source, no repair note and no tool_uses. blueprint.from.node is null, inherited unchanged from the base. No fixes."
+ }
+}

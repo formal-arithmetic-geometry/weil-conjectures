@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-resolution-section-cocycle-sheafification",
+ "kind": "statement",
+ "title": "Sheafification of the ordinary termwise-adjoint section cocycle",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes, $q\\in\\mathbf N$, $F$ an abelian etale sheaf on $X$, $I$ an injective resolution of $F$, and $V\\to S$ etale. Use the constructions of [def-weil-pbc-raw-restricted-normalization-data], [def-weil-pbc-abelian-higher-image-class] and [lem-weil-pbc-raw-restricted-resolution-cocycle]. Write $R=f_*$, $A=\\mathbf Z[V]$, $K=R(I)$ and $P=U(K)$, where $U$ forgets the sheaf condition. Let $a$ be sheafification, $\\eta:\\mathrm{id}\\to Ua$ its unit and $\\epsilon:aU\\to\\mathrm{id}$ its counit. For a chain map $c:(f^{-1}A)[0]\\to I[q]$, define its termwise ordinary adjunct $d:A[0]\\to R(I[q])$ as $\\mathrm{single}(\\eta^f_A)$ followed by the inverse single-complex comparison for $R$ and $R(c)$; here $\\eta^f$ is the ordinary inverse-image/direct-image adjunction unit. Set $z=\\mathrm{normalizationResolutionCocycleIso}(\\mathrm{chainEvaluation}(c))\\in H^q(P)(V)$, and $e=\\eta_{\\mathbf Z[\\mathrm{Hom}(-,V)]}(\\mathrm{id}_V)\\in A(V)$. Let $t:H^q(P)^\\#\\to H^q(K)$ be the inverse sheafification/homology comparison followed by $H^q(\\epsilon_K)$. Let $b:A\\to H^q(K)$ be the inverse single-complex homology identification $A\\to H^0(A[0])$, followed by $H^0(d)$, $H^0(R(I[q])\\xrightarrow{\\sim}R(I)[q])$, and the homology shift $H^0(K[q])\\xrightarrow{\\sim}H^q(K)$. Let $k:H^q(K)\\to R^qf_*F$ be the inverse classical resolution comparison followed by the inverse comparison with bounded-below right-derived homology. Then $(\\eta_{H^q(P)}\\gg U(t\\gg k))_V(z)=(b\\gg k)_V(e)$; the left-hand map is precisely normalizationResolutionClass. This is an ordinary chain, sections and sheafification identity; it includes no derived-adjunction or augmentation comparison. In Lean the ordinary adjunct is named by [def-weil-pbc-ordinary-complex-adjunct] and the shifted four-factor homology composite by [def-weil-pbc-resolution-cocycle-homology-tail]; the displayed map b followed by k is exactly the single homology inverse followed by homology of that adjunct and this composite.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W, lemma-higher-direct-images: termwise section cocycles and the canonical map from sheafification of sectionwise cohomology."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-raw-restricted-normalization-data",
+  "def-weil-pbc-abelian-higher-image-class",
+  "lem-weil-pbc-raw-restricted-resolution-cocycle",
+  "def-weil-pbc-ordinary-complex-adjunct",
+  "def-weil-pbc-resolution-cocycle-homology-tail"
+ ],
+ "proof": [
+  {
+   "text": "For an exact additive functor L and a short complex T, use its chosen left homology data to prove L(π_T) followed by the inverse homology comparison equals the inverse cycles comparison followed by π_{L(T)}. Apply the same identity to exact evaluation at V to identify the class of an evaluated cycle.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let U forget the sheaf condition, let L be sheafification, K a complex of sheaves, and P=U(K). Map U(Z^q(K)) into Z^q(P) by the kernel universal property, obtaining a. After applying L, cancel the monomorphic inclusion of sheaf cycles to show that L(a), the inverse cycles comparison, and the cycles map of the counit compose to the counit on sheaf cycles. The projection identity from step 1, naturality of the adjunction unit, and the right triangle identity then give a ≫ π_P ≫ η_{H^q(P)} ≫ U(μ^{-1} ≫ H^q(ε_K)) = U(π_K). No exactness of U is assumed.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent chainEvaluation(c) by the cycle obtained from the inverse single-object cycles isomorphism and the inverse single-complex comparison. Naturality of the cycle projection moves the maps in normalizationResolutionCocycleIso onto that cycle. Form the analogous sheaf cycle y:A→Z^q(K) from the ordinary adjunct d, its direct-image shift comparison, and the short-complex shift comparison. Compare the two evaluated cycles after their monomorphic inclusions. The middle components of both shift comparisons are the canonical index identifications. The degree-zero ordinary adjunct is the ordinary unit followed by the direct image of the degree-zero component of c. Naturality of normalizationSectionsIso and the definition of the represented generator therefore identify the section cycle with U(y) followed by a, evaluated on e. The two single-object cycles inclusions cancel their prescribed single-complex identifications.",
+   "uses": [
+    "lem-weil-pbc-raw-restricted-resolution-cocycle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the identity of step 2 to the actual cycle of step 3 and evaluate at V. Postcompose with the two prescribed inverse resolution comparisons. Finally, naturality of the homology projection and the single-object homology isomorphism identify y followed by π_K with the inverse single homology isomorphism followed by H^0(d), the direct-image shift comparison, and the homology shift. This is exactly the stated resolutionCocycleHomologyTail composite. Every identity is functorial, so q=0, boundaries, zero c, and empty charts require no extra hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-raw-restricted-resolution-cocycle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W, lemma-higher-direct-images: explicit cycle projection, sheafification adjunction triangle, and represented-generator calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sheafification unit followed by the homology counit sends a section cocycle to its class in sheaf homology",
+   "results": "OK 8 hits; CategoryTheory.Sheaf.adjunction_counit_app_val, CategoryTheory.toSheafification_app, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.sheafificationAdjunction_unit_app, CategoryTheory.sheafificationAdjunction_counit_app_val, CategoryTheory.toSheafify, CategoryTheory.Sheaf.sheafifyCocone_ι_app_val, CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply",
+   "date": "2026-10-25",
+   "verdict": "Only generic cycle, sheafification, or resolution identities; no match for the prescribed comparison composites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification unit and homology counit send a section cycle to its class in the homology sheaf",
+   "results": "OK 8 hits; HomologicalComplex.i_cyclesMk, HomologicalComplex.homologyπ, CategoryTheory.ShortComplex.i_cyclesMk, CochainComplex.HomComplex.leftHomologyData_π_hom_apply, HomologicalComplex.natTransHomologyπ, HomologicalComplex.natTransHomologyι_app, CategoryTheory.ShortComplex.π_moduleCatCyclesIso_hom_apply, HomologicalComplex.cyclesMk",
+   "date": "2026-10-25",
+   "verdict": "Only generic cycle, sheafification, or resolution identities; no match for the prescribed comparison composites."
+  },
+  {
+   "tool": "grep",
+   "query": "toSheafify|mapHomologyIso",
+   "results": "OK 25 hits; Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+   "date": "2026-10-25",
+   "verdict": "Only generic cycle, sheafification, or resolution identities; no match for the prescribed comparison composites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ResolutionCocycleAdjunctionClass",
+  "date": "2026-10-25",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, first paragraph of thm-weil-pbc-direct-image-finiteness-proper: the constructibility of higher direct images; canonical cohomology-class normalization via lem-weil-pbc-raw-restricted-class-normalization, specifically sheafification of the ordinary termwise-adjoint section cocycle.",
+   "via": [
+    "lem-weil-pbc-resolution-cocycle-adjunction-class",
+    "lem-weil-pbc-raw-restricted-resolution-class",
+    "lem-weil-pbc-raw-restricted-class-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ResolutionSectionCocycleSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionSectionCocycleSheafification.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolution_section_cocycle_sheafification",
+  "statement": "theorem resolution_section_cocycle_sheafification {X S : Scheme.{u}} (f : X ⟶ S)\n    (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution F) (V : S.Etale)\n    (c : (CochainComplex.singleFunctor _ 0).obj\n      ((upperStar AddCommGrpCat.{u + 1} f).obj (RawRestrictedComparison.freeSheaf S V)) ⟶\n        (normalizationShiftedResolution F I q).obj) :\n    let R := lowerStar AddCommGrpCat.{u + 1} f\n    let A := RawRestrictedComparison.freeSheaf S V\n    let d : (CochainComplex.singleFunctor _ 0).obj A ⟶\n        (R.mapHomologicalComplex (.up ℤ)).obj (normalizationShiftedResolution F I q).obj :=\n      ordinaryComplexAdjunct (upperStar AddCommGrpCat.{u + 1} f) R\n        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f) A\n        (normalizationShiftedResolution F I q).obj c\n    let e := ((toSheafify S.smallEtaleTopology\n      (uliftYoneda.{u + 1}.obj V ⋙ AddCommGrpCat.free)).app (op V)).hom\n        (FreeAbelianGroup.of (ULift.up (𝟙 V)))\n    (normalizationResolutionClass f q F I).app (op V)\n      ((normalizationResolutionCocycleIso f q F I V).hom\n        (RawRestrictedComparison.chainEvaluation f V _ c)) =\n      (((HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 A).inv ≫\n        HomologicalComplex.homologyMap d 0 ≫\n        resolutionCocycleHomologyTail f q F I).hom.app (op V)).hom e",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261026T002143-L-61660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T065605-L-3108279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

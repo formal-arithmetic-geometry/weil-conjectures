@@ -30,7 +30,8 @@
     "lem-sc-etale-qcoherent-descent",
     "def-weil-pbc-abelian-etale-sheaves",
     "def-weil-pbc-sheafification",
-    "def-sc-constant-sheaves"
+    "def-sc-constant-sheaves",
+    "lem-sc-as-sequence-data"
    ],
    "elementary": true,
    "source": {
@@ -106,7 +107,8 @@
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "lem-sc-local-ring-artin-schreier-kernel",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-weil-pbc-exact-sequence"
+  "def-weil-pbc-exact-sequence",
+  "lem-sc-as-sequence-data"
  ],
  "proof_origin": {
   "by": "agent",
@@ -156,7 +158,18 @@
   "def-sc-curves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -202,5 +215,27 @@
    "AlgebraicGeometry.artinSchreier_shortExact"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $p$ be a prime and $X$ a scheme with $p=0$ in $\\Gamma(X,\\mathcal O_X)$\n(for instance a curve over a field $k$ of characteristic $p$). The\nsequence of etale sheaves on $X_{\\Et}$\n\n$$\n0\\longrightarrow\\mathbf F_p\\longrightarrow\\mathbf G_a\n\\xrightarrow{\\ \\wp\\ }\\mathbf G_a\\longrightarrow0,\n\\qquad \\wp(x)=x^p-x,\n$$\n\nis exact; that is, $\\wp$ is an epimorphism of etale sheaves and the\nconstant sheaf $\\mathbf F_p$, mapped to $\\mathbf G_a$ by $c\\mapsto c\\cdot1$,\nis its kernel.",
+  "proof": [
+   {
+    "text": "The map $\\wp$ is additive since $p=0$ on every etale $X$-scheme. The\nconstant sheaf $\\mathbf F_p$ maps into $\\ker\\wp$ since $c^p=c$ for\n$c\\in\\mathbf F_p$. Conversely, let $V\\to X$ be etale and $y\\in\\mathcal O(V)$\nwith $y^p=y$. Since $y^p-y=\\prod_{c\\in\\mathbf F_p}(y-c)$ and the elements\n$y-c$ are pairwise comaximal (their differences are units of $\\mathbf F_p$),\nthe Chinese remainder theorem decomposes $V$ into the disjoint union of the\nopen and closed pieces $\\{y=c\\}$; so $y$ is a locally constant\n$\\mathbf F_p$-valued function, i.e. a section of $\\mathbf F_p$. This\nidentifies $\\mathbf F_p$ with $\\ker\\wp$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For surjectivity, let $U\\to X$ be etale and $f\\in\\mathbf G_a(U)=\\mathcal\nO_U(U)$. The $\\mathcal O_U(U)$-algebra $\\mathcal O_U(U)[y]/(y^p-y-f)$ is free\nof rank $p$, hence faithfully flat, and etale because the derivative of\n$y^p-y-f$ is $-1$, a unit. Its base change along\n$U\\to\\operatorname{Spec}\\mathcal O_U(U)$ is a surjective etale\n$V\\to U$ on which $\\wp(y)=f$; therefore $\\wp$ is surjective as a morphism\nof etale sheaves.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,262 @@
+{
+ "id": "lem-trf-flat-module-presentation-after-boundary-blowup",
+ "kind": "statement",
+ "title": "Finite presentation of a flat module after the boundary blowup",
+ "statement": "Let $S$ be a quasi-compact and quasi-separated scheme, $f:X\\to S$ a morphism locally of finite presentation [def-sbc-locally-finite-presentation], $\\mathcal M$ a finite-type quasi-coherent $\\mathcal O_X$-module flat over $S$, and $U\\subset S$ a quasi-compact open such that $\\mathcal M|_{X_U}$ is finitely presented. There is a finite-type quasi-coherent ideal $\\mathcal J\\subset\\mathcal O_S$ with $V(\\mathcal J)=S\\setminus U$. For any such $\\mathcal J$, its blowup $c:T=\\operatorname{Bl}_{\\mathcal J}S\\to S$ [def-nagata-global-blowup] is $U$-admissible, $T$ is quasi-compact and quasi-separated, and $U_T=c^{-1}(U)$ is quasi-compact, retrocompact (its intersection with every quasi-compact open is quasi-compact), and scheme-theoretically dense (for $j:U_T\\hookrightarrow T$ the map $\\mathcal O_T\\to j_*\\mathcal O_{U_T}$ is injective). If $p:X\\times_ST\\to X$ is the projection, then the module strict transform $\\mathcal M^c$ is canonically $p^*\\mathcal M$ and is flat over $T$ and of finite presentation as an $\\mathcal O_{X\\times_ST}$-module. The finite-presentation assertion is global on the entire fibre product. Module pullback is as in [def-pc-module-pullback]. Schemes and quasi-compactness conventions are as in [def-weil-pbc-scheme-conventions, def-weil-quasi-separated-morphism], quasi-coherence and finite type as in [pqf-def-coherent], finite presentation of module sheaves as in [def-weil-pbc-module-finite-type-presentation], and relative flatness as in [def-pc-scheme-module-flat-over]. Admissible blowups retain their finite-type centre ideals [def-nagata-admissible-blowup], and all module strict transforms use those specified ideals [def-trf-module-strict-transform].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 0815, theorem-flatten-module, final proof paragraph; Tag 080Y, remark-successive-blowups, paragraph 3; Tag 081N, lemma-flat-finite-type-finitely-presented-over-dense-open."
+ },
+ "stmt_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-global-blowup",
+  "def-pc-module-pullback",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lemma-nagata-qc-open-complement-ideal-exists] to the qcqs scheme $S$ and the quasi-compact open $U$ to obtain a finite-type quasi-coherent ideal with zero set $S\\setminus U$. Now fix any such ideal $\\mathcal J$. Apply [det-nagata-boundary-divisor-cartier] to $(S,U,\\mathcal J)$. It gives that $c:T=\\operatorname{Bl}_{\\mathcal J}S\\to S$ is $U$-admissible and that $U_T=c^{-1}(U)$ is scheme-theoretically dense in $T$. In particular the restriction map $\\mathcal O_T\\to j_*\\mathcal O_{U_T}$ is injective. In Lean, convert ideal-data finite type to module-sheaf finite type using [lem-pqf-finite-type-ideal-module]. Conversely, for a specified centre whose ideal module is finite type, its kernel construction is quasi-coherent by closed-immersion pushforward [lem-pc-closed-immersion-coherent-cohomology] and [lem-weil-pbc-quasi-coherent-module-kernel]. By [lem-weil-pbc-quasi-coherent-finite-type-affine], its affine sections are finite modules; their linear images under the ideal inclusion are exactly the affine ideals, so those ideals are finitely generated. This supplies the ideal-data finite-type hypothesis of the boundary theorem.",
+   "uses": [
+    "lemma-nagata-qc-open-complement-ideal-exists",
+    "det-nagata-boundary-divisor-cartier",
+    "lem-pqf-finite-type-ideal-module",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 080Y, remark-successive-blowups, third paragraph; properties.tex Tag 01PH, lemma-quasi-coherent-finite-type-ideals; divisors.tex Tags 02OS and 07ZU."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-trf-module-admissible-blowup-calculus] to $c$ and $\\mathcal M$. Its hypotheses hold because $S$ is qcqs, $U$ is quasi-compact, and $\\mathcal M$ is quasi-coherent, finite type and flat over $S$. Thus $T$ is qcqs and $\\mathcal M^c\\cong p^*\\mathcal M$ canonically; this module is quasi-coherent, finite type and flat over $T$. The same clause identifies its restriction over $U$ with $\\mathcal M|_{X_U}$.",
+   "uses": [
+    "lem-trf-module-admissible-blowup-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080F, lemma-strict-transform-flat (2); Tag 080D, definition-strict-transform (1), and permanence of relative flatness under base change."
+   }
+  },
+  {
+   "text": "By [lemma-nagata-admissible-blowup-over-open], the restriction of the blowup map to U is an isomorphism. Its source is quasi-compact because U is quasi-compact and isomorphisms are quasi-compact. Transfer compactness of the open subscheme to its underlying open. The elementary Mathlib lemma IsCompact.isRetrocompact, using quasi-separatedness of the new base from Step 2, gives retrocompactness directly. The quasi-compactness of its inclusion follows from the same compactness and [lem-weil-pbc-qcqs-morphism-permanence].",
+   "uses": [
+    "lemma-nagata-admissible-blowup-over-open",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PH, lemma-quasi-coherent-finite-type-ideals, and lemma-quasi-separated-quasi-compact-open-retrocompact; schemes.tex Tag 03GI, lemma-quasi-compact-permanence."
+   }
+  },
+  {
+   "text": "Put $Y=X\\times_ST$ and let $q:Y\\to T$ be the projection. By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], $q$ is locally of finite presentation, being a base change of $f$. Over $U_T\\cong U$, Step 2 identifies $\\mathcal M^c$ with the given finitely presented module $\\mathcal M|_{X_U}$. Now apply [lem-trf-flat-finite-type-dense-presentation] to $(q,\\mathcal M^c,U_T)$: Step 2 supplies finite type, quasi-coherence and relative flatness; Steps 1 and 3 supply schematic density and retrocompactness. It follows that $\\mathcal M^c$, and hence its canonical isomorphic pullback $p^*\\mathcal M$, is finitely presented on all of $Y$. The criterion imposes no quasi-compactness hypothesis on $Y$ or $X$. For the finite-presentation hypothesis, a private proved helper compares tensor pullback with the native scheme-module pullback by uniqueness of left adjoints, composes native pullbacks around the open restriction square, and uses preservation of finite presentation by native pullback. The pullback condition identifies the two source opens. Restrict the canonical quotient isomorphism from Step 2 and transfer finite presentation across it. For schematic density, apply Scheme.Hom.app_injective to the quasi-compact open inclusion and rewrite its target open as the intersection with the preserved open. These are interface identifications, not new unproved statements.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-flat-finite-type-dense-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0815, theorem-flatten-module, final paragraph, applying Tag 081N, lemma-flat-finite-type-finitely-presented-over-dense-open."
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-nagata-boundary-divisor-cartier",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pqf-finite-type-ideal-module",
+  "lem-trf-flat-finite-type-dense-presentation",
+  "lem-trf-module-admissible-blowup-calculus",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lemma-nagata-qc-open-complement-ideal-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tags 0815 (final paragraph), 080Y (third paragraph), and 081N. Lean implementation by B7, 2026-10-26, using the existing admissible-blowup permanence theorem, ideal-module affine bridges, native pullback comparisons, and Mathlib compact-open retrocompactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically.dense|flatten|strictTransform",
+   "results": "0 hits. . Definitions and permanence of finite presentation do not prove finite presentation after a boundary blowup over a non-Noetherian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"FinitePresentation\"",
+   "results": "0 hits. loogle: unknown identifier 'AlgebraicGeometry'. Definitions and permanence of finite presentation do not prove finite presentation after a boundary blowup over a non-Noetherian base.",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'AlgebraicGeometry'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowup makes an open schematically dense and a relatively flat finite type module finitely presented everywhere",
+   "results": "8 hits.  Candidates: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.flat_iff, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation. Definitions and permanence of finite presentation do not prove finite presentation after a boundary blowup over a non-Noetherian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent module flat over a quasi compact quasi separated base and finitely presented over a quasi compact open becomes finitely presented after blowing up the complement of that open",
+   "results": "8 hits.  Candidates: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE. Definitions and permanence of finite presentation do not prove finite presentation after a boundary blowup over a non-Noetherian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type quasi coherent module flat over a quasi compact quasi separated base and finitely presented over a quasi compact open becomes finitely presented after blowing up the complement of that open",
+   "results": "8 hits.  Candidates: SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.isFinitePresentation, Module.FinitePresentation.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, Module.finitePresentation_of_finite, SheafOfModules.IsFinitePresentation.casesOn, SheafOfModules.QuasicoherentData.IsFinitePresentation. Definitions and permanence of finite presentation do not prove finite presentation after a boundary blowup over a non-Noetherian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SchemeTheoreticallyDense\"",
+   "results": "0 hits. . Definitions and permanence of finite presentation do not prove finite presentation after a boundary blowup over a non-Noetherian base.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|[Ss]trict[Tt]ransform|[Ss]chematically[Dd]ense",
+   "results": "0 hits.  Read the returned types: finite-presentation predicates and permanence results do not give the boundary-blowup conclusion; Module.finitePresentation_of_finite requires a Noetherian base, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively flat finite type quasicoherent module finitely presented over a schematically dense retrocompact open is finitely presented everywhere",
+   "results": "8 hits. AlgebraicGeometry.instLocallyOfFinitePresentationResLE, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, Module.finitePresentation_of_finite, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation Read the returned types: finite-presentation predicates and permanence results do not give the boundary-blowup conclusion; Module.finitePresentation_of_finite requires a Noetherian base, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"Flat\"",
+   "results": "0 hits.  Read the returned types: finite-presentation predicates and permanence results do not give the boundary-blowup conclusion; Module.finitePresentation_of_finite requires a Noetherian base, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi coherent module flat over the base becomes finitely presented after blowing up the complement of a quasi compact open where it is finitely presented",
+   "results": "8 hits. SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, SheafOfModules.IsFinitePresentation Read the returned types: finite-presentation predicates and permanence results do not give the boundary-blowup conclusion; Module.finitePresentation_of_finite requires a Noetherian base, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat finite type modules extend finite presentation from a schematically dense retrocompact open of the base",
+   "results": "8 hits. AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset Read the returned types: finite-presentation predicates and permanence results do not give the boundary-blowup conclusion; Module.finitePresentation_of_finite requires a Noetherian base, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flattening-module-by-admissible-blowup",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Expansion of Stacks 0815: Tag 0815, theorem-flatten-module, final proof paragraph; Tag 080Y, remark-successive-blowups, paragraph 3; Tag 081N, lemma-flat-finite-type-finitely-presented-over-dense-open.",
+   "via": [
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-module-presentation-after-boundary-blowup",
+  "worker": "stage1",
+  "summary": "Proved the boundary-blowup finite-presentation assertion by assembling six existing nodes, with no new nodes. Verified arbitrary boundary ideals, canonical flat strict-transform identification, qcqs permanence, retrocompactness, and every hypothesis of the dense-open finite-presentation criterion. The statement is unchanged; no quasi-compactness of X is added.",
+  "blueprint": "The inherited blueprint ancestor lem-trf-local-term-locality, proof (1)--(2), semistable-alteration input, expanded through the flattening chain recorded in blueprint.from.via. These four steps realize the final finite-presentation argument of Stacks 0815 and its preliminary boundary blowup from 080Y; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-qc-open-complement-ideal-exists",
+    "why": "Generic existence of a finite-type ideal cutting out the complement of a quasi-compact open in a qcqs scheme; the trace unit has no alternative statement of this fact."
+   },
+   {
+    "node": "det-nagata-boundary-divisor-cartier",
+    "why": "Generic Cartier-boundary blowup and schematic-density tool applied to the chosen ideal; this supplies the boundary geometry required by the existing flattening route."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-over-open",
+    "why": "Generic isomorphism of an admissible blowup over its admissible open, used only to transfer quasi-compactness from U to U_T."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "det-nagata-boundary-divisor-cartier",
+  "lemma-nagata-admissible-blowup-over-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-66610d34b",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-66610d34b (reviewer sub-agent of L); spot-checked: Read in full: the item, all six cited statements, and Stacks 0815 (final paragraph), 080Y (paragraph 3), 081N, 080F(2), 01PH/02OS/07ZU/054D. The four steps follow 0815's final paragraph exactly. Step 1: the qc-open-complement ideal exists, and det-nagata-boundary-divisor-cartier works for ANY finite-type J with V(J)=S\\U and gives U-admissibility and density; its density definition is injectivity of O_T→j_*O_{U_T}. Step 2: calculus clause (2) gives M^c=p^*M, flat over T, finite type, agreement over U, T qcqs; this matches 080F(2). Step 3: U_T≅U, so U_T is qc; with T quasi-separated, the qc-permanence leaf clause (1) makes j qc, and a finite affine cover gives retrocompactness without assuming intersections of affines are affine. Step 4: q is lfp by base change, and every hypothesis of the 081N node is met, giving global finite presentation, which passes to p^*M through the isomorphism. Every clause of the statement is covered. Edge cases: U=S is the hypothesis; U=∅ makes T empty; non-Noetherian S and non-qc X are fine since 081N is local. No new nodes. The rg -L duplicate search found no other node with this statement, and there is no cycle; the only citer is the parent flattening node, which uses it as stated. The three Nagata tool_uses are accepted as generic blowup facts. No SGA citations. Minor: Step 3's source field also lists 01PH, and the report mentions a citations.json that was not committed; neither needs a change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatModulePresentationAfterBoundaryBlowup",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatModulePresentationAfterBoundaryBlowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModulePresentationAfterBoundaryBlowup.lean",
+  "statement": "theorem flatModulePresentationAfterBoundaryBlowup {X S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] (F : X.Modules) [hF : F.IsQuasicoherent] [F.IsFiniteType] (hflat : F.IsFlatOver f) (U : S.Opens) (hU : IsCompact (U : Set S)) (hUfp : ((restrictFunctor (f ⁻¹ᵁ U).ι).obj F).IsFinitePresentation) : (∃ I : S.IdealSheafData, I.toModules.IsFiniteType ∧ (I.support : Set S) = (U : Set S)ᶜ) ∧ ∀ (I : S.IdealSheafData) (hI : I.toModules.IsFiniteType), (I.support : Set S) = (U : Set S)ᶜ → (∃ B : IsAdmissible S U, B.I = I) ∧ CompactSpace I.blowup ∧ QuasiSeparatedSpace I.blowup ∧ IsCompact ((I.blowupMap ⁻¹ᵁ U : I.blowup.Opens) : Set I.blowup) ∧ IsRetrocompact ((I.blowupMap ⁻¹ᵁ U : I.blowup.Opens) : Set I.blowup) ∧ IsSchemeTheoreticallyDominant (I.blowupMap ⁻¹ᵁ U).ι ∧ IsIso (cokernel.π (kernel.ι (moduleStrictTransformRestriction f I F))) ∧ (@moduleStrictTransform _ _ f I hI F hF).IsFlatOver (pullback.snd f I.blowupMap) ∧ (@moduleStrictTransform _ _ f I hI F hF).IsFinitePresentation",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bbc9dd68",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: qcqs S, lfp f, F quasi-coherent+finite type+IsFlatOver f, qc U, restriction to f⁻¹U finitely presented; ∃ finite-type IdealSheafData with support = Uᶜ; ∀ such I: admissible with the same centre (∃ B : IsAdmissible S U, B.I = I), blowup qcqs, preimage of U compact+IsRetrocompact+IsSchemeTheoreticallyDominant ι, canonical quotient cokernel.π(kernel.ι moduleStrictTransformRestriction) is iso, strict transform IsFlatOver snd and globally IsFinitePresentation. Statement field verbatim; only the lean field of the node changed; report sections present; docstrings carry source, blueprint and 4 proof steps; only sorry; single universe; no extra assumptions. Advisory: Mathlib IsSchemeTheoreticallyDominant (ker=⊥) instead of def-trf-schematically-dense-open's SchematicallyDenseOpen; equivalent here because j is qc (U_T qc and T qs are co-conclusions, Hom.app_injective), the item does not cite that node, and it matches what the det-nagata-boundary-divisor-cartier proof dep produces. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261026T081100-L-1804922",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -14,15 +14,14 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineBasicOpen
+import WeilConjectures.AlgebraicGeometry.Modules.Annihilator
+import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
-import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!
 # A finitely presented closed subscheme supporting a finite type sheaf on one fibre
@@ -40,6 +39,78 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
+
+private theorem exists_fg_subideal_map_eq {A B : Type u} [CommRing A] [CommRing B]
+    (φ : A →+* B) (I : Ideal A) (hI : (I.map φ).FG) :
+    ∃ J : Ideal A, J.FG ∧ J ≤ I ∧ J.map φ = I.map φ := by
+  classical
+  obtain ⟨s, hs, he⟩ :=
+    (Submodule.fg_span_iff_fg_span_finset_subset (R := B) (φ '' (I : Set A))).mp hI
+  have hpre (b : s) : ∃ a : A, a ∈ I ∧ φ a = b := hs b.property
+  choose a ha haφ using hpre
+  let J : Ideal A := Ideal.span (Set.range a)
+  refine ⟨J, Submodule.fg_span (Set.finite_range a), Ideal.span_le.mpr ?_, ?_⟩
+  · rintro _ ⟨b, rfl⟩
+    exact ha b
+  · have himage : φ '' Set.range a = (s : Set B) := by
+      ext b
+      constructor
+      · rintro ⟨_, ⟨c, rfl⟩, rfl⟩
+        rw [haφ c]
+        exact c.property
+      · intro hb
+        exact ⟨a ⟨b, hb⟩, Set.mem_range_self _, haφ _⟩
+    change (Ideal.span (Set.range a)).map φ = Ideal.span (φ '' (I : Set A))
+    rw [Ideal.map_span, himage]
+    exact he.symm
+
+private theorem preimage_zeroLocus_appTop {Y X : Scheme.{u}} (g : Y ⟶ X)
+    (s : Set Γ(X, ⊤)) :
+    g ⁻¹' X.zeroLocus s = Y.zeroLocus (g.appTop.hom '' s) := by
+  exact Scheme.preimage_zeroLocus g s
+
+private theorem support_eq_zeroLocus_top {X : Scheme.{u}} [IsAffine X]
+    (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] :
+    {x : X | ¬ Subsingleton (F.presheaf.stalk x)} =
+      X.zeroLocus (U := ⊤) (Module.annihilator Γ(X, ⊤) Γ(F, ⊤)) := by
+  simpa only [IsAffineOpen.fromSpec_image_zeroLocus, TopologicalSpace.Opens.coe_top,
+    Set.inter_univ] using
+    (finite_type_module_support_closed X F).2.2.1 ⟨⊤, isAffineOpen_top X⟩
+
+private theorem exists_closedImmersion_of_fg_annihilator
+    {X : Scheme.{u}} [IsAffine X] (F : X.Modules) [F.IsFiniteType] [F.IsQuasicoherent]
+    (J : Ideal Γ(X, ⊤)) (hJ : J.FG)
+    (hJF : J ≤ Module.annihilator Γ(X, ⊤) Γ(F, ⊤)) :
+    ∃ (Z : Scheme.{u}) (j : Z ⟶ X),
+      IsClosedImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧
+        QuasiSeparated j ∧
+        ∃ H : Z.Modules, H.IsFiniteType ∧ H.IsQuasicoherent ∧
+          Nonempty ((pushforward j).obj H ≅ F) ∧
+          Set.range j.base = X.zeroLocus (U := ⊤) J := by
+  let I : X.IdealSheafData := Scheme.IdealSheafData.ofIdealTop J
+  let A : X.IdealSheafData :=
+    { ideal U := Module.annihilator Γ(X, U.1) Γ(F, U.1)
+      map_ideal_basicOpen U a := annihilator_affine_basicOpen X F U a }
+  have hIA : I ≤ A := Scheme.IdealSheafData.le_of_isAffine (by simpa [I, A] using hJF)
+  have hkill : ∀ U : X.affineOpens, ∀ a ∈ I.ideal U, ∀ m : Γ(F, U.1), a • m = 0 := by
+    intro U a ha m
+    exact Module.mem_annihilator.mp (hIA U ha) m
+  have hfp : LocallyOfFinitePresentation I.subschemeι :=
+    Scheme.IdealSheafData.locallyOfFinitePresentation_subschemeι fun U ↦ by
+      exact hJ.map _
+  have hunit : IsIso (pullbackUnit I.subschemeι F) :=
+    isIso_pullbackUnit_subschemeι_of_smul_eq_zero F I hkill
+  obtain ⟨adj⟩ := nonempty_tensorPullbackAdjunction I.subschemeι
+  let e := (adj.leftAdjointUniq (pullbackPushforwardAdjunction I.subschemeι)).app F
+  let H := (tensorPullback I.subschemeι).obj F
+  have hHfin : H.IsFiniteType := (tensorPullback_isFiniteType _ _ I.subschemeι F).1
+  have hHqc : H.IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent I.subscheme.ringCatSheaf).prop_of_iso e.symm
+      inferInstance
+  refine ⟨I.subscheme, I.subschemeι, inferInstance, hfp, inferInstance, inferInstance,
+    H, hHfin, hHqc, ⟨(pushforward I.subschemeι).mapIso e ≪≫ (asIso
+      (pullbackUnit I.subschemeι F)).symm⟩, ?_⟩
+  simpa only [I, Scheme.IdealSheafData.coe_support_ofIdealTop] using I.range_subschemeι
 
 /-- A finite type quasi-coherent module on an affine finite type scheme is the pushforward
 of a finite type quasi-coherent module on a finitely presented closed subscheme whose
@@ -90,6 +161,31 @@ theorem exists_finitePresentation_closedImmersion_fiber_support
               ¬ Subsingleton
                 (((tensorPullback
                   (pullback.fst f (S.fromSpecResidueField (f x)))).obj F).presheaf.stalk z)} := by
-  sorry
+  classical
+  let g := pullback.fst f (S.fromSpecResidueField (f x))
+  let T := Limits.pullback f (S.fromSpecResidueField (f x))
+  have : IsNoetherianRing Γ(T, ⊤) :=
+    IsLocallyNoetherian.component_noetherian ⟨⊤, isAffineOpen_top T⟩
+  let I := Module.annihilator Γ(X, ⊤) Γ(F, ⊤)
+  obtain ⟨J, hJ, hJI, hmap⟩ := exists_fg_subideal_map_eq g.appTop.hom I
+    (IsNoetherian.noetherian _)
+  obtain ⟨Z, j, hj, hjfp, hjqc, hjqs, H, hHfin, hHqc, e, hrange⟩ :=
+    exists_closedImmersion_of_fg_annihilator F J hJ hJI
+  refine ⟨Z, j, hj, hjfp, hjqc, hjqs, H, hHfin, hHqc, e, ?_⟩
+  have hzero : g ⁻¹' X.zeroLocus (U := ⊤) J = g ⁻¹' X.zeroLocus (U := ⊤) I := by
+    rw [preimage_zeroLocus_appTop, preimage_zeroLocus_appTop,
+      ← T.zeroLocus_span (g.appTop.hom '' (J : Set Γ(X, ⊤))),
+      ← T.zeroLocus_span (g.appTop.hom '' (I : Set Γ(X, ⊤)))]
+    change T.zeroLocus (U := ⊤) (J.map g.appTop.hom) =
+      T.zeroLocus (U := ⊤) (I.map g.appTop.hom)
+    rw [hmap]
+  have hsupport := ((finiteType_module_support_pullback F).2.2 T g).2
+  rw [support_eq_zeroLocus_top F] at hsupport
+  change Set.range (pullback.map (j ≫ f) (S.fromSpecResidueField (f x))
+    f (S.fromSpecResidueField (f x)) j
+    (𝟙 (Spec (S.residueField (f x)))) (𝟙 S) (by simp) (by simp)) = _
+  rw [Scheme.Pullback.range_map]
+  simpa only [hrange, Scheme.Hom.id_base, TopCat.coe_id, Set.range_id,
+    Set.preimage_univ, Set.inter_univ] using hzero.trans hsupport.symm
 
 end AlgebraicGeometry.Scheme.Modules

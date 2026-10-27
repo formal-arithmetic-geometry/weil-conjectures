@@ -1,0 +1,254 @@
+{
+ "id": "lem-pur-bounded-site-tensor-transposes",
+ "kind": "statement",
+ "title": "Bounded site comparison of tensor evaluation transposes",
+ "statement": "Fix the finite coefficient datum [def-pur-conventions]: $k$ is an algebraic closure of a finite field of characteristic $p$, $\\ell\\ne p$, $E/\\mathbf Q_\\ell$ is finite, $n\\ge1$ and $A=\\mathcal O_E/\\varpi_E^n$. All schemes are finite-type $k$-schemes and every morphism to which compact support is applied is separated and finite type [def-weil-scheme-morphism-properties]. No absolute separatedness is assumed. For each such $h:S\\to T$ choose $c_h=(j_h:S\\hookrightarrow\\overline S,r_h:\\overline S\\to T)$ [def-weil-compactifications-refinements]. On ordinary constant-$A$ module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], put $C_V=\\nu_V^*$ [def-sf-comparison-derived-pullback], $F_h^e=Rr_{h,e,*}j_{h,!}^e$ and $F_h^p=Rr_{h,p,*}j_{h,!}^p$. Use the specified proper-mate/open comparison $B_h:C_TF_h^e\\xrightarrow{\\sim}F_h^pC_S$ [lem-pur-compact-support-site-coherence], the ordinary etale right adjoint $G_h^e$ [thm-amb-etale-exceptional-adjoint], the transported $G_h^p=Rh^!$ [def-weil-exceptional-inverse-image], and their counits $\\varepsilon_h^e,\\varepsilon_h^p$. Write $a_{h,L}=\\rho_L:C_SG_h^eL\\xrightarrow{\\sim}G_h^pC_TL$ for the comparison induced by the site-adjunction unit, with the bounded-origin Hom normalization of [lem-pur-bounded-site-adjunction-transpose]. Only bounded-below etale inputs, bounded-below exceptional images, and bounded-below intermediate etale objects of the displayed composites are used; all pro-etale exceptional Hom bijections are the bounded etale-origin ones.\n\nLet $f:X\\to Y$ be one of these morphisms, $M\\in D^b_c(X_{\\mathrm{et}},A)$ and $K\\in D^b_{ctf}(Y_{\\mathrm{et}},A)$ [def-weil-pbc-constructible-complexes, def-weil-finite-tor-amplitude]. Let $e:F_f^eM\\to A_Y$ be any morphism, and set $e_p=C_Y(e)\\circ B_{f,M}^{-1}:F_f^pC_XM\\to C_YA_Y\\cong A_Y$. Use ordinary derived tensor [def-kun-derived-tensor], and the canonical coefficient-unit, tensor and pullback comparisons [lem-sfb-ringed-derived-monoidal-comparisons, lem-weil-pbc-comparison-pullback]. Let $P^e$ be the proper counit-mate/open compactification projection [def-kun-projection-formula-map, lem-pur-etale-open-derived-tensor], and $P^p$ the specified compactification projection [def-exchange-projection]. Both are invertible at $(M,K)$ and $(C_XM,C_YK)$.\nDefine $u_e:M\\otimes^Lf_e^*K\\to G_f^eK$ to be the adjoint transpose of\n$$z_e:F_f^e(M\\otimes^Lf_e^*K)\\xrightarrow{(P^e)^{-1}}F_f^eM\\otimes^LK\\xrightarrow{e\\otimes1}A_Y\\otimes^LK\\xrightarrow{\\sim}K,$$\nand $u_p:C_XM\\otimes^Lf_p^*C_YK\\to G_f^pC_YK$ as the specified bounded-origin transpose of the identical composite with $P^p,e_p$ and the pro-etale left unitor. With the canonical source identification $h:C_X(M\\otimes^Lf_e^*K)\\xrightarrow{\\sim}C_XM\\otimes^Lf_p^*C_YK$, one has\n$$u_p\\circ h=a_{f,K}\\circ C_X(u_e).$$\nThe equality also holds with the two source tensor factors reversed, using canonical symmetry. In particular, whenever $M=G_f^eA_Y$ is bounded constructible, $e=\\varepsilon^e_{f,A_Y}$ and the above domain conditions hold, it identifies the specified $\\theta^e_{f,K}$ with $\\theta^p_{f,C_YK}$ [def-pur-co-smoothness], using $a_{f,A_Y}$ on the dualizing factor. All equalities are natural in $M,K,e$; no projection outside this finite-Tor domain is inverted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Steps 1 and 3: inverse projection, evaluation and symmetry in the canonical tensor transpose; extracted returned proof Step 4"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sf-comparison-derived-pullback",
+  "lem-pur-compact-support-site-coherence",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-exceptional-inverse-image",
+  "lem-pur-bounded-site-adjunction-transpose",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-tor-amplitude",
+  "def-kun-derived-tensor",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-comparison-pullback",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-pur-bounded-site-transpose-arrows",
+  "def-smooth-purity-projection-comparison-equation",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-amb-etale-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "The proved compact_projection_square in the recorded projection-comparison module applies directly to the supplied finite coefficient A, bounded-below M and tensor J. Cancel comparison of the etale projection component. Use the two defining evaluation equations and siteTensorUnitEvaluation to identify the untransposed arrows. No coefficient-ring transport or extra dimension bound is needed.",
+   "uses": [
+    "lem-pur-projection-comparison-etale-origin",
+    "lem-pur-site-tensor-unit-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved boundedSiteTranspose_compatible computation of the defining bounded Hom chain to this untransposed square. This gives the forward-factor equation. Expand the specified reverse comparison: its two pro-etale braidings cancel by symmetry. Source naturality of boundedSiteTranspose then gives the reverse-factor equation, with the existing derived braiding and its signs.",
+   "uses": [
+    "def-pur-bounded-site-transpose-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the dualizing clause write d=H(eta_unit;U(coefficientUnit)). Its image under comparison is exactly boundedTensorDualizingRho. Naturality of the compact-support comparison and of the etale counit, followed by naturality and the left triangle identity of the site adjunction, gives F_p(C(d));epsilon_p = comparedEvaluation.",
+   "uses": [
+    "def-pur-bounded-site-transpose-arrows",
+    "def-sf-compact-support-site-comparison-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the projection moves C(d) from the source tensor to the evaluation. The preceding counit equation makes the resulting evaluation precisely the compared one. Apply the same tensor-evaluation square and bounded Hom-chain computation as above. Naturality of the canonical tensor/pullback source identification and source naturality of the Hom chain move the supplied jp witness through the transpose; jp inverse followed by jp cancels. This proves the displayed dualizing equation.",
+   "uses": [
+    "lem-pur-projection-comparison-etale-origin",
+    "lem-pur-site-tensor-unit-evaluation",
+    "def-pur-bounded-site-transpose-arrows",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing naturality proof is unchanged: source and target naturality of both adjunctions and the canonical compact-support comparison prove its two clauses.",
+   "uses": [
+    "def-pur-bounded-site-transpose-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pur-bounded-site-transpose-arrows",
+  "def-sf-compact-support-site-comparison-construction",
+  "lem-pur-projection-comparison-etale-origin",
+  "lem-pur-site-tensor-unit-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Steps 1 and 3, expanded using the proved finite-coefficient projection square, the actual comparison unit, counit naturality and tensor-unit evaluation compatibility. Stacks categories.tex lemma-transformation-between-functors-and-adjoints and sites-cohomology.tex lemma-pullback-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale proetale comparison preserves tensor counit adjunction transposes on bounded constructible finite Tor complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"For a light profinite space $ P $, the free $ R $-module $ \\\\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\\\to B \"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For a light condensed set $ P $, the free $ R $-module $ \\\\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\\\to B\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of monoidal adjunctions carries the transpose of inverse projection formula followed by evaluation to the corresponding tensor map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.frobeniusMorphism_mate\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) {L : CategoryTheory.Functor D C} [inst_\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be monoidal closed categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ and $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a pair of adjoint functors, with $L$ being the left \"}\n  {\"name\": \"CategoryTheory.tensorLeftAdjunction\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (Y Y' : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          CategoryTheory.MonoidalCategory.tensorLeft Y' ⊣ CategoryTheory.MonoidalCategory.tensorLeft Y\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given dual objects $Y$ and $Y'$ with an exact pairing, the left tensoring functor $\\\\mathcal{C} \\\\to \\\\mathcal{C}$ defined by tensoring with $Y'$ is left adjoi\"}\n  {\"name\": \"CategoryTheory.tensorRightAdjunction\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (Y Y' : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          CategoryTheory.MonoidalCategory.tensorRight Y ⊣ CategoryTheory.MonoidalCategory.tensorRight Y'\", \"doc\": \"Given dual objects $Y$ and $Y'$ in a monoidal category $\\\\mathcal{C}$, this establishes an adjunction between the functors $- \\\\otimes Y$ and $- \\\\otimes Y'$. Specifically, tensoring with the dual object\"}\n  {\"name\": \"CategoryTheory.coev_expComparison\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u'} [inst_1 : CategoryTheory.Category.{v, u'} D]\\n  [inst_2 : CategoryTheory.CartesianMonoidalCategory C] [inst_3 : CategoryTheory.CartesianMonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : CategoryTheory.MonoidalClosed\", \"doc\": \"For a product-preserving functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between closed monoidal categories and objects $A, B \\\\in \\\\mathcal{C}$, the composition of $F$ applied to the coevaluation map $\\\\eta_A\"}\n  {\"name\": \"CategoryTheory.frobeniusMorphism\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Functor\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u'} →\\n      [inst_1 : CategoryTheory.Category.{v, u'} D] →\\n        [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\\n          [inst_3 : CategoryTheory.CartesianMonoidalCategory D] →\\n            (F : CategoryTheory.Func\", \"doc\": \"Given an adjunction `h` where `L: \\\\mathcal{D} \\\\to \\\\mathcal{C}` is the left adjoint to `F: \\\\mathcal{C} \\\\to \\\\mathcal{D}`, and an object `A` in `\\\\mathcal{C}`, the Frobenius morphism is a natural transfor\"}\n  {\"name\": \"CategoryTheory.leftAdjointMate_comp_evaluation\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {X Y : C}\\n  [inst_2 : CategoryTheory.HasLeftDual X] [inst_3 : CategoryTheory.HasLeftDual Y] (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.whiskerLeft X \", \"doc\": \"In a monoidal category $\\\\mathcal{C}$, for objects $X$ and $Y$ with left duals and a morphism $f: X \\\\to Y$, the composition of the left adjoint mate $\\\\Dual{f}: \\\\Dual{Y} \\\\to \\\\Dual{X}$ with the evaluatio\"}\n  {\"name\": \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For any objects $X$ and $Y$ in category $\\\\mathcal{C}$, the composition of the unit of the adjunction $F \\\\dashv G$ applied to $X \\\\otimes Y$ followed by the image under $G$ of the oplax monoidal coheren\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For objects $X, Y$ in category $\\\\mathcal{D}$, the composition of $F$ applied to the lax monoidal coherence morphism $\\\\mu_{G,X,Y}$ followed by the counit $\\\\epsilon_{X \\\\otimes Y}$ of the adjunction $F \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [G.LaxMonoidal] : F.OplaxMonoidal\", \"doc\": \"The left adjoint of a lax monoidal functor is oplax monoidal.\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.OplaxMonoidal] : G.LaxMonoidal\", \"doc\": \"The right adjoint of an oplax monoidal functor is lax monoidal.\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.OplaxMonoidal] [G.LaxMonoidal] : Prop\", \"doc\": \"When `adj : F ⊣ G` is an adjunction, with `F` oplax monoidal and `G` lax-monoidal,\\nthis typeclass expresses compatibilities between the adjunction and the (op)lax\\nmonoidal structures.\"}\n  {\"name\": \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : G.LaxMonoidal ≃ F.OplaxMonoidal\", \"doc\": \"If `F ⊣ G` is an adjunction, the `G` is lax monoidal iff `F` is oplax monoidal.\\nIt is advisable to use `Adjunction.leftAdjointOplaxMonoidal` and\\n`Adjunction.rightAdjointLaxMonoidal`, because compatibi\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.OplaxMonoidal] : adj.IsMonoidal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [G.LaxMonoidal] : adj.IsMonoidal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isMonoidal_comp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] {F : CategoryTheory.Functor C D} {G : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {inst✝¹ : CategoryTheory.MonoidalCategory C} {D : Type u₂} {inst✝² : CategoryTheory.Category.{v₂, u₂} D} {inst✝³ : CategoryTheory.MonoidalCategory D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {adj : F ⊣ G} {inst✝⁴ : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.OplaxMonoidal] [G.LaxMonoidal] [adj.IsMono\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.unit_app_unit_comp_map_η\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.OplaxMonoidal] [G.LaxMonoidal] [adj.IsMono\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_η_comp_η\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.Monoidal] [G.Monoidal] [adj.IsMonoidal] : \", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*transpose|transpose.*tensor|projection.*counit",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale bounded comparison transports inverse compact support projection and evaluation adjunction transpose",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.pushforwardToOfIso\", \"module\": \"Mathlib.Topology.Sheaves.Presheaf\", \"type\": \"{X Y : TopCat} (H₁ : X ≅ Y) {ℱ : Y.Presheaf C} {𝒢 : X.Presheaf C} (H₂ : ℱ ⟶ H₁.hom _* 𝒢) : H₁.inv _* ℱ ⟶ 𝒢\", \"doc\": \"Let $H_1: X \\\\cong Y$ be a homeomorphism between topological spaces. Let $\\\\mathcal{F}$ be a presheaf on $Y$ and $\\\\mathcal{G}$ be a presheaf on $X$, both with values in a category $\\\\mathcal{C}$. The pus\"}\n  {\"name\": \"CategoryTheory.constantSheafAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{T : C} (hT : IsTerminal T) : constantSheaf J D ⊣ (sheafSections J D).obj (op T)\", \"doc\": \"Given a terminal object $ T $ in a category $ \\\\mathcal{C} $ and a category $ \\\\mathcal{D} $, there exists an adjunction where the left adjoint is the constant sheaf functor $ \\\\mathcal{C}^{\\\\text{op}} \\\\t\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_unit\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"Under the assumption that effective epimorphisms are surjective, the unit of the adjunction between the functor constructing sheaves of locally constant functions on compact Hausdorff-like spaces and \"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] : functor.{u, w} P hs ⊣ (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩\", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}\n  {\"name\": \"CategoryTheory.constantPresheafAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{T : C} (hT : IsTerminal T) : Functor.const Cᵒᵖ ⊣ (evaluation Cᵒᵖ D).obj (op T)\", \"doc\": \"For a category $\\\\mathcal{C}$ with a terminal object $T$, there is an adjunction between the constant presheaf functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\mathcal{D}$ valued at $T$ and the evaluation functor a\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionLeft_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) (Y : D),\\n  (CategoryTheory.evaluationAdjunctionLeft D c).counit.app Y =\\n    CategoryTheory.Limi\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ where $\\\\mathcal{D}$ has products over hom-sets of $\\\\mathcal{C}$, the counit of the evaluation adjunction at an object $Y \\\\in \\\\mathcal{D}$ is the projecti\"}\n  {\"name\": \"CategoryTheory.evaluationAdjunctionLeft\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Evaluation\", \"type\": \"(c : C) : (evaluation _ _).obj c ⊣ evaluationRightAdjoint D c\", \"doc\": \"For a category $\\\\mathcal{C}$ and a complete category $\\\\mathcal{D}$, the evaluation functor $\\\\text{Eval}_c : \\\\mathcal{D}^{\\\\mathcal{C}} \\\\to \\\\mathcal{D}$ at an object $c \\\\in \\\\mathcal{C}$ has a right adjo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction/monoidal or unrelated sheaf results do not identify the specified geometric compactification and bounded-origin maps"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*transpose|transpose.*tensor|projection.*counit",
+   "results": "Read 4 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/LinearAlgebra/Contraction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract adjunction, monoidal equivalence, condensed-module and linear-dual statements do not compare the specified finite-coefficient etale/proetale compact-support maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The comparison of monoidal adjunctions carries tensor evaluation transposes to corresponding maps",
+   "results": "Read 8 hits: CategoryTheory.tensorRightAdjunction, CategoryTheory.expComparison_ev, CategoryTheory.rightAdjointMate_comp_evaluation, CategoryTheory.Adjunction.mapMon, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation, CategoryTheory.leftAdjointMate, CategoryTheory.leftAdjointMate_comp_evaluation",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract adjunction, monoidal equivalence, condensed-module and linear-dual statements do not compare the specified finite-coefficient etale/proetale compact-support maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "Read 12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract adjunction, monoidal equivalence, condensed-module and linear-dual statements do not compare the specified finite-coefficient etale/proetale compact-support maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale proetale comparison preserves tensor evaluation adjunction transposes of inverse compact support projection formula",
+   "results": "Read 8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihom_map_val_app, Condensed.profiniteSolidCounit, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract adjunction, monoidal equivalence, condensed-module and linear-dual statements do not compare the specified finite-coefficient etale/proetale compact-support maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of symmetric monoidal functors intertwines inverse projection formula evaluation maps and exceptional adjunction transposes",
+   "results": "Read 8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor, CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.frobeniusMorphism_mate",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract adjunction, monoidal equivalence, condensed-module and linear-dual statements do not compare the specified finite-coefficient etale/proetale compact-support maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-site-counit-projection-transport",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Step 1, final paragraph (smooth base-change and co-projection factors), and Step 2 (tensor formula as projection mate); Steps 1 and 3: inverse projection, evaluation and symmetry in the canonical tensor transpose; extracted returned proof Step 4",
+   "via": [
+    "lem-pur-finite-site-counit-projection-transport",
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-bounded-site-tensor-transposes",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Five explicit steps identify the normalized projection square, invert only its given finite-Tor components, compare evaluation via the monoidal unitor, calculate the bounded-origin Hom-chain, and check symmetry and the exceptional-counit specialization. No new nodes; no Lean attachment or compilation.",
+  "blueprint": "thm-pur-composition-coherence proof Step 1 final paragraph and Step 2 projection-mate tensor formula, through the existing ancestry; the local tensor/counit calculation is the agent expansion of lem-pur-co-smooth-etale-locality proof Steps 1 and 3.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-projection-comparison-etale-origin",
+    "why": "Generic comparison identity used with the fixed functors and canonical maps, without replacing the smooth-purity unit route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Ambient symmetric monoidal pullback comparisons supply the tensor, left-unitor and symmetry identities; the smooth-purity unit does not reconstruct ringed-topos tensor descent."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Bounded-below fully faithful comparison supplies invertibility of the actual comparison unit; it is a generic site-comparison tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-projection-comparison-etale-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-bc4add5b5",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-bc4add5b5 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full: lem-pur-projection-comparison-etale-origin, def-sf-compact-support-site-comparison-construction, lem-sf-class-compact-support-comparison, lem-pur-compact-support-site-coherence, lem-sfb-ringed-derived-monoidal-comparisons, def-pur-bounded-site-transpose-arrows, lem-pur-bounded-site-adjunction-transpose, thm-weil-pbc-site-comparison, def-exchange-projection, def-pur-co-smoothness, and the parent's Step 3. Also read the blueprint lem-pur-co-smooth-etale-locality proof Steps 1-4. The statement is byte-identical to the base and the item is still unsplit on live; there are no new nodes. Step 1: substituting C=B^{-1} into the projection square gives r∘C(P^e)=P^p∘b, and inverting the two assumed isomorphisms gives the displayed equation. The identification C=B^{-1} follows from the statements of the construction def, the coherence lemma and the transpose def (open part named in the cited node). Step 2: tensor naturality plus left-unitor preservation give v_p b=C(v_e), hence z_p F_p(h) B_J=C(z_e). Step 3: the Hom-chain is the same as Phi of the stmt_dep lemma; naturality of the unit eta and of the etale adjunction gives rho_K∘C_X(u_e), with rho_K=C_X G^e(eta_K). All objects involved are bounded below: J is bounded by finite Tor amplitude, and G^eK is in D^+ by finite cohomological amplitude. Step 4: preservation of the Koszul symmetry plus source naturality gives the reversed-factor equality. Step 5: with e=eps^e the etale transpose is 1, so e_p=eps^p∘F_p(rho_A). Naturality of P^p in its first variable (invertible at omega by conjugation) then gives exactly theta^p of def-pur-co-smoothness. Edge cases tested: zero M, K and e; identity f; K=A; odd shifts. No duplicate found (the exchange-transposes, compositor-conjugates and unital-cancellation nodes cover other clauses). Accepted tool_use: lem-sfb-ringed-derived-monoidal-comparisons (off-route, generic symmetric-monoidal pullback); the other two declared tools lie on the route. No SGA source. Advisory: the dim X̄<=D hypothesis the worker avoided is always satisfiable, so citing the transpose lemma would also have been fine."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundedSiteTensorTransposes",
+  "declaration": "AlgebraicGeometry.ProEtale.boundedSiteTensorTransposes",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.boundedTensorComparedEvaluation",
+   "AlgebraicGeometry.ProEtale.boundedTensorOriginTranspose",
+   "AlgebraicGeometry.ProEtale.boundedTensorReverseComparison",
+   "AlgebraicGeometry.ProEtale.boundedTensorExceptionalCounit",
+   "AlgebraicGeometry.ProEtale.boundedTensorDualizingRho",
+   "AlgebraicGeometry.ProEtale.boundedSiteTensorTransposes",
+   "AlgebraicGeometry.ProEtale.boundedSiteTensorTransposes_dualizing",
+   "AlgebraicGeometry.ProEtale.boundedSiteTensorTransposes_natural"
+  ],
+  "file": "lean/Sheaf/Paper/BoundedSiteTensorTransposes.lean",
+  "statement": "theorem boundedSiteTensorTransposes (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (H : Etale.DerivedCategoryModule P.Coefficient Y ⥤ Etale.DerivedCategoryModule P.Coefficient X) (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c ⊣ H) (M : Etale.DerivedCategoryModule P.Coefficient X) (K : Etale.DerivedCategoryModule P.Coefficient Y) (_hMc : Etale.DerivedCategory.isBoundedConstructible P.Coefficient X M) (_hKc : WeilConjectures.finiteTorConstructibleEtale P.coefficients.l P.extension P.level P.level_pos Y K) (hM : _root_.DerivedCategory.TStructure.t.plus M) (_hK : _root_.DerivedCategory.TStructure.t.plus K) (_hHK : _root_.DerivedCategory.TStructure.t.plus (H.obj K)) (_hHUK : _root_.DerivedCategory.TStructure.t.plus (H.obj (R(comparisonLowerStar (ModuleCat.{u + 1} P.Coefficient) Y).obj (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K)))) (hJ : _root_.DerivedCategory.TStructure.t.plus (M ⊗ L(Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj K)) (hJrev : _root_.DerivedCategory.TStructure.t.plus (L(Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj K ⊗ M)) (e : (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).obj M ⟶ 𝟙_ (Etale.DerivedCategoryModule P.Coefficient Y)) [IsIso (((Etale.projectionMapOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).app M).app K)] [IsIso (((projectionMapOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).obj M)).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K))] (ze : (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).obj (M ⊗ L(Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj K) ⟶ K) (zp : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).obj (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).obj M ⊗ L(upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K)) ⟶ D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K) (_hze : ((Etale.projectionMapOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).app M).app K ≫ ze = ((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) Y).map e).app K ≫ (λ_ K).hom) (_hzp : ((projectionMapOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).obj M)).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K) ≫ zp = ((derivedTensor (ModuleCat.{u + 1} P.Coefficient) Y).map (boundedTensorComparedEvaluation P.Coefficient c M hM e)).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K) ≫ (λ_ (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K)).hom) : boundedSiteTranspose P.Coefficient c H adj ⟨_, hJ⟩ (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K) ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).map (projectionComparisonTargetIso P.Coefficient f M K).symm.hom ≫ zp) = D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).map ((adj.homEquiv _ K) ze) ≫ boundedSiteRho P.Coefficient H K ∧ boundedSiteTranspose P.Coefficient c H adj ⟨_, hJrev⟩ (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K) ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).map ((boundedTensorReverseComparison P.Coefficient (f := f) M K).hom ≫ ((_root_.DerivedCategory.braidedCategory' (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))).braiding (L(upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K)) (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).obj M)).hom) ≫ zp) = D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).map (((Etale.derivedBraidedCategory (ModuleCat.{u + 1} P.Coefficient) X).braiding (L(Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).obj K) M).hom ≫ (adj.homEquiv _ K) ze) ≫ boundedSiteRho P.Coefficient H K",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-285c21be4",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L (474ca8e6, H2). Route (a) applied exactly: all 4 uses of comparisonOpenTensorIso are now (projectionComparisonTargetIso …).symm (direction checked; equal by target_comparison_eq, ProjectionComparisonEtaleOrigin.lean:723). def-smooth-purity-projection-comparison-equation is cited and publicly imported; theorem node lem-sf-comparison-open-tensor-coherence and its import removed. Advisories fixed: owner nodes def-sf-compact-support-site-comparison-construction and def-amb-etale-compact-support cited; unused J/_je removed from _dualizing; second reading now gives a full clause list. Node differs from the old head only in stmt_deps and lean.statement; the statement field matches the file verbatim. Clause re-check (setting, C/U/F/G, B⁻¹, e_p, IsIso components, ze/zp pinning, both conjuncts, θ specialization, naturality, bounded-below domains, universes, edge cases) found no fault. No hollow definitions; theorems end in sorry; docstrings OK. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261025T205542-L-3287101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

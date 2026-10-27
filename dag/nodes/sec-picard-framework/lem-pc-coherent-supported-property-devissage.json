@@ -1,0 +1,258 @@
+{
+ "id": "lem-pc-coherent-supported-property-devissage",
+ "kind": "statement",
+ "title": "Devissage for coherent properties with a prescribed support subset",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions], and let $S\\subseteq |X|$ be any subset, not necessarily closed. For an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category] put $\\operatorname{Supp}(F)=\\{x\\in X:F_x\\ne0\\}$, where $F_x$ is its module stalk [def-weil-pbc-module-stalk]. Let $\\mathcal P$ be a property of coherent $\\mathcal O_X$-modules [pqf-def-coherent] supported in $S$. Assume that $\\mathcal P(0)$, that $\\mathcal P$ is invariant under isomorphisms between these modules, and that for every short exact sequence $0\\to F_1\\to F_2\\to F_3\\to0$ of coherent modules supported in $S$, $\\mathcal P(F_1)$ and $\\mathcal P(F_3)$ imply $\\mathcal P(F_2)$. Assume also that for every closed immersion $j:W\\to X$ [def-weil-closed-immersion] from an integral scheme $W$ [def-pc-integral-scheme] with $j(W)\\subseteq S$, and every nonzero quasi-coherent ideal $J\\subseteq\\mathcal O_W$, $\\mathcal P(j_*J)$ holds; $j_*$ denotes module pushforward [def-pc-module-pullback]. Then $\\mathcal P(F)$ holds for every coherent $\\mathcal O_X$-module $F$ supported in $S$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YH, label lemma-property-irreducible, proof: first, second and final proof paragraphs: finite-filtration propagation, proper-support factors and final filtration; the supported form of lemma-property-initial"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Fix a coherent $F$ with $\\operatorname{Supp}(F)\\subseteq S$. Apply [lem-weil-pbc-coherent-filtration-integral-subschemes] to the Noetherian scheme $X$ and $F$. Obtain $0=F_0\\subseteq\\cdots\\subseteq F_m=F$ with coherent $F_j$ and $Q_j=F_j/F_{j-1}\\cong(i_j)_*I_j$, where $i_j:Z_j\\to X$ is a closed immersion, $Z_j$ is integral and $I_j$ is a nonzero coherent ideal. Each $Q_j$ is coherent by [lem-weil-pbc-coherent-modules-kernel-cokernel-sum](1). Thus $0\\to F_{j-1}\\to F_j\\to Q_j\\to0$ is a short exact sequence of coherent modules. Length $m=0$ is allowed.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01YF (lemma-coherent-filter) and 01YG (lemma-property-initial), finite filtration; coherence: Modules Tag 01BY, label lemma-coherent-abelian"
+   }
+  },
+  {
+   "text": "For every $x\\notin S$, $F_x=0$. The injection $(F_j)_x\\hookrightarrow F_x$ and the formula $(Q_j)_x\\cong(F_j)_x/(F_{j-1})_x$ from [lem-weil-pbc-module-stalk-exact](1),(3) give $(F_j)_x=(Q_j)_x=0$. Consequently every $F_j$ and $Q_j$ is supported in $S$. The isomorphism $Q_j\\cong(i_j)_*I_j$ also induces stalk isomorphisms, so $(i_j)_*I_j$ is supported in $S$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AG, label lemma-abelian, preceding kernel and cokernel stalk formulas; support restriction in coherent.tex Tag 01YH, first proof paragraph"
+   }
+  },
+  {
+   "text": "Fix a factor and write $i:Z\\to X$, $I=I_j$, $Q=Q_j$. A closed immersion is locally of finite type: on affine charts it is induced by a quotient algebra, generated over its source ring by the empty family [def-weil-closed-immersion]. Since $X$ is locally Noetherian, [pqf-lem-locnoeth-lft] makes $Z$ locally Noetherian. Thus $I$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth]. If $\\eta$ is the generic point of $Z$, [lem-weil-pbc-integral-scheme-ideal-generic-stalk] gives $I_\\eta\\ne0$. By [lem-weil-pbc-closed-pushforward-stalks](2) and $Q\\cong i_*I$, this puts $i(\\eta)$ in $\\operatorname{Supp}(Q)$. Coherence of $Q$ and [pqf-lem-coherent-ft-locnoeth] make $Q$ quasi-coherent of finite type, so [lem-weil-pbc-finite-type-module-support-closed] makes its support closed. A closed immersion is a homeomorphism onto its closed image; hence $\\overline{\\{i(\\eta)\\}}=i(Z)$, because $\\overline{\\{\\eta\\}}=Z$. The closed support of $Q$ therefore contains $i(Z)$. Conversely the pushforward stalks vanish outside $i(Z)$ by [lem-weil-pbc-closed-pushforward-stalks](1), so $\\operatorname{Supp}(Q)=i(Z)\\subseteq S$. The hypothesis on nonzero quasi-coherent ideals now gives $\\mathcal P(i_*I)$, and isomorphism invariance gives $\\mathcal P(Q)$.",
+   "uses": [
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-weil-closed-immersion",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YG, label lemma-property-initial, factors in hypothesis (2); Tag 01YH, supported filtration; support closedness: morphisms.tex Tag 056J, label lemma-support-finite-type; closed-pushforward stalks: sheaves.tex Tag 00AE; locally Noetherian source: morphisms.tex Tag 01T6, label lemma-finite-type-noetherian"
+   }
+  },
+  {
+   "text": "Induct on $j=0,\\ldots,m$. The base $\\mathcal P(F_0)=\\mathcal P(0)$ is assumed. At stage $j\\ge1$ the preceding steps give $\\mathcal P(Q_j)$ and ensure that the coherent terms of $0\\to F_{j-1}\\to F_j\\to Q_j\\to0$ are supported in $S$. The induction hypothesis and the extension assumption give $\\mathcal P(F_j)$. For $j=m$ this is $\\mathcal P(F)$. This also handles $F=0$, $S=\\varnothing$, and $X=\\varnothing$ without assuming the existence of any integral subscheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YG, label lemma-property-initial, first proof paragraph; explicit zero base case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-weil-closed-immersion",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YG, lemma-property-initial, filtration propagation; Tag 01YH, lemma-property-irreducible, supported filtration paragraph; Tag 01YF, lemma-coherent-filter"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme coherent sheaf property extension closed integral closed subscheme ideal generators with support in an arbitrary subset",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop; AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals; AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaves supported in a subset extension closed property holds on integral closed subscheme ideal pushforwards implies property for every supported coherent sheaf",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff; AlgebraicGeometry.Scheme.IdealSheafData.supportSet; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet; AlgebraicGeometry.Scheme.IdealSheafData.support; AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff; AlgebraicGeometry.Scheme.IdealSheafData. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf devissage property closed under extensions supported integral ideals",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support; AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet; instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed; AlgebraicGeometry.Scheme.IdealSheafData.support_antitone; SheafOfModules.isQuasicoherent; AlgebraicGeometry.Scheme.IdealSheafData.support_eq_bot_iff; SheafOfModules.IsQuasicoherent.casesOn. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"coherent\"",
+   "results": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_restrictFunctor. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|coherent.*filtrat|filtrat.*coherent",
+   "results": "No hits. Read the results: no supported coherent-sheaf property theorem; ideal zero loci and affine module support facts do not state this result.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme coherent sheaf property closed under extensions integral closed subscheme ideals prescribed support subset devissage",
+   "results": "AlgebraicGeometry.IsNoetherian; AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian; AlgebraicGeometry.IsNoetherian.noetherianSpace; AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier. Source read: IdealSheafData.supportSet is the ideal zero locus, not module support; restrictFunctor only preserves quasi-coherence under open restriction. No result states the extension-closed supported property theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "devissage|dévissage|coherent.*filtrat|filtrat.*coherent",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaf on a Noetherian scheme extension closed property true for ideals of integral closed subschemes implies true for every sheaf supported in a subset",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet; AlgebraicGeometry.Scheme.IdealSheafData.support; AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support; AlgebraicGeometry.Scheme.IdealSheafData.gc; AlgebraicGeometry.Scheme.IdealSheafData.subscheme; AlgebraicGeometry.IsIntegralHom.instUniversallyClosed; AlgebraicGeometry.Scheme.IdealSheafData.support_antitone; AlgebraicGeometry.Scheme.IdealSheafData.mk. Source read: IdealSheafData.supportSet is the ideal zero locus, not module support; restrictFunctor only preserves quasi-coherence under open restriction. No result states the extension-closed supported property theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"coherent\"",
+   "results": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_restrictFunctor. Source read: IdealSheafData.supportSet is the ideal zero locus, not module support; restrictFunctor only preserves quasi-coherence under open restriction. No result states the extension-closed supported property theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite filtration of a coherent sheaf by pushforwards of nonzero ideals of integral closed subschemes and propagation of extension closed properties",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData; AlgebraicGeometry.IsLocallyArtinian; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop; AlgebraicGeometry.IsNoetherian; AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal. Source read: IdealSheafData.supportSet is the ideal zero locus, not module support; restrictFunctor only preserves quasi-coherence under open restriction. No result states the extension-closed supported property theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-coherent-property-irreducible",
+  "date": "2026-10-23",
+  "group": "Q63"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "blueprint": {
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "first, second and final proof paragraphs: finite-filtration propagation, proper-support factors and final filtration; the supported form of lemma-property-initial",
+   "via": [
+    "lem-pc-coherent-property-irreducible",
+    "lem-pc-coherent-property-devissage"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pc-coherent-supported-property-devissage",
+  "worker": "stage1",
+  "summary": "Four-step filtration proof; no new nodes. Verified each integral ideal factor has support equal to the closed integral subscheme, so all factors and intermediate terms remain in the arbitrary support subset. Retained the zero and isomorphism hypotheses. Corrected the primary source to Tag 01YG. Searches of Lean, DAG, current blueprint and Mathlib found no exact attachment or Mathlib leaf.",
+  "blueprint": "lem-pc-coherent-hi.proof.md, general proper case, sentence invoking Noetherian induction on the support; realizes the supported finite-filtration propagation used by lem-pc-coherent-property-irreducible.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "why": "Tag 01YF filtration as a generic coherent-module tool; the same-unit finite-presentation filtration omits the nonzero and coherence clauses needed here."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Coherence of the successive cokernels; generic coherent-module closure tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Support containment for subobjects and cokernels follows from its exact stalk formulas."
+   },
+   {
+    "node": "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "why": "Nonzero quasi-coherent ideals have nonzero generic stalks; generic ideal tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-pushforward-stalks",
+    "why": "Identify support of each ideal pushforward at and outside its closed image."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Convert coherent to quasi-coherent finite type on locally Noetherian schemes."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Closedness of the coherent quotient support lets its generic point force the whole integral closed image into S."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Locally finite type closed immersions into locally Noetherian X have locally Noetherian source; required for coherence implies quasi-coherence of the ideal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-9e4a69923",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-9e4a69923 (reviewer sub-agent of L); spot-checked: I read the delivery in full: a 4-step filtration proof with no new nodes. Statement, stmt_deps, source and blueprint.from are unchanged from the unsplit base, and it is not a 2026-10-21 re-split. Source check: coherent.tex lemma-property-initial 01YG (l.3144) and lemma-property-irreducible 01YH. The item is the 01YG argument with supports in an arbitrary subset S; the zero ideal is replaced by P(0) and isomorphism invariance is assumed. This serves both uses in Q63's parent lem-pc-coherent-property-irreducible (S=T minus xi, and S=T). Step 1: lem-weil-pbc-coherent-filtration-integral-subschemes gives a coherent chain with quotients isomorphic to (i_j)_*I_j, I_j nonzero and coherent; kernel-cokernel-sum(1) makes the quotients coherent. Step 2: module-stalk-exact (1) and (3) give vanishing of the submodule and quotient stalks outside S; elementary. Step 3: a closed immersion is locally of finite type (from def-weil-closed-immersion), so 01T6 makes Z locally Noetherian; 01XZ makes I quasi-coherent; ideal-generic-stalk (a)=>(c) gives I_eta nonzero; closed-pushforward-stalks (2) puts i(eta) in Supp(Q); 056J makes Supp(Q) closed; the homeomorphism onto the closed image gives the closure of i(eta) equal to i(Z); part (1) of the pushforward node gives Supp(Q)=i(Z) inside S; then the hypothesis applies, and isomorphism invariance gives P(Q). Every cited statement says what is used, and closedness of S is never used. Step 4 is an explicit induction with base P(0). Small cases: empty X, empty S or F=0; Spec k[eps]; the affine line with S the generic point, where only F=0 is supported in S; zero-dimensional factors. The statement is true. Duplicates: the 01YL-type, two-of-three and algebraic-space devissage nodes and the e2/s3 filtrations differ, so same_as=[] is right. I accept the 8 declared tool_uses: generic module and scheme tools from sk-thm-p1 and pqf; the same-unit e2 filtration lacks the nonzero and coherence clauses, and the unit's 02O5 route is not replaced. Searches recorded: LeanFinder, LeanSearch, Loogle and grep. No SGA. Minor, not repaired: the report says the source was corrected to 01YG, but only proof_origin names 01YG; source.place still names 01YH, which is accurate."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentSupportedPropertyDevissage",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_supported_property_devissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentSupportedPropertyDevissage.lean",
+  "statement": "theorem coherent_supported_property_devissage (X : Scheme.{u}) [IsNoetherian X] (S : Set X) (P : X.Modules → Prop) (hP_zero : P (0 : X.Modules)) (hP_iso : ∀ (F G : X.Modules) (_e : F ≅ G), RingedSpace.IsCoherent X.toRingedSpace F → RingedSpace.IsCoherent X.toRingedSpace G → {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ S → {x : X | ¬ Subsingleton (G.presheaf.stalk x)} ⊆ S → P F → P G) (hP_extension : ∀ T : ShortComplex X.Modules, T.ShortExact → RingedSpace.IsCoherent X.toRingedSpace T.X₁ → RingedSpace.IsCoherent X.toRingedSpace T.X₂ → RingedSpace.IsCoherent X.toRingedSpace T.X₃ → {x : X | ¬ Subsingleton (T.X₁.presheaf.stalk x)} ⊆ S → {x : X | ¬ Subsingleton (T.X₂.presheaf.stalk x)} ⊆ S → {x : X | ¬ Subsingleton (T.X₃.presheaf.stalk x)} ⊆ S → P T.X₁ → P T.X₃ → P T.X₂) (hP_integral : ∀ (W : Scheme.{u}) (j : W ⟶ X), IsClosedImmersion j → IsIntegral W → Set.range j.base ⊆ S → ∀ J : W.IdealSheafData, J ≠ ⊥ → P ((pushforward j).obj J.toModules)) : ∀ F : X.Modules, RingedSpace.IsCoherent X.toRingedSpace F → {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ S → P F",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-434216f22",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node against Stacks 01YG/01YH: IsNoetherian X; S an arbitrary Set; support = non-Subsingleton stalk; P guarded by RingedSpace.IsCoherent plus support ⊆ S in the iso hypothesis (both sides), the extension hypothesis (all three terms) and the conclusion; P(0); integral test = IsClosedImmersion j, IsIntegral W, range ⊆ S, and every J : W.IdealSheafData with J ≠ ⊥ pushed forward (toModules is the kernel ideal sheaf, quasi-coherent ideals exactly). No extra assumptions; W and X both Scheme.{u}. Records: pqf-def-coherent lists IsCoherent, def-pc-module-pullback gives pushforward, lean.statement verbatim, only the lean field changed vs live, not landed elsewhere. Edge cases (empty X/S, F=0, non-closed S, non-reduced X) fine. No hollow defs, only sorry, docstrings give source/blueprint/proof. No recompile per instruction; worker's compile evidence is clean. Advisory only: redundant public Coherent import; toModules decl from a node outside stmt_deps."
+ }
+}

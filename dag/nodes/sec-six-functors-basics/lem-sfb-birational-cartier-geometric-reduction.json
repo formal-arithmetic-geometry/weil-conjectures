@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-birational-cartier-geometric-reduction",
+ "kind": "statement",
+ "title": "Cartier markings and geometric reducedness under integral birational maps",
+ "statement": "Let $e$ be a field [def-weil-field] and $T$ a geometrically reduced finite-type $e$-scheme [def-pc-geometrically-irreducible, def-weil-finite-type-morphism]. Let $T_0$ be the reduced induced closed subscheme on an irreducible component of $T$ [def-weil-irreducible-components, def-weil-pbc-scheme-reduction, def-weil-closed-immersion]. Let $b:S\\to T_0$ and $h:N\\to S$ be birational $e$-morphisms between nonempty integral schemes [def-pc-integral-scheme], meaning that each identifies dense open subschemes [def-weil-open-immersion]. Let $\\mathcal J\\subseteq\\mathcal O_S$ be an effective Cartier ideal [def-nagata-effective-cartier-ideal]. Then $S$ and $N$ are geometrically reduced over $e$: their base changes by every extension field $L/e$ [def-pc-field-extension] are reduced. The extended ideal $\\mathcal J\\mathcal O_N$ [def-nagata-extended-ideal] is effective Cartier, and its vanishing set is $h^{-1}V(\\mathcal J)$. More generally, for every dominant morphism $g:Y\\to S$ from an integral scheme $Y$, $\\mathcal J\\mathcal O_Y$ is effective Cartier with vanishing set $g^{-1}V(\\mathcal J)$; dominant means having dense image. The function fields of $T_0$, $S$ and $N$ [def-sc-function-field], identified by $b$ and $h$, have reduced tensor product $k(T_0)\\otimes_e L$ for every $L/e$. No flatness of $h$ or $g$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150: the Cartier marking and geometric reducedness through the birational replacements. Stacks divisors.tex Tag 02OO (lemma-pullback-effective-Cartier-defined (2)); varieties.tex Tag 04KS (lemma-generic-points-geometrically-reduced (3),(4))."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-open-immersion",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-field-extension",
+  "def-nagata-extended-ideal",
+  "def-sc-function-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A$ of $T$ meeting the chosen component. Its intersection with the component is irreducible, and is $V(\\mathfrak p)$ for a prime $\\mathfrak p$, by [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. The prime is minimal: an irreducible closed subset of $U$ strictly containing $V(\\mathfrak p)$ would have irreducible closure in $T$ strictly containing the component, contrary to maximality [def-weil-irreducible-components]. The reduced induced structure gives $T_0\\cap U=\\operatorname{Spec}(A/\\mathfrak p)$ [lem-weil-pbc-reduced-induced-closed-subscheme]. In particular $T_0$ is reduced and irreducible, hence integral [def-pc-integral-scheme]. The ring $A$ is reduced since $T$ is geometrically reduced, using the identity extension and [def-pc-reduced-scheme]. By [lem-weil-pbc-minimal-prime-reduced-localization-field], $A_{\\mathfrak p}$ is a field and $\\mathfrak pA_{\\mathfrak p}=0$. Consequently the quotient-localization map identifies $(A/\\mathfrak p)_{(0)}=\\operatorname{Frac}(A/\\mathfrak p)$ with $A_{\\mathfrak p}$: every nonzero denominator modulo $\\mathfrak p$ comes from an element outside $\\mathfrak p$, and the localized quotient kills precisely $\\mathfrak pA_{\\mathfrak p}=0$. By [lem-sc-integral-function-field-affine-fraction] the former field is $k(T_0)$, compatibly with $e$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EU, lemma-minimal-prime-reduced-ring; applied to the component chart as in ILO X 2.3 Step 1"
+   }
+  },
+  {
+   "text": "Fix any extension field $L/e$. By [lem-weil-pbc-open-immersion-base-change], $U_L$ is an open subscheme of the reduced scheme $T_L$. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $U_L$ with $\\operatorname{Spec}(A\\otimes_eL)$, so $A\\otimes_eL$ is reduced [def-pc-reduced-scheme]. Apply [lem-weil-pbc-localization-tensor-over-base] with $R=e$, module and algebra $A$, multiplicative subset $A\\setminus\\mathfrak p$, and $N=L$. It gives $(A\\setminus\\mathfrak p)^{-1}(A\\otimes_eL)\\cong A_{\\mathfrak p}\\otimes_eL$ by $(a\\otimes l)/s\\mapsto(a/s)\\otimes l$. This is a ring isomorphism: the displayed map preserves $1$ and products on the pure-tensor fractions, hence on their finite sums. A localization of a reduced ring is reduced: if $(b/s)^d=0$ with $d>0$, some denominator $t$ satisfies $tb^d=0$; then $(tb)^d=0$, so $tb=0$ and $b/s=0$. Step 1 therefore proves that $k(T_0)\\otimes_eL$ is reduced, for every $L/e$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS, lemma-generic-points-geometrically-reduced, generic-local-ring argument; algebra.tex Tags 00DK and 00D2, tensor-localization formula"
+   }
+  },
+  {
+   "text": "For each of $b$ and $h$, use the dense open subschemes identified by that morphism in the hypothesis. A nonempty open of an integral scheme contains its generic point, by [lem-sc-integral-function-field-affine-fraction] applied to an affine open inside it. Restriction to an open neighbourhood does not change a stalk: the neighbourhoods contained in that open are cofinal, since intersecting any neighbourhood with the open gives such a neighbourhood [def-weil-pbc-module-stalk]. The isomorphism of open subschemes therefore induces an isomorphism on the generic stalks [def-weil-open-immersion]. These are the function fields by [def-sc-function-field], and the isomorphisms are exactly $b^\\sharp$ and $h^\\sharp$ there, since the open isomorphisms are their restrictions. They fix $e$ because both morphisms are over $e$. Tensoring these isomorphisms with $L$ gives inverse ring maps $a\\otimes l\\mapsto b^\\sharp(a)\\otimes l$ and $c\\otimes l\\mapsto h^\\sharp(c)\\otimes l$. Thus Step 2 gives reducedness of $k(S)\\otimes_eL$ and $k(N)\\otimes_eL$ as well.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-pbc-module-stalk",
+    "def-weil-open-immersion",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 2.3 Step 1, printed p.150: blowup and normalization; generic stalks on the unchanged dense opens"
+   }
+  },
+  {
+   "text": "The schemes $S$ and $N$ are reduced and irreducible by [def-pc-integral-scheme]. Each has just its single generic point, and Step 3 verifies the reduced-tensor hypothesis at that point for every extension field. Apply [lem-pur-geometric-reducedness-from-generic-stalks] separately to $S$ and $N$. It gives geometric reducedness of both schemes, with no finite-type assumption on either. Together with Steps 2--3 this proves all the geometric-reducedness and function-field clauses.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-pur-geometric-reducedness-from-generic-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS, lemma-generic-points-geometrically-reduced (3), through the existing generic-stalk node"
+   }
+  },
+  {
+   "text": "Let $g:Y\\to S$ be any dominant morphism with $Y$ integral. Let $\\eta_Y,\\eta_S$ be the generic points, whose stalks are fields by [lem-sc-integral-function-field-affine-fraction]. Continuity gives $g(Y)=g(\\overline{\\{\\eta_Y\\}})\\subseteq\\overline{\\{g(\\eta_Y)\\}}$; dominance implies that $g(\\eta_Y)$ is generic in $S$, hence equals $\\eta_S$ (uniqueness also follows from its prime $(0)$ on a nonempty integral affine chart). Therefore the generic stalk map is a unital map $k(S)\\to k(Y)$ of fields. It is injective: a nonzero element in its kernel would have an inverse, forcing $1=0$ in $k(Y)$. For nonempty affine opens $V=\\operatorname{Spec}B\\subseteq Y$ and $W=\\operatorname{Spec}R\\subseteq S$ with $g(V)\\subseteq W$, the section map $\\varphi:R\\to B$ is compatible with germs at these generic points [def-weil-pbc-module-stalk]. The germ maps of $R$ and $B$ are injective by [lem-sc-integral-function-field-affine-fraction]. Thus $\\varphi(r)=0$ implies that the image of $r$ in $k(Y)$ is zero, then its germ in $k(S)$ is zero, and finally $r=0$. This proves the affine injectivity needed for the marking, directly, without a flatness assumption.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CC1, lemma-dominant-between-integral, (1)--(4); the elementary generic-point and field-kernel argument is written here"
+   }
+  },
+  {
+   "text": "Cover $S$ by affine opens $W=\\operatorname{Spec}R$ on which $\\mathcal J=(t)$ with $t$ a nonzerodivisor [def-nagata-effective-cartier-ideal], and cover each $g^{-1}(W)$ by affine opens $V=\\operatorname{Spec}B$. Such an affine refinement is allowed: a generator stays a nonzerodivisor after localization, since $t(a/s)=0$ implies $uta=0$ for a denominator $u$, hence $ua=0$ and $a/s=0$. The closed subscheme $V(\\mathcal J)$ over $W$ is $\\operatorname{Spec}(R/(t))$ by [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme]. Its pullback over $V$ has ring $B\\otimes_R R/(t)$ by [lem-weil-pbc-fibre-product-affine-spectra]. The maps $b\\otimes\\bar r\\mapsto b\\varphi(r)\\bmod\\varphi(t)$ and $\\bar b\\mapsto b\\otimes1$ are well-defined inverse $B$-algebra maps between this ring and $B/(\\varphi(t))$; the tensor relations and $1\\otimes\\bar t=0$ verify this on generators. The projection of the pullback is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Hence its kernel ideal sheaf restricts to $\\widetilde{(\\varphi(t))}$ on $V$, by [def-sbc-closed-immersion-ideal-sheaf]. This kernel is exactly $\\mathcal J\\mathcal O_Y$ by [def-nagata-extended-ideal]. In particular it is quasi-coherent and locally generated by $\\varphi(t)$.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OO, lemma-pullback-effective-Cartier-defined, proof affine setup; the tensor-quotient computation is explicit"
+   }
+  },
+  {
+   "text": "Discard empty members of the affine covers in Step 6. Since $R$ and $B$ are domains [def-pc-integral-scheme], $t$ is nonzero and Step 5 gives $\\varphi(t)\\ne0$. Multiplication by $\\varphi(t)$ on the domain $B$ is injective. Thus the quasi-coherent ideal computed in Step 6 is an effective Cartier ideal by [def-nagata-effective-cartier-ideal]. Its vanishing set on $V$ is $\\{\\mathfrak q\\in\\operatorname{Spec}B:\\varphi(t)\\in\\mathfrak q\\}$, which equals the inverse image of $V(t)$ because the point map of $\\operatorname{Spec}\\varphi$ is contraction of primes [def-weil-affine-spectrum, lem-weil-pbc-spec-irreducible-closed-subsets-primes]. These local equalities give $V(\\mathcal J\\mathcal O_Y)=g^{-1}V(\\mathcal J)$. This proves the general dominant assertion. Finally $h$ has dense image because its image contains the dense open of $S$ identified with a dense open of $N$ in the birational hypothesis. Take $(Y,g)=(N,h)$ in the assertion just proved. The same Cartier and vanishing-set conclusions follow for $\\mathcal J\\mathcal O_N$. The argument also allows $t$ to be a unit, so it includes the empty divisor.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-nagata-effective-cartier-ideal",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OO, lemma-pullback-effective-Cartier-defined (2); nonzero elements in domains and contraction of prime ideals"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-stalk",
+  "def-weil-open-immersion",
+  "def-sc-function-field",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "def-nagata-effective-cartier-ideal",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-extended-ideal",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150, expanded using Stacks 00EU, 04KS and 02OO with explicit affine calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an integral birational model of a component of a geometrically reduced scheme the model remains geometrically reduced and dominant pullbacks preserve effective Cartier divisors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsReduced Y],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f: X \\\\to Y$ be an open immersion. If $Y$ is a reduced scheme, then $X$ is also a reduced scheme.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reducedness is preserved for integral schemes with the same function field and Cartier boundary survives dominant integral pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], AlgebraicGeometry.IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [AlgebraicGeometry.IsReduced Y],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f: X \\\\to Y$ be an open immersion. If $Y$ is a reduced scheme, then $X$ is also a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) [AlgebraicGeometry.IsReduced X], AlgebraicGeometry.IsReduced ↑U\", \"doc\": \"Every open subset of a reduced scheme is itself a reduced scheme. This follows because the local rings of the open subscheme are restrictions of the local rings of the ambient scheme, which by definit\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.IsIntegral",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|IsGeometricallyReduced|Cartier|birational",
+   "results": "[grep] OK 22 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"47\", \"text\": \"lemma GeometricallyIntegral.eq_geometricallyReduced_inf_geometricallyIrreducible :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"49\", \"text\": \"      (@GeometricallyReduced ⊓ @GeometricallyIrreducible : MorphismProperty Scheme) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"50\", \"text\": \"  rw [eq_geometrically, GeometricallyReduced.eq_geometrically,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"55\", \"text\": \"instance (priority := low) [GeometricallyIntegral f] : GeometricallyReduced f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"56\", \"text\": \"  (GeometricallyIntegral.eq_geometricallyReduced_inf_geometricallyIrreducible.le _ _ _ ‹_›).1\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"16\", \"text\": \"- `AlgebraicGeometry.GeometricallyReduced`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"20\", \"text\": \"- `GeometricallyReduced.iff_geometricallyReduced_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"23\", \"text\": \"- `AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"44\", \"text\": \"class GeometricallyReduced (f : X ⟶ Y) : Prop where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"47\", \"text\": \"lemma GeometricallyReduced.eq_geometrically :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"64\", \"text\": \"lemma smooth_of_grpObj [GeometricallyReduced f] : Smooth f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"12\", \"text\": \"# Birationality and Rationality of schemes.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"15\", \"text\": \"birationality and rationality.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"21\", \"text\": \"- `Scheme.Birational X Y`: `X` and `Y` are birational, i.e. there exists a `PartialIso X Y`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"22\", \"text\": \"- `Scheme.BirationalOver sX sY`: `X` and `Y` are birational over `S` via structure maps\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.Dominant\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"417\", \"text\": \"instance : GeometricallyReduced (𝔸(n; S) ↘ S) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"418\", \"text\": \"  rw [geometricallyReduced_iff]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"436\", \"text\": \"  .of_geometricallyReduced_of_geometricallyIrreducible _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an integral birational model of a component of a geometrically reduced scheme the model remains geometrically reduced and dominant pullbacks preserve effective Cartier divisors",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [IsReduced Y] : IsReduced X\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f: X \\\\to Y$ be an open immersion. If $Y$ is a reduced scheme, then $X$ is also a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.mk\", \"module\": \"Mathlib.RingTheory.Nilpotent.GeometricallyReduced\", \"type\": \"∀ {k : Type u_3} {A : Type u_4} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  IsReduced (TensorProduct k (AlgebraicClosure k) A) → Algebra.IsGeometricallyReduced k A\", \"doc\": \"If the tensor product of $ A $ with the algebraic closure of $ k $ is reduced, then $ A $ is geometrically reduced over $ k $.\"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X) [IsDominant ι] (hU : ι ≫ f = ι ≫ g) : f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|IsBirational",
+   "results": "{\"t\": \"2026-10-23T04:11:33Z\", \"tool\": \"grep\", \"query\": \"GeometricallyReduced|IsBirational\", \"sub\": \"AlgebraicGeometry/Geometrically\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"2bf077c2778ef0f3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral birational schemes over a field have the same geometric reducedness",
+   "results": "{\"t\": \"2026-10-23T04:11:34Z\", \"tool\": \"leansearch\", \"query\": \"Integral birational schemes over a field have the same geometric reducedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.mk\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\"], \"digest\": \"7d382c01f34c4a55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.IsIntegral",
+   "results": "{\"t\": \"2026-10-23T04:11:34Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral birational model of an irreducible component of a geometrically reduced scheme is geometrically reduced and dominant integral pullback preserves Cartier ideals",
+   "results": "{\"t\": \"2026-10-23T04:11:43Z\", \"tool\": \"leanfinder\", \"query\": \"An integral birational model of an irreducible component of a geometrically reduced scheme is geometrically reduced and dominant integral pullback preserves Cartier ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"b28882d5cac5d1d7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically reduced scheme over a field has geometrically reduced local rings at every point",
+   "results": "{\"t\": \"2026-10-23T04:12:46Z\", \"tool\": \"leanfinder\", \"query\": \"A geometrically reduced scheme over a field has geometrically reduced local rings at every point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.IsReduced\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\"], \"digest\": \"624df01e2c6ba746\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "grep",
+   "query": "injective|isDominant_iff",
+   "results": "{\"t\": \"2026-10-23T04:14:01Z\", \"tool\": \"grep\", \"query\": \"injective|isDominant_iff\", \"sub\": \"AlgebraicGeometry/Morphisms/Dominant.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "unavailable: the guessed file path does not exist; the command reported zero hits while suppressing rg stderr, so this is not evidence of absence. Replaced by the genuine SchemeTheoreticallyDominant.lean search."
+  },
+  {
+   "tool": "leansearch",
+   "query": "dominant morphism integral schemes injective map affine coordinate rings",
+   "results": "{\"t\": \"2026-10-23T04:14:01Z\", \"tool\": \"leansearch\", \"query\": \"dominant morphism integral schemes injective map affine coordinate rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.IsIntegralHom\", \"WeierstrassCurve.Affine.CoordinateRing.map_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\"], \"digest\": \"fce50ccd3754f217\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsDominant, Function.Injective",
+   "results": "{\"t\": \"2026-10-23T04:14:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsDominant, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isDominant_of_of_appTop_injective\"], \"digest\": \"c58ff7f8198a0afa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant morphism between integral schemes induces injective maps on coordinate rings of all nonempty affine open subsets",
+   "results": "{\"t\": \"2026-10-23T04:14:07Z\", \"tool\": \"leanfinder\", \"query\": \"A dominant morphism between integral schemes induces injective maps on coordinate rings of all nonempty affine open subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.specTargetImageFactorization_app_injective\"], \"digest\": \"40e17518153a2531\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "grep",
+   "query": "injective|isDominant_iff",
+   "results": "{\"t\": \"2026-10-23T04:17:14Z\", \"tool\": \"grep\", \"query\": \"injective|isDominant_iff\", \"sub\": \"AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"48\", \"64\", \"74\", \"76\", \"78\"], \"digest\": \"02b2332564cbef63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric reducedness of an integral scheme is determined by its function field; nonzero Cartier equations remain nonzero under dominant integral pullback",
+   "results": "{\"t\": \"2026-10-23T04:17:18Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric reducedness of an integral scheme is determined by its function field; nonzero Cartier equations remain nonzero under dominant integral pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isReduced_of_isIntegral\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\"], \"digest\": \"435d27e485a245b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give reducedness, integral schemes, generic fields, or separate injectivity results, not all clauses of the item. Affine injectivity is proved explicitly in step 5; no new auxiliary node is proposed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-pair-radicial-preparation",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 1, printed p.150 (compactification, reduced components, radicial constants, blowup, finite normalization), applied to the finitely many components with one common finite radicial constant extension. The compactification is chosen with C the closure of Z; including the complement of X is optional, not required.; returned proper-pair proof steps 9--10: Cartier markings and geometric reducedness under integral birational maps. No imported blueprint ancestor exists on this added-input branch.",
+   "via": [
+    "lem-sfb-proper-pair-radicial-preparation",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-birational-cartier-geometric-reduction",
+  "worker": "stage1",
+  "summary": "Expanded both preservation arguments using only existing DAG nodes. Compared ILO X 2.3 Step 1 with Stacks 04KS and 02OO. Proved the reduced component function-field identification and its scalar-extension reducedness, transported along the actual birational generic stalk maps, applied the existing arbitrary-scheme generic-stalk criterion, and wrote the dominant-map and affine Cartier calculations explicitly. No statement change, no new nodes, no use of flatness or finite type of the birational models.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 1, printed p.150 (compactification, reduced components, radicial constants, blowup, finite normalization), applied to the finitely many components with one common finite radicial constant extension. The compactification is chosen with C the closure of Z; including the complement of X is optional, not required.; returned proper-pair proof steps 9--10: Cartier markings and geometric reducedness under integral birational maps. No imported blueprint ancestor exists on this added-input branch. This split realizes the geometric reducedness and Cartier-marking clauses by the seven displayed arguments; no imported blueprint ancestor exists.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Affine description and reducedness of the induced closed structure, used as a generic scheme-theory tool."
+   },
+   {
+    "node": "def-sc-function-field",
+    "why": "The general integral-scheme function-field convention, used to name the generic stalks."
+   },
+   {
+    "node": "lem-pur-geometric-reducedness-from-generic-stalks",
+    "why": "The arbitrary-scheme generic-stalk criterion for geometric reducedness is a generic algebraic-geometric tool; no statement in this unit replaces it."
+   },
+   {
+    "node": "def-nagata-effective-cartier-ideal",
+    "why": "The cited statement supplies a generic scheme-theory notion or tool used in the explicit affine argument; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-sc-function-field",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-cac59e251",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-cac59e251 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement unchanged, the only citer (proper-pair-radicial-preparation step 4) uses it as stated, and there is no repair note. Sources checked: ILO X 2.3 Step 1 (printed p.150, PDF p.156), Stacks 02OO(2), 04KS(3) (not (4), since S and N are not of finite type) and 0CC1(1)⇔(4); no SGA. Steps: (1) the component chart gives a minimal prime p, A is reduced, A_p is a field, k(T_0)=Frac(A/p)=A_p. (2) A⊗_eL is reduced and its localization at A∖p is A_p⊗_eL, so k(T_0)⊗_eL is reduced for every L, inseparable ones included. (3) Birational isomorphisms of generic stalks over e carry this to k(S)⊗L and k(N)⊗L. (4) The generic-stalk criterion node, which has no finiteness hypothesis, gives S and N geometrically reduced. (5) Dominant ⇒ generic point goes to generic point ⇒ injective affine maps, written out. (6) B⊗_R R/(t)=B/φ(t) gives J O_Y locally =(φ(t)). (7) φ(t)≠0 in the domain B, the vanishing set comes from contraction of primes, and h is dominant. Each cited statement says what its step uses. Edge cases checked: J=O_S, a reducible T, inseparable L, non-Noetherian S and N, a non-dominant closed point (excluded). Duplicate search: flat-pullback-effective-cartier and semilinear-open-faithful-cartier need flatness; trf-dominant-affine-chart-data needs finite type and a locally Noetherian target; no existing node states the item. I accept the four tool_uses (reduced-induced closed subscheme, def-sc-function-field, generic-stalk geometric-reducedness criterion, def-nagata-effective-cartier-ideal). Advisory only: step 6 justifies refining a possibly non-affine Cartier chart to affine opens by 'localization' alone. The refinement also uses quasi-coherence, and it is automatic on the integral S, so the conclusion is unaffected."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BirationalCartierGeometricReduction",
+  "declaration": "AlgebraicGeometry.birational_cartier_geometric_reduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/BirationalCartierGeometricReduction.lean",
+  "statement": "theorem birational_cartier_geometric_reduction (e : Type u) [Field e] (T : Scheme.{u}) [T.Over (Spec (.of e))] [LocallyOfFiniteType (T ↘ Spec (.of e))] [QuasiCompact (T ↘ Spec (.of e))] [GeometricallyReduced (T ↘ Spec (.of e))] (Z : Set T) (hZ : Z ∈ irreducibleComponents T) (T₀ : Scheme.{u}) [T₀.Over (Spec (.of e))] [IsIntegral T₀] (i₀ : T₀ ⟶ T) [IsClosedImmersion i₀] (hi₀ : Set.range i₀ = Z) (hi₀e : i₀ ≫ (T ↘ Spec (.of e)) = T₀ ↘ Spec (.of e)) (S N : Scheme.{u}) [S.Over (Spec (.of e))] [N.Over (Spec (.of e))] [IsIntegral S] [IsIntegral N] (b : S ⟶ T₀) (hb : b ≫ (T₀ ↘ Spec (.of e)) = S ↘ Spec (.of e)) (Ub : T₀.Opens) (Vb : S.Opens) (eb : Vb.toScheme ≅ Ub.toScheme) (hUb : Dense (Ub : Set T₀)) (hVb : Dense (Vb : Set S)) (heb : eb.hom ≫ Ub.ι = Vb.ι ≫ b) (h : N ⟶ S) (hh : h ≫ (S ↘ Spec (.of e)) = N ↘ Spec (.of e)) (Uh : S.Opens) (Wh : N.Opens) (eh : Wh.toScheme ≅ Uh.toScheme) (hUh : Dense (Uh : Set S)) (hWh : Dense (Wh : Set N)) (heh : eh.hom ≫ Uh.ι = Wh.ι ≫ h) [Algebra e T₀.functionField] [Algebra e S.functionField] [Algebra e N.functionField] (haT₀ : algebraMap e T₀.functionField = (StructureSheaf.toStalk e ((T₀ ↘ Spec (.of e)) (genericPoint T₀)) ≫ (T₀ ↘ Spec (.of e)).stalkMap (genericPoint T₀)).hom) (haS : algebraMap e S.functionField = (StructureSheaf.toStalk e ((S ↘ Spec (.of e)) (genericPoint S)) ≫ (S ↘ Spec (.of e)).stalkMap (genericPoint S)).hom) (haN : algebraMap e N.functionField = (StructureSheaf.toStalk e ((N ↘ Spec (.of e)) (genericPoint N)) ≫ (N ↘ Spec (.of e)).stalkMap (genericPoint N)).hom) (J : S.IdealSheafData) (hJ : J.IsInvertible) : GeometricallyReduced (S ↘ Spec (.of e)) ∧ GeometricallyReduced (N ↘ Spec (.of e)) ∧ (J.comap h).IsInvertible ∧ (J.comap h).support = J.support.preimage h.continuous ∧ (∀ (Y : Scheme.{u}) [IsIntegral Y] (g : Y ⟶ S) [IsDominant g], (J.comap g).IsInvertible ∧ (J.comap g).support = J.support.preimage g.continuous) ∧ (∃ (hbη : b (genericPoint S) = genericPoint T₀) (hhη : h (genericPoint N) = genericPoint S), Function.Bijective (((T₀.presheaf.stalkCongr (Inseparable.of_eq hbη)).inv ≫ b.stalkMap (genericPoint S) : T₀.functionField ⟶ S.functionField)) ∧ Function.Bijective (((S.presheaf.stalkCongr (Inseparable.of_eq hhη)).inv ≫ h.stalkMap (genericPoint N) : S.functionField ⟶ N.functionField))) ∧ ∀ (L : Type u) [Field L] [Algebra e L], _root_.IsReduced (S.functionField ⊗[e] L) ∧ _root_.IsReduced (N.functionField ⊗[e] L) ∧ _root_.IsReduced (T₀.functionField ⊗[e] L)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-945ffcfdc",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: e field; T LocallyOfFiniteType+QuasiCompact+GeometricallyReduced over Spec e (records def-weil-finite-type-morphism, def-pc-geometrically-irreducible); T0 = integral closed immersion onto irreducible component Z over e (equivalent to reduced induced structure, integrality in node); b,h e-morphisms with dense-open isos commuting with b,h; J.IsInvertible = locally generated by nonzerodivisor on affine opens (effective Cartier). Conclusions: GeometricallyReduced S,N; (J.comap h/g).IsInvertible and support = preimage (comap = Mathlib kernel of pullback.fst, matches def-nagata-extended-ideal) for all dominant g from integral Y; generic-point equalities with bijective stalk maps of b,h; reduced k(T0),k(S),k(N) tensor L for all L/e, Algebra instances pinned to canonical toStalk≫stalkMap. L:Type u matches Mathlib geometrically convention. No flatness/extra assumptions, no defs, sorry only, docstrings with source and blueprint and 7 proof steps, lean.statement verbatim, node differs from live only in lean field, imports exist, no duplicate (comap_of_flat needs flatness). No compile needed (no change)."
+ }
+}

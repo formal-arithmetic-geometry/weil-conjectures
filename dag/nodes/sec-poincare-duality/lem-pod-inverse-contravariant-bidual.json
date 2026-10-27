@@ -1,0 +1,291 @@
+{
+ "id": "lem-pod-inverse-contravariant-bidual",
+ "kind": "statement",
+ "title": "Coefficient biduality for inverse contravariant rational Weil data",
+ "statement": "Fix distinct primes $p,\\ell$, $a\\ge1$, $q=p^a$, $k_0=\\mathbf F_q$, an algebraic closure $k$ of $k_0$, a finite extension $E/\\mathbf Q_\\ell$ inside a fixed $\\overline{\\mathbf Q}_\\ell$, and $\\Lambda=E$ [def-weil-finite-field-fiber]. For a finite-type $k_0$-scheme $T_0$ set $T=T_0\\times_{k_0}k$, $g_T=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q)$ with geometric Frobenius, and $P_T=Lg_T^*$ [def-weil-frobenius-detailed, def-weil-derived-pullback-tensor-hom]. Work in the rational bounded constructible categories with Weil pairs $(M,\\theta_M:P_TM\\simeq M)$ and Weil arrows $u\\theta_M=\\theta_NP_T(u)$ [def-weil-weil-sheaf-complex]. All Weil isomorphisms below are arbitrary rational arrows; a Frobenius-stable integral lattice is not assumed.\n\nLet $X_0$ be separated of finite type over $k_0$ and $X=X_0\\times_{k_0}k$. Let $(K,\\theta_K)$ have site-perfect underlying bounded constructible complex [def-weil-site-perfect-complex]. Put $P=P_X$, $c:P\\Lambda_X\\simeq\\Lambda_X$ for the canonical coefficient-unit datum [def-weil-frobenius-coefficient-twists], and $M^\\vee=R\\mathcal Hom_X(M,\\Lambda_X)$. Use coefficient evaluation $\\operatorname{ev}_M:M\\otimes^LM^\\vee\\to\\Lambda_X$, tensor symmetry $\\sigma$, and tensor-Hom transposition. For $M=K,K^\\vee$ the evaluation-defined comparison\n$$h_M:PM^\\vee\\simeq R\\mathcal Hom_X(PM,P\\Lambda_X)$$\nis the canonical comparison characterized by\n$$\\operatorname{ev}_{PM,P\\Lambda_X}(1\\otimes h_M)\\mu=P(\\operatorname{ev}_M),$$\nwhere $\\mu:P(U\\otimes^LV)\\simeq PU\\otimes^LPV$ [lem-pod-derived-automorphism-hom-evaluation]. Give the two duals the inverse contravariant data\n$$\\theta_{K^\\vee}=R\\mathcal Hom_X(\\theta_K^{-1},c)h_K,\\qquad\n\\theta_{K^{\\vee\\vee}}=R\\mathcal Hom_X(\\theta_{K^\\vee}^{-1},c)h_{K^\\vee}.$$\nThe canonical coefficient bidual map\n$$\\delta_K:K\\to K^{\\vee\\vee},\\qquad\n\\delta_K=(\\operatorname{ev}_K\\sigma_{K^\\vee,K})^\\sharp$$\nthen satisfies\n$$\\delta_K\\theta_K=\\theta_{K^{\\vee\\vee}}P(\\delta_K).$$\nIn particular it is the actual transpose of coefficient evaluation, with the symmetry and evaluation-defined comparisons retained, that is a Weil arrow. The assertion holds for arbitrary rational $\\theta_K$, including $K=\\Lambda_s$, $\\theta_K=\\ell$ on $s=\\operatorname{Spec}k$, and for the zero object.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Proof sentence 4 final clause (smooth pairing); retained rational proof Step 6, evaluation/bidual transposition calculation"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-site-perfect-complex",
+  "def-weil-frobenius-coefficient-twists",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-pod-partial-closed-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=K$, $B=K^\\vee$, $C=K^{\\vee\\vee}$, $\\alpha=\\theta_K$, $\\beta=\\theta_{K^\\vee}$ and $\\gamma=\\theta_{K^{\\vee\\vee}}$. The pairs $(K,\\Lambda_X)$ and $(K^\\vee,\\Lambda_X)$ lie in the domain of the rational internal Hom because every pair of bounded constructible rational objects on the separated finite-type $k$-scheme $X$ does (the admissible Hom-substitution lemma, applied to $X$ viewed as a six-functor space); perfect-dual stability is not needed for this. The specified $h_A,h_B$ are isomorphisms. Since internal Hom is a bifunctor, $H(\\alpha^{-1},c)$ and $H(\\beta^{-1},c)$ are isomorphisms, with inverses $H(\\alpha,c^{-1})$ and $H(\\beta,c^{-1})$. Thus $\\beta$ and $\\gamma$ are isomorphisms in the rational category. Put $e_A=\\operatorname{ev}_K$, $e_B=\\operatorname{ev}_{K^\\vee}$ and $t_{U,V}=\\mu_{U,V}^{-1}:PU\\otimes PV\\to P(U\\otimes V)$. All tensors below are derived tensors.",
+   "uses": [
+    "lem-sf-admissible-hom-substitution",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final duality/pairing paragraph; explicit coefficient-bidual calculation supplementing the evaluation/transposition argument in cor-coef-verdier-weil-equivariance.proof.md, paragraph 2"
+   }
+  },
+  {
+   "text": "For $M=A,B$ put $u=\\theta_M$ and $v=\\theta_{M^\\vee}=H(u^{-1},c)h_M$. Naturality of the rational evaluation transpose gives\n$$e_M(u\\otimes v)=c\\,\\operatorname{ev}_{PM,P\\Lambda_X}(1\\otimes h_M).$$\nIndeed the first-variable map in $H(u^{-1},c)$ composes an evaluated argument with $u^{-1}$, and the argument supplied here is $u$, so $u^{-1}u=1$; the second-variable map is $c$. The defining evaluation identity for $h_M$ now gives the two identities\n$$e_A(\\alpha\\otimes\\beta)=cP(e_A)t_{A,B},\\qquad e_B(\\beta\\otimes\\gamma)=cP(e_B)t_{B,C}.$$\nThese are equalities for arbitrary rational arrows by the cited rational transposition statement, rather than a calculation restricted to integral arrows.",
+   "uses": [
+    "lem-coef-completed-tensor-hom-transpose",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final duality/pairing paragraph; explicit coefficient-bidual calculation supplementing the evaluation/transposition argument in cor-coef-verdier-weil-equivariance.proof.md, paragraph 2"
+   }
+  },
+  {
+   "text": "Set $b=e_A\\sigma_{B,A}:B\\otimes A\\to\\Lambda_X$ and $j=b^\\sharp=\\delta_K:A\\to C$. By the evaluation formula for the bijective transpose,\n$$e_B(1_B\\otimes j)=b.$$\nTo prove $j\\alpha=\\gamma Pj$, it suffices by injectivity of that same transpose (with first variable $B$ and parameter $PA$) to compare $e_B(1_B\\otimes j\\alpha)$ and $e_B(1_B\\otimes\\gamma Pj)$, maps $B\\otimes PA\\to\\Lambda_X$. Precomposition by the isomorphism $\\beta\\otimes1_{PA}:PB\\otimes PA\\to B\\otimes PA$ is cancellable, so it suffices to compare their composites with this specified map.",
+   "uses": [
+    "lem-coef-completed-tensor-hom-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final duality/pairing paragraph; explicit coefficient-bidual calculation supplementing the evaluation/transposition argument in cor-coef-verdier-weil-equivariance.proof.md, paragraph 2"
+   }
+  },
+  {
+   "text": "The first composite is\n$$\\begin{aligned}\ne_B(\\beta\\otimes j\\alpha)&=b(\\beta\\otimes\\alpha)\\\\\n&=e_A(\\alpha\\otimes\\beta)\\sigma_{PB,PA}\\\\\n&=cP(e_A)t_{A,B}\\sigma_{PB,PA}\\\\\n&=cP(b)t_{B,A}.\n\\end{aligned}$$\nThe first equality is the defining transpose identity from step 3, the second is naturality of the prescribed rational signed symmetry, and the third is step 2. The last equality is precisely compatibility of the specified pullback-tensor comparison with that symmetry, namely $t_{A,B}\\sigma_{PB,PA}=P(\\sigma_{B,A})t_{B,A}$. Hence the cohomological signs are retained in this equality.",
+   "uses": [
+    "lem-coef-rational-tensor-symmetry-laws",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final duality/pairing paragraph; explicit coefficient-bidual calculation supplementing the evaluation/transposition argument in cor-coef-verdier-weil-equivariance.proof.md, paragraph 2"
+   }
+  },
+  {
+   "text": "The second composite is\n$$\\begin{aligned}\ne_B(\\beta\\otimes\\gamma Pj)&=e_B(\\beta\\otimes\\gamma)(1_{PB}\\otimes Pj)\\\\\n&=cP(e_B)t_{B,C}(1_{PB}\\otimes Pj)\\\\\n&=cP(e_B)P(1_B\\otimes j)t_{B,A}\\\\\n&=cP(b)t_{B,A}.\n\\end{aligned}$$\nThe first equality is tensor functoriality; the second is the other evaluation identity of step 2; the third is naturality of $t$ for the actual rational arrow $j:A\\to C$; and the fourth uses $e_B(1_B\\otimes j)=b$ from step 3 and functoriality of $P$. Thus the two composites agree.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final duality/pairing paragraph; explicit coefficient-bidual calculation supplementing the evaluation/transposition argument in cor-coef-verdier-weil-equivariance.proof.md, paragraph 2"
+   }
+  },
+  {
+   "text": "Cancel $\\beta\\otimes1_{PA}$ in steps 4–5 and use the injective transpose of step 3. This gives $\\delta_K\\theta_K=\\theta_{K^{\\vee\\vee}}P(\\delta_K)$, which is exactly the defining Weil-arrow equation. Only rational inverses and rational naturality were used, so no stable integral lattice is required. On a point with $K=E$ and $\\alpha=\\ell$, the displayed dual formulas give $\\beta=\\ell^{-1}$ and $\\gamma=\\ell$, while $j$ is the usual evaluation identification, so the equation holds. At the zero object both compared maps are the unique zero morphism; no cancellation by a nonzero scalar was used.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-coef-completed-tensor-hom-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+    "place": "Final duality/pairing paragraph; explicit coefficient-bidual calculation supplementing the evaluation/transposition argument in cor-coef-verdier-weil-equivariance.proof.md, paragraph 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-admissible-hom-substitution",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-coef-rational-tensor-symmetry-laws",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "Final duality/pairing paragraph; explicit coefficient-bidual calculation supplementing the evaluation/transposition argument in cor-coef-verdier-weil-equivariance.proof.md, paragraph 2",
+  "note": "D7: Hom-domain subproofs use the existing general permitted-pair lemma; remaining steps use generic private partial-closed calculations. No choice of Weil data or modification of public definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a site perfect rational sheaf complex with arbitrary Frobenius isomorphism the inverse contravariant internal Hom datum makes the canonical coefficient bidual map equivariant",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.ιFree_mapFree_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the image of the free $ R $-module sheaf over a\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"LightCondensed.ihom_map_val_app\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B P : LightCondMod R) (S : LightProfinite) (e : A ⟶ B)\\n  (x : ↑((P ⟹ A).val.obj (Opposite.op S))),\\n  (CategoryTheory.ConcreteCategory.hom (((CategoryTheory.ihom P).map e).val.app (Opposite.op S))) x =\\n    (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryT\", \"doc\": \"For any light condensed $ R $-modules $ A $, $ B $, $ P $, a light profinite space $ S $, a morphism $ e: A \\to B $, and an element $ x $ in the hom-set $ [P, A](S) $, the application of the internal h\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite)\\n  (x : CategoryTheory.MonoidalCategoryStruct.tensorObj A ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R A B S).symm x =\\n    (CategoryTheory.coherentTopology LightProfinite).yonedaEquiv\\n  \", \"doc\": \"For any objects $A, B$ in the category of light condensed $R$-modules and a light profinite space $S$, the inverse of the internal hom points map $\\\\text{ihomPoints}_R(A, B, S)$ evaluated at a morphism\"}\n  {\"name\": \"LightCondensed.ihomPoints_apply\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A B : LightCondMod R) (S : LightProfinite) (x : ↑((A ⟹ B).val.obj (Opposite.op S))),\\n  (LightCondensed.ihomPoints R A B S) x =\\n    CategoryTheory.MonoidalClosed.uncurry\\n      (((LightCondensed.freeForgetAdjunction R).homEquiv ((CategoryTheory.coherentTopology Ligh\", \"doc\": \"For any commutative ring $ R $, light condensed $ R $-modules $ A $ and $ B $, and a light profinite space $ S $, the points of the internal hom-object $ [A, B] $ at $ S $ are given by uncurrying the \"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} A] [inst_2 : CategoryTheory.HasWeakSheafify J A]\\n  [inst_3 : CategoryTheory.HasGlobalSectionsFunctor J A] {X' X : A} {F : CategoryTheory.She\", \"doc\": \"For any objects $X', X$ in category $\\\\mathcal{A}$ and sheaf $F$ on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, the inverse of the natural hom-set equivalence between morphisms from the constant sheaf \"}\n  {\"name\": \"SheafOfModules.freeHomEquiv_symm_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"For any sheaves of modules $M$ and $N$ over a sheaf of rings $R$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, an index type $I$, a family of global sections $s: I \\\\to \\\\Gamma(M)$, and a \"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} A] [inst_2 : CategoryTheory.HasWeakSheafify J A]\\n  [inst_3 : CategoryTheory.HasGlobalSectionsFunctor J A] {X : A} {F F' : CategoryTheory.She\", \"doc\": \"For any object $X$ in category $\\\\mathcal{A}$ and sheaves $F,F'$ on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, the inverse of the ΓHomEquiv bijection satisfies: applying it to the composition $f \\\\circ\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of symmetric derived evaluation intertwines a Frobenius pullback isomorphism with its double contragredient for rational constructible sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"dual\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual.*(Frobenius|Weil)|contragredient|contravariant.*bidual",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariance of canonical derived coefficient biduality under inverse contravariant Weil data",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.dualMap_symm\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"{f : M₁ ≃ₗ[R] M₂} : (LinearEquiv.dualMap f).symm = LinearEquiv.dualMap f.symm\", \"doc\": \"For any linear equivalence $ f: M_1 \\\\simeq_R M_2 $ between $ R $-modules $ M_1 $ and $ M_2 $, the inverse of the dual map $ f^*: \\\\text{Dual}_R(M_2) \\\\to \\\\text{Dual}_R(M_1) $ is equal to the dual map of\"}\n  {\"name\": \"Module.symm_dualMap_evalEquiv\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \": (evalEquiv R M).symm.dualMap = Dual.eval R (Dual R M)\", \"doc\": \"For a reflexive module $ M $ over a semiring $ R $, the dual map of the inverse evaluation equivalence $ (\\\\text{evalEquiv}_R(M))^{-1} $ coincides with the canonical evaluation map from the dual module\"}\n  {\"name\": \"LinearEquiv.symm_flip\", \"module\": \"Mathlib.LinearAlgebra.PerfectPairing.Basic\", \"type\": \": e.flip.symm = e.symm.dualMap.trans (evalEquiv R M).symm\", \"doc\": \"The inverse of the flipped linear equivalence $ e $ is equal to the composition of the dual map of the inverse equivalence $ e^{-1} $ and the inverse of the canonical evaluation equivalence for the re\"}\n  {\"name\": \"LinearEquiv.dualMap\", \"module\": \"Mathlib.LinearAlgebra.Dual.Defs\", \"type\": \"(f : M₁ ≃ₗ[R] M₂) : Dual R M₂ ≃ₗ[R] Dual R M₁\", \"doc\": \"Given a linear equivalence $ f: M_1 \\\\simeq_R M_2 $ between $ R $-modules $ M_1 $ and $ M_2 $, this constructs the linear equivalence $ f^*: \\\\text{Dual}_R(M_2) \\\\simeq_R \\\\text{Dual}_R(M_1) $ by precompo\"}\n  {\"name\": \"Module.Dual.congr_symm_apply_apply\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] (e : V ≃ₗ[R] W) (a : W →ₗ[R] R) (a_1 : V),\\n  ((Module.Dual.congr e).symm a) a_1 = a (e a_1)\", \"doc\": \"For any linear equivalence $ e : V \\\\simeq_R W $ between $ R $-modules $ V $ and $ W $, and for any linear functional $ a : W^\\\\to R $, the inverse of the induced linear equivalence on dual modules sati\"}\n  {\"name\": \"Lat.dualEquiv\", \"module\": \"Mathlib.Order.Category.Lat\", \"type\": \": Lat ≌ Lat\", \"doc\": \"The equivalence between the category of lattices and itself, defined by the dual functor. Applying the dual functor twice is naturally isomorphic to the identity functor, establishing that the dual op\"}\n  {\"name\": \"PiTensorProduct.dualDistribEquivOfBasis_symm_apply\", \"module\": \"Mathlib.LinearAlgebra.PiTensorProduct.Dual\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {κ : ι → Type u_3} {M : ι → Type u_4} [inst : CommRing R]\\n  [inst_1 : (i : ι) → AddCommGroup (M i)] [inst_2 : (i : ι) → Module R (M i)] [inst_3 : Finite ι]\\n  [inst_4 : ∀ (i : ι), Finite (κ i)] (b : (i : ι) → Module.Basis (κ i) R (M i))\\n  (a : Module.Dual R (PiTensorPr\", \"doc\": \"For a finite index type $\\\\iota$, commutative ring $R$, and a family of finite-dimensional $R$-modules $M_i$ with bases $b_i$, the inverse of the $R$-linear equivalence between the tensor product of du\"}\n  {\"name\": \"Module.Dual.congr\", \"module\": \"Mathlib.LinearAlgebra.Dual.BaseChange\", \"type\": \"(e : V ≃ₗ[R] W) : Dual R V ≃ₗ[R] Dual R W\", \"doc\": \"Let $V$ and $W$ be modules over a commutative semiring $R$. Given an $R$-linear equivalence $e: V \\\\to W$, this definition constructs an $R$-linear equivalence between their dual modules, $\\\\text{Dual}_\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical bidual evaluation map of a rational constructible sheaf complex is equivariant for inverse contravariant Frobenius data",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.Γevaluation_naturality, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihom_map_val_app, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, CompHausLike.LocallyConstantModule.functor_map_val, SheafOfModules.freeHomEquiv_symm_comp, CompHausLike.LocallyConstantModule.functorToPresheaves_map_app",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual.*(Frobenius|Weil)|contragredient|contravariant.*bidual",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical double dual map is equivariant for inverse contravariant automorphism data in a symmetric monoidal closed category",
+   "results": "OK 8 hit(s): LinearEquiv.dualMap, LinearEquiv.dualMap_symm, DomAddAct.mk, Lat.dualEquiv_inverse, Module.symm_dualMap_evalEquiv, Lat.dualEquiv, CategoryTheory.hasRightDualOfEquivalence, Lat.dualEquiv_functor",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihom\", \"dual\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal closed category the canonical map to the double internal dual commutes with a strong symmetric monoidal endofunctor and a chosen automorphism",
+   "results": "OK 8 hit(s): CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.coev_expComparison, CategoryTheory.ihom.ev_coev_assoc, CategoryTheory.exp.coev_ev, CategoryTheory.exp.ev_coev_assoc, CategoryTheory.MonoidalClosed.compTranspose_eq, CategoryTheory.ihom.ev_coev",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compTranspose|coe[v]?_expComparison|frobeniusMorphism_mate",
+   "results": "OK 9 hit(s): Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-rational-purity-pairing",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 4 final clause (smooth pairing); retained rational proof Step 6, evaluation/bidual transposition calculation",
+   "via": [
+    "lem-pod-rational-purity-pairing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pod-inverse-contravariant-bidual",
+  "worker": "stage1",
+  "summary": "Expanded inverse-contravariant coefficient bidual equivariance into two evaluation identities and two explicitly equal uncurried composites. Reused existing rational transpose, dual stability and specified tensor-symmetry tools; no new nodes or statement changes. Checked arbitrary rational data, scalar ell, signed shifts and zero.",
+  "blueprint": "prop-weil-operations final duality/pairing paragraph (latest sk-thm-frobenius location), refining the retained rational purity-pairing Step 6 evaluation/bidual calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-perfect-dual-pair-and-tate-stability",
+    "why": "The generic coefficient-dual stability theorem supplies the perfect domains of the two duals; it does not replace any finiteness step of sk-lem-finite."
+   },
+   {
+    "node": "lem-pod-derived-automorphism-hom-evaluation",
+    "why": "The evaluation-defined automorphism Hom comparison is the map specified in this item; used solely as a generic comparison tool."
+   },
+   {
+    "node": "lem-coef-completed-tensor-hom-transpose",
+    "why": "The natural rational evaluation transpose and its injectivity are a generic closed-category tool for the specified completed/localized operations."
+   },
+   {
+    "node": "lem-coef-rational-tensor-symmetry-laws",
+    "why": "Naturality of the actual rational Koszul symmetry is a generic tensor identity needed in the evaluation calculation."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Naturality and signed-symmetry compatibility of the specified pullback-tensor comparison are generic monoidal identities."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-coef-rational-tensor-symmetry-laws",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-6a22b82f9",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-6a22b82f9 (reviewer sub-agent of L); spot-checked: Six-step split with no new nodes. Statement and stmt_deps are identical to live and side-live, where the item is still unsplit; it is not superseded and there is no re-split note. proof_deps equals the union of step uses, there is no cycle (transitive walk) and no SGA citation. I re-derived every step. Step 2: transpose naturality in the 1st and 3rd variables gives e_A(alpha⊗beta)=c ev(1⊗h_A)=cP(e_A)mu^{-1}, using the characterizing identity of lem-pod-derived-automorphism-hom-evaluation; the same holds for B. Step 3: j=(e_A sigma)^sharp, with injectivity of lem-coef-completed-tensor-hom-transpose at (B,PA,Lambda) and cancellation of beta⊗1. Step 4: naturality of sigma (lem-coef-rational-tensor-symmetry-laws) and the signed-commutativity compatibility of lem-pur-derived-pullback-tensor-iso, t_{A,B}sigma=P(sigma)t_{B,A}. Step 5: naturality of mu in j. Both composites equal cP(b)t_{B,A}. Step 6 is the Weil-arrow equation of def-weil-weil-sheaf-complex. Step 1: lem-sf-perfect-dual-pair-and-tate-stability makes K^vee and K^vee-vee perfect. Sources: main-20261015 prop-weil-operations.proof and cor-coef-verdier-weil-equivariance.proof paragraph 1 (dual structure D(theta^{-1}) after the comparison; naturality of evaluation and transposition give delta; rational theta) match the convention and route. Tested on a point with alpha=ell (beta=ell^{-1}, gamma=ell), K=E[1] (signs), zero, and invertible matrices (inverse transpose). The duplicate search found only Verdier-dual biduality nodes and generic transports (lem-sf-evaluation-bidual-comparison-transport is an optional alternative, not a duplicate). The five generic tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InverseContravariantBidual",
+  "declaration": "WeilConjectures.podInverseContravariantBidual",
+  "declarations": [
+   "WeilConjectures.podInverseContravariantDatum",
+   "WeilConjectures.podCoefficientDual_permitted",
+   "WeilConjectures.podCoefficientDualPair",
+   "WeilConjectures.podCoefficientDual",
+   "WeilConjectures.podCoefficientBidual_permitted",
+   "WeilConjectures.podCoefficientBidualPair",
+   "WeilConjectures.podCoefficientDualStructure",
+   "WeilConjectures.podCoefficientBidualStructure",
+   "WeilConjectures.podCoefficientBidualMap",
+   "WeilConjectures.podInverseContravariantBidual"
+  ],
+  "file": "lean/Sheaf/Paper/InverseContravariantBidual.lean",
+  "statement": "theorem podInverseContravariantBidual (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (ι : E →ₐ[Padic l] Ω) (K : sfWeilComplex D l hl X₀ E) (hK : IsSfRationalCoefficientSitePerfect l E (D.geometricFiber X₀).left K.carrier) : K.str.hom ≫ podCoefficientBidualMap D l hl X₀ E K.carrier hK = (sfWeilFrobeniusPullback D l hl X₀ E).map (podCoefficientBidualMap D l hl X₀ E K.carrier hK) ≫ (podCoefficientBidualStructure D l hl X₀ E K hK).hom",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two named domain theorems express the well-definedness of the coefficient-dual and bidual pairs already required in the node statement and proof Step 1. All helper data are explicit applications of the recorded rational internal Hom, canonical coefficient Weil line, evaluation-defined pullback comparison and signed transpose; no stable lattice or universal Hom-closure hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-861f03705",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery of e1b460c8: the Lean module is byte-identical. The only node change adds stmt_deps def-sf-rational-common-tensor-symmetries (owns pullbackTensorRationalBraiding = σ) and def-pod-partial-closed-interfaces (owns PodPartialClosed transpose/evaluation). Both are existing:true on the base, which repairs the prior H2 RETURN exactly. All other statement owners are cited; podRationalClosed/HomComparison are .choose of the cited lem-pod-derived-automorphism-hom-evaluation. Maths re-checked: θ_{K∨}=H(θ⁻¹,c)h_K and θ_{K∨∨} likewise. δ = transpose(braid ≫ Hom-first eval) equals the node's (ev_K σ)^♯ after the argument-first/Hom-first conventions cancel. The conclusion is the Weil-arrow equation in diagrammatic order. The sorried _permitted domain facts are true Prop fields (constructible RHom into the coefficient line). Edge cases ℓ/zero/shift/empty and universes are fine. lean.statement is verbatim. No hollow defs; only theorem sorries. No compile needed (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4fc6a",
+  "group": "D7",
+  "result": "fix",
+  "landing": "20261025T122728-L-1800435",
+  "kind": "interface",
+  "note": "independent cc review: delivered InverseContravariantBidual.lean + node lem-pod-inverse-contravariant-bidual against live clone, node plan, unit sk-lem-finite (realized empty) and AdmissibleHomSubstitution.rationalPairPermitted; axioms probe compiled (exit 0)"
+ }
+}

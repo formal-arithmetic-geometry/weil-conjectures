@@ -1,0 +1,138 @@
+{
+ "id": "lem-coef-etale-lisse-hom-endpoint-bounds",
+ "kind": "statement",
+ "title": "Endpoint bounds for the lisse coefficient-Hom comparison",
+ "statement": "Let k, l≠p, m≤n and A=O_E/(ϖ_E^(n+1)), B=O_E/(ϖ_E^(m+1)) with the quotient φ be as in [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension, def-sf-etale-finite-coefficient-hom-arrow]. Let S be a separated finite-type k-scheme [def-weil-scheme-morphism-properties], d_S∈N, and a,b,d_X∈Z. Let K,N be bounded constructible complexes of A-modules on S_et [def-weil-pbc-constructible-complexes] with K dualizable of Tor amplitude [0,0] and N of Tor amplitude [a,b+2d_X+1] [def-kun-tor-amplitude], and Q=RHom_A(K,N) [def-pur-derived-internal-hom]. Then Q is bounded constructible with Tor amplitude in [a-2d_S,b+2d_X+1+2d_S]; Q⊗^L_A B and RHom_B(K⊗^L_A B, N⊗^L_A B) are bounded constructible of finite Tor amplitude over B.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-derived-categories"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "proof": [
+  {
+   "text": "Widen the interval of N to [min(a,b+2d_X+1), b+2d_X+1]. The finite constructible Hom theorem [cor-weil-finite-constructible-hom] on the separated finite-type S makes Q bounded constructible.",
+   "uses": [
+    "cor-weil-finite-constructible-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "For dualizable K, RHom(K,N)≅K^∨⊗^L N and K^∨ has Tor amplitude [0,0], so Q has Tor amplitude [a,b+2d_X+1]; since d_S≥0 this interval lies in [a-2d_S,b+2d_X+1+2d_S].",
+   "uses": [
+    "def-kun-tor-amplitude",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  },
+  {
+   "text": "The endpoint clause of [lem-coef-finite-hom-domain-calculus], applied to K with [0,0] and N with the widened interval, gives the two reduced endpoints bounded constructible with finite Tor amplitude.",
+   "uses": [
+    "lem-coef-finite-hom-domain-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-weil-finite-constructible-hom",
+  "def-kun-tor-amplitude",
+  "def-pur-derived-internal-hom",
+  "lem-coef-finite-hom-domain-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3, lisse degree-zero specialization of the site-perfect stratum argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etaleLisseHomEndpointBounds",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived category coefficient Hom",
+   "results": "No direct theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLisseHomEndpointBounds",
+   "results": "Only this local declaration.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleLisseHomReduction",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-lisse-hom-reduction",
+   "place": "Lisse Hom reduction proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleLisseHomReduction",
+  "file": "lean/Sheaf/Paper/EtaleLisseHomReduction.lean",
+  "declaration": "WeilConjectures.etaleLisseHomEndpointBounds",
+  "statement": "theorem etaleLisseHomEndpointBounds (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (n m : ℕ) (hmn : m ≤ n) (S : Scheme.{u}) [S.Over (Spec (.of D.k))] [IsSeparated (S ↘ Spec (.of D.k))] [LocallyOfFiniteType (S ↘ Spec (.of D.k))] [QuasiCompact (S ↘ Spec (.of D.k))] (K N Q : Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S) (hQ : Q = (finiteHomEtaleInternalHom l E S n).obj (op K, N)) (hKbc : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S K) (hKtor : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S 0 0 K) (hKdual : IsDualizable K) (hNbc : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S N) (a b dX : ℤ) (dS : ℕ) (hNtor : Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S a (b + 2 * dX + 1) N) : Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S Q ∧ Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) S (a - 2 * (dS : ℤ)) (b + 2 * dX + 1 + 2 * (dS : ℤ)) Q ∧ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1))) S ((finiteHomEtaleReduction l E S hmn).obj Q) ∧ Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1)))) S ((finiteHomEtaleReduction l E S hmn).obj Q) ∧ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1))) S ((finiteHomEtaleInternalHom l E S m).obj (op ((finiteHomEtaleReduction l E S hmn).obj K), (finiteHomEtaleReduction l E S hmn).obj N)) ∧ Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1)))) S ((finiteHomEtaleInternalHom l E S m).obj (op ((finiteHomEtaleReduction l E S hmn).obj K), (finiteHomEtaleReduction l E S hmn).obj N))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-aed7c",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261026T065553-L-3086827",
+  "kind": "interface",
+  "note": "independent cc review: 6 new item-module theorems + 3 new modules + FFHEC abbrev adaptation + 10 nodes vs packet/clone (item and target statements unchanged, FFHLC importer compiled against adapted FFHEC); private helpers vs public sorry statements; EndpointBounds vs counterexample dS=-1"
+ }
+}

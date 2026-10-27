@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-derived-scalar-pullback-tensor-normalization",
+ "kind": "statement",
+ "title": "Tensor normalization of scalar extension and pullback before taking mates",
+ "statement": "Let f : Z → T be any scheme morphism and a : A → B a map of commutative ring sheaves on the small pro-etale site of T. Write U = f_A^*, r_T and r_Z for exact derived scalar restriction, T_T and T_Z for derived scalar extension, b : r_Z ∘ f_B^* ≅ U ∘ r_T for the canonical restriction/pullback comparison, lambda : f_B^* ∘ T_T ≅ T_Z ∘ U for the prescribed inverse scalar mate, C_T = r_T(B)[0] and C_Z = r_Z(f^{-1}B)[0]. For any normalized tensor presentations t,z, let e_T : r_T T_T ≅ (- ⊗^L C_T), e_Z : r_Z T_Z ≅ (- ⊗^L C_Z), c : U C_T ≅ C_Z be the fixed degree-zero coefficient identification, and mu : U(M ⊗^L N) ≅ UM ⊗^L UN the normalized tensor comparison. For every M in D(A), b^{-1}_{T_T M} ≫ r_Z(lambda_M) ≫ e_{Z,UM} ≫ (1 ⊗ c^{-1}) = U(e_{T,M}) ≫ mu_{M,C_T}. There are no flatness or boundedness assumptions. This identity involves only pullback and scalar extension, before taking a geometric mate.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "On a flat-term K-flat complex P, postcompose both desired maps with tensor(d_P,derivedCoefficientPullback.hom), followed by the one-sided scalar coordinates. This is invertible because the scalar-derived counit is invertible on pulled-back K-flat complexes. Naturality of derivedTensorIso moves d_P to the scalar-extension side. The scalar ordinary route and the proved one-sided tensor pullback identify the two composites with the same localized ordinary total map. Cancel the postcomposition.",
+   "uses": [
+    "lem-sfb-scalar-mate-ordinary-tensor-route",
+    "lem-sfb-scalar-tensor-one-sided-pullback",
+    "lem-sfb-derived-scalar-tensor-identification",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-scalar-tensor-ordinary-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  },
+  {
+   "text": "Every derived object is isomorphic to Q(P) for a flat-term K-flat P, by an independent-coefficient K-flat resolution. Package both desired sides as natural transformations, transport the representative equality along this isomorphism, and cancel its image. All coefficient identifications are the specified ones; no target statement or definition is changed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-mate-ordinary-tensor-route",
+  "lem-sfb-scalar-tensor-one-sided-pullback",
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-scalar-tensor-ordinary-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); ordinary tensor normalization in sites-modules.tex, Tag 03EK. The compatibility calculations below are agent-written expansions, not verbatim claims of the source. R2: separate scalar counit and geometric tensor calculations, then cancel and extend naturally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate of scalar extension pullback after scalar restriction equals the tensor projection formula morphism",
+   "results": "ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.homEquiv_extendScalarsComp; ordinary tensor adjunction formulas only.",
+   "date": "2026-10-27",
+   "verdict": "No unbounded sheaf-ring representative normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, _ ≃ _",
+   "results": "Adjunction.homEquiv and its naturality lemmas. Project MateTransport supplies the later abstract mate calculation, not this pullback tensor identity.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of this normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*projection|projection.*scalar|tensor.*restriction",
+   "results": "msearch gave Analysis/CStarAlgebra/Projection.lean, unrelated. Project rg found DerivedScalarMateData normalization predicates, ProEtaleCanonicalTensorPullback, and the constant-coefficient specialization ProEtaleScalarTensorNormalization. The latter imports the parent thick-locus result and cannot prove the general ring-sheaf identity without a cycle.",
+   "date": "2026-10-27",
+   "verdict": "No usable theorem for the combined ring-sheaf normalization. Use the given scalar, tensor and localization normalization statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedScalarMateProjectionNormalization",
+  "date": "2026-10-27",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-derived-scalar-projection-normalization",
+   "place": "Proof step 1, before taking geometric right-adjoint mates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedScalarPullbackTensorNormalization",
+  "file": "lean/Sheaf/Paper/DerivedScalarPullbackTensorNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.scalarPullback_tensor_normalization",
+  "statement": "theorem scalarPullback_tensor_normalization\n    {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (t : ProEtaleTensorModel T A) (z : ProEtaleTensorModel Z (inverseRing f A))\n    (M : DerivedCategory (proEtaleRingModules T A)) :\n    (proEtaleRingRestrictionDerivedPullback f A B (inverseRing f A) (inverseRing f B)\n        a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)).inv.app\n          ((proEtaleRingDerivedExtension a).obj M) ≫\n      (restriction (inverseMap f a)).mapDerivedCategory.map ((scalarPullback f a).hom.app M) ≫\n      (derivedTensorIso (inverseMap f a) z).hom.app ((pull f A).obj M) ≫\n      z.tensor.map (Prod.mkHom (𝟙 _) (derivedCoefficientPullback f a).inv) =\n    (pull f A).map ((derivedTensorIso a t).hom.app M) ≫\n      (proEtaleCanonicalTensorComparison f A (inverseRing f A) (Iso.refl _) t z).hom.app\n        (M, DerivedCategory.Q.obj (coefficientComplex a))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T054601-L-966644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T084445-L-3682702",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

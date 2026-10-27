@@ -15,35 +15,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Ring.NegOnePow
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
-import Sheaf.Paper.FiniteDiscreteCondensedRing
-import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 public import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
 public import Sheaf.Paper.CompletedConstantSheafReduction
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
-import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
-import WeilConjectures.Algebra.Homology.HomComplex
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement
 import Mathlib.LinearAlgebra.Dual.Lemmas
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.RingTheory.Finiteness.Basic
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.AlgebraicGeometry.LocalModelCohomologyDescent
-import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.AdmissibleScalarRealizationExact
+import Sheaf.Paper.OrdinaryScalarPerfectLocalDual
+import Sheaf.Paper.OrdinaryScalarModelBoundedDescent
 
 /-!
 # Scalar cohomology models for locally perfect complexes and their duals
@@ -87,7 +66,21 @@ These are the two well-definedness checks of the ordinary scalar Hom complex. -/
 theorem scalarDualDifferential_laws (F : CochainComplex (ModuleCat.{u + 1} R) ℤ) :
     (∀ i j : ℤ, ¬ (ComplexShape.up ℤ).Rel i j → scalarDualDifferential F i j = 0) ∧
     (∀ i j k : ℤ, scalarDualDifferential F i j ≫ scalarDualDifferential F j k = 0) := by
-  sorry
+  constructor
+  · intro i j hij
+    have hd : F.d (-j) (-i) = 0 := F.shape _ _ (by
+      simp only [ComplexShape.up_Rel] at hij ⊢
+      omega)
+    apply ModuleCat.hom_ext
+    ext φ x
+    simp [scalarDualDifferential, hd]
+  · intro i j k
+    apply ModuleCat.hom_ext
+    ext φ x
+    have hd (x : F.X (-k)) :
+        (F.d (-j) (-i)).hom ((F.d (-k) (-j)).hom x) = 0 :=
+      ConcreteCategory.congr_hom (F.d_comp_d (-k) (-j) (-i)) x
+    simp [scalarDualDifferential, hd]
 
 /-- The actual scalar complex Hom_R(F,R[0]), with reversed degrees and its Hom sign.
 Source: Stacks Tag 08JJ (blueprint: lem-sfb-internal-hom-dual-constructible-models). -/
@@ -104,7 +97,7 @@ Proof: its map is the original additive linear map; addition is unchanged in int
 abelian-group modules. Sheafification, extension of scalars and point pullback are additive. -/
 theorem scalarModules_additive (A : Type u) [CommRing A] :
     (FiniteConstantModel.scalarModules A).Additive := by
-  sorry
+  exact { map_add := by intros; rfl }
 
 attribute [instance] scalarModules_additive
 
@@ -187,7 +180,25 @@ theorem realization_additive
       (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMod
         (AddCommGrpCat.of (ULift.{u + 1} A)) ⋙ Mod.extendScalars ρ ⋙
           (upperStarFromPoint T).mapMod Λ).Additive := by
-  sorry
+  have : ((constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMod
+      (AddCommGrpCat.of (ULift.{u + 1} A))).Additive :=
+    { map_add := by
+        intros
+        apply Mod.hom_ext
+        exact (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).map_add }
+  have : PreservesFiniteColimits (upperStarFromPoint T) := by
+    have h : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint T) := by
+      let adj := pointUpperStarLowerStarAdjunction.comp
+        (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ T))
+      exact adj.leftAdjoint_preservesColimits
+    infer_instance
+  have : PreservesBinaryBiproducts (upperStarFromPoint T) :=
+    preservesBinaryBiproducts_of_preservesBinaryCoproducts _
+  have : (upperStarFromPoint T).Additive :=
+    Functor.additive_of_preservesBinaryBiproducts _
+  have : ((upperStarFromPoint T).mapMod Λ).Additive :=
+    { map_add := by intros; apply Mod.hom_ext; exact (upperStarFromPoint T).map_add }
+  infer_instance
 
 attribute [instance] realization_additive
 
@@ -277,6 +288,89 @@ def Assertion (A : Type u) [CommRing A]
     constantModelBoundedConstructible Λ S
       (((CondensedRing.derivedHom Λ S).obj (op P)).obj (𝟙_ _))
 
+private theorem finitePresentation_homology
+    (A : Type u) [CommRing A] [IsNoetherianRing A]
+    (F : CochainComplex (ModuleCat.{u + 1} A) ℤ) (q : ℤ)
+    (hfinite : Module.Finite A (F.X q)) : Module.FinitePresentation A (F.homology q) := by
+  let : Module.Finite A (F.sc q).X₂ := hfinite
+  let K := LinearMap.ker (F.sc q).g.hom
+  have : Module.Finite A K := Module.Finite.of_injective K.subtype K.injective_subtype
+  have : Module.FinitePresentation A (F.sc q).moduleCatLeftHomologyData.H := by
+    change Module.FinitePresentation A (K ⧸ LinearMap.range (F.sc q).moduleCatToCycles)
+    exact Module.finitePresentation_of_finite A _
+  exact Module.FinitePresentation.of_equiv (F.sc q).moduleCatHomologyIso.symm.toLinearEquiv
+
+private theorem assertion_of_exact_realization
+    (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+    (S : Scheme.{u}) [CompactSpace S] [IsLocallyNoetherian S]
+    (h : ∀ T : Scheme.{u}, AdmissibleScalarRealization.ScalarAssertions A T) :
+    Assertion A (Profinite.continuousCoefficientRingObj A)
+      (FiniteConstantModel.modelFunctor A) S := by
+  let : IsNoetherianRing A := (h S).1
+  have hexact (T : Scheme.{u}) :
+      PreservesFiniteLimits (FiniteConstantModel.modelFunctor A T) ∧
+        PreservesFiniteColimits (FiniteConstantModel.modelFunctor A T) :=
+    ⟨(h T).2.2.1, (h T).2.2.2.1⟩
+  intro P 𝒰 F hbounded hterms hmodel
+  have hb (i : 𝒰.I₀) : ∃ a b : ℤ, ∀ q : ℤ,
+      q < a ∨ b < q → IsZero ((F i).X q) := by
+    obtain ⟨a, b, ha, hb⟩ := hbounded i
+    let := ha
+    let := hb
+    exact ⟨a, b, fun q hq ↦ hq.elim
+      (fun hq ↦ (F i).isZero_of_isStrictlyGE a q hq)
+      (fun hq ↦ (F i).isZero_of_isStrictlyLE b q hq)⟩
+  have hdb (i : 𝒰.I₀) : ∃ a b : ℤ, ∀ q : ℤ,
+      q < a ∨ b < q → IsZero ((scalarDual (F i)).X q) := by
+    obtain ⟨a, b, hab⟩ := hb i
+    refine ⟨-b, -a, fun q hq ↦ ?_⟩
+    have hz := hab (-q) (by omega)
+    have : Subsingleton ((F i).X (-q)) := ModuleCat.isZero_iff_subsingleton.mp hz
+    change IsZero (ModuleCat.of A (Module.Dual A ((F i).X (-q))))
+    exact ModuleCat.isZero_of_subsingleton _
+  have hdfinite (i : 𝒰.I₀) (q : ℤ) :
+      Module.Finite A ((scalarDual (F i)).X q) := by
+    let := (hterms i (-q)).1
+    let := (hterms i (-q)).2
+    exact Module.dual_finite (R := A) (M := (F i).X (-q))
+  have hfp (i : 𝒰.I₀) (q : ℤ) : Module.FinitePresentation A ((F i).homology q) :=
+    finitePresentation_homology A (F i) q (hterms i q).1
+  have hdfp (i : 𝒰.I₀) (q : ℤ) :
+      Module.FinitePresentation A ((scalarDual (F i)).homology q) :=
+    finitePresentation_homology A (scalarDual (F i)) q (hdfinite i q)
+  have hdmodel := ordinaryScalarPerfect_local_dual A S P 𝒰 F
+    (fun i ↦ scalarDual (F i)) hb hterms (fun _ _ ↦ Iso.refl _) (by
+      intro i q r
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl) hmodel
+  have cohomology_model
+      (Q : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
+          (condensedRingObj (Profinite.continuousCoefficientRingObj A) S)))
+      (K : 𝒰.I₀ → CochainComplex (ModuleCat.{u + 1} A) ℤ)
+      (hm : ∀ i : 𝒰.I₀, Nonempty
+        (((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj A)
+          (𝒰.f i)).mapDerivedCategory).obj Q ≅ DerivedCategory.Q.obj
+            (((FiniteConstantModel.modelFunctor A (𝒰.X i)).mapHomologicalComplex
+              (.up ℤ)).obj (K i)))) (i : 𝒰.I₀) (q : ℤ) :
+      Nonempty ((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj A)
+        (𝒰.f i)).obj ((DerivedCategory.homologyFunctor _ q).obj Q) ≅
+          (FiniteConstantModel.modelFunctor A (𝒰.X i)).obj ((K i).homology q)) := by
+    let := (hexact (𝒰.X i)).1
+    let := (hexact (𝒰.X i)).2
+    obtain ⟨e⟩ := hm i
+    exact ⟨((CondensedRing.upperStar (Profinite.continuousCoefficientRingObj A)
+      (𝒰.f i)).mapDerivedCategoryHomologyFunctorIso q).app Q ≪≫
+      (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+      (DerivedCategory.homologyFunctorFactors _ q).app _ ≪≫
+      ((FiniteConstantModel.modelFunctor A (𝒰.X i)).mapHomologicalComplexHomologyIso
+        (.up ℤ) q).app (K i)⟩
+  refine ⟨fun i q ↦ ⟨cohomology_model P F hmodel i q,
+    cohomology_model _ _ hdmodel i q, hfp i q, hdfp i q⟩, ?_, ?_⟩
+  · exact ordinaryScalarModel_bounded_descent A S P 𝒰 F hexact hb hmodel hfp
+  · exact ordinaryScalarModel_bounded_descent A S _ 𝒰
+      (fun i ↦ scalarDual (F i)) hexact hdb hdmodel hdfp
+
 /-- Constructible scalar cohomology models for all six admissible coefficient rings.
 The integral sheaves are the pulled-back continuous condensed rings, including their
 completed inverse-limit realization; no discrete replacement or derived completeness
@@ -334,6 +428,31 @@ theorem internalHomDual_constructible_models
         (FiniteConstantModel.rationalModel l E) S) ∧
     Assertion (ULift.{u} (PadicAlgCl l)) (algebraicCoefficients l)
       (algebraicModel l) S := by
-  sorry
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian
+    (S ↘ Spec (.of k))
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace
+    (S ↘ Spec (.of k))
+  have _ := hp
+  have _ := hpl
+  have h := AdmissibleScalarRealization.admissible_scalar_realization_exact
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro A _ _ hnil
+    let : TopologicalSpace A := ⊥
+    let : DiscreteTopology A := ⟨rfl⟩
+    apply assertion_of_exact_realization A S
+    intro T
+    apply ((h l T).1 A ?_).1
+    obtain ⟨n, hn⟩ := hnil
+    refine ⟨n, fun a ↦ ?_⟩
+    rw [nsmul_eq_mul, Nat.cast_pow, hn, zero_mul]
+  · exact assertion_of_exact_realization _ S (fun T ↦ (h l T).2.1.1)
+  · intro E _ _ _
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    exact assertion_of_exact_realization _ S (fun T ↦ ((h l T).2.2.1 E).1.1)
+  · exact assertion_of_exact_realization _ S (fun T ↦ (h l T).2.2.2.1)
+  · intro E _ _ _
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    exact assertion_of_exact_realization _ S (fun T ↦ ((h l T).2.2.1 E).2)
+  · exact assertion_of_exact_realization _ S (fun T ↦ (h l T).2.2.2.2)
 
 end AlgebraicGeometry.ProEtale.InternalHomDualModels

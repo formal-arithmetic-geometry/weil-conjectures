@@ -1,0 +1,113 @@
+{
+ "id": "def-sp-finite-intrinsic-pullback",
+ "kind": "definition",
+ "title": "Finite intrinsic derived pullback presentation",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring and $f:X\\to Y$ a scheme morphism. Use the small pro-etale inverse image and the constant-ring module categories [def-weil-proetale-inverse-image], [def-weil-pbc-proetale-operations], [def-weil-sheaf-of-modules-category]. Transport fixed-scalar inverse image through the canonical constant-module realization equivalences to define $f^*_{\\mathrm{int}}$. Define its unbounded derived functor by exact termwise descent to the derived categories [def-weil-abstract-derived-category]. Pullback composition is the transported fixed-scalar composition followed by insertion of the intermediate realization unit, and the identity comparison is its realization counit. These are the existing sfIntrinsicPullback, sfIntrinsicDerivedPullback, sfIntrinsicPullbackComp and sfIntrinsicPullbackId constructions, with the published constant-section normalization, not a new choice of coefficient identification.",
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: canonical exchanges, their unit/counit normalization and induced Weil structures on the two outer vertices; original detailed steps 13-15."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite constant coefficient proetale derived pullback open adjunction and scalar change mate",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; PresheafOfModules.pullback; TopCat.Sheaf.pullbackPushforwardAdjunction; TopCat.Presheaf.pushforwardPullbackAdjunction; CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj.",
+   "date": "2026-10-22",
+   "verdict": "General adjunctions, no exact finite intrinsic proetale or completed coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical finite constant coefficient proetale derived pullback open extension adjunction and pullback square",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.ExistsHomHomCompEqCompAux.g; AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_f; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X; AlgebraicGeometry.AffineSpace.isPullback_map.",
+   "date": "2026-10-22",
+   "verdict": "No exact match; reuse existing Sheaf declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "The existing generic mate API is used by the published constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntrinsicDerived|exceptionalOpenAdjunction|scalarPull|finiteQuotientChange (Mathlib/CategoryTheory; local WeilConjectures, Sheaf, and dag/nodes)",
+   "results": "[grep] OK 0 hit(s) in Mathlib/CategoryTheory. rg in WeilConjectures found unrelated scalarPullbackCoefficient constructions. Sheaf searches locate ProEtaleIntrinsicFiniteOperations, ProEtaleOpenSquareExchange, IntrinsicDerivedOpenAdjunction, SfIntrinsicRealizationTransport, and IntegralCompactSupportCoefficientComparison. A full lean.declaration/lean.declarations DAG scan finds sfIntrinsicDerivedPullback, sfIntrinsicDerivedOpen, sfIntrinsicDerivedSquarePullback, sfIntrinsicConstantModuleAdjunction unowned; exceptionalOpenAdjunction and the five coefficient comparison definitions are owned only by theorem nodes. blueprint_refs search: 0 blueprint nodes match intrinsic adjunction; 0 blueprint nodes match finite intrinsic mate; 0 blueprint nodes match coefficient mate data.",
+   "date": "2026-10-22",
+   "verdict": "Attach exact existing definitions, no Lean redeclaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-closed-weil-mate-structures",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Existing canonical operation and adjunction definitions needed for the explicit Weil-mate words and their coefficient transport.",
+   "via": [
+    "lem-sf-open-closed-weil-mate-structures"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations",
+  "declaration": "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfIntrinsicPullback",
+   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullback",
+   "AlgebraicGeometry.Scheme.sfIntrinsicPullbackComp",
+   "AlgebraicGeometry.Scheme.sfIntrinsicPullbackId",
+   "AlgebraicGeometry.Scheme.sfIntrinsicPullback_additive",
+   "AlgebraicGeometry.Scheme.sfIntrinsicPullback_preservesFiniteLimits",
+   "AlgebraicGeometry.Scheme.sfIntrinsicPullback_preservesFiniteColimits"
+  ],
+  "statement": "abbrev sfIntrinsicDerivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A",
+  "existing": true,
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "note": "Exact existing definitions, unchanged. Definition ownership of the canonical maps used by the returned mate statement; no theorem is promoted to a statement prerequisite."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afdd5dd2",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6afdd5dd2",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery repairing F1′ of 82f63df1. New conjunct sfCompletionOpenClosedWeilMateAssertions: OpenClosedScalarMateLift from the tower presentation (constructibleIntegralPullback, sfConstructibleIntegralFrobeniusSquare/zlIntegralPullComp, existential J⊣j, i⊣I) to the ordinary one (PurCompactSupport.pull completed, openDerivedAdjunction, proEtaleRingDerivedAdjunction, zlAmbientFrobeniusSquare) along the sfIntegralConstructible inclusions, so finite, integral, rational and Ω α/c run through one integral mate. Adjoint comparisons are the fixed mates. sfCompletionPullbackComparisonPin quantifies over every Comparison record (γ unique via finite Hom groups/Mittag-Leffler; inhabited) and pins s.inv = rho.inv ≫ tV(pbcActualStrictCompletedPullUnit ≫ towerIso) ≫ γ⁻¹ ≫ integral.map e for every complete representative and every e. Coverage holds because tW is an equivalence and IsSfDerivedComplete/Complete are the same Roos completeness. rho0 is pinned on unit-section generators and rho on every Q P via exact-pullback counits, so it is determined and consistent. The completion unit and γ are isos, so the pin is satisfiable; this matches proof step 6. The rational scalar clause's HEq-to-published binders are equivalent (defeq types), elaboration only. Statement verbatim; 21 declarations recorded and present; one sorry; docstrings with source and blueprint; node statement, proof and stmt_deps unchanged; new import owned by the cited def-pod-integral-completed-comparison-data. Earlier-accepted clauses unchanged. Edge cases U=X, U=∅, X=∅, K=0/torsion checked. Advisory: pbcActual*, proEtaleRingModuleUnitSection and proEtaleRingDerivedPullbackFactors have no recorded owner node (framework decls; inherited precedent). No compile (no FIX)."
+ }
+}

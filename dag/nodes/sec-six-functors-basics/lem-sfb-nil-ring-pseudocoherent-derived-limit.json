@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-nil-ring-pseudocoherent-derived-limit",
+ "kind": "statement",
+ "title": "Pseudo-coherent reconstruction over a surjective locally nilpotent ring tower",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative unital rings, with surjective unital transitions $u_n:A_{n+1}\\to A_n$ such that every element of $\\ker u_n$ is nilpotent. Put $A=\\varprojlim_n A_n$, the ring of compatible tuples with componentwise operations. For each $n$, let $K_n\\in D(A_n)$ [def-weil-abstract-derived-category] be pseudo-coherent [def-pc-ring-pseudo-coherent-complex], meaning isomorphic to a bounded-above complex of finite free $A_n$-modules. Suppose maps $t_n:K_{n+1}\\to K_n$ in $D(A_{n+1})$ (the target by restriction of scalars) have scalar-extension adjuncts $K_{n+1}\\otimes^{\\mathbf L}_{A_{n+1}}A_n\\xrightarrow{\\sim}K_n$. Derived scalar extension and its adjunction to exact scalar restriction are those of [lem-pur-derived-change-of-rings, lem-pur-sheaf-ring-derived-coefficient-adjunction], specialized to ordinary modules on the one-object point site. Regard the tower in $D(A)$ by restriction of scalars. If $(K,p,\\delta)$ is any derived limit of this tower [def-weil-derived-limit], with projections $p_n:K\\to K_n$, then $K$ is pseudo-coherent and, for every $n$, the scalar-extension adjunct of $p_n$ is an isomorphism $K\\otimes_A^{\\mathbf L}A_n\\xrightarrow{\\sim}K_n$ in $D(A_n)$. There is no Noetherian hypothesis, no required adic presentation of the tower, and no common nilpotence exponent; pseudo-coherence is assumed at every level.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, branch where every K_n is pseudo-coherent; projection-induced reduction maps and arbitrary derived limits as in its proof and Remark 0H9J (derived.tex, remark-functoriality-derived-limit)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite-free representative $P_1^\\bullet$ of $K_1$ and a marking $\\beta_1:Q(P_1)\\xrightarrow{\\sim}K_1$, using the definition of pseudo-coherence. Fix $b$ with $P_1^i=0$ for $i>b$. Put $J_n=\\ker(u_n)$. For $x\\in J_n$, choose $r$ with $x^r=0$; then $(1+x)\\sum_{j=0}^{r-1}(-x)^j=1$. Thus every element of $1+J_n$ is invertible. The quotient $A_{n+1}/J_n$ identifies with $A_n$: the map $[a]\\mapsto u_n(a)$ is injective by the definition of the kernel and surjective by hypothesis. This explicit identification will be used in each lifting application.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, proof (all levels pseudo-coherent branch)"
+   }
+  },
+  {
+   "text": "Inductively, suppose $(P_n,\\beta_n)$ has been chosen with cutoff $b$. Write $\\gamma_n:K_{n+1}\\otimes^{\\mathbf L}_{A_{n+1}}A_n\\xrightarrow{\\sim}K_n$ for the adjunct specified in the hypothesis. Apply the marked lifting lemma with $R=A_{n+1}$, $I=J_n$, $F=P_n$, $K=K_{n+1}$ and $\\alpha=\\beta_n^{-1}\\gamma_n$. Its hypotheses hold: $K_{n+1}$ is pseudo-coherent by assumption, and step 1 checked the unit condition. It gives $(P_{n+1},\\beta_{n+1},\\theta_n)$, with the same cutoff, and\n$$\\beta_n Q(\\theta_n)c_{P_{n+1}}=\\gamma_n(\\beta_{n+1}\\otimes^{\\mathbf L}A_n).$$\nDefine $v_n:P_{n+1}\\to P_n$ by $x\\mapsto\\theta_n(x\\otimes1)$. The coefficient adjunction, normalized on K-flat representatives, identifies the adjunct of $Q(v_n)$ with $Q(\\theta_n)c_{P_{n+1}}$. Bounded-above free complexes are K-flat. Consequently the displayed equality is equivalent by the adjunction bijection to $\\beta_n Q(v_n)=t_n\\beta_{n+1}$. The models therefore represent the actual transition maps, including their markings.",
+   "uses": [
+    "lem-sfb-jacobson-marked-free-complex-lift",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, proof (all levels pseudo-coherent branch)"
+   }
+  },
+  {
+   "text": "Choose a finite basis of each $P_1^i$, with index set of size $r_i$, empty for $i>b$. Given a basis of $P_n^i$, lift its vectors through $v_n^i$ to $P_{n+1}^i$. This is possible since $u_n$ is surjective and $\\theta_n^i$ is an isomorphism. They define $f:A_{n+1}^{r_i}\\to P_{n+1}^i$, whose reduction is the chosen basis isomorphism. Finite Nakayama makes $f$ surjective. The target is free, hence projective, so lift its identity through $f$ to split $f$. Its kernel $T$ is a direct summand of $A_{n+1}^{r_i}$, generated by the projections of the $r_i$ standard vectors. Reduction of this direct sum decomposition gives $T/J_nT=0$, since the reduction of $f$ is an isomorphism. Apply the same finite Nakayama statement to $0\\to T$ to get $T=0$. Thus the lifted vectors are a basis. Induction gives compatible bases in every degree. In these bases $v_n^i$ is coordinatewise $u_n$. A compatible sequence in $P_n^i$ is therefore exactly $r_i$ compatible sequences in $A_n$, giving $P^i:=\\varprojlim_nP_n^i\\cong A^{r_i}$. Componentwise differentials define a complex $P$; they square to zero in every coordinate. It is zero above $b$. The scalar map $P\\otimes_A A_n\\to P_n$, $x\\otimes a\\mapsto a x_n$, sends these bases to these bases, hence is a chain isomorphism.",
+   "uses": [
+    "lem-sc-finite-module-surjective-mod-ideal",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, proof (all levels pseudo-coherent branch)"
+   }
+  },
+  {
+   "text": "Every $v_n^i$ is surjective, as checked in step 3. The surjective-module-complex tower-limit theorem gives a Roos triangle for $Q(P)$ with first arrow whose components are $Q(P\\to P_n)$. The isomorphisms $\\beta_n$ from step 2 form an isomorphism of towers after restriction to $A$. Their product therefore intertwines the two $1-s$ arrows. Rotate the Roos triangles of $Q(P)$ and of the specified $(K,p,\\delta)$ so that these arrows are first. Axiom TR3 completes the commuting square of product isomorphisms to a morphism of triangles; rotate back to obtain $h:Q(P)\\to K$ with $p_nh=\\beta_n Q(P\\to P_n)$ for all $n$. The levelwise-isomorphism theorem for Roos-triangle completions makes $h$ an isomorphism. This applies to the specified derived limit and its projections, without assuming a canonical derived-limit functor.",
+   "uses": [
+    "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "def-weil-triangulated-category",
+    "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, proof (all levels pseudo-coherent branch)"
+   }
+  },
+  {
+   "text": "Step 3 exhibited $P$ as bounded above and termwise finite free, and step 4 gave $Q(P)\\cong K$. This is precisely pseudo-coherence of $K$. Tensoring with a free module is a sum of copies and preserves exact sequences, so $P$ is termwise flat. The bounded-above flat-complex theorem makes $P$ K-flat. Derived change of rings thus computes $Q(P)\\otimes_A^{\\mathbf L}A_n$ by the ordinary tensor complex $P\\otimes_A A_n$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, proof (all levels pseudo-coherent branch)"
+   }
+  },
+  {
+   "text": "Let $\\rho_n:K\\otimes_A^{\\mathbf L}A_n\\to K_n$ be the adjunct of the given projection $p_n$. By naturality of the coefficient adjunction, $\\rho_n\\circ(h\\otimes_A^{\\mathbf L}A_n)$ is the adjunct of $p_nh$. By the projection equality from step 4 and the adjunction's chain-level normalization, this adjunct is $\\beta_n\\circ Q(a_n)\\circ c_P$, where $a_n:P\\otimes_A A_n\\to P_n$ is $x\\otimes a\\mapsto ax_n$. Step 3 proved $a_n$ is a chain isomorphism. Each of $\\beta_n$, $Q(a_n)$, $c_P$ and $h\\otimes_A^{\\mathbf L}A_n$ is invertible, so $\\rho_n$ is invertible. This proves the assertion for the scalar-extension adjunct of each specified projection.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, proof (all levels pseudo-coherent branch)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sfb-jacobson-marked-free-complex-lift",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sc-finite-module-surjective-mod-ideal",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "def-weil-triangulated-category",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, proof (all levels pseudo-coherent branch)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo[Cc]oherent|[Pp]seudo.coherent|Rlim|[Dd]erived[Ll]imit",
+   "results": "{\"t\": \"2026-10-23T22:41:10Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo[Cc]oherent|[Pp]seudo.coherent|Rlim|[Dd]erived[Ll]imit\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/CochainComplexPlus.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\"], \"digest\": \"7f1989ad8ead2a29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Algebra hits are generic limit closure declarations and a comment; the RingTheory search has zero hits. None concerns pseudo-coherent or perfect derived reconstruction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of compatible pseudo coherent complexes over rings with locally nilpotent kernels is pseudo coherent with canonical reduction isomorphisms",
+   "results": "{\"t\": \"2026-10-23T22:41:11Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse limit of compatible pseudo coherent complexes over rings with locally nilpotent kernels is pseudo coherent with canonical reduction isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.isNatEquiv_piEquivLim\", \"Module.DirectLimit.congr_symm_apply_of\", \"InverseSystem.invLimEquiv.congr_simp\", \"HasDerivedCategory.standard\", \"CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.piEquivLim.congr_simp\", \"InverseSystem.piEquivLim\"], \"digest\": \"d49d54ea35a4de2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary ring completion, ordinary inverse/direct limits and derived localization do not give this reconstruction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"coherent\"",
+   "results": "{\"t\": \"2026-10-23T22:41:11Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"coherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo-coherent complexes over a surjective inverse sequence of rings with nil ideals as kernels reconstruct from their derived inverse limit",
+   "results": "{\"t\": \"2026-10-23T22:41:16Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudo-coherent complexes over a surjective inverse sequence of rings with nil ideals as kernels reconstruct from their derived inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.surjective_evalₐ\", \"AdicCompletion.of_surjective\", \"AdicCompletion.of_surjective_iff\", \"AdicCompletion.evalOneₐ_surjective\", \"AdicCompletion.mk_surjective\", \"AdicCompletion.kerProj_surjective\", \"AdicCompletion.eval_surjective\", \"Algebra.FormallySmooth.comp_surjective\"], \"digest\": \"614f7927a0e384bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary ring completion, Frobenius perfection, formal smoothness or generic K-projective complexes, not derived reconstruction over a nil-kernel tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of bounded above finite free complexes with compatible nilpotent reductions along an inverse sequence of rings",
+   "results": "{\"t\": \"2026-10-23T22:41:43Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraization of bounded above finite free complexes with compatible nilpotent reductions along an inverse sequence of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftAlgHom\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"IsAdicComplete.mkₐ_comp_liftAlgHom\", \"AdicCompletion.liftAlgHom\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth\"], \"digest\": \"fced041351404473\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary ring completion, Frobenius perfection, formal smoothness or generic K-projective complexes, not derived reconstruction over a nil-kernel tower."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo[Cc]oherent|[Pp]seudo.coherent|[Pp]erfect.*[Cc]omplex|Rlim",
+   "results": "{\"t\": \"2026-10-23T22:41:46Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo[Cc]oherent|[Pp]seudo.coherent|[Pp]erfect.*[Cc]omplex|Rlim\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Algebra hits are generic limit closure declarations and a comment; the RingTheory search has zero hits. None concerns pseudo-coherent or perfect derived reconstruction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of compatible pseudo coherent complexes over surjective rings with nil kernels is pseudo coherent",
+   "results": "{\"t\": \"2026-10-23T23:30:15Z\", \"tool\": \"leanfinder\", \"query\": \"Derived inverse limit of compatible pseudo coherent complexes over surjective rings with nil kernels is pseudo coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasLimitsOfSizeCondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"instHasLimitsCondensedMod\", \"Condensed.instAB5CondensedMod\", \"LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"localCohomology.ofDiagram\", \"localCohomology\"], \"digest\": \"f395cf193507f32f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary limits, condensed exactness or ordinary completion; none gives pseudo-coherent derived reconstruction along this ring tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"coherent\"",
+   "results": "{\"t\": \"2026-10-23T23:31:13Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"coherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary limits, condensed exactness or ordinary completion; none gives pseudo-coherent derived reconstruction along this ring tower."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo[Cc]oherent|[Pp]seudo.coherent|Rlim|[Dd]erived[Ll]imit",
+   "results": "{\"t\": \"2026-10-23T23:32:39Z\", \"tool\": \"grep\", \"query\": \"[Pp]seudo[Cc]oherent|[Pp]seudo.coherent|Rlim|[Dd]erived[Ll]imit\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Homology/CochainComplexPlus.lean\"], \"digest\": \"62026e047bce246d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary limits, condensed exactness or ordinary completion; none gives pseudo-coherent derived reconstruction along this ring tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopy inverse limit compatible finite free complexes surjective nil ideal ring tower pseudo coherent reconstruction",
+   "results": "{\"t\": \"2026-10-23T23:32:39Z\", \"tool\": \"leansearch\", \"query\": \"Homotopy inverse limit compatible finite free complexes surjective nil ideal ring tower pseudo coherent reconstruction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasLimit\", \"CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo\", \"HomologicalComplex.instHasLimitsOfShape\", \"HomologicalComplex.instHasFiniteLimits\", \"HomologicalComplex.isColimitCoconeOfHasColimitEval\", \"CategoryTheory.ShortComplex.pOpcycles_π_isoOpcyclesOfIsColimit_inv\", \"HomologicalComplex.instHasFiniteColimits\", \"HomologicalComplex.isLimitOfEval\"], \"digest\": \"4e0e46607169af56\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary limits, condensed exactness or ordinary completion; none gives pseudo-coherent derived reconstruction along this ring tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of bounded above finite free complexes along inverse systems of nilpotent thickenings",
+   "results": "{\"t\": \"2026-10-23T23:32:41Z\", \"tool\": \"leanfinder\", \"query\": \"Algebraization of bounded above finite free complexes along inverse systems of nilpotent thickenings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftAlgHom\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"AdicCompletion.instAlgebra\", \"AdicCompletion.instAlgebraAdicCauchySequence\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"AdicCompletion.subalgebra\", \"AdicCompletion.liftAlgHom\", \"IsAdicComplete.mkₐ_comp_liftAlgHom\"], \"digest\": \"e0fe28cd3a1c2d13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary limits, condensed exactness or ordinary completion; none gives pseudo-coherent derived reconstruction along this ring tower."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nil-ring-perfect-derived-limit",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite; the pseudo-coherent reconstruction input (Stacks 0CQF) in the proof of perfect reconstruction 0CQG.",
+   "via": [
+    "lem-sfb-nil-ring-perfect-derived-limit",
+    "lem-sfb-space-inverse-module-perfect-test-reduction",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nil-ring-pseudocoherent-derived-limit",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0CQF in the all-pseudo-coherent branch, retained prescribed derived markings using a new one-step Jacobson-ideal lifting lemma, constructed compatible bases explicitly, and compared Roos triangles to respect the projections of any specified derived limit. Existing nilpotent-kernel reconstruction statements are insufficient for merely locally nilpotent kernels.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited formal effectivity prerequisite; 0CQF supplies the pseudo-coherent input to perfect reconstruction 0CQG. No change to the unit route. The ancestor command returns None for this inherited chain, retained as JSON null.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalized coefficient adjunction identifies the actual transition and projection adjuncts on free models; the unit has no replacement for it."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-flat K-flatness computes scalar extensions on the free models; no unit-specific result replaces it."
+   },
+   {
+    "node": "lem-sc-finite-module-surjective-mod-ideal",
+    "why": "Finite Nakayama lifts compatible bases and kills the finite split kernel, without nilpotence of the entire ideal."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "why": "Generic degreewise-surjective module tower theorem gives the Roos triangle with the actual projections."
+   },
+   {
+    "node": "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+    "why": "Generic triangulated comparison makes a Roos-triangle completion invertible; it transfers the model to the specified derived limit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sc-finite-module-surjective-mod-ideal",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "lemma-weil-pbc-r-lim-levelwise-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-ff7e74c2e",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-ff7e74c2e (reviewer sub-agent of L); spot-checked: Read Stacks 0CQF (statement and proof), 0BCA (proof including the split-injective part), 0BC9 and 0BCB; all tags match their labels. The item is the all-levels-pseudo-coherent branch of 0CQF (2) with hypotheses (1) and (3) and the conclusion intact, applied to any specified derived limit; its statement is unchanged. Step 2: α=β_n^{-1}γ_n has the right type. Normalization (2) of the coefficient adjunction makes adjunct(Q v_n)=Q(θ_n)c, so by adjunction β_nQ(v_n)=t_nβ_{n+1}; the induction with fixed cutoff b is set up. Step 3: lifted bases via finite Nakayama, which needs only that 1+I is units, not nilpotence; the split kernel T has T/JT=0 so T=0; hence P^i=A^{r_i} and a_n is a chain isomorphism. Step 4: v_n is surjective in each degree; ∏β intertwines 1−s; TR3 on the rotated triangles gives h with p h=(∏β)p_P and h[1]δ_P=δ_K∏β, exactly the hypotheses of r-lim-levelwise-isomorphism. Steps 5 and 6: K-flatness, derived change of rings, and naturality plus normalization give ρ_n L(h)=β_nQ(a_n)c_P, which is invertible. New node lem-sfb-jacobson-marked-free-complex-lift: statement-only and self-contained. It is true by the 0BCA/0BCB cone construction with δ chosen to represent the inverse of α composed with L(γ); the marking holds up to sign, absorbed by β↦−β, and the homotopy h(x,y,z)=x was checked. Cutoff by finite Nakayama, freeness by 0BC6. Small cases I=0, R=0, F=0 and a nil but not nilpotent ideal all check. It generalizes lem-weil-pbc-nilpotent-marked-free-complex-lift, whose proof uses I^N=0. The 0BCB/0BCA nodes are unmarked and the marking is needed, so no duplicate. It is strictly smaller than the item and restates none of its clauses. Accepted tool_uses: bounded-flat K-flatness, finite Nakayama, surjective tower limit, levelwise-isomorphism; the lem-pur adjunction is on route via sk-def-sf-operations. from.node null is inherited from the base. No SGA. Advisories: the new node's 'hence K-flat' cites no def-pc-kflat-complex; the report mentions a citations.json that is not in the commit; neither node has a lean_audit field."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NilRingPseudoCoherentDerivedLimit",
+  "declaration": "ModuleCat.nilRingPseudoCoherentDerivedLimit",
+  "declarations": [
+   "ModuleCat.nilRingRestrictedDerivedStep",
+   "ModuleCat.nilRingPseudoCoherentDerivedLimit"
+  ],
+  "file": "lean/Sheaf/RingTheory/NilRingPseudoCoherentDerivedLimit.lean",
+  "statement": "theorem nilRingPseudoCoherentDerivedLimit (A : ℕᵒᵖ ⥤ CommRingCat.{u}) (c : Cone A) (hc : IsLimit c) (hsurj : ∀ n : ℕ, Function.Surjective (A.map (homOfLE (Nat.le_succ n)).op).hom) (hnil : ∀ (n : ℕ) (x : A.obj (Opposite.op (n + 1))), (A.map (homOfLE (Nat.le_succ n)).op).hom x = 0 → IsNilpotent x) (K : ∀ n : ℕ, DerivedCategory (ModuleCat.{u} (A.obj (Opposite.op n)))) (hpc : ∀ n : ℕ, DerivedCategory.IsPseudoCoherent (K n)) (t : ∀ n : ℕ, K (n + 1) ⟶ (derivedRestrictScalars (A.map (homOfLE (Nat.le_succ n)).op).hom).obj (K n)) (ht : ∀ n : ℕ, IsDerivedBaseChange (t n)) [HasProduct (C := DerivedCategory (ModuleCat.{u} c.pt)) (fun n : ℕ ↦ (derivedRestrictScalars (c.π.app (Opposite.op n)).hom).obj (K n))] (L : DerivedCategory (ModuleCat.{u} c.pt)) (p : L ⟶ ∏ᶜ fun n : ℕ ↦ (derivedRestrictScalars (c.π.app (Opposite.op n)).hom).obj (K n)) (δ : (∏ᶜ fun n : ℕ ↦ (derivedRestrictScalars (c.π.app (Opposite.op n)).hom).obj (K n)) ⟶ L⟦(1 : ℤ)⟧) (hlim : IsDerivedLimitTriangle (nilRingRestrictedDerivedStep A c K t) L p δ) : DerivedCategory.IsPseudoCoherent L ∧ ∀ n : ℕ, IsDerivedBaseChange (f := (c.π.app (Opposite.op n)).hom) (K' := K n) (p ≫ Pi.π (C := DerivedCategory (ModuleCat.{u} c.pt)) (fun m : ℕ ↦ (derivedRestrictScalars (c.π.app (Opposite.op m)).hom).obj (K m)) n)",
+  "branch": "sheaf-dag",
+  "by": "Q147",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5eafcd933",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Statement verbatim equal to the node's lean.statement; only the lean field and the new module differ from live. Clause-by-clause match with 0CQF all-levels branch: CommRingCat.{u} tower over ℕ (index 0 = level 1), hsurj, elementwise hnil (no common exponent), limit ring as an IsLimit cone, IsPseudoCoherent at every level, t_n into derivedRestrictScalars, ht and conclusion via ModuleCat.IsDerivedBaseChange (universal arrow, equivalent to the adjunct being an iso for any left adjoint; same convention as PerfectTower.isDerivedBaseChange_π_app), arbitrary (L,p,δ) via IsDerivedLimitTriangle with HasProduct (a true Prop), restricted transitions via canonical derivedRestrictScalarsCompIso from c.w. No added Noetherian/adic/flat/universe assumptions. Helper nilRingRestrictedDerivedStep fully defined, not hollow. No duplicate: lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction needs nilpotent kernels and only E_1 pseudo-coherent; PerfectTower covers perfect complexes over local quotient towers only. Docstrings carry source and blueprint; proof is sorry; imports exist; report has Worker report and Second reading sections (same worker, substantive). No file changed, so no compile."
+ }
+}

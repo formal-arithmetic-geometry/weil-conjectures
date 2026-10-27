@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-wlocal-directed-limit-topology",
+ "kind": "statement",
+ "title": "Topology of directed limits of w-local affine spectra",
+ "statement": "Let $D$ be a nonempty small directed poset and $(R_d,\\varphi_{de})_{d\\leq e}$ a direct system of commutative rings. Assume every $R_d$ is w-local [sk-def-pe-wlocal] and that every transition map preserves maximal ideals under contraction: $\\varphi_{de}^{-1}(\\mathfrak n)$ is maximal in $R_d$ whenever $\\mathfrak n$ is maximal in $R_e$. Put $R=\\varinjlim_d R_d$ in commutative rings [def-weil-pbc-category-colimit], with coprojections $\\iota_d$, and put $X=\\operatorname{Spec}R$, $X_d=\\operatorname{Spec}R_d$ [def-weil-affine-spectrum]. Then every prime $\\mathfrak p\\subset R$ is contained in a unique maximal ideal $\\mathfrak m$, whose contractions $\\iota_d^{-1}(\\mathfrak m)$ are the unique maximal ideals containing $\\iota_d^{-1}(\\mathfrak p)$. A prime of $R$ is maximal if and only if all its contractions to the $R_d$ are maximal. The closed-point subspace satisfies\n$$X^c=\\bigcap_d p_d^{-1}(X_d^c),$$\nwhere $p_d:X\\to X_d$ is induced by $\\iota_d$; in particular $R$ is w-local. The canonical coordinate maps induce homeomorphisms\n$$X^c\\xrightarrow{\\sim}\\varprojlim_d X_d^c,\\qquad \\pi_0(X)\\xrightarrow{\\sim}\\varprojlim_d\\pi_0(X_d).$$\nHere $Y^c$ is the closed-point subspace, $\\pi_0(Y)$ is the quotient by connected components with the quotient topology, and each inverse limit is the compatible-family subspace of the product. The first comparison sends $\\mathfrak m$ to $(\\iota_d^{-1}\\mathfrak m)_d$; the second sends the component of $x$ to the components of $p_d(x)$. Empty spectra and noninjective transition maps are allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.1.9, cofiltered-limit paragraph, with Lemma 2.1.4 and Remark 2.1.5; affine prime-family expansion of inherited proof steps 3–6."
+ },
+ "stmt_deps": [
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-filtered-spectrum-topological-limit] to obtain the specified homeomorphism between the colimit spectrum and compatible prime families. Coordinate maps are continuous. Spectrality of PrimeSpectrum is already an instance in the imported source/Mathlib topology API, so no passage through affine-scheme quasi-compactness or quasi-separatedness is needed.",
+   "uses": [
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 0CUE (lemma-inverse-limit-sets), 0CUF (lemma-inverse-limit-top); spectrality from the cited affine qcqs and qcqs spectral nodes"
+   }
+  },
+  {
+   "text": "We will use that inclusion of primes in $R$ is detected by all contractions. Here is the elementary topological verification from Step 1. In a spectrum [def-weil-affine-spectrum], $\\overline{\\{\\mathfrak a\\}}=V(\\mathfrak a)$, so $\\mathfrak b$ is a specialization of $\\mathfrak a$ exactly when $\\mathfrak a\\subseteq\\mathfrak b$. In a product, the closure of a singleton is the product of its coordinate closures: every basic neighbourhood imposes only finitely many coordinate conditions. Intersecting this closure with $L$ gives the closure in the subspace $L$. Thus $\\mathfrak a\\subseteq\\mathfrak b$ if and only if $\\iota_d^{-1}(\\mathfrak a)\\subseteq\\iota_d^{-1}(\\mathfrak b)$ for all $d$. Equality is also detected by coordinates, by the bijection in Step 1.",
+   "uses": [
+    "lem-a1-filtered-spectrum-topological-limit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 0CUF (lemma-inverse-limit-top) and 00E0 (lemma-Zariski-topology); elementary calculation of singleton closures"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset R$ and write $\\mathfrak p_d=\\iota_d^{-1}(\\mathfrak p)$. By w-locality [sk-def-pe-wlocal], each $\\mathfrak p_d$ lies in a unique maximal ideal $\\mathfrak m_d$. For $d\\leq e$, the ideal $\\varphi_{de}^{-1}(\\mathfrak m_e)$ is maximal by the explicit transition hypothesis, and contains $\\varphi_{de}^{-1}(\\mathfrak p_e)=\\mathfrak p_d$. Uniqueness therefore gives $\\varphi_{de}^{-1}(\\mathfrak m_e)=\\mathfrak m_d$. The family $(\\mathfrak m_d)_d$ is compatible.",
+   "uses": [
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9, cofiltered-limit paragraph; affine expansion"
+   }
+  },
+  {
+   "text": "Use the compatible-family bijection of [lem-a1-filtered-spectrum-topological-limit] on $(\\mathfrak m_d)_d$. It supplies a prime $\\mathfrak m\\subset R$ whose contractions are precisely $\\mathfrak m_d$. Since $\\mathfrak p_d\\subseteq\\mathfrak m_d$ for every $d$, Step 2 gives $\\mathfrak p\\subseteq\\mathfrak m$.",
+   "uses": [
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9, cofiltered-limit paragraph; affine expansion"
+   }
+  },
+  {
+   "text": "We prove that $\\mathfrak m$ is the unique maximal ideal above $\\mathfrak p$. For any prime $\\mathfrak q\\supseteq\\mathfrak p$, choose for each fixed $d$ a maximal ideal $\\mathfrak t_d$ containing $\\mathfrak q_d=\\iota_d^{-1}(\\mathfrak q)$, using [lem-weil-pbc-proper-ideal-contained-in-maximal]. Since $\\mathfrak t_d$ contains $\\mathfrak p_d$, its uniqueness in Step 3 forces $\\mathfrak t_d=\\mathfrak m_d$. Hence $\\mathfrak q_d\\subseteq\\mathfrak m_d$ for all $d$, and Step 2 gives $\\mathfrak q\\subseteq\\mathfrak m$. Now choose a maximal ideal $\\mathfrak n\\supseteq\\mathfrak m$ by the same cited theorem. It is prime and contains $\\mathfrak p$, so the preceding argument gives $\\mathfrak n\\subseteq\\mathfrak m$, proving $\\mathfrak m=\\mathfrak n$ maximal. Every maximal ideal containing $\\mathfrak p$ is contained in $\\mathfrak m$ by that argument and consequently equals it. Its contractions are the specified $\\mathfrak m_d$ by Step 4.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Tag 00E0 (lemma-Zariski-topology), proof of (8) via (2); Bhatt–Scholze Remark 2.1.5 and Lemma 2.1.9, affine order argument"
+   }
+  },
+  {
+   "text": "If $\\mathfrak p$ is maximal, then $\\mathfrak p=\\mathfrak m$ by Step 5, so all its contractions are maximal. Conversely, if every $\\mathfrak p_d$ is maximal, then $\\mathfrak p_d=\\mathfrak m_d$ for all $d$. Step 1 gives $\\mathfrak p=\\mathfrak m$, which is maximal by Step 5. This proves the claimed equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9, cofiltered-limit paragraph; affine expansion"
+   }
+  },
+  {
+   "text": "Closed points of a spectrum are exactly maximal ideals: $\\overline{\\{\\mathfrak p\\}}=V(\\mathfrak p)$, and every proper ideal is contained in a maximal ideal as used in Step 5. Step 6 therefore gives $X^c=\\bigcap_d p_d^{-1}(X_d^c)$. Each $X_d^c$ is closed by w-locality [sk-def-pe-wlocal], so continuity of $p_d$ makes this intersection closed. Step 5 gives a unique closed specialization of every point of $X$. Together with the spectrality from Step 1, these are exactly the conditions of [sk-def-pe-wlocal], so $R$ is w-local.",
+   "uses": [
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9, cofiltered-limit paragraph; affine expansion"
+   }
+  },
+  {
+   "text": "The canonical map from closed points of the colimit to compatible closed-point families is continuous by coordinatewise continuity. It is injective because contractions detect equality. Given a compatible closed-point family, [lem-a1-filtered-spectrum-topological-limit] supplies its unique prime lift; Step 6 makes this lift maximal. Thus the map is bijective. The domain is compact because the closed-point locus is closed in a compact spectrum. Each stage closed-point space is Hausdorff: a T1 spectral space is totally separated, using the source-library spectral-space instance. Therefore the compatible-family subspace of their product is Hausdorff, and Mathlib isHomeomorph_iff_continuous_bijective gives the desired homeomorphism. This avoids a separate product-of-subspaces topology calculation.",
+   "uses": [
+    "lem-a1-filtered-spectrum-topological-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9, cofiltered-limit paragraph; affine expansion"
+   }
+  },
+  {
+   "text": "Use the already proved source-library homeomorphisms WLocalSpace.closedPointsHomeomorph and closedPoints_eq_of_mk_eq, recorded at [lem-weil-pbc-w-local-closed-points-components-homeomorphism], at every stage and at the colimit (Step 7). These identify each component with its unique closed point. Step 6 shows that coprojection contractions preserve closed points, while the transition hypothesis does the same for transitions. In particular two contracted closed points with the same component are equal. The full bundled statement det-pe-wlocal-components is not needed.",
+   "uses": [
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.4 and Remark 2.1.5; component fibres and the canonical closed-point homeomorphism"
+   }
+  },
+  {
+   "text": "Define the comparison on components directly by the continuous component maps induced by the coprojections. Compatibility follows by taking a representative of a component and using the cocone identities. For injectivity represent both components by their closed points, use equality of stage components and Step 9 to get equality of all contractions, and then use Step 1. For surjectivity take the unique closed point representing every coordinate component. Transition maps preserve closed points; compatibility of coordinate components and injectivity of the stage closed-point/component homeomorphisms show that these closed points form a compatible family. Lift this family by Step 8 and take its component. Thus the comparison is a continuous bijection from a compact space to a Hausdorff compatible-family space; Mathlib makes it a homeomorphism. Its value on the component of x is the component of each contraction by Continuous.connectedComponentsMap_mk. No nonempty spectrum, injective transition map, or arbitrary ring witness is used.",
+   "uses": [
+    "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.1.9 with Lemma 2.1.4; elementary restriction of coordinatewise homeomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-filtered-spectrum-topological-limit",
+  "def-weil-affine-spectrum",
+  "sk-def-pe-wlocal",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-w-local-closed-points-components-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 2.1.9 with Lemma 2.1.4 and Remark 2.1.5. F1 formalization retains the compatible-prime and maximal-specialization argument, reuses the proved source closed-point/component homeomorphism, and obtains both topological comparisons from continuous bijections between compact and Hausdorff spaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"IsIntegral\"",
+   "results": "3 hits: PrimeSpectrum.isClosedMap_comap_of_isIntegral, PrimeSpectrum.isClosed_comap_singleton_of_isIntegral, PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual closed maps, ordinary local or henselian rings, localization, or existence of scheme limits; none gives this w-local diagram theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "grep",
+   "query": "WLocalSpace|w_local|wLocal|w-local|wlocal",
+   "results": "4 hits: Mathlib/Lean/Meta/CongrTheorems.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/Subsingleton.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual closed maps, ordinary local or henselian rings, localization, or existence of scheme limits; none gives this w-local diagram theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A directed colimit of w-local commutative rings along integral maps has a w-local spectrum and canonical inverse-limit spaces of closed points and connected components",
+   "results": "8 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.Scheme.IsLocallyDirected.isColimitForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.IsLocallyDirected.instHasColimit, AlgebraicGeometry.Scheme.IsLocallyDirected.isColimit, AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected, AlgebraicGeometry.Scheme.IsLocallyDirected.ι_jointly_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual closed maps, ordinary local or henselian rings, localization, or existence of scheme limits; none gives this w-local diagram theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limits of spectra with closed maximal point subspaces and unique closed specialization commute with closed points and connected components",
+   "results": "8 hits: AlgebraicGeometry.stalkClosedPointIso_inv, IsLocalRing.specializes_closedPoint, IsLocalRing.closedPoint, AlgebraicGeometry.Spec_closedPoint, Profinite.isIso_asLimitCone_lift, Profinite.asLimitCone, MaximalSpectrum.toPrimeSpectrum_range, SpectralSpace.toQuasiSober",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual closed maps, ordinary local or henselian rings, localization, or existence of scheme limits; none gives this w-local diagram theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible families of prime ideals have compatible unique maximal ideals above them in a directed system with closed-point-preserving spectrum maps",
+   "results": "8 hits: PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, IsLocalRing.primesOverFinset_eq, Ideal.isMaximal_of_mem_primesOver, IsLocalRing.primesOver_eq, IsLocalization.AtPrime.mem_primesOver_of_isPrime, PrimeSpectrum.piLocalizationToMaximalEquiv, PrimeSpectrum.exists_maximal_notMem_range_sigmaToPi_of_infinite, Ideal.exists_ltSeries_of_hasGoingDown",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern individual closed maps, ordinary local or henselian rings, localization, or existence of scheme limits; none gives this w-local diagram theorem or a one-line specialization of it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Directed colimits of w-local commutative rings preserving maximal ideals have w-local spectra and inverse limits of closed points and connected components",
+   "results": "8 hits: OfLocalizationMaximal, MaximalSpectrum.PiLocalization, AlgebraicGeometry.Spec_closedPoint, AlgebraicGeometry.Spec.locallyRingedSpaceObj, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected, PrimeSpectrum.piLocalizationToMaximal_comp_toPiLocalization, PrimeSpectrum.maximalSpectrumToPiLocalization_surjective_of_discreteTopology, MaximalSpectrum.toPiLocalizationEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern local rings, localizations or generic ring colimits; none states this w-local diagram theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "WLocalSpace|IsWLocalRing|wlocal|w_local",
+   "results": "4 hits: Mathlib/Lean/Meta/CongrTheorems.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/DepRewrite.lean, Mathlib/Tactic/Subsingleton.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern local rings, localizations or generic ring colimits; none states this w-local diagram theorem or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximal ideals and connected components of a directed colimit of w-local rings are the inverse limits of those of the rings",
+   "results": "8 hits: Ring.DirectLimit, Ring.DirectLimit.commRing, AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit, CategoryTheory.MorphismProperty.isClosedUnderColimitsOfShape_isLocal, AlgebraicGeometry.LocallyRingedSpace.coproductCofan, Ring.DirectLimit.ring, Ring.DirectLimit.instInhabited, Ring.DirectLimit.exists_of",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern local rings, localizations or generic ring colimits; none states this w-local diagram theorem or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"DirectLimit\"",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern local rings, localizations or generic ring colimits; none states this w-local diagram theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofiltered limit of spectral spaces with closed closed-point loci and unique closed specializations has closed points and connected components computed coordinatewise",
+   "results": "8 hits: AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.compactSpace_of_isLimit, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.exists_preimage_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern local rings, localizations or generic ring colimits; none states this w-local diagram theorem or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-indfinite-contractible-base-wstrict",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: root-tower coordinate-face limit; inherited indfinite-contractible-base-wstrict proof steps 3–6, compatible maximal specializations, closed-point topology and canonical component comparison.",
+   "via": [
+    "lem-sfb-indfinite-contractible-base-wstrict",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-wlocal-directed-limit-topology",
+  "worker": "stage1",
+  "summary": "N5: reused existing spectrum-limit, proper-ideal maximality, affine spectrality and w-local component nodes. Expanded compatible maximal specializations, order detection, both directions of maximality, closed-locus topology, and the natural component comparison. No new nodes and no statement changes.",
+  "blueprint": "Inherited ancestor is null (blueprint_refs ancestor agrees). Steps realize the inherited from.place: paragraph (3), open direct image, root-tower coordinate-face limit, specifically indfinite-contractible-base-wstrict steps 3–6. The supplied current unit and chapter route are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-filtered-spectrum-topological-limit",
+    "why": "Generic topological limit theorem for affine spectra; gives the compatible-prime-family homeomorphism, not any w-local conclusion."
+   },
+   {
+    "node": "det-pe-wlocal-components",
+    "why": "Generic w-local closed-point/component homeomorphism and fibre description, used after proving w-locality; this unit does not reprove those topology facts."
+   },
+   {
+    "node": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "why": "Generic maximal ideal existence for a proper ideal, used to verify the constructed compatible prime is maximal."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine quasi-compactness and quasi-separatedness, to establish spectrality."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic spectrality criterion for qcqs schemes, needed for the component theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-filtered-spectrum-topological-limit",
+  "det-pe-wlocal-components",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N5-58e9a06d6",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-58e9a06d6 (reviewer sub-agent of L); spot-checked: I read every step against its cited statements and the source. The source is Bhatt–Scholze pp. 6–7: Lemma 2.1.4, Remark 2.1.5 and the cofiltered-limit paragraph of Lemma 2.1.9. The item's hypothesis that contraction of a maximal ideal is maximal is BS's condition that transition maps preserve closed points. The delivery adds no new nodes. Statement, stmt_deps and source are unchanged against clones/live and side-live, where the item is still unsplit, and no repair note exists. Steps 1–2: lem-a1 gives X homeomorphic to the compatible-prime-family subspace, and closure in a product subspace detects inclusion of primes. Step 3: the family of unique maximal ideals is compatible, by uniqueness and the transition hypothesis. Steps 4–5: lem-a1 gives a prime m, and maximal-ideal existence shows m is maximal and is the unique maximal ideal above p, with no circularity. Step 6: maximality holds if and only if all contractions are maximal. Step 7: X^c is the intersection of the pulled-back closed point sets, so it is closed and R is w-local. Step 8: the restricted homeomorphism, using that a product of subspaces is a subspace of the product. Steps 9–10: det-pe-wlocal-components clause 2 together with r_d∘p_d = p_d∘r gives the canonical π0 comparison. Edge cases: zero colimit or empty spectra, a one-object diagram, and the non-injective projection k×k→k. No duplicate found in a w-local/limit scan of the DAG. Accepted tool uses: lem-a1-filtered-spectrum-topological-limit and det-pe-wlocal-components as generic topology, and the three pbc mathlib leaves. Advisory only: proof_origin should arguably be 'agent', since steps 3–6 replace BS's compactness argument with an algebraic one, and step 7 uses lem-weil-pbc-proper-ideal-contained-in-maximal by back-reference without listing it in uses (it is in proof_deps). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WLocalDirectedLimitTopology",
+  "declaration": "PrimeSpectrum.wLocal_directedLimit_topology",
+  "file": "lean/Sheaf/RingTheory/WLocalDirectedLimitTopology.lean",
+  "statement": "theorem wLocal_directedLimit_topology (D : Type u) [PartialOrder D] [Nonempty D] (hdir : Directed (· ≤ ·) (id : D → D)) (F : D ⥤ CommRingCat.{u}) (hw : ∀ d : D, IsWLocalRing (F.obj d)) (hmax : ∀ (d e : D) (hde : d ≤ e) (n : Ideal (F.obj e)), n.IsMaximal → (n.comap (F.map (homOfLE hde)).hom).IsMaximal) (c : Cocone F) (hc : IsColimit c) : (∀ p : PrimeSpectrum c.pt, ∃ m : Ideal c.pt, m.IsMaximal ∧ p.asIdeal ≤ m ∧ (∀ n : Ideal c.pt, n.IsMaximal → p.asIdeal ≤ n → n = m) ∧ ∀ d : D, (m.comap (c.ι.app d).hom).IsMaximal ∧ p.asIdeal.comap (c.ι.app d).hom ≤ m.comap (c.ι.app d).hom ∧ ∀ n : Ideal (F.obj d), n.IsMaximal → p.asIdeal.comap (c.ι.app d).hom ≤ n → n = m.comap (c.ι.app d).hom) ∧ (∀ p : PrimeSpectrum c.pt, p.asIdeal.IsMaximal ↔ ∀ d : D, (p.asIdeal.comap (c.ι.app d).hom).IsMaximal) ∧ (closedPoints (PrimeSpectrum c.pt) = ⋂ d : D, (PrimeSpectrum.comap (c.ι.app d).hom) ⁻¹' closedPoints (PrimeSpectrum (F.obj d))) ∧ IsWLocalRing c.pt ∧ (∃ e : closedPoints (PrimeSpectrum c.pt) ≃ₜ {p : (d : D) → closedPoints (PrimeSpectrum (F.obj d)) // ∀ (d e : D) (hde : d ≤ e), PrimeSpectrum.comap (F.map (homOfLE hde)).hom (p e).val = (p d).val}, ∀ (m : closedPoints (PrimeSpectrum c.pt)) (d : D), ((e m).val d).val = PrimeSpectrum.comap (c.ι.app d).hom m.val) ∧ (∃ e : ConnectedComponents (PrimeSpectrum c.pt) ≃ₜ {p : (d : D) → ConnectedComponents (PrimeSpectrum (F.obj d)) // ∀ (d e : D) (hde : d ≤ e), (PrimeSpectrum.continuous_comap (F.map (homOfLE hde)).hom).connectedComponentsMap (p e) = p d}, ∀ (x : PrimeSpectrum c.pt) (d : D), (e (ConnectedComponents.mk x)).val d = ConnectedComponents.mk (PrimeSpectrum.comap (c.ι.app d).hom x))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f3684240c",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Every hypothesis (nonempty directed D, functor to CommRingCat.{u}, IsWLocalRing stages, contraction of maximal ideals is maximal, arbitrary colimit cocone) and all six conclusion clauses (unique maximal ideal over each prime with its contractions, maximal iff all contractions maximal, X^c = ⋂ p_d⁻¹X_d^c, R w-local, closed-point and π0 homeomorphisms onto compatible families, each fixed by its value formula) match the node and BS 2.1.9/2.1.4/2.1.5. Edge cases: empty D excluded as the node says; empty spectra, one-object diagram and non-injective transitions allowed. Item node equals side-live apart from the lean field; lean.statement verbatim; record complete; imports follow brief rule 7; lines ≤100; docstrings carry source, blueprint tag and 10 steps; no definitions; sorry only. No duplicate in the side WeilConjectures/Sheaf trees or slopmaster2; not route-pivot dropped; no repair note; no supersession. Advisory: hmax could use RingHom.IsWLocal (equivalent). Nothing compiled: no changes made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261023T102704-L-2953179",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

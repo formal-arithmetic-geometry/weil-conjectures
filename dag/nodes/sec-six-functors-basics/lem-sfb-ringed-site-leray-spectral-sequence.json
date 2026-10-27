@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-ringed-site-leray-spectral-sequence",
+ "kind": "statement",
+ "title": "Natural Leray spectral sequence for module sheaves on ringed sites",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to a common coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with sheaves of commutative rings $\\mathcal O_{\\mathcal C},\\mathcal O_{\\mathcal D}$. Let $f$ be a morphism of their ringed topoi: a geometric morphism $f^{-1}\\dashv f_*$, with $f^{-1}$ preserving finite limits, together with a ring map $f^{-1}\\mathcal O_{\\mathcal D}\\to\\mathcal O_{\\mathcal C}$. Use the induced module direct image (the underlying abelian direct image with this scalar action) on module sheaves [def-weil-sheaf-of-modules-category]. Write $H^n(\\mathcal C,-)$ and $H^n(\\mathcal D,-)$ for right-derived global sections in the respective module categories, and $R^qf_*$ for right-derived module direct image, all computed by injective resolutions [def-sp-injective-resolutions]. For every $\\mathcal O_{\\mathcal C}$-module $F$ there is a first-quadrant cohomological spectral sequence, natural in module maps $F\\to F'$, with\n$$E_2^{a,b}=H^a(\\mathcal D,R^bf_*F)\\quad\\Longrightarrow\\quad H^{a+b}(\\mathcal C,F).$$\nConvergence means that for each $n\\geq0$ the abutment has a finite decreasing filtration $H^n=\\mathrm{Fil}^0\\supseteq\\cdots\\supseteq\\mathrm{Fil}^{n+1}=0$ whose graded pieces are $\\mathrm{Fil}^a/\\mathrm{Fil}^{a+1}\\cong E_\\infty^{a,n-a}$. The natural edge map $H^n(\\mathcal C,F)\\to H^0(\\mathcal D,R^nf_*F)$ is the composite of the quotient to $E_\\infty^{0,n}$ and its canonical inclusion into $E_2^{0,n}$. For an injective module resolution $F\\to I^\\bullet$, it sends a global cocycle of $I^\\bullet$ to its image in the sections of $\\mathcal H^n(f_*I^\\bullet)=R^nf_*F$. It is independent of the resolution. No flatness of the ring map or exactness of module tensor pullback is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0732, lemma-Leray, applied to F in degree zero; Tag 0733(2), lemma-apply-Leray, for the edge; derived.tex Tag 015N, lemma-grothendieck-spectral-sequence, for functoriality and the abutment filtration."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sp-spectral-sequence",
+  "def-sp-filtration",
+  "def-sp-left-exact-additive",
+  "def-sfb-coefficient-module-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O_{\\mathcal C})$, $\\mathcal B=\\operatorname{Mod}(\\mathcal O_{\\mathcal D})$. These are Grothendieck abelian by the arbitrary-ring-sheaf theorem and have enough injectives by the Grothendieck enough-injectives theorem. The same arbitrary-ring-sheaf theorem on the punctual site with ring $\\mathbf Z$ gives the required Grothendieck property for $\\mathrm{Ab}$: a module sheaf there is one abelian group with its unique integer scalar action. Work throughout in the common coefficient universe.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q, remark-existence-D; Grothendieck enough injectives"
+   }
+  },
+  {
+   "text": "Set $P=f_*:\\mathcal A\\to\\mathcal B$ and $G=\\Gamma(\\mathcal D,-):\\mathcal B\\to\\mathrm{Ab}$. The module adjunction makes $P$ a right adjoint: the adjunction identifies maps into $P(\\ker v)$ with maps into $\\ker P(v)$, giving preservation of kernels. Its underlying maps preserve addition by the ringed-topos module-action definition. For $G$, kernels and sums of maps are computed on sections, so $G$ is additive left exact as well. On underlying sets the sheaf adjunction gives $\\operatorname{Hom}(1,f_*M)=\\operatorname{Hom}(f^{-1}1,M)=\\operatorname{Hom}(1,M)$, since $f^{-1}$ preserves the terminal object. This bijection respects addition and module morphisms. Hence $GP\\cong\\Gamma(\\mathcal C,-)$ naturally, including the differentials on complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; definition-pushforward"
+   }
+  },
+  {
+   "text": "For every injective $I\\in\\mathcal A$, the injective-pushforward acyclicity lemma gives $R^pG(P I)=0$ for $p>0$. Thus $(P,G)$ satisfies exactly the composable-pair acyclicity condition. This supplies the hypothesis needed for the Grothendieck spectral sequence without asserting that $PI$ is injective or that module pullback is exact.",
+   "uses": [
+    "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+    "def-sp-composite-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 072Z, lemma-direct-image-injective-sheaf, and 0731(3), lemma-limp-acyclic"
+   }
+  },
+  {
+   "text": "Apply the general Grothendieck spectral sequence to $(P,G)$ and the degree-zero object $F$. It gives, functorially in $F$, $E_2^{a,b}=R^aG(R^bP(F))=H^a(\\mathcal D,R^bf_*F)$ for $a,b\\geq0$. Its abutment is $R^{a+b}(GP)(F)$, identified by the natural isomorphism of step 2 with $H^{a+b}(\\mathcal C,F)$. By the double-complex model lemma, for an injective resolution $F\\to I^\\bullet$ and a Cartan--Eilenberg resolution $C^{\\bullet,\\bullet}$ of $P I^\\bullet$, this spectral sequence with its abutment filtration is the spectral sequence of the filtration of $\\operatorname{Tot}G(C^{\\bullet,\\bullet})$ named there, with $E_2^{a,b}=R^aG(R^bP(F))$; use this model to fix the filtration and edges.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-pc-grothendieck-ss-double-complex-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0732, lemma-Leray, using derived.tex Tag 015N"
+   }
+  },
+  {
+   "text": "Apply the double-complex convergence theorem to that filtration of the first-quadrant double complex $G(C^{\\bullet,\\bullet})$ of step 4. In total degree $n$, only the $n+1$ bidegrees $(a,n-a)$ with $0\\leq a\\leq n$ occur. Its image filtration therefore has $\\mathrm{Fil}^0=H^n$, $\\mathrm{Fil}^{n+1}=0$, and $\\mathrm{Fil}^a/\\mathrm{Fil}^{a+1}\\cong E_\\infty^{a,n-a}$. This theorem also gives stabilization and functoriality of these filtrations under the comparison maps used in the functorial Grothendieck construction.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-pc-grothendieck-ss-double-complex-model",
+    "thm-sp-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015J, lemma-two-ss-complex-functor, and 015N, lemma-grothendieck-spectral-sequence"
+   }
+  },
+  {
+   "text": "The double-complex model for the Grothendieck left edge identifies it with $H^n\\twoheadrightarrow\\mathrm{Fil}^0/\\mathrm{Fil}^1=E_\\infty^{0,n}\\hookrightarrow E_2^{0,n}$. In column zero there are no incoming differentials on pages $r\\geq2$, so each later column-zero term is a subobject of the previous one; this explains the stated inclusion into $E_2^{0,n}=G(R^nP(F))$. The general cocycle description of this same edge sends a cocycle in $G(P I^\\bullet)$ through $G(Z^n(P I^\\bullet))\\to G(\\mathcal H^n(P I^\\bullet))$. Under $GP I^\\bullet=\\Gamma(\\mathcal C,I^\\bullet)$, this is exactly the global-cocycle formula in the item, with $\\mathcal H^n(P I^\\bullet)=R^nf_*F$.",
+   "uses": [
+    "lem-pc-grothendieck-ss-double-complex-model",
+    "lem-pc-grothendieck-edge-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015N, lemma-grothendieck-spectral-sequence, Cartan--Eilenberg construction of the left edge"
+   }
+  },
+  {
+   "text": "The cocycle theorem describes the canonical Grothendieck edge for any chosen injective resolution, using the canonical derived-functor comparisons. The derived well-definedness lemma makes those identifications independent of the chosen resolution. Consequently the displayed formula computes one resolution-independent edge, and the functoriality in $F$ of the Grothendieck sequence makes it natural in every module map $F\\to F'$. This proves all the assertions with the original hypotheses.",
+   "uses": [
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-sp-derived-well-defined",
+    "thm-sp-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015N, lemma-grothendieck-spectral-sequence; injective-resolution independence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-composite-acyclicity",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-grothendieck-edge-cocycle",
+  "lem-pc-grothendieck-ss-double-complex-model",
+  "lem-sfb-ringed-topos-injective-pushforward-global-acyclic",
+  "lem-sp-derived-well-defined",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "thm-sp-double-complex-spectral-sequences",
+  "thm-sp-grothendieck"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0732, lemma-Leray, with Tags 072Z and 0731(3); derived.tex Tag 015N for the functorial double-complex construction and its edge"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence for a morphism of ringed topoi and a sheaf of modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\alpha: F \\\\Rightarrow G$, a\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.pushforwardSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves of rings, and \"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomology presheaves, module sheaf definitions and spectral objects do not state the ringed-site Leray theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived global sections of a module direct image have a natural first quadrant spectral sequence converging to source cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomology presheaves, module sheaf definitions and spectral objects do not state the ringed-site Leray theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomology presheaves, module sheaf definitions and spectral objects do not state the ringed-site Leray theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|Grothendieck.*spectral|spectral.*sequence",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/SpectralObject.lean\", \"line\": \"24\", \"text\": \"* construct the spectral sequence attached to a spectral object in an abelian category\"}\n  {\"file\": \"Mathlib/CategoryTheory/ComposableArrows/Basic.lean\", \"line\": \"39\", \"text\": \"  up to `n = 7` in order to formalize spectral sequences following Verdier)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomology presheaves, module sheaf definitions and spectral objects do not state the ringed-site Leray theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Leray spectral sequence for sheaves of modules on ringed sites",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"Given a scheme $X$, this defines the type of sheaves of modules over the ring sheaf associated to $X$, obtained by composing the structure sheaf (taking values in commutative rings) with the canonical\"}\n  {\"name\": \"SheafOfModules.noConfusionType\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"Sort u_1 →\\n  {C : Type u₁} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      {J : CategoryTheory.GrothendieckTopology C} →\\n        {R : CategoryTheory.Sheaf J RingCat} →\\n          SheafOfModules R →\\n            {C' : Type u₁} →\\n              [inst' : CategoryTheory.Category.{v₁, u₁} C'] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $R$, where each module satisfies the sheaf c\"}\n  {\"name\": \"SheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J RingCat → Type (max (max (max u u₁) (v + 1)) v₁)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $F$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $F$, where each module satisfies the sheaf c\"}\n  {\"name\": \"SheafOfModules.over\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M : SheafOfModules.{v} R) (X : D) : SheafOfModules.{v} (R.over X)\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $R$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and an object $X \\\\in \\\\mathcal{C}$, this constructs the sheaf of modules $\\\\mathc\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"SheafOfModules.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        (val : PresheafOfModules R.val) → CategoryTheory.Presheaf.IsSheaf J val.presheaf → SheafOfModules R\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, if a presheaf of modules over the underlying presheaf of $R$ satisfies the sheaf condition wi\"}\n  {\"name\": \"SheafOfModules.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {motive : SheafOfModules R → Sort u_1} →\\n          (t : SheafOfModules R) →\\n            ((val : PresheafOfModules R.val) →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this recursor allows defining functions on sheaves of modules over $R$ by specifying their be\"}\n  {\"name\": \"SheafOfModules.Hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} → SheafOfModules R → SheafOfModules R → Type (max u₁ v)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this defines the type of homomorphisms between two sheaves of modules over $R$, wher\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: cohomology presheaves, module sheaf definitions and spectral objects do not state the ringed-site Leray theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|Grothendieck.*spectral|spectral.*sequence",
+   "results": "25 hits; Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean, Mathlib/Algebra/Homology/SpectralSequence/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: general spectral-object and page infrastructure, cohomology definitions and underived pushforwards do not state the natural ringed-topos module Leray sequence with its edge map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence natural in sheaves of modules for a morphism of ringed topoi with finite filtration and cocycle edge map",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pushforwardNatTrans_app_val_app_apply, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, SheafOfModules.GeneratingSections.opEpi_comp, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂",
+   "date": "2026-10-23",
+   "verdict": "no match: general spectral-object and page infrastructure, cohomology definitions and underived pushforwards do not state the natural ringed-topos module Leray sequence with its edge map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Leray spectral sequence for sheaves of modules on ringed sites",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules, SheafOfModules.noConfusionType, SheafOfModules, SheafOfModules.over, SheafOfModules.hasLimit, SheafOfModules.mk, SheafOfModules.recOn, SheafOfModules.Hom",
+   "date": "2026-10-23",
+   "verdict": "no match: general spectral-object and page infrastructure, cohomology definitions and underived pushforwards do not state the natural ringed-topos module Leray sequence with its edge map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"rightDerived\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: general spectral-object and page infrastructure, cohomology definitions and underived pushforwards do not state the natural ringed-topos module Leray sequence with its edge map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived global sections of a module direct image have a natural first quadrant spectral sequence converging to source cohomology",
+   "results": "8 hits; localCohomology.diagram, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-23",
+   "verdict": "no match: general spectral-object and page infrastructure, cohomology definitions and underived pushforwards do not state the natural ringed-topos module Leray sequence with its edge map"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-base-higher-image-sections",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: affine-base global vanishing after repeating the relative argument for an arbitrary base-changed module. Supporting input for the affine-base Leray argument: Natural Leray spectral sequence for module sheaves on ringed sites.",
+   "via": [
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-leray-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Split the module Leray theorem along Stacks 0732: category and adjunction checks, injective-pushforward global acyclicity, the existing functorial Grothendieck construction, finite filtration and the existing left-edge cocycle comparison. One new statement-only acyclicity input; statement unchanged, no flatness added.",
+  "blueprint": "Supports the inherited direct-image/curve cohomology branch of det-thm-sf-ctf-stability-direct-images, proof (3), through the parent affine-base higher-image sections lemma. The current latest blueprint proof was read; this is a generic cohomology input below the unit, not a change to its route. The ancestor tool returns None for the inherited created-node chain; its from.node and via are retained. Searches of the whole imported blueprint found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "The general ring-sheaf category theorem supplies the Grothendieck input; this unit has no separate proof of this generic fact."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "The generic enough-injectives implication supplies resolutions for the module categories."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "The generic module adjunction gives left exactness of the module direct image on arbitrary ringed topoi."
+   },
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "The general composable-pair theorem constructs the Leray sequence after the specific acyclicity hypothesis is checked."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "The generic first-quadrant convergence theorem supplies the finite image filtration."
+   },
+   {
+    "node": "lem-pc-grothendieck-ss-double-complex-model",
+    "why": "The generic model fixes the left edge as the quotient to the stable term followed by its inclusion."
+   },
+   {
+    "node": "lem-pc-grothendieck-edge-cocycle",
+    "why": "The general cocycle theorem identifies that same left edge on every injective resolution."
+   },
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "The generic resolution-independence theorem identifies all derived-functor models canonically."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "thm-sp-grothendieck",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-pc-grothendieck-ss-double-complex-model",
+  "lem-pc-grothendieck-edge-cocycle",
+  "lem-sp-derived-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-4068e534a",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-4068e534a (reviewer sub-agent of L); spot-checked: Read in full: the item's 7 steps, the one new node (lem-sfb-ringed-topos-injective-pushforward-global-acyclic) and every cited statement. Source checks against Stacks sites-cohomology.tex: 072Z at l.2212 and 0731(3) at l.2273 (together the new node: an arbitrary morphism of ringed topoi, I injective in Mod(O_C), no flatness), and 0732/0733 at l.2323/2347. The new node is self-contained and statement-only. Small-case tests on the new node: punctual Z->F_p (where f_*I need not be injective), f=id, and sites without a terminal object. It is not a duplicate: the evaluation-acyclic pbc node needs a presented site plus the 072Z site enlargement; relative-leray (Q41) is a different statement; the etale Leray nodes are abelian-only. It is strictly smaller than the item. Step checks: (1) Grothendieck property via the arbitrary ring sheaf, with Ab from the punctual site with ring Z. (2) P is a right adjoint by 03D7, Gamma=Hom(1,-) preserves kernels, and GP=Gamma(C) because f^{-1}1=1; elementary is correct. (3) Exactly def-sp-acyclic. (5) Filtration indexing checked against the CE rows. (6) The left edge is a quotient followed by an inclusion, d_r has bidegree (r,1-r), and the cocycle formula is taken from the statement. (7) Resolution independence. Item edge cases tested: F=0, n=0, f=id, Z->F_p. The eight tool_uses are generic and accepted. FIX: steps 4 and 5 relied on the 'Construction (part of the statement)' clause of thm-sp-grothendieck, and that node's blueprint_update (main-20261023) drops the clause, which would make the steps a C3 fault. I repointed them to lem-pc-grothendieck-ss-double-complex-model, which states the same CE model, filtration and edge and was already in proof_deps. proof_deps and stmt_deps are unchanged. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteLeraySpectralSequence",
+  "declaration": "CategoryTheory.exists_ringedSite_leray_spectralSequence",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteLeraySpectralSequence.lean",
+  "statement": "theorem exists_ringedSite_leray_spectralSequence {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) (f : RingedToposMorphism ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) : ∃ (t : f.modules ⋙ coefficientSections B ≅ coefficientSections A) (zC : ∀ M : coefficientModules A, (coefficientSections A).obj M → (⊤_ (Sheaf J (Type u)) ⟶ (sheafCompose J (forget AddCommGrpCat)).obj ((SheafOfModules.toSheaf _).obj M))) (zD : ∀ M : coefficientModules B, (coefficientSections B).obj M → (⊤_ (Sheaf K (Type u)) ⟶ (sheafCompose K (forget AddCommGrpCat)).obj ((SheafOfModules.toSheaf _).obj M))), (∀ (M : coefficientModules A) (x : (coefficientSections A).obj M) (U : Cᵒᵖ) (s : (⊤_ (Sheaf J (Type u))).obj.obj U), (zC M x).hom.app U s = (Sheaf.ΓRes ((SheafOfModules.toSheaf _).obj M) U) x) ∧ (∀ (M : coefficientModules B) (x : (coefficientSections B).obj M) (U : Dᵒᵖ) (s : (⊤_ (Sheaf K (Type u))).obj.obj U), (zD M x).hom.app U s = (Sheaf.ΓRes ((SheafOfModules.toSheaf _).obj M) U) x) ∧ (∀ (M : coefficientModules A) (x : (coefficientSections B).obj (f.modules.obj M)), (f.adj.homEquiv _ _) (terminal.from (f.inverse.obj (⊤_ (Sheaf K (Type u)))) ≫ zC M (t.hom.app M x)) = zD (f.modules.obj M) x ≫ f.underlying.hom.app M) ∧ ∃ (E : E₂CohomologicalSpectralSequenceNat (coefficientModules A ⥤ AddCommGrpCat.{u})) (e₂ : ∀ a b : ℕ, (E.page 2).X (a, b) ≅ f.modules.rightDerived b ⋙ (coefficientSections B).rightDerived a) (T : ∀ n : ℕ, DecreasingFiltration ((coefficientSections A).rightDerived n)), (∀ n : ℕ, (T n).step 0 = ⊤ ∧ (T n).step (n + 1) = ⊥) ∧ (∀ a b : ℕ, ∀ (r : ℤ) (hr : 2 ≤ r), max (a : ℤ) ((b : ℤ) + 1) < r → Nonempty ((E.page r hr).X (a, b) ≅ E.pageInfinity (a, b))) ∧ ∃ (g : ∀ (n a b : ℕ), a + b = n → ((T n).gradedPiece (a : ℤ) ≅ E.pageInfinity (a, b))) (j : ∀ (n : ℕ) (r : ℤ) (_hr : 2 ≤ r), (E.page r).X (0, n) ⟶ (E.page 2).X (0, n)), (∀ n : ℕ, j n 2 (by omega) = 𝟙 _) ∧ (∀ (n : ℕ) (r : ℤ) (hr : 2 ≤ r), Mono (j n r hr)) ∧ (∀ (n : ℕ) (r : ℤ) (hr : 2 ≤ r), (E.page r).homologyπ (0, n) ≫ (E.iso r (r + 1) (0, n)).hom ≫ j n (r + 1) (by omega) = (E.page r).iCycles (0, n) ≫ j n r hr) ∧ ∃ (q : ∀ n : ℕ, (coefficientSections A).rightDerived n ⟶ (T n).gradedPiece 0) (edge : ∀ n : ℕ, (coefficientSections A).rightDerived n ⟶ f.modules.rightDerived n ⋙ coefficientSections B), (∀ n : ℕ, ((T n).step 0).arrow ≫ q n = cokernel.π (Subobject.ofLE ((T n).step 1) ((T n).step 0) ((T n).antitone_step (by omega)))) ∧ (∀ n : ℕ, edge n = q n ≫ (g n 0 n (by omega)).hom ≫ j n (0 + n + 2 : ℕ) (by omega) ≫ (e₂ 0 n).hom ≫ Functor.whiskerLeft (f.modules.rightDerived n) (coefficientSections B).rightDerivedZeroIsoSelf.hom) ∧ (∀ (M : coefficientModules A) (I : InjectiveResolution M) (n : ℕ), ∃ c : (coefficientSections B).obj (((f.modules.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).cycles n) ⟶ (((coefficientSections A).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).cycles n, c ≫ (((coefficientSections A).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles n = (coefficientSections B).map (((f.modules.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).iCycles n) ≫ t.hom.app (I.cocomplex.X n) ∧ c ≫ (((coefficientSections A).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homologyπ n ≫ (I.isoRightDerivedObj (coefficientSections A) n).inv ≫ (edge n).app M ≫ (coefficientSections B).map (I.isoRightDerivedObj f.modules n).hom = (coefficientSections B).map (((f.modules.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homologyπ n))",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Natural spectral sequence and finite filtration in the functor category on module sheaves. Column-zero inclusions are normalized by the page homology maps. The edge has its formula on every injective resolution; the global-sections comparison is normalized on generalized global elements."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25655ac8c",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after the b09a RETURN (H2 theorem stmt_dep). Lean file byte-identical (sha256 f945068e); item differs from side-live only in lean and stmt_deps: lem-coef-derived-sections-scalar-coherence replaced by the new def-sfb-coefficient-module-global-sections. That node is existing:true on Sheaf.CategoryTheory.DerivedSectionsScalarCoherence; coefficientModules = ringedSiteModules of the forget₂ image, coefficientSections = toSheaf ⋙ Sheaf.Γ. Its statement matches the source and is verbatim in the module. stmt_deps are 3 definition nodes; no other definition-node owner in side-live; newtargets-dag branch accepted. Item mathematics re-checked: t pinned via ΓRes plus adj.homEquiv; E₂ order, filtration ends, gr^a≅E∞, stable bound r>max(a,b+1) correct; j unique by column-zero recursion; edge = q≫g≫j≫e₂≫R⁰Γ, pinned by the cocycle formula for every InjectiveResolution. Edge cases F=0, n=0, f=id, Z→F_p, empty site OK. One sorry; docstrings carry the source and 7 steps. Advisories: abbrev docstrings name the theorem's blueprint id; global isGrothendieckAbelian instance attribute (already global elsewhere). No compile (no file changed)."
+ }
+}

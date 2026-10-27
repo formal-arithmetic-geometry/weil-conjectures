@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-etale-space-single-cover-effective-descent",
+ "kind": "statement",
+ "title": "Effective descent of etale spaces along one surjective etale cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention], and let $M,U$ be algebraic spaces over $S$ [def-trf-algebraic-space]. Let $a:U\\to M$ be a surjective etale morphism and $v:V\\to U$ an etale morphism of algebraic spaces. Etale means etale on scheme charts [def-weil-etale-morphism]; surjective means onto field-valued point classes. Put $U_2=U\\times_MU$ and $U_3=U\\times_MU\\times_MU$, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Suppose an isomorphism $\\theta:p_1^*V\\xrightarrow{\\sim}p_2^*V$ over $U_2$ restricts to the identity over the diagonal $U\\to U_2$ and satisfies $p_{23}^*\\theta\\circ p_{12}^*\\theta=p_{13}^*\\theta$ over $U_3$. Then there exist an algebraic space $N/S$, an etale map $N\\to M$, and an isomorphism $N\\times_MU\\simeq V$ over $U$ whose induced overlap isomorphism is $\\theta$. For any two etale algebraic spaces over $M$, pullback along $a$ gives a bijection between morphisms over $M$ and morphisms over $U$ respecting their canonical overlap isomorphisms. Thus a realization of $(V,\\theta)$ is unique up to unique isomorphism compatible with its displayed identification. No quasi-compactness or finite-type hypothesis is imposed on $a$ or $v$.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0ADV (lemma-descend-algebraic-space), part (1) for the singleton covering {U -> M}; spaces-descent.tex Tag 0ADT (lemma-descent-data-sheaves) for full faithfulness, and Tag 042B (lemma-descending-property-etale) for etaleness of the descended map."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-cover-sheaf-descent-categories",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-stack-chartwise-smooth-etale-calculus], the etale map $a$ is flat and locally of finite presentation; its surjectivity is part of the hypotheses. Thus the singleton $\\{a\\}$ is an fppf covering in the explicit sense of [lem-sfb-fppf-space-datum-sheaf-realization]. The given $\\theta$ supplies its descent datum: the two local copies of $V$ are over the ordered two factors of $U_2$, and the stated equation on $U_3$ is precisely its cocycle.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fppf-space-datum-sheaf-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV (lemma-descend-algebraic-space), proof of (1), singleton case."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-fppf-space-datum-sheaf-realization] to obtain an fppf sheaf $F\\to M$ and $e:F\\times_M U\\xrightarrow{\\sim}V$ over $U$ inducing $\\theta$. Write $q:V\\to F$ for the projection $F\\times_M U\\to F$ composed with $e^{-1}$. At this point $F$ is only a sheaf; no effectivity as an algebraic space has been used.",
+   "uses": [
+    "lem-sfb-fppf-space-datum-sheaf-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), functor from descent data to sheaves and its equivalence."
+   }
+  },
+  {
+   "text": "For an $S$-scheme $T$ and $x\\in F(T)$, fibre-product associativity gives $h_T\\times_{x,F,q}V\\simeq h_T\\times_M U$: a section on the left is $(t,v)$ with $q(v)=x(t)$, and $e^{-1}(v)=(x(t),u)$ sends it to $(t,u)$; conversely $(t,u)$ gives $v=e(x(t),u)$. These are natural inverse maps. By [lem-trf-space-fibre-products-etale-covers], the right side is an algebraic space and its map to $T$ is surjective etale. By [lem-sfb-stack-chartwise-smooth-etale-calculus] this map is flat and locally of finite presentation. Thus $q$ satisfies every scheme-test hypothesis of [lem-sfb-fppf-space-atlas-bootstrap], with atlas space $V$. That node proves $F$ is an algebraic space. Set $N=F$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0ADV (lemma-descend-algebraic-space), proof of (1), singleton case."
+   }
+  },
+  {
+   "text": "The morphism $N\\to M$ pulls back along $a$ to $V\\to U$, which is etale by hypothesis. Apply the algebraic-space, etale clause of [lem-sfb-representable-fppf-etale-open-descent], using flatness, local finite presentation and surjectivity of $a$ verified in step 1. It follows that $N\\to M$ is etale. The isomorphism $e:N\\times_MU\\simeq V$ still induces $\\theta$, since neither the underlying sheaf nor $e$ was changed.",
+   "uses": [
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 042B (lemma-descending-property-etale); target locality applied to the singleton fppf covering."
+   }
+  },
+  {
+   "text": "For etale spaces $N_1,N_2$ over $M$, their underlying sheaves lie in $\\mathcal L$ of [lem-sfb-fppf-space-datum-sheaf-realization]: the local pullbacks are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. Its full faithfulness gives exactly the claimed bijection of maps, since morphisms of algebraic spaces are natural transformations [def-trf-algebraic-space]. For two realizations, the displayed identifications with $V$ give inverse compatible local isomorphisms. Descend both by the bijection. Their composites are identities because their pullbacks are identities and the bijection is injective. This gives the unique isomorphism compatible with the displays. No step required quasi-compactness or finite type; in particular the use of the bootstrap involved a single atlas space, not an unbounded coproduct.",
+   "uses": [
+    "lem-sfb-fppf-space-datum-sheaf-realization",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0ADT (lemma-descent-data-sheaves), functor from descent data to sheaves and its equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-fppf-space-datum-sheaf-realization",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0ADV (lemma-descend-algebraic-space), proof of (1), singleton case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent for etale algebraic spaces along a single surjective etale morphism of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme property descent and general stack descent do not establish effective descent for etale algebraic spaces; the sole grep hit imports ring-level etale descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback is an equivalence from etale algebraic spaces to etale descent data over a surjective etale cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) →\\n      {ι : Type t} →\\n        {S : C} →\\n          {X : ι → C} →\\n            {f : (i : ι) → X i ⟶ S} →\\n              {S' : C} →\\n                \", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an isomorphism $ e: S' \\\\cong S $ in $ \\\\mathcal{C} $, and compatible families of morphisms $ p'_j: X'_j \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_functor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat) {ι : Type t} {S : C}\\n  {X : ι → C} {f : (i : ι) → X i ⟶ S} {S' : C} {ι' : Type t'} {X' : ι' → C} {f' : (j : ι') → X' j ⟶ S'} (e : S' ≅ S)\\n  {α : ι' → \", \"doc\": \"Given a pseudofunctor $ F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat} $, an isomorphism $ e: S' \\\\cong S $ in $ \\\\mathcal{C} $, and compatible families of morphisms $ p': X'_j \\\\to \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {ι : Type t} {S : C} {X : ι → C} (f : (i : ι) → X i ⟶ S),\\n  CategoryTheory.Sieve.ofArrows \", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$ be a pseudofunctor satisfying the stack conditi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme property descent and general stack descent do not establish effective descent for etale algebraic spaces; the sole grep hit imports ring-level etale descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"DescendsAlong\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme property descent and general stack descent do not establish effective descent for etale algebraic spaces; the sole grep hit imports ring-level etale descent"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Etale.*[Dd]escent|[Dd]escent.*Etale",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Etale.Descent\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme property descent and general stack descent do not establish effective descent for etale algebraic spaces; the sole grep hit imports ring-level etale descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebraic spaces satisfy effective descent along surjective etale morphisms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Function.Surjective ⇑(algebraMap R S) → (Algebra.FormallyEtale R S ↔ IsIdempotentElem (RingHom.ker (algebraMap R S)))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a surjective algebra homomorphism $ R \\\\to S $. Then $ S $ is formally étale over $ R $ if and only if the kernel of this homomorphism is an idempotent ide\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(R S T : Type*) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [IsStandardEtale R S]\\n  [Algebra.Etale R T] (f : S →ₐ[R] T) (hf : Function.Surjective f) : IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @Surjective (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme property descent and general stack descent do not establish effective descent for etale algebraic spaces; the sole grep hit imports ring-level etale descent"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Etale.*[Dd]escent|[Dd]escent.*Etale",
+   "results": {
+    "t": "2026-10-23T11:47:25Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|Etale.*[Dd]escent|[Dd]escent.*Etale",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean"
+    ],
+    "digest": "9768c84a3b8914bc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring etale facts and abstract descent for assumed stacks do not give effective descent of etale algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of etale algebraic spaces along a surjective etale morphism",
+   "results": {
+    "t": "2026-10-23T11:47:31Z",
+    "tool": "leanfinder",
+    "query": "Effective descent of etale algebraic spaces along a surjective etale morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsStandardEtale.of_surjective",
+     "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.Scheme.instCategoryEtale"
+    ],
+    "digest": "d0366b0ddbe1cb25"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring etale facts and abstract descent for assumed stacks do not give effective descent of etale algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback is an equivalence from etale algebraic spaces to etale descent data over a surjective etale cover",
+   "results": {
+    "t": "2026-10-23T11:55:40Z",
+    "tool": "leanfinder",
+    "query": "Pullback is an equivalence from etale algebraic spaces to etale descent data over a surjective etale cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence",
+     "AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_functor",
+     "CategoryTheory.Pseudofunctor.isEquivalence_toDescentData"
+    ],
+    "digest": "7317ae964f5ff73f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring etale facts and abstract descent for assumed stacks do not give effective descent of etale algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebraic spaces satisfy effective descent along surjective etale morphisms",
+   "results": {
+    "t": "2026-10-23T12:03:10Z",
+    "tool": "leansearch",
+    "query": "Etale algebraic spaces satisfy effective descent along surjective etale morphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Etale.formallyEtale",
+     "Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective",
+     "AlgebraicGeometry.IsEtale",
+     "RingHom.Etale",
+     "Algebra.IsStandardEtale.of_surjective",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Scheme.Etale",
+     "Algebra.Etale.exists_subalgebra_fg"
+    ],
+    "digest": "69d1be03381f688e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring etale facts and abstract descent for assumed stacks do not give effective descent of etale algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"DescendsAlong\"",
+   "results": {
+    "t": "2026-10-23T12:03:10Z",
+    "tool": "loogle",
+    "query": "\"IsEtale\", \"DescendsAlong\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme/ring etale facts and abstract descent for assumed stacks do not give effective descent of etale algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-stabilizer-preserving-etale",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input. Supporting input: Keel--Mori uniform categorical space and universal homeomorphism, before identifying it with the given coarse scheme. Local input: Stabilizer-preserving etale morphisms give cartesian moduli squares. Supporting input to Tag 0DUV: descend etale spaces from one etale chart cover; Tags 0ADV(1), 0ADT, 042B.",
+   "via": [
+    "lem-sfb-keel-mori-stabilizer-preserving-etale",
+    "lem-sfb-keel-mori-uniform-topological-moduli",
+    "lem-sfb-coarse-moduli-open-restriction",
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-space-single-cover-effective-descent",
+  "worker": "stage1",
+  "summary": "Expanded 0ADV(1) through 0ADT sheaf realization, verified each bootstrap test by an explicit pullback isomorphism, descended etaleness with the existing 042B node, and checked morphism descent and unique compatible isomorphisms. No statement change and no finiteness hypotheses added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input. Supporting input: Keel--Mori uniform categorical space and universal homeomorphism, before identifying it with the given coarse scheme. Local input: Stabilizer-preserving etale morphisms give cartesian moduli squares. Supporting input to Tag 0DUV: descend etale spaces from one etale chart cover; Tags 0ADV(1), 0ADT, 042B. The five steps supply the single-cover etale-space descent input below the stabilizer-preserving etale moduli-square argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-b982c4f78",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-b982c4f78 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and the sources (bootstrap 0ADV and its proof of (1), spaces-descent 0ADT and its proof, 042B, 04S6(3)). The 5 steps write out the 0ADV(1) proof for the singleton cover. Step 1: étale ⇒ flat+lfp (chartwise calculus, or by definition); θ is a singleton descent datum and the cocycle i=j=k matches. Step 2: sheaf realization only. Step 3: h_T×_{F,q}V ≅ h_T×_M U by explicit natural inverse maps; the fibre-products node makes it a space surjective étale over T, so every hypothesis of lem-sfb-fppf-space-atlas-bootstrap holds and F is algebraic. Step 4: the target-local étale clause of representable-fppf-etale-open-descent with q=a. Step 5: full faithfulness of the new node gives the bijection, and unique compatible isos follow by injectivity. New node lem-sfb-fppf-space-datum-sheaf-realization = 0ADT (equivalence + clause (1)), checked hypothesis by hypothesis against the definitions of fppf covering and descent datum. It is self-contained, statement-only, contains no algebraicity claim and is not a restatement of the item. It holds in the small cases (identity cover, empty X/I, non-qc). Duplicate search (02W5 scheme versions, 0ADV(2) finite-type node, 04SK, 02YS, 0BH4, 076V, 04P2) found nothing equal. No cycle, statement unchanged, no SGA. Batch-5 flags: the three sfb citations reach sec-trace-formula only through def-trf-algebraic-space (a general definition), and lem-trf-space-fibre-products-etale-covers is general algebraic-space foundations (02X2/041F) already a stmt_dep of the item, not part of the trace formula or Poincaré duality, so all are accepted. Cross-unit tool use of these two sk-i-curve-zero nodes is accepted. Minor: the report mentions a citations.json that is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSpaceSingleCoverEffectiveDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleSpaceSingleCover_effective",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.singleCoverSheafObject",
+   "AlgebraicGeometry.AlgebraicSpace.etaleSpaceSingleCover_effective",
+   "AlgebraicGeometry.AlgebraicSpace.etaleSpaceSingleCover_bijective",
+   "AlgebraicGeometry.AlgebraicSpace.etaleSpaceSingleCover_unique"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSpaceSingleCoverEffectiveDescent.lean",
+  "statement": "theorem etaleSpaceSingleCover_effective {S : Scheme.{u}} {M U : AlgebraicSpace S} (a : U ⟶ M) (ha : MapIsLocally (@Etale) a) (hsurj : IsJointlySurjective (fun _ : Unit ↦ a.hom.hom)) (D : SpaceCoverSheafDescent (fun _ : Unit ↦ a)) (hv : MapIsLocally (@Etale) (ObjectProperty.homMk (D.localObject ()).hom : (⟨(D.localObject ()).left, D.local_algebraic ()⟩ : AlgebraicSpace S) ⟶ U)) : ∃ (N : AlgebraicSpace S) (f : N ⟶ M), MapIsLocally (@Etale) f ∧ Nonempty (D ≅ (spaceCoverSheafRestriction (fun _ : Unit ↦ a)).obj (singleCoverSheafObject a f))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Three theorems state effectivity with the specified overlap map, bijectivity of canonical pullback on compatible morphisms, and uniqueness of realizations with their displays. Uses singleton transport-form descent data and the existing chartwise Etale test; does not impose representability of the morphism by schemes. singleCoverSheafObject only bundles an actual sheaf pullback using fibre-product closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91d1ae68c",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read the node, module, report (Worker report and Second reading present) and the live deps SpaceCoverSheafDescent, MapIsLocally, IsJointlySurjective, fibreProduct_isAlgebraicSpace and fppfSpaceDatumSheafRealization. Each clause matches: chartwise Etale with no added representability; point-class surjectivity; θ/self/cocycle via singleton transport-form descent data; existence of an étale N with D ≅ R.obj N (the display induces θ); bijectivity of R.map onto compatible Homs; ∃! iso with mapIso e = e₁.symm ≪≫ e₂. No qc/finite-type assumptions. The recorded statement appears verbatim in the file. The added stmt_deps are landed def nodes used in the statement. singleCoverSheafObject is real data (Over.mk f.hom plus the fibre-product proof). Docstrings give source and blueprint, proofs are sorry only, universes are bound. No duplicate found. No changes made, no compile run."
+ }
+}

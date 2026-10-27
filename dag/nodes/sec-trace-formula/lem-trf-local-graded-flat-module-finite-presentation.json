@@ -15,50 +15,45 @@
  ],
  "proof": [
   {
-   "text": "Replace a finite generating family by its finitely many homogeneous components; their span contains the original generators, so they still generate. Choose these homogeneous generators $m_1,\\ldots,m_r$ of $L$ over $P$ (finite generation). With $d_i=\\deg(m_i)$, they give a graded exact sequence $0\\to K\\to\\bigoplus_i P(-d_i)\\to L\\to0$, whose degree-$d$ part is $0\\to K_d\\to\\bigoplus_i P_{d-d_i}\\to L_d\\to0$. For each $d$, the module $P_{d-d_i}$ is finite free over $R$: only finitely many exponent vectors $\\alpha$ satisfy $\\sum_j w_j\\alpha_j=d-d_i$, because all $w_j>0$; its monomials form a finite basis. The inclusion and degree projection exhibit $L_d$ as an $R$-linear retract of $L$, so $L_d$ is flat by [lem-weil-pbc-flat-module-retract]. The middle term is finite free and hence flat (tensoring with it is a finite direct sum, which preserves injections). Thus each $K_d$ is flat by [lem-weil-pbc-flat-ses-kernel-flat].",
+   "text": "Choose finitely many homogeneous generators m_i by replacing a finite generating family with the components of its internal direct-sum decomposition. Let δ_i be their degrees, F = P^I with shifted pieces F_d = ∏_i P_(d-δ_i), and f:F→L their linear-combination surjection. Positivity of the weights bounds the monomials in each polynomial piece, so each F_d is finite over R. Weighted homogeneous projections give an internal decomposition of F; f preserves degree, commutes with projections, and induces surjections f_d:F_d→L_d. The same projections restrict to K=ker f and give K its internal grading.",
    "uses": [
     "def-weil-finitely-generated-module",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-flat-ses-kernel-flat",
-    "lem-weil-pbc-flat-module-retract"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 053C, proof lines 5871--5887"
-   }
-  },
-  {
-   "text": "Each $L_d$ is a finite flat $R$-module: it is generated over $R$ by the finitely many products of the chosen $m_i$ with monomials of degree $d-d_i$, and it is a direct graded summand of the flat $R$-module $L$, hence flat by [lem-weil-pbc-flat-module-retract]. Therefore [lem-weil-pbc-finite-flat-local-free] makes every $L_d$ finite free. The surjection $\\bigoplus_i P_{d-d_i}\\to L_d$ then splits because $L_d$ is free, so $K_d$ is a retract of the finite free source and is finite. Together with Step 1 and [lem-weil-pbc-finite-flat-local-free], each $K_d$ is finite free.",
-   "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-flat-module-retract",
-    "lem-weil-pbc-finite-flat-local-free",
     "def-weil-pbc-mv-polynomial-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 053C, proof lines 5882--5890"
+    "place": "Tag 053C, first paragraph of proof, lines 5873--5886"
    }
   },
   {
-   "text": "Let $\\mathfrak m$ be the unique maximal ideal of $R$ and $\\kappa=R/\\mathfrak m$. Since each $L_d$ is flat over $R$, [lem-weil-pbc-flat-quotient-tensor-injective] shows that tensoring the degreewise exact sequences with $\\kappa$ preserves exactness. The ring $P\\otimes_R\\kappa\\cong\\kappa[x_1,\\ldots,x_n]$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (the base $\\kappa$ is a field, hence Noetherian), and the injected module $K\\otimes_R\\kappa$ is a submodule of the finite $P\\otimes_R\\kappa$-module $\\bigoplus_i(P\\otimes_R\\kappa)(-d_i)$. Thus [lem-weil-pbc-noetherian-submodule-finite] makes $K\\otimes_R\\kappa$ finite over $P\\otimes_R\\kappa$, and homogeneous finite generators $\\bar k_1,\\ldots,\\bar k_t$ may be chosen. Choose homogeneous lifts $k_j\\in K$ and write $e_j=\\deg(k_j)$.",
+   "text": "The R-span of products P_(d-δ_i)m_i equals L_d, by applying the degree-d projection to polynomial linear combinations of the homogeneous generators. Hence L_d is finite over R. Its inclusion into L has its degree projection as retraction, so it is flat by lem-weil-pbc-flat-module-retract, and free by lem-weil-pbc-finite-flat-local-free. A finite free module is finitely presented. Since F_d is finite, the kernel of the surjection f_d:F_d→L_d is finite (Module.FinitePresentation.fg_ker). Identify it with K_d by the evident linear equivalence. No flatness or freeness of K_d is required.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-weil-pbc-flat-quotient-tensor-injective"
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-flat-module-retract",
+    "lem-weil-pbc-finite-flat-local-free"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 053C, proof lines 5893--5898"
+    "place": "Tag 053C, degreewise finite-module argument, lines 5882--5890"
    }
   },
   {
-   "text": "For every degree $d$, the homogeneous map $\\bigoplus_j P_{d-e_j}\\to K_d$ induced by the $k_j$ becomes surjective after tensoring with $\\kappa$, because the $\\bar k_j$ generate $K\\otimes_R\\kappa$ homogeneously. Its cokernel is a finite $R$-module: both source and target are finite $R$-modules by Step 2. Nakayama's lemma [lem-weil-pbc-nakayama-local-generators] therefore makes this map surjective over $R$. Hence the finite set $k_1,\\ldots,k_t$ generates $K$ as a graded $P$-module. Thus $K$ is finitely generated, and the exact sequence in Step 1 is a finite presentation of $L$ over $P$ by [def-sc-finitely-presented-module].",
+   "text": "Put κ=R/𝔪. Flatness of L and lem-weil-pbc-flat-quotient-tensor-injective make K⊗_Rκ→F⊗_Rκ injective. The finite-type κ-algebra κ⊗_R P is Noetherian by lem-weil-pbc-finite-type-algebra-noetherian; the commutativity equivalence gives the same for P⊗_Rκ. The map P→P⊗_Rκ is surjective. Restriction of scalars along this surjection preserves Noetherianity, so F⊗_Rκ≅(P⊗_Rκ)^I is Noetherian over P. Its submodule K⊗_Rκ is therefore finite by lem-weil-pbc-noetherian-submodule-finite. Lift a finite generating family through the surjection q:K→K⊗_Rκ, x↦x⊗1. Replacing each lift by its finitely many homogeneous components gives a finite homogeneous set s⊂K whose P-span N still maps onto K⊗_Rκ.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053C, residue-field argument, lines 5893--5898"
+   }
+  },
+  {
+   "text": "The P-span N of the homogeneous set s is stable under every degree projection: decompose polynomial coefficients and retain only terms of complementary degree. For a∈K_d, surjectivity of q(N) gives b∈N with b⊗1=a⊗1. Applying the tensor of the degree-d projection gives π_d(b)⊗1=a⊗1 with π_d(b)∈N∩K_d. Thus N∩K_d maps onto κ⊗_R K_d. Since K_d is finite, lem-weil-pbc-nakayama-local-generators shows N∩K_d=K_d. Summing the finitely supported homogeneous decomposition of each element gives N=K. Hence K is finitely generated, and Module.finitePresentation_of_free_of_surjective applied to f gives the required finite presentation.",
    "uses": [
     "lem-weil-pbc-nakayama-local-generators",
     "def-sc-finitely-presented-module"
@@ -66,27 +61,25 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 053C, proof lines 5899--5909"
+    "place": "Tag 053C, Nakayama and conclusion, lines 5899--5909"
    }
   }
  ],
  "proof_deps": [
   "def-sc-finitely-presented-module",
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-mv-polynomial-ring",
   "lem-weil-pbc-finite-flat-local-free",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-weil-pbc-flat-module-retract",
   "lem-weil-pbc-flat-quotient-tensor-injective",
-  "lem-weil-pbc-flat-ses-kernel-flat",
   "lem-weil-pbc-nakayama-local-generators",
   "lem-weil-pbc-noetherian-submodule-finite"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 053C, lemma-flat-graded-finite-type-finite-presentation-module, proof lines 5871--5909"
+  "place": "Tag 053C, proof lines 5873--5909; K9 formalization replaces the unnecessary freeness of K_d by Module.FinitePresentation.fg_ker and uses degree projections to lift residue generators."
  },
  "mathlib_searches": [
   {
@@ -199,5 +192,26 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261023T123837-L-1266070",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

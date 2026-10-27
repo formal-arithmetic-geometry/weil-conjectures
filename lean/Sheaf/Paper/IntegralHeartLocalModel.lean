@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NW
+Authors: SHEAF group V2
 -/
 module
 
@@ -12,288 +12,175 @@ public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-
-import Sheaf.Paper.AdicStratifiedPerfect
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+public import Sheaf.Paper.IntegralHeartLocalModelData
+import Sheaf.Paper.IntegralConstantModelHeart
+import Sheaf.Paper.IntegralHeartProjectiveLocalModels
+import Sheaf.Paper.IntegralHeartConstructibleModuleComplete
+import Sheaf.Paper.IntegralHeartRealizationExact
+import Mathlib.LinearAlgebra.FreeModule.PID
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.IntegralCohomologicalAdicCriterion
-import Sheaf.Paper.IntegralModels
-import Sheaf.SixFunctors.ProEtale.DerivedCompletion
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-!
-# Local models for the integral constructible heart
+/-! # Integral constructible local models
 
-Source: blueprint main-20261015, integral-heart-local-model, clauses (1)--(3);
-Stacks Project, Tags 099I, 09C7, 09C4, 0990, 099Q and 099Y
-(blueprint: det-lem-int-integral-heart-local-model).
-
-The coefficient ring is exactly the sibling integral-heart theorem's ring. Scalar
-modules are lifted copies of the integers in the canonical small presentation of E.
-Their realization is sheafified extension of scalars along constant functions,
-followed by the existing equivalence with internal module objects.
+Source: the current blueprint, integral-heart-local-model, clauses (1)--(3).
+(blueprint: det-lem-int-integral-heart-local-model)
 -/
 
 @[expose] public noncomputable section
-
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
-
 universe u v
-
 open CategoryTheory CategoryTheory.Limits Opposite
-open AlgebraicGeometry AlgebraicGeometry.ProEtale
-open CategoryTheory.InternalAbelianSheafModule
+open AlgebraicGeometry
 open scoped CategoryTheory.Obj
-
 namespace AlgebraicGeometry.ProEtale
 
-/-- The coefficient DVR, lifted only to the sheaf-value universe.
-Source: integral-heart coefficient setup (blueprint: det-lem-int-integral-heart-local-model). -/
-abbrev integralHeartScalars (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]
-    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] :=
-  ULift.{u + 1} (SmallAdicCompletion.Coefficients.integers ℓ E)
+-- Keep the coefficient structure explicit while transporting the categorical package.
+private def localModel_categoricalHeartProperty
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    (m : MonObj Λ) (hc : @IsCommMonObj _ _ _ _ Λ m) (X : Scheme.{u}) : Prop :=
+  letI := m
+  letI := hc
+  ObjectProperty.IsClosedUnderIsomorphisms
+    (constantModelBoundedConstructible Λ X) ∧
+  ObjectProperty.IsTriangulated
+    (constantModelBoundedConstructible Λ X) ∧
+  (∀ K, constantModelBoundedConstructible Λ X K →
+    DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ,
+      constantModelBoundedConstructible Λ X
+        ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧
+      constantModelBoundedConstructible Λ X
+        ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧
+  (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+    DerivedCategory.singleFunctor _ 0).Full ∧
+  (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+    DerivedCategory.singleFunctor _ 0).Faithful ∧
+  (∀ K, (ObjectProperty.ι
+      (IsConstantModelConstructible Λ X) ⋙
+      DerivedCategory.singleFunctor _ 0).essImage K ↔
+    constantModelBoundedConstructible Λ X K ∧
+    DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧
+  Nonempty (Abelian (ConstantModelConstructible Λ X)) ∧
+  ObjectProperty.IsClosedUnderKernels
+    (IsConstantModelConstructible Λ X) ∧
+  ObjectProperty.IsClosedUnderCokernels
+    (IsConstantModelConstructible Λ X) ∧
+  ObjectProperty.IsClosedUnderExtensions
+    (IsConstantModelConstructible Λ X) ∧
+  EssentiallySmall.{u + 1}
+    (ConstantModelConstructible Λ X)
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]
-  [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
+attribute [-instance] SmallAdicCompletion.Coefficients.integerRingMonObj
+  SmallAdicCompletion.Coefficients.integerRingComm in
+private noncomputable def localModel_canonicalCoefficient
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]
+    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] :
+    {m : MonObj (integralHeartCoefficientRingObj.{u} ℓ E) //
+      @IsCommMonObj _ _ _ _ _ m} := ⟨inferInstance, inferInstance⟩
 
-/-- The actual section ring sheaf of the condensed integral ring.
-Source: pulled-back coefficient setup (blueprint: det-lem-int-integral-heart-local-model). -/
-abbrev integralHeartPointRing :=
-  (sheafCompose (coherentTopology Profinite.{u}) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-    (sectionRingSheaf (coherentTopology Profinite.{u})
-      (SmallAdicCompletion.Coefficients.integerRing ℓ E))
+attribute [-instance] SmallAdicCompletion.Coefficients.integerRingMonObj
+  SmallAdicCompletion.Coefficients.integerRingComm in
+private theorem localModel_categoricalHeart_canonical
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p)
+    (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ p)
+    (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] :
+    localModel_categoricalHeartProperty (integralHeartCoefficientRingObj ℓ E)
+      (localModel_canonicalCoefficient.{u} ℓ E).val
+      (localModel_canonicalCoefficient.{u} ℓ E).property X := by
+  have h := @integralConstantModelHeart.{u, v} k ‹Field k› p ‹CharP k p› hp
+    ℓ ‹Fact ℓ.Prime› hℓ E ‹Field E› ‹Algebra (Padic ℓ) E›
+    ‹FiniteDimensional (Padic ℓ) E› X ‹X.Over (Spec (.of k))›
+    ‹IsSeparated (X ↘ Spec (.of k))› ‹LocallyOfFiniteType (X ↘ Spec (.of k))›
+    ‹QuasiCompact (X ↘ Spec (.of k))›
+  unfold localModel_categoricalHeartProperty
+  exact h
 
-/-- A scalar as its constant continuous function, in the reconstructed section ring.
-Source: scalar realization in clause (1) (blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartScalarSection (S : Profinite.{u}ᵒᵖ)
-    (a : integralHeartScalars.{u} ℓ E) :
-    (sectionRingSheaf (coherentTopology Profinite.{u})
-      (SmallAdicCompletion.Coefficients.integerRing ℓ E)).obj.obj S :=
-  ULift.up (ContinuousMap.const S.unop a.down)
+attribute [local irreducible] localModel_categoricalHeartProperty
 
-/-- The constant scalar one is the unit of the reconstructed section ring.
-Source: scalar realization in clause (1) (blueprint: det-lem-int-integral-heart-local-model).
-Proof: the internal unit of continuous functions is the constant function one.
-Evaluating its section-ring reconstruction gives the same constant function. -/
-theorem integralHeartScalarSection_one (S : Profinite.{u}ᵒᵖ) :
-    integralHeartScalarSection.{u} ℓ E S 1 = 1 := by
-  sorry
+private theorem localModel_coefficient_transport
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]
+    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
+    (P : {m : MonObj (integralHeartCoefficientRingObj.{u} ℓ E) //
+      @IsCommMonObj _ _ _ _ _ m} → Prop)
+    (h : P (localModel_canonicalCoefficient.{u} ℓ E)) :
+    P ⟨SmallAdicCompletion.Coefficients.integerRingMonObj.{u} ℓ E,
+      SmallAdicCompletion.Coefficients.integerRingComm.{u} ℓ E⟩ := by
+  have heq : (⟨SmallAdicCompletion.Coefficients.integerRingMonObj.{u} ℓ E,
+      SmallAdicCompletion.Coefficients.integerRingComm.{u} ℓ E⟩ :
+      {m : MonObj (integralHeartCoefficientRingObj.{u} ℓ E) //
+        @IsCommMonObj _ _ _ _ _ m}) = localModel_canonicalCoefficient.{u} ℓ E := by
+    exact Subtype.ext (show _ = _ from rfl)
+  exact (congrArg P heq).mpr h
 
-/-- Constant continuous functions preserve multiplication in the reconstructed ring.
-Source: scalar realization in clause (1) (blueprint: det-lem-int-integral-heart-local-model).
-Proof: the reconstructed internal multiplication evaluated on a pure tensor is the
-original pointwise multiplication of continuous functions. The two constant functions
-multiply to the constant function on the scalar product. -/
-theorem integralHeartScalarSection_mul (S : Profinite.{u}ᵒᵖ)
-    (a b : integralHeartScalars.{u} ℓ E) :
-    integralHeartScalarSection.{u} ℓ E S (a * b) =
-      integralHeartScalarSection.{u} ℓ E S a * integralHeartScalarSection.{u} ℓ E S b := by
-  sorry
+private theorem localModel_categoricalHeart_cached
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p)
+    (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ p)
+    (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] :
+    localModel_categoricalHeartProperty (integralHeartCoefficientRingObj ℓ E)
+      (SmallAdicCompletion.Coefficients.integerRingMonObj ℓ E)
+      (SmallAdicCompletion.Coefficients.integerRingComm ℓ E) X := by
+  have h := @localModel_categoricalHeart_canonical.{u, v} k ‹Field k› p ‹CharP k p› hp
+    ℓ ‹Fact ℓ.Prime› hℓ E ‹Field E› ‹Algebra (Padic ℓ) E›
+    ‹FiniteDimensional (Padic ℓ) E› X ‹X.Over (Spec (.of k))›
+    ‹IsSeparated (X ↘ Spec (.of k))› ‹LocallyOfFiniteType (X ↘ Spec (.of k))›
+    ‹QuasiCompact (X ↘ Spec (.of k))›
+  exact localModel_coefficient_transport ℓ E (fun x ↦ localModel_categoricalHeartProperty
+    (integralHeartCoefficientRingObj.{u} ℓ E) x.val x.property X) h
 
-/-- Constant scalar functions in every profinite section ring.
-Source: the scalar-extension model in clause (1)
-(blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartConstantMap :
-    (Functor.const Profinite.{u}ᵒᵖ).obj (CommRingCat.of (integralHeartScalars.{u} ℓ E)) ⟶
-      (sectionRingSheaf (coherentTopology Profinite.{u})
-        (SmallAdicCompletion.Coefficients.integerRing ℓ E)).obj where
-  app S := @CommRingCat.ofHom
-    (integralHeartScalars.{u} ℓ E)
-    ((sectionRingSheaf (coherentTopology Profinite.{u})
-      (SmallAdicCompletion.Coefficients.integerRing.{u} ℓ E)).obj.obj S) inferInstance
-    (CommRingCat.commRing _)
-    { toFun := integralHeartScalarSection.{u} ℓ E S
-      map_one' := integralHeartScalarSection_one.{u} ℓ E S
-      map_mul' := integralHeartScalarSection_mul.{u} ℓ E S
-      map_zero' := rfl
-      map_add' := fun _ _ ↦ rfl }
-  naturality _ _ _ := rfl
+private theorem localModel_single_constructible_of_essImage
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (h : ∀ K, (ObjectProperty.ι (IsConstantModelConstructible Λ X) ⋙
+      DerivedCategory.singleFunctor _ 0).essImage K ↔
+      constantModelBoundedConstructible Λ X K ∧
+      DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K)
+    (C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) (hC : IsConstantModelConstructible Λ X C) :
+    constantModelBoundedConstructible Λ X ((DerivedCategory.singleFunctor _ 0).obj C) := by
+  exact ((h _).1 ⟨⟨C, hC⟩, ⟨Iso.refl _⟩⟩).1
 
-/-- Constant scalar module presheaves on the point, with identity restrictions.
-Source: the scalar-extension model in clause (1)
-(blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartConstantPresheaf : ModuleCat.{u + 1} (integralHeartScalars.{u} ℓ E) ⥤
-    PresheafOfModules.{u + 1}
-      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (integralHeartScalars.{u} ℓ E))) where
-  obj M := { obj := fun _ ↦ M, map := fun _ ↦ ModuleCat.ofHom LinearMap.id }
-  map f := { app := fun _ ↦ f }
+private def localModel_singleConstructibleProperty
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    (m : MonObj Λ) (hc : @IsCommMonObj _ _ _ _ Λ m) (X : Scheme.{u}) : Prop :=
+  letI := m
+  letI := hc
+  ∀ C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X),
+    IsConstantModelConstructible Λ X C →
+      constantModelBoundedConstructible Λ X ((DerivedCategory.singleFunctor _ 0).obj C)
 
-/-- Additivity of constant module presheaves.
-Source: clause (1), constant realization (blueprint: det-lem-int-integral-heart-local-model).
-Proof: evaluate a sum of morphisms at each profinite object; its value is the original
-sum of linear maps, so additivity is pointwise. -/
-theorem integralHeartConstantPresheaf_additive :
-    (integralHeartConstantPresheaf.{u} ℓ E).Additive := by
-  sorry
+attribute [local irreducible] localModel_singleConstructibleProperty
 
-attribute [instance] integralHeartConstantPresheaf_additive
+private theorem localModel_singleConstructible_cached
+    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p)
+    (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ p)
+    (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] :
+    localModel_singleConstructibleProperty (SmallAdicCompletion.Coefficients.integerRing ℓ E)
+      (SmallAdicCompletion.Coefficients.integerRingMonObj ℓ E)
+      (SmallAdicCompletion.Coefficients.integerRingComm ℓ E) X := by
+  have h := @localModel_categoricalHeart_cached.{u, v} k ‹Field k› p ‹CharP k p› hp
+    ℓ ‹Fact ℓ.Prime› hℓ E ‹Field E› ‹Algebra (Padic ℓ) E›
+    ‹FiniteDimensional (Padic ℓ) E› X ‹X.Over (Spec (.of k))›
+    ‹IsSeparated (X ↘ Spec (.of k))› ‹LocallyOfFiniteType (X ↘ Spec (.of k))›
+    ‹QuasiCompact (X ↘ Spec (.of k))›
+  unfold localModel_categoricalHeartProperty at h
+  unfold localModel_singleConstructibleProperty
+  exact localModel_single_constructible_of_essImage _ X h.2.2.2.2.2.1
 
-/-- The constant scalar ring sheaf.
-Source: the scalar model in clause (1) (blueprint: det-lem-int-integral-heart-local-model). -/
-abbrev integralHeartConstantRing :=
-  (constantSheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1}).obj
-    (CommRingCat.of (integralHeartScalars.{u} ℓ E))
 
-/-- The sheafification unit for the constant scalar ring, forgetting commutativity.
-Source: scalar realization in clause (1) (blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartConstantUnit :=
-  Functor.whiskerRight
-    (toSheafify (coherentTopology Profinite.{u})
-      ((Functor.const Profinite.{u}ᵒᵖ).obj
-        (CommRingCat.of (integralHeartScalars.{u} ℓ E))))
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
-
-/-- The constant ring sheafification unit is locally injective after forgetting
-commutativity. Source: constant sheafification, Stacks 03DA
-(blueprint: det-lem-int-integral-heart-local-model).
-Proof: the underlying functions and equalizer sieves are unchanged by forgetting
-commutativity, and the original sheafification unit is locally injective. -/
-theorem integralHeartConstantUnit_isLocallyInjective :
-    Presheaf.IsLocallyInjective (coherentTopology Profinite.{u})
-      (integralHeartConstantUnit.{u} ℓ E) := by
-  sorry
-
-/-- The constant ring sheafification unit is locally surjective after forgetting
-commutativity. Source: constant sheafification, Stacks 03DA
-(blueprint: det-lem-int-integral-heart-local-model).
-Proof: the underlying functions and image sieves are unchanged by forgetting
-commutativity, and the original sheafification unit is locally surjective. -/
-theorem integralHeartConstantUnit_isLocallySurjective :
-    Presheaf.IsLocallySurjective (coherentTopology Profinite.{u})
-      (integralHeartConstantUnit.{u} ℓ E) := by
-  sorry
-
-attribute [instance] integralHeartConstantUnit_isLocallyInjective
-  integralHeartConstantUnit_isLocallySurjective
-
-/-- The canonical ring map from constant scalars to continuous coefficients.
-Source: scalar realization in clauses (1)--(2)
-(blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartScalarMap : integralHeartConstantRing.{u} ℓ E ⟶
-    sectionRingSheaf (coherentTopology Profinite.{u})
-      (SmallAdicCompletion.Coefficients.integerRing ℓ E) :=
-  ((sheafificationAdjunction (coherentTopology Profinite.{u}) CommRingCat.{u + 1}).homEquiv
-    _ _).symm (integralHeartConstantMap.{u} ℓ E)
-
-/-- Modules over the constant scalar ring on the point.
-Source: scalar realization in clause (1) (blueprint: det-lem-int-integral-heart-local-model). -/
-abbrev integralHeartConstantModules :=
-  SheafOfModules.{u + 1} ((sheafCompose (coherentTopology Profinite.{u})
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (integralHeartConstantRing.{u} ℓ E))
-
-/-- The map laws of the existing canonical sectionwise scalar-extension construction.
-Source: sheaf tensor, Stacks 03EK (blueprint: det-lem-int-integral-heart-local-model).
-Proof: before sheafification all maps are id tensor f. Tensor functoriality gives
-identity and composition on pure tensors. Sheafification preserves both equations. -/
-theorem integralHeartExtension_laws :
-    (∀ M : integralHeartConstantModules.{u} ℓ E,
-      SheafOfModules.changeOfRingsHomOfUniverses.{u, u + 1, u + 1, u + 1}
-        (integralHeartScalarMap.{u} ℓ E) M (𝟙 M) = 𝟙 _) ∧
-    (∀ (M N P : integralHeartConstantModules.{u} ℓ E) (f : M ⟶ N) (g : N ⟶ P),
-      SheafOfModules.changeOfRingsHomOfUniverses.{u, u + 1, u + 1, u + 1}
-        (integralHeartScalarMap.{u} ℓ E) M (f ≫ g) =
-      SheafOfModules.changeOfRingsHomOfUniverses.{u, u + 1, u + 1, u + 1}
-        (integralHeartScalarMap.{u} ℓ E) M f ≫
-      SheafOfModules.changeOfRingsHomOfUniverses.{u, u + 1, u + 1, u + 1}
-        (integralHeartScalarMap.{u} ℓ E) N g) := by
-  sorry
-
-/-- Actual completed scalar extension, sheafifying the sectionwise tensor product.
-Source: scalar realization in clauses (1)--(2)
-(blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartExtension :
-    SheafOfModules.{u + 1} ((sheafCompose (coherentTopology Profinite.{u})
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (integralHeartConstantRing.{u} ℓ E)) ⥤
-    SheafOfModules.{u + 1} (integralHeartPointRing.{u} ℓ E) where
-  obj M := SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
-    (integralHeartScalarMap.{u} ℓ E) M
-  map {M _N} f := SheafOfModules.changeOfRingsHomOfUniverses.{u, u + 1, u + 1, u + 1}
-    (integralHeartScalarMap.{u} ℓ E) M f
-  map_id M := (integralHeartExtension_laws.{u} ℓ E).1 M
-  map_comp f g := (integralHeartExtension_laws.{u} ℓ E).2 _ _ _ f g
-
-/-- The canonical completed scalar-module realization on the point. It first forms
-constant module sheaves, then extends scalars along constant functions, and finally
-uses the existing internal-module equivalence. No realization functor is an input.
-Source: clauses (1)--(2) (blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartPointRealization : ModuleCat.{u + 1} (integralHeartScalars.{u} ℓ E) ⥤
-    CategoryTheory.Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-      (SmallAdicCompletion.Coefficients.integerRing ℓ E) :=
-  integralHeartConstantPresheaf.{u} ℓ E ⋙
-    PresheafOfModules.sheafification
-      (R := (sheafCompose (coherentTopology Profinite.{u})
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (integralHeartConstantRing.{u} ℓ E))
-      (integralHeartConstantUnit.{u} ℓ E) ⋙
-    integralHeartExtension.{u} ℓ E ⋙
-    (sectionModuleEquivalence (coherentTopology Profinite.{u})
-      (SmallAdicCompletion.Coefficients.integerRing ℓ E)).inverse
-
-/-- Additivity of completed scalar realization.
-Source: clauses (1)--(2) (blueprint: det-lem-int-integral-heart-local-model).
-Proof: constant presheaves preserve addition pointwise. Scalar extension and
-sheafification are additive; the inverse of an additive equivalence is additive. -/
-theorem integralHeartPointRealization_additive :
-    (integralHeartPointRealization.{u} ℓ E).Additive := by
-  sorry
-
-attribute [instance] integralHeartPointRealization_additive
-
-/-- Scalar-module realization on a scheme by the published inverse image from the point.
-Source: clauses (1)--(2) (blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartRealization (X : Scheme.{u}) :=
-  integralHeartPointRealization.{u} ℓ E ⋙
-    (upperStarFromPoint X).mapMod (SmallAdicCompletion.Coefficients.integerRing ℓ E)
-
-/-- Additivity of realization on the scheme.
-Source: clauses (1)--(2) (blueprint: det-lem-int-integral-heart-local-model).
-Proof: point realization is additive and inverse image is additive; compose these
-properties. This is only the structure needed to map cochain complexes. -/
-theorem integralHeartRealization_additive (X : Scheme.{u}) :
-    (integralHeartRealization.{u} ℓ E X).Additive := by
-  sorry
-
-attribute [instance] integralHeartRealization_additive
-
-/-- The ordinary unbounded category with exactly the integral-heart coefficient ring.
-Source: the standing setup (blueprint: det-lem-int-integral-heart-local-model). -/
-abbrev integralHeartDerivedCategory (X : Scheme.{u}) :=
-  DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (condensedRingObj (SmallAdicCompletion.Coefficients.integerRing.{u} ℓ E) X))
-
-/-- The q-th cohomology sheaf in degree zero.
-Source: clause (2) (blueprint: det-lem-int-integral-heart-local-model). -/
-abbrev integralHeartCohomology (X : Scheme.{u})
-    (K : integralHeartDerivedCategory.{u} ℓ E X) (q : ℤ) :=
-  (DerivedCategory.singleFunctor _ 0).obj ((DerivedCategory.homologyFunctor _ q).obj K)
-
-/-- Finite free models and all their cohomology models on the same strata and charts.
-The differential matrices are over the scalar DVR since P is a scalar cochain complex.
-Source: clauses (1) and (2) (blueprint: det-lem-int-integral-heart-local-model). -/
-def integralHeartFiniteFreeLocalModel (X : Scheme.{u})
-    (K : integralHeartDerivedCategory.{u} ℓ E X) : Prop :=
-  ∃ s : Scheme.FiniteLocallyClosedStratification X,
-    (∀ a : Fin s.n, Topology.IsConstructible (s.stratum a)) ∧
-    ∀ a : Fin s.n, ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage (s.domain a),
-      ∀ i : 𝒰.I₀,
-        ∃ (P : CochainComplex (ModuleCat.{u + 1} (integralHeartScalars.{u} ℓ E)) ℤ)
-          (b c : ℤ),
-          P.IsStrictlyGE b ∧ P.IsStrictlyLE c ∧
-          (∀ q : ℤ, Module.Free (integralHeartScalars.{u} ℓ E) (P.X q) ∧
-            Module.Finite (integralHeartScalars.{u} ℓ E) (P.X q)) ∧
-          Nonempty (((CondensedRing.upperStar (SmallAdicCompletion.Coefficients.integerRing ℓ E)
-              (𝒰.f i ≫ s.immersion a)).mapDerivedCategory).obj K ≅
-            DerivedCategory.Q.obj
-              (((integralHeartRealization.{u} ℓ E (𝒰.X i)).mapHomologicalComplex (.up ℤ)).obj P)) ∧
-          (∀ q : ℤ,
-            Module.Finite (integralHeartScalars.{u} ℓ E) (P.homology q) ∧
-            Nonempty ((CondensedRing.upperStar (SmallAdicCompletion.Coefficients.integerRing ℓ E)
-                (𝒰.f i ≫ s.immersion a)).obj
-                  ((DerivedCategory.homologyFunctor _ q).obj K) ≅
-              (integralHeartRealization.{u} ℓ E (𝒰.X i)).obj (P.homology q)))
 
 /-- Integral constructible complexes have finite free local models, their cohomology is
 complete and constructible, and both good truncations remain constructible.
@@ -338,6 +225,72 @@ theorem integralHeartLocalModel
           ((DerivedCategory.TStructure.t.truncLE q).obj K) ∧
         constantModelBoundedConstructible (SmallAdicCompletion.Coefficients.integerRing ℓ E) X
           ((DerivedCategory.TStructure.t.truncGE q).obj K)) := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k₀))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k₀))
+  have : IsNoetherian X := ⟨⟩
+  have hcat := @localModel_categoricalHeart_cached.{u, v} k₀ ‹Field k₀› p ‹CharP k₀ p› _hp
+    ℓ ‹Fact ℓ.Prime› _hℓ.symm E ‹Field E› ‹Algebra (Padic ℓ) E›
+    ‹FiniteDimensional (Padic ℓ) E› X ‹X.Over (Spec (.of k₀))›
+    ‹IsSeparated (X ↘ Spec (.of k₀))› ‹LocallyOfFiniteType (X ↘ Spec (.of k₀))›
+    ‹QuasiCompact (X ↘ Spec (.of k₀))›
+  unfold localModel_categoricalHeartProperty at hcat
+  have hs := @localModel_singleConstructible_cached.{u, v} k₀ ‹Field k₀› p ‹CharP k₀ p› _hp
+    ℓ ‹Fact ℓ.Prime› _hℓ.symm E ‹Field E› ‹Algebra (Padic ℓ) E›
+    ‹FiniteDimensional (Padic ℓ) E› X ‹X.Over (Spec (.of k₀))›
+    ‹IsSeparated (X ↘ Spec (.of k₀))› ‹LocallyOfFiniteType (X ↘ Spec (.of k₀))›
+    ‹QuasiCompact (X ↘ Spec (.of k₀))›
+  unfold localModel_singleConstructibleProperty at hs
+  refine ⟨?_, ?_, (hcat.2.2.1 K hK).2⟩
+  · obtain ⟨s, hs, hmodels⟩ := integralHeart_projective_local_models ℓ E X K hK
+    refine ⟨s, hs, fun a ↦ ?_⟩
+    obtain ⟨𝒰, h𝒰⟩ := hmodels a
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    obtain ⟨P, b, c, hb, hc, hP, ⟨e⟩⟩ := h𝒰 i
+    let A := integralHeartScalars.{u} ℓ E
+    let O := SmallAdicCompletion.Coefficients.integers ℓ E
+    have hDvr : IsDiscreteValuationRing O :=
+      (Padic.extension_integers_dvr ℓ (SmallAdicCompletion.Coefficients.field ℓ E)
+        (Padic.coefficientExtensionAbsoluteValue ℓ _)
+        (spectralNorm_extends (K := Padic ℓ)
+          (L := SmallAdicCompletion.Coefficients.field ℓ E))).choose_spec.choose_spec
+          |>.2.2.2.2.2.2.2.1
+    have : IsPrincipalIdealRing O := hDvr.toIsPrincipalIdealRing
+    have : IsDomain A := MulEquiv.isDomain O (ULift.ringEquiv (R := O)).toMulEquiv
+    have : IsPrincipalIdealRing A :=
+      IsPrincipalIdealRing.of_surjective ULift.ringEquiv.symm ULift.ringEquiv.symm.surjective
+    refine ⟨P, b, c, hb, hc, ?_, ⟨e⟩, ?_⟩
+    · intro q
+      have : Module.Projective A (P.X q) := (hP q).1
+      have : Module.Finite A (P.X q) := (hP q).2
+      have : Module.IsTorsionFree A (P.X q) := by
+        obtain ⟨f, hf⟩ := (inferInstance : Module.Projective A (P.X q)).out
+        exact Function.Injective.moduleIsTorsionFree f hf.injective f.map_smul
+      exact ⟨inferInstance, inferInstance⟩
+    · intro q
+      have : Module.Finite A (P.X q) := (hP q).2
+      have : Module.Finite A (P.cycles q) :=
+        Module.Finite.of_injective (P.iCycles q).hom
+          ((ModuleCat.mono_iff_injective _).1 inferInstance)
+      have : Module.Finite A (P.homology q) :=
+        Module.Finite.of_surjective (P.homologyπ q).hom
+          ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+      let F := integralHeartRealization.{u} ℓ E (𝒰.X i)
+      obtain ⟨hFlim, hFcolim, _⟩ := integralHeartRealization_exact_free ℓ E (𝒰.X i)
+      have : PreservesFiniteLimits F := hFlim
+      have : PreservesFiniteColimits F := hFcolim
+      let G := CondensedRing.upperStar (SmallAdicCompletion.Coefficients.integerRing ℓ E)
+        (𝒰.f i ≫ s.immersion a)
+      exact ⟨inferInstance, ⟨(G.mapDerivedCategoryHomologyFunctorIso q).app K ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+        (DerivedCategory.homologyFunctorFactors _ q).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj P) ≪≫
+        (F.mapHomologicalComplexHomologyIso (.up ℤ) q).app P⟩⟩
+  · intro q
+    have hq : constantModelBoundedConstructible
+        (SmallAdicCompletion.Coefficients.integerRing ℓ E) X
+        (integralHeartCohomology.{u} ℓ E X K q) := hs _ (hK.2 q)
+    exact ⟨integralHeart_constructible_module_complete ℓ E X _ (hK.2 q), hq⟩
 
 end AlgebraicGeometry.ProEtale

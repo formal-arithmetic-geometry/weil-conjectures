@@ -12,106 +12,70 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "lem-trf-derived-colimit-bar"
+  "lem-trf-derived-colimit-bar",
+  "def-trf-polynomial-presentation-pair-categories"
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\mathcal P^{op}$ and $\\mathcal B=\\mathcal D^{op}$. A presheaf is a covariant module functor on the corresponding non-opposite category. The bar theorem identifies the stated derived colimits with derived colimits on these small categories. To use the simplicial-computation theorem, identify its first-vertex bar convention with the bar theorem's last-vertex convention: their differentials in degree $-n$ differ by $(-1)^n$, and multiplication by $\\lambda_n=(-1)^{n(n+1)/2}$ is a chain isomorphism since $\\lambda_n=(-1)^n\\lambda_{n-1}$. This is the identity in degree zero and commutes with every reindexing map and augmentation. Work in these identified models. Choose the standard polynomial resolution $P_\\bullet\\to B$ supplied by the resolution-coherence theorem, within the fixed size bound, and set $U_n=(P_n\\to B,P_n[E]\\to C)$. Each is an object of $\\mathcal A$, and extending every simplicial operator by the identity on $E$ makes $U_\\bullet$ a simplicial object. Transport to the chosen small representatives by isomorphisms when necessary.",
-   "uses": [
-    "lem-trf-derived-colimit-bar",
-    "lem-trf-simplicial-derived-colimit-computation",
-    "lem-trf-cotangent-resolution-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QV (lemma-polynomial-on-top), first paragraph; Tag 08QI (remark-resolution); sites-cohomology.tex Tag 08Q9, with the explicit bar sign identification."
-   }
-  },
-  {
-   "text": "The resolution-coherence theorem says that every $P_n\\to B$ is surjective and $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism. For constant $B$, the alternating differential is zero in odd positive chain degree and the identity in even positive degree, so $s(\\operatorname{const} B)\\to B[0]$ is a quasi-isomorphism. Therefore $s(P_\\bullet)\\to s(\\operatorname{const} B)$ is a quasi-isomorphism. Applying the surjective-quasi-isomorphism criterion to the underlying simplicial abelian groups proves that $P_\\bullet\\to\\operatorname{const} B$ is a trivial Kan fibration, with the boundary lifting property and vertex surjectivity of the cited definition.",
+   "text": "Choose the standard polynomial resolution $P_\\bullet\\to B$ from [lem-trf-cotangent-resolution-coherence], within the fixed infinite bound: its generators are obtained by iterating the free-algebra/underlying-set construction, which stays within that bound. Every augmentation $P_n\\to B$ is surjective and $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism. Apply [lem-trf-polynomial-resolution-extension-trivial-kan] to obtain the trivial Kan fibrations for both $P_\\bullet\\to B$ and $P_\\bullet[E]\\to B[E]$.",
    "uses": [
     "lem-trf-cotangent-resolution-coherence",
-    "lem-trf-surjective-qis-simplicial-group-trivial-kan",
-    "def-weil-pbc-trivial-kan-fibration"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); cotangent.tex Tag 08QI (remark-resolution)."
-   }
-  },
-  {
-   "text": "The map $P_\\bullet[E]\\to\\operatorname{const}(B[E])$ is also termwise surjective and a quasi-isomorphism on alternating complexes. Indeed let $\\mathcal M=\\mathbf N^{(E)}$ be the set of finitely supported monomial exponent functions. Coefficients identify its underlying simplicial abelian-group map with $\\bigoplus_{m\\in\\mathcal M}(P_\\bullet\\to\\operatorname{const} B)$, because simplicial operators act on coefficients and fix all variables. The alternating complex is the same direct sum of complexes. A cycle in a direct sum has finite support and is a tuple of coordinate cycles; a boundary is a tuple of coordinate boundaries. Choosing preimages only on that finite support proves $H_n(\\bigoplus C_m)=\\bigoplus H_n(C_m)$. Thus Step 2 gives the required homology isomorphisms. Termwise surjectivity follows by lifting the finitely many coefficients of a polynomial. Apply the same surjective-quasi-isomorphism criterion. This proves the trivial Kan fibration needed for the top polynomial algebra, including infinite $E$, without a filtered-colimit preservation theorem.",
-   "uses": [
-    "lem-trf-surjective-qis-simplicial-group-trivial-kan"
+    "lem-trf-polynomial-resolution-extension-trivial-kan"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QV (lemma-polynomial-on-top), last paragraph, expanded by the finite-support coefficient argument; simplicial.tex Tag 08P1 (lemma-qis-simplicial-abelian-groups)."
+    "place": "Tag 08QV (lemma-polynomial-on-top); Tags 08QI and 08P1, resolution and polynomial extension."
    }
   },
   {
-   "text": "For $W=(P\\to B,Q\\to C)$ choose polynomial coordinates $P=A[S]$, $Q=P[T]$. A simplex of $X_W=\\operatorname{Hom}_{\\mathcal A}(W,U_\\bullet)$ consists precisely of elements $x_s\\in P_\\bullet$ over $\\beta(s)$ for $s\\in S$, and $y_t\\in P_\\bullet[E]$ over $\\gamma(t)$ for $t\\in T$: the second algebra map extends the first and is determined freely by the $y_t$. This coordinate description commutes with all faces and degeneracies. A boundary lifting problem for $X_W\\to *$ is therefore a family of boundary lifting problems for the maps in Steps 2 and 3 over the indicated constant simplices. Fill each coordinate, choose the fillers for the sets $S,T$, and extend uniquely by the polynomial universal property. Vertex lifts are obtained in the same way. Consequently $X_W\\to *$ is a trivial Kan fibration by the cited definition, and the homotopy-equivalence theorem makes $X_W$ homotopy equivalent to a singleton. Empty generator sets give empty products, hence a singleton; infinite generator sets cause no restriction because each chosen coordinate defines an algebra map out of a free polynomial algebra.",
+   "text": "Write $\\mathcal A=\\mathcal P^{op}$ and $\\mathcal B=\\mathcal D^{op}$. Apply [lem-trf-polynomial-pair-resolution-contractibility] to this resolution, using both trivial Kan fibrations from Step 1. It supplies $U_n=(P_n,P_n[E])$ in $\\mathcal A$, the homotopy equivalence $\\operatorname{Hom}_{\\mathcal A}(W,U_\\bullet)\\simeq *$ for every $W$, and the canonical simplicial identification $v^{op}U_\\bullet\\cong\\operatorname{const} C$.",
    "uses": [
-    "def-weil-pbc-trivial-kan-fibration",
-    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+    "lem-trf-polynomial-pair-resolution-contractibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QV (lemma-polynomial-on-top), representable mapping simplicial sets; simplicial.tex Tag 08NS (lemma-trivial-kan-homotopy)."
+    "place": "Tag 08QV (lemma-polynomial-on-top); Representable fibres and base change of U; Tag 08NS."
    }
   },
   {
-   "text": "Apply the simplicial derived-colimit computation to $\\mathcal A$, the coefficient functor $v^{-1}F$, and $U_\\bullet$. Step 4 verifies its representable-contractibility hypothesis, so it gives an isomorphism $a_U:s(F(C))\\xrightarrow{\\sim}L\\pi_{\\mathcal P,!}^R(v^{-1}F)$. Here $vU_n=P_n[E]\\otimes_{P_n}B\\simeq B[E]=C$, canonically by the maps fixing coefficients and variables; all operators become identities. In $\\mathcal B$, the augmented algebra $(C\\xrightarrow{1}C)$ is terminal: the unique augmentation-preserving map from $T\\to C$ to it is the augmentation of $T$. Its constant simplicial object therefore has singleton representable mapping sets. The same theorem gives $a_C:s(F(C))\\xrightarrow{\\sim}L\\pi_{\\mathcal D,!}^R F$. Apply its reindexing naturality to $v^{op}:\\mathcal A\\to\\mathcal B$, identity coefficients, and the displayed simplicial isomorphism $v^{op}U_\\bullet\\simeq\\operatorname{const} C$. It says $c\\,a_U=a_C$, where $c$ is the canonical reindexing map. The bar theorem and Step 1's signs identify this $c$ with exactly the reindexing map in the statement. Hence $c$ is an isomorphism.",
+   "text": "The bar theorem represents the required derived colimits on $\\mathcal A,\\mathcal B$; use the natural sign isomorphisms of [lem-trf-terminal-bar-evaluation-compatibility] to compare with the simplicial-computation convention. In $\\mathcal B$, the identity-augmented $C$ is terminal: an augmentation-preserving $B$-algebra map $(T\\to C)\\to(C\\xrightarrow{1}C)$ must equal the augmentation. Thus the constant $C$ has singleton representable mapping sets. The simplicial derived-colimit computation applied to $U_\\bullet$ and to $\\operatorname{const} C$ gives isomorphisms $a_U:s(\\operatorname{const}F(C))\\to L\\pi_{\\mathcal P,!}^R(v^{-1}F)$ and $a_C:s(\\operatorname{const}F(C))\\to L\\pi_{\\mathcal D,!}^RF$. Identify the coefficient complexes by Step 2's simplicial isomorphism fixing coefficients and variables. For the canonical reindexing $c=\\mathbf H(v^{op},1)$, naturality gives $c\\,a_U=a_C$ after that coefficient identification. The bar and sign compatibilities identify $c$ with the stated canonical reindexing map; hence $c$ is an isomorphism.",
    "uses": [
-    "lem-trf-simplicial-derived-colimit-computation",
-    "lem-trf-derived-colimit-bar"
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-terminal-bar-evaluation-compatibility",
+    "lem-trf-simplicial-derived-colimit-computation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), applied to both categories; Tags 08PG and 08PH, reindexing map; cotangent.tex Tag 08QV."
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QV (lemma-polynomial-on-top); sites-cohomology.tex Tags 08PG, 08PH and 08Q9, with the explicit bar-convention identification and canonical augmentation."
    }
   },
   {
-   "text": "Write $M=F(C)$ and let $\\epsilon_{\\mathcal D}:K_{\\mathcal D}(F)\\to M[0]$ be the augmentation whose degree-zero component at $T$ is restriction along $C\\to T$ in $\\mathcal D$. The maps form a cocone, so this is a chain map. Let $i:*\\to\\mathcal B$ pick $C$, with coefficient $M$ on the one-object category. Apply the simplicial-computation theorem there to its constant unique object, obtaining an isomorphism $a_*:s(M)\\to\\mathbf H(*,M)$. Its reindexing naturality gives $a_C=\\mathbf H(i,1)a_*$. On bars, $\\epsilon_{\\mathcal D}\\mathbf H(i,1)$ is exactly the augmentation $\\epsilon_*:K_*(M)\\to M[0]$, since the only degree-zero image is $(C,x)\\mapsto x$. This augmentation is a quasi-isomorphism: the constant alternating complex has differential zero in odd degrees and identity in positive even degrees; its degree-zero section and the homotopy $h_n=1$ for odd $n$, $h_n=0$ for even $n$ contract it to $M[0]$. Thus $\\epsilon_{\\mathcal D}a_C=\\epsilon_*a_*$ is an isomorphism. Since $a_C$ is an isomorphism, so is $\\epsilon_{\\mathcal D}$. This argument applies also to $M=0$ and to any coefficient ring $R$.",
+   "text": "Apply [lem-trf-terminal-bar-evaluation-compatibility] to $\\mathcal B$, its terminal object $C$, and the covariant coefficient functor corresponding to $F$. It makes the generator-defined augmentation $\\epsilon_{\\mathcal D}:L\\pi_{\\mathcal D,!}^RF\\to F(C)[0]$ an isomorphism. Its reindexing identity says that $\\epsilon_{\\mathcal D}c$ has degree-zero formula $(W,x)\\mapsto F(C\\to vW)(x)$ and all other components zero, exactly the requested augmentation. The sign comparison is the identity in degree zero, so preserves this equality. The required map is therefore the stated composite of two isomorphisms.",
    "uses": [
-    "lem-trf-simplicial-derived-colimit-computation",
-    "lem-trf-derived-colimit-bar"
+    "lem-trf-terminal-bar-evaluation-compatibility"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QV (lemma-polynomial-on-top), evaluation at C; sites-cohomology.tex Tags 08PG, 08PH and 08Q9, reindexing from the one-object category."
-   }
-  },
-  {
-   "text": "Finally $\\epsilon_{\\mathcal D}c$ is exactly the requested augmentation. In degree zero its bar generator $(W,x)$ maps to $(vW,x)$ and then to the restriction of $x$ along $C\\to vW$. In higher degrees both augmentations to $M[0]$ are zero. These are equal chain maps; the sign identification of Step 1 does not alter them in degree zero. The arrows $C\\to vW$ are natural because both sides of their naturality square are the augmentation of the polynomial $B$-algebra in the non-opposite category. Thus the stated canonical map, with its stated factorization, is the composite of the two isomorphisms proved in Steps 5 and 6, and is an isomorphism in $D(R)$.",
-   "uses": [
-    "lem-trf-derived-colimit-bar"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cotangent.tex",
-    "place": "Tag 08QV (lemma-polynomial-on-top); sites-cohomology.tex Tag 08PH (example-morphism-categories), explicit augmentation and reindexing formula."
+    "place": "Tag 08QV (lemma-polynomial-on-top); sites-cohomology.tex Tags 08PG, 08PH and 08Q9, with the explicit bar-convention identification and canonical augmentation."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-derived-colimit-bar",
-  "lem-trf-simplicial-derived-colimit-computation",
   "lem-trf-cotangent-resolution-coherence",
-  "lem-trf-surjective-qis-simplicial-group-trivial-kan",
-  "def-weil-pbc-trivial-kan-fibration",
-  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+  "lem-trf-polynomial-resolution-extension-trivial-kan",
+  "lem-trf-polynomial-pair-resolution-contractibility",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-terminal-bar-evaluation-compatibility",
+  "lem-trf-simplicial-derived-colimit-computation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cotangent.tex",
-  "place": "Tag 08QV (lemma-polynomial-on-top); follows its polynomial-resolution route, expands polynomial-extension and representable lifting by finite-support coefficients, and uses the naturality of sites-cohomology.tex Tag 08Q9 to identify the stated canonical augmentation."
+  "place": "Tag 08QV (lemma-polynomial-on-top), same polynomial-resolution route as the returned proof; assembly of the extracted polynomial-extension, representable-contractibility and terminal-bar-compatibility lemmas, with sites-cohomology.tex Tags 08PG, 08PH and 08Q9."
  },
  "mathlib_searches": [
   {
@@ -226,28 +190,57 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-cotangent-lower-shriek-polynomial-top",
   "worker": "stage1",
-  "summary": "Q42 preserves the statement and all inherited searches, gives the full polynomial-resolution and coordinate boundary-lifting proof of Stacks 08QV with arbitrary constant module coefficients, and identifies the canonical augmentation through the naturality of the existing derived-colimit comparison. No new nodes are needed.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. This split realizes the polynomial-top computation used for the third lower-shriek counit; Steps 1–4 establish the resolution hypothesis and Steps 5–7 compute and identify the canonical augmentation.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-    "why": "Generic simplicial-set lifting theorem converts the explicitly verified trivial Kan fibration Hom(W,U) to a homotopy equivalence with a singleton, exactly as Stacks 08QV requires; no node of this unit supplies that conversion."
-   }
-  ]
+  "summary": "Q01 repairs the landing return at da74c14ddc8 against the current DAG. The retained item differs from the current item only in split-owned proof fields; every previously fingerprinted cited statement agrees and was re-read. The initial required dry run found three newer same-tag nodes: their full statements do not replace the independent helpers, and precise comparisons are added to the report. Step 3 now explicitly names the canonical reindexing map; its citation excerpt now covers both the comparison isomorphism and its naturality. The statement, maintainer metadata, three unsplit helpers, complete returned argument, source citations and authentic searches are preserved.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. This split realizes the polynomial-top computation used for the third lower-shriek counit; Steps 1–4 establish the resolution hypothesis and Steps 5–7 compute and identify the canonical augmentation. Mandatory re-split: new resolution-extension node realizes old Steps 2–3; new representable-contractibility node realizes construction in old Step 1 and old Step 4; new bar-compatibility node realizes signs in old Step 1 and old Steps 6–7. New parent Step 3 assembles old Step 5 with the already existing simplicial-computation naturality theorem.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-trivial-kan-homotopy-equivalence"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q42-c1010485a",
-  "group": "Q42",
+  "reviewer": "NT-cc-Q01-b1648fc0f",
+  "group": "Q01",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-c1010485a (reviewer sub-agent of L); spot-checked: I read the delivery in full. The statement is unchanged and identical to the live node, which is still unsplit. There are no new nodes and no cycle (312-node closure without the item), and no SGA source is used. I checked the item against Stacks 08QV, whose route it follows: U_n=(P_n,P_n[E]), contractible Hom(W,U_•), then the 08Q9 computation. Step 1: the sign λ_n=(-1)^{n(n+1)/2} correctly matches the last-vertex bar convention of the bar node with the first-vertex convention of the computation node, and size stays within the cardinal bound. Step 2: the coherence node gives termwise surjectivity and the quasi-isomorphism; s(const B) has differentials 0/1, so 08P1 makes P_•→const B a trivial Kan fibration. Step 3: P_•[E] is a direct sum of copies of P_• indexed by finite-support monomials, which replaces Stacks' filtered-colimit lemma and is valid for infinite E. Step 4: a morphism (A[S],P[T])→U_n is the same as coordinates x_s over β(s) and y_t over γ(t), so lifting reduces to fibrewise lifts, and 08NS then gives contractibility. Step 5: C→C is terminal in D^op, vU_•≅const C, and the reindexing clause gives c a_U=a_C. Step 6: ε_D H(i,1)=ε_*, the constant complex contracts, so ε_D is an isomorphism. Step 7: the composite is the stated augmentation. I tested E empty, infinite E, A→B non-surjective or non-flat, R=0 or F=0, and empty S or T; nothing breaks. Accepted tool_use: lem-weil-pbc-trivial-kan-homotopy-equivalence (sk-prop-h2, which the unit does not cite) as a generic 08NS black box. Route pivot: def-weil-pbc-trivial-kan-fibration is the classical 08NL definition, used at Steps 2 and 4 for lifting; 'simplicial set' means the classical Hom-simplicial sets of 08Q9, not dropped ∞/model-category machinery. I accept both."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-b1648fc0f (reviewer sub-agent of L); spot-checked: This is the fourth delivery of the batch-5 re-split. The heads d9fbc55cd481, b1301e0ffa57 and da74c14ddc85 each got a reader PASS, and landing L then refused each only because the side completion was never promoted to the live DAG (svc.log 15:25, 19:35, 00:18). Compared with da74c14ddc85, the three new nodes are byte-identical. The item changes only one Step 3 sentence, which now names c=H(v^op,1) and the coefficient identification. That wording is correct: in the simplicial-computation naturality clause, take u=v^op, θ=id, Q=U_•, Q'=const C and k equal to N2's iso v^+U_•≅const C, which gives a_C∘s(F(k))=H(v^op,1)∘a_U. I re-read everything else independently. The statement is verbatim and matches Stacks 08QV with 08Q9 module coefficients; v=Q⊗_P B agrees with def-trf-polynomial-presentation-pair-categories, and the result is stated in D(R). Step 1: resolution-coherence gives polynomial terms, surjectivity and the quasi-isomorphism, which are N1's hypotheses. Step 2: N2 receives both trivial Kan fibrations from N1. Step 3: C→C is terminal in 𝒟^op, so Hom(T, const C) is a point. Step 4: N3 gives ε_D as a quasi-isomorphism and ε_D∘c as (W,x)↦F(C→vW)x, with the right variance. N1 is true: P[E] is the direct sum of copies of P over N^(E), homology commutes with direct sums, and 08P1 applies; E empty or infinite, B=0 and non-flat A→B are all fine. N2 matches 08QV (cotangent.tex lines 1247–1270): Hom(W,U_n) is ∏F_s×∏F'_t, fibres of trivial Kan fibrations and their products are trivial Kan, and 08NS gives the homotopy equivalence; empty and infinite generator sets are fine. N3: d_K=(-1)^n d_B, so λ_n=(-1)^{n(n+1)/2} is a chain isomorphism with λ_0=1; ε is a chain map because maps to t are unique, and it is a quasi-isomorphism because t is terminal. Re-split: old Steps 2–3 went to N1, old Step 4 and the U construction to N2, the old signs and Steps 6–7 to N3, and old Step 5 to item Step 3. Nothing was dropped, and the nodes are of comparable size. Duplicates: lem-trf-polynomial-augmentation-boundary (Q18) overlaps only N1's E=∅ clause (advisory). Not duplicates: the preorder bar node, the one-stage presentation-homology node, and the comma-evaluation node, which depends on this item. No SGA source is used. Route pivot: def-weil-pbc-trivial-kan-fibration in N1 and N2 is the classical 08NL lifting definition (status mathlib), so I accept it. 'Simplicial set' in the item, N1 and N2 means the ordinary 08Q9 Hom and underlying simplicial sets, so I accept it. Accepted tool_use: lem-weil-pbc-trivial-kan-homotopy-equivalence (08NS), now used only by N2's planned proof. No fixes. Maintainer note: the return is the L promotion, and another re-delivery will not fix it."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentLowerShriekPolynomialTop",
+  "declaration": "Algebra.PolynomialPresentation.polynomial_top_evaluation",
+  "declarations": [
+   "Algebra.PolynomialPresentation.IsEvaluationAugmentation",
+   "Algebra.PolynomialPresentation.polynomial_top_evaluation"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentLowerShriekPolynomialTop.lean",
+  "statement": "theorem polynomial_top_evaluation (I A B R : Type u) [Infinite I] [CommRing A] [CommRing B] [Algebra A B] [CommRing R] (_boundA : Nonempty (A ↪ I)) (_boundB : Nonempty (B ↪ I)) (E : Set I) (system : CategoryColimitBarSystem.{u}) (F : (Target I B E)ᵒᵖᵒᵖ ⥤ ModuleCat.{u} R) : ∃ (εD : (system.models (Target I B E)ᵒᵖ R).bar.obj F ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (F.obj (op (op (topTarget I B E))))) (εP : (system.models (Pair I A B E)ᵒᵖ R).bar.obj ((baseChange I A B E).op.op ⋙ F) ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (F.obj (op (op (topTarget I B E))))), IsEvaluationAugmentation (system.models (Target I B E)ᵒᵖ R) F (F.obj (op (op (topTarget I B E)))) (fun T ↦ F.map (toTop I B E T.unop).op.op) εD ∧ IsEvaluationAugmentation (system.models (Pair I A B E)ᵒᵖ R) ((baseChange I A B E).op.op ⋙ F) (F.obj (op (op (topTarget I B E)))) (fun W ↦ F.map (toTop I B E W.unop.target).op.op) εP ∧ εP = system.map (baseChange I A B E).op (RingHom.id R) (𝟙 ((baseChange I A B E).op.op ⋙ F)) ≫ εD ∧ IsIso (DerivedCategory.Q.map εP)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theorem uses the canonical bar models of lem-trf-derived-colimit-bar. Its existential augmentations are uniquely specified by all generator formulas and all nonzero-degree components, with the chain-level reindexing factorization and derived IsIso conclusion. No object is selected from a mere existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdeaf5ab3",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Clause-by-clause check of polynomial_top_evaluation against the node and Stacks 08QU/08QV, 08PH, 08Q9. Pair/PairHom matches the node's commuting augmented pairs: upperBase makes upper an A-algebra map over lower, and baseChange is uniquely determined and always exists. Target is the augmented polynomial B-algebras, topTarget=(E,X) is terminal before opposites, v=Q⊗_P B=B[T], and v^{-1}F is precomposition. The bound is infinite with A,B↪I and variable sets ⊆ I; R in universe u is inherited from lem-trf-derived-colimit-bar. εP/εD are fully pinned by generator restrictions and vanish outside degree 0; the chain-level factorization goes through the canonical system.map; the conclusion is IsIso in D(R). Edge cases (E empty, empty S/T, infinite sets, B=0, R=0, F=0, non-surjective A→B) are all allowed. Statements verbatim, declarations present; item changes only lean and stmt_deps, adding only the new def node (§1(A)); no hollow defs, no duplicate notion found, docstrings carry the source and 7 proof steps. Not recompiled (no change). Advisory: redundant public import of RingedSiteModules. Maintainer note: TrivialKanFibration module is recorded but absent from side-live; stage 3 needs it."
+ }
 }

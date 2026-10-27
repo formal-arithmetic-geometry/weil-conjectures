@@ -1,0 +1,108 @@
+{
+ "id": "def-sfb-cofactor-local-data",
+ "kind": "definition",
+ "title": "Cofactor target, normalized scalar comparisons and local formula predicate",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring, $P,Q$ be $A$-modules, $c\\geq0$, and $u:P\\to Q$ be $A$-linear. Write $V^\\vee=\\operatorname{Hom}_A(V,A)$. Using exterior powers [def-weil-pbc-exterior-algebra] and tensor products [def-weil-pbc-module-tensor-product], define $D_{P,Q,c}=(\\bigwedge_A^cP)^\\vee\\otimes_A\\bigwedge_A^{c+1}Q$. For an ordered basis $p=(p_1,\\ldots,p_c)$ of $P$ and $v\\in Q$, define its cofactor basis value to be $(p_1\\wedge\\cdots\\wedge p_c)^\\vee\\otimes(u(p_1)\\wedge\\cdots\\wedge u(p_c)\\wedge v)$, with the dual basis wedge functional defined by the determinant pairing of the coordinate forms.\nFor a commutative $A$-algebra $B$, put $P_B=B\\otimes_AP$, $Q_B=B\\otimes_AQ$ and $u_B=B\\otimes_Au$. A normalized cofactor scalar comparison consists of $B$-linear isomorphisms $s:B\\otimes_A\\bigwedge_A^cP\\to\\bigwedge_B^cP_B$, $t:B\\otimes_A\\bigwedge_A^{c+1}Q\\to\\bigwedge_B^{c+1}Q_B$, $d:B\\otimes_A(\\bigwedge_A^cP)^\\vee\\to(\\bigwedge_B^cP_B)^\\vee$, $L:B\\otimes_AD_{P,Q,c}\\to D_{P_B,Q_B,c}$ and $K:B\\otimes_A(Q/u(P))\\to Q_B/u_B(P_B)$, with these normalization equations: $s(b\\otimes\\bigwedge_i x_i)=b\\bigwedge_i(1\\otimes x_i)$ and likewise $t$ on $(c+1)$-fold wedges; $d(b\\otimes\\lambda)(s(b'\\otimes x))=bb'\\lambda(x)$; $L(b\\otimes(\\lambda\\otimes y))=d(b\\otimes\\lambda)\\otimes t(1\\otimes y)$; and $K(b\\otimes\\bar v)=\\overline{b\\otimes v}$. Scalars from $A$ in these equations are mapped to $B$ by its algebra map. This is a type of specified data, not an assertion that such comparisons exist for arbitrary modules and algebras.\nGiven such comparisons $e_S$ for every localization $B=S^{-1}A$ [def-weil-pbc-module-localization] and an $A$-linear $w:Q/u(P)\\to D_{P,Q,c}$, define the local cofactor predicate to mean that for every $S$, every ordered basis $p$ of $P_B$ of length $c$, and every $v\\in Q_B$, one has $L_S((B\\otimes_Aw)(K_S^{-1}(\\bar v)))$ equal to the cofactor basis value of $(u_B,p,v)$. The definition includes the empty basis, the zero ring and noninjective $u$; it imposes no finite-projectivity, rank or existence assertion.",
+ "stmt_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y (lemma-determinant), displayed cofactor basis formula; algebra.tex Tags 0C6F, 00DL, 00CS, canonical exterior, dual and cokernel scalar comparisons. Definition interface extracted from lem-sfb-cofactor-local-descent as required by H2."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CofactorTarget|CofactorScalarComparison|IsLocalCofactor|cofactorBasisValue [LinearAlgebra]",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib definition bundle; the existing four declarations in CofactorLocalDescent are extracted unchanged under the maintainer return."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofactor map quotient of a module by an image to dual exterior power tensor exterior power and canonical scalar comparison",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exteriorPower.toTensorPower\", \"Subspace.quotDualCoannihilatorToDual_bijective\", \"ModuleCat.exteriorPower.mk\", \"ModuleCat.exteriorPower.iso₀\", \"exteriorPower.ιMulti\", \"rTensor.toFun\", \"Submodule.quotDualCoannihilatorToDual\", \"ModuleCat.exteriorPower.map\"], \"digest\": \"b2308055e2aad235\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib definition bundle; the existing four declarations in CofactorLocalDescent are extracted unchanged under the maintainer return."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofactor local formula normalized exterior dual tensor and cokernel scalar extension comparisons",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exteriorPower.pairingDual_ιMulti_ιMulti\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"tensorKaehlerQuotKerSqEquiv\", \"Algebra.Generators.H1Cotangent.δAux\", \"tensorKaehlerQuotKerSqEquiv_tmul_D\", \"Algebra.Generators.cotangentCompAwaySec\", \"tensorKaehlerQuotKerSqEquiv_symm_tmul_D\", \"KaehlerDifferential.D_tensorProductTo\"], \"digest\": \"5bce4295c41099c1\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib definition bundle; the existing four declarations in CofactorLocalDescent are extracted unchanged under the maintainer return."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"CofactorTarget|CofactorScalarComparison|IsLocalCofactor|cofactorBasisValue\" lean/WeilConjectures lean/Sheaf; rg -l \"CofactorTarget|CofactorScalarComparison|IsLocalCofactor|cofactor.*(predicate|comparison data)\" dag/nodes; python3 tools/blueprint_refs.py search cofactor",
+   "results": "No WeilConjectures declarations. Sheaf has exactly the four definitions in CofactorLocalDescent and their uses in that file. Only lem-sfb-cofactor-local-descent carries them in the DAG; no definition node. No blueprint nodes match cofactor. Move these definitions, retaining their names and data; do not create a second copy.",
+   "date": "2026-10-24",
+   "verdict": "Definition ownership extraction required by H2, not a new mathematical notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-surjective-cofactor-compatibility",
+  "date": "2026-10-24",
+  "group": "Q120"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; algebra input for invariance of the conormal cofactor map under the determinant comparisons of two presentations; returned proof steps 4--5: acyclic kernel bases, normalized determinant generator, kernel-correction wedge calculation and local-to-global equality; definition data for the cofactor target, scalar comparisons and local formula hypotheses",
+   "via": [
+    "lem-sfb-surjective-cofactor-compatibility",
+    "lem-sfb-two-term-cofactor-naturality",
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CofactorLocalData",
+  "declaration": "Module.IsLocalCofactor",
+  "declarations": [
+   "Module.CofactorTarget",
+   "Module.cofactorBasisValue",
+   "Module.CofactorScalarComparison",
+   "Module.IsLocalCofactor"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/CofactorLocalData.lean",
+  "statement": "def IsLocalCofactor {A : Type u} [CommRing A]\n    {P : Type v} {Q : Type w} [AddCommGroup P] [Module A P]\n    [AddCommGroup Q] [Module A Q] (u : P →ₗ[A] Q) (c : ℕ)\n    (e : ∀ S : Submonoid A, CofactorScalarComparison (Localization S) u c)\n    (w : (Q ⧸ LinearMap.range u) →ₗ[A] CofactorTarget A P Q c) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Moves the four existing definitions unchanged out of CofactorLocalDescent, which publicly re-exports this module. There are no duplicate declarations and no postponed theorem in this definition module."
+ }
+}

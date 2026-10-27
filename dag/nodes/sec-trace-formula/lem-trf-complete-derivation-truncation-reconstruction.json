@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-complete-derivation-truncation-reconstruction",
+ "kind": "statement",
+ "title": "Shifted truncation reconstruction from a complete differential generator module",
+ "statement": "Let $k$ be a commutative ring, $R$ a commutative $k$-algebra, $\\mathfrak m\\subseteq R$ an ideal, and $N$ an $R$-module. Assume the canonical map $\\iota:N\\to\\varprojlim_{r\\geq1}N/\\mathfrak m^rN$, $z\\mapsto(z\\bmod\\mathfrak m^rN)_r$, is an isomorphism. Let $\\delta:R\\to N$ be a $k$-derivation [def-weil-pbc-kahler-differentials], and assume $N$ is generated over $R$ by $\\delta(x_1),\\ldots,\\delta(x_d)$ for some $d\\geq0$ and $x_i\\in R$. For $r\\geq1$ set $R_r=R/\\mathfrak m^r$, $C_r=\\Omega_{R_r/k}$, with quotient-induced transition $\\tau_r:C_{r+1}\\to C_r$, and $C=\\varprojlim_{r\\geq1}C_r=\\widehat\\Omega_{R/k,\\mathfrak m}$ [def-trf-continuous-kahler-differentials]. Suppose given $R$-linear maps $\\phi_r:N\\to C_r$ with $\\tau_r\\phi_{r+1}=\\phi_r$ and $\\phi_r\\delta(x)=\\mathrm d(x\\bmod\\mathfrak m^r)$ for every $x\\in R$. Then $\\delta(\\mathfrak m^{r+1})\\subseteq\\mathfrak m^rN$ for every $r\\geq1$, and there is a unique $R$-linear map $\\eta_r:C_{r+1}\\to N/\\mathfrak m^rN$ with $\\eta_r(\\mathrm d(x\\bmod\\mathfrak m^{r+1}))=\\delta(x)\\bmod\\mathfrak m^rN$ for all $x\\in R$. Writing $\\rho_r:N/\\mathfrak m^{r+1}N\\to N/\\mathfrak m^rN$ and $\\pi_r:N\\to N/\\mathfrak m^rN$ for quotient maps, one has $\\rho_r\\eta_{r+1}=\\eta_r\\tau_{r+1}$ and $\\eta_r\\phi_{r+1}=\\pi_r$. Each $\\phi_r$ induces $\\bar\\phi_r:N/\\mathfrak m^rN\\to C_r$, and $\\bar\\phi_r\\eta_r=\\tau_r$. The map $\\Phi:N\\to C$, $z\\mapsto(\\phi_r(z))_r$, is an isomorphism with inverse $\\Psi((c_r)_r)=\\iota^{-1}((\\eta_r(c_{r+1}))_r)$; in particular $\\Psi\\Phi=\\mathrm{id}_N$ and $\\Phi\\Psi=\\mathrm{id}_C$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent auxiliary reconstruction lemma based on Tag 02HQ (lemma-differential-mod-power-ideal), the Leibniz estimate for ideal powers, and Tag 00RO (lemma-universal-omega), the universal property. Extracts returned conormal proof Steps 5-8, including transition compatibility and both inverse identities; the original full argument is retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-trf-continuous-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Fix $r\\geq1$. An element of $\\mathfrak m^{r+1}$ is a finite sum of terms $a_0a_1\\cdots a_{r+1}$ with $a_0\\in R$ and $a_i\\in\\mathfrak m$ for $i>0$. Additivity and repeated Leibniz expansion give $\\delta(a_0a_1\\cdots a_{r+1})=(a_1\\cdots a_{r+1})\\delta(a_0)+\\sum_{i=1}^{r+1}a_0\\prod_{1\\leq j\\leq r+1,\\,j\\ne i}a_j\\,\\delta(a_i)$. Each coefficient lies in $\\mathfrak m^r$, so each summand lies in $\\mathfrak m^rN$. Summing proves $\\delta(\\mathfrak m^{r+1})\\subseteq\\mathfrak m^rN$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HQ (lemma-differential-mod-power-ideal), Leibniz estimate expanded for a module-valued derivation"
+   }
+  },
+  {
+   "text": "Put $Q_r=N/\\mathfrak m^rN$. The rule $D_r(\\bar x)=\\delta(x)\\bmod\\mathfrak m^rN$ on $R_{r+1}$ is well defined by Step 1: two representatives differ by an element killed by the reduced derivation. It is additive, vanishes on $k$, and satisfies $D_r(\\bar x\\bar y)=\\bar xD_r(\\bar y)+\\bar yD_r(\\bar x)$ by reducing the corresponding equations for $\\delta$. The scalar action on $Q_r$ factors through $R_{r+1}$ because $\\mathfrak m^{r+1}N\\subseteq\\mathfrak m^rN$. Apply the universal bijection of [def-weil-pbc-kahler-differentials] to this $k$-derivation: it gives a unique $R_{r+1}$-linear $\\eta_r:C_{r+1}\\to Q_r$ with the required values on $\\mathrm d\\bar x$. This is also uniqueness among $R$-linear maps, since both module actions factor through the surjection $R\\to R_{r+1}$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), applied to the explicitly descended derivation"
+   }
+  },
+  {
+   "text": "For each of the given generators $\\delta(x_i)$ of $N$, the assumed formula for $\\phi_{r+1}$ and the defining formula for $\\eta_r$ give $\\eta_r\\phi_{r+1}(\\delta(x_i))=\\delta(x_i)\\bmod\\mathfrak m^rN=\\pi_r(\\delta(x_i))$. Every $z\\in N$ is a finite sum $\\sum_{i=1}^d a_i\\delta(x_i)$, so linearity gives $\\eta_r\\phi_{r+1}(z)=\\pi_r(z)$. This also applies when $d=0$, since then $N=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent calculation from the generation hypothesis and the defining formulas"
+   }
+  },
+  {
+   "text": "The $R$-action on $C_r$ factors through $R_r$, so $\\mathfrak m^rC_r=0$. If $z\\in\\mathfrak m^rN$, write it as a finite sum of $az'$ with $a\\in\\mathfrak m^r$; $R$-linearity gives $\\phi_r(z)=\\sum a\\phi_r(z')=0$. Thus $\\bar\\phi_r([z])=\\phi_r(z)$ is well defined and linear on $Q_r$. For $x\\in R$ the composite $\\bar\\phi_r\\eta_r$ sends $\\mathrm d(x\\bmod\\mathfrak m^{r+1})$ to $\\phi_r\\delta(x)=\\mathrm d(x\\bmod\\mathfrak m^r)$, just as $\\tau_r$ does. The explicit free-symbol quotient in [def-weil-pbc-kahler-differentials] shows that these differentials generate $C_{r+1}$ over $R_{r+1}$ and hence over $R$ (all scalars lift to $R$). Consequently $\\bar\\phi_r\\eta_r=\\tau_r$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega) and the preceding free-symbol construction; agent quotient calculation"
+   }
+  },
+  {
+   "text": "Both $\\rho_r\\eta_{r+1}$ and $\\eta_r\\tau_{r+1}$ have domain $C_{r+2}$ and codomain $Q_r$. On $\\mathrm d(x\\bmod\\mathfrak m^{r+2})$ they both take the value $\\delta(x)\\bmod\\mathfrak m^rN$, by the definitions of the quotient and differential transition maps. The differential-symbol generation in [def-weil-pbc-kahler-differentials] therefore gives $\\rho_r\\eta_{r+1}=\\eta_r\\tau_{r+1}$. In particular for $c=(c_r)_r\\in C$, $\\rho_r\\eta_{r+1}(c_{r+2})=\\eta_r\\tau_{r+1}(c_{r+2})=\\eta_r(c_{r+1})$, so $(\\eta_r(c_{r+1}))_r$ is a compatible element of $\\varprojlim_r Q_r$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RO (lemma-universal-omega), generator test for the two displayed transition composites"
+   }
+  },
+  {
+   "text": "By [def-trf-continuous-kahler-differentials] the limit $C$ consists of compatible tuples with componentwise module operations. The assumed compatibility of $\\phi_r$ therefore makes $\\Phi(z)=(\\phi_r(z))_r$ an $R$-linear map to $C$. Step 5 and the assumed isomorphism $\\iota$ define the $R$-linear map $\\Psi(c)=\\iota^{-1}((\\eta_r(c_{r+1}))_r)$. For $z\\in N$, the $r$th coordinate of $\\iota\\Psi\\Phi(z)$ equals $\\eta_r\\phi_{r+1}(z)=\\pi_r(z)$ by Step 3; injectivity of $\\iota$ gives $\\Psi\\Phi(z)=z$. Conversely the definition of $\\Psi$ gives $\\pi_r\\Psi(c)=\\eta_r(c_{r+1})$. Thus $\\phi_r\\Psi(c)=\\bar\\phi_r\\pi_r\\Psi(c)=\\bar\\phi_r\\eta_r(c_{r+1})=\\tau_r(c_{r+1})=c_r$ by Step 4 and compatibility of $c$. Equality of tuples gives $\\Phi\\Psi(c)=c$. These two identities prove that $\\Phi$ is an isomorphism with exactly the stated inverse.",
+   "uses": [
+    "def-trf-continuous-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md",
+    "place": "Agent auxiliary inverse-limit calculation on the inherited completed-Jacobian branch; not asserted by the current contracting-correspondence proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-trf-continuous-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit reconstruction from Tag 00RO (lemma-universal-omega) and the Leibniz calculation in Tag 02HQ (lemma-differential-mod-power-ideal); Stacks does not assert the full reconstruction lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derivation into an adically complete module generated by its values identifies that module with the inverse limit of differentials of ideal power quotients when compatible differential maps exist",
+   "results": "{\"t\": \"2026-10-22T06:45:06Z\", \"tool\": \"leanfinder\", \"query\": \"A derivation into an adically complete module generated by its values identifies that module with the inverse limit of differentials of ideal power quotients when compatible differential maps exist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"liftOfDerivationToSquareZero_mk_apply'\", \"derivationToSquareZeroEquivLift\", \"derivationToSquareZeroOfLift\", \"liftOfDerivationToSquareZero_mk_apply\", \"AdicCompletion.of_apply\", \"AdicCompletion.mk\", \"AdicCompletion.of\", \"Hausdorffification.of\"], \"digest\": \"d3e0b1811d0463c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary universal derivations or completion coordinates, not the shifted differential reconstruction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|MvPowerSeries.*Kaehler|derivation.*[Aa]dic",
+   "results": "{\"t\": \"2026-10-22T06:45:09Z\", \"tool\": \"grep\", \"query\": \"continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|MvPowerSeries.*Kaehler|derivation.*[Aa]dic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary universal derivations or completion coordinates, not the shifted differential reconstruction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, AdicCompletion",
+   "results": "{\"t\": \"2026-10-22T06:45:10Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary universal derivations or completion coordinates, not the shifted differential reconstruction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "reconstruct complete module from a derivation and compatible maps to Kahler differentials of adic truncations",
+   "results": "{\"t\": \"2026-10-22T06:45:22Z\", \"tool\": \"leansearch\", \"query\": \"reconstruct complete module from a derivation and compatible maps to Kahler differentials of adic truncations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationQuotKerSq\", \"Derivation.liftKaehlerDifferential\", \"KaehlerDifferential.map_D\", \"ModuleCat.Derivation.desc_d\", \"KaehlerDifferential.linearMapEquivDerivation_apply_apply\", \"ModuleCat.Derivation.desc\", \"CommRingCat.KaehlerDifferential.D\", \"KaehlerDifferential.D\"], \"digest\": \"2e8604c00ebbcb5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary universal derivations or completion coordinates, not the shifted differential reconstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse isomorphism for continuous Kahler differentials using derivations at quotient powers r plus one and completeness of the target module",
+   "results": "{\"t\": \"2026-10-22T06:45:40Z\", \"tool\": \"leanfinder\", \"query\": \"inverse isomorphism for continuous Kahler differentials using derivations at quotient powers r plus one and completeness of the target module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.quotKerTotalEquiv_symm_apply\", \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"KaehlerDifferential.linearMapEquivDerivation_symm_apply\", \"KaehlerDifferential.endEquivDerivation'\", \"derivationQuotKerSq_mk\", \"tensorKaehlerQuotKerSqEquiv_symm_tmul_D\", \"derivationQuotKerSq\", \"Derivation.liftKaehlerDifferential_apply\"], \"digest\": \"7dcb504ae3bd3ac5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary universal derivations or completion coordinates, not the shifted differential reconstruction theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBaseChange_surjective|exact_kerCotangentToTensor_mapBaseChange|liftKaehlerDifferential|AdicCompletion.of_apply",
+   "results": "{\"t\": \"2026-10-22T06:46:13Z\", \"tool\": \"grep\", \"query\": \"mapBaseChange_surjective|exact_kerCotangentToTensor_mapBaseChange|liftKaehlerDifferential|AdicCompletion.of_apply\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/TensorProduct.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\", \"Mathlib/RingTheory/Kaehler/Polynomial.lean\"], \"digest\": \"34ac2cec1a998be8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary universal derivations or completion coordinates, not the shifted differential reconstruction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete module generated by values of a derivation is the inverse limit of Kahler differentials of ideal power quotients given compatible differential maps",
+   "results": "{\"t\": \"2026-10-23T09:48:14Z\", \"tool\": \"leanfinder\", \"query\": \"A complete module generated by values of a derivation is the inverse limit of Kahler differentials of ideal power quotients given compatible differential maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"derivationQuotKerSq\", \"KaehlerDifferential.endEquivDerivation'\", \"Derivation.liftKaehlerDifferential_apply\", \"derivationQuotKerSq_mk\", \"KaehlerDifferential.derivationQuotKerTotal\", \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"Algebra.Extension.toKaehler\", \"KaehlerDifferential.derivationQuotKerTotal_apply\"], \"digest\": \"be452d6e7f629969\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide universal derivations, ordinary presentations or completion lifts, not shifted differential reconstruction and both inverse identities"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|derivation.*[Aa]dic",
+   "results": "{\"t\": \"2026-10-23T09:49:36Z\", \"tool\": \"grep\", \"query\": \"continuous.*[Dd]ifferential|[Dd]ifferential.*[Cc]omplet|derivation.*[Aa]dic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide universal derivations, ordinary presentations or completion lifts, not shifted differential reconstruction and both inverse identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete module reconstructed from compatible differential maps of adic quotient rings",
+   "results": "{\"t\": \"2026-10-23T09:49:36Z\", \"tool\": \"leansearch\", \"query\": \"Complete module reconstructed from compatible differential maps of adic quotient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.module\", \"AdicCompletion\", \"IsAdicComplete.mk_lift\", \"IsAdicComplete.lift\", \"IsAdicComplete.of_comp_lift\", \"AdicCompletion.lift.congr_simp\", \"AdicCompletion.map_mk\", \"AdicCompletion.submodule\"], \"digest\": \"d1731ebf6ecc1a1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide universal derivations, ordinary presentations or completion lifts, not shifted differential reconstruction and both inverse identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T09:49:36Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, AdicCompletion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide universal derivations, ordinary presentations or completion lifts, not shifted differential reconstruction and both inverse identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shifted inverse limits of quotient Kahler differentials identify a complete module using a spanning derivation and compatible maps",
+   "results": "{\"t\": \"2026-10-23T09:51:04Z\", \"tool\": \"leanfinder\", \"query\": \"Shifted inverse limits of quotient Kahler differentials identify a complete module using a spanning derivation and compatible maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.derivationQuotKerTotal\", \"BDeRhamPlus\", \"KaehlerDifferential.quotKerTotalEquiv_symm_comp_D\", \"KaehlerDifferential.quotKerTotalEquiv_symm_apply\", \"KaehlerDifferential.endEquivAuxEquiv\", \"derivationQuotKerSq_mk\", \"Algebra.Presentation.differentials.comm₂₃\", \"KaehlerDifferential.derivationQuotKerTotal_lift_comp_linearCombination\"], \"digest\": \"99da20cfc601718e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide universal derivations, ordinary presentations or completion lifts, not shifted differential reconstruction and both inverse identities"
+  },
+  {
+   "tool": "grep",
+   "query": "def liftKaehlerDifferential|linearMapEquivDerivation|derivationQuotKerTotal|quotKerTotalEquiv|IsAdicComplete.lift|def lift|mk_lift",
+   "results": "{\"t\": \"2026-10-23T09:53:55Z\", \"tool\": \"grep\", \"query\": \"def liftKaehlerDifferential|linearMapEquivDerivation|derivationQuotKerTotal|quotKerTotalEquiv|IsAdicComplete.lift|def lift|mk_lift\", \"sub\": \"RingTheory/Kaehler\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\"], \"digest\": \"9d63cf94163e857d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide universal derivations, ordinary presentations or completion lifts, not shifted differential reconstruction and both inverse identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-power-series-continuous-conormal",
+  "date": "2026-10-22",
+  "group": "Q31"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The Jacobian-cokernel/differential comparison in the first proof paragraph of the pointwise nodal ingredient (Curves 0C4D), specifically the quotient/conormal passage for continuous differentials. Extracted argument: Agent auxiliary reconstruction lemma based on Tag 02HQ (lemma-differential-mod-power-ideal), the Leibniz estimate for ideal powers, and Tag 00RO (lemma-universal-omega), the universal property. Extracts returned conormal proof Steps 5-8, including transition compatibility and both inverse identities; the original full argument is retained in report.md.",
+   "via": [
+    "lem-trf-formal-power-series-continuous-conormal",
+    "lem-trf-formal-power-series-continuous-differentials",
+    "lem-trf-completed-jacobian-differentials",
+    "lem-trf-separable-closed-point-formal-presentation",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-complete-derivation-truncation-reconstruction",
+  "worker": "stage1",
+  "summary": "Expanded the shifted-quotient reconstruction into six explicit steps: power estimate, descended universal derivation, generator identity, quotient factorization, transition identity and coordinatewise inverse identities. Reuses the existing universal differential and concrete inverse-limit definitions; no new nodes or statement changes.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry via the formal-power-series continuous-conormal comparison. Realizes the extracted original conormal Steps 5-8 (Q31 report) on the old Jacobian/cotangent auxiliary branch. The latest ancestor proof is a contracting-correspondence argument and contains no Jacobian paragraph; this ancestry mismatch is reported, not replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-64c9ca48e",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-64c9ca48e (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full; I made no fixes and the delivery has no new nodes. Shape: one commit that changes only the item and its report. The statement and stmt_deps are unchanged, proof_deps equals the union of the step uses, every step has a source, the three kinds of Mathlib search are recorded, and no SGA source is cited. Both cited definitions are used through their statements, not their proofs. def-weil-pbc-kahler-differentials states the universal Hom/Der bijection and the free-symbol quotient, which shows that the dx generate. def-trf-continuous-kahler-differentials defines the limit as compatible tuples, with E_n=C_{n+1} and t_n=tau_{n+1}, matching the item's r>=1 indexing. Stacks sources: tags/tags maps 00RO to algebra-lemma-universal-omega (algebra.tex line 33856) and 02HQ to algebra-lemma-differential-mod-power-ideal (line 34194); the 02HQ Leibniz estimate d(I^{n+1}) in I^n Omega is Step 1. Steps: 1 (Leibniz coefficients lie in m^r) is correct. 2: Q_r is an R_{r+1}-module, D_r is well defined by Step 1, the universal property is applied to k->R_{r+1}, and R-linear equals R_{r+1}-linear because the quotient map is onto. 3 (check on the generators delta(x_i)), 4 (m^r C_r=0 so phi_r descends; generator test gives phi-bar_r eta_r=tau_r), 5 (tau_{r+1} index correct; eta_r(c_{r+1}) is a compatible tuple) and 6 (Psi Phi=id by injectivity of iota; Phi Psi=id coordinatewise) all check, with every domain and codomain verified. Edge cases tested: d=0, m=0, m=R, and R=k[[t]] with N=R dt in characteristic 0 and characteristic p. No Noetherian or finite-generation hypothesis is needed. Duplicates: lem-trf-adic-differential-quotient-interleaving and the 02HQ tensor nodes are different statements. Only definitions are cited, so there is no route issue and no tool_uses. The inherited blueprint.from.place mismatch with the current lem-trf-local-term-locality comes from Q31's creation of the node and is disclosed in the report; I left it as is."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteDerivationTruncationReconstruction",
+  "declaration": "KaehlerDifferential.completeDerivationTruncationReconstruction",
+  "file": "lean/Sheaf/RingTheory/CompleteDerivationTruncationReconstruction.lean",
+  "statement": "theorem completeDerivationTruncationReconstruction (k : Type u) (R : Type v) (N : Type w) [CommRing k] [CommRing R] [Algebra k R] [AddCommGroup N] [Module R N] [Module k N] [IsScalarTower k R N] (m : Ideal R) (hcomplete : Function.Bijective (AdicCompletion.of m N)) (δ : Derivation k R N) (d : ℕ) (x : Fin d → R) (hgen : Submodule.span R (Set.range (fun i : Fin d ↦ δ (x i))) = ⊤) (φ : ∀ n : ℕ, N →ₗ[R] KaehlerDifferential k (R ⧸ m ^ (n + 1))) (hcompat : ∀ n : ℕ, (adicTransition k R m n).comp (φ (n + 1)) = φ n) (hφ : ∀ (n : ℕ) (a : R), φ n (δ a) = D k (R ⧸ m ^ (n + 1)) (Ideal.Quotient.mk _ a)) : (∀ (n : ℕ) (a : R), a ∈ m ^ (n + 2) → δ a ∈ (m ^ (n + 1) • ⊤ : Submodule R N)) ∧ ∃ η : ∀ n : ℕ, KaehlerDifferential k (R ⧸ m ^ (n + 2)) →ₗ[R] N ⧸ (m ^ (n + 1) • ⊤ : Submodule R N), (∀ (n : ℕ) (a : R), η n (D k (R ⧸ m ^ (n + 2)) (Ideal.Quotient.mk _ a)) = (m ^ (n + 1) • ⊤ : Submodule R N).mkQ (δ a)) ∧ (∀ (n : ℕ) (f : KaehlerDifferential k (R ⧸ m ^ (n + 2)) →ₗ[R] N ⧸ (m ^ (n + 1) • ⊤ : Submodule R N)), (∀ a : R, f (D k (R ⧸ m ^ (n + 2)) (Ideal.Quotient.mk _ a)) = (m ^ (n + 1) • ⊤ : Submodule R N).mkQ (δ a)) → f = η n) ∧ (∀ n : ℕ, (Submodule.factorPowSucc m N (n + 1)).comp (η (n + 1)) = (η n).comp (adicTransition k R m (n + 1))) ∧ (∀ n : ℕ, (η n).comp (φ (n + 1)) = (m ^ (n + 1) • ⊤ : Submodule R N).mkQ) ∧ ∃ φbar : ∀ n : ℕ, (N ⧸ (m ^ (n + 1) • ⊤ : Submodule R N)) →ₗ[R] KaehlerDifferential k (R ⧸ m ^ (n + 1)), (∀ n : ℕ, (φbar n).comp (m ^ (n + 1) • ⊤ : Submodule R N).mkQ = φ n) ∧ (∀ n : ℕ, (φbar n).comp (η n) = adicTransition k R m n) ∧ ∃ (Φ : N →ₗ[R] Continuous k R m) (Ψ : Continuous k R m →ₗ[R] N), (∀ (z : N) (n : ℕ), (Φ z).val n = φ n z) ∧ (∀ c : Continuous k R m, ∃ q : AdicCompletion m N, (∀ n : ℕ, q.val (n + 1) = η n (c.val (n + 1))) ∧ Ψ c = (LinearEquiv.ofBijective (AdicCompletion.of m N) hcomplete).symm q) ∧ Ψ.comp Φ = LinearMap.id ∧ Φ.comp Ψ = LinearMap.id",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4877b0c0",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Fresh delivery (live lean null, no name collision). Every clause checked with Lean n = node r-1: hcomplete = bijectivity of the canonical AdicCompletion.of (index-0 quotient is zero), δ/hgen/φ/hcompat/hφ match; δ(m^(n+2)) ⊆ m^(n+1)N; η n : Ω(R/m^(n+2)) → N/m^(n+1)N with values plus uniqueness among R-linear maps; ρ via Submodule.factorPowSucc m N (n+1) and adicTransition (n+1), types checked; η∘φ(n+1)=mkQ; φbar pinned by φbar∘mkQ=φ, φbar∘η=adicTransition n; Φ coordinates pinned; Ψ = ofBijective.symm q with q.val(n+1)=η n(c.val(n+1)) = η_r(c_{r+1}), q fully pinned; both inverse identities stated. No extra hypotheses, independent universes u v w, statement verbatim, single sorry theorem, no defs, source and blueprint docstrings, stmt_deps unchanged and used, node unchanged except lean, report has Worker report and Second reading sections. No findings; no compile needed (no FIX)."
+ }
+}

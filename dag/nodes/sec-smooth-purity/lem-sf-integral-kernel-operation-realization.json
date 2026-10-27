@@ -1,0 +1,156 @@
+{
+ "id": "lem-sf-integral-kernel-operation-realization",
+ "kind": "statement",
+ "title": "Constructibility and recorded operations of the completed sheaf kernel",
+ "statement": "Fix a prime \\(\\ell\\), a finite extension \\(E/\\mathbf Q_\\ell\\), and its valuation ring \\(\\mathcal O_E\\). Let \\(k\\) be any field in which \\(\\ell\\) is invertible. Let \\(X\\) be a separated finite-type \\(k\\)-scheme, \\(i:Z\\hookrightarrow X\\) a closed immersion, and \\(j:U\\hookrightarrow X\\) its complementary open immersion over \\(k\\). With the actual completed-coefficient module unit \\(\\eta\\) and kernel of [def-sf-recollement-presentation-data], let \\(A\\) be their exact derived presentation from [lem-sf-exact-localization-triangle]. Both functors of \\(A\\) preserve the integral constructible property [def-weil-derived-complete-integral-detailed]. Their literal restrictions [lem-sf-recollement-full-subcategory-restriction] are linear over the canonical \\(\\mathcal O_E\\)-action. For every integral constructible \\(K\\) on \\(X\\), integral \\(j^*K\\) is constructible and the restricted open vertex is isomorphic to its recorded compact-support value; the underlying closed vertex is isomorphic to an object of the recorded integral direct-image tower for integral \\(i^*K\\) [def-weil-integral-rational-qbar-compact-support, def-weil-derived-direct-image]. This asserts no distinguished triangle or Hom vanishing.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral sheaf localization and coefficient passage, steps 3–10"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "lem-sf-exact-localization-triangle",
+  "lem-sf-recollement-full-subcategory-restriction",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The structure map to k sends the unit l to a unit in each residue field of X, U, and Z. The recorded integral pullback preservation theorem therefore supplies constructibility of integral j*K and i*K.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open-kernel compact-support comparison identifies the open vertex with the underlying recorded compact-support value. Transport its constructibility across that isomorphism.",
+   "uses": [
+    "lem-sf-integral-open-kernel-compact-support",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual termwise kernel sequence gives a distinguished ambient localization triangle. Since the intrinsic constructible subcategory is triangulated and contains the open vertex and K, it contains the closed vertex. No separate finite closed-image constructibility theorem is required.",
+   "uses": [
+    "lem-sf-exact-localization-triangle",
+    "lem-weil-integral-constructible-triangulated",
+    "def-sf-recollement-presentation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the monic kernel counit forces the module open functor to be O_E-linear, by cancellation; naturality of the epic closed unit does the same for the closed functor. Descend linearity through the derived localization, identifying its scalar action with the canonical constant-section action. The literal full-subcategory restrictions inherit linearity.",
+   "uses": [
+    "def-sf-recollement-presentation-data",
+    "lem-weil-integral-constructible-linear",
+    "lem-sf-recollement-full-subcategory-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the open comparison to the full constructible subcategory. Apply the closed-kernel Roos comparison to K and i*K, whose completeness was already supplied by their constructibility. These give the two vertices required by the original unchanged statement.",
+   "uses": [
+    "lem-sf-integral-open-kernel-compact-support",
+    "lem-sf-integral-closed-kernel-roos",
+    "lem-sf-recollement-full-subcategory-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-sf-integral-open-kernel-compact-support",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sf-exact-localization-triangle",
+  "def-sf-recollement-presentation-data",
+  "lem-weil-integral-constructible-linear",
+  "lem-sf-recollement-full-subcategory-restriction",
+  "lem-sf-integral-closed-kernel-roos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, integral coefficient case; Constructibility, first paragraph",
+  "note": "D2: complete Lean glue and scalar-action proof, with two separate normalized operation comparisons left as new items."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the closed restriction unit preserves derived complete constructible sheaves and equals extension by zero from the open complement",
+   "results": "Eight unrelated algebraic-geometry kernel and restriction results; no completed constructible localization comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the recorded geometric comparisons and exact sheaf sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES_distinguished",
+   "results": "DerivedCategory.triangleOfSES_distinguished in Mathlib.Algebra.Homology.DerivedCategory.ShortExact",
+   "date": "2026-10-25",
+   "verdict": "Used for the termwise short exact sequence."
+  },
+  {
+   "tool": "grep",
+   "query": "kernelSequence_exact|triangleOfSES_distinguished",
+   "results": "ShortComplex.kernelSequence_exact in Mathlib.Algebra.Homology.ShortComplex.Exact; DerivedCategory.triangleOfSES_distinguished in DerivedCategory.ShortExact.",
+   "date": "2026-10-25",
+   "verdict": "Use both for the actual kernel short exact sequence and its derived triangle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
+  "date": "2026-10-25",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Integral localization: identify ordinary immersion restriction with completed pullback, prove completeness and uniform constructible reductions of the open and closed vertices, and identify the recorded operation values.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfIntegralKernelRealization",
+  "file": "lean/Sheaf/Paper/SfIntegralKernelRealization.lean",
+  "declaration": "WeilConjectures.sfIntegralKernel_operation_realization",
+  "statement": "theorem sfIntegralKernel_operation_realization\n    (k : Type u) [Field k] (hk : IsUnit (l : k))\n    {Z U X : Scheme.{u}}\n    [X.Over (Spec (.of k))] [U.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]\n    [j.IsOver (Spec (.of k))]\n    (hij : Set.range j.base = (Set.range i.base)ᶜ) :\n    letI := sfRecollementNoetherian k X\n    let S := sfIntegralConstructible l E X\n    let A := sfIntegralKernelAmbient l E i\n    ∃ (ho : ∀ K : S.FullSubcategory, S (A.openTerm.obj K.obj))\n      (hc : ∀ K : S.FullSubcategory, S (A.closedTerm.obj K.obj)),\n      SfIntegralRecollementVertices l E k hk i j (sfRecollementRestriction S A ho hc) ∧\n      (sfRecollementRestriction S A ho hc).openTerm.Linear\n        (Padic.coefficientExtensionIntegers l E) ∧\n      (sfRecollementRestriction S A ho hc).closedTerm.Linear\n        (Padic.coefficientExtensionIntegers l E)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.sfIntegralKernelAmbient",
+   "WeilConjectures.sfIntegralKernel_operation_realization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-633be",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261025T043310-L-1694419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100900-L-3633754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "id": "def-zl-constant-extension-sheet-pullback-data",
+ "kind": "definition",
+ "title": "Canonical constant-extension sheet pullbacks and return comparison",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$, an integer $m\\ge1$, and a separated finite-type $k_0$-scheme $X_0$. Use its constant-extension datum $D_m$, $k_m$-model $X_{0,m}$, original-base model $X_{0,m}\\to\\operatorname{Spec}k_0$, geometric fibres $X_m=X_{0,m}\\times_{k_m}k$ and $Y=X_{0,m}\\times_{k_0}k$, and distinguished sheet $j:X_m\\to Y$ of [def-dl-a1-constant-extension-data]. Write $H:Y\\to Y$ for geometric $q$-Frobenius and $g_m:X_m\\to X_m$ for geometric $q^m$-Frobenius [def-weil-frobenius-detailed]; here $H^n$ ($n\\ge1$) is the positive iterate of $H$ of [def-weil-local-frobenius-trace], indexed there by $n-1$. Their canonical sheet-return identity is $j\\circ g_m=H^m\\circ j$ (ordinary functional composition). Fix a prime $\\ell\\ne p$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$. All categories are the actual common-stage categories $D^b_c(-,\\Omega)$ of [def-weil-algebraically-closed-coefficients], all Frobenius pullbacks are those used in the fixed-pair Weil categories of [def-weil-weil-sheaf-complex], and every pullback is the common-stage derived pullback of [def-weil-derived-pullback-tensor-hom]. Define the distinguished-sheet pullback $J_0=Lj^*:D^b_c(Y,\\Omega)\\to D^b_c(X_m,\\Omega)$ and, for each $0\\le i<m$, the semilinear-coordinate pullback $J_i=L(H^i\\circ j)^*$ between the same categories, on objects and morphisms. Define the natural return comparison at $M\\in D^b_c(Y,\\Omega)$ by\n$$\\rho_M:L g_m^*(Lj^*M)\\xrightarrow{\\sim}Lj^*(L(H^m)^*M).$$\nIt is the composite of the inverse of the integral-normalized pullback compositor for $g_m,j$, the equality comparison supplied by $j\\circ g_m=H^m\\circ j$, and the integral-normalized pullback compositor for $j,H^m$, all as specified in [def-zl-weil-ind-sheaf-category]. These constructions are respectively constantExtensionSheetPull, constantExtensionSheetPullAt and constantExtensionReturnComparison; no $k$-linearity of $H^i\\circ j$ is asserted.",
+ "stmt_deps": [
+  "def-dl-a1-constant-extension-data",
+  "def-weil-frobenius-detailed",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-local-frobenius-trace"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Paragraph after (1.1.10), p.152: decomposition over finite-field embeddings and change of finite base field; canonical pullback-composition normalization as in def-zl-weil-ind-sheaf-category."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback on semilinear sheets of a finite constant field extension and normalized Frobenius return comparison",
+   "results": {
+    "t": "2026-10-24T18:09:11Z",
+    "tool": "leansearch",
+    "query": "Pullback on semilinear sheets of a finite constant field extension and normalized Frobenius return comparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Seminorm.pullback",
+     "FiniteField.Extension.frob",
+     "FiniteField.Extension.frob_apply",
+     "LinearMap.frobenius",
+     "FiniteField.frobeniusAlgEquivOfAlgebraic",
+     "FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp",
+     "Seminorm.pullback_apply",
+     "VectorField.mpullback_smul_apply"
+    ],
+    "digest": "6602922c4bc1cd98"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; reuse the existing project sheet pullbacks and return comparison with a separate definition owner."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantExtensionSheetPull\"",
+   "results": {
+    "t": "2026-10-24T18:09:12Z",
+    "tool": "loogle",
+    "query": "\"constantExtensionSheetPull\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; reuse the existing project sheet pullbacks and return comparison with a separate definition owner."
+  },
+  {
+   "tool": "grep",
+   "query": "constantExtensionSheetPull|constantExtensionSheetPullAt|constantExtensionReturnComparison",
+   "results": {
+    "t": "2026-10-24T18:09:12Z",
+    "tool": "grep",
+    "query": "constantExtensionSheetPull|constantExtensionSheetPullAt|constantExtensionReturnComparison",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; reuse the existing project sheet pullbacks and return comparison with a separate definition owner."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n constantExtensionSheetPull|constantExtensionSheetPullAt|constantExtensionReturnComparison dag/nodes lean/Sheaf lean/WeilConjectures dag/lean_names_upstream.json; rg same pattern lean/.lake/packages/mathlib/Mathlib; python3 tools/blueprint_refs.py search constantExtensionSheetPull",
+   "results": "DAG: only lem-zl-constant-extension-weil-heart-equivalence records these three names. Sheaf: exactly the definitions in Sheaf.Paper.ConstantExtensionWeilHeartEquivalence, and their uses there. WeilConjectures, Mathlib and upstream declaration index: no hits. blueprint_refs.py: 0 blueprint nodes match constantExtensionSheetPull. No independent definition node owns these declarations.",
+   "date": "2026-10-24",
+   "verdict": "Existing project declarations are exact matches. Create an existing:true definition owner, without a module or copied definitions, avoiding the downstream theorem dependency cycle."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-extension-pullback-return-residue",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraphs 1 and 5: restriction under finite constant extension, distinguished-sheet return, and semilinear cyclic normalization before direct image.",
+   "via": [
+    "lem-zl-constant-extension-pullback-return-residue",
+    "lem-zl-constant-extension-weil-heart-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantExtensionWeilHeartData",
+  "declaration": "WeilConjectures.constantExtensionSheetPull",
+  "declarations": [
+   "WeilConjectures.constantExtensionSheetPull",
+   "WeilConjectures.constantExtensionSheetPullAt",
+   "WeilConjectures.constantExtensionReturnComparison",
+   "WeilConjectures.ConstantExtensionSheetSpec",
+   "WeilConjectures.constantExtensionSheet_return"
+  ],
+  "statement": "def constantExtensionSheetPull",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "§1(B), H2 repair of 2b7bbcb19c20. The old record named the canonical pullbacks and return comparison but omitted their sheet-return equality and carrier/Weil-map specification, leaving them owned only by the downstream equivalence theorem whose proof uses the present item. Record those exact existing declarations as supporting interfaces of this sheet-pullback definition: the equality fixes the compositor, and ConstantExtensionSheetSpec specifies its action on carriers, arrows and the m-fold return. No declaration is copied or changed, and no equivalence theorem is assumed. The shared source module is retained; the reverse proof import is omitted under stages/2-statements §3.7 because it would close an import cycle.",
+  "file": "lean/Sheaf/Paper/ConstantExtensionWeilHeartData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d597a06e4",
+  "group": "Q16",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6155cfea",
+  "group": "NI",
+  "result": "pass",
+  "note": "Re-delivery of 2b7b (RETURN H2). Lean differs only by two inlinings: finiteComp = IteratedReturnTransport.finiteComposition formula (pointPowerPullbackModel/integralFiniteCanonicalPullbackComposition/whiskers), finiteFibre = integralOperationsFiniteModules body, both verified identical. Maths unchanged and re-checked: R pinned by ConstantExtensionSheetSpec; c F_R = F_N c with exponents m(r+1), r+1 and c pinned by ∃!; naturality and scalar squares; finite and whole-tower block laws with ζ/ν; deg_{k0} = m·deg_{km}, #κ = q^{m r}; purity/mixed ↔ for all real w; subobject/chain equivalences. Edge cases m=1, r'≥1, zero stalks, t=0, empty scheme; u/v universes independent. Owner map over side-live+snapshot: every used declaration is owned within the item's stmt_deps closure (Spec/sheet_return via §1(B) record on def-zl-constant-extension-sheet-pullback-data; new existing:true def-zl-finite-point-power-transport-data and def-zl-integral-point-tower-transport-data, statements verbatim, declarations exist, cites = stmt_deps, no duplicate owner; integralFiniteCanonicalPullbackComposition is theorem-owned but in the closure, constructed-data precedent). Parent theorem not in closure; no cycle in the stmt_deps or proof_deps checks. lean.statement verbatim, 18/18 declarations present, 4 sorries on theorems only, no line over 100 characters, report has both required sections. Advisories: Spec's record owner lacks a restriction-local-data stmt_dep and a statement sentence for Spec; the shared ConstantExtensionWeilHeartEquivalence module means the parent's stage-3 proof needs a separate module. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-14961",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261025T202206-L-2690002",
+  "kind": "interface",
+  "note": "independent cc review: delivered ConstantExtensionWeilHeartData/Equivalence/SheetHeartData vs live clone (verbatim relocation, unchanged statements via #check), node lean/proof records vs Lean, axioms, 15 direct importers compiled against sandbox .lbuild"
+ }
+}

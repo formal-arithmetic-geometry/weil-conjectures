@@ -1,0 +1,288 @@
+{
+ "id": "lem-sf-exceptional-tensor-transitivity",
+ "kind": "statement",
+ "title": "Canonical exceptional tensor maps under composition and etale restriction",
+ "statement": "Let $A$ be a finite commutative ring and $X\\xrightarrow{a}Y\\xrightarrow{b}Z$ morphisms of arbitrary schemes. Supply $a,b,h=ba$ with open-then-proper factorizations and the ordinary unbounded etale adjunctions and tensor maps of [lem-sf-etale-ambient-adjoint-projection]. Use the canonical compact-support composition $F_h\\cong F_bF_a$ [lem-etale-unbounded-compact-support-composition] and its counit-preserving right-adjoint comparison $c:G_h\\cong G_aG_b$; thus $\\epsilon_h$ is $\\epsilon_b\\circ F_b\\epsilon_a$, with this comparison inserted. Suppose every $\\theta_{a,P}$ is invertible. Then\n$$\\delta:\\omega_h\\xrightarrow{c_{A_Z}}G_a\\omega_b\\xrightarrow{\\theta_{a,\\omega_b}^{-1}}\\omega_a\\otimes_A^La^*\\omega_b$$\nis an isomorphism. After inserting $\\delta$ and canonical pullback-tensor reassociation, the actual tensor maps satisfy\n$$c_K\\circ\\theta_{h,K}=\\theta_{a,G_bK}\\circ(1_{\\omega_a}\\otimes a^*\\theta_{b,K})\\circ(\\delta\\otimes1_{h^*K}).$$\nConsequently, if $\\omega_b$ is tensor-invertible and $\\theta_{b,K}$ is invertible, then $\\theta_{h,K}$ is invertible. Tensor-invertible means admitting a two-sided inverse for $\\otimes_A^L$.\nFor a separated etale $a=u$, use the normalized identification of [lem-sf-etale-unit-tensor-arbitrary-base]. The counit-preserving comparison $\\lambda_P:u^*G_bP\\xrightarrow{\\sim}G_{bu}P$ satisfies\n$$\\lambda_K\\circ u^*\\theta_{b,K}=\\theta_{bu,K}\\circ(\\lambda_{A_Z}\\otimes1),$$\nunder $u^*(\\omega_b\\otimes b^*K)\\cong u^*\\omega_b\\otimes(bu)^*K$. There are no Noetherian or quasi-compactness assumptions on the schemes or etale $u$ beyond the supplied factorizations. These are equations of canonical derived morphisms, not only isomorphisms of endpoints.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3, transposing the projection map and composite counits. Generic non-smooth transitivity underlying upstream SmoothDuality/Local.lean lines 239-319; compare lem-asd-tensor-mate-etale-precomp, whose current statement only permits Noetherian schemes. Includes the actual etale restriction equation needed to descend the tensor morphism."
+ },
+ "stmt_deps": [
+  "lem-sf-etale-ambient-adjoint-projection",
+  "lem-sf-etale-unit-tensor-arbitrary-base",
+  "lem-etale-unbounded-compact-support-composition"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\otimes=\\otimes_A^L$, $W=\\omega_a$, $V=\\omega_b$ and $Q=b^*K$. Use [lem-sf-etale-compact-projection-coherence] to normalize the compact-support comparison $E:F_h\\cong F_bF_a$ and to obtain the natural inverse projections $q_f$. In the calculation identify $F_h$ with $F_bF_a$ using $E$, and $G_h$ with $G_aG_b$ using the specified counit-preserving $c$. This is notation for conjugating every map by these comparisons. Thus the composite counit is exactly that of [def-weil-pbc-composite-adjunction]. The canonical pullback tensor comparison [lem-kun-inverse-image-monoidal] is inserted throughout. By the definition in [lem-sf-etale-ambient-adjoint-projection], put\n$$\\phi_f(P)=(\\epsilon_{f,A}\\otimes1_P)\\circ q_f(\\omega_f,P):F_f(\\omega_f\\otimes f^*P)\\to P.$$\nIts adjunct is $\\theta_{f,P}$. Unit constraints are those of [lem-kun-tensor-unit].",
+   "uses": [
+    "lem-sf-etale-compact-projection-coherence",
+    "def-weil-pbc-composite-adjunction",
+    "lem-kun-inverse-image-monoidal",
+    "lem-sf-etale-ambient-adjoint-projection",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: fix the projection and composite-counit normalizations before transposing."
+   }
+  },
+  {
+   "text": "Set $M=W\\otimes a^*V$, $s=\\theta_{a,V}:M\\to G_aV$ and $d=c_{A_Z}^{-1}\\circ s:M\\to\\omega_h$. By hypothesis $s$ is invertible, hence $d=\\delta^{-1}$ is invertible. Put $v=\\phi_a(V):F_aM\\to V$. The defining transpose of $s$ is $\\epsilon_{a,V}\\circ F_a(s)=v$ [lem-sf-etale-ambient-adjoint-projection]. Therefore the composite counit [def-weil-pbc-composite-adjunction], with $c_{A_Z}\\circ d=s$, gives the actual equality\n$$\\epsilon_{h,A_Z}\\circ F_h(d)=\\epsilon_{b,A_Z}\\circ F_b(v):F_hM\\to A_Z.$$\nThis proves the first isomorphism assertion and records the scalar counit needed below.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: scalar component of the composite-counit calculation."
+   }
+  },
+  {
+   "text": "Identify $D=M\\otimes a^*Q$ with $W\\otimes a^*(V\\otimes Q)$ by the tensor comparison. The defining adjunct formula and naturality of $q_a$ imply naturality of $\\theta_a$: for $t:P\\to P'$, the transposes of $G_a(t)\\circ\\theta_{a,P}$ and $\\theta_{a,P'}\\circ(1_W\\otimes a^*t)$ both equal $t\\circ\\phi_a(P)$, by counit naturality. Apply this with $t=\\theta_{b,K}:V\\otimes Q\\to G_bK$. The composite-adjunction transpose of\n$$R=\\theta_{a,G_bK}\\circ(1_W\\otimes a^*\\theta_{b,K}):D\\to G_aG_bK$$\nis consequently\n$$T_R=\\phi_b(K)\\circ F_b(\\phi_a(V\\otimes Q)).$$\nHere the two Hom bijections are exactly those in [def-weil-pbc-composite-adjunction], and the identities for $\\phi$ are their defining transposes, rather than any assertion about isomorphic endpoints.",
+   "uses": [
+    "lem-sf-etale-ambient-adjoint-projection",
+    "lem-sf-etale-compact-projection-coherence",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose the iterated tensor map, explicitly using naturality."
+   }
+  },
+  {
+   "text": "The tensor-associativity identity of [lem-sf-etale-compact-projection-coherence] at $(W,V,Q)$ says\n$$q_a(W,V\\otimes Q)=(q_a(W,V)\\otimes1_Q)\\circ q_a(M,Q).$$\nPostcompose with $\\epsilon_{a,A_Y}\\otimes1_V\\otimes1_Q$. The definition of $v$ in step 2 gives\n$$\\phi_a(V\\otimes Q)=(v\\otimes1_Q)\\circ q_a(M,Q).$$\nSubstitute this into step 3 and use $\\phi_b(K)=(\\epsilon_{b,A_Z}\\otimes1_K)\\circ q_b(V,K)$. Naturality of $q_b$ at $v:F_aM\\to V$ gives\n$$T_R=((\\epsilon_{b,A_Z}\\circ F_bv)\\otimes1_K)\\circ q_b(F_aM,K)\\circ F_b(q_a(M,Q)).$$\nAll displayed sources are $F_bF_aD$ and targets are $K$; associators are the fixed ones of step 1.",
+   "uses": [
+    "lem-sf-etale-compact-projection-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: expand the two tensor reassociations using projection associativity."
+   }
+  },
+  {
+   "text": "The composition equation of [lem-sf-etale-compact-projection-coherence], with $E$ inserted as in step 1, replaces $q_b(F_aM,K)\\circ F_b(q_a(M,Q))$ in step 4 by $q_h(M,K)$. Thus\n$$T_R=((\\epsilon_{b,A_Z}\\circ F_bv)\\otimes1_K)\\circ q_h(M,K).$$\nFor $L=c_K\\circ\\theta_{h,K}\\circ(d\\otimes1_{h^*K}):D\\to G_aG_bK$, the defining transpose of $\\theta_h$ [lem-sf-etale-ambient-adjoint-projection] and naturality of $q_h$ at $d$ instead give\n$$T_L=((\\epsilon_{h,A_Z}\\circ F_hd)\\otimes1_K)\\circ q_h(M,K).$$\nStep 2 identifies the bracketed counits, so $T_L=T_R$. Injectivity of the composite Hom bijection [def-weil-pbc-composite-adjunction] gives $L=R$. Precompose with $\\delta\\otimes1$ and restore the comparisons to obtain exactly\n$$c_K\\circ\\theta_{h,K}=\\theta_{a,G_bK}\\circ(1_W\\otimes a^*\\theta_{b,K})\\circ(\\delta\\otimes1_{h^*K}).$$",
+   "uses": [
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-etale-ambient-adjoint-projection",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: compare both actual transposes and use the adjunction bijection."
+   }
+  },
+  {
+   "text": "In the equation of step 5, $c_K$ and $\\delta$ are isomorphisms, $\\theta_{a,G_bK}$ is an isomorphism by the hypothesis for every $P$, and $1_W\\otimes a^*\\theta_{b,K}$ is an isomorphism whenever $\\theta_{b,K}$ is: apply the pullback and tensor functors to its inverse. Hence $\\theta_{h,K}$ is invertible. This proves the stated consequence when $\\omega_b$ is tensor-invertible; that extra hypothesis is actually unnecessary for this consequence under the given universal hypothesis on $\\theta_a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: invertibility follows from the equality of canonical maps."
+   }
+  },
+  {
+   "text": "Now take $a=u$ separated etale. Write $\\rho_P:G_uP\\xrightarrow{\\sim}u^*P$ and $\\eta:\\omega_u\\xrightarrow{\\sim}A_X$ for the normalized maps of [lem-sf-etale-unit-tensor-arbitrary-base]. It gives both the hypothesis on every $\\theta_u$ and the equation $\\rho_P\\theta_{u,P}=\\ell_{u^*P}(\\eta\\otimes1)$, where $\\ell$ denotes the left unit constraint [lem-kun-tensor-unit] (written $\\lambda$ in that node; here $\\lambda$ is reserved for the comparison below). The counit-preserving comparison in the question is\n$$\\lambda_P=c_P^{-1}\\circ\\rho_{G_bP}^{-1}:u^*G_bP\\to G_{bu}P.$$\nIndeed it is the same composite Hom bijection with $G_u$ replaced by $u^*$ through its counit-preserving normalization [def-weil-pbc-composite-adjunction]. At $P=A_Z$, the definition of $\\delta$ and the normalization of $\\theta_{u,V}$ give\n$$\\lambda_{A_Z}^{-1}=\\rho_V\\circ c_{A_Z}=\\ell_{u^*V}\\circ(\\eta\\otimes1)\\circ\\delta.$$",
+   "uses": [
+    "lem-sf-etale-unit-tensor-arbitrary-base",
+    "def-weil-pbc-composite-adjunction",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: identify the etale right adjoint by its evaluation counit, including its scalar component."
+   }
+  },
+  {
+   "text": "Apply $\\rho_{G_bK}$ to step 5 for $(u,b)$. The normalization in [lem-sf-etale-unit-tensor-arbitrary-base], and naturality of the tensor unit constraints [lem-kun-tensor-unit], turn its right side into\n$$u^*\\theta_{b,K}\\circ(\\lambda_{A_Z}^{-1}\\otimes1).$$\nThe left side is $\\lambda_K^{-1}\\circ\\theta_{bu,K}$ by step 7. Multiplying by $\\lambda_K$ on the left and by $\\lambda_{A_Z}\\otimes1$ on the right proves\n$$\\lambda_K\\circ u^*\\theta_{b,K}=\\theta_{bu,K}\\circ(\\lambda_{A_Z}\\otimes1).$$\nThe canonical source identification is [lem-kun-inverse-image-monoidal]. Every input above is an arbitrary object of the ordinary unbounded etale derived category. All factorizations were supplied, and no step uses a compactification existence theorem, quasi-compactness, Noetherianity, purity, or a change of coefficient category.",
+   "uses": [
+    "lem-sf-etale-unit-tensor-arbitrary-base",
+    "lem-kun-tensor-unit",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: cancel the normalized etale tensor unit and recover the restriction equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-tensor-unit",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "lem-sf-etale-compact-projection-coherence",
+  "lem-sf-etale-unit-tensor-arbitrary-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3, explicit projection/co-unit calculation on arbitrary bases; coherence inputs isolated as a statement-only child."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor map from a relative dualizing object tensor pullback to exceptional pullback is compatible with composition of compact support adjunctions",
+   "results": "CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc; Hits concern exponentiable morphisms, rigid-category evaluation and ordinary module pullback composition. None states the exceptional tensor composition law with compact-support projection normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula adjunction mate composition gives dualizing complex of composite and tensor comparison isomorphism",
+   "results": "CategoryTheory.coev_expComparison, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.coevaluation_comp_rightAdjointMate_assoc, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_tensor, CategoryTheory.rightAdjointMate_comp_evaluation, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.ExponentiableMorphism.coev_ev; Hits concern exponentiable morphisms, rigid-category evaluation and ordinary module pullback composition. None states the exceptional tensor composition law with compact-support projection normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionTensorMap\"",
+   "results": "No hits; Hits concern exponentiable morphisms, rigid-category evaluation and ordinary module pullback composition. None states the exceptional tensor composition law with compact-support projection normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionTensorMap|dualizingComplexTensorMap|rightDerivedLowerShriekCompIso",
+   "results": "No hits; Hits concern exponentiable morphisms, rigid-category evaluation and ordinary module pullback composition. None states the exceptional tensor composition law with compact-support projection normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of exceptional inverse image tensor comparison maps for adjunctions with projection formula",
+   "results": "SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, lTensor.inverse_comp_lTensor, CategoryTheory.Limits.inv_piComparison_comp_map_π, CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.Limits.inv_prodComparison_map_snd_assoc, CategoryTheory.Functor.Monoidal.tensorObjComp_inv_app; Hits concern exponentiable morphisms, rigid-category evaluation and ordinary module pullback composition. None states the exceptional tensor composition law with compact-support projection normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor map from a relative dualizing object tensor pullback to exceptional pullback is compatible with composition of compact support adjunctions",
+   "results": "{\"t\": \"2026-10-22T06:25:56Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical tensor map from a relative dualizing object tensor pullback to exceptional pullback is compatible with composition of compact support adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ExponentiableMorphism.coev_ev\", \"CategoryTheory.ExponentiableMorphism.coev_naturality_assoc\", \"CategoryTheory.ExponentiableMorphism.coev_ev_assoc\", \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\", \"CategoryTheory.ExponentiableMorphism.coev_naturality\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"CategoryTheory.ExponentiableMorphism.ev_naturality\"], \"digest\": \"8207c6df45cf8965\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern exponentiable morphisms, rigid-category Hom equivalences or ordinary module pullback composition, not the full exceptional tensor identity."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionTensorMap|dualizingComplexTensorMap|rightDerivedLowerShriekCompIso",
+   "results": "{\"t\": \"2026-10-22T06:26:11Z\", \"tool\": \"grep\", \"query\": \"projectionTensorMap|dualizingComplexTensorMap|rightDerivedLowerShriekCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern exponentiable morphisms, rigid-category Hom equivalences or ordinary module pullback composition, not the full exceptional tensor identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionTensorMap\"",
+   "results": "{\"t\": \"2026-10-22T06:26:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectionTensorMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern exponentiable morphisms, rigid-category Hom equivalences or ordinary module pullback composition, not the full exceptional tensor identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of exceptional inverse image tensor comparison maps for adjunctions with projection formula",
+   "results": "{\"t\": \"2026-10-22T06:26:12Z\", \"tool\": \"leansearch\", \"query\": \"Composition of exceptional inverse image tensor comparison maps for adjunctions with projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"lTensor.inverse_comp_lTensor\", \"CategoryTheory.Limits.inv_piComparison_comp_map_π\", \"CategoryTheory.Limits.inv_piComparison_comp_map_π_assoc\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"CategoryTheory.Limits.inv_prodComparison_map_snd_assoc\", \"CategoryTheory.Functor.Monoidal.tensorObjComp_inv_app\"], \"digest\": \"30e50f0f8c5041e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern exponentiable morphisms, rigid-category Hom equivalences or ordinary module pullback composition, not the full exceptional tensor identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula adjunction mate composition gives dualizing complex of composite and tensor comparison isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:26:21Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula adjunction mate composition gives dualizing complex of composite and tensor comparison isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.coev_expComparison\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.tensorRightHomEquiv\", \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight\", \"CategoryTheory.coevaluation_comp_rightAdjointMate\"], \"digest\": \"2bf1e66384e996ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits concern exponentiable morphisms, rigid-category Hom equivalences or ordinary module pullback composition, not the full exceptional tensor identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-smooth-dualizing-complex-invertible",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-prop-sf-rf-shriek-preservation, smooth case (unit step 3), via the current thm-asd-smooth-tensor proof: Paragraph 3, transposing the projection map and composite counits. Generic non-smooth transitivity underlying upstream SmoothDuality/Local.lean lines 239-319; compare lem-asd-tensor-mate-etale-precomp, whose current statement only permits Noetherian schemes. Includes the actual etale restriction equation needed to descend the tensor morphism.",
+   "via": [
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exceptional-tensor-transitivity",
+  "worker": "stage1",
+  "summary": "Expanded the two canonical map equalities as an eight-step adjoint-transpose calculation. One new statement-only node supplies arbitrary-base projection associativity and projection compatibility of the graph-factorization compositor; existing restricted coherence nodes do not apply. Kept the statement unchanged, including its redundant tensor-invertibility hypothesis. Checked the supplied factorization, category and counit normalizations in every step.",
+  "blueprint": "Unit sk-prop-sf-rf-shriek-preservation step 3 (smooth case), via lem-sf-smooth-dualizing-complex-invertible: realizes the transposition argument in thm-asd-smooth-tensor.proof.md paragraph 3. The created.item chain terminates at the maintainer-created parent, so blueprint_refs ancestor reports None; preserve its null origin and describe the exact unit place.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-etale-unit-tensor-arbitrary-base",
+    "why": "Generic normalized etale adjunction and its tensor-unit equation for arbitrary schemes; needed to specialize the composition calculation, not a replacement of the smooth-preservation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-etale-unit-tensor-arbitrary-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O1-6fe18b70a",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-6fe18b70a (reviewer sub-agent of L); spot-checked: Read the whole item and the new node. All 8 steps re-derived: step 2 d=c^{-1}θ_{a,V}=δ^{-1} with ε_hF_h(d)=ε_bF_b(v); step 3 θ_a naturality by transposes; step 4 projection associativity gives φ_a(V⊗Q)=(v⊗1)q_a(M,Q); step 5 composition clause gives T_L=T_R, then injectivity of the composite hom bijection (Adjunction.comp); steps 7-8 etale clause via ρθ=unitor(η⊗1). Sources, targets and directions all match. The equations relate canonical maps, not just isomorphic endpoints. Source checked: main-20261015 thm-asd-smooth-tensor.proof.md paragraph 3, where both transposes are projection formula plus composite counit. No SGA. Not a re-split item. Live, clones/live and side-live still have the item unsplit, so it is not superseded. New node lem-sf-etale-compact-projection-coherence (associativity of the compact-support projection map, and compatibility with the graph-normalized comparison E, on arbitrary schemes): checked its types and small cases. It is not a restatement and is strictly smaller (no ω, θ or adjoints). It generalizes lem-amb-shriek-tensor-composition and lem-amb-unbounded-compact-support-comparisons (both Noetherian), lem-sf-composition-projection-mate (F̄_q) and lem-pur-projection-formula-coefficient-coherence (pro-étale). The arbitrary base is needed because the parent's step 6 uses non-qc opens. The E normalization matches the composition node's graph-factorization proof. FIX (E6-type notation fault): step 7 used λ for both the unitor (taken from lem-sf-etale-unit-tensor-arbitrary-base) and the comparison λ_P, inside one display. The unitor is renamed ℓ and lem-kun-tensor-unit is added to the step's uses (fixes/dag/nodes/sec-six-functors-basics/lem-sf-exceptional-tensor-transitivity.json). Maintainer note: lem-etale-unbounded-compact-support-composition cites def-weil-compactifications-refinements, which requires finite type, although that node claims arbitrary factorizations. This is a base-node inconsistency, not a delivery fault. The report mentions a citations.json that is not in the commit; this has no effect on the DAG.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfExceptionalTensorTransitivity",
+  "declaration": "AlgebraicGeometry.Etale.sfExceptionalTensorTransitivity",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfExceptionalCompComparison",
+   "AlgebraicGeometry.Etale.sfExceptionalCompDelta",
+   "AlgebraicGeometry.Etale.sfExceptionalTensorReassociation",
+   "AlgebraicGeometry.Etale.sfExceptionalTensorTransitivity",
+   "AlgebraicGeometry.Etale.sfEtaleDerivedRightAdjointIso",
+   "AlgebraicGeometry.Etale.sfExceptionalEtaleRestrictionComparison",
+   "AlgebraicGeometry.Etale.sfExceptionalTensorEtaleRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfExceptionalTensorTransitivity.lean",
+  "statement": "theorem sfExceptionalTensorTransitivity (A : Type (u + 1)) [CommRing A] [Finite A] {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) (ca : Compactification a) (cb : Compactification b) (ch : Compactification (a ≫ b)) (Ga : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X) (Gb : DerivedCategoryModule A Z ⥤ DerivedCategoryModule A Y) (Gh : DerivedCategoryModule A Z ⥤ DerivedCategoryModule A X) (adja : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) ca ⊣ Ga) (adjb : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) cb ⊣ Gb) (adjh : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) ch ⊣ Gh) (ha : ∀ P : DerivedCategoryModule A Y, IsIso (sfEtaleAmbientTensorMap A ca Ga adja P)) : IsIso (sfExceptionalCompDelta A a b ca cb ch Ga Gb Gh adja adjb adjh ha) ∧ (∀ K : DerivedCategoryModule A Z, sfEtaleAmbientTensorMap A ch Gh adjh K ≫ (sfExceptionalCompComparison A a b ca cb ch Ga Gb Gh adja adjb adjh).hom.app K = ((derivedTensor (ModuleCat.{u + 1} A) X).map (sfExceptionalCompDelta A a b ca cb ch Ga Gb Gh adja adjb adjh ha)).app ((L(upperStar (ModuleCat.{u + 1} A) (a ≫ b))).obj K) ≫ sfExceptionalTensorReassociation A a b (Ga.obj (constantComplex A Y)) (Gb.obj (constantComplex A Z)) K ≫ ((derivedTensor (ModuleCat.{u + 1} A) X).obj (Ga.obj (constantComplex A Y))).map ((L(upperStar (ModuleCat.{u + 1} A) a)).map (sfEtaleAmbientTensorMap A cb Gb adjb K)) ≫ sfEtaleAmbientTensorMap A ca Ga adja (Gb.obj K)) ∧ ((∃ V : DerivedCategoryModule A Y, Nonempty ((((derivedTensor (ModuleCat.{u + 1} A) Y).obj (Gb.obj (constantComplex A Z))).obj V) ≅ constantComplex A Y) ∧ Nonempty ((((derivedTensor (ModuleCat.{u + 1} A) Y).obj V).obj (Gb.obj (constantComplex A Z))) ≅ constantComplex A Y)) → ∀ K : DerivedCategoryModule A Z, IsIso (sfEtaleAmbientTensorMap A cb Gb adjb K) → IsIso (sfEtaleAmbientTensorMap A ch Gh adjh K))",
+  "branch": "sheaf-dag",
+  "by": "Q77",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f219777bc",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Clause-by-clause match of item Lean to node: c = conjugateIsoEquiv adjh (adja.comp adjb) of the graph compositor (Gh ≅ Gb⋙Ga, counit-preserving); δ = c_A ≫ inv θ_a(ω_b), IsIso of the specified arrow; composition equation with explicit reassociation (pullback comp hom, associator, inverse pullback-tensor iso; directions checked against upstream defs); tensor-invertibility consequence two-sided, redundant hyp kept; etale restriction λ = c⁻¹ρ⁻¹ via sfEtaleRightAdjointComparison + L≅D(a^*), equation with μ and comp.inv source identification; [Etale][IsSeparated]; no qc/Noetherian; universes as deps. §1(B) repair of lem-etale-unbounded-compact-support-composition: old record was a bare Nonempty (A2 existing:true); new defs copy the upstream proof bodies as data with supplied compactifications, no choice; not a duplicate of the qc-only unboundedEtaleLowerShriekCompIso; only lean changed, note present; no landed statement-level users of the old record (citers: coherence node without Lean, which names the graph comparison; two proof-only deps; old theorem still publicly imported). Both statements verbatim, lines ≤100, docstrings with source/blueprint and the 8 steps, only sorry proofs, report sections present. No compile (no change). Advisory: redundant Adjunction.Basic import; base-node finite-type citation inconsistency in the composition node (maintainer note)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261024T185325-L-3508701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.sfExceptionalTensorEtaleRestriction",
+   "AlgebraicGeometry.Etale.sfExceptionalTensorTransitivity"
+  ],
+  "sorry_after": []
+ }
+}

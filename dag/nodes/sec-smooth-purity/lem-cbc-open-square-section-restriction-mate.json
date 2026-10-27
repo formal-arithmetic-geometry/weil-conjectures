@@ -1,0 +1,242 @@
+{
+ "id": "lem-cbc-open-square-section-restriction-mate",
+ "kind": "statement",
+ "title": "The section-identity open restriction comparison is the mate of the compositor square",
+ "statement": "Let $B$ be a commutative ring. For every scheme $T$ [def-pc-scheme] use its small pro-etale site with the chosen small skeleton [def-weil-pbc-proetale-site], its constant ring sheaf $\\underline B_T$ [def-weil-pbc-constant-sheaf] and the category of $\\underline B_T$-module sheaves [def-weil-sheaf-of-modules-category]. For a morphism $u$ use the module inverse image $u^{-1}$ and direct image $u_*$, $(u_*M)(W)=M(W\\times_{T}T')$ for $u:T'\\to T$, with the canonical constant-section coefficient identification and the adjunction $u^{-1}\\dashv u_*$ [def-weil-pbc-proetale-operations], and the inverse-image compositors $u^{-1}v^{-1}\\cong(vu)^{-1}$ of [def-cbc-strict-constant-tower-operations], which are the conjugates of the direct-image compositors given by restriction along the fibre-product identifications [def-pc-fibre-product]. Let $(j:U\\hookrightarrow X,\\ j':U'\\hookrightarrow X',\\ g:X'\\to X,\\ g_U:U'\\to U)$ be an open-immersion square [def-cbc-open-immersion-square], with $j\\circ g_U=g\\circ j'$. Let $c:g_U^{-1}j^{-1}\\xrightarrow{\\sim}j'^{-1}g^{-1}$ be the inverse-image compositor for $j\\circ g_U$, followed by the equality $j\\circ g_U=g\\circ j'$ and the inverse of the inverse-image compositor for $g\\circ j'$. Let $t:j^{-1}g_*\\xrightarrow{\\sim}(g_U)_*j'^{-1}$ be the natural isomorphism whose component at a $\\underline B_{X'}$-module $M$ and an object $V\\to U$ of $U_{\\mathrm{proet}}$ is the identity of $M(V\\times_XX')$, read as $M(V\\times_UU')$ through the unique isomorphism $V\\times_UU'\\cong V\\times_XX'$ compatible with both projections. Then $t$ is the exchange mate of $c$ under $g^{-1}\\dashv g_*$ and $g_U^{-1}\\dashv(g_U)_*$ [def-weil-pbc-adjunction-mate]:\n$$t_M=(g_U)_*j'^{-1}(\\varepsilon_{g,M})\\circ(g_U)_*(c_{g_*M})\\circ\\eta_{g_U,\\,j^{-1}g_*M}.$$\nNo hypothesis on $g$ or on $B$ is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites): the commutative diagram of ringed topoi and the equality $f'_*j_U^{-1}=j_V^{-1}f_*$; its proof refers to sites.tex lemma-localize-morphism. The identification of that equality with the mate of the inverse-image square is agent-formulated."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-operations",
+  "def-cbc-strict-constant-tower-operations",
+  "def-pc-fibre-product",
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-cbc-tower-square-unit-sections] to the direct image of the input module. It computes the inverse compositor square on the iterated adjunction-unit section. Expand the exchange mate; applying the pulled-back direct-image counit to that equation gives the needed intermediate expression.",
+   "uses": [
+    "lem-cbc-tower-square-unit-sections",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the exchange mate on an open adjunction-unit section. Substitute the iterated-unit formula from Step 1. Naturality moves the direct-image counit through the restriction map and the open adjunction unit; the direct-image triangle identity cancels that counit with its unit. Now restrict along the unit of the composition/base-change adjunction of sites. The two resulting arrows into the double fibre product agree: their first projections are the test-object projection and their second projections are the prescribed open projection. Fibre-product extensionality and naturality give the exact openBetaSection formula in the Lean statement.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-pc-fibre-product",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For invertibility use the fully faithful open extension: its unit is invertible. The module open-square isomorphism puts the pulled-back open extension in the essential image of the upper open extension, so the upper open counit is invertible on it. The inverse transpose of the pulled-back open unit is consequently invertible. Taking its conjugate under the composite adjunctions yields exactly openBetaRestriction by the iterated-mate identity. Conjugation preserves isomorphisms. This is the earlier openBetaModule_isIso and openBetaModule_normalized argument in the same module, independent of the section formula.",
+   "uses": [
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-trf-iterated-square-mates",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-tower-square-unit-sections",
+  "def-weil-pbc-adjunction-mate",
+  "def-cbc-strict-constant-tower-operations",
+  "def-pc-fibre-product",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "lem-trf-iterated-square-mates"
+ ],
+ "proof_origin": {
+  "by": "P3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0; direct section calculation from the specified conjugate compositors, units, counits and fibre-product projections, avoiding scalar transport of a separate localization comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on proetale sites the open restriction of a pushforward is naturally the pushforward of the open restriction and this section identity is the adjunction mate of pullback composition",
+   "results": [
+    "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+    "SheafOfModules.pushforwardNatIso",
+    "SheafOfModules.pushforwardComp_inv_app_val_app",
+    "SheafOfModules.pushforwardSections_unitHomEquiv",
+    "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+    "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+    "AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map",
+    "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit"
+   ],
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward, pullback-composition and localization APIs, or Zariski scheme modules; none identifies the specified pro-etale open section map with its mate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open subsite of direct image of a module sheaf is the mate of the inverse image composition isomorphism",
+   "results": [
+    "AlgebraicGeometry.Scheme.Modules.restrict_obj",
+    "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+    "AlgebraicGeometry.pullbackRestrictIsoRestrict",
+    "AlgebraicGeometry.Scheme.Hom.app_appIso_inv",
+    "AlgebraicGeometry.Scheme.Modules.restrict",
+    "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+    "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+    "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict"
+   ],
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward, pullback-composition and localization APIs, or Zariski scheme modules; none identifies the specified pro-etale open section map with its mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, SheafOfModules.pushforward",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward, pullback-composition and localization APIs, or Zariski scheme modules; none identifies the specified pro-etale open section map with its mate."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|overPullback|Over\\.post",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+    "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+    "Mathlib/CategoryTheory/Sites/Over.lean",
+    "Mathlib/CategoryTheory/Sites/Over.lean",
+    "Mathlib/CategoryTheory/Sites/Over.lean",
+    "Mathlib/CategoryTheory/Sites/Over.lean",
+    "Mathlib/CategoryTheory/Sites/Over.lean",
+    "Mathlib/CategoryTheory/Sites/LocalProperties.lean"
+   ],
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward, pullback-composition and localization APIs, or Zariski scheme modules; none identifies the specified pro-etale open section map with its mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Beck Chevalley isomorphism for localization of a ringed site at an object is compatible with the adjunction counit and is given by restriction on sections",
+   "results": [
+    "CategoryTheory.Adjunction.localization_counit_app",
+    "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+    "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+    "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+    "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+    "SheafOfModules.sheafificationCompPullback",
+    "CategoryTheory.sheafComposeNatIso",
+    "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app"
+   ],
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward, pullback-composition and localization APIs, or Zariski scheme modules; none identifies the specified pro-etale open section map with its mate."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|pullbackComp|restrictAdjunction|pushforwardNatIso",
+   "results": [
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean"
+   ],
+   "date": "2026-10-22",
+   "verdict": "no match: generic module pushforward, pullback-composition and localization APIs, or Zariski scheme modules; none identifies the specified pro-etale open section map with its mate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-cbc-tower-open-beta-normalization",
+  "date": "2026-10-22",
+  "group": "Q159"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open comparison underlying the passage to derived limits: identification of the section-normalized open restriction comparison with the mate of the canonical inverse-image square, used by lem-cbc-tower-open-beta-normalization Steps 3-5",
+   "via": [
+    "lem-cbc-tower-open-beta-normalization",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-open-square-section-restriction-mate",
+  "worker": "stage1",
+  "summary": "Reuse the existing arbitrary-ring pro-etale open-restriction counit equation. Transport it along coherent constant-section ring identifications, identify its comparison with the section identity and its inverse-image square with the specified conjugate compositors, and transpose the counit equation. No new nodes or statement changes. Replaced inherited unexecuted search placeholders with actual logged searches.",
+  "blueprint": "thm-cbc-complete-proetale proof, final parenthesis on compatibility of compact-support comparisons with completed maps: establishes the underlying ordinary open square normalization used by lem-cbc-tower-open-beta-normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Generic ordinary pro-etale module open-restriction theorem supplies the section formula and counit equation; no node of this unit supplies that equation independently of the item."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-ring inverse-image theorem supplies coherent coefficient and unit identifications for arbitrary B; this is coefficient transport, not an alternative compact-support route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-e58b9813e",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-e58b9813e (reviewer sub-agent of L); spot-checked: S1 split, no new nodes. Statement and stmt_deps are identical to the unsplit node that the Q159 reviewer FIX created; the base proof was empty and there is no re-split note. Statement checked: the mate of c: g_U^{-1}j^{-1}→j'^{-1}g^{-1} under g^{-1}⊣g_* and g_U^{-1}⊣(g_U)_* is η, then (g_U)_*c, then (g_U)_*j'^{-1}ε. That matches def-weil-pbc-adjunction-mate, and the citer lem-cbc-tower-open-beta-normalization uses it the same way in Steps 3-5. Edge cases g=id, U=∅ and B=0 all hold. Step 1: lem-sfb-proetale-open-restriction-counit with (f,h)=(g,j) allows any morphism and any ring sheaf. lem-pe-constant-left-module-inverse-image identifies its inverse-image rings with the constant B-rings. That identification preserves constant sections, so it equals c^f_A, and it is compatible with composition, localization and the unit. Transport along a ring isomorphism keeps the adjunctions, and no finiteness is needed. Step 2: the section formula gives β=t, using the unique projection-compatible V×_UU'≅V×_XX'. α is the conjugate of the same direct-image fibre-product identifications that define the compositors of def-cbc-strict-constant-tower-operations, so α=c^{-1} with the orientation checked. The transport to the chosen U' is formal. Step 3: the counit equation type-checks; composing with c and transposing gives exactly the stated formula. Sources checked: Stacks 04J0 (sites-modules l.2369), 09A5, 07A7, and the last parenthesis of the main-20261015 thm-cbc-complete-proetale proof. No SGA. Not duplicates: lem-sf-cartesian-open-adjunction-restriction (finite Λ, derived), det-sf-mate-open-restriction, lem-fix-ordinary-restriction-pullback-square, lem-sfb-identity-open-underived-square-normalization, lem-exc-proetale-derived-open-restriction, lem-trf-open-square-exchange. Two tool_uses accepted (the generic counit node and the constant-ring inverse-image node). proof_deps equals the union of step uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TowerOpenBetaNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.openBetaRestriction_normalized",
+  "statement": "theorem openBetaRestriction_normalized {U' U X' X : Scheme.{u}}\n    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)\n    [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g)\n    (sq : IsPullback a j' j g) :\n    IsIso (openBetaRestriction B a j' j g w) ∧\n      (∀ (M : Modules B X') (V : U.ProEt)\n        (x : ((moduleDirectImage B g).obj M).val.obj\n          (op ((MorphismProperty.Over.map (f := j) ⊤\n            (inferInstance : WeaklyEtale j)).obj V))),\n        ((openBetaRestriction B a j' j g w).app M).val.app (op V)\n            (openBetaSection B j ((moduleDirectImage B g).obj M) V x) =\n          openBetaSection B j' M ((Scheme.proEtaleBaseChange a).obj V)\n            (M.val.map (openBetaSectionObjectMap a j' j g w V).op x))",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Exact existing single-module-sheaf clause, not the derived/tower conclusion of its owning module. openBetaRestriction is definitionally the mate of moduleSquareG.inv under the canonical constant-ring module adjunctions; moduleSquareG_eq identifies that inverse with the compositor c in this node. The theorem asserts this mate is invertible and has the specified identity-on-common-sections action, for arbitrary commutative B and arbitrary g. OpenImmersionSquare unpacks into its two open instances and IsPullback; its chosen projection-compatible representative changes no map. This attaches the already-stated helper rather than duplicating it. Its docstring currently cites this node, so stage 3 should prove this very helper from this node's three-step proof, not appeal to itself or add a self-import. No proof is supplied in this delivery."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fae4ba5d0",
+  "group": "O4",
+  "result": "pass",
+  "note": "Existing:true attachment of openBetaRestriction_normalized (TowerOpenBetaNormalization, sorry); only the item lean field changed (diffed vs side-live); statement verbatim. B: Type(u+1) CommRing as in def-cbc-strict-constant-tower-operations, no hyp on B or g; IsOpenImmersion j/j' + IsPullback = OpenImmersionSquare unpacked. moduleSquareG.inv = c via moduleSquareG_eq (GComp a j inverse, eqToIso w, GComp j' g), correct orientation; openBetaRestriction = mateEquiv(adj g, adj a) of c gives eta, (gU)_*c, (gU)_*j'^-1 eps, per def-weil-pbc-adjunction-mate. Section clause: mate is the identity on M(V x_X X') via canonical openBetaSection and projection-compatible lift (id_V, j'), i.e. t = mate; IsIso implied by the node. Edge cases g=id, U empty, B=0 covered. Advisory: helper also listed in lem-cbc-tower-open-beta-normalization declarations (that node has this item as proof_dep only, no cycle); helper docstring is tagged with the consumer node and refers to this item, so stage 3 should carry this node's 3-step proof; moduleSquareG comes from a non-stmt_dep node, pinned by _eq."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261026T002501-L-91800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFiniteCompatibility"
+  ],
+  "sorry_after": []
+ }
+}

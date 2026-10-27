@@ -1,0 +1,355 @@
+{
+ "id": "lem-sfb-space-nodal-locus-base-change",
+ "kind": "statement",
+ "title": "Universal nodal relative-dimension-one locus for algebraic spaces",
+ "statement": "Algebraic spaces are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Flatness and local finite presentation for their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed: separated means its diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). Let $f:X\\to Y$ be flat and locally of finite presentation. There is a largest open subspace $V\\subseteq X$ on which $f$ is at-worst-nodal of relative dimension one, and formation of $V$ commutes with every base change $Y'\\to Y$. More precisely, on any geometric fibre over an algebraically closed field $\\Omega$ [def-weil-geometric-fibre, def-weil-field, def-weil-algebraic-closure], the inverse image $V_\\Omega$ consists exactly of the points with a neighbourhood smooth of relative dimension one [def-sbc-smooth-morphisms] and the ordinary nodes. An ordinary node is a closed point whose completed local ring is $\\Omega[[u,v]]/(uv)$ [def-weil-closed-points, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The topology and fibre conditions for algebraic spaces are tested on etale scheme charts; no equidimensionality assumption is imposed on the whole of $X$ or on its fibres.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-points",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-trf-projective-nodal-tower"
+ ],
+ "proof": [
+  {
+   "text": "First handle an arbitrary flat locally finitely presented scheme morphism $h:U\\to T$, without a fibre-dimension hypothesis. Put $L=L_1(h)$ from [lem-sfb-syntomic-fixed-dimension-locus]. Its restriction is flat and locally of finite presentation, and all nonempty geometric fibres are pure of dimension one. Apply [lem-trf-nodal-open-locus] to $h|_L$ and denote its nodal open by $N\\subseteq L\\subseteq U$. The cited statement applies because the purity hypothesis has now been verified on $L$, rather than assumed on $U$. Both $L$ and $N$ are open in $U$.",
+   "uses": [
+    "lem-sfb-syntomic-fixed-dimension-locus",
+    "lem-trf-nodal-open-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, reduction to the scheme case; curves.tex Tag 0DSC, restriction to the syntomic relative-dimension-one piece."
+   }
+  },
+  {
+   "text": "This $N$ is the largest nodal source open for $h$. Indeed, let $O\\subseteq U$ be any open on which $h$ is nodal. Each geometric fibre $O_\\Omega$ is pure one-dimensional and its closed points are smooth or nodes. Apply [lem-trf-nodal-curve-lci-criterion], implication (1) to (2), to that fibre (taking its first-Fitting singular subscheme): the fibre is a local complete intersection. Thus $h|_O$ is syntomic by the explicit geometric-fibre definition in [lem-sfb-syntomic-fixed-dimension-locus], and its fibres are pure one-dimensional. Largestness in that node gives $O\\subseteq L$. Now [lem-trf-nodal-open-locus] on $L$ gives $O\\subseteq N$. For every scheme base change $T'\\to T$, the first cited node identifies $L_1(h_{T'})$ with $L\\times_TT'$, and the second identifies its nodal open with $N\\times_TT'$. The same construction therefore proves arbitrary scheme base-change compatibility, without any purity assumption on $h$.",
+   "uses": [
+    "lem-sfb-syntomic-fixed-dimension-locus",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-open-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, scheme-locus input, with curves.tex Tag 0DSC and Tag 0C4E."
+   }
+  },
+  {
+   "text": "Record the precise fibrewise meaning of this scheme locus. Let $C=U_\\Omega$. A point with a smooth relative-dimension-one neighbourhood belongs to $L_1(h)_\\Omega$ by [lem-sfb-syntomic-fixed-dimension-locus]. So does every ordinary node $c$: its completion is $A=\\Omega[[u,v]]/(uv)$. By [lem-weil-pbc-power-series-field-cohen-regular-complete] the power series ring is a local domain; hence the nonzero nonunit $uv$ is a regular sequence of length one. Also $\\dim A=1$: a prime containing $uv$ contains $u$ or $v$, and the corresponding quotients are the one-variable power series domains of dimension one furnished by the same node. Every chain lies in one of these two branches, and the chain $(u)\\subsetneq(u,v)$ has length one. The closed-point completed-ring criterion in [lem-sfb-syntomic-fixed-dimension-locus] now puts $c$ in $L_1(h)_\\Omega$. Apply the fibrewise description of [lem-trf-nodal-open-locus] on $L_1(h)$: its $N_\\Omega$ contains all these points and consists only of smooth curve points and nodes. Local rings and completions are unchanged by open restriction, so the pointwise description is in $C$, with no purity assumption on $C$.",
+   "uses": [
+    "lem-sfb-syntomic-fixed-dimension-locus",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-trf-nodal-open-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, geometric-fibre interpretation from curves.tex Tag 0DSC; algebra.tex Tag 032C for the completed node."
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme atlas $T\\to Y$ and then a surjective etale scheme atlas $U\\to X\\times_YT$ using [def-trf-algebraic-space]. By [lem-trf-space-fibre-products-etale-covers] and the etale composition rule [lem-weil-pbc-etale-composition-cancellation], tested on scheme charts, their composite $p:U\\to X$ is surjective etale. Write $h:U\\to T$ for the top morphism. By the assumed chartwise flatness and local finite presentation, $h$ satisfies the hypotheses of Steps 1--3. Let $N\\subseteq U$ be its scheme locus, and let $V\\subseteq X$ be the image open subspace of $N\\to X$. This exists by [lem-a1-space-etale-open-image], which also makes $N\\to V$ surjective etale. The diagram $N\\to T$ over $V\\to Y$ has etale vertical arrows and a surjective source arrow. Since its top morphism is nodal, [lem-sfb-space-nodal-chart-locality] gives that $V\\to Y$ is nodal.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-space-nodal-chart-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, choice of charts and the open image; Tag 0DSG, condition (7)."
+   }
+  },
+  {
+   "text": "Let $O\\subseteq X$ be any open subspace with $O\\to Y$ nodal. Apply [lem-sfb-space-nodal-chart-locality] to the diagram $p^{-1}O\\to T$ over $O\\to Y$. It says that the top scheme morphism is nodal, so Step 2 gives $p^{-1}O\\subseteq N$. Because $p$ is surjective, each point of $O$ lifts to $p^{-1}O$, and therefore lies in the image open $V$. Thus $O\\subseteq V$ on points, and hence as open subspaces by [lem-a1-space-etale-open-image]. This proves largestness. Apply the same argument with $O=V$: it gives $p^{-1}V\\subseteq N$, while the definition of the image gives $N\\subseteq p^{-1}V$. Consequently $p^{-1}V=N$. The construction and this equality hold for any choice of charts; different choices give the same $V$ by largestness.",
+   "uses": [
+    "lem-sfb-space-nodal-chart-locality",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, nodal descent and largestness; the parenthetical inverse-image equality made explicit."
+   }
+  },
+  {
+   "text": "Fix any algebraic-space morphism $Y'\\to Y$. Set $X'=X\\times_YY'$ and $T'=T\\times_YY'$. Choose a surjective etale scheme atlas $Z\\to T'$. Since $T'$ is a base change of the surjective etale atlas $T\\to Y$, the composite $Z\\to Y'$ is surjective etale. Put $U_Z=U\\times_TZ$; here $U,T,Z$ are schemes, so this is a scheme. Associativity of fibre products identifies it with $(U\\times_YY')\\times_{T'}Z$. The covering and representability assertions of [lem-trf-space-fibre-products-etale-covers], together with the scheme etale composition rule [lem-weil-pbc-etale-composition-cancellation] on charts, show that $U_Z\\to X'$ is a surjective etale scheme atlas. Thus $U_Z\\to Z$ is an admissible chart diagram for $X'\\to Y'$. It is the scheme base change of $h$, so is flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). This also verifies chartwise that $X'\\to Y'$ is flat and locally of finite presentation.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, last sentence: scheme refinement of the pulled-back charts for an arbitrary algebraic-space base change."
+   }
+  },
+  {
+   "text": "Let $V'\\subseteq X'$ be the largest nodal open constructed for $X'\\to Y'$. By Step 5 in the chart diagram of Step 6, its inverse image in $U_Z$ is the nodal scheme locus of $U_Z\\to Z$. Step 2 identifies this locus with $N\\times_TZ$. On the other hand, the inverse image of $V\\times_YY'$ in $U_Z$ is also $N\\times_TZ$: substitute $p^{-1}V=N$ from Step 5 into the cartesian diagram of Step 6. The atlas $U_Z\\to X'$ is surjective, so the two open subsets of $|X'|$ with equal inverse image are equal. By the open-subspace correspondence of [lem-a1-space-etale-open-image] the two open subspaces are equal. Hence $V'=V\\times_YY'$ as required.",
+   "uses": [
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, last sentence: explicit comparison of the two source opens after a surjective scheme refinement."
+   }
+  },
+  {
+   "text": "Finally base change to any geometric point $\\operatorname{Spec}\\Omega\\to Y$. Step 7 identifies the inverse image $V_\\Omega$ with the largest nodal open for $X_\\Omega\\to\\operatorname{Spec}\\Omega$. Choose any surjective etale scheme atlas $A\\to X_\\Omega$ and use the target chart $\\operatorname{Spec}\\Omega$ itself. Step 5 identifies the inverse image of $V_\\Omega$ with the scheme locus of $A\\to\\operatorname{Spec}\\Omega$. By Step 3 this is precisely the smooth-relative-dimension-one points and ordinary nodes of $A$. The pointwise preservation and reflection assertion of [lem-sfb-space-nodal-chart-locality] identifies this condition with the same condition on $X_\\Omega$, tested on these charts. Since the atlas is surjective, this proves the claimed equality of fibre subsets. Neither the construction nor this test has assumed pure dimension for the other components of any fibre.",
+   "uses": [
+    "lem-sfb-space-nodal-chart-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0DSH, geometric-fibre meaning of the descended open; Tag 0DSG and curves.tex Tag 0DSC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-space-nodal-chart-locality",
+  "lem-sfb-syntomic-fixed-dimension-locus",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-nodal-open-locus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DSH (lemma-locus-where-nodal), with the scheme restriction of curves.tex Tag 0DSC factored through its syntomic relative-dimension-one piece and the final base-change comparison written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented morphism of algebraic spaces has a largest nodal relative dimension one open locus compatible with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus of smooth curve points and ordinary nodes is open in a flat family of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinaryDoublePoint",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"295\", \"text\": \"/-- Lagrange interpolation: given a finset `s : Finset ι`, a nodal map `v : ι → F` injective on\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"529\", \"text\": \"section Nodal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"536\", \"text\": \"/-- `nodal s v` is the unique monic polynomial whose roots are the nodes defined by `v` and `s`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"538\", \"text\": \"That is, the roots of `nodal s v` are exactly the image of `v` on `s`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"541\", \"text\": \"We can use `nodal` to define the barycentric forms of the evaluated interpolant.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finitely presented morphism of algebraic spaces has a largest nodal relative dimension one open locus compatible with base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus of nodal relative dimension one points in a flat finitely presented morphism of algebraic spaces is open and commutes with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth curve points and ordinary double points form a universal open locus in a flat family",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Algebra.smoothLocus R A = Set.univ\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ coincides with the entire prime spectrum $ \\\\operatorname{Spec}(A) $, i.e., $ \\\\operatorname{smoothL\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"nodal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinaryDoublePoint|AlgebraicSpace",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"295\", \"text\": \"/-- Lagrange interpolation: given a finset `s : Finset ι`, a nodal map `v : ι → F` injective on\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"529\", \"text\": \"section Nodal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"536\", \"text\": \"/-- `nodal s v` is the unique monic polynomial whose roots are the nodes defined by `v` and `s`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"538\", \"text\": \"That is, the roots of `nodal s v` are exactly the image of `v` on `s`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"541\", \"text\": \"We can use `nodal` to define the barycentric forms of the evaluated interpolant.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nodal locus of a flat locally finitely presented morphism of algebraic spaces commutes with base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no nodal algebraic-space assertion; the scheme smoothness and etaleness results omit ordinary nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal.",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-space-nodal-locus-base-change",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DSH: construct the unrestricted scheme locus by first isolating the syntomic one-dimensional piece and reusing the existing pure-dimension nodal-open node; descend its open image through etale charts and prove saturation, maximality and arbitrary-space base change explicitly. Two statement-only prerequisites. Checked completed nodes and mixed-dimensional fibres; normalized inherited doubled TeX escapes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DSH (lemma-locus-where-nodal), with lemma-nodal-local and definition-nodal-family; fibrewise meaning from curves.tex lemma-locus-where-nodal. The eight steps realize the supporting nodal-locus input by the 0DSH chart construction. The ancestor tool returns None for this inherited chain; retained its null ancestor and full explicit place.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic Algebraic spaces and their etale line modules, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic Open images of representable etale morphisms of algebraic spaces, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-trf-nodal-curve-lci-criterion",
+    "why": "Generic Nodal curves characterized by a local complete intersection and unramified Jacobian subscheme, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-trf-nodal-open-locus",
+    "why": "Generic The nodal locus of a flat family is open and commutes with base change, used exactly for its stated scheme nodal-open result after verifying pure fibre dimension in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic Fibre products of algebraic spaces and pullback of etale coverings, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic Open immersions are etale; etale morphisms compose and cancel, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic Base change of a flat morphism of schemes is flat, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic Power series over a field or a Cohen ring: complete regular local domain, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic Quasi-compactness and quasi-separatedness of morphisms between qcqs schemes; finite presentation is stable under base change, used exactly for its stated chart, open-image, fibre-product, or local algebra assertion in the Stacks 0DSH construction; no node of this unit supplies that tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-nodal-open-locus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-88a5d830c",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-88a5d830c (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps), both new unsplit nodes, every cited statement, and the sources. These were Stacks 0DSH, 0DSG (1)-(8), 0DSF and definition-nodal-family in spaces-more-morphisms.tex; lemma-nodal-family, definition-nodal-family and 0DSC (with its proof) in curves.tex; and 02K1 in morphisms.tex. Tags were checked against tags/tags. The route is the source's 0DSH proof. lem-trf-nodal-open-locus assumes pure 1-dimensional fibres, so steps 1-3 first restrict to L_1(h), the syntomic piece of dimension 1, in the order of the 0DSC proof. Step 2 gets maximality from lci-criterion (1)=>(2) and gets scheme base change. Step 3 checks that Omega[[u,v]]/(uv) is a CI of dimension 1 (regular element uv; the two branches give dimension 1). Steps 4-5 build V as the open image, prove it is the largest via 0DSG(6)/(7), and prove p^-1V=N. Step 6 checks that U x_T Z -> X' is a surjective etale atlas (I verified the associativity). Step 7 compares the two opens through their equal preimage N x_T Z. Step 8 reads off the fibre meaning. Tested cases: mixed fibres A^2 + A^1 + node, a cusp (in L_1 but not in N), d=0 double point, empty fibres. New node lem-sfb-syntomic-fixed-dimension-locus is true (02V3+02K1+02NK, closed-point criterion via 09Q1/0A21/07NV). It is not a duplicate of lem-trf-syntomic-locus-base-change, which has no dimension, or of lem-sbc-...-decomposition, which has no syntomic locus or base change. It has no nodal content. New node lem-sfb-space-nodal-chart-locality is 0DSG+0DSF plus a true pointwise statement on etale charts. No node in the DAG states 0DSG/0DSF (lem-trf-nodal-family-etale-source-locality covers schemes only), and it does not restate the item. All 9 tool_uses are accepted as generic black boxes. Batch-5: the closure of the 5 flagged nodes has 1104 nodes, of which 114 are in sec-trace-formula, all def/lem nodes of sk-i-curve-zero. It contains no thm node, no trace-transport node, no nt-assume or nt-target node and no sec-poincare-duality node. All 6 flagged citations are general algebraic-space or nodal-curve geometry (025Y, 02X2/041F, 03BZ/03IR, 0C4E, 0DSC), neither given by the trace-formula or Poincare-duality assumptions nor steps of their proofs. Accepted, as for the PASSed parent lem-sfb-nodal-curve-stack-smooth. The item is still unsplit on live and side-live, has no repair note and is not on the dropped list. Advisory only: the inherited item statement leaves at-worst-nodal implicit, but the fibre clause pins it down. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceNodalLocusBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_nodal_open_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.IsSmoothCurveOrOrdinaryNode",
+   "AlgebraicGeometry.IsSchemeNodalCurve",
+   "AlgebraicGeometry.AlgebraicSpace.OnEtaleCharts",
+   "AlgebraicGeometry.AlgebraicSpace.HasNodalCurveCharts",
+   "AlgebraicGeometry.AlgebraicSpace.exists_nodal_open_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceNodalLocusBaseChange.lean",
+  "statement": "theorem exists_nodal_open_baseChange {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) (hflat : OnEtaleCharts (fun _ _ h ↦ Flat h) f.hom.hom) (hfp : OnEtaleCharts (fun _ _ h ↦ LocallyOfFinitePresentation h) f.hom.hom) : ∃ A : OpenSubspace X, HasNodalCurveCharts (A.val.ι ≫ f.hom.hom) ∧ (∀ B : OpenSubspace X, HasNodalCurveCharts (B.val.ι ≫ f.hom.hom) → B ≤ A) ∧ (∀ (Y' : AlgebraicSpace S) (g : Y' ⟶ Y), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (A.val.preimage (Limits.pullback.fst f.hom.hom g.hom.hom)).ι ∧ HasNodalCurveCharts ((A.val.preimage (Limits.pullback.fst f.hom.hom g.hom.hom)).ι ≫ Limits.pullback.snd f.hom.hom g.hom.hom) ∧ (∀ B : Subfunctor (Limits.pullback f.hom.hom g.hom.hom), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) B.ι → HasNodalCurveCharts (B.ι ≫ Limits.pullback.snd f.hom.hom g.hom.hom) → B ≤ A.val.preimage (Limits.pullback.fst f.hom.hom g.hom.hom))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (g : yoneda.obj (Over.mk s) ⟶ Y.obj.obj) (U : Over S) (a : yoneda.obj U ⟶ Limits.pullback f.hom.hom g) (b : U ⟶ Over.mk s), IsEtale a → a ≫ Limits.pullback.snd f.hom.hom g = yoneda.map b → ∀ x : U.left, schemePointMap (a ≫ Limits.pullback.fst f.hom.hom g) x ∈ pointImage A.val.ι ↔ IsSmoothCurveOrOrdinaryNode b.left x)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88da30e7a",
+  "group": "O2",
+  "result": "pass",
+  "note": "Re-delivery repairs the affc2dab RETURN exactly: def-sfb-space-nodal-curve-charts and SpaceNodalCurveCharts.lean dropped; IsSmoothCurveOrOrdinaryNode/IsSchemeNodalCurve/OnEtaleCharts/HasNodalCurveCharts inlined with source+blueprint docstrings and listed with the theorem in lean.declarations; stmt_deps = live base + def-a1-space-open-subspace + def-a1-space-point-topology + def-trf-projective-nodal-tower (the list simulated clean by the prior reviewer); node clause = closedPoints ∧ IsGeometricOrdinaryDoublePoint with [IsAlgClosed Ω] (F2). Node diff vs side-live: only stmt_deps and lean; statement verbatim in file; one sorry. Maths checked against Stacks 0DSH/0DSG(6)/curves lemma-nodal-family: chartwise flat+lfp hypotheses, largest nodal OpenSubspace, base change as largest nodal open of the presheaf pullback, geometric-fibre iff on étale charts via schemePointMap/pointImage; edge cases (empty, mixed fibres, isolated point, cusp, identity base change, Ω : Type u) ok. Imports all module files on side-live. Advisories: helper space-nodal predicate lives in a theorem module (future citers need a def node); IsNodalRelativeCurve duplicate notion in non-module theorem file; schemePointMap reached transitively. No compile (no FIX)."
+ }
+}

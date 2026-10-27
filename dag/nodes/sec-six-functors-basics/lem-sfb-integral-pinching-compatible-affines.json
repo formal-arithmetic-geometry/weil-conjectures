@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-integral-pinching-compatible-affines",
+ "kind": "statement",
+ "title": "Compatible affine neighbourhoods for closed-integral pinching",
+ "statement": "Let $X,T,Z$ be schemes [def-pc-scheme], let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and let $j:Z\\to T$ be an integral morphism [def-weil-finite-integral-morphism]. Assume that for every $t\\in T$ the subset $i(j^{-1}(\\{t\\}))$ is contained in some affine open of $X$. Then for every $t\\in T$ there are affine open subschemes $U\\subseteq X$ and $V\\subseteq T$ [def-weil-open-immersion] with $t\\in V$ and $i^{-1}(U)=j^{-1}(V)$ as open subschemes of $Z$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0ECJ, lemma-prepare-pushout-along-closed-immersion-and-integral, in Situation situation-pushout-along-closed-immersion-and-integral."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t\\in T$. Choose an affine open $U_0\\subseteq X$ containing $i(j^{-1}\\{t\\})$, as in the hypothesis, and set $\\Omega_0=i^{-1}(U_0)$. The affine description in [def-weil-closed-immersion] makes $\\Omega_0$ affine and $\\Gamma(U_0,\\mathcal O_X)\\to\\Gamma(\\Omega_0,\\mathcal O_Z)$ surjective. By [pqf-lem-integral-univclosed], $j$ is universally closed, hence closed. Thus $H_0=T\\setminus j(Z\\setminus\\Omega_0)$ is an open neighbourhood of $t$. Apply [lem-weil-pbc-affine-opens-basis] to choose an affine $t\\in V_0\\subseteq H_0$. By the definition of $H_0$, $j^{-1}(V_0)\\subseteq\\Omega_0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "pqf-lem-integral-univclosed",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECJ, lemma-prepare-pushout-along-closed-immersion-and-integral, first paragraph, first shrinking of Y"
+   }
+  },
+  {
+   "text": "Form the scheme-theoretic fibre $Z_t=Z\\times_T\\operatorname{Spec}\\kappa(t)$ of [def-pc-scheme-fibre]. Its image in $Z$ is exactly $j^{-1}\\{t\\}$. By [lem-sbc-integral-morphism-base-change] its structure map to $\\operatorname{Spec}\\kappa(t)$ is integral. By [def-weil-finite-integral-morphism], $Z_t=\\operatorname{Spec}A_t$ for a commutative algebra $A_t$ integral over the field $\\kappa(t)$. The fibre map has image in $j^{-1}(V_0)\\subseteq\\Omega_0$, so restricts to a morphism into that open subscheme; here restriction means the factorization through the open subspace with the restricted structure sheaf [def-weil-open-immersion].",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-sbc-integral-morphism-base-change",
+    "def-weil-finite-integral-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECJ, lemma-prepare-pushout-along-closed-immersion-and-integral, first paragraph, fibre integral over a field"
+   }
+  },
+  {
+   "text": "Write $\\Omega_0=\\operatorname{Spec}B_0$. By [def-weil-affine-spectrum] the map $Z_t\\to\\Omega_0$ is induced by a ring map $B_0\\to A_t$. Apply [lem-sfb-algebraic-field-image-principal-neighbourhood] to the open subset $j^{-1}(V_0)$ of $\\Omega_0$. It gives $\\overline f_0\\in B_0$ with $j^{-1}\\{t\\}\\subseteq D_{\\Omega_0}(\\overline f_0)\\subseteq j^{-1}(V_0)$. Lift $\\overline f_0$ to $f_0\\in\\Gamma(U_0,\\mathcal O_X)$ by [def-weil-closed-immersion], and put $U_1=D_{U_0}(f_0)$. This is affine by [lem-weil-pbc-principal-localization-open-immersion]. Since the affine spectrum map contracts primes, $i^{-1}(U_1)=D_{\\Omega_0}(\\overline f_0)$: a prime omits $\\overline f_0$ exactly when its inverse-image prime omits $f_0$. Thus, writing $\\Omega_1=i^{-1}(U_1)$, we have $j^{-1}\\{t\\}\\subseteq\\Omega_1\\subseteq j^{-1}(V_0)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-algebraic-field-image-principal-neighbourhood",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECJ, lemma-prepare-pushout-along-closed-immersion-and-integral, first paragraph, use of Limits Tag 0E21 and lifting the first function"
+   }
+  },
+  {
+   "text": "The closedness of $j$, again from [pqf-lem-integral-univclosed], shows that $H_1=V_0\\setminus j(Z\\setminus\\Omega_1)$ is open in the affine scheme $V_0$. It contains $t$, since the whole fibre over $t$ lies in $\\Omega_1$. Use the canonical morphism $\\operatorname{Spec}\\kappa(t)\\to V_0$ of [def-pc-scheme-fibre]; its image is $\\{t\\}$. Apply [lem-sfb-algebraic-field-image-principal-neighbourhood] with the field algebra $A=k=\\kappa(t)$ and this map to obtain $g\\in\\Gamma(V_0,\\mathcal O_T)$ such that $t\\in V=D_{V_0}(g)\\subseteq H_1$. The principal open $V$ is affine by [lem-weil-pbc-principal-localization-open-immersion]. From $V\\subseteq H_1$ it follows that $j^{-1}(V)\\subseteq\\Omega_1$.",
+   "uses": [
+    "pqf-lem-integral-univclosed",
+    "def-pc-scheme-fibre",
+    "lem-sfb-algebraic-field-image-principal-neighbourhood",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECJ, lemma-prepare-pushout-along-closed-immersion-and-integral, second paragraph, choice of g with saturated preimage in the shrunken X open"
+   }
+  },
+  {
+   "text": "Since $\\Omega_1\\subseteq j^{-1}(V_0)$, pull $g$ back along $j|_{\\Omega_1}:\\Omega_1\\to V_0$ to a section $\\overline f_1\\in\\Gamma(\\Omega_1,\\mathcal O_Z)$. Apply the affine description in [def-weil-closed-immersion] now to the affine open $U_1\\subseteq X$ to lift it to $f_1\\in\\Gamma(U_1,\\mathcal O_X)$. Set $U=D_{U_1}(f_1)$, which is affine by [lem-weil-pbc-principal-localization-open-immersion]. Contraction of primes for the spectrum maps [def-weil-affine-spectrum] gives $i^{-1}(U)=D_{\\Omega_1}(\\overline f_1)=\\Omega_1\\cap j^{-1}(D_{V_0}(g))$. Because $j^{-1}(V)\\subseteq\\Omega_1$, this is $j^{-1}(V)$. Equal open subsets carry the same restricted structure sheaf [def-weil-open-immersion], so this is equality as open subschemes of $Z$. Together with $t\\in V$, these $U,V$ prove the claim.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ECJ, lemma-prepare-pushout-along-closed-immersion-and-integral, second paragraph, final function lifting and equality of inverse images; correcting the last printed V-prime to U-prime"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-scheme-fibre",
+  "lem-sbc-integral-morphism-base-change",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "lem-sfb-algebraic-field-image-principal-neighbourhood",
+  "lem-weil-pbc-principal-localization-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0ECJ, lemma-prepare-pushout-along-closed-immersion-and-integral, full proof; affine form of Limits Tag 0E21 for the principal-neighbourhood input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a closed immersion Z into X and an integral morphism Z to T have affine neighborhoods of every fibre, there are affine opens U in X and V in T with identical inverse images in Z",
+   "results": "{\"t\": \"2026-10-22T05:21:58Z\", \"tool\": \"leanfinder\", \"query\": \"If a closed immersion Z into X and an integral morphism Z to T have affine neighborhoods of every fibre, there are affine opens U in X and V in T with identical inverse images in Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv\"], \"digest\": \"4a2ba0ee80d6cc9a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the definition of an integral morphism, its affine property and restrictions, or open-immersion gluing; none produces simultaneous saturated affine neighbourhoods."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"affine\", \"integral\"",
+   "results": "{\"t\": \"2026-10-22T05:21:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"affine\\\", \\\"integral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.AffineSpace.instIsIntegral\", \"AlgebraicGeometry.AffineSpace.instGeometricallyIntegralOverSchemeInferInstanceOverClass\"], \"digest\": \"36da40cd6331192b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the definition of an integral morphism, its affine property and restrictions, or open-immersion gluing; none produces simultaneous saturated affine neighbourhoods."
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinching|compatible.*affine|affine.*neighb.*integral",
+   "results": "{\"t\": \"2026-10-22T05:21:56Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinching|compatible.*affine|affine.*neighb.*integral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the definition of an integral morphism, its affine property and restrictions, or open-immersion gluing; none produces simultaneous saturated affine neighbourhoods."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible affine open neighborhoods for an integral morphism and a closed immersion",
+   "results": "{\"t\": \"2026-10-22T05:21:57Z\", \"tool\": \"leansearch\", \"query\": \"Compatible affine open neighborhoods for an integral morphism and a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv\", \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv_apply_coe_coe\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion\", \"AlgebraicGeometry.isIntegralHom_iff\"], \"digest\": \"0c3742e89e1942aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the definition of an integral morphism, its affine property and restrictions, or open-immersion gluing; none produces simultaneous saturated affine neighbourhoods."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous affine neighborhoods in a pinching datum with closed embedding and integral gluing morphism",
+   "results": "{\"t\": \"2026-10-22T05:22:11Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous affine neighborhoods in a pinching datum with closed embedding and integral gluing morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\"], \"digest\": \"85a37bc0fdc4fe12\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give the definition of an integral morphism, its affine property and restrictions, or open-immersion gluing; none produces simultaneous saturated affine neighbourhoods."
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinching|compatible.*affine|affine.*neighb.*integral",
+   "results": "{\"t\": \"2026-10-22T05:42:13Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinching|compatible.*affine|affine.*neighb.*integral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations provide integral/closed-immersion affine properties and individual basic opens, not simultaneous affine neighbourhoods with identical inverse images."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine neighborhoods with equal inverse images for integral pinching along a closed immersion",
+   "results": "{\"t\": \"2026-10-22T05:42:14Z\", \"tool\": \"leansearch\", \"query\": \"Affine neighborhoods with equal inverse images for integral pinching along a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion\", \"AlgebraicGeometry.affineOpensRestrict_symm_apply_coe\", \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv_symm_apply_coe\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus\"], \"digest\": \"87262abf4df971a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations provide integral/closed-immersion affine properties and individual basic opens, not simultaneous affine neighbourhoods with identical inverse images."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"integral\", \"affine\"",
+   "results": "{\"t\": \"2026-10-22T05:42:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"integral\\\", \\\"affine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.AffineSpace.instIsIntegral\", \"AlgebraicGeometry.AffineSpace.instGeometricallyIntegralOverSchemeInferInstanceOverClass\"], \"digest\": \"36da40cd6331192b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations provide integral/closed-immersion affine properties and individual basic opens, not simultaneous affine neighbourhoods with identical inverse images."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible affine open neighborhoods U in X and V in T for a closed immersion Z to X and an integral morphism Z to T whose fibers are contained in affine opens, with identical inverse images in Z",
+   "results": "{\"t\": \"2026-10-22T05:42:16Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible affine open neighborhoods U in X and V in T for a closed immersion Z to X and an integral morphism Z to T whose fibers are contained in affine opens, with identical inverse images in Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\"], \"digest\": \"5ab3b757d71a3c28\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations provide integral/closed-immersion affine properties and individual basic opens, not simultaneous affine neighbourhoods with identical inverse images."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ferrand-scheme-pushout",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches; general scheme pushout construction used before the trait flatness and nodal-fibre argument; general scheme pushout construction, compatible affine neighbourhoods used to produce local models (Stacks 0E25, second paragraph).",
+   "via": [
+    "lem-sfb-ferrand-scheme-pushout",
+    "lem-sfb-trait-etale-branch-pinching",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-pinching-compatible-affines",
+  "worker": "stage1",
+  "summary": "Kept the statement, checked Tag 0ECJ and its Situation, and wrote the two successive shrinkings and function lifts explicitly. Reused existing integral closedness, integral base change, fibre, affine-basis and principal-localization nodes. Created only the affine specialization of 0E21 as a statement-only lemma. Corrected the source proof's final i^{-1}(V') typo to i^{-1}(U'). No finiteness or nonempty-fibre assumption was added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches; general scheme pushout construction used before the trait flatness and nodal-fibre argument; general scheme pushout construction, compatible affine neighbourhoods used to produce local models (Stacks 0E25, second paragraph). This split supplies the compatible affine models used in step 2 of lem-sfb-ferrand-scheme-pushout; the new node is the strictly smaller 0E21 principal-neighbourhood input.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-89aaf0a01",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-89aaf0a01 (reviewer sub-agent of L); spot-checked: The item statement matches Stacks 0ECJ and its Situation (more-morphisms.tex l.19708-19757). The 5 steps write out the source proof, including both shrinkings, both lifts and the corrected final formula i^{-1}(U')=j^{-1}(V') (the source has a typo there). Step 1 uses 01QO affine-surjective plus integral⇒closed (01WM) for V_0. Step 2 builds the fibre Z_t=Spec A_t from integral base change plus the scheme-fibre homeomorphism. Step 3 applies the new node to B_0→A_t with W=j^{-1}V_0, lifts f, and gets i^{-1}D(f_0)=D(f̄_0) by contracting primes. Step 4 shows H_1 is open by closedness and gets g with t∈D(g)⊆H_1 by applying the new node to Spec κ(t)→V_0; that is valid but heavier than needed. Step 5: i^{-1}D(f_1)=Ω_1∩j^{-1}D(g)=j^{-1}V, checked pointwise. Every cited node is a Mathlib leaf or definition, so there is no route issue. The new node lem-sfb-algebraic-field-image-principal-neighbourhood is exactly the affine case (X=Spec R, L=O_X) of Limits 0E21 (limits.tex l.3003). It is true on the tested cases (A=0, one point, Q×Q, k[ε]) and is a genuine lemma, since the image can be an infinite profinite set. Only lem-sc-ample-finite-principal-affine comes close, and it is the finite-set special case, not a duplicate. Mathlib searches have all three kinds. The node is statement-only and self-contained. The item, new node, cited nodes and blueprint via chain are all absent from the side-live route-pivot drop list. The item is live-unsplit and has no re-split note. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralPinchingCompatibleAffines",
+  "declaration": "AlgebraicGeometry.exists_affineOpens_preimage_eq_of_isIntegralHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralPinchingCompatibleAffines.lean",
+  "statement": "theorem exists_affineOpens_preimage_eq_of_isIntegralHom {X T Z : Scheme.{u}} (i : Z ⟶ X) (j : Z ⟶ T) [IsClosedImmersion i] [IsIntegralHom j] (h : ∀ t : T, ∃ U : X.Opens, IsAffineOpen U ∧ ∀ z : Z, j z = t → i z ∈ U) : ∀ t : T, ∃ (U : X.Opens) (V : T.Opens), IsAffineOpen U ∧ IsAffineOpen V ∧ t ∈ V ∧ i ⁻¹ᵁ U = j ⁻¹ᵁ V",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e377c820d",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0ECJ clause by clause: [IsClosedImmersion i], [IsIntegralHom j] (not finite), fibre hypothesis ∀ z, j z = t → i z ∈ U for an affine U, conclusion ∀ t ∃ affine U V with t ∈ V and i ⁻¹ᵁ U = j ⁻¹ᵁ V in Z.Opens; no extra assumptions, one universe u, all variables bound. Edge cases (empty T, Z or fibre) fine. Node diff vs side-live: only the lean field added; lean.statement verbatim in file. No duplicate in Mathlib or project lean. Proof-only import of the Q141 helper lem-sfb-algebraic-field-image-principal-neighbourhood is landed. No definitions, proof only sorry, docstrings give source place, blueprint id and the 5 proof steps. Worker report and Second reading by Q121 present (second reading short but a real clause check). No compile run since no file was changed."
+ }
+}

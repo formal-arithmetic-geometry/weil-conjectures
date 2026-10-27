@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-space-etale-thickening-detects-iso",
+ "kind": "statement",
+ "title": "Etale space isomorphisms are detected on a thickening",
+ "statement": "Let $B$ be a scheme and let $f:V\\to W$ be a morphism of algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Suppose $f$ is chartwise etale in the sense of [lem-trf-space-chartwise-etale-permanence]: its composite with every representable etale scheme chart of $V$ is representable etale. Let $i:W_0\\hookrightarrow W$ be a thickening, meaning a representable closed immersion whose scheme base changes are closed immersions [def-weil-closed-immersion] and which induces a homeomorphism on underlying spaces, with the quotient topology from a surjective etale scheme atlas. If $$V\\times_W W_0\\longrightarrow W_0$$ is an isomorphism [lem-trf-space-fibre-products-etale-covers], then $f$ is an isomorphism. No quasi-compactness, separation or finite-order condition is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZH, theorem-topological-invariance, applied to the thickening W_0 -> W, and reflection of isomorphisms under its equivalence of categories of etale algebraic spaces. See also Tag 05ZS, lemma-thickening-equivalence, for scheme objects."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "proof": [
+  {
+   "text": "Fix a scheme $T$ over $B$ and a map $T\\to W$. Put $E=V\\times_WT$, $T_0=W_0\\times_WT$ and $E_0=E\\times_TT_0$. These are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. The base-change clause of [lem-trf-space-chartwise-etale-permanence] makes $g:E\\to T$ chartwise etale. Apply [lem-sfb-space-thickening-base-change] to $i$ and $T\\to W$: its point classes and atlas topology are exactly the underlying-space convention in the hypothesis. It gives a representable closed immersion $T_0\\to T$ inducing a homeomorphism; since $T$ is a scheme, $T_0$ is a scheme as well. Thus $T_0\\to T$ is a thickening, with no finite-order condition. The hypothesis identifies $E_0\\to T_0$ with an isomorphism: on sections the identification $E_0\\simeq (V\\times_WW_0)\\times_{W_0}T_0$ forgets the repeated $W$-coordinate, with inverse inserting its forced value. In particular no representability of $f$ has been assumed.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-thickening-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZH (theorem-topological-invariance), faithfulness/open-equalizer argument specialized to a thickening; Tag 09ZX (lemma-base-change-thickening)."
+   }
+  },
+  {
+   "text": "For each representable etale scheme chart $A\\to E$, the composite $A\\to T$ is etale by step 1 and therefore unramified by [def-weil-etale-morphism]. These are precisely the chart hypotheses of [lem-sfb-unramified-space-open-diagonal], whose target $T$ is a scheme. Thus $\\delta:E\\to D:=E\\times_TE$ is a representable open immersion.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sfb-unramified-space-open-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), part (1), with scheme target T."
+   }
+  },
+  {
+   "text": "Test $\\delta$ on an arbitrary scheme $H\\to D$. Its pullback is an open subscheme $U\\subseteq H$. Set $H_0=H\\times_TT_0$; [lem-sfb-space-thickening-base-change] applied to $T_0\\to T$ and the composite $H\\to D\\to T$ makes $H_0\\to H$ a representable closed immersion and a homeomorphism on point spaces. In particular $H_0$ is a scheme and this morphism is surjective on scheme points. After this base change, the open immersion $U\\to H$ is the pullback of $\\delta_0:E_0\\to E_0\\times_{T_0}E_0$. This is an isomorphism: since $E_0\\to T_0$ is an isomorphism, two sections over the same section of $T_0$ coincide; the first projection is the inverse to $\\delta_0$. Consequently $U\\times_HH_0\\to H_0$ is an isomorphism, so $H_0\\to H$ factors through $U$. Its surjectivity implies $|U|=|H|$, and the open-subscheme description in [def-weil-open-immersion] gives $U=H$. Hence every scheme test of $\\delta$ is an isomorphism. Equivalently, for each test scheme $H$ and pair $(a,b)\\in D(H)$ there is exactly one section of $E(H)$ mapping to $(a,b)$; these inverses commute with restrictions by uniqueness. Thus $\\delta$ itself is an isomorphism.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZH (theorem-topological-invariance), faithfulness/open-equalizer argument specialized to a thickening; Tag 09ZX (lemma-base-change-thickening)."
+   }
+  },
+  {
+   "text": "For any test scheme $H$ and $a,b\\in E(H)$ with $g(a)=g(b)$, the pair $(a,b)$ belongs to $D(H)$. Surjectivity of $\\delta_H$ from step 3 gives a section $c$ with $(a,b)=(c,c)$, so $a=b$. Thus $g$ is a monomorphism of sheaves. Together with the chartwise etaleness from step 1 this supplies both hypotheses of [lem-sfb-space-etale-monomorphism-open], applied over $B$. It follows that $g:E\\to T$ is representable by open immersions.",
+   "uses": [
+    "lem-sfb-space-etale-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W5 (lemma-etale-universally-injective-open), monomorphism specialization."
+   }
+  },
+  {
+   "text": "Testing the open immersion $g$ on $\\operatorname{id}_T$ identifies $E$ over $T$ with an open subscheme $O\\subseteq T$. The isomorphism $E_0\\to T_0$ of step 1 gives a factorization $T_0\\to O\\to T$: use its inverse followed by the projection $E_0\\to E=O$. Since the thickening $T_0\\to T$ is surjective on points, $|O|=|T|$. By [def-weil-open-immersion], an open subscheme with this underlying open is $T$ itself. Hence $g$ is an isomorphism.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZH (theorem-topological-invariance), faithfulness/open-equalizer argument specialized to a thickening; Tag 09ZX (lemma-base-change-thickening)."
+   }
+  },
+  {
+   "text": "The scheme map $T\\to W$ in step 1 was arbitrary. Given any $B$-scheme $H$ and section $y\\in W(H)$, take $T=H$ with map $y$. The isomorphism $V\\times_WH\\to H$ of step 5 gives a unique section above $\\operatorname{id}_H$, that is, a unique $x\\in V(H)$ with $f_H(x)=y$. These bijections are natural: restricting a lift still lifts the restricted section, and uniqueness identifies it with the unique lift of that section. Their inverses therefore define a natural transformation inverse to $f$. By [def-trf-algebraic-space], morphisms of algebraic spaces are natural transformations, so this is an inverse morphism over $B$. Thus $f$ is an isomorphism.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZH (theorem-topological-invariance), faithfulness/open-equalizer argument specialized to a thickening; Tag 09ZX (lemma-base-change-thickening)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-sfb-space-thickening-base-change",
+  "lem-sfb-unramified-space-open-diagonal",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZH, specialized open-equalizer argument; its diagonal/monomorphism specialization is written out using Tags 05W1, 05W5 and 09ZX instead of adding the whole topological-invariance theorem as a new node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism of algebraic spaces is an isomorphism if it becomes an isomorphism over a thickening of its target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"RingHom.Etale.respectsIso\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism and $ e : S \\\\cong T $ is a ring isomorphism, then the composition $ e \\\\circ f : R \\\\to T $ is also étale. Similarly, if $ g : S \\\\to T $ is étale and $ e\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, etale composition or formal etaleness of algebras; none detects isomorphisms of etale algebraic spaces on a thickening"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a nilpotent thickening reflects isomorphisms of etale algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, etale composition or formal etaleness of algebras; none detects isomorphisms of etale algebraic spaces on a thickening"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsIso\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, etale composition or formal etaleness of algebras; none detects isomorphisms of etale algebraic spaces on a thickening"
+  },
+  {
+   "tool": "grep",
+   "query": "thicken.*[Ee]tale|[Ee]tale.*thicken|[Ee]tale.*[Ii]so|[Ii]so.*[Ee]tale",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"86\", \"text\": \"instance : Functor.IsOneHypercoverDense.{u} (AffineEtale.Spec S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"line\": \"82\", \"text\": \"        ⟨Functor.elementsMk _ (AffineEtale.mk (j ≫ f)) (Over.homMk y'), ⟨Iso.refl _⟩⟩,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean\", \"line\": \"61\", \"text\": \"instance : MorphismProperty.RespectsIso @WeaklyEtale := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"78\", \"text\": \"instance (priority := 900) [IsOpenImmersion f] : Etale f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"79\", \"text\": \"  HasRingHomProperty.of_isOpenImmersion RingHom.Etale.containsIdentities\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"105\", \"text\": \"  · exact RingHom.Etale.respectsIso\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, etale composition or formal etaleness of algebras; none detects isomorphisms of etale algebraic spaces on a thickening"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebraic space trivial on a closed thickening is trivial",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton Ω[A⁄R]\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., contains at most one element).\"}\n  {\"name\": \"Algebra.FormallyEtale.mk\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Subsingleton Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallyEtale R A\", \"doc\": \"If the module of Kähler differentials $\\\\Omega_{A/R}$ is trivial and the first cohomology group of the cotangent complex is trivial, then the algebra $A$ over $R$ is formally étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.Etale.recOn\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.Etale R A → Sort u_1} →\\n            (t : Algebra.Etale R A) →\\n              ((formallyEtale : Algebra.FormallyEtale R A) →\\n                  (finitePre\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, this recursor allows defining functions on the property that $ A $ is étale over $ R $ by specifying their behavior on\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, etale composition or formal etaleness of algebras; none detects isomorphisms of etale algebraic spaces on a thickening"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"IsIso\"",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring etale loci, or scheme open/closed-immersion results do not state arbitrary-thickening detection for chartwise etale algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "thicken.*[Ee]tale|[Ee]tale.*thicken|[Ee]tale.*[Ii]so|[Ii]so.*[Ee]tale",
+   "results": "Logged 6 hits: Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring etale loci, or scheme open/closed-immersion results do not state arbitrary-thickening detection for chartwise etale algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale map of algebraic spaces trivial over a closed thickening is an isomorphism",
+   "results": "Logged 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, RingHom.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring etale loci, or scheme open/closed-immersion results do not state arbitrary-thickening detection for chartwise etale algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism of algebraic spaces that is an isomorphism after pullback along an arbitrary thickening is an isomorphism",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring etale loci, or scheme open/closed-immersion results do not state arbitrary-thickening detection for chartwise etale algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback to a nil closed subspace detects whether an etale algebraic space is the terminal object",
+   "results": "Logged 8 hits: Algebra.etaleLocus_eq_univ_iff_etale, Algebra.etaleLocus_eq_univ_iff, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring etale loci, or scheme open/closed-immersion results do not state arbitrary-thickening detection for chartwise etale algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-lfp-space-pushout-gluing",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, last sentence of proof: the etale counit is an isomorphism on the reduced closed subspace, hence an isomorphism.",
+   "via": [
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etale-thickening-detects-iso",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all inherited metadata. Proved the result on arbitrary scheme tests using the open unramified diagonal, base-change stability of arbitrary thickenings, and the existing etale monomorphism criterion. Wrote the pointwise inverse explicitly; no topological-invariance black box, new nodes, finite-order assumption or representability assumption on f. Searched the project and Mathlib, read every cited statement, and checked empty, identity, nonseparated and unbounded-nilpotence cases. Repair of return L: re-read the current thickening-base-change statement and its added point-class/topology definitions, verified the conventions coincide, made both base-change applications and scheme representability explicit, and refreshed the two stale citation quotes against the current DAG.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Tag 07W3, last sentence of proof: the etale counit is an isomorphism on the reduced closed subspace, hence an isomorphism. Realizes the final counit-isomorphism detection input of Stacks Tag 07W3 within the inherited direct-image alteration chain; the latest blueprint direct-images proof (3) still calls the same constructibility route. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General algebraic-space fibre products used on arbitrary scheme tests; not a trace-formula argument and no local unit statement replaces this construction."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "General base-change permanence of chartwise etaleness needed for E over T; not a replacement of the unit constructibility argument."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "The general definition identifies algebraic-space morphisms with natural transformations, needed to turn the explicitly natural inverse into a morphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-trf-algebraic-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-aaeb0dc7b",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-aaeb0dc7b (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item in full; it has no new nodes. This head re-delivers e358, which was reviewed PASS earlier and then returned by L for stale citation quotes. Compared with e358, only steps 1 and 3 and the split_report changed. Step 1 now applies the thickening base-change node explicitly to i and T→W and notes that T_0 is a scheme. Step 3 now applies it explicitly to T_0→T along H→D→T, so H_0 is a scheme and H_0→H is surjective. The statement, stmt_deps, source, blueprint, chapter and unit are unchanged. There is no re-split note for this item. I read Stacks 05ZH (open-equaliser argument), 09ZX, 05W1(1) and 05W5 (spaces-morphisms l.10729). Steps checked: (1) E, T_0 and E_0 are algebraic spaces, g is chartwise étale by base change, T_0→T is a scheme thickening, and E_0≅T_0 by pasting pullbacks. (2) Chart composites into T are étale, hence unramified, which is the exact hypothesis of lem-sfb-unramified-space-open-diagonal, so δ is an open immersion. (3) U×_H H_0 = H_0×_{D_0}E_0 with δ_0 an iso; the surjective H_0→H factors through U, so U=H by def-weil-open-immersion. (4) δ surjective makes g a sheaf mono; with chartwise étaleness this is the exact hypothesis of lem-sfb-space-etale-monomorphism-open, so g is an open immersion. (5) T_0→O→T is surjective, so O=T. (6) Unique lifts are natural, which gives the inverse by def-trf-algebraic-space. Edge cases checked: empty W, identity thickening, nil ideal with no uniform exponent, non-separated V. Spec k→Spec k[ε] shows the étale hypothesis is needed. No duplicate: 03SI is scheme-level and the pushout nodes state other things. No cycle. tool_uses: three generic trf foundation nodes, accepted. Batch-5: each of the three flagged citations reaches sec-trace-formula only through def-trf-algebraic-space and algebraic-space foundation lemmas (fppf descent, étale relations, fibre products). None reaches the trace formula, Poincaré duality or their proofs, so all three are accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleThickeningDetectsIso",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_of_chartwiseEtale_of_thickening",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleThickeningDetectsIso.lean",
+  "statement": "theorem isIso_of_chartwiseEtale_of_thickening {B : Scheme.{u}} (V W W₀ : AlgebraicSpace B) (f : V ⟶ W) (i : W₀ ⟶ W) (hf : IsChartwiseEtale f) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (hiTop : IsHomeomorph (mapPoint i.hom.hom)) (h₀ : IsIso (enlargedFibreProductFst i f)) : IsIso f",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ef76b131",
+  "group": "NE",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsChartwiseEtale f = node chartwise etale (no representability of f); hi (IsRepresentableWith closed immersion) + hiTop (IsHomeomorph mapPoint, atlas quotient topology) = thickening, same rendering as landed exists_affineThickeningPushout; h0 = IsIso of the canonical pullback.fst W0 x_W V -> W0 (factor swap of V x_W W0 -> W0); conclusion IsIso f; no extra qc/separation/finite-order hypotheses; universe u as in AlgebraicSpace. Stacks 05ZH (spaces-more-morphisms l.1316) checked: a thickening is integral, universally injective and surjective, so the etale equivalence reflects isomorphisms. Edge cases: empty W, identity thickening, nil ideal without uniform bound, non-separated V. Item unchanged except lean; live lean null; statement verbatim; docstrings carry source, blueprint and 6 proof steps; sorry only; lines <=90. Notes: mapPoint/Point/pointTopologicalSpace owners (def-sfb-proper-curve-moduli, def-a1-space-point-topology) not in stmt_deps; inherited from the base node, plain defs, maintainer may add. Unused proof-only imports Etale/OpenImmersion are harmless."
+ }
+}

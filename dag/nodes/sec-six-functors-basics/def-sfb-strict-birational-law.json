@@ -1,0 +1,157 @@
+{
+ "id": "def-sfb-strict-birational-law",
+ "kind": "definition",
+ "title": "Strict birational law data and universal left translations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $Y/S$ a scheme over it [def-weil-scheme-over-base]; form all products over $S$ [def-pc-base-change]. Use relative partial and rational maps and fibrewise dense opens as in [def-sfb-relative-birational-maps]. Strict birational law data is a representative $m:D\\to Y$ of a relative rational multiplication on $Y\\times_S Y$, associative as a relative rational map, together with opens $V,W\\subset Y\\times_S Y$ and isomorphisms $L:D\\simeq V$, $R:D\\simeq W$ given respectively by $(x,y)\\mapsto(x,m(x,y))$ and $(x,y)\\mapsto(m(x,y),y)$. Each of $D,V,W$ is dense in every fibre of each of the two projections to $Y$. Associativity means there is an $S$-dense open $H\\subset Y^3$ on which $(a,b)$, $(b,c)$, $(a,m(b,c))$ and $(m(a,b),c)$ all land in $D$, and $m(a,m(b,c))=m(m(a,b),c)$ as scheme morphisms on $H$. For a test $S$-scheme $T$ and $a:T\\to Y$, its left-translation chart is the pullback of $L$ along $a$ in the first coordinate: on $Y_T$, let $q=(a\\circ\\operatorname{pr}_T,\\operatorname{pr}_Y):Y_T\\to Y\\times_S Y$; its domain and codomain are $q^{-1}(D)$ and $q^{-1}(V)$, and its isomorphism is the one commuting with the induced maps to $D$ and $V$ and with $L$. These data describe a strict birational law on the smooth separated finite-type schemes with nonempty fibres appearing in the consumer statement; those ambient hypotheses are imposed there.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-sfb-relative-birational-maps"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.5; 5.2 Definition 1 and construction preceding Lemma 4, printed pp.114-118"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative rational map scheme dense in every fibre strict birational group law",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(X Y : Scheme.{u}) : Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"Sort u_1 →\\n  {X Y : AlgebraicGeometry.Scheme} → X.PartialMap Y → {X' Y' : AlgebraicGeometry.Scheme} → X'.PartialMap Y' → Sort u_1\", \"doc\": \"The type of rational maps between two schemes, defined as equivalence classes of partial maps with dense domains. Two partial maps are considered equivalent if they agree on a dense open subset of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : Dense (X := X) f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) (U : X.Opens) (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').toRationalMap = f.toRationalMap\", \"doc\": \"For schemes $X$ and $Y$, if $f$ is a partial map from $X$ to $Y$ and $U$ is a dense open subset of $X$ contained in the domain of $f$, then the rational map obtained by restricting $f$ to $U$ is equal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) [IrreducibleSpace X] {U : X.Opens} (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsDominant f ↔ DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is dominant if and only if the underlying continuous function of its base map $ f_{\\\\text{base}} : X \\to Y $ has dense image in $ Y $, i.e., the closure of the image\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsDominant f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map $ f_{\\\\text{base}} $ has dense image in $ Y $, then $ f $ is a dominant morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No relative fibrewise-dense birational law or translation group API; absolute rational maps are insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associative strict birational group law on a scheme isomorphisms of dense opens universal left and right translations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instBraidedCategoryScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.BraidedCategory AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes is endowed with the structure of a braided category. This structure is derived from its Cartesian monoidal structure, where the braiding isomorphism for two schemes $X$ and $Y$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.instSetoid\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Setoid (X.PartialMap Y)\", \"doc\": \"The setoid structure on partial maps between two schemes $X$ and $Y$, where two partial maps are equivalent if they agree on an open subset of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_base_inv_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) {Z : TopCat} (h : ↑X.toPresheafedSpace ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp e.hom.base (CategoryTheory.CategoryStruct.comp e.inv.base h) = h\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ of schemes and any continuous map $ h: X \\\\to Z $ to a topological space $ Z $, the composition of the underlying continuous map of $ e $, the underlying continuous\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsDominant\", \"doc\": \"Every isomorphism of schemes is a dominant morphism, meaning the property of being dominant holds for all isomorphisms in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.iso_hom_base_inv_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.hom.base e.inv.base = CategoryTheory.CategoryStruct.id ↑X.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e $ between schemes $ X $ and $ Y $, the composition of the underlying continuous map $ e_{\\\\text{base}} $ and its inverse $ e^{-1}_{\\\\text{base}} $ equals the identity map on the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_base_inv_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.hom.base e.inv.base = CategoryTheory.CategoryStruct.id ↑X.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e $ between schemes $ X $ and $ Y $, the composition of the underlying continuous map of $ e $ and the underlying continuous map of its inverse $ e^{-1} $ equals the identity map\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.inv_base_hom_base_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y) {Z : TopCat} (h : ↑Y.toPresheafedSpace ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp e.inv.base (CategoryTheory.CategoryStruct.comp e.hom.base h) = h\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ between schemes and any continuous map $ h: Y \\\\to Z $, the composition of the inverse base map $ e^{-1}_\\\\text{base} $ with the composition $ e_\\\\text{base} \\\\circ h \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.iso_inv_base_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (e : X ≅ Y),\\n  CategoryTheory.CategoryStruct.comp e.inv.base e.hom.base = CategoryTheory.CategoryStruct.id ↑Y.toPresheafedSpace\", \"doc\": \"For any isomorphism $ e: X \\\\cong Y $ between schemes, the composition of the inverse base map $ e^{-1}_\\\\text{base}: Y \\\\to X $ and the forward base map $ e_\\\\text{base}: X \\\\to Y $ equals the identity ma\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No relative fibrewise-dense birational law or translation group API; absolute rational maps are insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictBirational|FibrewiseDense|FiberwiseDense|RelativeRational",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No relative fibrewise-dense birational law or translation group API; absolute rational maps are insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "grep project: rg -n StrictBirational|RelativeBirational|FibrewiseDense|FiberwiseDense|strict.*birational /home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/TraceFormula/ValuationNormalizedGraphModel.lean:138:   Scheme-image restriction and finite-birational normal invertibility make both\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/BirationalIntegralNormalNeighbourhood.lean:42:The restriction remains birational, in the component-generic-point and stalk-map sense.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/BirationalIntegralNormalNeighbourhood.lean:71:   and the restricted map sends one to the other, proving the asserted birationality.\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ModificationFibreCentreFinite.lean:156:restricts on this localization to the centred map for $\\nu$. Lift it to any proper birational\n",
+   "date": "2026-10-24",
+   "verdict": "No definition node or declaration carrying this relative notion; existing strict-law nodes are statements."
+  },
+  {
+   "tool": "grep",
+   "query": "grep DAG: rg -l strict birational law|birational self.map /home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-strict-law-finite-translate-envelope.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-strict-law-translation-embedding.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-strict-law-complete-square-group.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-strict-law-graph-charts.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-bounded-group-translation-model.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-strict-law-single-translate-gluing.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-trait-birational-group-envelope.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-strict-law-base-change.json\n",
+   "date": "2026-10-24",
+   "verdict": "No definition node or declaration carrying this relative notion; existing strict-law nodes are statements."
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint search: python3 /home/ubuntu/weil-conjectures-sheaf-shared/tools/blueprint_refs.py search strict birational",
+   "results": "0 blueprint nodes match 'strict birational'\n",
+   "date": "2026-10-24",
+   "verdict": "No definition node or declaration carrying this relative notion; existing strict-law nodes are statements."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-law-translation-embedding",
+  "date": "2026-10-24",
+  "group": "Q131"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 5.3 Lemma 8, extending product and division from a complete dense open square; auxiliary input to BLR 5.3 Lemma 8: 5.2 Lemma 4 and its preceding construction, printed pp.118-119 (PDF pp.124-125)",
+   "via": [
+    "lem-sfb-strict-law-translation-embedding",
+    "lem-sfb-strict-law-complete-square-group",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictBirationalLaw",
+  "declaration": "AlgebraicGeometry.RelativeBirational.StrictLaw",
+  "declarations": [
+   "AlgebraicGeometry.RelativeBirational.square",
+   "AlgebraicGeometry.RelativeBirational.cube",
+   "AlgebraicGeometry.RelativeBirational.cubeFirst",
+   "AlgebraicGeometry.RelativeBirational.cubeSecond",
+   "AlgebraicGeometry.RelativeBirational.cubeThird",
+   "AlgebraicGeometry.RelativeBirational.Associative",
+   "AlgebraicGeometry.RelativeBirational.StrictLaw",
+   "AlgebraicGeometry.RelativeBirational.IsLeftTranslation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictBirationalLaw.lean",
+  "statement": "structure StrictLaw (Y : Over S)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4afa7bd92",
+  "group": "Q131",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4afa7bd92",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Read item node (7 steps), all 11 stmt_dep records, new nodes def-sfb-relative-birational-maps and def-sfb-strict-birational-law, the 3 modules and report.md (Worker report + Second reading by Q131 present). Hypotheses match: Noetherian, IsStrictlyHenselianLocalRing, inline normal-ring form per record, Y : Over (Spec A) with Smooth, LOFT+QC, closed-immersion diagonal, nonempty fibres. FibrewiseDense = density of the preimage in the scheme-theoretic fibre. StrictLaw has the D representative, 6 projection densities, leftIso/rightIso with (x,m(x,y))/(m(x,y),y) equations, and Associative on an S-dense open of Y^3. B: (Over S)^op ⥤ GrpCat.{u} with e T ≃ SelfMap(Y_T); product pinned by IsComposite (f∘g, composites exist); B.map pinned by IsPullback (full inverse images under baseChangeMap, iso determined); τ pinned by IsLeftTranslation (q=(a∘pr_T,pr_Y), q⁻¹D→q⁻¹V commuting with L); injective; naturality from the nat-trans type; τ_c=τ_a*τ_b for every representative r agreeing with m and every factorization d. No conditions on T (nonreduced, empty T ok); single universe u. No hollow defs, only sorry, docstrings with source and blueprint, statements verbatim. No compile (no changes). Maintainer note: parallel unlanded S2 deliveries Q17 2251 (same item; same new id def-sfb-strict-birational-law), Q04 dbe5 (def-sfb-fibrewise-dense) and NF aa9f define the same notions; first lander owns them, the others rebind."
+ }
+}

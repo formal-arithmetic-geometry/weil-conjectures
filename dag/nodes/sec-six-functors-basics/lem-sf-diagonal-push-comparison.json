@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-diagonal-push-comparison",
+ "kind": "statement",
+ "title": "Direct-image coordinate comparison on diagonal-supported objects",
+ "statement": "Let \\(A\\) be a finite commutative ring and \\(f:X\\to Y\\) proper. Write \\(\\Delta:X\\to X\\times_Y X\\) for the diagonal, \\(p_1,p_2\\) for the projections, \\(F=Rf_!\\), and \\(S=R\\Delta_!\\). Let \\(\\alpha_1=\\operatorname{diagonalFirst}\\), \\(\\alpha_2=\\operatorname{idIsoDiagonalSnd}\\), and \\(c=\\operatorname{directComparison}\\) be the canonical maps of [def-sf-supported-diagonal-calculus]. For every \\(M\\in D_A(X)\\),\n\\[\nF(\\alpha_{2,M});c_{S(M)}=F(\\alpha_{1,M}).\n\\]\nThis is an equality involving only direct images and their canonical identity and composition comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle: the sentence about the equality qp1=qp2 and the composition isomorphism interchanging the two operations. Stacks Project: sites-cohomology.tex, Tag 0B56; categories.tex, Tag 0DV0."
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Identify the inverse of rightDerivedLowerShriekCompIso with the explicitly constructed unboundedEtaleLowerShriekCompIso by expanding only the three compactification-comparison factors. Through a proof-only import all, use the already proved unboundedFormalism, its base-change and proper-exchange instances, and unbounded_chosen_comp. Apply CompactSupportFormalism.lowerShriekCompIso_assoc to the three proper maps. Equality induction identifies its lowerShriekCongr with rightDerivedLowerShriekCongrIso. Evaluate the resulting natural-transformation equality at M and transport the composite morphisms to the named maps. This gives associativity for the collapse isomorphisms from push(f) push(g) to push(h), where h=f≫g. The private formalism has no Noetherian assumption, so none is introduced.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this transported associativity to Delta,p1,f and Delta,p2,f, using Delta≫pi=id, p1≫f=p2≫f, and id≫f=f. Both equations have a common final collapse for Delta,p2≫f and a common collapse for id,f. Cancel these isomorphisms in the elementary compare_sections identity. Precompose with push(f) of the inverse canonical identity comparison, and expand diagonalFirst, idIsoDiagonalSnd, and directComparison. Congruence along the reverse equality is the inverse congruence, by equality induction, so this is exactly the claimed equation. No identity-composition normalization is needed: the same id,f comparison cancels on both sides.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First triangle, coordinate direct-image interchange; implemented using the existing chosen compact-support formalism associativity and elementary isomorphism cancellation (P4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula naturality diagonal section insertion derived tensor",
+   "results": "Eight hits, including LinearMap.proj_comp_single and CategoryTheory.CartesianMonoidalCategory.tensorHom_fst. None states the derived section/projection normalization or the direct-image compositor identity.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; existing abstract projection coherence needs specialization to the concrete compact-support comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"projection\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*section|section.*projection",
+   "results": "24 hits in Mathlib, mostly topology, module complements, and simplicial projections; no derived projection section identity. Also searched project for rightDerivedLowerShriekCompIso, diagonalIso, idIsoDiagonalSnd, and diagonalFirst.",
+   "date": "2026-10-27",
+   "verdict": "The library has the concrete canonical maps and abstract ringed projection section coherence, but no theorem identifying these concrete composites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfDiagonalInsertionProjection",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; First triangle: the sentence about the equality qp1=qp2 and the composition isomorphism interchanging the two operations.",
+   "via": [
+    "lem-sf-diagonal-insertion-projection",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfDiagonalPushComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfDiagonalPushComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.diagonalPushComparison",
+  "statement": "theorem diagonalPushComparison (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] (M : DerivedCategoryModule A X) :\n    (push A f).map ((TraceDiagonalDatum.idIsoDiagonalSnd (Λ := A) f).hom.app M) ≫\n        (directComparison A f).hom.app ((push A (TraceDiagonalDatum.diagonal f)).obj M) =\n      (push A f).map ((SfDiagonalKernel.diagonalFirst A f).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T012902-L-2344025",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T021342-L-2760452",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

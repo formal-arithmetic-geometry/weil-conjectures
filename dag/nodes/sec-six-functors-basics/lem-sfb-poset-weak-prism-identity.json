@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-poset-weak-prism-identity",
+ "kind": "statement",
+ "title": "The weak-tuple prism preserves repetitions and satisfies the augmented boundary identity",
+ "statement": "Use the integer-degree differential convention of [def-weil-pbc-module-chain-complex-homology], so a differential in degree $n$ has target degree $n-1$. Let $R$ be a commutative ring, let $P,Q$ be finite partially ordered sets, possibly empty, and let $f,g:P\\to Q$ be monotone maps satisfying $f(x)\\leq g(x)$ for every $x\\in P$. For $S=P,Q$ and $n\\geq0$, let $W_n(S;R)$ be the free $R$-module on weakly increasing tuples $(x_0,\\ldots,x_n)$, including tuples with repetitions as distinct basis elements. Put $W_{-1}(S;R)=R[\\varnothing]$ and $W_n(S;R)=0$ for $n<-1$. Let $d_n$ be alternating vertex deletion for $n\\geq0$ (so $d_0[x]=[\\varnothing]$) and zero for $n<0$. Let $D_n(S;R)$ be the span of repeated tuples for $n\\geq1$, and zero for $n\\leq0$. For $u=f,g$, define $W(u)_n$ by entrywise image in nonnegative degrees, by the identity of $R$ in degree $-1$, and by zero below $-1$. For $n\\geq0$ and a weakly increasing tuple $x$, put\n$$T_i(x)=(f(x_0),\\ldots,f(x_i),g(x_i),\\ldots,g(x_n))\\quad(0\\leq i\\leq n),\\qquad H_n[x]=\\sum_{i=0}^n(-1)^i[T_i(x)],$$\nand put $H_n=0$ for $n<0$. Every $T_i(x)$ is weakly increasing, so this specifies an $R$-linear map $H_n:W_n(P;R)\\to W_{n+1}(Q;R)$. It satisfies $H_n(D_n(P;R))\\subseteq D_{n+1}(Q;R)$ for every integer $n$, and the following equality of $R$-linear maps holds in every integer degree:\n$$d_{n+1}H_n+H_{n-1}d_n=W(g)_n-W(f)_n.$$\nIn particular these assertions include degree zero when $f(x)=g(x)$, degree $-1$ with the fixed empty generator, all lower degrees, and empty $P$ or $Q$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, lemma-homotopy-s-N, and preceding equation-homotopy-to-homotopy (lines 4739–4846): prism boundary cancellation. Agent-formulated augmented strict-poset-chain version; descent through repeated tuples and the degree -1 convention are additional obligations, not verbatim assertions of 019S. Extracted from the returned item, old proof steps 5–8: weak pivot tuples, repetition preservation, off-junction sign pairing, junction telescoping, and all augmented edge degrees."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-weil-pbc-module-chain-complex-homology] only for the convention $d_n:W_n\\to W_{n-1}$. All operators below are the explicit linear maps in the statement. Equality on basis tuples proves equality of linear maps, since every vector is a finite linear combination of these tuples.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "For $n\\geq0$, the $f$ segment and the $g$ segment of $T_i(x)$ are weakly increasing by monotonicity; the junction is $f(x_i)\\leq g(x_i)$. Thus every summand is a basis tuple and extends linearly. If $x_a=x_b$ with $a<b$, weak increase gives $x_a=x_{a+1}$ by antisymmetry. Fix such an adjacent pair $x_a=x_{a+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "If $i\\leq a$, both $g(x_a)$ and $g(x_{a+1})$ occur in $T_i(x)$; if $i\\geq a+1$, both $f(x_a)$ and $f(x_{a+1})$ occur. In either case $T_i(x)$ is repeated. Hence every summand of $H_n$ on every generator of $D_n$ belongs to $D_{n+1}$, and linearity proves the inclusion for $n\\geq1$. For $n\\leq0$ its source $D_n$ is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "Now let $n\\geq1$ and denote deletion of position $j$ by $\\partial_j$. Expand $dH[x]=\\sum_{i=0}^n\\sum_{j=0}^{n+1}(-1)^{i+j}[\\partial_jT_i(x)]$. Also $Hd[x]=\\sum_{k=0}^n\\sum_{r=0}^{n-1}(-1)^{k+r}[T_r(\\partial_kx)]$. For $j<i$, deleting the $f(x_j)$ entry gives $\\partial_jT_i(x)=T_{i-1}(\\partial_jx)$. Its coefficient $(-1)^{i+j}$ cancels the coefficient $(-1)^{j+i-1}$ of precisely this term in $Hd[x]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "For $j>i+1$, deleting the $g(x_{j-1})$ entry gives $\\partial_jT_i(x)=T_i(\\partial_{j-1}x)$. The coefficients in $dH$ and $Hd$ are $(-1)^{i+j}$ and $(-1)^{j-1+i}$, which cancel. These pairings exhaust $Hd$: for its deletion index $k$ and pivot $r$, use $(i,j)=(r+1,k)$ if $k\\leq r$, and $(i,j)=(r,k+1)$ if $k>r$. In the first case $j<i$; in the second $j>i+1$, with $0\\leq i\\leq n$ in both. These are inverse reindexings, even if different terms happen to be equal tuples.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "The remaining faces have $j=i$ or $j=i+1$. Define $A_i=(f(x_0),\\ldots,f(x_{i-1}),g(x_i),\\ldots,g(x_n))$ for $0\\leq i\\leq n+1$, with empty initial or final segments allowed. Then $\\partial_iT_i=A_i$ has sign $+1$, and $\\partial_{i+1}T_i=A_{i+1}$ has sign $-1$. Their total is $\\sum_{i=0}^n([A_i]-[A_{i+1}])=[g(x_0),\\ldots,g(x_n)]-[f(x_0),\\ldots,f(x_n)]$. Together with the cancellations this gives the desired identity for $n\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+   }
+  },
+  {
+   "text": "For $n=0$, $H_0[x]=[f(x),g(x)]$, so $d_1H_0[x]=[g(x)]-[f(x)]$ and $H_{-1}d_0=0$. This holds also when $f(x)=g(x)$: the repeated two-tuple is retained in $W_1$ and its boundary is zero. In degree $-1$, $H_{-1}=H_{-2}=0$ and $W(g)_{-1}-W(f)_{-1}=\\mathrm{id}_R-\\mathrm{id}_R=0$. Below $-1$ the source module is zero. If $P$ is empty all nonnegative source modules vanish. If $Q$ is empty, the existence of $f$ forces $P$ empty. Thus every claimed edge case is included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 019S, lemma-homotopy-s-N; preceding equation-homotopy-to-homotopy and its four-sum cancellation, lines 4739–4820. Agent adaptation to weak poset tuples, positive prism sign, repetitions, and augmentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The signed prism on weakly increasing poset tuples is well defined preserves tuples with repetitions and satisfies d H plus H d equals g minus f in the augmented complex",
+   "results": "{\"t\": \"2026-10-22T06:11:06Z\", \"tool\": \"leanfinder\", \"query\": \"The signed prism on weakly increasing poset tuples is well defined preserves tuples with repetitions and satisfies d H plus H d equals g minus f in the augmented complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.N₂_obj_X_d\", \"AlgebraicTopology.AlternatingFaceMapComplex.objD\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"AlgebraicTopology.DoldKan.hσ'\"], \"digest\": \"2bdea9b70dce1b14\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.Homotopy.toChainHomotopy (ChainHomotopy.lean:156) requires a supplied simplicial homotopy and gives an ordinary nonnegative complex. Its hom_eq at line 46 uses the opposite sign convention. Constructing the poset homotopy, proving the stated explicit formula, augmentation, and preservation of repeated tuples is additional work. DoldKan.hσ concerns normalization of one simplicial object. None is this explicit augmented weak-tuple identity and degeneracy preservation in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Homotopy\", \"toChainHomotopy\"",
+   "results": "{\"t\": \"2026-10-22T06:10:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Homotopy\\\", \\\"toChainHomotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Homotopy.ToChainHomotopy.hom\", \"CategoryTheory.SimplicialObject.Homotopy.ToChainHomotopy.hom_eq_zero\", \"CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy\", \"CategoryTheory.SimplicialObject.Homotopy.ToChainHomotopy.hom_eq\"], \"digest\": \"3a9bacd35d1f2f74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.Homotopy.toChainHomotopy (ChainHomotopy.lean:156) requires a supplied simplicial homotopy and gives an ordinary nonnegative complex. Its hom_eq at line 46 uses the opposite sign convention. Constructing the poset homotopy, proving the stated explicit formula, augmentation, and preservation of repeated tuples is additional work. DoldKan.hσ concerns normalization of one simplicial object. None is this explicit augmented weak-tuple identity and degeneracy preservation in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "toChainHomotopy|homotopyPInftyToId|normalizedChainComplex",
+   "results": "{\"t\": \"2026-10-22T06:10:50Z\", \"tool\": \"grep\", \"query\": \"toChainHomotopy|homotopyPInftyToId|normalizedChainComplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\"], \"digest\": \"33a7346e0aa31857\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.Homotopy.toChainHomotopy (ChainHomotopy.lean:156) requires a supplied simplicial homotopy and gives an ordinary nonnegative complex. Its hom_eq at line 46 uses the opposite sign convention. Constructing the poset homotopy, proving the stated explicit formula, augmentation, and preservation of repeated tuples is additional work. DoldKan.hσ concerns normalization of one simplicial object. None is this explicit augmented weak-tuple identity and degeneracy preservation in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For comparable monotone poset maps the signed sum of duplicated pivot weak chains satisfies the prism boundary formula including degree minus one",
+   "results": "{\"t\": \"2026-10-22T06:10:51Z\", \"tool\": \"leansearch\", \"query\": \"For comparable monotone poset maps the signed sum of duplicated pivot weak chains satisfies the prism boundary formula including degree minus one\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For f x at most g x the sum over pivots of f x0 ... f xi g xi ... g xn has boundary g image minus f image minus the prism of the boundary, and preserves degenerate chains",
+   "results": "{\"t\": \"2026-10-22T06:12:16Z\", \"tool\": \"leanfinder\", \"query\": \"For f x at most g x the sum over pivots of f x0 ... f xi g xi ... g xn has boundary g image minus f image minus the prism of the boundary, and preserves degenerate chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.boundary_eq_iSup\", \"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_map_of_gt\", \"SSet.PtSimplex.RelStruct.δ_map_of_gt\", \"Cube.insertAt_boundary\", \"Rep.standardComplex.d_of\", \"AlgebraicTopology.DoldKan.decomposition_Q\"], \"digest\": \"9d8ff44502b5c6e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.Homotopy.toChainHomotopy (ChainHomotopy.lean:156) requires a supplied simplicial homotopy and gives an ordinary nonnegative complex. Its hom_eq at line 46 uses the opposite sign convention. Constructing the poset homotopy, proving the stated explicit formula, augmentation, and preservation of repeated tuples is additional work. DoldKan.hσ concerns normalization of one simplicial object. None is this explicit augmented weak-tuple identity and degeneracy preservation in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*tuple|strict.*poset|poset.*chain|repeated.*tuple",
+   "results": "{\"t\": \"2026-10-22T06:11:47Z\", \"tool\": \"grep\", \"query\": \"weak.*tuple|strict.*poset|poset.*chain|repeated.*tuple\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplicialObject.Homotopy.toChainHomotopy (ChainHomotopy.lean:156) requires a supplied simplicial homotopy and gives an ordinary nonnegative complex. Its hom_eq at line 46 uses the opposite sign convention. Constructing the poset homotopy, proving the stated explicit formula, augmentation, and preservation of repeated tuples is additional work. DoldKan.hσ concerns normalization of one simplicial object. None is this explicit augmented weak-tuple identity and degeneracy preservation in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "toChainHomotopy|homotopyPInftyToId|normalizedChainComplex",
+   "results": "{\"t\": \"2026-10-23T11:23:17Z\", \"tool\": \"grep\", \"query\": \"toChainHomotopy|homotopyPInftyToId|normalizedChainComplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/ChainHomotopy.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\", \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\"], \"digest\": \"33a7346e0aa31857\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ChainHomotopy.lean:39–47,156 constructs a negative signed sum from an already supplied simplicial homotopy in nonnegative degrees. Supplying the weak-poset homotopy, identifying this positive formula, proving preservation of repeated tuples, and extending to degree -1 are additional arguments. DoldKan.hσ and homotopyPInftyToId concern normalization of one simplicial object; Rep.standardComplex.d and objD only define differentials. No exact or one-line specialization of the entire item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For comparable monotone poset maps the signed pivot prism has boundary g minus f and preserves degenerate tuples in augmented chains",
+   "results": "{\"t\": \"2026-10-23T11:23:17Z\", \"tool\": \"leansearch\", \"query\": \"For comparable monotone poset maps the signed pivot prism has boundary g minus f and preserves degenerate tuples in augmented chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OrderHom\", \"Monotone.partMap\", \"PartOrd.ext_iff\", \"SimplexCategory.II.monotone_map'\", \"OrderHom.mk.congr_simp\", \"PartOrd.Hom.hom\", \"OrderHom.coeFnHom\", \"PartOrd.Hom.Simps.hom\"], \"digest\": \"f9e461a9f5d47e67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ChainHomotopy.lean:39–47,156 constructs a negative signed sum from an already supplied simplicial homotopy in nonnegative degrees. Supplying the weak-poset homotopy, identifying this positive formula, proving preservation of repeated tuples, and extending to degree -1 are additional arguments. DoldKan.hσ and homotopyPInftyToId concern normalization of one simplicial object; Rep.standardComplex.d and objD only define differentials. No exact or one-line specialization of the entire item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Homotopy\", \"toChainHomotopy\"",
+   "results": "{\"t\": \"2026-10-23T11:23:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Homotopy\\\", \\\"toChainHomotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Homotopy.ToChainHomotopy.hom\", \"CategoryTheory.SimplicialObject.Homotopy.ToChainHomotopy.hom_eq_zero\", \"CategoryTheory.SimplicialObject.Homotopy.toChainHomotopy\", \"CategoryTheory.SimplicialObject.Homotopy.ToChainHomotopy.hom_eq\"], \"digest\": \"3a9bacd35d1f2f74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ChainHomotopy.lean:39–47,156 constructs a negative signed sum from an already supplied simplicial homotopy in nonnegative degrees. Supplying the weak-poset homotopy, identifying this positive formula, proving preservation of repeated tuples, and extending to degree -1 are additional arguments. DoldKan.hσ and homotopyPInftyToId concern normalization of one simplicial object; Rep.standardComplex.d and objD only define differentials. No exact or one-line specialization of the entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The signed prism on weakly increasing poset tuples preserves repeated tuples and satisfies d H plus H d equals g minus f including the augmentation",
+   "results": "{\"t\": \"2026-10-23T11:23:22Z\", \"tool\": \"leanfinder\", \"query\": \"The signed prism on weakly increasing poset tuples preserves repeated tuples and satisfies d H plus H d equals g minus f including the augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"Rep.standardComplex.d\", \"SimplexCategoryGenRel.P_σ.σ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\", \"SimplexCategoryGenRel.P_δ.δ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\"], \"digest\": \"076f8d1bc81a56b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ChainHomotopy.lean:39–47,156 constructs a negative signed sum from an already supplied simplicial homotopy in nonnegative degrees. Supplying the weak-poset homotopy, identifying this positive formula, proving preservation of repeated tuples, and extending to degree -1 are additional arguments. DoldKan.hσ and homotopyPInftyToId concern normalization of one simplicial object; Rep.standardComplex.d and objD only define differentials. No exact or one-line specialization of the entire item."
+  },
+  {
+   "tool": "grep",
+   "query": "weak.*tuple|strict.*poset|poset.*chain|repeated.*tuple",
+   "results": "{\"t\": \"2026-10-23T11:24:25Z\", \"tool\": \"grep\", \"query\": \"weak.*tuple|strict.*poset|poset.*chain|repeated.*tuple\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ChainHomotopy.lean:39–47,156 constructs a negative signed sum from an already supplied simplicial homotopy in nonnegative degrees. Supplying the weak-poset homotopy, identifying this positive formula, proving preservation of repeated tuples, and extending to degree -1 are additional arguments. DoldKan.hσ and homotopyPInftyToId concern normalization of one simplicial object; Rep.standardComplex.d and objD only define differentials. No exact or one-line specialization of the entire item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For f x at most g x the alternating sum of f x0 ... f xi g xi ... g xn has boundary the g image minus f image minus the prism of the boundary",
+   "results": "{\"t\": \"2026-10-23T11:24:27Z\", \"tool\": \"leanfinder\", \"query\": \"For f x at most g x the alternating sum of f x0 ... f xi g xi ... g xn has boundary the g image minus f image minus the prism of the boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BoxIntegral.BoxAdditiveMap.upperSubLower_apply\", \"BoxIntegral.BoxAdditiveMap.upperSubLower\", \"Cube.boundary\", \"ComplexShape.Embedding.AreComplementary.Boundary.of_boundaryGE\", \"AlgebraicTopology.AlternatingFaceMapComplex.objD\", \"Rep.standardComplex.d\", \"Rep.standardComplex.d_of\", \"AlgebraicTopology.AlternatingCofaceMapComplex.objD\"], \"digest\": \"8479eca506afc018\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ChainHomotopy.lean:39–47,156 constructs a negative signed sum from an already supplied simplicial homotopy in nonnegative degrees. Supplying the weak-poset homotopy, identifying this positive formula, proving preservation of repeated tuples, and extending to degree -1 are additional arguments. DoldKan.hσ and homotopyPInftyToId concern normalization of one simplicial object; Rep.standardComplex.d and objD only define differentials. No exact or one-line specialization of the entire item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-poset-augmented-chain-prism",
+  "date": "2026-10-22",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the trivial-lattice polynomial-bar multidegree calculation below lem-sfb-rational-polynomial-bar-contraction; contraction and Boolean-interval induction for its finite combinatorial input. This combinatorial argument is agent-written, not present in the blueprint. General normalized augmented poset-chain prism used in the contraction maps. Extracted argument: old proof steps 5–8: weak pivot tuples, repetition preservation, off-junction sign pairing, junction telescoping, and all augmented edge degrees. Checked against latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3); this is the explicit finite combinatorial tool below that route, not a claim made in that paragraph.",
+   "via": [
+    "lem-sfb-poset-augmented-chain-prism",
+    "lem-sfb-product-chain-proper-interval-homology",
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-poset-weak-prism-identity",
+  "worker": "stage1",
+  "summary": "ND: preserved the statement, wrote the explicit weak-tuple sign cancellation and adjacent-repeat argument, checked augmentation and empty cases. No new nodes: each step is a direct tuple identity, finite-sum reindexing, or linear extension; no abstract simplicial-homotopy theorem is used. Searched current project source and Mathlib and read candidate declarations. Repair of L's promotion refusal: rebased retained split fields onto the current live unsplit record, re-read the sole cited Mathlib definition and verified the unchanged quotation; made both summation ranges and the bounds of the inverse cancellation reindexing explicit.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability direct-images proof paragraph (3), open direct image: inherited chain of combinatorial tools recorded in blueprint.from.via. The prism argument is agent-written below that route; it is not in the blueprint. Steps 2–3 realize old parent step 5, steps 4–6 old parent steps 6–7, step 7 old parent step 8. Whole-blueprint searches for prism and weakly increasing returned no matches."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-48c7969be",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-48c7969be (reviewer sub-agent of L); spot-checked: PASS: the proof is complete and correct, with no faults to repair. The delivery is one commit (item + report), with 0 new nodes and no tool_uses. The statement and stmt_deps are identical to the live record, which is still unsplit with no proof steps; no other group has split the item. This re-delivery after L's promotion refusal changes only steps 4–5 relative to bd2786491599: it writes out the Hd double sum and the reindexing bounds, and both additions are correct. Step 1 cites def-weil-pbc-module-chain-complex-homology only for d_n:C_n→C_{n-1}, which its statement gives. Steps 2–3: a repeated weak tuple has an adjacent repeat by antisymmetry, and that repeat survives in the g segment if i≤a and in the f segment if i≥a+1. Steps 4–5: I checked by hand that ∂_jT_i=T_{i-1}(∂_jx) for j<i and ∂_jT_i=T_i(∂_{j-1}x) for j>i+1, each with the opposite sign, and that (k,r)↦(r+1,k) for k≤r and (r,k+1) for k>r is a bijection onto these terms (n(n+1) on each side). Step 6: ∂_iT_i=A_i(+) and ∂_{i+1}T_i=A_{i+1}(−) telescope to g−f. Step 7 covers n=0 (including f(x)=g(x)), degree −1 (id−id), lower degrees and empty P or Q. My own script over Z found 0 failures: it ran the 3-chain and the poset with 0<1, 0<2, all comparable monotone pairs and weak tuples of length 1–4, checking both the identity and repetition preservation. Source: I read Stacks simplicial.tex 4739–4848 (equation-homotopy-to-homotopy, Tag 019S); the item's sign convention is +(-1)^i with conclusion g−f, where the source's is (-1)^{i+1} with conclusion a−b, and proof_origin is agent. The parent lem-sfb-poset-augmented-chain-prism step 3 uses exactly what this statement gives, and there is no cycle. Not a duplicate of weak-chain-normalization, simplicial-homotopy-free-chain-homotopy or trf coefficient-bar-prism; Mathlib toChainHomotopy needs a supplied simplicial homotopy and has no augmentation. No SGA. blueprint.from.node is null; the ancestor tool returned None and the report records this openly."
+ }
+}

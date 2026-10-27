@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-relative-finite-bundle-roos",
+ "kind": "statement",
+ "title": "Roos exactness for finite continuous module bundles on a profinite slice",
+ "statement": "Work in the small-site and indexing universes of [def-weil-size-convention]. For a profinite space $P$ (compact Hausdorff and totally disconnected), equip $\\operatorname{Prof}/P$ with finite jointly surjective covering families. For a topological commutative ring $T$, write $R_T(Q\\xrightarrow{a}P)=C(Q,T)$, with pointwise operations and pullback of continuous functions. Use ordinary internal $R_T$-modules [sk-def-sfb-module-objects] and their ordinary uncompleted derived category [def-weil-abstract-derived-category]. Let $T$ be any topological commutative ring. Products of $R_T$-module sheaves are exact, and the termwise product of any small family of module complexes represents its ordinary derived product [def-weil-category-product]. Let $(M_k,t_k:M_{k+1}\\to M_k)_{k\\ge1}$ be a strict inverse sequence of $R_T$-modules. Here a finite locally constant bundle on $P$ is a finite disjoint union of products of clopen subsets of $P$ with finite discrete abelian groups, mapping to $P$ by the first projection. Suppose each underlying sheaf is the sheaf of continuous sections of a finite locally constant bundle $E_k\\to P$, every transition is induced by a continuous fibrewise additive map over $P$, and the specified $R_T$-actions make these transitions module morphisms. Put $M=\\varprojlim_kM_k$, with its induced $R_T$-action. Then the sequence of sheaf modules\n$$0\\longrightarrow M\\longrightarrow\\prod_{k\\ge1}M_k\\xrightarrow{1-s}\\prod_{k\\ge1}M_k\\longrightarrow0$$\nis exact, where $(1-s)(x)_k=x_k-t_k(x_{k+1})$. Consequently $M[0]\\to\\prod_k^DM_k[0]\\xrightarrow{1-s}\\prod_k^DM_k[0]\\to M[1]$ is distinguished. Finite fibre cardinalities and transition images may vary with $k$ and with $p\\in P$; no uniform Mittag--Leffler condition, surjectivity of $t_k$, or extremal disconnectedness of $P$ is assumed.",
+ "source": {
+  "document": "literature/ruimy-tubach-wolf-proetale-motives-solid-rigidity_arXiv-2601.07358.pdf",
+  "place": "Lemma 1.2.7 and its finite-bundle compactness mechanism; agent relative profinite-slice version. Compare Stacks 08TC (more-on-algebra, definition-derived-limit), and 08YN (topology, proposition-projective-in-category-hausdorff-qc)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-sfb-relative-finite-bundle-model",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-relative-module-stonean-epi to a map of discrete diagrams of module sheaves. On each Stonean test choose a preimage of every component of a given target section. The source limit is computed sectionwise, and Types.isLimitEquivSections assembles the family into a section; compatibility in a discrete diagram is just the identity law. Naturality of lim.map with each projection shows this section maps to the desired target section. Thus lim preserves epimorphisms, and Mathlib hasExactLimitsOfShape_of_preservesEpi gives exact products, including the empty family.",
+   "uses": [
+    "lem-sfb-relative-module-stonean-epi",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install the universe-compatible Grothendieck instance and its K-injective resolutions. The already proved general DerivedCategory.Q product-preservation instance in WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit applies to the exact products just established. Apply isLimitOfPreserves to HomologicalComplex.isLimitConeOfHasLimitEval to obtain the termwise derived-product statement with precisely its actual localized projections. This reuses the source proof of isLimitFanQ rather than reproving its resolution and product transport.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the tower let t be towerProductShift and let the first arrow have the limit projections as coordinates. The product projection formula for t and naturality of the limit cone show that this first arrow annihilates 1-t. A map into the product killed by 1-t has compatible adjacent coordinates; NatTrans.ofOpSequence extends these to a cone on the whole tower. The limit universal property gives its unique factorization through limit M. This is exactly the already proved general Fan.IsLimit.isLimitKernelForkOneSub in the same source module, giving a kernel fork and hence a monomorphism and exactness.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-category-product",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sfb-relative-finite-bundle-roos-epi to make the second arrow epic. Together with the kernel fork this gives ShortComplex.ShortExact with the stated canonical arrows.",
+   "uses": [
+    "lem-sfb-relative-finite-bundle-roos-epi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport exact products indexed by ULift Nat down to Nat with Discrete.equivalence Equiv.ulift. The degree-zero single-complex functor preserves products, and so does Q by step 2. Transport preservation along singleFunctorsPostcompQIso. Applying isLimitFanMkObjOfIsLimit to the original product cone supplies the derived product fan with the exact singleFunctor images of the original projections.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib ShortComplex.ShortExact.singleδ and singleTriangle_distinguished, the degree-zero corollary of the short-exact-complex triangle, on the short exact complex just obtained. Its first two maps are definitionally the singleFunctor images of the canonical limit inclusion and towerTransitionEndomorphism. Pair this distinguished triangle with the product universal property from step 5; no conjugation or replacement of either arrow is necessary.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-module-stonean-epi",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-weil-category-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism",
+  "lem-sfb-relative-finite-bundle-roos-epi",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ruimy-tubach-wolf-proetale-motives-solid-rigidity_arXiv-2601.07358.pdf",
+  "place": "Lemma 1.2.7 motivates the relative finite-bundle argument. T6 formalization uses the proved generic product preservation and tower kernel APIs of WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit and Mathlib SingleTriangle, reducing the geometric work to the two strictly smaller named steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse sequence of finite locally constant module bundles on a profinite space has vanishing higher inverse limit in the relative condensed module category and its ordinary limit is the homotopy fibre of one minus shift on the product",
+   "results": "{\"t\": \"2026-10-25T10:31:59Z\", \"tool\": \"leanfinder\", \"query\": \"An inverse sequence of finite locally constant module bundles on a profinite space has vanishing higher inverse limit in the relative condensed module category and its ordinary limit is the homotopy fibre of one minus shift on the product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"CondensedMod.ofSheafProfinite\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"Condensed.isoLocallyConstantOfIsColimit_inv\", \"CondensedMod.IsSolid.isIso_solidification_map\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"LightCondMod.ofSheafLightProfinite\"], \"digest\": \"7d04d0cc0f73d2d0\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: existence of limits, AB4Star for fixed scalar condensed modules and solid-module definitions do not give this relative finite-bundle Roos exactness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"limit\"",
+   "results": "{\"t\": \"2026-10-25T10:32:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"limit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"instHasLimitsCondensedSet\", \"instHasLimitsOfSizeCondensedSet\", \"instHasFiniteLimitsCondensed\", \"instHasLimitsOfShapeCondensed\", \"instHasColimitsCondensedMod\", \"instHasLimitsCondensedMod\", \"instHasLimitsOfSizeCondensedMod\", \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\"], \"digest\": \"e94d14aa637b445b\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: existence of limits, AB4Star for fixed scalar condensed modules and solid-module definitions do not give this relative finite-bundle Roos exactness"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite|Finite).*(Roos|roos)|[Rr]oos.*(finite|Finite)|[Cc]ondensed.*AB4Star",
+   "results": "{\"t\": \"2026-10-25T10:32:00Z\", \"tool\": \"grep\", \"query\": \"(finite|Finite).*(Roos|roos)|[Rr]oos.*(finite|Finite)|[Cc]ondensed.*AB4Star\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: existence of limits, AB4Star for fixed scalar condensed modules and solid-module definitions do not give this relative finite-bundle Roos exactness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limits of finite local systems on a profinite slice are exact by compactness and projectivity of extremally disconnected covers",
+   "results": "{\"t\": \"2026-10-25T10:32:01Z\", \"tool\": \"leansearch\", \"query\": \"Inverse limits of finite local systems on a profinite slice are exact by compactness and projectivity of extremally disconnected covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHaus.instExtremallyDisconnectedCarrierToTopTrueOfProjective\", \"Profinite.projective_of_extrDisc\", \"Profinite.hasLimits\", \"Profinite.limitCone\", \"ProfiniteAddGrp.limit\", \"Profinite.hasColimits\", \"Profinite.instEnoughProjectives\", \"Profinite.asLimit\"], \"digest\": \"cf8dfb728f5ce160\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: existence of limits, AB4Star for fixed scalar condensed modules and solid-module definitions do not give this relative finite-bundle Roos exactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In relative condensed modules over a profinite base the countable inverse limit of finite continuous module bundles is the derived inverse limit without a uniform Mittag Leffler condition",
+   "results": "{\"t\": \"2026-10-25T10:34:03Z\", \"tool\": \"leanfinder\", \"query\": \"In relative condensed modules over a profinite base the countable inverse limit of finite continuous module bundles is the derived inverse limit without a uniform Mittag Leffler condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"instHasLimitsOfSizeCondensedMod\", \"LightCondensed.instCountableAB4StarLightCondMod\", \"instHasLimitsCondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"CondensedMod.ofSheafProfinite\", \"instHasLimitsOfSizeLightCondMod\"], \"digest\": \"b38a5f834b1ffbdb\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: existence of limits, AB4Star for fixed scalar condensed modules and solid-module definitions do not give this relative finite-bundle Roos exactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a profinite space P and a sheaf of rings R on the profinite slice over P, products of R module sheaves are exact and the Roos map of a tower of finite locally constant bundles is an epimorphism",
+   "results": "{\"t\": \"2026-10-25T11:37:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a profinite space P and a sheaf of rings R on the profinite slice over P, products of R module sheaves are exact and the Roos map of a tower of finite locally constant bundles is an epimorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.ofSheafProfinite\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.instAB4CondensedMod\", \"LightCondMod.ofSheafLightProfinite\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\"], \"digest\": \"751cd15a3f768850\"}",
+   "date": "2026-10-25",
+   "verdict": "no match for the full item: fixed-ring CondensedMod AB4Star and general sheaf limits are only components; no relative finite-bundle Roos exactness theorem. Read Mathlib/Condensed/AB.lean:43–67 and the returned signatures."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"AB4Star\"",
+   "results": "{\"t\": \"2026-10-25T11:39:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"AB4Star\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Condensed.instAB4StarCondensedMod\", \"LightCondensed.instCountableAB4StarLightCondMod\"], \"digest\": \"80de28d7b1b8473c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match for the full item: fixed-ring CondensedMod AB4Star and general sheaf limits are only components; no relative finite-bundle Roos exactness theorem. Read Mathlib/Condensed/AB.lean:43–67 and the returned signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "AB4Star|preserves.*Products|roos",
+   "results": "{\"t\": \"2026-10-25T11:41:26Z\", \"tool\": \"grep\", \"query\": \"AB4Star|preserves.*Products|roos\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/TopComparison.lean\", \"Mathlib/Condensed/AB.lean\", \"Mathlib/Condensed/Functors.lean\", \"Mathlib/Condensed/Functors.lean\"], \"digest\": \"e278cfb65fb0632c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match for the full item: fixed-ring CondensedMod AB4Star and general sheaf limits are only components; no relative finite-bundle Roos exactness theorem. Read Mathlib/Condensed/AB.lean:43–67 and the returned signatures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of sheaves of modules over a sheaf of rings on the profinite slice has exact products computed using extremally disconnected projective covers",
+   "results": "{\"t\": \"2026-10-25T11:41:26Z\", \"tool\": \"leansearch\", \"query\": \"The category of sheaves of modules over a sheaf of rings on the profinite slice has exact products computed using extremally disconnected projective covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules\", \"SheafOfModules.hasLimit\", \"AlgebraicGeometry.Scheme.Modules\", \"Profinite.instEnoughProjectives\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\", \"SheafOfModules.mk\", \"instAB4StarModuleCat\", \"SheafOfModules.instAbelian\"], \"digest\": \"1d601e7ddb860d21\"}",
+   "date": "2026-10-25",
+   "verdict": "no match for the full item: fixed-ring CondensedMod AB4Star and general sheaf limits are only components; no relative finite-bundle Roos exactness theorem. Read Mathlib/Condensed/AB.lean:43–67 and the returned signatures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of finite continuous abelian group bundles on a profinite slice is the kernel of a surjective one minus shift map and products represent derived products",
+   "results": "{\"t\": \"2026-10-25T12:00:35Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse limit of finite continuous abelian group bundles on a profinite slice is the kernel of a surjective one minus shift map and products represent derived products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteAddGrp.limitConePtAux\", \"ProfiniteGrp.limitConePtAux\", \"ProfiniteGrp.toLimit\", \"ProfiniteGrp.toLimit_fun\", \"ProfiniteAddGrp.limit\", \"ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor\", \"Profinite.NobelingProof.CC_exact\", \"ProfiniteAddGrp.instAddGroupCarrierToTopTotallyDisconnectedSpacePtProfiniteLimitConeCompForget₂\"], \"digest\": \"3d26802e00ab3662\"}",
+   "date": "2026-10-25",
+   "verdict": "no match for the full item: fixed-ring CondensedMod AB4Star and general sheaf limits are only components; no relative finite-bundle Roos exactness theorem. Read Mathlib/Condensed/AB.lean:43–67 and the returned signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*bundle.*[Rr]oos|[Rr]oos.*finite.*bundle|AB4Star.*SheafOfModules",
+   "results": "{\"t\": \"2026-10-25T12:00:35Z\", \"tool\": \"grep\", \"query\": \"finite.*bundle.*[Rr]oos|[Rr]oos.*finite.*bundle|AB4Star.*SheafOfModules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match for the full item: fixed-ring CondensedMod AB4Star and general sheaf limits are only components; no relative finite-bundle Roos exactness theorem. Read Mathlib/Condensed/AB.lean:43–67 and the returned signatures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-constant-model-relation-hull",
+  "date": "2026-10-25",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; local continuous relation-kernel input before applying closed-pair restriction. Auxiliary Roos exactness for finite continuous module bundles on a profinite slice.",
+   "via": [
+    "lem-sfb-profinite-constant-model-relation-hull",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-relative-finite-bundle-roos",
+  "worker": "stage1",
+  "summary": "Proved exact small products by Stonean test covers, all-small termwise derived products via K-injective resolutions, and finite-bundle Roos epimorphy via the explicit compact solution cover and finite backward recursion. Reused existing general topology and ringed-site nodes; no new nodes and no statement change. Checked source hypotheses, relative site, actual scalar structures, arbitrary index universes, empty bases, zero modules and nonsurjective transitions.",
+  "blueprint": "Nearest ancestor det-sf-comp-coherence-cocycle, Refinement isomorphisms paragraph via det-sf-comp-coherence-refinement (2): descendant closed-fibre comparison needs ordinary-limit/Roos identification for finite continuous relation bundles; the compactness argument realizes this auxiliary input without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic topology or ringed-site/derived-category tool, used with its stated hypotheses in the relative profinite-slice proof; the compactification-coherence unit has no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic topology or ringed-site/derived-category tool, used with its stated hypotheses in the relative profinite-slice proof; the compactification-coherence unit has no replacement for this general fact."
+   },
+   {
+    "node": "det-pe-stonean-projective",
+    "why": "Generic topology or ringed-site/derived-category tool, used with its stated hypotheses in the relative profinite-slice proof; the compactification-coherence unit has no replacement for this general fact."
+   },
+   {
+    "node": "det-pe-stonean-cover",
+    "why": "Generic topology or ringed-site/derived-category tool, used with its stated hypotheses in the relative profinite-slice proof; the compactification-coherence unit has no replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic topology or ringed-site/derived-category tool, used with its stated hypotheses in the relative profinite-slice proof; the compactification-coherence unit has no replacement for this general fact."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic topology or ringed-site/derived-category tool, used with its stated hypotheses in the relative profinite-slice proof; the compactification-coherence unit has no replacement for this general fact."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Generic topology or ringed-site/derived-category tool, used with its stated hypotheses in the relative profinite-slice proof; the compactification-coherence unit has no replacement for this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NG-60c29dd14",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-60c29dd14 (reviewer sub-agent of L); spot-checked: Read all 8 steps, every cited statement, and RTW 2601.07358 Lemma 1.2.7 (p.14). That lemma only motivates the argument (it reduces to an extremally disconnected closed-point space and defers to FS24), so proof_origin=agent is right. Stacks tags 08TC/08YN/08ZU/005C/005D/03CN/03DA/03DB/03CO/0BK6/07KC exist with the cited labels. No new nodes; proof_deps equals the union of uses; the statement matches what the citer relation-hull step 3 uses. Step 1: C(-,T) restricts to the slice; sheafification on the size-convention skeleton feeds the internal/sectionwise module equivalence; forgetting is faithful and exact. Step 2: the clopen-cover sheaf condition gives B(V)=∏B(S_j) (B(∅)=0); det-pe-stonean-projective (3) gives a section of V→S; det-pe-stonean-cover gives the converse. Step 3: product of epis is epi, so products are exact. Step 4: H^q commutes with products; K-injective resolutions plus lem-pc-ringed-space-product-kinjective show the termwise product with its projections is the derived product, for all small families. Step 5: Z_y is a closed equaliser of continuous maps into Hausdorff F_k, hence profinite. Step 6: the backward recursion solves each finite block (checked x_k−t_k x_{k+1}=y_k) and the finite-intersection leaf gives a solution over each q. Step 7: the single cover makes 1−s locally surjective; the sectionwise limit is ker(1−s). Step 8: the SES triangle plus product uniqueness pins the middle arrow. Edge cases: empty P/Q, a point, zero/identity transitions, varying fibre sizes, non-Hausdorff T. Not duplicates: det-pe-products-exact and the replete nodes are for X_proét with epimorphic transitions. The 7 declared tool_uses are accepted as generic black-box tools. Advisory only: the bundle definition is coherent only if the clopen pieces partition P; step 5 reads it that way, and the wording is inherited from NC."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.RelativeFiniteBundleRoos",
+  "declaration": "Profinite.relativeFiniteBundle_roos",
+  "declarations": [
+   "Profinite.relativeContinuousRing_exact_products",
+   "Profinite.relativeContinuousRing_termwise_derived_product",
+   "Profinite.relativeFiniteBundle_roos"
+  ],
+  "file": "lean/Sheaf/Topology/RelativeFiniteBundleRoos.lean",
+  "statement": "theorem relativeFiniteBundle_roos (P : Profinite.{u}) (T : Type v) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [HasDerivedCategory.{w} (SheafOfModules.{max u v + 1} (relativeContinuousRing P T))] (M : ℕᵒᵖ ⥤ SheafOfModules.{max u v + 1} (relativeContinuousRing P T)) (E : ℕ → FiniteAbelianBundle P) (hE : ∀ n : ℕ, Nonempty ((E n).SectionPresentation (M.obj (op n)))) : ∃ hz : Pi.lift (fun n : ℕ ↦ limit.π M (op n)) ≫ towerTransitionEndomorphism (fun n : ℕ ↦ M.map (homOfLE (Nat.le_succ n)).op) = 0, (ShortComplex.mk (Pi.lift (fun n : ℕ ↦ limit.π M (op n))) (towerTransitionEndomorphism (fun n : ℕ ↦ M.map (homOfLE (Nat.le_succ n)).op)) hz).ShortExact ∧ Nonempty (IsLimit (Fan.mk ((DerivedCategory.singleFunctor _ 0).obj (∏ᶜ fun n : ℕ ↦ M.obj (op n))) (fun n : ℕ ↦ (DerivedCategory.singleFunctor _ 0).map (Pi.π (fun n : ℕ ↦ M.obj (op n)) n)))) ∧ ∃ δ : (DerivedCategory.singleFunctor _ 0).obj (∏ᶜ fun n : ℕ ↦ M.obj (op n)) ⟶ ((DerivedCategory.singleFunctor _ 0).obj (limit M))⟦(1 : ℤ)⟧, Triangle.mk ((DerivedCategory.singleFunctor _ 0).map (Pi.lift (fun n : ℕ ↦ limit.π M (op n)))) ((DerivedCategory.singleFunctor _ 0).map (towerTransitionEndomorphism (fun n : ℕ ↦ M.map (homOfLE (Nat.le_succ n)).op))) δ ∈ distTriang (DerivedCategory (SheafOfModules.{max u v + 1} (relativeContinuousRing P T)))",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed52e5bd7",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item node, the new def node def-sfb-relative-finite-bundle-model, both delivered modules, the report (Worker report, New nodes and Second reading by NF present) and the stmt_dep declarations in the live tree (continuousMapRingSheafOfUniverse, towerTransitionEndomorphism = 𝟙 − Pi.lift(π(n+1)≫f n), sectionModuleEquivalence). Node diff: only lean was added and stmt_deps gained 5 used deps; statement, proof and proof_deps unchanged. Clauses match: actual C(-,T)|_P ring with no extra condition on T; exact products as HasExactLimitsOfShape (Discrete I) for every I : Type (max u v + 1), including empty I; derived product as IsLimit of the Q-mapped termwise cone; tower M : ℕᵒᵖ ⥤ SheafOfModules; ShortExact with the 1−s sign x_k − t_k x_{k+1}; IsLimit fan of the single-functor product with its actual projections; distinguished triangle with both actual arrows. The bundle is a partition c : P → Fin n with finite groups, which covers every such bundle up to isomorphism (the node's wording is coherent only for partitions; same advisory as the stage-1 reviewer). The natural additive SectionPresentation gives the continuous fibrewise additive transitions by Yoneda on the representable section presheaf, so the hypothesis is equivalent, not weaker. Edge cases checked: empty P/Q, one-point P, zero/identity/non-surjective transitions, varying fibres, zero or non-Hausdorff T, empty families. lean.statement matches the files verbatim; sorry only in the 3 theorem proofs; definitions have real data; docstrings carry source and blueprint; all imports exist. No file changed and nothing compiled; the worker reports a clean compile. Advisory: the in-report second reading is the worker's self-check, not a separate reader."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T164352-L-1005196",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

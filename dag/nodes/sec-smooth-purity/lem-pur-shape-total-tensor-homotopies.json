@@ -1,0 +1,80 @@
+{
+ "id": "lem-pur-shape-total-tensor-homotopies",
+ "kind": "statement",
+ "title": "Total tensor for a complex shape preserves homotopies in each variable",
+ "statement": "Let $C$ be a preadditive category [def-weil-preadditive-category] with a monoidal structure [def-sfb-monoidal-category] whose tensor bifunctor is additive in both variables. Let $I$ be an additive commutative monoid with decidable equality. A complex shape $c$ is a relation on $I$ with at most one successor and at most one predecessor at each index. Assume its relation is preserved by adding an index, and fix a homomorphism $\\varepsilon:I\\to\\{1,-1\\}$ with $\\varepsilon(p')=-\\varepsilon(p)$ whenever $c(p,p')$. A $c$-complex has objects $X^p$ and maps $d_X^{p,p'}$ zero off $c(p,p')$, with consecutive differentials composing to zero. Its maps commute with differentials. A homotopy from $f$ to $f'$ is a family $h^{i,j}:X^i\\to X'^j$ zero unless $c(j,i)$ and satisfying $f-f'=d_{X'}h+hd_X$; the sums here have at most two terms at each index. Assume the total tensor complexes for the pairs used below exist: their degree $n$ term is $\\bigoplus_{p+q=n}X^p\\otimes Y^q$, and their differential on a summand is $d_X\\otimes1+\\varepsilon(p)1\\otimes d_Y$. For chain maps $f,f':X\\to X'$ and $g,g':Y\\to Y'$, the total tensor maps satisfy both assertions:\n\n1. If $f$ and $f'$ are homotopic, then $f\\otimes g$ and $f'\\otimes g$ are homotopic.\n2. If $g$ and $g'$ are homotopic, then $f\\otimes g$ and $f\\otimes g'$ are homotopic.\n\nNo braiding, abelian-category hypothesis, or boundedness is assumed.",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+  "place": "HomologicalComplex.mapBifunctorMapHomotopy₁, lines 178-182, and HomologicalComplex.mapBifunctorMapHomotopy₂, lines 190-192; common hypotheses lines 25-37. Specialize the additive bifunctor F to curriedTensor C and the three shapes to c."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category",
+  "def-sfb-monoidal-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor bifunctor on homological complexes preserves homotopies in both variables and descends to homotopy category",
+   "results": "HomologicalComplex.mapBifunctorMapHomotopy₁; HasTensor; tensorObj. Inspected BifunctorHomotopy.lean common hypotheses and both homotopy constructors.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive bifunctor sends a homotopy of either input chain map to a homotopy of maps on total complexes",
+   "results": "HomologicalComplex.mapBifunctorMapHomotopy₂ and mapBifunctorMapHomotopy₁ are the first two hits; both specialize to the stated tensor maps.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorMapHomotopy₁",
+   "results": "Exact declaration, Mathlib.Algebra.Homology.BifunctorHomotopy.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive tensor bifunctor of homological complexes respects chain homotopies for arbitrary total complex shapes",
+   "results": "HomologicalComplex.mapBifunctorMapHomotopy₂ and mapBifunctorMapHomotopy₁, together with tensorHom and tensorObj.",
+   "date": "2026-10-22",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def mapBifunctorMapHomotopy₁|def mapBifunctorMapHomotopy₂",
+   "results": "Mathlib/Algebra/Homology/BifunctorHomotopy.lean:178,190 (searched Algebra/Homology).",
+   "date": "2026-10-22",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.mapBifunctorMapHomotopy₁",
+  "file": "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+  "how": "One declaration per clause: HomologicalComplex.mapBifunctorMapHomotopy₁ at lines 178-182 proves assertion 1; HomologicalComplex.mapBifunctorMapHomotopy₂ at lines 190-192 proves assertion 2. In each take C₁=C₂=D=C, F=curriedTensor C and c₁=c₂=c. Additivity is assumed; the stated epsilon signs give the TotalComplexShape instance (ComplexShapeSigns.lean:160-166), and the assumed total tensors are HasMapBifunctor. No symmetry-shape hypothesis is required.",
+  "line": 178
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-homotopy-category-koszul-braided",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "thm-asd-smooth-tensor.proof.md, opening displayed projection formula in the transpose construction: ordinary signed total tensor must first pass to homotopy classes before deriving it. Supplies homotopy congruence, not the Koszul braiding or its hexagons. The ancestor command returns null because the maintainer-created item's created.item is null; its explicit blueprint.from names thm-asd-smooth-tensor.",
+   "via": [
+    "lem-asd-homotopy-category-koszul-braided"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

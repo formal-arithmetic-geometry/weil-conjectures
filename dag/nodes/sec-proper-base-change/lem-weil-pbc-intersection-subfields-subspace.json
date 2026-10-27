@@ -119,7 +119,32 @@
   "item": "lem-weil-pbc-intersection-subfields-differentials",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "IntermediateField.exists_ne_zero_mem_base_iff_forall_mem_intermediateField"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "IntermediateField.exists_ne_zero_mem_base_iff_forall_mem_intermediateField",
+     "module": "WeilConjectures.FieldTheory.IntersectionSubfieldsSubspace",
+     "lines": [
+      25,
+      152
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -166,5 +191,41 @@
    "IntermediateField.exists_ne_zero_mem_base_iff_forall_mem_intermediateField"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $K/k$ be a field extension, $k$ regarded as a subfield of $K$. Let $(K_\\alpha)_{\\alpha\\in\\mathcal A}$ be a family of subfields of $K$, indexed by a nonempty set $\\mathcal A$, such that (1) $k\\subseteq K_\\alpha$ for all $\\alpha\\in\\mathcal A$; (2) $k=\\bigcap_{\\alpha\\in\\mathcal A}K_\\alpha$; (3) for $\\alpha,\\alpha'\\in\\mathcal A$ there is $\\alpha''\\in\\mathcal A$ with $K_{\\alpha''}\\subseteq K_\\alpha\\cap K_{\\alpha'}$. For a subfield $F\\subseteq K$ and $n\\ge1$ write $F^{\\oplus n}\\subseteq K^{\\oplus n}$ for the set of vectors all of whose coordinates lie in $F$. Then for every $n\\ge1$ and every $K$-linear subspace $V\\subseteq K^{\\oplus n}$ we have $V\\cap k^{\\oplus n}\\ne0$ if and only if $V\\cap K_\\alpha^{\\oplus n}\\ne0$ for every $\\alpha\\in\\mathcal A$.",
+  "proof": [
+   {
+    "text": "The forward implication is immediate: if $0\\ne v\\in V\\cap k^{\\oplus n}$, then $v\\in V\\cap K_\\alpha^{\\oplus n}$ for each $\\alpha$, since $k\\subseteq K_\\alpha$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the converse, induct on $n$. If $n=1$, a $K$-subspace $V\\subseteq K$ is either $0$ or $K$: a nonzero $x\\in V$ gives $1=x^{-1}x\\in V$. Since $\\mathcal A$ is nonempty and $V\\cap K_\\alpha\\ne0$ for every $\\alpha$, $V=K$, whence $1\\in V\\cap k$. Now suppose $n\\ge2$ and the converse holds in dimension $n-1$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Identify the tail subspace $W=\\{(x_2,\\ldots,x_n)\\in K^{\\oplus(n-1)}:(0,x_2,\\ldots,x_n)\\in V\\}$. It is $K$-linear. If $W\\cap k^{\\oplus(n-1)}\\ne0$, adjoining a leading zero proves $V\\cap k^{\\oplus n}\\ne0$. Otherwise the induction hypothesis, applied to $W$ and contraposed, gives an $\\alpha\\in\\mathcal A$ for which $W\\cap K_\\alpha^{\\oplus(n-1)}=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Choose $0\\ne w=(w_1,\\ldots,w_n)\\in V\\cap K_\\alpha^{\\oplus n}$. Then $w_1\\ne0$, since otherwise its tail would be a nonzero element of $W\\cap K_\\alpha^{\\oplus(n-1)}$. Dividing by $w_1\\in K_\\alpha$ gives $v=(1,x_2,\\ldots,x_n)\\in V\\cap K_\\alpha^{\\oplus n}$. Every $z=(z_1,\\ldots,z_n)\\in V\\cap K_\\alpha^{\\oplus n}$ satisfies $z-z_1v\\in V\\cap(0\\oplus K_\\alpha^{\\oplus(n-1)})=0$; thus $V\\cap K_\\alpha^{\\oplus n}=K_\\alpha v$. If $K_\\beta\\subseteq K_\\alpha$, choose $0\\ne z\\in V\\cap K_\\beta^{\\oplus n}$. The preceding equality gives $z=z_1v$ with $z_1\\ne0$; hence $v=z_1^{-1}z\\in K_\\beta^{\\oplus n}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Each coordinate $x_i$ of $v$ therefore belongs to every $K_\\beta$ contained in $K_\\alpha$. Given any $\\gamma\\in\\mathcal A$, condition (3) supplies $\\delta$ with $K_\\delta\\subseteq K_\\alpha\\cap K_\\gamma$; hence $x_i\\in K_\\delta\\subseteq K_\\gamma$. Condition (2) yields $x_i\\in\\bigcap_\\gamma K_\\gamma=k$. The leading coordinate $1$ lies in $k$ too, so $0\\ne v\\in V\\cap k^{\\oplus n}$, completing the induction.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

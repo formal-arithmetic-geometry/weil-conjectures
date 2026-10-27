@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-opposite-root-sl2-parametrizations",
+ "kind": "statement",
+ "title": "Compatible rank-one parametrizations of opposite root groups",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroup schemes as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Let $G$ be a smooth connected affine reductive $F$-group scheme of finite type, where reductive means having no nontrivial smooth connected normal unipotent closed subgroup; unipotent means that all geometric points are unipotent matrices in a faithful linear representation. Fix a split maximal torus $T\\subseteq G$, its character and cocharacter lattices and root datum $(X,\\Phi,Y,\\Phi^\\vee)$ as in [lem-sfb-reductive-borel-pair-structure], and root subgroup schemes $U_\\beta$ as in [lem-sfb-reductive-root-subgroup-parametrizations]. Thus $Y=\\operatorname{Hom}(\\mathbf G_m,T)$ and $\\Phi^\\vee$ is the set of canonical coroots, not their differentials. Write $\\operatorname{SL}_2(A)=\\{M\\in\\operatorname{Mat}_{2\\times2}(A):\\det M=1\\}$ for every commutative $F$-algebra $A$, and put $$x_+(a)=I_2+aE_{12},\\quad x_-(a)=I_2+aE_{21},\\quad h(s)=\\operatorname{diag}(s,s^{-1}),$$ where $I_2$ is the identity matrix and $E_{ij}$ is the matrix with a single $1$ at position $(i,j)$ and zero elsewhere. For every $\\alpha\\in\\Phi$ there is a group-scheme homomorphism $v_\\alpha:\\operatorname{SL}_2\\to G$ whose restrictions to $x_+(\\mathbf G_a)$ and $x_-(\\mathbf G_a)$ are isomorphisms onto $U_\\alpha$ and $U_{-\\alpha}$, respectively, and whose restriction to the diagonal torus satisfies $v_\\alpha(h(s))=\\alpha^\\vee(s)$ for every $A$ and $s\\in A^\\times$. Here $\\mathbf G_a,\\mathbf G_m$ have the meanings of [def-sc-gm-ga]. No restriction on the characteristic of $F$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.11, proof (b)--(e), printed pp.429--430; paragraph 21.24, printed p.432 (restrictions to both upper and lower unitriangular subgroups)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-sc-gm-ga",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\alpha\\in\\Phi$. By [lem-sfb-reductive-rank-one-reflections], $H=G_\\alpha=C_G(T_\\alpha)$ is reductive of semisimple rank one and contains the maximal torus $T$. Its upper-root embedding supplied there has tangent space $\\mathfrak g_\\alpha$, so $\\mathfrak g_\\alpha\\subseteq\\operatorname{Lie}(H)$. The hypotheses of [lem-sfb-split-rank-one-classification] therefore hold for $(H,T)$. Choose its isomorphism with $(Z\\times K,Z\\times D_K)$, where $Z=\\mathbf G_m^r$ and $K$ is one of $\\operatorname{SL}_2,\\operatorname{PGL}_2,\\operatorname{GL}_2$. Work in this model and then compose the constructed map with $Z\\times K\\simeq H\\hookrightarrow G$. No hypothesis on characteristic has been added.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-split-rank-one-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 21.11(a),(b), pp.428--429, reduced to Theorem 20.33 and Corollary 20.34, pp.418--419."
+   }
+  },
+  {
+   "text": "In the three models define $j:\\operatorname{SL}_2\\to Z\\times K$ by $M\\mapsto(1,M)$, $M\\mapsto(1,[M])$, or $M\\mapsto(1,M)$, respectively, and put $\\nu(s)=j(h(s))$. These are group-scheme homomorphisms by matrix multiplication. Put $L_\\pm=j(x_\\pm(\\mathbf G_a))$. In the SL and GL models they are the closed matrix subgroups with diagonal entries $1$ and the opposite off-diagonal entry $0$; the remaining entry is their inverse coordinate. For the PGL model use the determinant-open projective-matrix realization stated in [lem-sfb-projective-frames-pgl], with $S=\\operatorname{Spec}F$ and rank $2$. In coordinates $[a:b:c:d]$, $L_+$ is cut out by $a=d,c=0$, and $L_-$ by $a=d,b=0$. The determinant condition becomes $d^2\\ne0$, so these closed subschemes lie in the chart $d\\ne0$, where normalization gives $[1:b/d:0:1]$ and $[1:0:c/d:1]$. Thus in every model $j\\circ x_\\pm:\\mathbf G_a\\to L_\\pm$ are isomorphisms of smooth connected closed group schemes, on every test algebra; a matrix representative of an arbitrary PGL point is not assumed.",
+   "uses": [
+    "lem-sfb-projective-frames-pgl"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 21.3--21.5, pp.425--426; 20.38, pp.422--423; 21.24, p.432. Explicit matrix-coordinate verification, with the determinant-open realization from the cited node."
+   }
+  },
+  {
+   "text": "Let $\\chi$ be the character of $Z\\times D_K$, trivial on $Z$, given in the three cases by $\\chi(\\operatorname{diag}(z,z^{-1}))=z^2$, $\\chi([\\operatorname{diag}(a,d)])=a/d$, and $\\chi(\\operatorname{diag}(a,d))=a/d$. Direct multiplication gives $t x_+(b)t^{-1}=x_+(\\chi(t)b)$ and $t x_-(c)t^{-1}=x_-(\\chi(t)^{-1}c)$. The only nonzero tangent weights of $Z\\times K$ are $\\chi,-\\chi$: conjugation scales the two off-diagonal matrix coordinates by these characters and fixes the diagonal coordinates. In the PGL chart $d=1$ at the identity the tangent coordinates are $a-1,b,c$, of respective weights $0,\\chi,-\\chi$; this calculation also holds in characteristic two. Since $\\mathfrak g_\\alpha\\subseteq\\operatorname{Lie}(H)$, $\\alpha=\\epsilon\\chi$ for $\\epsilon\\in\\{1,-1\\}$. By [lem-sfb-reductive-rank-one-reflections], $\\dim\\mathfrak g_{\\pm\\alpha}=1$, so the tangent lines of $L_\\pm$ are exactly $\\mathfrak g_{\\pm\\chi}$ inside $\\operatorname{Lie}(G)$. The subgroups $L_\\pm$ are $T$-normalized by the displayed formulas. The uniqueness assertion of [lem-sfb-reductive-root-subgroup-parametrizations] now identifies $L_+=U_\\chi$ and $L_-=U_{-\\chi}$ as subgroup schemes of $G$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Examples 21.3--21.5, pp.425--426; Theorem 21.11(b),(c), pp.428--429; 21.19, p.431."
+   }
+  },
+  {
+   "text": "Set $w=\\left(\\begin{smallmatrix}0&-1\\\\1&0\\end{smallmatrix}\\right)$ and $n=j(w)$. In each model $n$ normalizes $T$ and direct diagonal multiplication gives $n^{-1}tn=t\\,\\nu(\\chi(t)^{-1})$; it swaps the two diagonal entries, and fixes the $Z$ factor. Thus $n$ acts nontrivially on $T$ and belongs to $N_H(T)(F)$. By [lem-sfb-reductive-rank-one-reflections], its Weyl class is the unique nonidentity class $s_\\alpha$. For every character $\\xi$ of $T$, applying $\\xi$ to this identity and using $\\xi\\circ\\nu(s)=s^{\\langle\\xi,\\nu\\rangle}$ gives $s_\\alpha(\\xi)=\\xi-\\langle\\xi,\\nu\\rangle\\chi=\\xi-\\langle\\xi,\\epsilon\\nu\\rangle\\alpha$. The uniqueness of the cocharacter in that cited reflection identity gives $\\alpha^\\vee=\\epsilon\\nu$. This is equality in the cocharacter lattice, hence of group-scheme maps, rather than equality only of differentials.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "20.39--20.40, p.423; Theorem 21.11(d),(e), pp.429--430; 21.24, p.432."
+   }
+  },
+  {
+   "text": "If $\\epsilon=1$, take $v_\\alpha=j$, followed by the chosen isomorphism and inclusion into $G$. If $\\epsilon=-1$, take $v_\\alpha=j\\circ\\operatorname{Int}(w)$. Matrix multiplication gives $w x_+(a)w^{-1}=x_-(-a)$, $w x_-(a)w^{-1}=x_+(-a)$, and $w h(s)w^{-1}=h(s^{-1})$. Consequently the upper and lower restrictions are isomorphisms onto $U_\\alpha,U_{-\\alpha}$ in the required order, and the diagonal restriction is $\\epsilon\\nu=\\alpha^\\vee$. These formulas hold over every commutative $F$-algebra; $a\\mapsto-a$ is an isomorphism even in characteristic two. If $\\Phi$ is empty there is nothing to choose. This proves all clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "20.38--20.40, pp.422--423; 21.24, p.432; explicit sign choice and assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-projective-frames-pgl",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 21.11 and paragraph 21.24, using the explicit rank-one models of Theorem 20.33; matrix details expanded by Q14."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coroot|root[Ss]ubgroup|root_subgroup",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rank one SL2 homomorphism onto opposite root subgroups of a reductive group",
+   "results": "Hits: LieAlgebra.IsKilling.sl2SubalgebraOfRoot, LieAlgebra.IsKilling.sl2SubalgebraOfRoot.congr_simp, LieAlgebra.IsKilling.sl2SubmoduleOfRoot.congr_simp, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff, SpecialLinearGroup.toLinearEquiv, SpecialLinearGroup.toLinearEquiv_apply, SpecialLinearGroup.center_eq_bot_of_finrank_le_one; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"root\"",
+   "results": "Hits: Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity', Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply, Matrix.SpecialLinearGroup.eq_scalar_center_equiv_rootsOfUnity, Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_symm_apply_coe_coe, Matrix.ProjectiveSpecialLinearGroup.toPGL_surj_of_roots, SpecialLinearGroup.centerEquivRootsOfUnity_invFun, SpecialLinearGroup.centerEquivRootsOfUnity; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite root subgroups of a reductive algebraic group are images of upper and lower unipotent subgroups under an SL2 homomorphism",
+   "results": "Hits: LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff, LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup, RootPairing.range_weylGroup_coweightHom, RootPairing.GeckConstruction.ωConj_mem_of_mem, RootPairing.GeckConstruction.h', LieAlgebra.IsKilling.sl2SubalgebraOfRoot, RootPairing.GeckConstruction.ωConjLieSubmodule, RootPairing.GeckConstruction.cartanSubalgebra'; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A root and its negative admit compatible SL2 parametrizations with diagonal torus mapping to the coroot",
+   "results": "Hits: RootPairing.Base.IsPos.or_neg, RootPairing.neg_root_mem, RootPairing.pairingIn_neg_two_neg_two_iff, RootPairing.baseOf_root_eq_baseOf_coroot, RootPairing.pairing_neg_two_neg_two_iff, RootPairing.pairing_neg_one_neg_four_iff, RootPairing.root_eq_neg_iff, RootPairing.pairingIn_neg_one_neg_four_iff; no statement about the required algebraic group schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coroot|root[Ss]ubgroup|root_subgroup",
+   "results": "{\"t\": \"2026-10-23T20:39:37Z\", \"tool\": \"grep\", \"query\": \"coroot|root[Ss]ubgroup|root_subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Basis/Base.lean\", \"Mathlib/Algebra/Lie/Basis/Base.lean\", \"Mathlib/Algebra/Lie/Basis/Base.lean\", \"Mathlib/Algebra/Lie/Basis/Base.lean\", \"Mathlib/Algebra/Lie/Basis/Base.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\", \"Mathlib/Algebra/Lie/Weights/Cartan.lean\"], \"digest\": \"37a451d7f30d9f6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, Lie algebras or root pairings, not the required reductive group-scheme homomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Opposite root groups of a reductive algebraic group are parametrized by a rank one special linear group",
+   "results": "{\"t\": \"2026-10-23T20:39:38Z\", \"tool\": \"leansearch\", \"query\": \"Opposite root groups of a reductive algebraic group are parametrized by a rank one special linear group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup\", \"Subgroup.mem_op\", \"Subgroup.op_inj\", \"Subgroup.op\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"SpecialLinearGroup.instGroup\", \"Subgroup.op_injective\", \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\"], \"digest\": \"7a03fc6ddcbc3225\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, Lie algebras or root pairings, not the required reductive group-scheme homomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"root\"",
+   "results": "{\"t\": \"2026-10-23T20:39:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"root\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"Matrix.SpecialLinearGroup.eq_scalar_center_equiv_rootsOfUnity\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_symm_apply_coe_coe\", \"Matrix.ProjectiveSpecialLinearGroup.toPGL_surj_of_roots\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"SpecialLinearGroup.centerEquivRootsOfUnity\"], \"digest\": \"5279c2f2eff0530a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, Lie algebras or root pairings, not the required reductive group-scheme homomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive algebraic group has an SL2 homomorphism identifying the two unipotent subgroups with opposite root groups and the diagonal with the coroot",
+   "results": "{\"t\": \"2026-10-23T20:39:39Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive algebraic group has an SL2 homomorphism identifying the two unipotent subgroups with opposite root groups and the diagonal with the coroot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.h'\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\"], \"digest\": \"766b26c6a29b88ca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, Lie algebras or root pairings, not the required reductive group-scheme homomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a split reductive group each coroot lifts to a morphism from the special linear algebraic group of degree two",
+   "results": "{\"t\": \"2026-10-23T20:40:18Z\", \"tool\": \"leanfinder\", \"query\": \"In a split reductive group each coroot lifts to a morphism from the special linear algebraic group of degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.coroot'In\", \"RootPairing.algebraMap_coroot'In_apply\", \"IsSl2Triple.h_eq_coroot\", \"RootPairing.root'In\", \"LieAlgebra.IsKilling.rootSystem_coroot_apply\", \"RootPairing.Hom.coroot_coweightMap\", \"RootPairing.Hom.coroot_coweightMap_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\"], \"digest\": \"16e04959ddfda7cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract matrix groups, Lie algebras or root pairings, not the required reductive group-scheme homomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-root-subgroups-generate",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Generation by root subgroups, Milne Proposition 21.49(a), used at the last step of Corollary 21.50. Supporting input: Compatible rank-one parametrizations of opposite root groups.",
+   "via": [
+    "lem-sfb-semisimple-root-subgroups-generate",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-opposite-root-sl2-parametrizations",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing rank-one centralizer, classification, root-subgroup uniqueness, and projective-matrix realization nodes. Explicit matrices give both restrictions and the canonical coroot without a new lemma, including characteristic two and nonreduced test algebras. All five current Mathlib searches are recorded verbatim from the command log.",
+  "blueprint": "The inherited from.place traces this supporting lemma to det-thm-sf-ctf-stability-direct-images proof (3), through the semisimple-perfectness input. This split realizes precisely the compatible rank-one parametrization input by Milne 20.33, 21.11 and 21.24. The inherited null from.node is confirmed by blueprint_refs.py ancestor; no new ancestry is invented."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-453579f47",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-453579f47 (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing: it is a first split of a statement-only item, with no new nodes and the statement and stmt_deps unchanged. The 5 steps cite rank-one-reflections, split-rank-one-classification, projective-frames-pgl and reductive-root-subgroup-parametrizations; I read each of these statements and each says what its step uses. Checks by step. Step 1: the classification is an isomorphism of pairs, so T goes to Z×D_K, and Lie(G_α) contains g_α. Step 2: on the PGL2 equations a=d,c=0 the determinant becomes d^2, which forces the chart d≠0, so G_a≅L_± over every algebra; the fppf quotient PGL2 agrees with the Zariski quotient. Step 3: I recomputed the weights (z^2 for SL2, a/d for GL2 and PGL2, also in characteristic 2); with dim g_{±α}=1 and Qα∩Φ={±α}, uniqueness of root groups gives L_±=U_{±χ}. Step 4: I checked n^{-1}tn = t·ν(χ(t)^{-1}) in all three models, and uniqueness of the cocharacter in the reflection identity gives α^∨=εν. Step 5: I checked w x_+(a) w^{-1} = x_-(-a), w x_-(a) w^{-1} = x_+(-a) and w h(s) w^{-1} = h(s^{-1}). The coroot is consistent with the statement because borel-pair-structure takes its coroots from rank-one-reflections. The source agrees: Milne iAG Theorem 21.11(a)-(e) and its proof, pp.428-430, and 21.24, p.432 (restrictions to U+ and U-). There is no cycle (closure of 10883 nodes), no duplicate (rg -L for U_{-α} and lower unitriangular), no SGA and no tool use. Batch 5: the two flagged citations, lem-trf-smooth-fpqc-base-descent (a Mathlib leaf on fpqc descent of smoothness) and lem-trf-projective-bundle-quotient-geometry (the universal property of Proj Sym), are generic tools, not steps of the trace formula or Poincaré duality, so I accept both."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.OppositeRootSL2Parametrizations",
+  "declaration": "AlgebraicGeometry.opposite_root_sl2_parametrizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/OppositeRootSL2Parametrizations.lean",
+  "statement": "theorem opposite_root_sl2_parametrizations {F : Type u} [Field F] [IsAlgClosed F] (G T : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (i : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus i) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] [aG : ModObj T.X G.X] (hconj : aG.smul = RankOneRoots.adjointMap i) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (hroot : ∀ β : Φ, P.root β = β.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ TorusCharacterTangent.weightSpace T G χ.toMul ≠ ⊥) (α : Φ) (hcanonical : ∃ n : RankOneRoots.normalizer i, (𝟙 T.X / ((P.root α).toMul.hom.hom ≫ (P.coroot α).toMul.hom.hom)) ≫ i.hom.hom = (toUnit T.X ≫ n.val)⁻¹ * i.hom.hom * (toUnit T.X ≫ n.val)) (Uplus Uminus : Grp (Over (Spec (.of F)))) (jplus : Uplus ⟶ G) (jminus : Uminus ⟶ G) (hplus : IsClosedSubgroupScheme jplus.hom.hom ∧ Smooth Uplus.X.hom ∧ ConnectedSpace Uplus.X.left ∧ TorusCharacterTangent.IsStable T G jplus ∧ (GrpObj.differential jplus.hom.hom).toLinearMap.range = TorusCharacterTangent.weightSpace T G α.val.toMul) (hminus : IsClosedSubgroupScheme jminus.hom.hom ∧ Smooth Uminus.X.hom ∧ ConnectedSpace Uminus.X.left ∧ TorusCharacterTangent.IsStable T G jminus ∧ (GrpObj.differential jminus.hom.hom).toLinearMap.range = TorusCharacterTangent.weightSpace T G (-α.val).toMul) : ∃ (v : RankOneRoots.SL2Hom G) (eplus : Grp.mk (StandardGroupSchemes.additive F) ≅ Uplus) (eminus : Grp.mk (StandardGroupSchemes.additive F) ≅ Uminus), (∀ (A : CommAlgCat.{u} F) (a : A) (g : Matrix.SpecialLinearGroup (Fin 2) A), g.val = !![1, a; 0, 1] → v.app A g = TorusCharacterTangent.additiveParameterPoint F a ≫ eplus.hom.hom.hom ≫ jplus.hom.hom) ∧ (∀ (A : CommAlgCat.{u} F) (a : A) (g : Matrix.SpecialLinearGroup (Fin 2) A), g.val = !![1, 0; a, 1] → v.app A g = TorusCharacterTangent.additiveParameterPoint F a ≫ eminus.hom.hom.hom ≫ jminus.hom.hom) ∧ (∀ (A : CommAlgCat.{u} F) (s : StandardGroupSchemes.affine F A ⟶ StandardGroupSchemes.multiplicative F) (g : Matrix.SpecialLinearGroup (Fin 2) A), g.val = !![RankOneRoots.multiplicativeValue A s, 0; 0, RankOneRoots.multiplicativeValue A s⁻¹] → v.app A g = s ≫ (P.coroot α).toMul.hom.hom ≫ i.hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8776d8971",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Re-delivery after acd3 RETURN H13+H4: the lem-sfb-reductive-borel-pair-structure record is restored byte-identical to live Q131 (key-by-key compare), CanonicalReductiveBorelPairStructure.lean is dropped, and the item import is restored to ReductiveBorelPairStructure (one-line module diff). The item node JSON is identical to the previously accepted one; lean.statement is verbatim equal to the file signature. I re-checked against Milne 21.11(b)-(e)/21.24: hypotheses, hcanonical, Ga≅U± upper/lower clauses, the diagonal coroot clause, and the empty-Φ, char-2, nonreduced, PGL2 and universe cases. Imports exist live; the item is not landed in parallel. The report has Worker report, Second reading by Q36 and Repair sections. No change, no compile (worker reports a clean scompile and preflight). Advisory only: term owners are reached transitively."
+ }
+}

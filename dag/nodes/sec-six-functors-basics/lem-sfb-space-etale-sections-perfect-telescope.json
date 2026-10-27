@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-space-etale-sections-perfect-telescope",
+ "kind": "statement",
+ "title": "Perfect telescope computing sections on an etale chart",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use module sheaves [def-weil-sheaf-of-modules-category], unbounded derived categories [def-weil-abstract-derived-category], quasi-coherence [def-trf-space-quasi-coherent-module], canonical tensor pullback and direct image [def-trf-space-etale-module-functors], and derived functors computed by K-flat and K-injective resolutions. Write $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ for the full subcategory with quasi-coherent cohomology. Perfect means etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $A$ be a commutative ring, let $X\\to\\operatorname{Spec}A$ be separated and finitely presented, and let $u:U\\to X$ be an etale morphism with $U$ a quasi-compact quasi-separated scheme. Finite presentation here means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. There is a sequence of perfect objects $E_m\\to E_{m+1}$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and compatible maps $e_m:E_m\\to Ru_*\\mathcal O_U$ whose sequential homotopy colimit is $Ru_*\\mathcal O_U$. Homotopy colimit has the telescope-triangle meaning of [def-kun-truncations]; all sequences and coproducts are small. For every $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ the maps\n$$\\theta_{m,L}:R\\Gamma(X,E_m\\otimes_{\\mathcal O_X}^{\\mathbf L}L)\\longrightarrow R\\Gamma(U,u^*L)$$\nobtained from $e_m\\otimes1$, the canonical projection formula $Ru_*\\mathcal O_U\\otimes^{\\mathbf L}L\\to Ru_*u^*L$, and derived composition induce an isomorphism\n$$\\operatorname{hocolim}_mR\\Gamma(X,E_m\\otimes^{\\mathbf L}L)\\xrightarrow{\\sim}R\\Gamma(U,u^*L)$$\nin $D(A)$, natural in every morphism of $L$. The same sequence and the same maps give this isomorphism in $D(B)$ for every commutative $A$-algebra $B$ and every complex $L$ of $\\mathcal O_X\\otimes_A B$-modules whose underlying $\\mathcal O_X$-complex has quasi-coherent cohomology; here $E_m\\otimes^{\\mathbf L}_{\\mathcal O_X}L$ is formed using K-flat representatives of $E_m$, retaining the $B$-action. These maps and isomorphisms are natural for $B$-linear morphisms, and their underlying $D(A)$ maps are the displayed ones. Homotopy colimits of these diagrams and their maps are computed by mapping telescopes on compatible complex representatives; the naturality just asserted holds for these diagram maps, not merely for the individual legs of an arbitrarily chosen cone.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-kun-truncations"
+ ],
+ "proof": [
+  {
+   "text": "Put $a:X\\to\\operatorname{Spec}A$ and $F=Ru_*\\mathcal O_U$. The affine base is qcqs, so [lem-sfb-space-fp-qcqs-source] makes $X$ qcqs. By [lem-sfb-space-qcqs-permanence], $u$ is qcqs, since its source is qcqs and its target is quasi-separated. The etale chart definition [def-trf-algebraic-space, def-weil-etale-morphism] makes $u$ flat and locally finitely presented on scheme charts, hence finitely presented. Thus $U\\to\\operatorname{Spec}A$ is finitely presented by composition [lem-sfb-space-separated-fp-composition], without asserting that $U$ is separated. Finally [lem-sfb-space-derived-pushforward-coproducts] gives $F\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$.",
+   "uses": [
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-qcqs-permanence",
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-derived-pushforward-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0CRW proof: finiteness hypotheses for approximation and direct image."
+   }
+  },
+  {
+   "text": "Express $A$ as the filtered union of its finitely generated $\\mathbf Z$-subalgebras $A_i$: every finite set lies in the subalgebra it generates, so the index set is small and directed. Apply [lem-sfb-fp-space-limit-category] first to $X/ A$, obtaining $X_i/A_i$ finitely presented. Its base changes $X_j$ are qcqs by [lem-sfb-space-fp-qcqs-source]. The projections $X_j\\to X_i$ are affine because an affine test $\\operatorname{Spec}C\\to X_i$ pulls them back to $\\operatorname{Spec}(C\\otimes_{A_i}A_j)$ (the ring-map tensor universal property), and $X=\\varprojlim X_j$ by the fibre-product universal property. Apply [lem-sfb-space-fp-over-space-limit-descent] to the finitely presented object $U\\to X$, giving $f_i:U_i\\to X_i$ finitely presented. Both spaces are qcqs, again by [lem-sfb-space-fp-qcqs-source]. Apply [lem-sfb-space-etaleness-eventual-stage] to this arrow over the affine base system: its limit $u$ is etale, so after increasing $i$ the arrow $f_i$ is etale, hence flat [def-weil-etale-morphism]. Composition makes $U_i$ finitely presented over $A_i$. Neither descended space needs to be a scheme.",
+   "uses": [
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-fp-over-space-limit-descent",
+    "lem-sfb-space-etaleness-eventual-stage",
+    "lem-sfb-space-separated-fp-composition",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0CRW proof, approximation paragraph; spaces-limits.tex Tag 07SL descends etaleness, supplying the required flatness since the limiting arrow here is etale."
+   }
+  },
+  {
+   "text": "The ring $A_i$ is a finitely generated algebra over the Noetherian ring $\\mathbf Z$, hence finitely presented [lem-weil-pbc-finite-type-noetherian-finite-presentation]; by composition [lem-sfb-space-separated-fp-composition] $X_i$ and $U_i$ are finitely presented over $\\mathbf Z$. Every affine etale scheme over either space is quasi-compact and separated over that space by [lem-sfb-space-affine-source-qc-separated]; etaleness gives local finite presentation [def-weil-etale-morphism]. Composition therefore makes this affine scheme finitely presented over $\\mathbf Z$ [lem-sfb-space-separated-fp-composition]. Its ring is a quotient of a polynomial ring in finitely many variables over $\\mathbf Z$, so is countable (finite tuples of integer coefficients and exponents form a countable set). Let $F_i=Rf_{i,*}\\mathcal O_{U_i}$, which has quasi-coherent cohomology by [lem-sfb-space-derived-pushforward-coproducts]. For an affine etale $V\\to X_i$, [lem-sfb-space-derived-etale-chart-calculus] identifies $F_i|_V$ with $R(f_i)_V{}_*(\\mathcal O_{U_i\\times_{X_i}V})$. Derived sections, their composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and [lem-sfb-affine-etale-derived-module-realization] identify $\\mathcal H^r(F_i)(V)$ with $H^rR\\Gamma(U_i\\times_{X_i}V,\\mathcal O)$. The projection $U_i\\times_{X_i}V\\to U_i$ is etale and qcqs: $V\\to X_i$ is qcqs and these properties survive base change [lem-sfb-space-quasicompact-fppf-local, lem-sfb-space-quasiseparated-test-calculus]. Apply [lem-sfb-space-countable-hypercohomology] to $K=P=\\mathcal O_{U_i}$. It makes these groups countable. The countability criterion [lem-sfb-space-countable-telescope] now gives a perfect sequence $P_m$ with telescope $F_i$ and its compatible legs.",
+   "uses": [
+    "lem-sfb-space-affine-source-qc-separated",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-quasiseparated-test-calculus",
+    "lem-sfb-space-countable-hypercohomology",
+    "lem-sfb-space-countable-telescope",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0CRW proof, final paragraph; 0CRU and 0CRV."
+   }
+  },
+  {
+   "text": "Let $g:X\\to X_i$ be the base projection. Flat base change [lem-sfb-flat-space-derived-pushforward-base-change] gives the canonical isomorphism $Lg^*F_i\\simeq F$, since $f_i$ is flat and qcqs. Set $E_m=Lg^*P_m$ and take $e_m$ to be $Lg^*$ of the telescope legs followed by this isomorphism. Pullback preserves perfectness [lem-sfb-space-perfect-limit-category]. Each $P_m$ lies in $D_{\\mathrm{QCoh}}(\\mathcal O_{X_i})$ by [lem-sfb-space-countable-telescope], and pullback preserves quasi-coherent cohomology [lem-sfb-space-derived-qcoh-pullback-tensor], so $E_m\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Its exactness and its derived adjunction to direct image are [lem-weil-pbc-ringed-topoi-derived-pullback, lem-sfb-space-derived-etale-chart-calculus]; a left adjoint preserves coproducts [lem-weil-pbc-left-adjoint-preserves-colimits]. Hence [lem-kun-functor-preserves-hocolim] carries the supplied telescope triangle to a telescope triangle with vertex $F$ and legs $e_m$.",
+   "uses": [
+    "lem-sfb-flat-space-derived-pushforward-base-change",
+    "lem-sfb-space-perfect-limit-category",
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-kun-functor-preserves-hocolim",
+    "lem-sfb-space-countable-telescope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0CRW proof, pullback of the perfect telescope."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-ringed-augmented-sequence-model] for this supplied telescope. It gives a compatible K-flat sequence and a fixed telescope isomorphism to $F$, and identifies its tensor telescope with $F\\otimes^{\\mathbf L}L$, naturally in $L$. All its terms have quasi-coherent cohomology [lem-sfb-space-derived-qcoh-pullback-tensor]. The functor $R\\Gamma(X,-)$ preserves small sums on this subcategory: apply [lem-sfb-space-derived-pushforward-coproducts] to $a$ and then the affine equivalence [lem-sfb-affine-etale-derived-module-realization]. Derived composition is [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], and exactness is [lem-pc-right-derived-functor-triangulated]. Thus [lem-kun-functor-preserves-hocolim] identifies the section telescope with $R\\Gamma(X,F\\otimes^{\\mathbf L}L)$. Finally apply the specified adjunction-mate isomorphism [lem-sfb-space-qcqs-derived-projection-formula] to $u$ and $\\mathcal O_U$, and derived composition. Since etale pullback is exact [lem-sfb-space-derived-etale-chart-calculus], its target is $R\\Gamma(U,u^*L)$. The restriction to the $m$th telescope leg is precisely $R\\Gamma(e_m\\otimes1)$ followed by that projection mate and composition. These are the asserted $\\theta_{m,L}$.",
+   "uses": [
+    "lem-sfb-ringed-augmented-sequence-model",
+    "lem-sfb-space-derived-qcoh-pullback-tensor",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-kun-functor-preserves-hocolim",
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0CRW proof, first paragraph; normalized projection map from 08IN."
+   }
+  },
+  {
+   "text": "For $B$ and $L$ as in the statement put $\\mathcal O_{Z,B}=\\mathcal O_Z\\otimes_A B$, for $Z=X,U$, and let $u_B$ denote $u$ with these rings. The sequence-model comparison [lem-sfb-ringed-augmented-sequence-model] is $B$-linear on complex diagrams. Etale pullback is exact slice restriction [lem-sfb-space-derived-etale-chart-calculus], also for these coefficient rings. The derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact], applied to $u_B$, transposes the following coefficient-linear map into $F\\otimes^\\mathbf L_{\\mathcal O_X}L\\to Ru_{B,*}u_B^*L$: pull back, identify the result with $u^*F\\otimes^\\mathbf L_{\\mathcal O_U}u_B^*L$, and tensor the original counit $u^*F\\to\\mathcal O_U$ with $1$. The tensor identification is termwise slice restriction on the chosen K-flat representatives; $B$ acts on the second factor throughout. Apply coefficient derived sections. For a singleton index, [lem-pur-diagram-ring-restriction-pushforward] identifies these sections and direct images after forgetting coefficients with the original derived functors. Its normalization by ringed-topos composition identifies the underlying mate with [lem-sfb-space-qcqs-derived-projection-formula]: both transpose the same counit-tensor map, using slice restriction and K-injective resolutions. This constructs the asserted telescope map in $D(B)$.",
+   "uses": [
+    "lem-sfb-ringed-augmented-sequence-model",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-sfb-space-qcqs-derived-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "0CRW tensor construction with commuting coefficient action; sites-cohomology.tex Tag 0D6E for normalized scalar restriction."
+   }
+  },
+  {
+   "text": "By scalar restriction [lem-pur-diagram-ring-restriction-pushforward] and normalized composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], the map in step 6 forgets to the isomorphism of step 5. Exact restriction of scalars detects quasi-isomorphisms: kernels and images of a $B$-linear differential have the same underlying $A$-modules. Apply this to a cone to see that restriction detects derived isomorphisms. The map is therefore an isomorphism in $D(B)$. Naturality holds before forgetting coefficients: the tensor telescope is natural on chain maps and roofs [lem-sfb-ringed-augmented-sequence-model], the counit-tensor adjunction construction is natural [lem-weil-pbc-ringed-projection-mate-exact], and derived composition is natural [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Hence it holds for every $B$-linear derived morphism of $L$, including the $A$-linear case $B=A$. We used these diagram maps throughout; agreement of legs alone would not prove equality of arbitrary cone maps.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-ringed-augmented-sequence-model",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Agent coefficient-linearity and naturality expansion of the 0CRW proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-qcqs-permanence",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "lem-sfb-fp-space-limit-category",
+  "lem-sfb-space-fp-over-space-limit-descent",
+  "lem-sfb-space-etaleness-eventual-stage",
+  "lem-sfb-space-affine-source-qc-separated",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-quasiseparated-test-calculus",
+  "lem-sfb-space-countable-hypercohomology",
+  "lem-sfb-space-countable-telescope",
+  "lem-sfb-flat-space-derived-pushforward-base-change",
+  "lem-sfb-space-perfect-limit-category",
+  "lem-sfb-space-derived-qcoh-pullback-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-sfb-ringed-augmented-sequence-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-space-qcqs-derived-projection-formula",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CRW, lemma-computing-sections-as-colim, proof of (2); agent expansion of coefficient-linear and compatible-complex naturality clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections on a flat finitely presented algebraic space over another are a sequential homotopy colimit of global tensor tests by perfect complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.preservesColimit_Γ\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {I : Type w} [inst : CategoryTheory.Category.{v, w} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Schemeᵒᵖ)\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (Opposite.unop (D.obj i))],\\n  CategoryTheory.Limits.PreservesColimit D AlgebraicGeometry.Scheme.Γ\", \"doc\": \"The global sections functor $ \\\\Gamma $, which maps schemes to their global sections in the category of commutative rings, preserves colimits of diagrams where each object is an affine scheme. Specific\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of the structure sheaf for a flat finite presentation morphism is a countable homotopy colimit of perfect complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections on an etale chart computed by homotopy colimits of tensor products with perfect complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instHasColimits\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": HasColimits LocallyRingedSpace\", \"doc\": \"The category of locally ringed spaces has all colimits. This means that for any small diagram in this category, there exists a colimit object that satisfies the universal property of colimits, constru\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.coproductCofan\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.HasColimits\", \"type\": \": Cocone F\", \"doc\": \"For a diagram $ F : \\\\mathcal{J} \\\\to \\\\mathrm{LocallyRingedSpace} $, this cocone constructs the colimit in the category of locally ringed spaces by first taking the colimit in the category of sheafed sp\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"AlgebraicGeometry.preservesColimit_Γ\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{I : Type w} [Category.{v} I] (D : I ⥤ Scheme.{u}ᵒᵖ) [∀ i, IsAffine (D.obj i).unop] : PreservesColimit D Scheme.Γ\", \"doc\": \"The global sections functor $ \\\\Gamma $, which maps schemes to their global sections in the category of commutative rings, preserves colimits of diagrams where each object is an affine scheme. Specific\"}\n  {\"name\": \"HomologicalComplex.instHasColimit\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \": HasColimit F\", \"doc\": \"For a category $ V $ with zero morphisms and a complex shape $ c $, the category of homological complexes in $ V $ with shape $ c $ has colimits. These colimits are computed component-wise via the eva\"}\n  {\"name\": \"Algebra.Extension.tensorCotangentSpace\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"(H : f.toRingHom.FormallyEtale) : T ⊗[S] P.CotangentSpace ≃ₗ[T] Q.CotangentSpace\", \"doc\": \"Given a formally étale ring homomorphism $ f: P \\\\to Q $ between commutative rings, this constructs a linear equivalence between the tensor product $ T \\\\otimes_S P.\\\\text{CotangentSpace} $ and $ Q.\\\\text\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"colimit\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|[Pp]erfect.*[Cc]olimit",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary scheme limits, sheaf limits, ordinary finite presentations, condensed modules or cotangent complexes; none states the derived quasi-coherent perfect-test assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale chart of a finitely presented algebraic space, the derived structure sheaf pushforward is a sequential homotopy colimit of perfect complexes computing sections by tensoring",
+   "results": "Hits: Algebra.isOpen_etaleLocus, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived perfect-telescope theorem for algebraic spaces in the returned declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"colimit\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived perfect-telescope theorem for algebraic spaces in the returned declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|[Pp]erfect.*[Cc]olimit",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived perfect-telescope theorem for algebraic spaces in the returned declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sections computed as telescope of perfect tensor tests on an algebraic space",
+   "results": "Hits: AlgHom.tensorEqualizer, instInhabitedTensorAlgebra, Algebra.FormallySmooth.instTensorProduct, TensorAlgebra.instRing, instAlgebra, perfect_iff_eq_derivedSet, AlgebraicGeometry.Scheme.algebra_section_section_basicOpen, AlgebraicGeometry.isLocalization_away_of_isAffine",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived perfect-telescope theorem for algebraic spaces in the returned declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable approximation of quasi-coherent derived pushforward by perfect complexes and natural telescope of tensor sections",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardSections, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardNatTrans, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-24",
+   "verdict": "no match: no derived perfect-telescope theorem for algebraic spaces in the returned declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-affine-base-change",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction.",
+   "via": [
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-etale-sections-perfect-telescope",
+  "worker": "stage1",
+  "summary": "Expanded the 0CRW proof through finite-presentation descent, eventual etaleness (and hence flatness), countability and a perfect telescope, then proved the normalized tensor-section and arbitrary coefficient-linear diagram comparisons. Reused existing projection, coproduct, base-change and scalar-restriction statements; created three strictly smaller statement-only prerequisites.",
+  "blueprint": "Inherited prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), via inverse-module affine base change, as recorded in blueprint.from; current latest blueprint checked. Its local coherent-family test is supplied by the explicit 0CRW route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic derived-category, scalar-restriction or scheme-chart tool used in the 0CRW construction; it does not replace any step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic derived-category, scalar-restriction or scheme-chart tool used in the 0CRW construction; it does not replace any step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-kun-functor-preserves-hocolim",
+    "why": "Generic derived-category, scalar-restriction or scheme-chart tool used in the 0CRW construction; it does not replace any step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic derived-category, scalar-restriction or scheme-chart tool used in the 0CRW construction; it does not replace any step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic derived-category, scalar-restriction or scheme-chart tool used in the 0CRW construction; it does not replace any step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-pur-diagram-ring-restriction-pushforward",
+    "why": "Generic derived-category, scalar-restriction or scheme-chart tool used in the 0CRW construction; it does not replace any step of the constructible-stability unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "The generic ringed-topos derived adjunction and natural counit-tensor mate construct a morphism with the external coefficient action; the algebraic-space projection-formula node gives invertibility only after forgetting coefficients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-kun-functor-preserves-hocolim",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-1bb3b7774",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-1bb3b7774 (reviewer sub-agent of L); spot-checked: Read the delivery in full. Source checks: spaces-perfect 0CRU, 0CRV (both directions and the proof via D_QCoh≅D(A,d)), 0CRW (both paragraphs) and 08IN. The item's statement and stmt_deps are unchanged, and it is still unsplit live, so it is not superseded. Steps 1-2: fp/qcqs permanence, fp-limit descent over affine and space bases, and eventual etaleness (hence flatness) checked hypothesis by hypothesis. Steps 5-7: the projection-formula mate, sum-preservation of RΓ on D_QCoh, and the B-linear mate through diagram-ring-restriction normalisation checked. The three new nodes are true, smaller than the item and not duplicates: countable-hypercohomology is 0CRU, countable-telescope is 0CRV (2)⇒(1), and the ringed sequence model holds by strict ℕ-rectification, a K-flat cone, TR3 and strict tensor-telescope commutation. Batch-5: every flagged citation reaches sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-space-quasi-coherent-module, which are not part of either assumption; accepted. The seven tool uses are generic; accepted. FIXes: (1) countable-telescope now states P_m ∈ D_QCoh(O_X), faithful to the 0CRV proof, and names t_m; step 4 now cites it for E_m ∈ D_QCoh, which was unsupported because no perfect⇒QCoh node exists for spaces. (2) Step 3 now justifies that A_i is finitely presented over Z with the Mathlib leaf lem-weil-pbc-finite-type-noetherian-finite-presentation. (3) Step 3 now cites derived-pushforward composition for H^r(F_i)(V)=H^rRΓ(U_i×V,O).; 2 file(s) fixed by the reviewer"
+ }
+}

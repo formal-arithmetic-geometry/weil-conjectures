@@ -1,0 +1,115 @@
+{
+ "id": "def-trf-integral-pullback-descent-model",
+ "kind": "definition",
+ "title": "The existing normalized completed pullback as one record",
+ "statement": "Fix the prime and finite coefficient extension and a scheme morphism f:X to Y. Use the unrestricted completed coefficient module categories [def-weil-integral-reduction-tower], their ordinary unbounded derived categories [def-weil-abstract-derived-category], and localization q of flat-term K-flat representatives. Package the normalized completed pullback of [lem-pur-integral-operations-well-defined] as a record (F,e,U), where F:D(Y) to D(X), e:q followed by F is naturally isomorphic to the actual pullback-on-good-complexes functor, and U says: for every other G and normalization d:q followed by G isomorphic to that same functor there exists a unique isomorphism i:F to G whose restriction followed by d equals e. The concrete record takes the exact functor and comparison already chosen by integralDerivedPullback and integralDerivedPullbackComparison and their existing universal property. Those existing definitions are the two projections of this record. Reducing the projections gives the exact old terms; no data choice or mathematical statement is changed.",
+ "stmt_deps": [
+  "def-weil-integral-reduction-tower",
+  "def-weil-abstract-derived-category",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 099N(5); Bhatt--Scholze Lemma 6.5.9(4); the existing normalized descent integralOperationsWellDefined, with the same record pattern as IntegralCompletedTensorDescent."
+ },
+ "proof": [
+  {
+   "text": "Use the existing first functor witness and its existing comparison witness, without making a new choice. The universal field is the first conjunct of the existing well-definedness theorem after eliminating the remaining tensor functor and comparison. The functor and comparison projections of this concrete record reduce to the exact former bodies. Its universal property determines the record up to unique compatible isomorphism. This is a packaging of proved normalized descent, including for the zero complex and arbitrary scheme morphisms, not an added hypothesis.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 099N(5) normalized descent as already proved by integralOperationsWellDefined; V2 packages its existing choices."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A descended functor packaged with its normalization isomorphism and unique compatible isomorphisms to every other descent",
+   "results": "8 hits, including CategoryTheory.Sigma.descUniq and Pseudofunctor.DescentData.iso, ofObj and isoMk. They concern other descent settings, not this existing completed pullback.",
+   "date": "2026-10-26",
+   "verdict": "The project already proves this universal property; package its exact data."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoWhiskerLeft\"",
+   "results": "12 hits including CategoryTheory.Functor.isoWhiskerLeft, isoWhiskerLeft_hom, isoWhiskerLeft_trans and its associativity formulas. They supply the whiskering used in the universal field, not a completed pullback model.",
+   "date": "2026-10-26",
+   "verdict": "no replacement for the project-specific data record"
+  },
+  {
+   "tool": "grep",
+   "query": "Localization.*lift.*[Uu]niq|Lift.*[Uu]niq",
+   "results": "25 hits, mostly universal properties of ring and topological lifts and CategoryTheory.PathCategory.lift_unique. The existing project theorem supplies the needed normalized universal property directly.",
+   "date": "2026-10-26",
+   "verdict": "use the already proved normalization, without new mathematical assumptions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.IsomorphismMultiplicationConeDescent",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "thm-trf-l-function-euler-product, proof Step 1 (Global powers), via prop-trf-rational-frobenius-integral-model.proof.md (2)-(3): isomorphism pullback commutes with reductions and transitions, original item steps 4-6 and 8 (multiplication, product comparison and descent)",
+   "via": [
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralDerivedOperations",
+  "file": "lean/Sheaf/Paper/IntegralDerivedOperations.lean",
+  "declaration": "WeilConjectures.integralPullbackDescent",
+  "declarations": [
+   "WeilConjectures.IntegralPullbackDescent",
+   "WeilConjectures.integralPullbackDescent",
+   "WeilConjectures.integralDerivedPullback",
+   "WeilConjectures.integralDerivedPullbackComparison"
+  ],
+  "statement": "def integralPullbackDescent {X Y : AlgebraicGeometry.Scheme.{t}} (f : X ⟶ Y) : IntegralPullbackDescent l E f",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26",
+  "note": "Two new public data declarations package the existing two normalized choices and their proved universal property. Existing aliases retain their exact signatures and definitionally equal bodies. Zero holes."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29c11",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T092852-L-3475163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-29c11",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261026T092852-L-3475163",
+  "kind": "interface",
+  "note": "independent cc review: elaborated type hashes of integralDerivedPullback(+Comparison), the 7 relocated defs and isomorphismMultiplicationConeDescent (published build vs delivered/fixed sandbox); the 3 sorry lemmas vs the original item conclusion and node; importers compiled against the fixed files"
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "id": "def-sfb-smooth-bundle-test-distributions",
+ "kind": "definition",
+ "title": "Test densities and distributional sections of smooth real bundles",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $N$ be a compact Hausdorff second-countable oriented smooth manifold without boundary of dimension $m\\geq1$ [def-sfb-smooth-real-manifold], and $E\\to N$ a smooth finite-rank real vector bundle [def-sfb-smooth-real-vector-bundle]. An orientation is a choice of compatible charts with positive transition Jacobian determinants. Use smooth sections [def-sfb-smooth-bundle-sections], the fibrewise dual $E^*$ [def-sfb-smooth-dual-bundle], the density line $\\mathrm{Dens}_N=|\\Lambda^mT^*N|$ [def-sfb-smooth-density-line], and the fibrewise tensor bundle [def-sfb-smooth-tensor-bundle]. Put $\\mathcal T(E)=\\Gamma_c^\\infty(E^*\\otimes\\mathrm{Dens}_N)$ with the chart/frame seminorm topology of [def-sfb-compact-smooth-section-topology]. Define $\\mathcal D'(E)=\\mathcal T(E)'_b$ using [def-sfb-real-strong-dual]: this is the continuous real-linear dual with seminorms $u\\mapsto\\sup_{\\phi\\in S}|u(\\phi)|$ for sets $S$ bounded for every test-space seminorm. A smooth section $s$ gives $\\phi\\mapsto\\int_N\\phi(s)$: take the chart-sum integral of [def-sfb-smooth-density-integral], choosing a partition by [lem-sfb-smooth-subordinate-partition]; its choice independence and linearity are [lem-sfb-density-integral-choice-independent], and continuity of this pairing is [lem-sfb-smooth-section-pairing-continuous]. For a smooth real function $h$, define $hu\\in\\mathcal D'(E)$ by $(hu)(\\phi)=u(h\\phi)$, using continuity of $M_h$ from [lem-sfb-test-operations-continuous]. In a chart $x:U\\to V$ and frame $e$ of $E$, set $u_{x,e}=u\\circ J_{x,e}\\in\\mathscr D(V,\\mathbf R^q)'_b$, where the local tests are [def-sfb-local-coefficient-tests] and $J_{x,e}$ is the continuous chart-density extension of [lem-sfb-test-operations-continuous]. For $\\alpha\\in\\mathbf N^m$, define the local coefficient distribution $\\partial^\\alpha u_{x,e}\\in\\mathscr D(V,\\mathbf R^q)'_b$ by $(\\partial^\\alpha u_{x,e})(f)=(-1)^{|\\alpha|}u_{x,e}(\\partial^\\alpha f)$; repeated use of [lem-sfb-local-test-derivative-continuous] makes the test operator continuous. This derivative belongs to the chart coefficient dual, with the specified chart and frame. For another such bundle $F$ and a specified continuous real-linear map $T:\\mathcal T(F)\\to\\mathcal T(E)$, define its transpose $T':\\mathcal D'(E)\\to\\mathcal D'(F)$ by $(T'u)(\\phi)=u(T\\phi)$.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Part I §3.A–3.B, printed pp.11–13, notation D′(M,E) and its use in the smooth-kernel paragraph following 3.6. The real test-density and strong-dual conventions are made explicit by the agent; the source is WANTED locally. Online indexed source: https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/hodge-ams.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-smooth-real-manifold",
+  "def-sfb-smooth-real-vector-bundle",
+  "def-sfb-smooth-bundle-sections",
+  "def-sfb-smooth-dual-bundle",
+  "def-sfb-smooth-density-line",
+  "def-sfb-smooth-tensor-bundle",
+  "def-sfb-compact-smooth-section-topology",
+  "def-sfb-real-strong-dual",
+  "def-sfb-smooth-density-integral",
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-density-integral-choice-independent",
+  "lem-sfb-smooth-section-pairing-continuous",
+  "lem-sfb-test-operations-continuous",
+  "def-sfb-local-coefficient-tests",
+  "lem-sfb-local-test-derivative-continuous"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "abbrev Distribution|structure TestFunction|Bundle.*Distribution|Distribution.*Bundle",
+   "results": "{\"t\": \"2026-10-24T03:27:35Z\", \"tool\": \"grep\", \"query\": \"abbrev Distribution|structure TestFunction|Bundle.*Distribution|Distribution.*Bundle\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/TestFunction.lean\", \"Mathlib/Analysis/Distribution/Distribution.lean\"], \"digest\": \"381047cc83d7f88d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution at Analysis/Distribution/Distribution.lean:160 is for an open subset of a normed vector space; TestFunction at Analysis/Distribution/TestFunction.lean:67 is likewise Euclidean. ContMDiffSection supplies smooth bundle sections but not their test-density topology or distributional dual. StrongDual supplies a generic continuous dual, not the topology on smooth bundle tests. The global bundle definition is not a one-line specialization of these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous real linear functionals on smooth compactly supported dual vector bundle densities with the strong dual topology",
+   "results": "{\"t\": \"2026-10-24T03:27:36Z\", \"tool\": \"leansearch\", \"query\": \"Continuous real linear functionals on smooth compactly supported dual vector bundle densities with the strong dual topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StrongDual\", \"TestFunction.continuous_iff_continuous_comp\", \"WeakDual.continuous_of_continuous_eval\", \"WeakDual.coe_toStrongDual\", \"NormedSpace.Dual.dual_norm_topology_le_weak_dual_topology\", \"NormedSpace.Dual.toWeakDual\", \"NormedSpace.Dual.toWeakDual_continuous\", \"StrongDual.toLp\"], \"digest\": \"f538b318457a9fbe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution at Analysis/Distribution/Distribution.lean:160 is for an open subset of a normed vector space; TestFunction at Analysis/Distribution/TestFunction.lean:67 is likewise Euclidean. ContMDiffSection supplies smooth bundle sections but not their test-density topology or distributional dual. StrongDual supplies a generic continuous dual, not the topology on smooth bundle tests. The global bundle definition is not a one-line specialization of these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "Distribution, TestFunction",
+   "results": "{\"t\": \"2026-10-24T03:27:36Z\", \"tool\": \"loogle\", \"query\": \"Distribution, TestFunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Distribution.delta_apply\", \"Distribution.delta_eq_zero_of_notMem\", \"Distribution.instLineDerivLeftSMulRealTopENat\", \"Distribution.ofFun_neg\", \"Distribution.ofFun_zero\", \"Distribution.instContinuousLineDerivTopENat\", \"Distribution.instLineDerivAddTopENat\", \"Distribution.ofFun_apply\"], \"digest\": \"28dd0f58afd4b00a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution at Analysis/Distribution/Distribution.lean:160 is for an open subset of a normed vector space; TestFunction at Analysis/Distribution/TestFunction.lean:67 is likewise Euclidean. ContMDiffSection supplies smooth bundle sections but not their test-density topology or distributional dual. StrongDual supplies a generic continuous dual, not the topology on smooth bundle tests. The global bundle definition is not a one-line specialization of these hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distributional sections of a smooth vector bundle on a compact manifold are the continuous dual of smooth dual bundle density sections",
+   "results": "{\"t\": \"2026-10-24T03:27:39Z\", \"tool\": \"leanfinder\", \"query\": \"Distributional sections of a smooth vector bundle on a compact manifold are the continuous dual of smooth dual bundle density sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffSection.instDFunLike\", \"exists_contMDiffOn_section_forall_mem_convex_of_local\", \"exists_contMDiffSection_forall_mem_convex_of_local\", \"exists_smooth_section_forall_mem_convex_of_local\", \"ContMDiffSection.coeFn_mk\", \"smoothSheaf.contMDiff_section\", \"ContMDiffSection.ext\", \"ContMDiffSection.inhabited\"], \"digest\": \"ce5dd9b780ad4fa6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Distribution at Analysis/Distribution/Distribution.lean:160 is for an open subset of a normed vector space; TestFunction at Analysis/Distribution/TestFunction.lean:67 is likewise Euclidean. ContMDiffSection supplies smooth bundle sections but not their test-density topology or distributional dual. StrongDual supplies a generic continuous dual, not the topology on smooth bundle tests. The global bundle definition is not a one-line specialization of these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev Distribution|structure TestFunction|StrongDual|Bundle.*Distribution",
+   "results": "{\"t\": \"2026-10-24T03:53:35Z\", \"tool\": \"grep\", \"query\": \"abbrev Distribution|structure TestFunction|StrongDual|Bundle.*Distribution\", \"sub\": \"Analysis/Distribution/\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/TestFunction.lean\", \"Mathlib/Analysis/Distribution/Distribution.lean\"], \"digest\": \"381047cc83d7f88d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: Distribution at Analysis/Distribution/Distribution.lean:160 and TestFunction at Analysis/Distribution/TestFunction.lean:67 have a normed-vector-space domain, not a manifold or a nontrivial bundle, and Distribution uses compact convergence. ContMDiffSection supplies smooth sections but not their density-valued test topology. StrongDual supplies only the generic dual, now separately cited as a Mathlib leaf. Two semantic phrasings and a direct source search found no full match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong dual of compactly supported smooth sections of a vector bundle on a manifold",
+   "results": "{\"t\": \"2026-10-24T03:53:36Z\", \"tool\": \"leansearch\", \"query\": \"Strong dual of compactly supported smooth sections of a vector bundle on a manifold\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StrongDual\", \"ContMDiffSection.mdifferentiable\", \"StrongDual.coe_toWeakDual\", \"ContMDiffSection\", \"MDifferentiableOn.smul_section_of_tsupport\", \"HasCompactSupport.toSchwartzMap\", \"ContDiffMapSupportedIn.locallyConvexSpace\", \"ContMDiffSection.ctorIdx\"], \"digest\": \"0e43512049af89f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: Distribution at Analysis/Distribution/Distribution.lean:160 and TestFunction at Analysis/Distribution/TestFunction.lean:67 have a normed-vector-space domain, not a manifold or a nontrivial bundle, and Distribution uses compact convergence. ContMDiffSection supplies smooth sections but not their density-valued test topology. StrongDual supplies only the generic dual, now separately cited as a Mathlib leaf. Two semantic phrasings and a direct source search found no full match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Distribution, TestFunction",
+   "results": "{\"t\": \"2026-10-24T03:53:36Z\", \"tool\": \"loogle\", \"query\": \"Distribution, TestFunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Distribution.delta_apply\", \"Distribution.delta_eq_zero_of_notMem\", \"Distribution.instLineDerivLeftSMulRealTopENat\", \"Distribution.ofFun_neg\", \"Distribution.ofFun_zero\", \"Distribution.instContinuousLineDerivTopENat\", \"Distribution.instLineDerivAddTopENat\", \"Distribution.ofFun_apply\"], \"digest\": \"28dd0f58afd4b00a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: Distribution at Analysis/Distribution/Distribution.lean:160 and TestFunction at Analysis/Distribution/TestFunction.lean:67 have a normed-vector-space domain, not a manifold or a nontrivial bundle, and Distribution uses compact convergence. ContMDiffSection supplies smooth sections but not their density-valued test topology. StrongDual supplies only the generic dual, now separately cited as a Mathlib leaf. Two semantic phrasings and a direct source search found no full match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distributional sections of a smooth vector bundle are continuous linear functionals on compactly supported smooth dual bundle densities",
+   "results": "{\"t\": \"2026-10-24T03:53:37Z\", \"tool\": \"leanfinder\", \"query\": \"Distributional sections of a smooth vector bundle are continuous linear functionals on compactly supported smooth dual bundle densities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffMapSupportedIn.structureMapCLM\", \"TestFunction.mkCLM_apply\", \"TestFunction.mkCLM\", \"TestFunction.ofSupportedInCLM\", \"Distribution.mapCLM\", \"TestFunction.ofSupportedInLM\", \"Distribution\", \"TestFunction.postcompCLM\"], \"digest\": \"eca4c719995fe197\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: Distribution at Analysis/Distribution/Distribution.lean:160 and TestFunction at Analysis/Distribution/TestFunction.lean:67 have a normed-vector-space domain, not a manifold or a nontrivial bundle, and Distribution uses compact convergence. ContMDiffSection supplies smooth sections but not their density-valued test topology. StrongDual supplies only the generic dual, now separately cited as a Mathlib leaf. Two semantic phrasings and a direct source search found no full match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Test density bundle sections on compact smooth manifolds and their distribution dual space",
+   "results": "{\"t\": \"2026-10-24T03:57:31Z\", \"tool\": \"leanfinder\", \"query\": \"Test density bundle sections on compact smooth manifolds and their distribution dual space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TestFunction.ofSupportedInCLM\", \"TestFunction.ofSupportedInLM\", \"TestFunction.mkCLM_apply\", \"Distribution\", \"TestFunction.mkCLM\", \"TestFunction.coe_ofSupportedInCLM\", \"TestFunction.coe_ofSupportedIn\", \"TestFunction.toTestFunctionClass\"], \"digest\": \"45a460acd57d9f40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item: Distribution at Analysis/Distribution/Distribution.lean:160 and TestFunction at Analysis/Distribution/TestFunction.lean:67 have a normed-vector-space domain, not a manifold or a nontrivial bundle, and Distribution uses compact convergence. ContMDiffSection supplies smooth sections but not their density-valued test topology. StrongDual supplies only the generic dual, now separately cited as a Mathlib leaf. Two semantic phrasings and a direct source search found no full match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-symbol-pseudodifferential-operators",
+  "date": "2026-10-24",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization.",
+   "via": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-smooth-bundle-test-distributions",
+  "worker": "stage1",
+  "summary": "Repaired all three return points: separated the smooth-manifold/bundle/section notions as Mathlib leaves; density, tensor, test topology and chart-sum integration as independent constructions; chart/partition independence, smooth pairing continuity and test-operation continuity as statement-only nodes. Named the local coefficient-test and derivative Mathlib leaves and the existing smooth subordinate partition. The distribution definition now assembles these notions and named well-definedness theorems. The derivative codomain is explicitly the chart coefficient dual, never the global D′(E). Retained the previously validated strong-dual leaf and all search history.",
+  "blueprint": "Read the current latest sec-six-functors-basics/sk-thm-sf-ctf-stability unit and sk-thm-sf-ctf-stability-direct-images proof, especially its direct-image alteration input. This analytic definition is an inherited prerequisite of that route. blueprint_refs.py ancestor prints None for the existing created.item chain; retain from.node=None and the inherited exact place. Whole-DAG and whole-blueprint searches distribution, smooth manifold, strong dual and density found no equivalent imported node. The new leaf serves the strong-dual clause of this definition, below the inherited pseudodifferential/weak-Garding prerequisite. Repair: the newly named inputs realize the density/test/operation clauses of the same inherited analytic prerequisite; no unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NY-b9f4fd5f0",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-b9f4fd5f0 (reviewer sub-agent of L); spot-checked: Verdict FIX: two form repairs to new-node files; the mathematics and the split are sound. All three points of the earlier return (0d4a) are now answered.\n\nReturn (1): the item names a node for each notion. Mathlib leaves (sources read): IsManifold (Basic.lean:780) with the self Euclidean model and n=∞; ContMDiffVectorBundle (VectorBundle/Basic.lean:300-315); ContMDiffSection (290-294, 377-398); the dual bundle as ContMDiffVectorBundle.continuousLinearMap into Bundle.Trivial (Hom.lean:128-130; transition g^{-T} checked); TestFunction (67-75) with topologicalSpace (274), which is the finest locally convex topology coarser than the iSup of the D_K topologies; D_K induced by iteratedFDeriv (ContDiffMapSupportedIn 489-526); lineDerivCLM (564/586, ⊤+1≤⊤); StrongDual (unchanged). Unsplit definitions: tensor bundle, density line (a=b|det D(y∘x^{-1})| checked), chart/frame seminorm topology, chart-sum integral (partition via lem-sfb-smooth-subordinate-partition with S=N: T2, σ-compact, sum 1, values in [0,1]).\n\nReturn (2): choice independence/linearity, pairing continuity, and continuity of M_h and J_{x,e} are statement nodes. All are true; the smoothness of J_{x,e}(f) follows because x^{-1}(K) is closed in the Hausdorff N. The item takes well-definedness from them by name, and there is no cycle.\n\nReturn (3): ∂^α u_{x,e} lies in D(V,R^q)'_b. With u=u_s this gives the classical derivative of the coefficients. The sign and the transpose direction are correct, and nothing is weakened against the base statement.\n\nSmall cases checked: N empty, rank 0, S^1, a reversed chart. No duplicates found by searching the snapshot nodes (with -L) for the notion and Mathlib names. Demailly is WANTED, with no claim made from it. No SGA, no tool_uses, no repair note.\n\nFIXES (fixes/dag/nodes/sec-six-functors-basics/):\n(a) B4: def-sfb-smooth-dual-bundle used the broken macro E_x\\toL_{\\mathbf R}\\mathbf R; replaced with Hom_{R,cont}(E_x,R).\n(b) B3: def-sfb-smooth-density-line listed def-sfb-smooth-real-vector-bundle as a stmt_dep but never cited it, and never said Dens_N is a smooth rank-one real vector bundle (the tensor and section nodes need that); added that sentence with the citation.\n\nNo stmt_deps changed and no node was dropped. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ }
+}

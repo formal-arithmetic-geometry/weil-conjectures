@@ -346,18 +346,36 @@
   "file": "lean/Sheaf/RingTheory/FiniteEtaleFormalMonoidCoefficientLift.lean",
   "statement": "theorem finiteEtale_formalMonoid_coefficientLift (E : Type u) [CommRing E] [IsRegularLocalRing E] [IsAdicComplete (IsLocalRing.maximalIdeal E) E] (S : Type v) [AddCommMonoid S] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative S)) (hsharp : ∀ s : S, IsUnit (Multiplicative.ofAdd s) → s = 0) (a : Ideal (AddMonoidAlgebra E S)) (ha : a = Ideal.map (algebraMap E (AddMonoidAlgebra E S)) (IsLocalRing.maximalIdeal E) ⊔ Ideal.span {b | ∃ s : S, s ≠ 0 ∧ b = single s (1 : E)}) (f : AdicCompletion a (AddMonoidAlgebra E S)) (hf : f ∈ Ideal.map (algebraMap (AddMonoidAlgebra E S) _) a) (K : Type w) [CommRing K] [IsLocalRing K] [Algebra (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K] [Module.Finite (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K] [Algebra.Etale (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K] : ∃ (D : Type (max u v w)) (_ : CommRing D) (_ : IsRegularLocalRing D) (_ : Algebra E D), Module.Finite E D ∧ Algebra.Etale E D ∧ IsAdicComplete (IsLocalRing.maximalIdeal D) D ∧ Nonempty (IsLocalRing.ResidueField D ≃+* IsLocalRing.ResidueField K) ∧ IsLocalRing.maximalIdeal D = Ideal.map (algebraMap E D) (IsLocalRing.maximalIdeal E) ∧ (∀ x : E, x ∈ IsLocalRing.maximalIdeal E → x ∉ (IsLocalRing.maximalIdeal E) ^ 2 → algebraMap E D x ∈ IsLocalRing.maximalIdeal D ∧ algebraMap E D x ∉ (IsLocalRing.maximalIdeal D) ^ 2) ∧ ∃ e : K ≃+* CoefficientHypersurface E S a f D, (∀ h : AdicCompletion a (AddMonoidAlgebra E S), e (algebraMap (AdicCompletion a (AddMonoidAlgebra E S) ⧸ Ideal.span {f}) K (Ideal.Quotient.mk (Ideal.span {f}) h)) = Ideal.Quotient.mk (Ideal.span {formalCoefficientMap E S a D f}) (formalCoefficientMap E S a D h)) ∧ @Continuous K (CoefficientHypersurface E S a f D) (IsLocalRing.maximalIdeal K).adicTopology (coefficientHypersurfaceTopology E S a f D) e ∧ @Continuous (CoefficientHypersurface E S a f D) K (coefficientHypersurfaceTopology E S a f D) (IsLocalRing.maximalIdeal K).adicTopology e.symm",
   "branch": "newtargets-dag",
-  "by": "NY",
-  "date": "2026-10-18",
+  "by": "NO",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "Canonical coefficient extension is constructed on every ideal-power quotient using AdicCompletion.liftRingHom. The completion on D[S] uses the extended ideal; m_D=m_E D identifies it with the stated formal-monoid completion ideal. Ring-equivalence compatibility on all H elements expresses exactly A0-algebra linearity, and continuity in both directions uses explicit adic topologies. 2026-10-20 (U): module Sheaf.RingTheory.FiniteEtaleFormalMonoidCoefficientLift deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Restores the previously deleted statement module against the live library. Canonical coefficient extension is constructed on every ideal-power quotient with AdicCompletion.liftRingHom; no arbitrary map is assumed. The extended defining ideal agrees with (m_D, nonzero monomials) under m_D = m_E D. The compatibility equation on all H elements expresses A0-algebra linearity; continuity of the equivalence and its inverse is stated for explicit adic topologies."
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-491aa3895",
-  "group": "NY",
+  "reviewer": "NT-stage2-cc-766813ac7",
+  "group": "NO",
   "result": "pass",
-  "note": "Only the lean record and one new module changed; statement, stmt_deps and proof are byte-identical to live. Every hypothesis and conclusion clause matches the node: complete IsRegularLocalRing E; fs + sharp S; H = AdicCompletion a E[S] with ha fixing a = (n, [s]: s≠0); hf puts f in aH, which equals H's maximal ideal by steps 1-2, f=0 allowed; K local finite etale over A0. Conclusion: D in Type (max u v w) is complete regular local and finite etale over E, residue fields isomorphic, m_D = nD, the n\\n² clause holds, and e : K ≃+* D[[S]]/(f) is A0-compatible via the constructed levelwise coefficient map and continuous in both directions. The 4 helpers are real constructions with source/blueprint docstrings and no duplicates in Mathlib or the project. Edge cases S={0}, E a field, f=0, mixed characteristic and degree-one K are covered. nt_compile --json: clean, 11.5 s, exit 0. Advisory only: stage-3-only imports; IsFineSaturatedMonoid is owned by def-trf-log-regular-pair via def-trf-fs-log-blowup; mapRingHomAlong is in Mathlib's AdicCompletion namespace."
+  "note": "Maintenance Q111: replay unchanged independently passed restoration; stale route retirement entries removed by 86b66452ba9"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/FiniteEtaleFormalMonoidCoefficientLift.lean",
+  "module": "Sheaf.RingTheory.FiniteEtaleFormalMonoidCoefficientLift",
+  "declaration": "AddMonoidAlgebra.finiteEtale_formalMonoid_coefficientLift",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

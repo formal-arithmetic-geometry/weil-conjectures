@@ -1,0 +1,320 @@
+{
+ "id": "lem-pod-perfect-dual-scalar-calculus",
+ "kind": "statement",
+ "title": "Signed dual-complex scalar calculus, towers and localization",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings and $P$ a bounded cochain complex of finitely generated projective $R$-modules [def-pc-perfect-ring-complex]. Put $P_S=P\\otimes_R S$ termwise [def-weil-module-base-change], and $P^\\vee=\\operatorname{Hom}_R^\\bullet(P,R[0])$, with $d(f)=-(-1)^j f d_P$ for homogeneous $f$ of degree $j$, using the one-object ringed-site version of [def-pur-hom-complex]. Order evaluation as $P\\otimes P^\\vee\\to R[0]$, with value $(-1)^{pj}f(x)$ on $x\\in P^p$ and $f\\in(P^\\vee)^j$ (zero unless $p+j=0$).\nThe balanced formula\n$$\\beta_{S/R,P}(f\\otimes a)(x\\otimes b)=\\iota(f(x))ab$$\ndefines an $S$-linear isomorphism of cochain complexes $P^\\vee\\otimes_R S\\to\\operatorname{Hom}_S^\\bullet(P_S,S[0])$. In this formula $\\iota:R\\to S$ is the given map. It obeys $d\\beta(f\\otimes a)=\\beta(df\\otimes a)$ and intertwines signed evaluation with scalar extension: both uncurried evaluations on $(x\\otimes b)\\otimes(f\\otimes a)$ are $(-1)^{pj}\\iota(f(x))ab$. The terms of $P_S$ and of its dual are finite projective. These maps define a natural transformation on the perfect derived category $\\operatorname{Perf}(R)\\subset D(R)$ [def-weil-abstract-derived-category], independent of the chosen bounded finite-projective representative. For a derived morphism $u:P\\to Q$, contravariance is precomposition, and\n$$\\beta_{S/R,P}(u^\\vee\\otimes1)=(u\\otimes1)^\\vee\\beta_{S/R,Q}.$$\nFor $S=R$, $\\beta$ is the identity under multiplication. For a further ring homomorphism $S\\to T$, successive $\\beta$ maps and the direct $R\\to T$ map agree through the balanced associators $(z\\otimes a)\\otimes c\\mapsto z\\otimes\\iota_{S,T}(a)c$. On the successive arguments $((f\\otimes a)\\otimes c)$ and $((x\\otimes b)\\otimes d)$ both dual maps give $\\iota_{R,T}(f(x))\\iota_{S,T}(ab)cd$.\nFor any multiplicative subset $U\\subset R$, termwise localization $U^{-1}(-)$ preserves quasi-isomorphisms, and the canonical dual identification for $U^{-1}P$ is $\\beta_{U^{-1}R/R,P}$. Localizing any of the preceding maps and equations gives the same maps and equations over the localized rings, including their signed evaluation, naturality and tower equations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Algebraic part of returned steps 2, 5, 6 and 7."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-module-base-change",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projective-module",
+  "def-weil-finitely-generated-module",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-localization",
+  "def-sc-module-total-hom-complex",
+  "def-sf-coefficient-duality",
+  "lem-sf-perfect-scalar-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Identify degree j of the recorded Hom complex into R[0] with the ordinary module dual of degree -j using Cochain.toSingleEquiv. Mathlib Module.dual_projective and Module.dual_finite give finite projectivity of each dual term. Tensor-product projectivity and finiteness instances give finite projectivity of scalar-extended terms. The ordinary dual/scalar equivalence is TensorProduct.comm followed by dualTensorHomEquiv and the extension/restriction-of-scalars adjunction; its pure-tensor formula identifies it with beta degreewise.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0518 (finite-module definition), 05CF (lemma-characterize-projective), 05G3 (definition-base-change); finite dual property as in more-algebra.tex Tag 07VI (lemma-dual-perfect-complex). Explicit splitting calculation."
+   }
+  },
+  {
+   "text": "Construct scalarCochain by applying extension of scalars to each cochain component and composing with the coefficient-unit comparison. Its R-linearity follows from scalar compatibility of extension. The extension/restriction adjunction gives betaX. The Hom differential identities for functorial maps and postcomposition prove commutation with differentials, giving beta. Evaluating the adjunction on pure tensors gives f(z(x))*a*b.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV (section-tensor-product), 05G3 (definition-base-change); balancing in both variables."
+   }
+  },
+  {
+   "text": "Identify each degree with an ordinary dual by HomComplex.Cochain.toSingleEquiv. The composite of TensorProduct.comm, dualTensorHomEquiv and the additive scalar adjunction is bijective. Its pure-tensor formula agrees with betaX, so betaX is bijective and beta is an isomorphism. Mathlib module dual and tensor-product instances prove every claimed finite-projectivity clause.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product); explicit inverse from the finite splitting in step 1."
+   }
+  },
+  {
+   "text": "The chain-map compatibility for beta follows directly from HomComplex.δ_map and HomComplex.δ_comp_ofHom. Precomposition is composition by the degree-zero cocycle of a chain map; HomComplex.δ_ofHom_comp verifies its differential equation.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), differential formula specialized to R[0]."
+   }
+  },
+  {
+   "text": "Use the signed evaluation given by [lem-pod-projective-hom-evaluation-model]. On every direct-sum tensor summand compare pure tensors. The scalar tensorator multiplies the two scalar factors. Both paths evaluate to (-1)^(p*j)*f(z(x))*a*b. Outside total degree zero the coefficient complex is zero. In degree zero the beta pure-tensor formula and additive compatibility with the sign prove equality.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex",
+    "lem-sf-perfect-scalar-tensor-coherence",
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNG (section-sign-rules), tensor differential and Koszul symmetry; explicit signed evaluation calculation."
+   }
+  },
+  {
+   "text": "Define precomposition by composition with the degree-zero cocycle of a chain map in the product Hom complex [def-pur-hom-complex]. HomComplex differential composition identities show it is a chain map. Comparing cochain components proves beta naturality, identity and tower equations directly, with scalar multiplication associativity and commutativity on pure tensors. No passage to homotopy classes is needed.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A8H (section-hom-complexes): explicit dual homotopy calculation for the signed differential."
+   }
+  },
+  {
+   "text": "Apply the proved canonical derived comparison [lem-pod-perfect-dual-derived-transport] to the concrete beta maps, the signed evaluation supplied by [lem-pod-projective-hom-evaluation-model], the proved chain evaluation square and finite-projective term assertions, and DerivedCategory.IsPerfect.ihom_unit. The result supplies derived naturality, model compatibility, evaluation, identity and tower equations.",
+   "uses": [
+    "lem-pod-perfect-dual-derived-transport",
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the identity and tower equations for beta on scalar pure tensors. The identity extension multiplies scalars; for R → S → T both paths give g(f(z(x))) * g(a*b) * c*d. The tensor universal property proves equality of the chain maps. The derived identity and tower equations are obtained separately from the canonical comparison theorem in step 7.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product); balanced tower and identity calculations, with the derived comparison from the cited node."
+   }
+  },
+  {
+   "text": "The existing localization functor is exact by [lem-weil-pbc-localization-module-exact]. Its map on complexes therefore preserves quasi-isomorphisms by the Mathlib exact-functor API, for arbitrary complexes and multiplicative subsets.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CS (proposition-localization-exact); elementary cycles, boundaries and quotient calculation."
+   }
+  },
+  {
+   "text": "Use the base-change universal property of the localization map to identify A ⊗_R M with U^{-1}M for A=U^{-1}R. Tensor balancing and the localization universal property prove naturality. Its inverse sends x/t to (1/t) tensor x. Conjugate beta by this natural isomorphism and precompose by its inverse on the original complex. The beta coordinate formula and multiplication of localized fractions give z(x)/(s*t). The same proof includes the zero ring and multiplicative subsets containing zero.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Sections 00CM (section-localization) and 00CV (section-tensor-product); explicit fraction and tower formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-pur-hom-complex",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-perfect-scalar-tensor-coherence",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pod-perfect-dual-derived-transport",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-module-localization",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Concrete scalar and localization proof using ordinary-dual equivalences; derived comparison proved canonically by preservation of perfect dual pairings. Original statement and unit route unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite projective cochain complex dual base change cochain map signed evaluation naturality localization",
+   "results": "CategoryTheory.ProjectiveResolution.Hom.hom'_f; CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc; CategoryTheory.ProjectiveResolution.cochainComplexXIso; CategoryTheory.ProjectiveResolution.π'; CategoryTheory.ProjectiveResolution.cochainComplex_d; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CochainComplex.instIsKProjectiveObjIntShiftFunctor; CochainComplex.isKProjective_shift_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: module dual and tensor APIs do not state the signed cochain, derived naturality and localization package"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, TensorProduct",
+   "results": "TensorProduct.dualDistrib; TensorProduct.AlgebraTensorModule.dualDistrib; TensorProduct.dualDistrib_apply; TensorProduct.AlgebraTensorModule.dualDistrib_apply; TensorProduct.dualDistrib_apply_comm; contractLeft; contractRight; dualTensorHom",
+   "date": "2026-10-22",
+   "verdict": "no match: module dual and tensor APIs do not state the signed cochain, derived naturality and localization package"
+  },
+  {
+   "tool": "grep",
+   "query": "toDualBaseChange|eval_naturality|baseChange.*[Dd]ual",
+   "results": "Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean; Mathlib/LinearAlgebra/Dual/Defs.lean; Mathlib/LinearAlgebra/Dual/Defs.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module dual and tensor APIs do not state the signed cochain, derived naturality and localization package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "the dual Hom complex of a bounded finite projective complex commutes with extension of scalars and localization",
+   "results": "LinearEquiv.extendScalarsOfIsLocalizationEquiv; CochainComplex.HomComplex.δ_units_smul; IsLocalizedModule.mapExtendScalars; CochainComplex.HomComplex; CategoryTheory.ProjectiveResolution.extMk_hom; Module.Dual.baseChange; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; dualTensorHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: module dual and tensor APIs do not state the signed cochain, derived naturality and localization package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul signed Hom complex dual scalar extension identity transitivity compatible evaluation",
+   "results": "ModuleCat.extendScalars_comp_id; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendScalars_comp_id_assoc; ModuleCat.extendScalars_id_comp; ModuleCat.extendScalars_id_comp_assoc; ExteriorAlgebra.toTrivSqZeroExt_comp_map; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: module dual and tensor APIs do not state the signed cochain, derived naturality and localization package"
+  },
+  {
+   "tool": "grep",
+   "query": "toDualBaseChange|baseChange_baseChange|eval_naturality",
+   "results": "{\"t\": \"2026-10-22T07:03:24Z\", \"tool\": \"grep\", \"query\": \"toDualBaseChange|baseChange_baseChange|eval_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"881479b6a87fddd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits cover module duals, tensor contractions or projective derived Hom, not the complete signed cochain scalar, derived naturality and localization statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dual complex of finite projective modules commutes with base change and localization with Koszul evaluation signs",
+   "results": "{\"t\": \"2026-10-22T07:03:25Z\", \"tool\": \"leansearch\", \"query\": \"dual complex of finite projective modules commutes with base change and localization with Koszul evaluation signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.dual\", \"IsBaseChange.toDualBaseChange_tmul\", \"IsBaseChange.toDualBaseChange\", \"Module.Dual.baseChange_baseChange\", \"IsBaseChange.toDual\", \"Module.dual_finite\", \"Module.dual_projective\", \"Module.Dual.baseChange_apply_tmul\"], \"digest\": \"559f248749a37201\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits cover module duals, tensor contractions or projective derived Hom, not the complete signed cochain scalar, derived naturality and localization statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T07:03:25Z\", \"tool\": \"loogle\", \"query\": \"Module.Dual, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.dualDistrib\", \"TensorProduct.AlgebraTensorModule.dualDistrib\", \"TensorProduct.dualDistrib_apply\", \"TensorProduct.AlgebraTensorModule.dualDistrib_apply\", \"TensorProduct.dualDistrib_apply_comm\", \"contractLeft\", \"contractRight\", \"dualTensorHom\"], \"digest\": \"c99708f5f556ac96\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits cover module duals, tensor contractions or projective derived Hom, not the complete signed cochain scalar, derived naturality and localization statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite projective cochain complex dual scalar extension signed evaluation naturality localization",
+   "results": "{\"t\": \"2026-10-22T07:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"bounded finite projective cochain complex dual scalar extension signed evaluation naturality localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"CategoryTheory.ProjectiveResolution.cochainComplex_d\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.ProjectiveResolution.cochainComplex\"], \"digest\": \"8feab22d95cfceea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits cover module duals, tensor contractions or projective derived Hom, not the complete signed cochain scalar, derived naturality and localization statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul differential Hom dual cochain complex finite projective base change coherent signed evaluation under ring homomorphisms",
+   "results": "{\"t\": \"2026-10-22T07:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul differential Hom dual cochain complex finite projective base change coherent signed evaluation under ring homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.δ\", \"Algebra.Generators.H1Cotangent.δAux_ofComp\", \"inhomogeneousCochains.d\", \"Algebra.Generators.H1Cotangent.δ_map\", \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.Generators.H1Cotangent.δ_eq_δ\", \"KaehlerDifferential.cotangentComplexBaseChange\"], \"digest\": \"94a3aba2b7273c8e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits cover module duals, tensor contractions or projective derived Hom, not the complete signed cochain scalar, derived naturality and localization statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-scalar-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-pod-point-dualizing-complex",
+   "place": "Second sentence: '$R\\mathcal Hom$ at the point being computed over the coefficient ring'; finite-projective scalar/evaluation calculation. Algebraic part of returned steps 2, 5, 6 and 7.",
+   "via": [
+    "lem-pod-point-scalar-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-perfect-dual-scalar-calculus",
+  "worker": "stage1",
+  "group": "Q43",
+  "summary": "No statement change and no new nodes. Expanded the balanced dual-base-change construction, finite-dual-family inverse, signed differential and evaluation equations, homotopy descent, all-derived-morphism naturality, representative independence, identity/tower equations, and exact localization. Reused existing generic tools and retained prior Mathlib searches. Repair of returned head 2efbdd3ec64: reconstructed the item on the current live DAG, reread every cited statement against the retained 34 quotations, and expanded the scalar-projectivity lifting and localization endpoint arguments. The statement and proof route are unchanged.",
+  "blueprint": "Realizes lem-pod-point-dualizing-complex.proof.md second sentence, R Hom at the point computed over the coefficient ring, via lem-pod-point-scalar-hom-evaluation: the algebraic finite-projective scalar and signed evaluation component of its steps 2, 5, 6, 7. No unit/chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-perfect-scalar-tensor-coherence",
+    "why": "Generic ring-level derived scalar-extension computation and balanced tensor/tower comparisons; this unit does not provide those coefficient-model identifications."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic projective-module Hom computation and its explicit signed derived evaluation; this unit needs this tool to identify its chain formulas with derived Hom."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic module-localization exactness, used to prove localization preserves cohomology and quasi-isomorphisms; this unit has no replacement module theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-perfect-scalar-tensor-coherence",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-6f46612fd",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-6f46612fd (reviewer sub-agent of L); spot-checked: Read the whole item, all 14 cited statements, and the main-20261015 source lem-pod-point-dualizing-complex.proof.md (second sentence). The delivery is one commit: the item and its report, with no new nodes. The item is still unsplit in live and side-live and has no repair note, so no re-split rule applies. This re-delivers the PASSed head 2efbdd3ec648 after its not-promoted landing return; the delta is only the expanded steps 1 and 11 plus the summary. The statement equals live verbatim, the four added stmt_deps are all used, and no SGA is cited. Checks: (1) the section along the f.g. surjection gives the dual family, and the new scalar-extension lifting proof of projectivity is correct; (2-3) beta is balanced, and both composites of alpha are identities with no basis and no flatness; (4) d f=-(-1)^j f d_P matches def-pur-hom-complex with N=R[0], and d beta=beta d; (5) evaluation is a chain map because the exponents differ by 2p, and the scalar square through b/unit of lem-sf-perfect-scalar-tensor-coherence holds; (6) H(f)=(-1)^j f h gives dH+Hd=f(u-v); (7-9) lem-pc-ring-derived-map-representative applies to bounded-above projective sources, and the evaluation model applies with N=R[0]; (10) both tower paths give iota(f(x))iota(ab)cd; (11) the endpoint segments with U^{-1}0=0 give kernel and image, so quasi-isomorphisms are preserved; (12) the inverse of M⊗U^{-1}R≅U^{-1}M is well defined. Small cases: P=0, R[-1], R-r->R, the zero ring, 0 in U, non-flat Z->Z/2, a nonfree summand. No cycle. Tool uses accepted: the coherence node's unit is already cited by sk-thm-sf-package, the Hom-evaluation model is a generic black box, and localization exactness is a Mathlib leaf. lem-pc-base-change-rhom-perfect overlaps only advisorily (abstract iso, no signs, towers or localization). No fixes. Maintainer note: this is a side-completion promotion loop; the retained split is unchanged apart from the correct step 1/11 expansions."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectDualScalarCalculus",
+  "declaration": "CochainComplex.PerfectDualScalar.perfect_dual_scalar_calculus",
+  "declarations": [
+   "CochainComplex.PerfectDualScalar.perfect_dual_scalar_calculus"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectDualScalarCalculus.lean",
+  "statement": "theorem perfect_dual_scalar_calculus [∀ R : CommRingCat.{u}, HasDerivedCategory.{u} (ModuleCat.{u} R)] : ∃ pre : ∀ (R : CommRingCat.{u}) {P Q : CochainComplex (ModuleCat.{u} R) ℤ}, (P ⟶ Q) → ((moduleHomComplex Q (coefficient R)) ⟶ (moduleHomComplex P (coefficient R))), ∃ ev : ∀ (R : CommRingCat.{u}) (P : CochainComplex (ModuleCat.{u} R) ℤ), P ⊗ (moduleHomComplex P (coefficient R)) ⟶ coefficient R, ∃ beta : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : CochainComplex (ModuleCat.{u} R) ℤ), (E f).obj (moduleHomComplex P (coefficient R)) ⟶ (moduleHomComplex ((E f).obj P) (coefficient S)), ∃ dualPerfect : ∀ (R : CommRingCat.{u}) (P : D.{u, u} R), IsPerfectRingComplex P → IsPerfectRingComplex ((coefficientDerivedDual R).obj (op P)), ∃ delta : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, u} R), IsPerfectRingComplex P → ((B f).obj ((coefficientDerivedDual R).obj (op P)) ≅ ((coefficientDerivedDual S).obj (op ((B f).obj P)))), (∀ (R : CommRingCat.{u}) (P Q : CochainComplex (ModuleCat.{u} R) ℤ) (v : P ⟶ Q) (p j : ℤ) (h : p + j = 0) (z : (moduleHomComplex Q (coefficient R)).X j), ((pre R v).f j z).v p 0 h = v.f p ≫ z.v p 0 h) ∧ (∀ (R : CommRingCat.{u}) (P : CochainComplex (ModuleCat.{u} R) ℤ) (p j : ℤ) (x : P.X p) (z : (moduleHomComplex P (coefficient R)).X j), (ev R P).f (p + j) (HomologicalComplex.ιTensorObj P (moduleHomComplex P (coefficient R)) p j (p + j) rfl (x ⊗ₜ[R] z)) = (p * j).negOnePow • (z.v p (p + j) rfl) x) ∧ (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : CochainComplex (ModuleCat.{u} R) ℤ) (p j : ℤ) (h : p + j = 0) (z : (moduleHomComplex P (coefficient R)).X j) (x : P.X p) (a b : S), (((beta f P).f j (a ⊗ₜ[R] z)).v p 0 h) (b ⊗ₜ[R] x) = f.hom ((z.v p 0 h) x) * a * b) ∧ (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : CochainComplex (ModuleCat.{u} R) ℤ), ((ModuleCat.extendScalars f.hom).mapCochainComplexμIso P (moduleHomComplex P (coefficient R))).hom ≫ (E f).map (ev R P) ≫ (ModuleCat.extendScalars f.hom).mapCochainComplexεIso.inv = (E f).obj P ◁ beta f P ≫ ev S ((E f).obj P)) ∧ (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ) (_hlo : P.IsStrictlyGE a) (_hhi : P.IsStrictlyLE b) (_ht : ∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n)), IsIso (beta f P) ∧ (∀ n : ℤ, Module.Projective S (((E f).obj P).X n) ∧ Module.Finite S (((E f).obj P).X n)) ∧ (∀ n : ℤ, Module.Projective R ((moduleHomComplex P (coefficient R)).X n) ∧ Module.Finite R ((moduleHomComplex P (coefficient R)).X n)) ∧ (∀ n : ℤ, Module.Projective S ((moduleHomComplex ((E f).obj P) (coefficient S)).X n) ∧ Module.Finite S ((moduleHomComplex ((E f).obj P) (coefficient S)).X n))) ∧ (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : CochainComplex (ModuleCat.{u} R) ℤ) (v : P ⟶ Q), (E f).map (pre R v) ≫ beta f P = beta f Q ≫ pre S ((E f).map v)) ∧ (∀ (R : CommRingCat.{u}) (P : CochainComplex (ModuleCat.{u} R) ℤ), beta (𝟙 R) P ≫ pre R ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsId R) (.up ℤ)).app P).inv = ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsId R) (.up ℤ)).app (moduleHomComplex P (coefficient R))).hom) ∧ (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T) (P : CochainComplex (ModuleCat.{u} R) ℤ), (E g).map (beta f P) ≫ beta g ((E f).obj P) = ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp f.hom g.hom).symm (.up ℤ)).app (moduleHomComplex P (coefficient R))).hom ≫ beta (f ≫ g) P ≫ pre T ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsComp f.hom g.hom).symm (.up ℤ)).app P).hom) ∧ (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T) (P : CochainComplex (ModuleCat.{u} R) ℤ) (p j : ℤ) (h : p + j = 0) (z : (moduleHomComplex P (coefficient R)).X j) (x : P.X p) (a b : S) (c d : T), (((beta g ((E f).obj P)).f j (c ⊗ₜ[S] ((beta f P).f j (a ⊗ₜ[R] z)))).v p 0 h) (d ⊗ₜ[S] (b ⊗ₜ[R] x)) = g.hom (f.hom ((z.v p 0 h) x)) * g.hom (a * b) * c * d) ∧ (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : D.{u, u} R) (hP : IsPerfectRingComplex P) (hQ : IsPerfectRingComplex Q) (v : P ⟶ Q), (B f).map ((MonoidalClosed.pre v).app (𝟙_ (D R))) ≫ (delta f P hP).hom = (delta f Q hQ).hom ≫ (MonoidalClosed.pre ((B f).map v)).app (𝟙_ (D S))) ∧ (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ) (_hlo : P.IsStrictlyGE a) (_hhi : P.IsStrictlyLE b) (_ht : ∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n)) (hP : IsPerfectRingComplex (DerivedCategory.Q.obj P)), ∃ (k : DerivedCategory.Q.obj (moduleHomComplex P (coefficient R)) ≅ ((coefficientDerivedDual R).obj (op (DerivedCategory.Q.obj P)))) (l : DerivedCategory.Q.obj (moduleHomComplex ((E f).obj P) (coefficient S)) ≅ ((coefficientDerivedDual S).obj (op (DerivedCategory.Q.obj ((E f).obj P))))), (Functor.LaxMonoidal.μ DerivedCategory.Q P (moduleHomComplex P (coefficient R)) ≫ DerivedCategory.Q.map (ev R P) = DerivedCategory.Q.obj P ◁ k.hom ≫ (ihom.ev (DerivedCategory.Q.obj P)).app (𝟙_ (D R)) ≫ Functor.LaxMonoidal.ε (DerivedCategory.Q (C := ModuleCat R))) ∧ (Functor.LaxMonoidal.μ DerivedCategory.Q ((E f).obj P) (moduleHomComplex ((E f).obj P) (coefficient S)) ≫ DerivedCategory.Q.map (ev S ((E f).obj P)) = DerivedCategory.Q.obj ((E f).obj P) ◁ l.hom ≫ (ihom.ev (DerivedCategory.Q.obj ((E f).obj P))).app (𝟙_ (D S)) ≫ Functor.LaxMonoidal.ε (DerivedCategory.Q (C := ModuleCat S))) ∧ (B f).map k.inv ≫ modelMap f (moduleHomComplex P (coefficient R)) ≫ DerivedCategory.Q.map (beta f P) ≫ l.hom ≫ (MonoidalClosed.pre (modelMap f P)).app (𝟙_ (D S)) = (delta f (DerivedCategory.Q.obj P) hP).hom) ∧ (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, u} R) (hP : IsPerfectRingComplex P), (B f).map ((ihom.ev P).app (𝟙_ (D R))) ≫ (coherenceData.unit f).hom = (coherenceData.tensor f P ((coefficientDerivedDual R).obj (op P)) hP (dualPerfect R P hP)).hom ≫ (B f).obj P ◁ (delta f P hP).hom ≫ (ihom.ev ((B f).obj P)).app (𝟙_ (D S))) ∧ (∀ (R : CommRingCat.{u}) (P : D.{u, u} R) (hP : IsPerfectRingComplex P), (delta (𝟙 R) P hP).hom = (coherenceData.identity R ((coefficientDerivedDual R).obj (op P)) (dualPerfect R P hP)).hom ≫ (MonoidalClosed.pre (coherenceData.identity R P hP).hom).app (𝟙_ (D R))) ∧ (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T) (P : D.{u, u} R) (hP : IsPerfectRingComplex P), (B g).map (delta f P hP).hom ≫ (delta g ((B f).obj P) (coherenceData.preserves f P hP)).hom = (coherenceData.comp f g ((coefficientDerivedDual R).obj (op P)) (dualPerfect R P hP)).hom ≫ (delta (f ≫ g) P hP).hom ≫ (MonoidalClosed.pre (coherenceData.comp f g P hP).hom).app (𝟙_ (D T))) ∧ (∀ (R : CommRingCat.{u}) (U : Submonoid R) (P Q : CochainComplex (ModuleCat.{u} R) ℤ) (v : P ⟶ Q), QuasiIso v → QuasiIso (((ModuleCat.localizedModuleFunctor U).mapHomologicalComplex (.up ℤ)).map v)) ∧ (∀ (R : CommRingCat.{u}) (U : Submonoid R), ∃ l : E (CommRingCat.ofHom (algebraMap R (Localization U))) ≅ (ModuleCat.localizedModuleFunctor U).mapHomologicalComplex (.up ℤ), (∀ (P : CochainComplex (ModuleCat.{u} R) ℤ) (n : ℤ) (x : P.X n), (l.hom.app P).f n ((1 : Localization U) ⊗ₜ[R] x) = (P.X n).localizedModuleMkLinearMap U x) ∧ ∃ eta : ∀ P : CochainComplex (ModuleCat.{u} R) ℤ, ((ModuleCat.localizedModuleFunctor U).mapHomologicalComplex (.up ℤ)).obj (moduleHomComplex P (coefficient R)) ⟶ moduleHomComplex (((ModuleCat.localizedModuleFunctor U).mapHomologicalComplex (.up ℤ)).obj P) (coefficient (CommRingCat.of (Localization U))), (∀ P : CochainComplex (ModuleCat.{u} R) ℤ, eta P = l.inv.app (moduleHomComplex P (coefficient R)) ≫ beta (CommRingCat.ofHom (algebraMap R (Localization U))) P ≫ pre (CommRingCat.of (Localization U)) (l.inv.app P)) ∧ (∀ (P : CochainComplex (ModuleCat.{u} R) ℤ) (p j : ℤ) (h : p + j = 0) (z : (moduleHomComplex P (coefficient R)).X j) (x : P.X p) (s t : U), (((eta P).f j (@id (((moduleHomComplex P (coefficient R)).X j).localizedModule U) (IsLocalizedModule.mk' (((moduleHomComplex P (coefficient R)).X j).localizedModuleMkLinearMap U) z s))).v p 0 h) (@id ((P.X p).localizedModule U) (IsLocalizedModule.mk' ((P.X p).localizedModuleMkLinearMap U) x t)) = IsLocalization.mk' (Localization U) (@id R ((z.v p 0 h) x)) (s * t)))",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b972bc5a",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Read item, all 11 stmt_deps and their recorded sources (PerfectScalarTensorCoherence, CoefficientDuality, PerfectRingComplexGeneral, MapHomologicalComplex μ/εIso, Mathlib localizedModuleFunctor). Mechanical theorem stmt_dep: the statement uses coherenceData = perfect_scalar_tensor_coherence_data.exists.choose (a constructed object), so it genuinely depends on the theorem → PASS on that point. All existential data are pinned: pre by precomposition coordinates, ev by the signed (-1)^{pj} summand formula (chain-map sign check done by hand under Mathlib conventions), beta by f(z x)ab on pure tensors, k/l by the evaluation equation (uncurry bijection), delta by the model formula plus naturality on all perfect objects, eta by the beta composite. Chain and derived evaluation, naturality, identity (extendScalarsId) and tower (extendScalarsComp) clauses match the node; localization covers QI preservation for unbounded complexes, a natural l pinned on 1⊗x, and the fraction formula z(x)/(st). The localized-equations clause is implied via towers (advisory). HasDerivedCategory.{u} is forced by coefficientDerivedDual. Statement verbatim; only lean plus 3 landed stmt_deps changed; no new defs, sorry only, docstrings with Stacks tags and blueprint id and 12 steps. No duplicate statement in side-live. Advisory: HomComplex import possibly unused. No compile (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261024T232213-L-2314658",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

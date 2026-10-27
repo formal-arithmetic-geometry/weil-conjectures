@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-section-action-internal",
+ "kind": "statement",
+ "title": "Normalized lifting of sectionwise module actions to internal sheaf modules",
+ "statement": "Let $C$ be a site essentially small relative to the universe of abelian coefficient groups. Use abelian sheafification $a$ [def-weil-pbc-sheafification] and the sheafified objectwise tensor over $\\mathbf Z$, for which $a$ is strong symmetric monoidal [sk-def-sfb-sheaf-tensor]. Let $B$ be a sheaf of commutative rings, with its internal ring structure characterized by extension of pointwise multiplication and unit [det-def-sfb-ring-object-sheaf]. Let $P$ be an abelian sheaf, equipped on its underlying presheaf with a natural action $\\beta:B\\otimes_pP\\to P$, where $\\otimes_p$ is objectwise $\\otimes_{\\mathbf Z}$. Assume its sectionwise action is unital and associative: $\\beta(e^p(n)\\otimes x)=nx$ and $\\beta(bc\\otimes x)=\\beta(b\\otimes\\beta(c\\otimes x))$, with $e^p(n)=n\\cdot1$. Write $\\epsilon_P:aP\\xrightarrow{\\sim}P$ for the sheafification counit. Then\n$$\\gamma_P=\\epsilon_P\\circ a(\\beta):B\\otimes P=a(B\\otimes_pP)\\longrightarrow P$$\nis the unique sheaf morphism extending $\\beta$ along the canonical map from the tensor presheaf, and it satisfies the internal unit and associativity identities of [sk-def-sfb-module-objects]. For two such sheaves $P,Q$, an additive natural map $v:P\\to Q$ is a morphism of their resulting internal $B$-modules if and only if $v\\beta_P=\\beta_Q(\\mathrm{id}_B\\otimes_pv)$. The assignment leaves underlying abelian sheaves and maps unchanged, respects identities, composition and sums, and so is an additive functor on the category of such sectionwise module sheaves (with the displayed action-commuting maps). For a finite family of such objects, the abelian sheaf $L(U)=\\prod_iP_i(U)$ with coordinate restrictions and action $\\beta_L(b\\otimes(x_i)_i)=(\\beta_{P_i}(b\\otimes x_i))_i$ is again such an object; its lifted coordinate cone is a product of internal $B$-modules. Equivalently every family of internal module maps $v_i:K\\to P_i$, with $K$ any internal $B$-module, has a unique internal-linear tuple map to this lifted $L$. For the empty family $L$ is the zero sheaf and is terminal. For $P=B$ and $\\beta=\\mu^p$, the lifted action is the given internal multiplication $\\mu$, hence the resulting module is the regular internal $B$-module.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "First two sentences of lem-sfb-subfield-flat.proof.md: passage to internal condensed modules; extracted original step 3, sheafification part of 4, internal product argument of 5 and regular normalization of 6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sheafification",
+  "sk-def-sfb-sheaf-tensor",
+  "det-def-sfb-ring-object-sheaf",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "Write $i$ for inclusion into abelian presheaves and $\\eta_F:F\\to iaF$ for the sheafification unit. The universal property in [def-weil-pbc-sheafification] says that precomposition with $\\eta_F$ bijects sheaf maps $aF\\to P$ with presheaf maps $F\\to iP$. For a sheaf $P$, the extension $\\epsilon_P:a(iP)\\to P$ of its identity is inverse to $\\eta_{iP}$: one composite is the identity by extension, and the other by uniqueness. Naturality of $\\eta$ now gives $i(\\epsilon_Pa\\beta)\\eta_{B\\otimes_pP}=i\\epsilon_P\\eta_{iP}\\beta=\\beta$. Thus the displayed $\\gamma_P$ exists and is the unique extension. In particular two sheaf maps out of $aF$ agree whenever their restrictions to $F$ agree.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH, proposition-sheafification-adjoint; universal property, applied in abelian sheaves"
+   }
+  },
+  {
+   "text": "The unit and associative hypotheses define a module object over the coefficient presheaf: prove the unit equation on n tensor x and the associative equation on (b tensor c) tensor x, using additive generation by pure tensors. These are precisely the axioms of [sk-def-sfb-module-objects].",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "det-def-sfb-ring-object-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.md",
+    "place": "Unit and unitor bullets; apply the sheafification universal property to the sectionwise unit law"
+   }
+  },
+  {
+   "text": "Strong monoidal sheafification from [det-def-sfb-sheaf-tensor-structure] transports this presheaf module to a module over the sheafified coefficient. Transport both objects along the counit isomorphisms of [def-weil-pbc-sheafification], using ModObj.ofIso and Functor.modObjObj. The coefficient transport is definitionally the prescribed monoid of [det-def-sfb-ring-object-sheaf]. The transported action is the inverse counits tensor, the sheafification tensorator, the sheafified action, and the module counit. By the definition of the specified tensor comparison this is exactly gamma. Thus the transported unit and associative laws are the required laws of [sk-def-sfb-module-objects].",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "det-def-sfb-ring-object-sheaf",
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-structure.md",
+    "place": "Associator bullet and its invertible sheafified unit comparisons; apply to the sectionwise associativity identity"
+   }
+  },
+  {
+   "text": "An additive natural map $v:P\\to Q$ is already a map of abelian sheaves, since the sheaf category is full in presheaves. By the tensor-on-morphisms formula of [det-def-sfb-sheaf-tensor-structure] and naturality of the sheafification unit, the restrictions of $v\\gamma_P$ and $\\gamma_Q(\\mathrm{id}_B\\otimes v)$ to $B\\otimes_pP$ are exactly $v\\beta_P$ and $\\beta_Q(\\mathrm{id}_B\\otimes_pv)$. The bijection of step 1 says that equality holds before restriction if and only if it holds afterwards. The former is precisely the module-morphism equation of [sk-def-sfb-module-objects], proving both directions of the criterion.",
+   "uses": [
+    "det-def-sfb-sheaf-tensor-structure",
+    "def-weil-pbc-sheafification",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: linearity of the coordinate isomorphism; normalized extension of the action-commuting equation"
+   }
+  },
+  {
+   "text": "The identity commutes with each $\\beta$, and for action-commuting $v:P\\to Q$ and $w:Q\\to H$ one has $(wv)\\beta_P=w\\beta_Q(\\mathrm{id}\\otimes_pv)=\\beta_H(\\mathrm{id}\\otimes_p(wv))$. Also $(v+w)\\beta_P=\\beta_Q(\\mathrm{id}\\otimes_p(v+w))$ by additivity of $\\beta_Q$, and the zero map commutes with the actions. Step 4 therefore gives the functor on the specified objects and maps. Identities, composition, zero and sums are unchanged on underlying natural maps. The same bilinear calculation shows that sums of internal-linear maps are internal-linear (or apply step 4 to their underlying maps). Consequently this functor is additive.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: passage from continuous linear coordinate maps to internal module maps; additive functor assertion"
+   }
+  },
+  {
+   "text": "Construct the presheaf with section groups Shrink(product_i P_i(U)), canonically additively equivalent to the full coordinate product. Finiteness makes this group small in the coefficient universe even when the index has an independent universe. Coordinate restrictions and tuple maps give a limiting presheaf Fan. Limits of sheaves are sheaves, by Sheaf.isSheaf_of_isLimit. Apply [lem-sfb-modobj-forget-creates] in the presheaf category to obtain the module action; its projection equations evaluated at b tensor x give exactly the coordinate action formula. Lift this object and its linear projections by the preceding steps.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "lem-sfb-modobj-forget-creates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Coordinate isomorphism to a finite power: coordinatewise action, gluing and product cone"
+   }
+  },
+  {
+   "text": "Apply limit reflection for Mod.forget from [lem-sfb-modobj-forget-creates] to the lifted coordinate cone and its underlying abelian sheaf product cone. This proves the universal property against every internal source module. For an empty index, isLimitEquivIsTerminalOfIsEmpty makes both cones terminal; IsTerminal.isZero makes the underlying abelian sheaf zero.",
+   "uses": [
+    "lem-sfb-modobj-forget-creates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Finite power in the first two sentences: internal-module universal property, including arbitrary source and empty family"
+   }
+  },
+  {
+   "text": "For $P=B$ with $\\beta=\\mu^p$, the given multiplication $\\mu$ is the unique sheaf morphism extending $\\mu^p$ by [det-def-sfb-ring-object-sheaf]. Step 1 characterizes $\\gamma_B$ by exactly that extension property. Thus $\\gamma_B=\\mu$, and the definition of the regular module in [sk-def-sfb-module-objects] identifies the output with the given regular internal module, on the same underlying sheaf.",
+   "uses": [
+    "det-def-sfb-ring-object-sheaf",
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-ring-object/det-def-sfb-ring-object-sheaf.md",
+    "place": "Multiplication is the unique extension of the objectwise ring multiplication"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "det-def-sfb-sheaf-tensor-structure",
+  "det-def-sfb-ring-object-sheaf",
+  "sk-def-sfb-module-objects",
+  "lem-sfb-modobj-forget-creates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "First two sentences, implemented with the existing monoidal module transport, normalized counit comparison, explicit coordinate product and internal-module limit creation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ModObj|mapMod|module.*[Ss]heafif|[Ss]heafif.*module",
+   "results": "11 hits: Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean, Mathlib/CategoryTheory/Monoidal/Mod.lean; note: ; digest 5f7e549e6c61e7d5; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "No match: PresheafOfModules.Sheafify.module constructs ordinary sectionwise modules, not the specified internal sheaf-tensor action with counit normalization and morphism criterion. CategoryTheory.ModObj supplies the notion only; Monoidal/Mon.lean:856 has a TODO for mapMod. The project has internal/sectionwise equivalence and limit-creation tools, but neither states this normalized action-extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural sectionwise module structure on an abelian sheaf extends uniquely to an internal module action through the sheafified tensor, with the same linear maps",
+   "results": "8 hits: PresheafOfModules.Sheafify.module, PresheafOfModules.Sheafify.instNonemptySMulCandidate, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.sheafify, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.SMulCandidate.ctorIdx; note: ; digest 7f4d9ed150d70e06",
+   "date": "2026-10-22",
+   "verdict": "No match: PresheafOfModules.Sheafify.module constructs ordinary sectionwise modules, not the specified internal sheaf-tensor action with counit normalization and morphism criterion. CategoryTheory.ModObj supplies the notion only; Monoidal/Mon.lean:856 has a TODO for mapMod. The project has internal/sectionwise equivalence and limit-creation tools, but neither states this normalized action-extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModObj",
+   "results": "12 hits: CategoryTheory.ModObj, CategoryTheory.ModObj.regular, CategoryTheory.ModObj.instTensorUnit, CategoryTheory.Mod.mk, CategoryTheory.Mod.mod, CategoryTheory.Mod_.mod, CategoryTheory.instIsModHomId, CategoryTheory.IsModHom; note: ; digest e4020ef024cfb1b5",
+   "date": "2026-10-22",
+   "verdict": "No match: PresheafOfModules.Sheafify.module constructs ordinary sectionwise modules, not the specified internal sheaf-tensor action with counit normalization and morphism criterion. CategoryTheory.ModObj supplies the notion only; Monoidal/Mon.lean:856 has a TODO for mapMod. The project has internal/sectionwise equivalence and limit-creation tools, but neither states this normalized action-extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"module\"",
+   "results": "12 hits: SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections, SheafOfModules.Hom, SheafOfModules.instPreadditive, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsFunctor_obj; note: ; digest 06d589ddcb0e6dd6",
+   "date": "2026-10-22",
+   "verdict": "No match: PresheafOfModules.Sheafify.module constructs ordinary sectionwise modules, not the specified internal sheaf-tensor action with counit normalization and morphism criterion. CategoryTheory.ModObj supplies the notion only; Monoidal/Mon.lean:856 has a TODO for mapMod. The project has internal/sectionwise equivalence and limit-creation tools, but neither states this normalized action-extension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal sheafification transports a presheaf module action on an already abelian sheaf to the unique internal action extending it, preserving linear maps sums products and the regular module",
+   "results": "8 hits: PresheafOfModules.Sheafify.module, PresheafOfModules.Sheafify.add_smul, PresheafOfModules.Sheafify.smulCandidate, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.SMulCandidate, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.smul, PresheafOfModules.Sheafify.smul_add; note: ; digest 88157f17b00ead82",
+   "date": "2026-10-22",
+   "verdict": "No match: PresheafOfModules.Sheafify.module constructs ordinary sectionwise modules, not the specified internal sheaf-tensor action with counit normalization and morphism criterion. CategoryTheory.ModObj supplies the notion only; Monoidal/Mon.lean:856 has a TODO for mapMod. The project has internal/sectionwise equivalence and limit-creation tools, but neither states this normalized action-extension theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ModObj|mapMod|module.*[Ss]heafif|[Ss]heafif.*module",
+   "results": "{\"t\": \"2026-10-22T06:24:25Z\", \"tool\": \"grep\", \"query\": \"ModObj|mapMod|module.*[Ss]heafif|[Ss]heafif.*module\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Mod.lean\"], \"digest\": \"73acbc5aa3ce3548\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct sectionwise SheafOfModules or define ModObj, but do not identify the normalized counit lift with an internal sheaf-tensor action or supply all morphism/product/regular clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules over a ring sheaf are sheaves with sectionwise linear actions and linear maps",
+   "results": "{\"t\": \"2026-10-22T06:24:25Z\", \"tool\": \"leansearch\", \"query\": \"Internal modules over a ring sheaf are sheaves with sectionwise linear actions and linear maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules\", \"SheafOfModules.mk\", \"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.noConfusionType\", \"SheafOfModules.instCategory\", \"PresheafOfModules.ofPresheaf\", \"AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf\", \"PresheafOfModules.Sheafify.module\"], \"digest\": \"f751325ac96b2556\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct sectionwise SheafOfModules or define ModObj, but do not identify the normalized counit lift with an internal sheaf-tensor action or supply all morphism/product/regular clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModObj, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-22T06:24:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ModObj, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct sectionwise SheafOfModules or define ModObj, but do not identify the normalized counit lift with an internal sheaf-tensor action or supply all morphism/product/regular clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sectionwise action of a ring sheaf on an abelian sheaf extends uniquely to the sheafified tensor action and defines an internal module",
+   "results": "{\"t\": \"2026-10-22T06:24:34Z\", \"tool\": \"leanfinder\", \"query\": \"A sectionwise action of a ring sheaf on an abelian sheaf extends uniquely to the sheafified tensor action and defines an internal module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.module\", \"PresheafOfModules.Sheafify.smulCandidate\", \"PresheafOfModules.Sheafify.smul\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"PresheafOfModules.Sheafify.SMulCandidate\", \"PresheafOfModules.Sheafify.SMulCandidate.x\", \"PresheafOfModules.Sheafify.add_smul\", \"PresheafOfModules.Sheafify.instNonemptySMulCandidate\"], \"digest\": \"24f78afd88caf6ab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct sectionwise SheafOfModules or define ModObj, but do not identify the normalized counit lift with an internal sheaf-tensor action or supply all morphism/product/regular clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ModObj",
+   "results": "{\"t\": \"2026-10-22T06:25:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ModObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ModObj\", \"CategoryTheory.ModObj.regular\", \"CategoryTheory.ModObj.instTensorUnit\", \"CategoryTheory.Mod.mk\", \"CategoryTheory.Mod.mod\", \"CategoryTheory.Mod_.mod\", \"CategoryTheory.instIsModHomId\", \"CategoryTheory.IsModHom\"], \"digest\": \"e4020ef024cfb1b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct sectionwise SheafOfModules or define ModObj, but do not identify the normalized counit lift with an internal sheaf-tensor action or supply all morphism/product/regular clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-topological-module-condensation",
+  "date": "2026-10-22",
+  "group": "N6"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-subfield-flat",
+   "place": "First two sentences of lem-sfb-subfield-flat.proof.md: passage to internal condensed modules; extracted original step 3, sheafification part of 4, internal product argument of 5 and regular normalization of 6.",
+   "via": [
+    "lem-sfb-topological-module-condensation",
+    "lem-sfb-condensed-subfield-basis"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-section-action-internal",
+  "worker": "stage1",
+  "summary": "Eight steps prove the normalized action extension and both module identities by sheafification uniqueness and the explicit tensor comparison maps; derive the iff for linearity and additivity; construct the sectionwise product and apply existing module-limit creation; identify the regular module. No statement change and no new nodes.",
+  "blueprint": "Expands the first two sentences of lem-sfb-subfield-flat.proof.md, namely the passage from the sectionwise coordinate isomorphism to an internal module isomorphism; includes the normalization and finite-product clauses extracted through lem-sfb-topological-module-condensation.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-modobj-forget-creates",
+    "why": "Generic creation of limits in internal modules, used only after explicitly constructing the underlying finite product and proving linearity of its projections; this unit contains no separate general module-limit creation result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-modobj-forget-creates"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-1e9d8f4f2",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-1e9d8f4f2 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of a node with no proof. The item was created 2026-10-22 by N6 in the parent lem-sfb-topological-module-condensation re-split, has no repair note of its own, and is still unsplit in live and side-live. Statement, stmt_deps and source match live; the delivery adds 8 steps (5642 chars), no new nodes, and the uses lists equal proof_deps. I checked every step against the cited statements. Step 1: the def-weil-pbc-sheafification universal property gives epsilon inverse to eta_iP, naturality gives gamma∘eta = beta, and the extension is unique. Step 2: the unitor of det-def-sfb-sheaf-tensor-structure, defined from the objectwise unitor and the iso a(eta_Z⊗_pP), together with the ring-object unit extending n↦n·1, reduces both sides to beta(e^p(n)⊗x) = nx. Step 3: by the associator bullet, alpha∘a(eta⊗_pP) = a(B⊗_p eta)∘a(alpha_p); I computed both sides on T as beta(bc⊗x) and beta(b⊗beta(c⊗x)), with no pure-tensor claim on sheaf sections. Step 4: R⊗v = a(id⊗_p v), so the iff follows from step 1's bijection. Steps 5 and 6 are elementary (additive functor; coordinatewise gluing and product). Step 7 uses clause 1 of lem-sfb-modobj-forget-creates with a finite discrete J and the specified cone; the empty family gives a terminal object. I accept this off-unit generic tool use, which is declared in split_report.tool_uses. Step 8: gamma_B and mu are both the unique extension of mu^p, so (B, mu) is the regular module. Route: the ring-object and sheaf-tensor units lie in the unit's transitive uses; the other citations are definitions or a Mathlib leaf. Sources checked: Stacks 00WH (sites.tex:2053), the blueprint det-def-sfb-sheaf-tensor-structure associator and unitor bullets, and lem-sfb-subfield-flat.proof.md sentences 1–2. Not a duplicate of def-weil-pbc-internal-abelian-sheaf-module-equivalence, which lacks the normalized formula, the criterion, the product clause and the regular normalization that the parent cites. Edge cases checked: B=0, P=0, singleton family, empty family, trivial site. No SGA. review_split 'no such node' messages are a symlink artefact; both files exist and I read them."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SectionActionInternal",
+  "declaration": "CategoryTheory.sfbSectionActionInternal",
+  "declarations": [
+   "CategoryTheory.sfbSectionAction_hasSheafify",
+   "CategoryTheory.sfbSectionAction_isMonoidal",
+   "CategoryTheory.sfbSectionModules",
+   "CategoryTheory.sfbSectionUnderlying",
+   "CategoryTheory.sfbSectionActionLift",
+   "CategoryTheory.sfbSectionCoefficient",
+   "CategoryTheory.sfbSectionCoefficient_presheafMonObj",
+   "CategoryTheory.sfbSectionLiftFunctor",
+   "CategoryTheory.sfbSectionRegular",
+   "CategoryTheory.sfbSectionActionInternal"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SectionActionInternal.lean",
+  "statement": "theorem sfbSectionActionInternal (B : Sheaf J CommRingCat.{w}) : (∀ (P : Sheaf J AddCommGrpCat.{w}) (β : (sfbSectionCoefficient J B).obj ⊗ P.obj ⟶ P.obj), (∀ (U : Cᵒᵖ) (n : ℤ) (x : P.obj.obj U), (β.app U).hom ((n • (1 : B.obj.obj U)) ⊗ₜ[ℤ] x) = n • x) → (∀ (U : Cᵒᵖ) (b c : B.obj.obj U) (x : P.obj.obj U), (β.app U).hom ((b * c) ⊗ₜ[ℤ] x) = (β.app U).hom (b ⊗ₜ[ℤ] (β.app U).hom (c ⊗ₜ[ℤ] x))) → ∃ m : ModObj (sfbSectionCoefficient J B) P, m.smul = sfbSectionActionLift J (sfbSectionCoefficient J B) P β ∧ Functor.LaxMonoidal.μ (sheafToPresheaf J AddCommGrpCat.{w}) (sfbSectionCoefficient J B) P ≫ m.smul.hom = β ∧ (∀ g : sfbSectionCoefficient J B ⊗ P ⟶ P, Functor.LaxMonoidal.μ (sheafToPresheaf J AddCommGrpCat.{w}) (sfbSectionCoefficient J B) P ≫ g.hom = β → g = m.smul)) ∧ (∃ (m : ∀ M : sfbSectionModules J (sfbSectionCoefficient J B).obj, ModObj (sfbSectionCoefficient J B) (sfbSectionUnderlying J M)) (lin : ∀ {M N : sfbSectionModules J (sfbSectionCoefficient J B).obj} (f : M ⟶ N), (m M).smul ≫ (⟨f.hom.hom⟩ : sfbSectionUnderlying J M ⟶ sfbSectionUnderlying J N) = sfbSectionCoefficient J B ◁ (⟨f.hom.hom⟩ : sfbSectionUnderlying J M ⟶ sfbSectionUnderlying J N) ≫ (m N).smul), (∀ M : sfbSectionModules J (sfbSectionCoefficient J B).obj, (m M).smul = sfbSectionActionLift J (sfbSectionCoefficient J B) (sfbSectionUnderlying J M) (Mod.act (A := (sfbSectionCoefficient J B).obj) M.obj.X)) ∧ (∀ (M N : sfbSectionModules J (sfbSectionCoefficient J B).obj) (f : sfbSectionUnderlying J M ⟶ sfbSectionUnderlying J N), (m M).smul ≫ f = sfbSectionCoefficient J B ◁ f ≫ (m N).smul ↔ Mod.act (A := (sfbSectionCoefficient J B).obj) M.obj.X ≫ f.hom = (sfbSectionCoefficient J B).obj ◁ f.hom ≫ Mod.act (A := (sfbSectionCoefficient J B).obj) N.obj.X) ∧ (sfbSectionLiftFunctor J B m lin).Additive ∧ (∀ (I : Type t) [Finite I] (P : I → sfbSectionModules J (sfbSectionCoefficient J B).obj), ∃ (L : sfbSectionModules J (sfbSectionCoefficient J B).obj) (π : ∀ i : I, L ⟶ P i) (e : ∀ U : Cᵒᵖ, L.obj.X.obj U ≃+ ∀ i : I, (P i).obj.X.obj U), (∀ (i : I) (U : Cᵒᵖ) (x : L.obj.X.obj U), ((π i).hom.hom.app U).hom x = e U x i) ∧ (∀ (U V : Cᵒᵖ) (f : U ⟶ V) (x : L.obj.X.obj U) (i : I), e V ((L.obj.X.map f).hom x) i = ((P i).obj.X.map f).hom (e U x i)) ∧ (∀ (U : Cᵒᵖ) (b : B.obj.obj U) (x : L.obj.X.obj U) (i : I), e U (((Mod.act (A := (sfbSectionCoefficient J B).obj) L.obj.X).app U).hom (b ⊗ₜ[ℤ] x)) i = ((Mod.act (A := (sfbSectionCoefficient J B).obj) (P i).obj.X).app U).hom (b ⊗ₜ[ℤ] e U x i)) ∧ Nonempty (IsLimit (Fan.mk (sfbSectionUnderlying J L) (fun i => (⟨(π i).hom.hom⟩ : sfbSectionUnderlying J L ⟶ sfbSectionUnderlying J (P i))))) ∧ Nonempty (IsLimit (Fan.mk ((sfbSectionLiftFunctor J B m lin).obj L) (fun i => (sfbSectionLiftFunctor J B m lin).map (π i)))) ∧ (IsEmpty I → IsZero (sfbSectionUnderlying J L) ∧ Nonempty (IsTerminal ((sfbSectionLiftFunctor J B m lin).obj L)))) ∧ (m (sfbSectionRegular J B)).smul = MonObj.mul (X := sfbSectionCoefficient J B))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses use the existing presheaf and internal ModObj notions. Helpers name the source category, its underlying sheaves, the normalized counit lift and the unchanged-map functor. The finite-product clause uses arbitrary finite index types in any universe and explicitly identifies sections, restrictions, action and projections via additive coordinate equivalences; IsLimit includes every internal source module. The setup theorems discharge sheafification and tensor-locality rather than adding hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbe20b671",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Clause-by-clause match: the lift is pinned to the canonical map (tensor comparison, sheafified beta, counit) with restriction beta along sheafToPresheaf μ and uniqueness; unit and associativity are ModObj fields; the internal ring structure is the existing Sheaf.monObj_sheafCompose_obj of det-def-sfb-ring-object-sheaf. sfbSectionModules is the full subcategory of presheaf Mod; each lift is pinned to the lift of Mod.act; the iff criterion, the additive unchanged-map functor, finite I : Type t products (coordinate isos, both Fans limiting, the lifted one in all of Mod, empty case zero and terminal) and the regular-module clause are all stated. No extra hypotheses: the HasSheafify and J.W.IsMonoidal sorry instances are true for EssentiallySmall.{w}; universes are independent. The §1(B) restoration of the deleted RingObjectSheaf module equals the live record up to whitespace, its node diff is lean only, and no competing delivery was found. Both statements are verbatim in their files, only the item node's lean field changed, docstrings and both report sections are present, no hollow definitions, proofs are sorry only. No compile (nothing changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261023T124320-L-1370620",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

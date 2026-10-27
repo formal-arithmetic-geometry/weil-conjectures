@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-semisimple-roots-span",
+ "kind": "statement",
+ "title": "Semisimplicity is equivalent to rational spanning by roots",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $H$ a reductive $F$-group scheme [def-sc-group-scheme]. Use the maximal torus and root-datum conventions of [lem-sfb-reductive-borel-pair-structure]: reductive means smooth, connected, affine and of finite type with no nontrivial smooth connected normal unipotent subgroup. Fix a split maximal torus $T$ in $H$, let $X=X^*(T)$, $X_*=X_*(T)$, and let $\\Phi\\subset X$ and $\\Phi^\\vee\\subset X_*$ be the roots and coroots. Then $H$ is semisimple if and only if $\\Phi$ spans $X\\otimes_{\\mathbf Z}\\mathbf Q$. Here semisimple means having no nontrivial smooth connected solvable normal subgroup, and solvable means that successive commutator subgroup schemes become trivial. If these equivalent conditions hold, the rational extension of the integer pairing makes $(\\Phi,\\Phi^\\vee)$ a finite reduced crystallographic root system in $X\\otimes\\mathbf Q$ and $X_*\\otimes\\mathbf Q$; in particular the coroots span the latter space.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.48, printed p.439; Appendix C.34--C.35, printed p.615; paragraph 22.9, printed p.465."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "Set $L=\\sum_{\\alpha\\in\\Phi}\\mathbf Z\\alpha$ and $M=X/L$. The lattice $X$ is free of finite rank by [lem-sfb-reductive-borel-pair-structure], so its quotient $M$ is a finitely generated abelian group. By [lem-sfb-reductive-centre-root-quotient], $Z(H)=D_F(M)$ scheme-theoretically, with coordinate algebra having the basis $(e_m)_{m\\in M}$. Consequently $Z(H)$ is finite over $F$ exactly when $M$ is finite: this is precisely finite-dimensionality of its coordinate algebra.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-reductive-centre-root-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 21.8 and 21.48, printed pp.427,439."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-finitely-generated-abelian-group-structure] to $M$ to write $M\\simeq\\mathbf Z^r\\oplus C$ with $C$ finite (the finitely many prime-power cyclic factors). In particular $M$ is finite exactly when $r=0$, equivalently when $M$ is torsion. By [lem-sfb-diagonalizable-group-geometric-criteria], $D_F(M)\\simeq\\mathbf G_m^r\\times D_F(C)$. If $r>0$, its first coordinate contains a nontrivial closed subtorus. If $r=0$, $Z(H)$ is finite by step 1, so any closed subtorus $S\\simeq\\mathbf G_m^s$ has finite-dimensional coordinate algebra: a closed immersion of affine schemes gives a surjection from the coordinate algebra of $Z(H)$. For $s>0$, the Laurent monomials $t_1^n$ for $n\\in\\mathbf Z$ are linearly independent, a contradiction. Thus $Z(H)$ has no nontrivial subtorus exactly when $M$ is finite. This includes $C$ with characteristic-primary torsion: $D_F(C)$ can be nonreduced, but is still finite.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-sfb-diagonalizable-group-geometric-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 19.10, printed p.400; decomposition in Proposition 12.3, printed p.232."
+   }
+  },
+  {
+   "text": "By [lem-sfb-reductive-radical-quotient], the radical $R(H)$ is the largest smooth connected normal solvable subgroup and is the largest subtorus of $Z(H)$. The solvability convention there (a finite normal series with commutative quotients) agrees with the commutator-series convention here: the derived subgroup lies in any normal subgroup with commutative quotient; induction places the successive derived subgroups in the successive terms of such a series. Conversely the derived series itself is such a series. Therefore $H$ is semisimple exactly when $R(H)=1$, exactly when $Z(H)$ has no nontrivial subtorus. By step 2 this is equivalent to finiteness of $M$. All hypotheses of the radical theorem hold because $F$ is algebraically closed and $H$ is smooth connected affine of finite type and reductive.",
+   "uses": [
+    "lem-sfb-reductive-radical-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.10, printed p.400; Proposition 21.48, printed p.439."
+   }
+  },
+  {
+   "text": "Finiteness of $M$ is equivalent to rational spanning. Indeed if $M$ is finite, each $x\\in X$ has some positive multiple in $L$, so $x\\otimes1$ is a rational linear combination of roots. Conversely, if the roots span $X\\otimes\\mathbf Q$, express each element $x_j$ of a finite integral basis of $X$ as a rational combination of roots and clear denominators to get $n_jx_j\\in L$ with $n_j>0$. Equality in the rational space gives equality in $X$ because $X$ is free. The quotient $M$ is then generated by the images of the $x_j$, each of finite order dividing $n_j$, and is a quotient of the finite group $\\prod_j\\mathbf Z/n_j\\mathbf Z$. Thus it is finite. Combined with step 3 this proves the stated equivalence, also in rank zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition C.34, printed p.615, and Proposition 21.48, printed p.439; denominator argument explicit."
+   }
+  },
+  {
+   "text": "Extend the perfect integer pairing and the root datum of [lem-sfb-reductive-borel-pair-structure] to $V=X\\otimes\\mathbf Q$ and $W=X_*\\otimes\\mathbf Q$. Choosing dual integral bases shows that the extended pairing is perfect; the lattice embeddings remain injective, and both reflection formulas remain valid by bilinearity. The index set is finite and the root-coroot pairings remain integers. Thus [lem-sfb-rational-root-coroot-span] applies. Under the equivalent conditions already proved, the roots span $V$, so that node gives that the coroots span $W$. Finiteness, nonzero roots, reducedness, the reflection permutations and crystallographic integrality are already part of the root datum and are preserved under rational extension (clear denominators for an equality between lattice vectors). These properties together with the two spanning assertions are exactly a finite reduced crystallographic root system in the paired spaces $V,W$. For $H=1$, both spaces and both families are empty or zero and the same argument applies.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rational-root-coroot-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.34--C.35, printed p.615; C.38--C.41, printed pp.616--617; paragraph 22.9, printed p.465."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-centre-root-quotient",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sfb-diagonalizable-group-geometric-criteria",
+  "lem-sfb-reductive-radical-quotient",
+  "lem-sfb-rational-root-coroot-span"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 21.8,19.10,21.48 and Appendix C.34--C.35,C.38--C.41; printed pp.427,400,439,615--617."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semisimple|rootDatum|characterLattice",
+   "results": "{\"t\": \"2026-10-23T13:19:26Z\", \"tool\": \"grep\", \"query\": \"semisimple|rootDatum|characterLattice\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic-group criterion: RootPairing.rootSpan_eq_top_iff compares root and coroot spans abstractly, but none of these results relates spanning to semisimplicity of an algebraic group; Lie-algebra semisimplicity is a different notion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The roots of a semisimple algebraic group span its rational character lattice",
+   "results": "{\"t\": \"2026-10-23T13:19:27Z\", \"tool\": \"leansearch\", \"query\": \"The roots of a semisimple algebraic group span its rational character lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.IsRootSystem.span_root_eq_top\", \"RootPairing.rootSpan_eq_top_iff\", \"RootPairing.rootSpan\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.span_root'_eq_top\", \"RootPairing.Base.root_mem_span_int\", \"RootPairing.rootSpanMem\", \"RootPairing.IsRootSystem.span_coroot_eq_top\"], \"digest\": \"bd1ca3b451926136\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic-group criterion: RootPairing.rootSpan_eq_top_iff compares root and coroot spans abstractly, but none of these results relates spanning to semisimplicity of an algebraic group; Lie-algebra semisimplicity is a different notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"span\"",
+   "results": "{\"t\": \"2026-10-23T13:19:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootPairing\\\", \\\"span\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.IsRootSystem.span_coroot_eq_top\", \"RootPairing.IsRootSystem.span_root_eq_top\", \"RootPairing.reflectionPerm_eq_reflectionPerm_iff_of_span\", \"RootPairing.corootSpan\", \"RootPairing.rootSpan\", \"RootPairing.corootSpanMem\", \"RootPairing.rootSpanMem\", \"RootPairing.corootSpan_ne_bot\"], \"digest\": \"0aaf2fdfbc001711\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic-group criterion: RootPairing.rootSpan_eq_top_iff compares root and coroot spans abstractly, but none of these results relates spanning to semisimplicity of an algebraic group; Lie-algebra semisimplicity is a different notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The roots of a semisimple algebraic group span the rational character space of a maximal torus",
+   "results": "{\"t\": \"2026-10-23T13:19:29Z\", \"tool\": \"leanfinder\", \"query\": \"The roots of a semisimple algebraic group span the rational character space of a maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.span_root'_eq_top\", \"RootPairing.EmbeddedG2.span_eq_top\", \"RootPairing.IsRootSystem.span_root_eq_top\", \"RootPairing.Base.span_root_support\", \"RootPairing.IsG2.span_eq_rootSpan_int\", \"RootPairing.span_coroot'_eq_top\", \"RootPairing.Base.span_int_root_support\", \"RootPairing.EmbeddedG2.mem_span_of_mem_allRoots\"], \"digest\": \"f74ea7136f282e3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic-group criterion: RootPairing.rootSpan_eq_top_iff compares root and coroot spans abstractly, but none of these results relates spanning to semisimplicity of an algebraic group; Lie-algebra semisimplicity is a different notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group is semisimple exactly when its roots span the character lattice tensored with the rationals",
+   "results": "{\"t\": \"2026-10-23T13:24:42Z\", \"tool\": \"leanfinder\", \"query\": \"A split reductive group is semisimple exactly when its roots span the character lattice tensored with the rationals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.instSemisimple\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsSemisimple\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\"], \"digest\": \"08319a38fb25ee6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for algebraic-group criterion: RootPairing.rootSpan_eq_top_iff compares root and coroot spans abstractly, but none of these results relates spanning to semisimplicity of an algebraic group; Lie-algebra semisimplicity is a different notion."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|Semisimple|rootDatum",
+   "results": "{\"t\": \"2026-10-23T15:00:36Z\", \"tool\": \"grep\", \"query\": \"semisimple|Semisimple|rootDatum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-group semisimplicity is not Lie-algebra semisimplicity or abstract-group simplicity; root-span theorems alone do not give the group criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive algebraic group is semisimple exactly when its centre is finite",
+   "results": "{\"t\": \"2026-10-23T15:00:37Z\", \"tool\": \"leansearch\", \"query\": \"A reductive algebraic group is semisimple exactly when its centre is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSimpleGroup.finite\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"Subgroup.finiteIndex_center\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"IsSimpleGroup\", \"Subgroup.center\", \"IsArtinianRing.isSemisimpleRing_of_isReduced\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\"], \"digest\": \"c09718373428ee60\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-group semisimplicity is not Lie-algebra semisimplicity or abstract-group simplicity; root-span theorems alone do not give the group criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"semisimple\"",
+   "results": "{\"t\": \"2026-10-23T15:00:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootDatum\\\", \\\"semisimple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-group semisimplicity is not Lie-algebra semisimplicity or abstract-group simplicity; root-span theorems alone do not give the group criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive algebraic group is semisimple if and only if the roots span the rational character lattice of a maximal torus",
+   "results": "{\"t\": \"2026-10-23T15:00:38Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive algebraic group is semisimple if and only if the roots span the rational character lattice of a maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.instSemisimple\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsSemisimple\", \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\"], \"digest\": \"f962fde88aac788d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-group semisimplicity is not Lie-algebra semisimplicity or abstract-group simplicity; root-span theorems alone do not give the group criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simply-connected-character-lattice",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Proposition 21.48, printed p.439; Appendix C.34--C.35, printed p.615; paragraph 22.9, printed p.465.",
+   "via": [
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimple-roots-span",
+  "worker": "stage1",
+  "summary": "Followed Milne 21.48 through scheme-theoretic centre characters and the existing radical theorem. Wrote out finiteness, torus-rank and rational-lattice arguments; root-coroot full-span comparison is a Mathlib leaf. Two new nodes, one Mathlib leaf; statement unchanged.",
+  "blueprint": "Nearest blueprint ancestor is null (blueprint_refs.py ancestor); retained the inherited exact place and via chain. These five steps realize the lattice input below rho-section-modules in det-thm-sf-ctf-stability-direct-images proof (3). Whole-blueprint searches semisimple, root datum, coroot, diagonalizable, spanning, 21.8 and root pairing found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-830f91c66",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-830f91c66 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. The split follows Milne iAG2017 Proposition 21.48 (p.439): finite centre via 19.10 (p.400), and the centre's characters X/ZΦ via 21.7 and 21.8 (p.427). Step-by-step checks: step 1, F[M] is finite-dimensional exactly when M is finite. Step 2, the fg-abelian Mathlib leaf plus D(M)≅G_m^r×∏μ_n; a finite group scheme has no G_m^s with s>0. Step 3, the radical theorem's hypotheses all hold, and the bridge between the normal-series and derived-series definitions of solvable is written out. Step 4, clearing denominators in the free lattice X. Step 5, the rational root datum feeds the leaf. Its same-permutation condition for roots and coroots comes from the root datum of borel-pair-structure, whose own proof establishes it (Milne C.49). New node centre-root-quotient states 21.7 and 21.8 scheme-theoretically; I tested it on a torus, GL_2, SL_2 (μ_2, nonreduced in characteristic 2) and PGL_2. A grep of the whole DAG found no duplicate, and it is strictly smaller than the item. New leaf rational-root-coroot-span: I checked Mathlib RootPairing.rootSpan_eq_top_iff (Finite/Nondegenerate.lean:339-347) and its instances: Fintype ι, Field ℚ, and IsAnisotropic from the crystallographic instance at lines 87-89. It needs no IsRootSystem and no spanning hypothesis, and the node's fields match Defs.lean. The item statement equals the live copy. Live is still unsplit, there is no re-split note, no SGA is cited, there is no cycle (BFS over 10,661 nodes), and all citations stay in the same unit apart from one Mathlib tool. Batch-5 check: centre-root-quotient→borel-pair-structure reaches sec-trace-formula only through the Stacks 021O fppf base-change leaf, and item→reductive-radical-quotient only through the Stacks 02VL smooth fpqc-descent leaf. Both are generic algebraic-group or descent results, neither part of nor a step in the proofs of the trace formula or Poincaré duality, so I accepted them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SemisimpleRootsSpan",
+  "declaration": "AlgebraicGeometry.semisimple_iff_roots_span",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SemisimpleRootsSpan.lean",
+  "statement": "theorem semisimple_iff_roots_span {F : Type u} [Field F] [IsAlgClosed F] (H T : Grp (Over (Spec (.of F)))) (hH : ReductiveTorusCentralizer.IsReductive H) (iT : T ⟶ H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aH : ModObj T.X H.X) (hconj : aH.smul = (iT.hom.hom ⊗ₘ 𝟙 H.X) ≫ GrpObj.conj H.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) [Module.Finite ℤ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))] [Module.Finite ℤ (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))] (hred : P.IsReduced) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T H aH χ.toMul ≠ ⊥) : (IsSemisimpleGroupScheme H.X ↔ Submodule.span ℚ (Set.range (fun α : Φ ↦ TensorProduct.tmul ℤ (1 : ℚ) (P.root α))) = ⊤) ∧ (IsSemisimpleGroupScheme H.X → ∃ Q : RootPairing Φ ℚ (ℚ ⊗[ℤ] Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ℚ ⊗[ℤ] Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), (∀ α : Φ, Q.root α = TensorProduct.tmul ℤ (1 : ℚ) (P.root α)) ∧ (∀ α : Φ, Q.coroot α = TensorProduct.tmul ℤ (1 : ℚ) (P.coroot α)) ∧ (∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), Q.toLinearMap (TensorProduct.tmul ℤ (1 : ℚ) χ) (TensorProduct.tmul ℤ (1 : ℚ) ν) = (P.toLinearMap χ ν : ℚ)) ∧ Q.IsRootSystem ∧ Q.IsReduced ∧ Q.IsCrystallographic)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d6f8cd69",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Item node equals side-live apart from the lean record; lean.statement is verbatim in the file; the report has Worker report and Second reading by Q22; no new or dependency nodes; proof is sorry only. Clauses: algebraically closed field F : Type u; H reductive via ReductiveTorusCentralizer.IsReductive, the landed Borel-pair convention; iT/IsMaximalTorus/hsplit; X and X_* are the actual Hom groups; Phi, P, hroot, hpair, hweights, hconj and hred are the landed reductive_borel_pair_structure binders without the Borel/base parts (weaker hypotheses); IsSemisimpleGroupScheme uses commutator-series solvability; first conjunct is an iff with span over Q of 1⊗root = top; second conjunct is a pinned rational RootPairing (roots, coroots, pairing on pure tensors) with IsRootSystem (both spans), IsReduced and IsCrystallographic. Unpinned coroots of P are harmless: the iff does not use them, and under semisimplicity a finite spanning Phi determines them. Edge cases H=1, torus, char 2 SL2, universes OK. H4 searches: no group-scheme criterion in Mathlib or the project. Proof imports are Mathlib leaves; three proof-dep nodes have no lean record yet. Docstrings carry source places, blueprint id and the 5-step plan. Advisory: def-node owners (semisimple, reductive/torus terminology, tori, weights, G_m) are reached through the Borel-pair dependency, not direct stmt_deps, as in the landed sibling simply-connected-character-lattice. No file changed, no compile."
+ }
+}

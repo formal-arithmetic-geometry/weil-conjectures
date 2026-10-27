@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-root-datum-isogeny-realization",
+ "kind": "statement",
+ "title": "Isogeny theorem and root-exponent criteria for split reductive groups",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], of characteristic exponent $p$ ($p=1$ in characteristic zero). Let $(G_1,S_1),(G_0,S_0)$ be split reductive $F$-group schemes [def-sc-group-scheme] with split maximal tori and reduced root data $(M_i,R_i,M_i^\\vee,R_i^\\vee)$ as in [lem-sfb-reductive-borel-pair-structure], where $M_i=X^*(S_i)$ and $M_i^\\vee=\\operatorname{Hom}_{\\mathbf Z}(M_i,\\mathbf Z)$. Suppose $u:M_0\\to M_1$ is injective with finite cokernel, and there are a bijection $b:R_1\\to R_0$ and numbers $q_\\alpha\\in\\{p^e:e\\geq0\\}$ such that $u(b(\\alpha))=q_\\alpha\\alpha$ and $u^\\vee(\\alpha^\\vee)=q_\\alpha b(\\alpha)^\\vee$ for every $\\alpha\\in R_1$, where $u^\\vee$ is restriction of integer-valued functionals. Then there exists a surjective homomorphism $g:G_1\\to G_0$ with finite scheme-theoretic kernel, with $g(S_1)=S_0$ and $(g|_{S_1})^*=u$. For every such isogeny inducing $u$, the kernel is central if and only if every $q_\\alpha=1$, and $g$ is an isomorphism if and only if every $q_\\alpha=1$ and $u$ is an isomorphism of abelian groups. Finite means finite-dimensional coordinate algebra; central means commuting with every group element after every commutative $F$-algebra extension. No reducedness of the kernel or prime-to-characteristic condition on the cokernel is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definitions 23.1--23.2, printed pp.483--484; Proposition 23.5, printed pp.485--486; Theorem 23.9, printed p.487; full isogeny theorem 23.25, printed pp.492--493."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "The character antiduality [lem-sfb-multiplicative-character-antiduality] gives the unique torus homomorphism $h:S_1\\to S_0$ with $h^*=u$. In the group-algebra descriptions, $h^*$ sends $e_m$ to $e_{u(m)}$. Coset representatives for $M_1/u(M_0)$ give a finite free basis of $F[M_1]$ over $F[M_0]$, of positive rank. Thus this map is faithfully flat, and [lem-weil-pbc-faithfully-flat-surjective-spectrum] makes the associated map of spectra surjective. Its identity fibre has algebra $F[M_1]/(e_{u(m)}-1)_m=F[M_1/u(M_0)]$, which is finite-dimensional. In particular $h$ has finite kernel and image $S_0$. The given dual relation says precisely $h\\circ\\alpha^\\vee=b(\\alpha)^\\vee\\circ(t\\mapsto t^{q_\\alpha})$, since the perfect character pairing separates cocharacters.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9, pp.233--234; Definitions 23.1--23.2, pp.483--484: passage between torus and lattice maps."
+   }
+  },
+  {
+   "text": "Choose a Borel containing $S_1$ and its positive roots and simple base $\\Phi_1^+,\\Delta_1$ [lem-sfb-reductive-borel-pair-structure]. Choose a regular cocharacter $\\lambda_1$ defining this Borel by [lem-sfb-regular-cocharacter-borel-description], and put $\\lambda_0=h\\lambda_1$. Then $\\langle b(\\alpha),\\lambda_0\\rangle=q_\\alpha\\langle\\alpha,\\lambda_1\\rangle$, so $\\lambda_0$ is regular and defines a Borel of $G_0$ whose positive roots are $b(\\Phi_1^+)$. The bases correspond: under $u_{\\mathbf Q}$ their positive cones coincide, since every root is carried to a positive multiple of its corresponding root. In a cone freely spanned by a simple-root base, the extremal rays are exactly the simple-root rays (uniqueness of coefficients). Thus the two simple bases have corresponding rays; reducedness permits only one positive root on each ray, so $\\Delta_0=b(\\Delta_1)$. Similarly $b(-\\alpha)=-b(\\alpha)$ and $q_{-\\alpha}=q_\\alpha$ follow by applying $u_{\\mathbf Q}^{-1}$ and reducedness. If the roots are empty, both groups are their maximal tori by the empty-root clause of [lem-sfb-regular-cocharacter-borel-description], so $h$ already supplies the desired map.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.4, p.484, with its positive-cone argument made explicit; rank-zero paragraph before Proposition 23.14, p.489."
+   }
+  },
+  {
+   "text": "For $\\alpha\\in\\Delta_1$ form $G_{1,\\alpha}$ and $G_{0,b(\\alpha)}$ using [lem-sfb-reductive-rank-one-reflections]. To see their roots, a character is trivial on the largest subtorus of $\\ker\\alpha$ exactly when it is a rational multiple of $\\alpha$ (character antiduality [lem-sfb-multiplicative-character-antiduality]). Differentiating the defining centralizer equations selects precisely those weight spaces. Ambient reducedness then leaves exactly $\\pm\\alpha$ and $\\pm b(\\alpha)$, with the same ambient tori; the coroots agree by the reflection-identity uniqueness in the rank-one-reflections node. The equations $u(b(\\alpha))=q_\\alpha\\alpha$ and $u^\\vee(\\alpha^\\vee)=q_\\alpha b(\\alpha)^\\vee$, together with step 2 for negative roots, verify the hypotheses of [lem-sfb-rank-one-frobenius-extension]. It yields $f_\\alpha:G_{1,\\alpha}\\to G_{0,b(\\alpha)}$ restricting to the SAME $h$, mapping both opposite root subgroups onto their counterparts, with exponent $q_\\alpha$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-rank-one-frobenius-extension",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.16, p.490, applying Proposition 23.14 to the rank-one subgroups of Theorem 21.11."
+   }
+  },
+  {
+   "text": "Take the reduced closed subgroup $L\\subseteq G_1\\times_FG_0$ generated by the torus graph and the graphs of the $f_\\alpha$. All the hypotheses of [lem-sfb-compatible-rank-one-graph-geometry] hold: step 2 gives the bijection of simple bases; step 1 gives the torus character condition; step 3 gives the two root images and the common torus restriction. Therefore $L$ is reductive, $T_L=\\Gamma_h$ is maximal, and the first torus projection $a:T_L\\xrightarrow{\\sim}S_1$ identifies their FULL root data, not just the tangent characters. Write $p_1:L\\to G_1$ and $p_0:L\\to G_0$ for the projections. Apply [lem-sfb-root-monomial-kernel-coordinates] to $p_1$: its root exponents are all one, its torus restriction is $a$, and its kernel coordinates are all trivial. Thus $p_1$ is faithfully flat with trivial scheme-theoretic kernel.",
+   "uses": [
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-monomial-kernel-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.17--23.24 and the final paragraph of 23.18, pp.490--492; the big-cell trivial-kernel calculation of Proposition 23.5."
+   }
+  },
+  {
+   "text": "A faithfully flat affine group homomorphism with trivial kernel is invertible here directly by [lem-sfb-faithfully-flat-group-quotient-universal]: the identity of $L$ kills $\\ker p_1$, so it factors as $j p_1=\\mathrm{id}_L$; uniqueness applied to $p_1:L\\to G_1$ then gives $p_1j=\\mathrm{id}_{G_1}$. Define $g=p_0j$. On tori $j$ is $a^{-1}$, so $g|_{S_1}=h$. Apply [lem-sfb-root-monomial-kernel-coordinates] to this already constructed homomorphism: its character map is $u$, and the root and coroot equations are the given hypotheses. It follows that $g$ is faithfully flat, hence surjective, with finite scheme-theoretic kernel.",
+   "uses": [
+    "lem-sfb-faithfully-flat-group-quotient-universal",
+    "lem-sfb-root-monomial-kernel-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Completion of 23.18, p.492, and Lemma 23.10, p.487; Theorem 5.13 and Proposition 5.43 (affine quotient universal property)."
+   }
+  },
+  {
+   "text": "Now let $g$ be ANY isogeny in the statement with torus character map $u$. Apply [lem-sfb-root-monomial-kernel-coordinates] again, using the prescribed $b,q_\\alpha$; reducedness makes this correspondence and these exponents unique, since two positive multiples of roots on the same ray must involve the same root. Suppose its kernel $K$ is central. By the scheme-theoretic equality $C_{G_1}(S_1)=S_1$ of [lem-sfb-reductive-torus-self-centralizer], $K\\subseteq S_1$. Hence $K\\cap U_{1,\\alpha}$ is trivial. But the root formula identifies this intersection with $\\operatorname{Spec}F[z]/(z^{q_\\alpha})$. Its coordinate algebra has basis $1,z,\\ldots,z^{q_\\alpha-1}$; it is the trivial group scheme only if $q_\\alpha=1$. This detects nonreduced root kernels as well as reduced ones.",
+   "uses": [
+    "lem-sfb-root-monomial-kernel-coordinates",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, final two paragraphs, p.486, using Theorem 21.84 scheme-theoretically."
+   }
+  },
+  {
+   "text": "Conversely, suppose all $q_\\alpha=1$. The kernel-coordinate isomorphism [lem-sfb-root-monomial-kernel-coordinates] now identifies $K$ with $\\ker h\\subseteq S_1$. For every $F$-algebra $A$ and $k\\in K(A)$, the equation $u(b(\\alpha))=\\alpha$ gives $\\alpha(k)=b(\\alpha)(h(k))=1$. The conjugation formula of [lem-sfb-reductive-root-subgroup-parametrizations] says that $k$ commutes with every root subgroup, and it commutes with the torus. Thus the two morphisms $K\\times G_1\\to G_1$, $(k,x)\\mapsto kxk^{-1}$ and $(k,x)\\mapsto x$, agree on $K\\times C_1$, where $C_1$ is the dense big cell in the kernel-coordinate node. This equality extends to $K\\times G_1$: $G_1$ is integral by [lem-sfb-bruhat-longest-cell-charts], so restriction from its coordinate ring to the dense open $C_1$ is injective; tensoring this injection with the $F$-vector space $F[K]$ remains injective. Comparing the pullbacks of each function of the affine target proves equality on all $K\\times G_1$. This is centrality over every algebra, even when $K$ is nonreduced.",
+   "uses": [
+    "lem-sfb-root-monomial-kernel-coordinates",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-bruhat-longest-cell-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, p.486: centrality when all root maps are isomorphisms; scheme-theoretic density elaboration using Theorem 21.84 and formula (144)."
+   }
+  },
+  {
+   "text": "If $g$ is an isomorphism, its kernel is trivial, hence central, so step 6 gives $q_\\alpha=1$. Its restriction $h:S_1\\to S_0$ has trivial kernel; the group-algebra computation in step 1 then gives $F[M_1/u(M_0)]=F$, so the coset basis forces $M_1/u(M_0)=0$. Thus $u$ is an isomorphism. Conversely, if all $q_\\alpha=1$ and $u$ is an isomorphism, character antiduality [lem-sfb-multiplicative-character-antiduality] makes $h$ an isomorphism. The kernel coordinates [lem-sfb-root-monomial-kernel-coordinates] give $K=1$. The same quotient-universal-property argument as in step 5, now using [lem-sfb-faithfully-flat-group-quotient-universal] for $g$, constructs its two-sided inverse. The empty-root case has the same conclusion; every torus kernel is central because a torus is commutative.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-root-monomial-kernel-coordinates",
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5, last paragraph, p.486; Definitions 23.1--23.2 and Theorem 12.9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-rank-one-frobenius-extension",
+  "lem-sfb-compatible-rank-one-graph-geometry",
+  "lem-sfb-root-monomial-kernel-coordinates",
+  "lem-sfb-faithfully-flat-group-quotient-universal",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-bruhat-longest-cell-charts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.5 and Definitions 23.1--23.2, pp.483--486; the rank-one generated-graph proof of Theorem 23.9 in 23.14--23.24, pp.489--492; Theorem 23.25, pp.492--493."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isogen|reductive|semisimple",
+   "results": "{\"t\": \"2026-10-23T14:45:46Z\", \"tool\": \"grep\", \"query\": \"isogen|reductive|semisimple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isogenies of split reductive algebraic groups correspond contravariantly to isogenies of root data",
+   "results": "{\"t\": \"2026-10-23T14:45:46Z\", \"tool\": \"leansearch\", \"query\": \"Isogenies of split reductive algebraic groups correspond contravariantly to isogenies of root data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootPairing.Equiv.mk\", \"RootPairing.algebraMap_coroot'In_apply\", \"RootPairing.Hom.mk.noConfusion\", \"RootPairing.root'\", \"RootPairing.coroot'In\", \"RootPairing.Equiv.toEndUnit_val\", \"RootPairing.instIsRootSystemFlip\"], \"digest\": \"c4bd2f30650cbd00\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Hom",
+   "results": "{\"t\": \"2026-10-23T14:45:47Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.Hom.id\", \"RootPairing.Hom.instMonoid\", \"RootPairing.Hom\", \"RootPairing.Hom.indexEquiv\", \"RootPairing.Equiv.toHom\", \"RootPairing.Hom.coweightMap\", \"RootPairing.Hom.weightMap\", \"RootPairing.Hom.comp_id\"], \"digest\": \"7b9215b3d44ff850\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective homomorphism of root data with finite cokernel and root exponents powers of the characteristic is induced by an isogeny of split reductive groups, central precisely when all exponents are one",
+   "results": "{\"t\": \"2026-10-23T14:45:49Z\", \"tool\": \"leanfinder\", \"query\": \"An injective homomorphism of root data with finite cokernel and root exponents powers of the characteristic is induced by an isogeny of split reductive groups, central precisely when all exponents are one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootPairing.polarizationIn_Injective\", \"RootPairing.mk''\", \"RootPairing.Hom.root_weightMap\", \"RootPairing.Base.injective_pairingIn\", \"RootPairing.Equiv.coweightHom_injective\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"RootPairing.Hom.coweightHom_injective\"], \"digest\": \"4720ae992da07bf0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of maximal tori extends to a central isogeny of reductive groups if its character map identifies roots and coroots",
+   "results": "{\"t\": \"2026-10-23T14:45:50Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of maximal tori extends to a central isogeny of reductive groups if its character map identifies roots and coroots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Hom.root_weightMap\", \"RootPairing.Hom.coroot_coweightMap\", \"RootPairing.Equiv.toHom\", \"RootPairing.Hom.ext\", \"RootPairing.Hom.ext_iff\", \"RootPairing.Hom.coroot_coweightMap_apply\", \"RootPairing.Hom.mk.inj\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\"], \"digest\": \"1d0e54d52b61fb8a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "isogen|reductive|root subgroup",
+   "results": "{\"t\": \"2026-10-23T20:47:00Z\", \"tool\": \"grep\", \"query\": \"isogen|reductive|root subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isogeny theorem for reductive group schemes and root data",
+   "results": "{\"t\": \"2026-10-23T20:47:00Z\", \"tool\": \"leansearch\", \"query\": \"Isogeny theorem for reductive group schemes and root data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootPairing.ext_iff\", \"RootSystem.ext\", \"RootPairing.restrictScalars_coe_root\", \"RootPairing.restrictScalars_coe_coroot\", \"RootPairing.mk.injEq\", \"RootPairing.RootPositiveForm.toInvariantForm.congr_simp\", \"AlgebraicGeometry.IsAffine.iff_of_isIso\"], \"digest\": \"24f247d9713daaf3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Hom",
+   "results": "{\"t\": \"2026-10-23T20:47:00Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.Hom.id\", \"RootPairing.Hom.instMonoid\", \"RootPairing.Hom\", \"RootPairing.Hom.indexEquiv\", \"RootPairing.Equiv.toHom\", \"RootPairing.Hom.coweightMap\", \"RootPairing.Hom.weightMap\", \"RootPairing.Hom.comp_id\"], \"digest\": \"7b9215b3d44ff850\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective character lattice map with finite cokernel respecting roots and coroots up to characteristic powers is realized by an isogeny of split reductive algebraic groups",
+   "results": "{\"t\": \"2026-10-23T20:47:02Z\", \"tool\": \"leanfinder\", \"query\": \"An injective character lattice map with finite cokernel respecting roots and coroots up to characteristic powers is realized by an isogeny of split reductive algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.polarizationIn_Injective\", \"RootPairing.mk''\", \"RootPairing.Base.injective_pairingIn\", \"RootPairing.coroot\", \"RootDatum\", \"RootPairing.Equiv.coweightHom_injective\", \"RootPairing.Equiv.weightHom_injective\", \"RootPairing.Hom.coweightHom_injective\"], \"digest\": \"4ce4c9875d3b6c1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootDatum and RootPairing.Hom are abstract root-pairing data (Defs.lean:81-109, Hom.lean:58-78); the latter explicitly lists isogenies as TODO (Hom.lean:45-47). SpecialLinearGroup.toGeneralLinearGroup (SpecialLinearGroup.lean:208) and baseChange (:255) are group-valued matrix constructions, not homomorphisms of algebraic group schemes. MonoidHom.graph (Algebra/Group/Graph.lean:158) and Subgroup.exists_eq_graph concern abstract groups, not reduced generated algebraic subgroups or maximal tori. Scheme.Hom.ker is a kernel ideal sheaf, not a group-scheme kernel. None gives the stated geometric result or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-lattice-enlargement",
+  "date": "2026-10-23",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism.",
+   "via": [
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-root-datum-isogeny-realization",
+  "worker": "stage1",
+  "summary": "Q62 verified the statement against Milne and split the rank-one generated-graph construction. Three statement-only inputs isolate rank-one Frobenius extension, geometry of generated graphs, and monomial root/kernel coordinates for an already existing homomorphism. The item constructs the global map and proves both criteria, retaining all infinitesimal kernels. No statement change, no Lean attachment or Mathlib match.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/ILO X route, through central-lattice-enlargement: realize the verified lattice inclusion and prove the centrality/isomorphism tests. Latest blueprint searched; no root-isogeny duplicate. Steps 1--5 implement Milne 23.9 and steps 6--8 implement 23.5; no unit or chapter route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-d6d42afff",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-d6d42afff (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and all 9 cited statements in full, and checked them against Milne iAG printed pp.483-494. The item statement is unchanged from the base and matches Def 23.1-23.2, Prop 23.5, Thm 23.9 and Lemma 23.10. It correctly does not claim that an isomorphism of tori gives an isomorphism of groups (counterexample in Milne 23.30). Step checks: (1) antiduality gives h; F[M1] is free over F[M0], so the map is faithfully flat with identity fibre F[M1/uM0]. (2) The regular cocharacter h·lambda1 and the positive cones give Delta0=b(Delta1), b(-a)=-b(a) and q(-a)=q(a), making 23.4 explicit. (3) The roots of G_a=C_G(T_a) are +/-a, by antiduality, the functorial centralizer Lie algebra and Q·a∩Phi={+/-a}; the coroot is fixed by reflection uniqueness, so the Frobenius-extension hypotheses hold. (4) The graph-geometry hypotheses come from steps 1-3; the coordinate node applied to p1 gives a trivial scheme kernel. (5) The quotient universal property gives a two-sided inverse; g=p0 j and g(S1)=S0. (6) A central kernel lies in S1 by the scheme-theoretic self-centralizer, while K∩U_a=Spec F[z]/(z^q), so q=1; this holds for any isogeny inducing u. (7) If all q=1 then K=ker h; it commutes on the big cell, and integrality of G1 tensored with F[K] extends this to G1, so nonreduced K is handled. (8) The isomorphism criterion follows from the group-algebra computation and the quotient property. New nodes, all true and self-contained: rank-one-frobenius-extension is Milne 23.14/23.16 with (145), tested on SL2 Frobenius, SL2->PGL2, char-2 PGL2->SL2 and GL2. Graph-geometry is 23.17-23.24 plus the completion of 23.18; Delta0 being a base is enough for 23.19 and 23.21, and Delta1 empty gives L equal to the torus graph. Root-monomial-kernel-coordinates is 23.10, (144)-(147) and the 21.84 big cell; K lies in C1 because K(F) is central, tested on SL2 Frobenius (p^3) and SO(2n+1)->Sp(2n) in char 2. None restates the item, and none duplicates an existing node. Advisory: the worker missed lem-sfb-isogeny-root-power-laws, a base node stating Prop 23.5 including central iff e=1. The coordinate node only overlaps it in the root-formula clause and strictly extends it (homomorphism hypothesis, 23.10, kernel coordinates). Steps 6-7 re-derive its centrality clause by a valid route, so no fix was made, and stage 2 should reuse its Lean. proof_deps equals the union of step uses and there is no cycle. Searches cover all three tools, blueprint fields are present, and there is no SGA. Batch 5: all 13 flags pass through generic foundations (fppf/fpqc, smooth composition, lattice torus, exterior scalars). The closure diff against the base stmt_deps adds 18 nodes and no trace-formula or Poincare-duality node, since every flagged trf node was already reached through lem-sfb-reductive-borel-pair-structure; all accepted. No off-unit tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RootDatumIsogenyRealization",
+  "declaration": "AlgebraicGeometry.rootDatum_isogeny_realization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RootDatumIsogenyRealization.lean",
+  "statement": "theorem rootDatum_isogeny_realization {F : Type u} [Field F] [IsAlgClosed F] (p : ℕ) [ExpChar F p] (G T : Fin 2 → Grp (Over (Spec (.of F)))) (iT : ∀ i : Fin 2, T i ⟶ G i) (hG : ∀ i, ReductiveTorusCentralizer.IsReductive (G i)) (hT : ∀ i, ReductiveTorusCentralizer.IsMaximalTorus (iT i)) (hsplit : ∀ i, ∃ r : ℕ, Nonempty (T i ≅ MultiplicativeType.splitTorus F r)) [∀ i, IsCommMonObj (T i).X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ∀ i, ModObj (T i).X (G i).X) (hconj : ∀ i, (aG i).smul = ((iT i).hom.hom ⊗ₘ 𝟙 (G i).X) ≫ GrpObj.conj (G i).X) (Φ : ∀ i, Finset (Additive (RankOneRoots.Character (T i)))) (D : ∀ i, RootDatum (Φ i) (Additive (RankOneRoots.Character (T i))) (Additive (RankOneRoots.Cocharacter (T i)))) [∀ i, Module.Finite ℤ (Additive (RankOneRoots.Character (T i)))] [∀ i, Module.Finite ℤ (Additive (RankOneRoots.Cocharacter (T i)))] (hred : ∀ i, (D i).IsReduced) (hroot : ∀ i (α : Φ i), (D i).root α = α.val) (hpair : ∀ i (χ : Additive (RankOneRoots.Character (T i))) (ν : Additive (RankOneRoots.Cocharacter (T i))), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ ((D i).toLinearMap χ ν)) (hweights : ∀ i (χ : Additive (RankOneRoots.Character (T i))), χ ∈ Φ i ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ (T i) (G i) (aG i) χ.toMul ≠ ⊥) (hcoroot : ∀ i (α : Φ i), ∃ (n : 𝟙_ (Over (Spec (.of F))) ⟶ (G i).X) (s : T i ≅ T i), (∀ (A : CommAlgCat.{u} F) (t : StandardGroupSchemes.affine F A ⟶ (T i).X), t ≫ s.hom.hom.hom ≫ (iT i).hom.hom = (toUnit (StandardGroupSchemes.affine F A) ≫ n) * (t ≫ (iT i).hom.hom) * (toUnit (StandardGroupSchemes.affine F A) ≫ n)⁻¹) ∧ ∀ χ : Additive (RankOneRoots.Character (T i)), Additive.ofMul (s.hom ≫ χ.toMul) = χ - ((D i).toLinearMap χ ((D i).coroot α)) • α.val) (u : Additive (RankOneRoots.Character (T 0)) →+ Additive (RankOneRoots.Character (T 1))) (hinj : Function.Injective u) (hfinite : Finite (_ ⧸ u.range)) (b : Φ 1 ≃ Φ 0) (q : Φ 1 → ℕ) (hq : ∀ α, ∃ e : ℕ, q α = p ^ e) (hu : ∀ α : Φ 1, u ((D 0).root (b α)) = q α • (D 1).root α) (hdual : ∀ (α : Φ 1) (χ : Additive (RankOneRoots.Character (T 0))), (D 1).toLinearMap (u χ) ((D 1).coroot α) = (q α : ℤ) * (D 0).toLinearMap χ ((D 0).coroot (b α))) : (∃ (g : G 1 ⟶ G 0) (gT : T 1 ⟶ T 0), Surjective g.hom.hom.left ∧ IsFinite (GrpObj.ker g.hom.hom).hom ∧ iT 1 ≫ g = gT ≫ iT 0 ∧ Surjective gT.hom.hom.left ∧ ∀ χ : Additive (RankOneRoots.Character (T 0)), Additive.ofMul (gT ≫ χ.toMul) = u χ) ∧ ∀ (g : G 1 ⟶ G 0) (gT : T 1 ⟶ T 0), Surjective g.hom.hom.left → IsFinite (GrpObj.ker g.hom.hom).hom → iT 1 ≫ g = gT ≫ iT 0 → Surjective gT.hom.hom.left → (∀ χ : Additive (RankOneRoots.Character (T 0)), Additive.ofMul (gT ≫ χ.toMul) = u χ) → ((∀ (A : Type u) [CommRing A] [Algebra F A] (x : StandardGroupSchemes.affine F A ⟶ GrpObj.ker g.hom.hom) (y : StandardGroupSchemes.affine F A ⟶ (G 1).X), (x ≫ GrpObj.kerι g.hom.hom) * y = y * (x ≫ GrpObj.kerι g.hom.hom)) ↔ ∀ α : Φ 1, q α = 1) ∧ (IsIso g ↔ (∀ α : Φ 1, q α = 1) ∧ Function.Bijective u)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual character/cocharacter lattices and the Borel-pair composition pairing; hcoroot unpacks the geometric coroot normalization (Milne 21.11(d)) using actual conjugation. The transpose relation is restriction of integer functionals, pointwise. Both criteria quantify over every realization and retain nonreduced kernels."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-827ea86bd",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Item Lean matches node/Milne 23.1-23.5,23.9 clause by clause: u M0→M1 inj finite coker, b R1→R0, hu u(bα)=qα·α, hdual pointwise ⟨uχ,α∨⟩=q⟨χ,b(α)∨⟩ (correct transpose direction), existence (surjective, IsFinite ker, gT surjective, gT^*=u) and criteria quantified over every realization (central over all F-algebras ↔ q=1; IsIso ↔ q=1 ∧ u bijective); ExpChar p, q=p^e, char 0 forces q=1; edge cases empty roots/rank 0/SL2 Frobenius/SL2→PGL2 char 2/B-C char 2 checked; no universe restriction; sorry-only, docstrings with source and 8 steps. hcoroot is necessary: without it GL2 with shifted coroot (1+c,-1+c) and u=[[1+c,c],[0,1]] satisfies all hypotheses but has no realization. §1(B) repair of lem-sfb-reductive-borel-pair-structure: new decl = landed Q131 statement verbatim plus one true normalizer-coroot clause (Milne 21.11(d)-(e), node step 6), old module publicly imported, semisimple clause reused, live record = base, lean.note present. No name clash, lines ≤100. Advisory: Second reading by Q28 is a brief author reread; worker report has full matching. No compile run (none needed, no file changed)."
+ }
+}

@@ -64,6 +64,12 @@ FAILED_IN_DELIVERED = [False]
 INFRA_TEXT = ("object file", "unknown module", "No such file")
 
 
+def storage_failure(out):
+    """Disk exhaustion depends on server storage, not on the source-content key."""
+    return any(m in out.lower() for m in
+               ("no space left on device", "disk quota exceeded", "[errno 28]", "error code: 28"))
+
+
 class CompileError(Exception):
     def __init__(self, rc, out):
         self.rc = rc; self.out = out
@@ -90,7 +96,14 @@ def key_of(module, text, kind):
     return hashlib.sha256(json.dumps([salt(), kind, module, text, inputs, OVR[0]], sort_keys=True).encode()).hexdigest()[:40]
 
 
-def kcompile(module, src, kind, label, progress, output, quiet_hit=False):
+# 2026-10-25 (deliverfix; the human: only the delivery's own compile refuses): a landed library module compiled privately
+# for this call (not a file of the delivery) gets LIBRARY_LIMIT seconds; the 60-second rule is checked on its own landing,
+# and a slow upstream module (WeilConjectures.PoincareDuality.ProjectionFormula) refused every delivery importing it.
+LIBRARY_LIMIT = int(os.environ.get("NT_LIBRARY_LIMIT", "400"))
+FAIL_CUTOFF = 1792891181   # 2026-10-25 (deliverfix): cached compile failures older than this are recompiled
+
+
+def kcompile(module, src, kind, label, progress, output, quiet_hit=False, limit=60):
     """Compile src as `module` once per content key (see above); append the output; raise CompileError on failure."""
     text = src.read_text(); k = key_of(module, text, kind)
     base = KC / module; base.mkdir(parents=True, exist_ok=True)
@@ -110,15 +123,19 @@ def kcompile(module, src, kind, label, progress, output, quiet_hit=False):
             try:
                 f = json.loads(failf.read_text())
                 final = f["rc"] == 1 and not any(m in f["out"] for m in INFRA_TEXT)
-                if (final and time.time() - f["t"] < 3600) or f["t"] >= CALL_START[0]:
+                # 2026-10-25 (deliverfix): failures recorded before published modules were walked (a stale artifact
+                # loaded below an unchanged published import) are not reused; the key does not show that difference
+                final = final and f["t"] >= FAIL_CUTOFF
+                if not storage_failure(f["out"]) and ((final and time.time() - f["t"] < 3600)
+                                                      or f["t"] >= CALL_START[0]):
                     hit = f
             except (OSError, ValueError, KeyError):
                 pass
         if hit is None:
-            if progress: progress("Compiling " + label + module + " (60 s limit after slot acquisition)")
+            if progress: progress("Compiling " + label + module + f" ({limit} s limit after slot acquisition)")
             tmp = base / ("tmp-" + k + "-" + str(os.getpid()))
             shutil.rmtree(tmp, ignore_errors=True); tmp.mkdir()
-            rc, out = lc.run(src, 60, out=tmp)
+            rc, out = lc.run(src, limit, out=tmp)
             if rc == 0:
                 if kind == "sandbox":
                     for x in tmp.rglob("*"):
@@ -127,14 +144,16 @@ def kcompile(module, src, kind, label, progress, output, quiet_hit=False):
                 tmp.rename(entry); failf.unlink(missing_ok=True)
             else:
                 shutil.rmtree(tmp, ignore_errors=True)
-                failf.write_text(json.dumps({"rc": rc, "out": out, "t": time.time()}))
+                if not storage_failure(out):
+                    failf.write_text(json.dumps({"rc": rc, "out": out, "t": time.time()}))
             hit = {"rc": rc, "out": out}
             quiet_hit = False
     rc, out = hit["rc"], hit["out"]
     if not (quiet_hit and rc == 0):
         output.append(label + module + "\n" + out)
     if rc:
-        FAILED_IN_DELIVERED[0] = rc == 1 and not any(m in out for m in INFRA_TEXT)
+        FAILED_IN_DELIVERED[0] = (rc == 1 and not storage_failure(out)
+                                  and not any(m in out for m in INFRA_TEXT))
         raise CompileError(rc, "\n".join(output))
     if kind != "sandbox":
         arts = ORIGINAL_ARTS(entry)
@@ -211,6 +230,7 @@ def prune():
 
 def run(files, progress=None, warm=False):
     os.nice(max(0, 19 - os.getpriority(os.PRIO_PROCESS, 0)))
+    sys.setrecursionlimit(max(sys.getrecursionlimit(), 20000))   # 2026-10-25 (deliverfix): published modules are walked
     CALL_START[0] = time.time()
     CALLMAP.clear(); CALLKEY.clear(); OVR[0] = None
     source_root = snapshot(); sources = source_root / "lean"
@@ -247,13 +267,22 @@ def run(files, progress=None, warm=False):
         if module in done: return
         if module in active: raise RuntimeError("side overlay import cycle: " + module)
         src = supplied_paths.get(module, sources / (module.replace(".", "/") + ".lean"))
-        if not src.is_file(): return
+        if not src.is_file():
+            # 2026-10-25 (deliverfix): a module read from the published build is still walked: a module changed since the
+            # publication that is reached only through it (Sheaf.LinearAlgebra.FiniteIndexSplitting through
+            # ContinuousFieldMatrixElimination) is compiled from its current source too, never loaded stale beside it
+            done.add(module)
+            live = lc.P / (module.replace(".", "/") + ".lean")
+            if module.split(".")[0] in ("Sheaf", "WeilConjectures", "Comparator") and live.is_file():
+                for dep in IMPORT.findall(live.read_text()):
+                    ensure(dep)
+            return
         active.add(module); text = src.read_text()
         for dep in IMPORT.findall(text):
             ensure(dep)
         private = module in private_modules
         kcompile(module, src, "library", "private overlay " if private else "overlay ", progress, output,
-                 quiet_hit=not private)
+                 quiet_hit=not private, limit=60 if module in supplied else LIBRARY_LIMIT)
         active.remove(module); done.add(module)
 
     # Keep the explicit replacements available even when a published importer reaches them transitively, without
@@ -392,6 +421,9 @@ def run_files(files, progress=None):
             rc, out = exc.rc, exc.out
         except (OSError, ValueError, RuntimeError) as exc:
             rc, out = 2, repr(exc) if isinstance(exc, OSError) else str(exc)
+        if rc and storage_failure(out):
+            FAILED_IN_DELIVERED[0] = False
+            return INFRA_RC, "INFRASTRUCTURE RETRY (server storage):\n" + out
         stale = stale_live_clash(out) if rc else []
         if stale:
             FAILED_IN_DELIVERED[0] = False

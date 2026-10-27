@@ -313,7 +313,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-c9a3d4090 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 8 steps, the new node, the statement of every cited node, unit sk-lem-coefficient-heart, the main-20261015 blueprint statement and proof, and Bhatt–Scholze §6.8 (Lemma 6.8.2, Prop 6.8.4(1)-(6) with proofs, Cor 6.8.5 with proof, p.60). The statement matches the blueprint word for word and nothing is weakened. Step 1 (local basis lift splits the extension, rank 0 included) and steps 7-8 (kernel ≅ (coker φ^∨)^∨, checked both ways; globalization through common stratification (1)-(3) and modobj-abelian) are unchanged from the previously reviewed split. Steps 2-3 are BS 6.8.5. The coefficient ring is transported to the continuous-function ring through the explicit realization isomorphism. The monodromy node needs only a Noetherian underlying space. In the new node, K, I and Q give underlying-exact sequences, so J(V)→J(I) is epi, and coker J(h)=J(Q) by functoriality; restriction is exact by cartesian (1) untwisted only, with no condition on ℓ. Step 4: topologically Noetherian implies qcqs, and the finite-descent conventions are identical to the item's. Step 5: the condensed-flat calculus rings are the same internal-module rings as the item's, termwise tensor gives the ordinary degree-0 comparisons, and descent (2) gives the actual transported morphism. Step 6: extension of scalars is a left adjoint and preserves cokernels; no kernel exactness is used. New node lem-sfb-continuous-representation-subquotients is true: subspaces of finite-dimensional spaces over the complete field E are closed with the canonical topologies, and Π×V→Π×V/U is an open surjection. I tested V=0, U=0, U=V, trivial Π, h=0, h an isomorphism, and injective, surjective and split h. Its source is BS 6.8.5 p.60 ('obviously admits kernels and cokernels'). It is statement-only, B1-B9 hold, and the searches are genuine. It is not a restatement of a parent clause. It is not a duplicate: cor-galois-lisse-representations(2) states abelianness only for π1 of a Noetherian separated Y with ℓ invertible, and the kernel argument is only in its proof. There is no cycle. Off-route uses are a Mathlib leaf, a Lean-closed node, a definition, and six declared tool uses; I accept all six, including the new condensed-flat-coefficient-calculus. No SGA source is used. No fixes were made. Cosmetic only: the new node's title says 'p-adic' and lean_audit is absent (filled by tools)."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -326,22 +337,20 @@
   "module": "Sheaf.Paper.CoefficientHeartClosure",
   "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_closure",
   "file": "lean/Sheaf/Paper/CoefficientHeartClosure.lean",
-  "statement": "theorem coefficientHeart_closure (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ)] (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨ Λ = Profinite.padicAlgClCondensedRing ℓ) : (∀ (S : Scheme.{u}) [TopologicalSpace.NoetherianSpace S], ObjectProperty.IsClosedUnderExtensions (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S)) ∧ ObjectProperty.IsClosedUnderKernels (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S)) ∧ ObjectProperty.IsClosedUnderCokernels (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S))) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X], ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧ Nonempty (Abelian (ConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧ PreservesFiniteLimits (ObjectProperty.ι (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧ PreservesFiniteColimits (ObjectProperty.ι (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧ ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X), IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X M ↔ ∃ R : X.FiniteLocallyClosedStratification, ∀ a : Fin R.n, IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) ((CondensedRing.upperStar ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (R.immersion a)).obj M))",
+  "statement": "theorem coefficientHeart_closure (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj (coefficientHeartRingObj Λ)] (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨ Λ = Profinite.padicAlgClCondensedRing ℓ) : (∀ (S : Scheme.{u}) [TopologicalSpace.NoetherianSpace S], ObjectProperty.IsClosedUnderExtensions (IsLisseCoefficientModule (coefficientHeartRingObj Λ) (X := S)) ∧ ObjectProperty.IsClosedUnderKernels (IsLisseCoefficientModule (coefficientHeartRingObj Λ) (X := S)) ∧ ObjectProperty.IsClosedUnderCokernels (IsLisseCoefficientModule (coefficientHeartRingObj Λ) (X := S))) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X], ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧ Nonempty (Abelian (ConstantModelConstructible (coefficientHeartRingObj Λ) X)) ∧ PreservesFiniteLimits (ObjectProperty.ι (IsConstantModelConstructible (coefficientHeartRingObj Λ) X)) ∧ PreservesFiniteColimits (ObjectProperty.ι (IsConstantModelConstructible (coefficientHeartRingObj Λ) X)) ∧ ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (coefficientHeartRingObj Λ) X), IsConstantModelConstructible (coefficientHeartRingObj Λ) X M ↔ ∃ R : X.FiniteLocallyClosedStratification, ∀ a : Fin R.n, IsLisseCoefficientModule (coefficientHeartRingObj Λ) ((CondensedRing.upperStar (coefficientHeartRingObj Λ) (R.immersion a)).obj M))",
   "branch": "newtargets-dag",
   "by": "Q17",
   "date": "2026-10-18",
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "C2",
-  "result": "pass",
-  "landing": "20261021T021908-L-2790350",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "reviewer": "C-da59e",
+  "group": "C6",
+  "result": "fix",
+  "landing": "20261024T204534-L-3791332",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefficientHeart/Closure/CurveComplement vs live clone and dep node records; 3 delivered modules + 14 direct importers compiled against sandbox .lbuild; #print axioms; unit realized list"
  }
 }

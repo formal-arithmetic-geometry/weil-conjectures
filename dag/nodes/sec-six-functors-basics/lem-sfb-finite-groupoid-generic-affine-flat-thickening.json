@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+ "kind": "statement",
+ "title": "Invariant affine generic neighbourhood with a finite locally free thickening",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme]. Assume $s,t:R\\to U$ are finite and of finite presentation [def-weil-finite-integral-morphism, def-weil-pbc-scheme-conventions], and assume $U$ is quasi-separated [def-weil-quasi-separated-morphism]. Let $u_1,\\ldots,u_m\\in U$, with $m\\geq0$, have orbits $O(u)=t(s^{-1}(\\{u\\}))$ consisting of generic points [def-sc-generic-point] of irreducible components [def-weil-irreducible-components] of $U$. Then there exist an open subscheme $V\\subseteq U$ and a closed subscheme $V'\\hookrightarrow V$ [def-weil-open-immersion, def-weil-closed-immersion] such that: $V$ and $V'$ are affine [def-weil-affine-spectrum]; $u_1,\\ldots,u_m\\in |V'|$; $s^{-1}(V)=t^{-1}(V)$; $V'\\hookrightarrow V$ is a thickening of finite presentation, meaning a closed immersion of finite presentation inducing a homeomorphism on underlying spaces; and $s^{-1}(V')=t^{-1}(V')$ as closed subschemes of $R_V=s^{-1}(V)$. In particular the restriction groupoid with objects $V'$ and arrows $R'=V'\\times_{U,s}R\\times_{t,U}V'$ has source and target $s',t':R'\\to V'$ finite locally free [def-pc-finite-locally-free].",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABC (lemma-invariant-affine-open-around-generic-point), statement; R-invariant subscheme has equal source and target inverse images."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If $m=0$, take $V=V\\prime=\\varnothing=\\operatorname{Spec}(0)$; all assertions are vacuous and the empty closed immersion is an isomorphism. Hence assume $m>0$. Choose $Z_n$ from [lem-sfb-finite-presented-groupoid-rank-filtration], and put $D_r=Z_{r-1}\\setminus Z_r$. Every point lies in exactly one $|D_r|$. For a selected $u_j\\in D_r$, invariance of each $Z_n$ implies that the entire orbit $O(u_j)$ lies in $D_r$: for an arrow with source $u_j$, membership of its target in each $Z_n$ equals membership of its source. By [lem-weil-pbc-finite-closed-map-finite-fibres], each $O(u_j)$ is finite. Write $F=\\bigcup_jO(u_j)$ and let $K$ be the finite set of ranks $r$ attained by $F$.",
+   "uses": [
+    "lem-sfb-finite-presented-groupoid-rank-filtration",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, first paragraph; Tag 0ABB, rank filtration and generic orbits"
+   }
+  },
+  {
+   "text": "For $r\\in K$, let $E_r=\\operatorname{int}_U(|D_r|)$. Every point $x\\in F\\cap D_r$ lies in $E_r$: apply [lem-sfb-generic-point-fp-closed-interior] to $Z_{r-1}\\hookrightarrow U$ and intersect its resulting neighbourhood with $U\\setminus|Z_r|$. Define $H(E)=U\\setminus t(s^{-1}(U\\setminus E))$ for an open $E$. This is open because $t$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]; it is invariant by [lem-sfb-groupoid-subset-saturation-invariant] and taking complements. The identity section gives $H(E)\\subseteq E$. Inversion shows that $x\\in H(E)$ if and only if $O(x)\\subseteq E$: an incoming arrow from outside $E$ is inverted to an outgoing arrow to outside $E$. Thus $W_r=H(E_r)$ contains every selected orbit lying in $D_r$. The opens $W_r$ are pairwise disjoint since $W_r\\subseteq |D_r|$.",
+   "uses": [
+    "lem-sfb-generic-point-fp-closed-interior",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-groupoid-subset-saturation-invariant",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tags 0ABB and 0ABC, generic points in rank strata; invariant shrinking of those neighbourhoods"
+   }
+  },
+  {
+   "text": "Put $W=\\bigcup_{r\\in K}W_r$ and define $W\\prime\\hookrightarrow W$ on the disjoint open pieces by $W\\prime_r=Z_{r-1}\\times_U W_r$. These closed subschemes glue by their ideal sheaves, with no overlap conditions on disjoint pieces. Each has support $W_r$, hence $W\\prime\\hookrightarrow W$ is a homeomorphism. Invariance holds scheme-theoretically: the pullbacks of $Z_{r-1}$ agree and those of $W_r$ agree, so the pullbacks of their intersection agree on each common inverse-image open piece. By [lem-trf-closed-immersion-finite-presentation-ideal], the ideals of $Z_{r-1}$ are locally finitely generated. Their restrictions define $W\\prime_r$, so the ideal of $W\\prime$ is locally finitely generated too. Applying the same criterion makes $W\\prime\\hookrightarrow W$ of finite presentation. This constructs the required invariant thickening before imposing affineness; it contains $F$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-trf-closed-immersion-finite-presentation-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, reduction to a finitely presented invariant thickening; Tag 0ABB, finite presentation of its ideal"
+   }
+  },
+  {
+   "text": "On the open subscheme $W\\prime_r\\subseteq D_r$, the source is the open restriction of the finite locally free rank-$r$ map supplied in step 1. Indeed for an invariant monomorphism $T\\to U$, the double restriction $T\\times_{U,s}R\\times_{t,U}T$ equals the single inverse image $R\\times_{s,U}T$: the second membership condition is automatic by equality of inverse-image subschemes, and its lift is unique by the monomorphism. The source over $W\\prime$ is therefore finite by [lem-weil-pbc-finite-morphism-permanence](a). Flatness and local finite presentation hold locally on the disjoint pieces, since open restriction leaves the relevant stalk maps and local affine presentations unchanged. Thus the source is finite locally free by [def-pc-finite-locally-free]. Inversion interchanges source and target, so the target is likewise finite locally free. Denote this restricted groupoid by $(X,Q,a,b)$, with $X=W\\prime$. On any affine chart the ideal of $W\\prime$ in $W$ consists of nilpotents, because its vanishing set is all of that chart. Its pullback ideal is again nil, since a finite sum of multiples of nilpotent elements is nilpotent. Thus the closed pullback $Q\\to R_W$ is a homeomorphism, and its source and target point maps identify the orbits in $X$ with the original orbits in $W$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme",
+    "lem-sfb-finite-presented-groupoid-rank-filtration",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, replacement of the original groupoid by its restriction to the thickening"
+   }
+  },
+  {
+   "text": "The scheme $X$ is quasi-separated. To check this explicitly, take affine opens of $U$ contained in $W$ covering $W$, and pull them back through the closed immersion $X\\hookrightarrow W$. These pullbacks are affine by the quotient-ring description of [def-weil-closed-immersion]. The ambient affine opens have quasi-compact pairwise intersections by [pqf-lem-qs-intersection-qc]. Intersecting those intersections with $X$ preserves quasi-compactness: cover an intersection by finitely many affine opens, whose closed pullbacks are affine. The affine-cover criterion [lem-weil-pbc-quasi-separated-affine-cover-criterion](2) proves the claim. The homeomorphism $|X|=|W|$ identifies every point of $F$ with a component generic point of $X$, since $W$ is open in $U$. Apply [lemma-nagata-affine-neighbourhood-generic-points-exists] with any point of the nonempty $F$ and the distinct generic points comprising $F$. Obtain one affine open $A\\subseteq X$ containing $F$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "pqf-lem-qs-intersection-qc",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lemma-nagata-affine-neighbourhood-generic-points-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, final paragraph: a common affine open containing the finite union of generic orbits, Properties Tags 01ZV/01ZX"
+   }
+  },
+  {
+   "text": "On $X$ use the operation $H$ of step 2 with $(a,b)$ in place of $(s,t)$, and put $B=H(A)$. The same closed-image, saturation and inversion argument applies because $a,b$ are finite. It gives an invariant open $B\\subseteq A$ containing $F$: each selected $u_j$ has its whole orbit in $A$, hence lies in $B$, and invariance then puts its entire orbit in $B$. Write $A=\\operatorname{Spec}C$. Let $J\\subseteq C$ be the ideal generated by the elements $h$ with $D_A(h)\\subseteq B$. For every $x\\in F$ the basic-open basis [lem-weil-pbc-spec-localization-away-basic-open](i) gives such an $h$ nonzero at $x$. Thus $J$ is not contained in any of the finitely many primes $\\mathfrak p_x$, and [lem-weil-pbc-prime-avoidance] supplies $f\\in J$ outside all of them. Consequently $F\\subseteq D_A(f)\\subseteq B$: a prime outside $B$ contains every generator of $J$ and hence contains $f$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-groupoid-subset-saturation-invariant",
+    "def-a1-groupoid-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, final application of Groupoids Tag 03JE; its invariant interior and finite prime avoidance work for the whole finite union of orbits"
+   }
+  },
+  {
+   "text": "Set $V\\prime=H(D_A(f))$. Step 2 gives an invariant open containing $F$ and contained in $D_A(f)$. Inversion exchanges $b(a^{-1}(X\\setminus D_A(f)))$ and $a(b^{-1}(X\\setminus D_A(f)))$. Hence $|V\\prime|=B\\cap\\bigl(X\\setminus a(b^{-1}(X\\setminus D_A(f)))\\bigr)$. Also $a^{-1}(B)\\subseteq b^{-1}(A)$ because $B$ is invariant and lies in $A$. Apply [lem-pd-descent-norm-locus-affine] with its object scheme $X$, affine open $A$, intermediate open $B$, section $f$ and output $V\\prime$. Its remaining hypotheses are $D_A(f)\\subseteq B$, $V\\prime\\subseteq D_A(f)$ and finite, flat, locally finitely presented $a$, all proved above. The lemma gives affineness of $V\\prime$. This is the norm argument for all the selected orbits together, without assuming that a union of separately constructed invariant affine opens is affine.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-pd-descent-norm-locus-affine",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, final paragraph; Groupoids Tag 03JE, final norm argument"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq W$ be the unique open corresponding to $V\\prime\\subseteq W\\prime=X$ under the homeomorphism $|W\\prime|\\to|W|$. Then $V\\prime=V\\times_W W\\prime$ as schemes, since both are the open restriction of $W\\prime$ to that set. Restricting the defining ideal of $W\\prime$ gives a closed immersion $V\\prime\\hookrightarrow V$ with the same underlying points. The ideal is still locally finitely generated, so [lem-trf-closed-immersion-finite-presentation-ideal] gives finite presentation. By [lem-sc-closed-affine-union-affine] with the single affine closed subscheme $V\\prime$, the scheme $V$ is affine. The set invariance of $V\\prime$ in $X$ implies invariance of $V$ in $U$: for $r\\in R$ over $W$, use the homeomorphism $|Q|=|R_W|$ established in step 4 and the equality of the two pullbacks of $W\\prime$. Thus membership of $s(r)$ in $V$ equals membership of $t(r)$ in $V$. Equal open subsets give equal open subschemes. Scheme-theoretic invariance of $V\\prime$ follows by restricting the equal pullbacks of $W\\prime$ to this common inverse-image open, where it is exactly invariance of $V\\prime$ in $X$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-trf-closed-immersion-finite-presentation-ideal",
+    "lem-sc-closed-affine-union-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, first paragraph, lifting the invariant affine open across the thickening and applying Limits Tag 09NL"
+   }
+  },
+  {
+   "text": "The points $u_j$ lie in $V\\prime$ by construction. Its arrow scheme is $V\\prime\\times_{U,s}R\\times_{t,U}V\\prime$, as required. Since $V\\prime$ is an invariant open in $X$, its source is the open restriction of $a$; finiteness is preserved by [lem-weil-pbc-finite-morphism-permanence](a), while flatness and local finite presentation are unchanged on these open restrictions. By [def-pc-finite-locally-free] it is finite locally free; inversion gives the same assertion for the target. This verifies every stated clause.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-finite-locally-free",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABC, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "lem-pd-descent-norm-locus-affine",
+  "lem-sc-closed-affine-union-affine",
+  "lem-sfb-finite-presented-groupoid-rank-filtration",
+  "lem-sfb-generic-point-fp-closed-interior",
+  "lem-sfb-groupoid-subset-saturation-invariant",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lemma-nagata-affine-neighbourhood-generic-points-exists",
+  "pqf-lem-qs-intersection-qc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABC proof, using the invariant rank filtration and generic-interior argument of Tag 0ABB directly; finite-orbit version of the norm construction of Groupoids Tag 03JE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite finitely presented groupoid scheme has an invariant affine open around finitely many generic orbits with a finite presentation thickening on which source and target are finite locally free",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes that is locally of finite presentation, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic flatness for finite scheme groupoids gives an invariant affine nilpotent thickening near generic points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(generic|thicken)|invariant.*affine",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Analysis/Convex/AmpleSet.lean\", \"line\": \"23\", \"text\": \"- `AmpleSet.{pre}image`: being ample is invariant under continuous affine equivalences;\"}\n  {\"file\": \"Mathlib/Analysis/Convex/AmpleSet.lean\", \"line\": \"25\", \"text\": \"- `AmpleSet.vadd`: in particular, ample-ness is invariant under affine translations\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned affine, finite-presentation and flatness declarations do not construct invariant scheme-groupoid neighbourhoods or their thickenings; manifold groupoids and ordinary group invariants are different objects"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(generic|thicken)|invariant.*affine",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Analysis/Convex/AmpleSet.lean\", \"line\": \"23\", \"text\": \"- `AmpleSet.{pre}image`: being ample is invariant under continuous affine equivalences;\"}\n  {\"file\": \"Mathlib/Analysis/Convex/AmpleSet.lean\", \"line\": \"25\", \"text\": \"- `AmpleSet.vadd`: in particular, ample-ness is invariant under affine translations\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant affine generic neighbourhood with a finite presentation thickening for a finite finitely presented groupoid scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes which is locally of finite presentation. If $U \\\\subseteq Y$ and $V \\\\subseteq X$ are affine open subsets such that $f(V) \\\\subseteq U$, then the ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite scheme groupoid becomes finite locally free on an invariant thickening of an affine open around finitely many generic orbits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsAffineOpen\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations do not give this scheme-groupoid rank filtration or the asserted generic-point neighbourhood; basic finite-presentation, zero-locus and irreducible-component facts alone require further arguments"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-almost-invariant-function",
+  "date": "2026-10-23",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-find-almost-invariant-function. Supporting Tag 0ABF, first paragraph: apply Tag 0ABC before choosing the boundary ideal J; final paragraph: norm and clearing denominators. The affine invariant pair V′ ⊂ V with finite locally free restricted arrows.",
+   "via": [
+    "lem-sfb-finite-groupoid-almost-invariant-function",
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-groupoid-generic-affine-flat-thickening",
+  "worker": "stage1",
+  "summary": "Constructed the invariant finitely presented thickening directly on invariant interiors of finitely many rank strata; supplied the missing finite-presentation filtration and generic-interior inputs as two statement-only nodes. Wrote out the simultaneous finite-orbit norm shrinking, lifted it across the thickening, and checked scheme-theoretic invariance. The item statement is unchanged.",
+  "blueprint": "Supports the recorded alteration-chain prerequisite of det-thm-sf-ctf-stability-direct-images (3), through Stacks 0ABC. No unit-level route is replaced. The local rank-interior construction realizes the reduction of 0ABC through 0ABB; the remaining steps follow 03JE and 09NL.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-descent-norm-locus-affine",
+    "why": "Generic scheme/topology/algebra tool used within the Stacks 0ABC rank-thickening and norm route; no node of this unit supplies this precise statement."
+   },
+   {
+    "node": "lem-sc-closed-affine-union-affine",
+    "why": "Generic scheme/topology/algebra tool used within the Stacks 0ABC rank-thickening and norm route; no node of this unit supplies this precise statement."
+   },
+   {
+    "node": "lem-trf-closed-immersion-finite-presentation-ideal",
+    "why": "Generic scheme/topology/algebra tool used within the Stacks 0ABC rank-thickening and norm route; no node of this unit supplies this precise statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-descent-norm-locus-affine",
+  "lem-sc-closed-affine-union-affine",
+  "lem-trf-closed-immersion-finite-presentation-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-dabb4a783",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-dabb4a783 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the sources. The item statement matches Stacks 0ABC (more-groupoids.tex 2582-2616) hypothesis by hypothesis and is not weakened. New node rank-filtration: this is 0AB9 plus the first sentence of the 0ABB proof. Finite presentation of the Fitting strata Z_r follows from 05P8 because s_*O_R is finitely presented. Z_0=U because O_U to s_*O_R is split by e^*. It is a true strengthening of the existing 0AB9 node, which has no finite-presentation conclusion, so it is not a duplicate and not a clause of the item. New node generic-fp-closed-interior: this is 0AAW(1) applied with Chevalley 054K. I checked the affine case: a finitely generated I inside a minimal prime p is nilpotent in A_p, so one denominator s gives D(s) inside V(I). It is true, the claim is about underlying sets only, and I found no duplicate in the DAG. Steps 1-9 all hold. Every point lies in exactly one D_r, and orbits stay in one D_r and are finite. Interiors and the invariant open H(E) are justified by t being closed, the saturation-invariance node and inversion. The glued thickening W' to W has support W_r inside Z_{r-1}, is scheme-theoretically invariant, and is of finite presentation by 01TV used in both directions. The restricted groupoid's source is the open restriction of the rank-r map, so it is finite locally free. X is quasi-separated, and the Nagata/01ZV lemma applies with x in F and distinct components. Prime avoidance (F nonempty) gives f with F inside D(f) inside B. All hypotheses of the 03JE norm lemma hold with s=a, t=b, W=B, giving V' affine. The open V is affine by 09NL, its invariance comes from |Q|=|R_W|, and the restricted arrows are finite locally free. Edge cases checked: m=0, repeated points, the trivial groupoid, unbounded ranks, non-Noetherian and non-reduced U. No hypothesis is missing. Batch-5 flag: lem-trf-closed-immersion-finite-presentation-ideal is Stacks 01TV, a general fact about closed immersions with generic pbc/sbc proof deps. It is outside the trace-formula and Poincaré-duality statements and their proofs, so I accept it. I accept tool_uses 03JE norm (pd), 09NL (sc) and 01TV (trf) as generic tools. No SGA. The only defect is cosmetic: the report mentions a citations.json that is not among the delivered files. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupoidGenericAffineFlatThickening",
+  "declaration": "AlgebraicGeometry.groupoid_exists_generic_affine_flat_thickening",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupoidGenericAffineFlatThickening.lean",
+  "statement": "theorem groupoid_exists_generic_affine_flat_thickening {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) [IsFinite s] [IsFinite t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] [QuasiSeparatedSpace U] (m : ℕ) (p : Fin m → U) (hgeneric : ∀ (j : Fin m) (x : U), x ∈ t '' (s ⁻¹' {p j}) → ∃ Z ∈ irreducibleComponents U, IsGenericPoint x Z) : ∃ (V : U.Opens) (hV : s ⁻¹ᵁ V = t ⁻¹ᵁ V) (J : V.toScheme.IdealSheafData), IsAffine V.toScheme ∧ IsAffine J.subscheme ∧ (∀ j : Fin m, p j ∈ Set.range (J.subschemeι ≫ V.ι)) ∧ LocallyOfFinitePresentation J.subschemeι ∧ QuasiCompact J.subschemeι ∧ QuasiSeparated J.subschemeι ∧ IsHomeomorph J.subschemeι ∧ J.comap (s ∣_ V) = J.comap (t.resLE V (s ⁻¹ᵁ V) (le_of_eq hV)) ∧ (pullback.fst (pullback.snd (J.subschemeι ≫ V.ι) s ≫ t) (J.subschemeι ≫ V.ι) ≫ pullback.fst (J.subschemeι ≫ V.ι) s).IsFiniteLocallyFree ∧ (pullback.snd (pullback.snd (J.subschemeι ≫ V.ι) s ≫ t) (J.subschemeι ≫ V.ι)).IsFiniteLocallyFree",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Closed subschemes use Mathlib IdealSheafData. Equal comap ideals on the common open arrow scheme encode scheme-theoretic invariance. The final maps are the two canonical projections from the double restriction fibre product. Finite morphisms are quasi-compact and quasi-separated, so finite presentation of s,t is LocallyOfFinitePresentation; the thickening states all three finite-presentation conditions explicitly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8adbb4a8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read node, Stacks 0ABC, all 11 stmt_dep records, module, report. Node diff vs live: lean field only; lean.statement verbatim in file. Hypotheses match exactly: IsGroupoidScheme s t e i c; IsFinite + LocallyOfFinitePresentation for s,t (finite ⇒ qc+qs, so = convention's finite presentation); QuasiSeparatedSpace U; p : Fin m → U (m=0 allowed); hgeneric covers every point of t''(s⁻¹'{p j}). Conclusions: V : U.Opens with s⁻¹ᵁV = t⁻¹ᵁV; J : V.IdealSheafData (closed subscheme); both affine; p j ∈ range(J.subschemeι ≫ V.ι); LocallyOfFinitePresentation+QC+QS+IsHomeomorph of J.subschemeι = f.p. thickening; J.comap (s∣_V) = J.comap (t.resLE … hV) is scheme-theoretic invariance on R_V (comap = ker of pullback.fst, comapIso); source/target of pullback(pullback.snd j s ≫ t) j are the correct projections, both IsFiniteLocallyFree (FiberDegree: finite+flat+lfp). Edge cases m=0, empty U, nonreduced, single universe u OK. No new defs, sorry only, docstrings with Tag 0ABC + blueprint + 9-step proof plan, imports exist, both report sections present. No duplicate of 0ABC found. Note only: inline thickening condition instead of project IsThickening (def-sbc-first-order-thickening, closed immersion ∧ surjective), equivalent and literally following the node, which does not cite that def; a stmt_dep change is not possible in a stage-2 fix. Not recompiled per instructions; worker reports clean scompile."
+ }
+}

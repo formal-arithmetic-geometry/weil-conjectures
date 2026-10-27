@@ -69,7 +69,32 @@
   "def-sp-injective-resolutions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves",
+     "lines": [
+      28,
+      37
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-groth-ss",
  "split_report": {
@@ -96,5 +121,24 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $u:\\mathcal A\\to\\mathcal B$ be a functor which preserves finite\nlimits (for instance an exact functor between abelian categories\n[def-sp-abelian]) and admits a right adjoint $u_*:\\mathcal\nB\\to\\mathcal A$. Then $u_*$ sends injective\n[def-sp-injective-resolutions] objects to injective objects.",
+  "proof": [
+   {
+    "text": "By [def-sp-injective-resolutions], $I\\in\\mathcal B$ is injective iff for\nevery monomorphism $N\\hookrightarrow N'$ in $\\mathcal B$ the map\n\n$$\n \\operatorname{Hom}_{\\mathcal B}(N',I)\\longrightarrow\n \\operatorname{Hom}_{\\mathcal B}(N,I)\n$$\n\nis surjective. By the adjunction\n\n$$\n \\operatorname{Hom}_{\\mathcal B}(uM,N)\\cong\n \\operatorname{Hom}_{\\mathcal A}(M,u_*N),\n$$\n\nthe injectivity of $u_*I$ is equivalent to the surjectivity of\n$\\operatorname{Hom}(uM',I)\\to\\operatorname{Hom}(uM,I)$ for every monomorphism\n$M\\hookrightarrow M'$ in $\\mathcal A$; this holds because $u$ preserves\nmonomorphisms (a morphism is a monomorphism iff its kernel pair is trivial,\ni.e. both projections of $M\\times_{M'}M$ to $M$ agree, and $u$ preserves this\nfinite limit), and $I$ is injective.",
+    "uses": [
+     "def-sp-injective-resolutions"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

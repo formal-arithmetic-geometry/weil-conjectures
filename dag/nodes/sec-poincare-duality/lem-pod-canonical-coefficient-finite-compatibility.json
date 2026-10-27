@@ -1,0 +1,141 @@
+{
+ "id": "lem-pod-canonical-coefficient-finite-compatibility",
+ "kind": "statement",
+ "title": "Finite coefficient multiplication respects the specified strict quotient transitions",
+ "statement": "Fix prime ell, finite E/Q_ell and an isomorphism g:X to Y. Use the actual finite coefficient multiplication isomorphisms lambda_n, inverse to the specified finite tensor-unit comparison, the restriction functors Res_n, the pulled-back quotient transitions t_n, and the inverse-image quotient transitions s_n constructed from the actual coefficient isomorphisms in [lem-pod-canonical-coefficient-model-maps]. Then t_n composed with Res_n(lambda_n) equals Res_{n+1}(lambda_{n+1}) composed with s_n, for every natural n (positive quotient exponent n+1). This is an equality of actual chain maps before localization. The underlying quotient reductions and tower transitions are those of [def-pur-integral-derived-operations, def-weil-completed-integral-coefficients].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/derived.tex",
+  "place": "Tags 03D6 and 08TC; the parent coefficient-comparison proof and the proved regular-unit APIs of lean/Sheaf/Paper/ConstantWeilStructure.lean."
+ },
+ "stmt_deps": [
+  "lem-pod-canonical-coefficient-model-maps",
+  "def-pur-integral-derived-operations",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "The finite tensor-unit triangle shows lambda_n followed by the finite coefficient identification equals the finite regular pullback isomorphism. Together with the canonical regular reduction this turns pullbackUnitLevel into the actual coefficient projection.",
+   "uses": [
+    "lem-pod-canonical-coefficient-model-maps",
+    "lem-pod-canonical-coefficient-chain-normalization",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient projection followed by inverse regular reduction sends one to the reduced unit. The actual unrestricted quotient transition sends this to the next reduced unit, and finite regular multiplication sends it to one. Regular-source extensionality proves the strict projection transition equation.",
+   "uses": [
+    "lem-pod-canonical-coefficient-model-maps",
+    "lem-pod-canonical-coefficient-unit-roos-normalization",
+    "def-weil-constant-weil-structure",
+    "def-pur-integral-derived-operations",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient projections are epimorphisms by quotientProjection_epi and single-complex extensionality, cancelling in degree zero. Therefore pullbackUnitLevel is epi as its subsequent regular comparison is invertible. Precompose the desired square with that epi followed by canonical reduction and postcompose with the finite coefficient isomorphism. Substitute the multiplication formula, strict unit transition, and coefficient projection equation; cancel epi and iso to conclude.",
+   "uses": [
+    "lem-pod-canonical-coefficient-model-maps",
+    "lem-pod-canonical-coefficient-chain-normalization",
+    "def-weil-constant-weil-structure",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-canonical-coefficient-model-maps",
+  "lem-pod-canonical-coefficient-chain-normalization",
+  "def-weil-constant-weil-structure",
+  "lem-pod-canonical-coefficient-unit-roos-normalization",
+  "def-pur-integral-derived-operations",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/CanonicalCoefficientFiniteCompatibility.lean",
+  "place": "D7, 2026-10-27: a fully proved part of the coefficient comparison; separated after profiling the monolithic proof. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived inverse limit comparison commutes with quotient projections mapping cocone augmentation and multiplication",
+   "results": "LightProfinite.lightToProfinite_map_proj_eq; InverseSystem.invLimEquiv_symm_apply_coe; CategoryTheory.liftedLimitMapsToOriginal_inv_map_π; InverseSystem.invLimEquiv_apply_coe; InverseSystem.invLimEquiv; LightProfinite.proj_comp_transitionMap; LightProfinite.isoMapCone; LightProfinite.proj_comp_transitionMapLE",
+   "date": "2026-10-26",
+   "verdict": "no direct match; use the proved regular-module APIs of ConstantWeilStructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift_f_fst",
+   "results": "loogle: unknown identifier 'CochainComplex.mappingCocone.lift_f_fst'",
+   "date": "2026-10-26",
+   "verdict": "no direct match; use the proved regular-module APIs of ConstantWeilStructure"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(comp|hom_ext|lift_f_fst)",
+   "results": "No hits. Local source inspection supplied the needed comparison and cone lemmas.",
+   "date": "2026-10-26",
+   "verdict": "no direct match; use the proved regular-module APIs of ConstantWeilStructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme isomorphism the regular coefficient inverse image and finite pullback commute with quotient projections via their canonical tensor multiplication and normalized Roos augmentation",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom; AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.pullbackSpecIso",
+   "date": "2026-10-26",
+   "verdict": "No exact match: these are structure-sheaf and fibre-product isomorphisms, rather than the specified completed coefficient augmentation and finite quotient maps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalCoefficientPullbackReduction",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Proof Step 7: normalization of the coefficient pullback comparison and its finite quotient projections.",
+   "via": [
+    "lem-pod-canonical-coefficient-pullback-reduction",
+    "lem-pod-frobenius-fixes-unit-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalCoefficientFiniteCompatibility",
+  "file": "lean/Sheaf/Paper/CanonicalCoefficientFiniteCompatibility.lean",
+  "declaration": "WeilConjectures.coefficientStrictTransition",
+  "statement": "theorem coefficientStrictTransition {X Y : Scheme.{u}}\n    (g : X ⟶ Y) [IsIso g] (n : ℕ) :\n    canonicalCoefficientPullbackTransition l E g n ≫\n        (canonicalCoefficientRes l E X n).map\n          (canonicalCoefficientLambdaFinite l E g n).hom =\n      (canonicalCoefficientRes l E X (n + 1)).map\n          (canonicalCoefficientLambdaFinite l E g (n + 1)).hom ≫\n        canonicalCoefficientInverseTransition l E g n",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0442d",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222616-L-673941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-0442d",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222616-L-673941",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules + item node and 4 new nodes against the clone's item (moved block byte-identical), the 2 direct importers compiled against the delivery in a sandbox (both OK), #print axioms (sorryAx only via published constantWeilIntegralRoosComparison/Lambda)"
+ }
+}

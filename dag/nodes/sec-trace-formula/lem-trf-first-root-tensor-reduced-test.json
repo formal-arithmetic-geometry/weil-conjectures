@@ -1,0 +1,490 @@
+{
+ "id": "lem-trf-first-root-tensor-reduced-test",
+ "kind": "statement",
+ "title": "Reducedness after the first root extension tests geometric reducedness of a field",
+ "statement": "Let $p$ be prime, let $k$ be a field [def-weil-field] of characteristic $p$, and choose an algebraic closure $\\overline k$ [def-weil-algebraic-closure]. Put $k^{1/p}=\\{x\\in\\overline k:x^p\\in k\\}$. Let $F/k$ be any field extension. For fields over $k$, use the scalar tensor product [def-weil-vector-space-scalar-extension] with multiplication $(a\\otimes b)(c\\otimes d)=ac\\otimes bd$ and unit $1\\otimes1$. If $F\\otimes_k k^{1/p}$ is reduced, then $F\\otimes_k E$ is reduced for every field extension $E/k$. Reduced means that $x^m=0$ for an integer $m\\ge1$ implies $x=0$. No algebraicity or finite-generation hypothesis on $F/k$, $E/k$ or $k^{1/p}/k$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030W, label lemma-characterize-separable-field-extensions, equivalence of conditions (3) and (4), read at lines 10360–10407; geometric reducedness is expanded as its field-base-change meaning."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=k^{1/p}$. The field operations preserve $L$: for $u,v\\in L$, Frobenius gives $(u+v)^p=u^p+v^p$, $(uv)^p=u^pv^p$, and $(u^{-1})^p=(u^p)^{-1}$ when $u\\ne0$; also $k\\subseteq L$. For every $c\\in k$, the polynomial $X^p-c$ has a root $r\\in\\overline k$, which belongs to $L$ and satisfies $r^p=c$. Put $Q=F\\otimes_kL$. It has $p\\cdot1=0$ since $p(1\\otimes1)=(p\\cdot1)\\otimes1=0$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-ring-frobenius",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, paragraph before the statement and the start of (3) implies (2)."
+   }
+  },
+  {
+   "text": "Let $b_1,\\ldots,b_m\\in F$ be linearly independent over $k$, and suppose $\\sum_i c_ib_i^p=0$ with $c_i\\in k$. Choose $r_i\\in L$ with $r_i^p=c_i$ by step 1 and put $x=\\sum_i b_i\\otimes r_i\\in Q$. Frobenius in $Q$ and tensor balancing give $$x^p=\\sum_i b_i^p\\otimes r_i^p=\\sum_i c_ib_i^p\\otimes1=0.$$ As $Q$ is reduced and $p\\geq1$, $x=0$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, (3) implies (2), the displayed formula for the homomorphism m and its Frobenius identity."
+   }
+  },
+  {
+   "text": "Extend $\\{b_1,\\ldots,b_m\\}$ to a $k$-basis of $F$ by the basis-extension node. The scalar-extension node says that its tensors with $1$ form an $L$-basis of $Q$. Thus $0=x=\\sum_i r_i(b_i\\otimes1)$ forces every $r_i=0$, hence every $c_i=r_i^p=0$. Therefore taking $p$-th powers preserves every finite $k$-linearly independent family in $F$. The empty family is included.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, (3) implies (2), independence of the scalar-extended family."
+   }
+  },
+  {
+   "text": "Let $F_0$ be any intermediate field $k\\subseteq F_0\\subseteq F$ finitely generated as a field over $k$. A finite family in $F_0$ is $k$-linearly independent exactly when its image in $F$ is, since the inclusion is injective. Powers commute with this inclusion. Step 3 therefore gives the p-power independence hypothesis for $F_0$. Apply the cited finitely generated criterion to conclude that $F_0/k$ is separably generated.",
+   "uses": [
+    "lem-weil-pbc-p-power-independence-separably-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, (2) implies (1), finitely generated case."
+   }
+  },
+  {
+   "text": "Fix an arbitrary field extension $E/k$. It is reduced: if $e^n=0$ and $e\\ne0$, multiplying by $(e^{-1})^n$ gives $1=0$. For every finitely generated intermediate field $F_0$ as in step 4, apply the separably-generated tensor-reducedness node with $K=F_0$ and $S=E$. Its hypotheses are precisely the separable generation just proved and this reducedness of $E$; hence $F_0\\otimes_kE$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-tensor-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, (1) implies (4), using Tag 030U, lemma-separable-extension-preserves-reducedness, separably generated case."
+   }
+  },
+  {
+   "text": "Let $z\\in F\\otimes_kE$ and $n\\geq1$ satisfy $z^n=0$. Write $z=\\sum_{i=1}^s f_i\\otimes e_i$ and put $F_0=k(f_1,\\ldots,f_s)\\subseteq F$. The inclusion $F_0\\hookrightarrow F$ is injective and $k$-linear. The field-flatness node makes $E$ flat over $k$, so the definition of flatness gives an injective map $j:F_0\\otimes_kE\\to F\\otimes_kE$. The tensor formulas show that $j$ preserves products. Set $z_0=\\sum_i f_i\\otimes e_i$ in its source. Then $j(z_0^n)=z^n=0$, so $z_0^n=0$. Step 5 gives $z_0=0$, whence $z=j(z_0)=0$. This includes $s=0$, where $F_0=k$. No finiteness of $F/k$ or $E/k$ was used.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030U, lemma-separable-extension-preserves-reducedness, reduction to finitely generated field extensions; finite-support argument written explicitly, as used in Tag 030W (1) implies (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-ring-frobenius",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "lem-weil-pbc-p-power-independence-separably-generated",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-module-over-field-flat",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030W, lemma-characterize-separable-field-extensions, (3) implies (2) implies (1) implies (4); Tag 030U, lemma-separable-extension-preserves-reducedness. The finite-support reduction is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A field extension in characteristic p is geometrically reduced if its tensor product with the field of pth roots of the base field is reduced",
+   "results": {
+    "t": "2026-10-24T16:43:27Z",
+    "tool": "leanfinder",
+    "query": "A field extension in characteristic p is geometrically reduced if its tensor product with the field of pth roots of the base field is reduced",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.isGeometricallyReduced_iff",
+     "Algebra.IsGeometricallyReduced",
+     "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+     "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+     "Algebra.isReduced_of_isGeometricallyReduced",
+     "Algebra.FormallyUnramified.isReduced_of_field",
+     "PerfectClosure.instReduced",
+     "IsPurelyInseparable.isPRadical"
+    ],
+    "digest": "24ebd25abeb2b162"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Algebra.isGeometricallyReduced_field_iff tests the full algebraic closure, not the first root field; the reduced tensor instance assumes geometric reducedness. Algebra.IsSeparable and formally unramified hits concern algebraic separability or assume essential finite type. Purely inseparable root constructions do not prove this first-root criterion. Read GeometricallyReduced.lean:60–110 and the hit signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "separab|frobenius|isReduced",
+   "results": {
+    "t": "2026-10-24T16:44:00Z",
+    "tool": "grep",
+    "query": "separab|frobenius|isReduced",
+    "sub": "RingTheory/Nilpotent",
+    "ok": true,
+    "n_hits": 20,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/Lemmas.lean",
+     "Mathlib/RingTheory/Nilpotent/Lemmas.lean",
+     "Mathlib/RingTheory/Nilpotent/Lemmas.lean"
+    ],
+    "digest": "81ffaed89902ac1e"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Algebra.isGeometricallyReduced_field_iff tests the full algebraic closure, not the first root field; the reduced tensor instance assumes geometric reducedness. Algebra.IsSeparable and formally unramified hits concern algebraic separability or assume essential finite type. Purely inseparable root constructions do not prove this first-root criterion. Read GeometricallyReduced.lean:60–110 and the hit signatures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If tensoring a field extension of characteristic p with the first pth root extension is reduced then tensoring with every field extension is reduced",
+   "results": {
+    "t": "2026-10-24T16:44:00Z",
+    "tool": "leansearch",
+    "query": "If tensoring a field extension of characteristic p with the first pth root extension is reduced then tensoring with every field extension is reduced",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+     "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+     "Algebra.isGeometricallyReduced_iff",
+     "Algebra.IsGeometricallyReduced.casesOn",
+     "Algebra.IsGeometricallyReduced.mk",
+     "Algebra.IsGeometricallyReduced",
+     "PerfectClosure.instNontrivialOfIsReduced",
+     "IsReduced.tensorProduct_of_flat_of_forall_fg"
+    ],
+    "digest": "e7bfbbfc368d0580"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Algebra.isGeometricallyReduced_field_iff tests the full algebraic closure, not the first root field; the reduced tensor instance assumes geometric reducedness. Algebra.IsSeparable and formally unramified hits concern algebraic separability or assume essential finite type. Purely inseparable root constructions do not prove this first-root criterion. Read GeometricallyReduced.lean:60–110 and the hit signatures."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReduced\", \"TensorProduct\"",
+   "results": {
+    "t": "2026-10-24T16:44:01Z",
+    "tool": "loogle",
+    "query": "\"IsReduced\", \"TensorProduct\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "IsReduced.tensorProduct_of_flat_of_forall_fg",
+     "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+     "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct"
+    ],
+    "digest": "02e2d376278d559c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Algebra.isGeometricallyReduced_field_iff tests the full algebraic closure, not the first root field; the reduced tensor instance assumes geometric reducedness. Algebra.IsSeparable and formally unramified hits concern algebraic separability or assume essential finite type. Purely inseparable root constructions do not prove this first-root criterion. Read GeometricallyReduced.lean:60–110 and the hit signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*reduced|reduced.*separable|[Ff]robenius.*[Tt]ensor|[Tt]ensor.*[Ff]robenius",
+   "results": {
+    "t": "2026-10-24T16:44:51Z",
+    "tool": "grep",
+    "query": "separable.*reduced|reduced.*separable|[Ff]robenius.*[Tt]ensor|[Tt]ensor.*[Ff]robenius",
+    "sub": "FieldTheory",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Basic.lean"
+    ],
+    "digest": "3eee19a1c1626509"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Algebra.isGeometricallyReduced_field_iff tests the full algebraic closure, not the first root field; the reduced tensor instance assumes geometric reducedness. Algebra.IsSeparable and formally unramified hits concern algebraic separability or assume essential finite type. Purely inseparable root constructions do not prove this first-root criterion. Read GeometricallyReduced.lean:60–110 and the hit signatures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field extension is separable exactly when its tensor with the field of pth roots is reduced and then its tensor with every field is reduced",
+   "results": {
+    "t": "2026-10-24T16:44:52Z",
+    "tool": "leanfinder",
+    "query": "A field extension is separable exactly when its tensor with the field of pth roots is reduced and then its tensor with every field is reduced",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallyUnramified.iff_isSeparable",
+     "Algebra.FormallyUnramified.of_isSeparable",
+     "Algebra.IsSeparable",
+     "Algebra.FormallyUnramified.isSeparable",
+     "Algebra.FormallyEtale.iff_isSeparable",
+     "Algebra.FormallyEtale.of_isSeparable",
+     "IsPRadical.isPurelyInseparable",
+     "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced"
+    ],
+    "digest": "3f8b6436ebd5c50d"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Algebra.isGeometricallyReduced_field_iff tests the full algebraic closure, not the first root field; the reduced tensor instance assumes geometric reducedness. Algebra.IsSeparable and formally unramified hits concern algebraic separability or assume essential finite type. Purely inseparable root constructions do not prove this first-root criterion. Read GeometricallyReduced.lean:60–110 and the hit signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "IsGeometricallyReduced|IsReduced.*TensorProduct|TensorProduct.*IsReduced|separable.*reduced|reduced.*separable",
+   "results": {
+    "t": "2026-10-24T16:47:50Z",
+    "tool": "grep",
+    "query": "IsGeometricallyReduced|IsReduced.*TensorProduct|TensorProduct.*IsReduced|separable.*reduced|reduced.*separable",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Flat/Basic.lean"
+    ],
+    "digest": "5d8440a8f14b52fa"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Algebra.isGeometricallyReduced_field_iff tests the full algebraic closure, not the first root field; the reduced tensor instance assumes geometric reducedness. Algebra.IsSeparable and formally unramified hits concern algebraic separability or assume essential finite type. Purely inseparable root constructions do not prove this first-root criterion. Read GeometricallyReduced.lean:60–110 and the hit signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "isGeometricallyReduced|linearIndepOn_pow",
+   "results": {
+    "t": "2026-10-24T17:19:45Z",
+    "tool": "grep",
+    "query": "isGeometricallyReduced|linearIndepOn_pow",
+    "sub": "RingTheory/Nilpotent",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean",
+     "Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean"
+    ],
+    "digest": "d94bb59e6d82a5f0"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: full algebraic-closure geometric-reducedness criteria assume a stronger tensor hypothesis; the separably-generated criterion is only the finitely generated intermediate step, already represented by lem-weil-pbc-p-power-independence-separably-generated. Read GeometricallyReduced.lean:60-103 and SeparablyGenerated.lean:189-206,282-296."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReduced\", \"TensorProduct\"",
+   "results": {
+    "t": "2026-10-24T17:19:46Z",
+    "tool": "loogle",
+    "query": "\"IsReduced\", \"TensorProduct\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "IsReduced.tensorProduct_of_flat_of_forall_fg",
+     "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+     "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct"
+    ],
+    "digest": "02e2d376278d559c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: full algebraic-closure geometric-reducedness criteria assume a stronger tensor hypothesis; the separably-generated criterion is only the finitely generated intermediate step, already represented by lem-weil-pbc-p-power-independence-separably-generated. Read GeometricallyReduced.lean:60-103 and SeparablyGenerated.lean:189-206,282-296."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In characteristic p reducedness after adjoining all pth roots of the base field implies geometric reducedness of a field extension",
+   "results": {
+    "t": "2026-10-24T17:19:46Z",
+    "tool": "leansearch",
+    "query": "In characteristic p reducedness after adjoining all pth roots of the base field implies geometric reducedness of a field extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsGeometricallyReduced",
+     "Algebra.IsGeometricallyReduced.mk",
+     "Algebra.IsGeometricallyReduced.casesOn",
+     "Algebra.IsGeometricallyReduced.rec",
+     "Algebra.isGeometricallyReduced_iff",
+     "Algebra.isReduced_of_isGeometricallyReduced",
+     "PerfectClosure.instReduced",
+     "PerfectClosure.instNontrivialOfIsReduced"
+    ],
+    "digest": "a3e50a4f677e2e04"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: full algebraic-closure geometric-reducedness criteria assume a stronger tensor hypothesis; the separably-generated criterion is only the finitely generated intermediate step, already represented by lem-weil-pbc-p-power-independence-separably-generated. Read GeometricallyReduced.lean:60-103 and SeparablyGenerated.lean:189-206,282-296."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced tensor product with the first pth root field implies a field extension is geometrically reduced",
+   "results": {
+    "t": "2026-10-24T17:19:47Z",
+    "tool": "leanfinder",
+    "query": "Reduced tensor product with the first pth root field implies a field extension is geometrically reduced",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.isGeometricallyReduced_iff",
+     "Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced",
+     "Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+     "Algebra.IsGeometricallyReduced",
+     "Algebra.isReduced_of_isGeometricallyReduced",
+     "Algebra.FormallyUnramified.isReduced_of_field",
+     "Algebra.IsGeometricallyReduced.of_forall_fg",
+     "Algebra.IsGeometricallyReduced.of_injective"
+    ],
+    "digest": "05501eb9b30255d3"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: full algebraic-closure geometric-reducedness criteria assume a stronger tensor hypothesis; the separably-generated criterion is only the finitely generated intermediate step, already represented by lem-weil-pbc-p-power-independence-separably-generated. Read GeometricallyReduced.lean:60-103 and SeparablyGenerated.lean:189-206,282-296."
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*reduced|reduced.*separable|linearIndepOn_pow",
+   "results": {
+    "t": "2026-10-24T17:21:10Z",
+    "tool": "grep",
+    "query": "separable.*reduced|reduced.*separable|linearIndepOn_pow",
+    "sub": "FieldTheory",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/SeparablyGenerated.lean",
+     "Mathlib/FieldTheory/SeparablyGenerated.lean",
+     "Mathlib/FieldTheory/SeparablyGenerated.lean",
+     "Mathlib/FieldTheory/SeparablyGenerated.lean",
+     "Mathlib/FieldTheory/SeparablyGenerated.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+     "Mathlib/FieldTheory/PurelyInseparable/Basic.lean"
+    ],
+    "digest": "038a1f039aa855b9"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: full algebraic-closure geometric-reducedness criteria assume a stronger tensor hypothesis; the separably-generated criterion is only the finitely generated intermediate step, already represented by lem-weil-pbc-p-power-independence-separably-generated. Read GeometricallyReduced.lean:60-103 and SeparablyGenerated.lean:189-206,282-296."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field extension whose pth powers preserve linear independence is geometrically reduced without finite generation",
+   "results": {
+    "t": "2026-10-24T17:21:11Z",
+    "tool": "leanfinder",
+    "query": "A field extension whose pth powers preserve linear independence is geometrically reduced without finite generation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsGeometricallyReduced",
+     "Algebra.IsGeometricallyReduced.of_forall_fg",
+     "Algebra.FormallyUnramified.isReduced_of_field",
+     "Algebra.isReduced_of_isGeometricallyReduced",
+     "Algebra.isGeometricallyReduced_iff",
+     "PerfectClosure.instReduced",
+     "PerfectField",
+     "IsPurelyInseparable"
+    ],
+    "digest": "040500cad718be1a"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: full algebraic-closure geometric-reducedness criteria assume a stronger tensor hypothesis; the separably-generated criterion is only the finitely generated intermediate step, already represented by lem-weil-pbc-p-power-independence-separably-generated. Read GeometricallyReduced.lean:60-103 and SeparablyGenerated.lean:189-206,282-296."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-root-coordinate-test",
+  "date": "2026-10-25",
+  "group": "NR"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Proof of BGR 5.3.1/1: Lemma 3.5.3/2, printed p.155 (scan PDF p.163), with the definition of b-separable modules and weak stability in 3.5.2/1. Supporting input to BGR Lemma 3.5.3/2: Theorem 3.5.3/1 reduces weak stability to weak cartesianness of the first Frobenius root field. The current blueprint proof uses contracting correspondences; this retains the inherited historical analytic input below node level. Algebraic first-root tensor test supporting the completion characterization in the remark preceding BGR 3.5.3/1 (printed p.154); Stacks Tag 030W, (3) implies (4).",
+   "via": [
+    "lem-trf-frobenius-root-coordinate-test",
+    "lem-trf-fraction-root-module-weak-stability-criterion",
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-first-root-tensor-reduced-test",
+  "worker": "stage1",
+  "summary": "Proved the first-root criterion using the Frobenius relation, scalar-extended bases, the existing finitely generated p-power-independence criterion and separably-generated tensor-reducedness theorem, then an explicit finite-support and flatness argument. No new nodes or change of statement. Read the cited statements, Stacks 030W and 030U, current blueprint, and project Lean.",
+  "blueprint": "The inherited historical analytic chain below lem-trf-local-term-locality leads through the BGR first-root coordinate test to this algebraic input. The latest blueprint node uses contracting correspondences; this split changes no unit route and only resolves the inherited algebraic tool.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separably-generated-tensor-reduced",
+    "why": "Generic field-theory tensor-reducedness tool from Tag 030U applied only to finitely generated intermediate fields; no analytic argument or contracting-correspondence step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separably-generated-tensor-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-e4835243b",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-e4835243b (reviewer sub-agent of L); spot-checked: Read in full against Stacks algebra.tex Tag 030W (lemma-characterize-separable-field-extensions, lines 10360-10407): the item is (3)=>(4) with geometric reducedness spelled out as reducedness of F⊗E for every field extension E/k, not weakened, and the statement is unchanged. All 6 steps are correct. Step 1: L=k^{1/p} is a field and Q has p=0 (Frobenius, algebraic closure). Step 2: x^p=(Σc_i b_i^p)⊗1=0, so x=0 because Q is reduced. Step 3: the basis is extended and (b_j⊗1) is an L-basis (both are in the cited statements), so r_i=0 and c_i=0. Step 4: for every finitely generated F_0⊆F, the hypotheses of the Mathlib-leaf p-power criterion are checked, giving separable generation. Step 5: lem-weil-pbc-separably-generated-tensor-reduced is applied with S=E, a field and so reduced. Step 6: since E is flat, F_0⊗E→F⊗E is injective and multiplicative, which brings z^n=0 back to F_0⊗E. Every non-elementary use cites a node whose statement says it (C3/C4 ok). Edge cases checked: F=k, perfect k, k(t), s=0, and the inseparable case F_p(t)(t^{1/p}), where the hypothesis correctly fails. No new nodes. Duplicate search on 030W and k^{1/p} found only the converse and finite variants. Mathlib has no first-root criterion. The tool_use of lem-weil-pbc-separably-generated-tensor-reduced (unit sk-thm-p1, Lean-closed in slopmaster2) is accepted. No fixes."
+ }
+}

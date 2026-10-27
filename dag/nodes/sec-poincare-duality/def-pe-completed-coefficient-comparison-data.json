@@ -1,0 +1,119 @@
+{
+ "id": "def-pe-completed-coefficient-comparison-data",
+ "kind": "definition",
+ "title": "Data for normalized completed coefficient comparisons",
+ "statement": "Record the existing quotient ring tower n↦R/I^n with quotient transition maps, the constant ring functors at the point and on a scheme, and the map from constant scalars to continuous functions. Also record inverse-image coefficient inclusions, the restricted rational module and multiplication-by-l module sequence, the completed comparison predicate, the finite-subextension ring diagram and its canonical cocone, and the ZMod(l^n) quotient tower. These are exactly the previously declared constructions of Sheaf.AlgebraicGeometry.ProEtaleCompletedCoefficients, moved with their names and types preserved. All construction bodies are identical. The comparison predicate records rational pullback naturality through the underlying bundled coefficientPullbackIso maps: these are identity followed by the original condensedPullbackHom components, so the identity law gives the same condition. No alternative coefficient model is introduced. The underlying notions are [sk-def-sfb-condensed-ring], [sk-def-sfb-pulled-back-coefficients] and [sk-def-sfb-module-objects].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/_section.md",
+  "place": "Data for normalized completed coefficient comparisons"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compact topological ring separated by powers of an ideal is the inverse limit of finite discrete quotients as pro-etale sheaves",
+   "results": "Profinite.asLimit, Profinite.lim, AdicCompletion: profinite and algebraic limits, no normalized ring-object comparison on the scheme site.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing represented-tower argument; the normalized point cone is additional glue."
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite.asLimit",
+   "results": "Profinite.asLimit : IsLimit X.asLimitCone.",
+   "date": "2026-10-27",
+   "verdict": "Generic profinite limit; does not give the specified quotient cone in ring objects."
+  },
+  {
+   "tool": "grep",
+   "query": "sfb_normalized_integral_quotient_cone; completedRingTowerLimit; completedFinitePointIso in Mathlib and both project roots",
+   "results": "No exact normalized point-to-constant quotient cone. CompletedCondensedCoefficients has proved private represented-tower and finite constant helpers, with a positive quotient indexing.",
+   "date": "2026-10-27",
+   "verdict": "New compatibility step, not a duplicate of the existing integral-limit declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleCompletedCoefficients",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The Lean route theorem: Data for normalized completed coefficient comparisons; source sk-prop-sfb-qlbar-colimit-x, _section.md",
+   "via": [
+    "lem-route-sfb-completed-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-sp-tate-twist",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCompletedCoefficientData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCompletedCoefficientData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sfbConstantRing",
+  "statement": "def sfbConstantRing (X : Scheme.{u}) :\n    RingCat.{u + 1} ⥤ Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfbConstantRing",
+   "AlgebraicGeometry.ProEtale.sfbPointConstantRing",
+   "AlgebraicGeometry.ProEtale.sfbCoefficientQuotientTower",
+   "AlgebraicGeometry.ProEtale.sfbConstantToContinuous",
+   "AlgebraicGeometry.ProEtale.sfbCoefficientInclusion",
+   "AlgebraicGeometry.ProEtale.sfbRationalCoefficientModule",
+   "AlgebraicGeometry.ProEtale.sfbRationalizationSequence",
+   "AlgebraicGeometry.ProEtale.SfbCompletedCoefficientComparison",
+   "AlgebraicGeometry.ProEtale.sfbFiniteSubfieldRingDiagram",
+   "AlgebraicGeometry.ProEtale.sfbFiniteSubfieldRingCocone",
+   "AlgebraicGeometry.ProEtale.sfbZModCoefficientTower"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e4d9",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T034720-L-3678500",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e4d9",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T034720-L-3678500",
+  "kind": "interface",
+  "note": "independent cc review: SfbCompletedCoefficientComparison bundled coefficientPullbackIso field vs published condensedPullbackHom (equal by id_comp, Basic.lean:538/576); two new sorry statements vs the item node and the published CompletedCondensedCoefficients; the 3 direct importers compiled against the delivered files (all OK)"
+ }
+}

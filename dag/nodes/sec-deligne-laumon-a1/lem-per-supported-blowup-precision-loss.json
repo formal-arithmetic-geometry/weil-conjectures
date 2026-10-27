@@ -1,0 +1,282 @@
+{
+ "id": "lem-per-supported-blowup-precision-loss",
+ "kind": "statement",
+ "title": "Bounded adic precision loss under supported blowups",
+ "statement": "Let $A$ and $B$ be Noetherian rings [def-weil-pbc-noetherian-ring], complete and separated for principal ideals $(\\pi)$ and $(\\rho)$ [def-weil-pbc-adic-completion], with $\\pi$ and $\\rho$ non-zero-divisors. Let $H\\subset A$ and $L\\subset B$ be finitely generated ideals containing $\\pi^e$ and $\\rho^e$, respectively, where $e\\geq0$. The formal blowup in $H$ is covered by $\\operatorname{Spf}\\widehat{A[H/s]}$, $s$ running through finite generators of $H$, with completion for $(\\pi)$; the ordinary chart ring is that of [def-nagata-blowup-chart-ring]. Define the formal blowup in $L$ similarly. Suppose $u,v:A\\to B$ are continuous homomorphisms with $u((\\pi))B=v((\\pi))B=(\\rho)$, $u(H)B=v(H)B=L$, and $u(a)-v(a)\\in\\rho^mB$ for all $a\\in A$, where $m>e$. The induced maps from the formal blowup of $B$ in $L$ to that of $A$ in $H$ agree on their reductions modulo $\\rho^{m-e}$ (equivalently modulo the extended distinguished ideal to this power). In particular, any continuous automorphism of $A$ preserving $H$ and congruent to the identity modulo $\\pi^m$ acts trivially on the blown-up space modulo $\\pi^{m-e}$. The assertion holds on charts of Noetherian adic formal schemes, defined as spaces covered by the displayed formal spectra with inverse-limit structure sheaves. Iterating through a fixed finite tower of supported formal blowups loses at most the sum of the exponents of the successive center ideals, whenever the two induced maps identify the successive centers. Empty centers have exponent zero. The bounds are unchanged by flat pullback [def-weil-flat-morphism].",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Chart computation in the proof of Lemma 3.3.3, printed p.23, generalized from an automorphism to two maps; finite iteration and flat pullback of the same calculation; read online 2026-10-24, archival copy WANTED. No Stacks tag states this specialized assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-flat-morphism",
+  "def-per-formal-blowup-congruence-data"
+ ],
+ "proof": [
+  {
+   "text": "Put k=m-e>0 and choose generators s_i of H. For w=u or v, the elements w(s_i) generate L. On ordinary chart rings the localization map A_{s_i} -> B_{w(s_i)} restricts to A[H/s_i] -> B[L/w(s_i)], sending a/s_i to w(a)/w(s_i), by [def-nagata-strict-chart-to-extended-blowup-chart]. The maps are continuous because w((pi))B=(rho), and extend to completions by applying their compatible maps on every power quotient and taking compatible sequences [def-weil-pbc-adic-completion, lem-weil-pbc-adic-completion-mod-power]. The completed charts cover by [lem-per-formal-open-blowup-base-change]. These chart maps glue: on the intersection of target charts s_i,s_j the ratio s_j/s_i is inverted, and both restrictions send it to w(s_j)/w(s_i); the base coefficients and all fractions have the same images. Thus they define the claimed two induced formal morphisms. The localization operation and uniqueness here are [lem-weil-pbc-localization-away-universal-property].",
+   "uses": [
+    "def-nagata-strict-chart-to-extended-blowup-chart",
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-per-formal-open-blowup-base-change",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 3.3.3, printed p.23, chart computation; two-map extension written out by Q84. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix s=s_i, t=u(s), t'=v(s). Write t'-t=rho^m b with b in B. In C_0=B[L/t] put q=rho^e/t, which belongs to C_0 because rho^e is in L. The ratio r=t'/t is therefore 1+rho^k bq. In the rho-adic completed chart C it is a unit by [lem-weil-pbc-adic-complete-jacobson-radical]. The overlap of the ordinary t and t' charts is obtained by inverting r in C_0 and t/t' in B[L/t']: these localizations are the same ring, since a/t'=(a/t)r^{-1} and a/t=(a/t')(t/t')^{-1} for a in L. This follows inside B_{tt'} from the subalgebra definition [def-nagata-blowup-chart-ring] and the localization universal property. By [lem-per-formal-affine-principal-refinement] completion gives the formal principal overlap. Since r is a unit, it is the whole t chart. Interchanging u and v gives the whole t' chart. Hence these two formal open subsets of the blowup of B coincide. This proves chart preservation, not merely a comparison on an unspecified intersection.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-per-formal-affine-principal-refinement",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 3.3.3, printed p.23, chart computation; two-map extension written out by Q84. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "On this common formal chart, for a in H choose c_a,c_s in B with u(a)-v(a)=rho^m c_a and u(s)-v(s)=rho^m c_s. Direct subtraction in the overlap ring gives\nu(a)/u(s)-v(a)/v(s)=rho^k (rho^e/u(s)) (c_a-c_s v(a)/v(s)).\nEvery factor on the right belongs to the common completed chart: rho^e belongs to L and v(a)/v(s) is a chart generator on the identified v chart. Thus the difference is in rho^k C. For a base coefficient a in A the difference is in rho^m B, hence in rho^k C. By [def-nagata-blowup-chart-ring], coefficients and the fractions a/s generate the ordinary source chart, so its two maps to C/rho^k C agree: sums and products of equal residue classes remain equal. By [lem-weil-pbc-adic-completion-mod-power] every element of its pi-adic completion has, modulo pi^k, an ordinary representative. Both maps carry pi^k into rho^k C, so their maps on the completed source chart also agree modulo rho^k. No cancellation of rho, pi or a potentially zero-divisor generator is used.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 3.3.3, printed p.23, chart computation; two-map extension written out by Q84. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "For each i, Step 2 identifies the u(s_i) and v(s_i) formal opens of the domain, and both morphisms take that common open into the same s_i chart of the codomain. Step 3 gives equal morphisms on its rho^k reduction. The reductions of these opens cover the reduced domain, by the chart cover of [lem-per-formal-open-blowup-base-change]. The equalities agree on overlaps since they are restrictions of the same two morphisms. A map of locally ringed spaces is a continuous map with a sheaf map, and these data are equal if equal on an open cover: point images agree locally and sections agree by the sheaf uniqueness axiom. Thus the reduced morphisms are equal. The two extended distinguished ideals both equal (rho), as assumed, so this is also equality modulo the specified distinguished ideal to power k. For the automorphism clause, if e=0 then H=A and the blowup is the identity, so the original congruence suffices. If e>=1, m>=2 and u(pi)=pi(1+pi^{m-1}c); the parenthesis is a unit by [lem-weil-pbc-adic-complete-jacobson-radical]. Thus u((pi))A=(pi), and taking B=A, rho=pi and v=id gives the claim.",
+   "uses": [
+    "lem-per-formal-open-blowup-base-change",
+    "lem-weil-pbc-adic-complete-jacobson-radical"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 3.3.3, printed p.23, chart computation; two-map extension written out by Q84. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "For formal schemes, work on common formal affine neighbourhoods of the two images: congruence modulo a positive power already gives the same map on underlying points, so every point has such a neighbourhood. Restrict further to domain formal affine opens. Sections on principal refinements are completed localizations with their canonical restriction maps [lem-per-formal-affine-principal-refinement]. Consequently the coefficient congruences restrict to these charts, and Steps 1--4 give equal maps modulo the asserted power locally. Equality then glues as in Step 4. The supported formal blowup construction itself commutes with formal open restriction by [lem-per-formal-open-blowup-base-change]. Therefore the affine calculation proves precisely the asserted chartwise formal-scheme version, including non-affine intersections by refining them into formal affines.",
+   "uses": [
+    "lem-per-formal-affine-principal-refinement",
+    "lem-per-formal-open-blowup-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 3.3.3, printed p.23, chart computation; two-map extension written out by Q84. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "For a tower with successive bounds e_1,...,e_N, set E_j=sum_{i=1}^j e_i. The induction claim is equality of the two maps at level j modulo the extended distinguished ideal to power m-E_j, whenever m>E_j. At j=0 this is the hypothesis. If m>E_j, the induction hypothesis at j-1 has positive exponent m-E_{j-1}>e_j. The two maps identify the next center ideals by the tower hypothesis. Apply Steps 1--5 with this exponent to obtain m-E_j. This induction uses no additional regularity lemma: the calculation in Steps 1--3 required only that rho^e be in the center, the equality of distinguished ideals and the completed chart models; it did not use cancellation or regularity of chart rings. For an empty center the ideal is the unit ideal, its blowup is the identity [lem-per-formal-open-blowup-base-change], and one takes e_j=0. Length-zero towers give the original congruence. If m<=E_N there is no positive-precision conclusion; exponent zero means the zero quotient ring, hence an empty reduction and a vacuous equality. This states the exact range of the tower bound without an implicit negative ideal power.",
+   "uses": [
+    "lem-per-formal-open-blowup-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 3.3.3, printed p.23, chart computation; two-map extension written out by Q84. Archival copy WANTED."
+   }
+  },
+  {
+   "text": "For a flat adic pullback with Noetherian formal source and the pulled-back ideal of definition, [lem-per-formal-open-blowup-base-change] identifies each pulled-back formal blowup with the blowup of the extended center, compatibly with successive pullbacks and finite towers. Extending ideals preserves rho^e in L and sends rho^m c to the same product of extended sections; it also preserves w((pi))B=(rho) and w(H)B=L. Thus the same q, r=1+rho^k bq, and displayed fraction difference in Steps 2--3 are their images on the pulled-back charts. All congruences and the induction keep the same exponents. This proves unchanged bounds under flat pullback; it does not assert that an arbitrary ordinary tensor product of complete rings is complete. The formal fibre products and chart rings used are the completed ones in the cited node.",
+   "uses": [
+    "lem-per-formal-open-blowup-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+    "place": "Lemma 3.3.3, printed p.23, chart computation; two-map extension written out by Q84. Archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-strict-chart-to-extended-blowup-chart",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-per-formal-open-blowup-base-change",
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-nagata-blowup-chart-ring",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-per-formal-affine-principal-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Temkin Lemma 3.3.3, p.23, two-map extension, completed-chart overlap calculation and induction written out; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism congruent to identity modulo pi to m induces identity modulo pi to m minus l on a blowup along an ideal containing pi to l",
+   "results": "8 hits: PreTilt.untiltAux_smodEq_untiltFun, Ideal.quotientRangePowQuotSuccInclusionEquiv, PreTilt.exists_smodEq_untiltAux, Ideal.powQuotSuccInclusion_apply_coe, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, AdicCompletion.transitionMap_map_one, Ideal.quotientToQuotientRangePowQuotSucc_mk, PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|admissible.*blow|congr.*blow",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two congruent homomorphisms of adic rings induce congruent maps of admissible blowups after bounded loss of adic precision",
+   "results": "8 hits: AdjoinRoot.mapAlgHom.congr_simp, IsAdicComplete.liftRingHom.congr_simp, UniformSpace.Completion.mapRingHom.congr_simp, IsAdicComplete.StrictMono.liftRingHom.congr_simp, AdicCompletion.lift.congr_simp, IsAdicComplete.algHom_ext, IsAdicComplete.StrictMono.extend.congr_simp, AdicCompletion.liftRingHom.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary smoothness, Hensel roots, affine-limit factorization or adic congruence; none states this bounded-precision singular-pair/tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|congr.*adic|adic.*congr",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lift/extensionality, ordinary localization fractions, formally unramified maps, and perfectoid congruences do not state the supported-blowup estimate",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphism congruent to identity modulo pi power acts on blowup chart algebra of ideal containing pi power",
+   "results": "8 hits: Algebra.FormallyUnramified.ext, AlgEquiv.autCongr_apply, IsLocalRing.ResidueField.mapAut, Ideal.Quotient.exists_algEquiv_fixedPoint_quotient_under, AlgEquiv.autCongr_refl, AlgEquiv.apply_faithfulSMul, Ideal.Quotient.stabilizerHom, Ideal.Quotient.stabilizerHom.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lift/extensionality, ordinary localization fractions, formally unramified maps, and perfectoid congruences do not state the supported-blowup estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lift/extensionality, ordinary localization fractions, formally unramified maps, and perfectoid congruences do not state the supported-blowup estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two adic ring homomorphisms congruent modulo a power induce congruent morphisms on blowups with bounded loss of precision",
+   "results": "8 hits: PreTilt.untiltAux_smodEq_untiltFun, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', IsAdicComplete.mk_comp_liftRingHom, IsAdicComplete.mk_liftRingHom, PreTilt.exists_smodEq_untiltAux, AdicCompletion.factor_eval_liftRingHom, IsAdicComplete.algHom_ext, IsAdicComplete.StrictMono.mk_liftRingHom",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lift/extensionality, ordinary localization fractions, formally unramified maps, and perfectoid congruences do not state the supported-blowup estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Congruence of ring homomorphisms on fractions when denominators divide a fixed power of a non-zero-divisor",
+   "results": "8 hits: RatFunc.liftOn_ofFractionRing_mk, IsLocalization.Away.exists_of_eq, Localization.awayLift_mk, IsLocalization.lift_eq_iff, RatFunc.liftOn_def, RatFunc.liftRingHom_apply_ofFractionRing_mk, RatFunc.map_apply_ofFractionRing_mk, IsFractionRing.lift_mk'",
+   "date": "2026-10-24",
+   "verdict": "no match: completion lift/extensionality, ordinary localization fractions, formally unramified maps, and perfectoid congruences do not state the supported-blowup estimate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-formal-resolution-intrinsic",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical ancestor lem-per-artin-gabber-affine-curve: its Step 3 perverse-duality exchange led, through the retained resolution chain in via, to Temkin Lemma 3.3.3 chart computation (printed p.23), serving lem-per-rig-formal-resolution-intrinsic Step 3. The current blueprint ancestor has no precision-loss assertion; this is a subordinate algebraic tool, not a replacement of the unit route.",
+   "via": [
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-supported-blowup-precision-loss",
+  "worker": "stage1",
+  "summary": "Q84 writes the two-map chart proof, proves coincidence of moved charts using a unit ratio, passes congruence through completion quotients, and handles formal locality, tower induction and flat pullback using existing nodes. No new nodes or statement change.",
+  "blueprint": "Historical subordinate tool of lem-per-artin-gabber-affine-curve via the retained resolution chain; realizes the Temkin Lemma 3.3.3 chart computation required by lem-per-rig-formal-resolution-intrinsic Step 3. Current latest blueprint checked; it states no duplicate precision estimate.",
+  "tool_uses": [
+   {
+    "node": "def-nagata-strict-chart-to-extended-blowup-chart",
+    "why": "Generic explicit localization map between ordinary blowup chart algebras, supplying the two chart maps; no specialized perverse-unit replacement is involved."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-power",
+    "why": "Generic algebraic identification of a completed ring modulo an ideal power with the ordinary quotient, needed to pass congruence to completions."
+   },
+   {
+    "node": "lem-weil-pbc-localization-away-universal-property",
+    "why": "Generic localization existence and uniqueness used for chart maps and overlap identifications."
+   },
+   {
+    "node": "lem-weil-pbc-adic-complete-jacobson-radical",
+    "why": "Generic complete-ring unit criterion applied to 1+rho^(m-e)bq on a formal chart."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-nagata-strict-chart-to-extended-blowup-chart",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-adic-complete-jacobson-radical"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-5d5110f21",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-5d5110f21 (reviewer sub-agent of L); spot-checked: I read the whole Q84 split of lem-per-supported-blowup-precision-loss. It has 7 steps, creates no new nodes, and keeps the statement and stmt_deps identical to the live unsplit node. No repair note exists, so the re-split rule does not apply. Temkin Lemma 3.3.3 is not in literature/, so the WANTED line and proof_origin agent are correct; I checked the argument from first principles. Every cited statement was opened and says what its step takes from it. Step 1: the def-nagata-strict-chart-to-extended-blowup-chart statement gives the A[I/a]->B[IB/f(a)] restriction, w(s_i) generate L, and lem-per-formal-open-blowup-base-change gives the chart cover for any finite generating set. Step 2: r=t'/t=1+rho^k b(rho^e/t) is correct; r is a unit in the complete chart ring by the jacobson-radical node; I checked that the two ordinary overlap localizations coincide inside B_{tt'}, and lem-per-formal-affine-principal-refinement gives the formal principal open. Step 3: I expanded the fraction identity and it is right; completion is handled through the mod-power node. Step 4: the automorphism clause is right: e=0 gives the identity blowup, and for e>=1 u(pi) is pi times a unit. Steps 5-7: the formal-scheme localization, the induction with invariant m-E_j (pi stays a non-zero-divisor on charts, next centers are a hypothesis) and the flat pullback are all sound. Edge cases tested: k[x][[pi]] with H=(pi,x) loses exactly 1 (sharp); principal center; e=0; m<=E_N is vacuous. No duplicate found (rg 'precision' and '3.3.3' in the snapshot DAG). The graph is acyclic and every cited node exists. Tool_uses for generic algebra accepted. The citer rig-formal-resolution-intrinsic step 3 uses the item exactly as stated. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedBlowupPrecisionLoss",
+  "declaration": "AlgebraicGeometry.AdicFormal.supportedBlowup_precision_loss",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedBlowupPrecisionLoss.lean",
+  "statement": "theorem supportedBlowup_precision_loss : (∀ (A B : CommRingCat.{u}) [IsNoetherianRing A] [IsNoetherianRing B] (π : A) (ρ : B) [IsAdicComplete (Ideal.span {π}) A] [IsAdicComplete (Ideal.span {ρ}) B] (H : Ideal A) (L : Ideal B) (e m : ℕ) (u v : A →+* B), π ∈ nonZeroDivisors A → ρ ∈ nonZeroDivisors B → H.FG → L.FG → π ^ e ∈ H → ρ ^ e ∈ L → e < m → @Continuous _ _ (Ideal.span {π}).adicTopology (Ideal.span {ρ}).adicTopology u → @Continuous _ _ (Ideal.span {π}).adicTopology (Ideal.span {ρ}).adicTopology v → (Ideal.span {π}).map u = Ideal.span {ρ} → (Ideal.span {π}).map v = Ideal.span {ρ} → H.map u = L → H.map v = L → (∀ a : A, u a - v a ∈ Ideal.span {ρ} ^ m) → ∃ (f g : completion (affineIdeal B (Ideal.span {ρ})) ⟶ completion (affineIdeal A (Ideal.span {π}))) (bA : affineBlowupSystem A (Ideal.span {π}) H ⟶ completion (affineIdeal A (Ideal.span {π}))) (bB : affineBlowupSystem B (Ideal.span {ρ}) L ⟶ completion (affineIdeal B (Ideal.span {ρ}))) (f' g' : affineBlowupSystem B (Ideal.span {ρ}) L ⟶ affineBlowupSystem A (Ideal.span {π}) H), InducesRingHom (Ideal.span {π}) (Ideal.span {ρ}) u f ∧ InducesRingHom (Ideal.span {π}) (Ideal.span {ρ}) v g ∧ IsAffineBlowupProjection A (Ideal.span {π}) H bA ∧ IsAffineBlowupProjection B (Ideal.span {ρ}) L bB ∧ (∀ x : affineBlowupSystem B (Ideal.span {ρ}) L ⟶ affineBlowupSystem A (Ideal.span {π}) H, x ≫ bA = bB ≫ f ↔ x = f') ∧ (∀ x : affineBlowupSystem B (Ideal.span {ρ}) L ⟶ affineBlowupSystem A (Ideal.span {π}) H, x ≫ bA = bB ≫ g ↔ x = g') ∧ Congruent f' g' (m - e)) ∧ (∀ (F G F' G' : ℕ ⥤ Scheme.{u}) (b : F' ⟶ F) (c : G' ⟶ G) (J : ∀ n : ℕ, (F.obj n).IdealSheafData) (K : ∀ n : ℕ, (G.obj n).IdealSheafData) (f g : G ⟶ F) (e m : ℕ), IsBlowup b J → IsBlowup c K → HasPrincipalRegularCharts F → HasPrincipalRegularCharts G → HasCenterExponent F J e → HasCenterExponent G K e → IsAdicMap f → IsAdicMap g → (∀ n : ℕ, (J n).comap (f.app n) = K n) → (∀ n : ℕ, (J n).comap (g.app n) = K n) → e < m → Congruent f g m → ∃ p : (G' ⟶ F') × (G' ⟶ F'), (∀ q : (G' ⟶ F') × (G' ⟶ F'), (q.1 ≫ b = c ≫ f ∧ q.2 ≫ b = c ≫ g ∧ IsAdicMap q.1 ∧ IsAdicMap q.2) ↔ q = p) ∧ Congruent p.1 p.2 (m - e)) ∧ (∀ (F F' : ℕ ⥤ Scheme.{u}) (b : F' ⟶ F) (J : ∀ n : ℕ, (F.obj n).IdealSheafData) (a : F ≅ F) (e m : ℕ), IsBlowup b J → HasPrincipalRegularCharts F → HasCenterExponent F J e → (∀ n : ℕ, (J n).comap (a.hom.app n) = J n) → e < m → Congruent a.hom (𝟙 F) m → ∃ a' : F' ≅ F', (∀ a'' : F' ≅ F', a''.hom ≫ b = b ≫ a.hom ↔ a'' = a') ∧ Congruent a'.hom (𝟙 F') (m - e)) ∧ (∀ (r : ℕ) (S T : PrecisionTower.{u} r) (f g : PrecisionTowerMap S T) (m : ℕ), S.exponent = T.exponent → Congruent (f.map 0) (g.map 0) m → Congruent (f.map (Fin.last r)) (g.map (Fin.last r)) (m - ∑ i : Fin r, T.exponent i)) ∧ (∀ (r : ℕ) (S T S' T' : PrecisionTower.{u} r) (f g : PrecisionTowerMap S T) (f' g' : PrecisionTowerMap S' T') (hS : PrecisionTowerMap S' S) (hT : PrecisionTowerMap T' T) (m : ℕ), hS.IsFlatPullback → hT.IsFlatPullback → S.exponent = T.exponent → S'.exponent = S.exponent → T'.exponent = T.exponent → (∀ i : Fin (r + 1), f'.map i ≫ hT.map i = hS.map i ≫ f.map i) → (∀ i : Fin (r + 1), g'.map i ≫ hT.map i = hS.map i ≫ g.map i) → (∀ (Z Z' : ℕ ⥤ Scheme.{u}) (h : Z' ⟶ Z) (s : ∀ i : Fin (r + 1), S.level i ⟶ Z) (t : ∀ i : Fin (r + 1), T.level i ⟶ Z) (s' : ∀ i : Fin (r + 1), S'.level i ⟶ Z') (t' : ∀ i : Fin (r + 1), T'.level i ⟶ Z'), IsAdicMap h → (∀ n : ℕ, Flat (h.app n)) → (∀ i : Fin (r + 1), f.map i ≫ t i = s i ∧ g.map i ≫ t i = s i) → (∀ (i : Fin (r + 1)) (n : ℕ), IsPullback ((hS.map i).app n) ((s' i).app n) ((s i).app n) (h.app n)) → (∀ (i : Fin (r + 1)) (n : ℕ), IsPullback ((hT.map i).app n) ((t' i).app n) ((t i).app n) (h.app n)) → (∀ i : Fin (r + 1), f'.map i ≫ t' i = s' i ∧ g'.map i ≫ t' i = s' i) → Congruent (f.map 0) (g.map 0) m → Congruent (f'.map (Fin.last r)) (g'.map (Fin.last r)) (m - ∑ i : Fin r, T.exponent i)))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Second reader (cc review, 2026-10-24): conjuncts 1-3 now state that the induced blowup maps are the unique lifts over the base maps (iff form) and that these lifts are congruent; the delivered ∃ / ∃!-of-conjunction only asserted that some congruent lift exists, and uniqueness of lifts through a formal blowup is content (blowup universal property).",
+  "fixed_by": "NT-stage2-cc-babccf0e4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-babccf0e4",
+  "group": "Q20",
+  "result": "fix",
+  "note": "Read item (only lean + new stmt_dep vs side-live), all 5 stmt_deps, NoetherianAdicFormalSystem owners, Mathlib IdealSheafData.comap (= extended ideal), both delivered modules, report (Worker report + Second reading by Q20). All hypotheses present and none stronger; formal blowup = completion of the ordinary blowup; base maps/projections pinned through mono closed immersions; Congruent (m-e) = agreement modulo rho^(m-e); formal, automorphism, tower (r=0, nat-sub vacuous) and flat-pullback (common flat adic base change) clauses OK; single universe forced by Scheme morphisms. New def node is real, with docstrings, and no duplicate in the AdicFormal model. H3 finding: conj 1 (plain exists f',g') and conj 2/3 (exists-unique of lift AND Congruent) only asserted that some congruent lift exists; lift uniqueness (blowup universal property) is content. FIX: iff-form uniqueness of each lift plus Congruent of that lift in conj 1-3; lean-record gives the verbatim statement; no stmt_deps/declarations change. nt_compile --json of the def module + fixed item: exit 0, no errors."
+ }
+}

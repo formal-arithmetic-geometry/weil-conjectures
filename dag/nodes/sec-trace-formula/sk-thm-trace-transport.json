@@ -252,7 +252,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-trace-formula",
  "unit": "sk-thm-trace-transport",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.hasProd_inv_alternatingCharpolyRevProd"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.hasProd_inv_alternatingCharpolyRevProd"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-thm-trace-transport",
@@ -287,5 +302,49 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-77c9156eb (reviewer sub-agent of L); spot-checked: FIX with one small repair; I read the whole delivery and no new nodes are proposed. I compared the item with blueprint main-20261015 _section.md and its Steps 1-6, and read the statements of all 18 cited nodes plus the definitions the hypotheses depend on (etale-origin witness, finite-torsion constructibility, finite-Tor amplitude, admissibility and the two theorems behind it). The statement is not weakened. The repaired references are correct: def-trf-adic-system replaces sk-prop-trace-adic(ii) and thm-trf-grothendieck-lefschetz-finite-ring replaces sk-thm-trace-formula. Making the integral trace the perfect-complex trace of sk-d-trace and the field trace an alternating sum on cohomology clarifies the blueprint's own wording; the torsion complex [O_E -varpi-> O_E] has identity trace 0 and no module-trace reading. Allowing general field-stage Weil isomorphisms generalizes the statement, and diag(1,l) on E^2 shows the case is needed. Checks on Spec F_{q^2}, on the empty scheme and K=0, and on shifts all agree. Steps 1-8 check against the cited statements. Lattice normalization meets the hypotheses of def-weil-pbc-adic-coefficient-datum; lem-sf-proetale-constructible-origin(ii) gives the origin witness; Nagata applies over F_q; def-trf-admissibility states that every such morphism is admissible. Step 4 is a complete argument through prop-trf-adic-coefficient-morphism-systems(4), since O_E is separated. Steps 5-7 use the unit's existing sub-theorems with every hypothesis met, and Step 8 is elementary. Nothing cited depends on the item, everything is in the unit route, and the unit record changes only its realized fields. I accept the declared tool_uses: lem-sf-proetale-constructible-origin, thm-nagata-compactification and thm-trf-frobenius-fixed-points. Fault repaired: Step 1 proved the finite-Tor bound only at stalks, but def-weil-finite-tor-amplitude requires it for every sheaf M. The fix file restates the argument for sheaves and adds def-weil-finite-tor-amplitude to Step 1 uses and to proof_deps; this creates no cycle. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "A closed point $x\\in|X_0|$ of degree $d$ over $\\mathbf F_q$\ncorresponds to a Frobenius orbit of $d$ geometric points, and its\nlocal operator is the Frobenius going once around this orbit.\n\nIn [sk-thm-tf-uniform-formula], take\n$\\Lambda=\\Ql,E$ or $\\overline{\\mathbf Q}_\\ell$. For each closed\npoint $x\\in|X_0|$, let $d_x=[\\kappa(x):\\mathbf F_q]$ be its degree,\nchoose one of the $d_x$ points $y\\in X_0(\\mathbf F_{q^{d_x}})$ lying\nover $x$, write $\\bar x=\\bar y$ for the corresponding geometric point,\nand let $\\operatorname{Frob}_x=\\operatorname{Frob}_{y,d_x}$ be its\nlocal operator on $K_{\\bar x}$. Another choice of $y$ replaces\n$\\operatorname{Frob}_x$ by a conjugate. Define\n\n$$\n L(X_0,K,T)\n  :=\\prod_{x\\in|X_0|}\n      \\det\\bigl(1-T^{d_x}\\operatorname{Frob}_x\\mid K_{\\bar x}\\bigr)^{-1}.\n \\tag{1}\n$$\n\nFor every $n$ only finitely many factors differ from $1$ modulo $T^n$,\nso the product converges $T$-adically in $1+T\\Lambda[[T]]$, and\n\n$$\n \\boxed{\\quad\n L(X_0,K,T)\n   =\\prod_i\\det\\bigl(1-T\\operatorname{Frob}_{X,K}\\mid H_c^i(X_{\\mathrm{pro\\acute et}},K)\\bigr)^{(-1)^{i+1}}.\n \\quad}\n \\tag{2}\n$$\n\nIn particular $L(X_0,K,T)$ is the expansion at zero of a rational\nfunction in $\\Lambda(T)$ with value $1$ at zero. If $X_0$ is proper,\n$H_c^i$ can be replaced by $H^i$.\n\n*Complement.*\n\n1. **(i)** If $\\dim X_0\\le1$ and $K$ is a sheaf placed in degree zero, then\n   $H_c^i(X,K)=0$ for $i\\notin\\{0,1,2\\}$, so the product in (2) runs over\n   $0\\le i\\le2$.\n2. **(ii)** For $\\Lambda=\\overline{\\mathbf Q}_\\ell$, any field embedding\n   $\\iota:\\overline{\\mathbf Q}_\\ell\\to\\mathbf C$, applied coefficientwise,\n   carries the identity (2) to the corresponding identity in $\\mathbf C[[T]]$.",
+  "proof": [
+   {
+    "text": "Since $X_0$ is of finite type over a finite field, it has only finitely\nmany closed points of degree at most any given bound. The factor at\n$x$ in (1) is $1$ modulo $T^{d_x}$, which proves\nconvergence.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The proof compares the two sides through their logarithms; for this\nthe point side of [sk-thm-tf-uniform-formula] is rewritten in\nterms of closed points. A closed point of degree $d$ has\nexactly $d$ points over $\\mathbf F_{q^m}$ when $d\\mid m$, and none\notherwise. These points form one Frobenius orbit, and the Weil\nstructure gives isomorphisms $a_0,\\ldots,a_{d_x-1}$ between the\nstalks at consecutive points of the orbit. The local operator at a\npoint of the orbit is the composite of these isomorphisms taken once\naround the orbit, starting at that point. Moving the starting point\ncyclically conjugates this composite by one of the $a_i$; hence the\noperators at the $d_x$ points are conjugate. Iterating the Weil\nstructure shows, in the same way, that for $d_x\\mid m$ the operator\n$\\operatorname{Frob}_{y,m}$ at each of the $d_x$ points $y\\in X_0(\\mathbf F_{q^m})$ over\n$x$ is conjugate to $\\operatorname{Frob}_x^{m/d_x}$. Since traces are invariant under conjugation,\nthe identity (1) of [sk-thm-tf-uniform-formula] reads\n\n$$\n \\operatorname{tr}_{\\Lambda}(\\operatorname{Frob}_{X,K}^m\\mid R\\Gamma_c(X_{\\mathrm{pro\\acute et}},K))\n  =\\sum_{\\substack{x\\in|X_0|\\\\d_x\\mid m}}d_x\\,\n      \\operatorname{tr}_{\\Lambda}\n         (\\operatorname{Frob}_x^{m/d_x}\\mid K_{\\bar x}).\n \\tag{3}\n$$\n\nMultiply (3) by $T^m/m$ and sum over\n$m\\geq1$. By [sk-prop-logdet], the left side becomes\nthe logarithm of the right side of (2). On the\npoint side, substitute $m=rd_x$; the multiplicity $d_x$ cancels the\nfactor $d_x$ in $m$, and [sk-prop-logdet] applied to\n$\\operatorname{Frob}_x$ on $K_{\\bar x}$, with $T^{d_x}$ in place of $T$, gives\n\n$$\n \\sum_{x\\in|X_0|}\\sum_{r\\geq1}\n    \\operatorname{tr}_{\\Lambda}(\\operatorname{Frob}_x^r\\mid K_{\\bar x})\n       \\frac{T^{rd_x}}{r}\n  =\\log L(X_0,K,T).\n$$",
+    "uses": [
+     "sk-thm-tf-uniform-formula",
+     "sk-prop-logdet"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Each coefficient of $T$ receives only finitely many contributions, so\nthe sums may be regrouped, and exponentiating proves\n(2). The cohomological product has finitely\nmany factors, each a polynomial or the reciprocal of one, with value\n$1$ at zero; this proves rationality. If $X_0$ is proper, compact and\nordinary cohomology agree.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Complement.* (i) The groups $H_c^i(X,K)$ are finite dimensional and vanish\noutside a bounded range by [sk-thm-sf-ctf-stability]. For a curve and a\ncoefficient sheaf in degree zero, compactification by\n[sk-thm-nagata-compactification], extension by zero and [lem-sc-arbitrary-curve-cd] give the\nrange $0\\le i\\le2$. (ii) A field embedding $\\iota$ is a ring homomorphism, so\nit carries the identity in $\\overline{\\mathbf Q}_\\ell[[T]]$ coefficientwise to\none in $\\mathbf C[[T]]$.",
+    "uses": [
+     "sk-thm-nagata-compactification",
+     "lem-sc-arbitrary-curve-cd"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The detailed form of this argument, including the complement, is\n[thm-trf-l-function-euler-product].",
+    "uses": [
+     "thm-trf-l-function-euler-product"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

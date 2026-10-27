@@ -17,13 +17,12 @@
  ],
  "proof": [
   {
-   "text": "Let $U\\subseteq T\\prime$ be an affine open, let $V_U\\subseteq V$ be its inverse image (the open subscheme representing $V\\times_{T\\prime}U$ [def-pc-fibre-product]), let $K\\subseteq V_U$ be a quasi-compact open subscheme, and let $h:K\\to U$ be the restricted morphism. (a) $h$ is separated [def-weil-proper-morphism]: since $U\\to T\\prime$ is an open immersion, $K\\times_UK=K\\times_{T\\prime}K$ is the open subscheme of $V\\times_{T\\prime}V$ over $K\\times K$, and the diagonal of $V\\to T\\prime$, a closed immersion, has inverse image $K$ over it; the restriction of a closed immersion over an open of its target is a closed immersion, and it is the diagonal of $h$. (b) $h$ is locally quasi-finite by [lem-weil-pbc-lqf-restriction-to-opens] applied to $V\\to T\\prime$, the open $K$ and the open $U$. (c) $h$ is quasi-compact: $K$ is quasi-compact and $U$ is affine, hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-qcqs-morphism-permanence](1) applies. (d) $h$ is locally of finite type by [lem-weil-pbc-lqf-locally-finite-type] and (b). By [lemma-nagata-quasi-affine-morphism-of-quasi-finite], whose four hypotheses are (a)–(d), $h:K\\to U$ is quasi-affine [def-nagata-quasi-affine-morphism]. Thus $V\\to T\\prime$ has the property required in [lem-a1-ind-quasi-affine-fpqc-effective-descent]: for every affine open of $T\\prime$, every quasi-compact open of its inverse image is quasi-affine over it.",
+   "text": "Use the comparison theorem Scheme.Hom.isLocallyQuasiFinite_iff of [pqf-def-quasifinite] to extract Mathlib local quasi-finiteness and local finite type of V -> T'. Given an affine open U of T' and a quasi-compact open K of the scheme pullback V times_{T'} U, consider h = K.ι followed by the second projection to U. Separatedness of h follows from base-change stability and composition with the open immersion K.ι [def-weil-proper-morphism]. Mathlib local quasi-finiteness and local finite type are preserved by this base change and composition. The hypothesis on K gives CompactSpace K.toScheme. The affine scheme U is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-qcqs-morphism-permanence](1), implemented by quasiCompact_of_compactSpace, gives QuasiCompact h. Apply [lemma-nagata-quasi-affine-morphism-of-quasi-finite], IsQuasiAffineHom.of_locallyQuasiFinite, to these four properties. Thus h is quasi-affine [def-nagata-quasi-affine-morphism], which proves the precise quasi-compact-open condition required for ind-quasi-affine descent. No quasi-compactness of V -> T' or separatedness of either base was used.",
    "uses": [
+    "pqf-def-quasifinite",
     "def-weil-proper-morphism",
-    "lem-weil-pbc-lqf-restriction-to-opens",
     "lem-weil-pbc-affine-scheme-qcqs",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-lqf-locally-finite-type",
     "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
     "def-nagata-quasi-affine-morphism"
    ],
@@ -46,11 +45,10 @@
   }
  ],
  "proof_deps": [
+  "pqf-def-quasifinite",
   "def-weil-proper-morphism",
-  "lem-weil-pbc-lqf-restriction-to-opens",
   "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-lqf-locally-finite-type",
   "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
   "def-nagata-quasi-affine-morphism",
   "lem-a1-ind-quasi-affine-fpqc-effective-descent"
@@ -58,7 +56,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-groupoids.tex",
-  "place": "Tag 0APK, lemma-ind-quasi-affine, specialized to a singleton fpqc cover; Tag 0AP9 (via Tag 02LR) supplies ind-quasi-affineness of separated locally quasi-finite morphisms"
+  "place": "Tag 0APK, lemma-ind-quasi-affine, singleton fpqc specialization; Tag 0AP9 via Tag 02LR supplies ind-quasi-affineness. Implemented using the Stacks/Mathlib local-quasi-finiteness comparison and Mathlib base-change/composition instances."
  },
  "mathlib_searches": [
   {
@@ -148,9 +146,7 @@
  },
  "tool_uses": [
   "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
-  "lem-weil-pbc-lqf-restriction-to-opens",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-lqf-locally-finite-type",
   "lem-weil-pbc-affine-scheme-qcqs"
  ],
  "reviewed": {
@@ -179,5 +175,26 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T081934-L-2105265",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

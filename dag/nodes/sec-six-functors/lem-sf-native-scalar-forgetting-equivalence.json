@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-native-scalar-forgetting-equivalence",
+ "kind": "statement",
+ "title": "Ambient scalar forgetting for native module sheaves",
+ "statement": "Let ell be a prime and T any scheme in the project coefficient universes. Let B_T be the native locally finite continuous coefficient algebra in sheaves of vector spaces over the algebraic closure Omega of Q_ell [def-sf-native-weil-derived-framework]. Then the existing functor AdicSheaf.forgetAb from B_T-module objects in Omega-vector-space sheaves to module objects over the underlying abelian ring sheaf is an equivalence. Its underlying abelian sheaf functor is the ordinary scalar-forgetting functor.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CW, 03CY and 03EK; agent internal-action and adjunction comparison, native module comparison step 2"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-module-objects",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The unit of the native algebra gives a central ring map Omega to each reconstructed section ring. Ring multiplication with these constants is the original scalar multiplication; both left and right identities follow from the native unit diagrams. Restrict the action of an abelian internal module to these constants. Its section modules form a vector-space presheaf: restrictions are scalar linear by the naturality of the algebra unit. Its underlying abelian presheaf is already a sheaf.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original ring action is bilinear over these scalars. On elementary tensors define b tensor x to be b acting on x. Centrality and module associativity prove the balancing relation. Tensor universal properties give the presheaf action and its unit and associativity; monoidal sheafification lifts it to a native module. The sheafification unit is invertible because the underlying presheaf is a sheaf, and the module adjunction unit shows it intertwines the original abelian action.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Any abelian module map commutes with constant scalar actions, so is scalar linear. Testing the action diagram on elementary tensors proves fullness; faithfulness follows since underlying maps do not change. The constructed native module and invertible unit prove essential surjectivity, hence equivalence. The zero object and empty site are covered by the same formulas.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-module-objects",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CW, 03CY and 03EK; agent internal-action and adjunction comparison, native module comparison step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Modules over an algebra in sheaves of vector spaces equal modules over its underlying ring sheaf",
+   "results": "SheafOfModules, SheafOfModules.toSheaf and Scheme.Modules describe sectionwise modules; none compares ambient scalar-enriched internal modules.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of algebras in vector spaces are equivalent to modules over its underlying sheaf of abelian groups",
+   "results": "SheafOfModules.toSheaf, forget, unit and forgetToSheafModuleCat. No internal scalar-forgetting equivalence or normalized coefficient restriction comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*IsEquivalence|forget.*[Ee]quivalence.*[Mm]od",
+   "results": "Only ModuleCat Z to AddCommGrpCat equivalence in Mathlib/Algebra/Category/Grp/Injective.lean:52. Project mapMod and change-of-scalars APIs supply component constructions, not these comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeModuleConstructibilityComparison",
+  "date": "2026-10-25",
+  "group": "Z7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom realization paragraph of lem-fix-weil-operations; native module comparison step 2",
+   "via": [
+    "lem-sf-weil-verdier-module-constructibility-comparison",
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeScalarForgetting",
+  "file": "lean/Sheaf/Paper/NativeScalarForgetting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeScalarForgetting_isEquivalence",
+  "statement": "theorem nativeScalarForgetting_isEquivalence (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :\n    (AdicSheaf.forgetAb ℓ T).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6325a",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T043435-L-1768238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6325a",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T043435-L-1768238",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 new modules/nodes vs clone 939ea7ddad9: statements/bodies unchanged except the main sorry→proof; unit realized empty so CartesianCoefficients drop bypasses nothing; axioms of the main theorem clean; 4 direct importers compile against the delivered modules"
+ }
+}

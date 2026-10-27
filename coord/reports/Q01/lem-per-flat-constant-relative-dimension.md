@@ -1,0 +1,73 @@
+## Worker report
+
+1. Files written: the item `lem-per-flat-constant-relative-dimension` (statement unchanged, status split), `lem-per-flat-dimension-surjective-neighbourhoods` (statement, unsplit, no complete Mathlib match), and `lem-per-surjective-flat-global-dimension` (statement, unsplit, no complete Mathlib match). Also citations.json and this report. Two new nodes, zero Mathlib leaves. No Lean files written and no compiler invoked.
+2. Attachments: none. The project declaration `AlgebraicGeometry.topologicalKrullDimAt_eq_add_of_flat_constantRelativeDimension`, Sheaf/AlgebraicGeometry/FlatConstantRelativeDimension.lean:70, ends in sorry. Searches of WeilConjectures found no exact finished theorem for the item or the proposed lemmas.
+3. WANTED: none. All required sources are available locally.
+4. The released repair order correctly identified excessive work in the parent. The retained sandbox had only dispatcher markers, so I copied the current repository version, read its full proof and review, and repaired that returned version. The item statement, statement dependencies, source route and maintainer metadata were preserved. The two new nodes are independent intermediate results, not clauses of the local dimension conclusion. Their proofs remain future parallel work, as explicitly ordered.
+5. Nothing mathematically unfinished in the assembly; the new nodes are deliberately unsplit. Delivery validation is recorded below after the required dry run.
+
+## Repair and preservation of the arguments
+
+The first new node owns old steps 1-2, including both the simultaneous dimension-minimizing construction and preservation of the scheme hypotheses. The second owns old steps 3-4, including nonempty fibre dimensions and the pointwise Noetherian local-ring calculation followed by suprema. These are two substantial separate arguments, not the entire original theorem moved into one child. Old step 5 is the elementary final substitution retained in the parent. The global lemma assumes a nonempty target to avoid the empty-supremum convention; its use is valid because the selected target contains y. Neither new lemma asserts the parent's local dimension formula.
+
+For the neighbourhood lemma, choose U0 and V0 attaining the local dimensions; openness follows from local finite type over a locally Noetherian base giving local finite presentation and flat-lfp openness. Put U1=U0 intersect f^{-1}(V0) and V1=f(U1). The minimum and open-subspace monotonicity give equality of their global dimensions with the original local dimensions. The image V1 is open, contains y, and the restriction is surjective. The local rings of open subschemes are unchanged, so flatness and local Noetherianity persist. The principal-open localization argument for local finite type, and open-subspace invariance of each fibre's local dimension, are retained verbatim below. This establishes precisely the new first node's output, without assuming a local dimension addition formula.
+
+For the global lemma, surjectivity makes every fibre nonempty. The existing supremum-of-local-topological-dimensions theorem gives dim X_b=d from the fibre hypothesis. At a over b, use R=O_{Y,b}, S=O_{X,a}, and the maximal ideal of S (not an undefined prime corresponding to a inside its own stalk). Its contraction is the maximal ideal of R because the stalk map is local. The flat height formula and fibre-stalk quotient give dim S=dim R+dim O_{X_b,a}. Grouping the supremum over a by b gives, explicitly,
+
+$$
+\dim X=\sup_{b\in Y}\sup_{a\in X_b}(\dim\mathcal O_{Y,b}+\dim\mathcal O_{X_b,a})=\sup_{b\in Y}(\dim\mathcal O_{Y,b}+d)=\dim Y+d.
+$$
+
+Each local ring has finite dimension since it is Noetherian local, and the fibre supremum is the fixed finite d. Addition by a finite nonnegative number commutes with these nonempty suprema, including an unbounded supremum equal to infinity. This expands rather than suppresses the original supremum calculation. No equality between local topological dimension and local-ring dimension at a fixed point is claimed.
+
+### Original argument, retained verbatim as handoff material
+
+Old step 1 (assigned to the neighbourhood lemma):
+
+Choose open neighbourhoods $U_0\ni x$ and $V_0\ni y$ with $\dim U_0=\dim_x X$ and $\dim V_0=\dim_y Y$, using the minimum in [def-kun-topological-dimension-at-point]. Since $Y$ is locally Noetherian and $f$ is locally of finite type, [pqf-lem-lft-fp-locnoeth] makes $f$ locally of finite presentation, so [lem-weil-pbc-flat-lfp-open] makes $f$ open. Put $U_1=U_0\cap f^{-1}(V_0)$, an open neighbourhood of $x$ contained in $U_0$. By [lem-weil-pbc-open-subspace-dimension-monotone] $\dim U_1\le\dim U_0=\dim_xX$, and the minimum in [def-kun-topological-dimension-at-point] gives $\dim U_1\ge\dim_xX$; hence $\dim U_1=\dim_xX$. Its image $V_1=f(U_1)$ is open because $f$ is open, contains $y$, and is contained in $V_0$; the same two inequalities give $\dim V_1=\dim_yY$. Replacing $X,Y,f$ by $U_1,V_1,h:=f|_{U_1}$, we may assume $h$ is surjective and $\dim X=\dim_xX$, $\dim Y=\dim_yY$.
+
+Uses: def-kun-topological-dimension-at-point, pqf-lem-lft-fp-locnoeth, lem-weil-pbc-flat-lfp-open, lem-weil-pbc-open-subspace-dimension-monotone
+
+Old step 2 (assigned to the neighbourhood lemma):
+
+The restricted schemes are open subschemes, so they remain locally Noetherian by [pqf-def-locnoeth]. Flatness restricts to $h$ by [def-weil-flat-morphism], since the local rings of the open subschemes $U_1$, $V_1$ are those of $X$, $Y$. For local finite type, let $a\in U_1$; by [lem-weil-pbc-lft-pointwise-criterion] there are affine opens $U\ni a$ of $X$ and $V$ of $Y$ with $f(U)\subseteq V$ and $\mathcal O_X(U)$ a finitely generated $\mathcal O_Y(V)$-algebra. Choose $g\in\mathcal O_Y(V)$ with $f(a)\in D(g)\subseteq V\cap V_1$ and then $s\in\mathcal O_X(U)$ with $a\in D(s)\subseteq U\cap U_1\cap f^{-1}(D(g))$; then $\mathcal O_X(U)_s$ is an $\mathcal O_Y(V)_g$-algebra generated by the generators of $\mathcal O_X(U)$ and $1/s$, so the same criterion, applied to the affine opens $D(s)\subseteq U_1$ and $D(g)\subseteq V_1$, makes $h$ locally of finite type [def-weil-finite-type-morphism]. For $b\in Y$, [def-pc-scheme-fibre] identifies the underlying space of the fibre $X_b$ with $h^{-1}(b)$; therefore each fibre of $h$ is an open subspace of the corresponding original fibre. By [lem-weil-pbc-dimension-at-point-open-subspace], every point $a\in X_b$ still has $\dim_a(X_b)=d$. Thus the hypotheses on the fibres are preserved by the replacement.
+
+Uses: pqf-def-locnoeth, def-weil-flat-morphism, def-weil-finite-type-morphism, def-pc-scheme-fibre, lem-weil-pbc-dimension-at-point-open-subspace, lem-weil-pbc-lft-pointwise-criterion
+
+Old step 3 (assigned to the global lemma):
+
+For every $b\in Y$, surjectivity makes $X_b$ nonempty. Every point of $X_b$ has local topological dimension $d$ by Step 2, so [lem-weil-pbc-dimension-supremum-local-dimensions] gives $\dim X_b=d$. (There are no empty fibres after the surjective replacement.)
+
+Uses: lem-weil-pbc-dimension-supremum-local-dimensions
+
+Old step 4 (assigned to the global lemma):
+
+Fix $a\in X$, put $b=h(a)$, and write $R=\mathcal O_{Y,b}$ and $S=\mathcal O_{X,a}$. These are Noetherian local rings because $X$ and $Y$ are locally Noetherian. The stalk map $R\to S$ is flat by [def-weil-flat-morphism]. Let $\mathfrak Q$ be the prime of $S$ corresponding to $a$ and $\mathfrak p$ its contraction. The flat local dimension formula [lem-weil-pbc-flat-height-formula], together with the fibre-stalk identification [lem-sbc-scheme-fibre-stalk-quotient], gives $\dim\mathcal O_{X,a}=\dim\mathcal O_{Y,b}+\dim\mathcal O_{X_b,a}$. Now apply [lem-pc-scheme-dimension-local-rings] to $X$, $Y$, and every fibre $X_b$. Taking suprema over $a$ and grouping points by $b=h(a)$ yields $\dim X=\dim Y+d$, because Step 3 gives $\dim X_b=d$ for every $b$; the supremum manipulation is elementary and remains valid in the extended dimensions, with $+\infty+d=+\infty$.
+
+Uses: def-weil-flat-morphism, lem-weil-pbc-flat-height-formula, lem-sbc-scheme-fibre-stalk-quotient, lem-pc-scheme-dimension-local-rings
+
+Old step 5 (assigned to parent final assembly):
+
+Finally, the open-subspace equality [lem-weil-pbc-dimension-at-point-open-subspace] gives $\dim_xX=\dim_x(U_1)=\dim U_1$ and $\dim_yY=\dim_y(V_1)=\dim V_1$. Substituting the equality from Step 4 proves $\dim_xX=\dim_yY+d$. The argument includes $d=0$, the identity morphism, empty schemes (the assertion is vacuous), and infinite base dimension; no smoothness, surjectivity, separatedness, or global finite-type assumption was introduced.
+
+Uses: lem-weil-pbc-dimension-at-point-open-subspace
+
+## Not duplicates
+
+lem-per-flat-dimension-surjective-neighbourhoods vs lem-per-flat-constant-relative-dimension: both cite 0AFE, but the new node constructs dimension-attaining surjective open restrictions and preserves all hypotheses; it states no dimension-addition identity.
+lem-per-surjective-flat-global-dimension vs lem-per-flat-constant-relative-dimension: both cite 0AFE, but the new node computes global dimensions under surjectivity and nonempty target; it does not give the local dimension formula at any chosen point.
+lem-per-flat-dimension-surjective-neighbourhoods vs lem-weil-pbc-principal-neighborhood-dimension: the existing statement concerns one principal open in one affine spectrum, without a morphism, a simultaneous target neighbourhood, surjectivity or preservation of fibre dimensions.
+
+The 0AFE source-tag search found only the item (the smooth local dimension node mentions 0AFE in its proof, but its statement is the distinct smooth pointwise-fibre formula sourced to 0AFF). The two new source records carry only 0AFE, the exact source proof paragraphs they extract. Whole-DAG searches by surjectivity, flatness, constant dimension and neighbourhood minimization, and blueprint_refs searches for surjective flat, dimension neighbourhood, dimension-minimizing, constant fibre, relative dimension and 0AFE found no existing statement that subsumes either construction. Search hits about finite fibre length, smooth pullback, purity, affine basic opens or flat ring dimensions do not state these results. The nearest blueprint ancestor is lem-per-smooth-pullback-t-exact and both nodes have the full intervening via chain.
+
+## Review by Q01
+
+I read the source statement and entire proof of Stacks 0AFE (morphisms.tex, lemma-rel-dimension-dimension), together with its first-paragraph openness inputs 01TX and 01UA, the relative-dimension definition in the same section, and the actual statements and proofs of 00ON in algebra.tex, 04MU in properties.tex, 0B7I in topology.tex, and 0HA1 in schemes.tex. I compared the current chapter and unit with the smooth-pullback blueprint ancestor. This keeps the existing support-dimension route, with no SGA source. The parent still states exactly its returned statement. The first child extracts the first paragraph of 0AFE, including the detailed restriction checks; the second child extracts its second paragraph, with the earlier explicit nonempty-fibre step. All old arguments remain above as a handoff; no proof steps were put into the unsplit child JSON files.
+
+For parent step 1, I read the entire new neighbourhood statement: its hypotheses are exactly the parent hypotheses, and it explicitly supplies U, V, their attained global dimensions, flatness, locally finite type, locally Noetherianity, surjectivity and the fibre condition. The citation does not rely on an unstated construction inside a proof. For step 2, I read the entire global statement: U and V meet all its hypotheses from step 1, and V is nonempty because it contains y. It supplies exactly dim U=dim V+d. For step 3, I opened lem-weil-pbc-dimension-at-point-open-subspace and checked that its statement is precisely dim_y(O)=dim_y(Y) for an open subspace, so both applications are valid. The remaining operation is substitution of equalities, hence elementary. citations.json quotes these actual statements verbatim, one for each step citation.
+
+I also opened every old cited node. The flat-lfp openness statement supplies openness, not a dimension formula; pqf-lem-lft-fp-locnoeth supplies its finite-presentation hypothesis. The dimension minimum and open monotonicity supply the two shrinking inequalities. The local finite type pointwise criterion supplies exactly the affine finite-generation test used after principal localization; the original generators and 1/s generate the localized algebra over the target localization. The fibre definition supplies the underlying subspace identification, and the open-dimension statement preserves the fibre local dimensions. The supremum-local-dimensions node applies to nonempty fibres and gives dimension d; the flat height node applies to the flat map of Noetherian local stalks, with the maximal prime contracting to the maximal prime. The fibre-stalk quotient node supplies the stated ring isomorphism, and the global scheme-dimension node supplies exactly each supremum. These checks ensure that the retained handoff has no hidden use of a stronger cited statement.
+
+I checked B1-B9: both new nodes are self-contained statements with all notions cited, no proofs, empty proof dependencies, real exact logged searches, filled blueprint provenance and source tags. No candidate is a full Mathlib specialization: the hits establish openness and restrictions or ring inequalities only. C1-C8: every non-elementary assembly input is a cited statement, all quotations are literal, no new child refers to the parent and no cycle is introduced; the only remaining off-unit proof citation is the already accepted generic topology tool. D1-D5: the new children carry two different parts of the original proof; neither restates the local theorem. E1-E7: I verified local finite type versus global finite type and local topological versus stalk dimensions, and made the maximal-prime choice explicit in the handoff.
+
+Small cases checked: identity (d=0), affine space over a field, polynomial projection over a DVR, a non-surjective open immersion (handled by the first node), an empty source (parent assertion vacuous and no neighbourhood lemma invocation), and unbounded base dimension (supremum infinity). For the global child the empty target is excluded explicitly; the neighbourhood child always produces a nonempty target. A point in an affine line has fibre local topological dimension one even when its stalk dimension is zero; the argument never confuses those dimensions. Neither extraction introduces separatedness, smoothness, global finite type or quasi-compactness. The assembled proof has no step over 2000 characters and its total is below 3000.

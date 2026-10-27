@@ -1,0 +1,130 @@
+{
+ "id": "lem-coef-integral-reduction-quotient-model",
+ "kind": "statement",
+ "title": "The scalar quotient map on a K-flat reduction model",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell in an independent universe, a scheme W, a K-flat complex Q over the completed integral coefficient sheaf, and n >= 0. Let kappa_k be the canonical finite-reduction isomorphism [def-sf-finite-reduction-computation], d_n the scalar-adjunction quotient mate [lem-sf-integral-open-tensor-representative], tau_n the ordinary scalar quotient, and S_n the consecutive finite scalar restriction [def-coef-normalized-dvr-tower]. Then d_n(Q) followed by S_n(kappa_n) and the exact restriction localization factor equals kappa_(n+1) followed by Q(tau_n(Q)). There is no flatness assumption on the quotient coefficient ring or boundedness assumption on Q.",
+ "stmt_deps": [
+  "def-sf-finite-reduction-computation",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-normalized-dvr-tower",
+  "def-pc-kflat-complex",
+  "lem-sf-integral-open-tensor-representative"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0941; Step 4 of lem-sf-integral-open-tensor-quotient-model, scalar K-flat quotient computation."
+ },
+ "proof": [
+  {
+   "text": "Apply injectivity of the larger coefficientFiniteAdjunction Hom equivalence, then cancel the exact larger scalar-restriction localization factor. Unfold integralOpenReductionStep and coefficientQuotientNatTrans: its adjunct is the smaller derived unit followed by the inverse compactSupportSystemRestrictionComp.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality moves coefficientFiniteReductionModel at the smaller level through inverse successive restriction. Expand the restriction comparison as inverse exact-localization compositor followed by the localization of coefficientRestrictionComp. The compositor and natural-isomorphism factor identities identify the resulting restriction factors. In the private finiteModel_unit calculation, transport the specified derived scalar unit normalization from homotopy localization to complex localization, using the definition of coefficientFiniteReductionModel and the exact restriction factor formula. Apply it at both finite levels.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-sf-finite-reduction-computation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use uniqueness in coefficientOrdinaryQuotient_exists to identify the chosen ordinary quotient natural transformation with coefficientOrdinaryQuotientNaturalTransformation. Its mate unit equation follows by apply_symm_apply in the abstract adjunction Hom equivalence. Apply this equation degreewise and localize it. Naturality of the larger exact restriction factor and the two finiteModel_unit equations identify the two transposes; the private abstract quotient_model helper performs their cancellation. This proof uses K-flatness only through the canonical model normalization, with no boundedness or termwise-flatness assumption.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-sf-finite-reduction-computation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0941, scalar K-flat quotient computation. G3, 2026-10-27: direct adjunction and exact-localization calculation, with proved private unit-coordinate helpers; no new obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar quotient maps computed on K-flat complexes by localization and adjunction units",
+   "results": "Eight hits: ModuleCat.smulShortComplex_g; Submodule.toLocalizedQuotient'_mk, toLocalizedQuotient', toLocalizedQuotient; Module.Flat.of_isLocalizedModule; IsLocalizedModule.toLocalizedQuotient'; RingHom.Flat.holdsForLocalizationAway and ofLocalizationSpanTarget. None describes localization of sheaf scalar adjunction quotient mates.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with restriction of scalars and quotient transitions",
+   "results": "Eight results about free sheaves and extension of scalars; no comparison of the open quotient models.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"pushforward\"",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforwardCongr₂",
+   "results": "The concrete module pushforward composition/congruence APIs construct the ordinary restriction comparison. Local searches in both project roots find no theorem asserting either the scalar K-flat quotient-model equation or the ordinary open tensor quotient square.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOpenTensorQuotientModel",
+  "date": "2026-10-27",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-open-tensor-quotient-model",
+   "place": "Tags 06YY and 0941; Step 4 of lem-sf-integral-open-tensor-quotient-model, scalar K-flat quotient computation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralReductionQuotientModel",
+  "file": "lean/Sheaf/SixFunctors/IntegralReductionQuotientModel.lean",
+  "declaration": "WeilConjectures.integralReductionQuotientModel",
+  "statement": "theorem integralReductionQuotientModel\n    (Q : CochainComplex (scalarReductionSource l E W) ℤ)\n    (hQ : CochainComplex.IsKFlatIndependentCoefficients\n      (J := ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) Q)\n    (n : ℕ) :\n    (integralOpenReductionStep l E W n).app (DerivedCategory.Q.obj Q) ≫\n        (normalizedDVRRes l E W (Nat.le_succ n)).map\n          (coefficientFiniteReductionModel l E W Q hQ n).hom ≫\n        (normalizedDVRModuleRes l E W (Nat.le_succ n)).mapDerivedCategoryFactors.hom.app\n          (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q) =\n      (coefficientFiniteReductionModel l E W Q hQ (n + 1)).hom ≫\n        DerivedCategory.Q.map\n          ((NatTrans.mapHomologicalComplex\n            (coefficientOrdinaryQuotient l E W (Nat.le_succ n)) (.up ℤ)).app Q)",
+  "branch": "sheaf-dag",
+  "by": "M7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261027T050623-L-245985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T103422-L-1071281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

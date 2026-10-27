@@ -64,7 +64,22 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerStar_of_isProper"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isLeftAdjoint_rightDerivedLowerStar_of_isProper"
+   ]
+  }
+ },
  "lean": {
   "existing": true,
   "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifUpperShriek",
@@ -74,5 +89,21 @@
   "branch": "sheaf-dag",
   "by": "G9",
   "date": "2026-10-20"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\mathcal A$ be a Grothendieck abelian category and $g\\colon Z\\to Y$ a proper morphism.\nThen the derived pushforward\n\n$$\nRg_*=R(g_*)\\colon D(Z_{\\mathrm{proét}},\\mathcal A)\\to D(Y_{\\mathrm{proét}},\\mathcal A)\n$$\n\n(the right derived functor [det-def-sfb-derived-categories] of the pushforward of\n[def-sfb-finite-lower-star]) has a right adjoint, denoted $Rg^!$.",
+  "proof": [
+   {
+    "text": "The derived category of a Grothendieck abelian category is well generated, and by Brown\nrepresentability (Neeman) a triangulated functor out of a well generated triangulated\ncategory has a right adjoint as soon as it preserves arbitrary coproducts. $Rg_*$ is\ntriangulated, so it remains to show that it commutes with arbitrary direct sums. This is\nwhere properness, more precisely quasi-compactness and quasi-separatedness of $g$, enters.\nWe have $(Rg_*K)(V)=R\\Gamma(V\\times_YZ,K)$, and on quasi-compact quasi-separated objects\nof the pro-étale site cohomology commutes with filtered colimits of sheaves. This gives the\nclaim for bounded below complexes. The extension to unbounded complexes is the remaining\ninput.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

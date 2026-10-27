@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-level-reduction",
+ "kind": "statement",
+ "title": "Consecutive reduction for normalized integral scalar tensor maps",
+ "statement": "Let $\\ell$ be prime, let $E,L/\\mathbf Q_\\ell$ be finite extensions and $\\iota:E\\to L$ an embedding. Use the specified ordinary scalar-extension functors $S_W$ [def-weil-integral-scalar-extension] and finite operation functors [lem-pur-integral-operations-well-defined]. For a scheme $W$, let $T^E_n,T^L_n$ be the finite total-tensor functors with the recorded consecutive transitions $r^E_n,r^L_n$. Suppose $\\alpha_n:S_W T^E_n\\to T^L_n(S_W\\times S_W)$ are natural chain maps whose action on each bidegree generator is $1\\otimes((1\\otimes x)\\otimes(1\\otimes y))\\mapsto  (1\\otimes(1\\otimes x))\\otimes(1\\otimes(1\\otimes y))$. Then, for every $n$, $S_W(r^E_n);\\alpha_n=\\alpha_{n+1};r^L_n(S_W\\times S_W)$. This is only the consecutive reduction equation; it asserts neither existence nor uniqueness of a map on whole towers.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor-product, including lemma-sheafification-tensor and lemma-tensor-product-pullback; finite quotient transition argument in Bhatt--Scholze Definition 3.4.10 and Stacks 07A4."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "def-weil-integral-reduction-tower",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "proof": [
+  {
+   "text": "In each total degree use the ordinary scalar adjunction from ScalarExtensionComposition to test equality after the unit. For the finite total tensor use the generator-normalized finiteTensorComparison from the strict tensor reduction comparison. Precompose with this isomorphism and apply total_extension_hom_ext from IntegralTensorTransitionCompatibility; scalar extension and restriction preserve the summand coproducts. Lift each finite coefficient section along the completed projection: constantQuotient_surjective gives a lift to the constant integer sheaf, and the constant-to-completion map gives the required completed section. The balanced tensor relation moves this lifted coefficient onto the first original input. The normalized finite comparison therefore reduces the equality to the displayed coefficient-one generators. All three auxiliary statements in this argument are proved private helpers, without new obligations.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-integral-tensor-reduction-tower-comparison",
+    "lem-pur-integral-tensor-transition-compatibility",
+    "lem-sp-completed-integral-finite-quotient-hom-ext",
+    "def-weil-integral-reduction-tower",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an original pair of sections, scalarAdjunction_unit identifies the testing map with integralOrdinaryTensorSection at coefficient one. Apply scalar_map_tensor, the chosen tensor transition formula, and the chosen ordinary reduction formula. Ring maps preserve one, so h_alpha at level n identifies the first route. Apply h_alpha at n+1 to the second route and then the L-coefficient tensor and ordinary reduction formulas. The results coincide definitionally. HomologicalComplex.hom_ext and NatTrans.ext assemble these equalities in every degree and at every pair of input complexes.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-integral-scalar-extension",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-pur-integral-tensor-transition-compatibility",
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "def-weil-integral-reduction-tower",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor-product, lemma-sheafification-tensor and lemma-tensor-product-pullback; direct-sum total tensor and finite quotient transition calculation. Reuses existing proved normalized comparisons and extensionality helpers; no further split."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations of inverse sequences commute if they commute with consecutive maps",
+   "results": "NatTrans.ofOpSequence and ofSequence construct transformations from consecutive squares; they do not prove the generator-normalized coefficient reduction equation.",
+   "date": "2026-10-26",
+   "verdict": "Use the generic constructor in the parent; no specialized reduction square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "NatTrans.ext is componentwise extensionality, not the finite coefficient reduction square.",
+   "date": "2026-10-26",
+   "verdict": "No matching specialized theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.ofOpSequence|scalar.*[Rr]eduction.*[Cc]ompat; integralScalarTensorLevelReduction",
+   "results": "Mathlib provides ofOpSequence. Project search found IntegralTensorTransitionCompatibility for reduction of the ordinary tensor at one coefficient field, not scalar extension between E and L. No declaration with this new name exists in Sheaf, WeilConjectures, or Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "A separate scalar coefficient reduction square is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "blueprint_refs.py search scalar tensor reduction / scalar pullback reduction",
+   "results": "Zero blueprint nodes match either search; ancestor is def-weil-derived-pullback-tensor-hom through lem-pur-integral-operations-scalar-extension.",
+   "date": "2026-10-26",
+   "verdict": "No existing blueprint node for the consecutive scalar reduction square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "group": "F2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Strict finite-level scalar comparison maps commute with consecutive reductions before forming the Roos complex",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorLevelReduction",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorLevelReduction.lean",
+  "declaration": "WeilConjectures.integralScalarTensorLevelReduction",
+  "statement": "theorem integralScalarTensorLevelReduction (W : AlgebraicGeometry.Scheme.{u})\n    (α : ∀ n : ℕ, integralOperationsTensorLevel l E W n ⋙\n        (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ⟶\n      ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)).prod\n        ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)) ⋙\n          integralOperationsTensorLevel l L W n)\n    (hα : ∀ (n : ℕ) (P Q : CochainComplex (integralTowerModules l E W) ℤ) (p q : ℤ)\n        (U : W.ProEtᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),\n        (((α n).app (P, Q)).f (p + q)).val.app U\n          (integralOrdinaryTensorSection l E L ι W\n            (((integralOperationsTensorLevel l E W n).obj (P, Q)).X (p + q)) U 1\n            (integralOperationsTotalTensorSection l E W n P Q p q U\n              (unrestrictedIntegralTensorSection l E W n (P.X p) U 1 x)\n              (unrestrictedIntegralTensorSection l E W n (Q.X q) U 1 y))) =\n        integralOperationsTotalTensorSection l L W n\n          (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj P)\n          (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Q) p q U\n          (unrestrictedIntegralTensorSection l L W n\n            ((integralOrdinaryScalar l E L ι W).obj (P.X p)) U 1\n            (integralOrdinaryTensorSection l E L ι W (P.X p) U 1 x))\n          (unrestrictedIntegralTensorSection l L W n\n            ((integralOrdinaryScalar l E L ι W).obj (Q.X q)) U 1\n            (integralOrdinaryTensorSection l E L ι W (Q.X q) U 1 y))) (n : ℕ) :\n    Functor.whiskerRight (integralOperationsTensorTransition l E W n)\n        ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)) ≫\n      α n =\n    α (n + 1) ≫ Functor.whiskerLeft\n      (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)).prod\n        ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)))\n      (integralOperationsTensorTransition l L W n)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T130359-L-3453118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T135718-L-4058511",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

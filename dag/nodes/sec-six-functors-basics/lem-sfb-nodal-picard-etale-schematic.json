@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-nodal-picard-etale-schematic",
+ "kind": "statement",
+ "title": "Etale-local schematic nodal Picard identity space",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], and let $f:C\\to S$ be a flat finitely presented projective-bundle morphism [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-trf-projective-bundle-morphism], with nonempty geometrically connected reduced nodal fibres [def-trf-nodal-geometric-fibres]. Suppose the subfunctor $D\\subseteq\\operatorname{Pic}_{C/S}$ of classes having degree zero on every irreducible component of every geometric fibre is represented by an algebraic space [sk-def-picard-pic, def-trf-algebraic-space]. Component degree means the degree on the smooth normalization of the reduced component [def-weil-pbc-reduced-normalization]. Then $D\\to S$ is a separated smooth commutative group algebraic space of finite presentation, with geometrically integral fibres. There is a jointly surjective family of etale maps $S_a\\to S$ of schemes such that every $D\\times_SS_a$ is a scheme. The group law is tensor product of line-module classes and its identity is the trivial class. Here smoothness and finite presentation on spaces are tested on etale scheme charts, separatedness means that the diagonal is a closed immersion, and geometrically integral means that each geometric fibre is reduced and irreducible. Formation of this group algebraic space is compatible with base change of locally Noetherian schemes and with curve isomorphisms, via the displayed Picard-subfunctor description. No relatively ample line module on $D$ and no global scheme representability of $D$ are asserted.",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Section 2, printed p.136, geometry of the multidegree-zero Picard group; Lemmas 4.4--4.6, printed pp.143--144, nonspecial divisor chart and translate-cover proof of etale-local schematicness. The base-change description is the Picard sheaf and fibrewise component-degree condition. Local PDF WANTED; primary Numdam PDF read online."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-projective-bundle-morphism",
+  "def-trf-nodal-geometric-fibres",
+  "sk-def-picard-pic",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-projective-bundle-proper] the family is proper. Apply [lem-sc-proper-flat-global-sections]: the reduced connected geometric fibres give universally $f_*\\mathcal O_C\\simeq\\mathcal O_S$. The canonical map is an isomorphism as well: locally a rank-one algebra $B=Re$ has $1=ce$, $e^2=de$, and $e=ce^2$ gives $cd=1$. Thus [lem-sfb-picard-space-curves-smooth] applies and supplies the smooth locally finitely presented quasi-separated Picard space $P$, whose diagonal is a representable immersion. Tensor product is its group law.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "lem-sc-proper-flat-global-sections",
+    "lem-sfb-picard-space-curves-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, p.136; Stacks 0E0L, 0DPK, 0D2D"
+   }
+  },
+  {
+   "text": "The component-degree condition is independent of fppf-local representatives: a line pulled back from the test base is trivial on each geometric fibre. [lem-pc-degree-base-change] and [lem-trf-curve-degree-tensor-additive] give field invariance and additivity of degree, so tensor product, dual and the trivial line preserve this condition. Thus it is a subgroup sheaf of the Picard sheaf [sk-def-picard-pic]. For a test scheme $U\\to T\\to S$, the relative curve is exactly $C_U$ in either base-change description; testing its geometric fibres gives identical subfunctors. A curve isomorphism identifies those fibres and their normalized components, hence their degrees. Since maps of representing algebraic spaces are natural transformations [def-trf-algebraic-space], these identifications give the canonical base-change and curve-isomorphism maps, with composite and identity compatibilities checked on each test scheme.",
+   "uses": [
+    "lem-pc-degree-base-change",
+    "lem-trf-curve-degree-tensor-additive",
+    "sk-def-picard-pic",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, multidegree-zero definition and functoriality"
+   }
+  },
+  {
+   "text": "Work on an affine Noetherian open of $S$. The structure line there is ample (section $1$ has the whole affine as nonvanishing open), so [lem-trf-projective-bundle-to-h-projective] gives an embedding and a line $H=\\mathcal O_C(1)$. Its geometric-fibre restrictions are ample by [lem-pc-very-ample-ample]. Their normalized component degrees $h_Z$ are positive by [lem-trf-fibre-degree-ample-criterion]. The finite birational normalization has function-field degree one, so [lem-sfb-proper-curve-bundle-pullback-degree] and [lem-trf-degree-weighted-irreducible-components] identify total degree with $h=\\sum_Zh_Z$. By [lem-sfb-proper-flat-sheaf-euler-local-constancy], shrink until $h$ and $g=1-\\chi(\\mathcal O_{C_s})$ are constant; universal global sections give $g=h^1(\\mathcal O_{C_{\\bar s}})$. Set $N=h+1$. For a representative $L$ on a test family, the component degrees of $H\\otimes L^{\\pm N}$ are $h_Z\\pm N d_Z$ by tensor additivity. Both are positive exactly when every integer $d_Z$ is zero, since $0<h_Z\\le h<N$. The fibre-degree criterion and [lem-sfb-space-relative-ample-locus] show this condition cuts out an open of every test scheme, with arbitrary base change. After taking local bundle representatives on a presentation of $P$, [lem-trf-fppf-local-open-subfunctor-descent] therefore makes $D\\hookrightarrow P$ an open immersion. In particular $D$ is smooth and locally finitely presented by [lem-sfb-stack-chartwise-smooth-etale-calculus].",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-pc-very-ample-ample",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-trf-fppf-local-open-subfunctor-descent",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, openness; Stacks varieties.tex 0AYU, 0AYW, 0AYX, 0AYZ, 0B5Y; perfect.tex 0B9T; more-morphisms.tex 0D2S"
+   }
+  },
+  {
+   "text": "Keep this affine base and constant $g,h$. Put $m=2g+1$, $d=mh$. [lem-sfb-projective-smooth-divisor-parameter] supplies a finite-type scheme $V_d$ and universal smooth-locus divisor $E$. The line $\\mathcal O(E)\\otimes H^{-m}$ defines $V_d\\to P$; its pullback to $D$ is an open scheme $W\\subseteq V_d$. Every geometric point of $D$ lifts to $W$ by [lem-sfb-nodal-uniform-smooth-divisor], applied with the positive-degree $H$ and multidegree-zero representative $L$. The source $W$ is quasi-compact: $V_d$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and its open $W$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply (4) implies (1) of [lem-sfb-dm-quasicompact-atlas-criterion], viewing an algebraic space as a Deligne--Mumford stack with discrete fibres. It makes $D$ quasi-compact on this affine base. For an arbitrary affine $T$ over this affine base, use the base change $W_T\\to D_T$. It remains surjective on geometric points, and $W_T$ is quasi-compact: the quasi-compact open $W$ in the finite-type scheme $V_d$ has a finite cover by affine distinguished opens in finite-type affine charts, and base-changing that cover gives finitely many affine opens over $T$. The same criterion gives quasi-compactness of $D_T$. Thus $D\\to S$ is quasi-compact.",
+   "uses": [
+    "lem-sfb-projective-smooth-divisor-parameter",
+    "lem-pc-recd-pullback",
+    "sk-def-picard-pic",
+    "lem-sfb-nodal-uniform-smooth-divisor",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-dm-quasicompact-atlas-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, finite type; projective-divisor bounding argument using Stacks curves.tex 0E3F"
+   }
+  },
+  {
+   "text": "On a geometric fibre a multidegree-zero line $M$ with a nonzero section is trivial. Indeed pull the section to normalized components along the normalization of [lem-sfb-nodal-completed-normalization-model]. On a component where it is nonzero, [lem-trf-curve-section-degree-positivity] makes it nowhere zero. At each node the two branch residues agree in a local trivialization by [lem-sfb-nodal-completed-normalization-model]. Its nonzero residue forces the adjacent component section to be nonzero. The finite component graph is connected, since otherwise its disjoint closed component unions disconnect the curve. Thus the section is nonvanishing on all components and at every node, and trivializes $M$. Conversely the trivial line has $h^0=1$ by Step 1. Hence $M$ is trivial precisely when $h^0(M)\\ge1$.",
+   "uses": [
+    "lem-trf-curve-section-degree-positivity",
+    "lem-sfb-nodal-completed-normalization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, separatedness: multidegree-zero triviality criterion"
+   }
+  },
+  {
+   "text": "The diagonal of $D$ is an immersion, by restricting the diagonal of $P$; the open and closed factors persist by [lem-weil-pbc-open-immersion-base-change] and [lem-weil-pbc-closed-immersion-base-change]. On a scheme test of this diagonal choose an fppf cover where the difference of the Picard sections is represented by a line $M$. Its geometric fibres have multidegree zero. By Step 5 the diagonal image is the locus $h^0(M_{\\bar t})\\ge1$. Flat field base change [lem-pc-flat-base-change-cohom] identifies this dimension with the residue-field dimension. [det-thm-picard-semicon] makes the locus closed: the family is proper and finitely presented, and $M$ is finitely presented and flat over the test base. This use of upper semicontinuity needs no reducedness of the base. The covering maps are open by [lem-weil-pbc-flat-lfp-open], so the complement of the global image is the union of the open images of the local complements. The diagonal is therefore an immersion with closed image, hence a closed immersion by [lem-weil-pbc-immersion-closed-image-closed-immersion]. Thus $D$ is separated. Its diagonal is quasi-compact, so quasi-compactness and local finite presentation already proved give finite presentation.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-flat-base-change-cohom",
+    "det-thm-picard-semicon",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, separatedness; Stacks 0D2D and semicontinuity"
+   }
+  },
+  {
+   "text": "Fix an algebraically closed geometric residue field $k$. [lem-sfb-nodal-normalization-picard-sequence] identifies the fibre $D_k$ with a torsor over $B=\\prod J_i$ under $Q=\\operatorname{coker}(\\mathbf G_m^I\\to\\mathbf G_m^E)$. Choose a spanning tree in the finite connected dual graph. Normalize each edge parameter on the tree to $1$ by recursively rescaling the vertex frames, starting with frame $1$ at a root. The recursion is a Laurent monomial in the edge parameters and is unique; parameters on non-tree edges remain arbitrary. This identifies $Q$, on every test scheme, with $\\mathbf G_m^{E\\setminus F}$. By [lem-trf-split-lattice-torus-projection] this is smooth with integral geometric fibres; its Laurent polynomial ring is affine and finitely presented. The torsor is therefore represented by a scheme, smooth surjective and open over $B$, by [lem-sfb-smooth-affine-group-torsor-representability]. Every geometric fibre of this torsor has a rational point by [lem-pc-rational-points-dense] and hence, by translation by that point, is a split torus. Thus its fibres are geometrically connected. The smooth connected scheme $B$ has its rational identity, so [lem-sbc-connected-rational-point-geometrically-connected] makes it geometrically connected. Apply [lem-weil-pbc-connected-fibres-quotient-preimage-connected] to the open surjection $D_k\\to B$; it gives connectedness, also after field extension. Finally [lem-trf-smooth-connected-fibre-normal-integrality] makes this smooth geometrically connected $k$-scheme integral. This proves the required geometric-fibre assertion, including a tree graph ($Q=1$) and self-nodes (non-tree edges).",
+   "uses": [
+    "lem-sfb-nodal-normalization-picard-sequence",
+    "lem-trf-split-lattice-torus-projection",
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "lem-pc-rational-points-dense",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+    "lem-trf-smooth-connected-fibre-normal-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Section 2, geometric fibres; normalization/gluing description of the generalized Jacobian"
+   }
+  },
+  {
+   "text": "At a point $s$ take a separable closure $k_s$ of its residue field. [lem-sfb-nodal-nonspecial-smooth-divisor] supplies the distinct smooth divisor $E_s$ of degree $g$ with $h^0=1$ and $h^1=0$. Apply [lem-sfb-relative-abel-nonspecial-chart] with the open subgroup $A=D$ from Step 3. Its etale neighbourhood $S'\\to S$ carries a quasi-compact schematic open $V\\subseteq D_{S'}$ containing the identity section, so $V$ meets every geometric fibre. Now [lem-sfb-group-finite-translate-cover] applies: Steps 3, 4, 6 and 7 provide smoothness, finite presentation, separation and integral geometric fibres. After a further etale covering $S_a\\to S'$ we have $D_{S_a}=\\bigcup_jg_jV_{S_a}$. Each translation is an automorphism, with inverse translation by $g_j^{-1}$ by the group identities; hence each translated open is a scheme. Their overlaps are open subschemes of these schemes and the induced overlap isomorphisms satisfy the cocycle since they all map to the same sheaf $D_{S_a}$. [lem-weil-pbc-glue-schemes] glues them to a scheme. Its sheaf agrees with $D_{S_a}$ because sections agree and glue on this open cover; thus $D_{S_a}$ is a scheme. Do this at every $s$ and compose the etale neighbourhood maps using [lem-sfb-stack-chartwise-smooth-etale-calculus]. Their images cover $S$. All conclusions are vacuous on the empty base, using the empty covering family.",
+   "uses": [
+    "lem-sfb-nodal-nonspecial-smooth-divisor",
+    "lem-sfb-relative-abel-nonspecial-chart",
+    "lem-sfb-group-finite-translate-cover",
+    "lem-weil-pbc-glue-schemes",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemmas 4.4--4.6, printed pp.143--144; scheme gluing Stacks 01JB, 01JC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-proper",
+  "lem-sc-proper-flat-global-sections",
+  "lem-sfb-picard-space-curves-smooth",
+  "lem-pc-degree-base-change",
+  "lem-trf-curve-degree-tensor-additive",
+  "sk-def-picard-pic",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-pc-very-ample-ample",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-sfb-proper-curve-bundle-pullback-degree",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+  "lem-sfb-space-relative-ample-locus",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-projective-smooth-divisor-parameter",
+  "lem-pc-recd-pullback",
+  "lem-sfb-nodal-uniform-smooth-divisor",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-dm-quasicompact-atlas-criterion",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-sfb-nodal-completed-normalization-model",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-flat-base-change-cohom",
+  "det-thm-picard-semicon",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-sfb-nodal-normalization-picard-sequence",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "lem-pc-rational-points-dense",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sfb-nodal-nonspecial-smooth-divisor",
+  "lem-sfb-relative-abel-nonspecial-chart",
+  "lem-sfb-group-finite-translate-cover",
+  "lem-weil-pbc-glue-schemes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Section 2 and Lemmas 4.4--4.6, read in primary Numdam PDF online; local document WANTED. General nodal-family assembly from existing Stacks inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective family of nodal curves has smooth separated multidegree zero Picard space which becomes a scheme etale locally on the base",
+   "results": "OK 8 hits; returned declarations: AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth. Read the returned types; none treats nodal relative Picard spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties and Weierstrass-coordinate Jacobians do not give the relative nodal Picard assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generalized Jacobian nodal curve family etale locally representable smooth separated algebraic space",
+   "results": "OK 8 hits; returned declarations: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsEtale, WeierstrassCurve.Jacobian, Algebra.FormallyEtale.instFormallySmooth, AlgebraicGeometry.Scheme.etalePretopology. Read the returned types; none treats nodal relative Picard spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties and Weierstrass-coordinate Jacobians do not give the relative nodal Picard assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties and Weierstrass-coordinate Jacobians do not give the relative nodal Picard assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "picard|generalizedJacobian|nodal",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"24\", \"text\": \"the special case where `S` is the spectrum of some commutative ring `R` whose Picard group is zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"50\", \"text\": \"elliptic curves over the spectrum `Spec(R)` of `R` in the case that `R` has trivial Picard group\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties and Weierstrass-coordinate Jacobians do not give the relative nodal Picard assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-picard-theta-ampleness",
+  "date": "2026-10-23",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space.",
+   "via": [
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-picard-etale-schematic",
+  "worker": "stage1",
+  "summary": "Preserved the general nodal-family statement; proved openness, boundedness, separation and fibre geometry with existing inputs, then obtained schematicness by a nonspecial Abel chart and finite translates. Three statement-only auxiliary lemmas, all searched; no Lean and no attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Current latest unit and direct-image proof read. This supplies Picard geometry in the recorded stable-level alteration chain; no unit route changed. ancestor returns None for the broken imported-ancestor chain; retained null from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-proper-flat-global-sections",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-fibre-degree-ample-criterion",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-fppf-local-open-subfunctor-descent",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-curve-section-degree-positivity",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "det-thm-picard-semicon",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic geometric or scheme-gluing tool applied to the displayed family; does not replace the constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-sc-proper-flat-global-sections",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-trf-curve-section-degree-positivity",
+  "det-thm-picard-semicon",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-trf-smooth-connected-fibre-normal-integrality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-e969c7ae0",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-e969c7ae0 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, the 3 new nodes and the statements of all 42 cited nodes. This is a first split of a Q120-created node; it answers no re-split note. The live item is still unsplit, so nothing supersedes it. Statement, stmt_deps, source and blueprint are unchanged from base. No SGA citation. The steps are correct. S1: canonical f_*O≅O from 0E0L plus a rank-one argument (cd=1), then the 0D2C Picard space. S2: multidegree subgroup and base change. S3: N=h+1 gives degrees h_Z±N·d_Z>0 iff d_Z=0; with 0B5Y, the 0D3D relative ample locus and 02WU descent, D is open in P. S4: V_d with m=2g+1 and the uniform smooth divisor make W→D surjective, and 04YC(4)⇒(1) gives quasi-compactness, including non-Noetherian affine tests. S5: a nonzero section of a multidegree-0 line is nowhere zero; it propagates through the equal constant terms at the nodes (completed model) over the connected graph. S6: the diagonal image is the h^0≥1 locus, closed by det-thm-picard-semicon (first clause, no reduced base), then 01IQ gives separatedness. S7: the 0C1M torsor over B, spanning-tree Q≅G_m^{E∖F}, a scheme by 049C, connected fibres plus 0377 and 057J give integral fibres. S8: nonspecial divisor, then chart, then translates, then gluing. New nodes are true and not duplicates. Nonspecial divisor: inductive evaluation of ω(−E) at smooth k-rational points; tested g=0, nodal cubic, trees, reducible curves. Abel chart: h^1=0 locus, Div→Pic iso there, E extended étale-locally. Translate cover: the dimension argument with n>d+dim O_{S,s} works; the naive spread-out fails for non-proper G (DVR example noted). None restates the item. Batch-5: every flagged citation is a definition or a generic Stacks/Picard-framework fact (01WC, 0E0L, 0D2C, 0AYX, 087S, 0B5Y, 0AYW, 0B9T, 0D3D, 02WU, 04XB, 0DPE, 0E3F, 04YC, 0B40, 0E68, semicon, 0C1M, ILO VIII 3.2.12, 049C, 057J). None is a step of the trace-formula or Poincaré-duality proofs; accepted. The 12 tool_uses are accepted. Advisory: Steps 3–4 name four uses without brackets; Steps 4/6 leave the rational-point representative fact implicit; the Deligne Astérisque 127 PDF is WANTED (not local), so the mathematics was judged on its own."
+ }
+}

@@ -1,0 +1,161 @@
+{
+ "id": "lem-coef-geometric-tensor-component-horizontal",
+ "kind": "statement",
+ "title": "Horizontal compatibility of the normalized ordinary geometric tensor components",
+ "statement": "variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)\n  (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n\n\nvariable (μ : ∀ (n : ℕ) (M N : Mod.{c, v, max c v r} J (B n)),\n  (O.inverseImage n).modules.obj (ordinaryTensor.{c, v, r} J (B n) M N) ≅\n    ordinaryTensor.{c, v, r} J' (O.coefficients n)\n      ((O.inverseImage n).modules.obj M) ((O.inverseImage n).modules.obj N))\n\n\n@[irreducible] def geometricTensorComponent (n : ℕ) (M N : Systems.{c, v, max c v r} J B τ) :\n    (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).obj\n        (O.pull.obj (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)\n          (systemRing.{c, v, max c v r} J B τ) M N)) ≅\n      (evaluation.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).obj\n        (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J')\n          (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n          (O.pull.obj M) (O.pull.obj N)) := by\n  let := SheafOfModules.isMonoidal_W_independentCoefficients (O.coefficients n)\n  let := SheafOfModules.monoidalCategory (O.coefficients n)\n  exact (O.ordinaryPullEvaluation n).app _ ≪≫\n    (O.inverseImage n).modules.mapIso (ordinaryEvaluationTensor.{c, v, r} J B τ n M N) ≪≫\n    μ n ((evaluation.{c, v, max c v r} J B τ n).obj M)\n      ((evaluation.{c, v, max c v r} J B τ n).obj N) ≪≫\n    CategoryTheory.MonoidalCategory.tensorIso\n      ((O.ordinaryPullEvaluation n).app M).symm\n      ((O.ordinaryPullEvaluation n).app N).symm ≪≫\n    (ordinaryEvaluationTensor.{c, v, r} J' O.coefficients O.coefficientTransition n\n      (O.pull.obj M) (O.pull.obj N)).symm\n\n\ntheorem geometricTensorComponent_horizontal [PreservesFiniteLimits uInv]\n    (hp : ∀ n : ℕ, InverseTensorPure.{c, v, r} J J' uInv\n      (B n) (O.coefficients n) (O.inverseImage n) (μ n))\n    (M N : Systems.{c, v, max c v r} J B τ) :\n    ∀ {m n : ℕ} (h : n ≤ m),\n      (transition.{c, v, max c v r} J' O.coefficients O.coefficientTransition h).app\n          (O.pull.obj (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)\n            (systemRing.{c, v, max c v r} J B τ) M N)) ≫\n        (res.{c, v, max c v r}\n          (coefficientMap.{c, v, max c v r} J' O.coefficients O.coefficientTransition h)).map\n          (geometricTensorComponent.{c, v, r} J B τ J' uInv uPush adjSet O μ n M N).hom =\n      (geometricTensorComponent.{c, v, r} J B τ J' uInv uPush adjSet O μ m M N).hom ≫\n        (transition.{c, v, max c v r} J' O.coefficients O.coefficientTransition h).app\n          (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J')\n            (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n            (O.pull.obj M) (O.pull.obj N))",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, naturality of the universal balanced pairing; Zheng Construction 4.1, actual horizontal transitions as normalized in GeometryOrdinary."
+ },
+ "proof": [
+  {
+   "text": "Use the existing section casts for evaluation and the actual transition formula. Naturality of tensorSection under presheaf restriction and the pure normalization of ordinaryEvaluationTensor show that the evaluated horizontal tensor map takes a pure tensor to the tensor of the two horizontal restrictions.",
+   "uses": [
+    "def-coef-semilinear-derived-calculus",
+    "lem-pur-system-ordinary-tensor-reduction",
+    "lem-coef-evaluation-tensor-horizontal-pure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose ordinaryPullEvaluation with moduleUnderlying to identify the underlying sheaf of each evaluated pullback with uInv of the original evaluated underlying sheaf. Apply ordinaryPullTransition, restrictionPullback_underlying and naturality of moduleUnderlying to prove horizontal_normalization. Hence transporting any generalized section commutes with the actual horizontal map (imageMap_transition).",
+   "uses": [
+    "lem-coef-semilinear-ordinary-geometric-realization",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any generalized pair and its pure tensor, expand the fixed geometricTensorComponent, cancel the evaluation isomorphism, use naturality of moduleUnderlying and apply the assumed InverseTensorPure equation. Tensor morphisms act componentwise on pure sections, giving component_pure. Finite product preservation supplies a generalized pair above any two target sections. The ordinary tensor hom extensionality theorem, after conjugating by geometricTensorComponent and ordinaryEvaluationTensor, then proves component_hom_ext.",
+   "uses": [
+    "lem-coef-semilinear-ordinary-geometric-realization",
+    "def-coef-semilinear-derived-calculus",
+    "lem-pur-system-ordinary-tensor-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply component_hom_ext to the two horizontal composites. Restrict the source generalized pair and its pure tensor horizontally. The evaluated pure transition formula shows they still satisfy the pure relation. On the left use imageMap_transition and component_pure at the lower level. On the right use component_pure at the upper level, followed by the target pure transition formula and imageMap_transition for both operands. The resulting sections agree; cancel the target evaluation isomorphism. This proves the original horizontal equation without new hypotheses or intermediate holes.",
+   "uses": [
+    "lem-coef-semilinear-ordinary-geometric-realization",
+    "def-coef-semilinear-derived-calculus",
+    "lem-pur-system-ordinary-tensor-reduction",
+    "lem-coef-evaluation-tensor-horizontal-pure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-derived-calculus",
+  "lem-pur-system-ordinary-tensor-reduction",
+  "lem-coef-evaluation-tensor-horizontal-pure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback), functoriality of the universal bilinear pairing; Zheng Construction 4.1 for actual horizontal maps. Lean proof by T4 using generalized sections and finite product preservation."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricOrdinaryTensor",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Normalized tensor localization for fixed ordinary geometric operations. Substep: Ordinary tensor comparison and resolving-class preservation for geometric systems. Specifically, compatibility of the ordinary tensor comparison with the actual horizontal restrictions before assembly.",
+   "via": [
+    "lem-coef-semilinear-geometric-ordinary-tensor",
+    "lem-coef-semilinear-geometric-tensor-localization",
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor comparison natural for restriction of coefficients inverse image horizontal semilinear maps",
+   "results": "IsBaseChange.tensorEquiv and algebra TensorProduct restrict-scalars/map identities; no module-sheaf sequence comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the specified algebraic inverse image and normalized system horizontal maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorHom\"",
+   "results": "12 tensor-product linear-map results, no strict-system comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImageTensor|KFlat.*Pullback|pullback.*KFlat",
+   "results": "No results from msearch. Direct local searches locate CochainInverseComparison for a single ring and SemilinearDerivedCalculus for evaluation tensor comparison.",
+   "date": "2026-10-26",
+   "verdict": "The level and evaluation results exist but neither states horizontal compatibility across coefficient levels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image tensor comparison of sheaves of modules commutes with semilinear horizontal restriction in a sequence of coefficient rings",
+   "results": "8 hits including SheafOfModules.restrictScalars, pullbackObjFreeIso, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, TensorProduct.congr_symm_tmul and directLimitLeft_symm_of_tmul.",
+   "date": "2026-10-26",
+   "verdict": "No result establishes the ordinary tensor component equation for a specified algebraic inverse image of coefficient systems."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImageTensor|horizontal.*tensor|tensor.*horizontal|restrictionPullback in Mathlib/Algebra/Category/ModuleCat and Mathlib/CategoryTheory/Sites",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib declaration for the system transition equation."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricTensorComponentHorizontal",
+  "file": "lean/Sheaf/Paper/GeometricTensorComponentHorizontal.lean",
+  "declaration": "WeilConjectures.SemilinearSections.geometricTensorComponent_horizontal",
+  "statement": "theorem geometricTensorComponent_horizontal [PreservesFiniteLimits uInv]\n    (hp : ∀ n : ℕ, InverseTensorPure.{c, v, r} J J' uInv\n      (B n) (O.coefficients n) (O.inverseImage n) (μ n))\n    (M N : Systems.{c, v, max c v r} J B τ) :\n    ∀ {m n : ℕ} (h : n ≤ m),\n      (transition.{c, v, max c v r} J' O.coefficients O.coefficientTransition h).app\n          (O.pull.obj (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J)\n            (systemRing.{c, v, max c v r} J B τ) M N)) ≫\n        (res.{c, v, max c v r}\n          (coefficientMap.{c, v, max c v r} J' O.coefficients O.coefficientTransition h)).map\n          (geometricTensorComponent.{c, v, r} J B τ J' uInv uPush adjSet O μ n M N).hom =\n      (geometricTensorComponent.{c, v, r} J B τ J' uInv uPush adjSet O μ m M N).hom ≫\n        (transition.{c, v, max c v r} J' O.coefficients O.coefficientTransition h).app\n          (ordinaryTensor.{c, v, r} (coefficientSequenceTopology J')\n            (systemRing.{c, v, max c v r} J' O.coefficients O.coefficientTransition)\n            (O.pull.obj M) (O.pull.obj N))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.geometricTensorComponent",
+   "WeilConjectures.SemilinearSections.geometricTensorComponent_horizontal"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T114145-L-2269142",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T130708-L-3493076",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

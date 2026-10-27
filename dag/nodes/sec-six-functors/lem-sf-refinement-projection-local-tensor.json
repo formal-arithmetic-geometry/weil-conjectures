@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-refinement-projection-local-tensor",
+ "kind": "statement",
+ "title": "Local tensor equation for the normalized refinement mate",
+ "statement": "For finite-type spaces over the fixed algebraic closure of a finite field, a prime l different from its characteristic, a finite extension E of Q_l, and positive level n+1, let c1,c2 compactify the same quasi-compact map f and let r refine c1 to c2. In the finite and simultaneous-system words of [def-sf-refinement-projection-words], the normalized proper/open mate obeys Words.Local: delta2(K,L) followed by gamma at K tensor P_f L equals tensor(gamma_K,id) followed by inner projection and the proper image of delta1(K,L). This holds for every unbounded input and every realization presentation, with no Cartesian, boundedness or constructibility condition.",
+ "stmt_deps": [
+  "def-sf-refinement-projection-words"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence; explicit component calculation using Stacks 0B56 and 0DV0"
+ },
+ "proof": [
+  {
+   "text": "Apply properOpenProjectionMate to the square (j1,id,u,j2) and N=P_p2 L. Its two open tensor maps are the inverse open-immersion projection isomorphisms, so the resulting identity retains the intrinsic proper/open mate and the actual proper projection of u.",
+   "uses": [
+    "lem-sf-proper-open-tensor-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At finite level use the canonical pullback identity comparison and its adjunction-conjugate direct-image identity. On systems obtain the pullback identity comparison whose conjugate is the canonical bridge followed by the sectionwise direct-image identity from lem-sf-system-push-identity-pair-pull-unit. Its normalized two-identity unit law and compositor associativity imply the left unit law for every map: specialize associativity to (id,id,f), use the two-identity unit law, and cancel the invertible compositor.",
+   "uses": [
+    "lem-sf-system-push-identity-pair-pull-unit",
+    "lem-sf-integral-system-compositor-associativity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ambient pullback tensor-composition law, specialized to two identities, and the pullback unit law show that the identity pullback tensor comparison becomes the identity after transport by the pullback identity isomorphism. Cancel its invertible tensor comparison. The adjunction projection conjugation formula then shows that the identity direct-image projection, normalized by the conjugate identity, is the identity. Use first-variable naturality of the second open tensor map to insert this normalization in the mate equation.",
+   "uses": [
+    "lem-sf-ambient-proper-open-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use second-variable naturality of the first open tensor map to insert the inverse compositor for (u,p2) and the equality u p2=p1. Pullback associativity and the left identity unit identify this transport followed by the first compactification comparison with the second compactification comparison. Finally naturality of the normalized mate moves that comparison through the mate. This is precisely Words.Local. All arguments take place in the simultaneous system category before evaluation; no proper projection or mate is inverted.",
+   "uses": [
+    "lem-sf-integral-system-compositor-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-sf-system-push-identity-pair-pull-unit",
+  "lem-sf-integral-system-compositor-associativity",
+  "lem-sf-ambient-proper-open-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence, local square; categorical tensor-unit cancellation, adjunction projection conjugation, identity-side mate normalization, and pullback triangle transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula along composite adjunction and natural tensor map",
+   "results": "8 hits, including CategoryTheory.Adjunction.comp_counit_app and comp; none states the geometric normalized equations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open adjunction mate tensor identity and projection composition compatibility",
+   "results": "8 hits on general monoidal adjunction tensor maps and rigid mates, no matching normalized refinement equation.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap_(comp|conjugate)",
+   "results": "0 hits in search service. Local rg found the upstream general projection composition and conjugate lemmas.",
+   "date": "2026-10-25",
+   "verdict": "general tools available; no geometric normalized equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RefinementProjectionCounit",
+  "date": "2026-10-25",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence: normalized inner proper/open square and outer proper projection pasting.",
+   "via": [
+    "lem-sf-refinement-projection-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RefinementProjectionLocalTensor",
+  "file": "lean/Sheaf/SixFunctors/RefinementProjectionLocalTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.RefinementProjection.refinementProjectionLocalTensor",
+  "statement": "theorem refinementProjectionLocalTensor\n    (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ)\n    {X Y : Spaces F} {f : X ⟶ Y} [QuasiCompact f.hom.left]\n    (c₁ c₂ : Compactification f.hom.left) (r : c₁.Refinement c₂) :\n    Words.Local (finiteWords F\n      (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) r) ∧\n    ∀ (o : WeilConjectures.IntegralSystemRealization.Operations l E)\n      (z : WeilConjectures.IntegralSystemRealization.Realizations l E F o),\n      Words.Local (WeilConjectures.IntegralSystemRealization.RefinementProjection.systemWords\n        l E F o z r)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": null,
+  "slopmaster2": null,
+  "mathlib": null
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-915b6",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T071105-L-3824606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T222801-L-695635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

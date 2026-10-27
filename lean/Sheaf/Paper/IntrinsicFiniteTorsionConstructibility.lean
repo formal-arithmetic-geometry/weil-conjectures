@@ -6,6 +6,7 @@ Authors: SHEAF group NY
 module
 
 public import Sheaf.Paper.FiniteTorsionConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleIntrinsic
 
 /-!
 # Intrinsic finite-torsion constructibility without a global base datum

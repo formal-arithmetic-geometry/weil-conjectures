@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-adic-finite-tensor-components",
+ "kind": "statement",
+ "title": "Objectwise scalar-unit-normalized finite tensor realization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $T$ on which $\\ell$ is invertible, and $n,d\\in\\mathbf N$. Let $A=\\mathcal O_E/\\pi_E^{n+1}$ with the universe lift used for fixed-coefficient module sheaves. Let $F$ be the canonical realization from fixed $A$-module sheaves to modules over the constant ring sheaf, with scalar-unit section $\\eta_M$ [def-weil-extension-by-zero, def-weil-pbc-proetale-modules, def-weil-proetale-inverse-image]. Let $L$ be the degree-$d$ finite intrinsic twisting line [def-coefficient-twists-detailed] and $L^{\\mathrm{fix}}$ its constant-scalar restriction [def-pur-finite-tate-site-comparison]. For each fixed-coefficient sheaf $M$, there exists an intrinsic-module isomorphism $F(M)\\otimes L\\simeq F(M\\otimes_A L^{\\mathrm{fix}})$ sending every local tensor $\\eta_M(x)\\otimes y$ to $\\eta_{M\\otimes L^{\\mathrm{fix}}}(\\mu(x\\otimes_A y))$, where $\\mu$ is the specified lax tensor map of sheaf inclusion. This asserts a single component; its naturality and the uniqueness of the natural transformation are separate conclusions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Finite coefficient twist, coefficient reduction of the rank-one line, and nonnegative tensor powers; the component step of def-pur-adic-finite-tensor-realization."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-tate-site-comparison",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the intrinsic line to constant scalars. The canonical module sheafification adjunction identifies its associated intrinsic realization with the original line, with the counit composed with the scalar unit equal to the identity on sections. The constant scalar unit is locally bijective, so constant-scalar balancing and intrinsic balancing agree locally.",
+   "uses": [
+    "def-pur-finite-tate-site-comparison",
+    "def-weil-proetale-inverse-image",
+    "def-weil-extension-by-zero",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+    "place": "Finite coefficient twist, coefficient reduction of the rank-one line, and nonnegative tensor powers; the component step of def-pur-adic-finite-tensor-realization."
+   }
+  },
+  {
+   "text": "Tensor the realization units and use the sectionwise tensor and sheafification universal properties. The lax tensor map of fixed-module sheaf inclusion becomes an isomorphism after sheafification. Compose with the preceding identification of the second factor. Naturality of the sheafification unit gives exactly the displayed pure-tensor equation. The inverse is the map induced by the same pure tensors in the other presentation; the two composites fix pure tensors and hence are identities. Zero rings and empty objects need no additional assumption.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-proetale-inverse-image",
+    "def-pur-finite-tate-site-comparison",
+    "def-weil-extension-by-zero",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+    "place": "Finite coefficient twist, coefficient reduction of the rank-one line, and nonnegative tensor powers; the component step of def-pur-adic-finite-tensor-realization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-tate-site-comparison",
+  "def-weil-proetale-inverse-image",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-proetale-modules",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Finite coefficient twist, coefficient reduction of the rank-one line, and nonnegative tensor powers; the component step of def-pur-adic-finite-tensor-realization.",
+  "group": "Q3",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules scalar restriction tensor product with a line commutes with quotient scalar extension normalized on pure tensors",
+   "results": "8 hits: SheafOfModules.restrictScalars, RestrictScalars, TensorProduct.AlgebraTensorModule.restrictScalars_lTensor, PresheafOfModules.restrictScalarsObj, PresheafOfModules.restrictScalars, AlgebraicGeometry.Scheme.Modules.map_smul, ModuleCat.RestrictScalars.obj', ModuleCat.Tilde.toOpen",
+   "date": "2026-10-25",
+   "verdict": "Generic scalar restriction and tensor APIs; no normalized root-line component theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical tensor comparison intrinsic constant ring realization module sheaf scalar unit pure tensors",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorObj, TensorProduct.isTensorProduct, PolynomialLaw.one_tmul_ground_apply', PresheafOfModules.Monoidal.tensorObj_obj, ModuleCat.MonoidalCategory.tensorObj_carrier, ModuleCat.MonoidalCategory.tensorObj, PolynomialLaw.one_tmul_ground, PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-25",
+   "verdict": "Generic scalar restriction and tensor APIs; no normalized root-line component theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|tensor.*restrictScalars|sfIntrinsicRealizationUnit",
+   "results": "25 hits: Mathlib/Algebra/Algebra/Epi.lean, Mathlib/RingTheory/Flat/Localization.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic scalar restriction and tensor APIs; no normalized root-line component theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPurityFiniteTensor",
+  "date": "2026-10-25",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Finite coefficient twist, coefficient reduction of the rank-one line, and nonnegative tensor powers; the component step of def-pur-adic-finite-tensor-realization.",
+   "via": [
+    "def-pur-adic-finite-tensor-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPurityFiniteTensorComponents",
+  "file": "lean/Sheaf/Paper/AdicPurityFiniteTensorComponents.lean",
+  "declaration": "WeilConjectures.adicPurityFiniteTensor_component",
+  "statement": "theorem adicPurityFiniteTensor_component (d : ℕ)\n    (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (finiteTateCoefficient l E n))) :\n    ∃ e : (SheafOfModules.siteSheafTensorRight\n        (A := integralCoefficientCommRingSheaf l E T n)\n        (finiteCoefficientTwist l E T n (d : ℤ))).obj\n          ((sfIntrinsicModuleEquivalence T\n            (Padic.coefficientExtensionRing l E (n + 1))).functor.obj M) ≅\n      (sfIntrinsicModuleEquivalence T\n        (Padic.coefficientExtensionRing l E (n + 1))).functor.obj\n          (M ⊗ finiteTateProSheaf l E n T d),\n      ∀ (W : T.ProEtᵒᵖ) (x : M.obj.obj W)\n        (y : (finiteCoefficientTwist l E T n (d : ℤ)).val.obj W),\n        e.hom.val.app W\n          (SheafOfModules.siteSheafTensorTmul\n            (A := integralCoefficientCommRingSheaf l E T n) _ _ W\n            (sfIntrinsicRealizationUnit T (Padic.coefficientExtensionRing l E (n + 1)) M W x) y) =\n        sfIntrinsicRealizationUnit T (Padic.coefficientExtensionRing l E (n + 1))\n          (M ⊗ finiteTateProSheaf l E n T d) W\n          ((Functor.LaxMonoidal.μ (sheafToPresheaf (ProEt.topology T)\n            (ModuleCat.{u + 1} (finiteTateCoefficient l E n))) M\n              (finiteTateProSheaf l E n T d)).app W (x ⊗ₜ[finiteTateCoefficient l E n] y))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261025T095739-L-3476563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261025T095739-L-3476563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

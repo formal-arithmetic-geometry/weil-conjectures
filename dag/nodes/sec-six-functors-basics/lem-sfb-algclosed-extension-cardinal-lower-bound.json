@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-algclosed-extension-cardinal-lower-bound",
+ "kind": "statement",
+ "title": "Algebraically closed field extensions with any prescribed cardinal lower bound",
+ "statement": "Fix a universe $\\mathcal U$. Let $k$ be a $\\mathcal U$-small field [def-weil-field] and let $\\lambda$ be an infinite cardinal in $\\mathcal U$. There exists a $\\mathcal U$-small algebraically closed field extension $K/k$ [def-pc-field-extension, def-weil-algebraic-closure] with $\\lambda\\leq |K|$. The extension $K/k$ is not required to be algebraic.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09GT (theorem-existence-algebraic-closure), used after adjoining a set of independent variables and taking the fraction field. Agent cardinal-enlargement consequence; the construction is explained in the delivery report, not asserted to be the literal statement of 09GT."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Choose a $\\mathcal U$-small set $I$ with $|I|=\\lambda$, and form $R=k[x_i:i\\in I]$ using [def-weil-pbc-mv-polynomial-ring]. A field is a domain: if $ab=0$ and $a\\ne0$, multiplication by $a^{-1}$ gives $b=0$. Thus [lem-weil-pbc-polynomial-ring-domain] makes $R$ a domain. The coefficient of the monomial $x_i$ in $x_i$ is $1$, whereas in $x_j$ for $j\\ne i$ it is $0$; since $1\\ne0$, $i\\mapsto x_i$ is injective. The constant-polynomial map $k\\to R$ is injective by its coefficient at the constant monomial. The set $R$ is $\\mathcal U$-small: its elements are finite coefficient-supported families on finite-support exponent families on $I$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "def-weil-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09FJ (example-quotient-field) followed by Tag 09GT (theorem-existence-algebraic-closure); agent cardinal-enlargement argument."
+   }
+  },
+  {
+   "text": "Use the localization construction in [def-weil-pbc-essentially-finite-type-algebra] with $B=R$, base ring $k$ and multiplicative subset $S=R\\setminus\\{0\\}$. Set $F=S^{-1}R$. Its equality criterion reduces to $a/s=b/t$ iff $at=bs$, because $R$ is a domain and every multiplier in $S$ is nonzero. Hence $R\\to F$, $a\\mapsto a/1$, is injective, and $0\\ne1$ in $F$. A nonzero $a/s$ has $a\\ne0$ and inverse $s/a$, so $F$ is a field. The composite $k\\to R\\to F$ is a unital ring map and is injective. The fractions form a quotient of the $\\mathcal U$-small set $R\\times S$, so $F$ is $\\mathcal U$-small. No finite-type assertion from the cited definition is used.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09FJ (example-quotient-field): quotient construction, cross-multiplication and inverse of a nonzero fraction."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-pc-algebraic-closure-exists-unique] to the field $F$, choosing an algebraic closure $K/F$. Apply this existence theorem inside $\\mathcal U$: its construction is available in the same universe as $F$ (concretely, Mathlib's $\\operatorname{AlgebraicClosure}(F)$ is defined in that universe). Thus $K$ is $\\mathcal U$-small and algebraically closed. The field map $F\\to K$ is injective by [def-pc-field-extension]. Composing $k\\to F\\to K$ equips $K$ with the required field extension of $k$.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GT (theorem-existence-algebraic-closure), applied to F; Tag 09FU (lemma-field-maps-injective)."
+   }
+  },
+  {
+   "text": "The composite $I\\to R\\to F\\to K$ is injective: equality in $K$ implies equality in $F$, then in $R$, and then equality of indices by step 1. It witnesses $\\lambda=|I|\\leq|K|$. The construction only requires $K/F$ to be algebraic; it imposes no algebraicity condition on $K/k$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09FJ (example-quotient-field) followed by Tag 09GT (theorem-existence-algebraic-closure); agent cardinal-enlargement argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "def-weil-field",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Cardinal enlargement by independent variables; Tag 09FJ then Tag 09GT. The cardinal-enlargement assertion is not the literal statement of either tag."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A field has an algebraically closed extension of arbitrarily large cardinality",
+   "results": "8 hits; FirstOrder.Field.ACF_categorical; IsAlgClosed.instInfinite; AlgebraicClosure.instInhabited; AlgebraicClosure.isAlgClosed; Field.Emb.Cardinal.deg_lt_aleph0; FirstOrder.Field.isAlgClosed_of_model_ACF; IsAlgClosed.instIsAlgClosure; IsAlgClosed.ringEquiv_of_equiv_of_charZero",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned finite-type results or cardinal bounds do not state this arbitrary-generator or cardinal-enlargement assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a field k and an infinite cardinal c there exists an algebraically closed k-algebra field K with c at most cardinal K",
+   "results": "8 hits; FirstOrder.Field.ACF_categorical; IsAlgClosed.instInfinite; IsAlgClosed.cardinal_le_max_transcendence_basis'; IsAlgClosed.cardinal_le_max_transcendence_basis; IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt; Field.Emb.Cardinal.deg_lt_aleph0; IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt'; Field.infinite_emb_of_transcendental",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned finite-type results or cardinal bounds do not state this arbitrary-generator or cardinal-enlargement assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAlgClosed\", \"Cardinal\"",
+   "results": "4 hits; IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt'; IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt; IsAlgClosed.cardinal_le_max_transcendence_basis'; IsAlgClosed.cardinal_le_max_transcendence_basis",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned finite-type results or cardinal bounds do not state this arbitrary-generator or cardinal-enlargement assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any field k and cardinal bound there is an algebraically closed extension K with larger cardinality",
+   "results": "8 hits; AlgebraicClosure; IsAlgClosed.cardinal_le_max_transcendence_basis; AlgebraicClosure.isAlgClosed; IsAlgClosure.ofAlgebraic; IsAlgClosed.cardinal_le_max_transcendence_basis'; IsTranscendenceBasis.lift_cardinalMk_eq_max_lift; isAlgClosure_iff; Field.Emb.Cardinal.deg_lt_aleph0",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned finite-type results or cardinal bounds do not state this arbitrary-generator or cardinal-enlargement assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Aa]lg[Cc]losed|[Aa]lg[Cc]losed.*exists|mk.*[Mm]v[Rr]at[Ff]unc|[Mm]v[Rr]at[Ff]unc.*mk",
+   "results": "11 hits; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/FieldTheory/IsSepClosed.lean; Mathlib/FieldTheory/AlgebraicClosure.lean; Mathlib/FieldTheory/AlgebraicClosure.lean; source directory Mathlib/FieldTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned finite-type results or cardinal bounds do not state this arbitrary-generator or cardinal-enlargement assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*cardinal|cardinal.*exists|exists.*[Cc]ard|[Cc]ard.*exists",
+   "results": "4 hits; Mathlib/FieldTheory/Galois/Basic.lean; Mathlib/FieldTheory/Cardinality.lean; Mathlib/FieldTheory/Finite/Basic.lean; Mathlib/FieldTheory/Finite/Basic.lean; source directory Mathlib/FieldTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned finite-type results or cardinal bounds do not state this arbitrary-generator or cardinal-enlargement assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every integral domain has a field of fractions and an injective canonical ring homomorphism into it",
+   "results": "{\"t\": \"2026-10-23T18:50:38Z\", \"tool\": \"leanfinder\", \"query\": \"Every integral domain has a field of fractions and an injective canonical ring homomorphism into it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionRing.field\", \"IsFractionRing.toField\", \"IsFractionRing.isDomain\", \"IsFractionRing.injective\", \"FractionRing.instIsFractionRing\", \"instIsFractionRing\", \"IsFractionRing.of_field\", \"isFractionRing_of_exists_eq_algebraMap_or_inv_eq_algebraMap_of_injective\"], \"digest\": \"64c85b8547b466d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing.injective",
+   "results": "{\"t\": \"2026-10-23T18:51:21Z\", \"tool\": \"loogle\", \"query\": \"IsFractionRing.injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsFractionRing.injective\"], \"digest\": \"11171f7bbba83e9a\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev FractionRing|def FractionRing|instance field|theorem injective|isFractionRing",
+   "results": "{\"t\": \"2026-10-23T18:51:21Z\", \"tool\": \"grep\", \"query\": \"abbrev FractionRing|def FractionRing|instance field|theorem injective|isFractionRing\", \"sub\": \"RingTheory/Localization/FractionRing.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"26\", \"28\", \"52\", \"53\"], \"digest\": \"701c8a9bc26b72e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative integral domain has a fraction field in the same universe with an injective structure map",
+   "results": "{\"t\": \"2026-10-23T18:52:10Z\", \"tool\": \"leansearch\", \"query\": \"A commutative integral domain has a fraction field in the same universe with an injective structure map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.injective\", \"Algebra.instIsEpiOfIsDomainOfIsFractionRing\", \"IsFractionRing.toField\", \"FractionRing.field.congr_simp\", \"isFractionRing_of_exists_eq_algebraMap_or_inv_eq_algebraMap_of_injective\", \"RatFunc.toFractionRing_injective\", \"FractionRing.instIsFractionRing\", \"FractionRing.field\"], \"digest\": \"824f8580108e43f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The localization of an integral domain at its nonzero elements is a field and the original ring embeds into it",
+   "results": "{\"t\": \"2026-10-23T18:52:12Z\", \"tool\": \"leanfinder\", \"query\": \"The localization of an integral domain at its nonzero elements is a field and the original ring embeds into it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FractionRing.field\", \"IsFractionRing.toField\", \"OreLocalization.instFieldNonZeroDivisors\", \"Localization.subalgebra.isLocalization_ofField\", \"Localization.subalgebra.isFractionRing_ofField\", \"IsFractionRing.isFractionRing_of_isDomain_of_isLocalization\", \"instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing\", \"Localization.subalgebra.isFractionRing\"], \"digest\": \"15eb6b99e955bef2\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "grep",
+   "query": "abbrev FractionRing|def FractionRing|instance field|theorem injective",
+   "results": "{\"t\": \"2026-10-23T18:52:12Z\", \"tool\": \"grep\", \"query\": \"abbrev FractionRing|def FractionRing|instance field|theorem injective\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\", \"Mathlib/RingTheory/Localization/Defs.lean\"], \"digest\": \"94f0baaf207b7fec\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Aa]lg[Cc]losed|[Aa]lg[Cc]losed.*exists|[Cc]ardinal.*[Aa]lg[Cc]losed|[Aa]lg[Cc]losed.*[Cc]ardinal",
+   "results": "{\"t\": \"2026-10-23T18:54:26Z\", \"tool\": \"grep\", \"query\": \"exists.*[Aa]lg[Cc]losed|[Aa]lg[Cc]losed.*exists|[Cc]ardinal.*[Aa]lg[Cc]losed|[Aa]lg[Cc]losed.*[Cc]ardinal\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsSepClosed.lean\", \"Mathlib/FieldTheory/AlgebraicClosure.lean\", \"Mathlib/FieldTheory/AlgebraicClosure.lean\", \"Mathlib/FieldTheory/SeparableDegree.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\"], \"digest\": \"f329602fec29a090\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebraic closure of the rational function field on an arbitrary set has cardinality at least that set",
+   "results": "{\"t\": \"2026-10-23T18:54:26Z\", \"tool\": \"leansearch\", \"query\": \"The algebraic closure of the rational function field on an arbitrary set has cardinality at least that set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.cardinal_le_max_transcendence_basis\", \"AlgebraicClosure\", \"IsAlgClosed.cardinal_le_max_transcendence_basis'\", \"AlgebraicClosure.isAlgebraic\", \"AlgebraicClosure.isAlgClosed\", \"IntermediateField.cardinalMk_adjoin_le\", \"AlgebraicClosure.instField\", \"AlgebraicClosure.instIsAlgClosureOfIsAlgebraic\"], \"digest\": \"bc1568a70551c9fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAlgClosed\", \"Cardinal\"",
+   "results": "{\"t\": \"2026-10-23T18:54:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAlgClosed\\\", \\\"Cardinal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt'\", \"IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt\", \"IsAlgClosed.cardinal_le_max_transcendence_basis'\", \"IsAlgClosed.cardinal_le_max_transcendence_basis\"], \"digest\": \"7f9f136145f55300\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field k and a small type I there exists an algebraically closed extension K of k with an injection from I into K",
+   "results": "{\"t\": \"2026-10-23T18:54:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a field k and a small type I there exists an algebraically closed extension K of k with an injection from I into K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure.instInhabited\", \"Field.Emb.Cardinal.deg_lt_aleph0\", \"IsAlgClosed.instInfinite\", \"AlgebraicClosure.isAlgClosed\", \"FirstOrder.Field.ACF_categorical\", \"Field.infinite_emb_of_transcendental\", \"IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset\", \"Field.Emb.Cardinal.embEquivPi\"], \"digest\": \"ef56a4890ae3b339\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: the hits supply supporting fraction-field or algebraic-closure facts, not the required cardinal enlargement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-large-algclosed-jacobson",
+  "date": "2026-10-23",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: geometric: Tag 0B8F proof, first input 0B8E; schemeness after algebraic closure before descent. Auxiliary input: Tag 0B8E: choose a sufficiently large algebraically closed extension for an arbitrary etale scheme atlas. Supporting input: Algebraically closed field extensions with any prescribed cardinal lower bound.",
+   "via": [
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-sfb-separated-group-space-geometric-scheme",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algclosed-extension-cardinal-lower-bound",
+  "worker": "stage1",
+  "summary": "Construct the polynomial ring on a small set of cardinality lambda, explicitly check distinct variables, localize at its nonzero elements and prove the field and injectivity properties directly, then apply existing algebraic-closure existence and compose the three injections. No new nodes; no change to the statement or its dependencies. All non-elementary inputs are existing Mathlib leaves. All supporting and whole-item searches are recorded honestly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: geometric: Tag 0B8F proof, first input 0B8E; schemeness after algebraic closure before descent. Auxiliary input: Tag 0B8E: choose a sufficiently large algebraically closed extension for an arbitrary etale scheme atlas. Supporting input: Algebraically closed field extensions with any prescribed cardinal lower bound. Realizes the final supporting cardinal-enlargement prerequisite by the construction already specified in the item source; the blueprint ancestor is absent (from.node is null in the live node). No change of unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-59addd32b",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-59addd32b (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement is unchanged against live, which still has the item unsplit with no proof, and it is true. Tested cases: F_2 with λ=ℵ_0; ℂ; a countable k with a large λ, where the algebraic closure of k alone would fail, which justifies 'not required to be algebraic'. Step 1 uses the arbitrary-set polynomial ring and the domain node; injectivity of the variables and constants is shown by coefficients. Step 2 uses the W^{-1}B construction stated in def-weil-pbc-essentially-finite-type-algebra (S=R∖{0}, cancellation gives cross-multiplication, so F is a field and R→F is injective); this is Stacks 09FJ, fields.tex:104, and accepted as elementary. Step 3 uses clause (1) of lem-pc-algebraic-closure-exists-unique (Stacks 09GT, line 967; Mathlib AlgebraicClosure : Type u, line 127) and injectivity of field maps from def-pc-field-extension (09FU, line 254). Step 4 composes the injections, giving λ≤|K|. Every cited node is a definition or a Mathlib leaf, so no route issue arises and no tool_uses are needed. The citer lem-sfb-scheme-large-algclosed-jacobson step 1 uses exactly this statement. No duplicate in the DAG (rg -L for cardinal + algebraically closed and for fraction field). All three kinds of Mathlib search are recorded. No SGA cited. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.AlgClosedExtensionCardinalLowerBound",
+  "declaration": "Field.exists_algClosed_extension_cardinal_le",
+  "file": "lean/Sheaf/FieldTheory/AlgClosedExtensionCardinalLowerBound.lean",
+  "statement": "theorem exists_algClosed_extension_cardinal_le (k : Type u) [Field k] (κ : Cardinal.{u}) (hκ : Cardinal.aleph0 ≤ κ) : ∃ (K : Type u) (_ : Field K) (_ : Algebra k K), IsAlgClosed K ∧ κ ≤ Cardinal.mk K",
+  "branch": "sheaf-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e34f61141",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Clause-by-clause match: k:Type u field, κ:Cardinal.{u} with ℵ0≤κ, ∃ K:Type u, Field K, Algebra k K (def-pc-field-extension encoding), IsAlgClosed K (not IsAlgClosure: node says K/k need not be algebraic), κ ≤ #K; no extra assumptions, no universe restriction; lean.statement verbatim equal to the file signature. Snapshot node differs from live only in lean; no new nodes, no stmt_deps change, item unlanded in live. No Mathlib or project duplicate (LargeAlgClosedFieldExtension has a different conclusion). Edge cases (finite char 2, countable k with large κ, κ≤|k|, universes) all hold. Proof is sorry; docstrings give source place, blueprint tag and all 4 steps; public imports are needed by the statement, plain imports are proof_dep modules. Worker reports a clean compile; no file changed, so no recompile."
+ }
+}

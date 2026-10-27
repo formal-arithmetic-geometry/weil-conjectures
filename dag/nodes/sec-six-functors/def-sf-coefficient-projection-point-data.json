@@ -1,0 +1,137 @@
+{
+ "id": "def-sf-coefficient-projection-point-data",
+ "kind": "definition",
+ "title": "Coefficient point tensor, signed symmetry and normalized sections data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. On the actual quotient point tower and small pro-etale sequence module categories [def-coef-ringed-sequence-site, lem-coef-hom-tower-scalar-model], use the native quotient levels and transition maps [def-weil-compact-support-native-system-evaluation] and define the commutative quotient-ring presentation and transport its pointwise tensor to the recorded module category. Define ordinary point-sections, geometric direct-image [def-sp-varying-ring-operations] and scalar-restriction lax tensor data by their values on every local pure tensor, using the recorded semilinear tensor sections [def-coef-semilinear-system-models] and sheaf tensor [def-pur-sheaf-tensor-product]. Define derived quotient and integral point tensor data by universal signed-total localization [def-sf-coefficient-projection-adjunction-data], and the quotient symmetry by the signed swap on every total summand. For a scheme morphism use the pro-etale base-change functor [def-weil-proetale-inverse-image] to define the terminal-object pullback isomorphism and the ordinary and derived point-sections composition data, normalized on sections and on the universal derived units. These are data and compatibility predicates, not existence assertions.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-hom-tower-scalar-model",
+  "def-sf-coefficient-projection-adjunction-data",
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "def-coef-semilinear-system-models",
+  "def-weil-proetale-inverse-image",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0B56, 0D6E; signed total tensor 06YN; normalized comparisons used in blueprint prop-coef-integral-dualizing proof paragraph 2."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PointSymmetry|SectionsComposition|SectionsTensor|RestrictionTensor",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no exact package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed total tensor on quotient module towers and scalar restriction with derived sections composition normalization",
+   "results": "8 hits: TensorProduct.tensorQuotientEquiv; LinearMap.compQuadraticMap'; Submodule.restrictScalars; TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk; TensorProduct.directSumRight'_restrict; TensorProduct.quotientTensorQuotientEquiv; TensorProduct.quotientTensorEquiv; TensorProduct.tensorQuotEquivQuotSMul_comp_mk",
+   "date": "2026-10-24",
+   "verdict": "no exact package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient coefficient point tower tensor with local pure sections and normalized derived sections composition",
+   "results": "8 hits: Algebra.Generators.cotangentCompAwaySec; Algebra.Generators.map_comp_cotangentCompAwaySec; Algebra.Generators.cotangentCompAwaySec_apply; Algebra.Extension.tensorCotangentInvFun; Algebra.Generators.cotangentCompLocalizationAwayEquiv; Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv; Algebra.Extension.tensorCotangentInvFun_smul_mk; Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+   "date": "2026-10-24",
+   "verdict": "no exact package"
+  },
+  {
+   "tool": "rg and blueprint_refs.py search",
+   "query": "Exact declaration names in lean/WeilConjectures and lean/Sheaf; new id in dag/nodes; point tensor in blueprint",
+   "results": "No exact names or id. Blueprint search returned def-weil-poincare-trace-cup, not this sequence-site normalization package.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-system-projection-evaluation",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, mapping-complex adjunction and specified natural maps before limits; returned expansion lem-coef-tower-evaluation-pairing, steps 6-8: Projection-evaluation word on ringed coefficient systems.",
+   "via": [
+    "lem-coef-system-projection-evaluation",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefficientProjectionPointData",
+  "declaration": "WeilConjectures.CoefProjectionEvaluation.SectionsComposition",
+  "declarations": [
+   "WeilConjectures.CoefProjectionEvaluation.pointRing",
+   "WeilConjectures.CoefProjectionEvaluation.pointRing_forget",
+   "WeilConjectures.CoefProjectionEvaluation.ringMonoidal",
+   "WeilConjectures.CoefProjectionEvaluation.pointMonoidal",
+   "WeilConjectures.CoefProjectionEvaluation.pointPreadditive_exists",
+   "WeilConjectures.CoefProjectionEvaluation.pointPreadditive",
+   "WeilConjectures.CoefProjectionEvaluation.integralPointMonoidal",
+   "WeilConjectures.CoefProjectionEvaluation.systemMonoidal",
+   "WeilConjectures.CoefProjectionEvaluation.systemPreadditive",
+   "WeilConjectures.CoefProjectionEvaluation.ringTensorSection",
+   "WeilConjectures.CoefProjectionEvaluation.SectionsTensor",
+   "WeilConjectures.CoefProjectionEvaluation.PushTensor",
+   "WeilConjectures.CoefProjectionEvaluation.RestrictionTensor",
+   "WeilConjectures.CoefProjectionEvaluation.restrictionUnit",
+   "WeilConjectures.CoefProjectionEvaluation.integralPointPreadditive",
+   "WeilConjectures.CoefProjectionEvaluation.PointTensor",
+   "WeilConjectures.CoefProjectionEvaluation.pointGenerator",
+   "WeilConjectures.CoefProjectionEvaluation.PointSymmetry",
+   "WeilConjectures.CoefProjectionEvaluation.terminalPullback",
+   "WeilConjectures.CoefProjectionEvaluation.systemPushAdditive",
+   "WeilConjectures.CoefProjectionEvaluation.sectionsAdditive",
+   "WeilConjectures.CoefProjectionEvaluation.SectionsComposition",
+   "WeilConjectures.CoefProjectionEvaluation.PointTensor.qTensor",
+   "WeilConjectures.CoefProjectionEvaluation.PointTensor.rTensor"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CoefficientProjectionPointData.lean",
+  "statement": "structure SectionsComposition {X Y : Scheme.{u}} (a : X ⟶ Y)",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9726b135",
+  "group": "Q19",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9726b135",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of a18b (RETURN H2/H12). All three Lean modules are byte-identical to a18b (cmp), whose maths was accepted; re-read v/Pi/q/balance/beta/ScalarSpecialization and the theorem signature against the node: OK. The item's stmt_deps gained the 7 requested landed def owners (VaryingRing, compact-support native evaluation, open-tensor evaluation data, point-sections data, derived symmetric monoidal data, scalar-Hom comparison, derived-system calculus) plus the 2 new nodes, and lost none; all are on side-live with lean records (STMT_DEPS MAY GAIN LANDED NODES); statement text unchanged; no other base node modified. Point-data node now cites the 5 requested owners, placed in its statement text. Adjunction-data node cites lem-weil-pbc-ringed-topoi-derived-tensor-pullback for tensorPullbackTotal: correct, because no def node lists that declaration and its source (RingedTopoiCanonicalTensorPullback.lean:147) is tagged to that theorem. Report has Worker report, Second reading by Q19 and the repair section. Only named-theorem sorries; docstrings OK; universes as siblings. No file changed, no compile (report: 11.5/40.1/53.4 s)."
+ }
+}

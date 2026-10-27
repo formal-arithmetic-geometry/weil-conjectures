@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-identity-full-cohomological-dimension",
+ "kind": "statement",
+ "title": "Full cohomological dimension zero for identity",
+ "statement": "Let $s$ be any scheme and $A$ any finite commutative ring. In the intrinsic constant-ring module derived categories of [def-weil-proetale-inverse-image], the identity morphism has full cohomological dimension zero: $\\operatorname{FullCD}(\\operatorname{id}_s,A;0)$ in [def-weil-full-cohomological-dimension]. Both clauses apply to every module sheaf, and the second to every pro-etale test object, without finite-type or constructibility restrictions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+  "place": "identity-adjunction sentence, expanded in parent steps 1--2 (FullCD) and 3--5, 8 (support normalization)"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-full-cohomological-dimension"
+ ],
+ "proof": [
+  {
+   "text": "For an isomorphism f, conjugate the fixed-scalar pro-etale lowerStar equivalence through the canonical coefficient realization. The section-normalized direct-image comparison yields an equivalence for the actual intrinsic direct image. This is directImage_isEquivalence in Lean.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An equivalence is exact, so its right derived functor agrees with its exact termwise descent. The singleFunctor comparison identifies the image of F[0] with (f_*F)[0]. The standard t-structure therefore gives zero cohomology in every positive degree. This is positive_directImage_single.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding argument to id_s and to the second projection from the pullback of id_s along each pro-etale object V. Both morphisms are isomorphisms. In the second application use the specified pullback of F as the sheaf in degree zero. Conjunction introduction gives the two FullCD clauses.",
+   "uses": [
+    "def-weil-full-cohomological-dimension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-weil-proetale-inverse-image",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-full-cohomological-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-global-duality/lem-sf-point.proof.md",
+  "place": "identity-adjunction sentence, expanded in parent steps 1--2 (FullCD) and 3--5, 8 (support normalization)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Identity direct image on a scheme has zero positive derived cohomology after all pro-etale base changes",
+   "results": "8 hits: TopCat.Presheaf.Pushforward.id, AlgebraicGeometry.Scheme.Hom.id_preimage, AlgebraicGeometry.Scheme.Cover.id_app, AlgebraicGeometry.Scheme.Hom.id_image, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Cover.id_idx_apply, AlgebraicGeometry.Scheme.IdealSheafData.comap_id, AlgebraicGeometry.Scheme.Hom.id_base. No theorem of the required intrinsic comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPushforwardContinuousId",
+   "results": "3 hits: CategoryTheory.Functor.sheafPushforwardContinuousId, CategoryTheory.Functor.sheafPushforwardContinuousId_hom_app_hom_app, CategoryTheory.Functor.sheafPushforwardContinuousId_inv_app_hom_app. No theorem of the required intrinsic comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfFullCohomologicalDimension_identity|identity.*[Cc]ohomologicalDimension",
+   "results": "0 hits: . No theorem of the required intrinsic comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointIdentityAdmissibility",
+  "date": "2026-10-26",
+  "group": "F1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-global-duality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-point",
+   "place": "proof, identity is its own right adjoint; parent identity admissibility calculation",
+   "via": [
+    "lem-sf-point-identity-admissibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdentityFullCohomologicalDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdentityFullCohomologicalDimension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfFullCohomologicalDimension_identity",
+  "statement": "theorem sfFullCohomologicalDimension_identity (s : Scheme.{u})\n    (A : Type u) [CommRing A] [Finite A] :\n    sfFullCohomologicalDimension (𝟙 s) A 0",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-43b7c",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T201824-L-2625200",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-43b7c",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T201824-L-2625200",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointIdentityAdmissibility + 2 new modules/nodes vs clone (item node, unit sk-thm-sf-global-duality realized empty, ClopenSectionComponent/ExceptionalAdjointAdmissibility/SfCompactSupportRestrictionOfScalars defs); axioms probe compiled in /tmp sandbox"
+ }
+}

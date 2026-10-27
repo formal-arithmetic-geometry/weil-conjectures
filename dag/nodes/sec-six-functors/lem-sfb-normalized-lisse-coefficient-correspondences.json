@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-normalized-lisse-coefficient-correspondences",
+ "kind": "statement",
+ "title": "Normalized lisse integral, rational and algebraic-closure correspondences",
+ "statement": "Fix a prime ell, a connected locally Noetherian quasi-compact scheme X, an algebraically closed geometric point x, and a profinite group G acting on the finite-etale fibre and satisfying the fundamental-group property [def-galois-fibre-functor]. Given any finite Galois lisse correspondence c [def-pod-galois-correspondence-data-e4], there exists C of type Correspondences in [def-sfb-lisse-representation-data] for which IntegralNormalization ell x G c C E holds for every finite intermediate coefficient field E and Compatibilities ell x G C holds. This asserts only the normalized correspondences of clauses (1)--(3), not the geometric-freeness theorem for arbitrary lisse rational modules, normal integrality, or the field-of-definition theorem for arbitrary continuous representations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+  "place": "Clauses (1)--(3), tensor/scalar paragraph; original DAG steps 1--11"
+ },
+ "stmt_deps": [
+  "def-sfb-lisse-representation-data",
+  "def-galois-fibre-functor",
+  "def-pod-galois-correspondence-data-e4"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_E$, $t=\\pi_E$, $A_n=A/t^n$ for $n\\geq1$, and $G=\\pi_1(X,\\bar x)$. The $A_n$ are finite local rings with surjective reductions [def-weil-l-adic-coefficient-extension]. The scheme is qcqs by [lem-weil-pbc-locally-noetherian-quasi-separated], and its underlying space is Noetherian by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. These checks will permit the section-continuity, finite-field descent and finite-etale lattice descent results below. Connectedness with a geometric point makes $X$ nonempty.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "Opening conventions; hypotheses for (1)-(4)"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-continuous-ring-universe-realization] to identify the integral and finite rational condensed coefficient sheaves with $U\\mapsto C(|U|,A)$ and $U\\mapsto C(|U|,E)$. The inclusion and embedded lattices are identified by [lem-sfb-embedded-lattice-coefficient-comparison]. Thus [lem-sfb-integral-lisse-reduction-equivalence] applies to our actual integral module category: reduction $N\\mapsto(N/t^nN)_n$ is an equivalence onto normalized finite locally free towers, with inverse the sheaf limit. For finite $A_n$, [det-pe-finite-local-systems-twist] identifies these tower terms and all their maps with finite locally constant etale $A_n$-module sheaves. No separatedness or invertibility of $\\ell$ is assumed in any of these four statements.",
+   "uses": [
+    "lem-sfb-continuous-ring-universe-realization",
+    "lem-sfb-embedded-lattice-coefficient-comparison",
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "det-pe-finite-local-systems-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; Proposition 6.8.4(1); finite classical comparison also Stacks 099Y"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-lisse-geometric-fibres-finite-free] for the actual finite free geometric sections. For finite classical sheaves identify sections after pullback with the etale stalk, naturally on all pointed germs. These are the precise finite-fibre comparisons used in IntegralNormalization.",
+   "uses": [
+    "lem-sfb-lisse-geometric-fibres-finite-free",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-cbc-proetale-comparison-stalk",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For integral lisse $N$, write $F_n$ for the finite etale model of $N/t^nN$. The exact coefficient pullback [sk-prop-sfb-cartesian-coefficients] identifies its pullback quotient with $(\\bar x^*N)/t^n$. On the point the free module and its quotients give $N_{\\bar x}\\cong\\varprojlim_n(F_n)_{\\bar x}$ by [lem-sfb-integers-profinite-tower]. This does not assert that arbitrary inverse image preserves arbitrary limits. By [cor-galois-lisse-representations](1), the $M_n=(F_n)_{\\bar x}$ have continuous $G$-actions and equivariant normalized transitions. Their limit action on $M=N_{\\bar x}$ is continuous: in any free basis the $t$-adic topology is the inverse-limit topology, and each finite coordinate of $G\\times M\\to M$ is the continuous action on $M_n$. The supplied c.finiteEvaluationAction identifies all coefficient-level actions with the same c.γ evaluation action on underlying set fibres, and therefore the quotient maps are equivariant even for the arbitrary supplied finite correspondence.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-integers-profinite-tower",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(1), construction of the integral action and its continuity"
+   }
+  },
+  {
+   "text": "The finite equivalences in [cor-galois-lisse-representations](1), applied levelwise and using their scalar-reduction compatibility, give a bijection on compatible families of tower morphisms. The reduction equivalence [lem-sfb-integral-lisse-reduction-equivalence] therefore yields\n$\\Hom(N,N')=\\varprojlim_n\\Hom_G(M_n,M'_n)=\\Hom_G(M,M')$.\nFor the last equality an $A$-linear map to $M'=\\varprojlim M'_n$ is a compatible family of maps, each killing $t^nM$; the same projections test equivariance. These linear maps are continuous since they preserve every $t^n$-submodule. This proves full faithfulness in (1).",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-sfb-integral-lisse-reduction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(1), Full faithfulness"
+   }
+  },
+  {
+   "text": "Conversely let $M$ be finite free over $A$ with continuous $G$-action. Each $M/t^nM$ is finite discrete with continuous action. Apply [cor-galois-lisse-representations](1) to obtain $F_n$, with transition maps obtained from the actual quotient maps by full faithfulness. The canonical reduction identifications make the pulled-back $F_n$ a normalized tower, so [lem-sfb-integral-lisse-reduction-equivalence] constructs a lisse $N=\\varprojlim_n\\nu^*F_n$ with these reductions. Step 4 identifies its fibre with $M$ equivariantly. The equivalence in (1), including its reduction normalization, follows. In the other direction finite free stalk towers have free inverse limit by [lem-per-normalized-tower-finite-free]; their ranks agree because reduction to the residue field preserves the rank of a free module. Thus constant finite rank is justified at finite level rather than by the imported rank lemma, which only states the rational case.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "lem-per-normalized-tower-finite-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(1), Essential surjectivity and constant-rank check"
+   }
+  },
+  {
+   "text": "For lattices $N,N'$ put $L=N[1/\\ell]$, $L'=N'[1/\\ell]$. The coefficient localization is [sk-prop-sfb-qlbar-colimit-x]. Since $N$ is locally finite free, maps from $N$ are sections of $N^\\vee\\otimes-$: on a free chart both sides are the finite direct sum of the target, and the evaluation identifications agree on overlaps. Hence this internal Hom commutes with filtered colimits, by its finite free chart formula. Applying [det-lem-coefficient-finite-descent-sections](1) on the qcqs final object gives\n$\\Hom_{E_X}(L,L')=\\varinjlim_{c\\geq0}\\Hom_{A_X}(N,t^{-c}N')$.\nHere $t^{-c}N'$ is the lattice embedded in $L'$ by multiplication by $t^{-c}$; the equality also uses the universal property of inverting $t$ (equivalently $\\ell$). Pullback tensor and the free-point calculation give $L_{\\bar x}=E\\otimes_A N_{\\bar x}$, using [lem-pur-proetale-inverse-image-tensor-comparison].",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "det-lem-coefficient-finite-descent-sections",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(2), Morphisms: bounded denominators on sheaves"
+   }
+  },
+  {
+   "text": "Apply (1) to every term of the preceding Hom colimit. An $E$-linear equivariant map $V\\to V'$ carries a finite $A$-basis of $M$ into $t^{-c}M'$ for one $c$; restriction is then an equivariant $A$-linear map, and two representatives agree exactly after increasing $c$. Thus the colimit is $\\Hom_G(V,V')$, proving rational full faithfulness. For two lattices $N,N_1$ in the same $L$, step 7 applied to the identity of $L$ gives $t^cN\\subseteq N_1$. By (1) this inclusion intertwines their integral actions, and after localization it is the identity of $L_{\\bar x}$ on the underlying embedded fibres. Consequently the two rational actions coincide. The same argument gives composition and functoriality independently of all lattice choices.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(2), Full faithfulness and Independence of the lattice"
+   }
+  },
+  {
+   "text": "For a continuous finite-dimensional $E$-representation $V$, [lem-pod-profinite-stable-lattice] gives a stable finite free $A$-lattice $M$ with continuous restricted action. Part (1) produces $N$ with fibre $M$, and $N[1/\\ell]$ has fibre $V$. This proves essential surjectivity in (2). The usual continuity convention for a map $G\\to\\GL_r(E)$ gives a jointly continuous action, since each coordinate is a finite sum of products of a continuous matrix coefficient and a vector coordinate; conversely, evaluation on a basis recovers the matrix coefficients. Thus the stable-lattice node applies under the stated continuity hypothesis.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet; blueprint (2), Essential surjectivity"
+   }
+  },
+  {
+   "text": "For finite $E\\subset F$, integral extension of scalars carries $N$ to the lattice $\\mathcal O_{F,X}\\otimes_{A_X}N$ in $F_X\\otimes_{E_X}L$: local free charts prove the inclusion and localization assertions. The coefficient extensions are finite free by [sk-prop-sfb-cartesian-coefficients]; an integral basis exists by [lem-sfb-local-field-integral-basis]. Consequently scalar extension of the finite reduction towers commutes with their limits: in such a basis it is a finite direct sum, and the $t$-power and $\\pi_F$-power filtrations are cofinal because $t=u\\pi_F^e$ for a unit $u$ and $e>0$ [def-weil-l-adic-coefficient-extension]. The finite-level tensor and coefficient comparisons of [cor-galois-lisse-representations](1) therefore give the integral, then rational tensor/scalar comparisons. Each comparison sends $a\\otimes v$ to $a\\otimes v$, so units, associativity, symmetry and successive coefficient extensions agree on generators. This proves the asserted compatibilities for (1),(2).",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-local-field-integral-basis",
+    "def-weil-l-adic-coefficient-extension",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(2)-(3), tensor products and finite coefficient extension"
+   }
+  },
+  {
+   "text": "Use [det-lem-coefficient-finite-descent-lisse](2) for the qcqs $X$. If two integral finite-field models define the same $\\QbarX$-module, its isomorphism and its inverse descend to a common finite field; after enlarging that field their composites are identities, by equality in the filtered Hom colimit. Part (2) and step 10 then identify their scalar-extended actions through the actual identity on the $\\Qlb$-fibre. The action in (3) is thus independent of the model. For models over a common $E$, the same node and (2) give\n$\\Hom_{\\QbarX}(L_{\\Qlb},L'_{\\Qlb})=\\varinjlim_{F\\supset E}\\Hom_G(V_F,V'_F)$.\nThis is $\\Hom_G(V_{\\Qlb},V'_{\\Qlb})$: any matrix over $\\Qlb$ has finitely many entries in some finite $F$, and its intertwining equations already hold over $F$ by injectivity of $F\\hookrightarrow\\Qlb$. This proves full faithfulness without an uncited flat-invariants theorem. A representation defined over $E$ comes from (2), proving essential surjectivity in (3). The tensor/scalar comparisons follow from step 10 after descent to a common finite field.",
+   "uses": [
+    "det-lem-coefficient-finite-descent-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+    "place": "(3), model independence, morphisms and essential surjectivity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-continuous-ring-universe-realization",
+  "lem-sfb-embedded-lattice-coefficient-comparison",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "det-pe-finite-local-systems-twist",
+  "lem-sfb-lisse-geometric-fibres-finite-free",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-integers-profinite-tower",
+  "cor-galois-lisse-representations",
+  "lem-per-normalized-tower-finite-free",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "det-lem-coefficient-finite-descent-sections",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pod-profinite-stable-lattice",
+  "lem-sfb-local-field-integral-basis",
+  "det-lem-coefficient-finite-descent-lisse"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+  "place": "Clauses (1)--(3), tensor/scalar paragraph; original DAG steps 1--11"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free geometric fibre of a locally constant sheaf of modules at a separably closed point",
+   "results": "Returned free sheaf modules, free loci and locally constant functions; no normalized condensed geometric fibre/correspondence statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match for normalized correspondences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lisse sheaves continuous representations integral lattice normal Noetherian scheme",
+   "results": "Returned invariant integrality and condensed module functors; no matching scheme theorem.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finiteDimensional_forall_mem|lisse_qlbar_representations",
+   "results": "Remote msearch grep returned no hits. Local rg of both Lean roots found the assigned theorem, the existing compact matrix theorem in WeilConjectures.RepresentationTheory.IntegralModel, and the invariant-subspace transport helpers in Sheaf.RepresentationTheory.LAdicSubrepresentation. Read the proof-dependency signatures and relevant Mathlib site/module files. No other declaration supplies the new step in its full normalized interface; matrix descent supplies the entry-field step but not the invariant-subspace and continuity comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use existing declarations as ingredients; a separate step is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseQlbarRepresentations",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-lisse-qlbar-representations",
+   "place": "Clauses (1)--(3), tensor/scalar paragraph; original DAG steps 1--11",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedLisseCoefficientCorrespondences",
+  "file": "lean/Sheaf/Paper/NormalizedLisseCoefficientCorrespondences.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.LisseRepresentation.exists_normalized_coefficient_correspondences",
+  "statement": "theorem exists_normalized_coefficient_correspondences\n    (ell : ℕ) [Fact ell.Prime]\n    (X : Scheme.{u}) [ConnectedSpace X] [IsLocallyNoetherian X] [CompactSpace X]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)\n    (G : ProfiniteGrp.{u}) [∀ P, MulAction G ((Scheme.FiniteEtale.fiber x).obj P)]\n    [CategoryTheory.PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber x) G]\n    (c : Scheme.GaloisLisseFiniteCorrespondence x G) :\n    ∃ C : Correspondences ell x G,\n      (∀ E, IntegralNormalization ell x G c C E) ∧ Compatibilities ell x G C",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "independent cc review: Defs module vs live item namespace body (verbatim apart from a local irreducible attribute); theorem signature byte-identical; 3 sorry statements vs thm-lisse-qlbar-representations clauses (1)-(4) and GaloisLisseFiniteCorrespondence fields; item node vs live (lean/proof/proof_deps/proof_origin plus an in-order tool_uses subsequence); scratch --all build with #print axioms"
+ }
+}

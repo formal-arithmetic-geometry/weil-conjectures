@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-log-smooth-composition-strict-base-change",
+ "kind": "statement",
+ "title": "Composition and strict base change in logarithmic smoothness",
+ "statement": "For locally Noetherian fs log schemes [def-trf-fs-log-blowup], use log smooth and log etale in the chart sense of [def-per-fs-log-smooth-etale]. Composites of log smooth morphisms are log smooth; log etale morphisms are log smooth; hence a log etale morphism followed by a log smooth morphism is log smooth. A strict base change of a log smooth morphism is log smooth, where strict means the source log structure is the log structure pulled back from the target. These properties can be checked on jointly surjective strict etale neighborhoods of source and target. For a nonempty coherent log ideal on an fs log scheme, its saturated log blowup, whenever it exists, is log etale. Finite saturated log blowup towers are therefore log etale.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1--1.8, printed pp.69--70 (fs log schemes and log smooth chart calculus); VIII 3.3.8--3.3.11, printed pp.107--108, especially 3.3.11 explicitly asserting that saturated log blowups are log etale; X proof of 1.1 and 1.3, printed p.139 (preservation of log smoothness through log blowups). General composition and strict base-change chart calculus: Kato 1988 Theorem 3.5, WANTED locally. No Stacks tag states this logarithmic calculus."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "def-per-strict-log-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Construct identities and compositions with their actual relative section maps using [lem-sfb-log-morphism-operations]. A log-etale chart is log smooth directly: a finite whole cokernel is torsion, so the torsion subgroup has the same cardinality; an etale scheme comparison is smooth. This avoids an infinitesimal argument for this implication.",
+   "uses": [
+    "lem-sfb-log-morphism-operations",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use [lem-sfb-log-local-lifting-composition] to compose the two etale-local lifting predicates and the fs infinitesimal criterion to pass between lifting and chart smoothness. Underlying local finite presentation composes by the Mathlib theorem. This gives smooth composition and, using the preceding implication, mixed composition.",
+   "uses": [
+    "lem-sfb-log-local-lifting-composition",
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sbc-locally-finite-presentation-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The generic strict log product lemma [lem-sfb-strict-log-pullback-universal] gives existence of the locally Noetherian fs product and the universal property for every representative, with arbitrary log test structures. Pair lifts by [lem-sfb-log-infinitesimal-pullback]. Scheme base change supplies local finite presentation, and the criterion now proves chart log smoothness of the new projection.",
+   "uses": [
+    "lem-sfb-strict-log-pullback-universal",
+    "lem-sfb-log-infinitesimal-pullback",
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the two pointwise chart equivalences of [lem-sfb-strict-etale-log-chart-transport] to each family member. The forward directions give the properties on every local map. For descent choose a preimage of each source point from the jointly surjective family, and apply the reverse pointwise equivalence.",
+   "uses": [
+    "lem-sfb-strict-etale-log-chart-transport",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use [lem-sfb-saturated-log-blowup-chart-cover] to choose a compatible chart through each point of a saturated blowup. Bijectivity of its group map makes the kernel trivial and the cokernel trivial, hence finite of cardinality one; one is a unit in every local ring. The isomorphic comparison is etale. These are exactly the chart-log-etale conditions.",
+   "uses": [
+    "lem-sfb-saturated-log-blowup-chart-cover",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The identity has unique infinitesimal lifts by [lem-sfb-log-unique-lifting-composition] and its base is locally of finite presentation, so the criterion makes it log etale. The same lemma composes unique lifts, and local finite presentation composes, giving log-etale composition. Define all tower maps by dependent Fin.induction, taking identity at zero and composing each arrow with the preceding map. The constructed composites give the required CompEq equations. A second Fin.induction using blowup log etaleness proves every tower map log etale, including its last map and length zero.",
+   "uses": [
+    "lem-sfb-log-morphism-operations",
+    "lem-sfb-log-unique-lifting-composition",
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sbc-locally-finite-presentation-composition",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-log-morphism-operations",
+  "def-per-fs-log-smooth-etale",
+  "lem-sfb-log-local-lifting-composition",
+  "lem-sfb-fs-log-infinitesimal-criterion",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-strict-log-pullback-universal",
+  "lem-sfb-log-infinitesimal-pullback",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-strict-etale-log-chart-transport",
+  "lem-sfb-saturated-log-blowup-chart-cover",
+  "lem-sfb-log-unique-lifting-composition",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "F3 Lean reduction, 2026-10-23, following the seven original chart/lifting steps. Actual identities, composition, unique lifting, product lifting, group/cardinality calculations, pointwise descent and finite tower recursion are proved. Four separate geometric results remain in their named modules. The unit route and target statement are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composites of log smooth morphisms are log smooth and saturated log blowups of fine saturated log schemes are log etale",
+   "results": "OK 8 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: returned smoothness and etaleness permanence concerns ordinary schemes, not fs logarithmic structures or saturated log blowups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"logSmooth\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned smoothness and etaleness permanence concerns ordinary schemes, not fs logarithmic structures or saturated log blowups"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]og[Ss]mooth|log_smooth|[Ll]og[Ee]tale|log_etale|[Ll]og[Bb]low",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned smoothness and etaleness permanence concerns ordinary schemes, not fs logarithmic structures or saturated log blowups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logarithmically smooth morphisms are stable under composition and strict base change, and logarithmic blowups are log etale",
+   "results": "OK 8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmooth_stableUnderComposition, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, RingHom.FormallySmooth.stableUnderComposition, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: returned smoothness and etaleness permanence concerns ordinary schemes, not fs logarithmic structures or saturated log blowups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fine saturated log schemes logarithmic smoothness composition strict pullback and logarithmic blowups",
+   "results": "OK 8 hits: RingHom.isStandardSmooth_stableUnderComposition, RingHom.FormallySmooth.stableUnderComposition, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, Algebra.FormallySmooth.comp, RingHom.Smooth.stableUnderComposition, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary schemes or rings, without logarithmic structures; the logarithmic grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmically smooth morphisms compose and are stable under strict base change; saturated logarithmic blowups are logarithmically etale",
+   "results": "OK 8 hits: AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary schemes or rings, without logarithmic structures; the logarithmic grep and Loogle queries have no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19).",
+   "via": [
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-log-smooth-composition-strict-base-change",
+  "worker": "stage1",
+  "summary": "Full repair of the returned circular duplicate reuse: replaced the sole dropped per-theorem citation with seven complete steps. Created the requested statement-only live sfb infinitesimal criterion; all remaining proof inputs are existing live generic trf, weil-pbc, sbc or pqf tools and definitions. Preserved the item statement, its statement dependencies and all earlier item searches. Checked ILO chart and blowup sources and every cited statement.",
+  "blueprint": "The recorded det-thm-sf-ctf-stability-direct-images ancestor, clause (3), via the live nodal smooth-pair resolution: composition in its step 6 and preservation through the saturated blowup tower in its step 9. This supplies the logarithmic calculus on the ILO alteration route without importing the dropped artin-gabber chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "Associated-log-structure universal property, stalk formula and etale restriction are generic local chart tools used in Steps 1 and 3; no node in this direct-image unit constructs them."
+   },
+   {
+    "node": "lem-weil-pbc-first-order-thickening-base-change",
+    "why": "Generic square-zero closed-immersion base change used in Step 2 for the pulled-back test; this is not a replacement for an alteration or direct-image argument."
+   },
+   {
+    "node": "lem-trf-coherent-log-ideal-chart-construction",
+    "why": "Generic saturated blowup charts and their fs universal property, used in Step 6; it neither invokes a trace theorem nor changes the direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-associated-log-universal-stalks",
+  "lem-weil-pbc-first-order-thickening-base-change",
+  "lem-trf-coherent-log-ideal-chart-construction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-a33186bf2",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a33186bf2 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. This re-delivery fixes my 672504f5 RETURN. It no longer reuses the dropped lem-per-log-smooth-composition-strict-base-change (route-pivot-dropped.txt l.1700). Instead it ports that node's 7 steps onto live tools and adds one unsplit statement-only node, lem-sfb-fs-log-infinitesimal-criterion (Kato 1988 Thm 3.5 with the fs refinement of ILO X 1.2; the ILO pdf's proof of 1.2 says it adapts Kato 3.5). Its statement equals the dropped lem-per-fs-log-infinitesimal-criterion (l.1595), whose statement was accepted earlier. Restating it as a live sfb node is the port the return asked for, and it is not a clause of the item. Dropped check: none of the 22 stmt_deps/proof_deps/uses ids of the two nodes is on the dropped list; the per definitions are live. Live check: the item is still unsplit in clones/live with an identical statement, stmt_deps, unit and chapter, so nothing is superseded or weakened. No re-split repair note exists for this item. Steps against the per proof, sentence by sentence: (1) identities and strict étale maps are log étale (open immersion étale, associated-log universal property), and log étale ⇒ log smooth via the criterion. (2) Composition by a two-stage lift (01TR lfp; square-zero base change; covering composition). (3) The strict log fibre product, with its universal property checked directly for non-Noetherian fine tests; lfp via 01I4 and 05G5, then locally Noetherian via 01T6. (4) Base change by pairing lifts. (5) Source/target locality via 02GN/02GO, cancellation and covering base change. (6) Saturated blowup charts A⊗Z[P]Z[Q_e^sat] with (Q_e^sat)^gp = P^gp, so K = C = 0 and the comparison is an iso; this matches ILO VIII 3.3.11 (p.108). (7) Induction on tower length. Every step is sound. Small cases on the new node: trivial log structures give the ordinary 02H6/02HM criteria; Spec k[N]/k is log smooth but not log étale (lifts are non-unique by 1+ε); strict étale maps have unique lifts. No live duplicate (grep for Kato 3.5, lifting and criterion wording). Batch-5: I checked the closures of the four flagged cites directly. def-trf-fs-log-blowup and def-per-fs-log-smooth-etale reach only the two trf definitions. lem-trf-associated-log-universal-stalks adds only monoid sheafification. lem-trf-coherent-log-ideal-chart-construction (1392 nodes) reaches only algebraic-space/descent/Proj/monoid lemmas, with no thm-trf, trace-transport, Poincaré or batch-4 node. All four are generic and part of neither assumed statement nor its proof, so they are accepted. I accept all three declared tool_uses (associated-log stalks, first-order thickening base change, coherent log ideal charts). No SGA is used. No fixes written."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FSLogSmoothCompositionStrictBaseChange",
+  "declaration": "AlgebraicGeometry.fsLogSmooth_composition_strictBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FSLogSmoothCompositionStrictBaseChange.lean",
+  "statement": "theorem fsLogSmooth_composition_strictBaseChange : (∀ (X Y Z : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (g : EtaleLogHom Y Z), f.IsLogSmooth → g.IsLogSmooth → ∃ c : EtaleLogHom X Z, f.CompEq g c ∧ c.IsLogSmooth) ∧ (∀ (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y), f.IsLogEtale → f.IsLogSmooth) ∧ (∀ (X Y Z : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (g : EtaleLogHom Y Z), f.IsLogEtale → g.IsLogSmooth → ∃ c : EtaleLogHom X Z, f.CompEq g c ∧ c.IsLogSmooth) ∧ (∀ (X Y Y' : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (h : EtaleLogHom Y' Y), f.IsLogSmooth → h.IsStrict → ∃ (X' : FineSaturatedLogScheme.{u}) (p : EtaleLogHom X' X) (q : EtaleLogHom X' Y') (c : EtaleLogHom X' Y), p.IsStrict ∧ IsPullback p.base q.base f.base h.base ∧ p.CompEq f c ∧ q.CompEq h c ∧ q.IsLogSmooth) ∧ (∀ (X X' Y Y' : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (h : EtaleLogHom Y' Y) (p : EtaleLogHom X' X) (q : EtaleLogHom X' Y') (c : EtaleLogHom X' Y), h.IsStrict → p.IsStrict → IsPullback p.base q.base f.base h.base → p.CompEq f c → q.CompEq h c → f.IsLogSmooth → q.IsLogSmooth) ∧ (∀ (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (ι : Type v) (U V : ι → FineSaturatedLogScheme.{u}) (a : ∀ i : ι, EtaleLogHom (U i) X) (b : ∀ i : ι, EtaleLogHom (V i) Y) (r : ∀ i : ι, EtaleLogHom (U i) (V i)) (c : ∀ i : ι, EtaleLogHom (U i) Y), (∀ i : ι, (a i).IsStrict ∧ Etale (a i).base) → (∀ i : ι, (b i).IsStrict ∧ Etale (b i).base) → (∀ i : ι, (a i).CompEq f (c i) ∧ (r i).CompEq (b i) (c i)) → (∀ x : X.scheme, ∃ (i : ι) (z : (U i).scheme), (a i).base z = x) → (f.IsLogSmooth ↔ ∀ i : ι, (r i).IsLogSmooth) ∧ (f.IsLogEtale ↔ ∀ i : ι, (r i).IsLogEtale)) ∧ (∀ (X X' : FineSaturatedLogScheme.{u}) (b : EtaleLogHom X' X) (I : X.logStructure.IdealFamily), IsSaturatedLogBlowup b I → b.IsLogEtale) ∧ (∀ T : SaturatedLogBlowupTower.{u}, ∃ p : ∀ i : Fin (T.length + 1), EtaleLogHom (T.level i) (T.level 0), (p 0).IsIdentity ∧ (∀ i : Fin T.length, (T.arrow i).CompEq (p i.castSucc) (p i.succ)) ∧ (p ⟨T.length, Nat.lt_succ_self T.length⟩).IsLogEtale)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b302fa608",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after landing return L on 501e6f29: the duplicate FSStrictLogMorphism copy is dropped. Maintenance (2026-10-22) moved CharacteristicRelation/IsStrict/IsIdentity verbatim into live module-mode FSStrictLogMorphism, LogFanChartBlowup imports it, and the def-per-strict-log-morphism record points there. The item .lean is byte-identical to the PASSed 501e6f29 file. Only the item's lean record differs from live, the statement is verbatim, all imports are live module-mode, and nothing is on the dropped list. All 8 conjuncts were re-read against FineSaturatedLogBlowup/FSLogSmoothEtale/FSStrictLogMorphism: composition via CompEq (unique composite), etale implies smooth, mixed order correct, strict base change as scheme pullback with strict p (existence and every representative), locality for an arbitrary Type v strict etale family covering X (iff for both properties), every representative of IsSaturatedLogBlowup (includes nonempty coherent ideal) is log etale, tower composite with IsIdentity at 0 and CompEq steps is log etale including length 0. Edge cases and universes u/v are fine. Gates are met and the report sections are present. No compile (no file changed). Advisory: the report calls the infinitesimal criterion unrecorded, but NF delivered it live; it is a proof-only dep."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T151841-L-417408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

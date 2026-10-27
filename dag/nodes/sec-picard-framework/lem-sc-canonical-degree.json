@@ -120,7 +120,32 @@
    "elementary": null
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.degree_relativeDifferentials"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.degree_relativeDifferentials",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch",
+     "lines": [
+      1378,
+      1406
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "split_report": {
@@ -169,9 +194,24 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $k$ be algebraically closed and $C$ a\nproper smooth connected curve of genus $g$ over\n$k$. Then $\\omega_C=\\mathcal O_C(K_C)$ and\n\n$$\n\\deg K_C=2g-2.\n$$",
-  "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field and $C$ a scheme which is smooth of relative\ndimension $1$ and proper over $k$ with $H^0(C,\\mathcal O_C)=k$; put\n$g=\\dim_kH^1(C,\\mathcal O_C)$. Then the invertible module\n$\\omega_C=\\Omega^1_{C/k}$ satisfies\n\n$$\n\\dim_kH^0(C,\\omega_C)=g,\\qquad \\dim_kH^1(C,\\omega_C)=1,\\qquad\n\\deg\\omega_C=2g-2,\n$$\n\nwith $\\deg$ the degree of [def-sc-pic0].",
+  "proof": [
+   {
+    "text": "The module $\\omega_C$ is invertible ([lem-sc-canonical-sheaf]). Serre\nduality ([thm-sc-serre-duality-curve]) for the finite locally free module\n$\\mathcal O_C$, whose dual is $\\mathcal O_C$, gives\n$H^1(C,\\mathcal O_C)^\\vee\\cong H^0(C,\\omega_C)$ and\n$H^0(C,\\mathcal O_C)^\\vee\\cong H^1(C,\\omega_C)$; hence\n$\\dim_kH^0(C,\\omega_C)=g$ and $\\dim_kH^1(C,\\omega_C)=\\dim_kH^0(C,\\mathcal O_C)=1$.\nCoherent cohomology on the one-dimensional Noetherian scheme $C$\nvanishes in degrees $\\ge2$ (Grothendieck vanishing), so\n$\\chi(\\omega_C)=g-1$ and $\\chi(\\mathcal O_C)=1-g$, and by\n[def-sc-pic0]\n\n$$\n\\deg\\omega_C=\\chi(\\omega_C)-\\chi(\\mathcal O_C)=(g-1)-(1-g)=2g-2 .\n$$",
+    "uses": [
+     "lem-sc-canonical-sheaf",
+     "thm-sc-serre-duality-curve",
+     "def-sc-pic0"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

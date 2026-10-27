@@ -1,0 +1,57 @@
+# global build 2026-10-26T07:55:02Z of 3e16a8a022: Sheaf.Paper.CompletedHomScalarTranspose failed
+error: Sheaf/Paper/CompletedHomScalarTranspose.lean:729:4: Type mismatch
+  congrArg (fun x ↦ ↑(p * j).negOnePow • x) (hgamma p j hpj U f z a b)
+has type
+  ↑(p * j).negOnePow •
+      (fun j p hpj U f z ↦
+          (ConcreteCategory.hom ((PointCompletedEvaluation.sheafValue D l L (p + j) hpj).val.app U))
+            (PointDerivedHom.homValue D.k (PointCompletedEvaluation.B D l L)
+              (PointCompletedEvaluation.model D l L
+                (((ModuleCat.extendScalars
+                          (ULift.ringEquiv.symm.toRingHom.comp
+                            ((integralScalarIntegerInclusion l E L ι).comp
+                              ULift.ringEquiv.toRingHom))).mapHomologicalComplex
+                      (ComplexShape.up ℤ)).obj
+                  P))
+              (PointCompletedEvaluation.coefficient D l L) j p U ((ConcreteCategory.hom ((hL.hom.f j).val.app U)) f) z))
+        j p hpj U
+        ((ConcreteCategory.hom ((gamma.f j).val.app U))
+          (integralOrdinaryTensorSection l E L ι (Spec (CommRingCat.of D.k))
+            ((PointCompletedEvaluation.model D l E (PointCompletedEvaluation.dual l E P)).X j) U a f))
+        ((ConcreteCategory.hom ((k.hom.f p).val.app U))
+          (integralOrdinaryTensorSection l E L ι (Spec (CommRingCat.of D.k))
+            ((PointCompletedEvaluation.model D l E P).X p) U b z)) =
+    ↑(p * j).negOnePow •
+      ((ConcreteCategory.hom ((integralCompletedScalarMap l E L ι (Spec (CommRingCat.of D.k))).hom.app U))
+            ((fun j p hpj U f z ↦
+                (ConcreteCategory.hom ((PointCompletedEvaluation.sheafValue D l E (p + j) hpj).val.app U))
+                  (PointDerivedHom.homValue D.k (PointCompletedEvaluation.B D l E)
+                    (PointCompletedEvaluation.model D l E P) (PointCompletedEvaluation.coefficient D l E) j p U
+                    ((ConcreteCategory.hom ((h.hom.f j).val.app U)) f) z))
+              j p hpj U f z) *
+          a *
+        b)
+but is expected to have type
+  (ConcreteCategory.hom ((PointCompletedEvaluation.sheafValue D l L (p + j) hpj).val.app U))
+      (↑(p * j).negOnePow •
+        PointDerivedHom.homValue D.k (PointCompletedEvaluation.B D l L) K (PointCompletedEvaluation.coefficient D l L) j
+          p U
+          ((ConcreteCategory.hom (((gamma ≫ hL.hom).f j).val.app U))
+            (integralOrdinaryTensorSection l E L ι (Spec (CommRingCat.of D.k))
+              ((PointCompletedEvaluation.model D l E (PointCompletedEvaluation.dual l E P)).X j) U a f))
+          ((ConcreteCategory.hom (((modelBaseChange D l E L ι P).hom.f p).val.app U))
+            (integralOrdinaryTensorSection l E L ι (Spec (CommRingCat.of D.k))
+              ((PointCompletedEvaluation.model D l E P).X p) U b z))) =
+    ↑(p * j).negOnePow •
+      ((ConcreteCategory.hom ((integralCompletedScalarMap l E L ι (Spec (CommRingCat.of D.k))).hom.app U))
+            (value D l E P h j p hpj U f z) *
+          a *
+        b)
+warning: Sheaf/Paper/CompletedHomScalarTranspose.lean:728:31: This simp argument is unused:
+  map_zsmul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Units.smul_def]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+error: Lean exited with code 1

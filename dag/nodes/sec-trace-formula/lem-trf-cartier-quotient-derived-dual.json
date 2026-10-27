@@ -1,0 +1,255 @@
+{
+ "id": "lem-trf-cartier-quotient-derived-dual",
+ "kind": "statement",
+ "title": "Derived dual of a quotient by an invertible ideal",
+ "statement": "Let $S$ be a commutative ring and $I\\subseteq S$ an ideal which, as an $S$-module, is finitely generated projective and locally free of rank one (after localization at every prime). Put $B=S/I$ with its quotient ring map, and put $N=\\operatorname{Hom}_B(I\\otimes_S B,B)$, the ordinary $B$-module dual of the scalar extension of $I$. Use ordinary unbounded module derived categories [def-weil-abstract-derived-category] and derived coinduction $C_B^S$ with its specified $B$-action [def-trf-derived-coinduction]. There is an isomorphism in $D(B)$\n$$C_B^S(S[0])\\ \\cong\\ N[0][-1].$$\nNo Noetherian hypothesis is imposed; $I=S$ and zero rings are allowed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZH, lemma-compute-for-effective-Cartier-algebraic, proof: identification of RHom(A,R) with the inverse conormal line in degree 1; Tag 0A71, lemma-RHom-ext, for the scalar restriction."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-trf-derived-coinduction"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:I\\hookrightarrow S$, $q:S\\twoheadrightarrow B$, and $I^\\vee=\\operatorname{Hom}_S(I,S)$. Choose finite generators of $I$, giving a surjection $p:S^n\\twoheadrightarrow I$. Projectivity, in the lifting formulation of [def-weil-pbc-projective-module], gives $a:I\\to S^n$ with $pa=1_I$. Thus $I$ is a direct summand of a finite free module, as required by [lem-trf-line-module-duality]. Its other hypothesis is exactly the assumed rank-one freeness at every prime. That node identifies the scalar map $c:S\\xrightarrow{\\sim}\\operatorname{Hom}_S(I,I)$, $s\\mapsto(x\\mapsto sx)$, as an isomorphism. No trivialization of $I$ is chosen.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-trf-line-module-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0B8I, lemma-invertible, and Tag 0FJ9, section-determinants, scalar endomorphisms of an invertible module; Algebra Tags 05CE and 05CF, definition-projective and lemma-characterize-projective."
+   }
+  },
+  {
+   "text": "By the exact-Hom definition of projectivity [def-weil-pbc-projective-module], applying $\\operatorname{Hom}_S(I,-)$ to $0\\to I\\xrightarrow{j}S\\xrightarrow{q}B\\to0$ gives\n$$0\\to\\operatorname{Hom}_S(I,I)\\xrightarrow{j\\circ-}I^\\vee\\xrightarrow{q\\circ-}\\operatorname{Hom}_S(I,B)\\to0.$$\nUnder $c$ of Step 1 its first map is $u:S\\to I^\\vee$, $u(s)(x)=sx$. In particular $u$ is injective. Identify the last term with $N$ by the explicit inverse maps\n$$h\\longmapsto(x\\otimes b\\mapsto b\\,h(x)),\\qquad \\nu\\longmapsto(x\\mapsto\\nu(x\\otimes1)).$$\nThe first formula is balanced because $h(sx)=q(s)h(x)$; the second is $S$-linear for the same reason. Their composites are identities on $x$ and on the generating tensors $x\\otimes b$. Hence $\\operatorname{coker}(u)\\cong N$ as $S$-modules. This step uses only exactness in the cited definition and the displayed tensor formulas.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZH, lemma-compute-for-effective-Cartier-algebraic, final sentence; expanded using Algebra Tag 05CE, definition-projective, and the universal property of ordinary tensor products."
+   }
+  },
+  {
+   "text": "Take $E^{-1}=I$, $E^0=S$, $d_E^{-1}=-j$, and all other terms zero, augmented by $q$ to $B[0]$. Its negative cohomology is zero since $j$ is injective, and its degree-zero cohomology is $S/I=B$; thus the augmentation is a quasi-isomorphism. Its terms are projective: $I$ by assumption, and $S$ because an $S$-linear map out of $S$ lifts along any surjection by lifting the image of $1$ [def-weil-pbc-projective-module]. Apply [lem-sc-derived-hom-projective-resolution] with $A=S,F=B,G=S$. It represents $R\\operatorname{Hom}_S(B[0],S[0])$ by $\\operatorname{Hom}_S^\\bullet(E,S[0])$. The total-Hom differential of [def-sc-module-total-hom-complex] is $d(f)=d_{S[0]}f-(-1)^{\\deg f}f d_E$. With our sign choice the resulting two-term complex is precisely $S\\xrightarrow{u}I^\\vee$ in degrees $0,1$. Step 2 therefore gives cohomology zero in every degree other than $1$, and degree-one cohomology $N$, as $S$-modules.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-sc-derived-hom-projective-resolution",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZH, lemma-compute-for-effective-Cartier-algebraic, finite projective resolution and its dual; Derived Categories Tag 06XR, lemma-compute-ext-resolutions; More on Algebra Tag 0A8H, section-hom-complexes."
+   }
+  },
+  {
+   "text": "Put $K=C_B^S(S[0])\\in D(B)$ and let $U$ be scalar restriction. By [lem-trf-derived-coinduction-adjunction], $UK\\cong R\\operatorname{Hom}_S(B[0],S[0])$ in $D(S)$, with the action stipulated in [def-trf-derived-coinduction]. Restriction of module scalars preserves kernels, images and quotients: each is the same subgroup with the restricted action. Consequently $U H^r(K)=H^r(UK)$, and a $B$-module is zero if its underlying $S$-module is zero. Step 3 implies $H^r(K)=0$ for $r\\ne1$ and gives an $S$-linear isomorphism $\\alpha:UH^1(K)\\to UN$. This is automatically $B$-linear: for $b\\in B$ choose $s\\in S$ with $q(s)=b$; then for $z\\in H^1(K)$,\n$$\\alpha(bz)=\\alpha(sz)=s\\alpha(z)=b\\alpha(z).$$\nThe same applies to its inverse. Thus $H^1(K)\\cong N$ as $B$-modules. This argument uses scalar restriction on cohomology only, and does not lift an arbitrary derived $S$-isomorphism to $D(B)$.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A71, lemma-RHom-ext; Tag 0BZH, lemma-compute-for-effective-Cartier-algebraic, reduction of the single cohomology-module assertion by fully faithful ordinary module restriction."
+   }
+  },
+  {
+   "text": "The shifted object $K[1]\\in D(B)$ has $H^r(K[1])=H^{r+1}(K)$, so it is concentrated in degree zero and its degree-zero cohomology is $N$. Apply [lem-amb-derived-degree-zero-normalization] in the abelian category of $B$-modules to obtain $K[1]\\cong H^0(K[1])[0]\\cong N[0]$. Shifting back gives the required isomorphism $K\\cong N[0][-1]$ in $D(B)$. The normalization also applies when $B$ is the zero ring. If $I=S$, the map $u$ is the identity after $\\operatorname{Hom}_S(S,S)=S$, so both sides are zero; if $S=0$ this is the same zero-category case. If $I=0$, Step 1 forces $S\\cong\\operatorname{End}_S(0)=0$, so that case is already included.",
+   "uses": [
+    "lem-amb-derived-degree-zero-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZH, lemma-compute-for-effective-Cartier-algebraic, reduction to a unique cohomology module; Homology Tag 0118, section-truncations, good truncation reconstruction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-trf-line-module-duality",
+  "lem-sc-derived-hom-projective-resolution",
+  "def-sc-module-total-hom-complex",
+  "lem-trf-derived-coinduction-adjunction",
+  "def-trf-derived-coinduction",
+  "lem-amb-derived-degree-zero-normalization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0BZH and 0A71, lemma-compute-for-effective-Cartier-algebraic and lemma-RHom-ext; expanded exact-Hom algebra and explicit quotient-scalar check."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction of a quotient by an invertible ideal applied to the ring is the dual conormal line shifted minus one",
+   "results": "8 hits; Ideal.cotangentEquivIdeal, Algebra.Extension.cotangentComplex, KaehlerDifferential.endEquivDerivation', Algebra.H1Cotangent, KaehlerDifferential.quotientCotangentIdealRingEquiv, KaehlerDifferential.quotientCotangentIdeal, Algebra.Extension.H1Cotangent, Ideal.cotangentToQuotientSquare",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary cotangent modules, invertible modules, representations or ordinary duality; no derived coinduction dual in D(B)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Hom\", \"Ideal\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary cotangent modules, invertible modules, representations or ordinary duality; no derived coinduction dual in D(B)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quotient of a commutative ring by an invertible ideal its derived dual is the dual of the conormal module placed in degree one",
+   "results": "8 hits; Submodule.dualQuotEquivDualAnnihilator_apply, Ideal.cotangentIdeal, Ideal.cotangentEquivIdeal, CommRing.Pic.mk_dual, instInvertibleReprₛ, Ideal.Cotangent, Ideal.instModuleQuotientCotangent, FractionalIdeal.dual_div_dual",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary cotangent modules, invertible modules, representations or ordinary duality; no derived coinduction dual in D(B)."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|coinduc|derived.*[Cc]onormal",
+   "results": "25 hits; Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary cotangent modules, invertible modules, representations or ordinary duality; no derived coinduction dual in D(B)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext of an effective Cartier divisor in its ambient ring is its inverse normal line in degree one",
+   "results": "8 hits; CommRing.relPic, WeierstrassCurve.Affine.CoordinateRing.XYIdeal', AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, WeierstrassCurve.Affine.Point.toClass_some, AlgebraicGeometry.StructureSheaf.const_mul_rev, WeierstrassCurve.Affine.Point.toClass_apply, Algebra.Generators.cMulXSubOneCotangent_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary cotangent modules, invertible modules, representations or ordinary duality; no derived coinduction dual in D(B)."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|coinduc|[Ee]xt.*[Ii]deal",
+   "results": "25 hits; Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorShift.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary cotangent modules, invertible modules, representations or ordinary duality; no derived coinduction dual in D(B)."
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|derivedCoinduction|cartier.*dual",
+   "results": "{\"t\": \"2026-10-23T12:21:32Z\", \"tool\": \"grep\", \"query\": \"RHom|derivedCoinduction|cartier.*dual\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Unitization.lean\", \"Mathlib/Algebra/Algebra/Unitization.lean\", \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"Mathlib/Algebra/Order/Archimedean/Class.lean\", \"Mathlib/Algebra/Order/Archimedean/Hom.lean\"], \"digest\": \"13feea1af2f56d17\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary conormal/dual modules, fractional ideals, or general Ext computation; none identifies this derived coinduction object in D(B)."
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|invertible.*ideal|ideal.*dual",
+   "results": "{\"t\": \"2026-10-23T12:21:32Z\", \"tool\": \"grep\", \"query\": \"coextendScalars|invertible.*ideal|ideal.*dual\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DualNumber.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/ClassGroup/Basic.lean\", \"Mathlib/RingTheory/ClassGroup/Basic.lean\", \"Mathlib/RingTheory/ClassGroup/Basic.lean\", \"Mathlib/RingTheory/ClassGroup/Basic.lean\", \"Mathlib/RingTheory/ClassGroup/Basic.lean\", \"Mathlib/RingTheory/PicardGroup.lean\"], \"digest\": \"4802f050e87e27a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary conormal/dual modules, fractional ideals, or general Ext computation; none identifies this derived coinduction object in D(B)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a commutative ring quotient by a projective ideal of rank one derived coinduction of the ring is the dual conormal line in degree one",
+   "results": "{\"t\": \"2026-10-23T12:21:32Z\", \"tool\": \"leansearch\", \"query\": \"For a commutative ring quotient by a projective ideal of rank one derived coinduction of the ring is the dual conormal line in degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.instModuleQuotientCotangent\", \"Module.dual_projective\", \"Ideal.cotangentIdeal\", \"Ideal.Cotangent\", \"Ideal.cotangentToQuotientSquare\", \"Ideal.cotangentEquivIdeal\", \"Ideal.pi_mkQ_surjective\", \"Ideal.instAlgebraQuotient\"], \"digest\": \"d7358a9b63bfc13e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary conormal/dual modules, fractional ideals, or general Ext computation; none identifies this derived coinduction object in D(B)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Ideal\", \"dual\"",
+   "results": "{\"t\": \"2026-10-23T12:21:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"Ideal\\\", \\\"dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary conormal/dual modules, fractional ideals, or general Ext computation; none identifies this derived coinduction object in D(B)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compute Ext of a quotient ring using the two term projective resolution given by an invertible ideal",
+   "results": "{\"t\": \"2026-10-23T12:21:33Z\", \"tool\": \"leanfinder\", \"query\": \"Compute Ext of a quotient ring using the two term projective resolution given by an invertible ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHasExtModuleCatOfSmall\", \"Ext\", \"CategoryTheory.ProjectiveResolution.isoExt\", \"CategoryTheory.ProjectiveResolution.extMk\", \"isZero_Ext_succ_of_projective\", \"CategoryTheory.Abelian.Ext.instModule\", \"CategoryTheory.ProjectiveResolution.sub_extMk\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\"], \"digest\": \"c399ede3e8a8ac2e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary conormal/dual modules, fractional ideals, or general Ext computation; none identifies this derived coinduction object in D(B)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived dual of a quotient by an invertible ideal is its dual conormal module shifted into cohomological degree one",
+   "results": "{\"t\": \"2026-10-23T12:21:34Z\", \"tool\": \"leanfinder\", \"query\": \"Derived dual of a quotient by an invertible ideal is its dual conormal module shifted into cohomological degree one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent\", \"CommRing.Pic.mk_dual\", \"Algebra.Extension.H1Cotangent\", \"Module.Invertible.instDual\", \"CommRing.Pic.inv_eq_dual\", \"Ideal.cotangentEquivIdeal\", \"Submodule.dualQuotEquivDualAnnihilator_symm_apply_mk\", \"Algebra.Extension.h1Cotangentι\"], \"digest\": \"2acfc98a8f8be7e2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary conormal/dual modules, fractional ideals, or general Ext computation; none identifies this derived coinduction object in D(B)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coinduction-polynomial-refinement",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Re-split task: old steps 3--4, cancellation of evaluation variables and polynomial refinement. Input: the derived dual of an effective Cartier quotient, used for the equation y-g.",
+   "via": [
+    "lem-trf-coinduction-polynomial-refinement",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cartier-quotient-derived-dual",
+  "worker": "stage1",
+  "summary": "Split the Stacks effective-Cartier quotient calculation using existing nodes only. Exact Hom(I,-) and the scalar endomorphism isomorphism give the dual complex and its cokernel. Projective-resolution RHom computes the underlying S-object; surjective quotient restriction identifies its sole cohomology B-linearly, and degree-zero normalization after a shift yields the D(B) isomorphism. Statement unchanged; no Noetherian assumption and zero cases retained.",
+  "blueprint": "Ancestor lem-trf-local-term-locality, proof (1)--(2), normal-cone specialization sentence, via the recorded semistable/marked-dualizing/polynomial-chart route. Realizes the effective Cartier quotient input of lem-trf-coinduction-polynomial-refinement, namely its old Step 1 for y-g; no change of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-derived-hom-projective-resolution",
+    "why": "Generic module projective-resolution computation of RHom, used in Step 3; the unit does not provide a different module Hom computation."
+   },
+   {
+    "node": "lem-amb-derived-degree-zero-normalization",
+    "why": "Generic reconstruction of a complex with one nonzero cohomology module, used after shifting in Step 5; independent of the geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-derived-hom-projective-resolution",
+  "lem-amb-derived-degree-zero-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-89edfee91",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-89edfee91 (reviewer sub-agent of L); spot-checked: Read Stacks dualizing.tex 0BZH (statement and full proof) and 0A71. The item matches: I is an invertible ideal, B=S/I, N=Hom_B(I⊗B,B), and the iso C_B^S(S[0])≅N[0][-1] is in D(B) with the specified coinduction action. Statement and stmt_deps are unchanged from live. Live and side-live still have the item unsplit, and there is no repair note. The delivery has no new nodes. proof_deps equals the union of uses, and there is no cycle (406-node closure). Step 1: the projective splitting meets the hypothesis of lem-trf-line-module-duality, and its statement gives the scalar iso c. Step 2: exact Hom_S(I,-); the Hom_S(I,B)≅Hom_B(I⊗B,B) formulas are checked and correctly marked elementary. Step 3: E=[I→S] with d=-j resolves B. lem-sc-derived-hom-projective-resolution applies, and the total-Hom differential is f∘j=u, so H^0=0 and H^1=coker u≅N. Step 4: the adjunction lemma gives U C≅RHom_S(B,S); cohomology commutes with restriction, and α is B-linear by lifting along the surjection S→B. Step 5: K[1] is concentrated in degree 0, so degree-zero normalization gives an iso in D(B), then shift back. Edge cases tested: I=S, S=0, I=0 forces S=0, Z/(n), k[t]/(t), and nonprincipal ideals (no trivialization used). Not a duplicate: lem-sc-koszul-regular-sequence-dual-complex needs Koszul-regular generators and is stated in D(A), not D(B). Accepted tool_uses: lem-sc-derived-hom-projective-resolution and lem-amb-derived-degree-zero-normalization. No SGA source is used. Advisory only: the stmt_deps omit the projective/tensor/localization notion nodes, which were inherited from the creator."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CartierQuotientDerivedDual",
+  "declaration": "ModuleCat.cartier_quotient_derived_dual",
+  "file": "lean/Sheaf/Algebra/Homology/CartierQuotientDerivedDual.lean",
+  "statement": "theorem cartier_quotient_derived_dual (S : Type u) [CommRing S] (I : Ideal S) [Module.Finite S I] [Module.Projective S I] (hlocal : ∀ (p : Ideal S) [p.IsPrime], Nonempty (LocalizedModule p.primeCompl I ≃ₗ[Localization.AtPrime p] Localization.AtPrime p)) [HasDerivedCategory.{wS} (ModuleCat.{u} S)] [HasDerivedCategory.{wB} (ModuleCat.{u} (S ⧸ I))] : Nonempty ((derivedCoinduction (Ideal.Quotient.mk I)).obj ((DerivedCategory.singleFunctor (ModuleCat.{u} S) 0).obj (ModuleCat.of S S)) ≅ ((DerivedCategory.singleFunctor (ModuleCat.{u} (S ⧸ I)) 0).obj (ModuleCat.of (S ⧸ I) (Module.Dual (S ⧸ I) ((S ⧸ I) ⊗[S] I))))⟦(-1 : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "Q147",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ba25215e",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Real S2 statement (only lean changed vs side-live; prior 31031328 was an S1 split returned as superseded). Checked against Stacks 0BZH/0A71: S CommRing, actual Ideal I, Module.Finite+Projective, rank-one local hypothesis identical to dep line_module_duality, B = S⧸I via Ideal.Quotient.mk, N = Module.Dual B (B⊗[S]I) (swapped factor order; canonically iso B-modules, conclusion only asserts existence), lhs = recorded ModuleCat.derivedCoinduction (coextendScalars right-derived, action (b•h)(b')=h(b'b)) on S[0], rhs = N[0]⟦-1⟧ (degree 1), Nonempty iso in D(B). Independent HasDerivedCategory universes, no Noetherian/nonzero assumptions; S=0, I=S, I=0 edge cases fine. Statement verbatim in file, docstrings carry source+blueprint+5 steps, sorry only, private imports = proof-dep modules (all exist), no new nodes/defs, no name clash, report sections present. Not recompiled per instructions (worker scompile clean, deliver2 dry-run OK). Advisory only: stmt_deps omit projective/tensor notion nodes (inherited)."
+ }
+}

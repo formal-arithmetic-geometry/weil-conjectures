@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-coefficient-heart-locally-closed-extension",
+ "kind": "statement",
+ "title": "Exact locally closed coefficient extension through the scheme-theoretic closure",
+ "statement": "Let $X$ be a Noetherian scheme (locally Noetherian and quasi-compact), let $\\Lambda$ be a commutative condensed ring, and use internal modules over $\\Lambda_Y=p_Y^*\\Lambda$ on each small pro-étale site $Y_{\\mathrm{proét}}$ [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. Every open, closed, or locally closed subscheme of $X$ is Noetherian; its underlying space is topologically Noetherian, all its open immersions are quasi-compact, and it is quasi-separated. Let $a:S\\hookrightarrow X$ be a locally closed immersion, meaning a closed immersion into an open subscheme of $X$. It is quasi-compact and quasi-separated. Its scheme-theoretic image $\\overline S=\\operatorname{SIm}(a)$ [def-nagata-scheme-theoretic-closure] has underlying set $\\overline{a(S)}$, and the canonical factorization $S\\xrightarrow{u}\\overline S\\xrightarrow{i}X$ [def-nagata-scheme-image-factor] has $u$ open and $i$ closed. For the actual coefficient-module functors [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star], both $u_!$ and $i_*$ are exact, and hence so is the locally closed coefficient extension $a_!=i_*u_!$ of [def-sfb-locally-closed-coefficient-extension]. For every cochain complex $K$ of $\\Lambda_S$-modules there are natural isomorphisms $H^n(a_!K)\\cong a_!H^n(K)$ for every integer $n$. The termwise functor preserves quasi-isomorphisms and induces a functor $D(S_{\\mathrm{proét}},\\Lambda_S)\\to D(X_{\\mathrm{proét}},\\Lambda_X)$ with a natural isomorphism $Q_S\\,D(a_!)\\cong C(a_!)\\,Q_X$, where $C(a_!)$ denotes termwise application and $Q$ denotes localization at quasi-isomorphisms [sk-def-sfb-derived-categories]. Empty schemes and zero complexes are allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart.proof.md",
+  "place": "Introductory paragraph: factorization through the closure and exact locally closed extension; retained proof steps 1 (Noetherian subschemes) and 3. Supporting Stacks: proetale.tex Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact; sites-modules.tex Tag 03DJ, lemma-extension-by-zero-exact."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-image-factor",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-derived-categories",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-locally-closed-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof": [
+  {
+   "text": "For an immersion b:T→X, its topological embedding induces NoetherianSpace T from NoetherianSpace X [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Every subset of T is compact [lem-sfb-noetherian-space-compact-subsets]. An immersion is locally of finite type (Mathlib IsImmersion.instLocallyOfFiniteType, the packaged closed/open finite-type argument of [lem-weil-pbc-closed-immersion-proper] and [def-weil-open-immersion]). Apply LocallyOfFiniteType.isLocallyNoetherian from [lem-weil-pbc-finite-type-over-noetherian] and combine with compactness to construct IsNoetherian T. Its quasi-separatedness is [lem-weil-pbc-locally-noetherian-quasi-separated]. Every open immersion into T has Noetherian source by its embedding, so is quasi-compact. The proof hsource makes all these constructions uniformly for T and b.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the first step to S. Compactness of all subsets makes a quasi-compact. It is quasi-separated because an immersion is a monomorphism, whose diagonal is an isomorphism [def-weil-quasi-separated-morphism]. The canonical a.toImage is open by [lemma-nagata-immersion-open-in-scheme-image]. The image inclusion is closed and a.toImage ≫ a.imageι = a by [def-nagata-scheme-theoretic-image, def-nagata-scheme-image-factor]. Rewrite its range using IdealSheafData.range_subschemeι and Hom.support_ker: range(a.imageι)=a.ker.support=closure(range(a)), the scheme-theoretic closure of [def-nagata-scheme-theoretic-closure].",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-quasi-separated-morphism",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "def-nagata-scheme-theoretic-image",
+    "def-nagata-scheme-image-factor",
+    "def-nagata-scheme-theoretic-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the complementary open V with carrier complement(range(a.imageι)); its inclusion V.ι is quasi-compact by Noetherianity. Apply the already proved CondensedRing.closedSupport_lowerStarExact from [det-lem-formal-closed-support-adjunction] with i=a.imageι and j=V.ι. The complement equality is converted to its required orientation by double complementation. This theorem applies directly to the actual internal coefficient functor CondensedRing.lowerStar Λ i of [def-sfb-module-lower-star]. Its proof exhibits this functor as a left adjoint to closed support, so finite-colimit preservation follows without a sectionwise-module comparison. Left exactness and additivity are the existing lowerStar instances. This uses the closed-support adjunction solely as a generic exactness tool, preserving the coefficient-heart unit route through the canonical closure and the exact open/closed factors.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction",
+    "def-sfb-module-lower-star",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual open factor is additive and preserves finite limits and colimits by [def-sfb-module-open-lower-shriek]. Unfold [def-sfb-locally-closed-coefficient-extension]: the defined functor is exactly openImmersionLowerShriek Λ a.toImage followed by lowerStar Λ a.imageι. The existing composition instances supply finite-limit preservation, finite-colimit preservation and additivity of this exact composite. No object is selected from an existence assertion.",
+   "uses": [
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-locally-closed-coefficient-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For F=coefficientHeartLocallyClosedExtension Λ a ha, apply ShortComplex.homologyFunctorIso, whiskered by HomologicalComplex.shortComplexFunctor in each integer degree [lem-weil-pbc-exact-functor-complex-cohomology]. This is definitionally the required natural isomorphism on cochain complexes. Functor.preservesHomologyOfExact and HomologicalComplex.quasiIso_map_of_preservesHomology give quasi-isomorphism preservation. Finally take D=F.mapDerivedCategory and F.mapDerivedCategoryFactors from [lem-weil-pbc-exact-functor-derived-factorization]. This gives precisely Q⋙D ≅ C(F)⋙Q. All results are unbounded and require no nonemptiness hypothesis, so empty schemes, zero rings and zero complexes are included.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-weil-quasi-separated-morphism",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "def-nagata-scheme-theoretic-image",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "det-lem-formal-closed-support-adjunction",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-locally-closed-coefficient-extension",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/_section.md",
+  "place": "Introductory exact closure-factorization paragraph, assembled in Lean from Mathlib and the existing closed-support adjunction (det-lem-formal-closed-support-adjunction); Stacks proetale.tex Tag 09BM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|open immersion|closed immersion|proetale",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no usable result: the subdirectory argument accidentally repeated Mathlib/; corrected source grep below is the search used for the verdict"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact extension by zero for a locally closed immersion factors through scheme theoretic closure on ringed proetale sites",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsImmersion.mk, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion, AlgebraicGeometry.isClosedImmersion_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, Sheaf, IsIso, exact",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory'",
+   "date": "2026-10-22",
+   "verdict": "no usable pattern result; semantic searches and corrected qualified-name pattern below were used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact extension by zero for a locally closed immersion factors through scheme theoretic closure on ringed proetale sites",
+   "results": "8 hits: AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.IsClosedImmersion.lift_fac, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|mapDerivedCategory|proetale",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact extension by zero through the scheme theoretic closure preserves finite limits finite colimits and quasi-isomorphisms of complexes of condensed modules",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf",
+   "results": "12 hits: CategoryTheory.Sheaf, CategoryTheory.Sheaf.terminal, CategoryTheory.sheafOver, CategoryTheory.Sheaf.isTerminalTerminal, CategoryTheory.sheafToPresheaf, CategoryTheory.fullyFaithfulSheafToPresheaf, CategoryTheory.instInhabitedSheafBotGrothendieckTopologyType, CategoryTheory.sheafSections",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact extension by zero through the scheme theoretic closure preserves finite limits finite colimits and quasi-isomorphisms of complexes of condensed modules",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod, instAbelianCondensedMod, Condensed.instAB4CondensedMod, instAbelianLightCondMod, CondensedMod.IsSolid, LightCondensed.instCountableAB4StarLightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state the scheme-and-internal-coefficient assertion, nor specialize to all its conclusions in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|instIsOpenImmersionToImageOfQuasiCompact|NoetherianSpace",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-22",
+   "verdict": "partial matches only: exact-functor descent already has existing Mathlib leaves; no result states the whole scheme-theoretic and internal condensed-coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact locally closed extension of internal modules over a condensed ring on the proetale site",
+   "results": "8 hits: CondensedMod, LightCondMod, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, LightCondensed.lanLightCondSet, CondensedMod.isDiscrete_tfae, instAbelianCondensedMod, CondensedMod.IsSolid.mk",
+   "date": "2026-10-22",
+   "verdict": "partial matches only: exact-functor descent already has existing Mathlib leaves; no result states the whole scheme-theoretic and internal condensed-coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "date": "2026-10-22",
+   "verdict": "partial matches only: exact-functor descent already has existing Mathlib leaves; no result states the whole scheme-theoretic and internal condensed-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally closed immersion of Noetherian schemes factors through its scheme theoretic image and exact internal coefficient module extension induces an unbounded derived functor",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Abelian.Ext.mapExactFunctor, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-22",
+   "verdict": "partial matches only: exact-functor descent already has existing Mathlib leaves; no result states the whole scheme-theoretic and internal condensed-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors preserve cohomology and quasi isomorphisms and descend through localization to unbounded derived categories",
+   "results": "8 hits: CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "partial matches only: exact-functor descent already has existing Mathlib leaves; no result states the whole scheme-theoretic and internal condensed-coefficient assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-lem-coefficient-heart",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-coefficient-heart",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-coefficient-heart",
+   "place": "Introductory paragraph: factorization through the closure and exact locally closed extension; retained proof steps 1 (Noetherian subschemes) and 3. Supporting Stacks: proetale.tex Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact; sites-modules.tex Tag 03DJ, lemma-extension-by-zero-exact.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coefficient-heart-locally-closed-extension",
+  "worker": "stage1",
+  "summary": "Seven proof steps; no new nodes. Reused Noetherian scheme and topology leaves, the canonical immersion-to-image theorem, exact actual ringed pro-etale direct image with specified coefficient isomorphisms, and exact-functor cohomology/localization leaves. Wrote the internal/sectionwise direct-image action comparison explicitly. Statement unchanged; redundant statement dependency removed and geometric notions added. No sorry-free project declaration states the full item.",
+  "blueprint": "Realizes the introductory paragraph of sk-lem-coefficient-heart: canonical closure factorization, exact open and closed coefficient extension, and descent to the unbounded derived categories. Also supplies the Noetherian subscheme facts used by proof paragraph (3).",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-proetale-identified-open-closed",
+    "why": "Generic coefficient-module or ringed-site tool used to justify actual functors and their categories; the coefficient-heart unit does not restate this general result, and its closure/extension route is retained."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-3cecc9bbe",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-3cecc9bbe (reviewer sub-agent of L); spot-checked: Read the whole item, all 7 steps, every cited statement, the unit's introductory paragraph and Stacks 09BM and 01R8. Status: still unsplit live, no repair note on the item, not superseded. The statement is unchanged; stmt_deps dropped the unused sk-def-sfb-module-pushforward-pullback and added the geometric definitions the statement uses. No new nodes, no cycle (its closure of 694 nodes does not reach the item), no SGA citation. Step 1: open subschemes of X are Noetherian, and closed subschemes of those are finite type over them, hence Noetherian. Descending chains of closed subsets give that every subset is quasi-compact, so every open immersion into them is quasi-compact; quasi-separated by the locally-Noetherian lemma. Step 2: a and its diagonal are quasi-compact, so the immersion-open-in-image leaf applies; i is closed and i∘u = a. Closed and dense means the underlying set is the closure of a(S). This is the same toImage/imageι factorization fixed by def-sfb-locally-closed-coefficient-extension. Step 3: the hypotheses of the internal/sectionwise module equivalence are met, the module categories are abelian, and alpha_f is a ring isomorphism for any condensed ring. The passage from alpha_i to a ring-sheaf identification is written briefly but is routine. Step 4: lem-sfb-proetale-identified-open-closed applies because the complementary open is quasi-compact (retrocompact, as 09BM needs). Its action through the adjoint of c equals the eta_i action of def-sfb-module-lower-star. I accept it as the declared tool use. Steps 5-7: u_! is exact by its definition node, so the composite i_*u_! is exact. The exact-functor leaves give the cohomology isomorphisms for all n with no bounds, and Q_S D(a_!) ≅ C(a_!) Q_X written in diagrammatic order. Edge cases checked: empty S, closed or open a, nonreduced scheme-theoretic closure, zero ring, unbounded complexes. Neighbouring nodes (locally-closed-extension-coherence, the module-extension-coherence node, the existential proetale-locally-closed-extension, immersion-limit-preservation) work with ring sheaves R, a different factorization or a pullback, so none duplicates this item."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartLocallyClosedExtension",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_locallyClosedExtension",
+  "file": "lean/Sheaf/Paper/CoefficientHeartLocallyClosedExtension.lean",
+  "statement": "theorem coefficientHeart_locallyClosedExtension (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsNoetherian X] : (∀ (T : Scheme.{u}) (b : T ⟶ X), IsImmersion b → IsNoetherian T ∧ TopologicalSpace.NoetherianSpace T ∧ QuasiSeparatedSpace T ∧ ∀ (V : Scheme.{u}) (j : V ⟶ T), IsOpenImmersion j → QuasiCompact j) ∧ ∀ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a), QuasiCompact a ∧ QuasiSeparated a ∧ Set.range a.imageι = closure (Set.range a) ∧ a.toImage ≫ a.imageι = a ∧ IsClosedImmersion a.imageι ∧ Exists fun [_hu : IsOpenImmersion a.toImage] ↦ PreservesFiniteLimits (CondensedRing.openImmersionLowerShriek Λ a.toImage) ∧ PreservesFiniteColimits (CondensedRing.openImmersionLowerShriek Λ a.toImage) ∧ PreservesFiniteLimits (CondensedRing.lowerStar Λ a.imageι) ∧ PreservesFiniteColimits (CondensedRing.lowerStar Λ a.imageι) ∧ PreservesFiniteLimits (coefficientHeartLocallyClosedExtension Λ a ha) ∧ PreservesFiniteColimits (coefficientHeartLocallyClosedExtension Λ a ha) ∧ Exists fun [_hadd : (coefficientHeartLocallyClosedExtension Λ a ha).Additive] ↦ (∀ n : ℤ, Nonempty ((coefficientHeartLocallyClosedExtension Λ a ha).mapHomologicalComplex (.up ℤ) ⋙ HomologicalComplex.homologyFunctor _ (.up ℤ) n ≅ HomologicalComplex.homologyFunctor _ (.up ℤ) n ⋙ coefficientHeartLocallyClosedExtension Λ a ha)) ∧ (∀ (K L : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)) ℤ) (f : K ⟶ L), QuasiIso f → QuasiIso (((coefficientHeartLocallyClosedExtension Λ a ha).mapHomologicalComplex (.up ℤ)).map f)) ∧ ∃ D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)) ⥤ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), Nonempty (DerivedCategory.Q ⋙ D ≅ (coefficientHeartLocallyClosedExtension Λ a ha).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c46e08792",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Delivered node differs from live only in lean; statement verbatim in file; not superseded (no live module, no other S2 run). Clause by clause: IsNoetherian X; Λ unbundled comm condensed ring, same variable/universes as the recorded coefficientHeartLocallyClosedExtension def (Profinite.{u}/Ab.{u+1}/Scheme.{u}); all immersion subschemes Noetherian/NoetherianSpace/QuasiSeparatedSpace/open immersions qc; a qc+qs; range imageι = closure(range a); toImage≫imageι=a, imageι closed, toImage open via a Prop existential (asserted, not assumed); exactness of the actual recorded openImmersionLowerShriek, lowerStar and a_!; natural homology iso for all n:ℤ; quasi-iso preservation; ∃ D with Q⋙D ≅ C(a_!)⋙Q (determined up to iso by the localization, not vacuous). No extra hypotheses; empty/zero/unbounded cases covered; docstrings carry the source and all 7 steps; proof sorry. Advisory only: proof-interface imports unused by the statement. No recompile per the 2026-10-21 rule."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261022T143611-L-1209466",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

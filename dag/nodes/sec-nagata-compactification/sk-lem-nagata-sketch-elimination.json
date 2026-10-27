@@ -74,5 +74,51 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-elimination",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap",
+     "module": "WeilConjectures.Compactification.EliminationOfIndeterminacy",
+     "lines": [
+      550,
+      563
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be qcqs, let $U\\subseteq T$ be quasi-compact open, and let $W\\to T$\nbe separated and of finite type, with $W_U\\to U$ an isomorphism. There is a\n$U$-admissible blow-up $T'\\to T$ ([sk-def-nagata-admissible]) whose strict\ntransform $W'\\to T'$ is an open immersion.\n\nThis is Stacks 081S, proved here without flattening by blow-up. A first\n$U$-admissible blow-up makes $U$ schematically dense\n([sk-lem-nagata-boundary-divisor]). The inverse of $W_U\\to U$ is a section\nof $W\\to T$ over $U$; by Conrad's account of Deligne's proof (Conrad,\n*Deligne's notes on Nagata compactifications*, Theorem 2.4), which rests on\nZariski's Main Theorem, it extends after a further admissible blow-up to an\nopen containing the preimage of $U$, with closed graph\n([thm-nagata-conrad-elimination]). The composite blow-up is $U$-admissible\n([sk-lem-nagata-sketch-blowups]), and the closed graph, containing the graph\nover $U$ schematically densely, is the strict transform. So the strict\ntransform is isomorphic to an open of $T'$.",
+  "proof": [
+   {
+    "text": "First blow up a finite-type ideal supported exactly on $T\\setminus U$, so\nthat $U$ becomes scheme-theoretically dense\n([sk-lem-nagata-boundary-divisor]). Apply [thm-nagata-conrad-elimination] with\n$V=U$ to the section $U\\to W$ inverse to $W_U\\to U$. Refine once more by a\nproduct with an ideal cutting out $T\\setminus U$, and compose the blow-ups\ninto one $U$-admissible blow-up $T'\\to T$ ([sk-lem-nagata-sketch-blowups]).\nThe extended section is defined on an open $W_0\\subseteq T'$ and has closed\ngraph $\\Gamma\\simeq W_0$ in $W\\times_TT'$, containing the graph over $U$\nschematically densely. The strict transform $W'$ is the scheme-theoretic\nclosure of that graph, so $W'=\\Gamma\\simeq W_0$, and $W'\\to T'$ is an open\nimmersion.",
+    "uses": [
+     "sk-lem-nagata-boundary-divisor",
+     "thm-nagata-conrad-elimination",
+     "sk-lem-nagata-sketch-blowups"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

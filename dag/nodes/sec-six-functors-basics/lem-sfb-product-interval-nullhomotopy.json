@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-product-interval-nullhomotopy",
+ "kind": "statement",
+ "title": "Explicit null-homotopy for a non-Boolean proper product interval",
+ "statement": "Let $R$ be a commutative ring, let $r\\geq1$, let $m\\in\\mathbf N^r$, and choose $j$ with $m_j\\geq2$. Give $T=\\prod_{i=1}^r\\{0,\\ldots,m_i\\}\\setminus\\{0,m\\}$ its coordinatewise order, and use the augmented strict-chain complex $C(T;R)$ of [def-sfb-augmented-poset-chains]. Put $e_j=1$, $e_i=0$ for $i\\ne j$, and put $u(x)_j=\\max(x_j,1)$, $u(x)_i=x_i$ for $i\\ne j$. Then $e\\in T$, $u:T\\to T$ is monotone, and both $\\operatorname{id}_T\\leq u$ and $c_e\\leq u$ hold, where $c_e$ is the constant map at $e$. Write $h(f,g)$ for the explicit degree-raising prism maps of [lem-sfb-poset-augmented-chain-prism]. Define $R$-linear maps $t_n:C_n(T;R)\\to C_{n+1}(T;R)$ by $t_n=h_n(c_e,u)-h_n(\\operatorname{id}_T,u)$ for $n\\geq0$, by $t_{-1}[\\varnothing]=[e]$, and by zero for $n<-1$. These maps satisfy $d_{n+1}t_n+t_{n-1}d_n=\\operatorname{id}_{C_n(T;R)}$ for every $n\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, contextual motivation only. Agent-formulated extraction of the retained proof of lem-sfb-product-chain-proper-interval-homology, steps 1–2; no exact combinatorial assertion in the blueprint. Exact reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-augmented-poset-chains",
+  "lem-sfb-poset-augmented-chain-prism"
+ ],
+ "proof": [
+  {
+   "text": "The poset $T$ is finite, being a subset of the finite product of the sets $\\{0,\\ldots,m_i\\}$. The vector $e$ belongs to this product, is nonzero, and differs from $m$ in coordinate $j$ since $1<m_j$. For $x\\in T$, every coordinate of $u(x)$ is within its bound, and $u(x)_j\\geq1$, so $u(x)\\ne0$. If $u(x)=m$, then $\\max(x_j,1)=m_j\\geq2$ forces $x_j=m_j$, while all other coordinates already equal those of $m$; this contradicts $x\\ne m$. Thus $u$ maps $T$ to itself. Coordinatewise monotonicity of maximum proves monotonicity of $u$, and $x\\leq u(x)$ and $e\\leq u(x)$ hold coordinatewise. The identity and constant maps are monotone as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written coordinate-max contraction extracted from lem-sfb-product-chain-proper-interval-homology, original steps 1–2. Prism input: Stacks Tag 019S, lemma-homotopy-s-N and equation-homotopy-to-homotopy in literature/stacks-project/simplicial.tex, via lem-sfb-poset-augmented-chain-prism. No exact product-interval assertion in the blueprint."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-poset-augmented-chain-prism] to $P=Q=T$, first to $(c_e,u)$ and then to $(\\operatorname{id}_T,u)$; step 1 checks finiteness and both comparisons. Subtract the supplied identities. Writing $s=h(c_e,u)-h(\\operatorname{id}_T,u)$ gives $ds+sd=(u_*-(c_e)_*)-(u_*-\\operatorname{id}_*)=\\operatorname{id}-(c_e)_*$ in every degree; here the identity-map clause identifies $\\operatorname{id}_*$ with the identity. The prism maps are $R$-linear and $s_{-1}=0$. The displayed $t_n$ are therefore $R$-linear too, including the basis assignment in degree $-1$.",
+   "uses": [
+    "lem-sfb-poset-augmented-chain-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written coordinate-max contraction extracted from lem-sfb-product-chain-proper-interval-homology, original steps 1–2. Prism input: Stacks Tag 019S, lemma-homotopy-s-N and equation-homotopy-to-homotopy in literature/stacks-project/simplicial.tex, via lem-sfb-poset-augmented-chain-prism. No exact product-interval assertion in the blueprint."
+   }
+  },
+  {
+   "text": "For $n\\geq1$, the constant-map formula in [lem-sfb-poset-augmented-chain-prism] sends each strict $n$-chain to the repeated tuple $[e,\\ldots,e]=0$. Hence $(c_e)_{*,n}=0$. Since $t_n=s_n$ and $t_{n-1}=s_{n-1}$ for these degrees, step 2 gives $d_{n+1}t_n+t_{n-1}d_n=\\operatorname{id}$.",
+   "uses": [
+    "lem-sfb-poset-augmented-chain-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written coordinate-max contraction extracted from lem-sfb-product-chain-proper-interval-homology, original steps 1–2. Prism input: Stacks Tag 019S, lemma-homotopy-s-N and equation-homotopy-to-homotopy in literature/stacks-project/simplicial.tex, via lem-sfb-poset-augmented-chain-prism. No exact product-interval assertion in the blueprint."
+   }
+  },
+  {
+   "text": "In degree zero, [def-sfb-augmented-poset-chains] gives $d_0[x]=[\\varnothing]$, so $t_{-1}d_0[x]=[e]=(c_e)_{*,0}[x]$ by the constant-map formula of [lem-sfb-poset-augmented-chain-prism]. Step 2, with $s_{-1}=0$ and $t_0=s_0$, gives $d_1t_0=\\operatorname{id}-(c_e)_{*,0}$; adding the preceding equality proves degree zero. In degree $-1$, $d_0t_{-1}[\\varnothing]=d_0[e]=[\\varnothing]$ and $t_{-2}d_{-1}=0$. For $n<-1$ the source module is zero. The basis calculations extend linearly, proving the identity in all integer degrees.",
+   "uses": [
+    "def-sfb-augmented-poset-chains",
+    "lem-sfb-poset-augmented-chain-prism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image, contextual motivation only; agent-written coordinate-max contraction extracted from lem-sfb-product-chain-proper-interval-homology, original steps 1–2. Prism input: Stacks Tag 019S, lemma-homotopy-s-N and equation-homotopy-to-homotopy in literature/stacks-project/simplicial.tex, via lem-sfb-poset-augmented-chain-prism. No exact product-interval assertion in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-poset-augmented-chain-prism",
+  "def-sfb-augmented-poset-chains"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, contextual motivation only; agent-written coordinate-max contraction extracted from lem-sfb-product-chain-proper-interval-homology, original steps 1–2. Prism input: Stacks Tag 019S, lemma-homotopy-s-N and equation-homotopy-to-homotopy in literature/stacks-project/simplicial.tex, via lem-sfb-poset-augmented-chain-prism. No exact product-interval assertion in the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properInterval|proper.interval|poset.*contract|orderComplex|coatom",
+   "results": "{\"t\": \"2026-10-22T06:11:56Z\", \"tool\": \"grep\", \"query\": \"properInterval|proper.interval|poset.*contract|orderComplex|coatom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Jacobson/Semiprimary.lean\", \"Mathlib/RingTheory/Jacobson/Radical.lean\", \"Mathlib/RingTheory/Jacobson/Radical.lean\", \"Mathlib/RingTheory/Jacobson/Radical.lean\", \"Mathlib/RingTheory/Jacobson/Radical.lean\"], \"digest\": \"1d50060fc008e622\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Homotopy constructors and extra-degeneracy homotopy equivalences do not construct the coordinate maximum endomorphism or its augmented normalized prism contraction; order-chain and Nobeling results concern different chains. Targeted source grep is empty."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coordinatewise maximum map gives a null homotopy of the identity on the augmented chains of the proper part of a product of finite chains",
+   "results": "{\"t\": \"2026-10-22T06:11:56Z\", \"tool\": \"leansearch\", \"query\": \"A coordinatewise maximum map gives a null homotopy of the identity on the augmented chains of the proper part of a product of finite chains\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"OrderHom\"",
+   "results": "{\"t\": \"2026-10-22T06:11:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"OrderHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Homotopy constructors and extra-degeneracy homotopy equivalences do not construct the coordinate maximum endomorphism or its augmented normalized prism contraction; order-chain and Nobeling results concern different chains. Targeted source grep is empty."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product of chains with bottom and top removed admits an explicit contracting homotopy on its augmented strict-chain complex when one coordinate has length at least two",
+   "results": "{\"t\": \"2026-10-22T06:12:24Z\", \"tool\": \"leanfinder\", \"query\": \"A finite product of chains with bottom and top removed admits an explicit contracting homotopy on its augmented strict-chain complex when one coordinate has length at least two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"Homotopy.mkInductiveAux₁\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"Homotopy.mkInductiveAux₂\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"AlgebraicTopology.DoldKan.hσ\"], \"digest\": \"108dcebbfdb9dc67\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Homotopy constructors and extra-degeneracy homotopy equivalences do not construct the coordinate maximum endomorphism or its augmented normalized prism contraction; order-chain and Nobeling results concern different chains. Targeted source grep is empty."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracting augmented chains using comparable monotone maps and a constant map to a vertex",
+   "results": "{\"t\": \"2026-10-22T06:12:25Z\", \"tool\": \"leanfinder\", \"query\": \"Contracting augmented chains using comparable monotone maps and a constant map to a vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OmegaCompletePartialOrder.Chain.pair\", \"Profinite.NobelingProof.GoodProducts.chain'_cons_of_lt\", \"LTSeries.exists_relSeries_covBy\", \"Profinite.NobelingProof.GoodProducts.isChain_cons_of_lt\", \"OmegaCompletePartialOrder.Chain.map\", \"List.isChain_cons_of_isChain_cons_pmap\", \"SimplexCategoryGenRel.simplicialEvalσ_monotone\", \"OmegaCompletePartialOrder.Chain.map_coe\"], \"digest\": \"b6383558d6a717d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Homotopy constructors and extra-degeneracy homotopy equivalences do not construct the coordinate maximum endomorphism or its augmented normalized prism contraction; order-chain and Nobeling results concern different chains. Targeted source grep is empty."
+  },
+  {
+   "tool": "grep",
+   "query": "properInterval|proper.interval|poset.*contract|orderComplex",
+   "results": "{\"t\": \"2026-10-22T06:13:22Z\", \"tool\": \"grep\", \"query\": \"properInterval|proper.interval|poset.*contract|orderComplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Homotopy constructors and extra-degeneracy homotopy equivalences do not construct the coordinate maximum endomorphism or its augmented normalized prism contraction; order-chain and Nobeling results concern different chains. Targeted source grep is empty."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An explicit contracting homotopy on augmented strict chains of a non-Boolean finite product of integer chains",
+   "results": "{\"t\": \"2026-10-22T06:13:23Z\", \"tool\": \"leansearch\", \"query\": \"An explicit contracting homotopy on augmented strict chains of a non-Boolean finite product of integer chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.mk.congr_simp\", \"Homotopy.mkInductive\", \"Homotopy.mkInductiveAux₂.congr_simp\", \"Homotopy.noConfusionType\", \"Homotopy.nullHomotopy'\", \"Homotopy.mkInductiveAux₁.congr_simp\", \"Homotopy.ofEq.congr_simp\", \"Homotopy.nullHomotopy\"], \"digest\": \"69c59060afb8cdfe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general Homotopy constructors and extra-degeneracy homotopy equivalences do not construct the coordinate maximum endomorphism or its augmented normalized prism contraction; order-chain and Nobeling results concern different chains. Targeted source grep is empty."
+  },
+  {
+   "tool": "grep",
+   "query": "properInterval|proper.interval|poset.*contract|orderComplex",
+   "results": "{\"t\": \"2026-10-23T11:27:26Z\", \"tool\": \"grep\", \"query\": \"properInterval|proper.interval|poset.*contract|orderComplex\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern generic homotopy constructors, Dold–Kan projections, extra degeneracy data, or order-map identities; none constructs the specified coordinate-max contraction and its augmented degree -1 correction. Read Mathlib/Algebra/Homology/Homotopy.lean:324–338, AlgebraicTopology/DoldKan/HomotopyEquivalence.lean:35–43, and AlgebraicTopology/ExtraDegeneracy.lean:415–430."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"OrderHom\"",
+   "results": "{\"t\": \"2026-10-23T11:27:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"OrderHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern generic homotopy constructors, Dold–Kan projections, extra degeneracy data, or order-map identities; none constructs the specified coordinate-max contraction and its augmented degree -1 correction. Read Mathlib/Algebra/Homology/Homotopy.lean:324–338, AlgebraicTopology/DoldKan/HomotopyEquivalence.lean:35–43, and AlgebraicTopology/ExtraDegeneracy.lean:415–430."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Explicit contracting homotopy of augmented strict chains of a product of finite chains with top and bottom removed",
+   "results": "{\"t\": \"2026-10-23T11:27:26Z\", \"tool\": \"leansearch\", \"query\": \"Explicit contracting homotopy of augmented strict chains of a product of finite chains with top and bottom removed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.mkInductive\", \"Homotopy.nullHomotopy\", \"Homotopy.mk.congr_simp\", \"Homotopy.nullHomotopy'\", \"Homotopy.mkInductiveAux₁.congr_simp\", \"Homotopy.mkInductiveAux₂.congr_simp\", \"Homotopy.mkInductiveAux₂\", \"Homotopy.noConfusionType\"], \"digest\": \"1f52b137e69adab1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern generic homotopy constructors, Dold–Kan projections, extra degeneracy data, or order-map identities; none constructs the specified coordinate-max contraction and its augmented degree -1 correction. Read Mathlib/Algebra/Homology/Homotopy.lean:324–338, AlgebraicTopology/DoldKan/HomotopyEquivalence.lean:35–43, and AlgebraicTopology/ExtraDegeneracy.lean:415–430."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented strict poset chain complex of the proper part of a finite product of chains has a contracting homotopy when one factor has at least three elements",
+   "results": "{\"t\": \"2026-10-23T11:27:29Z\", \"tool\": \"leanfinder\", \"query\": \"An augmented strict poset chain complex of the proper part of a finite product of chains has a contracting homotopy when one factor has at least three elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Homotopy.mkInductiveAux₃\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"Homotopy.mkInductiveAux₂_add_one\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyHσToZero\", \"Homotopy.mkInductiveAux₂\"], \"digest\": \"4d94cac66970566c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern generic homotopy constructors, Dold–Kan projections, extra degeneracy data, or order-map identities; none constructs the specified coordinate-max contraction and its augmented degree -1 correction. Read Mathlib/Algebra/Homology/Homotopy.lean:324–338, AlgebraicTopology/DoldKan/HomotopyEquivalence.lean:35–43, and AlgebraicTopology/ExtraDegeneracy.lean:415–430."
+  },
+  {
+   "tool": "grep",
+   "query": "nullHomotopy|mkInductive|prism|[Pp]oset",
+   "results": "{\"t\": \"2026-10-23T11:28:14Z\", \"tool\": \"grep\", \"query\": \"nullHomotopy|mkInductive|prism|[Pp]oset\", \"sub\": \"Algebra/Homology/Homotopy.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"324\", \"336\", \"337\", \"411\", \"425\"], \"digest\": \"171c283d0e4c7f4a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern generic homotopy constructors, Dold–Kan projections, extra degeneracy data, or order-map identities; none constructs the specified coordinate-max contraction and its augmented degree -1 correction. Read Mathlib/Algebra/Homology/Homotopy.lean:324–338, AlgebraicTopology/DoldKan/HomotopyEquivalence.lean:35–43, and AlgebraicTopology/ExtraDegeneracy.lean:415–430."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For comparable monotone maps the chain prism identity contracts a poset when identity and a constant map have a common upper bound",
+   "results": "{\"t\": \"2026-10-23T11:28:15Z\", \"tool\": \"leanfinder\", \"query\": \"For comparable monotone maps the chain prism identity contracts a poset when identity and a constant map have a common upper bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OmegaCompletePartialOrder.Chain.map_id\", \"SimplexCategory.mkOfLe_refl\", \"CategoryTheory.SimplicialThickening.id_I\", \"SimplexCategory.II.monotone_map'\", \"SimplexCategory.II.map'_id\", \"SimplexCategory.mkOfLeComp\", \"SimplexCategory.const_subinterval_eq\", \"SSet.stdSimplex.const_down_toOrderHom\"], \"digest\": \"e4797ac75d478861\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern generic homotopy constructors, Dold–Kan projections, extra degeneracy data, or order-map identities; none constructs the specified coordinate-max contraction and its augmented degree -1 correction. Read Mathlib/Algebra/Homology/Homotopy.lean:324–338, AlgebraicTopology/DoldKan/HomotopyEquivalence.lean:35–43, and AlgebraicTopology/ExtraDegeneracy.lean:415–430."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-product-chain-proper-interval-homology",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, contextual motivation only: non-Boolean proper-product-interval contraction below the retained polynomial-bar multidegree argument; coordinate-max construction and the augmentation correction extracted from original proof steps 1–2 of lem-sfb-product-chain-proper-interval-homology. The combinatorial assertion is agent-written and not in the blueprint.",
+   "via": [
+    "lem-sfb-product-chain-proper-interval-homology",
+    "lem-sfb-rational-polynomial-bar-contraction",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-product-interval-nullhomotopy",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement; proved coordinate-max well-definedness, subtracted the two existing prism identities, and checked positive, zero, augmentation and lower degrees separately. No new node is needed: all remaining arguments are elementary. Repeated Mathlib searches with two semantic phrasings, read candidates, and found no exact leaf or project attachment.",
+  "blueprint": "Latest blueprint paragraph (3), open direct image, is motivation only. Steps 1–4 realize the agent-written non-Boolean contraction extracted from lem-sfb-product-chain-proper-interval-homology steps 1–2; no new unit route or exact blueprint assertion is claimed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-c4aa454f1",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-c4aa454f1 (reviewer sub-agent of L); spot-checked: Statement is byte-identical to the live base, where the item was unsplit; the delivery adds 4 proof steps, no new nodes and no fixes. Read def-sfb-augmented-poset-chains and lem-sfb-poset-augmented-chain-prism in full. Step 1: e is in T, u maps T to T (u(x)=m would force x_j=m_j because m_j>=2, so x=m), and id<=u, c_e<=u hold coordinatewise; correct. Step 2: subtracting the two prism identities gives ds+sd=id-(c_e)_*; signs checked, id_*=id by functoriality. Step 3: for n>=1, (c_e)_* lands on repeated tuples, which are 0. Step 4: in degree 0, t_{-1}d_0[x]=[e]=(c_e)_{*,0}[x] cancels the remaining term; degree -1 gives d[e]=[∅]; lower degrees are zero. Only the statements of the cited nodes are used, and there is no cycle: the parent lem-sfb-product-chain-proper-interval-homology step 1 uses exactly dt+td=id. My own script over Z checked dt+td=id on every augmented chain for m=(2),(3),(2,1),(1,2),(0,2,1),(2,2),(3,1,1) (132 chains for the last); all pass. Searching the DAG for poset contraction, cone or prism nodes found no duplicate (ordered-join-partial-contraction and trf-coefficient-bar-prism-homotopy concern other objects). Sources: blueprint direct-images.proof paragraph (3), l.19-25, is motivation only, and the node says honestly that the statement is agent-formulated; Stacks 019S (simplicial.tex l.4754, l.4817) is the prism motivation. No SGA and no tool_uses. Cosmetic only: the node-level source points to main-20261015 while the steps point to latest/; both give the same paragraph."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.ProductIntervalNullhomotopy",
+  "declaration": "AlgebraicTopology.AugmentedPosetChains.ProductInterval.nullhomotopy",
+  "declarations": [
+   "AlgebraicTopology.AugmentedPosetChains.ProductInterval.coordinate_laws",
+   "AlgebraicTopology.AugmentedPosetChains.ProductInterval.vertex",
+   "AlgebraicTopology.AugmentedPosetChains.ProductInterval.raise",
+   "AlgebraicTopology.AugmentedPosetChains.ProductInterval.contractionComponent",
+   "AlgebraicTopology.AugmentedPosetChains.ProductInterval.nullhomotopy"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/ProductIntervalNullhomotopy.lean",
+  "statement": "theorem nullhomotopy (R : Type u) [CommRing R] {r : ℕ} (hr : 1 ≤ r) (m : Fin r → ℕ) (j : Fin r) (hj : 2 ≤ m j) : (OrderHom.id : Set.Ioo (0 : Fin r → ℕ) m →o Set.Ioo (0 : Fin r → ℕ) m) ≤ raise hr m j hj ∧ OrderHom.const (Set.Ioo (0 : Fin r → ℕ) m) (vertex hr m j hj) ≤ raise hr m j hj ∧ ∀ n : ℤ, contractionComponent R hr m j hj n (n + 1) ≫ (complex R (Set.Ioo (0 : Fin r → ℕ) m)).d (n + 1) n + (complex R (Set.Ioo (0 : Fin r → ℕ) m)).d n (n - 1) ≫ contractionComponent R hr m j hj (n - 1) n = 𝟙 ((complex R (Set.Ioo (0 : Fin r → ℕ) m)).X n)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-371ea5f72",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Node unchanged apart from lean (live lean=None, no rival); lean.statement verbatim in file. T=Set.Ioo 0 m on Fin r→ℕ with Pi order equals {x≤m, x≠0, x≠m}. vertex/raise are real data whose proofs cite sorried coordinate_laws (listed; covers e∈T and u monotone); nullhomotopy states id≤u, c_e≤u and t n (n+1)≫d + d≫t (n-1) n = 𝟙 for all n:ℤ. contractionComponent = prismComponent(c_e,u) − prismComponent(id,u) for n≥0, [∅]↦[e] at n=-1, 0 below; sign matches prism_identity g_*−f_*. Hand-checked degrees ≥1 (constant map gives repeated lists = 0), 0, −1, <−1, and step 1. Edge cases m=(2), m=(0,2), zero ring fine; no extra hypotheses or instances. Docstrings and source place present, sorry-only, report sections present. Advisory: the downstream lem-sfb-product-chain-proper-interval-homology owns its own ProperInterval and will need an Ioo bridge. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261026T091830-L-3379995",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicTopology.AugmentedPosetChains.ProductInterval.coordinate_laws",
+   "AlgebraicTopology.AugmentedPosetChains.ProductInterval.nullhomotopy"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-section-cohomology-cycle-formula",
+ "kind": "statement",
+ "title": "The canonical section cohomology comparison evaluated on cycles",
+ "statement": "Let Y be a scheme, K a nonnegative complex of O_Y-modules, p a natural number and V an open of Y. Put P=(K.sc p).map U, where U forgets module sheaves to module presheaves, E the exact evaluation functor at V to additive groups, and k the inverse of the kernel comparison P.cycles≅U(K.cycles p). Then the cycle quotient for P.map E, followed by its homology evaluation comparison and E(sectionCohomologyTheta K p) [def-weil-pbc-flat-base-change-open-choices], equals the cycle evaluation comparison followed by E(k) and evaluation at V of K.homologyπ p.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images, proof identifying the cohomology sheaf as the sheaf associated to the section-cohomology presheaf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [
+  {
+   "text": "For an exact left adjoint L with left-exact right adjoint U, precompose the adjoint homology comparison with the cycle quotient. Apply the adjunction equivalence and commute the quotient through L. Counit naturality and monicity of the cycle inclusion identify its cycles map with the inverse kernel comparison followed by the counit. Transport back across the adjunction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize this identity to the module-sheafification adjunction of the definition of theta. Exact evaluation commutes with cycles and homology and sends the identity to the stated equality at V. The proof works at every degree and every open.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images, proof identifying the cohomology sheaf as the sheaf associated to the section-cohomology presheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaf class map on cycles agrees with homology projection after evaluation of a complex of sheaves",
+   "results": "Eight Hom-complex and group-cohomology results, none identifies the sheafification theta map with the chosen Leray edge.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\", \"mapHomologyIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionCohomologyTheta|lerayEdge",
+   "results": "No Mathlib hits; local proved private cycle calculations in FlatUnitRawSections supply the generic adjunction calculation, but no public whole-open Leray comparison exists.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LerayEdgeRestrictedResolution",
+  "date": "2026-10-26",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-leray-edge-restricted-resolution",
+   "place": "Proof step 2, the exact sheafification adjunction sends a cycle to its cohomology-sheaf class",
+   "via": [
+    "lem-weil-pbc-leray-edge-whole-open-class"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionCohomologyCycleFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionCohomologyCycleFormula.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.section_comparison_cycles",
+  "statement": "theorem section_comparison_cycles {Y : Scheme.{u}}\n    (K : CochainComplex (SheafOfModules.{u} Y.ringCatSheaf) ℕ)\n    (p : ℕ) (V : Y.Opens) :\n    let E := PresheafOfModules.toPresheaf.{u} Y.ringCatSheaf.obj ⋙\n      (CategoryTheory.evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)\n    let P := (K.sc p).map (SheafOfModules.forget.{u} Y.ringCatSheaf)\n    let k := (P.isoCyclesOfIsLimit (KernelFork.mapIsLimit _ (K.sc p).cyclesIsKernel\n      (SheafOfModules.forget.{u} Y.ringCatSheaf))).inv\n    (P.map E).homologyπ ≫ (P.mapHomologyIso E).hom ≫\n        E.map (sectionCohomologyTheta K p) =\n      (P.mapCyclesIso E).hom ≫ E.map k ≫ Hom.app (K.sc p).homologyπ V",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T092149-L-3405260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T092149-L-3405260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

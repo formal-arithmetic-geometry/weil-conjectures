@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-strict-proper-restriction-composition",
+ "kind": "statement",
+ "title": "Composition of coefficient restriction squares for proper image",
+ "statement": "For any scheme morphism g:Z→W and any strict derived constant L-integral tower K, the two coefficient-restriction/proper-image squares for E→F→L paste to the direct E→L square under the canonical restriction compositors. No properness or finite-Tor hypothesis is needed.\n\nPrecise Lean statement with module variables:\n```lean\nvariable (l : ℕ) [Fact l.Prime]\n  (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n  (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n  (i : E →ₐ[ℚ_[l]] F)\n  (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n  (j : F →ₐ[ℚ_[l]] L)\ntheorem properRestriction_composition {Z W : Scheme.{u}} (g : Z ⟶ W)\n    (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l L)) Z) :\n    (U l E F i W).map ((properRestriction l F L j g).hom.app K) ≫\n        (properRestriction l E F i g).hom.app ((U l F L j Z).obj K) ≫\n        (R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).map\n          ((towerScalarRestrictionComposition l E F i L j Z).hom.app K) =\n      (towerScalarRestrictionComposition l E F i L j W).hom.app\n          ((R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l L)) g).obj K) ≫\n        (properRestriction l E L (j.comp i) g).hom.app K\n```",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint), lemma-derived-pushforward-composition, and Tag 0940 (section-derived-limits); whole-complex right-derived normalization as in the cited node lem-pur-derived-square-normalization-naturality (Tag 0D6E). Auxiliary Steps 2–3 of lem-pur-compact-support-strict-scalar-composition; the precise constant-tower formula is the agent calculation from these specified normalizations."
+ },
+ "stmt_deps": [
+  "def-pur-constant-scalar-tower-mates",
+  "lem-pur-strict-scalar-tower-associator"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "The ordinary cocycle holds on all sections. Both proper restriction maps are identity on the same base-change sections, and pbcRestrictComp is identity on sections. Extensionality gives equality of whole-tower morphisms.",
+   "uses": [
+    "def-pur-constant-scalar-tower-mates",
+    "lem-pur-strict-scalar-tower-associator"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "Each properRestriction satisfies its defining whole-complex unit equation. normalized_comp pastes the first two normalized squares. The factorization formula for the exact restriction compositor and normalized_naturality compare that pasted square with the direct square. Evaluate the resulting natural-transformation equality at K.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality",
+    "lem-pur-exact-restriction-composition",
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-constant-scalar-tower-mates",
+  "lem-pur-strict-scalar-tower-associator",
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-pur-exact-restriction-composition"
+ ],
+ "proof_origin": "S2, 2026-10-27: specialization and assembly of proved ordinary adjunction and exact-derived normalized-square coherence; no postponed proof.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of mates of scalar extension and restriction under canonical associativity of tensor products",
+   "date": "2026-10-27",
+   "results": "OK 8 hit(s): ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.RestrictionCoextensionAdj.app', ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply",
+   "verdict": "Use the existing adjunction, mate-pasting and exact-localization API. No complete constant-tower coherence result was found in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-27",
+   "results": "OK 1 hit(s): CategoryTheory.mateEquiv_vcomp",
+   "verdict": "Use the existing adjunction, mate-pasting and exact-localization API. No complete constant-tower coherence result was found in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "mate_tower_square|properRestriction.*composition|localizedProper.*composition",
+   "date": "2026-10-27",
+   "results": "OK 0 hit(s): ",
+   "verdict": "Use the existing adjunction, mate-pasting and exact-localization API. No complete constant-tower coherence result was found in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localization preserves composite adjunction and canonical left adjoint comparison isomorphism",
+   "date": "2026-10-27",
+   "results": "OK 8 hit(s): CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Localization.HasProductsOfShapeAux.adj",
+   "verdict": "Use the existing adjunction, mate-pasting and exact-localization API. No complete constant-tower coherence result was found in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-27",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary strict proper/scalar comparison Steps 2–3.",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality",
+    "lem-pur-compact-support-strict-scalar-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictProperRestrictionComposition",
+  "file": "lean/Sheaf/Paper/StrictProperRestrictionComposition.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.properRestriction_composition",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.properRestriction_composition"
+  ],
+  "statement": "theorem properRestriction_composition {Z W : Scheme.{u}} (g : Z ⟶ W)\n    (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l L)) Z) :\n    (U l E F i W).map ((properRestriction l F L j g).hom.app K) ≫\n        (properRestriction l E F i g).hom.app ((U l F L j Z).obj K) ≫\n        (R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).map\n          ((towerScalarRestrictionComposition l E F i L j Z).hom.app K) =\n      (towerScalarRestrictionComposition l E F i L j W).hom.app\n          ((R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l L)) g).obj K) ≫\n        (properRestriction l E L (j.comp i) g).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T222753-L-693657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T222753-L-693657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

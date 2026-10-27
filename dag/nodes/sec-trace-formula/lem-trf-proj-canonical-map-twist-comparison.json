@@ -20,45 +20,63 @@
  ],
  "proof": [
   {
-   "text": "Apply the canonical generation-locus construction to the graded map ψ. The positive-degree nonvanishing opens cover Z by hypothesis, so U(ψ)=Z; the resulting canonical morphism is the stated r, characterized on every basic open D_+(a) by r^{-1}D_+(a)=Z_{ψ(a)} and by the displayed localized ring map.",
-   "uses": [
-    "lem-trf-space-line-module-proj-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK (lemma-invertible-map-into-proj), construction of r_{L,ψ} and property (1); the scheme specialization of the canonical relative-Proj construction"
-   }
-  },
-  {
-   "text": "If Z is empty, take d=1; then every sheaf-generation assertion and the final isomorphism on Z are vacuous. Otherwise, quasi-compactness gives a finite nonempty family of positive-degree homogeneous elements a_i∈A_{d_i} whose nonvanishing opens Z_{ψ(a_i)} cover Z. Let d be a common positive multiple of the d_i. For each i, ψ(a_i)^{d/d_i} is a section of M^{⊗d} with the same nonvanishing open, so the degree-d sections ψ(A_d) generate M^{⊗d} on all of Z. Raising these generators to the k-th tensor power shows that ψ(A_{dk}) generates M^{⊗dk} for every k≥1.",
+   "text": "Use the given preimage formula to regard hcover as a cover by inverse images of positive homogeneous standard opens. Quasi-compactness gives finitely many such opens, indexed by a finite set t with positive degrees n_i. Put d=product_i n_i. The empty product is 1, so d>0 even for an empty scheme. For each k>0 and each retained chart, n_i divides d*k and q_i=d*k/n_i is positive. The homogeneous element a_i^q_i has degree d*k and D_+(a_i^q_i)=D_+(a_i), hence all degree-d*k inverse-image charts cover Z. This is the private proved exists_common_degree_cover; only the standard-open power identity and finite-product arithmetic are used.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK, final assertion after choosing a common positive degree; quasi-compactness gives a finite subcover and powers move all degrees to d"
+    "place": "Tag 01N8 (lemma-converse-construction), local frames and their ratios; Tag 01NK (lemma-invertible-map-into-proj), section normalization and generated-degree comparison"
    }
   },
   {
-   "text": "Apply the generated-chart comparison node to V=Z and each positive degree dk. Its hypotheses hold by Step 2, and U(ψ)=Z by Step 1. We obtain the canonical isomorphism r^*O_P(dk)≅M^{⊗dk} for every k≥1. The uniqueness clause identifies these maps with the canonical maps induced by ψ, so the assertion is independent of the finite subcover and of the chosen common multiple.",
+   "text": "Fix m=d*k and let U_a=r^{-1}D_+(a) for a in A_m. The section a/1 of O(m), given by unitToTwist, is a free generator on D_+(a); ordinary pullback preserves this generator. The supplied preimage equation and mem_nonvanishingLocus_iff_generatesAt identify U_a with the generating locus of psi(a), so psi(a) freely generates M^m there.",
    "uses": [
-    "lem-trf-proj-invertible-map-twist-iso"
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-local-free-generator",
+    "def-sc-section-generating-locus",
+    "lem-sc-nonvanishing-iff-generates-at"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NK, graded comparison θ and final assertion; Tag 01N8, converse construction in each common positive degree"
+    "place": "Tag 01N8 (lemma-converse-construction), local frames and their ratios; Tag 01NK (lemma-invertible-map-into-proj), section normalization and generated-degree comparison"
+   }
+  },
+  {
+   "text": "For a,b in A_m use c=r^#(a/b) on U_b. map_unitToTwist_eq_smul and pullbackSection_map_eq_smul give r^*(a/1)=c*r^*(b/1), while hr_formula with exponent 1 gives psi(a)=c*psi(b). The private proved exists_iso_of_section_ratios restricts these identities to arbitrary overlap opens. Cancellation against a free generator converts any linear relation between source frames into the same relation between target frames. Apply the proved isoOfIsFreeGenerator to glue the frame maps and their inverses. On each U_b every homogeneous section satisfies the same ratio equation, so the glued isomorphism sends r^*(a/1) to psi(a) for every a, by sheaf separatedness.",
+   "uses": [
+    "def-sc-local-free-generator",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), local frames and their ratios; Tag 01NK (lemma-invertible-map-into-proj), section normalization and generated-degree comparison"
+   }
+  },
+  {
+   "text": "The section-normalized tensor pullback adjunction and the ordinary pullback adjunction are related by leftAdjointUniq. Its unit compatibility, evaluated on sections in the private proved tensorPullbackSection_transport, sends the actual tensorPullbackSection 1 tensor a to ordinary pullbackSection a. Compose this object isomorphism with the frame-glued isomorphism. The normalization just proved becomes exactly the required tensor-pullback section equality; restriction from top is the identity. All three private helpers are fully proved, and no canonical map existence theorem is needed because r and its chart formulas are hypotheses.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N8 (lemma-converse-construction), local frames and their ratios; Tag 01NK (lemma-invertible-map-into-proj), section normalization and generated-degree comparison"
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-space-line-module-proj-map",
-  "lem-trf-proj-invertible-map-twist-iso"
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-local-free-generator",
+  "def-sc-section-generating-locus",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "def-pc-module-pullback"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01NK (lemma-invertible-map-into-proj), graded comparison θ and final assertion; Tag 01N8 (lemma-converse-construction), applied after a finite-subcover common-degree argument"
+  "place": "Tag 01N8 (lemma-converse-construction), local frames and their ratios; Tag 01NK (lemma-invertible-map-into-proj), section normalization and generated-degree comparison"
  },
  "mathlib_searches": [
   {
@@ -168,5 +186,26 @@
   "result": "pass",
   "note": "Reviewed node, all dependencies, Stacks Tags 01NK/01N8, Lean declarations, edge cases, docstrings, report sections, route compliance, and scompile side-overlay evidence. No substantive or mechanical errors found."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261023T132058-L-2202640",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

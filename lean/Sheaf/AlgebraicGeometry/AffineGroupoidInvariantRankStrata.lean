@@ -7,11 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.GroupoidScheme
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
-import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.AffineSplitMorphismPositiveRankPieces
+import Sheaf.AlgebraicGeometry.GroupoidSourcePullbackTranslation
+import Sheaf.AlgebraicGeometry.GroupoidInvariantOpenRestrictionDegree
 
 /-!
 # Invariant constant-rank strata of an affine groupoid scheme
@@ -81,6 +79,54 @@ theorem affineGroupoid_exists_invariant_rank_strata
           k ≫ pullback.fst s t = pullback.fst s' t' ≫ (V r).ι ∧
           k ≫ pullback.snd s t = pullback.snd s' t' ≫ (V r).ι ∧
           c' ≫ (V r).ι = k ≫ c := by
-  sorry
+  classical
+  obtain ⟨hpos, U, hmem, hclopen, hdisj, _hcover, _hzero, haff,
+    I, hI, hIfin, _hcolim, hempty⟩ :=
+    affine_split_morphism_positive_rank_pieces A B s e hG.identity_source
+  let J : Finset ℕ := hIfin.toFinset
+  have hJ (r : J) : 1 ≤ r.1 ∧ (U r.1 : Set (Spec A)).Nonempty := by
+    have hr : r.1 ∈ I := hIfin.mem_toFinset.mp r.2
+    rwa [hI] at hr
+  have hinv (r : ℕ) : s ⁻¹ᵁ U r = t ⁻¹ᵁ U r := by
+    ext z
+    change s z ∈ U r ↔ t z ∈ U r
+    rw [hmem, hmem]
+    have hrank := ((groupoid_source_pullback_translation s t e i c hG).2
+      inferInstance).1 z
+    change s.fiberDegree (t z) = s.fiberDegree (s z) at hrank
+    rw [hrank]
+  refine ⟨J, (fun r ↦ U r.1), (fun r ↦ s ⁻¹ᵁ U r.1), ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro r
+    exact hJ r |>.1
+  · intro r
+    obtain ⟨x, hx⟩ := (hJ r).2
+    exact ⟨⟨⟨x, hx⟩⟩, (hclopen r.1).isClosed, (haff r.1).1⟩
+  · intro r r' hne
+    exact hdisj (show r.1 ≠ r'.1 from fun h ↦ hne (Subtype.ext h))
+  · apply top_unique
+    intro x _hx
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    have hx : x ∈ U (s.fiberDegree x) := (hmem _ _).2 rfl
+    have hdeg : s.fiberDegree x ∈ I := by
+      rw [hI]
+      exact ⟨hpos x, x, hx⟩
+    exact ⟨⟨s.fiberDegree x, hIfin.mem_toFinset.mpr hdeg⟩, hx⟩
+  · intro h
+    exact hIfin.toFinset_eq_empty.mpr (hempty h)
+  · intro r
+    refine ⟨rfl, hinv r.1, (haff r.1).2.1, ?_⟩
+    obtain ⟨sW, tW, eW, iW, cW, hs, ht, hsuniq, _htuniq, heuniq, hiuniq,
+      hcuniq, hGW, _hiIso, _hiInv, _hiSource, hdegree⟩ :=
+      hG.existsUnique_invariantOpen_restriction_degree s t e i c (U r.1) (hinv r.1)
+    have hsW : s ∣_ U r.1 = sW := (hsuniq _).mp (morphismRestrict_ι s (U r.1))
+    have hsdegree : sW.IsFiniteLocallyFreeOfDegree r.1 := by
+      rw [← hsW]
+      exact (haff r.1).2.2.1
+    refine ⟨sW, tW, eW, iW, cW,
+      pullback.map sW tW s t _ _ _ hs ht,
+      hGW, hsdegree, hdegree r.1 hsdegree, hs, ht,
+      (heuniq _).mpr rfl, (hiuniq _).mpr rfl, ?_, ?_, (hcuniq _).mpr rfl⟩
+    · simp
+    · simp
 
 end AlgebraicGeometry

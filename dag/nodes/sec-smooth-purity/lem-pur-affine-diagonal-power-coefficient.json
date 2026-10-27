@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-affine-diagonal-power-coefficient",
+ "kind": "statement",
+ "title": "Root powers commute with the coefficient prefix of a coordinate presentation",
+ "statement": "In the finite setting [def-pur-conventions] use the explicit ordered coefficients, pullback comparisons and descents of [def-pur-affine-diagonal-integration-constructions]. Let B be finite type over k, f:U→B a compactifiable quasi-compact map with coordinates cU:U≅X_d(B) over B. Let r≤r' and both ell-powers annihilate A. Supply root-power maps q on U and qB on B, normalized by composition with the monic inclusions into G_m, and isomorphisms e,eB of the scalar-extended Tate lines with the pure-generator power-map formula. Set c,c' to the two ordered tower coefficient descents and k=c'.hom followed by pullback of the factorwise shifted tensor comparison eB and c.inv. Set prefix (respectively prefix') to inverse base-coefficient pullback for f, followed by pullback-composition for cU and the projection, followed by pullback along cU of c.inv (respectively c'.inv). Then the factorwise comparison induced by e followed by prefix equals prefix' followed by pullback of k. This is only a coefficient equation: it contains no trace, integration or exceptional inverse image.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement"
+ },
+ "stmt_deps": [
+  "def-pur-affine-diagonal-integration-constructions",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The kernel inclusion equations identify q and qB with root-power maps. Restriction of units preserves powers, so their inverse-image square commutes. The pure-generator equations identify e,eB with the scalar-extended root-power maps. Use normalized finite Tate inverse image from [lem-asd-etale-finite-twist-pullback]; since pure generators generate after sheafification, its square commutes with e,eB.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on d in the explicit coefficient tensors of [def-pur-affine-diagonal-integration-constructions]. At zero the comparison is identity and constant-unit inverse image is natural. At a successor tensor the induction square with the shifted line square. Tensor inverse-image comparison is natural in its two variables; shift and the degree-zero embedding preserve the equation.",
+   "uses": [
+    "def-pur-affine-diagonal-integration-constructions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport that square by the inverse-image composition comparison for cU followed by p. Its naturality gives the same equality with the coefficient descents appended. Expand k and cancel the adjacent c,c inverse pairs, using functoriality. This yields the displayed prefix equation, including the identity tensor at d=0 and the empty scheme.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "def-pur-affine-diagonal-integration-constructions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized root power maps commute with derived coefficient pullback and affine space integration trace",
+   "results": "8 hits: Algebra.normalizedTrace and normalizedTrace_def, Polynomial.integralNormalization_map and related field-trace/polynomial normalization results. None concerns etale Tate coefficients, ordered integration or exceptional adjunctions.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root power comparison commutes with the exceptional transpose of ordered affine integration",
+   "results": "8 hits: RootPairing.RootPositiveForm.pairingIn_mul_eq_pairingIn_mul_swap, RootPairing.chainBotCoeff_mul_chainTopCoeff and root-system chain/reflection lemmas. No finite Tate comparison or derived trace equation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits including homEquiv_apply, homEquiv_symm_apply and comp_homEquiv. These supply the generic adjunction API, not root-power trace compatibility. Local source homEquiv_naturality_left_symm gives the compact-support equation from the transpose equation.",
+   "date": "2026-10-26",
+   "verdict": "generic adjunction glue only"
+  },
+  {
+   "tool": "grep",
+   "query": "root.*power|power.*root|homEquiv_naturality_left",
+   "results": "25 returned hits include rootsOfUnity.integer_power_of_ringEquiv, cyclotomic primitive-root power bases and number-field root-of-unity results. These concern algebraic roots and power bases, not sheaves, Tate scalar extension, compact-support integration or exceptional transposes. A separate local source search found the generic adjunction source-naturality lemma used in the assembly.",
+   "date": "2026-10-26",
+   "verdict": "no geometric match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalIntegrationOrientation",
+  "group": "F2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: ordered projective-line-normalized integration; annihilator independence clause of the orientation refinement",
+   "via": [
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineDiagonalPowerCoefficient",
+  "file": "lean/Sheaf/Paper/AffineDiagonalPowerCoefficient.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.affineDiagonalPower_coefficient",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.affineDiagonalPower_coefficient"
+  ],
+  "statement": "theorem affineDiagonalPower_coefficient (P : PurityFiniteSetting.{u})\n    {U B : Scheme.{u}} (d : ℕ) (f : U ⟶ B) [HasCompactification f] [QuasiCompact f]\n    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (r r' : ℕ) (hrr : r ≤ r')\n    (hA : ((P.coefficients.l ^ (r + 1) : ℕ) : P.Coefficient) = 0)\n    (hA' : ((P.coefficients.l ^ (r' + 1) : ℕ) : P.Coefficient) = 0)\n    (cU : U ≅ affineTraceTower B d) (hcU : cU.hom ≫ affineTraceProjection B d = f)\n    (q : U.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1)) ⟶\n      U.rootsOfUnitySheaf (P.coefficients.l ^ (r + 1)))\n    (e : Scheme.finiteEtaleTateLine U (P.coefficients.l ^ (r' + 1)) P.Coefficient hA' ≅\n      Scheme.finiteEtaleTateLine U (P.coefficients.l ^ (r + 1)) P.Coefficient hA)\n    (hq : q ≫ kernel.ι ((P.coefficients.l ^ (r + 1)) • 𝟙 U.gmSheaf) =\n      (P.coefficients.l ^ (r' + 1) / P.coefficients.l ^ (r + 1)) •\n        kernel.ι ((P.coefficients.l ^ (r' + 1)) • 𝟙 U.gmSheaf))\n    (he : ∀ (V : U.Etaleᵒᵖ) (a : P.Coefficient)\n      (z : (U.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1))).obj.obj V),\n      e.hom.hom.app V (Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r' + 1)) U hA' V a z) =\n      Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r + 1)) U hA V a (q.hom.app V z))\n    (qB : B.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1)) ⟶\n      B.rootsOfUnitySheaf (P.coefficients.l ^ (r + 1)))\n    (eB : Scheme.finiteEtaleTateLine B (P.coefficients.l ^ (r' + 1)) P.Coefficient hA' ≅\n      Scheme.finiteEtaleTateLine B (P.coefficients.l ^ (r + 1)) P.Coefficient hA)\n    (hqB : qB ≫ kernel.ι ((P.coefficients.l ^ (r + 1)) • 𝟙 B.gmSheaf) =\n      (P.coefficients.l ^ (r' + 1) / P.coefficients.l ^ (r + 1)) •\n        kernel.ι ((P.coefficients.l ^ (r' + 1)) • 𝟙 B.gmSheaf))\n    (heB : ∀ (V : B.Etaleᵒᵖ) (a : P.Coefficient)\n      (z : (B.rootsOfUnitySheaf (P.coefficients.l ^ (r' + 1))).obj.obj V),\n      eB.hom.hom.app V (Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r' + 1)) B hA' V a z) =\n      Scheme.finiteEtaleTateOneGenerator P.Coefficient\n        (P.coefficients.l ^ (r + 1)) B hA V a (qB.hom.app V z)) :\n    letI := P.noetherian aB\n    let N := P.coefficients.l ^ (r + 1)\n    let N' := P.coefficients.l ^ (r' + 1)\n    let hN := pow_pos P.coefficients.prime.out.pos (r + 1)\n    let hN' := pow_pos P.coefficients.prime.out.pos (r' + 1)\n    let t := Etale.ambientAffineTraceTransport N hN P.Coefficient hA\n    let t' := Etale.ambientAffineTraceTransport N' hN' P.Coefficient hA'\n    let hB := WeilConjectures.PurityConventions.coefficientPower_isUnit P B aB r\n    let hB' := WeilConjectures.PurityConventions.coefficientPower_isUnit P B aB r'\n    let p := affineTraceProjection B d\n    let F := Etale.ordinaryFinitePullback P.Coefficient p\n    let c := Etale.affineLinearCoefficientDescent P.Coefficient N hA t B hB d\n    let c' := Etale.affineLinearCoefficientDescent P.Coefficient N' hA' t' B hB' d\n    let k := c'.hom ≫ F.map (P.affineDiagonalPowerComparison B r r' hA hA' eB d).hom ≫ c.inv\n    let E := Etale.ordinaryFinitePullback P.Coefficient cU.hom\n    let preMap := (Etale.vectorIntegrationBaseCoefficientPullback\n        P.Coefficient N hA t f hB d).inv ≫\n      (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient)\n        cU.hom p f hcU.symm).hom.app\n          (Etale.affineLinearBaseCoefficient P.Coefficient N hA B d) ≫ E.map c.inv\n    let preMapNext := (Etale.vectorIntegrationBaseCoefficientPullback\n        P.Coefficient N' hA' t' f hB' d).inv ≫\n      (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} P.Coefficient)\n        cU.hom p f hcU.symm).hom.app\n          (Etale.affineLinearBaseCoefficient P.Coefficient N' hA' B d) ≫ E.map c'.inv\n    (P.affineDiagonalPowerComparison U r r' hA hA' e d).hom ≫ preMap =\n      preMapNext ≫ E.map k",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T201830-L-2628638",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T201830-L-2628638",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

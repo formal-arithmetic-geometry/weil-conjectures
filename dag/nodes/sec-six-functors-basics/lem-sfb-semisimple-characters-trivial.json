@@ -1,0 +1,180 @@
+{
+ "id": "lem-sfb-semisimple-characters-trivial",
+ "kind": "statement",
+ "title": "A semisimple group has no nontrivial characters",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $X^*(G)=\\operatorname{Hom}_{F\\text{-grp}}(G,\\mathbf G_m)$ for the abelian group of characters, with addition given by multiplication of values, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. A semisimple group means a smooth connected affine group of finite type with no nontrivial smooth connected solvable normal closed subgroup scheme; solvable means that successive derived subgroup schemes eventually become trivial, where the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. For every semisimple group $H$, one has $X^*(H)=0$: every group-scheme homomorphism $H\\to\\mathbf G_m$ is the identity-valued homomorphism, after every scalar extension.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 21.50, printed p.440, together with Definition 12.45, printed p.245 (perfect means no nontrivial commutative quotient); also Remark 18.27, printed p.393."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix a semisimple $H$ and a character $\\chi:H\\to\\mathbf G_m$. The hypotheses in [lem-sfb-semisimple-group-perfect] agree with the stated definition of semisimple (smooth, connected, affine and finite type, with no nontrivial smooth connected solvable normal closed subgroup), so that node gives $H^{\\mathrm{der}}=H$ as closed subgroup schemes, not merely an equality of rational-point groups.",
+   "uses": [
+    "lem-sfb-semisimple-group-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 21.50, printed p.440; Definition 12.45, printed p.245"
+   }
+  },
+  {
+   "text": "The target $\\mathbf G_m$ is affine, commutative and of finite type by [def-sc-gm-ga]: its coordinate ring is $F[t,t^{-1}]$ and its comultiplication $t\\mapsto t\\otimes t$ is invariant under swapping the tensor factors. The group $H$ is smooth and connected, so [lem-sfb-smooth-connected-derived-subgroup] applies to $\\chi$ and says that $\\chi$ restricts to the identity-valued homomorphism on $H^{\\mathrm{der}}$. Substituting $H^{\\mathrm{der}}=H$ from step 1 shows $\\chi=e_{\\mathbf G_m}\\circ p_H$ as a morphism of group schemes, where $p_H:H\\to\\operatorname{Spec}F$ is the structure map.",
+   "uses": [
+    "def-sc-gm-ga",
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.18 and Corollary 6.19(d), printed p.129; smoothness qualification in Chapter 6 errata"
+   }
+  },
+  {
+   "text": "The identity-valued homomorphism exists, and the arbitrary character $\\chi$ equals it, so the character group has exactly its zero element (addition of characters is multiplication of values). Equality here is equality of scheme morphisms: pulling the equality $\\chi=e_{\\mathbf G_m}\\circ p_H$ back along any $F$-algebra $R$ yields $\\chi_R=e_{\\mathbf G_{m,R}}\\circ p_{H_R}$, hence $\\chi_R(A)(h)=1$ for every $R$-algebra $A$ and $h\\in H_R(A)$. This proves the asserted triviality after every scalar extension without assuming that rational points detect morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 6.19(d), printed p.129 (arbitrary base algebra R); Definition 12.45, printed p.245"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimple-group-perfect",
+  "def-sc-gm-ga",
+  "lem-sfb-smooth-connected-derived-subgroup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 21.50 and Definition 12.45, applied via Corollary 6.19(d)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic character of a semisimple affine algebraic group into the multiplicative group is trivial in any characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"FDRep.char_one\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Monoid G] (V : FDRep k G),\\n  V.character 1 = ↑(Module.finrank k ↑V.V)\", \"doc\": \"For any finitely generated representation $ V $ of a monoid $ G $ over a ring $ k $, the character of $ V $ evaluated at the identity element $ 1 $ of $ G $ is equal to the finite rank of $ V $ as a $\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"MulChar.finite\", \"module\": \"Mathlib/NumberTheory/MulChar/Duality\", \"type\": \"∀ {M : Type u_1} {R : Type u_2} [inst : CommMonoid M] [inst_1 : CommRing R] [Finite Mˣ] [IsDomain R],\\n  Finite (MulChar M R)\", \"doc\": \"If the group of units of a commutative monoid $ M $ is finite and $ R $ is a domain, then the set of multiplicative characters from $ M $ to $ R $ is finite.\"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"FDRep.char_mul_comm\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Monoid G] (V : FDRep k G) (g h : G),\\n  V.character (h * g) = V.character (g * h)\", \"doc\": \"For any finitely generated representation $V$ of a monoid $G$ over a field $k$, and for any elements $g, h \\\\in G$, the character evaluated at the product $hg$ is equal to the character evaluated at th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The character group X star of a semisimple linear algebraic group is zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L]\\n  [PerfectField K] {x : L}, x ∈ H → ((LieAlgebra.ad K L) x).IsSe\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with non-degenerate Killing form, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $x \\\\in \\\\mathfrak{h}$, then the adjoint end\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Semisimple\", \"Character\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emisimple.*[Cc]haracter|[Cc]haracter.*[Ss]emisimple",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Character.lean\", \"line\": \"17\", \"text\": \"algebra (e.g., a Cartan subalgebra of a semisimple Lie algebra) a character is just a linear form.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Killing.lean\", \"line\": \"22\", \"text\": \"Furthermore, much of the Cartan-Killing classification of semisimple Lie algebras in characteristic\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"55\", \"text\": \"In characteristic zero, it is also equivalent to `LieAlgebra.IsSemisimple`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"28\", \"text\": \"* `Module.End.isSemisimple_iff`: the characterisation of semisimplicity in terms of invariant\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Semisimple.lean\", \"line\": \"100\", \"text\": \"/-- A characterisation of `Module.End.IsFinitelySemisimple` using only the lattice of submodules of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every algebraic character of a semisimple affine algebraic group into the multiplicative group is trivial in any characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulChar.trivial\", \"module\": \"Mathlib.NumberTheory.MulChar.Basic\", \"type\": \": MulChar R R'\", \"doc\": \"The trivial multiplicative character from a commutative monoid $ R $ to a commutative monoid with zero $ R' $, defined by mapping each unit in $ R $ to $ 1 $ and all non-units to $ 0 $. This function \"}\n  {\"name\": \"MulChar.inhabited\", \"module\": \"Mathlib.NumberTheory.MulChar.Basic\", \"type\": \": Inhabited (MulChar R R')\", \"doc\": \"The monoid of multiplicative characters from $ R $ to $ R' $ is inhabited by the trivial character, which maps units to 1 and non-units to 0.\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"(V : Rep k G) : Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"MulChar.map_ringChar\", \"module\": \"Mathlib.NumberTheory.MulChar.Basic\", \"type\": \"{R : Type*} [CommSemiring R] [Nontrivial R] (χ : MulChar R R') : χ (ringChar R) = 0\", \"doc\": \"For any non-trivial commutative semiring $ R $ and any multiplicative character $ \\\\chi: R \\\\to R' $ (where $ R' $ is a commutative monoid with zero), the image of the ring characteristic $ \\\\operatornam\"}\n  {\"name\": \"MulChar.ne_one_iff\", \"module\": \"Mathlib.NumberTheory.MulChar.Basic\", \"type\": \"{χ : MulChar R R'} : χ ≠ 1 ↔ ∃ a : Rˣ, χ a ≠ 1\", \"doc\": \"For multiplicative characters $\\\\chi$ from a commutative monoid $R$ to a commutative monoid with zero $R'$, $\\\\chi$ is not the trivial character if and only if there exists an invertible element $a \\\\in \"}\n  {\"name\": \"FDRep.character\", \"module\": \"Mathlib.RepresentationTheory.Character\", \"type\": \"(V : FDRep k G) (g : G)\", \"doc\": \"Let $k$ be a field and $G$ be a monoid. For a finite-dimensional representation $V$ of $G$ over $k$, with corresponding monoid homomorphism $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, the character $\\\\chi_V$ is a\"}\n  {\"name\": \"AddChar.exists_apply_ne_zero\", \"module\": \"Mathlib.Analysis.Fourier.FiniteAbelian.PontryaginDuality\", \"type\": \": (∃ ψ : AddChar α ℂ, ψ a ≠ 1) ↔ a ≠ 0\", \"doc\": \"For a finite additive commutative group $\\\\alpha$ and an element $a \\\\in \\\\alpha$, there exists an additive character $\\\\psi : \\\\alpha \\\\to \\\\mathbb{C}$ such that $\\\\psi(a) \\\\neq 1$ if and only if $a$ is not t\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"[CharZero k] (V : FDRep k G) : Simple V ↔ ∑ g : G, V.character g * V.character g⁻¹ = Fintype.card G\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The character group X star of a semisimple linear algebraic group is zero",
+   "results": "8 hits: AddChar.forall_apply_eq_zero; MulChar.star_eq_inv; star_eq_zero; MulChar.sum_eq_zero_of_ne_one; CharacterModule.exists_character_apply_ne_zero_of_ne_zero; LieAlgebra.IsSemisimple.instHasTrivialRadical; Set.star_inv'; AddChar.sum_apply_eq_ite. Read the returned types; none concerns homomorphisms from semisimple affine group schemes to G_m.",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract characters, star identities and Lie semisimplicity do not specialize to the affine group-scheme assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-multiplicative-universal-cover",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Corollary 21.50, printed p.440, together with Definition 12.45, printed p.245 (perfect means no nontrivial commutative quotient); also Remark 18.27, printed p.393.",
+   "via": [
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimple-characters-trivial",
+  "worker": "stage1",
+  "summary": "Q127 reuses existing semisimple perfectness and smooth connected derived-subgroup nodes. The proof applies the latter to the multiplicative group, substitutes Hder=H, and spells out scalar extension of the resulting equality of morphisms. No new nodes or changed statements.",
+  "blueprint": "The inherited from.place traces this supporting Milne input to det-thm-sf-ctf-stability-direct-images proof (3), through the multiplicative universal cover and the reductive central cover. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) is the direct-image preservation step; our three steps supply the character-vanishing input in the existing supporting chain. Whole-blueprint searches for semisimple and no nontrivial characters found no exact duplicate. The inherited from.node=null is what blueprint_refs.py ancestor currently returns; created.item eventually ends at the non-node module name Sheaf.SixFunctors.CtfStabilityDirectImages."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-28f65d462",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-28f65d462 (reviewer sub-agent of L); spot-checked: I read the item, its three steps and all three cited statements in full, and checked them against Milne iAG at Def. 12.45 (p.245), Cor. 21.50 (p.440) and Prop. 6.18/Cor. 6.19(d) (pp.129-130). Delivery shape: the item JSON plus the report, with no new nodes. Compared with live, where the item is still unsplit (so no parallel group got there first), the statement, stmt_deps and blueprint are unchanged. proof_deps equals the union of the step uses. There is no repair note, so the re-split rule does not apply, and no SGA source is used. Step 1: lem-sfb-semisimple-group-perfect has the same hypotheses as the item (F algebraically closed; semisimple and the derived subgroup defined word for word the same) and gives H^der=H. Milne proves 21.50 through splitness and 20.24, not through characters, so this is not circular in the source. Step 2: def-sc-gm-ga shows G_m is affine, and commutativity follows from the symmetry of t⊗t. lem-sfb-smooth-connected-derived-subgroup (H smooth, connected, affine, finite type) says χ is trivial on D_H, which is the same object as H^der, so χ=e∘p_H as morphisms. Step 3 is elementary: base change of that equality covers the clause 'after every scalar extension' as worded. The only citer (the multiplicative universal cover node) needs only X*(H)=0 over F. Edge cases: H=1 holds, G_m is not semisimple, and nilpotent algebras like F[ε] cause no problem. Mathlib searches cover all three required kinds, and I read the results: none match. No duplicate node exists in the DAG, and the dependency closure of the cited nodes does not contain the item, so there is no cycle. All cited nodes are in the same unit, so no tool_uses are needed. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemisimpleCharactersTrivial",
+  "declaration": "AlgebraicGeometry.semisimpleGroupScheme_characters_trivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemisimpleCharactersTrivial.lean",
+  "statement": "theorem semisimpleGroupScheme_characters_trivial {k : Type u} [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] (hH : IsSemisimpleGroupScheme H) (χ : H ⟶ StandardGroupSchemes.multiplicative k) [IsMonHom χ] : χ = 1",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reviewer FIX: def-sfb-semisimple-group-scheme landed from Q102 (Sheaf.AlgebraicGeometry.GroupScheme.Semisimple, AlgebraicGeometry.IsSemisimpleGroupScheme, 2026-10-23T14:49Z) after this delivery's base; the delivery's same-id node and its module Sheaf.AlgebraicGeometry.SemisimpleGroupScheme are dropped and the item is restated on the landed declaration, whose derived-series solvability matches the item's wording.",
+  "fixed_by": "NT-stage2-cc-d18807c28"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d18807c28",
+  "group": "Q16",
+  "result": "fix",
+  "note": "The delivered statement is mathematically right. Hypotheses (alg. closed k, affine finite type, smooth, connected, no nontrivial smooth connected solvable normal closed subgroup) and the conclusion chi = 1 (identity-valued, equality of morphisms over Spec k) match the node; edge cases OK; sorry only; docstrings OK. Finding H4/H12: the new node def-sfb-semisimple-group-scheme was already landed by Q102 at 2026-10-23T14:49Z (AlgebraicGeometry.IsSemisimpleGroupScheme in Sheaf.AlgebraicGeometry.GroupScheme.Semisimple), after this delivery's 14:00 base. The delivery duplicates the id and the notion, with subnormal-series solvability instead of the item's derived series. FIX: drop the duplicate node and its module SemisimpleGroupScheme.lean; fixes/SemisimpleCharactersTrivial.lean restates the theorem as AlgebraicGeometry.semisimpleGroupScheme_characters_trivial on the landed IsSemisimpleGroupScheme (H : Over (Spec k)) [GrpObj H], the same predicate as sibling semisimpleGroupScheme_perfect; the lean-record json gives the new declaration and the verbatim statement; stmt_deps unchanged. My fixed file compiles cleanly via nt_compile --json (7.4 s); the delivery's own files were not recompiled.; dropped duplicate new node(s) def-sfb-semisimple-group-scheme (--drop-nodes; not merged, the item points at the landed declaration)"
+ }
+}

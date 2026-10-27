@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-unramified-space-open-diagonal",
+ "kind": "statement",
+ "title": "Open diagonal of an unramified algebraic space over a scheme",
+ "statement": "Let $S$ be a scheme, $T$ an $S$-scheme [def-pc-scheme], and $A$ an algebraic space over $S$ [def-trf-algebraic-space]. Let $f:A\\to T$ be unramified, meaning that for every representable etale scheme chart $V\\to A$ the composite $V\\to T$ is unramified [def-weil-unramified-morphism, def-weil-etale-morphism]. Then the diagonal\n$$\\Delta_f:A\\longrightarrow A\\times_T A$$\nis a representable open immersion. Explicitly, for every $S$-scheme $Z$ and every morphism $b:Z\\to A\\times_T A$, the sheaf fibre product $Z\\times_{b,A\\times_T A,\\Delta_f}A$ is represented by an open subscheme of $Z$ [def-weil-open-immersion]. Here the fibre products are fibre products of the functors of points, evaluated on each test scheme.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), part (1), with target a scheme; unramifiedness is tested on etale scheme charts as in Tag 03ZK (lemma-unramified-local)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-unramified-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=A\\times_T A$, with projections $\\pi_1,\\pi_2$. Fix an arbitrary scheme $b:Z\\to P$ and write $a_i=\\pi_i b$. The pullback $W=Z\\times_{P,\\Delta_f}A$ is the equality functor: its points over $Z$ are precisely those maps $z:C\\to Z$ for which $a_1z=a_2z$, and the accompanying point of $A(C)$ is then uniquely $a_1z$. It is a scheme: it is also the pullback of the representable diagonal $A\\to A\\times_S A$ along $(a_1,a_2)$, using [def-trf-algebraic-space]. This identification is on every test scheme, not just on points over fields. The projection $h:W\\to Z$ is a monomorphism, since there is at most one accompanying point of $A(C)$ for any $z$. Choose a representable surjective etale atlas $q:U\\to A$ with $U$ a scheme, again by [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), first sentence: representable monomorphism, here proved directly from the diagonal clause of Tag 025Y (spaces.tex, definition-algebraic-space)."
+   }
+  },
+  {
+   "text": "The hypothesis applies to the chart $q:U\\to A$: $f q:U\\to T$ is an unramified morphism of schemes. By [def-weil-unramified-morphism], its diagonal $d:U\\to U\\times_T U$ is an open immersion. The scheme fibre product exists by [def-pc-fibre-product]. Part (1) of [lem-weil-pbc-etale-composition-cancellation] therefore makes $d$ etale. This is exactly the scheme-diagonal input in the proof of Tag 05W1, taking the target chart to be $T\\xrightarrow{\\mathrm{id}}T$.",
+   "uses": [
+    "def-weil-unramified-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), part (1), paragraph beginning Assume f is unramified; scheme input morphisms.tex Tag 02GE (lemma-diagonal-unramified-morphism) and Tag 02GP (lemma-open-immersion-etale)."
+   }
+  },
+  {
+   "text": "The induced map $v=q\\times_T q:U\\times_T U\\to P$ is representable etale, as follows directly on test schemes. Given $c:C\\to P$, form the schemes $C_i=C\\times_{\\pi_i c,A,q}U$. By the representable-etale clause of [def-trf-algebraic-space], $C_i\\to C$ is etale. On a scheme over $C$, a pair of lifts to $U$ has equal composites to $T$, because $c$ is a point of $P$. Consequently $C\\times_P(U\\times_T U)$ is represented by $C_1\\times_C C_2$, with exactly those pairs as its points. Existence and this universal description use [def-pc-fibre-product]. The projection to $C_1$ is etale by clause (1) of [lem-weil-pbc-etale-base-change-finite-limits], applied to $C_2\\to C$; composing with $C_1\\to C$ is etale by part (2) of [lem-weil-pbc-etale-composition-cancellation]. This proves the assertion about $v$ on every test scheme.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), displayed diagram with V=T, middle vertical arrow; scheme base change and composition are morphisms.tex Tags 02GO and 02GN."
+   }
+  },
+  {
+   "text": "For the fixed $b:Z\\to P$, let $C=Z\\times_P(U\\times_T U)$, a scheme etale over $Z$ by Step 3, and set $E=C\\times_{U\\times_T U,d}U$. This is a scheme by [def-pc-fibre-product]. Its projection to $C$ is etale by clause (1) of [lem-weil-pbc-etale-base-change-finite-limits] and the etaleness of $d$ in Step 2. Part (2) of [lem-weil-pbc-etale-composition-cancellation] makes $E\\to Z$ etale. The defining pairs identify $E$ with $Z\\times_{P,\\Delta_f q}U$: a point is $(z,u)$ with $b(z)=(q(u),q(u))$. Thus this argument explicitly checks the needed base change of the composite, rather than inferring a property of a sheaf map from its underlying set.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), left square, with V=T; pull back its composite to the arbitrary scheme Z, using morphisms.tex Tags 02GO and 02GN."
+   }
+  },
+  {
+   "text": "There is a canonical identification $E\\cong W\\times_A U$, where $W\\to A$ is $a_1h=a_2h$. Indeed on a test scheme over $Z$, a point of the right side is $(z,x,u)$ with $a_1z=x=a_2z$ and $q(u)=x$; forgetting $x$ gives exactly $(z,u)$ with $b(z)=(q(u),q(u))$, the description of $E$ in Step 4. Inserting $x=q(u)$ is the inverse, and both operations commute with every restriction map. The projection $p:E\\to W$ is therefore a surjective etale morphism of schemes by the representable-surjective-etale meaning of the atlas $q$ in [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), surjective etale left vertical arrow, pulled back to W; atlas base-change convention is spaces.tex Tag 025Y (definition-algebraic-space)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-descent-through-source-cover] with its schemes $(T,X,Y)=(Z,W,E)$ and its arrows $(h,p)$ equal to those above. Step 5 supplies surjectivity and etaleness of $p$, and Step 4 supplies etaleness of $hp:E\\to Z$. Hence $h:W\\to Z$ is etale. The cited statement imposes no quasi-compactness on the cover and no separation, finite-type or Noetherian assumption on the schemes, so it applies to this arbitrary test scheme $Z$.",
+   "uses": [
+    "lem-trf-etale-descent-through-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), etale-locality conclusion in part (1); implemented after scheme base change by descent.tex Tag 036W (lemma-etale-etale-local-source), singleton source cover."
+   }
+  },
+  {
+   "text": "By [def-weil-etale-morphism], $h$ is flat and locally of finite presentation. It is a monomorphism by Step 1, so [lem-pe-flat-lfp-monomorphism-open] applies and shows that $h$ is an open immersion. Equivalently its source $W$ is isomorphic over $Z$ to an open subscheme of $Z$, by [def-weil-open-immersion]. Since $Z$ and $b$ were arbitrary, this proves the representable-open-immersion assertion for $\\Delta_f$ and the explicit equality-locus clause, with the full scheme structures throughout.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-pe-flat-lfp-monomorphism-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025G (theorem-etale-radicial-open), (3) implies (1), the final input to spaces-morphisms.tex Tag 05W1 (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-unramified-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-trf-etale-descent-through-source-cover",
+  "def-weil-etale-morphism",
+  "lem-pe-flat-lfp-monomorphism-open",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 05W1 (lemma-diagonal-unramified-morphism), part (1), with target chart V=T. Representability and all descent are expanded on arbitrary scheme test objects; scheme source descent is descent.tex Tag 036W, and the final criterion is etale.tex Tag 025G."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An unramified morphism of algebraic spaces has diagonal an open immersion",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126, has scheme source and target. The algebraic-space descent is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equality locus of two maps to an unramified algebraic space is an open subscheme",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.IsImmersion.instιScheme, AlgebraicGeometry.FormallyUnramified, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126, has scheme source and target. The algebraic-space descent is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equalizer of two sections of an unramified algebraic space over a scheme is open",
+   "results": "OK 8 hit(s); returned declarations/files: AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open, TopCat.coequalizer_isOpen_iff, Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.isClosedImmersion_equalizer_ι_left, AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_preimage, AlgebraicGeometry.RingedSpace.basicOpen_of_isUnit",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126, has scheme source and target. The algebraic-space descent is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsOpenImmersion",
+   "results": "OK 2 hit(s); returned declarations/files: AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126, has scheme source and target. The algebraic-space descent is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isOpenImmersion_diagonal|AlgebraicSpace|algebraicSpace|Unramified.*diagonal",
+   "results": "OK 2 hit(s); returned declarations/files: Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for algebraic spaces: AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126, has scheme source and target. The algebraic-space descent is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "isOpenImmersion_diagonal|AlgebraicSpace|algebraicSpace",
+   "results": "{\"t\": \"2026-10-22T05:41:27Z\", \"tool\": \"grep\", \"query\": \"isOpenImmersion_diagonal|AlgebraicSpace|algebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\"], \"digest\": \"41434a04f3ad4661\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equality locus of two maps to an unramified algebraic space is open",
+   "results": "{\"t\": \"2026-10-22T05:41:28Z\", \"tool\": \"leansearch\", \"query\": \"The equality locus of two maps to an unramified algebraic space is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocallyInjective.isOpen_eqLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"Algebra.unramifiedLocus\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"Algebra.unramifiedLocus_eq_compl_support\"], \"digest\": \"5a19ced503a49952\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is etale if its composition with a surjective etale morphism is etale",
+   "results": "{\"t\": \"2026-10-22T05:41:47Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism is etale if its composition with a surjective etale morphism is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"59069734971dfe07\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Surjective",
+   "results": "{\"t\": \"2026-10-22T05:42:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AlgebraicGeometry.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact\"], \"digest\": \"b9ce18837266aaf9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*(Precomp|precomp)|[Ee]tale.*[Ss]urjective|[Ee]tale.*[Dd]escent|[Ee]tale.*[Ss]ource",
+   "results": "{\"t\": \"2026-10-22T05:42:12Z\", \"tool\": \"grep\", \"query\": \"Etale.*(Precomp|precomp)|[Ee]tale.*[Ss]urjective|[Ee]tale.*[Dd]escent|[Ee]tale.*[Ss]ource\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"3fedaa5214c7ee26\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etaleness descends on the source along a surjective etale covering of schemes",
+   "results": "{\"t\": \"2026-10-22T05:42:13Z\", \"tool\": \"leanfinder\", \"query\": \"Etaleness descends on the source along a surjective etale covering of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.IsStandardEtale.of_surjective\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"31e5ea58a30ea8e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If p : U to X is surjective etale and f composed with p is etale then f is etale",
+   "results": "{\"t\": \"2026-10-22T05:42:24Z\", \"tool\": \"leansearch\", \"query\": \"If p : U to X is surjective etale and f composed with p is etale then f is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp\", \"Algebra.IsStandardEtale.of_surjective\", \"RingHom.Etale.stableUnderComposition\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"a03b4e01975e8fdc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  },
+  {
+   "tool": "grep",
+   "query": "Etale|[Ee]tale",
+   "results": "{\"t\": \"2026-10-22T05:42:24Z\", \"tool\": \"grep\", \"query\": \"Etale|[Ee]tale\", \"sub\": \"AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"8\", \"10\", \"47\", \"48\"], \"digest\": \"c891f9182c5c39aa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: results concern schemes or rings, not a morphism with algebraic-space source; source-cover descent is reused from lem-trf-etale-descent-through-source-cover. LocalFlatDescent.lean:47 is target-base-change descent, not cancellation of the source cover."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-geometric-inertia-trivial",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Passage from trivial geometric level stabilizers to an algebraic space on all test schemes, before identifying the coarse scheme. Sublemma: the open equality locus used to compare an automorphism with the identity over a possibly nonreduced test scheme.",
+   "via": [
+    "lem-sfb-dm-geometric-inertia-trivial",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-unramified-space-open-diagonal",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded Stacks 05W1 (1) with scheme target into representability and monicity, the scheme chart diagonal, the product chart, its composite on every test scheme, the explicit source-cover identification, scheme source etale descent, and the flat-lfp monomorphism criterion. All inputs already exist; no new nodes.",
+  "blueprint": "The inherited blueprint.from.place records the alteration/stable-curve branch of det-thm-sf-ctf-stability-direct-images proof (3). These steps supply exactly the open equality locus used by lem-sfb-dm-geometric-inertia-trivial Step 2, including nonreduced test schemes. No chapter or unit route is replaced. blueprint_refs.py ancestor prints None for the inherited creation chain; its existing provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic scheme source-etale-descent theorem for E -> W -> Z, with no quasi-compactness hypothesis; the current unit has no foundational replacement for this descent fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-descent-through-source-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-9c9e81df9",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-9c9e81df9 (reviewer sub-agent of L); spot-checked: Faithful split of Stacks 05W1(1) (spaces-morphisms.tex l.7508-7575) with a scheme target. The hypothesis is 03ZK(7) with V=T. Statement and stmt_deps are byte-identical to base, and there are no new nodes. I checked all 7 steps on points over test schemes. (1) W is the equality functor, a pullback of the representable absolute diagonal; W(C)→Z(C) is injective, so h is mono. (2) The diagonal of fq is an open immersion, hence etale (02GP leaf). (3) C×_P(U×_TU)=C1×_C C2 is etale over C by base change and composition. (4) E has points (z,u) with bz=(qu,qu) and is etale over Z. (5) E≅W×_A U; p is a base change of the atlas, so it is surjective etale. (6) Descent with h∘p=E→Z, checked. (7) Flat, lfp and mono give an open immersion (025G, Mathlib IsOpenImmersion.of_flat_of_mono). The declared tool use lem-trf-etale-descent-through-source-cover (Stacks 036W) is accepted. Batch 5: its 217-node closure contains no trace-formula or Poincare node besides itself; it is a generic scheme descent fact outside both assumptions and their proofs, so it is accepted. No duplicate in the DAG (rg for 05W1, 036W and algebraic space with unramified/diagonal). The item and its citer dm-geometric-inertia-trivial are not on the 2026-10-19 drop list; the item is still unsplit live. Edge cases checked: A a scheme, A=T⊔T, empty Z or A, nonreduced Z."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedSpaceOpenDiagonal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.unramified_space_open_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedSpaceOpenDiagonal.lean",
+  "statement": "theorem unramified_space_open_diagonal {S : Scheme.{u}} (T : Over S) (A : AlgebraicSpace S) (f : A.obj.obj ⟶ yoneda.obj T) (hf : ∀ (V : Over S) (a : yoneda.obj V ⟶ A.obj.obj), IsEtale a → IsUnramified (yoneda.preimage (a ≫ f)).left) : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (pullback.diagonal f)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31288e130",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Only the lean field changes; lean.statement matches the single module byte for byte. Checked against Stacks 05W1(1) and 03ZK(7) with target chart V=T: hf (all IsEtale charts a, IsUnramified of yoneda.preimage(a≫f).left) is exactly the node's chart test and no stronger. Conclusion IsRepresentableWith (IsOpenImmersion p.left) (pullback.diagonal f) quantifies over every Z and every b and is the project's standard representable-open-immersion form. No extra hypotheses, single universe u, edge cases (empty A or Z, scheme A, nonreduced Z) covered. Docstrings give source place, blueprint tag and all 7 proof steps; proof is sorry; proof-only imports exist (Etale.of_comp_of_surjective_etale, IsOpenImmersion.of_flat_of_mono). Notes: hf inlines the body of SpaceMapIsUnramified (def-sfb-open-moduli-substack), which the node does not cite, so accepted; lem-sfb-space-unramified-diagonal-open is a DAG generalization (space target, no Lean), stage-1 matter. No recompile because no files were changed."
+ }
+}

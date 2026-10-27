@@ -1,0 +1,246 @@
+{
+ "id": "lem-per-etale-away-completion-finite-refinement",
+ "kind": "statement",
+ "title": "Finite etale neighbourhood realization of a map of completions",
+ "statement": "Let $A$ be a commutative Noetherian ring, $I\\subseteq A$ an ideal, $D$ a finite type commutative $A$-algebra, and $R$ a commutative Noetherian $A$-algebra [def-weil-pbc-noetherian-ring, def-weil-pbc-finite-type-algebra, def-weil-pbc-algebra-hom-quotient]. Assume that $\\operatorname{Spec}D\\to\\operatorname{Spec}A$ is etale over $\\operatorname{Spec}A\\setminus V(I)$ [def-weil-affine-spectrum, def-weil-etale-morphism]. Put $\\widehat D=\\varprojlim_nD/I^nD$ and $\\widehat R=\\varprojlim_nR/I^nR$ [def-weil-pbc-adic-completion]. For every $A$-algebra homomorphism $\\varphi:\\widehat D\\to\\widehat R$, there exist a commutative etale finitely presented $R$-algebra $R'$ [def-weil-pbc-finitely-presented-algebra], with structural map $j:R\\to R'$, and an $A$-algebra map $u:D\\to R'$ such that $j$ induces an isomorphism $R/IR\\xrightarrow{\\sim}R'/IR'$ and $\\widehat u=\\widehat j\\circ\\varphi$ as maps $\\widehat D\\to\\widehat {R'}$. No henselian-pair hypothesis on $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0AKJ (lemma-fully-faithful-etale-over-complement), existence and final finite-etale-neighbourhood factorization assertion; etale finitely presented means an affine etale algebra."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $J=IR$ and let $\\eta:R\\to H=R^h$ be the henselization of $(R,J)$. By [lem-weil-pbc-pair-henselization], $(H,JH)$ is henselian and $H$ is the filtered colimit of the etale $R$-algebras $R_\\lambda$ inducing an isomorphism modulo $J$. Take a small skeleton of this essentially small category. By [lem-weil-pbc-henselization-noetherian-completion], $H$ is Noetherian and $\\eta$ induces the canonical $R$-algebra isomorphism $\\theta:\\widehat R\\xrightarrow{\\sim}\\widehat H$. Composing $\\varphi$ with $\\theta$, apply [lem-per-etale-away-completion-hom-lifting] to the original $A,I,D$ and the Noetherian henselian $A$-algebra $H$. This gives an $A$-algebra map $w:D\\to H$ with $\\widehat w=\\theta\\varphi$. The extended ideal is $IH=JH$, so the completions in that application are exactly these.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-per-etale-away-completion-hom-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ (lemma-fully-faithful-etale-over-complement), statement and first proof paragraph; henselian specialization followed by Tag 0AGV"
+   }
+  },
+  {
+   "text": "Since $A$ is Noetherian and $D$ is of finite type, [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes $D$ finitely presented over $A$. Regard the small filtered diagram of Step 1 as a diagram of $A$-algebras through $A\\to R$. Its colimit in rings is $H$, with $A$-algebra coprojections. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] with base ring $A$, source $D$ and map $w$. Obtain an etale $R$-algebra $R'$ in this diagram and $u:D\\to R'$ over $A$ such that $ku=w$, where $k:R'\\to H$ is its coprojection. Its structural map $j:R\\to R'$ has $kj=\\eta$ and induces $R/IR\\cong R'/IR'$ by the definition of the diagram. By [lem-weil-pbc-etale-algebra-finite-presentation-localization](1), $R'$ is finitely presented over $R$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, first proof paragraph, final-assertion argument; Tag 0A02 (lemma-henselization) and Tag 00QO (lemma-characterize-finite-presentation)"
+   }
+  },
+  {
+   "text": "The etale map $j$ is flat by [lem-weil-pbc-etale-algebra-flat]. Thus [lem-weil-pbc-flat-iso-mod-ideal-powers] gives isomorphisms $j_n:R/J^n\\to R'/J^nR'$ for every $n\\ge1$. These are the quotient maps of $j$, so they commute with reduction between powers. Taking compatible sequences, [lem-weil-pbc-henselization-completion-data] identifies $\\widehat j:\\widehat R\\to\\widehat {R'}$ as an isomorphism. This is the canonical completion map, not an arbitrary isomorphism.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-iso-mod-ideal-powers",
+    "lem-weil-pbc-henselization-completion-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AGU (lemma-henselization-flat), proof for each etale stage, and Tag 0AGV (lemma-henselization-Noetherian-pair), completion comparison"
+   }
+  },
+  {
+   "text": "Completion acts on maps componentwise on the quotients. Therefore $kj=\\eta$ gives $\\widehat k\\widehat j=\\theta$, and $ku=w$ gives $\\widehat k\\widehat u=\\widehat w=\\theta\\varphi$. Both $\\widehat j$ and $\\theta$ are isomorphisms, so $\\widehat k=\\theta(\\widehat j)^{-1}$ is an isomorphism. Cancel it in $\\widehat k\\widehat u=\\widehat k\\widehat j\\varphi$ to obtain $\\widehat u=\\widehat j\\varphi$. Together with Step 2 this is every required clause.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, final-assertion factorization, with the completion equality checked on quotient coordinates"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-per-etale-away-completion-hom-lifting",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-iso-mod-ideal-powers",
+  "lem-weil-pbc-henselization-completion-data",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0AKJ (lemma-fully-faithful-etale-over-complement), first proof paragraph: factorization through etale stages of the henselization; existence supplied by its existing henselian specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map of adic completions from an algebra etale away from an ideal factors through an etale neighbourhood of the target with identical closed fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebra homomorphisms between adic completions descend to an etale algebra inducing an isomorphism modulo the ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.algHom_ext\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"{f g : A →ₐ[R] S} (H : ∀ n, (Ideal.Quotient.mkₐ R (I ^ n)).comp f = (Ideal.Quotient.mkₐ R (I ^ n)).comp g) : f = g\", \"doc\": \"Let $ R $ be a commutative semiring, $ A $ an $ R $-algebra, $ I $ an ideal of $ R $, and $ S $ an $ R $-algebra that is adic complete with respect to $ I $. If two algebra homomorphisms $ f, g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.mkₐ\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → AdicCompletion.AdicCauchySequence I R →ₐ[R] AdicCompletion I R\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, this constructs the canonical $ S $-algebra homomorphism from $ R $ to its $ I $-adic complet\"}\n  {\"name\": \"IsAdicComplete.liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \": R →+* S\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to+* S $ by composing the inverse of the canonic\"}\n  {\"name\": \"IsAdicComplete.mk_liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) (x : A) : liftAlgHom I f hf x = f n x\", \"doc\": \"Let `R` be a commutative ring, and let `A` and `S` be commutative `R`-algebras. Let `I` be an ideal of `S` such that `S` is `I`-adically complete. Let `(f_n : A \\\\to S/I^n)_{n \\\\in \\\\mathbb{N}}` be a com\"}\n  {\"name\": \"IsAdicComplete.mk_comp_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(n : ℕ) : (Ideal.Quotient.mk (I ^ n)).comp (liftRingHom I f hf) = f n\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, there exists a ring homomorphism $ R \\to S $ constructed by composing the inverse of the \"}\n  {\"name\": \"IsAdicComplete.of_liftRingHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(x : R) : of I S (liftRingHom I f hf x) = (AdicCompletion.liftRingHom I f hf x)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \\to S $ by composing the inverse of the canonical\"}\n  {\"name\": \"IsAdicComplete.StrictMono.liftRingHom.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S) {a : ℕ → ℕ}\\n  (ha : StrictMono a) (f f_1 : (n : ℕ) → R →+* S ⧸ I ^ a n) (e_f : f = f_1)\\n  (hf : ∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) [inst_2 : IsAdicComplete I S],\\n  IsAdicCom\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ in a commutative ring $ S $, a strictly increasing sequence $ a : \\\\mathbb{N} \\\\to \\\\mathbb{N} $, and two families of ring homomorphisms $ f, f_1 : \\\\mathbb{\"}\n  {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*completion|completion.*henseli|etale.*approximation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of completion on algebras etale outside the closed subset after henselization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary smooth lifting, standard etale presentations, or completion maps, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra map between ideal adic completions of noetherian algebras etale off a closed subset descends to an etale neighbourhood of the target with the same closed fibre",
+   "results": "[leanfinder] OK 8 hit(s): Algebra.exists_etale_of_isEtaleAt, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.propertyIsLocal, Algebra.IsEtaleAt.comp, RingHom.Etale.ofLocalizationSpan, Algebra.mem_etaleLocus_iff, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.IsEtaleAt",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale locality, formal smooth lifting and completion constructors do not realize maps through an etale neighbourhood"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*completion|completion.*henseli|etale.*approximation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale locality, formal smooth lifting and completion constructors do not realize maps through an etale neighbourhood"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra etale outside an ideal has completion homomorphisms realized in an etale neighbourhood inducing the identity on the closed fibre",
+   "results": "[leansearch] OK 8 hit(s): RingHom.Etale.ofLocalizationSpanTarget, Algebra.etaleLocus, Algebra.Etale.formallyEtale, AdicCompletion.mkₐ, RingHom.Etale, Algebra.exists_etale_of_isEtaleAt, AdicCompletion.liftAlgHom, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale locality, formal smooth lifting and completion constructors do not realize maps through an etale neighbourhood"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Algebra.Etale",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale locality, formal smooth lifting and completion constructors do not realize maps through an etale neighbourhood"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full faithfulness of completion on finite type algebras etale away from the ideal after henselization of a noetherian pair",
+   "results": "[leanfinder] OK 8 hit(s): StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.instEtaleRing, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, StandardEtalePresentation.lift_bijective, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.Scheme.instFullEtaleOverForget, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.IsEtaleAt",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale locality, formal smooth lifting and completion constructors do not realize maps through an etale neighbourhood"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-etale-compatible-model-tower",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model. Supporting subargument: Tag 0AKA (lemma-approximate), proof from “We claim that we may choose” through the application of lemma-lift-approximation, before “By construction”. Supporting input: 0AKA claim paragraph, application of lemma-fully-faithful-etale-over-complement to the two models at level m-1.",
+   "via": [
+    "lem-per-rig-etale-compatible-model-tower",
+    "lem-per-rig-etale-principal-reduction",
+    "lem-per-rig-etale-jacobian-algebraization",
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-etale-away-completion-finite-refinement",
+  "worker": "stage1",
+  "summary": "Realized the finite-presentation etale-neighbourhood assertion of Stacks 0AKJ by applying the existing henselian lifting node to the Noetherian pair henselization, descending the map by finite presentation, and checking the canonical completion equality. Reused all inputs; no new nodes, statement change, or Lean attachment.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Assembling quotient algebraizations into a principal-complete model. Supporting subargument: Tag 0AKA (lemma-approximate), proof from “We claim that we may choose” through the application of lemma-lift-approximation, before “By construction”. Supporting input: 0AKA claim paragraph, application of lemma-fully-faithful-etale-over-complement to the two models at level m-1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "Generic pair henselization construction as a small filtered colimit of etale neighbourhoods, required by Stacks 0AKJ; no same-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-noetherian-completion",
+    "why": "Generic Noetherianity and canonical completion comparison of a pair henselization needed to apply the existing henselian lifting node."
+   },
+   {
+    "node": "lem-weil-pbc-flat-iso-mod-ideal-powers",
+    "why": "Generic propagation of a flat closed-fibre isomorphism to all ideal powers; used only to compare an etale stage with the base."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-completion-data",
+    "why": "Generic canonical inverse-limit comparison from quotient isomorphisms; used on the etale stage."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-flat-iso-mod-ideal-powers",
+  "lem-weil-pbc-henselization-completion-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NH-7cac3173d",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7cac3173d (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement and Stacks 0AKJ (restricted.tex 1847-1907). The delivery adds no new nodes. The statement is unchanged and true: it is 0AKJ existence together with the 'Moreover' factorization through an etale C' with C/IC ≅ C'/IC'. It holds in the edge cases I=0 and I=A, and in a small case (A=Z[1/2], I=(5), D=A[x]/(x^2+1), R'=A[i][1/(2-i)]). Step 1: pair-henselization (0A02) and henselization-noetherian-completion (0AGV) make H Noetherian with (H, IH=JH) henselian. That meets every hypothesis of hom-lifting for θφ, so it gives w with ŵ=θφ. Step 2: by 00FP D is finitely presented over A. The factorization leaf (00QO/07C3) is used with base A over a small skeleton of the filtered category (the skeleton is final). This gives u with ku=w, kj=η and the closed-fibre iso, and clause (1) gives finite presentation. Step 3: etale ⇒ flat; flat with the closed-fibre iso gives iso mod every J^n; completion-data then makes the canonical ĵ an isomorphism. Step 4 is elementary cancellation: k̂ĵ=θ and k̂û=θφ, so û=ĵφ. I accept the 4 declared tool_uses (generic commutative algebra in sk-thm-p1). Grepping the DAG for 0AKJ and henselization finds no duplicate, and no SGA is cited. Mechanical finding (cites dropped 2026-10-19 route node lem-per-etale-away-completion-hom-lifting): not a fault. On this snapshot lem-per-artin-gabber-affine-curve reaches neither this item nor hom-lifting (BFS over stmt_deps and proof_deps finds no path), so the finite-coefficient route lock on that node and its children does not bear on them. The item is reached by a different live chain (rig-etale-compatible-model-tower → … → elkik → … → sk-p-dl-a1-correction). hom-lifting is still in the DAG (status split, review pass Q53) and is also cited by lem-per-elkik-finite-etale-away-completion. Its content is 0AKJ with C^h=C and uses no forbidden input. The delivery justifies using it at Step 1. Maintainer notes: (a) the item's inherited blueprint.from/via still describes the dropped qbar-arbitrary-field-duality chain; this is base metadata and should be refreshed. (b) hom-lifting's Lean module was deleted as dead (8a6a58ff1c5), but the node is reached again and will need a Lean statement at stage 2."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleAwayCompletionFiniteRefinement",
+  "declaration": "RingTheory.etale_away_completion_finite_refinement",
+  "file": "lean/Sheaf/RingTheory/EtaleAwayCompletionFiniteRefinement.lean",
+  "statement": "theorem etale_away_completion_finite_refinement (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (D : Type v) [CommRing D] [Algebra A D] (hD : (algebraMap A D).FiniteType) (R : Type w) [CommRing R] [Algebra A R] [IsNoetherianRing R] (hEtale : ∀ q : PrimeSpectrum D, ¬ I ≤ q.asIdeal.comap (algebraMap A D) → Algebra.IsEtaleAt A q.asIdeal) (φ : AdicCompletion (I.map (algebraMap A D)) D →ₐ[A] AdicCompletion (I.map (algebraMap A R)) R) : ∃ (R' : Type w) (_ : CommRing R') (_ : Algebra R R') (_ : Algebra A R') (_ : IsScalarTower A R R'), Algebra.Etale R R' ∧ Algebra.FinitePresentation R R' ∧ ∃ u : D →ₐ[A] R', Function.Bijective (Ideal.quotientMap ((I.map (algebraMap A R)).map (algebraMap R R')) (algebraMap R R') Ideal.le_comap_map) ∧ ∀ (n : ℕ) (x : AdicCompletion (I.map (algebraMap A D)) D) (d : D) (r : R), AdicCompletion.evalₐ (I.map (algebraMap A D)) n x = Ideal.Quotient.mk ((I.map (algebraMap A D)) ^ n) d → AdicCompletion.evalₐ (I.map (algebraMap A R)) n (φ x) = Ideal.Quotient.mk ((I.map (algebraMap A R)) ^ n) r → Ideal.Quotient.mk (((I.map (algebraMap A R)).map (algebraMap R R')) ^ n) (u d) = Ideal.Quotient.mk (((I.map (algebraMap A R)).map (algebraMap R R')) ^ n) (algebraMap R R' r)",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa5dd8000",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Stage-2 Lean for Stacks 0AKJ (existence plus factorization through an étale R'). Checked clause by clause: A Noetherian, I arbitrary, D finite type via RingHom.FiniteType, R Noetherian, no henselian/Nontrivial/continuity assumptions. Étale over Spec A \\ V(I) is Algebra.IsEtaleAt at primes q with ¬ I ≤ q∩A; equivalent to the node's condition because D is finitely presented (exists_etale_of_isEtaleAt). Completions are AdicCompletion of the extended ideals; φ is an A-algebra map. R' : Type w with étale and FinitePresentation; u : D →ₐ[A] R'; R/IR → R'/(IR)R' bijective; û = ĵφ stated on representatives at every level n, which is equivalent because quotient maps are surjective. Edge cases I=0, I=A (R'=0), nilpotent I, n=0 and zero rings are fine; universes u v w independent and bound. lean.statement verbatim; source and blueprint docstrings and 4-step proof docstring present; sorry only; node changes only by its new lean field; proof-only imports exist. No compile (no change; worker reports clean). Maintainer notes: the item is reached only through dropped nodes via the Q36 sfb chain (only citer rig-etale-compatible-model-tower and the whole via chain are dropped; the stage-1 'live chain' claim is wrong; decide whether it and hom-lifting stay in dispatch); étale stated at ring level (IsEtaleAt) rather than via AlgebraicGeometry.Etale; the second-reading section is the author's own."
+ }
+}

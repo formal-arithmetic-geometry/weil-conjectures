@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-minimal-support-fixed-vector-coordinates",
+ "kind": "statement",
+ "title": "Minimal-support coordinates of a vector fixed by an endomorphism",
+ "statement": "Let $R$ be a commutative ring, $F$ a free $R$-module [def-weil-pbc-free-module], $x\\in F$ a nonzero element, and $\\pi:F\\to F$ an $R$-linear endomorphism with $\\pi(x)=x$. There exist a basis $\\mathcal B$ of $F$, an integer $n\\ge1$, distinct $e_1,\\ldots,e_n\\in\\mathcal B$, and nonzero $a_1,\\ldots,a_n\\in R$ such that $x=\\sum_{i=1}^n a_i e_i$, and $n$ is the least support cardinality of $x$ among all bases of $F$. For every $j$, there are no $c_i\\in R$ with $a_j=\\sum_{i\\ne j}a_i c_i$. Put $T=\\operatorname{span}_R(\\mathcal B\\setminus\\{e_1,\\ldots,e_n\\})$ and $y_i=\\pi(e_i)$. There exist $b_{ij}\\in R$ and $t_i\\in T$ such that $y_i=\\sum_{j=1}^n b_{ij}e_j+t_i$ for every $i$, $x=\\sum_{i=1}^n a_i y_i$, and $a_j=\\sum_{i=1}^n a_i b_{ij}$ for every $j$. Here a support is the finite set of basis vectors with nonzero coefficient in the unique basis expansion. No finite-generation hypothesis is imposed on $F$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0592, lemma-projective-freeness-criteria, proof first paragraph (minimal support and basis shear), second paragraph (projection coordinates), and last paragraph (comparison of coefficients)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-free-module], every basis gives a unique finite expansion of $x$. The set of support cardinalities attained by bases is a nonempty subset of $\\mathbb N$, so it has a least member $n$, attained by some basis $\\mathcal B$. Since an empty expansion is zero and $x\\ne0$, $n\\ge1$. Enumerate this support as distinct $e_1,\\ldots,e_n$, with its nonzero coefficients $a_1,\\ldots,a_n$. Then $x=\\sum_{i=1}^n a_i e_i$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof first paragraph: choose a basis with a minimal number of terms"
+   }
+  },
+  {
+   "text": "Fix $j$ and suppose $a_j=\\sum_{i\\ne j}a_i c_i$. Replace $e_i$ by $e_i\\prime=e_i+c_i e_j$ for $1\\le i\\le n$, $i\\ne j$, and fix $e_j$ and every vector of $\\mathcal B$ outside this finite list. This family is a basis by the unique-expansion definition [def-weil-pbc-free-module]: an old expansion with coefficients $d_e$ has new coefficients $d_{e_i}$ at $e_i\\prime$ for $i\\ne j$, $d_{e_j}-\\sum_{i\\ne j}d_{e_i}c_i$ at $e_j$, and unchanged coefficients elsewhere. Conversely, the old $e_j$-coefficient is the new $e_j$-coefficient plus $\\sum_{i\\ne j}d_{e_i}c_i$; all other coefficients are unchanged. These mutually inverse formulas preserve finite support and give existence and uniqueness of each new expansion.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof first paragraph: the basis shear, with the inverse coefficient formula written out"
+   }
+  },
+  {
+   "text": "In this new basis the coefficient of $e_j$ in $x$ is $a_j-\\sum_{i\\ne j}a_i c_i=0$, and the only remaining nonzero coefficients are the $a_i$ at $e_i\\prime$, $i\\ne j$. Its support thus has $n-1$ elements, contradicting minimality of $n$. Therefore no such $c_i$ exist, for every $j$. This uses only the expansion uniqueness in [def-weil-pbc-free-module].",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof first paragraph: the shear shortens the expression"
+   }
+  },
+  {
+   "text": "Keep the original minimizing basis. For each $i$, expand $y_i=\\pi(e_i)$ uniquely in $\\mathcal B$ using [def-weil-pbc-free-module]. Let $b_{ij}$ be its $e_j$-coefficient and let $t_i$ be the finite sum of its terms outside $\\{e_1,\\ldots,e_n\\}$. By the definition of $T$ as their span, $t_i\\in T$ and $y_i=\\sum_{j=1}^n b_{ij}e_j+t_i$. Linearity and the hypothesis $\\pi(x)=x$ give $\\sum_{i=1}^n a_i y_i=\\pi(\\sum_{i=1}^n a_i e_i)=\\pi(x)=x$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof second paragraph: coordinates of the projected vectors and the equality expressing x"
+   }
+  },
+  {
+   "text": "Every $t_i$ has zero $e_j$-coefficient for $1\\le j\\le n$. Substitute the expansions from the preceding step into $x=\\sum_i a_i y_i$ and distribute the finite sums. Its $e_j$-coefficient is $\\sum_{i=1}^n a_i b_{ij}$, while the original expansion has coefficient $a_j$. Uniqueness in [def-weil-pbc-free-module] gives $a_j=\\sum_{i=1}^n a_i b_{ij}$ for each $j$. All sums used are finite even when $\\mathcal B$ is infinite.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof last paragraph, first two sentences: substitute and equate coefficients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0592, lemma-projective-freeness-criteria, proof first paragraph, second paragraph through the coordinates and x equality, and last paragraph through the coefficient comparison; the projection is generalized to any endomorphism fixing x by the identical linearity calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Choose a basis of a free module minimizing the support of a vector so no nonzero coordinate is generated by the remaining coordinates",
+   "results": "{\"t\": \"2026-10-22T06:46:32Z\", \"tool\": \"leanfinder\", \"query\": \"Choose a basis of a free module minimizing the support of a vector so no nonzero coordinate is generated by the remaining coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_basis_of_pairing_eq_zero\", \"exists_linearIndependent'\", \"Module.basisOfFiniteTypeTorsionFree\", \"exists_basis_of_pairing_ne_zero\", \"exists_maximal_linearIndepOn\", \"Module.Basis.ofVectorSpaceIndex\", \"Module.exists_nontrivial_relation_sum_zero_of_finrank_succ_lt_card\", \"Module.exists_nontrivial_relation_of_finrank_lt_card\"], \"digest\": \"cb61cab2743bc10d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern support in a fixed basis, basis existence, or vector spaces/PIDs; none chooses a basis with irredundant coordinates and supplies the fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*support|support.*minimal|irredundant",
+   "results": "{\"t\": \"2026-10-22T06:47:05Z\", \"tool\": \"grep\", \"query\": \"minimal.*support|support.*minimal|irredundant\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern support in a fixed basis, basis existence, or vector spaces/PIDs; none chooses a basis with irredundant coordinates and supplies the fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A vector in a free module has a basis with a least number of nonzero coefficients and no coefficient is in the span of the others",
+   "results": "{\"t\": \"2026-10-22T06:47:05Z\", \"tool\": \"leansearch\", \"query\": \"A vector in a free module has a basis with a least number of nonzero coefficients and no coefficient is in the span of the others\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Free.exists_set\", \"Module.Free.finsupp\", \"Module.Free.chooseBasis\", \"Module.Free.repr\", \"Module.Basis.mem_span_repr_support\", \"FiniteDimensional.basisSingleton.congr_simp\", \"FiniteDimensional.basisSingleton_apply\", \"Module.Free.exists_basis\"], \"digest\": \"7c6cd583866831e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern support in a fixed basis, basis existence, or vector spaces/PIDs; none chooses a basis with irredundant coordinates and supplies the fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Finsupp.support",
+   "results": "{\"t\": \"2026-10-22T06:47:05Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, Finsupp.support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.Basis.mem_span_repr_support\", \"Module.Basis.repr_support_subset_of_mem_span\", \"Module.Basis.mem_span_image\", \"union_support_maximal_linearIndependent_eq_range_basis\", \"Algebra.FormallyUnramified.finite_of_free_aux\", \"QuadraticMap.sum_repr_sq_add_sum_repr_mul_polar\"], \"digest\": \"0d06cc4e21331d76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern support in a fixed basis, basis existence, or vector spaces/PIDs; none chooses a basis with irredundant coordinates and supplies the fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free module vector admits irredundant coordinates after minimizing its support among all bases",
+   "results": "{\"t\": \"2026-10-22T06:47:40Z\", \"tool\": \"leanfinder\", \"query\": \"A free module vector admits irredundant coordinates after minimizing its support among all bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_linearIndependent'\", \"Module.basisOfFiniteTypeTorsionFree\", \"exists_maximal_linearIndepOn\", \"Module.Basis.ofVectorSpaceIndex\", \"exists_linearIndependent\", \"basisOfPiSpaceOfLinearIndependent\", \"Module.Free.exists_set\", \"Module.Basis.ofVectorSpaceIndex.linearIndependent\"], \"digest\": \"3a7d11b4b2ccf034\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern support in a fixed basis, basis existence, or vector spaces/PIDs; none chooses a basis with irredundant coordinates and supplies the fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*support|support.*minimal|irredundant",
+   "results": "{\"t\": \"2026-10-23T10:45:41Z\", \"tool\": \"grep\", \"query\": \"minimal.*support|support.*minimal|irredundant\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: basis existence, support in a fixed basis, coordinate identities, and nilpotent-rank/eigenvector results do not minimize support among all bases and give irredundant coordinates with all the specified fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal support over all bases of a free module gives coefficients none of which is a linear combination of the others",
+   "results": "{\"t\": \"2026-10-23T10:45:42Z\", \"tool\": \"leansearch\", \"query\": \"Minimal support over all bases of a free module gives coefficients none of which is a linear combination of the others\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Free.repr\", \"Module.Basis.linearCombination_coord\", \"Module.Free.chooseBasis\", \"Module.Basis.linearIndependent\", \"Module.Free.exists_set\", \"Module.Basis.repr\", \"Module.Free.exists_basis\", \"Module.Basis.mem_span_repr_support\"], \"digest\": \"b5122656aec84224\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: basis existence, support in a fixed basis, coordinate identities, and nilpotent-rank/eigenvector results do not minimize support among all bases and give irredundant coordinates with all the specified fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, Finsupp.support",
+   "results": "{\"t\": \"2026-10-23T10:45:42Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, Finsupp.support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.Basis.mem_span_repr_support\", \"Module.Basis.repr_support_subset_of_mem_span\", \"Module.Basis.mem_span_image\", \"union_support_maximal_linearIndependent_eq_range_basis\", \"Algebra.FormallyUnramified.finite_of_free_aux\", \"QuadraticMap.sum_repr_sq_add_sum_repr_mul_polar\"], \"digest\": \"0d06cc4e21331d76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: basis existence, support in a fixed basis, coordinate identities, and nilpotent-rank/eigenvector results do not minimize support among all bases and give irredundant coordinates with all the specified fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a free module over a commutative ring choose a basis minimizing the number of nonzero coordinates of a nonzero vector fixed by a linear endomorphism",
+   "results": "{\"t\": \"2026-10-23T10:45:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a free module over a commutative ring choose a basis minimizing the number of nonzero coordinates of a nonzero vector fixed by a linear endomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.nilRankAux\", \"LinearMap.nilRank\", \"LinearMap.exists_isNilRegular\", \"LinearMap.nilRankAux_basis_indep\", \"LinearMap.exists_isNilRegular_of_finrank_le_card\", \"LinearMap.nilRankAux_le\", \"LinearMap.IsNilRegular\", \"Module.End.HasGenEigenvector\"], \"digest\": \"d811630250742f19\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: basis existence, support in a fixed basis, coordinate identities, and nilpotent-rank/eigenvector results do not minimize support among all bases and give irredundant coordinates with all the specified fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "grep",
+   "query": "repr_support_subset_of_mem_span|mem_span_repr_support|theorem sum_repr|def repr",
+   "results": "{\"t\": \"2026-10-23T10:46:15Z\", \"tool\": \"grep\", \"query\": \"repr_support_subset_of_mem_span|mem_span_repr_support|theorem sum_repr|def repr\", \"sub\": \"LinearAlgebra/Basis\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Basis/Basic.lean\", \"Mathlib/LinearAlgebra/Basis/Basic.lean\", \"Mathlib/LinearAlgebra/Basis/Basic.lean\", \"Mathlib/LinearAlgebra/Basis/Basic.lean\", \"Mathlib/LinearAlgebra/Basis/Basic.lean\", \"Mathlib/LinearAlgebra/Basis/Bilinear.lean\", \"Mathlib/LinearAlgebra/Basis/Bilinear.lean\", \"Mathlib/LinearAlgebra/Basis/Defs.lean\"], \"digest\": \"d76a388998070c25\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: basis existence, support in a fixed basis, coordinate identities, and nilpotent-rank/eigenvector results do not minimize support among all bases and give irredundant coordinates with all the specified fixed-endomorphism relations over an arbitrary commutative ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis change by adding multiples of one basis vector removes a coordinate which is a linear combination of the other coefficients",
+   "results": "{\"t\": \"2026-10-23T10:46:16Z\", \"tool\": \"leanfinder\", \"query\": \"A basis change by adding multiples of one basis vector removes a coordinate which is a linear combination of the other coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.span_range_update_sub_smul\", \"Submodule.span_range_update_add_smul\", \"Module.Basis.linearCombination_coord\", \"Module.Basis.mk_coord_apply_ne\", \"Module.Basis.coe_mkFinCons\", \"Finsupp.linearCombination_comp_addSingleEquiv\", \"Module.Basis.sum_repr_mul_repr\", \"Module.Basis.reindexFinsetRange_repr\"], \"digest\": \"7d8ab142e303d1c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: span_range_update_add_smul, linearCombination_comp_addSingleEquiv and basis coordinate identities supply elementary building blocks, not the simultaneous minimal-support and fixed-endomorphism statement."
+  },
+  {
+   "tool": "grep",
+   "query": "linearCombination_comp_addSingleEquiv|span_range_update_add_smul",
+   "results": "{\"t\": \"2026-10-23T10:47:43Z\", \"tool\": \"grep\", \"query\": \"linearCombination_comp_addSingleEquiv|span_range_update_add_smul\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Finsupp/LinearCombination.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Defs.lean\", \"Mathlib/LinearAlgebra/Span/Defs.lean\", \"Mathlib/LinearAlgebra/Span/Defs.lean\"], \"digest\": \"746559b97e816ec6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: the cited formulas preserve span or identify a shear on finitely supported coefficient families, without minimizing support or supplying fixed-endomorphism relations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-element-free-summand",
+  "date": "2026-10-22",
+  "group": "Q112"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). Within the proof of Tag 05FQ: the first sentence invokes Algebra, Theorem 0593 to make the projective source free. In the proof of Tag 0593, the invocation of Lemma 0592 (lemma-projective-freeness-criteria) for the complementary projective module. Within Tag 0592: Tag 0592, lemma-projective-freeness-criteria, proof first paragraph (minimal support and basis shear), second paragraph (projection coordinates), and last paragraph (comparison of coefficients).",
+   "via": [
+    "lem-trf-projective-element-free-summand",
+    "lem-trf-projective-over-local-free",
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-minimal-support-fixed-vector-coordinates",
+  "worker": "stage1",
+  "summary": "Q80: checked Tag 0592 against the unchanged statement and wrote five elementary steps: existence of a least support, the explicit invertible shear on coefficients, its support contradiction, expansion of the fixed-endomorphism images, and coefficient comparison. Infinite rank, n=1, the zero ring, and zero divisors were checked. No new node is needed; the only cited node defines bases by unique finite expansions. Preserved inherited search records and added seven actually logged Mathlib searches; none states the complete item. No project Lean attachment was found.",
+  "blueprint": "The existing ancestor and via chain is retained: lem-trf-local-term-locality, Proof (1)--(2), semistable-alteration input, through flattening, 05FQ, 0593 and 0592. The steps supply exactly 0592 paragraph 1, the coordinate portion of paragraph 2, and coefficient comparison at the start of paragraph 3. Whole-blueprint searches for minimal support, irredundant and 0592 found no same statement; same_as is []."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-998971253",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-998971253 (reviewer sub-agent of L); spot-checked: PASS. I read the item in full against Stacks algebra.tex Tag 0592 (lemma-projective-freeness-criteria), all three proof paragraphs. Compared with clones/live, the statement, stmt_deps, source, created and blueprint are unchanged; only the proof, proof_deps, proof_origin, mathlib_searches, status and split_report changed. The delivery has no new nodes and no re-split note. The parent lem-trf-projective-element-free-summand cites this item in its step 2 with exactly this statement, taking pi: F to P inside F, so pi(x)=x. The only cited node is def-weil-pbc-free-module (a basis means a unique finite expansion), and it supports every step. Step 1: a least support exists by well-ordering, and n>=1 because x is nonzero. Step 2: I checked the shear e_i'=e_i+c_i e_j myself; the coefficient maps d_{e_j} -> d_{e_j} - sum d_{e_i}c_i and its inverse are mutually inverse, so the new family is a basis over any index set. Step 3: the e_j-coefficient of x becomes 0 and the support drops to n-1, a contradiction; for n=1 the empty sum also works. Step 4: the y_i are expanded with t_i in T, and linearity plus pi(x)=x gives x = sum a_i y_i; pi squared = pi is never used. Step 5: uniqueness of coefficients gives a_j = sum_i a_i b_ij. All five steps are genuinely elementary (C1/C2), there is no cycle, and the delivery breaks none of the error points A-F. Small cases checked: n=1, Z with x=2, k[eps]/eps^2 with x=eps and pi=1+eps, zero ring or F=0, and infinite rank. Searching the DAG for Tag 0592, 0593, minimal support and irredundant finds only the 0592 siblings (relation matrix, block replacement) and flat-ml-minimal-support, a different statement, so there is no duplicate. No SGA is cited. No fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.MinimalSupportFixedVectorCoordinates",
+  "declaration": "Module.Free.exists_minimal_support_fixed_vector_coordinates",
+  "file": "lean/Sheaf/LinearAlgebra/MinimalSupportFixedVectorCoordinates.lean",
+  "statement": "theorem exists_minimal_support_fixed_vector_coordinates {R : Type u} [CommRing R] {F : Type v} [AddCommGroup F] [Module R F] [Module.Free R F] (x : F) (hx : x ≠ 0) (π : F →ₗ[R] F) (hπ : π x = x) : ∃ (ι : Type v) (B : Module.Basis ι R F) (n : ℕ) (e : Fin n → ι) (a : Fin n → R), 1 ≤ n ∧ Function.Injective (fun i ↦ B (e i)) ∧ (∀ i, a i ≠ 0) ∧ x = ∑ i : Fin n, a i • B (e i) ∧ (B.repr x).support.card = n ∧ (∀ (κ : Type v) (C : Module.Basis κ R F), n ≤ (C.repr x).support.card) ∧ (∀ j : Fin n, ¬ ∃ c : Fin n → R, a j = ∑ i ∈ Finset.univ.erase j, a i * c i) ∧ ∃ (b : Fin n → Fin n → R) (t : Fin n → F), (∀ i, t i ∈ Submodule.span R (B '' (Set.range e)ᶜ)) ∧ (∀ i, π (B (e i)) = (∑ j : Fin n, b i j • B (e j)) + t i) ∧ x = ∑ i : Fin n, a i • π (B (e i)) ∧ ∀ j : Fin n, a j = ∑ i : Fin n, a i * b i j",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bdc0a036",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read node, source (Stacks 0592, all three proof paragraphs), stmt_dep def-weil-pbc-free-module (Module.Free, record unchanged vs live), module and report (Worker report + Second reading by Q74 present). Node differs from live only in lean; lean.statement is verbatim the file signature. Every clause matches: CommRing R, Module.Free with no finite generation, x≠0, π x = x, ∃ basis/n≥1/injective B∘e/nonzero a, x=Σ a_i•B(e_i), support card = n and minimal over all Type v bases (lossless since hx forces nontriviality, so bases reindex by range ⊆ F), irredundancy via univ.erase j, T = span(B '' (range e)ᶜ), b_ij/t_i expansions, x = Σ a_i π(B e_i), a_j = Σ_i a_i b_ij in the source's index order. Edge cases: zero ring/F=0 excluded by hx, n=1, infinite rank, zero divisors. No defs, sorry-only proof, source/blueprint docstrings with proof steps, u/v bound, no duplicate in Mathlib or Sheaf. No changes, so no compile."
+ }
+}

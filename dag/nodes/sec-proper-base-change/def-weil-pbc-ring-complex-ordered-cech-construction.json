@@ -1,0 +1,121 @@
+{
+ "id": "def-weil-pbc-ring-complex-ordered-cech-construction",
+ "kind": "definition",
+ "title": "Concrete ordered Cech sections and their augmented mapping fibre",
+ "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal, $r\\geq0$, and $f:\\operatorname{Fin}(r)\\to A$. Let $U=\\operatorname{Spec}A\\setminus V(I)$ as in [def-weil-pbc-ring-complex-godement-construction], and let $V_i=U\\cap D(f_i)$. Use the ordered Cech module complex of [def-sc-alternating-cech-total-complex] for $\\mathcal O_U$, restrict its global-section scalars along $A\\to\\Gamma(U,\\mathcal O_U)$, and place it on the one-object ring site of [def-weil-pbc-ring-complex-cech-data]. Denote the resulting nonnegative complex by $L_f$. The actual restriction $A\\to L_f^0$ is killed by the first differential, by cancellation of the two restrictions on each pair. Thus it defines $\\rho_f:A[0]\\to L_f$. Define $C_f=\\operatorname{Cone}(\\rho_f)[-1]$ and $a_f:C_f\\to A[0]$ using the first object and morphism of the inverse-rotated cone triangle. No object is selected from an existence theorem. If $\\operatorname{span}(f)=I$, the family $(V_i)$ covers $U$, including the empty family when $U$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-godement-construction",
+  "def-sc-alternating-cech-total-complex",
+  "def-weil-pbc-ring-complex-cech-data"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement resolution section augmentation on affine open intersection is quasi-isomorphism",
+   "results": "Affine-open spectrum isomorphisms and injective-resolution augmentation instances; no Godement section comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Cech complex mapping fibre coordinates ring localization alternating restriction differential",
+   "results": "AlternatingCofaceMapComplex.map, representation standard complex and Dold-Kan constructions; no localization fibre coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech|mappingCone|Localization.Away",
+   "results": "Restrict.lean principal-open localization isomorphisms, StructureSheaf and Tilde localization APIs. Local rg found the existing ordered Cech construction and finite flasque comparison, but no coordinate calculation or affine Godement evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "use existing Cech definitions and comparison; isolate the missing specializations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexGodementCech",
+  "date": "2026-10-25",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(d): principal-open ordered Cech computation of the augmented ring complex",
+   "via": [
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexOrderedCechConstruction",
+  "file": "lean/Sheaf/Paper/RingComplexOrderedCechConstruction.lean",
+  "declaration": "AlgebraicGeometry.ringComplexOrderedCech",
+  "statement": "def ringComplexOrderedCech (A : CommRingCat.{u}) (I : Ideal A)\n    {r : ℕ} (f : Fin r → A) : CochainComplex (RingSiteModules A) ℤ",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ringComplexPrincipalCover",
+   "AlgebraicGeometry.ringComplexPrincipalCover_iSup",
+   "AlgebraicGeometry.ringComplexSectionScalars",
+   "AlgebraicGeometry.ringComplexSectionScalars_additive",
+   "AlgebraicGeometry.ringComplexStructureRestriction",
+   "AlgebraicGeometry.ringComplexOrderedCechSections",
+   "AlgebraicGeometry.ringComplexOrderedCechFirst",
+   "AlgebraicGeometry.ringComplexOrderedCechFirst_closed",
+   "AlgebraicGeometry.ringComplexOrderedCechRestriction",
+   "AlgebraicGeometry.ringComplexOrderedCech",
+   "AlgebraicGeometry.ringComplexOrderedCechAugmentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T144342-L-1231608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T144342-L-1231608",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

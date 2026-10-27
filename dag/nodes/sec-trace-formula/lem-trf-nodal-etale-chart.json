@@ -21,56 +21,77 @@
  ],
  "proof": [
   {
-   "text": "Fix a geometric point x of X over y in Y and work after shrinking etale neighbourhoods around x and y. If x is smooth for f and x is outside D, the relative smooth locus is open and D is closed, so choose U and V with x in U, U→V smooth, and U disjoint from D. This gives the smooth unmarked normal form. The hypotheses used here are exactly flatness, local finite presentation and the stated nodal fibres (which make the smooth locus the complement of the nodal points). The fitting-singular lemma asks for equidimensional geometric fibres of dimension one: a connected one-dimensional Noetherian fibre has no zero-dimensional irreducible component, since such a component would be a clopen point or would lie in another component; so the stated fibre condition gives it, together with the assumption that f is smooth away from T.",
+   "text": "Every geometric fibre is purely one-dimensional: a zero-dimensional irreducible component of a locally Noetherian one-dimensional connected scheme would be a clopen isolated point (a component meeting another component is not maximal irreducible), contradicting connectedness and dimension one. Apply [lem-trf-nodal-family-fitting-singular] to obtain the open relative smooth locus. At a smooth point outside the closed divisor $D$, restrict to its intersection with $X\\setminus D$. This gives the smooth unmarked case.",
    "uses": [
     "lem-trf-nodal-family-fitting-singular"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBY setup and the smooth-locus case; ILO Exposé VI, Proposition 1.9, pp. 70–71."
+    "place": "Tags 0C59/0C5A; smooth case of ILO VI Proposition 1.9."
    }
   },
   {
-   "text": "Suppose instead that x lies on D. Since D is supported in the relative smooth locus, f is smooth at x; after shrinking U and V, both U→V and the closed immersion D×_XU→U are smooth over V, the latter because D→Y is etale. Apply the etale-coordinate theorem for a smooth closed pair [lem-pur-smooth-pair-local-coordinates]. At x the relative dimensions are one for U→V and zero for D×_XU→V, so its integers are a=0 and b=1. Therefore the resulting etale V-map is U→A^1_V, with one coordinate z, and the inverse image of the coordinate subspace is exactly D×_XU; hence D∩U is z=0.",
+   "text": "At a marked point restrict to the relative smooth locus. The closed pair $D\\hookrightarrow X$ is smooth over the base, since the marking is etale. Apply [lem-pur-smooth-pair-local-coordinates]. The fibre dimensions one and zero give $a=0,b=1$; its Cartesian coordinate-subspace square is exactly the scheme-theoretic equation $z=0$ for $D$.",
    "uses": [
     "lem-pur-smooth-pair-local-coordinates"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Exposé VI, Proposition 1.9, smooth-locus/marked case, pp. 70–71."
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, lemma-etale-local-structure, with dimensions 1 and 0."
    }
   },
   {
-   "text": "Finally let x be nonsmooth. Apply the etale local model of an at-worst-nodal family [lem-trf-nodal-family-etale-local-model] (Stacks Tag 0CBY) at the image point of x; its hypotheses are flatness, local finite presentation and the nodal geometric fibres, equidimensional of dimension one as in step 1. It supplies etale U→X and V→Y, U→V over f, h∈Γ(V,O_V), and an etale V-map U→W=Spec_V(O_V[u,v]/(uv−h)) with a point of U over x; since U→X is etale the residue extension at that point is finite separable, so the geometric point x lifts to U. U→X×_YV is etale (a morphism between etale X-schemes), and smoothness of a morphism at a point is unchanged by etale maps on the source and by the etale base change V→Y; hence a point of U is nonsmooth for U→V exactly when its image in X is nonsmooth for f, and exactly when its image in W is nonsmooth for W→V. On the fibre κ(v)[u,v]/(uv−h(v)) of W the Jacobian (v,u) vanishes only at u=v=0 and only when h(v)=0, so the lift of x goes to the node locus u=v=0 and h(y_V)=0. Because D is contained in the relative smooth locus, shrink U so that D∩U is empty. The singular locus is the complement of the relative smooth locus by [lem-trf-nodal-family-fitting-singular]. Let N⊂W be the node locus u=v=0, which maps isomorphically to V(h). The image of U is open and contains the chosen node, so its intersection with N is an open neighbourhood of the image point in V(h); its complement Z in N≅V(h) is closed in V, and we replace V by V∖Z and U by its inverse image. Any h=0 point v' of V outside T_V then has its node point in the image of U, hence a nonsmooth point of U over v', whose image in X is a nonsmooth point of f over a point of Y∖T, contradicting smoothness over Y∖T. Hence h has no zero on V∖T_V, i.e. it is invertible there. This is precisely the equation uv=h in Tag 0CBY; no projectivity assumption is used.",
+   "text": "At a nonsmooth point apply [lem-trf-nodal-family-etale-local-model], whose pure-dimension hypothesis was checked in step 1. This gives $U,V,h,e:U\\to W$. By [lem-trf-nodal-model-etale-smooth-locus], lift the prescribed geometric point to $U$; its image in $W$ has $u=v=0$. Remove the inverse image of $D$, which contains no nonsmooth point, and keep that lift. The same lemma identifies smoothness for $U\\to V$ with smoothness for $f$.",
    "uses": [
     "lem-trf-nodal-family-etale-local-model",
-    "lem-trf-nodal-family-fitting-singular"
+    "lem-trf-nodal-model-etale-smooth-locus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family and its proof; the smoothness-away-from-T assertion is the smooth-locus hypothesis in ILO Exposé VI, Proposition 1.9."
+    "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family; identification of the pointed node."
    }
   },
   {
-   "text": "At the same time refine V etale-locally so that the divisorial log structure M_Y has a fine saturated chart c:P→M_Y; this is available from the definition of a fine saturated log-regular pair [def-trf-log-regular-pair]. On the nodal chart, h is invertible over V\\T_V, hence h is a section of M_Y by the definition M_Y=O_Y∩j_*O_{Y\\T}^×. The chart description of a fine saturated log structure says that every such section is a chart element times a unit, so h=εα(a) for some a∈P and ε∈O_V^×. Refining the smooth and marked neighbourhoods over the same V gives the asserted common fine saturated base chart.",
+   "text": "Apply [lem-trf-nodal-chart-boundary-shrinking] with $T_V=V\\times_YT$. Step 3 supplies its chosen node and identifies the smooth loci, so smoothness of $f$ off $T$ supplies its smoothness hypothesis. For its closed set $Z$, the image of $N\\setminus e(U)$ under $N\\simeq V(h)$, replace $V$ by $V\\setminus Z$ and $U$ by its inverse image. The lemma retains the chosen point and makes $h$ invertible on $V\\setminus T_V$.",
    "uses": [
-    "def-trf-log-regular-pair"
+    "lem-trf-nodal-chart-boundary-shrinking"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Exposé VI, Proposition 1.9 and §§1.4, 1.8, pp. 69–71; divisorial-chart factorization."
+    "place": "VI Proposition 1.9 proof, equation (1.a): h invertible away from T."
+   }
+  },
+  {
+   "text": "In both smooth cases initially take $V=Y$ and the given geometric lift into the open $U$. In the nodal case $h$ is invertible on $V\\times_Y(Y\\setminus T)=V\\setminus T_V$ by step 4, so by the definition $M_Y=\\mathcal O_Y\\cap j_*\\mathcal O_{Y\\setminus T}^\\times$ in [def-trf-log-regular-pair] it is a section of $M_Y|_V$. At the geometric point of $V$ obtained from the chosen lift in $U$, apply [lem-trf-divisorial-section-chart-factorization] to $(h)$ in the nodal case and to the empty list in the smooth cases. It gives the fs base chart and, in the nodal case, $h=\\varepsilon\\alpha(a)$. Pull $U$ back to this pointed etale refinement of $V$. Clause (1) of [lem-weil-pbc-etale-base-change-finite-limits] preserves the etale chart maps; clause (2) of [lem-weil-pbc-etale-composition-cancellation] preserves their etale composites to $X$. The two retained lifts agree over $V$, so their fibre-product lift maps to the prescribed point of $X$. The coordinate squares and omission of $D$ pull back, and clause (1) of [lem-sbc-smooth-relative-dimension-permanence] preserves smooth relative dimension one. Thus every case has the asserted base chart.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "lem-trf-divisorial-section-chart-factorization",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI §§1.1, 1.4 and Proposition 1.9 proof, h = epsilon a; base change of the three charts."
    }
   }
  ],
  "proof_deps": [
   "def-trf-log-regular-pair",
   "lem-pur-smooth-pair-local-coordinates",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-trf-divisorial-section-chart-factorization",
+  "lem-trf-nodal-chart-boundary-shrinking",
   "lem-trf-nodal-family-etale-local-model",
-  "lem-trf-nodal-family-fitting-singular"
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-nodal-model-etale-smooth-locus",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation"
  ],
  "proof_origin": {
   "by": "document",
@@ -169,28 +190,43 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-nodal-etale-chart",
   "worker": "stage1",
-  "summary": "Read the imported statement against Stacks Tag 0CBY and ILO Exposé VI Proposition 1.9. Kept the statement unchanged and wrote four source-backed steps: smooth unmarked points, marked etale coordinates via the existing smooth-pair coordinate lemma, the nodal uv=h chart with the smooth-locus check, and the fine-saturated base chart and unit factorization. No new child node was created because each requested normal form is a clause of this item; the only reusable non-elementary facts are cited existing nodes.",
-  "blueprint": "Realizes the historical lem-trf-local-term-locality proof (1)--(2) passage through ILO VI Proposition 1.9: smooth and marked normal forms, the nodal equation (1.a), and the fs base-chart refinement.",
+  "summary": "Repair of the landing refusal on the current DAG, continuing the retained three-child split and search logs. Compared all item fields and all nine cited statements with the current repository; the statement, inherited fields and saved original proof remain unchanged there. The first dry run found five new same-tag nodes, all read and distinguished explicitly in report.md. Clarified the final base refinement: apply chart factorization at the geometric point induced by the chosen source lift, then use the two compatible lifts to obtain the fibre-product lift. This retains every original argument and the prescribed geometric point. All citation quotes remain verbatim; no Lean file is changed. On this retry the first dry run passed at 66a4f27715b. Re-read the current nine cited statements and sources, and made the initial base V=Y and geometric lift explicit in the two smooth cases before pointed refinement.",
+  "blueprint": "Preserves the existing historical ancestor route through ILO VI Proposition 1.9: smooth and marked cases; equation (1.a), pointed node identification and invertibility off T; fs chart and h = epsilon a. New nodes have the inherited ancestor lem-trf-local-term-locality and via chain.",
   "tool_uses": [
    {
     "node": "lem-pur-smooth-pair-local-coordinates",
     "why": "The marked-point step needs the generic etale coordinate theorem for a smooth closed pair; this is a tool lemma from the smooth-purity unit and the nodal route has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic etale base-change/composition tool needed only to retain the coordinate diagrams under pointed base refinement; the trace unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic etale base-change/composition tool needed only to retain the coordinate diagrams under pointed base refinement; the trace unit has no replacement."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Clause (1) preserves smooth relative dimension one in the smooth branch under the final base refinement; generic morphism permanence tool, not a replacement of the trace-unit route."
    }
   ]
  },
  "tool_uses": [
-  "lem-pur-smooth-pair-local-coordinates"
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sbc-smooth-relative-dimension-permanence"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q25-37101c2db",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q113-0db0c6dfe",
+  "group": "Q113",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-37101c2db (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks curves.tex Tag 0CBY (lemma-etale-local-structure-nodal-family, both proofs) and 0C59/0C5A, and against ILO Exposé VI §§1.6–1.8 and Prop. 1.9 with its proof, pp. 70–71. I also read the statements of the cited nodes lem-pur-smooth-pair-local-coordinates (0FUE), lem-trf-nodal-family-fitting-singular, def-trf-log-regular-pair and def-trf-nodal-geometric-fibres. The statement is true without properness. I tested it on the DVR case uv=π, on Y=A² with T the axes and uv=st, and on the cases T empty, D empty and a smooth fibre. Steps 2 and 4 are correct: a=0 and b=1 by relative dimension, and h=εα(a) from the stalk pushout chart spread out étale-locally, as in ILO's 'h = εa'. Fixes: (1) C1: step 3 used Tag 0CBY, which is proved by Artin approximation, by tag only, and no DAG node states it. I added the statement-only node lem-trf-nodal-family-etale-local-model (unsplit; created.item = this item; blueprint.from = lem-trf-local-term-locality) and step 3 now cites it. (2) E5: Tag 0CBY gives only some point of U over x, not one sent to u=v=0. I wrote out why it is: smoothness is invariant under étale maps on the source and under étale base change, and the Jacobian of uv−h vanishes only at u=v=0 when h=0. I also wrote out the explicit shrinking V∖Z, and in step 1 derived the equidimensional-fibre hypothesis of the fitting-singular lemma. (3) I added def-weil-geometric-point and def-sbc-affine-space to stmt_deps. Accepted tool use: lem-pur-smooth-pair-local-coordinates, a generic étale-coordinate theorem. The new node records only Mathlib greps, which found nothing; LeanSearch and Loogle could not be run on this machine and were not recorded. No duplicate was found in dag/nodes, and no SGA source is used.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-0db0c6dfe (reviewer sub-agent of L); spot-checked: Read in full: the item and all 3 new nodes. Also read the statements of every cited node: fitting-singular, smooth-pair-local-coordinates (0FUE), nodal-family-etale-local-model (0CBY, which gives only some point of U over x), etale base change (1), composition (2), smooth-relative-dimension permanence (1), def-trf-log-regular-pair and def-trf-nodal-geometric-fibres. Sources: ILO VI Prop. 1.9 proof (printed p. 71, eq. (1.a): 'h ... inversible sur Y − T, donc appartenant à M_{Y,y} (1.4) ... h = εa'), and Stacks 01V9, 02GL, 02KM and 0CBY. No SGA is cited. This is the 4th push. The 3 new node files are byte-identical to 881e, 242c and 7d14. Only item step 5 changed: V=Y in the smooth branches and an explicit fibre-product lift, both correct. The live item still has the old 4-step proof. Re-split check: old steps 1-2 stay as one-citation steps. Old step 3 goes to the model node (étale invariance, Jacobian (v,u) so nonsmooth ⇔ u=v=0, N≅V(h), lift through a finite separable residue extension) and to the shrinking node (Z closed, p(t)∉Z, nodes over V° lie in e(U°), smooth off T ⇒ h is a unit). Old step 4 goes to the factorization node (stalk-pushout chart, finite list spread over one pointed V', r=0). The 3 nodes are true, of comparable size (1.0-1.2k characters each) and statement-only, and none restates the item or one of its clauses. Tested: h=0 (also char 2), h a unit, uv=π over a trait, uv=st over A² with T the axes, nonreduced V(h), U empty, r=0. Duplicate check with rg -L found no duplicate: log-regular-sharp-chart, log-regular-divisorial-structure, regular-local-ufd-boundary-factorization and sfb-dvr-nodal-etale-local-form differ, and sfb-nodal-graph-cone-chart overlaps only the model node's set-level N clause (advisory). Batch-5: the 3 flagged citations are this delivery's statement-only local-geometry nodes with generic definition deps. None is the trace formula, Poincaré duality or a step of their proofs, and the item was already in the closure (cited by trf-nodal-log-regularity and sfb-marked-nodal-relative-log-charts). Accepted. FIX (1 fault, C1/D5 and the re-split rule): step 5 again drops old step 4's derivation of the stated clause 'h is a section of M_Y|_V'. The factorization node only assumes invertibility. Fixes at 881e, 242c and 7d14 were all lost at landing. I re-applied it on this head's text: step 5 now cites def-trf-log-regular-pair (M_Y = O ∩ j_*O^×) for the membership, and def-trf-log-regular-pair is added to uses and proof_deps. The assembly is 2856 characters. Accepted tool uses: smooth-pair-local-coordinates, etale base change (1), composition (2) and smooth-permanence (1).; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -215,5 +251,16 @@
   "existing": false,
   "note": "Repair of returned H3: geometric-point lifts and smoothness off the boundary are explicit; the marked coordinate has an etale map and scheme-theoretic Cartesian zero-locus square; both unmarked branches remove the marking; one common fs chart precedes all alternatives; the nodal origin means vanishing in the residue field."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

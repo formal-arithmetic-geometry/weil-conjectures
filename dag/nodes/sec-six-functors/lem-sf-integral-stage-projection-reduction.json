@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-integral-stage-projection-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of the normalized integral-stage projection",
+ "statement": "Let D,C,E,n,hn,S be the six-functor operation datum of [def-fix-six-functor-datum]. For a separated finite-type f:X→Y, a compactification c, an arbitrary bounded constructible integral K on X, and a bounded constructible integral L on Y satisfying S.integralFiniteTorDomain, reduction at every positive exponent m+1 of the specified compact-support projection [def-sf-constructible-projection-mates] is isomorphic, as an arrow in the ambient finite derived category, to CompactSupportFiniteProjection.component for S.integralNormalization.finiteLevels m, reduced K, and any finite-Tor representative L_m whose underlying object equals the reduction of L. No invertibility of either projection is asserted. Only the second integral input is restricted to uniform finite Tor amplitude.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Integral projection: normalized reductions and coherent-system realization"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "Choose ordinary tensor models using the proved tensorModel_exists. Identify the operation integral projection with the concrete completed integralMap using the same-coefficient presentation comparison, and apply reduction.mapArrow to this arrow isomorphism.",
+   "uses": [
+    "lem-sf-integral-projection-operation-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+   }
+  },
+  {
+   "text": "Extract the invertible source and target comparisons and their commuting square from concreteIntegralProjectionCone at m. Arrow.isoMk turns the square into an arrow isomorphism between the reduced integralMap and finiteArrow.",
+   "uses": [
+    "lem-sf-concrete-integral-projection-cone"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+   }
+  },
+  {
+   "text": "Apply the finite same-coefficient presentation comparison to reduced K and L_m. Apply congrArg to hL_m.symm to identify the finiteArrow object with its first arrow, and use eqToIso for this equality. Compose the reduced integral presentation isomorphism, the concrete square isomorphism, this equality transport and the finite presentation isomorphism.",
+   "uses": [
+    "lem-sf-finite-projection-operation-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-projection-operation-presentation",
+  "lem-sf-concrete-integral-projection-cone",
+  "lem-sf-finite-projection-operation-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Separate the two same-coefficient coordinate changes from the actual integral-to-finite commuting square already supplied by concreteIntegralProjectionCone."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction of the integral projection formula agrees with the finite coefficient counit projection; composition and proper coincidence for projection maps",
+   "results": "Eight unrelated hits: AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self; SimplicialObject.Splitting.PInfty_comp_πSummand_id; Profinite.NobelingProof.GoodProducts.square_commutes; Profinite.NobelingProof.projRestricts_comp_projRestrict; AlgebraicTopology.DoldKan.N₁_obj_p; Profinite.NobelingProof.proj_comp_of_subset; AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex; Pi.counit_comp_single.",
+   "date": "2026-10-26",
+   "verdict": "No integral compact-support projection normalization or structural identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "Arrow.mk",
+   "results": "No hits; unknown identifier 'Arrow.mk'.",
+   "date": "2026-10-26",
+   "verdict": "No applicable normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*reduction|projection.*coherence",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No applicable theorem in this search; project rg found the existing concrete reduction and system-realization declarations, which the proof below uses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionIntegralStages",
+  "date": "2026-10-26",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite reduction of the normalized integral-stage projection",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStageProjectionReduction",
+  "file": "lean/Sheaf/Paper/IntegralStageProjectionReduction.lean",
+  "declaration": "WeilConjectures.integralStageProjection_reduction",
+  "statement": "theorem integralStageProjection_reduction\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorOperationDatum D C E n hn)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left)\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n    (L : sfIntegralConstructibleCategory C.l E Y.obj.left)\n    (_hL : S.integralFiniteTorDomain Y L) (m : ℕ)\n    (Lₘ : finiteTorConstructibleCategory C.l E (m + 1)\n      (Nat.succ_le_succ (Nat.zero_le m)) Y.obj.left)\n    (hLₘ : Lₘ.obj = ((sixFunctorIntegralReduction D C E m Y).obj L).obj) :\n    Nonempty (Arrow.mk\n      ((scalarReductionDerivedExtension C.l E Y.obj.left m).map\n        (compactSupportProjectionComponent S.higher.integralExchange f c K L).hom) ≅\n      Arrow.mk (CompactSupportFiniteProjection.component\n        (S.integralNormalization.finiteLevels m) f c\n        ((sixFunctorIntegralReduction D C E m X).obj K) Lₘ).hom)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T002801-L-115546",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T070736-L-3650845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

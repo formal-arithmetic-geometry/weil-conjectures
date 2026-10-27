@@ -1,0 +1,147 @@
+{
+ "id": "lem-diagonal-completed-root-projection-linear",
+ "kind": "statement",
+ "title": "Finite root projections are linear over the normalized completed coefficients",
+ "statement": "For a prime l, a Noetherian scheme X with l invertible, and a coefficient isomorphism e with every finite-reduction normalization of [lem-diagonal-completed-coefficient-ring-comparison], fix n >= 0. The map from the root-tower limit to the underlying n-th bottom-field integral twist level, given by the root projection followed by the free-module unit, lifts to a morphism from purTwistZlModule restricted along e.hom to that finite level reconstructed as a Z_l module. The bottom field and its finite levels are those of [def-sfb-diagonal-coefficient-diagrams], and reconstruction uses [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. No invertibility or limit of these finite morphisms is asserted.",
+ "stmt_deps": [
+  "lem-diagonal-completed-coefficient-ring-comparison",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Finite-level scalar calculation in paragraph (1) and the coordinatewise integral twist construction."
+ },
+ "proof": [
+  {
+   "text": "The finite quotient coefficient ring B=O_E/l^(n+1) is annihilated by l^(n+1), since its defining ideal contains that scalar. This holds pointwise for continuous-function condensed sections and remains true after the additive inverse-image functor to X. Apply it to E=bottomField l.",
+   "uses": [
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalized reduction purZlReduction is the abelian-sheaf cokernel of multiplication by l^(n+1) on the pulled-back condensed Z_l ring. The actual coefficient map to B kills this multiplication, so the cokernel universal property gives a factor b from the constant cyclic residue sheaf to B. It is unital by the factorization equation. Cancel the epimorphism rho tensor rho in the multiplicativity equation to prove b is a ring-object homomorphism.",
+   "uses": [
+    "lem-pur-condensed-zl-reduction-mod-ell-power",
+    "def-sfb-diagonal-coefficient-maps",
+    "sk-def-sp-tate-twist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reconstruct section rings and prove the constant-ring comparison, normalized on the sheafification unit, using the generic constant-presentation and ring-object APIs. Regard the free B-module on the finite root sheaf as a module over purTwistFiniteRing. The additive free-module unit from the finite root module is automatically linear over this constant cyclic ring: restrict to the constant presheaf, lift each ZMod scalar to an integer, use additivity, and descend via locally surjective restriction of scalars. Use the proved additive-to-linear helper abResidueLinearLift from the cyclic tensor comparison.",
+   "uses": [
+    "lem-sp-constant-zmod-scalar-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply he to e.hom(r), cancel e.hom followed by e.inv, and use the factorization rho followed by b equals the actual coefficient map. The result identifies the scalar acting through the finite root projection with the scalar acting on the target free B-module. The coordinate formula for purTwistZlAction and the finite-unit linearity now prove scalar compatibility of the prescribed root projection followed by the unit. Section reconstruction commutes with internal restriction of scalars by naturality of the lax monoidal comparison; apply it successively for Z_l to O_E and O_E to B.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed composite is already a natural additive sheaf morphism. Bundle its section maps and the proved scalar equations using PresheafOfModules.homMk. Forgetting the resulting module morphism is definitionally the required root projection followed by the free-module unit. No primitive-root generator or inverse to that unit is used; the same construction includes the empty scheme.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-sheaves",
+  "def-sfb-diagonal-coefficient-maps",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "lem-sp-constant-zmod-scalar-tensor",
+  "sk-def-sp-tate-twist"
+ ],
+ "proof_origin": {
+  "by": "V3",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Coordinatewise integral twist formula and finite cyclic scalar calculation, using the proved normalized cokernel comparison. Agent-written Lean argument; the diagonal-tower unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring an abelian sheaf annihilated by N with the constant ring ZMod N gives the same sheaf via the free module unit",
+   "results": "SheafOfModules.unit, sheafification-unit compatibility and general sheaf module API; no normalized internal free-unit comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact result for the specified pulled-back bottom-field quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, ZMod",
+   "results": "No matches. LeanFinder on inverse limits of roots returned cyclotomic-character projections, not the normalized sheaf comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the concrete finite coefficients and the existing sheaf module equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "freeForgetAdjunction|constantZMod|purTwistZlModule|IntegralRoots; blueprint: root unit; finite projection linear",
+   "results": "Read DiagonalIntegralRootMap, ProEtaleTateTwistLevels, ConstantZModScalarTensor, both torsion module APIs and BaseCoefficientCondensedIdentification. The tensor comparison has no normalization identifying the free unit. The integral-root-map theorem specifies a map, but not linearity. Blueprint-wide searches returned no duplicate.",
+   "date": "2026-10-27",
+   "verdict": "The finite normalized assertions need separate proofs; general limit and module APIs supply the assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientRootLineComparison",
+  "date": "2026-10-27",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite root projection scalar compatibility",
+   "via": [
+    "lem-diagonal-completed-coefficient-root-line-comparison",
+    "lem-diagonal-completed-coefficient-realization",
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedRootProjectionLinear",
+  "file": "lean/Sheaf/Paper/CompletedRootProjectionLinear.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedRootProjection_linear",
+  "statement": "theorem completedRootProjection_linear (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (l : Γ(X, ⊤)))\n    (e : (sheafCompose (Scheme.ProEt.topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n          (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n            (Scheme.ProEt.topology X)\n            (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X)) ≅\n        Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l))\n    (he : ∀ n : ℕ,\n        (sheafCompose (Scheme.ProEt.topology X)\n          (forget₂ RingCat.{u + 1} Ab.{u + 1})).map e.inv ≫\n            (purZlReduction l X (n + 1)).hom =\n          (sheafCompose (Scheme.ProEt.topology X)\n            (forget₂ RingCat.{u + 1} Ab.{u + 1})).map\n              ((sheafCompose (Scheme.ProEt.topology X)\n                (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map\n                  (Scheme.purTwistZlProjection X l n)) ≫\n            (sfbConstantRingAbIso X\n              (CommRingCat.of (ULift.{u + 1} (ZMod (l ^ (n + 1)))))).hom)\n    (n : ℕ) :\n    ∃ f : (SheafOfModules.restrictScalars e.hom).obj (Scheme.purTwistZlModule X l) ⟶\n        (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}\n          (Scheme.ProEt.topology X)\n          (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X)).functor.obj\n            ((Mod.comap (coefficientMap (integralMap l (bottomField l)) X)).obj\n              (spIntegralTwistLevel X l (bottomField l) n)),\n      (SheafOfModules.toSheaf _).map f =\n        limit.π (Scheme.proEtaleRootsOfUnityTower X l (Fact.out : l.Prime)) (op n) ≫\n          (Mod.freeForgetAdjunction\n            (condensedRingObj (spEllPointRingObj l (bottomField l) n) X)).unit.app\n              (Scheme.proEtaleRootsOfUnitySheaf X (l ^ (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261026T222732-L-687847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261026T235949-L-1474118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

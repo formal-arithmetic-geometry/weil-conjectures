@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-common-field-local-faithful-comparison",
+ "kind": "statement",
+ "title": "Faithfully flat local comparison through a common field",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "statement": "Let $k$ be a field and $E/k$, $L/k$ arbitrary field extensions [def-pc-field-extension]. Let $R$ be a commutative $k$-algebra, $R_E=R\\otimes_kE$, $S=R\\otimes_kL$, $\\mathfrak q$ a prime ideal of $S$, and $\\mathfrak p$ its inverse image under $R\\to S$. Tensor products use [def-weil-pbc-module-tensor-product] with their usual algebra multiplication. There exist a field $F$, embeddings $i_E:E\\to F$ and $i_L:L\\to F$ agreeing on $k$, and a prime ideal $\\mathfrak Q$ of $T=R\\otimes_kF$ whose inverse image under $S\\to T$, $r\\otimes l\\mapsto r\\otimes i_L(l)$, is $\\mathfrak q$. Let $\\mathfrak P$ be the inverse image of $\\mathfrak Q$ under $R_E\\to T$, $r\\otimes e\\mapsto r\\otimes i_E(e)$. Then $\\mathfrak P$ contracts to $\\mathfrak p$ in $R$, and the induced map\n$$(R_E)_{\\mathfrak P}\\longrightarrow T_{\\mathfrak Q},\\qquad t/u\\longmapsto i(t)/i(u),$$\nis a faithfully flat local homomorphism [def-weil-pbc-faithfully-flat-ring-map] [def-weil-pbc-localization-at-prime], where $i:R_E\\to T$ is the displayed scalar-extension map and local means that the inverse image of the maximal ideal is the maximal ideal. Both $S\\to T$ and $R_E\\to T$ are faithfully flat. No algebraicity, finite degree, Noetherianity, or finite generation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0384 (lemma-geometrically-reduced-upstairs), reverse implication: common extension, point above the prescribed point, and the faithfully flat map of local rings; field amalgamation is fields.tex Tag 0H7K (lemma-common-extension-field)."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-common-extension-fields] to the given extensions $E/k$ and $L/k$. Obtain a field $F$ and $k$-embeddings $i_E:E\\to F$ and $i_L:L\\to F$. Give $F$ its $E$- and $L$-algebra structures through these embeddings; their restrictions to $k$ agree. Put $T=R\\otimes_kF$.",
+   "uses": [
+    "lem-weil-common-extension-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0H7K (lemma-common-extension-field); used in varieties.tex Tag 0384"
+   }
+  },
+  {
+   "text": "For each $H\\in\\{E,L\\}$ write $i_H:H\\to F$ for its chosen embedding and $R_H=R\\otimes_kH$. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives mutually inverse ring maps\n$$\\alpha_H:(R\\otimes_kH)\\otimes_HF\\longrightarrow T,\\quad (r\\otimes h)\\otimes f\\longmapsto r\\otimes i_H(h)f,\\qquad \\beta_H:T\\longrightarrow(R\\otimes_kH)\\otimes_HF,\\quad r\\otimes f\\longmapsto(r\\otimes1)\\otimes f.$$\nThe formulas respect balancing: replacing $rh_0\\otimes h$ by $r\\otimes h_0h$ for $h_0\\in k$ has the same image because $i_H$ is a $k$-map, and $((r\\otimes h)a)\\otimes f=(r\\otimes h)\\otimes i_H(a)f$ for $a\\in H$. Both formulas preserve products and $1$. On a pure tensor, $\\alpha_H\\beta_H(r\\otimes f)=r\\otimes f$ and $\\beta_H\\alpha_H((r\\otimes h)\\otimes f)=(r\\otimes1)\\otimes i_H(h)f=(r\\otimes h)\\otimes f$. The generation clause of [def-weil-pbc-module-tensor-product] extends these equalities to every element. Thus $\\alpha_H$ is an isomorphism, and it sends $x\\otimes1$ to the stated scalar-extension map $j_H(x)$; this follows on $x=r\\otimes h$ and then by additivity.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0384, common-extension base change, explicit tensor identification"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-field-extension-base-change-faithfully-flat] with base field $H$, extension $F/H$, and commutative $H$-algebra $R_H$, for $H=E$ and $H=L$. It gives faithful flatness of $R_H\\to R_H\\otimes_HF$. Under $\\alpha_H$ from Step 2 this is $j_H:R_H\\to T$. Indeed $\\alpha_H$ is $R_H$-linear for these actions, so tensoring any complex over $R_H$ with either target gives isomorphic complexes; the exactness criterion in [def-weil-pbc-faithfully-flat-ring-map] is therefore unchanged. Consequently both $R_E\\to T$ and $S=R_L\\to T$ are faithfully flat, and in particular flat.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0384, field-extension maps are flat; faithful flatness before localization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-faithfully-flat-surjective-spectrum] to $j_L:S\\to T$ and the prescribed prime $\\mathfrak q$. It supplies a prime $\\mathfrak Q\\subset T$ with $j_L^{-1}(\\mathfrak Q)=\\mathfrak q$. Define $\\mathfrak P=j_E^{-1}(\\mathfrak Q)$. It is prime: $1$ is not in it, and $ab\\in\\mathfrak P$ implies $j_E(a)j_E(b)\\in\\mathfrak Q$, hence $a\\in\\mathfrak P$ or $b\\in\\mathfrak P$. For $r\\in R$, both composites $R\\to R_E\\to T$ and $R\\to S\\to T$ send $r$ to $r\\otimes1$. Therefore $r\\otimes1\\in\\mathfrak P$ if and only if $r\\otimes1\\in\\mathfrak Q$ if and only if $r\\otimes1\\in\\mathfrak q$, which is exactly $r\\in\\mathfrak p$. This proves the required contraction to $R$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HQ (lemma-ff-rings); point lifting in varieties.tex Tag 0384"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-flat-local-ring-maps] for the flat ring map $j_E:R_E\\to T$ and the prime $\\mathfrak Q$, whose inverse image is $\\mathfrak P$ by Step 4. Its conclusion gives a flat local homomorphism $f:(R_E)_{\\mathfrak P}\\to T_{\\mathfrak Q}$, with exactly the formula $t/u\\mapsto j_E(t)/j_E(u)$. No Noetherian clause of that node is used. To check the stronger inverse-image description of locality explicitly, a fraction $t/u$ belongs to the maximal ideal of $(R_E)_{\\mathfrak P}$ precisely when $t\\in\\mathfrak P$, and its image belongs to the maximal ideal of $T_{\\mathfrak Q}$ precisely when $j_E(t)\\in\\mathfrak Q$; these are equivalent by definition of $\\mathfrak P$. Denominators are valid because $u\\notin\\mathfrak P$ implies $j_E(u)\\notin\\mathfrak Q$. Here the maximal ideals are the extended primes as in [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (lemma-flat-localization); the flat local map in varieties.tex Tag 0384"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-local-hom-faithfully-flat] to the two local rings and the flat local homomorphism $f$ from Step 5. This proves its faithful flatness. Together with the field embeddings of Step 1, the two faithful flatness conclusions of Step 3, and the prime and contraction identities of Step 4, this gives every assertion. The construction uses arbitrary field extensions and arbitrary commutative algebras throughout.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HR (lemma-local-flat-ff); conclusion of the local-ring comparison in varieties.tex Tag 0384"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0384 (lemma-geometrically-reduced-upstairs), common-extension and faithfully flat local-ring comparison, expanded using Fields Tag 0H7K and Algebra Tags 00HQ, 00HT, 00HR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "faithfullyFlat.*local|faithfullyFlat.*[Tt]ensor|[Ff]aithfully[Ff]lat.*[Ll]ocal|[Ff]aithfully[Ff]lat.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T06:45:19Z\", \"tool\": \"grep\", \"query\": \"faithfullyFlat.*local|faithfullyFlat.*[Tt]ensor|[Ff]aithfully[Ff]lat.*[Ll]ocal|[Ff]aithfully[Ff]lat.*[Tt]ensor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent.lean\"], \"digest\": \"9b3f2b1331aabf87\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Ideal.exists_isPrime_liesOver_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:138,60, and RingHom.Flat.localRingHom are components. None includes amalgamation of the two fields, choice of the common prime, and the compatible local-ring map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common extension of two base fields provides a prime above a prescribed prime and a faithfully flat map on the corresponding local rings",
+   "results": "{\"t\": \"2026-10-22T06:45:19Z\", \"tool\": \"leansearch\", \"query\": \"A common extension of two base fields provides a prime above a prescribed prime and a faithfully flat map on the corresponding local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"RingHom.Flat.localRingHom\", \"instFlatAtPrime\", \"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"Module.FaithfullyFlat.of_comap_surjective\", \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"PrimeSpectrum.comap_surjective_of_faithfullyFlat\", \"Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain\"], \"digest\": \"d7c92fca46edb168\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Ideal.exists_isPrime_liesOver_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:138,60, and RingHom.Flat.localRingHom are components. None includes amalgamation of the two fields, choice of the common prime, and the compatible local-ring map."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, Localization.AtPrime",
+   "results": "{\"t\": \"2026-10-22T06:45:19Z\", \"tool\": \"loogle\", \"query\": \"Module.FaithfullyFlat, Localization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Ideal.exists_isPrime_liesOver_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:138,60, and RingHom.Flat.localRingHom are components. None includes amalgamation of the two fields, choice of the common prime, and the compatible local-ring map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two field extensions E and L of k and a prime q of R tensor k L there is a common field F and a prime Q of R tensor k F over q inducing a faithfully flat homomorphism from (R tensor k E)_P to (R tensor k F)_Q",
+   "results": "{\"t\": \"2026-10-22T06:45:35Z\", \"tool\": \"leanfinder\", \"query\": \"Given two field extensions E and L of k and a prime q of R tensor k L there is a common field F and a prime Q of R tensor k F over q inducing a faithfully flat homomorphism from (R tensor k E)_P to (R tensor k F)_Q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.TensorProduct.isAlgebraic_of_isField\", \"Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective\", \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"Algebra.QuasiFiniteAt.baseChange\"], \"digest\": \"9ec7e957c2427758\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Ideal.exists_isPrime_liesOver_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:138,60, and RingHom.Flat.localRingHom are components. None includes amalgamation of the two fields, choice of the common prime, and the compatible local-ring map."
+  },
+  {
+   "tool": "grep",
+   "query": "of_flat_of_isLocalHom|exists_isPrime_liesOver_of_faithfullyFlat|instFlatAtPrime",
+   "results": "{\"t\": \"2026-10-22T06:45:50Z\", \"tool\": \"grep\", \"query\": \"of_flat_of_isLocalHom|exists_isPrime_liesOver_of_faithfullyFlat|instFlatAtPrime\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Ideal/GoingDown.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\"], \"digest\": \"d8034febe8e86044\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Ideal.exists_isPrime_liesOver_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:138,60, and RingHom.Flat.localRingHom are components. None includes amalgamation of the two fields, choice of the common prime, and the compatible local-ring map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Amalgamate two field extensions then lift a prescribed prime and compare the local rings faithfully flatly",
+   "results": "{\"t\": \"2026-10-22T06:46:01Z\", \"tool\": \"leanfinder\", \"query\": \"Amalgamate two field extensions then lift a prescribed prime and compare the local rings faithfully flatly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"RingHom.Flat.localRingHom\", \"instFlatAtPrime\", \"RingHom.Flat.ofLocalizationPrime\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.FaithfullyFlat.of_specComap_surjective\", \"Module.FaithfullyFlat.of_comap_surjective\"], \"digest\": \"e724b1a3c45698ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: Ideal.exists_isPrime_liesOver_of_faithfullyFlat and Module.FaithfullyFlat.of_flat_of_isLocalHom, Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:138,60, and RingHom.Flat.localRingHom are components. None includes amalgamation of the two fields, choice of the common prime, and the compatible local-ring map."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isPrime_liesOver_of_faithfullyFlat|of_flat_of_isLocalHom|Flat.localRingHom",
+   "results": "{\"t\": \"2026-10-23T04:31:03Z\", \"tool\": \"grep\", \"query\": \"exists_isPrime_liesOver_of_faithfullyFlat|of_flat_of_isLocalHom|Flat.localRingHom\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Ideal/GoingDown.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\", \"Mathlib/RingTheory/LocalRing/Length.lean\"], \"digest\": \"d8034febe8e86044\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: hits give prime lifting, localization flatness, or comparison under extra domain/purely-inseparable hypotheses; none assembles the arbitrary common-field construction and all the specified prime contractions and local maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Amalgamate two field extensions, lift a prescribed prime after scalar extension, and obtain a faithfully flat map on local rings",
+   "results": "{\"t\": \"2026-10-23T04:31:04Z\", \"tool\": \"leansearch\", \"query\": \"Amalgamate two field extensions, lift a prescribed prime after scalar extension, and obtain a faithfully flat map on local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"instIsScalarTowerAtPrimeFractionRing\", \"RingHom.Flat.localRingHom\", \"IsLocalization.instIsScalarTowerAtPrimeFractionRing\", \"instIsLocalHomAtPrimeRingHomAlgebraMap\", \"Localization.AtPrime.instIsScalarTower\", \"LocalSubring.instIsScalarTowerSubtypeMemSubringToSubringOfPrime\", \"instIsScalarTowerAtPrimeFractionRing_1\"], \"digest\": \"c2a64775a91b7f56\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: hits give prime lifting, localization flatness, or comparison under extra domain/purely-inseparable hypotheses; none assembles the arbitrary common-field construction and all the specified prime contractions and local maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, Localization.AtPrime",
+   "results": "{\"t\": \"2026-10-23T04:31:04Z\", \"tool\": \"loogle\", \"query\": \"Module.FaithfullyFlat, Localization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: hits give prime lifting, localization flatness, or comparison under extra domain/purely-inseparable hypotheses; none assembles the arbitrary common-field construction and all the specified prime contractions and local maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two extensions E and L of a field k choose a common field F and a prime Q of R tensor F above a prime of R tensor L such that (R tensor E) localized at the contraction maps faithfully flatly to (R tensor F) localized at Q",
+   "results": "{\"t\": \"2026-10-23T04:31:05Z\", \"tool\": \"leanfinder\", \"query\": \"For two extensions E and L of a field k choose a common field F and a prime Q of R tensor F above a prime of R tensor L such that (R tensor E) localized at the contraction maps faithfully flatly to (R tensor F) localized at Q\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"Subalgebra.LinearDisjoint.exists_field_of_isDomain_of_injective\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"instFlatAtPrime\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\"], \"digest\": \"287e6af0fb34ea3a\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: hits give prime lifting, localization flatness, or comparison under extra domain/purely-inseparable hypotheses; none assembles the arbitrary common-field construction and all the specified prime contractions and local maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compare local rings after amalgamating arbitrary field extensions and lifting a prime using surjectivity of a faithfully flat map on spectra",
+   "results": "{\"t\": \"2026-10-23T04:32:53Z\", \"tool\": \"leanfinder\", \"query\": \"Compare local rings after amalgamating arbitrary field extensions and lifting a prime using surjectivity of a faithfully flat map on spectra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_comap_localRingHom_surjective\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"PrimeSpectrum.comap_surjective_of_faithfullyFlat\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"IsLocalization.AtPrime.liesOver_map_of_liesOver\", \"Algebra.HasGoingDown.of_flat\", \"PrimeSpectrum.specComap_surjective_of_faithfullyFlat\", \"Module.FaithfullyFlat.of_specComap_surjective\"], \"digest\": \"01839fb69e56075d\"}",
+   "date": "2026-10-23",
+   "verdict": "no exact match: hits give prime lifting, localization flatness, or comparison under extra domain/purely-inseparable hypotheses; none assembles the arbitrary common-field construction and all the specified prime contractions and local maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-reducedness-local-base-change",
+  "date": "2026-10-22",
+  "group": "Q68"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited Curves 0C4D geometric-point descent branch, expanded by 0384: choose a common field, lift the point and compare local rings faithfully flatly; old item proof steps 3 and 6.",
+   "via": [
+    "lem-trf-geometric-reducedness-local-base-change",
+    "lem-trf-geometric-field-stalk-descent",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-common-field-local-faithful-comparison",
+  "worker": "stage1",
+  "summary": "Retained the statement and its four notion dependencies. Expanded the common-field comparison of Stacks 0384 into six steps, explicitly identifying both scalar extensions and checking the contractions and inverse image of maximal ideals. Reused every required lemma; no new nodes. Searched upstream project declarations and Mathlib; no full attachment or exact leaf for the item.",
+  "blueprint": "Inherited geometric-point descent branch of lem-trf-local-term-locality: Curves 0C4D via geometric reducedness Tag 0384, the common extension and faithfully flat local comparison (old parent steps 3 and 6, as recorded in blueprint.from.place).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Step 1 uses the arbitrary common-extension existence theorem of Fields 0H7K as a generic field-theory tool; the curve-zero unit contains no field-amalgamation theorem and its route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-88ceec1fc",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-88ceec1fc (reviewer sub-agent of L); spot-checked: I read Stacks 0384 (lemma-geometrically-reduced-upstairs, reverse direction) and 0H7K (common extension field). The item isolates the algebra of 0384 correctly for arbitrary extensions E and L; it uses only flatness and prime lifting. The parent (geometric-reducedness-local-base-change, step 2) uses exactly the item's outputs. The delivery has six steps and no new nodes, and the live item is still unsplit, so no other group has superseded it. Step 1: lem-weil-common-extension-fields gives the common field for arbitrary extensions; it is off-unit, declared in tool_uses, and I accept it as generic field amalgamation. Step 2: I checked the explicit isomorphism (R⊗_kH)⊗_HF ≅ R⊗_kF from the pushout universal property; marking it elementary is justified. Step 3: field-extension-base-change-faithfully-flat applies with K=H, K'=F and D=R_H, carried across that isomorphism. Step 4: faithfully-flat-surjective-spectrum gives Q over q; P is prime, and both maps from R send r to r⊗1, so P contracts to p. Step 5: flat-local-ring-maps gives flatness; the item's stronger form of 'local' (preimage of the maximal ideal is the maximal ideal) is checked directly from primality of P. Step 6: flat-local-hom-faithfully-flat gives faithful flatness. Edge cases (R=0 vacuous; E=k or L=k; transcendental or inseparable extensions; non-domain tensor products; q not maximal) all work. A search of the DAG found no duplicate. One fault, B4: in step 5 the JSON stores '\\notin' with a single backslash, so it decodes as a newline followed by 'otin'. I corrected both occurrences to '\\\\notin' in fixes/dag/nodes/sec-trace-formula/lem-trf-common-field-local-faithful-comparison.json; the file has no other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CommonFieldLocalFaithfulComparison",
+  "declaration": "Algebra.exists_common_field_local_faithful_comparison",
+  "file": "lean/Sheaf/RingTheory/CommonFieldLocalFaithfulComparison.lean",
+  "statement": "theorem exists_common_field_local_faithful_comparison (k : Type u) (E : Type v) (L : Type w) (R : Type t) [Field k] [Field E] [Field L] [CommRing R] [Algebra k E] [Algebra k L] [Algebra k R] (q : PrimeSpectrum (R ⊗[k] L)) : ∃ (F : Type (max v w)) (_ : Field F) (_ : Algebra k F) (iE : E →ₐ[k] F) (iL : L →ₐ[k] F) (Q : PrimeSpectrum (R ⊗[k] F)) (P : PrimeSpectrum (R ⊗[k] E)) (hP : P.asIdeal = Q.asIdeal.comap (Algebra.TensorProduct.map (AlgHom.id k R) iE).toRingHom), Q.asIdeal.comap (Algebra.TensorProduct.map (AlgHom.id k R) iL).toRingHom = q.asIdeal ∧ P.asIdeal.comap (algebraMap R (R ⊗[k] E)) = q.asIdeal.comap (algebraMap R (R ⊗[k] L)) ∧ RingHom.FaithfullyFlat (Algebra.TensorProduct.map (AlgHom.id k R) iL).toRingHom ∧ RingHom.FaithfullyFlat (Algebra.TensorProduct.map (AlgHom.id k R) iE).toRingHom ∧ RingHom.FaithfullyFlat (Localization.localRingHom P.asIdeal Q.asIdeal (Algebra.TensorProduct.map (AlgHom.id k R) iE).toRingHom hP) ∧ (IsLocalRing.maximalIdeal (Localization.AtPrime Q.asIdeal)).comap (Localization.localRingHom P.asIdeal Q.asIdeal (Algebra.TensorProduct.map (AlgHom.id k R) iE).toRingHom hP) = IsLocalRing.maximalIdeal (Localization.AtPrime P.asIdeal)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d30c47a76",
+  "group": "NW",
+  "result": "pass",
+  "note": "Checked clause by clause against node and Stacks 0384/0H7K: arbitrary fields k,E,L and k-algebra R in independent universes; F : Type (max v w) matches Field.exists_common_extension, so it is no restriction; Q over q along the iL tensor map; P with hP in the direction Localization.localRingHom requires; P and q have the same contraction to R; RingHom.FaithfullyFlat for both tensor maps and for the canonical localRingHom; maximal-ideal comap equality (strong 'local'). The 4 stmt_dep records (Algebra, tensor, Localization.AtPrime, Module/RingHom.FaithfullyFlat) are correct. Node diff vs live: only lean; live item split, no competing landing; lean.statement verbatim in file, proof sorry. Docstrings have source, blueprint and 6 steps; no definitions, no extra hypotheses. Edge cases (R=0, E=k, transcendental, non-Noetherian, nonmaximal q) all covered. Report sections present (second reading is a declared self-check). No file changed, nothing compiled."
+ }
+}

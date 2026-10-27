@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-central-isogeny-solvable-normal-lift",
+ "kind": "statement",
+ "title": "Solvable normal subgroups lift through finite central isogenies",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $E$ and $B$ be smooth connected affine $F$-group schemes of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $f:E\\to B$ be a homomorphism such that $F[B]\\to F[E]$ is faithfully flat, meaning that extension of scalars is exact and detects zero modules. Assume its scheme-theoretic kernel $K$ is finite and central: $F[K]$ is finite-dimensional over $F$, and $K$ commutes with $E$ after every commutative $F$-algebra extension. Let $U\\subseteq B$ be a smooth connected solvable normal closed subgroup scheme [def-sc-group-scheme-subgroup]. Solvable means having a finite descending series of closed subgroup schemes, each normal in its predecessor, in which every successive group-scheme quotient is commutative. Form $P=E\\times_B U$ [def-pc-fibre-product] and let $V=(P_{\\mathrm{red}})^\\circ$: $P_{\\mathrm{red}}$ is the closed subscheme obtained by dividing every affine coordinate ring by its ideal of nilpotents, and the superscript denotes the connected component containing the identity, with its open subscheme structure. Then $V$ is a smooth connected solvable normal closed subgroup scheme of $E$, and $f|_V:V\\to U$ is faithfully flat with finite scheme-theoretic kernel $V\\cap K$. The kernel $K$ is not assumed smooth, reduced, or of order prime to the characteristic. The trivial subgroup $U=1$ and either characteristic are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 6.27, printed p.131 (solvable extensions and subgroups); Propositions 1.34 and 1.38 and Corollary 1.39, printed pp.16--18 (identity component and reduction over a perfect field); Proposition 1.90, p.33 (normality in a smooth ambient group); Theorem 5.39, p.108 (faithfully flat image), with the dimension-of-fibres argument of Proposition 1.63, p.25. Agent synthesis of these statements for the finite central inverse image."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-sfb-solvable-group-structure",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "The fibre-product universal property identifies $P(R)$ with $\\{e\\in E(R):f(e)\\in U(R)\\}$ for every commutative $F$-algebra $R$. It is a subgroup, normal in $E(R)$, since $U(R)$ is normal in $B(R)$. The closed-immersion base-change statement makes $P\\to E$ closed. Explicitly, if $F[U]=F[B]/J$, its pullback is $F[P]=F[E]/JF[E]$, so $P$ is affine and of finite type. Thus $P$ is a normal closed affine finite-type group scheme, without any assertion that $P$ is smooth.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.27, p.131, inverse-image construction of a solvable series; inverse-image subgroup construction by functor of points. Closed base change: Stacks Tag 01QR, morphisms-lemma-base-change-closed-immersion; affine fibre product: Tag 01I4, schemes-lemma-fibre-product-affine-schemes."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-locally-algebraic-group-identity-component] to $P$. Its identity component $C=P^\\circ$ is open and closed, and $C_{\\mathrm{red}}$ is a smooth connected finite-type subgroup with the same underlying space as $C$. Reduction has the original underlying space and quotients by the nilradical on opens [def-weil-pbc-scheme-reduction]. Hence the identity-component open of $P_{\\mathrm{red}}$ is exactly the reduction of the identity-component open of $P$: both have underlying open $|C|$ and structure sheaf $\\mathcal O_C/\\mathcal N_C$. Consequently the stated $V=(P_{\\mathrm{red}})^\\circ$ equals $C_{\\mathrm{red}}$. It is a smooth connected closed subgroup of $P$, hence of $E$. Affineness follows because it is closed in the affine $E$. Composition of these closed inclusions is given, on affine opens, by composition of surjective ring maps.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.34 and Corollary 1.35, pp.16--17; Proposition 1.38 and Corollary 1.39, p.18. Stacks Tags 0B7R (groupoids-proposition-connected-component), 047R (groupoids-lemma-reduced-subgroup-scheme-perfect), 047P and 047N (smoothness in positive and zero characteristic)."
+   }
+  },
+  {
+   "text": "For $g\\in E(F)$, conjugation preserves $P$ as a subgroup scheme: after every $F$-algebra extension, normality of $U$ gives $f(gpg^{-1})=f(g)f(p)f(g)^{-1}\\in U$. This automorphism of $P$ fixes the identity and therefore carries its identity-component open $C$ to itself. Its ring maps preserve nilpotents, so it preserves $C_{\\mathrm{red}}=V$ as a closed subgroup scheme, with inverse given by conjugation by $g^{-1}$. Apply [lem-sfb-smooth-ambient-normality-geometric] with $J=E$, $N=V$ and algebraic closure $\\bar F=F$. Its hypothesis is the scheme equality just established, and $E$ is smooth by assumption. Thus $V$ is normal in $E$ on points over every commutative $F$-algebra.",
+   "uses": [
+    "lem-sfb-smooth-ambient-normality-geometric",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.85, p.32, and Proposition 1.90, p.33: normality of a weakly characteristic subgroup of a normal subgroup in a smooth ambient group. Applied directly to preservation of the reduced identity component."
+   }
+  },
+  {
+   "text": "By [lem-sfb-affine-group-homomorphism-image], faithful flatness of $f:E\\to B$ implies $E(F)\\to B(F)$ is surjective, since $B$ is smooth. A lift of $u\\in U(F)$ then belongs to $P(F)$, so $P(F)\\to U(F)$ is surjective. By [lem-sfb-group-neutral-component-translates], $P$ has finitely many components, each $p_aC$ for some $p_a\\in P(F)$. A map from a field kills every nilpotent, so $C(F)=C_{\\mathrm{red}}(F)=V(F)$. It follows that\n$$U(F)=\\bigcup_a f(p_a)f(V(F)).$$\nFactor $h=f|_V:V\\to U$ as $V\\xrightarrow{v}I\\xrightarrow{j}U$ using [lem-sfb-affine-homomorphism-flat-image], where $v$ is faithfully flat and $j$ is a closed immersion. Let $Z_a=f(p_a)j(I)$, a closed translate in $U$. Translation by an $F$-point is an isomorphism, its inverse being translation by the inverse point, by the group laws. The displayed formula gives $U(F)\\subseteq\\bigcup_a Z_a(F)$.",
+   "uses": [
+    "lem-sfb-affine-group-homomorphism-image",
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-affine-homomorphism-flat-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.35 and dimension discussion before Proposition 1.37, pp.17--18 (component translates); Theorem 5.39, p.108 (closed image); Proposition 5.47, p.110 (faithful flatness and rational points)."
+   }
+  },
+  {
+   "text": "The connected group $U$ is irreducible by [lem-sfb-locally-algebraic-group-identity-component], since its identity component is all of $U$. Its coordinate algebra is reduced by [sbc-lem-smooth-geometrically-reduced]. For each closed translate $Z_a$, write $J_a\\subseteq F[U]$ for its ideal. Every element of $\\prod_aJ_a$ vanishes at every $F$-point by step 4. The vanishing principle [lem-wf-affine-nullstellensatz-vanishing] makes this product ideal zero. Hence $|U|=V(\\prod_aJ_a)=\\bigcup_aV(J_a)$. Irreducibility and finiteness imply $V(J_a)=|U|$ for some $a$. Then every element of $J_a$ lies in every prime of the reduced ring $F[U]$ and is zero, so $Z_a=U$ as schemes. Inverting its translation gives $j(I)=U$ as schemes. Thus the closed immersion $j$ is an isomorphism, and $h=jv$ is faithfully flat. This does not use smoothness of $P$ or of its kernel.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.42, p.108, combined with component translates (Corollary 1.35, p.17); reduced-source closed-image argument of Proposition 5.47, p.110. Smoothness implies reducedness: Stacks Tag 056T, varieties-lemma-smooth-geometrically-normal."
+   }
+  },
+  {
+   "text": "Choose a solvable series $U=U_0\\supseteq U_1\\supseteq\\cdots\\supseteq U_r=1$ from the hypothesis, with $U_{i+1}$ normal in $U_i$ and commutative quotient $U_i/U_{i+1}$. Set $D_0=V$ and let $D_{i+1}$ be the derived subgroup of $D_i$. The statement [lem-sfb-smooth-connected-derived-subgroup] applies successively: every $D_i$ is smooth, connected, affine and of finite type, and $D_{i+1}$ is closed and normal in $D_i$. Inductively the homomorphism $f|_{D_i}$ factors through $U_i$. For $i=0$ this is the defining map $h$. For the induction step, form the affine quotient $q_i:U_i\\to U_i/U_{i+1}$ by [lem-sfb-affine-normal-quotient-geometry]. The composite $D_i\\to U_i\\xrightarrow{q_i}U_i/U_{i+1}$ is a homomorphism to a commutative affine group. The derived-subgroup statement makes it trivial on $D_{i+1}$. Since $\\ker q_i=U_{i+1}$ scheme-theoretically, the kernel fibre-product universal property factors $f|_{D_{i+1}}$ through $U_{i+1}$. At $i=r$, $D_r\\to E$ therefore factors through $K=\\ker f$. Centrality of $K$ implies that this subgroup $D_r$ is commutative on every test algebra. Applying the same derived-subgroup statement to $\\mathrm{id}_{D_r}:D_r\\to D_r$ gives $D_{r+1}=1$. This also covers $r=0$.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 6.26 and Proposition 6.27, p.131; Propositions 6.18 and 6.20 and Corollary 6.19, pp.129--130. This writes the central-extension solvability argument as induction on a solvable series, without assuming its terms smooth."
+   }
+  },
+  {
+   "text": "For each $0\\leq i\\leq r$, form the affine quotient $Q_i=D_i/D_{i+1}$ using [lem-sfb-affine-normal-quotient-geometry]. It is commutative: two points of $Q_i$ over a test algebra lift simultaneously after faithfully flat finitely presented coverings to points $x,y$ of $D_i$, since the quotient is locally surjective as an fppf sheaf. Their commutator maps to the identity because the commutator morphism of $D_i$ factors through $D_{i+1}$ by [lem-sfb-smooth-connected-derived-subgroup]. Thus the commutator of the original two points is the identity after a covering, hence already is the identity by the sheaf condition for the represented quotient. Consequently $V=D_0\\supseteq D_1\\supseteq\\cdots\\supseteq D_{r+1}=1$ is a finite descending series of closed subgroups, normal in their predecessors, with commutative group-scheme quotients. This is precisely the solvability required in the statement.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-connected-derived-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.27, p.131, and Proposition 6.30, p.132 (derived series and solvability); Theorem 5.28 and Section 5(j), pp.104--105, 116--118 (quotient as represented fppf sheaf)."
+   }
+  },
+  {
+   "text": "Finally the kernel of $h:V\\to U$ is $V\\times_U\\{1\\}=V\\times_EK=V\\cap K$: each fibre product classifies the points of $V$ mapping to the identity under $f$. These identifications are functorial over every $F$-algebra and hence identify the scheme-theoretic kernels. The inclusion $V\\cap K\\to K$ is a closed immersion by base change of $V\\to E$. On coordinate rings it is a quotient of the finite-dimensional $F$-algebra $F[K]$, so it too is finite-dimensional. Hence the kernel is finite, including when $K$ is nonreduced. Together with steps 2, 3, 5 and 7 this proves every asserted property of $V$ and $f|_V$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.27, p.131, inverse-image argument; scheme-theoretic kernel is the identity fibre (Section 1(e), pp.23--25). Closed base change: Stacks Tag 01QR, morphisms-lemma-base-change-closed-immersion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "lem-sfb-affine-group-homomorphism-image",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-affine-normal-quotient-geometry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Synthesis of Propositions 1.34, 1.38 and 1.90, Corollary 1.35, Theorem 5.39, Proposition 5.47 and Proposition 6.27, as detailed step by step. Surjectivity uses finite component translates and the closed image rather than a dimension formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "solvable.*(isogen|preimage|inverse.image)|isogen.*solvable|reduced.*identity.*component",
+   "results": "{\"t\": \"2026-10-23T21:33:00Z\", \"tool\": \"grep\", \"query\": \"solvable.*(isogen|preimage|inverse.image)|isogen.*solvable|reduced.*identity.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern solvability of abstract groups or Lie algebras, not reduced neutral components of algebraic-group inverse images, their scheme-theoretic normality, or faithful flatness. Both AlgebraicGeometry grep queries and Loogle give no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced neutral component of the inverse image of a smooth connected solvable normal algebraic subgroup along a central isogeny is solvable and surjects onto that subgroup",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"leansearch\", \"query\": \"The reduced neutral component of the inverse image of a smooth connected solvable normal algebraic subgroup along a central isogeny is solvable and surjects onto that subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.Surjective.lieAlgebra_isSolvable\", \"solvable_of_surjective\", \"subgroup_solvable_of_solvable\", \"solvable_of_solvable_injective\", \"LieHom.isSolvable_range\", \"solvable_quotient_of_solvable\", \"IsNilpotent.to_isSolvable\", \"LieSubmodule.comap_normalizer\"], \"digest\": \"19d265f07859e5fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern solvability of abstract groups or Lie algebras, not reduced neutral components of algebraic-group inverse images, their scheme-theoretic normality, or faithful flatness. Both AlgebraicGeometry grep queries and Loogle give no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"solvable\"",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"solvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern solvability of abstract groups or Lie algebras, not reduced neutral components of algebraic-group inverse images, their scheme-theoretic normality, or faithful flatness. Both AlgebraicGeometry grep queries and Loogle give no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite central faithfully flat homomorphism of smooth connected algebraic groups, the reduced identity component of the inverse image of a connected solvable normal subgroup is solvable normal and maps onto that subgroup",
+   "results": "{\"t\": \"2026-10-23T21:33:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite central faithfully flat homomorphism of smooth connected algebraic groups, the reduced identity component of the inverse image of a connected solvable normal subgroup is solvable normal and maps onto that subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_of_ker_le_range\", \"solvable_of_surjective\", \"subgroup_solvable_of_solvable\", \"IsSolvable\", \"Function.Surjective.lieAlgebra_isSolvable\", \"solvable_of_solvable_injective\", \"isNilpotent_of_ker_le_center\", \"LieHom.isSolvable_range\"], \"digest\": \"3b197efa856d8c3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern solvability of abstract groups or Lie algebras, not reduced neutral components of algebraic-group inverse images, their scheme-theoretic normality, or faithful flatness. Both AlgebraicGeometry grep queries and Loogle give no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "central.*(isogen|quotient)|solvable|identityComponent",
+   "results": "{\"t\": \"2026-10-23T21:33:37Z\", \"tool\": \"grep\", \"query\": \"central.*(isogen|quotient)|solvable|identityComponent\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern solvability of abstract groups or Lie algebras, not reduced neutral components of algebraic-group inverse images, their scheme-theoretic normality, or faithful flatness. Both AlgebraicGeometry grep queries and Loogle give no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a smooth connected solvable normal subgroup through a central isogeny of algebraic groups by taking the reduced neutral component of its scheme theoretic preimage",
+   "results": "{\"t\": \"2026-10-23T21:33:43Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a smooth connected solvable normal subgroup through a central isogeny of algebraic groups by taking the reduced neutral component of its scheme theoretic preimage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"upperCentralSeriesStep\", \"solvable_of_ker_le_range\", \"isNilpotent_of_ker_le_center\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"upperCentralSeriesStep_eq_comap_center\", \"IsSolvable\", \"nilpotent_center_quotient_ind\"], \"digest\": \"d0117da21766c607\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern solvability of abstract groups or Lie algebras, not reduced neutral components of algebraic-group inverse images, their scheme-theoretic normality, or faithful flatness. Both AlgebraicGeometry grep queries and Loogle give no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "solvable|isogeny|identityComponent",
+   "results": "{\"t\": \"2026-10-23T22:13:54Z\", \"tool\": \"grep\", \"query\": \"solvable|isogeny|identityComponent\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits, if any, concern abstract groups or Lie algebras; they do not state the scheme-theoretic reduced-identity-component lifting assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central extension of a solvable algebraic group has solvable reduced identity component",
+   "results": "{\"t\": \"2026-10-23T22:13:54Z\", \"tool\": \"leansearch\", \"query\": \"A central extension of a solvable algebraic group has solvable reduced identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNilpotent.to_isSolvable\", \"LieAlgebra.ofAbelianIsSolvable\", \"CommGroup.isSolvable\", \"subgroup_solvable_of_solvable\", \"IsSolvable\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"solvable_quotient_of_solvable\", \"isSolvable_of_subsingleton\"], \"digest\": \"aed32ad2ecf1b491\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits, if any, concern abstract groups or Lie algebras; they do not state the scheme-theoretic reduced-identity-component lifting assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"solvable\"",
+   "results": "{\"t\": \"2026-10-23T22:13:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"solvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits, if any, concern abstract groups or Lie algebras; they do not state the scheme-theoretic reduced-identity-component lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced neutral component of the inverse image of a connected solvable normal subgroup under a faithfully flat central isogeny is solvable normal and surjects onto the subgroup",
+   "results": "{\"t\": \"2026-10-23T22:13:55Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced neutral component of the inverse image of a connected solvable normal subgroup under a faithfully flat central isogeny is solvable normal and surjects onto the subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_of_surjective\", \"IsSolvable\", \"solvable_of_ker_le_range\", \"upperCentralSeriesAux\", \"solvable_of_solvable_injective\", \"Function.Surjective.lieAlgebra_isSolvable\", \"isNilpotent_of_ker_le_center\", \"nilpotencyClass_le_of_ker_le_center\"], \"digest\": \"94b57d1f13a3cb4a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits, if any, concern abstract groups or Lie algebras; they do not state the scheme-theoretic reduced-identity-component lifting assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a surjective morphism of algebraic groups onto a connected group the reduced identity component maps surjectively and the central kernel preserves solvability",
+   "results": "{\"t\": \"2026-10-23T22:15:17Z\", \"tool\": \"leanfinder\", \"query\": \"In a surjective morphism of algebraic groups onto a connected group the reduced identity component maps surjectively and the central kernel preserves solvability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_of_surjective\", \"solvable_of_ker_le_range\", \"Function.Surjective.lieAlgebra_isSolvable\", \"nilpotent_of_surjective\", \"solvable_of_solvable_injective\", \"IsSolvable\", \"nilpotencyClass_le_of_surjective\", \"isNilpotent_of_ker_le_center\"], \"digest\": \"e0bec7e30932fc8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits, if any, concern abstract groups or Lie algebras; they do not state the scheme-theoretic reduced-identity-component lifting assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "solvable.*(isogen|preimage)|reduced.*identity.*component|central.*isogen",
+   "results": "{\"t\": \"2026-10-23T22:16:48Z\", \"tool\": \"grep\", \"query\": \"solvable.*(isogen|preimage)|reduced.*identity.*component|central.*isogen\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits, if any, concern abstract groups or Lie algebras; they do not state the scheme-theoretic reduced-identity-component lifting assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-character-sublattice-quotient",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Exercise 21-4, printed p.461; central-product construction 19.26--19.27, printed pp.404--405; centre as common root kernel, Section 21a; central isogeny root/coroot comparison, Proposition 23.5, pp.485--486. This is the equivalent finite-central-quotient construction starting with a weight-lattice semisimple group and a torus. Supporting quotient argument: lift a smooth connected solvable normal subgroup through the finite central quotient by taking the reduced identity component of its inverse image.",
+   "via": [
+    "lem-sfb-central-character-sublattice-quotient",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-central-isogeny-solvable-normal-lift",
+  "worker": "stage1",
+  "summary": "Q67: statement unchanged. Eight proof steps reuse the existing DAG, so no new nodes or Mathlib leaves. Wrote reduced-component identification, smooth-ambient scheme normality, finite-coset closed-image surjectivity, a derived-series induction through an arbitrary solvable series, commutativity of its quotients by fppf local lifting, and finite scheme-theoretic kernel. No smoothness of the kernel or of the inverse image is used. All citations checked against their statements; no Lean written or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Exercise 21-4, printed p.461; central-product construction 19.26--19.27, printed pp.404--405; centre as common root kernel, Section 21a; central isogeny root/coroot comparison, Proposition 23.5, pp.485--486. This is the equivalent finite-central-quotient construction starting with a weight-lattice semisimple group and a torus. Supporting quotient argument: lift a smooth connected solvable normal subgroup through the finite central quotient by taking the reduced identity component of its inverse image. Read latest sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), and the parent central-character-sublattice-quotient step 6. The inherited from.node is null because the recorded created.item chain is broken upstream; blueprint_refs.py ancestor confirms this. Preserve that metadata, supplying the full place rather than inventing an ancestor. Steps 1--8 implement the parent quotient-reductivity prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme base change for the inverse-image closed subgroup and for the finite kernel; the algebraic-group unit does not replace this geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product coordinate calculation identifies the inverse image as a finite-type affine quotient."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic geometric reducedness of smooth schemes, applied only to the smooth group U in the closed-image argument."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic vanishing principle for finitely generated reduced algebras over an algebraically closed field; used to turn the finite rational-point coset cover into a scheme cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-8ef755b5e",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-8ef755b5e (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full; I made no fixes and no changes. The delivery has no new nodes, the statement and its stmt_deps are unchanged, and the parent central-character-sublattice-quotient step 6 uses exactly this statement. Source: Milne iAG2017 Def 6.26/Prop 6.27 (p.131), Prop 1.90 (p.33), Prop 1.38, Thm 5.39. The statement is a correct synthesis; I tested it on Frobenius on G_m (K=mu_p, U=G_m and U=1), SL2->PGL2 in char 2 (U=1) and the prime-to-p power map. Step by step: S1 fibre-product points and normality, closed base change, F[E]/JF[E]. S2 V=(P_red)^0=(P^0)_red from the identity-component node and the reduction definition (same space, O/N). S3 Int(g) preserves P, hence C and C_red as schemes; smooth-ambient-normality with J=E smooth and kbar=F. S4 faithfully flat => E(F)->B(F) onto (B smooth), so P(F)->U(F) onto; finitely many components p_aC with C(F)=V(F); flat-image factorization V->I->U. S5 U irreducible (U^0=U) and reduced (smooth); the product of the translate ideals is 0 by the vanishing principle, so some translate is all of U, j is an iso and h is faithfully flat. S6 derived-series induction: f|D_i factors through U_i via the quotient node (no smoothness, kernel exact) and the universal property of the derived subgroup; D_r lies in the central K, so D_r is commutative and D_{r+1}=1. S7 the quotients are commutative by fppf local lifting and the sheaf property. S8 kernel V x_E K is closed in the finite K. No duplicate: solvable-normal-image-geometry is the converse direction. The 4 generic tool_uses (closed base change, affine fibre product, smooth=>reduced, Nullstellensatz vanishing) are accepted. Batch-5 flags are generic, not trace-formula or Poincare steps: lem-trf-flat-tensor-preserves-injection is a Mathlib flatness leaf, lem-trf-connected-point-geometrically-connected is Stacks 04KV, def-trf-scheme-cover-descent-datum is a definition. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CentralIsogenySolvableNormalLift",
+  "declaration": "AlgebraicGeometry.centralIsogeny_solvableNormalLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CentralIsogenySolvableNormalLift.lean",
+  "statement": "theorem centralIsogeny_solvableNormalLift {F : Type u} [Field F] [IsAlgClosed F] (E B : Grp (Over (Spec (.of F)))) [IsAffine E.X.left] [LocallyOfFiniteType E.X.hom] [QuasiCompact E.X.hom] [Smooth E.X.hom] [ConnectedSpace E.X.left] [IsAffine B.X.left] [LocallyOfFiniteType B.X.hom] [QuasiCompact B.X.hom] [Smooth B.X.hom] [ConnectedSpace B.X.left] (f : E ⟶ B) (hff : f.hom.hom.left.appTop.hom.FaithfullyFlat) [IsFinite (CategoryTheory.GrpObj.ker f.hom.hom).hom] (hcentral : ∀ (R : Type u) [CommRing R] [Algebra F R] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F R))) ⟶ CategoryTheory.GrpObj.ker f.hom.hom) (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap F R))) ⟶ E.X), (x ≫ CategoryTheory.GrpObj.kerι f.hom.hom) * g = g * (x ≫ CategoryTheory.GrpObj.kerι f.hom.hom)) (U : Grp (Over (Spec (.of F)))) (i : U ⟶ B) [IsClosedSubgroupScheme i.hom.hom] [IsNormalSubgroupScheme i.hom.hom] [Smooth U.X.hom] [ConnectedSpace U.X.left] (hsolv : SolvableGroupStructure.IsSolvable U) : ∃ (P : Grp (Over (Spec (.of F)))) (p : P ⟶ E) (q : P ⟶ U), IsPullback p.hom.hom q.hom.hom f.hom.hom i.hom.hom ∧ ∃ C : P.X.left.Opens, (C : Set P.X.left) = connectedComponent (GrpObj.onePoint P.X) ∧ ∃ (V : Grp (Over (Spec (.of F)))) (v : V ⟶ E) (h : V ⟶ U) (e : V.X.left ≅ C.toScheme.nilradical.subscheme), v.hom.hom.left = e.hom ≫ C.toScheme.nilradical.subschemeι ≫ C.ι ≫ p.hom.hom.left ∧ v ≫ f = h ≫ i ∧ Smooth V.X.hom ∧ ConnectedSpace V.X.left ∧ SolvableGroupStructure.IsSolvable V ∧ IsClosedSubgroupScheme v.hom.hom ∧ IsNormalSubgroupScheme v.hom.hom ∧ h.hom.hom.left.appTop.hom.FaithfullyFlat ∧ IsFinite (CategoryTheory.GrpObj.ker h.hom.hom).hom ∧ ∃ a : CategoryTheory.GrpObj.ker h.hom.hom ⟶ CategoryTheory.GrpObj.ker f.hom.hom, IsPullback (CategoryTheory.GrpObj.kerι h.hom.hom) a v.hom.hom (CategoryTheory.GrpObj.kerι f.hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-335ae3019",
+  "group": "N0",
+  "result": "pass",
+  "note": "Delivery = one sorry-only theorem module + lean record + two added landed stmt_deps (def-sfb-solvable-group-structure, def-weil-pbc-scheme-reduction), both used in the signature; statement verbatim (script check). Clause by clause: alg. closed F; E,B affine/LOFT+QC/smooth/connected; f Grp morphism with appTop FaithfullyFlat; K = GrpObj.ker with IsFinite; centrality over all R:Type u CommRing F-algebras; U closed normal (WeilConjectures GroupScheme.Defs) smooth connected, SolvableGroupStructure.IsSolvable; P via IsPullback (forced group structure); C = identity-component open by carrier; V = C.nilradical.subscheme pinned by iso + inclusion equation ((P°)_red = (P_red)° canonical, proof step 2); h unique via mono i; conclusions smooth/connected/solvable/closed/normal, h FaithfullyFlat, IsFinite ker h, cartesian square ker h = V ×_E K. No stronger hypotheses, no char/smoothness assumption on K; edge cases U=1, μ_p, both chars OK. No duplicate in side-live/Mathlib; all 12 imports exist; docstrings with source and blueprint tag and 8 proof steps; worker report + second reading present. No fixes."
+ }
+}

@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-space-smooth-source-point-locality",
+ "kind": "statement",
+ "title": "Smoothness at a point is invariant under smooth source maps",
+ "statement": "Let $B$ be a scheme [def-pc-scheme] and use algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Smoothness is tested on compatible etale scheme charts using [def-sbc-smooth-morphisms]. An open subspace is a subfunctor whose pullback along every scheme-valued object is an open subscheme. Let $h:X\\to Y$ and $q:Z\\to X$ be morphisms of algebraic spaces over $B$, with $q$ smooth. A point of a space is a field-valued section modulo isomorphism and common field extension; its topology is detected by etale scheme charts. For every $z\\in|Z|$, $h\\circ q$ is smooth at $z$ if and only if $h$ is smooth at $q(z)$. Smooth at a point means smooth on some open neighbourhood of that point. No surjectivity assumption on $q$, and no flatness or local finite presentation assumption on $h$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06F2, lemma-smooth-smooth-local-source, with definition-property-morphisms-local-source. Pointwise form: restrict q to a smooth neighbourhood and its open image, then use smooth-source descent; composition is spaces-morphisms.tex Tag 03ZD (lemma-composition-smooth), and openness of the image is spaces-morphisms.tex Tag 042S (lemma-fppf-open) with Tag 04TA (lemma-smooth-flat)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-smooth-morphisms",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof": [
+  {
+   "text": "Open subspace inclusions are representable etale: every scheme pullback is an open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation](1). They are therefore smooth by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Algebraic spaces may be viewed as discrete algebraic stacks: sheaf descent supplies their stack condition and their etale scheme atlases are smooth. Their maps are representable by algebraic spaces by the same calculus node. The two conventions for a property $P$ among smooth, flat and locally of finite presentation agree for a map $f:G\\to F$ of spaces. $P$ is etale local on source-and-target by [lem-sfb-scheme-etale-source-target-properties], and the chart notion of the statement is the one of [lem-sfb-space-etale-presentation-property-criterion]. If $f$ has $P$ as a representable map, choose etale scheme atlases $V\\to F$ and $U\\to G\\times_FV$. Criterion (1) for $G\\times_FV\\to V$ gives $P(U\\to V)$, and $U\\to G$ is surjective etale by [lem-trf-space-fibre-products-etale-covers] and composition, so criterion (2) gives $P$ for $f$ on charts. Conversely, if $f$ is smooth on charts, every scheme base change $G\\times_FT\\to T$ is smooth by [lem-sfb-space-smooth-surjective-fppf-locality], so $f$ is smooth as a representable map. Suppose $h$ is smooth at $q(z)$, and choose an open subspace $A\\subseteq X$ containing $q(z)$ with $h|_A$ smooth. The open pullback $Z_A=Z\\times_XA$ contains $z$, by [lem-a1-space-open-factor-scheme-tests]. Its projection to $A$ is smooth by base change of $q$. Its composite to $Y$ is smooth by composition, so $hq$ is smooth at $z$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03ZE (lemma-base-change-smooth), 03ZD (lemma-composition-smooth), 04XX (lemma-etale-smooth); morphisms.tex Tag 02GP (lemma-open-immersion-etale); spaces-properties.tex Tag 03IE (lemma-factor-through-open-subspace).; stacks-properties.tex Tag 04XC (lemma-property-spaces-too) and spaces-descent.tex Tag 0429 (lemma-descending-property-smooth) for the agreement of the chart and representable conventions."
+   }
+  },
+  {
+   "text": "Conversely, choose an open subspace $W\\subseteq Z$ containing $z$ on which $hq$ is smooth. The map $q_W:W\\to X$ is smooth by step 1 and composition. Thus it is flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus], on charts by the comparison of step 1. By [lem-sfb-flat-lfp-space-universally-open] its point image is open in $|X|$. The open-subset correspondence in [lem-a1-space-etale-open-image] gives an open subspace $O\\subseteq X$ with $|O|=\\operatorname{im}|q_W|$. By [lem-a1-space-open-factor-scheme-tests], $q_W$ factors uniquely as $r:W\\to O\\hookrightarrow X$, and $W\\times_XO\\to W$ is an isomorphism. Consequently $r$ is the base change of $q_W$ along $O\\hookrightarrow X$, so is smooth. It is surjective on point classes by the choice of $O$. Put $g=h|_O$; then $gr=(hq)|_W$ is smooth.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06F2 (lemma-smooth-smooth-local-source), pointwise reduction; spaces-morphisms.tex Tags 04TA (lemma-smooth-flat), 04AJ (lemma-smooth-locally-finite-presentation), 042S (lemma-fppf-open); spaces-properties.tex Tags 03BZ (lemma-open-subspaces), 03IE (lemma-factor-through-open-subspace)."
+   }
+  },
+  {
+   "text": "We now perform the chart argument for $g$, rather than assuming a smooth-source descent theorem for spaces. Choose a surjective etale scheme atlas $b:V\\to Y$ and a surjective etale scheme atlas $U\\to O\\times_YV$. Their composite $a:U\\to O$ is surjective etale by base change and composition of etale covers [lem-trf-space-fibre-products-etale-covers, lem-sfb-fibred-groupoid-representable-smooth-calculus]. Write $d:U\\to V$ for the other map. Form $E=W\\times_OU$, an algebraic space by the fibre-product node, and choose a surjective etale scheme atlas $T\\to E$. The resulting $p:T\\to U$ is smooth and surjective: $E\\to U$ is the base change of the smooth point-surjection $r$, and the atlas is smooth and surjective. Base change and composition preserve these properties by the fibred-groupoid calculus. Since $p$ is a map of schemes, it is smooth on charts by the comparison of step 1, hence smooth in the scheme sense by the scheme clause of [lem-sfb-space-etale-presentation-property-criterion]. The other composite $c:T\\to W$ is etale, because $E\\to W$ is the etale base change of $a$. From $bd=ga$ and $r\\circ(E\\to W)=a\\circ(E\\to U)$ we get $b\\circ(dp)=g\\circ a\\circ p=(gr)\\circ c$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06ER (lemma-transfer-from-schemes), proof: choose V, U, and a scheme atlas of the pullback of the source cover; spaces-morphisms.tex Tag 03MJ (lemma-local-source-target); descent.tex Tag 04R3 (remark-list-local-source-target), smooth entry."
+   }
+  },
+  {
+   "text": "Scheme smoothness is etale local on source-and-target by [lem-sfb-scheme-etale-source-target-properties]. Apply [lem-sfb-space-etale-presentation-property-criterion] to the smooth map $gr:W\\to Y$ and the presentation diagram $(c:T\\to W,b:V\\to Y,dp:T\\to V)$: it gives smoothness of $dp$. The smooth scheme morphism $p$ is flat and locally of finite presentation as a representable map by [lem-sfb-stack-chartwise-smooth-etale-calculus], hence in the scheme sense by the comparison of step 1 and the scheme clause of the criterion, and is surjective by step 3. Thus [lem-sbc-smooth-flat-surjective-source-descent] applied to $T\\xrightarrow{p}U\\xrightarrow{d}V$ gives smoothness of $d$, with no finite-presentation hypothesis on $d$ in advance. The presentation $(a:U\\to O,b:V\\to Y,d)$ has $a$ surjective etale, so the presentation criterion gives smoothness of $g:O\\to Y$.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06ER (lemma-transfer-from-schemes), the three equivalences, specialized to smoothness as in Tag 06F2; descent.tex Tag 05B5 (lemma-smooth-permanence), smooth case, supplies the scheme source-descent implication."
+   }
+  },
+  {
+   "text": "Since $z\\in|W|$, its image $q(z)$ lies in $|O|$. Step 4 proves that $h$ restricted to this open neighbourhood is smooth, so $h$ is smooth at $q(z)$. Together with step 1 this is the equivalence claimed. If $Z$ is empty there are no points to test; otherwise the argument for each $z$ makes $W$ and $O$ nonempty. The image $O$ may be a proper open of $X$, so no surjectivity of the original $q$ is needed. No flatness or local finite presentation of $h$ was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 06F2 (lemma-smooth-smooth-local-source), pointwise conclusion using the stated definition of smooth at a point."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 06F2 (lemma-smooth-smooth-local-source), 06ER (lemma-transfer-from-schemes), and definition-property-morphisms-local-source. Pointwise reduction uses the open image of a smooth neighbourhood; chartwise descent uses descent.tex Tag 05B5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smoothness at a point descends along a smooth morphism of algebraic spaces",
+   "results": "8 hits; AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.Smooth.of_equiv, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"comp\"",
+   "results": "12 hits; Algebra.FormallySmooth.comp, Algebra.Smooth.comp, Algebra.FormallySmooth.comp_lift, Algebra.FormallySmooth.comp_surjective, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth.iff_comp_surjective, Algebra.FormallySmooth.comp_liftOfSurjective, Algebra.smoothLocus_eq_compl_support_inter",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of a morphism of algebraic spaces at a point is equivalent to smoothness after precomposition with a smooth morphism at any point above it",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "of_comp_of_flat|smoothLocus|IsSmooth",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean. Mathlib source read: Morphisms/Smooth.lean lines 296-345 concern schemes; no algebraic-space or algebraic-stack declaration.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth maps Z to X of algebraic spaces, the inverse image of the open locus where X to Y is smooth is the smooth locus of Z to Y",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.isSmooth_comp, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSmooth|smoothLocus|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T12:13:15Z\", \"tool\": \"grep\", \"query\": \"IsSmooth|smoothLocus|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"71173cb651df568f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of algebraic spaces descends along smooth surjective source maps without a finite presentation hypothesis on the target map",
+   "results": "{\"t\": \"2026-10-23T12:13:16Z\", \"tool\": \"leansearch\", \"query\": \"Smoothness of algebraic spaces descends along smooth surjective source maps without a finite presentation hypothesis on the target map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"RingHom.smooth_def\", \"Algebra.Smooth.finitePresentation\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"c38ae46da365301e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"comp\"",
+   "results": "{\"t\": \"2026-10-23T12:13:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSmooth\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a point of a morphism of algebraic spaces is invariant under precomposition by a smooth morphism",
+   "results": "{\"t\": \"2026-10-23T12:13:17Z\", \"tool\": \"leanfinder\", \"query\": \"Smoothness at a point of a morphism of algebraic spaces is invariant under precomposition by a smooth morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"67d46fbda8bb77a6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Z to X is smooth and Z to Y is smooth then X to Y is smooth near the image of Z",
+   "results": "{\"t\": \"2026-10-23T12:13:18Z\", \"tool\": \"leanfinder\", \"query\": \"If Z to X is smooth and Z to Y is smooth then X to Y is smooth near the image of Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contMDiff_of_contMDiff_inr\", \"ContMDiffAt.comp_contMDiffWithinAt_of_eq\", \"ContMDiffWithinAt.comp₂_of_eq\", \"ContMDiffAt.comp₂_of_eq\", \"ContMDiffWithinAt.comp_of_eq\", \"ContMDiffAt.comp_of_eq\", \"contMDiff_of_contMDiff_inl\", \"contMDiffWithinAt_iff_target\"], \"digest\": \"87aa1fe1c7dda5ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*of_comp|Smooth.*of_comp|smooth.*descent|Smooth.*Descends|of_comp.*smooth",
+   "results": "{\"t\": \"2026-10-23T12:32:34Z\", \"tool\": \"grep\", \"query\": \"smooth.*of_comp|Smooth.*of_comp|smooth.*descent|Smooth.*Descends|of_comp.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"b4941c5b9fb3b276\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of a scheme morphism descends after precomposition with a smooth surjective scheme morphism",
+   "results": "{\"t\": \"2026-10-23T12:32:35Z\", \"tool\": \"leansearch\", \"query\": \"Smoothness of a scheme morphism descends after precomposition with a smooth surjective scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.IsSmooth.mk\", \"RingHom.isStandardSmooth_stableUnderComposition\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\"], \"digest\": \"c080face36bac6bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"of_comp\"",
+   "results": "{\"t\": \"2026-10-23T12:32:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Smooth\\\", \\\"of_comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_comp_surjective\"], \"digest\": \"8f2344de26bfd054\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms Z to X to Y, if Z to X is smooth and surjective and Z to Y is smooth, then X to Y is smooth",
+   "results": "{\"t\": \"2026-10-23T12:32:37Z\", \"tool\": \"leanfinder\", \"query\": \"For scheme morphisms Z to X to Y, if Z to X is smooth and surjective and Z to Y is smooth, then X to Y is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"9d8b26425b39f04a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "of.*[Cc]omp|[Cc]omp.*of|[Cc]ancel",
+   "results": "{\"t\": \"2026-10-23T12:33:37Z\", \"tool\": \"grep\", \"query\": \"of.*[Cc]omp|[Cc]omp.*of|[Cc]ancel\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"108\", \"158\", \"206\", \"214\", \"225\"], \"digest\": \"d04f1b4932633538\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is smooth if it becomes smooth after composition with a smooth surjective cover of its source",
+   "results": "{\"t\": \"2026-10-23T12:33:41Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of schemes is smooth if it becomes smooth after composition with a smooth surjective cover of its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_comp\"], \"digest\": \"7dd161a197a60005\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness, composition, smooth loci, ring lifting criteria or target-base-change descent; none states pointwise smooth-source locality for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-maximal-smooth-open",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the initial maximal smooth open and its flat base change to the coefficient ring. Supporting input: Tag 0DZR proof, smooth-source locality makes the smooth atlas locus invariant under the two projections of its presentation groupoid.",
+   "via": [
+    "lem-sfb-stack-maximal-smooth-open",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-smooth-source-point-locality",
+  "worker": "stage1",
+  "summary": "Q136: statement unchanged. Proved the pointwise assertion by an open smooth neighbourhood, its open image, and the explicit scheme-presentation argument of Stacks 06ER. Reused existing scheme source-descent 05B5 rather than creating a duplicate or using fppf source-locality of smoothness (which is false). Five steps, all under 2000 characters; no new nodes.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), finiteness via its alteration/moduli prerequisites, as recorded in inherited from.place. This item supplies smooth-source locality for invariance of the atlas smooth locus in Stacks 0DZR. The ancestor command returns None; inherited null ancestor and full via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Generic open-subspace factorization and pullback identification; the unit has no separate statement of this point/open calculus."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only the bijection between open subsets and open subspaces is used, not the etale-image conclusion; no corresponding classification is supplied in this unit."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product existence and etale-cover base change, used to construct scheme charts."
+   },
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme source-descent theorem 05B5 used on the scheme chart T to U to V; the unit has no such scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Only the scheme fact that an open immersion is etale is used in the scheme-test argument for open subspaces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-760521cb1",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-760521cb1 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 5 steps, no new nodes, no repair note), every cited statement, and Stacks 06F2/06ER in spaces-descent.tex; all cited tags resolve (05B5, 03MJ, 042S, 03IE, 03BZ, 04TA, 03ZD/03ZE, 02GP, 04XC, 0429). The statement is correct and not a duplicate (rg over the DAG for 06F2 and smooth-local-source). It holds on Z empty, q=id, q an open immersion avoiding the non-smooth part of h, and a non-smooth q (excluded). The proof follows 06ER, with scheme descent 05B5 applied along the single smooth surjective cover r. Two faults repaired. (1) C4/E6: the calculus nodes treat smoothness of a map of spaces as a representable map, while the item and criterion 03MJ use the chart notion, and no cited statement says the two agree. Step 1 now proves the comparison: representable to chart via atlases plus criterion (1),(2); chart-smooth to representable via the base-change clause of the existing same-unit node lem-sfb-space-smooth-surjective-fppf-locality (on the base). Steps 2-4 now refer to it. (2) E4: step 3's 'dp=(gr)c' is ill-typed; corrected to b∘(dp)=(gr)∘c. proof_deps reset to the union of uses. Tool uses accepted as generic. Batch-5: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are foundational, lem-trf-smooth-composition is scheme smooth composition, and the other listed nodes reach sec-trace-formula only through these. None is part of the trace-formula or Poincaré-duality proofs.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSmoothSourcePointLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smooth_at_iff_of_smooth_source",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSmoothSourcePointLocality.lean",
+  "statement": "theorem smooth_at_iff_of_smooth_source {B : Scheme.{u}} {X Y Z : AlgebraicSpace B} (h : X ⟶ Y) (q : Z ⟶ X) (hq : MapIsLocally (@Smooth) q) (z : Point Z.obj.obj) : (∃ W : OpenSubspace Z, z ∈ pointImage W.val.ι ∧ ∀ (U V : Over B) (a : yoneda.obj U ⟶ W.val.toFunctor) (b : yoneda.obj V ⟶ Y.obj.obj) (k : U ⟶ V), IsEtale a → IsEtale b → a ≫ (W.val.ι ≫ (q ≫ h).hom.hom) = yoneda.map k ≫ b → Smooth k.left) ↔ (∃ A : OpenSubspace X, mapPoint q.hom.hom z ∈ pointImage A.val.ι ∧ ∀ (U V : Over B) (a : yoneda.obj U ⟶ A.val.toFunctor) (b : yoneda.obj V ⟶ Y.obj.obj) (k : U ⟶ V), IsEtale a → IsEtale b → a ≫ (A.val.ι ≫ h.hom.hom) = yoneda.map k ≫ b → Smooth k.left)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Returned delivery repaired: inline all compatible etale chart quantifiers instead of using the theorem-owned EtalePresentation structure; explicitly cite the Point definition owner. The presentation criterion remains a proof dependency only. No mathematical hypothesis or conclusion changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b8355e64e",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 6c272e3d4939; both H2 faults repaired: theorem-owned EtalePresentation replaced by the inline MapIsLocally-style chart quantifier (the theorem node is removed from stmt_deps and kept in proof_deps), and the Point owner def-a1-algebraic-space-point-classes is cited. Only lean and stmt_deps differ from the live node. lean.statement matches the file verbatim. Owners checked: MapIsLocally→def-sfb-space-morphism-properties, OpenSubspace→def-a1-space-open-subspace, pointImage→def-a1-space-point-topology, mapPoint→def-sfb-proper-curve-moduli, IsEtale→def-trf-algebraic-space, Smooth→def-sbc-smooth-morphisms. Every clause matches the node (open-neighbourhood smoothness, ↔ orientation, no surjectivity or flat/lfp on h, single universe u). Edge cases checked: empty Z, q=id, non-surjective open q, h smooth only near q(z). Docstrings carry source and blueprint and the proof steps; the only proof is sorry; no definitions added. No file changed, so no compile."
+ }
+}

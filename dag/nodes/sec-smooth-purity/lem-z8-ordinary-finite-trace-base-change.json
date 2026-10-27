@@ -1,0 +1,114 @@
+{
+ "id": "lem-z8-ordinary-finite-trace-base-change",
+ "kind": "statement",
+ "title": "Ordinary Finite Trace Base Change",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem ordinaryFiniteP1Exchange_eq_derived (A : Type (u + 1)) [CommRing A]\n    {S' S : Scheme.{u}} (f : S' ⟶ S) (M : DerivedCategoryModule A (ProjectiveLine S)) :\n    ordinaryFiniteP1Exchange A f M =\n      (derivedBaseChangeMap (ModuleCat.{u + 1} A)\n        (ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2)) f).toCommSq).app M\n\ntheorem ordinaryFiniteP1TraceCounit_baseChange\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {S' S : Scheme.{u}} [IsNoetherian S'] [IsNoetherian S] (f : S' ⟶ S)\n    (hS : IsUnit (N : Γ(S, ⊤))) (_hS' : IsUnit (N : Γ(S', ⊤)))\n    (b : ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅\n      (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧))\n    (b' : ((ordinaryFiniteLine A N hA S')⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S') ≅\n      (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).obj\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧))\n    (ht : (ordinaryFinitePullback A f).map (b.inv ≫ biprod.snd) ≫\n        (ordinaryFiniteUnitPullback A f).hom =\n      ordinaryFiniteP1Exchange A f\n          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n        (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n          (ordinaryFiniteShiftedLinePullback A N hA t\n            (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n            (ordinaryFiniteP1_isUnit N S hS)).hom ≫ b'.inv ≫ biprod.snd)\n    (K : DerivedCategoryModule A S) :\n    (ordinaryFinitePullback A f).map\n        ((ordinaryFiniteP1TraceCounit A N hA S b).app K) =\n      ordinaryFiniteP1Exchange A f ((ordinaryFiniteP1Right A N hA S).obj K) ≫\n        (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n          (ordinaryFiniteP1RightBaseChange A N hA t f\n            (ordinaryFiniteP1_isUnit N S hS) K).hom ≫\n        (ordinaryFiniteP1TraceCounit A N hA S' b').app\n          ((ordinaryFinitePullback A f).obj K)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-asd-ordinary-finite-p1-kummer-maps"
+ ],
+ "proof": [
+  {
+   "text": "Identify the ordinary projective-line exchange and pullback comparison with their canonical derived presentations. Specialize the proved scalar trace-counit square to the projective-line projections and their normalized shifted-line coefficient. The constant-unit comparison supplies the unit square. Transport the resulting equality back to the prescribed projective-line counit and exchange.",
+   "uses": [
+    "def-asd-ordinary-finite-trace-counit",
+    "lem-asd-ordinary-finite-p1-kummer-maps",
+    "lem-z8-etale-exact-exchange-comparison",
+    "lem-z8-ordinary-finite-trace-counit-comparisons",
+    "lem-z8-ordinary-finite-trace-scalar-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-asd-ordinary-finite-p1-kummer-maps",
+  "lem-z8-etale-exact-exchange-comparison",
+  "lem-z8-ordinary-finite-trace-counit-comparisons",
+  "lem-z8-ordinary-finite-trace-scalar-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteTraceBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteTraceBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1TraceCounit_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1Exchange_eq_derived",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1TraceCounit_baseChange"
+  ],
+  "statement": "theorem ordinaryFiniteP1TraceCounit_baseChange\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]\n    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {S' S : Scheme.{u}} [IsNoetherian S'] [IsNoetherian S] (f : S' ⟶ S)\n    (hS : IsUnit (N : Γ(S, ⊤))) (_hS' : IsUnit (N : Γ(S', ⊤)))\n    (b : ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅\n      (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧))\n    (b' : ((ordinaryFiniteLine A N hA S')⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S') ≅\n      (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).obj\n        ((ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧))\n    (ht : (ordinaryFinitePullback A f).map (b.inv ≫ biprod.snd) ≫\n        (ordinaryFiniteUnitPullback A f).hom =\n      ordinaryFiniteP1Exchange A f\n          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n        (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n          (ordinaryFiniteShiftedLinePullback A N hA t\n            (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n            (ordinaryFiniteP1_isUnit N S hS)).hom ≫ b'.inv ≫ biprod.snd)\n    (K : DerivedCategoryModule A S) :\n    (ordinaryFinitePullback A f).map\n        ((ordinaryFiniteP1TraceCounit A N hA S b).app K) =\n      ordinaryFiniteP1Exchange A f ((ordinaryFiniteP1Right A N hA S).obj K) ≫\n        (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n          (ordinaryFiniteP1RightBaseChange A N hA t f\n            (ordinaryFiniteP1_isUnit N S hS) K).hom ≫\n        (ordinaryFiniteP1TraceCounit A N hA S' b').app\n          ((ordinaryFinitePullback A f).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

@@ -1,0 +1,51 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-inverse-limit-cech-primitive.json` (item, split), `citations.json`, this report, and the actual-query log `searches.jsonl`. No new nodes, no Mathlib leaves, no attachments. No Lean was written or compiled. All writes are confined to the assigned sandbox.
+
+Attachments: none. Searched the live project `lean/WeilConjectures/` for the exact blueprint tag, inverse-limit/Cech combinations and compatible primitives. The hits concern open-cover Cech complexes, directed colimits, or Kummer roots, not this statement. A project declaration with every clause was not found.
+
+WANTED: none. The supplied Bhatt–Scholze PDF is present.
+
+The item statement and statement dependencies are unchanged. Its previous proof was empty. I read Bhatt–Scholze, *The pro-etale topology for schemes*, Lemma 4.3.9(2),(4), printed page 33. The paper states a vanishing/limit result for topological G-modules; it does not verbatim state this pointwise Cech formulation. Accordingly the proof is explicitly agent-written, implementing the inherited compatible-primitive induction and inverse-limit reconstruction route. There is no appeal to an SGA source.
+
+The chapter record and unit record were read, together with the current main-20261015 unit and its direct-images proof. This is a low-level analytic input in the inherited finite-E open-direct-image branch. No geometric unit step or coefficient category has been replaced. `blueprint_refs.py ancestor` returns None for this detached ancestry, as it did for the parent. The inherited `blueprint.from.node=null`, place, and via list are retained. Whole imported-blueprint searches for Cech and inverse limit found no exact blueprint statement. Whole-DAG searches for primitives with profinite or inverse-limit coefficients found the existing finite-coefficient lifting node and the parent field-coefficient assertions; the finite-coefficient node is reused, and citing the field parent would be circular.
+
+The only substantive input is `lem-sfb-finite-coefficient-cech-primitive-lift`. Its entire statement was opened and checked: for finite discrete B→A, it lifts a prescribed A-primitive of the B-cocycle's reduction to an actual B-primitive with exactly that reduction. This is strictly the finite successor input, not an inverse-limit primitive. It is a sibling in the same recorded unit, so no off-unit tool use is needed. Its unsplit status is not a claim that its proof is finished: it remains the one existing queued dependency.
+
+Mathlib searches were run using the required msearch command, with actual results in searches.jsonl, and appended to the item's inherited searches without removing those records. The searches include LeanSearch, Loogle, LeanFinder with a second phrasing, and two greps. I read the hits. ProfiniteGrp/Limits.lean:43–92 and 120–147 concern a group's canonical presentation by its own finite quotients, not lifting Cech primitives. The remote search index uses the older name toLimit_fun_continuous, whereas the checked local file names it toLimitFun_continuous. Profinite/CofilteredLimit.lean:156,191 factor locally constant functions through stages, while Nobeling/Successor.lean:175–188,240 concerns the Boolean-coordinate Nobeling construction. None is an exact match or one-line specialization of this item; generic support-vanishing results for cochain complexes also do not provide the needed hypothesis here. Therefore the item is split, not a Mathlib leaf.
+
+Nothing remains unfinished in this one-level split; the existing finite-coefficient successor lemma remains unsplit downstream. All four proof steps are below 2000 characters. No new statement-only node is warranted: the remaining steps are finite signed-sum algebra, ordinary recursive choices, a basis-level continuity calculation and equality of sequences, written explicitly.
+
+## New nodes
+
+None.
+
+## Not duplicates
+
+No new nodes or duplicate pairs. The existing finite-coefficient primitive-lift node is cited rather than duplicated. The inverse-limit construction is proved inside the item rather than moved to a new node restating it.
+
+## Review by Q150
+
+I read delivery-errors B–E in full and checked the actual item and the cited node against them. There are no new nodes to audit under B1–B7, and no unsearched search records were invented. The item retains its original independent universes and its actual subspace-of-product inverse limit; neither a field, a common finite trivialization, nor a continuous section of q is assumed.
+
+Step 1 is elementary: restricted product projections are continuous, and an additive map preserves the finite signed sums defining d. This gives every reduced cocycle f_m and the equality p_m f_(m+1)=f_m. It uses no auxiliary theorem about exact limits.
+
+Step 2 uses precisely the statement of lem-sfb-finite-coefficient-cech-primitive-lift. I checked A=A_m and B=A_(m+1) are finite discrete, the prescribed p_m is a surjective homomorphism, n is positive, and f_(m+1) is a continuous cocycle by step 1. For each partial primitive w its differential equals f_m, and step 1 supplies f_m=p_m f_(m+1), the essential prescribed-reduction hypothesis. The quoted conclusion is copied verbatim in citations.json. The successor is selected on pairs (m,w) and recursion starts at the given u_1; thus no independently chosen sequence is silently claimed to be compatible. This step does not cite the proof of the finite-coefficient node or infer more than its statement.
+
+Step 3 is an explicit elementary topological check, with no hidden comparison lemma: compatibility puts (u_m(x)) inside the exact set L of the statement, and inverse images of finite-coordinate cylinders intersected with L are finite intersections of open inverse images under u_m. These sets form its defining subspace/product basis. This proves continuity of the actual assembled function; no replacement by locally constant maps is made.
+
+Step 4 evaluates every signed sum in each coordinate, giving rho_m(d u)=d u_m=f_m=rho_m f. Equality of sequences then gives d u=f, and the first coordinate is the originally prescribed primitive. The reverse reduction implication is the same calculation. No surjectivity of a projection L→A_m, no derived inverse-limit vanishing, and no compactness theorem are used in this reconstruction.
+
+I checked n=1 explicitly: the constructed primitive is a function on P_1=T; the induction always uses positive-degree cocycles and does not request degree-zero vanishing. For the empty surjection all tuple domains used here have positive length and are empty, giving unique maps. For all-zero groups the same construction gives zero. For a constant tower with identity transitions, the successor reduction condition forces each primitive to remain the prescribed one. For a nonzero constant cocycle f=0 and a possibly nonzero closed u_1, the construction preserves u_1 instead of replacing it by zero. These checks expose no missing hypothesis or statement dispute. No correction to the original statement was necessary.
+
+## Repair of return L (2026-10-23)
+
+The return identifies the delivered head as `6dd124e5777` and asks for a rebase onto the current DAG, rereading changed citations and adjusting the split. I continued its retained sandbox node, report, verbatim citation and actual search log rather than recreating them. The first required dry run exited successfully (`fd27c3fca84`, not pushed), establishing that the delivery tool can now package this split against the current server baseline.
+
+Comparison with the current repository finds the live item still `unsplit`, with empty proof and proof dependencies. Its statement, statement dependencies, source, chapter/unit and blueprint ancestry agree with the retained delivered copy. I rebuilt the sandbox item from that current node and overlaid only its split-owned fields. I retained all thirteen recorded searches (the seven inherited entries and the six logged Q150 searches), their results and verdicts. Their questions and the item statement have not changed, so no searches were repeated.
+
+I reread the complete current statements of `def-weil-size-convention`, `def-sfb-profinite-cech-tuples` and `lem-sfb-finite-coefficient-cech-primitive-lift`, rather than trusting the former review. The convention supplies the same universe bounds. The tuple definition supplies exactly the finite-product subspace topology and deletion maps for every positive tuple length used here; its additional empty-tuple case is unused. The finite-coefficient node is currently unsplit and unmerged, with no attached Lean declaration. Its statement still assumes exactly a continuous profinite surjection, positive n, finite discrete abelian groups and a surjective coefficient homomorphism; it still concludes both the lift equation and the differential equation. The retained verbatim quote in citations.json is contained in that current statement. No current dependency statement requires a replacement citation or a changed hypothesis.
+
+The proof adjustment is in step 2: it now explicitly uses the same q, n, tuple spaces and differentials as the finite successor node, and proves the finite-family induction invariant. Appending the successor leaves every earlier primitive, including the prescribed first entry, intact. This makes the base and induction step reviewable without an implicit compatibility inference. Steps 1, 3 and 4 retain the full coordinate and topology arguments. I reread Bhatt–Scholze Lemma 4.3.9(2),(4), printed page 33, and the main-20261015 direct-images proof paragraph (3); the source attribution remains explicitly agent-written, since neither source states this pointwise lemma verbatim. The unit route and all original arguments are preserved.
+
+Under B–E, there are still no new nodes, leaves or duplicate pairs. Step 2 cites a statement, not its proof; its hypotheses match as detailed above. All other steps remain elementary with the displayed calculations. No step exceeds 2000 characters. The n=1, empty-space, zero-group and identity-tower checks in the signed review still apply; the strengthened invariant also explicitly rules out changing a nonzero prescribed closed first primitive when f=0. This repair makes no claim that the downstream finite-coefficient lemma has been proved.

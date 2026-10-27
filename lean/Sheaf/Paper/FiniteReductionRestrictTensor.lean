@@ -30,6 +30,8 @@ def extend_restrict_tensor (f : A →+* B) :
     extend J f ⋙ Sheaf.restrictScalars J f ≅
       tensorRight ((constantSheaf J (ModuleCat.{u + 1} A)).obj
         ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B))) := by
+  have : (J.W (A := ModuleCat.{u + 1} A)).IsMonoidal :=
+    GrothendieckTopology.W.monoidal
   letI : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1} f) :=
     Sheaf.preservesSheafification_of_adjunction J
       (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} f)

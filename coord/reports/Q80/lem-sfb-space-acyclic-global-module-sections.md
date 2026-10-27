@@ -1,0 +1,50 @@
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-space-acyclic-global-module-sections.json`: existing statement, now split into six steps; unchanged statement and statement dependencies; no exact Mathlib match.
+- No new nodes and no new Mathlib leaves.
+- `citations.json`: 17 verbatim quotations, one for every step/node citation.
+- `searches.jsonl`: actual Q80 search-command log; the node retains its inherited searches and appends the six searches run for this split. `prepare.py` is sandbox-only preparation material, not part of the delivery.
+
+## Attachments
+
+None. Searched `lean/WeilConjectures/` for the exact blueprint tag, 07UZ, vanishing-compute variants, cohomologically affine terminology, and the global-module-sections notion. There is no exact project declaration to attach. No Lean was written or compiled.
+
+## Wanted literature
+
+None. All proof inputs were available locally.
+
+## Findings
+
+The statement is correct as imported and is unchanged. Read Stacks `spaces-cohomology.tex`, Situation 07UY (`situation-vanishing`) and Lemma 07UZ (`lemma-vanishing-compute`), including its proof. The item asks only for the global-module-sections assertion, with the actual canonical map and naturality; it does not ask for the additional direct-image assertion of 07UZ. The proof remains the source's free-presentation argument.
+
+The source calls the sequence between two free modules and M a “short exact sequence.” In that paragraph it is a free presentation, with no injectivity assertion on the first arrow. Step 1 writes its construction explicitly and does not introduce that extra assertion. The substantive details made explicit are that the tensor functor preserves cokernels and sums, that the abelian-sheaf cohomology convention is respected, that two short exact sequences are needed to deduce right exactness on the presentation, and that the resulting isomorphism is the specified unit.
+
+The latest blueprint files read were `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md` and `sk-thm-sf-ctf-stability-direct-images.proof.md`. The item is a remote supporting lemma in the inherited alteration/07V0 chain; this delivery does not replace that route. `tools/blueprint_refs.py ancestor` reports a null ancestor for this existing node, as already recorded and accepted in its parent's review, so the existing null ancestry and precise inherited place are retained. Blueprint searches for global sections, acyclic, colimits, 07UZ, free presentation, and the tensor-module wording found no blueprint node stating this item. Whole-DAG searches by the Stacks tag and the relevant operations found reusable infrastructure, rather than a need for new lemmas.
+
+Mathlib was searched using the required search command with LeanFinder twice, Loogle, LeanSearch, and source grep twice. All services returned results. Read `Mathlib/AlgebraicGeometry/Modules/Tilde.lean` lines 337–384 and `Mathlib/Algebra/Category/ModuleCat/Sheaf.lean` lines 154–194; these provide the affine tilde adjunction and a representation of sections by the unit sheaf. Also read `Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean` lines 30–115: `bijective_pushforwardSections` compares sections with sections of their direct image, not a module with sections of a pulled-back module. The scheme qcqs basic-open results in the first semantic search likewise do not prove the algebraic-space/H1-vanishing assertion. None is an exact match or a one-line specialization proving the item.
+
+## Unfinished work
+
+No mathematical gap identified in the split. The existing cited infrastructure nodes retain their own independent proof obligations; no proof of one was silently treated as its statement. Delivery validation is recorded below after the required dry run.
+
+## Not duplicates
+
+No new nodes. In particular the other 07UZ occurrences are not used as replacement lemmas: `lem-sfb-space-serre-affineness` asserts affineness, `lem-sfb-space-acyclic-affinization-geometry` asserts separatedness and universal injectivity of the canonical map, and `lem-sfb-space-h1-vanishing-affine-base-change` asserts affine base-change properties and depends on this item. Citing those to prove this item would risk reversing its source route or a cycle. The existing cohomology-colimit, quasi-coherent closure, affine tilde, and chart-unit nodes give the needed smaller facts.
+
+## Review by Q80
+
+I checked B–E of delivery-errors.md against the statement, each cited node's statement, and the source text. There are no new-node form or same-tag-pair obligations. All six steps are below 2000 characters, all uses occur in proof_deps, and every citation has a verified verbatim statement quotation. No SGA source is used.
+
+Step 1 is elementary: the free module on the elements of M surjects by evaluation; the free module on the elements of its kernel maps onto exactly that kernel. This establishes the presentation even for infinitely generated M and does not require projectivity of that kernel. It uses no unstated free-resolution theorem.
+
+For step 2 I read the full statements of `lem-weil-pbc-affine-tilde-gamma-adjunction`, `lem-trf-scheme-zariski-etale-quasi-coherent-equivalence`, `lem-sfb-space-qcoh-kernels-colimits`, `def-trf-space-etale-module-functors`, `lem-weil-pbc-left-adjoint-preserves-colimits`, `lem-trf-space-chart-adjunction-tensor-realization`, and `lem-weil-pbc-spec-module-tilde-sections`. The affine adjunction explicitly includes ambient colimit preservation, the comparison is an actual equivalence, and the quasi-coherent inclusion explicitly preserves ambient colimits. The equivalence's mapping property transfers the first colimit to quasi-coherent etale modules before the inclusion is applied; it is not assumed that an arbitrary equivalence between full subcategories preserves unrelated ambient colimits. The specified p-pullback is a left adjoint, so the general preservation theorem applies. The chart tensor realization identifies the rank-one pullback by multiplication, with inverse b maps to b tensor 1, and commutes with module maps. Quasi-coherence follows from the closure node applied to sums of the structure sheaf and their cokernel, not from a definition node incorrectly cited as a pullback theorem. I checked Stacks 01I7 (`schemes.tex`, `lemma-compare-constructions`), 01ID (`lemma-colimit-quasi-coherent`), 03M1 (`spaces-properties.tex`, `lemma-properties-quasi-coherent`), and 03D7 (`sites-modules.tex`, `lemma-adjoint-pullback-pushforward-modules`) for these ingredients.
+
+For step 3 the statements of `lem-weil-pbc-module-sheaves-colimits-forgetful`, `lem-sfb-space-cohomology-filtered-colimit`, `def-weil-pbc-sites-and-cohomology`, and the chart realization supply exactly forgetful preservation of the filtered colimit, its cohomology comparison in degree zero, additivity, and the unit's formula on basis vectors. I checked Stacks 073E (`spaces-cohomology.tex`, `lemma-colimits`) and 03DB (`sites-modules.tex`, `lemma-limits-colimits`). The indexing category of finite subsets is small and filtered, including when the basis is empty. Finite sums are also finite products in module categories, so additivity computes their sections. The point-space quasi-compactness and absolute-diagonal quasi-compactness of the item are precisely those in the cited cohomology-colimit statement, with base Spec Z. This avoids a hidden chart/point-space change of hypotheses. The colimit map is the actual sum of the injections, so the basis computation proves that the actual u on each free module is invertible.
+
+For step 4 I read the forgetful node, the cohomology definition, and `lem-weil-pbc-derived-functor-long-exact`. The first gives exactness on underlying abelian sheaves; the second supplies enough injectives, left exactness, and the degree-zero comparison; the third gives the required connecting segment. Checked 03DA (`sites-modules.tex`, `lemma-abelian`) and 015B (`derived.tex`, `lemma-higher-derived-functors`). H1 is applied to the quasi-coherent kernel Q, never to an unspecified module sheaf. Surjectivity of the section map follows because its cokernel injects into the zero H1 group. No comparison between module-derived and additive-derived cohomology is assumed.
+
+For step 5 the same quasi-coherent kernels-colimits node explicitly gives both the image B and kernel C. Both resulting short exact sequences therefore satisfy step 4's hypothesis. The first makes sections of T(F1) surject onto sections of B; the second identifies sections of B with the kernel and makes sections of T(F0) surject onto sections of T(M). This is the missing argument if one only says global sections is right exact. The chart-unit node explicitly commutes with module maps, so the presentation diagram commutes. The elementary quotient argument identifies the images under the two free isomorphisms and hence their cokernels. Uniqueness after the surjection F0 to M identifies the induced cokernel map with u_M itself. No five-lemma or unproved comparison of derived objects is hidden here.
+
+Step 6 is the elementary tensor formula for every map v: 1 tensor m goes to 1 tensor v(m); the cited chart realization explicitly guarantees its compatibility with module maps. Thus the original global-section unit, with the original A-action, is natural; conjugating the equality by inverses proves inverse naturality. I checked the empty-space/zero-ring case (a unital zero-ring module is zero), the zero module, an infinite basis, and a non-flat quotient A/I. The proof preserves cokernels, not kernels, under p-pullback, so it never assumes flatness. No finite generation or Noetherian argument occurs.
+
+Off-unit inputs are generic categorical and ringed-site tools, recorded in `split_report.tool_uses`; same-unit nodes provide the actual algebraic-space filtered-colimit and quasi-coherent closure assertions. None replaces an assigned unit step. I corrected the initial citation excerpts so each quotation reflects what that step actually uses (in particular colimit preservation in step 3, not merely exactness of the same forgetful functor).

@@ -1,0 +1,116 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemProjectionFormulaCoherence",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula maps commute with changes of compactification and with compatible triangles of compactifications on derived semilinear coefficient systems",
+   "results": "Eight hits about homology, projective resolutions and profinite projections; no compact-support or semilinear-system projection result.",
+   "date": "2026-10-26",
+   "verdict": "No matching geometric projection transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates, a generic mate-pasting identity.",
+   "date": "2026-10-26",
+   "verdict": "Useful categorical tool; does not state the geometric compact-support equation."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*evaluation|evaluation.*projection",
+   "results": "One hit, Mathlib/Topology/LocallyConstant/Basic.lean:278, locally constant evaluation.",
+   "date": "2026-10-26",
+   "verdict": "No matching strict-system compactification projection theorem."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "projection",
+   "results": "418 blueprint nodes match; includes general projection definitions and coherence statements, but none states either concrete-word specialization in the actual Operations realization.",
+   "date": "2026-10-26",
+   "verdict": "No exact blueprint duplicate for these concrete-word steps. Nearest blueprint ancestor: prop-pur-adic-reconstruction-trace-coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "id": "lem-pur-system-projection-triangle-compatibility",
+ "kind": "statement",
+ "title": "System projection composition in a compatible compactification triangle",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$ and its algebraic closure $k$ [def-weil-finite-field-fiber]. Let $\\ell$ be prime and $E$ a finite extension of $\\mathbf Q_\\ell$. Fix simultaneous system operations $o$ [def-sf-integral-system-operations] and a realization $z$ over this field datum [def-sf-integral-system-realization-data]. Write $\\mathscr S_W$ for the derived category of strict semilinear systems of $\\mathcal O_E/\\varpi_E^{n+1}$-module sheaves on the pro-etale site of $W$. Use precisely support, change, projection and triangleWord as constructed in [def-pur-system-projection-formula-maps]. Assume $\\ell\\ne p$. Let $X,Y,Z$ be separated finite-type $k$-schemes, and $f:X\\to Y$, $g:Y\\to Z$ separated finite-type $k$-morphisms. Let $T$ be a compatible compactification triangle: compactifications $T.cf,T.cg,T.cfg$ of $f,g,gf$, respectively, with the cartesian proper/open square and equations identifying the composite open and proper maps [def-pur-compatible-compactification-triangle]. For arbitrary $M\\in\\mathscr S_X$, $N\\in\\mathscr S_Z$, the word $\\operatorname{projection}_{T.cg}(\\operatorname{support}_{T.cf}M,N)$, then $\\operatorname{support}_{T.cg}(\\operatorname{projection}_{T.cf}(M,g^*N))$, then $\\operatorname{triangleWord}_T(M\\otimes f^*g^*N)$, then $\\operatorname{support}_{T.cfg}(1_M\\otimes(gf)^*N\\leftarrow1_M\\otimes f^*g^*N)$ using the inverse specified pullback compositor, equals $\\operatorname{triangleWord}_T(M)\\otimes1_N$ followed by $\\operatorname{projection}_{T.cfg}(M,N)$. The equality holds in $\\mathscr S_Z$ before evaluation. No graph-refinement change, isomorphism assertion, evaluation assertion or total-limit assertion is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, first paragraph, four compact-support composition identifications; sites-cohomology.tex Tag 0B56, counit projection."
+ },
+ "stmt_deps": [
+  "def-pur-system-projection-formula-maps",
+  "def-weil-finite-field-fiber",
+  "def-sf-integral-system-realization-data",
+  "def-weil-compactifications-refinements",
+  "def-sf-integral-system-operations",
+  "def-pur-compatible-compactification-triangle"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the three compactifications and eliminate their factorization equations and the triangle equations i_q and p_g. Bundle the six schemes as finite-type quasi-compact spaces over k, using q followed by the structure map of Y, s followed by the structure map of Z, and p followed by s for the three ambient structure maps. Properness supplies their finite-type and quasi-compact properties. The cartesian square supplies quasi-compactness of b, and quasi-compactness of g supplies that of i. Apply the simultaneous-system TriangleEquations clause of lem-sf-triangle-projection-compositor-contraction to the six bundled morphisms. Cancel the inverse mate with the proper adjunction equivalence to recover the specified intrinsic gamma. Naturality of the proper compositor moves the open compositor across it and identifies alpha with triangleWord. Postcompose the equation with the equality transport from the composite compactification factorization back to f followed by g. Functoriality of tensor and compact support cancels the two opposite equality transports on the left and incorporates the remaining transport into the compactification projection on the right. This gives the unchanged displayed equation for arbitrary M and N before evaluation.",
+   "uses": [
+    "lem-sf-triangle-projection-compositor-contraction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-triangle-projection-compositor-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J and sites-cohomology.tex Tag 0B56; specialization of the existing triangle projection contraction, with naturality and explicit equality transports."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "compatible-triangle projection identity in the strict-system composition calculation before inverse limit",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemProjectionTriangleCompatibility",
+  "file": "lean/Sheaf/Paper/SystemProjectionTriangleCompatibility.lean",
+  "declaration": "WeilConjectures.SystemProjectionFormula.projection_triangle",
+  "statement": "theorem projection_triangle (T : Compactification.Triangle f g)\n    (M : System l E X) (N : System l E Z) :\n    projection l E o z.compositors z.openComparisons T.cg ((support l E o T.cf).obj M) N ≫\n      (support l E o T.cg).map\n        (projection l E o z.compositors z.openComparisons T.cf M ((pull l E g).obj N)) ≫\n      (triangleWord l E o z.compositors z.openComparisons z.canonicalBridge\n        z.properOpen T).app\n          ((calculus l E X).systemClosed.tensor.obj\n            (M, (pull l E f).obj ((pull l E g).obj N))) ≫\n      (support l E o T.cfg).map ((calculus l E X).systemClosed.tensor.map\n        (Prod.mkHom (𝟙 M) ((z.compositors.pullComp f g).inv.app N))) =\n    (calculus l E Z).systemClosed.tensor.map\n      (Prod.mkHom ((triangleWord l E o z.compositors z.openComparisons z.canonicalBridge\n        z.properOpen T).app M) (𝟙 N)) ≫\n      projection l E o z.compositors z.openComparisons T.cfg M N",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1d96e",
+  "group": "U6",
+  "result": "fix",
+  "landing": "20261025T213040-L-278775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T065203-L-2738386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-tensor-power-pullback-comparisons",
+ "kind": "definition",
+ "title": "Tensor powers of module isomorphisms, with the canonical pullback power comparisons",
+ "status": "split",
+ "statement": "For a scheme $Z$ and sheaves of modules $A,B$ [def-weil-sheaf-of-modules-category], use the sheaf tensor product [def-pur-sheaf-tensor-product] and recursively define $A^{\\otimes0}=\\mathcal O_Z$ and $A^{\\otimes(d+1)}=A\\otimes A^{\\otimes d}$. For an isomorphism $t:A\\simeq B$, define $t^{\\otimes d}:A^{\\otimes d}\\simeq B^{\\otimes d}$ for every $d\\geq0$ by $t^{\\otimes0}=\\mathrm{id}_{\\mathcal O_Z}$ and $t^{\\otimes(d+1)}=t\\otimes t^{\\otimes d}$. These powers are used together with the recursive pullback power comparisons $p_j(L,d):j^*(L^{\\otimes d})\\simeq(j^*L)^{\\otimes d}$ of [def-sc-tensor-pullback-power-comparison] for module pullback [def-pc-module-pullback] along an arbitrary scheme morphism $j$; this node adds only the powers of an isomorphism. Neither invertibility, a closed immersion, nor a square-zero ideal is required.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-sc-tensor-pullback-power-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, lemma-tensor-product-pullback; recursion on tensor powers with its canonical unit comparison (Tag 0096 adjunction comparison)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf module tensor powers isomorphism pullback tensor power canonical comparison",
+   "results": "8 hits. TensorPower.cast; TensorPower.cast_refl; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso.congr_simp; TensorPower.cast.congr_simp; SheafOfModules.pullbackIso; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match; reuse the existing project definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf module tensor powers isomorphism pullback tensor power canonical comparison",
+   "results": "8 hits. SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match; reuse the existing project definition"
+  },
+  {
+   "tool": "grep",
+   "query": "MarkedNodalDualizingDegreesData|markedNodalLine|markedNodalComponentGenus|markedNodalBranches|RelativeSectionAlgebra|relProjIsoOfIso|boundaryTensorPowIso|boundaryPullbackPowIso",
+   "results": "0 hits. ",
+   "date": "2026-10-22",
+   "verdict": "no exact Mathlib match; reuse the existing project definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-log-canonical-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical pullback and tensor-power comparisons needed to define pullback of homogeneous log-line sections, including degree zero.",
+   "via": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.boundaryTensorPowIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.boundaryTensorPowIso",
+     "module": "WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons",
+     "lines": [
+      54,
+      59
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundaryTensorPowIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.boundaryTensorPowIso"
+  ],
+  "statement": "def boundaryTensorPowIso {Z : Scheme.{u}} {A B : Z.Modules} (t : A ≅ B) :\n    ∀ d : ℕ, A.tensorPow d ≅ B.tensorPow d",
+  "branch": "slopmaster2",
+  "by": "Q06",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership required by the independent return on c76dcf08274c. Binds existing real definitions in the unchanged published module, not its theorem. Reviewer fix (Q06 ff692ae4): boundaryPullbackComparison, boundaryPullbackTensorIso and boundaryPullbackPowIso are owned by def-sc-tensor-pullback-power-comparison (Q32, landed 04:40 after this delivery's base); this node is narrowed to the unowned boundaryTensorPowIso and cites that node, so the item's use of boundaryPullbackPowIso is owned through it. Re-applied at 8b112654: the ff692ae4 landing refused this fix only because def-sc-tensor-pullback-power-comparison was not yet on that delivery's base; it is on the 04:42 base of this head."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b1126544",
+  "group": "Q06",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b1126544",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Head 8b112654 is byte-identical to ff692ae4 (item .lean sha b008353f, item record ac1e15a0, four new node records); only a report section is new, and it misreads the landing refusal. The ff692 FIX was refused only because def-sc-tensor-pullback-power-comparison (Q32, merged 04:40 UTC) was not on that base (04:35); this head's base (blueprint-index 04:42) has it. As delivered, the head repeats the H4/H12 overlap: def-sfb-tensor-power-pullback-comparisons binds boundaryPullbackComparison/TensorIso/PowIso, which def-sc already owns. Re-applied the ff692 record fixes in fixes/: F1 narrow that node to boundaryTensorPowIso and cite def-sc; F2 relative-section-algebra node cites def-sc and def-trf-space-line-module-proj-input (trivializedPower); F3 marked-nodal node cites def-sc-normalization, def-trf-effective-cartier-center and def-a1-relative-differentials-pullback-map (body uses checked in the owner modules); F4 relProjIsoOfIso lean.statement begins at def. Each fix has exactly the NEW_NODE_KEYS, cites equal stmt_deps, and every dep exists on the base. Mathematics re-read and still holds (locally Noetherian S, projective flat lfp MultipointedCurve with Fin n split marking incl. n=0, smooth-locus sections, nodal and reduced pure-1 geometric fibres, normalized omega with smooth-locus IsIso and base change, 2g-2+r, ampleness over affine opens, canonical relProj iso, affine section-ring form, naturality); helpers real, only sorry, docstrings and 14-step plan present. No Lean changed, no compile run."
+ }
+}

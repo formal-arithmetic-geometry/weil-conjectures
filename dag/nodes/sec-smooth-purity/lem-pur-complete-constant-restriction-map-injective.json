@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-complete-constant-restriction-map-injective",
+ "kind": "statement",
+ "title": "Constant restriction detects maps into complete coefficient objects",
+ "statement": "Let l be a prime, E a finite extension of Q_l, and W any scheme, with coefficient field and scheme in the same universe [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site]. Let B_W be the completed integral coefficient sheaf and A_W the constant integral coefficient sheaf, and let A_W -> B_W be the canonical completion map [def-weil-completed-integral-coefficients]. Let U be exact derived restriction along this map, constructed by mapDerivedCategory from SheafOfModules.restrictScalars. Use the canonical standard derived category for completed-module sheaves and fix a derived-category instance for constant-module sheaves and the additive, finite-limit-preserving and finite-colimit-preserving structures for ordinary restriction (these hold for the canonical restriction). For any objects M,N in the unbounded derived category of B_W-module sheaves [def-weil-abstract-derived-category], if N is derived complete in the augmentation-normalized sense IsSfDerivedComplete [def-weil-derived-complete], then the map Hom(M,N) -> Hom(UM,UN) induced by U is injective. No geometric finiteness or constructibility hypothesis is imposed, and M need not be complete.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, lemma-restriction-derived-complete-equivalence, extended-Cech construction of the quasi-inverse and its comparison with the unit of restriction/coinduction; application to auxiliary Step 9 of lem-pur-compact-support-strict-scalar-composition."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "Transport the detailed completed coefficients to the native completed ring through integralDetailedTransport, preserving completeness. Compare the native constant scalar map with integralConstantToCompletionOfUniverses by its finite quotient projections, using the normalized coefficient and quotient isomorphisms. Exact restriction along the coefficient isomorphism is an equivalence, and its composite with native constant restriction is naturally isomorphic to the given restriction. This works for the supplied derived-category instance on constant modules.",
+   "uses": [
+    "def-sfb-integral-completed-coefficient-transport",
+    "lem-weil-pbc-integral-coefficient-completeness-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the small-site module equivalences for native constant and completed coefficients. Their scalar square commutes by the augmentation-normalized algebra isomorphism. Derive this square. The completed module equivalence agrees with the Cech coefficient equivalence. Transport the intrinsic completion unit through the Koszul constant comparison; its invertibility for the complete target identifies its image as a complete object in the small-site constant-completion category.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-coefficient-equivalence",
+    "lem-weil-pbc-completed-koszul-constant-transport",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write U for constant restriction and C_B,C_A for the completed and constant completion reflectors. The restriction of the complete target N is complete, by extension of the coefficient kernel ideal. The universal property of C_B factors arbitrary f,g:M->N uniquely through the completion unit eta_B(M), giving f-prime,g-prime:C_B(M)->N. The unit-preserving natural isomorphism U C_B = C_A U and the universal property of C_A imply U(f-prime)=U(g-prime) whenever U(f)=U(g). Restriction is faithful between complete objects by the constant-completion equivalence, hence f-prime=g-prime and f=g. Transport injectivity back through the two derived equivalences and the scalar square. The argument imposes no completeness on M and also covers zero objects and empty sites.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-completed-coefficient-transport",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "lem-weil-pbc-completed-constant-coefficient-equivalence",
+  "lem-weil-pbc-completed-koszul-constant-transport",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "W9 implementation of Tag 099I using the completion reflector universal property and restriction on complete objects, with normalized coefficient transports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Faithful",
+   "results": "{\"t\": \"2026-10-25T12:31:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Faithful.id\", \"CategoryTheory.Functor.Faithful\", \"CategoryTheory.Functor.FullyFaithful.faithful\", \"CategoryTheory.Functor.instFaithfulOfIsThin\", \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"CategoryTheory.Functor.Faithful.of_comp\", \"CategoryTheory.Functor.Faithful.of_iso\", \"CategoryTheory.Functor.Faithful.comp\"], \"digest\": \"98bae0d77c941160\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching derived sheaf statement: ordinary completion injectivity and abstract faithful-functor lemmas do not prove injectivity of this particular derived restriction on complete targets."
+  },
+  {
+   "tool": "grep",
+   "query": "complete.*[Rr]estrict|[Rr]estrict.*complete",
+   "results": "{\"t\": \"2026-10-25T12:31:28Z\", \"tool\": \"grep\", \"query\": \"complete.*[Rr]estrict|[Rr]estrict.*complete\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"Mathlib/Order/ConditionallyCompleteLattice/Basic.lean\", \"Mathlib/Algebra/Module/Submodule/RestrictScalars.lean\", \"Mathlib/Analysis/Normed/Operator/Compact/Basic.lean\", \"Mathlib/Analysis/Normed/Operator/Compact/Basic.lean\", \"Mathlib/Analysis/Normed/Operator/Compact/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/MeasureTheory/VectorMeasure/SetIntegral.lean\"], \"digest\": \"0a45e248bba3ca5b\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching derived sheaf statement: ordinary completion injectivity and abstract faithful-functor lemmas do not prove injectivity of this particular derived restriction on complete targets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived restriction of scalars is injective on maps into a derived complete target for a flat completion ring map",
+   "results": "{\"t\": \"2026-10-25T12:38:44Z\", \"tool\": \"leanfinder\", \"query\": \"derived restriction of scalars is injective on maps into a derived complete target for a flat completion ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.map_injective\", \"AdicCompletion.of_injective\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"AdicCompletion.of_inj\", \"AdicCompletion.map_ext''\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"7bb8e31dbe635a4c\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching derived sheaf statement: ordinary completion injectivity and abstract faithful-functor lemmas do not prove injectivity of this particular derived restriction on complete targets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat map of sheaves of rings which is an isomorphism modulo an ideal, derived restriction of scalars is injective on morphisms into derived complete complexes",
+   "results": "{\"t\": \"2026-10-25T12:59:25Z\", \"tool\": \"leansearch\", \"query\": \"For a flat map of sheaves of rings which is an isomorphism modulo an ideal, derived restriction of scalars is injective on morphisms into derived complete complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.restrictScalars_injective\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.instFaithfulRestrictScalars\", \"ModuleCat.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"PresheafOfModules.instFaithfulRestrictScalars\"], \"digest\": \"ea1e3cdd63417aed\"}",
+   "date": "2026-10-25",
+   "verdict": "No matching derived-complete statement; ordinary restriction and its faithfulness do not imply faithfulness after derived localization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarComposition",
+  "date": "2026-10-25",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2, coefficient-extension independence; auxiliary completed-linear realization uniqueness in returned comparison Step 11 / strict-scalar-composition Step 9.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-composition",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportCompleteRestrictionFaithful",
+  "file": "lean/Sheaf/Paper/CompactSupportCompleteRestrictionFaithful.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarConstantRestriction_complete_map_injective",
+  "statement": "theorem scalarConstantRestriction_complete_map_injective\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})\n    [HasDerivedCategory (SheafOfModules.{u + 1} (integralConstantRingOfUniverses l E W))]\n    [(SheafOfModules.restrictScalars.{u + 1}\n      (integralConstantToCompletionOfUniverses l E W)).Additive]\n    [PreservesFiniteLimits (SheafOfModules.restrictScalars.{u + 1}\n      (integralConstantToCompletionOfUniverses l E W))]\n    [PreservesFiniteColimits (SheafOfModules.restrictScalars.{u + 1}\n      (integralConstantToCompletionOfUniverses l E W))]\n    {M N : DerivedCategory (scalarReductionSource l E W)}\n    (hN : IsSfDerivedComplete l E W N) :\n    Function.Injective (fun a : M ⟶ N ↦\n      (SheafOfModules.restrictScalars.{u + 1}\n        (integralConstantToCompletionOfUniverses l E W)).mapDerivedCategory.map a)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T143029-L-919011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T181258-L-4137725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

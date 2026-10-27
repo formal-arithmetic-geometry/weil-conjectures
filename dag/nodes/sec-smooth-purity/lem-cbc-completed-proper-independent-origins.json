@@ -1,0 +1,298 @@
+{
+ "id": "lem-cbc-completed-proper-independent-origins",
+ "kind": "statement",
+ "title": "Completed proper exchange with independent finite origins and ambient naturality",
+ "statement": "Let $(A,I)$ be an adic datum [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$ and $A_T=\\lim_n(P_n)_T$. Let $p:V\\to Y$ be proper and $g:Y'\\to Y$ arbitrary, and form $V'=V\\times_Y Y'$ with maps $p',\\bar g$ [def-weil-pbc-cartesian-square, def-weil-proper-morphism]. Work in $D(\\operatorname{Mod}(A_T))$ and its strict quotient towers. Write $\\mathcal R_T$ for strict reduction, $\\mathscr L_u,\\mathscr P_u$ for derived tower pullback and direct image, and $L_T=R\\lim$ [def-weil-pbc-completed-pullback, prop-weil-pbc-direct-image-limits, prop-weil-pbc-rlim-functoriality]. On the whole ambient derived category, put $P_u=L_{\\mathrm{source}(u)}\\mathscr L_u\\mathcal R_{\\mathrm{target}(u)}$; on complete objects this is completed pullback. Use the canonical diagram-site projection $\\Pi_p:\\mathcal R_YRp_*\\to\\mathscr P_p\\mathcal R_V$ and strict exchange $v_\\square$ fixed by the counit-tensor projection maps and ambient mate in [def-cbc-completed-exchange-map], and the direct-image/limit comparison $c_{p'}:Rp'_*L_{V'}\\cong L_{Y'}\\mathscr P_{p'}$.\nThe specified three-factor expression\n$$\\gamma_H=c_{p'}^{-1}\\circ L_{Y'}(v_{\\square,H})\\circ L_{Y'}(\\mathscr L_g\\Pi_{p,H}):P_gRp_*H\\longrightarrow Rp'_*P_{\\bar g}H$$\nis a natural transformation on every $H\\in D(\\operatorname{Mod}(A_V))$, with all endpoint identifications the indicated canonical ones. Thus for every $a:H\\to H'$,\n$$Rp'_*P_{\\bar g}(a)\\,\\gamma_H=\\gamma_{H'}\\,P_gRp_*(a).$$\nIf $H$ is intrinsically derived $I$-complete [def-weil-pbc-intrinsic-completion] and each $H_n$ has an independently specified witness $\\nu_V^*L_n\\simeq H_n$, $L_n\\in D^+(V_{\\mathrm{et}},P_n)$ [def-weil-pbc-etale-origin-witness], then this same $\\gamma_H$ is an isomorphism and equals the specified completed proper exchange [def-weil-pbc-completed-base-change-map]. Neither compatibility between the witnesses nor a common lower bound is required. Naturality of $\\gamma$ imposes no completeness or origin condition on either endpoint.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C9, theorem-proper-base-change, proof, and Tag 099N, lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 07A7, remark-base-change. Completed-ring strict normalization and ambient naturality are the explicit refinement extracted here."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-completed-exchange-map",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-completed-base-change-map",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-rlim-functoriality",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-intrinsic-to-tower-complete"
+ ],
+ "proof": [
+  {
+   "text": "Use the ambient towerProjection_isIso instance and towerProjection_properties from [prop-weil-pbc-direct-image-limits]. Their components form a natural isomorphism pi: push f followed by strict reduction is naturally isomorphic to strict reduction followed by towerPush f. Whisker pi by towerPull g. This is exactly the first strict factor towerH in [def-weil-pbc-completed-base-change-map]. No completeness or origin hypothesis occurs.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-pbc-completed-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change, proof, and Tag 099N, lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 07A7, remark-base-change. Completed-ring strict normalization and ambient naturality are the explicit refinement extracted here."
+   }
+  },
+  {
+   "text": "The natural transformation exchangeStrictNatTrans from [lem-weil-pbc-strict-tower-exchange-mate-normalization] has components towerV'. Whisker the preceding projection transformation and this transformation by the functor Rlim of [prop-weil-pbc-rlim-functoriality], then compose with the inverse natural directImageRlimIso of [prop-weil-pbc-direct-image-limits], whiskered by the pulled strict reduction tower. The resulting component is definitionally completedExchange. Symmetry of its naturality equation proves the first conjunct for arbitrary H, H' and a.",
+   "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "prop-weil-pbc-rlim-functoriality",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-pbc-completed-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change, proof, and Tag 099N, lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 07A7, remark-base-change. Completed-ring strict normalization and ambient naturality are the explicit refinement extracted here."
+   }
+  },
+  {
+   "text": "For intrinsically complete H apply [lem-weil-pbc-intrinsic-to-tower-complete]. For each n separately, take the four corner comparison isomorphisms and the fourth evaluation equation from [lem-weil-pbc-strict-tower-exchange-mate-normalization]. This equation says ev_n(towerV') followed by alpha_3 equals alpha_1 followed by restriction of the v' isomorphism of [def-weil-pbc-four-arrows]. Its right side is invertible, so cancellation of alpha_3 makes ev_n(towerV') invertible. Each witness W n is used separately; no compatibility or common bound is introduced.",
+   "uses": [
+    "lem-weil-pbc-intrinsic-to-tower-complete",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "def-weil-pbc-four-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change, proof, and Tag 099N, lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 07A7, remark-base-change. Completed-ring strict normalization and ambient naturality are the explicit refinement extracted here."
+   }
+  },
+  {
+   "text": "Apply DerivedCategory.isIso_iff from [lem-weil-pbc-unbounded-derived-iso-cohomology] to towerV'. For each integer i and each n, evaluation commutes with homology by mapDerivedCategoryHomologyFunctorIso. The isomorphism established in the preceding step therefore implies that the nth component of H^i(towerV') is invertible. By [lem-weil-tower-category-levelwise-abelian] this is a natural transformation of towers; NatIso.isIso_of_isIso_app makes H^i(towerV') invertible. The derived criterion proves towerV' invertible.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change, proof, and Tag 099N, lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 07A7, remark-base-change. Completed-ring strict normalization and ambient naturality are the explicit refinement extracted here."
+   }
+  },
+  {
+   "text": "Unfold completedExchange as specified in [def-weil-pbc-completed-base-change-map]. Its first and last factors are functorial images or components of isomorphisms, and its middle factor is Rlim of the strict isomorphism just proved. Functors preserve isomorphisms, so the composite is invertible. The equality with completedBaseChangeMap is definitional: this map is completedExchange with the displayed hypotheses retained as unused arguments.",
+   "uses": [
+    "def-weil-pbc-completed-base-change-map",
+    "prop-weil-pbc-rlim-functoriality",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C9, theorem-proper-base-change, proof, and Tag 099N, lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 07A7, remark-base-change. Completed-ring strict normalization and ambient naturality are the explicit refinement extracted here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-completed-base-change-map",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-intrinsic-to-tower-complete",
+  "def-weil-pbc-four-arrows",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C9, theorem-proper-base-change, proof, and Tag 099N, lemma-pushforward-Noetherian-case; sites-cohomology.tex Tag 07A7, remark-base-change. Completed-ring strict normalization and ambient naturality are the explicit refinement extracted here.; J6 Lean implementation composes the existing ambient natural transformations and uses normalized finite evaluations to detect a strict tower isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical completed proper base change exchange defined by derived inverse limit of strict tower mates is natural in every complex without completeness assumptions",
+   "results": "LightCondMod.hom_naturality_apply; AdicCompletion.ofTensorProduct_naturality; LightCondSet.hom_naturality_apply; LightCondensed.ihomPoints_symm_comp; localCohomology.diagramComp; IsAdicComplete.StrictMono.of_comp_lift; LightProfinite.proj_comp_transitionMap; LightProfinite.proj_comp_transitionMapLE",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the derived limit composite of quotient tower projection a base change mate and inverse direct image derived limit comparison for arbitrary adic sheaf complexes",
+   "results": "localCohomology.diagramComp; CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac_assoc; CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac; CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux_fac; CategoryTheory.Limits.ι_colimitLimitIso_limit_π; CategoryTheory.GrothendieckTopology.diagramCompIso; CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Cc]omplete|[Tt]owerComplete",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed proper base change requires only independent etale origins at each quotient, not compatible witnesses",
+   "results": "Algebra.Etale.baseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; RingHom.IsStableUnderBaseChange; KaehlerDifferential.isBaseChange_of_formallyEtale; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; RingHom.QuasiFinite.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"IsProper\"",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change on a derived adic quotient tower follows from finite etale base change and evaluation detecting isomorphisms, while the completed exchange is natural on all complexes",
+   "results": "AdicCompletion.factor_evalₐ_eq_eval; AdicCompletion.transitionMap_comp_eval; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.eval_comp_of; AdicCompletion.factor_eval_eq_evalₐ; AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.mk_smul_top_ofAlgEquiv_symm; AdicCompletion.map_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed proper base change for intrinsically derived complete completed coefficient sheaves with independent bounded below etale origin witnesses at each finite quotient, no compatibility between witnesses",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete; RingHom.IsStandardSmooth.exists_etale_mvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for derived complete proetale sheaves from independent bounded below etale origins at finite quotients",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; Algebra.Etale.baseChange; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; KaehlerDifferential.isBaseChange_of_formallyEtale; AlgebraicGeometry.Scheme.etalePretopology; Algebra.QuasiFiniteAt.baseChange; Condensed.lanSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: none of these declarations states the normalized completed pro-etale proper exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed proper base change exchange on derived adic sheaf complexes is natural without completeness assumptions and is invertible for independent finite etale origin witnesses",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; localCohomology.diagramComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AdicCompletion.ofTensorProduct_naturality; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-22",
+   "verdict": "no match: none of these declarations states the normalized completed pro-etale proper exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strict quotient tower proper base change morphism is an isomorphism when every evaluation has its own bounded below etale origin and the derived inverse limit composite is natural on all input complexes",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; RingHom.Etale.respectsIso; Algebra.Etale.comp; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: none of these declarations states the normalized completed pro-etale proper exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-cbc-complete-proetale",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof: 'the completed proper base change [thm-weil-pbc-complete-proetale] applied to the proper p (the hypotheses hold ... its reductions j_!K_n carry the witnesses j_!L_n)' and 'natural by the corresponding properties of the two factors'.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-completed-proper-independent-origins",
+  "worker": "stage1",
+  "summary": "Q80: six-step proof using only existing nodes. Establish ambient projection and exchange naturality, evaluate the actual strict exchange using the finite mate rectangle, apply finite proper base change separately at each quotient, and identify all three specified limit factors. No new node, changed statement, compatible-witness hypothesis, or uniform lower bound.",
+  "blueprint": "thm-cbc-complete-proetale proof, first factor: completed proper base change applied to p; last sentence: naturality by the two factors. This item supplies the proper factor with independent finite origins and ambient naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic Compatible inverse image of profinite coefficient sheaves used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "why": "Generic Derived tower evaluation with its unit and counit normalization used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lemma-weil-pbc-perfect-projection-formula",
+    "why": "Generic Perfect projection formula for reductions used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic Direct image, derived limits, and completeness used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic Functoriality of the sequential derived inverse limit used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Generic Koszul and quotient reconstruction used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lem-weil-pbc-derived-finite-evaluation-normalization",
+    "why": "Generic Universal-counit normalized derived finite evaluation used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic Derived adjunctions under compatible changes of ring sheaves used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lem-weil-pbc-intrinsic-finite-exchange-rectangle",
+    "why": "Generic Finite exchange rectangle for intrinsic coefficient reduction used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "thm-weil-pbc-finite-level-proetale",
+    "why": "Generic Finite-level pro-etale proper base change used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   },
+   {
+    "node": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "why": "Generic Strict tower exchange agrees with the canonical mate used for the proper factor of the compact-support unit; this unit has no replacement for the indicated coefficient, evaluation, finite exchange, completeness, or limit interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-682e79bb0",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-682e79bb0 (reviewer sub-agent of L); spot-checked: I read the item and the full statements of all 19 dependencies, the parent thm-cbc-complete-proetale, and Stacks proetale.tex 09C9 (l.6187) and 099N (l.4336); I checked the tags in tags/tags. Stacks chooses each L_n separately with no compatibility between witnesses, so the item's 'independent witnesses' hypothesis is Stacks' hypothesis (2) and the six steps follow Stacks' route. Statement: the factors of gamma_H type-check for every ambient H. On complete H, P_g is Lg^*_comp, and def-weil-pbc-completed-base-change-map asks only for one witness per n, so no hypothesis is weakened. Step 1: Pi is invertible via the coefficient inverse image, tower-evaluation counit normalization and the perfect projection formula, then levelwise cohomology and the unbounded criterion. Step 2: the conjugation formula agrees with def-cbc-completed-exchange-map, and naturality cancels correctly. Step 3: composing the three naturality squares is genuinely elementary. Step 4: I checked directions (ev_n t = chi^{-1}); ev_n(v_H) = h'_n v_n h_n^{-1} = Ex^{P_n} by the intrinsic finite rectangle. Step 5: thm-weil-pbc-finite-level-proetale applies per n (P_n finite, H_n in D^+ via the witness), so v_H and then gamma are invertible. Step 6: strict-tower-exchange-mate-normalization (per-n witnesses, no compatibility) gives v'=H'R(e)H^{-1}, so the three ordered factors equal those of Ex^comp. Edge cases checked: H=0, non-complete H, lower bounds tending to -infinity, g=id. No new nodes, no SGA, proof_deps match the step uses, and no existing node duplicates the item (thm-weil-pbc-complete-proetale needs compatible witnesses; completed-exchange-coherence covers only complete inputs). I accept the 13 generic sk-thm-properbasechange tool_uses. Advisory: the prop-weil-pbc-koszul-reconstruction citation in Step 4 is not needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedProperIndependentOrigins",
+  "declaration": "AlgebraicGeometry.Scheme.completedProperIndependentOrigins",
+  "file": "lean/Sheaf/Paper/CompletedProperIndependentOrigins.lean",
+  "statement": "theorem completedProperIndependentOrigins {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) [IsProper f] : (∀ (H H' : d.derived X) (a : H ⟶ H'), d.completedExchange sq H ≫ (d.push f').map ((d.completedPull g').map a) = (d.completedPull g).map ((d.push f).map a) ≫ d.completedExchange sq H') ∧ (∀ (H : d.derived X) (hH : PbcIsIntrinsicallyComplete X d H) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj H)), IsIso (d.completedExchange sq H) ∧ d.completedExchange sq H = d.completedBaseChangeMap sq H (pbcIntrinsicComplete_towerComplete d X H hH) W)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-167bc84c0",
+  "group": "Q23",
+  "result": "pass",
+  "note": "The item module is byte-identical to the earlier Q23 deliveries. The def-weil-pbc-completed-pullback record is byte-identical to live, which fixes the H13 return, and the second reading is now clause by clause, which fixes the H11 return. Clauses checked: completedExchange is the specified three-factor composite; naturality holds for all H, H' and a with no premise; PbcIsIntrinsicallyComplete is the published existential Koszul predicate; FiniteEtaleOriginWitness gives one D+ witness per n with no compatibility and no common bound; IsIso carries the content; the equality with completedBaseChangeMap is rfl by the dependency's design. Theorem stmt_dep lem-weil-pbc-intrinsic-to-tower-complete: PASS, because its proof term is required to supply the TowerComplete argument of completedBaseChangeMap and its module defines nothing the statement uses. Universes t+1/t; docstrings carry the source place and all 6 proof steps; only sorry. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261023T041442-L-1577112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

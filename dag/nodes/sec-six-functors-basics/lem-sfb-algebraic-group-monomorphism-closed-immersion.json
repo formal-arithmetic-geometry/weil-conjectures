@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+ "kind": "statement",
+ "title": "Injective homomorphisms of finite-type group schemes are closed immersions",
+ "statement": "Let $k$ be a field [def-weil-field], let $A,B$ be separated finite-type $k$-group schemes [def-sc-group-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $u:A\\to B$ be a $k$-group-scheme homomorphism. Suppose that $u(R):A(R)\\to B(R)$ is injective for every commutative $k$-algebra $R$, where $A(R)=\\operatorname{Mor}_k(\\operatorname{Spec}R,A)$ and similarly for $B$. Then $u$ is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.31(a) and Theorem 5.34, printed pp.106--107; use the first proof of Theorem 5.34, through the homogeneous-space quotient of Theorem 5.28, not the alternative sketch."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The injectivity assumption also holds on points over every $k$-scheme $T$: restrict two maps $T\\to A$ to an affine open cover, apply the assumption on each open, and use equality of morphisms locally on their source. Consequently the kernel has exactly the identity point on every test scheme. By the universal property of the kernel fibre product, its projection to $\\operatorname{Spec}k$ and its identity section are inverse: test the other composite on the kernel itself, whose inclusion in $A$ must equal the identity-valued map. Thus the scheme-theoretic kernel is trivial.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.31(a),(b) and the first proof of Theorem 5.34, printed pp.106–107."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-trivial-kernel-homogeneous-quotient] to $H=A$, $G=B$ and $i=u$, using step 1. Obtain $X$, its $B$-action, the point $o$ and the orbit morphism $q:B\\to X$. The coset equality with $a=e_B$ gives, for every $k$-scheme $T$,\n$$q_T(b)=o_T\\quad\\Longleftrightarrow\\quad b\\in u_T(A(T)).$$\nIn particular $q\\circ u=o\\circ\\pi_A$. The quotient theorem assumes trivial kernel, not that $u$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-trivial-kernel-homogeneous-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.31(a),(b) and the first proof of Theorem 5.34, printed pp.106–107."
+   }
+  },
+  {
+   "text": "The square with arrows $u:A\\to B$, $\\pi_A:A\\to\\operatorname{Spec}k$, $q:B\\to X$ and $o:\\operatorname{Spec}k\\to X$ is cartesian. Indeed a compatible pair of test maps amounts to $b:T\\to B$ satisfying $q_T(b)=o_T$. Step 2 supplies $a:T\\to A$ with $u_T(a)=b$, and step 1 makes $a$ unique. This is exactly the universal property of the fibre product, including uniqueness; hence $A$ is that fibre product with projection $u$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.31(a),(b) and the first proof of Theorem 5.34, printed pp.106–107."
+   }
+  },
+  {
+   "text": "The point morphism $o:\\operatorname{Spec}k\\to X$ is a closed immersion directly by the affine criterion. For each affine open $V=\\operatorname{Spec}C\\subseteq X$, its inverse image is either empty or all of $\\operatorname{Spec}k$, since the latter has one point. In the nonempty case the induced $k$-algebra map $C\\to k$ is surjective (it is the identity on constants), so the restriction is $\\operatorname{Spec}(C/\\ker(C\\to k))\\to\\operatorname{Spec}C$; in the empty case use $C/C=0$. The affine criterion therefore applies on every affine open. Base-change this closed immersion along $q$ using [lem-weil-pbc-closed-immersion-base-change]. By step 3 the resulting projection is $u$, proving the assertion.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO (lemma-closed-immersion), affine criterion; Tag 01QR (lemma-base-change-closed-immersion), using schemes.tex Tag 01JY (lemma-base-change-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "lem-sfb-trivial-kernel-homogeneous-quotient",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 5.31(a),(b) and the first proof of Theorem 5.34, printed pp.106–107."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mono.*closed|closed.*mono|quotient|homogeneous",
+   "results": "{\"t\": \"2026-10-23T14:24:53Z\", \"tool\": \"grep\", \"query\": \"mono.*closed|closed.*mono|quotient|homogeneous\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"f9b193081b213dd9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsClosedImmersion\"",
+   "results": "{\"t\": \"2026-10-23T14:24:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsClosedImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective homomorphism of finite type group schemes over a field is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:24:56Z\", \"tool\": \"leanfinder\", \"query\": \"An injective homomorphism of finite type group schemes over a field is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\"], \"digest\": \"a8a3ba7358622000\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective homomorphism of algebraic groups over a field is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:29:54Z\", \"tool\": \"leansearch\", \"query\": \"An injective homomorphism of algebraic groups over a field is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\"], \"digest\": \"192124303c05f1ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism between algebraic group schemes over any field is a closed embedding",
+   "results": "{\"t\": \"2026-10-23T14:32:43Z\", \"tool\": \"leanfinder\", \"query\": \"A monomorphism between algebraic group schemes over any field is a closed embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instIsClosedImmersionOfSubsingletonCarrierCarrierCommRingCatOfIsOver\", \"AlgebraicGeometry.Scheme.Hom.isClosedEmbedding\", \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"AlgebraicGeometry.IsClosedImmersion.base_closed\", \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\"], \"digest\": \"45edb33335c0462d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.iff_isFinite_and_mono|instIsClosedImmersionOfSubsingleton|isStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-23T14:33:15Z\", \"tool\": \"grep\", \"query\": \"IsClosedImmersion.iff_isFinite_and_mono|instIsClosedImmersionOfSubsingleton|isStableUnderBaseChange\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\"], \"digest\": \"9420bdc76a597e74\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Mono|monomorphism|injective",
+   "results": "{\"t\": \"2026-10-23T14:40:07Z\", \"tool\": \"grep\", \"query\": \"Mono|monomorphism|injective\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\"], \"digest\": \"b843bba48618c0ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a homomorphism H to G of algebraic group schemes with injective maps on points over every algebra, the kernel is trivial and the morphism is a monomorphism",
+   "results": "{\"t\": \"2026-10-23T14:40:07Z\", \"tool\": \"leansearch\", \"query\": \"For a homomorphism H to G of algebraic group schemes with injective maps on points over every algebra, the kernel is trivial and the morphism is a monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGrpCat.mono_iff_ker_eq_bot\", \"GrpCat.ker_eq_bot_of_mono\", \"GrpCat.mono_iff_ker_eq_bot\", \"AddCommGrpCat.mono_iff_ker_eq_bot\", \"ModuleCat.mono_iff_ker_eq_bot\", \"AddGrpCat.mono_iff_ker_eq_bot\", \"CommGrpCat.ker_eq_bot_of_mono\", \"AddGrpCat.ker_eq_bot_of_mono\"], \"digest\": \"0e86c658895c97a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism of algebraic groups is a monomorphism if and only if its map on points of every algebra is injective",
+   "results": "{\"t\": \"2026-10-23T14:40:11Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism of algebraic groups is a monomorphism if and only if its map on points of every algebra is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGrpCat.mono_iff_injective\", \"Rep.mono_iff_injective\", \"GrpCat.mono_iff_injective\", \"CommGrpCat.mono_iff_ker_eq_bot\", \"AddCommGrpCat.mono_iff_injective\", \"CategoryTheory.Endofunctor.Algebra.mono_of_mono\", \"CategoryTheory.ConcreteCategory.injective_eq_monomorphisms_iff\", \"GrpCat.forget_grp_preserves_mono\"], \"digest\": \"852f54fe1531722a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono requires IsFinite, not merely finite type over k; definitions and abstract GrpCat monomorphism criteria do not prove the scheme statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-homomorphism-factorization",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof, final sentence: the induced homomorphism is a monomorphism, hence a closed immersion by Theorem 5.34.",
+   "via": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+  "worker": "stage1",
+  "summary": "Checked Milne Proposition 5.31 and the first proof of Theorem 5.34. Added the independent trivial-kernel homogeneous-quotient theorem 5.28 because the existing closed-subgroup quotient would be circular here. Wrote out extension from affine tests, triviality of the kernel, the cartesian fibre identification and the affine proof that a rational point is a closed immersion; reused closed-immersion base change. The statement and route are unchanged.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) supporting alteration/Picard route, through Milne Theorem 5.39: the final monomorphism-to-closed-immersion step is realized by Theorem 5.34 first proof and Theorem 5.28. The current latest blueprint no longer spells out the alteration subroute; its direct-images (3) still supplies the enclosing route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-b7e1ef28e",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-b7e1ef28e (reviewer sub-agent of L); spot-checked: I read Milne Algebraic Groups (2017): Def 5.20 and Prop 5.24 on pp.104-105, Thm 5.28 on p.105 (trivial-kernel homomorphism, fat-subfunctor quotient), Prop 5.31 on p.106, the first proof of Thm 5.34 on p.107 (H is the pullback of the closed point o) and Thm B.37 on p.605. The item statement matches the base and live versions, and stmt_deps are unchanged. This is a first delivery; live and side-live still have the item unsplit, and there is no repair note. Step 1: injectivity on points over affine opens extends to every k-scheme T by gluing; the kernel's T-points are then only e, so the kernel is Spec k by the fibre-product universal property. def-sc-group-scheme defines the kernel as A x_{B,u,e} Spec k. Step 2: the new node applied with a=e_B and mu(e,o)=o gives q_T(b)=o_T exactly when b is in u_T(A(T)), and q∘u=o∘π_A. Step 3: the square is cartesian. The test map b is automatically a k-map; existence comes from step 2 and uniqueness from step 1. Step 4: by the affine criterion stated in def-weil-closed-immersion, each affine preimage o^{-1}(Spec C) is either empty (Spec(C/C)) or Spec k, and a k-algebra map C→k is surjective, so a rational point is a closed immersion with no separatedness of X needed. Base change via lem-weil-pbc-closed-immersion-base-change then proves the item. Stacks tags 01QO, 01QR and 01JY are verified against the tags file. New node lem-sfb-trivial-kernel-homogeneous-quotient is statement-only and self-contained, with stmt_deps covering every notion. It is Milne 5.28/B.37 narrowed to finite type of X, the action, o and coset fibres; the coset property on all T follows from the affine-test form by gluing unique lifts. Small cases checked: trivial H; i an isomorphism; mu_p in G_m in characteristic p with nonreduced T; Borel in GL2 with quotient P^1; Frobenius on G_a, which is excluded because its kernel α_p is nontrivial. The node is not a restatement: it is quotient existence and does not claim closedness, while the item's four steps carry the argument as in Milne's own proof. No cycle: the node has no proof_deps and the item's only citer is the factorization parent. Duplicates searched with rg -L over the DAG: lem-sfb-algebraic-group-homogeneous-quotient (assumes a closed subgroup, circular here, no action), geometric-unipotence-faithful-closed-immersion (affine only), affine-normal-quotient-geometry and smooth-commutative-subgroup-quotient; none duplicates. No SGA, searches logged, inherited blueprint lineage with the via prepended. No tool_uses and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MonomorphismClosedImmersion",
+  "declaration": "AlgebraicGeometry.isClosedImmersion_of_injective_algebraPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MonomorphismClosedImmersion.lean",
+  "statement": "theorem isClosedImmersion_of_injective_algebraPoints {k : Type u} [Field k] (A B : Over (Spec (.of k))) [GrpObj A] [GrpObj B] [IsSeparated A.hom] [LocallyOfFiniteType A.hom] [QuasiCompact A.hom] [IsSeparated B.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] (u : A ⟶ B) [IsMonHom u] (hinj : ∀ (R : Type u) [CommRing R] [Algebra k R], Function.Injective (fun x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ A => x ≫ u)) : IsClosedImmersion u.left",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7484831a4",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Only the item's lean field changes; live lean is null and the item is not superseded. lean.statement appears verbatim in the file. Clause map: Field k; Over (Spec k) with GrpObj; IsSeparated; LocallyOfFiniteType plus QuasiCompact (the recorded finite-type conjunction); IsMonHom u; injectivity of postcomposition on points over every k-algebra R : Type u, including the zero ring and nonreduced rings; conclusion IsClosedImmersion u.left. Matches Milne Prop 5.31(a) and Thm 5.34, with no stronger hypotheses and a single universe u. Edge cases checked: trivial group, zero algebra, Frobenius on G_a excluded, mu_p in G_m. sorry-only proof, docstrings carry source place, blueprint tag and the 4 proof steps, report has both sections. Proof-only dep lem-sfb-trivial-kernel-homogeneous-quotient has no Lean record yet, which is acceptable. Not recompiled (no file changed); relied on the worker's reported clean compiles. Advisory: IsMonHom plus the injectivity hypothesis equals IsSubgroupScheme u (def-sc-group-scheme-subgroup, not cited by the node, so no duplicate); plain imports HasPullback and Scheme are redundant (H9)."
+ }
+}

@@ -12,11 +12,48 @@
   "def-sbc-smooth-morphisms",
   "def-weil-finite-type-morphism",
   "def-weil-closed-immersion",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-trf-supported-homogeneous-division"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-generic-monotone-vertex-chart] to construct the geometric chart and normalized regular vertex generators. Keep its actual Taylor ideal and diagram; no choices are made inside a definition.",
+   "uses": [
+    "lem-trf-generic-monotone-vertex-chart"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary regular lift family G satisfying the coefficient-one and earlier-coefficient-vanishing hypotheses, its Taylor series have the prescribed first exponents. Restrict this family to each degree prefix and apply [lem-trf-initial-exponent-homogeneous-division] to obtain HasUniqueDivision in every homogeneous degree.",
+   "uses": [
+    "lem-trf-initial-exponent-homogeneous-division"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-supported-formal-division] to the full Taylor lift family. The remainder belongs to the Taylor ideal, since the dividend and the finite sum of quotient multiples do. If nonzero, well-foundedness of degree-lex on finitely many variables gives its least nonzero exponent. Membership in the ideal puts that exponent in the actual diagram, while the remainder support puts it outside the generated diagram, which is equal to the actual one. This contradiction makes the remainder zero. Convert Function.support to the existing supported predicate to obtain the stated supported generation for every lift family. The well-founded minimum is the Mathlib WellFounded.has_min applied to DegLex.",
+   "uses": [
+    "lem-trf-supported-formal-division"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If the Taylor ideal is zero and s is nonzero, take index 0. The ordered-vertex characterization makes its vertex a member of the actual diagram. Its defining witness is a member of the zero ideal with a nonzero coefficient, a contradiction. Assemble the unchanged GenericMonotoneDiagram structure with these universal division and empty-family conclusions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-generic-monotone-vertex-chart",
+  "lem-trf-initial-exponent-homogeneous-division",
+  "lem-trf-supported-formal-division"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Q9 Lean reduction of the existing seven-step argument: geometric construction, finite homogeneous division, formal-remainder vanishing, and empty-vertex contradiction. BM 1997, sections 3.5, 7, 8 and Theorem 9.6, first proof paragraph; no unit route changes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +89,38 @@
    "results": "{\"t\": \"2026-10-19T16:33:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"lexOrder\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.lexOrder\", \"MvPowerSeries.lexOrder_zero\", \"MvPowerSeries.lexOrder_eq_top_iff_eq_zero\", \"MvPowerSeries.lexOrder_mul\", \"MvPowerSeries.le_lexOrder_mul\", \"MvPowerSeries.lexOrder_mul_ge\", \"MvPowerSeries.exists_finsupp_eq_lexOrder_of_ne_zero\", \"MvPowerSeries.min_lexOrder_le\"], \"digest\": \"24f7263b9ef13b92\"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected the recorded hits and the relevant polynomial division, formal-series order/inverse and smooth-presentation sources; none gives this formal diagram or regular Taylor-family theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-generic-monotone-diagram: generic linear coordinates in characteristic zero make the diagram of lowest degree lexicographic initial exponents monotone",
+   "results": "{\"t\": \"2026-10-22T04:37:13Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-generic-monotone-diagram: generic linear coordinates in characteristic zero make the diagram of lowest degree lexicographic initial exponents monotone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.simplicialEvalσ_monotone\", \"Finsupp.DegLex.monotone_degree\", \"ChevalleyThm.MvPolynomialC.numBound_mono\", \"Profinite.NobelingProof.GoodProducts.good_lt_maxProducts\", \"ChevalleyThm.MvPolynomialC.degBound_le_degBound\", \"MonomialOrder.toSyn_monotone\", \"MvPolynomial.degLex_totalDegree_monotone\", \"SimplexCategoryGenRel.IsAdmissible.mono\"], \"digest\": \"7f2f45c5abbb1f8d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: SimplexCategoryGenRel.simplicialEvalσ_monotone, Finsupp.DegLex.monotone_degree, ChevalleyThm.MvPolynomialC.numBound_mono, Profinite.NobelingProof.GoodProducts.good_lt_maxProducts, ChevalleyThm.MvPolynomialC.degBound_le_degBound, MonomialOrder.toSyn_monotone, MvPolynomial.degLex_totalDegree_monotone, SimplexCategoryGenRel.IsAdmissible.mono; these hits do not state this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "genericInitial|Borel.fixed|monotone.?diagram|Hironaka",
+   "results": "{\"t\": \"2026-10-22T04:37:39Z\", \"tool\": \"grep\", \"query\": \"genericInitial|Borel.fixed|monotone.?diagram|Hironaka\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"lexOrder\"",
+   "results": "{\"t\": \"2026-10-22T04:37:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"lexOrder\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.lexOrder\", \"MvPowerSeries.lexOrder_zero\", \"MvPowerSeries.lexOrder_eq_top_iff_eq_zero\", \"MvPowerSeries.lexOrder_mul\", \"MvPowerSeries.le_lexOrder_mul\", \"MvPowerSeries.lexOrder_mul_ge\", \"MvPowerSeries.exists_finsupp_eq_lexOrder_of_ne_zero\", \"MvPowerSeries.min_lexOrder_le\"], \"digest\": \"24f7263b9ef13b92\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.lexOrder, MvPowerSeries.lexOrder_zero, MvPowerSeries.lexOrder_eq_top_iff_eq_zero, MvPowerSeries.lexOrder_mul, MvPowerSeries.le_lexOrder_mul, MvPowerSeries.lexOrder_mul_ge, MvPowerSeries.exists_finsupp_eq_lexOrder_of_ne_zero, MvPowerSeries.min_lexOrder_le; these hits do not state this theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-generic-monotone-diagram: regular vertex generators of a Taylor ideal and supported formal division",
+   "results": "{\"t\": \"2026-10-22T04:37:40Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-generic-monotone-diagram: regular vertex generators of a Taylor ideal and supported formal division\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonomialOrder.toSyn_monotone\", \"MvPolynomial.mem_ideal_span_monomial_image_iff_dvd\", \"Polynomial.idealSpan_range_update_divByMonic\", \"HasFTaylorSeriesUpToOn.mono\", \"MvPolynomial.restrictSupport_mono\", \"Polynomial.degree_mono\", \"MvPolynomial.support_divMonomial\", \"MvPolynomial.divMonomial\"], \"digest\": \"d0e791b5478d80e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MonomialOrder.toSyn_monotone, MvPolynomial.mem_ideal_span_monomial_image_iff_dvd, Polynomial.idealSpan_range_update_divByMonic, HasFTaylorSeriesUpToOn.mono, MvPolynomial.restrictSupport_mono, Polynomial.degree_mono, MvPolynomial.support_divMonomial, MvPolynomial.divMonomial; these hits do not state this theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-regular-hilbert-coefficient-data",
@@ -88,5 +153,63 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-generic-monotone-diagram",
+  "worker": "stage1",
+  "summary": "Separated graded generic Borel fixity, Dickson finiteness (Mathlib), supported formal division, and the nonclosed-point Taylor associated graded comparison. Proved monotonicity by a triangular substitution, realized vertices through normal symbols, proved homogeneous division by finite triangular matrices, and descended generators. No change of statement. Return repair: revalidated the current implicit-Taylor calculus statement and specified its centered Taylor construction and r=0 specialization in step 7; regenerated the current citation packet.",
+  "blueprint": "VIII 2.3.11 and 2.3.13, printed pp.93--94; lower local input for the historical modification branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-regular-hilbert-coefficient-data. Realizes the generic-coordinate and regular-generator inputs below the historical modification branch; no change of chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-4d6699513",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-4d6699513 (reviewer sub-agent of L); spot-checked: Read in full. The item is still unsplit live, there is no repair note, and neither the item nor anything it cites is on the 2026-10-18 dropped list. There is no SGA source; all cited statements are in unit sk-i-curve-zero, and there are no tool_uses. ILO VIII 2.3.13 points to BM 1997, which is absent from the literature, so the WANTED lines and by:agent are correct. Steps 1-7 check out. Step 2's Borel direction is right: least lex is reversed revlex, and for n=2, J=(aT1+bT2) gives B=(T2), which is invariant under T1->T1+lT2 only, as stated. A k-point exists because k is infinite. Step 4: the shear V->V+AU fixes least monomials, so D=N^{n-c} x D_J, and the vertex lifts come from J_{d_i}. Step 5's matrix is unitriangular, step 6's remainder argument is BM Cor. 3.19(1), and step 7 takes faithful flatness, contraction and spreading from the current implicit-Taylor statement with r=0. New nodes. Borel node: the Galligo/Bayer-Stillman statement, true in char 0. Dickson leaf: Mathlib lines 438, 501 (WellFoundedSet) and 161, 215 (WellQuasiOrder) re-read and correct. Formal division: true (Hironaka/BM 3.17; degreewise bijective initial operator plus degree-raising perturbation also gives the order bounds); jet-diagram-hilbert-control states only uniqueness, so it is not a duplicate. Taylor graded comparison: true, since S is R-hat[[U]] by flatness and a regular fibre. FIX (B2/B3) in lem-trf-taylor-normal-cone-splitting: the vague 'characterized by ... etale lifting property' is replaced by the explicit composite O_{M,a}->O_{M_L,a_L}->completion = L[[T]], the chart is made explicit, l_j is defined as the degree-one part of tau(z_j), and def-weil-pbc-localization-at-prime, def-weil-residue-field and def-weil-pbc-adic-completion are added to stmt_deps; the assertions are unchanged. Advisory: the report's duplicate check misses lem-trf-relative-cohen-flat-presentation, which is not a duplicate but is the structural input for the future split of the Taylor node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericMonotoneDiagram",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.genericMonotoneDiagram",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.GenericMonotoneDiagram",
+   "AlgebraicGeometry.HilbertCoefficient.genericMonotoneDiagram"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericMonotoneDiagram.lean",
+  "statement": "theorem genericMonotoneDiagram {k : Type u} [Field k] [CharZero k] {X M : Scheme.{u}} (p : M ⟶ Spec (CommRingCat.of k)) (i : X ⟶ M) [Smooth p] [LocallyOfFiniteType p] [QuasiCompact p] [IsClosedImmersion i] (a : X) : Nonempty (GenericMonotoneDiagram p i a)",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ce330652",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause. Hypotheses: char-0 field, smooth+LFT+QC, closed immersion, no extra assumptions. Chart: affine étale coord chart over k; residue-preserving chart is a stronger but attainable conclusion. isTaylorMap pins the canonical (unique by formal étaleness) Taylor map; ideal = ker of Γ restriction to X×_M U on affine U. Finsupp.DegLex (·<·)(·<·) = ascending (|α|,α_1..α_n). diagram_spec iff on least terms; IsMonotone exact transfer formula; IsOrderedVertexFamily; generators span the ideal with normalized initial terms. any_lifts gives HasUniqueDivision for every prefix q and degree t (prefix quotientSupport = Δ_i since vertex degrees increase) and supported formal generation. K=0 ⇒ s=0. Edge cases empty X, n=0, nonclosed point, t<d_i, empty prefix and universes covered. Records: only lean + stmt_deps gaining two landed def nodes (allowed by STMT_DEPS MAY GAIN LANDED NODES); statement verbatim; lines ≤93; docstrings with source, blueprint and 7 steps; only sorry is the theorem proof; no duplicate in lean/Sheaf; not on dropped list. Not recompiled (no change); worker compile and dry run OK. Maintainer note: a released stage-1 re-split note (2026-10-22 13:57, after snapshot) keeps the statement, so stage 2 is unaffected; the report's 'no repair note' was true when written."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261026T092400-L-3428077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

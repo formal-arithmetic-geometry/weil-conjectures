@@ -1,0 +1,231 @@
+{
+ "id": "lem-sf-weil-derived-hom-single-resolution",
+ "kind": "statement",
+ "title": "Single-source computation of native derived internal Hom of Weil sheaves",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and $\\Qlb=\\overline{\\mathbf Q}_\\ell$. Let $X$ be a $k_0$-scheme locally of finite type, put $\\bar X=X\\times_{k_0}k$, and let $\\Phi=1_X\\times\\operatorname{Spec}(\\gamma)$ for inverse $q$-power Frobenius $\\gamma$ of $k$, where $q=\\#k_0$. On a small representative of $\\bar X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site, def-weil-size-convention], let $R$ be the ring sheaf whose sections on $U$ are continuous functions $|U|\\to\\Qlb$ whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-subspace. Write $\\mathcal A$ for the category of $R$-module sheaves $F$ with an isomorphism $\\theta_F:\\Phi^*F\\xrightarrow{\\sim}F$, and maps commuting with $\\theta_F$ (fixed pairs [def-weil-endofunctor-fixed-pair-category] in the sheaf category). Use the native derived category $D(\\mathcal A)$ [def-weil-abstract-derived-category], formed by inverting equivariant quasi-isomorphisms. Write $H(A,B)=\\mathcal Hom_R(A,B)$ with structure $h\\mapsto\\theta_B\\Phi^*(h)\\theta_A^{-1}$, and $H_A=H(A,-)$. For an additive functor $H_A$, its total right derived functor $RH_A$ is computed by applying $H_A$ termwise to a K-injective representative. Here a complex $I$ is K-injective if every map from an acyclic complex to $I$ is null-homotopic. The native bifunctor $\\operatorname{RHom}_{\\mathrm W}(K,N)$ is the image of $H^\\bullet(J,I)$ for the chosen K-injective representatives $J,I$ of $K,N$, with $H^\\bullet(J,I)^n=\\prod_p H(J^p,I^{p+n})$ and differential $d(f)=d_I f-(-1)^n f d_J$. Let $A\\in\\mathcal A$ be any sheaf, and let $N\\in D(\\mathcal A)$ have cohomology zero in all sufficiently negative degrees. Then there is a natural isomorphism in $D(\\mathcal A)$\n$$\\operatorname{RHom}_{\\mathrm W}(A[0],N)\\xrightarrow{\\sim}(RH_A)(N).$$\nMore precisely, for a K-injective representative $I$ of $N$ and a K-injective resolution $\\alpha:A[0]\\to J$, the isomorphism is represented by precomposition\n$$QH^\\bullet(J,I)\\xrightarrow{\\sim}QH^\\bullet(A[0],I)=Q(H_A(I)),$$\nand the rightmost object computes $(RH_A)(N)$. Here $Q$ is localization at quasi-isomorphisms. The comparison is independent of these choices and natural contravariantly in $A$ and covariantly in $N$. No lissity, dual, tensor product, or constructibility hypothesis on $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A95 (lemma-RHom-well-defined), equivariant analogue for the automorphism Phi; the two native models being compared are lean/WeilConjectures/WeilSheaf/DerivedHom.lean:111-113, CategoryTheory/DerivedCategory/BifunctorHom.lean:94-126, and WeilSheaf/Fourier.lean:1258-1262. The equivariant comparison is an agent-formulated lemma, not an assertion that Tag 0A95 already states it verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the source library K-injective equivalence. For each complex K lift the inverse equivalence counit to a unique map eta_K in the homotopy category, using bijectivity of localization on maps into K-injectives. Apply the contravariant native product-Hom functor and the quotient comparison to construct comparison_K,I. Naturality follows from uniqueness of the lift. On a K-injective source it equals the source library bifunctorRHomOfComplexObjIso; for any quasi-isomorphism alpha to a K-injective J it equals RHom((Q alpha)^-1) followed by that iso and Q Hom(alpha,I).",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sf-native-hom-precomposition-quasi-iso to an existing K-injective resolution of A[0]. Each factor of the resolution formula for comparison is invertible, so comparison_A[0],I is invertible. Compose with the proved source-degree-zero projection and the inverse rightDerivedFunctorObjQIso. This constructs c canonically, without choosing an arbitrary witness of the theorem being proved.",
+   "uses": [
+    "lem-sf-native-hom-precomposition-quasi-iso",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formula in step 1 proves the normalization for every alpha. Projection commutes with single-source precomposition and target postcomposition, checked on product components. Combine comparison naturality with naturality of the right-derived unit on K-injectives, canceling the canonical isomorphism on the right. Transport along kInjectiveRepIso N to obtain the arbitrary-target clause. These calculations retain the native row sign; the projection is in source degree zero so its sign is +1.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-native-hom-precomposition-quasi-iso",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A95, equivariant native specialization; categorical assembly via the source library K-injective equivalence and right-derived unit, E3 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For pro etale Weil sheaves the derived internal Hom with a sheaf in degree zero equals the right derived functor of the fixed sheaf internal Hom",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.H, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.ihomPoints, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondensed.ihomPoints_symm_comp, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Replace the first argument of a Hom complex by a K injective resolution without changing derived internal Hom into a K injective target",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.Hom.hom'_f, CategoryTheory.InjectiveResolution.desc, CategoryTheory.InjectiveResolution.Hom.hom', CategoryTheory.InjectiveResolution.descFOne, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.descFZero; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bifunctorRHom\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorRHom|singleFunctorCompRightDerivedFunctorIso|RHom.*single|single.*RHom",
+   "results": "7 hits: Mathlib/LinearAlgebra/Contraction.lean, Mathlib/Order/Hom/Basic.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from a single sheaf agrees with right deriving the internal Hom functor",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.ihom, CategoryTheory.sheafHom', CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.internalHom, CategoryTheory.Closed.rightAdj, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id; ",
+   "date": "2026-10-22",
+   "verdict": "no match: module duals, ordinary sheaf Hom, or classical derived functors; no native equivariant derived-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorRHom|singleFunctorCompRightDerivedFunctorIso|RHom.*single|single.*RHom",
+   "results": "7 hits: Mathlib/Order/Hom/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/LinearAlgebra/Contraction.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary derived functors, ordinary mapping complexes, or unrelated single-term constructions; none compares the native equivariant two-replacement internal Hom with fixed-source right derivation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from an object concentrated in degree zero is the right derived fixed internal Hom functor",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.preservesRightHomology_of_zero_f",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary derived functors, ordinary mapping complexes, or unrelated single-term constructions; none compares the native equivariant two-replacement internal Hom with fixed-source right derivation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bifunctorRHom\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary derived functors, ordinary mapping complexes, or unrelated single-term constructions; none compares the native equivariant two-replacement internal Hom with fixed-source right derivation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived bifunctor internal Hom evaluated on a single object equals its fixed source right derived functor",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerived_id, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary derived functors, ordinary mapping complexes, or unrelated single-term constructions; none compares the native equivariant two-replacement internal Hom with fixed-source right derivation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom complex from a sheaf in degree zero into a K injective Weil sheaf resolution computes the right derived internal Hom functor",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, PresheafOfModules.sheafificationHomEquiv, CategoryTheory.Sheaf.ΓHomEquiv, CategoryTheory.InjectiveResolution.extMk_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary derived functors, ordinary mapping complexes, or unrelated single-term constructions; none compares the native equivariant two-replacement internal Hom with fixed-source right derivation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-lisse-internal-hom-tensor-dual",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-local-boundary-duality",
+   "place": "Opening lisse identity D_U F = F^vee(1)[2] in lem-a1-local-boundary-duality.proof.md: resolution comparison needed by the native tensorLisse/internal-Hom identification, via lem-sf-weil-lisse-internal-hom-tensor-dual.",
+   "via": [
+    "lem-sf-weil-lisse-internal-hom-tensor-dual"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-derived-hom-single-resolution",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split order: retained the statement exactly, replaced the seven-step 7702-character proof by a short assembly, reused the existing integer-orbit free-fixed-pair theorem, and created two independent unsplit nodes for equivariant quasi-isomorphism invariance and product-Hom resolution calculus. The report retains every old argument verbatim, maps it to the obligations, and supplies sources, genuine recorded searches, citation checks and small-case review. No Lean written or compiled.",
+  "blueprint": "Realizes the resolution-comparison foundation of the opening lisse duality identity in lem-a1-local-boundary-duality, through its native tensorLisse/internal-Hom dependency lem-sf-weil-lisse-internal-hom-tensor-dual. The inherited unit is retained; no unit or chapter route is replaced. Re-split below this same resolution-comparison input; no unit or chapter is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Module-sheaf Grothendieck theorem on the small coefficient site supplies the base category."
+   },
+   {
+    "node": "lem-sf-free-derived-weil-resolution",
+    "why": "Its first paragraph supplies exactly the integer-orbit free adjunction and fixed-pair Grothendieck property used by the old proof; no unit-specific geometric route is replaced."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Existence of K-injective representatives after the fixed-pair Grothendieck property."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Canonical termwise K-injective computation and its natural derived-unit map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-c79f985c3",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-c79f985c3 (reviewer sub-agent of L); spot-checked: I read the re-split in full: 7 old steps (7702 characters) became a 4-step assembly (2371 characters) citing 2 new statement-only nodes of comparable size. The item's statement, stmt_deps and lean fields are unchanged against live and side-live. Every old argument now sits in a new node or in an existing node whose statement says it. Old steps 1-4 (free functor ⊕_Z T^n M, adjunction, exactness, Grothendieck property) are stated by the general existing lem-sf-free-derived-weil-resolution; a new node for them would be a duplicate. Old step 5 is new node 1, the equivariant 0A95 bridge (checked against sites-cohomology.tex l.8754: U creates products, the U-identification uses the 0A8X sign, the map is equivariant, U preserves K-injectives by 08BJ, and U reflects the qis). Old steps 6-7 are new node 2. I verified its homotopy formulas by hand: (-1)^n f h for source homotopies (the d_I f h terms cancel) and h'f for target homotopies. I also checked that the p=0 projection is an isomorphism (H(0,-)=0 and d_{A[0]}=0) and the 070I resolution squares (uα≃βa). Neither new node restates the item, and there are no cycles or SGA. Edge cases checked: K=0, I=0, T=id, empty site, unbounded and non-mono t. Accepted generic tool_uses: free-derived-weil-resolution, ringed-site Grothendieck, grothendieck-k-injective, right-derived-functor. Fault fixed: step 1's source cited 08BJ, which that step no longer uses; it now cites 079P (theorem-K-injective-embedding-grothendieck). Advisory: node 1's auxiliary clauses (U exact, detects qis, preserves K-injectives) are already stated by lem-sf-fixed-pair-derived-forget-comparison, which the report's duplicate search missed; the node-1 worker should cite it. The new nodes have blueprint.from.node=null because the ancestor tool returns None; this is a tooling gap, not a delivery fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.DerivedHomSingleResolution",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom_single_resolution",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.singleResolutionProjection_comm",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.singleResolutionProjection",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.singleResolutionProjection_isIso",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.singleResolutionMapRight",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.derivedHom_single_resolution"
+  ],
+  "file": "lean/Sheaf/WeilSheaf/DerivedHomSingleResolution.lean",
+  "statement": "theorem derivedHom_single_resolution [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] : ∃ c : ∀ (A : ProEtaleWeilSheaf k₀ l X) (I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) [I.IsKInjective], (∃ b : ℤ, (DerivedCategory.Q.obj I).IsGE b) → ((DerivedCategory.bifunctorRHomOfComplex (ihomBifunctor k₀ l X) I).obj (op ((DerivedCategory.singleFunctor _ 0).obj A)) ≅ (ihomFunctor k₀ l X A).rightDerivedFunctor.obj (DerivedCategory.Q.obj I)), (∀ (A : ProEtaleWeilSheaf k₀ l X) (I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) [I.IsKInjective] (hI : ∃ b : ℤ, (DerivedCategory.Q.obj I).IsGE b) (J : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) [J.IsKInjective] (α : (CochainComplex.singleFunctor _ 0).obj A ⟶ J) [QuasiIso α], (c A I hI).hom ≫ ((ihomFunctor k₀ l X A).rightDerivedFunctorObjQIso I).hom = (DerivedCategory.bifunctorRHomOfComplex (ihomBifunctor k₀ l X) I).map (inv (DerivedCategory.Q.map α)).op ≫ (DerivedCategory.bifunctorRHomOfComplexObjIso (ihomBifunctor k₀ l X) I J).hom ≫ DerivedCategory.Q.map (CochainComplex.bifunctorHomMapLeft (H := ihomBifunctor k₀ l X) (Y := I) α) ≫ DerivedCategory.Q.map (singleResolutionProjection A I)) ∧ (∀ (A B : ProEtaleWeilSheaf k₀ l X) (a : A ⟶ B) (I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) [I.IsKInjective] (hI : ∃ b : ℤ, (DerivedCategory.Q.obj I).IsGE b), (DerivedCategory.bifunctorRHomOfComplex (ihomBifunctor k₀ l X) I).map ((DerivedCategory.singleFunctor _ 0).map a).op ≫ (c A I hI).hom = (c B I hI).hom ≫ (Functor.rightDerivedFunctorNatTrans ((ihomBifunctor k₀ l X).map a.op)).app (DerivedCategory.Q.obj I)) ∧ (∀ (A : ProEtaleWeilSheaf k₀ l X) (I I' : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) [I.IsKInjective] [I'.IsKInjective] (hI : ∃ b : ℤ, (DerivedCategory.Q.obj I).IsGE b) (hI' : ∃ b : ℤ, (DerivedCategory.Q.obj I').IsGE b) (g : I ⟶ I'), singleResolutionMapRight A g ≫ (c A I' hI').hom = (c A I hI).hom ≫ (ihomFunctor k₀ l X A).rightDerivedFunctor.map (DerivedCategory.Q.map g)) ∧ (∀ (A : ProEtaleWeilSheaf k₀ l X) (N : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (_ : ∃ b : ℤ, N.IsGE b), ∃ e : (derivedHom k₀ l X N).obj (op ((DerivedCategory.singleFunctor _ 0).obj A)) ≅ (ihomFunctor k₀ l X A).rightDerivedFunctor.obj N, ∀ hI : ∃ b : ℤ, (DerivedCategory.Q.obj (DerivedCategory.kInjectiveRep N)).IsGE b, e.hom ≫ (ihomFunctor k₀ l X A).rightDerivedFunctor.map (DerivedCategory.kInjectiveRepIso N).hom = (c A (DerivedCategory.kInjectiveRep N) hI).hom)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical comparison on every bounded-below K-injective target, normalized for every source resolution, with both naturality squares and transport to arbitrary N. The helper declarations construct the degree-zero projection and target postcomposition of the same notion; no independent notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8af3f03c2",
+  "group": "NR",
+  "result": "pass",
+  "note": "Only the lean field changes vs live (no new nodes or dep repairs); lean.statement is verbatim and declarations are complete. Every clause matches the node on the native models it names (ProEtaleWeilSheaf = IsoAlgebra of the Frobenius pullback, Mathlib DerivedCategory, ihomBifunctor/ihomFunctor, derivedHom = bifunctorRHomOfComplex on kInjectiveRep, upstream rightDerivedFunctor with rightDerivedFunctorObjQIso). c is pinned by the precomposition equation for every K-injective J and quasi-iso alpha, which also gives source-choice independence; naturality in A, naturality in K-injective targets, and transport to bounded-below N are all stated. Helpers are real: the p=0 projection (both sorried facts true, since d of A[0] is 0 and H(0,-)=0) and singleResolutionMapRight (postcomposition on bifunctorRHomOfComplex's own representative). The upstream (-1)^p sign agrees with the node's at p=0. Docstrings, source and blueprint tags, and the 7 proof steps are present; no extra hypotheses or universe restrictions, no SGA, no pro-etale substitute; only theorem bodies are sorry. No existing comparison found; the citer uses the same objects. Edge cases X empty, A=0, N=0, unbounded representatives, non-mono alpha all covered. Not recompiled per instructions. Advisory: two DAG records name different right-derived-functor declarations (rightDerivedFunctorOfQuasiIsoResolutions vs upstream Functor.rightDerivedFunctor); this item uses the upstream one, consistent with its source and citer."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T002503-L-3114173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

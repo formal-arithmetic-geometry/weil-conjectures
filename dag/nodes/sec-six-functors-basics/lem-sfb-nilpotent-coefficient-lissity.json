@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-nilpotent-coefficient-lissity",
+ "kind": "statement",
+ "title": "Nilpotent constant-coefficient surjections reflect lissity",
+ "statement": "Let D be a small category with pullbacks, T a Grothendieck topology, B a commutative Noetherian ring, R a commutative ring in the same universe, and f:B to R a surjection with nilpotent kernel. If K is a bounded-above standard-derived constant-B module complex and its derived scalar extension along f has locally constant finite-type cohomology over R, then K has locally constant finite-type cohomology over B. The scalar extension is adicFiniteExtension from [lem-sfb-adic-constructible-finite-reductions]; lissity is [def-weil-pbc-locally-constant-finite-type-modules].",
+ "stmt_deps": [
+  "lem-sfb-adic-constructible-finite-reductions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, nilpotent ideal clause"
+ },
+ "proof": [
+  {
+   "text": "Compute both existing scalar-extension presentations on the same K-flat resolution and identify them by the explicit chain comparisons. Factor f through B/ker(f) and its canonical ring isomorphism to R.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-reduction-step",
+    "lem-pc-kflat-resolution",
+    "lem-sfb-adic-constructible-finite-reductions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, nilpotent ideal clause"
+   }
+  },
+  {
+   "text": "Transport the lissity hypothesis through scalar associativity and the bijective coefficient map. Apply the nilpotent-ideal clause of reduction_pow to ker(f), choosing a positive nilpotence exponent.",
+   "uses": [
+    "lem-weil-pbc-constant-coefficient-scalar-equivalence",
+    "lem-weil-pbc-nilpotent-reduction-lissity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094I, nilpotent ideal clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nilpotent-reduction-step",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-adic-constructible-finite-reductions",
+  "lem-weil-pbc-constant-coefficient-scalar-equivalence",
+  "lem-weil-pbc-nilpotent-reduction-lissity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, nilpotent ideal clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction along a surjective ring homomorphism with nilpotent kernel reflects locally constant finite type cohomology",
+   "results": "8 hits concerning ordinary finite algebras or unrelated local surjectivity; no derived lissity theorem.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.factor, RingHom.ker",
+   "results": "Ideal.Quotient.factor_ker; used to show successive adic kernels square-zero.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*locallyConstant|locallyConstant.*nilpotent",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib declaration; use the project interfaces and the stated source argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicEtaleStalkLevels",
+  "date": "2026-10-26",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-etale-stalk-levels",
+   "place": "Tag 094I, nilpotent ideal clause",
+   "via": [
+    "lem-sfb-adic-etale-stalk-levels"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NilpotentCoefficientLissity",
+  "file": "lean/Sheaf/Paper/NilpotentCoefficientLissity.lean",
+  "declaration": "SheafOfModules.lisse_of_nilpotent_coefficient_surjection",
+  "statement": "theorem lisse_of_nilpotent_coefficient_surjection\n    {D : Type w} [SmallCategory D] [HasPullbacks D] (T : GrothendieckTopology D)\n    {B R : Type w} [CommRing B] [CommRing R] [IsNoetherianRing B]\n    (f : B →+* R) (hf : Function.Surjective f) (hnil : IsNilpotent (RingHom.ker f))\n    (K : ConstantCompletion.D (constant T B))\n    (hbounded : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero ((coefficientModelCohomology _ q).obj K))\n    (hmod : ∀ q : ℤ, IsLocallyConstantFiniteTypeModules T R\n      ((coefficientModelCohomology _ q).obj\n        ((AlgebraicGeometry.Scheme.adicFiniteExtension T f).obj K))) :\n    ∀ q : ℤ, IsLocallyConstantFiniteTypeModules T B\n      ((coefficientModelCohomology _ q).obj K)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T071501-L-3939999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T071501-L-3939999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

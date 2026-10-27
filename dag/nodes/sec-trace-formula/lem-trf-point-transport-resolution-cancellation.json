@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-point-transport-resolution-cancellation",
+ "kind": "statement",
+ "title": "Resolution cancellation for the specified point comparison",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ with $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$, $g=\\operatorname{Spec}(\\gamma)$ for geometric Frobenius [def-weil-frobenius-detailed], $R=\\widehat{\\mathcal O}_{E,s}=\\lim_n(A_n)_s$, and $\\Gamma=\\Gamma(s,-)$, with its constant $\\mathcal O_E$-action, on the small pro-etale site in its module universes [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients, lem-weil-point-proetale-sections-exact]. For any flat-term K-flat complex $P$ of $R$-module sheaves [def-pc-kflat-complex, def-pc-flat-sheaf-modules], set $P_n=P\\otimes_R(A_n)_s$, $r_{P,n}(x)=x\\otimes1$ and $t_n=1\\otimes(A_{n+1}\\to A_n)$ [def-weil-pbc-adic-coefficient-datum]. Put $C(P)_n=\\operatorname{Res}_ng_n^*P_n$ with the actual coefficient-induced transitions $v_n$ of [def-weil-inverse-image-pullback-comparison](b), and $D(P)_n=\\Gamma P_n$, $B(P)_n=\\Gamma C(P)_n$. All towers are restricted to the single integral coefficient ring. For any strict tower $X$ with transitions $w_n$ put $s_X((x_n))=(w_nx_{n+1})$ and $H(X)=\\operatorname{Cone}(1-s_X)[-1]$, with $H(X)^i=\\prod_nX_n^{i-1}\\oplus\\prod_nX_n^i$ and differential $d(b,a)=(-db-(1-s_X)a,da)$ [lem-pur-integral-operations-well-defined]. For a strict tower map $f:X\\to Y$ let $H(f)(b,a)=((\\prod_nf_n)b,(\\prod_nf_n)a)$. Let $c_X:\\Gamma H(X)\\xrightarrow{\\sim}H(\\Gamma X)$ be the normalized identity on both sectionwise product coordinates for a tower of $R$-module sheaves [def-trf-point-sections-roos-comparison].\n\nPut $\\theta_{P,n}=\\kappa_{P_n}g^{-1}(r_{P,n})$ and $\\widetilde\\theta_P(w)=(0,(\\theta_{P,n}w)_n)$ using [def-weil-inverse-image-pullback-comparison]. Let $N$ be any complex of $R$-module sheaves and $q:P\\to N$ a quasi-isomorphism. Let $Lg^*$ be the ambient completed pullback [def-pur-integral-derived-operations]. Under its specified resolution comparison let $b_q:\\Gamma Lg^*[N]\\xrightarrow{\\sim}[H(B(P))]$ be obtained by identifying its representative with $H(C(P))$ and then using $c_{C(P)}$. Denote by $\\kappa_{N,q}=[\\widetilde\\theta_P][g^{-1}q]^{-1}$ the integral comparison formed using this resolution, as in comparison (b), and put $\\iota_{N,q}=\\Gamma(\\kappa_{N,q})\\sigma_N$, where $\\sigma$ is the restriction/colimit-insertion map [def-weil-frobenius-point-transport]. Brackets denote classes in the ordinary unbounded derived module categories [def-weil-abstract-derived-category].\n\nThen $\\Gamma(q)$ and $\\Gamma(g^{-1}q)$ are quasi-isomorphisms, $\\sigma_N\\Gamma(q)=\\Gamma(g^{-1}q)\\sigma_P$, and\n$$b_q\\iota_{N,q}=[c_{C(P)}\\Gamma(\\widetilde\\theta_P)\\sigma_P][\\Gamma(q)]^{-1}.$$\nThese formulas hold for every such resolution, with the specified representative comparisons, and agree with the defining $\\iota_N$ when $q$ is the resolution chosen to define comparison (b). No completeness or constructibility of $N$ is assumed. Only resolution quasi-isomorphisms and the specified comparison isomorphisms are inverted; no augmentation of $\\Gamma P$ into its reduction cone is asserted invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), point-transport comparison supplement; original steps 4 and 5: naturality of sigma, exactness, specified comparison and resolution cancellation"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-point-proetale-sections-exact",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-trf-point-sections-roos-comparison",
+  "def-pur-integral-derived-operations",
+  "def-weil-frobenius-point-transport",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Comparison (b) of [def-weil-inverse-image-pullback-comparison] explicitly makes the transported module inverse image exact, including for the completed ring, and states that it sends quasi-isomorphisms to quasi-isomorphisms. Apply this to $q$ to obtain that $g^{-1}q$ is a quasi-isomorphism of $R$-module complexes. By [lem-weil-point-proetale-sections-exact], termwise sections preserve quasi-isomorphisms for every ring sheaf on this geometric point. Apply this to $q$ and $g^{-1}q$. Restricting the resulting scalar actions along the constant map $\\mathcal O_E\\to\\Gamma(s,R)$ changes neither kernels, images nor the underlying homology groups, so $\\Gamma(q)$ and $\\Gamma(g^{-1}q)$ remain quasi-isomorphisms of ordinary $\\mathcal O_E$-complexes. This argument applies to unbounded complexes and does not use completeness of $N$.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098H, lemma-w-contractible-is-weakly-contractible; application via the cited exact-point-sections lemma, together with the explicit completed-module exactness in comparison (b)"
+   }
+  },
+  {
+   "text": "Use the defining section formula in [def-weil-frobenius-point-transport]: frobeniusPointIntegralSigma in degree i is restriction along the site arrow (s,g) to (s,id), in the canonical sectionwise inverse-image coordinates. Apply naturality of the module sheaf map q^i to that site arrow. The resulting equality on every section gives the strict sigma square after HomologicalComplex.hom_ext. This works for all complexes and requires no separate general automorphism-transport theorem.",
+   "uses": [
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), point-transport supplement: restriction and colimit-insertion naturality, original step 4; explicit argument supplied by agent"
+   }
+  },
+  {
+   "text": "Use the actual coefficient-induced transitions from [def-weil-inverse-image-pullback-comparison](b). Its formula $v_n\\theta_{P,n+1}=\\theta_{P,n}$ implies $(1-s_{C(P)})(\\theta_{P,n})_n=0$. Hence the prescribed lift is a chain map: $d(0,(\\theta_{P,n}w)_n)=(0,(\\theta_{P,n}dw)_n)$ for every local section $w$. The normalized comparison of [def-trf-point-sections-roos-comparison] acts identically on both sectionwise product coordinates. Thus $e_P=c_{C(P)}\\Gamma(\\widetilde\\theta_P)\\sigma_P$ is a chain map whose degreewise value is $e_P(z)=(0,(\\Gamma(\\theta_{P,n})\\sigma_P(z))_n)$. This checks the zero shifted-product component as well as the unshifted component; no replacement of the specified comparison is made.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-trf-point-sections-roos-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit; signed shifted-cone calculation with the explicitly specified comparison (b)"
+   }
+  },
+  {
+   "text": "Write $Q=[\\Gamma(q)]$ and $T=[\\Gamma(g^{-1}q)]$. These are isomorphisms by step 1 and the localization definition of [def-weil-abstract-derived-category]. After taking classes, step 2 reads $[\\sigma_N]Q=T[\\sigma_P]$. Compose on the left with $T^{-1}$ and on the right with $Q^{-1}$ to get $T^{-1}[\\sigma_N]=[\\sigma_P]Q^{-1}$, by associativity and the inverse identities. Also $\\Gamma([g^{-1}q]^{-1})=T^{-1}$: applying the sections functor to both inverse identities shows that its image is an inverse of $T$, hence the unique inverse. Thus no additional localization or augmentation inverse is being assumed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category; elementary inverse and functor calculation in the localized category"
+   }
+  },
+  {
+   "text": "Let $j_q:[H(C(P))]\\xrightarrow{\\sim}Lg^*[N]$ denote the specified resolution comparison, with this orientation. The definition of $\\kappa_{N,q}$ in [def-weil-inverse-image-pullback-comparison](b), read under that comparison, says $\\kappa_{N,q}=j_q[\\widetilde\\theta_P][g^{-1}q]^{-1}$. The specified definition of $b_q$ is $[c_{C(P)}]\\Gamma(j_q)^{-1}$. Therefore functoriality, cancellation of $\\Gamma(j_q)$, and step 4 give\n$$b_q\\iota_{N,q}=[c_{C(P)}][\\Gamma(\\widetilde\\theta_P)]T^{-1}[\\sigma_N]=[c_{C(P)}\\Gamma(\\widetilde\\theta_P)\\sigma_P]Q^{-1}.$$\nThe first equality expands $\\iota_{N,q}=\\Gamma(\\kappa_{N,q})[\\sigma_N]$ and the second substitutes $T^{-1}[\\sigma_N]=[\\sigma_P]Q^{-1}$. The chain map inside the last brackets is the explicitly normalized $e_P$ of step 3.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-trf-point-sections-roos-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), point-transport supplement: specified representative comparison and cancellation, original step 5; elementary composite written out by agent"
+   }
+  },
+  {
+   "text": "The preceding calculation began with an arbitrary flat-term K-flat $P$ and arbitrary quasi-isomorphism $q:P\\to N$ as in the statement. Its only identifications were the specified $j_q$ and $c_{C(P)}$, so it proves the formulas for every such resolution with those comparisons. When $q$ is the resolution chosen in comparison (b), the formula for $\\kappa_{N,q}$ is exactly the defining $\\kappa_N$. The integral clause of [def-weil-frobenius-point-transport] defines $\\iota_N$ as $\\Gamma(\\kappa_N)\\sigma_N$; hence for that chosen resolution the displayed formula is the formula for the defining $\\iota_N$. For an arbitrary $N$ it gives the asserted recipe $\\iota_{N,q}$ without claiming that $N$ belongs to the constructible subcategory on which the fibre functor is named. The only inverted maps were resolution quasi-isomorphisms and specified comparison isomorphisms.",
+   "uses": [
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+    "place": "clause (3), point-transport supplement: universal quantification over resolutions and agreement with the chosen comparison (b)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-point-proetale-sections-exact",
+  "def-trf-point-sections-roos-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-frobenius-point-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "A7: the six-step resolution cancellation argument, with step 2 proved directly from the defining sigma section formula and restriction naturality; all representative and Roos comparisons remain the specified ones."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Point section transport through an inverse image comparison on a K flat resolution cancels the resolution quasi isomorphism in the derived category",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.iso_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.instIsIsoToRightDerivedZero', CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc. Generic localization of quasi-isomorphisms, injective resolution naturality and tensor insertion do not identify this specified ambient completed pullback map on an arbitrary good resolution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.lift",
+   "results": "8 hits: CochainComplex.mappingCocone.ofHom_lift, CochainComplex.mappingCocone.lift, CochainComplex.mappingCocone.lift_fst, CochainComplex.mappingCocone.lift_f_snd_v, CochainComplex.mappingCocone.lift_f_fst_f, CochainComplex.mappingCocone.lift_f_snd_v_assoc, CochainComplex.mappingCocone.lift_f_fst_f_assoc, CochainComplex.mappingCocone.lift_fst_assoc. Generic localization of quasi-isomorphisms, injective resolution naturality and tensor insertion do not identify this specified ambient completed pullback map on an arbitrary good resolution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point transport inverse image comparison expressed on any K flat resolution by cancellation of a quasi isomorphism",
+   "results": "8 hits: DerivedCategory.instIsIsoMapCochainComplexIntQ, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, HomotopyEquiv.quasiIso_inv, isoOfQuasiIsoAt_inv_hom_id, isoOfQuasiIsoAt_inv_hom_id_assoc, CategoryTheory.ShortComplex.quasiIso_of_isIso, HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso, quasiIso_of_comp_left. Generic localization of quasi-isomorphisms, injective resolution naturality and tensor insertion do not identify this specified ambient completed pullback map on an arbitrary good resolution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sectionwise completed pullback comparison on any flat resolution equals the theta cone lift composed with inverse of the resolution and point restriction",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, CategoryTheory.GrothendieckTopology.diagramPullback_app, CategoryTheory.GrothendieckTopology.diagramPullback, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Meq.pullback_apply, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.regularTopology.mapToEqualizer_eq_comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom. Generic localization of quasi-isomorphisms, injective resolution naturality and tensor insertion do not identify this specified ambient completed pullback map on an arbitrary good resolution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*[Cc]omparison|[Pp]oint.*[Tt]ransport|[Kk][Ff]lat",
+   "results": "2 hits: Mathlib/LinearAlgebra/AffineSpace/Independent.lean, Mathlib/LinearAlgebra/AffineSpace/Combination.lean. Generic localization of quasi-isomorphisms, injective resolution naturality and tensor insertion do not identify this specified ambient completed pullback map on an arbitrary good resolution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric point, exact sections and natural restriction transport give the completed pullback comparison on any K-flat resolution by cancellation of its quasi-isomorphism",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, SheafOfModules.pullbackIso. These are generic functor/inverse, free-sheaf pullback, or projective-resolution results, not the stated completed point comparison with its normalized cone coordinates.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointTransport|point_transport|sectionsRoos|resolution.*[Cc]ancel|map_inv",
+   "results": "25 hits: Mathlib/CategoryTheory/EqToHom.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/NatIso.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean, Mathlib/CategoryTheory/Functor/Category.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean. These are generic functor/inverse, free-sheaf pullback, or projective-resolution results, not the stated completed point comparison with its normalized cone coordinates.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_inv",
+   "results": "1 hits: CategoryTheory.Functor.map_inv. These are generic functor/inverse, free-sheaf pullback, or projective-resolution results, not the stated completed point comparison with its normalized cone coordinates.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of point sections restriction and completed pullback comparison allows cancellation of a K flat resolution quasi isomorphism",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.iso_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality, HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.Sheaf.ΓRes, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.Sheaf.natTransΓRes. These are generic functor/inverse, free-sheaf pullback, or projective-resolution results, not the stated completed point comparison with its normalized cone coordinates.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact global sections applied to a completed inverse image cone comparison on an arbitrary flat resolution equals the theta lift after inverting the resolution map",
+   "results": "8 hits: CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.RanIsSheafOfIsCocontinuous.lift, CategoryTheory.GrothendieckTopology.liftToPlusObjLimitObj_fac, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux, CategoryTheory.GrothendieckTopology.coneCompEvaluationOfConeCompDiagramFunctorCompEvaluation_π_app. These are generic functor/inverse, free-sheaf pullback, or projective-resolution results, not the stated completed point comparison with its normalized cone coordinates.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-transport-cone-comparison-descent",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "proof clause (3), passage from levelwise compact-support maps to the integral derived limit; original steps 4 and 5: naturality of sigma, exactness, specified comparison and resolution cancellation",
+   "via": [
+    "lem-trf-point-transport-cone-comparison-descent",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-point-transport-resolution-cancellation",
+  "worker": "stage1",
+  "summary": "Split into exactness, the strict sigma naturality square, the normalized two-coordinate cone lift, inverse-square algebra, explicit representative comparison cancellation, and agreement with the chosen definition. Reused existing results and introduced no nodes. The statement is unchanged and no completeness or constructibility hypothesis is added.",
+  "blueprint": "Realizes clause (3) of prop-trf-rational-frobenius-integral-model, specifically the point-transport comparison supplement corresponding to original realization steps 4-5; uses the prescribed completed-pullback route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact sections on a geometric point preserve quasi-isomorphisms of arbitrary module complexes. This is a general point-site tool, not a replacement for the unit route, and no node of sk-d-weil gives its exactness proof."
+   },
+   {
+    "node": "lem-weil-point-automorphism-restriction-natural",
+    "why": "Its unbounded chain-map naturality and integral scalar normalization give the exact sigma square for q. This generic automorphism-of-a-point tool avoids using naturality only on constructible objects; no sk-d-weil node states that more general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-4c3f4111b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-4c3f4111b (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, with every cited statement: comparison (b) and its structure paragraph, sections-exact, point-automorphism-restriction-natural, sections-Roos comparison, abstract derived category, the integral clause of point-transport, and the stmt_deps integral-derived-operations and operations-well-defined(2). The source is the main-20261015 blueprint, clause (3) of prop-trf-rational-frobenius-integral-model.proof.md, lines 55-73. It does not print this identity, so proof_origin=agent is correct. There are no new nodes, the statement and stmt_deps are unchanged, the step uses equal proof_deps, and there is no cycle (12530-node closure). Checks by step. Step 1: g^{-1} is exact for completed coefficients and sends quasi-isomorphisms to quasi-isomorphisms (g is an isomorphism, l != p); Gamma is exact since k = F_q-bar is algebraically closed, for any ring sheaf, on unbounded complexes. Step 2: sigma^g of the naturality lemma is the same res+coprojection+sheafification map as in point-transport, and its unbounded chain naturality gives the strict square. Step 3: I recomputed the cone sign, d(0,theta w) = (0, theta dw) using t_m theta_{m+1} = theta_m. Step 4: inverse-square algebra, using functoriality of Gamma on D. Step 5: cancellation of Gamma(j_q); the domain Gamma N and codomain [H(B(P))] check. Step 6: j_q is the identity on the defining resolution, so the formula agrees with iota_N on D^b_c. Edge cases: q = id, N = 0, constant E-sheaf (no augmentation is inverted). This is not a duplicate of comparison (b) or of the naturality lemma, and it covers parent old steps 4-5 in full. I accept the worker-written tool_uses for the sections-exact and restriction-natural lemmas: they are generic point-site tools that no sk-d-weil node gives. Advisory only: step 6 could also cite operations-well-defined(2) for j_q. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointTransportResolutionCancellation",
+  "declaration": "WeilConjectures.pointTransportResolutionCancellation",
+  "file": "lean/Sheaf/Paper/PointTransportResolutionCancellation.lean",
+  "statement": "theorem pointTransportResolutionCancellation (hl : l ≠ D.p) (N : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : P.obj ⟶ N) [QuasiIso q] : QuasiIso ((CompletedStalk.sectionsComplex D l E).map q) ∧ QuasiIso ((CompletedStalk.sectionsComplex D l E).map (((inverseImageIntegralModules l E (frobeniusPointIso D).hom).mapHomologicalComplex (.up ℤ)).map q)) ∧ ((CompletedStalk.sectionsComplex D l E).map q ≫ frobeniusPointIntegralSigma D l E N = frobeniusPointIntegralSigma D l E P.obj ≫ (CompletedStalk.sectionsComplex D l E).map (((inverseImageIntegralModules l E (frobeniusPointIso D).hom).mapHomologicalComplex (.up ℤ)).map q)) ∧ (frobeniusPointTransportIntegralComplex D l hl E N P q ≫ ((pointFibreIntegralAmbient D l E).mapIso ((integralDerivedPullback l E (frobeniusPointIso D).hom).mapIso (asIso (DerivedCategory.Q.map q)).symm) ≪≫ (pointFibreIntegralAmbient D l E).mapIso ((integralDerivedPullbackComparison l E (frobeniusPointIso D).hom).app P) ≪≫ (@Functor.mapDerivedCategoryFactors _ _ _ (HasDerivedCategory.standard _) _ _ _ (HasDerivedCategory.ofIsGrothendieckAbelian _) (pointIntegralSections l E D.k) _ _ _).app ((integralOperationsPullbackComplexFunctor l E (frobeniusPointIso D).hom).obj P.obj) ≪≫ (CompletedStalk.moduleQ l E).mapIso (CompletedStalk.sectionsRoos D l E ((integralOperationsPullbackTowerFunctor l E (frobeniusPointIso D).hom).obj P.obj))).hom = inv ((pointFibreIntegralAmbient D l E).map (DerivedCategory.Q.map q)) ≫ (@Functor.mapDerivedCategoryFactors _ _ _ (HasDerivedCategory.standard _) _ _ _ (HasDerivedCategory.ofIsGrothendieckAbelian _) (pointIntegralSections l E D.k) _ _ _).hom.app P.obj ≫ (CompletedStalk.moduleQ l E).map (frobeniusPointIntegralSigma D l E P.obj ≫ (CompletedStalk.sectionsComplex D l E).map (inverseImageRoosComparisonComplex l E (frobeniusPointIso D).hom P.obj) ≫ (CompletedStalk.sectionsRoos D l E ((integralOperationsPullbackTowerFunctor l E (frobeniusPointIso D).hom).obj P.obj)).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da9a3e9d3",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read node, six steps, source clause (3), module, report and the exact source of iota_{N,q} (frobeniusPointTransportIntegralComplex), kappa (inverseImagePullbackComparison), theta-tilde (inverseImageRoosComparisonComplex), sigma, sectionsRoos/sectionsComplex/moduleQ and pointFibreIntegralAmbient. All four conjuncts match the node. b_q is exactly the existing CompletedStalk.realization composite (canonical). The identity checks by hand via cancelling j_q, mapDerivedCategoryFactors naturality and the sigma square, so it is non-vacuous; only q and specified comparisons are inverted. The 'agrees with iota_N' clause is the existsUnique spec of the recorded dep with e=refl, so it is correctly not restated. No extra hypotheses, universes consistent, lean.statement verbatim, only lean changed, first delivery, sorry only, docstrings with source/blueprint/steps. Advisories: forced use of decls from non-stmt_dep modules (integralDerivedPullback, pointFibreIntegralAmbient, inverseImageIntegralModules); proof-only private import. No recompile, per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T094813-L-3260063",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-diagonal-supported-flat",
+ "kind": "statement",
+ "title": "Flatness of the internal regular coefficient module supported on the diagonal",
+ "statement": "For a commutative condensed ring object Lambda and a scheme Y whose diagonal surface W is Noetherian, the internal module source Lambda Y = Delta_* Lambda_P of def-sfb-diagonal-coefficient-category is flat in Mod(W,Lambda_W). No flatness or nonzero hypothesis on Lambda is imposed.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), closed diagonal supported coefficient source; supported-source normalization in the diagonal tower trace"
+ },
+ "proof": [
+  {
+   "text": "Exact closed and complementary open inverse images jointly detect zero objects: underlying abelian sheaves are detected by closed support. Exactness then lets them detect invertibility through kernels and cokernels.",
+   "uses": [
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both module restrictions are strong monoidal. Transport the two tensor functors across their monoidal comparisons and reflect their exactness jointly. This proves that a module with flat closed and open restrictions is flat.",
+   "uses": [
+    "def-sfb-mapmod-strong-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the regular diagonal coefficient along the canonical coefficient pullback isomorphism. It remains regular and hence flat. Closed localization identifies the closed restriction of its direct image with this input and the open restriction with zero. The previous criterion proves flatness, and the actual coefficient/direct-image comparison transports this to source Lambda Y.",
+   "uses": [
+    "lem-sf-ring-sheaf-closed-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "def-sfb-mapmod-strong-monoidal",
+  "lem-sf-ring-sheaf-closed-localization"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Paragraph (1), closed diagonal supported coefficient source; supported-source normalization in the diagonal tower trace",
+  "by": "R2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of ringed topoi extension of scalars of the direct image of the unit is the direct image of the new unit and the direct image of the unit is flat",
+   "results": "8 hits: SheafOfModules.unitToPushforwardObjUnit, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, PresheafOfModules.unit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.Hom.appIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.unit. Local rg in both project library roots found the existing scalar adjunction, closed localization and K-injective preservation interfaces, but no direct proof of this concrete supported-module assertion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project interfaces. Prove the concrete supported-module assertion from them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.flat",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.ObjectProperty.flat'. Local rg in both project library roots found the existing scalar adjunction, closed localization and K-injective preservation interfaces, but no direct proof of this concrete supported-module assertion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project interfaces. Prove the concrete supported-module assertion from them."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*flat|preservesKInjective|pushHomOfComapIso",
+   "results": "7 hits: Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/Combinatorics/Matroid/Closure.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. Local rg in both project library roots found the existing scalar adjunction, closed localization and K-injective preservation interfaces, but no direct proof of this concrete supported-module assertion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing project interfaces. Prove the concrete supported-module assertion from them."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalSupportedScalarSource",
+  "date": "2026-10-27",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "Paragraph (1), closed diagonal supported coefficient source; supported-source normalization in the diagonal tower trace",
+   "via": [
+    "lem-diagonal-supported-scalar-source",
+    "lem-diagonal-uniformizer-scalar-frame",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalSupportedFlat",
+  "file": "lean/Sheaf/Paper/DiagonalSupportedFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonal_supported_flat",
+  "statement": "theorem diagonal_supported_flat\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})\n    [IsNoetherian (diagonalSurface Y)] : ObjectProperty.flat (source Λ Y)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T012926-L-2348817",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T012926-L-2348817",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

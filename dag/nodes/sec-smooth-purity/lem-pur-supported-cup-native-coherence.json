@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-supported-cup-native-coherence",
+ "kind": "statement",
+ "title": "Native supported cup coherence and Kummer naturality",
+ "statement": "For the finite datum of [def-pur-conventions] and native operations of [def-pur-supported-cup-functoriality-models], on either small site the supported pullback preserves identities and composition, the specified Kummer class is additive on units and natural under scheme pullback, and the specified supported cup is associative, graded symmetric with sign (-1)^(ab), and compatible with normalized pullback. These are exactly the seven coherence, pullback and Kummer fields of FunctorialCupAlgebraLaws; the four bilinearity fields are not asserted here.",
+ "stmt_deps": [
+  "def-pur-supported-cup-functoriality-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPM, lemma-cup-product-commutative (and Tag 0FPL, associativity); supported refinement formulated by the agent from the tensor-morphism construction in def-pur-supported-cup, Stacks Tag 09XP localization, Tag 03PL Kummer sequence, and Tag 0G78 supported functoriality (cohomology.tex). Pro-etale comparison compatibility is part of this auxiliary statement, not an assertion that 0FPM alone states it."
+ },
+ "proof": [
+  {
+   "text": "Use the normalized exchange and signed-Tate identity and composition laws for pullback. Use the Kummer connecting class for its additivity and naturality. Expand the prescribed cup as inverse coefficient multiplication, shifted tensor of arrows, then Tate multiplication. Tensor bilinearity gives additive and scalar fields. Source and Tate associativity with the shift sign cocycle give associativity; their symmetry with the shift braiding gives (-1)^(ab). Exact monoidal inverse image and the normalized source and target squares give cup pullback. All maps are the native ModuleCat-sheaf maps, so the ringed-module source-system statement must be identified with these native models.",
+   "uses": [
+    "lem-pur-supported-source-system-cup-calculus",
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "lem-pur-unit-kummer-two-site-normalization",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-etale-closed-constant-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-supported-source-system-cup-calculus",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-pur-unit-kummer-two-site-normalization",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-etale-closed-constant-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native-model refinement of lem-pur-supported-cup-functoriality"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedCupFunctoriality",
+  "date": "2026-10-26",
+  "group": "Q8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Steps 1--5 and 8",
+   "via": [
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedCupNativeCoherence",
+  "file": "lean/Sheaf/Paper/SupportedCupNativeCoherence.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.supportedCupNativeCoherence",
+  "statement": "theorem supportedCupNativeCoherence (P : PurityFiniteSetting.{u}) (pro : Bool) :\n    P.FunctorialCupAlgebraIdentity pro ∧ P.FunctorialCupAlgebraComposition pro ∧\n      P.FunctorialCupAlgebraKummerAdd pro ∧ P.FunctorialCupAlgebraKummerPullback pro ∧\n      P.FunctorialCupAlgebraAssociativity pro ∧ P.FunctorialCupAlgebraSymmetry pro ∧\n      P.FunctorialCupAlgebraPullback pro",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "supported cup product graded associativity symmetry pullback localization etale proetale comparison",
+   "results": "Eight projective-spectrum pullback results; none is a supported cohomology cup law.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShiftedHom.comp",
+   "results": "Unknown identifier in search index; source search used instead.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedCup|cupComposite|mapShiftedHom_singleδ",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Map.ShortComplex.ShortExact.mapShiftedHom_singleδ gives the exact-functor boundary formula. No complete supported-cup calculus.",
+   "date": "2026-10-26",
+   "verdict": "partial match: used for localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image preserves the connecting morphism of a short exact sequence and cup product associativity",
+   "results": "Eight results include CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁ and preservation of images; none states the complete native supported cup calculus. Exact single-delta functoriality is supplied by the separately located Mathlib Ext.Map lemma.",
+   "date": "2026-10-26",
+   "verdict": "partial match for localization only"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40b06",
+  "group": "Q8",
+  "result": "fix",
+  "landing": "20261026T002320-L-75804",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40b06",
+  "group": "Q8",
+  "result": "fix",
+  "landing": "20261026T002320-L-75804",
+  "kind": "interface",
+  "note": "independent cc review: supportedCupFunctoriality and the 7 delivered modules vs the published SupportedCupFunctoriality (every moved declaration compared; defeq rfl checks of the instances); 59 importers/users compiled against the sandbox build; nodes vs Lean"
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "def-pur-sequence-site-open-data",
+ "kind": "definition",
+ "title": "Ordinary open-extension data for the ringed sequence site",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ have object universe $c$, morphism universe $v$, a Grothendieck topology $J$, and be essentially small in $k=\\max(c,v,r)$. Let $U\\in\\mathcal C$, let $B_n$ be commutative ring sheaves in universe $k$, and let $\\tau_n:B_{n+1}\\to B_n$. Use the strict semilinear system categories, evaluation and horizontal transitions of [def-coef-semilinear-system-models], restriction of scalars [def-pc-sheaf-restrict-scalars], the localized site and restricted coefficient rings $B_n|_U$ of [def-pur-localized-ringed-site], and module sheaves [def-weil-sheaf-of-modules-category]. Define $\\operatorname{openTower}(B)_n=B_n|_U$ and $\\operatorname{openTowerMap}(\\tau)_n=\\tau_n|_U$. Levelwise $j_{!,R}$ is the sheafification [def-weil-presheaf-modules-sheafification] of the extension-by-zero presheaf [def-weil-extension-by-zero-presheaf], and $j_R^*$ is restriction to $\\mathcal C/U$, with their actual normalized adjunction [lem-pur-site-restriction-module-adjunction-exact]. The summand section of $j_{!,R}M$ over an object of $\\mathcal C/U$ is the component of this adjunction unit.\n\nDefine coefficient-comparison data to consist, for every ring-sheaf map $\\varphi:R\\to S$, of isomorphisms $\\operatorname{Res}_{\\varphi|_U}j_{!,R}\\cong j_{!,S}\\operatorname{Res}_\\varphi$ and $\\operatorname{Res}_\\varphi j_R^*\\cong j_S^*\\operatorname{Res}_{\\varphi|_U}$, the first taking every actual summand section to the identical summand section and the second the identity on underlying sections. Require compatibility with the level adjunction unit and counit, identity coefficients, and composition; the composition identifications for scalar restrictions on both sites are the identity on underlying sections.\n\nAn ordinary sequence-site open datum consists of these coefficient-comparison data and the following data. It has a ringed-topos morphism with independent site universes [def-pur-ringed-topos-morphism-of-universes] between the coefficient sequence sites, whose inverse image on underlying presheaves is naturally restriction along $(1_{\\mathbb N}\\times(\\mathcal C/U\\to\\mathcal C))^{\\mathrm{op}}$ and whose ring map is the identity under this identification. It has a sheaf $H$ with presheaf the constant-in-index lifted representable of $U$, a proof that $H$ is subterminal, an equivalence from sheaves on the slice sequence site to the slice topos over $H$, and an identification of this geometric inverse image with pullback to that slice. It has functors $L$ from systems on $\\mathcal C$ to systems on $\\mathcal C/U$ and $J_!$ in the reverse direction. The objects, maps and restrictions of $L$ are the actual section restrictions. Require an adjunction $L\\dashv f_*$ to the ringed module direct image, an identification of the underlying sheaf of $L$ with geometric inverse image, an adjunction $J_!\\dashv L$, and additivity and preservation of finite limits and finite colimits for both $J_!$ and $L$. Finally it has level comparisons $\\operatorname{ev}_nJ_!\\cong j_{!,B_n}\\operatorname{ev}_n$ and $\\operatorname{ev}_nL\\cong j_{B_n}^*\\operatorname{ev}_n$, scalar-restriction identifications between the localized composite tower maps and the restrictions of the original composite tower maps that are the identity on sections, and the two equations identifying the evaluated adjunction unit and counit with the actual level units and counits under these comparisons.\n\nFor such a datum define its transition predicate to require, for every $n\\le m$ and every system $M$ on the slice, that the horizontal transition of $J_!M$, followed by the level-$n$ comparison and scalar restriction, equal the level-$m$ comparison followed by $j_{!,B_m}$ applied to the transition of $M$, the localized composite scalar identification, and the coefficient-comparison isomorphism for $B_m\\to B_n$. This definition imposes the equation for equality indices as well as for all composite transitions. No existence assertion or derived extension datum is part of this definition.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pur-ringed-topos-morphism-of-universes"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact) and 03CY, with sites.tex Tags 04GZ and 0791; ordinary coefficient, geometric localization, level-adjunction and transition data already defined in Sheaf.Paper.SequenceSiteOpenExtension for blueprint operations.proof.md (2)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction and extension by zero on a sequence site of semilinear module systems with coefficient comparison data",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Function.ExtendByZero.linearMap\", \"module\": \"Mathlib.LinearAlgebra.Pi\", \"type\": \": (ι → R) →ₗ[R] η → R\", \"doc\": \"The linear map from the space of functions $\\\\iota \\\\to R$ to $\\\\eta \\\\to R$, defined by extending each function $f : \\\\iota \\\\to R$ via the mapping $s : \\\\iota \\\\to \\\\eta$ with zero as the default value for e\"}\n  {\"name\": \"DFinsupp.lmk\", \"module\": \"Mathlib.LinearAlgebra.DFinsupp\", \"type\": \"(s : Finset ι) : (∀ i : (↑s : Set ι), M i) →ₗ[R] Π₀ i, M i\", \"doc\": \"Let $R$ be a semiring, $\\\\iota$ be an index type, and $(M_i)_{i \\\\in \\\\iota}$ be a family of $R$-modules. For any finite set $s \\\\subseteq \\\\iota$, `DFinsupp.lmk s` is the $R$-linear map from the space of \"}\n  {\"name\": \"Finsupp.restrictSupportEquiv_symm_apply_coe\", \"module\": \"Mathlib.Data.Finsupp.Basic\", \"type\": \"(s : Set α) (M : Type*) [AddCommMonoid M] [DecidablePred (· ∈ s)] (f : s →₀ M) :\\n  (restrictSupportEquiv s M).symm f = f.extendDomain\", \"doc\": \"For any subset $ s \\\\subseteq \\\\alpha $ and finite support function $ f : s \\\\to_0 M $, applying the inverse of the restriction-equivalence $ \\\\text{restrictSupportEquiv} $ yields the function $ f $ exten\"}\n  {\"name\": \"Finsupp.subtypeDomain_extendDomain\", \"module\": \"Mathlib.Data.Finsupp.Basic\", \"type\": \"(f : Subtype P →₀ M) : subtypeDomain P f.extendDomain = f\", \"doc\": \"For any finite support function $f$ defined on a subtype $\\\\{x : \\\\alpha \\\\mid P(x)\\\\}$, extending $f$ to the entire domain $\\\\alpha$ by zero and then restricting back to the subtype results in the origina\"}\n  {\"name\": \"Finsupp.supportedEquivFinsupp\", \"module\": \"Mathlib.LinearAlgebra.Finsupp.Supported\", \"type\": \"(s : Set α) : supported M R s ≃ₗ[R] s →₀ M\", \"doc\": \"There is a canonical linear equivalence between the submodule of finite support functions $ \\\\alpha \\\\to_0 M $ with support contained in a subset $ s \\\\subseteq \\\\alpha $, and the space of finite support \"}\n  {\"name\": \"Finsupp.restrictSupportEquiv\", \"module\": \"Mathlib.Data.Finsupp.Basic\", \"type\": \"(s : Set α) (M : Type*) [AddCommMonoid M] : { f : α →₀ M // ↑f.support ⊆ s } ≃ (s →₀ M)\", \"doc\": \"There is a canonical equivalence between the type of finite support functions $ \\\\alpha \\\\to_0 M $ whose support is contained in a subset $ s \\\\subseteq \\\\alpha $, and the type of finite support functions\"}\n  {\"name\": \"Finsupp.lsubtypeDomain\", \"module\": \"Mathlib.LinearAlgebra.Finsupp.Defs\", \"type\": \": (α →₀ M) →ₗ[R] s →₀ M\", \"doc\": \"The linear map from the $ R $-module of finite support functions $ \\\\alpha \\\\to_0 M $ to the $ R $-module of finite support functions on a subset $ s \\\\subseteq \\\\alpha $, defined by restricting each func\"}\n  {\"name\": \"ContinuousLinearMap.restrictScalars_zero\", \"module\": \"Mathlib.Topology.Algebra.Module.LinearMap\", \"type\": \": (0 : M₁ →L[A] M₂).restrictScalars R = 0\", \"doc\": \"The restriction of scalars of the zero continuous linear map between modules is equal to the zero map in the restricted scalar context, i.e., $ 0|_R = 0 $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "The existing project SequenceSiteOpenExtension definitions are reused; no Mathlib definition supplies this packaged datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary open extension datum on strict semilinear systems with canonical level comparisons and transition formula",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.StrictMono.extend\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {I : Ideal R} →\\n      {M : Type u_4} →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            {N : Type u_5} →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {a : ℕ → ℕ} → Str\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, a strictly monotonic function $ a : \\\\mathbb{N} \\\\to \\\\mathbb{N} $, and a family of $ R $-linear maps $ f_n : M \\\\to N/I^{a(n\"}\n  {\"name\": \"Module.Baer.ExtensionOfMaxAdjoin.snd\", \"module\": \"Mathlib/Algebra/Module/Injective\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {Q : Type v} →\\n      [inst_1 : AddCommGroup Q] →\\n        [inst_2 : Module R Q] →\\n          {M : Type u_1} →\\n            {N : Type u_2} →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : AddCommGroup N] →\\n                  [inst_5 : Module R M\", \"doc\": \"Given a ring $ R $, $ R $-modules $ M, N, Q $ with injective linear maps $ i : M → N $ and $ f : M → Q $, and an element $ y ∈ N $, this function returns the scalar $ b ∈ R $ such that any element $ x\"}\n  {\"name\": \"Module.Baer.ExtensionOfMaxAdjoin.extensionToFun\", \"module\": \"Mathlib/Algebra/Module/Injective\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {Q : Type v} →\\n      [inst_1 : AddCommGroup Q] →\\n        [inst_2 : Module R Q] →\\n          {M : Type u_1} →\\n            {N : Type u_2} →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : AddCommGroup N] →\\n                  [inst_5 : Module R M\", \"doc\": \"Given a Baer module $ Q $ over a ring $ R $, injective linear maps $ i : M → N $ and $ f : M → Q $, and an element $ y ∈ N $, this function maps an element $ x $ in the submodule formed by the sum of \"}\n  {\"name\": \"Module.Baer.ExtensionOfMaxAdjoin.fst\", \"module\": \"Mathlib/Algebra/Module/Injective\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {Q : Type v} →\\n      [inst_1 : AddCommGroup Q] →\\n        [inst_2 : Module R Q] →\\n          {M : Type u_1} →\\n            {N : Type u_2} →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : AddCommGroup N] →\\n                  [inst_5 : Module R M\", \"doc\": \"Given a ring $ R $ and $ R $-modules $ M, N, Q $ with injective linear maps $ i : M → N $ and $ f : M → Q $, this function takes an element $ x $ in the submodule formed by the sum of the domain of th\"}\n  {\"name\": \"IsAdicComplete.StrictMono.extend_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For each natural number $n$, the extension of the function $f$ evaluated at the sequence term $a_n$ is equal to $f(n)$, i.e., $\\\\text{extend}_{ha}(f)(a_n) = f(n)$.\"}\n  {\"name\": \"Module.Baer.ExtensionOf\", \"module\": \"Mathlib/Algebra/Module/Injective\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {Q : Type v} →\\n      [inst_1 : AddCommGroup Q] →\\n        [inst_2 : Module R Q] →\\n          {M : Type u_1} →\\n            {N : Type u_2} →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : AddCommGroup N] →\\n                  [inst_5 : Module R M\", \"doc\": \"An inductive type representing the extension of a linear map $ f : M \\to Q $ along a linear map $ g : M \\to N $, as part of Baer's criterion for injective modules. Given a ring $ R $, $ R $-modules $ M,\"}\n  {\"name\": \"Module.Baer.ExtensionOf.max\", \"module\": \"Mathlib/Algebra/Module/Injective\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {Q : Type v} →\\n      [inst_1 : AddCommGroup Q] →\\n        [inst_2 : Module R Q] →\\n          {M : Type u_1} →\\n            {N : Type u_2} →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : AddCommGroup N] →\\n                  [inst_5 : Module R M\", \"doc\": \"Given a ring $ R $, $ R $-modules $ M, N, Q $, and linear maps $ i : M → N $ and $ f : M → Q $, if $ c $ is a nonempty chain of Baer extensions of $ f $ along $ i $ under the pointwise order, then the\"}\n  {\"name\": \"Module.Baer.ExtensionOf.inhabited\", \"module\": \"Mathlib/Algebra/Module/Injective\", \"type\": \"{R : Type u} →\\n  [inst : Ring R] →\\n    {Q : Type v} →\\n      [inst_1 : AddCommGroup Q] →\\n        [inst_2 : Module R Q] →\\n          {M : Type u_1} →\\n            {N : Type u_2} →\\n              [inst_3 : AddCommGroup M] →\\n                [inst_4 : AddCommGroup N] →\\n                  [inst_5 : Module R M\", \"doc\": \"For any ring $ R $, $ R $-modules $ M $ and $ N $, an injective $ R $-linear map $ i : M \\to N $, and an $ R $-linear map $ f : M \\to Q $ where $ Q $ is an injective $ R $-module, there exists an $ R $-\"}\n",
+   "date": "2026-10-22",
+   "verdict": "The existing project SequenceSiteOpenExtension definitions are reused; no Mathlib definition supplies this packaged datum."
+  },
+  {
+   "tool": "grep",
+   "query": "SequenceOpenOrdinary|SequenceOpenCoefficientData|openTowerMap",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "The existing project SequenceSiteOpenExtension definitions are reused; no Mathlib definition supplies this packaged datum."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n SequenceOpenOrdinary|SequenceOpenCoefficientData|openTowerMap /home/ubuntu/weil-conjectures-sheaf-shared/lean/WeilConjectures /home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:49:abbrev openTowerMap (B : ℕ → Sheaf J CommRingCat.{max c v r})\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:65:structure SequenceOpenCoefficientData where\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:141:structure SequenceOpenOrdinary where\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:142:  coefficients : SequenceOpenCoefficientData.{c, v, r} J U\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:146:    (openTowerMap.{c, v, r} J U B τ)))\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:155:    (openTowerMap.{c, v, r} J U B τ)).obj.obj X),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:169:    Systems.{max c v, v, max c v r} (J.over U) (openTower.{c, v, r} J U B) (openTowerMap.{c, v,\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:186:        (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ)) ≅\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:189:  Jfun : Systems.{max c v, v, max c v r} (J.over U) (openTower.{c, v, r} J U B) (openTowerMap.{c,\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:199:    evaluation.{max c v, v, max c v r} (J.over U) (openTower.{c, v, r} J U B) (openTowerMap.{c,\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:205:        (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) h) ≅\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:215:        (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n ≅\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:220:      (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ)),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:222:        (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n).map\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:229:        (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n).obj M)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:238:attribute [instance] SequenceOpenOrdinary.additive SequenceOpenOrdinary.limits\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:239:  SequenceOpenOrdinary.colimits SequenceOpenOrdinary.restrictionAdditive\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:240:  SequenceOpenOrdinary.restrictionLimits SequenceOpenOrdinary.restrictionColimits\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:246:def SequenceOpenOrdinary.Transitions\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:247:    (O : SequenceOpenOrdinary.{c, v, r} J U B τ) : Prop :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:250:      (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ)),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:258:            (openTowerMap.{c, v, r} J U B τ) h).app M) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:262:            (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n).obj M)) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:265:          (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n).obj M)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:271:def SequenceOpenOrdinary.Scalars\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:272:    (O : SequenceOpenOrdinary.{c, v, r} J U B τ) : Prop :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:280:      (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ)),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:292:def SequenceOpenOrdinary.derivedLevel\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:293:    (O : SequenceOpenOrdinary.{c, v, r} J U B τ) (n : ℕ) :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:304:      (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:310:def SequenceOpenCoefficientData.derivedComparison\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:311:    (A : SequenceOpenCoefficientData.{c, v, r} J U)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:334:def SequenceOpenOrdinary.DerivedTransitions\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:335:    (O : SequenceOpenOrdinary.{c, v, r} J U B τ) : Prop :=\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:343:      (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ)),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:347:        ((SequenceOpenOrdinary.derivedLevel.{c, v, r} J U B τ O n).hom.app M) =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:348:    (SequenceOpenOrdinary.derivedLevel.{c, v, r} J U B τ O m).hom.app M ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:351:          (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) h).app M) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:355:            (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n).obj M)) ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:356:      (SequenceOpenCoefficientData.derivedComparison.{c, v, r} J U O.coefficients\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:359:          (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ) n).obj M)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:366:    (O : SequenceOpenOrdinary.{c, v, r} J U B τ) where\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:370:      (openTower.{c, v, r} J U B) (openTowerMap.{c, v, r} J U B τ)) ℤ,\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/SequenceSiteOpenExtension.lean:407:    ∃ O : SequenceOpenOrdinary.{u + 1, u, r} (Scheme.ProEt.topology W) V B τ,\n",
+   "date": "2026-10-22",
+   "verdict": "The exact existing definitions occur in Sheaf.Paper.SequenceSiteOpenExtension, recorded only by the theorem node lem-pur-sequence-site-open-extension. No definition node owns the ordinary open datum; attach existing declarations without changing the module."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l SequenceOpenOrdinary|SequenceOpenCoefficientData|SequenceSiteOpenExtension /home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-pur-sequence-site-open-extension.json\n",
+   "date": "2026-10-22",
+   "verdict": "The exact existing definitions occur in Sheaf.Paper.SequenceSiteOpenExtension, recorded only by the theorem node lem-pur-sequence-site-open-extension. No definition node owns the ordinary open datum; attach existing declarations without changing the module."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 /home/ubuntu/weil-conjectures-sheaf-shared/tools/blueprint_refs.py search SequenceOpenOrdinary",
+   "results": "0 blueprint nodes match 'SequenceOpenOrdinary'\n",
+   "date": "2026-10-22",
+   "verdict": "The exact existing definitions occur in Sheaf.Paper.SequenceSiteOpenExtension, recorded only by the theorem node lem-pur-sequence-site-open-extension. No definition node owns the ordinary open datum; attach existing declarations without changing the module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-semilinear-open-closed-complex-sequence",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "operations.proof.md paragraph (2), final sentence: ordinary levelwise open extension and transitions in the open-closed sequence of strict systems.",
+   "via": [
+    "lem-sp-semilinear-open-closed-complex-sequence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "module": "Sheaf.Paper.SequenceSiteOpenData",
+  "declaration": "WeilConjectures.SemilinearSections.SequenceOpenOrdinary",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.openTower",
+   "WeilConjectures.SemilinearSections.openTowerMap",
+   "WeilConjectures.SemilinearSections.openExtensionSection",
+   "WeilConjectures.SemilinearSections.SequenceOpenCoefficientData",
+   "WeilConjectures.SemilinearSections.SequenceOpenOrdinary",
+   "WeilConjectures.SemilinearSections.SequenceOpenOrdinary.Transitions"
+  ],
+  "statement": "structure SequenceOpenOrdinary",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "The six existing ordinary definitions are relocated verbatim from SequenceSiteOpenExtension to SequenceSiteOpenData and publicly re-exported by the original module. Only docstring anchors differ; all names, binders and bodies agree. See coord/changes/C6-sequence-open-data-extraction.md.",
+  "file": "lean/Sheaf/Paper/SequenceSiteOpenData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb0f72655",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb0f72655",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery after b687 RETURN; both repairs correct. (a) levelUnit/levelAdjunction/pushEvaluation/unitEvaluation now use def-weil-pbc-proetale-operations proEtaleRingDirectImageMap/proEtaleRingModuleDirectImage with Iso.refl (same canonical map); ProEtaleRingedOpenClosed is a plain proof import and lem-weil-pbc-proetale-ringed-open-closed is dropped from stmt_deps. (b) New def-pur-sequence-site-open-data, existing:true on unchanged SequenceSiteOpenExtension (openTower, openTowerMap, openExtensionSection, SequenceOpenCoefficientData, SequenceOpenOrdinary, Transitions); statement checked field by field; its theorem stmt_dep lem-pur-site-restriction-module-adjunction-exact is genuine (localizedSystemAdjunction = .choose of an ∃! theorem); statement equals the extracted signature. Mechanical finding: lem-pur-ringed-site-module-pullback-exists-universes is genuine use (IsRightAdjoint instance types SheafOfModules.pullback for pull/levelPull and both adjunctions) → PASS on that point. Item statement, proof and proof_deps identical to live; only lean and the two stmt_deps additions changed. Clause table, edge cases (U or Z empty, zero ring, non-flat φ, unbounded ℤ complexes, non-qcqs T) and universes re-checked; lean.statement verbatim; declarations equal the module's; H5/H6/H8 OK. Advisories: proEtaleModuleInverseImage and coefficientSequenceTopology owners reached transitively; proEtaleRingDirectImageMap not in the def-weil-pbc-proetale-operations declarations list; levelPresentation unpinned; six declarations listed by two nodes. No compile, no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2408a",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184752-L-3173980",
+  "kind": "interface",
+  "note": "independent cc review: delivered SequenceSiteOpenData vs clone's SequenceSiteOpenExtension (verbatim move, only blueprint anchors and gen* options differ); item theorem statement vs clone (identical); new node lean records vs delivered modules; 3 direct importers compiled against the delivered modules in a sandbox (all OK); #print axioms: three new theorems axiom-clean, item theorem sorryAx only via sequenceOpenOrdinary"
+ }
+}

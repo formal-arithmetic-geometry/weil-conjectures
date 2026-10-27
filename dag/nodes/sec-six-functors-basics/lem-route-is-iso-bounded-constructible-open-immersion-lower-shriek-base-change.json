@@ -1,0 +1,126 @@
+{
+ "id": "lem-route-is-iso-bounded-constructible-open-immersion-lower-shriek-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "via": [
+    "def-sfb-derived-open-lower-shriek-id",
+    "lem-sfb-adic-proper-localizing-adjunction-comparison",
+    "lem-sfb-adic-localizing-exceptional-cohomology"
+   ],
+   "place": "provisional: the Lean of def-sfb-derived-open-lower-shriek-id (its module WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek imports WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange (3 steps)) uses AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange' (route sorry with no node, tools/route_nodes.py 2026-10-25)"
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "**Base change for extension by zero** on bounded constructible complexes: for a *cartesian* square with `j` and `j'` open immersions, the exchange mor",
+ "statement": "PROVISIONAL (machine-made from the Lean declaration; stage 1 writes it in words): **Base change for extension by zero** on bounded constructible complexes: for a *cartesian* square with `j` and `j'` open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism. Mathematically, since the square is cartesian, `X'` is the preimage of the open subscheme `X ⊆ Z` under `g`, and on stalks at points of `Z'_proét` both sides are the pulled-back stalk at points of `X'` and vanish outside `X'`.\n\nLean (AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'):\n```lean\ntheorem isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange' (sq : IsPullback g' j' j g) :\n    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq.toCommSq)\n```",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-existence-ii/sk-cor-existence-ii-restriction.proof.md",
+  "place": "def-sfb-derived-open-lower-shriek-id: the Lean of this node (its module WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek imports WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange (3 steps)) reaches AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange', a sorry on the sorry route of batch3 with no node; Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/OpenLowerShriekBaseChange.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange' (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange, lines 179-188, proof `sorry`)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For the primed unit-square-counit exchange alpha and any bounded constructible complex K, apply [stage3-sfb-open-base-change-component-mono]. Its equality premise is reflexivity after unfolding the primed exchange and its three steps: the adjunctions, square comparison and unitors are exactly the displayed formula. Thus alpha.app K is monic. The hypotheses on the coefficient ring, field, schemes and cartesian square agree verbatim.",
+   "uses": [
+    "stage3-sfb-open-base-change-component-mono"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [stage3-sfb-open-base-change-component-section] to the same alpha, with the same reflexive formula identification, obtaining beta with beta followed by alpha.app K equal to the identity. Cancel the monomorphism alpha.app K from (alpha.app K followed by beta) followed by alpha.app K = alpha.app K; associativity and the section equation give alpha.app K followed by beta = identity. These two equations exhibit alpha.app K as an isomorphism.",
+   "uses": [
+    "stage3-sfb-open-base-change-component-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use CategoryTheory.NatIso.isIso_of_isIso_app to conclude that the natural transformation alpha is an isomorphism. No naturality of independently selected component inverses must be proved separately, since this standard component criterion constructs the natural inverse.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "stage3-sfb-open-base-change-component-mono",
+  "stage3-sfb-open-base-change-component-section"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.proof.md",
+  "place": "C8, 2026-10-25: reuse the existing proved component mono and section inputs for exactly the same exchange formula; categorical cancellation and componentwise natural-isomorphism assembly. The source proves the geometric exchange statement via ambient exact functors and the underived cartesian comparison. The new proof reuses that geometry through the existing component inputs rather than reproving it."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-sfb-derived-open-lower-shriek-id",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/OpenLowerShriekBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'"
+  ],
+  "statement": "theorem isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange' (sq : IsPullback g' j' j g) :\n    IsIso (boundedConstructibleOpenImmersionLowerShriekBaseChange' Λ ℓ sq.toCommSq) :=\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "upstream declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py",
+  "branch": "slopmaster2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange'",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange",
+     "lines": [
+      179,
+      188
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T070913-L-4173286",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "id": "lem-sf-exact-tensor-model-construction-independent",
+ "kind": "statement",
+ "title": "Totalization and descent of an ordinary tensor comparison",
+ "statement": "Let J,K be essentially small sites with coefficients in an independent universe containing their object and morphism universes. Fix commutative ring sheaves R,S, an additive exact left adjoint F:Mod(J,R)→Mod(K,S), closed derived tensor structures A,B and their representative models TA,TB [def-coef-semilinear-system-models]. Given natural ordinary tensor isomorphisms e:F(M⊗N)≅FM⊗FN, and preservation by F of K-flat complexes with flat terms, there exist a derived tensor comparison mu and TensorComparisonModel whose ordinary part is e and whose chain maps are all invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU and 07A4: signed totalization and flat-term K-flat descent."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Totalize the inverse ordinary tensor comparison on all summands. Naturality verifies the signed differential, and the left adjoint preserves coproducts, giving an invertible chain comparison.",
+   "uses": [
+    "lem-sf-open-operation-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU and 07A4: signed totalization and flat-term K-flat descent."
+   }
+  },
+  {
+   "text": "Cochain tensor rigidity makes restriction to pairs of flat-term K-flat representatives fully faithful. Descend the representative tensor-model comparison along this restriction.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity",
+    "lem-sf-open-operation-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU and 07A4: signed totalization and flat-term K-flat descent."
+   }
+  },
+  {
+   "text": "Cancel the four invertible factors of the descended comparison to verify the TensorComparisonModel representative equation.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU and 07A4: signed totalization and flat-term K-flat descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-operation-models",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU and 07A4: signed totalization and flat-term K-flat descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean; Mathlib/CategoryTheory/Dialectica/Monoidal.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean; Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean; Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "date": "2026-10-25",
+   "verdict": "Categorical pullback API found; no independent-universe ordinary/total/derived normalization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "SheafOfModules.pullbackId; SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackIso",
+   "date": "2026-10-25",
+   "verdict": "Categorical pullback API found; no independent-universe ordinary/total/derived normalization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint module pullback on a ringed site preserves tensor products with pure tensor normalization",
+   "results": "SheafOfModules.instIsLeftAdjointPullback; PresheafOfModules.pullback; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-25",
+   "verdict": "Categorical pullback API found; no independent-universe ordinary/total/derived normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cochain_tensor_model_rigidity|TensorComparisonModel|tensorPullbackTotal",
+   "results": "No matching declarations.",
+   "date": "2026-10-25",
+   "verdict": "No exact independent-coefficient ordinary/total/derived model normalization statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural ordinary tensor comparison descends from K-flat complexes to derived categories and determines the chain and derived comparison uniquely",
+   "results": "HasDerivedCategory.standard; Module.Flat.rTensor_shortComplex_exact; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; Module.Flat.lTensor_shortComplex_exact; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; HomologicalComplex.tensorHom; LinearMap.tensorEqLocusEquiv; Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-25",
+   "verdict": "No exact independent-coefficient ordinary/total/derived model normalization statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatIso.ofComponents",
+   "results": "No matching declarations.",
+   "date": "2026-10-25",
+   "verdict": "No exact independent-coefficient ordinary/total/derived model normalization statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+  "date": "2026-10-25",
+  "group": "Y9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]: ambient pullback tensor normalization and representative comparison.",
+   "via": [
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactTensorModelConstructionIndependent",
+  "file": "lean/Sheaf/Paper/ExactTensorModelConstructionIndependent.lean",
+  "declaration": "WeilConjectures.IndependentTensorModel.modelOfOrdinary",
+  "statement": "theorem modelOfOrdinary\n    {C D : Type c} [Category.{v} C] [Category.{v} D]\n    [EssentiallySmall.{max c v r} C] [EssentiallySmall.{max c v r} D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (R : Sheaf J CommRingCat.{max c v r}) (S : Sheaf K CommRingCat.{max c v r})\n    (F : SemilinearSections.Mod.{c, v, max c v r} J R ⥤\n      SemilinearSections.Mod.{c, v, max c v r} K S) [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (G : SemilinearSections.Mod.{c, v, max c v r} K S ⥤\n      SemilinearSections.Mod.{c, v, max c v r} J R) (adj : F ⊣ G)\n    (A : SemilinearSections.Closed.{c, v, r} J R)\n    (B : SemilinearSections.Closed.{c, v, r} K S)\n    (TA : Models.{c, v, r} J R A)\n    (TB : Models.{c, v, r} K S B)\n    (e : ∀ M N : SemilinearSections.Mod.{c, v, max c v r} J R,\n      F.obj (ordinaryTensor.{c, v, r} J R M N) ≅\n        ordinaryTensor.{c, v, r} K S (F.obj M) (F.obj N))\n    (he : ∀ {M M' N N' : SemilinearSections.Mod.{c, v, max c v r} J R} (a : M ⟶ M') (b : N ⟶ N'),\n      F.map (ordinaryTensorHom.{c, v, r} J R a b) ≫ (e M' N').hom =\n        (e M N).hom ≫ ordinaryTensorHom.{c, v, r} K S (F.map a) (F.map b))\n    (hk : ∀ P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ,\n      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →\n      flatTerms.{c, v, r} J R P →\n      CochainComplex.IsKFlatIndependentCoefficients (J := K) (R := S)\n        ((F.mapHomologicalComplex (.up ℤ)).obj P)) :\n    ∃ mu : A.tensor ⋙ F.mapDerivedCategory ≅\n        (F.mapDerivedCategory.prod F.mapDerivedCategory) ⋙ B.tensor,\n      ∃ model : TensorComparisonModel.{c, v, r} J K R S F A B TA TB mu,\n        model.ordinary = e ∧ ∀ P Q, IsIso (model.chain P Q)",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-16698",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261026T071609-L-3954447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-16698",
+  "group": "Y9",
+  "result": "fix",
+  "landing": "20261026T071609-L-3954447",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-sf-ambient-pullback-tensor-coherence and 6 new nodes vs delivered Lean (tensorData_existsUnique proved via sitePullbackTensorGenerators/modelOfOrdinary/tensorComparisonModel_unique, axioms clean); TensorData abbrev and pure rewrite vs change records and the original structure/tensorSection; both direct importers compiled against the sandbox-built delivery"
+ }
+}

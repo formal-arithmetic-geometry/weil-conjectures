@@ -32,68 +32,30 @@ public import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 public import Sheaf.Paper.QcqsCompactSupportRealization
-import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
-import Sheaf.Paper.RefinementComparisonIsomorphism
-import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
-import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.Paper.CompletedCoefficientPushforwardComparison
-import Sheaf.Paper.SfCbcCompactSupportCompositionLimit
-import Sheaf.Paper.SfCbcExtensionZeroCompletion
-import Sheaf.Paper.CompletedPullbackAdjunction
-import Sheaf.Paper.ProEtaleConstantReductionTower
-import Sheaf.Paper.ProperOpenTowerComparison
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.ConstantCompletionEquivalence
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.StrictTowerExchangeMateNormalization
-import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
 public import Sheaf.Paper.PbcRationalTransport
 public import Sheaf.Paper.CompleteCompactSupportProetale
-import WeilConjectures.Compactification.NagataCompactification
-
-
-
 
 import Sheaf.Paper.IntrinsicQbarCategory
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import Sheaf.Paper.PbcIntrinsicTowerComplete
+import all Sheaf.Paper.PbcScalarExtension
 
 public import Sheaf.Paper.CompletedExchangeCoherence
 public import Sheaf.Paper.SbcCompletedOperations
 
+import Mathlib.Algebra.Homology.DerivedCategory.Linear
+import all Sheaf.Paper.CompletedExchangeCoherence
+import Sheaf.Paper.CompletedPullbackReflection
+import all Sheaf.Paper.CompletedAdicCoefficientDatum
+import all Sheaf.Paper.IntegralCompactSupportUniformRestriction
+import all Sheaf.Paper.CompletedConstructiblePreservation
+import all Sheaf.Paper.CompletedOpenExchangeTransport
+import Sheaf.Paper.ExtensionZeroStratifiedPerfect
+import all Sheaf.Paper.CompleteCompactSupportProetale
+import all Sheaf.Paper.CompletedExtensionZeroComparison
+import all Sheaf.Paper.PbcConstructibleReductionDirectImage
+import all Sheaf.AlgebraicGeometry.FiniteTypeGeometryFibreBound
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 
 /-!
 # Naturality, identities, pasting, and smoothness of the canonical exchanges
@@ -115,13 +77,191 @@ There is no additional exchange chosen from an abstract operation datum.
 -- maximum coefficient universe at this fixed small-site coefficient size.
 attribute [-instance] WeilConjectures.IntegralHom.derivedCategory
 
+attribute [local irreducible] HasDerivedCategory.standard
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+universe u
+namespace AlgebraicGeometry.Scheme
+variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+private instance exchangeDatumModuleLinear (T : Scheme.{u}) :
+    Linear A (reductionModules T (d.completedRing T)) := by
+  exact pbcCompletedModulesLinear T d
+private instance exchangeDatumDerivedLinear (T : Scheme.{u}) :
+    Linear A (d.derived T) := inferInstance
+private theorem exchangePushLinear {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (d.push f).Linear A := by
+  rw [datumPush_eq_actualPush]
+  exact (pbcActualOperations_linear_aux f d).2.1
+
+private theorem exchangePullLinear {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (d.pull f).Linear A := by
+  have hP : (proEtaleRingModulePullback f (d.completedRing Y) (d.completedRing X)
+      (d.integralRingIso f)).Linear A := by
+    constructor
+    intro M N k a
+    have h := (completedModulePullLinear f d).map_smul k a
+    rw [coefficientIso_eq f d] at h
+    exact h
+  have := hP
+  exact inferInstanceAs ((proEtaleRingModulePullback f (d.completedRing Y)
+    (d.completedRing X) (d.integralRingIso f)).mapDerivedCategory.Linear A)
+
+private theorem exchangeCompletedPullLinear {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (d.completedPull f).Linear A := by
+  have := exchangePullLinear d f
+  rw [Functor.linear_iff]
+  intro K a
+  apply ((d.completedPull_reflection f).2 K _
+    ((d.completedPull_reflection f).1 K)).1
+  dsimp only
+  rw [← ordinaryToCompleted_naturality d f (a • 𝟙 K)]
+  simp only [Functor.map_smul, Linear.smul_comp, Linear.comp_smul,
+    Category.comp_id]
+  rw [(d.pull f).map_id K]
+  simp only [Category.id_comp]
+
+private theorem exchangeOpenShriekLinear {U T : Scheme.{u}} (j : U ⟶ T)
+    [IsOpenImmersion j] : (cbcDerivedOpenShriek d j inferInstance).Linear A := by
+  have hP : (proEtaleRingModulePullback j (d.completedRing T) (d.completedRing U)
+      (d.integralRingIso j)).Linear A := by
+    constructor
+    intro M N f a
+    have h := (completedModulePullLinear j d).map_smul f a
+    rw [coefficientIso_eq j d] at h
+    exact h
+  have := hP
+  have := cbcPullToRestriction_isIso d j
+  have hR : (cbcOpenRestriction d j inferInstance).Linear A :=
+    Functor.linear_of_iso A (asIso (cbcPullToRestriction d j))
+  have := hR
+  have := (cbcOpenAdjunction d j inferInstance).left_adjoint_linear (R := A)
+  exact inferInstanceAs ((cbcOpenShriek d j inferInstance).mapDerivedCategory.Linear A)
+private theorem primeGlobalUnit (T : Scheme.{u}) (l : ℕ)
+    (hl : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) : IsUnit (l : Γ(T, ⊤)) := by
+  apply T.toRingedSpace.isUnit_of_isUnit_germ
+  intro x hx
+  simpa only [map_natCast] using hl x
+
+private theorem openPreserves
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
+    (hdU : ∃ n : ℕ, topologicalKrullDim U ≤ (n : WithBot ℕ∞))
+    (hdT : ∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞))
+    (hlU : ∀ x : U, IsUnit (l : U.presheaf.stalk x))
+    (hlT : ∀ x : T, IsUnit (l : T.presheaf.stalk x))
+    (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]
+    (K : PbcCompletedDerived U (pbcIntegralDatum l E))
+    (hK : PbcIsBoundedConstructibleComplete U (pbcIntegralDatum l E) K) :
+    PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)
+      ((cbcDerivedOpenShriek (pbcIntegralDatum l E) j inferInstance).obj K) := by
+  let i := j.closedComplement
+  apply ((integralStratifiedPerfectCharacterization T l E hdT
+    (primeGlobalUnit T l hlT) _).1).mpr
+  apply (cbc_extension_zero_stratified_perfect l E j i ?_ ?_ K ?_).1
+  · rw [Scheme.Hom.range_closedComplement, Set.union_compl_self]
+  · rw [Scheme.Hom.range_closedComplement]
+    exact disjoint_compl_right
+  · exact ((integralStratifiedPerfectCharacterization U l E hdU
+      (primeGlobalUnit U l hlU) K).1).mp hK
+
+private theorem sourcePreserves
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (c : Compactification f)
+    (c' : Compactification f') (gbar : c'.Z ⟶ c.Z)
+    (properSquare : ChosenCartesianSquare gbar c'.g c.g g)
+    (_openSquare : OpenImmersionSquare g' c'.i c.i gbar)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y']
+    (dimX : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞))
+    (dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))
+    (_dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞))
+    (dimY' : ∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞))
+    (hlX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
+    (hlY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))
+    (_hlX' : ∀ x' : X', IsUnit (l : X'.presheaf.stalk x'))
+    (hlY' : ∀ y' : Y', IsUnit (l : Y'.presheaf.stalk y'))
+    (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)) :
+    PbcIsBoundedConstructibleComplete Y' (pbcIntegralDatum l E)
+      ((cbcCompactSupportSource g c (pbcIntegralDatum l E)).obj K.obj) := by
+  let d := pbcIntegralDatum l E
+  have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : IsLocallyNoetherian c'.Z := LocallyOfFiniteType.isLocallyNoetherian c'.g
+  have : CompactSpace c'.Z := QuasiCompact.compactSpace_of_compactSpace c'.g
+  have : IsNoetherian c'.Z := ⟨⟩
+  have dimZ := AlgebraicGeometry.finiteType_source_dimension_bound c.g dimY
+  have dimZ' := AlgebraicGeometry.finiteType_source_dimension_bound c'.g dimY'
+  have hlZ : IsUnit (l : Γ(c.Z, ⊤)) := by
+    simpa only [map_natCast] using (primeGlobalUnit Y l hlY).map c.g.appTop.hom
+  have hlZ' : IsUnit (l : Γ(c'.Z, ⊤)) := by
+    simpa only [map_natCast] using (primeGlobalUnit Y' l hlY').map c'.g.appTop.hom
+  have hJ := openPreserves l E dimX dimZ hlX
+    (fun z ↦ by
+      simpa only [map_natCast] using
+        (hlZ.map (c.Z.presheaf.germ ⊤ z trivial).hom)) c.i K.obj K.property
+  have hAnn : (l : Padic.coefficientExtensionRing l E 1) = 0 := by
+    have H := (Padic.extension_integers_dvr l E
+      (Padic.coefficientExtensionAbsoluteValue l E)
+      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+    have hgen := H.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+    change (Ideal.Quotient.mk _ (l : Padic.coefficientExtensionIntegers l E)) = 0
+    apply Ideal.Quotient.eq_zero_iff_mem.mpr
+    change (l : Padic.coefficientExtensionIntegers l E) ∈
+      Ideal.span {Padic.coefficientExtensionUniformizer l E} ^ 1
+    change Ideal.span {Padic.coefficientExtensionUniformizer l E} =
+      Padic.coefficientExtensionMaximalIdeal l E at hgen
+    rw [pow_one, hgen]
+    apply (H.2.1 _).2
+    have h := spectralNorm_extends (K := ℚ_[l]) (L := E) (l : ℚ_[l])
+    rw [map_natCast] at h
+    change spectralNorm ℚ_[l] E (l : E) < 1
+    rw [h]
+    exact Padic.norm_p_lt_one
+  have hAnn' : (l : PbcIntegralRing l E ⧸ d.ideal) = 0 := by
+    apply Ideal.Quotient.eq_zero_iff_mem.mpr
+    exact annihilator_mem l E l hAnn
+  obtain ⟨e, he⟩ := dimZ
+  have hFib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+      (y : Spec (.of Ω) ⟶ Y),
+      topologicalKrullDim (pullback c.g y : Scheme.{u}) ≤ (e : WithBot ℕ∞) := by
+    intro Ω _ _ y
+    exact (AlgebraicGeometry.topologicalKrullDim_pullback_le c.g y).trans he
+  exact (d.constructible_preservation properSquare ⟨e, he⟩ dimY dimZ' dimY'
+    l (Fact.out : l.Prime).pos hAnn' hlZ (primeGlobalUnit Y l hlY)
+    hlZ' (primeGlobalUnit Y' l hlY') e hFib _ hJ).2.1
+private theorem completedDatumExchange_retuple
+    {U' U T' T : Scheme.{u}} {j : U ⟶ T} {j' : U' ⟶ T'}
+    {g : T' ⟶ T} {gU : U' ⟶ U} (sq : OpenImmersionSquare gU j' j g)
+    [QuasiCompact j]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (s : ℕ) (b : Fin s → A) (hb : Ideal.span (Set.range b) = d.ideal)
+    (K : d.derived U) (hK : cbcCompleteProperty d U r a ha K)
+    (hK' : cbcCompleteProperty d U s b hb K) :
+    (cbcDatumCompletedExchange d sq r a ha).app ⟨K, hK⟩ =
+      (cbcDatumCompletedExchange d sq s b hb).app ⟨K, hK'⟩ := by
+  have hL := (completedOpenExchangeComparison d sq s b hb).2 ⟨K, hK'⟩
+  apply ((d.completedPull_reflection g).2 _ _
+    (cbcTowerComplete_of_property d T' s b hb _ hL.2.2)).1
+  exact (cbcDatumCompletedExchange_unit d sq r a ha ⟨K, hK⟩).trans
+    (cbcDatumCompletedExchange_unit d sq s b hb ⟨K, hK'⟩).symm
+
+end AlgebraicGeometry.Scheme
+
 section LiftedCompactSupportInterface
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
 set_option synthInstance.maxSize 4096
-universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme.LiftedCbc
 
@@ -178,7 +318,10 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
       PbcIsBoundedConstructibleComplete Y' d
         ((cbcCompactSupportSource g c d).obj K.obj)) :
     (cbcCompactSupportSourceLift l E g c d hSource).Additive := by
-  sorry
+  let := cbcCompactSupportSource_additive g c d
+  exact ObjectProperty.liftFullSubcategory_additive
+    (PbcIsBoundedConstructibleComplete X d) (PbcIsBoundedConstructibleComplete Y' d)
+    (cbcCompactSupportSource g c d) (fun K hK ↦ hSource ⟨K, hK⟩)
 
 /-- The target restriction is additive for the inherited full-subcategory addition.
 Proof: the restriction maps each morphism by the ambient composite. Its additivity
@@ -195,7 +338,10 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
       PbcIsBoundedConstructibleComplete Y' d
         ((cbcCompactSupportTarget g' c' d).obj K.obj)) :
     (cbcCompactSupportTargetLift l E g' c' d hTarget).Additive := by
-  sorry
+  let := cbcCompactSupportTarget_additive g' c' d
+  exact ObjectProperty.liftFullSubcategory_additive
+    (PbcIsBoundedConstructibleComplete X d) (PbcIsBoundedConstructibleComplete Y' d)
+    (cbcCompactSupportTarget g' c' d) (fun K hK ↦ hTarget ⟨K, hK⟩)
 
 /-- The source restriction respects the actual constant-section scalar action.
 Proof: tensor, pullback and direct image commute with scalar multiples of maps on
@@ -212,7 +358,13 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
         ((cbcCompactSupportSource g c d).obj K.obj)) :
     (cbcCompactSupportSourceLift l E g c d hSource).Linear
       (PbcIntegralRing l E) := by
-  sorry
+  have := exchangeOpenShriekLinear d c.i
+  have := exchangePushLinear d c.g
+  have := exchangeCompletedPullLinear d g
+  constructor
+  intro K H f a
+  apply ObjectProperty.hom_ext
+  exact (cbcCompactSupportSource g c d).map_smul a f.hom
 
 /-- The target restriction respects the actual constant-section scalar action.
 Proof: tensor, pullback and direct image commute with scalar multiples of maps on
@@ -230,7 +382,13 @@ Source: blueprint thm-cbc-finite-extension, proof step 1
         ((cbcCompactSupportTarget g' c' d).obj K.obj)) :
     (cbcCompactSupportTargetLift l E g' c' d hTarget).Linear
       (PbcIntegralRing l E) := by
-  sorry
+  have := exchangeCompletedPullLinear d g'
+  have := exchangeOpenShriekLinear d c'.i
+  have := exchangePushLinear d c'.g
+  constructor
+  intro K H f a
+  apply ObjectProperty.hom_ext
+  exact (cbcCompactSupportTarget g' c' d).map_smul a f.hom
 
 /-- The two rational functors obtained by scalar transport of these lifts.
 Source: `prop-weil-pbc-rational-transport`
@@ -364,7 +522,66 @@ theorem finiteExtension_compactSupportBaseChange
           η.hom.app ⟨K⟩ =
             finiteExtensionCompactSupportExchangeComponent l E c c' gbar
               properSquare openSquare r a ha hSource hTarget K hComplete := by
-  sorry
+  classical
+  let d := pbcIntegralDatum l E
+  let a₀ : Fin 1 → PbcIntegralRing l E := fun _ ↦ pbcUniformizer l E
+  have ha₀ : Ideal.span (Set.range a₀) = d.ideal := by
+    change Ideal.span (Set.range (fun _ : Fin 1 ↦ pbcUniformizer l E)) =
+      Ideal.span {pbcUniformizer l E}
+    rw [Set.range_const]
+  have hComplete (K : PbcBoundedConstructibleComplete X d)
+      (r : ℕ) (a : Fin r → PbcIntegralRing l E)
+      (ha : Ideal.span (Set.range a) = d.ideal) : cbcCompleteProperty d X r a ha K.obj :=
+    (d.towerComplete_iff_intrinsic X K.obj).mp
+      (pbcIntrinsicComplete_towerComplete d X K.obj K.property.1) r a ha _ _
+  let hS := fun K ↦ sourcePreserves l E c c' gbar properSquare openSquare
+    _dimX _dimY _dimX' _dimY' _hlX _hlY _hlX' _hlY' K
+  let : Fact (∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞)) := ⟨_dimY'⟩
+  let : Fact (∀ y : Y', IsUnit (l : Y'.presheaf.stalk y)) := ⟨_hlY'⟩
+  have hEx (K : PbcBoundedConstructibleComplete X d) :
+      IsIso (completedCompactSupportExchange d c c' gbar properSquare openSquare
+        1 a₀ ha₀ ⟨K.obj, hComplete K 1 a₀ ha₀⟩) :=
+    (completeCompactSupportProetale_isIso d c c' gbar properSquare openSquare
+      1 a₀ ha₀ ⟨K.obj, hComplete K 1 a₀ ha₀⟩ K.property.2.2).1
+  let hT := fun K : PbcBoundedConstructibleComplete X d ↦
+    ObjectProperty.prop_of_iso (PbcIsBoundedConstructibleComplete Y' d)
+      (@asIso _ _ _ _ (completedCompactSupportExchange d c c' gbar properSquare openSquare
+        1 a₀ ha₀ ⟨K.obj, hComplete K 1 a₀ ha₀⟩) (hEx K)) (hS K)
+  let τ : cbcCompactSupportSourceLift l E g c d hS ⟶
+      cbcCompactSupportTargetLift l E g' c' d hT :=
+    { app K := ObjectProperty.homMk (completedCompactSupportExchange d c c' gbar
+        properSquare openSquare 1 a₀ ha₀ ⟨K.obj, hComplete K 1 a₀ ha₀⟩)
+      naturality K H k := by
+        apply ObjectProperty.hom_ext
+        exact (completeCompactSupportProetale_isIso d c c' gbar properSquare openSquare
+          1 a₀ ha₀ ⟨K.obj, hComplete K 1 a₀ ha₀⟩ K.property.2.2).2
+            ⟨H.obj, hComplete H 1 a₀ ha₀⟩ k.hom }
+  have hτ (K : PbcBoundedConstructibleComplete X d) : IsIso (τ.app K) := by
+    have h : IsIso ((ObjectProperty.ι
+        (PbcIsBoundedConstructibleComplete Y' d)).map (τ.app K)) := hEx K
+    have := h
+    exact isIso_of_reflects_iso (τ.app K)
+      (ObjectProperty.ι (PbcIsBoundedConstructibleComplete Y' d))
+  let τQ := ScalarLocalization.transportNat (PbcIntegralRing l E) (pbcUniformizer l E) τ
+  let η : cbcCompactSupportSourceTransport l E g c d hS ≅
+      cbcCompactSupportTargetTransport l E g' c' d hT :=
+    NatIso.ofComponents (fun K ↦
+      (pbcRationalization Y' d (pbcUniformizer l E)).mapIso
+        (@asIso _ _ _ _ (τ.app K.obj) (hτ K.obj)))
+      (fun {K H} k ↦ τQ.naturality k)
+  refine ⟨hS, hT, η, ?_⟩
+  intro K r a ha hc
+  change (pbcRationalization Y' d (pbcUniformizer l E)).map
+    (ObjectProperty.homMk
+      (X := ⟨_, hS K⟩) (Y := ⟨_, hT K⟩)
+      (completedCompactSupportExchange d c c' gbar properSquare
+        openSquare 1 a₀ ha₀ ⟨K.obj, hComplete K 1 a₀ ha₀⟩)) = _
+  unfold finiteExtensionCompactSupportExchangeComponent
+  congr 1
+  apply ObjectProperty.hom_ext
+  unfold completedCompactSupportExchange
+  rw [completedDatumExchange_retuple d openSquare 1 a₀ ha₀ r a ha K.obj
+    (hComplete K 1 a₀ ha₀) hc]
 
 /-- Intrinsic completeness of a selected integral object, for every presentation of I.
 Source: blueprint thm-cbc-finite-extension, proof step 2
@@ -384,7 +601,9 @@ theorem finiteExtension_cbcComplete
     (r : ℕ) (a : Fin r → PbcIntegralRing l E)
     (ha : Ideal.span (Set.range a) = (pbcIntegralDatum l E).ideal) :
     cbcCompleteProperty (pbcIntegralDatum l E) T r a ha K.obj := by
-  sorry
+  exact ((pbcIntegralDatum l E).towerComplete_iff_intrinsic T K.obj).mp
+    (pbcIntrinsicComplete_towerComplete (pbcIntegralDatum l E) T K.obj K.property.1)
+    r a ha _ _
 
 /-- Localization of an ambient arrow between selected integral objects.
 Applied to a path, this is its rational path: the full inclusion and localization preserve
@@ -447,7 +666,23 @@ theorem finiteExtension_compactSupportBaseChange_identity
       finiteExtensionRationalArrow l E hS hT
         ((pbcIntegralDatum l E).completedPullId Y
           ((cbcSupport (pbcIntegralDatum l E) c).obj K.obj) hF).hom := by
-  sorry
+  let := _hX.1
+  let := _hY.1
+  let : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) := ⟨_hY.2.1⟩
+  let : Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) := ⟨_hY.2.2⟩
+  obtain ⟨hSource, hTarget, η, hη⟩ :=
+    finiteExtension_compactSupportBaseChange l E c c (𝟙 c.Z) sp sj
+      _hX.2.1 _hY.2.1 _hX.2.1 _hY.2.1
+      _hX.2.2 _hY.2.2 _hX.2.2 _hY.2.2
+  obtain ⟨hK, hF, he⟩ := completeCompactSupportProetale_identity
+    (pbcIntegralDatum l E) c sp sj r a ha
+    ⟨K.obj, finiteExtension_cbcComplete l E X K r a ha⟩ K.property.2.2
+  have hT := ObjectProperty.prop_of_iso
+    (PbcIsBoundedConstructibleComplete Y (pbcIntegralDatum l E))
+    ((cbcSupport (pbcIntegralDatum l E) c).mapIso
+      ((pbcIntegralDatum l E).completedPullId X K.obj hK)) (hTarget K)
+  refine ⟨hK, hF, hSource K, hT, ?_⟩
+  exact congrArg (finiteExtensionRationalArrow l E (hSource K) hT) he
 
 /-- Rational horizontal-pasting coherence for two arbitrary successive base changes.
 The paths retain the canonical completion-unit-normalized pullback compositors.
@@ -501,7 +736,21 @@ theorem finiteExtension_compactSupportBaseChange_horizontal
             ⟨((pbcIntegralDatum l E).completedPull g').obj K.obj, hK'⟩ ≫
           (cbcSupport (pbcIntegralDatum l E) c'').map
             (((pbcIntegralDatum l E).completedPullComp h' g').inv.app K.obj)) := by
-  sorry
+  let := _hX.1
+  let := _hX'.1
+  let := _hX''.1
+  let := _hY.1
+  let := _hY'.1
+  let := _hY''.1
+  obtain ⟨hSource, hTarget, η, hη⟩ :=
+    finiteExtension_compactSupportBaseChange l E c c'' (hb ≫ gb) sp sj
+      _hX.2.1 _hY.2.1 _hX''.2.1 _hY''.2.1
+      _hX.2.2 _hY.2.2 _hX''.2.2 _hY''.2.2
+  obtain ⟨hK', he⟩ := completeCompactSupportProetale_horizontal
+    (pbcIntegralDatum l E) c c' c'' gb hb sp₁ sj₁ sp₂ sj₂ sp sj r a ha
+    ⟨K.obj, finiteExtension_cbcComplete l E X K r a ha⟩ K.property.2.2
+  refine ⟨hK', hSource K, hTarget K, ?_⟩
+  exact congrArg (finiteExtensionRationalArrow l E (hSource K) (hTarget K)) he
 
 /-- Rational vertical-pasting coherence, with the canonical proper/open composition
 maps for supplied compatible compactification towers. No Cartesian refinement is imposed.
@@ -571,7 +820,48 @@ theorem finiteExtension_compactSupportBaseChange_vertical
             (qh := cbcBaseChangeQuasiCompact ch ch' gbh sjh)
             cf' ch' chf' b' p' hb' hp' hq' sq'
             (((pbcIntegralDatum l E).completedPull gx).obj K.obj)) := by
-  sorry
+  let := _hX.1
+  let := _hX'.1
+  let := _hY.1
+  let := _hY'.1
+  let := _hZ.1
+  let := _hZ'.1
+  let : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞)) := ⟨_hY.2.1⟩
+  let : Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) := ⟨_hY.2.2⟩
+  obtain ⟨hS₁, hT₁, η₁, hη₁⟩ :=
+    finiteExtension_compactSupportBaseChange l E cf cf' gbf spf sjf
+      _hX.2.1 _hY.2.1 _hX'.2.1 _hY'.2.1
+      _hX.2.2 _hY.2.2 _hX'.2.2 _hY'.2.2
+  have hi := IsPullback.id_horiz cf.g
+  let sp : ChosenCartesianSquare (𝟙 cf.Z) cf.g cf.g (𝟙 Y) :=
+    { toCommSq := hi.toCommSq
+      isoPullback := hi.isoPullback
+      hom_fst := hi.isoPullback_hom_fst
+      hom_snd := hi.isoPullback_hom_snd }
+  have hj := IsPullback.id_horiz cf.i
+  let sj : OpenImmersionSquare (𝟙 X) cf.i cf.i (𝟙 cf.Z) :=
+    { toCommSq := hj.toCommSq
+      isoPullback := hj.isoPullback
+      hom_fst := hj.isoPullback_hom_fst
+      hom_snd := hj.isoPullback_hom_snd
+      isOpenImmersion := cf.isOpenImmersion
+      isOpenImmersion' := cf.isOpenImmersion }
+  obtain ⟨hK, hFK, hSK, hTK, hidentity⟩ :=
+    finiteExtension_compactSupportBaseChange_identity l E _hX _hY cf sp sj r a ha K
+  obtain ⟨hS₂, hT₂, η₂, hη₂⟩ :=
+    finiteExtension_compactSupportBaseChange l E ch ch' gbh sph sjh
+      _hY.2.1 _hZ.2.1 _hY'.2.1 _hZ'.2.1
+      _hY.2.2 _hZ.2.2 _hY'.2.2 _hZ'.2.2
+  obtain ⟨hS₃, hT₃, η₃, hη₃⟩ :=
+    finiteExtension_compactSupportBaseChange l E chf chf' gbhf sphf sjhf
+      _hX.2.1 _hZ.2.1 _hX'.2.1 _hZ'.2.1
+      _hX.2.2 _hZ.2.2 _hX'.2.2 _hZ'.2.2
+  obtain ⟨hF, he⟩ := (completeCompactSupportProetale_vertical
+    (pbcIntegralDatum l E) cf ch chf cf' ch' chf' gbf gbh gbhf
+    spf sjf sph sjh sphf sjhf b p b' p' hb hp hq hb' hp' hq' sq sq' _wb _wp r a ha
+    ⟨K.obj, finiteExtension_cbcComplete l E X K r a ha⟩ K.property.2.2).2.2
+  refine ⟨hF, hS₂ ⟨_, hTK⟩, hT₃ K, ?_⟩
+  exact congrArg (finiteExtensionRationalArrow l E (hS₂ ⟨_, hTK⟩) (hT₃ K)) he
 
 end Coherence
 
@@ -590,7 +880,7 @@ set_option relaxedAutoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
-universe u v w
+universe v w
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory CategoryTheory.TwoSquare
 open scoped CategoryTheory.Functor
@@ -1098,7 +1388,6 @@ Source: fix-lem-exchanges, canonical common-stage normalization and clauses (1)-
     (hInvS : IsUnit (l : Γ(S, ⊤))),
     exchangeCommonStageSmoothAtSquare l Ω sq hInvS
 
-
 /-- Identification of the canonical completed mate with its finite mates and its
 strict derived-limit realization. This is about the same sbcExchangeApp as smooth invertibility.
 Source: fix-lem-exchanges, construction and proof steps 4--5, 17--18
@@ -1352,7 +1641,6 @@ def exchangeTransposeSquare {X' X Y' Y : Scheme.{u}}
     simp only [Iso.trans_hom, Category.assoc, pullbackSymmetry_hom_comp_snd]
     exact sq.hom_fst
 
-
 /-- Smooth invertibility of the actual finite module Ex_*, and its canonical identification with
       the abelian smooth map after forgetting coefficients.
 Source: blueprint fix-lem-exchanges, clauses (1)--(4)
@@ -1494,7 +1782,6 @@ Source: fix-lem-exchanges, canonical common-stage normalization and clauses (1)-
     (_invX' : ∀ x : X', IsUnit (l : X'.presheaf.stalk x)),
     exchangeCommonStageSupportLawsAtSquare l Ω c c' gbar properSquare openSquare _dimY _dimX' _invY
       _invX'
-
 
 /-- Compatibility of the actual completed ambient exchange and its raw rational localization with
       the fixed coefficient mates.

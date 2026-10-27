@@ -7,13 +7,15 @@ module
 
 public import Sheaf.Paper.IndHeartFullFaithfulness
 public import Sheaf.Topology.ContinuousMapCondensedRing
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Mathlib.CategoryTheory.Functor.KanExtension.DenseAt
 public import Mathlib.CategoryTheory.EssentiallySmall
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import Sheaf.Paper.CoefficientHeartSmall
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # Canonical presentations of ind-constructible sheaves

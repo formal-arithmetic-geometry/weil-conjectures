@@ -7,19 +7,13 @@ module
 
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.NumberTheory.Padics.RingHoms
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Sheaf.NumberTheory.Padics.LocalFieldIntegralBasis
-import Sheaf.NumberTheory.Padics.LocalFieldCoefficientStages
-import Mathlib.CategoryTheory.Sites.LeftExact
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.NumberTheory.Padics.PadicNumbers
+import Sheaf.Paper.PurTwistCoefficientComparison
 
 /-! # Normalized tensor presentation of completed coefficient rings
 
@@ -312,6 +306,605 @@ structure Extension (iota : H →ₐ[Padic l] F) (d : BaseData.{t, u} l)
   beta_square : ∀ T : Scheme.{t}, (p.beta T).hom ≫ inclusion T =
     tensorMap T ≫ (q.beta T).hom
 
+
+/-- Naturality of the constant-section comparison.
+Source: Stacks 00WH (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem delta_naturality {T' T : Scheme.{t}} (h : T' ⟶ T)
+    {A B : CommRingCat.{max u (t + 1)}} (f : A ⟶ B) :
+    (inverse.{t, u} h).map ((constantSheaf (ProEt.topology T) _).map f) ≫ delta.{t, u} h B =
+      delta.{t, u} h A ≫ (constantSheaf (ProEt.topology T') _).map f := by
+  let : HasColimitsOfSize.{t + 1, t + 1} CommRingCat.{max u (t + 1)} :=
+    hasColimitsOfSizeShrink.{t + 1, t + 1, u, u} _
+  let := kan.{t, u} h
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (proEtaleBaseChange h) CommRingCat.{max u (t + 1)}
+    (ProEt.topology T) (ProEt.topology T')
+  apply (adj.homEquiv _ _).injective
+  rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+  simp only [adj, delta, Equiv.apply_symm_apply]
+  apply ((sheafificationAdjunction (ProEt.topology T) _).homEquiv _ _).injective
+  simp only [constantSheaf, Functor.comp_map]
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [Equiv.apply_symm_apply]
+  apply NatTrans.ext
+  funext U
+  exact NatTrans.congr_app ((toSheafification (ProEt.topology T') _).naturality
+    ((Functor.const T'.ProEtᵒᵖ).map f)) ((proEtaleBaseChange h).op.obj U)
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The constant comparison is an isomorphism, by uniqueness of left adjoints
+of evaluation at the preserved terminal object.
+Source: Stacks 0H7J (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem delta_isIso {T' T : Scheme.{t}} (h : T' ⟶ T)
+    (A : CommRingCat.{max u (t + 1)}) : IsIso (delta.{t, u} h A) := by
+  let : HasColimitsOfSize.{t + 1, t + 1} CommRingCat.{max u (t + 1)} :=
+    hasColimitsOfSizeShrink.{t + 1, t + 1, u, u} _
+  let := kan.{t, u} h
+  let G := proEtaleBaseChange h
+  let X : T.ProEt := ProEt.mk (𝟙 T)
+  let ht : IsTerminal X := MorphismProperty.Over.mkIdTerminal _ T
+  let ht' : IsTerminal (G.obj X) := ht.isTerminalObj G
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous G
+    CommRingCat.{max u (t + 1)} (ProEt.topology T) (ProEt.topology T')
+  let eR : G.sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+      (ProEt.topology T) (ProEt.topology T') ⋙
+        (sheafSections (ProEt.topology T) CommRingCat.{max u (t + 1)}).obj (op X) ≅
+      (sheafSections (ProEt.topology T') CommRingCat.{max u (t + 1)}).obj
+        (op (G.obj X)) := NatIso.ofComponents (fun _ ↦ Iso.refl _)
+  let a₁ := ((constantSheafAdj (ProEt.topology T) _ ht).comp adj).ofNatIsoRight eR
+  let a₂ := constantSheafAdj (ProEt.topology T') CommRingCat.{max u (t + 1)} ht'
+  let e := a₁.leftAdjointUniq a₂
+  have he : delta.{t, u} h A = e.hom.app A := by
+    apply (a₁.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    simp only [a₁, Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv]
+    change (constantSheafAdj (ProEt.topology T) CommRingCat.{max u (t + 1)} ht).homEquiv
+      _ _ ((adj.homEquiv _ _) ((adj.homEquiv _ _).symm _)) ≫ 𝟙 _ = _
+    rw [Equiv.apply_symm_apply, Category.comp_id]
+    rw [constantSheafAdj, Adjunction.comp_homEquiv]
+    change (constantPresheafAdj CommRingCat.{max u (t + 1)} ht).homEquiv _ _
+      ((sheafificationAdjunction (ProEt.topology T) CommRingCat.{max u (t + 1)}).homEquiv
+        _ _ (((sheafificationAdjunction (ProEt.topology T)
+          CommRingCat.{max u (t + 1)}).homEquiv _ _).symm _)) = _
+    rw [Equiv.apply_symm_apply]
+    simp only [a₂, constantSheafAdj, Adjunction.comp_unit_app,
+      constantPresheafAdj_unit_app, Category.id_comp, sheafificationAdjunction_unit_app]
+    rfl
+  rw [he]
+  infer_instance
+
+/-- Inverse image preserves the tensor pushout because it is a left adjoint.
+Source: Stacks 03EL (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem inverse_preservesColimits {T' T : Scheme.{t}} (h : T' ⟶ T) :
+    PreservesColimits (inverse.{t, u} h) := by
+  let := kan.{t, u} h
+  let := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (proEtaleBaseChange h) CommRingCat.{max u (t + 1)}
+    (ProEt.topology T) (ProEt.topology T')).isLeftAdjoint
+  infer_instance
+
+
+/-- The residue-normalized inverse image of the completed base ring.
+Source: Stacks 03CO and 0H7J
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def basePullback (d : BaseData.{t, u} l) {T' T : Scheme.{t}} (h : T' ⟶ T) :
+    BasePullback l d h := by
+  let L := inverse.{t, u} h
+  let v (n : ℕ) := L.map (baseProjection l T n) ≫
+    delta.{t, u} h (CommRingCat.of (ULift.{max u (t + 1)} (ZMod (l ^ (n + 1)))))
+  have hv (n : ℕ) : v (n + 1) ≫ baseTransition l T' n = v n := by
+    dsimp only [v, baseTransition]
+    rw [Category.assoc, ← delta_naturality, ← Category.assoc, ← Functor.map_comp]
+    congr 1
+    apply congrArg L.map
+    simpa only [baseProjection, baseTower, baseTransition,
+      Functor.ofOpSequence_map_homOfLE_succ] using
+      limit.w (baseTower.{t, u} l T) (homOfLE (Nat.le_succ n)).op
+  let c : Cone (baseTower.{t, u} l T') :=
+    { pt := L.obj (baseCompletion l T)
+      π := NatTrans.ofOpSequence v (by
+        intro n
+        change 𝟙 _ ≫ v n = v (n + 1) ≫ _
+        rw [Category.id_comp]
+        simpa only [baseTower, Functor.ofOpSequence_map_homOfLE_succ] using (hv n).symm) }
+  refine ⟨limit.lift _ c, fun n ↦ limit.lift_π c (op n), ?_,
+    fun C ↦ delta_isIso h C⟩
+  apply limit.hom_ext
+  intro n
+  change _ ≫ baseProjection l T' n.unop = _ ≫ baseProjection l T' n.unop
+  rw [Category.assoc, limit.lift_π]
+  change L.map (d.epsilon T) ≫ v n.unop = _
+  dsimp only [v]
+  rw [← Category.assoc, ← L.map_comp, d.residue, Category.assoc, d.residue]
+  exact delta_naturality h _
+
+/-- Completion projections detect morphisms of commutative ring sheaves.
+Source: Stacks 03CO (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem completion_hom_ext (T : Scheme.{t}) {X : Rings.{t, u} T}
+    {f g : X ⟶ completedIntegralCommRingSheafUnrestricted l H T}
+    (h : ∀ n, f ≫ completedIntegralCommRingProjectionUnrestricted l H T n =
+      g ≫ completedIntegralCommRingProjectionUnrestricted l H T n) : f = g := by
+  let V := sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})
+  apply V.map_injective
+  apply limit.hom_ext
+  intro n
+  exact (V.map_comp _ _).symm.trans
+    ((congrArg V.map (h n.unop)).trans (V.map_comp _ _))
+
+/-- Quotient maps from the base are determined by their p-adic residues.
+Source: Stacks 03CO (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem base_quotient_ext {R : Type u} [CommRing R] (k : ℕ)
+    {j j' : ZMod (l ^ (k + 1)) →+* R}
+    (h : ∀ z : PadicInt l, j (PadicInt.toZModPow (k + 1) z) =
+      j' (PadicInt.toZModPow (k + 1) z)) : j = j' := by
+  ext a
+  obtain ⟨z, rfl⟩ := ZMod.ringHom_surjective (PadicInt.toZModPow (k + 1)) a
+  exact h z
+
+
+/-- The two canonical restrictions of the p-adic scalar inclusion coincide.
+Source: the integral twist paragraph
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem integer_scalar_square (iota : H →ₐ[Padic l] F)
+    (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d)
+    (f : Padic.coefficientExtensionIntegers l H →+* Padic.coefficientExtensionIntegers l F)
+    (hf : ∀ x, (f x : F) = iota (x : H)) :
+    f.comp p.integers = q.integers := by
+  ext z
+  rw [RingHom.comp_apply, hf, p.integers_spec, q.integers_spec, iota.commutes]
+
+
+/-- Projection of a presentation on its completed-base inclusion.
+Source: the integral twist paragraph
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem presentation_left (d : BaseData.{t, u} l) (p : Presentation l H d)
+    (T : Scheme.{t}) (n k : ℕ)
+    (hk : Ideal.span ({(l : Padic.coefficientExtensionIntegers l H) ^ (k + 1)} :
+      Set (Padic.coefficientExtensionIntegers l H)) ≤
+        Padic.coefficientExtensionIdeal l H (n + 1)) :
+    ∃ j : ZMod (l ^ (k + 1)) →+* Padic.coefficientExtensionRing l H (n + 1),
+      (∀ a : PadicInt l, j (PadicInt.toZModPow (k + 1) a) =
+        Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l H (n + 1)) (p.integers a)) ∧
+      pushout.inl (d.epsilon T) (scalar l H p.integers T) ≫ (p.beta T).hom ≫
+          completedIntegralCommRingProjectionUnrestricted l H T n =
+        baseProjection l T k ≫ residueFromBase l H T n k j := by
+  obtain ⟨j, hj, hp⟩ := p.projection T n k hk
+  refine ⟨j, hj, ?_⟩
+  ext U x
+  change (((p.beta T).hom ≫
+    completedIntegralCommRingProjectionUnrestricted l H T n).hom.app U)
+      ((pushout.inl (d.epsilon T) (scalar l H p.integers T)).hom.app U x) =
+    (residueFromBase l H T n k j).hom.app U ((baseProjection l T k).hom.app U x)
+  simpa only [map_one, mul_one] using hp U x 1
+
+/-- Every level admits a base exponent, uniformly over the site.
+Source: Stacks 03CO and the local-field DVR theorem
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem base_admissible (n : ℕ) :
+    Ideal.span ({(l : Padic.coefficientExtensionIntegers l H) ^ (n + 1)} :
+      Set (Padic.coefficientExtensionIntegers l H)) ≤
+        Padic.coefficientExtensionIdeal l H (n + 1) := by
+  have h := (Padic.extension_integers_dvr l H
+    (Padic.coefficientExtensionAbsoluteValue l H)
+    (spectralNorm_extends (K := ℚ_[l]) (L := H))).choose_spec.choose_spec
+  have hm : (l : Padic.coefficientExtensionIntegers l H) ∈
+      Padic.coefficientExtensionMaximalIdeal l H := by
+    apply (h.2.1 _).2
+    change spectralNorm ℚ_[l] H (l : H) < 1
+    rw [← map_natCast (algebraMap ℚ_[l] H), spectralNorm_extends]
+    exact Padic.norm_p_lt_one
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l H} :
+      Set (Padic.coefficientExtensionIntegers l H)) =
+        Padic.coefficientExtensionMaximalIdeal l H :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  rw [Ideal.span_le, Set.singleton_subset_iff]
+  change (l : Padic.coefficientExtensionIntegers l H) ^ (n + 1) ∈
+    Ideal.span ({Padic.coefficientExtensionUniformizer l H} :
+      Set (Padic.coefficientExtensionIntegers l H)) ^ (n + 1)
+  rw [hgen]
+  exact Ideal.pow_mem_pow hm (n + 1)
+
+/-- Projection of a presentation on its discrete-integer inclusion.
+Source: the integral twist paragraph
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem presentation_right (d : BaseData.{t, u} l) (p : Presentation l H d)
+    (T : Scheme.{t}) (n : ℕ) :
+    pushout.inr (d.epsilon T) (scalar l H p.integers T) ≫ (p.beta T).hom ≫
+        completedIntegralCommRingProjectionUnrestricted l H T n =
+      integralResidue l H T n := by
+  obtain ⟨j, _, hp⟩ := p.projection T n n (base_admissible l H n)
+  ext U b
+  change (((p.beta T).hom ≫
+    completedIntegralCommRingProjectionUnrestricted l H T n).hom.app U)
+      ((pushout.inr (d.epsilon T) (scalar l H p.integers T)).hom.app U b) = _
+  simpa only [map_one, one_mul] using hp U 1 b
+
+
+/-- The normalized change of scalars on tensor pushouts.
+Source: Stacks 03EL (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def tensorChange (d : BaseData.{t, u} l) (p : Presentation l H d)
+    {T' T : Scheme.{t}} (h : T' ⟶ T) (a : BasePullback l d h) :
+    pulledTensor l H d p h ⟶ tensor l H d p.integers T' :=
+  pushout.desc
+    (a.alpha ≫ pushout.inl (d.epsilon T') (scalar l H p.integers T'))
+    (delta.{t, u} h (CommRingCat.of
+      (ULift.{t + 1} (Padic.coefficientExtensionIntegers l H))) ≫
+        pushout.inr (d.epsilon T') (scalar l H p.integers T')) (by
+      rw [← Category.assoc, a.epsilon_square, Category.assoc, pushout.condition,
+        ← Category.assoc, ← Category.assoc]
+      exact congrArg (fun v ↦ v ≫ pushout.inr (d.epsilon T')
+        (scalar l H p.integers T')) (delta_naturality.{t, u} h (CommRingCat.ofHom
+          ((ULift.ringEquiv : ULift.{t + 1}
+            (Padic.coefficientExtensionIntegers l H) ≃+*
+              Padic.coefficientExtensionIntegers l H).symm.toRingHom.comp
+            (p.integers.comp (ULift.ringEquiv :
+              ULift.{max u (t + 1)} (PadicInt l) ≃+* PadicInt l).toRingHom)))).symm)
+
+
+/-- Inverse image of the tensor, normalized on the two pushout inclusions.
+Source: Stacks 03EL (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def tensorSigma (d : BaseData.{t, u} l) (p : Presentation l H d)
+    {T' T : Scheme.{t}} (h : T' ⟶ T) :
+    (inverse.{t, u} h).obj (tensor l H d p.integers T) ≅ pulledTensor l H d p h := by
+  let := inverse_preservesColimits.{t, u} h
+  exact (PreservesPushout.iso (inverse.{t, u} h) (d.epsilon T)
+    (scalar l H p.integers T)).symm
+
+/-- The tensor-normalized inverse image of completed integral coefficients.
+Source: the integral twist paragraph; Stacks 03EL
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def presentationPullback (d : BaseData.{t, u} l) (p : Presentation l H d)
+    {T' T : Scheme.{t}} (h : T' ⟶ T) (a : BasePullback l d h) :
+    Pullback l H d p h a := by
+  let := inverse_preservesColimits.{t, u} h
+  let L := inverse.{t, u} h
+  let σ := tensorSigma l H d p h
+  let τ := tensorChange l H d p h a
+  let α := L.map (p.beta T).inv ≫ σ.hom ≫ τ ≫ (p.beta T').hom
+  have hsL : pushout.inl _ _ ≫ σ.inv =
+      L.map (pushout.inl (d.epsilon T) (scalar l H p.integers T)) :=
+    PreservesPushout.inl_iso_hom _ _ _
+  have hsR : pushout.inr _ _ ≫ σ.inv =
+      L.map (pushout.inr (d.epsilon T) (scalar l H p.integers T)) :=
+    PreservesPushout.inr_iso_hom _ _ _
+  have htL : pushout.inl _ _ ≫ τ = a.alpha ≫
+      pushout.inl (d.epsilon T') (scalar l H p.integers T') :=
+    pushout.inl_desc _ _ _
+  have htR : pushout.inr _ _ ≫ τ =
+      delta.{t, u} h (CommRingCat.of
+        (ULift.{t + 1} (Padic.coefficientExtensionIntegers l H))) ≫
+          pushout.inr (d.epsilon T') (scalar l H p.integers T') :=
+    pushout.inr_desc _ _ _
+  have hβ : L.map (p.beta T).hom ≫ α = σ.hom ≫ τ ≫ (p.beta T').hom := by
+    simp only [α, ← Category.assoc, ← L.map_comp, Iso.hom_inv_id, L.map_id,
+      Category.id_comp]
+  refine ⟨α, ?_, delta_naturality h _, σ, ?_, ?_, τ, ?_, ?_, hβ⟩
+  · intro n
+    apply (cancel_epi (L.map (p.beta T).hom)).mp
+    rw [← Category.assoc, hβ, Category.assoc, Category.assoc,
+      ← L.map_comp_assoc]
+    apply (cancel_epi σ.inv).mp
+    apply pushout.hom_ext
+    · obtain ⟨j, hj, hp⟩ := presentation_left l H d p T n n (base_admissible l H n)
+      obtain ⟨j', hj', hp'⟩ := presentation_left l H d p T' n n (base_admissible l H n)
+      have he : j = j' := base_quotient_ext l n (fun z ↦ (hj z).trans (hj' z).symm)
+      subst j'
+      simp only [Iso.inv_hom_id_assoc]
+      simp only [← Category.assoc]
+      rw [hsL, htL]
+      simp only [Category.assoc]
+      rw [hp', ← Category.assoc, a.projection, Category.assoc]
+      have hn : L.map (residueFromBase l H T n n j) ≫
+          delta.{t, u} h (CommRingCat.of
+            (ULift.{t + 1} (Padic.coefficientExtensionRing l H (n + 1)))) =
+          delta.{t, u} h (CommRingCat.of
+            (ULift.{max u (t + 1)} (ZMod (l ^ (n + 1))))) ≫
+              residueFromBase l H T' n n j :=
+        delta_naturality.{t, u} h (CommRingCat.ofHom
+          ((ULift.ringEquiv : ULift.{t + 1}
+            (Padic.coefficientExtensionRing l H (n + 1)) ≃+*
+              Padic.coefficientExtensionRing l H (n + 1)).symm.toRingHom.comp
+            (j.comp (ULift.ringEquiv : ULift.{max u (t + 1)}
+              (ZMod (l ^ (n + 1))) ≃+* ZMod (l ^ (n + 1))).toRingHom)))
+      rw [← L.map_comp_assoc, hp, L.map_comp, Category.assoc]
+      exact congrArg (fun v ↦ L.map (baseProjection l T n) ≫ v) hn.symm
+    · simp only [Iso.inv_hom_id_assoc]
+      simp only [← Category.assoc]
+      rw [hsR, htR]
+      simp only [Category.assoc]
+      rw [presentation_right, ← L.map_comp_assoc, presentation_right]
+      exact (delta_naturality h _).symm
+  · exact PreservesPushout.inl_iso_inv _ _ _
+  · exact PreservesPushout.inr_iso_inv _ _ _
+  · exact pushout.inl_desc _ _ _
+  · exact pushout.inr_desc _ _ _
+
+
+/-- The base data are the canonical residue-normalized completion map.
+Source: Stacks 03CO (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def canonicalBase : BaseData.{t, u} l where
+  epsilon T := purTwistZlCompletionMapOfUniverses.{t, u} T l
+  residue T n := (purTwistZlCompletionMap_existsUniqueOfUniverses.{t, u} T l).exists.choose_spec n
+
+private theorem baseResidue_epi (T : Scheme.{t}) (n : ℕ) :
+    Epi (baseResidue.{t, u} l T n) := by
+  let q : CommRingCat.of (ULift.{max u (t + 1)} (PadicInt l)) ⟶
+      CommRingCat.of (ULift.{max u (t + 1)} (ZMod (l ^ (n + 1)))) :=
+    CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+      ((PadicInt.toZModPow (n + 1)).comp ULift.ringEquiv.toRingHom))
+  have : Epi q := ConcreteCategory.epi_of_surjective q (by
+    intro x
+    obtain ⟨z, hz⟩ := ZMod.ringHom_surjective (PadicInt.toZModPow (n + 1)) x.down
+    exact ⟨ULift.up z, congrArg ULift.up hz⟩)
+  change Epi ((constantSheaf (ProEt.topology T) CommRingCat.{max u (t + 1)}).map q)
+  let := (constantSheafAdj (ProEt.topology T) CommRingCat.{max u (t + 1)}
+    (MorphismProperty.Over.mkIdTerminal _ _)).isLeftAdjoint
+  infer_instance
+
+private theorem baseFiniteFactor_ext (T : Scheme.{t}) {B : Rings.{t, u} T} (k m : ℕ)
+    (f : baseLevel.{t, u} l T k ⟶ B) (g : baseLevel.{t, u} l T m ⟶ B)
+    (h : baseResidue l T k ≫ f = baseResidue l T m ≫ g) :
+    baseProjection l T k ≫ f = baseProjection l T m ≫ g := by
+  let t := max k m
+  let p (i : ℕ) (hi : i ≤ t) := (baseTower.{t, u} l T).map (homOfLE hi).op
+  have hp (i : ℕ) (hi : i ≤ t) :
+      baseProjection l T t ≫ p i hi = baseProjection l T i :=
+    limit.w (baseTower l T) (homOfLE hi).op
+  have hr (i : ℕ) (hi : i ≤ t) :
+      baseResidue l T t ≫ p i hi = baseResidue l T i := by
+    rw [← (canonicalBase.{t, u} l).residue T t, Category.assoc, hp,
+      (canonicalBase.{t, u} l).residue]
+  have : Epi (baseResidue.{t, u} l T t) := baseResidue_epi l T t
+  have he : p k (le_max_left k m) ≫ f = p m (le_max_right k m) ≫ g := by
+    apply (cancel_epi (baseResidue l T t)).mp
+    simpa only [← Category.assoc, hr] using h
+  rw [← hp k (le_max_left k m), ← hp m (le_max_right k m),
+    Category.assoc, Category.assoc, he]
+
+/-- The normalized coefficient tensor presentation, using the existing proved
+coefficient pushout comparison and quotient factorization for every admissible level.
+Source: Stacks 03EK and the integral twist paragraph
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def canonicalPresentation : Presentation l H (canonicalBase.{t, u} l) := by
+  let f := purTwistIntegersMap l H
+  have hf := (purTwistIntegersMap_existsUnique l H).exists.choose_spec
+  letI (T : Scheme.{t}) : IsIso (purTwistCoefficientComparison T l H) :=
+    purTwistCoefficientComparison_isIso T l H
+  refine ⟨f, hf, fun T ↦ asIso (purTwistCoefficientComparison T l H), ?_⟩
+  intro T n k hk
+  let g := (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l H (n + 1))).comp f
+  have hker : RingHom.ker (PadicInt.toZModPow (k + 1)) ≤ RingHom.ker g := by
+    rw [PadicInt.ker_toZModPow, Ideal.span_le, Set.singleton_subset_iff]
+    change Ideal.Quotient.mk _ (f ((l : PadicInt l) ^ (k + 1))) = 0
+    rw [map_pow, map_natCast, Ideal.Quotient.eq_zero_iff_mem]
+    exact hk (Ideal.subset_span (Set.mem_singleton _))
+  let j := (PadicInt.toZModPow (k + 1)).liftOfSurjective
+    (ZMod.ringHom_surjective _) ⟨g, hker⟩
+  have hj (z : PadicInt l) : j (PadicInt.toZModPow (k + 1) z) =
+      Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l H (n + 1)) (f z) :=
+    RingHom.liftOfSurjective_comp_apply _ _ _ z
+  have hc : purTwistCompletedScalarMap T l H ≫
+      completedIntegralCommRingProjectionUnrestricted l H T n =
+        baseProjection l T k ≫ residueFromBase l H T n k j := by
+    obtain ⟨m, q, hq, hp⟩ :=
+      (purTwistCompletedScalarMap_existsUnique T l H).exists.choose_spec n
+    erw [hp]
+    apply baseFiniteFactor_ext l T m k
+    dsimp [baseResidue, purTwistZlReductionOfUniverses, residueFromBase]
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    congr 1
+    ext z
+    exact (hq z.down).trans (hj z.down).symm
+  have hd := (purTwistIntegralCompletionMap_existsUnique T l H).exists.choose_spec n
+  refine ⟨j, hj, ?_⟩
+  intro U x b
+  have hl := pushout.inl_desc (purTwistCompletedScalarMap T l H)
+    (purTwistIntegralCompletionMap T l H) (purTwistCoefficientSquare T l H)
+  have hr := pushout.inr_desc (purTwistCompletedScalarMap T l H)
+    (purTwistIntegralCompletionMap T l H) (purTwistCoefficientSquare T l H)
+  rw [map_mul]
+  congr 1
+  · exact ConcreteCategory.congr_hom (congrArg (fun v ↦ v.hom.app U)
+      ((Category.assoc _ _ _).symm.trans ((congrArg
+        (fun v ↦ v ≫ completedIntegralCommRingProjectionUnrestricted l H T n) hl).trans hc))) x
+  · exact ConcreteCategory.congr_hom (congrArg (fun v ↦ v.hom.app U)
+      ((Category.assoc _ _ _).symm.trans ((congrArg
+        (fun v ↦ v ≫ completedIntegralCommRingProjectionUnrestricted l H T n) hr).trans hd))) b
+
+
+/-- The field inclusion restricts to integer rings and takes each uniformizer
+ideal power into the corresponding power in the upper field.
+Source: Serre, Local Fields, II §2; Stacks 03CO
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem integral_inclusion (iota : H →ₐ[Padic l] F) :
+    ∃ f : Padic.coefficientExtensionIntegers l H →+* Padic.coefficientExtensionIntegers l F,
+      (∀ x, (f x : F) = iota (x : H)) ∧
+      ∀ n, Padic.coefficientExtensionIdeal l H (n + 1) ≤
+        (Padic.coefficientExtensionIdeal l F (n + 1)).comap f := by
+  let R := Padic.coefficientExtensionIntegers l H
+  let S := Padic.coefficientExtensionIntegers l F
+  have hR := (Padic.extension_integers_dvr l H
+    (Padic.coefficientExtensionAbsoluteValue l H)
+    (spectralNorm_extends (K := ℚ_[l]) (L := H))).choose_spec.choose_spec
+  have hS := (Padic.extension_integers_dvr l F
+    (Padic.coefficientExtensionAbsoluteValue l F)
+    (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec
+  have hn (x : H) : spectralNorm ℚ_[l] F (iota x) = spectralNorm ℚ_[l] H x := by
+    unfold spectralNorm
+    rw [minpoly.algHom_eq iota iota.injective]
+  let f : R →+* S := (iota.toRingHom.comp R.subtype).codRestrict S (by
+    intro x
+    apply (hS.1 _).mpr
+    change spectralNorm ℚ_[l] F (iota (x : H)) ≤ 1
+    rw [hn]
+    exact (hR.1 _).mp x.property)
+  refine ⟨f, fun _ ↦ rfl, fun n ↦ ?_⟩
+  have hgenR : Ideal.span ({Padic.coefficientExtensionUniformizer l H} : Set R) =
+      Padic.coefficientExtensionMaximalIdeal l H :=
+    hR.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hgenS : Ideal.span ({Padic.coefficientExtensionUniformizer l F} : Set S) =
+      Padic.coefficientExtensionMaximalIdeal l F :=
+    hS.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  apply Ideal.map_le_iff_le_comap.mp
+  change Ideal.map f (Ideal.span {Padic.coefficientExtensionUniformizer l H} ^ (n + 1)) ≤ _
+  rw [Ideal.map_pow]
+  change Ideal.map f (Ideal.span {Padic.coefficientExtensionUniformizer l H}) ^ (n + 1) ≤
+    Ideal.span {Padic.coefficientExtensionUniformizer l F} ^ (n + 1)
+  apply pow_le_pow_left'
+  rw [Ideal.map_span, Set.image_singleton, Ideal.span_le, Set.singleton_subset_iff]
+  rw [hgenS]
+  apply (hS.2.1 _).mpr
+  change spectralNorm ℚ_[l] F (iota (Padic.coefficientExtensionUniformizer l H : H)) < 1
+  rw [hn]
+  apply (hR.2.1 _).mp
+  change Padic.coefficientExtensionUniformizer l H ∈
+    Padic.coefficientExtensionMaximalIdeal l H
+  rw [← hgenR]
+  exact Ideal.subset_span (Set.mem_singleton _)
+
+/-- The tensor map of a coefficient inclusion, fixed on both factors.
+Source: Stacks 03EK (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def inclusionTensor (iota : H →ₐ[Padic l] F)
+    (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d)
+    (f : Padic.coefficientExtensionIntegers l H →+* Padic.coefficientExtensionIntegers l F)
+    (hf : ∀ x, (f x : F) = iota (x : H)) (T : Scheme.{t}) :
+    tensor l H d p.integers T ⟶ tensor l F d q.integers T :=
+  pushout.desc (pushout.inl (d.epsilon T) (scalar l F q.integers T))
+    (constantInclusion l H F f T ≫ pushout.inr (d.epsilon T) (scalar l F q.integers T)) (by
+      rw [pushout.condition, ← Category.assoc]
+      congr 1
+      dsimp [scalar, constantInclusion]
+      rw [← Functor.map_comp]
+      congr 1
+      ext z
+      exact congrArg Subtype.val (RingHom.congr_fun
+        (integer_scalar_square l H F iota d p q f hf) z.down).symm)
+
+/-- The completed coefficient inclusion is obtained from the tensor inclusion.
+Source: the integral twist paragraph
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def inclusion (iota : H →ₐ[Padic l] F)
+    (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d)
+    (f : Padic.coefficientExtensionIntegers l H →+* Padic.coefficientExtensionIntegers l F)
+    (hf : ∀ x, (f x : F) = iota (x : H)) (T : Scheme.{t}) :
+    completedIntegralCommRingSheafUnrestricted l H T ⟶
+      completedIntegralCommRingSheafUnrestricted l F T :=
+  (p.beta T).inv ≫ inclusionTensor l H F iota d p q f hf T ≫ (q.beta T).hom
+
+/-- Every quotient map is compatible with constant integral reduction.
+Source: Stacks 03CO (blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem residue_quotient
+    (f : Padic.coefficientExtensionIntegers l H →+* Padic.coefficientExtensionIntegers l F)
+    (T : Scheme.{t}) (k n : ℕ)
+    (hk : Padic.coefficientExtensionIdeal l H (k + 1) ≤
+      (Padic.coefficientExtensionIdeal l F (n + 1)).comap f) :
+    integralResidue l H T k ≫ quotientInclusion l H F f T k n hk =
+      constantInclusion l H F f T ≫ integralResidue l F T n := by
+  dsimp [integralResidue, quotientInclusion, constantInclusion]
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 1
+
+/-- Every admissible ramified quotient computes the tensor-defined inclusion.
+Source: the integral twist paragraph, comparison on pure tensors
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem inclusion_projection (iota : H →ₐ[Padic l] F)
+    (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d)
+    (f : Padic.coefficientExtensionIntegers l H →+* Padic.coefficientExtensionIntegers l F)
+    (hf : ∀ x, (f x : F) = iota (x : H)) (T : Scheme.{t}) (n k : ℕ)
+    (hk : Padic.coefficientExtensionIdeal l H (k + 1) ≤
+      (Padic.coefficientExtensionIdeal l F (n + 1)).comap f) :
+    inclusion l H F iota d p q f hf T ≫
+        completedIntegralCommRingProjectionUnrestricted l F T n =
+      completedIntegralCommRingProjectionUnrestricted l H T k ≫
+        quotientInclusion l H F f T k n hk := by
+  apply (cancel_epi (p.beta T).hom).mp
+  simp only [inclusion, Category.assoc, Iso.hom_inv_id_assoc]
+  apply pushout.hom_ext
+  · let r := max k n
+    have hH : Ideal.span ({(l : Padic.coefficientExtensionIntegers l H) ^ (r + 1)} :
+        Set (Padic.coefficientExtensionIntegers l H)) ≤
+          Padic.coefficientExtensionIdeal l H (k + 1) := by
+      apply le_trans _ (base_admissible l H k)
+      rw [← Ideal.span_singleton_pow, ← Ideal.span_singleton_pow]
+      exact Ideal.pow_le_pow_right (Nat.add_le_add_right (le_max_left k n) 1)
+    have hF : Ideal.span ({(l : Padic.coefficientExtensionIntegers l F) ^ (r + 1)} :
+        Set (Padic.coefficientExtensionIntegers l F)) ≤
+          Padic.coefficientExtensionIdeal l F (n + 1) := by
+      apply le_trans _ (base_admissible l F n)
+      rw [← Ideal.span_singleton_pow, ← Ideal.span_singleton_pow]
+      exact Ideal.pow_le_pow_right (Nat.add_le_add_right (le_max_right k n) 1)
+    obtain ⟨jH, hjH, hpH⟩ := presentation_left l H d p T k r hH
+    obtain ⟨jF, hjF, hpF⟩ := presentation_left l F d q T n r hF
+    simp only [inclusionTensor, pushout.inl_desc_assoc]
+    rw [hpF]
+    have hh := congrArg (fun v ↦ v ≫ quotientInclusion l H F f T k n hk) hpH
+    simp only [Category.assoc] at hh
+    rw [hh]
+    congr 1
+    dsimp [residueFromBase, quotientInclusion]
+    rw [← Functor.map_comp]
+    congr 1
+    ext z
+    change jF z.down = Ideal.quotientMap _ f hk (jH z.down)
+    obtain ⟨a, ha⟩ := ZMod.ringHom_surjective (PadicInt.toZModPow (r + 1)) z.down
+    rw [← ha, hjF, hjH]
+    change Ideal.Quotient.mk _ (q.integers a) = Ideal.Quotient.mk _ (f (p.integers a))
+    apply congrArg (Ideal.Quotient.mk _)
+    exact (RingHom.congr_fun (integer_scalar_square l H F iota d p q f hf) a).symm
+  · simp only [inclusionTensor, pushout.inr_desc_assoc]
+    rw [Category.assoc, presentation_right]
+    have hh := congrArg (fun v ↦ v ≫ quotientInclusion l H F f T k n hk)
+      (presentation_right l H d p T k)
+    simp only [Category.assoc] at hh
+    rw [hh, residue_quotient]
+
+/-- Extension data are fixed by the tensor inclusions and every quotient projection.
+Source: the integral twist paragraph
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private def extension (iota : H →ₐ[Padic l] F)
+    (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d) :
+    Extension l H F iota d p q := by
+  let h := integral_inclusion l H F iota
+  let f := h.choose
+  have hf := h.choose_spec.1
+  have ha := h.choose_spec.2
+  refine ⟨f, hf, fun n ↦ ⟨n, ha n⟩, inclusion l H F iota d p q f hf,
+    inclusion_projection l H F iota d p q f hf,
+    inclusionTensor l H F iota d p q f hf, ?_, ?_, ?_⟩
+  · intro T
+    exact pushout.inl_desc _ _ _
+  · intro T
+    exact pushout.inr_desc _ _ _
+  · intro T
+    simp only [inclusion, Iso.hom_inv_id_assoc]
+
+/-- Inverse image commutes with the normalized completed coefficient inclusion.
+Source: the integral twist paragraph, joint detection by finite projections
+(blueprint: lem-pur-completed-coefficient-tensor-normalization). -/
+private theorem extension_pullback (iota : H →ₐ[Padic l] F)
+    (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d)
+    (e : Extension l H F iota d p q)
+    {T' T : Scheme.{t}} (h : T' ⟶ T) (a : BasePullback l d h)
+    (b : Pullback l H d p h a) (c : Pullback l F d q h a) :
+    (inverse.{t, u} h).map (e.inclusion T) ≫ c.alpha = b.alpha ≫ e.inclusion T' := by
+  apply completion_hom_ext l F T'
+  intro n
+  obtain ⟨k, hk⟩ := e.admissible n
+  have hn : (inverse.{t, u} h).map (quotientInclusion l H F e.integers T k n hk) ≫
+      delta.{t, u} h (CommRingCat.of
+        (ULift.{t + 1} (Padic.coefficientExtensionRing l F (n + 1)))) =
+      delta.{t, u} h (CommRingCat.of
+        (ULift.{t + 1} (Padic.coefficientExtensionRing l H (k + 1)))) ≫
+          quotientInclusion l H F e.integers T' k n hk :=
+    delta_naturality.{t, u} h (CommRingCat.ofHom
+      (liftHom (Ideal.quotientMap (Padic.coefficientExtensionIdeal l F (n + 1))
+        e.integers hk)))
+  rw [Category.assoc, c.projection, ← Functor.map_comp_assoc, e.projection T n k hk,
+    Functor.map_comp, Category.assoc, hn, ← Category.assoc, ← b.projection,
+    Category.assoc, Category.assoc, e.projection T' n k hk]
+
+
 /-- The normalized completed coefficient tensor isomorphisms exist and commute
 with arbitrary scheme inverse image and finite extensions of coefficient fields.
 There is no characteristic, finite-field, dimension, or invertibility restriction.
@@ -319,32 +912,25 @@ There is no characteristic, finite-field, dimension, or invertibility restrictio
 Source: main-20261015, smooth-purity, Cartesian coefficients and twists,
 integral twist paragraph (blueprint: lem-pur-completed-coefficient-tensor-normalization).
 
-Proof (the ten steps of the node):
-1. Use lem-sfb-local-field-integral-basis over Q_l and
-   lem-pur-local-field-coefficient-stages to choose an integral basis and write
-   l = u varpi^e; the l-power and uniformizer-power filtrations are cofinal.
-2. Sheafify the basis coordinate maps and their finite reductions. Finite-product
-   preservation of sheafification makes these inverse constant-module isomorphisms.
-3. In compatible tuples, pass to the cofinal indices er. The coordinate maps give
-   A_T^d isomorphic to R_H,T, sectionwise and compatibly with restrictions.
-4. The balanced tensor universal property identifies A_T tensor B_H,T with A_T^d.
-   The composite gives beta and its projection formula for every admissible k.
-5. Compute products and units under all quotient projections. Thus beta and its
-   inverse are ring maps. The projection formula uniquely determines beta.
-6. Constant comparisons are the adjoints of constant-section maps. Sheafification
-   uniqueness shows their naturality for all residue and inclusion ring maps.
-7. Define alpha_0 and alpha_H by their quotient cones. Naturality from step 6
-   proves the epsilon square after each base projection.
-8. Inverse image of the universal balanced pairing induces the tensor comparison.
-   The finite basis proves invertibility. Its two inclusion equations fix sigma;
-   the epsilon and scalar squares define the displayed change-of-scalars map.
-9. Project the beta inverse-image square to n and use an admissible k. Step 6
-   identifies the pulled-back residue pairing with the pairing over T'. Joint
-   detection by projections gives equality of the ring-sheaf maps.
-10. Define the coefficient inclusion by all admissible ramified quotient maps;
-    compare two choices after a common larger index. The beta extension square
-    follows on pure tensors. Project the inverse-image inclusion square and use
-    step 6 for each quotient map. Naturality also gives the discrete q square. -/
+Proof:
+1. Reuse the proved coefficient pushout comparison with independent site and
+   coefficient universes. Factor each admissible residue through the finite base
+   quotient. Surjectivity of p-adic reduction identifies this factor with the
+   completed scalar map; the pushout leg equations give the pure-tensor formula.
+2. Apply the sheafification and inverse-image adjunctions to the constant-section
+   maps. This proves naturality of the constant comparison for every ring map;
+   uniqueness of left adjoints proves that this comparison is invertible.
+3. Define the base pullback by its projection cone. Preservation of pushouts by
+   inverse image supplies sigma with its two inclusion equations. The pushout
+   change map, conjugated by beta and sigma, defines the coefficient pullback.
+   Check its projection formula on the two pushout inclusions.
+4. A coefficient field inclusion preserves spectral norms, hence restricts to
+   integer rings and preserves maximal ideals. Their powers give admissible
+   quotients. Conjugate the tensor inclusion by beta to define the completed
+   inclusion; quotient detection proves its formula for every admissible pair.
+5. Test the completed-inclusion pullback square under every target projection,
+   using the two pullback formulas and constant-comparison naturality. The same
+   naturality gives the discrete inclusion square. Assemble the constructed data. -/
 theorem completed_coefficient_tensor_normalization (iota : H →ₐ[Padic l] F) :
     ∃ (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d)
       (e : Extension l H F iota d p q),
@@ -357,6 +943,18 @@ theorem completed_coefficient_tensor_normalization (iota : H →ₐ[Padic l] F) 
             delta.{t, u} h
               (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l H))) ≫
               constantInclusion l H F e.integers T' := by
-  sorry
+  -- Reuse the proved coefficient comparison for the first five steps of the plan.
+  -- Quotient detection then supplies the inverse-image and extension compatibilities.
+  let d := canonicalBase.{t, u} l
+  let p := canonicalPresentation.{t, u} l H
+  let q := canonicalPresentation.{t, u} l F
+  let e := extension l H F iota d p q
+  refine ⟨d, p, q, e, ?_⟩
+  intro T' T h
+  let a := basePullback l d h
+  let b := presentationPullback l H d p h a
+  let c := presentationPullback l F d q h a
+  exact ⟨a, b, c, extension_pullback l H F iota d p q e h a b c,
+    delta_naturality h _⟩
 
 end WeilConjectures.CompletedCoefficientNormalization

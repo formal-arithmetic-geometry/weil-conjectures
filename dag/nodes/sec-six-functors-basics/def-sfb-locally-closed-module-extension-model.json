@@ -1,0 +1,176 @@
+{
+ "id": "def-sfb-locally-closed-module-extension-model",
+ "kind": "definition",
+ "title": "Fixed exact closed-then-open module extension model",
+ "statement": "For every coefficient immersion $a:S\\to X$ between Noetherian coefficient schemes [def-sfb-locally-closed-module-extension-data], choose a closed-then-open coefficient-compatible factorization $a=vc$. Define the fixed model of extension to be $F_a(M)=v_!(c_*M)$, using actual module direct image [def-weil-pbc-proetale-operations] and the exact open left adjoint constructed by [lem-sfb-proetale-identified-open-closed]. Define its restriction isomorphism by the canonical inverse-image compositor, inverse open unit, and closed counit. The model is additive, preserves finite limits and colimits, and is fully faithful. All choices in this definition use already proved existence theorems, rather than unfinished existence statements.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "proetale.tex Tags 09AA (lemma-closed-immersion) and 09BN (lemma-open-immersion); sites-modules.tex Tags 03DI and 03DJ; scheme immersion factorization Tag 01IO. Steps 1--2 of the assigned node."
+ },
+ "stmt_deps": [
+  "def-sfb-locally-closed-module-extension-data",
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-proetale-identified-open-closed"
+ ],
+ "proof": [
+  {
+   "text": "Factor the immersion and give the intermediate open its actual inverse-image coefficient ring. Give the closed factor the inverse of the canonical composition coefficient map followed by the original coefficient identification. Cancellation proves equality with the original coefficient immersion. Package the explicit composite in ModelPresentation, with an equality field fixing its functor exactly. The proved nonemptiness theorem uses the explicit composite itself. This gives a nominal presentation without kernel reduction through its sheaf object data; modelExtension_eq recovers the construction.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-pbc-strict-tower-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved identified open/closed theorem for the complementary vanishing-ideal closed subscheme of the open factor, and for the complementary open of the closed factor. Compose actual closed direct image with the open extension. The two invertible adjunction maps give the displayed modelRestriction; the open source is Noetherian, so every open used is quasi-compact. Compose exactness and full-faithfulness witnesses of the two factors.",
+   "uses": [
+    "lem-sfb-proetale-identified-open-closed",
+    "lem-weil-pbc-closed-subset-closed-subscheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-strict-tower-operations",
+  "lem-sfb-proetale-identified-open-closed",
+  "lem-weil-pbc-closed-subset-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E5",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "proetale.tex Tags 09AA (lemma-closed-immersion) and 09BN (lemma-open-immersion); sites-modules.tex Tags 03DI and 03DJ; scheme immersion factorization Tag 01IO. Steps 1--2 of the assigned node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally closed immersion extension by zero normalized composition of sheaves of modules",
+   "date": "2026-10-26",
+   "results": "8 hits; AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, ModuleCat.Tilde.res_apply",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "9cd61669a58cdb12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extensionByZero\"",
+   "date": "2026-10-26",
+   "results": "0 hits; ",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosed.*extension|extensionByZero.*[Cc]omp",
+   "date": "2026-10-26",
+   "results": "0 hits; ",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact fully faithful extension by zero for a locally closed immersion and normalized composition",
+   "date": "2026-10-26",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsClosedImmersion.comp_iff, AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion, AlgebraicGeometry.IsImmersion.comp, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.IsOpenImmersion.comp",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "c4398a3a8b83e4bd"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction normalized natural isomorphism fully faithful functor associativity unit laws",
+   "date": "2026-10-26",
+   "results": "8 hits; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Functor.FullyFaithful.homNatIso, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.restrictFullyFaithful",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "2ecad34d2bbd804a"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|unit_conjugateEquiv_symm|fullyFaithfulROfIsIsoCounit",
+   "date": "2026-10-26",
+   "results": "21 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "b5a0ffa458083a8a"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyClosedModuleExtensionCoherence",
+  "group": "E5",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "proetale.tex Tags 09AA (lemma-closed-immersion) and 09BN (lemma-open-immersion); sites-modules.tex Tags 03DI and 03DJ; scheme immersion factorization Tag 01IO. Steps 1--2 of the assigned node.",
+   "via": [
+    "lem-sfb-locally-closed-module-extension-coherence",
+    "lem-sfb-locally-closed-extension-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedModuleExtensionModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedModuleExtensionModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.ExtensionFactorization",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.factorization_nonempty",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.extensionFactorization",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.open_extension_exists",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelOpenExtension",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelOpenExtension_additive",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelOpenExtension_finiteLimits",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelOpenExtension_finiteColimits",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelOpenAdjunction",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelOpenAdjunction_unit_isIso",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelClosed_finiteLimits",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelClosed_finiteColimits",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelClosed_counit_isIso",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.ModelPresentation",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelPresentation_nonempty",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelPresentation",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension_eq",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension_additive",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension_finiteLimits",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension_finiteColimits",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension_full",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelExtension_faithful",
+   "AlgebraicGeometry.Scheme.LocallyClosedCoefficientImmersion.modelRestriction"
+  ],
+  "statement": "def modelExtension {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) : proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-884ed",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065537-L-3071508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-884ed",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065537-L-3071508",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules + item node/new nodes/change record vs clone sheaf-dag; old vs new normalization fields (definitionally equal formulas); 3 direct importers compiled against the delivery (all OK); #print axioms (sorryAx only on item via the 3 new obligations; model sorry-free)"
+ }
+}

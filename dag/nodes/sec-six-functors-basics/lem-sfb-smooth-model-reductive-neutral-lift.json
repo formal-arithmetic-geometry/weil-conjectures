@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-smooth-model-reductive-neutral-lift",
+ "kind": "statement",
+ "title": "Split reductive neutral model from a reductive special neutral fibre",
+ "statement": "Let $R$ be a henselian discrete valuation ring [def-sc-discrete-valuation-ring, def-weil-pbc-henselian-terminology] with algebraically closed residue field $F$ [def-weil-algebraic-closure] and fraction field $L$. Let $\\mathcal N$ be a smooth affine finite-type $R$-group scheme with geometrically connected generic fibre. Group schemes over a ring have multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme], with that ring as base. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume the identity component $\\mathcal N_F^0$ of the special fibre is reductive. Over a field, reductive means smooth, geometrically connected, affine of finite type, with no nontrivial smooth connected normal unipotent subgroup after algebraic closure; unipotent means that all geometric points are unipotent matrices in a faithful representation. The union of $\\mathcal N_L$ and $\\mathcal N_F^0$ in $|\\mathcal N|$, with its induced open-subscheme structure [def-weil-open-immersion], is an open affine finite-type subgroup scheme $\\mathcal D\\subseteq\\mathcal N$. It satisfies $\\mathcal D_L=\\mathcal N_L$ and $\\mathcal D_F=\\mathcal N_F^0$, and is split reductive over $R$: it is smooth affine of finite type with reductive geometric fibres and admits a closed subgroup scheme $\\mathcal T\\cong\\mathbf G_{m,R}^{r}$ which is a maximal torus in every geometric fibre. Here $\\mathbf G_{m,R}=\\operatorname{Spec}R[t,t^{-1}]$ with multiplication of units, a torus over an algebraically closed field is a group isomorphic to a finite product of $\\mathbf G_m$, and maximal means maximal under subgroup inclusion. The integer $r\\geq0$ is allowed to be zero.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read online https://arxiv.org/pdf/math/0405381: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-split-torus-over-ring",
+  "def-wf-algebraic-components"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=\\mathcal N_F^0$. By [lem-sfb-finite-type-group-identity-subgroup], $H$ is an open and closed subgroup scheme of $\\mathcal N_F$. Its complement is closed in the closed special fibre, hence closed in $\\mathcal N$. Remove that complement and call the resulting open subscheme $\\mathcal D$. Its generic fibre is $\\mathcal N_L$ and its special fibre is $H$, as schemes. Multiplication on $\\mathcal D\\times_R\\mathcal D$, inversion on $\\mathcal D$, and the identity have image in this open: over $L$ there is nothing removed, and over $F$ this follows from the subgroup property of $H$. A morphism whose image lies in an open factors uniquely through its restricted structure sheaf. The restricted maps satisfy the group diagrams since they do so after the open immersion into $\\mathcal N$. Thus $\\mathcal D$ is the specified open subgroup.",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Lemma 3.5 and the neutral-component paragraph preceding it, printed p.6; Stacks Tag 0B7R (groupoids-proposition-connected-component)"
+   }
+  },
+  {
+   "text": "Write $\\mathcal N=\\operatorname{Spec}E$ and choose a uniformizer $\\pi$ of $R$. The smooth affine comparison [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes $E$ a smooth $R$-algebra. By [lem-weil-pbc-smooth-ring-map-flat] it is flat, and [lem-trf-flat-module-torsionfree-domain] makes multiplication by $\\pi$ injective. Thus $E\\subset E[1/\\pi]$. Apply [lem-weil-pbc-spec-clopen-idempotent] to the complement of $H$ in $\\operatorname{Spec}(E/\\pi E)$: obtain $\\bar a^2=\\bar a$ with $H=V(\\bar a)=D(1-\\bar a)$. Choose a lift $a\\in E$ and $b\\in E$ satisfying $a(1-a)=\\pi b$. Then $|\\mathcal D|=D_E(\\pi)\\cup D_E(1-a)$.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Lemma 3.5, alternative affine-dilatation argument, printed p.6; algebraic charts written out here; Stacks Tags 00TA, 00SL, 00EE"
+   }
+  },
+  {
+   "text": "Put $t=a/\\pi$ and $B=E[t]\\subset E[1/\\pi]$. In $B$, $1=(1-a)+\\pi t$, so the basic opens $D_B(\\pi)$ and $D_B(1-a)$ cover $\\operatorname{Spec}B$. The corresponding ring maps are isomorphisms: $B[1/\\pi]=E[1/\\pi]$, and $B[1/(1-a)]=E[1/(1-a)]$ because $t=b/(1-a)$ there. The latter equality holds inside $E[1/\\pi,1/(1-a)]$, into which $E[1/(1-a)]$ injects by the preceding torsion-freeness. By [lem-weil-pbc-affine-open-section-vanishing-prime], these are exactly the maps on the two basic-open charts of $\\operatorname{Spec}E$; hence $\\operatorname{Spec}B\\to\\operatorname{Spec}E$ identifies its charts, and their common localization, with $D_E(\\pi)$ and $D_E(1-a)$. This identifies $\\mathcal D=\\operatorname{Spec}B$. In particular it is affine of finite type over $R$, since $E$ is finitely generated and only $t$ is adjoined.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+    "place": "Lemma 3.5, alternative argument: explicit coordinate version of the affine dilatation; Stacks Tag 01I3 (schemes-lemma-standard-open-affine)"
+   }
+  },
+  {
+   "text": "By [lem-pc-open-immersion-smooth-composition], $\\mathcal D$ is smooth over $R$. Apply the first assertion of [lem-sfb-reductive-torus-fibre-openness] to $\\mathcal D$ at the closed point of $S=\\operatorname{Spec}R$. Its geometric special fibre is $H$, reductive by hypothesis because $F$ is algebraically closed. The required finite presentation follows from smoothness and affineness by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Every open neighborhood of the closed point of this local spectrum is all of $S$: a basic open containing the maximal ideal is defined by a unit. Thus all geometric fibre identity components of $\\mathcal D$ are reductive. Its geometric generic fibre is connected by the hypothesis on $\\mathcal N_L$, and its special fibre is the connected $H$. Therefore the geometric fibres themselves are reductive.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-sfb-reductive-torus-fibre-openness",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9(1), printed pp.85-88; Prasad--Yu Proposition 4.3 first paragraph; Stacks Tags 01VC, 01VA"
+   }
+  },
+  {
+   "text": "By [lem-sfb-reductive-borel-pair-structure], choose a split maximal torus $T_0\\simeq\\mathbf G_{m,F}^r$ in $H$. Apply [lem-sfb-split-torus-etale-subgroup-lift] to the smooth affine $R$-group $\\mathcal D$, its closed point, and this immersion. Obtain $U=\\operatorname{Spec}C$ etale over $S$, an $F$-point $u$ above the closed point, and $j:\\mathbf G_{m,U}^r\\hookrightarrow\\mathcal D_U$. Since etale morphisms are smooth [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes $C$ a smooth $R$-algebra. Apply [lem-trf-henselian-smooth-algebra-lifting] with base ring $R$, target algebra $R$ and ideal $(\\pi)$ to the residue map $C\\to F$ of $u$. The maximal-ideal pair is henselian by hypothesis. Obtain $C\\to R$ lifting it, equivalently a section $S\\to U$ through $u$. Pulling back $j$ along that section gives a closed subgroup $\\mathcal T\\simeq\\mathbf G_{m,R}^r$ in $\\mathcal D$, with special fibre $T_0$. On coordinate rings a closed immersion is a quotient, and tensoring this quotient with $R$ is again a quotient, so the pulled-back immersion is closed.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-split-torus-etale-subgroup-lift",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-henselian-smooth-algebra-lifting",
+    "def-sbc-smooth-morphisms",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292; Stacks Tag 0H74 (more-algebra-lemma-lift-smooth-henselian)"
+   }
+  },
+  {
+   "text": "Apply the second assertion of [lem-sfb-reductive-torus-fibre-openness] to $\\mathcal D$ and $\\mathcal T$. The special fibre is reductive and $T_0$ is maximal there by the preceding choice. It follows that $\\mathcal T$ is maximal on all geometric fibres over an open neighborhood of the closed point, hence over all of $\\operatorname{Spec}R$ by the unit argument in Step 4. Along with Steps 1, 3 and 4 this proves every required assertion, including the rank-zero case.",
+   "uses": [
+    "lem-sfb-reductive-torus-fibre-openness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.9(2), printed pp.85-86; Prasad--Yu Section 3.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-ring-localization-away",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-reductive-torus-fibre-openness",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-split-torus-etale-subgroup-lift",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Lemma 3.5 and Proposition 4.3 first paragraph, with Conrad Propositions 3.1.6, 3.1.9 and B.3.4 as generic tools, read online; both local copies WANTED. Explicit localization and henselian-section assembly by Q13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The neutral component of a smooth affine group scheme over a strictly henselian discrete valuation ring with connected generic fibre and reductive special identity component is split reductive",
+   "results": "{\"t\": \"2026-10-24T02:00:19Z\", \"tool\": \"leanfinder\", \"query\": \"The neutral component of a smooth affine group scheme over a strictly henselian discrete valuation ring with connected generic fibre and reductive special identity component is split reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"HenselianLocalRing\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"Field.henselian\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"e82d86ca05044611\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth ring maps, formal smoothness over perfect fields and elliptic good reduction do not give affineness and split reductivity of a relative neutral component"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth group over a local ring with reductive special fibre is a reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T02:00:19Z\", \"tool\": \"leansearch\", \"query\": \"Smooth group over a local ring with reductive special fibre is a reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.Smooth.formallySmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"RingHom.Smooth\", \"Algebra.Smooth.mk\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\"], \"digest\": \"d6ad85a331974544\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth ring maps, formal smoothness over perfect fields and elliptic good reduction do not give affineness and split reductivity of a relative neutral component"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T02:00:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth ring maps, formal smoothness over perfect fields and elliptic good reduction do not give affineness and split reductivity of a relative neutral component"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|neutralComponent|identityComponent",
+   "results": "{\"t\": \"2026-10-24T02:00:20Z\", \"tool\": \"grep\", \"query\": \"reductive|neutralComponent|identityComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth ring maps, formal smoothness over perfect fields and elliptic good reduction do not give affineness and split reductivity of a relative neutral component"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reductive special fibre lifts to split reductive group over a strictly henselian local ring and smooth neutral component is affine",
+   "results": "{\"t\": \"2026-10-24T02:00:26Z\", \"tool\": \"leanfinder\", \"query\": \"Reductive special fibre lifts to split reductive group over a strictly henselian local ring and smooth neutral component is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"Field.henselian\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.FormallyUnramified.isReduced_of_field\"], \"digest\": \"6b288f567bce365f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth ring maps, formal smoothness over perfect fields and elliptic good reduction do not give affineness and split reductivity of a relative neutral component"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine group scheme over a henselian discrete valuation ring whose special identity component is reductive has split reductive relative neutral component",
+   "results": "{\"t\": \"2026-10-24T02:47:15Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth affine group scheme over a henselian discrete valuation ring whose special identity component is reductive has split reductive relative neutral component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"HenselianLocalRing\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"HenselianLocalRing.TFAE\", \"Field.henselian\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_unramified_and_smooth\"], \"digest\": \"9c97bd3d1193815a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian rings, elliptic good reduction, formal smoothness and group-extension splitting do not prove the relative neutral model assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|neutralComponent|identityComponent",
+   "results": "{\"t\": \"2026-10-24T02:50:12Z\", \"tool\": \"grep\", \"query\": \"reductive|neutralComponent|identityComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian rings, elliptic good reduction, formal smoothness and group-extension splitting do not prove the relative neutral model assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The neutral component of a smooth affine group model with reductive special identity component is split reductive",
+   "results": "{\"t\": \"2026-10-24T02:50:12Z\", \"tool\": \"leansearch\", \"query\": \"The neutral component of a smooth affine group model with reductive special identity component is split reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"SemidirectProduct.right_splitting\", \"AddGroupExtension.IsConj.refl\", \"SpecialLinearGroup.instGroup\", \"Algebra.FormallySmooth.of_split\", \"GroupExtension.IsConj.refl\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"SpecialLinearGroup.instInhabited\"], \"digest\": \"b61b7cfab6f56e4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian rings, elliptic good reduction, formal smoothness and group-extension splitting do not prove the relative neutral model assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-24T02:50:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: henselian rings, elliptic good reduction, formal smoothness and group-extension splitting do not prove the relative neutral model assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasi-reductive-special-connectedness",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive",
+   "via": [
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-model-reductive-neutral-lift",
+  "worker": "stage1",
+  "summary": "Constructed the relative neutral open and proved affineness by two explicit localization charts using a lift of the special-fibre idempotent. Added two generic statement-only inputs: openness of reductivity and torus maximality, and etale lifting of split torus subgroups. Combined them with existing henselian smooth lifting to obtain a fibrewise maximal split torus, without invoking the parent special-connectedness theorem. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Realizes precisely the smooth-model neutral lifting prerequisite, using the current latest direct-images proof (3) as ancestor route; the inherited root is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine scheme/ring smoothness comparison; used on E, B and the etale neighborhood C."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-flat",
+    "why": "Generic commutative algebra smooth implies flat, used to inject E into its generic localization."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "Generic flat-module implication over a domain, with no trace-formula hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "Generic commutative algebra correspondence for the clopen special-fibre component."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic affine basic-open localization theorem for the two-chart identification."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Generic scheme smoothness of an open restriction, independent of curves or Picard schemes."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "Generic henselian-pair lifting, applied to C to construct the section of the etale neighborhood."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic fact that an etale morphism (locally of finite presentation, flat, unramified) is smooth; used for the etale neighborhood U=Spec C before the henselian section."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-c961229d5",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-c961229d5 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full. Checked Prasad-Yu (arXiv math/0405381: the neutral-component paragraph, Lemma 3.5 via dilatation, §3.6, Prop. 4.3 first paragraph) and Conrad's Reductive group schemes (Prop. 3.1.6 étale lift with k(s')=k(s); Prop. 3.1.9(1),(2) openness of reductivity and of torus maximality), both read from text extracted from downloaded PDFs. The item's statement and stmt_deps equal live, where the item is still unsplit; there is no repair note. Steps 1-4 and 6 are correct: the open subgroup, the clopen idempotent on the special fibre (sign checked), the explicit two-chart dilatation B=E[a/π] using π-torsion-freeness, reductivity over all of Spec R by the unit argument, and maximality by 3.1.9(2). New nodes: torus-fibre-openness is Conrad 3.1.9 restricted to a split torus; split-torus-etale-subgroup-lift is Conrad 3.1.6 plus B.3.4 splitting (true without henselian or reductive hypotheses). Both are statement-only, strictly smaller than the item, and searched; no duplicates were found in the DAG. Batch-5 citations: flat⇒torsion-free, Stacks 0H74 henselian lifting, component-open-qc and fppf base change are generic algebra/topology and neither trace formula nor Poincaré duality; accepted. FIX (C4): step 5 cited def-sbc-smooth-morphisms for 'etale morphisms are smooth', but the new node's étale is def-weil-etale-morphism (lfp+flat+unramified). Step 5 now cites lem-weil-pbc-etale-smooth-zero-dimensional-fibres in its uses and proof_deps, declared in split_report.tool_uses. Advisory: reductive/G_m are defined inline rather than citing def-sfb-reductive-torus-centralizer-terminology/def-sc-gm-ga, consistently with them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SmoothModelReductiveNeutralLift",
+  "declaration": "AlgebraicGeometry.smoothModel_reductive_neutral_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SmoothModelReductiveNeutralLift.lean",
+  "statement": "theorem smoothModel_reductive_neutral_lift (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [HenselianLocalRing R] [IsAlgClosed (IsLocalRing.ResidueField R)] (L : Type u) [Field L] [Algebra R L] [IsFractionRing R L] (N : Grp (Over (Spec (.of R)))) [Smooth N.X.hom] [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [GeometricallyConnected (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (algebraMap R L))))] (hH : ReductiveTorusCentralizer.IsReductive (Grp.mk ((@GrpObj.identityComponent (IsLocalRing.ResidueField R) inferInstance ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).obj N.X) inferInstance (inferInstanceAs (LocallyOfFiniteType (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))))) (inferInstanceAs (QuasiCompact (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))))))))) : ∃ (D : Grp (Over (Spec (.of R)))) (i : D ⟶ N), IsOpenImmersion i.hom.hom.left ∧ Set.range i.hom.hom.left = Set.range (pullback.fst N.X.hom (Spec.map (CommRingCat.ofHom (algebraMap R L)))) ∪ Set.range (((@GrpObj.identityComponentι (IsLocalRing.ResidueField R) inferInstance ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).obj N.X) inferInstance (inferInstanceAs (LocallyOfFiniteType (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))))) (inferInstanceAs (QuasiCompact (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))))))).left ≫ pullback.fst N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))) ∧ Smooth D.X.hom ∧ IsAffine D.X.left ∧ LocallyOfFiniteType D.X.hom ∧ QuasiCompact D.X.hom ∧ IsIso ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R L)))).mapGrp.map i) ∧ (∃ e : (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).obj D.X ≅ (@GrpObj.identityComponent (IsLocalRing.ResidueField R) inferInstance ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).obj N.X) inferInstance (inferInstanceAs (LocallyOfFiniteType (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))))) (inferInstanceAs (QuasiCompact (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R))))))), e.hom ≫ (@GrpObj.identityComponentι (IsLocalRing.ResidueField R) inferInstance ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).obj N.X) inferInstance (inferInstanceAs (LocallyOfFiniteType (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))))) (inferInstanceAs (QuasiCompact (pullback.snd N.X.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R))))))) = (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).map i.hom.hom) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (φ : R →+* Ω), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom φ))).mapGrp.obj D)) ∧ ∃ (r : ℕ) (j : RingGroupSchemes.splitTorus R r ⟶ D), IsClosedImmersion j.hom.hom.left ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (φ : R →+* Ω), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom φ))).mapGrp.map j)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06c2931e4",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Diff vs side-live: only the item lean record, 3 used landed def stmt_deps (reductive-torus-centralizer-terminology, split-torus-over-ring, wf-algebraic-components) and the new module; statement verbatim. Clause-by-clause: henselian DVR, alg-closed canonical residue field, fraction field, smooth affine finite-type N (QC implied), geometrically connected generic fibre (Mathlib), IsReductive of upstream GrpObj.identityComponent of N_F; conclusion D with an open-immersion group hom whose range is N_L ∪ N_F^0, smooth/affine/finite type, IsIso on the generic fibre, special-fibre iso compatible with ι, reductive geometric fibres for all alg-closed Ω in Type u, closed splitTorus R r ⟶ D maximal on every geometric fibre (matches the Q74 Cartan consumer's hypotheses). Edge cases r=0, all characteristics, disconnected special fibre, universes OK. No hollow defs, sorry only, source/blueprint docstrings with all 6 proof steps, imports OK, no duplicates. No file changed, no compile. Advisory: second reading is the author's own self-check."
+ }
+}

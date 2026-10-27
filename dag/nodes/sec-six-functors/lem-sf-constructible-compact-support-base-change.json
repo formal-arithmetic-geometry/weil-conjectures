@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-constructible-compact-support-base-change",
+ "kind": "statement",
+ "title": "Base change on a constructible torsion object",
+ "statement": "Let $A$ be a concrete Grothendieck abelian category [def-sp-grothendieck-abelian] with a closed symmetric monoidal, additive tensor structure and functorial flat resolutions. Here an object is finitely generated when a finite set of its underlying elements is contained in no proper subobject: every monomorphism into it whose underlying range contains that set is an isomorphism. Assume small-site sheafification for $A$. For a scheme $T$ [def-pc-scheme], write $D(T,A)=D(\\operatorname{Sh}(T_{\\mathrm{et}},A))$ for its ordinary unbounded derived category [def-weil-abstract-derived-category]. The tensor $\\otimes^L$ is the K-flat derived tensor [def-kun-derived-tensor], with $A$ as its coefficient category. Say that $C\\in D(T,A)$ is constructible finite-Tor if it has only finitely many nonzero cohomology sheaves, each is locally constant with finitely generated geometric stalks on a finite locally closed constructible partition, and $C\\otimes^L F[0]$ has cohomology in one fixed finite interval for every $A$-valued sheaf $F$. Say its cohomology stalks are torsion if, for each integer $i$ and geometric point $t$, there is an integer $r>0$ with $r\\operatorname{id}_{H^i(C)_t}=0$. For a compactifiable morphism $h$, choose a factorization $h=pj$ with $j$ open and $p$ proper, and set $Rh_!=Rp_*j_!$ using that chosen factorization [def-weil-compactifications-refinements]. Let $f:X\\to B$ be quasi-compact and compactifiable, let $g:Y\\to B$ be any morphism, and let $p:X\\times_B Y\\to X$, $q:X\\times_B Y\\to Y$ be the projections. For constructible finite-Tor $K\\in D(X,A)$ whose cohomology stalks are torsion, there exists an isomorphism $Lg^*Rf_!K\\cong Rq_!Lp^*K$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/sk-thm-sf-kunneth-relative.proof.md",
+  "place": "proof step (3), exchange for the Cartesian square (p,q,f,g); general-coefficient specialization needed by the adopted source declaration"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "First prove that finite exponent of geometric homology stalks is preserved by isomorphism, exact inverse image and extension by zero. For inverse image use the geometric stalk-composition isomorphism. For extension by zero, a stalk in the open is the original stalk and a stalk outside the open is zero. Exactness of both functors also preserves boundedness.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a Cartesian proper refinement r:c -> d of compactifications, test its derived unit on the open d.i and the complementary closed immersion. On the open the extension-by-zero functors are fully faithful, and the refinement pullback comparison identifies their composite, so the unit is invertible. On the closed complement, extension by zero is zero. Apply bounded torsion proper base change to r and the pulled-back extension-by-zero input: its pullback to the complement of the open is zero by disjointness of ranges, so the closed restriction of its derived direct image is zero as well. Open/closed conservativity makes the unit invertible. Whiskering gives invertibility of the compactification comparison at this input.",
+   "uses": [
+    "lem-sf-grothendieck-torsion-proper-base-change",
+    "lem-exc-derived-open-closed-conservative",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the common compactification refinement inf(c,d), with its two Cartesian refinement maps. Compose the first objectwise comparison with the inverse of the second to obtain the objectwise isomorphism between the compact-support candidates. This uses boundedness and stalk exponent, and does not assert an isomorphism on the whole unbounded derived category.",
+   "uses": [
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the chosen compactification c of f along g. The existing compactification exchange is the composite of proper exchange and exact open extension-by-zero exchange. Apply the new bounded torsion proper-base-change theorem to the bounded extension-by-zero input; therefore this exchange is invertible at K. The pulled-back input remains bounded and has finite-exponent homology stalks by the first step. Compare the base-changed compactification to the chosen compactification of q using the common-refinement isomorphism from the preceding steps. Compose the two isomorphisms to give Lg* Rf! K isomorphic to Rq! Lp* K.",
+   "uses": [
+    "lem-sf-grothendieck-torsion-proper-base-change",
+    "lem-cbc-extension-zero-base-change",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-sf-grothendieck-torsion-proper-base-change",
+  "lem-exc-derived-open-closed-conservative",
+  "def-weil-compactifications-refinements",
+  "lem-cbc-extension-zero-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/sga/SGA4-expose-17_reedition.pdf",
+  "place": "XVII 5.1.6--5.1.8 and 5.2.6--5.2.9. Objectwise compactification comparison and compact-support exchange are implemented using bounded torsion proper base change; finite truncation of the latter is proved, leaving only its separate sheaf-level Grothendieck-coefficient comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change torsion Grothendieck abelian coefficient category",
+   "results": "8 hits: abelian epimorphism stability, Grothendieck AB4, Guitart exact Kan base change and geometric properness stability; none is derived etale base change.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition of derived compactly supported direct images of etale sheaves",
+   "results": "8 hits about underived continuous sheaf/module pushforward composition; none constructs the compact-support derived comparison.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula derived tensor compact support direct image constructible finite Tor",
+   "results": "8 hits about algebraic Tor and tensor direct sums; none is the etale projection formula.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedLowerShriek\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support|LowerShriek|Kunneth",
+   "results": "25 hits on compact support of topological functions; none is a sheaf-theoretic compact-support functor.",
+   "date": "2026-10-24",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative",
+  "date": "2026-10-24",
+  "group": "R5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-kunneth-relative",
+   "place": "proof step (3), exchange for the Cartesian square (p,q,f,g)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ConstructibleCompactSupportBaseChange",
+  "file": "lean/Sheaf/SixFunctors/ConstructibleCompactSupportBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_iso_constructible_compact_support_base_change",
+  "statement": "theorem nonempty_iso_constructible_compact_support_base_change {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [QuasiCompact f] {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hK : DerivedCategory.constructibleFiniteTor A X K) (hT : ∀ (n : ℤ) (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X), ∃ N : ℕ, 0 < N ∧ N • (𝟙 ((Scheme.pointSmallEtale s).sheafFiber.obj ((_root_.DerivedCategory.homologyFunctor _ n).obj K))) = 0) : Nonempty ((L((g)^*[A])).obj ((R(f)_![A]).obj K) ≅ (R(pullback.snd f g)_![A]).obj ((L((pullback.fst f g)^*[A])).obj K))",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261024T015947-L-2486729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261024T184648-L-3092898",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

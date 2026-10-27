@@ -1,0 +1,259 @@
+{
+ "id": "lem-per-regular-generic-continuous-jacobian",
+ "kind": "statement",
+ "title": "Regular principal generic fibre gives a continuous Jacobian splitting up to a power",
+ "statement": "Let $k$ be a characteristic-zero field, let $r\\geq0$, and put $P=\\widehat{k[t,x_1,\\ldots,x_r]}_{(t)}$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-adic-completion]. Let $J\\subseteq P$ be an ideal and write $B=P/J$. Suppose $B[1/t]$ is a regular Noetherian ring [def-weil-regular-scheme]; localization here inverts the powers of the image of $t$. Define the $B$-linear map $\\delta:J/J^2\\to B^{\\oplus r}$ by $f\\bmod J^2\\mapsto(\\partial f/\\partial x_i\\bmod J)_i$, with derivatives defined continuously by differentiating polynomial approximations. Then there exist $c\\geq0$ and a $B$-linear map $h:B^{\\oplus r}\\to J/J^2$ such that $h\\delta=t^c\\operatorname{id}_{J/J^2}$. No assertion that $\\operatorname{coker}\\delta$ is torsion is made.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Proposition 3.3.1 proof (regular affinoid over a characteristic-zero complete field is smooth) and Proposition 3.3.2 (continuous Jacobian criterion), printed pp.19--21; the splitting condition is Stacks restricted.tex Tag 0GAJ (lemma-equivalent-with-artin-smooth), condition (3). Read online; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-regular-scheme",
+  "def-per-completed-polynomial-conormal"
+ ],
+ "proof": [
+  {
+   "text": "The polynomial ring $k[t,x_1,\\ldots,x_r]$ is Noetherian by [lem-weil-pbc-polynomial-ring-field-regular-ring], using only its Noetherianity clause. Its $(t)$-adic completion $P$ is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. By [def-weil-pbc-noetherian-ring], choose generators $f_1,\\ldots,f_s$ of $J$, allowing $s=0$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OQ (proposition-finite-gl-dim-polynomial-ring), 0316 (lemma-completion-Noetherian-Noetherian); finite generation is the definition of Noetherianity"
+   }
+  },
+  {
+   "text": "Put $K=k((t))$ with $|t|=1/2$. From the inverse-limit definition [def-weil-pbc-adic-completion], an element of $P$ is a series $\\sum_\\nu a_\\nu(t)x^\\nu$ with $a_\\nu\\in k[[t]]$ such that, modulo any $t^n$, only finitely many coefficients are nonzero. Equivalently $a_\\nu\\to0$ in the $t$-adic absolute value. A restricted family of coefficients in $K$ is bounded: all but finitely many have norm less than $1$, and the remaining finite set has a maximum. Since the valuation is discrete, one common power of $t$ moves all coefficients into $k[[t]]$. Thus coefficient expansion gives $P[1/t]=K\\langle x_1,\\ldots,x_r\\rangle=:A$. The Laurent-series field is complete: in a Cauchy sequence every coefficient below any fixed exponent eventually stabilizes, and a common lower bound follows by comparing its tail with one fixed term. The stabilized coefficients therefore define its limit. Fractions give $B[1/t]\\cong A/JA=:C$: surjectivity follows by choosing representatives, and a fraction maps to zero precisely when some power of $t$ times its numerator lies in $J$. Termwise $x_i$-derivatives preserve the restricted condition, since integers have norm at most $1$; reduction modulo each $t^n$ verifies Leibniz from polynomials. Hence these derivatives agree with the continuously defined derivatives in the statement.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof, printed p.19; explicit coefficient and fraction verification by Q06"
+   }
+  },
+  {
+   "text": "By hypothesis $C=B[1/t]$ is regular Noetherian. Apply [lem-per-regular-affinoid-complete-field-extension] to the Tate presentation $C=A/(f_1,\\ldots,f_s)$. The field $K=k((t))$ has characteristic zero, is complete and has nontrivial discrete absolute value by Step 2. Therefore for every complete isometric extension $L/K$, the coefficient-extended quotient $L\\langle x\\rangle/(f_{1,L},\\ldots,f_{s,L})$ is regular Noetherian.",
+   "uses": [
+    "lem-per-regular-affinoid-complete-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.1 proof, printed p.19, regular affinoid implies smooth over the perfect field"
+   }
+  },
+  {
+   "text": "For $E\\subseteq\\{1,\\ldots,s\\}$ and $T\\subseteq\\{1,\\ldots,r\\}$ of equal cardinality, put $J_E=(f_j:j\\in E)\\subseteq P$, $D_{E,T}=\\det(\\partial f_j/\\partial x_i)_{i\\in T,j\\in E}\\in P$, and\n$$H=\\sum_{E,T}\\overline{(J_E:J)}\\,\\overline{D_{E,T}}\\,B,$$\nwhere $(J_E:J)=\\{a\\in P:aJ\\subseteq J_E\\}$ and bars mean reduction modulo $J$. The coefficient extension property from Step 3 is exactly the hypothesis of [lem-per-geometric-affinoid-jacobian-unit]. Applied over $K$ to $C=A/JA$, it says that the analogous ideal $H_K$, using colons and minors in $A$, equals $C$.",
+   "uses": [
+    "lem-per-geometric-affinoid-jacobian-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2, printed pp.20--21, Jacobian ideal formula and analytic criterion"
+   }
+  },
+  {
+   "text": "We check $H_K=HC$ without assuming $t$ is a non-zero-divisor on $B$. Inclusion $HC\\subseteq H_K$ follows by localizing $aJ\\subseteq J_E$. Conversely let $a/t^d\\in(J_EA:JA)$ with $a\\in P$. For each of the finitely many generators $f_j$ of $J$, membership $af_j/1\\in J_EA$ means that $t^{N_j}af_j\\in J_E$ for some $N_j\\geq0$, by the equality rule for fractions [def-weil-pbc-module-localization-away]. Taking $N=\\max_j N_j$ (take $N=0$ if $s=0$) gives $t^Na\\in(J_E:J)$. Thus every localized colon element comes from its colon in $P$. The derivative minors are the same after localization, proving the equality of ideals. Since $HC=C$, a finite sum representing $1$ in this ideal has a common denominator and gives $u/t^d=1$ with $u\\in H$. Equality of fractions gives $t^e(u-t^d)=0$ in $B$ for some $e\\geq0$. Therefore $t^{e+d}=t^eu\\in H$. Set $c=e+d$ and write\n$$t^c=\\sum_{\\lambda=1}^q b_\\lambda\\bar a_\\lambda\\bar D_{E_\\lambda,T_\\lambda},\\quad b_\\lambda\\in B,\\quad a_\\lambda J\\subseteq J_{E_\\lambda}.$$\nThe finite sum exists by the definition of the generated ideal.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, printed p.20, compatibility with localization; explicit finite-generator and denominator argument by Q06"
+   }
+  },
+  {
+   "text": "Write $M=J/J^2$. Fix one summand $a=a_\\lambda$, $E=E_\\lambda$, $T=T_\\lambda$, and form the square matrix $U=(\\overline{\\partial f_j/\\partial x_i})_{i\\in T,j\\in E}$ over $B$. Let $q_E:B^{E}\\to M$ send the $j$th basis vector to $[f_j]$, and let $p_T:B^r\\to B^T$ be coordinate projection, identifying the ordered sets $E,T$ with the same finite index set. Define the $B$-linear map\n$$h_{a,E,T}=q_E\\operatorname{adj}(U)\\bar a\\,p_T:B^r\\to M.$$\nFor any $f\\in J$, choose $v_j\\in P$ with $af=\\sum_{j\\in E}v_jf_j$, which is possible because $aJ\\subseteq J_E$. Modulo $J^2$ this reads $\\bar a[f]=\\sum_j\\bar v_j[f_j]$. Differentiating and reducing modulo $J$ gives $\\bar a\\,p_T\\delta([f])=U(\\bar v_j)_j$: the terms involving $f$ or any $f_j$ vanish. By [lem-weil-pbc-matrix-adjugate-identity], $\\operatorname{adj}(U)U=\\det(U)\\,1$, so\n$$h_{a,E,T}\\delta([f])=\\bar D_{E,T}\\sum_j\\bar v_j[f_j]=\\bar a\\bar D_{E,T}[f].$$\nThe formula for $h_{a,E,T}$ is independent of choices of the $v_j$. For $E=T=\\varnothing$ take the zero map; the colon condition gives $aJ=0$, so the same equality holds with empty determinant $1$.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0GAJ (lemma-equivalent-with-artin-smooth), condition (4) to (3); direct adjugate calculation by Q06; matrix identity is algebra.tex Tag 07DQ (lemma-matrix-left-inverse)"
+   }
+  },
+  {
+   "text": "Set $h=\\sum_{\\lambda=1}^q b_\\lambda h_{a_\\lambda,E_\\lambda,T_\\lambda}$. This finite sum is $B$-linear, and Steps 5--6 give\n$$h\\delta=\\sum_\\lambda b_\\lambda\\bar a_\\lambda\\bar D_{E_\\lambda,T_\\lambda}\\operatorname{id}_M=t^c\\operatorname{id}_M.$$\nThis is the required conclusion. If $C=0$, Step 5 gives a power of $t$ equal to zero in $B$, and $h=0$ also suffices. No step uses torsion of the cokernel of $\\delta$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0GAJ (lemma-equivalent-with-artin-smooth), linear combination yielding condition (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-geometric-affinoid-jacobian-unit",
+  "lem-per-regular-affinoid-complete-field-extension",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Propositions 3.3.1--3.3.2, printed pp.19--21, read online; explicit coefficient, colon-localization and adjugate assembly by Q06; archival copy WANTED"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affinoid|rig.smooth|continuous.*[Jj]acobian|conormal.*split",
+   "results": "{\"t\": \"2026-10-24T04:19:42Z\", \"tool\": \"grep\", \"query\": \"affinoid|rig.smooth|continuous.*[Jj]acobian|conormal.*split\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth split-injection results assume algebraic formal smoothness; they do not deduce the continuous Jacobian splitting from regularity of an affinoid generic fibre",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If B is topologically finite type over k formal power series and B localized at t is regular then a power of t times the conormal identity factors through the continuous derivative map",
+   "results": "{\"t\": \"2026-10-24T04:19:42Z\", \"tool\": \"leansearch\", \"query\": \"If B is topologically finite type over k formal power series and B localized at t is regular then a power of t times the conormal identity factors through the continuous derivative map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.derivativeFun\", \"HasFPowerSeriesAt.fderiv_eq\", \"KaehlerDifferential.isLocalizedModule_map\", \"KaehlerDifferential.span_range_map_derivation_of_isLocalization\", \"PowerSeries.derivative.ext\", \"PowerSeries.derivative\", \"HasFiniteFPowerSeriesOnBall.hasFDerivAt\", \"LaurentSeries.derivative\"], \"digest\": \"fe40aa830784eb3b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth split-injection results assume algebraic formal smoothness; they do not deduce the continuous Jacobian splitting from regularity of an affinoid generic fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"split\"",
+   "results": "{\"t\": \"2026-10-24T04:19:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\", \\\"split\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_split\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.FormallySmooth.iff_split_injection\"], \"digest\": \"0fc7401ed11977f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth split-injection results assume algebraic formal smoothness; they do not deduce the continuous Jacobian splitting from regularity of an affinoid generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular affinoid algebra over a characteristic zero complete discretely valued field is smooth and its continuous conormal differential has a left inverse",
+   "results": "{\"t\": \"2026-10-24T04:19:45Z\", \"tool\": \"leanfinder\", \"query\": \"A regular affinoid algebra over a characteristic zero complete discretely valued field is smooth and its continuous conormal differential has a left inverse\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.Smooth\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.Smooth.formallySmooth\", \"RingHom.IsStandardSmooth.smooth\", \"RingHom.IsStandardSmooth\"], \"digest\": \"3ef896578e060f88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formally smooth split-injection results assume algebraic formal smoothness; they do not deduce the continuous Jacobian splitting from regularity of an affinoid generic fibre"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular affinoid algebra over a complete characteristic zero valued field has a split injective continuous conormal differential",
+   "results": "{\"t\": \"2026-10-24T04:48:55Z\", \"tool\": \"leanfinder\", \"query\": \"A regular affinoid algebra over a complete characteristic zero valued field has a split injective continuous conormal differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_split_injection\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"], \"digest\": \"8dcecebfc6feac5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic algebraic formal smoothness and polynomial submersive presentations do not give continuous Jacobian power splitting for a regular affinoid generic fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RestrictedPowerSeries\"",
+   "results": "{\"t\": \"2026-10-24T04:48:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"RestrictedPowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic algebraic formal smoothness and polynomial submersive presentations do not give continuous Jacobian power splitting for a regular affinoid generic fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|continuous.*[Jj]acobian",
+   "results": "{\"t\": \"2026-10-24T04:48:56Z\", \"tool\": \"grep\", \"query\": \"affinoid|TateAlgebra|continuous.*[Jj]acobian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic algebraic formal smoothness and polynomial submersive presentations do not give continuous Jacobian power splitting for a regular affinoid generic fibre",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Jacobian splitting of a regular generic fibre of an adically complete polynomial quotient",
+   "results": "{\"t\": \"2026-10-24T04:48:56Z\", \"tool\": \"leansearch\", \"query\": \"Continuous Jacobian splitting of a regular generic fibre of an adically complete polynomial quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.PreSubmersivePresentation.localizationAway_jacobiMatrix\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"IsAdicComplete.henselianRing\", \"Algebra.PreSubmersivePresentation.baseChange_jacobian\"], \"digest\": \"2e530386674f2804\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic algebraic formal smoothness and polynomial submersive presentations do not give continuous Jacobian power splitting for a regular affinoid generic fibre"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-principal-formal-algebraization",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proposition 3.3.1 proof (regular affinoid over a characteristic-zero complete field is smooth) and Proposition 3.3.2 (continuous Jacobian criterion), printed pp.19--21; the splitting condition is Stacks restricted.tex Tag 0GAJ (lemma-equivalent-with-artin-smooth), condition (3). Read online; archival copy WANTED. Supporting the algebraization sentence in the inherited formal-resolution branch of ancestor Step 3; the latest ancestor has no separate formal-algebraization sentence.",
+   "via": [
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-generic-continuous-jacobian",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Separated geometric regularity of characteristic-zero affinoids from the analytic Jacobian ideal criterion. Gave explicit coefficient identification of the generic Tate algebra, finite-generator colon localization and power clearing, and adjugate construction of h without a flatness or torsion-free hypothesis. No Lean attachment exists.",
+  "blueprint": "Inherited formal-algebraization branch through lem-per-rig-principal-formal-algebraization of lem-per-artin-gabber-affine-curve Step 3; current latest ancestor no longer has a formal-algebraization sentence. This split refines that inherited branch, preserving the current unit and chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "why": "Only the Noetherianity clause of a finite polynomial ring over a field is needed to choose finitely many relations; no statement in this unit supplies this generic commutative algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherian-completion theorem makes J finitely generated in the chosen ambient completion; it does not replace any unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-matrix-adjugate-identity",
+    "why": "Universal matrix cofactor identity supplies the displayed explicit map; the current unit has no matrix theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-matrix-adjugate-identity"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-bc0898834",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-bc0898834 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item statement and stmt_deps are unchanged from the base (checked against the Q12 snapshot), and the parent's step 2 uses exactly this statement. There is no repair note, so the re-split rule does not apply. Steps 1-7 are correct. Step 1: Noetherianity for n=r+1 variables and completion Noetherian for any ideal give finitely many generators f_j. Step 2: P is t-torsion-free and restricted families are bounded, so P[1/t]=k((t))<x>, and B[1/t]=A/JA by the fraction rule. Steps 3-4: both new nodes apply with matching hypotheses (characteristic 0, complete, discretely valued; same class of complete fields L). Step 5: the colon ideals localize by taking the maximum power over the finitely many generators, and t^{e+d} lies in H without cancelling t. Step 6: differentiating gives a·p_T·delta(f) = U·v, the adjugate identity gives the multiplier a·D, and the empty case gives aJ=0. Step 7: the finite sum gives h·delta = t^c·id. Edge cases checked: J=(tx) gives c=1; t^2 in J gives h=0; J=0. New node lem-per-regular-affinoid-complete-field-extension is true: in characteristic 0 Kiehl's criterion gives smoothness, which base-changes; characteristic 0 is essential (x^p-a). New node lem-per-geometric-affinoid-jacobian-unit is plausibly true in every characteristic: the Jacobian criterion over the completed algebraic closure plus faithfully flat descent. Tests: r=0, f=x, x-x^p, x^p-a (the hypothesis fails correctly), x^2 (excluded). Both are statement-only and self-contained; neither restates a clause of the item. Duplicate search (rg -L for affinoid, Tate, restricted series, Jacobian, colon) found nothing equivalent; trf-affinoid-polynomial-closed-point-comparison and per-jacobian-torsion-etale-shrink differ. I could not check the source: Temkin's Props 3.3.1-3.3.2 are WANTED and proof_origin is agent. The three tool_uses (polynomial Noetherian, completion Noetherian, adjugate) are generic algebra and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularGenericContinuousJacobian",
+  "declaration": "AlgebraicGeometry.exists_continuousJacobian_powerSplitting",
+  "file": "lean/Sheaf/RingTheory/RegularGenericContinuousJacobian.lean",
+  "statement": "theorem exists_continuousJacobian_powerSplitting (k : Type u) [Field k] [CharZero k] (r : ℕ) (J : Ideal (rigPolynomialCompletion (Ideal.span {(Polynomial.X : Polynomial k)}) r)) [IsRegularRing (Localization.Away (algebraMap (Polynomial k) (rigPolynomialCompletion (Ideal.span {(Polynomial.X : Polynomial k)}) r ⧸ J) Polynomial.X))] : ∃ (c : ℕ) (h : (Fin r → rigPolynomialCompletion (Ideal.span {(Polynomial.X : Polynomial k)}) r ⧸ J) →ₗ[ rigPolynomialCompletion (Ideal.span {(Polynomial.X : Polynomial k)}) r ⧸ J] J.Cotangent), h.comp (rigJacobianDifferential (Ideal.span {(Polynomial.X : Polynomial k)}) r J) = (algebraMap (Polynomial k) (rigPolynomialCompletion (Ideal.span {(Polynomial.X : Polynomial k)}) r ⧸ J) Polynomial.X) ^ c • LinearMap.id",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the canonical iterated polynomial presentation k[t][x_1,...,x_r]. The IsRegularRing class includes Noetherianity. Localization.Away inverts the powers of the actual image of Polynomial.X in the quotient. Fin r tuples are the finite direct sum; h.comp delta = t^c • LinearMap.id asserts only the required left splitting."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-07cb851d7",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Item matches the node clause by clause: char-0 field k, r:ℕ, P = AdicCompletion of MvPolynomial (Fin r) k[X] along (t), arbitrary J, B = P/J, [IsRegularRing (Localization.Away t̄)] (includes Noetherian, no extra hypotheses), conclusion ∃ c h, h.comp δ = t̄^c • id (direction and scalar exact, no cokernel clause). Universes all u; lean.statement fields match the files exactly. Restored dependency def-per-completed-polynomial-conormal (live lean null, lean_removed): partial derivative and conormal map are .choose of true ∃! statements (uniqueness via Noetherian kernels I^nP and Hausdorffness; toCotangent surjective), not hollow; node diff vs live is lean only; its 9 citers have no Lean; no duplicate in Mathlib or live Sheaf. Item diff vs live is lean plus the genuine stmt_dep. Docstrings have source places, blueprint tags and the 7 proof steps; only sorry proofs. Edge cases r=0, J=0, J=⊤, t nilpotent, J=(tx), c=0 checked. Compile not reproduced; no file changed. Maintainer note: Q13 delivered the same item and module in parallel (97ea6456, S2 PASS, not yet landed); the first to land owns them and the later one should be dropped."
+ }
+}

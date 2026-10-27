@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-finite-jet-normalizer-detection",
+ "kind": "statement",
+ "title": "Finite infinitesimal neighborhoods detect a smooth connected subgroup normalizer",
+ "statement": "Let $A$ be a commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. A group scheme over $S$ is a group object in schemes over $S$ [def-pc-scheme], with multiplication, identity and inverse as in [def-sc-group-scheme], over this base. Let $H\\hookrightarrow G$ be a finitely presented closed subgroup [def-weil-closed-immersion], smooth with nonempty geometrically connected fibres [def-weil-connected-scheme]; geometrically connected means connected after extension of the residue field to an algebraic closure. For $K=G,H$, let $I_K$ be the ideal sheaf of its identity section and put $K_n=V(I_K^{n+1})$ for $n\\geq1$, the closed subscheme defined by this ideal power. Then $G_n$ and $H_n$ are finite locally free over $S$ [def-pc-finite-locally-free], their coordinate algebras are finite locally free modules (Zariski locally finite free), and their formation commutes with arbitrary base change. Conjugation on $G$ preserves $G_n$, and $H_n\\hookrightarrow G_n$ induces a surjection of these coordinate algebras. There is a finite cover of $S$ by affine open subschemes $U_i$ [def-weil-open-immersion] and integers $n_i\\geq1$ such that the coordinate algebras $C_i$ of $(G_{n_i})_{U_i}$ and $D_i$ of $(H_{n_i})_{U_i}$ are free of finite constant ranks $M_i$ and $r_i$, respectively, with $1\\leq r_i\\leq M_i$. For every $U_i$-scheme $W$ and every $g\\in G(W)$ one has\n$$c_g((H_{n_i})_W)=(H_{n_i})_W\\quad\\Longleftrightarrow\\quad c_g(H_W)=H_W.$$\nEqualities here are equalities of closed subschemes; $c_g$ denotes conjugation and $K_W=K\\times_SW$ [def-pc-fibre-product]. The same equivalence, and the quotient $C_i\\twoheadrightarrow D_i$, remain valid after any base change of $U_i$. No self-normalizer hypothesis on $H$ and no connectedness hypothesis on $G$ is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Proposition 2.1.6 and proof, printed pp.61-63 (finite flat infinitesimal neighborhoods and universal weak schematic density); Theorem 2.3.6 proof, printed p.74, first two paragraphs (stabilization of the finite-jet normalizers). Arbitrary-ring formulation uses the finite-presentation limit reduction stated in both proofs, before finite Zariski trivialization of the jet algebras. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this combined finite-jet normalizer assertion."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "def-pc-finite-locally-free",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-section-finite-jets] to the identity sections of $G$ and $H$. Both schemes are smooth affine of finite presentation, and the identity gives the required algebra retraction. It follows that all $G_n,H_n$ are finite locally free, and their coordinate quotients commute with arbitrary affine base change. For a general base change these identifications agree on affine overlaps because they preserve the quotient maps, so they glue. By [def-pc-finite-locally-free] the structural maps are finite, flat and locally finitely presented. Apply [lem-pc-finite-flat-pushforward-locally-free] with the rank-one module $\\mathcal O_{K_n}$, for $K=G,H$. Its conclusion says precisely that the coordinate algebra of $K_n$ is a finite locally free module on $S$.",
+   "uses": [
+    "lem-sfb-smooth-section-finite-jets",
+    "def-pc-finite-locally-free",
+    "lem-pc-finite-flat-pushforward-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6 proof, pp.62--63; Theorem 2.3.6 proof, p.74, finite locally free coordinate algebras. Module interpretation also follows from Stacks Tag 02KB (morphisms-lemma-finite-flat)."
+   }
+  },
+  {
+   "text": "Write $G=\\operatorname{Spec}B$, $H=\\operatorname{Spec}D$ and let $q:B\\twoheadrightarrow D$ be the quotient supplied by [def-weil-closed-immersion]. Let $J_G,J_H$ be the augmentation ideals and $Q=\\ker q$. Compatibility with identity gives $q(J_G)=J_H$: a lift of any element of $J_H$ already has augmentation zero. Consequently $\\mathcal O(H_n)=D/J_H^{n+1}=B/(Q+J_G^{n+1})$ is a quotient of $B/J_G^{n+1}$. More generally $H\\cap G_m=H_m$ and $H_n\\cap G_m=H_m$ for $n\\geq m$, since the sum of the corresponding ideals is $Q+J_G^{m+1}$. These calculations hold after every base change by step 1. For every test scheme $T$ and $g\\in G(T)$, $c_g$ fixes the identity section, so its pullback preserves $J_{G_T}$ and each power. Its inverse is $c_{g^{-1}}$, so it preserves $(G_m)_T$ as a closed subscheme. Applying this to the universal element over $G$ proves preservation by the conjugation action itself.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6 proof, p.74, quotient algebras and conjugation action; elementary augmentation-ideal calculation."
+   }
+  },
+  {
+   "text": "By [lem-sfb-smooth-connected-subgroup-noetherian-model] choose $A_0\\subset A$, $S_0=\\operatorname{Spec}A_0$, and compatible models $H_0\\hookrightarrow G_0$ for the entire group and subgroup data. In particular $A_0$ and $G_0$ are Noetherian, $G_0$ is smooth affine of finite presentation, and $H_0$ is smooth with nonempty geometrically connected fibers. Perform steps 1--2 over this model. Denote its jets by $G_{0,n},H_{0,n}$. All tests in steps 4--7 will be arbitrary $S_0$-schemes; they are not required to be Noetherian. This universal test statement is what will allow return to $A$ in step 8.",
+   "uses": [
+    "lem-sfb-smooth-connected-subgroup-noetherian-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6 proof, p.62, simultaneous noetherian reduction; Theorem 2.3.6 proof, pp.73--74."
+   }
+  },
+  {
+   "text": "For each $n\\geq1$, apply [lem-sfb-finite-locally-free-source-factorization-locus] twice with finite locally free source $H_{0,n}$, parameter $P=G_0$, affine finitely presented target $X=G_0$, and finitely presented closed target $Z=H_0$. The two families send $(h,g)$ to $ghg^{-1}$ and $g^{-1}hg$. Obtain closed loci $L_n^+,L_n^-\\hookrightarrow G_0$. Write $G_0=\\operatorname{Spec}C_0$ and $L_n^\\pm=\\operatorname{Spec}(C_0/K_n^\\pm)$ using [def-weil-closed-immersion]. Set $K_n=K_n^++K_n^-$ and $N_n=\\operatorname{Spec}(C_0/K_n)$. On an affine test, factoring through $N_n$ means killing both ideals, hence imposing both containment conditions $c_g((H_{0,n})_T)\\subseteq(H_0)_T$ and $c_{g^{-1}}((H_{0,n})_T)\\subseteq(H_0)_T$. For general tests the same characterization holds: local quotient factorizations are unique and agree on overlaps, and [lem-weil-pbc-scheme-morphism-gluing] glues them. The factorization-locus lemma is valid for arbitrary tests and arbitrary base change, so this construction does not merely characterize geometric points.",
+   "uses": [
+    "lem-sfb-finite-locally-free-source-factorization-locus",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3 and proof, pp.58--59; Proposition 2.1.2 proof, p.60, coefficient-equation loci; Theorem 2.3.6 proof, p.74, closed jet normalizers. Gluing: Stacks Tags 01JA and 04TN."
+   }
+  },
+  {
+   "text": "Since $c_g$ preserves $(G_{0,n})_T$, step 2 identifies the two containment conditions in step 4 with $c_g((H_{0,n})_T)\\subseteq(H_{0,n})_T$ and its inverse condition. Applying $c_g$ to the inverse condition gives the reverse inclusion, so $N_n(T)$ is exactly the equality stabilizer of $(H_{0,n})_T$. Moreover preservation of $H_{0,n}$ implies preservation of $H_{0,m}=H_{0,n}\\cap G_{0,m}$ for $m\\leq n$, by step 2. Thus $N_n$ is a closed subfunctor of $N_m$. In particular $K_m\\subseteq K_n$: evaluate this functorial containment on the universal point of $\\operatorname{Spec}(C_0/K_n)$ to see that its quotient map kills $K_m$. This proves the descending-chain assertion scheme-theoretically, rather than from containment of the jets alone.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6 proof, p.74, descending intersection; explicit verification using the ambient augmentation filtration."
+   }
+  },
+  {
+   "text": "For an arbitrary $T$ and $g$ lying in all $N_n(T)$, form in $(H_0)_T$ the inverse image of $(H_0)_T\\hookrightarrow(G_0)_T$ under $c_g|_{(H_0)_T}$. It is a closed subscheme by [lem-weil-pbc-closed-immersion-base-change], and contains every $(H_{0,n})_T$, $n\\geq1$. It contains the zeroth jet as well, since that factors through the first jet. Apply [lem-sfb-smooth-section-universal-jet-density] to $Y=H_0$ with its identity section: $A_0$ is Noetherian, and $H_0$ is affine smooth of finite presentation with nonempty geometrically connected fibers. The inverse image is the whole of $(H_0)_T$. Thus $c_g((H_0)_T)\\subseteq(H_0)_T$. Applying the same argument to $g^{-1}$ gives the reverse inclusion, hence equality. Conversely, if $c_g$ preserves $(H_0)_T$, it preserves all jets by intersecting with $(G_{0,n})_T$. Therefore $\\bigcap_{n\\geq1}N_n(T)=\\{g:c_g((H_0)_T)=(H_0)_T\\}$ on every test, including nonreduced and non-Noetherian tests.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-smooth-section-universal-jet-density"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.6 proof, pp.62--63, universal weak schematic density; Theorem 2.3.6 proof, p.74. Closed inverse images: Stacks Tag 01QR."
+   }
+  },
+  {
+   "text": "By [pqf-lem-affine-open-locnoeth], $C_0$ is Noetherian because $G_0$ is Noetherian and affine. Put $K=\\sum_{n\\geq1}K_n$. By [def-weil-pbc-noetherian-ring] choose finitely many generators of $K$. Each generator is a finite sum of elements of finitely many $K_n$, and the ideals increase by step 5. Choose $N\\geq1$ at least all these indices (take $N=1$ if there are no generators). Then $K=K_N$. For every test $T$, factoring through $\\operatorname{Spec}(C_0/K)$ is equivalent to factoring through every $N_n$: on affine opens it means that the ring map kills every $K_n$, and the unique local factorizations glue as in step 4. Since $K=K_N$, step 6 identifies $N_N(T)$ with the normalizer of $(H_0)_T$ on all tests. No inference from stabilization of underlying closed sets is used.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6 proof, p.74, noetherian stabilization. Stacks Tag 00FM (algebra-section-Noetherian), finite generation of every ideal."
+   }
+  },
+  {
+   "text": "Regard any $S$-scheme $W$ as an $S_0$-scheme. The compatible model isomorphisms of step 3 identify $(G_0)_W=G_W$ and $(H_0)_W=H_W$, preserving conjugation. Step 1 identifies $(H_{0,N})_W=(H_N)_W$. Hence step 7 gives $c_g((H_N)_W)=(H_N)_W$ if and only if $c_g(H_W)=H_W$ for every $W$ and $g\\in G(W)$. The identical argument applies when $W$ is a scheme over any base change $S'\\to S$. Thus the same single integer $N$ detects the normalizer over $S$ and after every base change, without descent of a pre-existing normalizer and without a flatness hypothesis on the base change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6 proof, pp.73--74, return from the noetherian model; universal-test interpretation."
+   }
+  },
+  {
+   "text": "By step 1 the coordinate modules of $G_N,H_N$ are finite locally free. Simultaneously trivialize them on affine principal opens $U_i=D(f_i)\\subseteq S$, with constant finite ranks $M_i,r_i$ on each. One may take finitely many such opens: a principal-open cover means the $f_i$ generate the unit ideal, so an expression $1=\\sum_{i\\in F}a_if_i$ selects a finite subcover. Discard empty opens; if $S$ is empty take the empty cover. Set $n_i=N$. Step 2 supplies a surjection $C_i\\twoheadrightarrow D_i$, so on residue fields its source dimension is at least its target dimension, giving $r_i\\leq M_i$. The augmentation $D_i\\twoheadrightarrow\\mathcal O(U_i)$ shows $r_i\\geq1$ on a nonempty open. Step 8 supplies the equivalence for every $U_i$-scheme. After arbitrary base change the chosen bases remain bases, and the map remains surjective: a quotient tensored with an algebra is still the quotient by the extended ideal. Step 1 identifies these quotients with the base-changed jets. This proves every base-change and finite-cover clause of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 2.3.6 proof, p.74, local trivialization of the finite locally free jet algebras; elementary principal-open finite selection and residue-field rank inequalities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-section-finite-jets",
+  "def-pc-finite-locally-free",
+  "lem-pc-finite-flat-pushforward-locally-free",
+  "def-weil-closed-immersion",
+  "lem-sfb-smooth-connected-subgroup-noetherian-model",
+  "lem-sfb-finite-locally-free-source-factorization-locus",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-smooth-section-universal-jet-density",
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Expanded argument for Proposition 2.1.6 and Theorem 2.3.6, pp.61--63 and 73--74, read online; local copy requested in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative smooth closed subgroup of a smooth affine group: infinitesimal neighborhoods finite locally free and their normalizer stabilizes to the subgroup",
+   "results": "{\"t\": \"2026-10-24T09:34:00Z\", \"tool\": \"leansearch\", \"query\": \"Relative smooth closed subgroup of a smooth affine group: infinitesimal neighborhoods finite locally free and their normalizer stabilizes to the subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormalizerCondition\", \"LieSubalgebra.normalizer\", \"AddSubgroup.normalizer\", \"LieSubmodule.normalizer\", \"AddSubgroup.normalizer_eq_top_iff\", \"Subgroup.le_normalizer\", \"Subgroup.subgroupOf_normalizer_eq\", \"ClosedSubgroup.recOn\"], \"digest\": \"8a66633b5b4be32a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme, Normalizer, Infinitesimal",
+   "results": "{\"t\": \"2026-10-24T09:34:00Z\", \"tool\": \"loogle\", \"query\": \"Scheme, Normalizer, Infinitesimal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Scheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer|infinitesimal neighborhood",
+   "results": "{\"t\": \"2026-10-24T09:34:00Z\", \"tool\": \"grep\", \"query\": \"normalizer|infinitesimal neighborhood\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian descending intersection of normalizers of infinitesimal neighborhoods of a smooth subgroup stabilizes",
+   "results": "{\"t\": \"2026-10-24T09:34:01Z\", \"tool\": \"leansearch\", \"query\": \"Noetherian descending intersection of normalizers of infinitesimal neighborhoods of a smooth subgroup stabilizes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.inf_normalizer_le_normalizer_inf\", \"AddSubgroup.normalizer\", \"NormalizerCondition\", \"Subgroup.subgroupOf_normalizer_eq\", \"Subgroup.le_normalizer\", \"Subgroup.normalizer_eq_top\", \"LieSubmodule.normalizer_inf\", \"normalizerCondition_of_isNilpotent\"], \"digest\": \"5b68e1ae8548c7b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "loogle",
+   "query": "Normalizer, Smooth, ClosedSubgroup",
+   "results": "{\"t\": \"2026-10-24T09:34:01Z\", \"tool\": \"loogle\", \"query\": \"Normalizer, Smooth, ClosedSubgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Normalizer'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "grep",
+   "query": "infinitesimal neighborhood|normalizer",
+   "results": "{\"t\": \"2026-10-24T09:34:02Z\", \"tool\": \"grep\", \"query\": \"infinitesimal neighborhood|normalizer\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T09:38:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected closed subgroup H of a smooth affine group scheme G over any ring, a finite infinitesimal neighborhood H_n of the identity has the same functorial normalizer as H",
+   "results": "{\"t\": \"2026-10-24T09:38:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected closed subgroup H of a smooth affine group scheme G over any ring, a finite infinitesimal neighborhood H_n of the identity has the same functorial normalizer as H\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sylow.normalizer_normalizer\", \"Subgroup.subgroupOf_normalizer_eq\", \"Subgroup.Normal.pathComponentOne\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"CategoryTheory.Subgroupoid.IsNormal.vertexSubgroup\", \"instNormalCommutatorClosure\", \"OpenNormalSubgroup.pathComponentOne\"], \"digest\": \"e05cfdf380d0ff2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup, topological group and Lie normalizers do not state finite-jet detection for group schemes. The AlgebraicGeometry normalizer greps returned no hit. Initial unqualified Loogle patterns were rejected as unknown identifiers; a qualified Scheme pattern was also tried."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite infinitesimal neighborhood of the identity in a smooth geometrically connected closed subgroup has the same functorial normalizer as that subgroup",
+   "results": "{\"t\": \"2026-10-24T10:13:11Z\", \"tool\": \"leanfinder\", \"query\": \"A finite infinitesimal neighborhood of the identity in a smooth geometrically connected closed subgroup has the same functorial normalizer as that subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.Normal.pathComponentOne\", \"instNormalCommutatorClosure\", \"OpenNormalSubgroup.pathComponentOne\", \"Subgroup.connectedComponentOfOne\", \"CategoryTheory.Subgroupoid.IsNormal.vertexSubgroup\", \"krullTopology_mem_nhds_one_iff_of_normal\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\"], \"digest\": \"7b2a5046294901ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group, Lie algebra and topological-group normalizers or stabilizers do not state universal finite-jet detection for smooth group schemes; the scheme-source grep and qualified Loogle returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizer|infinitesimal neighborhood|finite.jet",
+   "results": "{\"t\": \"2026-10-24T10:13:40Z\", \"tool\": \"grep\", \"query\": \"normalizer|infinitesimal neighborhood|finite.jet\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group, Lie algebra and topological-group normalizers or stabilizers do not state universal finite-jet detection for smooth group schemes; the scheme-source grep and qualified Loogle returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a smooth affine group scheme, stabilizers of finite infinitesimal neighborhoods detect the normalizer of a geometrically connected subgroup",
+   "results": "{\"t\": \"2026-10-24T10:13:40Z\", \"tool\": \"leansearch\", \"query\": \"In a smooth affine group scheme, stabilizers of finite infinitesimal neighborhoods detect the normalizer of a geometrically connected subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normalizer\", \"LieSubalgebra.normalizer\", \"LieSubmodule.normalizer\", \"AddSubgroup.normalizer\", \"Subgroup.setNormalizer\", \"Subgroup.le_normalizer\", \"Subgroup.mem_normalizer_iff'\", \"AddSubgroup.setNormalizer\"], \"digest\": \"d051877efbf401ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group, Lie algebra and topological-group normalizers or stabilizers do not state universal finite-jet detection for smooth group schemes; the scheme-source grep and qualified Loogle returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T10:13:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.Scheme\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group, Lie algebra and topological-group normalizers or stabilizers do not state universal finite-jet detection for smooth group schemes; the scheme-source grep and qualified Loogle returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected subgroup of an affine group scheme, the decreasing stabilizers of its identity jets eventually equal its normalizer on every test scheme",
+   "results": "{\"t\": \"2026-10-24T10:14:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected subgroup of an affine group scheme, the decreasing stabilizers of its identity jets eventually equal its normalizer on every test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sylow.stabilizer_eq_normalizer\", \"CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois\", \"CategoryTheory.PreGaloisCategory.nhds_one_has_basis_stabilizers\", \"Subgroup.Normal.pathComponentOne\", \"CategoryTheory.Subgroupoid.IsNormal.vertexSubgroup\", \"normalClosure_of_stabilizer_eq_top\", \"krullTopology_mem_nhds_one_iff_of_normal\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\"], \"digest\": \"566301047d94569b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract group, Lie algebra and topological-group normalizers or stabilizers do not state universal finite-jet detection for smooth group schemes; the scheme-source grep and qualified Loogle returned no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-self-normalizing-quotient",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, construction of B=P_G(lambda), its self-normalizer and G/B, before trivializing the pointed curve. This does not assert a relative matrix-model isomorphism. Supporting input: Proposition 4.2.7, proof, p.123: apply Theorem 2.3.6 to the self-normalizing B, before the genus-zero trivialization. Finite-order input: Conrad Theorem 2.3.6 proof, p.74, equality N_G(H_n)=N_G(H), using Proposition 2.1.6, pp.62-63; retains the finite jet construction before the Grassmannian orbit map.",
+   "via": [
+    "lem-sfb-relative-self-normalizing-quotient",
+    "lem-sfb-relative-adjoint-rank-one-flag-curve",
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-jet-normalizer-detection",
+  "worker": "stage1",
+  "summary": "Q130: retained the statement; reused the existing finite-jet, universal-density, noetherian-model and finite-source-locus nodes. Wrote the augmentation intersection calculation, two-sided containment characterization, scheme-theoretic increasing-ideal stabilization, universal return from the model, and finite free atlas explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "Retains the inherited finite-order prerequisite to the Grassmannian orbit-map argument, Conrad Theorem 2.3.6 p.74, in the existing alteration dependency chain from det-thm-sf-ctf-stability-direct-images (3). The current latest blueprint direct-image proof uses compactification and does not itself state a finite-jet normalizer lemma; no unit route is changed. blueprint_refs ancestor returns null for the inherited chain, which is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-flat-pushforward-locally-free",
+    "why": "Applied to the rank-one structure module of each finite flat finitely presented jet to obtain locally free coordinate modules. This is a generic module lemma, not a replacement of the unit route; the jet node states finite locally free morphisms but not the coordinate-module equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-flat-pushforward-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-c050df7d3",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-c050df7d3 (reviewer sub-agent of L); spot-checked: I read the item in full: statement, 9 steps and split_report. I also read every cited node's statement and the citer step in lem-sfb-relative-self-normalizing-quotient. Against the NX base snapshot, the statement and stmt_deps are unchanged and the 8 inherited searches are kept with 5 new ones added. The Conrad Luminy notes (Prop 2.1.6, Thm 2.3.6) have no local copy, so the delivery records WANTED and proof_origin agent; I checked the mathematics directly. Stacks 02KB (morphisms lemma-finite-flat) is carried by the finite-jets node. Steps: (1) finite-jets for G and H at the identity, plus the declared tool lem-pc-finite-flat-pushforward-locally-free applied to O_{K_n}; accepted. (2) q(J_G)=J_H, H∩G_m=H_m and H_n∩G_m=H_m by the ideal sum Q+J^{m+1}; conjugation preserves the J^k. (3) The noetherian model gives every hypothesis used. (4) The factorization locus with D=H_{0,n}, P=X=G_0, Z=H_0, two families, the ideal sum, and gluing. (5) Containment becomes equality stabilizer, and the scheme-theoretic chain K_m⊆K_n follows by Yoneda. (6) Closed inverse image plus universal density (A_0 Noetherian; H_0 affine, smooth, fp, geometrically connected; jets from n=0) gives the normalizer on all tests. (7) C_0 is Noetherian, so K=K_N. (8) Return from the model by base change of the jets, with no flatness needed. (9) Principal-open trivialization, a finite subcover from 1=Σa_if_i, and 1≤r_i≤M_i. Edge cases checked: H=G, H=1, disconnected G, A=0, characteristic p, non-reduced T. No new nodes. Not a duplicate of lem-sfb-relative-smooth-subgroup-normalizer, which states representability, not finite-order detection. Batch-5: lem-trf-finite-projective-local-free is a Mathlib leaf (finitely presented and locally free implies projective) and lem-trf-noetherian-constructible-subset-criterion is Stacks 053Z topology. Both are generic results outside the trace-formula and Poincaré-duality assumptions, so both are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FiniteJetNormalizerDetection",
+  "declaration": "AlgebraicGeometry.GroupScheme.finiteJet_normalizer_detection",
+  "declarations": [
+   "AlgebraicGeometry.GroupScheme.identityNeighborhoodIdeal",
+   "AlgebraicGeometry.GroupScheme.identityNeighborhood",
+   "AlgebraicGeometry.GroupScheme.identityNeighborhoodι",
+   "AlgebraicGeometry.GroupScheme.baseChangedIdentity",
+   "AlgebraicGeometry.GroupScheme.baseChangedArrow",
+   "AlgebraicGeometry.GroupScheme.finiteJet_normalizer_detection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FiniteJetNormalizerDetection.lean",
+  "statement": "theorem finiteJet_normalizer_detection (A : CommRingCat.{u}) (G H : Over (Spec A)) [GrpObj G] [GrpObj H] [IsAffine G.left] [Smooth G.hom] [LocallyOfFinitePresentation G.hom] (i : H ⟶ G) [IsMonHom i] [IsClosedImmersion i.left] [LocallyOfFinitePresentation i.left] [Smooth H.hom] [GeometricallyConnected H.hom] : (∀ (n : ℕ), 1 ≤ n → (identityNeighborhood G n).hom.IsFiniteLocallyFree ∧ (identityNeighborhood H n).hom.IsFiniteLocallyFree) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ (W : Over (Spec A)), (baseChangedIdentity G W).ker ^ (n + 1) = (identityNeighborhoodIdeal G n).comap (pullback.fst G.hom W.hom) ∧ (baseChangedIdentity H W).ker ^ (n + 1) = (identityNeighborhoodIdeal H n).comap (pullback.fst H.hom W.hom)) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ (W : Over (Spec A)) (g : W ⟶ G), ∀ (V : Over (Spec A)) (v : V ⟶ W), Set.range (fun h : V ⟶ identityNeighborhood G n ↦ (v ≫ g) * (h ≫ identityNeighborhoodι G n) * (v ≫ g)⁻¹) = Set.range (fun h : V ⟶ identityNeighborhood G n ↦ h ≫ identityNeighborhoodι G n)) ∧ (∀ (n : ℕ), 1 ≤ n → ∃ j : identityNeighborhood H n ⟶ identityNeighborhood G n, j ≫ identityNeighborhoodι G n = identityNeighborhoodι H n ≫ i ∧ IsClosedImmersion j.left ∧ Function.Surjective j.left.appTop.hom ∧ ∀ (W : Over (Spec A)) (_ : IsAffine W.left), Function.Surjective (baseChangedArrow j W).appTop.hom) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ s : Spec A, ∃ U : (Spec A).affineOpens, s ∈ U.1 ∧ ∃ M r : ℕ, Nonempty (@Module.Basis (Fin M) Γ(U.1.toScheme, ⊤) Γ(pullback (identityNeighborhood G n).hom U.1.ι, ⊤) inferInstance inferInstance (pullback.snd (identityNeighborhood G n).hom U.1.ι).appTop.hom.toModule) ∧ Nonempty (@Module.Basis (Fin r) Γ(U.1.toScheme, ⊤) Γ(pullback (identityNeighborhood H n).hom U.1.ι, ⊤) inferInstance inferInstance (pullback.snd (identityNeighborhood H n).hom U.1.ι).appTop.hom.toModule)) ∧ ∃ (k : ℕ) (U : Fin k → (Spec A).affineOpens) (n M r : Fin k → ℕ), (∀ s : Spec A, ∃ a : Fin k, s ∈ (U a).1) ∧ ∀ a : Fin k, 1 ≤ n a ∧ 1 ≤ r a ∧ r a ≤ M a ∧ Nonempty (@Module.Basis (Fin (M a)) Γ((U a).1.toScheme, ⊤) Γ(pullback (identityNeighborhood G (n a)).hom (U a).1.ι, ⊤) inferInstance inferInstance (pullback.snd (identityNeighborhood G (n a)).hom (U a).1.ι).appTop.hom.toModule) ∧ Nonempty (@Module.Basis (Fin (r a)) Γ((U a).1.toScheme, ⊤) Γ(pullback (identityNeighborhood H (n a)).hom (U a).1.ι, ⊤) inferInstance inferInstance (pullback.snd (identityNeighborhood H (n a)).hom (U a).1.ι).appTop.hom.toModule) ∧ ∀ (W : Over (Spec A)), (∃ w : W.left ⟶ (U a).1.toScheme, w ≫ (U a).1.ι = W.hom) → ∀ g : W ⟶ G, (∀ (V : Over (Spec A)) (v : V ⟶ W), Set.range (fun h : V ⟶ identityNeighborhood H (n a) ↦ (v ≫ g) * (h ≫ identityNeighborhoodι H (n a) ≫ i) * (v ≫ g)⁻¹) = Set.range (fun h : V ⟶ identityNeighborhood H (n a) ↦ h ≫ identityNeighborhoodι H (n a) ≫ i)) ↔ (∀ (V : Over (Spec A)) (v : V ⟶ W), Set.range (fun h : V ⟶ H ↦ (v ≫ g) * (h ≫ i) * (v ≫ g)⁻¹) = Set.range (fun h : V ⟶ H ↦ h ≫ i))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31f995657",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Snapshot node differs from the side-live base only in lean; one new module; lean.statement is verbatim the file signature. Hypotheses match: GrpObj on Over (Spec A), IsAffine+Smooth+LFP G (equals FP over an affine base), IsMonHom+IsClosedImmersion+LFP i (LFP implied, not stronger), Smooth+GeometricallyConnected H (Mathlib's version includes nonemptiness); no G-connectedness or self-normalizer assumption. All six conclusion clauses match the node: finite locally free jets for n>=1; base change as an ideal equality ker(e_W)^(n+1) = comap I^(n+1) (true: extended ideal powers); conjugation preserves G_n as subfunctors; jet inclusion j with surjective Gamma, also after affine base change; locally free coordinate modules via the pullback.snd module structure; finite affine cover with n_a>=1, 1<=r_a<=M_a, bases, and the H_{n_a} vs H normalizer iff for every scheme over U_a, which covers further base change. Edge cases: A=0 (k=0 allowed), empty charts, n=0 excluded, H=G or H=1, char p, non-reduced tests, single universe u. Five helper defs are real constructions; no existing jet/infinitesimal-neighbourhood declaration in Mathlib, side-live Sheaf or WeilConjectures; the jet-owning node lem-sfb-smooth-section-finite-jets has no Lean record. Source and blueprint docstrings present, proof plan in the theorem docstring, proof is sorry only, report sections present. No recompile (no change). No findings."
+ }
+}

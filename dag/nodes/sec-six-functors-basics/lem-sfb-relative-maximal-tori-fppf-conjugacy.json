@@ -1,0 +1,389 @@
+{
+ "id": "lem-sfb-relative-maximal-tori-fppf-conjugacy",
+ "kind": "statement",
+ "title": "Fppf local conjugacy of geometrically maximal tori",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], and let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms] [pqf-def-affine-morphism] [def-sbc-locally-finite-presentation]. A group scheme over $S$ is a group object in schemes over $S$; finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $T_0,T_1\\hookrightarrow G$ be closed subgroup schemes [def-weil-closed-immersion], both relative $S$-tori [def-sfb-relative-torus]. Suppose that for every geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$, with $\\Omega$ algebraically closed, each $(T_a)_{\\bar s}$ is maximal under inclusion among torus subgroups of $G_{\\bar s}$, where a torus over $\\Omega$ is a group scheme isomorphic to $\\mathbf G_{m,\\Omega}^d$ for some $d\\geq0$. Then there is an fppf covering $\\{S_i\\to S\\}_{i\\in I}$ [def-pc-fppf-site] and elements $g_i\\in G(S_i)=\\operatorname{Hom}_S(S_i,G)$ such that $g_i(T_0)_{S_i}g_i^{-1}=(T_1)_{S_i}$ as closed subgroup schemes of $G_{S_i}$ [def-pc-fibre-product]. This equality is an equality of subgroup functors on all $S_i$-schemes, including nonreduced test schemes. No reductivity, connectedness or Noetherian hypothesis is imposed, and ranks may vary with the base.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proof of Theorem 3.2.6, printed pp.94-95: after the paragraph ending \"Now we will just use that G to S is a smooth S-affine group\", the two-maximal-tori argument uses direct limits (Lemma 3.2.5), completion and approximation, and Corollary B.3.5. This is only the conjugacy input, not the parameter-scheme theorem. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative group-scheme structural result."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-torus",
+  "def-pc-fppf-site",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "It suffices to construct the required covering after an fppf covering of the base: compose the local coverings, using the covering transitivity axiom. First cover S by affine opens. On each such open, the definition of a relative torus supplies splitting fppf coverings for T_0 and T_1; pull one back along the other and compose. Refine by the affine-refinement lemma. Thus we may work over a nonempty affine S=Spec A on which T_a is identified with the split torus of rank r_a, for a=0,1. The empty affine needs no covering members. Base change preserves smoothness of G. Geometric maximality is inherited because every algebraically closed geometric point of any new base is also such a point of the original base.",
+   "uses": [
+    "def-sfb-relative-torus",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.2, proof, printed pp.56-57: local splitting and reduction to affine bases; covering transitivity is Stacks Tag 00VH, affine refinement Tag 021L."
+   }
+  },
+  {
+   "text": "Write G=Spec C. The affine smoothness equivalence identifies A to C as a smooth ring map. The smooth-algebra model theorem gives a finitely generated integer subring A_0 of A and a smooth affine finite-presentation scheme G_0=Spec C_0 whose base change is G. Enlarge A_0 through the directed set of finitely generated subrings of A when necessary, replacing G_0 by base change; smoothness persists. This directed system has limit Spec A by Noetherian approximation. Every stage is Noetherian by the finite-type-over-Z lemma, and every scheme used as a finite product of G_0 and split tori is affine, hence qcqs.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-algebra-finite-type-model",
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TP, lemma-finite-presentation-fs-Noetherian; Limits Tag 01YW and Properties Tag 01OU. Conrad Proposition 2.1.2, first reduction, printed pp.56-57."
+   }
+  },
+  {
+   "text": "Descend the multiplication, identity and inverse of G, and both maps from the standard split tori into G, by the arrow clause of finite-presentation spreading out. Use the standard split tori and the finite products of G_0 as the chosen object models. The associativity, unit, inverse and subgroup-homomorphism diagrams are finitely many equalities of maps between those finite-presentation models. The equality clause therefore makes all diagrams hold at a common later stage. The two descended torus maps are locally of finite type (their affine source algebras have finite generating sets already over the base); the closed-immersion descent lemma makes both maps closed immersions after a further enlargement. We now have a smooth affine finite-type group G_0 over a nonzero Noetherian ring A_0, with closed split torus subgroups T_{0,0},T_{1,0}, whose entire diagram pulls back to the prescribed one. No geometric maximality assertion at this stage is needed.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZM, lemma-descend-finite-presentation (2),(3), and 01ZP, lemma-descend-closed-immersion-finite-presentation; the finite group-diagram argument is the first paragraph of Conrad Proposition 2.1.2."
+   }
+  },
+  {
+   "text": "Apply the existing multiplicative-type transporter theorem to G_0 and the two split tori. It gives a closed finite-presentation smooth A_0-scheme Z_0 representing gT_{0,0}g^{-1} contained in T_{1,0}. Pull back along Spec A to Spec A_0. Its arbitrary-base-change assertion says exactly that Z=Z_0 times_{A_0} A represents g(T_0)_Vg^{-1} contained in (T_1)_V, as subgroup functors on every V-scheme. In particular there is a universal g in G(Z) and a unique induced group homomorphism q:(T_0)_Z to (T_1)_Z, with j_1 q=Int(g)j_0. The group diagrams follow since j_1 is monic. Smoothness of Z over S follows from smooth base change.",
+   "uses": [
+    "lem-sfb-multiplicative-type-transporter-smooth",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 2.1.2, printed pp.56-60, including functorial base change. Only containment is asserted here."
+   }
+  },
+  {
+   "text": "For each geometric point s:Spec Omega to S, consider G_s. Its identity component G_s^0 is an open and closed connected subgroup of finite type. It is affine by the closed-immersion affine criterion and smooth by restriction of the smooth morphism G_s to its open component. Each split torus (T_a)_s is connected: its Laurent coordinate ring over Omega is a domain (including rank zero), so its spectrum is irreducible. Its image contains the identity and therefore lies in the identity component. Factor through that open component by the open-factorization lemma; the torus remains a closed subgroup there. A larger torus in G_s^0 would be a larger torus in G_s, so both tori are maximal in G_s^0. The classical Borel/maximal-torus conjugacy theorem, applied to this smooth connected affine Omega-group, supplies h in G_s^0(Omega) with h(T_0)_s h^{-1}=(T_1)_s as subgroup schemes. Consequently h defines an Omega-point of Z above s. Every point of S admits an algebraically closed residue-field extension, so Z to S is surjective.",
+   "uses": [
+    "lem-sfb-finite-type-group-identity-subgroup",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 2.1.5, printed pp.60-61, and Theorem 3.2.6, conjugacy paragraph, printed p.95; classical conjugacy: Milne Theorem 17.10, printed pp.354-355; identity subgroup: Stacks Tag 0B7R."
+   }
+  },
+  {
+   "text": "The universal containment is an equality on Z, not just on its geometric points. Indeed, at every algebraically closed geometric point z of Z, q_z identifies the conjugate of the maximal torus (T_0)_z with a torus subgroup of (T_1)_z. Maximality in G_z makes this inclusion an equality. Apply the split-torus matrix-sheaf theorem to q over Z. Locally on Z it is given by a constant integer matrix M. If that open is nonempty, choose a geometric point of it. Since q_z is an isomorphism, the matrix correspondence and its composition law give an integer inverse of M there: r_0=r_1 and M is unimodular. The same constant inverse defines an inverse homomorphism throughout that open. These local inverses agree because they are inverses of q, so q is an isomorphism. Thus j_1 q=Int(g)j_0 gives g(T_0)_Zg^{-1}=(T_1)_Z as subgroup functors on every Z-scheme, with no reducedness assumption.",
+   "uses": [
+    "lem-sfb-relative-split-torus-matrix-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 2.1.5, final sentence of proof, printed p.61: equality checked after splitting via characters; Proposition B.1.1, printed pp.280-281. This is the explicit matrix argument, not a fibrewise equality criterion for arbitrary closed subschemes."
+   }
+  },
+  {
+   "text": "The smooth surjection Z to S is flat and locally of finite presentation by the smooth-flat lemma. By the definition of the fppf site, its singleton is an fppf covering. Its universal element g gives the required conjugation by step 6. For the original base, compose these coverings with the affine splitting coverings of step 1, using site transitivity. Empty pieces contribute no members. Ranks are fixed only on each splitting member; the construction requires no global rank, connectedness of G, reductivity or Noetherian condition on S.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021L, definition-fppf, and Sites Tag 00VH, definition-site; construction from Conrad Corollary 2.1.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-relative-torus",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-algebra-finite-type-model",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-sfb-multiplicative-type-transporter-smooth",
+  "lem-sfb-finite-type-group-identity-subgroup",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-relative-split-torus-matrix-sheaf",
+  "lem-pc-smooth-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Agent assembly of Conrad Proposition 2.1.2 and Corollary 2.1.5, printed pp.56-61, with classical conjugacy as used in the proof of Theorem 3.2.6, printed p.95. Read online; WANTED local archive. Avoids completion by reusing the existing smooth transporter and the character-matrix lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "maximal.*tor|tor.*conjug|conjug.*tor",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"grep\", \"query\": \"maximal.*tor|tor.*conjug|conjug.*tor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"Mathlib/GroupTheory/Commutator/Basic.lean\"], \"digest\": \"1b868ca6d9379ded\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean; Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean; Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean; Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean; Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean; Mathlib/GroupTheory/Commutator/Basic.lean; Mathlib/GroupTheory/Commutator/Basic.lean; Mathlib/GroupTheory/Commutator/Basic.lean; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugate\", \"torus\"",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugate\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori of a smooth affine group scheme are locally conjugate in the faithfully flat topology",
+   "results": "{\"t\": \"2026-10-24T10:24:41Z\", \"tool\": \"leansearch\", \"query\": \"Maximal tori of a smooth affine group scheme are locally conjugate in the faithfully flat topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Module.FaithfullyFlat.recOn\", \"MaximalSpectrum.zariskiTopology\", \"Module.FaithfullyFlat.casesOn\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"3d6cbde34b164253\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.IsSmooth.recOn; Module.FaithfullyFlat.recOn; MaximalSpectrum.zariskiTopology; Module.FaithfullyFlat.casesOn; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Flat.flat_of_affine_subset; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two geometrically maximal tori in a reductive group scheme are conjugate after an fppf covering of an arbitrary base",
+   "results": "{\"t\": \"2026-10-24T10:24:42Z\", \"tool\": \"leanfinder\", \"query\": \"Two geometrically maximal tori in a reductive group scheme are conjugate after an fppf covering of an arbitrary base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isConj_arithFrobAt\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"MulAction.IwasawaStructure.is_conj\", \"IsArithFrobAt.conj\", \"ConjClasses.mk_bijOn\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CategoryTheory.PreGaloisCategory.connected_component_unique\"], \"digest\": \"9a27342ea0d35874\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: isConj_arithFrobAt; RootPairing.GeckConstruction.ωConj_mem_of_mem; RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff; MulAction.IwasawaStructure.is_conj; IsArithFrobAt.conj; ConjClasses.mk_bijOn; CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen; CategoryTheory.PreGaloisCategory.connected_component_unique; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative maximal tori are locally conjugate by sections of a reductive group over a ring",
+   "results": "{\"t\": \"2026-10-24T10:27:12Z\", \"tool\": \"leanfinder\", \"query\": \"Relative maximal tori are locally conjugate by sections of a reductive group over a ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff\", \"MulAction.IwasawaStructure.is_conj\", \"GroupExtension.IsConj\", \"GroupExtension.IsConj.refl\", \"GroupExtension.IsConj.trans\", \"Sylow.conj_eq_normalizer_conj_of_mem_centralizer\"], \"digest\": \"df531e77a5a4afa2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.GeckConstruction.ωConj_mem_of_mem; RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff; RootPairing.GeckConstruction.mem_ωConjLieSubmodule_iff; MulAction.IwasawaStructure.is_conj; GroupExtension.IsConj; GroupExtension.IsConj.refl; GroupExtension.IsConj.trans; Sylow.conj_eq_normalizer_conj_of_mem_centralizer; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\btorus\\b|\\btori\\b|reductive.*group|group.*reductive",
+   "results": "{\"t\": \"2026-10-24T10:28:36Z\", \"tool\": \"grep\", \"query\": \"\\\\btorus\\\\b|\\\\btori\\\\b|reductive.*group|group.*reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this relative group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "\\btorus\\b|\\btori\\b|maximalTorus",
+   "results": "{\"t\": \"2026-10-24T11:02:54Z\", \"tool\": \"grep\", \"query\": \"\\\\btorus\\\\b|\\\\btori\\\\b|maximalTorus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all hits; they concern abstract group conjugation, Lie root matrices or Galois categories, not relative torus subgroup schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two maximal torus subgroup schemes of a smooth affine group are locally conjugate over any base",
+   "results": "{\"t\": \"2026-10-24T11:02:55Z\", \"tool\": \"leansearch\", \"query\": \"Two maximal torus subgroup schemes of a smooth affine group are locally conjugate over any base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.inj\", \"AlgebraicGeometry.Scheme.mk.injEq\", \"ClosedSubgroup.ext_iff\", \"Sylow.mk.injEq\", \"MulAction.IwasawaStructure.mk.injEq\", \"MulAction.IwasawaStructure.is_conj\", \"AddGroupExtension.IsConj\", \"Commensurable.quotConjEquiv\"], \"digest\": \"1294176eb3806080\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all hits; they concern abstract group conjugation, Lie root matrices or Galois categories, not relative torus subgroup schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"conjugate\"",
+   "results": "{\"t\": \"2026-10-24T11:02:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"conjugate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all hits; they concern abstract group conjugation, Lie root matrices or Galois categories, not relative torus subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth transporter scheme and conjugacy of maximal tori over an arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-24T11:02:56Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth transporter scheme and conjugacy of maximal tori over an arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"MulAction.IwasawaStructure.is_conj\", \"ConjAct.mem_orbit_conjAct\", \"ConjAct.orbitRel_conjAct\", \"ConjClasses.mkEquiv\", \"LieAlgebra.conj_ad_apply\", \"ConjClasses.mk_bijOn\"], \"digest\": \"f441ee2400603efa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all hits; they concern abstract group conjugation, Lie root matrices or Galois categories, not relative torus subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically maximal tori in a smooth affine group scheme are conjugate locally in the fppf topology",
+   "results": "{\"t\": \"2026-10-24T11:02:58Z\", \"tool\": \"leanfinder\", \"query\": \"Geometrically maximal tori in a smooth affine group scheme are conjugate locally in the fppf topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CategoryTheory.PreGaloisCategory.toAutMulEquiv\", \"CategoryTheory.PreGaloisCategory.toAut_bijective\", \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.toAutHomeo_apply\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\"], \"digest\": \"dcea3f05afafad7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all hits; they concern abstract group conjugation, Lie root matrices or Galois categories, not relative torus subgroup schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-maximal-torus-parameter-scheme",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Proof of Theorem 3.2.6, printed pp.94-95: after the paragraph ending \"Now we will just use that G to S is a smooth S-affine group\", the two-maximal-tori argument uses direct limits (Lemma 3.2.5), completion and approximation, and Corollary B.3.5. This is only the conjugacy input, not the parameter-scheme theorem.",
+   "via": [
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-maximal-tori-fppf-conjugacy",
+  "worker": "stage1",
+  "summary": "Q146 retains the statement and all original metadata, finds no Lean attachment or Mathlib match, and splits using existing nodes only. Descends a split group diagram without descending maximality, pulls back the smooth containment transporter, proves geometric surjectivity inside identity components and upgrades universal containment by integer matrices. No new nodes.",
+  "blueprint": "Current latest blueprint (main-20261024), sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, proof (3), along the supporting chain already recorded in blueprint.from.place. The imported ancestor search returns None; no new ancestry is invented. This supplies the conjugacy input of maximal-torus parameterization, using Conrad Proposition 2.1.2 and Corollary 2.1.5 rather than the longer completion argument in Theorem 3.2.6.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-algebra-finite-type-model",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme/site descent or permanence tool used exactly as stated in the assembly; this unit has no substitute for this general-purpose input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-algebra-finite-type-model",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-pc-smooth-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-b9b9b01bb",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-b9b9b01bb (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. Its 7 steps are a correct assembly in the spirit of Conrad 2.1.2/2.1.5 and match the cited statements. Step 1: fppf splitting covers (def-sfb-relative-torus), pulled back with lem-trf-fppf-covering-base-change, composed by site transitivity and made affine with lem-pc-fppf-affine-refinement. Step 2: smooth finite-type model over a finitely generated subring A_0 and the Nagata limit. Step 3: thm-pd-spreading-out clauses (2) and (3) descend the group structure and the torus maps, and 01ZP closed-immersion descent applies because the maps are lft and everything is affine and qcqs; maximality is never descended. Step 4: the transporter node's hypotheses (Noetherian nonzero A_0, smooth affine finite-type G_0, split tori of multiplicative type) hold, and its base-change clause carries the transporter to Spec A. Step 5: G_s^0 is affine, smooth and connected; the tori factor through it and stay maximal; Borel/Milne 17.10 conjugacy gives surjectivity of Z→S. Step 6: the matrix-sheaf node holds over any base, so the integer inverse at a geometric point inverts q on the whole open; marking it elementary is fine. Step 7: smooth gives flat and lfp, so {Z→S} is an fppf cover. Edge cases checked: empty S, rank 0, disconnected G, nonreduced base, non-Noetherian A. No cycle (closure traversed) and no duplicate (searched 'maximal tor'; lem-sfb-isogeny-torus-conjugacy is a different statement). Batch-5 check: lem-trf-fppf-covering-base-change, lem-trf-finite-type-component-open-qc and lem-trf-smooth-fpqc-base-descent are generic scheme and site facts, not steps of the trace formula or Poincaré duality, so all four flagged citations are accepted. The tool_uses are accepted as generic tools. Conrad is not archived locally (WANTED); the proof depends only on DAG statements."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeMaximalToriFppfConjugacy",
+  "declaration": "AlgebraicGeometry.relative_maximal_tori_fppf_conjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMaximalToriFppfConjugacy.lean",
+  "statement": "theorem relative_maximal_tori_fppf_conjugacy {S : Scheme.{u}} (G : Grp (Over S)) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] [QuasiCompact G.X.hom] [QuasiSeparated G.X.hom] (T : Fin 2 → Grp (Over S)) (j : ∀ a : Fin 2, T a ⟶ G) [∀ a : Fin 2, IsClosedImmersion (j a).hom.hom.left] (hT : ∀ a : Fin 2, IsRelativeTorus (T a).X) (hmax : ∀ (a : Fin 2) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (H : Grp (Over (Spec (.of Ω)))) (i : H ⟶ (Over.pullback s).mapGrp.obj G), IsClosedImmersion i.hom.hom.left → (∃ r : ℕ, Nonempty (yonedaGrpObj H.X ≅ relativeSplitTorusFunctor (Spec (.of Ω)) r)) → ∀ f : (Over.pullback s).mapGrp.obj (T a) ⟶ H, f ≫ i = (Over.pullback s).mapGrp.map (j a) → IsIso f) : ∃ (I : Type u) (U : I → Over S) (g : ∀ i : I, U i ⟶ G.X), Presieve.ofArrows (fun i ↦ (U i).left) (fun i ↦ (U i).hom) ∈ Scheme.fppfPrecoverage S ∧ ∀ (i : I) (V : Over S) (v : V ⟶ U i), Set.range (fun t : V ⟶ (T 0).X ↦ (v ≫ g i) * (t ≫ (j 0).hom.hom) * (v ≫ g i)⁻¹) = Set.range (fun t : V ⟶ (T 1).X ↦ t ≫ (j 1).hom.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1077f1bc7",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read node, report, module (153 lines), all 9 stmt_deps and the side-live declarations IsRelativeTorus/relativeSplitTorusFunctor, Mathlib fppfPrecoverage and yonedaGrpObj/Hom.group. Only the lean field of the node changed; statement verbatim; docstrings have source and blueprint plus the 7-step proof; sorry only; no new definitions. Clauses match: G smooth/IsAffineHom/LFP/qc/qs; T : Fin 2 → Grp (Over S) with closed-immersion group maps and IsRelativeTorus; hmax = maximality among closed split-torus subgroups (group-functor iso, any rank r ≥ 0) at every algebraically closed Ω in universe u, which is equivalent or stronger; conclusion = fppfPrecoverage family with I : Type u and g_i : U_i ⟶ G.X, and range equality of conjugated T0-points and T1-points for every (V, v) over U_i, i.e. subgroup-functor equality including nonreduced tests. Edge cases empty S, rank 0, variable rank, nonreductive or disconnected G: ok. Advisory: hmax inlines the field notion that ReductiveTorusCentralizer.IsMaximalTorus (def-sfb-reductive-torus-centralizer-terminology) also defines; the node is uncited and inlines it too, so PASS with note. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,329 @@
+{
+ "id": "lem-sf-finite-kernel-constructible-localization",
+ "kind": "statement",
+ "title": "Constructible restriction of finite-coefficient kernel recollement",
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be separated of finite type over $k$, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and the coefficient categories $D^b_c(T,A_n)$ and $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], for $T=X,Z,U$.\nFix $n\\ge1$ and put $A=A_n$. On ordinary sheaves of $A$-modules define $i^!_0N=i^*\\ker(N\\to j_*j^*N)$, with derived functor computed on K-injective resolutions [lem-sf-ringed-closed-kernel-adjoint, def-pur-kinjective-complex]. Use the canonical finite operations of [def-weil-derived-direct-image, def-weil-derived-pullback-tensor-hom]. The functor $Rj_*$ preserves $D^b_c$; the ambient $Ri^!_0$ restricts to a coefficient-linear exact right adjoint of $i_*$ on these full constructible categories. For every $M\\in D(X_{\\rm proet},A)$ the ordinary triangle $j_!j^*M\\to M\\to i_*i^*M\\to$ induces, by the four adjunctions, for every $K\\in D^b_c(X,A)$ a supported distinguished triangle $i_*Ri^!_0K\\xrightarrow e K\\xrightarrow u Rj_*j^*K\\to$ whose first two maps are the actual counit and unit. Its ambient construction does not assume boundedness of $Ri^!_0K$. For every $P\\in D^b_c(Z,A)$, $G\\in D^b_c(U,A)$ and integer $m$, $\\operatorname{Hom}(i_*P[m],Rj_*G)=0$.\nThe termwise closed counit $i^*i_*\\to1$ with its signed shift comparison is invertible on bounded constructible complexes. All these conclusions use the intrinsic finite constructible categories, without replacing them by finite-Tor categories.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite stage and Vanishing; unit Hom(-,K) argument; returned proof steps 1–4"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "def-pur-kinjective-complex",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-exc-proetale-sections-with-support",
+  "def-weil-open-closed-recollement",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The positive coefficient level is finite. The extension valuation identifies the maximal ideal with the uniformizer ideal; the prime belongs to it, so its (n+1)-st power kills A. This integer remains a unit in k. Finite type over the noetherian field makes X noetherian and the complementary open quasi-compact.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing; (1); (2) and (3); Consequences"
+   }
+  },
+  {
+   "text": "Apply the ringed closed-kernel adjunction with the constant coefficient ring. Transport closed and open inverse image along their canonical constant-coefficient identifications. The support kernel is in the closed essential image, so its closed unit is invertible. Maps from closed direct images factor uniquely through the open-unit kernel, defining the sheaf adjunction with precisely the normalized kernel counit. The intrinsic ambient theorem supplies right exactness of closed direct image.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-exc-proetale-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing; (1); (2) and (3); Consequences"
+   }
+  },
+  {
+   "text": "Compare intrinsic inverse image with the transported fixed-module inverse image by uniqueness of left adjoints to the same direct image. Derive these exact comparisons. The published realization comparison for derived direct image identifies intrinsic closed and open direct image with fixed-module direct image. Uniqueness of right adjoints then identifies the specified derived kernel shriek with the transport of ProEtale.closedUpperShriek.rightDerivedFunctor. Its triangulated and additive instances are those of the canonical right derived functor. Transport the linear structures along the realization equivalences; fixed-module closed shriek is linear as right adjoint to a linear closed direct image, which proves preservation of the explicitly conjugated sfKernelScalar action.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing; (1); (2) and (3); Consequences"
+   }
+  },
+  {
+   "text": "For the ordinary triangle, complete the actual open-extension counit. Open restriction kills its cone because the open unit is invertible. Closed inverse image of the second arrow is invertible because closed inverse image kills extension by zero. The source-library fixed-coefficient closed essential-image theorem, transported by realization, makes the closed unit at the cone invertible. Its composite with the inverse of closed inverse image of the second arrow identifies the cone with i_*i^*M; naturality of the unit gives exactly the requested second map. Perform this construction for both intrinsic pullback and the canonically isomorphic constant-ring pullback. The latter ordinary triangle gives the closed essential image needed by Recollement.exists_distTriang_counit_unit, yielding the supported triangle with the actual exceptional counit and open unit. Recollement.subsingleton_hom_shift gives the stated vanishing. These constructions hold on all ambient objects before boundedness is used.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-sf-ringed-closed-kernel-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing; (1); (2) and (3); Consequences"
+   }
+  },
+  {
+   "text": "Intrinsic bounded constructibility is equivalent under derived realization to fixed-module bounded constructibility. Exact realization commutes with homology, finite homology support is equivalent to boundedness, and finite constructible homology sheaves descend to the etale site. Apply the existing source-library LocalizeConstructible theorems for fixed-coefficient pullback, closed direct image, open direct image and closed shriek. Their integer annihilator hypothesis is supplied by the first step. The comparison isomorphisms from the third step transport all four conclusions to precisely the functors in this statement; no Tor condition is introduced.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-proetale-dbc-triangulated",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing; (1); (2) and (3); Consequences"
+   }
+  },
+  {
+   "text": "Full faithfulness of closed direct image, transported from the fixed-module derived functor, makes the actual exact-derived closed counit invertible. The standard exact-derived unit commutes with signed shifts, so the adjunction shift theorem gives the same compatibility for its counit. The localization-counit formula gives the displayed equality on every cochain complex with exactly the standard factorization isomorphisms.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-pur-exact-adjunction-unit-shift-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing; (1); (2) and (3); Consequences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-exc-proetale-closed-support",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-exact-derived-adjunction",
+  "lem-pur-exact-adjunction-unit-shift-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "P8: canonical coefficient-realization transport of existing source-library finite-coefficient localization; ordinary-counit-cone construction precedes supported triangle; normalized exact closed counit retained. Source modules: WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible, .Localization, .OpenClosedTriangle and .ScalarExtension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructible finite coefficient pro etale open direct image and closed kernel derived adjoint supported localization triangle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).rightOp ⊣ Y.kerFunctor\", \"doc\": \"For any scheme $Y$, the right opposite of the subscheme functor (mapping ideal sheaves to closed subschemes) is left adjoint to the kernel functor (extracting ideal sheaves from structure morphisms in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction_counit_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (f : (CategoryTheory.Over Y)ᵒᵖ),\\n  Y.kerAdjunction.counit.app f =\\n    (CategoryTheory.Over.homMk (AlgebraicGeometry.Scheme.Hom.toImage (Opposite.unop f).hom) ⋯).op\", \"doc\": \"For any scheme $Y$ and any morphism $f$ in the opposite category of the over category over $Y$, the counit of the adjunction between the kernel functor and the subscheme functor at $f$ is the morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.restrictFunctor f).IsLeftAdjoint\", \"doc\": \"For an open immersion $ f: X \\to Y $ between schemes, the restriction functor from the category of sheaves of modules over $ Y $ to the category of sheaves of modules over $ X $, induced by $ f $, has \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [inst_2 : CategoryTheory.IsCofiltered I]\\n  \", \"doc\": \"The image of the morphism $ g $ is contained within the diagonal open subsets of the pullback of $ f $ with itself, specifically within the diagonal cover's diagonal range constructed from the open co\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Triangulated",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Triangulated'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*(pro.?etale|kernel)|kernel.*constructib",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived closed support kernel adjoint restricts to bounded constructible finite coefficient sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(Y : Scheme.{u}) : (subschemeFunctor Y).rightOp ⊣ Y.kerFunctor\", \"doc\": \"For any scheme $Y$, the right opposite of the subscheme functor (mapping ideal sheaves to closed subschemes) is left adjoint to the kernel functor (extracting ideal sheaves from structure morphisms in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X ⟶ Y) [QuasiCompact f] : f.ker.support = closure (Set.range f)\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, the support of the kernel sheaf of $ f $ is equal to the closure of the image of $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit_app_val\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"For a sheaf $X$ over compact Hausdorff-like spaces with a coherent Grothendieck topology, the counit of the adjunction between the sheaf of locally constant functions and the presheaf construction eva\"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : constantSheaf J A ⊣ Γ J A\", \"doc\": \"The constant sheaf functor is left adjoint to the global sections functor, establishing an adjunction between them in the category of sheaves with respect to a Grothendieck topology $J$.\"}\n  {\"name\": \"ProbabilityTheory.Kernel.IsFiniteKernel.restrict\", \"module\": \"Mathlib.Probability.Kernel.Basic\", \"type\": \"(κ : Kernel α β) [IsFiniteKernel κ] (hs : MeasurableSet s) : IsFiniteKernel (κ.restrict hs)\", \"doc\": \"For any finite Markov kernel $\\\\kappa : \\\\alpha \\\\to \\\\mathrm{Measure}(\\\\beta)$ and measurable subset $s \\\\subseteq \\\\beta$, the restriction of $\\\\kappa$ to $s$ is also a finite Markov kernel. Specifically, t\"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open closed recollement on constructible derived categories of finite torsion sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*(pro.?etale|kernel)|kernel.*constructib",
+   "results": "{\"t\": \"2026-10-22T08:00:20Z\", \"tool\": \"grep\", \"query\": \"constructib.*(pro.?etale|kernel)|kernel.*constructib\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general sheaf/category infrastructure, scheme structure-sheaf modules or scheme ideal kernels; no finite-coefficient pro-etale constructible localization with the specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open closed recollement on the bounded constructible derived category of finite torsion sheaves",
+   "results": "{\"t\": \"2026-10-22T08:00:21Z\", \"tool\": \"leansearch\", \"query\": \"Open closed recollement on the bounded constructible derived category of finite torsion sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafIsAbelian\", \"DerivedCategory.TStructure.t\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"TopCat.Sheaf.forget\", \"CategoryTheory.Sheaf.instHasFiniteColimits\", \"CategoryTheory.Sheaf.recOn\", \"CategoryTheory.instAdhesiveSheafOfHasPullbacksOfHasPushoutsOfHasSheafify\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\"], \"digest\": \"aa9886b9a744bf3f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general sheaf/category infrastructure, scheme structure-sheaf modules or scheme ideal kernels; no finite-coefficient pro-etale constructible localization with the specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory",
+   "results": "{\"t\": \"2026-10-22T08:00:21Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general sheaf/category infrastructure, scheme structure-sheaf modules or scheme ideal kernels; no finite-coefficient pro-etale constructible localization with the specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient constructible pro etale derived open direct image closed support kernel adjoint localization triangle",
+   "results": "{\"t\": \"2026-10-22T08:00:30Z\", \"tool\": \"leanfinder\", \"query\": \"Finite coefficient constructible pro etale derived open direct image closed support kernel adjoint localization triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\"], \"digest\": \"a19b18770b170d4c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general sheaf/category infrastructure, scheme structure-sheaf modules or scheme ideal kernels; no finite-coefficient pro-etale constructible localization with the specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion preserves bounded constructible torsion derived sheaves and the kernel of restriction defines the closed exceptional right adjoint",
+   "results": "{\"t\": \"2026-10-22T08:20:17Z\", \"tool\": \"leanfinder\", \"query\": \"An open immersion preserves bounded constructible torsion derived sheaves and the kernel of restriction defines the closed exceptional right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.kerAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrict\"], \"digest\": \"757044532404d1f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only general sheaf/category infrastructure, scheme structure-sheaf modules or scheme ideal kernels; no finite-coefficient pro-etale constructible localization with the specified maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Finite stage: constructibility of Rj_*, ambient support adjunction and supported triangle before constructible restriction; Vanishing; unit Hom(-,K) argument",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-kernel-constructible-localization",
+  "worker": "stage1",
+  "summary": "Split with ten steps and no new nodes. Construct ambient exact linear adjunctions and the supported triangle via the existing counit-cone lemma before any boundedness claim; obtain intrinsic constructibility using the arbitrary-finite-ring site equivalence and open finiteness, then restrict the actual adjunction. Check the termwise closed counit against signed shifts. Repair only the K-injective definition citation, without changing any mathematical hypothesis or conclusion.",
+  "blueprint": "Steps 1–5 realize the finite-stage ambient support construction and the unit Hom(-,K) argument; Step 5 also realizes Vanishing. Steps 6–9 realize finite-stage open constructibility and restriction of the ambient exceptional adjoint. Step 10 retains the termwise closed-counit normalization required by the returned finite-stage proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Noetherian open-subscheme topology verifies the quasi-compact-complement hypothesis of the ringed recollement tools. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the actual finite coefficient ring maps with inverse-image constant coefficients. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic exact ringed open-closed sequence supplies the ordinary triangle and exact sheaf operations. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exactness of finite-coefficient module inverse image, without Tor restrictions. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General small ringed-site module category theorem supplies the hypothesis for K-injective existence. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "General Grothendieck abelian K-injective existence supplies the unbounded resolution assumption. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Generic K-injective derived adjunction theorem retains the actual signed shifts for the two right adjoints. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-weil-kinjective-total-derived-linear",
+    "why": "Generic scalar-linearity theorem applies to the support-kernel sheaf functor, with no linear resolution choices. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic short-exact-complex triangle, used on the unit route to form the ordinary open-closed triangle. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "General finite-ring etale/pro-etale constructible equivalence applies to arbitrary k; the older sf origin node assumes the fixed finite-field datum. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "cor-fin-deligne-open-finite-coefficients",
+    "why": "The unit proof explicitly requires open-image constructibility; this existing theorem gives its bounded-complex version over any field. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "The qcqs site comparison transports the etale open-image theorem to the intrinsic pro-etale category. No node on the localization unit route replaces this general interface."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "States for any scheme and finite commutative ring that the intrinsic bounded constructible pro-etale complexes form a full triangulated subcategory (Step 7). No node on the localization unit route gives it; it replaces the etale-site route through prop-constructible-derived-subcategory, whose constructibility notion is a different node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-8eb660a26",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-8eb660a26 (reviewer sub-agent of L); spot-checked: Read the item's ten steps against the main-20261015 prop-sf-localization-all-stages proof (Finite stage, lines 17-29, and Vanishing) and the unit sk-prop-sf-localization proof (ordinary-triangle Existence argument). Also read the statement of every cited node. The delivery has no new nodes. The only statement change swaps the etale-only K-injective definition for def-pur-kinjective-complex, which is a correct reference repair and does not weaken the target. Hypotheses checked: (1) |ℓ|_E<1 gives ℓ=uϖ^e with e≥1, so ℓ^n kills A_n; X is Noetherian, so j is quasi-compact as the ringed nodes require. (3) The canonical derived-adjunction-shift node's hypotheses hold (Grothendieck module categories, exact left adjoints i_* and j^*), so Ri^!_0 and Rj_* are exact; derived linearity holds since i^!_0 is A-linear. (5) All hypotheses of lem-sf-ordinary-triangle-counit-cone hold ambiently; it gives β with βv=u and Hom(i_*P[m],j_*Q)=0. (6) The finite-ring origin equivalence (any scheme), cor-fin-deligne-open-finite-coefficients (any field, ring killed by ℓ^n, same etale D^b_c node) and comparison-direct-image (j qcqs, G' in D^+) are applied within their hypotheses. Steps 8-10 are elementary as marked. Edge cases U=∅, Z=∅, X=∅, n=1, n=2 and non-closed k all pass; no Tor or cd(k) bound is used. FIX: Step 7 reproved triangulated closure through the imported prop-constructible-derived-subcategory, whose etale constructibility is a different node family (def-constructible-*) from the origin equivalence's, while lem-weil-proetale-dbc-triangulated states exactly this closure for any scheme and finite commutative ring. Step 7 now cites that node plus TR2 rotations; proof_deps and split_report.tool_uses are updated, and there is no cycle. Advisory: the item's D^b_c(T,A_n) passes through def-weil-finite-torsion-constructibility (finite-field datum, ℓ≠p), but its sheaf notion is the intrinsic one used by the proof.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteKernelConstructibleLocalization",
+  "declaration": "WeilConjectures.finiteKernelConstructibleLocalization",
+  "declarations": [
+   "WeilConjectures.sfKernelCoefficient",
+   "WeilConjectures.sfKernelCoefficient_finite",
+   "WeilConjectures.sfKernelScalar",
+   "WeilConjectures.sfKernelPush_limits",
+   "WeilConjectures.finiteKernelConstructibleLocalization"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteKernelConstructibleLocalization.lean",
+  "statement": "theorem finiteKernelConstructibleLocalization (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (k : Type u) [Field k] (_hl : IsUnit (l : k)) {X Z U : Scheme.{u}} (t : X ⟶ Spec (.of k)) [LocallyOfFiniteType t] [QuasiCompact t] [IsSeparated t] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (_hij : Set.range j = (Set.range i)ᶜ) : ∃ hcol : PreservesFiniteColimits (sfConstantModuleDirectImage i (sfKernelCoefficient l E n)), (fun [hc : PreservesFiniteColimits (sfConstantModuleDirectImage i (sfKernelCoefficient l E n))] ↦ ∃ a0 : sfConstantModuleDirectImage i (sfKernelCoefficient l E n) ⊣ sfIntrinsicClosedUpperShriek i j (sfKernelCoefficient l E n), (∀ N, IsIso ((sfConstantModuleAdjunction i (sfKernelCoefficient l E n)).unit.app ((sfIntrinsicSectionsWithSupport j (sfKernelCoefficient l E n)).obj N)) ∧ (sfConstantModuleAdjunction i (sfKernelCoefficient l E n)).unit.app ((sfIntrinsicSectionsWithSupport j (sfKernelCoefficient l E n)).obj N) ≫ a0.counit.app N = kernel.ι ((sfConstantModuleAdjunction j (sfKernelCoefficient l E n)).unit.app N)) ∧ Functor.IsTriangulated (sfIntrinsicClosedUpperShriek i j (sfKernelCoefficient l E n)).rightDerivedFunctor ∧ Functor.Additive (sfIntrinsicClosedUpperShriek i j (sfKernelCoefficient l E n)).rightDerivedFunctor ∧ (∀ (K L : proEtaleDerivedCategory X (sfKernelCoefficient l E n)) (a : sfKernelCoefficient l E n) (f : K ⟶ L), (sfIntrinsicClosedUpperShriek i j (sfKernelCoefficient l E n)).rightDerivedFunctor.map (sfKernelScalar X (sfKernelCoefficient l E n) a f) = sfKernelScalar Z (sfKernelCoefficient l E n) a ((sfIntrinsicClosedUpperShriek i j (sfKernelCoefficient l E n)).rightDerivedFunctor.map f)) ∧ (∀ K, intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X K → intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z ((sfIntrinsicClosedUpperShriek i j (sfKernelCoefficient l E n)).rightDerivedFunctor.obj K)) ∧ (∀ K, intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X K → intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z ((sfConstantModulePullback i (sfKernelCoefficient l E n)).mapDerivedCategory.obj K) ∧ intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) U ((sfConstantModulePullback j (sfKernelCoefficient l E n)).mapDerivedCategory.obj K)) ∧ (∀ P, intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z P → intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X ((sfConstantModuleDirectImage i (sfKernelCoefficient l E n)).mapDerivedCategory.obj P)) ∧ (∀ G, intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) U G → intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X ((sfConstantModuleDirectImage j (sfKernelCoefficient l E n)).rightDerivedFunctor.obj G)) ∧ (∀ M : proEtaleDerivedCategory X (sfKernelCoefficient l E n), ∃ δ : (proEtaleConstantDerivedDirectImage i (sfKernelCoefficient l E n)).obj ((finiteDerivedPullback l E n i).obj M) ⟶ (sfIntrinsicDerivedOpen (sfKernelCoefficient l E n) j).obj ((finiteDerivedPullback l E n j).obj M)⟦(1 : ℤ)⟧, Triangle.mk ((exceptionalOpenAdjunction j (sfKernelCoefficient l E n)).counit.app M) ((finiteRecollementDerivedAdjunction i (sfKernelCoefficient l E n)).unit.app M) δ ∈ distTriang (proEtaleDerivedCategory X (sfKernelCoefficient l E n))) ∧ (∀ (K : proEtaleDerivedCategory X (sfKernelCoefficient l E n)), intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) X K → ∃ δ : (sfConstantModuleDirectImage j (sfKernelCoefficient l E n)).rightDerivedFunctor.obj ((sfConstantModulePullback j (sfKernelCoefficient l E n)).mapDerivedCategory.obj K) ⟶ ((sfConstantModuleDirectImage i (sfKernelCoefficient l E n)).mapDerivedCategory.obj ((sfIntrinsicClosedUpperShriek i j (sfKernelCoefficient l E n)).rightDerivedFunctor.obj K))⟦(1 : ℤ)⟧, Triangle.mk (a0.mapDerivedCategoryRightDerivedAdjunction.counit.app K) ((Adjunction.mapDerivedCategoryRightDerivedAdjunction (sfConstantModuleAdjunction j (sfKernelCoefficient l E n))).unit.app K) δ ∈ distTriang (proEtaleDerivedCategory X (sfKernelCoefficient l E n))) ∧ (∀ (P : proEtaleDerivedCategory Z (sfKernelCoefficient l E n)) (G : proEtaleDerivedCategory U (sfKernelCoefficient l E n)) (m : ℤ), intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z P → intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) U G → Subsingleton (((sfConstantModuleDirectImage i (sfKernelCoefficient l E n)).mapDerivedCategory.obj P)⟦m⟧ ⟶ (sfConstantModuleDirectImage j (sfKernelCoefficient l E n)).rightDerivedFunctor.obj G)) ∧ (∀ P : proEtaleDerivedCategory Z (sfKernelCoefficient l E n), intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) Z P → IsIso ((SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (sfConstantModuleAdjunction i (sfKernelCoefficient l E n))).counit.app P)) ∧ NatTrans.CommShift (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (sfConstantModuleAdjunction i (sfKernelCoefficient l E n))).counit ℤ ∧ (∀ I : CochainComplex (proEtaleRingModules Z (proEtaleConstantRing Z (sfKernelCoefficient l E n))) ℤ, (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (sfConstantModuleAdjunction i (sfKernelCoefficient l E n))).counit.app (DerivedCategory.Q.obj I) = (sfConstantModulePullback i (sfKernelCoefficient l E n)).mapDerivedCategory.map ((sfConstantModuleDirectImage i (sfKernelCoefficient l E n)).mapDerivedCategoryFactors.hom.app I) ≫ (sfConstantModulePullback i (sfKernelCoefficient l E n)).mapDerivedCategoryFactors.hom.app (((sfConstantModuleDirectImage i (sfKernelCoefficient l E n)).mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map (((sfConstantModuleAdjunction i (sfKernelCoefficient l E n)).mapHomologicalComplex (.up ℤ)).counit.app I))) (hc := hcol)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The ambient support kernel and constant-section module operations are reused, not redefined. The positive coefficient exponent is n+1. The existential right-exactness witness is a conclusion, installed by an explicit instance lambda to type exact termwise closed direct image; it is not an extra hypothesis. Scalar linearity is written as preservation of the canonical transported constant-scalar action on derived Hom. The intrinsic constructibility predicate is used throughout. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b2a403f5",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read node, main-20261015 prop-sf-localization-all-stages proof (Vanishing; Finite stage), all stmt_dep declarations in side-live. Hypotheses exact (field k, IsUnit ℓ, finite E/Q_ℓ, level n+1 covers n≥1, separated finite type X, closed/open complement); no extra Noetherian, finite-field or Tor assumption. i^!_0 is the recorded sfIntrinsicClosedUpperShriek; the adjunction a0 is pinned by an invertible closed unit and counit = kernel.ι; its derived adjunction is the canonical mapDerivedCategoryRightDerivedAdjunction. Clauses: exact, additive and A-linear derived i^!_0 (canonical transported scalar action); D^b_c preservation by Ri^!_0, i^*, j^*, i_*, Rj_*; ordinary triangle for all M with the recollement counit and unit; supported triangle for constructible K with the actual counit and unit; Subsingleton Hom(i_*P[m], Rj_*G) for all m; closed counit iso, CommShift, termwise formula. lean.statement verbatim; stmt_deps gain only three landed def nodes (allowed); imports exist; no name clash; sorry only. Advisory: sfKernelCoefficient alias; sfIntrinsicDerivedEquivalence and exceptionalOpenAdjunction owners are outside stmt_deps. No compile rerun (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261025T060952-L-2389271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

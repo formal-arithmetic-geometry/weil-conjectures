@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-space-quasicompact-affine-tests",
+ "kind": "statement",
+ "title": "Quasi-compact morphisms of algebraic spaces: affine tests and Zariski locality",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and use algebraic spaces over $S$ [def-trf-algebraic-space] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale map from a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme]; a morphism is quasi-compact if its pullback over every quasi-compact scheme has quasi-compact source. For any $f:X\\to Y$, the following are equivalent: $f$ is quasi-compact; for every affine scheme $V\\to Y$ the space $X\\times_YV$ is quasi-compact; there is a covering of $Y$ by open subspaces $Y_a$ such that each $X\\times_YY_a\\to Y_a$ is quasi-compact. Quasi-compact morphisms are preserved by arbitrary algebraic-space base change. For a representable morphism this is equivalent to quasi-compactness of every scheme base change in the scheme sense (inverse images of affine opens are quasi-compact).",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KG (lemma-quasi-compact-local), (1), (3), (6); Tag 03HF (lemma-base-change-quasi-compact); Tag 03HD (lemma-characterize-representable-quasi-compact)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-a1-space-open-subspace",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q(f)$ for the scheme-test definition in the statement and $A(f)$ for the affine-test condition. If $Q(f)$ holds, $A(f)$ follows because affine schemes are quasi-compact [lem-weil-pbc-affine-scheme-qcqs]. Conversely, assume $A(f)$ and take a quasi-compact scheme $T\\to Y$. Affine opens form a basis [lem-weil-pbc-affine-opens-basis], so a finite number $T_1,\\ldots,T_n$ cover $T$. Each inclusion is etale [lem-weil-pbc-open-immersion-etale], and each $P_j=X\\times_YT_j$ has a surjective etale atlas $U_j\\to P_j$ from a quasi-compact scheme, by $A(f)$ and the definition of quasi-compact space. For $P=X\\times_YT$, fibre-product associativity identifies $P\\times_TT_j$ with $P_j$ [lem-trf-space-fibre-products-etale-covers]. Apply [lem-trf-space-finite-qc-atlas-assembly] to $P\\to T$, the finite etale cover $(T_j\\to T)$, and these atlases. It supplies a quasi-compact scheme atlas of $P$. Thus $Q(f)$ holds. If $T$ is empty, use the empty finite cover, which the assembly lemma explicitly permits.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-finite-qc-atlas-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KG (lemma-quasi-compact-local), (3) implies (1); the finite-affine scheme-test version of its affine-atlas argument."
+   }
+  },
+  {
+   "text": "Let $g:Y'\\to Y$ be any morphism of algebraic spaces, and suppose $Q(f)$. For a quasi-compact scheme $T\\to Y'$, the universal property of sheaf fibre products gives $(X\\times_YY')\\times_{Y'}T\\simeq X\\times_YT$ [lem-trf-space-fibre-products-etale-covers]. Explicitly, a section on a test scheme on the left consists of $(x,y',t)$ with $f(x)=g(y')$ and $y'$ equal to the image of $t$; deleting $y'$ gives the right-hand pair $(x,t)$, and inserting that image is inverse. The right-hand space is quasi-compact by $Q(f)$ applied to $T\\to Y'\\to Y$. This proves arbitrary algebraic-space base-change stability, with no hypothesis on $g$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HF (lemma-base-change-quasi-compact), transitivity of fibre products, with its omitted argument written out."
+   }
+  },
+  {
+   "text": "If $Q(f)$ holds, step 2 shows that every restriction over an open subspace is quasi-compact; in particular the single open $Y$ gives the required cover. Conversely, let $(Y_a)$ be an open covering with quasi-compact restrictions and fix an affine scheme $V\\to Y$. An open subspace is representable by open immersions [def-a1-space-open-subspace], so $V_a=V\\times_YY_a$ are open subschemes of $V$. They cover $V$: on each scheme test their point images are inverse images of $|Y_a|$ [lem-a1-space-point-open-calculus]. Refine this open cover by affine opens using [lem-weil-pbc-affine-opens-basis], and take a finite subcover $V_1,\\ldots,V_n$ since $V$ is quasi-compact [lem-weil-pbc-affine-scheme-qcqs]. Each $V_j$ lies in some $V_{a(j)}$, hence its map factors through $Y_{a(j)}$. Its quasi-compactness and the assumed $Q(f|_{Y_{a(j)}})$ show that $X\\times_YV_j$ is quasi-compact, using fibre-product associativity [lem-trf-space-fibre-products-etale-covers]. Choose quasi-compact scheme atlases of these spaces. The inclusions $V_j\\to V$ are etale [lem-weil-pbc-open-immersion-etale], so [lem-trf-space-finite-qc-atlas-assembly] supplies a quasi-compact atlas of $X\\times_YV$. This is $A(f)$, and step 1 gives $Q(f)$. No intersection of affine opens is assumed affine or quasi-compact.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-trf-space-finite-qc-atlas-assembly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KG (lemma-quasi-compact-local), (1) implies (6) and (6) implies (3)."
+   }
+  },
+  {
+   "text": "Finally let $f$ be representable, so for every scheme $T\\to Y$ the space $P=X\\times_YT$ is a scheme [def-trf-algebraic-space]. For a scheme, quasi-compactness as an algebraic space agrees with quasi-compactness of its usual topological space: the equivalence in [lem-a1-space-etale-open-image] says exactly that an etale atlas from a quasi-compact scheme exists if and only if its point space is quasi-compact; for schemes this is the usual topology [def-a1-space-point-topology]. Suppose $Q(f)$. For each affine open $W\\subseteq T$, $W$ is quasi-compact [lem-weil-pbc-affine-scheme-qcqs], so $X\\times_YW=P\\times_TW$ is quasi-compact by $Q(f)$ and associativity [lem-trf-space-fibre-products-etale-covers]. Thus the inverse image of every affine open under $P\\to T$ is quasi-compact, exactly the scheme condition [def-weil-finite-type-morphism]. Conversely, if every such scheme projection $P\\to T$ is quasi-compact, then for quasi-compact $T$ its inverse image of the quasi-compact open $T$ is quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open]. It is $P$ itself. The scheme/space equivalence just recalled proves $Q(f)$. This proves both directions without assuming the test scheme affine or separated.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-etale-open-image",
+    "def-a1-space-point-topology",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03HD (lemma-characterize-representable-quasi-compact); its inverse-image formula is $p^{-1}(W)=W\times_YX$."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-finite-qc-atlas-assembly",
+  "def-a1-space-open-subspace",
+  "lem-a1-space-point-open-calculus",
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "def-a1-space-point-topology",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03KG, 03HF, 03HD; the finite-cover argument is expanded using the existing atlas-assembly node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is quasi compact if and only if every affine scheme base change has quasi compact source",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_iff_forall_affine, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiCompact_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasiCompact_iff_forall_affine and base-change results do not provide the algebraic-space affine-test and Zariski criteria."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact algebraic space morphisms are preserved by finite disjoint unions and detected on affine scheme tests",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.quasiCompact_iff_forall_affine, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasiCompact_iff_forall_affine and base-change results do not provide the algebraic-space affine-test and Zariski criteria."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"IsStableUnderBaseChange\"",
+   "results": "1 hits; declarations/files: AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasiCompact_iff_forall_affine and base-change results do not provide the algebraic-space affine-test and Zariski criteria."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Immersions and quasi compact morphisms of algebraic spaces are stable under base change and detected by affine scheme tests",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasiCompact_iff_forall_affine and base-change results do not provide the algebraic-space affine-test and Zariski criteria."
+  },
+  {
+   "tool": "grep",
+   "query": "03KG|03M4|02L8|0423|AlgebraicSpace",
+   "results": "0 hits; declarations/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasiCompact_iff_forall_affine and base-change results do not provide the algebraic-space affine-test and Zariski criteria."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasiCompact_iff_forall_affine|quasiCompact_isStableUnderBaseChange",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism results do not state the algebraic-space assertion; read Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:35-56, 97-104, 150-185."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compactness of morphisms of algebraic spaces is local on the target for open covers",
+   "results": "8 hits: AlgebraicGeometry.IsLocalAtTarget.of_openCover, AlgebraicGeometry.QuasiCompactCover.inst, AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover, AlgebraicGeometry.IsZariskiLocalAtTarget.of_openCover, AlgebraicGeometry.QuasiCompactCover.of_isOpenMap, AlgebraicGeometry.IsLocalAtTarget, AlgebraicGeometry.QuasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism results do not state the algebraic-space assertion; read Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:35-56, 97-104, 150-185."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\", \"IsStableUnderBaseChange\"",
+   "results": "1 hits: AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism results do not state the algebraic-space assertion; read Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:35-56, 97-104, 150-185."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is quasi compact if and only if every affine scheme base change has quasi compact source",
+   "results": "8 hits: AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_iff_forall_affine, AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.quasiCompact_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism results do not state the algebraic-space assertion; read Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:35-56, 97-104, 150-185."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness of an algebraic space morphism is detected on Zariski open covers of the target and stable under arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompact, AlgebraicGeometry.quasiCompact_iff, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.QuasiCompactCover.homCover, AlgebraicGeometry.Scheme.quasiCompactCover",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism results do not state the algebraic-space assertion; read Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:35-56, 97-104, 150-185."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasi-compact-immersion-locality",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Descent of the universal locally closed equality loci for arbitrary Picard sheaf sections. Supporting input: Tag 0424 proof, hypotheses (1) and (2) of 041J, using 03KG.",
+   "via": [
+    "lem-sfb-space-quasi-compact-immersion-locality",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasicompact-affine-tests",
+  "worker": "stage1",
+  "summary": "Q21 supplies four complete proof steps, retains the statement verbatim, and creates no nodes. Finite affine cover assembly proves the affine criterion and Zariski locality; explicit fibre-product associativity proves arbitrary base change; the representable clause compares topological and scheme notions. All searches and full citation statements were read.",
+  "blueprint": "Realizes the inherited from.place: the Tag 03KG prerequisite of Tag 0424 / 041J in the Picard equality-locus descent chain under det-thm-sf-ctf-stability-direct-images proof (3). Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3). blueprint_refs.py ancestor returns None; retain that inherited null ancestor and its full via chain. Whole-blueprint searches found no duplicate of the algebraic-space affine-test assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence, universal property and associativity of algebraic-space fibre products; no unit-specific substitute."
+   },
+   {
+    "node": "lem-trf-space-finite-qc-atlas-assembly",
+    "why": "Generic finite assembly of quasi-compact scheme atlases over an etale scheme cover; it is the finite-cover mechanism, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-image and open-subspace calculus ensures that the pulled-back Zariski opens cover a scheme test."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only its final equivalence between topological quasi-compactness and a quasi-compact scheme atlas is used, to compare the scheme and space notions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-finite-qc-atlas-assembly",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-f9944aacf",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-f9944aacf (reviewer sub-agent of L); spot-checked: Read Stacks spaces-morphisms 03HD, 03HE, 03HF and 03KG in full, and every cited node statement. There are no new nodes. The statement and stmt_deps are unchanged from the seed (diffed against clones/live and side-live, where the item is still unsplit). Step 1 (affine test ⇒ Q): finite affine cover of T plus finite-qc-atlas-assembly over Z=T, with exact hypotheses including the empty case. Step 2: base change via fibre-product associativity, written out where 03HF omits it; marked elementary, which is justified. Step 3: Zariski locality. V_a are open subschemes by def-a1-space-open-subspace and cover V by the image formula of point-open-calculus. A finite affine refinement and assembly give the affine test. No affine intersection is used (E1 checked). Step 4: representable case. Space-qc and topological qc agree via the last sentence of etale-open-image and the point topology; the scheme-test direction uses def-weil-finite-type-morphism, and the converse uses 01K4 with W=T. Tested on the empty space, ∐pt→pt and the identity of an infinite disjoint union. No duplicate: lem-trf-space-qc-separated-etale-local is the combined qc+separated criterion, and lem-pc-quasi-compact-local-on-target is the scheme case. No cycle. Accepted the 4 tool_uses as generic algebraic-space foundations. Batch-5: finite-qc-atlas-assembly and the def-a1/lem-a1 space nodes reach sec-trace-formula only through algebraic-space foundations in unit sk-i-curve-zero (def-trf-algebraic-space, fibre products, quotients). None is a trace-formula or Poincaré-duality step, so they are kept. Maintainer note: the inherited blueprint from.node is null; this comes from the seed and is not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasiCompactAffineTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCompact_iff_quasiCompact_scheme_tests",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.quasiCompact_iff_quasiCompact_scheme_tests",
+   "AlgebraicGeometry.AlgebraicSpace.quasiCompact_iff_exists_open_subspace_cover",
+   "AlgebraicGeometry.AlgebraicSpace.quasiCompact_presheafMap_baseChange",
+   "AlgebraicGeometry.AlgebraicSpace.quasiCompact_iff_representableWith_quasiCompact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasiCompactAffineTests.lean",
+  "statement": "theorem quasiCompact_iff_quasiCompact_scheme_tests {S : Scheme.{u}} (X Y : AlgebraicSpace S) (f : X ⟶ Y) : IsQuasiCompactPresheafMap f.hom.hom ↔ ∀ (T : Over S), CompactSpace T.left → ∀ h : yoneda.obj T ⟶ Y.obj.obj, ∃ (U : Over S) (a : yoneda.obj U ⟶ Limits.pullback f.hom.hom h), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Four statements jointly render the node: equivalence of all quasi-compact scheme tests with the existing affine-test atlas predicate; Zariski open-subspace locality; arbitrary algebraic-space base change; and representable scheme-test compatibility. No definitions are duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4ec66eda",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Re-delivery after RETURN fb3e6e9ab270 (H2). The only Lean change is a public import of AlgebraicSpaceJointSurjectivity; the 4 signatures, docstrings and sorry proofs are byte-identical. In stmt_deps the theorem lem-trf-space-qc-separated-etale-local is replaced by the new def node def-sfb-space-quasi-compact-presheaf-map (existing:true on SpaceQCSeparatedEtaleLocal/IsQuasiCompactPresheafMap; statement matches lines 38-44 binder for binder; lean.statement verbatim; no other owner in live dag; same pattern as def-sfb-presheaf-map-separated-diagonal), and def-trf-algebraic-space-jointly-surjective-family is added. Item statement, proof and source are verbatim vs live, and the item is still without a Lean record live. Mathematics re-checked: qc tests vs affine predicate (03KG 1<->3), open-subspace cover with Type (u+1) index and pointwise joint surjectivity (03KG 6), arbitrary base change (03HF), representable case (03HD); edge cases empty T/cover and infinite disjoint unions; no added hypotheses. No compile needed (no file changed). Advisory: other citers still cite the theorem for this predicate."
+ }
+}

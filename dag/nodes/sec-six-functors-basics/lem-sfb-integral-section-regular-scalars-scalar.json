@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-integral-section-regular-scalars-scalar",
+ "kind": "statement",
+ "title": "Scalar endomorphism part of the regular integral section comparison",
+ "statement": "For a prime l, finite extension E of Q_l, and scheme X, the section realization and completed constant realization are isomorphic on the lifted regular module, compatibly with every endomorphism induced by multiplication by a scalar in the coefficient ring.",
+ "stmt_deps": [
+  "def-sfb-integral-section-action-transport",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-sfb-continuous-scalar-finite-presentation"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), rank-one scalar calculation"
+ },
+ "proof": [
+  {
+   "text": "Identify the ordinary lifted regular module with the regular internal constant module. Apply the constant-sheaf functor and the regular extension-of-scalars isomorphism. The extension/restriction adjunction unit is natural, so conjugation of each scalar endomorphism acts on the canonical constant section by multiplication by that scalar. Pull this equation back to X and encode it as an equation on sections.",
+   "uses": [
+    "lem-sfb-continuous-scalar-finite-presentation",
+    "lem-weil-pbc-regular-extension-comparison",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-sf-finite-discrete-normalized-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the section-action regular-module isomorphism and restriction along the fixed coefficient-ring isomorphisms to identify the section realization with the unit module. For the completed constant realization use completedKoszulOne, whose invertibility and scalar equation are already proved. Restrict its inverse through pbcCompletedComparison to obtain a second isomorphism to the same unit module.",
+   "uses": [
+    "def-sfb-integral-section-action-transport",
+    "def-sfb-integral-completed-coefficient-transport",
+    "def-weil-pbc-integral-stratified-perfect-models",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-completed-realization-regular"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the constant scalar maps through the absolute-value-to-spectral-norm point comparison. The normalized integral constant-section comparison agrees with this map on sheafified constant generators. Its prescribed equations at every positive quotient agree with those defining adicDatumScalar, hence limit.hom_ext identifies the maps into the completed coefficient ring. Expand completedSectionIso and cancel its point and completed comparison isomorphisms. The underlying-ring image of purCoefficientIso is the fixed integralDetailedCoefficientComparison, giving equality of the two transported scalar sections.",
+   "uses": [
+    "lem-sfb-integral-constant-section-projection",
+    "lem-sfb-integral-models-flat-residue",
+    "lem-pe-integral-normalized-restriction-squares",
+    "lem-sf-finite-discrete-normalized-encoding",
+    "def-sfb-integral-completed-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Maps from the unit module are determined by their value at one. The scalar calculations and coefficient-section equality therefore identify the two conjugated endomorphisms. Compose one regular-value isomorphism with the inverse of the other and cancel their inverses to obtain the required intertwining equation for every scalar, including zero and on the empty scheme.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-scalar-finite-presentation",
+  "lem-weil-pbc-regular-extension-comparison",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "def-sfb-integral-section-action-transport",
+  "def-sfb-integral-completed-coefficient-transport",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-weil-pbc-completed-realization-regular",
+  "lem-sfb-integral-constant-section-projection",
+  "lem-sfb-integral-models-flat-residue",
+  "lem-pe-integral-normalized-restriction-squares"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), regular scalar calculation using the existing normalized constant-section projections and completedKoszulOne scalar formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension sends the regular module to the regular module naturally in scalar endomorphisms",
+   "results": "Generic extension-of-scalars and regular-module APIs; no theorem for the fixed integral comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the repository's normalized coefficient and section-module APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.regular",
+   "results": "CategoryTheory.Mod.regular and regular module hom extensionality.",
+   "date": "2026-10-26",
+   "verdict": "Generic regular-module APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "regularExtensionIso|sectionModuleRegularIso|ringModuleUnitIso|integral_constant_section_projection",
+   "results": "Repository contains the normalized regular-module and section-unit APIs used by the proof plan.",
+   "date": "2026-10-26",
+   "verdict": "No existing theorem states this fixed integral comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSectionRegularScalars",
+  "date": "2026-10-26",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-integral-section-regular-scalars",
+   "place": "Proof step 1, with scalar naturality isolated before the rank-one endomorphism reduction",
+   "via": [
+    "lem-sfb-integral-section-regular-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSectionRegularScalarsScalar",
+  "file": "lean/Sheaf/Paper/IntegralSectionRegularScalarsScalar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralSectionScalars.scalarComparison",
+  "statement": "theorem scalarComparison (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) :\n    let A := Padic.coefficientExtensionIntegers l E\n    let R := ModuleCat.of A (ULift.{u + 1} A)\n    let F :=\n      (letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n       continuousScalarFunctor A) ⋙\n        (upperStarFromPoint X).mapMod (DerivedNakayama.integerRing l E) ⋙\n        integralSectionFunctor l E X ⋙\n        SheafOfModules.restrictScalars.{u + 1}\n          (Scheme.integralDetailedCoefficientComparison X l E).hom\n    let G :=\n      ModuleCat.restrictScalars.{u + 1}\n        (ULift.ringEquiv : Scheme.PbcIntegralRing l E ≃+* A).toRingHom ⋙\n      Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)\n    ∃ e : F.obj R ≅ G.obj R,\n      ∀ a : A,\n        F.map (ModuleCat.ofHom ((ULift.moduleEquiv (R := A) (M := A)).symm.toLinearMap.comp\n          ((LinearMap.mulLeft A a).comp\n            (ULift.moduleEquiv (R := A) (M := A)).toLinearMap))) ≫ e.hom =\n          e.hom ≫ G.map (ModuleCat.ofHom\n            ((ULift.moduleEquiv (R := A) (M := A)).symm.toLinearMap.comp\n              ((LinearMap.mulLeft A a).comp\n                (ULift.moduleEquiv (R := A) (M := A)).toLinearMap)))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T182210-L-3536650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T194447-L-2369875",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

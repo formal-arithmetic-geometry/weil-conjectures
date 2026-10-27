@@ -1,0 +1,402 @@
+{
+ "id": "lem-trf-frobenius-root-coordinate-test",
+ "kind": "statement",
+ "title": "Weak stability tested on the first Frobenius root field",
+ "statement": "Let $K$ be a field [def-weil-field] of positive characteristic $p$, with a nontrivial real-valued multiplicative nonarchimedean absolute value $|\\cdot|$. In an algebraic closure $\\overline K$, put $K_1=\\{z\\in\\overline K:z^p\\in K\\}$ and $N(z)=|z^p|^{1/p}$. Assume that for every finite-dimensional $K$-linear subspace $V\\subseteq K_1$ and every basis $v_1,\\ldots,v_r$ of $V$ there are real $c_V,C_V>0$ such that $$c_V\\max_i|a_i|\\le N(\\sum_i a_iv_i)\\le C_V\\max_i|a_i|\\qquad(a_i\\in K).$$ For $V=0$, the empty sum and maximum are zero. Then, for every finite field extension $L/K$ and every basis $w_1,\\ldots,w_d$ of $L$, its minimal-polynomial spectral norm $s_{L/K}$ [lem-trf-incomplete-spectral-algebra-norm] satisfies $$c\\max_i|b_i|\\le s_{L/K}(\\sum_i b_iw_i)\\le C\\max_i|b_i|\\qquad(b_i\\in K)$$ for some real $c,C>0$. No completeness of $K$, finiteness of $K_1/K$, or separability of $L/K$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Theorem 3.5.3/1, printed p.154 (scan PDF p.162), with Definition 3.5.2/1: finite-dimensional coordinate formulation of weak cartesianness. Primary-source indexed online text read 2026-10-25; local archival PDF WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "The characteristic $p$ of a field is prime. The identities $(x+y)^p=x^p+y^p$ and $(xy)^p=x^py^p$ show that $K_1$ is a field containing $K$, and that $N$ is a definite multiplicative ultrametric absolute value extending $|\\cdot|$: for example $N(x+y)^p\\le\\max(N(x)^p,N(y)^p)$ and $N(ax)^p=|a|^pN(x)^p$. Its restriction to $K$ is nontrivial. Apply [lem-sfb-normed-field-completion] to $K$ and $(K_1,N)$, obtaining complete normed fields $H=\\widehat K$ and $H_1=\\widehat {K_1}$. The isometry $K\\to K_1$ extends to an isometric field embedding $H\\to H_1$: send a Cauchy sequence in $K$ to the same sequence in $K_1$. Equal classes have differences tending to zero; conversely an image of norm zero has original norm zero. Sums and products of representatives give the field-map identities. The ultrametric inequalities pass to limits in both completions.",
+   "uses": [
+    "lem-sfb-normed-field-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Remark preceding Theorem 3.5.3/1 and the theorem, printed p.154 (scan p.162): completion characterization and first-root criterion. Agent expansion through Stacks 030W and finite-dimensional linear algebra; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Use [def-weil-vector-space-scalar-extension] to form the commutative algebra $B=K_1\\otimes_K H$, and define $j:B\\to H_1$ by $z\\otimes h\\mapsto zh$, with the embeddings from step 1. This is a well-defined algebra map by bilinearity and the displayed tensor multiplication. Every $u\\in B$ is a finite sum of pure tensors. Choose a $K$-basis $v_1,\\ldots,v_r$ of the span of their first factors and rewrite $u=\\sum_i v_i\\otimes h_i$. Choose sequences $a_{i,m}\\in K$ converging to $h_i$, possible by the definition of $H$. The assumed lower bound for this particular finite-dimensional span gives $$N(\\sum_i a_{i,m}v_i)\\ge c_V\\max_i|a_{i,m}|.$$ Finite sums and the absolute value are continuous, so passage to the limit in $H_1$ gives $$|j(u)|_{H_1}\\ge c_V\\max_i|h_i|_H.$$ Thus $j(u)=0$ forces all $h_i=0$ and hence $u=0$. This includes the empty span. Since a field has no nonzero nilpotents, injectivity of $j$ shows that $B$ is reduced: $u^m=0$ implies $j(u)^m=0$, then $j(u)=0$, then $u=0$.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Remark preceding Theorem 3.5.3/1 and the theorem, printed p.154 (scan p.162): completion characterization and first-root criterion. Agent expansion through Stacks 030W and finite-dimensional linear algebra; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Interchange tensor factors to identify $H\\otimes_K K_1$ with $B$, by $h\\otimes z\\mapsto z\\otimes h$. It is reduced by step 2. Apply [lem-trf-first-root-tensor-reduced-test] with $k=K$, $F=H$, and $E=L$. Its first-root field is exactly the given $K_1$, the prime characteristic hypothesis holds, and it requires no algebraicity of $H/K$. Therefore $A=L\\otimes_K H$ is reduced, after interchanging factors once more. This argument applies to every finite $L/K$, including purely inseparable extensions.",
+   "uses": [
+    "lem-trf-first-root-tensor-reduced-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030W, lemma-characterize-separable-field-extensions, (3) implies (4)."
+   }
+  },
+  {
+   "text": "Fix any given basis $w_1,\\ldots,w_d$ of $L/K$. By [def-weil-vector-space-scalar-extension], $w_i\\otimes1$ form an $H$-basis of $A$, so $\\dim_H A=d\\ge1$ and the map $L\\to A$, $z\\mapsto z\\otimes1$, is injective. By [lem-weil-pbc-finite-dim-algebra-artinian], $A$ is Artinian. Its reducedness from step 3 lets us apply [lem-sfb-reduced-artinian-residue-product], obtaining the canonical product of residue fields $A\\simeq\\prod_{j=1}^r E_j$. Here $r\\ge1$, since $A\\ne0$; each quotient $E_j$ is spanned over $H$ by the images of the $d$ basis vectors, hence is finite-dimensional over $H$. The structural map $H\\to E_j$ is a unital field map and therefore injective; the product isomorphism is an $H$-algebra isomorphism because each coordinate is the quotient map.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Remark preceding Theorem 3.5.3/1 and the theorem, printed p.154 (scan p.162): completion characterization and first-root criterion. Agent expansion through Stacks 030W and finite-dimensional linear algebra; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "For each finite field extension $E_j/H$, [lem-trf-spectral-norm-algebraic-extension] supplies its multiplicative ultrametric spectral norm $s_j$, since $H$ is complete and nontrivially valued. Put $Q(a)=\\max_j s_j(a_j)$ on the product, and transport it to $A$. This is definite, ultrametric, scalar homogeneous, submultiplicative, satisfies $Q(1)=1$, and $Q(a^m)=Q(a)^m$ for $m\\ge1$, by the same identities in each component and the nonempty finite maximum. In particular $A$ is a finite-dimensional Hausdorff topological $H$-vector space: the norm inequalities give continuity of addition, and $$Q(ha-h_0a_0)\\le\\max(|h|Q(a-a_0),|h-h_0|Q(a_0))$$ gives continuity of scalar multiplication.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Remark preceding Theorem 3.5.3/1 and the theorem, printed p.154 (scan p.162): completion characterization and first-root criterion. Agent expansion through Stacks 030W and finite-dimensional linear algebra; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-dimensional-linear-map-continuous] to the $H$-linear coordinate maps for the basis $w_i\\otimes1$ of $(A,Q)$. The base $H$ is complete with a nontrivial absolute value, the source is finite-dimensional and Hausdorff by steps 4–5, and the target $H$ is a topological vector space. Thus there is $\\delta>0$ such that $Q(a)<\\delta$ implies $\\max_i|a_i|<1$. Choose $t\\in H$ with $0<\\rho=|t|<1$, replacing a nontrivially valued element by its inverse if necessary. For $a\\ne0$, choose $m\\in\\mathbf Z$ so that $\\rho\\delta\\le\\rho^mQ(a)<\\delta$. Applying the preceding implication to $t^ma$ gives $\\max_i|a_i|<\\rho^{-m}\\le Q(a)/(\\rho\\delta)$. The case $a=0$ is immediate. Consequently $$c\\max_i|a_i|\\le Q(\\sum_i a_i(w_i\\otimes1))\\le C\\max_i|a_i|$$ with $c=\\rho\\delta>0$ and $C=\\max_i Q(w_i\\otimes1)>0$; the upper bound is the finite ultrametric triangle inequality.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Remark preceding Theorem 3.5.3/1 and the theorem, printed p.154 (scan p.162): completion characterization and first-root criterion. Agent expansion through Stacks 030W and finite-dimensional linear algebra; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Restrict $Q$ to $L\\hookrightarrow A$ and write $M(z)=Q(z\\otimes1)$. By step 5 and injectivity in step 4, $M$ is a definite, normalized, power-multiplicative ultrametric $K$-algebra norm. Step 6 restricted to coefficients in $K$ gives its two-sided bounds for the originally specified basis $w_i$. All hypotheses of [lem-trf-product-topology-spectral-uniqueness] therefore hold with $N=M$, without any completeness assumption on $K$ or separability assumption on $L/K$. It gives $M=s_{L/K}$. Substitution in those same bounds proves exactly the claimed inequalities for this arbitrary finite extension and this arbitrary basis.",
+   "uses": [
+    "lem-trf-product-topology-spectral-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Remark preceding Theorem 3.5.3/1 and the theorem, printed p.154 (scan p.162): completion characterization and first-root criterion. Agent expansion through Stacks 030W and finite-dimensional linear algebra; archival PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normed-field-completion",
+  "def-weil-vector-space-scalar-extension",
+  "lem-trf-first-root-tensor-reduced-test",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-trf-product-topology-spectral-uniqueness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Remark preceding Theorem 3.5.3/1 and the theorem, printed p.154 (scan p.162): completion characterization and first-root criterion. Agent expansion through Stacks 030W and finite-dimensional linear algebra; archival PDF WANTED. The indexed primary text was read online; this explicit completion proof follows the characterization in its preceding remark rather than the printed perfect-closure induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonarchimedean field of characteristic p is weakly stable if every finite dimensional subspace of its pth root field has norm equivalent to a basis maximum coordinate norm",
+   "results": {
+    "t": "2026-10-24T16:13:59Z",
+    "tool": "leanfinder",
+    "query": "A nonarchimedean field of characteristic p is weakly stable if every finite dimensional subspace of its pth root field has norm equivalent to a basis maximum coordinate norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "IsUltrametricDist.isPowMul_invariantExtension",
+     "spectralNorm.nontriviallyNormedField",
+     "Module.Basis.norm_isNonarchimedean"
+    ],
+    "digest": "0cdbc72754ba6a15"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the spectral-norm hits give norm axioms or require CompleteSpace K for finite-dimensional norm topology; completion and separability hits do not give the Frobenius-root test over an incomplete field. No root-coordinate weak-stability criterion was found under either phrasing."
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.?[Cc]artesian|weak.?stability|b.separable|[Ss]eparable.*[Cc]ompletion|[Cc]ompletion.*[Ss]eparable",
+   "results": {
+    "t": "2026-10-24T16:15:15Z",
+    "tool": "grep",
+    "query": "weakly.?[Cc]artesian|weak.?stability|b.separable|[Ss]eparable.*[Cc]ompletion|[Cc]ompletion.*[Ss]eparable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/MeasureTheory/Measure/SeparableMeasure.lean",
+     "Mathlib/Topology/UniformSpace/Completion.lean",
+     "Mathlib/Topology/UniformSpace/Completion.lean",
+     "Mathlib/Topology/UniformSpace/Completion.lean",
+     "Mathlib/Topology/Bases.lean"
+    ],
+    "digest": "33b6eabf6bbdec4e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the spectral-norm hits give norm axioms or require CompleteSpace K for finite-dimensional norm topology; completion and separability hits do not give the Frobenius-root test over an incomplete field. No root-coordinate weak-stability criterion was found under either phrasing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If all finite dimensional subspaces of the pth root field of a nonarchimedean field have equivalent coordinate and root norms then every finite spectral extension has equivalent coordinate norm",
+   "results": {
+    "t": "2026-10-24T16:15:16Z",
+    "tool": "leansearch",
+    "query": "If all finite dimensional subspaces of the pth root field of a nonarchimedean field have equivalent coordinate and root norms then every finite spectral extension has equivalent coordinate norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm",
+     "spectralAlgNorm",
+     "spectralNorm_unique_of_finiteDimensional_normal",
+     "spectralNorm.completeSpace",
+     "norm_root_le_spectralValue",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm_eq_invariantExtension"
+    ],
+    "digest": "caec418edc0318a4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the spectral-norm hits give norm axioms or require CompleteSpace K for finite-dimensional norm topology; completion and separability hits do not give the Frobenius-root test over an incomplete field. No root-coordinate weak-stability criterion was found under either phrasing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"IsPurelyInseparable\"",
+   "results": {
+    "t": "2026-10-24T16:15:16Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"IsPurelyInseparable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the spectral-norm hits give norm axioms or require CompleteSpace K for finite-dimensional norm topology; completion and separability hits do not give the Frobenius-root test over an incomplete field. No root-coordinate weak-stability criterion was found under either phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valued field has separable completion if finite subspaces of its Frobenius root field have continuous coordinate functionals, hence all finite spectral extensions have the vector space topology",
+   "results": {
+    "t": "2026-10-24T16:15:16Z",
+    "tool": "leanfinder",
+    "query": "A valued field has separable completion if finite subspaces of its Frobenius root field have continuous coordinate functionals, hence all finite spectral extensions have the vector space topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Valued.completable",
+     "WithAbs.instIsSeparable",
+     "spectralNorm.completeSpace",
+     "Valued.valuedCompletion",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "CompletableTopField",
+     "NormedField.instCompletableTopField",
+     "Valuation.instRankOneCompletion"
+    ],
+    "digest": "d2664d1a352daacf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the spectral-norm hits give norm axioms or require CompleteSpace K for finite-dimensional norm topology; completion and separability hits do not give the Frobenius-root test over an incomplete field. No root-coordinate weak-stability criterion was found under either phrasing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonarchimedean field is weakly stable if every finite dimensional subspace of the field of pth roots has norm equivalent to the coordinate maximum norm",
+   "results": {
+    "t": "2026-10-24T16:44:53Z",
+    "tool": "leanfinder",
+    "query": "A nonarchimedean field is weakly stable if every finite dimensional subspace of the field of pth roots has norm equivalent to the coordinate maximum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm.nontriviallyNormedField",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.normedField",
+     "IsUltrametricDist.isPowMul_invariantExtension"
+    ],
+    "digest": "21de19a2bd292fa0"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectral norm axioms and normedSpace declarations do not prove the first-root criterion over an incomplete base; normedSpace requires CompleteSpace K."
+  },
+  {
+   "tool": "grep",
+   "query": "weakly.?cartesian|weak.?stability|frobenius.*spectralNorm|spectralNorm.*frobenius",
+   "results": {
+    "t": "2026-10-24T16:46:10Z",
+    "tool": "grep",
+    "query": "weakly.?cartesian|weak.?stability|frobenius.*spectralNorm|spectralNorm.*frobenius",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectral norm axioms and normedSpace declarations do not prove the first-root criterion over an incomplete base; normedSpace requires CompleteSpace K."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weak stability of an incomplete valued field follows from coordinate norm bounds for all finite subspaces of its first Frobenius root field",
+   "results": {
+    "t": "2026-10-24T16:46:10Z",
+    "tool": "leansearch",
+    "query": "Weak stability of an incomplete valued field follows from coordinate norm bounds for all finite subspaces of its first Frobenius root field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "norm_root_le_spectralValue",
+     "NormedField.instCompletableTopField",
+     "Valued.toNontriviallyNormedField",
+     "spectralNorm.completeSpace",
+     "Valued.completable",
+     "NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace",
+     "Valued.toNormedField.norm_lt_one_iff",
+     "IsNonarchimedeanLocalField.instCompleteSpace"
+    ],
+    "digest": "645f2f6f5b5b61c0"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectral norm axioms and normedSpace declarations do not prove the first-root criterion over an incomplete base; normedSpace requires CompleteSpace K."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"IsPurelyInseparable\"",
+   "results": {
+    "t": "2026-10-24T16:46:11Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"IsPurelyInseparable\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectral norm axioms and normedSpace declarations do not prove the first-root criterion over an incomplete base; normedSpace requires CompleteSpace K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the first purely inseparable root field has the vector space topology on finite subspaces then every finite extension has its spectral norm topology equivalent to a basis coordinate norm",
+   "results": {
+    "t": "2026-10-24T16:46:11Z",
+    "tool": "leanfinder",
+    "query": "If the first purely inseparable root field has the vector space topology on finite subspaces then every finite extension has its spectral norm topology equivalent to a basis coordinate norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm_eq_invariantExtension",
+     "spectralAlgNorm_of_finiteDimensional_normal_def",
+     "spectralNorm.normedField",
+     "spectralNorm.normedSpace",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralAlgNorm_def",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal"
+    ],
+    "digest": "8c382963862a446f"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectral norm axioms and normedSpace declarations do not prove the first-root criterion over an incomplete base; normedSpace requires CompleteSpace K."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fraction-root-module-weak-stability-criterion",
+  "date": "2026-10-25",
+  "group": "Q17"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Theorem 5.3.1/1 and its proof, printed pp.212–213 (scan PDF pp.218–219); Definition 3.5.2/1, printed p.153 (scan PDF p.161), gives weak stability. The displayed inequalities spell out the weakly cartesian topology for a finite basis. Proof of BGR 5.3.1/1: Lemma 3.5.3/2, printed p.155 (scan PDF p.163), with the definition of b-separable modules and weak stability in 3.5.2/1. Supporting input to BGR Lemma 3.5.3/2: Theorem 3.5.3/1 reduces weak stability to weak cartesianness of the first Frobenius root field. The current blueprint proof uses contracting correspondences; this retains the inherited historical analytic input below node level.",
+   "via": [
+    "lem-trf-fraction-root-module-weak-stability-criterion",
+    "lem-trf-tate-fraction-weak-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-frobenius-root-coordinate-test",
+  "worker": "stage1",
+  "summary": "Preserved every hypothesis and conclusion. Proved first-root tensor reducedness by passing the assumed finite-coordinate lower bounds to completions; used the distinct algebraic first-root geometric-reducedness criterion, then existing Artinian product and finite-dimensional continuity results to construct a coordinate-equivalent power-multiplicative norm. Existing spectral uniqueness identifies it with the specified norm. One new statement-only algebraic node; no Lean or compiler invoked.",
+  "blueprint": "Historical analytic supporting branch under lem-trf-local-term-locality, at BGR Theorem 3.5.3/1 and its preceding completion-characterization remark. The latest blueprint lem-trf-local-term-locality proof instead uses contracting correspondences; no unit or chapter route is replaced. Searches for weak stability, weakly cartesian, Frobenius root, first root, spectral norm and 030W found no matching blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NR-b1f1729ba",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-b1f1729ba (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, the new node and every cited statement. The item statement is unchanged except for the added stmt_dep def-weil-algebraic-closure. It is BGR 3.5.3/1 (K^{1/p} weakly cartesian ⇒ K weakly stable) in coordinates, proved by an agent because the BGR PDF is WANTED. Steps checked: (1) Frobenius makes N a multiplicative ultrametric absolute value; the completions H→H_1 come from the normed-field-completion Mathlib leaf. (2) Passing the assumed lower bound c_V to the limit gives |j(u)|≥c_V max|h_i|, so K_1⊗H→H_1 is injective and K_1⊗H is reduced; the empty span is fine. (3) The new node with k=K, F=H, E=L gives L⊗H reduced; transcendental H is allowed. (4) A=L⊗_K H has dimension d≥1, is Artinian and reduced, so A≅∏E_j by IsArtinianRing.equivPi, with r≥1 and each E_j finite over H. (5) Q=max s_j, using the spectral norm over the complete nontrivial H, is a power-multiplicative ultrametric norm; scalar multiplication is continuous. (6) LinearMap.continuous_of_finiteDimensional gives δ, and integer t^m scaling gives c=ρδ; the inequality directions are correct and only the complete base H is used. (7) M(z)=Q(z⊗1) meets every hypothesis of the same-unit lem-trf-product-topology-spectral-uniqueness, which I also checked is plausibly true (spectral radius on ∏E_j), so M=s_{L/K}. No cycle; the route stays in sk-i-curve-zero; no tool_uses; no SGA. New node lem-trf-first-root-tensor-reduced-test: true as Stacks 030W (3)⇒(4) (algebra.tex 10360–10407; also 030V (2)⇒(5)). It meets B1–B9: statement only, self-contained, correct stmt_deps, logged searches. My check of Mathlib GeometricallyReduced.lean:50–110 finds no first-root criterion, and the F_p(t) inseparable example does not meet its premise. It is purely algebraic and smaller than the item (not D1). Duplicate rg over 030V/030W/^{1/p}: the nearest node, lem-trf-geometric-reducedness-finite-inseparable-test (030V (1)⇔(5)), assumes reducedness after all finite purely inseparable extensions and so does not give the new node in one line. The report should have listed it (advisory). No fixes."
+ }
+}

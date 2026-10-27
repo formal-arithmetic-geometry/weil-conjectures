@@ -33,61 +33,42 @@
  ],
  "proof": [
   {
-   "text": "Choose the simultaneous effective normalized models of [lem-trf-effective-comparison-realization-models]. On a flat-term K-flat representative their finite systems are exactly $P_{F,n}$, $Q_{f,F}(P)$ and $Q_{h,k,E}(P)$ with the actual quotient transitions. The primitive operation realizations and whole-system counits have the stated K-injective and quotient/zero-shifted-component normalization; their resolution independence supplies the same choices for all inputs. Constructibility and completeness hold at every intermediate object.",
+   "text": "Choose the ambient normalized primitive family. For each coefficient field apply the geometric realization theorem to that same family; for each embedding apply mixed coherence and scalar coherence. No independently chosen coefficientwise systems are used.",
    "uses": [
-    "lem-trf-effective-comparison-realization-models"
+    "lem-trf-ambient-comparison-system-existence",
+    "lem-trf-normalized-integral-geometric-coherence",
+    "lem-trf-normalized-integral-mixed-coherence",
+    "lem-trf-normalized-integral-scalar-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Final common-stage transport sentence; assembly of the extracted normalized realization, substitution and strict-system coherence lemmas."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-trf-counit-realization-substitution] to the words $U_hU_k$, $S_{L/E}U_f$ and $U_{f,L}S_{L/E}$. The three resulting counit substitutions are precisely $\\eta$, $\\lambda$ and $\\mu$ in the statement. Thus they are natural isomorphisms, and $c^E=\\eta^{-1}R\\lim(c_{h,k,\\bullet})$ and $a_f=\\mu^{-1}\\lambda$ are their specified conjugates of the finite compositor and scalar/pullback comparison. Use the same construction over $L$.",
+   "text": "Use the ordinary mixed, coefficient-unit and coefficient-tower laws from quotient-system coherence. Derive the ordinary mixed scheme-unit law from the composition law at two identities and the geometric unital laws: the identity pullback is isomorphic to the identity, hence faithful, and cancellation gives the unitor equation. The generic cancellation and equality transport are proved in Lean.",
    "uses": [
-    "lem-trf-counit-realization-substitution"
+    "lem-trf-quotient-system-mixed-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Final common-stage transport sentence; assembly of the extracted normalized realization, substitution and strict-system coherence lemmas."
-   }
+   "elementary": true
   },
   {
-   "text": "The mixed square, geometric associativity and units, and coefficient unit/tower equations hold on entire quotient diagrams by [lem-trf-quotient-system-mixed-coherence]. Under [lem-trf-counit-realization-substitution], applying $F_{h,L}$ to $a_k$ becomes termwise $U_{h,L}(\\kappa_k)$, and applying scalar extension to $c^E$ becomes $S_{L/E,Z}(c^E_\\bullet)$. Substitute the conjugation formulas in these diagram equations and cancel adjacent inverse comparison maps; functorial $R\\lim$ then gives exactly the displayed integral square and all its finite iterations. The same substitution identifies the coefficient unit with multiplication/completeness and the scalar associator with the ordinary derived tensor associator conjugated by the specified $\\chi$, as required. Equality of scheme morphisms is retained.",
-   "uses": [
-    "lem-trf-quotient-system-mixed-coherence",
-    "lem-trf-counit-realization-substitution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Final common-stage transport sentence; assembly of the extracted normalized realization, substitution and strict-system coherence lemmas."
-   }
-  },
-  {
-   "text": "The raw scalar-localization functor of [def-weil-rationalization-karoubi] preserves composition, identities and equality, so applying it to these integral equations gives the asserted rationalized equations. All prior constructions used entire quotient diagrams and K-flat models, with no finite Tor-amplitude condition.",
+   "text": "Fill every field of IntegralComparisonRealizationCoherence with these results. Applying the rationalization functor to the integral mixed equation gives rationalScalarComposition.",
    "uses": [
     "def-weil-rationalization-karoubi"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-    "place": "Final common-stage transport sentence; assembly of the extracted normalized realization, substitution and strict-system coherence lemmas."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-trf-effective-comparison-realization-models",
-  "lem-trf-counit-realization-substitution",
+  "lem-trf-ambient-comparison-system-existence",
+  "lem-trf-normalized-integral-geometric-coherence",
+  "lem-trf-normalized-integral-mixed-coherence",
+  "lem-trf-normalized-integral-scalar-coherence",
   "lem-trf-quotient-system-mixed-coherence",
   "def-weil-rationalization-karoubi"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
-  "place": "Last sentence: common-stage transport and scalar/composition coherence"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0941; assembly of independent geometric, mixed and scalar normalization results."
  },
  "mathlib_searches": [
   {
@@ -169,44 +150,47 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-794d19a24 (reviewer sub-agent of L); spot-checked: Re-split answering the human note (2026-10-21 14:08: at least 2 nodes, parent ≤3000 characters). Statement, stmt_deps and Lean record are byte-identical to live and side-live; only proof, proof_deps and split_report change. No parallel re-split and no SGA. 3 statement-only nodes of comparable size (3257, 3985 and 3093 characters); parent 7485→2103 characters in 4 steps. Every old step is carried. Old steps 1, 3 and 4 (K-flat quotient models, effectivity, independence of representatives) go to effective-comparison-realization-models. Old steps 2, 5 and 6 (ε naturality, substitution) and the χ parts of 7 and 8 go to counit-realization-substitution. The mixed square, associativity/units and scalar tower of old steps 6–8 go to quotient-system-mixed-coherence. Rationalization is parent step 4, elementary. Checked: r_{O,C}=L(O e_C)∘b is well typed and an iso on normalized systems, since K⊗^L A_n≅C_n through the ϖ^n resolution. η, λ and μ equal r on the words U_hU_k, S U_f and U_{f,L}S by naturality of b, using the κ model identification for λ. The χ-associator direction is correct, and χ_{E/E} is the completeness map. I checked the mixed square, scalar unit and scalar tower on generators (γ_hγ_k(1⊗x); γ(sx); γ(cb⊗x)), and normalization and constructibility of U_f R K and S R K, including ramified same-index quotients without flatness. Sources: Stacks 099N (2),(5) at proetale.tex:4336, 0941 at sites-cohomology.tex:5067, and 0D6D at sites-cohomology.tex:3658; route is prop-trf-karoubi-independence (last sentence). Duplicate check: node 2 extends Q79 lem-pur-completed-operation-tower-substitution (one ring, pullback/tensor) by ramified scalar change, mixed words and χ. Node 3 extends lem-pod-finite-system-pullback-coherence (associativity only) and lem-pur-scalar-extension-tower-coherence (reductions with tensor, not the two-map mixed square). These are generalizations, not restatements, so they are advisory for the provers. Batch 5: the three flagged citations are the new nodes. Their content is generic coherence of the integral pullback and scalar comparisons, not part of the trace formula or Poincaré duality. Their stmt_deps are only definitions and generic lemmas already in the base item's closure, so the closure gains nothing, consistent with the Q60 ruling. Accepted. tool_uses: none."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-00a3d7a2b",
-  "group": "N2",
+  "reviewer": "NT-stage2-cc-ba3b27df0",
+  "group": "NJ",
   "result": "pass",
-  "note": "Read the item node, the 3 delivered modules, the 2 new definition nodes, the report and the key dependency declarations in the side clone. The node changes only in lean and in stmt_deps (+2 new nodes, per 1(A)); lean.statement is verbatim and the declarations lists match the files. Clause by clause the Lean matches the node: l prime, E,L finite over Q_l with iota, quotient levels n+1; l invertible via residue-field Invertible binders, same as constructibleIntegralPullback; recorded objects (integralDerivedPullback, integralScalarExtension, sfIntegralConstructibleCategory); eta/lambda/mu built from the derived const-lim counit with the K-injective normalization and the reduction-counit formula; c^E = eta^-1 o Rlim(c) after the realization; a = mu^-1 o lambda; displayed scalar/composition equation with correct order; associativity, both units, eqToHom transport for every finite F; E=L identity via chi and the ordinary unit; associator = chi-conjugate of the ordinary associator; system-level equations before realization; raw rationalized equation; no Tor-amplitude hypothesis. The existential D is not free: realizations are fixed by normalizations over every flat-term K-flat representative, and presentations exist by CoefficientReductionModels; Roos comparison fixed on K-injectives; Classical.choice of DerivedChangeOfRingsCochainModel is unique up to unique iso (same landed pattern). No hollow data; 17 sorries, all named theorems with source and proof docstrings. Common universe u inherited from sfIntegralConstructible; helpers keep t,u separate; the p=l+1 argument is unused. New nodes have the 5 fields and 4 searches and are cited. Line widths, docstrings and blueprint tags OK. nt_compile.py --json on all 3 modules, two runs: rc=0, no errors or warnings, 10.5/15.3/28.1 s within 60 s, reproducing the recorded times. Minor: the Second reading section is a thin self-check, compensated by the full worker mapping and this review."
+  "note": "Read node, both delivered modules, dep JSON diff (lean-only), report, and the dependency declarations in side-live. Clause match: separated finite-type X0/Y0, f is the Over.pullback base change, z≫f=x; c^E pinned to Fib((rational compositor z,f).symm ≫ eqToIso h); b = β^{-1} then Fib(a_z); scalar square b_z≫J_z(a_f)≫c^L = (c^E⊗L)≫b_x for all F≤G; unit and tower at both z and x; γ on the quotient common-stage categories with HEq to pointFdQbarStage(Shrink-ext c^E), types propositionally equal via commonStagePullbackObject/pointQbarFibreObj, so the HEq is genuine. Mechanical finding: sfRationalScalarUnit/Comp are ∃!.choose of lem-weil-scalar-extension-composition, i.e. objects the theorem constructs → PASS on that point. §1(B) dep module integralPullbackComparisonRealization_simultaneous (∃C ∀E L ι Coherence) is correct: the node specifies one system across towers. ∃C is usable by the existential parent; same shape as landed automorphismConstructibleStage_comparison_system. Advisory: ∀C strengthening; dep lean.declarations now lists only the new theorem; sibling b uses LocalFrobeniusTransport.rationalScalar instead of the def-node owner. No hollow defs, sorry only, docstrings OK. No compile run (no changes); worker scompile and deliver2 dry run OK."
  },
  "lean": {
-  "module": "Sheaf.Paper.IntegralPullbackComparisonRealization",
-  "declaration": "WeilConjectures.integralPullbackComparisonRealization",
-  "file": "lean/Sheaf/Paper/IntegralPullbackComparisonRealization.lean",
-  "statement": "theorem integralPullbackComparisonRealization (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) : ∃ D : IntegralComparisonSystem l, IntegralComparisonRealizationCoherence l E L ι D",
-  "branch": "newtargets-dag",
-  "by": "N2",
-  "date": "2026-10-18",
-  "existing": false,
+  "module": "Sheaf.Paper.SimultaneousIntegralPullbackComparisons",
+  "declaration": "WeilConjectures.integralPullbackComparisonRealization_simultaneous",
   "declarations": [
-   "WeilConjectures.integralComparisonPullbackCounit",
-   "WeilConjectures.integralComparisonScalarCounit",
-   "WeilConjectures.IntegralComparisonCoefficientData",
-   "WeilConjectures.IntegralComparisonScalarData",
-   "WeilConjectures.IntegralComparisonSystem",
-   "WeilConjectures.integralComparisonEta",
-   "WeilConjectures.integralComparisonLambda",
-   "WeilConjectures.integralComparisonMu",
-   "WeilConjectures.integralComparisonComposition",
-   "WeilConjectures.integralComparisonScalar",
-   "WeilConjectures.integralComparisonConstructibleScalar",
-   "WeilConjectures.integralComparisonUnit",
-   "WeilConjectures.integralComparisonScalarUnit",
-   "WeilConjectures.integralComparisonScalarAssociator",
-   "WeilConjectures.integralComparisonSequenceSiteSmall",
-   "WeilConjectures.IntegralComparisonCompositionLaws",
-   "WeilConjectures.integralComparisonScalarSquareLeft",
-   "WeilConjectures.integralComparisonScalarSquareRight",
-   "WeilConjectures.IntegralComparisonRealizationCoherence",
-   "WeilConjectures.integralPullbackComparisonRealization"
-  ]
+   "WeilConjectures.integralPullbackComparisonRealization_simultaneous"
+  ],
+  "file": "lean/Sheaf/Paper/SimultaneousIntegralPullbackComparisons.lean",
+  "statement": "theorem integralPullbackComparisonRealization_simultaneous (l : ℕ) [Fact l.Prime] : ∃ C : IntegralComparisonSystem.{u} l, ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L), IntegralComparisonRealizationCoherence l E L ι C",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B): the existing theorem has coefficient fields E,L and inclusion iota outside its existential comparison-system quantifier, so it does not supply the single system simultaneously coherent for all inclusions that the node states (arbitrary finite iterations and coefficient towers). This module publicly imports the unchanged original module, retaining every normalized counit, quotient-diagram construction and coherence structure, and states their simultaneous existence with C outside all coefficient quantifiers. No new arbitrary comparison maps or mathematical assumptions are introduced."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261025T162139-L-324177",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

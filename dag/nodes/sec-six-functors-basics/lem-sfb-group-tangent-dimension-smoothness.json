@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-group-tangent-dimension-smoothness",
+ "kind": "statement",
+ "title": "Dimension and the smoothness criterion at the identity of an algebraic group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and $J$ an affine $F$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Let $e\\in J(F)$ be the identity, and let $T_{J/F,e}$ be its tangent space [def-sc-scheme-tangent-space]. Write $\\dim J$ for its topological Krull dimension [def-kun-topological-krull-dimension]. Both this dimension and $\\dim_F T_{J/F,e}$ are finite nonnegative integers, and\n$$\\dim J\\leq\\dim_F T_{J/F,e}.$$\nEquality holds if and only if $J$ is smooth over $F$ [def-sbc-smooth-morphisms]. The identity component is not required to be all of $J$, and reducedness of $J$ is not assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.37, printed p.18, using homogeneity 1.28 and Appendix A.52; dimension paragraph following 1.36, printed p.17."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sc-scheme-tangent-space",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite-type affine neighbourhood $U=\\operatorname{Spec}A$ of $e$, as supplied by the definition of locally finite type. The identity section induces an $F$-algebra augmentation $a:A\\to F$; it is surjective since $a(c)=c$ for $c\\in F$. Thus $\\mathfrak q=\\ker a$ is maximal and $A/\\mathfrak q=F$. The affine-stalk comparison identifies $R=\\mathcal O_{J,e}$ with $A_{\\mathfrak q}$, with residue field $F$. A field is Noetherian (its only ideals are $0$ and itself); finite-type Noetherian permanence and localization permanence therefore make $R$ Noetherian. Write $\\mathfrak m$ for its maximal ideal. The group identity dimension theorem applies to this finite-type group without reducedness or smoothness and gives $\\dim J=\\dim R$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne Proposition 1.37 and dimension paragraph before it, printed pp.17-18; Stacks Tags 01HV (lemma-spec-sheaves), 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Apply the fundamental inequality and regularity criterion to the Noetherian local ring $R$: $E=\\mathfrak m/\\mathfrak m^2$ is a finite-dimensional $F$-space, $\\dim R\\leq\\dim_F E$, and equality is equivalent to regularity of $R$. Apply rational tangent-cotangent duality to $\\mathrm{id}_J$ at $e$ to identify $T_{J/F,e}$ with $E^*$. Finite linear duality gives $\\dim_F T_{J/F,e}=\\dim_F E$ and finite-dimensionality. Together with Step 1 this proves the asserted inequality and shows that equality holds exactly when $R$ is regular. Since $R$ has residue field $F$, its spectrum is nonempty, so $0\\leq\\dim R$; the finite upper bound makes $\\dim J=\\dim R$ a finite nonnegative integer as well.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-sfb-linear-dual-dimension-rank"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne Appendix A.51-A.52, printed pp.577-578; Stacks Tags 0B2E (lemma-tangent-space-rational-point), 00KU (definition-regular-local and preceding fundamental inequality)."
+   }
+  },
+  {
+   "text": "Suppose equality holds. Step 2 makes $A_{\\mathfrak q}=R$ regular. Its residue field is $F$, a finite separable extension of itself of degree one. Apply the regular-separable affine smooth-neighbourhood theorem to the chart $U$, the finite-type $F$-algebra $A$ and $\\mathfrak q$. It supplies an open neighbourhood $V\\subseteq U\\subseteq J$ of $e$ whose structure morphism to $\\operatorname{Spec}F$ is smooth.",
+   "uses": [
+    "lem-sfb-regular-separable-affine-smooth-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne Proposition 1.28(b)-(c), printed p.14; Stacks Tags 00TV (lemma-separable-smooth), 00TB (definition-smooth-at-prime), 01V6 (lemma-smooth-characterize)."
+   }
+  },
+  {
+   "text": "For every $g\\in J(F)$, left translation $L_g$ is an $F$-scheme isomorphism, with inverse $L_{g^{-1}}$ and $L_g(e)=g$. Thus $V_g=L_g(V)$ is an open neighbourhood of $g$ isomorphic over $F$ to $V$, so is smooth by invariance of smoothness under isomorphisms. Let $W=\\bigcup_{g\\in J(F)}V_g$. Every closed point of $J$ is $F$-rational by the closed-point residue-field theorem, hence belongs to $W$. If the closed subset $Z=J\\setminus W$ were nonempty, the Jacobson density theorem applied to $Z$ would give a closed point of $J$ in $Z$, a contradiction. Therefore the $V_g$ cover $J$; smoothness local on the source gives that $J/F$ is smooth. This argument includes every connected component.",
+   "uses": [
+    "lem-sc-translation-automorphism",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne Proposition 1.28(b) implies (a), using homogeneity 1.8, printed pp.9 and 14; Stacks Tags 00FV (theorem-nullstellensatz), 0478 (lemma-locally-finite-type-Jacobson), 01V6 (lemma-smooth-characterize)."
+   }
+  },
+  {
+   "text": "Conversely suppose $J/F$ is smooth. Restriction to the affine neighbourhood $U$ of Step 1 is smooth. The affine scheme/ring smoothness equivalence makes $A$ a smooth $F$-algebra. The smooth-over-field regular-local theorem then makes $A_{\\mathfrak q}=R$ regular. Step 2 gives $\\dim J=\\dim_F T_{J/F,e}$, completing the equivalence.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-over-field-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Milne Proposition 1.28(a) implies (c), and Proposition 1.37; Stacks Tags 01V6 (lemma-smooth-characterize), 02H6 (lemma-smooth-formally-smooth), 00TT (lemma-characterize-smooth-over-field)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-ag-group-identity-local-dimension",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-sc-translation-automorphism",
+  "lem-sfb-linear-dual-dimension-rank",
+  "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 1.37; dimension paragraph before it; Proposition 1.28; Appendix A.51-A.52. Supplemented by Stacks Tags 00FN, 00KU, 0B2E, 00TV, 00TT, 01V6, 0478 and 00FV for the named intermediate results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finrank.*[Tt]angent|[Tt]angent.*finrank|[Ss]mooth.*[Tt]angent|[Tt]angent.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-23T21:30:49Z\", \"tool\": \"grep\", \"query\": \"finrank.*[Tt]angent|[Tt]angent.*finrank|[Ss]mooth.*[Tt]angent|[Tt]angent.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"18270f09a4de5b3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie groups and smooth-algebra cotangent rank statements do not give the finite-type group-scheme tangent criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group smooth if and only if dimension equals dimension Lie algebra tangent space at identity",
+   "results": "{\"t\": \"2026-10-23T21:30:50Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic group smooth if and only if dimension equals dimension Lie algebra tangent space at identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupLieAlgebra\", \"LieAddGroup.toContMDiffAdd\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.smoothLocus_eq_univ_iff\", \"contMDiff_mulInvariantVectorField\", \"LieGroup\", \"Algebra.Smooth.of_equiv\"], \"digest\": \"09ccecc5ff6d6ff9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie groups and smooth-algebra cotangent rank statements do not give the finite-type group-scheme tangent criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tangent\", \"smooth\"",
+   "results": "{\"t\": \"2026-10-23T21:30:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"tangent\\\", \\\"smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.Extension.equivH1CotangentOfFormallySmooth\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth_symm\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth_toLinearMap\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth_apply\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\"], \"digest\": \"76b5950aa24beed7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie groups and smooth-algebra cotangent rank statements do not give the finite-type group-scheme tangent criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group over an algebraically closed field has dimension at most its identity tangent space dimension, with equality if and only if it is smooth",
+   "results": "{\"t\": \"2026-10-23T21:30:52Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group over an algebraically closed field has dimension at most its identity tangent space dimension, with equality if and only if it is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.instIsStandardSmoothOfRelativeDimensionOfNatNatOfSubsingleton\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\"], \"digest\": \"0747670fe09f4bbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie groups and smooth-algebra cotangent rank statements do not give the finite-type group-scheme tangent criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*[Tt]angent|[Tt]angent.*finrank|dim.*LieAlgebra|LieAlgebra.*dim",
+   "results": "{\"t\": \"2026-10-23T21:31:41Z\", \"tool\": \"grep\", \"query\": \"finrank.*[Tt]angent|[Tt]angent.*finrank|dim.*LieAlgebra|LieAlgebra.*dim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/SpanRankOperations.lean\", \"Mathlib/Algebra/Module/SpanRankOperations.lean\", \"Mathlib/Algebra/Module/SpanRankOperations.lean\", \"Mathlib/Algebra/Module/SpanRankOperations.lean\", \"Mathlib/Algebra/Module/SpanRankOperations.lean\", \"Mathlib/Algebra/Lie/Basis/Prod.lean\", \"Mathlib/Algebra/Lie/Basis/Prod.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"9ba3788b1d0ba5fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie groups and smooth-algebra cotangent rank statements do not give the finite-type group-scheme tangent criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type group scheme over an algebraically closed field smoothness is equivalent to the Krull dimension being the dimension of the dual number tangent vectors at the identity",
+   "results": "{\"t\": \"2026-10-23T21:31:44Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type group scheme over an algebraically closed field smoothness is equivalent to the Krull dimension being the dimension of the dual number tangent vectors at the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.smooth_iff\"], \"digest\": \"e84b1e23e63f195b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: manifold Lie groups and smooth-algebra cotangent rank statements do not give the finite-type group-scheme tangent criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*[Tt]angent|[Tt]angent.*finrank|[Ss]mooth.*[Tt]angent|[Tt]angent.*[Ss]mooth",
+   "results": "{\"t\": \"2026-10-23T22:21:04Z\", \"tool\": \"grep\", \"query\": \"finrank.*[Tt]angent|[Tt]angent.*finrank|[Ss]mooth.*[Tt]angent|[Tt]angent.*[Ss]mooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"18270f09a4de5b3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned standard-smooth/cotangent or smooth-algebra declarations do not state the group dimension inequality together with the arbitrary-characteristic equality criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a finite type algebraic group is at most tangent space dimension and equality characterizes smoothness",
+   "results": "{\"t\": \"2026-10-23T22:21:04Z\", \"tool\": \"leansearch\", \"query\": \"Dimension of a finite type algebraic group is at most tangent space dimension and equality characterizes smoothness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.mk\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.Smooth.flat\", \"RingHom.isStandardSmoothOfRelativeDimension_algebraMap\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\"], \"digest\": \"d729bb30d0e90264\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned standard-smooth/cotangent or smooth-algebra declarations do not state the group dimension inequality together with the arbitrary-characteristic equality criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tangent\", \"smooth\"",
+   "results": "{\"t\": \"2026-10-23T22:21:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"tangent\\\", \\\"smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.Extension.equivH1CotangentOfFormallySmooth\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth_symm\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth_toLinearMap\", \"Algebra.Extension.H1Cotangent.equivOfFormallySmooth_apply\", \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\"], \"digest\": \"76b5950aa24beed7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned standard-smooth/cotangent or smooth-algebra declarations do not state the group dimension inequality together with the arbitrary-characteristic equality criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite type group scheme over an algebraically closed field is smooth if and only if its tangent space at the identity has dimension equal to its Krull dimension",
+   "results": "{\"t\": \"2026-10-23T22:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"An affine finite type group scheme over an algebraically closed field is smooth if and only if its tangent space at the identity has dimension equal to its Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Algebra.smooth_iff\"], \"digest\": \"c50ac62467e37a83\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned standard-smooth/cotangent or smooth-algebra declarations do not state the group dimension inequality together with the arbitrary-characteristic equality criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic group smoothness is detected by regularity at the identity and embedding dimension equals local dimension",
+   "results": "{\"t\": \"2026-10-23T22:21:06Z\", \"tool\": \"leanfinder\", \"query\": \"For an algebraic group smoothness is detected by regularity at the identity and embedding dimension equals local dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.smooth_iff\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.smoothLocus_eq_univ\"], \"digest\": \"9d2d830fb14235ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned standard-smooth/cotangent or smooth-algebra declarations do not state the group dimension inequality together with the arbitrary-characteristic equality criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cartan-containing-normalizer-smooth",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically. Supporting lemma for Milne Theorem 17.48: Lemma 17.47, printed p.366; normalizer representability in Section 1i, Proposition 1.79 and Corollary 1.80, printed pp.30--31; Lie normalizer identity Proposition 10.34, printed pp.197--198. Auxiliary for Lemma 17.47: Proposition 1.37, printed p.18, using homogeneity 1.28 and Appendix A.52; dimension paragraph following 1.36, printed p.17.",
+   "via": [
+    "lem-sfb-cartan-containing-normalizer-smooth",
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-tangent-dimension-smoothness",
+  "worker": "stage1",
+  "summary": "Proved the unchanged statement by identity-local dimension, finite cotangent duality, the regular-local embedding-dimension criterion, and the regular-separable smooth neighbourhood followed by translation and Jacobson density. All ingredients reuse existing nodes; no new nodes or restricted characteristic assumptions. Distinguished global dimension at the group identity from the overgeneralized scheme sentence in Milne 1.37.",
+  "blueprint": "Realizes the recorded auxiliary use of Milne 1.37 in Milne 17.47: dimension comparison and equality forcing smoothness for the scheme-theoretic normalizer. Retains the inherited alteration/GIT/central-cover ancestry and unit. blueprint_refs.py ancestor prints None for the inherited ancestry, so from.node and via are retained. Latest blueprint sk-thm-sf-ctf-stability and the matrix-group dimension proof were read; the latter has characteristic-zero hypotheses and is not the same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic local dimension at a group identity equals global dimension used as a black box in Milne 1.37/1.28; no statement of this unit replaces this algebraic-geometric input."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Generic tangent maps at rational points are dual to cotangent maps used as a black box in Milne 1.37/1.28; no statement of this unit replaces this algebraic-geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic local rings of a smooth algebra over a field are regular used as a black box in Milne 1.37/1.28; no statement of this unit replaces this algebraic-geometric input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic a ring map is smooth iff the morphism of spectra is smooth used as a black box in Milne 1.37/1.28; no statement of this unit replaces this algebraic-geometric input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-group-identity-local-dimension",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-2e6141f1b",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-2e6141f1b (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 (dimension paragraph p.17, Prop 1.37 p.18, which uses 1.28 and A.52) and all 16 cited node statements in full. The statement and stmt_deps are unchanged. There are no new nodes and no repair note, so this is a first split of the node Q18 created on 2026-10-24. Proof check: Step 1 takes an affine chart Spec A with augmentation kernel q maximal and residue field F, identifies the stalk with A_q (01HV), gets Noetherian from 00FN, and cites lem-ag-group-identity-local-dimension, which needs only a finite-type group and no reducedness or smoothness. Step 2 uses the fundamental inequality and regularity criterion of 00KU, applies the tangent-cotangent duality of 0B2E to id_J at a rational point, and uses the Mathlib dual-dimension leaf; together these give both finiteness clauses and the inequality. Step 3 applies the 00TV smooth neighbourhood; its hypotheses hold (S of finite type, S_q regular, residue field F/F finite separable). Step 4 shows each translate V_g is smooth by clause (c) of the restrict node, every closed point is rational (00FV), and Jacobson density (0478) makes the V_g cover J; smoothness is then local on the source. Step 5 restricts to the affine chart, uses the ring-map/affine smoothness equivalence and 00TT to get A_q regular, then returns to Step 2. Edge cases checked: trivial group, finite constant groups, G_a, G_m, alpha_p, mu_p, disconnected non-reduced products. The worker's note that Milne's 'In general' sentence fails on non-equidimensional schemes (Spec F ⊔ A^1) is correct and is avoided by citing the group-specific local-dimension node. The four declared tool_uses are generic and accepted; the translation node is slopmaster2-closed and the other off-unit nodes are Mathlib leaves. A duplicate scan of all DAG statements finds only lem-ag-smooth-lie-local-dimension, which assumes smoothness, so it is not a duplicate. No SGA source is used. review_split.py reports every cited id missing because it does not follow the chapter symlinks; that is a tool artifact."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TangentDimensionSmoothness",
+  "declaration": "AlgebraicGeometry.GrpObj.tangent_dimension_smoothness",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.tangent_dimension_smoothness",
+   "AlgebraicGeometry.GrpObj.identitySchemeTangentSpaceModule"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TangentDimensionSmoothness.lean",
+  "statement": "theorem tangent_dimension_smoothness (F : Type u) [Field F] [IsAlgClosed F] (G : Over (Spec (.of F))) [GrpObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : Module.Finite F (schemeTangentSpace F G.left G.hom (onePoint G)) ∧ (∃ d : ℕ, topologicalKrullDim G.left = (d : WithBot ℕ∞)) ∧ topologicalKrullDim G.left ≤ (Module.finrank F (schemeTangentSpace F G.left G.hom (onePoint G)) : WithBot ℕ∞) ∧ (topologicalKrullDim G.left = (Module.finrank F (schemeTangentSpace F G.left G.hom (onePoint G)) : WithBot ℕ∞) ↔ Smooth G.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q67",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helper instance restricts the recorded residue-field tangent-space action along the canonical structural map F → κ(e). The theorem measures the existing dual-number tangent space over F; no new tangent-space definition or extra hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58d01e3c0",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read item node, Milne 1.37/1.28 source place, all 7 stmt_dep lean records, delivered module and report (Worker report + Second reading present). Every clause matches: IsAlgClosed field; GrpObj over Spec F; IsAffine; LocallyOfFiniteType ∧ QuasiCompact (recorded finite-type conjunction; QC redundant given affine, advisory); onePoint identity; recorded schemeTangentSpace with F-action via Module.compHom along toStalk≫stalkMap≫residue (same r as existing project tangent statements, real data, no new notion); Module.Finite, ∃ d:ℕ for topologicalKrullDim, inequality, equality ↔ Smooth G.hom. No connectedness/reducedness assumed; edge cases trivial/finite constant/G_a/G_m/α_p/μ_p consistent. Node diff vs side-live = lean only; statement verbatim; docstrings with source, blueprint id and 5 proof steps; lines ≤100; only sorry; private imports are proof_dep modules. Not landed live yet. No compile needed (no change); worker scompile clean."
+ }
+}

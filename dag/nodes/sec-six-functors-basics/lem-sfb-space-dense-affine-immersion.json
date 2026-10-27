@@ -1,0 +1,356 @@
+{
+ "id": "lem-sfb-space-dense-affine-immersion",
+ "kind": "statement",
+ "title": "Dense affine immersion in a finite-type algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], put $B=\\operatorname{Spec}A$ with a specified map to $S$ [def-weil-affine-spectrum], and let $f:X\\to B$ be separated of finite type [def-sfb-space-morphism-properties]. There exist a quasi-compact open subspace $U\\subseteq X$, dense in the atlas point topology [def-a1-space-point-topology], an integer $n\\geq0$, and an immersion $a:U\\to\\mathbf A^n_B$ over $B$ [def-nagata-relative-affine-space]. Here an open subspace is represented on every scheme test by an open immersion [def-weil-open-immersion], and an immersion is represented on every scheme test by a closed immersion followed by an open immersion [def-weil-closed-immersion]. In particular $U$ is a scheme. The space $X$ and the base ring need not be reduced, and $X$ need not be irreducible or flat over $B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 088N (lemma-embedding-into-affine-over-qs), specialized to a separated finite-type space over an affine Noetherian scheme. Finite presentation and Noetherianity used in this specialization are spaces-morphisms.tex Tags 06G4 (lemma-noetherian-finite-type-finite-presentation), 04ZK (lemma-locally-finite-type-locally-noetherian), and 04ZL (lemma-finite-presentation-noetherian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-nagata-relative-affine-space",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The scheme morphism $B\\to S$ is separated by [lem-weil-pbc-affine-source-morphism-separated]. By the Yoneda identification $h_B\\times_{h_S}h_B=h_{B\\times_SB}$, the diagonal of $h_B\\to h_S$ is represented by the scheme diagonal $B\\to B\\times_SB$, a closed immersion; its pullback along any scheme $T\\to B\\times_SB$ is the scheme fibre product $B\\times_{B\\times_SB}T\\to T$, a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. So $B\\to S$ is separated as a morphism of algebraic spaces. The given $f$ is separated. By [lem-sfb-space-quasiseparated-test-calculus], both morphisms are quasi-separated and their composite $X\\to S$ is quasi-separated, i.e. $\\Delta:X\\to X\\times_SX$ is quasi-compact. For a scheme $T\\to X\\times_SX$ the pullback $P=X\\times_{X\\times_SX}T$ is a scheme (the diagonal of an algebraic space is representable), and for a quasi-compact open $W\\subseteq T$ the open $P\\times_TW$ is a quasi-compact algebraic space, i.e. receives a surjective etale map from a quasi-compact scheme; its image is all of $P\\times_TW$, which is therefore quasi-compact. Thus the diagonal satisfies the scheme-test hypothesis of [lem-sfb-quasiseparated-space-dense-scheme-open]. Apply that node to obtain an open immersion $j:V\\to X$ with $V$ a scheme and $|V|$ open dense in $|X|$.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-quasiseparated-test-calculus",
+    "lem-sfb-quasiseparated-space-dense-scheme-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 088N, lemma-embedding-into-affine-over-qs, first paragraph: pass to a dense open scheme; relative quasi-separatedness is sufficient."
+   }
+  },
+  {
+   "text": "The affine scheme $B=\\operatorname{Spec}A$ is locally Noetherian by the one-member affine covering in [pqf-def-locnoeth], and is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Finite type in [def-sfb-space-morphism-properties] includes quasi-compactness; testing $f$ on the affine target $B$ gives quasi-compactness of $X$. For every etale scheme chart $T\\to X$, the chart test for $f$, with target chart $\\mathrm{id}_B$, says that $T\\to B$ is locally of finite type. Thus [pqf-lem-locnoeth-lft] makes every such $T$ locally Noetherian. This is precisely local Noetherianity on etale charts. Apply [lem-sfb-noetherian-space-topology] to conclude that $|X|$ is Noetherian. Hence its open subspace $|V|$ is Noetherian: an increasing chain of opens of $V$ is an increasing chain of opens of $X$, since $V$ is open.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sfb-space-morphism-properties",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-noetherian-space-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04ZK, lemma-locally-finite-type-locally-noetherian; spaces-properties.tex lemma-Noetherian-topology, and Tag 088N first paragraph."
+   }
+  },
+  {
+   "text": "By [lem-sc-noetherian-finite-irreducible-components] and [lem-sc-irreducible-components-cover], write $|V|=C_1\\cup\\cdots\\cup C_r$ as its finitely many distinct irreducible components. Put $O_i=V\\setminus\\bigcup_{k\\ne i}C_k$. This is open, contained in $C_i$, and nonempty: otherwise the irreducible set $C_i$ would be contained in a finite union of other components and hence in one of them, contradicting maximality and distinctness. The elementary finite-union assertion follows by induction from the definition of irreducibility. Pick $x_i\\in O_i$ and use [lem-weil-pbc-affine-opens-basis] to choose an affine open $W_i$ with $x_i\\in W_i\\subseteq O_i$. The $W_i$ are pairwise disjoint. Each nonempty open $W_i$ of the irreducible space $C_i$ is dense in $C_i$: it meets every other nonempty open by irreducibility. Thus $U=\\bigcup_iW_i$ is open dense in $V$ and consequently in $X$. If $V$ is empty take $r=0$ and $U=\\varnothing$.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 088N, lemma-embedding-into-affine-over-qs, first paragraph: remove component intersections and shrink each remaining irreducible open to an affine; no reducedness assumption."
+   }
+  },
+  {
+   "text": "Write $W_i\\simeq\\operatorname{Spec}R_i$. The open subscheme $U$ with its restricted structure sheaf is the coproduct of the $W_i$: a morphism out of $U$ is exactly a family of morphisms out of its disjoint open pieces, glued uniquely on their empty overlaps. Apply [lem-weil-pbc-finite-affine-coproduct-spectrum] to identify $U\\simeq\\operatorname{Spec}(\\prod_iR_i)$. In particular $U$ is affine and quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. The inclusions $U\\subseteq V\\subseteq X$ give an open subspace of $X$, because after any scheme test they are successive inclusions of open subschemes with restricted structure sheaves. The empty product is the zero ring, so this also covers $X=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "lemma-disjoint-union-affines; its finite iteration, equivalently the finite coproduct-spectrum isomorphism."
+   }
+  },
+  {
+   "text": "The open immersion $U\\to X$ is representable etale: on each scheme test it is an open immersion, which is etale by [lem-weil-pbc-open-immersion-etale]. Apply the chart definition [def-sfb-space-morphism-properties] to $U\\to X$, $\\mathrm{id}_B:B\\to B$ and $f|_U:U\\to B$. It gives local finite type of this scheme morphism. Both $U$ and $B$ are affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; [lem-weil-pbc-qcqs-morphism-permanence](1) makes $U\\to B$ quasi-compact. Therefore $U\\to B$ is of finite type. The first conclusion of [lem-chow-affine-immersion] now gives an integer $n\\geq0$ and a closed immersion $U\\hookrightarrow\\mathbf A^n_B$ over $B$, hence the requested immersion (take the open factor to be the identity). This uses the full structure sheaves of the chosen opens throughout; it takes no reduction and assumes neither irreducibility nor flatness of $X$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-chow-affine-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 088N, lemma-embedding-into-affine-over-qs, final paragraph, with affine scheme base: finite-type affine schemes embed closed in affine space; morphisms.tex lemma-quasi-affine-finite-type-over-S."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-quasiseparated-test-calculus",
+  "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sfb-space-morphism-properties",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-noetherian-space-topology",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-chow-affine-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 088N, lemma-embedding-into-affine-over-qs, proof specialized to an affine Noetherian scheme base: the base is already a scheme, so the middle reduction of the base is unnecessary; finite disjoint affine opens are affine by schemes.tex lemma-disjoint-union-affines."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite presentation algebraic space over a Noetherian algebraic space has a dense open subspace which immerses into a relative affine space",
+   "results": "8 hits. AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; scheme immersion criteria, affine-space finite presentation and basic Proj opens do not construct this dense immersion of an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dense open part of a finitely presented algebraic space over a Noetherian base admits an immersion into affine n space",
+   "results": "8 hits. AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion, AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; scheme immersion criteria, affine-space finite presentation and basic Proj opens do not construct this dense immersion of an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion",
+   "results": "12 hits. AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Scheme.Hom.coborderRange, AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; scheme immersion criteria, affine-space finite presentation and basic Proj opens do not construct this dense immersion of an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|dense.*(affine|immersion)|exists.*immersion",
+   "results": "5 hits. Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; scheme immersion criteria, affine-space finite presentation and basic Proj opens do not construct this dense immersion of an algebraic space."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|dense.*affine|exists.*[Ii]mmersion",
+   "results": {
+    "t": "2026-10-23T22:05:24Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|dense.*affine|exists.*[Ii]mmersion",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/LocalIso.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean"
+    ],
+    "digest": "406e0e7dc5644d9b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; scheme immersion/Noetherian/quasi-affine facts do not construct a dense schematic open in an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian algebraic space has a dense open subscheme affine over an affine base",
+   "results": {
+    "t": "2026-10-23T22:05:24Z",
+    "tool": "leansearch",
+    "query": "A Noetherian algebraic space has a dense open subscheme affine over an affine base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+     "AlgebraicGeometry.IsNoetherian",
+     "AlgebraicGeometry.noetherianSpace_of_isAffine",
+     "AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion",
+     "AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian",
+     "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover",
+     "AlgebraicGeometry.noetherianSpace_of_isAffineOpen",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top"
+    ],
+    "digest": "6e6d189467f8b1df"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; scheme immersion/Noetherian/quasi-affine facts do not construct a dense schematic open in an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion",
+   "results": {
+    "t": "2026-10-23T22:05:25Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsImmersion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsImmersion.instIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.IsImmersion.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.IsImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.IsImmersion",
+     "AlgebraicGeometry.Scheme.Hom.coborderRange",
+     "AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType",
+     "AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion",
+     "AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion"
+    ],
+    "digest": "94173deabf8898fd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; scheme immersion/Noetherian/quasi-affine facts do not construct a dense schematic open in an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type algebraic space over an affine Noetherian scheme has a dense affine open subscheme embedding in finite dimensional affine space",
+   "results": {
+    "t": "2026-10-23T22:05:25Z",
+    "tool": "leanfinder",
+    "query": "A separated finite type algebraic space over an affine Noetherian scheme has a dense affine open subscheme embedding in finite dimensional affine space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.IsAffine",
+     "AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom"
+    ],
+    "digest": "0fd60184babc50b5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; scheme immersion/Noetherian/quasi-affine facts do not construct a dense schematic open in an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi separated algebraic space admits a dense open subscheme and a Noetherian scheme has a dense affine open subset",
+   "results": {
+    "t": "2026-10-23T22:05:53Z",
+    "tool": "leanfinder",
+    "query": "Every quasi separated algebraic space admits a dense open subscheme and a Noetherian scheme has a dense affine open subset",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_of_isAffine",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine",
+     "AlgebraicGeometry.IsAffineOpen.isQuasiSeparated",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens"
+    ],
+    "digest": "b131450f0227e9ba"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; scheme immersion/Noetherian/quasi-affine facts do not construct a dense schematic open in an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-chow-dense-modification",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, choose a dense affine-space immersion using 088N.",
+   "via": [
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-dense-affine-immersion",
+  "worker": "stage1",
+  "summary": "Checked the full nonreduced statement and proved it by the affine-base specialization of 088N: dense open scheme, Noetherian topology, disjoint affine opens in component interiors, finite affine coproduct, polynomial embedding. All inputs already exist; no new nodes. No exact project attachment or Mathlib match. Statement and statement dependencies unchanged.",
+  "blueprint": "Supporting input of Tag 088S, proof choosing a dense affine-space immersion by 088N, in the inherited Chow modification / proper-support formal existence prerequisite of the current latest sk-thm-sf-ctf-stability direct-image/compactification paragraph. The ancestor command returns None; retain the inherited null ancestor and via chain, with its explicit source place. Steps 1-4 realize 088N first paragraph and step 5 its final paragraph over the already-affine base.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme local-Noetherian inheritance used on etale charts; the unit has no replacement and the compactification route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-182a8e04f",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-182a8e04f (reviewer sub-agent of L); spot-checked: Read 088N in full; this split specializes it to the affine Noetherian base B=Spec A. It skips the base-thickening reduction, and it replaces the 'details omitted' immersion of disjoint affine spaces with one affine U = Spec of the product of the R_i (sigmaSpec leaf). The resulting U is quasi-compact, dense and immerses into A^n_B, as the item requires. No new nodes, no duplicates (grep for 088N and key phrases), no cycle; statement and stmt_deps unchanged. Step 1 FIX (C1): turning the scheme separatedness of B->S into separatedness as algebraic spaces uses base change of closed immersions, which had no citation. I added the Mathlib leaf lem-weil-pbc-closed-immersion-base-change and wrote out the two-line argument that atlas-sense quasi-compactness of the diagonal (def-sfb-stack-qcqs-morphism) gives the scheme-test hypothesis of lem-sfb-quasiseparated-space-dense-scheme-open. Only proof[0] and proof_deps change. Step 2 checked: quasi-compactness of the morphism (def-sfb-proper-curve-moduli) pulled back along B gives |X| compact; charts with target id_B are locally of finite type, hence locally Noetherian (01T6, tool use accepted); so |X| and the open |V| are Noetherian. Step 3 checked: O_i nonempty by maximality; the W_i are disjoint; each is dense in C_i, so U is dense. Tested on crossing lines, a nonreduced irreducible scheme and the empty case. Step 4: gluing on disjoint opens plus the coproduct-Spec leaf. Step 5: chart test plus qcqs permanence give finite type; lem-chow-affine-immersion (Lean-closed in slopmaster2, a tool) gives the closed immersion into A^m. Batch-5: the three flagged cites reach the trace-formula chapter only through the general definition def-trf-algebraic-space, which the item statement already cites; neither assumption gives these results and none is a step in their proofs, so all three are accepted. The fix adds no trace-formula-chapter citation. Off-unit cites are all Mathlib leaves, definitions or Lean-closed nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceDenseAffineImmersion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_dense_affineSpace_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceDenseAffineImmersion.lean",
+  "statement": "theorem exists_dense_affineSpace_immersion {S : Scheme.{u}} (A : Type u) [CommRing A] [IsNoetherianRing A] (b : Spec (.of A) ⟶ S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace (Over.mk b)) (hsep : MapIsSeparated f) (hft : MapIsFiniteType f) : ∃ (U : Over S) (j : yoneda.obj U ⟶ X.obj.obj) (g : U ⟶ Over.mk b) (n : ℕ) (a : U.left ⟶ AffineSpace (ULift.{u} (Fin n)) (Spec (.of A))), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j ∧ CompactSpace U.left ∧ Dense (pointImage j) ∧ j ≫ f.hom.hom = yoneda.map g ∧ IsImmersion a ∧ a ≫ (AffineSpace (ULift.{u} (Fin n)) (Spec (.of A)) ↘ Spec (.of A)) = g.left",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59a14d036",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Clause-by-clause check of exists_dense_affineSpace_immersion against the node and Stacks 088N (spaces-limits.tex l.3089). Hypotheses: A commutative Noetherian, f : X ⟶ schemeSpace (Over.mk b) with MapIsSeparated and MapIsFiniteType (qc and chart-locally LFT), with no extra binders. Conclusion: U : Over S with a scheme-test open immersion j (same encoding as exists_dense_scheme_open), CompactSpace U.left, Dense (pointImage j), g pinned by j ≫ f = yoneda.map g, IsImmersion a into AffineSpace (ULift (Fin n)) (Spec A) over B; not stronger or weaker than the node. Edge cases (X empty, A zero, n = 0, non-reduced or reducible X, single universe u) are covered. lean.statement is verbatim in the file. The node changes only by the added lean field; no other changed nodes and no parallel landing. No defs, sorry only, docstrings carry the source place, blueprint tag and 5 proof steps, and the report has both required sections. Advisory: schemeSpace belongs to def-trf-scheme-algebraic-space, which is not in stmt_deps; the stmt_deps are unchanged from stage 1, as in Q133/Q148. No compile run (none required); no files changed."
+ }
+}

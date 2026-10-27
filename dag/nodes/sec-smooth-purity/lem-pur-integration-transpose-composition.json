@@ -1,0 +1,420 @@
+{
+ "id": "lem-pur-integration-transpose-composition",
+ "kind": "statement",
+ "title": "Composition and dualizing tensor calculus for integration transposes",
+ "statement": "Let $A$ be a finite commutative ring and let $X\\xrightarrow fY\\xrightarrow gZ$ be compactifiable separated finite-type maps between Noetherian schemes. Work in the ordinary small-etale derived categories [def-weil-pbc-derived-categories] with compact support $F_f=Rf_!$, $F_g=Rg_!$, $F_h=R(gf)_!$ and actual right adjoints $R_f,R_g,R_h$ [def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Use the proper/open triangle-normalized compositor $\\alpha:F_gF_f\\xrightarrow{\\sim}F_h$ [lem-amb-unbounded-compact-support-comparisons] and its adjunction-preserving right mate $c:R_h\\xrightarrow{\\sim}R_fR_g$, with the composite Hom bijection [def-weil-pbc-composite-adjunction].\n\nChoose $W_f\\in D(X_{\\mathrm{et}},A)$, $W_g\\in D(Y_{\\mathrm{et}},A)$ and traces $t_f:F_fW_f\\to A_Y$, $t_g:F_gW_g\\to A_Z$. Put $W_h=f^*W_g\\otimes W_f$, and choose $t_h:F_hW_h\\to A_Z$ satisfying\n$$t_h\\alpha_{W_h}=t_gF_g\\bigl((1\\otimes t_f)P_{f;W_g,W_f}^{-1}\\bigr).$$\nFor each $a=f,g,h$ write $P_{a;K,M}:K\\otimes_A^LF_aM\\to F_a(a^*K\\otimes_A^LM)$ for the canonical compact-support projection map, built from the proper projection map and the open-extension tensor comparison on a compactification [lem-amb-proper-coproducts-projection, lem-pur-etale-open-derived-tensor], with derived tensor [def-kun-derived-tensor]. Assume all canonical projection maps used with $W_f,W_g,W_h$ are invertible on all inputs. Let $\\gamma_{a,K}:a^*K\\otimes W_a\\to R_aK$ be the transpose of $(1_K\\otimes t_a)P_{a;K,W_a}^{-1}$ for $a=f,g,h$ [def-weil-pbc-adjunction-mate]. Let $a_K:h^*K\\otimes W_h\\xrightarrow{\\sim} f^*(g^*K\\otimes W_g)\\otimes W_f$ be reassociation. Then\n$$\\gamma_{h,K}=c_K^{-1}\\gamma_{f,R_gK}(f^*\\gamma_{g,K}\\otimes1_{W_f})a_K.$$\n\nSet $\\omega_f=R_fA_Y$. Let $\\theta_{f,L}:f^*L\\otimes\\omega_f\\to R_fL$ be the transpose of $(1_L\\otimes\\varepsilon_{f,A_Y})P_{f;L,\\omega_f}^{-1}$ whenever that projection map is invertible. Then\n$$\\theta_{f,L}(1\\otimes\\gamma_{f,A_Y})=\\gamma_{f,L}.$$\nFor the vector-bundle specialization $W_f=A_X(r)[2r]$, $W_g=A_Y(s)[2s]$, projection with $\\omega_f$ is invertible if $\\gamma_{f,A_Y}$ is invertible. The formula therefore uses precisely the orientation at the unit followed by the dualizing tensor map, including ambient inputs $R_gK$. The ordered twist/shift associators carry no block-interchange sign since $(-1)^{(2r)(2s)}=1$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, transposing ordered composite integrations and identifying the dualizing tensor map; old Step 6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "def-kun-derived-tensor",
+  "def-pur-compact-support-projection-map",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-tensor-unit",
+  "def-asd-finite-etale-tate-twist",
+  "def-sf-etale-support-compositor",
+  "def-pur-etale-exact-pullback-unit-composition-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the unchanged integration, exact unit/tensor comparison, reassociation and right-mate constructions, now publicly re-exported from the definition module. The statement and each defining term are unchanged.",
+   "uses": [
+    "def-pur-integration-transpose-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2, transposing ordered composite integrations and identifying the dualizing tensor map; old Step 6"
+   }
+  },
+  {
+   "text": "Unit normalization identifies orientation with the actual adjoint transpose of the trace. Thus F_f(orientation) followed by the counit is t_f. Naturality of the coefficient-first projection in its sheaf argument gives an inverse-projection square. Apply it to orientation, tensor the counit, and use this identity; left naturality and injectivity of the Hom equivalence give the orientation/theta clause.",
+   "uses": [
+    "lem-pur-integration-unit-normalization",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2, transposing ordered composite integrations and identifying the dualizing tensor map; old Step 6"
+   }
+  },
+  {
+   "text": "The ordered integration composition lemma gives the equality before transposing. Apply the composite-adjunction Hom bijection and the adjunction-preserving right-mate isomorphism to that equality. Projection naturality in the coefficient variable implies naturality of integration, hence naturality of gamma. Applying this to gamma_g moves R_f(gamma_g) across gamma_f and gives exactly the stated four-arrow composition formula.",
+   "uses": [
+    "lem-pur-iterated-integration",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2, transposing ordered composite integrations and identifying the dualizing tensor map; old Step 6"
+   }
+  },
+  {
+   "text": "The adopted source theorem isIso_projectionMap_of_finite makes every ordinary projection component an isomorphism. The coefficient-first projection is that component conjugated by the two canonical symmetries and the exact-pullback comparison, all isomorphisms. This proves the third clause for every L; its extra orientation, twist and shift hypotheses are retained unchanged. This uses the canonical chosen compactification and the existing finite projection theorem directly, rather than an auxiliary choice of projection isomorphism.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2, transposing ordered composite integrations and identifying the dualizing tensor map; old Step 6"
+   }
+  },
+  {
+   "text": "Rewrite the exponent ((2*r)*(2*s)) using multiplication associativity and pow_mul. Since (-1)^2=1, the final sign equality follows by simplification. No shift or block-comparison theorem is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2, transposing ordered composite integrations and identifying the dualizing tensor map; old Step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integration-transpose-data",
+  "lem-pur-integration-unit-normalization",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-pur-iterated-integration",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "lem-amb-proper-coproducts-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2, ordered integration and adjoint transposition; direct specialization of the adopted projection unit, associativity and braiding theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor projection formula composite integration counit transpose equals ordered composition of exceptional pullbacks",
+   "results": "CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.coev_ev_assoc; CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit; CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left_fst; CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left_snd; CategoryTheory.ExponentiableMorphism.coev_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "CategoryTheory.Adjunction.comp; CategoryTheory.Equivalence.trans_toAdjunction; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_unit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_unit_app_assoc; CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Cc]ompos|[Cc]ompos.*projection|dualizing",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/CategoryTheory/Comma/StructuredArrow/Functor.lean; Mathlib/CategoryTheory/Sums/Products.lean; Mathlib/CategoryTheory/Sums/Products.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizing tensor morphism carries the unit orientation to the integration transpose and composes via right adjoint compositor",
+   "results": "CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorRightHomEquiv_tensor; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.tensorLeftHomEquiv; CategoryTheory.tensorLeftHomEquiv_tensor; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integration transpose composition dualizing tensor morphism",
+   "results": "Module.Dual.transpose_apply; Module.Dual.transpose_comp; Module.Dual.transpose; LinearMap.dualMap_def; LinearEquiv.dualMap_trans; CategoryTheory.MonoidalClosed.compTranspose; CharacterModule.dual_comp; map_dualTensorHom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not give the stated ordinary-etale integration, derived scalar normalization, and specified projection/mate equations; abstract adjunction or module trace results give only constituent operations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of integration transposes under compact support exceptional adjunction and projection formula",
+   "results": {
+    "hits": 8,
+    "top": [
+     "MeasureTheory.integral_integral_swap_of_hasCompactSupport",
+     "ContinuousLinearMap.integral_comp_commSL",
+     "continuousOn_integral_bilinear_of_locally_integrable_of_compact_support",
+     "CompactlySupportedContinuousMap.integralLinearMap_apply",
+     "CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun",
+     "ContinuousLinearMap.integral_comp_comm'",
+     "MeasureTheory.integral_continuousLinearMap_prod'",
+     "ContinuousLinearMap.integral_id_map"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(assoc|unit)|projectionFormula|ProjectionFormula",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Cc]ompos|[Cc]ompos.*projection|dualizing",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/Topology/Path.lean",
+     "Mathlib/Topology/Algebra/ContinuousAffineEquiv.lean",
+     "Mathlib/Topology/PartialHomeomorph/Defs.lean",
+     "Mathlib/Topology/OpenPartialHomeomorph/Defs.lean",
+     "Mathlib/Topology/UniformSpace/Equiv.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/Algebra/Module/Multilinear/Basic.lean",
+     "Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoint transpose of composite trace with projection formula",
+   "results": {
+    "hits": 8,
+    "top": [
+     "ContinuousLinearMap.adjoint_comp",
+     "LinearMap.toMatrix_adjoint",
+     "LinearMap.adjoint_comp",
+     "Matrix.toLin_conjTranspose",
+     "Matrix.trace_conjTranspose",
+     "LinearMap.trace_comp_comm",
+     "Module.Dual.transpose_comp",
+     "LinearMap.trace_transpose"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Adjunction",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
+     "CategoryTheory.Adjunction.rightAdjointLaxMonoidal",
+     "CategoryTheory.Adjunction.IsMonoidal",
+     "CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal",
+     "CategoryTheory.Adjunction.instIsMonoidal",
+     "CategoryTheory.Adjunction.instIsMonoidal_1",
+     "CategoryTheory.Adjunction.isMonoidal_comp",
+     "CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": {
+    "hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.comp",
+     "CategoryTheory.Equivalence.trans_toAdjunction",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Adjunction.comp_counit_app",
+     "CategoryTheory.Adjunction.comp_unit_app",
+     "CategoryTheory.Adjunction.comp_counit_app_assoc",
+     "CategoryTheory.Adjunction.comp_unit_app_assoc",
+     "CategoryTheory.Adjunction.comp_counit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor action associativity of the compact support projection formula",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.MonoidalCategory.MonoidalLeftAction.tensor_actionHomRight_assoc",
+     "Algebra.TensorProduct.mul_assoc",
+     "TensorProduct.map_map_assoc",
+     "TensorProduct.map_map_comp_assoc_eq",
+     "TensorProduct.map_map_assoc_symm",
+     "TensorProduct.map_map_comp_assoc_symm_eq",
+     "TensorProduct.assoc_tensor''",
+     "Algebra.TensorProduct.assoc_tmul"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula inverse is a module functor action compatible with tensor products of two coefficients",
+   "results": {
+    "hits": 8,
+    "top": [
+     "lTensor.inverse",
+     "rTensor.inverse",
+     "Module.Invertible.rTensorInv_leftInverse",
+     "ModuleCat.FreeMonoidal.μIso_inv_freeMk",
+     "Rep.finsuppTensorRight_inv_hom",
+     "Rep.finsuppTensorLeft_inv_hom",
+     "rTensor.inverse_of_rightInverse",
+     "lTensor.inverse_of_rightInverse"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical compact support projection formula satisfies tensor associativity and tensor unit for ordinary etale derived categories",
+   "results": {
+    "hits": 8,
+    "top": [
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "LightCondensed.instMonoidalCategoryLightCondMod",
+     "HomologicalComplex.instHasTensorXTensorUnit",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned adjunction, monoidal action, tensor-module or analytic integration declarations do not state the ordinary-etale normalized compact-support integration transpose formulas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-vector-bundle-purity",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "paragraph 2, transposing ordered composite integrations and identifying the dualizing tensor map; old Step 6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-integration-transpose-composition",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Expanded the ordered integration-transpose calculation, the orientation-at-unit identity and projection invertibility transfer. Reused the existing general ringed-topos projection theorem and normalized tensor constraints; no new nodes. No Lean attachment states the whole item.",
+  "blueprint": "cor-pur-vector-bundle-purity.proof.md paragraph 2, transposing iterated integration; original sk-prop-an Step 6, and the dualizing-tensor identification needed at ambient R_gK.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-tensor-additive-constraints",
+    "why": "Generic normalization and resolving-tuple descent for the canonical derived associator, symmetry and shift comparisons; used as a black box within the unit integration route."
+   },
+   {
+    "node": "lem-pur-exact-pullback-signed-comparison",
+    "why": "Generic coherence of exact ordinary inverse-image tensor comparisons on unbounded derived inputs; used as a black box within the unit integration route."
+   },
+   {
+    "node": "lem-kun-derived-pullback-composition-monoidal",
+    "why": "Generic ordinary etale pullback composition and unit constraints; used as a black box within the unit integration route."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic canonical ordinary unbounded open-extension tensor comparison; used as a black box within the unit integration route."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic proper projection tensor law and naturality; the unit has no general ringed-topos coherence theorem; used as a black box within the unit integration route."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Generic counit definition of the ordinary proper projection map; used as a black box within the unit integration route."
+   },
+   {
+    "node": "lem-pur-total-tensor-signed-coherence",
+    "why": "Generic chain-level signed shift/block formula; used as a black box within the unit integration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-open-derived-tensor",
+  "def-kun-projection-formula-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-354092045",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-354092045 (reviewer sub-agent of L); spot-checked: I read every proof step and found no fault, so no fixes were written. The delivery has 0 new nodes. The item's statement and stmt_deps match the base byte for byte: they are the Q106 reviewer-FIX version, so nothing is weakened. There is no SGA citation and no repair note for this item. The source (main-20261015 cor-pur-vector-bundle-purity.proof.md ¶2) says only 'transposing'; the 8 steps write that calculation out, and the proof is marked agent-written. I re-derived each step by hand. Step 2 builds the compact-support projection tensor law from three cited facts: the first identity of lem-sfb-ringed-projection-tensor-composition, naturality of the proper projection, and the open two-coefficient law of Step 1. The unit law comes from the definition of PF plus lem-weil-pbc-adjunct-counit-identity. Step 3: εF(θ(1⊗v)) = (1⊗t_f)Q = u_{f,L}. Steps 4–5 combine the composite Hom bijection, naturality of Q_f along γ_g, the factorisation γ_g⊗t_f = γ_g(1⊗t_f), the tensor law at (g^*K, W_g, W_f), and naturality of Q_g along β. Step 6 inverts lem-amb-shriek-tensor-composition at W_h (the node states the inverse form), cancels α_{W_h} with the trace hypothesis, and identifies the transpose of c_Kγ_h as u_hα_S through the mate formula with L2=F_gF_f, L1=F_h; the h→fg direction checks out. Step 7 is a naturality square. Step 8: the sign (−1)^{(2r)(2s)} = +1 follows from the signed-coherence node. Small case f=g=id: both sides of the composition formula equal 1⊗t_g⊗t_f, and θ(1⊗t_f) = γ_{f,L}. A depth-first search over all dependencies found no cycle. Duplicate candidates checked: lem-pur-composition-tensor-mate and lem-pur-smooth-exceptional-tensor-pasting are narrower pro-étale D^b_ctf nodes, and lem-amb-vector-integration-tensor-counit makes a different claim. Accepted tool_uses: generic off-route nodes lem-sfb-ringed-projection-tensor-composition, lem-kun-derived-pullback-composition-monoidal, lem-pur-etale-open-derived-tensor and def-kun-projection-formula-map. One minor point needs no action: the hypothesis that all projection maps are invertible is redundant, because the proper projection and open comparison nodes already make them isomorphisms. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegrationTransposeComposition",
+  "declaration": "AlgebraicGeometry.Etale.IntegrationComposition.integrationTransposeComposition",
+  "declarations": [
+   "AlgebraicGeometry.Etale.IntegrationComposition.integrationTransposeComposition"
+  ],
+  "file": "lean/Sheaf/Paper/IntegrationTransposeComposition.lean",
+  "statement": "theorem integrationTransposeComposition [Finite A] [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (f : X ⟶ Y) (g : Y ⟶ Z) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] (Rf : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A X) (Rg : DerivedCategoryModule A Z ⥤ DerivedCategoryModule A Y) (Rh : DerivedCategoryModule A Z ⥤ DerivedCategoryModule A X) (adjf : rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⊣ Rf) (adjg : rightDerivedLowerShriek (ModuleCat.{u + 1} A) g ⊣ Rg) (adjh : rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g) ⊣ Rh) (Wf : DerivedCategoryModule A X) (Wg : DerivedCategoryModule A Y) (tf : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj Wf ⟶ 𝟙_ _) (tg : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).obj Wg ⟶ 𝟙_ _) (th : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).obj (object f Wf Wg) ⟶ 𝟙_ _) (hPf : ∀ L : DerivedCategoryModule A Y, IsIso (compactSupportProjectionMap A f Wf L)) (hPg : ∀ K : DerivedCategoryModule A Z, IsIso (compactSupportProjectionMap A g Wg K)) (hPh : ∀ K : DerivedCategoryModule A Z, IsIso (compactSupportProjectionMap A (f ≫ g) (object f Wf Wg) K)) (ht : (unboundedEtaleLowerShriekCompIso A f g).hom.app (object f Wf Wg) ≫ th = (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map (integration f Wf tf hPf Wg) ≫ tg) (K : DerivedCategoryModule A Z) : (gamma (f ≫ g) Rh adjh (object f Wf Wg) th hPh K = (reassociation f g Wf Wg K).hom ≫ ((derivedTensor (ModuleCat.{u + 1} A) X).map ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.map (gamma g Rg adjg Wg tg hPg K))).app Wf ≫ gamma f Rf adjf Wf tf hPf (Rg.obj K) ≫ (rightMate f g Rf Rg Rh adjf adjg adjh).inv.app K) ∧ (∀ (L : DerivedCategoryModule A Y) (hPomega : IsIso (compactSupportProjectionMap A f (Rf.obj (𝟙_ _)) L)), ((derivedTensor (ModuleCat.{u + 1} A) X).obj ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj L)).map (orientation f Rf adjf Wf tf hPf) ≫ theta f Rf adjf L hPomega = gamma f Rf adjf Wf tf hPf L) ∧ (∀ (N r s : ℕ) (hA : (N : A) = 0), Wf = ((DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateTwist X N A hA r))⟦2 * (r : ℤ)⟧ → Wg = ((DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateTwist Y N A hA s))⟦2 * (s : ℤ)⟧ → IsIso (orientation f Rf adjf Wf tf hPf) → ∀ L : DerivedCategoryModule A Y, IsIso (compactSupportProjectionMap A f (Rf.obj (𝟙_ _)) L)) ∧ (∀ r s : ℕ, (-1 : ℤ) ^ ((2 * r) * (2 * s)) = 1)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The nine construction names and signatures are re-exported from IntegrationTransposeCompositionData. Eight defining terms move verbatim; unitObjectIso specializes the identical canonical construction packaged in integrationUnitObjectIso. The theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-833171d56",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L at 4203bbe51a4f (H2/H12). Lean module byte-identical to the previously reviewed head; item changes only stmt_deps (additions vs base, none lost) and lean.note. The new definition node def-pur-compact-support-projection-map has an existing:true record on unchanged Sheaf.AlgebraicGeometry.ShriekTensorComposition (compactSupportProjectionMapOfCompactification, compactSupportProjectionMap); its statement matches side-live l.176-184 verbatim and its TeX gives the same four arrows as the body, with PF_c = proper projection, inverse open comparison, compactification pullback iso (LowerShriekProjection l.122-131). All 8 of its stmt_deps exist and are cited; proof fields empty; no other owner; not yet live. lem-amb-shriek-tensor-composition is kept in proof_deps. Added owners def-sf-etale-support-compositor (alpha) and def-pur-etale-exact-pullback-unit-composition-comparisons (unboundedEtaleUpperStarCompIso) are correct and unchanged vs live. DFS: no cycle. Mechanical finding: lem-kun-inverse-image-monoidal (record = canonical leftDerivedUpperStarTensorNatIso and its components) and lem-kun-tensor-unit (record = the unitors) are constructed-object deps, PASS on that point. Statement clauses, edge cases and gates re-checked and correct. No compile (no file changed). Advisories: rightMate duplicates etaleSumRightAdjointCompIso (H4); private proof-plan imports unused by the statement (H9)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bc644",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T013218-L-3940996",
+  "kind": "interface",
+  "note": "independent cc review: integrationTransposeComposition and the new modules IntegrationTransposeCompositionData/IntegrationUnitNormalization/IteratedIntegration against node lem-pur-integration-transpose-composition, the 3 new nodes, the change record, and the clone's original module (9 constructions preserved; unitObjectIso via an identical irreducible wrapper); direct importer AffineOrderedIntegrationTransposes compiled clean; axioms only propext/choice/Quot.sound"
+ }
+}

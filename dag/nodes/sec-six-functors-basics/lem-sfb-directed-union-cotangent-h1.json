@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-directed-union-cotangent-h1",
+ "kind": "statement",
+ "title": "First cotangent homology classes and zero relations descend along directed unions",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings and let $(S_\\lambda)_{\\lambda\\in\\Lambda}$ be a nonempty family of $R$-subalgebras of $S$, directed under inclusion and with union $S$. Thus every pair is contained in a third member and every element of $S$ belongs to some $S_\\lambda$. For any commutative $R$-algebra $D$, let $Q_D=R[x_d\\mid d\\in D]$ [def-weil-pbc-mv-polynomial-ring], let $I_D$ be the kernel of evaluation $Q_D\\to D$, and put $T_1(D/R)=\\ker(I_D/I_D^2\\to D\\otimes_{Q_D}\\Omega_{Q_D/R})$, where $\\bar f\\mapsto1\\otimes\\mathrm df$ [def-weil-pbc-kahler-differentials]. All maps on $T_1$ are the canonical maps induced by inclusions of algebras and $x_d\\mapsto x_d$ [lem-weil-pbc-nl-presentation-h1-functoriality]. Then (i) every $h\\in T_1(S/R)$ is the image of an element of $T_1(S_\\lambda/R)$ for some $\\lambda$; (ii) if $h\\in T_1(S_\\lambda/R)$ maps to zero in $T_1(S/R)$, there is $\\mu$ with $S_\\lambda\\subseteq S_\\mu$ such that $h$ maps to zero in $T_1(S_\\mu/R)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BQ (lemma-colimits-NL), constant-base directed inclusions; elementwise consequences for the kernel of the canonical two-term naive cotangent differential."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-nl-presentation-h1-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "For an $R$-subalgebra $A\\subseteq S$, denote by $j_A:Q_A\\to Q_S$ the variable inclusion. This map is injective: distinct monomials on the set $A$ remain distinct monomials on $S$, and their coefficients in $R$ are unchanged. Evaluation satisfies $\\operatorname{ev}_S j_A=\\iota_A\\operatorname{ev}_A$, by checking constants and variables, where $\\iota_A:A\\hookrightarrow S$. Consequently $j_A(f)\\in I_S$ if and only if $f\\in I_A$, since $\\iota_A$ is injective. Every finite collection of polynomials in $Q_S$ uses only finitely many variable labels in $S$, by the finite-monomial definition of the polynomial ring. These labels all belong to one $S_\\lambda$: select a member for each label and repeatedly use directedness to find a common upper member. For no labels use nonemptiness. Reinterpret the same monomials over that member to lift all the polynomials. When a specified $S_{\\lambda_0}$ must also be contained in the chosen member, take a further common upper member with $S_{\\lambda_0}$. This argument requires neither injectivity of $R\\to S$ nor finite generation of any subalgebra.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof: $R[S]=\\operatorname{colim} R[S_\\lambda]$ and $I=\\operatorname{colim} I_\\lambda$, expanded by finite monomial support."
+   }
+  },
+  {
+   "text": "For any $R$-algebra $D$, apply the arbitrary-variable polynomial differential basis theorem with variable set $D$ and with $Q_D\\to D$ the evaluation map. It identifies $D\\otimes_{Q_D}\\Omega_{Q_D/R}$ with the free $D$-module on $e_d=1\\otimes\\mathrm dx_d$ and gives\n$$1\\otimes\\mathrm df=\\sum_{d\\in D}\\operatorname{ev}_D(\\partial_d f)e_d.$$\nThus a representative $f\\in I_D$ defines a class in $T_1(D/R)$ precisely when all the displayed coefficients vanish. Here, explicitly, on a monomial $r\\prod_t x_t^{n_t}$ the operator $\\partial_d$ produces $n_d r x_d^{n_d-1}\\prod_{t\\ne d}x_t^{n_t}$ if $n_d>0$, and zero otherwise; extend over finite sums. For an inclusion $A\\subseteq S$, this monomial formula gives $j_A(\\partial_a f)=\\partial_a j_A(f)$ for $a\\in A$, while $\\partial_s j_A(f)=0$ for $s\\notin A$. Evaluating and using step 1 gives $\\iota_A(\\operatorname{ev}_A(\\partial_a f))=\\operatorname{ev}_S(\\partial_a j_A(f))$. These are actual coefficient identities, so no assertion that a tensor map is injective is needed.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX (lemma-differentials-polynomial-ring), polynomial differential basis and partial-derivative calculation; Tag 07BQ, the free differential term of the canonical presentation."
+   }
+  },
+  {
+   "text": "Let $h\\in T_1(S/R)$. Since $T_1(S/R)$ is a submodule of $I_S/I_S^2$, choose $f\\in I_S$ representing its underlying conormal class. By step 1 choose $\\lambda$ and $f_\\lambda\\in Q_{S_\\lambda}$ with $j_{S_\\lambda}(f_\\lambda)=f$. Evaluation and injectivity of $S_\\lambda\\hookrightarrow S$ imply $f_\\lambda\\in I_{S_\\lambda}$. Since $h$ is in the differential kernel, step 2 says $\\operatorname{ev}_S(\\partial_s f)=0$ for all $s\\in S$. The coefficient identity in step 2 and injectivity of $S_\\lambda\\hookrightarrow S$ give $\\operatorname{ev}_{S_\\lambda}(\\partial_a f_\\lambda)=0$ for every $a\\in S_\\lambda$. The same basis theorem therefore places $[f_\\lambda]$ in $T_1(S_\\lambda/R)$. The presentation-functoriality statement sends this class to $[j_{S_\\lambda}(f_\\lambda)]=[f]$ in the conormal quotient, hence to $h$ in its kernel submodule. This proves (i), with the exact canonical map in the statement.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), finite-support descent of a differential-kernel class; Tag 00S1 (lemma-NL-homotopy), induced map on the conormal quotient and its kernel."
+   }
+  },
+  {
+   "text": "Let $h\\in T_1(S_\\lambda/R)$ map to zero, and represent its conormal class by $f_\\lambda\\in I_{S_\\lambda}$. The functoriality statement identifies its image with $[j_{S_\\lambda}(f_\\lambda)]$, so $f:=j_{S_\\lambda}(f_\\lambda)\\in I_S^2$. By the definition of the product ideal, write $f=\\sum_{k=1}^n p_kq_k$ with $p_k,q_k\\in I_S$: an additional polynomial coefficient in a generator of the product ideal is absorbed into $p_k$, which remains in $I_S$. Apply the finite-support construction in step 1 to these finitely many factors, also requiring the resulting member $S_\\mu$ to contain $S_\\lambda$. Let $p_{k,\\mu},q_{k,\\mu}\\in Q_{S_\\mu}$ be their lifts. The evaluation identity and injectivity into $S$ imply that every lift is in $I_{S_\\mu}$. Let $f_{\\lambda,\\mu}$ denote the variable inclusion of $f_\\lambda$ in $Q_{S_\\mu}$. Both $f_{\\lambda,\\mu}$ and $\\sum_k p_{k,\\mu}q_{k,\\mu}$ map to $f$ under the injective map $j_{S_\\mu}$, hence are equal. Therefore $f_{\\lambda,\\mu}\\in I_{S_\\mu}^2$. Presentation functoriality identifies the image of $h$ with its class, which is zero in the conormal quotient and thus zero in the kernel submodule. This proves (ii). Empty sums and zero polynomials are covered by the same argument, taking any upper member containing $S_\\lambda$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07BQ (lemma-colimits-NL), proof: descent of $I/I^2$, with a finite product-ideal witness written out; Tag 00S1, the representative formula for the induced kernel map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-nl-presentation-h1-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07BQ (lemma-colimits-NL), proof expanded elementwise for constant base and inclusions, using Tag 00RX for the free differential term and Tag 00S1 for the canonical maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "H1Cotangent.*(colimit|[Dd]irect|[Ll]imit)|([Dd]irectLimit|[Ii]sColimit).*H1Cotangent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent maps, presentation changes and localization do not establish directed-union continuity. General filtered-colimit homology preservation does not identify the cotangent complexes. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-595."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"H1Cotangent\"",
+   "results": "12 hits: Algebra.H1Cotangent, Algebra.Extension.H1Cotangent, Algebra.Extension.instAddCommGroupH1Cotangent, Algebra.Extension.h1Cotangentι, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.Extension.H1Cotangent.equiv, Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent.mapEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent maps, presentation changes and localization do not establish directed-union continuity. General filtered-colimit homology preservation does not identify the cotangent complexes. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-595."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First cotangent homology of an algebra commutes with directed unions of subalgebras; classes descend to a stage and zero classes vanish eventually",
+   "results": "8 hits: Algebra.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.h1Cotangentι, Algebra.Extension.Cotangent.map_comp, Algebra.Extension.CotangentSpace.map_comp, Algebra.Extension.CotangentSpace.map_comp_apply, Algebra.Extension.CotangentSpace.map_cotangentComplex, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent maps, presentation changes and localization do not establish directed-union continuity. General filtered-colimit homology preservation does not identify the cotangent complexes. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-595."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First homology of the naive cotangent complex commutes with filtered colimits of algebras",
+   "results": "8 hits: instPreservesHomologyFunctorAddCommGrpCatColim, Algebra.Extension.H1Cotangent, HomologicalComplex.instHasFilteredColimitsOfSize, Algebra.H1Cotangent, Algebra.tensorH1CotangentOfIsLocalization, CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommGrpCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent maps, presentation changes and localization do not establish directed-union continuity. General filtered-colimit homology preservation does not identify the cotangent complexes. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-595."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a directed union of subalgebras S_i of S the map from the direct limit of H1Cotangent R S_i to H1Cotangent R S is bijective",
+   "results": "8 hits: Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, Algebra.Extension.Cotangent.map_toInfinitesimal_bijective, Algebra.Generators.cotangentRestrict_bijective_of_basis_kaehlerDifferential, Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective, Algebra.Extension.h1Cotangentι_ext_iff, Algebra.Extension.h1Cotangentι_ext, Algebra.Generators.cotangentRestrict_bijective_of_isCompl, Algebra.H1Cotangent.map",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent maps, presentation changes and localization do not establish directed-union continuity. General filtered-colimit homology preservation does not identify the cotangent complexes. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-595."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"H1Cotangent\"",
+   "results": "12 hits: Algebra.H1Cotangent, Algebra.Extension.H1Cotangent, Algebra.Extension.instAddCommGroupH1Cotangent, Algebra.Extension.h1Cotangentι, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.Extension.H1Cotangent.equiv, Algebra.Extension.H1Cotangent.map, Algebra.H1Cotangent.mapEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent maps, localization and general filtered-colimit homology results do not state the directed-union identification of the canonical presentation kernels. Polynomial coefficient descent is insufficient by itself. Read the canonical H1 and map definitions in Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-570."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First cotangent homology commutes with directed unions of subalgebras; every class descends and a zero class vanishes at a later stage",
+   "results": "8 hits: Algebra.H1Cotangent.map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.h1Cotangentι, Algebra.Extension.Cotangent.map_comp, Algebra.Extension.Cotangent.map, Algebra.Extension.CotangentSpace.map_comp, Algebra.Extension.CotangentSpace.map_comp_apply, Algebra.Extension.CotangentSpace.map_cotangentComplex",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent maps, localization and general filtered-colimit homology results do not state the directed-union identification of the canonical presentation kernels. Polynomial coefficient descent is insufficient by itself. Read the canonical H1 and map definitions in Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-570."
+  },
+  {
+   "tool": "grep",
+   "query": "H1Cotangent.*(colimit|directLimit)|colimit.*H1Cotangent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent maps, localization and general filtered-colimit homology results do not state the directed-union identification of the canonical presentation kernels. Polynomial coefficient descent is insufficient by itself. Read the canonical H1 and map definitions in Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-570."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First homology of the naive cotangent complex commutes with filtered colimits of rings",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize, instPreservesHomologyFunctorAddCommGrpCatColim, Algebra.Extension.H1Cotangent, Algebra.H1Cotangent, Algebra.tensorH1CotangentOfIsLocalization, CommRingCat.FilteredColimits.colimit, RingCat.FilteredColimits.colimit, CommGrpCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent maps, localization and general filtered-colimit homology results do not state the directed-union identification of the canonical presentation kernels. Polynomial coefficient descent is insufficient by itself. Read the canonical H1 and map definitions in Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-570."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First homology of the canonical polynomial presentation over an increasing union of rings is the direct limit of the first homologies",
+   "results": "8 hits: Ring.DirectLimit.quotientMk_of, Ring.DirectLimit.Polynomial.exists_of, Ring.DirectLimit, Ring.DirectLimit.of.zero_exact, Ring.DirectLimit.exists_of, ModuleCat.directLimitCocone_pt_isAddCommGroup, Ring.DirectLimit.ring, Ring.DirectLimit.commRing",
+   "date": "2026-10-23",
+   "verdict": "no match: cotangent maps, localization and general filtered-colimit homology results do not state the directed-union identification of the canonical presentation kernels. Polynomial coefficient descent is insufficient by itself. Read the canonical H1 and map definitions in Mathlib/RingTheory/Extension/Cotangent/Basic.lean:381-428,560-570."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-dense-cotangent-h1",
+  "date": "2026-10-23",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 0GQ5 (lemma-extensions-of-relative-ringed-topoi), 0GQ6 (remark-extensions-of-relative-ringed-topoi), 0GQ7 (lemma-extensions-of-relative-ringed-topoi-functorial), 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), and 08UG (lemma-huge-diagram-ringed-topoi), clause (2), with identity underlying topos. Supporting input: Polynomial-presentation comparisons for the sheaf naive cotangent complex. Tag 08TY, proof of the claim: injectivity and surjectivity for the inclusion of the sectionwise image algebra into B. Algebraic finite-data input in both final paragraphs: Tag 07BQ applied to the directed union of finite extensions of the image subalgebra.",
+   "via": [
+    "lem-sfb-locally-dense-cotangent-h1",
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "lem-sfb-etale-algebra-extension-ext",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-directed-union-cotangent-h1",
+  "worker": "stage1",
+  "group": "Q72",
+  "summary": "Statement unchanged. Expanded Tag 07BQ using finite variable support, the existing arbitrary-variable polynomial differential basis, and the existing presentation-functoriality leaf. Classes descend by the evaluated derivative criterion; zero classes descend by a finite sum of products in the evaluation-kernel ideal. No new nodes: the two substantial generic inputs already exist as Mathlib leaves. No attachment in the project states both clauses for general commutative rings.",
+  "blueprint": "Realizes the existing blueprint.from.place: the Tag 07BQ algebraic finite-data input in Tag 08TY, used for lem-sfb-locally-dense-cotangent-h1. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; its current direct-image route is unchanged. Whole-blueprint searches for cotangent, directed union and 07BQ found no node stating this item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-bcede27ea",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-bcede27ea (reviewer sub-agent of L); spot-checked: I read the source, the item and all three cited nodes in full; nothing was compiled and no fixes were written. The statement is unchanged and true; it is the elementwise form of Stacks 07BQ (lemma-colimits-NL, algebra.tex) for a constant base R and directed inclusions. The delivery adds no new nodes, and its four steps expand the source's 'Hence the lemma is clear'. Step 1 (elementary): renaming variables along an inclusion is injective (Mathlib rename_injective); ev_S∘j_A = ι_A∘ev_A by the uniqueness clause of def-weil-pbc-mv-polynomial-ring; finitely many polynomials lift to one member by directedness, with nonemptiness covering the empty case. Step 2: lem-weil-pbc-polynomial-ring-kahler-basis-any-variables (Mathlib leaf mvPolynomialBasis plus base change) gives the coordinates ev(∂_d f) of 1⊗df; partial derivatives commute with renaming, checked on monomials (pderiv_rename). Step 3, clause (i): lift the representative f to f_λ, reflect the zero coordinates through the injective inclusion S_λ→S, and use the representative formula of lem-weil-pbc-nl-presentation-h1-functoriality (square id_R and inclusion) to send [f_λ] to h. Step 4, clause (ii): write f = Σ p_k q_k with p_k, q_k ∈ I_S, lift all factors to some S_μ ⊇ S_λ, and conclude f_{λ,μ} ∈ I_{S_μ}² because j_{S_μ} is injective, so the image of h is zero. Small cases (one-member family, zero ring, R→S not injective, empty sums) pass, and injective transition maps on T_1 are never assumed. The parent lem-sfb-locally-dense-cotangent-h1 uses clauses (i) and (ii) exactly as stated. The proof cites only definitions and Mathlib leaves, so it stays on its route, tool_uses is correctly empty, and there is no cycle. Searching the DAG for 07BQ and cotangent-with-directed-union nodes finds no duplicate; h1-cotangent-finite-subfields and transitivity-gamma are field-only. Searches by grep, loogle, leanfinder and leansearch are all recorded. No SGA is cited. blueprint.from.node is null, but that came from N5 when the node was created, not from this delivery; from.place is filled and same_as is []."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.H1CotangentDirectedUnion",
+  "declaration": "Algebra.H1Cotangent.directed_union",
+  "file": "lean/Sheaf/RingTheory/H1CotangentDirectedUnion.lean",
+  "statement": "theorem H1Cotangent.directed_union (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (ι : Type w) [Nonempty ι] (A : ι → Subalgebra R S) (hdir : Directed (· ≤ ·) A) (hunion : ∀ s : S, ∃ i : ι, s ∈ A i) : (∀ h : H1Cotangent R S, ∃ (i : ι) (hᵢ : H1Cotangent R (A i)), H1Cotangent.map R R (A i) S hᵢ = h) ∧ (∀ (i : ι) (h : H1Cotangent R (A i)), H1Cotangent.map R R (A i) S h = 0 → ∃ (j : ι) (hij : A i ≤ A j), @H1Cotangent.map R R _ _ _ (A i) _ _ (A j) _ _ _ _ (Subalgebra.inclusion hij).toRingHom.toAlgebra (@IsScalarTower.of_algebraMap_eq' R (A i) (A j) _ _ _ _ (Subalgebra.inclusion hij).toRingHom.toAlgebra _ (Subalgebra.inclusion hij).comp_algebraMap.symm) h = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6cfc313e",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Only the lean field changed; lean.statement matches the file word for word; the module and declaration name are new (not in Mathlib or live lean/Sheaf). Hypotheses match the node exactly: Nonempty ι, Directed (· ≤ ·) A, union ∀ s ∃ i, s ∈ A i, independent universes, no injectivity of R→S. Algebra.H1Cotangent R D = ker of 1⊗d on the canonical Generators.self presentation (MvPolynomial D R, evaluation) = node's T_1. Maps are H1Cotangent.map, canonical by map_eq; the i→j map's explicit @-arguments (inclusion hij algebra structure, IsScalarTower via comp_algebraMap) checked against Mathlib's section variable order. Clauses (i) and (ii) exact with the node's quantifier order. Edge cases (singleton family, zero ring, empty support/sum, j=i, index universe) covered. No definitions, sole sorry, docstrings give Tags 07BQ/00S1, the blueprint id and the 4 proof steps; Mathlib-only imports; no duplicate found. Report has both required sections. Not recompiled (worker reports a clean compile)."
+ }
+}

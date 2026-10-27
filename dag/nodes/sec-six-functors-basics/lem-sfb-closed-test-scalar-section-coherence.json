@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-closed-test-scalar-section-coherence",
+ "kind": "statement",
+ "title": "Section scalar coherence with its computation unit",
+ "statement": "Let $\\Lambda,S$ be commutative condensed rings and $c:\\Lambda\\to S$ a morphism of ring objects [sk-def-sfb-condensed-ring, sk-def-sfb-coefficient-morphisms]. Use the specified exact restriction of scalars, universal right-derived comparisons and section arrows [def-sfb-closed-test-scalar-comparison-maps] and the specified models and comparison maps [def-sfb-closed-test-scalar-model-diagrams]. SectionCoherence(c) holds: the universal section comparison satisfies its computation-unit equation on every complex, commutes with the ordinary unit section and its derived arrow, and commutes with direct-image evaluation.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y, 09T5; sites-cohomology.tex Tags 07A6, 0D6F, 0FPI; proetale.tex Tag 09BL. Parent argument specialized to this step."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-closed-test-scalar-comparison-maps",
+  "def-sfb-closed-test-scalar-model-diagrams"
+ ],
+ "proof": [
+  {
+   "text": "Specialize rightDerivedFunctorUnitQ_rightDerivedPullback_app to exact scalar restriction and the identity section transformation. Simplifying the identity gives the section computation-unit equation.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine that equation with the three section squares.",
+   "uses": [
+    "lem-sfb-closed-test-scalar-section-squares"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "lem-sfb-closed-test-scalar-section-squares"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y and 09T5; assembly of parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with universal derived comparison units and section models",
+   "results": "8 hits: RestrictScalars, AlgHom.restrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, Submodule.restrictScalars, ModuleCat.RestrictScalars.obj', LinearMap.restrictScalarsₗ, PresheafOfModules.restrictScalars",
+   "date": "2026-10-25",
+   "verdict": "No normalized closed-test derived comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnitQ\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib total derived computation-unit API. The source library has the API used here."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars",
+   "results": "25 hits, primarily scalar towers and linear maps in number theory, no closed-test models.",
+   "date": "2026-10-25",
+   "verdict": "No exact match. Additional rg of Sheaf and WeilConjectures found the normalized-model predicates and rightDerivedPullback calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClosedTestScalarModelCoherence",
+  "date": "2026-10-25",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), identify the closed-base-change mate with restriction on the full integral root tower; its geometric invertibility is proved separately; returned closed-test proof steps 10, 11: Universal coefficient comparison for closed-test models; Section scalar coherence with its computation unit",
+   "via": [
+    "lem-sfb-closed-test-scalar-model-coherence",
+    "lem-sfb-closed-test-derived-exchange-model",
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedTestScalarSectionCoherence",
+  "file": "lean/Sheaf/Paper/ClosedTestScalarSectionCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedTestScalarModelCoherence.closed_test_scalar_section_coherence",
+  "statement": "theorem closed_test_scalar_section_coherence : SectionCoherence c",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T101407-L-3688871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

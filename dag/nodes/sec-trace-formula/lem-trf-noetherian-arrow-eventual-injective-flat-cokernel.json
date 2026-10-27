@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-noetherian-arrow-eventual-injective-flat-cokernel",
+ "kind": "statement",
+ "title": "Eventual injectivity and flat cokernels at Noetherian local arrow stages",
+ "statement": "Let $I$ be a small nonempty directed set. For each $i\\in I$ let $\\varphi_i:R_i\\to S_i$ be a local homomorphism of commutative local rings, and let $\\varphi:R\\to S$ be another such homomorphism. Here local means that the inverse image of the target maximal ideal is the source maximal ideal. For $i\\le j$ let $r_{ji}:R_i\\to R_j$ and $s_{ji}:S_i\\to S_j$ be local homomorphisms, with local cocone maps $r_i:R_i\\to R$ and $s_i:S_i\\to S$. All ring squares commute, transitions are identities at equal indices and respect composition, and the cocones are compatible. Suppose $R=\\varinjlim R_i$ and $S=\\varinjlim S_i$ as rings [def-weil-pbc-category-colimit]. These colimits are algebraic: elements come from stages and equality is detected at a common later stage. Put $\\mathfrak m_i=\\mathfrak m_{R_i}$, $\\mathfrak m=\\mathfrak m_R$, $k_i=R_i/\\mathfrak m_i$, and $k=R/\\mathfrak m$. Assume $R_i,S_i$ are Noetherian [def-weil-pbc-noetherian-ring]. Let $M_i,N_i$ be finite $S_i$-modules [def-weil-finitely-generated-module] and $u_i:M_i\\to N_i$ be $S_i$-linear. Give them additive semilinear transitions $m_{ji},n_{ji}$ over $s_{ji}$, and additive semilinear cocones $\\mu_i:M_i\\to M$, $\\nu_i:N_i\\to N$ over $s_i$, where $M,N$ are $S$-modules and $u:M\\to N$ is $S$-linear. Transitions respect identities and composition, cocones are compatible, $n_{ji}u_i=u_jm_{ji}$, and $\\nu_i u_i=u\\mu_i$. Suppose $M,N$ are the algebraic colimits of the underlying abelian groups, with their induced $S$-actions. Suppose for every $i\\le j$ the canonical map $S_i\\otimes_{R_i}R_j\\to S_j$ is a localization at a multiplicative subset (all denominators become units, every target element is a fraction, and an element mapping to zero is killed by a denominator), and the canonical maps $M_i\\otimes_{S_i}S_j\\to M_j$, $x\\otimes a\\mapsto a m_{ji}(x)$, and $N_i\\otimes_{S_i}S_j\\to N_j$, $y\\otimes a\\mapsto a n_{ji}(y)$, are isomorphisms [def-weil-pbc-module-tensor-product]. Assume $N$ is flat over $R$ [def-weil-pbc-flat-ring-map] and the induced map $\\overline u:M/\\mathfrak mM\\to N/\\mathfrak mN$ is injective. Assume there is $i_1$ such that the map $\\Psi_j:(M_j/\\mathfrak m_jM_j)\\otimes_{k_j}k\\to M/\\mathfrak mM$, $[x]\\otimes c\\mapsto c[\\mu_j(x)]$, is injective for every $j\\ge i_1$. Then there exists $i_2\\ge i_1$ such that for every $j\\ge i_2$, the module $N_j$ is flat over $R_j$, the induced map $\\overline{u_j}:M_j/\\mathfrak m_jM_j\\to N_j/\\mathfrak m_jN_j$ is injective, $u_j$ is injective, and $C_j=N_j/u_j(M_j)$ is flat over $R_j$. No injectivity hypothesis is imposed on the cocone map $N_j/\\mathfrak m_jN_j\\to N/\\mathfrak mN$. All sets and objects may be placed in one common sufficiently large universe.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 046Y (lemma-mod-injective-general), first paragraph (eventual target flatness) and final paragraph (faithful field extension, fibre square and stage criterion); Tag 00R6 (lemma-colimit-eventually-flat), Tag 00ME (lemma-mod-injective), and the first proof paragraph of Tag 00MO (lemma-another-variant-local-criterion-flatness); old steps 2, 6, 7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Bundle the target modules and additive transition maps as a functor D. The supplied representatives and eventual equality identify its cocone with the filtered colimit in sets, hence in abelian groups. Identify the categorical ring colimits with the supplied colimit cocones. The ring and additive equivalences respect scalar multiplication; [lem-pc-flat-semilinear-equiv] transports the assumed flatness of N. Apply [lem-weil-pbc-colimit-eventually-flat] to obtain a flat stage a. Mathlib supplies preservation of filtered ring colimits by the forgetful functor, so the additional elementwise ring-colimit hypotheses are unnecessary for this interface.",
+   "uses": [
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-pc-flat-semilinear-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00R6 (lemma-colimit-eventually-flat), as used in the first paragraph of Tag 046Y (lemma-mod-injective-general)"
+   }
+  },
+  {
+   "text": "For any $j\\ge a$, apply [lem-weil-pbc-flat-another-variant-local-criterion] to the square $(R_a,S_a,R_j,S_j)$ and $I=0$. This is a proper ideal since $R_a$ is local. The quotient condition is precisely flatness of $N_a$ over $R_a$. The multiplication-kernel condition is automatic: $0\\otimes_{R_a}N_a=0$, since every pure tensor has zero first factor. All four rings are Noetherian local, all four arrows are local, and the square and localization hypotheses are given. The criterion makes $N_a\\otimes_{S_a}S_j$ flat over $R_j$; the specified base-change isomorphism identifies this module with $N_j$. Choose an upper bound $i_2$ of $a$ and $i_1$. Then $N_j$ is flat over $R_j$ for every $j\\ge i_2$.",
+   "uses": [
+    "lem-weil-pbc-flat-another-variant-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MO (lemma-another-variant-local-criterion-flatness), specialization I=0; eventual flatness assertion in the first paragraph of Tag 046Y"
+   }
+  },
+  {
+   "text": "Fix j above i₂. Locality gives the field algebra k_j → k. The stage fibre V_j = k_j tensor_(R_j) M_j is a vector space over k_j and therefore flat. Mathlib Module.Flat.tensorProduct_mk_injective gives injectivity of V_j → k tensor_(k_j) V_j, including V_j = 0; the field algebra is faithful. TensorProduct.AlgebraTensorModule.cancelBaseChange identifies the codomain with k tensor_(R_j) M_j and sends 1 tensor (c tensor x) to image(c) tensor x, realizing [def-weil-vector-space-scalar-extension]. Composing this injection t with the assumed injective Ψ_j embeds the stage source fibre in the limit source fibre.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), final paragraph: the injectivity of the scalar-extended comparison implies that of the source fibre cocone"
+   }
+  },
+  {
+   "text": "The semilinear cocone ν_j and the induced residue-field map define β_j:k_j tensor_(R_j) N_j → k tensor_R N. On pure tensors the identity ν_j u_j = u μ_j proves the commuting square β_j ū_j = ū Ψ_j t; tensor induction extends it to all elements. Equality under ū_j therefore implies equality under Ψ_j t, by injectivity of the limit fibre arrow ū. Injectivity of Ψ_j and of t then proves injectivity of ū_j. No injectivity of β_j is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 046Y (lemma-mod-injective-general), final paragraph: the commutative fibre square"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-mod-injective] with its finite source $N$ equal to our $M_j$, its flat target $M$ equal to our $N_j$, and local ring map $R_j\\to S_j$. The source is finite over the Noetherian local ring $S_j$ by hypothesis, the target is flat over $R_j$ by step 2, and the map is $R_j$-linear because it is $S_j$-linear. Step 4 supplies its residue-fibre injectivity. The criterion gives injectivity of $u_j$ and flatness of $N_j/u_j(M_j)$ over $R_j$. Together with steps 2 and 4 these are all four conclusions for every $j\\ge i_2$.",
+   "uses": [
+    "lem-weil-pbc-flat-mod-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ME (lemma-mod-injective), applied in the final paragraph of Tag 046Y (lemma-mod-injective-general)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-pc-flat-semilinear-equiv",
+  "lem-weil-pbc-flat-another-variant-local-criterion",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-pbc-flat-mod-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 046Y, first and final proof paragraphs; Tag 00R6; Tag 00MO with I=0; Tag 00ME. Categorical comparison uses the proved flatness transport lemma and Mathlib filtered-colimit preservation; scalar-extension injectivity uses Module.Flat.tensorProduct_mk_injective and tensor cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In Noetherian local algebra approximation diagrams, a flat limit target and eventual injectivity of scalar extended source closed fibre comparisons imply that stage module maps are eventually injective with flat cokernel",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_injective_of_injective; AdicCompletion.map_injective; AdicCompletion.flat_of_isNoetherian; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; RingHom.FaithfullyFlat.codescendsAlong_injective; Module.Flat.iff_lift_lsmul_comp_subtype_injective; Algebra.Smooth.flat_of_isNoetherianRing; LinearMap.lTensor_injective_of_exact_of_flat",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern completions, fixed-ring colimits, localization detection or elementary flatness; none gives this varying-ring approximation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend target flatness to a finite Noetherian approximation, propagate it under localized base change, descend fibre injectivity using faithful extension of fields and apply the local criterion for flat cokernels",
+   "results": "8 hits: Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Algebra.Smooth.flat_of_isNoetherianRing; RingHom.Flat.propertyIsLocal; RingHom.Flat.ofLocalizationSpanTarget; Module.flat_of_localized_span; Module.flat_of_isLocalized_span; Module.FaithfullyFlat.of_flat_of_isLocalHom; Module.flat_of_localized_maximal",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern completions, fixed-ring colimits, localization detection or elementary flatness; none gives this varying-ring approximation statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing, Function.Injective",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not assert this simultaneous varying-ring stage/limit statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat.*[Cc]oker|[Cc]oker.*[Ff]lat|[Ff]lat.*maximalIdeal|[Ii]nject.*[Rr]esidueField",
+   "results": "21 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:111       Function.Injective f ∧ ∀ x, (f.residueFieldMap x).hom.IsPurelyInseparable,; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean:53   rw [← IsNilpotent.map_iff (Algebra.lmul_injective (R := I.ResidueField)),; Mathlib/RingTheory/Smooth/Local.lean:34 theorem FormallySmooth.iff_injective_lTensor_residueField.{u}; Mathlib/RingTheory/Smooth/Local.lean:40       Function.Injective (P.cotangentComplex.lTensor (ResidueField S)) := by; Mathlib/RingTheory/Smooth/Local.lean:45   rw [← IsLocalRing.split_injective_iff_lTensor_residueField_injective,; Mathlib/RingTheory/Smooth/Local.lean:48 theorem FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Mathlib/RingTheory/Smooth/Local.lean:53       Function.Injective (cotangentComplexBaseChange R S P (ResidueField S)) := by; Mathlib/RingTheory/Smooth/Fiber.lean:117   rw [Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField (P := P) h₁ h₂]; Mathlib/RingTheory/QuasiFinite/Polynomial.lean:54     .of_injective (IsScalarTower.toAlgHom _ _ P.ResidueField).toLinearMap; Mathlib/RingTheory/QuasiFinite/Weakly.lean:134   exact .of_injective (IsScalarTower.toAlgHom _ _ r.ResidueField).toLinearMap (RingHom.injective _); Mathlib/RingTheory/LocalRing/Module.lean:33 - `IsLocalRing.split_injective_iff_lTensor_residueField_injective`:; Mathlib/RingTheory/LocalRing/Module.lean:334 theorem IsLocalRing.split_injective_iff_lTensor_residueField_injective [IsLocalRing R]; Mathlib/RingTheory/LocalRing/Module.lean:336     (∃ l', l' ∘ₗ l = LinearMap.id) ↔ Function.Injective (l.lTensor (ResidueField R)) := by; Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean:101 lemma Ideal.injective_algebraMap_quotient_residueField :; Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean:102     Function.Injective (algebraMap (R ⧸ I) I.ResidueField) := by; Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean:110     (map_ne_zero_of_mem_nonZeroDivisors _ I.injective_algebraMap_quotient_residueField y.2); Mathlib/RingTheory/LocalRing/ResidueField/Ideal.lean:137   ⟨I.injective_algebraMap_quotient_residueField, IsFractionRing.surjective_iff_isField.mpr; Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean:42         FaithfulSMul.algebraMap_injective I.ResidueField[X] (RatFunc I.ResidueField)]; Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean:52   · suffices Function.Injective (aeval (R := I.ResidueField) (algebraMap R[X] J.ResidueField X)) by; Mathlib/RingTheory/LocalRing/ResidueField/Polynomial.lean:72     apply IsFractionRing.injective_comp_algebraMap (A := I.ResidueField[X]); Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean:81   refine .extendScalars (Ideal.injective_algebraMap_quotient_residueField p)",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration found for this stage/limit statement; the related matches supply only individual ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A directed system of Noetherian local module arrows has eventually injective maps and flat cokernels if the target limit is flat and the source fibre comparisons and limit fibre map are injective",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*flat|flat.*stage|flat.*cokernel|cokernel.*flat",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this varying-ring eventual stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Eventually injective module maps with flat cokernels in a directed Noetherian local approximation of a flat module",
+   "results": "Module.Flat.mk; Module.Flat.lTensor_preserves_injective_linearMap; Module.Flat.rTensor_preserves_injective_linearMap; Module.Flat.iff_lTensor_injective'; Module.Flat.of_isLocalizedModule; Module.Flat.iff_lTensor_injectiveₛ; Module.Flat.of_forall_exists_factorization; Module.Flat.tfae_equational_criterion",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this varying-ring eventual stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalRing, Function.Injective",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this varying-ring eventual stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat limit of finite modules over directed Noetherian local ring diagrams with localized tensor base changes is flat at some stage and eventually maps injectively with flat cokernel",
+   "results": "Module.flat_of_isLocalized_span; Module.Flat.tfae_equational_criterion; AdicCompletion.flat_of_isNoetherian; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; Module.FaithfullyFlat; Algebra.Smooth.flat_of_isNoetherianRing; AdicCompletion.tensor_map_id_left_injective_of_injective; Module.Flat.iff_lTensor_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this varying-ring eventual stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of injectivity modulo the maximal ideal to Noetherian local approximation stages and the local criterion for a flat quotient",
+   "results": "AdicCompletion.flat_of_isNoetherian; injective_of_localized_maximal; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing; AdicCompletion.map_injective; injective_of_isLocalized_maximal; Algebra.Smooth.flat_of_isNoetherianRing; AdicCompletion.tensor_map_id_left_injective_of_injective; Module.flat_of_isLocalized_maximal",
+   "date": "2026-10-22",
+   "verdict": "no match: none states this varying-ring eventual stage assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valuation-general-mod-injective",
+  "date": "2026-10-22",
+  "group": "Q32"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The 046Y helper reached through the Tag 0GSG valuation-ring argument on the local-term-locality branch: Tag 046Y (lemma-mod-injective-general), first paragraph (eventual target flatness) and final paragraph (faithful field extension, fibre square and stage criterion); Tag 00R6 (lemma-colimit-eventually-flat), Tag 00ME (lemma-mod-injective), and the first proof paragraph of Tag 00MO (lemma-another-variant-local-criterion-flatness); old steps 2, 6, 7.",
+   "via": [
+    "lem-trf-valuation-general-mod-injective",
+    "lem-trf-valuation-finite-module-injectivity",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-noetherian-arrow-eventual-injective-flat-cokernel",
+  "worker": "stage1",
+  "summary": "Reuse the existing 00R6, 00MO and 00ME nodes. Propagate a flat stage through 00MO with zero ideal, prove source-fibre cocone injectivity by a basis, and write the commuting fibre-square argument. No new nodes and no statement change.",
+  "blueprint": "Serves the valuation-ring algebra helper on the Tag 0GSG branch below lem-trf-local-term-locality: realizes the first and final paragraphs of 046Y as isolated by lem-trf-valuation-general-mod-injective. The inherited blueprint.from records the complete branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-colimit-eventually-flat",
+    "why": "Generic 00R6 flat-stage existence, explicitly used by 046Y; no trace-formula node replaces this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-another-variant-local-criterion",
+    "why": "Generic 00MO applied with I=0 to propagate flatness along the given localized base-change squares."
+   },
+   {
+    "node": "lem-weil-pbc-flat-mod-injective",
+    "why": "Generic Noetherian local criterion 00ME explicitly invoked in the final paragraph of 046Y."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-colimit-eventually-flat",
+  "lem-weil-pbc-flat-another-variant-local-criterion",
+  "lem-weil-pbc-flat-mod-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-701752504",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-701752504 (reviewer sub-agent of L); spot-checked: I read all five steps in full against Stacks 046Y (both proof paragraphs) and the statements of the 00R6, 00MO, 00ME and scalar-extension nodes. The item statement and stmt_deps are unchanged from the live and side-live copies, where the item is still unsplit. There are no new nodes. The delivered steps match the old steps 2/6/7 that the Q32 parent review assigned to this node. Step 1: every 00R6 hypothesis is matched. The set-colimit condition follows from the explicit algebraic colimit. Step 2: 00MO with I=0 is valid. 0 is a proper ideal, (2) is flatness of N_a, (3) is vacuous since 0⊗N_a=0, and the commuting square and the localization at the given index pair are hypotheses. Flatness passes to N_j through the S_j-linear base-change isomorphism. An upper bound i_2 of a and i_1 then gives a whole tail. This fills the gap in the source, where 00R6 gives only one flat stage. Step 3 is elementary: k_j→k is injective, and the basis clause holds for any index set, so V_j→V_j⊗k is injective. Composing with Ψ_j gives α_j injective, and α_j is well defined by semilinearity. Step 4 is elementary: the square β_jū_j=ūα_j commutes, and ū_j is injective without any injectivity of β_j. Step 5: the 00ME hypotheses are matched with the module letters swapped, giving both remaining conclusions. Edge cases checked: singleton I, M=0, N=0, non-linear I. Duplicate grep over 046Y and eventual-flat wording found only sibling nodes that state other things. I accept the declared tool_uses of 00R6/00MO/00ME, as for the parent. No SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherianArrowEventualInjectiveFlatCokernel",
+  "declaration": "Module.eventually_injective_flat_cokernel_of_noetherian_local_stages",
+  "file": "lean/Sheaf/RingTheory/NoetherianArrowEventualInjectiveFlatCokernel.lean",
+  "statement": "theorem eventually_injective_flat_cokernel_of_noetherian_local_stages {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (Ri Si : I ⥤ CommRingCat.{u}) (cR : Cocone Ri) (cS : Cocone Si) (hcR : IsColimit cR) (hcS : IsColimit cS) [IsLocalRing cR.pt] [IsLocalRing cS.pt] [∀ i : I, IsLocalRing (Ri.obj i)] [∀ i : I, IsLocalRing (Si.obj i)] [∀ i : I, IsNoetherianRing (Ri.obj i)] [∀ i : I, IsNoetherianRing (Si.obj i)] [Algebra cR.pt cS.pt] [IsLocalHom (algebraMap cR.pt cS.pt)] [∀ i : I, Algebra (Ri.obj i) (Si.obj i)] [∀ i : I, Algebra (Ri.obj i) cR.pt] [∀ i : I, Algebra (Si.obj i) cS.pt] [∀ i : I, Algebra (Ri.obj i) cS.pt] [∀ i : I, IsScalarTower (Ri.obj i) (Si.obj i) cS.pt] [∀ i : I, IsScalarTower (Ri.obj i) cR.pt cS.pt] [∀ i : I, IsLocalHom (algebraMap (Ri.obj i) (Si.obj i))] [∀ i : I, IsLocalHom (algebraMap (Ri.obj i) cR.pt)] [∀ i : I, IsLocalHom (algebraMap (Si.obj i) cS.pt)] (hR_local : ∀ (i j : I) (h : i ≤ j), IsLocalHom (Ri.map (homOfLE h)).hom) (hS_local : ∀ (i j : I) (h : i ≤ j), IsLocalHom (Si.map (homOfLE h)).hom) (hR : ∀ (i : I), algebraMap (Ri.obj i) cR.pt = (cR.ι.app i).hom) (hS : ∀ (i : I), algebraMap (Si.obj i) cS.pt = (cS.ι.app i).hom) (h_ring_arrow : ∀ (i j : I) (h : i ≤ j) (r : Ri.obj i), (Si.map (homOfLE h)).hom (algebraMap (Ri.obj i) (Si.obj i) r) = algebraMap (Ri.obj j) (Si.obj j) ((Ri.map (homOfLE h)).hom r)) (hR_represent : ∀ r : cR.pt, ∃ (i : I) (a : Ri.obj i), (cR.ι.app i).hom a = r) (hS_represent : ∀ s : cS.pt, ∃ (i : I) (a : Si.obj i), (cS.ι.app i).hom a = s) (hR_equal : ∀ (i j : I) (a : Ri.obj i) (b : Ri.obj j), (cR.ι.app i).hom a = (cR.ι.app j).hom b → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), (Ri.map (homOfLE hik)).hom a = (Ri.map (homOfLE hjk)).hom b) (hS_equal : ∀ (i j : I) (a : Si.obj i) (b : Si.obj j), (cS.ι.app i).hom a = (cS.ι.app j).hom b → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), (Si.map (homOfLE hik)).hom a = (Si.map (homOfLE hjk)).hom b) (Mi Ni : I → Type u) [∀ i : I, AddCommGroup (Mi i)] [∀ i : I, AddCommGroup (Ni i)] [∀ i : I, Module (Si.obj i) (Mi i)] [∀ i : I, Module (Si.obj i) (Ni i)] [∀ i : I, Module.Finite (Si.obj i) (Mi i)] [∀ i : I, Module.Finite (Si.obj i) (Ni i)] [∀ i : I, Module (Ri.obj i) (Mi i)] [∀ i : I, IsScalarTower (Ri.obj i) (Si.obj i) (Mi i)] [∀ i : I, Module (Ri.obj i) (Ni i)] [∀ i : I, IsScalarTower (Ri.obj i) (Si.obj i) (Ni i)] (ui : ∀ i : I, Mi i →ₗ[Si.obj i] Ni i) (m : ∀ (i j : I), i ≤ j → Mi i →+ Mi j) (n : ∀ (i j : I), i ≤ j → Ni i →+ Ni j) (hm_smul : ∀ (i j : I) (h : i ≤ j) (s : Si.obj i) (x : Mi i), m i j h (s • x) = (Si.map (homOfLE h)).hom s • m i j h x) (hn_smul : ∀ (i j : I) (h : i ≤ j) (s : Si.obj i) (y : Ni i), n i j h (s • y) = (Si.map (homOfLE h)).hom s • n i j h y) (hm_id : ∀ (i : I) (x : Mi i), m i i le_rfl x = x) (hn_id : ∀ (i : I) (y : Ni i), n i i le_rfl y = y) (hm_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : Mi i), m j k hjk (m i j hij x) = m i k (hij.trans hjk) x) (hn_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (y : Ni i), n j k hjk (n i j hij y) = n i k (hij.trans hjk) y) (h_stage_arrow : ∀ (i j : I) (h : i ≤ j) (x : Mi i), n i j h (ui i x) = ui j (m i j h x)) (M N : Type u) [AddCommGroup M] [AddCommGroup N] [Module cS.pt M] [Module cS.pt N] [Module cR.pt M] [IsScalarTower cR.pt cS.pt M] [Module cR.pt N] [IsScalarTower cR.pt cS.pt N] (mu : ∀ i : I, Mi i →+ M) (nu : ∀ i : I, Ni i →+ N) (hmu_smul : ∀ (i : I) (s : Si.obj i) (x : Mi i), mu i (s • x) = algebraMap (Si.obj i) cS.pt s • mu i x) (hnu_smul : ∀ (i : I) (s : Si.obj i) (y : Ni i), nu i (s • y) = algebraMap (Si.obj i) cS.pt s • nu i y) (hmu_comp : ∀ (i j : I) (h : i ≤ j) (x : Mi i), mu j (m i j h x) = mu i x) (hnu_comp : ∀ (i j : I) (h : i ≤ j) (y : Ni i), nu j (n i j h y) = nu i y) (u : M →ₗ[cS.pt] N) (h_limit_arrow : ∀ (i : I) (x : Mi i), nu i (ui i x) = u (mu i x)) (hM_represent : ∀ x : M, ∃ (i : I) (xi : Mi i), mu i xi = x) (hN_represent : ∀ y : N, ∃ (i : I) (yi : Ni i), nu i yi = y) (hM_equal : ∀ (i j : I) (x : Mi i) (y : Mi j), mu i x = mu j y → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), m i k hik x = m j k hjk y) (hN_equal : ∀ (i j : I) (x : Ni i) (y : Ni j), nu i x = nu j y → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), n i k hik x = n j k hjk y) (hloc : ∀ (i j : I) (h : i ≤ j), letI := (Ri.map (homOfLE h)).hom.toAlgebra ∃ (q : Si.obj i ⊗[Ri.obj i] Ri.obj j →+* Si.obj j) (W : Submonoid (Si.obj i ⊗[Ri.obj i] Ri.obj j)), (∀ (s : Si.obj i) (r : Ri.obj j), q (s ⊗ₜ[Ri.obj i] r) = (Si.map (homOfLE h)).hom s * algebraMap (Ri.obj j) (Si.obj j) r) ∧ (letI := q.toAlgebra; IsLocalization W (Si.obj j))) (hbaseM : ∀ (i j : I) (h : i ≤ j), letI := (Si.map (homOfLE h)).hom.toAlgebra ∃ e : (Si.obj j ⊗[Si.obj i] Mi i) ≃ₗ[Si.obj j] Mi j, ∀ (s : Si.obj j) (x : Mi i), e (s ⊗ₜ[Si.obj i] x) = s • m i j h x) (hbaseN : ∀ (i j : I) (h : i ≤ j), letI := (Si.map (homOfLE h)).hom.toAlgebra ∃ e : (Si.obj j ⊗[Si.obj i] Ni i) ≃ₗ[Si.obj j] Ni j, ∀ (s : Si.obj j) (x : Ni i), e (s ⊗ₜ[Si.obj i] x) = s • n i j h x) [Module.Flat cR.pt N] (h_fibre : Function.Injective ((u.restrictScalars cR.pt).lTensor (IsLocalRing.ResidueField cR.pt))) (i₁ : I) (h_source : ∀ j : I, i₁ ≤ j → letI := ((algebraMap cR.pt (IsLocalRing.ResidueField cR.pt)).comp (algebraMap (Ri.obj j) cR.pt)).toAlgebra ∃ Ψ : (IsLocalRing.ResidueField cR.pt ⊗[Ri.obj j] Mi j) →ₗ[ IsLocalRing.ResidueField cR.pt] (IsLocalRing.ResidueField cR.pt ⊗[cR.pt] M), (∀ (c : IsLocalRing.ResidueField cR.pt) (x : Mi j), Ψ (c ⊗ₜ[Ri.obj j] x) = c ⊗ₜ[cR.pt] mu j x) ∧ Function.Injective Ψ) : ∃ i₂ : I, i₁ ≤ i₂ ∧ ∀ j : I, i₂ ≤ j → Module.Flat (Ri.obj j) (Ni j) ∧ Function.Injective (((ui j).restrictScalars (Ri.obj j)).lTensor (IsLocalRing.ResidueField (Ri.obj j))) ∧ Function.Injective (ui j) ∧ Module.Flat (Ri.obj j) (Ni j ⧸ LinearMap.range ((ui j).restrictScalars (Ri.obj j)))",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Closed fibres are represented by residue-field tensor products using TensorProduct.quotTensorEquivQuotSMul. Tensor associativity and cancellation identify k ⊗[R_j] M_j with the scalar extension of the stage fibre; h_source specifies its canonical comparison on pure tensors. All data share a sufficiently large universe, as permitted in the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45bf4ca78",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Node identical to side-live except the lean record; no statement_change and no new nodes. Lean matches every clause: local rings and local stage, transition, cocone and limit arrows; categorical plus elementwise ring and module colimits; semilinear transitions and cocones with identity, composition and square laws; the localization map, the base-change isomorphisms and Psi_j pinned on pure tensors (Psi always exists, so only its injectivity is assumed); Noetherian and finite only at stages; N flat over R; limit fibre injective via the residue-field tensor; conclusion is exists i2 >= i1 such that for all j >= i2: N_j flat, fibre map injective, u_j injective, cokernel flat. A single universe is allowed by the node. No duplicate found in the side-live lean/Sheaf or lean/WeilConjectures trees. lean.statement matches the file verbatim; the only sorry is the theorem body; no hollow definitions; docstrings carry the source place and the five proof steps; the report has Worker report and Second reading sections. No fixes, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261023T131944-L-2176430",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

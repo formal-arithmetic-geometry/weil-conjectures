@@ -1,0 +1,163 @@
+{
+ "id": "lem-pur-twisted-pullback-coefficient-coherence",
+ "kind": "statement",
+ "title": "Normalized coefficient and shift coherence for a twisted pullback square",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "statement": "Fix a prime ell and an algebraic closure Ω of Q_ell, with actual finite intermediate fields R⊆Ω, including equal inclusions. Let X,X′,Y,Y′ be Noetherian schemes of finite Krull dimension with ell invertible in the stalks and residue fields. Given arbitrary maps u:X′→X, f:X→Y, f′:X′→Y′, v:Y′→Y, equality sq:u≫f=f′≫v, and d≥0, there exists ShiftCoherence s as defined in [def-pur-twisted-pullback-shift-coherence], together with normalized SquareCoordinates for those same shift data [def-pur-twisted-pullback-square-coordinates], the seven family TowerCoherence laws [def-pur-twisted-pullback-coefficient-coherence], and SquareShiftEquations sq d s [def-pur-twisted-pullback-square-shift-equations]. No smoothness or Cartesian hypothesis is needed. The theorem asserts none of Z,C,M, the two intermediate equations or the identification with adic a.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Clause (3), coefficient-extension tower comparisons; expanded ordinary pullback/tensor/shift calculation in lem-pur-twisted-pullback-square-scalars."
+ },
+ "stmt_deps": [
+  "def-pur-twisted-pullback-shift-coherence",
+  "def-pur-twisted-pullback-square-coordinates",
+  "def-pur-twisted-pullback-coefficient-coherence",
+  "def-pur-twisted-pullback-square-shift-equations"
+ ],
+ "proof": [
+  {
+   "text": "Restrict exact coefficient relabeling and localize it on hom tensors to construct Presentation. Use the simultaneous framework/PBC bridge to pin the entire quotient tower, augmentation and zero shifted coordinate for every pullback. Its chi-normalized scalar comparison produces ScalarCoordinates and PullScalarCompatible, in the inverse PBC direction. Apply this at each vertex and arrow with the same presentations.",
+   "uses": [
+    "lem-pur-framework-pbc-pullback-scalar-bridge",
+    "def-weil-pbc-rational-category",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a flat K-flat representative, remove completed tensor by its normalized inverse augmentation, identify ordinary tensor, and collapse the degree-zero Tate factor. Descend this natural map to beta on integral objects. Transport canonical shifts through beta and localize to obtain ShiftData. Exact coefficient relabeling on the line gives TwistCoordinates with this beta and hence SquareCoordinates.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p, use the specified scalar identity and successive-extension comparisons. For q, ordinary balancing on each Tate factor gives identity multiplication and associative triple multiplication; d=0 uses the coefficient unit. Whole-system normalized realization and localization preserve these laws. Whisker and paste to get PU,PV,a,rA,rB: naturality moves the intervening associator through the comparison, and the adjacent scalar associators cancel. These are TowerCoherence for all seven families.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed cochain pullback/tensor and scalar comparisons commute with signed shifts and every whole-tower transition. With the Tate line in degree zero, there is no new sign, and the common shift 2d is even. Descend and localize, then compose shift equations to get ShiftCoherence and the z,t,m shift equations. The shift structures are the ones pinned by beta, not newly rescaled structures.",
+   "uses": [
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "lem-weil-completed-scalar-chain-shift",
+    "lem-pur-framework-pbc-pullback-scalar-bridge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-framework-pbc-pullback-scalar-bridge",
+  "def-weil-pbc-rational-category",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-coefficient-twists-detailed",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "lem-weil-completed-scalar-chain-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Clause (3), coefficient-extension tower comparisons; expanded ordinary pullback/tensor/shift calculation in lem-pur-twisted-pullback-square-scalars."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist derived pullback scalar extension commutative square naturality composition",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso\", \"naturality\"",
+   "results": "CategoryTheory.NatIso.naturality_1; CategoryTheory.NatIso.naturality_2; CategoryTheory.NatIso.naturality_1'; CategoryTheory.NatIso.naturality_2'; CategoryTheory.NatIso.naturality_1_assoc; CategoryTheory.NatIso.naturality_2_assoc; CategoryTheory.NatIso.naturality_1'_assoc; CategoryTheory.NatIso.naturality_2'_assoc",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "twistedPullbackSquareScalars|TwistedPullbackScalars.*(natur|coher)|rationalPullbackScalarComparison.*comp",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist pullback coefficient extension canonical coherence and rational localization",
+   "results": "Module.Basis.ofIsLocalizedModule_repr_apply; LinearMap.restrictScalars_extendScalarsOfIsLocalization; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalizationEquiv; LinearMap.extendScalarsOfIsLocalization; IsLocalization.mapₐ_coe; ModuleCat.instIsScalarTowerLocalizationCarrierLocalizedModule; instIsScalarTowerLocalizationAlgebraMapSubmonoidPrimeCompl_1",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(twist|pullback)|twist.*scalar in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Localization",
+   "results": "No hits for the specified comparisons; checked the local Mathlib source.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedPullbackSquareScalars",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-rational-purity-trace-coherence",
+   "place": "Ordinary scalar/pullback/twist constituents of base-change coherence, as expanded by lem-pur-twisted-pullback-square-scalars",
+   "via": [
+    "lem-pur-twisted-pullback-square-scalars",
+    "lem-pur-smooth-exchange-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TwistedPullbackCoefficientCoherence",
+  "file": "lean/Sheaf/Paper/TwistedPullbackCoefficientCoherence.lean",
+  "declaration": "WeilConjectures.TwistedPullbackScalars.twistedPullbackCoefficientCoherence",
+  "statement": "theorem twistedPullbackCoefficientCoherence :\n    ∃ s : ShiftCoherence l Ω u f f' v d,\n      Nonempty (SquareCoordinates l Ω u f f' v d s) ∧\n      TowerCoherence l Ω u f f' v d ∧ SquareShiftEquations l Ω u f f' v sq d s",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T181101-L-4074722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T181101-L-4074722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

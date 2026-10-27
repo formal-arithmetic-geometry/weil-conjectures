@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-semiabelian-picard-multiplicative-torsor",
+ "kind": "statement",
+ "title": "Geometric Picard-zero lines admit multiplicative frame torsors",
+ "statement": "Let $k$ be a field [def-weil-field] and $H/k$ a smooth separated commutative group scheme of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-sc-group-scheme, def-weil-finite-type-morphism]. Separated means its diagonal is a closed immersion. Assume that over an algebraic closure $\\bar k$ there is an exact sequence of fppf sheaves $1\\to\\mathbf G_{m,\\bar k}^r\\to H_{\\bar k}\\to A\\to1$, where $r\\geq0$, $\\mathbf G_m=\\operatorname{Spec}\\bar k[t,t^{-1}]$ with multiplication, and $A$ is a proper smooth geometrically connected commutative group scheme [def-weil-algebraic-closure, def-pc-base-change, def-pc-fppf-site]. Let $T$ be an invertible $\\mathcal O_H$-module [def-sc-invertible-module]. Assume $T_{\\bar k}$ is algebraically equivalent to $\\mathcal O_{H_{\\bar k}}$, meaning that their classes are related by a chain of pairs of fibres of invertible-module families on $H_{\\bar k}\\times V$, with $V$ a smooth connected $\\bar k$-variety. Fix a nonzero frame $u$ of the one-dimensional $k$-vector space $e^*T$, where $e$ is the identity of $H$. Define the frame torsor $E=T^\\times$ by $E(U)=\\operatorname{Isom}_{\\mathcal O_U}(\\mathcal O_U,h^*T)$ over each map $h:U\\to H$; scalar multiplication gives its $\\mathbf G_{m,k}$-action. There exists a commutative $k$-group scheme structure on $E$, with identity $u$, such that its projection $E\\to H$ is a group homomorphism and the embedding $\\mathbf G_{m,k}\\to E$, $a\\mapsto au$, identifies $\\mathbf G_{m,k}$ with its kernel. Its group law restricts to the stated scalar action, and $1\\to\\mathbf G_{m,k}\\to E\\to H\\to1$ is exact as fppf sheaves. Pullbacks here are tensor inverse images [def-pc-module-pullback]. This assertion is over $k$ with no perfection or split-torus hypothesis.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "IV, Picard/theorem-of-square calculus for semiabelian groups; WANTED locally. Agent-formulated multiplicative-torsor prerequisite, not asserted to be a verbatim theorem there. Abelian comparison: literature/milne-abelian-varieties_AV.pdf, I Proposition 8.4 and Section 9 (Weil--Barsotti)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-pc-base-change",
+  "def-pc-fppf-site",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-line-algebraic-equivalence",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga",
+  "def-sfb-split-torus-frame-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-semiabelian-geometric-power-integrality] over $F=\\bar k$ to the exact sequence in the hypotheses. Thus $H_{\\bar k}$ and $(H_{\\bar k})^2$ are nonempty integral separated finite-type schemes. The same holds for the powers used below. These are the hypotheses needed for the product-unit theorem used below; no properness of $H$ is inferred.",
+   "uses": [
+    "lem-sfb-semiabelian-geometric-power-integrality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+   }
+  },
+  {
+   "text": "Represent the frame functor by the following open subscheme of $P=\\mathbf P_H(\\mathcal O_H\\oplus T^\\vee)$, using [lem-trf-projective-bundle-quotient-geometry]. In the universal quotient require both summand maps to the quotient line to be isomorphisms. This is open, since in local bases it says that two functions are units. Normalize by the first summand; the second is then an isomorphism $h^*T^\\vee\\simeq\\mathcal O_U$, equivalently a frame of $h^*T$. This correspondence and its inverse commute with pullback. It identifies the open with $E=T^\\times$ and its scalar action. On an open $V$ trivializing $T$, the coordinate of a frame identifies $E|_V$ with $V\\times\\mathbf G_m$. This also fixes the interpretation of all later formulas as morphisms, on every test scheme, rather than just on field-valued points.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+   }
+  },
+  {
+   "text": "By [lem-sfb-semiabelian-picard-square-triviality], choose an isomorphism $\\phi_0:p_1^*T\\otimes p_2^*T\\simeq m^*T$ over $k$. Using the given frame $u$ at the identity, its restrictions define units $a(x)$ and $b(y)$ by $\\phi_0(v\\otimes u)=a(x)v$ and $\\phi_0(u\\otimes w)=b(y)w$. These definitions are independent of the local frames $v,w$, because automorphisms of a rank-one module are scalar units. Put $c=a(e)=b(e)$ and $$\\phi=\\frac{c}{p_1^*a\\,p_2^*b}\\phi_0.$$ Then $\\phi(v\\otimes u)=v$ and $\\phi(u\\otimes w)=w$: on the first axis the correction is $1/a(x)$, on the second it is $1/b(y)$. Define $v*w=\\phi(v\\otimes w)$. The tensor of two frames is a frame and $\\phi$ is an isomorphism, so this defines a morphism $E\\times_kE\\to E$ over $m$. It is bilinear under scalar multiplication, and $u$ is its two-sided identity.",
+   "uses": [
+    "lem-sfb-semiabelian-picard-square-triviality",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+   }
+  },
+  {
+   "text": "Compare $\\phi_{x+y,z}(\\phi_{x,y}\\otimes1)$ and $\\phi_{x,y+z}(1\\otimes\\phi_{y,z})$ as isomorphisms from $T_x\\otimes T_y\\otimes T_z$ to $T_{x+y+z}$. Their ratio is a regular unit $q$ on $H^3$. The unit normalizations give $q(x,y,e)=1$ and $q(e,e,z)=1$. After extension to $\\bar k$, apply [lem-sfb-rosenlicht-product-unit-factorization] to $X=H_{\\bar k}^2$, $Y=H_{\\bar k}$, based at $(e,e),e$. Its explicit formula gives $$q(x,y,z)=q(x,y,e)q(e,e,z)/q(e,e,e)=1.$$ Equality descends to $k$: on affine opens trivializing the relevant lines, a difference of maps has coefficient in a $k$-algebra $R$, and $R\\to R\\otimes_k\\bar k$ is injective (extend any nonzero vector to a $k$-basis). Thus $*$ is associative as a scheme morphism.",
+   "uses": [
+    "lem-sfb-rosenlicht-product-unit-factorization",
+    "lem-sfb-semiabelian-geometric-power-integrality",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+   }
+  },
+  {
+   "text": "Compare $\\phi_{x,y}$ with $\\phi_{y,x}$ after switching the tensor factors. Their ratio $d$ is a regular unit on $H^2$, with $d(x,e)=d(e,y)=1$. The normalized formula of [lem-sfb-rosenlicht-product-unit-factorization] over $\\bar k$ gives $d(x,y)=d(x,e)d(e,y)/d(e,e)=1$. Descend this equality by the same coefficient injection $R\\hookrightarrow R\\otimes_k\\bar k$. Hence $*$ is commutative. This uses product-unit rigidity, not the false assertion that every regular unit on a semiabelian variety is constant.",
+   "uses": [
+    "lem-sfb-rosenlicht-product-unit-factorization",
+    "lem-sfb-semiabelian-geometric-power-integrality",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+   }
+  },
+  {
+   "text": "Pull back $\\phi$ along $x\\mapsto(x,-x)$ and identify $T_e$ with $k$ by $u$. This is a perfect rank-one pairing $T_x\\otimes T_{-x}\\simeq k$. Given a frame $v$ of $T_x$, let $j(v)$ be the unique frame of $T_{-x}$ paired with $v$ to $1$. Locally, in bases of these two lines, the pairing has unit coefficient $f(x)$ and $v$ has unit coordinate $t$, so $j(v)$ has coordinate $(f(x)t)^{-1}$. This is regular on the frame scheme; uniqueness makes the formulas agree on overlaps. Thus $j:E\\to E$ is a morphism and $v*j(v)=u$; commutativity gives the other inverse identity. Together with the preceding steps this is a commutative group scheme [def-sc-group-scheme].",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+   }
+  },
+  {
+   "text": "The projection is a homomorphism since $*$ lies over $m$. Its fibre at $e$ consists exactly of frames of the fixed line $T_e$; the chosen $u$ identifies it, on every test scheme, with $\\mathbf G_{m,k}$ by $a\\mapsto au$. Bilinearity and normalization give $(au)*v=av$ and $(au)*(bu)=ab\\,u$, so this embedding is a homomorphism and its action is exactly the specified scalar action. Finally every map $U\\to H$ admits a Zariski cover trivializing the pulled-back line; a basis on each open is a lift to $E$. Such covers are fppf covers by [lem-pc-zariski-coverings-are-fppf]. Hence $E\\to H$ is an epimorphism of fppf sheaves, and the displayed kernel calculation proves exactness of the asserted sequence.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-group-scheme",
+    "lem-pc-zariski-coverings-are-fppf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semiabelian-geometric-power-integrality",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-sc-invertible-module",
+  "lem-sfb-semiabelian-picard-square-triviality",
+  "lem-sfb-rosenlicht-product-unit-factorization",
+  "def-sc-group-scheme",
+  "lem-pc-zariski-coverings-are-fppf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 8.4 and Section 9, Proposition 9.2, printed pp.35--36 and 41; agent generalization to semiabelian groups using Milne iAG2017 Proposition 12.48 and Remark 12.50, pp.246--247"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically algebraically trivial line bundle on a semiabelian variety is the multiplicative group torsor of a commutative group extension by Gm",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.functor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"CategoryTheory.Functor CommSemiRingCat CommGrpCat\", \"doc\": \"The functor from the category of commutative semirings to the category of commutative groups, which sends each commutative semiring $ R $ to its Picard group $ \\\\mathrm{Pic}(R) $ and each ring homomorp\"}\n  {\"name\": \"instCommGroupPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → CommGroup (CommRing.Pic R)\", \"doc\": \"For any commutative semiring $ R $, its Picard group $ \\\\mathrm{Pic}(R) $, which consists of isomorphism classes of invertible semimodules over $ R $ under tensor product, forms an abelian group. The g\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [CommSemiring R] → Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}\n  {\"name\": \"CommRing.Pic.instAddCommGroupAsModule\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u_7) → [inst : CommRing R] → (M : CommRing.Pic R) → AddCommGroup M.AsModule\", \"doc\": \"For any commutative ring $ R $ and any invertible module $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, the underlying additive structure of $ M $ forms an additive commutative group. This instance as\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.instOneH1\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {G : CategoryTheory.Functor Cᵒᵖ GrpCat} → {I : Type w'} → {U : I → C} → One (CategoryTheory.PresheafOfGroups.H1 G U)\", \"doc\": \"For any category $\\\\mathcal{C}$, presheaf of groups $G: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, and covering family $U: I \\\\to \\\\mathcal{C}$, the first non-abelian cohomology group $H^1(G, U)$ has a can\"}\n  {\"name\": \"CommRing.Pic.mk\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (M : Type u_5) → [inst_1 : AddCommMonoid M] → [inst_2 : Module R M] → [Module.Invertible R M] → CommRing.Pic R\", \"doc\": \"The Picard group of a commutative semiring $ R $ is the group formed by isomorphism classes of invertible $ R $-semimodules under the tensor product operation. Each class has an inverse given by the d\"}\n  {\"name\": \"CommRing.Pic.AsModule\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"{R : Type u} → [inst : CommSemiring R] → CommRing.Pic R → Type u\", \"doc\": \"For an element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, this returns the corresponding invertible semimodule (module) over $ R $ in the skeleton category, representing the isomorphism class of i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups and abstract group extensions do not construct multiplicative torsors of semiabelian schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles algebraically equivalent to zero on a semiabelian group admit a group extension structure on their frame torsor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddGroupExtension\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"(N : Type u_1) →\\n  (E : Type u_2) → (G : Type u_3) → [AddGroup N] → [AddGroup E] → [AddGroup G] → Type (max (max u_1 u_2) u_3)\", \"doc\": \"The structure of an additive group extension, representing a short exact sequence $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ where $N$, $E$, and $G$ are additive groups with $N$ a normal subgroup of $E$ and $G$ the \"}\n  {\"name\": \"AddGroupExtension.mk\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] →\\n        [inst_1 : AddGroup E] →\\n          [inst_2 : AddGroup G] →\\n            (inl : N →+ E) →\\n              (rightHom : E →+ G) →\\n                Function.Injective ⇑inl →\\n                  inl.range = rightHom.ker\", \"doc\": \"Given additive groups $N$, $E$, $G$, and additive group homomorphisms $\\\\text{inl}: N \\\\to E$ and $\\\\text{rightHom}: E \\\\to G$ such that $\\\\text{inl}$ is injective, the image of $\\\\text{inl}$ equals the ker\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Subgroup (Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"AddGroupExtension.Equiv.ctorIdx\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      {inst : AddGroup N} →\\n        {inst_1 : AddGroup E} →\\n          {inst_2 : AddGroup G} →\\n            {S : AddGroupExtension N E G} →\\n              {E' : Type u_4} → {inst_3 : AddGroup E'} → {S' : AddGroupExtension N E' G} → S.Equiv S' → ℕ\", \"doc\": \"The function that returns 0 for any equivalence between additive group extensions, since the equivalence structure has a single constructor.\"}\n  {\"name\": \"LieAlgebra.of_symm_zero\", \"module\": \"Mathlib.Algebra.Lie.Extension\", \"type\": \": (ofProd c).symm (0 : ofTwoCocycle c) = 0\", \"doc\": \"The Lie algebra extension of $ L $ by $ M $ constructed via a 2-cocycle $ c $ is equipped with an additive commutative group structure, inherited from the canonical equivalence between the extension a\"}\n  {\"name\": \"GroupExtension.Equiv\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] →\\n        [inst_1 : Group E] →\\n          [inst_2 : Group G] →\\n            GroupExtension N E G → {E' : Type u_4} → [inst_3 : Group E'] → GroupExtension N E' G → Type (max u_2 u_4)\", \"doc\": \"The type of equivalences between two group extensions with the same normal subgroup $N$ and quotient group $G$, consisting of a group isomorphism between the total groups $E$ and $E'$ that commutes wi\"}\n  {\"name\": \"LieAlgebra.instAddCommGroupOfTwoCocycle\", \"module\": \"Mathlib.Algebra.Lie.Extension\", \"type\": \": AddCommGroup (ofTwoCocycle c)\", \"doc\": \"The Lie algebra extension of $ L $ by $ M $ constructed via a 2-cocycle $ c $ is equipped with an additive commutative group structure, inherited from the canonical equivalence between the extension a\"}\n  {\"name\": \"AddGroupExtension.Equiv\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] →\\n        [inst_1 : AddGroup E] →\\n          [inst_2 : AddGroup G] →\\n            AddGroupExtension N E G →\\n              {E' : Type u_4} → [inst_3 : AddGroup E'] → AddGroupExtension N E' G → Type (max u_2 u_4)\", \"doc\": \"An equivalence between two additive group extensions $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and $0 \\\\to N \\\\to E' \\\\to G \\\\to 0$, consisting of an additive group isomorphism $E \\\\to E'$ that commutes with the inclusi\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups and abstract group extensions do not construct multiplicative torsors of semiabelian schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Meta.Closure.pickNextToProcess?\", \"module\": \"Lean.Meta.Closure\", \"type\": \" : Lean.Meta.Closure.ClosureM (Option Lean.Meta.Closure.ToProcessElement)\", \"doc\": \"\"}\n  {\"name\": \"Lean.Meta.Closure.pickNextToProcessAux\", \"module\": \"Lean.Meta.Closure\", \"type\": \" (lctx : Lean.LocalContext) (i : ℕ) (toProcess : Array Lean.Meta.Closure.ToProcessElement) (elem : Lean.Meta.Closure.ToProcessElement) : Lean.Meta.Closure.ToProcessElement × Array Lean.Meta.Closure.ToProcessElement\", \"doc\": \"\"}\n  {\"name\": \"Batteries.Tactic.tacticPick_goal_\", \"module\": \"Batteries.Tactic.PermuteGoals\", \"type\": \" : Lean.ParserDescr\", \"doc\": \"`pick_goal n` will move the `n`-th goal to the front.\\n\\n`pick_goal -n` will move the `n`-th goal (counting from the bottom) to the front.\\n\\nSee also `rotate_left`/`rotate_right`, which move goals from t\"}\n  {\"name\": \"unpickle\", \"module\": \"Batteries.Util.Pickle\", \"type\": \" (α : Type) (path : System.FilePath) : IO (α × Lean.CompactedRegion)\", \"doc\": \"Load an object from disk.\\nNote: The returned `CompactedRegion` can be used to free the memory behind the value\\nof type `α`, using `CompactedRegion.free` (which is only safe once all references to the \"}\n  {\"name\": \"pickle\", \"module\": \"Batteries.Util.Pickle\", \"type\": \" {α : Type} (path : System.FilePath) (x : α) (key : Lean.Name := by exact decl_name%) : IO Unit\", \"doc\": \"Save an object to disk.\\nIf you need to write multiple objects from within a single declaration,\\nyou will need to provide a unique `key` for each.\"}\n  {\"name\": \"withUnpickle\", \"module\": \"Batteries.Util.Pickle\", \"type\": \" {m : Type → Type u_1} [Monad m] [MonadLiftT IO m] {α β : Type} (path : System.FilePath) (f : α → m β) : m β\", \"doc\": \"Load an object from disk and run some continuation on it, freeing memory afterwards.\"}\n  {\"name\": \"Mathlib.CrossRef.PiBaseTopic\", \"module\": \"Mathlib.Tactic.CrossRefAttribute\", \"type\": \" : Type\", \"doc\": \"A topic identifying a π-Base project.\"}\n  {\"name\": \"Mathlib.CrossRef.pibaseTopic\", \"module\": \"Mathlib.Tactic.CrossRefAttribute\", \"type\": \" : Lean.ParserDescr\", \"doc\": \"The topic identifying a π-Base database. Possible values:\\n\\n- `topology`\\n\\nThis list will be expanded in the future.\"}\n  {\"name\": \"Mathlib.CrossRef.PiBaseTopic.topology\", \"module\": \"Mathlib.Tactic.CrossRefAttribute\", \"type\": \" : Mathlib.CrossRef.PiBaseTopic\", \"doc\": \"\"}\n  {\"name\": \"Mathlib.CrossRef.instBEqPiBaseTopic\", \"module\": \"Mathlib.Tactic.CrossRefAttribute\", \"type\": \" : BEq Mathlib.CrossRef.PiBaseTopic\", \"doc\": \"\"}\n  {\"name\": \"Mathlib.CrossRef.instHashablePiBaseTopic\", \"module\": \"Mathlib.Tactic.CrossRefAttribute\", \"type\": \" : Hashable Mathlib.CrossRef.PiBaseTopic\", \"doc\": \"\"}\n  {\"name\": \"Mathlib.CrossRef.instOrdPiBaseTopic\", \"module\": \"Mathlib.Tactic.CrossRefAttribute\", \"type\": \" : Ord Mathlib.CrossRef.PiBaseTopic\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups and abstract group extensions do not construct multiplicative torsors of semiabelian schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semiAbelian|multiplicative.*torsor|algebraically.*trivial",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups and abstract group extensions do not construct multiplicative torsors of semiabelian schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Weil Barsotti correspondence between primitive invertible sheaves and central extensions of a semiabelian group by the multiplicative group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.functor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"CategoryTheory.Functor CommSemiRingCat CommGrpCat\", \"doc\": \"The functor from the category of commutative semirings to the category of commutative groups, which sends each commutative semiring $ R $ to its Picard group $ \\\\mathrm{Pic}(R) $ and each ring homomorp\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"Submodule.unitsQuotEquivRelPic_symm_apply\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A] (a : ↥(CommRing.relPic R A)),\\n  (Submodule.unitsQuotEquivRelPic R A).symm a =\\n    (QuotientGroup.congr (Submodule.unitsToPic R A).ker (Units.map ↑(Submodule.spanSingle\", \"doc\": \"For commutative semirings $ R $ and $ A $ with a faithful $ R $-algebra structure, the quotient group of invertible submodules of $ A $ by the subgroup of principal invertible submodules (those genera\"}\n  {\"name\": \"instCommGroupPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → CommGroup (CommRing.Pic R)\", \"doc\": \"For any commutative semiring $ R $, its Picard group $ \\\\mathrm{Pic}(R) $, which consists of isomorphism classes of invertible semimodules over $ R $ under tensor product, forms an abelian group. The g\"}\n  {\"name\": \"CategoryTheory.PresheafOfGroups.H1\", \"module\": \"Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Functor Cᵒᵖ GrpCat → {I : Type w'} → (I → C) → Type (max (max (max u v) w) w')\", \"doc\": \"Given a category $\\\\mathcal{C}$, a presheaf of groups $F: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Grp}$, an indexing type $I$, and a function $U: I \\\\to \\\\mathcal{C}$, the first non-abelian cohomology group $H\"}\n  {\"name\": \"Submodule.unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  (A : Type u_4) →\\n    [inst : CommSemiring R] →\\n      [inst_1 : Semiring A] → [inst_2 : Algebra R A] → [FaithfulSMul R A] → (Submodule R A)ˣ →* CommRing.Pic R\", \"doc\": \"The function defines a monoid homomorphism from the group of invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $. It maps each invertible submodule $ I $ to its isom\"}\n  {\"name\": \"CommRing.Pic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [CommSemiring R] → Type u\", \"doc\": \"The Picard group of a commutative semiring $ R $ is defined as the group of units of the skeleton of the category of semimodules over $ R $, with the type shrunk to ensure smallness. This corresponds \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups and abstract group extensions do not construct multiplicative torsors of semiabelian schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraically trivial line bundles on semiabelian varieties have trivial theorem of square defect",
+   "results": "Search log hits: Algebra.IsStandardSmooth.subsingleton_h1Cotangent, CommRing.relPic_eq_top, groupCohomology.H1ofAutOnUnitsUnique, CommRing.Pic.instFreeOfSubsingleton, CommRing.Pic.subsingleton_iff, CommRing.Pic.subsingleton_iffₛ, WeierstrassCurve.Affine.Point.toClass_eq_zero, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, abstract extensions, and Hilbert 90 do not state the semiabelian frame-torsor theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRing.Pic",
+   "results": "Search log hits: CommRing.Pic, instCommGroupPic, CommRing.Pic.AsModule, CommRing.Pic.instCoeSortType, CommRing.Pic.instSubsingletonOfIsLocalRing, CommRing.Pic.instAddCommGroupAsModule, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.Pic.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, abstract extensions, and Hilbert 90 do not state the semiabelian frame-torsor theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semiAbelian|theorem.of.square|Rosenlicht",
+   "results": "Search log hits: Mathlib/FieldTheory/Differential/Liouville.lean, Mathlib/RingTheory/Derivation/Basic.lean, Mathlib/GroupTheory/SpecificGroups/ZGroup.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, abstract extensions, and Hilbert 90 do not state the semiabelian frame-torsor theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A primitive line bundle on a connected algebraic group defines a commutative extension by the multiplicative group",
+   "results": "Search log hits: instCommGroupPic, CommRing.relPic, LieAlgebra.of_symm_zero, LieAlgebra.of_nsmul, LieAlgebra.instAddCommGroupOfTwoCocycle, LieAlgebra.instModuleOfTwoCocycle, GroupExtension.mk, LieAlgebra.of_symm_add",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, abstract extensions, and Hilbert 90 do not state the semiabelian frame-torsor theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil Barsotti theorem constructing group extensions from algebraically trivial line bundles",
+   "results": "Search log hits: groupCohomology.H1ofAutOnUnitsUnique, CommRing.Pic.functor, CommRing.relPic, CategoryTheory.PresheafOfGroups.H1, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Algebra.Extension.instAddCommGroupH1Cotangent, Submodule.mulExact_unitsToPic_mapAlgebra, CategoryTheory.PresheafOfGroups.instOneH1",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, abstract extensions, and Hilbert 90 do not state the semiabelian frame-torsor theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-algebraic-equivalence-norm",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Structural input before inversion: realize a geometrically algebraically trivial line as a multiplicative frame torsor.",
+   "via": [
+    "lem-sfb-semiabelian-algebraic-equivalence-norm",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-picard-multiplicative-torsor",
+  "worker": "stage1",
+  "summary": "Construct the frame scheme, normalize a square isomorphism by two axis units, prove associativity and commutativity by Rosenlicht factorization, and construct the inverse by the perfect rank-one pairing. Two new smaller statement-only inputs: square-defect triviality over the original field and geometric integrality of semiabelian powers. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Structural input before inversion: realize a geometrically algebraically trivial line as a multiplicative frame torsor. Latest direct-images proof (3) read; this is the supporting multiplicative-torsor argument on its inherited alteration/Picard branch. The null blueprint ancestor and via chain are retained exactly as returned by blueprint_refs.py.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic representing quotient geometry constructs the frame scheme; no version is supplied by this unit."
+   },
+   {
+    "node": "lem-pc-zariski-coverings-are-fppf",
+    "why": "Generic topology inclusion shows that Zariski-local frames give fppf-local lifts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-pc-zariski-coverings-are-fppf"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-8930bb1c9",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-8930bb1c9 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full. The item's statement and stmt_deps are unchanged from live, and live is still unsplit, so this delivery is not superseded. The split follows Milne AV I 8.4 and 9.2 (pp.35-36 and 41, read in the local copy): a square isomorphism is normalized by the two axis units, with c=a(e)=b(e). Associativity: q(x,y,e)=q(e,e,z)=1 by direct check, then the normalized Rosenlicht formula on H^2×H gives q=1, and k̄→k descent is by injectivity of R→R⊗k̄. Commutativity: same argument with d(x,e)=d(e,y)=1. Inverse: from the perfect pairing T⊗ι*T≅O. Exactness: the kernel is the frames of e*T≅G_m, and Zariski-local lifts give fppf surjectivity. The Rosenlicht integrality hypotheses are supplied in Step 1. New node square-triviality: strictly smaller than the item (no group law or coherence). It follows from the item itself and agrees with Milne 8.4 for abelian varieties. On nonsplit tori it holds because the axis restrictions detect H^1(G_k,X̂⊕X̂). It does not duplicate second-difference-diagonal, cubical-rigidification or the proper-only algebraically-trivial-line-multiplicativity. New node geometric-power-integrality: true (torus torsor over connected B, then 0B7Q/056T, then products over k̄). Its tags exist, and no existing node gives this integrality. Batch-5 citation lem-trf-projective-bundle-quotient-geometry: a generic P(Sym E) functor-of-points node (sk-i-curve-zero). Its closure reaches no trace-formula or Poincaré proof node. It is already a stmt_dep of the base node lem-sfb-split-torus-torsor-frame-geometry in this unit, so it is accepted as a generic tool. Accepted tool_uses: that trf node and lem-pc-zariski-coverings-are-fppf (a Mathlib leaf). The graph is acyclic. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianPicardMultiplicativeTorsor",
+  "declaration": "AlgebraicGeometry.semiabelian_picard_multiplicative_torsor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianPicardMultiplicativeTorsor.lean",
+  "statement": "theorem semiabelian_picard_multiplicative_torsor {k : Type u} [Field k] (H : Grp (Over (Spec (.of k)))) [IsCommMonObj H.X] [Smooth H.X.hom] [IsClosedImmersion (pullback.diagonal H.X.hom)] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (r : ℕ) (A : Grp (Over (Spec (.of (AlgebraicClosure k))))) [IsCommMonObj A.X] [IsProper A.X.hom] [Smooth A.X.hom] [GeometricallyConnected A.X.hom] (i : MultiplicativeType.splitTorus (AlgebraicClosure k) r ⟶ (MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H) (q : (MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H ⟶ A) (hkernel : IsPullback i.hom.hom (toUnit (MultiplicativeType.splitTorus (AlgebraicClosure k) r).X) q.hom.hom η[A.X]) (hlocallySurjective : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of (AlgebraicClosure k)))) (yoneda.map q.hom.hom)) (T : H.X.left.Modules) [T.IsInvertible] (halgebraicallyTrivial : AreAlgebraicallyEquivalent ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H).X ((tensorPullback (pullback.fst H.X.hom (Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))))).obj T) (unit ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H).X.left)) (u : unit (𝟙_ (Over (Spec (.of k)))).left ≅ (tensorPullback η[H.X].left).obj T) : ∃ (E : Grp (Over (Spec (.of k)))) (p : E.X ⟶ H.X) (j : StandardGroupSchemes.multiplicative k ⟶ E.X) (F : FrameModel T) (c : Over.mk p.left ≅ F.space) (s : Over.mk η[H.X].left ⟶ Over.mk p.left), IsCommMonObj E.X ∧ IsMonHom p ∧ IsMonHom j ∧ s.left = η[E.X].left ∧ F.at (s ≫ c.hom) = u ∧ IsPullback j (toUnit (StandardGroupSchemes.multiplicative k)) p η[H.X] ∧ Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of k))) (yoneda.map p) ∧ (∀ (U : Over H.X.left) (x y : (Over.map H.X.hom).obj U ⟶ E.X) (hx : x.left ≫ p.left = U.hom) (hy : y.left ≫ p.left = U.hom) (z : (Over.map H.X.hom).obj U ⟶ StandardGroupSchemes.multiplicative k), y = x * (z ≫ j) → (F.at (Over.homMk y.left hy ≫ c.hom)).hom = (F.at (Over.homMk x.left hx ≫ c.hom)).hom ≫ ((tensorPullback U.hom).obj T).smulHom (z.left.appTop ((Scheme.ΓSpecIso (.of (LaurentPolynomial k))).inv (LaurentPolynomial.T 1))))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-859c7d9a6",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read the node, the Lean module, the report and the dependency sources (FrameModel/FrameModel.at/pullFrame, AreAlgebraicallyEquivalent, MultiplicativeType.baseChange/splitTorus, StandardGroupSchemes.multiplicative, smulHom). Every hypothesis matches: smooth, closed-diagonal, finite-type commutative H; the k̄ exact sequence as a kernel pullback plus fppf local surjectivity; A proper, smooth, geometrically connected; T invertible and algebraically trivial over k̄; u an iso O≅e*T. Every conclusion clause matches: E a commutative Grp over k identified with the FrameModel space over H; identity s with frame u; p and j group homs; G_m the full kernel (IsPullback); p fppf locally surjective; scalar law y=x*j(z) ⇒ frame(y)=frame(x)·z*t on all test schemes, which gives j(a)=au. Edge cases r=0, trivial H, T=O, char p and a single universe u are covered. The four added stmt_deps are landed def owners of used declarations, with no cycle. The statement field is verbatim, the name is new, the proof is only sorry with no defs, and source/blueprint/proof docstrings are present. Both report sections exist. No findings."
+ }
+}

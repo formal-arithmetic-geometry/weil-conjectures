@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-ordinary-pullback-composition-evaluation",
+ "kind": "statement",
+ "title": "Ordinary evaluation of the adjunction-normalized pullback compositor",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell and composable scheme maps h: Z -> X and f: X -> Y. For every index n>=0 and every strict coefficient system M on Y, evaluate the canonical ordinary whole-system pullback compositor at n. Under the unit-normalized ordinary evaluation isomorphisms of lem-pur-completed-primitive-counit-comparison, the result equals the canonical finite coefficient module compositor of lem-pur-proetale-module-pullback-composition. Explicitly, e_(hf)^(-1) followed by ev_n(a_M) equals a_(M_n) followed by h_n^*(e_f^(-1)) followed by e_h^(-1). Here n denotes the positive quotient exponent n+1. No normalization hypothesis on M or replacement of its transitions is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8, lemma-push-pull-composition-modules; explicit evaluation/mate refinement of parent steps 1 and 3"
+ },
+ "stmt_deps": [
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-pur-proetale-module-pullback-composition",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the two sides under the finite module pullback/direct-image adjunctions. Use the unit characterization of each inverseEvaluation and the mate characterizations of integralComparisonSequenceComposition and coefficientModulePullbackComposition. The resulting maps on evaluated direct images agree on sections: both restrict along the canonical fibre-product isomorphism Z x_X (X x_Y U) -> Z x_Y U. The coefficient actions agree by the constant-section maps. Extensionality on sections gives the equality of the right-adjoint maps. Injectivity of the composite adjunction Hom equivalences proves the asserted equality. This argument is independent of the transition maps of M and includes n=0.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-proetale-module-pullback-composition",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-pur-proetale-module-pullback-composition",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8; the unit-normalized evaluation calculation from parent proof steps 1 and 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a composite of left adjoints commutes with the canonical composition comparison",
+   "results": [
+    "CategoryTheory.Adjunction.comp_unit_app",
+    "CategoryTheory.Adjunction.comp_counit_app",
+    "CategoryTheory.Adjunction.leftAdjointCompNatTrans"
+   ],
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction identities exist; no specialized sequence-site evaluation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived functor composition comparison under evaluation of complexes",
+   "results": [
+    "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app"
+   ],
+   "date": "2026-10-25",
+   "verdict": "Derived factorization exists; the remaining statement is the ordinary unit-normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "integralComparisonSystemComposition|inverseEvaluation.*[Cc]omp; blueprint search pullback composition evaluation",
+   "results": [],
+   "date": "2026-10-25",
+   "verdict": "No existing ordinary composition/evaluation identity. The parent is the only node giving this specialized compatibility; its full conclusion is substantially stronger."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedPullbackCompositionTransport",
+  "date": "2026-10-25",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Compatible coefficient reductions and natural Weil comparison; pullback-composition finite normalization in parent proof steps 1 and 3",
+   "via": [
+    "lem-pur-normalized-pullback-composition-transport",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryPullbackCompositionEvaluation",
+  "file": "lean/Sheaf/Paper/OrdinaryPullbackCompositionEvaluation.lean",
+  "declaration": "WeilConjectures.PullbackCompositionTransport.ordinaryCompositionEvaluation",
+  "statement": "theorem ordinaryCompositionEvaluation {X Y Z : Scheme.{t}}\n    (h : Z ⟶ X) (f : X ⟶ Y) (n : ℕ) (M : coefficientSequenceModules l E Y) :\n    (ordinaryEvaluation l E (h ≫ f) n).inv.app M ≫\n      (coefficientSequenceEvaluation l E Z n).map\n        ((integralComparisonSequenceComposition l E h f).hom.app M) =\n    (Scheme.coefficientModulePullbackComposition h f\n      (CommRingCat.of (ULift.{t + 1}\n        (Padic.coefficientExtensionRing l E (n + 1))))).hom.app\n          ((coefficientSequenceEvaluation l E Y n).obj M) ≫\n      (integralOperationsLevelPullback l E h n).map\n        ((ordinaryEvaluation l E f n).inv.app M) ≫\n      (ordinaryEvaluation l E h n).inv.app\n        ((integralComparisonSequencePullback l E f).obj M)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PullbackCompositionTransport.ordinaryEvaluation",
+   "WeilConjectures.PullbackCompositionTransport.ordinaryCompositionEvaluation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c779",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261025T204936-L-3059420",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5c779",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261025T204936-L-3059420",
+  "kind": "interface",
+  "note": "independent cc review: delivered item module + new OrdinaryPullbackCompositionEvaluation module + 2 node files + change record vs clone sheaf-dag; mapDerivedCategorySquareIso/TriangleIso abbrevs vs old evaluation/finiteComposition bodies; ordinaryCompositionEvaluation vs the ∃!-pinned inverseEvaluation, integralComparisonSequenceComposition and coefficientModulePullbackComposition"
+ }
+}

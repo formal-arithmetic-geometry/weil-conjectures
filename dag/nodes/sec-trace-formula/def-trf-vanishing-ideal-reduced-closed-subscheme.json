@@ -1,0 +1,118 @@
+{
+ "id": "def-trf-vanishing-ideal-reduced-closed-subscheme",
+ "kind": "definition",
+ "title": "Vanishing ideal and reduced induced closed subscheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $T\\subseteq X$ a closed subset. Its vanishing ideal sheaf $\\mathcal I_T$ is the quasi-coherent ideal sheaf [def-sbc-ideal-sheaf-powers] defined on every affine open $U=\\operatorname{Spec}R\\subseteq X$ [def-weil-affine-spectrum] by $\\mathcal I_T(U)=\\bigcap_{\\mathfrak p\\in T\\cap U}\\mathfrak p\\subseteq R$, where points of $U$ are identified with prime ideals of $R$. The reduced induced closed subscheme on $T$ is, by definition, the closed subscheme cut out by $\\mathcal I_T$, with its canonical inclusion into $X$, using the ideal-sheaf subscheme construction [def-weil-pbc-scheme-reduction].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01J3 (lemma-reduced-closed-subscheme), construction of the vanishing ideal in the proof; Tag 01J4 (definition-reduced-induced-scheme)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "vanishing ideal sheaf of a closed subset of a scheme reduced induced closed subscheme",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, coe_support_vanishingIdeal, vanishingIdeal_antimono, vanishingIdeal_ideal and gc. The primary declaration has type (Z : Closeds X) : IdealSheafData X and defines exactly the requested vanishing ideal; use it without a new Lean definition.",
+   "date": "2026-10-24",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "AlgebraicGeometry Scheme IdealSheafData vanishingIdeal closed subset",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal, vanishingIdeal_ideal, coe_support_vanishingIdeal, le_support_iff_le_vanishingIdeal and vanishingIdeal_support. The primary declaration is the exact construction.",
+   "date": "2026-10-24",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def vanishingIdeal|reduced induced scheme structure",
+   "results": "3 Mathlib AlgebraicGeometry hits: ProjectiveSpectrum/Topology.lean:94 (different projective notion), IdealSheaf/Basic.lean:563 (reduced induced scheme structure is the quotient of this ideal) and :565 (noncomputable nonrec def vanishingIdeal). Read Basic.lean:559-599, including the affine intersection construction and localization data.",
+   "date": "2026-10-24",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishingIdeal / reduced induced in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search vanishing ideal; blueprint_refs.py search reduced induced",
+   "results": "DAG definition-node scan found specialized users (dominant part, normalization, resolution strata and proper-support notions) but no definition node for the general vanishing ideal. The general reduced-induced theorem is lem-weil-pbc-reduced-induced-closed-subscheme, a proof theorem rather than this construction. Blueprint search vanishing ideal returned none; reduced induced returned four users, none defining the notion. Upstream ReducedInducedClosedSubscheme.lean states the theorem about Mathlib vanishingIdeal; upstream IdealSheaf/Subscheme.lean supplies reducedness and specialized complements. Sheaf users include FlatRelativeAssociatedSpecialization, NodalCurveNormalizationEuler and ClosedSubsetQcIdeal, all using the existing Mathlib construction. No duplicate Lean definition is introduced.",
+   "date": "2026-10-24",
+   "verdict": "existing construction; no definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-integral-filtration-multiplicity-profile",
+  "date": "2026-10-24",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the multiplicity-weighted reduction to reduced integral components in the proof of Stacks 0AYX (via 0AYW). Extraction: Original item proof steps 1 (Noetherianity and structure-module coherence), 2, 3, 4 and 5: coherent filtration, support geometry and generic length counts. Definition needed to write the reduced induced component schemes in the item statement (proof Step 2).",
+   "via": [
+    "lem-trf-curve-integral-filtration-multiplicity-profile",
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.IdealSheaf.Basic",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal",
+  "statement": "noncomputable nonrec def vanishingIdeal (Z : Closeds X) : IdealSheafData X",
+  "branch": "mathlib",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing affine-local vanishing-ideal construction at Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:565. The reduced induced closed scheme and inclusion are (vanishingIdeal T).subscheme and (vanishingIdeal T).subschemeι, using the existing construction recorded by def-weil-pbc-scheme-reduction. No additional theorem or Lean definition is stated."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb15367ed",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb15367ed",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of d1708de2. Diff against the d170 snapshot: the Lean change is imports only (the ReducedInducedClosedSubscheme public import becomes a plain proof import; public imports of Mathlib IdealSheaf.Basic and IdealSheaf.Subscheme added). The 7 signatures, already judged mathematically correct, are byte-identical. Item node vs live: only lean and stmt_deps differ; statement, proof and proof_deps are byte-identical. stmt_deps drop lem-weil-pbc-reduced-induced-closed-subscheme (kept in proof_deps) and add def-weil-pbc-scheme-reduction, def-sbc-ideal-sheaf-powers and the new def-trf-vanishing-ideal-reduced-closed-subscheme. The new node matches Stacks 01J3/01J4 and is bound existing:true to Mathlib IdealSheafData.vanishingIdeal (Basic.lean:565, verbatim; affine intersection of primes checked). Its deps all exist live; no cycle; no duplicate def node (the 3 vanishingIdeal hits in live dag are theorem/lemma nodes). lean.statement is verbatim. Report sections are present. No compile, since no file was changed; the worker's scompile and deliver2 --no-push were OK."
+ }
+}

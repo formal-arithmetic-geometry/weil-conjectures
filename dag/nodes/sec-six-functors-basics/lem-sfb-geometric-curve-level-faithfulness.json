@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-geometric-curve-level-faithfulness",
+ "kind": "statement",
+ "title": "Geometric faithfulness of odd abelian level on a curve",
+ "statement": "Let $\\Omega$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $C$ be a smooth projective connected curve over $\\Omega$ of genus $g\\geq2$ [def-sc-curves, def-sc-genus, def-kun-projective]. Let $\\ell\\geq3$ be a prime different from $\\operatorname{char}(\\Omega)$. If a $\\Omega$-automorphism $u:C\\xrightarrow{\\sim}C$ acts as the identity on $H^1(C_{\\mathrm{et}},\\mathbf Z/\\ell\\mathbf Z)$, then $u=\\mathrm{id}_C$. Cohomology is [def-weil-pbc-etale-cohomology] of the constant sheaf [def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+  "place": "Section 1.1(1) (g >= 2) and Section 2.3.3, geometric rigidity implicit in the fine abelian-level assertion for m >= 3. This node isolates only the geometric stabilizer assertion, not scheme representability. Local PDF WANTED; primary author PDF read online.",
+  "url": "https://arxiv.org/pdf/alg-geom/9501003"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-kun-projective",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose a primitive $\\ell$-th root $\\zeta\\in\\Omega$ by [lem-sc-primitive-root]. The associated sheaf isomorphism $\\theta_\\zeta:(\\mathbf Z/\\ell\\mathbf Z)_C\\simeq\\mu_{\\ell,C}$ is [def-sc-mu-trivialization]. Since $u$ is an $\\Omega$-morphism, it fixes the scalar $\\zeta$, so pullback sends $\\zeta^a$ to $\\zeta^a$. Thus $\\theta_\\zeta$ commutes with $u$ and the coefficient comparison. Naturality of cohomological pullback [lem-weil-pbc-cohomology-pullback-functorial](3) gives $H^1(\\theta_\\zeta)u^*=u^*H^1(\\theta_\\zeta)$. The hypothesis and invertibility of $H^1(\\theta_\\zeta)$ therefore show that $u^*$ is the identity on $H^1(C_{\\mathrm{et}},\\mu_\\ell)$.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "def-sc-mu-trivialization",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "§14, Remark 14.4, printed p.92; coefficient trivialization and pullback naturality"
+   }
+  },
+  {
+   "text": "The curve $C$ is proper by [lem-kun-projective-implies-proper]. By [lem-sc-global-functions], $\\mathcal O_C(C)=\\Omega$; hence its units are $\\ell$-divisible, since every nonzero scalar has an $\\ell$-th root in the algebraically closed field. Also [lem-sc-brauer-zero] applies to this smooth separated connected curve. The degree-one assertion of [lem-sc-kummer-les] now identifies $H^1(C_{\\mathrm{et}},\\mu_\\ell)$ with $\\operatorname{Pic}(C)[\\ell]$, through the map induced by $i:\\mu_\\ell\\hookrightarrow\\mathbf G_m$. Under cohomological pullback, the units comparison restricts to the roots-of-unity comparison: $u^*(z^\\ell)=(u^*z)^\\ell$. Naturality [lem-weil-pbc-cohomology-pullback-functorial](3), applied to $i$, makes its map on $H^1$ commute with $u^*$. By [lem-sc-h1-gm-pic-pullback] the resulting action on $\\operatorname{Pic}(C)$ is $[L]\\mapsto[u^*L]$. Consequently every class of $\\operatorname{Pic}(C)[\\ell]$ is fixed: write it as the image of $b\\in H^1(C,\\mu_\\ell)$ and use $u^*b=b$ from step 1.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-sc-global-functions",
+    "lem-sc-brauer-zero",
+    "lem-sc-kummer-les",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-sc-h1-gm-pic-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "§14, Proposition 14.1 and proof of Theorem 14.2, printed pp.89–91; functoriality of the Kummer inclusion"
+   }
+  },
+  {
+   "text": "Choose the representing Jacobian $J=\\operatorname{Pic}^0_{C/\\Omega}$ by [sk-thm-picard-main], which applies to our smooth proper connected curve. Equip it with $\\lambda_C$ and let $a_u$ be the pullback automorphism from [lem-sfb-curve-polarized-jacobian-faithfulness]. This is an automorphism of the group variety, with no choice of a base point on $C$. The equality $J[\\ell](\\Omega)=\\operatorname{Pic}(C)[\\ell]$ in [det-cor-jacobian-torsion-pic](2) identifies its action there with $[L]\\mapsto[u^*L]$. Step 2 therefore proves $a_u(x)=x$ for every $x\\in J[\\ell](\\Omega)$, and the same Jacobian-faithfulness node states $a_u^\\vee\\lambda_Ca_u=\\lambda_C$.",
+   "uses": [
+    "sk-thm-picard-main",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "det-cor-jacobian-torsion-pic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §§1 and 6, canonical Picard variety and polarization; compare LEC §14, Proposition 14.1"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-polarized-abelian-odd-level-rigidity] with $k=\\Omega$, $A=J$, $\\lambda=\\lambda_C$, $a=a_u$, and $n=\\ell$. The group-automorphism, polarization-preservation and torsion-fixing hypotheses were checked in step 3. The integer $\\ell$ is invertible in $\\Omega$ by the characteristic hypothesis and is at least $3$. The lemma gives $a_u=\\mathrm{id}_J$.",
+   "uses": [
+    "lem-sfb-polarized-abelian-odd-level-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 14.4(b), printed p.62"
+   }
+  },
+  {
+   "text": "By the injectivity clause of [lem-sfb-curve-polarized-jacobian-faithfulness], $a_u=\\mathrm{id}_J$ forces $u=\\mathrm{id}_C$. The genus hypothesis is used here: the lemma assumes $g\\geq2$, as in our statement.",
+   "uses": [
+    "lem-sfb-curve-polarized-jacobian-faithfulness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Theorem 12.1(b), printed p.120"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-primitive-root",
+  "def-sc-mu-trivialization",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-global-functions",
+  "lem-sc-brauer-zero",
+  "lem-sc-kummer-les",
+  "lem-sc-h1-gm-pic-pullback",
+  "sk-thm-picard-main",
+  "lem-sfb-curve-polarized-jacobian-faithfulness",
+  "det-cor-jacobian-torsion-pic",
+  "lem-sfb-polarized-abelian-odd-level-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Assembly of I Proposition 14.4(b), III §6 and Theorem 12.1(b), with LEC §14 Kummer theory. This supplies an explicit geometric proof of the stabilizer assertion implicit in Pikaart–de Jong §2.3.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Faithful action of automorphisms of genus g curves on first cohomology modulo an odd prime",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Module.Equiv.Basic\", \"type\": \": FaithfulSMul (M ≃ₗ[R] M) M\", \"doc\": \"The action of the automorphism group of a module $ M $ over a semiring $ R $ on $ M $ is faithful. This means that if two automorphisms act identically on every element of $ M $, then they are equal a\"}\n  {\"name\": \"RingAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Ring.Action.End\", \"type\": \": FaithfulSMul (RingAut R) R\", \"doc\": \"The action of the group of ring automorphisms on the ring is faithful, meaning that if two automorphisms act identically on all elements of the ring, then they are equal as automorphisms.\"}\n  {\"name\": \"Action.ρAut\", \"module\": \"Mathlib.CategoryTheory.Action.Basic\", \"type\": \"{G : Type*} [Group G] (A : Action V G) : G →* Aut A.V\", \"doc\": \"The group homomorphism from $ G $ to the automorphism group $ \\\\mathrm{Aut}(A.V) $ induced by the action $ A $, mapping each element $ g \\\\in G $ to the automorphism $ \\\\rho(g) $ of $ A.V $, where $ \\\\rho\"}\n  {\"name\": \"AddAut.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": FaithfulSMul (AddAut M) M\", \"doc\": \"The action of the additive automorphism group on M is faithful, meaning that if two automorphisms agree on all elements of M, then they are equal.\"}\n  {\"name\": \"Equiv.Perm.subgroupOfMulAction\", \"module\": \"Mathlib.GroupTheory.Perm.Subgroup\", \"type\": \"(G H : Type*) [Group G] [MulAction G H] [FaithfulSMul G H] : G ≃* (MulAction.toPermHom G H).range\", \"doc\": \"Given a group $ G $ acting faithfully on a set $ H $, this defines a group isomorphism between $ G $ and the subgroup of the permutation group of $ H $ consisting of permutations induced by the group \"}\n  {\"name\": \"AlgEquiv.apply_faithfulSMul\", \"module\": \"Mathlib.Algebra.Algebra.Equiv\", \"type\": \": FaithfulSMul (A₁ ≃ₐ[R] A₁) A₁\", \"doc\": \"The action of the group of R-algebra automorphisms on A₁ is faithful, meaning that if two automorphisms act identically on every element of A₁, then they are equal.\"}\n  {\"name\": \"AddAut.applyMulAction\", \"module\": \"Mathlib.Algebra.Group.Action.End\", \"type\": \": MulAction (AddAut M) M\", \"doc\": \"The additive automorphism group of an additive structure $ M $ acts on $ M $ by applying the automorphisms. Specifically, for any automorphism $ \\\\varphi \\\\in \\\\text{AddAut}(M) $ and element $ m \\\\in M $,\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instMulActionAutFunctorFintypeCatCarrierObj\", \"module\": \"Mathlib.CategoryTheory.Galois.Basic\", \"type\": \"(X : C) : MulAction (Aut F) (F.obj X)\", \"doc\": \"For any category $\\\\mathcal{C}$, functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and object $X \\\\in \\\\mathcal{C}$, the automorphism group $\\\\mathrm{Aut}(F)$ acts on the underlying set of $F(X)$. This act\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern faithful evaluation actions, field cyclotomic characters, Galois categories or elliptic curves, not faithfulness on cohomology of genus-at-least-two curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"aut\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern faithful evaluation actions, field cyclotomic characters, Galois categories or elliptic curves, not faithfulness on cohomology of genus-at-least-two curves"
+  },
+  {
+   "tool": "grep",
+   "query": "faithful.*[Cc]urve|[Cc]urve.*faithful|[Ll]evel.*[Aa]ut|[Aa]ut.*[Ll]evel",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Galois/Prorepresentability.lean\", \"line\": \"289\", \"text\": \"  which is induced from the level-wise equivalence `Aut A ≃ F.obj A` for a Galois object `A`.\"}\n  {\"file\": \"Mathlib/Data/Rel.lean\", \"line\": \"67\", \"text\": \"This extra level of indirection guides automation correctly and prevents (some kinds of) leakage.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern faithful evaluation actions, field cyclotomic characters, Galois categories or elliptic curves, not faithfulness on cohomology of genus-at-least-two curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a smooth projective curve of genus at least two acting trivially on mod ell first etale cohomology is identity for ell at least three",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"modularCyclotomicCharacter.id\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (n : ℕ) [inst_2 : NeZero n],\\n  modularCyclotomicCharacter.toFun n (RingEquiv.refl L) = 1\", \"doc\": \"For the modular cyclotomic character $\\\\chi_0$ associated with the $n$-th roots of unity in a commutative domain ring $L$, evaluating $\\\\chi_0$ at the identity automorphism of $L$ yields $1$ in the ring\"}\n  {\"name\": \"WeierstrassCurve.exists_variableChange_of_j_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [IsSepClosed F] (E E' : WeierstrassCurve F) [inst_2 : E.IsElliptic]\\n  [inst_3 : E'.IsElliptic], E.j = E'.j → ∃ C, C • E = E'\", \"doc\": \"If two elliptic curves over a separably closed field have the same $ j $-invariant, then there exists a variable change (isomorphism) transforming one curve into the other.\"}\n  {\"name\": \"cyclotomicCharacter.spec\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (p : ℕ) [inst_2 : Fact (Nat.Prime p)] {n : ℕ}\\n  [∀ (i : ℕ), HasEnoughRootsOfUnity L (p ^ i)] (g : L ≃+* L) (t : L),\\n  t ^ p ^ n = 1 → g t = t ^ ((PadicInt.toZModPow n) ↑((cyclotomicCharacter L p) g)).val\", \"doc\": \"For a prime $ p $, natural number $ n $, and an integral domain $ L $ containing $ p^n $-th roots of unity, the cyclotomic character $ \\\\chi_p $ maps each ring automorphism $ g : L \\\\to L $ to a unit in\"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"finGaloisGroupMap.map_id\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  (L : (FiniteGaloisIntermediateField k K)ᵒᵖ),\\n  finGaloisGroupMap (CategoryTheory.CategoryStruct.id L) =\\n    CategoryTheory.CategoryStruct.id (Opposite.unop L).finGaloisGroup\", \"doc\": \"For any finite Galois intermediate field $ L $ in a Galois extension $ K/k $, the group homomorphism induced by the identity morphism in the opposite category $ (\\\\text{FiniteGaloisIntermediateField}\\\\,\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_id\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {F : Type u} [inst : CommRing R] [inst_1 : Field F] {W' : WeierstrassCurve.Affine R}\\n  [inst_2 : DecidableEq F] [inst_3 : Algebra R F]\\n  (P : WeierstrassCurve.Affine.Point (WeierstrassCurve.baseChange W' F)),\\n  (WeierstrassCurve.Affine.Point.map (Algebra.ofId F F)) P = P\", \"doc\": \"For any point $ P $ on an affine Weierstrass curve $ W' $ over a field $ F $, applying the identity homomorphism on $ F $ to $ P $ results in $ P $ itself, i.e., $ \\\\text{map}(\\\\text{id}_F, P) = P $.\"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern faithful evaluation actions, field cyclotomic characters, Galois categories or elliptic curves, not faithfulness on cohomology of genus-at-least-two curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre rigidity lemma an automorphism of a curve preserving an abelian level structure is trivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"modularCyclotomicCharacter.id\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (n : ℕ) [inst_2 : NeZero n],\\n  modularCyclotomicCharacter.toFun n (RingEquiv.refl L) = 1\", \"doc\": \"For the modular cyclotomic character $\\\\chi_0$ associated with the $n$-th roots of unity in a commutative domain ring $L$, evaluating $\\\\chi_0$ at the identity automorphism of $L$ yields $1$ in the ring\"}\n  {\"name\": \"modularCyclotomicCharacter'.unique'\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ (L : Type u) [inst : CommRing L] [inst_1 : IsDomain L] (n : ℕ) [inst_2 : NeZero n] (g : L ≃+* L)\\n  {c : ZMod (Fintype.card ↥(rootsOfUnity n L))},\\n  (∀ t ∈ rootsOfUnity n L, g ↑t = ↑t ^ c.val) → c = ↑((modularCyclotomicCharacter' L n) g)\", \"doc\": \"If an automorphism $ g $ of a field $ L $ acts on all $ n $-th roots of unity $ t $ by $ g(t) = t^c $, then the integer $ c $ modulo $ k $ (where $ k $ is the number of $ n $-th roots of unity in $ L \"}\n  {\"name\": \"WeierstrassCurve.VariableChange.instGroup\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → Group (WeierstrassCurve.VariableChange R)\", \"doc\": \"For any commutative ring $ R $, the set of variable changes for a Weierstrass curve over $ R $ is equipped with a canonical group structure. The group operation combines variable changes via multiplic\"}\n  {\"name\": \"modularCyclotomicCharacter.unique\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ (L : Type u) [inst : CommRing L] [inst_1 : IsDomain L] {n : ℕ} [inst_2 : NeZero n]\\n  (hn : Fintype.card ↥(rootsOfUnity n L) = n) (g : L ≃+* L) {c : ZMod n},\\n  (∀ t ∈ rootsOfUnity n L, g ↑t = ↑t ^ c.val) → c = ↑((modularCyclotomicCharacter L hn) g)\", \"doc\": \"Let $ L $ be a field containing exactly $ n $ distinct $ n $-th roots of unity. If an automorphism $ g $ of $ L $ satisfies $ g(t) = t^c $ for all $ n $-th roots of unity $ t $, then the integer $ c $\"}\n  {\"name\": \"modularCyclotomicCharacter.toFun_unique\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (n : ℕ) [inst_2 : NeZero n] (g : L ≃+* L)\\n  (c : ZMod (Fintype.card ↥(rootsOfUnity n L))),\\n  (∀ (t : ↥(rootsOfUnity n L)), g ↑↑t = ↑(↑t ^ c.val)) → c = modularCyclotomicCharacter.toFun n g\", \"doc\": \"For a commutative domain ring $ L $ containing the $ n $-th roots of unity, the modular cyclotomic character $ \\\\chi_0(n, g) $ maps each ring automorphism $ g $ of $ L $ to the unique element $ m \\\\in \\\\\"}\n  {\"name\": \"modularCyclotomicCharacter.toFun_unique'\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ {L : Type u} [inst : CommRing L] [inst_1 : IsDomain L] (n : ℕ) [inst_2 : NeZero n] (g : L ≃+* L)\\n  (c : ZMod (Fintype.card ↥(rootsOfUnity n L))),\\n  (∀ t ∈ rootsOfUnity n L, g ↑t = ↑t ^ c.val) → c = modularCyclotomicCharacter.toFun n g\", \"doc\": \"The cyclotomic character $\\\\chi_0$ maps each ring automorphism $g$ of $L$ to the unique element $m \\\\in \\\\mathbb{Z}/k\\\\mathbb{Z}$, where $k$ is the cardinality of the group of $n$-th roots of unity in $L$\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [CategoryTh\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $X$ is a Galois object and the group $G$ acts transitively on $F(X)$, then every automorphism $t :\"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern faithful evaluation actions, field cyclotomic characters, Galois categories or elliptic curves, not faithfulness on cohomology of genus-at-least-two curves"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]urve.*faithful|faithful.*[Cc]urve|[Aa]ut.*[Ll]evel|[Ll]evel.*[Aa]ut",
+   "results": "2 hits; actual logged top results: Mathlib/Data/Rel.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism of a smooth projective curve of genus at least two acting trivially on first etale cohomology modulo an odd prime is identity",
+   "results": "8 hits; actual logged top results: groupCohomology.H1ofAutOnUnitsUnique, CategoryTheory.PreGaloisCategory.autMap.congr_simp, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale, WeierstrassCurve.IsCharTwoJNeZeroNF.a₄, FiniteGaloisIntermediateField.mem_fixingSubgroup_iff, MulAut.one_apply, CategoryTheory.PreGaloisCategory.autMap_id",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"faithful\"",
+   "results": "12 hits; actual logged top results: AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace_faithful, AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace, AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace_preimage_hom, AlgebraicGeometry.LocallyRingedSpace.instFaithfulSheafedSpaceCommRingCatForgetToSheafedSpace, AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.instFaithfulLocallyRingedSpaceForgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace_preimage_toLRSHom, AlgebraicGeometry.instFaithfulOppositeCommRingCatLocallyRingedSpaceToLocallyRingedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfulness of odd abelian level structure on genus at least two algebraic curves",
+   "results": "8 hits; actual logged top results: instFaithfulLightDiagram'LightDiagramToLightFunctor, instFaithfulWitness, WeierstrassCurve.Affine.Point.toClass_injective, WeierstrassCurve.map_injective, SlashInvariantForm.coeHom_injective, WeierstrassCurve.VariableChange.map_injective, CategoryTheory.PreGaloisCategory.FiberFunctor.instFaithfulFintypeCat, WeierstrassCurve.Affine.Point.map_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families.",
+   "via": [
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-geometric-curve-level-faithfulness",
+  "worker": "stage1",
+  "summary": "Kept the statement and expanded its geometric stabilizer proof through functorial Kummer theory, Picard torsion, polarized-abelian level rigidity and faithful curve pullback on the Jacobian. Reused the existing Kummer, Picard, primitive-root and cohomological naturality statements; added two statement-only genuine auxiliary lemmas after whole-DAG, blueprint and Mathlib searches.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Trivializes finite constant coefficients over the algebraically closed base. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Supplies coefficient naturality, used only for the two displayed commuting squares. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projectivity supplies properness for the Kummer and Picard inputs. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Proper smooth connected curves have scalar global functions, making global units divisible. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "lem-sc-brauer-zero",
+    "why": "Supplies the explicit vanishing hypothesis in the existing Kummer-LES statement. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "lem-sc-kummer-les",
+    "why": "Supplies the degree-one Kummer identification with Picard torsion. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "lem-sc-h1-gm-pic-pullback",
+    "why": "Identifies cohomology action with actual pullback of line bundles. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "sk-thm-picard-main",
+    "why": "Supplies a representing Picard variety for an arbitrary geometric curve. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   },
+   {
+    "node": "det-cor-jacobian-torsion-pic",
+    "why": "Identifies full Picard torsion with Jacobian torsion. This is a generic tool; the direct-image unit supplies no replacement for this geometric moduli prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-primitive-root",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-global-functions",
+  "lem-sc-brauer-zero",
+  "lem-sc-kummer-les",
+  "lem-sc-h1-gm-pic-pullback",
+  "sk-thm-picard-main",
+  "det-cor-jacobian-torsion-pic"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-9b0bbb8c5",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-9b0bbb8c5 (reviewer sub-agent of L); spot-checked: Read the item, all five steps and both new statement-only nodes in full. The item statement, stmt_deps and source are unchanged from base (compared with the Q22 snapshots). There is no re-split note and no SGA citation. Step 1: theta_zeta from lem-sc-primitive-root and def-sc-mu-trivialization commutes with the pullback comparison for an Omega-automorphism; naturality clause (3) of lem-weil-pbc-cohomology-pullback-functorial (checked verbatim) moves the trivial action to H^1(mu_ell). Step 2: the curve is proper (lem-kun-projective-implies-proper), O(C)=Omega (lem-sc-global-functions, last sentence), Br=0 (lem-sc-brauer-zero), so H^1(mu_ell)=Pic[ell] by lem-sc-kummer-les via H^1(i); naturality applied to i and lem-sc-h1-gm-pic-pullback give u^*L ~ L on Pic[ell]. Step 3: sk-thm-picard-main and det-cor-jacobian-torsion-pic(2) give J[ell](Omega)=Pic(C)[ell]. Steps 4 and 5 check every hypothesis of the two new nodes. New nodes: the rigidity node is Milne AV I Prop 14.4(b), read at p.62/63; n invertible is correctly kept because the proof uses the group scheme A_n, and n>=3 is needed ([-1] fixes A[2]). The Jacobian node: Milne III s6 theta polarization, which is preserved since u^* maps W_{g-1} to a translate of Theta; injectivity follows from III Thm 12.1(b) with beta=id, P=P' and sign + fixed, which covers the hyperelliptic case and all characteristics; g>=2 is needed. Both new nodes are true, neither restates the item, and rg -L and blueprint searches found no duplicates. Batch-5: I recomputed the target closure with and without the item's proof. The 25 added nodes are only Picard-framework nodes, sk-def-av-group-scheme and sk-def-av-mult-n, plus the item and its new nodes. The flagged lem-trf-curve-euler-tensor-generic-rank, lem-trf-proper-finite-fibre-finite-near and def-pod-ring-scalar-extension are already in the closure. sk-thm-picard-main, det-cor-jacobian-torsion-pic, def-sc-jacobian, lem-sc-brauer-zero and lem-sc-kummer-les are general Picard and Kummer facts or definitions, not statements or proof steps of the trace formula or Poincare duality, so they are accepted. The cross-chapter generic tool_uses are accepted. FIX (B3): I added [def-sc-ample], [def-sc-invertible-module] and [def-sc-group-scheme] to both new nodes, and [def-sc-divisor] to the Jacobian node, with stmt_deps extended. The mathematics is unchanged and the batch-5 closure is unchanged with the fix.; 2 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricCurveLevelFaithfulness",
+  "declaration": "AlgebraicGeometry.geometric_curve_level_faithfulness",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricCurveLevelFaithfulness.lean",
+  "statement": "theorem geometric_curve_level_faithfulness {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {C : Scheme.{u}} (f : C ⟶ Spec (.of Ω)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] (hgenus : 2 ≤ f.genus) (ℓ : ℕ) (hprime : ℓ.Prime) (hlevel : 3 ≤ ℓ) (hchar : (ℓ : Ω) ≠ 0) (a : C ≅ C) (hover : a.hom ≫ f = f) (hacts : ∀ x : Sheaf.H (C.constantZMod ℓ) 1, Sheaf.H.map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} a.hom).hom.app (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)))) 1 (Etale.cohomologyMap a.hom (C.constantZMod ℓ) 1 x) = x) : a = Iso.refl C",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4b7939a4",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: IsConnectedCurve+Smooth+IsHProjective (def-sc-curves, def-kun-projective records), 2 ≤ f.genus (def-sc-genus), ℓ prime ≥3 with (ℓ:Ω)≠0 (exactly ℓ≠char), a : C ≅ C over Ω, hypothesis = canonical pullback action (Etale.cohomologyMap, then upperStarConstantSheafIso comparison via Sheaf.H.map; no arbitrary map), conclusion a = Iso.refl C. constantZMod is the constantSheaf record with the u+1 lift; the Sheaf.H spelling is permitted by the def-weil-pbc-etale-cohomology record. Edge cases (empty scheme, dim 0, g≤1, ℓ=2, char ℓ, char 0/2) and universes OK. No definitions, sorry-only proof, docstrings carry source, blueprint id and the 5 proof steps, lines ≤100, plain imports = recorded proof-dep modules (3 unrecorded deps correctly not imported). lean.statement is the signature verbatim; node unchanged apart from lean. No duplicate found in side-live Sheaf/WeilConjectures. Not recompiled (no file changed)."
+ }
+}

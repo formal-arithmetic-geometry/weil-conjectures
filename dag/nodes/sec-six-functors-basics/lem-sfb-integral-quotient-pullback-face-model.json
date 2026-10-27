@@ -1,0 +1,414 @@
+{
+ "id": "lem-sfb-integral-quotient-pullback-face-model",
+ "kind": "statement",
+ "title": "Common K-flat model for integral quotient pullback faces",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_E$, a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension], and $n\\geq1$. On the small pro-étale site of each scheme $T$ [def-weil-pbc-proetale-site, def-weil-size-convention] put $R_T=p_T^*\\underline A=\\varprojlim_{m\\geq1}(A/\\pi^m)_T$, $S_T=(A/\\pi^n)_T$, and let $a_T:R_T\\to S_T$ be the actual finite projection [sk-def-sfb-pulled-back-coefficients, det-prop-sfb-qlbar-colimit-x-integral-limit]. Regard these also as their reconstructed section-ring sheaves [def-weil-pbc-internal-abelian-sheaf-module-equivalence].\n\nLet $X'\\xrightarrow{h} X$, $Y'\\xrightarrow{g}Y$, $f:X\\to Y$, $f':X'\\to Y'$ be a chosen cartesian square [def-weil-pbc-cartesian-square]. For an edge $u:U\\to V$, use ordinary section-module pullback $p^B_u$ and its unbounded derived functor $L^B_u$ for $B=R,S$ [def-weil-pbc-proetale-operations]. Write $t_T(P)=P\\otimes_{R_T}S_T$ for termwise sheafified scalar extension, $T_T=-\\otimes^L_{R_T}S_T$ for its uncompleted derived functor [def-pur-sheaf-tensor-product, lem-pur-derived-change-of-rings], and $Q$ for localization from cochain complexes to the ordinary unbounded derived category [def-weil-abstract-derived-category]. Let $\\chi_u:L^S_uT_V\\xrightarrow\\sim T_UL^R_u$ be the canonical ringed scalar/pullback comparison normalized by the balanced map $u^{-1}(x\\otimes s)\\mapsto u^{-1}x\\otimes u^{-1}s$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-sfb-kflat-scalar-comparison-normalization]. Let $\\vartheta^B:L^B_{f'}L^B_g\\xrightarrow\\sim L^B_hL^B_f$ be the geometric square built from the specified composition maps [lem-weil-pbc-proetale-derived-pullback-composition].\n\nThe canonical coefficient identifications $c_{u,R}:u^{-1}R_V\\cong R_U$ and $c_{u,S}:u^{-1}S_V\\cong S_U$ [sk-prop-sfb-cartesian-coefficients] satisfy $a_Uc_{u,R}=c_{u,S}u^{-1}a_V$, commute with identities and composition, and agree with the pulled-back condensed coefficient identifications after every finite projection.\n\nEvery $M\\in D(R_Y)$ admits a flat-term K-flat representative $P$ [lem-pc-kflat-resolution, def-pc-kflat-complex, def-pc-flat-sheaf-modules]. For every such $P$, all intermediate ordinary complexes in the routes\n$$p^S_{f'}p^S_gt_YP\\longrightarrow p^S_{f'}t_{Y'}p^R_gP\\longrightarrow t_{X'}p^R_{f'}p^R_gP\\longrightarrow t_{X'}p^R_hp^R_fP$$\nand\n$$p^S_{f'}p^S_gt_YP\\longrightarrow p^S_hp^S_ft_YP\\longrightarrow p^S_ht_Xp^R_fP\\longrightarrow t_{X'}p^R_hp^R_fP$$\nare K-flat with flat terms over their current ring. Under the canonical representative identifications $L^B_uQ(P')\\cong Q(p^B_uP')$ and $T_TQ(P')\\cong Q(t_TP')$, the six derived faces $L^S_{f'}(\\chi_g)$, $\\chi_{f'}L^R_g$, $T_{X'}(\\vartheta^R)$, $\\vartheta^ST_Y$, $L^S_h(\\chi_f)$, $\\chi_hL^R_f$ are the localizations of the respective ordinary faces in these two routes on this same $P$. The ordinary scalar faces are the stated balanced-generator maps and the ordinary square faces are the geometric inverse-image compositors. These representative identifications and face formulas are natural for chain maps between flat-term K-flat representatives. No flatness of $a_T$, boundedness, properness or completeness is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), reduction of the canonical exchange: common representative and coefficient-face normalization extracted from returned proof Steps 2-3. Stacks sites-cohomology.tex, Tag 0D6D (lemma-derived-pullback-composition), Tag 07A4 (lemma-pullback-tensor-product); the simultaneous six-face normalization for the integral limit is the extracted argument."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "def-sfb-integral-quotient-coefficients",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-integral-quotient-projection-map",
+  "def-pd-section-module-operations-data",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Use the quotient condensed-ring map $\\underline A\\to\\underline{A/\\pi^n}$ defining the actual projection, with index $n-1$ in the zero-based notation of [def-sfb-integral-quotient-coefficients]. The coefficient maps $c_{u,R},c_{u,S}$ are the components at these two rings of the same natural isomorphism $u^{-1}p_V^*\\cong p_U^*$ of [sk-def-sfb-pullback-from-point-comp, sk-def-sfb-coefficient-morphisms]. Its naturality at this quotient map says precisely $a_Uc_{u,R}=c_{u,S}u^{-1}a_V$. The integral-limit description of [det-prop-sfb-qlbar-colimit-x-integral-limit] is the canonical identification of this pulled-back ring with its finite quotient limit. To check the projection normalization, use [lem-sfb-finite-reduction-pullback] at any positive exponent $m$: its hypothesis holds because the actual quotient map sends every continuous $b:H\\to A$ to $b\\bmod\\pi^m$, hence its adjunction mate is the relative finite-label map $T[b\\bmod\\pi^m]$. Its conclusion gives the identical square with $a_m$ and the finite coefficient identification. This is a separate check at each $m$; it does not assert that inverse image preserves an infinite limit.",
+   "uses": [
+    "def-sfb-integral-quotient-coefficients",
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-coefficient-morphisms",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "lem-sfb-finite-reduction-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3) of the item source; coefficient naturality under actual quotient projections"
+   }
+  },
+  {
+   "text": "The same coefficient identifications have the required identity and composition laws. Indeed [lem-sfb-eta-id] identifies the adjunct of the identity coefficient map with the pushforward unitor. For composable edges, [lem-sfb-eta-comp] identifies the adjunct of the composite coefficient map with the two successive adjuncts and the pushforward compositor. Apply the adjunction bijections to these equations: the pasting law of [lem-weil-pbc-mate-pasting] identifies their transposes with respectively the pullback unitor and $c_{v,B}\\circ v^{-1}(c_{u,B})$ after the geometric compositor, for $B=R,S$. Injectivity of these bijections gives the identity and composition laws for $c$. Since the argument uses the natural coefficient identifications of Step 1, the laws also hold after every finite projection.",
+   "uses": [
+    "lem-sfb-eta-id",
+    "lem-sfb-eta-comp",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), coefficient-composition normalization"
+   }
+  },
+  {
+   "text": "Represent $M$ by a complex $K$ and apply [lem-pc-kflat-resolution] to obtain a quasi-isomorphism $P\\to K$ with $P$ K-flat and each term flat. Fix any flat-term K-flat $P$, as required by the universal assertion in the statement. Each $p_u^B$ is pullback for the ringed geometric morphism with structural map $c_{u,B}$. Each $t_T$ is pullback for the identity geometric morphism with structural map $a_T:R_T\\to S_T$. Thus [lem-weil-pbc-ringed-pullback-preserves-kflat] applies to both kinds of edge, including the nonflat quotient edge. Induct on the length of any of the finitely many words displayed in the statement: the length-zero word is $P$; applying its last edge preserves both K-flatness and flatness of all terms. Consequently every intermediate complex in both routes has these properties over its current ring. This is flatness over $S_T$ after quotient extension, and does not assert flatness over $R_T$ of the restricted quotient.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat)"
+   }
+  },
+  {
+   "text": "For a flat-term K-flat intermediate $P'$, take the universal cochain computation counit $\\epsilon^B_{u,P'}:L_u^BQ(P')\\to Q(p_u^BP')$ of [lem-weil-pbc-ringed-topoi-derived-pullback], which is invertible and natural in chain maps. Take also the scalar computation $\\epsilon^a_{T,P'}:T_TQ(P')\\to Q(t_TP')$ of [lem-pur-derived-change-of-rings]. Starting at the input, whisker and compose these counits in the order of each word. Step 3 ensures that every next component is invertible. This gives the canonical representative identifications at every vertex of both routes, with no second resolution. The naturality clauses of these two cited computation results give naturality of all these composites on chain maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), including identity-topos scalar extension"
+   }
+  },
+  {
+   "text": "Use Step 1 to identify the target rings with $u^{-1}R_V,u^{-1}S_V$. Under this identification the ordinary scalar face is exactly the invertible coequalizer comparison $\\chi_u^{\\mathrm{ord}}$ of [lem-sfb-kflat-scalar-comparison-normalization]. In the right-tensor convention of the item it sends the inverse image of $x\\otimes s$ to the inverse image of $x$ tensored with the inverse image of $s$, with the coefficient transported by $c_{u,S}$. This formula is balanced: replacing $rx\\otimes s$ by $x\\otimes a_V(r)s$ yields the same target by $a_Uc_{u,R}=c_{u,S}u^{-1}a_V$ from Step 1. It respects restrictions and addition, so it defines the sheafified tensor map. The tensor universal property in [def-weil-pbc-ringed-tensor-section-calculus] makes these generator formulas determining; no assumption that every sheaf section is pure is used. The normalization theorem says that, under Step 4's computation counits, $Q(\\chi_u^{\\mathrm{ord}})^{-1}$ is the scalar-adjunction mate. Hence $Q(\\chi_u^{\\mathrm{ord}})$ represents the canonical $\\chi_u$ in the direction specified by this item. This also specifies the scalar/pullback comparison that the tensor-pullback citation in the imported statement alone did not state.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); ordinary normalization: sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "For $B=R,S$, apply [lem-weil-pbc-proetale-derived-pullback-composition] to the two length-two paths from $X'$ to $Y$. Their ring identifications agree by Step 2 and the chosen cartesian identification $gf'=fh$. The cited comparison is computed on flat-term K-flat complexes by the termwise geometric module-pullback compositor. Therefore $\\vartheta^B=(c^B_{h,f})\\circ(c^B_{f',g})^{-1}$, with the middle composite identified using $gf'=fh$, is represented by the corresponding composite of ordinary compositors. In particular the ordinary square faces act only by the geometric inverse-image identifications and the coefficient transport already fixed in Step 2. For the $S$ square its input is $t_YP$, which is flat-term K-flat over $S_Y$ by Step 3; for the $R$ square its input is $P$.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-ringed-kflat-word-comparison-descent] to the finite collection of ringed topoi $(T,R_T),(T,S_T)$ for the four vertices, the eight geometric pullbacks and the four identity-topos scalar edges. These are morphisms of small-site ringed topoi by the size convention in the statement; all structural maps are ring maps and the quotient squares commute by Step 1. The derived edge counits are exactly Step 4's normalized ones. The theorem's representative equation and its preservation of whiskering give the following six ordinary representatives, in order: $p^S_{f'}(\\chi_g^{\\mathrm{ord}})$, $\\chi_{f'}^{\\mathrm{ord}}p_g^R$, $t_{X'}(\\vartheta^{R,\\mathrm{ord}})$, $\\vartheta^{S,\\mathrm{ord}}t_Y$, $p_h^S(\\chi_f^{\\mathrm{ord}})$, and $\\chi_h^{\\mathrm{ord}}p_f^R$. Steps 5 and 6 identify their unwhiskered derived transformations with the prescribed $\\chi$ and $\\vartheta$. The representative equation therefore identifies precisely the six faces in the statement, using the common vertex identifications of Step 4. In particular applying $T_{X'}$ to the $R$ square is computed by the ordinary $t_{X'}$ on that square, because both its endpoints are flat-term K-flat.",
+   "uses": [
+    "lem-trf-ringed-kflat-word-comparison-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YY, 0D6D; normalized finite-word comparison descent"
+   }
+  },
+  {
+   "text": "Finally let $b:P\\to\\widetilde P$ be a chain map between flat-term K-flat representatives. All vertex comparison maps are natural by Step 4. Each ordinary scalar face is a natural transformation on module sheaves, so its degreewise formula commutes with $b$; the same holds for the geometric compositors of Step 6. Applying $Q$ and the whiskered representative equations of Step 7 gives the asserted chain-map naturality of all six face formulas. Every operation used is termwise additive and every face has degree zero, so the argument applies to arbitrary unbounded cochain complexes without additional signs. Together with Steps 1-3 this proves every clause, without properness or completeness assumptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Naturality of the six representative formulas established in Steps 4-7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-quotient-coefficients",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-eta-comp",
+  "lem-sfb-eta-id",
+  "lem-sfb-finite-reduction-pullback",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), with Stacks Tags 06YS, 0G7E, 06YY, 0D6D and the cited existing normalization and word-descent statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(KFlat|KFlat|K-flat|kflat).*(scalar|pullback|comp)|(scalar|pullback).*(KFlat|K-flat|kflat)",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived change of coefficients for ring sheaves: one flat term K-flat resolution computes every face of the pullback and scalar extension composition cube",
+   "results": "8 hits; Module.Flat.isBaseChange; Algebra.FormallyUnramified.flat_of_restrictScalars; RingHom.Flat.isStableUnderBaseChange; IsSMulRegular.of_flat_of_isBaseChange; RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange; RingHom.FaithfullyFlat.isStableUnderBaseChange; SheafOfModules.pullback; AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"comp\"",
+   "results": "12 hits; CategoryTheory.Limits.WidePullback.eq_lift_of_comp_eq; CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst; CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd; CategoryTheory.Limits.pullbackComparison; CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst; CategoryTheory.Limits.pullbackSymmetry_inv_comp_snd; CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst_assoc; CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For integral proetale coefficient ring sheaves given by inverse limits of finite quotients, simultaneous K-flat representative normalization of all faces of the derived quotient scalar extension and geometric pullback composition cube",
+   "results": "8 hits; Algebra.Extension.tensorH1Cotangent; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange; Algebra.Extension.homInfinitesimal; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.FormallyEtale.comp; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Extension.tensorCotangentSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(Comp|comp|[Aa]djunction)|[Aa]djunction.*pullback",
+   "results": "11 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullback\"",
+   "results": "12 hits; PresheafOfModules.pullbackId; PresheafOfModules.pullbackObjIsDefined; PresheafOfModules.pullback; PresheafOfModules.pullbackObjIsDefined_eq_top; PresheafOfModules.pullbackObjIsDefined_free_yoneda; PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModules.pullbackComp; PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback along a ringed topos morphism and extension of scalars preserve K-flat complexes with flat terms and compute the natural composition comparisons on a common resolution",
+   "results": "8 hits; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; SheafOfModules.sheafificationCompPullback; PresheafOfModules.pullbackComp; SheafOfModules.freeFunctorCompPullbackIso; CategoryTheory.compatiblePreservingOfFlat",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|conjugateEquiv_mateEquiv_vcomp|mateEquiv_conjugateEquiv_vcomp",
+   "results": "5 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf pullback composition and flat module base change do not give simultaneous derived face normalization for the actual inverse-limit integral coefficient and its nonflat quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A common flat term K-flat complex computes scalar extension and all derived pullback composition faces for a commutative square of sheaves of rings",
+   "results": "8 hits; CategoryTheory.compatiblePreservingOfFlat; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.of_flat_tensorProduct; AlgebraicGeometry.Flat.isStableUnderBaseChange; Module.Flat.trans; Module.Flat.iff_flat_tensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and module flatness results do not supply simultaneous six-face normalized unbounded derived models; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:165-181"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat.*(pullback|[Ss]calar)|(pullback|[Ss]calar).*KFlat",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and module flatness results do not supply simultaneous six-face normalized unbounded derived models; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:165-181"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackComp\"",
+   "results": "2 hits; PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and module flatness results do not supply simultaneous six-face normalized unbounded derived models; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:165-181"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat resolutions compute derived pullback and change of scalars simultaneously on a square of ring sheaves",
+   "results": "8 hits; SheafOfModules.pullback; Algebra.FormallyUnramified.flat_of_restrictScalars; PresheafOfModules.pullback; Module.Flat.isBaseChange; IsSMulRegular.of_flat_of_isBaseChange; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.conjugateEquiv_pullbackComp_inv; RingHom.Flat.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and module flatness results do not supply simultaneous six-face normalized unbounded derived models; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:165-181"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|conjugateEquiv_pullbackComp",
+   "results": "5 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and module flatness results do not supply simultaneous six-face normalized unbounded derived models; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:165-181"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonflat scalar extension and exact geometric inverse image of sheaf modules have canonical derived comparison maps computed on any flat term K-flat resolution",
+   "results": "8 hits; Module.FaithfullyFlat.iff_exact_iff_rTensor_exact; Module.FaithfullyFlat.iff_exact_iff_lTensor_exact; Module.FaithfullyFlat.lTensor_reflects_exact; Module.FaithfullyFlat.rTensor_reflects_exact; Module.FaithfullyFlat.lTensor_exact_iff_exact; Module.FaithfullyFlat.rTensor_exact_iff_exact; Module.Flat.iff_rTensor_exact'; Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback composition and module flatness results do not supply simultaneous six-face normalized unbounded derived models; read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:165-181"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-quotient-exchange-comparison",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), \"the reduction of each canonical map is the corresponding canonical map for the torsion reductions\": coefficient projection and common K-flat representative calculation of the exchange cube (returned Steps 2-3).",
+   "via": [
+    "lem-sfb-integral-quotient-exchange-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-quotient-pullback-face-model",
+  "worker": "stage1",
+  "summary": "Eight-step split using existing generic coefficient, K-flat computation and comparison-descent nodes. No new nodes. Verified actual finite projections and coefficient cocycles, all intermediate resolving classes, and the six face formulas on one P. Added the missing scalar/pullback normalization citation without changing mathematical content. No exact project Lean attachment found.",
+  "blueprint": "Realizes det-thm-sfb-proper-base-change-integral.proof.md paragraph (3), sentence that reduction of each canonical map is its torsion reduction: coefficient and pullback-face part of the exchange cube, via lem-sfb-integral-quotient-exchange-comparison.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-tensor-section-calculus",
+    "why": "General sheafified balanced tensor generator extensionality. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Integral coefficient ring identification with its actual finite quotient limit. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General unbounded sheaf-module resolution existence. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General uncompleted derived extension-of-scalars computation and resolution naturality. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-sfb-eta-comp",
+    "why": "Generic composition normalization for pulled-back coefficient morphisms. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-sfb-eta-id",
+    "why": "Generic identity normalization for pulled-back coefficient morphisms. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-sfb-finite-reduction-pullback",
+    "why": "Finite-projection normalization under geometric inverse image, checked at each quotient exponent. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic balanced scalar/pullback comparison and its derived mate normalization, without flatness of the quotient map. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-trf-ringed-kflat-word-comparison-descent",
+    "why": "Generic normalized comparison descent and whiskering for a finite collection of ringed pullbacks, including nonflat scalar extension; used only to compute the six faces, not the trace-transport route. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "General adjunction pasting needed to transpose the coefficient cocycle. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "General geometric-compositor representative formula. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "General preservation of flat-term K-flat complexes under ringed pullback, including identity-topos quotient extension. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "General universal computation counit on flat-term K-flat complexes and its naturality. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "sk-def-sfb-coefficient-morphisms",
+    "why": "Definition of c as a component of the coefficient functor comparison. No node of the proper-base-change unit supplies this generic interface."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point-comp",
+    "why": "Definition of the natural coefficient comparison from the point. No node of the proper-base-change unit supplies this generic interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-eta-comp",
+  "lem-sfb-eta-id",
+  "lem-sfb-finite-reduction-pullback",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-pullback-from-point-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-4761994da",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-4761994da (reviewer sub-agent of L); spot-checked: I read all of it: the item (8 steps, 0 new nodes), the base form of the item (unsplit, statement only, from the NC fix), every cited statement, blueprint main-20261015 sk-thm-sfb-proper-base-change-integral.proof.md paragraph (3), and Stacks tags 06YS, 0G7E (text read), 06YY, 0D6D, 07A4 and 03EL, each checked against its label. The only statement change adds the citation lem-sfb-kflat-scalar-comparison-normalization, which pins the χ_u the statement already described; the item is still unsplit in live, and there is no repair note. Step 1: c_{u,B} are components of the one natural isomorphism u^{-1}p_V^*≅p_U^*, so naturality at the condensed quotient gives the coefficient square; the zero-based index n-1 is right; finite-reduction-pullback is applied one m at a time, with no infinite-limit preservation. Step 2: the η-id and η-comp laws are transposed to c through mate pasting and injectivity of the adjunction bijection. Step 3: ringed-pullback-preserves-kflat (no flatness of c needed, as in Stacks 0G7E) covers both the geometric edges and the non-flat quotient edge; checked on Z_p→F_p. Step 4: counits from ringed-topoi-derived-pullback and derived-change-of-rings. Step 5: Q(χ^ord) is the inverse of the scalar mate θ, which matches the item's direction. Step 6: the composite ring identifications agree because gf'=fh and the cocycle law holds; ϑ=c_{h,f}∘c_{f',g}^{-1}. Step 7: the six faces come from uniqueness and whiskering in the word-descent node, in the stated order. Step 8 is elementary naturality. There is no cycle, and no duplicate (checked against coefficient-projection-square, pulled-reduction-flat-model-formulas and section-mate-realization). The declared tool uses are generic and accepted. Batch 5, normalization node: its route into the Poincaré-duality chapter is lem-pod-derived-exact-square-composition, an abstract statement about pasting exact functor squares in derived categories. It is already in the parent's closure through other citations, so neither assumption covers it and it is accepted. Batch 5, lem-trf-ringed-kflat-word-comparison-descent: generic K-flat word calculus with no trace content, and it adds only itself to the item's closure, so it is accepted (as in the Q60 precedent). Maintainer note: this node belongs outside sec-trace-formula as a generic lemma."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralQuotientPullbackFaceModel",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.integral_quotient_pullback_face_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.Route",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.Route.comp",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.Route.Face",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.Route.NaturalAt",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.FlatRepresentative",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.pull",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.scalar",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.complexSquare",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.ordinaryScalarFace",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.scalarMate",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.ordinarySquare",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.derivedSquare",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.leftFace",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.CoefficientCoherence",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.start",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.afterG",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.beforeSquare",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.finish",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.afterSquare",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.afterF",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.SixFaces",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.CommonModel",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.PullbackFace.integral_quotient_pullback_face_model"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralQuotientPullbackFaceModel.lean",
+  "statement": "theorem integral_quotient_pullback_face_model (sq : ChosenCartesianSquare h f' f g) : CoefficientCoherence (integral l E) ∧ (∀ m : ℕ, CoefficientCoherence (finite l E m)) ∧ (∀ (m : ℕ) {U V : Scheme.{u}} (a : U ⟶ V), (upperStar Ab.{u + 1} a).map (coefficientMap (reduction l E m) V) ≫ condensedPullbackHom (finite l E m) a = condensedPullbackHom (integral l E) a ≫ coefficientMap (reduction l E m) U) ∧ (∀ M : DerivedCategory (QuotientChange.Modules (integral l E) Y), ∃ P : CochainComplex (QuotientChange.Modules (integral l E) Y) ℤ, FlatRepresentative (integral l E) Y P ∧ Nonempty (DerivedCategory.Q.obj P ≅ M)) ∧ ∃ χ : ∀ {U V : Scheme.{u}} (a : U ⟶ V), (scalar l E n V).derived ⋙ (pull (finite l E n) a).derived ≅ (pull (integral l E) a).derived ⋙ (scalar l E n U).derived, (∀ {U V : Scheme.{u}} (a : U ⟶ V), (χ a).inv = scalarMate l E n a) ∧ ∀ P : CochainComplex (QuotientChange.Modules (integral l E) Y) ℤ, FlatRepresentative (integral l E) Y P → CommonModel l E n χ sq P",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The fixed internal/section-module equivalence supplies coordinates for the stated section-module categories. Flatness and K-flatness are tested after that exact equivalence. Positive quotient exponents are indexed by n+1. The scalar comparison is specified by equality of its inverse with the actual scalar-adjunction mate, together with all six computation-counit equations; no flatness of scalar extension is imposed. All auxiliary definitions are bookkeeping for this one simultaneous face model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c6ff9217",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Read item, all 23 stmt_deps, module and used decls in side-live (pullIso/comapUpperStarIso/derivedComapUpperStarIso, ScalarPullback.mate, QuotientChange D/L/scalarAdj/V/compute, computePull, ModuleRingedComparison.equivalence = sectionModuleEquivalence, condensedAmbientPullbackComparison, integral/finite/reduction). Clauses match: coefficient square for all finite levels, CoefficientCoherence for integral and every finite level, K-flat flat-term representative existence, vertex flatness and iso counits at every prefix of six routes, six faces in node order and direction on the same P (ordinary scalar face = pullIso.symm balanced map, square = upperStarComp compositors, derived square = condensedAmbientPullbackComparison), chi pinned by inv = adjunction mate (no exact-scalar derivedPullIso), naturality for chain maps between flat K-flat representatives. n+1 indexing covers every n>=1; no flatness/boundedness/properness/completeness; E universe forced by recorded coefficients. Only item lean+stmt_deps changed; 5 added stmt_deps are landed def nodes owning used decls (STMT_DEPS MAY GAIN LANDED NODES), no cycle. Statement verbatim (whitespace-normalized), no hollow defs, sorry only on theorem, docstrings with source/blueprint and 8-step proof, no name collision. Not recompiled (no change); worker scompile clean 31.9/14.9 s. Advisories: plain ScalarPullback.mate owned by base-era theorem stmt_dep lem-sfb-kflat-scalar-comparison-normalization; upstream pullIso/derivedComapUpperStarIso without DAG owner; unused imports; second reading is a self-reread."
+ }
+}

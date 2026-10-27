@@ -1,0 +1,132 @@
+{
+ "id": "def-weil-pbc-truncated-counit-edge",
+ "kind": "definition",
+ "title": "The explicit upper-truncation counit edge",
+ "statement": "Let $g:T\\to S$ be a scheme morphism with the shared derived module categories and the normalized derived and tensor-pullback adjunctions [def-pc-derived-category, def-pc-derived-pullback, def-pc-derived-direct-image, lem-pc-module-pullback-adjunction, lem-pc-pinned-derived-adjunction-shifts]. For $q\\in\\mathbf Z$ and $K\\in D(\\mathcal O_T)$ put $P=\\tau_{\\le q}Rg_*K$ and let $i:P\\to Rg_*K$ be the truncation inclusion [def-sbc-standard-tstructure-derived-category]. Let $d:Lg^*P\\to K$ be its derived transpose. Define the module morphism $e:H^q(Rg_*K)\\to g_*H^q(K)$ to be $(H^q(i))^{-1}$ followed by the ordinary adjunct of $\\kappa_{g,P}^{-1}H^q(d)$, where $\\kappa$ is [lem-weil-pbc-derived-pullback-top-cohomology]. The inverse of $H^q(i)$ exists because truncation preserves cohomology in degree $q$. The canonical resolution-based local class, Leray and inverse-open class constructions used to compare this edge are retained verbatim from the parent interface [lem-trf-unbounded-direct-image-section-presheaf].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0BKJ, 0D5X; derived.tex Tags 08J5, 06XS. Agent refinement of the top-edge argument."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-pinned-derived-adjunction-shifts",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "def-pc-scheme",
+  "lem-pc-canonical-single-adjunction-transpose",
+  "lem-pc-ringed-space-sheafification-cohomology",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical local cohomology edge is induced by the derived counit on an upper truncation",
+   "results": "Functor.totalLeftDerivedCounit, Functor.totalRightDerivedUnit, CochainComplex.iTruncLE; no normalized module local-class equation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The edge map from cohomology of derived pushforward to pushforward cohomology equals the transpose of the derived counit on the upper truncation",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, ordinary pullbackPushforwardAdjunction unit formulas, Functor.mapDerivedCategoryFactorsh_hom_app; none states this normalized cohomology map.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*counit|counit.*truncLE|topEdgeTruncatedCounit; rg in Mathlib, WeilConjectures and Sheaf; blueprint_refs search truncated counit and cohomology counit",
+   "results": "No match for the normalized truncation/counit edge; existing top-edge theorem is the parent, not a proof of this local step. No blueprint duplicate.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge",
+  "date": "2026-10-25",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. The top-degree normalization of the derived-to-ordinary module adjoint. Local normalization on the upper truncation of the derived direct image.",
+   "via": [
+    "lem-weil-pbc-derived-adjunction-top-edge",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdgeData",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedAdjunctionTopEdgeData.lean",
+  "declaration": "AlgebraicGeometry.topEdgeTruncatedCounit",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.topEdgeResolution",
+   "AlgebraicGeometry.RingedSpace.topEdgeResolutionIso",
+   "AlgebraicGeometry.RingedSpace.topEdgeLocalModel",
+   "AlgebraicGeometry.RingedSpace.topEdgeLocalClass",
+   "AlgebraicGeometry.RingedSpace.topEdgeDirectImageComparison",
+   "AlgebraicGeometry.RingedSpace.topEdgeInverseModel",
+   "AlgebraicGeometry.RingedSpace.topEdgeLocalLeray",
+   "AlgebraicGeometry.RingedSpace.topEdgeInverseLocalClass",
+   "AlgebraicGeometry.topEdgePullbackInverse",
+   "AlgebraicGeometry.topEdgeTruncatedCounit"
+  ],
+  "statement": "def topEdgeTruncatedCounit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)\n    (K : schemeDerivedCategory T) :\n    (DerivedCategory.homologyFunctor.{w, u, u + 1}\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q).obj\n        ((schemeDerivedDirectImage g).obj K) ⟶\n      (Scheme.Modules.pushforward g).obj\n        ((DerivedCategory.homologyFunctor.{w, u, u + 1}\n          (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj K)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-25",
+  "note": "The nine existing resolution/local-class definitions are moved verbatim, retaining names, universes, types and bodies. The original item publicly re-exports this module."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-35b98",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261025T100951-L-3644939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-35b98",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261025T100951-L-3644939",
+  "kind": "interface",
+  "note": "independent cc review: derivedAdjunction_topEdge proof and new topEdgeTruncatedCounit_localClass vs node lem-weil-pbc-derived-adjunction-top-edge, new nodes def-weil-pbc-truncated-counit-edge and lem-weil-pbc-truncated-counit-local-class, moved defs diffed against the clone, DerivedSquareLocalClasses importer compiled"
+ }
+}

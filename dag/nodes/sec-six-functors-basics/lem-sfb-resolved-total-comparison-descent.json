@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-resolved-total-comparison-descent",
+ "kind": "statement",
+ "title": "Naturality and common-resolution descent for resolved total comparisons",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian], let $F:\\mathcal A\\to\\mathcal B$ be left exact and additive [def-sp-left-exact-additive], and use ordinary derived categories, localization $Q$, and the K-injective right derived functor $RF$ [sk-def-sfb-derived-categories]. Let $\\Delta$ have the finite nonempty ordered sets $[n]$ and order-preserving maps as its objects and arrows. For a strict functor $C:\\Delta\\to\\operatorname{Ch}^{\\ge0}(\\mathcal A)$, put $T(C)^r=\\bigoplus_{n+q=r}C_n^q$ and $d_T=\\delta+(-1)^n d_C$, where $\\delta=\\sum_i(-1)^i C(d^i)$ [def-sp-double-complex-total]. Let $u:K\\to J$ and $v:L\\to M$ be strict columnwise quasi-isomorphisms with $J_n,M_n$ nonnegative termwise injective complexes, and put $\\chi_u=Q\\beta_J\\rho_{T(J)}RF(QT(u))$ and $\\chi_v=Q\\beta_M\\rho_{T(M)}RF(QT(v))$, where $\\beta$ is the summand-preserving finite-total chain isomorphism and $\\rho$ the inverse right-derived unit. For every strict square $gu=vf$, with $f:K\\to L$ and $g:J\\to M$, one has\n$$QT(Fg)\\chi_u=\\chi_v RF(QT(f)).$$\nThe column comparisons satisfy $QF(g_n)c_{u_n}=c_{v_n}RF(Qf_n)$, with $c_{u_n}=\\rho_{J_n}RF(Qu_n)$. Thus these total maps represent the strict derived-image maps on columns, and identities and composites agree. For two replacements $u:K\\to J$ and $w:K\\to N$, and any functorial nonnegative injective resolution $\\eta:\\mathrm{id}\\to I$ of complexes, the strict zigzag\n$$J\\xrightarrow{\\eta_J}I(J)\\xleftarrow{I(u)}I(K)\\xrightarrow{I(w)}I(N)\\xleftarrow{\\eta_N}N$$\nhas columnwise quasi-isomorphisms, and applying $T(F(-))$ gives quasi-isomorphisms on every leg. Its induced isomorphism $e_{u,w}:QT(FJ)\\xrightarrow{\\sim}QT(FN)$ is $\\chi_w\\chi_u^{-1}$. It is independent of $I$ and of every augmentation-preserving zigzag through nonnegative termwise injective columns whose intermediate augmented objects are also columnwise quasi-isomorphic replacements of $K$; $e_{u,u}=1$ and $e_{w,z}e_{u,w}=e_{u,z}$. These identifications commute with the strict-square equation above. The terms K-injective, quasi-isomorphism and injective resolution have the meanings of [sk-def-sfb-derived-categories, def-sp-injective-resolutions].",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0141 (lemma-functorial-injective-resolutions and remark-match), Tag 05TH (lemma-injective-acyclic), and Tag 0133 (homology.tex, lemma-double-complex-gives-resolution); common strict resolution zigzag and derived-unit naturality for cosimplicial totals."
+ },
+ "stmt_deps": [
+  "def-sp-double-complex-total",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-injective-finite-total-derived-comparison] to each replacement $u:K\\to J$ and $v:L\\to M$. It gives the quasi-isomorphisms $T(u),T(v)$, the K-injective nonnegative totals $T(J),T(M)$, the column comparisons $c_{u_n},c_{v_n}$, and the isomorphisms $\\chi_u,\\chi_v$ with exactly the normalization in the statement. In particular all inverses used below exist. Its finite-biproduct comparison also gives $T(Fg)\\beta_J=\\beta_MF(T(g))$ for every strict map $g:J\\to M$; no quasi-isomorphism assumption on $g$ is needed.",
+   "uses": [
+    "lem-sfb-injective-finite-total-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic) and 015J (lemma-two-ss-complex-functor): inverse derived unit and finite-total comparison; explicit naturality calculation."
+   }
+  },
+  {
+   "text": "Write $\\alpha_E:QF(E)\\to RF(QE)$ for the unit of the total right derived functor [sk-def-sfb-derived-categories], a natural transformation $Q\\circ F\\Rightarrow RF\\circ Q$ on all complexes. For nonnegative termwise injective $E,E'$ the comparison in step 1 identifies $\\rho_E=\\alpha_E^{-1}$. Naturality of the unit is, by definition of natural transformation, $RF(Qh)\\alpha_E=\\alpha_{E'}QF(h)$ for every chain map $h:E\\to E'$. Multiply by $\\alpha_{E'}^{-1}$ on the left and $\\alpha_E^{-1}$ on the right to obtain\n$$QF(h)\\rho_E=\\rho_{E'}RF(Qh).$$\nWe will use this identity for $h=T(g)$ and $h=g_n$. This is just inversion of the naturality square, not a claim that $F$ preserves arbitrary quasi-isomorphisms.",
+   "uses": [
+    "lem-sfb-injective-finite-total-derived-comparison",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic) and 015J (lemma-two-ss-complex-functor): inverse derived unit and finite-total comparison; explicit naturality calculation."
+   }
+  },
+  {
+   "text": "Totalization respects composition on each summand, so $gu=vf$ gives $T(g)T(u)=T(v)T(f)$. Using steps 1 and 2, calculate\n$$\\begin{aligned}QT(Fg)\\chi_u&=Q\\beta_M\\,QF(T(g))\\rho_{T(J)}RF(QT(u))\\\\&=Q\\beta_M\\rho_{T(M)}RF(Q(T(g)T(u)))\\\\&=\\chi_vRF(QT(f)).\\end{aligned}$$\nIn each column, the same multiplication without $\\beta$ gives $QF(g_n)c_{u_n}=\\rho_{M_n}RF(Q(g_nu_n))=c_{v_n}RF(Qf_n)$. Thus the column maps represent the strict derived-image maps. For two composable squares their equations multiply to give the equation for the composite, and the identity square gives the identity: this follows from the functor laws for $RF$ and $T(F(-))$.",
+   "uses": [
+    "lem-sfb-injective-finite-total-derived-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic) and 015J (lemma-two-ss-complex-functor): inverse derived unit and finite-total comparison; explicit naturality calculation."
+   }
+  },
+  {
+   "text": "Now fix the functor $I$ and natural quasi-isomorphism $\\eta$ quantified in the statement. Postcomposition by a functor preserves all cosimplicial identities; naturality of $\\eta$ gives strict maps of diagrams. Give the five objects $J,I(J),I(K),I(N),N$ their augmentations from $K$, respectively $u,\\eta_Ju,\\eta_K,\\eta_Nw,w$. The four zigzag legs preserve these augmentations because $I(u)\\eta_K=\\eta_Ju$ and $I(w)\\eta_K=\\eta_Nw$. Each augmentation is columnwise a quasi-isomorphism. In each column, the same two equations show that $I(u)$ and $I(w)$ are quasi-isomorphisms: applying every $H^r$, their composites with the invertible $H^r(\\eta_K)$ are invertible. The other two legs are components of $\\eta$ and are quasi-isomorphisms by assumption. Every object in this zigzag has nonnegative termwise injective columns, including $I(K)$ by the stipulated property of $I$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0141, lemma-functorial-injective-resolutions and remark-match: natural augmentation squares; only the functorial resolution given in the statement is used."
+   }
+  },
+  {
+   "text": "Let $h:A\\to B$ be any strict columnwise quasi-isomorphism between diagrams with nonnegative termwise injective columns. Applying [lem-sfb-injective-finite-total-derived-comparison] with replacement $h$ shows that $T(h)$ is a quasi-isomorphism and $T(B)$ is a bounded-below complex of injectives; applying it with replacement $1_A$ shows the same for $T(A)$. So both totals have invertible derived units $\\rho_{T(A)},\\rho_{T(B)}$. Step 2 therefore gives\n$$QF(T(h))=\\rho_{T(B)}RF(QT(h))\\rho_{T(A)}^{-1},$$\nan isomorphism. The finite-total naturality square gives\n$$QT(Fh)=Q\\beta_B\\,QF(T(h))\\,(Q\\beta_A)^{-1},$$\nalso an isomorphism. By [def-weil-abstract-derived-category], every cohomology functor factors through $Q$; applying it shows that every $H^r(T(Fh))$ is invertible, exactly the definition of quasi-isomorphism. This proves the required assertion for all four legs, and for any leg between augmented replacements in the stated class.",
+   "uses": [
+    "lem-sfb-injective-finite-total-derived-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic) and 015J (lemma-two-ss-complex-functor): inverse derived unit and finite-total comparison; explicit naturality calculation."
+   }
+  },
+  {
+   "text": "For a forward augmentation-preserving leg $h:A\\to B$ between replacements $a:K\\to A$ and $b:K\\to B$, use step 3 with $f=1_K$. Since $ha=b$, it gives $QT(Fh)\\chi_a=\\chi_b$, hence $QT(Fh)=\\chi_b\\chi_a^{-1}$. A backward leg contributes the inverse, $\\chi_a\\chi_b^{-1}$. Multiplying these expressions along the displayed zigzag cancels every intermediate comparison, leaving $e_{u,w}=\\chi_w\\chi_u^{-1}$. The same cancellation works for every finite augmentation-preserving zigzag whose intermediate augmentations are columnwise quasi-isomorphic injective replacements. Its value depends only on $u,w$, so is independent both of the zigzag and of $I$. Direct multiplication gives $e_{u,u}=1$ and $e_{w,z}e_{u,w}=\\chi_z\\chi_u^{-1}=e_{u,z}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic) and 015J (lemma-two-ss-complex-functor): inverse derived unit and finite-total comparison; explicit naturality calculation."
+   }
+  },
+  {
+   "text": "Finally fix a strict $f:K\\to L$, two source replacements $u,u'$ and two target replacements $v,v'$, with strict lifts $g,g'$ of $f$. Step 3 writes their mapped total morphisms as $QT(Fg)=\\chi_vRF(QT(f))\\chi_u^{-1}$ and $QT(Fg')=\\chi_{v'}RF(QT(f))\\chi_{u'}^{-1}$. Using step 6, both\n$$e_{v,v'}QT(Fg)\\quad\\text{and}\\quad QT(Fg')e_{u,u'}$$\nare $\\chi_{v'}RF(QT(f))\\chi_u^{-1}$. This is the claimed compatibility of the choice identifications with strict-square naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic) and 015J (lemma-two-ss-complex-functor): inverse derived unit and finite-total comparison; explicit naturality calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-injective-finite-total-derived-comparison",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0141 (remark-match), 05TH and 015J. Explicit cosimplicial finite-total extension: inversion of the right-derived unit naturality square and cancellation along augmented common-resolution zigzags."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two compatible cosimplicial injective replacements have canonically isomorphic mapped total complexes via a common resolution zigzag naturally in strict maps",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.Hom.hom'_f, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.homotopyEquiv_inv_ι, CategoryTheory.InjectiveResolution.iso_inv_naturality, CategoryTheory.InjectiveResolution.homotopyEquiv_hom_ι, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.InjectiveResolution.homotopyEquiv_inv_ι_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits compare injective resolutions of individual objects; they do not provide a common strict cosimplicial-resolution zigzag whose mapped finite totals give the normalized natural comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"naturality\"",
+   "results": "12 hits: CategoryTheory.InjectiveResolution.iso_inv_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits compare injective resolutions of individual objects; they do not provide a common strict cosimplicial-resolution zigzag whose mapped finite totals give the normalized natural comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(cosimplicial|total).*(resolution|[Rr]esolution).*(natur|compar)|[Rr]esolution.*zigzag",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits compare injective resolutions of individual objects; they do not provide a common strict cosimplicial-resolution zigzag whose mapped finite totals give the normalized natural comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Independence of compatible injective resolutions for the total of a cosimplicial derived functor using homotopy equivalences of columns",
+   "results": "8 hits: CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.homotopyEquiv, CategoryTheory.InjectiveResolution.mk.injEq, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.mk.noConfusion",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits compare injective resolutions of individual objects; they do not provide a common strict cosimplicial-resolution zigzag whose mapped finite totals give the normalized natural comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and choice independence of normalized derived comparisons between finite total complexes of resolved strict diagrams",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits compare injective resolutions of individual objects; they do not provide a common strict cosimplicial-resolution zigzag whose mapped finite totals give the normalized natural comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(cosimplicial|total).*(resolution|Resolution).*(natur|compar)|[Rr]esolution.*zigzag",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: checked object-resolution naturality in Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean:247-260 and Abelian/RightDerived.lean:126-151; these do not state total right-derived comparison for strict cosimplicial complexes or its augmented common-resolution descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common functorial injective resolution compares total complexes naturally and independently of the choice of resolution",
+   "results": "8 hits: CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.of, CategoryTheory.injectiveResolution, CategoryTheory.InjectiveResolution.self, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.mk.injEq, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.of_def",
+   "date": "2026-10-22",
+   "verdict": "no match: checked object-resolution naturality in Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean:247-260 and Abelian/RightDerived.lean:126-151; these do not state total right-derived comparison for strict cosimplicial complexes or its augmented common-resolution descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"InjectiveResolution\", \"naturality\"",
+   "results": "12 hits: CategoryTheory.InjectiveResolution.iso_inv_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: checked object-resolution naturality in Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean:247-260 and Abelian/RightDerived.lean:126-151; these do not state total right-derived comparison for strict cosimplicial complexes or its augmented common-resolution descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and independence of injective replacements for total complexes of cosimplicial diagrams under a right derived functor",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: checked object-resolution naturality in Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean:247-260 and Abelian/RightDerived.lean:126-151; these do not state total right-derived comparison for strict cosimplicial complexes or its augmented common-resolution descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Common resolution zigzags for strict cosimplicial cochain complexes, finite totalization and the inverse unit of a total right derived functor",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles",
+   "date": "2026-10-22",
+   "verdict": "no match: checked object-resolution naturality in Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean:247-260 and Abelian/RightDerived.lean:126-151; these do not state total right-derived comparison for strict cosimplicial complexes or its augmented common-resolution descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nonnegative-derived-totalization",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the formal bounded-below Cech descent used before the root-tower boundary-unit calculation; the compatible derived-image totalization comparison. The inherited ancestor is None. Re-split of nonnegative-derived-totalization: former steps 6,7.",
+   "via": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-resolved-total-comparison-descent",
+  "worker": "stage1",
+  "group": "Q118",
+  "summary": "Read the exact item and its parent split, current blueprint open-direct-image route, Stacks functorial resolution, injective computation and finite-total arguments. Preserved the statement. Reused the existing injective finite-total comparison; made inverse-unit naturality, the strict-square calculation, each augmented zigzag leg and cancellation explicit. Quasi-isomorphisms after F are deduced from derived isomorphisms using the existing cohomology factorization definition, without exactness of F. No new nodes needed.",
+  "blueprint": "Current main-20261015 sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3): open direct image, via the inherited nonnegative-derived-totalization descent chain and its former steps 6,7. The ancestor tool returns None; the existing null ancestor and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic definition of quasi-isomorphisms and the factorization of cohomology through localization; needed to turn an invertible localized chain map into a quasi-isomorphism. No geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-abstract-derived-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-cdfd2591f",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-cdfd2591f (reviewer sub-agent of L); spot-checked: Read the full item (7 steps, statement unchanged and not weakened, no new nodes), both cited statements, sk-def-sfb-derived-categories, the parent nonnegative-derived-totalization (current step 3 uses this item; old steps 6-7 from the N9 run snapshot are all carried here by a valid inverse-unit route), and Stacks derived.tex lemma-functorial-injective-resolutions/remark-match/lemma-injective-acyclic (all present). Recomputed every step. Step 3: QT(Fg)chi_u = Qbeta_M rho_T(M) RF(QT(gu)) = chi_v RF(QTf); the column version is also correct. Step 4: two-out-of-three gives I(u), I(w) qis. Step 5: QF(Th) = rho RF(QTh) rho^-1, then conjugating by beta and using H^r factoring through Q shows T(Fh) is a qis, with no exactness of F needed. Step 6: the four-leg product telescopes to chi_w chi_u^-1, which gives independence, e_uu=1 and the cocycle identity. Step 7: both sides equal chi_v' RF(QTf) chi_u^-1. Small cases checked: F=id, a single column, u=w, F=0. Duplicate search (zigzag, chi_u, functorial injective resolution) found only the sibling augmentation-square node, the existence nodes for the replacement functor I, the trf Gamma-zigzag node and lem-sp-derived-injective-resolution-naturality from another unit; none duplicates this item. No SGA cited; the null blueprint ancestor is inherited, not a fault of this delivery. Accepted tool_use: def-weil-abstract-derived-category (generic definition). Two fixes in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-resolved-total-comparison-descent.json: (1) step 2 used naturality of the derived unit without citing its definition, so sk-def-sfb-derived-categories is added to the step's uses and to proof_deps (C1). (2) Step 5 used rho_T(A) but applied the finite-total lemma only to h, which gives injectivity of the target total only; the text now also applies the lemma to 1_A (E1 precision).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ResolvedTotalComparisonDescent",
+  "declaration": "CategoryTheory.ResolvedTotal.resolved_total_comparison_descent",
+  "declarations": [
+   "CategoryTheory.ResolvedTotal.totalFunctor",
+   "CategoryTheory.ResolvedTotal.integerTotal",
+   "CategoryTheory.ResolvedTotal.mappedTotal",
+   "CategoryTheory.ResolvedTotal.mappedIntegerTotal",
+   "CategoryTheory.ResolvedTotal.extendComparison",
+   "CategoryTheory.ResolvedTotal.derivedUnit",
+   "CategoryTheory.ResolvedTotal.Replacement",
+   "CategoryTheory.ResolvedTotal.AugmentedZigzag",
+   "CategoryTheory.ResolvedTotal.mapped_leg_quasiIso",
+   "CategoryTheory.ResolvedTotal.legIso",
+   "CategoryTheory.ResolvedTotal.zigzagIso",
+   "CategoryTheory.ResolvedTotal.common_resolution_legs",
+   "CategoryTheory.ResolvedTotal.commonResolutionIso",
+   "CategoryTheory.ResolvedTotal.resolvedMap",
+   "CategoryTheory.ResolvedTotal.resolved_total_comparison_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ResolvedTotalComparisonDescent.lean",
+  "statement": "theorem resolved_total_comparison_descent : ∃ (β : totalFunctor A ⋙ F.mapHomologicalComplex (ComplexShape.up ℕ) ≅ mappedTotal F) (χ : ∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K), F.rightDerivedFunctor.obj (DerivedCategory.Q.obj ((integerTotal A).obj K)) ≅ DerivedCategory.Q.obj ((mappedIntegerTotal F).obj R.diagram)) (c : ∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K) (n : SimplexCategory), F.rightDerivedFunctor.obj (DerivedCategory.Q.obj ((K.obj n).extend ComplexShape.embeddingUpNat)) ≅ DerivedCategory.Q.obj ((((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (R.diagram.obj n)).extend ComplexShape.embeddingUpNat))), (∀ (J : CosimplicialObject (CochainComplex A ℕ)) (n q : ℕ), F.map (HomologicalComplex₂.ιTotal ((alternatingCofaceMapComplex _).obj J) (ComplexShape.up ℕ) n q (n + q) rfl) ≫ (β.app J).hom.f (n + q) = (HomologicalComplex₂.ιTotal ((alternatingCofaceMapComplex _).obj (J ⋙ F.mapHomologicalComplex (ComplexShape.up ℕ))) (ComplexShape.up ℕ) n q (n + q) rfl)) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K), (χ K R).hom ≫ (DerivedCategory.Q.mapIso (extendComparison F β R.diagram)).inv ≫ derivedUnit F ((integerTotal A).obj R.diagram) = F.rightDerivedFunctor.map (DerivedCategory.Q.map ((integerTotal A).map R.augmentation))) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K) (n : SimplexCategory), (c K R n).hom ≫ DerivedCategory.Q.map ((R.diagram.obj n).mapExtendIso ComplexShape.embeddingUpNat F).inv ≫ derivedUnit F ((R.diagram.obj n).extend ComplexShape.embeddingUpNat) = F.rightDerivedFunctor.map (DerivedCategory.Q.map (HomologicalComplex.extendMap (R.augmentation.app n) ComplexShape.embeddingUpNat))) ∧ (∀ (K L : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K) (S : Replacement L) (f : K ⟶ L) (g : R.diagram ⟶ S.diagram), R.augmentation ≫ g = f ≫ S.augmentation → (χ K R).hom ≫ DerivedCategory.Q.map ((mappedIntegerTotal F).map g) = F.rightDerivedFunctor.map (DerivedCategory.Q.map ((integerTotal A).map f)) ≫ (χ L S).hom ∧ (∀ n : SimplexCategory, (c K R n).hom ≫ DerivedCategory.Q.map (HomologicalComplex.extendMap ((F.mapHomologicalComplex (ComplexShape.up ℕ)).map (g.app n)) ComplexShape.embeddingUpNat) = F.rightDerivedFunctor.map (DerivedCategory.Q.map (HomologicalComplex.extendMap (f.app n) ComplexShape.embeddingUpNat)) ≫ (c L S n).hom)) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K), resolvedMap F χ R R (𝟙 K) = 𝟙 _) ∧ (∀ (K L N : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K) (S : Replacement L) (U : Replacement N) (f : K ⟶ L) (g : L ⟶ N), resolvedMap F χ R U (f ≫ g) = resolvedMap F χ R S f ≫ resolvedMap F χ S U g) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R S : Replacement K) (I : CochainComplex A ℕ ⥤ CochainComplex A ℕ) (η : 𝟭 (CochainComplex A ℕ) ⟶ I) (hη : ∀ E : CochainComplex A ℕ, QuasiIso (η.app E)) (hI : ∀ (E : CochainComplex A ℕ) (q : ℕ), Injective ((I.obj E).X q)), commonResolutionIso F R S I η hη hI = (χ K R).symm ≪≫ χ K S) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R S : Replacement K) (p : AugmentedZigzag R S), zigzagIso F p = (χ K R).symm ≪≫ χ K S) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R : Replacement K), (χ K R).symm ≪≫ χ K R = Iso.refl _) ∧ (∀ (K : CosimplicialObject (CochainComplex A ℕ)) (R S U : Replacement K), ((χ K R).symm ≪≫ χ K S) ≪≫ ((χ K S).symm ≪≫ χ K U) = (χ K R).symm ≪≫ χ K U) ∧ (∀ (K L : CosimplicialObject (CochainComplex A ℕ)) (R R' : Replacement K) (S S' : Replacement L) (f : K ⟶ L) (g : R.diagram ⟶ S.diagram) (g' : R'.diagram ⟶ S'.diagram), R.augmentation ≫ g = f ≫ S.augmentation → R'.augmentation ≫ g' = f ≫ S'.augmentation → DerivedCategory.Q.map ((mappedIntegerTotal F).map g) ≫ ((χ L S).symm ≪≫ χ L S').hom = ((χ K R).symm ≪≫ χ K R').hom ≫ DerivedCategory.Q.map ((mappedIntegerTotal F).map g'))",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The normalized comparison families are quantified together with their characterizing summand/unit equations. Replacement and AugmentedZigzag package precisely the strict augmented diagrams in this node; every helper is in this owning module. The two helper theorems are the mapped-leg and common-resolution clauses of this same DAG statement, not independent postponed facts."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5eb854a81",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps (unchanged vs live), module, report (Worker report + Second reading by Q130), parent NonnegativeDerivedTotalization, sk-def-sfb-derived-categories record (allows upstream rightDerivedFunctor on Grothendieck), KInjectiveResolution instance. All 11 conjuncts match the node and are true: β pinned by summand equation; χ/c pinned by actual rightDerivedFunctorUnit normalization; strict-square + column squares; commonResolutionIso of actual mapped legs = χ_R⁻¹χ_S for arbitrary I,η; AugmentedZigzag (every vertex a Replacement) value = χ_R⁻¹χ_S; two-lift compatibility. Universes independent, autoImplicit false, statement verbatim, only sorry, docstrings ok, no stronger hypotheses. M1 maintainer note: ResolvedTotal.totalFunctor/Replacement/derivedUnit duplicate the parent theorem module's nonnegativeCosimplicialTotal/NonnegativeCosimplicialResolution/nonnegativeRightDerivedUnit; this is forced by the import cycle for a re-split child and there is no name clash; stage 3 should share them in a def-node module. M2: conjuncts 5,6,9,10 are formal consequences, faithful to the node's 'thus' clauses. No compile (no file changed); delivery compile clean 3.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T070849-L-4139368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ResolvedTotal.common_resolution_legs",
+   "CategoryTheory.ResolvedTotal.mapped_leg_quasiIso",
+   "CategoryTheory.ResolvedTotal.resolved_total_comparison_descent"
+  ],
+  "sorry_after": []
+ }
+}

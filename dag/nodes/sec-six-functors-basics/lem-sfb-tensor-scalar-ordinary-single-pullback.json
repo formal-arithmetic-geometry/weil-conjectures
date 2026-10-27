@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-tensor-scalar-ordinary-single-pullback",
+ "kind": "statement",
+ "title": "Ordinary tensor pullback with a single coefficient",
+ "statement": "For a scheme morphism f:Z→T, a morphism a:A→B of ring sheaves and an arbitrary cochain complex P of A-modules, conjugate tensorScalarOrdinaryPullback(f,a,P) by the inverse source and forward target mapBifunctorSingle₂Iso. In degree n this is the ordinary tensor pullback map on (P.X n,coefficient a), followed by tensoring the first pulled-back factor with the fixed coefficientPullback(f,a). No scalar comparison, derived category, K-flatness or boundedness is involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-sfb-scalar-tensor-ordinary-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Identify the inverse total tensor pullback with the standard HomologicalComplex.mapBifunctorComparison of the ordinary tensor pullback transformation. Test the defining total descent map on each homogeneous summand and cancel the ordinary tensor pullback isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+   }
+  },
+  {
+   "text": "Apply the proved source-library mapBifunctorComparisonX_single2 in each degree and single2Iso coefficient naturality. They identify the prescribed total comparison with tensor pullback and the coefficient map degreewise, including the singleMapHomologicalComplex factor. Cancel the target single-complex comparison using its explicit inverse equations.",
+   "uses": [
+    "lem-sfb-scalar-tensor-ordinary-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-scalar-tensor-ordinary-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor pullback comparison with single complex in degree zero",
+   "results": "Eight tensor-unit and unitor hits, including HomologicalComplex.tensorUnitIso and rightUnitor. No arbitrary coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved source-library component comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorComparisonX_single₂",
+   "results": "No Mathlib hits: the identifier is in the adopted source library, not Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "Use WeilConjectures.Algebra.Homology.BifunctorSingleComparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparisonX_single",
+   "results": "No Mathlib hits; project rg finds the proved source-library component formula.",
+   "date": "2026-10-27",
+   "verdict": "Apply that formula and coefficient naturality, rather than rebuilding single totalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarMateOrdinaryTensorRoute",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of sk-thm-sf-ctf-stability, direct-images paragraph (3); Ordinary tensor pullback with a single coefficient.",
+   "via": [
+    "lem-sfb-scalar-mate-ordinary-complex-route",
+    "lem-sfb-scalar-mate-ordinary-tensor-route",
+    "lem-sfb-derived-scalar-pullback-tensor-normalization",
+    "lem-sfb-derived-scalar-projection-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorScalarOrdinarySinglePullback",
+  "file": "lean/Sheaf/Paper/TensorScalarOrdinarySinglePullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.tensorScalarOrdinaryPullback_single_f",
+  "statement": "theorem tensorScalarOrdinaryPullback_single_f {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (P : CochainComplex (proEtaleRingModules T A) ℤ) (n : ℤ) :\n    let FA := proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)\n    let FAc := FA.mapHomologicalComplex (.up ℤ)\n    (FAc.map (CochainComplex.mapBifunctorSingle₂Iso\n      (proEtaleOrdinaryTensor T A) (coefficient a) P).inv ≫\n      tensorScalarOrdinaryPullback f a P ≫\n      (CochainComplex.mapBifunctorSingle₂Iso\n        (proEtaleOrdinaryTensor Z (inverseRing f A)) (coefficient (inverseMap f a))\n        (FAc.obj P)).hom).f n =\n    (proEtaleOrdinaryTensorPullback f A (inverseRing f A) (Iso.refl _)\n      (P.X n) (coefficient a)).hom ≫\n      ((proEtaleOrdinaryTensor Z (inverseRing f A)).obj (FA.obj (P.X n))).map\n        (coefficientPullback f a).hom",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

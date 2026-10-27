@@ -1,0 +1,147 @@
+{
+ "id": "lem-pur-system-tensor-semilinear-realization",
+ "kind": "statement",
+ "title": "Realization of supplied semilinear calculus by normalized diagram operations",
+ "statement": "Fix the prime and coefficient extension of [def-pur-system-tensor-mate-arrows]. For each scheme W let a W be a supplied SemilinearDerivedSectionsData for its actual quotient sequence [lem-coef-semilinear-derived-sections]. There exist normalized diagram tensor operations o and a SemilinearPresentationComparison a o [def-pur-system-tensor-presentation-core]: its system tensor calculus is exactly a W.systems; its comparison with a.geometric retains the unit-normalized inverse-image coefficient identification, ordinary pure tensors, K-flat total model, derived units, counits, mu and geometric projection; its comparison with a.localization retains the canonical pro-etale slice sections, morphisms, horizontal transitions and ordinary open unit. No comparison with a second arbitrary normalized operations package is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56 equation-projection-formula-map; the agent presentation comparison Steps 1--9 in lem-pur-system-tensor-presentation-identification. These tags specify the mate word, not the concrete presentation theorem."
+ },
+ "stmt_deps": [
+  "def-pur-system-tensor-presentation-core",
+  "def-pur-system-tensor-mate-arrows",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Retain a W.systems on every scheme. Form the ordinary sectionwise diagram operations and their normalized tensor comparison as in the existence of TensorOperations. The constant-section unit comparison identifies each geometric inverse-image coefficient ring with the original constant quotient ring and commutes with every transition. Assemble these into the sequence ring isomorphism. Restriction along its inverse is the exact coefficient transport. Identify its pure-tensor ordinary comparison and signed total complex comparison, and descend on K-flat models.",
+   "uses": [
+    "def-pur-system-tensor-mate-arrows",
+    "lem-coef-semilinear-operations-existence",
+    "def-coef-semilinear-geometry-derived",
+    "lem-sfb-exact-monoidal-equivalence-total-kflat",
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the specified ordinary geometric adjunctions with the diagram adjunction through their common sectionwise direct image and canonical coefficient map. Descend to the unbounded category using the specified derived units and system K-injectives. The tensor-model equations identify geometric mu, and substitution in its counit transpose identifies its projection. Use the slice equivalence for an open to retain every section, morphism and transition. Left-adjoint uniqueness with the actual localized restriction identifies the extension and its unit with a.localization. These data give SemilinearPresentationComparison, with systems exactly a W.systems.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-sfb-exact-postcomposition-kinjective-descent",
+    "def-sfb-right-derived-functor",
+    "def-pur-proetale-slice-to"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-system-tensor-mate-arrows",
+  "lem-coef-semilinear-operations-existence",
+  "def-coef-semilinear-geometry-derived",
+  "lem-sfb-exact-monoidal-equivalence-total-kflat",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sfb-exact-postcomposition-kinjective-descent",
+  "def-sfb-right-derived-functor",
+  "def-pur-proetale-slice-to"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56 equation-projection-formula-map; the agent presentation comparison Steps 1--9 in lem-pur-system-tensor-presentation-identification. These tags specify the mate word, not the concrete presentation theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of left adjoints normalized by adjunction unit and counit",
+   "results": "Adjunction.homEquiv_leftAdjointUniq_hom_app and unit_leftAdjointUniq_hom_app supply adjoint normalization; no full strict-system presentation theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the adjunction uniqueness API; the concrete K-flat and geometric realization steps are absent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits, including leftAdjointUniq, unit_leftAdjointUniq_hom_app, leftAdjointUniq_hom_app_counit and transitivity.",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction comparisons exist, but do not package these concrete systems and tensor models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two normalized choices of derived tensor and pullback operations on sheaves have a canonical comparison preserving adjunction units and K-flat models",
+   "results": "8 hits concerning sheaf module pullback, pullbackPushforwardAdjunction and pullbackComp; no comparison of the complete system models.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelIso|TensorComparisonModel; TensorPresentationComparison|SemilinearPresentationComparison",
+   "results": "Mathlib grep via msearch: zero hits. Project rg finds the definitions only in the item; SemilinearSystemModels and CochainTensorModelRigidity provide representative interfaces and rigidity. Blueprint search for tensor presentation: zero matches.",
+   "date": "2026-10-26",
+   "verdict": "Existing interfaces are reused; the two strictly partial existence steps have no separate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemTensorPresentationIdentification",
+  "date": "2026-10-26",
+  "group": "W7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Proof of prop-pur-adic-reconstruction-trace-coherence, the projection-composition equality used in the arbitrary-input mate calculation; the proper/open tensor interchange in Step 3 of its child lem-pur-system-level-projection-formula-coherence. Comparison of the simultaneous coefficient categories and tensor/projection/open factors (old Steps 1 and 3). Strict-system presentation comparison: Realization of supplied semilinear calculus by normalized diagram operations.",
+   "via": [
+    "lem-pur-system-tensor-presentation-identification",
+    "lem-pur-system-clopen-tensor-compatibility",
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemTensorSemilinearRealization",
+  "file": "lean/Sheaf/Paper/SystemTensorSemilinearRealization.lean",
+  "declaration": "WeilConjectures.SystemTensorMate.semilinearPresentation_realization",
+  "statement": "theorem semilinearPresentation_realization\n    (a : ∀ W : Scheme.{u}, PresentationSections (l := l) (E := E) W) :\n    ∃ o : TensorOperations l E, Nonempty (SemilinearPresentationComparison a o)",
+  "branch": "sheaf-dag",
+  "by": "W7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0baea",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261025T205953-L-3430927",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0baea",
+  "group": "W7",
+  "result": "fix",
+  "landing": "20261025T205953-L-3430927",
+  "kind": "interface",
+  "note": "independent cc review: item tensorPresentationIdentification + extracted SystemTensorPresentationData interfaces + core/realization split statements against node lem-pur-system-tensor-presentation-identification, clone version and TensorOperations (SystemTensorMateArrows)"
+ }
+}

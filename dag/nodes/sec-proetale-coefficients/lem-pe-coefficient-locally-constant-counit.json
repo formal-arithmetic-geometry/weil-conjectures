@@ -1,0 +1,154 @@
+{
+ "id": "lem-pe-coefficient-locally-constant-counit",
+ "kind": "statement",
+ "title": "Coefficient-universe classicality of locally constant set sheaves",
+ "statement": "Let X be a scheme and let H be a sheaf of sets in Type (max v (u+1)) on its coefficient-sized pro-etale model [def-weil-pbc-site-comparison-morphism, def-weil-proetale-inverse-image]. Suppose a coefficient-sized family W covers the final object and every slice restriction H.over(W_j) is isomorphic to the constant sheaf of some coefficient-sized set Q_j [def-weil-pbc-constant-sheaf]. Then the canonical counit nu^* nu_* H -> H of smallModelProEtaleComparison is an isomorphism. This is a single-sheaf structural assertion; there is no family of H, no local inhabitedness assumption, and no covering-family conclusion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1--5.1.4, p. 34: locally classical implies classical, and classicality is equivalent to invertibility of the comparison counit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Work on the original sites with values in Type (max v (u+1)). Repeat the density proof for left Kan extensions: express a presheaf as its colimit of lifted representables; finite presentation of etale schemes makes each image representable continuous on affine ind-etale limits. The affine minimal precoverage and relative-presentability sheaf criterion show that the Kan extension is already a sheaf on the dense affine basis. Consequently the comparison unit is invertible and comparison inverse images are continuous. These arguments are implemented as proved private helpers, generalizing the proofs in ProEtaleComparisonSections and LanContinuityFromRepresentables rather than applying their fixed-universe statements.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the weakly etale slice equivalence and AsSmall.up to transport each slice trivialization to the ordinary pro-etale site of the covering scheme. Both functors are continuous and cocontinuous, so constant sheafification commutes with their restriction. Constant sheaves are classical by composing the constant-sheaf and comparison adjunctions and invoking uniqueness of left adjoints. Refining the cover by affine ind-etale charts preserves classicality, by the conjugate of the geometric base-change isomorphism on direct images. The required coefficient-universe compatibility is proved privately.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Repeat the finite-cover descent argument in the coefficient universe. Finite families of representatives and equalities in filtered colimits lift to one common stage. Thus sectionwise filtered colimits preserve the sheaf condition for each finite generating presieve. For an affine base apply this to V mapping to F(C_j times V): the comparison to F(C times V) is an isomorphism on the classical cover, hence globally; evaluation at the terminal affine object gives continuity. For a general base pass to the cofinal category over one etale stage. All these steps are proved private helpers, with no additional unproved statement.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the original comparison counit on the dense affine basis. Present each basis object as a cofiltered limit of affine etale stages. Continuity on both sides and invertibility on the etale stages imply invertibility at the limit. Finally compose this comparison adjunction with the AsSmall sheaf equivalences. Its right adjoint identifies sectionwise with smallModelComparisonPushforward. Uniqueness of left adjoints and its counit identity identify the displayed canonical counit with a composite of isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1--5.1.4, p. 34. Coefficient-universe adaptations of the existing complete continuity and comparison-section proofs, with explicit AsSmall and slice transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally constant sheaf on the proetale site is classical and the comparison adjunction counit is an isomorphism",
+   "results": [
+    "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app",
+    "CategoryTheory.isIso_sheafificationAdjunction_counit",
+    "CategoryTheory.Sheaf.isConstant_of_isIso_counit_app"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Constant sheaf and sheafification counits, not the etale/pro-etale comparison counit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf on the proetale site descends to the etale site",
+   "results": [
+    "Condensed.lanSheafProfinite",
+    "LightCondensed.lanLightCondSet",
+    "Condensed.isSheafProfinite"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Different sites; no etale/pro-etale comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftKanExtension",
+   "results": [
+    "CategoryTheory.Functor.IsLeftKanExtension",
+    "CategoryTheory.Functor.leftKanExtensionUnique"
+   ],
+   "date": "2026-10-26",
+   "verdict": "The generic Kan-extension API proves the parent family argument but does not prove geometric classicality."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallySurjective|locallyClassical; project locallyConstant/counit searches",
+   "results": "Mathlib local-surjectivity API; project ProEtaleLocallyClassicalEtaleCover, ProEtaleLocallyClassicalContinuity and ProEtaleComparisonSections are fixed to Type (u+1). CoefficientComparisonConstantChartCounit concerns module sheaves and etale charts.",
+   "date": "2026-10-26",
+   "verdict": "No existing declaration handles arbitrary coefficient-sized set sheaves trivialized on pro-etale charts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientLocallyConstantEtaleSections",
+  "date": "2026-10-26",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "First geometric step of the joint local-section argument: locally constant set sheaves are classical",
+   "via": [
+    "lem-pe-coefficient-locally-constant-etale-sections",
+    "lem-pe-coefficient-fp-local-system-etale-cover",
+    "lem-pe-coefficient-fp-local-system-origin",
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientLocallyConstantCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientLocallyConstantCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientLocallyConstant_counit_isIso",
+  "statement": "theorem coefficientLocallyConstant_counit_isIso (X : Scheme.{u})\n    (H : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (Type (max v (u + 1))))\n    (hH : ∃ (L : Type (max v (u + 1)))\n      (W : L → Scheme.coefficientProEtaleSiteModel.{u, v} X),\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X).CoversTop W ∧\n        ∀ j : L, ∃ Q : Type (max v (u + 1)),\n          Nonempty (H.over (W j) ≅\n            (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, v} X).over (W j))\n              (Type (max v (u + 1)))).obj Q)) :\n    IsIso ((Scheme.smallModelProEtaleComparison.{u, v} X).counit.app H)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T022915-L-500947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T065305-L-2790274",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

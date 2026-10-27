@@ -28,57 +28,41 @@
  ],
  "proof": [
   {
-   "text": "Choose a generating section nonvanishing at y by the invertible-sheaf generation criterion. Shrink to an affine neighbourhood U in its generating locus and in a standard smooth chart. The section trivializes L there; shrink further so the relative differentials are free of rank d and the structure morphism is smooth of relative dimension d.",
+   "text": "Apply the local first-jet spanning theorem to obtain a frame, the actual columns J_i, and an equivalence b from the cotangent fibre to K^d. Let T=id_K times b. Define E as T composed with the finite linear-combination map of J. The span hypothesis and Fintype.range_linearCombination make E surjective.",
    "uses": [
-    "lem-weil-pbc-invertible-generating-sections-fibre",
-    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+    "lem-zl-bertini-local-first-jets"
    ],
    "elementary": false
   },
   {
-   "text": "Write s_j=f_j s_i on U, with f_i=1. On each residue field the conormal sequence for the immersion into the projective chart is surjective on differentials. The projective chart coordinates pull back to the ratios f_j, so their differentials span the cotangent fibre of U. Choose a basis of that fibre and define E on the standard coordinate vectors by (f_j,df_j). Its i-th column is (1,0); subtracting f_j times that column leaves (0,df_j). Thus E is surjective onto kappa(z) plus kappa(z)^d.",
+   "text": "Apply the singular-fibre polynomial-equation theorem in the same actual local frame, obtaining its affine coordinate ring A, isomorphism e and surjective polynomial quotient q with all value/differential relations and coefficient compatibility.",
    "uses": [
-    "lem-pur-conormal-sequence-smooth-immersion",
-    "def-weil-pbc-morphism-to-projective-space-by-sections",
-    "def-sc-relative-differential-sheaf"
+    "lem-zl-bertini-singular-fibre-polynomial-equations"
    ],
    "elementary": false
   },
   {
-   "text": "On coefficient space times U, the equation is F=sum x_j f_j, and its differential relative to coefficient space is sum x_j df_j. Smooth base change makes the ambient projection smooth. A nonzero value of this differential at a zero-scheme point gives a smooth open neighbourhood by the hypersurface differential criterion. Hence all coefficients of F and dF vanish on the nonsmooth subset. The vanishing ideal defining its reduced induced structure contains these functions; this remains true after passage to each residue-field fibre.",
+   "text": "Reindex the dual of the standard basis of K^(r+1) by ULift. SymmetricAlgebra.equivMvPolynomial for this basis gives P with P(iota(proj_i))=x_i. Set H=q composed with P. Both maps are surjective.",
    "uses": [
-    "lem-pc-proper-base-change",
-    "lem-zl-hypersurface-nonzero-relative-differential",
-    "def-sc-relative-differential-sheaf",
-    "def-pc-zero-scheme"
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
    ],
    "elementary": false
   },
   {
-   "text": "The fibre over z of coefficient space times Y is affine coefficient space over K. The two closed inclusions (singular scheme into universal zero scheme into the product) remain closed after base change. Hence F_z is affine with its actual coordinate ring A and a surjective quotient of K[x_0,...,x_r]. Identify this polynomial algebra with the symmetric algebra of the coordinate dual to obtain H. The preceding vanishing kills E*(phi) for every target functional. Checking polynomial variables and scalar coefficients gives the displayed coefficient compatibility. This includes empty fibres (A the zero ring) and d=0.",
-   "uses": [
-    "def-zl-bertini-universal-family",
-    "def-pc-scheme-fibre"
-   ],
+   "text": "Expand an arbitrary dual vector in this dual basis. Then P(iota(E.dualMap(phi)))=sum_i phi(T(J_i))*x_i. Apply the polynomial relation for phi composed with T to get zero. The equality H(iota(proj_i))=q(x_i) transports coefficient compatibility unchanged.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-fibre",
-  "def-pc-zero-scheme",
-  "def-sc-relative-differential-sheaf",
-  "def-weil-pbc-morphism-to-projective-space-by-sections",
-  "def-zl-bertini-universal-family",
-  "lem-pc-proper-base-change",
-  "lem-pur-conormal-sequence-smooth-immersion",
-  "lem-weil-pbc-invertible-generating-sections-fibre",
-  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
-  "lem-zl-hypersurface-nonzero-relative-differential"
+  "lem-zl-bertini-local-first-jets",
+  "lem-zl-bertini-singular-fibre-polynomial-equations",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0FD6, lemma-bertini, final paragraph: first-order evaluation and its kernel"
+  "place": "Tag 0FD6, final paragraph, realized through local first-jet columns and their polynomial equations; dual-basis expansion and symmetric-algebra identification are proved in Lean by M7"
  },
  "mathlib_searches": [
   {
@@ -154,14 +138,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-64c49",
-  "group": "Q7",
+  "reviewer": "COMPILER",
+  "group": "M7",
   "result": "pass",
-  "landing": "20261020T132029-L-1404056",
+  "landing": "20261026T092039-L-3397452",
   "kind": "interface",
-  "note": "independent cc review: item proof + 6 new nodes/modules vs live clone: theorem signature identical, 4 defs moved verbatim to the publicly imported BertiniUniversalFamily, all 7 modules compile, importer BertiniSmoothMember compiles, axioms as expected, the one remaining sorry (bertini_singular_fibre_equations) checked as true against Stacks 0FD6/00T7"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

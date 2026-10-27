@@ -1,0 +1,146 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0G7E, the canonical tensor comparison on flat-term K-flat representatives; ordinary unit compatibility uses Modules on Sites, Tag 03EL."
+ },
+ "proof_origin": {
+  "by": "worker",
+  "agent": "G1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit interface identifications in the proof of normalization, following 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor comparison square for a composite descends from normalized resolving representatives using fully faithful precomposition",
+   "results": "Generic functorial right resolution and derivability structure theorems in Mathlib.CategoryTheory.Localization.DerivabilityStructure, plus generic Tor naturality. None states this pasted tensor square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.map_injective",
+   "results": "CategoryTheory.Functor.FullyFaithful.map_injective in Mathlib.CategoryTheory.Functor.FullyFaithful. It is used for the final descent after proving the representative square.",
+   "date": "2026-10-26",
+   "verdict": "Generic descent tool used, not a duplicate of the whole statement."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison_tensor_descends|composite_tensor_square",
+   "results": "msearch grep returned zero. Direct rg found the already proved private helpers in the item and similar private square-pasting helpers in NormalizedCoefficientTensorSquare. This module relocates the item helpers with their proofs intact.",
+   "date": "2026-10-26",
+   "verdict": "Existing private proof support moved to a separate module to satisfy the per-file compile limit."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5: the normalized comparison mu_{g;K,Lambda(m)}; compose its normalized tensor squares and descend the compositor tensor equation.",
+   "via": [
+    "lem-pur-finite-derived-comparison-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "id": "lem-pur-finite-tensor-comparison-proof-support",
+ "title": "Pasting and descent of normalized tensor comparison squares",
+ "statement": "For sheaf modules the existing tensor instances may be reused through the cached proved constants. The explicit native cochain comparison is obtained by uncurrying and has the original component maps, and the total tensor map is the native tensorHom. The recorded tensor models are natural on K-flat complexes; the packaged native cochain compositor has its original components and tensor-composition equation. For arbitrary category-valued comparison data, the normalized tensor compositor square descends as follows:\ntheorem comparison_tensor_descends\n    {L Z : Type*} [Category L] [Category Z]\n    (q : K ⥤ D) (q' : H ⥤ E) (q'' : L ⥤ Z)\n    (t : K → K → K) (t' : H → H → H) (t'' : L → L → L)\n    (T : D × D ⥤ D) (T' : E × E ⥤ E) (T'' : Z × Z ⥤ Z)\n    (U : K ⥤ H) (V : H ⥤ L) (W : K ⥤ L)\n    (F : D ⥤ E) (G : E ⥤ Z) (Fh : D ⥤ Z)\n    (eF : q ⋙ F ⟶ U ⋙ q') (eG : q' ⋙ G ⟶ V ⋙ q'')\n    (eH : q ⋙ Fh ⟶ W ⋙ q'')\n    (nF : T ⋙ F ⟶ F.prod F ⋙ T') (nG : T' ⋙ G ⟶ G.prod G ⋙ T'')\n    (nH : T ⋙ Fh ⟶ Fh.prod Fh ⋙ T'')\n    (pK : ObjectProperty K) (pH : ObjectProperty H) (pL : ObjectProperty L)\n    (hU : ∀ A, pK A → pH (U.obj A)) (hV : ∀ A, pH A → pL (V.obj A))\n    (hW : ∀ A, pK A → pL (W.obj A))\n    (ht : ∀ A B, pK A → pK B → pK (t A B))\n    (ff : (((Functor.whiskeringLeft (pK.FullSubcategory × pK.FullSubcategory)\n      (D × D) Z).obj ((pK.ι ⋙ q).prod (pK.ι ⋙ q))).FullyFaithful))\n    (r : ∀ A B, pK A → pK B → (q.obj (t A B) ≅ T.obj (q.obj A, q.obj B)))\n    (r' : ∀ A B, pH A → pH B → (q'.obj (t' A B) ≅ T'.obj (q'.obj A, q'.obj B)))\n    (r'' : ∀ A B, pL A → pL B → (q''.obj (t'' A B) ≅ T''.obj (q''.obj A, q''.obj B)))\n    (bF : ∀ A B, U.obj (t A B) ⟶ t' (U.obj A) (U.obj B))\n    (bG : ∀ A B, V.obj (t' A B) ⟶ t'' (V.obj A) (V.obj B))\n    (bH : ∀ A B, W.obj (t A B) ⟶ t'' (W.obj A) (W.obj B))\n    (hnF : ∀ A B hA hB,\n      F.map (r A B hA hB).hom ≫ nF.app (q.obj A, q.obj B) ≫\n          T'.map (Prod.mkHom (eF.app A) (eF.app B)) =\n        eF.app (t A B) ≫ q'.map (bF A B) ≫\n          (r' _ _ (hU A hA) (hU B hB)).hom)\n    (hnG : ∀ A B hA hB,\n      G.map (r' A B hA hB).hom ≫ nG.app (q'.obj A, q'.obj B) ≫\n          T''.map (Prod.mkHom (eG.app A) (eG.app B)) =\n        eG.app (t' A B) ≫ q''.map (bG A B) ≫\n          (r'' _ _ (hV A hA) (hV B hB)).hom)\n    (hnH : ∀ A B hA hB,\n      Fh.map (r A B hA hB).hom ≫ nH.app (q.obj A, q.obj B) ≫\n          T''.map (Prod.mkHom (eH.app A) (eH.app B)) =\n        eH.app (t A B) ≫ q''.map (bH A B) ≫\n          (r'' _ _ (hW A hA) (hW B hB)).hom)\n    (heF : ∀ A, pK A → IsIso (eF.app A))\n    (heG : ∀ A, pH A → IsIso (eG.app A))\n    (c : Fh ≅ F ⋙ G) (a : W ≅ U ⋙ V)\n    (hc : ∀ A, pK A → c.hom.app (q.obj A) ≫ G.map (eF.app A) ≫ eG.app (U.obj A) =\n      eH.app A ≫ q''.map (a.hom.app A))\n    (am : ∀ A B, t'' (W.obj A) (W.obj B) ⟶ t'' (V.obj (U.obj A)) (V.obj (U.obj B)))\n    (ha : ∀ A B, bH A B ≫ am A B =\n      a.hom.app (t A B) ≫ V.map (bF A B) ≫ bG (U.obj A) (U.obj B))\n    (hr : ∀ A B (hA : pK A) (hB : pK B),\n      q''.map (am A B) ≫ (r'' _ _ (hV _ (hU A hA)) (hV _ (hU B hB))).hom =\n        (r'' _ _ (hW A hA) (hW B hB)).hom ≫\n          T''.map (Prod.mkHom (q''.map (a.hom.app A)) (q''.map (a.hom.app B)))) :\n    ∀ M N : D, nH.app (M, N) ≫ T''.map (Prod.mkHom (c.hom.app M) (c.hom.app N)) =\n      c.hom.app (T.obj (M, N)) ≫ G.map (nF.app (M, N)) ≫ nG.app (F.obj M, F.obj N)",
+ "stmt_deps": [
+  "def-sfb-ringed-derived-comparison-data",
+  "def-pur-cochain-tensor-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "The native tensor instance lemmas are direct specializations of the existing additive, zero-colimit and graded tensor instances for sheaf modules. Cache them as proved constants so subsequent native specializations reuse them. Uncurry the existing natural cochain comparison by NatIso.ofComponents, proving its naturality in the two variables in succession. Its component equation is definitional. For the total tensor map, functoriality of the double-complex totalization identifies the two successive tensor maps with the simultaneous tensor map. Naturality of the recorded model gives tensor_model_naturality after rewriting the total tensor map. Package the original module compositor as a cochain natural isomorphism; its components are the prescribed composition comparison, and the cochain tensor-composition equation is exactly the composition component of cochainPullbackTensorCoherence.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-cochain-pullback-tensor-shift",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the composite comparison by whiskering and composition. Naturality of the second tensor comparison and its counit paste the two representative squares, with functoriality preserving all composites.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For two normalized squares, postcompose with the tensor of the two invertible computation maps and precompose with the source model isomorphism. Substitute each square and the unary comparison equation, then use naturality of the comparison and the target model square. Cancel the two isomorphisms to identify the tensor routes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this cancellation to the specified third square and the pasted composite square. The hypothesis makes restriction of the two natural transformations fully faithful. Its map_injective gives equality from the representative calculation, and evaluating the equality at (M,N) gives the result.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-cochain-pullback-tensor-shift"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorComparisonProofSupport",
+  "file": "lean/Sheaf/Paper/FiniteTensorComparisonProofSupport.lean",
+  "declaration": "CategoryTheory.FiniteTensorComparisonProofSupport.comparison_tensor_descends",
+  "declarations": [
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedTensorAdditive",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedTensorAdditiveObj",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedTensorLeftZero",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedTensorRightZero",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.totalTensor_exists",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedGradedTensor",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedGradedFour",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedGradedLeft",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cachedGradedRight",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.comparison_tensor_descends",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.uncurry_comparison",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cochain_comparison",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cochain_comparison_hom_app",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.total_tensor_map",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.tensor_model_naturality",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cochain_compositor",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cochain_compositor_hom_app",
+   "CategoryTheory.FiniteTensorComparisonProofSupport.cochain_composition_tensor"
+  ],
+  "statement": "theorem comparison_tensor_descends\n    {L Z : Type*} [Category L] [Category Z]\n    (q : K ⥤ D) (q' : H ⥤ E) (q'' : L ⥤ Z)\n    (t : K → K → K) (t' : H → H → H) (t'' : L → L → L)\n    (T : D × D ⥤ D) (T' : E × E ⥤ E) (T'' : Z × Z ⥤ Z)\n    (U : K ⥤ H) (V : H ⥤ L) (W : K ⥤ L)\n    (F : D ⥤ E) (G : E ⥤ Z) (Fh : D ⥤ Z)\n    (eF : q ⋙ F ⟶ U ⋙ q') (eG : q' ⋙ G ⟶ V ⋙ q'')\n    (eH : q ⋙ Fh ⟶ W ⋙ q'')\n    (nF : T ⋙ F ⟶ F.prod F ⋙ T') (nG : T' ⋙ G ⟶ G.prod G ⋙ T'')\n    (nH : T ⋙ Fh ⟶ Fh.prod Fh ⋙ T'')\n    (pK : ObjectProperty K) (pH : ObjectProperty H) (pL : ObjectProperty L)\n    (hU : ∀ A, pK A → pH (U.obj A)) (hV : ∀ A, pH A → pL (V.obj A))\n    (hW : ∀ A, pK A → pL (W.obj A))\n    (ht : ∀ A B, pK A → pK B → pK (t A B))\n    (ff : (((Functor.whiskeringLeft (pK.FullSubcategory × pK.FullSubcategory)\n      (D × D) Z).obj ((pK.ι ⋙ q).prod (pK.ι ⋙ q))).FullyFaithful))\n    (r : ∀ A B, pK A → pK B → (q.obj (t A B) ≅ T.obj (q.obj A, q.obj B)))\n    (r' : ∀ A B, pH A → pH B → (q'.obj (t' A B) ≅ T'.obj (q'.obj A, q'.obj B)))\n    (r'' : ∀ A B, pL A → pL B → (q''.obj (t'' A B) ≅ T''.obj (q''.obj A, q''.obj B)))\n    (bF : ∀ A B, U.obj (t A B) ⟶ t' (U.obj A) (U.obj B))\n    (bG : ∀ A B, V.obj (t' A B) ⟶ t'' (V.obj A) (V.obj B))\n    (bH : ∀ A B, W.obj (t A B) ⟶ t'' (W.obj A) (W.obj B))\n    (hnF : ∀ A B hA hB,\n      F.map (r A B hA hB).hom ≫ nF.app (q.obj A, q.obj B) ≫\n          T'.map (Prod.mkHom (eF.app A) (eF.app B)) =\n        eF.app (t A B) ≫ q'.map (bF A B) ≫\n          (r' _ _ (hU A hA) (hU B hB)).hom)\n    (hnG : ∀ A B hA hB,\n      G.map (r' A B hA hB).hom ≫ nG.app (q'.obj A, q'.obj B) ≫\n          T''.map (Prod.mkHom (eG.app A) (eG.app B)) =\n        eG.app (t' A B) ≫ q''.map (bG A B) ≫\n          (r'' _ _ (hV A hA) (hV B hB)).hom)\n    (hnH : ∀ A B hA hB,\n      Fh.map (r A B hA hB).hom ≫ nH.app (q.obj A, q.obj B) ≫\n          T''.map (Prod.mkHom (eH.app A) (eH.app B)) =\n        eH.app (t A B) ≫ q''.map (bH A B) ≫\n          (r'' _ _ (hW A hA) (hW B hB)).hom)\n    (heF : ∀ A, pK A → IsIso (eF.app A))\n    (heG : ∀ A, pH A → IsIso (eG.app A))\n    (c : Fh ≅ F ⋙ G) (a : W ≅ U ⋙ V)\n    (hc : ∀ A, pK A → c.hom.app (q.obj A) ≫ G.map (eF.app A) ≫ eG.app (U.obj A) =\n      eH.app A ≫ q''.map (a.hom.app A))\n    (am : ∀ A B, t'' (W.obj A) (W.obj B) ⟶ t'' (V.obj (U.obj A)) (V.obj (U.obj B)))\n    (ha : ∀ A B, bH A B ≫ am A B =\n      a.hom.app (t A B) ≫ V.map (bF A B) ≫ bG (U.obj A) (U.obj B))\n    (hr : ∀ A B (hA : pK A) (hB : pK B),\n      q''.map (am A B) ≫ (r'' _ _ (hV _ (hU A hA)) (hV _ (hU B hB))).hom =\n        (r'' _ _ (hW A hA) (hW B hB)).hom ≫\n          T''.map (Prod.mkHom (q''.map (a.hom.app A)) (q''.map (a.hom.app B)))) :\n    ∀ M N : D, nH.app (M, N) ≫ T''.map (Prod.mkHom (c.hom.app M) (c.hom.app N)) =\n      c.hom.app (T.obj (M, N)) ≫ G.map (nF.app (M, N)) ≫ nG.app (F.obj M, F.obj N)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T135344-L-4025431",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

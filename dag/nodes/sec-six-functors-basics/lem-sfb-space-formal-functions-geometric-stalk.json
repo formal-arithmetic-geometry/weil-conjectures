@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-space-formal-functions-geometric-stalk",
+ "kind": "statement",
+ "title": "Formal functions at a geometric stalk for proper algebraic spaces",
+ "statement": "Let $Y$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and $f:X\\to Y$ a proper morphism of algebraic spaces [def-trf-algebraic-space, lem-sfb-space-flat-proper-fp-locality]. Proper means separated, of finite type and universally closed. Let $F$ be a coherent module on $X_{\\mathrm{et}}$: it is quasi-coherent [def-trf-space-quasi-coherent-module] and there is a jointly surjective family of affine etale charts $\\operatorname{Spec}B_i\\to X$ with $B_i$ Noetherian and $F$ associated on each chart to a finitely generated $B_i$-module [def-weil-pbc-noetherian-ring, def-weil-finitely-generated-module]. Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point, with $\\Omega$ algebraically closed [def-weil-geometric-point], and use geometric stalks [def-weil-pbc-geometric-stalks]. Put $A=\\mathcal O_{Y,\\bar y}$ and let $\\mathfrak m$ be its maximal ideal. Then $A$ is a Noetherian local ring. Let $c:\\operatorname{Spec}A\\to Y$ be the canonical morphism: for any affine pointed etale neighbourhood $(U,\\bar u)$ of $\\bar y$ it is the composite of $U\\to Y$ with the map $\\operatorname{Spec}A\\to U$ given by the colimit map $\\Gamma(U,\\mathcal O_U)\\to A$, and it does not depend on $(U,\\bar u)$. For $n\\geq1$ set $X_n=X\\times_Y\\operatorname{Spec}(A/\\mathfrak m^n)$, formed along $c$ restricted to $\\operatorname{Spec}(A/\\mathfrak m^n)$, with projection $i_n:X_n\\to X$, and $F_n=i_n^*F$, using algebraic-space fibre products and tensor pullback [lem-trf-space-fibre-products-etale-covers, def-trf-space-etale-module-functors, def-weil-affine-spectrum]. Write $R^qf_*F$ for right derived module direct image on the small etale ringed sites, computed by an injective resolution in module sheaves [def-sp-injective-resolutions]. Write $H^q(X_n,F_n)$ for right derived global sections on the same ringed site. For every integer $q\\geq0$, with $M=(R^qf_*F)_{\\bar y}$, there is a canonical isomorphism of $\\widehat A$-modules\n$$\\widehat M=\\varprojlim_{n\\geq1}M/\\mathfrak m^nM\\ \\simeq\\ \\varprojlim_{n\\geq1}H^q(X_n,F_n),\\qquad \\widehat A=\\varprojlim_{n\\geq1}A/\\mathfrak m^n.$$\nHere completion is [def-weil-pbc-adic-completion], and the cohomology transition maps are restriction along $X_n\\hookrightarrow X_{n+1}$ followed by $F_{n+1}|_{X_n}\\simeq F_n$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08B1 (lemma-formal-functions-stalk); Noetherianity of A is the first observation of its proof, using spaces-properties.tex Tag 08AH (lemma-Noetherian-local-ring-Noetherian), locally on Y."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "def-weil-affine-spectrum",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-space-formal-functions-data",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-strict-local-cohomology-comparison] to $f,F,\\bar y$: properness supplies separatedness and finite type. With $X_A=X\\times_Y\\operatorname{Spec}A$, projections $h,f_A$ and $F_A=h^*F$, this gives a Noetherian local ring $A$, coherent $F_A$, and the canonical $A$-linear isomorphism $\\alpha:M\\xrightarrow{\\sim}N:=H^q(X_A,F_A)$. The comparison is induced by the canonical pointed-neighbourhood maps, so it uses the same $c$ as the statement. No replacement of the geometric stalk by an ordinary Zariski stalk is made.",
+   "uses": [
+    "lem-sfb-space-strict-local-cohomology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08B1, proof, first two paragraphs, strict-local reduction."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-flat-proper-fp-locality], $f_A$ is proper. The universal property of fibre products [lem-trf-space-fibre-products-etale-covers] gives $X_A\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/\\mathfrak m^n)\\simeq X\\times_Y\\operatorname{Spec}(A/\\mathfrak m^n)=X_n$: both objects represent triples with the identical compatibility over $Y$. Tensor pullback [def-trf-space-etale-module-functors] identifies the restriction of $F_A$ with $F_n$; on charts the identification is $(P\\otimes_B C)\\otimes_C D\\simeq P\\otimes_B D$, sending $(p\\otimes c)\\otimes d$ to $p\\otimes cd$. These maps commute with the quotient maps $A/\\mathfrak m^{n+1}\\to A/\\mathfrak m^n$, since both composites send this tensor to the same tensor after reduction. Thus the towers, including their restriction maps, are canonically identified.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08B1, proof, canonical identifications X_n=X_n\\prime; spaces-morphisms.tex Tag 04WP (lemma-base-change-proper)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-affine-formal-functions] to the Noetherian ring $A$, ideal $\\mathfrak m$, proper $f_A$ and coherent $F_A$. It gives $\\widehat N\\xrightarrow{\\sim}\\varprojlim_nH^q(X_n,F_n)$ with the transition maps identified in step 2. The $A$-linear isomorphism $\\alpha$ from step 1 sends $\\mathfrak m^nM$ onto $\\mathfrak m^nN$, so induces compatible isomorphisms $M/\\mathfrak m^nM\\simeq N/\\mathfrak m^nN$. Taking the inverse limit and composing yields the asserted isomorphism. It is $\\widehat A$-linear because at coordinate $n$ both maps respect the $A/\\mathfrak m^n$ action; hence they respect coordinatewise multiplication by every compatible sequence $(a_n)_n\\in\\widehat A$. The maps used are the specified cohomological restrictions and canonical base-change comparison, which proves canonicity.",
+   "uses": [
+    "lem-sfb-space-affine-formal-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08B1, final paragraph, application of Tag 08AZ (theorem-formal-functions)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-strict-local-cohomology-comparison",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-affine-formal-functions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08B1 (lemma-formal-functions-stalk), reduction to Tag 08AZ (theorem-formal-functions)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Formal functions for a proper morphism of algebraic spaces: completion of a geometric stalk of coherent higher direct image is the inverse limit of cohomology on infinitesimal fibres",
+   "results": "OK: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\", \"completion\"",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.functions|formalFunctions|AlgebraicSpace|algebraic.space",
+   "results": "OK: 3 hits; Mathlib/Analysis/Complex/Conformal.lean, Mathlib/Algebra/MonoidAlgebra/PointwiseSMul.lean, Mathlib/Algebra/MonoidAlgebra/PointwiseSMul.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper algebraic space over a locally Noetherian scheme the completed etale stalk of coherent higher direct image equals inverse limit of infinitesimal fibre cohomology",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, Algebra.Etale.formallyEtale, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.FormallyEtale, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The theorem on formal functions identifies a completed coherent cohomology stalk with the inverse limit of cohomology over powers of the maximal ideal for proper algebraic spaces",
+   "results": "OK: 8 hits; ModuleCat.Tilde.toStalk, ModuleCat.Tilde.toOpen_germ, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, smoothSheafCommRing.forgetStalk_inv_comp_eval, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_hom; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme sections, ordinary stalks, formal etaleness or definitions of quasi-coherence; none states this algebraic-space cohomology theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-fibre-cohomology-bound",
+  "date": "2026-10-23",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Coherent higher-image fibre-dimension bound for proper algebraic spaces. Supporting input in the proof of Tag 0A4T: the completed geometric stalk is computed by infinitesimal-fibre cohomology (Tag 08B1).",
+   "via": [
+    "lem-sfb-noetherian-space-fibre-cohomology-bound",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-formal-functions-geometric-stalk",
+  "worker": "stage1",
+  "summary": "Followed Tag 08B1 through strict-local coherent cohomology comparison, proper base change and the general affine algebraic-space formal-functions theorem. Created two statement-only supporting nodes; retained the imported statement and avoided the degree-zero-only flat-base-change citation. Checked finite-level transition maps and completed-ring linearity.",
+  "blueprint": "The existing provenance chain serves det-thm-sf-ctf-stability-direct-images, proof (3), through the proper algebraic-space curve-cohomology bound. This supporting split realizes Tag 08B1, proof paragraphs 1-3. The ancestor tool returns null for the inherited broken chain; preserved that result and its explicit place rather than inventing a blueprint id."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-63179a970",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-63179a970 (reviewer sub-agent of L); spot-checked: Read in full: the item and both new nodes, every cited statement, and the Stacks source (spaces-cohomology.tex 08AZ l.4208, the whole proof of 08B1 l.4294-4356, 073K l.1704). There is no re-split repair note, so this is a first split. The item statement is unchanged and matches 08B1, using A/m^n rather than Omega as the base of the tower. Step 1 cites the strict-local node, whose hypotheses hold: proper gives separated and of finite type. Step 2 is properness under base change (fp-locality) plus pasting of fibre products (trf fibre-products) plus an explicit tensor formula for the pullbacks. Step 3 cites the affine 08AZ node with I=m; Ahat-linearity is checked coordinatewise. strict-local-cohomology-comparison is true: for qcqs f, flat base change (073K) along etale neighbourhoods gives the stalk as H^q(X_A,F_A); A is Noetherian by 08AH; I tested k^sep over a nonperfect field. affine-formal-functions is 08AZ with an infinitesimal-subspace reformulation, justified by the last paragraph of 08B1 (closed immersion, vanishing higher images); I tested I=0, I=A and A=0. Neither node duplicates an existing one: the scheme versions (02OC, the pbc local-stalk node, the flat base change nodes) and the degree-0 space flat base change node do not cover them. Neither restates the item. FIX (B3): affine-formal-functions wrote the completion of the module H^q and cited def-weil-pbc-adic-completion, which defines only the completion of a ring. The corrected node defines the module completion inline as lim H^q/I^nH^q. Batch 5: the flagged def-trf-algebraic-space, space-quasi-coherent-module, etale-module-functors, the trf fibre-products lemma and lem-sfb-space-flat-proper-fp-locality are general algebraic-space foundations. Their closures reach no trace-formula or Poincare statement and no nt-assume leaf, so the batch-5 flag needs no change. I accept the trf fibre-products lemma as a generic tool use. from.node is null, inherited from a broken provenance chain. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFormalFunctionsGeometricStalk",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.formalFunctions_geometricStalk",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.formalFunctions_geometricStalk"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFormalFunctionsGeometricStalk.lean",
+  "statement": "theorem formalFunctions_geometricStalk (Y : Scheme.{u}) [IsLocallyNoetherian Y] (X : AlgebraicSpace Y) (f : X ⟶ FormalFunctions.base Y) (hf : MapIsProper f) (F : X.Modules) (hF : F.IsQuasicoherent) (hfinite : ∃ (I : Type (u + 1)) (T : I → X.EtaleSite), IsJointlySurjective (fun i ↦ (T i).obj.hom) ∧ ∀ i : I, IsAffine (X.etaleForget.obj (T i)) ∧ IsNoetherianRing (X.structureSheaf.obj.obj (op (T i))) ∧ Module.Finite (X.structureSheaf.obj.obj (op (T i))) (F.val.obj (op (T i)))) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) : IsNoetherianRing (FormalFunctions.ring y) ∧ ∃ (D : Geometry X f y) (C : Cohomology D), ∀ q : ℕ, ∃! e : ModuleCat.of D.completion (AdicCompletion D.ideal (source f y F q)) ≅ limit (C.tower F q), ∀ (n : ℕ) (m : source f y F q), (e.hom ≫ limit.π (C.tower F q) (op n)) (AdicCompletion.of D.ideal (source f y F q) m) = C.map F n q m",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e443bc972",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Read item node (only lean + 2 appended stmt_deps vs live), Tag 08B1, both modules and every cited declaration. Clauses match: IsLocallyNoetherian Y, MapIsProper f, IsQuasicoherent + jointly surjective affine Noetherian finite-module charts, Ω alg. closed; A = geometric stalk ring, Noetherian + local concluded; X_n real IsPullback, exponent n+1; for all q, ∃! Â-linear iso AdicCompletion m M ≅ limit tower, normalized to C.map. ∃ D C acceptable: c, X_n, transitions, ordinary and derived compositors are all pinned by canonical/pullback/chart/K-injective normalizations. Edge cases ok (empty X, F=0, q=0, m=0, empty I, single universe u). H2 fixed: new def node cited theorem node lem-sfb-space-derived-etale-chart-calculus only for plain def spaceDerivedChartDirectImageComp. fixes/SpaceFormalFunctionsData.lean inlines its identical conjugateIsoEquiv body (spaceDerivedAdjunction + spaceDerivedPullbackComp) with swapped imports; fixes/def-sfb-space-formal-functions-data.json repoints stmt_dep and citation to def-sfb-space-derived-pullback (on base). Fixed module compiled clean in 49.5 s via nt_compile --json; unchanged original also timed out under load ~72 (control), so timeouts are load; item module not recompiled (combined run timed out under load, signatures unchanged). Advisory: lem-trf-space-fibre-products-etale-covers is cited by the new node as a reference only, no declaration from its module is used."
+ }
+}

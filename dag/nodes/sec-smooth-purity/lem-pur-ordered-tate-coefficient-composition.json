@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-ordered-tate-coefficient-composition",
+ "kind": "statement",
+ "title": "Composition of ordered Tate coefficient pullbacks",
+ "statement": "Let A be a commutative ring killed by N and t an OrdinaryFiniteTwistTransport. For composable scheme maps p:T→U and v:U→S, with w:T→S and hw:w=p≫v, assume N is invertible on S and U. For every d≥0, the derived inverse-image compositor followed by the ordered coefficient pullback along v and then along p equals the ordered coefficient pullback along w.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Compatibility paragraph: base change of the normalized trace and transposition; ordered tensor composition."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-vector-integration-charts"
+ ],
+ "proof": [
+  {
+   "text": "Prove the normalized roots comparison equals the canonical map by cancelling its monomorphic inclusion into the units sheaf. Identify maps from the finite Tate line with maps from roots into the underlying abelian sheaf, using sheafification and scalar-extension adjunctions. The pure-generator normalization and composition of inverse-image adjunctions then give the line composition equation.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Functor.mapDerivedCategoryNatIso_comp_hom_app_singleFunctor from the proved source library to the normalized line composition equation. Shift this identity by two using naturality and shift compatibility of the exact-derived compositors. Conjugate by the exact-to-left-derived comparison to obtain composition for the specified shifted Tate line.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the ordered coefficient degree. The zero case is ordinaryFiniteUnitPullback_comp. For a successor expand the recursive tensor comparison and use the proved source-library leftDerivedUpperStarTensorComparison_comp (the tensor clause underlying lem-kun-derived-pullback-composition-monoidal), together with its naturality, the induction hypothesis, and shifted-line composition. Bifunctoriality of tensor reassembles the equality without permuting factors.",
+   "uses": [
+    "def-amb-vector-integration-charts",
+    "lem-amb-ordinary-finite-unit-pullback-comp",
+    "lem-kun-derived-pullback-composition-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-vector-integration-charts",
+  "lem-amb-ordinary-finite-unit-pullback-comp",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof_origin": {
+  "by": "Q9 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Compatibility paragraph: base change of the normalized trace and transposition; ordered tensor composition.",
+  "note": "Complete local reuse of the private coefficient_comp calculation and its proved helpers in Sheaf.Paper.OrderedTateExactOpenComposition (SHEAF groups Q1 and H4). No new obligations and no changes to shared modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vectorIntegrationBaseCoefficientPullback composition theorem",
+   "results": "No public theorem with this exact arbitrary composable-map statement; the private composition calculation in OrderedTateExactOpenComposition is not reusable.",
+   "date": "2026-10-27",
+   "verdict": "No exact existing declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrderedTatePullbackSquare",
+  "date": "2026-10-27",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-ordered-tate-pullback-square",
+   "place": "Compatibility paragraph: ordered coefficient composition",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedTateCoefficientComposition",
+  "file": "lean/Sheaf/Paper/OrderedTateCoefficientComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.orderedTateCoefficientComposition",
+  "statement": "theorem orderedTateCoefficientComposition (A : Type (u + 1)) [CommRing A]\n    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)\n    {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)\n    (hw : w = p ≫ v) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hU : IsUnit (N : Γ(U, ⊤))) (d : ℕ) :\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) p v w hw).hom.app\n        (affineLinearBaseCoefficient A N hA S d) ≫\n      (ordinaryFinitePullback A p).map\n        (vectorIntegrationBaseCoefficientPullback A N hA t v hS d).hom ≫\n      (vectorIntegrationBaseCoefficientPullback A N hA t p hU d).hom =\n        (vectorIntegrationBaseCoefficientPullback A N hA t w hS d).hom",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T235916-L-1467894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261027T021354-L-2762874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

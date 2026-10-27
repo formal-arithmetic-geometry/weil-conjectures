@@ -1,0 +1,166 @@
+{
+ "id": "lem-sc-canonical-embedded-points-gluing",
+ "kind": "statement",
+ "title": "Canonical affine maximal submodules glue to a coherent subobject",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth] and $\\mathcal F$ a coherent module [pqf-def-coherent]. For every affine open $V$ let $A_V=\\mathcal O_X(V)$ and $M_V=\\mathcal F(V)$, a finite module [def-weil-finitely-generated-module], and let $N_V\\subseteq M_V$ be maximal among submodules whose support is nowhere dense in $\\operatorname{Supp}(M_V)$. Then there exists a coherent subobject $\\mathcal K\\subseteq\\mathcal F$ whose section inclusion on every affine $V$ has image $N_V$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open V, coherence gives the finite section module M over the Noetherian coordinate ring A. Every submodule of M is finite. The tilde/global-sections equivalence sends the inclusion N(V) into M to a monic map of quasi-coherent modules on V. Its sections on each principal open are the localized inclusion.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+   }
+  },
+  {
+   "text": "The maximal nowhere-dense submodule is unique: the sum of two such submodules has support equal to the union of their supports, since localization is exact; a finite union of nowhere-dense subsets is nowhere dense. Maximality applied to this sum gives equality. Apply the canonical localization theorem to N(V) and the maximal submodule on D(f). Its isomorphism commutes with the quotient maps; equality of their kernels identifies the localization of N(V) with N(D(f)). The tilde/global-sections equivalence transports this to equality of subsheaves on each principal open.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points-affine-localization",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+   }
+  },
+  {
+   "text": "The intersection of two affine opens is covered by opens principal in both. On this basis their tilde inclusions have the same images by the preceding localization calculation. A sheaf subsheaf is determined by these section images and the sheaf axiom, so the local subobjects agree on the overlap. Their identity identifications satisfy the cocycle. Glue the local modules and the inclusion maps. Monicity can be checked on the cover, so this gives a subobject K of F.",
+   "uses": [
+    "lem-sc-affine-inter-principal-both",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+   }
+  },
+  {
+   "text": "Quasi-coherence and finite type are local on the affine cover. The glued modules are tilde modules of finite submodules, hence are quasi-coherent and finite type. The locally Noetherian coherence criterion makes K coherent. Its affine section range is N(V), by the counit of the affine tilde/global-sections equivalence, compatibly with the inclusion. For zero modules or empty affines all these modules and maps are zero and the same argument applies.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-hilbert-embedded-points-affine-localization",
+  "lem-sc-affine-inter-principal-both",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02OL, proof of lemma-remove-embedded-points; uses Algebra Tag 02M7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a locally Noetherian scheme, the canonical maximal submodules with nowhere dense support on affine opens glue to a coherent subsheaf",
+   "results": "No exact theorem; AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff; AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop; AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff; AlgebraicGeometry.Scheme.IdealSheafData; AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter; AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Subobject",
+   "results": "No exact theorem; loogle: unknown identifier 'Subobject'",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique.*(subobject|submodule)|affine.*(glue|gluing)",
+   "results": "No exact theorem; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/LinearAlgebra/LinearPMap.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal submodules with nowhere dense support on all affine opens glue to a coherent subobject on a locally Noetherian scheme",
+   "results": "No exact theorem; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; Submodule.le_of_localization_maximal; AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter; Submodule.fg_of_localized_maximal; AlgebraicGeometry.IsNoetherian.noetherianSpace; AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top; AlgebraicGeometry.Scheme.IdealSheafData.supportSet_eq_iInter_zeroLocus; AlgebraicGeometry.IsLocallyNoetherian.mk",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "T1",
+  "item": "Sheaf.AlgebraicGeometry.RemoveEmbeddedPoints",
+  "date": "2026-10-23"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "proof, support-dimension induction: glue the affine embedded-point submodules in the proof of the removal step (Stacks Tag 02OL)",
+   "via": [
+    "lem-sc-hilbert-embedded-points"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalEmbeddedPointsGluing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_coherent_subobject_of_affine_maxima",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalEmbeddedPointsGluing.lean",
+  "statement": "theorem exists_coherent_subobject_of_affine_maxima (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (N : ∀ V : X.affineOpens, Submodule Γ(X, V.1) Γ(F, V.1)) (hN : ∀ V : X.affineOpens, Maximal (fun L : Submodule Γ(X, V.1) Γ(F, V.1) ↦ IsNowhereDense {p : Module.support Γ(X, V.1) Γ(F, V.1) | p.val ∈ Module.support Γ(X, V.1) L}) (N V)) : ∃ K : Subobject F, RingedSpace.IsCoherent X.toRingedSpace (K : X.Modules) ∧ ∀ V : X.affineOpens, LinearMap.range (K.arrow.val.app (.op V.1)).hom = N V",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261023T131809-L-2152711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261023T131809-L-2152711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

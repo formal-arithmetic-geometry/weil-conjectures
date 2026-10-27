@@ -1,0 +1,105 @@
+{
+ "id": "def-trf-rees-degree-one-element",
+ "kind": "definition",
+ "title": "The canonical degree-one Rees element",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal and $a\\in I$. In the polynomial model of the Rees algebra [def-nagata-rees-algebra], define $a^{(1)}=at$ to be the polynomial with coefficient $a$ in degree one and zero in every other degree, regarded as an element of $\\mathcal R_A(I)$. It belongs to the degree-one piece of the Rees grading [def-nagata-rees-piece]. This definition also applies to $a=0$, when $a^{(1)}=0$.",
+ "stmt_deps": [
+  "def-nagata-rees-algebra",
+  "def-nagata-rees-piece"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0804, lemma-blowing-up-affine, proof: a^(1) denotes a viewed as an element of degree one in the Rees algebra."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The degree one element a times t in the Rees algebra of an ideal",
+   "results": "8 hits; top=['reesAlgebra', 'adjoin_monomial_eq_reesAlgebra', 'mem_reesAlgebra_iff', 'reesAlgebra.fg', 'reesAlgebra.monomial_mem', 'mem_reesAlgebra_iff_support', 'Ideal.Filtration.submodule', 'Ideal.Filtration.submodule_span_single']; ; digest=d0621a98c0750c88. No exact Mathlib definition; the existing upstream declaration is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reesX\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. No exact Mathlib definition; the existing upstream declaration is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reesX",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. No exact Mathlib definition; the existing upstream declaration is reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-excellent-blowup-projective-transforms",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 Step 2, flatification of the curve and horizontal boundary before the stable modification theorem. Parent retained proof Steps 3--4: Excellent blowup geometry and projective closed transforms. Definition used to state the canonical Sym-to-Rees immersion and its standard charts.",
+   "via": [
+    "lem-trf-excellent-blowup-projective-transforms",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [
+   "lemma-nagata-rees-degree-one-element"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "WeilConjectures.Blowup.Affine.ReesGrading",
+  "declaration": "AlgebraicGeometry.reesX",
+  "statement": "noncomputable def reesX (a : A) (ha : a ∈ I) : reesAlgebra I",
+  "note": "Definition owner added as explicitly requested by the return on 3ae79de01e41. The existing theorem node lemma-nagata-rees-degree-one-element records the homogeneous-element assertion and simp properties; this definition node records just the canonical construction it uses. ReesGrading.lean:51 binds {A : Type u} [CommRing A] (I : Ideal A); lines 204-207 construct reesX as reesMonomial I (n := 1) a. The polynomial is exactly Polynomial.monomial 1 a, as coe_reesX at 210-212 states; reesX_mem at 214-215 supplies its degree. No duplicate Lean declaration is introduced.",
+  "branch": "slopmaster2",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": true
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40f3f7eb0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40f3f7eb0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 3ae79de0 (H2+H3). Item diff vs live: only lean added and stmt_deps +6. Statement, proof and source unchanged; lean.statement verbatim. H2 fixed: landed owners def-trf-canonical-symmetric-graded-algebra (gradedAlgebraData), def-nagata-rees-piece (reesGrading), def-nagata-homogeneous-away-to-chart and def-nagata-affine-proj cited. New §1(A) existing:true def nodes def-trf-relative-proj-induced-morphism (relProjMap/IrrelevantLE; text checked vs Functoriality.lean l.43-95: B_+ ⊆ q(A_+)B, chart gluing, direction B.relProj→A.relProj) and def-trf-rees-degree-one-element (reesX = monomial 1 a, ReesGrading l.204-215). No live def node owns these and the new ids are not on live, so no race. H3 fixed: e.hom = basicOpenIsoSpec.hom ≫ Spec.map θ⁻¹ (direction correct) plus the inverse equation through blowupι V. The two are consistent via awayι := basicOpenIsoSpec.inv ≫ ι, and the second alone pins e (open immersions are mono). Other clauses identical to the previously accepted reading; edge cases I=O_S, r=0, empty affine, zero/repeated generators, empty X/Y OK. No hollow defs, docstrings present, sorry only, no universe restriction. Advisory: homogeneousAwayEquivChart (RingEquiv.ofBijective of the owned θ_a) has no node record; accepted, as the prior review recommended it. No file changed, so no compile."
+ }
+}

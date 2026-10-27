@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-groupoid-module-limits-colimits",
+ "kind": "statement",
+ "title": "Underlying finite limits and small colimits of flat groupoid modules",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $(U,R,s,t,c,e,i)$ a groupoid in schemes over $S$ [def-a1-scheme-groupoid-laws]. Let $\\mathcal C$ have objects $(M,\\beta)$, where $M$ is a quasi-coherent $\\mathcal O_U$-module [pqf-def-coherent], $\\beta:t^*M\\xrightarrow{\\sim}s^*M$ [def-pc-module-pullback], $e^*\\beta=1$, and $c^*\\beta=\\operatorname{pr}_1^*\\beta\\circ\\operatorname{pr}_0^*\\beta$ under the canonical pullback identifications. Its morphisms $f:(M,\\beta)\\to(N,\\gamma)$ satisfy $s^*f\\circ\\beta=\\gamma\\circ t^*f$. Write $V:\\mathcal C\\to\\operatorname{QCoh}(U)$ for the forgetful functor. Assume $s,t$ are flat [def-weil-flat-morphism]. Then $\\mathcal C$ is abelian; $V$ is faithful, reflects isomorphisms, and computes kernels, cokernels, finite direct sums, and finite limits as those of the underlying $\\mathcal O_U$-modules. It also computes every small colimit [def-weil-pbc-category-colimit] as the colimit of the underlying $\\mathcal O_U$-modules, which is quasi-coherent. In particular, a pullback of equivariant modules is the underlying module pullback with its induced equivariant structure, and a cocone of equivariant modules whose underlying module cocone is a colimit is itself a colimit. All diagrams and their morphism sets are small in a fixed universe containing the schemes and modules.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), their constructions on underlying quasi-coherent modules; faithfulness and reflection of isomorphisms follow from the displayed definition of morphisms."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-a1-scheme-groupoid-laws",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-sp-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-scheme-groupoid-module"
+ ],
+ "proof": [
+  {
+   "text": "Work in the chosen universe. The ambient category $\\operatorname{Mod}(\\mathcal O_U)$ is abelian and has small colimits. Kernels and cokernels of maps between quasi-coherent modules are quasi-coherent, as are small direct sums. In particular every small diagram $D:I\\to\\operatorname{QCoh}(U)$ has a quasi-coherent ambient colimit: put $A=\\bigoplus_{a:i\\to j}D_i$, $B=\\bigoplus_iD_i$, and define $d:A\\to B$ on the summand for $a:i\\to j$ by $\\iota_jD(a)-\\iota_i$. Then $L=\\operatorname{coker}d$ is quasi-coherent by the cokernel theorem. A map $B\\to N$ kills $d$ precisely when its components form a cocone, proving that $L$ is the ambient colimit. This also handles the empty diagram, giving zero.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-quasicoherent-module-coproducts",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "Every scheme pullback preserves quasi-coherence. It preserves small colimits because it is left adjoint to module pushforward; hence it preserves cokernels and finite sums. The tensor formula makes it additive. For a flat scheme map its stalk ring maps are flat, so the stated flat tensor-pullback theorem applies to this very functor and preserves kernels. These observations apply on $U$, on $R$, and on schemes of composable arrows. In particular, for $P=R\\times_{s,U,t}R$ and $p_0,p_1:P\\to R$, the projections are flat by base change of $t,s$. The composite $q=s p_1=s c$ is flat: at a point its stalk homomorphism is the composite of two flat ring maps, hence flat by the cited composition theorem. Thus $q^*$ preserves kernels.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-flat-morphism",
+    "lem-sc-stalk-flat-tensor-pullback-kernels",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "Equivariant maps are closed under sums, negatives, zero and composition by their defining equation and additivity of pullback. They therefore form an additive subgroup of each underlying module Hom group, with bilinear composition. Forgetting is faithful. If an equivariant map $f:(M,\\beta)\\to(N,\\gamma)$ has underlying inverse $g$, multiplying $s^*f\\,\\beta=\\gamma\\,t^*f$ by $s^*g$ on the left and $t^*g$ on the right gives $s^*g\\,\\gamma=\\beta\\,t^*g$. Thus $g$ is equivariant and $V$ reflects isomorphisms. Zero and a finite direct sum carry the zero and block-diagonal descent isomorphisms, using pullback preservation of finite sums from Step 2. Their unit and cocycle identities hold componentwise, and their inclusions and projections are equivariant. Their universal properties follow by taking components. The underlying finite sums are thus biproducts in $\\mathcal C$.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-quasicoherent-module-coproducts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "Let $D_i=(M_i,\\beta_i)$ be any small equivariant diagram and let $(L,\\iota_i)$ be its ambient module colimit from Step 1. Pullback preservation gives colimits $(t^*L,t^*\\iota_i)$ and $(s^*L,s^*\\iota_i)$. Define $b:t^*L\\to s^*L$ by $b\\,t^*\\iota_i=s^*\\iota_i\\,\\beta_i$. These maps are compatible since every transition map is equivariant. The same construction with $\\beta_i^{-1}$ yields an inverse, as the two composites are identity after every colimit leg. To prove $e^*b=1$, precompose with each $\\iota_i$ and use $e^*\\beta_i=1$. To prove $c^*b=p_1^*b\\,p_0^*b$, precompose with each $(tc)^*\\iota_i$ and use the corresponding identity for $\\beta_i$ together with $t c=t p_0$, $s p_0=t p_1$, $s c=s p_1$. These legs jointly detect equality because all the composite pullbacks preserve colimits, by the same adjunction argument. Hence $(L,b)$ is an object and its legs are equivariant.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "For an equivariant cocone $h_i:(M_i,\\beta_i)\\to(N,\\gamma)$, the ambient colimit gives a unique module map $h:L\\to N$ with $h\\iota_i=h_i$. The maps $s^*h\\,b$ and $\\gamma\\,t^*h$ agree after each $t^*\\iota_i$, by equivariance of $h_i$ and the defining equation for $b$. Since $t^*$ preserves this colimit, they are equal. Thus $h$ is equivariant; uniqueness is the underlying uniqueness. This proves the colimit universal property in $\\mathcal C$. The identical argument applies to any already equivariant cocone whose underlying module cocone is a colimit: use its given structure in place of $b$. Consequently every such cocone is a colimit, as claimed.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "For $f:(M,\\beta)\\to(N,\\gamma)$ let $k:K\\to M$ be the underlying module kernel, which is quasi-coherent. By Step 2, $t^*k$ and $s^*k$ are kernels of $t^*f$ and $s^*f$. The equation for $f$ shows that $\\beta\\,t^*k$ factors uniquely through $s^*k$; call the factor $\\kappa:t^*K\\to s^*K$. Applying the same construction with $\\beta^{-1},\\gamma^{-1}$ gives its inverse, since the composites become identity after the kernel inclusions. Thus $\\kappa$ is an isomorphism and $s^*k\\,\\kappa=\\beta\\,t^*k$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-sc-stalk-flat-tensor-pullback-kernels",
+    "def-weil-flat-morphism",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "The kernel structure obeys the laws. Pulling its defining equation back by $e$, and using $se=te=1_U$ and $e^*\\beta=1$, gives $k\\,e^*\\kappa=k$; cancel the monomorphism $k$. On $P$ compare $c^*\\kappa$ with $p_1^*\\kappa\\,p_0^*\\kappa$. Postcomposition with $(sc)^*k$ makes both equal, by the defining equation for $\\kappa$ and the cocycle of $\\beta$. This postcomposition can be cancelled: $sc=q$ is flat by Step 2, and $q^*k$ is a kernel inclusion. Notice that no flatness of $e$ is asserted. Finally an equivariant $x:(T,\\delta)\\to(M,\\beta)$ killed by $f$ has a unique underlying factor $y:T\\to K$. Postcomposing $s^*y\\,\\delta$ and $\\kappa\\,t^*y$ with the monomorphism $s^*k$ gives equal maps by equivariance of $x$. Hence $y$ is equivariant and $(K,\\kappa),k$ is a kernel in $\\mathcal C$.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "lem-sc-stalk-flat-tensor-pullback-kernels",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "Apply Steps 4 and 5 to the parallel equivariant maps $f,0:M\\rightrightarrows N$. Their underlying coequalizer is the module cokernel $p:N\\to Q$, and $Q$ is quasi-coherent. Thus this construction equips the underlying cokernel with descent and makes $p$ a cokernel in $\\mathcal C$. Explicitly its isomorphism $\\lambda$ satisfies $\\lambda\\,t^*p=s^*p\\,\\gamma$. The unit and cocycle checks are those of Step 4; all pullbacks preserve the cokernel, so the necessary epimorphism cancellations are valid without extra flatness. We have now constructed all kernels, cokernels and finite biproducts on underlying modules.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-weil-pbc-category-colimit",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "To check the abelian axioms, suppose $f$ is monic in $\\mathcal C$. Its kernel inclusion $k$ is zero by cancellation of $f$, hence $1_K=0$ since $k$ is monic. The underlying kernel is therefore zero, so the underlying $f$ is monic in the ambient abelian category. There $M\\to\\ker(\\operatorname{coker}f)$ is an isomorphism. The comparison is equivariant by the kernel universal property proved above, and Step 3 makes it an isomorphism in $\\mathcal C$. Thus $f$ is a kernel of its cokernel. Dually, if $f$ is epic, its cokernel projection is zero, its cokernel object has identity zero, and the underlying $f$ is epic. The ambient isomorphism $\\operatorname{coker}(\\ker f)\\to N$ is equivariant by the cokernel universal property and is an isomorphism by Step 3. Hence every epi is a cokernel. Together with the preadditivity, zero object, finite biproducts, kernels and cokernels already constructed, these are precisely the abelian axioms.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  },
+  {
+   "text": "Finite limits also have the required underlying form. For a finite diagram $D:J\\to\\mathcal C$, form $B=\\bigoplus_{j\\in J}D_j$ and $E=\\bigoplus_{a:i\\to j}D_j$ and the equivariant map $d:B\\to E$ whose $a$-component is $D(a)\\pi_i-\\pi_j$. The kernel $L\\to B$ with its component projections is a limit: a map to $B$ factors through $L$ exactly when its components obey every cone equation, and its factor is unique. The same formula in ambient modules proves that $V$ computes this limit. Empty $J$ gives zero, the terminal object. For $M\\xrightarrow{f}T\\xleftarrow{g}N$, the formula is the familiar kernel of $[f,-g]:M\\oplus N\\to T$ with its two projections, so it gives the underlying module pullback with induced equivariance. This proves all finite-limit clauses.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasicoherent-module-coproducts",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-flat-morphism",
+  "lem-sc-stalk-flat-tensor-pullback-kernels",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "def-a1-scheme-groupoid-laws",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), with their omitted universal-property and cocycle verifications written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on a flat scheme groupoid form an abelian category with kernels and colimits computed on the underlying scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Category.{u, u + 1} X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ is equipped with a canonical category structure. The Hom-sets consist of sheaf homomorphisms satisfying the sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"instAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Abelian (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules forms an abelian category. This follows from the fact that the category of sheaves on the site of light profinite spaces (equipped wit\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Limits and colimits of equivariant quasi coherent sheaves are created by forgetting the descent datum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.createsLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {R : CategoryTheory.Sheaf J RingCat} →\\n            (F : CategoryTheory.Functor D (SheafOfModules R\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$ and $R$ a sheaf of rings on $\\\\mathcal{C}$. The forgetful functor from the category of sheaves of modules over $R$ to the category of pr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.instCreatesColimitsOfShapePresheafedSpaceForgetToPresheafedSpaceOfSmallOfHasLimitsOfShapeOpposite\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : Type w) →\\n      [inst_1 : CategoryTheory.Category.{w', w} J] →\\n        [Small.{v, w} J] →\\n          [CategoryTheory.Limits.HasLimitsOfShape Jᵒᵖ C] →\\n            CategoryTheory.CreatesColimitsOfShape J AlgebraicGeometry.SheafedSpac\", \"doc\": \"Given a category $\\\\mathcal{C}$ with limits of shape $J^{\\\\text{op}}$ and a small category $J$, the forgetful functor from sheafed spaces over $\\\\mathcal{C}$ to presheafed spaces over $\\\\mathcal{C}$ creat\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"TopCat.instCreatesLimitsSheafPresheafForgetOfHasLimits\", \"module\": \"Mathlib/Topology/Sheaves/Limits\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.Limits.HasLimits C] → (X : TopCat) → CategoryTheory.CreatesLimits (TopCat.Sheaf.forget C X)\", \"doc\": \"For any topological space $X$ and category $\\\\mathcal{C}$ with limits of shape $J$, the forgetful functor from the category of sheaves on $X$ with values in $\\\\mathcal{C}$ to the category of presheaves \"}\n  {\"name\": \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat), CategoryTheory.Limits.PreservesFiniteLimits (SheafOfModules.forget R)\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of presheaves of modules over $ R $ preserves finite limits. This means that any finite limit \"}\n  {\"name\": \"SheafOfModules.forgetPreservesLimitsOfShape\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (D : Type u₂)\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Sheaf J RingCat) [Small.{v, u₂} D],\\n  CategoryTheory.Limits.PreservesLimitsOfShape D (SheafOfModules.forget R)\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a sheaf of rings to the category of presheaves of modules preserves limits of diagrams indexed by a small category $ D $. This means \"}\n  {\"name\": \"CategoryTheory.Sheaf.createsLimits\", \"module\": \"Mathlib/CategoryTheory/Sites/Limits\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type w} →\\n        [inst_1 : CategoryTheory.Category.{w', w} D] →\\n          [CategoryTheory.Limits.HasLimitsOfSize.{u₁, u₂, w', w} D] →\\n            CategoryTheory.CreatesLimitsOfS\", \"doc\": \"The inclusion functor from the category of sheaves to the category of presheaves creates limits of a specified size. This means that whenever a diagram in the sheaf category has a limit in the preshea\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"HasColimits\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*abelian|groupoid.*colimit|equivariant.*kernel",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent modules on a flat scheme groupoid form an abelian category with kernels and colimits computed on the underlying scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian\", \"type\": \": Abelian (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"PresheafOfModules.instAbelian\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian\", \"type\": \": Abelian (PresheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ and any presheaf of rings $R$ on $\\\\mathcal{C}$, the category of presheaves of modules over $R$ is an abelian category. This follows from the preadditive structure of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"FGModuleCat.instAbelian\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Abelian\", \"type\": \": Abelian (FGModuleCat k)\", \"doc\": \"For any Noetherian ring $ k $, the category of finitely generated left $ k $-modules forms an abelian category. This means it has all finite limits and colimits, kernels and cokernels for every morphi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary module sheaves, general category infrastructure or other objects, and do not state this scheme-groupoid assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(module|colimit|abelian)|equivariant.*quasi|quasi.*equivariant",
+   "results": "Actual logged results: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/module categories or unrelated constructions; none supplies equivariant quasi-coherent scheme-groupoid operations. Read Scheme/Modules/Sheaf.lean lines 39-55 and Sheaf/Limits.lean lines 62-63; their forgetful functors do not forget groupoid descent data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of quasi coherent modules on a flat groupoid scheme is abelian with colimits and kernels computed on the underlying scheme",
+   "results": "Actual logged results: SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.instHasColimits, PresheafOfModules.instAbelian, SheafOfModules.IsQuasicoherent.mk, FGModuleCat.instAbelian, AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/module categories or unrelated constructions; none supplies equivariant quasi-coherent scheme-groupoid operations. Read Scheme/Modules/Sheaf.lean lines 39-55 and Sheaf/Limits.lean lines 62-63; their forgetful functors do not forget groupoid descent data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Limits and colimits of equivariant quasi coherent modules on flat scheme groupoids are created by forgetting equivariance",
+   "results": "Actual logged results: AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.createsLimit, AlgebraicGeometry.Scheme.Modules.instPreservesLimitsPresheafAbCarrierCommRingCatToPresheaf, instHasFiniteLimitsLightCondMod, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.forgetPreservesLimitsOfShape, SheafOfModules.hasLimit, SheafOfModules.forgetPreservesLimitsOfSize. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/module categories or unrelated constructions; none supplies equivariant quasi-coherent scheme-groupoid operations. Read Scheme/Modules/Sheaf.lean lines 39-55 and Sheaf/Limits.lean lines 62-63; their forgetful functors do not forget groupoid descent data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent data for quasi coherent sheaves over a groupoid with flat source and target form an abelian category",
+   "results": "Actual logged results: instAbelianCondensedMod, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.instAbelian, instAbelianLightCondMod, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.sheafIsAbelian. ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf/module categories or unrelated constructions; none supplies equivariant quasi-coherent scheme-groupoid operations. Read Scheme/Modules/Sheaf.lean lines 39-55 and Sheaf/Limits.lean lines 62-63; their forgetful functors do not forget groupoid descent data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the invocation of Groupoids lemma-colimit-coherent in the last sentence; the equivariant approximation theorem, not the algebraic-space conclusion. Supporting input to Tag 07TU: Tag 077R (lemma-colimits), Tag 077S (lemma-abelian), their constructions on underlying quasi-coherent modules; faithfulness and reflection of isomorphisms follow from the displayed definition of morphisms.",
+   "via": [
+    "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-module-limits-colimits",
+  "worker": "NP stage1",
+  "summary": "Expanded the constructions of Stacks 077R and 077S with all omitted universal-property and descent-law checks. Reused existing DAG nodes for quasi-coherent kernels, cokernels, sums, pullbacks, adjunctions and flatness. No new nodes and no statement correction. In particular kernel cocycle cancellation uses flatness of s c, deduced from the flat projections and stalkwise flat composition; the identity check does not assume e flat.",
+  "blueprint": "Supporting input to Tag 07TU in the existing ancestry of det-thm-sf-ctf-stability-direct-images, proof (3): creates underlying module operations needed for coherent groupoid approximation. Read latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3); no unit or chapter route change.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-modules-grothendieck-abelian",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pc-quasicoherent-module-coproducts",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   },
+   {
+    "node": "def-pc-module-pullback",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-sc-stalk-flat-tensor-pullback-kernels",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   },
+   {
+    "node": "def-a1-scheme-groupoid-laws",
+    "why": "Generic module-sheaf, quasi-coherence, pullback or abelian-category infrastructure used in the constructions of Stacks 077R/077S; no node in the item unit supplies this fact and no step of the unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasicoherent-module-coproducts",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-pc-module-pullback",
+  "lem-sc-stalk-flat-tensor-pullback-kernels",
+  "def-a1-scheme-groupoid-laws"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-35d830e24",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-35d830e24 (reviewer sub-agent of L); spot-checked: I read the whole item: its unchanged statement, 10 proof steps, 0 new nodes and the statements of all 17 cited nodes. The source matches Stacks groupoids.tex: definition-groupoid-module (l.2622), 077R lemma-colimits (l.2755) and 077S lemma-abelian (l.2775), and the proof writes out the checks the source omits. Step 1 builds a general small colimit as the cokernel of the arrow-indexed sum. In Step 2, p_0 and p_1 are base changes of t and s, and s c = s p_1 is flat by composing flat stalk maps. Step 4 checks the descent laws on jointly epimorphic legs, because every pullback preserves colimits. I recomputed the Step 7 kernel cocycle: both sides equal c^*β ∘ (tc)^*k after postcomposing with the monomorphism (sc)^*k. The Step 7 unit law cancels k and needs no flatness of e. Step 8 builds the cokernel as a coequalizer, without flatness. Step 9 checks the abelian axioms. Step 10 builds finite limits as kernels of differences, with ker[f,-g] for pullbacks. proof_deps equals the union of the step uses. There is no SGA citation and no re-split note for this item. A grep of the whole DAG for groupoid finds no duplicate. The only citer is lem-sfb-flat-noetherian-groupoid-coherent-approximation, and the route is unchanged. Small cases are consistent: Hopf-algebra comodules over a field, the identity groupoid, the empty diagram. The eight off-unit tool_uses are generic infrastructure and are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidModuleLimitsColimits",
+  "declaration": "AlgebraicGeometry.Scheme.groupoidModule_limits_colimits",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidModuleLimitsColimits.lean",
+  "statement": "theorem groupoidModule_limits_colimits (S U R : Scheme.{u}) (π : U ⟶ S) (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoid s t e i c) (_hS : s ≫ π = t ≫ π) [Flat s] [Flat t] : Nonempty (Abelian (GroupoidModule s t e i c hG)) ∧ (GroupoidModule.forgetToQuasiCoherent (hG := hG)).Faithful ∧ (GroupoidModule.forgetToQuasiCoherent (hG := hG)).ReflectsIsomorphisms ∧ HasFiniteLimits (GroupoidModule s t e i c hG) ∧ HasColimitsOfSize.{u, u} (GroupoidModule s t e i c hG) ∧ PreservesFiniteLimits (GroupoidModule.forgetToModules (hG := hG)) ∧ PreservesColimitsOfSize.{u, u} (GroupoidModule.forgetToModules (hG := hG)) ∧ (∀ (J : Type) [SmallCategory J] [FinCategory J], Nonempty (CreatesLimitsOfShape J (GroupoidModule.forgetToModules (hG := hG)))) ∧ Nonempty (CreatesColimitsOfSize.{u, u} (GroupoidModule.forgetToModules (hG := hG))) ∧ (∀ (J : Type u) [SmallCategory J] (D : J ⥤ GroupoidModule s t e i c hG), SheafOfModules.IsQuasicoherent (R := U.ringCatSheaf) (colimit (D ⋙ GroupoidModule.forgetToModules (hG := hG)))) ∧ (∀ (J : Type u) [SmallCategory J] (D : J ⥤ GroupoidModule s t e i c hG) (k : Cocone D), Nonempty (IsColimit ((GroupoidModule.forgetToModules (hG := hG)).mapCocone k)) → Nonempty (IsColimit k))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7006ec77c",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Item matches node and Stacks 077R/077S clause by clause: groupoid over S via IsGroupoid+_hS; quasi-coherent (no finite type) M; beta t^*M≅s^*M; unit/cocycle laws via canonical section-normalized tensorPullbackSectionComp/Id comparisons, cocycle orientation (pr0=fst later arrow) verified against groupoids.tex l.2622 and IsGroupoid docstring; Hom subtype t^*f≫γ=β≫s^*f; only [Flat s][Flat t]; Nonempty Abelian, V faithful/reflects isos, finite limits preserved+created (Type-0 finite shapes), size-u colimits existence/preservation/creation, quasi-coherence of underlying colimit, colimit reflection clause. New def node def-sfb-scheme-groupoid-module is real data (irreducible wrapper = exact tensorPullback), no duplicate in side-live lean/, Mathlib or parallel runs. lean.statement verbatim for both nodes, docstrings with source and blueprint, only sorry is the theorem proof, report sections present. No compile (no file changed); worker reports clean server compiles. Advisory: Nonempty Abelian leaves the instance choice to citers, harmless since the additive structure is unique."
+ }
+}

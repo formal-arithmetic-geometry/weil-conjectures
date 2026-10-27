@@ -1,0 +1,366 @@
+{
+ "id": "lem-sfb-finite-local-system-frame-scheme",
+ "kind": "statement",
+ "title": "Frame scheme of a finite etale local system",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], let $\\ell$ be a prime, put $A=\\mathbf Z/\\ell\\mathbf Z$, and let $n\\geq0$. On the small etale site $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site], let $H$ be a sheaf of $\\underline A_T$-modules [def-weil-sheaf-of-modules-category, def-weil-pbc-constant-sheaf] which on an etale cover is isomorphic to $\\underline{A^n}_T$. For every morphism of schemes $v:U\\to T$, write $v^{-1}H$ for its inverse image [def-weil-pbc-inverse-image] and set\n$$\\operatorname{Fr}_H(U)=\\operatorname{Isom}_{\\underline A_U}(\\underline{A^n}_U,v^{-1}H).$$\nRestriction along $w:U'\\to U$ is inverse image of the isomorphism, followed by the canonical constant-sheaf and composite-inverse-image comparisons. There is a finite etale surjective scheme $p:P\\to T$ [def-weil-pbc-finite-etale-category] and a universal frame $\\lambda_P:\\underline{A^n}_P\\xrightarrow{\\sim}p^{-1}H$ such that pullback of $\\lambda_P$ gives a bijection $\\operatorname{Mor}_T(U,P)\\cong\\operatorname{Fr}_H(U)$, natural for all $T$-schemes $U$. For every $v:U\\to T$, the scheme $P\\times_TU$ [def-pc-fibre-product] with its pulled-back universal frame represents $\\operatorname{Fr}_{v^{-1}H}$ over $U$, compatibly with composition of base changes. On each etale chart $U\\to T$ trivializing $H$, the representing scheme is the disjoint union of copies of $U$ indexed by $\\operatorname{GL}_n(A)$. Its fibre at every geometric point is the set of frames of the corresponding stalk of $H$. The empty base and $n=0$ are included.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV, lemma-characterize-finite-locally-constant; Tag 03Q1, lemma-stalk-pullback (4). Frame construction and arbitrary-test-scheme evaluation from returned proof Step 2; the argument and the existing inputs are preserved in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=A^n$ and $G=\\operatorname{Aut}_A(M)=\\operatorname{GL}_n(A)$. This is a nonempty finite set: it contains the identity and embeds in the set of all functions from the finite set $M$ to itself. Define $F(V)=\\operatorname{Isom}_{\\underline A_V}(\\underline M_V,H|_V)$ for etale $V\\to T$. By [lem-weil-pbc-etale-inverse-image-restriction] and [lem-pe-constant-left-module-inverse-image], restriction is canonically the inverse image used in the question, including the module structure; [lem-sfb-geometric-inverse-image-constant-module] identifies the restricted constant source with $\\underline M_V$. Thus [lem-sf-local-module-isom-sheaf] makes $F$ a sheaf of sets, with exactly the question's restriction maps. The slice $T_{\\mathrm{et}}/V$ is $V_{\\mathrm{et}}$: composition and cancellation of etale morphisms give the identification [lem-weil-pbc-etale-composition-cancellation].",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sf-local-module-isom-sheaf",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S2, section-extension-by-zero (inverse image is restriction); Tag 03Q1, lemma-stalk-pullback; Tag 093T, sites-modules-lemma-locally-constant, proof of (2)"
+   }
+  },
+  {
+   "text": "On any scheme $V$, the canonical map $\\underline G_V\\to\\mathcal Aut_{\\underline A_V}(\\underline M_V)$ sends $g$ to its constant module automorphism. It is an isomorphism as follows. Since $M$ is finite free, [lem-pur-site-constant-module-hom] identifies the endomorphism sheaf with $\\underline{\\operatorname{End}_A(M)}_V$, by the canonical constant-map comparison. Its underlying set sheaf is the constant set sheaf, by [def-sf-site-constant-module-functor] and [lem-pc-sites-sheafification-underlying-sets]. Given an automorphism and its inverse, [lem-weil-pbc-finite-constant-set-sections-cover] makes both constant, say $a,b$, on a common etale covering. On a nonempty member, injectivity of constant labels gives $ab=ba=1$, so $a\\in G$; empty members have unique sections and impose no condition. This proves local surjectivity of the displayed map. The same injectivity on nonempty members proves local injectivity. Both sides are sheaves, so [lem-galois-set-sheaf-local-bijection-isomorphism] gives the claimed isomorphism. Its construction uses the same constant linear maps after restriction.",
+   "uses": [
+    "lem-pur-site-constant-module-hom",
+    "def-sf-site-constant-module-functor",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-finite-constant-set-sections-cover",
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093T, lemma-locally-constant (1),(2), canonical Hom map and mutually inverse pairs"
+   }
+  },
+  {
+   "text": "Choose the given etale cover $t_i:T_i\\to T$ and trivializations $\\tau_i:\\underline M_{T_i}\\simeq t_i^{-1}H$. Composition $g\\mapsto\\tau_i\\circ g$ and its inverse $\\lambda\\mapsto\\tau_i^{-1}\\circ\\lambda$ identify $F|_{T_i}$ with $\\underline G_{T_i}$ by Step 2. Hence $F$ is finite locally constant. Apply [lem-galois-flc-representable] to obtain a finite etale $p:P\\to T$ and a sheaf isomorphism $\\theta:h_P\\simeq F$. Because $P$ is itself an object of $T_{\\mathrm{et}}$, set $\\lambda_P=\\theta_P(\\mathrm{id}_P)$. Naturality gives $\\theta_V(a)=a^{-1}\\lambda_P$ for every etale $V\\to T$ and $a:V\\to P$ over $T$, using the inverse-image comparisons of Step 1.",
+   "uses": [
+    "lem-galois-flc-representable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, lemma-characterize-finite-locally-constant; universal element evaluated at P"
+   }
+  },
+  {
+   "text": "For a trivializing chart $T_i$, the fibre-product property identifies $h_{P\\times_TT_i}$ on $(T_i)_{\\mathrm{et}}$ with $h_P|_{T_i}$. Under $\\theta$ and $\\tau_i$, this is $\\underline G_{T_i}$. By [lem-galois-constant-sheaf-sets-representable], the latter is represented by $\\coprod_{g\\in G}T_i$. Both representing schemes are etale over $T_i$: for the first use [lem-weil-pbc-etale-scheme-base-change], and for the second apply [lem-sc-etale-coproduct-etale] to the finite family of identity maps (each identity is an open immersion, hence etale by [lem-weil-pbc-etale-composition-cancellation]). Yoneda [lem-galois-yoneda-fully-faithful] gives an isomorphism $P\\times_TT_i\\simeq\\coprod_{g\\in G}T_i$ under which the pulled-back universal frame on component $g$ is $\\tau_i\\circ g$. Indeed, its pullback along the component section is the image of that constant label under $\\theta$. Since $1\\in G$, this chart projection has a section. For every $t\\in T$ choose a point of a covering chart over $t$ and then its point on the identity component; its image in $P$ lies over $t$. Thus $p$ is surjective.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-galois-yoneda-fully-faithful",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sc-etale-coproduct-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03RV, lemma-characterize-finite-locally-constant; 03P5, remark-constant-locally-constant-maps"
+   }
+  },
+  {
+   "text": "Now let $v:U\\to T$ be arbitrary, and put $P_U=P\\times_TU$, $q:P_U\\to U$. Pull $\\lambda_P$ back to $P_U$ and use the constant-module comparison [lem-sfb-geometric-inverse-image-constant-module] and the composite inverse-image comparison [lem-pe-constant-left-module-inverse-image] to obtain $\\lambda_{P_U}:\\underline M_{P_U}\\simeq q^{-1}v^{-1}H$. Pullback of this frame defines a morphism of sheaves on $U_{\\mathrm{et}}$ from $h_{P_U}$ to the local isomorphism sheaf $F_{v^{-1}H}$: the source is a sheaf by [lem-weil-pbc-small-etale-representable-presheaf-sheaf], the target by [lem-sf-local-module-isom-sheaf]. Pull back the cover $\\{T_i\\to T\\}$ to $U$: by [lem-weil-pbc-etale-covering-base-change] the projections $U\\times_TT_i\\to U$ are etale and jointly surjective, hence a covering family of $U_{\\mathrm{et}}$ as defined in [def-weil-pbc-etale-site]. On $U_i=U\\times_TT_i$, Step 4 base changes to $P_U\\times_UU_i=\\coprod_{g\\in G}U_i$. This equality follows directly from the fibre-product universal property: by [lem-weil-pbc-scheme-coproduct-family], the inverse images of the disjoint open components partition the pullback and each is $U_i$. The frame on component $g$ is the pulled-back $\\tau_i$ followed by the SAME constant $g$, by naturality in linear maps of the constant-module comparison. Thus the sheaf morphism is, on $U_i$, precisely the constant-$G$ isomorphism of Step 2 and [lem-galois-constant-sheaf-sets-representable]. It is locally injective and locally surjective, hence an isomorphism by [lem-galois-set-sheaf-local-bijection-isomorphism]. Evaluating at the final object $U$ gives $\\operatorname{Mor}_T(U,P)=\\operatorname{Mor}_U(U,P_U)\\cong\\operatorname{Fr}_H(U)$.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-sf-local-module-isom-sheaf",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-etale-site",
+    "lem-galois-constant-sheaf-sets-representable",
+    "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (4); Tag 03P5, remark-constant-locally-constant-maps; arbitrary-test-scheme extension by etale-local evaluation"
+   }
+  },
+  {
+   "text": "For $w:U'\\to U$, the frame assigned to $a\\circ w:U'\\to P$ is the inverse image under $w$ of the frame assigned to $a:U\\to P$, followed by the specified comparisons. This is the composition law of [lem-weil-pbc-sets-etale-inverse-image-composition-units], lifted to constant module sheaves by [lem-pe-constant-left-module-inverse-image]; constants carry the same linear maps by [lem-sfb-geometric-inverse-image-constant-module]. Hence Step 5's bijections are natural on all $T$-schemes. More generally, a map $W\\to P_U$ over $U$ is exactly a map $W\\to P$ over $T$ with its prescribed map $W\\to U$. Step 5 identifies these with frames of $(W\\to T)^{-1}H$, equivalently frames of $(W\\to U)^{-1}v^{-1}H$. It sends the identity of $P_U$ to $\\lambda_{P_U}$, proving the base-change representability assertion with its specified universal frame. For $U'\\to U\\to T$, both iterated base changes send a map from any $W$ to the inverse image of the SAME $\\lambda_P$; the associativity equation in the cited composition lemma equates the two sheaf comparisons. The fibre-product associator equates the two maps of schemes. This proves compatibility with composition, rather than merely existence of an unspecified isomorphism.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03CB, sites-lemma-composition-morphisms-sites; Tag 03Q1, lemma-stalk-pullback (4); units and associativity"
+   }
+  },
+  {
+   "text": "For a geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$, Step 5 identifies the geometric fibre's set of points $\\operatorname{Mor}_T(\\operatorname{Spec}\\Omega,P)$ with frames of $\\bar t^{-1}H$. By [lem-weil-pbc-geometric-point-pullback-stalk], module sheaves on $(\\operatorname{Spec}\\Omega)_{\\mathrm{et}}$ are equivalent, via global sections, to modules, and global sections of the pulled-back underlying abelian sheaf are $H_{\\bar t}$. This identification is $A$-linear: naturality in the scalar endomorphisms and the constant-scalar comparison of [lem-pe-constant-left-module-inverse-image] identify each multiplication by $a\\in A$. The constant source has global sections $A^n$, since the constant-module comparison is the equivalence's constant object. Thus these are exactly $\\operatorname{Isom}_A(A^n,H_{\\bar t})$, as claimed.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1, lemma-stalk-pullback (3), 04JN, remark-stalk-pullback, and 04JQ, lemma-equivalence-abelian-sheaves-point"
+   }
+  },
+  {
+   "text": "If $T$ is empty, any $T$-scheme is empty, any module sheaf on its small etale site is the unique zero sheaf (apply its sheaf condition to the empty covering), and all frame sets are singleton sets. The representing scheme $P$ is empty because it maps to $T$; surjectivity is vacuous. If $n=0$, then $G=\\{1\\}$ and all the preceding steps still apply. There is exactly one frame locally, and the sheaf condition makes $F$ terminal; the two representing etale objects $P$ and $T$ are isomorphic by Yoneda [lem-galois-yoneda-fully-faithful]. In particular no step used $n>0$, a nonempty or connected base, a characteristic restriction on $T$, or a Noetherian hypothesis.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV, lemma-characterize-finite-locally-constant; empty covering and zero module cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sf-local-module-isom-sheaf",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-pur-site-constant-module-hom",
+  "def-sf-site-constant-module-functor",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-finite-constant-set-sections-cover",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-galois-flc-representable",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sc-etale-coproduct-etale",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-geometric-point-pullback-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RV and 03Q1 with sites-modules.tex Tag 093T; explicit assembly and arbitrary-test-scheme argument by Q87"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The frames of a locally constant sheaf of finite rank modules over a finite field are represented by a finite etale surjective scheme and commute with every base change",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism sheaf from a constant finite free module to a finite locally constant etale module sheaf is a finite etale torsor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (M : ModuleCat R) →\\n      (LightCondensed.discrete (ModuleCat R)).obj M ≅\\n        (LightCondensed.discrete (ModuleCat R)).obj\\n          (ModuleCat.of R (LocallyConstant ↑(LightProfinite.of PUnit.{u + 1}).toTop ↑M))\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, applying the discrete functor to $ M $ yields an object isomorphic to applying the discrete functor to the module of locally constant functions from the sing\"}\n  {\"name\": \"LightCondMod.LocallyConstant.functorIsoDiscreteComponents\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (M : ModuleCat R) → (LightCondensed.discrete (ModuleCat R)).obj M ≅ (LightCondMod.LocallyConstant.functor R).obj M\", \"doc\": \"For any ring $ R $ and left $ R $-module $ M $, the discrete (constant sheaf) functor applied to $ M $ is isomorphic to the locally constant module functor applied to $ M $ in the category of light co\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₂\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (M : ModuleCat R) →\\n      (Condensed.discrete (ModuleCat R)).obj M ≅\\n        (Condensed.discrete (ModuleCat R)).obj (ModuleCat.of R (LocallyConstant ↑(CompHaus.of PUnit.{u + 1}).toTop ↑M))\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, the discrete functor applied to $ M $ is isomorphic to the discrete functor applied to the module of locally constant functions on the compact Hausdorff spac\"}\n  {\"name\": \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₁\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] → (M : ModuleCat R) → M ≅ ModuleCat.of R (LocallyConstant ↑(LightProfinite.of PUnit.{u + 1}).toTop ↑M)\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, there is a canonical isomorphism between $ M $ and the module of locally constant functions from the singleton topological space (equipped with the trivial t\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functorIsoDiscreteAux₁\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] → (M : ModuleCat R) → M ≅ ModuleCat.of R (LocallyConstant ↑(CompHaus.of PUnit.{u + 1}).toTop ↑M)\", \"doc\": \"For any ring $ R $ and left $ R $-module $ M $, there is an isomorphism between $ M $ and the module of locally constant functions from the one-point compact Hausdorff space $ \\\\{\\\\ast\\\\} $ to $ M $. Thi\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functorIsoDiscreteComponents\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (M : ModuleCat R) → (Condensed.discrete (ModuleCat R)).obj M ≅ (CondensedMod.LocallyConstant.functor R).obj M\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, the discrete condensed module associated with $ M $ is isomorphic to the condensed module of locally constant functions from the discrete space to $ M $. Thi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"IsRepresentable\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "frameSheaf|frame_sheaf|finite.*locally.*constant|isFiniteLocallyConstant",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"32\", \"text\": \"  locally finitely presented morphism is locally constant.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"86\", \"text\": \"flat and locally of finite presentation, this is a locally constant function (see\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"231\", \"text\": \"/-- The rank of a finite flat locally finitely presented morphism is locally constant. -/\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local system of finite vector spaces has a finite etale scheme of bases with universal basis",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} {inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat}\\n  {inst_2 : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat}\\n  {ins\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, there exists local ge\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [inst_2 : ∀ (X : C), (J.over X).WEqualsLoca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the asserted etale frame scheme, framed-groupoid comparison, or coarse-stack identification; ordinary scheme smoothness, condensed modules and discrete groupoids alone do not specialize to this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"IsRepresentable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit represents frames of a locally constant module sheaf on a scheme's small etale site; finite-type local generators, condensed constant objects, and etale algebra presentations do not specialize to this conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "frameSheaf|frameScheme|frame_sheaf|frame_scheme|isFiniteLocallyConstant",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit represents frames of a locally constant module sheaf on a scheme's small etale site; finite-type local generators, condensed constant objects, and etale algebra presentations do not specialize to this conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism sheaf from a finite constant free module to a locally constant module sheaf is represented by a finite etale scheme",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso (Mathlib.CategoryTheory.Sites.ConstantSheaf); CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, functorIsoDiscrete, functorIsoDiscreteAux₂; LightCondMod.LocallyConstant.functorIsoDiscreteComponents, functorIsoDiscrete; CondensedSet.LocallyConstant.iso; CompHausLike.LocallyConstant.functorToPresheavesIso.",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit represents frames of a locally constant module sheaf on a scheme's small etale site; finite-type local generators, condensed constant objects, and etale algebra presentations do not specialize to this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally constant sheaf of vector spaces on the small etale site has a finite etale surjective scheme of frames representing frames on every base scheme",
+   "results": "SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.IsFiniteType (Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators); Condensed.finFree; CompHausLike.LocallyConstantModule.functor; LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite; CategoryTheory.coherentTopology.isLocallySurjective_iff; CategoryTheory.PresheafIsFinite; CompHausLike.LocallyConstant.functor.",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit represents frames of a locally constant module sheaf on a scheme's small etale site; finite-type local generators, condensed constant objects, and etale algebra presentations do not specialize to this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bases of an etale local system form a representable finite torsor under a general linear group",
+   "results": "StandardEtalePresentation, Algebra.Etale.finitePresentation, StandardEtalePresentation.toPresentation_σ', StandardEtalePresentation.P, AlgebraicGeometry.Scheme.Etale.forget, Algebra.Etale.exists_subalgebra_fg, Algebra.isOpen_etaleLocus, StandardEtalePresentation.lift_bijective.",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit represents frames of a locally constant module sheaf on a scheme's small etale site; finite-type local generators, condensed constant objects, and etale algebra presentations do not specialize to this conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Returned rigidification proof: Tag 03RV, lemma-characterize-finite-locally-constant; Tag 03Q1, lemma-stalk-pullback (4). Frame construction and arbitrary-test-scheme evaluation from returned proof Step 2; the argument and the existing inputs are preserved in report.md.",
+   "via": [
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-local-system-frame-scheme",
+  "worker": "stage1",
+  "summary": "Constructed the Isom sheaf, proved its constant GL_n local model from the existing canonical finite-presentation Hom theorem, applied existing finite-locally-constant representability, and verified the universal frame on arbitrary test schemes, naturality, coherent base change, geometric fibres, empty base and rank zero. No new nodes; no statement change. All proof inputs are existing statements read in full.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Returned rigidification proof: Tag 03RV, lemma-characterize-finite-locally-constant; Tag 03Q1, lemma-stalk-pullback (4). Frame construction and arbitrary-test-scheme evaluation from returned proof Step 2; the argument and the existing inputs are preserved in report.md. Current latest blueprint direct-images proof (3) is proper/open compactification assembly; this inherited alteration-chain prerequisite is retained without changing its unit or chapter. blueprint_refs ancestor returns None for the existing chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Identifies small-etale inverse image with slice restriction so the local Isom sheaf is the question's functor. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Supplies the constant-scalar module lift, its underlying abelian pullback and composition compatibility. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sf-local-module-isom-sheaf",
+    "why": "Supplies gluing of actual local module isomorphisms on a site. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-pur-site-constant-module-hom",
+    "why": "Computes the canonical Hom sheaf between finite free constant modules; this is the tool behind the GL_n local model. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "def-sf-site-constant-module-functor",
+    "why": "General sheaf or scheme tool used for local recognition; no node of the inherited unit supplies this statement. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "why": "General sheaf or scheme tool used for local recognition; no node of the inherited unit supplies this statement. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-galois-constant-sheaf-sets-representable",
+    "why": "Identifies the constant set sheaf with the coproduct-of-copies scheme, retaining its constant labels. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Preserves the chosen constant module and every constant linear map under arbitrary scheme pullback. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Identifies frames after geometric-point pullback with frames of the stalk via the point-site equivalence. No node of the item's unit supplies this generic fact."
+   },
+   {
+    "node": "lem-sc-etale-coproduct-etale",
+    "why": "The finite coproduct of etale identity maps is etale, allowing small-etale Yoneda to recognize the local representing scheme. This generic scheme tool is not supplied by the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sf-local-module-isom-sheaf",
+  "lem-pur-site-constant-module-hom",
+  "def-sf-site-constant-module-functor",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-sc-etale-coproduct-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-6d79289b5",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-6d79289b5 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with every cited statement (20 proof_deps, 7 stmt_deps), Stacks 03RV (etale-cohomology.tex 9994-10018) and 093T (sites-modules.tex 8476-8521), and the parent level-rigidification step that applies the item. No new nodes. The statement, source and blueprint fields match the live record, which is still unsplit. There is no repair note, no SGA source and no cycle. Every cited unit is on the sk-thm-sf-ctf-stability route except two generic tools, lem-sfb-geometric-inverse-image-constant-module and lem-pur-site-constant-module-hom; both are listed in split_report.tool_uses and I accept them. The mathematics checks out. Step 2 derives 093T(2) from 093T(1) with the presentation 0->A^n->A^n, using the common constant cover and label injectivity on nonempty members. Step 3 applies lem-galois-flc-representable(2) and takes the universal frame as theta_P(id). Step 4 gets the local coproduct form by small-etale Yoneda, with both schemes etale over T_i, and surjectivity of p from the identity components. Step 5 handles arbitrary non-etale U by working on U_et, building a sheaf map that is locally the constant-G isomorphism of Step 2. Step 6 gets coherence from the associativity clause of the composition-units lemma. Step 7 uses the module form of the geometric-point stalk equivalence. I tested empty T, n=0, n=1 over F_2, disconnected T, nontrivial monodromy and char = ell. No duplicate exists: the monodromy-torsor, torsor-sheaf and projective-frames nodes are weaker or about other objects. One C4 fault, which I repaired: Step 5 cited def-weil-pbc-etale-site for a 'base-change axiom for covers' that the definition does not state. The fix cites the existing Mathlib leaf lem-weil-pbc-etale-covering-base-change (the base-changed family is etale and jointly surjective) in that step instead of lem-weil-pbc-etale-scheme-base-change, which Step 4 still uses. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-local-system-frame-scheme.json, with proof_deps re-derived as the union of uses (21 nodes).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteLocalSystemFrameScheme",
+  "declaration": "AlgebraicGeometry.FiniteLocalSystemFrame.exists_frameScheme",
+  "declarations": [
+   "AlgebraicGeometry.FiniteLocalSystemFrame.Coeff",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.model",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.liftedModel",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.constant",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.Frame",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.restrict",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.evaluation",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.baseFrame",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.forgetBaseChange",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.stalkFrame",
+   "AlgebraicGeometry.FiniteLocalSystemFrame.exists_frameScheme"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteLocalSystemFrameScheme.lean",
+  "statement": "theorem exists_frameScheme (T : Scheme.{u}) (ell : ℕ) (hell : Nat.Prime ell) (n : ℕ) (H : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} ell))) (hH : ∃ (𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage T), ∀ i : 𝒰.I₀, Nonempty (Frame ell n H (𝒰.f i))) : ∃ (P : Scheme.{u}) (p : P ⟶ T), IsFinite p ∧ Etale p ∧ Surjective p ∧ ∃ frame : Frame ell n H p, (∀ U : Over T, Function.Bijective (evaluation ell n H p frame U)) ∧ (∀ (U V : Over T) (w : U ⟶ V) (a : V ⟶ Over.mk p), evaluation ell n H p frame U (w ≫ a) = restrict ell n H w (evaluation ell n H p frame V a)) ∧ (∀ (U V W : Over T) (w : U ⟶ V) (w' : W ⟶ U) (e : Frame ell n H V.hom), restrict ell n H (w' ≫ w) e = restrict ell n H w' (restrict ell n H w e)) ∧ (∀ (U : Scheme.{u}) (v : U ⟶ T), (∀ W : Over U, Function.Bijective (evaluation ell n ((Etale.upperStar (ModuleCat.{u + 1} (Coeff.{u} ell)) v).obj H) (pullback.snd p v) (baseFrame ell n H p frame v) W)) ∧ (∀ (W : Over U) (a : W ⟶ Over.mk (pullback.snd p v)), evaluation ell n ((Etale.upperStar (ModuleCat.{u + 1} (Coeff.{u} ell)) v).obj H) (pullback.snd p v) (baseFrame ell n H p frame v) W a ≪≫ ((Etale.upperStarComp (ModuleCat.{u + 1} (Coeff.{u} ell)) W.hom v).app H).symm = evaluation ell n H p frame (Over.mk (W.hom ≫ v)) (forgetBaseChange p v W a))) ∧ (∀ (U V : Scheme.{u}) (v : U ⟶ T) (w : V ⟶ U) (W : Over V) (a : W ⟶ Over.mk (pullback.snd (pullback.snd p v) w)), evaluation ell n ((Etale.upperStar (ModuleCat.{u + 1} (Coeff.{u} ell)) w).obj ((Etale.upperStar (ModuleCat.{u + 1} (Coeff.{u} ell)) v).obj H)) (pullback.snd (pullback.snd p v) w) (baseFrame ell n ((Etale.upperStar (ModuleCat.{u + 1} (Coeff.{u} ell)) v).obj H) (pullback.snd p v) (baseFrame ell n H p frame v) w) W a ≪≫ ((Etale.upperStarComp (ModuleCat.{u + 1} (Coeff.{u} ell)) W.hom w).app ((Etale.upperStar (ModuleCat.{u + 1} (Coeff.{u} ell)) v).obj H)).symm ≪≫ ((Etale.upperStarComp (ModuleCat.{u + 1} (Coeff.{u} ell)) (W.hom ≫ w) v).app H).symm = evaluation ell n H p frame (Over.mk ((W.hom ≫ w) ≫ v)) (forgetBaseChange p v (Over.mk (W.hom ≫ w)) (forgetBaseChange (pullback.snd p v) w W a))) ∧ (∀ (U : Scheme.{u}) (v : U ⟶ T), Etale v → Nonempty (Frame ell n H v) → ∃ e : pullback p v ≅ ∐ fun _ : model ell n ≅ model ell n ↦ U, e.hom ≫ Sigma.desc (fun _ : model ell n ≅ model ell n ↦ 𝟙 U) = pullback.snd p v) ∧ (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ T), Function.Bijective (fun a : Over.mk s ⟶ Over.mk p ↦ stalkFrame ell n H s (evaluation ell n H p frame (Over.mk s) a)))",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The coefficient ring is the canonical universe lift ULift (ZMod ell). Module-valued sheaves are the usual fixed-coefficient presentation of modules over the constant ring sheaf; the free module and all comparisons use that same coefficient ring. Helpers are explicit constructions belonging to the frame notion. The geometric fibre is the set of Spec Omega maps over T, and the stalk is the standard lifted point fibre."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ef9a6949",
+  "group": "O1",
+  "result": "pass",
+  "note": "O1 lem-sfb-finite-local-system-frame-scheme 2ef9a694: node unchanged vs live except lean; lean.statement verbatim; single sorry; helpers (Frame, restrict, evaluation, baseFrame, forgetBaseChange, stalkFrame) are real data built from the canonical framework comparisons upperStar/upperStarComp/constantSheafCompUpperStarIso/upperStarCompUliftSheafFiberIso (read in UpperLowerStar Defs/ConstantSheaf/Stalk). Clauses match node: etale-cover local triviality, finite etale surjective P with universal frame, bijection on all Over T, naturality, base change to P×_T U with explicit baseFrame and composition coherence, etale chart ≅ ∐_{Aut(A^n)} U over U, geometric fibre (sep-closed Ω) ≅ stalk frames. Empty T and n=0 covered; no extra hypotheses; universes u/u+1 consistent. Advisory only: fixed-scalar ModuleCat(ULift ZMod ℓ) presentation of A_T-modules is the etale framework convention. No compile run (no file changed)."
+ }
+}

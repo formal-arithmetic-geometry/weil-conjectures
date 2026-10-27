@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-local-spectrum-base-change-stalks",
+ "kind": "statement",
+ "title": "Points and local rings under local-spectrum base change",
+ "statement": "Let $f:T\\to X$ be any morphism of schemes [def-pc-scheme] and $p\\in X$ any point. Put $A=\\mathcal O_{X,p}$ [def-weil-pbc-module-stalk], let $\\mathfrak m_A$ be its maximal ideal, and let $c:\\operatorname{Spec}A\\to X$ be the canonical local-spectrum morphism of [lem-weil-pbc-spec-local-ring-canonical-morphism]. Form $T_p=\\operatorname{Spec}A\\times_XT$ [def-pc-fibre-product], with projections $\\pi:T_p\\to\\operatorname{Spec}A$ and $h:T_p\\to T$. For every $q\\in T$ with $f(q)=p$, there is exactly one point $\\widetilde q\\in T_p$ with $h(\\widetilde q)=q$; it satisfies $\\pi(\\widetilde q)=\\mathfrak m_A$, and the induced map of local rings $\\mathcal O_{T,q}\\to\\mathcal O_{T_p,\\widetilde q}$ is an isomorphism. If $q$ is closed in $T$, then $\\widetilde q$ is closed in $T_p$.\nMore explicitly, for any affine open $U=\\operatorname{Spec}R\\subseteq X$ containing $p$, let $\\mathfrak p\\subset R$ represent $p$ and $S=R\\setminus\\mathfrak p$. For any affine open $W=\\operatorname{Spec}D\\subseteq f^{-1}(U)$ containing $q$, let $Q\\subset D$ represent $q$. Write $S^{-1}D$ for localization at the image of $S$ in $D$, the ring of fractions with denominators in that image [def-weil-pbc-module-localization]. Then $h^{-1}(W)$ is canonically $\\operatorname{Spec}(S^{-1}D)$, $\\widetilde q$ corresponds to $S^{-1}Q$, and the local-ring isomorphism is\n$$D_Q\\xrightarrow{\\sim}(S^{-1}D)_{S^{-1}Q},\\qquad d/e\\longmapsto(d/1)/(e/1),$$\nwith inverse $(d/s)/(e/t)\\mapsto dt/(se)$ for $s,t\\in S$, $e\\notin Q$ [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01J6 (lemma-morphism-from-spec-local-ring), Equation 02NA (equation-canonical-morphism), and the affine description of their base change; algebra.tex Tag 00DK (lemma-tensor-localization), Tag 00E3 (lemma-spec-localization). Agent-formulated base-change consequence, including the explicit local-ring comparison and closed-point consequence, from returned proof steps 5, 6 and 8."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Choose $U=\\operatorname{Spec}R\\ni p$ and $W=\\operatorname{Spec}D\\subseteq f^{-1}(U)$ containing $q$, and write $\\alpha:R\\to D$ for the induced map. The canonical-morphism node identifies $A$ with $R_{\\mathfrak p}$ and factors $c$ through $U$. The open-fibre-product node identifies $h^{-1}(W)$, compatibly with both projections, with $\\operatorname{Spec}A\\times_U W$. By the affine-fibre-product and localization-base-change nodes this is $\\operatorname{Spec}(S^{-1}D)$, with $h$ induced by $d\\mapsto d/1$. Here and below $S^{-1}D$ means localization at $\\alpha(S)$; no injectivity of $\\alpha$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J6/02NA, 01JR (lemma-open-fibre-product), 01I4/01JQ (lemma-fibre-product-affine-schemes, lemma-fibre-product-affines); algebra.tex Tag 00DK"
+   }
+  },
+  {
+   "text": "The point $q$ is represented by $Q$ with $\\alpha^{-1}(Q)=\\mathfrak p$, since the spectrum map is contraction. Thus $Q\\cap\\alpha(S)=\\varnothing$. The localization-spectrum embedding supplies exactly one prime $P$ of $S^{-1}D$ contracting to $Q$. Explicitly $P=S^{-1}Q$: an element $d/s$ is in $P$ iff $d/1$ is, since $s/1$ is a unit, iff $d\\in Q$. Let $\\widetilde q$ be this point in $h^{-1}(W)$. Every point of $T_p$ mapping to $q$ belongs to this same open $h^{-1}(W)$; hence uniqueness on the affine chart is global. Under $R_{\\mathfrak p}\\to S^{-1}D$, $r/s$ belongs to the contraction of $P$ iff $\\alpha(r)\\in Q$, equivalently $r\\in\\mathfrak p$. That contraction is $\\mathfrak pR_{\\mathfrak p}=\\mathfrak m_A$, so $\\pi(\\widetilde q)=\\mathfrak m_A$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization); localization at a prime after Definition 00CO"
+   }
+  },
+  {
+   "text": "Put $B=S^{-1}D$ and $P=S^{-1}Q$. Every $s\\in\\alpha(S)$ is outside $Q$, hence invertible in $D_Q$. By the localization universal property the map $D\\to D_Q$ extends to $v:B\\to D_Q$, $d/s\\mapsto d/s$. If $d/s\\notin P$, then $d\\notin Q$, so its image is a unit of $D_Q$. The same universal property extends $v$ uniquely to $\\psi:B_P\\to D_Q$. Conversely $D\\to B_P$ sends every $e\\notin Q$ to a unit, so extends uniquely to $\\phi:D_Q\\to B_P$, $d/e\\mapsto(d/1)/(e/1)$. The composite $\\psi\\phi$ is the identity by uniqueness for $D_Q$. The composite $\\phi\\psi$ is the identity first on $B$ by uniqueness for $S^{-1}D$, then on $B_P$ by uniqueness again. Thus these are inverse ring isomorphisms, and the fraction formula gives $\\psi((d/s)/(e/t))=(d/s)/(e/t)=dt/(se)$, where $e\\notin Q$ and $s,t\\in\\alpha(S)$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), applied three times; fraction construction of Tag 00CO"
+   }
+  },
+  {
+   "text": "The affine-open stalk-localization node identifies $\\mathcal O_{T,q}$ with $D_Q$ and $\\mathcal O_{T_p,\\widetilde q}$ with $B_P$, using the affine open $h^{-1}(W)$ from step 1. Under these identifications the stalk map of $h$ sends the germ of $d\\in D$ to the germ of $d/1\\in B$: this is the induced stalk map of the sheaf morphism defining $h$, whose map on these chart sections is $d\\mapsto d/1$. Uniqueness in the localization universal property therefore identifies that stalk map with $\\phi$ from step 3. This proves both that the induced map is an isomorphism and that it has exactly the displayed formulas, rather than merely producing an abstract isomorphism of the two local rings.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), (1),(6), with the definition of morphisms of locally ringed spaces; algebra.tex Tag 00CP"
+   }
+  },
+  {
+   "text": "If $q$ is closed in $T$, the singleton $\\{q\\}$ is closed. The underlying map of the scheme morphism $h$ is continuous, so $h^{-1}(\\{q\\})$ is closed in $T_p$. Step 2 identified this inverse image as precisely $\\{\\widetilde q\\}$. Hence $\\widetilde q$ is closed in $T_p$, without any Noetherian, finite-type, separatedness or closedness assumption on $p$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Definition of scheme morphism as a morphism of locally ringed spaces; elementary inverse image of a closed singleton"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Affine base-change consequence of Tags 01J6/02NA, 01JR, 01I4/01JQ and 01HV, together with algebra.tex Tags 00DK, 00E3 and 00CP; explicit assembly written by Q72."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ll]ocalization|[Pp]reimmersion|fromSpecStalk",
+   "results": "0 hits:",
+   "date": "2026-10-22",
+   "verdict": "no match: SpecToEquivOfLocalRing concerns maps from a local spectrum, not arbitrary base change. stalkMapIsoOfIsPullback requires an open immersion, whereas the canonical local-spectrum map need not be open. Preimmersion results give embeddings and surjective stalk maps but not this complete point/stalk comparison as a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing the base of a scheme morphism at a point preserves the local rings at every point of its fibre",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits:",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stalkMap\", \"pullback\"",
+   "results": "1 hits: AlgebraicGeometry.Scheme.stalkMapIsoOfIsPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: SpecToEquivOfLocalRing concerns maps from a local spectrum, not arbitrary base change. stalkMapIsoOfIsPullback requires an open immersion, whereas the canonical local-spectrum map need not be open. Preimmersion results give embeddings and surjective stalk maps but not this complete point/stalk comparison as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism Y to X, base change to Spec of the local ring at x has a unique point over each y above x and induces an isomorphism on local rings",
+   "results": "8 hits: AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.stalkwise_SpecMap_iff, AlgebraicGeometry.IsPreimmersion.of_isLocalization, AlgebraicGeometry.stalkwise_Spec_map_iff, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Spec_closedPoint, AlgebraicGeometry.HasRingHomProperty.stalkMap, AlgebraicGeometry.HasRingHomProperty.of_stalkMap",
+   "date": "2026-10-22",
+   "verdict": "no match: SpecToEquivOfLocalRing concerns maps from a local spectrum, not arbitrary base change. stalkMapIsoOfIsPullback requires an open immersion, whereas the canonical local-spectrum map need not be open. Preimmersion results give embeddings and surjective stalk maps but not this complete point/stalk comparison as a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk|[Ll]ocalization|[Pp]reimmersion",
+   "results": "5 hits: 9, 16, 17, 34, 40",
+   "date": "2026-10-22",
+   "verdict": "no match: SpecToEquivOfLocalRing concerns maps from a local spectrum, not arbitrary base change. stalkMapIsoOfIsPullback requires an open immersion, whereas the canonical local-spectrum map need not be open. Preimmersion results give embeddings and surjective stalk maps but not this complete point/stalk comparison as a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPreimmersion\", \"stalk\"",
+   "results": "3 hits: AlgebraicGeometry.IsPreimmersion.toSurjectiveOnStalks, AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: SpecToEquivOfLocalRing concerns maps from a local spectrum, not arbitrary base change. stalkMapIsoOfIsPullback requires an open immersion, whereas the canonical local-spectrum map need not be open. Preimmersion results give embeddings and surjective stalk maps but not this complete point/stalk comparison as a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base changing any scheme morphism along the canonical map Spec O_X_x to X preserves stalks and gives a singleton preimage for points above x",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsOverMapStalkMapOverInferInstanceOverClass, AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf, AlgebraicGeometry.over_def, AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf, AlgebraicGeometry.Scheme.Spec_stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe, AlgebraicGeometry.Scheme.stalkClosedPointTo_comp, AlgebraicGeometry.Scheme.stalkClosedPointTo",
+   "date": "2026-10-22",
+   "verdict": "no match: SpecToEquivOfLocalRing concerns maps from a local spectrum, not arbitrary base change. stalkMapIsoOfIsPullback requires an open immersion, whereas the canonical local-spectrum map need not be open. Preimmersion results give embeddings and surjective stalk maps but not this complete point/stalk comparison as a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk|stalkMapIsoOfIsPullback",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: spectrum-localization stalk isomorphisms and prime embeddings supply ingredients, not the entire arbitrary-scheme base-change statement with chart formulas, unique lift, and closed lift. stalkMapIsoOfIsPullback requires an open immersion. SpecToEquivOfLocalRing concerns maps out of a local spectrum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"fromSpecStalk\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: spectrum-localization stalk isomorphisms and prime embeddings supply ingredients, not the entire arbitrary-scheme base-change statement with chart formulas, unique lift, and closed lift. stalkMapIsoOfIsPullback requires an open immersion. SpecToEquivOfLocalRing concerns maps out of a local spectrum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base changing a scheme to Spec of a local ring induces isomorphisms on local rings and unique points over the fibre",
+   "results": "8 hits: AlgebraicGeometry.Spec_map_localization_isIso, AlgebraicGeometry.Spec_closedPoint, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.Spec.locallyRingedSpaceMap, AlgebraicGeometry.SpecToEquivOfLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match: spectrum-localization stalk isomorphisms and prime embeddings supply ingredients, not the entire arbitrary-scheme base-change statement with chart formulas, unique lift, and closed lift. stalkMapIsoOfIsPullback requires an open immersion. SpecToEquivOfLocalRing concerns maps out of a local spectrum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a scheme morphism to the spectrum of the local ring at a point preserves local rings at points of the fibre and lifts each point uniquely",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst, AlgebraicGeometry.Scheme.instIsOverMapStalkMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass",
+   "date": "2026-10-23",
+   "verdict": "no match: spectrum-localization stalk isomorphisms and prime embeddings supply ingredients, not the entire arbitrary-scheme base-change statement with chart formulas, unique lift, and closed lift. stalkMapIsoOfIsPullback requires an open immersion. SpecToEquivOfLocalRing concerns maps out of a local spectrum."
+  },
+  {
+   "tool": "grep",
+   "query": "Spec_map_localization_isIso|stalkMapIsoOfIsPullback",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: spectrum-localization stalk isomorphisms and prime embeddings supply ingredients, not the entire arbitrary-scheme base-change statement with chart formulas, unique lift, and closed lift. stalkMapIsoOfIsPullback requires an open immersion. SpecToEquivOfLocalRing concerns maps out of a local spectrum."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"localization\"",
+   "results": "12 hits: AlgebraicGeometry.StructureSheaf.Localizations, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, AlgebraicGeometry.StructureSheaf.Localizations.comapFun, AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, AlgebraicGeometry.StructureSheaf.Localizations.comapFun_mk, AlgebraicGeometry.isIso_SpecMap_stakMap_localization, AlgebraicGeometry.isIso_specMap_stalkMap_localization, AlgebraicGeometry.IsOpenImmersion.of_isLocalization",
+   "date": "2026-10-23",
+   "verdict": "no match: spectrum-localization stalk isomorphisms and prime embeddings supply ingredients, not the entire arbitrary-scheme base-change statement with chart formulas, unique lift, and closed lift. stalkMapIsoOfIsPullback requires an open immersion. SpecToEquivOfLocalRing concerns maps out of a local spectrum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the base of an arbitrary scheme morphism is locally a localization of rings with injective map on points and isomorphic stalks",
+   "results": "8 hits: AlgebraicGeometry.HasRingHomProperty.locally_of_iff, AlgebraicGeometry.HasRingHomProperty.of_stalkMap, AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally, AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap, AlgebraicGeometry.instIsZariskiLocalAtTargetStalkwiseBijectiveCoeRingHom, AlgebraicGeometry.HasRingHomProperty.stalkMap, AlgebraicGeometry.IsPreimmersion.of_isLocalization, AlgebraicGeometry.stalkwise",
+   "date": "2026-10-23",
+   "verdict": "no match: spectrum-localization stalk isomorphisms and prime embeddings supply ingredients, not the entire arbitrary-scheme base-change statement with chart formulas, unique lift, and closed lift. stalkMapIsoOfIsPullback requires an open immersion. SpecToEquivOfLocalRing concerns maps out of a local spectrum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-point-blowup-geometry",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 6: preserve regularity, integrality, Noetherianity and local dimension two through the point-blowup tower.; Returned proof steps 5-6 and the closedness argument of step 8: affine localization charts, unique lifts and the explicit inverse on local rings.",
+   "via": [
+    "lem-sfb-regular-point-blowup-geometry",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-local-spectrum-base-change-stalks",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Five explicit steps using only existing DAG nodes: affine localization chart, unique prime and contraction to the closed base point, two mutually inverse localization maps, identification with the actual stalk map, and inverse image of a closed singleton. No new nodes, Lean or compiles.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 6: preserve regularity, integrality, Noetherianity and local dimension two through the point-blowup tower.; Returned proof steps 5-6 and the closedness argument of step 8: affine localization charts, unique lifts and the explicit inverse on local rings. The five steps realize the inherited affine-localization, unique-lift, stalk-comparison and closed-lift prerequisite; no change to the alteration route. The ancestor tool reports blueprint.from.node = None for this inherited non-blueprint chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Generic canonical local-spectrum map and its affine factorization; no node of this unit supplies this scheme-theoretic localization interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-ed28b4b4a",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-ed28b4b4a (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to live, which still has the item unsplit, so no other group has split it first and nothing is weakened. There are no new nodes and proof_deps equals the union of the step uses. Step 1 combines four cited nodes: canonical-morphism (1) gives c^{-1}(U)=Spec A and c=Spec(R_p→R); 01JR (open fibre product) identifies h^{-1}(W) with Spec A×_U W; the affine-spectra node gives the tensor ring; and the localization-base-change node, which allows any map ψ, turns it into α(S)^{-1}D. All hypotheses hold without f affine. Step 2 is correct: the localization-spectrum embedding gives a unique P=S^{-1}Q, uniqueness holds globally because every point over q lies in h^{-1}(W), and the contraction is pR_p=m_A. In step 3 I checked the maps v, ψ and φ, both inverse composites (by the uniqueness clauses) and the formula dt/(se); nothing assumes a domain. Step 4 uses the affine-open-stalk node to show that the actual stalk map h^♯ is φ, not just some isomorphism. Step 5 uses continuity and the one-point fibre. I checked the source labels 01J6, 02NA, 01JR, 01I4, 00DK and 00E3 in the Stacks tex. I tested the statement on k[x]/(x²) over k[x] (a non-injective ring map), on k[x,y] at (x,y−1) where the lift is closed, on the generic point and on an empty fibre. lem-sbc-affine-localization-pullback-stalk only gives existence of a lift and an abstract isomorphism, so it is not a duplicate. I accept the recorded tool use of lem-weil-pbc-spec-local-ring-canonical-morphism (unit sk-thm-p1, already a stmt_dep): this unit has no node for the canonical local-spectrum morphism, and the alteration route is unchanged. No SGA source is used. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalSpectrumBaseChangeStalks",
+  "declaration": "AlgebraicGeometry.Scheme.localSpectrumBaseChange_points_stalks",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.localSpectrumBaseChangeDenominators",
+   "AlgebraicGeometry.Scheme.localSpectrumBaseChange_points_stalks",
+   "AlgebraicGeometry.Scheme.localSpectrumBaseChange_affine_fractions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalSpectrumBaseChangeStalks.lean",
+  "statement": "theorem localSpectrumBaseChange_points_stalks {X T Y : Scheme.{u}} (f : T ⟶ X) (p : X) (π : Y ⟶ Spec (X.presheaf.stalk p)) (h : Y ⟶ T) (hpb : IsPullback π h (X.fromSpecStalk p) f) (q : T) (hq : f q = p) : (∃! z : Y, h z = q) ∧ ∀ (z : Y), h z = q → π z = closedPoint (X.presheaf.stalk p) ∧ IsIso (h.stalkMap z) ∧ (IsClosed ({q} : Set T) → IsClosed ({z} : Set Y))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Two statements jointly render the node: unique lift, closed-base projection, actual stalk-map isomorphism and closed lift; then the canonical affine localization chart, extended prime, actual stalk comparison and both fraction formulas. The helper is the image submonoid of base denominators, not a new localization construction. Any realization of the stated fibre product is expressed by IsPullback."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-294c23e59",
+  "group": "NL",
+  "result": "pass",
+  "note": "Node identical to side-live except the new lean field; lean.statement verbatim; 3 declarations recorded, no new nodes or dep modules. Thm 1: IsPullback square in Scheme.{u}, ∃! lift over q with f q = p, π z = closedPoint, IsIso (h.stalkMap z), closed q gives closed lift; nothing stronger than the node. Thm 2: helper = image of R∖𝔭 under appLE (no injectivity); chart ring is IsLocalization at the image with algebraMap = h.app W; chart iso e pinned by its compatibility with the map to T (mono composite); lifted prime = Ideal.map Q; eD/eB pinned by germ equalities and φ = actual stalkMap; forward d/e ↦ (d/1)/(e/1) and inverse (d/s)/(e/t) ↦ dt/(se) correct, Ring.inverse only on units (f(h z)=p keeps S out of Q). Edge cases (empty fibre/W, non-injective α, generic p, non-closed q, universes) fine. Mathlib stalk/Localization/fromSpecStalk match the dep records; upstream exists_lift_stalkEquiv_of_isLocalization and Mathlib stalkMapIsoOfIsPullback are not duplicates. sorry only, source+blueprint docstrings carrying the 5 proof steps, real helper, both report sections present. No compile (no file changed)."
+ }
+}

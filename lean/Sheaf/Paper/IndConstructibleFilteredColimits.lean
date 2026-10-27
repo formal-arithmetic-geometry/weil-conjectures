@@ -16,6 +16,9 @@ import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.CategoryTheory.Limits.Pi
 import Mathlib.CategoryTheory.Limits.Constructions.Filtered
 import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.AlgebraicGeometry.QuasiAffine
+import Mathlib.RingTheory.DedekindDomain.Basic
+import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-!
 # Filtered colimits and sums of ind-constructible module sheaves

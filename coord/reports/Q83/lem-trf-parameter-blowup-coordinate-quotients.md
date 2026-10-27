@@ -1,0 +1,53 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-trace-formula/lem-trf-parameter-blowup-coordinate-quotients.json`: item split, statement unchanged. The quotient presentations, coordinate injectivity after every prefix, dimension calculation, and simultaneous labelled parameter extension are written explicitly.
+- `citations.json`: one verbatim statement quote for every node in every step's `uses`.
+- `report.md`: this report. `searches.jsonl` is the unmodified msearch log. `write_split.py` is a sandbox-only reproducible write script, not a project file.
+
+New nodes: 0. New Mathlib leaves: 0. Existing Mathlib leaves used: finite polynomial regularity, regular-sequence localization, localization of a quotient, dimension drop for a regular sequence, and polynomial/localization definitions.
+
+Attachments: none. Searches by the exact blueprint tag and by blowup/coordinate/parameter concepts in `lean/WeilConjectures/` found no project declaration proving all clauses; existing chart algebra constructions do not prove this item. I wrote no Lean and ran no compiler, Lake, or build command.
+
+WANTED: none. All source documents needed for the proof are present.
+
+What was wrong: the item had no proof. Its statement is correct, including its explicit regularity assumption on A and its insistence on keeping labels distinct. It was unnecessary to add a new coordinate-quotient or parameter-extension lemma: existing parameter-chart regularity and the elementary lifting of generators suffice. I did not replace the simultaneous assertion by separate single-coordinate assertions.
+
+Unfinished: none in this one-level split; its existing cited nodes remain responsible for their own proofs. Dry run and delivery are performed with the prescribed launcher command.
+
+## Sources and searches
+
+Read ILO, *Travaux de Gabber*, Expose VIII, Remark 4.2.2(i), printed p.118, and Lemma 4.2.9 and its chart proof, printed p.121 (PDF pp.124 and 127). The source describes the local chart coordinate calculation; this split supplies the algebra omitted in its brief conclusion. Read the chapter and unit records, and the current `literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md`. The current locality proof follows Varshavsky; this item remains the existing algebraic subproblem under its permissible-coordinate-chart ancestry, not a change to the unit's route.
+
+Read Stacks `algebra.tex`: Tag 00NQ, `lemma-regular-ring-CM`; Tag 00NU, `lemma-regular-mod-x`, including its generator-lifting proof; Tag 00NR, `lemma-regular-quotient-regular`, as a candidate not needed in the final proof; and `more-algebra.tex` Tag 0BIQ, `lemma-blowup-regular-sequence`, behind the already split parameter-chart regularity node. Tags were checked against `tags/tags`. Official Stacks pages for 00NQ and 00NU were also checked; the source citations in the delivered proof use the local literature and stable tags.
+
+Whole DAG and blueprint searches covered blowup, regular parameters, regular sequences, coordinate quotients, cotangent generators and regular-local quotients. The general chart-localization-parameters and permissible-coordinate-chart nodes depend on this item and cannot be used here. The parameter-blowup-algebra-regular node, all its ancestors, and all the actual cited nodes were checked for paths back to this item: none exists. The existing chart-coordinate-nonzerodivisors node treats just one quotient at a time, whereas Step 4 needs every prefix; its argument here is a direct fraction calculation from the existing general chart theorem, not a new node.
+
+Ran and read all six searches in `searches.jsonl`: LeanFinder twice with distinct phrasings, Loogle, LeanSearch, and two Mathlib greps. LeanSearch gave dimension-drop declarations, LeanFinder gave regular-sequence localization or standard smoothness, and the broad grep gave only a Rees algebra comment. Read `Mathlib/RingTheory/ReesAlgebra.lean` and the actual candidate declarations in `RegularLocalRing/Polynomial.lean:108-114`, `Regular/Flat.lean:75-79`, and `KrullDimension/Regular.lean:210-214`. None is the complete item; the useful candidates already have DAG nodes. Existing inherited searches were retained, and the six new records have exactly the tool/query strings of the actual logged commands.
+
+## Review by Q83
+
+I checked delivery-errors B through E against the actual source and every cited statement, rather than treating a source tag or an earlier proof as a substitute for a node statement. There are no new nodes to check for missing hypotheses, notions, sources or hidden proofs, and no new clause disguised as a lemma. The original statement, source, created metadata, blueprint ancestry and dependency notions are retained. Every proof step has an explicit elementary judgement, and proof_deps is exactly the union of uses. Every cited node has been opened; citations.json copies its statement verbatim. No step exceeds 2000 characters or hides a separate standard comparison lemma.
+
+Step 1 uses precisely the parameter-prefix quotient clause of `lem-weil-pbc-regular-local-generators-regular-sequence`. Reordering is legitimate because the reordered full list generates the same maximal ideal and has the same length. T=U union K omits j, so the residual base has dimension at least one, an important hypothesis for the later chart theorem. The surviving parameters generate the residual maximal ideal with the right number, as the regular-system definition requires. The forward and backward quotient maps are specified, including the relations for the discarded ratio variables. The polynomial definition's universal property supplies equality of these maps, not an uncited quotient theorem.
+
+Step 2 applies the actual statement of `lem-trf-parameter-blowup-algebra-regular`: regularity, t_j-injectivity and the exceptional localization isomorphism are all expressly in that statement. The centre is J minus U and still contains j; K is disjoint from it. Its proof has no dependency on this item, so reuse is acyclic. This is not an appeal to our own coordinate assertion in a smaller dimension.
+
+Step 3 uses the same parameter-prefix quotient theorem on J union K, allowing a zero-dimensional regular local base. `lem-weil-pbc-regular-local-localization` explicitly says that a regular local ring is a regular ring; only after this is `lem-trf-polynomial-ring-regular-base` applied. The polynomial ring can have no variables. Both directions of the exceptional quotient identification are explicit and kill every required relation. Thus it proves regularity of the precise quotient, not of a different fibre ring.
+
+Step 4 uses the exceptional injectivity and complement isomorphism already obtained in Step 2, the exact fraction equality in `def-weil-ring-localization-away`, and the actual regular-sequence conclusion of the parameter theorem. I checked the cancellation twice: a power of t_j killing an element of B implies that element is zero, and t_i times x/t_j^n=0 implies some t_j^m t_i x=0, whence t_j^m x=0. This establishes injectivity after all previous coordinate quotients, which the single-coordinate nonzerodivisor node alone would not provide. No domain assumption on a nonlocal chart is silently introduced.
+
+Step 5 states its prefix induction explicitly: every prefix is the Step-1 chart with exactly those indices removed, Step 4 handles each next nonexceptional equation, and the exceptional equation is appended last and handled by Step 2. The regular-sequence definition provides the weak injectivity condition, and the existing localization leaf upgrades it at P because every entry belongs to P; the resulting quotient is nonzero there. The assumed regularity of A supplies the Noetherian regular local ambient ring. `lem-weil-pbc-localization-at-prime-of-quotient` gives exactly S/QS, and the global regularity proved in Steps 2-3 gives its local regularity. The Mathlib dimension leaf requires precisely a Noetherian local ambient ring and a regular sequence, now verified. Hence the count is c, without a catenarity or excellence assumption.
+
+Step 6 is the short generator-lifting argument in the proof of Stacks 00NU. It chooses parameters in the already proved regular quotient, lifts them into the maximal ideal, and writes the coefficient subtraction showing they and the original labelled equations generate the maximal ideal. Step 5 gives exactly the required total length. Thus the definition of a regular parameter system applies to this displayed list with its first c positions fixed. It proves one simultaneous choice for all vanishing coordinates. No claim about the kernel of a cotangent map, minimal generators of an arbitrary ideal, or regular-sequence permutation is left implicit.
+
+Step 7 uses only the localization definition: a chosen equation outside P becomes invertible on D(f), so its intersection is empty near P. If all chosen equations lie in P, the same labelled list of Step 6 and dimension equality of Step 5 apply.
+
+Small-case checks: for d=1 and J={j}, A=R and the exceptional quotient is the residue field; for singleton J in any dimension there are no ratio variables and the argument is the usual parameter-quotient calculation. For U=K=empty and epsilon=0 the quotient is A and c=0. For U=L and K the full complement of J, the nonexceptional quotient base has dimension one, so the chart theorem still applies. Adding epsilon=1 then gives the residue field and no variables. For J the full parameter set and epsilon=1 with U empty, the exceptional quotient is the polynomial ring over the residue field; nonclosed primes of that fibre are included by regularity at every prime, not only at origins. At a prime avoiding t_j, ratios may be units or vanish; Step 4 handles the vanishing equations without treating all original parameters as lying in that prime. Empty selections, no vanishing coordinates, dimension-zero quotient, and selected units are all covered. Labels remain distinct throughout and the number c is always the list length.
+
+Generic off-unit tools declared in split_report.tool_uses: Stacks 00NQ parameter quotients/regular sequences and Stacks 0AFS localizations of a regular local ring. Both are commutative-algebra tools used within the prescribed chart computation; neither replaces a geometric step of the unit. All other off-unit statements used are existing Mathlib leaves or definitions.
+
+## Not duplicates
+
+No new nodes were created. Existing general parameter-chart regularity, polynomial regularity, localization, regular-sequence dimension and parameter definitions are cited rather than duplicated.

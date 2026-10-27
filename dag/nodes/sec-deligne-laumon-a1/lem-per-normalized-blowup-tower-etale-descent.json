@@ -12,11 +12,232 @@
   "pqf-def-locnoeth",
   "def-nagata-global-blowup",
   "def-sc-normalization",
-  "def-trf-projective-bundle-morphism"
+  "def-trf-projective-bundle-morphism",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-etale-morphism",
+  "pqf-def-coherent",
+  "def-weil-flat-morphism",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-normal-ring",
+  "def-per-normalized-tower-descent-data",
+  "def-trf-normalized-blowup",
+  "def-trf-monoscheme-toric-realization",
+  "def-pd-descent-datum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First establish the geometry for a tower already on a normal Noetherian quasi-excellent base $S$, without assuming it separated. Its finitely many irreducible components are open normal integral schemes, by the finite-components and normal-components lemmas. On each component the center ideal is nonzero: its zero set contains no generic point. The integral-blowup lemma makes the ordinary blowup integral on that component. Blowup restricts to these open components by flat base change. For projectivity on all of $S$, the Rees-presentation lemma gives the surjection $\\operatorname{Sym}(I)\\twoheadrightarrow\\bigoplus I^n$ and identifies the blowup with the latter's relative Proj. Relative-Proj functoriality gives a closed immersion into $\\mathbf P_S(I)$, exactly projectivity in the stipulated convention. Thus the ordinary blowup $B$ is reduced and has one integral component over each component of $S$. The empty base gives the empty blowup.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sfb-normal-locally-finite-components",
+    "lem-sfb-integral-blowup-projective-geometry",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-sfb-blowup-rees-symmetric-presentation",
+    "prop-nagata-relative-proj-functoriality",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.1--2.2.5, pp.90--91; ordinary geometry: Stacks Tags 0804, 02ND, 02NS (divisors.tex, lemma-blowing-up-affine, lemma-blow-up-integral-scheme, lemma-blowing-up-projective)"
+   }
+  },
+  {
+   "text": "Projectivity makes $B\\to S$ proper and of finite type. Since $S$ is quasi-compact, its source is quasi-compact: take a finite affine cover of $S$ and the finite affine inverse-image covers in the definition of finite type. Quasi-excellent finite-type stability therefore makes $B$ Noetherian and quasi-excellent. On an affine $\\operatorname{Spec}A\\subset B$, quasi-excellence makes $A$ Nagata. For every minimal prime $\\mathfrak p_j$ of $A$, the definition of Nagata says $A/\\mathfrak p_j$ is Japanese. Apply its finite-normalization assertion to the degree-one field extension $K_j/K_j$, where $K_j=\\operatorname{Frac}(A/\\mathfrak p_j)$. The integral closure $A'_j$ is finite over $A/\\mathfrak p_j$, hence over $A$. The affine normalization formula identifies $\\nu^{-1}(\\operatorname{Spec}A)$ with $\\operatorname{Spec}(\\prod_j A'_j)$. This finite product is a finite $A$-module (combine the finitely many generating sets), so $\\nu:B^\\nu\\to B$ is finite by definition. This proves finiteness using quasi-excellence, without adding universal catenarity.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-per-componentwise-normalization-affine-charts",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.1--2.2.3, p.90; Stacks Tags 07QU (lemma-finite-type-over-excellent), 07QV (lemma-quasi-excellent-nagata), 035S (lemma-nagata-normalization), 035P (lemma-description-normalization)"
+   }
+  },
+  {
+   "text": "The finite map $B^\\nu\\to B$ is projective by the finite-projective-bundle lemma, hence proper and of finite type. Applying quasi-excellent finite-type stability again shows that $B^\\nu$ is Noetherian and quasi-excellent; normality is the normalization generic-properties lemma. A locally Noetherian scheme is quasi-separated, so both $B$ and $S$ are quasi-compact and quasi-separated. The projective-bundle composition lemma applies to $B^\\nu\\to B\\to S$. Induct on the number of stages, starting with $S$ and its identity: every stage is normal Noetherian quasi-excellent, every normalization is finite, and every partial composite is projective. In the induction step compose the projective next arrow with the preceding projective composite, whose target $S$ is quasi-compact and quasi-separated. The identity is the projective bundle $\\mathbf P_S(\\mathcal O_S)=S$. The finite-type clause follows from projectivity, since projective morphisms are proper and proper morphisms are of finite type, including for the length-zero tower.",
+   "uses": [
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-sfb-projective-bundle-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.1--2.2.5, pp.90--91; Stacks Tags 0B3I (lemma-finite-projective), 0C4P (lemma-composition-projective), 07QU"
+   }
+  },
+  {
+   "text": "Each ordinary blowup is the identity on the complement of its center. On each integral component this nonempty open is dense, since it contains its generic point; the blowup source is integral by step 1. Normalization induces a bijection on component generic points with identical residue fields. On the inverse image of the center complement it is an isomorphism: normalization commutes with restriction to an open, and a normal scheme with locally finitely many components has trivial normalization. Thus each normalized arrow is birational on each component. For a finite tower on $X$, let $Z$ be the union of the images in $X$ of all the centers. Each image is closed, since the partial composite is projective and hence proper. It contains no generic point of $X$: inductively that generic point has a single generic preimage, outside the next center. Thus $Z$ is nowhere dense and every stage is the identity over the common dense open $X\\setminus Z$. When $X$ is integral, step 1 and the generic-point bijection show every stage integral; the function-field identifications are the identity through this common open. These arguments also cover empty centers and the length-zero tower.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-sfb-integral-blowup-projective-geometry",
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-sfb-normalization-normal-locally-finite",
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.1--2.1.3 and 2.2.1--2.2.5, pp.86--87,90; Stacks Tags 035Q, 07TD, 0H7D, 01OF (blowup complement)"
+   }
+  },
+  {
+   "text": "Record rigidity needed for comparing the supplied datum with the reconstructed one. A normalized blowup over a normal Noetherian quasi-excellent $S$ has no nonidentity $S$-automorphism. Work over an affine open $V\\subset S$. Its normalized blowup is separated as an absolute scheme, since it is projective over the affine scheme $V$. It is normal, with finitely many integral open components; the inverse image of the center complement is dense in every component by step 4. It is schematically dense: on an affine open in an integral component, restriction of functions to any dense open is injective, since a function vanishing there has a zero locus containing a dense subset and therefore lies in every prime, hence is zero in the domain. The agree-on-dense-open lemma now makes an automorphism the identity, since it is the identity over the center complement. Glue over the affine opens of $S$. Induction on stages gives rigidity for the whole tower with its base fixed. This local argument also works when $S=U$ is not separated.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-normal-locally-finite-components",
+    "lem-chow-agree-on-dense-open",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.3--2.2.5, p.90 (no automorphisms); Stacks Tag 01RH (lemma-equal-on-dense-open)"
+   }
+  },
+  {
+   "text": "For an etale $v:T\\to S$, the ordinary blowup comparison is an isomorphism because $v$ is flat. The induced map between ordinary blowups is the base change of $v$, hence etale. Both blowups are locally Noetherian: this is affine-local finite-type stability over their locally Noetherian bases. The componentwise-normalization smooth-pullback lemma, in its explicit etale case, identifies their normalizations. Combining these two comparisons identifies the normalized blowup of the extended ideal with the scheme pullback of the original normalized blowup. Repeating at each ordered stage proves etale compatibility for towers. The comparisons respect identity maps and composition: the blowup comparison is defined by coefficient pullback on the Rees algebras, and the normalization comparison is the unique isomorphism over the pulled-back ordinary blowup. No assertion of normalization commuting with arbitrary flat base change is used. In particular $U$ and the overlap stages are normal by smooth normal ascent, since etale maps are smooth; quasi-excellence and local Noetherianity ascend by finite-type stability. Their quasi-compact covers are Noetherian. These checks allow the same rigidity and construction arguments over the overlap bases.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-sfb-componentwise-normalization-smooth-pullback",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sfb-smooth-normal-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 2.2.9 and 2.2.11, p.91; Stacks Tags 0805 (flat blowup base change), 07TD (lemma-normalization-and-smooth)"
+   }
+  },
+  {
+   "text": "For later use, ideal equality is detected by ANY jointly surjective flat family $T_a\\to S$. At $s\\in S$ choose $t\\in T_a$ above it. The flat local homomorphism $A=\\mathcal O_{S,s}\\to B=\\mathcal O_{T_a,t}$ is faithfully flat. For ideals $I,J\\subset A$ with $IB=JB$, every $x\\in I$ maps to zero in $B/JB$. Apply universal injectivity to $A/J$: its map into $(A/J)\\otimes_A B=B/JB$ is injective, so $x\\in J$. Interchange $I,J$. Flat pullback is exact, hence its ideal submodule is precisely the extended ideal in $B$; this justifies using these stalk equalities. Equality at all stalks is equality of subsheaves, since membership in a subsheaf is local. The same faithful-flat argument shows a map of modules with injective pullback is injective: apply it to each element of its kernel. No quasi-compactness of the family is needed for these detection assertions.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Corollary 5.5.3, pp.128--129 (centers detected faithfully flat); Stacks Tags 05CK (lemma-faithfully-flat-universally-injective), 00HR (flat local faithful flatness)"
+   }
+  },
+  {
+   "text": "Descend centers and construct the tower by induction. Write $U_0=U$, $X_0=X$, and keep the original index set $0,\\ldots,n$. Suppose $X_i$ and the comparison $U_i\\simeq U\\times_X X_i$ have been constructed and induce the given datum through stage $i$; this is true for $i=0$. The map $u_i:U_i\\to X_i$ is a singleton fpqc cover, being the base change of the quasi-compact surjective flat map $u$. Apply quasi-coherent fpqc descent to the next center $J_i$ and its inclusion $J_i\\hookrightarrow\\mathcal O_{U_i}$; the given identification of centers says exactly that this inclusion respects the datum. Fully faithful descent gives a map $M_i\\to\\mathcal O_{X_i}$, and step 7 makes it injective. Its image $I_i$ is therefore a quasi-coherent ideal with pullback $J_i$. On an affine open of the Noetherian $X_i$, it is a submodule of the finite module $A$, hence finitely generated by the Noetherian-submodule lemma. The coherent/finite-type criterion makes $I_i$ coherent. Its zero set is nowhere dense: for each generic point $\\eta$ of $X_i$, $\\mathcal O_{X_i,\\eta}$ is a field. A point $t$ of the surjective cover over $\\eta$ is generic: every generalization of $t$ maps to $\\eta$, while the etale fibre over $\\eta$ is zero-dimensional and has no proper generalizations. Thus $J_i$ is the unit ideal at $t$. Thus $I_i$ cannot be zero at $\\eta$ and is the unit ideal there.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-pc-fpqc-descent",
+    "lem-trf-noetherian-submodule-finitely-presented",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.11, p.91 and 5.5.5, p.129; Stacks Tag 023T (proposition-fpqc-descent-quasi-coherent), 01XZ (coherent finite-type criterion)"
+   }
+  },
+  {
+   "text": "Set $X_{i+1}=\\operatorname{Bl}_{I_i}(X_i)^\\nu$. Steps 1--3 make it a normal Noetherian quasi-excellent next stage, with all the required geometry. Step 6 identifies $U\\times_X X_{i+1}$ with the original normalized blowup of $J_i$, namely $U_{i+1}$. On the overlap the supplied descent isomorphism and the canonical comparison are isomorphisms over the same stage-$i$ scheme, identifying the same center. Their difference is an automorphism of its normalized blowup, so it is the identity by step 5. Consequently the comparison realizes the prescribed datum, not just its underlying object. This completes the induction. The full-faithfulness clause of module descent makes the descended ideal and inclusion unique at each stage; the functorial blowup and normalization constructions then give the comparison with any other descended tower, unique by step 5. Hence the resulting tower is unique up to unique compatible isomorphism.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "def-nagata-global-blowup",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.3--2.2.5 and 2.2.11, pp.90--91; VIII 5.5.5, p.129"
+   }
+  },
+  {
+   "text": "For synchronized towers already on $X$, apply step 7 at the first centers to get their equality. Their normalized blowups are then the same construction, up to the unique comparison of step 5. Proceed to the next identified stage and repeat; the prescribed common stage set is essential. This proves the stated flat-family test. Here only equality of the pulled-back ideal subsheaves on each stage is tested; it does not require defining normalized blowup pullback for an arbitrary flat map. For an action on the tower over $U$ compatible with the descent datum (in particular the finite-group actions in the source), descend each of its automorphisms stage by stage along $u_i$ using fpqc descent of scheme morphisms. Descend its inverse too. Both composites, the action multiplication law, its identity law, compatibility with arrows, and preservation of the center inclusions hold after the covering; uniqueness of descended morphisms and the ideal test make them hold downstairs. Thus this is an action on the descended tower. For a scheme-valued group action, apply the same morphism descent to the action map along the base-changed cover on the parameter product, and to its two-parameter product for associativity. The finiteness, projectivity and integrality assertions without a cover are precisely steps 1--4.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.11, p.91; Corollary 5.5.3 and 5.5.5, pp.128--129; ordinary equivariance discussion VIII 2.1.11, pp.87--88"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-global-blowup",
+  "def-pc-integral-scheme",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "lem-chow-agree-on-dense-open",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pc-fpqc-descent",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-sfb-blowup-rees-symmetric-presentation",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sfb-componentwise-normalization-smooth-pullback",
+  "lem-sfb-integral-blowup-projective-geometry",
+  "lem-sfb-normal-locally-finite-components",
+  "lem-sfb-normalization-normal-locally-finite",
+  "lem-sfb-projective-bundle-composition",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-lem-coherent-ft-locnoeth",
+  "prop-nagata-relative-proj-functoriality",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 2.2.1--2.2.11, pp.90--91; 5.5.3--5.5.5, pp.128--129; Stacks 02NS, 035S, 07QU, 07TD, 023T, 0B3I, 0C4P for the general inputs"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +266,45 @@
    "results": "{\"t\": \"2026-10-18T21:43:22Z\", \"tool\": \"grep\", \"query\": \"normalized.*blowup|blowup|normalization.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalized blowup towers descend along surjective etale covers by descent of coherent ideal centers and are projective over quasi excellent noetherian schemes",
+   "results": "{\"t\": \"2026-10-24T00:25:18Z\", \"tool\": \"leanfinder\", \"query\": \"Finite normalized blowup towers descend along surjective etale covers by descent of coherent ideal centers and are projective over quasi excellent noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\"], \"digest\": \"1204e28aa752ba41\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|BlowUp|normalized.*tower|QuasiExcellent",
+   "results": "{\"t\": \"2026-10-24T00:29:03Z\", \"tool\": \"grep\", \"query\": \"blowup|BlowUp|normalized.*tower|QuasiExcellent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent coherent ideal blowup normalization projective tower",
+   "results": "{\"t\": \"2026-10-24T00:29:04Z\", \"tool\": \"leansearch\", \"query\": \"Etale descent coherent ideal blowup normalization projective tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.IsEtaleAt.comp\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\"], \"digest\": \"a1fe18002fd03e9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-24T00:29:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute componentwise normalization of a locally noetherian scheme commutes with smooth base change",
+   "results": "{\"t\": \"2026-10-24T00:33:44Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute componentwise normalization of a locally noetherian scheme commutes with smooth base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\"], \"digest\": \"dc42719074485abe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-absolute-equivariant-modification",
@@ -76,5 +332,168 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-normalized-blowup-tower-etale-descent",
+  "worker": "Q43",
+  "summary": "Statement preserved; ten source-following steps reconstruct the descent by its ordered ideal centers and prove the geometry independently. Reuses existing general DAG inputs; zero new nodes and zero Mathlib leaves. Explicitly handles nonseparated U, arbitrary flat families only as ideal-equality tests, synchronized identity stages, and the empty and length-zero cases.",
+  "blueprint": {
+   "ancestor": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII 2.2.1--2.2.4 and 3.4.8, printed pp.89--90,111; 5.5.3--5.5.5, printed pp.128--129 (descent of the ordered centers); Stacks Tags 035S (morphisms.tex, lemma-nagata-normalization), 02NS (divisors.tex, lemma-blowing-up-projective), 0C4P (morphisms.tex, lemma-composition-projective).",
+   "steps": "Expands the already imported absolute Gabber modification input used under ancestor Step 3: ILO VIII 2.2.11 and 5.5.3--5.5.5, with the geometric finiteness/projectivity assertions of the parent split.",
+   "same_as_searches": [
+    "normalized blowup",
+    "blowup tower",
+    "normalization smooth",
+    "07TD",
+    "quasi-excellent",
+    "descent"
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-chow-agree-on-dense-open",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-sfb-blowup-rees-symmetric-presentation",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-sfb-componentwise-normalization-generic-properties",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-sfb-componentwise-normalization-smooth-pullback",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-sfb-normal-locally-finite-components",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-sfb-normalization-normal-locally-finite",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "General algebraic-geometry or module-descent input used exactly as its statement in the indicated proof steps; it supplies the normalized-tower tool within the established Gabber modification route, not a replacement perverse-sheaf route."
+   },
+   {
+    "node": "lem-sfb-smooth-normal-ascent",
+    "why": "General normality-ascent tool verifying the hypotheses for the center-descent induction and its overlap bases; does not change the Gabber modification route."
+   },
+   {
+    "node": "lem-sfb-integral-blowup-projective-geometry",
+    "why": "General blowup/projective-bundle geometry (Stacks 02ND/02NS, 0C4P) used exactly as stated; byte-identical live sfb copy of the dropped lem-per node, substituted by the reviewer so the dropped 2026-10-19 id is not re-reached."
+   },
+   {
+    "node": "lem-sfb-projective-bundle-composition",
+    "why": "General blowup/projective-bundle geometry (Stacks 02ND/02NS, 0C4P) used exactly as stated; byte-identical live sfb copy of the dropped lem-per node, substituted by the reviewer so the dropped 2026-10-19 id is not re-reached."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-agree-on-dense-open",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-pc-fpqc-descent",
+  "lem-sfb-blowup-rees-symmetric-presentation",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sfb-componentwise-normalization-smooth-pullback",
+  "lem-sfb-normal-locally-finite-components",
+  "lem-sfb-normalization-normal-locally-finite",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "pqf-lem-coherent-ft-locnoeth",
+  "prop-nagata-relative-proj-functoriality",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-sfb-integral-blowup-projective-geometry",
+  "lem-sfb-projective-bundle-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-c94a43c50",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-c94a43c50 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps and every cited statement in full against ILO VIII 2.2.1-2.2.12 (printed pp.90-91; 2.2.11 is fpqc descent of towers 'because the centers descend', normalized towers along qc surjective regular maps) and Stacks 02ND/02NS, 035P/035S, 07QU/07QV, 07TD, 023T/023Q, 0B3I, 0C4P. Statement is unchanged against the live unsplit node; the added stmt_deps are definitions only. There are 0 new nodes, proof_deps = union of the step uses, no SGA. All steps are correct. Steps 1-3: components are integral because the center is nonzero on each; global projectivity comes from Sym I onto the Rees algebra plus the Proj closed immersion; finite normalization comes from quasi-excellent => Nagata => N-2 with L=K on reduced affine charts; induction with the qcqs-target composition. Step 4: the generic fibre over the dense open is a single point, so the image Z is nowhere dense. Step 5: rigidity uses separatedness over affine V and schematic density on integral components, so it also covers a non-separated U. Step 6: the 07TD etale case plus flat blowup comparison. Step 7: stalkwise faithfully-flat ideal test. Step 8: 023T descends the center and its inclusion; the etale 0-dimensional fibre gives the nowhere-dense condition. Steps 9-10: uniqueness and action descent. Edge cases checked: unit and Cartier centers, empty base, length 0. Route: the item itself is on the 2026-10-19 drop list (line 1753) but BFS shows it is still reached from nt-target-weil-conjectures through the live lem-sfb-field-log-smooth-gabber-modification -> lem-per-gabber-absolute-equivariant-modification, so the maths was judged; maintainer note: drop-list item re-reached. Dropped cites: componentwise-normalization-affine-charts and quasi-excellent-finite-type-stability are already reached without the item (0 added), accepted. integral-blowup-projective-geometry and projective-bundle-composition are not otherwise reached; FIX re-cites the byte-identical lem-sfb-integral-blowup-projective-geometry (steps 1, 4) and lem-sfb-projective-bundle-composition (step 3), both already reached, on base, clean closures, and adds tool_uses entries for them. projective-bundle-relative-ample is used only for finite type, which proper already gives; FIX removes it and makes the step-3 sentence explicit. Batch 5: the trf finite-projective-bundle (0B3I), noetherian-submodule (00FP) and projective-bundle-proper (01WC) cites, and the trf defs and G-ring nodes in the closures, are generic, not trace-formula or Poincaré steps; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedBlowupTowerEtaleDescent",
+  "declaration": "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedBlowupTower_etaleDescent",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedBlowupTower_geometry",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedBlowupTower_etalePullback",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedBlowupTower_etaleDescent",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedBlowupTower_flatCenterDetection",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedBlowupTower_flatTowerDetection",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.normalizedBlowupTower_actionDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedBlowupTowerEtaleDescent.lean",
+  "statement": "theorem normalizedBlowupTower_etaleDescent {n : ℕ} (X : Scheme.{u}) [IsNoetherian X] [X.IsSeparated] (hNormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (hQE : ∀ V : X.affineOpens, IsQuasiExcellent Γ(X, V)) (T : NormalizedTower.{u} n) [IsNoetherian (T.level 0)] (uMap : T.level 0 ⟶ X) [Etale uMap] [QuasiCompact uMap] [Surjective uMap] (hCenters : T.HasNowhereDenseCenters) (D : DescentData T uMap) : ∃ (S : NormalizedTower.{u} n) (e : S.level 0 ≅ X) (c : CenterMap T S), S.HasNowhereDenseCenters ∧ D.Realizes S e c ∧ ∀ (S' : NormalizedTower.{u} n) (e' : S'.level 0 ≅ X) (c' : CenterMap T S'), S'.HasNowhereDenseCenters → D.Realizes S' e' c' → ∃! E : CenterIso S S', (E.iso 0).hom ≫ e'.hom = e.hom ∧ ∀ i : Fin (n + 1), c.map i ≫ (E.iso i).hom = c'.map i",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c0ad14ae",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Read item node (10 steps, ILO VIII 2.2.1-2.2.11/5.5.3-5.5.5), both delivered modules, new node def-per-normalized-tower-descent-data, and deps (NormalizedTower/IsNormalizedBlowup, normalizedBlowup=reducedNormalization of blowup, Mathlib IdealSheafData.comap=extended ideal, Over.DescentDatum transport+cocycle, IsQuasiExcellent, IsProjectiveBundle). Hypotheses/clauses match: stalkwise normality (allows empty/disconnected), U not separated, DescentData per-level datum + arrows + center identification, Realizes pins the given datum (checked converse via cartesian squares), ∃! CenterIso uniqueness, flat ideal/tower detection without qc, geometry (finite normalization, projective+finite type, iso over dense centerImagesᶜ, integral generic stalks), action descent. Edge cases n=0, empty, unit centers OK. No name clashes; 4 added stmt_deps all used; both lean.statement verbatim. F1 (H3): normalizedBlowupTower_etalePullback required [(T.level 0).IsSeparated], but the node applies etale pullback to the tower on non-separated U and its overlaps (steps 5,6,9); FIX fixes/NormalizedBlowupTowerEtaleDescent.lean drops that binder (+docstring). Compiled once via nt_compile --json with the new-node module: both clean (7.9 s, 13.9 s), exit 0."
+ }
 }

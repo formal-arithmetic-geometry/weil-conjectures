@@ -31,50 +31,32 @@
  ],
  "proof": [
   {
-   "text": "Write $C_W=\\nu_W^*$ and $e,p$ for the two sites. Apply [lem-sf-locally-closed-closure-adjoint-realization]. It gives the Noetherian hypotheses, $N=v_e^*M\\in D^b_c$, $H=J_eM\\in D^+$, the closure compactification and normalized $q_\\tau:F_\\tau\\cong E_\\tau$, with $J_e\\cong s^\\times$. All comparison inputs below are bounded below. Use [lem-sf-derived-immersion-comparison-normalization] for the derived open units/counits and the restriction normalization of the named closed mates.",
+   "text": "Construct the Noetherian hypotheses and the quasi-compact immersion from finite type over the field. Choose the ordinary closed adjoints, with the canonical open complement on the pro-etale side. Exact open inverse image followed by the right adjoint to exact closed direct image preserves a lower bound of every bounded constructible input.",
    "uses": [
-    "lem-sf-locally-closed-closure-adjoint-realization",
-    "lem-sf-derived-immersion-comparison-normalization"
+    "lem-pur-exact-derived-adjunction-bounds",
+    "lem-exc-closed-ambient",
+    "lem-exc-proetale-closed-support"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-    "place": "Proof, second paragraph: The locally closed $Rs^!$ commutes with $\\nu^*$ by the open and closed comparisons above."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $b:C_Vv_e^*\\cong v_p^*C_T$, $o:C_Tv_{e,!}\\cong v_{p,!}C_V$ and $\\delta:C_Vc_{e,*}\\cong c_{p,*}C_S$. Choose a bounded-below lift of $H$; transport the named Plus mate along its inclusion isomorphisms. Derived normalization identifies this with the termwise closed mate, independently of the lift. The closed theorem then supplies $\\alpha_N:C_SRc_e^!N\\cong Rc_p^!C_VN$ and $k^p c_{p,*}(\\alpha_N)\\delta_H=C_V(k^e_N)$. Define $\\gamma_M=Rc_p^!(b_M)\\alpha_N$ and $\\Delta_L=v_{p,!}(\\delta_L)o_{c_{e,*}L}$. They are natural isomorphisms with exactly the specified components. With pasted counits $\\epsilon^\\tau=e^\\tau v_{\\tau,!}(k^\\tau)$, naturality and the closed equation give\n$$\\epsilon^pF_p(\\gamma_M)\\Delta_H=e^p v_{p,!}(b_M)v_{p,!}(C_Vk^e_N)o_{c_{e,*}H}=e^p v_{p,!}(b_M)o_N C_T(v_{e,!}k^e_N)=C_T(\\epsilon^e_M).$$\nThe middle equality is naturality of $o$; the last is the normalized open counit equation. Thus $\\gamma_M$ is the unique ambient transpose of $C_T(\\epsilon^e_M)\\Delta_H^{-1}$.",
+   "text": "Construct the natural transformation gamma by transposing the inverse specified Delta followed by the comparison image of the etale pasted counit. Adjunction naturality proves its naturality. The adjunction inverse law proves its specified counit identity. Its components are isomorphisms by lem-sf-locally-closed-counit-comparison.",
    "uses": [
-    "lem-weil-finite-duality-closed-comparison",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-derived-immersion-comparison-normalization",
-    "def-weil-pbc-composite-adjunction"
+    "lem-sf-locally-closed-counit-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-    "place": "Proof, second paragraph: The locally closed $Rs^!$ commutes with $\\nu^*$ by the open and closed comparisons above."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sf-locally-closed-closure-comparison-square] to the normalized $q_\\tau$. It gives $q_p\\Delta=B C_T(q_e)$ for the named closure comparison $B$, and the commuting square for any second factorization. Now [lem-sf-locally-closed-relative-transpose-normalization] applies to the counit identity just proved. It identifies both Hom bijections by $\\theta_M=\\rho_M\\gamma_M^{-1}$, where $\\rho_M=C_Ss^\\times(\\eta_M)$, independently of every bounded-below etale-origin witness. Hence $\\theta_M\\gamma_M$ is the stated comparison unit and the defined units and counits agree.",
+   "text": "Define rho_M=C_S(r_M X(eta_M)), with the actual closure right-adjoint comparison r. Its naturality follows from r and eta. The comparison unit is invertible on bounded-below M, so rho is invertible componentwise. Define transport=gamma.symm ≪≫ asIso rho. Cancellation proves unit_normalization; lem-sf-locally-closed-relative-hom-identity supplies precisely relative_hom. This constructs the existing comparison structure without changing its fields.",
    "uses": [
-    "lem-sf-locally-closed-closure-comparison-square",
-    "lem-sf-locally-closed-relative-transpose-normalization"
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-locally-closed-relative-hom-identity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-    "place": "Proof, second paragraph: The locally closed $Rs^!$ commutes with $\\nu^*$ by the open and closed comparisons above."
-   }
+   "elementary": false
   },
   {
-   "text": "For a second factorization, conjugate the normalized left-adjoint maps to right-adjoint maps. Conjugation respects identities and composition [def-weil-pbc-adjunction-conjugate]; the preceding commuting square and uniqueness of the counit transpose force the $\\gamma$ square. The natural formula $\\theta\\gamma=\\rho$ forces its transported square. These are the canonical factorization identifications; their units and counits are the pasted ones [lem-cat-right-adjoint-composition, def-weil-pbc-composite-adjunction].",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-cat-right-adjoint-composition",
-    "def-weil-pbc-composite-adjunction"
-   ],
+   "text": "For the factorization theorem, equality of c ≫ v and c′ ≫ v′ identifies the closure exceptional functors X and X′, including their proof-valued instance arguments. Write r:J_e ≅ X and r′:J′_e ≅ X for the specified counit-compatible identifications, and θ,θ′ for the two transport maps. Set e_e=r ≪≫ r′.symm and e_p=θ ≪≫ θ′.symm. Cancellation proves both normalization equalities. Postcompose the gamma square with θ′; the two unit_normalization equations reduce it to C_S(r r′⁻¹) C_S(r′ X(η)) = C_S(r X(η)), which follows by functoriality and inverse cancellation. Finally either normalization uniquely determines its component by cancellation, proving existence and uniqueness of the pair. A private lemma proves this calculation in arbitrary categories before specializing it to the scheme functors; no extra comparison or adjunction is assumed.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
@@ -83,20 +65,17 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-locally-closed-closure-adjoint-realization",
-  "lem-sf-derived-immersion-comparison-normalization",
-  "lem-weil-finite-duality-closed-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "def-weil-pbc-composite-adjunction",
-  "lem-sf-locally-closed-closure-comparison-square",
-  "lem-sf-locally-closed-relative-transpose-normalization",
-  "def-weil-pbc-adjunction-conjugate",
-  "lem-cat-right-adjoint-composition"
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-exc-closed-ambient",
+  "lem-exc-proetale-closed-support",
+  "lem-sf-locally-closed-counit-comparison",
+  "thm-weil-pbc-site-comparison",
+  "lem-sf-locally-closed-relative-hom-identity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
-  "place": "Second proof paragraph, locally closed comparison; reassembly of the four extracted argument interfaces."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second paragraph, locally closed comparison sentence. Z9: canonical counit mate, exact-adjoint bounds and explicit comparison-unit transport; factorization proof unchanged."
  },
  "mathlib_match": null,
  "status": "split",
@@ -275,20 +254,6 @@
   "module": "Sheaf.AlgebraicGeometry.FiniteDualityLocallyClosedComparison",
   "declaration": "AlgebraicGeometry.ProEtale.finiteDuality_locallyClosed_comparison",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints",
-   "AlgebraicGeometry.ProEtale.locallyClosedEtaleExtension",
-   "AlgebraicGeometry.ProEtale.locallyClosedProEtaleExtension",
-   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.etaleRight",
-   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.proetaleRight",
-   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.etalePasted",
-   "AlgebraicGeometry.ProEtale.LocallyClosedComparisonAdjoints.proetalePasted",
-   "AlgebraicGeometry.ProEtale.locallyClosedExtensionComparison",
-   "AlgebraicGeometry.ProEtale.locallyClosedImageCompactification",
-   "AlgebraicGeometry.ProEtale.locallyClosedEtaleSheafIso",
-   "AlgebraicGeometry.ProEtale.locallyClosedEtaleSupportIso",
-   "AlgebraicGeometry.ProEtale.locallyClosedImage_isLeftAdjoint",
-   "AlgebraicGeometry.ProEtale.locallyClosedEtaleExceptional",
-   "AlgebraicGeometry.ProEtale.locallyClosedEtaleRightIso",
    "AlgebraicGeometry.ProEtale.LocallyClosedExceptionalComparison",
    "AlgebraicGeometry.ProEtale.finiteDuality_locallyClosed_comparison",
    "AlgebraicGeometry.ProEtale.locallyClosed_comparison_factorization"
@@ -308,5 +273,26 @@
   "result": "pass",
   "note": "Every clause matches the node; the statement field is verbatim and all 17 declarations exist. The pasted adjunctions are literal, the counit equation pins gamma uniquely, Delta is built from the named comparison maps, and unit_normalization pins the transport to nu^* s^x(eta). relative_hom covers every witness and the uniquely determined class adjunction. The factorization theorem was checked true as stated. Both section 1(B) repairs are justified: the old thm-sf-ambient-adjoint-class interface uses an arbitrary .some isomorphism (confirmed in the source), and the old def-weil-exceptional-inverse-image takes A : Type u. Edge cases checked: empty S, identity, pure open, pure closed, first level, universes. Only the three theorem bodies are sorry; no hollow definitions; docstrings carry the source and all 12 proof steps; no extra assumptions or pro-etale substitute. nt_compile --json on all three modules: exit 0, no errors or warnings. Minor notes, no change needed: the narrower declarations list in the exceptional-inverse-image record, a helper instance that applies an existing theorem, and the copyright author label."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0128",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T102119-L-3777722",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 3 new modules/nodes vs live base c83f015 (moved coordinates byte-identical); importers StratumHomComparisonMate and FiniteDualitySiteComparison compiled against the delivery; #print axioms clean except sorryAx via locallyClosedCounitMate_isIso"
+ }
 }

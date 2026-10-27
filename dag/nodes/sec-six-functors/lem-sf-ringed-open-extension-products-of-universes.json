@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-ringed-open-extension-products-of-universes",
+ "kind": "statement",
+ "title": "Countable open extension products in independent coefficient universes",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "statement": "Let $X$ be a scheme in universe $t$, and let $U$ be an object of its small pro-etale site whose structure morphism $j$ is a quasi-compact open immersion [def-weil-pbc-proetale-site, def-weil-open-immersion]. Put $v=\\max(u,t+1)$. Let $R$ be a sheaf of commutative rings with section sets in universe $v$, write $R_0$ for its underlying sheaf of rings, and use $v$-sized module sheaves [def-weil-sheaf-of-modules-category]. For every family $(M_n)_{n\\in\\mathbf N}$ of module sheaves over $R_0|_U$, the canonical comparison\n$$e_!\\left(\\prod_{n\\in\\mathbf N}M_n\\right)\\longrightarrow\\prod_{n\\in\\mathbf N}e_!M_n$$\nis an isomorphism. Here $e_!$ is the actual direct-sum extension presheaf followed by module sheafification, namely localizedSystemExtension [lem-pur-site-restriction-module-adjunction-exact]; the comparison is Mathlib's piComparison, characterized by its composites with every product projection. No equality between $u$ and $t$, and no quasi-compactness or separation hypothesis on $X$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP (lemma-j-shriek-limits), kernel proof; module refinement with arbitrary ring sheaf, using the existing ringed recollement and closed-immersion limit nodes."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized localized adjunction. Since U is subterminal, Over.forget U is full. The counit of slice restriction followed by its right adjoint is invertible sectionwise. Mathlib's adjoint-triple criterion makes the unit of L adjoint J invertible. J preserves countable products as a right adjoint. Projecting J(piComparison L M) onto each factor identifies it, after these unit isomorphisms and the J product comparison, with the product of the unit components. Hence J(piComparison L M) is invertible.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the actual reduced induced closed subscheme of the complement of U. Let I be module forgetful followed by its constructed abelian inverse image. Closed inverse image preserves countable products by the independent-universe closed theorem; module forgetful preserves products because module-sheaf limits are sectionwise. Every I(L(M n)) and I(L(product M)) is zero by the support theorem. Therefore both source and target of I(piComparison L M) are zero, so it is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sf-closed-abelian-products-of-universes",
+    "lem-sf-open-closed-module-support-of-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the complementary-restriction isomorphism detection clause of the support theorem to the two mapped comparison isomorphisms. This proves the original canonical comparison is invertible, with the original statement and all universes unchanged.",
+   "uses": [
+    "lem-sf-open-closed-module-support-of-universes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-closed-abelian-products-of-universes",
+  "lem-sf-open-closed-module-support-of-universes",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP via the original open-closed argument. F5: adjoint-triple proof of the open unit, product projection calculation, closed abelian product comparison, and complementary support detection. The two independent geometric refinements are named separate nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along a quasi compact open immersion preserves countable products of sheaves of modules with arbitrary coefficient universe",
+   "date": "2026-10-24",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.instCountableAB4StarLightCondMod",
+     "CondensedMod.ofSheafCompHaus",
+     "CondensedMod.ofSheafProfinite"
+    ]
+   },
+   "verdict": "No match: condensed module products do not assert pro-etale ringed open extension preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.piComparison",
+   "date": "2026-10-24",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Limits.piComparison",
+     "CategoryTheory.Limits.piComparison_comp_π",
+     "CategoryTheory.Limits.PreservesProduct.of_iso_comparison"
+    ]
+   },
+   "verdict": "General product comparison API only; no geometric preservation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*products",
+   "date": "2026-10-24",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": []
+   },
+   "verdict": "No Mathlib match. Library search finds proEtaleRingedExtensionByZero_products, whose coefficients are tied to t+1."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenRoosExtensionComparison",
+  "date": "2026-10-24",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor paragraph: both composites take values in the essential image of the open extension. Supplies the countable-product clause needed for its normalized strict-tower Roos comparison (lem-sf-open-roos-extension-comparison, geometry_products)."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProductsOfUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedOpenExtensionProductsOfUniverses.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingedExtensionByZero_products_of_universes",
+  "statement": "theorem proEtaleRingedExtensionByZero_products_of_universes\n    {X : Scheme.{t}} (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom]\n    (R : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)})\n    (M : ℕ → ringedSiteModules.{max u (t + 1)}\n      (((sheafCompose (ProEt.topology X)\n        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R).over U)) :\n    IsIso (piComparison (SheafOfModules.localizedSystemExtension.{t + 1, t, u} R U) M)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c7f4",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261025T003345-L-3232879",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T050555-L-239161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

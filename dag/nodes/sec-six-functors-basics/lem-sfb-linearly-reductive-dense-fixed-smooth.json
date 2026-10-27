@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-linearly-reductive-dense-fixed-smooth",
+ "kind": "statement",
+ "title": "Smooth common fixed schemes of dense subgroups of linearly reductive groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth affine finite-type $k$-group scheme [def-sc-group-scheme, def-weil-finite-type-morphism, def-sbc-smooth-morphisms]. An algebraic representation on a finite-dimensional $k$-vector space $V$ is a group-scheme homomorphism to $\\operatorname{GL}(V)$, where $\\operatorname{GL}(V)(A)$ is the group of invertible $A$-linear endomorphisms of $V\\otimes_k A$. A group is linearly reductive if every finite-dimensional algebraic representation is a direct sum of simple representations; simple means nonzero with no nonzero proper invariant $k$-subspace, and invariant means preserved after every commutative $k$-algebra extension. Assume that $G$ is linearly reductive. Let $\\Gamma\\subset G(k)$ be an abstract subgroup whose rational points are Zariski dense in the underlying topological space of $G$. Let $X$ be a smooth affine finite-type $k$-scheme [def-pc-scheme], and let $a:G\\times_kX\\to X$ be a group action, that is, a morphism satisfying $a(1,x)=x$ and $a(g_1g_2,x)=a(g_1,a(g_2,x))$ after every commutative $k$-algebra extension [def-pc-fibre-product]. Suppose a closed subscheme $F\\hookrightarrow X$ [def-weil-closed-immersion] represents the functor $$F(A)=\\{x\\in X(A):a(\\gamma_A,x)=x\\text{ for every }\\gamma\\in\\Gamma\\},$$ where $\\gamma_A$ is the image of $\\gamma$ in $G(A)$. Then $F$ is smooth over $k$. Neither $G$ nor $X$ is required to be connected.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 13.6 and Theorem 13.7, printed p.256, specialized to an algebraically closed field, an affine smooth scheme and a dense abstract subgroup. The local proof does not require connectedness or irreducibility of X."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sfb-linearly-reductive-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}B$. By [def-weil-closed-immersion], $F=\\operatorname{Spec}(B/I)$ for an ideal $I$. Images of finitely many algebra generators generate $B/I$, so $F$ is affine and finite type over $k$. By clause (1) of [lem-wf-affine-nullstellensatz-vanishing], every closed point of $F$ is $k$-rational. By [lem-weil-pbc-smooth-scheme-over-field-regular], every local ring of the smooth scheme $X$ is regular. Fix such a closed point $x\\in F(k)$ and put $A=\\mathcal O_{X,x}$, with maximal ideal $\\mathfrak m$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-weil-pbc-smooth-scheme-over-field-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, printed p.256, with Lemmas 13.3--13.4, printed p.255"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dense-fixed-local-ideal-jets] to $G,\\Gamma,X,F,x$. Its hypotheses use only the given smoothness of $G$, density of $\\Gamma$, affine finite type of $X$, and the stated fixed functor. It identifies $\\mathcal O_{F,x}$ with $A/J$, where $J=(\\gamma^*f-f:\\gamma\\in\\Gamma,f\\in\\mathfrak m)\\subseteq\\mathfrak m$. For each $n\\geq1$ it gives the finite-dimensional rational $G$-algebra $R_n=A/\\mathfrak m^{n+1}$ and the equivariant surjection $q_n:M_n=\\mathfrak m/\\mathfrak m^{n+1}\\twoheadrightarrow V=\\mathfrak m/\\mathfrak m^2$. Inverse pullbacks are used, which give the same common-fixed ideal since $\\Gamma$ is closed under inversion.",
+   "uses": [
+    "lem-sfb-dense-fixed-local-ideal-jets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, printed p.256, with Lemmas 13.3--13.4, printed p.255"
+   }
+  },
+  {
+   "text": "Linear reductivity, as defined in the statement, makes $V$ and every $M_n$ finite direct sums of simple rational $G$-modules. By [lem-sfb-dense-restriction-semisimple], their restrictions to $\\Gamma$ are semisimple and $q_n$ has a $\\Gamma$-equivariant linear section. Decompose $V=V_0\\oplus V_1\\oplus\\cdots\\oplus V_r$, collecting the trivial simple summands in $V_0$ and taking each $V_i$ for $i>0$ to be a nontrivial simple $\\Gamma$-module. Put $d=\\dim_k V$ and $s=\\sum_{i>0}\\dim_k V_i$. For fixed $n$, let $W_i$ be the image of $V_i$ under the section. Thus $q_n:W_i\\to V_i$ is an equivariant isomorphism and $W_0$ is fixed pointwise.",
+   "uses": [
+    "lem-sfb-dense-restriction-semisimple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, printed p.256, with Lemmas 13.3--13.4, printed p.255"
+   }
+  },
+  {
+   "text": "For $i>0$, let $D_i\\subseteq W_i$ be the span of $\\gamma^*w-w$ for $\\gamma\\in\\Gamma$ and $w\\in W_i$. This is $\\Gamma$-invariant: $h^*(\\gamma^*w-w)=((h\\gamma)^*w-w)-(h^*w-w)$. It is nonzero because $W_i$ is nontrivial. Simplicity gives $D_i=W_i$. Consequently every $W_i$ with $i>0$ lies in the image $J_n$ of $J$ in $R_n$: lift $w$ to $f\\in\\mathfrak m$, so $\\gamma^*w-w$ is the image of $\\gamma^*f-f$. Choose bases of the $W_i$, numbering all $i>0$ basis vectors first as $w_1,\\ldots,w_s$ and the remaining ones as $w_{s+1},\\ldots,w_d$. Lift them to $u_1,\\ldots,u_d\\in\\mathfrak m$. Their classes form a basis of $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, printed p.256, with Lemmas 13.3--13.4, printed p.255"
+   }
+  },
+  {
+   "text": "These $w_j$ generate $R_n$ as a $k$-algebra. Indeed a class in $\\mathfrak m$ is a constant linear combination of the $u_j$ modulo $\\mathfrak m^2$; in a product of $a$ elements of $\\mathfrak m$, make this replacement in each factor to express it as a homogeneous polynomial of degree $a$ modulo $\\mathfrak m^{a+1}$. Iterating for $a=1,\\ldots,n$ expresses every element of $R_n$ as a polynomial in the $w_j$ plus its residue in $k$. Let $L_n=(w_1,\\ldots,w_s)\\subseteq R_n$. Step 4 gives $L_n\\subseteq J_n$. The subspace $W_1\\oplus\\cdots\\oplus W_r$ is invariant, so $L_n$ is invariant under every $\\gamma^*$. The quotient $R_n/L_n$ is generated by scalars and the images of $W_0$, all fixed pointwise. Hence every $\\gamma^*f-f$ maps to zero there, so $J_n\\subseteq L_n$. We have proved $J+\\mathfrak m^{n+1}=(u_1,\\ldots,u_s)+\\mathfrak m^{n+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, printed p.256, with Lemmas 13.3--13.4, printed p.255"
+   }
+  },
+  {
+   "text": "The integer $s$ depends only on the chosen decomposition of $V$, not on $n$. For every $n\\geq1$, steps 3--5 give a tuple whose classes form a cotangent basis and whose first $s$ entries give the displayed ideal equality. Since $A$ is regular, [lem-sfb-regular-quotient-parameter-approximation] applies to $A,J,s$ and shows that $A/J$, hence $\\mathcal O_{F,x}$, is regular. This includes $s=0$, $s=d$, and $d=0$; the tuples need not be compatible as $n$ varies.",
+   "uses": [
+    "lem-sfb-regular-quotient-parameter-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, printed p.256, with Lemmas 13.3--13.4, printed p.255"
+   }
+  },
+  {
+   "text": "For every closed point $x$ of the finite-type affine scheme $F$, its residue field is $k$ and is therefore finite separable over $k$. Apply [lem-sfb-regular-separable-affine-smooth-neighbourhood] to the whole affine $F$ and the regular local ring just proved. This gives a smooth open neighbourhood $U_x$ of $x$. Let $U$ be their union. Its closed complement has no closed points of $F$, so is empty by [lem-sc-lft-over-field-jacobson-space]. Thus the $U_x$ cover $F$. By [lem-weil-pbc-smooth-local-on-source], $F$ is smooth over $k$. The same conclusion holds for empty $F$ by the empty-cover case of that node. No connectedness or irreducibility of either scheme was used.",
+   "uses": [
+    "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, printed p.256, with Lemmas 13.3--13.4, printed p.255"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sfb-dense-fixed-local-ideal-jets",
+  "lem-sfb-dense-restriction-semisimple",
+  "lem-sfb-regular-quotient-parameter-approximation",
+  "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proof of Lemma 13.6, printed p.256, made explicit using Lemmas 13.3--13.4 and Proposition 4.17; smoothness from local regularity by Stacks Tag 00TV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Zariski dense set of rational points of a linearly reductive algebraic group acting on a smooth affine scheme has a smooth fixed subscheme",
+   "results": "8 hits: Algebra.isOpen_smoothLocus, Algebra.smoothLocus_eq_univ, FixedPoints.isSeparable, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, IntermediateField.fixingSubgroup_isOpen, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat. Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 76a43556f1916470.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed loci of dense subgroups of linearly reductive groups acting on smooth varieties are smooth",
+   "results": "8 hits: Algebra.smoothLocus, mem_fixingAddSubgroup_iff_subset_fixedBy, FixedPoints.subgroup, FixedPoints.subgroup_toSubmonoid, AddAction.fixedPoints_of_subsingleton, fixingSubgroup, FixedPoints.addSubgroup_toAddSubmonoid, FixedPoints.submonoid. Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 833508293567859b.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of the common fixed locus for a completely reducible affine algebraic group action on a nonsingular variety",
+   "results": "8 hits: Algebra.smoothLocus_eq_univ, Algebra.smoothLocus, Algebra.isOpen_smoothLocus, Algebra.smoothLocus_eq_compl_support_inter, FixedPoints.normal, Algebra.smoothLocus_eq_univ_iff, FixedPoints.isSeparable, AlgebraicGeometry.isSmooth_iff. Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 131ec8fed2a940e8.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\", \"IsSmooth\"",
+   "results": "0 hits: . Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.*smooth|smooth.*fixed|linearly.reductive",
+   "results": "0 hits: . Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed scheme of a dense subgroup of a linearly reductive affine group acting on a smooth affine scheme is smooth",
+   "results": "{\"t\": \"2026-10-23T22:31:13Z\", \"tool\": \"leanfinder\", \"query\": \"The fixed scheme of a dense subgroup of a linearly reductive affine group acting on a smooth affine scheme is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.isOpen_smoothLocus\", \"Algebra.smoothLocus_eq_univ\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\"], \"digest\": \"dd6eb05e751e9aa3\"} Read returned signatures: Abstract fixed sets, smooth loci and irreducible representations do not state smoothness of scheme-theoretic common fixed loci for linearly reductive algebraic-group actions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linearly reductive algebraic group acting on a smooth variety has smooth fixed loci",
+   "results": "{\"t\": \"2026-10-23T22:31:06Z\", \"tool\": \"leansearch\", \"query\": \"A linearly reductive algebraic group acting on a smooth variety has smooth fixed loci\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"FixedPoints.subalgebra\", \"Algebra.smoothLocus_eq_univ_iff\", \"MulAction.smul_inv_mem_fixedBy_iff_mem_fixedBy\", \"Algebra.smoothLocus_eq_univ\", \"Representation.invariants_eq_inter\", \"MulAction.smul_fixedBy\", \"AddAction.vadd_mem_fixedBy_iff_mem_fixedBy\"], \"digest\": \"c613fc00f2beed68\"} Read returned signatures: Abstract fixed sets, smooth loci and irreducible representations do not state smoothness of scheme-theoretic common fixed loci for linearly reductive algebraic-group actions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-23T22:31:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"fixedPoints\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures: Abstract fixed sets, smooth loci and irreducible representations do not state smoothness of scheme-theoretic common fixed loci for linearly reductive algebraic-group actions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.*smooth|smooth.*fixed|linearly.reductive",
+   "results": "{\"t\": \"2026-10-23T22:31:05Z\", \"tool\": \"grep\", \"query\": \"fixed.*smooth|smooth.*fixed|linearly.reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures: Abstract fixed sets, smooth loci and irreducible representations do not state smoothness of scheme-theoretic common fixed loci for linearly reductive algebraic-group actions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete reducibility of algebraic group representations implies nonsingularity of common fixed point schemes",
+   "results": "{\"t\": \"2026-10-23T22:31:14Z\", \"tool\": \"leanfinder\", \"query\": \"Complete reducibility of algebraic group representations implies nonsingularity of common fixed point schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.IsIrreducible\", \"Rep.instInjective\", \"Rep.invariantsFunctor_obj_carrier\", \"FDRep.simple_iff_end_is_rank_one\", \"AlgebraicGeometry.IsReduced\", \"Rep.instProjective\", \"Representation.invariants_eq_top\", \"Representation.isIrreducible_iff\"], \"digest\": \"3a9f8e8c2464e294\"} Read returned signatures: Abstract fixed sets, smooth loci and irreducible representations do not state smoothness of scheme-theoretic common fixed loci for linearly reductive algebraic-group actions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-fixed-subscheme-smooth",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Corollary 13.8, printed p.257, smoothness assertion, specialized to a smooth connected acting affine group and a smooth affine scheme. Supporting input: Lemma 13.6 and Theorem 13.7, printed p.256, specialized to an algebraically closed field, an affine smooth scheme and a dense abstract subgroup. The local proof does not require connectedness or irreducibility of X.",
+   "via": [
+    "lem-sfb-semisimple-fixed-subscheme-smooth",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-linearly-reductive-dense-fixed-smooth",
+  "worker": "stage1",
+  "summary": "Q116 follows Milne Lemma 13.6 via rational finite jets, restriction semisimplicity, the explicit truncated difference-ideal calculation and the existing parameter-approximation criterion. Two strictly supporting statement-only nodes; existing regularity, Nullstellensatz, Jacobson and smooth-neighbourhood inputs reused. Statement unchanged. No Lean attachment or Mathlib match for the item.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli chain, as specified by blueprint.from.place; this is its Milne 13.6 local smoothness prerequisite. Latest blueprint searched: no equivalent node. The ancestor command returns None for this inherited chain, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Only clause (1), residue fields of closed points of a finite-type affine scheme over algebraically closed k; a generic algebraic tool, not a unit-route replacement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Regularity of the local rings of the given smooth scheme X, Stacks 056S; generic geometric input to Milne 13.6."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-weil-pbc-smooth-scheme-over-field-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-2808b16b9",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-2808b16b9 (reviewer sub-agent of L); spot-checked: I read in full the item (7 steps, statement unchanged and still exactly what the citer lem-sfb-semisimple-fixed-subscheme-smooth needs), both new nodes, every cited statement, and Milne iAG2017 13.2-13.7 (pp.254-256), 1.10/1.13, 4.3/4.4 and 4.17. Steps 1-3 and 6-7 use exactly what the cited statements say: closed-immersion affine form, Nullstellensatz clause (1), regularity from smoothness via Stacks 056S, parameter approximation with n-dependent tuples, the 00TV smooth neighbourhood at k-rational closed points, the Jacobson leaf (empty complement), and the local-on-source leaf (empty cover allowed). Steps 4-5 are honestly elementary: I checked the identity h*(γ*w−w)=((hγ)*w−w)−(h*w−w), that the difference span is nonzero and so equals the simple summand, the degree induction showing the lifts generate R_n, and that γ* acts trivially on R_n/L_n, which gives J_n=L_n. This writes out the step Milne only asserts. New node lem-sfb-dense-fixed-local-ideal-jets is true: the stabilizer is closed and contains dense Γ in reduced G, so it is all of G (Milne 1.10/1.13); I verified IA=J by hand; the jets are G-stable because 𝔪_x maps into 𝔪_x⊗k[G]. New node lem-sfb-dense-restriction-semisimple is true: by Milne 4.3/4.4 Γ-stable subspaces are G-stable, the complement comes from the 4.17 argument, and the section from a complement of ker q. It needs no averaging and works in any characteristic. Neither node duplicates an existing one: the torus jets node is a special case, and the subspace-test node uses all of G(k). Neither restates a clause of the item. Both have statement only, are self-contained, have 5 logged searches of three kinds, correct created.item, via and same_as=[], and no SGA. The two declared tool_uses (Nullstellensatz clause 1, 056S regularity) are generic and accepted. proof_deps equals the union of uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LinearlyReductiveDenseFixedSmooth",
+  "declaration": "AlgebraicGeometry.linearlyReductive_dense_fixed_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearlyReductiveDenseFixedSmooth.lean",
+  "statement": "theorem linearlyReductive_dense_fixed_smooth {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [Smooth G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (hG : IsLinearlyReductiveGroupScheme G) (Γ : Subgroup (points G k)) (hdense : DenseRange fun g : Γ ↦ g.val.left (IsLocalRing.closedPoint k)) (X : Over (Spec (.of k))) [IsAffine X.left] [Smooth X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [action : ModObj G X] (F : Over (Spec (.of k))) (i : F ⟶ X) [IsClosedImmersion i.left] (hfixed : ∀ (A : Type u) [CommRing A] [Algebra k A] (x : points X A), (∃ z : points F A, z ≫ i = x) ↔ ∀ g : Γ, points.map G (Algebra.ofId k A) g.val • x = x) : Smooth F.hom",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a148e93f0",
+  "group": "N5",
+  "result": "pass",
+  "note": "Clause-by-clause match to the node (Milne 13.6/13.7). Alg-closed k; G smooth affine finite type with GrpObj; IsLinearlyReductiveGroupScheme reused from landed def-sfb-linearly-reductive-group-scheme (A-span invariance for all k-algebras, no char-0 restriction, empty family allowed); Γ : Subgroup (points G k); Zariski DenseRange of underlying points; X smooth affine finite type; ModObj action, Hom.smul = lift g x ≫ γ = a(g,x); closed immersion i with hfixed image ↔ ∀ g : Γ, points.map (Algebra.ofId k A) g • x = x for all Type-u k-algebras (closed immersion is mono, so this is representation); conclusion Smooth F.hom. Item diff vs side-live = lean record + added landed stmt_dep only; 9 dep records byte-identical; lean.statement verbatim; proof-plan imports exist; report has Worker report + Second reading by N5; sorry only, docstring has source, blueprint id and 7 steps. Edge cases ok (empty F/X, d=0, char p, nonreduced A, same-universe test algebras). No change, no compile."
+ }
+}

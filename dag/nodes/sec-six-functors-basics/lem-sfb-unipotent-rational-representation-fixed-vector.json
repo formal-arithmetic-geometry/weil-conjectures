@@ -1,0 +1,199 @@
+{
+ "id": "lem-sfb-unipotent-rational-representation-fixed-vector",
+ "kind": "statement",
+ "title": "Nonzero fixed vectors for rational representations of smooth unipotent groups",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field] (every nonconstant polynomial over $K$ has a root in $K$). Let $U$ be a smooth [def-sbc-smooth-morphisms] affine group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $K$. Assume that there are $m\\geq1$ and a homomorphism of $K$-group schemes $i:U\\to\\operatorname{GL}_{m,K}$ [def-sc-general-linear-group] which is faithful: for every commutative $K$-algebra $R$ the map $i(R):U(R)\\to\\operatorname{GL}_m(R)$ is injective, where $U(R)$ denotes the morphisms $\\operatorname{Spec}R\\to U$ over $K$; and that for every $u\\in U(K)$ the matrix $i(u)$ is unipotent: $(i(u)-I_m)^N=0$ for some integer $N\\geq1$ depending on $u$. For every $d\\geq1$ and every homomorphism of $K$-group schemes $\\rho:U\\to\\operatorname{GL}_{d,K}$ (a rational representation on $K^d$), there exists $v\\in K^d$ with $v\\ne0$ such that $\\rho(u)v=v$ for every $u\\in U(K)$. Here $U(K)$ denotes the morphisms $\\operatorname{Spec}K\\to U$ over $K$ [def-weil-affine-spectrum], and the action is ordinary matrix multiplication on column vectors.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 3.35, printed p.75 (a homomorphism with trivial kernel, i.e. a faithful finite-dimensional representation, is a closed immersion); Corollary 14.12, printed p.283 (smooth groups and the geometric-matrix criterion); Proposition 14.3 and the definition in section 14.b, printed p.280 (every nonzero rational representation has a fixed vector); applied in the proof of Lemma 19.16, printed p.401."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-general-linear-group",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Fix $d\\geq1$ and the given rational representation $\\rho:U\\to\\operatorname{GL}_{d,K}$. For each $u\\in U(K)$ apply [lem-sfb-rational-representation-unipotent-point] with $G=U$, $r=\\rho$, and the faithful homomorphism $i$ in the hypothesis. Its field hypothesis holds since $K$ is algebraically closed, its affine finite-type hypotheses are part of the item, and its faithfulness is exactly injectivity on $R$-points for every commutative $K$-algebra $R$. The hypothesis $(i(u)-I_m)^N=0$ is given for this particular $u$. We obtain $(\\rho(u)-I_d)^{M_u}=0$ for some $M_u\\geq1$. This proves unipotence in the requested representation, not just in the original faithful one. No uniform exponent is needed.",
+   "uses": [
+    "lem-sfb-rational-representation-unipotent-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 9.19, printed p.171; pointwise application of representation independence of unipotence."
+   }
+  },
+  {
+   "text": "Let $H=\\{\\rho(u):u\\in U(K)\\}\\subseteq\\operatorname{GL}_d(K)$. The functor-of-points description in [def-sc-group-scheme] makes $U(K)$ a group and makes $\\rho(K)$ a group homomorphism. The matrix description in [def-sc-general-linear-group] identifies its target with invertible matrices. Explicitly, $I_d=\\rho(e)$, $\\rho(u)\\rho(w)=\\rho(uw)$, and $\\rho(u)^{-1}=\\rho(u^{-1})$. Thus $H$ is a subgroup. By step 1 every $h\\in H$ satisfies $(h-I_d)^N=0$ for some $N\\geq1$: choose $u$ with $h=\\rho(u)$ and take $N=M_u$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed p.279: passage from a group action to its group of matrices."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-unipotent-matrix-group-fixed-vector] to $K$, $d$, and the subgroup $H$ from step 2. Its positive-dimension hypothesis is exactly $d\\geq1$, and its pointwise unipotence hypothesis was verified in steps 1--2. It gives a nonzero $v\\in K^d$ with $hv=v$ for every $h\\in H$. For every $u\\in U(K)$ the matrix $\\rho(u)$ lies in $H$, so $\\rho(u)v=v$. This is the asserted vector for the arbitrary $d$ and $\\rho$.",
+   "uses": [
+    "lem-sfb-unipotent-matrix-group-fixed-vector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 14.1, printed pp.279--280; equivalence with the fixed-vector definition of unipotent algebraic groups in section 14.b, printed p.280."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-representation-unipotent-point",
+  "def-sc-group-scheme",
+  "def-sc-general-linear-group",
+  "lem-sfb-unipotent-matrix-group-fixed-vector"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 9.19, printed p.171, followed by Proposition 14.1, printed pp.279--280. These provide the pointwise representation-independence input and the abstract common fixed-vector argument underlying section 14.b."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth unipotent algebraic group over an algebraically closed field has a nonzero fixed vector in every nonzero finite dimensional rational representation",
+   "results": "8 hits: FDRep.simple_iff_end_is_rank_one, FDRep.simple_iff_char_is_norm_one, groupCohomology.Hilbert90.aux_ne_zero, LieModule.exists_isRegular_of_finrank_le_card, LieModule.exists_isRegular, FDRep.finrank_hom_simple_simple, FDRep.instInjectiveOfNeZeroCastCard, LieAlgebra.exists_isRegular_of_finrank_le_card.",
+   "date": "2026-10-23",
+   "verdict": "no match: no unipotent algebraic-group fixed-vector theorem; returned finite-group semisimplicity, Hilbert 90 or Lie-algebra regular-element results are different statements"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kolchin theorem: a smooth affine group whose faithful representation has unipotent matrices has nonzero invariants in any rational representation",
+   "results": "8 hits: groupCohomology.Hilbert90.aux_ne_zero, FDRep.instInjectiveOfNeZeroCastCard, FDRep.simple_iff_char_is_norm_one, LieModule.exists_isRegular, Rep.instInjective, LieModule.exists_isRegular_of_finrank_le_card, FDRep.simple_iff_end_is_rank_one, LieAlgebra.exists_isRegular.",
+   "date": "2026-10-23",
+   "verdict": "no match: no unipotent algebraic-group fixed-vector theorem; returned finite-group semisimplicity, Hilbert 90 or Lie-algebra regular-element results are different statements"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unipotent\", \"invariant\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no unipotent algebraic-group fixed-vector theorem; returned finite-group semisimplicity, Hilbert 90 or Lie-algebra regular-element results are different statements"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*(fixed|invariant)|fixed.*unipotent|unipotent.*representation|IsUnipotent",
+   "results": "[grep] OK 0 hit(s), entire Mathlib",
+   "date": "2026-10-23",
+   "verdict": "no match: no unipotent algebraic-group fixed-vector theorem; returned finite-group semisimplicity, Hilbert 90 or Lie-algebra regular-element results are different statements"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unipotent affine algebraic group has a nonzero invariant vector in any nonzero finite dimensional rational representation",
+   "results": "8 hits in Mathlib.RepresentationTheory.Invariants: Representation.invariants, Representation.mem_invariants, Representation.averageMap_invariant, Representation.invariants_eq_top, Representation.le_comap_invariants, Rep.invariantsFunctor, Representation.invariants_eq_inter, Rep.invariantsFunctor_obj_carrier. Read Invariants.lean:70-90: invariants are defined but nonzero invariants are not asserted. Averaging assumes a finite group and invertible order (lines 35-39).",
+   "date": "2026-10-23",
+   "verdict": "no match: only the invariant-subspace definition and finite-group averaging, not nonvanishing for unipotent algebraic groups"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth affine unipotent algebraic group over an algebraically closed field fixes a nonzero vector in each nonzero rational representation",
+   "results": "8 hits: Representation.invariants, Representation.mem_invariants, Rep.instInjective, Representation.invariants_eq_inter, Representation.averageMap_invariant, Representation.invariants_eq_top, Representation.le_comap_invariants, Representation.asGroupHom",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, individual 2-by-2 matrix facts and Hilbert 90 do not give fixed vectors for rational representations of these algebraic groups"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational representation of a unipotent algebraic group has nonzero invariants",
+   "results": "8 hits: groupCohomology.Hilbert90.aux_ne_zero, Matrix.SpecialLinearGroup.fin_two_exists_eq_mk_of_apply_zero_one_eq_zero, Matrix.SpecialLinearGroup.row_ne_zero, Matrix.GeneralLinearGroup.fixpointPolynomial_eq_zero_iff, SpecialLinearGroup.instInhabited, Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero, Matrix.GeneralLinearGroup.IsParabolic, Matrix.GeneralLinearGroup.parabolicFixedPoint",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, individual 2-by-2 matrix facts and Hilbert 90 do not give fixed vectors for rational representations of these algebraic groups"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, individual 2-by-2 matrix facts and Hilbert 90 do not give fixed vectors for rational representations of these algebraic groups"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Kolchin|common.*fixed|fixed.*vector",
+   "results": "3 hits in Mathlib/LinearAlgebra: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: invariants definitions, finite-group averaging, individual 2-by-2 matrix facts and Hilbert 90 do not give fixed vectors for rational representations of these algebraic groups"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-general-linear-reductive",
+  "date": "2026-10-23",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12.",
+   "via": [
+    "lem-sfb-general-linear-reductive",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unipotent-rational-representation-fixed-vector",
+  "worker": "stage1",
+  "summary": "Retained the statement and existing searches. Split the fixed-vector assertion into preservation of unipotence of a single group point under rational representations and the independent linear-algebra common fixed-vector theorem. Wrote the image-subgroup construction explicitly. Searched the DAG, whole blueprint, project Lean and Mathlib; both prerequisites are new unsplit statements, not Mathlib leaves.",
+  "blueprint": "Supporting fixed-vector input of lem-sfb-general-linear-reductive, through the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/GIT chain. The ancestor tool returns null for this existing chain; retained that provenance and the exact inherited place. Read the latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md: its current paragraph (3) assembles proper and open direct images through compactification, whereas the longer alteration/GIT chain is recorded in the intervening DAG splits. This delivery changes only the below-unit fixed-vector prerequisite. Step 1 realizes representation independence; steps 2--3 realize the common fixed-vector input."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-5244c86b6",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-5244c86b6 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. The item's statement is unchanged and its only citer, lem-sfb-general-linear-reductive step 4, still matches it. The proof has three steps. Step 1 cites lem-sfb-rational-representation-unipotent-point: G=U, r=rho and i keep the item's hypotheses verbatim, and the exponent M_u is allowed to depend on u. Step 2 is genuinely elementary: H=rho(U(K)) is a subgroup by the group-of-points description in def-sc-group-scheme and the matrix-group description in def-sc-general-linear-group. Step 3 cites lem-sfb-unipotent-matrix-group-fixed-vector, which gives one v fixed by all of H. New node 1 matches Milne iAG Theorem 9.18 (p.170) and 9.19 (p.171), read in the PDF: i(g_s)=i(g)_s=I, so g_s=e by injectivity of i on K-points, and then r(g)=r(g_u) is unipotent. Algebraically closed is a special case of Milne's perfect field, and no smoothness is needed. I tested it on G_m, on G_a in characteristic p and on mu_p. New node 2 is exactly Milne Prop. 14.1 (pp.279-280: an abstract group acting unipotently over any field, with footnote 1 for descending from the algebraic closure). I tested d=1, U_n and a cyclic group of order p, and noted that the hypothesis must hold for every element of H. Both new nodes are statement-only, self-contained and strictly smaller than the item; neither restates a clause of it. Searching snapshot/dag/nodes with rg -L (unipotent, kolchin, fixed vector, jordan decomposition) and the main-20261015 blueprint found no duplicate or generalization. No SGA citation and no cycle. Milne's own route goes through 14.10/14.12 and needs smoothness; the new pointwise route proves the same K-point conclusion without it. The item's smoothness hypothesis is therefore unused but kept, which does not weaken the target. No changes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnipotentRationalRepresentationFixedVector",
+  "declaration": "AlgebraicGeometry.exists_nonzero_fixedVector_of_faithful_unipotent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnipotentRationalRepresentationFixedVector.lean",
+  "statement": "theorem exists_nonzero_fixedVector_of_faithful_unipotent (K : Type u) [Field K] [IsAlgClosed K] (U : Over (Spec (.of K))) [GrpObj U] [IsAffine U.left] [Smooth U.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] (m : ℕ) (_hm : 1 ≤ m) (i : U ⟶ GeneralLinearGroup (ULift.{u} (Fin m)) K) [IsMonHom i] (_hfaithful : ∀ (R : Type u) [CommRing R] [Algebra K R], Function.Injective (fun x : (Spec (.of R)).asOver (Spec (.of K)) ⟶ U ↦ x ≫ i)) (_hunipotent : ∀ x : (Spec (.of K)).asOver (Spec (.of K)) ⟶ U, ∃ N : ℕ, 1 ≤ N ∧ ((GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin m)) K K (x ≫ i)).val - 1) ^ N = 0) (d : ℕ) (_hd : 1 ≤ d) (ρ : U ⟶ GeneralLinearGroup (ULift.{u} (Fin d)) K) [IsMonHom ρ] : ∃ v : ULift.{u} (Fin d) → K, v ≠ 0 ∧ ∀ x : (Spec (.of K)).asOver (Spec (.of K)) ⟶ U, Matrix.mulVec (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin d)) K K (x ≫ ρ)).val v = v",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4aab5fd74",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Every clause matches the node: algebraically closed K; U over Spec K with GrpObj, IsAffine, Smooth, LocallyOfFiniteType and QuasiCompact; i into GL(ULift(Fin m)) K with IsMonHom; faithfulness as injectivity of x ↦ x≫i on R-points for all R : Type u (the universe is forced by upstream homMulEquiv and is equivalent to the node's condition for affine U); unipotence on K-points via homMulEquiv with an existential N ≥ 1 per point; arbitrary d ≥ 1 and ρ with IsMonHom; conclusion ∃ v ≠ 0 with mulVec v = v for every K-point, one v for all points. The stmt_dep records were read: GL and homMulEquiv are the upstream ones reused by def-sc-general-linear-group, so no duplicate. The lean.statement matches the file verbatim. No defs, only sorry, source and blueprint docstrings with the 3-step plan, no statement_change, no extra assumptions. Edge cases d=0 (excluded), d=1, trivial group and characteristic p checked. Not recompiled; the worker reports a clean compile."
+ }
+}

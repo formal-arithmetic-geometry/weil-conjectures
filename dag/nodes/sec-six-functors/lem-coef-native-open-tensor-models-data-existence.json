@@ -1,0 +1,128 @@
+{
+ "id": "lem-coef-native-open-tensor-models-data-existence",
+ "kind": "lemma",
+ "title": "Native open tensor representative data existence",
+ "statement": "theorem nativeOpenTensorModels_data_exists {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (SZ : CoefficientDerivedSystemCalculus.{u, u} l E Z) :\n    ∃ (O : SystemOpenModel l E j SX.toCoefficientDerivedSystemTensors\n        SZ.toCoefficientDerivedSystemTensors)\n      (On : ∀ n : ℕ, FiniteOpenModel l E j SX.toCoefficientDerivedSystemTensors\n        SZ.toCoefficientDerivedSystemTensors n), True",
+ "stmt_deps": [
+  "def-coef-native-open-tensor-evaluation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Support-open-tensor steps 5--6; Stacks 0E8I, 0GL1 and 07A4."
+ },
+ "proof": [
+  {
+   "text": "Construct ordinary restriction/projection and cochain data on the native system and finite sites. This step contains no derived tensor choice.",
+   "uses": [
+    "lem-coef-native-open-tensor-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each site apply modelOfOrdinary to the restriction tensor, its naturality, right adjunction, and K-flat preservation. It supplies the derived restriction and its representative model with the prescribed ordinary comparison.",
+   "uses": [
+    "lem-sf-exact-tensor-model-construction-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend each supplied simultaneous K-flat tensor model to pairs with either factor K-flat. Retain both-model compatibility and naturality, then apply normalized projection descent to obtain gamma and its two equations.",
+   "uses": [
+    "lem-sfb-ringed-tensor-comparison-extension",
+    "lem-sf-open-tensor-projection-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble all fields of OpenTensorModel using the ordinary comparison equality. Apply the same assembly to every finite stage and choose the family of witnesses in the existential conclusion.",
+   "uses": [
+    "def-sf-open-tensor-representative-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-native-open-tensor-cochains",
+  "lem-sf-exact-tensor-model-construction-independent",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "lem-sf-open-tensor-projection-descent",
+  "def-sf-open-tensor-representative-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, expanding its omitted totalization/descent; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves commutes with derived tensor product and finite coefficient evaluation",
+   "results": "Eight generic sheaf-cohomology and zero tensor facts; no native open tensor model existence theorem.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the existing project interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support reduction tower transitions and normalized open tensor finite evaluation",
+   "results": "Eight unrelated condensed module and test-function facts. Loogle NatTrans.naturality found the generic naturality square used in assembly, not a model construction.",
+   "date": "2026-10-25",
+   "verdict": "No matching native interface."
+  },
+  {
+   "tool": "grep",
+   "query": "SectionsModel|GammaEvaluation|SystemOpenModel|FiniteOpenModel; extensionByZero.*tensor; rightDerived.*Evaluation",
+   "results": "Project search found only data definitions and model consumers; Mathlib search found no such construction. Blueprint search point sections found det-pbc-torsion-stalk-proetale-point, which concerns a geometric point, not R-linear sequence sections. Existing open normalization uses independently chosen localized-site tensors and is insufficient by direct application.",
+   "date": "2026-10-25",
+   "verdict": "New interface specialization, retaining the stated construction dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeOpenTensorModelsExistence",
+  "date": "2026-10-27",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-native-open-tensor-models-existence",
+   "place": "Proof decomposition of native open tensor model existence.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefNativeOpenTensorModelsDataExistence",
+  "file": "lean/Sheaf/Paper/CoefNativeOpenTensorModelsDataExistence.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.nativeOpenTensorModels_data_exists",
+  "statement": "theorem nativeOpenTensorModels_data_exists {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (SZ : CoefficientDerivedSystemCalculus.{u, u} l E Z) :\n    ∃ (O : SystemOpenModel l E j SX.toCoefficientDerivedSystemTensors\n        SZ.toCoefficientDerivedSystemTensors)\n      (On : ∀ n : ℕ, FiniteOpenModel l E j SX.toCoefficientDerivedSystemTensors\n        SZ.toCoefficientDerivedSystemTensors n), True",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T112438-L-1584289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T123449-L-2302018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

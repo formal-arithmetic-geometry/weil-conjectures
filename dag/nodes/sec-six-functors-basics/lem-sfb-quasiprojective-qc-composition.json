@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-quasiprojective-qc-composition",
+ "kind": "statement",
+ "title": "Composition of finite-type relatively ample morphisms over a quasi-compact base",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to S$ be morphisms of schemes [def-pc-scheme], both of finite type [def-weil-finite-type-morphism], and suppose $S$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Suppose there exist an invertible $\\mathcal O_X$-module $L$ and an invertible $\\mathcal O_Y$-module $M$ [def-sc-invertible-module] that are respectively $f$-relatively ample and $g$-relatively ample. Then $g\\circ f$ is of finite type and there exists an invertible $\\mathcal O_X$-module $N$ that is $(g\\circ f)$-relatively ample. Here an invertible module $L$ on the source of a morphism $h$ is $h$-relatively ample if $h$ is quasi-compact [def-weil-finite-type-morphism] and, for every affine open $V$ of its target, $L|_{h^{-1}(V)}$ is ample in the absolute sense [def-weil-pbc-ample-invertible-module].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4M (lemma-composition-quasi-projective), with Definition Tag 01VW(1) (definition-quasi-projective) and Definition Tag 01VH (definition-relatively-ample)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose witnesses $L,M$ to the two relative-ampleness hypotheses. Apply [lem-sfb-composition-finite-affine-twist-bounds] to $f,g,L,M$, using the affine-open ampleness conditions in those hypotheses. Obtain $h=g\\circ f$ of finite type and quasi-compact, a finite affine covering $(V_i)_{1\\leq i\\leq r}$ of $S$, the restricted data $f_i,L_i,M_i$, and bounds $a_i\\geq0$ for which every twist $L_i\\otimes f_i^*(M_i^{\\otimes a})$ with $a\\geq a_i$ is ample.",
+   "uses": [
+    "lem-sfb-composition-finite-affine-twist-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), finite affine-cover reduction and local application of Tag 0892(1) (lemma-pullback-ample-tensor-relatively-ample); finite type uses Tags 01T3 and 01T4; relative ampleness is Definition 01VH."
+   }
+  },
+  {
+   "text": "Choose one nonnegative integer bound a_i for every member of the finite cover and put a = sum_i a_i. Nonnegativity of all the summands implies a_i <= a for every i. Thus every local twist at exponent a is ample by Step 1. The sum is nonnegative, so its natural-number exponent a.toNat is exactly a. For an empty covering the empty sum is zero; no nonempty-index hypothesis or infinite maximum is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), finite affine-cover reduction and local application of Tag 0892(1) (lemma-pullback-ample-tensor-relatively-ample); finite type uses Tags 01T3 and 01T4; relative ampleness is Definition 01VH."
+   }
+  },
+  {
+   "text": "Set $N=L\\otimes f^*(M^{\\otimes a})$. Apply [lem-sfb-invertible-twist-open-restriction] to $f,L,M,a$ to obtain invertibility of $N$, including when the cover is empty. For each $i$, take $U=Y_i=g^{-1}(V_i)$ in its open-restriction assertion. It identifies $N|_{X_i}$ with $L_i\\otimes f_i^*(M_i^{\\otimes a})$, including at $a=0$. Its ampleness equivalence and Step 2 imply that $N|_{X_i}$ is ample for every $i$.",
+   "uses": [
+    "lem-sfb-invertible-twist-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4K (lemma-ample-composition), identifying the restriction of the displayed global twist with the local twist. Module comparisons: Modules Tags 01CD (lemma-tensor-product-pullback), 0B8L (lemma-pullback-invertible), 01CT (lemma-constructions-invertible); Sheaves Tag 0097 (lemma-push-pull-composition-modules)."
+   }
+  },
+  {
+   "text": "For each $i$, $h^{-1}(V_i)=f^{-1}(g^{-1}(V_i))=X_i$, so Step 3 gives ampleness of $N|_{h^{-1}(V_i)}$. Apply [lem-trf-scheme-relative-ample-affine-cover] to the quasi-compact map $h$, the globally invertible module $N$ and the affine cover $(V_i)$. It gives ampleness of $N|_{h^{-1}(V)}$ for every affine open $V\\subseteq S$. Together with quasi-compactness this is precisely $h$-relative ampleness. Use this $N$ as the existential witness; finite type of $h$ was obtained in Step 1. If the cover is empty, $S$, $Y$ and $X$ are empty; Step 3 still supplies the global invertible witness and the criterion applies to the empty cover.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0C4K and 0C4M, final application of 01VJ (lemma-characterize-relatively-ample), (3) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-composition-finite-affine-twist-bounds",
+  "lem-sfb-invertible-twist-open-restriction",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4M (lemma-composition-quasi-projective), expanding the proof of Tag 0C4K (lemma-ample-composition) into its finite affine-cover argument and using Tag 0892(1). The 0892(1) input is the reviewer-added sfb statement node lem-sfb-relative-ample-absolute-twist.",
+  "note": "B9 stage 3, 2026-10-26: implemented the four assembly steps in Lean from the three existing proof dependencies. The finite common bound is the sum of the nonnegative local bounds rather than their maximum. Invertibility and ampleness transport are taken directly from invertible_twist_open_restriction; proof irrelevance identifies the existential invertibility witnesses with the canonical ones used by the affine-cover criterion. No statement change or new node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition of finite type scheme morphisms admitting relatively ample invertible sheaves over a quasi compact base again admits a relatively ample invertible sheaf",
+   "results": "OK 8 hits: AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.quasiCompact_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi projective morphisms of schemes are stable under composition when the ultimate base is quasi compact",
+   "results": "OK 8 hits: AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.quasiSeparated_comp, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderComposition, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.QuasiSeparated.of_comp, AlgebraicGeometry.IsSeparated.stableUnderComposition",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsQuasiProjective\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasi[Pp]rojective|[Aa]mple.*[Cc]omp|[Cc]omp.*[Aa]mple",
+   "results": "OK 0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the required relative ampleness or projective-bundle embedding assertion; affine Proj properness and ordinary composition instances are only partial inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?projective|[Aa]mple.*[Cc]omp|[Cc]omp.*[Aa]mple",
+   "results": {
+    "t": "2026-10-22T05:04:47Z",
+    "tool": "grep",
+    "query": "quasi.?projective|[Aa]mple.*[Cc]omp|[Cc]omp.*[Aa]mple",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme-morphism composition, base change, or fibre-product rings; none asserts relative ampleness of the composite twist"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiProjective\"",
+   "results": {
+    "t": "2026-10-22T05:04:48Z",
+    "tool": "loogle",
+    "query": "\"IsQuasiProjective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme-morphism composition, base change, or fibre-product rings; none asserts relative ampleness of the composite twist"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of finite type scheme morphisms with relatively ample invertible sheaves over a quasi compact base admits a relatively ample invertible sheaf",
+   "results": {
+    "t": "2026-10-22T05:04:49Z",
+    "tool": "leanfinder",
+    "query": "Composition of finite type scheme morphisms with relatively ample invertible sheaves over a quasi compact base admits a relatively ample invertible sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+     "AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType",
+     "AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType",
+     "AlgebraicGeometry.quasiCompact_comp"
+    ],
+    "digest": "45921d591b05758c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme-morphism composition, base change, or fibre-product rings; none asserts relative ampleness of the composite twist"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi projective morphisms of schemes compose over a quasi compact base",
+   "results": {
+    "t": "2026-10-22T05:04:59Z",
+    "tool": "leansearch",
+    "query": "Quasi projective morphisms of schemes compose over a quasi compact base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+     "AlgebraicGeometry.quasiSeparated_comp",
+     "AlgebraicGeometry.instIsAffineHomCompScheme",
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.quasiSeparated_isStableUnderComposition",
+     "AlgebraicGeometry.IsProper.instCompScheme",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.QuasiSeparated.of_comp"
+    ],
+    "digest": "fe2c2e99c548b825"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme-morphism composition, base change, or fibre-product rings; none asserts relative ampleness of the composite twist"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given relatively ample line bundles for X to Y and Y to S with S quasi compact a twist L tensor pullback M to a high power is ample relative to S",
+   "results": {
+    "t": "2026-10-22T05:05:01Z",
+    "tool": "leanfinder",
+    "query": "Given relatively ample line bundles for X to Y and Y to S with S quasi compact a twist L tensor pullback M to a high power is ample relative to S",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo",
+     "AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
+     "RingHom.IsStableUnderBaseChange.pullback_fst_appTop"
+    ],
+    "digest": "204ba8dec8d995cc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme-morphism composition, base change, or fibre-product rings; none asserts relative ampleness of the composite twist"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-bundle-composition",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, second sentence: quasi-projectivity of the composite, by 0C4M; supplies a relatively ample module on the composite modification tower.",
+   "via": [
+    "lem-sfb-projective-bundle-composition",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasiprojective-qc-composition",
+  "worker": "stage1",
+  "summary": "Q106 repair of the human re-split order: extracted two comparable statement-only tasks, finite-cover local twist bounds (old Steps 1--3) and invertibility/open restriction of the global twist with exponent-zero normalization and ampleness transport (old Step 4). Short assembly retains the finite maximum and final 01VJ criterion (old Step 5). Statement and statement dependencies unchanged. Landing-refusal repair: rebased the retained split onto the current DAG item and reread current cited statements; made the existential witness choice and the empty-cover-independent global invertibility application explicit. The original-item snapshot equals the current repository item; the report records the comparison and retained search evidence. Retry 2026-10-23: compared the retained delivered fields with the current read DAG again, which still equals original-item.json, reread every assembly citation and the supporting Stacks statements, and expanded the last assembly step to match the criterion explicitly on h^{-1}(V_i)=X_i and provide the actual existential witness N even for an empty cover.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, second sentence: quasi-projectivity of the composite, by 0C4M; supplies a relatively ample module on the composite modification tower. The five steps realize precisely the 0C4M composition input to 0C4P: finite-type composition, restriction to a finite affine cover, a common ample-twist exponent, construction of the global twist, and the relative-ampleness affine-cover criterion. No chapter or unit route changes. Q106 re-split preserves the same argument via the two new local-data and twist-comparison nodes. The original five-step argument is realized by the present four assembly steps and the two statement-only tasks.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-relative-ample-affine-cover",
+    "why": "Generic scheme affine-open-cover criterion 01VJ(3) implies (1), required at the end of Stacks 0C4K. This unit has no separate version; it is used solely for its scheme statement. Batch-5 flag reviewed: general scheme geometry (Stacks 01VJ), neither assumed statement gives it and it is not trace-formula content."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-relative-ample-absolute-twist",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-e8a31f8e9",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-e8a31f8e9 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks morphisms.tex 0C4M (l.9755), 0C4K (l.8888), 0892(1) (l.8829) and 01VJ (l.8680) in full. The released re-split note (2026-10-22) still applies: live keeps the old 5-step proof (3368 characters, reviewed by Q10), and neither new id exists in live or side-live. This is the third push of the same split; ffac3142 and e831698f were PASSed and then refused at landing because side completion had not been promoted. Against e831698f both new nodes are byte-identical. The only changes are the wording of assembly Step 4 (it makes h^{-1}(V_i)=X_i and the global witness N explicit for the empty cover) and the split_report. The statement is unchanged and faithful to 0C4M/01VH: quasi-compact S, with no separated or Noetherian hypothesis added. The assembly is 1696 characters. Step 1 is node A. Step 2 is the elementary max({0}∪{a_i}) over a finite family. Step 3 is node B with U=Y_i. Step 4 is lem-trf-scheme-relative-ample-affine-cover (01VJ (3)⇒(1)). Every hypothesis is supplied. Node A, lem-sfb-composition-finite-affine-twist-bounds, is old Steps 1–3 and is true: h is finite type by 01T3; f_i is a base change by 01T4; f_i^{-1}W=f^{-1}W for affine W⊆Y_i; M_i is ample, and its ampleness gives the quasi-compactness of Y_i that 0892 needs; lem-sfb-relative-ample-absolute-twist gives a bound for all a≥a_i. Node B, lem-sfb-invertible-twist-open-restriction, is old Step 4 in full: invertibility (0B8L, 01CT), the restriction isomorphism via 01CD/0097 with f∘j=k∘f_U, the a=0 unit map, and ampleness invariant under isomorphism. It is true for an arbitrary f and U. Edge cases checked: S empty (r=0), U=Y, U empty, a=0, a=1, f=id. A and B are of comparable size, neither restates the item, and no argument of the old proof was dropped. Duplicate search (lem-sc-ample-iso, lem-sc-ample-finite-affine-cover, lem-weil-pbc-invertible-pullback-tensor, lem-sfb-relative-ample-absolute-twist, lem-trf-scheme-relative-ample-base-change) found ingredients only, no duplicates. Each new node records leansearch, loogle, leanfinder and grep searches, with no Mathlib match. No SGA source is used. The 01VJ tool use is accepted as generic scheme geometry. Advisory: the maintainer-recorded top-level tool_uses still lists the 0892 node and invertible-pullback-tensor, which are now inputs of the new nodes, not of the assembly."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiprojectiveQCComposition",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isAmple_on_affineOpens_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiprojectiveQCComposition.lean",
+  "statement": "theorem exists_isAmple_on_affineOpens_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType g] [QuasiCompact g] [CompactSpace S] (hf : ∃ (L : X.Modules) (_ : L.IsInvertible), ∀ V : Y.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (f ⁻¹ᵁ V).ι).obj L).IsInvertible, @IsAmple (f ⁻¹ᵁ V).toScheme ((tensorPullback (f ⁻¹ᵁ V).ι).obj L) h) (hg : ∃ (M : Y.Modules) (_ : M.IsInvertible), ∀ V : S.Opens, IsAffineOpen V → ∃ h : ((tensorPullback (g ⁻¹ᵁ V).ι).obj M).IsInvertible, @IsAmple (g ⁻¹ᵁ V).toScheme ((tensorPullback (g ⁻¹ᵁ V).ι).obj M) h) : LocallyOfFiniteType (f ≫ g) ∧ QuasiCompact (f ≫ g) ∧ ∃ (N : X.Modules) (_ : N.IsInvertible), ∀ V : S.Opens, IsAffineOpen V → ∃ h : ((tensorPullback ((f ≫ g) ⁻¹ᵁ V).ι).obj N).IsInvertible, @IsAmple ((f ≫ g) ⁻¹ᵁ V).toScheme ((tensorPullback ((f ≫ g) ⁻¹ᵁ V).ι).obj N) h",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48d61414c",
+  "group": "Q23",
+  "result": "pass",
+  "note": "The node matches live except for its lean field; the item is not dropped (only lem-per-quasiprojective-qc-composition is). The Lean matches 0C4M/01VH clause by clause: LocallyOfFiniteType∧QuasiCompact for f and g, CompactSpace S, ∃ invertible L/M ample on tensorPullback restrictions over every affine open, and a conclusion of finite type of f≫g plus ∃ invertible N ample over affines. The ∃ h : IsInvertible witness is harmless (IsInvertible is a Prop class and holds for restrictions). No added separated/Noetherian hypothesis; one universe u. No duplicate def or composition statement in live Lean; the encoding matches the landed SchemeRelativeAmpleAffineCover. Docstrings have the source, blueprint tag and five proof steps; the only sorry is the theorem's proof; lean.statement is verbatim; the report has both sections. No recompile (no file changed). Advisory: tensorPullback (def-pc-module-pullback) is not in stmt_deps; proof-only imports could be dropped."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T081152-L-1847232",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

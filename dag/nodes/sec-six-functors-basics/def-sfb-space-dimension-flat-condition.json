@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-space-dimension-flat-condition",
+ "kind": "definition",
+ "title": "Dimension-filtered module flatness on all etale charts",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], $Y,B$ schemes over $S$, $f:X\\to h_Y$, and $g:B\\to Y$, where $h_Y,h_B$ are the represented algebraic spaces [def-trf-scheme-algebraic-space]. Let $M$ be a module on the small etale site of $X$, and $n\\in\\mathbf N$. Form the actual sheaf fibre product $X_B=X\\times_{h_Y}h_B$ with first projection $q$ [def-sfb-space-sheaf-fibre-product] and put $M_B=q^*M$, using tensor pullback [def-trf-space-etale-module-functors]. Define $P_n(X,M;B)$ by the following condition: for every object $a:U\\to X_B$ of its small etale site, and every $u\\in U$ mapping to $v\\in B$, if $\\operatorname{trdeg}_{\\kappa(v)}\\kappa(u)\\ge n$, then $(a^*_{\\mathrm{Zar}}M_B)_u$ is flat over $\\mathcal O_{B,v}$. Here $a^*_{\\mathrm{Zar}}$ is restriction to Zariski opens [def-trf-space-module-scheme-restriction], stalks are [def-pc-module-stalk-functor], residue fields and their maps are [def-weil-residue-field], transcendence degree is [def-kun-transcendence-degree], and base flatness is [def-pc-scheme-module-flat-over], with scalar restriction along the actual stalk map of $U\\to B$. The map $U\\to B$ is the Yoneda preimage of its composite with the second sheaf-pullback projection. This defines the predicate for arbitrary module sheaves and maps; it is used for finite-type quasi-coherent modules on locally finite-type families.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-module-scheme-restriction",
+  "def-pc-module-stalk-functor",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-pc-scheme-module-flat-over"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tags 0CWS (lemma-pre-flat-dimension-n), 0CWT (definition-flat-dimension-n), and equation-flat-dimension-n; scheme source flat.tex Tag 05UF."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension filtered flatness on all etale charts after arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": IsStableUnderBaseChange Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: results concern unfiltered flatness or smooth/etale loci, not the all-chart dimension-filtered tensor-base-change condition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension filtered flatness module stalk residue field transcendence degree etale charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.Etale.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra. This follows from the universal property of localization, where inverting powers of \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: results concern unfiltered flatness or smooth/etale loci, not the all-chart dimension-filtered tensor-base-change condition."
+  },
+  {
+   "tool": "grep",
+   "query": "dimensionFlatCondition|flat_dimension|dimension.*flat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match: results concern unfiltered flatness or smooth/etale loci, not the all-chart dimension-filtered tensor-base-change condition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg dimensionFlatCondition|DimensionFlat|flatDimension|flat_dimension in lean/WeilConjectures and lean/Sheaf; search dimension flatness in dag/nodes; tools/blueprint_refs.py search dimension-flat-condition",
+   "results": "No existing all-chart base-change predicate. SmoothTopDimensionRankDecomposition.lean:79 defines smoothTopDimensionFlatCondition only for Zariski scheme modules with a pointwise test; it does not accept algebraic-space etale modules or all representable etale charts. blueprint search: 0 matches. Existing theorem nodes repeat the informal condition, but no definition node owns it.",
+   "date": "2026-10-24",
+   "verdict": "A new definition node is needed; reuse existing sheaf pullback, tensor pullback, Zariski restriction and stalk functors."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-complete-devissage-dimension-flattening",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Definition of the all-chart predicate P_n used to state this affine representability input.",
+   "via": [
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDimensionFlatCondition",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.dimensionFlatCondition",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.dimensionFlatBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.dimensionFlatChartMap",
+   "AlgebraicGeometry.AlgebraicSpace.dimensionFlatCondition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDimensionFlatCondition.lean",
+  "statement": "def dimensionFlatCondition {S : Scheme.{u}} {Y B : Over S} {X : AlgebraicSpace S} (f : X ⟶ schemeSpace Y) (M : X.Modules) (n : ℕ) (g : B ⟶ Y) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac6b372aa",
+  "group": "Q105",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac6b372aa",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Item Lean statement matches node and Stacks 05UF clause by clause: fp R→A, Spec A/Spec R over Spec ℤ via terminal-slice functor with actual Spec.map, M on small étale site with IsFinitePresentation, N=Γ via identity chart + schemeRestriction + ΓSpecIso.inv, hdev uses existing CompleteAlgebraDevissage (Module.Finite witness required by its signature), P_{d+1} over identity, conclusion ∃ V∋p, Z→V Mono+LFP+QC+QC diagonal, ∀ B→V: P_d ↔ ∃! lift (monic ⇒ exactly the singleton-or-empty functor). New def node def-sfb-space-dimension-flat-condition: tensor pullback along fst of actual sheaf fibre product, Zariski restriction to each étale chart, stalk flat over O_{B,v} via stalkMap, trdeg as Cardinal via residueFieldMap of the same chart→B Yoneda preimage; no duplicate live (only Zariski smoothTopDimensionFlatCondition), no same-id parallel node, no other run delivers it. Added stmt_deps are definition-node owners with matching live records; item node otherwise identical to live; lean.statement fields verbatim; imports exist and match proof_deps. Edge cases d=0, zero module/length 0, empty/nonaffine B, infinite trdeg covered; no extra assumptions; real-data defs; docstrings/source/blueprint/proof steps present; only sorry. No compile run (no change). Advisory: IsFinitePresentation's free QuasicoherentData index universe, equivalent for affine X."
+ }
+}

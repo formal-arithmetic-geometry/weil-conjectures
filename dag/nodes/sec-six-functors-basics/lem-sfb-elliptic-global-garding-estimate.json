@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-elliptic-global-garding-estimate",
+ "kind": "statement",
+ "title": "Global smooth-section Gårding estimate for an elliptic bundle operator",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $N$ be a compact oriented smooth manifold without boundary, of dimension $m\\geq1$, with a smooth Riemannian metric and volume form $dV$. Let $G,H\\to N$ be smooth real vector bundles of the same finite rank, with smooth positive definite fibre metrics. Let $k\\geq1$ be an integer and $Q:\\Gamma^\\infty(G)\\to\\Gamma^\\infty(H)$ a real-linear differential operator locally of the form $Q=\\sum_{|\\alpha|\\leq k}b_\\alpha(x)\\partial^\\alpha$ with smooth matrix coefficients. Assume that $\\sum_{|\\alpha|=k}b_\\alpha(x)\\xi^\\alpha:G_x\\to H_x$ is invertible whenever $0\\ne\\xi\\in T_x^*N$. Fix a finite smooth trivializing atlas and a subordinate smooth partition of unity with compact supports in the charts. Write $\\|u\\|_{H^k(G)}^2$ for the sum of the Euclidean $L^2$ norms squared of all localized frame-component derivatives of $u$ through order $k$. Write $\\|u\\|_{L^2(G)}^2=\\int_N|u|^2\\,dV$ and similarly for $H$. There is a constant $C>0$, depending on these fixed data but not on $u$, such that every smooth section $u$ of $G$ satisfies $\\|u\\|_{H^k(G)}\\leq C\\bigl(\\|Qu\\|_{L^2(H)}+\\|u\\|_{L^2(G)}\\bigr)$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2 Gårding inequality (2.3), Sobolev index zero, printed p.289; only its smooth-section estimate, with the two-bundle system version of VI §1; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-bundle-elliptic-estimate-data"
+ ],
+ "proof": [
+  {
+   "text": "If $N$ is empty or the common bundle rank is zero, all sections and norms vanish and $C=1$ works. Otherwise apply [lem-sfb-differential-formal-adjoint-symbol] with $d=k$ to obtain $Q^*: \\Gamma^\\infty(H)\\to\\Gamma^\\infty(G)$ of order at most $k$ and symbol $(-1)^k\\sigma_k(Q)^*$. Put $B=G\\oplus H$, with the orthogonal sum metric, and define $P(a,b)=(Q^*b,Qa)$. In concatenated local frames this is a real-linear differential operator on $B$ with smooth block matrix coefficients of order at most $k$.",
+   "uses": [
+    "lem-sfb-differential-formal-adjoint-symbol"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "proof (3), inherited supporting analytic branch; agent-written block-operator reduction using the existing formal-adjoint and weak-Garding nodes, not an argument stated in this blueprint file"
+   }
+  },
+  {
+   "text": "For $\\xi\\ne0$ put $A=\\sigma_k(Q)(x,\\xi)$ and $D=(-1)^k A^*$. Since $A:G_x\\to H_x$ is invertible, $D:H_x\\to G_x$ is invertible with inverse $(-1)^k(A^{-1})^*$. The degree-$k$ symbol of $P$ maps $(a,b)$ to $(Db,Aa)$; its inverse maps $(c,e)$ to $(A^{-1}e,D^{-1}c)$. Thus $P$ satisfies exactly the ellipticity hypothesis of the one-bundle weak estimate, without identifying $G$ and $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "proof (3), inherited supporting analytic branch; agent-written block-operator reduction using the existing formal-adjoint and weak-Garding nodes, not an argument stated in this blueprint file"
+   }
+  },
+  {
+   "text": "Choose a finite smooth coordinate atlas trivializing both $G$ and $H$: when the fixed atlas already trivializes $H$ take it with its cutoffs; otherwise intersect each fixed chart with trivializing opens of $H$, keep finitely many by compactness, and take a subordinate smooth partition of unity from [lem-sfb-smooth-subordinate-partition] with $S=N$, whose closed supports are compact in the charts since $N$ is compact. Write $\\|\\cdot\\|'_{H^k}$ for the norms of the item's form built from these data, with the concatenated frames of $G,H$ for $B$. By [lem-sfb-bundle-sobolev-rellich] for the bundle $G$ and $s=k$, different atlas, frame and partition choices give equivalent norms, so there is $c\\geq1$ with $\\|u\\|_{H^k(G)}\\leq c\\|u\\|'_{H^k(G)}$ for all smooth $u$ ($c=1$ if the fixed data were kept). For any smooth $u$, let $w=(u,0)$. Then $Pw=(0,Qu)$ both classically and distributionally: against compactly supported smooth tests repeated integration by parts identifies distributional derivatives of smooth coefficients with their classical derivatives. Both sections are $L^2$, since they are smooth on the compact $N$. Apply [lem-sfb-weak-garding-sobolev-estimate] with bundle $B$, operator $P$, $d=k$, $s=0$, $v=w$ and the norms $\\|\\cdot\\|'$. The base is compact, oriented and without boundary, its dimension is $m\\geq1$, and $B$ has a smooth positive definite metric. The cited statement uses the integrated norm $\\|\\cdot\\|_{L^2_g}$ of the Riemannian volume form $dV_g$ for $H^0(B)=L^2(B)$ and gives a fixed $C_0>0$ with $\\|w\\|'_{H^k(B)}\\leq C_0(\\|Pw\\|_{L^2_g(B)}+\\|w\\|_{L^2_g(B)})$.",
+   "uses": [
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-weak-garding-sobolev-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "proof (3), inherited supporting analytic branch; agent-written block-operator reduction using the existing formal-adjoint and weak-Garding nodes, not an argument stated in this blueprint file"
+   }
+  },
+  {
+   "text": "For every cutoff $\\chi_j$ of the chosen data and multi-index $|\\alpha|\\leq k$, the localized components satisfy $\\partial^\\alpha(\\chi_j w)=(\\partial^\\alpha(\\chi_j u),0)$. The sums of their squared Euclidean norms are identical, so $\\|w\\|'_{H^k(B)}=\\|u\\|'_{H^k(G)}$. The orthogonal sum metric gives pointwise $|w|=|u|$ and $|Pw|=|Qu|$, hence $\\|w\\|_{L^2_g(B)}=\\|u\\|_{L^2_g(G)}$ and $\\|Pw\\|_{L^2_g(B)}=\\|Qu\\|_{L^2_g(H)}$. Write $dV=\\rho\\,dV_g$ with $\\rho$ smooth and positive ($\\rho=1$ when $dV$ is the Riemannian volume form); on compact $N$ it has a minimum $\\rho_->0$, so $\\int|f|^2dV_g\\leq\\rho_-^{-1}\\int|f|^2dV$ for every smooth section $f$. Combining with step 3, $\\|u\\|_{H^k(G)}\\leq c\\|u\\|'_{H^k(G)}\\leq cC_0\\rho_-^{-1/2}(\\|Qu\\|_{L^2(H)}+\\|u\\|_{L^2(G)})$; take $C=cC_0\\rho_-^{-1/2}$. All choices determining $P$, the norms and $c,\\rho_-$ were fixed independently of $u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "proof (3), inherited supporting analytic branch; agent-written block-operator reduction using the existing formal-adjoint and weak-Garding nodes, not an argument stated in this blueprint file"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-differential-formal-adjoint-symbol",
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-bundle-sobolev-rellich",
+  "lem-sfb-weak-garding-sobolev-estimate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-written supporting analytic reduction for proof (3); Demailly VI §§1–2 is WANTED locally, so no claim of having read its proof is made."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Garding elliptic estimate on a compact manifold norm Hk bounded by norm Qu in L2 plus norm u in L2",
+   "results": "{\"t\": \"2026-10-24T02:28:06Z\", \"tool\": \"leanfinder\", \"query\": \"Garding elliptic estimate on a compact manifold norm Hk bounded by norm Qu in L2 plus norm u in L2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"MeasureTheory.eLpNormLESNormFDerivOfLeConst\", \"ContDiffMapSupportedIn.seminorm_le_iff\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_one\", \"ContDiffMapSupportedIn.norm_iteratedFDeriv_apply_le_seminorm\", \"ContDiffMapSupportedIn.seminorm_le_iff_withOrder\", \"MeasureTheory.eLpNormLESNormFDerivOfLeConst_def\"], \"digest\": \"170c1253f3286e77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the analytic hits concern Gagliardo–Nirenberg inequalities on Euclidean functions, not an elliptic-system estimate; the elliptic name hits are algebraic curves or elliptic functions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"elliptic\"",
+   "results": "{\"t\": \"2026-10-24T02:28:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"elliptic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.IsElliptic.isUnit\", \"WeierstrassCurve.IsElliptic.mk\", \"WeierstrassCurve.isElliptic_iff\", \"WeierstrassCurve.instIsEllipticMap\", \"WeierstrassCurve.twoTorsionPolynomial_discr_ne_zero_of_isElliptic\", \"WeierstrassCurve.instIsEllipticHSMulVariableChange\", \"IsEllipticDvdSequence.id\"], \"digest\": \"c60cd8e1c20e56eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the analytic hits concern Gagliardo–Nirenberg inequalities on Euclidean functions, not an elliptic-system estimate; the elliptic name hits are algebraic curves or elliptic functions."
+  },
+  {
+   "tool": "grep",
+   "query": "elliptic|Garding|Gårding",
+   "results": "{\"t\": \"2026-10-24T02:28:10Z\", \"tool\": \"grep\", \"query\": \"elliptic|Garding|Gårding\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Analysis/SpecialFunctions/Elliptic/Weierstrass.lean\", \"Mathlib/Analysis/Complex/AbelLimit.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"1c80ba22b379e545\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the analytic hits concern Gagliardo–Nirenberg inequalities on Euclidean functions, not an elliptic-system estimate; the elliptic name hits are algebraic curves or elliptic functions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Garding inequality for elliptic systems controls the highest Sobolev norm by the operator L2 norm and the section L2 norm",
+   "results": "{\"t\": \"2026-10-24T02:29:20Z\", \"tool\": \"leansearch\", \"query\": \"Garding inequality for elliptic systems controls the highest Sobolev norm by the operator L2 norm and the section L2 norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_le\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"MeasureTheory.eLpNormLESNormFDerivOfLeConst.congr_simp\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_one\", \"MeasureTheory.lintegral_pow_le_pow_lintegral_fderiv\", \"MeasureTheory.SNormLESNormFDerivOfEqConst_def\"], \"digest\": \"f413612b3e4d111a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the analytic hits concern Gagliardo–Nirenberg inequalities on Euclidean functions, not an elliptic-system estimate; the elliptic name hits are algebraic curves or elliptic functions."
+  },
+  {
+   "tool": "grep",
+   "query": "Garding|Gårding|elliptic.*(estimate|operator)|Sobolev",
+   "results": "{\"t\": \"2026-10-24T03:03:40Z\", \"tool\": \"grep\", \"query\": \"Garding|Gårding|elliptic.*(estimate|operator)|Sobolev\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/DerivNotation.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Complex/AbelLimit.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\"], \"digest\": \"8463d85b41d2cf69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Sobolev inequalities, Bessel-potential membership and Schwartz seminorm bounds do not state an elliptic variable-coefficient estimate on compact bundle sections. Read Mathlib/Analysis/Distribution/Sobolev.lean:11–43 and Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean:15–53."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth elliptic differential operator between equal rank vector bundles on a compact manifold controls the Sobolev norm modulo the L2 norm",
+   "results": "{\"t\": \"2026-10-24T03:03:40Z\", \"tool\": \"leansearch\", \"query\": \"A smooth elliptic differential operator between equal rank vector bundles on a compact manifold controls the Sobolev norm modulo the L2 norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_le\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv\", \"MeasureTheory.eLpNormLESNormFDerivOfLeConst.congr_simp\", \"contMDiffWithinAt_hom_bundle\", \"Bundle.ContMDiffRiemannianMetric.contMDiff\", \"MeasureTheory.SNormLESNormFDerivOfEqConst_def\"], \"digest\": \"2397b01e1c9abdcd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Sobolev inequalities, Bessel-potential membership and Schwartz seminorm bounds do not state an elliptic variable-coefficient estimate on compact bundle sections. Read Mathlib/Analysis/Distribution/Sobolev.lean:11–43 and Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean:15–53."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"elliptic\"",
+   "results": "{\"t\": \"2026-10-24T03:03:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"elliptic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsElliptic\", \"WeierstrassCurve.IsElliptic.isUnit\", \"WeierstrassCurve.IsElliptic.mk\", \"WeierstrassCurve.isElliptic_iff\", \"WeierstrassCurve.instIsEllipticMap\", \"WeierstrassCurve.twoTorsionPolynomial_discr_ne_zero_of_isElliptic\", \"WeierstrassCurve.instIsEllipticHSMulVariableChange\", \"IsEllipticDvdSequence.id\"], \"digest\": \"c60cd8e1c20e56eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: elliptic hits concern algebraic curves or divisibility sequences, not elliptic differential estimates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global elliptic estimate on a compact manifold: Hk norm of a smooth bundle section is bounded by L2 norm of Qu plus L2 norm of u",
+   "results": "{\"t\": \"2026-10-24T03:03:42Z\", \"tool\": \"leanfinder\", \"query\": \"Global elliptic estimate on a compact manifold: Hk norm of a smooth bundle section is bounded by L2 norm of Qu plus L2 norm of u\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq_inner\", \"MeasureTheory.eLpNorm_le_eLpNorm_fderiv_one\", \"ContDiffMapSupportedIn.seminorm_le_iff\", \"ContDiffMapSupportedIn.norm_iteratedFDeriv_apply_le_seminorm\", \"ContDiffMapSupportedIn.norm_iteratedFDeriv_apply_le_seminorm_withOrder\", \"ContDiffMapSupportedIn.seminorm_le_iff_withOrder\", \"MeasureTheory.eLpNormLESNormFDerivOfLeConst\"], \"digest\": \"6bcc95f829e80d25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Sobolev inequalities, Bessel-potential membership and Schwartz seminorm bounds do not state an elliptic variable-coefficient estimate on compact bundle sections. Read Mathlib/Analysis/Distribution/Sobolev.lean:11–43 and Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean:15–53."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\"",
+   "results": "{\"t\": \"2026-10-24T03:05:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sobolev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TemperedDistribution.MemSobolev\", \"TemperedDistribution.MemSobolev.mono\", \"TemperedDistribution.memSobolev_fun_zero\", \"TemperedDistribution.MemSobolev.lineDerivOp\", \"TemperedDistribution.MemSobolev.laplacian\", \"TemperedDistribution.MemSobolev.neg\", \"TemperedDistribution.MemSobolev.sub\", \"TemperedDistribution.MemSobolev.add\"], \"digest\": \"9f33c41d8fc07c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Sobolev inequalities, Bessel-potential membership and Schwartz seminorm bounds do not state an elliptic variable-coefficient estimate on compact bundle sections. Read Mathlib/Analysis/Distribution/Sobolev.lean:11–43 and Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean:15–53."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An a priori estimate for a variable coefficient elliptic system bounds all order k derivatives by the operator applied to the function and its L2 norm",
+   "results": "{\"t\": \"2026-10-24T03:05:07Z\", \"tool\": \"leanfinder\", \"query\": \"An a priori estimate for a variable coefficient elliptic system bounds all order k derivatives by the operator applied to the function and its L2 norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNormLESNormFDerivOfLeConst\", \"SchwartzMap.seminormAux_le_bound\", \"SchwartzMap.le_seminormAux\", \"SchwartzMap.bounds_nonempty\", \"SchwartzMap.one_add_le_sup_seminorm_apply\", \"SchwartzMap.bounds_bddBelow\", \"SchwartzMap.seminorm_le_bound\", \"SchwartzMap.decay\"], \"digest\": \"065ad6416fa0e09e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Sobolev inequalities, Bessel-potential membership and Schwartz seminorm bounds do not state an elliptic variable-coefficient estimate on compact bundle sections. Read Mathlib/Analysis/Distribution/Sobolev.lean:11–43 and Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean:15–53."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-sobolev-closed-range",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §2 Gårding inequality (2.3), Sobolev index zero, printed p.289; only its smooth-section estimate, with the two-bundle system version of VI §1; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf",
+   "via": [
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-elliptic-global-garding-estimate",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing one-bundle weak Garding estimate by constructing an elliptic block operator on G direct-sum H from Q and its existing formal differential adjoint. Wrote the block-symbol inverse and the exact localized and integrated norm identities. No new nodes: the two cited existing statements already supply the only non-elementary inputs. Mathlib searched in two phrasings with logged LeanFinder, Loogle, LeanSearch and grep calls. Maintainer reader FIX: step 3 no longer assumes the fixed atlas trivializes H or that dV is the Riemannian volume form; it refines to an atlas trivializing G and H (partition from lem-sfb-smooth-subordinate-partition), compares norms by the equivalence in lem-sfb-bundle-sobolev-rellich, and step 4 absorbs the density ratio.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, proof (3), inherited analytic prerequisite chain through harmonic representatives and elliptic closed range. This is a supporting analytic assembly and does not change that unit route. blueprint_refs.py ancestor returns None for the inherited chain; preserved from.node=null and its detailed from.place/via rather than inventing an ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-d11effca6",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-d11effca6 (reviewer sub-agent of L); spot-checked: I read the item in full and every statement it cites: formal-adjoint-symbol, weak-garding-sobolev-estimate, bundle-sobolev-rellich, smooth-subordinate-partition and the citer elliptic-sobolev-closed-range. Demailly VI §§1–2 is not in the literature tree, so the source is marked WANTED and proof_origin is agent; there is no SGA. The statement (Demailly (2.3) at Sobolev index 0, for smooth sections between two bundles) is true and unweakened. It serves the citer's step 4 exactly, and it duplicates nothing: the weak estimate is for one bundle only. Steps 1–2 are correct: the block operator P(a,b)=(Q*b,Qa) has symbol (a,b)↦((-1)^kA*b,Aa), and I checked its inverse in both orders, for odd k and in non-orthonormal frames. Steps 3–4 apply the weak estimate at s=0 to w=(u,0) and every hypothesis holds. Gap: the item fixes only a trivializing atlas for G and uses only G-frames, but step 3 needs concatenated frames of G⊕H on the same charts. Also, the weak node's L² norm uses the Riemannian volume form, while the item's dV is not stated to be that form. FIX: step 3 now refines to an atlas that trivializes both G and H. It takes the partition from lem-sfb-smooth-subordinate-partition (a Mathlib leaf) and bounds the item's H^k norm by the refined one using the norm-equivalence clause of lem-sfb-bundle-sobolev-rellich. Step 4 absorbs the density ratio ρ≥ρ_->0 on compact N, giving C=cC_0ρ_-^{-1/2}. proof_deps is now the union of all four uses, the route stays in the same unit, there is no cycle and no tool_uses. Edge cases checked: u=0, ker Q≠0, N empty, rank 0, S¹ with d/dx, G not isomorphic to H. No new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EllipticGlobalGardingEstimate",
+  "declaration": "RealManifold.elliptic_global_garding_estimate",
+  "file": "lean/Sheaf/Paper/EllipticGlobalGardingEstimate.lean",
+  "statement": "theorem elliptic_global_garding_estimate (m r : ℕ) (hm : 1 ≤ m) (N : Type u) [TopologicalSpace N] [ChartedSpace (CoordinateModel m) N] [IsManifold 𝓘(ℝ, CoordinateModel m) ∞ N] [T2Space N] [CompactSpace N] [MeasurableSpace N] [BorelSpace N] (orientation : OrientedAtlas m N) (g : ContMDiffRiemannianMetric 𝓘(ℝ, CoordinateModel m) ∞ (CoordinateModel m) (TangentSpace 𝓘(ℝ, CoordinateModel m) : N → Type)) (μ : PositiveSmoothVolume m N) (G : N → Type v) [TopologicalSpace (TotalSpace (CoordinateModel r) G)] [∀ x, NormedAddCommGroup (G x)] [∀ x, NormedSpace ℝ (G x)] [FiberBundle (CoordinateModel r) G] [VectorBundle ℝ (CoordinateModel r) G] [ContMDiffVectorBundle ∞ (CoordinateModel r) G 𝓘(ℝ, CoordinateModel m)] (H : N → Type w) [TopologicalSpace (TotalSpace (CoordinateModel r) H)] [∀ x, NormedAddCommGroup (H x)] [∀ x, NormedSpace ℝ (H x)] [FiberBundle (CoordinateModel r) H] [VectorBundle ℝ (CoordinateModel r) H] [ContMDiffVectorBundle ∞ (CoordinateModel r) H 𝓘(ℝ, CoordinateModel m)] (gG : ContMDiffRiemannianMetric 𝓘(ℝ, CoordinateModel m) ∞ (CoordinateModel r) G) (gH : ContMDiffRiemannianMetric 𝓘(ℝ, CoordinateModel m) ∞ (CoordinateModel r) H) (k : ℕ) (hk : 1 ≤ k) (Q : ContMDiffSection 𝓘(ℝ, CoordinateModel m) (CoordinateModel r) ∞ G →ₗ[ℝ] ContMDiffSection 𝓘(ℝ, CoordinateModel m) (CoordinateModel r) ∞ H) (D : BundleDifferentialOperator k Q) (hD : D.IsElliptic) (A : BundleLocalization m r N G) : ∃ C : ℝ, 0 < C ∧ ∀ s : ContMDiffSection 𝓘(ℝ, CoordinateModel m) (CoordinateModel r) ∞ G, A.sobolevNorm k s ≤ C * (bundleL2Norm gH μ (Q s) + bundleL2Norm gG μ s)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60d969c59",
+  "group": "NV",
+  "result": "pass",
+  "note": "Item theorem RealManifold.elliptic_global_garding_estimate matches the node clause by clause: compact oriented m>=1 manifold (OrientedAtlas), smooth metric g, PositiveSmoothVolume (densities in every smooth chart; satisfiable by Riemannian volume, finite on compact N, independent of g as the item's dV allows), equal-rank G,H with ContMDiffRiemannianMetric gG,gH, k>=1, Q real-linear on ContMDiffSection, BundleDifferentialOperator covering N with smooth coefficients and the identity on all smooth sections, IsElliptic = bijective top symbol at every nonzero covector (coefficients determined by Q, so not fakeable), BundleLocalization trivializing G with subordinate compactly supported partition, classical localized H^k norm (localized coefficients genuinely smooth, honest integrals, each |alpha|<=k once), integrated L2 norms, exists C>0 before s, unsquared inequality with L2 remainder. Edge cases N empty, rank 0, ker Q nonzero, non-isomorphic G/H, non-Riemannian volume all handled. New node def-sfb-bundle-elliptic-estimate-data matches its statement, 16 declarations listed with source/blueprint docstrings, no hollow defs, only sorry, no Mathlib match, no RealManifold name clash. Records: only lean + stmt_deps (adds the new def node) differ from live; lean.statement verbatim in both files. Maintainer note: NO's def-sfb-bundle-sobolev-space (BundleSobolevSpace.lean) landed 13:18 CST, after this base (index 05:08 UTC = 13:08 CST); different notions (weak-derivative norms on L2 classes, metric volume, trivializationAtlas frames) vs classical smooth-section norms here, but both modules define a Localization structure and a multi-index partial; consider later consolidation, not a return. No compile run (no file changed)."
+ }
+}

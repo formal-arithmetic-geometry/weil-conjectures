@@ -131,5 +131,56 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Algebra.ind_smooth_quotient_compatibility"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Algebra.ind_smooth_quotient_compatibility",
+     "module": "WeilConjectures.Algebra.IndSmoothQuotientCompatibility",
+     "lines": [
+      30,
+      85
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $R\\to\\Lambda$ be a homomorphism of commutative rings, and let $K\\subseteq I$ be ideals of $R$. If $\\Lambda/I\\Lambda$ is a filtered colimit, in the category of commutative $R/I$-algebras, of smooth $R/I$-algebras, then $(\\Lambda/K\\Lambda)/(I/K)(\\Lambda/K\\Lambda)$ is a filtered colimit, in the category of commutative $(R/K)/(I/K)$-algebras, of smooth $(R/K)/(I/K)$-algebras.",
+  "proof": [
+   {
+    "text": "Put J = I.map(algebraMap R Λ) and L = K.map(algebraMap R Λ). Monotonicity gives L ≤ J. The ideal extended from I.map(Quotient.mk K) to Λ/L equals J.map(Quotient.mk L): ideal map composition and commutativity of the quotient algebra square give the equality. DoubleQuot.quotQuotEquivQuotOfLE identifies (R/K)/(I/K) with R/I and (Λ/L)/(J/L) with Λ/J. These maps send the double class of each element to its single class, so they commute with the structure maps.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Restrict scalar actions along the base ring isomorphism and its inverse. On algebra homomorphisms keep the underlying functions; scalar compatibility follows by substitution. These functors are inverse up to the identity maps on underlying rings. Smoothness is preserved: transport a finite polynomial presentation by changing coefficients along the isomorphism, and transport the square-zero lifting problem along the same scalar action; the original lift is a lift after transport. Thus both finite presentation and formal smoothness hold for each transported term.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Apply the transport functor to the given diagram and its colimit cocone, keeping the same small filtered index category. It remains a colimit: send any competing cocone through the inverse functor, use the original universal property, and transport its unique map back. Compose the transported vertex with the compatible algebra isomorphism from the first step. The resulting cocone has the required double quotient as vertex and smooth terms, hence witnesses ObjectProperty.ind.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-stable-abelian-level-normalization",
+ "kind": "statement",
+ "title": "Scheme representability of the stable abelian-level normalization",
+ "statement": "Let $k$ be any field, let $g\\geq2$, and let $\\ell\\geq3$ be prime and different from $\\operatorname{char}(k)$. Use the unpointed stable moduli stack $\\overline{\\mathcal M}_{g,0}$, its smooth substack $\\mathcal M_{g,0}$ and the smooth level scheme $L_{g,\\ell}$ with the meanings in [def-sfb-stable-pointed-moduli-groupoids]. Let $Q_g$ be a coarse moduli scheme of $\\overline{\\mathcal M}_{g,0}$. Normalize $\\overline{\\mathcal M}_{g,0}$ in the full level cover $L_{g,\\ell}\\to\\mathcal M_{g,0}$, using all generic components. Explicitly, on a normal finite-type etale atlas $A\\to\\overline{\\mathcal M}_{g,0}$, take the integral closure of $\\mathcal O_A$ in the product of the function fields of $A^\\circ\\times_{\\mathcal M_{g,0}} L_{g,\\ell}$, where $A^\\circ=A\\times_{\\overline{\\mathcal M}_{g,0}}\\mathcal M_{g,0}$; glue these normalizations and their descent arrows as a stack. The resulting normalization is represented by a $k$-scheme $Z_{g,\\ell}$, with a morphism $a:Z_{g,\\ell}\\to\\overline{\\mathcal M}_{g,0}$ for which the induced scheme morphism $Z_{g,\\ell}\\to Q_g$ is finite. There is a 2-cartesian square\n$$\n\\begin{array}{ccc}\nL_{g,\\ell}&\\longrightarrow&Z_{g,\\ell}\\\\\n\\downarrow&&\\downarrow a\\\\\n\\mathcal M_{g,0}&\\longrightarrow&\\overline{\\mathcal M}_{g,0}.\n\\end{array}\n$$\nThus the inverse image of the smooth substack is exactly the original full level scheme. The word normalization means the integral-closure construction, not just an arbitrary finite cover. Finiteness is [def-weil-finite-integral-morphism]; fields, schemes and etaleness are [def-weil-field], [def-pc-scheme] and [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+  "place": "Sections 1.1 and 2.3.3--2.3.7, especially Proposition 2.3.4 and Remark 2.3.7; genus g >= 2 throughout. Local PDF WANTED; primary arXiv PDF read online.",
+  "url": "https://arxiv.org/pdf/alg-geom/9501003"
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal X=\\overline{\\mathcal M}_{g,0}$ and $U=\\mathcal M_{g,0}$. The coarse-moduli theorem gives a smooth Deligne--Mumford stack, its coarse scheme $Q_g$, and the dense open $U$. The stable-isomorphism theorem supplies finite type and finite diagonal, which are not consequences of the definition of a moduli groupoid. Smooth level rigidification supplies the scheme $V=L_{g,\\ell}$ and the representable finite etale surjection $V\\to U$: on a test family its 2-fibre product is the actual frame scheme, with its isomorphism to that family. Thus all inputs of the finite-normalization theorem are available over the original field $k$.",
+   "uses": [
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-stable-isom-finite-unramified",
+    "lem-sfb-smooth-curve-abelian-level-rigidification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Sections 2.3.3--2.3.7, especially the formal deformation and freeness argument of Proposition 2.3.6, printed pp.10--11; Stacks tags specified by the supporting nodes."
+   }
+  },
+  {
+   "text": "Apply the finite-normalization theorem to $(\\mathcal X,U,V)$. Denote the resulting normal Deligne--Mumford stack by $\\mathcal N$ and its representable finite map by $\\nu$. For every normal etale scheme atlas $T\\to\\mathcal X$, its pullback is exactly the integral closure in all generic field factors of $V\\times_U(T\\times_{\\mathcal X}U)$. The etale compatibility identifies the two pullbacks on $T\\times_{\\mathcal X}T$ and supplies their descent arrows. This is the normalization construction specified in the item. The same theorem gives $\\mathcal N\\times_{\\mathcal X}U\\simeq V$ canonically over $U$. Let $k_0\\subseteq k$ be the prime field. All moduli groupoids and frame covers in Step 1 are also defined over $k_0$, and their base changes are the indicated objects over $k$: on test schemes this is the same family, the same constant coefficient module, and the same frame, by base-change compatibility in smooth rigidification. The pullback of a frame is exactly the inverse-image frame followed by the degree-one base-change map specified in the current moduli-groupoid definition. Apply the construction over $k_0$ as well and call it $\\mathcal N_0$. Since $k_0$ is perfect, the scalar-extension clause identifies $\\mathcal N_0\\times_{k_0}k$ with $\\mathcal N$. We therefore check geometric automorphisms on $\\mathcal N_0$ first.",
+   "uses": [
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Sections 2.3.3--2.3.7, especially the formal deformation and freeness argument of Proposition 2.3.6, printed pp.10--11; Stacks tags specified by the supporting nodes."
+   }
+  },
+  {
+   "text": "Fix an arbitrary geometric object $y$ of $\\mathcal N_0$ over an algebraically closed extension $\\Omega/k_0$, and write $C=\\nu_0(y)$. The versal-branch theorem supplies the complete deformation chart $[\\operatorname{Spf}A/H]$ for $C$, where $H=\\operatorname{Aut}_\\Omega(C)$, with smooth locus obtained by inverting the product of its node parameters. Its finite algebra $B$ uses the full frame torsor, so it agrees with the algebra in the formal-chart compatibility of the normalization theorem. That compatibility identifies the completed neighbourhood above $C$ with $[\\operatorname{Spf}B/H]$ and identifies $\\operatorname{Aut}(y)$ with the stabilizer of a geometric closed point $b$ of $B$ over the closed point of $A$. By the versal-branch freeness assertion this stabilizer is $\\{1\\}$. Hence every geometric object of $\\mathcal N_0$ has trivial automorphism group. The argument includes smooth $C$: then the parameter product is empty and equal to $1$. Here the perfect-field hypothesis of the formal-chart assertion holds because the ground field is $k_0$. An object of $\\mathcal N$ over an algebraically closed extension of $k$ is, by the scalar-extension identification of Step 2, the same object of $\\mathcal N_0$ with its fixed scalar map. Its automorphisms are unchanged. Thus the triviality also holds over the original $k$.",
+   "uses": [
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-dm-finite-normalization-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Sections 2.3.3--2.3.7, especially the formal deformation and freeness argument of Proposition 2.3.6, printed pp.10--11; Stacks tags specified by the supporting nodes."
+   }
+  },
+  {
+   "text": "Apply the inertia-free finite-cover criterion with target $\\mathcal X$, source $\\mathcal N$, and coarse scheme $Q_g$. The target has finite type and finite diagonal by the stable-isomorphism theorem; $\\nu$ is representable finite by construction, and Step 3 establishes the required triviality at every geometric object. The criterion therefore represents $\\mathcal N$ by a $k$-scheme $Z_{g,\\ell}$ whose composite to $Q_g$ is finite. Under this equivalence $\\nu$ is the desired morphism $a:Z_{g,\\ell}\\to\\overline{\\mathcal M}_{g,0}$. No restriction on the characteristic relative to the order of a stable curve's automorphism group was introduced.",
+   "uses": [
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-isom-finite-unramified",
+    "lem-sfb-dm-finite-normalization-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Sections 2.3.3--2.3.7, especially the formal deformation and freeness argument of Proposition 2.3.6, printed pp.10--11; Stacks tags specified by the supporting nodes."
+   }
+  },
+  {
+   "text": "The equivalence of Step 2 is over $U$, so the representing equivalence of Step 4 gives $Z_{g,\\ell}\\times_{\\overline{\\mathcal M}_{g,0}}\\mathcal M_{g,0}\\simeq L_{g,\\ell}$. Unfold the current 2-fibre-product definition: over a test scheme an object is $(z,m,\\phi)$, where $z$ is a point of $Z_{g,\\ell}$, $m$ is a smooth family, and $\\phi:a(z)\\xrightarrow{\\sim}m$ is an isomorphism of stable families. An arrow $(z,m,\\phi)\\to(z',m',\\phi')$ is a pair $(v,w)$ satisfying $w\\phi=\\phi'a(v)$. Thus the equivalence includes the arrows and their compatibility with the specified isomorphism, and gives the asserted 2-cartesian square as fibred groupoids. Its smooth inverse image is the original full level cover, since Step 2 used every generic factor.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+    "place": "Sections 2.3.3--2.3.7, especially the formal deformation and freeness argument of Proposition 2.3.6, printed pp.10--11; Stacks tags specified by the supporting nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unpointed-stable-coarse-projective",
+  "lem-sfb-stable-isom-finite-unramified",
+  "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "lem-sfb-dm-finite-normalization-charts",
+  "lem-sfb-stable-level-versal-branch-freeness",
+  "lem-sfb-inertia-free-finite-cover-coarse",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/pikaart-de-jong-moduli-nonabelian-level-1995.pdf",
+  "place": "Sections 2.3.3--2.3.7 read from primary arXiv PDF; argument expanded with generic normalization and coarse-space consequences. The PDF is absent from project literature."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalization of the stack of stable curves in its abelian level cover is a scheme finite over the coarse moduli space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.normalization ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized compactification of the fine moduli scheme of curves with level structure carries a universal stable curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Normalization\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme\", \"doc\": \"Given `f : X ⟶ Y`, `f.normalization` is the relative normalization of `Y` in `X`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"This is the open cover of `f.normalization` by `Spec` of integral closures of `Γ(Y, U)`\\nin `Γ(X, f ⁻¹ U)` where `U` ranges over all affine opens.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X] : AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X] : AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"[Stacks Tag 0AXN](https://stacks.math.columbia.edu/tag/0AXN)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The morphism from the relative normalization to itself. This map is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The dominant morphism into the relative normalization.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f] : AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"[Stacks Tag 03GP](https://stacks.math.columbia.edu/tag/03GP)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*moduli|moduli.*normalization|stableCurve|stable_curve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-stable-pointed-level-parameter",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization.",
+   "via": [
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-stable-abelian-level-normalization",
+  "worker": "stage1",
+  "summary": "Expanded the normalization construction, used actual frame schemes on the smooth locus, isolated the formal boundary freeness input rather than inferring it from smooth rigidification, and used a generic finite coarse-cover criterion. Four statement-only supporting nodes; no Lean attachment or Mathlib match. Statement unchanged. Repair of returned head 3cf5e258c91: reread the expanded moduli-groupoid definition, made its explicit frame pullback and 2-fibre-product arrow compatibility visible in Steps 2 and 5, and revalidated all citation quotations against the current DAG; statement and supporting lemmas unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-c2f57fe05",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-c2f57fe05 (reviewer sub-agent of L); spot-checked: Read in full the item (5 steps), the 4 new nodes, the cited statements (def-sfb-stable-pointed-moduli-groupoids current text, lem-sfb-unpointed-stable-coarse-projective, lem-sfb-smooth-curve-abelian-level-rigidification) and the parent's Steps 2 and 6 that cite the item. Context checks: the item is still unsplit in side-live with an identical statement; there is no repair note; neither the item nor its via chain is on the dropped list; no SGA is used. Sources read: Pikaart–de Jong (arXiv PDF via pdftotext) §2.3.3 (unrestricted frames), §2.3.5 and Prop 2.3.6 p.11 (universal deformation A, normalization B, Spf(B)/Aut(C), freeness from Deligne Prop 3.5) and Rem 2.3.7 (the stacks are schemes); these agree with the item and the versal node, and the item correctly claims no smoothness. Stacks 0E7A, 0E9A, 0E9C, 045H, 0DUT, 0ABP, 0BB0 and 038O are at the right labels. Steps 1-4 check hypothesis by hypothesis: k0 perfect; the scalar-extension clause holds via 038O plus flatness of generic points; E equals V×U by rigidification, so the two B agree; the formal chart follows from regularity of O^sh→completion. Step 5 is the def's 2-fibre product with its arrows and is elementary. New nodes are true and tested: d=0 is Serre's lemma plus Aut(C) acting faithfully on J; the genus-2 involution and the elliptic tail act nontrivially mod l>=3; the coarse criterion was checked on a scheme and on BG. None restates the item. Advisory: stable-isom-finite-unramified overlaps the existing lem-sfb-stable-pointed-isom-finite (finite-type base only); it is not a duplicate, since it adds finite type of the stack and arbitrary T. Batch-5: the def node's closure has only generic trf/pod definitions and lemmas (algebraic space, projective bundle and its properness, limit descent), none of them a trace-formula or PD step; the item already cited this def on base. Accepted. FIX: the 3 repairs of the earlier FIX of 83e98bb were lost when its landing was refused; I re-applied them (whole JSON in fixes/dag/nodes/sec-six-functors-basics/): (1) dm-finite-normalization-charts: added def-sbc-smooth-morphisms for stack smoothness (B3); (2) inertia-free-finite-cover-coarse: 'algebraic stacks' -> 'stacks', since the def node does not define algebraic stacks (B3); (3) versal-branch-freeness: the family carries an H-action over Spec A that restricts to Aut(C) on C, which the action on E needs. No tool_uses, no drop_nodes.; 3 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableAbelianLevelNormalization",
+  "declaration": "AlgebraicGeometry.exists_stable_abelian_level_normalization",
+  "declarations": [
+   "AlgebraicGeometry.exists_stable_abelian_level_normalization",
+   "AlgebraicGeometry.stableModuliBased",
+   "AlgebraicGeometry.smoothModuliBased",
+   "AlgebraicGeometry.smoothModuliInclusion",
+   "AlgebraicGeometry.abelianLevelBased",
+   "AlgebraicGeometry.abelianLevelToSmooth",
+   "AlgebraicGeometry.abelianLevelSchemeMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StableAbelianLevelNormalization.lean",
+  "statement": "theorem exists_stable_abelian_level_normalization (k : Type u) [Field k] (g : ℕ) (hg : 2 ≤ g) (ℓ : AbelianLevelPrime (Spec (.of k))) (L : Over (Spec (.of k))) (eL : BasedFunctor (discreteModuli (yoneda.obj L)) (abelianLevelBased (Spec (.of k)) g ℓ)) (hL : eL.toFunctor.IsEquivalence) (Q : Over (Spec (.of k))) (π : BasedFunctor (stableModuliBased (Spec (.of k)) g) (discreteModuli (yoneda.obj Q))) (hQ : IsCoarseModuliScheme (stableModuliBased (Spec (.of k)) g) Q π) : ∃ (Z : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj Z)) (stableModuliBased (Spec (.of k)) g)) (c : Z ⟶ Q), IsFinite c.left ∧ Nonempty (ModuliTwoIso (a.comp π) (discreteModuliMap (yoneda.map c))) ∧ ∃ (i : L ⟶ Z) (e : (discreteModuliMap (yoneda.map i)).comp a ≅ abelianLevelSchemeMap eL), IsModuliChartNormalization (abelianLevelSchemeMap eL) a (discreteModuliMap (yoneda.map i)) e ∧ (moduliTwoFiberLift (discreteModuliMap (yoneda.map i)) (eL.comp (abelianLevelToSmooth (Spec (.of k)) g ℓ)) e).toFunctor.IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c10f06798",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read item, all stmt_dep records, new def-sfb-moduli-chart-normalization, both delivered modules and the side-live StablePointedModuliGroupoids declarations used. Records: item differs from side-live only in lean plus appended new stmt_dep; statement unchanged; both lean.statement fields verbatim in their files; all listed declarations present; no line over 100 chars; only the theorem has sorry; not dropped; no repair note; no name clash in Sheaf. Clauses: Field k, 2<=g, AbelianLevelPrime (prime, >=3, stalk unit, i.e. l != char k over a field), recorded stable/smooth/all-frame level categories, L via based equivalence eL (the def's 'represents'), coarse Q via pi and hQ, IsFinite c.left with c tied by ModuliTwoIso(a.comp pi, h_c), IsModuliChartNormalization with Mathlib relative normalization on every normal finite-type etale chart (equal to closure in all generic fields since E is normal; not vacuous since an etale atlas exists), and the 2-cartesian square as an equivalence of moduliTwoFiberLift. Helpers are real functors and Over wrappers, no hollow data, independent universes. Docstrings carry source, blueprint and 5 proof steps. Edge cases: g=2, l=3, positive char != l, imperfect k, empty T. No compile (no change; worker compiled 14.7 s and 9.8 s)."
+ }
+}

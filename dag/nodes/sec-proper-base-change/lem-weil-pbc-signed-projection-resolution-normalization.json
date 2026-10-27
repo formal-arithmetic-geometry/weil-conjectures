@@ -1,0 +1,263 @@
+{
+ "id": "lem-weil-pbc-signed-projection-resolution-normalization",
+ "kind": "statement",
+ "title": "Normalized signed totalization on chosen finite-projective resolutions",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism on the small pro-etale sites, let $R_Y,R_X$ be commutative ring sheaves, and fix $f^{-1}R_Y\\cong R_X$. Use the ordinary uncompleted module derived categories and canonical module adjunction of [def-weil-pbc-proetale-operations], the normalized K-flat tensor comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and cochain localization $\\mathcal Q_T$ on $T=X,Y$. Let $K\\in D(R_X)$, $P\\in D(R_Y)$, choose a K-injective complex $I^\\bullet$ with $\\alpha:K\\xrightarrow{\\sim}\\mathcal Q_XI^\\bullet$, and a bounded complex $F^\\bullet$ with $\\beta:\\mathcal Q_YF^\\bullet\\xrightarrow{\\sim}P$. For each degree $r$, supply a strict-perfect package $F^r\\xrightarrow{i_r}R_Y^{N_r}\\xrightarrow{p_r}F^r$, $p_ri_r=1$, as in [def-weil-pbc-strict-perfect-coefficient-package].\n\nSet $C=\\operatorname{Tot}(f_*I\\otimes F)$, $J=\\operatorname{Tot}(I\\otimes f^*F)$ and $B=f_*J$, using differential $d_I\\otimes1+(-1)^a1\\otimes d_F$ in bidegree $(a,r)$. Let $t:C\\to B$ be the ordinary signed total counit mate, and $s:B\\to C$ the degreewise retract inverse specified in [def-weil-pbc-projection-formula-arrows]. Thus the $(a,r)$ summand of $s$ is $(1\\otimes p_r)q_{I^a,N_r}f_*(1\\otimes f^*i_r)$, with $q_{I^a,N_r}$ the inverse of the ordinary finite-free projection identification. Write $\\eta_H:\\mathcal Q_Y(f_*H)\\to Rf_*\\mathcal Q_XH$ for the right-derived comparison, $\\ell_F:Lf^*\\mathcal Q_YF\\cong\\mathcal Q_X(f^*F)$ for exact pullback comparison, and $m_Y,m_X$ for the canonical mixed tensor comparisons with coefficient complexes $F,f^*F$.\n\nThen $F$ and $f^*F$ are flat-term K-flat complexes and $J$ is K-injective. In particular $\\eta_I,\\eta_J$ and the following specified comparisons are isomorphisms:\n$$S=m_Y\\circ((\\eta_I^{-1}\\circ Rf_*\\alpha)\\otimes\\beta^{-1}):Rf_*K\\otimes^LP\\xrightarrow{\\sim}\\mathcal Q_YC,$$\n$$T=\\eta_J^{-1}\\circ Rf_*\\bigl(m_X\\circ(\\alpha\\otimes(\\ell_F\\circ Lf^*\\beta^{-1}))\\bigr):Rf_*(K\\otimes^LLf^*P)\\xrightarrow{\\sim}\\mathcal Q_YB.$$\nFor the canonical derived counit projection mate $\\pi_{f,K,P}$, the adjunct of $(\\varepsilon_K\\otimes1)\\mu_{Rf_*K,P}$ [lem-weil-pbc-ringed-projection-mate-exact], one has\n$$\\pi_{f,K,P}=T^{-1}\\circ\\mathcal Q_Y(t)\\circ S,$$\nand $S^{-1}\\circ\\mathcal Q_Y(s)\\circ T$ is its two-sided inverse. These equalities hold for every choice of $I,F,\\alpha,\\beta$ and every degreewise splitting package; no boundedness of $K$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+  "place": "Second paragraph (signed totalization) and third paragraph (resolution independence); expanded normalization in lean/Sheaf/Paper/PerfectProjectionFormula.lean, Resolution.sourceModel, Resolution.targetModel and totalization_compatibility, lines 1244–1451. Stacks Tag 0B56, equation-projection-formula-map, is the counit-mate source."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-fixed-tensor-localization-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply proEtaleStrictPerfect_flat from [def-weil-pbc-projection-formula-arrows] to the supplied bounded coefficient package. For the pulled-back complex, transport the inclusion and retraction by the exact additive module pullback of [def-weil-pbc-proetale-operations]. PreservesProduct.iso followed by the product of the uniquely characterized pullback-unit isomorphism identifies the image finite free object with the corresponding finite free object on X. Functoriality preserves the splitting equation, including rank zero. Additivity sends the zero terms outside the given bounds to zero. Apply proEtaleStrictPerfect_flat again to this transported package. This proves the two flat-term K-flat assertions without choosing any new resolution.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "Second paragraph, bounded strict-perfect coefficients and termwise pullback."
+   }
+  },
+  {
+   "text": "Apply tensorAdjunctionTotal_target_isKInjective from [def-weil-pbc-projection-formula-arrows] to the exact module pullback, its pullback-unit isomorphism, the given K-injective I and the bounded coefficient splitting. This theorem proves K-injectivity of the target total by the triangulated right-orthogonal criterion; it imposes no bound on I and no chain-map condition on the splitting. The canonical K-injective comparison theorem proEtaleRingDerivedDirectImage_kInjective in [def-weil-pbc-proetale-operations] then makes eta_I and eta_J invertible. This completes model_properties.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "Second paragraph, K-injective target total and derived comparisons."
+   }
+  },
+  {
+   "text": "Use the specified mixed comparisons from [def-weil-pbc-projection-formula-arrows] and the exact pullback comparison to form S and T, exactly as in their unchanged definitions. Apply [lem-weil-pbc-proetale-mixed-projection-mate] at I and F with the just-proved flat K-flat assertion. Its ordinary total map is definitionally totalMate. Postcompose the resulting equality with eta_J inverse to obtain (eta_I tensor identity) followed by pi at QI,QF and the normalized target comparison equals m_Y followed by Q(t). The mixed-mate theorem already supplies the localization normalization, so no additional fixed-tensor descent proof is needed here.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-proetale-mixed-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "Second paragraph, normalized signed total mate; Stacks 0B56, equation-projection-formula-map."
+   }
+  },
+  {
+   "text": "Transport that equality along alpha and beta inverse. Naturality of the existing rightAdjointProjectionMap in both arguments is naturality of the canonical mate specified by [def-weil-pbc-projection-formula-arrows] and [lem-weil-pbc-ringed-projection-mate-exact]. Precompose by tensor of eta_I inverse and cancel eta_I. Tensor functoriality combines the representative changes with the normalized comparisons, giving precisely S and T. The proved private transport_projection lemma performs this categorical calculation. Cancel T to obtain pi = S.hom followed by Q(t) followed by T.inv for arbitrary derived representative isomorphisms.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "Third paragraph, independence of the chosen representatives."
+   }
+  },
+  {
+   "text": "The existing tensorAdjunctionTotal_isIso theorem of [def-weil-pbc-projection-formula-arrows], applied to the uniquely normalized pullback unit and the bounded degreewise splitting, makes totalMate invertible. By definition totalInverse is its inverse, whose finite-total retract summands are already characterized by tensorAdjunctionTotalInverse_summand. Substitute the forward formula and the unchanged definition of inverse. Cancel the source and target model isomorphisms, combine adjacent localization maps using functoriality, and localize the two ordinary inverse equations. This proves both displayed identity equations. All steps apply also when F is zero or its degreewise ranks are zero, and require no boundedness of I.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "Second paragraph, finite signed total inverse; third paragraph, uniqueness of the inverse."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-arrows",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-proetale-mixed-projection-mate",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+  "place": "Second and third paragraphs, made into Lean by C3 using the existing strict-perfect flatness, K-injective total, mixed-mate normalization, mate naturality, and finite-total inverse APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projection formula on arbitrary K-injective and bounded finite projective models equals localization of the signed ordinary counit tensor mate",
+   "results": "8 hits: CategoryTheory.Functor.totalLeftDerivedCounit, CochainComplex.cm5b.fac, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CochainComplex.isKProjective_of_op",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived counit and localization factorization do not give the normalized mixed tensor models and signed finite-retract inverse for module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi identify the derived projection counit mate with the signed total map after choosing a K-injective representative and a bounded complex of finite free retracts",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_counit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived counit and localization factorization do not give the normalized mixed tensor models and signed finite-retract inverse for module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize the finite projective tensor projection chain map on chosen resolutions to the canonical derived adjunction counit mate and identify its signed total inverse",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.Functor.mapProjectiveResolution_π, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.ProjectiveResolution.iso_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.iso_inv_naturality, CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'_assoc, CategoryTheory.ProjectiveResolution.iso_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived counit and localization factorization do not give the normalized mixed tensor models and signed finite-retract inverse for module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryFactors\"",
+   "results": "11 hits: CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived counit and localization factorization do not give the normalized mixed tensor models and signed finite-retract inverse for module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|tensorAdjunctionTotal|mixedProjectionMate",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived counit and localization factorization do not give the normalized mixed tensor models and signed finite-retract inverse for module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|derivedε_fac_app|mapDerivedCategoryFactors",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived counit and localization factorization do not give the normalized mixed tensor models and signed finite-retract inverse for module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the derived projection counit mate with signed tensor totalization on K-injective and bounded finite projective resolutions",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.ProjectiveResolution.leftDerived_app_eq, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'_assoc, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-resolution and Tor formulas or abstract derived-counit factorization do not state the specified module-sheaf mixed tensor totalization equality and finite-retract inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|tensorAdjunctionTotal|mixedProjectionMate",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-resolution and Tor formulas or abstract derived-counit factorization do not state the specified module-sheaf mixed tensor totalization equality and finite-retract inverse"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived_counit\"",
+   "results": "1 hits: CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-resolution and Tor formulas or abstract derived-counit factorization do not state the specified module-sheaf mixed tensor totalization equality and finite-retract inverse"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula on bounded finite projective coefficient complexes agrees with the localized ordinary counit mate and its retract inverse",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero', CategoryTheory.Functor.mapProjectiveResolution_π, CategoryTheory.ProjectiveResolution.Hom.hom_comp_π, HomologicalComplex.homologyπ, CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π', CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.counitIso, CategoryTheory.ProjectiveResolution.π'_f_zero_assoc, CategoryTheory.ProjectiveResolution.homotopyEquiv_inv_π_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-resolution and Tor formulas or abstract derived-counit factorization do not state the specified module-sheaf mixed tensor totalization equality and finite-retract inverse"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural derived tensor projection transformation is computed by the ordinary tensor adjunction on K-injective and K-flat complex representatives",
+   "results": "8 hits: CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, HomologicalComplex.ιTensorObj, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasTensor, CategoryTheory.Tor'_obj_obj, HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-resolution and Tor formulas or abstract derived-counit factorization do not state the specified module-sheaf mixed tensor totalization equality and finite-retract inverse"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|derivedε_fac_app",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean (subdirectory CategoryTheory/Functor/Derived)",
+   "date": "2026-10-22",
+   "verdict": "no match: projective-resolution and Tor formulas or abstract derived-counit factorization do not state the specified module-sheaf mixed tensor totalization equality and finite-retract inverse"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-perfect-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Second proof paragraph: signed totalization gives inverse arrows; third paragraph: independence of the strict-perfect package. Extracts the mixed model comparison, exact pullback, right-derived comparisons, and signed finite-total inverse from live proof step 5.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-signed-projection-resolution-normalization",
+  "worker": "stage1",
+  "summary": "Reused the existing mixed projection mate, bounded split-perfect K-injective totalization, and normalized fixed-tensor comparisons. Wrote out ordinary finite-free and retract identities, signed differential compatibility, and naturality conjugation for arbitrary derived representatives. No new nodes; no change to the statement.",
+  "blueprint": "Second paragraph: signed totalization and its inverse, with normalized source and target models; third paragraph: independence of strict-perfect package and representatives.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General bounded-above flat-complex criterion on a ringed site, applied to the bounded coefficient complex; no node in this unit states that general criterion."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-6c2dc7c9d",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-6c2dc7c9d (reviewer sub-agent of L); spot-checked: I read the item, all 16 cited nodes, the main-20261015 proof (paragraphs 2–3), Stacks 0B56/0943 as quoted in def-weil-pbc-projection-formula-map, and the Lean (PerfectProjectionFormula totalization_compatibility, proEtaleMixedTensor uniqueness). The statement matches the Q10-landed text; the only stmt_deps change adds fixed-tensor-localization-comparison, which pins m_Y and m_X. The item is still unsplit live, there are no new nodes and no cycle. Step checks: (1) F^r is flat as a retract of R^N and K-flat by 06YQ, and f^*F is flat-term K-flat by the tensor-pullback node. (2) The pulled-back package lets split-perfect-tensor-kinjective make J K-injective, and kinjective-total-derived makes η_I and η_J isomorphisms. (3) The step-3 formula is the inverse of e_R in the fixed-tensor node, and it matches the proEtaleMixedTensor characterization. (4)–(5) I recomputed st = A(p)q t A(i) = 1 and ts = B(p)t q B(i) = 1, and the differentials commute with s with the same (−1)^a on both sides; i_r, p_r need not be chain maps. (6) The equation is exactly the mixed-mate Lean statement, and the cancellations are valid. (7) Naturality of π in E and P gives ua = S and vb = T. (8) Uniqueness of inverses. Edge cases: F = 0, N = 0, f = id, unbounded I, nonzero d_F. Accepted tool use: lem-pc-bounded-above-flat-kflat-site (generic 06YQ). lemma-weil-pbc-projection-formula-totalization overlaps in its proof but states only the inverse property under unspecified identifications, so the item is not a duplicate. Note, not a fault: the mixed-mate node's prose should state its normalization formula."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SignedProjectionResolutionNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.SignedProjectionResolution.normalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.pulledCoefficient",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.sourceComplex",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.targetComplex",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.pushTargetComplex",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.derivedComparison",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.model_properties",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.sourceModel",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.targetModel",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.totalMate",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.totalInverse",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.inverse",
+   "AlgebraicGeometry.Scheme.SignedProjectionResolution.normalization"
+  ],
+  "file": "lean/Sheaf/Paper/SignedProjectionResolutionNormalization.lean",
+  "statement": "theorem normalization : derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c) (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c) a.tensor b.tensor (proEtaleCanonicalTensorComparison f R S c a b) K P = (sourceModel f R S c a K P I hI alpha F beta package bounded).hom ≫ DerivedCategory.Q.map (totalMate f R S c I F) ≫ (targetModel f R S c b K P I hI alpha F beta package bounded).inv ∧ derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c) (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c) a.tensor b.tensor (proEtaleCanonicalTensorComparison f R S c a b) K P ≫ inverse f R S c a b K P I hI alpha F beta package bounded = 𝟙 (a.tensor.obj ((proEtaleRingDerivedDirectImage f R S c).obj K, P)) ∧ inverse f R S c a b K P I hI alpha F beta package bounded ≫ derivedProjectionFormulaMate (proEtaleRingDerivedPullback f R S c) (proEtaleRingDerivedDirectImage f R S c) (proEtaleRingDerivedAdjunction f R S c) a.tensor b.tensor (proEtaleCanonicalTensorComparison f R S c a b) K P = 𝟙 ((proEtaleRingDerivedDirectImage f R S c).obj (b.tensor.obj (K, (proEtaleRingDerivedPullback f R S c).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "Q121",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "model_properties states the flat-term K-flat, K-injective and derived-comparison conclusions; sourceModel and targetModel are the specified derived isomorphisms S and T; normalization states the forward formula and both inverse identities for arbitrary derived representatives. totalMate instantiates tensorAdjunctionTotal from the existing arrows dependency; the canonical derived mate is written directly as derivedProjectionFormulaMate. No statement dependency is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4a9269a9",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of e4c167ad0106. Diff vs that head: the mixed-mate stmt_dep and its public import were removed (import now private). t = totalMate = tensorAdjunctionTotal with the same arguments as totalInverse, the same term as proEtaleProjectionTotal. π is written as derivedProjectionFormulaMate(proEtaleRingDerivedPullback, proEtaleRingDerivedDirectImage, proEtaleRingDerivedAdjunction, a.tensor, b.tensor, proEtaleCanonicalTensorComparison) K P, the body of proEtaleProjectionFormulaMate. Both decls are in ProjectionFormulaArrows (blueprint: def-weil-pbc-projection-formula-arrows), publicly re-exported by the cited arrows module. Node record differs from live only in lean; stmt_deps are the original six; statement field verbatim. Re-checked: arbitrary c, alpha K->QI, beta QF->P, F bounded only, degreewise package, N_r=0; C/J/B signs; eta = rightDerivedFunctorUnit; model_properties clauses; S and T composites (ell_F direction Lf^*QF≅Q f^*F); pi = S.hom≫Q t≫T.inv; both inverse laws; no hollow defs; docstrings; sorry only; no universe restriction. Live: no lean record or module, not superseded. Advisory H9: unused private proof-dep imports. No compile (no FIX); the worker reports clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261022T143003-L-914306",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

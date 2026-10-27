@@ -1,0 +1,152 @@
+{
+ "id": "def-sp-nested-affine-orientation-coordinates",
+ "kind": "definition",
+ "title": "Canonical coordinates for nested affine orientations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite purity setting $P$ [def-pur-conventions], its ordinary relative dualizing object and its diagonal shifted Tate objects [def-pur-diagonal-dualizing-data], using the exceptional inverse image [def-weil-exceptional-inverse-image]. For a separated finite-type smooth morphism $f:X\\to Y$ of pure relative dimension $d\\geq0$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms], with $Y$ finite type over the fixed field, re-export chartOrdinaryOrientation as the ordinary representative of the specified unique normalized diagonal orientation of [thm-pur-diagonal-dualizing-object]. For any compactifiable $f$, re-export chartDualizingUnit, the declaration owned by [def-pur-diagonal-dnc-chart-data], as the exceptional image of the inverse canonical isomorphism between the degree-zero coefficient object and the derived tensor unit. For every scheme $B$ and $r\\geq0$, re-export chartTraceProjection_smooth, the declaration owned by [def-pur-diagonal-chart-transports], the smooth relative-dimension-$r$ evidence for the recorded ordered affine projection $p_r:\\mathbf A^r_B\\to B$ [def-sbc-affine-space].\n\nUse the ordinary-etale presentations of derived tensor [def-weil-derived-tensor] and shifted finite Tate powers [def-coefficient-twists-detailed], with the coefficient-unit comparison of [def-pur-smooth-purity-map]. For a scheme $X$, an abelian Grothendieck symmetric monoidal closed coefficient category $C$ with monoidal preadditivity and functorial flat resolutions, objects $B_n,L\\in D(X_{et},C)$, an isomorphism $z:B_0\\simeq\\mathbf1$, and isomorphisms $s_n:B_{n+1}\\simeq B_n\\otimes^L L$, re-export compositionEtalePowerAssembly, the existing ordered isomorphism $B_{d+e}\\simeq B_d\\otimes^L B_e$. Its $e=0$ branch is the inverse right-unit constraint after transport by $z$; its successor branch is $s_{d+e}$, tensor the preceding assembly with the identity of $L$, the associator, then tensor with $s_e^{-1}$. For every commutative ring $A$, natural $N$ with $N A=0$, and scheme $X$, write $T_n$ for the recorded ordered finite Tate power, with its even shift, so $T_0=A_X[0]$ and $T_{n+1}=T_n\\otimes^L L_X[2]$. Re-export compositionEtalePowerZero and compositionEtalePowerSuccessor as these existing definitional identifications, and compositionEtalePowerAdd as their ordered assembly $T_{d+e}\\simeq T_d\\otimes^L T_e$, using the canonical comparison $A_X[0]\\simeq\\mathbf1$. These seven exports are transparent aliases of the published declarations; they make no new orientation, smoothness proof, tensor product, or choice.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-dualizing-data",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-diagonal-dnc-chart-data",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "thm-pur-diagonal-dualizing-object",
+  "def-sbc-affine-space",
+  "def-pur-diagonal-chart-transports",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "def-pur-smooth-purity-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), specified diagonal orientations and ordered affine tensor coordinates, including empty blocks"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary diagonal dualizing orientation and ordered shifted Tate tensor powers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Action.diagonalSuccIsoTensorTrivial_hom_hom_apply\", \"module\": \"Mathlib/CategoryTheory/Action/Monoidal\", \"type\": \"∀ {G : Type u} [inst : Group G] {n : ℕ} (f : Fin (n + 1) → G),\\n  (Action.diagonalSuccIsoTensorTrivial G n).hom.hom f = (f 0, fun i => (f i.castSucc)⁻¹ * f i.succ)\", \"doc\": \"For a group $G$ and natural number $n$, the forward direction of the natural isomorphism between the diagonal action of $G$ on $G^{n+1}$ and the tensor product of the left regular action on $G$ with t\"}\n  {\"name\": \"Action.diagonalSuccIsoTensorDiagonal_hom_hom\", \"module\": \"Mathlib/CategoryTheory/Action/Monoidal\", \"type\": \"∀ (G : Type u) [inst : Monoid G] (n : ℕ) (a : (Action.diagonal G (n + 1)).V),\\n  (Action.diagonalSuccIsoTensorDiagonal G n).hom.hom a = (Fin.consEquiv fun a => G).symm a\", \"doc\": \"For any monoid $G$ and natural number $n$, the diagonal action of $G$ on the $(n+1)$-fold product $G^{n+1}$ is naturally isomorphic to the tensor product of the left regular action of $G$ on itself an\"}\n  {\"name\": \"Rep.diagonalSuccIsoTensorTrivial_hom_hom_single\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {n : ℕ} (f : Fin (n + 1) → G) (a : k),\\n  (ModuleCat.Hom.hom (Rep.diagonalSuccIsoTensorTrivial k G n).hom.hom) (Finsupp.single f a) =\\n    Finsupp.single (f 0) 1 ⊗ₜ[k] Finsupp.single (fun i => (f i.castSucc)⁻¹ * f i.succ) a\", \"doc\": \"For a group $ G $, commutative ring $ k $, and natural number $ n $, the homomorphism component of the diagonal successor isomorphism maps a finite support function $ f : \\\\mathrm{Fin}(n+1) \\\\to G $ wit\"}\n  {\"name\": \"CategoryTheory.CommShift₂Setup.int_ε\", \"module\": \"Mathlib/CategoryTheory/Shift/CommShiftTwo\", \"type\": \"∀ {D : Type u_5} [inst : CategoryTheory.Category.{v_5, u_5} D] [inst_1 : CategoryTheory.Preadditive D]\\n  [inst_2 : CategoryTheory.HasShift D ℤ] [inst_3 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor D n).Additive] (p q : ℤ),\\n  CategoryTheory.CommShift₂Setup.int.ε p q = (-1) ^ (p * q)\", \"doc\": \"In a preadditive category equipped with integer-indexed shift operations, the commutator isomorphism $\\\\varepsilon(p, q)$ between shifts by integers $p$ and $q$ is given by $(-1)^{pq}$. This encodes th\"}\n  {\"name\": \"Action.diagonalSuccIsoTensorTrivial\", \"module\": \"Mathlib/CategoryTheory/Action/Monoidal\", \"type\": \"(G : Type u) →\\n  [inst : Group G] →\\n    (n : ℕ) →\\n      Action.diagonal G (n + 1) ≅\\n        CategoryTheory.MonoidalCategoryStruct.tensorObj (Action.leftRegular G) (Action.trivial G (Fin n → G))\", \"doc\": \"For a group $G$ and natural number $n$, the diagonal action of $G$ on the $(n+1)$-fold product $G^{n+1}$ is naturally isomorphic to the tensor product of the left regular action of $G$ on itself and t\"}\n  {\"name\": \"TensorPower.pairingDual\", \"module\": \"Mathlib/LinearAlgebra/TensorPower/Pairing\", \"type\": \"(R : Type u_1) →\\n  (M : Type u_2) →\\n    [inst : CommSemiring R] →\\n      [inst_1 : AddCommMonoid M] →\\n        [inst_2 : Module R M] → (n : ℕ) → TensorPower R n (Module.Dual R M) →ₗ[R] Module.Dual R (TensorPower R n M)\", \"doc\": \"The linear map from the $ n $-th tensor power of the dual module $ M^* $ to the dual of the $ n $-th tensor power of $ M $, constructed via the universal property of tensor products by lifting a multi\"}\n  {\"name\": \"Action.diagonalSuccIsoTensorDiagonal\", \"module\": \"Mathlib/CategoryTheory/Action/Monoidal\", \"type\": \"(G : Type u) →\\n  [inst : Monoid G] →\\n    (n : ℕ) →\\n      Action.diagonal G (n + 1) ≅\\n        CategoryTheory.MonoidalCategoryStruct.tensorObj (Action.leftRegular G) (Action.diagonal G n)\", \"doc\": \"For a monoid $G$ and natural number $n$, the diagonal action of $G$ on the $(n+1)$-fold product $G^{n+1}$ is naturally isomorphic to the tensor product of the left regular action of $G$ on itself and \"}\n  {\"name\": \"TensorPower.pairingDual_tprod_tprod\", \"module\": \"Mathlib/LinearAlgebra/TensorPower/Pairing\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M] {n : ℕ}\\n  (f : Fin n → Module.Dual R M) (v : Fin n → M),\\n  ((TensorPower.pairingDual R M n) ((PiTensorProduct.tprod R) f)) ((PiTensorProduct.tprod R) v) = ∏ i, (f i) (v i)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $, and a natural number $ n $, the pairing of the tensor products $ \\\\bigotimes_{i=1}^n \\\\mathrm{Dual}(M) $ and $ \\\\bigotimes_{i=1}^n M $ evaluated a\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib interface; re-export the existing project constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical etale diagonal orientation normalized unit ordered Tate powers addition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.instNormalizationMonoid\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": NormalizationMonoid k⟦X⟧\", \"doc\": \"For any field $ k $, the ring of formal power series $ k[[X]] $ is equipped with a normalization monoid structure. The normalization unit $ \\\\operatorname{normUnit}(f) $ for a nonzero power series $ f \"}\n  {\"name\": \"PUnit.canonicallyOrderedAdd\", \"module\": \"Mathlib.Algebra.Order.PUnit\", \"type\": \": CanonicallyOrderedAdd PUnit\", \"doc\": \"The unit type $\\\\mathbf{1}$ (with a single element $\\\\star$) has a canonical canonically ordered additive monoid structure. Since $\\\\star + \\\\star = \\\\star$ and there is only one element, the order relatio\"}\n  {\"name\": \"PowerSeries.normUnit_X\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": normUnit (X : k⟦X⟧) = 1\", \"doc\": \"In the ring of formal power series over a field $ k $, the normalization unit of the formal variable $ X $ satisfies $ \\\\operatorname{normUnit}(X) = 1 $. This follows from the definition where $ X $ ha\"}\n  {\"name\": \"UnitAddTorus\", \"module\": \"Mathlib.Analysis.Fourier.AddCircleMulti\", \"type\": \"(d : Type*)\", \"doc\": \"The additive torus of dimension $d$, defined as the product of $d$ copies of the additive circle $\\\\mathbb{R}/\\\\mathbb{Z}$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale (@LocallyOfFiniteType ⊓ @FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"AddUnits.instOrd\", \"module\": \"Mathlib.Algebra.Order.Monoid.Units\", \"type\": \"{α : Type u_1} → [inst : AddMonoid α] → [Ord α] → Ord (AddUnits α)\", \"doc\": \"Given an additive monoid $\\\\alpha$ equipped with an order, this definition provides an order on the additive units of $\\\\alpha$ by comparing their corresponding elements in $\\\\alpha$ through the valuatio\"}\n  {\"name\": \"Units.val_add\", \"module\": \"Mathlib.Analysis.Normed.Ring.Units\", \"type\": \"∀ {R : Type u_1} [inst : NormedRing R] [inst_1 : HasSummableGeomSeries R] (x : Rˣ) (t : R) (h : ‖t‖ < ‖↑x⁻¹‖⁻¹),\\n  ↑(x.add t h) = ↑x + t\", \"doc\": \"In a normed ring $ R $ with a summable geometric series, for any unit $ x $ and element $ t $ satisfying $ \\\\|t\\\\| < \\\\|x^{-1}\\\\|^{-1} $, the underlying element of the unit $ x.add(t, h) $ is equal to $ x\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib interface; re-export the existing project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "chartOrdinaryOrientation|chartDualizingUnit|compositionEtalePower",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib interface; re-export the existing project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"chartOrdinaryOrientation|chartDualizingUnit|compositionEtalePower(Assembly|Zero|Successor|Add)|chartTraceProjection_smooth\" lean/.lake/packages/mathlib/Mathlib",
+   "results": "No Mathlib matches (rg exit 1).",
+   "date": "2026-10-25",
+   "verdict": "No matching construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"chartOrdinaryOrientation|chartDualizingUnit|compositionEtalePower(Assembly|Zero|Successor|Add)|chartTraceProjection_smooth\" lean/WeilConjectures",
+   "results": "No WeilConjectures matches (rg exit 1).",
+   "date": "2026-10-25",
+   "verdict": "No matching construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"chartOrdinaryOrientation|chartDualizingUnit|compositionEtalePower(Assembly|Zero|Successor|Add)|chartTraceProjection_smooth\" lean/Sheaf",
+   "results": "lean/Sheaf/Paper/CompositionModelOrientationDefinitions.lean:50:        (compositionEtalePowerAdd P.Coefficient P.diagonalExponent\nlean/Sheaf/Paper/CompositionModelOrientationDefinitions.lean:231:        (P.chartDualizingUnit (DiagonalPasting.pr r B))) ≪≫\nlean/Sheaf/Paper/RegularImmersionPurityComparison.lean:56:    (eqToIso (compositionEtalePowerZero P.Coefficient P.diagonalExponent\nlean/Sheaf/Paper/EtaleOrientationLocality.lean:134:  P.chartDualizingUnit e ≪≫\nlean/Sheaf/Paper/EtaleOrientationLocality.lean:135:      P.chartOrdinaryOrientation 0 e (X ↘ Spec (.of P.field.k)) ≪≫\nlean/Sheaf/Paper/EtaleOrientationLocality.lean:136:      eqToIso (compositionEtalePowerZero P.Coefficient P.diagonalExponent\nlean/Sheaf/Paper/DiagonalOrientationChoiceIndependent.lean:120:            (P.chartDualizingUnit q ≪≫ γ.symm) ≪≫\nlean/Sheaf/Paper/FiniteReductionChartCalculus.lean:125:    (eqToIso (compositionEtalePowerZero A N hA X)) t\nlean/Sheaf/Paper/FiniteReductionChartCalculus.lean:126:    (fun n ↦ eqToIso (compositionEtalePowerSuccessor A N hA X n)) d\nlean/Sheaf/Paper/NormalModelSectionOrientation.lean:82:              (P.chartDualizingUnit (VectorBundleZeroSection.π B d F) ≪≫ γ.symm) ≪≫\nlean/Sheaf/Paper/VectorBundleFrameOrientationRestriction.lean:263:  letI := chartTraceProjection_smooth B d\nlean/Sheaf/Paper/VectorBundleFrameOrientationRestriction.lean:378:  letI := chartTraceProjection_smooth B d\nlean/Sheaf/Paper/VectorBundleFrameOrientationRestriction.lean:379:  letI := chartTraceProjection_smooth B' d\nlean/Sheaf/Paper/VectorBundleFrameOrientationRestriction.lean:410:  letI := chartTraceProjection_smooth U.1.toScheme d\nlean/Sheaf/Paper/VectorBundleFrameOrientationRestriction.lean:411:  letI := chartTraceProjection_smooth U'.1.toScheme d\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:83:def compositionEtalePowerAssembly (C : Type v) [Category.{u + 1} C] [Abelian C]\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:101:theorem compositionEtalePowerZero (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:112:theorem compositionEtalePowerSuccessor (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:125:def compositionEtalePowerAdd (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:132:  compositionEtalePowerAssembly (ModuleCat.{u + 1} A) X\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:135:    (eqToIso (compositionEtalePowerZero A N hA X) ≪≫ smoothPurityUnitIso A X)\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:136:    (fun n ↦ eqToIso (compositionEtalePowerSuccessor A N hA X n)) d e\nlean/Sheaf/Paper/PurityCompositionCoherence.lean:152:    (compositionEtalePowerAdd A N hA X d e ≪≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:51:def chartOrdinaryOrientation (P : PurityFiniteSetting.{u})\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:66:def chartDualizingUnit (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:95:            (IsPullback.of_hasPullback h h).flip)) ≪≫ P.chartDualizingUnit h) ≪≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:126:      (P.chartDualizingUnit q ≪≫ P.chartOrdinaryOrientation d q aB) ≪≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:200:chosen in chartOrdinaryOrientation, so the comparison equation is unchanged. -/\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:201:theorem chartOrdinaryOrientation_spec (P : PurityFiniteSetting.{u})\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:209:    P.DiagonalOrientationNormalization d f aY (P.chartOrdinaryOrientation d f aY) ∧\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:213:            (P.chartOrdinaryOrientation d f aY) := by\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:223:chartOrdinaryOrientation_spec, canonical etale locality and mate pasting.\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:242:        (P.chartOrdinaryOrientation d f aY).hom ≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:246:        (P.chartOrdinaryOrientation d (j ≫ f) aY).hom := by\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:269:  (Etale.ordinaryFinitePullback P.Coefficient a).mapIso (P.chartDualizingUnit f).symm ≪≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:271:      P.chartDualizingUnit f'\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:297:        (P.chartOrdinaryOrientation d f aY).hom ≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:301:        (P.chartOrdinaryOrientation d h (v ≫ aY)).hom := by\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:524:Proof: apply chartOrdinaryOrientation_spec with the identity source chart and\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:550:    (P.chartOrdinaryOrientation d h aV).inv =\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:607:          (P.chartOrdinaryOrientation d\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:758:    P.chartOrdinaryOrientation d h aV = P.chartEpsilon d h aV u w N ≪≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:772:theorem chartTraceProjection_smooth (B : Scheme.{u}) (r : ℕ) :\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:790:precede with chartDualizingUnit, and compose the canonical Tate restriction.\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:803:    letI := chartTraceProjection_smooth B r\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:806:        (P.chartDualizingUnit (affineTraceProjection B r) ≪≫\nlean/Sheaf/Paper/DiagonalDncChartNormalization.lean:994:        (P.chartDualizingUnit (𝟙 B) ≪≫\nlean/Sheaf/Paper/FiniteProductScalarPresentation.lean:77:  | 0 => (eqToIso (compositionEtalePowerZero A N hA T)).symm\nlean/Sheaf/Paper/FiniteProductScalarPresentation.lean:81:    (eqToIso (compositionEtalePowerSuccessor A N hA T r)).symm\nlean/Sheaf/Paper/FiniteDiagonalReductionComparisons.lean:54:    ((ordinaryScalar (quotient P m hm hmn) X).map (P.chartDualizingUnit f).inv ≫\nlean/Sheaf/Paper/FiniteDiagonalReductionComparisons.lean:56:      ((P.finiteReductionSetting m hm).chartDualizingUnit f).hom)",
+   "date": "2026-10-25",
+   "verdict": "Existing helper declarations are re-exported, not reconstructed."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l quoted helper names in dag/nodes",
+   "results": "No DAG declaration-owner matches (rg exit 1).",
+   "date": "2026-10-25",
+   "verdict": "No definition node records this complete helper interface."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "ordinary diagonal orientation ordered Tate powers",
+   "results": "0 blueprint nodes match 'ordinary diagonal orientation ordered Tate powers'",
+   "date": "2026-10-25",
+   "verdict": "No existing blueprint node for this coordinate interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-nested-affine-orientation",
+  "date": "2026-10-25",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (1), canonical ordinary diagonal orientation and ordered shifted Tate concatenation",
+   "via": [
+    "lem-sp-nested-affine-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.NestedAffineOrientationCoordinates",
+  "declaration": "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.chartOrdinaryOrientation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.chartOrdinaryOrientation",
+   "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.chartDualizingUnit",
+   "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.chartTraceProjection_smooth",
+   "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.compositionEtalePowerAssembly",
+   "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.compositionEtalePowerZero",
+   "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.compositionEtalePowerSuccessor",
+   "WeilConjectures.PurityFiniteSetting.NestedAffineCoordinates.compositionEtalePowerAdd"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/NestedAffineOrientationCoordinates.lean",
+  "statement": "abbrev chartOrdinaryOrientation (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [SmoothOfRelativeDimension d f] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Definition owner requested by immutable-head H2 return 84288e793d21. Transparent re-exports of the published seven coordinate helpers, including the existing smoothness proof; no new postponed theorem and no use of either removed theorem conclusion. Reviewer FIX (NK 28d261c8): chartDualizingUnit and chartTraceProjection_smooth are already owned by the landed definition nodes def-pur-diagonal-dnc-chart-data and def-pur-diagonal-chart-transports; their two aliases here are re-exports of those owners, now cited in stmt_deps and the statement."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28d261c83",
+  "group": "NK",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28d261c83",
+  "group": "NK",
+  "result": "fix",
+  "note": "Re-delivery of H2 RETURN 84288e79. Item module differs only by imports/5 alias call sites; statement, proof, proof_deps unchanged; lean.statement verbatim; item hypotheses, conclusions and edge cases (d=0, e=0, empty, non-Cartesian outer square, non-flat G_pR) re-checked OK. New def node def-sp-nested-affine-orientation-coordinates: 7 transparent abbrevs with identical signatures, docstrings OK, no sorry; it cites thm-pur-diagonal-dualizing-object legitimately (.choose of its exists-unique). F1 (H4/H12) FIX: chartDualizingUnit and chartTraceProjection_smooth were already owned at base 28d261c8 by landed def-pur-diagonal-dnc-chart-data and def-pur-diagonal-chart-transports; fixes/def-sp-nested-affine-orientation-coordinates.json cites both owners in stmt_deps and the statement (no cycle) and updates lean.note. JSON-only, no Lean change, no compile; worker reports clean compiles (5.5 s, 14.4 s)."
+ }
+}

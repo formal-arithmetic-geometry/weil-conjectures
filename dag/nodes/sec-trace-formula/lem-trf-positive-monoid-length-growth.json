@@ -1,0 +1,243 @@
+{
+ "id": "lem-trf-positive-monoid-length-growth",
+ "kind": "statement",
+ "title": "Polynomial growth of a positive lattice monoid length convolution",
+ "statement": "Let $r,d\\ge0$ be integers, let $G\\cong\\mathbf Z^r$ be a free abelian group (a free $\\mathbf Z$-module with finite basis [def-weil-pbc-free-module]), and let $P\\subseteq G$ be a finitely generated additive submonoid whose generated subgroup is $G$. Assume there is a homomorphism $w:G\\to\\mathbf Z$ strictly positive on $P\\setminus\\{0\\}$. Define $\\nu(0)=0$ and, for $p\\ne0$, let $\\nu(p)$ be the largest length of a decomposition of $p$ into nonzero elements of $P$. These integers are finite, and $S_n=\\{p\\in P:\\nu(p)<n\\}$ is finite for every $n\\ge1$. Let $\\lambda:\\mathbf Z_{\\ge1}\\to\\mathbf R_{\\ge0}$ be nondecreasing, and suppose there are constants $a,b>0$ and $k_0\\ge1$ such that $a k^d\\le\\lambda(k)\\le b k^d$ for every integer $k\\ge k_0$. Set\n$$F(n)=\\sum_{p\\in S_n}\\lambda(n-\\nu(p))\\qquad(n\\ge1).$$\nThere exist constants $a',b'>0$ and $n_0\\ge1$ such that\n$$a'n^{d+r}\\le F(n)\\le b'n^{d+r}\\qquad(n\\ge n_0).$$\nMore precisely, when $r>0$, choose nonzero monoid generators $g_1,\\ldots,g_s$ and put $M=\\max_i w(g_i)$. Then $w(p)/M\\le\\nu(p)\\le w(p)$ for every $p\\in P$. In any fixed lattice coordinates, if the integer $C\\ge1$ bounds all $|(g_i)_j|$, then $|S_n|\\le(2Cn+1)^r$. There exist $r$ linearly independent generators $v_1,\\ldots,v_r$; for any such choice put $W=\\max_j w(v_j)$. For every integer $n\\ge2$, the map\n$$\\{0,\\ldots,\\lfloor n/(4rW)\\rfloor\\}^r\\longrightarrow P,\\quad (b_j)\\longmapsto\\sum_jb_jv_j$$\nis injective with image contained in $\\{p:\\nu(p)\\le n/4\\}$. In particular\n$$(\\lfloor n/(4rW)\\rfloor+1)^r\\lambda(\\lfloor n/2\\rfloor)\\le F(n)\\le(2Cn+1)^r\\lambda(n).$$\nWhen $r=0$, one has $P=\\{0\\}$ and $F(n)=\\lambda(n)$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70, agent-supplied lattice-counting refinement (old proof steps 6--7 of lem-trf-formal-monoid-ring-dimension): upper coordinate box, independent-generator lower box, and weighted growth comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "In a decomposition $p=p_1+\\cdots+p_t$ with all $p_i\\ne0$, strict positivity and integral weights give $w(p)=\\sum_iw(p_i)\\ge t$. For $p\\ne0$ the length set is nonempty (the one-term decomposition) and is a subset of the finite interval $\\{1,\\ldots,w(p)\\}$, hence has an attained largest element. A nonempty sum cannot be zero since its weight is positive. Thus the empty decomposition alone represents zero, $\\nu(0)=0$, and $\\nu(p)\\le w(p)$ for every $p$. In Lean, define each maximum by Nat.findGreatest with bound $w(p).\\mathrm{toNat}$; the singleton or empty decomposition supplies a witness, and the weight inequality proves that this bounded search is the greatest of all lengths.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; agent-supplied lattice refinement: maximal lengths from positive integral weights"
+   }
+  },
+  {
+   "text": "If $r=0$, the fixed lattice coordinates identify $G$ with the zero group, so $P=\\{0\\}$, $S_n=\\{0\\}$, and $F(n)=\\lambda(n)$; take $a\\prime=a$, $b\\prime=b$, $n_0=k_0$. Henceforth suppose $r>0$. Remove zero from a finite monoid generating list. The remaining list is nonempty since its generated subgroup is the nonzero group $G$. Each $w(g_i)\\ge1$, so $M\\ge1$. For any $p$ write $p=\\sum_{i=1}^s a_ig_i$ with $a_i\\in\\mathbf N$ and put $t=\\sum_i a_i$. Then $t\\le\\nu(p)$ and $w(p)=\\sum_i a_iw(g_i)\\le Mt\\le M\\nu(p)$. This proves $w(p)/M\\le\\nu(p)\\le w(p)$, including $p=0$. The formal proof takes a finite word in the nonzero generators using AddSubmonoid.exists_list_of_mem_closure, and regards that word as a decomposition indexed by Fin of its length. This is the same count as the sum of multiplicities above.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; agent-supplied lattice refinement: rank zero and generator-length comparison"
+   }
+  },
+  {
+   "text": "Fix lattice coordinates using the finite integral basis of [def-weil-pbc-free-module]. In the generator expression of Step 2, $t\\le\\nu(p)$, so for $p\\in S_n$ each coordinate satisfies $|p_j|\\le\\sum_i a_i|(g_i)_j|\\le Ct<Cn$. Consequently the injective coordinate map sends $S_n$ into $\\{-Cn,\\ldots,Cn\\}^r$, a finite product of $r$ intervals each of cardinality $2Cn+1$. Thus $S_n$ is finite and $|S_n|\\le(2Cn+1)^r$ for every $n\\ge1$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; agent-supplied lattice refinement: upper coordinate box"
+   }
+  },
+  {
+   "text": "View the integral coordinate vectors $g_i$ in $\\mathbf Q^r$. Each standard coordinate vector $e_j$ is an integer combination of the $g_i$, because the generated subgroup is all of $G$. Thus these rational vectors span $\\mathbf Q^r$. Apply [lem-weil-span-independent-subfamily] with field $\\mathbf Q$ to obtain an independent subfamily with the same span. By [lem-weil-dimension-span-independent-family], its size is the dimension of this span; applying that same statement to the standard coordinate basis shows this dimension is $r$. Denote the selected generators by $v_1,\\ldots,v_r$. Their rational independence implies integral independence, since an integral relation is in particular a rational relation. Mathlib Submodule.exists_fun_fin_finrank_span_eq packages the independent-subfamily and dimension statements into a family indexed by Fin r. The rational span is all of the coordinate space by subgroup closure induction; LinearIndependent.restrict_scalars' and LinearIndependent.of_comp transfer independence back to the integral generators.",
+   "uses": [
+    "lem-weil-span-independent-subfamily",
+    "lem-weil-dimension-span-independent-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; agent-supplied lattice refinement: selection of independent generators"
+   }
+  },
+  {
+   "text": "For any such independent choice let $W=\\max_j w(v_j)\\ge1$, $n\\ge2$, and $m=\\lfloor n/(4rW)\\rfloor$. If $0\\le b_j\\le m$, then $p=\\sum_jb_jv_j$ belongs to $P$ and $\\nu(p)\\le w(p)=\\sum_jb_jw(v_j)\\le rmW\\le n/4$. Equality of the images of two tuples gives the integral relation $\\sum_j(b_j-b\\prime_j)v_j=0$, forcing equality of all entries. Thus the tuple map is injective, with $(m+1)^r$ image points. Each image point belongs to $S_n$ and has $n-\\nu(p)\\ge3n/4\\ge\\lfloor n/2\\rfloor\\ge1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; agent-supplied lattice refinement: independent-generator lower box using the weight upper bound on length"
+   }
+  },
+  {
+   "text": "For $p\\in S_n$, $1\\le n-\\nu(p)\\le n$ and monotonicity gives $\\lambda(n-\\nu(p))\\le\\lambda(n)$. Summing and applying Step 3 proves the stated upper convolution bound. On every image point of Step 5, monotonicity gives $\\lambda(n-\\nu(p))\\ge\\lambda(\\lfloor n/2\\rfloor)$. All remaining summands are nonnegative, so restricting the sum to these $(m+1)^r$ points proves the stated lower convolution bound for every $n\\ge2$. In Lean, use the finite subtype of points with length below n; finsum_eq_sum_of_fintype identifies its finsum with a Finset sum. For the lower bound, sum over the image of the injective box map and compare that image sum with the full sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; agent-supplied lattice refinement: finite nonnegative sum comparison"
+   }
+  },
+  {
+   "text": "For $n\\ge n_0=\\max(3,2k_0)$, one has $\\lfloor n/2\\rfloor\\ge k_0$ and $\\lfloor n/2\\rfloor\\ge n/3$. Also $\\lfloor n/(4rW)\\rfloor+1\\ge n/(4rW)$ and $2Cn+1\\le(2C+1)n$. Substitute the assumed polynomial bounds at $\\lfloor n/2\\rfloor$ and $n$ into Step 6. The result is $\\bigl(a\\,3^{-d}(4rW)^{-r}\\bigr)n^{d+r}\\le F(n)\\le\\bigl(b(2C+1)^r\\bigr)n^{d+r}$. Both displayed constants are positive; these give $a\\prime,b\\prime$ and complete the assertion. The inequalities also cover $d=0$, since every positive number to the zeroth power is one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6(i)--(ii), printed p. 70; agent-supplied lattice refinement: explicit eventual polynomial constants"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-span-independent-subfamily",
+  "lem-weil-dimension-span-independent-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(i)--(ii), printed p. 70, provides the formal-model motivation only; the lattice-counting proof is agent supplied (old dimension proof steps 6--7). K1 formalizes these seven steps with a bounded Nat.findGreatest construction of the lengths, finite generator words, rational coordinate span, finite box embeddings, and explicit eventual polynomial constants; no additional unfinished lemma is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated positive affine monoid of lattice rank r the convolution sum of a sequence growing like n power d over monoid order less than n grows like n power d plus r",
+   "results": "{\"t\": \"2026-10-22T06:13:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated positive affine monoid of lattice rank r the convolution sum of a sequence growing like n power d over monoid order less than n grows like n power d plus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AkraBazziRecurrence.tendsto_atTop_sumCoeffsExp\", \"AkraBazziRecurrence.tendsto_zero_sumCoeffsExp\", \"ZLattice.exists_finsetSum_norm_rpow_le_tsum\", \"ZLattice.tsumNormRPowBound_spec\", \"ZLattice.tsum_norm_rpow_le\", \"AkraBazziRecurrence.sumTransform_def\", \"AkraBazziRecurrence.sumTransform\", \"AkraBazziRecurrence.asympBound_def'\"], \"digest\": \"0ce513456f6b97ea\"}; No exact or one-line match. AkraBazzi sum-transform and ZLattice norm-summability results do not count the positive affine monoid by maximal decomposition length or give the stated convolution bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(growth|asymptotic|card).*(affineMonoid|AffineMonoid|semigroup)|(semigroup|affineMonoid).*(growth|asymptotic)",
+   "results": "{\"t\": \"2026-10-22T06:14:10Z\", \"tool\": \"grep\", \"query\": \"(growth|asymptotic|card).*(affineMonoid|AffineMonoid|semigroup)|(semigroup|affineMonoid).*(growth|asymptotic)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact or one-line match. AkraBazzi sum-transform and ZLattice norm-summability results do not count the positive affine monoid by maximal decomposition length or give the stated convolution bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive finitely generated submonoid of a lattice of rank r has polynomial counting growth degree r and its weighted length convolution has growth degree d plus r",
+   "results": "{\"t\": \"2026-10-22T06:14:10Z\", \"tool\": \"leansearch\", \"query\": \"A positive finitely generated submonoid of a lattice of rank r has polynomial counting growth degree r and its weighted length convolution has growth degree d plus r\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact or one-line match. AkraBazzi sum-transform and ZLattice norm-summability results do not count the positive affine monoid by maximal decomposition length or give the stated convolution bounds.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.card, AddMonoidAlgebra",
+   "results": "{\"t\": \"2026-10-22T06:14:11Z\", \"tool\": \"loogle\", \"query\": \"Finset.card, AddMonoidAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No exact or one-line match. AkraBazzi sum-transform and ZLattice norm-summability results do not count the positive affine monoid by maximal decomposition length or give the stated convolution bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial growth bounds for numbers of lattice monoid elements with bounded maximal decomposition length and convolution with a positive polynomial sequence",
+   "results": "{\"t\": \"2026-10-22T06:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial growth bounds for numbers of lattice monoid elements with bounded maximal decomposition length and convolution with a positive polynomial sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AkraBazziRecurrence.g_grows_poly\", \"AkraBazziRecurrence.eventually_atTop_sumTransform_le\", \"AkraBazziRecurrence.GrowsPolynomially.eventually_atTop_le_nat\", \"HurwitzKernelBounds.isBigO_atTop_F_nat_one\", \"ZLattice.sum_piFinset_Icc_rpow_le\", \"AkraBazziRecurrence.GrowsPolynomially.eventually_atTop_ge_nat\", \"HurwitzKernelBounds.isBigO_atTop_F_int_one\", \"AkraBazziRecurrence.GrowsPolynomially.eventually_atTop_le\"], \"digest\": \"23f494f953340661\"}; No exact or one-line match. AkraBazzi sum-transform and ZLattice norm-summability results do not count the positive affine monoid by maximal decomposition length or give the stated convolution bounds.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated positive additive submonoid of a finite rank integer lattice has polynomial counting growth and weighted maximal decomposition length convolution of degree d plus rank",
+   "results": "{\"t\": \"2026-10-23T04:16:56Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated positive additive submonoid of a finite rank integer lattice has polynomial counting growth and weighted maximal decomposition length convolution of degree d plus rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZLattice.exists_finsetSum_norm_rpow_le_tsum\", \"ZLattice.tsumNormRPowBound_spec\", \"ZLattice.tsumNormRPowBound\", \"ZLattice.sum_piFinset_Icc_rpow_le\", \"ZLattice.tsum_norm_rpow_le\", \"ClassGroup.cardM\", \"ZLattice.covolume.tendsto_card_le_div''\", \"ZLattice.covolume.tendsto_card_le_div\"], \"digest\": \"b4aa54a41927fd8a\"}; Read the hits: lattice norm summability and covolume limits, affine-monoid definitions, and Chevalley complexity bounds do not give maximal-factorization-length convolution growth. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(growth|asymptotic|card).*(affineMonoid|AffineMonoid|semigroup)|(semigroup|affineMonoid).*(growth|asymptotic)",
+   "results": "{\"t\": \"2026-10-23T04:18:24Z\", \"tool\": \"grep\", \"query\": \"(growth|asymptotic|card).*(affineMonoid|AffineMonoid|semigroup)|(semigroup|affineMonoid).*(growth|asymptotic)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: lattice norm summability and covolume limits, affine-monoid definitions, and Chevalley complexity bounds do not give maximal-factorization-length convolution growth. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive affine monoid of rank r has polynomial growth of degree r for maximal additive factorization length, and convolution with n power d has degree d plus r",
+   "results": "{\"t\": \"2026-10-23T04:18:24Z\", \"tool\": \"leansearch\", \"query\": \"A positive affine monoid of rank r has polynomial growth of degree r for maximal additive factorization length, and convolution with n power d has degree d plus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAffineAddMonoid\", \"IsAffineMonoid.mk\", \"IsAffineAddMonoid.mk\", \"IsAffineAddMonoid.toFG\", \"IsAffineMonoid.toFG\", \"IsAffineMonoid\", \"AffineAddMonoid.dim\", \"AddMonoidAlgebra.supDegree_mul\"], \"digest\": \"4b6b6364986483cd\"}; Read the hits: lattice norm summability and covolume limits, affine-monoid definitions, and Chevalley complexity bounds do not give maximal-factorization-length convolution growth. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubmonoid, Finset.card",
+   "results": "{\"t\": \"2026-10-23T04:18:24Z\", \"tool\": \"loogle\", \"query\": \"AddSubmonoid, Finset.card\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: lattice norm summability and covolume limits, affine-monoid definitions, and Chevalley complexity bounds do not give maximal-factorization-length convolution growth. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two sided polynomial estimates for a sum over elements of a finitely generated additive submonoid using maximum factorization length",
+   "results": "{\"t\": \"2026-10-23T04:18:33Z\", \"tool\": \"leanfinder\", \"query\": \"Two sided polynomial estimates for a sum over elements of a finitely generated additive submonoid using maximum factorization length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.numBound\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"ChevalleyThm.MvPolynomialC.numBound_casesOn_succ\", \"ChevalleyThm.MvPolynomialC.degBound_succ\", \"ChevalleyThm.MvPolynomialC.numBound_succ\"], \"digest\": \"c116a9949a068a99\"}; Read the hits: lattice norm summability and covolume limits, affine-monoid definitions, and Chevalley complexity bounds do not give maximal-factorization-length convolution growth. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsAffineMonoid|def dim|theorem exists_finsetSum_norm_rpow_le_tsum|theorem sum_piFinset_Icc_rpow_le",
+   "results": "{\"t\": \"2026-10-23T04:21:25Z\", \"tool\": \"grep\", \"query\": \"class IsAffineMonoid|def dim|theorem exists_finsetSum_norm_rpow_le_tsum|theorem sum_piFinset_Icc_rpow_le\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/HausdorffDimension.lean\", \"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"4e8fafc078dfe0ab\"}; Read the hits: lattice norm summability and covolume limits, affine-monoid definitions, and Chevalley complexity bounds do not give maximal-factorization-length convolution growth. No exact or one-line match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-monoid-ring-dimension",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Independent completed-local algebra input for the toric chart case of VI 1.8: VI 1.6(i)--(ii), printed p. 70: commutative-algebra dimension input for the displayed formal monoid models (agent-supplied refinement). Hilbert--Samuel dimension theorem: Stacks algebra.tex Tag 00KQ, proposition-dimension; completion dimension: more-algebra.tex Tag 07NV, lemma-completion-dimension. Extracted argument: VI 1.6(i)--(ii), printed p. 70, agent-supplied lattice-counting refinement (old proof steps 6--7 of lem-trf-formal-monoid-ring-dimension): upper coordinate box, independent-generator lower box, and weighted growth comparison.",
+   "via": [
+    "lem-trf-formal-monoid-ring-dimension",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-positive-monoid-length-growth",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Gave direct positive-weight, coordinate-box, lower-box and explicit-constant arguments in short elementary steps; used two existing Mathlib linear-algebra leaves for the sole non-elementary selection of independent generators. No new nodes. Checked rank zero, d=0, n=1/2, non-normal and non-free monoids. Refreshed recorded Mathlib searches; no attachment or full match.",
+  "blueprint": "Keeps the inherited historical algebra input under lem-trf-local-term-locality proof (1)--(2), through formal-monoid-ring-dimension: old steps 6--7, coordinate upper box and independent-generator lower box followed by weighted growth. No change of unit/chapter route or claim that this appears as a theorem in ILO."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-2dd8e8fa5",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-2dd8e8fa5 (reviewer sub-agent of L); spot-checked: The statement is unchanged against live, where the item is still unsplit, and there is no repair note, so this is a first split. The delivery adds no new nodes. Steps 1-7 check out. (1) Positive integral weights give a maximal decomposition length nu<=w and nu(0)=0. (2) For r=0, P={0} and F=lambda; for r>0, w/M<=nu because a generator expression of length t is a decomposition, so t<=nu. (3) Coordinates come from def-weil-pbc-free-module: |p_j|<=Ct<Cn, so |S_n|<=(2Cn+1)^r. (4) Over Q, e_j lies in the Z-span of the g_i; lem-weil-span-independent-subfamily and lem-weil-dimension-span-independent-family (both Mathlib leaves) give r independent generators, and Q-independence implies Z-independence. (5) nu<=w<=rmW<=n/4 uses the weight bound, not the displayed length; the box map is injective and n-nu>=floor(n/2)>=1. (6) Monotonicity and nonnegative summands give the two sum bounds. (7) n0=max(3,2k0) gives floor(n/2)>=n/3 and the positive constants a3^-d(4rW)^-r and b(2C+1)^r. The citer formal-monoid-ring-dimension step 3 applies the item exactly as stated, including r=0. ILO VI 1.6 (printed p.70) gives only the formal models, so proof_origin=agent is correct; no SGA is cited. I tested P=<2,3> and P=<(1,0),(1,1),(0,2)> by computing nu by DP for n=2..9: all boxes and inequalities hold. convolution-length and adic-filtration contain only the finiteness clauses, so they are not duplicates. Searches are recorded with all three kinds. Minor: the report mentions a citations.json that was not delivered."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.PositiveMonoidLengthGrowth",
+  "declaration": "AddSubmonoid.positiveMonoid_length_growth",
+  "file": "lean/Sheaf/GroupTheory/PositiveMonoidLengthGrowth.lean",
+  "statement": "theorem positiveMonoid_length_growth (r d : ℕ) (G : Type u) [AddCommGroup G] (B : Module.Basis (Fin r) ℤ G) (P : AddSubmonoid G) (hfg : P.FG) (hspan : AddSubgroup.closure (P : Set G) = ⊤) (w : G →+ ℤ) (hpos : ∀ p : P, p ≠ 0 → 0 < w (p : G)) (lam : ℕ+ → ℝ≥0) (hmono : Monotone lam) (hgrowth : ∃ a b : ℝ≥0, 0 < a ∧ 0 < b ∧ ∃ k₀ : ℕ+, ∀ k : ℕ+, k₀ ≤ k → a * (k : ℝ≥0) ^ d ≤ lam k ∧ lam k ≤ b * (k : ℝ≥0) ^ d) : ∃ ν : P → ℕ, (∀ p : P, IsGreatest {l : ℕ | ∃ f : Fin l → P, (∀ i : Fin l, f i ≠ 0) ∧ (∑ i, f i) = p} (ν p)) ∧ ν 0 = 0 ∧ (∀ n : ℕ+, Set.Finite {p : P | ν p < (n : ℕ)}) ∧ ∃ F : ℕ+ → ℝ≥0, (∀ n : ℕ+, F n = ∑ᶠ p : {p : P // ν p < (n : ℕ)}, lam (((n : ℕ) - ν p.1).toPNat')) ∧ (∃ a' b' : ℝ≥0, 0 < a' ∧ 0 < b' ∧ ∃ n₀ : ℕ+, ∀ n : ℕ+, n₀ ≤ n → a' * (n : ℝ≥0) ^ (d + r) ≤ F n ∧ F n ≤ b' * (n : ℝ≥0) ^ (d + r)) ∧ (r = 0 → P = ⊥ ∧ ∀ n : ℕ+, F n = lam n) ∧ (0 < r → (∃ (s : ℕ) (g : Fin s → P), (∀ i : Fin s, g i ≠ 0) ∧ AddSubmonoid.closure (Set.range (fun i ↦ (g i : G))) = P) ∧ ∀ (s : ℕ) (g : Fin s → P), (∀ i : Fin s, g i ≠ 0) → AddSubmonoid.closure (Set.range (fun i ↦ (g i : G))) = P → (∀ M : ℕ, M = Finset.univ.sup (fun i ↦ (w (g i : G)).toNat) → ∀ p : P, (w (p : G) : ℝ) / (M : ℝ) ≤ (ν p : ℝ) ∧ (ν p : ℤ) ≤ w (p : G)) ∧ (∀ C : ℕ, 1 ≤ C → (∀ (i : Fin s) (j : Fin r), |B.repr (g i : G) j| ≤ (C : ℤ)) → (∀ n : ℕ+, Set.ncard {p : P | ν p < (n : ℕ)} ≤ (2 * C * (n : ℕ) + 1) ^ r) ∧ ∀ n : ℕ+, 2 ≤ (n : ℕ) → F n ≤ ((2 * C * (n : ℕ) + 1) ^ r : ℕ) * lam n) ∧ (∃ v : Fin r → Fin s, LinearIndependent ℤ (fun j ↦ (g (v j) : G))) ∧ (∀ v : Fin r → Fin s, LinearIndependent ℤ (fun j ↦ (g (v j) : G)) → ∀ W : ℕ, W = Finset.univ.sup (fun j ↦ (w (g (v j) : G)).toNat) → ∀ n : ℕ+, 2 ≤ (n : ℕ) → Function.Injective (fun b : Fin r → Fin ((n : ℕ) / (4 * r * W) + 1) ↦ ∑ j : Fin r, (b j : ℕ) • g (v j)) ∧ (∀ b : Fin r → Fin ((n : ℕ) / (4 * r * W) + 1), (ν (∑ j : Fin r, (b j : ℕ) • g (v j)) : ℝ) ≤ (n : ℝ) / 4) ∧ ((((n : ℕ) / (4 * r * W) + 1) ^ r : ℕ) : ℝ≥0) * lam (((n : ℕ) / 2).toPNat') ≤ F n))",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a03eb60aa",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Node vs live: only lean field changed; lean.statement verbatim in file. Clause-by-clause match: Basis (Fin r) ℤ G for free lattice with coordinates (stmt_dep Module.Free), FG submonoid, closure=⊤, strictly positive w, monotone lam:ℕ+→ℝ≥0 with two-sided k^d bounds; ν via IsGreatest (unique), ν0=0, S_n finite, F by finsum with toPNat' on positive args; eventual n^(d+r) bounds; r=0 → P=⊥, F=lam; r>0 generator family, M clause w/M≤ν≤w, C-box ncard≤(2Cn+1)^r and upper F bound for n≥2 (node's 'in particular' pair is in the n≥2 sentence), ∃ independent selection, every selection: injective box, ν≤n/4, lower F bound. Edge cases r=0, d=0, p=0, n=1,2 fine; math of steps 1-7 rechecked. No def duplicate (convolution-length module also existential). No defs, sorry only, docstrings/source/blueprint present. Not recompiled (no change). Note: Second reading section is a self-check by the same group."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T091907-L-3384663",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -227,7 +227,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "split_report": {
@@ -321,5 +332,49 @@
   "group": "NM",
   "result": "pass",
   "note": "Clause-by-clause match: IsIso of the actual vectorBundleThomTau, including rank 0 and the empty base. Base change for arbitrary nonflat g, with a vector-bundle base-change predicate (generator iso), via proper/open exchange + twist pullback + compactification comparison. Direct sums in forward form (tau1⊗tau2)≫T = m≫tau, with T = kappa_B^{-1} the forward six-arrow product + root product. Trace = inv tau, with both inverse identities and base-change/direct-sum squares. The HEq-packaged ∃!/choose pins were probed: functorialCupTwist true B 0 = P.constant B by rfl (5.8 s, twist-1 control fails); cupDerivedCoefficientMap and vectorBundleThomTau elaborate at the derivedTensor Hom types; the full Hom-type rfl hits a kernel timeout (advisory for stage 3). Not hollow. The two new def nodes have correct fields and verbatim records; the item changed only stmt_deps(+2 new defs)/lean; other nodes identical to live; not dropped. Advisories: H9 transitive proof-dep imports, H11 stub second reading (Worker report matches), framework vs canonical cbc exchange bridge for stage 3. Compile: Maps 59.1 s at load ~121 (land at lower load), Product 11.9 s, item 25.0 s."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\pi:E\\to B$ be a vector bundle of constant rank $r$ with zero\nsection $z$. The morphism\n$\\tau_E:\\Lambda_B\\to R\\pi_!\\Lambda_E(r)[2r]$ of\n[def-pur-vector-bundle-thom-class] is an isomorphism, compatible\nwith base change and with direct sums of vector bundles. Its inverse\nis the *vector-bundle trace*\n\n$$\n\\operatorname{tr}_\\pi:R\\pi_!\\Lambda_E(r)[2r]\\longrightarrow\\Lambda_B.\n$$\n\nIt differs from the integration $t_\\pi$ of [def-amb-vector-integration],\nwhich is normalized by the projective-line trace, by a sign:\n$\\operatorname{tr}_\\pi=(-1)^rt_\\pi$. For $r=1$, $\\operatorname{tr}_\\pi$ is\nthe rank-one trace of [thm-pur-rank-one-thom], so that one is $-t_\\pi$.",
+  "proof": [
+   {
+    "text": "Trivialize the bundle as in [def-pur-vector-bundle-zero-section]; the rank-one factors are those of [thm-pur-rank-one-thom], and their supported exterior product is the comparison of [lem-pur-kunneth-supported].\nStep 1: on a geometric fiber. Let $\\bar b\\to B$ be a geometric\npoint. By [lem-pur-cfiber-stalk], the stalk of $\\tau_E$ at\n$\\bar b$ is the morphism\n\n$$\n\\Lambda\\longrightarrow\nR\\Gamma_c\\bigl(\\mathbf A^r_{\\bar b},\\Lambda(r)[2r]\\bigr),\n$$\n\nthe class of the origin being the exterior product of the $r$\nrank-one classes (the class of $0\\subset\\mathbf A^r$ is the Künneth\nproduct of the classes of the coordinates' zero divisors, which is the\ngenerator fixed by the rank-one normalization of\n[thm-pur-rank-one-local-calculation]; equivalently\n$R\\Gamma_c(\\mathbf A^r,\\Lambda)\\cong\\Lambda(-r)[-2r]$ by the Künneth\nresult of [thm-pur-projective-bundle-formula] Step 1). The map\non the cohomology sheaves is therefore the\ndef:coefficient-twists-canonical identification $\\Lambda\\to\\Lambda$,\nhence an isomorphism at every geometric point.",
+    "uses": [
+     "def-pur-vector-bundle-zero-section",
+     "thm-pur-rank-one-thom",
+     "lem-pur-kunneth-supported",
+     "lem-pur-cfiber-stalk",
+     "thm-pur-rank-one-local-calculation",
+     "thm-pur-projective-bundle-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 2: globally. The cone of the globally defined $\\tau_E$ is a\nbounded constructible complex with zero geometric stalks, hence zero\n(the truncation argument of [def-weil-derived-cohomology-sheaves]).\nBase change and direct sums: by (L2) and (L3) of\n[thm-pur-localized-top-chern] and the base-change compatibility\nof [def-pur-vector-bundle-thom-class]. No local morphism is\nglued here.",
+    "uses": [
+     "def-weil-derived-cohomology-sheaves",
+     "thm-pur-localized-top-chern",
+     "def-pur-vector-bundle-thom-class"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Step 3: the sign against the integration. The composite\n$t_\\pi\\circ\\tau_E$ is an endomorphism of the constant sheaf $\\Lambda_B$,\nso it is determined by its geometric stalks. At $\\bar b$, by Step 1,\n$\\tau_E$ sends $1$ to the class\n$\\partial\\kappa(t_1)\\cup\\cdots\\cup\\partial\\kappa(t_r)$ of the origin in\nlinear coordinates, and $t_\\pi$ restricts to the affine-space integration\nof [def-amb-vector-integration], which sends this class to $(-1)^r$ by\n[cor-pur-affine-space-zero-section-purity]. Hence\n$t_\\pi\\circ\\tau_E=(-1)^r$ and $\\operatorname{tr}_\\pi=\\tau_E^{-1}=(-1)^rt_\\pi$.\nFor $r=1$ the class of [def-pur-vector-bundle-thom-class] is that of\n[thm-pur-rank-one-thom] by (L1) of [thm-pur-localized-top-chern].",
+    "uses": [
+     "def-amb-vector-integration",
+     "cor-pur-affine-space-zero-section-purity",
+     "def-pur-vector-bundle-thom-class",
+     "thm-pur-rank-one-thom",
+     "thm-pur-localized-top-chern"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

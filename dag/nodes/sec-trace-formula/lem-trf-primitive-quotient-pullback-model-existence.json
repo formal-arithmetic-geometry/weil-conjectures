@@ -1,0 +1,150 @@
+{
+ "id": "lem-trf-primitive-quotient-pullback-model-existence",
+ "kind": "statement",
+ "title": "Primitive quotient pullback model existence",
+ "statement": "For a prime ell, a finite coefficient field E, a scheme map f:X -> Y with ell invertible in every residue field of X and Y, a supplied coefficient derived-system calculus S on Y and a supplied normalized Roos model rho on X, there exists an IntegralComparisonPullbackModel for f,S,rho [def-trf-integral-comparison-realization-models]: a natural isomorphism from the actual completed integral pullback to reduction followed by sequence inverse image and total derived limit, with its fixed strict generator and Roos normalization on every whole-system coherent simultaneous quotient presentation of every flat-term K-flat complex.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099N(2),(5), 06YS, 0G7E and 0941; pullback/scalar model existence split from lem-trf-primitive-quotient-realization-comparisons"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Choose the ordinary quotient model and its compatible derived comparison to the supplied calculus. Obtain the strict ordinary pullback tower comparison.",
+   "uses": [
+    "lem-trf-coherent-quotient-reduction-comparison",
+    "lem-trf-ordinary-quotient-pullback-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the derived reduction comparison, the exact inverse-image/restriction factorization isomorphisms of the whole-system sequence pullback and coefficient restriction, the supplied natural Roos comparison, and the strict tower comparison. These give a natural isomorphism on the good flat-term K-flat class. The existing uniqueness clause of integralOperationsWellDefined extends it to the ambient derived category and fixes its good-complex components.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "def-trf-integral-comparison-realization-models",
+    "def-trf-integral-comparison-sequence-systems",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any coherent presentation use the strict quotient isomorphism a from the first lemma and set q to the pullback of a inverse followed by the tower comparison. The second lemma gives its generator equation. Naturality of the combined restriction/Roos comparison and D.reductionComparison followed by Q(a) equal to e allow cancellation of a and a inverse inside Roos. The remaining equation is precisely the localization uniqueness equation.",
+   "uses": [
+    "lem-trf-coherent-quotient-reduction-comparison",
+    "lem-trf-ordinary-quotient-pullback-tower-comparison",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-coherent-quotient-reduction-comparison",
+  "lem-trf-ordinary-quotient-pullback-tower-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "def-trf-integral-comparison-realization-models",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "by": "S9 stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Actual Lean assembly via strict quotient comparison, supplied natural Roos comparison, and integralOperationsWellDefined uniqueness. Pullback normalization is repaired to require a whole-system coherent presentation; see coord/changes/S9-pullback-presentation-coherence.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of normalized primitive quotient pullback/scalar realization model",
+   "results": "No existing declaration gives the corresponding normalized IntegralComparison model for arbitrary supplied calculus and Roos model.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntegralComparisonPullbackModel IntegralComparisonScalarModel Nonempty",
+   "results": "No matching theorem found.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Nonempty (IntegralComparisonPullbackModel|IntegralComparisonScalarModel)",
+   "results": "Only the parent theorem and unrelated downstream sorries; no reusable constructor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrimitiveQuotientRealizationComparisons",
+  "date": "2026-10-26",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting.",
+   "via": [
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrimitiveQuotientPullbackModelExistence",
+  "declaration": "WeilConjectures.primitiveQuotientPullbackModelExistence",
+  "file": "lean/Sheaf/Paper/PrimitiveQuotientPullbackModelExistence.lean",
+  "statement": "theorem primitiveQuotientPullbackModelExistence\n    {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (_hlX : ∀ x : X, IsUnit (l : X.residueField x))\n    (_hlY : ∀ y : Y, IsUnit (l : Y.residueField y))\n    (SY : CoefficientDerivedSystemCalculus l E Y)\n    (ρX : IntegralComparisonRoosModel l E X) :\n    Nonempty (IntegralComparisonPullbackModel l E f SY ρX)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261026T002659-L-107679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-71156",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T071021-L-3770140",
+  "kind": "interface",
+  "note": "independent cc review: item proof + adapted ICRM (coherence hypothesis, Roos predicate factor, explicit LimitToRoos type) + two new sorried lemmas against their nodes, the change record, the parent STATEMENT-DISPUTED note and CompletionUnit models; 21 direct importers + 4 indirect users compiled against the sandbox ICRM build"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "S9 stage 3",
+  "old_statement": "For a prime $\\ell$, finite coefficient field $E$, scheme map $f:X\\to Y$, ",
+  "what": "The old prose was a truncated introductory clause with no conclusion. Complete it to match the unchanged Lean existence signature, and make explicit the corrected coherent-presentation interpretation of its auxiliary model definition. This delivery does not prove the previous false arbitrary-presentation predicate; see the definition-node correction and change record.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tags 099N(2),(5), 06YS, 0G7E and 0941; pullback/scalar model existence split from lem-trf-primitive-quotient-realization-comparisons"
+  },
+  "citers": []
+ }
+}

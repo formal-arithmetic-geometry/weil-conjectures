@@ -1,0 +1,223 @@
+{
+ "id": "lem-dl-a1-field-point-full-faithful-galois-map",
+ "kind": "statement",
+ "title": "Fully faithful pullback along a field-valued point gives a Galois surjection",
+ "statement": "Let $X$ be a connected scheme [def-pc-scheme], let $K$ be a field, and let $a:\\operatorname{Spec}K\\to X$ be a morphism. Choose a separable closure $\\Omega/K$ [def-pd-separable-closure] and an algebraic closure $\\widetilde\\Omega$ of $\\Omega$ [def-weil-algebraic-closure], with the induced $K$-structure. Put $G=\\operatorname{Aut}_K(\\Omega)$ with its Krull topology, $\\bar a:\\operatorname{Spec}\\widetilde\\Omega\\to X$, and $\\Pi=\\pi_1(X,\\bar a)$ [def-galois-fibre-functor]. Assume pullback along $a$ is fully faithful on finite etale covers [def-galois-categories]: for every pair $P,Q$ of such covers, $\\operatorname{Hom}_X(P,Q)\\to\\operatorname{Hom}_K(P_K,Q_K)$ is bijective. Each $\\sigma\\in G$ has a unique $K$-automorphism extension $\\widetilde\\sigma$ to $\\widetilde\\Omega$. On every finite etale cover $P$, the rule $t\\mapsto t\\circ\\operatorname{Spec}(\\widetilde\\sigma)$ on lifts $t:\\operatorname{Spec}\\widetilde\\Omega\\to P$ defines a natural fibre-functor automorphism. Restriction along $\\operatorname{Spec}\\widetilde\\Omega\\to\\operatorname{Spec}\\Omega$ gives a bijection $|P_{\\bar a}|\\simeq\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,P_K)$ that is $G$-equivariant for the action $s\\mapsto s\\circ\\operatorname{Spec}(\\sigma)$ on the target; thus a subgroup of $G$ acts trivially on $|P_{\\bar a}|$ exactly when it acts trivially on $\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,P_K)$. These automorphisms define a continuous surjective homomorphism $q_a:G\\to\\Pi$, equal to the fundamental-group homomorphism induced by $a$ under the field Galois identification. Both $G$ and $\\Pi$ are profinite. For every finite etale $P\\to X$, restriction and evaluation give bijections $\\operatorname{Hom}_X(X,P)\\simeq\\operatorname{Hom}_K(\\operatorname{Spec}K,P_K)\\simeq |P_{\\bar a}|^G$, where the superscript means points fixed by every element of $G$ acting through $q_a$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BQM, proposition-normal, surjectivity via full faithfulness; Tag 0BNE, lemma-fundamental-group-Galois-group, and Remark 0BQ9, remark-variance. General fully faithful field-point form of the same argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pd-separable-closure",
+  "def-weil-algebraic-closure",
+  "def-galois-fibre-functor",
+  "def-galois-categories"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-dl-a1-field-galois-fibre-identification] over $K$, writing $s:\\operatorname{Spec}\\widetilde\\Omega\\to\\operatorname{Spec}K$. It gives the unique extensions $\\widetilde\\sigma$, the profinite group $G$, the topological isomorphism $j:G\\to\\pi_1(\\operatorname{Spec}K,s)$, and the natural equivariant bijections $b_{P_K}$. A lift $t$ to $P$ is the same as the pair $(t,s)$ lifting to $P_K$. Thus the inverse of $b_{P_K}$ identifies $|P_{\\bar a}|$ with $\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,P_K)$. Its equivariance is exactly the displayed identity for $b_{P_K}$. In particular, a subgroup acts trivially on one set if and only if it acts trivially on the other.",
+   "uses": [
+    "lem-dl-a1-field-galois-fibre-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BNE, lemma-fundamental-group-Galois-group, and 0BQ9, remark-variance."
+   }
+  },
+  {
+   "text": "Use [lem-galois-pi1-functoriality] for $a$ and $s$, and set $q_a=a_*\\circ j$. Its fibre identification sends a lift $z$ to $\\mathrm{pr}_1\\circ z$. Hence on $t\\in|P_{\\bar a}|$ the action is $q_a(\\sigma)(t)=t\\circ\\operatorname{Spec}(\\widetilde\\sigma)$. Postcomposition by any cover morphism commutes with this rule. Also $\\operatorname{Spec}(\\widetilde\\sigma\\widetilde\\tau)=\\operatorname{Spec}(\\widetilde\\tau)\\circ\\operatorname{Spec}(\\widetilde\\sigma)$, so $q_a(\\sigma\\tau)(t)=q_a(\\sigma)(q_a(\\tau)(t))$, and the inverse is given by $\\sigma^{-1}$. This proves the natural automorphism and homomorphism claims with the asserted variance. Continuity follows by composition. The target is profinite by [thm-galois-fundamental]; the source is profinite by the field comparison.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "lem-dl-a1-field-galois-fibre-identification",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (3); Tag 0BQ9, remark-variance."
+   }
+  },
+  {
+   "text": "The fibre equivalences of [thm-galois-fundamental], for $X$ and for $\\operatorname{Spec}K$, together with $j$ and the action identity in step 2 identify $a^*$ with $\\operatorname{Res}_{q_a}$. The identifications are natural in covers and their maps; therefore the assumed bijections on cover Hom sets give bijections on Hom sets between all finite continuous $\\Pi$-sets (choose covers using essential surjectivity). Thus $\\operatorname{Res}_{q_a}$ is fully faithful. Since both groups are profinite and $q_a$ is continuous, [lem-dl-a1-profinite-restriction-full-faithful] gives its surjectivity.",
+   "uses": [
+    "thm-galois-fundamental",
+    "lem-dl-a1-field-galois-fibre-identification",
+    "lem-dl-a1-profinite-restriction-full-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN6, lemma-functoriality-galois-surjective, equivalence (1)-(2), as used in Tag 0BQM, proposition-normal."
+   }
+  },
+  {
+   "text": "Apply the assumed full faithfulness to the covers $X$ and $P$. Since $X_K=\\operatorname{Spec}K$, this gives the first section bijection. Under [thm-galois-fundamental] for $\\operatorname{Spec}K$, the identity cover has singleton fibre and $P_K$ has fibre $|P_{\\bar a}|$. An equivariant map from a singleton is precisely the choice of a fixed point. Via $j$ this is $|P_{\\bar a}|^G$, proving the second bijection. Its evaluation map sends a section $u$ to $u\\circ s$, which corresponds under the first-projection fibre identification to the claimed lift of $\\bar a$.",
+   "uses": [
+    "thm-galois-fundamental",
+    "lem-dl-a1-field-galois-fibre-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE, lemma-fundamental-group-Galois-group, and Tag 0BND, theorem-fundamental-group; the singleton/fixed-point argument also appears in etale-cohomology.tex, Tag 04JM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-dl-a1-field-galois-fibre-identification",
+  "lem-galois-pi1-functoriality",
+  "thm-galois-fundamental",
+  "lem-dl-a1-profinite-restriction-full-faithful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BNE and 0BQ9 (field comparison), 0BND (functoriality), and 0BN6 (fully faithful restriction criterion); the formal full-faithful argument in 0BQM applies to the explicitly assumed fully faithful pullback."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal integral scheme the Galois action on geometric generic fibres of finite etale covers is continuous and its fixed points are precisely the sections over the scheme",
+   "results": "8 hits: IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.to_isFractionRing, Ideal.exists_map_eq_of_isGalois, IsGaloisGroup.of_isFractionRing, Algebra.isInvariant_of_isGalois', CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois, Algebra.isInvariant_of_isGalois, Ideal.exists_smul_eq_of_isGaloisGroup. Read Mathlib CategoryTheory/Galois/IsFundamentalgroup.lean 122-194 and Topology.lean 144-161: the abstract toAut continuity/surjectivity lemmas require continuous actions and transitivity; they do not prove the scheme/field identification or derive transitivity from fully faithful field pullback. Normalization and IsGaloisGroup hits likewise do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "galoisTo|fixed.*[Ff]iber|fixed.*[Ff]ibre|generic.*[Ff]ull",
+   "results": "0 hits: . Read Mathlib CategoryTheory/Galois/IsFundamentalgroup.lean 122-194 and Topology.lean 144-161: the abstract toAut continuity/surjectivity lemmas require continuous actions and transitivity; they do not prove the scheme/field identification or derive transitivity from fully faithful field pullback. Normalization and IsGaloisGroup hits likewise do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Field.absoluteGaloisGroup, Continuous",
+   "results": "0 hits: . Read Mathlib CategoryTheory/Galois/IsFundamentalgroup.lean 122-194 and Topology.lean 144-161: the abstract toAut continuity/surjectivity lemmas require continuous actions and transitivity; they do not prove the scheme/field identification or derive transitivity from fully faithful field pullback. Normalization and IsGaloisGroup hits likewise do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of finite etale covers of a normal integral scheme identifies sections with Galois fixed geometric generic points and the natural Galois action defines a continuous map of fibre functor automorphism groups",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois, CategoryTheory.PreGaloisCategory.AutGalois.π, finGaloisGroupMap, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber. Read Mathlib CategoryTheory/Galois/IsFundamentalgroup.lean 122-194 and Topology.lean 144-161: the abstract toAut continuity/surjectivity lemmas require continuous actions and transitivity; they do not prove the scheme/field identification or derive transitivity from fully faithful field pullback. Normalization and IsGaloisGroup hits likewise do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toAut.*surject|toAut.*[Cc]ontinu|FullyFaithful|fully.faithful",
+   "results": "13 hits: Mathlib/CategoryTheory/Galois/Topology.lean, Mathlib/CategoryTheory/Galois/Topology.lean, Mathlib/CategoryTheory/Galois/Topology.lean, Mathlib/CategoryTheory/Galois/Topology.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/Galois/Equivalence.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean. Read Mathlib CategoryTheory/Galois/IsFundamentalgroup.lean 122-194 and Topology.lean 144-161: the abstract toAut continuity/surjectivity lemmas require continuous actions and transitivity; they do not prove the scheme/field identification or derive transitivity from fully faithful field pullback. Normalization and IsGaloisGroup hits likewise do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any connected scheme and a field-valued point whose pullback on finite etale covers is fully faithful the absolute Galois action induces a continuous surjection onto its fundamental group and fixed fibre points are sections",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected, CategoryTheory.PreGaloisCategory.AutGalois.π_surjective, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective. Read Mathlib CategoryTheory/Galois/IsFundamentalgroup.lean 122-194 and Topology.lean 144-161: the abstract toAut continuity/surjectivity lemmas require continuous actions and transitivity; they do not prove the scheme/field identification or derive transitivity from fully faithful field pullback. Normalization and IsGaloisGroup hits likewise do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If pullback of finite etale covers along a field-valued point of a connected scheme is fully faithful then its absolute Galois group surjects continuously onto the scheme fundamental group",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f, Field.absoluteGaloisGroup, CategoryTheory.Sieve.essSurjFullFunctorGaloisInsertion, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver', AlgebraicGeometry.Scheme.Cover.pullbackCoverOver, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.casesOn, AlgebraicGeometry.Scheme.Cover.pullbackCoverOver_f. Read Mathlib CategoryTheory/Galois/IsFundamentalgroup.lean 122-194 and Topology.lean 144-161: the abstract toAut continuity/surjectivity lemmas require continuous actions and transitivity; they do not prove the scheme/field identification or derive transitivity from fully faithful field pullback. Normalization and IsGaloisGroup hits likewise do not state this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful pullback of finite etale covers along a field point induces a continuous surjection from the absolute Galois group to the etale fundamental group",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.AutGalois.π_surjective, CategoryTheory.PreGaloisCategory.autGaloisSystem_map_surjective, CategoryTheory.PreGaloisCategory.evaluation_aut_surjective_of_isGalois, InfiniteGalois.proj, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, InfiniteGalois.asProfiniteGaloisGroupFunctor, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive. No hit supplies the full scheme/field comparison, the consequence of full faithfulness, and the section/fixed-point clauses. The field-theory and abstract Galois-category hits cover only separate prerequisites.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Field.absoluteGaloisGroup, Continuous",
+   "results": "0 hits: . No hit supplies the full scheme/field comparison, the consequence of full faithfulness, and the section/fixed-point clauses. The field-theory and abstract Galois-category hits cover only separate prerequisites.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "absoluteGaloisGroup|fundamentalGroup|fullyFaithful",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/AlgebraicGeometry/Scheme.lean, Mathlib/AlgebraicGeometry/Scheme.lean. No hit supplies the full scheme/field comparison, the consequence of full faithfulness, and the section/fixed-point clauses. The field-theory and abstract Galois-category hits cover only separate prerequisites.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A field point with fully faithful finite etale pullback induces a surjective etale fundamental group homomorphism",
+   "results": "8 hits: FundamentalGroup.mapOfEq, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.autGaloisSystem_map_surjective, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.Functor.FullyFaithful.mapGrp, FixedPoints.toAlgHom_bijective, IntermediateField.restrictRestrictAlgEquivMapHom_surjective. No hit supplies the full scheme/field comparison, the consequence of full faithfulness, and the section/fixed-point clauses. The field-theory and abstract Galois-category hits cover only separate prerequisites.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph: extension to a lisse Weil sheaf on the open U_0 union infinity is equivalent to trivial inertia at infinity; Tag 0BQM, proposition-normal, surjectivity via full faithfulness; Tag 0BNE, lemma-fundamental-group-Galois-group, and Remark 0BQ9, remark-variance. General fully faithful field-point form of the same argument.",
+   "via": [
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-dl-a1-field-point-full-faithful-galois-map",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Separated the intrinsic field Galois comparison and the general profinite restriction criterion as two statement-only supporting nodes; assembled the actual field-point map using the existing scheme functoriality and fibre equivalences. Checked the Spec variance, inverse direction of the separable-fibre bijection, subgroup kernel comparison and both section bijections. No Lean or compiler was used.",
+  "blueprint": "Second paragraph of rem-dl-a1-conventions: extension across infinity is equivalent to trivial inertia; the Galois presentation used by lem-dl-a1-normal-scheme-galois-inertia-presentation, via the fully faithful field-point comparison.",
+  "tool_uses": [
+   {
+    "node": "thm-galois-fundamental",
+    "why": "The universal classification of finite etale covers by fibre-functor actions, used for X and Spec K; the conventions unit has no proof steps and no such foundational result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-galois-fundamental"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-9e741e7a3",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-9e741e7a3 (reviewer sub-agent of L); spot-checked: The item's four steps are a correct, complete assembly from the statements they cite. Steps 1–2 use the fibre-product universal property and q_a=a_*∘j; I checked the Spec variance (left action, as in 0BQ9). The τ-equivariance comes from lem-galois-pi1-functoriality. In step 3, the thm-galois-fundamental equivalences (using essential surjectivity) identify a* with Res_{q_a}; the new criterion then gives surjectivity, with profinite groups and q_a continuous. Step 4 is the elementary singleton-to-fixed-point argument. Sources read in pione.tex: 0BN6, 0BNE, 0BQ9 and 0BQM. New node lem-dl-a1-field-galois-fibre-identification is true: Ω̃/Ω is purely inseparable, so σ̃ exists and is unique; b_Q is bijective because K-maps of finite separable L into Ω̃ land in Ω; equivariance holds since r∘Spec σ̃=Spec σ∘r. I tested it on separably closed, imperfect and char-0 K and on the empty cover and Spec K. New node lem-dl-a1-profinite-restriction-full-faithful is true (0BN6 (1)⇔(2)): a proper compact image lies in a proper open CN, and G/CN has an H-fixed point but no G-fixed point. Its compactness hypothesis is needed. Grep of the DAG (0BNE/0BN6/0BQ9, Krull topology with fibre functors) found no duplicate, and neither new node restates a clause of the item. Batch-5 flag: def-pod-finite-continuous-module is a general definition of finite continuous G-sets/modules, outside the Poincaré duality and trace formula statements and their proofs, so it is accepted. tool_use thm-galois-fundamental is accepted as a generic classification lemma. There is no SGA citation, no added hypothesis and no change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FieldPointFullFaithfulGaloisMap",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.field_point_full_faithful_galois_map",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FieldPointFullFaithfulGaloisMap.lean",
+  "statement": "theorem field_point_full_faithful_galois_map {X : Scheme.{u}} [ConnectedSpace X] (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosed Ks] [Algebra.IsSeparable K Ks] [Algebra Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] (a : Spec (.of K) ⟶ X) (hfull : ∀ P Q : X.FiniteEtale, Function.Bijective (fun f : P ⟶ Q ↦ (pullback a).map f)) : ∃ (j : Gal(Ks/K) ≃ₜ* Aut (fiber (pointOfAlgebra Ω (𝟙 (Spec (.of K)))))) (q : Gal(Ks/K) →* Aut (fiber (pointOfAlgebra Ω a))), (∀ σ : Gal(Ks/K), ∃! τ : Gal(Ω/K), ∀ x : Ks, τ (algebraMap Ks Ω x) = algebraMap Ks Ω (σ x)) ∧ (∀ (σ : Gal(Ks/K)) (τ : Gal(Ω/K)), (∀ x : Ks, τ (algebraMap Ks Ω x) = algebraMap Ks Ω (σ x)) → (∀ (Q : (Spec (.of K)).FiniteEtale) (t : (fiber (pointOfAlgebra Ω (𝟙 (Spec (.of K))))).obj Q), ((j σ).hom.app Q t).left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ t.left) ∧ (∀ (P : X.FiniteEtale) (t : (fiber (pointOfAlgebra Ω a)).obj P), ((q σ).hom.app P t).left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ t.left)) ∧ (∀ σ : Gal(Ks/K), q σ = (pullbackFiberIso a (pointOfAlgebra Ω (𝟙 (Spec (.of K))))).conjAut (Functor.mapAut _ ((Functor.whiskeringLeft _ _ _).obj (pullback a)) (j σ))) ∧ Continuous q ∧ Function.Surjective q ∧ CompactSpace Gal(Ks/K) ∧ T2Space Gal(Ks/K) ∧ TotallyDisconnectedSpace Gal(Ks/K) ∧ CompactSpace (Aut (fiber (pointOfAlgebra Ω a))) ∧ T2Space (Aut (fiber (pointOfAlgebra Ω a))) ∧ TotallyDisconnectedSpace (Aut (fiber (pointOfAlgebra Ω a))) ∧ (∃ b : ∀ P : X.FiniteEtale, (fiber (pointOfAlgebra Ω a)).obj P ≃ (fiber (pointOfAlgebra Ks (𝟙 (Spec (.of K))))).obj ((pullback a).obj P), (∀ (P : X.FiniteEtale) (t : (fiber (pointOfAlgebra Ω a)).obj P), Spec.map (CommRingCat.ofHom (algebraMap Ks Ω)) ≫ (b P t).left ≫ Limits.pullback.fst P.obj.hom a = t.left) ∧ (∀ (σ : Gal(Ks/K)) (P : X.FiniteEtale) (t : (fiber (pointOfAlgebra Ω a)).obj P), b P ((q σ).hom.app P t) = (galoisToAut (𝟙 (Spec (.of K))) σ).hom.app ((pullback a).obj P) (b P t)) ∧ (∀ (H : Subgroup Gal(Ks/K)) (P : X.FiniteEtale), (∀ (σ : H) (t : (fiber (pointOfAlgebra Ω a)).obj P), (q σ).hom.app P t = t) ↔ (∀ (σ : H) (t : (fiber (pointOfAlgebra Ks (𝟙 (Spec (.of K))))).obj ((pullback a).obj P)), (galoisToAut (𝟙 (Spec (.of K))) σ).hom.app ((pullback a).obj P) t = t))) ∧ (∀ P : X.FiniteEtale, ∃ (e : {v : X ⟶ P.obj.left // v ≫ P.obj.hom = 𝟙 X} ≃ {v : Spec (.of K) ⟶ ((pullback a).obj P).obj.left // v ≫ ((pullback a).obj P).obj.hom = 𝟙 (Spec (.of K))}) (d : {v : Spec (.of K) ⟶ ((pullback a).obj P).obj.left // v ≫ ((pullback a).obj P).obj.hom = 𝟙 (Spec (.of K))} ≃ {t : (fiber (pointOfAlgebra Ω a)).obj P // ∀ σ : Gal(Ks/K), (q σ).hom.app P t = t}), (∀ v, (e v).val ≫ Limits.pullback.fst P.obj.hom a = a ≫ v.val) ∧ (∀ v, (d v).val.left = Spec.map (CommRingCat.ofHom (algebraMap K Ω)) ≫ v.val ≫ Limits.pullback.fst P.obj.hom a))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The fundamental group is expressed in the existing finite-etale fibre model Aut (fiber (pointOfAlgebra Ω a)); the recorded fibre-compatible FLC equivalence identifies this with the group in def-galois-fibre-functor. The induced map is specified exactly by whiskering with the recorded pullback functor and conjugating by pullbackFiberIso; no arbitrary comparison map, additional small group model, or choice of an extension is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08fb8505a",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and pione.tex 0BN6/0BNE/0BQ9/0BQM: unique extension ∃! τ; q σ acts as Spec τ ≫ t, the same direction as galoisToAut; q = pullbackFiberIso.conjAut ∘ mapAut(whisker pullback a) ∘ j, which equals recorded fundamentalGroupMap (needed because Aut(fiber) : Type (u+1)); b pinned by Spec ι ≫ b ≫ fst = t and equivariant (checked by hand); subgroup trivial-action iff; continuous, surjective, both groups compact/T2/totally disconnected; e and d section bijections pinned by fst/evaluation formulas. Hypotheses are exactly IsSepClosure/IsAlgClosure components and Hom-bijectivity of pullback a, nothing stronger. Aut(fiber) finite-étale model accepted, same as landed sibling Q67 field_galois_fibre_identification. lean.statement verbatim; node differs from live only in lean; dep nodes unchanged; no new defs; proof is sorry; docstrings carry source and blueprint. Edge cases (empty cover, separably closed/imperfect/char-0 K, universes) fine. Advisory: pullback/pullbackFiberIso owned by proof_dep theorem lem-galois-pi1-functoriality, not in stmt_deps, no cycle. Not recompiled per instructions; worker reports clean compile 10.3 s/3.5 s."
+ }
+}

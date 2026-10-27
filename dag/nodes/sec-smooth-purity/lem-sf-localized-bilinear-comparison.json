@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-localized-bilinear-comparison",
+ "kind": "statement",
+ "title": "Semilinear comparison of localized bilinear functors",
+ "statement": "Let R,S be commutative rings, C an R-linear and D an S-linear preadditive category [def-weil-linear-category], t in R, s in S, and c:R[1/t] → S[1/s] a ring homomorphism. Let U:C×C → C, V:D×D → D and r:C → D be functors. On their raw scalar localizations [def-weil-linear-scalar-localization], let A:L_t(C)×L_t(C) → L_t(C), B:L_s(D)×L_s(D) → L_s(D) and additive T:L_t(C) → L_s(D) have respectively the object maps U,V,r. Assume T(x tensor a)=c(x) tensor r(a). Assume the Hom actions of A and B are represented by maps linear separately over R[1/t] and S[1/s], respectively, and send pairs (x tensor a,y tensor b) to (xy) tensor U(a,b) and (xy) tensor V(a,b). Given a natural isomorphism mu:U followed by r ≅ (r×r) followed by V, there exists a unique natural isomorphism alpha:A followed by T ≅ (T×T) followed by B whose component at (K,N) is heterogeneously equal to Q_D(mu_(K,N)).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CV (tensor products), 00CX (universal property), applied to the rational-operation formulas in def-weil-derived-pullback-tensor-hom: Rational and common-stage tensor paragraphs, the formula multiplying two scalar coefficients and rationalization of theta^tensor"
+ },
+ "stmt_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Construct a normalized natural isomorphism by conjugating localized integral components with the object equalities. Double tensor induction proves naturality from the integral naturality square and coefficient multiplication. For the semilinear composite, postcompose the source bilinear Hom map with the additive scalar functor; precompose the target bilinear Hom map with that functor in both arguments. The pure-tensor map formula and multiplicativity of the coefficient homomorphism identify both comparisons with the normalized integral comparison. Component extensionality proves uniqueness.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "Already proved private scalar-localization calculus, extracted unchanged in argument to Sheaf.CategoryTheory.DerivedScalarLocalizationBilinearComparison for predictable per-file compilation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear natural comparison between bilinear functors extends to scalar localized categories",
+   "results": "CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Shift.linear_of_localization, CategoryTheory.Localization.linear, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.instLinearLocalization', CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization",
+   "date": "2026-10-26",
+   "verdict": "The results give generic localization and tensor induction, not the semilinear comparison with two independent localized bilinear actions. Existing lem-sf-bilinear-functor-scalar-localization constructs one bifunctor, rather than comparing the two composites asserted here. Extract the already proved private comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.induction_on",
+   "results": "TensorProduct.induction_on",
+   "date": "2026-10-26",
+   "verdict": "The results give generic localization and tensor induction, not the semilinear comparison with two independent localized bilinear actions. Existing lem-sf-bilinear-functor-scalar-localization constructs one bifunctor, rather than comparing the two composites asserted here. Extract the already proved private comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinearTensorIso_localize|bilinearFunctor_existsUnique",
+   "results": "No matches",
+   "date": "2026-10-26",
+   "verdict": "The results give generic localization and tensor induction, not the semilinear comparison with two independent localized bilinear actions. Existing lem-sf-bilinear-functor-scalar-localization constructs one bifunctor, rather than comparing the two composites asserted here. Extract the already proved private comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Rational and common-stage tensor paragraphs, the formula multiplying two scalar coefficients and rationalization of theta^tensor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedScalarLocalizationBilinearComparison",
+  "file": "lean/Sheaf/CategoryTheory/DerivedScalarLocalizationBilinearComparison.lean",
+  "declaration": "WeilConjectures.OperationsScalarLocalization.bilinearComparison_existsUnique",
+  "statement": "theorem bilinearComparison_existsUnique\n    {R : Type r} [CommRing R] {S : Type s} [CommRing S]\n    {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]\n    {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear S D]\n    (t : R) (tS : S) (c : Localization.Away t →+* Localization.Away tS)\n    (U : C × C ⥤ C) (V : D × D ⥤ D) (r : C ⥤ D)\n    (A : ScalarLocalization R C t × ScalarLocalization R C t ⥤ ScalarLocalization R C t)\n    (B : ScalarLocalization S D tS × ScalarLocalization S D tS ⥤ ScalarLocalization S D tS)\n    (T : ScalarLocalization R C t ⥤ ScalarLocalization S D tS) [T.Additive]\n    (hA : ∀ K, A.obj K = ⟨U.obj (K.1.obj, K.2.obj)⟩)\n    (hB : ∀ K, B.obj K = ⟨V.obj (K.1.obj, K.2.obj)⟩)\n    (hT : ∀ K, T.obj K = ⟨r.obj K.obj⟩)\n    (mT : ∀ (K K' : C) (a : K ⟶ K') (x : Localization.Away t),\n      HEq (T.map (x ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk K'))\n        (c x ⊗ₜ[S] r.map a))\n    (mA : ∀ (K K' N N' : ScalarLocalization R C t),\n      ∃ β : (K ⟶ K') →ₗ[Localization.Away t] (N ⟶ N') →ₗ[Localization.Away t]\n          (A.obj (K, N) ⟶ A.obj (K', N')),\n        (∀ a b, A.map (Prod.mkHom a b) = β a b) ∧\n        ∀ (a : K.obj ⟶ K'.obj) (b : N.obj ⟶ N'.obj) (x y : Localization.Away t),\n          HEq (β (x ⊗ₜ[R] a) (y ⊗ₜ[R] b)) ((x * y) ⊗ₜ[R] U.map (Prod.mkHom a b)))\n    (mB : ∀ (K K' N N' : ScalarLocalization S D tS),\n      ∃ β : (K ⟶ K') →ₗ[Localization.Away tS] (N ⟶ N') →ₗ[Localization.Away tS]\n          (B.obj (K, N) ⟶ B.obj (K', N')),\n        (∀ a b, B.map (Prod.mkHom a b) = β a b) ∧\n        ∀ (a : K.obj ⟶ K'.obj) (b : N.obj ⟶ N'.obj) (x y : Localization.Away tS),\n          HEq (β (x ⊗ₜ[S] a) (y ⊗ₜ[S] b)) ((x * y) ⊗ₜ[S] V.map (Prod.mkHom a b)))\n    (μ : U ⋙ r ≅ r.prod r ⋙ V) :\n    ∃! α : A ⋙ T ≅ T.prod T ⋙ B,\n      ∀ K, HEq (α.hom.app K)\n        ((ScalarLocalization.localization S D tS).map (μ.hom.app (K.1.obj, K.2.obj)))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-21488",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261027T021335-L-2758778",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + FiniteRationalDerivedOperations + 4 DerivedScalarLocalization* modules vs clone original (declaration chunks: public defs verbatim, 6 theorem proofs changed); compiled delivered set + the 2 `import all` importers in a sandbox"
+ }
+}

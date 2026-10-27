@@ -1,0 +1,186 @@
+{
+ "id": "def-sfb-finite-closed-augmented-rows",
+ "kind": "definition",
+ "title": "Finite signed augmented closed rows without exactness",
+ "status": "split",
+ "statement": "Use the shared constructions [def-sfb-finite-closed-row-constructions]. Let $X,Z$ be schemes [def-pc-scheme], $A$ a sheaf of commutative rings on the small pro-etale site of $X$ [def-weil-pbc-proetale-site], $i:Z\\to X$ a morphism, $m\\geq0$, and $W_a\\to X$ an ordered family indexed by $a\\in\\{0,\\ldots,m-1\\}$. Write $\\mathcal M_X=\\operatorname{Mod}(A)$ for module sheaves [def-weil-sheaf-of-modules-category]. For every subset $s$ of the index set let $W_s=\\prod_{a\\in s,X}W_a$, with $W_\\varnothing=X$ [def-pc-fibre-product], and write $i_s:W_s\\to X$, $E_s=i_{s,*}i_s^*$ and $E_Z=i_*i^*$. All inverse images use the inverse-image coefficient ring [def-weil-proetale-inverse-image]; $\\eta_s:\\mathrm{id}\\to E_s$ and $\\eta_Z:\\mathrm{id}\\to E_Z$ are the normalized adjunction units [def-sfb-proetale-unit-normalized-adjunction].\n\nA finite signed augmented row consists of the following data and equations. There are natural transformations $r_{s,t}:E_s\\to E_t$ for all subsets, with $r_{s,t}\\circ\\eta_s=\\eta_t$ when $s\\subseteq t$ and $r_{s,t}=0$ otherwise; and $r_{Z,s}:E_Z\\to E_s$ for nonempty $s$, with $r_{Z,s}\\circ\\eta_Z=\\eta_s$. There is an additive functor $D:\\mathcal M_X\\to\\operatorname{CoCh}(\\mathcal M_X)$ to integer cochain complexes [def-weil-abstract-derived-category], with specified natural isomorphisms\n$$\\theta_p:D(-)^p\\xrightarrow{\\sim}T_p:=\\bigoplus_{t:\\{0,\\ldots,p\\}\\hookrightarrow_{\\rm ord}\\{0,\\ldots,m-1\\}}E_{\\operatorname{im}t}\\quad(p\\geq0),$$\nwhere the sums and projections $\\pi_t:T_p\\to E_{\\operatorname{im}t}$ are the canonical finite products of the shared construction. Under $\\theta_p$ the differential is its signed deletion-restriction matrix: the component indexed by an increasing $(p+2)$-tuple $t$ is $\\sum_{j=0}^{p+1}(-1)^j r_{\\operatorname{im}(t\\setminus j),\\operatorname{im}t}\\circ\\pi_{t\\setminus j}$. Require $D(M)^p$ to be a zero object for $p<0$ or $p\\geq m$. Supply a natural transformation $a:E_Z\\to D(-)^0$ such that $\\pi_t\\circ\\theta_0\\circ a\\circ\\eta_Z=\\eta_{\\operatorname{im}t}$ for every singleton tuple $t$.\n\nFor every cochain complex $K$, use the shared termwise double complex $B_D(K)^{p,q}=D(K^q)^p$, with row degree first, and its ordinary direct-sum total $C_D(K)^n=\\bigoplus_{p+q=n}B_D(K)^{p,q}$ with differential $d_D+(-1)^pD(d_K)$. Write $\\iota^D_{p,q}:B_D(K)^{p,q}\\to C_D(K)^{p+q}$ for its canonical inclusions. The row data also include a natural chain map $\\alpha:E_Z(-)\\to C_D(-)$, with $E_Z$ applied termwise, satisfying $\\alpha_K^n=\\iota^D_{0,n}\\circ a_{K^n}$. The functor $D$, its cochain identities, and the chain map $\\alpha$ are supplied data satisfying these conditions, not an assertion that arbitrary restriction transformations produce them. No covering, closed-immersion, exactness or epimorphic-unit hypothesis is imposed.\n\nFor a scheme morphism $g:Y\\to X$, put $A'=g^{-1}A$, let $g^*:\\mathcal M_X\\to\\mathcal M_Y$ be the actual module inverse image, and let $D'$ be row data for $Y\\times_XZ\\to Y$ and $Y\\times_XW_a\\to Y$ with coefficients $A'$. Supply intersection isomorphisms $c_s:g^*E_s\\xrightarrow{\\sim}E'_sg^*$ for nonempty $s$ and a natural transformation of complex-valued functors $\\sigma:g^*D\\to D'g^*$, where $g^*$ acts termwise on complexes. Define $\\operatorname{RowFormula}(D,D',g,c,\\sigma)$ by the following projection equations, for every $M\\in\\mathcal M_X$, $p\\geq0$ and increasing $(p+1)$-tuple $t$, with $s=\\operatorname{im}t$:\n$$\\pi'_t\\circ\\theta'_p\\circ\\sigma_M^p=c_{s,M}\\circ g^*(\\pi_t\\circ\\theta_p).$$\nThe index $s$ is always nonempty. When the supplied comparisons satisfy $c_s\\circ g^*\\eta_s=\\eta'_sg^*$, they are called unit-compatible; this is a condition on the supplied comparisons, not an additional equation in RowFormula.\n\nFor any category $P$ and functor $I:P\\to\\operatorname{CoCh}(\\mathcal M_X)$ in compatible universes, and a natural chain transformation $\\tau:g^*C_DI\\to C_{D'}g^*I$, define $\\operatorname{TotalFormulaOn}(D,D',g,I,\\sigma,\\tau)$ by requiring, for every $K\\in P$ and integers $p,q,n$ with $p+q=n$,\n$$\\tau_K^n\\circ g^*(\\iota^D_{p,q})=\\iota^{D'}_{p,q}\\circ\\sigma_{(I K)^q}^{p}.$$\nDefine TotalFormula as TotalFormulaOn for the inclusion of the full subcategory of bounded-below complexes, meaning complexes whose terms are zero objects below some integer. These predicates specify equations for supplied transformations; they assert neither their existence nor invertibility.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-proetale-unit-normalized-adjunction",
+  "def-pc-fibre-product",
+  "def-weil-abstract-derived-category",
+  "def-sfb-finite-closed-row-constructions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AH, lemma-ses-associated-to-open, for actual closed units; signed-row and total-comparison constructions in lem-sfb-closed-restriction-total-pullback steps 1, 3 and 4; homology.tex Tag 0133 for the total augmentation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite closed augmented rows without exactness with signed closed restriction differential",
+   "results": "8 hits: MeasureTheory.SignedMeasure.toMeasureOfZeroLE_finite, MeasureTheory.Measure.toSignedMeasure_restrict_eq_restrict_toSignedMeasure, Topology.RelCWComplex.Finite, AlgebraicGeometry.IsFinite.instMorphismRestrict, extDerivWithin_extDerivWithin_apply, Matroid.instFinitaryElemRestrictSubtype, Submodule.ClosedComplemented.of_finiteDimensional, ClosedSubmodule.noConfusionType.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit compatible closed restriction comparisons induce natural isomorphisms of finite total complexes under pullback",
+   "results": "8 hits include HomologicalComplex.restriction.sc'Iso, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal and restrictionCyclesIso; no signed closed row interface.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"mapIso\"",
+   "results": "3 hits: HomologicalComplex₂.total.mapIso, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex₂.total.mapIso_inv.",
+   "date": "2026-10-24",
+   "verdict": "generic total maps reused, not an augmented closed-row interface"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteClosedAugmentedRows|finiteClosedTerms|closed.*augmented.*row (Mathlib Algebra/Homology and project WeilConjectures and Sheaf); blueprint_refs search augmented row; rg in dag/nodes",
+   "results": "Mathlib: 0 hits; WeilConjectures: 0 hits; Sheaf: finiteClosedTerms and exact FiniteClosedResolution in FiniteClosedCoverResolution.lean, reused rather than copied. blueprint_refs: 0 blueprint nodes; DAG has the cover-resolution statement, not a definition of rows without exactness.",
+   "date": "2026-10-24",
+   "verdict": "new interface needed; all existing graded terms, differentials, units and totalization are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteClosedAugmentedRows|RowFormula|TotalFormulaOn|finiteClosedRestriction",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite augmented Cech row of sheaves of modules with signed differentials and a total complex comparison under inverse image",
+   "results": "8 hits: CategoryTheory.Arrow.augmentedCechConerve, ChainComplex.augment, CategoryTheory.Arrow.augmentedCechNerve, ChainComplex.augment_d_succ_succ, HomologicalComplex₂.total.mapIso, HomologicalComplex₂.total, CochainComplex.augment_d_succ_succ, HomologicalComplex₂.total.mapIso_inv",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, NatTrans",
+   "results": "0 hits: . loogle: unknown identifier 'NatTrans'",
+   "date": "2026-10-24",
+   "verdict": "invalid query; retried with the successful total/ιTotal query; no absence conclusion drawn"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite signed augmented rows of module sheaves with intersection restriction maps, adjunction units, and pullback comparison formulas",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  },
+  {
+   "tool": "grep",
+   "query": "def total|def augment|def augmentedCech|def ιTotal|lemma ιTotal_map",
+   "results": "19 hits: Mathlib/Algebra/MvPolynomial/Degrees.lean, Mathlib/Algebra/Homology/TotalComplexSymmetry.lean, Mathlib/Algebra/Homology/TotalComplexSymmetry.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/Augment.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"ιTotal\"",
+   "results": "12 hits: HomologicalComplex₂.ιTotalOrZero, HomologicalComplex₂.ιTotal, HomologicalComplex₂.ιTotalOrZero_eq, HomologicalComplex₂.ιTotalOrZero_eq_zero, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal, HomologicalComplex₂.XXIsoOfEq_hom_ιTotal_assoc, HomologicalComplex₂.XXIsoOfEq_inv_ιTotal_assoc",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from module sheaves to finite cochain complexes with specified graded terms, augmentation and base change comparisons on total diagonal inclusions",
+   "results": "8 hits: ContinuousCohomology.homogeneousCochains, CochainComplex.ιMapBifunctor, CategoryTheory.Functor.mapCochainComplexSingleFunctor, Rep.standardComplex.forget₂ToModuleCat, CategoryTheory.Functor.map₂CochainComplex, CochainComplex.instHasMapBifunctorObjIntShiftFunctor, CochainComplex.instAdditiveIntFunctorSingleFunctors, CochainComplex.HasMapBifunctor",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  },
+  {
+   "tool": "grep",
+   "query": "up.*up|sign₁|sign₂",
+   "results": "2 hits: 192, 348",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  },
+  {
+   "tool": "grep",
+   "query": "def Plus|abbrev Plus|IsStrictlyGE|IsGE|IsBoundedBelow",
+   "results": "5 hits: 30, 31, 34, 39, 42",
+   "date": "2026-10-24",
+   "verdict": "no match for this definition: generic augmentation, totalization and module-pullback ingredients do not state the finite signed closed-row structure and both comparison predicates"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-closed-restriction-total-pullback",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct-image finiteness, of det-thm-sf-ctf-stability-direct-images in literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md; technical finite closed-support row interface used in lem-sfb-closed-restriction-total-pullback, signed rows and projectionwise comparisons (steps 3-4). Stacks proetale.tex Tag 09AH, lemma-ses-associated-to-open, motivates the actual units; homology.tex Tag 0133, lemma-double-complex-gives-resolution, gives the diagonal augmentation convention. Neither tag asserts the full interface.",
+   "via": [
+    "lem-sfb-closed-restriction-total-pullback",
+    "lem-sfb-finite-closed-cover-resolution",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClosedAugmentedRows",
+  "declaration": "AlgebraicGeometry.FiniteClosedAugmentedRows",
+  "declarations": [
+   "AlgebraicGeometry.FiniteClosedAugmentedRows",
+   "AlgebraicGeometry.FiniteClosedAugmentedRows.RowFormula",
+   "AlgebraicGeometry.FiniteClosedAugmentedRows.TotalFormulaOn",
+   "AlgebraicGeometry.FiniteClosedAugmentedRows.TotalFormula"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClosedAugmentedRows.lean",
+  "statement": "structure FiniteClosedAugmentedRows {X Z : Scheme.{u}} (i : Z ⟶ X) {m : ℕ}\n    (W : Fin m → Over X) (A : Sheaf (ProEt.topology X) CommRingCat.{u + 1})",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair F1/F2: imports only the owning shared-constructions definition module. FiniteClosedResolution now extends this one row structure; RowFormula is the single projectionwise formula reused by its cover-resolution alias, and TotalFormulaOn is the single diagonal formula reused on all complexes and on Plus."
+ },
+ "import_flags": [],
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-finite-closed-augmented-rows",
+  "worker": "stage1",
+  "summary": "Audited this definition against its existing Sheaf structure, its four comparison declarations, every statement dependency, Stacks 09AH and 0133, and the latest blueprint route. Made all structure data, specified degree identifications, diagonal formulas and comparison predicates explicit. Reused the owning shared-constructions node, with no new nodes and no theorem or exactness claims. Preserved existing Lean attachments and inherited search records; appended Q82 searches from the actual search log.",
+  "blueprint": "Technical finite closed-row interface supporting paragraph (3), open direct-image finiteness, in literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. The blueprint does not itself state this interface. blueprint_refs ancestor returns None, so inherited from.node=null and via are retained; from.place is made precise."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-d52576157",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-d52576157 (reviewer sub-agent of L); spot-checked: This is a one-commit, definition-only delivery: the item JSON and a report with '## Review by Q82'. It creates no new nodes. The item was already split and gains a split_report with a blueprint entry. I read the rewritten statement in full and compared it field by field with the owner lean/Sheaf/AlgebraicGeometry/FiniteClosedAugmentedRows.lean and with FiniteClosedRowConstructions.lean. All of these match: the restriction and ambient unit equations (unit ≫ r = unit, i.e. r∘η_s=η_t), the restriction zero for s⊄t, the additive rows functor with natural isomorphisms θ_p, the differential, the support condition (zero for p<0 or p≥m), the augment unit, and totalAugment_f (α^n=ι_{0,n}∘a). The differential is finiteClosedDifferential (lines 92-100), with component Σ(-1)^j r_{im(t∖j),im t}∘π_{t∖j}. In the double complex D(K^q)^p comes from mapHomologicalComplex followed by flip, and the Mathlib up-ℤ signs give d_D+(-1)^p D(d_K). Base change is pullback.fst g i, finiteClosedPullbackFamily (Y×_XW_a→Y) and inverseRing. RowFormula, TotalFormulaOn and TotalFormula (Plus.ι; CochainComplexPlus.lean:31, ∃n IsStrictlyGE) also match. The base text read RowFormula as requiring 'unit-compatible' comparisons; the new text treats unit compatibility as a separate condition, which follows the Lean owner. The citers lem-sfb-finite-closed-cover-resolution and lem-sfb-closed-restriction-total-pullback impose the unit equations themselves, so no target is weakened. I read all 8 stmt_dep statements and each notion is covered. Stacks 09AH (proetale.tex:5135) and 0133 (homology.tex:6699) were verified in tags/tags; they are used only as motivation and no exactness or quasi-isomorphism is claimed. Blueprint paragraph (3) at line 19 of sk-thm-sf-ctf-stability-direct-images.proof.md is identical in latest (main-20261024) and main-20261015. Small cases m=0, 1 and 2 were checked, and the m=2 deletion sign agrees with succAboveOrderEmb. The rg duplicate search over dag/nodes found only unrelated curve-estimate rows. No SGA source, no fixes, no tool_uses."
+ }
+}

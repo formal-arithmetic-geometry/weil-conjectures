@@ -1,0 +1,126 @@
+{
+ "id": "new-unit-structure-coefficient-iso",
+ "kind": "statement",
+ "title": "Canonical structural coordinates for the coherent unit coefficient",
+ "statement": "For every scheme X [def-pc-scheme], the lifted tensor-section sheaf of the unit module [def-sc-etale-qcoherent-module,def-pbc-canonical-coherent-etale-comparison] is canonically isomorphic to the actual additive structure sheaf [def-sc-etale-additive-structure-restriction]. Its component at U is the lifted top-section map of tensorPullbackObjUnitToUnit U.hom. Pullback of a module multiplication map and coherentEtaleMap have their prescribed section formulas.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "proof": [
+  {
+   "text": "Use the top-section maps of the adjoint unit-module isomorphisms as the components. The tensor-unit restriction equation proves naturality. Whisker with additive ULift and lift the presheaf isomorphism to sheaves. The component formula is definitional. Applying the tensor-pullback adjunction proves pullback of smulHom; lift the given section formula for the coherent coefficient map.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-sc-etale-tensor-unit-restriction-equation",
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-etale-tensor-unit-restriction-equation",
+  "lem-sc-etale-zariski-qcoh-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images; Tags 03P2, 0096, 0097 and 03DR, normalized unit coefficients and restriction; Tags 03FD and 01FT, Ext evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated etale sheaf of the unit module is isomorphic to the additive structure sheaf naturally in scalar multiplication",
+   "results": "8 hits, including SheafOfModules.unit, unitHomEquiv and structurePresheafCompForget. None identifies the project tensor-section coefficient or its localized scalar action.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPullbackObjUnitToUnit\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHToDerived.*natural|etaleTensorUnit.*Iso|unitRealization.*transport",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation of Ext classes under a right derived functor with respect to coefficient morphisms",
+   "results": "8 hits: extFunctor, its map formula and generic right-derived naturality. None states naturality of the fixed derivedExtEvaluation composite.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnitRealizationScalarNormalization",
+  "date": "2026-10-25",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input via proper smooth curve structural coefficients; unit coefficient transport and scalar normalization.",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "new-unit-realization-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnitStructureCoefficientIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnitStructureCoefficientIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.unitStructureCoefficientIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorPullback_map_smulHom",
+   "AlgebraicGeometry.Scheme.Modules.coherentEtaleMap_app",
+   "AlgebraicGeometry.Scheme.Modules.coherentEtaleMap_smulHom_app",
+   "AlgebraicGeometry.Scheme.Modules.unitStructureCoefficientIso",
+   "AlgebraicGeometry.Scheme.Modules.unitStructureCoefficientIso_hom_app"
+  ],
+  "statement": "def unitStructureCoefficientIso (X : Scheme.{u}) : liftedCoherentEtaleSheaf (SheafOfModules.unit X.ringCatSheaf) ≅ X.etaleAdditiveSheaf",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261025T123943-L-1920510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

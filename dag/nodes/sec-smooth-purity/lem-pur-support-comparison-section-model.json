@@ -28,11 +28,10 @@
  ],
  "proof": [
   {
-   "text": "For each etale object $W\\to T$, the definition of direct image gives $(\\nu_{T,*}J^n)(W)=J^n(W)$, and it gives the same map for every arrow of such objects. Thus the maps $u_T,u_V$ are identities of complexes, not just degreewise bijections: the differentials and the arrow $T\\leftarrow V$ are the same on both sides. The support functor is the kernel of this arrow, with the induced action on morphisms. Hence its termwise application gives the stated $u_C$, with the same kernel inclusion. Likewise, on any etale $W\\to V$, both $j_{\\mathrm{et}}^{-1}\\nu_{T,*}J^n$ and $\\nu_{V,*}j_{\\mathrm{pro}}^{-1}J^n$ evaluate to $J^n(W\\to T)$; this is the sectionwise restriction/direct-image identification in the question.",
+   "text": "Direct-image evaluation gives $I(W)=J(W)$ for every etale $W\\to T$, on objects, arrows and differentials [def-weil-pbc-site-comparison-morphism]. Hence $u_T,u_V$ are identities of complexes; their induced kernel identity $u_C$ preserves the actual restriction arrow and kernel inclusion [def-pur-support-cohomology].",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "def-pur-support-cohomology",
-    "lem-pur-comparison-pullback-open-unit"
+    "def-pur-support-cohomology"
    ],
    "elementary": true,
    "source": {
@@ -41,65 +40,51 @@
    }
   },
   {
-   "text": "Use [lem-pur-comparison-pullback-open-unit] with the given finite ring $A$, scheme $T$, open $j$ and sheaf $F$. In its notation $a_F=\\beta_F^{-1}$ and $c_{F_p}$ is precisely the sectionwise identity of step 1. Its unit equation is\n$$\\nu_{V,*}(\\beta_F^{-1})\\circ j_{\\mathrm{et}}^{-1}(\\eta_F^0)=\\eta_{j_{\\mathrm{et}}^{-1}F}^0.$$\nPostcompose by $\\nu_{V,*}(\\beta_F)$. Since a functor preserves inverse isomorphisms, this gives exactly\n$$j_{\\mathrm{et}}^{-1}(\\eta_F^0)=\\nu_{V,*}(\\beta_F)\\circ\\eta_{j_{\\mathrm{et}}^{-1}F}^0.$$\nIn particular the comparison here is the specified canonical pullback comparison, with its specified unit, rather than a new choice of isomorphism.",
+   "text": "Apply [lem-pur-open-restriction-comparison-augmentation] to $j,F,h$. It gives the asserted ordinary unit equation, $h_V=(j_p^{-1}h)\\beta_F$, and $a_V=j_e^{-1}a$ as an injective resolution representing the derived unit. Thus the open calculation uses exactly the prescribed coefficient comparison and restricted augmentations.",
    "uses": [
-    "lem-pur-comparison-pullback-open-unit"
+    "lem-pur-open-restriction-comparison-augmentation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CF, label lemma-localize-morphism; the ordinary unit normalization is the statement of lem-pur-comparison-pullback-open-unit."
+    "place": "Tag 03CF (lemma-localize-morphism), localization square and its direct-image/restriction identity; with proetale.tex Tags 099V (lemma-relative-comparison) and 09B1 (lemma-compare-derived). Agent-formulated augmentation normalization extracted from returned section-model steps 2 and 4, the restriction identity in step 1, and open naturality in step 6; uses the exact canonical unit normalization of lem-pur-comparison-pullback-open-unit."
    }
   },
   {
-   "text": "Write $e:QI^\\bullet\\xrightarrow{\\sim}R\\nu_{T,*}F_p$ for the injective-computation isomorphism specified in the hypotheses. Those hypotheses say $e\\circ Qa=\\eta_F$. The canonical injective computation of a right derived functor is natural in chain maps by [lem-weil-pbc-right-derived-plus-injective]. Consequently, when the source $R\\Gamma(T_{\\mathrm{et}},F)$ is identified with $QI^\\bullet(T)$ by the augmentation $a$, the morphism $R\\Gamma(T_{\\mathrm{et}},\\eta_F)$ has identity matrix on $I^\\bullet(T)$, with its target identified using $e$. To identify the next factor, $J^\\bullet$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. The full-support case $C=T$ of [lem-pur-derived-support-comparison-direct-image] says that the final-object comparison is represented by the sectionwise identity $I^\\bullet(T)=J^\\bullet(T)$. The global comparison is the composite of these two factors by [lem-weil-pbc-comparison-global-cohomology]. Its representative is therefore exactly $u_T$, with the source and target identifications coming from $a$ and $h$.",
+   "text": "Apply [lem-pur-normalized-comparison-augmented-resolution] with $U=\\nu_{T,*}$ and $(E,H)$ the etale and pro-etale global section functors. The hypothesis $eQa=\\eta_F$ supplies its augmented unit. Bounded-below injectives are K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], so [lem-pur-derived-support-comparison-direct-image] with full support supplies its normalized $b$ and identity $\\sigma$. By [lem-weil-pbc-comparison-global-cohomology] its composite is the specified global comparison, represented by $u_T$. Apply the same lemma on $V$ to the resolutions from step 2: the result is $u_V$ with precisely $\\beta_F$ and the given augmentations.",
    "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-pur-normalized-comparison-augmented-resolution",
     "lem-weil-pbc-bounded-below-injectives-kinjective",
     "lem-pur-derived-support-comparison-direct-image",
     "lem-weil-pbc-comparison-global-cohomology"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, label section-cohomology-support, kernel-of-restriction model; agent-formulated comparison normalization using the explicitly cited adjunction and derived-functor statements."
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic), and 05SA (lemma-derived-functor). Agent-formulated naturality and normalization calculation extracted from returned proof steps 3 and 5 and the derived-computation part of step 6 of lem-pur-support-comparison-section-model; not a verbatim assertion of these tags."
    }
   },
   {
-   "text": "Put $F_V=j_{\\mathrm{et}}^{-1}F$, $J_V^\\bullet=j_{\\mathrm{pro}}^{-1}J^\\bullet$, and $h_V=(j_{\\mathrm{pro}}^{-1}h)\\circ\\beta_F:\\nu_V^*F_V\\to J_V^\\bullet$. Restriction is exact and preserves injectives by [lem-weil-pbc-proetale-restriction-injectives], so $h_V$ is a bounded-below injective resolution. Apply [lem-pur-support-comparison-common-injectives] on the scheme $V$ to this resolution. It gives the injective etale resolution $a_V=\\nu_{V,*}(h_V)\\circ\\eta_{F_V}^0$, representing the derived unit on $V$. The sectionwise identity of step 1 identifies its target $\\nu_{V,*}J_V^\\bullet$ with $j_{\\mathrm{et}}^{-1}I^\\bullet$. Step 2 then gives the actual equality of augmentations\n$$a_V=\\nu_{V,*}(j_{\\mathrm{pro}}^{-1}h)\\circ\\nu_{V,*}(\\beta_F)\\circ\\eta_{F_V}^0=j_{\\mathrm{et}}^{-1}(a).$$\nNow repeat the two-factor calculation of step 3 on $V$, using $a_V,h_V$ and the global comparison of [lem-weil-pbc-comparison-global-cohomology]. Its chain representative is the identity $I^\\bullet(V)=J^\\bullet(V)$, namely $u_V$. The source augmentation is the restriction of the given $a$, and $h_V$ uses exactly the required coefficient identification $\\beta_F$.",
+   "text": "Apply [lem-pur-normalized-comparison-augmented-resolution] instead with $E=\\Gamma_C(T_{\\mathrm{et}},-)$ and $H=\\Gamma_C(T_{\\mathrm{proet}},-)$, the additive kernel functors [def-pur-support-cohomology]. Step 1 gives $EU=H$. The K-injectivity from step 3 and the kernel normalization of [lem-pur-derived-support-comparison-direct-image] give its $b,\\sigma$. The composite in that lemma is exactly the displayed definition $c^C_{T,F}=b_{C,F_p}R\\Gamma_C(\\eta_F)$, so its representative is $u_C$. This identifies the specified map using its normalization.",
    "uses": [
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-pur-support-comparison-common-injectives",
-    "lem-weil-pbc-comparison-global-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, label section-cohomology-support, kernel-of-restriction model; agent-formulated comparison normalization using the explicitly cited adjunction and derived-functor statements."
-   }
-  },
-  {
-   "text": "Apply the same calculation to the additive kernel functor $\\Gamma_C$ defined in [def-pur-support-cohomology]. Under the injective-computation isomorphisms of [lem-weil-pbc-right-derived-plus-injective], the equality $e\\circ Qa=\\eta_F$ from step 3 means that $R\\Gamma_C(T_{\\mathrm{et}},\\eta_F)$ is represented by the identity of $\\ker(I^\\bullet(T)\\to I^\\bullet(V))$, with its source identified by the given augmentation $a$. The second factor $b_{C,F_p}$ of the explicitly specified $c^C_{T,F}$ is, by the normalization in [lem-pur-derived-support-comparison-direct-image], the identity between that kernel and $\\ker(J^\\bullet(T)\\to J^\\bullet(V))$. Its hypothesis of a K-injective representative holds by the bounded-below injective result used in step 3. Thus the composite has representative $u_C$. This uses the normalization of $b$ and the displayed definition of $c^C_{T,F}$ in the statement; compatibility with the two other terms alone would not determine a supported map.",
-   "uses": [
+    "lem-pur-normalized-comparison-augmented-resolution",
     "def-pur-support-cohomology",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-pur-derived-support-comparison-direct-image",
-    "lem-weil-pbc-bounded-below-injectives-kinjective"
+    "lem-pur-derived-support-comparison-direct-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, label section-cohomology-support, kernel-of-restriction model; agent-formulated comparison normalization using the explicitly cited adjunction and derived-functor statements."
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TI (lemma-enough-injectives-right-derived), 05TH (lemma-injective-acyclic), and 05SA (lemma-derived-functor). Agent-formulated naturality and normalization calculation extracted from returned proof steps 3 and 5 and the derived-computation part of step 6 of lem-pur-support-comparison-section-model; not a verbatim assertion of these tags."
    }
   },
   {
-   "text": "Let $f:F\\to F'$ and $t:J^\\bullet\\to J'^\\bullet$ be a chain map between two such augmented resolutions lifting $\\nu_T^*f$, so $t\\circ h=h'\\circ\\nu_T^*f$. Naturality of the ordinary adjunction unit gives\n$$\\nu_{T,*}(t)\\circ a=\\nu_{T,*}(t\\circ h)\\circ\\eta_F^0=\\nu_{T,*}(h')\\circ\\eta_{F'}^0\\circ f=a'\\circ f.$$\nOn $W=T,V$ the maps $\\nu_{T,*}(t)(W)$ and $t(W)$ are literally equal by the direct-image formula. They commute with the restriction arrows because $t$ is a morphism of sheaf complexes. If $s\\in J^n(T)$ restricts to zero on $V$, then $\\mathrm{res}(t(s))=t(\\mathrm{res}(s))=0$; the same equality proves that the induced kernel map commutes with the kernel inclusion. These equalities commute with all three identity representatives. Localization preserves these equalities, and the canonical derived comparisons used above are natural. This proves the claimed naturality and preservation of the two arrows on the specified augmentations.",
+   "text": "For $th=h'\\nu_T^*f$, naturality of the ordinary unit gives $\\nu_{T,*}(t)a=\\nu_{T,*}(h')\\nu_{T,*}\\nu_T^*(f)\\eta_F^0=a'f$. Evaluation gives literally $\\nu_{T,*}(t)(W)=t(W)$. Since $\\mathrm{res}(t(s))=t(\\mathrm{res}(s))$, these maps preserve restriction, its kernels and their inclusions. Localization preserves the equalities. The naturality clauses of [lem-pur-normalized-comparison-augmented-resolution] and [lem-pur-open-restriction-comparison-augmentation] give the derived computations on $T,V,C$, with these augmentations.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "def-pur-support-cohomology",
-    "lem-weil-pbc-right-derived-plus-injective"
+    "lem-pur-normalized-comparison-augmented-resolution",
+    "lem-pur-open-restriction-comparison-augmentation"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Tag 09XP, label section-cohomology-support, kernel-of-restriction model; agent-formulated comparison normalization using the explicitly cited adjunction and derived-functor statements."
@@ -109,13 +94,11 @@
  "proof_deps": [
   "def-weil-pbc-site-comparison-morphism",
   "def-pur-support-cohomology",
-  "lem-pur-comparison-pullback-open-unit",
-  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-pur-open-restriction-comparison-augmentation",
+  "lem-pur-normalized-comparison-augmented-resolution",
   "lem-weil-pbc-bounded-below-injectives-kinjective",
   "lem-pur-derived-support-comparison-direct-image",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-pur-support-comparison-common-injectives"
+  "lem-weil-pbc-comparison-global-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
@@ -216,19 +199,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-support-comparison-section-model",
   "worker": "stage1",
-  "summary": "No new nodes. Expanded the ordinary open-unit equation using the existing exact normalization lemma; tracked augmentations under open restriction; computed global and supported comparison composites on the common section kernels. Made the already specified supported-map normalization explicit in the statement, without changing its map, hypotheses, or conclusion. Preserved inherited search records and added searches actually run for Q25.",
-  "blueprint": "Final sentence of main-20261015 thm-pur-rank-one-local-calculation: the pro-etale comparison. This item identifies its whole-space, open and support maps, below lem-pur-support-comparison-boundary; it makes no connecting-map assertion.",
+  "summary": "Repair of the 2026-10-22 human re-split return. Preserved the statement and all maintainer fields. Added two independently stated unsplit arguments of comparable scope: normalized derived comparison on arbitrary common augmented resolutions, and canonical open restriction of comparison augmentations. The parent now assembles their conclusions and retains explicit section/kernel identities and naturality. All six returned arguments are mapped in report.md, with their full text retained for the next workers. Actual Mathlib searches found no complete match; LeanSearch rate-limited, recorded unavailable.",
+  "blueprint": "Final comparison sentence of current main-20261015 thm-pur-rank-one-local-calculation.proof.md: two intermediate arguments implement its global/open/supported comparison below support-comparison-boundary; no change of unit route and no connecting-map assertion.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-comparison-global-cohomology",
-    "why": "Generic adjunction, injective restriction, or derived-sections computation used only to identify the comparison maps on the common model; this does not replace the rank-one calculation or any step of its unit."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-restriction-injectives",
-    "why": "Generic adjunction, injective restriction, or derived-sections computation used only to identify the comparison maps on the common model; this does not replace the rank-one calculation or any step of its unit."
+    "why": "Identifies the composite of the derived comparison unit and full-support direct-image comparison with the specified global comparison; a generic comparison tool, not a replacement of the rank-one calculation."
    }
   ]
  },
@@ -237,12 +216,12 @@
   "lem-weil-pbc-proetale-restriction-injectives"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q25-629b0b098",
-  "group": "Q25",
+  "reviewer": "NT-cc-NA-f66c00f8d",
+  "group": "NA",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-629b0b098 (reviewer sub-agent of L); spot-checked: Read the item at 629b0b09 and its base, the Q54 parent lem-pur-support-comparison-boundary (step 4 cites this item), every dependency statement, and the proof of lem-pur-support-site-comparison, plus Stacks 09XP (etale-cohomology.tex l.13966) and 03CF (sites.tex l.6265). The item is a new Q54 node with no proof on base and no repair note; it is still unsplit live, so it is not superseded. Statement change: one added sentence writes c^C = b∘RΓ_C(η_F) explicitly, which is word for word the definition in step 1 of lem-pur-support-site-comparison. It makes the cited map precise, removes a C3 risk, and weakens nothing. Steps: (1) direct-image evaluation identities plus the kernel action. (2) The open-unit equation of lem-pur-comparison-pullback-open-unit with a=β^{-1}, c=id, postcomposed by ν_*(β); correct. (3) e∘Qa=η_F, K-injective J, the C=T normalization of b and the two-factor form of the global comparison give u_T. (4) Pro-etale restriction is exact and preserves injectives; common-injectives on V; a_V=j^{-1}a follows from step 2; gives u_V with β. (5) Kernel version gives u_C, equal to the explicit c^C. (6) Naturality written out. Edge cases C=∅, C=T, F=0 checked. No new nodes; no cycle; no SGA; nothing in the dropped list; cited ids ⊆ uses and proof_deps = ∪ uses; the closure grows only by the sibling common-injectives node. Tool uses for comparison-global-cohomology and proetale-restriction-injectives accepted as generic. Advisory: the proof is 5518 characters with no new nodes, which may attract a later re-split; c^C is data built in a proof and needs a def owner at stage 2."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-f66c00f8d (reviewer sub-agent of L); spot-checked: FIX. The re-split answers the released human note of 2026-10-21/22. The statement and stmt_deps are byte-identical to the live node. The parent proof is now a 5-step, 2381-character assembly. Two comparable new unsplit nodes (2101 and 2349 characters) carry all six old arguments: steps 2+4 → open-restriction, 3+5 → normalized-comparison, step 6 → explicit parent step 5 + naturality clauses, step 1 stays elementary. Nothing was dropped or blurred, and neither new node restates the item. Checked by hand: (1) normalized-comparison: the types match; naturality of b at Qh plus the normalization gives c^H_h c = Q(σ_J)c^E_a, and both naturality squares follow from naturality of α. (2) open-restriction: a_V = j_e^{-1}a, from pullback-open-unit with a = β^{-1}, c = id; the unit clause; h_V is an injective resolution (open ⇒ weakly étale restriction); common-injectives and Stacks 099V hold for an arbitrary scheme; the lift equations follow from β- and unit-naturality. Parent steps: the C = T normalization of derived-support-comparison-direct-image, K-injectivity, and global-cohomology give u_T; step-2 data give u_V with β; the Γ_C kernels with EU = H literally give u_C = b∘RΓ_C(η) through the stated normalization. Duplicate candidates read, none equivalent: sf-kinjective-derived-map-computation, sf-normalized-derived-comparison-common-resolution/composition, comparison-global/unit-injective-model, sc-grothendieck-bottom-*, weil-pbc-resolution-pullback-augmentation. Sources 05TI/05TH/05SA/03CF/099V/09B1 verified; no SGA; no cycle. The tool use of global-cohomology is accepted. Batch-5 flag (open-restriction → common-injectives → lem-trf-bounded-below-derived-adjunction): accepted. That node is the generic derived adjunction L_D ⊣ R⁺, not part of the trace formula or Poincaré duality, and the item already cited common-injectives before this delivery. Repair (E1/B2): normalized-comparison inverted the α maps of right-derived-plus-injective without assuming enough injectives; I added 'A and B have enough injectives' to its statement. The etale and pro-etale module categories satisfy this, so the item is unaffected.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SupportComparisonSectionModel",
@@ -276,5 +255,17 @@
   "group": "NM",
   "result": "fix",
   "note": "Main theorem is a faithful rendering of the node (open-unit equation with β forward, a_V=j⁻¹a, T/V/C computations uniquely pinned by normalizations, c^C=b∘RΓ_C(η) with b normalized, kernel/restriction equalities; hypotheses provable via supportComparisonCommonInjectives; edge cases ok). H3 FIX: the naturality V conjunct reused the T predicate on V, so it covered supportComparisonSource V F_V, which is not defeq to the restricted source j⁻¹(F[0]) with j⁻¹J and h_V=j⁻¹h∘β used by the main theorem. Replaced by the new SectionModelOpenComputationsNatural over T-data (a_V naturality, et/pro squares, evaluation identity). H9 FIX: dropped the unused plain imports ProEtaleRestrictionInjectives and KInjective. lean-record.json adds the declaration and a note; refit_record clean; statement verbatim unchanged. Fixed file compiled once with nt_compile --json: 34.2 s, exit 0, clean. Advisory: statement uses decls of the proof_dep-only nodes common-injectives and pullback-open-unit."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,423 @@
+{
+ "id": "lem-sf-bounded-one-sided-tensor-realization",
+ "kind": "statement",
+ "title": "Bounded signed total realization with a supplied one-sided flat factor",
+ "statement": "Let $\\mathcal C$ be a site small in the universe of module sheaves [def-weil-size-convention], and let $R$ be a sheaf of commutative rings on it. Use the abelian category $\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category], integer-indexed cochain complexes [def-pc-cochain-complex-modules], and cochain localization $Q_R:\\operatorname{Ch}(R)\\to D(R)$ [def-weil-abstract-derived-category]. Equip $D(R)$ with the K-flat derived tensor and its two-sided representative comparison of [lem-weil-pbc-site-derived-tensor-descent]. Let $r\\le s$ and $u\\le v$ be integers. Let $B\\in D(R)$ satisfy $H^j(B)=0$ for $j\\notin[r,s]$. Let $P^\\bullet$ be a given K-flat complex [def-pc-kflat-complex] whose terms are flat [def-pc-flat-sheaf-modules] and vanish outside $[u,v]$.\nThere exists a complex $B^\\bullet$ with $B^j=0$ for $j\\notin[r,s]$ and an isomorphism $B\\cong Q_R(B^\\bullet)$. For every such representative and representing isomorphism, the right-factor one-sided comparison normalized by the specified two-sided comparison gives an isomorphism in $D(R)$\n$$B\\otimes_R^{\\mathbf L}Q_R(P^\\bullet)\\xrightarrow{\\sim}Q_R\\operatorname{Tot}(B^\\bullet\\otimes_R P^\\bullet).$$\nThe total is the signed direct-sum total complex [def-pc-tensor-complex-sheaves], with degree-$d$ term $\\bigoplus_{j+h=d}B^j\\otimes_RP^h$ and differential $d_B\\otimes1+(-1)^j1\\otimes d_P$ on bidegree $(j,h)$. Its terms vanish for $d\\notin[r+u,s+v]$, and each degree has only finitely many potentially nonzero summands. Consequently the displayed derived tensor has zero cohomology outside $[r+u,s+v]$, so belongs to $D^b(\\operatorname{Mod}(R))\\subset D^+(\\operatorname{Mod}(R))$ [def-weil-pbc-bounded-derived-subcategories]. These are vanishing bounds, with no assertion of nonvanishing at either endpoint. No termwise flatness, K-flatness, or finite Tor amplitude of $B$ or $B^\\bullet$ is assumed, and $r=s$, $u=v$, zero inputs and the zero ring are allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor and preceding one-sided K-flat construction; bounded input is DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE in Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, lines 180-186; elementary degree-support calculation for the signed direct-sum total."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sf-ringed-kflat-tensor-representative-data"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-sheaf-of-modules-category], the size hypothesis makes $\\operatorname{Mod}(R)$ abelian. Apply [lem-sfb-bounded-representative] to this abelian category, $B$, and the integers $r\\le s$. Its hypotheses are precisely the assumed cohomology vanishings. Obtain $B^\\bullet$ with terms zero outside $[r,s]$ and an isomorphism $e:B\\xrightarrow{\\sim}Q_RB^\\bullet$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-sfb-bounded-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "place": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, lines 180-186; isGE_iff and isLE_iff, lines 90-122"
+   }
+  },
+  {
+   "text": "Apply the right-factor natural comparison clause of [lem-weil-pbc-kflat-fixed-tensor-triangulated] to the supplied flat-term K-flat complex P. It directly gives a natural isomorphism cR from Q Tot(- tensor P) to D(-,QP), with cR(V) equal to the specified representativeIso(V,P) for every flat-term K-flat V. For every bounded representative K and every e:B ≅ QK, compose D(-,QP).mapIso(e) with cR(K) inverse. This is exactly the required displayed isomorphism; no flatness condition on K is used.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/Algebra/Homology/KFlatFixedTensorTriangulated.lean",
+    "place": "kFlat_fixed_tensor_triangulated, right-factor cR clause and representative normalization; Stacks sites-cohomology.tex, construction preceding definition-derived-tor (06YU)."
+   }
+  },
+  {
+   "text": "The total is the signed direct-sum total of [def-pc-tensor-complex-sheaves]. The tensor functors of [def-pur-sheaf-tensor-product] are additive, so map_isZero shows a tensor summand is zero whenever either input term is zero. For j+h=d outside [r+u,s+v], integer arithmetic shows j<r or s<j or h<u or v<h. Every summand is therefore zero. HomologicalComplex.mapBifunctor.hom_ext applied to the identity and zero morphisms makes the degree-d total term zero. Any nonzero summand has (j,h) in the finite product interval [(r,u),(s,v)] in the componentwise order; Set.finite_Icc and subset give the required finiteness in every degree.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex, applied to tensor as in Sites Cohomology Tag 06YM; elementary support calculation"
+   }
+  },
+  {
+   "text": "By ShortComplex.isZero_homology_of_isZero_X₂, the zero degree-d total term has zero degree-d homology. Compose homologyFunctor.mapIso of the comparison for the chosen bounded representative with homologyFunctorFactors from [def-weil-abstract-derived-category]; IsZero.of_iso transfers vanishing to the derived tensor. DerivedCategory.isGE_iff and isLE_iff supply its lower bound r+u and upper bound s+v. The existential definitions of plus, minus and bounded in [def-weil-pbc-bounded-derived-subcategories] give membership in D^b and D^+. The argument uses no nonzero endpoint assumption, and includes equal endpoints, zero inputs and the zero ring.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category; elementary cohomology of a complex with zero degree-d term"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sfb-bounded-representative",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "H9, 2026-10-23: construction preceding definition-derived-tor (06YU), using the already proved fixed-factor normalized comparison directly; bounded representatives from Mathlib and elementary signed-total support calculation from homology.tex definition-associated-simple-complex (012Z)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|mapBifunctor|HasGoodTensor",
+   "results": {
+    "t": "2026-10-22T06:47:04Z",
+    "tool": "grep",
+    "query": "exists_iso_Q_obj_of_isGE_of_isLE|mapBifunctor|HasGoodTensor",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/BifunctorShift.lean",
+     "Mathlib/Algebra/Homology/BifunctorShift.lean",
+     "Mathlib/Algebra/Homology/BifunctorShift.lean",
+     "Mathlib/Algebra/Homology/BifunctorShift.lean",
+     "Mathlib/Algebra/Homology/BifunctorShift.lean",
+     "Mathlib/Algebra/Homology/BifunctorAssociator.lean",
+     "Mathlib/Algebra/Homology/BifunctorAssociator.lean",
+     "Mathlib/Algebra/Homology/BifunctorAssociator.lean"
+    ],
+    "digest": "8472aa5766e921e2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bounded representatives and ordinary total tensor are separate ingredients; none supplies the one-sided derived comparison with an arbitrary non-flat bounded-cohomology input and the simultaneous strict and cohomological sum bounds.",
+   "subdirectory": "Algebra/Homology"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctor, DerivedCategory.Q",
+   "results": {
+    "t": "2026-10-22T06:47:04Z",
+    "tool": "loogle",
+    "query": "CochainComplex.mapBifunctor, DerivedCategory.Q",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bounded representatives and ordinary total tensor are separate ingredients; none supplies the one-sided derived comparison with an arbitrary non-flat bounded-cohomology input and the simultaneous strict and cohomological sum bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A supplied bounded flat right factor computes the derived tensor of any bounded cohomology sheaf complex using a bounded representative and the sum of support intervals",
+   "results": {
+    "t": "2026-10-22T06:47:04Z",
+    "tool": "leansearch",
+    "query": "A supplied bounded flat right factor computes the derived tensor of any bounded cohomology sheaf complex using a bounded representative and the sum of support intervals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "Module.Flat.iff_forall_exists_factorization",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact"
+    ],
+    "digest": "a8a2875245c394e2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bounded representatives and ordinary total tensor are separate ingredients; none supplies the one-sided derived comparison with an arbitrary non-flat bounded-cohomology input and the simultaneous strict and cohomological sum bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module sheaves on a ringed site tensoring a complex with cohomology in r through s with a supplied bounded flat K-flat complex in u through v has a signed total complex representative and vanishes outside the sum interval",
+   "results": {
+    "t": "2026-10-22T06:47:17Z",
+    "tool": "leanfinder",
+    "query": "For module sheaves on a ringed site tensoring a complex with cohomology in r through s with a supplied bounded flat K-flat complex in u through v has a signed total complex representative and vanishes outside the sum interval",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.instHasTensorOfHasTensorX",
+     "HomologicalComplex.tensorObj"
+    ],
+    "digest": "4553ee6fdc57e0e7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bounded representatives and ordinary total tensor are separate ingredients; none supplies the one-sided derived comparison with an arbitrary non-flat bounded-cohomology input and the simultaneous strict and cohomological sum bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": {
+    "t": "2026-10-22T06:47:40Z",
+    "tool": "loogle",
+    "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "digest": "a7b25b75b1756892"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bounded representatives and ordinary total tensor are separate ingredients; none supplies the one-sided derived comparison with an arbitrary non-flat bounded-cohomology input and the simultaneous strict and cohomological sum bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product with a specified bounded K-flat complex of flat module sheaves is represented by a bounded signed total complex for every bounded derived input",
+   "results": {
+    "t": "2026-10-22T06:47:51Z",
+    "tool": "leanfinder",
+    "query": "The derived tensor product with a specified bounded K-flat complex of flat module sheaves is represented by a bounded signed total complex for every bounded derived input",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "CategoryTheory.Tor'",
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Tor_obj",
+     "CategoryTheory.Tor"
+    ],
+    "digest": "1c835bcaf2b4135d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: bounded representatives and ordinary total tensor are separate ingredients; none supplies the one-sided derived comparison with an arbitrary non-flat bounded-cohomology input and the simultaneous strict and cohomological sum bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|HasGoodTensor|derivedTensor",
+   "results": {
+    "t": "2026-10-22T07:55:42Z",
+    "tool": "grep",
+    "query": "exists_iso_Q_obj_of_isGE_of_isLE|HasGoodTensor|derivedTensor",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/Monoidal.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean"
+    ],
+    "digest": "6679aca03df12e41"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exists_iso_Q_obj_of_isGE_of_isLE gives only the bounded representative (already lem-sfb-bounded-representative); HasGoodTensor and tensorObj concern ordinary total tensors; Tor uses projective resolutions and returns homology of degree-zero inputs. None supplies the specified ringed-site one-sided comparison and the simultaneous bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of a bounded derived object with a bounded flat K-flat complex is computed by the signed total tensor",
+   "results": {
+    "t": "2026-10-22T07:55:42Z",
+    "tool": "leansearch",
+    "query": "Derived tensor of a bounded derived object with a bounded flat K-flat complex is computed by the signed total tensor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.tensorObj",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasTensorTensorUnit",
+     "HomologicalComplex.tensorHom",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "HomologicalComplex.mapBifunctorFlipIso"
+    ],
+    "digest": "fcb3cc1db8bc8112"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exists_iso_Q_obj_of_isGE_of_isLE gives only the bounded representative (already lem-sfb-bounded-representative); HasGoodTensor and tensorObj concern ordinary total tensors; Tor uses projective resolutions and returns homology of degree-zero inputs. None supplies the specified ringed-site one-sided comparison and the simultaneous bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": {
+    "t": "2026-10-22T07:55:42Z",
+    "tool": "loogle",
+    "query": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "digest": "a7b25b75b1756892"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exists_iso_Q_obj_of_isGE_of_isLE gives only the bounded representative (already lem-sfb-bounded-representative); HasGoodTensor and tensorObj concern ordinary total tensors; Tor uses projective resolutions and returns homology of degree-zero inputs. None supplies the specified ringed-site one-sided comparison and the simultaneous bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded cohomology module sheaf complex tensored with a supplied bounded K-flat complex has a bounded signed total representative in the sum of support intervals",
+   "results": {
+    "t": "2026-10-22T07:55:48Z",
+    "tool": "leanfinder",
+    "query": "A bounded cohomology module sheaf complex tensored with a supplied bounded K-flat complex has a bounded signed total representative in the sum of support intervals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasGoodTensor₂₃",
+     "HomologicalComplex.HasTensor",
+     "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+     "HomologicalComplex.unit_tensor_d₁",
+     "HomologicalComplex.ιTensorObj",
+     "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+     "HomologicalComplex.tensorObj"
+    ],
+    "digest": "23efd4af607f1c0e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exists_iso_Q_obj_of_isGE_of_isLE gives only the bounded representative (already lem-sfb-bounded-representative); HasGoodTensor and tensorObj concern ordinary total tensors; Tor uses projective resolutions and returns homology of degree-zero inputs. None supplies the specified ringed-site one-sided comparison and the simultaneous bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One-sided K-flat right factor computes derived tensor of arbitrary sheaf complexes with natural two-sided normalization",
+   "results": {
+    "t": "2026-10-22T07:55:50Z",
+    "tool": "leanfinder",
+    "query": "One-sided K-flat right factor computes derived tensor of arbitrary sheaf complexes with natural two-sided normalization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Tor'_map_app",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "CategoryTheory.Tor'",
+     "CategoryTheory.Tor",
+     "CategoryTheory.Tor_obj",
+     "CategoryTheory.Tor'_obj_map",
+     "Module.Flat.lTensor_shortComplex_exact"
+    ],
+    "digest": "a91934ff962fefed"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: exists_iso_Q_obj_of_isGE_of_isLE gives only the bounded representative (already lem-sfb-bounded-representative); HasGoodTensor and tensorObj concern ordinary total tensors; Tor uses projective resolutions and returns homology of degree-zero inputs. None supplies the specified ringed-site one-sided comparison and the simultaneous bounds."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-boundary-bounded-tensor-comparison",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Second evaluation paragraph, derived evaluation tensor with bounded first input and the flat restriction of the second input; carries returned preparation steps 1, 4 and 5, including the derived-category identification and the strict sum interval.",
+   "via": [
+    "lem-sf-boundary-bounded-tensor-comparison",
+    "lem-weil-boundary-proetale-projection-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-bounded-one-sided-tensor-realization",
+  "worker": "stage1",
+  "summary": "No exact completed project declaration found. Reused the existing general Mathlib bounded-representative leaf and the existing normalized one-sided ringed-site tensor lemma; wrote out the signed total, finite support and cohomology bounds. No new nodes or changes to the statement. Landing-return repair: rebased the retained reviewed split onto the current live unsplit node, preserving all current statement and ancestry metadata, and reread every current cited statement; all seven citation quotes and their hypotheses still apply.",
+  "blueprint": "cor-weil-boundary-duality-discharge: final proof paragraph, restriction of the evaluation tensor; makes precise the bounded tensor realization required in the ancestor split, second evaluation paragraph, via lem-sf-boundary-bounded-tensor-comparison. The current main-20261015 imported text carries no proof, so the historical master proof identifies the evaluation sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-site-one-sided-tensor-normalization",
+    "why": "Generic ringed-site K-flat comparison with the specified two-sided normalization; used as a black box to compute the evaluation tensor, not to replace the biduality unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N0-31bd604f7",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-31bd604f7 (reviewer sub-agent of L); spot-checked: This is a re-push after a landing return of head d7f376e93e6e, which was reviewed PASS. A JSON diff of the item against that head shows that only split_report.summary changed. The statement, stmt_deps, proof, proof_deps (7), tool_uses and source are identical, and there are no new nodes. I reread everything in full anyway. Step 1: Mod(R) is abelian under the size hypothesis (def-weil-sheaf-of-modules-category). lem-sfb-bounded-representative is the Mathlib leaf exists_iso_Q_obj_of_isGE_of_isLE (checked at TStructure.lean 180-186), applied with a=r, b=s. Step 2: the last sentences of lem-trf-site-one-sided-tensor-normalization give the M⊗T comparison for an arbitrary M, normalized by the same δ from lem-weil-pbc-site-derived-tensor-descent. P^• is K-flat with flat terms, so it lies in the subcategory the lemma requires. Composing with e⊗^L1 covers every representing pair. This matches Stacks 06YU (sites-cohomology.tex ~3275-3300), where the K-flat factor is on the right. The off-unit generic tool use (C8) is declared and I accept it. Step 3: the signed total and the (-1)^p sign come from def-pc-tensor-complex-sheaves. A tensor with a zero factor is zero (def-pur-sheaf-tensor-product), and max(r,d-v)≤j≤min(s,d-u) has no solutions outside [r+u,s+v]. Step 4: H^d∘Q≅H^d transfers the vanishing across the Step 2 isomorphism, so the object lies in D^b⊂D^+. Edge cases r=s, u=v, zero inputs and the zero ring all go through. proof_deps equals the union of the step uses, there is no cycle and no SGA, and the unit and statement are unchanged. Maintainer note: this is a side-completion promotion loop; the mathematics was already approved, so the L promotion step needs attention."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedOneSidedTensorRealization",
+  "declaration": "SheafOfModules.bounded_one_sided_tensor_realization",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedOneSidedTensorRealization.lean",
+  "statement": "theorem bounded_one_sided_tensor_realization {C : Type c} [Category.{m} C] [EssentiallySmall.{a} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{a}) [HasDerivedCategory.{w} (Modules R)] (r s u v : ℤ) (hrs : r ≤ s) (huv : u ≤ v) (B : DerivedCategory (Modules R)) (hB : ∀ j : ℤ, j < r ∨ s < j → IsZero ((DerivedCategory.homologyFunctor (Modules R) j).obj B)) (P : CochainComplex (Modules R) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P) (hPf : ∀ h : ℤ, IsFlatOnSite (J := J) (R := R) (P.X h)) (hPs : ∀ h : ℤ, h < u ∨ v < h → IsZero (P.X h)) : (∃ K : CochainComplex (Modules R) ℤ, (∀ j : ℤ, j < r ∨ s < j → IsZero (K.X j)) ∧ Nonempty (B ≅ DerivedCategory.Q.obj K)) ∧ (∃ cR : (totalTensor R).flip.obj P ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ (derivedTensor R).flip.obj (DerivedCategory.Q.obj P), (∀ (V : CochainComplex (Modules R) ℤ) (hV : CochainComplex.IsKFlatIndependentCoefficients V) (hVf : ∀ j : ℤ, IsFlatOnSite (J := J) (R := R) (V.X j)), cR.app V = representativeIso R V P hV hP hVf hPf) ∧ (∀ (K : CochainComplex (Modules R) ℤ) (_hK : ∀ j : ℤ, j < r ∨ s < j → IsZero (K.X j)) (e : B ≅ DerivedCategory.Q.obj K), (∃ i : ((derivedTensor R).flip.obj (DerivedCategory.Q.obj P)).obj B ≅ DerivedCategory.Q.obj (((totalTensor R).obj K).obj P), i = ((derivedTensor R).flip.obj (DerivedCategory.Q.obj P)).mapIso e ≪≫ (cR.app K).symm) ∧ (∀ d : ℤ, d < r + u ∨ s + v < d → IsZero ((((totalTensor R).obj K).obj P).X d)) ∧ (∀ d : ℤ, Set.Finite {p : ℤ × ℤ | p.1 + p.2 = d ∧ ¬ IsZero (((ordinaryTensor R).obj (K.X p.1)).obj (P.X p.2))}))) ∧ (∀ d : ℤ, d < r + u ∨ s + v < d → IsZero ((DerivedCategory.homologyFunctor (Modules R) d).obj (((derivedTensor R).flip.obj (DerivedCategory.Q.obj P)).obj B))) ∧ DerivedCategory.TStructure.t.bounded (((derivedTensor R).flip.obj (DerivedCategory.Q.obj P)).obj B) ∧ DerivedCategory.TStructure.t.plus (((derivedTensor R).flip.obj (DerivedCategory.Q.obj P)).obj B)",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the already landed def-sf-ringed-kflat-tensor-representative-data for Modules, ordinaryTensor, totalTensor, derivedTensor and the specified representativeIso. The right comparison is a natural isomorphism normalized to that exact two-sided comparison; every representing isomorphism e is transported by derived right tensor before its inverse is applied. No node statement is corrected and no new notion is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e93858f4b",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Every node clause is rendered faithfully: EssentiallySmall.{a} site with independent universes; hB is homology vanishing outside [r,s]; P is IsKFlatIndependentCoefficients with IsFlatOnSite terms supported in [u,v]; the bounded representative exists; cR is a natural iso over all complexes normalized to representativeIso on flat-term K-flat V, which is unique by resolution plus K-flatness of P and equals the right-factor comparison of lem-trf-site-one-sided-tensor-normalization (orientation inverted); for every (K,e) the realization iso is mapIso e then cR.app K inverse, with strict total-term vanishing outside [r+u,s+v] and finite nonzero summands; derived H^d vanishes outside the interval and the object satisfies t.bounded and t.plus (the mathlib_match of def-weil-pbc-bounded-derived-subcategories). The added stmt_dep def-sf-ringed-kflat-tensor-representative-data is landed (existing:true owner of Modules/ordinaryTensor/totalTensor/derivedTensor/representativeIso), allowed by stage2_delivery.py. The statement is verbatim; docstrings carry source, blueprint and proof steps; the report has both sections; no extra assumptions; edge cases r=s, u=v, zero inputs and zero ring are covered. Advisory: the ∃ i, i = composite clause is redundant but faithful. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261023T123603-L-1217249",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

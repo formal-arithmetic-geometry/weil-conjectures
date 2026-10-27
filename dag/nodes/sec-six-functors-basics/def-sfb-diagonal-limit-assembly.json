@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-diagonal-limit-assembly",
+ "kind": "definition",
+ "title": "Completed diagonal limit specification",
+ "status": "split",
+ "statement": "With the notation of [def-sfb-diagonal-system-interface] and [def-sfb-diagonal-limit-interface], for $\\ell$ prime, a scheme $Y$ on which $\\ell$ is invertible and a simultaneous derived reduction $D$ of the strict coefficient tower on $W=\\mathbf P^1_Y\\times_Y\\mathbf P^1_Y$, define the proposition that the integral Cartier boundary of the diagonal satisfies the simultaneous normalization predicate of [def-sfb-diagonal-limit-interface]: its strict reduction is a class $c$ in $\\mathrm{Ext}^2$ from the reduced integral source to a tower $H$ whose underlying tower is identified with the roots-of-unity tower $(\\mu_{\\ell^{n+1}})_n$; the finite evaluations of $c$ are the torsion cycle classes [def-sfb-cartier-reduction-data] with the Kummer normalization; and the completed arrow has source the supported completed constant normalized by the completed generator and target the completed Tate line [sk-def-sp-tate-twist] normalized by the root-limit comparison. This is a proposition, not its proof.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sp-tate-twist",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-diagonal-limit-interface",
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.md",
+  "place": "split helper for diagonal tower limit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, Mathlib.Tactic.Module.reduceCoefficientwise, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; Mathlib.Tactic.Module.reduceCoefficientwise, Mathlib.Tactic.Module.qNF.toNF, Mathlib.Tactic.LinearCombination.normStx, Mathlib.Tactic.tacticReduce__, SimplexCategoryGenRel.exists_normal_form_P_σ, Mathlib.Tactic.LinearCombination'.normStx, FixedDetMatrices.reduce_reduceStep, Algebra.SubmersivePresentation.comp",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "rg",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource in lean/WeilConjectures and lean/Sheaf",
+   "results": "No upstream WeilConjectures matches. Sheaf matches: DiagonalTowerSystem, DiagonalTowerLimit, DiagonalTowerTrace (the definitions); DiagonalTowerTraceLimit, DiagonalCoefficientReference, DiagonalTowerCoefficients, DiagonalCoefficientCategory, CoefficientBidualEvaluationShiftOne (consumers).",
+   "date": "2026-10-23",
+   "verdict": "Exact existing project definitions; new nodes supply ownership only."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'diagonal derived reduction'; search 'normalized source'",
+   "results": "0 blueprint nodes for either query. DAG rg found the three theorem records and existing trace/reference definition consumers, but no definition node owning these eight declarations.",
+   "date": "2026-10-23",
+   "verdict": "Extract definition ownership from theorem modules, as requested by return H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerLimit",
+  "date": "2026-10-27",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-limit",
+   "place": "split interface declaration",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCompletedLimitSpec",
+  "statement": "def DiagonalCompletedLimitSpec (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤))) [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ (diagonalSurface Y))] [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y))) : Prop",
+  "module": "Sheaf.Paper.DiagonalLimitAssembly",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/DiagonalLimitAssembly.lean",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-27"
+ },
+ "existing": false,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6cea6",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261026T222738-L-689439",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6cea6",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261026T222738-L-689439",
+  "kind": "interface",
+  "note": "independent cc review: clone DiagonalTowerLimit vs delivered Interface+Assembly+item: moved verbatim (only typed lambda binders in DiagonalCompletedLimitSpec); diagonalTower_limit sorry kept unchanged; sandbox compile of the 3 delivered modules + 5 direct importers all rc 0; axioms clean"
+ }
+}

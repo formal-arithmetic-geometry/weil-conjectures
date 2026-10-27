@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-abelian-subvariety-separable-definition",
+ "kind": "statement",
+ "title": "Geometric abelian subvarieties have a finite separable field of definition",
+ "statement": "Let $k$ be a field [def-weil-field], fix an algebraic closure $\\Omega/k$ [def-weil-algebraic-closure], and let $A/k$ be an abelian variety [def-sc-abelian-variety]. Let $C\\hookrightarrow A_\\Omega$ be a closed subgroup scheme [def-sc-group-scheme-subgroup] which is an abelian variety over $\\Omega$. There exist an intermediate field $k\\subseteq E\\subseteq\\Omega$ with $E/k$ finite Galois (finite-dimensional, separable algebraic [def-weil-pbc-separable-algebraic-extension], and normal, meaning that every minimal polynomial over $k$ of an element of $E$ splits in $E$), and a closed abelian subvariety $C_E\\hookrightarrow A_E$, such that $(C_E)_\\Omega=C$ as closed subgroup schemes of $A_\\Omega$. Base changes are those of [def-pc-base-change]. No perfectness hypothesis on $k$ is made.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 10.1 footnote 10, p.42, and discussion after Remark 10.2 footnote 11, p.43: missing imperfect-field prerequisite. Explicit source: Milne, Abelian Varieties (January 2, 2022), https://www.jmilne.org/math/xnotes/AVs.pdf, Section 12, second unnumbered lemma after Proposition 12.1, printed p.19 (finite separable definition); replacing its finite separable extension by its finite normal closure gives the finite Galois form. This newer article is WANTED in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Let $k_s\\subseteq\\Omega$ consist of the elements separable over $k$; by [def-weil-pbc-relative-separable-closure] it is a subfield, separable algebraic over $k$ and separably closed, hence a separable closure [def-pd-separable-closure]. In particular $k_s/k$ is Galois: the roots in $\\Omega$ of the minimal polynomial of a separable element are again separable. By [lem-sfb-abelian-prime-to-torsion-dense], $T=\\bigcup_{n\\geq1,\\,n\\in k^\\times}C[n](\\Omega)$ is dense in $C$. Because $C\\hookrightarrow A_\\Omega$ is a group homomorphism, every point in $C[n](\\Omega)$ lies in $A[n](\\Omega)$. The finite etale scheme $A[n]$ is given by [lem-sc-mult-n-etale-kernel]; its coordinate algebra is a product of finite separable extensions of $k$ by [lem-weil-pbc-etale-algebra-over-field-product]. Every $k$-map from one of these factors to $\\Omega$ has image in $k_s$. Thus every point of $T$ is the scalar extension of a point of $A(k_s)$.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "def-pd-separable-closure",
+    "lem-sfb-abelian-prime-to-torsion-dense",
+    "lem-sc-mult-n-etale-kernel",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Section 10, pp.42–45, supporting torsion inputs; agent expansion of the missing separable-definition argument. Explicit comparison: Milne 2022, Section 12, second unnumbered lemma after Proposition 12.1, printed p.19 (WANTED)."
+   }
+  },
+  {
+   "text": "The abelian variety $C$ is smooth, so it is reduced by [sbc-lem-smooth-geometrically-reduced]. The scheme $A_{k_s}$ is an abelian variety by [lem-sfb-abelian-field-extension], hence finite type. Apply [lem-sfb-dense-rational-closed-subscheme-descent] with $F=k_s$, $L=\\Omega$, $X=A_{k_s}$, $Z=C$ and the set of $k_s$-points found in step 1. Obtain a closed subscheme $D\\hookrightarrow A_{k_s}$ with $D_\\Omega=C$. Choose a finite affine open cover $U_i=\\operatorname{Spec}R_i$ of $A$, possible since $A$ is proper, hence finite type. Each $R_i\\otimes_k k_s$ is a finite-type algebra over a field and is Noetherian by [lem-wf-affine-noetherian-components]. Therefore the ideal $I_i$ cutting out $D$ on $(U_i)_{k_s}$ has finitely many generators. Write each generator as a finite sum $\\sum_j r_j\\otimes a_j$ and collect the finitely many coefficients $a_j\\in k_s$ across the finitely many charts.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-abelian-field-extension",
+    "lem-sfb-dense-rational-closed-subscheme-descent",
+    "lem-wf-affine-noetherian-components",
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Section 10, pp.42–45, supporting torsion inputs; agent expansion of the missing separable-definition argument. Explicit comparison: Milne 2022, Section 12, second unnumbered lemma after Proposition 12.1, printed p.19 (WANTED)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-set-in-finite-galois-subextension] to that finite coefficient set inside the Galois extension $k_s/k$. Obtain $k\\subseteq E\\subseteq k_s$ finite Galois. In $R_i\\otimes_k E$ let $J_i$ be generated by the same displayed finite sums. Its extension to $R_i\\otimes_k k_s$ is $I_i$. These ideals agree on overlaps: on any affine open $W\\subseteq (U_i)_E\\cap(U_j)_E$, their extensions to $W_{k_s}$ agree, since both cut out $D$. For an $E$-vector space $V$, the map $V\\to V\\otimes_E k_s$ is injective (extend any nonzero vector to a basis); apply this to the quotients by the two ideals to reflect both ideal inclusions. The ideals thus glue to a closed subscheme $C_E\\hookrightarrow A_E$, with $(C_E)_{k_s}=D$ and $(C_E)_\\Omega=C$ as closed subschemes.",
+   "uses": [
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DT/0EXM, lemma-normal-closure/lemma-normal-closure-galois; coefficient construction and ideal reflection as in Milne algebraic groups, Appendix A.65."
+   }
+  },
+  {
+   "text": "The group operations of $A_E$ restrict to $C_E$. Indeed, the composite $C_E\\times_E C_E\\to A_E$ becomes the multiplication into $C$ after extension to $\\Omega$. On each affine chart every element of the ideal of $C_E$ therefore maps to zero after tensoring with $\\Omega$, hence to zero before tensoring, by the vector-space injection in step 3. This is exactly the criterion for factorization through a closed subscheme. Apply the same argument to inverse and unit. The group identities hold because their composites with the closed immersion into $A_E$ hold, and a closed immersion is a monomorphism. Thus $C_E$ is a closed subgroup scheme in the sense of [def-sc-group-scheme-subgroup].",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.65–A.66; explicit ideal-factorization and monomorphism argument."
+   }
+  },
+  {
+   "text": "The field extension $\\Omega/E$ is faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat]; its map of spectra is surjective by [lem-weil-pbc-faithfully-flat-surjective-spectrum], and it is quasi-compact since it is affine. Since $(C_E)_\\Omega=C$ is smooth, [lem-trf-smooth-fpqc-base-descent] makes $C_E$ smooth over $E$. Also $A_E$ is an abelian variety by [lem-sfb-abelian-field-extension], so [lem-weil-pbc-closed-immersion-proper] makes its closed subscheme $C_E$ proper. The projection $C\\to C_E$ is surjective: apply the same faithfully-flat and spectrum-surjectivity statements on affine charts. If $C_E$ were the union of two nonempty disjoint clopen subsets, their inverse images would be such a decomposition of the connected scheme $C$. Hence $C_E$ is connected and nonempty. Together with step 4 this gives all three properties of an abelian variety [def-sc-abelian-variety], and step 3 gives the required field and subgroup equality.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-sfb-abelian-field-extension",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VL, lemma-descending-property-smooth; groupoids.tex Tag 0BFB, lemma-abelian-variety-change-field; morphisms.tex Tags 01W5/01W3; algebra.tex Tags 00HP/00HQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-separable-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-proper-morphism",
+  "lem-sc-mult-n-etale-kernel",
+  "lem-sfb-abelian-field-extension",
+  "lem-sfb-abelian-prime-to-torsion-dense",
+  "lem-sfb-dense-rational-closed-subscheme-descent",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-wf-affine-noetherian-components",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Section 10, pp.42–45, expanded by dense prime-to-characteristic torsion, coefficient-basis closed-subscheme descent, finite equations, and fpqc smoothness descent. Explicit lemma in Milne 2022 Section 12 printed p.19 is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every geometric abelian subvariety of an abelian variety is defined over a finite separable extension of the ground field",
+   "results": "8 hits; finiteExts, IsSepClosed, IsAbelianGalois.tower_bot, IsAbelianGalois.tower_top, IsAbelianGalois.of_algHom, Algebra.FormallyUnramified.isSeparable, Field.absoluteGaloisGroupAbelianization, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separable closures and abelian Galois extensions do not give descent of geometric abelian subvarieties; Mathlib has no abelian-variety interface in the searched source"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every abelian subvariety over an algebraic closure is defined over a finite separable extension",
+   "results": "8 hits; separableClosure, IsSepClosure.recOn, IsSepClosure.isAlgClosure_of_perfectField, separableClosure.isPurelyInseparable, SeparableClosure, IsSepClosed.of_isAlgClosed, IsSepClosure.isGalois, IsAbelianGalois.toIsGalois",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separable closures and abelian Galois extensions do not give descent of geometric abelian subvarieties; Mathlib has no abelian-variety interface in the searched source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric abelian subvarieties descend to a finite Galois extension even over an imperfect ground field",
+   "results": "8 hits; IsAbelianGalois.tower_bot, IsAbelianGalois.tower_top, IsAbelianGalois.of_algHom, instIsAbelianGaloisSubtypeMemIntermediateField, instIsAbelianGaloisSubtypeMemIntermediateField_1, Field.absoluteGaloisGroupAbelianization, fixedByFinite, IsGaloisGroup.to_isFractionRing",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separable closures and abelian Galois extensions do not give descent of geometric abelian subvarieties; Mathlib has no abelian-variety interface in the searched source"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAbelianVariety\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separable closures and abelian Galois extensions do not give descent of geometric abelian subvarieties; Mathlib has no abelian-variety interface in the searched source"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianVariety|IsAbelianVariety|subvariety|separable.*descent",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separable closures and abelian Galois extensions do not give descent of geometric abelian subvarieties; Mathlib has no abelian-variety interface in the searched source"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every geometric abelian subvariety descends to a finite separable extension of the ground field",
+   "results": "8 hits: IsAbelianGalois.of_algHom, IsSepClosed.lift_def, Algebra.FormallyUnramified.isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Field.Emb.Cardinal.instIsSeparableSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet, Algebra.FormallySmooth.of_perfectField",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separability and abelian Galois extensions do not give descent of abelian subvarieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric abelian subvarieties descend to a finite Galois extension even over an imperfect field",
+   "results": "8 hits: IsAbelianGalois.tower_bot, IsAbelianGalois.tower_top, IsAbelianGalois.of_algHom, Field.absoluteGaloisGroupAbelianization, instIsAbelianGaloisSubtypeMemIntermediateField, instIsAbelianGaloisSubtypeMemIntermediateField_1, IsGaloisGroup.to_isFractionRing, fixedByFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separability and abelian Galois extensions do not give descent of abelian subvarieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian subvariety over an algebraic closure has a finite separable field of definition",
+   "results": "8 hits: SeparableClosure, IsSepClosure.recOn, separableClosure, IsSepClosure.separable, IsSepClosed.of_isAlgClosed, IsSepClosure.isAlgClosure_of_perfectField, perfectField_iff_isSeparable_algebraicClosure, IsSeparable",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separability and abelian Galois extensions do not give descent of abelian subvarieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAbelianVariety\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separability and abelian Galois extensions do not give descent of abelian subvarieties"
+  },
+  {
+   "tool": "grep",
+   "query": "abelianVariety|IsAbelianVariety|torsion.*dense|dense.*torsion",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: field-theoretic separability and abelian Galois extensions do not give descent of abelian subvarieties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-kernel-abelian-part",
+  "date": "2026-10-23",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The abelian part of a homomorphism kernel over its ground field. Supporting lemma: Geometric abelian subvarieties have a finite separable field of definition.",
+   "via": [
+    "lem-sfb-abelian-kernel-abelian-part",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-subvariety-separable-definition",
+  "worker": "stage1",
+  "summary": "Q53: retained the imperfect-field statement exactly; supplied five proof steps through dense separable torsion and explicit finite-equation descent. Created two strictly smaller statement-only supporting nodes, searched Mathlib and the whole DAG/blueprint; checked scheme-theoretic equality and arbitrary-extension smoothness descent.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/level-rigidity prerequisite, via the recorded abelian-kernel chain. Current latest direct-images proof (3) is shorter and does not state this auxiliary fact. Existing null nearest-blueprint-ancestor retained, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-mult-n-etale-kernel",
+    "why": "Prime-to-characteristic multiplication on the ambient abelian variety is finite etale; the present unit has no such torsion lemma."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smoothness gives reducedness of C before applying dense-rational-point descent; this is a generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-mult-n-etale-kernel",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-478f552cb",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-478f552cb (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, Milne AV I §10 (Prop 10.1; footnotes 10 and 11 say the imperfect-field case still needs proof, so agent origin is correct and the 2022 article is rightly WANTED) and Milne iAG A.65–A.66 (the generator criterion a = a'∩A). The statement matches live exactly: arbitrary k, no perfectness, finite Galois E, scheme-theoretic equality. Live item is still unsplit; there is no repair note. Steps 1–5 checked. Torsion points have coordinates in k_s because A[n] is finite étale and its algebra is a product of finite separable fields. Descent from Ω to k_s uses the new rational-density lemma; C is reduced since it is smooth. Noetherianity gives finitely many coefficients, which lie in a finite Galois E. Ideals agree on affine W inside the overlaps by V→V⊗k_s injectivity. The subgroup step is elementary from the definition. Smoothness descends along fpqc Spec Ω→Spec E; C_E is proper as a closed subscheme and connected because C→C_E is surjective. FIX (C4): step 1 used def-pd-separable-closure for 'the separable elements of Ω form a separably closed subfield', which that node does not state. Added the mathlib leaf def-weil-pbc-relative-separable-closure to the text, uses and proof_deps. New nodes: prime-to-torsion density is true (closure H, H⁰, n^{2dim} count; B=0 checked) and is not a duplicate of torsion-kernel-divisibility, mult-n-etale-kernel or rational-points-dense. Dense-rational descent is true (linear-independence argument; tested on purely inseparable points, empty Z, and nonreduced Z, which the hypothesis excludes) and is distinct from galois-closed-subscheme-descent. Neither new node restates the item. Tool uses lem-sc-mult-n-etale-kernel and sbc-lem-smooth-geometrically-reduced are accepted. Batch-5 flags: mult-n-etale-kernel reaches only an elementary forward-difference polynomial lemma, and smooth-fpqc-base-descent is a generic mathlib leaf; neither is in the trace-formula or Poincaré statements or their proofs, so both are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.SubvarietySeparableDefinition",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_finiteGalois_subvariety_definition",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/SubvarietySeparableDefinition.lean",
+  "statement": "theorem IsAbelianVariety.exists_finiteGalois_subvariety_definition (k Ω : Type u) [Field k] [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (C : Over (Spec (.of Ω))) [GrpObj C] [IsAbelianVariety C] (i : C ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).obj A) [IsClosedSubgroupScheme i] : ∃ E : IntermediateField k Ω, FiniteDimensional k E ∧ IsGalois k E ∧ ∃ (C_E : Over (Spec (.of E))) (_ : GrpObj C_E) (_ : IsAbelianVariety C_E) (j : C_E ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k E)))).obj A) (_ : IsClosedSubgroupScheme j) (q : C.left ⟶ C_E.left), IsPullback q C.hom C_E.hom (Spec.map (CommRingCat.ofHom E.subtype)) ∧ q ≫ j.left ≫ pullback.fst A.hom (Spec.map (CommRingCat.ofHom (algebraMap k E))) = i.left ≫ pullback.fst A.hom (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfcb9a761",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Snapshot node differs from live only by the new lean record; no supersession, repair note or existing declaration (H4). Statement field verbatim; sole sorry is the proof. Clauses match: Field k; IsAlgClosure k Ω (same universe u, no loss of generality); A with GrpObj+IsAbelianVariety; i into Over.pullback A_Ω with the canonical group structure and IsClosedSubgroupScheme; ∃ E IntermediateField with FiniteDimensional ∧ IsGalois (separable+normal); C_E with GrpObj, IsAbelianVariety, closed subgroup j into A_E; IsPullback q plus A-component equation gives (C_E)_Ω = C as closed subschemes of A_Ω. No perfectness/char/dimension hypotheses; edge cases C trivial, C=A_Ω, E=k, imperfect k covered. All 6 stmt_deps used via recorded declarations; docstrings carry source place, blueprint tag and 5 proof steps; report has Worker report and Second reading by Q12. No change, so no compile; worker compile clean."
+ }
+}

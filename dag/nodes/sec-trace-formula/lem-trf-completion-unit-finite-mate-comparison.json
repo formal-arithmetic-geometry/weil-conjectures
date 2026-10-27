@@ -1,0 +1,130 @@
+{
+ "id": "lem-trf-completion-unit-finite-mate-comparison",
+ "kind": "statement",
+ "title": "Finite scalar mates identify a normalized tensor comparison",
+ "statement": "Fix l,E,W as in [def-trf-completion-unit-models], an ordinary model M, and a fixed coefficient derived system calculus S [lem-coef-derived-system-evaluation-calculus]. Let c identify the termwise limit with roosLimitFunctor, preserving all degreewise projections, and let eta be normalized on every K-injective tower by eta followed by rightDerivedFunctorObjQIso equal to Q(c inverse). Given a natural comparison epsilon : Q S.reduction -> M.quotient Q, suppose only that for each complex Q its S-adjunction transpose equals Q of the ordinary tensor-adjunction unit followed by the explicit M.limitComparison/eta/exact-restriction composite at M.quotient(Q). Then, for every flat-term K-flat Q and every n, the derived evaluation of epsilon_Q, followed by the exact evaluation localization factor and Q(M.evaluation n), equals S.reductionEvaluation n followed by the fixed coefficientFiniteReductionModel. This theorem constructs no epsilon, adjunction or universal derived functor, and assumes neither universality nor invertibility of epsilon.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A6 lemma-adjoint and 0941 lemma-derived-limit-is-ok; 06YY/09T5 scalar-unit normalization; finite-mate substep of parent proof step 3."
+ },
+ "proof": [
+  {
+   "text": "Define two natural transformations from the ordinary tower-limit localization to localized exact evaluation. On a K-injective tower their equality is precisely eta normalization followed by coefficientConstantTowerProjection_exists. For any tower choose a quasi-isomorphism into a K-injective tower. Exact evaluation preserves that quasi-isomorphism, so naturality and cancellation of its localized image extend the equality to every tower (private helper limitUnit_projection).",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private square_factors helper computes the canonical square of exact derived functors using mapDerivedCategoryCompIso_hom_app_factors and mapDerivedCategoryNatIso_fac. Cancel the initial invertible localization factor in this generic helper, before specializing to coefficient categories. Apply the resulting identity directly to actual sequence restriction, constant-tower evaluation, finite evaluation and scalar restriction. Naturality of the total-limit projection moves the inverse exact-restriction factor past the projection. Combine this with limitUnit_projection; hc identifies c inverse followed by the termwise projection with the actual ordinary complex-limit projection (system_projection). Degreewise, M.limitComparison_projection and M.unit_tensor identify the projected ordinary tensor unit with the chosen scalar-extension unit (ordinary_unit).",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private finiteModel_unit helper explicitly rewrites identity maps and closes the asIso_hom equality by reflexivity in the finite model comparison, and puts the existing derivedScalarExtensionRestrictionAdjunction K-flat normalization into cochain-localization coordinates, by the exact-restriction factor equation and the quotient-to-derived factor isomorphisms. Precompose the proposed finite comparison with S.reductionEvaluation inverse, apply injectivity of the finite adjunction Hom equivalence, and postcompose by the invertible scalar-restriction localization factor. S.unit_projection and naturality of coefficientSequenceProjection express its left side as hunit projected to level n. Use system_projection and ordinary_unit to identify this with the localized ordinary scalar unit. finiteModel_unit identifies the right side with the same map. No faithfulness of derived evaluation, boundedness, or nonzero condition is used.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A6 lemma-adjoint and 0941 lemma-derived-limit-is-ok; 06YY/09T5 scalar-unit normalization; finite-mate substep of parent proof step 3. Lean implementation by J9 follows these three steps using fully proved private helpers. W4 keeps this route and performs localization-factor cancellation in the generic helper before coefficient specialization, avoiding the concrete simplifier transport. Returned W4 delivery repaired by restoring the quarantined module and explicitly closing the reflexive finite localized counit model hom equality after the calculus wrapper change."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of a K-injective resolution of a restricted semilinear coefficient system is a quasi-isomorphism; Equality of finite scalar adjunction mates determines a tensor reduction comparison on K-flat complexes",
+   "results": "The acyclicity query returned QuasiIso, homotopy-equivalence quasi-isomorphisms, and ordinary injective resolutions. The finite-mate query returned linear adjoints and tensor equalizer results, with no specialized comparison.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem states the fixed coefficient-system specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of a K-injective sequence is acyclic for inverse limit; Finite evaluation of derived tensor comparison determined by normalized adjunction unit",
+   "results": "Returned bounded-below injective criteria, Grothendieck complexes, and generic monoidal adjunction comparisons. Read the project RestrictedTowerResolutionAcyclicity and SequencePushforwardLimitProjections declarations instead.",
+   "date": "2026-10-26",
+   "verdict": "The project has the generic restriction acyclicity statement, but the specified coefficient-site transport is required. Finite normalization requires the actual coefficient scalar units."
+  },
+  {
+   "tool": "grep",
+   "query": "restricted_limit_acyclic|finiteComparison_of_unit|rightDerivedFunctorObjQIso|homEquiv_naturality_right|isIso_map_iff",
+   "results": "No duplicate specialized declarations in Sheaf or WeilConjectures. Read CoefficientRingedSequenceSite, CompletionUnitModels, CoefDerivedSystemEvaluationCalculus, DerivedScalarExtensionRestrictionAdjunction, RestrictedTowerResolutionAcyclicity and Mathlib Adjunction/Unique. Whole-blueprint searches found the generic lem-coef-restricted-tower-resolution-acyclicity and the parent comparison, but no other node of either specialized statement.",
+   "date": "2026-10-26",
+   "verdict": "Use generic acyclicity after transporting the actual site; use finite scalar Hom injectivity for the finite comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletionUnitDerivedAdjunctionComparison",
+  "date": "2026-10-26",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "07A6 lemma-adjoint and 0941 lemma-derived-limit-is-ok; 06YY/09T5 scalar-unit normalization; finite-mate substep of parent proof step 3.",
+   "via": [
+    "lem-trf-completion-unit-derived-adjunction-comparison",
+    "lem-trf-completion-unit-canonical-models",
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletionUnitFiniteMateComparison",
+  "file": "lean/Sheaf/Paper/CompletionUnitFiniteMateComparison.lean",
+  "declaration": "WeilConjectures.CompletionUnit.finiteComparison_of_unit",
+  "statement": "theorem finiteComparison_of_unit\n    (S : CoefficientDerivedSystemCalculus l E W) (M : OrdinaryModel l E W)\n    (c : (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤\n      scalarReductionSource l E W).mapHomologicalComplex (.up ℤ) ≅ roosLimitFunctor)\n    (hc : ∀ (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n      (n : ℕ) (p : ℤ),\n      (c.hom.app Z ≫ limit.π Z.asFunctor (op n)).f p = limit.π (Z.X p) (op n))\n    (η : roosLimitFunctor ⋙ DerivedCategory.Q ⟶\n      DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W)\n    (hηnorm : ∀ (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n      [J.IsKInjective], η.app J ≫\n        ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤\n          scalarReductionSource l E W).rightDerivedFunctorObjQIso J).hom =\n        DerivedCategory.Q.map (c.inv.app J))\n    (ε : DerivedCategory.Q ⋙ S.reduction ⟶ M.quotient l E W ⋙ DerivedCategory.Q)\n    (hunit : ∀ Q : CochainComplex (scalarReductionSource l E W) ℤ,\n      S.adjunction.homEquiv (DerivedCategory.Q.obj Q)\n          (DerivedCategory.Q.obj ((M.quotient l E W).obj Q)) (ε.app Q) =\n        DerivedCategory.Q.map\n          ((M.adjunction.mapHomologicalComplex (.up ℤ)).unit.app Q) ≫\n      (DerivedCategory.Q.map (M.limitComparison.hom.app ((M.quotient l E W).obj Q)) ≫\n        η.app ((tower l E W).obj ((M.quotient l E W).obj Q)) ≫\n        (coefficientConstantTowerLimit l E W).map\n          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app\n            ((M.quotient l E W).obj Q)))) :\n    ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)\n        (hQ : Q.IsKFlatIndependentCoefficients)\n        (_hflat : ∀ p : ℤ, (Q.X p).IsFlatOnSite) (n : ℕ),\n        (coefficientSequenceDerivedEvaluation l E W n).map (ε.app Q) ≫\n            (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app\n              ((M.quotient l E W).obj Q) ≫\n            DerivedCategory.Q.map\n              ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q) =\n          (S.reductionEvaluation n).hom.app (DerivedCategory.Q.obj Q) ≫\n            (coefficientFiniteReductionModel l E W Q hQ n).hom",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T065823-L-3252510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261027T065900-L-2486822",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

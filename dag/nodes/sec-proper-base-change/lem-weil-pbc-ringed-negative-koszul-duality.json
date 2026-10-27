@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-ringed-negative-koszul-duality",
+ "kind": "statement",
+ "title": "Finite free duality for nonempty ordered two-term tensors on one ringed site",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, $\\mathcal O$ a commutative ring sheaf, $r\\in\\mathbf N$ and $b$ a family of $r+1$ global sections. The ordered negative two-term tensors $N_m=\\bigotimes_i[\\mathcal O\\xrightarrow{b_i^{m+1}}\\mathcal O]$ in degrees $-1,0$ of [def-cbc-signed-koszul-completion-model] have chain isomorphisms to $\\mathcal Hom^\\bullet(P_m,\\mathcal O[0])$, with $P_m$ the ordered positive two-term tensor of [def-weil-pbc-ringed-koszul-system]. These intertwine the explicit negative transitions of [def-weil-pbc-ringed-negative-koszul-transitions] with the dual positive transitions. The empty-subset negative basis inclusion followed by the degree-zero isomorphism equals the degree-zero dual augmentation of [def-weil-pbc-ringed-koszul-system], preceded by the inverse single-complex identification. This has no scheme, coefficient extension or exterior algebra. The empty-list case is proved separately in [def-weil-pbc-ringed-negative-koszul-transitions].",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-pbc-ringed-negative-koszul-transitions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, the finite free negative Koszul complex and its dual identification; Modules on Sites Tags 03D8, 03EK and 0GMW for coefficient realization."
+ },
+ "proof": [
+  {
+   "text": "Induct on the number of generators, proving the same normalized duality assertion for all lists, including the empty one. For length zero apply ringedNegativeKoszulZeroDuality, already proved in the transition module.",
+   "uses": [
+    "def-weil-pbc-ringed-negative-koszul-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At a successor, use the tail isomorphism e_m from induction. Tensor it with the first negative factor, then apply the one-factor tensor-Hom isomorphism with K equal to the tail positive complex. The result has exactly the recursively defined negative source and Hom of the positive successor tensor as target.",
+   "uses": [
+    "lem-weil-pbc-ringed-negative-koszul-factor-hom-tensor",
+    "def-weil-pbc-ringed-koszul-system",
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the transition square, first use the tail transition equation under the tensor functor. Move the first negative transition past the tensor of e_(m+1) by bifunctor naturality. Apply contravariant naturality of the one-factor comparison to the tail positive transition, followed by its first-factor transition equation. Contravariant functoriality combines the resulting maps into the successor positive transition; bifunctor naturality identifies its two orders.",
+   "uses": [
+    "lem-weil-pbc-ringed-negative-koszul-factor-hom-tensor",
+    "def-weil-pbc-ringed-koszul-system",
+    "def-cbc-signed-koszul-completion-model",
+    "def-weil-pbc-ringed-negative-koszul-transitions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold only the successor empty-subset basis. The subset preimage is empty and both factor degrees are zero. Naturality of the total-tensor (0,0) inclusion moves the tensor of the tail isomorphism onto that tail basis. Replace the composite by the induction unit equation. The one-factor normalized projection equation, with p the tail projection, gives the desired successor dual unit because the positive projection is defined recursively by exactly that tensor of projections and U tensor U -> U.",
+   "uses": [
+    "lem-weil-pbc-ringed-negative-koszul-factor-hom-tensor",
+    "def-weil-pbc-ringed-koszul-system",
+    "def-cbc-signed-koszul-completion-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-negative-koszul-transitions",
+  "lem-weil-pbc-ringed-negative-koszul-factor-hom-tensor",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-cbc-signed-koszul-completion-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E; A3 formalizes induction using the normalized single-factor comparison, proving all recursive transition and empty-subset unit glue in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The negative Koszul complex of module sheaves is the internal dual of the positive Koszul complex and commutes with scalar extension",
+   "results": "8 hits: HomologicalComplex.unop, opposite homology comparisons, extendOpIso, FGModuleCatDual, and Hom-complex shifts. None identifies these Koszul complexes or transports their transitions and units.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a tensor product of finite free complexes is the tensor product of the dual complexes",
+   "results": "8 hits, including TensorProduct.dualDistribEquiv, PiTensorProduct.dualDistribEquiv, dualTensorHomEquiv and map_dualTensorHom. These concern modules and provide no chain-level sheaf comparison with the stated units.",
+   "date": "2026-10-26",
+   "verdict": "Useful underlying module duality, no direct chain-level theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"tensor\"",
+   "results": "12 hits: leftDualTensorIso, rightDualTensorIso, tensor dual instances, TensorProduct.dualDistrib and dualTensorHomEquiv. No statement about the present module-sheaf complexes.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor)|Koszul.*(dual|tensor)",
+   "results": "0 Mathlib hits through msearch. Local rg found the negative two-term tensor and basis in SignedKoszulCompletionModel. Read its definitions, RingedKoszulSystem, HomComplexToSingle, HomTensorTotal, and the completed tensor transport modules. None states either required normalized finite comparison.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing negative tensor; add only its explicit transition API and the two comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilNegativeKoszulTensorDualTransport",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The finite negative Koszul complexes and the unit in the derived-inverse-limit formula of def-weil-pbc-completed-pullback: Finite free duality on one ringed site, between the positive and negative two-term tensors.",
+   "via": [
+    "lem-weil-pbc-negative-koszul-tensor-dual-transport",
+    "lem-weil-pbc-completed-koszul-coefficient-comparison",
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedNegativeKoszulDuality",
+  "file": "lean/Sheaf/CategoryTheory/RingedNegativeKoszulDuality.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulSuccDuality",
+  "statement": "theorem ringedNegativeKoszulSuccDuality\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u}) (r : ℕ)\n    (b : Fin (r + 1) → (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ e : ∀ m : ℕ, ringedNegativeKoszul O (r + 1) b m ≅\n        (ringedKoszulDualTower O (r + 1) b).obj (op m),\n      (∀ m, ringedNegativeKoszulTransition O (r + 1) b m ≫ (e m).hom =\n        (e (m + 1)).hom ≫ (ringedKoszulDualTower O (r + 1) b).map\n          (homOfLE (Nat.le_succ m)).op) ∧\n      (∀ m, ringedNegativeKoszulBasis O (r + 1) b m ∅ 0 ≫ (e m).hom.f 0 =\n        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫\n          (ringedKoszulDualUnit O (r + 1) b m).f 0)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T001000-L-4157372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T022721-L-399390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

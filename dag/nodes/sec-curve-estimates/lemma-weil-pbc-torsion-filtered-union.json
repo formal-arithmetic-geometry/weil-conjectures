@@ -132,7 +132,18 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -172,17 +183,27 @@
   "note": "independent Codex review: Packet files match the delivery; stage-3 checks, compilation, and axiom audit pass with unchanged target/interface statements."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For every torsion sheaf [def-weil-pbc-etale-sheaves] $F$ on $X_{\\Et}$,\n\n$$\n F=\\varinjlim_{(\\mathbf N_{>0},\\mid)}F[n],\\qquad\n F[n]=\\ker(n:F\\to F),\n$$\n\nas a filtered colimit in $\\Ab(X_{\\Et})$. Here positive integers are ordered\nby divisibility, and for $n\\mid m$ the transition map is the inclusion\n$F[n]\\hookrightarrow F[m]$; this poset is filtered because\n$\\operatorname{lcm}(n,m)$ is a common upper bound.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring and $F$ an etale sheaf of\n$\\Lambda$-modules on $X_{\\Et}$ [def-weil-pbc-etale-sheaves] which is\ntorsion, i.e. every element of every geometric stalk of $F$ is killed by\na positive integer. Then $F$ is the colimit, in sheaves of\n$\\Lambda$-modules on $X_{\\Et}$, of a filtered diagram of sheaves\n$(D_j)_{j\\in J}$ each of which is killed by some positive integer $n_j$.\nIf moreover the geometric stalks of $F$ are torsion of orders invertible\non a scheme $S$, the diagram can be chosen with every $n_j$ invertible\non $S$.",
   "proof": [
    {
-    "text": "Every local section of $F$ is locally killed by some positive integer, hence lies in\n$F[n]$ locally, so the canonical map to $F$ is an epimorphism of sheaves; a\nsection that is zero in $F$ is already zero in every $F[n]$, so it is a\nmonomorphism. Filteredness follows from the lcm property, and the sheaf\naxioms pass the local statements to global ones, exactly in the sense of\n[def-weil-pbc-etale-sheaves].",
+    "text": "For $k\\in\\mathbf N$ let $F[k!]=\\ker(k!:F\\to F)$, a subsheaf killed by\n$k!$; since $k!\\mid k'!$ for $k\\le k'$ these form an increasing chain,\nindexed by the filtered category $\\mathbf N$. Filtered colimits of\nsheaves of $\\Lambda$-modules on $X_{\\Et}$ [def-weil-pbc-etale-sheaves]\nare exact, so the canonical map $\\varinjlim_kF[k!]\\to F$ is a\nmonomorphism. It is an epimorphism, as can be checked on geometric\nstalks: geometric stalks commute with colimits and kernels, and an\nelement of a stalk killed by $n>0$ lies in the stalk of $F[k!]$ for\nevery $k\\ge n$. Hence $F=\\varinjlim_kF[k!]$.",
     "uses": [
      "def-weil-pbc-etale-sheaves"
     ],
     "elementary": false
+   },
+   {
+    "text": "In the second case let $N_k$ be the product of the positive integers\n$d\\le k$ invertible on $S$, and use the chain $F[N_k]$. Its colimit\nmaps monomorphically to $F$ as before. Every map $D_j\\to F$ from the\nfirst diagram factors through some $F[N_k]$: on geometric stalks the\nimage of $D_j$ is killed by $n_j$ and by orders invertible on $S$, hence\nby the part of $n_j$ prime to the non-invertible primes, which divides\n$N_{n_j}$. So the colimit map is also an epimorphism.",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

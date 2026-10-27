@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-homogeneous-orbit-quotient-geometry",
+ "kind": "statement",
+ "title": "Quotients by arbitrary closed subgroups and orbit identifications",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness, connectedness and morphism properties have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme, def-pc-morphism-conventions]. Let $G$ be smooth and connected and let $H\\subseteq G$ be any subgroup, not necessarily normal, smooth or connected. The fppf sheafification of $A\\mapsto G(A)/H(A)$, for faithfully flat finitely presented coverings of commutative $F$-algebras, is represented by a separated finite-type $F$-scheme $G/H$. The canonical morphism $q:G\\to G/H$ is faithfully flat and satisfies $q(gh)=q(g)$, and $(g,h)\\mapsto(g,gh)$ is an isomorphism $G\\times_F H\\simeq G\\times_{G/H}G$. For an action of $G$ on a separated finite-type $F$-scheme $X$ and $x\\in X(F)$, the scheme-theoretic stabilizer $G_x$ has $G_x(A)=\\{g:g x_A=x_A\\}$. The orbit with its reduced structure is canonically isomorphic to $G/G_x$, by $gG_x\\mapsto gx$. Every $F$-point of $G/H$ lifts to an $F$-point of $G$; thus $(G/H)(F)=G(F)/H(F)$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 7.18, printed p.142; Propositions 5.24--5.25 and Corollary 5.27, pp.104--105; Propositions 7.11--7.12 and 7.17, pp.141--142."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-group-scheme-separated-field], $G$ is separated. Apply [lem-sfb-algebraic-group-homogeneous-quotient] with $k=F$ and $L=H$. Obtain a separated finite-type scheme $Y$ and a flat, surjective, finitely presented map $p:G\\to Y$ such that, for every $F$-scheme $T$, $p(a)=p(b)$ if and only if $a^{-1}b\\in H(T)$. In particular $p(gh)=p(g)$. No normality or reducedness of $H$ is used.",
+   "uses": [
+    "lem-sc-group-scheme-separated-field",
+    "lem-sfb-algebraic-group-homogeneous-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.28 and Definition 5.20, pp.104--105; Theorem 7.18, p.143; Stacks groupoids.tex Tag 047L, lemma-group-scheme-over-field-separated"
+   }
+  },
+  {
+   "text": "Use the coset criterion of [lem-sfb-algebraic-group-homogeneous-quotient] on $T=G\\times_YG$, with its two universal projections $a,b$ [def-pc-fibre-product]. There is a unique morphism $h:T\\to H$ with image $a^{-1}b$ in $G(T)$. Thus $(a,b)\\mapsto(a,a^{-1}b)$ is a morphism $G\\times_YG\\to G\\times_FH$. Its composites with $(g,h)\\mapsto(g,gh)$ are the identities, since $g^{-1}(gh)=h$ and $a(a^{-1}b)=b$. This proves the torsor identity as an isomorphism of schemes.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.24, pp.104--105"
+   }
+  },
+  {
+   "text": "The singleton $\\{p\\}$ is an fppf covering by [def-pc-fppf-site]. For $y:\\operatorname{Spec}A\\to Y$, pull it back by [lem-trf-fppf-covering-base-change] and apply [lem-pc-fppf-affine-refinement]. This gives finitely many affine schemes $V_j$ covering $\\operatorname{Spec}A$ in the fppf topology and morphisms $V_j\\to G$ lifting $y|_{V_j}$. Each $V_j\\to\\operatorname{Spec}A$ is locally finitely presented, and is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](1), since its source and target are affine. Thus these are the faithfully flat finitely presented affine coverings in the statement. If one uses singleton affine coverings instead, [lem-sfb-space-fppf-finite-affine-refinement] supplies a single affine flat surjective locally finitely presented refinement, which is finitely presented by the same permanence statement.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-fppf-finite-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.7, p.99, affine-cover construction; Stacks topologies.tex Tags 021O (lemma-fppf), 021P (lemma-fppf-affine); schemes.tex Tags 03GI, 01KV"
+   }
+  },
+  {
+   "text": "Every represented functor is a sheaf for our coverings: [lem-trf-fppf-covering-is-fpqc] and [lem-weil-pbc-fpqc-representable-descent] give precisely existence and uniqueness of gluing maps into $Y$. Put $P(A)=G(A)/H(A)$. The coset criterion in step 1 makes $P\\to h_Y$ injective on each algebra, and step 3 makes every section of $h_Y$ locally a section of $P$. To check the sheafification universal property [def-weil-pbc-sheafification] explicitly, take any sheaf $E$ and map $P\\to E$. For $y\\in Y(A)$ choose the local lifts from step 3 and glue their images in $E$: on overlaps their cosets agree by step 1, so their images agree. Refining two choices shows independence; uniqueness of gluing proves naturality and uniqueness of the extension $h_Y\\to E$. Hence $Y$ represents $P^\\#$; write $G/H=Y$ and $q=p$.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 5.20 and Proposition 5.21, p.104; Stacks topologies.tex Tag 022C; descent.tex Tag 023Q, lemma-fpqc-universal-effective-epimorphisms"
+   }
+  },
+  {
+   "text": "For an action on $X$ and $x\\in X(F)$, form $G_x=G\\times_{X\\times_FX}X$, where $G\\to X\\times_FX$ is $g\\mapsto(gx,x)$ and $X\\to X\\times_FX$ is the diagonal. Its $T$-points are exactly the $g$ with $gx_T=x_T$, by [def-pc-fibre-product]; the action identities make them a subgroup. Since $X$ is separated, its diagonal is closed, so [lem-weil-pbc-proper-fp-permanence](b) makes $G_x\\hookrightarrow G$ closed. Apply [lem-sfb-smooth-group-orbit-geometry]: the reduced orbit $O_x$ is locally closed and smooth, and $a:G\\to O_x$, $g\\mapsto gx$, is faithfully flat. These conclusions allow nonreduced $X$ and nonreduced $G_x$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-smooth-group-orbit-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.4 and 7.11--7.12, pp.139--142; Proposition 7.17, p.143; Stacks schemes.tex Tag 01KU, closed-immersion base change"
+   }
+  },
+  {
+   "text": "For completeness compare the schemes, rather than only their $F$-points. By [lem-trf-immersion-over-separated-base], the locally closed immersion $O_x\\to X$ makes $O_x$ separated over $F$. The map $a:G\\to O_x$ is finite type by [lemma-nagata-finite-type-to-separated-target](b), since $G$ is finite type over $F$. Consequently $\\{a\\}$ is fpqc: it is flat, surjective and quasi-compact, which gives the finite affine subcover condition in [def-weil-pbc-fpqc-covering]. Likewise the quotient map $p_x:G\\to Q_x=G/G_x$ from step 1 is fpqc. On $G\\times_{Q_x}G$, the two orbit maps agree because $b=ah$ with $h\\in G_x$; on $G\\times_{O_x}G$, the two quotient maps agree because $ax=bx$ implies $(a^{-1}b)x=x$. Apply [lem-weil-pbc-fpqc-representable-descent] to descend these maps to $Q_x\\to O_x$ and $O_x\\to Q_x$, respectively. Their composites pull back to the identity on $G$; uniqueness in the same descent statement makes them inverse. The first map sends $gG_x$ to $gx$, so this is the claimed canonical orbit identification.",
+   "uses": [
+    "lem-trf-immersion-over-separated-base",
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.11--7.12, pp.141--142; Definition 5.20 and Proposition 5.21, p.104; Stacks descent.tex Tag 023Q; Stacks schemes.tex Tag 01L8, lemma-subscheme-of-separated-scheme"
+   }
+  },
+  {
+   "text": "Let $y\\in Y(F)$. By [lem-trf-fppf-covering-base-change], its fibre $Z=G\\times_Y\\operatorname{Spec}F$ is nonempty. It is of finite type over $F$ by [lem-sfb-finite-type-composition-base-change], applied to the finite-type map $p$ of step 1. By [lem-sc-lft-over-field-jacobson-space], closed points are dense in $Z$, hence there is a closed point $z$. By [lem-weil-pbc-closed-point-residue-field-base], $F\\to\\kappa(z)$ is an isomorphism. Thus $z$ gives an $F$-point of the fibre, and its projection to $G$ lifts $y$. The fibre criterion of step 1 says that two such lifts differ by right multiplication by an element of $H(F)$, proving $Y(F)=G(F)/H(F)$. No smoothness of the fibre has been assumed.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.7, p.99; Stacks varieties.tex Tag 0478, lemma-locally-finite-type-Jacobson; algebra.tex Tag 00FV, theorem-nullstellensatz; morphisms.tex Tag 01TB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-group-scheme-separated-field",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-space-fppf-finite-affine-refinement",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-trf-immersion-over-separated-base",
+  "lemma-nagata-finite-type-to-separated-target",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 5.20 and Propositions 5.21, 5.24--5.25, Theorem 5.28; Propositions 7.4 and 7.11--7.12; Theorem 7.18 (pp.99,104--105,139--143), expanded using Stacks fppf refinement and representable descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth affine algebraic group modulo a closed subgroup is a separated finite type scheme and a faithfully flat torsor, and orbits are homogeneous spaces with smaller dimensional boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"QuotientGroup.instT3Space\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] (N : Subgroup G) [N.Normal]\\n  [hN : IsClosed ↑N], T3Space (G ⧸ N)\", \"doc\": \"If $ N $ is a closed normal subgroup of a topological group $ G $, then the quotient group $ G/N $ equipped with the quotient topology is a T3 space (i.e., it is both regular and T1).\"}\n  {\"name\": \"t2Space_quotient_mulAction_of_properSMul\", \"module\": \"Mathlib/Topology/Algebra/ProperAction/Basic\", \"type\": \"∀ {G : Type u_1} {X : Type u_2} [inst : Group G] [inst_1 : MulAction G X] [inst_2 : TopologicalSpace G]\\n  [inst_3 : TopologicalSpace X] [ProperSMul G X], T2Space (Quotient (MulAction.orbitRel G X))\", \"doc\": \"If a topological group $G$ acts properly on a topological space $X$, then the quotient space $X/G$ (the space of orbits under the action) is a Hausdorff space.\"}\n  {\"name\": \"QuotientAddGroup.instT3Space\", \"module\": \"Mathlib/Topology/Algebra/Group/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [IsTopologicalAddGroup G] (N : AddSubgroup G)\\n  [N.Normal] [hN : IsClosed ↑N], T3Space (G ⧸ N)\", \"doc\": \"If $G$ is a topological additive group and $N$ is a normal, closed additive subgroup of $G$, then the quotient group $G/N$ equipped with the quotient topology is a T3 space (i.e., it is both regular a\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine S],\\n  AlgebraicGeometry.IsAffine (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"If $ S $ is an affine scheme, then the affine space $ \\\\mathbb{A}^n_S $ over $ S $ is also affine. This instance asserts that when the base scheme $ S $ satisfies the affineness condition, the construc\"}\n  {\"name\": \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] [CompactSpace G] (U : OpenSubgroup G),\\n  Finite (G ⧸ ↑U)\", \"doc\": \"If $G$ is a compact topological group with continuous multiplication and $U$ is an open subgroup of $G$, then the quotient group $G/U$ is finite.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic group homogeneous space quotient torsor stabilizer orbit dimension closed minimal orbit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddAction.ofQuotientStabilizer_mem_orbit\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : AddGroup α] [inst_1 : AddAction α β] (x : β) (g : α ⧸ AddAction.stabilizer α x),\\n  AddAction.ofQuotientStabilizer α x g ∈ AddAction.orbit α x\", \"doc\": \"For any additive group $\\\\alpha$ acting on a type $\\\\beta$, and for any element $x \\\\in \\\\beta$, applying the induced action of any coset in the quotient group $\\\\alpha / \\\\text{Stab}(x)$ (where $\\\\text{Stab\"}\n  {\"name\": \"MulAction.stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(a : α) : Subgroup G\", \"doc\": \"Given a group action of $G$ on a set $\\\\alpha$ and an element $a \\\\in \\\\alpha$, the stabilizer subgroup of $a$ is the subgroup of $G$ consisting of all elements $g$ satisfying $g \\\\bullet a = a$. This sub\"}\n  {\"name\": \"MulAction.orbitEquivQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(b : β) : orbit α b ≃ α ⧸ stabilizer α b\", \"doc\": \"For a group $G$ acting on a set $\\\\beta$ and an element $b \\\\in \\\\beta$, the orbit of $b$ under the group action is in bijection with the quotient group $G / \\\\text{Stab}(b)$, where $\\\\text{Stab}(b)$ denot\"}\n  {\"name\": \"AddAction.orbitEquivQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(α : Type u) →\\n  {β : Type v} →\\n    [inst : AddGroup α] → [inst_1 : AddAction α β] → (b : β) → ↑(AddAction.orbit α b) ≃ α ⧸ AddAction.stabilizer α b\", \"doc\": \"For any additive group $\\\\alpha$ acting on a type $\\\\beta$ and element $b \\\\in \\\\beta$, there exists a canonical bijection between the orbit of $b$ under $\\\\alpha$ and the quotient group $\\\\alpha/\\\\text{Stab\"}\n  {\"name\": \"AddAction.injective_ofQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : AddGroup α] [inst_1 : AddAction α β] (x : β),\\n  Function.Injective (AddAction.ofQuotientStabilizer α x)\", \"doc\": \"The function induced by the quotient group $\\\\alpha / \\\\text{Stab}(x)$ acting on $x$ is injective, i.e., the induced action $\\\\alpha / \\\\text{Stab}(x) \\\\to \\\\beta$ is injective.\"}\n  {\"name\": \"AddAction.ofQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(α : Type u) →\\n  {β : Type v} → [inst : AddGroup α] → [inst_1 : AddAction α β] → (x : β) → α ⧸ AddAction.stabilizer α x → β\", \"doc\": \"Given an additive group $\\\\alpha$ acting on a type $\\\\beta$ and an element $x \\\\in \\\\beta$, this function maps each coset in the quotient group $\\\\alpha/\\\\text{Stab}(x)$ (where $\\\\text{Stab}(x)$ is the stabi\"}\n  {\"name\": \"MulAction.ofQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(g : α ⧸ MulAction.stabilizer α x) : β\", \"doc\": \"For a group action of $G$ on a set $\\\\alpha$ and a fixed element $x \\\\in \\\\alpha$, this defines the induced action of the quotient group $G / \\\\text{Stab}(x)$ on $\\\\beta$. Given a coset $g \\\\cdot \\\\text{Stab\"}\n  {\"name\": \"MulAction.orbitProdStabilizerEquivGroup\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"(b : β) : orbit α b × stabilizer α b ≃ α\", \"doc\": \"For a group $G$ acting on a set $\\\\beta$ and an element $b \\\\in \\\\beta$, there is a canonical bijection between the Cartesian product of the orbit of $b$ and the stabilizer subgroup of $b$, and the group\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsor\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.space|quotient.*subgroup|orbit.*stabilizer",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/NormTrace.lean\", \"line\": \"69\", \"text\": \"      quotientFunc_smul f hh, Subgroup.HasDetPlusMinusOne.abs_det hh,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"268\", \"text\": \"  rw [← IsInvariant.orbit_eq_primesOver A B G p P, ← index_stabilizer,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"269\", \"text\": \"    ← orbit_eq, ← index_stabilizer, stabilizer_eq, ← Subgroup.relIndex,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"270\", \"text\": \"    ← IsInvariant.orbit_eq_primesOver A C GAC p Q, ← index_stabilizer,\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"314\", \"text\": \"  simpa using Nat.card_congr (MulAction.orbitProdStabilizerEquivGroup G P)\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"line\": \"424\", \"text\": \"  (MulAction.selfEquivSigmaOrbitsQuotientStabilizer (torsion K) (integerSet K)).trans\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"line\": \"25\", \"text\": \"  quotients of first countable topological groups by normal subgroups are themselves complete, for\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"line\": \"613\", \"text\": \"/-- The quotient `G ⧸ N` of a complete first countable topological group `G` by a normal subgroup\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"line\": \"707\", \"text\": \"/-- The quotient `G ⧸ N` of a complete first countable uniform group `G` by a normal subgroup\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"line\": \"736\", \"text\": \"/-- The quotient `G ⧸ N` of a complete first countable topological group `G` by a normal subgroup\"}\n  {\"file\": \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"line\": \"757\", \"text\": \"/-- The quotient `G ⧸ N` of a complete first countable uniform group `G` by a normal subgroup\"}\n  {\"file\": \"Mathlib/Algebra/Module/Torsion/Basic.lean\", \"line\": \"554\", \"text\": \"  smul b := QuotientAddGroup.lift I.toAddSubgroup (smulAddHom R M)\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"line\": \"110\", \"text\": \"  refine ⟨AddSubgroup.quotient_finite_of_isOpen I.toAddSubgroup, fun H ↦ ?_⟩\"}\n  {\"file\": \"Mathlib/Algebra/Module/ZMod.lean\", \"line\": \"50\", \"text\": \"/-- The quotient of an abelian group by a subgroup containing all multiples of `n` is a\"}\n  {\"file\": \"Mathlib/Algebra/Module/ZMod.lean\", \"line\": \"53\", \"text\": \"abbrev QuotientAddGroup.zmodModule {G : Type*} [AddCommGroup G] {H : AddSubgroup G}\"}\n  {\"file\": \"Mathlib/Topology/Defs/Basic.lean\", \"line\": \"175\", \"text\": \"- the quotient map from a topological group to its quotient by a normal subgroup;\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"490\", \"text\": \"        ← MulAction.card_orbit_mul_card_stabilizer_eq_card_group _ w,\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification.lean\", \"line\": \"513\", \"text\": \"        ← MulAction.card_orbit_mul_card_stabilizer_eq_card_group _ w,\"}\n  {\"file\": \"Mathlib/Algebra/Module/ZLattice/Basic.lean\", \"line\": \"280\", \"text\": \"    rwa [QuotientAddGroup.leftRel_apply, mem_toAddSubgroup, ← fract_eq_fract]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean\", \"line\": \"448\", \"text\": \"      QuotientGroup.ker_mk', Submodule.fg_iff_addSubgroup_fg,\"}\n  {\"file\": \"Mathlib/Topology/Maps/OpenQuotient.lean\", \"line\": \"20\", \"text\": \"- the quotient map from a topological group to its quotient by a normal subgroup;\"}\n  {\"file\": \"Mathlib/Topology/Covering/Quotient.lean\", \"line\": \"241\", \"text\": \"      (Quotient.mk <| MulAction.orbitRel G E) '' {e | MulAction.stabilizer G e = ⊥} :=\"}\n  {\"file\": \"Mathlib/Topology/Covering/Quotient.lean\", \"line\": \"252\", \"text\": \"@[to_additive] lemma isQuotientCoveringMap_of_subgroup [Group E] [IsTopologicalGroup E]\"}\n  {\"file\": \"Mathlib/Topology/Covering/Quotient.lean\", \"line\": \"262\", \"text\": \"@[to_additive] lemma isQuotientCoveringMap_of_subgroupOp [Group E] [IsTopologicalGroup E]\"}\n  {\"file\": \"Mathlib/Topology/Covering/Quotient.lean\", \"line\": \"278\", \"text\": \"  hf.isQuotientCoveringMap_of_subgroup f.ker disc fun {_ _} ↦ by\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern abstract groups, characteristic-zero Lie algebras, or abstract root pairings, not this group-scheme statement"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.space|orbit.*stabilizer|quotient.*subgroup",
+   "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions, quotient representations, and affine scheme ideal quotients do not assert homogeneous group-scheme quotients or the orbit isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the fppf quotient of an algebraic group by a closed subgroup scheme and orbit stabilizer isomorphism",
+   "results": "[leansearch] OK 8 hit(s); MulAction.orbitEquivQuotientStabilizer, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, AddAction.orbitEquivQuotientStabilizer, MulAction.orbitProdStabilizerEquivGroup, CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected, AddAction.injective_ofQuotientStabilizer, AddAction.ofQuotientStabilizer_mem_orbit, QuotientGroup.orbit_eq_out_smul",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions, quotient representations, and affine scheme ideal quotients do not assert homogeneous group-scheme quotients or the orbit isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", \"Scheme\"",
+   "results": "[loogle] OK 3 hit(s); AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions, quotient representations, and affine scheme ideal quotients do not assert homogeneous group-scheme quotients or the orbit isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine algebraic group and any closed subgroup scheme the fppf coset quotient is a separated scheme with a faithfully flat quotient map and reduced orbits identify with the quotient by the stabilizer",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, QuotientGroup.instT2Space, AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, QuotientAddGroup.instT2Space, QuotientGroup.instT1Space, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.PreGaloisCategory.has_decomp_quotients, QuotientGroup.instT3Space",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions, quotient representations, and affine scheme ideal quotients do not assert homogeneous group-scheme quotients or the orbit isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable homogeneous spaces of affine group schemes: quotient by nonnormal or nonreduced subgroup, and the orbit map as an fppf torsor",
+   "results": "[leanfinder] OK 8 hit(s); Representation.ofQuotient, Rep.ofQuotient, Rep.quotientToInvariants, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, Rep.quotientToCoinvariants, Rep.quotientToInvariantsFunctor, Representation.ofQuotient_coe_apply, Rep.quotientToCoinvariantsFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group actions, quotient representations, and affine scheme ideal quotients do not assert homogeneous group-scheme quotients or the orbit isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-borel-pair-structure",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Representability and torsor identity before proving properness of G/B. This is the nonnormal-subgroup version, not the existing normal quotient theorem.",
+   "via": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "worker": "stage1",
+  "summary": "Reused the existing general homogeneous-quotient and smooth-orbit nodes; proved the torsor identity by universal pairs, identified the fppf sheafification by local lifts and gluing, compared the orbit and quotient by representable descent, and lifted rational points via closed points of finite-type fibres. No new nodes and no statement change.",
+  "blueprint": "The existing blueprint.from.place traces this auxiliary to det-thm-sf-ctf-stability-direct-images proof (3), specifically representability of G/B before the properness argument in lem-sfb-reductive-borel-pair-structure. The latest blueprint direct-images proof (3) is read; no chapter or unit route is changed. Whole-blueprint searches homogeneous, stabilizer, Chevalley, coset and orbit found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "Generic scheme/descent input: A group scheme over a field is separated. The group-quotient argument needs this scheme-theoretic fact; no same-unit result supplies a different construction."
+   },
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic scheme/descent input: Affine refinement of an fppf covering. The group-quotient argument needs this scheme-theoretic fact; no same-unit result supplies a different construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-group-scheme-separated-field",
+  "lem-pc-fppf-affine-refinement"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-d2e94d7dc",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-d2e94d7dc (reviewer sub-agent of L); spot-checked: PASS, no changes. One-commit delivery: item plus report, no new nodes, statement unchanged; stmt_deps adds only the fppf-site, sheafification and fibre-product definitions the statement uses. Source agrees with Milne iAG2017 Def. 5.20, Props. 5.24-5.25, 7.11-7.12, 7.17 and Thm. 7.18. Thm. 7.18 is on printed p.143, not p.142 as the maintainer-owned source.place says. Step 1: the general quotient node's hypotheses (separated finite-type group, arbitrary closed subgroup) and its coset criterion are used from its statement only. Step 2 is elementary: a universal pair on G x_Y G, h unique because j is a monomorphism, both composites checked. Step 3 uses 021O(3) base change, 021P affine refinement, and affine source plus quasi-separated target plus lfp giving fp, with no Noetherian hypothesis. Step 4 is the sheafification universal property: P into h_Y is injective by the criterion and locally surjective by step 3, and gluing works through 022C fpqc and 023Q representable descent. Step 5: the stabilizer is the base change of the closed diagonal; the smooth-orbit node's hypotheses are exactly G smooth connected affine and X separated finite type. Step 6: O_x is separated (01L8) and the orbit map is finite type by Nagata (b), hence quasi-compact and an fpqc covering. Both compatibilities are checked and descent gives mutually inverse maps; the reduced stabilizer is never used (Milne Rem. 7.14). Step 7: the fibre is nonempty by covering base change, is of finite type, has a closed point by Jacobson density, and that point has residue field F. Small cases G_m/mu_2 (char 2), G_m/mu_n on F-points and GL_2/B = P^1 are consistent. Batch-5 flags: lem-trf-fppf-covering-base-change (021O), lem-trf-fppf-covering-is-fpqc (022C) and lem-trf-immersion-over-separated-base (01L8) are generic Stacks facts. lem-sfb-space-fppf-finite-affine-refinement reaches def-trf-algebraic-space only as the general definition of algebraic spaces, and serves only the optional singleton-covering remark. None is part of the trace-formula or Poincare proofs, so all are accepted. Tool uses lem-sc-group-scheme-separated-field (047L) and lem-pc-fppf-affine-refinement (021P) are generic and needed, so accepted. No cycle; no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomogeneousOrbitQuotientGeometry",
+  "declaration": "AlgebraicGeometry.exists_homogeneous_fppf_quotient",
+  "declarations": [
+   "AlgebraicGeometry.exists_homogeneous_fppf_quotient",
+   "AlgebraicGeometry.exists_orbit_stabilizer_quotient_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomogeneousOrbitQuotientGeometry.lean",
+  "statement": "theorem exists_homogeneous_fppf_quotient {F : Type u} [Field F] [IsAlgClosed F] (G H : Over (Spec (.of F))) [GrpObj G] [GrpObj H] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (i : H ⟶ G) [IsClosedSubgroupScheme i] : ∃ (Q : Over (Spec (.of F))) (q : G ⟶ Q), IsSeparated Q.hom ∧ LocallyOfFiniteType Q.hom ∧ QuasiCompact Q.hom ∧ Flat q.left ∧ Surjective q.left ∧ (fst G H ≫ q = lift (fst G H) (snd G H ≫ i) ≫ μ[G] ≫ q) ∧ (∃ e : G ⊗ H ≅ pullback q q, e.hom ≫ pullback.fst q q = fst G H ∧ e.hom ≫ pullback.snd q q = lift (fst G H) (snd G H ≫ i) ≫ μ[G]) ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over (Spec (.of F))) (yoneda.obj Q) ∧ (∃ ηq : coequalizer (yoneda.map (fst G H)) (yoneda.map (lift (fst G H) (snd G H ≫ i) ≫ μ[G])) ⟶ yoneda.obj Q, coequalizer.π _ _ ≫ ηq = yoneda.map q ∧ ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun f : yoneda.obj Q ⟶ Z.obj ↦ ηq ≫ f)) ∧ Function.Surjective (fun g : 𝟙_ (Over (Spec (.of F))) ⟶ G ↦ g ≫ q) ∧ (∀ g₁ g₂ : 𝟙_ (Over (Spec (.of F))) ⟶ G, g₁ ≫ q = g₂ ≫ q ↔ ∃ h : 𝟙_ (Over (Spec (.of F))) ⟶ H, g₂ = g₁ * (h ≫ i))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Two theorem statements cover the quotient and orbit clauses, respectively. The coset presheaf is the pointwise coequalizer of projection and right multiplication; its displayed arrow to the represented fppf sheaf satisfies exactly the sheafification universal property. The reduced orbit is characterized by its reduced locally closed immersion and exact topological image. Its isomorphism from any quotient presentation is unique with the stated orbit-map compatibility. No subgroup is assumed normal, reduced, smooth or connected."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e8d01e0a",
+  "group": "N0",
+  "result": "pass",
+  "note": "Both theorems (exists_homogeneous_fppf_quotient, exists_orbit_stabilizer_quotient_iso) render every node clause. Hypotheses: F alg. closed; G,H affine finite type; G smooth connected; arbitrary IsClosedSubgroupScheme i, no extra assumptions. Quotient: separated finite type, q flat+surjective, q(gh)=q(g). Torsor iso pinned by both projections. Coset presheaf = functor-category coequalizer; sheafification universal property over fppfTopology.over (Spec F) pins q. Rational points: lifting plus coset iff. Orbit theorem: stabilizer via the fixing condition on all T, nilpotents kept; reduced orbit pinned by reduced + immersion + exact range; unique iso Q ≅ O compatible with the orbit map, not vacuous because theorem 1 applies to K. One universe, autoImplicit false, only sorry proofs, docstrings with source and blueprint, statement verbatim, proof-dep imports. Live node unchanged except lean and has no lean record (no supersession, no duplicate). Not recompiled per instruction; worker compiles clean. Advisory: inherited source.place says Thm 7.18 p.142, printed p.143."
+ }
+}

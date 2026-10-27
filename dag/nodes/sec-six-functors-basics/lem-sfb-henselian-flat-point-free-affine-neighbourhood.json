@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+ "kind": "statement",
+ "title": "A flat finite-type sheaf has a free affine neighbourhood over a henselian local base",
+ "statement": "Let $A$ be a henselian commutative local ring with maximal ideal $\\mathfrak m$ [def-weil-pbc-henselian-terminology]. Let $f:X\\to S=\\operatorname{Spec}A$ be a morphism of schemes [def-pc-scheme, def-weil-affine-spectrum] which is locally of finite type [def-weil-finite-type-morphism]. Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_X$-module of finite type [pqf-def-coherent]. Let $x\\in X$ satisfy $f(x)=\\mathfrak m$, and assume that its module stalk $\\mathcal F_x$ [def-weil-pbc-module-stalk], regarded as an $A$-module through $f$, is flat [def-weil-pbc-flat-ring-map]. Then there is an affine open neighbourhood $U\\subseteq X$ of $x$ such that $\\Gamma(U,\\mathcal F)$ is a free $A$-module [def-weil-pbc-free-module]. The free module is not required to have finite rank.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), specialization over a henselian local base: an elementary etale neighbourhood of the closed point has the same local ring as the base. This is the specialization used in the free-affine-neighbourhood paragraph of lemma-flat-finite-type-local-colimit-free."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $X_0=\\operatorname{Spec}B\\subseteq X$ containing $x$ such that $B$ is a finitely generated $A$-algebra, using the locally finite-type affine cover. Choose generators $b_1,\\ldots,b_n$ of $B$ over $A$. The surjection $A[t_1,\\ldots,t_n]\\to B$, $t_i\\mapsto b_i$, realizes $X_0$ as a closed subscheme $i:X_0\\hookrightarrow P=\\operatorname{Spec}A[t_1,\\ldots,t_n]$. This is the affine quotient characterization of a closed immersion. Put $y=i(x)$. The map $P\\to S$ is finitely presented: its algebra presentation has these $n$ generators and no relations.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MF, first three sentences of the proof: affine reduction and embedding into affine space"
+   }
+  },
+  {
+   "text": "Put $\\mathcal G=i_*(\\mathcal F|_{X_0})$. A closed immersion is finite, so the finite-pushforward theorem makes $\\mathcal G$ quasi-coherent of finite type. The closed-pushforward stalk comparison gives $\\mathcal G_y\\cong\\mathcal F_x$ compatibly with the $A$-action. Consequently $\\mathcal G_y$ is flat over $A=\\mathcal O_{S,\\mathfrak m}$. It suffices to find an affine open $H\\subseteq P$ containing $y$ with $\\Gamma(H,\\mathcal G)$ free over $A$: the last step will pull $H$ back along the closed immersion.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-pc-f3-finite-pushforward-finite-type",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MF, reduction from the sheaf on X to its closed pushforward on affine space"
+   }
+  },
+  {
+   "text": "Apply the finite-type flat-at-a-point theorem to $P\\to S$, $\\mathcal G$, and $y$. Its hypotheses hold: $P/S$ is locally finitely presented by step 1, $\\mathcal G$ is quasi-coherent finite type by step 2, and its stalk at $y$ is $A$-flat. It gives an elementary etale neighbourhood $(T,t)\\to(S,\\mathfrak m)$ and an open $V\\subseteq P\\times_S\\operatorname{Spec}\\mathcal O_{T,t}$ containing the point above $y$, on which the pulled-back module is finitely presented and flat over $\\mathcal O_{T,t}$. Replace $T$ by an affine open containing $t$; this does not change its local ring or residue field.",
+   "uses": [
+    "lem-trf-finite-type-flat-etale-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MF, application of Tag 05I5 (proposition-finite-type-flat-at-point)"
+   }
+  },
+  {
+   "text": "Here is the henselian specialization, also used in step 7. For any affine elementary etale $(T,t)\\to(S,\\mathfrak m)$, write $T=\\operatorname{Spec}D$ and let $\\mathfrak q$ represent $t$. The henselian etale retraction theorem gives $\\sigma:D\\to A$ with $\\sigma^{-1}(\\mathfrak m)=\\mathfrak q$. Its section $j:S\\to T$ is open and closed by the etale-section lemma. The needed separatedness holds directly: the diagonal of this affine-to-affine map is induced by the surjection $D\\otimes_A D\\to D$, $d\\otimes d^{\\prime}\\mapsto dd^{\\prime}$, hence is a closed immersion. Since $j(\\mathfrak m)=t$, the section identifies $\\mathcal O_{T,t}$ with $\\mathcal O_{S,\\mathfrak m}=A$ as an $A$-algebra. Thus the structural map $A\\to\\mathcal O_{T,t}$ is an isomorphism. For the neighbourhood of step 3 this identifies $P\\times_S\\operatorname{Spec}\\mathcal O_{T,t}$ with $P$ and $V$ with an open neighbourhood of $y$, with exactly the original sheaf $\\mathcal G|_V$.",
+   "uses": [
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05U7, free-affine-neighbourhood paragraph, with Algebra Tag 04GG and Etale Morphisms Tag 024T for the henselian specialization"
+   }
+  },
+  {
+   "text": "Choose a basic affine open $Z=D(h)\\subseteq P$ containing $y$ and contained in $V$. The restricted sheaf $\\mathcal G|_Z$ is still quasi-coherent, finitely presented and flat over $A$, since these are local conditions or conditions on stalks. Moreover $Z\\to S$ is finitely presented: its coordinate algebra has the explicit finite presentation $A[t_1,\\ldots,t_n,u]/(hu-1)$. Apply the projective-neighbourhood theorem to $Z/S$, $\\mathcal G|_Z$, and $y$. It gives an affine elementary etale $(S^{\\prime},s^{\\prime})\\to(S,\\mathfrak m)$, with $S^{\\prime}=\\operatorname{Spec}D^{\\prime}$, and an affine open $W\\subseteq Z\\times_S S^{\\prime}$ containing $(y,s^{\\prime})$, with $Q=\\Gamma(W,\\operatorname{pr}_Z^*(\\mathcal G|_Z))$ projective over $D^{\\prime}$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MF, application of Tag 05ME after finite-presentation reduction; Tag 05ME statement"
+   }
+  },
+  {
+   "text": "Use the section $j:S\\to S^{\\prime}$ through $s^{\\prime}$ supplied by the construction in step 4, and its ring retraction $\\sigma:D^{\\prime}\\to A$. Base change $W$ along $j$. The scheme $H=W\\times_{S^{\\prime}}S$ is affine (both $W$ and the base schemes are affine), and under $(Z\\times_S S^{\\prime})\\times_{S^{\\prime}}S\\cong Z$ it is an open neighbourhood of $y$. The open is obtained by inverse image of the open $W$, not merely from a set-theoretic factorization. The fibre over $(y,s^{\\prime})$ is unchanged because $j(\\mathfrak m)=s^{\\prime}$ and the residue-field map is the specified isomorphism. Pullback preserves quasi-coherence, so the pulled-back sheaf on $W$ meets the quasi-coherence hypothesis. Affine pushforward base change for $W\\to S^{\\prime}$ identifies $\\Gamma(H,\\mathcal G|_H)$ with $A\\otimes_{D^{\\prime},\\sigma}Q$. Pullback composition identifies the sheaf here with $\\mathcal G|_H$, since the composite $H\\to W\\to Z$ is the open inclusion.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-pc-module-pullback",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05U7, free-affine-neighbourhood paragraph; affine scalar change as in Coherent Tag 02KG"
+   }
+  },
+  {
+   "text": "Projectivity survives this scalar extension without any flatness assumption on $\\sigma$: choose split maps $Q\\to\\bigoplus_{b\\in B}D^{\\prime}\\to Q$ with composite $1_Q$. Tensoring these maps with $A$ gives split maps $A\\otimes_{D^{\\prime}}Q\\to\\bigoplus_{b\\in B}A\\to A\\otimes_{D^{\\prime}}Q$ with composite the identity. The direct-sum identification sends $a\\otimes(d_b)_b$ to $(a\\sigma(d_b))_b$ and has inverse given on the $b$-th basis vector by $a\\mapsto a\\otimes e_b$. Thus $\\Gamma(H,\\mathcal G|_H)$ is projective over $A$.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MF, projective conclusion and arbitrary scalar extension along the henselian section; projectivity via the direct-summand characterization"
+   }
+  },
+  {
+   "text": "Since $A$ is local, the arbitrary-rank projective-freeness theorem makes $\\Gamma(H,\\mathcal G)$ free over $A$. Set $U=i^{-1}(H)\\subseteq X_0\\subseteq X$. This is open and contains $x$. It is affine by the affine quotient description of a closed immersion: $U$ is the closed subscheme of the affine scheme $H$ cut out by the restricted defining ideal. By the definition of direct image, $\\Gamma(H,\\mathcal G)=\\Gamma(i^{-1}H,\\mathcal F)=\\Gamma(U,\\mathcal F)$ as $A$-modules. Transport the free basis along this equality. This proves precisely the stated conclusion, allowing the empty basis and arbitrary infinite rank.",
+   "uses": [
+    "lem-trf-projective-over-local-free",
+    "def-weil-closed-immersion",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05MF, final application of Algebra Tag 0593 (theorem-projective-free-over-local-ring), followed by restriction back to X"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-pc-f3-finite-pushforward-finite-type",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-trf-finite-type-flat-etale-neighborhood",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-weil-pbc-projective-module",
+  "lem-trf-projective-over-local-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), proof via Tags 05I5 and 05ME, with the henselian specialization from the free-affine-neighbourhood paragraph of Tag 05U7. The removal of the elementary etale bases is written out using Algebra Tag 04GG and Etale Morphisms Tag 024T."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hensel.*(neighbou?r|[Ff]ree)|[Ff]ree.*hensel",
+   "results": "0 hits; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-flat freeness and free-locus results require finiteness over the base ring, whereas here the module is finite over the source algebra; the affine-neighbourhood freeness assertion is not supplied by these results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian local base finite type quasi coherent sheaf flat at a point has affine neighbourhood with free module of sections",
+   "results": "8 hits; Module.free_of_flat_of_isLocalRing, HenselianLocalRing.toIsLocalRing, HenselianLocalRing, instHenselianRingMaximalIdeal, Module.Flat.of_free, Field.henselian, HenselianLocalRing.mk, Module.freeLocus_eq_univ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-flat freeness and free-locus results require finiteness over the base ring, whereas here the module is finite over the source algebra; the affine-neighbourhood freeness assertion is not supplied by these results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"Free\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-flat freeness and free-locus results require finiteness over the base ring, whereas here the module is finite over the source algebra; the affine-neighbourhood freeness assertion is not supplied by these results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type module flat at one point has a free module of sections on a smaller affine open over a henselian local base",
+   "results": "8 hits; Module.free_of_flat_of_isLocalRing, Module.free_of_flat_of_finrank_eq, Module.freeLocus_eq_univ, Module.flat_of_isLocalized_maximal, Module.flat_of_isLocalized_span, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.flat_of_affine_subset",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-flat freeness and free-locus results require finiteness over the base ring, whereas here the module is finite over the source algebra; the affine-neighbourhood freeness assertion is not supplied by these results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme locally of finite type over a henselian local ring and a finite type quasi coherent module flat at a point of the closed fibre there is an affine open neighborhood whose sections form a free module over the base",
+   "results": "8 hits; Module.free_of_flat_of_isLocalRing, Module.free_of_flat_of_finrank_eq, Module.isOpen_freeLocus, Module.freeLocus_eq_univ, Module.isLocallyConstant_rankAtStalk_freeLocus, AlgebraicGeometry.flat_iff, Module.flat_of_isLocalized_maximal, AlgebraicGeometry.Flat.flat_of_affine_subset",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-flat freeness and free-locus results require finiteness over the base ring, whereas here the module is finite over the source algebra; the affine-neighbourhood freeness assertion is not supplied by these results."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*(neighbou?r|[Ff]ree)|[Ff]ree.*hensel",
+   "results": "0 hits; ; ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite-flat freeness results require a module finite over the base A; the present sheaf is finite only over the source algebra. Flatness criteria and free-locus results do not give the required affine neighbourhood."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type sheaf flat at a closed fibre point over a henselian local base has a free module of sections on an affine open",
+   "results": "8 hits; Module.free_of_flat_of_isLocalRing, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.casesOn, Module.Flat.of_free, SheafOfModules.IsFiniteType.mk, Module.free_of_flat_of_finrank_eq, AlgebraicGeometry.Flat.flat_of_affine_subset, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite-flat freeness results require a module finite over the base A; the present sheaf is finite only over the source algebra. Flatness criteria and free-locus results do not give the required affine neighbourhood."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"Free\"",
+   "results": "0 hits; ; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite-flat freeness results require a module finite over the base A; the present sheaf is finite only over the source algebra. Flatness criteria and free-locus results do not give the required affine neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme locally of finite type over a henselian local ring a finite type quasi coherent sheaf flat at a point of the closed fibre has an affine neighborhood with sections free over the base",
+   "results": "8 hits; Module.free_of_flat_of_isLocalRing, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset, AlgebraicGeometry.Scheme.Hom.flat_appLE; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite-flat freeness results require a module finite over the base A; the present sheaf is finite only over the source algebra. Flatness criteria and free-locus results do not give the required affine neighbourhood."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian base local flatness of a finite module over a finite type algebra yields free sections on a Zariski affine neighbourhood",
+   "results": "8 hits; Module.free_of_flat_of_isLocalRing, Module.freeLocus_eq_univ, Module.free_of_flat_of_finrank_eq, Module.flat_of_isLocalized_maximal, Module.flat_of_isLocalized_span, Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the finite-flat freeness results require a module finite over the base A; the present sheaf is finite only over the source algebra. Flatness criteria and free-locus results do not give the required affine neighbourhood."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 0AT4 (lemma-upstairs-finite-type-injective-into-flat-mod-m). Subinput: Tag 05U7 (lemma-flat-finite-type-local-colimit-free), first assertion, omitting the additional Mittag-Leffler conclusion. Supporting geometric input: Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), over a henselian local base, used in the free-neighbourhood paragraph of Tag 05U7.",
+   "via": [
+    "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+  "worker": "stage1",
+  "summary": "Split Stacks 05MF over a henselian local base, retaining the statement. The proof embeds an affine source in affine space, uses existing 05I5 to reach finite presentation, removes the first etale local base by a henselian section, applies the new statement-only 05ME projective-neighbourhood lemma, pulls back along a second henselian section, proves preservation of arbitrary projectivity by split maps, and uses the existing arbitrary-rank local freeness theorem. Each citation was read and has verbatim evidence; no Lean was written or compiled.",
+  "blueprint": "Current literature/blueprint/latest, det-thm-sf-ctf-stability-direct-images proof (3): inherited alteration/stable-moduli auxiliary chain recorded in blueprint.from.place. This split realizes its supporting Stacks 05U7 free-affine-neighbourhood paragraph through 05MF. No unit or chapter route is replaced. The imported created.item chain has no blueprint-kind ancestor (blueprint_refs.py ancestor prints None); the existing null from.node is retained and the new node inherits that computed null with the complete via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-f3-finite-pushforward-finite-type",
+    "why": "Generic Finite pushforward preserves quasi-coherence and finite type without Noetherian assumptions used in the Stacks 05MF reduction; this is a scheme/module tool, not a replacement for a step of the six-functor unit."
+   },
+   {
+    "node": "lem-trf-finite-type-flat-etale-neighborhood",
+    "why": "Generic Finite-type flatness gives a finitely presented etale neighborhood used in the Stacks 05MF reduction; this is a scheme/module tool, not a replacement for a step of the six-functor unit."
+   },
+   {
+    "node": "lem-trf-projective-over-local-free",
+    "why": "Generic Projective modules over local rings are free in arbitrary rank used in the Stacks 05MF reduction; this is a scheme/module tool, not a replacement for a step of the six-functor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-f3-finite-pushforward-finite-type",
+  "lem-trf-finite-type-flat-etale-neighborhood",
+  "lem-trf-projective-over-local-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-8f4c20ef3",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-8f4c20ef3 (reviewer sub-agent of L); spot-checked: I read Stacks flat.tex Tags 05MF (statement and full proof), 05ME, 05I5 and 05U7. The item is 05MF over a henselian A: since O_{S',s'} is isomorphic to A (04GG), the statement is correct, with arbitrary rank and flatness assumed only at x. Its 8 steps follow the 05MF proof and each cited statement says what the step uses. Step 1 is the affine-space embedding. Step 2 is the finite closed pushforward with the stalk comparison (A-linear). Step 3 is 05I5, applied with P locally finitely presented. Step 4 is the henselian retraction 04GG plus the clopen section, with separatedness derived from the diagonal, so O_{T,t} is isomorphic to A. Step 5 applies the new 05ME node to a basic open D(h), whose presentation A[t,u]/(hu-1) is finite. Step 6 base-changes W along the section; H is affine and open, contains y, and the affine base-change tensor formula applies. Step 7 shows projectivity survives scalar extension via split maps. Step 8 is Kaplansky 0593 and U=i^{-1}(H), which is affine. The new node lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood is exactly 05ME, hypothesis by hypothesis. It is statement-only with B1-B9 satisfied, five searches recorded, no duplicate in the DAG (checked with rg -L for 05ME/05MF and their labels, and against 05ID, 05I7 and 05I5), and it holds on small cases (zero sheaf, identity morphism, field base, infinite rank). Batch-5 citations: lem-trf-finite-type-flat-etale-neighborhood (05I5) and lem-trf-projective-over-local-free (0593) are generic algebra results. Their dependency closures (1967 and 38 nodes) contain only generic lem-trf algebra nodes: no nt-assume leaf, no trace-transport node and no trace-formula or Poincaré-duality theorem. They are accepted together with the third declared tool use, lem-pc-f3. The sk-thm-p1 citations are on the unit's route, and no SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HenselianFlatPointFreeAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_free_affine_neighbourhood_of_henselian_flat_point",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianFlatPointFreeAffineNeighbourhood.lean",
+  "statement": "theorem exists_free_affine_neighbourhood_of_henselian_flat_point (A : Type u) [CommRing A] [HenselianLocalRing A] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [LocallyOfFiniteType f] (F : X.Modules) (hF : Scheme.Modules.IsQuasiCoherentFiniteType F) (x : X) (hx : f x = IsLocalRing.closedPoint A) (hflat : @Module.Flat A (PresheafOfModules.stalkObj X.ringCatSheaf.obj x F.val) _ _ (Module.compHom _ (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop ≫ X.presheaf.germ ⊤ x (by trivial)).hom))) : ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧ @Module.Free A Γ(F, U) _ _ (Module.compHom _ (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop ≫ X.presheaf.map ((homOfLE le_top : U ⟶ ⊤)).op).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8557d006",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Snapshot node differs from side-live only in lean; lean.statement verbatim in the file. Clause check vs Stacks 05MF (henselian case via 04GG/024T): HenselianLocalRing A (no strict), LocallyOfFiniteType f only, IsQuasiCoherentFiniteType F (= IsQuasicoherent ∧ IsFiniteType, read), hx f x = closedPoint A, flatness at x only of stalkObj with the canonical compHom action ΓSpecIso.inv ≫ f.appTop ≫ germ; conclusion ∃ affine open U ∋ x with Γ(F,U) Module.Free over A via the canonical restriction action, any rank. Edge cases (empty X, F=0, field base, identity, infinite rank) and single universe u ok. No defs, sorry only, docstrings with source/blueprint and 8 proof steps, both report sections present, no duplicate in side-live/slopmaster2 (rg 05MF/05U7/free_affine_neighbo), all imports exist. No change, so no compile run. No fixes."
+ }
+}

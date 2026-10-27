@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-etale-ordered-open-projection-scalar",
+ "kind": "lemma",
+ "title": "Scalar compatibility of the local ordered open projection",
+ "statement": "Let A and B be commutative rings, φ:A→B a unital ring map, j:X→Z an arbitrary open immersion of schemes, T∈D_A(Z), and M∈D_A(X). Write Q for ordinary unbounded derived scalar extension, L_R(j) for left-derived geometric pullback, J_R for exact derived extension by zero, δ for ExceptionalCoefficients.tensorIso, β for ExceptionalCoefficients.openIso and a_j for scalarPullbackIso. Define o_R(j;T,M):T⊗J_R M→J_R(L_R(j)T⊗M) as the inverse signed symmetry, inverse canonical open projection formula, and J_R of the final signed symmetry. Then Q_Z(o_A);β(L_A(j)T⊗M);J_B(δ_X(L_A(j)T,M);(a_j(T)⁻¹⊗id)) = δ_Z(T,J_A M);(id⊗β(M));o_B(j;Q_Z T,Q_X M). This is a local open-immersion square: it has no compactification, proper morphism, or composite-pullback identification. No flatness, boundedness, coefficient finiteness, or quasi-compactness is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 and lemma-projection-formula-Rf-lower-shriek, the local open-immersion tensor square; sites-cohomology.tex Tags 0E8I and 07A4 for scalar balancing and derived tensor"
+ },
+ "proof": [
+  {
+   "text": "Apply the mixed_tensor_scalar field of etaleOpenScalarComparisons at M,T. Its q is the canonical open scalar comparison: uniqueness of the open-adjunction unit transpose identifies it with ExceptionalCoefficients.openIso. Its r is the inverse scalarPullbackIso transported through the exact/left-derived pullback comparisons. The tensor normalization uniqueness theorem identifies the inverse etaleHomTensorComparison with ExceptionalCoefficients.tensorIso. Cancel the invertible comparison and open-projection factors to obtain the forward unordered projection square.",
+   "uses": [
+    "lem-coef-etale-open-scalar-coherence",
+    "lem-coef-etale-open-tensor",
+    "def-pur-open-coefficient-normalizations",
+    "lem-pur-etale-open-derived-tensor",
+    "def-pur-exceptional-coefficient-normalizations",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the unordered square by the signed tensor symmetries on X and Z. On flat-term K-flat models the normalized scalar tensor comparison is ordinary balancing and the symmetry is the signed swap. In bidegree (p,q) both composites have the sign (-1)^(p*q); scalar coefficients have degree zero. Equality on tensor generators gives equality of chain maps. Localization and naturality extend it to all derived inputs. This also covers zero inputs, the empty open, and zero rings.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "lem-pc-kflat-resolution",
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-pur-open-coefficient-normalizations",
+  "lem-coef-etale-open-scalar-coherence",
+  "lem-coef-etale-open-tensor",
+  "lem-kun-tensor-sym",
+  "lem-pc-kflat-resolution",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U4",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 and lemma-projection-formula-Rf-lower-shriek, the local open-immersion tensor square; sites-cohomology.tex Tags 0E8I and 07A4 for scalar balancing and derived tensor"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension commutes with open immersion derived tensor projection formula",
+   "results": "Eight scheme open-immersion restriction naturality results; no derived scalar/open projection square.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Generic naturality and pullback cone identities; these provide pasting but do not identify scalar tensor and open projection normalizations.",
+   "date": "2026-10-27",
+   "verdict": "No specialized scalar/open square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Pp]rojection|[Pp]rojection.*scalar",
+   "results": "Mathlib contains a C-star projection result only. Project search finds the existing mixed open tensor/scalar equation with exact pullback and different normalized maps, and pro-etale coefficient variants.",
+   "date": "2026-10-27",
+   "verdict": "Use the mixed scalar/open equation as a dependency; no duplicate of this normalized ordered local square."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleOpenScalarProjection",
+  "group": "U4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Local open-projection square in steps 1 and 2 of lem-pur-etale-open-scalar-projection, before pasting the compactification pullback compositor",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-pur-etale-open-scalar-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOrderedOpenProjectionScalar",
+  "file": "lean/Sheaf/Paper/EtaleOrderedOpenProjectionScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOrderedOpenProjectionScalar",
+  "declarations": [
+   "AlgebraicGeometry.Etale.orderedOpenProjection",
+   "AlgebraicGeometry.Etale.etaleOrderedOpenProjectionScalar"
+  ],
+  "statement": "theorem etaleOrderedOpenProjectionScalar\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (T : DerivedCategoryModule A Z) (M : DerivedCategoryModule A X) :\n    (scalarExtension φ Z).map (orderedOpenProjection A j T M) ≫\n      (ExceptionalCoefficients.openIso φ j).hom.app\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj\n          ((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj T)).obj M) ≫\n      (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map\n        ((ExceptionalCoefficients.tensorIso φ X).hom.app\n            ((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj T, M) ≫\n          ((derivedTensor (ModuleCat.{u + 1} B) X).map\n            ((scalarPullbackIso φ j).inv.app T)).app ((scalarExtension φ X).obj M)) =\n    (ExceptionalCoefficients.tensorIso φ Z).hom.app\n        (T, (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M) ≫\n      ((derivedTensor (ModuleCat.{u + 1} B) Z).obj\n        ((scalarExtension φ Z).obj T)).map\n          ((ExceptionalCoefficients.openIso φ j).hom.app M) ≫\n      orderedOpenProjection B j ((scalarExtension φ Z).obj T)\n        ((scalarExtension φ X).obj M)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T094526-L-239262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T094526-L-239262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

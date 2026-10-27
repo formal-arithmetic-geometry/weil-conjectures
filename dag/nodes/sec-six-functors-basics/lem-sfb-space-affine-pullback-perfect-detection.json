@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-space-affine-pullback-perfect-detection",
+ "kind": "statement",
+ "title": "Affine pullbacks of perfect objects detect isomorphisms on algebraic spaces",
+ "statement": "Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], and unbounded derived categories [def-weil-abstract-derived-category], in the universes of [def-weil-size-convention]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived pushforward is computed by K-injective resolutions and tensor pullback $Lh^*$ by K-flat resolutions. Quasi-compact means that every open cover has a finite subcover; quasi-separated means the diagonal is quasi-compact. A perfect complex is etale locally isomorphic to a bounded complex of direct summands of finite free structure-sheaf modules. Let $S$ be a scheme and $h:Z'\\to Z$ an affine morphism of quasi-compact quasi-separated algebraic spaces over $S$. Here affine means representable with affine inverse images of affine scheme charts. Let $v:C\\to D$ be a morphism in $D_{\\mathrm{QCoh}}(\\mathcal O_{Z'})$. If for every perfect $P\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ and every integer $j$ postcomposition by $v[j]$ gives a bijection\n$$\\operatorname{Hom}(Lh^*P,C[j])\\longrightarrow\\operatorname{Hom}(Lh^*P,D[j]),$$\nthen $v$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 09IY (theorem-bondal-van-den-Bergh), 0E4R (remark-pullback-generator), affine case: shifted-Hom zero-cone detection."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-space-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose the perfect weak generator $P$ on $Z$ supplied by [lem-sfb-space-perfect-weak-generator]; its hypotheses hold because $Z$ is quasi-compact and quasi-separated. Complete $v$ to a distinguished triangle $C\\xrightarrow{v}D\\xrightarrow{a}K\\xrightarrow{b}C[1]$ in the unbounded module derived category [def-weil-abstract-derived-category]. The cone $K$ has quasi-coherent cohomology: [lem-sfb-space-perfect-localizing-generation] explicitly says that $D_{\\mathrm{QCoh}}$ is closed under distinguished-triangle cones. Apply that closure to $C,D$ on $Z\\prime$.",
+   "uses": [
+    "lem-sfb-space-perfect-weak-generator",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-space-perfect-localizing-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 09IY (theorem-bondal-van-den-Bergh) and 0E4R (remark-pullback-generator), affine case."
+   }
+  },
+  {
+   "text": "For every integer $n$, $P[n]$ is perfect, since shifting a bounded finite-projective local representative remains bounded and finite-projective. Put $A=Lh^*(P[n])$. The hypothesis with test object $P[n]$ and $j=0,1$ says that $\\operatorname{Hom}(A,v)$ is surjective and $\\operatorname{Hom}(A,v[1])$ is injective. We show $\\operatorname{Hom}(A,K)=0$ using [lem-weil-pbc-hom-into-triangle-exact]. Given $t:A\\to K$, the triangle relation gives $v[1]bt=0$; injectivity implies $bt=0$. Exactness in the rotated triangle yields $t=as$ for some $s:A\\to D$. Surjectivity gives $s=vr$ for some $r:A\\to C$, whence $t=avr=0$. This holds for every $n$; no boundedness of $C,D,K$ was used.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 09IY (theorem-bondal-van-den-Bergh) and 0E4R (remark-pullback-generator), affine case."
+   }
+  },
+  {
+   "text": "The derived adjunction $Lh^*\\dashv Rh_*$ stated in [lem-sfb-space-derived-etale-chart-calculus] identifies the vanishing just obtained with $\\operatorname{Hom}(P[n],Rh_*K)=0$ for every $n$. By [lem-sfb-space-affine-derived-pushforward-conservative], $Rh_*K$ has quasi-coherent cohomology. The zero-detection clause of [lem-sfb-space-perfect-weak-generator] therefore gives $Rh_*K\\cong0$. Apply affine conservativity to the zero endomorphism $0:K\\to K$: its image is an isomorphism between zero objects, so $0:K\\to K$ is an isomorphism. Its inverse identity implies $\\mathrm{id}_K=0$, hence $K\\cong0$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-affine-derived-pushforward-conservative",
+    "lem-sfb-space-perfect-weak-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 09IY (theorem-bondal-van-den-Bergh) and 0E4R (remark-pullback-generator), affine case."
+   }
+  },
+  {
+   "text": "With $K\\cong0$, exactness for the triangle and its rotation [lem-weil-pbc-hom-into-triangle-exact] makes $\\operatorname{Hom}(W,v)$ bijective for every $W$: existence follows from $\\operatorname{Hom}(W,K)=0$, and uniqueness from $\\operatorname{Hom}(W,K[-1])=0$. For $W=D$ choose $r:D\\to C$ with $vr=\\mathrm{id}_D$. For $W=C$, injectivity and $v(rv)=v$ give $rv=\\mathrm{id}_C$. Thus $r$ is an inverse of $v$, as required.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tags 09IY (theorem-bondal-van-den-Bergh) and 0E4R (remark-pullback-generator), affine case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-perfect-weak-generator",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-affine-derived-pushforward-conservative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 09IY (theorem-bondal-van-den-Bergh) and 0E4R (remark-pullback-generator), affine case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine pullbacks of perfect complexes detect isomorphisms in the quasi coherent derived category of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso], P.diagonal.toProperty.RespectsIso\", \"doc\": \"If a morphism property $P$ for schemes with affine targets respects isomorphisms, then the diagonal property derived from $P$ (which asserts preservation under pullbacks along open immersions from aff\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.respectsIso_of\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.RespectsIso],\\n  (AlgebraicGeometry.AffineTargetMorphismProperty.of P).toProperty.RespectsIso\", \"doc\": \"If a morphism property $ P $ for schemes respects isomorphisms, then the property obtained by restricting $ P $ to morphisms with affine targets also respects isomorphisms. This means that whenever $ \"}\n  {\"name\": \"AlgebraicGeometry.instRespectsIsoSchemeTargetAffineLocallyOfToProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso],\\n  (AlgebraicGeometry.targetAffineLocally P).RespectsIso\", \"doc\": \"If a morphism property $ P $ for morphisms with affine targets, when extended to all morphisms, respects isomorphisms, then the property that $ P $ holds locally on affine opens of the target also res\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.arrow_mk_iso_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] {X Y X' Y' : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y} {f' : X' ⟶ Y'} (e : CategoryTheory.Arrow.mk f ≅ CategoryTheory.Arrow.mk f')\\n  {h : AlgebraicGeometry.IsAffine Y}, P f ↔ P f'\", \"doc\": \"For a morphism property $P$ respecting isomorphisms that applies to scheme morphisms with affine targets, if two morphisms $f: X \\\\to Y$ and $f': X' \\\\to Y'$ are isomorphic in the arrow category (via an\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.cancel_right_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] {X Y Z : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) (g : Y ⟶ Z) [CategoryTheory.IsIso g] [inst : AlgebraicGeometry.IsAffine Z]\\n  [inst_1 : AlgebraicGeometry.IsAffine Y], P (CategoryTheory.CategoryStruct.comp f g) ↔ P f\", \"doc\": \"If a morphism property $P$ for affine targets respects isomorphisms, then for any morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ where $g$ is an isomorphism and both $Y$ and $Z$ are affine schemes, the prope\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.cancel_left_of_respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (P : AlgebraicGeometry.AffineTargetMorphismProperty) [P.toProperty.RespectsIso] {X Y Z : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) (g : Y ⟶ Z) [CategoryTheory.IsIso f] [inst : AlgebraicGeometry.IsAffine Z],\\n  P (CategoryTheory.CategoryStruct.comp f g) ↔ P g\", \"doc\": \"Let $\\\\mathcal{P}$ be a morphism property defined on schemes with affine targets that respects isomorphisms. For schemes $X,Y,Z$, a morphism $f:X\\\\to Y$ that is an isomorphism, and a morphism $g:Y\\\\to Z$\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.instRespectsIsoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], P.RespectsIso\", \"doc\": \"For the category of schemes, the property of morphisms with affine targets respects isomorphisms. Specifically, any isomorphism of schemes $ X \\to Y $ where $ Y $ is affine satisfies the HasAffinePrope\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"AlgebraicGeometry.HasAffineProperty (CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme)\\n  fun X x f x_1 => AlgebraicGeometry.IsAffine X ∧ CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.appTop f)\", \"doc\": \"For a morphism of schemes with an affine target, if the source scheme is affine and the induced morphism on global sections is an isomorphism in the category of commutative rings, then the morphism sa\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward along an affine morphism is conservative and the pullback of a generator generates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Faithful\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  (AlgebraicGeometry.Scheme.Modules.pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (F : CategoryTheory.Functor X.AffineZariskiSiteᵒᵖ CommRingCat)\\n  (α : (AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor X).op.comp X.presheaf ⟶ F),\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization F α →\\n    ((F.rightOp.comp AlgebraicGeometr\", \"doc\": \"Given a scheme $X$, a functor $F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing}$ equipped with a natural transformation $\\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F$ that preserves localization, the comp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.ReflectsIsomorphisms\", \"Adjunction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Gg]enerator|[Aa]ffine.*[Cc]onservative|[Pp]ullback.*[Gg]enerator",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine pullbacks of perfect complexes detect isomorphisms in the quasi coherent derived category of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom g] [IsAffine X] : IsAffine (pullback f g)\", \"doc\": \"If $ X $ is an affine scheme and $ g $ is an affine morphism, then the pullback of $ f $ and $ g $ is an affine scheme.\"}\n  {\"name\": \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"{K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] : IsIso (Q.map f)\", \"doc\": \"In the derived category of an abelian category, the localization functor $ Q $ maps quasi-isomorphisms between cochain complexes to isomorphisms. Specifically, for any quasi-isomorphism $ f: K \\to L $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"{f g : X ⟶ Y} (hf : f = g) : pullback f ≅ pullback g\", \"doc\": \"Given two morphisms $ f, g : X \\\\to Y $ of schemes, if $ f = g $, then the pullback functors $ f^* $ and $ g^* $ from the category of sheaves of modules over $ Y $'s structure sheaf to the category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{C : CommRingCat} {X Y : Scheme} (f : X ⟶ Spec C) (g : Y ⟶ Spec C) : HasPullback f g\", \"doc\": \"For any commutative ring $C$, and any two schemes $X$ and $Y$ with morphisms $f: X \\\\to \\\\operatorname{Spec}(C)$ and $g: Y \\\\to \\\\operatorname{Spec}(C)$, the pullback of $f$ and $g$ exists in the category\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \"{K L : HomologicalComplex C c} (f : K ⟶ L) : IsIso (Q.map f) ↔ HomologicalComplex.quasiIso C c f\", \"doc\": \"A morphism $ f $ between homological complexes becomes an isomorphism in the derived category $ \\\\mathcal{D} = \\\\mathcal{K}[\\\\text{QuasiIso}^{-1}] $ if and only if $ f $ is a quasi-isomorphism (i.e., ind\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [IsAffine X] [IsAffine Y] [IsAffine Z] : IsAffine (pullback f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(f : X ⟶ Y) (𝒰 : Y.OpenCover) (i) :\\n  (𝒰.pullbackCoverAffineRefinementObjIso f i).inv ≫ 𝒰.affineRefinement.openCover.pullbackHom f i =\\n    (𝒰.X i.1).affineCover.pullbackHom (𝒰.pullbackHom f i.1) i.2\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and $\\\\mathcal{U}$ an open cover of $Y$. Let $V$ be an affine open subscheme in an affine refinement of $\\\\mathcal{U}$ that is contained in an open subscheme $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"{A B C : CommRingCat} (f : Spec A ⟶ Spec C) (g : Spec B ⟶ Spec C) : HasPullback f g\", \"doc\": \"For any commutative rings $A$, $B$, and $C$, and morphisms $f : \\\\operatorname{Spec}(A) \\\\to \\\\operatorname{Spec}(C)$ and $g : \\\\operatorname{Spec}(B) \\\\to \\\\operatorname{Spec}(C)$, the pullback (fiber prod\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf adjunctions, scheme morphism properties and general derived-category constructions do not state this unbounded quasi-coherent algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*generator|generator.*perfect|pullback.*generator",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullbacks of perfect complexes along an affine map detect whether a morphism is an isomorphism by shifted Hom groups",
+   "results": "OK: 8 hits; AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, CategoryTheory.Limits.instIsIsoPullbackComparison, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine, AlgebraicGeometry.Scheme.Modules.pullbackCongr, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.pullbackShiftIso.congr_simp, CategoryTheory.MorphismProperty.instRespectsIsoPullbacks, CategoryTheory.IsPullback.isoIsPullback_hom_snd; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"homEquiv\"",
+   "results": "OK: 2 hits; CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff, CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine pullbacks of perfect complexes detect isomorphisms in the quasi coherent derived category of algebraic spaces",
+   "results": "OK: 8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.respectsIso_of, AlgebraicGeometry.instRespectsIsoSchemeTargetAffineLocallyOfToProperty, AlgebraicGeometry.AffineTargetMorphismProperty.arrow_mk_iso_iff, AlgebraicGeometry.AffineTargetMorphismProperty.cancel_right_of_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.cancel_left_of_respectsIso, AlgebraicGeometry.HasAffineProperty.instRespectsIsoScheme, AlgebraicGeometry.instHasAffinePropertyIsomorphismsSchemeAndIsAffineIsIsoCommRingCatAppTop; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary scheme module functors, affine scheme geometry, general localization or Kan-extension results do not state unbounded quasi-coherent algebraic-space conservativity or the perfect pullback test"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-flat-proper-adjoint-base-change",
+  "date": "2026-10-23",
+  "group": "Q28"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Affine base change of the proper flat coherent right adjoint. Supporting input of Tag 0E5I(1): Tags 09IY (theorem-bondal-van-den-Bergh), 0E4R (remark-pullback-generator), affine case: shifted-Hom zero-cone detection.",
+   "via": [
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-pullback-perfect-detection",
+  "worker": "stage1",
+  "summary": "Checked the unbounded algebraic-space statement against Stacks 09IY and 0E4R. Reused the existing perfect weak generator, cone closure, ringed-site derived adjunction and representable Hom exactness. Added only affine derived pushforward conservativity (08II), which is not the existing scheme-only theorem. Proved Hom vanishing for the cone explicitly using surjectivity at j=0 and injectivity at j=1, testing on P[n] to avoid an unstated derived shift comparison. Statement unchanged.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration-reduction ancestry uses coherent duality, then 0E5I affine adjoint base change. This item supplies its 09IY/0E4R perfect test, by zero-cone detection. Ancestor command reports null for the existing created.item chain; retained inherited null and precise existing place rather than inventing an ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-bc844ff65",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-bc844ff65 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-perfect 09IY (l.3674), 0E4R (l.3747), 08II (lemma-affine-morphism, l.748) and 08FA(1) (l.573). The item statement is unchanged and correct: Z and Z' qcqs, h affine, all perfect test objects P and all shifts j. Checked cases: identity on Spec k, empty Z', a non-flat affine closed immersion, unbounded C and D. Step 1: the cone comes from the triangulated structure of def-weil-abstract-derived-category, and K lies in D_QCoh(Z') because lem-sfb-space-perfect-localizing-generation states that D_QCoh is closed under cones (a statement clause; Z' is qcqs). Step 2: checked by hand from lem-weil-pbc-hom-into-triangle-exact (i)-(iii) on the triangle and its rotations: v[1]bt=0, then bt=0 by injectivity at j=1, then t=as, then s=vr by surjectivity at j=0, so t=0. Testing on P[n] avoids a shift comparison. Step 3: the adjunction from lem-sfb-space-derived-etale-chart-calculus, quasi-coherence of Rh_*K from the new node, and zero detection by the weak generator give Rh_*K=0; conservativity applied to 0:K->K gives K=0. Step 4: lifts exist and are unique by exactness, and the explicit inverse is correct. The new node lem-sfb-space-affine-derived-pushforward-conservative is 08II plus 08FA(1), true without extra hypotheses (checked on id, an empty source and a closed immersion). It is statement-only, self-contained, and its blueprint ancestry is the item's inherited one. rg -L over dag/nodes for 08II, 0E4R, 'reflects isomorphisms' and D_QCoh with affine and algebraic space finds no duplicate: the nearest nodes are scheme-level (0AVW lem-sc-affine-derived-cohomology) or base-change or projection-formula lemmas. No cycle (DFS over the 1199-node closure), no SGA, no tool_uses. Batch-5 flags: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors are general definitions, and the closure of lem-sfb-space-perfect-localizing-generation reaches only those and foundational algebraic-space lemmas. Neither the trace formula nor Poincare duality gives these results and none is a step of their proofs, so all are accepted. Minor: the report mentions a citations.json that is not in the commit (report only). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffinePullbackPerfectDetection",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affinePullbackPerfect_detectsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffinePullbackPerfectDetection.lean",
+  "statement": "theorem affinePullbackPerfect_detectsIso {S : Scheme.{u}} {Z' Z : AlgebraicSpace S} (h : Z' ⟶ Z) (haffine : MapIsAffine h) (hqc' : CompactSpace (Point Z'.obj.obj)) (hqs' : ∀ (U V : Over S) (a : yoneda.obj U ⟶ Z'.obj.obj) (b : yoneda.obj V ⟶ Z'.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (hqc : CompactSpace (Point Z.obj.obj)) (hqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ Z.obj.obj) (b : yoneda.obj V ⟶ Z.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) [HasDerivedCategory.{w'} Z'.SmallModules] [HasDerivedCategory.{w} Z.SmallModules] {C D : Z'.DerivedQCoh} (v : C ⟶ D) (htest : ∀ (P : Z.DerivedQCoh), SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u} Z.smallStructureSheaf P.obj → ∀ j : ℤ, Function.Bijective (fun a : (derivedTensorPullback h).obj P.obj ⟶ C.obj⟦j⟧ ↦ a ≫ (shiftFunctor Z'.DerivedModules j).map v.hom)) : IsIso v",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d53a0bede",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Read node, Stacks spaces-perfect 0E4R/09IY, the delivered module and the dependency declarations (Point and its topology, MapIsAffine, SmallModules/smallStructureSheaf, DerivedQCoh/derivedQCohProperty, derivedTensorPullback from O3, IsPerfectOnRingedSiteOfUniverses). Clause by clause: S, Z', Z, h; MapIsAffine; CompactSpace(Point) for Z and Z'; absolute affine-pair qs, so no condition on S; unbounded C, D in DerivedQCoh; all perfect P with site universes {u,u,u} matching SmallModel.{u}/CommRingCat.{u}; all j : ℤ; Bijective postcomposition by (shiftFunctor j).map v.hom on Lh*P ⟶ C[j]; IsIso v; independent w/w' with the order matching derivedTensorPullback. Edge cases: id on Spec k, empty Z', non-flat closed immersion, j ≤ 0, unbounded, non-qs S all included. The lean.statement is verbatim; the item changes only in lean and 5 added landed def stmt_deps (allowed, no cycle); no dep records changed; no duplicate declaration in the live Sheaf tree; docstrings include source, blueprint and 4 proof steps; sorry only; lines ≤100; plain import Pretriangulated = the module of the Mathlib leaf proof_dep lem-weil-pbc-hom-into-triangle-exact. Advisory: hqs/hqs' unfold IsAbsolutelyQuasiSeparated (def-sfb-space-absolute-quasi-separated, Q09, landed around the base; the node defines qs inline, so not a fault); the stmt_dep def-sfb-proper-curve-moduli is not used by the statement (the Point topology is owned by def-a1-space-point-topology), harmless. No compile run, per instructions; no FIX."
+ }
+}

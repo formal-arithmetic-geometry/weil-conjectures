@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-directed-coalgebra-comodule-descent",
+ "kind": "statement",
+ "title": "Finite coactions and colinear maps descend along a directed coalgebra limit",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $I$ be a nonempty set with a directed preorder, so any two indices have a common upper bound. For each $i\\in I$ let $D_i$ be a $k$-vector space with linear maps $\\Delta_i:D_i\\to D_i\\otimes_kD_i$ and $\\epsilon_i:D_i\\to k$ satisfying $(\\Delta_i\\otimes1)\\Delta_i=(1\\otimes\\Delta_i)\\Delta_i$ and $(\\epsilon_i\\otimes1)\\Delta_i=(1\\otimes\\epsilon_i)\\Delta_i=1_{D_i}$. Use tensor products [def-weil-pbc-module-tensor-product]. Suppose $u_{ij}:D_i\\to D_j$ for $i\\leq j$ are linear maps preserving $\\Delta$ and $\\epsilon$, with $u_{ii}=1$ and $u_{j\\ell}u_{ij}=u_{i\\ell}$. Let $(D,\\iota_i)$ be the vector-space colimit [def-weil-pbc-category-colimit]. There is a unique coalgebra structure on $D$ with $\\Delta\\iota_i=(\\iota_i\\otimes\\iota_i)\\Delta_i$ and $\\epsilon\\iota_i=\\epsilon_i$.\nFor any finite-dimensional $k$-vector space $M$ [def-weil-finite-dimensional-subspace] and right $D$-coaction $\\rho:M\\to M\\otimes_kD$, meaning $(\\rho\\otimes1)\\rho=(1\\otimes\\Delta)\\rho$ and $(1\\otimes\\epsilon)\\rho=1_M$, there are $i$ and a right $D_i$-coaction $\\rho_i$ on the same $M$ such that $\\rho=(1_M\\otimes\\iota_i)\\rho_i$. Moreover, let $M,N$ be finite-dimensional right $D_i$-comodules and let $a:M\\to N$ be $k$-linear. If $a$ is colinear after extension to $D$, there is $j\\geq i$ for which $a$ is colinear for the $D_j$-coactions obtained by composing with $1\\otimes u_{ij}$. Neither injectivity of the transition maps nor finite-dimensionality of the $D_i$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proof of Theorem 9.37, printed p.178, details of its passage to the directed limit; agent-explicit finite coaction and morphism descent underlying that passage."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "The maps $d_i=(\\iota_i\\otimes\\iota_i)\\Delta_i:D_i\\to D\\otimes_kD$ form a cocone: for $i\\le j$, $d_ju_{ij}=(\\iota_ju_{ij}\\otimes\\iota_ju_{ij})\\Delta_i=d_i$. The $\\epsilon_i$ also form a cocone. The colimit universal property defines unique linear maps $\\Delta:D\\to D\\otimes_kD$ and $\\epsilon:D\\to k$ with the required composites. After precomposing with $\\iota_i$, the two coassociativity maps both equal $\\iota_i^{\\otimes3}(\\Delta_i\\otimes1)\\Delta_i=\\iota_i^{\\otimes3}(1\\otimes\\Delta_i)\\Delta_i$, and each counit composite equals $\\iota_i$. Colimit uniqueness proves the coalgebra identities. All tensor rebracketings here are the maps $x\\otimes(y\\otimes z)\\leftrightarrow(x\\otimes y)\\otimes z$ induced by the tensor universal property.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.37, printed p.178, directed-limit passage; agent supplies the finite-coefficient argument, using Stacks algebra.tex Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits)."
+   }
+  },
+  {
+   "text": "Apply the tensor-colimit theorem with constant ring system $A_i=k$ and module systems $M_i=N_i=D_i$. Its hypotheses on underlying abelian colimits hold: the quotient construction of directed abelian-group colimits has scalar action $a[x_i]=[ax_i]$, well defined by eventual equality; compatible linear maps descend by $[x_i]\\mapsto f_i(x_i)$, which is linear by this formula. Thus that construction is a vector-space colimit, and its unique colimit isomorphism to $D$ respects every leg. The constant ring colimit is $k$, since a compatible cocone on a nonempty directed constant diagram has all its legs equal. The cited theorem consequently identifies\n$$\\varinjlim_i(D_i\\otimes_kD_i)\\ \\xrightarrow{\\sim}\\ D\\otimes_kD,\\qquad [x\\otimes y]_i\\longmapsto\\iota_i(x)\\otimes\\iota_i(y).$$\nThese are module colimits as well, by the same scalar formula. Hence the module-elementwise lemma detects the vanishing of any element of $D_i\\otimes_kD_i$ at a later stage. This is an application of the existing varying-ring theorem, not an assumption that $\\iota_i\\otimes\\iota_i$ is injective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+    "def-weil-directed-colimit-abelian-groups",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.37, printed p.178, directed-limit passage; agent supplies the finite-coefficient argument, using Stacks algebra.tex Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits)."
+   }
+  },
+  {
+   "text": "Choose a finite basis $e_1,\\ldots,e_n$ of $M$: starting with its finite spanning family, delete a vector whenever it is a combination of the others; the remaining family is independent and still spans. For any vector space $W$, the tensor universal property gives mutually inverse maps $W^n\\to M\\otimes_kW$, $(w_a)\\mapsto\\sum_a e_a\\otimes w_a$, and $M\\otimes_kW\\to W^n$, $e_a\\otimes w\\mapsto(\\delta_{ab}w)_b$. In particular write uniquely\n$$\\rho(e_b)=\\sum_a e_a\\otimes c_{ab},\\qquad c_{ab}\\in D.$$\nExpanding the two coaction identities and applying the coordinate maps just constructed gives\n$$\\Delta(c_{ab})=\\sum_t c_{at}\\otimes c_{tb},\\qquad\\epsilon(c_{ab})=\\delta_{ab}.$$\nFor example, the coefficient of $e_a$ in $(\\rho\\otimes1)\\rho(e_b)$ is $\\sum_t c_{at}\\otimes c_{tb}$, fixing the order of the two tensor factors.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.37, printed p.178, directed-limit passage; agent supplies the finite-coefficient argument, using Stacks algebra.tex Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits)."
+   }
+  },
+  {
+   "text": "Use the module-elementwise lemma to represent each of the finitely many $c_{ab}$ by an element of some $D_{i_{ab}}$. Repeatedly take common upper bounds of those indices to obtain $i$ and lifts $c^i_{ab}\\in D_i$ with $\\iota_i(c^i_{ab})=c_{ab}$. Define the linear map $\\widetilde\\rho_i(e_b)=\\sum_a e_a\\otimes c^i_{ab}$. Its extension is $\\rho$, but it need not yet satisfy coassociativity. The counit equations already hold: $\\epsilon_i(c^i_{ab})=\\epsilon\\iota_i(c^i_{ab})=\\delta_{ab}$, an equality in the fixed field $k$. If $n=0$, take any $i\\in I$; all the displayed families and equations are empty and the zero map is the required coaction.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.37, printed p.178, directed-limit passage; agent supplies the finite-coefficient argument, using Stacks algebra.tex Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits)."
+   }
+  },
+  {
+   "text": "For each pair $(a,b)$ put\n$$z_{ab}=\\Delta_i(c^i_{ab})-\\sum_t c^i_{at}\\otimes c^i_{tb}\\ \\in D_i\\otimes_kD_i.$$\nIts image in $D\\otimes_kD$ is zero by steps 1 and 3. Step 2 and the module-elementwise lemma therefore give an index $j_{ab}\\ge i$ at which $(u_{i j_{ab}}\\otimes u_{i j_{ab}})(z_{ab})=0$. Choose one $j$ above these finitely many indices and $i$. Put $c^j_{ab}=u_{ij}(c^i_{ab})$. Since $u_{ij}$ preserves comultiplication, the image of $z_{ab}$ at $j$ is exactly $\\Delta_j(c^j_{ab})-\\sum_t c^j_{at}\\otimes c^j_{tb}$; it is zero because transition maps take zero to zero. Counits remain $\\delta_{ab}$ since $\\epsilon_ju_{ij}=\\epsilon_i$. Define $\\rho_j(e_b)=\\sum_a e_a\\otimes c^j_{ab}$. The same coordinate expansion as in step 3 proves both coaction identities for $\\rho_j$, and $\\iota_ju_{ij}=\\iota_i$ proves $(1_M\\otimes\\iota_j)\\rho_j=\\rho$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.37, printed p.178, directed-limit passage; agent supplies the finite-coefficient argument, using Stacks algebra.tex Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits)."
+   }
+  },
+  {
+   "text": "For the morphism assertion, choose finite bases $(e_b)$ of $M$ and $(f_s)$ of $N$ by the deletion argument of step 3. Write the given $D_i$-coactions and linear map as\n$$\\rho_M(e_b)=\\sum_t e_t\\otimes c_{tb},\\quad\\rho_N(f_s)=\\sum_r f_r\\otimes d_{rs},\\quad a(e_b)=\\sum_s A_{sb}f_s,$$\nwith $c_{tb},d_{rs}\\in D_i$ and $A_{sb}\\in k$. The coefficient of $f_r$ in $\\rho_Na(e_b)-(a\\otimes1)\\rho_M(e_b)$ is\n$$w_{rb}=\\sum_s A_{sb}d_{rs}-\\sum_t A_{rt}c_{tb}\\in D_i.$$\nColinearity after extension to $D$ says exactly $\\iota_i(w_{rb})=0$. The module-elementwise lemma kills each of these finitely many elements at a later index. A common upper bound $j\\ge i$ kills them all, and coordinate expansion gives colinearity at $j$. The pushed maps are indeed coactions: expanding their coassociativity equations applies $1\\otimes u_{ij}\\otimes u_{ij}$ to the original equations, and the counit equation applies $\\epsilon_ju_{ij}=\\epsilon_i$. If either basis is empty there are no $w_{rb}$ and one may take $j=i$. No step cancels a transition map; neither injectivity nor any dimension bound on $D_i$ was used.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 9.37, printed p.178, directed-limit passage; agent supplies the finite-coefficient argument, using Stacks algebra.tex Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 9.37, printed p.178, directed-limit passage; agent supplies the finite-coefficient argument, using Stacks algebra.tex Tags 00D6 (lemma-directed-colimit), 00D7 (lemma-zero-directed-limit), 00DD (lemma-tensor-products-commute-with-limits)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]omodule|[Cc]omod|[Cc]oalgebra.*[Cc]olimit|[Cc]olimit.*[Cc]oalgebra",
+   "results": "{\"t\": \"2026-10-24T14:25:04Z\", \"tool\": \"grep\", \"query\": \"[Cc]omodule|[Cc]omod|[Cc]oalgebra.*[Cc]olimit|[Cc]olimit.*[Cc]oalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Group/ModEq.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Angle.lean\", \"Mathlib/Analysis/SpecialFunctions/Trigonometric/Angle.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\", \"Mathlib/Algebra/Order/ToIntervalMod.lean\"], \"digest\": \"4adc2ad9d5faa43d\"}; Read Algebra/Category/ModuleCat/FilteredColimits.lean:37–66, ModuleCat/Limits.lean:213–246 and Limits/ConcreteCategory/WithAlgebraicStructures.lean:48–58. These construct a module limit or detect one equality, not finite coaction descent. Monad/Limits.lean:399–435,469–475 concerns colimits for a fixed comonad, not changing coefficient coalgebras. CoalgCat/ComonEquivalence.lean:98–108 identifies comonoids only. No search hit supplies the simultaneous finite-stage coaction identities and colinearity; no match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a directed system of coalgebras finite dimensional coactions descend to a finite stage and colinearity of a linear map is eventually detected",
+   "results": "{\"t\": \"2026-10-24T14:25:05Z\", \"tool\": \"leansearch\", \"query\": \"Given a directed system of coalgebras finite dimensional coactions descend to a finite stage and colinearity of a linear map is eventually detected\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.directLimitIsColimit_desc\", \"ModuleCat.directLimitIsColimit\", \"DFinsupp.instCoalgebra\", \"ModuleCat.directLimitCocone\", \"CoalgHomClass.toCoalgHom\", \"DFinsupp.instIsCocomm\", \"CoalgEquiv.toLinearEquiv_toLinearMap\", \"CoalgCat.hom_ext_iff\"], \"digest\": \"38e1469552f8ce7d\"}; Read Algebra/Category/ModuleCat/FilteredColimits.lean:37–66, ModuleCat/Limits.lean:213–246 and Limits/ConcreteCategory/WithAlgebraicStructures.lean:48–58. These construct a module limit or detect one equality, not finite coaction descent. Monad/Limits.lean:399–435,469–475 concerns colimits for a fixed comonad, not changing coefficient coalgebras. CoalgCat/ComonEquivalence.lean:98–108 identifies comonoids only. No search hit supplies the simultaneous finite-stage coaction identities and colinearity; no match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-24T14:25:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Algebra/Category/ModuleCat/FilteredColimits.lean:37–66, ModuleCat/Limits.lean:213–246 and Limits/ConcreteCategory/WithAlgebraicStructures.lean:48–58. These construct a module limit or detect one equality, not finite coaction descent. Monad/Limits.lean:399–435,469–475 concerns colimits for a fixed comonad, not changing coefficient coalgebras. CoalgCat/ComonEquivalence.lean:98–108 identifies comonoids only. No search hit supplies the simultaneous finite-stage coaction identities and colinearity; no match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional corepresentations of a filtered direct limit of coalgebras are the filtered colimit of finite dimensional corepresentation categories",
+   "results": "{\"t\": \"2026-10-24T14:25:07Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional corepresentations of a filtered direct limit of coalgebras are the filtered colimit of finite dimensional corepresentation categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.instPreservesFiniteColimitsRepForget₂\", \"CategoryTheory.PreGaloisCategory.PointedGaloisObject.isColimit\", \"FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂\", \"preservesFilteredColimits_coyoneda\", \"CategoryTheory.Limits.Concrete.colimit_rep_eq_zero\", \"ModuleCat.FilteredColimits.colimit\", \"CategoryTheory.PreGaloisCategory.PointedGaloisObject.instHasColimitOppositeFunctorTypeCompOpInclCoyoneda\", \"ModuleCat.FilteredColimits.M\"], \"digest\": \"ab9247f00d7c2ded\"}; Read Algebra/Category/ModuleCat/FilteredColimits.lean:37–66, ModuleCat/Limits.lean:213–246 and Limits/ConcreteCategory/WithAlgebraicStructures.lean:48–58. These construct a module limit or detect one equality, not finite coaction descent. Monad/Limits.lean:399–435,469–475 concerns colimits for a fixed comonad, not changing coefficient coalgebras. CoalgCat/ComonEquivalence.lean:98–108 identifies comonoids only. No search hit supplies the simultaneous finite-stage coaction identities and colinearity; no match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional comodules and their morphisms descend to one stage of a filtered colimit of coalgebras",
+   "results": "{\"t\": \"2026-10-24T14:25:09Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional comodules and their morphisms descend to one stage of a filtered colimit of coalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoalgCat.instComonObjModuleCatOfCarrier\", \"CoalgCat.ofComon\", \"CoalgCat.comonEquivalence\", \"CoalgCat.toComonObj\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"CategoryTheory.Comonad.ForgetCreatesColimits'.γ_app\", \"ModuleCat.FilteredColimits.coconeMorphism\", \"ModuleCat.FilteredColimits.M.mk_map\"], \"digest\": \"62d6771d0d210e6b\"}; Read Algebra/Category/ModuleCat/FilteredColimits.lean:37–66, ModuleCat/Limits.lean:213–246 and Limits/ConcreteCategory/WithAlgebraicStructures.lean:48–58. These construct a module limit or detect one equality, not finite coaction descent. Monad/Limits.lean:399–435,469–475 concerns colimits for a fixed comonad, not changing coefficient coalgebras. CoalgCat/ComonEquivalence.lean:98–108 identifies comonoids only. No search hit supplies the simultaneous finite-stage coaction identities and colinearity; no match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|coalgebra.*[Ll]imit|[Cc]oalgebra.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-24T14:31:40Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule|coalgebra.*[Ll]imit|[Cc]oalgebra.*[Cc]olimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Monad/Equalizer.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Products.lean\"], \"digest\": \"e17e3f3b5395e74e\"}; Read Algebra/Category/ModuleCat/FilteredColimits.lean:37–66, ModuleCat/Limits.lean:213–246 and Limits/ConcreteCategory/WithAlgebraicStructures.lean:48–58. These construct a module limit or detect one equality, not finite coaction descent. Monad/Limits.lean:399–435,469–475 concerns colimits for a fixed comonad, not changing coefficient coalgebras. CoalgCat/ComonEquivalence.lean:98–108 identifies comonoids only. No search hit supplies the simultaneous finite-stage coaction identities and colinearity; no match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|comodule|coalgebra.*[Cc]olimit|[Cc]olimit.*coalgebra",
+   "results": "{\"t\": \"2026-10-24T14:53:51Z\", \"tool\": \"grep\", \"query\": \"Comodule|comodule|coalgebra.*[Cc]olimit|[Cc]olimit.*coalgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\", \"Mathlib/CategoryTheory/Monad/Limits.lean\"], \"digest\": \"84685ba957be1479\"}; Read the actual returned declarations. Monad/Limits.lean:399-438 fixes a comonad, whereas here the coefficient coalgebra varies. Module colimit and finite representation colimit hits do not supply finite-stage coaction identities. Coalgebra.Repr.arbitrary in RingTheory/Coalgebra/Basic.lean only expresses the comultiplication of one element as a finite tensor sum. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, \"colimit\"",
+   "results": "{\"t\": \"2026-10-24T14:53:51Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the actual returned declarations. Monad/Limits.lean:399-438 fixes a comonad, whereas here the coefficient coalgebra varies. Module colimit and finite representation colimit hits do not supply finite-stage coaction identities. Coalgebra.Repr.arbitrary in RingTheory/Coalgebra/Basic.lean only expresses the comultiplication of one element as a finite tensor sum. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional coactions descend along a filtered colimit of coalgebras and colinearity is detected at a finite stage",
+   "results": "{\"t\": \"2026-10-24T14:53:51Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional coactions descend along a filtered colimit of coalgebras and colinearity is detected at a finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.ForgetCreatesColimits'.liftedCoconeIsColimit\", \"CategoryTheory.Limits.colimitLimitIso\", \"CategoryTheory.Comonad.ForgetCreatesColimits'.liftedCoconeIsColimit_desc_f\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"CategoryTheory.Comonad.ForgetCreatesColimits'.coconePoint_a\", \"CommGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"DFinsupp.instCoalgebra\", \"AddGrpCat.FilteredColimits.colimitCoconeIsColimit\"], \"digest\": \"fe8696a3cb9ea996\"}; Read the actual returned declarations. Monad/Limits.lean:399-438 fixes a comonad, whereas here the coefficient coalgebra varies. Module colimit and finite representation colimit hits do not supply finite-stage coaction identities. Coalgebra.Repr.arbitrary in RingTheory/Coalgebra/Basic.lean only expresses the comultiplication of one element as a finite tensor sum. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional comodules and colinear maps descend to a stage of a directed colimit of coalgebras",
+   "results": "{\"t\": \"2026-10-24T14:53:52Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional comodules and colinear maps descend to a stage of a directed colimit of coalgebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectLimit.Module.of_f\", \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"ModuleCat.directLimitIsColimit_desc\", \"FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂\", \"ModuleCat.directLimitIsColimit\", \"Module.DirectLimit.exists_of₂\", \"Module.DirectLimit.exists_of\", \"ModuleCat.directLimitCocone\"], \"digest\": \"b7f0ff1b47ff0431\"}; Read the actual returned declarations. Monad/Limits.lean:399-438 fixes a comonad, whereas here the coefficient coalgebra varies. Module colimit and finite representation colimit hits do not supply finite-stage coaction identities. Coalgebra.Repr.arbitrary in RingTheory/Coalgebra/Basic.lean only expresses the comultiplication of one element as a finite tensor sum. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A corepresentation on a finite vector space over the colimit coalgebra is defined over some earlier coalgebra in the filtered diagram",
+   "results": "{\"t\": \"2026-10-24T14:54:30Z\", \"tool\": \"leanfinder\", \"query\": \"A corepresentation on a finite vector space over the colimit coalgebra is defined over some earlier coalgebra in the filtered diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.Repr.arbitrary\", \"CategoryTheory.Comonad.ForgetCreatesColimits'.coconePoint\", \"FDRep.instPreservesFiniteColimitsRepForget₂\", \"CategoryTheory.Functor.corepresentableByCompCoyonedaObjOfIsColimit\", \"CategoryTheory.Comonad.ForgetCreatesColimits'.liftedCocone\", \"CategoryTheory.Comonad.hasColimit_of_comp_forget_hasColimit\", \"CategoryTheory.Comonad.ForgetCreatesColimits'.liftedCoconeIsColimit\", \"CategoryTheory.PreGaloisCategory.PointedGaloisObject.isColimit\"], \"digest\": \"415a20654b0bcebc\"}; Read the actual returned declarations. Monad/Limits.lean:399-438 fixes a comonad, whereas here the coefficient coalgebra varies. Module colimit and finite representation colimit hits do not supply finite-stage coaction identities. Coalgebra.Repr.arbitrary in RingTheory/Coalgebra/Basic.lean only expresses the comultiplication of one element as a finite tensor sum. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-exact-fibre-coalgebra-reconstruction",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Theorems 9.24 and 9.46--9.47, Notes 9.25--9.27, printed pp.172--173,182--184; Lie tangent-family description is the dual-number calculation in Lemma 23.69, p.506. Differentiation and adjoint bracket: Theorem 10.23, pp.193--194; tensor differential: 10.28, pp.194--195. No existence of a semisimple group is asserted here. Supporting abelian reconstruction before the tensor structure: Milne Theorems 9.32 and 9.37, Sections 9(d)-9(e), coefficient presentation of the reconstructed coalgebra. Supporting input: Milne Theorem 9.37, directed-limit passage: explicit finite coaction descent and eventual detection of morphisms.",
+   "via": [
+    "lem-sfb-exact-fibre-coalgebra-reconstruction",
+    "lem-sfb-neutral-tensor-envelope",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-directed-coalgebra-comodule-descent",
+  "worker": "stage1",
+  "summary": "Q11 gives the coalgebra by the colimit universal property, then lifts its finite coaction matrix and kills its finitely many comultiplication errors in the tensor-square colimit; the same eventual-zero test kills the colinearity errors. Existing module-elementwise and varying-ring tensor-colimit nodes suffice; no new nodes. Statement and statement dependencies unchanged.",
+  "blueprint": "The latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), via the inherited prerequisite chain, leads to the abelian reconstruction prerequisite of Milne Theorem 9.37. Steps 1-5 supply finite coaction descent in that directed-limit passage; step 6 supplies eventual colinearity. blueprint_refs.py ancestor returns None on the inherited chain, as for the parent; the existing null ancestor and via are retained. Whole-blueprint searches for coalgebra, coaction and tensor colimit gave no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+    "why": "Generic tensor-colimit comparison, specialized to constant field and the two copies of the coalgebra diagram; the unit has no node giving this comparison, and the specialization implements the directed-limit passage in Milne 9.37 rather than replacing it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-ffd459ad1",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-ffd459ad1 (reviewer sub-agent of L); spot-checked: I read the item in full, all six steps and every cited statement. There are no new nodes and the statement and stmt_deps are unchanged from the base. Source checked: Milne iAG2017, printed p.178, Theorem 9.37 and the passage before it. Milne's order on isomorphism classes is only a preorder, so the item's directed preorder is right, and the parent lem-sfb-exact-fibre-coalgebra-reconstruction uses the item at steps 9 (colinearity) and 10 (object descent) exactly as stated. Step 1: Delta and epsilon come from the colimit; I checked coassociativity and counit after precomposing with iota_i. Step 2: the varying-ring tensor theorem applies with constant ring k; I checked each hypothesis, the abelian colimit is identified with the vector-space colimit through the scalar formula, and iota_i⊗iota_i = psi∘lambda_i. Step 3: I recomputed Delta(c_ab) = sum_t c_at⊗c_tb and the factor order is right. Steps 4-5: coefficients are lifted to one stage and the finitely many errors z_ab are killed at a later stage. I recomputed the report's noninjective example (error -2(g-h)⊗(g-h)), which shows the later stage is needed. Step 6: I recomputed w_rb and the pushed coactions satisfy the coaction laws. Edge cases checked: singleton I, empty bases, a non-antisymmetric preorder, infinite-dimensional D_i. Accepted tool use: lem-weil-pbc-filtered-colimit-tensor-varying-rings (unit sk-thm-reduction) as a generic tensor-colimit comparison. An rg -L search over comodule plus directed, filtered or colimit nodes found no duplicate. Minor point, no change made: 'colinear' is not defined inline, but it has the standard meaning and step 6 uses exactly that."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DirectedCoalgebraComoduleDescent",
+  "declaration": "Coalgebra.directed_colimit_coalgebra_comodule_descent",
+  "file": "lean/Sheaf/RingTheory/DirectedCoalgebraComoduleDescent.lean",
+  "statement": "theorem directed_colimit_coalgebra_comodule_descent {k : Type u} [Field k] {I : Type v} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{v} k) [∀ i : I, Coalgebra k (F.obj i)] (hΔ : ∀ (i j : I) (h : i ≤ j), Coalgebra.comul (R := k) (A := F.obj j) ∘ₗ (F.map (homOfLE h)).hom = TensorProduct.map (F.map (homOfLE h)).hom (F.map (homOfLE h)).hom ∘ₗ Coalgebra.comul (R := k) (A := F.obj i)) (hε : ∀ (i j : I) (h : i ≤ j), Coalgebra.counit (R := k) (A := F.obj j) ∘ₗ (F.map (homOfLE h)).hom = Coalgebra.counit (R := k) (A := F.obj i)) (c : Cocone F) (hc : IsColimit c) : ∃ d : Coalgebra k c.pt, (∀ i : I, d.comul ∘ₗ (c.ι.app i).hom = TensorProduct.map (c.ι.app i).hom (c.ι.app i).hom ∘ₗ Coalgebra.comul (R := k) (A := F.obj i)) ∧ (∀ i : I, d.counit ∘ₗ (c.ι.app i).hom = Coalgebra.counit (R := k) (A := F.obj i)) ∧ (∀ d' : Coalgebra k c.pt, (∀ i : I, d'.comul ∘ₗ (c.ι.app i).hom = TensorProduct.map (c.ι.app i).hom (c.ι.app i).hom ∘ₗ Coalgebra.comul (R := k) (A := F.obj i)) → (∀ i : I, d'.counit ∘ₗ (c.ι.app i).hom = Coalgebra.counit (R := k) (A := F.obj i)) → d' = d) ∧ (∀ (M : Type w) [AddCommGroup M] [Module k M] [FiniteDimensional k M] (ρ : M →ₗ[k] M ⊗[k] c.pt), (TensorProduct.assoc k M c.pt c.pt).toLinearMap ∘ₗ ρ.rTensor c.pt ∘ₗ ρ = d.comul.lTensor M ∘ₗ ρ → (TensorProduct.rid k M).toLinearMap ∘ₗ d.counit.lTensor M ∘ₗ ρ = LinearMap.id → ∃ (i : I) (ρi : M →ₗ[k] M ⊗[k] F.obj i), (TensorProduct.assoc k M (F.obj i) (F.obj i)).toLinearMap ∘ₗ ρi.rTensor (F.obj i) ∘ₗ ρi = (Coalgebra.comul (R := k) (A := F.obj i)).lTensor M ∘ₗ ρi ∧ (TensorProduct.rid k M).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := F.obj i)).lTensor M ∘ₗ ρi = LinearMap.id ∧ ρ = (c.ι.app i).hom.lTensor M ∘ₗ ρi) ∧ (∀ (i : I) (M : Type w) (N : Type t) [AddCommGroup M] [Module k M] [FiniteDimensional k M] [AddCommGroup N] [Module k N] [FiniteDimensional k N] (ρM : M →ₗ[k] M ⊗[k] F.obj i) (ρN : N →ₗ[k] N ⊗[k] F.obj i) (a : M →ₗ[k] N), (TensorProduct.assoc k M (F.obj i) (F.obj i)).toLinearMap ∘ₗ ρM.rTensor (F.obj i) ∘ₗ ρM = (Coalgebra.comul (R := k) (A := F.obj i)).lTensor M ∘ₗ ρM → (TensorProduct.rid k M).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := F.obj i)).lTensor M ∘ₗ ρM = LinearMap.id → (TensorProduct.assoc k N (F.obj i) (F.obj i)).toLinearMap ∘ₗ ρN.rTensor (F.obj i) ∘ₗ ρN = (Coalgebra.comul (R := k) (A := F.obj i)).lTensor N ∘ₗ ρN → (TensorProduct.rid k N).toLinearMap ∘ₗ (Coalgebra.counit (R := k) (A := F.obj i)).lTensor N ∘ₗ ρN = LinearMap.id → (c.ι.app i).hom.lTensor N ∘ₗ ρN ∘ₗ a = a.rTensor c.pt ∘ₗ (c.ι.app i).hom.lTensor M ∘ₗ ρM → ∃ (j : I) (h : i ≤ j), (F.map (homOfLE h)).hom.lTensor N ∘ₗ ρN ∘ₗ a = a.rTensor (F.obj j) ∘ₗ (F.map (homOfLE h)).hom.lTensor M ∘ₗ ρM)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8e4ee923",
+  "group": "ND",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field k; nonempty directed Preorder I; F : I ⥤ ModuleCat k with functor laws = u_ii=1, u_jl u_ij=u_il; Mathlib Coalgebra = node coassoc/counit identities; hΔ/hε preservation; any IsColimit cocone. Conclusion: ∃ d with both compatibilities and uniqueness over all compatible d'; finite-dim coaction descends on the same M (assoc (M⊗D)⊗D→M⊗(D⊗D), rid counit, ρ=(1⊗ι_i)ρi); colinearity over D gives ∃ j≥i colinearity via 1⊗u_ij. No injectivity or fin-dim D_i assumed. Edge cases: empty I excluded as in node; M=0/N=0 fine; any characteristic. I : Type v = carrier universe follows brief-stage2 l.76 index-universe convention (colimit given as data); M,N universes independent. H4: no general abstract-coalgebra coaction owner (IsCoordinateCoaction is Γ(U,⊤)-specific; Hopf Coaction structures differ); no name clash. lean.statement verbatim in file; node differs from side-live only in lean field; no defs; proof sorry; docstrings give source + blueprint id + 6 proof steps; report has Worker report and Second reading by ND. No compile (no file changed)."
+ }
+}

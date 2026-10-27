@@ -1,0 +1,355 @@
+{
+ "id": "lem-sf-adic-completed-tensor-realization-descent",
+ "kind": "statement",
+ "title": "Specified completed tensor constraints descend through continuous realization",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, and $\\Omega=\\overline{\\mathbf Q}_\\ell$ [def-weil-finite-field-fiber]. Let $T$ be a separated finite-type $k$-scheme. On its small pro-etale site [def-weil-pbc-proetale-site], for each finite $E\\subset\\Omega$ put $B_{E,T}=\\varprojlim_{n\\ge1}(\\mathcal O_E/\\varpi_E^n)_T$ [def-weil-completed-integral-coefficients], $E_T=B_{E,T}[1/\\varpi_E]$, and $R_T=p_T^*\\underline\\Omega$, where $\\underline\\Omega(S)$ consists of continuous functions on a profinite set $S$ valued in one finite subextension [sk-def-sfb-qlbar-condensed, sk-prop-sfb-qlbar-colimit-x]. Write $\\mathcal C_E(T)=D^b_c(T,E)$ for the raw rationalization of derived-complete integral constructible complexes, with its specified completed finite scalar transitions $S_{F/E}$ [def-weil-rationalization-karoubi]. Write $\\mathcal C_T$ for the common-stage pair category of these $\\mathcal C_E(T)$, with Hom groups the directed colimits over common finite fields [def-weil-algebraically-closed-coefficients]. For $A=E_T,R_T$, let $\\mathcal D_T(A)$ be the full subcategory of $D(\\operatorname{Mod}(A))$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category] of bounded objects whose cohomology sheaves have a finite locally closed stratification on each stratum of which they are pro-etale locally finite free over $A$.\n\nLet $J_{E,T}=E_T\\otimes^L_{B_{E,T}}-$ on integral representatives and let $\\rho_T:\\mathcal C_T\\to\\mathcal D_T(R_T)$ be the functor obtained by further extension to $R_T$, with balanced identity/tower comparisons. Use exactly the completed tensor, unit, reassociation, unitors and signed symmetry of [def-weil-derived-pullback-tensor-hom]. For integral constructible $K,L$, let $\\chi_{K,L}:K\\otimes^L_{B_{E,T}}L\\to K\\widehat\\otimes^L_{\\mathcal O_E}L$ be the specified quotient-tower comparison [lem-fix-constructible-tensor-completion]. Define\n$$\\mu_{E;K,L}:J_{E,T}K\\otimes^L_{E_T}J_{E,T}L\\longrightarrow J_{E,T}(K\\widehat\\otimes^L L)$$\nas balanced scalar multiplication followed by $J_{E,T}(\\chi_{K,L})$; the multiplication map on K-flat representatives is $(a\\otimes x)\\otimes(b\\otimes y)\\mapsto ab\\otimes(x\\otimes y)$, with inverse $a\\otimes(x\\otimes y)\\mapsto(a\\otimes x)\\otimes(1\\otimes y)$ before applying $\\chi$.\n\nThese maps are isomorphisms natural in $K,L$ and respect the actual completed associator, both action unitors and signed symmetry. More precisely coherent reduction of each constraint square through $\\chi$ is the corresponding whole-system total-complex map: reassociation $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$, action $b\\otimes x\\mapsto bx$ or $x\\otimes b\\mapsto bx$, or swap $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$. This identifies the specified constraints even for iterated completed tensors with re-resolved inner expressions.\n\nRationalization of $\\mu_E$ and extension from a common finite field to $R_T$ give a well-defined tensorator $\\mu_{M,N}:\\rho_TM\\otimes^L_{R_T}\\rho_TN\\xrightarrow{\\sim}\\rho_T(M\\otimes N)$, independent of field and arrow representatives. Tensor of pure rational arrows multiplies the scalar coefficients. The tensorator respects balanced finite scalar comparison, including its identity and tower maps, and makes $\\rho_T$ symmetric strong monoidal. The unit comparison is the multiplication $R_T\\otimes_{E_T}E_T\\cong R_T$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Definition 3.4.10 and Remark 6.8.15; HRS Lemma 7.9; normalized quotient constraints and rational/common-stage tensor descent, old steps 7--8; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-fix-constructible-tensor-completion",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-sf-native-adic-realization-data",
+  "def-sf-native-adic-finite-normalization",
+  "def-sf-constructible-tensor-completion-presentation",
+  "def-sf-common-stage-inclusion-tensor-comparison",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-adic-finite-realization-cocone to $T$. It identifies the integral category used by $\\mathcal C_E(T)$ with the bounded constructible complete category, with the same morphisms and reductions; it also identifies the stated constructibility conventions for $E_T,R_T$. Moreover $T$ is qcqs and $\\ell$ is invertible, so lem-fix-constructible-tensor-completion applies to these very integral representatives. Thus the specified $\\chi_{K,L}$ is a natural isomorphism. Apply the ordinary derived scalar tensor comparison to the identity geometric morphism with ring map $B_{E,T}\\to E_T$. On flat-term K-flat representatives this comparison is the cochain comparison $c$ of lem-pur-cochain-pullback-tensor-coherence, whose stated inverse is the balanced multiplication $(a\\otimes x)\\otimes(b\\otimes y)\\mapsto ab\\otimes(x\\otimes y)$, so composing it with $J_E(\\chi_{K,L})$ gives exactly $\\mu_E$ in the statement. Both factors are natural isomorphisms. Completed tensor remains integral constructible by lem-pur-integral-operations-preserve-constructible, so the codomain belongs to the stated category.",
+   "uses": [
+    "lem-sf-adic-finite-realization-cocone",
+    "lem-fix-constructible-tensor-completion",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10; Lemma 6.5.5, pp. 49–50; Stacks Tag 07A4, lemma-pullback-tensor-product"
+   }
+  },
+  {
+   "text": "Use coherent reductions $A=\\mathcal RK$, $N=\\mathcal RL$, and $H=\\mathcal RM$. Their transition adjoints are the derived scalar associators, hence invertible; these are normalized systems. Tensor expressions remain normalized because derived scalar extension is monoidal (lem-pur-cochain-pullback-tensor-coherence), so each induced transition adjoint is a tensor of invertible adjoints. The primitive tensor comparisons of lem-pur-completed-primitive-counit-comparison are invertible, and so are their recursive composites on every finite tensor expression. The normalized effectivity counit is invertible at each such system, hence so is each $\\gamma_P=e_{S_P}\\mathcal R(\\beta_P)$. Apply lem-pur-normalized-tensor-constraint-transport: the actual completed constraint is $\\beta_Q^{-1}\\mathcal L(a)\\beta_P$ and $\\gamma_Q\\mathcal R(\\widehat a)=a\\gamma_P$, with $a$ the stated reassociation, either action, or signed swap. This uses a simultaneous whole-system comparison; it does not infer equality from unrelated levelwise isomorphisms. The primitive comparisons are resolution independent, so the same assertion holds when an inner completed tensor is re-resolved.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-coef-normalized-dvr-effectivity",
+    "lem-pur-normalized-tensor-constraint-transport",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; explicit normalized whole-system refinement in the three cited nodes"
+   }
+  },
+  {
+   "text": "To identify these comparisons through the particular $\\chi$, use lem-pur-integral-ambient-operation-models: completion of the ordinary total tensor is identified with the completed quotient tensor by the balanced maps of entire strict towers, preserving their quotient augmentations and zero shifted coordinates. Thus $\\chi$ is that augmentation followed by this identification. Naturality of the cochain tensor comparisons makes its reassociation, action and swap squares the maps $a$ of step 2. Consequently the ordinary constraints are taken to the actual completed constraints through $\\chi$. Ordinary scalar extension is symmetric strong monoidal by lem-sfb-ringed-derived-monoidal-comparisons. Composing its multiplication tensorator with $J_E(\\chi)$ therefore gives all the required constraint equations for $\\mu_E$, including both unitors.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-normalized-tensor-constraint-transport",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 03EL, sites-modules-lemma-tensor-product-pullback; augmentation and counit normalization refinements"
+   }
+  },
+  {
+   "text": "For $E\\subset F$, use $j_{F/E}$ of lem-sf-adic-finite-realization-cocone and the specified scalar comparison for completed tensor in lem-pur-integral-operations-scalar-extension. To check their tensor square, replace completed scalar extension by the inverse of $\\chi_{F/E}$ from lem-weil-finite-free-completed-scalar-comparison. It is the quotient augmentation with zero shifted coordinate. The completed tensor scalar comparison itself is pinned by lem-pur-scalar-extension-tower-coherence: it is the derived limit of the strict quotient-tower tensor scalar-extension maps $\\sigma_W$, $(x\\otimes y)\\otimes b\\mapsto(x\\otimes b)\\otimes(y\\otimes1)$, with their identity and successive-extension equations. Step 3 identifies the tensor augmentations in the same way. The remaining square is therefore the balanced cochain scalar square of lem-pur-cochain-pullback-tensor-coherence: on homogeneous inputs it multiplies the same two coefficient scalars and leaves $x\\otimes y$ unchanged. The equality holds on entire quotient towers and hence after their functorial derived limits. This also checks the unit square, where the formula is multiplication. For identity and successive finite extensions the comparisons $j$ already obey the actual identity/tower equations; their compatibility with tensor is the monoidality of scalar composition in lem-sfb-ringed-derived-monoidal-comparisons. No equality of the two uniformizer filtrations is used: $\\chi_{F/E}$ uses the actual $F$-uniformizer quotient tower.",
+   "uses": [
+    "lem-sf-adic-finite-realization-cocone",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-ambient-operation-models",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-scalar-extension-tower-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 and Tag 03EL; specified quotient-augmentation scalar comparisons of the cited integral lemmas"
+   }
+  },
+  {
+   "text": "Localize the integral Hom modules as in def-weil-rationalization-karoubi and lem-sf-scalar-localization-monoidal. On pure arrows $(u\\otimes a),(v\\otimes b)$ the tensor is $(u\\widehat\\otimes v)\\otimes ab$. Map a rational arrow under $J_E$ to $aJ_E(u)$. Naturality of $\\mu_E$ then extends to pure rational arrows because both routes are $ab$ times the integral naturality equation; additivity gives the equation for sums. Balancing over $\\mathcal O_E$ is respected by linearity. Inverse comparison components localize as well, so $\\mu_E$ remains invertible. Every constraint and scalar square proved above is an equality of integral arrows and therefore remains an equality after this localization.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-sf-scalar-localization-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; agent-written raw scalar-localization calculation"
+   }
+  },
+  {
+   "text": "For $M=(E,K)$ and $N=(F,L)$ choose $G\\supset E,F$. Extend the rational $\\mu_G$ on $S_{G/E}K,S_{G/F}L$ to $R_T$ and conjugate by $j_{G/E},j_{G/F}$ and the tensor transition comparison; this defines the proposed $\\mu_{M,N}$. Step 4 says that replacing $G$ by $G'\\supset G$ gives the same map after the specified cocone comparisons. Two arbitrary choices compare at a further common extension. For arrows choose one finite field representing both arrows and the objects concerned. Their naturality square is the scalar extension of the rational square of step 5. If either representative is changed, the two representatives agree at some further common field by def-weil-algebraically-closed-coefficients, where these squares agree. Thus the tensorator is independent of object-stage choices and arrow representatives and is natural for every common-stage arrow. Its inverse is obtained in exactly the same way from $\\mu_G^{-1}$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-sf-adic-finite-realization-cocone",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 7.9; agent-written common-stage comparison argument"
+   }
+  },
+  {
+   "text": "Every associativity, symmetry, unitor, or finite scalar compatibility diagram has finitely many objects and arrows. Represent all of them over one common finite field. By steps 3–5 the corresponding finite-stage diagram commutes, and extension to $R_T$ preserves this equality. Step 6 identifies its edges with the tensorator just constructed, including the specified identity and tower maps. These are precisely the symmetric strong monoidal equations for $\\rho_T$. The coefficient object at that field is $E_T$; its comparison after extension is $R_T\\otimes_{E_T}E_T\\to R_T$, $r\\otimes e\\mapsto re$, with inverse $r\\mapsto r\\otimes1$. This is the required unit normalization.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 7.9; finite common-stage verification of coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-finite-realization-cocone",
+  "lem-fix-constructible-tensor-completion",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-pur-normalized-tensor-constraint-transport",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-scalar-extension-tower-coherence",
+  "def-weil-rationalization-karoubi",
+  "lem-sf-scalar-localization-monoidal",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5; Stacks Tags 07A4/03EL; HRS Lemma 7.9. Explicit constraint normalization and common-stage descent assembled from the cited nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient completion tensor comparison for constructible integral sheaves descends through rationalization to a coherent symmetric monoidal common stage realization",
+   "results": "[leanfinder] OK 8 hit(s); LightCondensed.instMonoidalLightCondSetLightCondModFree: (R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf: (R : Type u) →\n  [inst : CommRing R] →\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal; LightCondensed.internallyProjective_iff_tensor_condition: ∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\n  CategoryTheory.InternallyProjective P ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\n     ; LightCondensed.internallyProjective_iff_tensor_condition': ∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\n  CategoryTheory.InternallyProjective P ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\n     ; LightCondensed.free_internallyProjective_iff_tensor_condition: ∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ; LightCondensed.free_internallyProjective_iff_tensor_condition': ∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition': ∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition: ∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Monoidal\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*tensor|tensor.*completion|realization.*tensor",
+   "results": "[grep] OK 5 hit(s); Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:57: def ofTensorProduct : AdicCompletion I R ⊗[R] M →ₗ[AdicCompletion I R] AdicCompletion I M :=; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:68: lemma ofTensorProduct_tmul (r : AdicCompletion I R) (x : M) :; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:95:       (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:120:       (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).toLinearMap := by; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:129:   letI g := (TensorProduct.piScalarRight R (AdicCompletion I R) (AdicCompletion I R) ι).symm",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed integral tensor and ordinary derived scalar tensor agree with the specified associator unit and signed symmetry after common coefficient field descent",
+   "results": "[leansearch] OK 8 hit(s); TensorProduct.tensorTensorTensorAssoc_symm_tmul: (m : M) (n : N) (p : P) (q : Q) : (tensorTensorTensorAssoc R M N P Q).symm (m ⊗ₜ (n ⊗ₜ p) ⊗ₜ q) = m ⊗ₜ n ⊗ₜ (p ⊗ₜ q); Algebra.TensorProduct.assoc_symm_tmul: (a : A) (b : C) (c : D) : (TensorProduct.assoc R S A C D).symm (a ⊗ₜ (b ⊗ₜ c)) = (a ⊗ₜ b) ⊗ₜ c; TensorProduct.tensorTensorTensorAssoc_tmul: (m : M) (n : N) (p : P) (q : Q) : tensorTensorTensorAssoc R M N P Q (m ⊗ₜ n ⊗ₜ (p ⊗ₜ q)) = m ⊗ₜ (n ⊗ₜ p) ⊗ₜ q; Algebra.TensorProduct.assoc: : A ⊗[S] C ⊗[R] D ≃ₐ[S] A ⊗[S] (C ⊗[R] D); Algebra.TensorProduct.tensorTensorTensorComm.congr_simp: ∀ (R : Type uR) (R' : Type u_1) (S : Type uS) (T : Type u_2) (A : Type uA) (B : Type uB) (C : Type uC) (D : Type uD)\n  [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [inst_3 : Semiring A] [inst_4 : Algebra R A]\n  [inst_5 : Algebra S A] [inst_6 : IsScalarTower R S A] [inst_7; Bialgebra.TensorProduct.assoc: : (A ⊗[S] C) ⊗[R] D ≃ₐc[S] A ⊗[S] (C ⊗[R] D); Algebra.TensorProduct.tensorTensorTensorComm_tmul: (m : A) (n : B) (p : C) (q : D) : tensorTensorTensorComm R R' S T A B C D (m ⊗ₜ n ⊗ₜ (p ⊗ₜ q)) = m ⊗ₜ p ⊗ₜ (n ⊗ₜ q); Algebra.TensorProduct.tensorTensorTensorComm_toLinearEquiv: :\n  (tensorTensorTensorComm R R' S T A B C D).toLinearEquiv =\n    TensorProduct.AlgebraTensorModule.tensorTensorTensorComm R R' S T A B C D",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent reductions identify the actual completed tensor constraints and scalar localization preserves their common stage tensor comparisons",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Localization.Monoidal.rightUnitor_hom_app: (X : C) : (ρ_ ((L').obj X)).hom = (L').obj X ◁ (ε' L W ε).inv ≫ (μ _ _ _ _ _).hom ≫ (L').map (ρ_ X).hom; IsLocalization.moduleTensorEquiv: : M₁ ⊗[A] M₂ ≃ₗ[A] M₁ ⊗[R] M₂; IsLocalization.algebraTensorEquiv: : B ⊗[A] C ≃ₐ[A] B ⊗[R] C; IsLocalization.instIsLocalizedModuleTensorProductMap: (N N') [AddCommMonoid N] [Module R N] [AddCommMonoid N'] [Module R N'] (g : N →ₗ[R] N') [IsLocalizedModule S f]\n  [IsLocalizedModule S g] : IsLocalizedModule S (TensorProduct.map f g); CategoryTheory.Localization.Monoidal.μ: (X Y : C) : (L').obj X ⊗ (L').obj Y ≅ (L').obj (X ⊗ Y); IsLocalizedModule.rTensor: (g : M →ₗ[A] M') [h : IsLocalizedModule S g] : IsLocalizedModule S (AlgebraTensorModule.rTensor R N g); IsLocalization.tensorProduct_isLocalizedModule: : IsLocalizedModule S (TensorProduct.mk R A M 1); Finsupp.linearCombination_one_tmul: [DecidableEq ι] {v : ι → M} :\n  (linearCombination S ((1 : S) ⊗ₜ[R] v ·)).restrictScalars R =\n    (linearCombination R v).lTensor S ∘ₗ (finsuppScalarRight R R S ι).symm",
+   "date": "2026-10-22",
+   "verdict": "no match: general modules, condensed objects or categorical tools do not state this specified constructible adic comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed derived tensor comparison for constructible proetale sheaves is compatible with associator symmetry and scalar realization",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.ihomPoints_symm_comp, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, AdicCompletion.tensor_map_id_left_eq_map, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed monoidal structures, classical module completion or generic localization do not state the specified adic realization comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Monoidal\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed monoidal structures, classical module completion or generic localization do not state the specified adic realization comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*tensor|tensor.*completion|realization.*tensor",
+   "results": "5 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed monoidal structures, classical module completion or generic localization do not state the specified adic realization comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion tensor comparison descends through scalar localization as a symmetric monoidal functor",
+   "results": "8 hits: CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_hom, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp, IsLocalization.instIsLocalizedModuleTensorProductMap, CategoryTheory.Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal, CategoryTheory.LocalizedMonoidal, CategoryTheory.Localization.Monoidal.rightUnitor_hom_app, CategoryTheory.Localization.Monoidal.toMonoidalCategory, IsLocalization.tensorProduct_isLocalizedModule",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed monoidal structures, classical module completion or generic localization do not state the specified adic realization comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of integral constructible complexes tensor coherence under common finite coefficient field extension",
+   "results": "8 hits: IsIntegral.tmul, Algebra.Extension.tensorH1Cotangent, TensorProduct.toIntegralClosure, Algebra.IsIntegral.tensorProduct, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, TensorProduct.toIntegralClosure_bijective_of_tower, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.TensorProduct.instCompatibleSMulRat",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary condensed monoidal structures, classical module completion or generic localization do not state the specified adic realization comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The native obligation has no imported blueprint ancestor (ancestor prints None); supplied provenance is the evaluation/biduality clause of thm-coef-qbar-verdier. This node carries returned realization proof steps 7,8: Specified completed tensor constraints descend through continuous realization.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-adic-completed-tensor-realization-descent",
+  "worker": "stage1",
+  "summary": "No new nodes: reused ordinary derived scalar monoidality, whole-system completed constraint transport, quotient-augmentation models and finite-realization cocone; wrote explicit rational-arrow and common-field descent arguments. Statement unchanged. Checked citations, ramified/identity transitions and re-resolved iterated expressions. Return repair: rebased retained split onto the current unsplit live item, re-read all fifteen cited statements, and made the finite-realization category bridge explicit in step 1; refreshed citation coverage. No statement or route change.",
+  "blueprint": "The native obligation has no imported blueprint ancestor (ancestor prints None); supplied provenance is the evaluation/biduality clause of thm-coef-qbar-verdier. This node carries returned realization proof steps 7,8: Specified completed tensor constraints descend through continuous realization.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-tensor-completion",
+    "why": "Generic Ordinary and completed tensor agree on integral constructible complexes used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic Integral pullback and completed tensor product preserve constructibility used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-pur-completed-primitive-counit-comparison",
+    "why": "Generic Quotient-limit realization and primitive coherent-counit comparisons used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-pur-normalized-tensor-constraint-transport",
+    "why": "Generic Transport of normalized tensor constraints through coherent realization used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic Signed tensor comparison and composition on cochain sheaf pullbacks used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-pur-integral-ambient-operation-models",
+    "why": "Generic Ambient completion presentations for integral pullback and tensor used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic Monoidal and adjunction normalization of derived ringed-topos comparisons used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic Integral derived operations commute with finite scalar extension used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-sf-scalar-localization-monoidal",
+    "why": "Generic ScalarLocalizationMonoidal used as a coefficient/tensor comparison tool; the biduality unit has no replacement for this ringed-site construction."
+   },
+   {
+    "node": "lem-pur-scalar-extension-tower-coherence",
+    "why": "Generic strict quotient-tower formula pinning the completed tensor scalar-extension comparison of lem-pur-integral-operations-scalar-extension, used in step 4 as a coefficient/tensor comparison tool; the biduality unit has no node giving this formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-tensor-completion",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-pur-normalized-tensor-constraint-transport",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-scalar-localization-monoidal",
+  "lem-pur-scalar-extension-tower-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-25bb31ce2",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-25bb31ce2 (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps, no new nodes, statement unchanged), every cited statement (none changed since f9fd33f9), the unit route and the sources (BS Def 3.4.10 and Lemma 6.5.5, Stacks 07A4 and 03EL). No SGA, no repair note, no cycle. This re-delivers f9fd33f9, which was reviewed FIX but returned because the side completion never reached live. Only step 1 changed: the new cocone category-identification sentence is supported by the cocone statement. The earlier FIX was lost, and both faults are still present, so I re-verified and re-applied it. C4, step 1: 'inverse is balanced multiplication' is not in lem-weil-pbc-ringed-topoi-derived-tensor-pullback. Step 1 now cites lem-pur-cochain-pullback-tensor-coherence, whose statement gives c and its inverse (s⊗x)⊗(t⊗y)↦st⊗(x⊗y). C3, step 4: the statement of lem-pur-integral-operations-scalar-extension does not pin the tensor comparison θ. Step 4 now cites lem-pur-scalar-extension-tower-coherence (split, reviewed by Q06; no cycle), which pins θ as the derived limit of the strict σ_W maps, with identity and tower equations. That node is added to proof_deps (now equal to the union of the step uses) and to split_report.tool_uses. Steps 2-3 and 5-7 check out: β/γ are invertible on normalized systems, χ is the quotient augmentation, the localization multiplies coefficients, and common-stage equality holds at a further field. Edge cases: E=F, ramified, zero objects, odd-degree sign, empty T. All steps are under 2000 characters. Accepted tool uses: the 11 declared plus the added one. Maintainer: this FIX has now been lost once; re-apply this fixes/ file on any re-delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicCompletedTensorRealizationDescent",
+  "declaration": "WeilConjectures.AdicQbarRealization.adic_completed_tensor_realization_descent",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.CompletedTensorRealization",
+   "WeilConjectures.AdicQbarRealization.tensorStage",
+   "WeilConjectures.AdicQbarRealization.tensorIntegralObjectIso",
+   "WeilConjectures.AdicQbarRealization.tensorQuotientIso",
+   "WeilConjectures.AdicQbarRealization.tensorDescentFiniteBalanceSections",
+   "WeilConjectures.AdicQbarRealization.tensorDescentFiniteRepresentative",
+   "WeilConjectures.AdicQbarRealization.tensorDescentFiniteTensorAgreement",
+   "WeilConjectures.AdicQbarRealization.CompletedTensorFiniteNormalization",
+   "WeilConjectures.AdicQbarRealization.CompletedTensorRealizationDescent",
+   "WeilConjectures.AdicQbarRealization.adic_completed_tensor_realization_descent"
+  ],
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorRealizationDescent.lean",
+  "statement": "theorem adic_completed_tensor_realization_descent (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (T : Over (Spec (CommRingCat.of D.k))) [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom] (R : LocallyFiniteAdicRealization.Realization l T.left) : Nonempty (CompletedTensorRealizationDescent l T.left R)",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Tensor-only descent with canonical finite quotient normalization and all common-stage coherence equations. The common tensorator is pinned by balance_sections, representative and integral_tensor at every finite field; no independent finite rational realization System is asserted. Uses the existing native realization and actual source tensor constraints, without requiring the additional internal-Hom invertibility field of NativeAdicRealizationData.At."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab1fcb7ab",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Re-delivery of 4bf1b9b4890a (RETURN H2+H3). Diff vs that snapshot: the only changes are the removed CompletedTensorRealizationDescent.finite field, the removed theorem stmt_dep lem-zl-rational-realization-tensor-comparison, and updated docstring/note/report. This is exactly prescribed correction (a); imports, signature, other declarations and proof steps are unchanged. Re-checked: mu_E is pinned by balance_sections (pure-section formula with 1 on the right factor), representative (K-flat counit square) and integral_tensor (HEq through the actual R.integral and stageTensor, same pattern as the landed NativeAdicFiniteNormalization.finiteTensorAgreement). The common tensorator is natural on the actual Hom colimit, with associative/left_unit/right_unit/symmetric against the actual pullbackTensorCommon constraints. Finite-stage mu_E iso/coherence follows via the faithful, conservative extension E_T->R_T. Scalar/identity/tower compatibility follows from naturality plus R.common_field. The unit is fixed by left_unit. All 17 stmt_dep records equal live; the live item has the same statement and proof (N8 FIX present) and no lean binding. lean.statement is verbatim; one sorry; docstrings carry source/blueprint and the 7 steps. No extra hypotheses or universe restriction. Edge cases (empty T, zero, odd degrees, E=F, towers, ramified) covered. Advisory: def owners not in stmt_deps (pbc-bounded-constructible-tower, coef-ringed-tensor-hom-model, pc-kflat-complex, a1-flat-term-kflat-complex). No file changed, no compile run."
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-projective-line-overlap-laurent-coordinates",
+ "kind": "statement",
+ "title": "Laurent evaluation identifies the projective-line overlap ring",
+ "statement": "Let $k$ be a field [def-weil-field], $P=\\mathbf P^1_k$, $U_0=D_+(x_0)$, $U_1=D_+(x_1)$ and $U=U_0\\cap U_1$ [def-sc-p1-standard]. Let $c:k\\to\\Gamma(U,\\mathcal O_P)$ be the structural map on functions and $q=x_0/x_1\\in\\Gamma(U,\\mathcal O_P)^\\times$ the standard ratio unit. The ring map $k[z,z^{-1}]\\to\\Gamma(U,\\mathcal O_P)$ [def-weil-laurent-polynomial-ring] defined by Laurent evaluation, $a z^m\\mapsto c(a)q^m$, is bijective.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD, proof specialized to n=1 over a field; OverlapLaurentCoordinates"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-p1-standard",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved theorem ProjectiveSpace.bijective_sum_awayMonomial for the full set of the two homogeneous coordinates [def-sc-p1-standard, def-nagata-homogeneous-localization-degree-zero]. It identifies overlap sections with finitely supported coefficients on degree-zero exponent vectors. The map m ↦ (m,-m) is an equivalence from the integers to those vectors: the sum-zero condition determines the second coordinate, and there is no nonnegativity restriction outside the full set.",
+   "uses": [
+    "def-sc-p1-standard",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare the open called overlap with the intersection of the standard opens. Restriction between these equal opens is bijective. Compute the restriction of ratioUnit 0 1 by map_ratio, using denominator x_0 x_1. Its numerator is x_0 squared, exactly the awayMonomial for exponent vector (1,-1) written with that denominator. The multiplication and zero identities for awayMonomial show that its inverse is the vector (-1,1), and its integer powers are the vectors (m,-m).",
+   "uses": [
+    "def-sc-p1-standard",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Reindex the finitely supported monomial basis by the equivalence m ↦ (m,-m). LaurentPolynomial.eval₂_C_mul_T [def-weil-laurent-polynomial-ring] and the power computation identify Laurent evaluation term by term with the monomial-basis bijection. Both maps respect finite sums, so evaluation after restriction is bijective. Since restriction is a bijection, evaluation itself is bijective.",
+   "uses": [
+    "def-weil-laurent-polynomial-ring"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G4",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BXJ, proof of lemma-Pic-projective-space-UFD; implemented using the existing proved monomial basis of TwistSections and the monomial multiplication API of LineDifferentials."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The ring of regular functions on the intersection of the two standard affine charts of the projective line is the Laurent polynomial ring",
+   "results": "8 hits: LaurentPolynomial, LaurentPolynomial.isLocalization, instModulePolynomial, Polynomial.toLaurentAlg_apply, Polynomial.toLaurent_eq_zero, instIsScalarTowerPolynomial, algebraPolynomial, Polynomial.toLaurent.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero homogeneous localization of k[X,Y] at XY is isomorphic to Laurent polynomials in X/Y",
+   "results": "8 hits: LaurentPolynomial.isLocalization, mk'_one_X, RatFunc.laurent, LaurentPolynomial.mk'_eq, mk'_one_X_pow, Polynomial.toLaurent_X, RatFunc.laurentAux_ofFractionRing_mk, RatFunc.coe_X.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  },
+  {
+   "tool": "grep",
+   "query": "LaurentPolynomial.eval₂|bijective_sum_awayMonomial|laurentExponents",
+   "results": "0 Mathlib matches through msearch. Local source inspection found bijective_sum_awayMonomial in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections and polynomial chart coordinates in LineDifferentials, but no concrete Laurent overlap evaluation theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching sheaf/chart theorem. The returned algebraic facts are used where applicable, but do not identify the concrete projective-line chart maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.LineInvertibleClassification",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof of lem-sfb-projective-line-invertible-classification: OverlapLaurentCoordinates",
+   "via": [
+    "lem-sfb-projective-line-invertible-classification",
+    "lem-sfb-projective-line-twist-rigidity",
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.OverlapLaurentCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/OverlapLaurentCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.bijective_overlap_laurent",
+  "statement": "theorem bijective_overlap_laurent (k : Type u) [Field k] :\n    Function.Bijective\n      (LaurentPolynomial.eval₂\n        (chartConst k (standardOpen _ (Spec (.of k)) (⟨0⟩ : ULift.{u} (Fin 2)) ⊓\n          standardOpen _ (Spec (.of k)) (⟨1⟩ : ULift.{u} (Fin 2))))\n        (ratioUnit (ULift.{u} (Fin 2)) (Spec (.of k)) ⟨0⟩ ⟨1⟩))",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T094333-L-215633",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261027T112348-L-1575801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

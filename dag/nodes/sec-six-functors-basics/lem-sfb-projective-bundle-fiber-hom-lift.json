@@ -1,0 +1,176 @@
+{
+ "id": "lem-sfb-projective-bundle-fiber-hom-lift",
+ "kind": "statement",
+ "title": "Lifting a projective-bundle fibre isomorphism as a morphism",
+ "statement": "Let S be a scheme [def-pc-scheme], E a quasi-coherent finite locally free module of constant rank r >= 2 [def-amb-finite-locally-free-module], and p:P(E)->S the canonical symmetric-algebra relative Proj [def-trf-canonical-symmetric-graded-algebra]. Let M,N be invertible modules on P(E) [def-sc-invertible-module], and s a point of S. Assume the tensor-formula pullbacks of M,N to the residue-field fibre at s are isomorphic [def-pc-scheme-fibre, def-pc-module-pullback]. There exist an open U containing s and a morphism phi:M|p^{-1}(U)->N|p^{-1}(U) such that its tensor-formula pullback along the fibre inclusion of p|U at the point (s,s in U) is an isomorphism. No invertibility of phi over p^{-1}(U) itself is asserted.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "lemma-perfect-direct-image and remark-explain-perfect-direct-image (Noetherian fibre-section lifting), combined with limits.tex lemma-descend-invertible-modules and finite-presentation map descent; EGA II Remark 4.2.7 announces the related classification."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-sc-invertible-module",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to an affine base neighbourhood trivializing E. Quotient geometry identifies its bundle with projective space. First suppose the base ring is Noetherian. Put F=M dual tensor N; the fibre isomorphism gives F_s isomorphic to O and a generator of it. The projection is proper and flat, by polynomial charts, and F is flat over the base. Its trivial fibre has H^1=0 by projective-space cohomology. Lift the fibre generator by proper flat fibre-section lifting. Tensor-Hom duality converts the lifted section into a morphism from M to N. Under the canonical identifications its pullback to the restricted projection fibre is the given isomorphism, hence invertible. This step does not prove invertibility on the neighbourhood.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-nagata-polynomial-projection-flat",
+    "lem-pc-projective-space-twist-cohomology",
+    "lem-sfb-proper-flat-fibre-section-lifting",
+    "def-sc-invertible-module",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "lemma-perfect-direct-image and remark-explain-perfect-direct-image (Noetherian fibre-section lifting), combined with limits.tex lemma-descend-invertible-modules and finite-presentation map descent; EGA II Remark 4.2.7 announces the related classification."
+   }
+  },
+  {
+   "text": "For an arbitrary affine ring A, express Spec A as the limit of its finite-type integer approximations. The corresponding projective spaces are qcqs with affine transitions and the expected limit. Descend M and N to a common Noetherian stage. The original fibre is the limit of the residue-field fibres at the image points. Finite-presentation isomorphism descent places the fibre isomorphism and its inverse at a later stage. Apply the Noetherian lifting step there, and pull its open and morphism back. Compatibility with fibre products and pullback composition identifies the fibre pullback with a pullback of an isomorphism. View the resulting open inside the original S. No removal of the non-isomorphism locus is performed.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-weil-pbc-limit-residue-field",
+    "lem-trf-fp-module-limit-isomorphism-descent",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "lemma-perfect-direct-image and remark-explain-perfect-direct-image (Noetherian fibre-section lifting), combined with limits.tex lemma-descend-invertible-modules and finite-presentation map descent; EGA II Remark 4.2.7 announces the related classification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pc-projective-space-twist-cohomology",
+  "lem-sfb-proper-flat-fibre-section-lifting",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-weil-pbc-limit-residue-field",
+  "lem-trf-fp-module-limit-isomorphism-descent",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "lemma-perfect-direct-image and remark-explain-perfect-direct-image (Noetherian fibre-section lifting), combined with limits.tex lemma-descend-invertible-modules and finite-presentation map descent; EGA II Remark 4.2.7 announces the related classification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between invertible sheaves on a projective bundle can be lifted from a residue field fiber to the inverse image of a base neighborhood, as a homomorphism whose fiber pullback is invertible",
+   "results": "Eight hits, including openToLocalization and Proj.fromOfGlobalSections_morphismRestrict; all describe basic projective-spectrum sections and maps, none lifts a homomorphism between line bundles.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Iso\"",
+   "results": "Twelve hits, including PresheafOfModules.isoMk, reflection of isomorphisms by sheaf forgetful functors, and freeSumIso; none concerns fibre homomorphism lifting.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*iso|iso.*fiber|section.*lifting; fiber.hom.lift|fibre.hom.lift; repository projective bundle and fibre lifting searches",
+   "results": "Mathlib grep returned unrelated fibre algebra declarations. The repository ProperFlatFibreSectionLifting gives the Noetherian section lift only after flatness and H1 hypotheses are established. CompleteLocalDiagonalizableFibreHomLift concerns group schemes, not projective bundles. DAG/blueprint searches found the parent fibre-isomorphism spreading node and its local-normal-form ancestors, not this pre-shrinking lifting step.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of the lifting step; reuse existing section lifting in its proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberIsoSpread",
+  "date": "2026-10-27",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Fibre-generator lifting part of the local-normal-form argument, before removal of the closed image of the non-generation locus.",
+   "via": [
+    "lem-sfb-projective-bundle-fiber-iso-spread",
+    "lem-sfb-projective-bundle-local-normal-form",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberHomLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleFiberHomLift.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_fiber_hom_lift",
+  "statement": "theorem projective_bundle_fiber_hom_lift (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)\n    (M N : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules)\n    (hM : M.IsInvertible) (hN : N.IsInvertible) (s : S)\n    (e : Nonempty\n      ((tensorPullback\n        ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.fiberι s)).obj M ≅\n        (tensorPullback\n          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.fiberι s)).obj N)) :\n    ∃ (U : S.Opens) (hs : s ∈ U)\n      (φ : (tensorPullback\n        ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ U).ι).obj M ⟶\n        (tensorPullback\n          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ U).ι).obj N),\n      IsIso ((tensorPullback\n        (((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ∣_ U).fiberι\n          (⟨s, hs⟩ : U.toScheme))).map φ)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T123523-L-2315649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T123523-L-2315649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

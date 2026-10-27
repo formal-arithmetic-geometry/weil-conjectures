@@ -1,0 +1,98 @@
+{
+ "id": "lem-z8-shifted-composite-comparison",
+ "kind": "statement",
+ "title": "Shifted Composite Comparison",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem shifted_composite_comparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]\n    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)\n    [F.CommShift ℤ] [G.CommShift ℤ] [H.CommShift ℤ]\n    (c : H ⟶ F ⋙ G) [NatTrans.CommShift c ℤ]\n    (X : C) (Y : D) (Z : E) (e : F.obj X ⟶ Y) (e' : G.obj Y ⟶ Z)\n    (e'' : H.obj X ⟶ Z) (he : c.app X ≫ G.map e ≫ e' = e'') (n : ℤ) :\n    c.app (X⟦n⟧) ≫\n        G.map ((F.commShiftIso n).hom.app X ≫ e⟦n⟧') ≫\n        (G.commShiftIso n).hom.app Y ≫ e'⟦n⟧' =\n      (H.commShiftIso n).hom.app X ≫ e''⟦n⟧'",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the shift functor to the unshifted composition equation. Naturality of the shift-commutation isomorphism moves the coefficient comparison through the shift; the composite-functor commutation law identifies the resulting composite with the shifted compositor.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ShiftedCompositeComparison",
+  "file": "lean/Sheaf/CategoryTheory/ShiftedCompositeComparison.lean",
+  "declaration": "CategoryTheory.shifted_composite_comparison",
+  "declarations": [
+   "CategoryTheory.shifted_composite_comparison"
+  ],
+  "statement": "theorem shifted_composite_comparison\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]\n    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)\n    [F.CommShift ℤ] [G.CommShift ℤ] [H.CommShift ℤ]\n    (c : H ⟶ F ⋙ G) [NatTrans.CommShift c ℤ]\n    (X : C) (Y : D) (Z : E) (e : F.obj X ⟶ Y) (e' : G.obj Y ⟶ Z)\n    (e'' : H.obj X ⟶ Z) (he : c.app X ≫ G.map e ≫ e' = e'') (n : ℤ) :\n    c.app (X⟦n⟧) ≫\n        G.map ((F.commShiftIso n).hom.app X ≫ e⟦n⟧') ≫\n        (G.commShiftIso n).hom.app Y ≫ e'⟦n⟧' =\n      (H.commShiftIso n).hom.app X ≫ e''⟦n⟧'",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

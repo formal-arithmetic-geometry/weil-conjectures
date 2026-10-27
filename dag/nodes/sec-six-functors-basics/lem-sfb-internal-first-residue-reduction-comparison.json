@@ -1,0 +1,140 @@
+{
+ "id": "lem-sfb-internal-first-residue-reduction-comparison",
+ "kind": "statement",
+ "title": "Natural common first-residue comparison of internal derived scalar functors",
+ "statement": "Let l be prime, E a finite extension of Q_l in universe u, and X any scheme in universe u. Use the actual continuous integral and first-quotient ring objects and derived reduction of [sk-def-pe-derived-completion], the constant coefficient scalar and quotient maps of [def-sfb-integral-models-stacks-data], and the inverse integral point comparison of [def-sfb-integral-constant-model-realization]. There exists an isomorphism e from the continuous condensed first residue ring to the constant condensed first residue ring such that the following functors on the unbounded derived category of actual continuous integral modules are naturally isomorphic: first restrict along the inverse integral point comparison, then along the constant-to-continuous integral map, then derive extension along the constant first quotient; or first apply the actual derivedReduction at index zero and then restrict along the pullback of e inverse. There is no Noetherian, constructibility, Tor-amplitude, boundedness, or completeness hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1)--(2), first quotient comparison; Stacks 099L, 09C1, 08FZ"
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary first-residue comparison to obtain the residue ring isomorphism e, flatness of the combined integral scalar map a, and the natural ordinary tensor isomorphism. Combine the two exact integral restriction functors using comapComp and mapDerivedCategoryCompIso.",
+   "uses": [
+    "lem-sfb-internal-first-residue-ordinary-comparison",
+    "def-sfb-integral-constant-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flat scalar restriction preserves native K-flat complexes. Identify native K-flatness with preservation of acyclicity by total tensor, then use the internal-section tensor comparison. The section-module comap and regular-module isomorphisms identify the restricted regular module and restriction functor with their ordinary sheaf-module counterparts. Flat scalar restriction preserves K-flatness there; transport back through the same comparisons.",
+   "uses": [
+    "lem-sfb-integral-coefficient-square-normalization",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-weil-pbc-flat-scalar-restriction-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every internal complex admits a quasi-isomorphic native K-flat resolution. On this resolving class both scalar-extension computation counits are invertible, by the preceding restriction result on the left and native K-flatness on the right. Exact scalar restrictions have invertible localization factors on every complex. Apply resolving_square_iso to the termwise ordinary tensor comparison and these four computation transformations. Its descended natural isomorphism, composed with the integral restriction composition isomorphism, is exactly the asserted pair of derived functors.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pe-internal-kflat-scalar-tower-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-first-residue-ordinary-comparison",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sfb-integral-coefficient-square-normalization",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pe-internal-kflat-scalar-tower-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K9",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1)--(2), first quotient comparison; Stacks 099L, 09C1, 08FZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A flat homomorphism of ring sheaves inducing the same quotient identifies derived reduction before and after restriction of scalars",
+   "results": "{\"t\": \"2026-10-25T10:24:39Z\", \"tool\": \"leansearch\", \"query\": \"A flat homomorphism of ring sheaves inducing the same quotient identifies derived reduction before and after restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.Flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Derivation.restrictScalars\"], \"digest\": \"059fbd43827a6c2c\"}",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib theorem identifies these two internal residue functors; repository common-quotient and section-action declarations give the proof plan."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat homomorphism of ring sheaves inducing the same quotient identifies derived reduction before and after restriction of scalars",
+   "results": "{\"t\": \"2026-10-25T10:28:43Z\", \"tool\": \"leanfinder\", \"query\": \"A flat homomorphism of ring sheaves inducing the same quotient identifies derived reduction before and after restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"RingHom.Flat.propertyIsLocal\", \"Module.Flat.of_shrink\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.ofLocalizationPrime\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat\"], \"digest\": \"77644f37413459a7\"}",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib theorem identifies these two internal residue functors; repository common-quotient and section-action declarations give the proof plan."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso",
+   "results": "{\"t\": \"2026-10-25T10:12:10Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib theorem identifies these two internal residue functors; repository common-quotient and section-action declarations give the proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorAmplitude|constantToContinuous|QObjTensorUnitIso",
+   "results": "{\"t\": \"2026-10-25T10:13:16Z\", \"tool\": \"grep\", \"query\": \"finiteTorAmplitude|constantToContinuous|QObjTensorUnitIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib theorem identifies these two internal residue functors; repository common-quotient and section-action declarations give the proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalResidueStacksComparison",
+  "date": "2026-10-25",
+  "group": "T6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Integral-models proof (1)--(2): the flat constant-to-continuous integral map identifies the first quotient and both derived residue reductions.",
+   "via": [
+    "lem-sfb-internal-residue-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalFirstResidueReductionComparison",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalFirstResidueReductionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_first_residue_reduction_comparison",
+  "statement": "theorem internal_first_residue_reduction_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :\n    ∃ e : Mon.mk (DerivedNakayama.quotientRing l E 1) ≅\n        Mon.mk (IntegralModelsStacks.discreteObj (Padic.coefficientExtensionRing l E 1)),\n      Nonempty\n        ((Mod.comap (coefficientMap\n            (IntegralConstantModel.pointComparison l E).inv.hom X)).mapDerivedCategory ⋙\n          IntegralModelsStacks.restriction l E X ⋙\n          (Mod.extendScalars (IntegralModelsStacks.residueMap l E X)).leftDerivedFunctor ≅\n        AdicCompletion.derivedReduction l E X 0 ⋙\n          (Mod.comap (coefficientMap e.inv.hom X)).mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T123929-L-1918437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T163840-L-862164",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

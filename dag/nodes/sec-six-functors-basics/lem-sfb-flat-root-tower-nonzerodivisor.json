@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-flat-root-tower-nonzerodivisor",
+ "kind": "statement",
+ "title": "Nonzerodivisors in a flat simultaneous-root tower",
+ "statement": "Let $A,R$ be commutative rings and $a:A\\to R$ a flat ring map [def-weil-pbc-flat-ring-map]. Let $r\\geq0$, $t_1,\\ldots,t_r\\in A$, and $c\\in A$ such that multiplication by $c$ is injective on $A$. Let $I$ be a set of positive integers containing $1$, ordered by divisibility, such that every pair in $I$ has a common multiple in $I$. For $n\\in I$ put\n$$R_n=R[x_{1,n},\\ldots,x_{r,n}]/(x_{d,n}^{n}-a(t_d))_{1\\leq d\\leq r},$$\nusing polynomial rings [def-weil-pbc-mv-polynomial-ring]. Give these rings the $R$-algebra transition maps $x_{d,n}\\mapsto x_{d,m}^{m/n}$ for $n\\mid m$, and let $S=\\varinjlim_{n\\in I}R_n$ be their ring colimit [def-weil-pbc-category-colimit]. Let $Q$ be any commutative $S$-algebra whose structure map $S\\to Q$ is flat. Then multiplication by the image of $c$ is injective on $R$, on every $R_n$, on $S$, and on $Q$. No injectivity of the transition maps, characteristic assumption, invertibility of the integers $n$, normality or Noetherian hypothesis is required. The rings $R$ or $Q$ may be zero. For $r=0$ every $R_n=R$ and $S=R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent extraction and algebraic generalization of returned Steps 7 and 8: Tag 00HB (algebra-definition-flat), iterated monic polynomial division as used by lem-weil-pbc-monic-quotient-free, and categories.tex Section directed-colimits, eventual-equality description preceding Tag 002W (categories-lemma-directed-commutes). The full tower assertion is an agent assembly of these arguments."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-sfb-simultaneous-root-tower",
+  "def-sfb-parameter-root-algebra"
+ ],
+ "proof": [
+  {
+   "text": "The divisibility poset $I$ is small and filtered: it is a subset of the positive integers, contains $1$, and the common-multiple hypothesis supplies upper bounds; parallel arrows in a poset are unique. For $n\\mid m$, evaluation sends each relation $x_{d,n}^n-a(t_d)$ to $(x_{d,m}^{m/n})^n-a(t_d)=x_{d,m}^m-a(t_d)=0$, so descends to an $R$-algebra homomorphism $u_{nm}:R_n\\to R_m$. For $n\\mid m\\mid k$, both $u_{mk}u_{nm}$ and $u_{nk}$ fix $R$ and send $x_{d,n}$ to $x_{d,k}^{(k/m)(m/n)}=x_{d,k}^{k/n}$; polynomial evaluation and surjectivity of the quotient map make them equal. The same calculation gives $u_{nn}=\\mathrm{id}$. Thus these maps define the stated diagram and its ring-colimit cocone.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), filteredness; polynomial evaluation and quotient definitions"
+   }
+  },
+  {
+   "text": "Apply lem-trf-flat-tensor-preserves-injection over $A$ with flat module $R$ to the injective $A$-linear map $\\mu_c:A\\to A$, $b\\mapsto cb$. Identify $R\\otimes_A A$ with $R$ by $r\\otimes b\\mapsto r a(b)$, with inverse $r\\mapsto r\\otimes1$. The tensor relations give both inverse identities, and $\\mathrm{id}_R\\otimes\\mu_c$ becomes $r\\mapsto a(c)r$. Therefore multiplication by $a(c)$ is injective on $R$.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB (definition-flat), applied to multiplication; tensor identification from Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "Fix a positive n. Induct on the number r of parameters. For r=0, evaluation into R and the coefficient map are inverse by quotient and polynomial extensionality, so regularity follows from step 2. In the successor step let B be the simultaneous-root quotient for the tail parameters, and let T=B[X]/(X^n-t_0). The polynomial is monic, so lem-weil-pbc-monic-quotient-free makes T free over B, hence flat. Apply the same flat preservation of regularity as in step 2 to the induction hypothesis on B. Define a map f from the full simultaneous-root quotient to T by sending the first variable to the new root and each tail variable to its image from B. All root equations hold, so quotient evaluation gives an R-algebra homomorphism. Conversely the tail roots define B to the full quotient, and adjoining its first root defines g:T to the full quotient. The composite gf fixes every root and coefficient and is the identity by quotient and polynomial extensionality. Thus f is injective; R-linearity transports regularity from T to the full quotient. This proof works also for zero rings and needs no hypothesis on the parameters.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), monic quotient finite free; iterated monic-division argument"
+   }
+  },
+  {
+   "text": "Write $\\iota_n:R_n\\to S$ for the colimit maps and $c_S$ for the image of $c$. For $z\\in S$ with $c_Sz=0$, clause (1) of lem-pc-filtered-colimit-commrings-elementwise gives $z=\\iota_n(b)$. Thus $\\iota_n(c_nb)=\\iota_n(0)$, where $c_n$ is the image of $c$ in $R_n$. Clause (2) supplies a stage $m$ and arrows $n\\to m$ making the two representatives equal; these arrows coincide because $I$ is a poset. Hence $c_m u_{nm}(b)=0$. Step 3 gives $u_{nm}(b)=0$, and the cocone identity gives $z=\\iota_m(u_{nm}(b))=0$. A multiplication map of abelian groups is injective when its kernel is zero, since equal images imply the difference is in the kernel. Therefore multiplication by $c_S$ is injective on $S$. No injectivity of any $u_{nm}$ was used.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04AX (section-directed-colimits), eventual-equality description preceding Tag 002W; Algebra Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit)"
+   }
+  },
+  {
+   "text": "Apply lem-trf-flat-tensor-preserves-injection over $S$ with flat module $Q$ to the injective $S$-linear multiplication map $\\mu_{c_S}:S\\to S$ from step 4. The inverse maps $Q\\otimes_S S\\to Q$, $q\\otimes s\\mapsto q s$, and $q\\mapsto q\\otimes1$ identify this tensor map with multiplication by the image of $c$ on $Q$, exactly as in step 2. It is therefore injective. These arguments allow zero target rings: the unique endomorphism of the zero module is injective. Only positivity of $n$, flatness of the two supplied structure maps and filteredness were used; characteristic, invertibility, normality and Noetherian assumptions are unnecessary.",
+   "uses": [
+    "lem-trf-flat-tensor-preserves-injection",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB (definition-flat), applied to multiplication; tensor identification from Tag 00CX (lemma-tensor-product)"
+   }
+  },
+  {
+   "text": "For r=0, define evaluation from each root quotient to R using the empty variable family. Its composite with the coefficient map is the identity by algebra-homomorphism commutation, and the other composite fixes all (empty) variables, hence is the identity by quotient and polynomial extensionality. Thus each coefficient map is bijective. The colimit coefficient map is surjective because each colimit element has a representative at a stage and each stage element is a coefficient. It is injective because equality of the images of two coefficients eventually holds at a later stage; the transition maps preserve coefficients and the later-stage coefficient map is injective. RingEquiv.ofBijective gives the displayed equivalences with exactly the specified coefficient maps.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-category-colimit",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Colimit universal property, Tags 002F and 04AX; empty polynomial-variable and quotient conventions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of flat tensoring (00HB), iterated monic division (04GG), and the filtered-colimit representative description (categories.tex 04AX; algebra.tex 00D6 and 00D7). Lean realization by S5: IsSMulRegular.of_flat packages the tensor argument, and the finite-stage induction uses an explicit split injection into a monic extension. The empty-family colimit is identified by representative surjectivity and eventual equality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(AdjoinRoot|DirectLimit|FilteredColimit).*(nonZeroDivisors|[Ii]sRegular)|(nonZeroDivisors|[Ii]sRegular).*(AdjoinRoot|DirectLimit|FilteredColimit)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scalar-extension preservation and single monic-quotient freeness are components; none constructs the simultaneous-root directed system or proves its colimit regular-element assertion in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, nonZeroDivisors",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scalar-extension preservation and single monic-quotient freeness are components; none constructs the simultaneous-root directed system or proves its colimit regular-element assertion in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzerodivisor stays a nonzerodivisor after a flat base change followed by a filtered colimit of simultaneous monic root extensions and another flat base change",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.of_flat, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, TensorProduct.toIntegralClosure_injective_of_flat, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsRegular.of_faithfullyFlat, IsReduced.tensorProduct_of_flat_of_forall_fg, RingHom.isStandardSmooth_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scalar-extension preservation and single monic-quotient freeness are components; none constructs the simultaneous-root directed system or proves its colimit regular-element assertion in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of multiplication by a regular element in a filtered direct limit of polynomial quotients by monic root equations",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch rate limit exceeded"
+  },
+  {
+   "tool": "grep",
+   "query": "nonZeroDivisors|IsRegular|Module.Free|Module.Flat",
+   "results": "3 hits: 648, 656, 1095; searched Mathlib/RingTheory/AdjoinRoot.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scalar-extension preservation and single monic-quotient freeness are components; none constructs the simultaneous-root directed system or proves its colimit regular-element assertion in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular elements remain regular in the direct limit of rings R indexed by divisibility with roots x_i of t_i and relations x_i^n equals t_i, also after flat scalar extension",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.of_flat, RingTheory.Sequence.IsRegular.of_faithfullyFlat, RingTheory.Sequence.IsWeaklyRegular.of_isLocalization, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scalar-extension preservation and single monic-quotient freeness are components; none constructs the simultaneous-root directed system or proves its colimit regular-element assertion in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "free_adjoinRoot|free_quotient|IsSMulRegular.of_flat",
+   "results": "8 hits: Mathlib/RingTheory/Finiteness/ModuleFinitePresentation.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean; read Polynomial.Monic.free_adjoinRoot (Mathlib/RingTheory/AdjoinRoot.lean:648), free_quotient (:655), and IsSMulRegular.of_flat (Mathlib/RingTheory/Flat/Basic.lean:633)",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scalar-extension preservation and single monic-quotient freeness are components; none constructs the simultaneous-root directed system or proves its colimit regular-element assertion in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzerodivisor stays regular after flat base change and a filtered colimit of simultaneous monic root extensions",
+   "results": "{\"t\": \"2026-10-22T07:09:06Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzerodivisor stays regular after flat base change and a filtered colimit of simultaneous monic root extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"IsSMulRegular.of_flat\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.Flat.isSMulRegular_of_nonZeroDivisors\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"Module.Flat.isSMulRegular_of_isRegular\"], \"digest\": \"af0e4168ba9980ac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide flat scalar preservation or single-root components, not the full simultaneous-root filtered-colimit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(AdjoinRoot|DirectLimit|FilteredColimit).*(nonZeroDivisors|IsRegular)|(nonZeroDivisors|IsRegular).*(AdjoinRoot|DirectLimit|FilteredColimit)",
+   "results": "{\"t\": \"2026-10-22T07:09:21Z\", \"tool\": \"grep\", \"query\": \"(AdjoinRoot|DirectLimit|FilteredColimit).*(nonZeroDivisors|IsRegular)|(nonZeroDivisors|IsRegular).*(AdjoinRoot|DirectLimit|FilteredColimit)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide flat scalar preservation or single-root components, not the full simultaneous-root filtered-colimit assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular element stays regular in a filtered colimit of simultaneous root algebras after flat base change",
+   "results": "{\"t\": \"2026-10-22T07:09:22Z\", \"tool\": \"leansearch\", \"query\": \"A regular element stays regular in a filtered colimit of simultaneous root algebras after flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"LieAlgebra.IsRegular\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"LieModule.IsRegular\", \"IsRegular\", \"LieAlgebra.isRegular_def\"], \"digest\": \"4e7bb2a9fa5c57dc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide flat scalar preservation or single-root components, not the full simultaneous-root filtered-colimit assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, nonZeroDivisors",
+   "results": "{\"t\": \"2026-10-22T07:09:24Z\", \"tool\": \"loogle\", \"query\": \"AdjoinRoot, nonZeroDivisors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide flat scalar preservation or single-root components, not the full simultaneous-root filtered-colimit assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSMulRegular.of_flat|powerBasis.|free_quotient",
+   "results": "{\"t\": \"2026-10-22T07:09:36Z\", \"tool\": \"grep\", \"query\": \"IsSMulRegular.of_flat|powerBasis.|free_quotient\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"Mathlib/RingTheory/PowerBasis.lean\", \"Mathlib/RingTheory/PowerBasis.lean\", \"Mathlib/RingTheory/PowerBasis.lean\", \"Mathlib/RingTheory/PowerBasis.lean\", \"Mathlib/RingTheory/PowerBasis.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\"], \"digest\": \"a9366da26d625133\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide flat scalar preservation or single-root components, not the full simultaneous-root filtered-colimit assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of multiplication on a directed union of algebras obtained by adjoining finitely many roots of powers of parameters",
+   "results": "{\"t\": \"2026-10-22T07:09:38Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of multiplication on a directed union of algebras obtained by adjoining finitely many roots of powers of parameters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.σ_injective\", \"Algebra.PreSubmersivePresentation.map_inj\", \"minpoly.aux_inj_roots_of_min_poly\", \"AdjoinRoot.coe_injective\", \"Algebra.Extension.σ_injective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"IsPurelyInseparable.injective_comp_algebraMap\", \"AdjoinRoot.of.injective_of_degree_ne_zero\"], \"digest\": \"77fa3f1776819d54\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide flat scalar preservation or single-root components, not the full simultaneous-root filtered-colimit assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-root-limit-normal-charts",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: boundary nonzerodivisors on the full parameter-root limit; extract flat tensoring, the monomial basis at finite root stages and eventual equality in the colimit from returned Steps 7 and 8.",
+   "via": [
+    "lem-sfb-snc-root-limit-normal-charts",
+    "lem-sfb-root-tower-lisse-morphism-extension",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-flat-root-tower-nonzerodivisor",
+  "worker": "stage1",
+  "summary": "Six proof steps using existing DAG tools only: verify the diagram, tensor the regular multiplication map to R, induct over single-root monic quotients, pass injectivity to the filtered colimit by eventual equality, tensor to Q, and verify the r=0 convention. No statement correction or new node. Zero intermediate rings treated before invoking polynomial degree.",
+  "blueprint": "Current blueprint det-thm-sf-ctf-stability-direct-images clause (3), open-direct-image branch, through lem-sfb-snc-root-limit-normal-charts returned Steps 7 and 8. The inherited ancestor command returns None; retained its supplied from.node=null and via chain.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-category-colimit",
+    "why": "Generic algebra definition or tool for the flat/root/colimit assembly; this preserves the unit open-direct-image route and no unit-specific replacement is being made."
+   },
+   {
+    "node": "def-weil-pbc-mv-polynomial-ring",
+    "why": "Generic algebra definition or tool for the flat/root/colimit assembly; this preserves the unit open-direct-image route and no unit-specific replacement is being made."
+   },
+   {
+    "node": "def-weil-pbc-algebra-hom-quotient",
+    "why": "Generic algebra definition or tool for the flat/root/colimit assembly; this preserves the unit open-direct-image route and no unit-specific replacement is being made."
+   },
+   {
+    "node": "lem-trf-flat-tensor-preserves-injection",
+    "why": "Generic algebra definition or tool for the flat/root/colimit assembly; this preserves the unit open-direct-image route and no unit-specific replacement is being made."
+   },
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "Generic algebra definition or tool for the flat/root/colimit assembly; this preserves the unit open-direct-image route and no unit-specific replacement is being made."
+   },
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "Generic algebra definition or tool for the flat/root/colimit assembly; this preserves the unit open-direct-image route and no unit-specific replacement is being made."
+   },
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Generic algebra definition or tool for the flat/root/colimit assembly; this preserves the unit open-direct-image route and no unit-specific replacement is being made."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-trf-flat-tensor-preserves-injection",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-00bdcda71",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-00bdcda71 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. There are no new nodes and the statement is unchanged. The item is not on the drop list and is unsplit live, and it matches its use in Step 5 of lem-sfb-snc-root-limit-normal-charts (c=∏t_d, divisibility set of integers prime to p, weakly étale maps flat). The statement is true. Edge cases checked: r=0, n=1, nilpotent t_d, a zero R, Q or A, and c a unit. Step 1 (filtered divisibility poset, transition maps descend and compose) is elementary. Step 2 applies flat-tensor injectivity to μ_c with R⊗_A A≅R. Step 3 inducts with the monic-quotient basis (AdjoinRoot.powerBasis') and treats the zero ring separately. Step 4 uses the representative and eventual-equality clauses of lem-pc-filtered-colimit-commrings-elementwise and needs no injective transition maps. Step 5 is the flat-tensor argument over S. Step 6 is the r=0 constant colimit. uses equal proof_deps, and stmt_deps are exact. Stacks sources check out: 00HB, 00CX, 04GG proof (10)⇒(1) (monic quotient finite free), 04AX/002V/002F, and 00D6/00D7. No SGA is cited. The seven declared tool uses are generic algebra definitions or Mathlib leaves, so I accept them. No duplicate node was found. Batch-5 flag on lem-trf-flat-tensor-preserves-injection: accepted. It is a dependency-free Mathlib leaf (Module.Flat.lTensor_preserves_injective_linearMap), generic flatness, and neither part of the trace formula or Poincaré duality nor of their proofs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatRootTowerNonzerodivisor",
+  "declaration": "Algebra.flat_root_tower_nonzerodivisor",
+  "file": "lean/Sheaf/RingTheory/FlatRootTowerNonzerodivisor.lean",
+  "statement": "theorem flat_root_tower_nonzerodivisor (A : Type u) (R : Type v) [CommRing A] [CommRing R] (a : A →+* R) (ha : a.Flat) (r : ℕ) (t : Fin r → A) (c : A) (hc : Function.Injective (fun x : A ↦ c * x)) (I : Set ℕ+) (h1 : (1 : ℕ+) ∈ I) (hfiltered : ∀ n ∈ I, ∀ m ∈ I, ∃ k ∈ I, (n : ℕ) ∣ (k : ℕ) ∧ (m : ℕ) ∣ (k : ℕ)) (Q : Type w) [CommRing Q] (q : ↥(colimit (simultaneousRootDiagram (fun d ↦ a (t d)) I)) →+* Q) (hq : q.Flat) : Function.Injective (fun x : R ↦ a c * x) ∧ (∀ n : RootTowerIndex I, Function.Injective (fun x : pthRootAlgebra (n.1 : ℕ) r R (fun d ↦ a (t d)) ↦ algebraMap R (pthRootAlgebra (n.1 : ℕ) r R (fun d ↦ a (t d))) (a c) * x)) ∧ Function.Injective (fun x : ↥(colimit (simultaneousRootDiagram (fun d ↦ a (t d)) I)) ↦ simultaneousRootColimitMap (fun d ↦ a (t d)) I h1 (a c) * x) ∧ Function.Injective (fun x : Q ↦ q (simultaneousRootColimitMap (fun d ↦ a (t d)) I h1 (a c)) * x) ∧ (r = 0 → (∀ n : RootTowerIndex I, ∃ e : R ≃+* pthRootAlgebra (n.1 : ℕ) r R (fun d ↦ a (t d)), e.toRingHom = algebraMap R (pthRootAlgebra (n.1 : ℕ) r R (fun d ↦ a (t d)))) ∧ ∃ e : R ≃+* ↥(colimit (simultaneousRootDiagram (fun d ↦ a (t d)) I)), e.toRingHom = simultaneousRootColimitMap (fun d ↦ a (t d)) I h1)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-530a0495e",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery after the 86fd RETURN (R1, H12/H2): the plain abbrev Algebra.pthRootAlgebra was reachable only through theorem node lem-weil-pbc-pth-root-algebra-local. Both Lean modules are byte-identical to 86fd. The item adds stmt_dep def-sfb-parameter-root-algebra, the landed Q65 existing:true owner of Algebra.pthRootAlgebra (live, reviewed PASS; abbrev body is the exact quotient, no primality). def-sfb-simultaneous-root-tower replaces the theorem citation with it in TeX and stmt_deps; no other change. Reusing the landed owner rather than adding a new node is the correct H12 choice. Re-read H3: flat a, injective c*, I ⊂ ℕ+ with 1 and common multiples, divisibility preorder on RootTowerIndex, canonical liftₐ/aeval transitions, chosen CommRingCat colimit, flat q; four injectivity conjuncts plus canonical r=0 equivalences; no extra hypotheses. Edge cases r=0, n=1, I={1}, zero rings, unit or nilpotent elements, char | n hold. No duplicate: the parent uses tameRootAlgebra (prime-to-p only). Item unlanded live. Nothing compiled (no file changed). Advisory: the upstream abbrev docstring still tags the theorem node; the parent's tameRootAlgebra will need a comparison at stage 3."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261023T124322-L-1371329",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

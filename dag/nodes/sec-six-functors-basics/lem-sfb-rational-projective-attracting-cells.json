@@ -1,0 +1,339 @@
+{
+ "id": "lem-sfb-rational-projective-attracting-cells",
+ "kind": "statement",
+ "title": "Affine attracting cells at rational isolated fixed points over an arbitrary field",
+ "statement": "Let $F$ be a field [def-weil-field]. Let $X$ be a nonempty smooth projective geometrically connected $F$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism, def-pc-geometrically-irreducible]. Suppose $\\mathbf G_{m,F}$ acts on $X$ [def-sc-gm-ga]; an action is a morphism $\\mathbf G_m\\times_F X\\to X$ satisfying the unit and associativity identities. Assume there is an equivariant closed immersion $X\\hookrightarrow\\mathbf P(E)$ for a nonzero finite-dimensional rational $\\mathbf G_m$-representation $E$, meaning a group-scheme homomorphism $\\mathbf G_m\\to\\operatorname{GL}(E)$ [def-sc-general-linear-group]; $\\mathbf P(E)$ parametrizes lines and equivariance is an equality on every test algebra. Suppose the fixed subfunctor, consisting of points fixed after every algebra extension, is represented by a finite disjoint union $X^{\\mathbf G_m}=\\coprod_{a\\in I}\\operatorname{Spec}F$ of reduced $F$-points $x_a$. Then for each $a$ the functor\n$$A\\longmapsto\\{f:\\mathbf A^1_A\\to X_A:\\ f(tu)=t\\cdot f(u)\\text{ on all test }A\\text{-algebras},\\ f(0)=x_{a,A}\\}$$\nis represented, by evaluation at $1$, by a smooth locally closed subscheme $X_a^+\\subseteq X$ [def-weil-open-immersion, def-weil-closed-immersion, def-sbc-affine-space]. Here $\\mathbf G_m$ acts on $\\mathbf A^1$ by multiplication. These subschemes give a disjoint partition of the underlying topological space of $X$, and each $X_a^+$ is $F$-isomorphic to $\\mathbf A_F^{d_a}$ for some integer $d_a\\geq0$. There is exactly one $a_0$ for which $X_{a_0}^+$ is open dense; no other stratum has closure $X$. For every field extension $L/F$ [def-pc-field-extension], the fixed subscheme of $X_L$ is the same disjoint union of $L$-points, and the attracting subscheme at $x_{a,L}$ is $(X_a^+)_L$; the partition, affine-space descriptions and distinguished open dense stratum persist. If $X=\\operatorname{Spec}F$, its sole stratum is $\\mathbf A_F^0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.47 and Corollary 13.49, printed pp.272--274, and the linear-action application after Lemma 13.51, p.275. Retain projectivity so that every geometric orbit has a limit, and require the fixed points to be rational, so that the affine fibres are affine spaces over F itself. The all-test-algebra formulation is the concentrator construction of Section 13g; its representing functor specifies the scalar-extension compatibility. This is the arbitrary-field form of the existing algebraically-closed-field lemma lem-sfb-projective-attracting-cells."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sbc-affine-space",
+  "def-pc-field-extension",
+  "def-sfb-projectivized-gm-representation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-gm-representation-weight-basis] over $F$ to choose coordinates $z_i$ with $t[z_i]=[t^{a_i}z_i]$. The chart $D_+(z_i)$ is affine with coordinates $u_j=z_j/z_i$ by [lemma-nagata-relative-affine-space-open-immersion], after relabelling the distinguished coordinate. Its weights are $a_j-a_i$, so it is invariant. Its intersection $U_i$ with $X$ is affine by [def-weil-closed-immersion], and smooth over $F$ by [lem-pc-open-immersion-smooth-composition]. Fix $x_a$, choose $i$ with $z_i(x_a)\\ne0$, and put $w=a_i$, $c_j=u_j(x_a)$. Fixedness on every test algebra implies $c_j=0$ whenever $a_j\\ne w$, by comparing Laurent monomials. Inside this chart let $C_a$ be defined by $u_j=0$ for $a_j<w$ and $u_j=c_j$ for $a_j=w$. It is an affine space on the remaining, strictly positive-weight coordinates. Define $Y_a=X\\cap C_a$ scheme-theoretically inside $U_i$.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-pc-open-immersion-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.46, p.272; Proposition 13.18 and Definition 13.21, pp.259--261."
+   }
+  },
+  {
+   "text": "For an $F$-algebra $A$, the orbit of $y\\in U_i(A)$ has ratios $t^{a_j-w}u_j(y)$. It extends in $U_i$ to $\\mathbf A^1_A$ with value $x_{a,A}$ at zero exactly when the equations of $C_a$ hold. This coefficient comparison is valid for nonreduced $A$: $A[t]\\to A[t,t^{-1}]$ is injective. Conversely those equations give the extension by this same polynomial formula; it lands in $X$ because its defining equations vanish after inverting $t$, hence already in $A[t]$. Thus $Y_a$ is the affine concentrator $U_i(\\{x_a\\})$. The point $\\{x_a\\}=\\operatorname{Spec}F$ is an invariant smooth closed subscheme of $U_i$ (a rational point in this affine chart is cut out by its coordinate values). Apply [lem-sfb-smooth-affine-concentrator] to conclude that $Y_a$ is smooth and closed in $U_i$, hence locally closed in $X$. The polynomial extension is equivariant: substituting $su$ for $u$ multiplies each positive-weight coordinate by $s^{a_j-w}$.",
+   "uses": [
+    "lem-sfb-smooth-affine-concentrator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 13.21 and Propositions 13.23--13.24, pp.261--262; Remark 13.57, p.277."
+   }
+  },
+  {
+   "text": "An arbitrary equivariant $f:\\mathbf A^1_A\\to X_A$ with $f(0)=x_{a,A}$ factors through $(U_i)_A$. Indeed, on each geometric fibre the inverse image of the invariant closed complement is a closed invariant subset of $\\mathbf A^1$ missing zero. If it contained a nonzero point, invariance would give the whole multiplicative orbit, whose closure contains zero. Thus it is empty on every geometric fibre, hence empty. The open factorization is provided by [lem-weil-pbc-morphism-factors-through-open-subscheme]. In the affine chart, equivariance determines $f$ on $\\mathbf G_{m,A}$ by $f(1)$, and injectivity of $A[t]\\to A[t,t^{-1}]$ determines it everywhere. Step 2 now identifies evaluation at $1$ with a natural bijection between the functor in the statement and $Y_a(A)$. This proves representability, including nilpotent test algebras, and independence of the chosen chart, since each chart construction represents this identical functor over $X$. Set $X_a^+=Y_a$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 13.57 and the invariant-affine-open construction in Proposition 13.58, pp.277--278."
+   }
+  },
+  {
+   "text": "Let $B=\\mathcal O(Y_a)$. It is a quotient of the polynomial algebra of $C_a$, with its variables in strictly positive degrees. Its defining ideal is homogeneous: stability under the action is an identity of coactions, and comparing coefficients of $t$ in the quotient tensored with $F[t,t^{-1}]$ shows that each homogeneous component of an element of the ideal is again in the ideal. Hence $B=\\bigoplus_{n\\ge0}B_n$, and $B_0=F$: evaluation at $x_a$ shows that no nonzero constant is killed. The maximal ideal of $x_a$ is $\\mathfrak m=\\bigoplus_{n>0}B_n$. Smoothness from Step 2 and [lem-weil-pbc-smooth-scheme-over-field-regular] imply that $B_{\\mathfrak m}$ is regular. Apply [lem-sfb-positive-graded-regular-polynomial], including its existence of homogeneous cotangent-basis lifts, to obtain $B\\simeq F[T_1,\\ldots,T_{d_a}]$. By [def-sbc-affine-space] this gives $X_a^+\\simeq\\mathbf A_F^{d_a}$, with $d_a\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sfb-positive-graded-regular-polynomial",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.39, pp.268--269, and the polynomial-algebra argument of Theorem 13.44, pp.271--272."
+   }
+  },
+  {
+   "text": "For every algebraically closed extension $K/F$ and $y=[v]\\in X(K)$, write $v=\\sum_b v_b$ by weights and let $w$ be the least weight with $v_w\\ne0$. Then\n$$u\\longmapsto[\\sum_{b\\ge w}u^{b-w}v_b]$$\nis regular on $\\mathbf A^1_K$: a nonzero weight-$w$ coordinate is constant and supplies a standard chart. Its equations for $X$ vanish after inverting $u$ and therefore in $K[u]$. At zero its value is the fixed point $[v_w]$, which must be one of the $x_{a,K}$. This last assertion is functorial fixedness, since $v_w$ lies in one weight space. Step 3 places $y$ in $X_a^+(K)$. The minimum-weight expression determines the limit uniquely, so no two cells meet on these points. Every scheme point lifts to an algebraic closure of its residue field; consequently the cells exhaust $|X|$ and their underlying subsets are pairwise disjoint. In particular $I$ is nonempty. Projectivity enters here as the given closed embedding: the explicit projective limit stays in $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.20, pp.259--260; Theorem 13.47(c), p.273, used here with the explicit projective limit rather than an exhaustion claim without properness."
+   }
+  },
+  {
+   "text": "The scheme $X$ is regular by [lem-weil-pbc-smooth-scheme-over-field-regular] and connected by the hypothesis of geometric connectedness. By [lem-sc-regular-connected-integral], it is integral and thus irreducible and reduced. The finitely many closures of the cells cover $X$, so irreducibility forces one cell to have closure $X$. A dense locally closed subset is open: writing it as $V\\cap Z$ with $V$ open and $Z$ closed, density gives $Z=X$. Two dense cells would therefore be disjoint nonempty opens of an irreducible space, impossible. The cell structure on this open subset is the open subscheme structure: both it and $X$ are reduced, and [lem-weil-pbc-reduced-induced-closed-subscheme], on an open where the cell is closed, identifies their ideals with the unique radical ideal defining the common support. This proves the unique open dense stratum and excludes every other stratum from having closure $X$.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.49(c) and its finite-partition argument, pp.273--274; regularity/integrality input: Stacks Tags 056S, 0569, 033N."
+   }
+  },
+  {
+   "text": "Let $L/F$ be any field extension. For an $L$-algebra $A$, the conditions defining fixedness are exactly the original conditions for the same $F$-algebra $A$, since all further $A$-algebras are also $L$-algebras. Thus the fixed subfunctor is represented by $\\coprod_a\\operatorname{Spec}L$. Likewise the equations defining $Y_a$ become the identical equations with coefficients in $L$; equivalently the representing bijections of Step 3 apply to every $L$-algebra. They identify the attracting subscheme with $(X_a^+)_L$. The isomorphism of Step 4 becomes $L[T_1,\\ldots,T_{d_a}]\\simeq B\\otimes_FL$, so it is still an affine space. The minimum-weight argument of Step 5 works over algebraic closures of residue fields of $X_L$, giving the same disjoint partition. To check density, $X_L$ is smooth by [lem-sfb-scheme-lfp-smooth-flat-base-change] and [lem-pc-field-extension-flat] (smoothness includes local finite presentation), and connected by [def-pc-geometrically-irreducible]. It is nonempty since it contains $x_{a,L}$. The regularity and integrality nodes used in Step 6 therefore show $X_L$ is irreducible. The original open cell remains open by the inverse-image definition of base change of an open subscheme and nonempty because it contains $x_{a_0,L}$; hence it is dense, and the disjoint-partition argument again makes it unique. Finally, for $X=\\operatorname{Spec}F$ the only possible $f$ is the structure map, the action is trivial, and the sole representing scheme is $\\operatorname{Spec}F=\\mathbf A_F^0$ by [def-sbc-affine-space].",
+   "uses": [
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-pc-field-extension-flat",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 13.23 (field-extension compatibility), p.261, and the concentrator functor in Section 13g, pp.276--278; Stacks Tag 02V4 for smoothness after field extension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-gm-representation-weight-basis",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-smooth-affine-concentrator",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sfb-positive-graded-regular-polynomial",
+  "def-sbc-affine-space",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-pc-field-extension-flat",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.47 and Corollary 13.49, pp.272--274; affine concentrators in 13.21--13.24 and 13.57--13.58, and positive-graded algebra from 13.39/13.44. Explicit projective coordinates and scalar-extension assembly written by Q77."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Bialynicki|Birula|attracting.*(cell|scheme)|concentrator",
+   "results": "{\"t\": \"2026-10-24T04:22:46Z\", \"tool\": \"grep\", \"query\": \"Bialynicki|Birula|attracting.*(cell|scheme)|concentrator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AffineSpace and Proj define the ambient schemes; the returned smoothness constructors, affine transition-limit lemmas and finite-component result do not construct attracting subschemes or an affine-space decomposition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bialynicki Birula decomposition smooth projective scheme rational isolated fixed points",
+   "results": "{\"t\": \"2026-10-24T04:22:47Z\", \"tool\": \"leansearch\", \"query\": \"Bialynicki Birula decomposition smooth projective scheme rational isolated fixed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.pointsPi_injective\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"37534635f61abfd2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AffineSpace and Proj define the ambient schemes; the returned smoothness constructors, affine transition-limit lemmas and finite-component result do not construct attracting subschemes or an affine-space decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialynicki\"",
+   "results": "{\"t\": \"2026-10-24T04:22:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bialynicki\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AffineSpace and Proj define the ambient schemes; the returned smoothness constructors, affine transition-limit lemmas and finite-component result do not construct attracting subschemes or an affine-space decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth geometrically connected projective variety with multiplicative group action and finite rational fixed points has affine attracting cells",
+   "results": "{\"t\": \"2026-10-24T04:22:48Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth geometrically connected projective variety with multiplicative group action and finite rational fixed points has affine attracting cells\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.exists_map_eq_top\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\"], \"digest\": \"25ee6bb581d56394\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AffineSpace and Proj define the ambient schemes; the returned smoothness constructors, affine transition-limit lemmas and finite-component result do not construct attracting subschemes or an affine-space decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic multiplicative group acting on a smooth projective variety with isolated rational fixed points gives affine space strata by limits at zero",
+   "results": "{\"t\": \"2026-10-24T04:24:50Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic multiplicative group acting on a smooth projective variety with isolated rational fixed points gives affine space strata by limits at zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"1e23105bf9c40e1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AffineSpace and Proj define the ambient schemes; the returned smoothness constructors, affine transition-limit lemmas and finite-component result do not construct attracting subschemes or an affine-space decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective scheme with a multiplicative group action and isolated rational fixed points has affine attracting cells",
+   "results": "{\"t\": \"2026-10-24T04:56:05Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth projective scheme with a multiplicative group action and isolated rational fixed points has affine attracting cells\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.AffineSpace.instIsAffine\"], \"digest\": \"15780d6f3b616abb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned AffineSpace/Proj constructions, affine inverse-limit facts and smoothness constructors do not state the attracting functor or affine-cell decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialynicki\"",
+   "results": "{\"t\": \"2026-10-24T04:56:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bialynicki\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned AffineSpace/Proj constructions, affine inverse-limit facts and smoothness constructors do not state the attracting functor or affine-cell decomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "Bialynicki|Birula|attracting.*(cell|scheme)|concentrator",
+   "results": "{\"t\": \"2026-10-24T04:57:22Z\", \"tool\": \"grep\", \"query\": \"Bialynicki|Birula|attracting.*(cell|scheme)|concentrator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned AffineSpace/Proj constructions, affine inverse-limit facts and smoothness constructors do not state the attracting functor or affine-cell decomposition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bialynicki Birula decomposition into affine spaces over a field for projective smooth schemes",
+   "results": "{\"t\": \"2026-10-24T04:57:23Z\", \"tool\": \"leansearch\", \"query\": \"Bialynicki Birula decomposition into affine spaces over a field for projective smooth schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.over_over\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.Scheme.affineOpens\"], \"digest\": \"446c24953db8cd0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned AffineSpace/Proj constructions, affine inverse-limit facts and smoothness constructors do not state the attracting functor or affine-cell decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic multiplicative group acting on a smooth projective variety with isolated fixed rational points gives affine space strata by limits at zero",
+   "results": "{\"t\": \"2026-10-24T04:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic multiplicative group acting on a smooth projective variety with isolated fixed rational points gives affine space strata by limits at zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\"], \"digest\": \"4959d7deb85f3128\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned AffineSpace/Proj constructions, affine inverse-limit facts and smoothness constructors do not state the attracting functor or affine-cell decomposition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-bruhat-affine-stratification",
+  "date": "2026-10-24",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion, On Linearization of Line Bundles, Lemma 2.3 proof, printed p.118, the Pic(G/B) and root-datum paragraph, citing Iversen 1976 Proposition 5.2 and Theorem 5.3. The explicit split Schubert-boundary basis and its scalar-extension form are the geometric input unpacked here; also Milne Lemma 18.21, printed p.392, the split affine-cell argument. The statement concerns split groups over arbitrary fields, not only algebraically closed fields. Supporting geometry: the split Bruhat stratification before the boundary-divisor argument; Milne Theorems 21.73 and 21.80. Supporting input: Theorem 13.47 and Corollary 13.49, printed pp.272--274, and the linear-action application after Lemma 13.51, p.275. Retain projectivity so that every geometric orbit has a limit, and require the fixed points to be rational, so that the affine fibres are affine spaces over F itself. The all-test-algebra formulation is the concentrator construction of Section 13g; its representing functor specifies the scalar-extension compatibility. This is the arbitrary-field form of the existing algebraically-closed-field lemma lem-sfb-projective-attracting-cells.",
+   "via": [
+    "lem-sfb-split-bruhat-affine-stratification",
+    "lem-sfb-split-flag-schubert-picard-lattice",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-projective-attracting-cells",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused arbitrary-field weight decomposition, smooth affine concentrators and positive-graded regular polynomial algebra. Constructed the cells in invariant charts, proved the functor on all algebras, exhaustion, unique dense open and arbitrary field-extension compatibility. No new nodes or Mathlib leaves needed.",
+  "blueprint": "Retains inherited from.node=None and via, as confirmed by blueprint_refs.py ancestor. Realizes the exact inherited supporting geometric input to split Bruhat stratification, beneath det-thm-sf-ctf-stability-direct-images proof (3); latest chapter, unit and direct-image proof read. Whole-blueprint searches for attracting, concentrator and Bialynicki returned no equal blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Standard projective affine chart; supplies coordinates only, with no change to the unit route."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Generic restriction of smoothness to the invariant affine chart."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Generic unique factorization through an open once the image containment has been proved."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic smooth-over-field regularity for the graded vertex and for irreducibility."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic passage from connected regular to integral, needed for the finite-partition density argument."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic uniqueness of the reduced induced structure, needed to identify a cell with an open subscheme."
+   },
+   {
+    "node": "lem-pc-field-extension-flat",
+    "why": "Generic flatness of a field extension to apply smoothness base change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pc-field-extension-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-c188580c4",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-c188580c4 (reviewer sub-agent of L); spot-checked: I read the item in full: it is a seven-step split with no new nodes, and the statement is unchanged from base. Source checked: Milne iAG2017 Thm 13.47 and Cor 13.48-13.49 (pp.272-274) plus the erratum that 13.47(c) needs X proper. The item keeps a projective embedding and reduced rational isolated fixed points, which match the source and the erratum, and its functors on all test algebras are a strengthening that Steps 2-3 prove. Steps 1-2: I checked the weight basis and chart coordinates; c_j=0 follows from the identity t^{a_j-w}c_j=c_j in F[t,t^-1], so it holds over finite fields. The concentrator node's hypotheses hold (affine finite-type smooth invariant chart, rational point as smooth closed Z), and A[t]->A[t,t^-1] is injective for nonreduced A. Step 3: on geometric fibres the closed invariant preimage of the complement is empty because K^x orbits are infinite, then the open-factorization node applies, and equivariance plus injectivity pins f. Step 4: B_0=F, the ideal is homogeneous, m is the ideal of x_a, and B_m is regular, so the positive-graded polynomial node applies. Step 5 is genuinely elementary: an explicit minimum-weight limit [v_w], which is functorially fixed. Step 6: X is regular, connected and nonempty, hence integral; a dense locally closed cell is open, and the reduced-induced uniqueness identifies the cell with the open subscheme. Step 7: fixed and attracting functors over L are the base changes, and X_L is smooth by the lfp flat base-change node with flatness of Spec L->Spec F. Small cases checked: P^1 with weights 0,1, Spec F, imperfect and finite F, F[eps]. Duplicate search: lem-sfb-projective-attracting-cells assumes an algebraically closed field, so it is not this item; no clause of the item is restated. Batch-5 flags: lem-trf-smooth-at-point-fibre-criterion (reached via the concentrator and lfp-smooth-flat-base-change nodes) and lem-trf-polynomial-nonzero-ideal-quotient-dimension-bound (reached via positive-graded-regular-polynomial) are generic scheme theory and commutative algebra, outside both assumptions. All seven tool_uses are accepted as generic. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalProjectiveAttractingCells",
+  "declaration": "AlgebraicGeometry.RationalProjectiveAttractingCells.rational_projective_attracting_cells",
+  "declarations": [
+   "AlgebraicGeometry.RationalProjectiveAttractingCells.linePoint",
+   "AlgebraicGeometry.RationalProjectiveAttractingCells.unitPoint",
+   "AlgebraicGeometry.RationalProjectiveAttractingCells.IsFixed",
+   "AlgebraicGeometry.RationalProjectiveAttractingCells.RepresentsFixed",
+   "AlgebraicGeometry.RationalProjectiveAttractingCells.IsAttractorMap",
+   "AlgebraicGeometry.RationalProjectiveAttractingCells.RepresentsAttractor",
+   "AlgebraicGeometry.RationalProjectiveAttractingCells.rational_projective_attracting_cells"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalProjectiveAttractingCells.lean",
+  "statement": "theorem rational_projective_attracting_cells {F : Type u} [Field F] (X : Over (Spec (.of F))) [Nonempty X.left] [Smooth X.hom] [IsProjective X.hom] [GeometricallyConnected X.hom] (a : ModObj (StandardGroupSchemes.multiplicative F) X) (n : ℕ) (rho : StandardGroupSchemes.multiplicative F ⟶ GeneralLinearGroup (ULift.{u} (Fin (n + 1))) F) [IsMonHom rho] (p : ModObj (StandardGroupSchemes.multiplicative F) (DiagonalProjectiveAction.space F n)) (hp : ProjectivizedGmRepresentation.IsProjectivization rho p) (i : X ⟶ DiagonalProjectiveAction.space F n) [IsClosedImmersion i.left] (hi : a.smul ≫ i = (𝟙 _ ⊗ₘ i) ≫ p.smul) (I : Type u) [Finite I] (x : I → (𝟙_ (Over (Spec (.of F))) ⟶ X)) (hfixed : ∀ A : CommAlgCat.{u} F, RepresentsFixed a I x A) : ∃ (C : I → Over (Spec (.of F))) (j : ∀ b, C b ⟶ X) (d : I → ℕ), (∀ b, Smooth (C b).hom ∧ IsImmersion (j b).left ∧ Nonempty (C b ≅ Over.mk (AffineSpace (ULift.{u} (Fin (d b))) (Spec (.of F)) ↘ Spec (.of F))) ∧ ∀ A : CommAlgCat.{u} F, RepresentsAttractor a (x b) (C b) (j b) A) ∧ (∀ y : X.left, ∃! b, y ∈ Set.range (j b).left) ∧ ∃ b₀ : I, IsOpenImmersion (j b₀).left ∧ DenseRange (j b₀).left ∧ (∀ b, closure (Set.range (j b).left) = Set.univ ↔ b = b₀) ∧ (∀ (L : Type u) [Field L] [Algebra F L], (∀ (A : CommAlgCat.{u} F) [Algebra L A] [IsScalarTower F L A], RepresentsFixed a I x A ∧ ∀ b, RepresentsAttractor a (x b) (C b) (j b) A) ∧ (∀ b, Smooth (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).obj (C b)).hom) ∧ IsImmersion (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map (j b)).left) ∧ Nonempty (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).obj (C b)) ≅ Over.mk (AffineSpace (ULift.{u} (Fin (d b))) (Spec (.of L)) ↘ Spec (.of L)))) ∧ (∀ y : ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).obj X).left, ∃! b, y ∈ Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map (j b)).left)) ∧ IsOpenImmersion (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map (j b₀)).left) ∧ (∀ b, closure (Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map (j b)).left)) = Set.univ ↔ b = b₀)) ∧ (Nonempty (X ≅ 𝟙_ (Over (Spec (.of F)))) → Nonempty (Unique I) ∧ ∀ b, d b = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite-dimensional nonzero E is expressed in a chosen basis by F^(n+1); rho is a scheme homomorphism and its projectivization is specified by the actual universal matrix substitution. Scalar extension is expressed by the adjunction between Over.pullback and restriction to F: its fixed and attracting functors are the original functors on L-algebras, with the actual pullbacks of the representing schemes. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3745f06fa",
+  "group": "Q72",
+  "result": "pass",
+  "note": "The Lean matches the node clause by clause: hypotheses as Smooth, IsProjective, GeometricallyConnected, Nonempty, ModObj action, rho with IsMonHom, IsProjectivization, IsClosedImmersion with morphism-level equivariance; fixed subfunctor as injectivity plus image of Sigma.desc on all test algebras. RepresentsAttractor's two unique-existence clauses give a natural bijection by evaluation at 1. Also stated: smooth immersions isomorphic to A^d, partition of |X|, unique open dense cell via the closure iff, base change along the actual Over.pullback, and the Spec F clause. New node def-sfb-projectivized-gm-representation is a real, satisfiable predicate; its substitution gives the action on lines and the comparison iso is fixed by both projections. It reuses DiagonalProjectiveAction.space, and no duplicate was found in the Lean trees or the DAG. Item statement unchanged; the only added stmt_dep is the new node; lean.statement matches the files verbatim; theorem proof is only sorry. No compile: no file changed, worker compile evidence relied on. Note: the L-clause is stated through restriction of scalars, which is equivalent by the pullback adjunction."
+ }
+}

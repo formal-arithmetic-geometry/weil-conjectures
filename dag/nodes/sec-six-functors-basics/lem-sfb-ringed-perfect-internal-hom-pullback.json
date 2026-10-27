@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-ringed-perfect-internal-hom-pullback",
+ "kind": "statement",
+ "title": "Perfect-source internal Hom commutes with derived ringed-topos pullback",
+ "statement": "Work with sites small relative to the module universe [def-weil-size-convention], module sheaves [def-weil-sheaf-of-modules-category], and ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $u:(\\mathscr T',R')\\to(\\mathscr T,R)$ be a morphism of ringed topoi with commutative structure rings [def-weil-pbc-ringed-topos-morphism]. Write $L=Lu^*$ for K-flat derived tensor pullback, with its canonical strong monoidal comparison [lem-sfb-ringed-derived-monoidal-comparisons]. Write $H_R(P,Q)=R\\mathcal Hom_R(P,Q)$ and similarly for $R'$ [def-pur-derived-internal-hom]. Let $P\\in D(R)$ be perfect, meaning locally represented by a bounded complex of direct summands of finite free module sheaves [def-weil-pbc-strict-perfect-coefficient-package], and let $Q\\in D(R)$ be arbitrary. The canonical comparison is a natural isomorphism in $D(R')$,\n$$\\alpha_{u;P,Q}:L H_R(P,Q)\\xrightarrow{\\sim}H_{R'}(LP,LQ).$$\nPrecisely, let $\\operatorname{ev}_{P,Q}:H_R(P,Q)\\otimes_R^{\\mathbf L}P\\to Q$ be the evaluation, the counit of the derived tensor--internal-Hom adjunction $\\operatorname{Hom}(U\\otimes^{\\mathbf L}V,W)\\cong\\operatorname{Hom}(U,R\\mathcal Hom(V,W))$ [lem-sf-ringed-derived-closed-symmetric-monoidal]. Then $\\alpha_{u;P,Q}$ is the morphism corresponding under this adjunction for $R'$ (with $U=L H_R(P,Q)$ and $V=LP$) to\n$$L H_R(P,Q)\\otimes_{R'}^{\\mathbf L}LP\\xrightarrow{t^{-1}}L(H_R(P,Q)\\otimes_R^{\\mathbf L}P)\\xrightarrow{L(\\operatorname{ev}_{P,Q})}LQ,$$\nwhere $t$ is the tensor comparison of $L$. The comparison is natural contravariantly in $P$ and covariantly in $Q$. No flatness of $u$ or boundedness of $Q$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH (lemma-Rhom-strictly-perfect) and 08H3 (lemma-strictly-perfect-pullback), applied locally to the perfect first variable; the evaluation-normalized ringed-topos form of the finite-projective pullback comparison."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sf-ringed-derived-adjoint-lift-data",
+  "def-sfb-ringed-pullback-hom-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the closed symmetric monoidal structures of [lem-sf-ringed-derived-closed-symmetric-monoidal] on both derived categories. For the categorical lemmas use the equivalent left-tensor adjunction, obtained by precomposing with symmetry. Put $D=H_R(P,R)$ and $e=\\operatorname{ev}_{P,R}\\circ\\sigma_{P,D}:P\\otimes D\\to R$. By [lem-sfb-ringed-site-perfect-duality], the evaluation transpose $\\phi_N:D\\otimes N\\to H_R(P,N)$ is invertible for every unbounded $N$. Its evaluation normalization is unchanged by exchanging tensor factors via symmetry.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-site-perfect-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, all-target evaluation isomorphism; Tag 0FPT, lemma-symmetric-monoidal-derived."
+   }
+  },
+  {
+   "text": "Apply [lem-fix-closed-evaluation-dual-criterion] to these $e,\\phi_N$. If $u_P:R\\to H_R(P,P)$ is the transpose of the unitor, $c=\\phi_P^{-1}u_P:R\\to D\\otimes P$ satisfies both triangle identities with $e$. Thus the exact dual pair required below exists globally; no global strictly perfect representative is required.",
+   "uses": [
+    "lem-fix-closed-evaluation-dual-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, categorical consequence of its canonical evaluation isomorphisms."
+   }
+  },
+  {
+   "text": "By [lem-sfb-ringed-derived-monoidal-comparisons], $L$ is symmetric strong monoidal, with tensorator $\\mu=t^{-1}$. Apply [lem-fix-monoidal-dual-hom-comparison] to $G=L$, the dual pair of step 2, and arbitrary $Q$. Its specified left-adjunction comparison $\\gamma:LH_R(P,Q)\\to H_{R'}(LP,LQ)$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-fix-monoidal-dual-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ with the monoidal derived-pullback comparisons; categorical form of the perfect-source argument of cohomology.tex, Tag 0GM7, lemma-pullback-internal-hom (1)."
+   }
+  },
+  {
+   "text": "Write $A=H_R(P,Q)$. Convert the left-adjunction transpose defining $\\gamma$ to the right-adjunction convention of the item. Its uncurried map is $L(\\operatorname{ev}_{P,Q})\\circ L(\\sigma_{P,A})\\circ\\mu_{P,A}\\circ\\sigma_{LA,LP}$. Symmetric monoidality and $\\sigma_{LP,LA}\\circ\\sigma_{LA,LP}=1$ reduce this to $L(\\operatorname{ev}_{P,Q})\\circ\\mu_{A,P}$. Adjunction injectivity therefore gives $\\gamma=\\alpha_{u;P,Q}$, proving invertibility of the specified comparison.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT, symmetry and closed adjunction; derived pullback symmetric monoidality. Evaluation normalization of the comparison."
+   }
+  },
+  {
+   "text": "For $a:P_1\\to P$ and $b:Q\\to Q_1$, naturality of evaluation, the tensorator, and the adjunction gives $H_{R'}(La,Lb)\\circ\\alpha_{u;P,Q}=\\alpha_{u;P_1,Q_1}\\circ L(H_R(a,b))$: uncurry both sides, substitute the defining evaluation composite, and move $La,Lb$ through $\\mu$ by its naturality and through evaluation by its adjunction naturality. This identity holds before any perfectness assumption. Restricting to perfect first variables yields the asserted natural isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Derived pullback tensor-comparison naturality and closed-adjunction naturality; the defining evaluation transpose."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-fix-closed-evaluation-dual-criterion",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-fix-monoidal-dual-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JH and 08JJ (lemma-Rhom-strictly-perfect, lemma-dual-perfect-complex), assembled through the existing categorical dual-pair criterion and monoidal Hom comparison; cohomology.tex Tag 0GM7(1) supplies the parallel ringed-space argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi derived pullback commutes with derived internal Hom when the first argument is perfect",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {E : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} E] →\\n            {F : CategoryTheory.Functor C D} →\\n              {R : CategoryTheory\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal derived pullback preserves internal Hom from locally bounded finite projective complexes of sheaf modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"module\": \"Mathlib/CategoryTheory/Sites/CartesianClosed\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u_2) →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} A] →\\n          [CategoryTheory.HasSheafify J A] →\\n            [inst_3 : CategoryTheory.CartesianMonoidalCat\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ equipped with a Cartesian monoidal structure and sheafification, the category of sheaves on $\\\\mathcal{C}$ w\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"internalHom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Ii]nternal[Hh]om|[Ii]nternal[Hh]om.*[Pp]ullback|[Pp]ullback.*[Ii]nternal[Hh]om",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"71\", \"text\": \"    (sq₁₃ : MonoidalClosed.internalHom.PullbackObjObj i p) :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"83\", \"text\": \"  let sq₁₃' := Functor.PullbackObjObj.ofHasPullback MonoidalClosed.internalHom Λ[_, k].ι p\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean\", \"line\": \"97\", \"text\": \"  let sq₁₃ := Functor.PullbackObjObj.ofHasPullback MonoidalClosed.internalHom i p\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"line\": \"71\", \"text\": \"    (sq₁₃ : MonoidalClosed.internalHom.PullbackObjObj i p) :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"line\": \"85\", \"text\": \"  let sq₁₃' := Functor.PullbackObjObj.ofHasPullback MonoidalClosed.internalHom Λ[m + 1, k].ι p\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean\", \"line\": \"99\", \"text\": \"  let sq₁₃ := Functor.PullbackObjObj.ofHasPullback MonoidalClosed.internalHom i p\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"line\": \"91\", \"text\": \"    (Arrow C)ᵒᵖ ⥤ Arrow C ⥤ Arrow C := MonoidalClosed.internalHom.leibnizPullback\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of internal Hom from a perfect complex of sheaves on a ringed site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.sheafHom\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafHom\", \"type\": \"(F G : Sheaf J A) : Sheaf J (Type _)\", \"doc\": \"Given sheaves $F$ and $G$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$ taking values in a category $\\\\mathcal{A}$, this defines the sheaf $\\\\mathcal{H}om(F,G)$ that assigns to each object \"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : Sheaf J A ⥤ Sheaf K A\", \"doc\": \"The functor from sheaves on a site $\\\\mathcal{C}$ with topology $J$ to sheaves on a site $\\\\mathcal{D}$ with topology $K$, constructed by first converting a sheaf to its underlying presheaf, then applyi\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": ((pullbackPushforwardAdjunction.{u} φ).homEquiv _ _).symm (unitToPushforwardObjUnit φ) = pullbackObjUnitToUnit φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pullback.{v} φ).IsLeftAdjoint\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern underived sheaf pullback, scheme fibre products, flat ring maps, or unrelated monoidal constructions; none states this derived ringed-site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi derived pullback commutes with internal Hom from a perfect complex",
+   "results": "SheafOfModules.pullbackComp, pullbackObjUnitToUnit and other underived pullback comparisons; no derived perfect-source theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor preserves internal Hom from a dualizable object",
+   "results": "CategoryTheory.closedOfHasLeftDual, Cartesian expComparison and Frobenius comparisons; general exact-pairing comparison exists in the project, not these Mathlib hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"internalHom\"",
+   "results": "0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*internalHom|internalHom.*pullback|isIso_ihomComparison",
+   "results": "Three hits: Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean:71, AnodyneExtensions/PushoutProduct.lean:71, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean:91; these are categorical pullback objects, not ringed-topos pullback.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback commutes with derived internal Hom for perfect complexes on ringed sites",
+   "results": "SheafOfModules.pullback and pullbackPushforwardAdjunction, pullbackComp, Scheme.Modules.pullbackComp and underived finite-free comparisons; no derived perfect-source statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-perfect-hom-base-change",
+  "date": "2026-10-23",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Affine base change of the proper flat coherent right adjoint. Supporting input of Tag 0E5I(1): Tag 0E4S (lemma-affine-morphism-and-hom-out-of-perfect), case (1), specialized to flat f; the preceding construction of the canonical map. Flatness implies Tor independence. Supporting input: perfect-source internal Hom comparison before applying global sections in Tag 0E4S(1).",
+   "via": [
+    "lem-sfb-space-affine-perfect-hom-base-change",
+    "lem-sfb-affine-flat-proper-adjoint-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-perfect-internal-hom-pullback",
+  "worker": "stage1",
+  "summary": "Assemble the ringed-topos statement from existing perfect-source evaluation duality, its categorical exact-pairing criterion, and the strong monoidal dual-Hom comparison; explicitly identify the left-adjunction comparison with the prescribed right-adjunction evaluation mate and prove naturality. No new nodes or statement changes.",
+  "blueprint": "Supporting input of det-thm-sf-ctf-stability-direct-images, clause (3), through lem-sfb-space-affine-perfect-hom-base-change: internal-Hom pullback comparison before global sections in Stacks 0E4S(1). The supplied created.item chain has no mechanical blueprint ancestor (ancestor command prints None); retain the inherited provenance and record this precise contextual place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-34a22eddf",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-34a22eddf (reviewer sub-agent of L); spot-checked: PASS: the delivery changes only the item: 5 steps, no new nodes, and the statement and stmt_deps are identical to the corrected Q01 version (right-convention transpose of L(ev)∘t^{-1}). Sources read: Stacks 08JH, 08JJ and 08H3 (sites-cohomology.tex) and 0GM7(1) (cohomology.tex). Instead of 0GM7's local strictly-perfect calculation, the proof shows global dualizability, which is valid. Step 1: the left-convention transpose φ_N of e=ev∘σ equals e_{P,N}∘σ_{D,N} (I checked on chain level; the only nonzero degree has |x|=-|φ|), and that is the invertible comparison of lem-sfb-ringed-site-perfect-duality for arbitrary N. Step 2: every hypothesis of lem-fix-closed-evaluation-dual-criterion holds, so c=φ_P^{-1}u_P satisfies both triangle identities. Step 3: lem-fix-monoidal-dual-hom-comparison has the same orientation (ExactPairing D P, Lean-closed on slopmaster2), μ=t^{-1}, and needs no flatness, exactness or equivalence. Step 4 (elementary, re-derived): L(σ_{P,A})μ_{P,A}=μ_{A,P}σ_{LP,LA} and σ²=1 give γ=α. Step 5 (elementary): naturality of μ and of the adjunction. Hypotheses (small sites, commutative rings, local perfectness, unbounded Q, non-flat u) agree with every cited node. Edge cases: P=0, P=R[0] with Z→Z/2, shifts. No duplicate: the scheme, finite-coefficient, etale-bounded and finite-free-ring-change variants are all narrower. No SGA citation. Accepted tool_uses: lem-sfb-ringed-derived-monoidal-comparisons, lem-fix-closed-evaluation-dual-criterion, lem-fix-monoidal-dual-hom-comparison (generic monoidal tools); the closed-monoidal node is on the route through sk-prop-sf-biduality-general. Batch-5 flag: lem-fix-monoidal-dual-hom-comparison reaches lem-pod-closed-uncurry-laws, a Mathlib-status curry/uncurry law of closed monoidal categories. That is a generic fact, not part of the trace-formula or Poincare-duality proofs, so it is accepted. blueprint.from.node=null is inherited from the parent chain and recorded in split_report.blueprint."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RingedPerfectInternalHomPullback",
+  "declaration": "CategoryTheory.RingedDerivedComparisons.ringedPerfectInternalHomPullback",
+  "file": "lean/Sheaf/SixFunctors/RingedPerfectInternalHomPullback.lean",
+  "statement": "theorem ringedPerfectInternalHomPullback {X Y : Site.{u, w}} [HasSheafify Y.J AddCommGrpCat.{u}] [Y.J.WEqualsLocallyBijective AddCommGrpCat.{u}] [∀ U : Y.C, HasSheafify (Y.J.over U) AddCommGrpCat.{u}] [∀ U : Y.C, (Y.J.over U).WEqualsLocallyBijective AddCommGrpCat.{u}] {f : Morphism X Y} (l : AdjointLift f) : (∀ P : Y.D, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} Y.A P → ∀ Q : Y.D, IsIso (ringedPullbackHomComparison l P Q)) ∧ (∀ P P' Q Q' : Y.D, SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} Y.A P → SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} Y.A P' → ∀ (a : P' ⟶ P) (b : Q ⟶ Q'), l.edge.left.map ((pullbackHomFunctor Y).map (Prod.mkHom a.op b)) ≫ ringedPullbackHomComparison l P' Q' = ringedPullbackHomComparison l P Q ≫ (pullbackHomFunctor X).map (Prod.mkHom (l.edge.left.map a).op (l.edge.left.map b)))",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of returned head 12f557b33b4a: preserve the exact Lean theorem, mathematical statement and five accepted proof steps. Restore proof_deps to exactly the union of those steps uses. Statement dependencies cite the existing AdjointLift data definition and the existing:true definition-node attachment for the evaluation-transpose map; the unrelated existence and comparison theorem records are not needed to state or prove this accepted split."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bec8595e",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Re-delivery after review_split's mechanical return of 12f557 (proof_deps had lem-coef-ringed-pullback-hom-evaluation-comparison and lem-sfb-ringed-derived-adjoint-lift outside the union of uses). This head removes exactly those two; proof_deps now equals the union of uses and the live list. Snapshot diff vs 12f557: only the item's proof_deps and lean.note changed. Item .lean is byte-identical (sha ebbaec11) and lean.statement is verbatim. The new existing:true def node def-sfb-ringed-pullback-hom-comparison is unchanged; it owns the four plain defs at live lines 53-96, with beta = transpose(L(ev) o t^-1). The 9 base stmt_dep records equal side-live, and the item and new node are not yet landed live. Public imports are the stmt_dep modules; plain imports are the proof_dep modules. Mathematics as reviewed before: IsIso for locally perfect P and arbitrary Q, naturality in both variables, no flatness or bound on Q. No file changed, so no compile."
+ }
+}

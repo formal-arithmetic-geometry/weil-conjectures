@@ -25,91 +25,52 @@
  ],
  "proof": [
   {
-   "text": "Write $C_{W,R}=\\nu_W^*$, $N=G_AM$ and $M_B=TM$. The schemes $X,Z$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian and its spectrum is quasi-compact. Take the closed case $g=i$, $S=Z$, $j=\\mathrm{id}_Z$ of [lem-coef-etale-locally-closed-shriek], at the identity coefficient quotient $A_{E,n}\\to A_{E,n}$. Its assertion that $N_g=Rg_A^!M$ is finite-Tor bounded constructible gives $N\\in D^b_{ctf}(Z_{\\mathrm{et}},A)$. This uses only that lemma's preservation assertion, not its coefficient isomorphism. Its hypotheses hold: $X$ is separated finite type over the fixed $k$, $i$ is closed, $M$ has the stated finite-Tor constructible condition, and $n\\ge n\\ge1$.",
+   "text": "Put $C=\\nu^*$, $N=G_AM$, $M_B=TM$. Finite type over $k$ makes $X,Z$ Noetherian. The cited etale closed-preservation clause at levels $n,m$ gives $N,G_BM_B$ finite-Tor constructible; the input-model theorem on $M,N$ gives $M_B,TN$ with the same Tor intervals and bounded K-flat representatives on both sites, without flatness of $B/A$. Comparison preserves these intervals. Write $t_{W,K}:C_BTK\\cong T^pC_AK$ for tensor pullback and $e_{R,L}:C_RG_RL\\cong G_R^pC_RL$ for exceptional transport through the comparison unit. All outputs are bounded below.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-coef-etale-locally-closed-shriek"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-    "place": "Proof paragraph 3: establish the domain of the closed comparison"
-   }
-  },
-  {
-   "text": "For each of the two inputs $K=M$ on $X$ and $K=N$ on $Z$, choose a Tor interval $[u,v]$ with $u\\le v$. By [lem-sf-etale-flat-constructible], the Noetherian scheme admits a representative $P\\cong K$ of flat constructible $A$-sheaves, zero outside $[u,v]$. By [lem-sf-reduction-flat-model], $P\\otimes_A B$ represents $TK$, has flat $B$-terms, and has Tor interval $[u,v]$. Each of its terms is constructible: by the sheafification definition of tensor [def-pur-sheaf-tensor-product], constant local sections give the local isomorphism $\\underline F\\otimes_{\\underline A}\\underline B=\\underline{F\\otimes_A B}$ (the bilinear map on sections and its inverse on pure tensors glue after sheafification); hence on each stratum and etale cover making $P^r$ constant with finite module value $F$, its tensor is constant with finite $B$-module value $F\\otimes_A B$. Finiteness follows because the finitely many elements of $F$ generate this tensor over the finite ring $B$. Thus kernels and cokernels of its differentials, and therefore its cohomology, are constructible by [thm-constructible-serre]. It is bounded because its terms vanish outside $[u,v]$. Consequently $M_B$ and $TN$ are finite-Tor bounded constructible over $B$. No flatness of $B$ over $A$ is used.",
-   "uses": [
-    "lem-sf-etale-flat-constructible",
-    "lem-sf-reduction-flat-model",
-    "thm-constructible-serre",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-    "place": "Proof paragraph 3: quotient reduction on finite-Tor constructible inputs"
-   }
-  },
-  {
-   "text": "Apply the same preservation assertion of [lem-coef-etale-locally-closed-shriek] with coefficient level $m$, its identity quotient $A_{E,m}\\to A_{E,m}$, and input $M_B$. This gives $G_BM_B\\in D^b_{ctf}(Z_{\\mathrm{et}},B)$. The two requested etale outputs are therefore already bounded below. By [lem-sf-comparison-tor-amplitude], the pullbacks of $M,N,M_B,TN,G_BM_B$ are bounded constructible with their respective finite Tor intervals. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the comparison with constant $A$ coefficients and to the constant module $B$, write $t_{W,K}:C_{W,B}(TK)\\xrightarrow{\\sim}T^{p}C_{W,A}K$ for the canonical $B$-linear tensor identification. The module action is the pulled-back constant $B$ action. By the definition of the transported exceptional functor [def-weil-exceptional-inverse-image] and the unit isomorphism of [thm-weil-pbc-site-comparison], its value on $C_{X,R}L$ identifies with $C_{Z,R}G_RL$ for $L=M$ over $A$ and $L=M_B$ over $B$.",
-   "uses": [
     "lem-coef-etale-locally-closed-shriek",
+    "lem-sp-finite-coefficient-input-models",
     "lem-sf-comparison-tor-amplitude",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-exceptional-inverse-image",
-    "thm-weil-pbc-site-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-    "place": "Proof paragraph 3: identify the two sites and check all output categories"
-   }
-  },
-  {
-   "text": "For $R=A,B$, let $\\delta_{R,Q}:C_{X,R}i_{*,R}^{e}Q\\xrightarrow{\\sim}i_{*,R}^{p}C_{Z,R}Q$ be [lem-weil-pbc-comparison-direct-image-canonical-mate]. It applies to bounded-below $Q$, because [def-weil-closed-immersion] identifies inverse images of affine opens with $\\operatorname{Spec}(R/I)$, quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. The diagonal is an isomorphism (on these charts $(R/I)\\otimes_R(R/I)=R/I$), hence quasi-compact; so $i$ is quasi-separated. The same charts show finite type (a quotient needs no algebra generators) and separatedness (the isomorphism diagonal is closed). Let $c^e:T i_*^eN\\to i_*^eTN$ and $c^p:T^pi_*^pC_{Z,A}N\\to i_*^pT^pC_{Z,A}N$ be the ordinary coefficient maps of [lem-coef-finite-direct-image]. That theorem applies: $N$ is etale finite-Tor constructible, $i$ is separated finite type, and $B$ is cyclic, hence finite as an $A$-module. The two maps from $C_{X,B}Ti_*^eN$ to $i_*^pT^pC_{Z,A}N$ agree:\n$$i_*^p(t_{Z,N})\\,\\delta_{B,TN}\\,C_{X,B}(c^e)=c^p\\,T^p(\\delta_{A,N})\\,t_{X,i_*N}.$$\nIndeed transpose through the ordinary $B$-coefficient $i_p^*\\dashv i_*^p$. The defining transpose of $c$ is the coefficient extension of the ordinary pullback counit. The defining normalization of $\\delta$ carries the etale pullback counit to the pro-etale one. Under [lem-weil-pbc-comparison-pullback] and the tensor identification of step 3, both transposes are therefore the coefficient extension of $C_{Z,A}(i_e^*i_*^eN\\to N)$. At flat representatives the tensor identification sends $x\\otimes b$ to the pulled-back $x\\otimes b$, so applying the counit before or after this identification gives that same map. Injectivity of the Hom adjunction proves the equation; equivalently it is the pasting identity of [lem-weil-pbc-mate-pasting].",
-   "uses": [
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-coef-finite-direct-image",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-affine-scheme-qcqs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-    "place": "Proof paragraph 3: ordinary direct-image coefficient square on the two sites"
-   }
-  },
-  {
-   "text": "The exceptional counit under transport is normalized as follows. For bounded-below etale $Q,L$ in the domains here, the comparison $\\delta$ and full faithfulness of $C_R$ give the successive natural bijections\n$$\\operatorname{Hom}_{p}(i_*^pC_{Z,R}Q,C_{X,R}L)\\cong\\operatorname{Hom}_{e}(i_*^eQ,L)\\cong\\operatorname{Hom}_{e}(Q,G_RL)\\cong\\operatorname{Hom}_{p}(C_{Z,R}Q,C_{Z,R}G_RL).$$\nUse [lem-exc-closed-ambient] for the middle bijection and [thm-weil-pbc-site-comparison] for the other Hom identifications. This is the transported adjunction of [def-weil-exceptional-inverse-image]. Set $Q=G_RL$ and take the identity in the last Hom set. Its preimage is exactly\n$$\\varepsilon_R^p=C_{X,R}(\\varepsilon_R^e)\\,\\delta_{R,G_RL}^{-1}.$$\nThe rule that the counit is this preimage of the identity is [lem-weil-pbc-adjunction-of-natural-bijection]. Thus this equation identifies the specified counit, not merely the right-adjoint objects. It applies at $(R,L)=(A,M)$ and $(B,M_B)$ by steps 1--3; all four Hom arguments are bounded below.",
-   "uses": [
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-exc-closed-ambient",
     "thm-weil-pbc-site-comparison",
-    "def-weil-exceptional-inverse-image",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
+    "def-weil-exceptional-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-    "place": "Proof paragraph 3: transported exceptional adjunction and its counit"
+    "place": "Proof paragraph 3, quotient compatibility; assembly of the extracted etale-recovery arguments"
    }
   },
   {
-   "text": "Let $\\widetilde b$ be $C_{Z,B}(b^{\\mathrm{et}}_{i,M})$ conjugated by the tensor and exceptional identifications of step 3. Transpose it under the transported $i_{*,B}^p\\dashv G_B^p$. By step 5 its transpose, with source identified with $i_{*,B}^pC_{Z,B}TN$, is\n$$C_{X,B}(T\\varepsilon_A^e)\\,C_{X,B}((c^e)^{-1})\\,\\delta_{B,TN}^{-1}.$$\nHere the defining etale transpose is used exactly as written in the statement. Step 4, inverted on the coefficient comparisons, rewrites this as $T^p(C_{X,A}\\varepsilon_A^e)\\,T^p(\\delta_{A,N}^{-1})\\,(c^p)^{-1}$, after the canonical tensor identifications. Naturality of those identifications justifies their passage through the counit. By step 5 this is $(T^p\\varepsilon_A^p)(c^p)^{-1}$. It is precisely the defining transpose of the pro-etale map in [lem-coef-finite-closed-shriek]. Injectivity of this exceptional Hom bijection proves that $\\widetilde b$ is that map. This calculation uses only bounded constructible etale-origin source objects; it never asserts an adjunction on all pro-etale complexes.",
+   "text": "Closed immersions are proper, so use $h=i,c=(\\mathrm{id},i)$ in [lem-sp-et-proet-coefficient-compatibility]. Its $\\beta,b$ are the counit-transpose coefficient maps $c^e,c^p$; its $c^c$ is the ordinary counit-mate $\\delta$, and its tensor comparison is $t^{-1}$. Thus its square rearranges to\n$$i_*^p(t_{Z,N})\\delta_{B,TN}C_B(c^e)=c^pT^p(\\delta_{A,N})t_{X,i_*N}.$$\nThe direct-image coefficient theorem also gives both inverses for the cyclic $A$-module $B$.",
    "uses": [
-    "lem-coef-finite-closed-shriek",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-coef-finite-direct-image",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-    "place": "Proof paragraph 3: identify the exceptional-counit transposes"
+    "place": "Proof paragraph 3, quotient compatibility; assembly of the extracted etale-recovery arguments"
    }
   },
   {
-   "text": "The hypotheses of [lem-coef-finite-closed-shriek] now hold for the quotient $A_{E,n}\\to A_{E,m}$ and the pro-etale input $C_{X,A}M$: step 3 gave its finite-Tor constructibility, $i$ is a closed immersion between separated finite-type $k$-schemes, and the prime is invertible in $k$. Thus the pro-etale map identified in step 6 is an isomorphism. By [thm-weil-pbc-site-comparison], $C_{Z,B}$ is fully faithful on $D^+$, which contains both etale outputs by steps 2--3. It reflects this isomorphism explicitly: lift the inverse of its image using fullness; faithfulness applied to the two inverse equations makes that lift an inverse to $b^{\\mathrm{et}}_{i,M}$. Finally, for any two paths in a diagram between these bounded-below outputs, equal images under $C_{Z,B}$ imply equal paths by faithfulness. This proves both the etale isomorphism and the asserted test for equality of diagrams.",
+   "text": "Define $b^e$ by $T\\varepsilon_A^e(c^e)^{-1}$. By [lem-coef-site-closed-counit-transport], in the $e$ coordinates the counit is $\\varepsilon_R^p=C_R(\\varepsilon_R^e)\\delta_R^{-1}$ and adjuncts are transported by $C$. Consequently the transpose of $C_B(b^e)t_{Z,N}^{-1}$, after $t_{X,M}$, is\n$$t_{X,M}C_B(T\\varepsilon_A^e)C_B(c^e)^{-1}\\delta_{B,TN}^{-1}i_*^p(t_{Z,N}^{-1})\n=T^p(C_A\\varepsilon_A^e)t_{X,i_*N}C_B(c^e)^{-1}\\delta_{B,TN}^{-1}i_*^p(t_{Z,N}^{-1})\n=T^p(C_A\\varepsilon_A^e\\delta_{A,N}^{-1})(c^p)^{-1}.$$\nThe first equality is naturality of $t$, the second the inverted step-2 square. This is the defining transpose of [lem-coef-finite-closed-shriek]; injectivity of the transported Hom bijection identifies the maps.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-coef-site-closed-counit-transport",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-finite-closed-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
+    "place": "Proof paragraph 3, quotient compatibility; assembly of the extracted etale-recovery arguments"
+   }
+  },
+  {
+   "text": "The input $C_{X,A}M$ is finite-Tor constructible by step 1, and $i$ and $A\\to B$ meet all the geometric and coefficient hypotheses of [lem-coef-finite-closed-shriek]. That theorem makes the pro-etale map of step 3 invertible. By [thm-weil-pbc-site-comparison], $C_{Z,B}$ is fully faithful on $D^+$, which contains both etale outputs by step 1. Fullness lifts the inverse of its image; faithfulness reflects the two inverse equations, so $b^e$ is invertible. For two paths between bounded-below etale outputs, faithfulness likewise reflects equality of their images. This proves the isomorphism, its asserted pro-etale identification, and the diagram test.",
    "uses": [
     "lem-coef-finite-closed-shriek",
     "thm-weil-pbc-site-comparison"
@@ -117,29 +78,24 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-finite-free-extension.md",
-    "place": "Proof paragraph 3: recover the etale isomorphism and equality of diagrams"
+    "place": "Proof paragraph 3, quotient compatibility; assembly of the extracted etale-recovery arguments"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-coef-etale-locally-closed-shriek",
-  "lem-sf-etale-flat-constructible",
-  "lem-sf-reduction-flat-model",
-  "thm-constructible-serre",
-  "def-pur-sheaf-tensor-product",
+  "lem-sp-finite-coefficient-input-models",
   "lem-sf-comparison-tor-amplitude",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-exceptional-inverse-image",
   "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sp-et-proet-coefficient-compatibility",
   "lem-coef-finite-direct-image",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-mate-pasting",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
   "lem-exc-closed-ambient",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-coef-site-closed-counit-transport",
   "lem-coef-finite-closed-shriek"
  ],
  "proof_origin": {
@@ -237,87 +193,51 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-coef-finite-etale-descent",
   "worker": "stage1",
-  "summary": "Reuse the existing ordinary-etale closed preservation assertion to check finite-Tor domains, compute quotient reduction on constructible flat models, compare the ordinary coefficient maps by their transposes, then identify the transported exceptional counit and descend the specified pro-etale isomorphism and equality of diagrams. No new nodes and no statement changes.",
-  "blueprint": "lem-coef-finite-free-extension, proof paragraph 3: quotient compatibility on the two sites; retained split old step 11. Realizes the coefficient compatibility in sk-thm-sf-compatibility clause (7).",
+  "summary": "Repair C5 and D1/D2: drop all three duplicate new nodes; cite the reviewed coefficient/site square, closed counit transport and finite input models. Write the remaining transpose rewrite in step 3 and retain step 4 verbatim. Statement and statement dependencies unchanged. No new nodes are mathematically needed; report records the count-waiver request and batch-5 closure audit.",
+  "blueprint": "lem-coef-finite-free-extension, proof paragraph 3 (unchanged in main-20261015): counit-normalized quotient compatibility realizes sk-thm-sf-compatibility clause (7).",
   "tool_uses": [
    {
-    "node": "lem-coef-etale-locally-closed-shriek",
-    "why": "Only its existing ordinary-etale closed-adjoint preservation assertion is used to type the outputs; the present argument still identifies and descends the pro-etale quotient map."
-   },
-   {
-    "node": "lem-sf-etale-flat-constructible",
-    "why": "Generic bounded constructible flat-model theorem for the two etale inputs; no result in this compatibility unit supplies such models."
-   },
-   {
-    "node": "lem-sf-reduction-flat-model",
-    "why": "Generic quotient reduction of a bounded flat model; used to check the nonflat quotient domains."
-   },
-   {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic Noetherian criterion needed by the flat-model theorem."
+    "why": "Noetherian criterion for bounded constructible flat models; the compatibility unit does not prove scheme finiteness criteria."
+   },
+   {
+    "node": "lem-coef-etale-locally-closed-shriek",
+    "why": "Existing ordinary-etale closed-adjoint preservation at each coefficient level; only its preservation clause is needed for domains."
    },
    {
     "node": "lem-sf-comparison-tor-amplitude",
-    "why": "Generic passage of finite Tor intervals to the pro-etale constructible realization."
+    "why": "Generic comparison of Tor intervals with pro-etale constructible realization."
    },
    {
     "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic ringed-topos monoidal comparison identifies scalar extension on the two sites."
+    "why": "Generic natural monoidal tensor-pullback comparison, used with constant rings."
    },
    {
     "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Named ordinary direct-image site comparison with its counit normalization; needed to compare the specified maps."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Generic scheme-pullback site comparison used in the transpose calculation."
-   },
-   {
-    "node": "lem-exc-closed-ambient",
-    "why": "Generic ordinary-etale closed exceptional Hom adjunction."
-   },
-   {
-    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
-    "why": "Generic recovery of the normalized counit from the transported Hom bijection."
-   },
-   {
-    "node": "def-weil-exceptional-inverse-image",
-    "why": "Definition of finite exceptional transport along the site comparison."
-   },
-   {
-    "node": "thm-constructible-serre",
-    "why": "Generic existing tool for the coefficient/site comparison proof; its precise assertion is quoted in citations.json and checked in the report."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Generic existing tool for the coefficient/site comparison proof; its precise assertion is quoted in citations.json and checked in the report."
+    "why": "Generic normalized counit-mate site comparison identifies the actual square faces."
    },
    {
     "node": "lem-coef-finite-direct-image",
-    "why": "Generic existing tool for the coefficient/site comparison proof; its precise assertion is quoted in citations.json and checked in the report."
+    "why": "Existing ordinary and pro-etale direct-image coefficient isomorphisms with counit normalization."
    },
    {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Generic existing tool for the coefficient/site comparison proof; its precise assertion is quoted in citations.json and checked in the report."
+    "node": "lem-exc-closed-ambient",
+    "why": "Ordinary-etale exceptional Hom adjunction defining the map."
+   },
+   {
+    "node": "lem-coef-site-closed-counit-transport",
+    "why": "Existing transported exceptional counit and adjunct formula for closed immersions, rather than a new copy of that argument."
    },
    {
     "node": "lem-coef-finite-closed-shriek",
-    "why": "Generic existing tool for the coefficient/site comparison proof; its precise assertion is quoted in citations.json and checked in the report."
+    "why": "Existing pro-etale coefficient isomorphism supplies invertibility after the explicit comparison calculation."
    },
    {
-    "node": "def-pur-sheaf-tensor-product",
-    "why": "Definition of sheaf tensor as sheafification, used for the explicit local constancy calculation on a stratum."
-   },
-   {
-    "node": "def-weil-closed-immersion",
-    "why": "Affine quotient description supplies the explicit finite-type, separated and quasi-compact hypotheses of the ordinary comparison tools."
-   },
-   {
-    "node": "lem-weil-pbc-affine-scheme-qcqs",
-    "why": "Affine scheme quasi-compactness checks inverse images of affine target opens for the closed immersion."
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic bounded-below full faithfulness reflects inverse equations and equality of diagrams."
    }
   ]
  },
@@ -340,15 +260,16 @@
   "lem-coef-finite-closed-shriek",
   "def-pur-sheaf-tensor-product",
   "def-weil-closed-immersion",
-  "lem-weil-pbc-affine-scheme-qcqs"
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-coef-site-closed-counit-transport"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q37-e6b63edfb",
-  "group": "Q37",
+  "reviewer": "NT-cc-Q43-ea029d2e3",
+  "group": "Q43",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-e6b63edfb (reviewer sub-agent of L); spot-checked: Read in full: the item's statement and all 7 steps, every cited statement, the parent lem-coef-finite-free-extension (step 17 cites the item), unit sk-thm-sf-compatibility, and the blueprint master proof paragraph 3, which is identical in main-20261015. Stacks tags 099V/09B1/09AK/09AL/07A4 resolve to the labels named. The statement is true and unchanged. Its defining transpose T eps_A c^{-1} matches lem-coef-finite-closed-shriek, and the pro-etale Ri^! is nu^* i^x Rnu_* by def-weil-exceptional-inverse-image. Steps: (1) lem-coef-etale-locally-closed-shriek, closed case with identity quotient (n>=m>=1 allowed), gives N ctf. (2) lem-sf-etale-flat-constructible and lem-sf-reduction-flat-model on Noetherian schemes, plus Serre, give TM and TN ctf with no flatness of B. (3) The same node at level m gives G_B TM ctf. Comparison Tor (i) holds with ell invertible, the tensor-pullback identification uses constant rings, and the transported value comes from the unit iso. (4) i is qcqs and separated finite type, so the canonical mate and lem-coef-finite-direct-image apply; both sides of the displayed square type-check, with the common transpose being the B-extended C(counit). (5) I recomputed the counit as C(eps^e) delta^{-1} via adjunction-of-natural-bijection; this matches the definition's transported adjunction (thm-sf-ambient-adjoint-class). (6) The transpose of C(b^et) reduces exactly to T^p(eps^p_A)(c^p)^{-1}. (7) All hypotheses of lem-coef-finite-closed-shriek hold (A_{E,n}->A_{E,m}, L=E), and full faithfulness on D^+ reflects the iso and detects diagram equality. Edge cases checked: Z empty, n=m, m=1<n nonflat, M=0. No new nodes and no cycle. The declared tool uses are generic and accepted. Remark, not a fault: the etale-iso clause is already the closed specialization of the existing node lem-coef-etale-locally-closed-shriek; the item is pre-existing, not new, and its extra content is the pro-etale identification and the descent test. Batch-5 flag on lem-coef-etale-locally-closed-shriek: accepted as outside the assumptions. It is an etale coefficient compatibility of closed i^!, which neither the trace formula nor Poincare duality states or proves. Its closure enters the flagged chapters only through the finiteness theorem sbc-thm-finiteness-finite-type, reaching only foundational nodes (scalar extension, adic limits, lisse module sheaves, filtered derived categories). The item's pre-existing stmt_deps lem-coef-finite-closed-shriek and def-weil-exceptional-inverse-image already reach the same nodes. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-ea029d2e3 (reviewer sub-agent of L); spot-checked: This repair does what the be30634e return asked (C5, D1/D2). All three duplicate nodes are dropped and there are 0 new nodes. Only proof, proof_deps and split_report changed. The statement and stmt_deps are unchanged, step 4 is verbatim the old step 4, and nothing cites SGA. A BFS over the snapshot's stmt_deps and proof_deps finds no cycle back to the item. The statement is true: its étale isomorphism is the closed case of lem-coef-etale-locally-closed-shriek. Edge cases checked: empty Z, M=0, n=m, and the non-flat case n=2, m=1. Step 1: X and Z are Noetherian. Closed-shriek preservation at (n,n) and (m,m), the input-models node on M and N, comparison-tor(i) and the tensor pullback give every domain claim. Step 2: I recomputed lem-sp-et-proet-coefficient-compatibility at h=i and c=(id,i), with beta,b = c^e,c^p, c^c = delta and its delta = t^{-1}. Multiplied out, its display is exactly the item's square. finite-direct-image applies because B is a cyclic A-algebra. Step 3: lem-coef-site-closed-counit-transport applies at both levels on D+ inputs. Naturality of t plus the inverted square turn the transpose into T^p eps^p_A (c^p)^{-1}, the defining transpose of lem-coef-finite-closed-shriek. Step 4: full faithfulness on D+ gives the inverse and the diagram test. Re-split: each of the 7 old steps is carried by an existing reviewed statement or by the 3-line rewrite in step 3. The proof is a 4-step assembly of 2385 characters, longest step 723. New nodes would duplicate reviewed statements, so zero is right. Maintainer note: the human's re-split count needs a recorded waiver, which I recommend granting. Batch-5: input-models and et-proet-coefficient-compatibility reach sec-trace-formula only through det-sp-scalar-extension-functor to lem-trf-site-functorial-flat-resolution. That node is a generic result that module sheaves on a site have functorial flat resolutions. It is not part of the trace formula or Poincaré duality, so both citations are accepted. The declared tool_uses are generic and accepted."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -379,5 +300,16 @@
   ],
   "note": "Repair of H3 at immutable head 87772e94d5bf: explicitly asserts IsIso of the canonical ordinary-etale direct-image coefficient comparison c, supplies its two-sided inverse cInv, and identifies b by the exceptional adjunction homEquiv applied to cInv followed by T(epsilon_A). Retains the original counit equation, same-field quotient, finite-Tor outputs, canonical pro-etale transport equation, and bounded-below equality reflection. All seven real-data helpers remain listed in declarations."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

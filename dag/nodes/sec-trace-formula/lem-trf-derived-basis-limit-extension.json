@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-derived-basis-limit-extension",
+ "kind": "statement",
+ "title": "Extension of all basis identifications at a continuous ordinal limit",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal B$ be a set of open subsets covering $X$, with $U\\cap V=\\bigcup_{T\\in\\mathcal B,\\,T\\subset U\\cap V}T$ for $U,V\\in\\mathcal B$. For every $U\\in\\mathcal B$ give $K_U\\in D(\\mathcal O_U)$ [def-pc-derived-category] and for every inclusion $V\\subset U$ in $\\mathcal B$ give an isomorphism $\\rho_V^U:K_U|_V\\xrightarrow{\\sim}K_V$, with $\\rho_U^U=1$ and $\\rho_T^U=\\rho_T^V\\circ(\\rho_V^U|_T)$ for $T\\subset V\\subset U$. Assume $\\operatorname{Hom}(K_U,K_U[i])=0$ for every $U\\in\\mathcal B$ and every integer $i<0$. For a union $O$ of members of $\\mathcal B$, put $\\mathcal B_O=\\{U\\in\\mathcal B:U\\subset O\\}$. A solution on $O$ means an object $F\\in D(\\mathcal O_O)$ with isomorphisms $s_U:F|_U\\xrightarrow{\\sim}K_U$ for every $U\\in\\mathcal B_O$, satisfying $\\rho_V^U\\circ(s_U|_V)=s_V$ for all inclusions $V\\subset U$ in $\\mathcal B_O$. Let $\\lambda$ be a nonzero set-sized limit ordinal and let $(W_\\beta)_{\\beta<\\lambda}$ be increasing unions of members of $\\mathcal B$, with $W_0=\\varnothing$ and $W_\\delta=\\bigcup_{\\beta<\\delta}W_\\beta$ for every nonzero limit $\\delta<\\lambda$. Put $W_\\lambda=\\bigcup_{\\beta<\\lambda}W_\\beta$. Suppose solutions $(F_\\beta,s_\\beta)$ on $W_\\beta$ are supplied, with $\\operatorname{Hom}(F_\\beta,F_\\beta[i])=0$ for $i<0$, and isomorphisms $r_\\gamma^\\beta:F_\\beta|_{W_\\gamma}\\xrightarrow{\\sim}F_\\gamma$ for $\\gamma<\\beta<\\lambda$. Assume $r_\\eta^\\beta=r_\\eta^\\gamma\\circ(r_\\gamma^\\beta|_{W_\\eta})$ for $\\eta<\\gamma<\\beta$ and $s_{\\gamma,U}\\circ(r_\\gamma^\\beta|_U)=s_{\\beta,U}$ for $U\\in\\mathcal B_{W_\\gamma}$. Then there are a solution $(F_\\lambda,s_\\lambda)$ on $W_\\lambda$ and isomorphisms $r_\\beta:F_\\lambda|_{W_\\beta}\\xrightarrow{\\sim}F_\\beta$ with $r_\\gamma^\\beta\\circ(r_\\beta|_{W_\\gamma})=r_\\gamma$ and $s_{\\lambda,U}=s_{\\beta,U}\\circ(r_\\beta|_U)$ for every $U\\in\\mathcal B_{W_\\beta}$. For each $U\\in\\mathcal B_{W_\\lambda}$, the map $s_{\\lambda,U}$ is the unique morphism $F_\\lambda|_U\\to K_U$ satisfying $\\rho_V^U\\circ(s_{\\lambda,U}|_V)=s_{\\beta,V}\\circ(r_\\beta|_V)$ for all $\\beta<\\lambda$ and $V\\in\\mathcal B$ with $V\\subset U\\cap W_\\beta$; it is an isomorphism. No member $U\\in\\mathcal B_{W_\\lambda}$ is required to lie in a single $W_\\beta$, and no quasi-compactness or boundedness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D6B (cohomology-lemma-glueing-increasing-union) and 0D6C (cohomology-theorem-glueing-bbd-general), limit step and final compatibility bookkeeping."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-trf-module-open-map-comp-iso"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-derived-basis-increasing-union] on the open subscheme $W_\\lambda$, with $K_\\beta=F_\\beta$. The ordinal is set-sized, the opens cover $W_\\lambda$, continuity includes $W_0=\\varnothing$, and the required negative self Hom and cocycle are hypotheses. Obtain $F_\\lambda$ and $r_\\beta:F_\\lambda|_{W_\\beta}\\cong F_\\beta$ with $r_\\gamma=r_\\gamma^\\beta\\circ(r_\\beta|_{W_\\gamma})$.",
+   "uses": [
+    "lem-trf-derived-basis-increasing-union"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6B (cohomology-lemma-glueing-increasing-union); Tag 0D6C, limit paragraph"
+   }
+  },
+  {
+   "text": "Fix $U\\in\\mathcal B_{W_\\lambda}$ and put $\\mathcal C_U=\\{V\\in\\mathcal B:V\\subset U\\cap W_\\beta\\text{ for some }\\beta<\\lambda\\}$. It covers $U$: for $x\\in U$, choose a stage containing $x$, a member $T\\in\\mathcal B$ containing $x$ inside that stage, and then a member $V$ containing $x$ inside $T\\cap U$. Intersections of two members are covered by members of $\\mathcal C_U$, using the original intersection property and the fact that any smaller member remains in the same stage. For $V\\subset U\\cap W_\\beta$ define $a_V=(\\rho_V^U)^{-1}\\circ s_{\\beta,V}\\circ(r_\\beta|_V)$. If $\\beta\\le\\gamma$ are two choices, the equations $r_\\beta=r_\\beta^\\gamma(r_\\gamma|_{W_\\beta})$ and $s_{\\beta,V}(r_\\beta^\\gamma|_V)=s_{\\gamma,V}$ show the two formulas agree (equality of indices is immediate). Thus $a_V$ is well defined. For $T\\subset V$ in $\\mathcal C_U$, choose a stage for $V$, hence also for $T$; the cocycle for $\\rho$ and the solution equation for $s_\\beta$ give $a_V|_T=a_T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6C (cohomology-theorem-glueing-bbd-general), final paragraph: the system on U"
+   }
+  },
+  {
+   "text": "On each $V\\in\\mathcal C_U$, both $F_\\lambda|_V$ and $K_U|_V$ are isomorphic to $K_V$, via $s_{\\beta,V}(r_\\beta|_V)$ and $\\rho_V^U$. Consequently the negative Hom hypotheses hold for both ordered cross pairs and both self pairs, by conjugating with these isomorphisms and their shifts. Apply [lem-trf-derived-basis-local-hom-glue] on the scheme $U$, with covering collection $\\mathcal C_U$, to glue the $a_V$ to a unique morphism $s_{\\lambda,U}:F_\\lambda|_U\\to K_U$. Apply it to the inclusion-compatible inverse family $a_V^{-1}$ to obtain $b_U$. For the two self pairs, Hom injectivity identifies $b_Us_{\\lambda,U}$ and $s_{\\lambda,U}b_U$ with the identities, since they restrict to identities on every $V$. Thus $s_{\\lambda,U}$ is an isomorphism. Its restriction equation is precisely $\\rho_V^U(s_{\\lambda,U}|_V)=s_{\\beta,V}(r_\\beta|_V)$. Hom injectivity also proves uniqueness among all morphisms satisfying these equations.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D68 (cohomology-lemma-uniqueness) and 0D6C, final paragraph: existence and uniqueness on U"
+   }
+  },
+  {
+   "text": "For $T\\subset U$ in $\\mathcal B_{W_\\lambda}$ compare $\\rho_T^U(s_{\\lambda,U}|_T)$ with $s_{\\lambda,T}$. On every $V\\in\\mathcal C_T$, contained in some $W_\\beta$, the restriction of the first is $\\rho_T^U|_V(\\rho_V^U)^{-1}s_{\\beta,V}(r_\\beta|_V)=(\\rho_V^T)^{-1}s_{\\beta,V}(r_\\beta|_V)$ by the original cocycle. This is the restriction of the second by Step 3. Apply Hom injectivity in [lem-trf-derived-basis-local-hom-glue] on $T$ for $F_\\lambda|_T,K_T$ and the cover $\\mathcal C_T$; its local negative Hom follows from their identifications with $K_V$. The two maps are equal. Hence the maps just constructed form a solution on every member, including those crossing all earlier stages.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D6C, last sentence: explicit inclusion-compatibility bookkeeping"
+   }
+  },
+  {
+   "text": "If $U\\in\\mathcal B_{W_\\beta}$, then $U$ itself belongs to $\\mathcal C_U$. The defining equation at $V=U$ and $\\rho_U^U=1$ give $s_{\\lambda,U}=s_{\\beta,U}(r_\\beta|_U)$. Together with Step 1 this gives all stage comparisons. If $U=\\varnothing$ or $W_\\lambda=\\varnothing$, the same Hom bijections apply: [lem-trf-derived-basis-local-hom-glue] explicitly includes the empty scheme and empty covering family. The argument uses only set-sized covers; no finite subcover, boundedness, or containment of $U$ in one stage was used.",
+   "uses": [
+    "lem-trf-derived-basis-local-hom-glue"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0D68 and 0D6C, conclusion and empty-open case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-basis-increasing-union",
+  "lem-trf-derived-basis-local-hom-glue"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D6B and 0D6C, limit construction and final paragraph, with the omitted compatibility bookkeeping written out using Tag 0D68."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gluing compatible derived objects and basis identifications over a continuous increasing ordinal union of opens without quasi compactness",
+   "results": "8 hits; top=['TopCat.GlueData.ofOpenSubsets_toGlueData_V', \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", 'TopCat.Presheaf.isGluing_iff_pairwise', 'TopCat.Presheaf.IsGluing', 'AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map', 'AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val', 'AlgebraicGeometry.Scheme.Cover.LocallyDirected.ofIsBasisOpensRange_trans', 'TopCat.GlueData.ofOpenSubsets_toGlueData_U']; note=; digest=46cada8fd08c7977",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological gluing, ordinary sheaf sections, colimits of complexes on a fixed category, and topological refinements; none gives ordinal derived descent with all basis identifications. Loogle and targeted source grep return no declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous increasing family of open subsets carries compatible complexes with vanishing negative Ext; glue the complexes and all local basis identifications at the limit",
+   "results": "8 hits; top=['HomologicalComplex.isColimitOfEval', 'TopCat.GlueData.fromOpenSubsetsGlue_isOpenMap', 'TopCat.GlueData.ofOpenSubsets', 'TopCat.Presheaf.IsGluing', \"Opens.mayerVietorisSquare'\", 'TopCat.GlueData.fromOpenSubsetsGlue_isOpenEmbedding', 'TopCat.GlueData.MkCore.mk.inj', 'TopCat.GlueData.fromOpenSubsetsGlue_injective']; note=; digest=3d2b1cd2d2478485",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological gluing, ordinary sheaf sections, colimits of complexes on a fixed category, and topological refinements; none gives ordinal derived descent with all basis identifications. Loogle and targeted source grep return no declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"iUnion\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological gluing, ordinary sheaf sections, colimits of complexes on a fixed category, and topological refinements; none gives ordinal derived descent with all basis identifications. Loogle and targeted source grep return no declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|DerivedCategory).*(increasing|ordinal|union)|(increasing|ordinal|union).*(derived|DerivedCategory)",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological gluing, ordinary sheaf sections, colimits of complexes on a fixed category, and topological refinements; none gives ordinal derived descent with all basis identifications. Loogle and targeted source grep return no declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a limit ordinal extend compatible local identifications of a derived complex to basis opens not contained in any earlier open stage",
+   "results": "8 hits; top=['ShrinkingLemma.PartialRefinement.exists_gt', 'ShrinkingLemma.PartialRefinement.chainSup', 'precise_refinement', 'ShrinkingLemma.PartialRefinement', 'ShrinkingLemma.PartialRefinement.apply_eq_of_chain', 'TopologicalSpace.IsOpenCover.generalizingMap_iff_comp', \"ContinuousMap.liftCover_restrict'\", 'ShrinkingLemma.PartialRefinement.find_apply_of_mem']; note=; digest=a572323e6ad9d97d",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological gluing, ordinary sheaf sections, colimits of complexes on a fixed category, and topological refinements; none gives ordinal derived descent with all basis identifications. Loogle and targeted source grep return no declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "BBD|[Dd]erived.*[Gg]lu|[Gg]lu.*[Dd]erived",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern topological gluing, ordinary sheaf sections, colimits of complexes on a fixed category, and topological refinements; none gives ordinal derived descent with all basis identifications. Loogle and targeted source grep return no declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(increasing|ordinal|gluing|glueing)|(increasing|ordinal).*derived",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/Algebra",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf or topological gluing, bounded representatives and fraction presentations do not give ordinal descent with all basis identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing compatible complexes on an increasing ordinal family of open subsets and extending isomorphisms to an open not contained in a single stage",
+   "results": "8 hits; top=['TopCat.Presheaf.IsGluing', 'TopCat.GlueData.ofOpenSubsets', 'TopCat.Presheaf.IsSheafUniqueGluing', 'TopCat.Sheaf.interUnionPullbackConeLift', 'TopCat.GlueData.mk', 'TopCat.GlueData.fromOpenSubsetsGlue_isOpenMap', 'TopCat.GlueData.fromOpenSubsetsGlue_isOpenEmbedding', \"TopCat.GlueData.mk'\"]; note=; digest=30eb13004087044a",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf or topological gluing, bounded representatives and fraction presentations do not give ordinal descent with all basis identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"glue\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf or topological gluing, bounded representatives and fraction presentations do not give ordinal descent with all basis identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend compatible derived object identifications to every member of an open cover at a continuous ordinal union using vanishing negative Ext",
+   "results": "8 hits; top=['DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.exists_iso_Q_obj_of_isLE', 'DerivedCategory.exists_iso_Q_obj_of_isGE', 'CategoryTheory.HasInjectiveDimensionLT.mk', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.isLE_iff', 'CategoryTheory.hasInjectiveDimensionLT_iff', \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\"]; note=; digest=c5e9bf072cc442d2",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf or topological gluing, bounded representatives and fraction presentations do not give ordinal descent with all basis identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "BBD|derived.*(gluing|glueing|descent)|(gluing|glueing).*derived",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf or topological gluing, bounded representatives and fraction presentations do not give ordinal descent with all basis identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of unbounded derived complexes on continuous ordinal open covers and unique gluing of local derived morphisms with negative self Ext zero",
+   "results": "8 hits; top=['DerivedCategory.right_fac', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.left_fac', 'DerivedCategory.exists_iso_Q_obj_of_isLE', 'DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE', 'DerivedCategory.right_fac_of_isStrictlyLE', 'DerivedCategory.exists_iso_Q_obj_of_isGE']; note=; digest=a3cd79540b8d75f9",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary sheaf or topological gluing, bounded representatives and fraction presentations do not give ordinal descent with all basis identifications"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-basis-bbd-descent",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; BBD descent for derived objects with vanishing negative self extensions. Re-split component: BBD descent of the polynomial-chart dualizing object: continuous-limit gluing and extension to every chosen open, previously steps 6, 7 and the limit-compatibility part of step 8 of lem-trf-derived-basis-bbd-descent.",
+   "via": [
+    "lem-trf-derived-basis-bbd-descent",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-basis-limit-extension",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused the existing continuous-ordinal object-gluing and local Hom-descent nodes. Constructed the stage-refining cover on each original open, verified independence of stage and inclusion compatibility, glued maps and inverse maps, and proved every original-family and stage equation, including uniqueness and empty cases. No new nodes.",
+  "blueprint": "Realizes the inherited BBD-descent limit component recorded in blueprint.from.place (Tags 0D6B and 0D6C); retains the lem-trf-local-term-locality ancestry and via list. Current latest local-term proof and unit were read; this generic supporting lemma does not replace their route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-65cc3e8e7",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-65cc3e8e7 (reviewer sub-agent of L); spot-checked: I read the whole item and both cited statements: lem-trf-derived-basis-increasing-union and lem-trf-derived-basis-local-hom-glue. I also read the parent lem-trf-derived-basis-bbd-descent, the unit sk-i-curve-zero and Stacks 0D6B and 0D6C at cohomology.tex l.11343-11589. The delivery has no new nodes and no tool_uses. The statement is the 0D6C limit case with the bookkeeping Stacks omits written out. It matches how the parent's Step 4 uses it. Step 1: every hypothesis of increasing-union holds on W_lambda. Continuity at non-successor ordinals is the same condition as W_0 empty plus continuity at nonzero limits. Negative self-Hom vanishing and the cocycle are hypotheses of the item. Step 2: I checked by hand that C_U covers U, that it has the intersection property, that a_V does not depend on the stage (via r_beta = r^gamma_beta r_gamma and the s-equation), and that a_V|_T = a_T. Step 3: local-hom-glue is applied on U with cover C_U. Its local negative Hom hypothesis holds for both cross pairs and both self pairs by conjugating to K_V. The glued map and the glued inverse family give a two-sided inverse, and injectivity gives the stated uniqueness, whose index set is exactly C_U. Step 4: the cocycle rho_V^U = rho_V^T rho_T^U|_V together with injectivity on T gives the solution equation. Step 5: taking V = U and rho_U^U = 1 works, and the empty cases are covered by the cited node's empty clause. Step 5 is marked elementary while listing a cited node in uses; this is harmless. I tested lambda = omega with a member U contained in no single stage, U empty, the empty set in the family, and repeated stages. proof_deps equals the union of uses, there is no cycle, both inputs are in the same unit, there is no SGA citation, and the DAG search for 0D6B/0D6C and derived-basis/glue nodes found no duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedBasisLimitExtension",
+  "declaration": "AlgebraicGeometry.derived_basis_limit_extension",
+  "declarations": [
+   "AlgebraicGeometry.derivedOpenMapRestrictHom",
+   "AlgebraicGeometry.derived_basis_limit_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedBasisLimitExtension.lean",
+  "statement": "theorem derived_basis_limit_extension (X : Scheme.{u}) (lambda : Ordinal.{v}) (hlimit : Order.IsSuccLimit lambda) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (B : Set X.Opens) (hcover : sSup B = ⊤) (hrefine : ∀ U ∈ B, ∀ V ∈ B, sSup {T : X.Opens | T ∈ B ∧ T ≤ U ⊓ V} = U ⊓ V) (K : ∀ U : {U : X.Opens // U ∈ B}, DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U.val))) (rho : ∀ (U V : {U : X.Opens // U ∈ B}) (h : V.val ≤ U.val), (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)).mapDerivedCategory.obj (K U) ≅ K V) (rho_id : ∀ U : {U : X.Opens // U ∈ B}, (rho U U le_rfl).hom = (Functor.mapDerivedCategoryNatIso (NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso (PresheafOfModules.isoMk (fun _ ↦ Iso.refl _))) : SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (le_refl U.val)) ≅ 𝟭 (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U.val))) ≪≫ Functor.mapDerivedCategoryIdIso _).hom.app (K U)) (rho_comp : ∀ (U V T : {U : X.Opens // U ∈ B}) (hVU : V.val ≤ U.val) (hTV : T.val ≤ V.val), derivedOpenMapRestrictHom X (homOfLE hTV) (homOfLE hVU) (rho U V hVU).hom ≫ (rho V T hTV).hom = (rho U T (hTV.trans hVU)).hom) (hnegative : ∀ (U : {U : X.Opens // U ∈ B}) (i : ℤ), i < 0 → Subsingleton (K U ⟶ (K U)⟦i⟧)) (W : lambda.ToType → X.Opens) (hincreasing : Monotone W) (hunion : ∀ beta : lambda.ToType, sSup {U : X.Opens | U ∈ B ∧ U ≤ W beta} = W beta) (hcontinuous : ∀ delta : lambda.ToType, Order.IsSuccPrelimit delta → W delta = ⨆ beta : {beta : lambda.ToType // beta < delta}, W beta.val) (F : ∀ beta : lambda.ToType, DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (W beta)))) (s : ∀ (beta : lambda.ToType) (U : {U : X.Opens // U ∈ B}) (h : U.val ≤ W beta), (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)).mapDerivedCategory.obj (F beta) ≅ K U) (hs : ∀ (beta : lambda.ToType) (U V : {U : X.Opens // U ∈ B}) (hU : U.val ≤ W beta) (hVU : V.val ≤ U.val), derivedOpenMapRestrictHom X (homOfLE hVU) (homOfLE hU) (s beta U hU).hom ≫ (rho U V hVU).hom = (s beta V (hVU.trans hU)).hom) (hFnegative : ∀ (beta : lambda.ToType) (i : ℤ), i < 0 → Subsingleton (F beta ⟶ (F beta)⟦i⟧)) (r : ∀ (gamma beta : lambda.ToType) (h : gamma < beta), (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (hincreasing h.le))).mapDerivedCategory.obj (F beta) ≅ F gamma) (hr : ∀ (eta gamma beta : lambda.ToType) (heg : eta < gamma) (hgb : gamma < beta), derivedOpenMapRestrictHom X (homOfLE (hincreasing heg.le)) (homOfLE (hincreasing hgb.le)) (r gamma beta hgb).hom ≫ (r eta gamma heg).hom = (r eta beta (heg.trans hgb)).hom) (hrs : ∀ (gamma beta : lambda.ToType) (hgb : gamma < beta) (U : {U : X.Opens // U ∈ B}) (hU : U.val ≤ W gamma), derivedOpenMapRestrictHom X (homOfLE hU) (homOfLE (hincreasing hgb.le)) (r gamma beta hgb).hom ≫ (s gamma U hU).hom = (s beta U (hU.trans (hincreasing hgb.le))).hom) : ∃ (L : DerivedCategory (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (iSup W)))) (sL : ∀ (U : {U : X.Opens // U ∈ B}) (h : U.val ≤ iSup W), (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE h)).mapDerivedCategory.obj L ≅ K U) (rL : ∀ beta : lambda.ToType, (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE (le_iSup W beta))).mapDerivedCategory.obj L ≅ F beta), (∀ (U V : {U : X.Opens // U ∈ B}) (hU : U.val ≤ iSup W) (hVU : V.val ≤ U.val), derivedOpenMapRestrictHom X (homOfLE hVU) (homOfLE hU) (sL U hU).hom ≫ (rho U V hVU).hom = (sL V (hVU.trans hU)).hom) ∧ (∀ (gamma beta : lambda.ToType) (hgb : gamma < beta), derivedOpenMapRestrictHom X (homOfLE (hincreasing hgb.le)) (homOfLE (le_iSup W beta)) (rL beta).hom ≫ (r gamma beta hgb).hom = (rL gamma).hom) ∧ (∀ (beta : lambda.ToType) (U : {U : X.Opens // U ∈ B}) (hU : U.val ≤ W beta), (sL U (hU.trans (le_iSup W beta))).hom = derivedOpenMapRestrictHom X (homOfLE hU) (homOfLE (le_iSup W beta)) (rL beta).hom ≫ (s beta U hU).hom) ∧ (∀ (U : {U : X.Opens // U ∈ B}) (hU : U.val ≤ iSup W), (∀ (beta : lambda.ToType) (V : {U : X.Opens // U ∈ B}) (hVU : V.val ≤ U.val) (hV : V.val ≤ W beta), derivedOpenMapRestrictHom X (homOfLE hVU) (homOfLE hU) (sL U hU).hom ≫ (rho U V hVU).hom = derivedOpenMapRestrictHom X (homOfLE hV) (homOfLE (le_iSup W beta)) (rL beta).hom ≫ (s beta V hV).hom) ∧ (∀ a : (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hU)).mapDerivedCategory.obj L ⟶ K U, (∀ (beta : lambda.ToType) (V : {U : X.Opens // U ∈ B}) (hVU : V.val ≤ U.val) (hV : V.val ≤ W beta), derivedOpenMapRestrictHom X (homOfLE hVU) (homOfLE hU) a ≫ (rho U V hVU).hom = derivedOpenMapRestrictHom X (homOfLE hV) (homOfLE (le_iSup W beta)) (rL beta).hom ≫ (s beta V hV).hom) → a = (sL U hU).hom))",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the shared localized-open-site encoding of DerivedBasisIncreasingUnion, canonically equivalent via Scheme.Modules.overEquiv to D(O_U). derivedOpenMapRestrictHom is the existing successive-restriction comparison followed by restriction of the morphism. The ordinal is arbitrary set-sized; IsSuccPrelimit continuity includes the initial empty stage. The uniqueness clause quantifies over all morphisms, not only isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76cb03095",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery of 2b18 H2/H4 RETURN. New existing:true def node def-trf-module-open-map-comp-iso owns moduleOpenMapCompIso/derivedModuleOpenMapCompIso on the unchanged DerivedBasisIncreasingUnion. Its lean.statement occurs verbatim in live source; node text matches the bodies (sectionwise Iso.refl; mapDerivedCategoryCompIso.symm ≪≫ NatIso) and the j-then-i order. The item adds it to stmt_deps and otherwise differs from live only in the lean date. lean.statement is verbatim the file signature; one sorry. Clause check vs node/Stacks 0D6B/0D6C: hcover, hrefine, rho_id (inline = parent's derivedModuleOpenMapIdIso body; parent downstream), rho_comp, hnegative, λ IsSuccLimit, Monotone W, hunion, IsSuccPrelimit continuity incl. W_0=∅, F/s/hs/hFnegative, r/hr/hrs; conclusion L on iSup W, sL for every U ≤ iSup W, rL, r and stage equations, uniqueness over all morphisms. No extra assumptions. Edge cases: empty X/B, ∅∈B, all W empty, repeated stages, U in no stage. No compile (no file changed). Advisory: NR binary-extension 5835 (PASS, unlanded) adds def-trf-derived-module-open-map-comp-iso owning the same decls; the second lander drops its node and rebinds."
+ }
+}

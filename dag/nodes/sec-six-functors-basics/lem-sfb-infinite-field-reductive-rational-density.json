@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-infinite-field-reductive-rational-density",
+ "kind": "statement",
+ "title": "Density of rational points of a reductive group over an infinite field",
+ "statement": "Let $k$ be an infinite field [def-weil-field] and let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology]: smooth [def-sbc-smooth-morphisms], affine, of finite type [def-weil-finite-type-morphism], geometrically connected [def-weil-connected-scheme], and with no nontrivial smooth connected normal unipotent subgroup over an algebraic closure. Unipotent means that all geometric points are unipotent matrices in a faithful finite-dimensional representation. For every nonempty Zariski open subscheme $V\\subseteq G$ [def-weil-open-immersion], there exists a $k$-morphism $\\operatorname{Spec}k\\to V$. Equivalently, the images of the $k$-rational points $G(k)=\\operatorname{Hom}_k(\\operatorname{Spec}k,G)$ are dense in the underlying Zariski topological space of $G$. No perfectness hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.93(b), printed p.382, including the parenthetical rational-point density conclusion; cited explicitly in the proof of Theorem 25.9(a), p.546."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-cartan-product-dominance], choose maximal $k$-tori $T_1,\\ldots,T_m$ with dominant multiplication $\\mu:\\prod_i C_G(T_i)\\to G$. Its hypotheses hold: $k$ is infinite and reductivity supplies smoothness, geometric connectedness and affine finite type. This is the Cartan-product input of Milne 17.92, not a claim that products of the sets of rational points already fill $G(k)$.",
+   "uses": [
+    "lem-sfb-cartan-product-dominance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.91 and proof of Corollary 17.92, pp.381--382, used in Theorem 17.93(b)."
+   }
+  },
+  {
+   "text": "For each $i$, $T_i$ is a maximal $k$-torus: no closed torus subgroup of $G$ strictly contains it (a strictly larger one would give a non-isomorphic factorization of the inclusion, against [def-sfb-reductive-torus-centralizer-terminology]). By [lem-sfb-maximal-torus-field-extension] with $L=\\bar k$, $(T_i)_{\\bar k}$ is maximal in $G_{\\bar k}$; then [lem-sfb-reductive-torus-self-centralizer] gives $C_G(T_i)=T_i$ as subgroup functors, hence as closed subgroup schemes, so $\\mu$ is a dominant morphism from $P=\\prod_iT_i$. The group $P$ is a torus: after scalar extension, the fibre-product universal property [def-pc-fibre-product] identifies its points with tuples in the split tori $(T_i)_{\\bar k}$, and concatenating their coordinates gives $P_{\\bar k}\\simeq\\mathbf G_m^{\\sum_i r_i}$ [def-sfb-tori-multiplicative-type]. Apply [lem-sfb-torus-unirational-parametrization] to $P$ to obtain a nonempty open $U\\subseteq\\mathbb A^n_k$ and a dominant $k$-morphism $q:U\\to P$. No perfectness, splitness over $k$, or separability of $q$ is used.",
+   "uses": [
+    "def-sfb-reductive-torus-centralizer-terminology",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "def-pc-fibre-product",
+    "def-sfb-tori-multiplicative-type",
+    "lem-sfb-torus-unirational-parametrization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.93(b), p.382; Corollary 17.84 and its proof (Theorem 17.82 and Proposition 17.61), p.379 and p.372; Proposition 12.64, p.251."
+   }
+  },
+  {
+   "text": "Let $V\\subseteq G$ be nonempty open. Dominance of $\\mu$ means that $\\mu^{-1}(V)$ is nonempty; it is open by continuity. Dominance of $q$ then makes $W=q^{-1}(\\mu^{-1}(V))$ nonempty. It is open in $U$, hence in $\\mathbb A^n_k$ since $U$ is open. Thus it suffices to find a rational point of this particular nonempty affine-space open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark after Definition 12.59, p.250: dominance reduced to inverse images of opens."
+   }
+  },
+  {
+   "text": "Write $R=k[x_1,\\ldots,x_n]$. In the Zariski topology on $\\operatorname{Spec}R$ [def-weil-affine-spectrum], choose a prime $\\mathfrak p\\in W$. The closed complement is $V(I)$ for some ideal $I$, so choose $f\\in I\\setminus\\mathfrak p$; then $\\mathfrak p\\in D(f)\\subseteq W$ and $f\\ne0$. View $f$ as a Laurent polynomial; its distinct nonnegative exponent tuples remain distinct in $\\mathbf Z^n$, so some coefficient is nonzero. Apply [lem-sfb-laurent-vector-evaluation-test] with vector space $k$ and subspace $0$. If $f(t)=0$ for every $t\\in(k^\\times)^n$, all its coefficients would be zero. Hence choose $t$ with $f(t)\\ne0$. Evaluation $R\\to k$ defines a $k$-point whose prime kernel avoids $f$, so its image lies in $D(f)\\subseteq W$. This also covers $n=0$, when $f$ is a nonzero constant.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-laurent-vector-evaluation-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark following Definition 12.59, p.250; polynomial nonvanishing supplied by the existing Laurent evaluation lemma."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-morphism-factors-through-open-subscheme] the evaluation point factors through $W$. Composing with $q$ and $\\mu$ gives a $k$-point of $G$ whose image is in $V$, and the same open-factorization lemma gives a morphism $\\operatorname{Spec}k\\to V$. These factorizations are over $k$: their compositions with the structure map agree after the inclusions, hence equal the original structure map. Every nonempty open therefore meets $G(k)$. If its closure were proper, the nonempty open complement would contain no such point, a contradiction; this proves the stated density equivalence.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark following Definition 12.59, p.250, and the parenthetical conclusion of Theorem 17.93(b), p.382."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cartan-product-dominance",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "def-pc-fibre-product",
+  "def-sfb-tori-multiplicative-type",
+  "lem-sfb-torus-unirational-parametrization",
+  "def-weil-affine-spectrum",
+  "lem-sfb-laurent-vector-evaluation-test",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.93(b), printed p.382, through the dominant product in Corollary 17.92, Corollary 17.84 and Proposition 12.64; the density argument of the remark following Definition 12.59, p.250, is written out using the existing Laurent evaluation lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rational points of a connected reductive group are Zariski dense over every infinite field",
+   "results": "{\"t\": \"2026-10-24T07:06:02Z\", \"tool\": \"leansearch\", \"query\": \"Rational points of a connected reductive group are Zariski dense over every infinite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"NumberField.InfiniteAdeleRing.denseRange_algebraMap\", \"Padic.isDenseInducing_cast_withVal\", \"Rat.denseRange_cast\", \"Padic.rat_dense'\", \"Padic.denseRange_ratCast\", \"Subgroup.dense_iff_ne_zpowers\"], \"digest\": \"bf8b3c031ad4143b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned rational-map domain density and dominant-morphism definitions assume different input, and number-field/p-adic density uses different topology. Dense-subsite and abstract minimal-action declarations do not prove density of rational points of a reductive group."
+  },
+  {
+   "tool": "grep",
+   "query": "unirational|rationalPoints.*dense|dense.*rationalPoints",
+   "results": "{\"t\": \"2026-10-24T07:06:06Z\", \"tool\": \"grep\", \"query\": \"unirational|rationalPoints.*dense|dense.*rationalPoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned rational-map domain density and dominant-morphism definitions assume different input, and number-field/p-adic density uses different topology. Dense-subsite and abstract minimal-action declarations do not prove density of rational points of a reductive group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Zariski\", \"dense\"",
+   "results": "{\"t\": \"2026-10-24T07:06:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Zariski\\\", \\\"dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\"], \"digest\": \"b21a38337ebaa617\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned rational-map domain density and dominant-morphism definitions assume different input, and number-field/p-adic density uses different topology. Dense-subsite and abstract minimal-action declarations do not prove density of rational points of a reductive group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive algebraic group over an infinite field has Zariski dense rational points",
+   "results": "{\"t\": \"2026-10-24T07:06:17Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive algebraic group over an infinite field has Zariski dense rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.InfiniteAdeleRing.denseRange_algebraMap\", \"NumberField.InfinitePlace.denseRange_algebraMap_pi\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.IsDominant.denseRange\", \"ax_grothendieck_of_definable\", \"AlgebraicGeometry.dominant_eq_topologically\", \"FirstOrder.Field.ACF_zero_realize_iff_infinite_ACF_prime_realize\"], \"digest\": \"9760ead3c4e88b7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned rational-map domain density and dominant-morphism definitions assume different input, and number-field/p-adic density uses different topology. Dense-subsite and abstract minimal-action declarations do not prove density of rational points of a reductive group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty Zariski open subset of a reductive group over an infinite field contains a rational point",
+   "results": "{\"t\": \"2026-10-24T07:09:04Z\", \"tool\": \"leanfinder\", \"query\": \"Every nonempty Zariski open subset of a reductive group over an infinite field contains a rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"krullTopology_isTotallySeparated\", \"IsOpen.exists_smul_mem\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"IsOpen.iUnion_smul\", \"IsOpen.dense_of_preimage_smul_invariant\", \"IntermediateField.fixingSubgroup_isOpen\"], \"digest\": \"48eef371307e08da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned rational-map domain density and dominant-morphism definitions assume different input, and number-field/p-adic density uses different topology. Dense-subsite and abstract minimal-action declarations do not prove density of rational points of a reductive group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive algebraic group over an infinite field has Zariski dense rational points",
+   "results": "{\"t\": \"2026-10-24T08:15:33Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive algebraic group over an infinite field has Zariski dense rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.InfiniteAdeleRing.denseRange_algebraMap\", \"NumberField.InfinitePlace.denseRange_algebraMap_pi\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.IsDominant.denseRange\", \"ax_grothendieck_of_definable\", \"AlgebraicGeometry.dominant_eq_topologically\", \"FirstOrder.Field.ACF_zero_realize_iff_infinite_ACF_prime_realize\"], \"digest\": \"9760ead3c4e88b7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic density/open intersection, rational-map domain density and other topologies do not establish reductive-group rational-point density."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nonempty open subset of a reductive algebraic group over an infinite field has a rational point",
+   "results": "{\"t\": \"2026-10-24T08:15:32Z\", \"tool\": \"leansearch\", \"query\": \"Every nonempty open subset of a reductive algebraic group over an infinite field has a rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGenericPoint.mem_open_set_iff\", \"Dense.exists_mem_open\", \"TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent\", \"IsOpen.dense\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.component_nontrivial\", \"IsOpen.affineSpan_eq_top\", \"TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent\"], \"digest\": \"429e944e3b343e6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic density/open intersection, rational-map domain density and other topologies do not establish reductive-group rational-point density."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Zariski\", \"dense\"",
+   "results": "{\"t\": \"2026-10-24T08:15:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Zariski\\\", \\\"dense\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\"], \"digest\": \"b21a38337ebaa617\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic density/open intersection, rational-map domain density and other topologies do not establish reductive-group rational-point density."
+  },
+  {
+   "tool": "grep",
+   "query": "unirational|rationalPoints.*dense|dense.*rationalPoints",
+   "results": "{\"t\": \"2026-10-24T08:15:32Z\", \"tool\": \"grep\", \"query\": \"unirational|rationalPoints.*dense|dense.*rationalPoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic density/open intersection, rational-map domain density and other topologies do not establish reductive-group rational-point density."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonempty Zariski open subset of a reductive group over an infinite field contains a rational point",
+   "results": "{\"t\": \"2026-10-24T08:15:34Z\", \"tool\": \"leanfinder\", \"query\": \"Every nonempty Zariski open subset of a reductive group over an infinite field contains a rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"krullTopology_isTotallySeparated\", \"IsOpen.exists_smul_mem\", \"AlgebraicGeometry.dominant_eq_topologically\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"IsOpen.iUnion_smul\", \"IsOpen.dense_of_preimage_smul_invariant\", \"IntermediateField.fixingSubgroup_isOpen\"], \"digest\": \"48eef371307e08da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic density/open intersection, rational-map domain density and other topologies do not establish reductive-group rational-point density."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-parabolic-quotient-rational-lift",
+  "date": "2026-10-24",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a).",
+   "via": [
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-infinite-field-reductive-rational-density",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Followed Milne 17.93(b) via a dominant Cartan product, maximal-torus self-centralization, and torus unirational parametrization. Added three statement-only supporting lemmas after full DAG/blueprint/project and logged Mathlib searches. Proved the affine-open rational-point step using the existing Laurent evaluation theorem, including dimension zero.",
+  "blueprint": "Read current latest sk-thm-sf-ctf-stability/_section.md and det-thm-sf-ctf-stability-direct-images.proof.md, proof (3). The split realizes the inherited supporting chain at Milne 17.93(b), used by 25.9(a) for rational translates. The ancestor command reports None: retain inherited null from.node and via chain, adding the exact Milne substeps for new nodes. Whole-blueprint searches for unirational, Cartan, maximal torus, centralizer and rational points give no matching item or supporting node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-8e143be60",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-8e143be60 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full against Milne iAG2017: 12.59–12.65 (pp.250–251), 17.82–17.84 (p.379) and 17.91–17.93 (pp.381–382). The item statement is unchanged and is 17.93(b) including the clause that G(k) is dense; nothing is weakened. One duplicate (C5/D): the new node lem-sfb-maximal-torus-self-centralizing (Milne 17.84) is exactly two existing reviewed nodes of the same unit put together. These are lem-sfb-maximal-torus-field-extension (17.82: a maximal k-torus stays maximal over k̄) and lem-sfb-reductive-torus-self-centralizer (17.61(a) with its descent: G reductive and T_k̄ maximal give C_G(T)=T scheme-theoretically). The report's not-duplicate list misses both. FIX: I dropped the node, and step 2 now cites the two existing nodes, with an elementary note that the factorization-maximality of the terminology node means no strictly larger closed torus. proof_deps were recomputed. Remaining checks: (1) The Cartan-product node is 17.91 plus the dominant product in the proof of 17.92; it is true and not reductive-specific. I tested it on G_a, a torus and G=1. (2) The torus-unirational node is 12.64 through 12.60 and 12.63; it is true over any field, including n=0 and finite or imperfect k. (3) Step 3 is elementary. (4) Step 4: D(f)⊆W and the Laurent evaluation test with V=k, W=0 (this is where k infinite is used) give a k-point in D(f). (5) Open factorization is a Mathlib leaf and the density equivalence is elementary. No other duplicates found by rg for Cartan, unirational and the Milne numbers; no SGA; no tool_uses needed. Batch-5: the Cartan node's newly cited lem-sfb-torus-centralizer-smooth-connected reaches lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9), a generic smoothness criterion and not part of the trace formula or Poincaré duality, so I accept it. The added citations reach only generic monoid and toric algebra in sec-trace-formula, and both nodes were already accepted in full reviews. Caveat: lem-sfb-maximal-torus-field-extension was created by Q92, which I believe landed around 12:05 +0800 on 2026-10-24, before this delivery at 16:30; it is a proof_dep, not a stmt_dep.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InfiniteFieldReductiveRationalDensity",
+  "declaration": "AlgebraicGeometry.ReductiveTorusCentralizer.rationalPoints_dense_of_isReductive",
+  "file": "lean/Sheaf/AlgebraicGeometry/InfiniteFieldReductiveRationalDensity.lean",
+  "statement": "theorem rationalPoints_dense_of_isReductive {k : Type u} [Field k] [Infinite k] (G : Grp (Over (Spec (.of k)))) (hG : IsReductive G) : (∀ V : G.X.left.Opens, (V : Set G.X.left).Nonempty → ∃ p : Spec (.of k) ⟶ V.toScheme, p ≫ V.ι ≫ G.X.hom = 𝟙 (Spec (.of k))) ∧ DenseRange (fun p : Over.mk (𝟙 (Spec (.of k))) ⟶ G.X ↦ p.left.base (IsLocalRing.closedPoint k))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b81a481c6",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Item record diff vs side-live: lean only. lean.statement verbatim in file; declaration name new. Clauses vs Milne 17.93(b) p.382: [Field k][Infinite k], G : Grp (Over (Spec k)), hG : IsReductive G (the recorded def-sfb owner: IsAlgebraic, Smooth, k̄-connected, closed normal connected unipotent U ≅ trivial; extra IsAlgebraic U automatic). Conclusion is both node forms: every nonempty Opens V has p : Spec k ⟶ V.toScheme with p ≫ V.ι ≫ G.X.hom = 𝟙, and DenseRange of Over-morphism k-points evaluated at the closed point. No perfectness, char or split assumption; single universe u. Edge cases (trivial G, n=0, empty V, finite fields excluded, imperfect k) ok. Sorry-only, no new defs, docstrings with source/blueprint and proof steps 1-5, imports per rule, report has Worker report and Second reading sections; no duplicate (denseRange_fieldPoints needs IsSepClosed). No compile: nothing changed."
+ }
+}

@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-finite-function-norm-nonvanishing",
+ "kind": "statement",
+ "title": "Fibrewise nonvanishing criterion for a multiplicative function norm",
+ "statement": "Let $p:Y\\to Z$ be a finite morphism of schemes [def-pc-scheme, def-weil-finite-integral-morphism]. For all open $V\\subseteq Z$ let $\\nu_V:\\Gamma(p^{-1}V,\\mathcal O_Y)\\to\\Gamma(V,\\mathcal O_Z)$ preserve multiplication and $1$ and commute with restriction. Assume $b(y)=0$ implies $\\nu_V(b)(p(y))=0$ for every such $V,b$ and $y\\in p^{-1}V$, with values in the residue fields [def-weil-residue-field]. For $b\\in\\Gamma(p^{-1}V,\\mathcal O_Y)$ put $D(b)=\\{y\\in p^{-1}V:b(y)\\ne0\\}$. Then for every $z\\in V$ one has $$\\nu_V(b)(z)\\ne0\\quad\\Longleftrightarrow\\quad p^{-1}(\\{z\\})\\subseteq D(b).$$ Moreover, whenever the right side holds, $W=V\\setminus p(p^{-1}V\\setminus D(b))$ is an open neighborhood of $z$ in $Z$, $p^{-1}W\\subseteq D(b)$, and there is $c\\in\\Gamma(p^{-1}W,\\mathcal O_Y)$ such that $b|_{p^{-1}W}c=1$ and $\\nu_W(b|_{p^{-1}W})\\nu_W(c)=1$. No flatness, surjectivity, or power identity for $\\nu$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BCY (divisors-lemma-norm-invertible), 0BCZ (divisors-lemma-norm-map-invertible), and Section 0BCX (divisors-section-norms)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $V,b$ and $z\\in V$. If $\\nu_V(b)(z)\\ne0$ and $p(y)=z$, then $b(y)=0$ would give $\\nu_V(b)(z)=0$ by the assumed vanishing implication. Thus every such $y$ belongs to $D(b)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Section 0BCX (section-norms), neighborhood-unit observation; Tag 0BCZ (lemma-norm-map-invertible), final equivalence."
+   }
+  },
+  {
+   "text": "Conversely assume $p^{-1}(\\{z\\})\\subseteq D(b)$. By [lem-weil-pbc-basic-open-function], $D(b)$ is open, so $C=p^{-1}V\\setminus D(b)$ is closed in $p^{-1}V$. Choose a closed subset $F\\subseteq Y$ with $C=F\\cap p^{-1}V$, as allowed by the subspace topology. The finite morphism $p$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. Since $p(C)=p(F)\\cap V$, the specified set $W=V\\setminus p(C)=V\\setminus p(F)$ is open in $Z$. The fibre assumption gives $z\\notin p(C)$, hence $z\\in W$. If $y\\in p^{-1}W$ then $y\\notin C$, so $p^{-1}W\\subseteq D(b)$.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Section 0BCX (section-norms), neighborhood-unit observation; closed-map shrinking as in Tag 0BUT (lemma-finite-trivialize-invertible-upstairs), final sentence; Schemes Tag 01HZ (lemma-f-open)."
+   }
+  },
+  {
+   "text": "By clause (c) of [lem-weil-pbc-basic-open-function], there is an inverse $a$ to $b|_{D(b)}$. Restrict $a$ to the open $p^{-1}W\\subseteq D(b)$ and call the resulting section $c$. Restrictions preserve products and $1$, so $b|_{p^{-1}W}c=1$.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HZ (lemma-f-open), statement that the restriction to D(f) has an inverse; applied to the open subspace p^{-1}V."
+   }
+  },
+  {
+   "text": "Put $b_W=b|_{p^{-1}W}$. Multiplicativity and preservation of $1$ give $\\nu_W(b_W)\\nu_W(c)=\\nu_W(b_Wc)=\\nu_W(1)=1$. Evaluating in $\\kappa(z)$ gives a product equal to $1$, so $\\nu_W(b_W)(z)\\ne0$. Restriction compatibility identifies this value with $\\nu_V(b)(z)$. This proves the converse and both asserted inverse identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Section 0BCX (section-norms), neighborhood-unit observation; Tag 0BCZ (lemma-norm-map-invertible), final equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Section 0BCX (section-norms), neighborhood-unit observation; Tag 0BCZ (lemma-norm-map-invertible), final equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism with a multiplicative norm satisfying the vanishing condition has norm of a regular function nonzero exactly when the function is nonzero at every point of the fibre",
+   "results": "Service unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(nonvanish|vanish|fibre|fiber)",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry/Normalization.lean lines 80, 117, 120 concern normalization diagrams, not norms.",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic or valued-field norms and localization lemmas do not state this criterion for an arbitrary restriction-compatible multiplicative sheaf map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"evaluation\"",
+   "results": "Read returned hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic or valued-field norms and localization lemmas do not state this criterion for an arbitrary restriction-compatible multiplicative sheaf map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite map of schemes, a norm function is a unit near a base point if the original regular function is nonzero on its entire fibre",
+   "results": "Read returned hits: NumberField.FinitePlace.norm_eq_one_iff_notMem, RingOfIntegers.isUnit_norm, Valued.integer.exists_nnnorm_lt_one, Algebra.norm_eq_iff, Algebra.norm_localization, Valued.integer.exists_norm_lt_one, Valued.integer.norm_unit, Valued.integer.norm_coe_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic or valued-field norms and localization lemmas do not state this criterion for an arbitrary restriction-compatible multiplicative sheaf map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For multiplicative maps on regular functions under a finite scheme morphism, prove the residue field zero criterion by shrinking the base and taking the inverse of a nowhere zero function",
+   "results": "Read returned hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, RingHom.EssFiniteType.residueFieldMap, AlgebraicGeometry.Scheme.residue_descResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, PrimeSpectrum.mem_image_comap_basicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic or valued-field norms and localization lemmas do not state this criterion for an arbitrary restriction-compatible multiplicative sheaf map."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(nonvanish|vanish|fibre|fiber)",
+   "results": "Read returned hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the criterion for an arbitrary restriction-compatible multiplicative map. The basic-open hits are already represented by lem-weil-pbc-basic-open-function."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multiplicative sheaf map sends a function nonzero on a finite morphism fibre to a function nonzero at the base point",
+   "results": "Read returned hits: PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.map_smul_eq, AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap, AlgebraicGeometry.StructureSheaf.comapFun, ModuleCat.Tilde.openToLocalization, AlgebraicGeometry.Scheme.Hom.stalkMap, Filter.Germ.valueMulHom, SheafOfModules.sectionsMap; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the criterion for an arbitrary restriction-compatible multiplicative map. The basic-open hits are already represented by lem-weil-pbc-basic-open-function."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"basicOpen\"",
+   "results": "Read returned hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the criterion for an arbitrary restriction-compatible multiplicative map. The basic-open hits are already represented by lem-weil-pbc-basic-open-function."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed map of ringed spaces and a multiplicative morphism on structure sheaves give a fibrewise unit criterion by shrinking away from the image of the zero locus",
+   "results": "Read returned hits: AlgebraicGeometry.RingedSpace.isUnit_res_basicOpen, AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen, AlgebraicGeometry.isClosedMap_isZariskiLocalAtTarget, AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE, AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally, AlgebraicGeometry.HasRingHomProperty.locally_of_iff, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.StructureSheaf.comapFunIsLocallyFraction; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the criterion for an arbitrary restriction-compatible multiplicative map. The basic-open hits are already represented by lem-weil-pbc-basic-open-function."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of schemes and a restriction-compatible multiplicative map on regular functions preserving one and vanishing, its value is nonzero exactly when the function is nonzero on the whole fibre",
+   "results": "Read returned hits: AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no hit states the criterion for an arbitrary restriction-compatible multiplicative map. The basic-open hits are already represented by lem-weil-pbc-basic-open-function."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-norm-invertible-sections",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Existence of an ample invertible sheaf descends through a finite cover of a normal integral scheme. Tags 0BCY (divisors-lemma-norm-invertible) and 0BCZ (divisors-lemma-norm-map-invertible), applied to sections of tensor powers; Section 0BCX (divisors-section-norms) specifies the norm hypotheses. Re-split: Fibrewise vanishing criterion of Stacks 0BCZ and the neighborhood-unit observation of 0BCX; former item steps 5-6.",
+   "via": [
+    "lem-sfb-finite-norm-invertible-sections",
+    "lem-sfb-finite-normal-ample-descent",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-function-norm-nonvanishing",
+  "worker": "stage1",
+  "summary": "Q145: proved the vanishing direction from the hypothesis and the converse by closed-image shrinking, the existing basic-open unit lemma, and multiplicativity. Reused two Mathlib leaves; created no nodes. Checked arbitrary open V and empty fibres without flatness, surjectivity, additivity, or a power identity.",
+  "blueprint": "Realizes the inherited norm auxiliary argument below det-thm-sf-ctf-stability-direct-images (3), via lem-sfb-finite-norm-invertible-sections former steps 5-6: the Stacks 0BCX neighborhood-unit observation and 0BCZ fibrewise criterion. Latest blueprint direct-images proof read; no unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-e16d32912",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-e16d32912 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit that changes only the item and its report, adds no new nodes, and leaves the statement, stmt_deps and blueprint fields unchanged; there is no re-split repair note. I checked the item against Stacks divisors.tex Section 0BCX (multiplicativity sends units to units, plus vanishing condition (2)), Tag 0BUT's final shrinking sentence (finite, hence closed), Tag 0BCZ's fibre equivalence and schemes.tex 01HZ (D(f) is open and f has an inverse on D(f)). Step 1 is the contrapositive of the vanishing hypothesis. Step 2 handles C being closed only in p^{-1}V correctly: it writes C = F ∩ p^{-1}V with F closed in Y, so p(C) = p(F) ∩ V and W = V \\ p(F) is open. It cites lem-weil-pbc-basic-open-function (b) and lem-weil-pbc-finite-closed-map-finite-fibres (1); both are Mathlib leaves, so they are tools and no tool_uses entry is needed. Step 3 uses clause (c) of the basic-open leaf and restricts the inverse to p^{-1}W. Step 4 multiplies, evaluates the unit in κ(z) and uses restriction compatibility; it is elementary. Edge cases checked: an empty fibre with p^{-1}W empty (zero ring, ν(1) = 1, consistent), the identity map, disjoint sheets with the product norm, and nonreduced Y. The parent lem-sfb-finite-norm-invertible-sections cites only the iff, under stronger hypotheses, so the citation is valid. A grep for 0BCX/0BCY/0BCZ and a reading of six norm-related nodes found no duplicate. All three search kinds are recorded, with the unavailable LeanSearch marked honestly. No SGA source is used. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFunctionNormNonvanishing",
+  "declaration": "AlgebraicGeometry.finite_function_norm_nonvanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFunctionNormNonvanishing.lean",
+  "statement": "theorem finite_function_norm_nonvanishing {Y Z : Scheme.{u}} (p : Y ⟶ Z) [IsFinite p] (ν : ∀ V : Z.Opens, Γ(Y, p ⁻¹ᵁ V) →* Γ(Z, V)) (hν_restrict : ∀ (V W : Z.Opens) (h : W ≤ V) (b : Γ(Y, p ⁻¹ᵁ V)), ν W (Y.presheaf.map (homOfLE (p.preimage_mono h)).op b) = Z.presheaf.map (homOfLE h).op (ν V b)) (hν_vanish : ∀ (V : Z.Opens) (b : Γ(Y, p ⁻¹ᵁ V)) (y : Y) (hy : y ∈ p ⁻¹ᵁ V), Y.evaluation (p ⁻¹ᵁ V) y hy b = 0 → Z.evaluation V (p y) hy (ν V b) = 0) (V : Z.Opens) (b : Γ(Y, p ⁻¹ᵁ V)) (z : Z) (hz : z ∈ V) : (Z.evaluation V z hz (ν V b) ≠ 0 ↔ p ⁻¹' {z} ⊆ (Y.basicOpen b : Set Y)) ∧ (p ⁻¹' {z} ⊆ (Y.basicOpen b : Set Y) → ∃ (W : Z.Opens) (hWV : W ≤ V), (W : Set Z) = (V : Set Z) \\ p '' ((p ⁻¹ᵁ V : Set Y) \\ Y.basicOpen b) ∧ z ∈ W ∧ (p ⁻¹ᵁ W : Set Y) ⊆ Y.basicOpen b ∧ ∃ c : Γ(Y, p ⁻¹ᵁ W), Y.presheaf.map (homOfLE (p.preimage_mono hWV)).op b * c = 1 ∧ ν W (Y.presheaf.map (homOfLE (p.preimage_mono hWV)).op b) * ν W c = 1)",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53f1430cc",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Only the item's lean field changed, plus a new module with one sorried theorem. Clause-by-clause match: IsFinite p; MonoidHom family ν (no additivity or zero assumed); restriction compatibility for all W≤V; residue-field vanishing via Scheme.evaluation; D(b)=Y.basicOpen b (evaluation_ne_zero_iff_mem_basicOpen); the iff, then the exact W = V \\ p''(p⁻¹V \\ D(b)), open, z∈W, p⁻¹W⊆D(b), and c with b|·c=1 and ν_W(b|)ν_W(c)=1. The extra hWV follows from the set equality. Statement verbatim in file; universes bound; docstrings give source 0BCX/0BCY/0BCZ, blueprint id and proof steps. Edge cases (empty fibre, empty V, b=0, nonreduced) OK. No duplicate in lean/Sheaf or Mathlib. No compile, no file changed."
+ }
+}

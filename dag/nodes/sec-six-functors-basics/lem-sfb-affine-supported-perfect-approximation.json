@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-affine-supported-perfect-approximation",
+ "kind": "statement",
+ "title": "Supported perfect approximation on an affine scheme",
+ "statement": "Let $Y$ be an affine scheme [def-pc-scheme], let $T\\subseteq Y$ be closed, let $m\\in\\mathbf Z$, and let $s\\ge0$ be an integer. Let $F\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category] be $m$-pseudo-coherent [def-sfb-m-pseudo-coherent-complex]. Assume that $Y\\setminus T$ is a union of $s$ affine open subschemes and that $H^i(F)_y=0$ for every $i\\ge m-s+1$ and every $y\\notin T$. Then there exist a perfect object $P\\in D(\\mathcal O_Y)$ [def-pc-perfect-complex] and a morphism $v:P\\to F$ such that all cohomology stalks of $P$ outside $T$ vanish, $H^i(v)$ is an isomorphism for $i>m$, and $H^m(v)$ is surjective. In particular $\\mathsf A(Y)$ holds [def-sfb-supported-perfect-approximation-property].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EQ, lemma-approximation-affine (including its final assertion)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-perfect-complex",
+  "def-sfb-supported-perfect-approximation-property"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}A$. Put $U=Y\\setminus T$. An $m$-pseudo-coherent object is $a$-pseudo-coherent for every $a\\ge m$: the same local approximation has isomorphisms in degrees $>a$ and a surjection at $a$. On each member of its defining cover, $F$ has zero cohomology above the maximum of $m$ and the upper bound of the strictly perfect local approximation. Since the affine scheme $Y$ is quasi-compact, finitely many such members cover $Y$; the maximum of their bounds is a global cohomological upper bound. Fix $Y,T,m,s$ and prove the conclusion for all admissible $F$ with $H^i(F)=0$ for $i>t$, by induction on $\\max(0,t-m+1)$. If $t<m$, take $P=0$ and the zero map: all required target cohomology sheaves, including $H^m(F)$, vanish.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EQ, lemma-approximation-affine, proof"
+   }
+  },
+  {
+   "text": "For the induction step let $t\\ge m$. The preceding monotonicity makes $F$ $t$-pseudo-coherent. On the small Zariski ringed site the stated local strictly perfect definition is precisely the scheme definition. Apply the top-cohomology finite-type theorem at degree $t$ to obtain that $H^t(F)$ is finite type. It is quasi-coherent because $F\\in D_{\\mathrm{QCoh}}$. The affine finite-type criterion says that $\\Gamma(Y,H^t(F))$ has finitely many generators $c_1,\\ldots,c_n$.",
+   "uses": [
+    "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EQ, lemma-approximation-affine, proof"
+   }
+  },
+  {
+   "text": "Apply the supported-class lifting lemma to $E=F[t]$ and to each $c_j\\in\\Gamma(Y,H^0(F[t]))$. Indeed, for $-s+1\\le q\\le0$ one has $t+q\\ge m-s+1$, so $H^q(F[t])|_U=H^{t+q}(F)|_U=0$. It gives $a_j:K_j\\to F[t]$ and a section lifting $c_j$, with $K_j$ perfect, supported on $T$, and having no positive cohomology. Set $Q=\\bigoplus_{j=1}^nK_j[-t]$ and let $q:Q\\to F$ be the sum of the shifted maps. Then $Q$ is perfect, supported on $T$, and $H^i(Q)=0$ for $i>t$. The image of $H^t(q)$ contains every $c_j$. These sections generate the sheaf $H^t(F)$: under the affine tilde/global-sections counit this is the sheafification of the surjection $A^n\\to\\Gamma(Y,H^t(F))$, and the tilde functor preserves cokernels. Thus $H^t(q)$ is surjective. The empty set of generators gives $Q=0$.",
+   "uses": [
+    "lem-sfb-affine-supported-class-lift",
+    "lem-pc-perfect-thick-closure",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EQ, lemma-approximation-affine, proof"
+   }
+  },
+  {
+   "text": "Complete $q$ to a distinguished triangle $Q\\to F\\to F_1\\to Q[1]$. Since $Q$ is perfect, its local strictly perfect representatives show directly that it is $(m+1)$-pseudo-coherent. The triangle pseudo-coherence theorem, part (1), makes $F_1$ $m$-pseudo-coherent. The long exact cohomology sequence gives $H^i(F_1)=0$ for $i\\ge t$, using the surjection at $t$ and vanishing above $t$ of $Q,F$. For $y\\in U$, its stalk sequence has both adjacent cohomology stalks of $Q$ zero, hence $H^i(F)_y\\cong H^i(F_1)_y$ for all $i$. Therefore the required support bound persists. Also $F_1\\in D_{\\mathrm{QCoh}}$: $Q$ is a finite sum of shifts of the objects $K_j$ in $D_{\\mathrm{QCoh}}$, and closure of the quasi-coherent derived property under shifts and triangle middle terms, applied to $F\\to F_1\\to Q[1]$, gives this assertion. Apply the induction hypothesis at bound $t-1$ to obtain $v_1:P_1\\to F_1$ with $P_1$ perfect supported on $T$, isomorphisms above $m$, and a surjection at $m$.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pc-perfect-complex",
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EQ, lemma-approximation-affine, proof"
+   }
+  },
+  {
+   "text": "Let $d:F_1\\to Q[1]$ be the connecting map. Complete $d\\circ v_1$ to a triangle and rotate it to obtain a distinguished triangle $Q\\to P\\to P_1\\xrightarrow{d\\circ v_1}Q[1]$. Apply TR3 to the rotated triangles $P_1\\to Q[1]\\to P[1]\\to P_1[1]$ and $F_1\\to Q[1]\\to F[1]\\to F_1[1]$, with first maps $v_1$ and $1_{Q[1]}$. Shifting the resulting third map back gives $v:P\\to F$ and a morphism of the original triangles whose other components are $1_Q$ and $v_1$. The two perfect outer terms $Q,P_1$ imply that $P$ is perfect. At a point outside $T$, the long exact sequence of the upper triangle has zero outer stalks in every degree, so every cohomology stalk of $P$ there is zero.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-pc-perfect-thick-closure",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EQ, lemma-approximation-affine, proof"
+   }
+  },
+  {
+   "text": "Check the cohomology comparison on stalks, with every class below understood in the stalk at an arbitrary fixed point. For $i\\ge m$, a class $z\\in H^i(F)$ maps to a class $z_1\\in H^i(F_1)$. Lift $z_1$ through $H^i(v_1)$ to $x_1\\in H^i(P_1)$. Its connecting image in $H^{i+1}(Q)$ is zero by commutativity. Exactness lifts $x_1$ to $x\\in H^i(P)$; then $z-H^i(v)x$ comes from $H^i(Q)$, so adjust $x$ by this class. This proves surjectivity. If $i>m$ and $H^i(v)x=0$, injectivity of $H^i(v_1)$ shows that $x$ comes from $a\\in H^i(Q)$. Its image in $H^i(F)$ is zero, so $a$ comes from some $b\\in H^{i-1}(F_1)$. Since $i-1\\ge m$, surjectivity of $H^{i-1}(v_1)$ lifts $b$ to $H^{i-1}(P_1)$. The upper exact sequence now says that the image of $a$ in $H^i(P)$, namely $x$, is zero. This proves injectivity for $i>m$ and completes the induction. These arguments use the long exact sequences of the triangle morphism; the cited stalk exactness makes them exact on stalks. Bijective stalk maps give sheaf isomorphisms. Surjective stalk maps make the cokernel have all stalks zero, so its map to the zero sheaf is an isomorphism by the same criterion; hence the sheaf map is an epimorphism.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EQ, lemma-approximation-affine, proof"
+   }
+  },
+  {
+   "text": "Finally let $T$ have retrocompact complement. Taking the affine open $W=Y$ in its definition shows that $U=Y\\setminus T$ is quasi-compact, so choose a finite affine open covering with $s$ members. In the definition of $\\mathsf A(Y)$ take $r=s$. If $F$ is $(m-s)$-pseudo-coherent, the same approximations make it $m$-pseudo-coherent; its support hypothesis for degrees $i\\ge m-s$ implies the hypothesis for degrees $i\\ge m-s+1$ used above. The proved assertion therefore supplies all clauses of $\\mathsf A(Y)$. This covers $s=0$ and the empty affine scheme as well.",
+   "uses": [
+    "def-sfb-supported-perfect-approximation-property",
+    "lem-pqf-finite-affine-cover-qc-open",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EQ, lemma-approximation-affine, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-ringed-site-pseudocoherent-top-finite-type",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-pc-derived-category",
+  "lem-sfb-affine-supported-class-lift",
+  "lem-pc-perfect-thick-closure",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-triangulated-category",
+  "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "def-sfb-supported-perfect-approximation-property",
+  "lem-pqf-finite-affine-cover-qc-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EQ, lemma-approximation-affine: induction on the upper cohomological bound, using Tag 08E3 and TR3; final assertion via Tags 08EM and 08EN."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "perfect.*approximat|approximat.*perfect|pseudo.?coher",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine geometry or finite presentation of a sheaf; none gives a supported perfect approximation to a derived object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an affine scheme a complex with quasi coherent cohomology and finite pseudo coherence has a perfect approximation with prescribed support",
+   "results": "OK: 8 hits; SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, SheafOfModules.quasicoherentDataOfIsFinitePresentation, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.HasAffineProperty.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine geometry or finite presentation of a sheaf; none gives a supported perfect approximation to a derived object."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"CochainComplex\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine geometry or finite presentation of a sheaf; none gives a supported perfect approximation to a derived object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme a pseudo coherent complex has a perfect approximation supported on a prescribed closed subset with retrocompact complement",
+   "results": "OK: 8 hits; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine geometry or finite presentation of a sheaf; none gives a supported perfect approximation to a derived object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme Koszul complexes supported on a closed subset approximate sufficiently pseudo coherent derived objects",
+   "results": "OK: 8 hits; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern affine geometry or finite presentation of a sheaf; none gives a supported perfect approximation to a derived object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme an m pseudo coherent derived complex admits a supported perfect approximation with cohomology isomorphisms above m and a surjection at m",
+   "results": "{\"t\": \"2026-10-23T15:50:45Z\", \"tool\": \"leanfinder\", \"query\": \"On an affine scheme an m pseudo coherent derived complex admits a supported perfect approximation with cohomology isomorphisms above m and a surjection at m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"DerivedCategory.IsGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\"], \"digest\": \"e881d8d688a1f86e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give arbitrary bounded derived representatives, support of modules or affine-limit section vanishing, not a perfect approximation with prescribed support and finite pseudo-coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|perfect.*approximat|approximat.*perfect",
+   "results": "{\"t\": \"2026-10-23T15:53:12Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|perfect.*approximat|approximat.*perfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give arbitrary bounded derived representatives, support of modules or affine-limit section vanishing, not a perfect approximation with prescribed support and finite pseudo-coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex on an affine scheme can be approximated by a perfect complex with prescribed closed support",
+   "results": "{\"t\": \"2026-10-23T15:53:13Z\", \"tool\": \"leansearch\", \"query\": \"A pseudo coherent complex on an affine scheme can be approximated by a perfect complex with prescribed closed support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"Module.isClosed_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"CochainComplex.isIso_ιTruncLE_iff\", \"HomologicalComplex.instIsSupportedOfIsStrictlySupported\", \"HomologicalComplex.quasiIso_ιTruncLE_iff_isSupported\"], \"digest\": \"c5491127118e2e9e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give arbitrary bounded derived representatives, support of modules or affine-limit section vanishing, not a perfect approximation with prescribed support and finite pseudo-coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\", \"Complex\"",
+   "results": "{\"t\": \"2026-10-23T15:53:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Perfect\\\", \\\"Complex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give arbitrary bounded derived representatives, support of modules or affine-limit section vanishing, not a perfect approximation with prescribed support and finite pseudo-coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-perfect-approximation",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). In Stacks 0CSH proof, choose a perfect approximation P to E at degree m-N-1-b; this is the 08ES approximation theorem with support T=X. The affine base case of Tag 08ES.",
+   "via": [
+    "lem-sfb-pseudocoherent-perfect-approximation",
+    "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-supported-perfect-approximation",
+  "worker": "stage1",
+  "summary": "Read 08EQ and 08E3. Retained the top-degree induction and wrote its triangle assembly and endpoint diagram chase. Reused existing finiteness and triangle tools; created one class-lifting input without pseudo-coherence. Kept the affine-cover count distinct from the number of Koszul generators; no statement change.",
+  "blueprint": "Realizes the affine base case of 08ES in the inherited approximation prerequisite for det-thm-sf-ctf-stability-direct-images proof (3). The ancestor command returns None, as already recorded; retained that ancestry. The current latest blueprint proof (3) was read; this is a generic supporting tool in the inherited lineage, not a change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Quasi-compactness gives a finite subcover of local upper bounds; no approximation theorem is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "The affine finite-type criterion gives finitely many global generators of the top cohomology."
+   },
+   {
+    "node": "lem-pc-perfect-thick-closure",
+    "why": "Generic finite-sum, shift and triangle closure of perfect objects, used in the Stacks induction."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "The affine quasi-coherent counit and preservation of cokernels turn module generators into sheaf generators."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic cohomology exact sequences for distinguished triangles; the endpoint diagram chase is written out."
+   },
+   {
+    "node": "lem-pc-supported-qcoh-triangulated",
+    "why": "Generic triangle closure of the quasi-coherent derived category, with T=Y, keeps the induction cone in its domain."
+   },
+   {
+    "node": "lem-pqf-finite-affine-cover-qc-open",
+    "why": "Finite affine cover of the retrocompact complement for the uniform approximation parameter."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exact stalks allow the written cohomology diagram chase and detect its epimorphism by the cokernel formula."
+   },
+   {
+    "node": "lem-weil-pbc-module-iso-on-stalks",
+    "why": "Generic stalk detection converts stalk bijections, including the zero cokernel, to the required sheaf assertions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-perfect-thick-closure",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-iso-on-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-ebb8d2f57",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-ebb8d2f57 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node and every cited statement against Stacks perfect.tex 08EQ, 08E3, 08DD and 08EM/08EN. The item statement equals 08EQ with r=s and is unchanged. Step 1: monotonicity of pseudo-coherence, plus a global upper bound from a finite subcover, using quasi-compactness of Y. Step 2: 08FX(1) applied at degree t gives finite type, and the affine criterion gives finitely many generators. Step 3: the class lift is applied to F[t], and the window check t+q>=m-s+1 holds. Surjectivity is checked through tilde, the counit and cokernels. Step 4: 08FV(1) with Q perfect, hence (m+1)-pseudo-coherent. The long exact sequence gives H^{>=t}(F_1)=0, support is preserved, and F_1 is in D_QCoh by the supported-qcoh node with T=Y. Step 5: TR3 on the doubly rotated triangles is valid, and P is perfect by two-out-of-three and supported on T. Step 6: I redid the stalk diagram chase myself (surjectivity for i>=m, injectivity for i>m, using surjectivity at i-1) and it is correct. Step 7: retrocompactness gives the uniform r=s, and A(Y) follows. New node lem-sfb-affine-supported-class-lift is 08E3 in section form, which is equivalent on an affine scheme for E in D_QCoh. It is statement-only, self-contained, all three search kinds are recorded, and it is not a restatement of the item: it has no pseudo-coherence hypothesis and lifts a single class. It keeps the number s of affines (which bounds the cohomological dimension) separate from the number of Koszul generators (an arbitrary principal cover). That correctly avoids 08EQ's inaccurate 'T=V(f_1..f_r)' with r equal to the affine count, since an affine U need not be principal. Small cases checked: U empty (K=O_Y), T empty (c=0), Y=Spec k[x,y] with T the origin. Duplicate grep for 08E3/08DD/Koszul class: the existing nodes (08DD colimit, augmentation vanishing, 08EH, 09IR) do not state this lift. I accept all nine declared tool_uses as generic. No SGA citations. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSupportedPerfectApproximation",
+  "declaration": "AlgebraicGeometry.Scheme.exists_supported_perfect_approximation_of_isAffine",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exists_supported_perfect_approximation_of_isAffine",
+   "AlgebraicGeometry.Scheme.hasSupportedPerfectApproximation_of_isAffine"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSupportedPerfectApproximation.lean",
+  "statement": "theorem exists_supported_perfect_approximation_of_isAffine (Y : Scheme.{u}) [IsAffine Y] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (T : Set Y) (hT : IsClosed T) (m : ℤ) (s : ℕ) (F : schemeDerivedCategory Y) (hF : schemeDerivedQCohProperty Y F) (hFm : IsMPseudoCoherent Y m F) (hcover : ∃ U : Fin s → Y.Opens, (∀ k : Fin s, IsAffineOpen (U k)) ∧ (⋃ k : Fin s, (U k : Set Y)) = Tᶜ) (hvanish : ∀ i : ℤ, m - (s : ℤ) + 1 ≤ i → ∀ y : Y, y ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj F).val.presheaf y))) : ∃ (P : schemeDerivedCategory Y) (v : P ⟶ F), IsPerfect Y P ∧ (∀ (i : ℤ) (y : Y), y ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj P).val.presheaf y))) ∧ (∀ i : ℤ, m < i → IsIso ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).map v)) ∧ Epi ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) m).map v)",
+  "branch": "sheaf-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f68ad7e80",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Read the node, Stacks perfect.tex 08EQ, all 5 statement dependencies and the live Lean of IsMPseudoCoherent and HasSupportedPerfectApproximation. Both theorems match the node clause by clause: IsAffine Y; T closed; m:ℤ, s:ℕ; F in D_QCoh via schemeDerivedQCohProperty; IsMPseudoCoherent Y m F; Fin s affine-open cover with union = Tᶜ; Subsingleton stalk vanishing for i ≥ m-s+1 off T. The conclusion (IsPerfect, all-degree off-T vanishing, IsIso for i>m, Epi at m) has the same shape as the cited definition. The final assertion is a separate theorem concluding HasSupportedPerfectApproximation Y. Instance families are exactly those of the deps; universes u,w are independent and bound; the statement is verbatim; the node diff vs live is the lean record only, with no supersession. Edge cases s=0, empty Y, F=0, T empty or T=Y, negative m are covered. No defs, so nothing hollow; proofs are sorry only; docstrings carry source, blueprint id and proof steps; imports exist; the three proof deps without lean records are correctly not imported. Not recompiled per instructions. No findings."
+ }
+}

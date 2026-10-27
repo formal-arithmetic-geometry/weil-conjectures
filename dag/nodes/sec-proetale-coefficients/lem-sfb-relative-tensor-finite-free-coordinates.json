@@ -12,9 +12,94 @@
   "sk-def-sfb-module-objects",
   "def-sfb-modobj-relative-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the existing canonical sheaf-tensor instances and their recorded properties. Closedness gives tensor additivity, and the existing module APIs give a preadditive module category and additive forgetful functor. Its existing finite products supply finite biproducts. No tensor or action is redefined.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, the natural finite-free relative-tensor identification."
+   }
+  },
+  {
+   "text": "The module left unitor is induced from the bimodule left unitor. Expand its forward map as the tensor of the regular-bimodule comparison followed by the action-induced coequalizer descent. Naturality of the coequalizer projection, the identity underlying the regular comparison, and coequalizer.pi_desc give t_(R,M) followed by U(L_M) equal to the action. To compute U(L_M inverse), cancel the monomorphism U(L_M); the forward formula and the module unit axiom show that unit insertion followed by t_(R,M) has composite identity. This proves both unitor normalizations.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "lem-sfb-bimod-monoidal",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, the natural finite-free relative-tensor identification."
+   }
+  },
+  {
+   "text": "In any preadditive monoidal category with finite biproducts and additive tensor, construct the component isomorphism by tensoring theta inverse, applying Mathlib rightDistributor to the finite family of tensor units, applying the biproduct of left unitors, then applying biproduct.isoProduct. Specialize this construction to the internal module category with its existing relative tensor.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, the natural finite-free relative-tensor identification."
+   }
+  },
+  {
+   "text": "The rightDistributor projection formula, biproduct.mapIso projection formula and biproduct.isoProduct_hom give D_M followed by rho_i equal to (q_i tensor identity) followed by L_M. Expand the inverse using rightDistributor_inv and biproduct.isoProduct_inv. Distribute composition over the finite sum and use biproduct projection identities to obtain exactly the sum of rho_i followed by L_M inverse followed by (e_i tensor identity). These Mathlib isomorphisms and identities hold for the empty finite family as well.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, the natural finite-free relative-tensor identification."
+   }
+  },
+  {
+   "text": "Precompose the forward coordinate formula with t_(N,M), apply Mod.tensorObjpi_whiskerRight and the first unitor normalization. This gives the forward underlying-sheaf equation. Apply the additive forgetful functor to the inverse coordinate sum, use the inverse unitor normalization in each summand, commute each basis inclusion past the coequalizer projection by the same tensorObjpi naturality, and combine successive right whiskerings. This gives exactly the stated inverse underlying-sheaf sum.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, the natural finite-free relative-tensor identification."
+   }
+  },
+  {
+   "text": "For a module map f, check naturality of the component maps after every finite-product projection. Substitute the forward coordinate equation and Pi.map_pi, then use naturality of the left unitor and whisker exchange. Assemble the component isomorphisms with NatIso.ofComponents. Its naturality equation is the last clause of the theorem. Every construction and every finite-sum computation includes n=0; no nonempty or positive-rank hypothesis is used.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, the natural finite-free relative-tensor identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-sheafification",
+  "def-sfb-modobj-relative-tensor",
+  "lem-sfb-bimod-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "Last sentence, the natural finite-free relative-tensor identification.",
+  "note": "The Lean proof uses the existing generic distributor and biproduct isomorphisms for the finite matrix calculation, and proves both normalized underlying formulas from the actual relative-tensor coequalizer API."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +135,52 @@
    "results": "8 hits: SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.instMonoidalLightCondSetLightCondModFree; PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.monoidalCategory; PresheafOfModules.monoidalCategoryStruct; ModuleCat.instMonoidalFree; LightCondensed.instMonoidalCategoryLightCondMod; ModuleCat.MonoidalCategory.rightUnitor_def; result digest 440feeafc069faa6",
    "date": "2026-10-21",
    "verdict": "no match: rightDistributor and biproduct.isoProduct supply parts of a composite, but do not assert its internal-module coordinate normalization, relative-unitor compatibility and naturality together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module objects relative tensor finite free module coordinates normalized coequalizer unitor natural isomorphism finite product",
+   "results": "8 hits: ModuleCat.FreeMonoidal.μIso, ModuleCat.FreeMonoidal.μIso_hom_freeMk_tmul_freeMk, ModuleCat.free_μ_freeMk_tmul_freeMk, FGModuleCat.tensorUnit_obj, ModuleCat.FreeMonoidal.εIso, ModuleCat.instMonoidalFree, ModuleCat.FreeMonoidal.μIso_inv_freeMk, ModuleCat.free_δ_freeMk; logged digest 6b2b567655640b1a",
+   "date": "2026-10-23",
+   "verdict": "no match for the full internal-module coordinate and normalized-unitor statement; component distributor and bimodule APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "leftUnitor|tensorObjπ|MonoidalPreadditive",
+   "results": "0 hits: ; logged digest 4f53cda18c2baa0c; subdirectory CategoryTheory/Monoidal/Mod.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the full internal-module coordinate and normalized-unitor statement; component distributor and bimodule APIs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an additive monoidal category tensoring a finite direct sum of copies of the unit with an object is naturally the finite product of copies of that object",
+   "results": "8 hits: AddCommGrpCat.tensorObj_eq, AddGrpCat.tensorObj_eq, CategoryTheory.monoidalOfHasFiniteProducts.tensorObj, DirectSum.addEquivProd, CategoryTheory.tensor_sum, CategoryTheory.sum_tensor, CategoryTheory.monoidalOfHasFiniteProducts, CategoryTheory.leftDistributor; logged digest d278bc6667d77457",
+   "date": "2026-10-23",
+   "verdict": "no match for the full internal-module coordinate and normalized-unitor statement; component distributor and bimodule APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDistributor\"",
+   "results": "12 hits: CategoryTheory.rightDistributor, CategoryTheory.biproduct_ι_comp_rightDistributor_inv, CategoryTheory.rightDistributor_hom_comp_biproduct_π, CategoryTheory.biproduct_ι_comp_rightDistributor_hom, CategoryTheory.rightDistributor_inv_comp_biproduct_π, CategoryTheory.rightDistributor_ext_left, CategoryTheory.rightDistributor_ext_right, CategoryTheory.rightDistributor_ext_left_iff; logged digest 9da6cd4ba6b9b038",
+   "date": "2026-10-23",
+   "verdict": "no match for the full internal-module coordinate and normalized-unitor statement; component distributor and bimodule APIs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For modules internal to a monoidal abelian category relative tensor has additive whiskering and action induced left unitor with inverse unit insertion",
+   "results": "8 hits: ModuleCat.MonoidalCategory.leftUnitor_inv_apply, ModuleCat.hom_inv_leftUnitor, Bimod.TensorBimod.one_act_left', Bimod.TensorBimod.whiskerLeft_π_actLeft, ModuleCat.MonoidalCategory.leftUnitor_def, CategoryTheory.tensorLeft_linear, ModuleCat.MonoidalCategory.whiskerLeft_def, ModuleCat.hom_hom_leftUnitor; logged digest 9e5deab8ff40c697",
+   "date": "2026-10-23",
+   "verdict": "no match for the full internal-module coordinate and normalized-unitor statement; component distributor and bimodule APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDistributor|biproduct.isoProduct|LeftUnitorBimod|def hom|def inv",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Module.lean; logged digest 56ed10e24570ca2e; subdirectory CategoryTheory/Monoidal",
+   "date": "2026-10-23",
+   "verdict": "no match for the full internal-module coordinate and normalized-unitor statement; component distributor and bimodule APIs only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-free-scalar-coordinates",
@@ -72,5 +199,82 @@
   },
   "same_as": [],
   "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-tensor-finite-free-coordinates",
+  "worker": "stage1",
+  "summary": "Retained the full statement. Expanded the finite-free tensor argument into sheafification additivity, explicit finite module products, coequalizer naturality and additivity, normalized unitors, inverse matrix calculations, underlying-sheaf formulas and naturality including rank zero. Existing nodes supply all non-elementary inputs; no new nodes needed.",
+  "blueprint": "Expands the final sentence of lem-sfb-subfield-flat, first inference F_X tensor_{E_X} M is naturally M^n, as used in unit step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-bimod-monoidal",
+    "why": "Its action-induced bimodule unitor identifies the canonical relative unitor used here; a generic monoidal construction, with no replacement of the finite-free coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-bimod-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-3a7b9e112",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-3a7b9e112 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, every cited statement and the blueprint source; no fixes were needed. The statement, stmt_deps, source and blueprint are byte-identical to clones/live and side-live, where the item is still unsplit; the delivery adds no new nodes and cites no SGA. Source: main-20261015 lem-sfb-subfield-flat proof, last sentence: 'F_X⊗_{E_X}M≅M^n naturally'. The item makes this inference precise for its parent lem-sfb-finite-free-scalar-coordinates. Step checks: (1) sheafification is additive by the uniqueness in def-weil-pbc-sheafification, so the tensor and Mod_R are additive. (2) Finite products of modules carry the action γ_{M_i}(1⊗ρ_i); the unit and associativity laws follow from naturality of λ and α, the j_i make the product a biproduct, and q_ie_j=δ, Σe_iq_i=1. (3) t is epi, and U(a⊗_R b)t = t(Ua⊗Ub) as the induced map on coequalizers; tensor additivity follows by cancelling t, then faithfulness of U. (4) The unitor is action-induced by lem-sfb-bimod-monoidal; the regular module's symmetric right action is μβ=μ, so the bimodule and relative coequalizers coincide; U(L)v=γ(η⊗1)λ⁻¹=1 gives the formula for the inverse. (5) A_iB_j=δ_ij, SD=(Σe_iq_i)⊗1=1, and DS=1 by projections. (6) The underlying-sheaf formulas match the statement exactly. (7) Naturality follows from naturality of L; for n=0, 1_N=0. Edge cases checked: n=0, n=1, R=0, M=0. proof_deps equals the union of step uses. Accepted tool use: lem-sfb-bimod-monoidal, a Mathlib leaf (Bimod.monBicategory). Duplicate search: lem-sfb-balanced-tensor-finite-free-comparison (NI, unsplit) has the free module in the right variable and a coproduct target, so it is not a duplicate (advisory); lem-sfb-ringed-site-free-matrix-scalar-extension is a different statement. Minor point: step 3's induced morphism action is literally stated in lem-sfb-bimod-monoidal, which step 3 does not cite, but deriving it from the coequalizer is elementary."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeTensorFiniteFreeCoordinates",
+  "declaration": "CategoryTheory.sfb_relative_tensor_finite_free_coordinates",
+  "declarations": [
+   "CategoryTheory.sfbCoordinateSheafify",
+   "CategoryTheory.sfbCoordinateSheafMonoidal",
+   "CategoryTheory.sfbCoordinateSheafSymmetric",
+   "CategoryTheory.sfbCoordinateSheafClosed",
+   "CategoryTheory.sfbCoordinateSheafPreadditive",
+   "CategoryTheory.sfbCoordinateSheafLeftColimits",
+   "CategoryTheory.sfbCoordinateSheafRightColimits",
+   "CategoryTheory.sfbCoordinateModuleBiproducts",
+   "CategoryTheory.sfb_relative_tensor_finite_free_coordinates"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeTensorFiniteFreeCoordinates.lean",
+  "statement": "theorem sfb_relative_tensor_finite_free_coordinates (N : Mod (Sheaf J AddCommGrpCat.{w}) R) (n : ℕ) (θ : (⨁ fun _ : Fin n ↦ Mod.regular R) ≅ N) : (∀ M : Mod (Sheaf J AddCommGrpCat.{w}) R, Mod.tensorObjπ (Mod.regular R) M ≫ (λ_ M).hom.hom = γ[R,M.X] ∧ (λ_ M).inv.hom = (λ_ M.X).inv ≫ η[R] ▷ M.X ≫ Mod.tensorObjπ (Mod.regular R) M) ∧ ∃ D : tensorLeft N ≅ Functor.pi' (fun _ : Fin n ↦ 𝟭 (Mod (Sheaf J AddCommGrpCat.{w}) R)) ⋙ Limits.Pi.functor (Fin n), (∀ (M : Mod (Sheaf J AddCommGrpCat.{w}) R) (i : Fin n), (D.app M).hom ≫ Pi.π (fun _ : Fin n ↦ M) i = ((θ.inv ≫ biproduct.π (fun _ : Fin n ↦ Mod.regular R) i) ▷ M) ≫ (λ_ M).hom) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{w}) R, (D.app M).inv = ∑ i : Fin n, Pi.π (fun _ : Fin n ↦ M) i ≫ (λ_ M).inv ≫ ((biproduct.ι (fun _ : Fin n ↦ Mod.regular R) i ≫ θ.hom) ▷ M)) ∧ (∀ (M : Mod (Sheaf J AddCommGrpCat.{w}) R) (i : Fin n), Mod.tensorObjπ N M ≫ ((D.app M).hom ≫ Pi.π (fun _ : Fin n ↦ M) i).hom = (θ.inv ≫ biproduct.π (fun _ : Fin n ↦ Mod.regular R) i).hom ▷ M.X ≫ γ[R,M.X]) ∧ (∀ M : Mod (Sheaf J AddCommGrpCat.{w}) R, (D.app M).inv.hom = ∑ i : Fin n, (Pi.π (fun _ : Fin n ↦ M) i).hom ≫ (λ_ M.X).inv ≫ (η[R] ≫ (biproduct.ι (fun _ : Fin n ↦ Mod.regular R) i ≫ θ.hom).hom) ▷ M.X ≫ Mod.tensorObjπ N M) ∧ (∀ (M M' : Mod (Sheaf J AddCommGrpCat.{w}) R) (f : M ⟶ M'), (N ◁ f) ≫ (D.app M').hom = (D.app M).hom ≫ Limits.Pi.map (fun _ : Fin n ↦ f))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "All displayed normalized identities are stated together, using the canonical sheaf tensor and Mod.tensorObjπ. Auxiliary instances only select recorded canonical structures or apply existing sheafification transport, closedness, additivity, colimit-preservation and finite-biproduct interfaces; no new mathematical construction is substituted.",
+  "fixed_by": "NT-stage2-cc-e44ba70d7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e44ba70d7",
+  "group": "NC",
+  "result": "fix",
+  "note": "Statement matches node clause by clause. Unitor normalizations (tensorObjπ≫λ.hom.hom=γ; λ.inv.hom=λ⁻¹≫η▷≫tensorObjπ) checked against Mod.monoidalCategory (unitor = fromBimod leftUnitorBimod = desc actLeft). D : tensorLeft N ≅ Pi.functor∘pi'(𝟭), pinned by the projection clause. Module and underlying-sheaf formulas checked by hand via tensorObjπ_whiskerRight; naturality N◁f≫D=D≫Pi.map f. n=0 covered, no stronger hypotheses, universes uC vC w free, recorded ℤ-tensor sfbSheafTensorStructure (not cartesian). Node diff vs side-live is only the lean field; dep nodes identical; statement verbatim; docstrings carry source, blueprint tag and 7 steps; only sorry; report has both sections. FIX: sfbCoordinateSheafClosed was a global public MonoidalClosed instance chosen by .some, exporting a chosen internal Hom to all importers (diamond risk with SheafTensorClosed). Now an @[instance_reducible] def used via letI only in the Prop-valued MonoidalPreadditive instance; statement and declaration names unchanged. fixes/RelativeTensorFiniteFreeCoordinates.lean compiled clean via nt_compile --json (13.9 s, exit 0). Advisory: global Monoidal/Symmetric instances = recorded canonical data; sfbSheafTensorStructure is owned by a transitive dep that sk-def's record binds."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T070037-L-3349669",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

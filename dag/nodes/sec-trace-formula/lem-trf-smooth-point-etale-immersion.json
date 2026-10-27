@@ -19,13 +19,11 @@
  ],
  "proof": [
   {
-   "text": "For every input satisfying the hypotheses, $d=\\dim_x(X_s)$ is a finite nonnegative integer. Indeed, smoothness includes local finite presentation by [def-sbc-smooth-morphisms]. Choose affine neighbourhoods $U=\\operatorname{Spec}A$ of $x$ and $V=\\operatorname{Spec}R$ of $s$ with $f(U)\\subseteq V$ and $A$ finitely presented over $R$, using [def-sbc-locally-finite-presentation]. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $U_s$ with $\\operatorname{Spec}(A\\otimes_R\\kappa(s))$: the fibre computed over $V$ is also the fibre over $S$, since both have the same universal property. The images of the finitely many algebra generators of $A$ generate this tensor product over $\\kappa(s)$, so $U_s$ is of finite type over that field. Its dimension is finite by [lem-kun-dimension-finite-type]. By [def-kun-topological-dimension-at-point], dimension at $x$ is unchanged on restricting to the open neighbourhood $U_s$, and is at most its dimension: intersect any other neighbourhood with $U_s$ in the minimum defining dimension at a point. We prove the desired conclusion simultaneously for all such inputs by strong induction on $d$. The induction hypothesis is the full assertion, including immersion, etaleness over the same base, and singleton designated fibre, for every smaller value of $d$.",
+   "text": "Smoothness includes local finite presentation [def-sbc-smooth-morphisms], so by [def-sbc-locally-finite-presentation] there are affine opens $W=\\operatorname{Spec}A\\ni x$ of $X$ and $V=\\operatorname{Spec}R\\ni s$ of $S$ with $f(W)\\subset V$ and $A$ finitely presented over $R$. Apply [lem-trf-affine-fibre-point-dimension] to this chart: $\\dim_x(X_s)=\\dim_{\\mathfrak Q}(\\operatorname{Spec}(\\kappa(s)\\otimes_RA))$ is a finite nonnegative integer $d$. Prove the assertion by strong induction on $d$, simultaneously for every smooth morphism and every closed fibre point with finite separable residue extension. The induction hypothesis includes the immersion, etaleness over the same base, and the singleton designated fibre for every smaller dimension.",
    "uses": [
     "def-sbc-smooth-morphisms",
     "def-sbc-locally-finite-presentation",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-kun-dimension-finite-type",
-    "def-kun-topological-dimension-at-point"
+    "lem-trf-affine-fibre-point-dimension"
    ],
    "elementary": false,
    "source": {
@@ -34,14 +32,9 @@
    }
   },
   {
-   "text": "If $d=0$, [lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension], with the smooth open neighbourhood taken to be $X$ itself, gives an open neighbourhood $W\\subseteq X$ of $x$ such that $W\\to S$ is etale. By [lem-weil-pbc-etale-fibre-discrete-separable-points], the point corresponding to $x$ is open in $W_s$. By [def-pc-scheme-fibre], the topology of $W_s$ is precisely the subspace topology on the set-theoretic fibre in $W$. Consequently there is an open $Z\\subseteq W$ whose intersection with that fibre is exactly $\\{x\\}$. Give $Z$ its open subscheme structure and let $z$ be its point $x$. The fibre $Z_s$ has underlying set $\\{z\\}$ by the same fibre-topology statement. Its structural morphism is etale, since the open immersion $Z\\to W$ is etale and etale morphisms compose [lem-weil-pbc-etale-composition-cancellation]. Both $Z\\to W$ and $W\\to X$ are immersions (factor each through its identity closed immersion as in [def-weil-closed-immersion]); their composite $i:Z\\to X$ is an immersion by [lem-weil-pbc-proper-fp-permanence](e). It takes $z$ to $x$ and proves the induction base.",
+   "text": "If $d=0$, apply [lem-trf-smooth-zero-dimensional-singleton-open] with $W=X$. Its open subscheme $Z$ contains $x$, is etale over $S$, has singleton fibre over $s$, and its inclusion into $X$ is an immersion. Taking $z=x$ gives all the required conclusions.",
    "uses": [
-    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-proper-fp-permanence"
+    "lem-trf-smooth-zero-dimensional-singleton-open"
    ],
    "elementary": false,
    "source": {
@@ -50,12 +43,14 @@
    }
   },
   {
-   "text": "Let $d>0$. Apply [lem-trf-smooth-separable-hypersurface-slice] to obtain an affine open $U\\subseteq X$ and an effective Cartier divisor $D\\hookrightarrow U$ containing $x$, smooth over $S$, with $\\dim_x(D_s)=d-1$. All its hypotheses are exactly our smoothness, closedness in the fibre, finite separability, and positive dimension. Write $x_D$ for the point of $D$ over $x$. The fibre morphism $D_s\\to U_s$ is a closed immersion by [lem-weil-pbc-proper-fp-permanence](b); here the two fibres are the pullbacks of the closed immersion along $U_s\\to U$. Thus $x_D$ is closed in $D_s$, since its image is a closed point of $U_s$ and a closed immersion is a homeomorphism onto its image [def-weil-closed-immersion]. Moreover its residue field is unchanged: on an affine neighbourhood a closed immersion is $\\operatorname{Spec}(B/I)\\to\\operatorname{Spec}B$, and at the corresponding prime $\\mathfrak p\\supseteq I$ its residue field is $(B/I)_{\\mathfrak p/I}/(\\mathfrak p/I)=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$. The residue field at $x$ is also unchanged by the open restriction $U\\subseteq X$ [def-weil-open-immersion]. Therefore $\\kappa(x_D)/\\kappa(s)$ is the same finite separable extension, so the induction hypothesis applies to $D\\to S$ at $x_D$.",
+   "text": "If $d>0$, [lem-trf-smooth-separable-hypersurface-slice] gives an affine open $U\\subseteq X$ and an effective Cartier divisor $D\\hookrightarrow U$ through $x$, smooth over $S$, with $\\dim_{x_D}(D_s)=d-1$. Here $D_s=D\\times_U U_s$ by the fibre-product universal property, so $D_s\\to U_s$ is a closed immersion by [lem-weil-pbc-proper-fp-permanence](b). The closed singleton of $X_s$ restricts to the closed singleton $\\{x\\}$ in $U_s$. Its inverse image is $\\{x_D\\}$ because a closed immersion is a homeomorphism onto its image [def-weil-closed-immersion]. Thus $x_D$ is closed in $D_s$. The induced residue maps for $D\\hookrightarrow U\\hookrightarrow X$ are isomorphisms by [lem-weil-pbc-closed-immersion-residue-field-iso] and [lem-weil-pbc-residue-field-point-naturality], respectively. Write $a:D\\to U$, $b:U\\to X$ and $r_h$ for the residue map induced by a morphism $h$. The definition via local stalk maps [def-weil-residue-field] gives $r_{f\\circ b\\circ a}=r_a\\circ r_b\\circ r_f$, since stalk maps and their quotient maps compose. Thus the isomorphism $r_a\\circ r_b:\\kappa(x)\\to\\kappa(x_D)$ respects the given $\\kappa(s)$-algebra structures. Hence the extension at $x_D$ is finite separable. The smooth morphism $D\\to S$ and $x_D$ therefore satisfy the induction claim's input hypotheses at dimension $d-1$.",
    "uses": [
     "lem-trf-smooth-separable-hypersurface-slice",
     "lem-weil-pbc-proper-fp-permanence",
     "def-weil-closed-immersion",
-    "def-weil-open-immersion"
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-weil-residue-field"
    ],
    "elementary": false,
    "source": {
@@ -64,7 +59,7 @@
    }
   },
   {
-   "text": "The induction hypothesis produces an immersion $j:Z\\to D$ and $z\\in Z$ with $j(z)=x_D$, such that $Z\\to S$ is etale and $Z_s$ has underlying set $\\{z\\}$. The composite $D\\hookrightarrow U\\hookrightarrow X$ is an immersion by its displayed closed-then-open factorization [def-weil-closed-immersion]. Compose it with $j$; [lem-weil-pbc-proper-fp-permanence](e) shows that $i:Z\\to X$ is an immersion. Its structural morphism to $S$ is exactly the one obtained by induction, since all compositions used are over $S$. Thus $i(z)=x$ and both the etale and singleton-fibre conclusions hold. Since $d-1<d$, this closes the strong induction.",
+   "text": "Apply the induction hypothesis to $D\\to S$ at $x_D$, since $d-1<d$, obtaining $j:Z\\to D$ and $z\\in Z$. The map $D\\hookrightarrow U\\hookrightarrow X$ is an immersion by its closed-then-open factorization [def-weil-closed-immersion]. Its composite with $j$ is an immersion by [lem-weil-pbc-proper-fp-permanence](e), and sends $z$ to $x$. All maps are over $S$, so the structural map of $Z$ and its fibre over $s$ are exactly those supplied by induction. They are etale and the singleton $\\{z\\}$, respectively. This closes the induction.",
    "uses": [
     "def-weil-closed-immersion",
     "lem-weil-pbc-proper-fp-permanence"
@@ -79,17 +74,14 @@
  "proof_deps": [
   "def-sbc-smooth-morphisms",
   "def-sbc-locally-finite-presentation",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-kun-dimension-finite-type",
-  "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-proper-fp-permanence",
+  "lem-trf-affine-fibre-point-dimension",
+  "lem-trf-smooth-zero-dimensional-singleton-open",
   "lem-trf-smooth-separable-hypersurface-slice",
-  "def-weil-open-immersion"
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-weil-residue-field"
  ],
  "proof_origin": {
   "by": "document",
@@ -198,56 +190,66 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-smooth-point-etale-immersion",
   "worker": "stage1",
-  "summary": "Checked Tag 057G and the partial project Lean slice theorem. Kept the statement; wrote the full strong induction with singleton fibre in dimension zero, one smaller smooth hypersurface input, verification of the residue fields and closedness for induction, and immersion composition. Reused all existing generic tools; one new statement-only hypersurface lemma.",
+  "summary": "Q108 repair: extracted the returned affine finite-dimension setup and zero-dimensional open singleton-fibre construction into two independent statement-only unsplit nodes. Kept the statement and strong-induction route, using the existing hypersurface slice and existing closed/open immersion residue-field lemmas. Full former arguments and their allocation are retained in report.md. Current-DAG landing repair: rechecked all assembly dependency statements and verbatim quotes; compared the newly present smooth-span etale-slice node and documented why neither extracted helper is a duplicate. Current statement and metadata retained. Further direct-delivery audit: expanded assembly step 3 to specify D_s as the pullback over U, restrict the closed singleton from X_s to U_s, and identify the induced residue maps over the unchanged base through stalk-map composition. This makes the hypotheses of the induction explicit on the current DAG. Rebased repair on the current shared DAG record after dry run 3277694e472. Added the explicit residue-map composition formula and its definition citation, verifying that the induction preserves the specified base-field extension; refreshed the corresponding verbatim citation. Maintainer-reader FIX (2026-10-23, 4th application; the FIXes on b79f750b, 30a99da4 and a5005ab7 were each lost at refused landings): the extracted node lem-trf-lfp-affine-fibre-dimension duplicates Q107's existing lem-trf-affine-fibre-point-dimension (same unit, in the base and live); it is dropped and step 1 cites the lfp definition chart and that node. The delivered step-3 residue-map composition and its def-weil-residue-field citation are kept.",
   "blueprint": "Historical auxiliary descendant of lem-trf-local-term-locality through lem-trf-relative-completion-etale-approximation: its 057G immersion-slice application. Steps 1-4 realize the affine/finite dimension setup, zero-dimensional singleton-fibre case, one smooth Cartier cut and the induction/composition. The current main-20261015 local-term proof uses contracting correspondences and is not changed.",
   "tool_uses": [
    {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Finiteness of dimension for the affine finite-type fibre bounds the induction parameter; this generic scheme-dimension input is not a trace-formula step."
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic residue-field preservation verifies the induction hypothesis for the hypersurface; no theorem of the unit supplies this local-ring fact."
    },
    {
-    "node": "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
-    "why": "The generic smooth dimension-zero criterion supplies the induction base, not an alternative to the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "why": "Discreteness of an etale fibre allows an ambient open to isolate the designated point; no local-term theorem is imported."
+    "node": "lem-weil-pbc-residue-field-point-naturality",
+    "why": "Generic residue-field preservation under open restriction identifies the residue extension for the hypersurface point over the same base."
    }
   ]
  },
  "tool_uses": [
   "lem-kun-dimension-finite-type",
   "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-residue-field-point-naturality"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q01-05cf76237",
-  "group": "Q01",
+  "reviewer": "NT-cc-Q108-bc39c6710",
+  "group": "Q108",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q01-05cf76237 (reviewer sub-agent of L); spot-checked: Read the item, new node, cited DAG statements, Stacks Tags 057G/057F/057C and dimension references, route documents, and required review materials. The four induction steps correctly establish finite fibre dimension, the etale singleton-fibre base case, the smooth Cartier dimension-lowering step, residue-field preservation, and immersion composition. Hypotheses and edge cases were checked; the new node is proper, searched, and non-duplicate. No route-pivot machinery or forbidden SGA source appears. Review written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-bc39c6710 (reviewer sub-agent of L); spot-checked: FIX: I drop the duplicate node lem-trf-lfp-affine-fibre-dimension (C5/D) for the 4th time. The FIXes on b79f750b, 30a99da4 and a5005ab7 were each lost at refused landings ('completed in this project's DAG but not in the live DAG'). This head differs from a5005ab7 only in step 3, which adds the formula r_{f∘b∘a}=r_a∘r_b∘r_f and a citation of def-weil-residue-field; both new node files are byte-identical. The item is not superseded: live and side-live still hold the old 4-step proof and neither new node, and the re-split note is still in force. The duplicate: Q107's lem-trf-affine-fibre-point-dimension (same unit, in base and live, unsplit, no proof_deps, statement unchanged) already states the lfp affine chart, the open immersion Spec(κ(s)⊗_R A)→X_s, finite type, and that dim_x X_s is finite and nonnegative. The report never compares the two nodes. Fix: step 1 now cites def-sbc-locally-finite-presentation and the Q107 node. Steps 2-4 are as delivered, including the new step 3, which I checked: residue maps are contravariant, so the composition order is right and κ(x_D)/κ(s) stays finite separable over κ(s). proof_deps is recomputed as the union of the step uses (10 nodes), the assembly is 2850 chars (750/255/1311/534), and a summary note is added. The node count is waived because the existing node carries all of old step 1. Source: Stacks more-morphisms.tex lemma-slice-smooth (057G): affine reduction, d=0 étale with a discrete fibre shrunk via 01K1, and d>0 via 057F with dim d−1. Step checks: permanence(b) gives the closed immersion D_s=D×_U U_s→U_s, so {x_D} is closed; permanence(e) composes the immersions; the induction hypothesis is the full conclusion. The kept node smooth-zero-dimensional-singleton-open is true: the near-point étale open, the discrete étale fibre and 01K1 isolate x, with no closedness or separability hypothesis needed. I tested it on L/k separable, k×k, A¹ and k[t]/t² (the last two excluded). It is not a duplicate of smooth-span-etale-slice, finite-flat-singleton-chart, the near-point lemma or separable-smooth-cotangent-germ. Batch-5 flags: both flagged nodes and the replacement citation are generic scheme theory from 057G, not part of the trace formula or Poincaré duality; the flagged lfp node is dropped and the other is accepted. The two residue-field tool_uses are accepted, and no SGA source is cited. Maintainer: the group keeps re-pushing its own head after promotion refusals, so every FIX is lost.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-548199fb8",
-  "group": "Q20",
+  "reviewer": "NT-stage2-cc-3a0e835e3",
+  "group": "Q58",
   "result": "pass",
-  "note": "Statement, dependencies, source Tag 057G, docstrings, edge cases, route-pivot constraints, report sections, and scompile evidence verified; no fixes needed."
+  "note": "Item lem-trf-smooth-span-etale-slice: every hypothesis and conclusion clause of the node matches Lean, quantifier order preserved, no added hypotheses, single universe u. kX/kY/aV/cV and eX/eY are each fixed by both projection equations, so they are the canonical maps. The canonical-fibre clause is IsIso of fiberToSpecResidueField h; w is the unique point over h with IsIso of its residue map; the point images, tau v = lam s' and the residue isomorphism for x are present. The 1(B) repair of lem-trf-smooth-point-etale-immersion converts the module to module mode (required for the import) and passes the residue algebra explicitly instead of letI, same meaning. The four dropped WeilConjectures rule-7 imports match no module recorded for the current proof_deps, and no file imports the module. Both lean.statement fields are verbatim in their files (script-checked). Docstrings carry source and blueprint, proof is sorry, report has Worker report and Second reading sections. No file changed and no compile run; worker reports clean server compiles."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SmoothPointEtaleImmersion",
   "declaration": "AlgebraicGeometry.Smooth.exists_etale_immersion_slice",
-  "statement": "theorem Smooth.exists_etale_immersion_slice {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] (x : X) (hx : IsClosed {f.asFiber x}) (h : letI := (f.residueFieldMap x).hom.toAlgebra Module.Finite (S.residueField (f x)) (X.residueField x) ∧ Algebra.IsSeparable (S.residueField (f x)) (X.residueField x)) : ∃ (Z : Scheme.{u}) (i : Z ⟶ X) (z : Z), IsImmersion i ∧ i z = x ∧ Etale (i ≫ f) ∧ Set.range ((i ≫ f).fiberι (f x)) = Set.singleton z",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPointEtaleImmersion.lean",
+  "statement": "theorem Smooth.exists_etale_immersion_slice {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] (x : X) (hx : IsClosed {f.asFiber x}) (h : @Module.Finite (S.residueField (f x)) (X.residueField x) _ _ (@Algebra.toModule _ _ _ _ (f.residueFieldMap x).hom.toAlgebra) ∧ @Algebra.IsSeparable (S.residueField (f x)) (X.residueField x) _ _ (f.residueFieldMap x).hom.toAlgebra) : ∃ (Z : Scheme.{u}) (i : Z ⟶ X) (z : Z), IsImmersion i ∧ i z = x ∧ Etale (i ≫ f) ∧ Set.range ((i ≫ f).fiberι (f x)) = Set.singleton z",
   "branch": "newtargets-dag",
-  "by": "Q20",
-  "date": "2026-10-18",
+  "by": "Q58",
+  "date": "2026-10-24",
   "existing": false,
-  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPointEtaleImmersion.lean"
+  "note": "Dependency interface repair under §1(B): the recorded file is a legacy non-module and Lean rejects its import from a module-mode statement. Convert the same owning module to module mode with public statement imports and private proof imports, preserving the declaration and mathematical statement. The finite and separable hypotheses now pass the canonical residue-map algebra explicitly, replacing the old letI without changing its meaning. The proof docstring is expanded to the current four-step DAG proof; every theorem proof remains sorry."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

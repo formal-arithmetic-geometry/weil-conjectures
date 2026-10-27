@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-projection-exact-tensor-shift-first",
+ "kind": "statement",
+ "title": "For every resolving-preserving exact tensor comparison",
+ "statement": "For every resolving-preserving exact tensor comparison, its first-variable integer-shift square commutes for the supplied normalized tensor shifts. The sites, functors and normalized tensor models are those of [def-weil-pbc-ringed-projection-restriction-data]. The exact-derived model is the fixed termwise exact localization.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "For a fixed resolving argument, conjugate the comparison by the representative and exact-derived factor isomorphisms. Their normalized shifts and the total-bifunctor comparison shift theorem give the comparison shift square. Resolve arbitrary derived objects by flat-term K-flat complexes; essential surjectivity extends each square to all objects in each variable. This gives the unsigned first-variable and Koszul-signed second-variable equations.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-projection-exact-tensor-core",
+    "lem-weil-pbc-ringed-projection-tensor-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU, 07A4 and 0G7E; Modules on Sites, Tag 04J0; More on Algebra, Tag 0FNH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-projection-exact-tensor-core",
+  "lem-weil-pbc-ringed-projection-tensor-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU, 07A4, 0G7E, 04J0 and 0FNH; agent-written formal assembly of their representative constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact tensor functors preserving coproducts induce a tensor isomorphism on derived categories compatible with integer shifts",
+   "results": "mapDerivedCategory, its CommShift instance, exact-derived factors, commShiftMapCochainComplex. No normalized derived tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use exact-derived factorization, plus project tensor descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice site commutes with tensor products of sheaves of modules and derived tensor products",
+   "results": "Presheaf tensorObjMap, tensorObj_map_tmul, and general sheaf monoidal constructions; no matching tensor descent or localized exact operation.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "overFunctor, overFunctorMap, Scheme.Modules.overFunctorEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Use the actual slice restriction, with additional project theorems."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*tensor|tensor.*overFunctor; mapDerivedCategoryFactors and mapBifunctorComparison in Mathlib, WeilConjectures and Sheaf",
+   "results": "Mathlib exact-derived factors and slice restriction. Project APIs include cochain tensor rigidity, tensorOverIso, K-flat restriction and signed total comparisons.",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the combined normalized claim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalBaseData",
+  "group": "J4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "The locality step before the finite-complex argument; normalized localized tensor comparison for projection.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-base-data",
+    "lem-weil-pbc-ringed-projection-local-data",
+    "lem-weil-pbc-ringed-projection-local-model",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionExactTensorFirstShift",
+  "file": "lean/Sheaf/Paper/ProjectionExactTensorFirstShift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.ExactTensor.exactTensorComparison_shiftFirst",
+  "statement": "theorem exactTensorComparison_shiftFirst (L : Mod R ⥤ Mod S) [L.Additive]\n    [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    [PreservesColimitsOfSize.{0, 0} L]\n    (a : TensorModel R) (b : TensorModel S)\n    [sa : TensorShifts a] [sb : TensorShifts b]\n    (mu : ∀ M N : Mod R, L.obj (((tensor R).obj M).obj N) ≅\n      ((tensor S).obj (L.obj M)).obj (L.obj N))\n    (hn : ∀ {M M' N N' : Mod R} (f : M ⟶ M') (g : N ⟶ N'),\n      L.map (((tensor R).map f).app N ≫ ((tensor R).obj M').map g) ≫\n        (mu M' N').hom =\n      (mu M N).hom ≫ (((tensor S).map (L.map f)).app (L.obj N) ≫\n        ((tensor S).obj (L.obj M')).map (L.map g)))\n    (t : TensorComparison L (exactTensorModel L) a b mu) :\n    ∀ (M N : Der R) (n : ℤ),\n      t.comparison.hom.app (M⟦n⟧, N) ≫\n        b.functor.map (Prod.mkHom ((L.mapDerivedCategory.commShiftIso n).hom.app M) (𝟙 _)) ≫\n        (((Functor.curry.obj b.functor).flip.obj\n          (L.mapDerivedCategory.obj N)).commShiftIso n).hom.app (L.mapDerivedCategory.obj M) =\n      L.mapDerivedCategory.map\n          ((((Functor.curry.obj a.functor).flip.obj N).commShiftIso n).hom.app M) ≫\n        (L.mapDerivedCategory.commShiftIso n).hom.app (a.functor.obj (M, N)) ≫\n        (shiftFunctor (Der S) n).map (t.comparison.hom.app (M, N))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "independent cc review: item localBaseData_exists + new hole localOrdinaryResolving_exists against LocalBaseData/Local fields and node; Models+Transport and Model+ZeroCompletion concatenations vs published originals (verbatim); public decl type hashes published vs sandbox (identical); 12 delivered modules + 30 direct importers compiled in sandbox (all OK)"
+ }
+}

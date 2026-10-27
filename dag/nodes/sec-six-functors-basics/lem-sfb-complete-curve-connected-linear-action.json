@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-complete-curve-connected-linear-action",
+ "kind": "statement",
+ "title": "A complete curve with a nontrivial connected linear-group action is a projective line",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Let $H$ be smooth and connected [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $C$ be a smooth proper integral finite-type $F$-scheme [def-pc-scheme, def-weil-proper-morphism, def-pc-integral-scheme] of Krull dimension one [def-kun-topological-krull-dimension]. Let $a:H\\times_F C\\to C$ be an $F$-morphism satisfying the action unit and multiplication identities. If $a$ is not the second projection, then $C$ is $F$-isomorphic to $\\mathbf P^1_F=\\mathbf P(\\{0,1\\};\\operatorname{Spec}F)$ [def-nagata-projective-space-base-change]. There is no characteristic restriction.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 20.5 and preceding 20.2--20.3, printed p.408."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=H\\times_F C$. It is smooth over $F$ by smooth base change and composition [lem-sfb-stack-smooth-permanence], hence reduced by [lem-sfb-space-smooth-reduced-locality], applied over the reduced scheme $\\operatorname{Spec}F$. It is finite type by [lem-sfb-finite-type-composition-base-change]. Its closed points are dense by [lem-sc-lft-over-field-jacobson-space], and are $F$-rational by [lem-weil-pbc-closed-point-residue-field-base]. Let $W$ be the disjoint union of their copies of $\\operatorname{Spec}F$, mapping to $T$. If $a(h,x)=x$ for all $h\\in H(F),x\\in C(F)$, the two maps $a,\\operatorname{pr}_2:T\\to C$ agree after $W\\to T$: rational points of a fibre product are pairs by [def-pc-fibre-product]. Since $C/F$ is separated by properness [def-weil-proper-morphism], the dense-image extensionality [lem-sfb-relative-separated-dominant-ext] makes these maps equal, a contradiction. Thus choose $h,x$ with $hx\\ne x$.",
+   "uses": [
+    "lem-sfb-stack-smooth-permanence",
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  },
+  {
+   "text": "By [lem-sfb-borel-conjugation-cover], choose a Borel subgroup $B\\subseteq H$ and $g\\in H(F), b\\in B(F)$ with $h=gbg^{-1}$. Put $y=g^{-1}x$. If $by=y$, the action identities give $hx=gby=gy=x$, contradiction. Hence the restricted action of the smooth connected solvable group $B$ moves $y$ by $b$.",
+   "uses": [
+    "lem-sfb-borel-conjugation-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-solvable-torsors-and-variety] to $B$: it is split solvable and there is an $F$-scheme isomorphism $\\theta:\\mathbf A_F^r\\times_F(\\mathbf G_m)^s\\simeq B$. Write $p=\\theta^{-1}(1)$ and $q=\\theta^{-1}(b)$. In the product of $r+s$ coordinates, form $p_0=p, p_1,\\ldots,p_{r+s}=q$ by changing one coordinate at a time from its $p$-value to its $q$-value. The values of $z\\mapsto\\theta(z)y$ at the two ends are $y$ and $by\\ne y$, so some consecutive values differ. Fix all other coordinates at their values in these consecutive points and vary that coordinate. This defines an $F$-morphism from $Q=\\mathbf G_a$ (an affine coordinate) or $Q=\\mathbf G_m$ (a torus coordinate) to the product, hence a morphism $u:Q\\to C$. The coordinate maps are substitution homomorphisms of polynomial or Laurent polynomial rings [def-sc-gm-ga, def-weil-affine-spectrum]. Two $F$-points have different images under $u$, so $u$ cannot factor through an $F$-point. The case $r+s=0$ is excluded by the unequal endpoint values.",
+   "uses": [
+    "lem-sfb-split-solvable-torsors-and-variety",
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  },
+  {
+   "text": "The coordinate ring of $Q$ is $F[t]$ or $F[t,t^{-1}]$ [def-sc-gm-ga]. Both are domains: the highest nonzero coefficient of a product of nonzero polynomials is the product of their highest coefficients, and multiplying Laurent polynomials by powers of $t$ reduces to that case. Both have fraction field $F(t)$ [def-weil-rational-function-field]: in the Laurent case the extra generator $t^{-1}$ is already in that field, and every Laurent fraction is a fraction of polynomials after multiplying numerator and denominator by powers of $t$. By [lem-weil-pbc-spec-domain-stalks-function-field], $Q$ is integral and $F(Q)\\simeq F(t)$ as $F$-algebras.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-weil-rational-function-field",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-curve-nonconstant-generic-criterion] to the integral source $Q$ and the smooth integral dimension-one target $C$. Nonconstancy from step 3 gives an injective $F$-homomorphism $u^*:F(C)\\hookrightarrow F(Q)\\simeq F(t)$. Let $E$ be its image, an intermediate field. By [lem-sfb-curve-function-field-arithmetic], $\\operatorname{trdeg}_F F(C)=\\dim C=1$. Thus $E$ is strictly larger than $F$: if the image contained only constants, the injective $F$-map would identify $F(C)$ with $F$, whose transcendence degree is zero. The map $F(C)\\to E$ is an $F$-isomorphism by its definition as the image.",
+   "uses": [
+    "lem-sfb-curve-nonconstant-generic-criterion",
+    "lem-sfb-curve-function-field-arithmetic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  },
+  {
+   "text": "By [lem-sfb-luroth-rational-intermediate-field] applied to $E\\subseteq F(t)$, there is an $F$-isomorphism $F(t)\\simeq E$. Composing it with the inverse of $F(C)\\simeq E$ from step 5 yields an $F$-isomorphism $F(t)\\simeq F(C)$. No separability of $u$ is asserted or needed.",
+   "uses": [
+    "lem-sfb-luroth-rational-intermediate-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  },
+  {
+   "text": "Let $P=\\mathbf P^1_F$ with the exact projective-space model in the statement. By [lem-asd-projective-line-genus-zero], $P$ is a smooth proper connected curve of dimension one. By the integral clause of [lem-sc-smooth-connected-curve-local-rings], it is integral. The standard-chart statement [lem-weil-pbc-projective-space-standard-charts], with index set $\\{0,1\\}$ and base $\\operatorname{Spec}F$, gives a nonempty affine open $U\\subseteq P$ with coordinate ring $F[t]$. By [lem-sc-integral-function-field-affine-fraction], the generic-stalk field $F(P)$ is its fraction field, hence $F(P)\\simeq F(t)$ by [def-weil-rational-function-field]. Together with step 6 this gives an $F$-isomorphism $\\alpha:F(P)\\simeq F(C)$.",
+   "uses": [
+    "lem-asd-projective-line-genus-zero",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-rational-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-curve-function-field-morphisms] to $C$ and $P$, both smooth proper integral dimension-one curves: $\\alpha$ gives $f:C\\to P$, and $\\alpha^{-1}$ gives $g:P\\to C$. Its identity and composition clauses give $(g\\circ f)^*=\\alpha\\circ\\alpha^{-1}=\\operatorname{id}_{F(C)}$ and $(f\\circ g)^*=\\alpha^{-1}\\circ\\alpha=\\operatorname{id}_{F(P)}$. Its injectivity then gives $g\\circ f=\\operatorname{id}_C$ and $f\\circ g=\\operatorname{id}_P$. Thus $f$ is the required $F$-isomorphism.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-smooth-permanence",
+  "lem-sfb-space-smooth-reduced-locality",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-sfb-borel-conjugation-cover",
+  "lem-sfb-split-solvable-torsors-and-variety",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "def-weil-rational-function-field",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-sfb-curve-nonconstant-generic-criterion",
+  "lem-sfb-curve-function-field-arithmetic",
+  "lem-sfb-luroth-rational-intermediate-field",
+  "lem-asd-projective-line-genus-zero",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-proper-curve-function-field-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 20.5 and 20.2--20.3, printed p.408; coordinate version of the solvable reduction using Proposition 16.55(c) and Corollary 16.56, printed p.344."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homogeneous.*curve|curve.*homogeneous|exists.*[Ii]so.*[Pp]rojective|genus.*zero",
+   "results": "{\"t\": \"2026-10-23T21:48:29Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*curve|curve.*homogeneous|exists.*[Ii]so.*[Pp]rojective|genus.*zero\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\"], \"digest\": \"3ecfbe553a035ced\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass equations and their point coordinate changes do not classify smooth proper curves with algebraic group actions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete nonsingular curve admitting a nonconstant orbit map from a connected linear algebraic group is a projective line",
+   "results": "{\"t\": \"2026-10-23T21:48:30Z\", \"tool\": \"leansearch\", \"query\": \"A complete nonsingular curve admitting a nonconstant orbit map from a connected linear algebraic group is a projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Projective.map_nonsingular\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.nonsingular_of_equiv\", \"WeierstrassCurve.Projective.map_add\", \"WeierstrassCurve.Projective.Point.toAffineLift_eq\", \"WeierstrassCurve.Projective.comp_equiv_comp\"], \"digest\": \"c5c5b26ac4e5981c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass equations and their point coordinate changes do not classify smooth proper curves with algebraic group actions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveLine\"",
+   "results": "{\"t\": \"2026-10-23T21:48:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveLine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass equations and their point coordinate changes do not classify smooth proper curves with algebraic group actions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth proper integral curve over an algebraically closed field with a nontrivial action of a smooth connected affine algebraic group is isomorphic to the projective line",
+   "results": "{\"t\": \"2026-10-23T21:48:31Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth proper integral curve over an algebraically closed field with a nontrivial action of a smooth connected affine algebraic group is isomorphic to the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"WeierstrassCurve.toProjective\", \"WeierstrassCurve.Affine\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply\", \"WeierstrassCurve.Projective.Point.fromAffine_some\", \"WeierstrassCurve.Projective.Point.toAffine_of_equiv\", \"WeierstrassCurve.exists_variableChange_of_j_eq\"], \"digest\": \"867e55f72e85ce1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Weierstrass equations and their point coordinate changes do not classify smooth proper curves with algebraic group actions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth proper integral curve with a nontrivial connected linear algebraic group action is a projective line",
+   "results": "{\"t\": \"2026-10-23T22:19:02Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth proper integral curve with a nontrivial connected linear algebraic group action is a projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"WeierstrassCurve.toProjective\", \"WeierstrassCurve.Projective.PointClass\", \"WeierstrassCurve.Projective.NonsingularLift\", \"OnePoint.instGLAction\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.Affine\", \"WeierstrassCurve.Projective.Point.fromAffine_some\"], \"digest\": \"220cc26ebad3dd7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Weierstrass models, manifold integral curves or point-set actions, not this classification of proper scheme curves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveLine\"",
+   "results": "{\"t\": \"2026-10-23T22:19:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveLine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Weierstrass models, manifold integral curves or point-set actions, not this classification of proper scheme curves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete smooth curve with a nonconstant orbit from the additive or multiplicative group is rational",
+   "results": "{\"t\": \"2026-10-23T22:19:56Z\", \"tool\": \"leansearch\", \"query\": \"A complete smooth curve with a nonconstant orbit from the additive or multiplicative group is rational\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"IsIntegralCurve\", \"WeierstrassCurve.instInhabited\", \"WeierstrassCurve.Affine.Point.toClass_injective\", \"WeierstrassCurve\", \"WeierstrassCurve.IsIntegral\", \"IsIntegralCurveAt\", \"RatFunc\"], \"digest\": \"ab91c1097168cb17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Weierstrass models, manifold integral curves or point-set actions, not this classification of proper scheme curves."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*curve|curve.*homogeneous|nontrivial.*action.*curve",
+   "results": "{\"t\": \"2026-10-23T22:20:57Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*curve|curve.*homogeneous|nontrivial.*action.*curve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Formula.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic.lean\"], \"digest\": \"61c8130c91938a31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Weierstrass models, manifold integral curves or point-set actions, not this classification of proper scheme curves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-adjoint-projective-linear",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Proposition 20.5 and preceding 20.2--20.3, printed p.408.",
+   "via": [
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-curve-connected-linear-action",
+  "worker": "stage1",
+  "summary": "Checked Milne 20.5, 20.2--20.3 and the existing cited statements. Proved Borel reduction on actual moved rational points, wrote the coordinate-by-coordinate solvable-group argument, extracted the function-field embedding, used the exact Lüroth Mathlib leaf and assembled inverse curve morphisms. The only statement edit normalizes doubled TeX escaping; mathematical hypotheses and conclusion are unchanged.",
+  "blueprint": "Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md clause (3), via the inherited alteration and rank-one prerequisite chain. The ancestor tool returns None; retained inherited from.node=null and via. Below the item, Milne 20.5 solvable reduction is made explicit using 16.56 coordinates instead of factoring an action through series quotients.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-projective-line-genus-zero",
+    "why": "Only its smooth proper connected curve assertion is used for the specified projective line; its genus computation is not used."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Only integrality of a smooth connected curve is used for the projective line."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Standard affine coordinate ring F[t] of the exact base-change projective-space model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-projective-line-genus-zero",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-faf3d6506",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-faf3d6506 (reviewer sub-agent of L); spot-checked: I read all of it and found no faults; no fixes. Source: Milne iAG 2017, printed p.408 (20.2, 20.3, Prop 20.5 with proof) and p.344 (16.55, 16.56). The statement is unchanged apart from TeX un-doubling: H affine smooth connected, C smooth proper integral of dimension 1 over an algebraically closed F. Steps: S1 T=H×C is smooth, hence reduced over Spec F, and of finite type; its closed points are dense and F-rational; separated dense-image extensionality turns trivial action on points into a=pr2. S2 Borel conjugation gives h=gbg^-1 and b moves g^-1x. S3 B is split over an algebraically closed field, B≅A^r×Gm^s, and a one-coordinate path gives a nonconstant u:Q→C with no group action of Q needed; this is a valid agent route below the item. S4 Q is integral with F(Q)=F(t). S5 the nonconstant generic criterion gives F(C)↪F(t), and trdeg 1 makes the image strictly larger than F. S6 Lüroth. S7 P(\\{0,1\\};Spec F) is an integral smooth proper curve, and its chart F[U] gives F(P)=F(t). S8 the curve/function-field bijection, with its identity and composition clauses (directions checked) and injectivity, gives f∘g=id and g∘f=id. New node lem-sfb-luroth-rational-intermediate-field: exact match to RatFunc.Luroth.algEquiv (E≠⊥), Mathlib/FieldTheory/RatFunc/Luroth.lean:496; it is self-contained, has 4 search kinds, and no DAG duplicate exists (rg -L Lüroth finds only search-log mentions); it is not a clause of the item. Accepted tool uses: lem-asd-projective-line-genus-zero (smooth proper connected clause only), lem-sc-smooth-connected-curve-local-rings (clause 1), lem-weil-pbc-projective-space-standard-charts (c). Batch-5 check: stack-smooth-permanence and space-smooth-reduced-locality reach only def-trf-algebraic-space (the generic Stacks 025Y definition); borel-conjugation-cover reaches lem-trf-fppf-covering-base-change (Stacks 021O, Mathlib leaf); split-solvable reaches lem-trf-fppf-covering-is-fpqc (Stacks 022C, Mathlib leaf). All are generic foundations, not steps of the trace formula or Poincaré duality, so they are accepted. The item's closure is acyclic and proof_deps equals the union of the uses. No SGA is used. The blueprint from.node is null, inherited from the N0 chain."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.CompleteCurveConnectedLinearAction",
+  "declaration": "AlgebraicGeometry.complete_curve_connected_linear_action",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/CompleteCurveConnectedLinearAction.lean",
+  "statement": "theorem complete_curve_connected_linear_action (F : Type u) [Field F] [IsAlgClosed F] (H C : Over (Spec (.of F))) [GrpObj H] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [Smooth H.hom] [ConnectedSpace H.left] [Smooth C.hom] [IsProper C.hom] [IsIntegral C.left] (hdim : topologicalKrullDim C.left = 1) (a : H ⊗ C ⟶ C) (hunit : MonObj.one (X := H) ▷ C ≫ a = (λ_ C).hom) (hmul : MonObj.mul (X := H) ▷ C ≫ a = (α_ H H C).hom ≫ H ◁ a ≫ a) (hnontrivial : a ≠ CartesianMonoidalCategory.snd H C) : ∃ e : C.left ≅ ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of F)), e.hom ≫ (ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of F)) ↘ Spec (.of F)) = C.hom",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23f119275",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read the node, the 12 stmt_dep records, Milne 20.5 (p.408), the module and the report. Every clause matches: F alg-closed; H affine finite-type GrpObj in Over(Spec F), smooth and connected; C smooth, proper (gives finite type), integral, topologicalKrullDim 1; a : H⊗C⟶C with correct unit and multiplication identities; a ≠ snd; conclusion ∃ e : C ≅ ProjectiveSpace (ULift (Fin 2)) (Spec F) over F (first-projection structure map, as in the def-nagata-projective-space-base-change model). Node copy differs from live only in lean; lean.statement is verbatim; no hollow defs, sorry only; docstrings give the source and blueprint plus 8 steps; plain proof-dep imports exist live; edge cases and universes OK. No compile (no changes)."
+ }
+}

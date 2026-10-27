@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-neron-lft-finite-set-affine",
+ "kind": "statement",
+ "title": "Affine neighbourhoods of finite sets in a Néron lft-group",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension one, $K=\\operatorname{Frac}D$, and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. Let $V/K$ be a smooth separated commutative group scheme of finite type, and let $N/S$ be a Néron lft-model of $V$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Thus $N$ is a smooth separated commutative $S$-group scheme, with a specified generic-fibre group isomorphism $N_K\\simeq V$ [def-pc-base-change], such that restriction is a bijection $\\operatorname{Hom}_S(Y,N)\\simeq\\operatorname{Hom}_K(Y_K,V)$ for every smooth $S$-scheme $Y$. A group scheme has multiplication, inverse and identity morphisms satisfying the group diagrams [def-sc-group-scheme]; separated means the diagonal is a closed immersion [def-weil-closed-immersion]. For every finite subset $P\\subseteq |N|$ there exists an affine open subscheme $U\\subseteq N$ containing $P$ [def-weil-open-immersion]. Here affine means isomorphic to the spectrum of a commutative ring. The group $N$ itself need not be quasi-compact.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1, proof of Proposition 4, printed p.291 (PDF p.297), first sentence; preceding discussion printed p.290 and 6.4 Theorem 1 for the affine-neighbourhood input. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-neron-lft-neutral-affine-product-chart] the fibrewise neutral subgroup $H=N^0$ is open. Over each of its affine base neighbourhoods $B$, a surjection $U\\times_BU\\to H_B$ has affine source, so $H_B$ is quasi-compact: pull back any open cover and take a finite subcover. Finitely many such $B$ cover the quasi-compact $S$, hence $H$ is quasi-compact. It is locally of finite type, so finite type by [def-weil-finite-type-morphism]. It is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes], separated by restriction of the closed diagonal, and its geometric fibres are connected by the definition of $N^0$.",
+   "uses": [
+    "lem-sfb-neron-lft-neutral-affine-product-chart",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 after Definition 1, printed p.290: finite type of the identity component from the affine product chart."
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood in $N$ of each point of $P$ and take their finite union $W$ (use $W=\\varnothing$ for $P=\\varnothing$). A finite union of quasi-compact spaces is quasi-compact. Apply [lem-sfb-neutral-action-finite-type-saturation] to $N,H,W$. It supplies a smooth separated finite-type open $X\\subseteq N$ containing $P$, stable under $H$, whose geometric fibre components are $H$-orbits. This uses finite type of $H$, not of $N$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-sfb-neutral-action-finite-type-saturation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.6 Theorem 2, open image and (a); 10.1 p.290; finite-type neutral saturation in the lft case."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dedekind-smooth-fibre-dense-affine] to $X\\to S$. Its hypotheses are exactly the smooth separated finite-type properties just obtained over the prescribed affine Dedekind base. Obtain an affine open $A\\subseteq X$ dense in every geometric fibre and an effective Cartier divisor $E$ with complement $A$.",
+   "uses": [
+    "lem-sfb-dedekind-smooth-fibre-dense-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Lemma 4 and proof of Theorem 1, printed pp.155–156: construct the fibrewise dense affine open."
+   }
+  },
+  {
+   "text": "Each nonempty geometric fibre component of $X$ meets $A$, by density, and is a single $H$-orbit by Step 2. Over an algebraically closed field choose a point in this intersection; transitivity carries it to any prescribed geometric point in that component. Thus $H\\times_SA\\to X$ is surjective on points. The smooth finite-type group $H$ has geometrically connected fibres, so [lem-sfb-dedekind-action-boundary-ampleness] gives an absolutely ample invertible module $\\mathcal O_X(E)$.",
+   "uses": [
+    "lem-sfb-dedekind-action-boundary-ampleness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "6.4 Proposition 2 and Lemma 3, printed pp.153–155: affine complement meets all neutral orbits."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-ample-finite-set-affine] on $X$ to $P$ and the ample module just obtained. It gives an affine open $U\\subseteq X$ containing $P$. Since $X$ is open in $N$, $U$ is also an open subscheme of $N$, with the same scheme structure, by [def-weil-open-immersion]. This proves the assertion without asserting quasi-compactness of $N$.",
+   "uses": [
+    "lem-sc-ample-finite-set-affine",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, case (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-neron-lft-neutral-affine-product-chart",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "def-pc-scheme",
+  "lem-sfb-neutral-action-finite-type-saturation",
+  "lem-sfb-dedekind-smooth-fibre-dense-affine",
+  "lem-sfb-dedekind-action-boundary-ampleness",
+  "lem-sc-ample-finite-set-affine",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 p.290 and proof of Proposition 4 p.291, using 6.4 Proposition 2 and proof of Theorem 1; explicit neutral-saturation reduction makes the non-quasi-compact case precise. Primary scan read online; local PDF WANTED. Stacks 01ZY finishes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite set of points in a Neron locally finite type group model over an affine Dedekind scheme is contained in one affine open subscheme",
+   "results": "{\"t\": \"2026-10-24T07:09:18Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite set of points in a Neron locally finite type group model over an affine Dedekind scheme is contained in one affine open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.of_affine_open_cover\"], \"digest\": \"1d1850b65bacdd58\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give single-point affine neighbourhoods or finite affine covers, not one affine neighbourhood containing a finite set in a Néron lft-model."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T07:09:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give single-point affine neighbourhoods or finite affine covers, not one affine neighbourhood containing a finite set in a Néron lft-model."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|finite.*(set|subset).*affine|affine.*(neighborhood|neighbourhood)",
+   "results": "{\"t\": \"2026-10-24T07:09:08Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|finite.*(set|subset).*affine|affine.*(neighborhood|neighbourhood)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"bd9f1faa0e934bcd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give single-point affine neighbourhoods or finite affine covers, not one affine neighbourhood containing a finite set in a Néron lft-model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine neighbourhood of a finite set in a smooth separated group scheme over a Dedekind domain",
+   "results": "{\"t\": \"2026-10-24T07:09:08Z\", \"tool\": \"leansearch\", \"query\": \"Affine neighbourhood of a finite set in a smooth separated group scheme over a Dedekind domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.affineCover\"], \"digest\": \"4ab26a904bd715c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give single-point affine neighbourhoods or finite affine covers, not one affine neighbourhood containing a finite set in a Néron lft-model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated group scheme locally of finite type over a Dedekind ring has affine neighbourhoods of finite sets of points",
+   "results": "{\"t\": \"2026-10-24T07:09:18Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated group scheme locally of finite type over a Dedekind ring has affine neighbourhoods of finite sets of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\"], \"digest\": \"3e12cb4fa9d17e3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give single-point affine neighbourhoods or finite affine covers, not one affine neighbourhood containing a finite set in a Néron lft-model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite subset of a Neron lft group scheme over an affine Dedekind scheme is contained in an affine open",
+   "results": "{\"t\": \"2026-10-24T08:00:10Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite subset of a Neron lft group scheme over an affine Dedekind scheme is contained in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_isAffineOpen_mem_and_subset\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.of_affine_open_cover\", \"AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"a0e44a384f6991da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T08:00:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|finite.*(subset|set).*affine",
+   "results": "{\"t\": \"2026-10-24T08:00:08Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|finite.*(subset|set).*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite sets of points of a smooth separated locally finite type group over a Dedekind ring have affine neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T08:00:09Z\", \"tool\": \"leansearch\", \"query\": \"Finite sets of points of a smooth separated locally finite type group over a Dedekind ring have affine neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"LocallyFinite\", \"AlgebraicGeometry.Scheme.affineOpens\", \"LocallyFinite.point_finite\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"d901faafceadef12\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Neron model not necessarily quasi compact has a single affine neighbourhood of any finite family of points",
+   "results": "{\"t\": \"2026-10-24T08:00:11Z\", \"tool\": \"leanfinder\", \"query\": \"A Neron model not necessarily quasi compact has a single affine neighbourhood of any finite family of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\"], \"digest\": \"1a6dd23c7b1a029d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-lft-weil-restriction-geometry",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4). BLR 10.1, proof of Proposition 4, printed p.291 (PDF p.297), first sentence; preceding discussion printed p.290 and 6.4 Theorem 1 for the affine-neighbourhood input.",
+   "via": [
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-lft-finite-set-affine",
+  "worker": "stage1",
+  "summary": "Retained the statement, verified that no project declaration proves it, and split the lft case using finite-type neutral saturation, a fibrewise dense affine Cartier complement and the BLR group-action boundary criterion, followed by existing 01ZY. Three new statement-only non-Mathlib nodes; no finite-type hypothesis added to N.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, proper/open direct-image paragraph: open direct image via sk-prop-open-coefficients; inherited trait-extension/Néron refinement. Ancestry tool returns null and its existing via chain is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-finite-set-affine",
+    "why": "General Stacks 01ZY finite-set theorem on a scheme with an ample line; the unit supplies no separate prime-avoidance theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic restriction of a smooth morphism to an open subscheme; used only for the neutral subgroup, not as an alternative unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ample-finite-set-affine",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-e0bd6b93f",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-e0bd6b93f (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the cited nodes (neutral-affine-product-chart, 01ZY lem-sc-ample-finite-set-affine, smooth-restrict leaf, and the divisor-line, Cartier-ideal and ample definitions). BLR is not local, so I read the worker's scan: §6.4 Theorem 1, Proposition 2 and its proof, Lemmas 3–4, and the Theorem 1 construction (printed pp.152–156); §10.1 Definition 1 and the p.290 paragraph. The statement is unchanged; BLR says 'finite set of a fibre', and the split proves the global claim correctly with no finite-type hypothesis on N (the G_m-lft example checked). Step 1: H=N^0 is quasi-compact via the affine U×_B U surjections, so of finite type, smooth, separated, with geometrically connected fibres; elementary. Saturation node: true; checked image openness through the shear, quasi-compactness, H-stability, fibre components as G^0-cosets and the orbit clause h=yx^{-1}; not a restatement. Dense-affine node: it is the BLR 6.4 Lemma 4 + Theorem 1 construction (torsor structure unused); E is Cartier because X is regular; geometric-fibre density holds. Ampleness node: BLR 6.4 Proposition 2 specialized to S affine, with stronger hypotheses; relative = absolute by 01VK. Step 4 surjectivity checked through Ω-points of A∩C and the orbit clause. Step 5: 01ZY. Duplicate search in the DAG (group-affine-section-ampleness, affine-normal-connected-group-ample, trf codim-one affine neighbourhood, nagata dense-affine cover) found nothing. 01ZY tool use accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NeronLftFiniteSetAffine",
+  "declaration": "AlgebraicGeometry.exists_affineOpen_of_neronLft",
+  "file": "lean/Sheaf/AlgebraicGeometry/NeronLftFiniteSetAffine.lean",
+  "statement": "theorem exists_affineOpen_of_neronLft (D : Type u) [CommRing D] [IsDomain D] [IsNoetherianRing D] [IsIntegrallyClosed D] (hdim : ringKrullDim D = 1) (K : Type u) [Field K] [Algebra D K] [IsFractionRing D K] (V : Over (Spec (CommRingCat.of K))) [GrpObj V] [IsCommMonObj V] [Smooth V.hom] [IsSeparated V.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] (N : Over (Spec (CommRingCat.of D))) [GrpObj N] [IsCommMonObj N] [Smooth N.hom] [IsSeparated N.hom] (e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D K)))).obj N ≅ V) [IsMonHom e.hom] (hN : ∀ Y : Over (Spec (CommRingCat.of D)), Smooth Y.hom → Function.Bijective (fun f : Y ⟶ N ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D K)))).map f ≫ e.hom)) (P : Set N.left) (hP : P.Finite) : ∃ U : N.left.Opens, IsAffineOpen U ∧ P ⊆ (U : Set N.left)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43d43739c",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; statement verbatim in module, single sorry. Every hypothesis matches the node without strengthening: D Noetherian integrally closed domain with ringKrullDim = 1; K any IsFractionRing; V GrpObj/IsCommMonObj, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact per the finite-type record; N GrpObj/IsCommMonObj, Smooth, IsSeparated, no quasi-compactness added. e is an iso from Over.pullback of N with IsMonHom for the canonical base-changed group structure (Over.pullback Braided instance + Functor.grpObjObj). hN is bijectivity of the actual restriction map on smooth test schemes in the same universe u (BLR 10.1 Def 1). Conclusion: exists U with IsAffineOpen U and P ⊆ U for finite P. Edge cases (P empty, points in different fibres, non-quasi-compact N) covered. No definitions, so none hollow; source and blueprint docstrings present; five-step proof in docstring; private import AmpleFiniteSetAffine exists on live with no cycle; no existing declaration duplicates it. No compile run (no file changed); worker reports a clean compile."
+ }
+}

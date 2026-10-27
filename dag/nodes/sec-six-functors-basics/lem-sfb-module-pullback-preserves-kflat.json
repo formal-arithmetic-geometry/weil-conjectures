@@ -1,0 +1,197 @@
+{
+ "id": "lem-sfb-module-pullback-preserves-kflat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-module-upper-star-kflat-quasi-iso",
+   "via": [],
+   "place": "the Lean of lem-sfb-module-upper-star-kflat-quasi-iso (preservesKFlatQuasiIso_upperStar = Functor.preservesKFlatQuasiIso_comp of mapMod(f^*) and the extension of scalars) uses the instance preservesKFlatComplexes_mapMod_upperStar; module docstring: f^* is strong monoidal, exact and commutes with colimits, so it commutes with the relative tensor product of complexes and preserves acyclicity"
+  },
+  "same_as": [
+   "lem-sfb-module-mapmod-pullback-kflat"
+  ]
+ },
+ "kind": "statement",
+ "title": "The pullback of module objects preserves K-flat complexes",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $f\\colon X\\to Y$ a morphism of schemes, with pulled-back coefficient rings $\\Lambda_Y$ and $f^*\\Lambda_Y$ [sk-def-sfb-pulled-back-coefficients]. The functor $\\operatorname{mapMod}(f^*)\\colon\\Mod_{\\Lambda_Y}\\to\\Mod_{f^*\\Lambda_Y}$, the transport of module objects [sk-def-sfb-module-objects] along the sheaf pullback $f^*$ [def-sfb-module-upper-star], applied termwise, sends K-flat complexes of $\\Lambda_Y$-modules to K-flat complexes of $f^*\\Lambda_Y$-modules, K-flatness [def-sfb-preserves-kflat-quasi-iso] taken for the relative tensor product of module objects [def-sfb-modobj-relative-tensor].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-derived-pushpull/lem-sfb-module-upper-star-kflat-quasi-iso.md",
+  "place": "lem-sfb-module-upper-star-kflat-quasi-iso: the Lean of lem-sfb-module-upper-star-kflat-quasi-iso (preservesKFlatQuasiIso_upperStar = Functor.preservesKFlatQuasiIso_comp of mapMod(f^*) and the extension of scalars) uses the instance preservesKFlatComplexes_mapMod_upperStar; module docstring: f^* is strong monoidal, exact and commutes with colimits, so it commutes with the relative tensor product of complexes and preserves acyclicity; Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar, lines 174-177, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-module-upper-star",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Let $P$ be any K-flat complex of $\\Lambda_Y$-module objects. Apply [lem-sfb-module-mapmod-pullback-kflat] to the same commutative condensed ring $\\Lambda$, schemes $X,Y$ and morphism $f$. Its transport $\\operatorname{mapMod}(f^*_{\\Ab})$ is exactly the transport in this statement, with the same source ring $\\Lambda_Y$ and target ring $f^*\\Lambda_Y$. Its conclusion is K-flatness of the termwise image of $P$ for the relative tensor product of module objects, which is the required conclusion. In particular, it tests all acyclic target-module complexes; no assumption that such a test complex is itself pulled back is made. No extension of scalars along $f^*\\Lambda_Y\\to\\Lambda_X$ is involved.",
+   "uses": [
+    "lem-sfb-module-mapmod-pullback-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/lem-sfb-module-mapmod-pullback-kflat.md",
+    "place": "Statement, transport of module objects along the strong monoidal abelian-sheaf pullback; the same assertion as the existing reviewed node lem-sfb-module-mapmod-pullback-kflat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-module-mapmod-pullback-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/lem-sfb-module-mapmod-pullback-kflat.md",
+  "place": "Statement, transport of module objects along the strong monoidal abelian-sheaf pullback; the same assertion as the existing reviewed node lem-sfb-module-mapmod-pullback-kflat"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of sheaves of modules preserves K-flat complexes",
+   "results": "SheafOfModules.pullback, Scheme.Modules.pullback, SheafOfModules.pullbackPushforwardAdjunction: the functors only, no K-flatness",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a monoidal exact functor preserving colimits sends K-flat complexes to K-flat complexes",
+   "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact, iff_rTensor_..., rTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory): flat modules over a ring only",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'PreservesKFlat|KFlat' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|PreservesKFlat",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback constructions or ordinary module flatness only; no K-flat complex preservation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of module sheaves preserves K-flat complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.instIsLeftAdjointPullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso\", \"CategoryTheory.compatiblePreservingOfFlat\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback constructions or ordinary module flatness only; no K-flat complex preservation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback constructions or ordinary module flatness only; no K-flat complex preservation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of sheaves of modules along inverse image of a geometric morphism preserves K-flat complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback constructions or ordinary module flatness only; no K-flat complex preservation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact strong monoidal sheaf inverse image functor sends tensor acyclic unbounded complexes of modules to K-flat complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: pullback constructions or ordinary module flatness only; no K-flat complex preservation statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sfb-module-upper-star-kflat-quasi-iso",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-module-derived-pushpull",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar"
+  ],
+  "statement": "instance preservesKFlatComplexes_mapMod_upperStar :\n    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesKFlatComplexes := sorry",
+  "by": "maintainer",
+  "date": "2026-10-23",
+  "note": "upstream declaration attached as it stands, proof still `sorry`; recorded by the 2026-10-23 maintainer audit of route sorries with no node",
+  "branch": "slopmaster2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "lines": [
+      174,
+      177
+     ],
+     "kind": "instance",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-module-pullback-preserves-kflat",
+  "worker": "stage1",
+  "summary": "The maintainer-created route node duplicates the existing reviewed blueprint lemma lem-sfb-module-mapmod-pullback-kflat. Reuse that exact statement in one application, retaining all coefficient categories and the unbounded K-flatness conclusion. No new node, statement change, or Lean attachment. Checked the sorried upstream instance and recorded fresh Mathlib searches, including a second semantic phrasing.",
+  "blueprint": "Discharges the mapMod(f^*) K-flatness input singled out by the ancestor lem-sfb-module-upper-star-kflat-quasi-iso; the current blueprint already states that exact input as lem-sfb-module-mapmod-pullback-kflat. Added that node to same_as and reuse its reviewed proof rather than duplicating its internal-module comparison and pointwise route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-module-mapmod-pullback-kflat",
+    "why": "The exact existing K-flat transport theorem is the factorization unit's generic input for deriving mapMod(f^*); reuse preserves the module-derived-pushpull route and avoids creating a duplicate theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-module-mapmod-pullback-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-040202b63",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-040202b63 (reviewer sub-agent of L); spot-checked: FIX for one missing definition citation (B3); the split itself is correct. The item is a maintainer-created node (2026-10-23) for the upstream sorried instance preservesKFlatComplexes_mapMod_upperStar (UpperLowerStar.lean:176-177). It is an exact duplicate of the reviewed node lem-sfb-module-mapmod-pullback-kflat (NN pass 2026-10-22): same Λ and f, same mapMod(f^*_Ab) from Mod_{Λ_Y} to Mod_{f^*Λ_Y}, two-sided K-flatness for the relative tensor, unbounded complexes. Its Lean `_statement` record is the same PreservesKFlatComplexes.kFlat_map proposition (MapDerivedCategory.lean:83). The one-step citation, with no new nodes, is the right de-duplication. That node's closure (439 nodes) contains neither the item nor its citer lem-sfb-module-upper-star-kflat-quasi-iso, so there is no cycle. The item is still unsplit in live and side-live, so nothing supersedes this delivery. Edge cases hold: f=id, zero ring, empty X, unbounded P. The statement is true in general by Stacks 0DEP plus pro-étale enough points (0992), which is the route of the cited node's proof. Batch-5 flag: def-trf-geometric-morphism is a pure definition (topos and size-convention deps only, no proof_deps) and is not a step of the trace-formula or Poincaré proofs. The other trf nodes in the closure are generic (site points, free modules). The cited node is already in the batch-5 closure through sk-thm-sf-compatibility. Accepted. The unit-level forward tool_use is accepted as the duplicate's own statement, not a route departure. No SGA. FIX: the statement cited def-sfb-preserves-kflat-quasi-iso for 'the relative tensor product of module objects'. It now cites def-sfb-modobj-relative-tensor, which is added to stmt_deps; the meaning is unchanged. Maintainer note: merge the item into lem-sfb-module-mapmod-pullback-kflat and repoint lem-sfb-module-upper-star-kflat-quasi-iso.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261024T234311-L-2552236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar"
+  ],
+  "sorry_after": []
+ }
+}

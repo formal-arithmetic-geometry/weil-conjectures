@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-galois-continuous-section-naturality",
+ "kind": "statement",
+ "title": "Adjoint-normalized continuous section coordinates and coefficient naturality",
+ "statement": "Let $k$ be a field with separable closure $\\Omega$ [def-pd-separable-closure], and put $G=\\operatorname{Aut}_k(\\Omega)$ with its Krull topology. Suppose the fibre products $W_q=(\\operatorname{Spec}\\Omega)^{q+1}_{/k}$ [def-pc-fibre-product] have been identified with the profinite test objects $\\Omega[G^q]$ [def-sfb-profinite-test-objects], with cumulative vertices $x,xg_1,\\ldots,xg_1\\cdots g_q$. Let $A$ be any nonarchimedean normed field with its metric topology. Define $\\underline A(S)=C(S,A)$ on profinite sets [def-sfb-continuous-map-condensed-ring] and $R_{A,T}=p_T^*\\underline A$ on $T_{\\mathrm{proet}}$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. There are canonical ring isomorphisms\n$$\\Gamma(W_q,R_{A,k})\\cong C(G^q,A),\\qquad \\Gamma(\\Omega[S],R_{A,\\Omega})\\cong C(S,A)$$\nfor every $q\\geq0$ and profinite $S$. They are normalized by evaluation on the displayed geometric points, using the adjoint equations for the canonical continuous-ring comparison [def-sfb-continuous-ring-canonical-comparison]. In particular $\\Gamma(\\operatorname{Spec}\\Omega,R_{A,\\Omega})=A$. Every face or degeneracy acts on the first isomorphism by precomposition with its increment map; the base-vertex move in the zeroth face acts trivially on coefficients. For every continuous field homomorphism $\\varphi:A\\to B$, the coefficient morphism $p_T^*\\varphi_*$ [def-sfb-continuous-map-condensed-ring-map] acts in both displayed isomorphisms by $f\\mapsto\\varphi\\circ f$, commutes with all these reindexings, and induces $\\varphi$ on $q=0$ sections. Moreover $v^*R_{A,k}\\cong R_{A,\\Omega}$ for $v:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k$, compatibly as ring objects [sk-def-sfb-pullback-from-point-comp]. Completeness and algebraic closedness of $A$ are not assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Hemo–Richarz–Scholbach Example 3.1, p. 6; Bhatt–Scholze Lemma 4.2.12; agent expansion of adjoint-normalized coefficient naturality and geometric-point evaluation. Returned item proof steps 5 and 9."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-pc-fibre-product",
+  "def-sfb-profinite-test-objects",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-ring-canonical-comparison",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-pullback-from-point-comp",
+  "def-sfb-field-separable-cech-nerve",
+  "def-sfb-field-separable-cech-section-data",
+  "def-zl-profinite-test-projection",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "The metric topology on $A$ is Hausdorff and totally disconnected. Indeed, for distinct $a,b$, the ball $B(a,|a-b|)$ contains $a$ and excludes $b$. It is clopen: for $z$ outside that ball, the ultrametric inequality shows that $B(z,|z-a|)$ is disjoint from it. A connected subset containing both $a$ and $b$ would therefore be separated by this ball and its complement. The same argument applies to $B$ whenever a coefficient map is given. No completeness is involved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, totally disconnected coefficient hypothesis; elementary ultrametric verification."
+   }
+  },
+  {
+   "text": "Construct the affine test identification directly. For every profinite S and commutative ring R, LC(S,R) is the pushout of LC(S,Z) and R over ULift Z. A map from this pushout is the locally constant lift of the R-map and the spectral label map; ringHom_ext_of_specMap proves uniqueness. Applying Spec gives the defining pullback square of the profinite test object. This includes empty S and the zero ring. No finite-partition colimit or finite affine coproduct theorem is required.",
+   "uses": [
+    "def-sfb-profinite-test-objects",
+    "lem-weil-pbc-locally-constant-prime-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Generic-field continuous-coefficient calculation; direct affine-test universal-property implementation using LocallyConstant.liftPrimeSpectrum and ringHom_ext_of_specMap in the adopted source library."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-locally-constant-prime-spectrum] with $R=\\Omega$. Since $\\operatorname{Spec}\\Omega$ has one point, step 2 gives a homeomorphism $|\\Omega[S]|\\cong S$, whose inverse sends $s$ to the prime $\\{h:h(s)=0\\}$. This is precisely the label projection $\\pi_S$ in [def-sfb-continuous-ring-canonical-comparison]: the characteristic function of each clopen subset takes values $0,1$, so its integer evaluation labels and its $\\Omega$-evaluation labels select the same clopen subset. Thus the maps $\\operatorname{Spec}\\Omega\\to\\Omega[S]$ of constant label $s$ evaluate functions at $s$. Taking $S=G^q$ also identifies $|W_q|$ with $G^q$ under the identifications assumed in the statement. This argument does not require $\\Omega$ to be perfect.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "def-sfb-continuous-ring-canonical-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Examples 4.1.9--4.1.10 and Lemma 4.2.12; explicit label interpretation using LocallyConstant.homeomorphPrimeSpectrum, WeilConjectures/RingTheory/Spectrum/Prime/LocallyConstant.lean:278--287."
+   }
+  },
+  {
+   "text": "Install the ultrametric instance from the nonarchimedean norm and use total disconnectedness. The canonical comparison is an isomorphism by lem-sfb-continuous-ring-universe-realization and a ring-object morphism by def-sfb-continuous-ring-canonical-comparison. Forget to presheaves of commutative monoids, evaluate, and reconstruct ordinary section rings using reconstructedRingIso of def-weil-pbc-continuous-coefficient-module-encoding. This gives a ring equivalence from the actual section ring to continuous functions, whose underlying map is exactly comparison followed by ULift.down. Precompose with the inverse label homeomorphism and the supplied e_q. Evaluation on the singleton spectrum gives point sections. The nerve already exists in the statement; no additional separable-cover theorem is used.",
+   "uses": [
+    "def-sfb-continuous-ring-canonical-comparison",
+    "lem-sfb-continuous-ring-universe-realization",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p.6, continuous-function realization; explicit adjunction normalization of the comparison."
+   }
+  },
+  {
+   "text": "For a continuous field map $\\varphi:A\\to B$, define $\\Phi_X:F_{A,X}\\to F_{B,X}$ on sections by $h\\mapsto\\varphi\\circ h$. This is a ring-sheaf morphism because the operations are pointwise and restriction is precomposition. The coefficient map $\\varphi_*$ is the postcomposition map of [def-sfb-continuous-map-condensed-ring-map]. The adjuncts of $\\Phi_X\\sigma_{X,A}$ and $\\sigma_{X,B}p_X^*(\\varphi_*)$ coincide: on $f:S\\to A$ they are respectively $\\varphi\\circ(f\\circ\\pi_S)$ and $(\\varphi\\circ f)\\circ\\pi_S$, by the defining adjoint equations [def-sfb-continuous-ring-canonical-comparison]. Associativity of composition and injectivity of the adjunction Hom bijection give equality of these morphisms. Evaluating this equality in the coordinates of step 4 proves postcomposition in both displayed section rings, and evaluation at the single point proves that the degree-zero map is exactly $\\varphi$.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring-map",
+    "def-sfb-continuous-ring-canonical-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p.6, functoriality in topological rings; elementary calculation of the two normalized adjuncts."
+   }
+  },
+  {
+   "text": "Prove the simplex coordinate equation directly from AreCoordinates, without FieldSeparableCech.face_coordinates. The underlying scheme functor preserves these finite connected wide-pullback limits, so maps into W_n are determined by vertex projections. The Cech map selects vertex alpha(j). If h_j is the cumulative product at alpha(j), then h_0 times the product of the first j increments h_i^{-1} h_{i+1} is h_j, by induction using List.prod_take_succ. This proves every vertex equation, hence the geometric-point coordinate equation. Naturality of comparison turns restriction into precomposition. The base-vertex automorphism fixes the unique point of Spec Omega, so its action on coefficient values is trivial. The argument covers every simplex map, including all faces and degeneracies and degree zero.",
+   "uses": [
+    "def-sfb-field-separable-cech-nerve",
+    "def-sfb-field-separable-cech-section-data",
+    "def-sfb-continuous-ring-canonical-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p.6; agent cumulative-vertex calculation in the generic-field Cech subargument of det-thm-sf-ctf-stability-direct-images proof (3)."
+   }
+  },
+  {
+   "text": "Apply the monoidal natural isomorphism $v^*p_k^*\\cong p_\\Omega^*$ of [sk-def-sfb-pullback-from-point-comp] to the condensed ring $\\underline A$. The ring structures on the two sides are obtained by applying these strong monoidal functors to the multiplication and unit of $\\underline A$ [sk-def-sfb-pulled-back-coefficients]. Monoidality therefore gives $v^*R_{A,k}\\cong R_{A,\\Omega}$ as ring objects. Naturality also makes this isomorphism commute with $\\varphi_*$. Every use of a coefficient field above required only its nonarchimedean norm topology.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point-comp",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1 and the scheme-pullback paragraph following it, p.6; application of the specified monoidal point-pullback composition isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-profinite-test-objects",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "def-sfb-continuous-ring-canonical-comparison",
+  "lem-sfb-continuous-ring-universe-realization",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-field-separable-cech-nerve",
+  "def-sfb-field-separable-cech-section-data",
+  "sk-def-sfb-pullback-from-point-comp",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof_origin": "Stage-3 Lean proof by V9, 2026-10-25: follows the seven-step adjoint-normalized realization plan, replacing the finite-partition limit construction by a direct locally constant ring pushout and deriving simplex equations directly from the supplied vertex predicate. All private helpers are proved; no split-off theorem.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of pulled back condensed continuous field coefficients on the Galois Cech nerve are continuous functions on Galois powers naturally in coefficients and simplex maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstant.componentHom\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"{P : TopCat → Prop} →\\n  [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    {S : CompHausLike P} →\\n      {Y : CategoryTheory.Functor (CompHausLike P)ᵒᵖ (Type (max u w))} →\\n        [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] →\\n          (f : LocallyCons\", \"doc\": \"For a locally constant function $ f $ on a compact Hausdorff-like space $ S $ and a morphism $ g : T → S $, this defines a morphism between the fiber of the pulled-back function $ g^*f $ at a point an\"}\n  {\"name\": \"LightCondSet.toTopCatMap\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"{X Y : LightCondSet} → (X ⟶ Y) → (X.toTopCat ⟶ Y.toTopCat)\", \"doc\": \"For any morphism $ f : X \\to Y $ between light condensed sets, this is the continuous map between their underlying topological spaces obtained by evaluating the natural transformation $ f $ at the term\"}\n  {\"name\": \"Profinite.exists_locallyConstant_finite_aux\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1} [Finite α]\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g,\\n    LocallyConstant.\", \"doc\": \"Given a finite set $\\\\alpha$, a limit cone $C$ in the category of profinite spaces, and a locally constant function $f : C.\\\\text{apex} \\\\to \\\\alpha$, there exists an index $j$ in the diagram category and\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counitAppAppImage\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"{P : TopCat → Prop} →\\n  [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    {S : CompHausLike P} →\\n      {Y : CategoryTheory.Functor (CompHausLike P)ᵒᵖ (Type (max u w))} →\\n        [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] →\\n          (f : LocallyCons\", \"doc\": \"The function maps elements of the fiber (preimage of a point under a locally constant function) to the terminal object in the category of compact Hausdorff-like spaces, using the counit of an adjuncti\"}\n  {\"name\": \"LightCondSet.toTopCatMap_hom_apply\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"∀ {X Y : LightCondSet} (f : X ⟶ Y) (a : X.val.obj (Opposite.op (LightProfinite.of PUnit.{u + 1}))),\\n  (TopCat.Hom.hom (LightCondSet.toTopCatMap f)) a = f.val.app (Opposite.op (LightProfinite.of PUnit.{u + 1})) a\", \"doc\": \"For any morphism $f : X \\to Y$ between light condensed sets and any element $a$ in the evaluation of $X$ at the terminal light profinite space (the unit type with trivial topology), the induced continu\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] (X : ModuleCat R) {X_1 Y : (CompHausLike P)ᵒᵖ} (f : X_1 ⟶ Y),\\n  ((CompHausLike.LocallyConstantModule.functorToPresheaves R).obj X).map f =\\n    ModuleCat.ofHom (LocallyConstant.comapₗ R (TopCat.Hom.hom f.unop.hom))\", \"doc\": \"For a ring $ R $, compact Hausdorff-like predicate $ P $, and $ R $-module $ X $, the morphism part of the presheaf functor assigns to each continuous map $ f : S \\to T $ between compact Hausdorff-like\"}\n  {\"name\": \"TopCat.partialSections\", \"module\": \"Mathlib/Topology/Category/TopCat/Limits/Konig\", \"type\": \"{J : Type u} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    (F : CategoryTheory.Functor J TopCat) →\\n      {G : Finset J} → Finset (TopCat.FiniteDiagramArrow✝ G) → Set ((j : J) → ↑(F.obj j))\", \"doc\": \"Given a small category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathbf{Top}$ of topological spaces, a finite set $G \\\\subseteq \\\\mathrm{Obj}(\\\\mathcal{J})$ of objects, and a finite set $H$ of morph\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counitAppApp\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"{P : TopCat → Prop} →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      (S : CompHausLike P) →\\n        (Y : CategoryTheory.Functor (CompHausLike P)ᵒᵖ (Type (max u w))) →\\n          [CategoryTheory.Limits.Pr\", \"doc\": \"For a compact Hausdorff-like space $ S $, a functor $ Y $ from the opposite category of compact Hausdorff-like spaces to types preserving finite products, and a locally constant function $ r $ from $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: continuous-function sheaves and their maps do not give the adjoint-normalized identification of pulled-back condensed coefficients on the Galois nerve"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous coefficient sections over Spec locally constant functions are continuous maps from the profinite parameter and field maps act by postcomposition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpec_continuous\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace), Continuous X.toΓSpecFun\", \"doc\": \"The prime spectrum map induced by the global sections of a locally ringed space $ X $ is continuous with respect to the Zariski topology on $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ and the original topology\"}\n  {\"name\": \"CommRingCat.HomTopology.continuous_apply\", \"module\": \"Mathlib/Algebra/Category/Ring/Topology\", \"type\": \"∀ {R A : CommRingCat} [inst : TopologicalSpace ↑R] (x : ↑A), Continuous fun f => (CommRingCat.Hom.hom f) x\", \"doc\": \"For any commutative rings $ A $ and $ R $, the topology on the set of ring homomorphisms $ \\\\text{Hom}(A, R) $ is the product topology inherited from the space of all functions $ A \\\\to R $. Consequentl\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.comap_const\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top S))\\n  (hUV : V.carrier ⊆ PrimeSpectrum.comap f ⁻¹' U.carrier) (a b : R) (hb \", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings, and let $f^*: \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ be the induced map on their prime spectra. Let $U$ be an open subset of $\\\\oper\"}\n  {\"name\": \"LightCondSet.toTopCatMap\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"{X Y : LightCondSet} → (X ⟶ Y) → (X.toTopCat ⟶ Y.toTopCat)\", \"doc\": \"For any morphism $ f : X \\to Y $ between light condensed sets, this is the continuous map between their underlying topological spaces obtained by evaluating the natural transformation $ f $ at the term\"}\n  {\"name\": \"cyclotomicCharacter.continuous\", \"module\": \"Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter\", \"type\": \"∀ (p : ℕ) [inst : Fact (Nat.Prime p)] (K : Type u_1) (L : Type u_2) [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L], Continuous ⇑((cyclotomicCharacter L p).comp (MulSemiringAction.toRingAut Gal(L/K) L))\", \"doc\": \"The cyclotomic character homomorphism from the Galois group $\\\\mathrm{Gal}(L/K)$ to the multiplicative group of $p$-adic integers $\\\\mathbb{Z}_p^\\times$ is continuous with respect to the Krull topology o\"}\n  {\"name\": \"LocallyConstant.evalRingHom\", \"module\": \"Mathlib/Topology/LocallyConstant/Algebra\", \"type\": \"{X : Type u_1} → {Y : Type u_2} → [inst : TopologicalSpace X] → [inst_1 : Semiring Y] → X → LocallyConstant X Y →+* Y\", \"doc\": \"For a semiring $Y$ and a point $x$ in a topological space $X$, the evaluation map at $x$ defines a semiring homomorphism from the semiring of locally constant functions $X \\to Y$ to $Y$. This map sends\"}\n  {\"name\": \"LocallyConstant.evalₐ\", \"module\": \"Mathlib/Topology/LocallyConstant/Algebra\", \"type\": \"{X : Type u_1} →\\n  {Y : Type u_2} →\\n    [inst : TopologicalSpace X] →\\n      (R : Type u_6) →\\n        [inst_1 : CommSemiring R] → [inst_2 : Semiring Y] → [inst_3 : Algebra R Y] → X → LocallyConstant X Y →ₐ[R] Y\", \"doc\": \"Let $X$ be a topological space, $R$ be a commutative semiring, and $Y$ be an $R$-algebra. For any point $x \\\\in X$, the evaluation map at $x$ is an $R$-algebra homomorphism from the algebra of locally \"}\n  {\"name\": \"TopCat.continuousFunctions.map\", \"module\": \"Mathlib/Topology/Sheaves/CommRingCat\", \"type\": \"(X : TopCatᵒᵖ) → {R S : TopCommRingCat} → (R ⟶ S) → (TopCat.continuousFunctions X R ⟶ TopCat.continuousFunctions X S)\", \"doc\": \"Given a topological space $X$ (in the opposite category) and a continuous ring homomorphism $\\\\phi: R \\\\to S$ between topological commutative rings $R$ and $S$, this defines a ring homomorphism from the\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: continuous-function sheaves and their maps do not give the adjoint-normalized identification of pulled-back condensed coefficients on the Galois nerve"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"ContinuousMap\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X) : IsLocalHom (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : CategoryTheory.Functor AlgebraicGeometry.Schemeᵒᵖ (Type (max v u))\", \"doc\": \"The yoneda embedding of `TopCat` precomposed with the forgetful functor from `Scheme`. This is the\\npresheaf `U ↦ C(U, T)`. For universe reasons, we implement it by hand.\"}\n  {\"name\": \"AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : CategoryTheory.Presheaf.IsSheaf AlgebraicGeometry.Scheme.fpqcTopology (AlgebraicGeometry.continuousMapPresheaf T)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isSheaf_zariskiTopology_continuousMapPresheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : CategoryTheory.Presheaf.IsSheaf AlgebraicGeometry.Scheme.zariskiTopology (AlgebraicGeometry.continuousMapPresheaf T)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafAb\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (A : Type v) [TopologicalSpace A] [AddCommGroup A] [IsTopologicalAddGroup A] : CategoryTheory.Functor AlgebraicGeometry.Schemeᵒᵖ Ab\", \"doc\": \"`continuousMapPresheaf` as a presheaf of abelian groups associated to a topological abelian\\ngroup.\"}\n  {\"name\": \"AlgebraicGeometry.isSheaf_fpqcTopology_continuousMapPresheafAb\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (A : Type v) [TopologicalSpace A] [AddCommGroup A] [IsTopologicalAddGroup A] : CategoryTheory.Presheaf.IsSheaf AlgebraicGeometry.Scheme.fpqcTopology (AlgebraicGeometry.continuousMapPresheafAb A)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheaf_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] (U : AlgebraicGeometry.Schemeᵒᵖ) : (AlgebraicGeometry.continuousMapPresheaf T).obj U = C(↥(Opposite.unop U), T)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafEquivOfTotallyDisconnectedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] [TotallyDisconnectedSpace T] (U : AlgebraicGeometry.Scheme) : (AlgebraicGeometry.continuousMapPresheaf T).obj (Opposite.op U) ≃ C(ConnectedComponents ↥U, T)\", \"doc\": \"`continuousMapPresheaf` is `U ↦ C(ConnectedComponents U, T)` if `T` is totally\\ndisconnected.\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafIsoUlift\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] : AlgebraicGeometry.continuousMapPresheaf T ≅ AlgebraicGeometry.Scheme.forgetToTop.op.comp (TopCat.uliftFunctor.op.comp (CategoryTheory.yoneda.obj ↧(ULift.{u_1, v} T)))\", \"doc\": \"`continuousMapPresheaf` is isomorphic to the composition of the forgetful\\nfunctor to `TopCat` and the yoneda embedding.\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheafAbForgetIso\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (A : Type v) [TopologicalSpace A] [AddCommGroup A] [IsTopologicalAddGroup A] : (AlgebraicGeometry.continuousMapPresheafAb A).comp (CategoryTheory.forget Ab) ≅ AlgebraicGeometry.continuousMapPresheaf A\", \"doc\": \"`continuousMapPresheafAb` viewed as a type valued sheaf is isomorphic to\\n`continuousMapPresheaf`.\"}\n  {\"name\": \"AlgebraicGeometry.continuousMapPresheaf_map\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.ConstantSheaf\", \"type\": \" (T : Type v) [TopologicalSpace T] {U V : AlgebraicGeometry.Schemeᵒᵖ} (f : U ⟶ V) : (AlgebraicGeometry.continuousMapPresheaf T).map f = TypeCat.ofHom fun g => g.comp (TopCat.Hom.hom f.unop.base)\", \"doc\": \"\"}\n  {\"name\": \"ContinuousMap.yonedaPresheaf'\", \"module\": \"Mathlib.Topology.Category.TopCat.Yoneda\", \"type\": \" (Y : Type w') [TopologicalSpace Y] : CategoryTheory.Functor TopCatᵒᵖ (Type (max w w'))\", \"doc\": \"A universe polymorphic Yoneda presheaf on `TopCat` given by continuous maps into a topological\\nspace `Y`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: continuous-function sheaves and their maps do not give the adjoint-normalized identification of pulled-back condensed coefficients on the Galois nerve"
+  },
+  {
+   "tool": "grep",
+   "query": "(condensed|proetale).*([Cc]ontinuous|[Ss]ection)|([Cc]ontinuous|[Ss]ection).*(condensed|proetale)",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"65\", \"text\": \"  ((ProEt.forget X ⋙ Over.forget _).sheafPushforwardContinuous _ _ proetaleTopology).obj\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"66\", \"text\": \"    ⟨continuousMapPresheafAb (ℤ_[ℓ]), .of_le proetaleTopology_le_fpqcTopology <|\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"160\", \"text\": \"instance : (ProEt.forget S).IsContinuous (topology S) (proetaleTopology.over S) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"171\", \"text\": \"instance : (ProEt.forget S ⋙ Over.forget S).IsContinuous (ProEt.topology S) proetaleTopology :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"line\": \"172\", \"text\": \"  Functor.isContinuous_comp _ _ _ (proetaleTopology.over S) _\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: continuous-function sheaves and their maps do not give the adjoint-normalized identification of pulled-back condensed coefficients on the Galois nerve"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pulled back condensed ring global sections over profinite test objects of a separably closed field are continuous maps",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical adjoint comparison of pulled back condensed topological ring coefficients with continuous functions on proetale schemes is natural in ring homomorphisms and on Galois Cech test objects",
+   "results": "LightCondMod.hom_naturality_apply, CondensedMod.hom_naturality_apply, SheafOfModules.PullbackConstruction.adjunction and other abstract naturality statements; no pro-etale coefficient realization.",
+   "date": "2026-10-22",
+   "verdict": "no match: not the full normalized section-ring and coefficient-naturality assertion, nor a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousMapPresheaf\", \"map\"",
+   "results": "AlgebraicGeometry.continuousMapPresheaf, continuousMapPresheaf_map, continuousMapPresheafEquivOfTotallyDisconnectedSpace and fpqc sheafness in Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; they concern the continuous-function presheaf, not its normalized comparison with pulled-back condensed coefficients.",
+   "date": "2026-10-22",
+   "verdict": "no match: not the full normalized section-ring and coefficient-naturality assertion, nor a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(condensed|proetale).*(continuous|section)|(continuous|section).*(condensed|proetale)",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:65--66 and Sites/Proetale.lean:160,171--172 concern continuous functors and the ell-adic continuous presheaf, not this comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: not the full normalized section-ring and coefficient-naturality assertion, nor a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a pulled back condensed nonarchimedean field ring on a profinite family of geometric points equal continuous functions naturally in coefficients",
+   "results": "TopCat.continuousFunctions.pullback, TopCat.continuousFunctions, ContinuousMap ring instances, Condensed.ofSheafProfinite, Condensed.ofSheafForgetProfinite and LocallyConstant.comapRingHom; no normalized pro-etale section comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: not the full normalized section-ring and coefficient-naturality assertion, nor a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proetale global sections with continuous nonarchimedean coefficients on the separable closure Cech nerve are functions on powers of the absolute Galois group with trivial coefficient action",
+   "results": "InfiniteGalois.profiniteGalGrp, algEquivToLimit, algEquivToLimit_continuous, limitToAlgEquiv, asProfiniteGaloisGroupFunctor, profiniteGalGrpIsoLimit, proj and limitToAlgEquiv_apply in Mathlib/FieldTheory/Galois/Profinite.lean; these give Galois group topology, not the coefficient-ring or adjunction statements.",
+   "date": "2026-10-22",
+   "verdict": "no match: not the full normalized section-ring and coefficient-naturality assertion, nor a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-separable-cech-coordinates",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), generic-field continuous-coefficient Cech calculation beneath open direct image: section realization, adjoint-normalized coefficient maps and all simplex reindexings; parent lem-sfb-field-separable-cech-coordinates proof step 3.",
+   "via": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-galois-continuous-section-naturality",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Prove ultrametric disconnectedness, identify profinite field-test spaces via finite clopen partitions and the existing prime-spectrum homeomorphism, evaluate the existing canonical ring realization, and calculate coefficient adjuncts and cumulative-vertex reindexings explicitly. Preserve all inherited searches.",
+  "blueprint": "Realizes the field-coordinate input beneath det-thm-sf-ctf-stability-direct-images proof (3), specifically lem-sfb-field-separable-cech-coordinates step 3 and the former section/coefficient subarguments 5 and 9. Whole-blueprint searches continuous sections, continuous ring, profinite test, totally disconnected and locally constant found no equivalent item. The inherited created.item chain has no imported blueprint ancestor, as blueprint_refs.py ancestor confirms; its null ancestor is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-continuous-ring-universe-realization",
+    "why": "Generic canonical continuous-ring realization for a totally disconnected coefficient ring on any scheme; used as a black box, not a replacement for the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-continuous-ring-universe-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-f490b8ea5",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-f490b8ea5 (reviewer sub-agent of L); spot-checked: I read all seven steps in full and found no fault, so no fixes are needed. Shape: one commit with the item and report. There are no new nodes. The statement, stmt_deps, source and created fields are byte-identical to the Q55-delivered statement-only node, and the 5 inherited searches are kept as the exact prefix. There is no repair note, and the split carries the old parent steps 5 and 9 in fuller form. proof_deps equals the union of the step uses, there is no cycle and no SGA. Step 1: open ultrametric balls are clopen, because w in both balls would give |z-a| < |z-a|; this also holds for the trivial norm. Step 2: def-sfb-profinite-test-objects (limit over finite quotients), the finite-coproduct node (coproduct iso and coprojection formula) and spec-small-colimit-limit give Omega[S] = Spec LC(S,Omega); the empty case is the zero ring. Step 3: locally-constant-prime-spectrum with R=Omega (Lean-closed on slopmaster2) gives labels that agree with pi_S, since the evaluation prime pulls back over (s,(0)). Each base and label determines a unique geometric point. Step 4: lem-sfb-continuous-ring-universe-realization (same adjoint f -> f∘pi_S) applies once step 1 gives total disconnectedness. W_q is an object of k_proet by the weak-etaleness of v (separable-cover node) and base change/composition, and it is affine. Step 5: the adjuncts of both composites are f -> phi∘f∘pi_S, which proves coefficient naturality. Step 6: under the cumulative convention of galois-limit-nerve-faces (xg = x∘Spec g), d0 gives the tail, an interior deletion gives g_i g_{i+1}, the last deletion drops g_q and s_i inserts 1. Labels do not depend on the base. Checked q=0,1,2, a degeneracy and G=1. Step 7: the monoidal comp iso of sk-def-sfb-pullback-from-point-comp gives a ring iso through the transported structure. Accepted tool_use: lem-sfb-continuous-ring-universe-realization, the generic realization, which the unit does not otherwise give. There is no duplicate: det-pe-condensed-point-coefficients is unnormalized and the nerve-faces node is geometric only."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GaloisContinuousSectionNaturality",
+  "declaration": "AlgebraicGeometry.ProEtale.GaloisContinuousSection.section_naturality",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.GaloisContinuousSection.profiniteSections",
+   "AlgebraicGeometry.ProEtale.GaloisContinuousSection.pointSections",
+   "AlgebraicGeometry.ProEtale.GaloisContinuousSection.section_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/GaloisContinuousSectionNaturality.lean",
+  "statement": "theorem section_naturality (k Ω : Type u) [Field k] [Field Ω] [Algebra k Ω] [IsSepClosure k Ω] (e : ∀ q : ℕ, (FieldSeparableCech.object k Ω q).left ≅ ((profiniteToProEtOf (Spec (.of Ω))).obj (FieldSeparableCech.power k Ω q)).left) (he : FieldSeparableCech.AreCoordinates k Ω e) : ∃ c : ∀ (A : Type u) [NormedField A], IsNonarchimedean (norm : A → ℝ) → ∀ q : ℕ, FieldSeparableCech.sections k Ω A q ≃+* C(FieldSeparableCech.power k Ω q, A), ∃ t : ∀ (A : Type u) [NormedField A], IsNonarchimedean (norm : A → ℝ) → ∀ S : Profinite.{u}, profiniteSections Ω A S ≃+* C(S, A), ∃ a : ∀ (A : Type u) [NormedField A], IsNonarchimedean (norm : A → ℝ) → pointSections Ω A ≃+* A, (∀ (A : Type u) [NormedField A] (hA : IsNonarchimedean (norm : A → ℝ)) (q : ℕ) (f : FieldSeparableCech.sections k Ω A q) (g : FieldSeparableCech.power k Ω q), c A hA q f g = ((ContinuousRingUniverse.comparison (Spec (.of k)) A).hom.app (op (FieldSeparableCech.object k Ω q)) f).down ((FieldSeparableCech.testPoint k Ω q g ≫ (e q).inv).base (IsLocalRing.closedPoint Ω))) ∧ (∀ (A : Type u) [NormedField A] (hA : IsNonarchimedean (norm : A → ℝ)) (S : Profinite.{u}) (f : profiniteSections Ω A S) (x : ((profiniteToProEtOf (Spec (.of Ω))).obj S).left), t A hA S f (profiniteTestProjection (Spec (.of Ω)) S x) = ((ContinuousRingUniverse.comparison (Spec (.of Ω)) A).hom.app (op ((profiniteToProEtOf (Spec (.of Ω))).obj S)) f).down x) ∧ (∀ (A : Type u) [NormedField A] (hA : IsNonarchimedean (norm : A → ℝ)) (f : pointSections Ω A), a A hA f = ((ContinuousRingUniverse.comparison (Spec (.of Ω)) A).hom.app (op (Scheme.ProEt.mk (𝟙 (Spec (.of Ω))))) f).down (IsLocalRing.closedPoint Ω)) ∧ (∀ (A : Type u) [NormedField A] (hA : IsNonarchimedean (norm : A → ℝ)) (n m : ℕ) (α : SimplexCategory.mk n ⟶ SimplexCategory.mk m) (f : FieldSeparableCech.sections k Ω A n) (g : FieldSeparableCech.power k Ω m), c A hA m ((condensedRingObj (Profinite.continuousCoefficientRingObj A) (Spec (.of k))).obj.map ((FieldSeparableCech.closureArrow k Ω).cechNerve.map α.op).op f) g = c A hA n f (FieldSeparableCech.reindex k Ω α g)) ∧ (∀ (A B : Type u) [NormedField A] [NormedField B] (hA : IsNonarchimedean (norm : A → ℝ)) (hB : IsNonarchimedean (norm : B → ℝ)) (φ : A →+* B) (hφ : Continuous φ) (q : ℕ) (f : FieldSeparableCech.sections k Ω A q) (g : FieldSeparableCech.power k Ω q), c B hB q ((FieldSeparableCech.coefficientMap (Spec (.of k)) φ hφ).hom.app (op (FieldSeparableCech.object k Ω q)) f) g = φ (c A hA q f g)) ∧ (∀ (A B : Type u) [NormedField A] [NormedField B] (hA : IsNonarchimedean (norm : A → ℝ)) (hB : IsNonarchimedean (norm : B → ℝ)) (φ : A →+* B) (hφ : Continuous φ) (S : Profinite.{u}) (f : profiniteSections Ω A S) (s : S), t B hB S ((FieldSeparableCech.coefficientMap (Spec (.of Ω)) φ hφ).hom.app (op ((profiniteToProEtOf (Spec (.of Ω))).obj S)) f) s = φ (t A hA S f s)) ∧ (∀ (A B : Type u) [NormedField A] [NormedField B] (hA : IsNonarchimedean (norm : A → ℝ)) (hB : IsNonarchimedean (norm : B → ℝ)) (φ : A →+* B) (hφ : Continuous φ) (f : pointSections Ω A), a B hB ((FieldSeparableCech.coefficientMap (Spec (.of Ω)) φ hφ).hom.app (op (Scheme.ProEt.mk (𝟙 (Spec (.of Ω))))) f) = φ (a A hA f)) ∧ (∀ (A : Type u) [NormedField A] (_hA : IsNonarchimedean (norm : A → ℝ)), IsIso (condensedPullbackHom (Profinite.continuousCoefficientRingObj A) (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))) ∧ IsMonHom (condensedPullbackHom (Profinite.continuousCoefficientRingObj A) (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))))",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing FieldSeparableCech cumulative coordinates, actual section rings and coefficient maps without copying them. The canonical ContinuousRingUniverse.comparison fixes all evaluations; the theorem includes every profinite test object, point sections, all simplex maps, coefficient maps, and the canonical ring-object pullback comparison. Return H2 repair: stmt_deps now cites the landed nerve definition and the existing-definition binding for sections/coefficientMap/reindex, plus the test-projection and section-ring definition nodes; it does not depend on the parent theorem node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05f2fb6c7",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 1b3e1a0a (H2). The Lean is byte-identical to the returned head, whose mathematics was reviewed and found correct; I re-confirmed it clause by clause (c/t/a section rings pinned by the comparison, every simplex map, phi-postcomposition, IsIso+IsMonHom of the pullback). The item stmt_deps now cite the landed def-sfb-field-separable-cech-nerve (object/power/testPoint/AreCoordinates/cumulative), the new def-sfb-field-separable-cech-section-data (existing:true on the plain defs sections/coefficientMap/reindex; statement verbatim, TeX matches the Lean, only def stmt_deps, no cycle, no duplicate owner), def-zl-profinite-test-projection and def-weil-pbc-internal-abelian-sheaf-module-equivalence. The parent theorem node is not cited. Advisory only: continuousCoefficientRingObj is inherited and definitionally equal to the recorded continuousMapRingObjOfUniverse; the parent's import of this module is a stage-3 cycle the worker notes. No compile was needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T051953-L-32054",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

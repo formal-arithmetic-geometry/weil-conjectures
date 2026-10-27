@@ -1,0 +1,46 @@
+# Stage-1 split: lem-sfb-characteristic-zero-complete-reducibility
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-characteristic-zero-complete-reducibility.json: item, split; statement unchanged; four proof steps following Milne Proposition 22.41.
+- dag/nodes/sec-six-functors-basics/lem-sfb-semisimple-group-casimir-trace.json: new statement-only lemma, unsplit; no Mathlib match. Concrete trace-dual-basis Casimir construction, equivariance, trace, and trivial-quotient behavior.
+- dag/nodes/sec-six-functors-basics/lem-sfb-simple-hyperplane-splitting-criterion.json: new statement-only lemma, unsplit; no Mathlib match. Milne Lemma 22.40(c) implies (a), for any affine finite-type algebraic group with trivial character group.
+- citations.json: verbatim statement quotations for each citation in the four item steps.
+- searches.jsonl: searches actually executed through the required msearch.py command. Original item searches retained; new searches recorded from their real logged answers. prepare.py is sandbox-only preparation code, not a repository delivery.
+
+## Attachments
+
+None for the item. Project searches for its exact blueprint tag, complete reducibility, semisimple algebraic groups, and Weyl found only definitions, equivalence characterizations, or results assuming semisimplicity. GeneralLinear/Representation.lean defines IsSemisimple and characterizes its meaning; it does not establish it for semisimple group schemes. GeneralLinear/Lie.lean contains the invariant-subspace comparison, but no Casimir construction. A Mathlib theorem is not presented as a project attachment.
+
+## WANTED
+
+None: Milne, Algebraic Groups, is available locally as literature/milne-algebraic-groups_iAG2017.pdf. No SGA source is used.
+
+## Corrections and scope
+
+The imported item had a statement and searches but no proof. Its statement agrees with Milne Proposition 22.41 under the standing characteristic-zero assumption on printed p.475. No statement correction or dispute is needed. Its field is already algebraically closed, so the scalar-extension reduction of Lemma 22.39 is unnecessary. I did not cite the existing Schur-scalar lemma or the matrix-group Lie comparison as universal-field theorems: their statements restrict coefficients to Q_l-bar. Instead the scalar step uses the existing general algebraically closed eigenvalue leaf.
+
+The current latest blueprint direct-image proof, its unit, the recorded alteration/representation-theoretic ancestry, and the chapter were read. This supporting representation-theory split does not replace a step of the unit route. The item's inherited blueprint.from.node is null; blueprint_refs.py ancestor explicitly returns None for this ancestry. Both new nodes preserve that computed ancestor and prepend the item to the inherited via list, adding the precise supporting role to from.place. Whole-blueprint searches for complete reducibility, completely reducible, Casimir, codimension 1, codimension-one, and no characters found no matching imported theorem. The item is not the key statement of its unit, so no realized fields are changed.
+
+## Not duplicates
+
+lem-sfb-semisimple-group-casimir-trace vs lem-sfb-characteristic-zero-complete-reducibility: the new lemma constructs an endomorphism and proves its trace and equivariance properties; it asserts neither existence of complements nor a decomposition into simple modules.
+lem-sfb-simple-hyperplane-splitting-criterion vs lem-sfb-characteristic-zero-complete-reducibility: the new lemma assumes all simple hyperplanes in all rational modules split, and concerns arbitrary affine finite-type groups with no characters; it does not prove that assumption for semisimple groups. The item's actual Casimir/eigenspace/kernel argument proves this assumption.
+lem-sfb-semisimple-group-casimir-trace vs lem-sfb-semisimple-characters-trivial: character vanishing is reused; it says nothing about the trace form or the Casimir endomorphism.
+lem-sfb-simple-hyperplane-splitting-criterion vs sk-r-linear-library: the latter supplies composition-series/Schur assertions over Q_l-bar, not the universal simple-hyperplane criterion for rational representations. No duplicate Stacks-tag pair arises: the new results are cited to Milne, not to an inapplicable Stacks tag.
+
+## Review by Q141
+
+I read the complete Casimir discussion on Milne printed pp.475-476, Lemma 22.40 and its proof on pp.476-477, and Proposition 22.41 and its proof on p.477. I also read Proposition 10.31 on printed p.196, whose stabilizer calculation is the differentiation input invoked in the Casimir discussion. The first new node records exactly the operator built from the trace form on the faithful image of the differential; this avoids an erroneous use of the trace form on the full Lie algebra for a nonfaithful representation. The zero image is allowed, with empty basis and zero operator. The construction statement uses only the tangent image as a vector subspace, so its final version names the action morphism explicitly and removes the unused generic Lie-bracket definition dependency. The strict positivity of the image dimension is conditional on a nontrivial action and uses connectedness and characteristic zero, as in Milne's proof. Equivariance is the full rational/coaction identity, rather than just equivariance for a chosen abstract group of rational points.
+
+For the second new node I checked the two reductions in Lemma 22.40: dimension induction from simple hyperplanes to arbitrary hyperplanes, then the rational action on Hom(V,W) with the subspaces of maps whose restriction to W is scalar or zero. A complement line supplies an equivariant retraction because the character group vanishes. These are genuine supporting arguments with hypotheses independent of semisimplicity of G, and are left to that statement-only node's next split, rather than placed in its statement as a proof sketch. Both new nodes have empty proof and proof_deps. Neither is an elementary fact or a renamed clause of the item.
+
+For item step 1 I opened lem-sfb-semisimple-characters-trivial and checked its exact statement: its definition of semisimple is the same smooth connected affine finite-type group with no smooth connected solvable normal subgroup, and it states triviality of every scheme character after every scalar extension. The criterion states exactly the remaining task, for every finite-dimensional rational module and every simple codimension-one submodule. For step 2 I checked the Casimir node states all three properties used: equivariance/preservation of W, nonzero integral trace for a nontrivial action, and image contained in W when the quotient action is trivial. The one-dimensional quotient is a rational character; the same existing character-vanishing theorem therefore applies. The trivial-action case is handled separately by a vector-space basis extension, so the proof never claims a nonzero trace for a trivial representation.
+
+For step 3 I opened lem-zl-alg-closed-endomorphism-eigenvalue: it covers every nonzero finite-dimensional vector space over every algebraically closed field, exactly W and F here. Its conclusion provides an actual nonzero eigenvector. I wrote out the scalar argument instead of invoking the coefficient-restricted Schur lemma: the eigenspace is a rational submodule by the coaction equation, so simplicity makes it all of W. Preservation of kernels under tensoring over a field follows directly by choosing a vector-space complement to the kernel; it requires no flatness theorem for general rings. A basis of W extended to U gives the displayed diagonal blocks and hence the trace formula. The positive integer n is nonzero in F precisely because char F = 0. Step 4 explicitly constructs p and its kernel and checks the direct-sum identities, then uses exactly the criterion's conclusion. The quotations in citations.json were checked against the actual statements, not their proofs.
+
+I tested V=0, the trivial group, arbitrary trivial actions, simple W of dimension one, representations with nonfaithful differential, and zero Casimir image. The empty decomposition and empty Casimir sum cover the zero cases. W is nonzero by the definition of simple, while the trivial-action branch permits a complement with no trace argument. The statement is not asserted in positive characteristic or for disconnected groups. There are no non-elementary proof steps over 2000 characters (the four lengths are 414, 578, 619, and 459 characters). Every non-elementary input is a cited node; the coaction kernel and block-matrix checks are written out. The semantic search hits were read: finite-group Maschke, weight-space trace formulas, and characterizations assuming complemented submodule lattices do not prove either new statement. A second phrasing was used for each new node, and all four required search tools were run; Loogle finds no Casimir declaration, and grep finds no Casimir construction in Mathlib or the project.
+
+## Unfinished work
+
+The item is completely split by one level. The two new supporting lemmas remain unsplit, intentionally, as required. No Lean was written, compiler/Lake/build tool run, repository file modified, or agent started.

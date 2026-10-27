@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-trait-special-neutral-finite-type-open",
+ "kind": "statement",
+ "title": "Finite-type special-neutral open subgroup and its strict-local translates",
+ "statement": "Let $A$ be a discrete valuation ring with fraction field $L$, residue field $k$, and $T=\\operatorname{Spec}A$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $J/T$ be a smooth separated group scheme locally of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; its multiplication, identity and inverse satisfy the group diagrams, and separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Suppose $J_L$ is of finite type [def-pc-base-change]. Let $J_k^0$ be the connected component containing the identity in the special fibre, with its open-subscheme structure; connected components mean maximal connected subsets [def-weil-connected-scheme]. Then\n$$U=J\\setminus(J_k\\setminus J_k^0)$$\nis an open subgroup scheme [def-weil-open-immersion], smooth, separated and of finite type over $A$, with $U_L=J_L$ and $U_k=J_k^0$. For every field extension $k'/k$, $(J_k^0)_{k'}=(J_{k'})^0$. If $B\\to A$ is a faithfully flat homomorphism of discrete valuation rings [def-weil-pbc-faithfully-flat-ring-map] and $J$ carries a group-compatible descent datum $\\alpha$ relative to $\\operatorname{Spec}A\\to\\operatorname{Spec}B$ [def-pd-descent-datum], then $\\alpha(p_0^*U)=p_1^*U$ on $\\operatorname{Spec}(A\\otimes_BA)$. If $A$ is strictly henselian [def-weil-pbc-henselian-terminology], the translates $\\lambda U$ for sections $\\lambda\\in J(A)=\\operatorname{Hom}_T(T,J)$ cover $J$. Here $\\lambda U$ is the image of the open immersion obtained by left multiplication by $\\lambda$. No quasi-compactness of $J$ or Neron mapping property is assumed.",
+ "source": {
+  "document": "literature/raynaud-specialisation-foncteur-picard.pdf",
+  "place": "Raynaud, Specialisation du foncteur de Picard, printed pp.40-42: (3.2)(d), (3.3.4) definition of G^{00}, and the translate-cover paragraph in the smooth sketch of (3.3.1). Finite-type assertion is the agent specialization to finite-type generic fibre (two quasi-compact fibres). Primary scan read online at https://numdam.org/item/PMIHES_1970__38__27_0.pdf; local PDF WANTED. No SGA result is cited as an input."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-pd-descent-datum",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "By local-finite-type base change, $J_k$ is locally of finite type over $k$. Apply [lem-sfb-lft-field-group-neutral-component] to this group: its identity component $C=J_k^0$ is clopen and of finite type, is a subgroup with the open-subscheme structure, and satisfies $C_{k'}=(J_{k'})^0$ for every field extension $k'/k$. This proves the requested field-extension clause without any perfectness assumption. The smooth-fibre clause of [sbc-lem-smooth-criterion] also shows that $J_k$ is smooth over $k$.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-sfb-lft-field-group-neutral-component",
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proposition-connected-component; local finite type by morphisms.tex Tag 01T4; smooth fibres in Tag 01VB, as recorded by sbc-lem-smooth-criterion."
+   }
+  },
+  {
+   "text": "The subset $J_k$ is closed in $J$: on an affine chart it is cut out by a uniformizer of $A$. Since $C$ is clopen in $J_k$, $J_k\\setminus C$ is closed in $J$, so its complement $U$ is open. The open-subscheme restriction gives $U_L=J_L$ and $U_k=C$, with their actual scheme structures. Multiplication of $U\\times_TU$ lands in $U$: over the generic point there is no restriction, and over the closed point it is multiplication in the subgroup $C$. The same check works for inverse and identity. The open factorization lemma supplies the restricted morphisms. Their group diagrams hold because they hold after the open inclusion into $J$, a monomorphism. Restriction of a smooth morphism to an open is smooth. The diagonal of $U/T$ is the pullback of the closed diagonal of $J/T$ to $U\\times_TU$, so it is a closed immersion. Thus $U/T$ is smooth and separated.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Elementary open-complement and group-diagram argument using the special-fibre identity subgroup; Raynaud (3.3.4), printed p.42, motivates this construction (local PDF WANTED). Restriction uses morphisms.tex Tags 01VA and 01VC; closed diagonals use Tag 01JY."
+   }
+  },
+  {
+   "text": "For any open cover of $U$, restricting to $U_L=J_L$ gives a finite subfamily covering that fibre, since $J_L$ is of finite type. Restricting to $U_k=C$ gives another finite subfamily, since Step 1 gives finite type of $C$. These two finite subfamilies cover every point of $U$, as $\\operatorname{Spec}A$ has only its generic and closed points: by uniformizer factorization, any nonzero prime contains the uniformizer and hence equals the maximal ideal. Hence $U$ is quasi-compact. Smoothness gives local finite presentation; an algebra with a finite presentation is generated by its finitely many displayed variables. Thus $U/T$ is locally of finite type, and the only nonempty opens of this trait are the whole trait and its generic point, whose inverse images are the quasi-compact spaces $U$ and $J_L$. Thus $U/T$ is quasi-compact as a morphism and is of finite type by definition. This uses neither quasi-compactness of $J$ nor a Neron mapping property.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-finite-type-morphism",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1, definition-finite-type, applied directly to the two quasi-compact fibres; elementary finite-subcover argument written by Q01."
+   }
+  },
+  {
+   "text": "Now let $B\\to A$ be faithfully flat. It is injective: tensoring the injection $bB\\hookrightarrow B$ with the flat $B$-module $A$ remains injective; if $b$ maps to zero, its source $bB\\otimes_BA$ is zero, and faithfulness forces $bB=0$. A uniformizer $\\pi_B$ cannot become a unit, since otherwise the nonzero module $B/\\pi_BB$ would tensor to zero. For a uniformizer $\\pi_A$, the DVR factorization theorem therefore gives $\\pi_B=u\\pi_A^r$ in $A$ for a unit $u$ and integer $r\\geq1$. In $D=A\\otimes_BA$, write $a_0=\\pi_A\\otimes1$ and $a_1=1\\otimes\\pi_A$. The common image of $\\pi_B$ is a unit times $a_i^r$ for either $i$. For every prime $\\mathfrak q$ of $D$ this implies $a_0\\in\\mathfrak q$ if and only if $a_1\\in\\mathfrak q$. Consequently $p_0$ and $p_1$ send each point of $\\operatorname{Spec}D$ to the same point (closed or generic) of $\\operatorname{Spec}A$.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, uniformizer factorization; faithful-flatness consequences proved directly from the tensor-exactness definition. This is the ramified-overlap calculation written by Q01."
+   }
+  },
+  {
+   "text": "For a point $q\\in\\operatorname{Spec}D$, put $F=\\kappa(q)$. If its two images are generic, both $(p_i^*U)_F$ are the whole respective group fibre. If its two images are closed, the two maps $k\\to F$ can differ; nevertheless Step 1, applied with each map separately, identifies $(p_i^*U)_F$ with the identity component of $(p_i^*J)_F$. Since the descent isomorphism $\\alpha$ respects the group operations, it preserves identity. Its underlying homeomorphism therefore carries one identity component onto the other, by maximality of connected components and the inverse homeomorphism. Thus $\\alpha$ identifies the two open subsets on every residue-field fibre. Every point of the total space lies in such a fibre, so the underlying opens agree. The structure sheaf of an open subscheme is the restriction of the ambient structure sheaf; consequently the equality is one of open subschemes, $\\alpha(p_0^*U)=p_1^*U$, even if $D$ is nonreduced.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-base-change",
+    "def-pc-scheme-fibre",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023V, definition-descent-datum; fibrewise characterization from Step 1 and the simultaneous generic/special alternatives of Step 4. No effectiveness theorem or unramifiedness is used."
+   }
+  },
+  {
+   "text": "Assume $A$ strictly henselian, so $k$ is separably closed and $(A,\\mathfrak m_A)$ is henselian. For $x\\in J_k$, the fibre-component-neighbourhood lemma applied to $J_k\\to\\operatorname{Spec}k$ gives a nonempty open $W$ containing $x$ and contained in its connected component. Since $J_k$ is smooth, density of $J_k(k)$ supplies $g\\in W(k)$. Choose an affine open $V=\\operatorname{Spec}E\\subset J$ containing the image of $g$. The restriction $V\\to\\operatorname{Spec}A$ is smooth, hence $E$ is a smooth $A$-algebra by the affine smoothness comparison. Since $g:\\operatorname{Spec}k\\to J$ lands in $V$, it factors uniquely through $V$ by [lem-weil-pbc-morphism-factors-through-open-subscheme], and by [lem-weil-pbc-morphism-into-affine-scheme] this factorization over $\\operatorname{Spec}A$ is an $A$-algebra map $E\\to A/\\mathfrak m_A=k$. Apply henselian smooth-algebra lifting with $R=A$, $S=E$, the target algebra $A$, and $I=\\mathfrak m_A$. It gives an $A$-algebra map $E\\to A$, which by [lem-weil-pbc-morphism-into-affine-scheme] is a morphism $T\\to V$ over $T$, hence a section $\\lambda:T\\to V\\subset J$ specializing to $g$. The source algebra is smooth and finitely presented; neither $J$ nor its whole special fibre was assumed quasi-compact.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-sbc-fibre-component-neighbourhood",
+    "lem-pc-rational-points-dense",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-henselian-smooth-algebra-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74, lemma-lift-smooth-henselian; varieties.tex Tag 056U, lemma-smooth-separable-closed-points-dense (separably closed case); topology.tex Tags 04MF/04ME for component neighbourhoods."
+   }
+  },
+  {
+   "text": "Left multiplication $L_\\lambda:J\\to J$ is an isomorphism, with inverse $L_{\\lambda^{-1}}$: their composites are the identity by associativity and the inverse law. Thus $\\lambda U$ is open. On the special fibre $L_g$ sends the identity component $C$ onto the component of $g$: each inclusion follows by connectedness and maximality, applying $L_g$ and then $L_{g^{-1}}$. Since $g$ and $x$ in Step 6 lie in the same component, $x\\in(\\lambda U)_k$. This covers all special-fibre points. Every generic-fibre point is already in $U$, the translate by the identity section, since $U_L=J_L$. Therefore the translates by all sections cover $J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Elementary translation and maximal-connected-subset argument using Steps 1 and 6. Raynaud, smooth sketch of (3.3.1), printed p.42, translate-cover paragraph (primary scan read online, local PDF WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-base-change",
+  "lem-sfb-lft-field-group-neutral-component",
+  "sbc-lem-smooth-criterion",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-pd-descent-datum",
+  "def-pc-base-change",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-henselian-terminology",
+  "lem-sbc-fibre-component-neighbourhood",
+  "lem-pc-rational-points-dense",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Q01 assembly from Tag 0B7R and existing Stacks inputs, including the explicit two-fibre quasi-compactness and ramified descent calculations. Raynaud printed pp.40-42, (3.2)(d), (3.3.4) and the smooth sketch of (3.3.1) read in the online primary scan; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth locally finite type group over a strictly henselian DVR with finite type generic fibre has a finite type open subgroup consisting of the whole generic fibre and the special identity component",
+   "results": "{\"t\": \"2026-10-24T10:31:09Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth locally finite type group over a strictly henselian DVR with finite type generic fibre has a finite type open subgroup consisting of the whole generic fibre and the special identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"IsLocalRing.finite_residueField_of_compactSpace\", \"IsLocalRing.isOpen_iff_finite_quotient\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"Field.henselian\", \"Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"Valued.integer.isDiscreteValuationRing_of_compactSpace\"], \"digest\": \"635b842cdd498155\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complement of all nonidentity connected components of the special fibre of a smooth group over a trait is an open finite type subgroup and its translates by sections cover the group",
+   "results": "{\"t\": \"2026-10-24T10:32:17Z\", \"tool\": \"leanfinder\", \"query\": \"The complement of all nonidentity connected components of the special fibre of a smooth group over a trait is an open finite type subgroup and its translates by sections cover the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NonarchimedeanGroup.exists_openSubgroup_separating\", \"Subgroup.connectedComponentOfOne\", \"NonarchimedeanAddGroup.exists_openAddSubgroup_separating\", \"Subgroup.quotient_finite_of_isOpen\", \"ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one\", \"Subgroup.quotient_finite_of_isOpen'\", \"AddSubgroup.quotient_finite_of_isOpen'\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\"], \"digest\": \"aa958859d8961b2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T10:32:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|neutralComponent|special.*component",
+   "results": "{\"t\": \"2026-10-24T10:32:13Z\", \"tool\": \"grep\", \"query\": \"identityComponent|neutralComponent|special.*component\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"e88583a01131acae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth group over a strictly henselian discrete valuation ring is covered by translates of its finite type open subgroup with connected special fibre",
+   "results": "{\"t\": \"2026-10-24T10:32:13Z\", \"tool\": \"leansearch\", \"query\": \"A smooth group over a strictly henselian discrete valuation ring is covered by translates of its finite type open subgroup with connected special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"smoothSheafGroup\", \"OpenSubgroup.isOpen'\", \"Algebra.smoothLocus\", \"OpenSubgroup.instSubgroupClass\", \"ClosedSubgroup.ctorIdx\", \"Subgroup.isOpen_of_isClosed_of_finiteIndex\", \"Subgroup.isOpen_mono\"], \"digest\": \"e5a2d7855cc7a9e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned types concern topological groups, smoothness or etale loci, scheme gluing, or abstract stacks; none supplies the stated scheme/group descent construction with these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|connectedComponent.*GrpObj|GrpObj.*connectedComponent",
+   "results": "{\"t\": \"2026-10-24T11:03:28Z\", \"tool\": \"grep\", \"query\": \"identityComponent|connectedComponent.*GrpObj|GrpObj.*connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no scheme-group identity-component declaration in the AlgebraicGeometry source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type group scheme over a field has a quasi compact geometrically connected identity component",
+   "results": "{\"t\": \"2026-10-24T11:03:29Z\", \"tool\": \"leansearch\", \"query\": \"A locally finite type group scheme over a field has a quasi compact geometrically connected identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFiniteType_comp\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\"], \"digest\": \"92e7799628f8929a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give local finite type, local Noetherianity and affine compactness, not the identity subgroup or its geometric connectedness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"connectedComponent\"",
+   "results": "{\"t\": \"2026-10-24T11:03:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"connectedComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no declarations match the two names."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of a group scheme locally of finite type over any field is a geometrically irreducible open and closed finite type subgroup and commutes with field extensions",
+   "results": "{\"t\": \"2026-10-24T11:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of a group scheme locally of finite type over any field is a geometrically irreducible open and closed finite type subgroup and commutes with field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\"], \"digest\": \"40da35219f0fce81\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned types concern geometric reducedness, individual scheme compactness facts or ordinary topological groups; none constructs the identity subgroup scheme over an arbitrary field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary field the connected component containing the unit of a locally algebraic group is quasi compact and stable under extension of scalars",
+   "results": "{\"t\": \"2026-10-24T11:03:32Z\", \"tool\": \"leanfinder\", \"query\": \"Over an arbitrary field the connected component containing the unit of a locally algebraic group is quasi compact and stable under extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"Subgroup.connectedComponentOfOne\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"QuasispectrumRestricts.compactSpace\", \"AlgebraicGeometry.instQuasiCompactToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\"], \"digest\": \"c73d6f0784ec651d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned types concern geometric reducedness, individual scheme compactness facts or ordinary topological groups; none constructs the identity subgroup scheme over an arbitrary field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open subgroup containing the whole generic fibre and just the special identity component of a smooth trait group is finite type and invariant under faithfully flat trait descent",
+   "results": "{\"t\": \"2026-10-24T11:07:25Z\", \"tool\": \"leanfinder\", \"query\": \"The open subgroup containing the whole generic fibre and just the special identity component of a smooth trait group is finite type and invariant under faithfully flat trait descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.isOpen_smoothLocus\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Algebra.isOpen_etaleLocus\", \"Algebra.quasiFinite_iff\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"25bf7b6c36a057a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the eight hits concern smooth algebra models, smooth and etale loci, finite fibres and universally closed schemes; none supplies the trait group or descent assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+  "date": "2026-10-24",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent prerequisite; repair of the lft effectivity argument: Finite-type special-neutral open subgroup and its strict-local translates.",
+   "via": [
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-special-neutral-finite-type-open",
+  "worker": "stage1",
+  "summary": "Seven steps construct the open subgroup, prove finite type directly from its two quasi-compact fibres, compare both trait projections under possibly ramified descent, and lift rational special-fibre points before translating. One new general field-group identity-component input; all other facts reuse existing nodes. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent prerequisite; repair of the lft effectivity argument: Finite-type special-neutral open subgroup and its strict-local translates.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "Generic smooth-algebra lifting across a henselian pair at the chosen affine chart; this unit has no replacement algebra lifting statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine comparison needed to apply the henselian algebra lifting statement to a smooth affine chart."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic restriction of smoothness to the selected affine chart and the constructed open subgroup."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic closed-immersion stability to restrict the diagonal of the separated group."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-e8e03eba4",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-e8e03eba4 (reviewer sub-agent of L); spot-checked: Read the item, its 7 steps, the new node lem-sfb-lft-field-group-neutral-component and every cited statement, plus Stacks groupoids 0B7R (l.1013-1047), 04MF/04ME and more-algebra 0H74. The item statement is unchanged and every clause is proved. The new node (identity component of an lft group over an arbitrary field: clopen, finite type, geometrically irreducible, stable under field extension) is true by 0B7R plus local Noetherianity. I tested it on mu_p, alpha_p, the constant group Z/n, the disjoint union of copies of G_a indexed by Z, and mu_3 over Q. It is not a duplicate: the existing identity-component nodes assume finite type or an algebraically closed field. It is not a restated clause. Steps 2-5 checked: openness and the subgroup laws via open factorization; separatedness via Delta_J^{-1}(UxU)=U; quasi-compactness from the two fibres; the ramified overlap pi_B=u pi_A^r, so a0 is in q iff a1 is; alpha preserves the identity component fibrewise, and the cocycle is not needed. Steps 6-7 checked: component neighbourhood, density of rational points over a separably closed field, henselian smooth lifting with R=A and I=m, and translation by L_g. C1 fix: step 6 turned the point g into an A-algebra map E->k, and the lifted map E->A into a section, without citing the open-factorization and Mor(X,Spec R) correspondence. I added lem-weil-pbc-morphism-factors-through-open-subscheme and lem-weil-pbc-morphism-into-affine-scheme (Mathlib leaf) to the step's text, uses and proof_deps. Batch-5 check: lem-trf-henselian-smooth-algebra-lifting is Stacks 0H74, pure commutative algebra. Its whole dependency closure consists of pbc algebra lemmas and generic definitions, with no trace-formula or Poincare-duality content, so I accept it as an outside tool. Accepted the generic tool_uses (henselian lifting, smooth affine comparison, smooth open restriction, closed-immersion base change, plus the two leaves added). Raynaud is WANTED locally; the statement is unchanged, so no target is weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitSpecialNeutralFiniteTypeOpen",
+  "declaration": "AlgebraicGeometry.exists_trait_specialNeutral_finiteType_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitSpecialNeutralFiniteTypeOpen.lean",
+  "statement": "theorem exists_trait_specialNeutral_finiteType_open (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (L : Type u) [Field L] [Algebra A L] [IsFractionRing A L] (J : Over (Spec (.of A))) [GrpObj J] [Smooth J.hom] [IsSeparated J.hom] [LocallyOfFiniteType J.hom] [LocallyOfFiniteType (pullback.snd J.hom (Spec.map (CommRingCat.ofHom (algebraMap A L))))] [QuasiCompact (pullback.snd J.hom (Spec.map (CommRingCat.ofHom (algebraMap A L))))] : ∃ (C : ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).obj J).left.Opens) (U : J.left.Opens), (SetLike.coe C) = connectedComponent (GrpObj.onePoint ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).obj J)) ∧ (U : Set J.left) = (pullback.fst J.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))) '' (SetLike.coe C)ᶜ)ᶜ ∧ (∃ gU : GrpObj (Over.mk (U.ι ≫ J.hom)), @IsMonHom _ _ _ _ _ gU.toMonObj _ (Over.homMk (V := J) U.ι)) ∧ Smooth (U.ι ≫ J.hom) ∧ IsSeparated (U.ι ≫ J.hom) ∧ LocallyOfFiniteType (U.ι ≫ J.hom) ∧ QuasiCompact (U.ι ≫ J.hom) ∧ (pullback.fst J.hom (Spec.map (CommRingCat.ofHom (algebraMap A L)))) ⁻¹' (U : Set J.left) = Set.univ ∧ (pullback.fst J.hom (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))) ⁻¹' (U : Set J.left) = (SetLike.coe C) ∧ (∀ (K : Type u) [Field K] [Algebra (IsLocalRing.ResidueField A) K], (pullback.fst ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).obj J).hom (Spec.map (CommRingCat.ofHom (algebraMap (IsLocalRing.ResidueField A) K)))) ⁻¹' (SetLike.coe C) = connectedComponent (GrpObj.onePoint ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap (IsLocalRing.ResidueField A) K)))).obj ((Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).obj J)))) ∧ (∀ (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] (φ : B →+* A), φ.FaithfullyFlat → ∀ D : Over.DescentDatum (Spec.map (CommRingCat.ofHom φ)) J, (∀ (Z : Scheme.{u}) (f₀ f₁ : Z ⟶ Spec (.of A)) (h : f₀ ≫ Spec.map (CommRingCat.ofHom φ) = f₁ ≫ Spec.map (CommRingCat.ofHom φ)) (a b : Over.mk f₀ ⟶ J), D.transport f₀ f₁ h (lift a b ≫ μ[J]) = lift (D.transport f₀ f₁ h a) (D.transport f₀ f₁ h b) ≫ μ[J]) → (∀ (Z : Scheme.{u}) (f₀ f₁ : Z ⟶ Spec (.of A)) (h : f₀ ≫ Spec.map (CommRingCat.ofHom φ) = f₁ ≫ Spec.map (CommRingCat.ofHom φ)), D.transport f₀ f₁ h (toUnit _ ≫ η[J]) = toUnit _ ≫ η[J]) → D.toHom ⁻¹' (U : Set J.left) = (pullback.fst (J.hom ≫ Spec.map (CommRingCat.ofHom φ)) (Spec.map (CommRingCat.ofHom φ))) ⁻¹' (U : Set J.left)) ∧ (IsStrictlyHenselianLocalRing A → (∀ l : 𝟙_ (Over (Spec (.of A))) ⟶ J, IsOpenImmersion (U.ι ≫ (lift (toUnit J ≫ l) (𝟙 J) ≫ μ[J]).left)) ∧ ∀ x : J.left, ∃ l : 𝟙_ (Over (Spec (.of A))) ⟶ J, x ∈ (lift (toUnit J ≫ l) (𝟙 J) ≫ μ[J]).left '' (U : Set J.left))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-791bcb7ef",
+  "group": "Q128",
+  "result": "pass",
+  "note": "All node clauses match the Lean with nothing stronger assumed: DVR/fraction field/residue field; GrpObj J with Smooth, IsSeparated, LocallyOfFiniteType; finite-type J_L via pullback.snd; C = connectedComponent(onePoint J_k) as Opens; U = (fst '' Cᶜ)ᶜ with an open-subgroup GrpObj + IsMonHom inclusion; smooth, separated, finite type; U_L = J_L, U_k = C; field-extension clause over all fields K in universe u. Descent clause checked against DescentDatum.lean: toHom = pr1∘α on J×_B A, so toHom⁻¹U = fst⁻¹U is α(p0*U) = p1*U; mu/eta transport compatibility is exactly group compatibility. Strictly henselian clause: left-multiplication translates are open immersions and cover J. H4: identityComponentOpens needs QuasiCompact and mulLeft is field-only, so the inline forms are correct. One sorry; lean.statement verbatim; docstrings carry source, blueprint tag and 7 steps; report sections present. No file changed, so no compile. Note: parallel N5 delivery afdecf569 of the same item (different module name) has PASS but has not landed; first lander owns the record and the other must rebind."
+ }
+}

@@ -1,0 +1,386 @@
+{
+ "id": "lem-sfb-smooth-space-proper-component-neighbourhood",
+ "kind": "statement",
+ "title": "Etale neighbourhood carrying one proper smooth fibre component",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and let $f:X\\to S$ be a separated smooth morphism of algebraic spaces, locally of finite presentation [def-trf-algebraic-space, def-sfb-space-morphism-properties, def-sbc-smooth-morphisms]. Let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point [def-weil-geometric-point], and let $C\\subseteq X_{\\bar s}$ be a nonempty connected component with its open-subspace structure [def-a1-space-open-subspace, def-a1-space-point-topology]. A connected component is a maximal nonempty connected subset of the point space; connected means admitting no partition into two nonempty open-and-closed subsets. Suppose $C$ is proper over $\\Omega$. Then there exist a pointed etale neighbourhood $(T,\\bar t)\\to(S,\\bar s)$, meaning an etale scheme $T\\to S$ with a lift $\\bar t:\\operatorname{Spec}\\Omega\\to T$, and an open subspace $V\\subseteq X\\times_ST$, such that $V\\to T$ is proper, smooth, and of finite presentation with nonempty geometrically connected fibres, and $V\\times_{T,\\bar t}\\operatorname{Spec}\\Omega=C$ as open subspaces of $X_{\\bar s}$. Geometrically connected means connected after every extension of the fibre field. Finite presentation includes quasi-compactness and quasi-separatedness. The ambient $X\\to S$ need not be quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, applied to a finite-type open neighbourhood of the proper component after strict localization; Tag 0E1E, lemma-proper-flat-geom-red, for local constancy of the number of geometric components. Spreading the proper open uses spaces-limits.tex Tag 0827, lemma-descend-opens, and Tag 08K1, lemma-eventually-proper. This etale-neighbourhood consequence is an agent assembly, not the verbatim statement of 0CWI."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-sfb-space-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Replace $S$ by an affine open neighbourhood $S_0$ of $s=\\operatorname{im}\\bar s$; any neighbourhood produced over $S_0$ is also etale over $S$. For each point in the image of $C\\to X_{S_0}$, take an affine open in a scheme etale atlas of $X_{S_0}$ mapping to that point [def-trf-algebraic-space]. Its image is a quasi-compact open subspace by [lem-a1-space-etale-open-image]. The image of $|C|$ is quasi-compact, since $C$ is proper, hence quasi-compact, and point maps are continuous [def-sfb-space-morphism-properties, lem-a1-space-point-open-calculus]. Finitely many such images therefore cover it. Their union $U\\subseteq X_{S_0}$ is a quasi-compact open subspace, with a finite union of the chosen affine charts as a quasi-compact atlas. Its geometric fibre contains all of $C$ as a subspace; $C$ remains a connected component of $U_{\\bar s}$ since it is connected and clopen in $X_{\\bar s}$. The ambient $X$ has not been assumed quasi-compact.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-etale-open-image",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04NN, lemma-space-locally-quasi-compact, expanded by finite atlas images; Tags 03BZ and 06NF."
+   }
+  },
+  {
+   "text": "The restricted map $U\\to S_0$ is smooth and locally finitely presented: etale charts of an open subspace are charts of the ambient space, so the chart tests simply restrict [def-a1-space-open-subspace, def-sbc-smooth-morphisms, def-sfb-space-morphism-properties]. It is separated: its diagonal is the pullback of the closed diagonal of $X_{S_0}\\to S_0$ to $U\\times_{S_0}U$ [lem-sfb-space-separated-fp-composition]. Closed immersions are quasi-compact (on an affine scheme test they are spectra of quotient rings). Thus this diagonal is quasi-compact. Since $S_0$ is affine, [lem-sfb-space-qcqs-source-products] makes $U$ quasi-separated; its product with any affine scheme over $S_0$ is then quasi-compact. This is precisely quasi-compactness of $U\\to S_0$. Consequently $U\\to S_0$ is of finite presentation, by local finite presentation, quasi-compactness and quasi-separatedness, and is of finite type. Restriction of the scheme chart properties is also covered by [lem-sfb-scheme-etale-source-target-properties].",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-sbc-smooth-morphisms",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Separatedness via the diagonal and finite presentation: definitions separated, locally-finite-presentation and finite-presentation; finite-presentation is qc, qs and lfp."
+   }
+  },
+  {
+   "text": "Let $A=\\mathcal O^{\\mathrm{sh}}_{S_0,\\bar s}$ be the affine pointed-neighbourhood colimit [def-weil-pbc-strict-henselization-limit]. By [lem-weil-pbc-strict-henselization-local-structure] it is a strictly henselian local ring, with maximal ideal $\\mathfrak m$. The pointed map [lem-weil-pbc-strict-henselization-pointed-map] identifies $A/\\mathfrak m$ with the relative separable closure $K\\subseteq\\Omega$ of $\\kappa(s)$; this field is separably closed by [def-weil-pbc-relative-separable-closure]. The equality here is the quotient isomorphism induced by the surjective map in that node. Its pointed equations ensure that the composite $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K\\to\\operatorname{Spec}A\\to S_0$ is the original $\\bar s$, and that the limit projections give the specified lifts to all the neighbourhoods. Put $U_A=U\\times_{S_0}\\operatorname{Spec}A$ and $U_K=U_A\\times_AK$. The map $U_K\\to\\operatorname{Spec}K$ is separated and finitely presented by [lem-sfb-space-separated-fp-composition, lem-sfb-space-flat-proper-fp-locality].",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-pointed-map",
+    "def-weil-pbc-relative-separable-closure",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-flat-proper-fp-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring; algebra.tex, construction of strict henselization with prescribed separable residue field."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-sepclosed-components-base-change] to $U_K$ and $\\Omega/K$. It gives an open-and-closed component $D\\subseteq U_K$ with $D_\\Omega=C$ as open subspaces. Its point space is the continuous image of $|C|$, so it is quasi-compact. It is separated and locally of finite type over $K$ by restriction from $U_K$; the same diagonal and product argument as in Step 2 makes it finite type. The field extension $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$ is fpqc: it is affine and surjective, and flat since every vector space over a field is flat. Properness of $C$ implies universal closedness of $D_\\Omega\\to\\operatorname{Spec}\\Omega$. Apply [lem-sfb-space-fpqc-descend-universally-closed] to obtain universal closedness of $D\\to\\operatorname{Spec}K$. Together with separatedness and finite type this proves that $D$ is proper. This uses fpqc descent, without claiming that $\\Omega/K$ is of finite presentation.",
+   "uses": [
+    "lem-sfb-space-sepclosed-components-base-change",
+    "lem-sfb-space-fpqc-descend-universally-closed",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-space-qcqs-source-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0A12 and the open surjection in its proof; spaces-descent.tex Tag 041O, lemma-descending-property-universally-closed."
+   }
+  },
+  {
+   "text": "The base change $U_A\\to\\operatorname{Spec}A$ is separated and of finite presentation, hence finite type [lem-sfb-space-separated-fp-composition, lem-sfb-space-flat-proper-fp-locality]. The maximal-ideal pair $(A,\\mathfrak m)$ is henselian by the definition of strictly henselian [def-weil-pbc-henselian-terminology]. Apply [lem-sfb-space-henselian-proper-clopen-lift] to $U_A$, this pair, and the proper clopen $D\\subseteq U_K$. It supplies a clopen subspace $W\\subseteq U_A$, proper over $A$, with $W_K=D$. In particular $W_\\Omega=C$. Properness makes $W$ quasi-compact.",
+   "uses": [
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "def-weil-pbc-henselian-terminology",
+    "lem-sfb-space-henselian-proper-clopen-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CWI, lemma-split-off-proper-part-henselian, with I equal to the maximal ideal."
+   }
+  },
+  {
+   "text": "The small cofiltered category in [def-weil-pbc-strict-henselization-limit] can be reindexed by a small nonempty directed set without changing its limit, by [lem-weil-pbc-cofiltered-limit-directed-reindex]. Write the resulting affine pointed etale neighbourhoods as $(T_i,\\bar t_i)$ and their limit as $\\operatorname{Spec}A$. All transitions are affine, since they are morphisms between affine schemes. Restrict to the tail above one index $i_0$, and set $U_i=U\\times_{S_0}T_i$. These spaces are qcqs by finite-presentation base change and [lem-sfb-space-fp-qcqs-source]; their transitions are affine, since base changes of affine morphisms are affine on every scheme test. Base change commutes with their limit by [lem-sfb-space-affine-limits-schematic-stages], so $U_A=\\varprojlim U_i$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-affine-limits-schematic-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 07SF, lemma-directed-inverse-system-has-limit; the affine-neighbourhood inverse limit of etale-cohomology.tex Tag 04HX."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-limit-open-cover-descent] to the finite covering $(W,U_A)$ of $U_A$. Both are quasi-compact open subspaces, so at some stage it gives a quasi-compact open $V_i\\subseteq U_i$ whose pullback to $U_A$ is exactly $W$. This use of the cover theorem does not require the complement of $W$ to descend. The map $V_i\\to T_i$ is locally finitely presented and separated by the same restriction-of-charts and diagonal argument as Step 2. It is quasi-compact by [lem-sfb-space-qcqs-source-products], since $V_i$ is quasi-compact and quasi-separated and $T_i$ is affine. Thus it is finitely presented. Its pullback $W\\to\\operatorname{Spec}A$ is proper; [lem-sfb-space-eventually-proper] therefore makes $V_j=V_i\\times_{T_i}T_j\\to T_j$ proper at a later index $j$. The map remains an open subspace of $U_j\\subseteq X_{T_j}$, and its fibre along $\\bar t_j:\\operatorname{Spec}\\Omega\\to T_j$ is $W_\\Omega=C$, by Step 3's pointed equations.",
+   "uses": [
+    "lem-sfb-space-limit-open-cover-descent",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-eventually-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0827, lemma-descend-opens (via a two-open cover); Tag 08K1, lemma-eventually-proper."
+   }
+  },
+  {
+   "text": "The open $V_j\\subseteq X_{T_j}$ is smooth over $T_j$ by [lem-sfb-space-smooth-surjective-fppf-locality] and restriction of its smooth chart maps. Apply [lem-pc-smooth-flat] to these scheme charts and [lem-sfb-space-local-properties-chart-test] to infer flatness of $V_j\\to T_j$. Its geometric fibres are reduced by [lem-sfb-space-smooth-reduced-locality], applied after field base change; fields are reduced. Hence [lem-sfb-space-proper-flat-geometric-component-count] applies to this proper flat finitely presented map. At the image $t_j$ of $\\bar t_j$ the component count is one: its geometric fibre over the given algebraically closed $\\Omega$ is the nonempty connected $C$, and that node permits any algebraically closed extension. The locus where the count is one is an open neighbourhood $T\\subseteq T_j$ of $t_j$. Set $V=V_j\\times_{T_j}T$. The same node says that every fibre of $V\\to T$ is nonempty and geometrically connected.",
+   "uses": [
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "lem-pc-smooth-flat",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-space-proper-flat-geometric-component-count"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1E, lemma-proper-flat-geom-red; smooth-flat: spaces-morphisms.tex Tag 04TA; smooth reducedness: spaces-properties.tex, reducedness under smooth maps."
+   }
+  },
+  {
+   "text": "The lift $\\bar t_j$ factors through $T$ because its unique point belongs to this open. Its composite $\\bar t:\\operatorname{Spec}\\Omega\\to T$ lies over the original $\\bar s$. An open subscheme of an etale neighbourhood is still etale by the source-locality statement [lem-sfb-scheme-etale-source-target-properties]. Properness and finite presentation of $V\\to T$ follow by base change [lem-sfb-space-flat-proper-fp-locality], and smoothness by [lem-sfb-space-smooth-surjective-fppf-locality]. The open inclusion $V\\subseteq X_T$ is the pullback of the preceding open inclusion, and its $\\bar t$-fibre equals $C$ with the inherited open structure [def-a1-space-open-subspace]. These are all the required conclusions.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-smooth-surjective-fppf-locality",
+    "def-a1-space-open-subspace",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Etale-neighbourhood assembly after Tags 0827 and 08K1; restriction to an open base and fibre-product associativity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "def-sfb-space-morphism-properties",
+  "lem-a1-space-point-open-calculus",
+  "def-a1-space-open-subspace",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-sepclosed-components-base-change",
+  "lem-sfb-space-fpqc-descend-universally-closed",
+  "def-weil-pbc-henselian-terminology",
+  "lem-sfb-space-henselian-proper-clopen-lift",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "lem-sfb-space-limit-open-cover-descent",
+  "lem-sfb-space-eventually-proper",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-pc-smooth-flat",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-smooth-reduced-locality",
+  "lem-sfb-space-proper-flat-geometric-component-count"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Assembly of Tags 0CWI and 0E1E with spaces-limits.tex Tags 0827 and 08K1, using strict localization and 0A12 for the prescribed geometric component."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper smooth geometrically connected fibre component in a separated smooth algebraic space extends etale locally to a proper smooth open subspace",
+   "results": "8 hits; inspected results: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*component|component.*proper|splitOffProper",
+   "results": "4 hits; inspected results: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper connected component of a geometric fibre of a separated smooth algebraic space extends to a proper smooth open subspace over an etale neighbourhood of the base point",
+   "results": "8 hits; inspected results: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsProper.instMorphismRestrict, connectedComponentIn, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"connected\"",
+   "results": "0 hits; inspected results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper connected fibre component extends over a henselian local base as an open and closed proper part, and spreads to an etale neighbourhood",
+   "results": "8 hits; inspected results: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.Scheme.Etale, Algebra.isOpen_etaleLocus, Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale, AlgebraicGeometry.instIsPreimmersionFiberι",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper connected component of a fibre of a separated smooth algebraic space extends to a proper smooth open subspace over an etale neighbourhood",
+   "results": "AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.Scheme.Etale; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; AlgebraicGeometry.isSmooth_iff; AlgebraicGeometry.IsSmooth; AlgebraicGeometry.instIsPreimmersionFiberι; AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or elementary topology and do not supply this algebraic-space neighbourhood construction."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*component|component.*proper|splitOffProper",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or elementary topology and do not supply this algebraic-space neighbourhood construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper connected geometric fibre component of a smooth morphism can be spread out as a proper open after etale base change",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn; AlgebraicGeometry.IsSmooth.recOn; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.spread_out_of_isGermInjective'; AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or elementary topology and do not supply this algebraic-space neighbourhood construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"connected\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are for schemes or elementary topology and do not supply this algebraic-space neighbourhood construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-proper-neutral",
+  "date": "2026-10-23",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component.",
+   "via": [
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-space-proper-component-neighbourhood",
+  "worker": "stage1",
+  "group": "Q50",
+  "summary": "Checked the finite-type hypothesis of the henselian split-off theorem, the arbitrary geometric field extension, the small directed inverse system, and all spreading hypotheses. Reused the henselian lift and the general open-cover and eventual-properness nodes; added two field-component and component-count inputs for algebraic spaces. No statement correction.",
+  "blueprint": "The inherited blueprint.from place identifies the proper-neutral subgroup auxiliary in the direct-image route, with no imported blueprint id at its root. Steps 1-5 implement the finite-type-open / strict-local / 0CWI argument, Steps 6-7 the 0827 / 08K1 spread, and Steps 8-9 the 0E1E shrinking. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "def-a1-space-open-subspace",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-strict-henselization-limit",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-pointed-map",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-henselian-terminology",
+    "why": "Generic strict-localization, category, topology, or smooth-scheme tool used only for its stated conclusion in this algebraic-space assembly; it does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "def-a1-space-open-subspace",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-pointed-map",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-86e4615bb",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-86e4615bb (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, both new nodes, every cited node's statement, and Stacks 0CWI, 0E1E, 0A10, 0A12 and 0A13 at their places. No repair note exists, so the re-split rule does not apply. Item statement unchanged; the local-Noetherian hypothesis goes unused, which is harmless. S1: quasi-compactness is tested on affine schemes, so |C| is compact; finitely many qc chart images form a qc open U. S2: U→S0 is separated through the monomorphism diagonal, qs, then qc by qcqs-source-products, hence fp. S3: strictly henselian A; the pointed map gives A/m≅K separably closed and U_K⊗Ω=U_s̄. S4: new node 1 (=0A12) gives a clopen D with D_Ω=C; D is qc and finite type; universal closedness descends by fpqc along Spec Ω→Spec K, which is flat and surjective onto the single affine. Using fpqc rather than fppf is needed because Ω/K may be transcendental. S5: the 0CWI lift is verbatim, with (A,m) henselian and U_A separated of finite type. S6: directed reindex, qcqs U_i, U_A=lim U_j from the last clause of the limits node. S7: open-cover descent on (W,U_A), then eventually-proper with V_i×_{T_i}Spec A=W; the t̄_j-fibre is C. S8: flat and reduced geometric fibres; new node 2 (=0E1E over a scheme) gives an open count-1 locus with nonempty geometrically connected fibres. S9: étale composite and base change. New nodes: neither restates the item. Both are statement-only and self-contained, and neither duplicates the scheme versions (lem-weil-pbc-sepclosed-field-components-bijection, lem-weil-pbc-proper-flat-geometric-components-locally-constant); tested on empty Z, on Spec C over R, and on x^2=t. Batch-5: every flagged citation is a generic algebraic-space foundation (def-trf-algebraic-space, space fibre products, point topology, open subspaces, the Mathlib leaf lem-trf-smooth-composition). The item's full closure in sec-trace-formula and sec-poincare-duality has no trace-formula, Lefschetz-Verdier or duality theorem, no nt-assume leaf and no batch-4 target. Tool_uses (space and strict-henselization definitions and foundations) accepted. No SGA citations. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothSpaceProperComponentNeighbourhood",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_proper_smooth_component_neighbourhood",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.smoothComponentSchemeMap",
+   "AlgebraicGeometry.AlgebraicSpace.smoothComponentBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.smoothComponentTestMap",
+   "AlgebraicGeometry.AlgebraicSpace.smoothComponentFibreSnd",
+   "AlgebraicGeometry.AlgebraicSpace.exists_proper_smooth_component_neighbourhood"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSpaceProperComponentNeighbourhood.lean",
+  "statement": "theorem exists_proper_smooth_component_neighbourhood {S : Scheme.{u}} [IsLocallyNoetherian S] (X : AlgebraicSpace S) (f : X ⟶ schemeSpace (Over.mk (𝟙 S))) (hf_sep : MapIsSeparated f) (hf_sm : MapIsLocally (@Smooth) f) (hf_lfp : MapIsLocallyOfFinitePresentation f) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (Copen : OpenSubspace (enlargedFibreProduct f (smoothComponentBaseMap s))) (C : AlgebraicSpace S) (eC : C.obj.obj ≅ Copen.val.toFunctor) (iC : C ⟶ enlargedFibreProduct f (smoothComponentBaseMap s)) (hiC : iC.hom.hom = eC.hom ≫ Copen.val.ι) (hC : ∃ c : Point (enlargedFibreProduct f (smoothComponentBaseMap s)).obj.obj, pointImage Copen.val.ι = connectedComponent c) (hC_proper : MapIsProper (iC ≫ smoothComponentFibreSnd f (smoothComponentBaseMap s))) : ∃ (T : Scheme.{u}) (t : T ⟶ S) (_ : Etale t) (st : Spec (.of Ω) ⟶ T) (hst : st ≫ t = s) (Vopen : OpenSubspace (enlargedFibreProduct f (smoothComponentBaseMap t))) (V : AlgebraicSpace S) (eV : V.obj.obj ≅ Vopen.val.toFunctor) (iV : V ⟶ enlargedFibreProduct f (smoothComponentBaseMap t)), iV.hom.hom = eV.hom ≫ Vopen.val.ι ∧ ∃ p : V ⟶ schemeSpace (Over.mk t), p = iV ≫ smoothComponentFibreSnd f (smoothComponentBaseMap t) ∧ MapIsProper p ∧ MapIsLocally (@Smooth) p ∧ MapIsLocallyOfFinitePresentation p ∧ MapIsQuasiCompact p.hom.hom ∧ MapIsQuasiCompact (Limits.pullback.diagonal p.hom.hom) ∧ (∀ (K : Type u) [Field K] (z : Spec (.of K) ⟶ T) (L : Type u) [Field L] [Algebra K L], ConnectedSpace (Point (enlargedFibreProduct p (smoothComponentTestMap t (Spec.map (CommRingCat.ofHom (algebraMap K L)) ≫ z))).obj.obj)) ∧ ∃ k : C ⟶ V, k.hom.hom ≫ iV.hom.hom ≫ (Limits.pullback.fst f.hom (smoothComponentBaseMap t).hom).hom = iC.hom.hom ≫ (Limits.pullback.fst f.hom (smoothComponentBaseMap s).hom).hom ∧ IsPullback k (iC ≫ smoothComponentFibreSnd f (smoothComponentBaseMap s)) p (smoothComponentSchemeMap (Over.homMk st hst))",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The open component is represented by C and an isomorphism to its existing OpenSubspace subfunctor, with inclusion fixed by hiC. The final pullback square and ambient-X projection equation assert equality of open fibres, not only abstract isomorphism. Four real-data helpers lift Yoneda maps and the second sheaf-pullback projection. Added the two already-landed definition owners for schemeSpace and enlargedFibreProduct to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-056919cfe",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Every hypothesis matches the node: X and f locally Noetherian over S, separated, smooth (MapIsLocally Smooth) and lfp with no qc assumption; geometric point with Omega algebraically closed in Type u; Copen an OpenSubspace of X_sbar with model C/eC/iC pinned by hiC; pointImage = connectedComponent c (nonempty, maximal connected); C proper over Omega. Conclusion: etale scheme T with lift st, hst; Vopen open in X x_S T; p = iV followed by snd; MapIsProper, Smooth, lfp, qc and qc diagonal (= fp); ConnectedSpace of Point fibres over every field point and every extension L/K (nonempty, geometrically connected); IsPullback plus equation of the X-components gives V_tbar = C as subobjects of X_sbar. lean.statement verbatim; added stmt_deps def-trf-scheme-algebraic-space and def-sfb-space-sheaf-fibre-product are landed owners; base theorem dep lem-trf-space-fibre-products-etale-covers kept; 4 real-data wrapper helpers with docstrings; sorry only; 9 proof steps in docstring; no live duplicate or lean record. Advisories only: qs written as MapIsQuasiCompact of the diagonal (= later MapIsQuasiSeparated); MapIsQuasiCompact owner reached only transitively; snd/Yoneda wrappers duplicated across groups. No files changed, no compile."
+ }
+}

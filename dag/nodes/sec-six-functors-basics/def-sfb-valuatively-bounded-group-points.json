@@ -1,0 +1,138 @@
+{
+ "id": "def-sfb-valuatively-bounded-group-points",
+ "kind": "definition",
+ "title": "Valuatively bounded generic points and the integral subgroup",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring and $L$ a field [def-weil-field] with an $R$-algebra structure. Let $\\mathcal D$ be a group scheme over $\\operatorname{Spec}R$ [def-sc-group-scheme, def-weil-affine-spectrum]. Define its generic points as $R$-scheme morphisms $\\operatorname{Spec}L\\to\\mathcal D$, with the group law induced by the group diagrams. By the fibre-product universal property [def-pc-fibre-product], these are the $L$-points of $G=\\mathcal D\\times_R\\operatorname{Spec}L$. Define the integral-point subgroup to be the image of the group homomorphism $\\mathcal D(R)\\to G(L)$ obtained by precomposition with $\\operatorname{Spec}L\\to\\operatorname{Spec}R$. For a generic point $x$, evaluation of $f\\in\\Gamma(G,\\mathcal O_G)$ is pullback along the corresponding $\\operatorname{Spec}L\\to G$, followed by $\\Gamma(\\operatorname{Spec}L,\\mathcal O)=L$. For an additive valuation $v:L\\to\\mathbf Z\\cup\\{+\\infty\\}$ with $v(0)=+\\infty$, a subgroup $M\\subseteq G(L)$ is valuatively bounded when for every $f\\in\\Gamma(G,\\mathcal O_G)$ there exists $n_f\\in\\mathbf Z$ such that $n_f\\leq v(f(x))$ for every $x\\in M$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "Lemma 3.7, first assertion, and Proposition 4.3, second paragraph, printed pp.7-8; regular-function meaning of boundedness specified in lem-sfb-split-reductive-integral-maximal-bounded; read online https://arxiv.org/pdf/math/0405381."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A subgroup of rational points of an affine algebraic group is bounded if every regular function has valuations bounded below",
+   "results": "{\"t\": \"2026-10-24T10:00:37Z\", \"tool\": \"leansearch\", \"query\": \"A subgroup of rational points of an affine algebraic group is bounded if every regular function has valuations bounded below\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.mem_leAddSubgroup_iff\", \"Valuation.mem_ltAddSubgroup_iff\", \"Valuation.leAddSubgroup_zero\", \"Valuation.subgroups_basis\", \"Valuation.ltAddSubgroup\", \"Valuation.ltAddSubgroup_monotone\", \"Valuation.leAddSubgroup\", \"ValuationSubring.principalUnitGroup\"], \"digest\": \"a0233601f8a4ff29\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching predicate: scalar valuation subgroups, valuation-ring integrality, and valued topology do not define regular-function boundedness of group points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Valuation bounded rational points on an affine group scheme and the subgroup obtained by restriction of integral points",
+   "results": "{\"t\": \"2026-10-24T10:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"Valuation bounded rational points on an affine group scheme and the subgroup obtained by restriction of integral points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.coe_integer\", \"Valuation.Integers.mem_of_integral\", \"Valuation.Integers.isIntegral_iff_v_le_one\", \"Valuation.Integers.exists_of_le_one\", \"Rat.ringOfIntegersWithValEquiv_apply\", \"Valuation.Integers.map_le_one\", \"Set.unit\", \"RootPairing.EmbeddedG2.toIsValuedIn\"], \"digest\": \"7f7452f780b7eb8e\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching predicate: scalar valuation subgroups, valuation-ring integrality, and valued topology do not define regular-function boundedness of group points."
+  },
+  {
+   "tool": "grep",
+   "query": "valuat.*bound|bound.*valuat|integralPoints|pointsPrecomp",
+   "results": "{\"t\": \"2026-10-24T10:00:40Z\", \"tool\": \"grep\", \"query\": \"valuat.*bound|bound.*valuat|integralPoints|pointsPrecomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/ModelTheory/Semantics.lean\", \"Mathlib/Algebra/Order/Ring/StandardPart.lean\", \"Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean\", \"Mathlib/Analysis/InnerProductSpace/Orientation.lean\", \"Mathlib/Topology/Algebra/Valued/LocallyCompact.lean\", \"Mathlib/Topology/Algebra/Valued/LocallyCompact.lean\", \"Mathlib/Topology/Algebra/Valued/LocallyCompact.lean\", \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\"], \"digest\": \"4675997023387d02\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching predicate: scalar valuation subgroups, valuation-ring integrality, and valued topology do not define regular-function boundedness of group points."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"valuatively-bounded|ValuativelyBoundedPoints|def .*IsBounded|integralPoints\" lean/Sheaf lean/WeilConjectures; rg -l -i \"regular function.{0,120}bound|bounded subgroup|valuation.bounded|integral points\" dag/nodes; python3 tools/blueprint_refs.py search bounded",
+   "results": "No project predicate for regular-function bounded group points. The DAG has statements using the notion (including the item and torus statements), but no definition node for it. Existing unrelated IsBounded predicates concern complexes. Existing AlgebraicGeometry.pointsPrecomp in WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints is reused for the integral subgroup range.",
+   "date": "2026-10-24",
+   "verdict": "New definition needed; reuse the existing restriction homomorphism."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-integral-maximal-bounded",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Regular-function boundedness and canonical integral subgroup in the maximal-boundedness prerequisite, Prasad--Yu Lemma 3.7, before its application in Proposition 4.3.",
+   "via": [
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ValuativelyBoundedPoints",
+  "declaration": "AlgebraicGeometry.ValuativelyBoundedPoints.IsBounded",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ValuativelyBoundedPoints.lean",
+  "statement": "def IsBounded (R L : Type u) [CommRing R] [Field L] [Algebra R L] (D : Grp (Over (Spec (.of R)))) (v : AddValuation L (WithTop ℤ)) (M : Subgroup (genericPoints R L D)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ValuativelyBoundedPoints.genericPoints",
+   "AlgebraicGeometry.ValuativelyBoundedPoints.integralPoints",
+   "AlgebraicGeometry.ValuativelyBoundedPoints.evaluation",
+   "AlgebraicGeometry.ValuativelyBoundedPoints.IsBounded"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c8707d72",
+  "group": "NZ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c8707d72",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Clause-by-clause: henselian DVR (HenselianLocalRing is in the henselian-terminology record), alg. closed residue field, fraction field L with no completeness; v pinned on R to addVal by hv (determines v on Frac R, so not an extra assumption); D smooth/affine/finite type in Grp(Over Spec R), closed T ≅ splitTorus R r, hred/hmax over all R→Ω identical to the landed Cartan node; integralPoints = range of canonical pointsPrecomp restriction; IsBounded quantifies over all of Γ(D×_R Spec L) with an f-dependent uniform integer bound; conclusion IsBounded K ∧ ∀ M bounded, K ≤ M → M = K. New def node def-sfb-valuatively-bounded-group-points: 4 real definitions, source/blueprint docstrings, no duplicate in side-live or DAG. Item JSON differs from live only in lean and 3 used stmt_deps; both statements verbatim; sorry only; 4-step proof docstring; universes bound. Edge cases r=0, zero values, M=K checked. Second-reading section is the post-2026-10-17 placeholder. No files changed, no compile."
+ }
+}

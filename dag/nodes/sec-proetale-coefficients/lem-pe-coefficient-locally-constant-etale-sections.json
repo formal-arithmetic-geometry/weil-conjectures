@@ -1,0 +1,132 @@
+{
+ "id": "lem-pe-coefficient-locally-constant-etale-sections",
+ "kind": "statement",
+ "title": "Joint etale-local sections of coefficient-sized locally constant set sheaves",
+ "statement": "Let X be a scheme, with the equivalent coefficient-sized etale and pro-etale sites and inclusion i of [def-weil-pbc-site-comparison-morphism, def-weil-proetale-inverse-image]. Let H_a be a coefficient-sized family of set-valued sheaves on the pro-etale model. Suppose every H_a is locally constant: some family W_j covering the final object identifies each slice restriction with the constant sheaf of a coefficient-sized set Q_j [def-weil-pbc-constant-sheaf]. Suppose also a pro-etale family U_j covering the final object has, for every j, a section of at least one H_a on U_j. Then there is a coefficient-sized family V_j of etale objects such that i(V_j) cover the final pro-etale object and every i(V_j) has a section of some H_a. No nonemptiness of the family, coefficient sets, or X is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1-5.1.4, pp. 33-34, and Proposition 6.8.4(6), final section-descent paragraph; family version by the coproduct/epimorphism argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the coefficient-universe locally constant counit theorem separately to every H_a. Compose its invertible underlying counit with toSheafify for the pointwise left Kan extension of the etale restriction. The composite tau_a is locally surjective by Mathlib Presheaf.isLocallySurjective_toSheafify and local surjectivity of isomorphisms.",
+   "uses": [
+    "lem-pe-coefficient-locally-constant-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Index L by triples (Y,a,s), with Y in the coefficient-sized etale model, a in K, and s a section of H_a at the image of Y. All three indices have the coefficient universe. Given a section on U_i, restrict it to any W mapping to U_i. The image sieve of tau_a at this restricted section is covering. Every arrow Z into W in this sieve has a Kan-extension representative t. The pointwise Kan cocone and Types.jointly_surjective_of_isColimit give an etale object Y, a map Z to its image, and a section of the etale restriction at Y. This section is definitionally a section of H_a at the image of Y. Thus the covering image sieve is contained in the pullback of Sieve.ofObjects of the constructed family.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary pro-etale object T, apply GrothendieckTopology.transitive to the given covering sieve Sieve.ofObjects U T and the pullback coverings just constructed. This proves CoversTop for the family of images of Y. Its sections are the third coordinates of the indices. No choice of an element of K is made except from hsec, so the empty-family and empty-base cases are handled by the same transitivity proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-coefficient-locally-constant-counit",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.1--5.1.4, p. 34; the remaining family argument uses local surjectivity of sheafification, pointwise Kan representatives, and transitivity of covering sieves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale cover witnesses jointly local sections of a family of locally constant proetale sheaves of sets",
+   "results": [
+    "Condensed.lanSheafProfinite",
+    "AlgebraicGeometry.Scheme.etaleTopology",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "AlgebraicGeometry.Scheme.smallEtaleTopology",
+    "LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No comparison theorem for etale/pro-etale sheaves. The condensed and topological statements concern other sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant proetale sheaf of sets is classical and its local sections exist on an etale cover",
+   "results": [
+    "Condensed.lanSheafProfinite",
+    "LightCondensed.locallyConstantPresheaf",
+    "CompHausLike.LocallyConstant.functor",
+    "Condensed.locallyConstantPresheaf"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No exact comparison theorem. Existing project theorem proEtale_locallyClassical_etaleCover fixes all values and indices to Type (u+1); it cannot directly handle the independent coefficient universe."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant.*[Ee]tale|locallyConstant.*etaleSections|IsProEtaleClassical",
+   "results": "msearch grep: 0 hits. rg in the project found Sheaf.AlgebraicGeometry.ProEtaleLocallyClassicalEtaleCover, whose signature uses Type (u+1). Blueprint search for locally constant etale sections: 0 matches.",
+   "date": "2026-10-26",
+   "verdict": "No coefficient-universe statement. The new statement isolates only the set-valued geometric comparison step; all finite-module Isom calculations are proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientFpLocalSystemEtaleCover",
+  "date": "2026-10-26",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "First proof sentence: finite-local-system comparison on one stratum; Tag 099Y Isom-sheaf etale-local-section step",
+   "via": [
+    "lem-pe-coefficient-fp-local-system-etale-cover",
+    "lem-pe-coefficient-fp-local-system-origin",
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientLocallyConstantEtaleSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientLocallyConstantEtaleSections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientLocallyConstant_etaleSections",
+  "statement": "theorem coefficientLocallyConstant_etaleSections (X : Scheme.{u})\n    (K : Type (max v (u + 1)))\n    (H : K → Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (Type (max v (u + 1))))\n    (hH : ∀ a : K, ∃ (L : Type (max v (u + 1)))\n      (W : L → Scheme.coefficientProEtaleSiteModel.{u, v} X),\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X).CoversTop W ∧\n        ∀ j : L, ∃ Q : Type (max v (u + 1)),\n          Nonempty ((H a).over (W j) ≅\n            (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, v} X).over (W j))\n              (Type (max v (u + 1)))).obj Q))\n    (I : Type (max v (u + 1)))\n    (U : I → Scheme.coefficientProEtaleSiteModel.{u, v} X)\n    (hU : (Scheme.coefficientProEtaleModelTopology.{u, v} X).CoversTop U)\n    (hsec : ∀ j : I, ∃ a : K, Nonempty ((H a).obj.obj (op (U j)))) :\n    ∃ (L : Type (max v (u + 1)))\n      (V : L → Scheme.smallModelComparisonEtaleSite.{u, v} X),\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X).CoversTop\n        (fun j ↦ (Scheme.smallModelComparisonInclusion.{u, v} X).obj (V j)) ∧\n      ∀ j : L, ∃ a : K, Nonempty ((H a).obj.obj\n        (op ((Scheme.smallModelComparisonInclusion.{u, v} X).obj (V j))))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T001125-L-4170867",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T022915-L-500947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-quotient-root-line-comparison",
+ "kind": "statement",
+ "title": "Generator-normalized quotient root-line comparison",
+ "statement": "Let ell be prime and invertible on any scheme T, and let r>=m>=1. For the actual quotient between the double-lifted rings Z/ell^r and Z/ell^m, there is a CoefficientLineComparison [def-pur-finite-smooth-coefficient-arrows] at exponents ell^r and ell^m. Its root map is characterized by multiplication by ell^(r-m) after the kernel inclusion; its sheaf and derived maps satisfy all the recorded generator and scalar-single normalizations. These equations determine the data.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Generator-normalized quotient root-line comparison; the two-level argument."
+ },
+ "stmt_deps": [
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof": [
+  {
+   "text": "At the target coefficient ring B, apply the exponent-change clause of finiteEtaleTwistPullbackData to ell^m dividing ell^r. Positivity follows from primality, and invertibility follows by taking a power of hT. This gives q with its kernel power equation and the signed comparison t with its pure-generator equation.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use reductionTateOrdinaryScalar_isIso to make the canonical adjoint of reductionEtaleTateMap at exponent ell^r an isomorphism s. The sheaf comparison is s followed by t(1). Naturality of the scalar adjunction on its target, followed by the two generator equations, proves the generator field.",
+   "uses": [
+    "def-sp-reduction-exceptional-realization-objects",
+    "def-sp-affine-counit-comparison-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose reductionEtaleTateIso at exponent ell^r with the degree-zero derived single of t(1). Functoriality of the single functor and associativity identify its forward arrow with scalarSingleMap followed by the single of the composite sheaf comparison. Package q, the composite sheaf isomorphism and this derived isomorphism as CoefficientLineComparison. No new existence or local-freeness assertion is introduced.",
+   "uses": [
+    "def-sp-affine-counit-comparison-objects",
+    "def-pur-finite-smooth-coefficient-arrows"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "def-sp-reduction-exceptional-realization-objects",
+  "def-sp-affine-counit-comparison-objects",
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent K4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(3), Orientation: compose the existing fixed-exponent scalar comparison with the existing normalized exponent-change comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale roots of unity quotient prime powers scalar extension rank one line",
+   "results": "Eight Mathlib hits; no normalized etale/pro-etale purity coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse the project APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction transposition and naturality lemmas; used in the assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing categorical API."
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientLineComparison|roots_power|finiteEtaleTateLine",
+   "results": "Mathlib grep: zero hits. Local rg: Read the coefficient comparison structure, root-local models and existing finite-field comparisons. The latter require a field base and cannot supply this arbitrary-scheme two-exponent statement.",
+   "date": "2026-10-27",
+   "verdict": "Use existing declarations for formal steps; isolate only the stated step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothTwoLevelReduction",
+  "date": "2026-10-27",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 1: finite reductions; Generator-normalized quotient root-line comparison",
+   "via": [
+    "lem-pur-finite-smooth-two-level-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientRootLineComparison",
+  "file": "lean/Sheaf/Paper/QuotientRootLineComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.quotientRootLineComparison",
+  "statement": "theorem quotientRootLineComparison\n    (ell : ℕ) [Fact ell.Prime] (T : Scheme.{u})\n    (hT : IsUnit (ell : Γ(T, ⊤)))\n    (r m : ℕ) (hm : 1 ≤ m) (hmr : m ≤ r) :\n    Nonempty (CoefficientLineComparison (FiniteReduction.quotient ell hmr)\n      (ell ^ r) (ell ^ m) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261027T094432-L-225776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T103445-L-1082047",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

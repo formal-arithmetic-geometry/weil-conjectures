@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-common-stage-pullback-comparison-data",
+ "kind": "statement",
+ "title": "Coherent common-stage pullback comparison data",
+ "statement": "For a morphism f : X ⟶ Y of schemes with the stated invertibility hypotheses, the normalized rational pullback comparison isomorphisms form a coherent StageSystem family: there exists a comparison b for every coefficient inclusion, each component and inverse agrees heterogeneously with commonStagePullbackComparison, and b satisfies pairFunctorCoherent.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "common-stage paragraph, pullback comparison tower coherence"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Take rationalPullbackStageComparison, the explicitly whiskered normalized rational pullback comparison, as the family b. For each object use Iso.ext: its hom component is definitionally commonStagePullbackComparison.hom, so the two isomorphisms agree; applying the hom and inv projections gives both required heterogeneous component equalities. Its coherence is rationalPullbackStageComparison_coherent, which transports the coefficient-level tower equation through the recorded stage systems.",
+   "uses": [
+    "lem-weil-rational-pullback-stage-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-rational-pullback-stage-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "place": "M2: explicit whiskered scalar comparison family, component normalization, and the coefficient tower law"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-27",
+  "group": "V2"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "declaration": "WeilConjectures.commonStagePullback_comparison_data",
+  "file": "lean/Sheaf/Paper/DerivedPullbackTensorHom.lean",
+  "statement": "theorem commonStagePullback_comparison_data {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] :\n    ∃ b : ∀ {E L : Index l Ω} (h : E ≤ L),\n      (rationalDerivedPullback l (Coefficient.{u} l Ω E) f) ⋙\n          (stageSystem l Ω X).T h ≅\n        (stageSystem l Ω Y).T h ⋙\n          (rationalDerivedPullback l (Coefficient.{u} l Ω L) f),\n      (∀ {E L : Index l Ω} (h : E ≤ L)\n        (P : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y),\n        HEq ((b h).hom.app P)\n          ((commonStagePullbackComparison l Ω f ⟨E, P⟩ L h).hom) ∧\n        HEq ((b h).inv.app P)\n          ((commonStagePullbackComparison l Ω f ⟨E, P⟩ L h).inv)) ∧\n      (∀ {E L M : Index l Ω} (h : E ≤ L) (h' : L ≤ M)\n        (P : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) Y),\n        ((stageSystem l Ω X).T h').map ((b h).hom.app P) ≫\n          (b h').hom.app (((stageSystem l Ω Y).T h).obj P) ≫\n          (rationalDerivedPullback l (Coefficient.{u} l Ω M) f).map\n            (((stageSystem l Ω Y).assoc h h').hom.app P) =\n        (((stageSystem l Ω X).assoc h h').hom.app\n            ((rationalDerivedPullback l (Coefficient.{u} l Ω E) f).obj P) ≫\n          (b (h.trans h')).hom.app P))",
+  "branch": "newtargets-dag",
+  "by": "V2",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Strict intermediate statement for the coherent comparison family used by commonStageDerivedPullback_existsUnique."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "common-stage pullback comparison tower",
+   "via": []
+  },
+  "same_as": []
+ },
+ "blueprint_kind": "statement",
+ "blueprint_order": 1467,
+ "blueprint_uses": [],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T202636-L-3475024",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T112407-L-1578879",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

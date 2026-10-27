@@ -1,0 +1,91 @@
+{
+ "id": "lem-sfb-integral-pullback-geometric-flat-open",
+ "kind": "statement",
+ "title": "Integral pullback of a flat open geometrically integral morphism",
+ "statement": "Let $X,Y,S$ be schemes [def-pc-scheme], with morphisms $f:X\\to S$ and $g:Y\\to S$. Suppose $f$ is flat [def-weil-flat-morphism] and universally open, meaning that every base change of $f$ is open on underlying topological spaces. Suppose $f$ is geometrically integral: for every field $K$ and every morphism $\\operatorname{Spec}K\\to S$, the scheme $X\\times_S\\operatorname{Spec}K$ is integral [def-pc-integral-scheme]. If $Y$ is integral and locally Noetherian [pqf-def-locnoeth], then the ordinary fibre product $X\\times_SY$ [def-pc-fibre-product] is integral.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean",
+  "place": "lines 105-109, pullback instance instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian; underlying theorem GeometricallyIntegral.isIntegral_of_isLocallyNoetherian, lines 91-96"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically integral flat universally open morphism over an integral locally noetherian scheme has integral source; in particular the product of a geometrically integral finite type scheme with an integral finite type scheme over a field is integral",
+   "results": "8 hits; actual top results: AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsIntegralHom.instFstScheme, AlgebraicGeometry.IsIntegralHom.instDescScheme, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.IsIntegralHom.instSndScheme; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the eight returned declarations concern integral morphisms and open subschemes, not this total-space or product theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre product of a geometrically integral flat universally open scheme over a base with an integral locally noetherian scheme is integral",
+   "results": "8 hits; actual top results: AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instSndScheme, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned integral-morphism base-change and open-subscheme lemmas do not state the product integrality criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyIntegral, AlgebraicGeometry.IsIntegral",
+   "results": "9 hits; actual top results: AlgebraicGeometry.GeometricallyIntegral.eq_geometrically, AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral, AlgebraicGeometry.GeometricallyIntegral.mk, AlgebraicGeometry.geometricallyIntegral_iff, AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_isLocallyNoetherian, AlgebraicGeometry.GeometricallyIntegral.isIntegral_of_subsingleton, AlgebraicGeometry.instIsIntegralFiberOfGeometricallyIntegral, AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian; ",
+   "date": "2026-10-23",
+   "verdict": "match: the pullback instance at Integral.lean:107-109 is exactly this statement; also returned the named total-space theorem at lines 91-96"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_of_isLocallyNoetherian|If.*integral and flat|instIsIntegralPullbackScheme",
+   "results": "5 hits; actual top results: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; ",
+   "date": "2026-10-23",
+   "verdict": "match: read Mathlib/AlgebraicGeometry/Geometrically/Integral.lean:91-114; the instance at 107-109 is exact"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian",
+  "file": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean",
+  "how": "exact: instance at lines 107-109 (docstring 105-106); all five hypotheses occur verbatim. The statement allows arbitrary schemes and does not require the base S to be integral.",
+  "line": 107
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-generic-theta-abel-cartier-pullback",
+  "date": "2026-10-23",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: The normalized theta difference bundle pulls back to the Picard family. Milne III 6.8 proof, first sentence: apply III 6.7 on its dense open U; retain the scheme multiplicities, not merely the support. Product-integrality prerequisite in Milne III 6.7: the two sources C times C^(g-1) and C times Theta of the degree comparison.",
+   "via": [
+    "lem-sfb-generic-theta-abel-cartier-pullback",
+    "lem-sfb-theta-poincare-pullback",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

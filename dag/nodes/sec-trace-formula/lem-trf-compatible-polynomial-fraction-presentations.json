@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-compatible-polynomial-fraction-presentations",
+ "kind": "statement",
+ "title": "Compatible finite polynomial maps with unit-denominator presentations",
+ "statement": "Let $k$ be a field, let $P,Q$ be commutative $k$-algebras essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], let $A$ be a commutative $k$-algebra, and let $u:P\\twoheadrightarrow A$, $v:Q\\twoheadrightarrow A$ be surjective $k$-algebra homomorphisms. There exist integers $r,s\\geq0$, elements $p_1,\\ldots,p_r\\in P$, $q_1,\\ldots,q_s\\in Q$, elements $\\widetilde q_1,\\ldots,\\widetilde q_s\\in P$, $\\widetilde p_1,\\ldots,\\widetilde p_r\\in Q$, and $k$-algebra maps $f:D\\to P$, $g:D\\to Q$ from the finite polynomial algebra $D=k[x_1,\\ldots,x_r,y_1,\\ldots,y_s]$ [def-weil-pbc-mv-polynomial-ring], with $f(x_i)=p_i$, $f(y_j)=\\widetilde q_j$, $g(x_i)=\\widetilde p_i$, $g(y_j)=q_j$, $u(\\widetilde q_j)=v(q_j)$, and $v(\\widetilde p_i)=u(p_i)$. Their composites agree: $u\\circ f=v\\circ g=:h$. Every $p\\in P$ admits $a,t\\in k[x_1,\\ldots,x_r]\\subseteq D$ such that $f(t)$ is a unit and $p f(t)=f(a)$. Every $q\\in Q$ admits $c,z\\in k[y_1,\\ldots,y_s]\\subseteq D$ such that $g(z)$ is a unit and $q g(z)=g(c)$. No locality or regularity of $P,Q,A$ is assumed; the sequences of variables may be empty.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SF (lemma-lci-local), polynomial-local presentation comparison; agent refinement using simultaneous finite generators and lifts, abstracted from returned proof steps 1, 2 and the fraction descriptions in step 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-essentially-finite-type-algebra], choose $k$-algebras $B,C$ of finite type, multiplicative subsets $W\\subseteq B$, $V\\subseteq C$, and $k$-algebra isomorphisms $\\theta:W^{-1}B\\to P$, $\\eta:V^{-1}C\\to Q$. By [def-weil-pbc-finite-type-algebra], choose surjective $k$-algebra maps $e:k[x_1,\\ldots,x_r]\\to B$ and $d:k[y_1,\\ldots,y_s]\\to C$. Write $b_i=e(x_i)$, $c_j=d(y_j)$, and set $p_i=\\theta(b_i/1)$, $q_j=\\eta(c_j/1)$. These choices allow $r=0$ or $s=0$.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00QM (definition-essentially-finite-p-t) and 00F3 (definition-finite-type), (1) of each definition."
+   }
+  },
+  {
+   "text": "Surjectivity of $u$ gives a lift $\\widetilde q_j\\in P$ with $u(\\widetilde q_j)=v(q_j)$ for each $j$; surjectivity of $v$ gives $\\widetilde p_i\\in Q$ with $v(\\widetilde p_i)=u(p_i)$ for each $i$. The universal property in [def-weil-pbc-mv-polynomial-ring] defines $f,g$ on $D=k[x_1,\\ldots,x_r,y_1,\\ldots,y_s]$ by the stipulated variable images. The composites $uf,vg$ agree on each $x_i$ and $y_j$, hence are equal by uniqueness in that same universal property; call the common map $h$. The inclusions of the two polynomial blocks into $D$ extend each monomial by exponent zero on the other block; distinct monomials remain distinct, so both inclusions are injective.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SF (lemma-lci-local), polynomial-presentation comparison; agent construction using the polynomial universal property."
+   }
+  },
+  {
+   "text": "For $p\\in P$, represent $\\theta^{-1}(p)=b/w$ with $b\\in B$ and $w\\in W$, using the fraction definition in [def-weil-pbc-essentially-finite-type-algebra]. Choose $a,t\\in k[x_1,\\ldots,x_r]$ with $e(a)=b$ and $e(t)=w$ by surjectivity of $e$. On this block, $f=\\theta\\circ(b\\mapsto b/1)\\circ e$, since these maps agree on variables by [def-weil-pbc-mv-polynomial-ring]. Thus $f(t)=\\theta(w/1)$ is a unit with inverse $\\theta(1/w)$, and $p f(t)=\\theta((b/w)(w/1))=\\theta(b/1)=f(a)$. The fraction identities follow directly from multiplication and equality of fractions: $(w/1)(1/w)=1$ and $(b/w)(w/1)=b/1$.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), preceding fraction construction; Tag 00QM (definition-essentially-finite-p-t)."
+   }
+  },
+  {
+   "text": "For $q\\in Q$, write $\\eta^{-1}(q)=c_0/v_0$ with $c_0\\in C$, $v_0\\in V$. Choose $c,z\\in k[y_1,\\ldots,y_s]$ with $d(c)=c_0$, $d(z)=v_0$. On this block $g=\\eta\\circ(c_0\\mapsto c_0/1)\\circ d$ by uniqueness in [def-weil-pbc-mv-polynomial-ring]. Hence $g(z)=\\eta(v_0/1)$ has inverse $\\eta(1/v_0)$ and $qg(z)=\\eta((c_0/v_0)(v_0/1))=\\eta(c_0/1)=g(c)$, using the fraction definition in [def-weil-pbc-essentially-finite-type-algebra]. All arguments hold for empty blocks (whose polynomial algebra is $k$) and for the zero ring, where $0=1$ is a unit. They use no locality or regularity assumption.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), preceding fraction construction; Tag 00QM (definition-essentially-finite-p-t)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit simultaneous-presentation refinement of Tag 00SF (lemma-lci-local), using definitions Tags 00QM, 00F3 and the fraction construction preceding 00CO; the simultaneous comparison is written by Q71, not asserted to be the proof printed in 00SF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "EssFiniteType|exists.*surjective.*MvPolynomial|MvPolynomial.*surjective",
+   "results": "{\"t\": \"2026-10-22T06:46:36Z\", \"tool\": \"grep\", \"query\": \"EssFiniteType|exists.*surjective.*MvPolynomial|MvPolynomial.*surjective\", \"sub\": \"RingTheory/EssentialFiniteness\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "inconclusive: the requested path was not a directory, so this search returned no hits. Corrected immediately by the same pattern over RingTheory; see that recorded search."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common finite polynomial algebra has compatible evaluation maps to two essentially finite type algebras surjecting onto the same algebra",
+   "results": "{\"t\": \"2026-10-22T06:46:36Z\", \"tool\": \"leansearch\", \"query\": \"A common finite polynomial algebra has compatible evaluation maps to two essentially finite type algebras surjecting onto the same algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.map_aeval_eq_aeval_map\", \"Polynomial.aeval_algHom\", \"Algebra.Generators.Hom.algebraMap_toAlgHom\", \"Polynomial.aeval_algHom_apply\", \"MvPolynomial.evalᵢ\", \"Polynomial.aeval\", \"MvPolynomial.aeval_map_algebraMap\", \"Polynomial.aeval_algebraMap_apply\"], \"digest\": \"09366f721706bf04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities and individual finite-type polynomial presentations do not supply simultaneous compatible maps or the unit-denominator descriptions for two essentially finite type algebras. Read Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174) and Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:89); constructing both lifts and matching the composites is additional work."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, MvPolynomial",
+   "results": "{\"t\": \"2026-10-22T06:46:36Z\", \"tool\": \"loogle\", \"query\": \"Algebra.EssFiniteType, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities and individual finite-type polynomial presentations do not supply simultaneous compatible maps or the unit-denominator descriptions for two essentially finite type algebras. Read Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174) and Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:89); constructing both lifts and matching the composites is additional work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given surjections from two essentially finite type algebras over a field to a common algebra construct a finite polynomial algebra mapping to both with equal composites and expressing every target element as a fraction of polynomial images",
+   "results": "{\"t\": \"2026-10-22T06:46:47Z\", \"tool\": \"leanfinder\", \"query\": \"Given surjections from two essentially finite type algebras over a field to a common algebra construct a finite polynomial algebra mapping to both with equal composites and expressing every target element as a fraction of polynomial images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.FiniteType.iff_quotient_mvPolynomial\", \"AlgHom.FiniteType.comp_surjective\", \"Algebra.EssFiniteType.of_surjective\", \"Algebra.FiniteType.iff_quotient_freeAlgebra'\", \"Algebra.FiniteType.iff_quotient_freeAlgebra\", \"AlgHom.Finite.of_surjective\"], \"digest\": \"96b5b23376e41c79\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities and individual finite-type polynomial presentations do not supply simultaneous compatible maps or the unit-denominator descriptions for two essentially finite type algebras. Read Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174) and Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:89); constructing both lifts and matching the composites is additional work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous finite polynomial presentations compatible with a pair of surjective algebra maps and finite type localization models",
+   "results": "{\"t\": \"2026-10-22T06:46:47Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous finite polynomial presentations compatible with a pair of surjective algebra maps and finite type localization models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.of_span_eq_top_target_aux\", \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"RingHom.FinitePresentation.polynomial_induction\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"AlgHom.FinitePresentation.comp_surjective\", \"RingHom.FinitePresentation\", \"Algebra.FinitePresentation.of_span_eq_top_target\", \"Algebra.FinitePresentation.of_surjective\"], \"digest\": \"81efd7e880de4f76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities and individual finite-type polynomial presentations do not supply simultaneous compatible maps or the unit-denominator descriptions for two essentially finite type algebras. Read Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174) and Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:89); constructing both lifts and matching the composites is additional work."
+  },
+  {
+   "tool": "grep",
+   "query": "EssFiniteType|exists.*surjective.*MvPolynomial|MvPolynomial.*surjective",
+   "results": "{\"t\": \"2026-10-22T06:46:52Z\", \"tool\": \"grep\", \"query\": \"EssFiniteType|exists.*surjective.*MvPolynomial|MvPolynomial.*surjective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nullstellensatz.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Quotient.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\"], \"digest\": \"45531a92e54f971c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: evaluation identities and individual finite-type polynomial presentations do not supply simultaneous compatible maps or the unit-denominator descriptions for two essentially finite type algebras. Read Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174) and Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:89); constructing both lifts and matching the composites is additional work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two essentially finite type algebras surjecting onto a common algebra, construct compatible maps from one finite polynomial algebra and unit denominator polynomial fraction presentations",
+   "results": "{\"t\": \"2026-10-23T09:55:39Z\", \"tool\": \"leanfinder\", \"query\": \"Given two essentially finite type algebras surjecting onto a common algebra, construct compatible maps from one finite polynomial algebra and unit denominator polynomial fraction presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FinitePresentation.of_span_eq_top_target_aux\", \"Algebra.FiniteType.iff_quotient_mvPolynomial'\", \"RingHom.FinitePresentation.polynomial_induction\", \"Algebra.FiniteType.iff_quotient_mvPolynomial''\", \"Algebra.FiniteType.iff_quotient_mvPolynomial\", \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"Algebra.FinitePresentation.out\", \"Algebra.Generators.toAlgHom_ofComp_surjective\"], \"digest\": \"f99c661e43145f72\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-type polynomial presentations, single-algebra essential finite-type criteria, polynomial maps, and localization-away generator constructions do not give the pair of compatible maps and both fraction clauses in one specialization. Read Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:88) and Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174); constructing both lifts and their equal composites remains necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "essFiniteType_iff|iff_quotient_mvPolynomial|IsLocalization.*surj",
+   "results": "{\"t\": \"2026-10-23T09:55:59Z\", \"tool\": \"grep\", \"query\": \"essFiniteType_iff|iff_quotient_mvPolynomial|IsLocalization.*surj\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Flat.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\"], \"digest\": \"f8dd1ca02977d79d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-type polynomial presentations, single-algebra essential finite-type criteria, polynomial maps, and localization-away generator constructions do not give the pair of compatible maps and both fraction clauses in one specialization. Read Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:88) and Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174); constructing both lifts and their equal composites remains necessary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common finite polynomial algebra mapping compatibly to two essentially finite type algebras with unit denominator fractions",
+   "results": "{\"t\": \"2026-10-23T09:55:59Z\", \"tool\": \"leansearch\", \"query\": \"Common finite polynomial algebra mapping compatibly to two essentially finite type algebras with unit denominator fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.mapAlgHom\", \"RatFunc.algebraMap_apply\", \"Polynomial.mapAlg\", \"Polynomial.mapAlgEquiv_toAlgHom\", \"Polynomial.algebraMap_def\", \"Polynomial.algebra\", \"RatFunc.instAlgebraOfPolynomial\", \"MvPolynomial.mapAlgHom\"], \"digest\": \"133b08a66718525a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-type polynomial presentations, single-algebra essential finite-type criteria, polynomial maps, and localization-away generator constructions do not give the pair of compatible maps and both fraction clauses in one specialization. Read Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:88) and Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174); constructing both lifts and their equal composites remains necessary."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T09:55:59Z\", \"tool\": \"loogle\", \"query\": \"Algebra.EssFiniteType, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-type polynomial presentations, single-algebra essential finite-type criteria, polynomial maps, and localization-away generator constructions do not give the pair of compatible maps and both fraction clauses in one specialization. Read Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:88) and Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174); constructing both lifts and their equal composites remains necessary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite sets of algebra generators up to localization and lifts along two surjective algebra homomorphisms give compatible polynomial evaluation maps",
+   "results": "{\"t\": \"2026-10-23T09:58:21Z\", \"tool\": \"leanfinder\", \"query\": \"Finite sets of algebra generators up to localization and lifts along two surjective algebra homomorphisms give compatible polynomial evaluation maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.compLocalizationAwayAlgHom\", \"Algebra.Generators.compLocalizationAwayAlgHom_toAlgHom_toComp\", \"Algebra.Generators.compLocalizationAwayAlgHom_X_inl\", \"Algebra.Generators.ofSurjective\", \"Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero\", \"Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'\", \"Algebra.Generators.ofSurjective_val\", \"Algebra.Generators.toAlgHom_ofComp_localizationAway\"], \"digest\": \"38d068deef3545c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-type polynomial presentations, single-algebra essential finite-type criteria, polynomial maps, and localization-away generator constructions do not give the pair of compatible maps and both fraction clauses in one specialization. Read Algebra.essFiniteType_iff (Mathlib/RingTheory/EssentialFiniteness.lean:88) and Algebra.FiniteType.iff_quotient_mvPolynomial'' (Mathlib/RingTheory/FiniteType.lean:174); constructing both lifts and their equal composites remains necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-essentially-finite-type-ci-kernel-invariance",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The affine-local complete-intersection input used below the nodal chart: Morphisms Tag 01UG (lemma-local-complete-intersection), together with Algebra Tag 00SH (lemma-lci-global), characterizes the condition by complete-intersection local rings. Supporting algebra for the pointwise criterion: replace the regular-local quotient witnessing the local complete-intersection condition by the localization of a chosen polynomial presentation, using Algebra Tag 00SF (1) implies (2). Re-split of lem-trf-essentially-finite-type-ci-kernel-invariance: returned steps 1 and 2, with the polynomial numerator and unit-denominator witnesses used in step 4.",
+   "via": [
+    "lem-trf-essentially-finite-type-ci-kernel-invariance",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-lci-affine-open-locality",
+    "lem-trf-syntomic-geometric-fibres-affine-criterion",
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-compatible-polynomial-fraction-presentations",
+  "worker": "stage1",
+  "summary": "Unpacked the two localization models and finite polynomial presentations, lifted the finite generator images through the opposite surjections, and constructed and compared the two polynomial evaluations. Wrote out both unit-denominator calculations. All four steps are elementary applications of existing definition nodes; no new lemma is needed. Statement unchanged; no project attachment or Mathlib declaration covers the entire simultaneous construction.",
+  "blueprint": "Supports the existing ancestor chain from lem-trf-local-term-locality through the nodal chart and local complete-intersection criterion: the precise place already recorded in blueprint.from, namely the simultaneous polynomial presentation input to Tag 00SF. The latest blueprint local-term proof is unchanged by this auxiliary algebra construction."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-9263aeeea",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-9263aeeea (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and all 3 cited definition statements (essentially-finite-type with its explicit fraction relation, finite-type with n>=0, mv-polynomial universal property with uniqueness). Statement unchanged; it was statement-only from the Q96 re-split on 2026-10-22, so there is no older proof that could have been shortened. Step 1 directly instantiates theta, eta, e and d. Step 2: lifts come from surjectivity, and uf=vg is checked on each x_i and y_j and then follows by uniqueness. Steps 3 and 4: f on the x-block equals theta∘(·/1)∘e by uniqueness. Then f(t)=theta(w/1) has inverse theta(1/w), and p f(t)=theta(b/1)=f(a); the cross terms are zero, so no zero divisor is cancelled. The same holds on the y-block. Sources: Stacks 00SF lemma-lci-local (algebra.tex:36080) does not print this construction, and the node says so in proof_origin; 00QM checked at line 12836. The parent ci-kernel-invariance step 1 uses exactly the item's conclusions, and they match the hypotheses of lem-trf-common-localization-surjective-diagram. Edge cases tested: r=s=0; P=k[t], Q=k; P=k(t); zero rings. No duplicate found by grep of dag/nodes. proof_deps equal the union of step uses, there is no SGA citation, no tool_uses, and no change. Minor: the report mentions citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompatiblePolynomialFractionPresentations",
+  "declaration": "Algebra.exists_compatible_polynomial_fraction_presentations",
+  "file": "lean/Sheaf/RingTheory/CompatiblePolynomialFractionPresentations.lean",
+  "statement": "theorem exists_compatible_polynomial_fraction_presentations (k : Type u) [Field k] (P : Type v) [CommRing P] [Algebra k P] [EssFiniteType k P] (Q : Type w) [CommRing Q] [Algebra k Q] [EssFiniteType k Q] (A : Type z) [CommRing A] [Algebra k A] (u : P →ₐ[k] A) (v : Q →ₐ[k] A) (hu : Function.Surjective u) (hv : Function.Surjective v) : ∃ (r s : ℕ) (p : Fin r → P) (q : Fin s → Q) (qLift : Fin s → P) (pLift : Fin r → Q) (f : MvPolynomial (Fin r ⊕ Fin s) k →ₐ[k] P) (g : MvPolynomial (Fin r ⊕ Fin s) k →ₐ[k] Q), (∀ i : Fin r, f (MvPolynomial.X (Sum.inl i)) = p i) ∧ (∀ j : Fin s, f (MvPolynomial.X (Sum.inr j)) = qLift j) ∧ (∀ i : Fin r, g (MvPolynomial.X (Sum.inl i)) = pLift i) ∧ (∀ j : Fin s, g (MvPolynomial.X (Sum.inr j)) = q j) ∧ (∀ j : Fin s, u (qLift j) = v (q j)) ∧ (∀ i : Fin r, v (pLift i) = u (p i)) ∧ u.comp f = v.comp g ∧ (∀ x : P, ∃ a t : MvPolynomial (Fin r) k, IsUnit (f (MvPolynomial.rename Sum.inl t)) ∧ x * f (MvPolynomial.rename Sum.inl t) = f (MvPolynomial.rename Sum.inl a)) ∧ (∀ y : Q, ∃ c z : MvPolynomial (Fin s) k, IsUnit (g (MvPolynomial.rename Sum.inr z)) ∧ y * g (MvPolynomial.rename Sum.inr z) = g (MvPolynomial.rename Sum.inr c))",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c49c45b80",
+  "group": "N5",
+  "result": "pass",
+  "note": "Every clause matches the node: field k; P and Q essentially of finite type (Algebra.EssFiniteType, the node's Mathlib match, used the same way by landed modules); arbitrary A; surjective u, v; the four variable equations; the two lift equations; u.comp f = v.comp g; the two unit-denominator fraction clauses on the rename Sum.inl / Sum.inr blocks. No extra assumptions. Empty blocks and zero rings covered; universes u, v, w, z independent and bound. The node is unchanged apart from its lean record, and lean.statement appears verbatim in the file. Docstrings give Stacks 00SF (algebra.tex:36080), 00QM (12836) and the blueprint id, and carry all four proof steps. No definitions or new nodes; proof is sorry only. No duplicate found in Mathlib, Sheaf or WeilConjectures. Report has Worker report and Second reading by N5 (same worker, noted, not a fault). No file changed, no compile run."
+ }
+}

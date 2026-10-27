@@ -53,6 +53,21 @@ theorem effectiveCartierDivisor_finite_over_field
       IsFinite (J.subschemeι ≫ X ↘ Spec (.of k)) ∧
       (letI := (J.subschemeι ≫ X ↘ Spec (.of k)).ΓAlgebra
        FiniteDimensional k (Γ(J.subscheme, ⊤))) := by
-  sorry
+  obtain ⟨_, _, hdense, hopen⟩ := hJ.compl_support_dense
+  have hnow : IsNowhereDense (Set.range J.subschemeι.base) := by
+    rw [J.range_subschemeι]
+    exact (isClosed_isNowhereDense_iff_compl.mpr
+      ⟨J.support.isClosed.isOpen_compl, hdense⟩).2
+  obtain ⟨hdim, hclosed⟩ :=
+    dim_le_zero_of_isNowhereDense (X ↘ Spec (.of k)) J.subschemeι hX hnow
+  obtain ⟨hfinite, haffine, hsections⟩ :=
+    proper_dim_zero_finite_over_field (J.subschemeι ≫ X ↘ Spec (.of k)) hdim
+  refine ⟨hdim, hclosed, ?_, haffine, hfinite, hsections⟩
+  rintro ⟨U, hU, hcontained⟩
+  apply hU
+  apply hopen U
+  intro x hx
+  rw [← J.range_subschemeι]
+  exact hcontained ⟨x, hx⟩
 
 end AlgebraicGeometry

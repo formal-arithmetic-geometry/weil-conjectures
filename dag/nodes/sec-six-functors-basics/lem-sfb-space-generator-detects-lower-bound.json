@@ -1,0 +1,400 @@
+{
+ "id": "lem-sfb-space-generator-detects-lower-bound",
+ "kind": "statement",
+ "title": "Perfect generators detect lower cohomological bounds on algebraic spaces",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. A perfect complex is etale locally represented by a bounded complex of direct summands of finite free modules [def-weil-pbc-strict-perfect-coefficient-package]. Derived tensor and pullback use K-flat resolutions, and derived global sections use K-injective resolutions. Let $S$ be a scheme and $X$ a quasi-compact quasi-separated algebraic space over $S$. Quasi-compact means every open cover of $|X|$ has a finite subcover; quasi-separated means the diagonal is quasi-compact. Let $G\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be perfect and a generator, meaning that for every $F$ in this category, vanishing of $\\operatorname{Hom}(G[n],F)$ for every integer $n$ implies $F\\simeq0$. For every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ the following are equivalent: (i) there is an integer $c$ with $\\mathcal H^j(K)=0$ for every $j<c$; (ii) $\\operatorname{Hom}_{D(\\mathcal O_X)}(G,K[j])=0$ for every sufficiently negative integer $j$; (iii) $R\\Gamma(X,G^\\vee\\otimes^{\\mathbf L}_{\\mathcal O_X}K)$ is cohomologically bounded below. Here $G^\\vee=R\\mathcal Hom_{\\mathcal O_X}(G,\\mathcal O_X)$ [def-pur-derived-internal-hom], and $R\\Gamma$ is [def-pur-ringed-site-zeroth-hypercohomology].",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFI, proposition-detecting-bounded-below, equivalences (1), (2)/(3), (6)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-derived-internal-hom",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Suppose (i), with $\\mathcal H^q(K)=0$ for $q<c$. Apply the finite-window lemma to $P=G$, obtaining $[a,b]$. Since $\\mathcal H^q(K[j])=\\mathcal H^{q+j}(K)$, this vanishes throughout $[a,b]$ whenever $j<c-b$. Consequently $\\operatorname{Hom}(G,K[j])=0$ for those $j$, proving (ii).",
+   "uses": [
+    "lem-sfb-space-perfect-ext-window"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, first paragraph: (1) implies (2)."
+   }
+  },
+  {
+   "text": "Perfect duality gives the derived isomorphism $G^\\vee\\otimes^{\\mathbf L}K\\simeq R\\mathcal Hom(G,K)$. The global derived-Hom sections model identifies $H^jR\\Gamma(X,R\\mathcal Hom(G,K))$ with $\\operatorname{Hom}(G,K[j])$ for every integer $j$. Applying $R\\Gamma$ to the displayed isomorphism therefore proves (ii) if and only if (iii), by the definition of bounded-below cohomology. No quasi-coherence of internal Hom or boundedness of $K$ is assumed here.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, second paragraph; sites-cohomology.tex Tag 08JJ and section-global-RHom."
+   }
+  },
+  {
+   "text": "Assume (ii). For any $E\\in C_X$ write $T_E(P)$ for eventual vanishing of $\\operatorname{Hom}(P,E[j])$ as $j\\to-\\infty$. This holds for zero, is invariant under isomorphisms, and passes to finite sums and retracts because the corresponding Hom groups are finite sums and retracts. For a shift $P[n]$, use $\\operatorname{Hom}(P[n],E[j])=\\operatorname{Hom}(P,E[(j)-(n)])$. Exactness of Hom out of distinguished triangles, also after rotating, proves two-out-of-three: choose $j$ smaller than both vanishing bounds, and also their translates by $1$, in the adjacent exact Hom terms. Thus the objects satisfying $T_E$ form a thick subcategory. The classical-generation lemma and (ii) give $T_K(P)$ for every perfect $P$. We shall prove that, on every qcqs algebraic space, this all-perfect-test condition forces a lower bound on $E$.",
+   "uses": [
+    "lem-sfb-space-perfect-generator-thick",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-pc-thick-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, third paragraph, (2)--(6) imply (7); written thick-closure argument."
+   }
+  },
+  {
+   "text": "First record the truncation consequence needed below. For perfect $P$ and $E\\in C_X$, $T_E(P)$ is equivalent to $T_{\\tau_{\\le a}E}(P)$ for every integer $a$. Indeed the standard truncation triangle is $\\tau_{\\le a}E\\to E\\to F\\to(\\tau_{\\le a}E)[1]$, where $F=\\tau_{>a}E$ is bounded below. The finite-window argument of step 1, applied to $P$ and $F$, makes $\\operatorname{Hom}(P,F[j])$ and $\\operatorname{Hom}(P,F[j-1])$ vanish for all sufficiently negative $j$. Hom into this triangle and its rotation then identifies the two other Hom groups in these degrees. The truncations have quasi-coherent cohomology because their cohomology sheaves are either those of $E$ or zero.",
+   "uses": [
+    "lem-sfb-space-perfect-ext-window",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFG, lemma-bounded-below-truncation and its proof."
+   }
+  },
+  {
+   "text": "Apply distinguished-square induction to the isomorphism-invariant property $\\mathcal P(W)$: every $E\\in C_W$ satisfying $T_E(P)$ for every perfect $P$ is bounded below. The affine base case uses $W=\\operatorname{Spec}A$ and $P=\\mathcal O_W$. The global-Hom model, with the source structure module in degree zero, computes $\\operatorname{Hom}(\\mathcal O_W,E[j])=H^jR\\Gamma(W,E)$. The affine etale derived-module equivalence has quasi-inverse $R\\Gamma$; its associated-module functor is exact and faithful. Thus a lower bound for $R\\Gamma(W,E)$ gives the same bound for the cohomology sheaves of $E$. This includes the zero ring and the empty affine scheme. It remains to verify the square condition, which steps 6--8 do.",
+   "uses": [
+    "lem-sfb-space-qcqs-distinguished-square-induction",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, affine base case, using spaces-perfect.tex Tag 071Q and the affine module equivalence."
+   }
+  },
+  {
+   "text": "Let $(i:U\\hookrightarrow W,p:V\\to W)$ be a square in that induction, and assume $\\mathcal P(U)$, $\\mathcal P(V)$ and $\\mathcal P(U\\times_WV)$. Let $E\\in C_W$ satisfy all perfect tests. Apply the supported Koszul localization lemma to this square. Its hypotheses are exactly qcqs $W$, quasi-compact open $U$ and affine $V$; its construction gives a perfect $B_W$. The test $T_E(B_W)$ supplies the hypothesis of that lemma and yields an integer $a$ and the canonical isomorphism $\\tau_{\\le a}E\\simeq\\tau_{\\le a}Ri_*(E|_U)$. This is an isomorphism of derived objects, not merely separate cohomology isomorphisms.",
+   "uses": [
+    "lem-sfb-space-supported-koszul-low-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, distinguished-square proof, supported Koszul complex and low-truncation comparison."
+   }
+  },
+  {
+   "text": "Put $M=Ri_*(E|_U)$. For every perfect $Q$ on $W$, step 4 and the comparison of step 6 give $T_M(Q)$ from $T_E(Q)$. Here $M\\in C_W$ by quasi-coherent direct image: the quasi-compact open immersion into qcqs $W$ is qcqs. For an arbitrary perfect $A$ on $U$, choose $A\\xrightarrow{s}i^*Q\\xrightarrow{r}A$ with $rs=1$ by the open-retract lemma. The derived adjunction identifies $\\operatorname{Hom}(Q,M[j])$ with $\\operatorname{Hom}(i^*Q,E|_U[j])$. The latter vanishes eventually, and $\\operatorname{Hom}(A,E|_U[j])$ is its retract (precompose with $r$ and then $s$). Thus $E|_U$ satisfies every perfect test, so $\\mathcal P(U)$ implies it is bounded below. The assumptions $\\mathcal P(V)$ and $\\mathcal P(U\\times_WV)$ are permitted but unnecessary in this strengthened square argument.",
+   "uses": [
+    "lem-sfb-space-perfect-open-retract",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, final paragraph, with 09IX applied to each perfect test on U rather than just a chosen generator."
+   }
+  },
+  {
+   "text": "Since $E|_U$ is bounded below, choose a bounded-below K-injective representative $I$ by the ringed-site bounded injective resolution lemma. The complex $i_*I$ computes $M=Ri_*(E|_U)$ and remains bounded below, since an additive functor takes zero objects to zero objects in the same degrees. Hence $M$ is bounded below. The comparison $\\tau_{\\le a}E\\simeq\\tau_{\\le a}M$ then gives $\\mathcal H^j(E)=0$ for $j<\\min(c,a+1)$, where $c$ is any lower bound for $M$. This verifies $\\mathcal P(W)$. The induction principle now proves $\\mathcal P(X)$. Apply it to the all-perfect tests for $K$ from step 3, obtaining (ii) implies (i). Together with steps 1--2, this proves all three equivalences.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-sfb-space-qcqs-distinguished-square-induction",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0GFI, concluding paragraph: bounded-below direct image and final truncation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-perfect-ext-window",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sfb-space-perfect-generator-thick",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "def-pc-thick-closure",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sfb-space-qcqs-distinguished-square-induction",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-supported-koszul-low-localization",
+  "lem-sfb-space-perfect-open-retract",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sc-bounded-below-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0GFI, proposition-detecting-bounded-below, with the all-perfect-test induction written explicitly; Tag 0GFG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A perfect generator detects bounded below quasi coherent derived complexes on a quasi compact quasi separated algebraic space via derived Hom",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If derived Hom from a perfect generator is bounded below then the target complex is bounded below",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect generator detecting bounded below complexes of quasi coherent sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_generators\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the local generators data at each index $i$ coincides with the gener\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{M : SheafOfModules.{u} R} (q : M.QuasicoherentData) : M.LocalGeneratorsData\", \"doc\": \"Given a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, this constructs the local generato\"}\n  {\"name\": \"HomologicalComplex.isGrothendieckAbelian\", \"module\": \"Mathlib.Algebra.Homology.GrothendieckAbelian\", \"type\": \"[Abelian C] [IsGrothendieckAbelian.{w} C] [c.HasNoLoop] [Small.{w} ι] :\\n  IsGrothendieckAbelian.{w} (HomologicalComplex C c)\", \"doc\": \"If $ \\\\mathcal{C} $ is a Grothendieck abelian category, $ \\\\iota $ is a small type, and $ c $ is a complex shape with no loops, then the category of homological complexes over $ \\\\mathcal{C} $ with shape\"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.localGeneratorsData_I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and its quasicoherent data $q$, the index $I$ of the local generator\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsBoundedBelow\", \"Hom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "detect.*bounded|bounded.*generat|generat.*bounded",
+   "results": "[grep] OK 15 hit(s)\n  {\"file\": \"Mathlib/SetTheory/Cardinal/Subfield.lean\", \"line\": \"16\", \"text\": \"generated by a set is bounded by the cardinality of the set unless it is finite.\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"23\", \"text\": \"* `BoundedRandom` class for objects that can be generated randomly inside a range;\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"59\", \"text\": \"/-- `BoundedRandom m α` gives us machinery to generate values of type `α` between certain bounds in\"}\n  {\"file\": \"Mathlib/Control/Random.lean\", \"line\": \"62\", \"text\": \"  /-- Sample a bounded element of this type from the provided generator. -/\"}\n  {\"file\": \"Mathlib/Probability/Martingale/OptionalSampling.lean\", \"line\": \"21\", \"text\": \"  bounded by `n` is the conditional expectation of `f n` with respect to the σ-algebra generated by\"}\n  {\"file\": \"Mathlib/MeasureTheory/MeasurableSpace/Card.lean\", \"line\": \"17\", \"text\": \"bounded by `(max #s 2) ^ ℵ₀`. This is stated in `MeasurableSpace.cardinal_generate_measurable_le`\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"57\", \"text\": \"  for all `t : ℝ`, the moment-generating function of `X` with respect to `κ ω'` is bounded by\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"68\", \"text\": \"  is `μ`-integrable and the moment-generating function of `X` is bounded by `exp (c * t ^ 2 / 2)`\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"140\", \"text\": \"the moment-generating function of `X` with respect to `κ ω'` is bounded by `exp (c * t ^ 2 / 2)`.\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"599\", \"text\": \"the moment-generating function of `X` is bounded by `exp (c * t ^ 2 / 2)` for all `t : ℝ`.\"}\n  {\"file\": \"Mathlib/Topology/UniformSpace/Cauchy.lean\", \"line\": \"988\", \"text\": \"/-- A totally bounded set is separable in countably generated uniform spaces. This can be obtained\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean\", \"line\": \"413\", \"text\": \"theorem AECover.integrable_of_lintegral_enorm_bounded [l.NeBot] [l.IsCountablyGenerated]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean\", \"line\": \"428\", \"text\": \"theorem AECover.integrable_of_lintegral_enorm_bounded' [l.NeBot] [l.IsCountablyGenerated]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean\", \"line\": \"440\", \"text\": \"theorem AECover.integrable_of_integral_norm_bounded [l.NeBot] [l.IsCountablyGenerated]\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/IntegralEqImproper.lean\", \"line\": \"461\", \"text\": \"theorem AECover.integrable_of_integral_bounded_of_nonneg_ae [l.NeBot] [l.IsCountablyGenerated]\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]enerator.*[Bb]ounded|[Bb]ounded.*[Gg]enerator",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/Control/Random.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsBoundedBelow\", \"Hom\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect generator detecting bounded below complexes of quasi coherent sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "SheafOfModules.QuasicoherentData.presentation",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_generators",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData",
+     "HomologicalComplex.isGrothendieckAbelian",
+     "SheafOfModules.Presentation",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_I"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect generator detects bounded below quasi coherent derived complexes on a quasi compact quasi separated algebraic space via derived Hom",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.isLE_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]enerator.*[Bb]ounded|[Bb]ounded.*[Gg]enerator",
+   "results": {
+    "hits": 1,
+    "top": [
+     "Mathlib/Control/Random.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsBoundedBelow\", \"Hom\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect generator detecting bounded below complexes of quasi coherent sheaves",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "SheafOfModules.QuasicoherentData.presentation",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_generators",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData",
+     "HomologicalComplex.isGrothendieckAbelian",
+     "SheafOfModules.Presentation",
+     "SheafOfModules.QuasicoherentData.localGeneratorsData_I"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect generator detects bounded below quasi coherent derived complexes on a quasi compact quasi separated algebraic space via derived Hom",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.isLE_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: generic derived bounds, underived scheme localizations, or unrelated notions; no algebraic-space assertion or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-test-relative-perfection",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces.",
+   "via": [
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-generator-detects-lower-bound",
+  "worker": "stage1",
+  "summary": "Proved the equivalence by perfect duality, classical generation, finite-window truncation, and elementary distinguished-square induction with supported Koszul localization. Four statement-only prerequisites; no statement change or Lean attachment.",
+  "blueprint": "Read blueprint/latest/sk-thm-sf-ctf-stability/_section.md and direct-images proof (3). This is the inherited relative-duality prerequisite through 0GFL and 0GFI, as specified in blueprint.from.place. The existing ancestor command returns None; retain the inherited null ancestor and extend its precise supporting place, as in the accepted compact-perfect-generator sibling. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic exactness of Hom into a triangle, used for truncation; no coefficient or geometric route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic exactness of Hom out of a triangle, used for thick stability; no coefficient or geometric route is replaced."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic bounded-below ringed-site injective resolution, used to see that direct image remains bounded below; no scheme-specific substitute is assumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sc-bounded-below-injective-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-ad7a9d9f2",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-ad7a9d9f2 (reviewer sub-agent of L); spot-checked: Read in full: the item's 8 steps and the 4 new nodes, against the Stacks sources 0GFI (whole proof), 0GFG, 09MB, 09IX, 09IY, 0GFC, 08GG, 08HK and perfect.tex 0GEK; all tags checked in tags/tags. The item statement is unchanged and matches 0GFI (1)⇔(2)⇔(6), including the sign Hom(G[-i],E)=Hom(G,E[i]). Step checks: step 1 window bound j<c−b is right; step 2 uses perfect duality plus the sections model; step 3 thick class via Hom-out-of-triangle exactness and the 0GFC node; step 4 is 0GFG written out (bound j≤a−b'); step 5 affine base via the 071Q realization (a_A exact and faithful, quasi-inverse RΓ); step 6 uses the supported Koszul node; step 7 uses the 09IX retract and replaces Bondal–van den Bergh plus 'Q|_U generates' with an all-perfect-tests property, a valid strengthening allowed by the induction node; step 8 bounded-below K-injective plus i_* gives H^j(E)=0 for j<min(c,a+1). proof_deps equals the union of uses. New nodes: each is statement-only, self-contained, carries the three search kinds and correct created/via. ext-window = 09MB(1); generator-thick = 0GFC; open-retract = 09IX as a retract; supported-koszul = 08HK/08GG/0GEK plus the U/V check. For the Koszul node I checked that T is a qc open with finite D(f_k) cover, that the Koszul complex is supported on V∖T, and the edge cases U=X (B=0) and U×V=∅ (B=O_V); no regularity is needed. No duplicates found by rg -L for the tags and keywords: lem-sc-compact-generator-ambient-thick, lem-sfb-space-perfect-localizing-generation and lem-pc-supported-detector-open-lift-core all differ. No new node restates an item clause. No SGA. Accepted tool uses: lem-sc-bounded-below-injective-resolution, the two Hom-triangle leaves, and the undeclared lem-sfb-derived-internal-hom-sections-model (generic, already a tool use of the unit and its siblings). Batch-5: every listed citation reaches sec-trace-formula only through the general definitions def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors and def-a1-space-open-subspace, or through general space calculus; none is a step of the trace formula or of Poincaré duality, so they are accepted. Advisory: blueprint.from.node is null, inherited along the 0GFL chain as in the accepted sibling. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGeneratorDetectsLowerBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.generator_detects_lower_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGeneratorDetectsLowerBound.lean",
+  "statement": "theorem generator_detects_lower_bound {S : Scheme.{u}} (X : AlgebraicSpace S) [HasDerivedCategory.{w} X.SmallModules] (hqc : CompactSpace (Point X.obj.obj)) (hqs : X.IsAbsolutelyQuasiSeparated) (G : X.DerivedQCoh) (hG : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} X.smallStructureSheaf G.obj) (hgen : ∀ F : X.DerivedQCoh, (∀ n : ℤ, Subsingleton (G.obj⟦n⟧ ⟶ F.obj)) → IsZero F.obj) (K : X.DerivedQCoh) : ((∃ c : ℤ, ∀ j : ℤ, j < c → IsZero ((DerivedCategory.homologyFunctor X.SmallModules j).obj K.obj)) ↔ (∃ c : ℤ, ∀ j : ℤ, j < c → Subsingleton (G.obj ⟶ K.obj⟦j⟧))) ∧ ((∃ c : ℤ, ∀ j : ℤ, j < c → Subsingleton (G.obj ⟶ K.obj⟦j⟧)) ↔ (∃ c : ℤ, ∀ j : ℤ, j < c → IsZero ((ringedSiteZerothHypercohomologyOfUniverses.{u, u, u, w} X.smallEtaleModelTopology X.smallStructureSheaf).obj ((X.derivedDualityModel.closed.tensor.obj (X.derivedHom.obj (op G.obj, X.derivedStructure), K.obj))⟦j⟧))))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fdf2614d",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read node, Stacks 0GFI (1),(2),(6), module, report, and dep decls (DerivedQCoh/derivedHom/derivedDualityModel, IsPerfectOnRingedSiteOfUniverses, ringedSiteZerothHypercohomologyOfUniverses, IsAbsolutelyQuasiSeparated). Hypotheses qc (CompactSpace Point), absolute qs, perfect G in D_QCoh, weak generator over D_QCoh match; (i)<->(ii) with sign Hom(G,K[j]) = Stacks Hom(G[-i],E); (iii) via H0 RGamma of j-shifts of RHom(G,O) tensor K, tensor pinned on K-flat reps so choice harmless. Universes u (small model) and free w consistent. Only item record changed; added stmt_deps are landed owners; statement verbatim; single sorry; docstrings with source/blueprint and 8 steps; both report sections present; imports exist. Edge cases empty X / zero ring / K=0 fine. No findings; no recompile (no file changed)."
+ }
+}

@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-nonarchimedean-prime-power-root-estimates",
+ "kind": "statement",
+ "title": "Nonarchimedean prime-power sum and root error bounds",
+ "statement": "Let $E$ be a field [def-weil-field] with a nonarchimedean real absolute value. Write $E^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring], and let $p>0$ be the characteristic of $E^\\circ/\\{x:|x|<1\\}$. Let $n\\ge0$, $q=p^n$, $t\\ge1$, and $x_1,\\ldots,x_t\\in E$. Then\n$$\\left|\\left(\\sum_{i=1}^t x_i\\right)^q-\\sum_{i=1}^t x_i^q\\right|\\le |p|\\max_{1\\le i\\le t}|x_i|^q.$$\nFor $u,v\\in E$ one also has\n$$|(u-v)^q-(u^q-v^q)|\\le |p|\\max(|u|,|v|)^q.$$\nIf $y_1,\\ldots,y_t,y\\in E$ satisfy $y_i^q=x_i$ and $y^q=\\sum_{i=1}^t x_i$, then, for every such choice of roots,\n$$\\left|y-\\sum_{i=1}^t y_i\\right|\\le |p|^{1/q}\\max_{1\\le i\\le t}|x_i|^{1/q}.$$\nHere $p$ in an absolute value denotes its image in $E$; all roots of nonnegative real numbers denote their nonnegative real roots.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemma 6.2.10(i)--(ii), printed p. 46; difference form by the same binomial estimate (including the sign term when p=2).",
+  "url": "https://arxiv.org/pdf/0707.3953v3"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Set $c=|p|$. The nonarchimedean axiom gives $|m\\cdot1_E|\\le1$ for every integer $m$: use induction for positive $m$ and $|-a|=|a|$ for negative $m$. Thus $0\\le c\\le1$, and if $p\\mid m$ then $|m\\cdot1_E|\\le c$ by multiplicativity. The residue quotient is a field: an element of $E^\\circ$ outside $\\{a:|a|<1\\}$ has norm $1$, hence its inverse also lies in $E^\\circ$. Its positive characteristic $p$ is prime, since a factorization $p=ab$ with $1<a,b<p$ would give two nonzero elements with zero product in that field. Also $q=p^n\\ge1$. If $n=0$, then $q=1$: both power errors are zero and the stipulated roots are $y_i=x_i$, $y=\\sum_i x_i$, so all three assertions hold. Henceforth assume $n>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial coefficient argument; agent-written nonarchimedean estimates from this arithmetic input. Temkin Lemma 6.2.10(i)--(ii), p.46, is WANTED in this clone."
+   }
+  },
+  {
+   "text": "For $0<j<q$, one has $v_p(j)<n$: otherwise $q=p^n$ divides the positive integer $j<q$. Apply [lem-pur-prime-power-binomial-divisibility] with $a=n$ and $k=j$. Since $n-v_p(j)\\ge1$, it gives $p\\mid\\binom qj$, and Step 1 gives $|\\binom qj|\\le c$. Apply [lem-pur-commutative-ring-binomial-expansion] in $E$ to $a,b\\in E$. After removing the two endpoint terms, each remaining monomial has norm at most $c M^q$, where $M=\\max(|a|,|b|)$, because $|a|^j|b|^{q-j}\\le M^q$. The finite-sum bound [lem-trf-nonarchimedean-finite-sums], applied with $N=|\\cdot|$ to this nonempty finite sum, yields\n$$|(a+b)^q-a^q-b^q|\\le c\\max(|a|,|b|)^q.$$\nThe bound also covers $M=0$, when $a=b=0$.",
+   "uses": [
+    "lem-pur-prime-power-binomial-divisibility",
+    "lem-pur-commutative-ring-binomial-expansion",
+    "lem-trf-nonarchimedean-finite-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial coefficient argument; agent-written nonarchimedean estimates from this arithmetic input. Temkin Lemma 6.2.10(i)--(ii), p.46, is WANTED in this clone."
+   }
+  },
+  {
+   "text": "Put $M=\\max_i|x_i|$ and $S_j=\\sum_{i=1}^j x_i$. The finite-sum bound [lem-trf-nonarchimedean-finite-sums] with $N=|\\cdot|$ gives $|S_j|\\le M$. Induct on $1\\le j\\le t$ with claim $|S_j^q-\\sum_{i=1}^j x_i^q|\\le c M^q$. For $j=1$ the error is zero. For the induction step write the new error as\n$$(S_j+x_{j+1})^q-S_j^q-x_{j+1}^q+\\left(S_j^q-\\sum_{i=1}^j x_i^q\\right).$$\nStep 2 bounds the first summand by $c M^q$, and the induction hypothesis bounds the second by the same number. The ultrametric inequality proves the claim at $j+1$. At $j=t$ it is the first asserted bound.",
+   "uses": [
+    "lem-trf-nonarchimedean-finite-sums"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial coefficient argument; agent-written nonarchimedean estimates from this arithmetic input. Temkin Lemma 6.2.10(i)--(ii), p.46, is WANTED in this clone."
+   }
+  },
+  {
+   "text": "Apply Step 2 to $u,-v$. If $p$ is odd then $q$ is odd, so $(-v)^q=-v^q$ and this is the difference bound. If $p=2$, then $q$ is even, and\n$$(u-v)^q-(u^q-v^q)=\\big((u-v)^q-u^q-(-v)^q\\big)+2v^q.$$\nThe first summand has norm at most $c\\max(|u|,|v|)^q$ by Step 2, and the second has norm $|2||v|^q=c|v|^q$. The ultrametric inequality gives the same bound. These cases exhaust primes $p$; in characteristic $2$ the last summand is simply zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial coefficient argument; agent-written nonarchimedean estimates from this arithmetic input. Temkin Lemma 6.2.10(i)--(ii), p.46, is WANTED in this clone."
+   }
+  },
+  {
+   "text": "For the stipulated roots put $B=\\sum_i y_i$ and $R=\\max_i|y_i|$, so $R^q=\\max_i|x_i|$. Multiplicativity and the finite-sum bound [lem-trf-nonarchimedean-finite-sums] with $N=|\\cdot|$ give $|B|\\le R$ and\n$$|y|^q=|\\sum_i x_i|\\le\\max_i|x_i|=R^q,$$\nhence $|y|\\le R$ because $q\\ge1$. Step 3, applied to the $y_i$, gives $|B^q-y^q|\\le c R^q$. Step 4, applied to $y,B$, gives $|(y-B)^q-(y^q-B^q)|\\le c R^q$. Adding these two errors and applying the ultrametric inequality yields $|y-B|^q\\le c R^q$. Taking nonnegative real $q$-th roots proves\n$$|y-\\sum_i y_i|\\le c^{1/q}R=|p|^{1/q}\\max_i|x_i|^{1/q}.$$\nIf $R=0$ the same inequalities force $y=B=0$; if $c=0$ they force $y=B$. Thus this argument also covers zero inputs and equal characteristic, and it applies to every choice of roots without asserting their existence.",
+   "uses": [
+    "lem-trf-nonarchimedean-finite-sums"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0545, lemma-help-with-powers, binomial coefficient argument; agent-written nonarchimedean estimates from this arithmetic input. Temkin Lemma 6.2.10(i)--(ii), p.46, is WANTED in this clone."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-prime-power-binomial-divisibility",
+  "lem-pur-commutative-ring-binomial-expansion",
+  "lem-trf-nonarchimedean-finite-sums"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0545, lemma-help-with-powers, for the coefficient argument only; the five-step nonarchimedean argument is supplied by NN, since the cited Temkin PDF is not available in this clone."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "norm.*sum.*pow|norm.*pow.*sum|norm.*root.*sub|pow.*sub.*sum",
+   "results": "{\"t\": \"2026-10-24T09:46:33Z\", \"tool\": \"grep\", \"query\": \"norm.*sum.*pow|norm.*pow.*sum|norm.*root.*sub|pow.*sub.*sum\", \"sub\": \"Analysis/Normed\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Lp/LpEquiv.lean\", \"Mathlib/Analysis/Normed/Lp/lpHolder.lean\", \"Mathlib/Analysis/Normed/Lp/lpSpace.lean\", \"Mathlib/Analysis/Normed/Lp/lpSpace.lean\", \"Mathlib/Analysis/Normed/Lp/lpSpace.lean\", \"Mathlib/Analysis/Normed/Lp/lpSpace.lean\"], \"digest\": \"b0c2c7acb8a45f66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the equal-characteristic Frobenius identities and general ultrametric sum bounds do not give the mixed-characteristic error or arbitrary-root estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a nonarchimedean field of residue characteristic p the norm of a sum raised to p to the n minus the sum of those powers is bounded by norm p times the maximum norm power",
+   "results": "{\"t\": \"2026-10-24T09:46:33Z\", \"tool\": \"leansearch\", \"query\": \"In a nonarchimedean field of residue characteristic p the norm of a sum raised to p to the n minus the sum of those powers is bounded by norm p times the maximum norm power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Padic.nonarchimedean\", \"sum_pow_char_pow\", \"IsNonarchimedean.add_pow_le\", \"padicNorm.sum_le'\", \"IsUltrametricDist.nnnorm_pow_le\", \"padicNorm.sum_le\", \"PadicSeq.norm_nonarchimedean\", \"PadicComplex.isNonarchimedean\"], \"digest\": \"568e1d105740c84e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the equal-characteristic Frobenius identities and general ultrametric sum bounds do not give the mixed-characteristic error or arbitrary-root estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUltrametricDist, Finset.sum, HPow.hPow",
+   "results": "{\"t\": \"2026-10-24T09:46:34Z\", \"tool\": \"loogle\", \"query\": \"IsUltrametricDist, Finset.sum, HPow.hPow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the equal-characteristic Frobenius identities and general ultrametric sum bounds do not give the mixed-characteristic error or arbitrary-root estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean valued field residue characteristic p norm of a sum to the p power minus the sum of p powers and approximation of p power roots",
+   "results": "{\"t\": \"2026-10-24T09:46:34Z\", \"tool\": \"leanfinder\", \"query\": \"Nonarchimedean valued field residue characteristic p norm of a sum to the p power minus the sum of p powers and approximation of p power roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.valAux\", \"RingSeminorm.exists_index_pow_le\", \"PreTilt.valAux_eq\", \"PreTilt.valAux_add\", \"PadicSeq.norm_values_discrete\", \"hensels_lemma\", \"PadicInt.exists_mem_range_of_norm_rat_le_one\", \"Padic.norm_eq_of_norm_add_lt_right\"], \"digest\": \"8f57578191b33508\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the equal-characteristic Frobenius identities and general ultrametric sum bounds do not give the mixed-characteristic error or arbitrary-root estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "sum_pow_char_pow|add_pow_char_pow|norm.*sum.*le_max",
+   "results": "{\"t\": \"2026-10-24T09:47:16Z\", \"tool\": \"grep\", \"query\": \"sum_pow_char_pow|add_pow_char_pow|norm.*sum.*le_max\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\"], \"digest\": \"4fd2eae4a0092e47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the equal-characteristic Frobenius identities and general ultrametric sum bounds do not give the mixed-characteristic error or arbitrary-root estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ultrametric estimate for sums of arbitrary chosen p power roots in mixed characteristic",
+   "results": "{\"t\": \"2026-10-24T09:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"Ultrametric estimate for sums of arbitrary chosen p power roots in mixed characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingSeminorm.exists_index_pow_le\", \"PreTilt.valAux_add\", \"padicNorm.sum_le'\", \"padicNorm.sum_lt'\", \"padicNorm.sum_le\", \"padicNorm.sum_lt\", \"PadicInt.appr_lt\", \"IsNonarchimedean.add_pow_le\"], \"digest\": \"cfd57091f10f72d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the equal-characteristic Frobenius identities and general ultrametric sum bounds do not give the mixed-characteristic error or arbitrary-root estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "add_pow_le|dvd_choose_pow|valAux_add|sum_pow_char_pow",
+   "results": "{\"t\": \"2026-10-24T11:55:31Z\", \"tool\": \"grep\", \"query\": \"add_pow_le|dvd_choose_pow|valAux_add|sum_pow_char_pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/MahlerBasis.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Tower.lean\", \"Mathlib/Algebra/Order/Ring/IsNonarchimedean.lean\", \"Mathlib/Algebra/Order/Ring/Basic.lean\", \"Mathlib/Algebra/Order/Ring/Basic.lean\", \"Mathlib/Algebra/Order/Ring/Basic.lean\", \"Mathlib/Algebra/Order/Ring/Basic.lean\", \"Mathlib/Algebra/Order/Ring/Basic.lean\"], \"digest\": \"4006d1e797400fb9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give only ultrametric power bounds, characteristic-p Frobenius identities, or tilt/perfect-closure statements; none states all three mixed-characteristic and arbitrary-root bounds. Existing DAG nodes supply the needed binomial ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a nonarchimedean field arbitrary choices of p power roots of summands differ from a root of their sum by at most norm p to the reciprocal power times the maximum root norm",
+   "results": "{\"t\": \"2026-10-24T11:55:31Z\", \"tool\": \"leansearch\", \"query\": \"In a nonarchimedean field arbitrary choices of p power roots of summands differ from a root of their sum by at most norm p to the reciprocal power times the maximum root norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"padicNorm.sum_le'\", \"Padic.nonarchimedean\", \"padicNorm.sum_lt'\", \"Padic.add_eq_max_of_ne\", \"padicNorm.sum_le\", \"PadicSeq.norm_nonarchimedean\", \"PadicComplex.isNonarchimedean\", \"padicNormE.nonarchimedean'\"], \"digest\": \"c28e5de571000cd6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give only ultrametric power bounds, characteristic-p Frobenius identities, or tilt/perfect-closure statements; none states all three mixed-characteristic and arbitrary-root bounds. Existing DAG nodes supply the needed binomial ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNonarchimedean, HPow.hPow",
+   "results": "{\"t\": \"2026-10-24T11:55:31Z\", \"tool\": \"loogle\", \"query\": \"IsNonarchimedean, HPow.hPow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsNonarchimedean.add_pow_le\", \"RingSeminorm.exists_index_pow_le\", \"IsNonarchimedean.eval_mvPolynomial_le\"], \"digest\": \"29fca2118b28de64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give only ultrametric power bounds, characteristic-p Frobenius identities, or tilt/perfect-closure statements; none states all three mixed-characteristic and arbitrary-root bounds. Existing DAG nodes supply the needed binomial ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonarchimedean field residue characteristic p bound the error between a p power of a finite sum and the sum of p powers by absolute value p times maximum norm power",
+   "results": "{\"t\": \"2026-10-24T11:55:32Z\", \"tool\": \"leanfinder\", \"query\": \"Nonarchimedean field residue characteristic p bound the error between a p power of a finite sum and the sum of p powers by absolute value p times maximum norm power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNonarchimedean.add_pow_le\", \"RingSeminorm.exists_index_pow_le\", \"padicNorm.sum_le\", \"padicNorm.sum_lt'\", \"padicNorm.sum_le'\", \"padicNorm.sum_lt\", \"Padic.nonarchimedean\", \"PadicSeq.norm_nonarchimedean\"], \"digest\": \"955d2c3f6082c541\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give only ultrametric power bounds, characteristic-p Frobenius identities, or tilt/perfect-closure statements; none states all three mixed-characteristic and arbitrary-root bounds. Existing DAG nodes supply the needed binomial ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(add|sum|sub).*pow|pow.*(add|sub).*norm|root.*norm",
+   "results": "{\"t\": \"2026-10-24T11:56:00Z\", \"tool\": \"grep\", \"query\": \"norm.*(add|sum|sub).*pow|pow.*(add|sub).*norm|root.*norm\", \"sub\": \"RingTheory/Perfection.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give only ultrametric power bounds, characteristic-p Frobenius identities, or tilt/perfect-closure statements; none states all three mixed-characteristic and arbitrary-root bounds. Existing DAG nodes supply the needed binomial ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ultrametric bound for the Frobenius defect in mixed characteristic and for the difference of arbitrary chosen prime power roots",
+   "results": "{\"t\": \"2026-10-24T11:56:02Z\", \"tool\": \"leanfinder\", \"query\": \"Ultrametric bound for the Frobenius defect in mixed characteristic and for the difference of arbitrary chosen prime power roots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectClosure.R\", \"PerfectClosure.R.sound\", \"PerfectClosure.R.intro\", \"WittVector.exists_frobenius_solution_fractionRing\", \"PerfectionMap.of\", \"sub_mem_pNilradical_iff_pow_expChar_pow_eq\", \"PerfectClosure.frobenius_mk\", \"PerfectClosure.isPRadical\"], \"digest\": \"ae6af787697390f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give only ultrametric power bounds, characteristic-p Frobenius identities, or tilt/perfect-closure statements; none states all three mixed-characteristic and arbitrary-root bounds. Existing DAG nodes supply the needed binomial ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-special-coset-leading-bound",
+  "date": "2026-10-24",
+  "group": "Q60"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Proof of Theorem 6.3.1(i), type 4 argument, printed p. 50, specialized to algebraically closed k: every finite extension is immediate, and the proof constructs a topological generator. Supporting fact: Proposition 6.2.4, type 4 case, printed p. 42, with the finite moderately ramified extension equal to K itself; proof printed pp. 47–48. Polynomial degree reduction, Proposition 6.2.4 type 4 proof, printed p. 47: the prime-to-p leading-term estimate furnished by Lemma 6.2.9. Supporting input: Lemma 6.2.10(i)--(ii), printed p. 46; difference form by the same binomial estimate (including the sign term when p=2).",
+   "via": [
+    "lem-trf-analytic-special-coset-leading-bound",
+    "lem-trf-analytic-coset-generator-reduction",
+    "lem-trf-analytic-immediate-rationality",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-nonarchimedean-prime-power-root-estimates",
+  "worker": "stage1",
+  "summary": "Retained the complete statement and assembled all three estimates from the existing Mathlib binomial expansion and coefficient divisibility nodes. Made finite-sum induction, p=2 sign correction, arbitrary-root comparison, n=0, and zero cases explicit. No new nodes; missing Temkin source recorded WANTED; proof marked agent-written.",
+  "blueprint": "The inherited historical nearby-cycle/semistable-alteration branch from lem-trf-local-term-locality (1)--(2), specifically Temkin 6.2.10 used in the analytic special-coset leading bound. The latest blueprint ancestor now uses the contracting-correspondence route; this delivery only supplies the already assigned lower arithmetic item."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-b47f566d3",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-b47f566d3 (reviewer sub-agent of L); spot-checked: I read the whole delivery; its mathematics is correct. Shape: one commit; the item's statement and stmt_deps are identical to clones/live; status goes from unsplit to split; the six existing mathlib_searches are kept; there are no new nodes. I checked all five steps. Step 1: |m·1|<=1 and |m|<=|p| when p|m; the residue ring is a field, so p is prime; n=0 is trivial. Step 2: v_p(j)<n for 0<j<q, so lem-pur-prime-power-binomial-divisibility (key₁, Frobenius.lean:116, read) gives p|C(q,j); add_pow (Sum.lean:76, read) then bounds the middle terms by |p|M^q. Step 3: the induction claim, base and step are set up properly. Step 4: p=2 with q even, the 2v^q term has norm |p||v|^q; I re-expanded this myself. Step 5: |y|,|B|<=R, then Step 3 and Step 4 combine and the q-th root finishes, for every choice of roots. Cases tested: n=0, t=1, all-zero inputs, equal characteristic (|p|=0), trivial absolute value, p=2. The Temkin 6.2.10 PDF is not in literature; the statement is unchanged and the proof is marked agent-written. Stacks 0545 (lemma-help-with-powers) read for the coefficient argument. No duplicate in the DAG (rg -L over dag/nodes) and no cycle; the cited cross-unit nodes are Mathlib leaves, so no tool_uses are needed. FIX (C1/C5): steps 2, 3 and 5 used repeated ultrametric addition without citing the existing same-unit Mathlib leaf lem-trf-nonarchimedean-finite-sums. I added it to those steps and to proof_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.NonarchimedeanPrimePowerRootEstimates",
+  "declaration": "AbsoluteValue.nonarchimedean_prime_power_root_estimates",
+  "file": "lean/Sheaf/FieldTheory/NonarchimedeanPrimePowerRootEstimates.lean",
+  "statement": "theorem nonarchimedean_prime_power_root_estimates {E : Type u} [Field E] (abv : AbsoluteValue E ℝ) (hna : IsNonarchimedean abv) (A : ValuationSubring E) (hA : ∀ z : E, z ∈ A ↔ abv z ≤ 1) (p : ℕ) (hp : 0 < p) [CharP (IsLocalRing.ResidueField A) p] (n t : ℕ) (ht : 0 < t) (x : Fin t → E) : abv ((∑ i : Fin t, x i) ^ (p ^ n) - ∑ i : Fin t, x i ^ (p ^ n)) ≤ abv (p : E) * (⨆ i : Fin t, abv (x i)) ^ (p ^ n) ∧ (∀ a b : E, abv ((a - b) ^ (p ^ n) - (a ^ (p ^ n) - b ^ (p ^ n))) ≤ abv (p : E) * max (abv a) (abv b) ^ (p ^ n)) ∧ (∀ (ys : Fin t → E) (y : E), (∀ i : Fin t, ys i ^ (p ^ n) = x i) → y ^ (p ^ n) = ∑ i : Fin t, x i → abv (y - ∑ i : Fin t, ys i) ≤ abv (p : E) ^ (1 / ((p ^ n : ℕ) : ℝ)) * (⨆ i : Fin t, abv (x i)) ^ (1 / ((p ^ n : ℕ) : ℝ)))",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df49cd67b",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Node changes only in lean (live null); one sorry'd theorem AbsoluteValue.nonarchimedean_prime_power_root_estimates, no defs; lean.statement verbatim. Clause-by-clause match: Field E (free universe u), AbsoluteValue E ℝ + IsNonarchimedean, ValuationSubring A with hA: z∈A↔abv z≤1 (closed ball is always a valuation subring, so not vacuous, unique by ext), CharP (ResidueField A) p with 0<p = residue char of E°/{|x|<1}; n:ℕ, q=p^n; 0<t, Fin t (iSup = max); difference ∀a b; root clause ∀ ys y with both root equations, no existence asserted; rpow 1/((p^n:ℕ):ℝ) = nonnegative roots. Maths re-derived (binomial p|C(q,j), induction, p=2 term 2v^q, root step |y|,|B|≤R); edge cases n=0, t=1, zero inputs, |p|=0, trivial abs value, p=2 fine. No extra hypotheses; docstrings carry source place, blueprint tag and 5-step plan; report has both sections; no duplicate declaration; citers have no Lean. No compile (no file changed). Note: parallel NL b9a04c88 delivers same item/file (Valuation E ℝ≥0 encoding), both unlanded; only one should land, the later must not rebind."
+ }
+}

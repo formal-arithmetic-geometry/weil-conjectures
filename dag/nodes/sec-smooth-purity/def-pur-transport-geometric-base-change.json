@@ -1,0 +1,99 @@
+{
+ "id": "def-pur-transport-geometric-base-change",
+ "kind": "definition",
+ "title": "GeometricOperations coordinates for smooth purity",
+ "status": "split",
+ "import_flags": [
+  "unreachable"
+ ],
+ "statement": "Use [def-pur-transport-adjunction-family]. For a smooth geometric index and a morphism $Y'\\to Y$ in the standing setting, its base-change index has source the literal fiber product, map its second projection, the same dimension, and the base-changed compactification. For two composable smooth indices, the composite has the literal composite map, dimension the sum, and the compactification formed from a boundary compactification of the proper/open middle composite. All maps retain their structure morphisms over the same base field.",
+ "stmt_deps": [
+  "def-pur-transport-adjunction-family"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Coefficient, functor, counit and normalization clauses; coordinate interface TransportGeometricOperations"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical normalized root Tate coefficient pullback scalar extension compact support adjunction counit equations",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app, .counit, .Counit.map, .Counit.map_hom_apply, RestrictionCoextensionAdj.counit'_app, CompHausLike.LocallyConstant.counit, .adjunction_counit. Generic scalar adjunctions only.",
+   "date": "2026-10-25",
+   "verdict": "No combined normalized pro-etale coordinate interface; reuse the generic scalar adjunction constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Unique: rightAdjointUniq and its identity, composition and counit laws.",
+   "date": "2026-10-25",
+   "verdict": "Reuse right-adjoint uniqueness; none is the coefficient/geometric/root/integration coordinate interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"PurityTransport|smooth_purity_transport|AffineNormalized|ScalarLineCoordinates|LinePullCoordinates\" lean/WeilConjectures lean/Sheaf lean/.lake/packages/mathlib/Mathlib; rg -l \"def-pur-transport-(concrete-coefficients|root-coordinates|finite-encoding)\" dag/nodes; blueprint_refs.py search \"normalized root Tate\"",
+   "results": "No declaration with these coordinate names; upstream blueprint marker hits SmoothPurity/Defs and EtaleCohomology/Purity/Smooth/Transport concern finite or discrete integral categories. The latter theorem only preserves derived completeness. No matching new node ids; blueprint search returned 0 nodes. Existing root, coefficient, derived and finite-encoding ingredients are imported, not reconstructed.",
+   "date": "2026-10-25",
+   "verdict": "Missing packaging and canonical comparison coordinates, not a replacement coefficient formalism."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-purity-transport",
+  "date": "2026-10-25",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "The canonical maps and restricted adjunctions in the smooth-purity transport statement: TransportGeometricOperations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.TransportGeometricOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.PurityTransport.SmoothDatum.baseChange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PurityTransport.SmoothDatum.baseChange",
+   "AlgebraicGeometry.ProEtale.PurityTransport.SmoothDatum.comp"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/TransportGeometricOperations.lean",
+  "statement": "def SmoothDatum.baseChange {D : WeilConjectures.FiniteFieldDatum.{u}} (s : SmoothDatum D) (Y' : Over (Spec (.of D.k))) [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom] (v : Y'.left ⟶ s.Y.left) [v.IsOver (Spec (.of D.k))] : SmoothDatum D",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85feb8152",
+  "group": "NB",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85feb8152",
+  "group": "NB",
+  "result": "fix",
+  "note": "One fault, fixed: TransportSources.sourceComp took the derived braiding from DerivedCategory.nonempty_braidedCategory.some, an arbitrary braiding from a Nonempty, so the source compositor and the CompositionCompatible clause were not canonical (H3). fixes/TransportSources.lean is a complete replacement using the named Koszul braiding DerivedCategory.braidedCategory' (the witness of that Nonempty), with its import and one docstring sentence added; no signature or JSON change; compiled once via nt_compile --json with its six snapshot siblings, no errors (29.3 s). Otherwise correct: item statement verbatim; the Brown comparison gives the unique counit-compatible natural iso to every restricted Brown adjoint; the explicit adjunction family carries the scalar (listed maps, non-flat finite), base-change and composition counit equations and the finite affine-line integration normalization; étale clause follows the 10-25 correction (no d=0 claim); curve clause gives single(tateModule)[2] and H^i=0 for i≠-2. Every ∃ or choice is pinned: line-pullback, scalar-line and finite-line coordinates, ∃! rootComparison, the exists_extendScalarsMonoidal δ normalization, open exchange fixed by its inverse. No hollow definitions; sorry only in theorems with proofs in words; docstrings present; universes OK (finite A in CommRingCat.{0}, no loss); no pro-étale substitute; 24 new node statements match their files and have no dependency cycle; IsLocalizingAdmissibleCoefficient is an up-to-isomorphism predicate, not a duplicate of Coefficient. Advisory: CompositionCompatible quantifies over normalized interchanges whose existence is the published compositionInterchangeIsNormalized fact."
+ }
+}

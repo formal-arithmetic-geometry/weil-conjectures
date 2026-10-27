@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-sl2-lifted-root-gauss-relations",
+ "kind": "statement",
+ "title": "Gauss relations for equivariant root lifts in a central extension",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme is a group object in schemes over $S$, with multiplication, inverse and identity obeying the group identities; it is separated when its diagonal is a closed immersion [def-weil-closed-immersion]. On $S$-schemes use the fppf topology, whose covering families are jointly surjective flat morphisms locally of finite presentation. Write $\\mathbf G_a(T)=\\Gamma(T,\\mathcal O_T)$ with addition and $\\mathbf G_m(T)=\\Gamma(T,\\mathcal O_T)^\\times$ with multiplication, for every $S$-scheme $T$. A group sheaf means a group-valued functor with unique gluing of compatible sections for these coverings. A central exact sequence means that its first map identifies its source with the kernel of its second map, the second map is locally surjective for this topology, and the kernel commutes with every local section of the middle sheaf. Write $G=\\operatorname{SL}_{2,S}$ for the group sheaf of determinant-one $2\\times2$ matrices of global functions, and put $x(u)=I_2+uE_{12}$, $y(v)=I_2+vE_{21}$, where $I_2$ is the identity matrix and $E_{ij}$ has entry $1$ at $(i,j)$ and zero elsewhere, and $h(t)=\\operatorname{diag}(t,t^{-1})$. Let $Z$ be a separated commutative $S$-group scheme and $1\\to Z\\to E\\xrightarrow{p}G\\to1$ a central exact sequence of group sheaves. Let $D=h(\\mathbf G_m)$ and assume $D'=p^{-1}(D)$ is commutative. The conjugation action of $E$ on itself factors through $G$ by centrality. Suppose group-sheaf homomorphisms $x',y':\\mathbf G_a\\to E$ lift $x,y$ and are equivariant for $D$, with $h(s)\\cdot x'(u)=x'(s^2u)$ and $h(s)\\cdot y'(v)=y'(s^{-2}v)$. For a local unit $t$, define $g'(t)=y'(-t^{-1})x'(t)y'(-t^{-1})$ and $h'(t)=g'(t)g'(1)^{-1}$. Then $h':\\mathbf G_m\\to D'$ is a group-sheaf homomorphism lifting $h$, and $h'(s)g'(t)=g'(st)$ for local units $s,t$. For all local sections $u,v$ for which $w=1+uv$ is a unit, the following identities hold, without requiring $u$ or $v$ to be units:\n$$x'(u)y'(v)=y'(v/w)h'(w)x'(u/w),\\qquad y'(v)x'(u)=x'(u/w)h'(w)^{-1}y'(v/w).$$",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 4.3.3 and proof, printed pp.128--129, followed by equation (4.3.1) and its removal of the unit condition, printed pp.129--130. Read online on 2026-10-24; local archival copy WANTED. No Stacks tag states this lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Work on an arbitrary $S$-scheme $T$ and abbreviate $X(u)=x'(u)$, $Y(v)=y'(v)$, $G(t)=g'(t)$ and $H(t)=h'(t)$. Matrix multiplication gives $p(G(t))=\\left(\\begin{smallmatrix}0&t\\\\-t^{-1}&0\\end{smallmatrix}\\right)$ and $p(H(t))=\\operatorname{diag}(t,t^{-1})$. Thus $H(t)\\in D'(T)$ and $H(1)=1$. Centrality identifies conjugation by $H(s)$ with the given $h(s)$-action, hence $H(s)X(u)H(s)^{-1}=X(s^2u)$ and $H(s)Y(v)H(s)^{-1}=Y(s^{-2}v)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.3.3, preliminary definitions and first paragraph of proof, p.128."
+   }
+  },
+  {
+   "text": "Substitute these two conjugation identities into the three factors defining $G(t)$ to get $H(s)G(t)H(s)^{-1}=G(s^2t)$. Divide this equality by its case $t=1$ to obtain $H(s)H(t)H(s)^{-1}=H(s^2t)H(s^2)^{-1}$. The left side is $H(t)$ because $D'$ is commutative. Given arbitrary units $a,t$ on $T$, use [lem-sfb-fppf-local-unit-square-root] to pass to an fppf covering on which $a=s^2$ with $s$ a unit. There the equality reads $H(at)=H(t)H(a)=H(a)H(t)$. Equality descends because $E$ is an fppf sheaf. Together with $H(1)=1$ and the projection computed in step 1 this proves that the natural transformation $H:\\mathbf G_m\\to D'$ is a homomorphism lifting $h$.",
+   "uses": [
+    "lem-sfb-fppf-local-unit-square-root"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.3.3, proof, p.128; the passage from squares to arbitrary units is made explicit using Stacks Tag 040N."
+   }
+  },
+  {
+   "text": "Since $G(t)=H(t)G(1)$, multiplicativity gives $H(s)G(t)=G(st)$. Expand both sides and move $H(s)$ across the first $Y$-factor by step 1. Cancel the last $Y(-1/t)$ on the right and multiply on the left by $Y(1/(st))$. Additivity of $Y$ yields\n$$Y((s-1)/(s^2t))H(s)X(t)=X(st)Y((s-1)/(st)).$$\nFor $u$ and $w=1+uv$ units, put $s=w$ and $t=u/w$; then $st=u$, $(s-1)/(st)=v$, and $(s-1)/(s^2t)=v/w$. Thus $X(u)Y(v)=Y(v/w)H(w)X(u/w)$ whenever $u,w$ are units.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 4.3.3, last sentence, and equation (4.3.1), p.129; cancellation and substitution written out."
+   }
+  },
+  {
+   "text": "Now suppose only that $w=1+uv$ is a unit. By [lem-sfb-fppf-local-two-unit-decomposition], fppf-locally write $u=a+b$ with $a,b,q=1+bv$ units. Apply step 3 first to $(b,v)$ and then to $(a,v/q)$; their Gauss parameters are respectively $q$ and $1+av/q=w/q$, both units. The result is\n$$X(u)Y(v)=Y(v/w)H(w/q)X(aq/w)H(q)X(b/q).$$\nThe conjugation formula of step 1 gives $X(aq/w)H(q)=H(q)X(a/(qw))$. Multiplicativity of $H$ and additivity of $X$ therefore reduce the right side to $Y(v/w)H(w)X(u/w)$, since $a/(qw)+b/q=(a+bw)/(qw)=u/w$ using $u=a+b$ and $w=1+uv$. This is an equality in $E$ on a covering, so the sheaf axiom gives it on $T$.",
+   "uses": [
+    "lem-sfb-fppf-local-two-unit-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "After equation (4.3.1), pp.129--130; local decomposition and two successive applications of the unit case."
+   }
+  },
+  {
+   "text": "Apply step 4 to $(-u,-v)$, whose parameter is again $w=1+uv$. Taking inverses and using that $X,Y$ are homomorphisms from the additive group gives\n$$Y(v)X(u)=X(u/w)H(w)^{-1}Y(v/w).$$\nAll constructions and equalities commute with restriction to $S$-schemes, so these are the required identities of group sheaves, with no unit condition on $u$ or $v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "The inverse relation immediately after the simplification of (4.3.1), p.130."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fppf-local-unit-square-root",
+  "lem-sfb-fppf-local-two-unit-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Lemma 4.3.3 and equation (4.3.1), pp.128--130, read online; local archival copy WANTED. Explicit square-root descent and unit-removal algebra supplied by Q102."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a central extension of SL2 equivariant lifts of upper and lower root groups define a multiplicative diagonal lift and satisfy the Gauss decomposition relation",
+   "results": "{\"t\": \"2026-10-24T07:53:15Z\", \"tool\": \"leanfinder\", \"query\": \"In a central extension of SL2 equivariant lifts of upper and lower root groups define a multiplicative diagonal lift and satisfy the Gauss decomposition relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_symm_apply_coe_coe\"], \"digest\": \"930d175504cbd53f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SL2 triples in Lie algebras, centres, and ordinary matrix multiplication/transvections do not give relations among lifted elements in an arbitrary central extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifts of elementary unipotent matrices to central extensions satisfy x(u)y(v)=y(v/(1+uv))h(1+uv)x(u/(1+uv))",
+   "results": "{\"t\": \"2026-10-24T07:53:12Z\", \"tool\": \"leansearch\", \"query\": \"Lifts of elementary unipotent matrices to central extensions satisfy x(u)y(v)=y(v/(1+uv))h(1+uv)x(u/(1+uv))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniversalEnvelopingAlgebra.lift_ι_apply'\", \"UniversalEnvelopingAlgebra.lift_ι_apply\", \"UniversalEnvelopingAlgebra.ι_comp_lift\", \"ULift.instIsCentralScalar\", \"ULift.group\", \"UniversalEnvelopingAlgebra.lift_unique\", \"Con.liftOnUnits_mk\", \"UniversalEnvelopingAlgebra.lift\"], \"digest\": \"556d4c12f6df2bf6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SL2 triples in Lie algebras, centres, and ordinary matrix multiplication/transvections do not give relations among lifted elements in an arbitrary central extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"mul\"",
+   "results": "{\"t\": \"2026-10-24T07:53:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"mul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.hasMul\", \"Matrix.instDistribMulActionSpecialLinearGroupForall\", \"Matrix.SpecialLinearGroup.transvection_mul_neg\", \"Matrix.instSMulCommClassSpecialLinearGroupForall\", \"Matrix.SpecialLinearGroup.transvection_mulVec_single_self\", \"Matrix.SpecialLinearGroup.coe_mul\", \"Matrix.SpecialLinearGroup.transvection_smul_single_fst\", \"Matrix.SpecialLinearGroup.transvection_mulVec_single_other\"], \"digest\": \"4de55b130009e5c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SL2 triples in Lie algebras, centres, and ordinary matrix multiplication/transvections do not give relations among lifted elements in an arbitrary central extension."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss|central.?extension|root.*lift|lift.*root",
+   "results": "{\"t\": \"2026-10-24T07:53:12Z\", \"tool\": \"grep\", \"query\": \"Gauss|central.?extension|root.*lift|lift.*root\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/SchurComplement.lean\", \"Mathlib/LinearAlgebra/Matrix/Transvection.lean\", \"Mathlib/LinearAlgebra/Matrix/Rank.lean\"], \"digest\": \"3ce953127d57d034\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: SL2 triples in Lie algebras, centres, and ordinary matrix multiplication/transvections do not give relations among lifted elements in an arbitrary central extension."
+  },
+  {
+   "tool": "grep",
+   "query": "central.?extension|Gauss.*decomp|lifted.*root",
+   "results": "{\"t\": \"2026-10-24T08:29:38Z\", \"tool\": \"grep\", \"query\": \"central.?extension|Gauss.*decomp|lifted.*root\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary SL2 matrix identities and group-extension section defects do not prove the required sheaf-level root-lift identities; Lie algebra SL2 triples are different objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"transvection\"",
+   "results": "{\"t\": \"2026-10-24T08:29:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"transvection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.TransvectionStruct.toSpecialLinearGroup\", \"Matrix.SpecialLinearGroup.transvection\", \"Matrix.TransvectionStruct.toSpecialLinearGroup_mk\", \"Matrix.TransvectionStruct.toSpecialLinearGroup_def\", \"Matrix.TransvectionStruct.toSpecialLinearGroup_coe\", \"Matrix.SpecialLinearGroup.transvection_coeff_zero\", \"Matrix.SpecialLinearGroup.transvection_inv\", \"Matrix.SpecialLinearGroup.transvection_add\"], \"digest\": \"3d8425eaddf379ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary SL2 matrix identities and group-extension section defects do not prove the required sheaf-level root-lift identities; Lie algebra SL2 triples are different objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Central extension SL2 diagonal lift root subgroup Gauss multiplication relations",
+   "results": "{\"t\": \"2026-10-24T08:29:38Z\", \"tool\": \"leansearch\", \"query\": \"Central extension SL2 diagonal lift root subgroup Gauss multiplication relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot.congr_simp\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot.congr_simp\", \"RootPairing.GeckConstruction.isSl2Triple\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot\"], \"digest\": \"71b8d994a952765c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary SL2 matrix identities and group-extension section defects do not prove the required sheaf-level root-lift identities; Lie algebra SL2 triples are different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Central extensions of group sheaves SL2 torus equivariant unipotent lifts multiplicative diagonal section",
+   "results": "{\"t\": \"2026-10-24T08:29:40Z\", \"tool\": \"leanfinder\", \"query\": \"Central extensions of group sheaves SL2 torus equivariant unipotent lifts multiplicative diagonal section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Section.exists_mul_eq_inl_mul_mul\", \"GroupExtension.Section.exists_mul_eq_mul_mul_inl\", \"GroupExtension.Section.exists_eq_inl_mul\", \"GroupExtension.Section.exists_eq_mul_inl\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"GroupExtension.Section.mul_mul_mul_inv_mem_range_inl\"], \"digest\": \"3347ca5e6e3ada3c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary SL2 matrix identities and group-extension section defects do not prove the required sheaf-level root-lift identities; Lie algebra SL2 triples are different objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant lifts of upper and lower unipotent subgroups in a central extension of SL2 satisfy Gauss decomposition",
+   "results": "{\"t\": \"2026-10-24T08:29:41Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant lifts of upper and lower unipotent subgroups in a central extension of SL2 satisfy Gauss decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularGroup.g_eq_of_c_eq_one\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_ne_zero\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_eq_zero\", \"Matrix.SpecialLinearGroup.fin_two_exists_eq_mk_of_apply_zero_one_eq_zero\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"SpecialLinearGroup.centerEquivRootsOfUnity_invFun\", \"Matrix.GeneralLinearGroup.upperRightHom\"], \"digest\": \"a2d8ebe8756ef28e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary SL2 matrix identities and group-extension section defects do not prove the required sheaf-level root-lift identities; Lie algebra SL2 triples are different objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-sl2-central-extension-splitting",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: unique splitting of the central extension of SL2 in both centre cases. Supporting subargument: Lemma 4.3.3 and proof, printed pp.128--129, followed by equation (4.3.1) and its removal of the unit condition, printed pp.129--130.",
+   "via": [
+    "lem-sfb-relative-sl2-central-extension-splitting",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-lifted-root-gauss-relations",
+  "worker": "stage1",
+  "summary": "Checked Conrad pp.128--130 online and the live Lean/DAG/blueprint. Retained the exact statement. Wrote the torus-equivariance calculation, fppf square-root descent, explicit unit-case cancellations, two-unit removal and inverse relation. Added two strictly smaller local-existence prerequisites, each statement-only and searched in Mathlib with two semantic phrasings. No Lean or compiler used.",
+  "blueprint": "The inherited supporting subargument under det-thm-sf-ctf-stability-direct-images (3): Conrad Lemma 4.3.3 and equation (4.3.1), pp.128--130. The ancestor command returns None, consistently with the existing null from.node; retained the inherited via chain and precise from.place. The current latest blueprint direct-image proof has no independent statement of these prerequisites."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-4e13003a0",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-4e13003a0 (reviewer sub-agent of L); spot-checked: Shape: one commit; the item statement is byte-identical to the live base; the base item had no proof, so this is a first split. Conrad's Reductive group schemes (Luminy) is not under literature/: the worker wrote WANTED and set proof_origin agent, so I checked every computation by hand. Step 1: p(g'(t))=[[0,t],[-1/t,0]] and p(h'(t))=diag(t,1/t). Step 2: H(s)G(t)H(s)^-1=G(s^2 t), so H(s^2 t)=H(t)H(s^2) by commutativity of D'; fppf-local square roots come from the cited node, and gluing uses that E is a sheaf. Step 3: the cancellation gives Y((s-1)/(s^2 t))H(s)X(t)=X(st)Y((s-1)/(st)); with s=w, t=u/w this is (v/w, v). Step 4: the parameters are q=1+bv and w/q; X(aq/w)H(q)=H(q)X(a/(qw)); and a+bw=uq=a+b+buv, so the final parameter is u/w. Step 5: inversion at (-u,-v), whose parameter is the same w. New node lem-sfb-fppf-local-unit-square-root: true by the case n=2 of Stacks 040N lemma-kummer-sequence-syntomic, using the free rank-2 algebra A[r]/(r^2-s), including characteristic 2. New node lem-sfb-fppf-local-two-unit-decomposition: true via W=Spec A[z,1/(z(u-z)(1+zv))], which is flat and finitely presented with nonempty fibres; over F2 the Zariski version fails but the fppf version holds. Both are statement-only and self-contained, and def-pc-fppf-site defines the coverings they use. Neither is a duplicate: monic-quotient-tensor-coordinates and simultaneous-root-localization-api are ring algebra, def-sc-kummer-sequence is etale with n invertible, and sl2-open-cell-sheaf-extension states something else. Neither restates a clause of the item. No SGA citation; tool_uses none. The null blueprint from.node is inherited from the base item: noted, not a delivery fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LiftedRootGaussRelations",
+  "declaration": "AlgebraicGeometry.LiftedRootGauss.lifted_root_gauss_relations",
+  "declarations": [
+   "AlgebraicGeometry.LiftedRootGauss.weylLift",
+   "AlgebraicGeometry.LiftedRootGauss.diagonalLift",
+   "AlgebraicGeometry.LiftedRootGauss.lifted_root_gauss_relations"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LiftedRootGaussRelations.lean",
+  "statement": "theorem lifted_root_gauss_relations {S : Scheme.{u}} (Z : Over S) [GrpObj Z] [IsCommMonObj Z] (_hZsep : IsClosedImmersion (pullback.diagonal Z.hom)) (E : (Over S)ᵒᵖ ⥤ GrpCat.{v}) (_hE : Presheaf.IsSheaf (Scheme.fppfTopology.over S) E) (i : ∀ T : Over S, (T ⟶ Z) →* E.obj (op T)) (_hi_nat : ∀ (T U : Over S) (f : U ⟶ T) (z : T ⟶ Z), E.map f.op (i T z) = i U (f ≫ z)) (p : ∀ T : Over S, E.obj (op T) →* Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤)) (_hp_nat : ∀ (T U : Over S) (f : U ⟶ T) (e : E.obj (op T)), p U (E.map f.op e) = Matrix.SpecialLinearGroup.map f.left.appTop.hom (p T e)) (_hi_inj : ∀ T : Over S, Function.Injective (i T)) (_hexact : ∀ (T : Over S) (e : E.obj (op T)), p T e = 1 ↔ ∃ z : T ⟶ Z, i T z = e) (_hp_local : ∀ (T : Over S) (g : Matrix.SpecialLinearGroup (Fin 2) Γ(T.left, ⊤)), ∃ R : Sieve T, R ∈ (Scheme.fppfTopology.over S) T ∧ ∀ (U : Over S) (f : U ⟶ T), R f → ∃ e : E.obj (op U), p U e = Matrix.SpecialLinearGroup.map f.left.appTop.hom g) (_hcentral : ∀ (T : Over S) (z : T ⟶ Z) (e : E.obj (op T)), Commute (i T z) e) (_hD : ∀ (T : Over S) (a b : E.obj (op T)) (s t : Γ(T.left, ⊤)ˣ), (p T a).val = !![(s : Γ(T.left, ⊤)), 0; 0, (↑s⁻¹ : Γ(T.left, ⊤))] → (p T b).val = !![(t : Γ(T.left, ⊤)), 0; 0, (↑t⁻¹ : Γ(T.left, ⊤))] → Commute a b) (X Y : ∀ T : Over S, Multiplicative Γ(T.left, ⊤) →* E.obj (op T)) (_hX_nat : ∀ (T U : Over S) (f : U ⟶ T) (a : Γ(T.left, ⊤)), E.map f.op (X T (Multiplicative.ofAdd a)) = X U (Multiplicative.ofAdd (f.left.appTop a))) (_hY_nat : ∀ (T U : Over S) (f : U ⟶ T) (a : Γ(T.left, ⊤)), E.map f.op (Y T (Multiplicative.ofAdd a)) = Y U (Multiplicative.ofAdd (f.left.appTop a))) (_hX_lift : ∀ (T : Over S) (a : Γ(T.left, ⊤)), p T (X T (Multiplicative.ofAdd a)) = Matrix.SpecialLinearGroup.transvection (i := (0 : Fin 2)) (j := 1) zero_ne_one a) (_hY_lift : ∀ (T : Over S) (a : Γ(T.left, ⊤)), p T (Y T (Multiplicative.ofAdd a)) = Matrix.SpecialLinearGroup.transvection (i := (1 : Fin 2)) (j := 0) one_ne_zero a) (_hX_equiv : ∀ (T : Over S) (s : Γ(T.left, ⊤)ˣ) (e : E.obj (op T)), (p T e).val = !![(s : Γ(T.left, ⊤)), 0; 0, (↑s⁻¹ : Γ(T.left, ⊤))] → ∀ a : Γ(T.left, ⊤), e * X T (Multiplicative.ofAdd a) * e⁻¹ = X T (Multiplicative.ofAdd ((s : Γ(T.left, ⊤)) ^ 2 * a))) (_hY_equiv : ∀ (T : Over S) (s : Γ(T.left, ⊤)ˣ) (e : E.obj (op T)), (p T e).val = !![(s : Γ(T.left, ⊤)), 0; 0, (↑s⁻¹ : Γ(T.left, ⊤))] → ∀ a : Γ(T.left, ⊤), e * Y T (Multiplicative.ofAdd a) * e⁻¹ = Y T (Multiplicative.ofAdd ((↑s⁻¹ : Γ(T.left, ⊤)) ^ 2 * a))) : ∃ H : ∀ T : Over S, Γ(T.left, ⊤)ˣ →* E.obj (op T), (∀ (T : Over S) (t : Γ(T.left, ⊤)ˣ), H T t = diagonalLift (X T) (Y T) t) ∧ (∀ (T U : Over S) (f : U ⟶ T) (t : Γ(T.left, ⊤)ˣ), E.map f.op (H T t) = H U (Units.map f.left.appTop.hom t)) ∧ (∀ (T : Over S) (t : Γ(T.left, ⊤)ˣ), (p T (H T t)).val = !![(t : Γ(T.left, ⊤)), 0; 0, (↑t⁻¹ : Γ(T.left, ⊤))]) ∧ (∀ (T : Over S) (s t : Γ(T.left, ⊤)ˣ), H T s * weylLift (X T) (Y T) t = weylLift (X T) (Y T) (s * t)) ∧ (∀ (T : Over S) (a b : Γ(T.left, ⊤)) (w : Γ(T.left, ⊤)ˣ), (w : Γ(T.left, ⊤)) = 1 + a * b → X T (Multiplicative.ofAdd a) * Y T (Multiplicative.ofAdd b) = Y T (Multiplicative.ofAdd (b * (↑w⁻¹ : Γ(T.left, ⊤)))) * H T w * X T (Multiplicative.ofAdd (a * (↑w⁻¹ : Γ(T.left, ⊤))))) ∧ (∀ (T : Over S) (a b : Γ(T.left, ⊤)) (w : Γ(T.left, ⊤)ˣ), (w : Γ(T.left, ⊤)) = 1 + a * b → Y T (Multiplicative.ofAdd b) * X T (Multiplicative.ofAdd a) = X T (Multiplicative.ofAdd (a * (↑w⁻¹ : Γ(T.left, ⊤)))) * (H T w)⁻¹ * Y T (Multiplicative.ofAdd (b * (↑w⁻¹ : Γ(T.left, ⊤)))))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b122114ab",
+  "group": "NK",
+  "result": "pass",
+  "note": "Item lem-sfb-sl2-lifted-root-gauss-relations, new module LiftedRootGaussRelations. Clauses check against the node and Conrad 4.3.3/(4.3.1): Z is a separated commutative S-group scheme (GrpObj on Over S via pullbacks, IsClosedImmersion of the diagonal); E is an fppf group sheaf with v free; exactness via i injective, ker p = im i, and fppf-local surjectivity of p (sieve form); centrality; D' commutative via diagonal-preimage pairs; x', y' natural Multiplicative-Γ homomorphisms lifting transvections (0,1)/(1,0); equivariance quantified over global lifts e, equivalent to the action form by local lifts plus the sheaf property, so not stronger. Conclusion: H pinned to diagonalLift, natural, →*, projecting to diag(t,t⁻¹); h'(s)g'(t)=g'(st); both Gauss identities for arbitrary a,b with unit w=1+ab and the correct factor order. weylLift/diagonalLift are real products. Statement verbatim; node copy differs from live only in lean; stmt_deps unchanged and existing:true. Report has the Worker report and Second reading by NK sections. Proof is sorry only; source/blueprint docstrings and the five-step proof are present. No duplicates in side-live lean or Mathlib; sibling nodes have no lean records. Edge cases (zero ring, char 2, nonunit or nilpotent a,b, universes) OK. Not recompiled (no changes); worker's scompile was clean. Null blueprint from.node is inherited from the base item, not a delivery fault."
+ }
+}

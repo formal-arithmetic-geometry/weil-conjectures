@@ -1,0 +1,146 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.BoundaryDualityDischarge",
+  "date": "2026-10-25",
+  "group": "Y7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized comparison of Verdier duality evaluation with exceptional inverse image on small etale and proetale sites",
+   "results": "8 hits about sheaf congruence for equivalent sites, including CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app; no normalized boundary-model construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier boundary duality exchanges closed exceptional inverse image with ordinary pullback via evaluation",
+   "results": "8 hits including Scheme.Hom.liftCoborder_preimage and Functor.map_distinguished_op_exact; none gives boundary duality or its normalized models.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"evaluation\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|verdier|BoundaryDuality|boundary_duality|costalk",
+   "results": "25 Mathlib hits: bibliographic references to Verdier and localization/triangulated-category declarations; no site boundary-duality model.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "First paragraph (preservation and costalk duality), and second paragraph through the sentence identifying both pairings with restriction of evaluation; excludes the final formal bidual-transpose conclusions."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "First paragraph (preservation and costalk duality), and second paragraph through the sentence identifying both pairings with restriction of evaluation; excludes the final formal bidual-transpose conclusions."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "First paragraph (preservation and costalk duality), and second paragraph through the sentence identifying both pairings with restriction of evaluation; excludes the final formal bidual-transpose conclusions."
+  },
+  "same_as": []
+ },
+ "id": "lem-weil-boundary-normalized-models",
+ "kind": "statement",
+ "title": "Normalized geometric boundary models from the site comparisons",
+ "statement": "Fix the finite-field datum D of [def-weil-finite-field-fiber], a prime l distinct from its characteristic p, a finite extension E of Q_l, n a natural number, and a separated finite-type scheme Y over D.k. At coefficient level A=O_E/(varpi_E^(n+1)), for every locally closed piece of Y and every closed boundary arrow, there exists one system of the canonical operations of [def-weil-boundary-duality-input] satisfying their literal site-coordinate normalizations and admitting the normalized geometric model of [def-weil-boundary-normalized-model]. In particular this statement asks for no boundary-exchange invertibility and no boundary-exchange double-dual compatibility.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-boundary-duality-input",
+  "def-weil-boundary-normalized-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-boundary-finite-tor-domains] at level n+1 to every immersion into Y. Obtain separated finite-type pieces, preservation by ordinary and exceptional etale restrictions, etale dual preservation and invertible delta. The constant coefficient ring is finite and has invertible exponent since l differs from the characteristic.",
+   "uses": [
+    "lem-weil-boundary-finite-tor-domains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take all operation fields literally from [def-weil-boundary-duality-input]. Use [lem-weil-duality-pairing] to normalize symmetry and evaluation. Apply [thm-fix-general-biduality] and the evaluation-compatible internal-Hom comparison to obtain preservation and native delta invertibility in the fixed comparison dualizing object.",
+   "uses": [
+    "def-weil-boundary-duality-input",
+    "lem-weil-duality-pairing",
+    "thm-fix-general-biduality",
+    "lem-weil-finite-duality-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-boundary-evaluation-currying] with the finite-Tor domains and projection formula [lem-weil-finite-compact-projection-formula] to construct q and prove naturality. Apply [lem-weil-boundary-alpha-normalization] to the same q and admissible domains to obtain invertibility of this particular alpha, rather than choosing an existence-only costalk isomorphism.",
+   "uses": [
+    "lem-weil-boundary-evaluation-currying",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-weil-boundary-alpha-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-weil-boundary-finite-site-realization] to identify q, evaluation, dualizing objects and biduality on every finite-Tor etale-origin object with the pro-etale constructions. In comparison-pullback dualizing coordinates define theta as inverse C_ZG(unit) followed by C_Z(ecomp), and tau as inverse s(counit) tensor identity followed by tensorModel. Thus their normalization equations hold. Comparison full faithfulness and the specified evaluation squares transfer q naturality and the alpha isomorphism. All finite-Tor inputs have etale representatives, so these clauses hold on every piece and boundary. This gives exactly [def-weil-boundary-normalized-model], without using either beta conclusion.",
+   "uses": [
+    "lem-weil-boundary-finite-site-realization",
+    "def-weil-boundary-normalized-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-boundary-finite-tor-domains",
+  "def-weil-boundary-duality-input",
+  "lem-weil-duality-pairing",
+  "thm-fix-general-biduality",
+  "lem-weil-finite-duality-site-comparison",
+  "lem-weil-boundary-evaluation-currying",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-boundary-alpha-normalization",
+  "lem-weil-boundary-finite-site-realization",
+  "def-weil-boundary-normalized-model"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.BoundaryNormalizedModels",
+  "file": "lean/Sheaf/SixFunctors/BoundaryNormalizedModels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryDualityInput.boundary_normalized_models",
+  "statement": "theorem boundary_normalized_models\n    (D : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (CommRingCat.of D.k))\n    [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] :\n    letI : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY\n    letI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY\n    letI : IsNoetherian Y := ⟨⟩\n    ∃ o : Operations Boundary\n        (fun T : Piece Y ↦ FixedCategory (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.scheme)\n        (fun T : Piece Y ↦ FixedEtaleCategory (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) T.scheme),\n      CanonicalOperations (ModuleCat.{u + 1}\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) Y aY\n        (finiteComposition (Padic.coefficientExtensionRing l E (n + 1)) Y aY) o ∧\n      Nonempty (NormalizedModel o (fun T ↦ ctf l E n T.scheme))",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T124507-L-2039753",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261025T124507-L-2039753",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

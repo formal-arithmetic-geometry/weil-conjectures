@@ -1,0 +1,434 @@
+{
+ "id": "lem-coef-finite-point-reconstructed-hom-model",
+ "kind": "statement",
+ "title": "Reconstructed finite-point Hom comparison with arbitrary target",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$, a uniformizer $\\varpi$, and $n\\ge1$. Put $A=R/\\varpi^n$ [def-weil-l-adic-coefficient-extension], $s=\\operatorname{Spec}k$ and $B=A_s$ on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf].\nFor an $A$-module $M$ set $L(M)=B\\otimes_{\\underline A}\\underline M=\\underline M$, with sheaf tensor [def-pur-sheaf-tensor-product], and write $\\Gamma=\\Gamma(s,-)$. Both functors are exact, $\\Gamma B=A$ through $a\\mapsto a\\cdot1$, and $L\\dashv\\Gamma$ has the adjunction formulas $h\\mapsto(m\\mapsto h_s(1\\otimes m))$ and $t\\mapsto(b\\otimes m\\mapsto b\\,t(m)|_U)$. Apply these functors termwise on complexes and then on derived categories [def-weil-abstract-derived-category]. For every $C\\in D^b_c(s,A)$ [def-weil-finite-torsion-constructibility], the complex $c=\\Gamma C$ has bounded finite cohomology [def-weil-point-finite-cohomology-complexes], the actual counit $e_C:Lc\\to C$ is an isomorphism, and the unit $u_c:c\\to\\Gamma Lc$ satisfies $\\Gamma(e_C)u_c=1_c$.\nFor every ambient $V\\in D(s_{\\mathrm{proet}},B)$ use derived internal Hom [def-pur-derived-internal-hom]. For a flat-term K-flat representative $P$ of $c$ [def-pc-kflat-complex] and a K-injective resolution $V\\to J$ [def-pur-kinjective-complex], $\\Gamma J$ is K-injective, $\\Gamma V\\to\\Gamma J$ is a quasi-isomorphism, and the chain isomorphism\n$$q_{P,J}:\\Gamma\\mathcal Hom_B^\\bullet(LP,J)\\xrightarrow{\\sim}\\operatorname{Hom}_A^\\bullet(P,\\Gamma J),\\qquad h\\mapsto(x\\mapsto h(1\\otimes x))$$\nuses differential $dh=d_Jh-(-1)^{\\deg h}hd_P$ on both sides [def-pur-hom-complex]. It gives an isomorphism $q_{c,V}:\\Gamma R\\mathcal Hom_B(Lc,V)\\xrightarrow{\\sim}R\\operatorname{Hom}_A(c,\\Gamma V)$. The composite\n$$Q_{C,V}=q_{c,V}\\circ\\Gamma R\\mathcal Hom_B(e_C,V):\\Gamma R\\mathcal Hom_B(C,V)\\xrightarrow{\\sim}R\\operatorname{Hom}_A(c,\\Gamma V)$$\nis independent of the resolving representatives and is natural, contravariantly in $C$ and covariantly in $V$, for all derived morphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: compute point internal Hom over coefficients; exact realization, reconstruction and arbitrary-target resolution model (old item steps 2 and 3)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-point-finite-cohomology-complexes",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-pur-hom-complex",
+  "def-pod-point-derived-hom-models",
+  "def-sc-module-total-hom-complex",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "For the ordinary signed evaluation used by the model map, apply the proved module_hom_signed_evaluation to the arbitrary unbounded complexes P and J. This supplies existence with exactly the prescribed values on pure tensors. Two such chain maps agree degreewise: the total tensor coproduct extensionality reduces to every (p,j) summand, and tensor-product extensionality reduces to x tensor h, where the two normalization equations agree. This proves ordinaryEvaluation_existsUnique without any remaining hole. The following eight steps remain the plan for the still-unproved finite_point_reconstructed_hom_model.",
+   "uses": [
+    "lem-pod-module-hom-signed-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8H and 0A8X: signed ordinary evaluation; uniqueness by tensor and coproduct universal properties."
+   }
+  },
+  {
+   "text": "Since $B=\\underline A$, multiplication $b\\otimes m\\mapsto bm$, with inverse $m\\mapsto1\\otimes m$, identifies $L(M)$ with $\\underline M$. Constant presheaves preserve short exact sequences sectionwise, and exact module sheafification therefore makes $L$ exact. Here fixed-$A$ sheaves and $B$-module sheaves are identified by constant-scalar restriction, which leaves their underlying additive sheaves unchanged. A $B$-linear $h:LM\\to F$ gives $t(m)=h_s(1\\otimes m)$. Conversely $t:M\\to F(s)$ gives a map from the constant presheaf by $m\\mapsto t(m)|_U$, hence a unique map from its sheafification; extending $B$-linearly gives $b\\otimes m\\mapsto b\\,t(m)|_U$. Restriction compatibility follows from $(t(m)|_U)|_W=t(m)|_W$. The composites are the identity on $m$ and on $1\\otimes m$, hence on all local sections after sheafification. These formulas prove $L\\dashv\\Gamma$ and its naturality.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03EI (lemma-sheafification-exact), 093J (lemma-constant-exact); explicit adjunction from the sheafification universal property."
+   }
+  },
+  {
+   "text": "The valuation-ring theorem gives that $R$ is a DVR with finite residue field, and the finite-quotient theorem applies to the chosen uniformizer and $n\\ge1$, so $A$ is finite. Apply the finite-constant-sections theorem with $X=V=s$. The space $|s|$ has one point, so evaluation at that point identifies $C(|s|,A)$ with $A$. The stated normalization on constant-presheaf elements shows that its inverse is precisely $a\\mapsto a\\cdot1\\in\\Gamma B$. Exactness of $\\Gamma$ on all $B$-module sheaves, and preservation of quasi-isomorphisms by termwise $\\Gamma$, are the point-sections-exactness theorem.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-pur-proetale-finite-constant-sections",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12, printed p. 30, applied to the final object Spec k; point-sections exactness as in Stacks Tags 0982 and 098H."
+   }
+  },
+  {
+   "text": "Apply termwise-adjunction on homotopy categories and exact-functor derived factorization to $L,\\Gamma$. The unit and counit are still the termwise maps just constructed: by clause (2) of the localization universal property they descend uniquely to natural transformations between the derived functors, and by clause (3) their naturality and triangle equalities remain equalities after localization. For $C\\in D^b_c(s,A)$, sections finiteness gives $c=\\Gamma C\\in D^b_{\\mathrm{fin}}(A)$. The finite branch of point-sections reconstruction applies: its exactness, constant-value ring identification and explicit adjunction hypotheses were verified in steps 1 and 2. It gives that the actual counit $e_C:Lc\\to C$ is an isomorphism, natural in $C$. The triangle equality is $\\Gamma(e_C)u_{\\Gamma C}=1_{\\Gamma C}$, so its unit is exactly the asserted $u_c$.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-point-sections-finiteness",
+    "lem-pod-point-sections-reconstruction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: compute point internal Hom over coefficients; exact realization, reconstruction and arbitrary-target resolution model (old item steps 2 and 3)."
+   }
+  },
+  {
+   "text": "Work throughout on the small site skeleton fixed in the definition of $s_{\\mathrm{proet}}$. K-flat resolution existence, also applied to the one-object site with ring $A$, supplies a flat-term K-flat representative $P\\to c$. K-injective resolution existence on the small ringed site supplies $V\\to J$, with no boundedness restriction on $V$. Since $\\Gamma$ is right adjoint to the exact functor $L$, right-adjoint preservation of K-injectives gives that $\\Gamma J$ is K-injective over $A$. Exactness of $\\Gamma$ gives the quasi-isomorphism $\\Gamma V\\to\\Gamma J$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; resolution-existence statements used on the fixed small site and the one-object module site."
+   }
+  },
+  {
+   "text": "Global Hom cochains identify degree $r$ of $\\Gamma\\mathcal Hom_B^\\bullet(LP,J)$ with $\\prod_i\\operatorname{Hom}_B(LP^i,J^{i+r})$. Apply the degreewise adjunction of step 1 to every factor. The result is $\\prod_i\\operatorname{Hom}_A(P^i,\\Gamma J^{i+r})$, and the maps are $q(h)(x)=h_s(1\\otimes x)$ and $q^{-1}(t)(b\\otimes x)=b\\,t(x)|_U$. Products here are arbitrary sectionwise products; no finite-generation or boundedness of $P,J$ is used. In degree $r$, evaluation gives\n$$q(dh)(x)=d_{\\Gamma J}(q(h)(x))-(-1)^r q(h)(d_Px)=d(q(h))(x),$$\nsince $d_{LP}(1\\otimes x)=1\\otimes d_Px$. Thus these inverse degreewise maps are the claimed chain isomorphism $q_{P,J}$.",
+   "uses": [
+    "lem-pur-hom-complex-global-cochains",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Hom-complex construction and global-cohomology-hom-complex; explicit degreewise adjunction calculation refining the point blueprint sentence."
+   }
+  },
+  {
+   "text": "The derived-internal-Hom definition computes $R\\mathcal Hom_B(Lc,V)$ by $\\mathcal Hom_B^\\bullet(LP,J)$, because $LP$ represents $Lc$ and $J$ is K-injective. Over the one-object ringed site the same definition computes $R\\operatorname{Hom}_A(c,\\Gamma V)$ by $\\operatorname{Hom}_A^\\bullet(P,\\Gamma J)$, using step 4. Exact $\\Gamma$ needs no resolution of the Hom complex: by exact-functor derived factorization, termwise $\\Gamma$ of $\\mathcal Hom_B^\\bullet(LP,J)$ represents $\\Gamma R\\mathcal Hom_B(Lc,V)$. Therefore localizing the chain isomorphism of step 5 gives $q_{c,V}$ with the asserted direction. For different representatives the Hom-quasi-isomorphism lemma, on each of these two sites, supplies the comparison quasi-isomorphisms in the first variable and between K-injective representatives in the second. On the sheaf side exact $\\Gamma$ preserves these maps as quasi-isomorphisms.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A94 and 0A95, lemma-RHom-into-K-injective and lemma-RHom-well-defined; apply also on the one-object site for ordinary modules."
+   }
+  },
+  {
+   "text": "For chain maps $a:P'\\to P$ and $b:J\\to J'$, the formula in step 5 gives\n$$q_{P',J'}(b\\,h\\,L(a))=(\\Gamma b)\\,q_{P,J}(h)\\,a.$$\nIndeed both sides send $x$ to $b_s(h_s(1\\otimes a(x)))$. This proves commutation with every resolving comparison map in step 6. K-injective Hom-to-derived bijectivity represents any derived target morphism by a chain map between K-injective resolutions, uniquely up to homotopy; their changes are homotopy equivalences. In the source variable the derived category is localization at quasi-isomorphisms. The localization universal property therefore descends these commuting comparisons uniquely to the derived bifunctors. Naturality for an inverted quasi-isomorphism follows by inverting its commuting square, and then holds for every composite representing a derived morphism. This proves independence of $P,J$ and naturality of $q_{c,V}$ in both variables, not only for chain maps.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective; localization universal property and the explicit adjunct formula."
+   }
+  },
+  {
+   "text": "Precompose the first argument of internal Hom with the actual isomorphism $e_C:L\\Gamma C\\to C$ from step 3. Contravariance gives the isomorphism $R\\mathcal Hom_B(C,V)\\to R\\mathcal Hom_B(Lc,V)$. Composing its sections with $q_{c,V}$ defines exactly $Q_{C,V}$ in the statement. For $f:C\\to C'$ naturality of the counit reads $f e_C=e_{C'}L(\\Gamma f)$; combining this equality with the naturality of $q$ proved in step 7 gives\n$$R\\operatorname{Hom}_A(\\Gamma f,\\Gamma V)Q_{C',V}=Q_{C,V}\\,\\Gamma R\\mathcal Hom_B(f,V).$$\nCovariance for $V\\to V'$ follows from the same naturality of $q$ and of internal Hom. Both assertions apply to all derived morphisms by step 7, and the composite is independent of resolving representatives.",
+   "uses": [
+    "lem-pod-point-sections-reconstruction",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence: compute point internal Hom over coefficients; exact realization, reconstruction and arbitrary-target resolution model (old item steps 2 and 3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "lem-pc-kflat-resolution",
+  "lem-pod-module-hom-signed-evaluation",
+  "lem-pod-point-sections-reconstruction",
+  "lem-pur-hom-complex-global-cochains",
+  "lem-pur-proetale-finite-constant-sections",
+  "lem-pur-rhom-well-defined",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-valued-dvr-finite-quotients",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "R9, 2026-10-26: ordinaryEvaluation_existsUnique is proved from the existing signed-evaluation theorem and universal-property extensionality. The original eight-step sourced plan for the remaining main theorem is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact constant sheaf realization sections adjunction derived Hom arbitrary target K injective comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {A : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} A] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J A] →\\n            [inst_3 : CategoryTheory.HasGlobalSection\", \"doc\": \"For any object $X$ in category $\\\\mathcal{A}$ and sheaf $F$ on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this establishes a natural bijection between morphisms from the constant sheaf at $X$ to $F$ a\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_forget\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {B : Type u_3} [inst_3 : CategoryTheory.Category.{v_3, u_3} B] (U : CategoryTheo\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, a category $\\\\mathcal{D}$, and a functor $ U : \\\\mathcal{D} \\\\to \\\\mathcal{B} $ satisfying the sheaf composition condition, if the constant\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {L : CategoryTheory.Functor D (CategoryTheory.Sheaf J D)} {T : C} (hT : Category\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$, $\\\\mathcal{D}$ a category, and $T \\\\in \\\\mathcal{C}$ a terminal object. For an adjunction $L \\\\dashv (\\\\text{SheafSections}(J, \\\\mathcal{D})\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_of_forget\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {B : Type u_3} [inst_3 : CategoryTheory.Category.{v_3, u_3} B] (U : CategoryTheo\", \"doc\": \"If the constant sheaf functors are fully faithful, the sheaf composition functor reflects isomorphisms, and the composition of a sheaf $ F $ with a functor $ U $ yields a constant sheaf, then $ F $ it\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type w)] →\\n        [inst_2 : CategoryTheory.HasGlobalSectionsFunctor J (Type w)] →\\n          (F : CategoryTheory.Sheaf J (Type w)) →\\n      \", \"doc\": \"For a sheaf $ F $ on a category with respect to a Grothendieck topology $ J $, and a type $ X $ with a unique element, there is a canonical equivalence between the global sections of $ F $ and the set\"}\n  {\"name\": \"CategoryTheory.constantSheafAdj\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (D : Type u_2) →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {T : C} →\\n              Category\", \"doc\": \"Given a terminal object $ T $ in a category $ \\\\mathcal{C} $ and a category $ \\\\mathcal{D} $, there exists an adjunction where the left adjoint is the constant sheaf functor $ \\\\mathcal{C}^{\\\\text{op}} \\\\t\"}\n  {\"name\": \"CategoryTheory.constantSheafAdj_counit_w\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {B : Type u_3} [inst_3 : CategoryTheory.Category.{v_3, u_3} B] (U : CategoryTheo\", \"doc\": \"For a terminal object $ T $ in category $\\\\mathcal{C}$ and functors satisfying sheaf composition conditions, the counit of the constant sheaf adjunction commutes with whiskering by sheaf composition. S\"}\n  {\"name\": \"CategoryTheory.constantSheafΓAdj\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₂) →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} A] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J A] →\\n            [inst_3 : CategoryTheory.HasGlobalSection\", \"doc\": \"The constant sheaf functor is left adjoint to the global sections functor, establishing an adjunction between them in the category of sheaves with respect to a Grothendieck topology $J$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf adjunction and constantness criteria do not give this reconstructed derived Hom comparison for arbitrary targets with its resolving-model normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, HomologicalComplex",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SSet.chainComplexFunctorAdjunction\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.Homology.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasCoproducts C] [CategoryTheory.Preadditive C] (n : ℕ) : (CategoryTheory.Functor.postcompose₂.obj (HomologicalComplex.eval C (ComplexShape.down ℕ) n)).obj (SSet.chainComplexFunctor C) ⊣ (CategoryTheory.evaluation SSet C).obj (S\", \"doc\": \"The adjunction `Hom(Cⁿ(-, X), F) ≃ Hom(X, F(Δ[n]))` for `R : C` and `F : SSet ⥤ C`.\"}\n  {\"name\": \"AlgebraicTopology.singularChainComplexFunctorAdjunction\", \"module\": \"Mathlib.AlgebraicTopology.SingularHomology.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasCoproducts C] [CategoryTheory.Preadditive C] (n : ℕ) : (CategoryTheory.Functor.postcompose₂.obj (HomologicalComplex.eval C (ComplexShape.down ℕ) n)).obj (AlgebraicTopology.singularChainComplexFunctor C) ⊣ (CategoryTheory.eval\", \"doc\": \"The adjunction `Hom(Cⁿ(-, X), F) ≃ Hom(X, F(Δ[n]))` for `X : C` and `F : Top ⥤ C`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf adjunction and constantness criteria do not give this reconstructed derived Hom comparison for arbitrary targets with its resolving-model normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]Injective|[Kk]injective",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Algebra.Homology.DerivedCategory.KInjective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"35\", \"text\": \"instance : R.cochainComplex.IsKInjective := isKInjective_of_injective _ 0\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"44\", \"text\": \"    CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective.{w}.symm\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf adjunction and constantness criteria do not give this reconstructed derived Hom comparison for arbitrary targets with its resolving-model normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact left adjoint constant module sheaf and sections preserve K injective Hom complex derived adjunction",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ringed site exact extension of constants adjoint sections Hom complex isomorphism derived arbitrary target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D)\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) {A : Type w}\\n  [inst_2 : CategoryTheory.Category.\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous sheaf pushforward $ G_* $\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  [(CategoryTheory.constantSheaf J D).Faithful] [(CategoryTheory.constantSheaf J D\", \"doc\": \"Given a terminal object $ T $ in a category $ \\\\mathcal{C} $, a category $ \\\\mathcal{D} $, and a constant sheaf $ F $ on $ \\\\mathcal{C} $ with values in $ \\\\mathcal{D} $, if the constant sheaf functor is \"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  [(CategoryTheory.constantSheaf J D).Faithful] [(CategoryTheory.constantSheaf J D\", \"doc\": \"Given a Grothendieck topology $J$ on a category $\\\\mathcal{C}$ with a terminal object $T$, a sheaf $F$ with values in a category $\\\\mathcal{D}$ is constant if and only if the counit of the adjunction be\"}\n  {\"name\": \"CategoryTheory.constantSheafAdj_counit_w\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {B : Type u_3} [inst_3 : CategoryTheory.Category.{v_3, u_3} B] (U : CategoryTheo\", \"doc\": \"For a terminal object $ T $ in category $\\\\mathcal{C}$ and functors satisfying sheaf composition conditions, the counit of the constant sheaf adjunction commutes with whiskering by sheaf composition. S\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {L : CategoryTheory.Functor D (CategoryTheory.Sheaf J D)} {T : C} (hT : Category\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$, $\\\\mathcal{D}$ a category, and $T \\\\in \\\\mathcal{C}$ a terminal object. For an adjunction $L \\\\dashv (\\\\text{SheafSections}(J, \\\\mathcal{D})\"}\n  {\"name\": \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((Condensed.forget R).map\\n      ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app ((CondensedMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the counit of the adjunction between discrete condensed modules and the underlying category, evaluated at the locally constant condensed module associated to $ M $, be\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_of_isIso_counit_app\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  (F : CategoryTheory.Sheaf J D) [inst_3 : CategoryTheory.Limits.HasTerminal C]\\n  \", \"doc\": \"Given a sheaf $ F $ on a category $\\\\mathcal{C}$ with a terminal object $ T $, if the counit $\\\\varepsilon_F : (\\\\text{constant sheaf at } T) \\\\Rightarrow F$ of the adjunction between constant sheaves and\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf adjunction and constantness criteria do not give this reconstructed derived Hom comparison for arbitrary targets with its resolving-model normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafAdj|homEquiv",
+   "date": "2026-10-22",
+   "results": "{\"t\": \"2026-10-22T07:59:17Z\", \"tool\": \"grep\", \"query\": \"constantSheafAdj|homEquiv\", \"sub\": \"CategoryTheory/Sites/ConstantSheaf.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"70\", \"97\", \"101\", \"102\"], \"digest\": \"6a1ac789bf3fc185\"}",
+   "verdict": "no match: the returned general adjunction, global-sections and K-injective results do not state the finite-point reconstruction and arbitrary-target signed derived Hom comparison together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of derived sheaf Hom from constant module complex equals derived module Hom over a point",
+   "date": "2026-10-22",
+   "results": "{\"t\": \"2026-10-22T07:59:18Z\", \"tool\": \"leansearch\", \"query\": \"Global sections of derived sheaf Hom from constant module complex equals derived module Hom over a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.Sheaf.ΓNatIsoSheafSections\", \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"CategoryTheory.Sheaf.ΓHomEquiv_naturality_left\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm\", \"CategoryTheory.Sheaf.isLimitConeΓ\"], \"digest\": \"2def140cdb94b1b7\"}",
+   "verdict": "no match: the returned general adjunction, global-sections and K-injective results do not state the finite-point reconstruction and arbitrary-target signed derived Hom comparison together."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheafAdj",
+   "date": "2026-10-22",
+   "results": "{\"t\": \"2026-10-22T07:59:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.constantSheafAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Sheaf.isConstant_of_isIso_counit_app\", \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.constantSheafAdj_counit_w\"], \"digest\": \"291753d8e35fed1e\"}",
+   "verdict": "no match: the returned general adjunction, global-sections and K-injective results do not state the finite-point reconstruction and arbitrary-target signed derived Hom comparison together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact constant sheaf realization and global sections derived internal Hom comparison arbitrary target",
+   "date": "2026-10-22",
+   "results": "{\"t\": \"2026-10-22T07:59:27Z\", \"tool\": \"leanfinder\", \"query\": \"exact constant sheaf realization and global sections derived internal Hom comparison arbitrary target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"CategoryTheory.constantSheafAdj_counit_w\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.evalEquiv\", \"CompHausLike.LocallyConstant.counit_app_val\"], \"digest\": \"d7606b2e8ddddbde\"}",
+   "verdict": "no match: the returned general adjunction, global-sections and K-injective results do not state the finite-point reconstruction and arbitrary-target signed derived Hom comparison together."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafAdj|isKInjective",
+   "date": "2026-10-22",
+   "results": "{\"t\": \"2026-10-22T08:00:00Z\", \"tool\": \"grep\", \"query\": \"constantSheafAdj|isKInjective\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\"], \"digest\": \"1ddfc36fce7e8e2c\"}",
+   "verdict": "no match: the returned general adjunction, global-sections and K-injective results do not state the finite-point reconstruction and arbitrary-target signed derived Hom comparison together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact adjunction on complexes preserves K injective right adjoint and computes derived Hom of constant sheaves",
+   "date": "2026-10-22",
+   "results": "{\"t\": \"2026-10-22T08:00:11Z\", \"tool\": \"leanfinder\", \"query\": \"exact adjunction on complexes preserves K injective right adjoint and computes derived Hom of constant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective.Qh_map_bijective\", \"CategoryTheory.Adjunction.derived\", \"CondensedMod.LocallyConstant.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"LightCondMod.LocallyConstant.adjunction\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"c1c1cd02d209940f\"}",
+   "verdict": "no match: the returned general adjunction, global-sections and K-injective results do not state the finite-point reconstruction and arbitrary-target signed derived Hom comparison together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-point-internal-hom-evaluation",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Second paragraph: finite derived mapping-complex adjunction transported through the point identification; Second sentence: compute point internal Hom over coefficients; exact realization, reconstruction and arbitrary-target resolution model (old item steps 2 and 3).",
+   "via": [
+    "lem-coef-finite-point-internal-hom-evaluation"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-finite-point-reconstructed-hom-model",
+  "worker": "stage1",
+  "summary": "Q17 supplies eight proof steps with no new nodes. Exact constant realization and its explicit adjunction, constant-value coefficient normalization, the actual reconstruction counit, arbitrary-target K-injective transport, signed product Hom isomorphism and localization naturality are assembled from existing statements. No statement change.",
+  "blueprint": "prop-coef-integral-dualizing, second paragraph, finite derived mapping-complex adjunction transported through point identification; the second sentence of lem-pod-point-dualizing-complex.proof.md. Steps 1–3 fix realization and reconstruction, 4–6 compute the arbitrary-target model, 7–8 descend and compose it.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Provides flat-term representatives, also on the one-object site of A-modules."
+   },
+   {
+    "node": "lem-pod-point-sections-reconstruction",
+    "why": "Provides the actual finite-stage reconstruction counit under the explicit hypotheses verified in steps 1–2."
+   },
+   {
+    "node": "lem-pur-hom-complex-global-cochains",
+    "why": "Identifies sections of internal Hom complexes with the external product Hom cochains and differential."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Identifies sections of the finite constant ring at the one-point final object, with the prescribed constant-value normalization."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Gives the resolving quasi-isomorphism comparisons, on the point site and on the one-object module site."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Verifies the finite-residue DVR hypotheses required by the finite-quotient theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Localizes termwise exact realization and sections without replacements."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Represents arbitrary derived target maps between resolutions by chain maps up to homotopy."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Descends the natural chain isomorphism to all derived morphisms and proves choice independence."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-constant-module-encoding",
+    "why": "Identifies fixed-module-valued sheaves with modules over the constant ring, preserving underlying additive sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Exact left adjoint L makes sections carry K-injective resolutions to K-injective complexes."
+   },
+   {
+    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "why": "Exact module sheafification proves exactness of constant realization; a generic site tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Carries the explicitly fixed unit and counit to the homotopy categories."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Exact sections on the ambient point module category allow arbitrary targets; this does not assume constructibility of V."
+   },
+   {
+    "node": "lem-weil-point-sections-finiteness",
+    "why": "Ensures that the sections of C meet the finite-cohomology hypotheses of point reconstruction."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Establishes finiteness of the actual coefficient quotient before applying finite constant sections."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Supplies K-injective resolutions on the fixed small ringed site for unbounded V."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pod-point-sections-reconstruction",
+  "lem-pur-hom-complex-global-cochains",
+  "lem-pur-proetale-finite-constant-sections",
+  "lem-pur-rhom-well-defined",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-valued-dvr-finite-quotients",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-c9aef73f2",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-c9aef73f2 (reviewer sub-agent of L); spot-checked: Read all of the item, its 8 steps, all 22 cited statements, the blueprint source and the Stacks tags 08BJ/093J/03EI/0A95. The mathematics is correct. Steps 1-2 verify exactly the hypotheses of lem-pod-point-sections-reconstruction (exactness, Gamma B=A via a->a*1, explicit adjunction), and its finite branch matches the coefficient category D^b_c(s,A_{E,n}). Step 4 applies 08BJ to the exact left adjoint L, so Gamma J is K-injective for unbounded V. The step-5 sign check holds, d(q h)=d_{Gamma J}q(h)-(-1)^r q(h)d_P. The step-7 identity q(bhL(a))=Gamma(b)q(h)a holds. Edge cases checked: C=0, V=0, n=1, non-perfect c, and unbounded non-constructible V. No new nodes, no cycle, nothing merged, proof_deps equal the union of the uses, no SGA. All 17 tool_uses accepted. FIX (C1/C4, missing step citations): step 3 descends the termwise unit/counit and triangle identities to the derived categories without citing lem-weil-pbc-localization-universal-property; step 6 uses termwise Gamma of the Hom complex without citing lem-weil-pbc-exact-functor-derived-factorization. I added both citations with one sentence each; proof_deps and the statement are unchanged. Advisory: lem-pod-point-exact-extension-sections already states the content of steps 1-2, and lem-pod-point-derived-hom-evaluation is the special case V=B, so the item generalizes it and is not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitePointReconstructedHomModel",
+  "declaration": "WeilConjectures.FinitePointHom.finite_point_reconstructed_hom_model",
+  "declarations": [
+   "WeilConjectures.FinitePointHom.ordinaryDerived",
+   "WeilConjectures.FinitePointHom.ordinaryEvaluation_existsUnique",
+   "WeilConjectures.FinitePointHom.ordinaryEvaluation",
+   "WeilConjectures.FinitePointHom.ordinaryModelMap",
+   "WeilConjectures.FinitePointHom.A",
+   "WeilConjectures.FinitePointHom.B",
+   "WeilConjectures.FinitePointHom.Mod",
+   "WeilConjectures.FinitePointHom.finiteAbSheafify",
+   "WeilConjectures.FinitePointHom.finiteAbLocallyBijective",
+   "WeilConjectures.FinitePointHom.finiteSheafDerived",
+   "WeilConjectures.FinitePointHom.G",
+   "WeilConjectures.FinitePointHom.finiteSectionsAdditive",
+   "WeilConjectures.FinitePointHom.H",
+   "WeilConjectures.FinitePointHom.qSource",
+   "WeilConjectures.FinitePointHom.qTarget",
+   "WeilConjectures.FinitePointHom.sourceModelMap",
+   "WeilConjectures.FinitePointHom.targetModelMap",
+   "WeilConjectures.FinitePointHom.Reconstruction",
+   "WeilConjectures.FinitePointHom.ChainComparison",
+   "WeilConjectures.FinitePointHom.QNatural",
+   "WeilConjectures.FinitePointHom.Comparison",
+   "WeilConjectures.FinitePointHom.ReconstructedComparison",
+   "WeilConjectures.FinitePointHom.finite_point_reconstructed_hom_model"
+  ],
+  "file": "lean/Sheaf/Paper/FinitePointReconstructedHomModel.lean",
+  "statement": "theorem finite_point_reconstructed_hom_model (_hl : l ≠ D.p) (hn : 1 ≤ n) : ∃ (L : ModuleCat.{u + 1} (A l E n) ⥤ Mod D l E n) (hobj : ∀ M : ModuleCat.{u + 1} (A l E n), L.obj M = PointDerivedHom.extensionObject.{u, u} D.k (B D l E n) (𝟙 _) M), (∀ {M N : ModuleCat.{u + 1} (A l E n)} (f : M ⟶ N), L.map f = eqToHom (hobj M) ≫ PointDerivedHom.extensionMorphism.{u, u} D.k (B D l E n) (𝟙 _) f ≫ eqToHom (hobj N).symm) ∧ ∃ multiplication : L ≅ PointDerivedHom.constantModules.{u, u} D.k (PointDerivedHom.coefficientRing.{u, u} l E n false), (∀ (M : ModuleCat.{u + 1} (A l E n)) (U : (Scheme.ProEt (Spec (.of D.k)))ᵒᵖ) (b : (B D l E n).obj.obj U) (x : M), (multiplication.hom.app M).val.app U (PointDerivedHom.generator.{u, u} D.k (B D l E n) (𝟙 _) L hobj M U b x) = b • PointDerivedHom.constantElement.{u, u} D.k (PointDerivedHom.coefficientRing.{u, u} l E n false) M U x) ∧ ∃ adj : L ⊣ G D l E n, PointDerivedHom.ExplicitAdjunction.{u, u} D.k (B D l E n) (𝟙 _) L hobj adj ∧ PreservesFiniteLimits L ∧ PreservesFiniteColimits L ∧ PreservesFiniteLimits (G D l E n) ∧ PreservesFiniteColimits (G D l E n) ∧ Function.Bijective (PointDerivedHom.scalar.{u, u} D.k (B D l E n) (𝟙 _) (op (PointDerivedHom.finalObject D.k))) ∧ ∀ [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] [PreservesFiniteLimits (G D l E n)] [PreservesFiniteColimits (G D l E n)], ∃ hr : Reconstruction D l E n L hn adj, ∃! q : ∀ (c : DerivedCategory (ModuleCat.{u + 1} (A l E n))), DerivedCategory.pointFiniteCohomology (A l E n) c → ∀ V : DerivedCategory (Mod D l E n), (qSource D l E n L).obj (op c, V) ≅ (qTarget D l E n).obj (op c, V), Comparison D l E n L hobj q ∧ ReconstructedComparison D l E n L hn adj q (fun C hC ↦ (hr C hC).1)",
+  "branch": "sheaf-dag",
+  "by": "Q89",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed PointDerivedHom tensor/sections models and the ordinary-module RHom interface. Helpers normalize the chain comparison and its derived descent; the only auxiliary postponed theorem uniquely specifies ordinary signed evaluation. Exactness, explicit adjunction, scalar identification and reconstruction are conclusions, with arbitrary ambient derived targets."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5ec3d5a2",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Read the item node, all 15 stmt_dep records and their live sources (PointDerivedHomModels, IntegralHomReductionModels.homModelMap, OrdinaryModuleDerivedInternalHom and its closed structure, PointFiniteCohomology, IntrinsicFiniteTorsionConstructibility, PointSectionsReconstruction), plus the delivered module and report. Every node clause is rendered: L pinned by hobj/map equality and the b⊗x↦b•x multiplication iso; exact L and Γ; ΓB=A via the bijective scalar map; ExplicitAdjunction; counit IsIso and the triangle identity on D^b_c; ΓJ K-injective and ΓV→ΓJ quasi-iso for arbitrary V; q_{P,J} normalized by h(1⊗x); q pinned by the square of canonical model maps (homModelMap, closed-structure transpose of Koszul evaluation), both asserted iso, with ∃! and naturality for all derived maps; Q=q∘ΓRHom(e_C,V) with its naturality. Checked by hand that evaluation with sign (-1)^{pj} is a chain map under Mathlib conventions and that both model maps are invertible. Statement verbatim, all 23 declarations listed, docstrings present, sorry-only, not hollow (∃!.choose), node diff vs live only lean+stmt_deps (3 landed owner defs), no supersession. Advisories: global priority-2100 HasDerivedCategory instance for ModuleCat (precedent exists); inline K-flat condition matching the landed PointDerivedHom.Statement. No files changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261026T092519-L-3438862",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

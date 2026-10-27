@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-integral-line-support-preservation",
+ "kind": "statement",
+ "title": "Finite signed-line tensor does not enlarge cohomological support",
+ "statement": "In the integral line reduction data [def-pur-integral-line-reduction-data], let L be locally free of rank one. For every quotient index n, integer m and unbounded derived finite-coefficient module K, the cohomological support [def-weil-cohomological-support] of finiteOrdinary(L,n,m)(K) is contained in the cohomological support of K. There is no boundedness, completeness or constructibility hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU; homology.tex Tag 010N; final support sentence of proof (3) in literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md"
+ },
+ "stmt_deps": [
+  "def-pur-integral-line-reduction-data",
+  "def-weil-cohomological-support"
+ ],
+ "proof": [
+  {
+   "text": "Identify the actual scalar reduction of L with changeOfRingsOfUniverses using the specified scalarReductionExistence object equation and ScalarHomOrdinary.extensionIso. Scalar extension preserves invertibility; transport it across this isomorphism. Invertibility is equivalent to finite local freeness of rank one. Rewrite finitePower as coefficientTwistLine and apply signedLineTensor_equivalence, obtaining rank one for every signed finite power, including zero and negative exponents.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-local-iso",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-signed-line-tensor-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03EK and 0B8N; signed powers and scalar extension"
+   }
+  },
+  {
+   "text": "For an arbitrary flat module M and the specified closed tensor model S, choose a K-flat resolution P of a complex representing K. The flat-single theorem supplies K-flatness of M[0], exactness of tensorRight M, and the collapse of total tensor with M[0] to termwise tensor. Compose the inverse collapse, the actual S.models.iso and the tensor image of QP isomorphic to K. This gives Q(termwise tensor(P,M)) isomorphic to S.tensor(K,M[0]), with no identification between distinct chosen tensor models needed.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-flat-single-derived-normalization",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN and 06YU; K-flat computation of unbounded derived tensor"
+   }
+  },
+  {
+   "text": "If H^i(K) is zero, transport along QP isomorphic to K and homologyFunctorFactors to show H^i(P) is zero. The exact functor tensorRight M maps this zero object to zero. ShortComplex.mapHomologyIso identifies that image with H^i of termwise tensor. Transport back along homologyFunctorFactors and the tensor isomorphism of step 2. For M the finite signed power, flatness follows from line_unbounded_derived_tensor. Contraposition is precisely the asserted support inclusion.",
+   "uses": [
+    "lem-pur-line-unbounded-derived-tensor",
+    "def-weil-cohomological-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU; homology.tex Tag 010N, exact functors commute with homology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-dual-local-iso",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-signed-line-tensor-equivalence",
+  "lem-pc-kflat-resolution",
+  "lem-pur-flat-single-derived-normalization",
+  "lem-pur-line-unbounded-derived-tensor",
+  "def-weil-cohomological-support",
+  "lem-sfb-ringed-site-duality-maps"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU; homology.tex Tag 010N; final support sentence of proof (3) in literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a complex with a flat rank one sheaf preserves cohomology and commutes with derived extension of scalars",
+   "date": "2026-10-25",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheafFunctor; Rep.torIso; CategoryTheory.Sheaf.cohomologyPresheaf",
+   "verdict": "Use the existing exact tensor, homology and scalar comparison APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-25",
+   "results": "CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategoryIdIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId",
+   "verdict": "Use the existing exact tensor, homology and scalar comparison APIs; no complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteOrdinary|integral_line_derived_comparisons",
+   "date": "2026-10-25",
+   "results": "0 hits",
+   "verdict": "Use the existing exact tensor, homology and scalar comparison APIs; no complete match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical natural isomorphism derived extension of scalars commutes with tensor product computed on K flat complexes",
+   "date": "2026-10-25",
+   "results": "ModuleCat.extendScalarsComp_hom_app_one_tmul; CategoryTheory.Tor'_obj_map; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; CategoryTheory.Tor'_map_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_obj",
+   "verdict": "Use the existing exact tensor, homology and scalar comparison APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero.of_iso",
+   "date": "2026-10-25",
+   "results": "CategoryTheory.Limits.IsZero.of_iso",
+   "verdict": "Use the existing exact tensor, homology and scalar comparison APIs; no complete match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineDerivedComparisons",
+  "date": "2026-10-25",
+  "group": "U9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-line-derived-comparisons",
+   "place": "Finite signed-line tensor does not enlarge cohomological support",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineSupportPreservation",
+  "file": "lean/Sheaf/Paper/IntegralLineSupportPreservation.lean",
+  "declaration": "WeilConjectures.IntegralLineReduction.finite_ordinary_support_subset",
+  "statement": "theorem finite_ordinary_support_subset\n    (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]\n    (n : ℕ) (m : ℤ) (K : DerivedCategory (scalarReductionTarget.{u, u} l E X n)) :\n    proEtaleCohomologicalSupport ((finiteOrdinary l E X L n m).obj K) ⊆\n      proEtaleCohomologicalSupport K",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T101537-L-3706933",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T101537-L-3706933",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

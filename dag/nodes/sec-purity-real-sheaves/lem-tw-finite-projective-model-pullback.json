@@ -1,0 +1,274 @@
+{
+ "id": "lem-tw-finite-projective-model-pullback",
+ "kind": "statement",
+ "title": "Normalized finite-projective constant models under ordinary derived pullback",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$ [def-weil-l-adic-coefficient-extension]. For every scheme $T$ use its small pro-etale site [def-weil-pbc-proetale-site], the constant ring sheaves $C_{n,T}=(R/t^n)_T$, and $B_T=\\varprojlim_{n\\geq1}C_{n,T}$ with projections $\\pi_{T,n}$ [def-weil-completed-integral-coefficients]. For a scheme morphism $g:T\\to W$ [def-weil-scheme-morphism-properties], let $g^{-1}$ and $c^g_{R/t^n}$ be the inverse image and constant-section maps [def-weil-proetale-inverse-image]. Give it the structural ring map $c_g:g^{-1}B_W\\to B_T$ characterized by $\\pi_{T,n}c_g=c^g_{R/t^n}g^{-1}(\\pi_{W,n})$. Write $g_B^*M=B_T\\otimes_{g^{-1}B_W}g^{-1}M$ for ordinary module pullback, and $P_g=Lg_B^*$ with computation counit $\\epsilon_Q:P_g[Q]\\to[g_B^*Q]$ [lem-weil-pbc-ringed-topoi-derived-pullback]. Here module sheaves and their ordinary unbounded derived categories are those of [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], $[Q]$ denotes localization, and tensor products are sheaf tensor products [def-pur-sheaf-tensor-product].\n\nLet $v:V\\to U$ be any scheme morphism and let $L^\\bullet$ be a cochain complex of $R$-modules, zero outside some finite integer interval, with each $L^q$ a direct summand of a finite free $R$-module. Put $M_T^\\bullet=B_T\\otimes_{\\underline R_T}\\underline{L^\\bullet}_T$ for $T=U,V$, where underlining means termwise constant sheaves [def-weil-pbc-constant-sheaf] and the map $\\underline R_T\\to B_T$ has $n$-th projection the constant quotient $R\\to R/t^n$.\n\nThere is a natural isomorphism of complexes\n$$\\gamma_L:v_B^*M_U^\\bullet\\xrightarrow{\\sim}M_V^\\bullet.$$\nFor $L^q=R^r$ with standard basis $e_j$, its degree-$q$ map and inverse have the formulas\n$$b\\otimes(ae_j)\\longmapsto b\\,c_v(a)e_j,\\qquad be_j\\longmapsto b\\otimes e_j,$$\nwhere $a$ is a local section of $v^{-1}B_U$ and $b$ a local section of $B_V$. For each specified splitting $L^q\\xrightarrow{\\iota_q}R^{r_q}\\xrightarrow{p_q}L^q$ with $p_q\\iota_q=1$, $\\gamma_L^q$ is the restriction of this finite-free isomorphism to the image of the same scalar idempotent $e_q=\\iota_qp_q\\in M_{r_q}(R)$. It is independent of the splitting and natural in every $R$-linear map between finite projective modules, hence commutes with the specified differentials of $L^\\bullet$.\n\nEvery term of $M_U^\\bullet$ is flat [def-pc-flat-sheaf-modules] and $M_U^\\bullet$ is K-flat [def-pc-kflat-complex]. The specified ordinary computation counit is an isomorphism, and in the derived category the normalized model comparison is the isomorphism\n$$P_v[M_U^\\bullet]\\xrightarrow{\\epsilon_{M_U}}[v_B^*M_U^\\bullet]\\xrightarrow{[\\gamma_L]}[M_V^\\bullet].$$\nNo flatness of $B_U$ over $R$ or of $c_v$, and no completion of this comparison, is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, lemma-bounded-flat-K-flat, and 06YY, lemma-derived-base-change; Bhatt--Scholze Proposition 6.6.11 and Remark 6.8.15 for perfect scalar models. Extraction of returned proof steps 6-8, including the balanced-tensor, splitting and differential normalization (agent argument)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof": [
+  {
+   "text": "Prove the direct-image scalar square by projecting to every finite coefficient quotient and applying naturality of constant-section maps [def-weil-completed-integral-coefficients, def-weil-proetale-inverse-image, def-sf-ordinary-integral-pullback-construction]. Evaluate this square on constant R-sections; the two scalar restrictions of the module pushforward agree.",
+   "uses": [
+    "def-weil-completed-integral-coefficients",
+    "def-weil-proetale-inverse-image",
+    "def-sf-ordinary-integral-pullback-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; specialization to the published ordinary completed-integral module pullback, and uniqueness of total left derived functors."
+   }
+  },
+  {
+   "text": "Construct explicitly the adjunction between constant modules and evaluation at a terminal object, using constant-module sheafification, and the adjunction between the independent-universe scalar-extension functor and restriction of scalars [def-weil-pbc-strict-perfect-coefficient-package, def-pur-sheaf-tensor-product]. Their composite identifies maps from the model with R-linear maps into terminal sections. Step 1 identifies the right adjoints before and after ordinary pushforward. Uniqueness of left adjoints gives a natural isomorphism for every R-module, hence for finite projectives. Evaluate the hom-equivalence identity on x to obtain the normalized formula at the terminal object, and use restriction naturality to obtain it on every object. Injectivity of the two adjunction hom-equivalences proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; specialization to the published ordinary completed-integral module pullback, and uniqueness of total left derived functors."
+   }
+  },
+  {
+   "text": "Linearity and the adjunction unit give the two finite-free basis formulas. Naturality gives the displayed retract equations for any specified splitting, independently of the splitting. Apply naturality to each differential to obtain the complex isomorphism. These are direct categorical calculations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; specialization to the published ordinary completed-integral module pullback, and uniqueness of total left derived functors."
+   }
+  },
+  {
+   "text": "The scalar realization of R is the unit module by the proved constant-unit and scalar-extension-unit isomorphisms [lem-sfb-scalar-perfect-chart-finite-free]. Being a left adjoint, the model preserves finite products. Thus it sends R^n to the finite free sheaf. A finite projective module is a retract of R^n by Mathlib; its realization is the corresponding retract. The finite-free retract flatness lemma [lem-weil-pbc-strict-perfect-ringed-pullback-model] proves flatness of each term. The bounded interval gives boundedness above, so [lem-weil-pbc-independent-bounded-flat-kflat] proves K-flatness.",
+   "uses": [
+    "lem-sfb-scalar-perfect-chart-finite-free",
+    "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; specialization to the published ordinary completed-integral module pullback, and uniqueness of total left derived functors."
+   }
+  },
+  {
+   "text": "Use the existing canonical computation theorem [lem-tw-ordinary-integral-good-complex-counit] and naturality of its complex comparison to show ordinary pullback preserves quasi-isomorphisms between flat-term K-flat complexes. Every complex has a resolution in this class [lem-pc-kflat-resolution]. The resolving-class theorem [lem-pur-left-derived-from-kflat-class] therefore constructs a derived pair computing on this class in any specified derived-category universe. Uniqueness of total left derived functors transfers invertibility to the arbitrary LF and epsilon in the statement. Apply this to the bounded flat model complex of step 4. Finally localization sends the complex comparison to an isomorphism, and composition with the computation counit is invertible.",
+   "uses": [
+    "lem-tw-ordinary-integral-good-complex-counit",
+    "lem-pc-kflat-resolution",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; specialization to the published ordinary completed-integral module pullback, and uniqueness of total left derived functors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-scalar-perfect-chart-finite-free",
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-tw-ordinary-integral-good-complex-counit",
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03CY, 03EK, 06YY and 06YQ. Adjunction uniqueness gives the normalized comparison for all modules; finite-projective retracts are used only for flatness. The already published independent good-complex counit is recorded separately to avoid a spurious dependency on the later constructible-completeness theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of constant finite projective modules extended to a sheaf of rings is K-flat and its ordinary derived ringed pullback is the same constant complex with basis and idempotent normalization",
+   "results": "Hits read: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, CompHausLike.LocallyConstantModule.functor, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, Module.Flat.of_projective, Module.Flat.projective_of_finitePresentation. Free-sheaf pullback and ordinary module flatness/scalar-extension results do not give the specified completed-coefficient constant-projective complex comparison and its ordinary derived computation counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pullbackObjFreeIso\"",
+   "results": "Hits read: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. Free-sheaf pullback and ordinary module flatness/scalar-extension results do not give the specified completed-coefficient constant-projective complex comparison and its ordinary derived computation counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|KFlat|K.flat|[Pp]rojective",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Free-sheaf pullback and ordinary module flatness/scalar-extension results do not give the specified completed-coefficient constant-projective complex comparison and its ordinary derived computation counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars on bounded perfect constant sheaf complexes preserves projective summands and is computed by the ordinary K-flat counit",
+   "results": "Hits read: ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.ExtendRestrictScalarsAdj.counit, Module.Flat.rTensor_shortComplex_exact, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.lTensor_shortComplex_exact, IsSMulRegular.of_flat_of_isBaseChange, ModuleCat.RestrictionCoextensionAdj.counit'. Free-sheaf pullback and ordinary module flatness/scalar-extension results do not give the specified completed-coefficient constant-projective complex comparison and its ordinary derived computation counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso|KFlat|Kflat|strictPerfect",
+   "results": "Hits read: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Read PullbackFree.lean:100-143: these give ordinary free-sheaf comparisons, with continuity/finality and sheafification hypotheses. Neither these nor ordinary-module retract flatness state the completed-coefficient scalar-normalized complex comparison with its K-flat counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjFreeIso",
+   "results": "Hits read: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc. Read PullbackFree.lean:100-143: these give ordinary free-sheaf comparisons, with continuity/finality and sheafification hypotheses. Neither these nor ordinary-module retract flatness state the completed-coefficient scalar-normalized complex comparison with its K-flat counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of bounded retracts of finite free module sheaves computed by the K flat counit",
+   "results": "Hits read: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, Module.Flat.of_retract, SheafOfModules.pullback. Read PullbackFree.lean:100-143: these give ordinary free-sheaf comparisons, with continuity/finality and sheafification hypotheses. Neither these nor ordinary-module retract flatness state the completed-coefficient scalar-normalized complex comparison with its K-flat counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constant finite projective complex extended to a sheaf of rings has normalized ordinary derived pullback with the same scalar idempotent",
+   "results": "Hits read: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality. Read PullbackFree.lean:100-143: these give ordinary free-sheaf comparisons, with continuity/finality and sheafification hypotheses. Neither these nor ordinary-module retract flatness state the completed-coefficient scalar-normalized complex comparison with its K-flat counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and scalar extension of a constant finite projective module preserve its splitting and differentials naturally",
+   "results": "Hits read: Algebra.FormallyUnramified.projective_of_restrictScalars, IsBaseChange.toDualBaseChange, Algebra.Extension.tensorH1Cotangent, KaehlerDifferential.isBaseChange, Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, retractionKerToTensorEquivSection, RingHom.finite_isStableUnderBaseChange. Read PullbackFree.lean:100-143: these give ordinary free-sheaf comparisons, with continuity/finality and sheafification hypotheses. Neither these nor ordinary-module retract flatness state the completed-coefficient scalar-normalized complex comparison with its K-flat counit.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-ordinary-pullback-stratified-models",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Proposition 6.6.11 and Remark 6.8.15: base-changed strata, covering slices and finite-projective ordinary pullback models. Agent extraction of original steps 2-3, with the model interfaces used by steps 1 and 4. Returned ordinary-model proof steps 6-8: finite-projective scalar realization, K-flat counit and basis/idempotent normalization.",
+   "via": [
+    "lem-tw-ordinary-pullback-stratified-models",
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-finite-projective-model-pullback",
+  "worker": "stage1",
+  "summary": "No new nodes. Explicitly checked scalar compatibility at every finite quotient, scalar-realized retractions, balanced finite-free formulas, rectangular-matrix naturality and independence of splitting. Existing strict-perfect ringed pullback gives flatness, K-flatness and the specified counit. Statement and statement dependencies unchanged.",
+  "blueprint": "lem-tw-dual-negation first-sentence stalk transport, through its lisse realization and ordinary-pullback local-model descendants: supplies the finite-projective model normalization extracted as original steps 6-8 of lem-tw-ordinary-pullback-stratified-models.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "General arbitrary-ring constant scalar comparison, needed for R (which is not finite); used as a geometric tool, not a change in the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic additive and finite-limit preserving inverse image on the chosen pro-etale sites, used in the finite-free calculation."
+   },
+   {
+    "node": "lem-weil-pbc-strict-perfect-ringed-pullback-model",
+    "why": "Generic bounded finite-free-retract flatness and K-flat computation for the canonical ordinary counit; no node in this weights unit supplies the ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-perfect-ringed-pullback-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-b96806c89",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-b96806c89 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. Statement and stmt_deps are unchanged and match the use in step 4 of the citer lem-tw-ordinary-pullback-stratified-models. There is no repair note, so this is a first split, not a 2026-10-21 re-split. The base-change map c_v and the coefficient category (modules over the limit sheaf B_T, ordinary unbounded D) agree with the parent node and with def-weil-proetale-inverse-image. Step 1: I verified c_v v^{-1}s_U = s_V delta_R on constants after each projection pi_{V,n}, using naturality of c^v in A and lem-pe-constant-left-module-inverse-image for an arbitrary ring R. Steps 2-3: the balanced free tensor is already a sheaf, and I recomputed the matrix identity gamma_s v^*F_U(A) = F_V(A) gamma_r through step 1. Step 4: I recomputed gamma_P eta_P = 1, eta_P gamma_P = 1, the restriction I_V gamma_P = gamma_r v^*I_U, naturality via A = i'hp with Ae = A, and independence of the splitting. This is the Stacks 08H3 argument (sites-cohomology.tex:11755) written out. Step 5: the degreewise package on B_U needs no chain splittings, as def-weil-pbc-strict-perfect-coefficient-package allows. Step 6: lem-weil-pbc-strict-perfect-ringed-pullback-model applies with R=B_U, S=B_V and the map c_v, and gives flat terms, K-flatness, an invertible epsilon and naturality, with no flatness assumed. Edge cases tested: L=0, an empty scheme, L=R, idempotents 0 and 1, two different splittings, a nonzero differential, a non-flat ring map. The DAG search (strict-perfect-ringed-pullback-model, perfect-chart-tensor-comparison, sp coefficient-tower-normalization, per rational-realization comparison) found no duplicate. There is no SGA, and proof_deps equal the union of the step uses. Three generic tool_uses are accepted: lem-pe-constant-left-module-inverse-image, lem-weil-pbc-left-exact-site-inverse-image-tensor and lem-weil-pbc-strict-perfect-ringed-pullback-model."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProjectiveModelPullback",
+  "declaration": "WeilConjectures.FiniteProjectivePullback.finiteProjectiveModelPullback",
+  "declarations": [
+   "WeilConjectures.FiniteProjectivePullback.scalar",
+   "WeilConjectures.FiniteProjectivePullback.model",
+   "WeilConjectures.FiniteProjectivePullback.modelSection",
+   "WeilConjectures.FiniteProjectivePullback.model_additive",
+   "WeilConjectures.FiniteProjectivePullback.generator",
+   "WeilConjectures.FiniteProjectivePullback.Projectives",
+   "WeilConjectures.FiniteProjectivePullback.projectiveModel",
+   "WeilConjectures.FiniteProjectivePullback.comparison_existsUnique",
+   "WeilConjectures.FiniteProjectivePullback.comparison",
+   "WeilConjectures.FiniteProjectivePullback.free",
+   "WeilConjectures.FiniteProjectivePullback.comparison_free",
+   "WeilConjectures.FiniteProjectivePullback.comparison_retract",
+   "WeilConjectures.FiniteProjectivePullback.modelComplex",
+   "WeilConjectures.FiniteProjectivePullback.comparison_differential",
+   "WeilConjectures.FiniteProjectivePullback.complexComparison",
+   "WeilConjectures.FiniteProjectivePullback.finiteProjectiveModelPullback"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteProjectiveModelPullback.lean",
+  "statement": "theorem finiteProjectiveModelPullback {V U : Scheme.{u}} (v : V ⟶ U) [HasDerivedCategory.{w} (integralTowerModules.{u, u} l E U)] [HasDerivedCategory.{w} (integralTowerModules.{u, u} l E V)] (LF : DerivedCategory (integralTowerModules.{u, u} l E U) ⥤ DerivedCategory (integralTowerModules.{u, u} l E V)) (epsilon : DerivedCategory.Qh ⋙ LF ⟶ (ordinaryIntegralModulePull l E v).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) [LF.IsLeftDerivedFunctor epsilon (HomotopyCategory.quasiIso (integralTowerModules.{u, u} l E U) (.up ℤ))] (L : CochainComplex (ModuleCat.{u + 1} (PbcIntegralRing l E)) ℤ) (hL : ∀ q : ℤ, Module.Finite (PbcIntegralRing l E) (L.X q) ∧ Module.Projective (PbcIntegralRing l E) (L.X q)) (a b : ℤ) (_hbounded : ∀ q : ℤ, q < a ∨ b < q → IsZero (L.X q)) : (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology U) (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E U) (((modelComplex l E U).obj L).X q)) ∧ CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology U) (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E U) ((modelComplex l E U).obj L) ∧ IsIso (LF.map ((DerivedCategory.quotientCompQhIso _).inv.app ((modelComplex l E U).obj L)) ≫ epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((modelComplex l E U).obj L)) ≫ DerivedCategory.Qh.map (((ordinaryIntegralModulePull l E v).mapHomotopyCategoryFactors (.up ℤ)).hom.app ((modelComplex l E U).obj L)) ≫ (DerivedCategory.quotientCompQhIso _).hom.app (((ordinaryIntegralModulePull l E v).mapHomologicalComplex (.up ℤ)).obj ((modelComplex l E U).obj L))) ∧ IsIso (LF.map ((DerivedCategory.quotientCompQhIso _).inv.app ((modelComplex l E U).obj L)) ≫ epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((modelComplex l E U).obj L)) ≫ DerivedCategory.Qh.map (((ordinaryIntegralModulePull l E v).mapHomotopyCategoryFactors (.up ℤ)).hom.app ((modelComplex l E U).obj L)) ≫ (DerivedCategory.quotientCompQhIso _).hom.app (((ordinaryIntegralModulePull l E v).mapHomologicalComplex (.up ℤ)).obj ((modelComplex l E U).obj L)) ≫ DerivedCategory.Q.map (complexComparison l E v L hL).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Returned-delivery repair: reuse PbcIntegralRing, integralTowerModules, ordinaryIntegralDirectRingMap, ordinaryIntegralModulePull and ordinaryIntegralModuleAdjunction at Scheme.{u}, E : Type u. The ordinary construction is cited through its owning definition node. The computation counit is written inline using epsilon.app on the homotopy quotient and canonical localization factorization isomorphisms; the strict-perfect pullback theorem is proof-only. No private ring-map, pullback, adjunction or module-category definition remains. All normalized basis, retract, differential, flatness and K-flatness clauses are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf38e8d77",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Re-delivery repairs ea3fc17b RETURN: private c_v/pull/adjunction/Modules copies removed, published def-sf-ordinary-integral-pullback-construction decls used at Scheme.{u}, E:Type u (same as citer); counit inline = ordinaryIntegralPullComplexCounit composite, no ringedPullbackComplexComparison; node diff only lean+stmt_deps, stmt_deps add only landed def nodes def-sf-ordinary-integral-pullback-construction and def-weil-pbc-strict-perfect-coefficient-package. All clauses (scalar, model, uniquely normalized natural iso, basis formulas, retract/idempotent, differentials, flat, K-flat, eps iso, [gamma]eps iso) match; no extra hypotheses; edge cases covered; statement verbatim; 6 sorry theorems, real defs, docstrings ok. Advisory: citer's own adicLisse model vs scalarPerfectFunctor needs a stage-3 bridge; scalarExtensionSection reached via strict-perfect package interface. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261023T231852-L-3653189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

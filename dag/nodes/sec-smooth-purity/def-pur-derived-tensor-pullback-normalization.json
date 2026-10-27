@@ -1,0 +1,115 @@
+{
+ "id": "def-pur-derived-tensor-pullback-normalization",
+ "kind": "definition",
+ "title": "Normalization predicate for the existing derived tensor pullback comparison",
+ "status": "split",
+ "statement": "Let $(C,J)$ and $(D,K)$ be sites essentially small in a coefficient universe $r$, let $R$ and $S$ be sheaves of commutative rings, and use their module-sheaf categories [def-weil-sheaf-of-modules-category] and ordinary unbounded derived categories with independent localization universes [def-weil-abstract-derived-category]. Use the already constructed derived tensor $T_R,T_S$ and resolving comparison $\\rho_{P,Q}:Q\\operatorname{Tot}(P\\otimes Q)\\cong T_R(QP,QQ)$ of [def-sf-ringed-kflat-tensor-representative-data]; the names canonicalDerivedTensor and canonicalRepresentativeIso denote exactly these existing data. For a ringed pullback presentation $f$, its termwise pullback $f^*$ and canonical insertion-of-one total comparison $c_{P,Q}$ [def-pur-cochain-tensor-coherence-data], a functor $L:D(R)\\to D(S)$ and a natural transformation $\\epsilon:Q_R L\\to f^*Q_S$ (where composition is read left to right), define $\\Phi_L=T_R\\mathbin{\\gg}L$ and $\\Psi_L=(L\\times L)\\mathbin{\\gg}T_S$. For any natural transformation $\\tau:\\Phi_L\\to\\Psi_L$, define IsNormalized to mean: for every pair of K-flat complexes $P,Q$ with flat terms, their pullbacks are K-flat with flat terms, and, using those witnesses for the target resolving comparison,\n$$L(\\rho_{P,Q})\\,\\tau_{(Q_RP,Q_RQ)}\\,T_S(\\epsilon_P,\\epsilon_Q)=\\epsilon_{\\operatorname{Tot}(P\\otimes Q)}\\,Q_S(c_{P,Q})\\,\\rho_{f^*P,f^*Q}.$$\nThis is a predicate on the supplied transformation, not an assertion that such a transformation exists, is unique or is invertible. No shift structure or exactness hypothesis on $L$ is included.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sf-ringed-kflat-tensor-representative-data",
+  "def-pur-cochain-tensor-coherence-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; resolving complexes from Tag 0G7E, lemma-pullback-K-flat. The representative square is the normalization used in the scalar-extension coherence proof steps 3-4."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized derived tensor pullback comparison specified by the canonical square on flat term K flat representatives",
+   "results": "OK 8 hit(s): CategoryTheory.Limits.pullbackComparison, LinearMap.tensorKerEquiv_apply, VectorField.mpullback_eq_pullback, VectorField.mpullbackWithin_univ, ContMDiffVectorBundle.pullback, AlgebraicGeometry.Flat.instSndScheme, LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm, CategoryTheory.Square.IsPullback",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib definition; use the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalDerivedTensor|canonicalRepresentativeIso|IsNormalized.*[Tt]ensor|[Tt]ensor.*IsNormalized",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib definition; use the existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor pullback representative square normalization",
+   "results": "OK 8 hit(s): CategoryTheory.ChosenPullbacksAlong.Over.tensorObj_left, CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left, CategoryTheory.Over.tensorHom_left, CategoryTheory.Dial.tensorHomImpl, CategoryTheory.Over.tensorObj_left, CategoryTheory.ChosenPullbacksAlong.Over.tensorObj_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, CategoryTheory.Over.tensorObj_hom",
+   "date": "2026-10-22",
+   "verdict": "No matching Mathlib definition; use the existing project definitions."
+  },
+  {
+   "tool": "rg / blueprint_refs.py search",
+   "query": "canonicalDerivedTensor|canonicalRepresentativeIso|PullbackTensorCanonical\\.(Phi|Psi|IsNormalized), in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search \"normalized derived tensor pullback\"",
+   "results": "The five exact definitions occur in Sheaf.Paper.PullbackTensorCanonicalShiftUnit and are listed as helpers of its theorem node; no separate definition node owns the normalization predicate. WeilConjectures hits concern unrelated scheme tensor-Hom comparisons. No matching blueprint node.",
+   "date": "2026-10-22",
+   "verdict": "Record the existing definitions as a definition node; do not duplicate them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-algebra-diagram-pullback-extension-coherence",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Ambient tensor pullback comparison on simultaneous flat-term K-flat representatives, proof steps 3-4.",
+   "via": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence",
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.PullbackTensorCanonicalShiftUnit",
+  "declaration": "SheafOfModules.PullbackTensorCanonical.IsNormalized",
+  "declarations": [
+   "SheafOfModules.PullbackTensorCanonical.canonicalDerivedTensor",
+   "SheafOfModules.PullbackTensorCanonical.canonicalRepresentativeIso",
+   "SheafOfModules.PullbackTensorCanonical.Phi",
+   "SheafOfModules.PullbackTensorCanonical.Psi",
+   "SheafOfModules.PullbackTensorCanonical.IsNormalized"
+  ],
+  "statement": "def IsNormalized (tau : Phi L ⟶ Psi L) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership for the five existing plain definitions used in the item signature, per return C1/H2. The primary predicate is defined in the existing module at lines 524-547; its tensor and resolving aliases are precisely the published KFlatFixedTensor data (lines 416-417 and 441-449), and Phi/Psi are the actual composites (lines 514-519). Record the definitions directly under brief-stage2 §1(A)/§5 existing:true: no theorem, .choose, tensor choice, copied definition or theorem consequence is used. This retains one definition per notion and avoids moving an already published interface with many consumers."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61d3d1cbb",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61d3d1cbb",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery of 90c99809 C1/H2 RETURN; mathematics unchanged and re-confirmed (all Coherence data pinned, tensor_coherence/unit_coherence = node equations, exactness concluded, no flatness/boundedness, edge cases ok). Repair verified: hInv/hDir/hAdj are verbatim expansions of the diagramCoefficient* helper bodies; lem-pur-diagram-ring-restriction-pushforward dropped; ExactPullbackSignedComparison only a plain proof import; new def-pur-derived-tensor-pullback-normalization existing:true on unchanged PullbackTensorCanonicalShiftUnit owns exactly the 5 used decls, statement verbatim, check_existing clean, TeX matches IsNormalized, body owners cited, no cycle; item JSON differs only in lean/stmt_deps; no theorem stmt_dep added vs live. Advisory: diagramSiteSheafEquivalence (owner theorem lem-weil-pbc-diagram-site-sheaf-equivalence) and base-era diagramSiteTopology not in stmt_deps; base theorem stmt_deps carry structures. No file changed, no compile."
+ }
+}

@@ -1,10 +1,11 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q13
+Authors: SHEAF groups Q13 and P4
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.ProEtaleCompletedCoefficientData
 public import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
@@ -15,16 +16,20 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatib
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.AlgebraicGeometry.ProEtaleNormalizedIntegralTower
+import Sheaf.AlgebraicGeometry.ProEtaleCompletedRationalization
+import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.CategoryTheory.FilteredRingObjectCoconeColimit
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.CategoryTheory.Yoneda
+import Mathlib.Topology.Algebra.Ring.Compact
+import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 
 /-!
 # Comparison of pulled-back condensed coefficients with completed coefficients
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
+Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
 sk-prop-sfb-qlbar-colimit-x/_section.md and its two proof files
 (blueprint: sk-prop-sfb-qlbar-colimit-x).
 
@@ -32,6 +37,8 @@ The integral comparison is stated as a limit universal property, with its reduct
 normalized on constant sections. Rationalization is stated as the sequential module
 colimit together with the ring-localization universal property. These formulations
 specify the canonical comparisons without choosing new models for the coefficients.
+Rationalization naturality retains the underlying bundled ring comparison; its additive
+component is identity followed by the inverse-image compositor.
 -/
 
 @[expose] public section
@@ -44,98 +51,85 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Constant rings, as ring objects in abelian sheaves, with the standard integer tensor.
-Source: the constant finite quotients in the first display of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbConstantRing (X : Scheme.{u}) :
-    RingCat.{u + 1} ⥤ Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :=
-  RingCat.toMonAb ⋙ (constantSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).mapMon
+attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
+  monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
 
-/-- The same constant-ring construction on the pro-étale point.
-Source: the finite quotients in the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbPointConstantRing :
-    RingCat.{u + 1} ⥤ Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
-  RingCat.toMonAb ⋙ (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMon
+private noncomputable def sfb_padic_quotient_equiv (ℓ : ℕ) [Fact ℓ.Prime] (n : ℕ) :
+    ℤ_[ℓ] ⧸ Ideal.span ({(ℓ : ℤ_[ℓ])} : Set ℤ_[ℓ]) ^ n ≃+* ZMod (ℓ ^ n) :=
+  (Ideal.quotEquivOfEq (by
+    rw [Ideal.span_singleton_pow, PadicInt.ker_toZModPow])).trans
+    (RingHom.quotientKerEquivOfSurjective (ZMod.ringHom_surjective (PadicInt.toZModPow n)))
 
-/-- The quotient tower, including the harmless terminal zero quotient at exponent zero.
-Its maps are the quotient reductions, not arbitrary ring homomorphisms.
-Source: first display of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbCoefficientQuotientTower (R : Type) [CommRing R] (I : Ideal R) :
-    ℕᵒᵖ ⥤ RingCat.{u + 1} :=
-  Functor.ofOpSequence (X := fun n : ℕ ↦ RingCat.of (ULift.{u + 1} (R ⧸ I ^ n)))
-    (fun n : ℕ ↦ RingCat.ofHom
-    (ULift.ringEquiv.symm.toRingHom.comp
-      ((Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ n))).comp
-        ULift.ringEquiv.toRingHom)))
+private theorem sfb_padic_quotient_equiv_mk (ℓ : ℕ) [Fact ℓ.Prime] (n : ℕ) (x : ℤ_[ℓ]) :
+    sfb_padic_quotient_equiv ℓ n (Ideal.Quotient.mk _ x) = PadicInt.toZModPow n x := by
+  simp only [sfb_padic_quotient_equiv, RingEquiv.trans_apply, Ideal.quotEquivOfEq_mk,
+    RingHom.quotientKerEquivOfSurjective_apply_mk]
 
-/-- Constant sections of a topological ring, mapped into its condensed abelian sheaf.
-This is the adjoint of the map sending a scalar to its constant continuous function.
-Source: normalization of the reduction maps in the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbConstantToContinuous (R : Type) [CommRing R] [TopologicalSpace R]
-    [IsTopologicalRing R] :
-    (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj
-        (AddCommGrpCat.of (ULift.{u + 1} R)) ⟶ Profinite.continuousMapRingObj R :=
-  ((sheafificationAdjunction (coherentTopology Profinite.{u}) Ab.{u + 1}).homEquiv _ _).symm
-    { app S := AddCommGrpCat.ofHom
-        { toFun := fun x ↦ ULift.up (ContinuousMap.const S.unop x.down)
-          map_zero' := rfl
-          map_add' := fun _ _ ↦ rfl }
-      naturality := fun _ _ _ ↦ rfl }
+private theorem sfb_padic_quotient_tower (ℓ : ℕ) [Fact ℓ.Prime] :
+    ∃ e : sfbCoefficientQuotientTower ℤ_[ℓ]
+        (Ideal.span ({(ℓ : ℤ_[ℓ])} : Set ℤ_[ℓ])) ≅ sfbZModCoefficientTower.{u} ℓ,
+      ∀ (n : ℕ) (x : ℤ_[ℓ]),
+        (e.hom.app (op n)).hom (ULift.up (Ideal.Quotient.mk
+          (Ideal.span ({(ℓ : ℤ_[ℓ])} : Set ℤ_[ℓ]) ^ n) x)) =
+            ULift.up (PadicInt.toZModPow n x) := by
+  let e (n : ℕ) := ((ULift.ringEquiv.trans (sfb_padic_quotient_equiv ℓ n)).trans
+    ULift.ringEquiv.symm).toRingCatIso
+  let α : sfbCoefficientQuotientTower ℤ_[ℓ]
+        (Ideal.span ({(ℓ : ℤ_[ℓ])} : Set ℤ_[ℓ])) ⟶ sfbZModCoefficientTower.{u} ℓ :=
+    NatTrans.ofOpSequence (fun n ↦ (e n).hom) (fun n ↦ by
+      simp only [sfbCoefficientQuotientTower, sfbZModCoefficientTower,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      ext x
+      obtain ⟨y, hy⟩ := Ideal.Quotient.mk_surjective x.down
+      cases x
+      dsimp at hy ⊢
+      subst hy
+      change ULift.up (sfb_padic_quotient_equiv ℓ n (Ideal.Quotient.mk _ y)) =
+        ULift.up (ZMod.castHom (pow_dvd_pow ℓ (Nat.le_succ n)) _
+          (sfb_padic_quotient_equiv ℓ (n + 1) (Ideal.Quotient.mk _ y)))
+      rw [sfb_padic_quotient_equiv_mk, sfb_padic_quotient_equiv_mk]
+      exact congrArg ULift.up
+        (congrArg (fun h : ℤ_[ℓ] →+* ZMod (ℓ ^ n) ↦ h y)
+          (PadicInt.zmod_cast_comp_toZModPow n (n + 1) (Nat.le_succ n))).symm)
+  refine ⟨NatIso.ofComponents (fun n ↦ e n.unop) (fun f ↦ α.naturality f), ?_⟩
+  intro n x
+  exact congrArg ULift.up (sfb_padic_quotient_equiv_mk ℓ n x)
 
-/-- The pulled-back inclusion of integers into their coefficient field. The underlying
-map is precisely `p_X^*` applied to postcomposition with the given continuous inclusion.
-Source: second display of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbCoefficientInclusion (R K : Type) [CommRing R] [TopologicalSpace R]
-    [IsTopologicalRing R] [CommRing K] [TopologicalSpace K] [IsTopologicalRing K]
-    (φ : R →+* K) (hφ : Continuous φ) (X : Scheme.{u}) :
-    coefficientRing X (Mon.mk (Profinite.continuousMapRingObj R)) ⟶
-      coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K)) :=
-  (upperStarFromPoint X).mapMon.map (Mon.ofHom
-    ((sheafCompose (coherentTopology Profinite.{u})
-      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-        (Profinite.continuousMapRingSheafMap φ hφ)))
+private theorem sfb_comparison_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E) (τ : F ⋙ G ⟶ H)
+    {A B : C} (a : A ⟶ B) :
+    G.map (F.map a) ≫ τ.app B = τ.app A ≫ H.map a :=
+  τ.naturality a
 
-/-- The coefficient field as a module over the pulled-back integers, using their actual
-inclusion. Source: the sequential module colimit in the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbRationalCoefficientModule (R K : Type) [CommRing R]
-    [TopologicalSpace R] [IsTopologicalRing R] [CommRing K] [TopologicalSpace K]
-    [IsTopologicalRing K]
-    (i : ∀ X : Scheme.{u}, coefficientRing X (Mon.mk (Profinite.continuousMapRingObj R)) ⟶
-      coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K))) (X : Scheme.{u}) :
-    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj R) X) :=
-  (Mod.comap (i X).hom).obj
-    (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj K) X))
+private theorem sfb_ring_comparison_underlying
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.LaxMonoidal] [G.LaxMonoidal] [H.LaxMonoidal]
+    (e : F ⋙ G ≅ H) [NatTrans.IsMonoidal e.hom] (A : Mon C) :
+    (((Functor.mapMonCompIso (F := F) (G := G)).symm.app A ≪≫
+      (Functor.mapMonNatIso e).app A).hom).hom = e.hom.app A.X := by
+  simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Mon.comp_hom',
+    Functor.mapMonCompIso_inv_app_hom, Functor.mapMonNatIso_hom_app_hom]
+  exact Category.id_comp _
 
-/-- The sequential diagram of integer modules with transition multiplication by `ℓ`.
-Multiplication by `ℓ` is used only as a module map.
-Source: second display of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbRationalizationSequence (ℓ : ℕ) (R : Type) [CommRing R]
-    [TopologicalSpace R] [IsTopologicalRing R] (X : Scheme.{u}) :
-    ℕ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj R) X) :=
-  Functor.ofSequence (fun _ : ℕ ↦ ℓ •
-    𝟙 (Mod.regular (condensedRingObj (Profinite.continuousMapRingObj R) X)))
+private theorem sfb_comparison_change_inclusion
+    (ℓ : ℕ) (R K : Type) [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    [CommRing K] [TopologicalSpace K] [IsTopologicalRing K] (I : Ideal R)
+    {i j : ∀ X : Scheme.{u},
+      coefficientRing X (Mon.mk (Profinite.continuousMapRingObj R)) ⟶
+        coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K))}
+    (hi : ∀ X, i X = j X) (h : SfbCompletedCoefficientComparison ℓ R K I i) :
+    SfbCompletedCoefficientComparison ℓ R K I j :=
+  (congrArg (SfbCompletedCoefficientComparison ℓ R K I) (funext hi)) ▸ h
 
-/-- Expanded first and second comparisons, including their canonical maps and pullback
-compatibility. The reductions are normalized by the actual quotient maps on constants.
-`IsLimit` and `IsColimit` give the displayed comparison isomorphisms by uniqueness of
-limits and colimits. The last clause is the universal property of localization as rings;
-thus the ring structure on the sequential module colimit is the localization structure.
-
-Source: first two displays and inverse-image paragraph of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-def SfbCompletedCoefficientComparison (ℓ : ℕ) (R K : Type) [CommRing R]
+private theorem sfb_comparison_of_parts (ℓ : ℕ) (R K : Type) [CommRing R]
     [TopologicalSpace R] [IsTopologicalRing R] [CommRing K] [TopologicalSpace K]
     [IsTopologicalRing K] (I : Ideal R)
     (i : ∀ X : Scheme.{u}, coefficientRing X (Mon.mk (Profinite.continuousMapRingObj R)) ⟶
-      coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K))) : Prop :=
+      coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K)))
+    (hIntegral :
   ∃ ρ : (Functor.const ℕᵒᵖ).obj (Mon.mk (Profinite.continuousMapRingObj.{u} R)) ⟶
       sfbCoefficientQuotientTower R I ⋙ sfbPointConstantRing,
     (∀ n : ℕ, sfbConstantToContinuous R ≫ (ρ.app (op n)).hom =
@@ -152,8 +146,9 @@ def SfbCompletedCoefficientComparison (ℓ : ℕ) (R K : Type) [CommRing R]
     (∀ (X Y : Scheme.{u}) (f : X ⟶ Y),
       Nonempty (IsLimit ((upperStar Ab.{u + 1} f).mapMon.mapCone
         ((upperStarFromPoint Y).mapMon.mapCone
-          (Cone.mk (Mon.mk (Profinite.continuousMapRingObj R)) ρ))))) ∧
-    ∃ ι : ∀ X : Scheme.{u}, sfbRationalizationSequence ℓ R X ⟶
+          (Cone.mk (Mon.mk (Profinite.continuousMapRingObj R)) ρ))))) )
+    (hRational :
+  ∃ ι : ∀ X : Scheme.{u}, sfbRationalizationSequence ℓ R X ⟶
         (Functor.const ℕ).obj (sfbRationalCoefficientModule R K i X),
       (∀ X : Scheme.{u},
         ((ι X).app 0).hom = (i X).hom ∧
@@ -161,57 +156,100 @@ def SfbCompletedCoefficientComparison (ℓ : ℕ) (R K : Type) [CommRing R]
         IsIso (ℓ • 𝟙 (condensedRingObj (Profinite.continuousMapRingObj K) X))) ∧
       (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (m : ℕ),
         (upperStar Ab.{u + 1} f).map (((ι Y).app m).hom) ≫
-            condensedPullbackHom (Profinite.continuousMapRingObj K) f =
-          condensedPullbackHom (Profinite.continuousMapRingObj R) f ≫
+            ((coefficientPullbackIso f
+            (Mon.mk (Profinite.continuousMapRingObj K))).hom).hom =
+          ((coefficientPullbackIso f
+            (Mon.mk (Profinite.continuousMapRingObj R))).hom).hom ≫
             ((ι X).app m).hom) ∧
       (∀ (X : Scheme.{u}) (B : Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})),
         IsIso (ℓ • 𝟙 B.X) →
         ∀ a : coefficientRing X (Mon.mk (Profinite.continuousMapRingObj R)) ⟶ B,
           ∃! b : coefficientRing X (Mon.mk (Profinite.continuousMapRingObj K)) ⟶ B,
-            i X ≫ b = a)
+            i X ≫ b = a)) :
+    SfbCompletedCoefficientComparison ℓ R K I i := by
+  obtain ⟨ρ, hρ, hlim, hbase⟩ := hIntegral
+  exact ⟨ρ, hρ, hlim, hbase, hRational⟩
 
-/-- The finite-subextension diagram, in ring objects rather than only abelian sheaves.
-Source: third display of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbFiniteSubfieldRingDiagram (ℓ : ℕ) [Fact ℓ.Prime] :
-    PadicAlgCl.FiniteIntermediateField ℓ ⥤
-      Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) where
-  obj E := Mon.mk (Profinite.continuousMapRingObj E)
-  map f := Mon.ofHom (Profinite.padicSubfieldRingObjMap ℓ (leOfHom f))
-  map_id E := by
+private theorem sfb_finite_completed (ℓ : ℕ) [Fact ℓ.Prime] :
+    ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E),
+      IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span ({π} : Set _) →
+      SfbCompletedCoefficientComparison.{u} ℓ (PadicAlgCl.integers ℓ E) E
+        (Ideal.span ({π} : Set _))
+        (fun X ↦ Mon.ofHom (padicIntegersToPadicSubfield X ℓ E)) := by
+  classical
+  intro E π hπ
+  let R := PadicAlgCl.integers ℓ E
+  let iSource (X : Scheme.{u}) := completedCoefficientMap X
+    (Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing ℓ E)
+  apply sfb_comparison_change_inclusion ℓ R E (Ideal.span {π}) (i := iSource)
+  · intro X
     apply Mon.Hom.ext
-    exact Profinite.padicSubfieldRingObjMap_id ℓ E
-  map_comp f g := by
+    rfl
+  · refine sfb_comparison_of_parts ℓ R E (Ideal.span {π}) iSource ?_ ?_
+    · let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
+      let : NormedAlgebra ℚ_[ℓ] E.1 :=
+        { norm_smul_le c x := by
+            change ‖algebraMap E.1 (PadicAlgCl ℓ) (c • x)‖ ≤
+              ‖c‖ * ‖algebraMap E.1 (PadicAlgCl ℓ) x‖
+            rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+              PadicAlgCl.norm_extends] }
+      let : CompactSpace R := PadicAlgCl.compactSpace_integers ℓ E.1
+      let : ∀ n : ℕ, Finite (R ⧸ Ideal.span {π} ^ n) := fun n ↦ by
+        rw [← hπ]
+        infer_instance
+      let : ∀ n : ℕ, DiscreteTopology (R ⧸ Ideal.span {π} ^ n) := fun n ↦ by
+        apply QuotientAddGroup.discreteTopology
+        rw [← hπ]
+        exact IsLocalRing.isOpen_maximalIdeal_pow R n
+      have hsep (x y : R) (h : ∀ n : ℕ,
+          Ideal.Quotient.mk (Ideal.span {π} ^ n) x =
+            Ideal.Quotient.mk (Ideal.span {π} ^ n) y) : x = y := by
+        apply (IsHausdorff.eq_iff_smodEq (I := IsLocalRing.maximalIdeal R)).mpr
+        intro n
+        have hn := (Ideal.Quotient.mk_eq_mk_iff_sub_mem _ _).mp (h n)
+        simpa only [← hπ, Ideal.smul_eq_mul, Ideal.mul_top, SModEq.sub_mem] using hn
+      exact sfb_normalized_integral_quotient_cone.{u} R (Ideal.span {π}) hsep
+    · exact sfb_rational_comparison_from_completed ℓ R E
+        (PadicAlgCl.integers ℓ E).subtype continuous_subtype_val
+        (completedCondensedRational.{u} ℓ E)
+
+private theorem sfb_padic_completed (ℓ : ℕ) [Fact ℓ.Prime] :
+    SfbCompletedCoefficientComparison.{u} ℓ ℤ_[ℓ] ℚ_[ℓ]
+      (Ideal.span ({(ℓ : ℤ_[ℓ])} : Set ℤ_[ℓ]))
+      (sfbCoefficientInclusion ℤ_[ℓ] ℚ_[ℓ] PadicInt.Coe.ringHom
+        continuous_subtype_val) := by
+  classical
+  let I : Ideal ℤ_[ℓ] := Ideal.span {(ℓ : ℤ_[ℓ])}
+  let : ∀ n : ℕ, Finite (ℤ_[ℓ] ⧸ I ^ n) := fun n ↦
+    Finite.of_equiv (ZMod (ℓ ^ n)) (sfb_padic_quotient_equiv ℓ n).symm.toEquiv
+  let : ∀ n : ℕ, DiscreteTopology (ℤ_[ℓ] ⧸ I ^ n) := fun n ↦ by
+    apply QuotientAddGroup.discreteTopology
+    change IsOpen (X := ℤ_[ℓ]) ↑(Ideal.span {(ℓ : ℤ_[ℓ])} ^ n)
+    rw [← PadicInt.maximalIdeal_eq_span_p]
+    exact IsLocalRing.isOpen_maximalIdeal_pow ℤ_[ℓ] n
+  have hsep (x y : ℤ_[ℓ]) (h : ∀ n : ℕ,
+      Ideal.Quotient.mk (I ^ n) x = Ideal.Quotient.mk (I ^ n) y) : x = y := by
+    dsimp only [I] at h
+    apply PadicInt.ext_of_toZModPow.mp
+    intro n
+    simpa only [sfb_padic_quotient_equiv_mk] using
+      congrArg (sfb_padic_quotient_equiv ℓ n) (h n)
+  let iSource (X : Scheme.{u}) := completedCoefficientMap X
+    (Profinite.padicIntCondensedRingToPadicCondensedRing ℓ)
+  apply sfb_comparison_change_inclusion ℓ ℤ_[ℓ] ℚ_[ℓ] I (i := iSource)
+  · intro X
     apply Mon.Hom.ext
-    exact Profinite.padicSubfieldRingObjMap_comp ℓ (leOfHom f) (leOfHom g)
-
-/-- The canonical finite-field cocone as a cocone of rings; its legs are the inclusions
-into the finite-subextension-valued algebraic-closure coefficients.
-Source: third display of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbFiniteSubfieldRingCocone (ℓ : ℕ) [Fact ℓ.Prime] :
-    Cocone (sfbFiniteSubfieldRingDiagram.{u} ℓ) where
-  pt := Mon.mk (Profinite.padicAlgClRingObj ℓ)
-  ι :=
-    { app E := Mon.ofHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-      naturality := fun E F f ↦ by
-        apply Mon.Hom.ext
-        exact (Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ (leOfHom f)).trans
-          (Category.comp_id _).symm }
-
-/-- The standard finite constant coefficient rings `ZMod (ℓ^n)`, with reduction maps.
-Source: final paragraph of the comparison proposition
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def sfbZModCoefficientTower (ℓ : ℕ) : ℕᵒᵖ ⥤ RingCat.{u + 1} :=
-  Functor.ofOpSequence (X := fun n : ℕ ↦ RingCat.of (ULift.{u + 1} (ZMod (ℓ ^ n))))
-    (fun n : ℕ ↦ RingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
-      ((ZMod.castHom (pow_dvd_pow ℓ (Nat.le_succ n)) (ZMod (ℓ ^ n))).comp
-        ULift.ringEquiv.toRingHom)))
+    rfl
+  · refine sfb_comparison_of_parts ℓ ℤ_[ℓ] ℚ_[ℓ] I iSource ?_ ?_
+    · exact sfb_normalized_integral_quotient_cone.{u} ℤ_[ℓ] I hsep
+    · exact sfb_rational_comparison_from_completed ℓ ℤ_[ℓ] ℚ_[ℓ]
+        PadicInt.Coe.ringHom continuous_subtype_val
+        (completedCondensedPadicRational.{u} ℓ)
 
 /-- The three completed-coefficient comparisons, their inverse-image compatibility, and
 specialization to `ℤ_ℓ` and `ℚ_ℓ`.
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
+Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
 sk-prop-sfb-qlbar-colimit-x/_section.md, all displayed formulas
 (blueprint: sk-prop-sfb-qlbar-colimit-x).
 
@@ -264,6 +302,24 @@ theorem sfb_completed_coefficients (ℓ : ℕ) [Fact ℓ.Prime] :
           condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) f =
         condensedPullbackHom (Profinite.continuousMapRingObj E) f ≫
           padicSubfieldRingObjToPadicAlgCl X ℓ E) := by
-  sorry
+  classical
+  refine ⟨sfb_finite_completed ℓ, sfb_padic_completed ℓ,
+    sfb_padic_quotient_tower ℓ, ?_, ?_, ?_⟩
+  · intro X
+    apply (Mon.filtered_cocone_isColimit
+      ((upperStarFromPoint X).mapMon.mapCocone (sfbFiniteSubfieldRingCocone ℓ)) ?_).1
+    change IsColimit (padicAlgClRingObjCocone X ℓ)
+    exact isColimitPadicAlgClRingObjCocone X ℓ
+  · intro X Y f
+    apply (Mon.filtered_cocone_isColimit
+      ((upperStar Ab.{u + 1} f).mapMon.mapCocone
+        ((upperStarFromPoint Y).mapMon.mapCocone (sfbFiniteSubfieldRingCocone ℓ))) ?_).1
+    change IsColimit ((upperStar Ab.{u + 1} f).mapCocone (padicAlgClRingObjCocone Y ℓ))
+    exact isColimitOfPreserves (upperStar Ab.{u + 1} f)
+      (isColimitPadicAlgClRingObjCocone Y ℓ)
+  · intro X Y f E
+    exact sfb_comparison_naturality (upperStarFromPoint Y) (upperStar Ab.{u + 1} f)
+      (upperStarFromPoint X) (upperStarFromPointComp f).hom
+      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
 
 end AlgebraicGeometry.ProEtale

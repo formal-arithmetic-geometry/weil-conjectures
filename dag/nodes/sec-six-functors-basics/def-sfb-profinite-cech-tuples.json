@@ -114,16 +114,20 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
  "lean": {
-  "module": "Sheaf.Topology.NormedScalarProfiniteCechExact",
+  "module": "Sheaf.Topology.ProfiniteCechTuples",
   "declaration": "Profinite.scalarCechTuples",
   "declarations": [
    "Profinite.scalarCechTuples",
@@ -134,7 +138,8 @@
   "by": "NF",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Records the existing unchanged definitions, not the finite-complete-coefficient exactness theorem in the same module. The companion signature is def scalarCechDelete {S T : Profinite.{v}} (q : C(T, S)) (r : ℕ) (j : Fin (r + 1))\n    (x : scalarCechTuples q (r + 1)) : scalarCechTuples q r. Ambient universe v is explicit. scalarCechTuples is the subtype of Fin r → T satisfying all pairwise image equalities, with the inherited finite-product/subtype topology; scalarCechDelete precomposes with j.succAbove. No module is duplicated or modified. Unlike def-sfb-set-cech-nerve, this interface includes the profinite topology and r=0 and uses tuple length rather than simplicial degree."
+  "note": "Definitions moved verbatim from NormedScalarProfiniteCechExact to break the proof-import cycle with the finite-coefficient and inverse-limit primitive lemmas. Names, signatures, bodies, universes, and topology are unchanged. The original module publicly reexports this module.",
+  "file": "lean/Sheaf/Topology/ProfiniteCechTuples.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -151,5 +156,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Re-delivery after the H2 RETURN of 1704e764: the theorem stmt_dep lem-sfb-normed-scalar-profinite-cech-exact is replaced by the new def node def-sfb-profinite-cech-tuples (existing:true on the unchanged NormedScalarProfiniteCechExact module, owning scalarCechTuples/scalarCechDelete; statement matches the live abbrev/def including r=0 and succAbove deletion; header verbatim; H12 fields present; no other owner in side-live). Lean module byte-identical to the previously reviewed head, whose mathematics was checked correct (IsAlgClosure Padic with norm extension, no completion; clause (1) nonempty metrizable counterexample; split and diagonal-base-change contractions for all degrees n+1; empty case). Item JSON differs from live only in lean and stmt_deps. Report sections present. Not recompiled per instruction. Maintainer notes: possible later unification with def-sfb-set-cech-nerve; parent bar-augmentation step 3 still relies on the disproved exactness."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9afd2",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261025T071241-L-161674",
+  "kind": "interface",
+  "note": "independent cc review: the delivered proof of normedScalarProfiniteCech_exact (integral helper via the integers tower, finite_coefficient_cech_primitive_lift and exists_inverseLimit_cech_primitive, then compact bound and scaling) against the node plan and the live dependency statements; the verbatim tuple extraction and the two one-line forced import changes against the base clone; all four delivered modules plus importers FiniteNormedScalarSectionAcyclicity and NormAlgclProfiniteCechExact compiled with lcompile"
  }
 }

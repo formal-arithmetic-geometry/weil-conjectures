@@ -33,7 +33,7 @@
    }
   },
   {
-   "text": "Since $N$ is invertible on $S$ it is invertible on $W$. Apply [lem-asd-ordinary-supported-kummer] to the Cartier diagonal to obtain the supported class $\\kappa$ with SupportedKummerBoundary; this gives the first conjunct, and $\\delta$ is its exact derived realization.",
+   "text": "Since N is invertible on S it is invertible on W. Apply the existing ordinary_supported_kummer_uniqueBoundary clause of [lem-asd-ordinary-supported-kummer] to the Cartier diagonal. Retain only its normalized Ext representative and boundary property; the unused Chern and transport witnesses of the larger theorem are not instantiated. Its exact derived realization is delta. The remaining Chern-component and trace steps are unchanged.",
    "uses": [
     "lem-asd-ordinary-supported-kummer"
    ],
@@ -260,7 +260,18 @@
   "def-sc-p1-standard"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -329,7 +340,7 @@
   "by": "Q32",
   "date": "2026-10-16",
   "existing": false,
-  "note": "The target theorem remains in this module; diagonal data declarations are owned by def-sp-p1-diagonal-charts (projection, chart) and def-amb-p1-diagonal-data (trace, chart pushforward, alpha)."
+  "note": "The target theorem remains in this module; diagonal data declarations are owned by def-sp-p1-diagonal-charts (projection, chart) and def-amb-p1-diagonal-data (trace, chart pushforward, alpha). F1 C-240da consumer validation: use the existing uniqueBoundary clause instead of destructuring unused derived Chern and transport witnesses. The statement and public imports are unchanged; a proof-only import names the providing module. This removes expensive kernel normalization of unused witness types."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -357,13 +368,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-16cdf",
-  "group": "G4",
+  "reviewer": "C-efdbd",
+  "group": "F1",
   "result": "fix",
-  "landing": "20261021T014706-L-2445300",
+  "landing": "20261026T222636-L-676965",
   "kind": "interface",
-  "note": "independent cc review: delivered Lean (5 modules) and 6 node files vs the live clone, node statements, OrdinaryFiniteP1Datum/projectiveLineTrace interface and live sibling nodes (lem-sp-finite-p1-diagonal-*); compiled the delivered and corrected sets and the 4 direct importers; #print axioms"
+  "note": "independent cc review: item proof + 4 new modules + 4 adapted modules against published clone, DAG nodes and 6 change records; delivered set built in sandbox and 7 direct importers + 4 exposed transitive users (SfP1IntegralTransport, SfP1ChartExchange, SfP1ChartMapComposition, TowerP1KernelScalarData) compiled against it, all OK; #print axioms"
  }
 }

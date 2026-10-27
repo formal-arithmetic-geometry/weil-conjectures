@@ -1,0 +1,299 @@
+{
+ "id": "lem-pur-finite-twist-root-trivialization",
+ "kind": "statement",
+ "title": "Compatible root bases for finite signed Tate twists",
+ "statement": "Fix the finite datum of [def-pur-conventions]: an algebraically closed field $k$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. Use the finite signed twists $A(r)$ of [def-coefficient-twists-detailed], their small-etale realizations of [lem-asd-etale-finite-twist-pullback], the two small sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site] and comparison inverse image $\\nu_T^*$ [def-weil-pbc-site-comparison-morphism]. Then $A$ is finite and $\\ell^nA=0$, and its additive group has order a power of $\\ell$.\nFor every $k$-scheme $T$, put $M_T=\\mathbf Z_\\ell(1)_T$ and $m=\\ell^n$. There are canonical pro-etale sheaf identifications\n$$M_T/mM_T\\cong\\mu_{m,T},\\qquad A(1)_T\\cong\\mu_{m,T}\\otimes_{\\mathbf Z/m}A_T,$$\nwhere the quotient is in sheaves of modules, the tensor product is [def-pur-sheaf-tensor-product], and $\\mu_{m,T}(V)=\\{z\\in\\Gamma(V,\\mathcal O_V)^\\times:z^m=1\\}$.\nFor a primitive $m$-th root $\\zeta\\in k$, the map $a\\mapsto\\zeta^a$ gives $(\\mathbf Z/m)_T\\cong\\mu_{m,T}$ in both topologies. The induced bases and their tensor powers and duals give $A(r)_T\\cong A_T$ for every $r\\in\\mathbf Z$. These identifications commute with every $k$-morphism, identify the detailed pro-etale twist with $\\nu_T^*$ of its finite etale realization, and respect finite coefficient maps. For a coefficient map involving two finite levels, this last assertion uses a common exponent $\\ell^a$ annihilating both rings, a primitive $\\ell^a$-th root and its powers at the smaller exponents; it includes quotient maps without a flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK, section-kummer (finite root sheaves); agent refinement of blueprint Coefficients and the final twist sentence of Reduction to a geometric fibre, with the pro-etale finite quotient supplied by lem-pur-twist-sheaf-locally-free(2),(3)."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-amb-finite-tate-site-comparison-data",
+  "def-pur-finite-root-pro-tensor",
+  "def-pur-signed-root-coordinate-data",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-sc-mu-trivialization",
+  "def-sfb-cartier-reduction-data",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-twist-sheaves",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-sf-etale-sheaf-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-l-adic-extension-integers-dvr](1)--(4) and [lem-weil-valued-dvr-finite-quotients](2) to the extending absolute value and chosen uniformizer of $E$. Their hypotheses are precisely the finite extension datum, so $A$ is finite. Since $|\\ell|_E=\\ell^{-1}<1$, one has $\\ell\\in\\mathfrak m_E=\\varpi_E\\mathcal O_E$, and raising this inclusion to the $n$-th power gives $\\ell^n\\in\\varpi_E^n\\mathcal O_E$. Hence $\\ell^n A=0$. The integer $m=\\ell^n$ is invertible on every $k$-scheme because $\\ell\\ne p$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Coefficients: finiteness and an invertible annihilator"
+   }
+  },
+  {
+   "text": "The additive group $B=(A,+)$ is finite and killed by $\\ell^n$, by step 1. The final assertion of [lem-pur-affine-line-finite-group-devissage], with this $B$, $a=n$ and the given algebraically closed $k$, says exactly that its order is a power of $\\ell$. Only this group-theoretic assertion is used; the cohomological conclusions of that node are unnecessary here.",
+   "uses": [
+    "lem-pur-affine-line-finite-group-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Coefficients: finite-primary additive group"
+   }
+  },
+  {
+   "text": "For any primitive root $\\zeta$ of order $\\ell^r$, [lem-pur-primitive-root-etale-basis] gives the etale isomorphism $\\theta_r:a\\mapsto\\zeta^a$ on every $k$-scheme $T$. The root-only isomorphism $c_{\\ell^r,T}$ of [lem-amb-finite-root-site-comparison] carries roots to the same units; pulling back $\\theta_r$ therefore gives this very formula on the pro-etale site. It is an isomorphism there too. In particular this proves the asserted root basis for the specified primitive $m$-th root.",
+   "uses": [
+    "lem-pur-primitive-root-etale-basis",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Coefficients: the root sheaf and its etale/pro-etale basis"
+   }
+  },
+  {
+   "text": "Extend the specified $\\zeta_n=\\zeta$ to compatible primitive roots: for $r<n$ put $\\zeta_r=\\zeta^{\\ell^{n-r}}$, and for $r\\ge n$ choose a root of $X^\\ell-\\zeta_r$ in the algebraically closed field $k$. This root has order $\\ell^{r+1}$, since its $\\ell$-th power has order $\\ell^r$. In the bases of step 3 the root transitions are reduction of labels. By the sectionwise limit of [def-pur-sheaf-inverse-limit], $M_T$ is thus $R_T=\\varprojlim_r(\\mathbf Z/\\ell^r)_T$, carrying the root projection to the coordinate projection. That projection onto $(\\mathbf Z/\\ell^n)_T$ is locally surjective: locally a section is a label $j$, lifted by the constant integer $j$ in every coordinate. Its kernel is $\\ell^nR_T$: if $a_n=0$, define $b_r=a_{r+n}/\\ell^n\\pmod{\\ell^r}$ using the canonical inverse of multiplication $\\ell^n:\\mathbf Z/\\ell^r\\longrightarrow\\ell^n(\\mathbf Z/\\ell^{r+n})$. These maps apply to constant sheaves, commute with restriction and reduction, and give a compatible sequence with $\\ell^nb=a$. The reverse inclusion is immediate. Thus the canonical root projection, independent of the auxiliary roots, induces $M_T/mM_T\\cong\\mu_{m,T}$.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Coefficients: explicit finite quotient of the root limit"
+   }
+  },
+  {
+   "text": "Expand [def-coefficient-twists-detailed]: the two scalar extensions defining $A(1)_T$ identify it with $M_T\\otimes_{(\\mathbf Z_\\ell)_T}A_T$. Explicitly $(x\\otimes u)\\otimes a\\mapsto x\\otimes ua$ has inverse $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. By [lem-pc-sites-sheaf-tensor-bilinear-universal] these balanced formulas define inverse sheaf morphisms. Since $mA=0$, the bilinear map $x,a\\mapsto\\mathrm{pr}_n(x)\\otimes a$ factors through $M_T/mM_T$ and gives\n$$A(1)_T\\cong\\mu_{m,T}\\otimes_{(\\mathbf Z/m)_T}A_T.$$\nFor its inverse lift a root locally to $x\\in M_T$ and send $z\\otimes a$ to $x\\otimes a$; two lifts differ by $my$ by step 4, and $(my)\\otimes a=y\\otimes ma=0$. The local maps therefore glue and are inverse on pure tensors. These formulas prove the canonical identification without flatness of $A$ over $\\mathbf Z/m$.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Coefficients: finite tensor presentation of the detailed pro-etale line"
+   }
+  },
+  {
+   "text": "Put $e=\\zeta\\otimes1$ in the presentation of step 5. The inverse root basis in step 3 identifies $e$ with $1$, so $a\\mapsto ae$ is an $A_T$-module isomorphism. For $r>0$ its tensor powers have basis $e_r=e^{\\otimes r}$ and inverse $ae_r\\mapsto a$; at $r=0$ use $1$. For $r=-s<0$ use the definition in [def-coefficient-twists-detailed] and [def-pur-sheaf-hom]: a functional on the positive free line is uniquely determined by its value on $e_s$, with inverse $a\\mapsto(be_s\\mapsto ab)$. These maps on every localized site commute with restriction, hence give isomorphisms of sheaves in every signed degree. The same formulas apply to the etale signed twists of [lem-asd-etale-finite-twist-pullback].",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-hom",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Coefficients and final twist sentence of Reduction to a geometric fibre: all signed powers"
+   }
+  },
+  {
+   "text": "For a $k$-morphism $v:T'\\to T$, pullback of units sends the constant section $\\zeta$ to $\\zeta$. The canonical pullback and comparison equations in [lem-amb-finite-root-site-comparison] therefore preserve the degree-one bases and their tensor coordinates. At nonnegative degrees [lem-amb-finite-tate-site-descent] identifies this comparison with the actual detailed pro-etale twist. For a negative degree the comparison defined by evaluation sends a functional with value $a$ on $e_s$ to the functional with that same value on the pulled-back basis; it is an isomorphism by the explicit inverse in step 6. Consequently all signed comparisons and pullbacks commute with the bases, and identify $A(r)_T$ with $\\nu_T^*$ of its etale realization. Identity and composition equations hold on the basis, which generates each line.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison",
+    "lem-amb-finite-tate-site-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Reduction to a geometric fibre, final twist sentence: pullback and comparison naturality"
+   }
+  },
+  {
+   "text": "For a finite coefficient map $\\alpha:A\\to B$, choose $a\\ge1$ with $\\ell^aA=\\ell^aB=0$ and a primitive root $\\eta$ of order $\\ell^a$. Use its powers at smaller exponents. For $b\\le a$ the power map sends $\\eta^j$ to $(\\eta^{\\ell^{a-b}})^j$, so it is reduction of labels in the bases of step 3. The exponent-independence clause of [lem-asd-etale-finite-twist-pullback] and the power compatibility of [lem-amb-finite-root-site-comparison] identify these presentations on both sites. At the common exponent scalar extension has formula $(u e)\\otimes b\\mapsto\\alpha(u)b e'$. For positive powers iterate this formula. On the dual of the $s$-th power the evaluation-defined comparison sends $\\varphi\\otimes b$ to the functional $u e'_s\\mapsto\\alpha(\\varphi(e_s))bu$, so its inverse is evaluation at $e'_s$ followed by the source dual basis tensored with the resulting coefficient. Thus every signed coefficient comparison preserves the indicated bases and is invertible. These formulas work for quotient maps too, and use no flatness. They commute with composition, scheme pullback and site comparison because each carries $1$ to the same basis element.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+    "place": "Coefficients: common exponent, compatible roots, and arbitrary finite coefficient maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-pur-affine-line-finite-group-devissage",
+  "lem-pur-primitive-root-etale-basis",
+  "lem-amb-finite-root-site-comparison",
+  "def-pur-sheaf-inverse-limit",
+  "def-coefficient-twists-detailed",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-pur-sheaf-hom",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-finite-tate-site-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/sk-prop-a1-kummer.proof.md",
+  "place": "Coefficients and final twist sentence of Reduction to a geometric fibre; explicit root-limit quotient and signed coordinate refinements, using Stacks 03PK and the cited existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tate twists over an algebraically closed field are constant after choosing compatible primitive roots, naturally in schemes and finite coefficient maps",
+   "results": "{\"t\": \"2026-10-22T06:11:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Tate twists over an algebraically closed field are constant after choosing compatible primitive roots, naturally in schemes and finite coefficient maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.spec\", \"modularCyclotomicCharacter'.unique'\", \"modularCyclotomicCharacter.unique\", \"modularCyclotomicCharacter.toFun_unique\", \"modularCyclotomicCharacter.toFun_unique'\", \"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.toZModPow_toFun\", \"cyclotomicCharacter.toFun_spec\"], \"digest\": \"67d1c408e6b9c5be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of roots of unity tensor finite torsion rings give signed Tate lines and compatible constant bases",
+   "results": "{\"t\": \"2026-10-22T06:11:52Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of roots of unity tensor finite torsion rings give signed Tate lines and compatible constant bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_tensor\", \"CommRing.Pic.mapAlgebra_apply\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mapAlgebra\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"NumberField.Units.rootsOfUnity_eq_torsion\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\"], \"digest\": \"eb1c4fb41c559ac0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tate twists over an algebraically closed field are constant after choosing compatible primitive roots, naturally in schemes and finite coefficient maps",
+   "results": "{\"t\": \"2026-10-22T06:11:53Z\", \"tool\": \"leansearch\", \"query\": \"Finite Tate twists over an algebraically closed field are constant after choosing compatible primitive roots, naturally in schemes and finite coefficient maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCyclotomicExtension.algEquiv_eq_of_apply_eq\", \"MulChar.apply_mem_algebraAdjoin_of_pow_eq_one\", \"IsPrimitiveRoot.primitiveRootsPowEquivOfCoprime\", \"IsPrimitiveRoot.associated_map_sub_one_map_sub_one\", \"AlgebraicGeometry.IsFinite.recOn\", \"IsPrimitiveRoot.autToPow.congr_simp\", \"AddChar.FiniteField.primitiveChar_to_Complex\", \"IsPrimitiveRoot.embeddingsEquivPrimitiveRoots\"], \"digest\": \"8027b142b577c56f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T06:11:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*trivial|twist.*constant|rootsOfUnity.*[Ii]so",
+   "results": "{\"t\": \"2026-10-22T06:11:54Z\", \"tool\": \"grep\", \"query\": \"Tate.*trivial|twist.*constant|rootsOfUnity.*[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/FLT/Basic.lean\", \"Mathlib/RingTheory/RootsOfUnity/Basic.lean\", \"Mathlib/Algebra/Order/Chebyshev.lean\", \"Mathlib/Algebra/Order/Rearrangement.lean\", \"Mathlib/Algebra/Lie/CartanExists.lean\", \"Mathlib/Algebra/Lie/CartanExists.lean\", \"Mathlib/Topology/FiberBundle/Basic.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\"], \"digest\": \"3830188318913b34\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tate twists of arbitrary schemes over an algebraically closed field have primitive-root bases compatible with coefficient quotients and etale proetale comparison",
+   "results": "{\"t\": \"2026-10-22T11:21:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Tate twists of arbitrary schemes over an algebraically closed field have primitive-root bases compatible with coefficient quotients and etale proetale comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WittVector.isocrystal_classification\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun_apply\", \"cyclotomicCharacter.toFun\", \"cyclotomicCharacter.toZModPow\", \"cyclotomicCharacter.toZModPow_toFun\", \"modularCyclotomicCharacter.unique\", \"cyclotomicCharacter.toFun_spec\"], \"digest\": \"55251247e08559a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the stated geometric sheaf isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-22T11:21:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the stated geometric sheaf isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*trivial|twist.*constant|rootsOfUnity.*[Ii]so",
+   "results": "{\"t\": \"2026-10-22T11:21:28Z\", \"tool\": \"grep\", \"query\": \"Tate.*trivial|twist.*constant|rootsOfUnity.*[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/CartanExists.lean\", \"Mathlib/Algebra/Lie/CartanExists.lean\", \"Mathlib/Topology/FiberBundle/Basic.lean\", \"Mathlib/NumberTheory/FLT/Basic.lean\", \"Mathlib/Algebra/Order/Chebyshev.lean\", \"Mathlib/Algebra/Group/Hom/Basic.lean\", \"Mathlib/Algebra/Group/Hom/Basic.lean\", \"Mathlib/Algebra/Group/Hom/Basic.lean\"], \"digest\": \"3d5c808a1d1a96f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the stated geometric sheaf isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite Tate twists are constant sheaves after choosing primitive roots of unity on etale and proetale sites",
+   "results": "{\"t\": \"2026-10-22T11:22:03Z\", \"tool\": \"leansearch\", \"query\": \"Finite Tate twists are constant sheaves after choosing primitive roots of unity on etale and proetale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.Sheaf.IsConstant.rec\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"CategoryTheory.Sheaf.IsConstant.recOn\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"CategoryTheory.Sheaf.IsConstant.casesOn\"], \"digest\": \"3f7801dcebea6907\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the stated geometric sheaf isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-line-ordinary-invariance",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph, ordinary affine-line input: Compatible root bases for finite signed Tate twists; retained ordinary-invariance proof steps 1 and the order assertion of 2.",
+   "via": [
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-twist-root-trivialization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Separated finite coefficient arithmetic, root bases on arbitrary schemes, the canonical finite quotient of the root limit, balanced finite scalar extension, signed powers/duals, and actual pullback/site/coefficient comparisons. One new statement-only node records the general etale primitive-root basis already constructed upstream; attachment candidate reported for closure checking. No flatness or finite-type restriction introduced.",
+  "blueprint": "Realizes the constant finite-coefficient input of the elementary-shears paragraph of lem-pur-frame-independence, via lem-pur-affine-line-ordinary-invariance. Uses the Coefficients paragraph and final twist sentence of Reduction to a geometric fibre in main-20261015/sk-prop-a1-kummer.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Valuation-ring structure and finite residue field for the coefficient arithmetic. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-amb-finite-root-site-comparison",
+    "why": "Root-only and degree-one actual site/pullback comparison equations. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Universal property to define the explicit balanced sheaf tensor maps. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Existing signed etale realization and exponent independence. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-amb-finite-tate-site-descent",
+    "why": "Identification with the detailed pro-etale twist in nonnegative degrees. No statement of this unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-amb-finite-root-site-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-finite-tate-site-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-932414be0",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-932414be0 (reviewer sub-agent of L); spot-checked: The statement is unchanged; the item was a statement-only node created by Q116, with no re-split note. I read all 8 steps against the cited statements. (1) lem-weil-l-adic-extension-integers-dvr(1,3,4) and valued-dvr-finite-quotients(2) give A finite; |ℓ|<1 gives ℓ^n in ϖ^nO_E for any ramification. (2) The order of A is a power of ℓ by the last sentence of the devissage node, which has no deps, so no cycle. (3) The new node gives a↦ζ^a on the étale site; c_{m,T} of lem-amb-finite-root-site-comparison sends a root to the same unit. The step tacitly uses ν^* of a constant sheaf = constant sheaf, which I accept as elementary. (4) The limit is computed sectionwise; the kernel of the projection to Z/ℓ^n is ℓ^nR via b_r=a_{r+n}/ℓ^n, checked; the quotient is the canonical root projection. (5) The balanced inverse maps come from the bilinear universal property; lifts differ by my and (my)⊗a=0; no flatness is used. (6) and (7) Free bases, duals by evaluation, the d^v/σ/κ equations, and site-descent only for a≥0. (8) Common exponent ℓ^a, exponent-independence clauses as stated; quotient coefficient maps are covered. New node lem-pur-primitive-root-etale-basis is true: exact order m forces char∤m, so X^m-1 splits with unit differences, and sections are locally constant labels. Small cases checked: m=1, empty, disconnected or nonreduced T, k not algebraically closed. B1-B5 and B9 hold. It matches the sorry-free RootsOfUnity.lean isIso_constantZModToRootsOfUnitySheaf/constantZModIsoRootsOfUnitySheaf. It does not duplicate the curve-only def-sc-mu-trivialization or the local-trivialization nodes. Stacks 03PK is section-kummer, etale-cohomology.tex l.2819. Batch-5: the path through lem-amb-finite-root-site-comparison reaches lem-pod-etale-stalk-tensor-scalar. That node is a generic stalk/tensor lemma that neither assumption gives and that is not a step of Poincaré duality or of the trace formula, so it is accepted. The listed generic tool_uses are accepted. Advisory: the lean_candidates line 260 vs source line 261 mismatch is cosmetic. No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTwistRootTrivialization",
+  "declaration": "WeilConjectures.FiniteTwistRootTrivialization.finite_twist_root_trivialization",
+  "declarations": [
+   "WeilConjectures.FiniteTwistRootTrivialization.proSigned",
+   "WeilConjectures.FiniteTwistRootTrivialization.SignedBasis",
+   "WeilConjectures.FiniteTwistRootTrivialization.CompatibleBases",
+   "WeilConjectures.FiniteTwistRootTrivialization.finite_twist_root_trivialization"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteTwistRootTrivialization.lean",
+  "statement": "theorem finite_twist_root_trivialization (P : PurityFiniteSetting.{u}) : Finite P.Ring ∧ ((P.coefficients.l ^ P.level : ℕ) : P.Ring) = 0 ∧ (∃ b : ℕ, Nat.card P.Ring = P.coefficients.l ^ b) ∧ Nonempty (CompatibleBases P.field.k P.coefficients.l)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d9910b41",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Re-delivery after return L (H2) at a04626abeb58; the Lean module is byte-identical (sha256 6575c6f8), and the earlier full H3 reading found no substance fault, which I confirmed by rereading all 350 lines. The item changes only lean and stmt_deps: the three theorem nodes are replaced by def-amb-finite-tate-site-comparison-data, the two new existing:true definition nodes and the 7 advisory definition owners; the theorem nodes stay in proof_deps; dependency records are identical to live. def-pur-finite-root-pro-tensor (finiteRootProModule/Tensor/Generator) and def-pur-signed-root-coordinate-data (purPointConstant, IsPurPointSignedCoordinates): signatures verbatim with live l.49-51 and l.54-58; the TeX matches the bodies (restrict scalars, extend, sheafify; six signed clauses); H12 fields correct; no other live owner. All clauses are present: finiteness and ℓ-power order, the cokernel quotient, the tensor presentation, root bases on both sites, signed degrees, the ν* comparison, pullbacks, and arbitrary non-flat coefficient maps. Advisory: owners of integralCoefficientSheaf, rootsOfUnitySheaf, constantZMod and purTwistRing/purTwistFiniteRing are not cited in stmt_deps. No compile: no file changed."
+ }
+}

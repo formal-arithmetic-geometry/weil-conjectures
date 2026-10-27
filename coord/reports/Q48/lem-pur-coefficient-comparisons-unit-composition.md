@@ -1,0 +1,45 @@
+## Worker report
+
+Files written: `dag/nodes/sec-smooth-purity/lem-pur-coefficient-comparisons-unit-composition.json` (statement, split; no exact Mathlib match), `citations.json`, and this report. The statement, statement dependencies, source, creation history and blueprint ancestry are preserved. Seven proof steps construct the multiplication constraints and calculate all four compatibility equations. No new nodes and no Mathlib leaves.
+
+Attachments: none. Searches in `lean/WeilConjectures/` for the exact blueprint tag, coefficient comparisons, and scalar extension found no declaration stating all the item's clauses. The existing sheaf tensor bilinear universal-property theorem is reused through its existing node; its file `WeilConjectures/Algebra/Category/ModuleCat/Sheaf/TensorBilinearUniversal.lean`, lines 127–165, was read. No Lean source was written and no compiler was run.
+
+WANTED: none. The inherited brief's `coord/dag-sync.md` is absent in this read clone; no mathematical source is missing.
+
+The imported item had a complete statement but no proof. There is no statement dispute and no changed hypothesis. The current blueprint Frobenius-twist source moved to `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md`; I read its coefficient-compatibility sentence and retained the DAG's chapter/unit and ancestry rather than changing their records. The strict comparison calculus parent was read to identify its exact extracted clause. Its two sibling lemmas construct k/s and prove their strictness; neither is used to claim the unit/composition equations, and the parent is not cited, preventing a cycle.
+
+Nothing mathematical remains unfinished in this split. The eventual Lean formalization remains stage 2/3 work.
+
+## Mathlib and existing-node searches
+
+The five new searches in `searches.jsonl` were all run through the prescribed msearch command: LeanFinder with two distinct phrasings, LeanSearch, Loogle, and grep of `Algebra/Category/ModuleCat`. Every query text is copied exactly into `mathlib_searches`; all services returned hits. The inherited searches remain as provenance. I read ChangeOfRings.lean lines 954–1055 (extendScalarsId, extendScalarsComp, their normalized generator formulas and associativity/unit laws) and Sheaf/PullbackContinuous.lean lines 175–215 (pullback_assoc and the two unit laws). These ordinary comparisons are useful constituents but do not state both k/s compatibility equations on strict systems with arbitrary semilinear transitions and unbounded totals. The second LeanFinder phrasing additionally returned monoidal sheafification structures; those do not state this item either.
+
+Whole-DAG searches used tensor generators, pure tensors, balancing, sheafification universal properties, scalar unit and associator/composition keywords. `tools/blueprint_refs.py ancestor` confirmed the recorded ancestor, and whole-blueprint searches for `coefficient comparison`, `scalar associator` and `scalar extension` found no equivalent imported statement. The existing unit lemma `lem-pur-scalar-tensor-unit` is confined to a particular quotient sequence site and a coefficient identity; `lem-pur-coefficient-tensor-ordinary-coherence` is for fixed quotient coefficients and scalar adjunction units. Neither supplies the general ring-sheaf k and s equations. Rather than duplicate these or introduce clauses of this item as children, the proof carries the calculations itself.
+
+## New nodes
+
+None. In particular no unit-law, composition-law, or elementary balancing node was manufactured.
+
+## Not duplicates
+
+No new nodes, so there are no new/existing same-tag pairs to distinguish.
+
+## Review by Q48
+
+I read Stacks `sites-modules.tex` Section 03EK, label `section-tensor-product`, including the presheaf/sheaf tensor definitions, the sheafification-tensor statement (Tag 0GMW), and the bilinear Hom bijection; also Tag 03EL, label `lemma-tensor-product-pullback`, including its adjunction proof. These justify the constituents, not a quotation of the entire strict-system result. The proof is therefore explicitly agent-written. For totalization I read `homology.tex` Tag 012Z, label `definition-associated-simple-complex`, including its countable-direct-sum proviso and sign. I also read `sites-cohomology.tex` Tag 07A4, label `lemma-pullback-tensor-product`; its derived K-flat argument is not invoked for our arbitrary ordinary complexes. There are no new-node sources to verify.
+
+Step 1 cites four statements I opened: `lem-pc-sites-sheaf-tensor-bilinear-universal` really gives the bilinear Hom bijection; `def-weil-pbc-module-tensor-product` explicitly includes the quotient relations and pure-tensor generation; `def-weil-presheaf-modules-sheafification` explicitly gives unique factorization of linear maps; and `lem-pc-sites-module-sheafification-bilinear-extension` explicitly extends a bilinear pairing through both input sheafifications. These suffice to iterate the generator test, including differing coefficient rings by restriction of scalars. The step does not use a definition node as evidence of an unstated theorem. It does not assert that inverse-image sections come globally from the source site.
+
+Step 2 constructs U/A in the proof rather than invoking another copy of their clauses. I checked outer balancing over R^1 and inner balancing over R^0 separately. The latter uses exactly i^12 i^01 = i^02. The proposed A inverse respects that same relation; both composites reduce to tensor balancing. Naturality replaces only the module variable. The sheaf maps and their equalities use Step 1, so checking section formulas does not assume enough points.
+
+Step 3 checks the chain and strict-system conditions, with the ring sequence arrows and semilinear transitions kept explicit. I verified the hypothesis rho^2 i^12 = i^12 rho^1 at the one place it is used. Both inverse formulas preserve the same transitions because ring maps preserve one. The cited `def-pc-tensor-complex-sheaves` states the signed differential and arbitrary direct sums. On rereading, I replaced an informal appeal to finite sums after scalar extension by the explicit tensor-Hom adjunction in `lem-pc-sheaf-modules-tensor-closed`, whose statement I opened: maps out of R^b tensor Q curry to maps out of Q, and the coproduct universal property then applies even on a site where coproduct sections need not be globally finite sums. This step is marked non-elementary and its actual tensor-Hom tool is cited. No flatness or colimit-preservation theorem is silently assumed.
+
+Step 4 computes both unit equations using only the assumed k/s formulas and the multiplication maps already constructed. I checked that the two results live in F_a K and T_a(K,H), respectively. In Step 5 I expanded every intermediate of the successive k route, including F_2(A_Y): its two Y coefficients are ones, while multiplicativity and i_X^12 i_X^01 = i_X^02 produce exactly the displayed X coefficient. In Step 6 I expanded all three successive s operations on a homogeneous bidegree. Neither route permutes factors or changes degree, so no Koszul sign is introduced. Steps 4–6 are routine substitutions, not new non-elementary assertions. Step 1 supplies their sheaf equality test and Step 3 the whole-total equality test.
+
+Step 7 uses the hypothesis that k/s and their inverses are strict, together with the U/A strictness proved in Step 3. Equality in this category is equality of component chain maps. The written cancellation proves equality of inverse routes with reversed order, rather than treating inverse coherence as automatic notation. No inverses of transition maps are used.
+
+I tested repeated coefficient rows and all identities (the equations reduce to action balancing), the zero module and zero-ring cases (the unit equations become unique zero-module maps), arbitrary zero chain transitions, a nonflat map Z to Z/2 (balancing uses no exactness), and complexes with nonzero terms in every positive and negative degree (the proof uses coproduct inclusions, not finite bounds). All ring maps remain unital; 'zero transitions' means module transitions, not arbitrary zero maps between nonzero unital coefficient rings. I checked B–E against the actual files: all non-elementary sheaf inputs are cited, the argument is not a restatement in new nodes, no SGA source is used, and no proof step exceeds 2000 characters.
+
+The two off-unit tools are declared in `split_report.tool_uses` for maintainer review: bilinear extension through module sheafification, and the tensor-Hom adjunction on module sheaves. They are generic tools below the coefficient calculation, not replacement routes for purity. The tensor bilinear universal-property node is already recorded Lean-closed. `citations.json` has an exact substring of each cited node's statement for every (step,node) pair; each quote was verified while writing the file.
+
+The server `review_split` check passed before the final tensor-Hom clarification. The required final delivery dry run is run after this report; any diagnostics are repaired before push.

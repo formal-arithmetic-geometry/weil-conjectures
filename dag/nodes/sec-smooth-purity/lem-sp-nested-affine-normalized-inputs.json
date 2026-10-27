@@ -1,0 +1,145 @@
+{
+ "id": "lem-sp-nested-affine-normalized-inputs",
+ "kind": "statement",
+ "title": "Normalization and finite-Tor inputs for affine integration",
+ "statement": "Fix a finite purity setting $P$, with finite coefficient ring $A=P.Coefficient$, exponent $N=P.diagonalExponent$ and the canonical ordered shifted Tate coefficients and ordinary-etale arrows of [def-sp-nested-affine-formula-data]. For every affine $k$-scheme $B$, structure map $a_B$ of finite type, and $m\\ge0$, the inverse diagonal orientation of $p_m:T_m(B)\\to B$ equals gammaUnit. The object $p_m^!A_B$ is bounded constructible of finite Tor amplitude. For every bounded constructible finite-Tor $H$ on $B$, $p_m^*H\\otimes A(m)[2m]$ and $p_m^!H$ are bounded constructible finite-Tor, and\n$$\\Gamma_{m,H}=\\theta_{p_m,H}(1_{p_m^*H}\\otimes\\Gamma_{m,A_B}).$$\nAt $m=0$, composing gamma at $H$ with the exceptional-identity and pullback-identity comparisons gives zeroSource at $H$. gammaUnit in rank zero is the inverse of those identity comparisons at $A_B$. These clauses mean exactly NormalizedInputs P, with the fixed coefficient-unit constraints of that definition, including empty schemes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), ordered affine integration, chart restriction and normalization"
+ },
+ "stmt_deps": [
+  "def-sp-nested-affine-formula-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply projection-purity-agreement in the canonical finite-site presentation at every constructible finite-Tor ordinary input. Its tensor, pullback and exceptional comparison squares preserve the published counits. Reflect its equality back to ordinary arrows by full faithfulness of the finite-site comparison.",
+   "uses": [
+    "lem-pur-projection-purity-agreement",
+    "lem-sp-etale-ctf-chart-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand smooth purity as tensor of the pullback identity and the inverse orientation followed by theta. At the coefficient unit, dualizingTensor_unit removes the tensor and unit constraints, identifying the actual inverse diagonal orientation with gammaUnit. Substitute this equality in the formula at general H.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "lem-pur-dualizing-unit-composite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient unit has Tor interval [0,0]. Ordinary exceptional finite-Tor preservation supplies the dualizing and exceptional targets. Pullback preserves the Tor interval, tensor with the locally free shifted Tate line preserves finite Tor amplitude and constructibility, and its even shift translates the interval. These are the ordinary APIs underlying the preservation and chart-domain lemmas; no flatness of H or omega is assumed.",
+   "uses": [
+    "thm-sf-preservation-class",
+    "lem-sp-etale-ctf-chart-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In rank zero the ordered integration is the identity adjunction and its coefficient trace is the identity. The exceptional identity, exact pullback identity and right-unit comparisons in zeroSource are precisely the remaining factors of its transpose. At the coefficient unit the same cancellation gives the final gammaUnit equation, also over the empty scheme.",
+   "uses": [
+    "lem-pur-ordered-adjoint-tower-regrouping",
+    "def-pur-affine-space-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-projection-purity-agreement",
+  "lem-sp-etale-ctf-chart-domain",
+  "def-pur-smooth-purity-map",
+  "lem-pur-dualizing-unit-composite",
+  "thm-sf-preservation-class",
+  "lem-pur-ordered-adjoint-tower-regrouping",
+  "def-pur-affine-space-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), ordered affine integration, chart restriction and normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordered affine integration, etale chart orientation normalization, finite Tor constructibility, and composition of exceptional pullbacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom g] [IsAffine X] : IsAffine (pullback f g)\", \"doc\": \"If $ X $ is an affine scheme and $ g $ is an affine morphism, then the pullback of $ f $ and $ g $ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsIntegralHom f],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"Every integral morphism of schemes is affine, i.e., if $ f: X \\\\to Y $ is an integral morphism of schemes, then $ f $ is necessarily an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(f : X ⟶ Y) (𝒰 : Y.OpenCover) (i) :\\n  (𝒰.pullbackCoverAffineRefinementObjIso f i).inv ≫ (𝒰.affineRefinement.openCover.pullback₁ f).f i =\\n    ((𝒰.X i.1).affineCover.pullback₁ (𝒰.pullbackHom f i.1)).f i.2 ≫ (𝒰.pullback₁ f).f i.1\", \"doc\": \"For a morphism $ f : X ⟶ Y $, an open cover $ \\\\mathcal{U} $ of $ Y $, and an index $ i $, the inverse of the isomorphism between pullback constructions satisfies $ (\\\\mathcal{U}.\\\\text{pullbackCoverAffi\"}\n  {\"name\": \"VectorField.mpullbackWithin_comp_of_left\", \"module\": \"Mathlib.Geometry.Manifold.VectorField.Pullback\", \"type\": \"{g : M' → M''} {f : M → M'} {V : Π (x : M''), TangentSpace I'' x} {s : Set M} {t : Set M'} {x₀ : M}\\n  (hf : MDifferentiableWithinAt I I' f s x₀) (h : Set.MapsTo f s t) (hu : UniqueMDiffWithinAt I s x₀)\\n  (hg' : (mfderivWithin I' I'' g t (f x₀)).IsInvertible) :\\n  mpullbackWithin I I'' (g ∘ f) V s x₀ \", \"doc\": \"Let $ M, M', M'' $ be manifolds modeled on normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $. For a vector field $ V $ on $ M'' $, smooth maps $ f:M\\\\to M' $ and $ g:M'\\\\to M'' $, and\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": HasAffineProperty @IsIntegralHom fun X _ f _ ↦ IsAffine X ∧ RingHom.IsIntegral (f.app ⊤).hom\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement. The project provides the geometric and adjunction ingredients, but not these fixed ordinary-coordinate comparison equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth purity on nested etale charts equals ordered affine space integration with normalized exceptional pullback composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation\", \"doc\": \"For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement. The project provides the geometric and adjunction ingredients, but not these fixed ordinary-coordinate comparison equations."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Pp]urity|[Pp]urity.*[Cc]omposition",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement. The project provides the geometric and adjunction ingredients, but not these fixed ordinary-coordinate comparison equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.homEquiv",
+   "results": "[loogle] OK 1 hit(s): CategoryTheory.Adjunction.comp_homEquiv, Mathlib.CategoryTheory.Adjunction.Basic. The result gives the Hom-equivalence formula for two composed adjunctions.",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunct composition is available. It does not identify the fixed ordinary-etale trace, exceptional comparison, or chart orientation arrows; those comparison steps are the new obligations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.NestedAffineOrientation",
+  "date": "2026-10-26",
+  "group": "A9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (1), normalization and finite-tor inputs for affine integration",
+   "via": [
+    "lem-sp-nested-affine-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.NestedAffineNormalizedInputs",
+  "file": "lean/Sheaf/SecSmoothPurity/NestedAffineNormalizedInputs.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.NestedAffine.nested_affine_normalized_inputs",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.NestedAffine.nested_affine_normalized_inputs"
+  ],
+  "statement": "theorem nested_affine_normalized_inputs (P : PurityFiniteSetting.{u}) : NormalizedInputs P",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d8366",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261026T065133-L-2707807",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d8366",
+  "group": "A9",
+  "result": "fix",
+  "landing": "20261026T065133-L-2707807",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 3 new sorried step modules + relocated FormulaData vs clone NestedAffineOrientation (verbatim diff) and item Statement conjuncts; nodes vs Lean proof; sandbox compile + #print axioms"
+ }
+}

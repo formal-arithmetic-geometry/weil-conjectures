@@ -1,0 +1,210 @@
+{
+ "id": "def-sfb-derived-pullback-tensor-left-counit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "place": "the Lean proof of det-proper-image-localizing-open's declarations uses (or, for the batch import closure, sits beside) AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensorLeftCounit (found by the 2026-10-22 maintainer audit of upstream sorries without a DAG node); in blueprint terms: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The counit of Lf^*(- ⊗^L -)",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring] and $f\\colon X\\to Y$ a morphism of schemes. Write $\\Mod_{\\Lambda_T}$ for module objects over the pulled-back ring on the pro-étale site of $T$, $f^*$ for the (exact, monoidal) pullback of module objects, $Lf^*$ for its left derived functor and $\\otimes^L$ for the derived tensor product [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom]; $Q_h\\colon K(\\Mod_{\\Lambda_T})\\to D(\\Mod_{\\Lambda_T})$ is the localization of the homotopy category. The maps $Lf^*(Q_hA\\otimes^LQ_hB)\\to Lf^*Q_h(A\\otimes B)\\to Q_h(f^*(A\\otimes B))$, $Lf^*$ of the lax structure of $Q_h$ followed by the counit of the derived pullback, form a natural transformation of bifunctors on $K(\\Mod_{\\Lambda_Y})$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
+  "place": "det-proper-image-localizing-open: the projection formula for an open immersion compares Lf^*(K ⊗^L L) with Lf^*K ⊗^L Lf^*L (monoidality of the derived pullback); Lean: upstream file lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/Monoidal.lean, declaration AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensorLeftCounit (module WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal, lines 247-255, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-sfb-left-derived-functor",
+  "def-sfb-derived-tensor-modules",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Apply the derived pullback functor to naturality of the lax localization tensorator. Compose with naturality of the derived counit at A tensor psi, respectively phi tensor B. Functoriality of the derived pullback and associativity give exactly the two naturality fields of the prescribed pointwise transformation. The Lean proof performs these two calculations in private lemmas for arbitrary Q, L and a natural transformation Q ⋙ L ⟶ T, then specializes them to Qh, Lf* and the derived pullback counit. No construction data changes.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-left-derived-functor",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-left-derived-functor",
+  "lem-sfb-derived-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "coord/preferred-upstream/WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal.lean",
+  "place": "Recovered proofs at 438e3d04508, adapted to current source without changing non-proof fields; existing derived and homotopy-category APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived functor of a monoidal exact functor preserving flat objects is strong monoidal for derived tensor product",
+   "results": "Functor.IsLeftDerivedFunctor.mk (Mathlib.CategoryTheory.Functor.Derived.LeftDerived), Tor (Mathlib.CategoryTheory.Monoidal.Tor), Functor.Monoidal.ofBifunctor: no derived monoidal functor",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.Monoidal",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'leftDerivedFunctor.*Monoidal|Monoidal.*leftDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedDerivedTensorCounit|leftDerivedUpperStarTensorLeftCounit|μ_natural|μNatTrans",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean, Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Action/Monoidal.lean; directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality or generic derived-counit data only; the unbounded relative derived tensor and module pullback of the item are project constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison followed by the total left derived functor counit gives a natural transformation of bifunctors on homotopy categories",
+   "results": "8 hits; CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.FunctorToTypes.adj, CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Limits.prodComparisonNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality or generic derived-counit data only; the unbounded relative derived tensor and module pullback of the item are project constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal, CategoryTheory.NatTrans",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits for this conjunction of names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of a functor applied to the lax monoidal tensor comparison of homotopy localization and the counit of a total left derived functor is natural in both tensor factors",
+   "results": "8 hits; CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_ε, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_ε_assoc, CategoryTheory.Localization.Monoidal.μ_natural_right, CategoryTheory.Localization.Monoidal.μ_natural_left, CategoryTheory.Localization.Monoidal.μ_inv_natural_right, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_hom, CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost_hom_app_app', CategoryTheory.Localization.Monoidal.μ_inv_natural_left",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality or generic derived-counit data only; the unbounded relative derived tensor and module pullback of the item are project constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "μ_natural|μNatTrans|totalLeftDerivedCounit",
+   "results": "0 hits; ; directory CategoryTheory/Monoidal/Functor",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits in the specified subdirectory; this query alone does not establish absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "results": "1 hits; CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality or generic derived-counit data only; the unbounded relative derived tensor and module pullback of the item are project constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcompose the natural tensor comparison of a lax monoidal functor with a functor and then compose with a whiskered natural transformation; naturality of the resulting bifunctor map",
+   "results": "8 hits; CategoryTheory.μ_naturality₂, CategoryTheory.μ_naturalityᵣ, CategoryTheory.NatTrans.IsMonoidal.tensor, CategoryTheory.Functor.LaxMonoidal.ofBifunctor.secondMap_app_app_app, CategoryTheory.Functor.LaxMonoidal.μ_natural_right, CategoryTheory.μ_naturalityₗ, CategoryTheory.Functor.LaxMonoidal.μ_natural, CategoryTheory.μ_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality or generic derived-counit data only; the unbounded relative derived tensor and module pullback of the item are project constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem μ_natural|def μNatTrans|def totalLeftDerivedCounit",
+   "results": "6 hits; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean; directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic naturality or generic derived-counit data only; the unbounded relative derived tensor and module pullback of the item are project constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration in a batch target's import closure without a DAG node (maintainer audit of dag/lean_audit.json with_sorry_and_no_node, 2026-10-22, the human's order); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensorLeftCounit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensorLeftCounit",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal",
+     "lines": [
+      345,
+      356
+     ],
+     "kind": "def",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensor",
+  "file": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/MonoidalTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensorLeftCounit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarTensorLeftCounit"
+  ],
+  "statement": "noncomputable def leftDerivedUpperStarTensorLeftCounit :\n    (((whiskeringLeft₂ _).obj DerivedCategory.Qh).obj DerivedCategory.Qh).obj\n        (leftDerivedUpperStarTensorLeft Λ f) ⟶\n      upperStarTensorTarget Λ f where\n  app A :=\n    { app B := L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫\n        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B)\n      naturality B B' ψ := by\n        have h₁ := Functor.LaxMonoidal.μ_natural_right DerivedCategory.Qh A ψ\n        have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (A ◁ ψ)\n        dsimp only [Functor.comp_map] at h₂\n        change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.obj A ◁ DerivedCategory.Qh.map ψ) ≫\n            L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B') ≫ _ =\n          (L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫ _) ≫\n            DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (A ◁ ψ))\n        rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, Category.assoc, h₂] }\n  naturality A A' φ := by\n    ext B\n    have h₁ := Functor.LaxMonoidal.μ_natural_left DerivedCategory.Qh φ B\n    have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (φ ▷ B)\n    dsimp only [Functor.comp_map] at h₂\n    change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.map φ ▷ DerivedCategory.Qh.obj B) ≫\n        L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A' B) ≫ _ =\n      (L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫ _) ≫\n        DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (φ ▷ B))\n    rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, Category.assoc, h₂]",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-27",
+  "note": "upstream proof (slopmaster2 94795abff8, PR #1694) ported to live 2026-10-27 by hand, in the 60 s split of the sync work tree (Monoidal + 7 modules); declaration now in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensor, proved"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "def-sfb-derived-pullback-tensor-left-counit",
+  "worker": "stage1",
+  "summary": "Kept the statement and constructed its prescribed composite, with separate explicit calculations for naturality in each homotopy-category variable. Added the existing left-derived-counit definition and the existing relative-module derived-tensor/lax-localization statements as dependencies. No new nodes: the remaining calculations use only naturality, functoriality, and associativity. Read the upstream sorried declaration and generic implementation, without claiming a forbidden attachment. Ran and recorded fresh Mathlib searches in two phrasings; no match for the entire item.",
+  "blueprint": "The inherited ancestor det-proper-image-localizing-open states extension by zero on localizing categories. This item supplies an auxiliary derived-pullback tensor comparison from its Lean import closure, specifically the composite preceding the derived-bifunctor comparison in Monoidal.lean, module docstring step 3. Steps 1-2 assemble its data; steps 3-4 prove its two naturality fields. The ancestor paragraph itself contains no proof of this auxiliary assertion; this is an agent proof within the inherited route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-a9d923a9b",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-a9d923a9b (reviewer sub-agent of L); spot-checked: I read the whole item and all four steps; there are no new nodes. The statement matches the upstream Lean leftDerivedUpperStarTensorLeftCounit (Monoidal.lean:244-255): the source bifunctor is Lf^*(Q_hA ⊗^L Q_hB), the target is Q_h f^*(A⊗B), and the component is L(μ_{Qh}) followed by leftDerivedFunctorCounit at A⊗B. The coefficient category is Mod_{Λ_T} with the relative tensor. The counit is the derived-functor counit, not the adjunction counit. The statement is unchanged. Step 1: ε comes from def-sfb-left-derived-functor (blueprint line 17, counit LF∘Q⇒Q∘F on K) through the total-derived definition in sk-def-sfb-module-derived-pushpull. μ comes from lem-sfb-derived-monoidal (line 16, the localization from K(C) is lax monoidal), which def-sfb-derived-tensor-modules names as the structure of its Λ_X particular case. Steps 2-4: I checked the types and both naturality chains, each made of two naturality axioms plus functoriality of L, together with the assembly via (α,β)=(1,β)∘(α,1). All are correct and elementary, and no invertibility or extra hypothesis is used. No SGA is cited, and lem-sfb-derived-monoidal is Lean-closed, so no tool_uses declaration is needed. Maintainer note: the report missed that existing new-proetale-derived-module-pullback-monoidal already defines l=γ∘LF(μ_Y) and proves its naturality (its step 5). That node should cite this seeded item, not the reverse, so the miss is not a fault of this delivery."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T114231-L-2276331",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarTensorCounit"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.monoidal_leftDerivedUpperStar"
+  ]
+ }
+}

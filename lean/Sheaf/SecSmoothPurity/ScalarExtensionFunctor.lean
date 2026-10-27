@@ -170,7 +170,6 @@ section ConstructibilityProof
 attribute [local instance] HasDerivedCategory.standard
 attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall
 private theorem scalarExtensionSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 attribute [local instance] scalarExtensionSmall
@@ -553,7 +552,6 @@ theorem scalarExtensionFunctor_preserves_constructible_tor
   exact ⟨scalarExtension_bounded_of_tor T B _ a b ht,
     scalarExtension_constructible f T K hbounded hconstructible, ht⟩
 
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 /-- A line extends by ordinary tensor and remains locally free of rank one.
 Source: blueprint proof (3), Stacks 06YQ
 (blueprint: det-sp-scalar-extension-functor).
@@ -581,7 +579,8 @@ theorem scalarExtensionFunctor_line
   let eqv : proEtaleRingModules T R ≌ proEtaleRingModules T R :=
     CategoryTheory.Equivalence.mk F G e.symm (by
       simpa only [F, G, WeilConjectures.coefficientTwistLine,
-        WeilConjectures.coefficientTwistPower, neg_neg] using d)
+        WeilConjectures.coefficientTwistPower, SheafOfModules.scalarTensorPower,
+        neg_neg] using d)
   have : PreservesFiniteLimits F := inferInstanceAs (PreservesFiniteLimits eqv.functor)
   have : PreservesFiniteColimits F := inferInstanceAs (PreservesFiniteColimits eqv.functor)
   have : F.Additive := Functor.additive_of_preserves_binary_products F
@@ -699,7 +698,6 @@ private theorem scalarExtensionTateLine_rank
     (tateFiniteLine T ℓ (ULift.{u + 1, u} A) n a') r).1
 
 section TateComparisonProof
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall
 private theorem scalarTateSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 attribute [local instance] scalarTateSmall
@@ -1759,7 +1757,6 @@ def scalarExtensionTateLevelIso
 
 section TateExponentProof
 set_option backward.isDefEq.respectTransparency true
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall
 private theorem scalarTateExponentSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 attribute [local instance] scalarTateExponentSmall
@@ -2096,7 +2093,6 @@ private theorem scalarExtensionFunctor_identity_data
     WeilConjectures.OrdinaryFieldRealization.coefficientMap, proEtaleConstantRingMap,
     RingHom.ulift] using he P
 
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 /-- The identity extension has a unique multiplication-normalized unitor.
 Source: blueprint proof (4), Stacks 06YY
 (blueprint: det-sp-scalar-extension-functor).
@@ -2162,7 +2158,6 @@ private theorem scalarExtension_ringMap_id
     (constantSheaf (ProEt.topology T) CommRingCat.{u + 1})
     (CommRingCat.of (ULift.{u + 1, u} A))
 
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 private theorem scalarExtensionFunctor_unit_coherence
     {A B : Type u} [CommRing A] [CommRing B]
     (f : A →+* B) (T : Scheme.{u}) :
@@ -2243,7 +2238,6 @@ private theorem scalarExtensionBalance_cocycle
   exact reductionBalance_cocycle T φ ψ θ P
 
 set_option backward.isDefEq.respectTransparency false in
-attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 private theorem scalarExtensionFunctor_associativity
     {A B C D : Type u} [CommRing A] [CommRing B] [CommRing C] [CommRing D]
     (f : A →+* B) (g : B →+* C) (h : C →+* D) (T : Scheme.{u}) :

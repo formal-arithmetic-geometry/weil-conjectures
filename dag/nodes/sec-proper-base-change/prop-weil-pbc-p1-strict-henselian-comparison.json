@@ -138,7 +138,32 @@
    "cites": []
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+     "lines": [
+      391,
+      436
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -183,23 +208,30 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "In the setup of [def-weil-pbc-strict-henselian-setup], for every torsion\netale sheaf $F$ on $X$, restriction gives natural isomorphisms\n\n$$\n H^q(X,F)\\xrightarrow{\\sim}H^q(X_0,F_0)\n \\qquad(q\\geq0).\n$$",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be a strictly henselian local ring with residue field $\\kappa$, and in the\nsetup of [def-weil-pbc-strict-henselian-setup] let $X=\\mathbf P^1_A$ with closed\nfibre $X_0=\\mathbf P^1_\\kappa$. Let $\\Lambda$ be a commutative ring. For every\nsheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$ which is torsion\n[def-weil-pbc-torsion-etale-sheaf], restriction gives isomorphisms\n\n$$\n H^q(X,F)\\xrightarrow{\\sim}H^q(X_0,F_0)\n \\qquad(q\\geq0).\n$$",
   "proof": [
    {
-    "text": "Choose an injective resolution $F\\to I^\\bullet$. Exactness of inverse\nimage along the closed immersion gives an exact complex $F_0\\to I_0^\\bullet$.\nThe preceding lemma makes each $I_0^r$ acyclic, so Leray's acyclicity lemma\nidentifies $R\\Gamma(X_0,F_0)$ with $\\Gamma(X_0,I_0^\\bullet)$. Degree-zero\nrestriction identifies this complex with $\\Gamma(X,I^\\bullet)$ term by term.\nTaking cohomology gives the displayed isomorphisms, and naturality follows\nfrom the naturality of the restriction map and of injective resolutions.",
-    "uses": [],
-    "elementary": null
+    "text": "Only the underlying abelian sheaf of $F$ matters. *Reduction to a prime.* The\nclass of abelian sheaves for which the comparison holds in all degrees is closed\nunder extensions (five lemma in the long exact cohomology sequences on $X$ and\n$X_0$) and under filtered colimits (cohomology of the quasi-compact\nquasi-separated schemes $X$ and $X_0$ commutes with filtered colimits, as does\ninverse image). A torsion sheaf is the filtered union of its subsheaves $F[n]$\n[def-weil-pbc-torsion-etale-sheaf], a sheaf killed by $n$ is a finite extension of\nsheaves killed by primes, so it suffices to treat an abelian sheaf $G$ with\n$rG=0$ for a prime $r$, i.e. a sheaf of $\\mathbf F_r$-modules.",
+    "uses": [
+     "def-weil-pbc-torsion-etale-sheaf"
+    ],
+    "elementary": false
    },
    {
-    "text": "Choose a K-injective resolution $F\\to I^\\bullet$. By the acyclicity statement\nof [prop-weil-pbc-p1-acyclicity] each $I^m|_{X_0}$ is acyclic on $X_0$, so\n$H^q(X_0,F_0)$ is computed by $\\Gamma(X_0,I^\\bullet|_{X_0})$; the degree-zero\ncomparison, applied termwise to the abelian sheaves $I^m$, identifies this\nwith $\\Gamma(X,I^\\bullet)$, whose cohomology is $H^q(X,F)$. Naturality in $F$\nis the naturality of the two comparisons in the setup of\n[def-weil-pbc-strict-henselian-setup].",
+    "text": "*Sheaves of $\\mathbf F_r$-modules.* Induction on $q$. Degree zero is\n[lemma-weil-pbc-etale-degree-zero], $X$ being proper over the henselian local\nring $A$. For $q\\geq1$ embed $G$ into an injective sheaf $I$ of\n$\\mathbf F_r$-modules and put $Q=I/G$. The underlying abelian sheaf of $I$ has no\nhigher cohomology on $X$, and $H^q(X_0,I_0)=0$ for $q>0$ by\n[prop-weil-pbc-p1-acyclicity]. Inverse image is exact, so $0\\to G_0\\to I_0\\to\nQ_0\\to0$ is exact, and the long exact sequences of $0\\to G\\to I\\to Q\\to0$ on $X$\nand on $X_0$, connected by restriction, identify $H^q(X,G)$ and $H^q(X_0,G_0)$\nwith the cokernels of $H^{q-1}(X,I)\\to H^{q-1}(X,Q)$ and\n$H^{q-1}(X_0,I_0)\\to H^{q-1}(X_0,Q_0)$; by the induction hypothesis for $I$ and\n$Q$ in degree $q-1$, restriction is bijective on these cokernels. All maps are\nrestriction maps, so the isomorphisms are natural in $F$.",
     "uses": [
-     "prop-weil-pbc-p1-acyclicity",
-     "def-weil-pbc-strict-henselian-setup"
+     "lemma-weil-pbc-etale-degree-zero",
+     "prop-weil-pbc-p1-acyclicity"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

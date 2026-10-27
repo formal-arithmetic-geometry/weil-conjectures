@@ -95,7 +95,32 @@
   "item": "lem-weil-pbc-smooth-section-etale-lift",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_etale_away_of_localized_cotangent_vanishing"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_etale_away_of_localized_cotangent_vanishing",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing",
+     "lines": [
+      26,
+      62
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -137,5 +162,32 @@
   "landing": "20261012T095908-L-318610",
   "kind": "interface",
   "note": "independent Codex review: Matched the unchanged theorem signature with its node, the Mathlib proof with the recorded route, and the import change with both direct importers; compilation is clean and axioms are exactly propext, Classical.choice, Quot.sound."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A\\to C$ be a homomorphism of commutative rings making $C$ a finitely presented $A$-algebra, and $\\mathfrak q\\subset C$ a prime ideal such that the localizations at $\\mathfrak q$ of the $C$-modules $H_1(\\mathrm{NL}_{C/A})$ (the first homology of the naive cotangent complex) and $\\Omega_{C/A}$ vanish: $H_1(\\mathrm{NL}_{C/A})_{\\mathfrak q}=0$ and $(\\Omega_{C/A})_{\\mathfrak q}=0$. Then there is $h\\in C\\setminus\\mathfrak q$ such that $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$, induced by $A\\to C\\to C_h$, is étale.",
+  "proof": [
+   {
+    "text": "For a finitely presented $A$-algebra $C$, the etale locus (the set of primes at which $C$ is etale over $A$) is the complement of the union of the supports of the $C$-modules $H_1(\\mathrm{NL}_{C/A})$ and $\\Omega_{C/A}$. By hypothesis $\\mathfrak q$ lies in the support of neither, so $C$ is etale over $A$ at $\\mathfrak q$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The etale locus is open, and the principal opens $D(h)$ form a basis of $\\operatorname{Spec}C$. Hence there is $h\\in C\\setminus\\mathfrak q$ such that $D(h)$ lies in the etale locus, i.e. $C_h$ is an etale $A$-algebra.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "A morphism of affine schemes $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$ is etale exactly when the ring map $A\\to C_h$ is etale. Hence $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$ is etale, with $h\\notin\\mathfrak q$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

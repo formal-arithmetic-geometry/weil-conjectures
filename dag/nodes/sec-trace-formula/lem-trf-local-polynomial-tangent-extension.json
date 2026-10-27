@@ -1,0 +1,285 @@
+{
+ "id": "lem-trf-local-polynomial-tangent-extension",
+ "kind": "statement",
+ "title": "Tangent cone of a local polynomial ring at the closed origin",
+ "statement": "Let $(T,\\mathfrak b)$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring], with residue field $\\kappa=T/\\mathfrak b$. Set $P=T[V]$, $\\mathfrak q=\\mathfrak bP+(V)$ and $U=P_{\\mathfrak q}$ [def-weil-polynomial-ring, def-weil-pbc-localization-at-prime]. Then $\\mathfrak q$ is maximal, $U$ is Noetherian local with maximal ideal $\\mathfrak c=\\mathfrak qU$ and residue field canonically $\\kappa$, and there is a graded $\\kappa$-algebra isomorphism\n$$\\Phi_T:(\\operatorname{gr}_{\\mathfrak b}T)[Z]\\xrightarrow{\\sim}\\operatorname{gr}_{\\mathfrak c}U,\\qquad \\deg Z=1,$$\nwhere $\\Phi_T$ sends the degree-$d$ class of $a\\in\\mathfrak b^d$ to the degree-$d$ class of $a/1$, and $Z$ to the degree-one class of $V/1$ [def-weil-pbc-associated-graded-ring]. These isomorphisms commute with quotient maps: for any ideal $J\\subseteq\\mathfrak b$, the canonical map $U\\to (T/J)[V]_{(\\mathfrak b/J,V)}$ induces, under $\\Phi_T$ and $\\Phi_{T/J}$, the polynomial extension of $\\operatorname{gr}_{\\mathfrak b}T\\to\\operatorname{gr}_{\\mathfrak b/J}(T/J)$. If $T$ is regular local [def-weil-regular-scheme], then $U$ is regular local.",
+ "source": {
+  "document": "literature/hironaka-certain-numerical-characters-of-singularities-1970.pdf",
+  "place": "Hironaka, Certain numerical characters of singularities (1970), Remark (10.1), p.165, Proposition 11, p.166, and proof of Lemma 12, pp.166--167: local polynomial associated graded isomorphism, its coefficient inclusion and extension of the initial ideal. Naturality for quotient maps is the coefficient form of those identifications. Read online at https://scispace.com/pdf/certain-numerical-characters-of-singularities-18d51ii5bz.pdf; archival copy WANTED. No Stacks tag states this entire natural comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation at $V=0$ followed by $T\\to\\kappa$ is surjective with kernel $\\mathfrak q$: a polynomial is in the kernel exactly when its constant coefficient belongs to $\\mathfrak b$, since its remaining terms are divisible by $V$ [def-weil-polynomial-ring]. Thus $P/\\mathfrak q=\\kappa$ and $\\mathfrak q$ is maximal. The localization definition [def-weil-pbc-localization-at-prime] gives a local ring $U$ with maximal ideal $\\mathfrak c=\\mathfrak qU$. Its residue map is explicitly $f/s\\mapsto\\overline{f(0)}/\\overline{s(0)}$. The denominator is nonzero because $s\\notin\\mathfrak q$; the kernel consists exactly of fractions with numerator in $\\mathfrak q$, so this gives $U/\\mathfrak c\\simeq\\kappa$.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal-power and fraction calculations from the definitions of polynomial rings and localization (Tags 00CO, 07BH); detailed agent proof of the comparison asserted in Hironaka, Proposition 11, p.166, and used in Lemma 12, pp.166--167."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-algebra-noetherian] to $T\\to P=T[V]$ (one generator and zero relation ideal), and then [lem-weil-pbc-localization-noetherian] to $P\\to U$ at $P\\setminus\\mathfrak q$. Hence $P$ and $U$ are Noetherian. These uses require only the given Noetherianity of $T$, not its regularity.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, both sentences."
+   }
+  },
+  {
+   "text": "Expand the power of the sum of ideals by distributivity: for $n\\geq0$,\n$$\\mathfrak q^n=\\sum_{j=0}^n\\mathfrak b^{n-j}V^jP.$$\nFor completeness the base $n=0$ is $P=P$; multiplying the displayed sum by $\\mathfrak bP+(V)$ gives the same sum with $n$ replaced by $n+1$, including its two endpoints. Consequently $f=\\sum_i a_iV^i$ lies in $\\mathfrak q^n$ exactly when $a_i\\in\\mathfrak b^{n-i}$ for $0\\leq i<n$, with no restriction for $i\\geq n$: each summand on the right has this property, and conversely each term with $i<n$ belongs to its $j=i$ summand while every term with $i\\geq n$ belongs to $V^nP$. This uses only polynomial coefficients [def-weil-polynomial-ring] and ideal multiplication.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal-power and fraction calculations from the definitions of polynomial rings and localization (Tags 00CO, 07BH); detailed agent proof of the comparison asserted in Hironaka, Proposition 11, p.166, and used in Lemma 12, pp.166--167."
+   }
+  },
+  {
+   "text": "Using the preceding coefficient criterion for $n$ and $n+1$, coefficient extraction and its inverse give\n$$\\bigoplus_{i=0}^n\\mathfrak b^{n-i}/\\mathfrak b^{n-i+1}\\ \\xrightarrow{\\sim}\\ \\mathfrak q^n/\\mathfrak q^{n+1},\\qquad ([a_i])_{i=0}^n\\longmapsto[\\sum_{i=0}^n a_iV^i].$$\nIndeed every term of exponent greater than $n$ is zero in this quotient, and the displayed sum is zero exactly when each $a_i\\in\\mathfrak b^{n-i+1}$. In particular the formula is independent of lifts. These are $\\kappa$-linear maps, because $\\mathfrak b$ kills each source summand and $\\mathfrak q$ kills the target [def-weil-pbc-associated-graded-ring].",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal-power and fraction calculations from the definitions of polynomial rings and localization (Tags 00CO, 07BH); detailed agent proof of the comparison asserted in Hironaka, Proposition 11, p.166, and used in Lemma 12, pp.166--167."
+   }
+  },
+  {
+   "text": "For every $N\\geq1$ and $s\\notin\\mathfrak q$, write $s=s_0+Vh$ with $s_0\\in T\\setminus\\mathfrak b$. Since $T$ is local, $s_0$ is a unit. Put $w=s_0^{-1}Vh\\in\\mathfrak q$. In $P/\\mathfrak q^N$ the inverse of $s$ is\n$$s_0^{-1}\\sum_{j=0}^{N-1}(-w)^j,$$\nas multiplication gives $1-(-w)^N=1$. Thus the fraction rule gives an inverse $U/\\mathfrak c^N\\to P/\\mathfrak q^N$, $[f/s]\\mapsto[f][s]^{-1}$, to $[f]\\mapsto[f/1]$ [def-weil-pbc-localization-at-prime]. It is well defined by the fraction equality relation, and $\\mathfrak c^N=\\mathfrak q^NU$ because extending ideals commutes with finite sums of products. It sends $\\mathfrak c^n/\\mathfrak c^{n+1}$ onto $\\mathfrak q^n/\\mathfrak q^{n+1}$ for $N=n+1$: a numerator from $\\mathfrak q^n$ stays there when multiplied by the displayed polynomial inverse. Hence localization induces a bijection on these pieces for every $n\\geq0$, including $n=0$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal-power and fraction calculations from the definitions of polynomial rings and localization (Tags 00CO, 07BH); detailed agent proof of the comparison asserted in Hironaka, Proposition 11, p.166, and used in Lemma 12, pp.166--167."
+   }
+  },
+  {
+   "text": "Compose the degreewise maps of steps 4 and 5. On a homogeneous polynomial term $[a]_d Z^i$, the resulting map is $[aV^i/1]_{d+i}$. It is bijective in degree $n$ by those steps. It preserves products since\n$$([a]_dZ^i)([b]_eZ^j)=[ab]_{d+e}Z^{i+j},\\qquad (aV^i/1)(bV^j/1)=abV^{i+j}/1.$$\nIt preserves addition, $1$, and the degree-zero copy of $\\kappa$ by the same formulas. Finite sums of homogeneous terms exhaust both rings, by the definitions of polynomial and associated graded rings [def-weil-polynomial-ring, def-weil-pbc-associated-graded-ring]. This gives the required graded $\\kappa$-algebra isomorphism $\\Phi_T$, with precisely its stated coefficient and variable images.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal-power and fraction calculations from the definitions of polynomial rings and localization (Tags 00CO, 07BH); detailed agent proof of the comparison asserted in Hironaka, Proposition 11, p.166, and used in Lemma 12, pp.166--167."
+   }
+  },
+  {
+   "text": "Let $J\\subseteq\\mathfrak b$. Ideals of $T/J$ lift to ideals of $T$ containing $J$, so their finite generators project to finite generators; $T/J$ is Noetherian. Its units are exactly the classes outside $\\mathfrak b/J$, so it is nonzero local with this maximal ideal and residue field $\\kappa$. A denominator $s\\notin\\mathfrak q$ remains outside $(\\mathfrak b/J,V)$ because its constant coefficient has nonzero image in $\\kappa$. Therefore $f/s\\mapsto\\bar f/\\bar s$ defines the canonical localization map [def-weil-pbc-localization-at-prime]. It sends $\\mathfrak c^n$ into the corresponding $n$th power, and so induces the associated graded map [def-weil-pbc-associated-graded-ring]. On every homogeneous term the two maps in the claimed square are both\n$$[a]_dZ^i\\longmapsto[\\bar aV^i/1]_{d+i}.$$\nHere the coefficient map is $[a]_d\\mapsto[a+J]_d$ in $((\\mathfrak b/J)^d/(\\mathfrak b/J)^{d+1})$, which is well defined since powers map to powers. Equality on finite sums proves the required quotient compatibility.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary ideal-power and fraction calculations from the definitions of polynomial rings and localization (Tags 00CO, 07BH); detailed agent proof of the comparison asserted in Hironaka, Proposition 11, p.166, and used in Lemma 12, pp.166--167."
+   }
+  },
+  {
+   "text": "Finally suppose $T$ is regular local. By the last sentence of [lem-weil-pbc-regular-local-localization], $T$ is a regular ring. Apply [lem-trf-polynomial-ring-regular-base] with one variable: $P$ is regular. By the definition of regular ring [def-weil-regular-scheme], its localization at the prime $\\mathfrak q$ is regular local. This is $U$ from step 1, proving the last clause without assuming that the possibly singular ring $T/J$ is regular.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AFS, lemma-localization-of-regular-local-is-regular; Tag 00OD, definition-regular; polynomial regularity is the Mathlib leaf lem-trf-polynomial-ring-regular-base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-associated-graded-ring",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-polynomial-ring-regular-base",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit coefficient and finite-geometric-series proof of the canonical graded comparison of Hironaka Proposition 11 (p.166), read online; Stacks 00FN and 0AFS supply the Noetherianity and regular-local localization tools. Local Hironaka archival PDF is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*[Pp]olynomial|[Pp]olynomial.*associatedGraded|[Ll]ocal.*[Pp]olynomial.*[Rr]egular",
+   "results": "{\"t\": \"2026-10-23T21:19:43Z\", \"tool\": \"grep\", \"query\": \"associatedGraded.*[Pp]olynomial|[Pp]olynomial.*associatedGraded|[Ll]ocal.*[Pp]olynomial.*[Rr]egular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/localization and Weierstrass declarations and Associated-element lemmas do not give the canonical maximal-adic graded polynomial isomorphism; grep returned no hits. The first Loogle query reports unknown identifier Ideal.associatedGraded; the second phrasing was run and read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded of a polynomial ring localized at the maximal ideal generated by the base maximal ideal and the variable",
+   "results": "{\"t\": \"2026-10-23T21:19:43Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded of a polynomial ring localized at the maximal ideal generated by the base maximal ideal and the variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.maximalIdeal_eq_span_X\", \"HomogeneousLocalization.Away.isLocalization_mul\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.AtPrime\", \"HomogeneousLocalization\", \"AddMonoidAlgebra.grade.gradedAlgebra\", \"HomogeneousLocalization.instIsScalarTowerSubtypeMemOfNatLocalization\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\"], \"digest\": \"168df8965d37a873\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/localization and Weierstrass declarations and Associated-element lemmas do not give the canonical maximal-adic graded polynomial isomorphism; grep returned no hits. The first Loogle query reports unknown identifier Ideal.associatedGraded; the second phrasing was run and read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.associatedGraded, Polynomial",
+   "results": "{\"t\": \"2026-10-23T21:19:43Z\", \"tool\": \"loogle\", \"query\": \"Ideal.associatedGraded, Polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.associatedGraded'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/localization and Weierstrass declarations and Associated-element lemmas do not give the canonical maximal-adic graded polynomial isomorphism; grep returned no hits. The first Loogle query reports unknown identifier Ideal.associatedGraded; the second phrasing was run and read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-local-polynomial-tangent-extension: for a Noetherian local ring R the associated graded ring of R[V] localized at (m,V) is gr_m(R)[Z], canonically on coefficients and on the variable; if R is regular the localization is regular",
+   "results": "{\"t\": \"2026-10-23T21:19:44Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-local-polynomial-tangent-extension: for a Noetherian local ring R the associated graded ring of R[V] localized at (m,V) is gr_m(R)[Z], canonically on coefficients and on the variable; if R is regular the localization is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.IsStandardSmooth.localization_away\", \"RingHom.isStandardSmooth_localizationPreserves\", \"RingHom.IsStandardSmoothOfRelativeDimension.algebraMap_isLocalizationAway\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"cd0b1b8414cf6274\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/localization and Weierstrass declarations and Associated-element lemmas do not give the canonical maximal-adic graded polynomial isomorphism; grep returned no hits. The first Loogle query reports unknown identifier Ideal.associatedGraded; the second phrasing was run and read."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|associated_graded|tangentCone|tangent_cone",
+   "results": "{\"t\": \"2026-10-23T21:20:04Z\", \"tool\": \"grep\", \"query\": \"associatedGraded|associated_graded|tangentCone|tangent_cone\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/localization and Weierstrass declarations and Associated-element lemmas do not give the canonical maximal-adic graded polynomial isomorphism; grep returned no hits. The first Loogle query reports unknown identifier Ideal.associatedGraded; the second phrasing was run and read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associated\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-23T21:20:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"associated\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Polynomial.associated_map_map\", \"Polynomial.eq_of_monic_of_associated\", \"Polynomial.associated_of_dvd_of_degree_eq\", \"Polynomial.associated_of_dvd_of_natDegree_le_of_leadingCoeff\", \"Polynomial.associated_of_dvd_of_natDegree_le\", \"Polynomial.degree_eq_degree_of_associated\", \"Polynomial.associated_content_mul\", \"Polynomial.associated_content_C_mul\"], \"digest\": \"ca506c9c4f5f7df9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/localization and Weierstrass declarations and Associated-element lemmas do not give the canonical maximal-adic graded polynomial isomorphism; grep returned no hits. The first Loogle query reports unknown identifier Ideal.associatedGraded; the second phrasing was run and read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-local-polynomial-tangent-extension: adjoining a variable at the closed origin to any local Noetherian ring gives a polynomial extension of its maximal-adic tangent cone, and preserves regularity",
+   "results": "{\"t\": \"2026-10-23T21:20:10Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-local-polynomial-tangent-extension: adjoining a variable at the closed origin to any local Noetherian ring gives a polynomial extension of its maximal-adic tangent cone, and preserves regularity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"Algebra.IsStandardSmooth\", \"PowerSeries.exists_isWeierstrassFactorization\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\"], \"digest\": \"cde5667b1cb742a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned smooth/localization and Weierstrass declarations and Associated-element lemmas do not give the canonical maximal-adic graded polynomial isomorphism; grep returned no hits. The first Loogle query reports unknown identifier Ideal.associatedGraded; the second phrasing was run and read."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|associated_graded|tangentCone|tangent_cone",
+   "results": "{\"t\": \"2026-10-23T22:12:38Z\", \"tool\": \"grep\", \"query\": \"associatedGraded|associated_graded|tangentCone|tangent_cone\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern ordinary polynomial gradings, analytic tangent cones, Rees subalgebras, power-series division or homogeneous localization; none states the maximal-adic graded comparison or its quotient naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent cone of a local polynomial ring at the origin is a polynomial extension of the tangent cone of the base local ring",
+   "results": "{\"t\": \"2026-10-23T22:12:38Z\", \"tool\": \"leansearch\", \"query\": \"The tangent cone of a local polynomial ring at the origin is a polynomial extension of the tangent cone of the base local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tangentConeAt\", \"tangentConeAt_def\", \"tangentConeAt_mono_field\", \"tangentConeAt_of_mem_nhds\", \"mem_tangentConeAt_of_add_smul_mem\", \"tangentConeAt_congr\", \"tangentConeAt_mono\", \"tangentConeAt_univ\"], \"digest\": \"0b500191de67aec4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern ordinary polynomial gradings, analytic tangent cones, Rees subalgebras, power-series division or homogeneous localization; none states the maximal-adic graded comparison or its quotient naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"graded\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-23T22:12:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"graded\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"MvPolynomial.weightedGradedAlgebra\", \"MvPolynomial.WeightedHomogeneousSubmodule.gradedMonoid\", \"MvPolynomial.gradedAlgebra\", \"MvPolynomial.HomogeneousSubmodule.gradedMonoid\"], \"digest\": \"2a89d37f79512f36\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern ordinary polynomial gradings, analytic tangent cones, Rees subalgebras, power-series division or homogeneous localization; none states the maximal-adic graded comparison or its quotient naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adic\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-23T22:12:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"adic\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Polynomial.coeff_mem_radical_span_coeff_of_dvd\", \"MvPolynomial.vanishingIdeal_zeroLocus_eq_radical\", \"MvPolynomial.radical_le_vanishingIdeal_zeroLocus\", \"padic_polynomial_dist\", \"Polynomial.mul_contentIdeal_le_radical_contentIdeal_mul\", \"Polynomial.gaussNorm_intAdicAbv_le_one\", \"LaurentSeries.instFieldSpaceWithValRatFuncWithZeroMultiplicativeIntPolynomialValuationXRatfuncAdicComplPkg\", \"LaurentSeries.instValuedSpaceWithValRatFuncWithZeroMultiplicativeIntPolynomialValuationXRatfuncAdicComplPkg\"], \"digest\": \"61a1cf24b829772f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern ordinary polynomial gradings, analytic tangent cones, Rees subalgebras, power-series division or homogeneous localization; none states the maximal-adic graded comparison or its quotient naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-local-polynomial-tangent-extension: powers of the ideal (I,X) in R[X] have coefficient of X^i in I^(n-i), and localization at a maximal ideal preserves its adic graded pieces",
+   "results": "{\"t\": \"2026-10-23T22:12:39Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-local-polynomial-tangent-extension: powers of the ideal (I,X) in R[X] have coefficient of X^i in I^(n-i), and localization at a maximal ideal preserves its adic graded pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.coeff_mem_pow_of_mem_adjoin_C_mul_X\", \"mem_reesAlgebra_iff\", \"monomial_mem_adjoin_monomial\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_succ_sub_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div_sub_seq_mem\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\"], \"digest\": \"55e7ad6313dc228f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern ordinary polynomial gradings, analytic tangent cones, Rees subalgebras, power-series division or homogeneous localization; none states the maximal-adic graded comparison or its quotient naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-local-polynomial-tangent-extension: the associated graded of R[V] localized at (m,V) is the polynomial algebra gr_m(R)[Z], natural under quotients of a Noetherian local ring",
+   "results": "{\"t\": \"2026-10-23T22:12:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-local-polynomial-tangent-extension: the associated graded of R[V] localized at (m,V) is the polynomial algebra gr_m(R)[Z], natural under quotients of a Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"Algebra.Generators.localizationAway_σ\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.AtPrime\", \"HomogeneousLocalization.isLocalRing\", \"IsLocalization.Away.mvPolynomialQuotientEquiv_apply\"], \"digest\": \"8650a54e42aa120f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern ordinary polynomial gradings, analytic tangent cones, Rees subalgebras, power-series division or homogeneous localization; none states the maximal-adic graded comparison or its quotient naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simple-residue-extension-hilbert-comparison",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: Theorem III, p.156, with the definition of the degree sequence and standard bases on p.155; proof summarized on p.187; local chart form of the regular ambient embedding; Q76 refinement: Lemma 8, pp.160--162; (9.1)--(9.6), pp.162--164; Propositions 10--11 and Lemma 12, pp.164--167; second part of Remark (12.2), pp.167--168; Q36 refinement: Hironaka (9.1)--(9.6), three simple residue-extension cases, Propositions 10--11, Lemma 12 and Remark (12.2), pp.162--168. Q93 refinement: the polynomial tangent-cone identification in Hironaka Remark (10.1), Proposition 11 and Lemma 12, pp.165--167, used in the simple residue-extension comparison.",
+   "via": [
+    "lem-trf-simple-residue-extension-hilbert-comparison",
+    "lem-trf-projective-cone-hilbert-standard-degrees",
+    "lem-trf-permissible-blowup-standard-degrees",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-local-polynomial-tangent-extension",
+  "worker": "stage1",
+  "summary": "Preserved every clause of the statement. Wrote the coefficient criterion, finite quotient localization inverse, multiplicative graded comparison and quotient naturality explicitly; reused existing Noetherianity and regularity nodes. No new nodes, no Lean attachments. Checked field and singular Artinian bases, J=0 and J=b, and degree zero.",
+  "blueprint": "Refines the historical descendant place already recorded in blueprint.from: Hironaka Remark (10.1), Proposition 11 and Lemma 12, pp.165--167, in the simple residue-extension Hilbert comparison. The current blueprint local-term proof uses contracting correspondences; this supporting algebra node changes no unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Only its concluding regular-local implies regular-ring assertion is used, to apply the existing one-variable polynomial regularity leaf; the unit has no more specific localization theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-ee93ed0b4",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-ee93ed0b4 (reviewer sub-agent of L); spot-checked: I read the item, which has 8 steps and no new nodes, in full, along with all 9 cited statements. Step 1: the kernel of evaluation at V=0 followed by T to kappa is exactly q, so q is maximal, and the residue map f/s to f(0)/s(0) is well defined. Step 2: the finite-type and localization Noetherian leaves apply with only T Noetherian. Steps 3-4: the coefficient criterion for q^n holds in both directions and gives the sum of b^{n-i}/b^{n-i+1} as an isomorphism onto q^n/q^{n+1}. Step 5: inverting s=s_0(1+w) mod q^N by a finite geometric sum gives U/c^N = P/q^N with no completion. Step 6: the map is multiplicative and graded, with the stated images. Step 7: J inside b keeps T/J nonzero Noetherian local, and both paths of the square send [a]_d Z^i to [abar V^i/1]_{d+i}. Step 8: regular local gives a regular ring, then T[V] is regular, then P_q is regular local by definition. I accepted the declared tool use of lem-weil-pbc-regular-local-localization (generic, sk-thm-p1). Small cases checked: a field, k[e]/(e^2), Z_(p), J=0, J=b, n=0. The statement matches its use in lem-trf-simple-residue-extension-hilbert-comparison. lem-trf-smooth-local-tangent-cone-extension (Q-algebras, essentially smooth) and the power-series jets node are not duplicates. No SGA. There is no re-split note for this item. The Hironaka PDF is WANTED and was read online by the worker; proof_origin is agent, which is correct. No faults and no changes."
+ }
+}

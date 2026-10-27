@@ -120,7 +120,40 @@
   "prop-weil-pbc-kinjective-resolutions-exist"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.existsUnique_derivedBaseChangeMapPlus_comparison",
+     "module": "WeilConjectures.SixFunctors.BaseChange.DerivedTermwise",
+     "lines": [
+      58,
+      103
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_eq_termwise",
+     "module": "WeilConjectures.SixFunctors.BaseChange.DerivedTermwise",
+     "lines": [
+      106,
+      320
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-def-exchange",
  "split_report": {
@@ -163,5 +196,38 @@
   "landing": "20261012T044747-L-2036666",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\square$ be a commutative square of schemes as in\n[def-weil-pbc-underived-exchange] (for instance a cartesian square\n[def-weil-pbc-cartesian-square]) and let $K\\in\\Dplus(X_{\\Et})$. If\n$K\\to I$ is a K-injective resolution\n[def-sp-kinjective-bridge] of $K$ and $g'^{-1}I\\to J$ is a\nK-injective resolution of $g'^{-1}I$ on $X'$, then the morphism\n\n$$\n g^{-1}Rf_*K\\longrightarrow Rf'_*g'^{-1}K\n$$\n\nof the derived category [def-weil-pbc-derived-categories] obtained by\napplying the underived exchange morphism\n[def-weil-pbc-underived-exchange] $\\Ex^0_{\\square,I}$ term by term\nto $I$ and comparing $g'^{-1}I$ with $J$ is the derived exchange morphism\n$\\Ex_{\\square,K}$ of [def-weil-pbc-derived-exchange].",
+  "proof": [
+   {
+    "text": "*The comparison with $J$ is canonical.* Given two K-injective resolutions\n$g'^{-1}I\\to J$ and $g'^{-1}I\\to J'$, the identity of $g'^{-1}I$ lifts to maps\n$J\\to J'$ and $J'\\to J$ under $g'^{-1}I$, because K-injective complexes are\nhomotopically injective [def-sp-kinjective-bridge]; their\ncomposites are homotopic to the identities by the same lifting property.\nApplying $f'_*$ preserves chain homotopies, so the two resulting maps out of\n$g^{-1}f_*I$ define the same morphism of the derived category.",
+    "uses": [
+     "def-sp-kinjective-bridge"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Case of a bounded below complex of injectives.* Suppose first that $I$ is a\nbounded below complex of injective sheaves. Then $f_*I$ computes $Rf_*I$, i.e.\nthe canonical map $\\eta_I:f_*I\\to Rf_*I$ is an isomorphism, and since $J$ is\nK-injective the canonical map $f'_*g'^{-1}I\\to Rf'_*g'^{-1}I$ is the class of\n$f'_*(g'^{-1}I\\to J)$. Hence the morphism produced by the termwise\nconstruction is\n\n$$\n g^{-1}Rf_*I\\xrightarrow{(g^{-1}\\eta_I)^{-1}}g^{-1}f_*I\n \\xrightarrow{\\Ex^0_{\\square,I}}f'_*g'^{-1}I\\longrightarrow Rf'_*g'^{-1}I,\n$$\n\nwhich is $\\Ex_{\\square,I}$ by the defining identity of\n[def-weil-pbc-derived-exchange] applied to the complex $I$. Transporting along\nthe isomorphism $K\\cong I$ in $\\Dplus(X_{\\Et})$ by naturality of $\\Ex_\\square$\ngives $\\Ex_{\\square,K}$.",
+    "uses": [
+     "def-weil-pbc-derived-exchange"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*General case.* Let $K\\to I$ be an arbitrary K-injective resolution. Choose a\nresolution $K\\to I_0$ by a bounded below complex of injective sheaves (it\nexists because the category of etale sheaves is Grothendieck abelian; it is a\nK-injective resolution, cf. [prop-weil-pbc-kinjective-resolutions-exist]).\nSince $I$ is K-injective, $K\\to I$ extends along $K\\to I_0$ to a map\n$u:I_0\\to I$, unique up to homotopy; $u$ is a quasi-isomorphism between\nK-injective complexes, hence a homotopy equivalence, and so $f_*u$ and\n$g^{-1}f_*u$ are homotopy equivalences. Choose K-injective resolutions\n$g'^{-1}I_0\\to J_0$ and $g'^{-1}I\\to J$; since $J$ is K-injective, the map\n$g'^{-1}u$ extends to $v:J_0\\to J$, a quasi-isomorphism between K-injective\ncomplexes, hence a homotopy equivalence. Because $\\Ex^0_\\square$ is a natural\ntransformation applied degreewise, the diagram\n\n$$\n \\begin{array}{ccccc}\n g^{-1}f_*I_0&\\xrightarrow{\\Ex^0_{\\square,I_0}}&f'_*g'^{-1}I_0&\\longrightarrow&f'_*J_0\\\\\n \\downarrow g^{-1}f_*u&&\\downarrow f'_*g'^{-1}u&&\\downarrow f'_*v\\\\\n g^{-1}f_*I&\\xrightarrow{\\Ex^0_{\\square,I}}&f'_*g'^{-1}I&\\longrightarrow&f'_*J\n \\end{array}\n$$\n\ncommutes up to homotopy (the right square commutes up to homotopy because\nboth composites $g'^{-1}I_0\\to J$ are lifts of the same map into a K-injective\ncomplex). The vertical outer maps are homotopy equivalences compatible with\nthe identifications of their sources with $g^{-1}Rf_*K$ and of their targets\nwith $Rf'_*g'^{-1}K$, so the termwise constructions for $I$ and for $I_0$ give\nthe same morphism $g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$, which is $\\Ex_{\\square,K}$\nby the previous case.",
+    "uses": [
+     "prop-weil-pbc-kinjective-resolutions-exist"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

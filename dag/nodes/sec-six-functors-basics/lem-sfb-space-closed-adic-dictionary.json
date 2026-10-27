@@ -1,0 +1,385 @@
+{
+ "id": "lem-sfb-space-closed-adic-dictionary",
+ "kind": "statement",
+ "title": "Closed-immersion dictionary for coherent modules and adic systems",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Modules, tensor pullback and direct image are on these ringed sites [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Locally Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth]; Noetherian means additionally quasi-compact and quasi-separated (quasi-compact diagonal). Coherent means quasi-coherent with coherent pullbacks on etale scheme charts [pqf-def-coherent]. Let $X$ be Noetherian, let $i:Z\\hookrightarrow X$ be a closed immersion with quasi-coherent ideal $K$ [def-weil-closed-immersion], and let $J\\subseteq\\mathcal O_X$ be a quasi-coherent ideal. Then $Z$ is Noetherian, and $i_*$ is an equivalence from coherent modules on $Z$ to coherent modules on $X$ killed by $K$. For every coherent $Q$ on $Z$ and $n\\geq1$, the canonical map gives an isomorphism $i_*Q/J^n(i_*Q)\\simeq i_*(Q/(J\\mathcal O_Z)^nQ)$, natural in $Q$ and compatible with all quotient transitions. Thus $i_*$ is also an equivalence from $\\mathrm{Coh}(Z,J\\mathcal O_Z)$ to the full subcategory of $\\mathrm{Coh}(X,J)$ whose terms are killed by $K$ [def-sfb-space-coherent-adic-system]. These identifications commute with completion. If $A$ is a commutative ring and $X\\to\\operatorname{Spec}A$ is separated of finite type [def-sfb-space-morphism-properties, def-weil-affine-spectrum], the equivalences preserve and reflect proper support over $\\operatorname{Spec}A$ [def-sfb-space-proper-quot-functor]. For $J=I\\mathcal O_X$, where $I\\subseteq A$, write $X_n=X\\times_A\\operatorname{Spec}(A/I^n)$ [lem-trf-space-fibre-products-etale-covers]. Pushforward along $X_n\\hookrightarrow X$ identifies coherent modules on $X_n$ with coherent modules killed by $J^n$. Term by term this identifies systems of coherent modules on the $X_n$ with specified adjacent tensor-restriction isomorphisms with $\\mathrm{Coh}(X,J)$, on both objects and arrows. The tensor restriction of a coherent module on $X$ corresponds to its completion.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AM (lemma-i-star-equivalence); application to adic systems in spaces-more-morphisms.tex, proof of Tag 08BC (lemma-existence-tricky), first paragraph, and Tag 08BF (remark-reformulate-existence-theorem). Quotient compatibility is the affine closed-immersion quotient identity."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sfb-space-coherent-adic-system",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum",
+  "def-sfb-space-proper-quot-functor",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-thickening-coherent-systems",
+  "def-sfb-space-module-tensor-composition",
+  "def-sfb-space-quasi-coherent-ideal",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "By the closed-coherent-module theorem, $Z$ is Noetherian and $i_*$ preserves coherence. The quasi-coherent closed-immersion theorem makes $i_*$ exact and fully faithful with essential image the modules killed by $K$. We will also use the following concrete chart description of this functor. For an affine etale chart $U=\\operatorname{Spec}R\\to X$, its pullback is a closed subscheme $V=\\operatorname{Spec}B$, $B=R/H$, where $H=K|_U(U)$. The etale restriction comparison identifies $(i_*G)|_U$ with the pushforward of $G|_V$. The scheme Zariski/etale equivalence identifies this pushforward with the Zariski pushforward: the map $V\\to U$ is affine and separated, as required in that equivalence. The affine tilde/global-sections theorem therefore represents both by the same module $N=\\Gamma(V,G|_V)$, over $B$ on $V$ and by restriction of scalars over $R$ on $U$. These identifications are natural in $G$ and in restriction of charts; they keep sections and their scalar actions.",
+   "uses": [
+    "lem-sfb-space-closed-coherent-modules",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-closed-immersion",
+    "lem-sfb-space-closed-ideal-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AM, lemma-i-star-equivalence; chart description from spaces-morphisms.tex Tag 04CJ and spaces-properties.tex Tag 03LX."
+   }
+  },
+  {
+   "text": "Let $F$ be coherent on $X$ and killed by $K$. The quasi-coherent equivalence supplies a quasi-coherent $G$ on $Z$ with $i_*G\\simeq F$. On the charts of step 1, $F|_U$ is of finite type, since on a locally Noetherian space coherence is equivalent to quasi-coherence of finite type. The affine finite-type criterion says that $N$ is finitely generated over $R$. If $m_1,\\ldots,m_s$ generate it over $R$, their images generate over $B=R/H$ too: every expression $\\sum a_jm_j$ is $\\sum\\bar a_jm_j$. Thus $G|_V$ is of finite type by the same affine criterion. The base-changed charts $V=U\\times_XZ\\to Z$ form a jointly surjective etale family by the fibre-product cover theorem, so they cover $Z$, so $G$ is of finite type and hence coherent by the locally Noetherian coherence criterion. Restricting the exact fully faithful functor of step 1 to coherent modules now gives the asserted equivalence: every coherent killed module has such a preimage, and its maps are precisely the maps between the preimages. No completeness or hypothesis on $J$ has been used.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 08AM, lemma-i-star-equivalence, and Tag 07UB, lemma-coherent-Noetherian; affine finiteness is properties.tex Tag 01PB."
+   }
+  },
+  {
+   "text": "Put $L=J\\mathcal O_Z$. In the chart model of step 1, let $P=J|_U(U)$ and let $N$ represent $Q|_V$. The ideal $L|_V$ is $PB$, the image ideal of $P$ under $R\\twoheadrightarrow B$, by the closed-ideal pullback formula. The affine ideal-product theorem identifies powers, products and their quotients with the corresponding module operations. For every $n\\geq1$ one has $P^nN=(PB)^nN$: a product of $n$ elements of $P$ acts through their images in $B$, and every generator from $(PB)^n$ is a $B$-linear combination of these products. Hence the canonical map from $i_*Q$ to $i_*(Q/L^nQ)$ has locally kernel $J^n(i_*Q)$ and induces the identity isomorphism on the module $N/P^nN$. The maps agree on overlaps because they are induced by the same quotient map $Q\\to Q/L^nQ$, so give the canonical global isomorphism $\\beta_{Q,n}:i_*Q/J^n(i_*Q)\\simeq i_*(Q/L^nQ)$. The quotients are coherent: the affine ideal-product theorem gives quasi-coherent submodules, and the Noetherian coherent-subquotient theorem applies on $X$ and $Z$.",
+   "uses": [
+    "lem-sfb-space-closed-ideal-correspondence",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-sfb-space-noetherian-coherent-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC, lemma-existence-tricky, first paragraph; its implicit quotient calculation is expanded using schemes.tex Tags 01I8 and 01IC and spaces-cohomology.tex Tag 07UD."
+   }
+  },
+  {
+   "text": "For a module map $a:Q\\to Q'$ the two paths in the naturality square for $\\beta_{-,n}$ both send the local class $[m]$ to $[a(m)]$. For $m\\geq n$ the quotient transition on either side sends a class modulo the $m$th ideal power to the same class modulo the $n$th power. The corresponding squares therefore commute on every chart and hence as sheaf maps. In particular these are natural isomorphisms of quotient diagrams, including their specified quotient projections, not just isomorphisms of individual terms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC, lemma-existence-tricky, first paragraph; compatibility is the explicit quotient calculation of the preceding step."
+   }
+  },
+  {
+   "text": "Use the definition of $\\mathrm{Coh}(X,J)$. A system $(Q_n,t_n)$ on $Z$ pushes forward termwise; step 3 identifies its quotient-transition map with the image of $Q_{n+1}/L^nQ_{n+1}\\simeq Q_n$, and identifies the $L^n$-annihilation condition with $J^n i_*Q_n=0$. The terms are coherent and killed by $K$. Conversely, for a system $(M_n,s_n)$ on $X$ whose terms are killed by $K$, choose coherent $Q_n$ and isomorphisms $u_n:i_*Q_n\\simeq M_n$ by step 2. Full faithfulness lifts $u_n^{-1}s_nu_{n+1}$ uniquely to $t_n:Q_{n+1}\\to Q_n$. Step 3 and faithfulness reflect annihilation and the quotient-transition isomorphisms, so this is an object of $\\mathrm{Coh}(Z,L)$. For arrows lift each component uniquely; the equations $a_nt_n=t'_na_{n+1}$ hold because their pushforwards do and $i_*$ is faithful. Componentwise identities and composition are preserved by uniqueness. Thus termwise pushforward is fully faithful and essentially surjective onto exactly the stated full subcategory.",
+   "uses": [
+    "def-sfb-space-coherent-adic-system",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC, lemma-existence-tricky, first paragraph, full-subcategory interpretation of coherent adic systems."
+   }
+  },
+  {
+   "text": "For a coherent $Q$ the completion diagrams have terms $Q/L^nQ$ and $i_*Q/J^n(i_*Q)$. Steps 3 and 4 give a natural isomorphism $\\widehat{i_*Q}_J\\simeq i_*\\widehat Q_L$ of these diagrams, preserving every quotient projection and transition. This is precisely compatibility with completion as the quotient diagram just defined; it requires no exchange of a sheaf inverse limit with a functor.",
+   "uses": [
+    "def-sfb-space-coherent-adic-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC, lemma-existence-tricky, first paragraph and equation-completion-functor."
+   }
+  },
+  {
+   "text": "Assume now $p:X\\to\\operatorname{Spec}A$ is separated and of finite type. Both $p$ and $pi$ are locally of finite type. For $pi$ use the chart-test criterion with the chart $\\operatorname{Spec}A$ of the base and the jointly surjective etale family of base-changed charts $V=U\\times_XZ=\\operatorname{Spec}(R/H)$ of the fibre-product cover theorem: each $R$ is a finite-type $A$-algebra by the same criterion for $p$, and its quotient $R/H$ is generated by the images of the same algebra generators. Coherent modules are finite type by the coherence criterion. Apply the proper-carrier theorem to $Q$ on $Z$ and $i_*Q$ on $X$. In the chart notation their annihilators satisfy $\\operatorname{Ann}_R(N)=q^{-1}\\operatorname{Ann}_B(N)$, where $q:R\\twoheadrightarrow B$, since $a$ kills $N$ exactly when $q(a)$ kills it. Consequently $R/\\operatorname{Ann}_R(N)\\to B/\\operatorname{Ann}_B(N)$ is the canonical isomorphism. The closed-ideal correspondence glues these quotient identifications: the scheme-theoretic support of $i_*Q$ is the composite with $i$ of the scheme-theoretic support of $Q$, with the same space and the same map to $\\operatorname{Spec}A$. That map is proper on one side exactly when it is proper on the other. The proper-carrier theorem then proves preservation and reflection of the proper closed-carrier condition. For adic systems apply this argument to the first term, as required by their definition.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-closed-ideal-correspondence",
+    "def-sfb-space-coherent-adic-system",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC, lemma-existence-tricky, proper-support subcategories; spaces-perfect.tex Tag 0CZI, lemma-module-support-proper-over-base."
+   }
+  },
+  {
+   "text": "Let $J=I\\mathcal O_X$. The closed subspace $X_n=X\\times_A\\operatorname{Spec}(A/I^n)$ is cut out by $J^n$. Indeed for a scheme test $h:T\\to X$, a lift to this fibre product is a factorization of $T\\to\\operatorname{Spec}A$ through $\\operatorname{Spec}(A/I^n)$. On affine opens of $T$, this means exactly that all elements of $I^n$ map to zero. Those elements generate $h^{-1}J^n\\mathcal O_T$, since $(I\\mathcal O_T)^n=I^n\\mathcal O_T$ by expanding products. The factorization is unique, and the closed-ideal correspondence characterizes $V(J^n)$ by precisely this vanishing test. Thus $X_n=V(J^n)$. Step 2 applied to $i_n:X_n\\hookrightarrow X$ gives the coherent equivalence with modules killed by $J^n$ for every positive $n$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BF, remark-reformulate-existence-theorem; closed-ideal test from spaces-morphisms.tex Tag 03MB."
+   }
+  },
+  {
+   "text": "Write $j_n:X_n\\hookrightarrow X_{n+1}$. Given coherent $F_n$ on $X_n$ and isomorphisms $\\varphi_n:j_n^*F_{n+1}\\simeq F_n$, put $M_n=i_{n,*}F_n$. The canonical map $F_{n+1}\\to j_{n,*}j_n^*F_{n+1}$, followed by $j_{n,*}\\varphi_n$ and then $i_{n+1,*}$, gives $M_{n+1}\\to M_n$; on test sections the composite direct image is $i_{n,*}$. Locally put $R_n=R/P^n$, with $P=J(U)$, and let $N$ represent $F_{n+1}$. Tensor restriction is $N\\otimes_{R/P^{n+1}}R/P^n\\simeq N/P^nN$: the map sends $m\\otimes\\bar a$ to $[am]$ and its inverse sends $[m]$ to $m\\otimes1$. Independence of lifts follows because $P^n$ acts trivially on $R/P^n$, and balancing proves both inverse equations. The tensor-realization and etale restriction comparisons make these exactly the specified tensor pullback and unit maps. Therefore $\\varphi_n$ is equivalent to an isomorphism $M_{n+1}/J^nM_{n+1}\\simeq M_n$. The annihilation $J^nM_n=0$ follows from step 8. These are exactly the two defining conditions for $\\mathrm{Coh}(X,J)$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "def-sfb-space-coherent-adic-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BF, remark-reformulate-existence-theorem; tensor/unit normalization is the ringed-site tensor realization."
+   }
+  },
+  {
+   "text": "Conversely start with $(M_n,t_n)\\in\\mathrm{Coh}(X,J)$. Choose $F_n$ and $i_{n,*}F_n\\simeq M_n$ by step 8. Under the quotient identification in step 9, $t_n$ induces $i_{n,*}j_n^*F_{n+1}\\simeq i_{n,*}F_n$. Full faithfulness at level $n$ lifts it to a unique isomorphism $\\varphi_n:j_n^*F_{n+1}\\simeq F_n$. For a family of arrows, full faithfulness lifts each component uniquely and reflects its adjacent commutativity squares; thus the constructions are inverse on objects up to the chosen isomorphisms and bijective on Hom sets. Finally, for coherent $M$ on $X$, the same local tensor maps give $i_{n,*}i_n^*M\\simeq M/J^nM$. They send the adjunction unit to $m\\mapsto[m]$, so adjacent tensor restrictions induce exactly the canonical quotient transitions. Hence the tensor-restriction system is the completion diagram, naturally on coherent modules and their maps.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "def-sfb-space-coherent-adic-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BF, remark-reformulate-existence-theorem, with its adjacent restriction isomorphisms and completion functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-closed-coherent-modules",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "lem-sfb-space-noetherian-coherent-acc",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-sfb-space-noetherian-coherent-support",
+  "def-sfb-space-coherent-adic-system",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Expansion of the implicit dictionary in Tag 08BC (lemma-existence-tricky), first paragraph, and Tag 08BF (remark-reformulate-existence-theorem), using Tag 08AM (spaces-cohomology.tex lemma-i-star-equivalence); all quotient, transition and arrow compatibilities are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent modules on a closed subspace are equivalent to coherent modules annihilated by its ideal and the equivalence extends to adic systems",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"localCohomology.ringModIdeals\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → CategoryTheory.Functor D (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D} $ to the category of $ R $-modules\"}\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"Hausdorffification\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"For a commutative ring `R`, an ideal `I` of `R`, and an `R`-module `M`, the `Hausdorffification` of `M` with respect to `I` is the quotient module $M / (\\\\bigcap_{n \\\\in \\\\mathbb{N}} I^n M)$.\"}\n  {\"name\": \"AdicCompletion.submodule\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Submodule R ((n : ℕ) → M ⧸ I ^ n • ⊤)\", \"doc\": \"The submodule of the product $\\\\prod_{n \\\\in \\\\mathbb{N}} M/I^nM$ consisting of compatible sequences $\\\\{x_n\\\\}$ where each $x_n \\\\in M/I^nM$ and for all $m \\\\leq n$, the transition map sends $x_n$ to $x_m$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushforward through a closed immersion of algebraic spaces identifies ideal annihilated coherent inverse systems and commutes with quotient completion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(I : X.IdealSheafData) (f : X ⟶ Y) [QuasiCompact f] (U : Y.affineOpens) (H : IsAffineOpen (f ⁻¹ᵁ U)) :\\n  (I.map f).ideal U = (I.ideal ⟨_, H⟩).comap (f.app U).hom\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a quasi-compact morphism $f: X \\\\to Y$, the ideal sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $Y$ is constructed as the kernel of the composition $\\\\iota \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(i : Z ⟶ Y) (f : X ⟶ Y) [IsClosedImmersion i] : (pullback.fst f i).ker = i.ker.comap f\", \"doc\": \"Given a closed immersion $ i: Z \\\\to Y $ and a morphism $ f: X \\\\to Y $, the kernel of the first projection from the pullback of $ f $ and $ i $ to $ X $ is equal to the comap of the kernel of $ i $ alo\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"For any closed immersion $ f: X \\\\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(I : Y.IdealSheafData) (f : X ⟶ Y) [IsOpenImmersion f] (U : X.affineOpens) :\\n  (I.comap f).ideal U = (I.ideal ⟨f ''ᵁ U, U.2.image_of_isOpenImmersion f⟩).comap (f.appIso U).inv.hom\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ and an open immersion $f: X \\\\to Y$, the ideal of the comapped ideal sheaf data $\\\\mathcal{I}.\\\\text{comap}(f)$ on an affine open subset $U \\\\subseteq \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(I : X.IdealSheafData) (f : X ⟶ Y) [IsAffineHom f] (U : Y.affineOpens) :\\n  (I.map f).ideal U = (I.ideal ⟨_, U.2.preimage f⟩).comap (f.app U).hom\", \"doc\": \"For an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$, an affine morphism $f : X \\\\to Y$, and an affine open subset $U \\\\subseteq Y$, the ideal of the pushforward sheaf $\\\\mathcal{I}.\\\\text{map}(f)$ on $U$ coi\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"ClosedImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*coherent.*equiv|coherent.*closed.*equiv|adic.*closed",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Padics/Complex.lean\", \"line\": \"31\", \"text\": \"* `PadicComplex.isAlgClosed` : `ℂ_[p]` is algebraically closed.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple.lean\", \"line\": \"392\", \"text\": \"instance instHasTrivialRadical [IsAlgClosed K] : LieAlgebra.HasTrivialRadical K (lieAlgebra b) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"592\", \"text\": \"          (isClosed_iff_zeroLocus_radical_ideal _).mp (isClosed_closure (s := Z'))\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; module completion, scheme morphism properties, general sheaf presentations and presheaf Hom do not state this algebraic-space coherent-adic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of algebraic spaces induces equivalence on coherent modules annihilated by the ideal compatible with coherent adic inverse systems and completion",
+   "results": "[leanfinder] OK 8 hit(s); read the returned results. Top results: AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.congr, AdicCompletion.congr_apply, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion, AdicCompletion.of_bijective, IsAdicComplete. Source subdirectory: all Mathlib. Digest: c2b0ed9a1b4b377f.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes and their ideal sheaves, or completion of modules over a ring; none gives the coherent closed-immersion and adic-system dictionary for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Cc]losed[Ii]mmersion.*[Cc]oherent|[Cc]oherent.*[Cc]losed[Ii]mmersion|adic.*[Cc]oherent",
+   "results": "[grep] OK 0 hit(s); read the returned results. Top results: none. Source subdirectory: AlgebraicGeometry. Digest: 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes and their ideal sheaves, or completion of modules over a ring; none gives the coherent closed-immersion and adic-system dictionary for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaves killed by an ideal on an algebraic space correspond to coherent sheaves on the closed subspace and compatible sheaves on infinitesimal thickenings",
+   "results": "[leansearch] OK 8 hit(s); read the returned results. Top results: AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.instIsEmptyCarrierCarrierCommRingCatSubschemeTop. Source subdirectory: all Mathlib. Digest: ab0ade6aeeaf68e8.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes and their ideal sheaves, or completion of modules over a ring; none gives the coherent closed-immersion and adic-system dictionary for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"ClosedImmersion\"",
+   "results": "[loogle] OK 0 hit(s); read the returned results. Top results: none. Source subdirectory: all Mathlib. Digest: 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes and their ideal sheaves, or completion of modules over a ring; none gives the coherent closed-immersion and adic-system dictionary for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward through a quotient of structure sheaves preserves quotients by ideal powers and identifies compatible coherent sheaves on thickenings with adic systems",
+   "results": "[leanfinder] OK 8 hit(s); read the returned results. Top results: AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AdicCompletion.transitionMap_ideal_mk, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso. Source subdirectory: all Mathlib. Digest: 07cc957620e5c71c.",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes and their ideal sheaves, or completion of modules over a ring; none gives the coherent closed-immersion and adic-system dictionary for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-adic-existence",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the closed-subspace equivalence used without further mention in the first paragraph and its translation in 08BF.",
+   "via": [
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-closed-adic-dictionary",
+  "worker": "stage1",
+  "summary": "Reused existing closed-pushforward, quasi-coherent equivalence, coherence and proper-carrier nodes; proved coherence reflection and the quotient-power identity on etale affine charts, then constructed the two system equivalences on objects and arrows with canonical transition and completion compatibility. Corrected doubled TeX escapes and made explicit that the modules on the thickenings are coherent, as the source requires; arbitrary modules would make this last clause false (report STATEMENT-DISPUTED). No new nodes.",
+  "blueprint": "The inherited supporting prerequisite for det-thm-sf-ctf-stability-direct-images (3), recorded in blueprint.from.place: the proper-support existence argument uses the closed-subspace coherent and adic dictionary of Stacks 08BC; steps 8-10 unwind it as in 08BF. Searched the whole imported blueprint by coherent modules, closed immersion, adic and 08AM; no blueprint node states this dictionary. The nearest-ancestor command returns None; the inherited from.node and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic chart restriction of canonical module functors; the unit has no replacement for this algebraic-space foundation."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic equivalence used solely on affine scheme charts, including its qc separated direct-image comparison; no trace-formula assertion is used."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine quasi-coherent module reconstruction, used solely for the quotient-ring chart model."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine finite-generation criterion, used to reflect coherence under quotient-ring restriction of scalars."
+   },
+   {
+    "node": "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "why": "Generic affine ideal-product and quotient computation; the unit has no separate affine module calculation."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and chart description of sheaf fibre products, used for the infinitesimal thickenings."
+   },
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "The canonical direct-image and tensor-pullback definitions used throughout the statement and to specify adjacent restriction units."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic identification of specified pullbacks and units with local tensors, used to fix the actual adjacent restriction maps."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "The affine quotient-ring characterization of representable closed immersions, used on scheme charts; this is a morphism definition, not another unit proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-weil-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-24c93d0c1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-24c93d0c1 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps and every cited statement. There are no new nodes. The live item is still unsplit with no repair note. The mathematics is correct. The one statement change ('systems of coherent modules on the X_n') is a justified correction against Stacks 08BF (remark-reformulate-existence-theorem, condition (1) requires F_n coherent). The report's counterexample holds: Spec k, I=0, constant k^(N). The only citer, lem-sfb-space-supported-adic-existence, uses the clause for finitely presented (= coherent) F_n. Steps 1-2 follow 08AM (spaces-cohomology l.2042) via 04CJ and étale-local coherence. The affine chart model was checked: V->U is affine, hence qc and separated, for the Zariski/étale equivalence. Steps 3-6: I checked P^nN=(PB)^nN and the kernel of i_*Q->i_*(Q/L^nQ), and the definition of Coh(X,J) is used exactly. Step 7: I checked Ann_R(N)=q^{-1}Ann_B(N) and the equality of scheme-theoretic supports. Steps 8-10: the ideal of X_n is J^n by the vanishing test, and N⊗R/P^n=N/P^nN with the unit going to [m]. Small cases were checked: Z empty, Z=X, J=0, J=O, the example k[t]/(t^2), and proper support of a doubled point vs O_{A^1}. No duplicate: the 08AM/08BC/08BF hits are scheme versions in sec-proper-base-change or different space lemmas. FIX (C1, two missing citations): step 2 now cites lem-trf-space-fibre-products-etale-covers for the claim that the charts V->Z cover Z. Step 7 now cites lem-sfb-space-local-properties-chart-test (same unit, reviewed; checked acyclic) and fibre-products for p∘i being locally of finite type, with that argument written out. proof_deps = union of uses. Batch-5: every flagged citation is either generic algebraic-space or module-sheaf foundation (03LX, 03DX, 03D7, 02X2) or reaches only def-trf-algebraic-space, a general definition; none is part of the trace formula or Poincaré duality. The tool_uses are accepted. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceClosedAdicDictionary",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closedAdicDictionary",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.ClosedAdicKilled",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicPushDiagram",
+   "AlgebraicGeometry.AlgebraicSpace.ClosedAdicKilledSystems",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicDictionary",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicDictionary_properSupport",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicDirectComposition",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicRestrictionTransition",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicBase",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicBaseMap",
+   "AlgebraicGeometry.AlgebraicSpace.closedAdicDictionary_thickenings"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceClosedAdicDictionary.lean",
+  "statement": "theorem closedAdicDictionary (i : Z ⟶ X) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (K J : QuasiCoherentIdeal X) (hK : ∃ w : K.val.arrow ≫ moduleStructureMap i = 0, Nonempty (IsLimit (KernelFork.ofι K.val.arrow w))) : (∀ T : Z.EtaleSite, IsLocallyNoetherian (Z.etaleForget.obj T)) ∧ CompactSpace (Point Z.obj.obj) ∧ IsAbsolutelyQuasiSeparated Z ∧ (∃ E : (ClosedAdicCoherent Z).FullSubcategory ≌ (ClosedAdicKilled K 1).FullSubcategory, Nonempty (E.functor ⋙ ObjectProperty.ι (ClosedAdicKilled K 1) ≅ ObjectProperty.ι (ClosedAdicCoherent Z) ⋙ moduleDirectImage i)) ∧ ∃ L : QuasiCoherentIdeal Z, (∃ q : (moduleTensorPullback i).obj (J.val : X.Modules) ⟶ (L.val : Z.Modules), Epi q ∧ q ≫ L.val.arrow = idealTensorMap i J) ∧ (∃ β : ObjectProperty.ι (ClosedAdicCoherent Z) ⋙ moduleDirectImage i ⋙ coherentAdicCompletionDiagram J ≅ ObjectProperty.ι (ClosedAdicCoherent Z) ⋙ coherentAdicCompletionDiagram L ⋙ closedAdicPushDiagram i, ∀ (Q : (ClosedAdicCoherent Z).FullSubcategory) (n : ℕ), (adicQuotientModel J).projection ((moduleDirectImage i).obj Q.obj) n ≫ (β.app Q).hom.app (op n) = (moduleDirectImage i).map ((adicQuotientModel L).projection Q.obj n)) ∧ (∃ E : (IsCoherentAdicSystem L).FullSubcategory ≌ (ClosedAdicKilledSystems J K).FullSubcategory, Nonempty (E.functor ⋙ ObjectProperty.ι (ClosedAdicKilledSystems J K) ≅ ObjectProperty.ι (IsCoherentAdicSystem L) ⋙ closedAdicPushDiagram i))",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5286dc37",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read item, 17 stmt_dep records, both snapshot modules, SpaceCoherentAdicSystem/QuasiCoherentIdeal/ArtinRees sources. All clauses match: Noetherian hyps = adic-system convention; hK pins K = ker(i#) by kernel universal property; Coh(Z) ≌ ClosedAdicKilled K 1 (K^1, AdicPowerKills unshifted) with forward ≅ i_*; L = image of idealTensorMap (unique subobject); β natural diagram iso pinned by projection equation (all transitions, naturality, completion); Coh(Z,L) ≌ K-killed Coh(X,J) via termwise push; proper support iff for modules (level 0) and systems via existing CoherentAdicHasProperSupport; J=IO_X on affine charts; X_n actual sheaf pullbacks with Spec(A/I^(n+1)), unique j; restriction-system equivalence with canonical unit/composition transitions and unit→projection completion equation. New node def-sfb-space-thickening-coherent-systems real data, H12 fields ok, no duplicate. Edge cases covered; sorry-only; docstrings/steps present; stmt_deps only add new node + 3 landed def nodes. Advisories: idealSectionImage owner def-sfb-space-ideal-power-products not in stmt_deps; hsep/hft in thickenings justified by node context; self second reading; redundant public import in closure. No file changed, no compile."
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-nonunit-coefficient-stages",
+ "kind": "statement",
+ "title": "Finite complete coefficient stages for a nonzero nonunit",
+ "statement": "Let l be prime and E/Q_l a finite extension, with its recorded ring of integers O [def-weil-l-adic-coefficient-extension]. Let t in O be nonzero and not a unit. Every O/(t)^(n+1) is finite and annihilated by a power of l; all quotient transition maps for m <= n are surjective; O is complete for the ideal (t).",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, the complete principal coefficient ring; nonuniformizer reduction by the discrete valuation decomposition (Serre, Local Fields, Chapter II, section 2)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "The DVR theorem supplies the actual maximal ideal J, a uniformizer pi and a finite residue field. Write t=v*pi^r, with v a unit; r=0 would make t a unit, so r>0. Thus (t)=J^r.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib finite_quotient_pow gives finiteness. The spectral norm of l is less than one, hence l belongs to J; therefore l^(r*(n+1)) belongs to (t)^(n+1). Quotient representatives prove surjectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite-module completeness theorem to O. Its maximal-adic topology is complete; Mathlib is_ideal_adic_pow identifies the topology for J^r with that for J, and isAdicComplete_iff transports completeness.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pod-adic-limit-finite-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1; Lemma 5.13; Constructions 5.14–5.15 and Lemma 5.16. Explicit normalization through the recorded derived adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "[\"IsAdicComplete\", \"IsAdicComplete.of_subsingleton\", \"IsAdicComplete.toIsHausdorff\", \"IsAdicComplete.toIsPrecomplete\", \"IsAdicComplete.mk\", \"isAdicComplete_iff\", \"IsAdicComplete.bot\", \"IsAdicComplete.subsingleton\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic lemmas are used in the formal proof or the stated comparison argument."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete.*(radical|pow)|isAdicComplete.*(radical|pow)",
+   "results": "[\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"Mathlib/RingTheory/AdicCompletion/RingHom.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic lemmas are used in the formal proof or the stated comparison argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quotients and adic completeness of the valuation ring of a finite extension of the p-adic numbers for any nonzero nonunit parameter",
+   "results": "[\"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"PadicInt.instIsAdicCompleteMaximalIdeal\", \"Padic.adicCompletionEquiv\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"PadicInt.instIsDiscreteValuationRing\", \"Rat.HeightOneSpectrum.adicCompletionIntegers.padicIntEquiv\", \"Padic\", \"NumberField.FinitePlace.embedding\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic lemmas are used in the formal proof or the stated comparison argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemBrownConstruction",
+  "date": "2026-10-25",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps of lem-pur-etale-system-brown-construction, in the ordinary etale Brown construction of sk-def-sf-operations.",
+   "via": [
+    "lem-pur-etale-system-brown-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.NumberTheory.Padics.NonunitCoefficientStages",
+  "file": "lean/Sheaf/NumberTheory/Padics/NonunitCoefficientStages.lean",
+  "declaration": "Padic.nonunit_coefficient_stages",
+  "statement": "theorem nonunit_coefficient_stages\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E]\n    (t : coefficientExtensionIntegers l E) (ht : t ≠ 0) (hunit : ¬ IsUnit t) :\n    (∀ n : ℕ, Finite (coefficientExtensionIntegers l E ⧸\n      (Ideal.span ({t} : Set (coefficientExtensionIntegers l E))) ^ (n + 1))) ∧\n    (∀ n : ℕ, ∃ a : ℕ,\n      (l ^ a : coefficientExtensionIntegers l E ⧸\n        (Ideal.span ({t} : Set (coefficientExtensionIntegers l E))) ^ (n + 1)) = 0) ∧\n    (∀ {m n : ℕ} (h : m ≤ n), Function.Surjective\n      (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1)) :\n        (coefficientExtensionIntegers l E ⧸\n          (Ideal.span ({t} : Set (coefficientExtensionIntegers l E))) ^ (n + 1)) →+*\n        (coefficientExtensionIntegers l E ⧸\n          (Ideal.span ({t} : Set (coefficientExtensionIntegers l E))) ^ (m + 1)))) ∧\n    IsAdicComplete (Ideal.span ({t} : Set (coefficientExtensionIntegers l E)))\n      (coefficientExtensionIntegers l E)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T030510-L-2852930",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T030510-L-2852930",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-common-quotient-ordinary-insertion",
+ "kind": "statement",
+ "title": "Ordinary scalar insertion reduced to common quotients",
+ "statement": "For g:J→K preserving finite limits, normalized ordinary scalar extensions nY and nX, R→B and a:g(B)→Bprime, and a common quotient tower Q of R→B, suppose b:Bprime→g(Q.S) is compatible with a and makes each square for g(R)→Bprime a common quotient. If an ordinary natural transformation from inverse image of restriction to restriction of scalar extension along a sends x to 1 tensor the underlying inverse-image section, then its scalar extension to g(Q.S_n) is invertible for every n. This uses no flatness, complex or derived-category hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-quotient-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "A locally-surjective quotient is an epimorphism of underlying sheaves. Left adjoint inverse image preserves that epimorphism, and the ring-underlying isomorphisms transport it to g(Q.projection n). Thus the assumed target pushout and b define a common quotient tower on K.",
+   "uses": [
+    "lem-pur-coefficient-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary common-quotient tower comparison identifies restriction followed by scalar extension with scalar extension along the second projection, with s tensor x preserved. Convert its cochain-model scalar extensions to the normalized scalar extensions through their specified object and morphism equations.",
+   "uses": [
+    "lem-weil-pbc-ordinary-common-quotient-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply that comparison on J and K. Transport the J comparison through exact inverse image using the ordinary coefficient tensor comparison; compose the K comparison with scalar associativity along a and b. These give two natural isomorphisms from the reduced source and target to the same g(Q.S_n)-module functor.",
+   "uses": [
+    "lem-pur-coefficient-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient comparison insertion equation, naturality of moduleUnderlying, and the common-quotient section formula identify the first isomorphism on the quotient unit. The second identifies iterated unit insertion with the composite unit by normalized scalar associativity. The adjunction hom equivalence and faithfulness of underlying sheaves therefore identify extension of the given insertion followed by the second isomorphism with the first. Cancel the second isomorphism to obtain invertibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-pullback-comparison",
+  "lem-weil-pbc-ordinary-common-quotient-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived base change), 0G7E (K-flat pullback), 0D6D (composition); sites-modules.tex Tags 03D7, 03EK, 03EL.",
+  "note": "Explicit normalization and localization argument, with source formulas as written in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary scalar insertion for a ringed topos pullback becomes an isomorphism after tensoring with compatible common quotient rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.tensorQuotEquivQuotSMul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \"(I : Ideal R) : (M ⊗[R] (R ⧸ I)) ≃ₗ[R] M ⧸ (I • (⊤ : Submodule R M))\", \"doc\": \"For any ideal $ I $ of a commutative ring $ R $ and any $ R $-module $ M $, the tensor product $ M \\\\otimes_R (R/I) $ is linearly isomorphic to the quotient module $ M / (I \\\\cdot M) $, where $ I \\\\cdot \"}\n  {\"name\": \"TensorProduct.quotTensorEquivQuotSMul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \"(I : Ideal R) : ((R ⧸ I) ⊗[R] M) ≃ₗ[R] M ⧸ (I • (⊤ : Submodule R M))\", \"doc\": \"Let $R$ be a commutative ring, $M$ be an $R$-module, and $I$ be an ideal of $R$. This definition establishes an $R$-linear isomorphism between the tensor product of the quotient ring $R/I$ with $M$ an\"}\n  {\"name\": \"Algebra.TensorProduct.quotIdealMapEquivTensorQuot\", \"module\": \"Mathlib.RingTheory.TensorProduct.Quotient\", \"type\": \": (B ⧸ (I.map <| algebraMap A B)) ≃ₐ[B] B ⊗[A] (A ⧸ I)\", \"doc\": \"For commutative rings $ A $ and $ B $ where $ B $ is an $ A $-algebra, and for any ideal $ I $ of $ A $, there exists an algebra isomorphism between the quotient ring $ B / \\text{Ideal.map}(A \\\\to B)(I)\"}\n  {\"name\": \"RingCon.comapQuotientEquivOfSurj\", \"module\": \"Mathlib.RingTheory.Congruence.Hom\", \"type\": \"(c : RingCon M) (f : N →+* M) (hf : Function.Surjective f) {d : RingCon N} (hcd : d = c.comap f) :\\n  d.Quotient ≃+* c.Quotient\", \"doc\": \"Given a surjective ring homomorphism $ f : N → M $ and a congruence relation $ c $ on $ M $, if $ d $ is the pullback congruence on $ N $ defined by $ d = c $.comap $ f $, then the quotient rings $ N/\"}\n  {\"name\": \"Algebra.IsPushout.cancelBaseChangeAux\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \": B ⊗[A] M ≃ₗ[R] S ⊗[R] M\", \"doc\": \"Let $R, A, S, B$ be commutative semirings. Let $A$ and $S$ be $R$-algebras, and let $B$ be an algebra over both $A$ and $S$ that is the pushout of $A$ and $S$ over $R$. For any $A$-module $M$, there i\"}\n  {\"name\": \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\", \"module\": \"Mathlib.RingTheory.QuotSMulTop\", \"type\": \": M ⊗[R] QuotSMulTop r M' ≃ₗ[R] QuotSMulTop r (M ⊗[R] M')\", \"doc\": \"A linear equivalence between the tensor product of a module $ M $ with the quotient module $ M' / rM' $ and the quotient module of the tensor product $ M \\\\otimes_R M' $ by $ r(M \\\\otimes_R M') $, const\"}\n  {\"name\": \"RingCon.comapQuotientEquivRangeₐ\", \"module\": \"Mathlib.RingTheory.Congruence.Hom\", \"type\": \"(f : N →ₐ[R] M) {d : RingCon N} (h : d = comap c f) : d.Quotient ≃ₐ[R] AlgHom.range ((c.mkₐ _).comp f)\", \"doc\": \"Given a ring homomorphism $ f: N → M $ and a congruence $ d $ on $ N $ equal to the pullback of a congruence $ c $ on $ M $ along $ f $, the quotient ring $ N/d $ is isomorphic to the image of the com\"}\n  {\"name\": \"Ideal.qoutMapEquivTensorQout\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Quotient\", \"type\": \"{I : Ideal R} : (S ⧸ I.map (algebraMap R S)) ≃ₗ[S] S ⊗[R] (R ⧸ I)\", \"doc\": \"For a commutative ring $ R $, an $ R $-algebra $ S $, and an ideal $ I $ of $ R $, there is a linear equivalence between the quotient $ S $-module $ S / I^e $ (where $ I^e $ is the ideal generated by \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary scalar insertion for a ringed topos pullback becomes an isomorphism after tensoring with compatible common quotient rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯ = CategoryTheory.Iso.refl x.tensor\", \"doc\": \"For any pullback triplet $T$ in the category of schemes, applying the tensor congruence construction to the reflexive equality $T = T$ yields the identity isomorphism on the associated tensor pushout \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} → {T₁ T₂ : AlgebraicGeometry.Scheme.Pullback.Triplet f g} → T₁ = T₂ → (T₁.tensor ≅ T₂.tensor)\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then their associated tensor pushouts in the category of commutative rings are isomo\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*quotient|quotient.*changeOfRings|[Ii]sPushout.*[Tt]ensor",
+   "results": "[grep] OK 21 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"line\": \"116\", \"text\": \"lemma isPushout_tensorProduct (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"line\": \"131\", \"text\": \"  (isPushout_tensorProduct R S A).of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _)\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"line\": \"143\", \"text\": \"  let e : R' ⊗[R] S ≃+* S' := ((CommRingCat.isPushout_tensorProduct R R' S).isoPushout ≪≫\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"line\": \"145\", \"text\": \"  have h2 (r : R') : (CommRingCat.isPushout_tensorProduct R R' S).isoPushout.hom\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Constructions.lean\", \"line\": \"147\", \"text\": \"    congr($((CommRingCat.isPushout_tensorProduct R R' S).inl_isoPushout_hom).hom r)\"}\n  {\"file\": \"Mathlib/Algebra/Category/Ring/Under/Basic.lean\", \"line\": \"138\", \"text\": \"  Under.isoMk (CommRingCat.isPushout_tensorProduct R S A).flip.isoPushout <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"299\", \"text\": \"      ((CommRingCat.isPushout_tensorProduct _ _ _).flip.isoPushout.hom.hom.comp\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"305\", \"text\": \"    exact .piMap fun i ↦ (hV _).comp <| CommRingCat.isPushout_tensorProduct _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"309\", \"text\": \"    (CommRingCat.isPushout_tensorProduct _ _ _).flip.isoPushout.symm\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"320\", \"text\": \"      congr($((CommRingCat.isPushout_tensorProduct _ _ _).flip.inr_isoPushout_hom).hom)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"323\", \"text\": \"        ($((CommRingCat.isPushout_tensorProduct ↑Γ(S, US)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"633\", \"text\": \"  let e₀ := (CommRingCat.isPushout_tensorProduct ..).flip.isoPushout ≪≫\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"652\", \"text\": \"    (CommRingCat.isPushout_tensorProduct ..).flip.isoPushout.inv ≫\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/BaseChange.lean\", \"line\": \"366\", \"text\": \"    (Algebra.IsPushout.tensorProduct_tensorProduct R S A B H).symm\"}\n  {\"file\": \"Mathlib/RingTheory/IsTensorProduct.lean\", \"line\": \"688\", \"text\": \"lemma Algebra.IsPushout.tensorProduct_tensorProduct\"}\n  {\"file\": \"Mathlib/RingTheory/IsTensorProduct.lean\", \"line\": \"867\", \"text\": \"lemma IsPushout.cancelBaseChange_symm_comp_lTensor :\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"147\", \"text\": \"      commutes' x := congr($(Algebra.IsPushout.cancelBaseChange_symm_comp_lTensor R B D A) x) }\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"208\", \"text\": \"  have : _ = pushout.inr f g := (CommRingCat.isPushout_tensorProduct R S T).inr_isoPushout_hom\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"210\", \"text\": \"  exact (CommRingCat.isPushout_tensorProduct R S T).isoPushout.commRingCatIsoToRingEquiv\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"216\", \"text\": \"  have : _ = pushout.inl f g := (CommRingCat.isPushout_tensorProduct R S T).inl_isoPushout_hom\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"218\", \"text\": \"  exact (CommRingCat.isPushout_tensorProduct R S T).isoPushout.commRingCatIsoToRingEquiv\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No declaration for these arbitrary ringed-topos normalization data. Generic tensor, pullback and localization results are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedCommonQuotientPullbackComparison",
+  "date": "2026-10-22",
+  "group": "D3"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current blueprint order 1329, equality with the finite-level pullback tower and comparison from ordinary pullback; original item steps 4 and 5. Ordinary scalar insertion reduced to common quotients.",
+   "via": [
+    "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonQuotientOrdinaryInsertion",
+  "file": "lean/Sheaf/Paper/CommonQuotientOrdinaryInsertion.lean",
+  "declaration": "SheafOfModules.CommonQuotientPullback.ordinary_insertion_reduction_isIso",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-22",
+  "statement": "theorem ordinary_insertion_reduction_isIso [PreservesFiniteLimits uInv]\n    (hquotient : ∀ n : ℕ, IsPushout (g.rings.map φ ≫ a)\n      (quotient g φ Q n) (b.app (op n)) (𝟙 _))\n    (hcompatible : ∀ n : ℕ, a ≫ b.app (op n) = g.rings.map (Q.extensionProjection n))\n    (δ : ordinarySource g φ ⟶ ordinaryTarget g (pX := pX) φ a)\n    (hδ : ∀ (M : Mod J B) (U : Xᵒᵖ)\n      (x : ((g.inverse R).modules.obj ((restriction φ).obj M)).val.obj U),\n      (δ.app M).val.app U x = sectionTensor (pX a) ((g.inverse B).modules.obj M) U 1\n        (((g.inverse R).moduleUnderlying.hom.app ((restriction φ).obj M) ≫\n          (g.inverse B).moduleUnderlying.inv.app M).hom.app U x))\n    (n : ℕ) : IsIso (Functor.whiskerRight δ (pX (quotient g φ Q n)).ordinary)"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-2adb1",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261022T143033-L-933120",
+  "kind": "interface",
+  "note": "independent cc review: delivered CommonQuotientPullbackData.lean vs live item module (verbatim apart from blueprint tags/imports); item signature vs live; sandbox build of all 6 modules + #print axioms + import-deletion variants; unit sk-thm-properbasechange realized vs dropped FlatCommonQuotientReductionTower; node proof fields vs Lean"
+ }
+}

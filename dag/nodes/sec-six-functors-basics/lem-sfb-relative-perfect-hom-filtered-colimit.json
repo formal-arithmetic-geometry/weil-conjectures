@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-relative-perfect-hom-filtered-colimit",
+ "kind": "statement",
+ "title": "Derived Hom continuity for relatively perfect coefficients",
+ "statement": "Let $I$ be a small nonempty directed poset, let $(R_i)_{i\\in I}$ be a diagram of commutative rings, and let $R=\\varinjlim_i R_i$ be its ring colimit [def-weil-pbc-category-colimit]. Fix $i_0\\in I$ and a flat finitely presented homomorphism $R_{i_0}\\to A_{i_0}$ [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra]. For $i\\ge i_0$ put $A_i=A_{i_0}\\otimes_{R_{i_0}}R_i$ and put $A=A_{i_0}\\otimes_{R_{i_0}}R$. Use ordinary module derived categories [def-weil-abstract-derived-category] and derived extension of scalars [def-trf-affine-diagonal-module-data]. Let $K_0,L_0\\in D(A_{i_0})$. Assume $K_0$ is pseudo-coherent over $A_{i_0}$ [def-pc-ring-pseudo-coherent-complex], and $L_0$ has finite Tor amplitude over $R_{i_0}$: there are integers $a\\le b$ such that $H^n(L_0\\otimes_{R_{i_0}}^{\\mathbf L}Q)=0$ for every $R_{i_0}$-module $Q$ and $n\\notin[a,b]$. Set $K_i=K_0\\otimes_{A_{i_0}}^{\\mathbf L}A_i$, $L_i=L_0\\otimes_{A_{i_0}}^{\\mathbf L}A_i$, and similarly $K,L$ over $A$. Then the canonical homomorphism\n$$\\varinjlim_{i\\ge i_0}\\operatorname{Hom}_{D(A_i)}(K_i,L_i)\\longrightarrow\\operatorname{Hom}_{D(A)}(K,L)$$\nis an isomorphism of abelian groups. The transition maps and the displayed map send a derived morphism to its derived scalar extension. No flatness of the transition homomorphisms $R_i\\to R_j$ or $R_i\\to R$, Noetherianity, or perfectness of $K_0$ over $A_{i_0}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DHX, lemma-colimit-relatively-perfect, part (2); restricted to small directed posets, with the canonical transition maps explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-abstract-derived-category",
+  "def-trf-affine-diagonal-module-data",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-sfb-polynomial-koszul-diagonal-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-rhom-flat-base-change-model] to $R_{i_0}\\to A_{i_0}$ and $K_0,L_0$. Its hypotheses are precisely flatness, pseudo-coherence of $K_0$, and the given finite $R_{i_0}$-Tor interval for $L_0$; it does not require $L_0$ to be pseudo-coherent. Choose its $P_0,F_0$ and set $E_0=\\operatorname{Hom}_{A_{i_0}}^\\bullet(P_0,F_0)$. For every $R_{i_0}$-algebra $T$, its comparison gives $H^0(E_0\\otimes_{R_{i_0}}T)\\cong\\operatorname{Hom}_{D(A_{i_0}\\otimes_{R_{i_0}}T)}((K_0)_T,(L_0)_T)$. These comparisons intertwine every $T\\to U$ with the derived scalar-extension map, including nonflat maps.",
+   "uses": [
+    "lem-sfb-relative-rhom-flat-base-change-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DHX, lemma-colimit-relatively-perfect, proof of (2), using Tag 0E1U (lemma-compute-RHom-relatively-perfect) and Tag 00DB (algebra-lemma-directed-colimit-exact)."
+   }
+  },
+  {
+   "text": "Let $J=\\{i\\in I:i\\ge i_0\\}$. It is small, nonempty (contains $i_0$), and directed: a common upper bound of two elements of $J$ remains in $J$. Its ring colimit is $R$. Indeed a cocone on $J$ extends to $I$ by sending $R_i$ through any $R_j$ with $j\\ge i,i_0$; two choices agree at a common upper bound, and these extensions are mutually inverse to restriction. The same universal-property argument identifies the ring colimit with the colimit in $R_{i_0}$-algebras: the structure map is the leg at $i_0$, and compatible legs respect it. Apply [lem-weil-pbc-filtered-colimit-algebras-underlying-module] over $R_{i_0}$ to conclude that $R$, with these legs, is also the colimit of the underlying $R_{i_0}$-modules $R_i$, $i\\in J$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DHX, lemma-colimit-relatively-perfect, proof of (2), using Tag 0E1U (lemma-compute-RHom-relatively-perfect) and Tag 00DB (algebra-lemma-directed-colimit-exact)."
+   }
+  },
+  {
+   "text": "On the one-object site with only the maximal covering sieve, sheaves of $R_{i_0}$-modules are ordinary $R_{i_0}$-modules: there are no nontrivial restriction or sheaf conditions. Regard each $R_i$ as a complex concentrated in degree zero, and use the fixed complex $E_0$ in [lem-pc-module-filtered-colimits-tensor]. Step 2 identifies their termwise colimit with $R[0]$. The cited tensor-totalization comparison therefore gives a chain isomorphism $\\varinjlim_{i\\in J}(E_0\\otimes_{R_{i_0}}R_i)\\cong E_0\\otimes_{R_{i_0}}R$. Here totalization with a degree-zero complex is ordinary termwise tensor; flipping the two factors sends $x\\otimes r$ to $r\\otimes x$ with no sign since $r$ has degree zero. The comparison sends the class of $x\\otimes r_i$ to $x\\otimes\\iota_i(r_i)$ and commutes with the differential $d(x)\\otimes r_i$. Thus it is the comparison induced by the actual scalar-extension chain maps. By [lem-weil-pbc-module-sheaves-colimits-forgetful](3), this module-colimit cocone is also a colimit of the underlying abelian groups in each degree; its sheafification hypothesis holds because sheafification on this site is the identity.",
+   "uses": [
+    "lem-pc-module-filtered-colimits-tensor",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DHX, lemma-colimit-relatively-perfect, proof of (2), using Tag 0E1U (lemma-compute-RHom-relatively-perfect) and Tag 00DB (algebra-lemma-directed-colimit-exact)."
+   }
+  },
+  {
+   "text": "Put $C_i=E_0\\otimes_{R_{i_0}}R_i$, $Z_i=\\ker(d:C_i^0\\to C_i^1)$ and $B_i=\\operatorname{im}(d:C_i^{-1}\\to C_i^0)$, all regarded as abelian groups. The chain maps make these compatible systems. Apply [lem-weil-pbc-filtered-colimit-abelian-groups-exact] to $0\\to Z_i\\to C_i^0\\to C_i^1$, to $C_i^{-1}\\to B_i\\to0$, and to $0\\to B_i\\to Z_i\\to H^0(C_i)\\to0$. Exactness identifies $\\varinjlim Z_i$ with the cycles in $\\varinjlim C_i$, $\\varinjlim B_i$ with its boundaries (using the injectivity into $\\varinjlim Z_i$), and their quotient with $\\varinjlim H^0(C_i)$. Therefore the canonical cocycle map $\\varinjlim H^0(C_i)\\to H^0(\\varinjlim C_i)$ is an isomorphism. Combine it with the chain isomorphism of step 3 to obtain $\\varinjlim_{i\\in J}H^0(E_0\\otimes R_i)\\cong H^0(E_0\\otimes R)$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DHX, lemma-colimit-relatively-perfect, proof of (2), using Tag 0E1U (lemma-compute-RHom-relatively-perfect) and Tag 00DB (algebra-lemma-directed-colimit-exact)."
+   }
+  },
+  {
+   "text": "Insert the isomorphisms of step 1 with $T=R_i$ and $T=R$ into step 4. For $i\\le j$ in $J$, the chain map $h\\otimes r_i\\mapsto h\\otimes\\overline r_i$ induces, by the model's transition clause, the given map $\\operatorname{Hom}_{D(A_i)}(K_i,L_i)\\to\\operatorname{Hom}_{D(A_j)}(K_j,L_j)$. The same clause for $R_i\\to R$ identifies every colimit leg with derived extension to $A$. Hence the composite isomorphism of step 4 is exactly the displayed canonical homomorphism, by the universal property of the colimit of abelian groups. Additivity follows from the additive cohomology identifications. This proves the stated isomorphism with all transition maps normalized.",
+   "uses": [
+    "lem-sfb-relative-rhom-flat-base-change-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DHX, lemma-colimit-relatively-perfect, proof of (2), using Tag 0E1U (lemma-compute-RHom-relatively-perfect) and Tag 00DB (algebra-lemma-directed-colimit-exact)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-rhom-flat-base-change-model",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DHX, lemma-colimit-relatively-perfect, proof of (2), using Tag 0E1U (lemma-compute-RHom-relatively-perfect) and Tag 00DB (algebra-lemma-directed-colimit-exact)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|relatively.?perfect|relativePerfect|colimit.*[Hh]om",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/LocalCohomology.lean', 'Mathlib/Algebra/Homology/ModelCategory/Lifting.lean', 'Mathlib/Algebra/Homology/CochainComplexPlus.lean', 'Mathlib/Algebra/Homology/CommSq.lean', 'Mathlib/Algebra/Homology/CommSq.lean', 'Mathlib/Algebra/Homology/CommSq.lean', 'Mathlib/Algebra/Category/FGModuleCat/Colimits.lean', 'Mathlib/Algebra/Category/Grp/Colimits.lean']; note=; digest=f97e012b18340bd2",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring homomorphisms, existence of colimits, AB5, or derived fraction representatives; none gives continuity of derived Hom under varying base rings for a pseudo-coherent source and a relatively finite-Tor target"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit of derived Hom groups for pseudo coherent complexes over flat finitely presented algebras and finite Tor amplitude targets",
+   "results": "8 hits; top=['HomologicalComplex.instHasFilteredColimitsOfSize', 'ModuleCat.FilteredColimits.colimit', 'AddGrpCat.FilteredColimits.colimitAddGroup', 'AddGrpCat.FilteredColimits.colimit', 'ModuleCat.FilteredColimits.M.mk', 'AddGrpCat.FilteredColimits.colimitCocone', 'ModuleCat.FilteredColimits.colimitCoconeIsColimit', 'AddCommGrpCat.FilteredColimits.G']; note=; digest=fb3c026c9aaeba93",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring homomorphisms, existence of colimits, AB5, or derived fraction representatives; none gives continuity of derived Hom under varying base rings for a pseudo-coherent source and a relatively finite-Tor target"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"colimit\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring homomorphisms, existence of colimits, AB5, or derived fraction representatives; none gives continuity of derived Hom under varying base rings for a pseudo-coherent source and a relatively finite-Tor target"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category Hom between relative perfect complexes is continuous under directed unions of commutative base rings",
+   "results": "8 hits; top=['HasDerivedCategory.standard', 'DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE', 'DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE', 'DerivedCategory.right_fac_of_isStrictlyLE', 'DerivedCategory.left_fac_of_isStrictlyGE', 'DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE', 'Ext']; note=; digest=d037c23ae517713d",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring homomorphisms, existence of colimits, AB5, or derived fraction representatives; none gives continuity of derived Hom under varying base rings for a pseudo-coherent source and a relatively finite-Tor target"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from a pseudo coherent complex to a complex of finite relative Tor dimension commute with filtered colimits of base rings",
+   "results": "8 hits; top=['RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit', 'RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit', 'HomologicalComplex.instHasFilteredColimitsOfSize', 'localCohomology.hasColimitDiagram', 'localCohomology.diagram', 'Condensed.instAB5CondensedMod', 'HomologicalComplex.ab5OfSize', 'preservesFilteredColimits_coyoneda']; note=; digest=2a9a027a1f37a204",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring homomorphisms, existence of colimits, AB5, or derived fraction representatives; none gives continuity of derived Hom under varying base rings for a pseudo-coherent source and a relatively finite-Tor target"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|relatively.?perfect|colimit.*[Hh]om|[Hh]om.*colimit",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/LocalCohomology.lean', 'Mathlib/Algebra/Homology/CochainComplexPlus.lean', 'Mathlib/Algebra/Homology/SpectralObject/Page.lean', 'Mathlib/Algebra/Homology/SpectralObject/Page.lean', 'Mathlib/Algebra/Homology/CommSq.lean', 'Mathlib/Algebra/Homology/CommSq.lean', 'Mathlib/Algebra/Homology/CommSq.lean', 'Mathlib/Algebra/Homology/ModelCategory/Lifting.lean']; subdirectory=Algebra/Homology; note=; digest=99e2555bcc857528",
+   "date": "2026-10-24",
+   "verdict": "no match: colimit existence, underived tensor direct limits and finite-presentation descent do not give varying-ring derived Hom continuity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit of derived Hom groups for pseudo coherent complexes under changing commutative base rings",
+   "results": "8 hits; top=['HomologicalComplex.instHasFilteredColimitsOfSize', 'ModuleCat.FilteredColimits.M.mk', 'CommRingCat.FilteredColimits.colimit', 'AddCommGrpCat.FilteredColimits.colimitAddCommGroup', 'ModuleCat.FilteredColimits.M', 'ModuleCat.FilteredColimits.colimit', 'preservesFilteredColimits_coyoneda', 'ModuleCat.FilteredColimits.colimitCoconeIsColimit']; subdirectory=; note=; digest=cba3eade8d063659",
+   "date": "2026-10-24",
+   "verdict": "no match: colimit existence, underived tensor direct limits and finite-presentation descent do not give varying-ring derived Hom continuity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"colimit\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: colimit existence, underived tensor direct limits and finite-presentation descent do not give varying-ring derived Hom continuity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from pseudo coherent complexes to complexes of finite Tor dimension commute with directed colimits of base rings",
+   "results": "8 hits; top=['RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit', 'RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit', 'localCohomology.hasColimitDiagram', 'localCohomology.diagram', 'TensorProduct.directLimitLeft_rTensor_of', 'localCohomology.ofDiagram', 'TensorProduct.fromDirectLimit', 'TensorProduct.directLimitRight_tmul_of']; subdirectory=; note=; digest=877d2419fe3af2a2",
+   "date": "2026-10-24",
+   "verdict": "no match: colimit existence, underived tensor direct limits and finite-presentation descent do not give varying-ring derived Hom continuity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-arbitrary-ring-relative-dualizing-homothety",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Open restriction and rigidity of supplied relative dualizing pairs over arbitrary bases. Affine scalar endomorphisms and negative Ext input, before sheaf localization. Specific tool for the affine homothety input: Stacks 0E2G, final paragraph, invoking relative-perfect continuity (0DHX(2)).",
+   "via": [
+    "lem-sfb-arbitrary-ring-relative-dualizing-homothety",
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-perfect-hom-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Read 0DHX(2) and 0E1U. Added the general flat Hom-complex model because the existing finite-presentation variant assumes pseudo-coherence of L. Reused underlying algebra/module colimits, tensor totalization and exact filtered abelian-group colimits. Wrote the cofinal-tail argument, cycle/boundary comparison and canonical transition-map compatibility. Statement unchanged.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, specifically 0E2G final paragraph invoking 0DHX(2). Steps 1 and 5 realize its Hom-complex computation and canonical maps; steps 2--4 realize the tensor/filtered-exactness argument of 0DHX(2). Latest blueprint direct-image proof (3) and its unit are unchanged. blueprint_refs.py ancestor returns None; the inherited null ancestor and full via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "why": "Generic underlying-module colimit fact applied to the directed tail of R_i over R_i0; no node of this unit supplies it. It does not replace any geometric unit step."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic tensor-totalization colimit theorem on the one-object ringed site, with the variable factor concentrated in degree zero; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Its clause (3) identifies the underlying abelian-group colimit of the module complexes on the one-object site, so the abelian-group exactness leaf applies; sheafification there is the identity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-c823af901",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-c823af901 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full against Stacks more-algebra.tex 0DHX(2) (lemma-colimit-relatively-perfect, l.22105) and 0E1U (lemma-compute-RHom-relatively-perfect, l.22040). The item's statement and stmt_deps are byte-identical to base; on base it was unsplit with an empty proof, there is no repair note, and this is not a re-split. The new node lem-sfb-relative-rhom-flat-base-change-model states 0E1U (1),(2),(a),(b) plus the T→U transition clause, which comes from the proof's termwise Hom identification. I checked that it is true: P_T is K-projective, F_T is bounded with T-flat terms, and the comparison L⊗^L→L⊗ is natural, so derived extension of [h] is [h⊗1]. I tested it on K or L = 0, the zero ring, R=S=k with L infinite-dimensional, and Z→Z/p. It is not a duplicate: the existing lem-sfb-relative-rhom-finite-flat-base-change-model needs L pseudo-coherent and R→S of finite presentation, which the item does not give, and I also read the 0E2D/0E2F nodes, the projective Hom-evaluation model and the perfect-coinduction base change, none of which states it. Steps: 1 applies the model with T=R_i (S_T=A_i) and T=R. 2 restricts to the cofinal tail J={i≥i0}, where i0 initial gives the R_{i0}-algebra structure, and the algebra-colimit = module-colimit node applies. 3 uses tensor totalization with R_i[0] on the one-object site (small, sheafification is the identity) plus forgetful clause (3); the canonical map is written out. 4 applies the Mathlib exactness leaf to cycles, boundaries and H^0; marked elementary, correctly. 5 normalizes the transition maps and legs via the model's clause. The proof follows 0DHX(2) exactly. The three tool uses are generic algebra and accepted. Batch-5 flag: def-trf-affine-diagonal-module-data is a plain definition (K-flat derived scalar extension and the diagonal object), not part of the trace formula or Poincaré duality or their proofs, and the item already cited it on base, so it is no reason to return. No SGA, no cycle, no weakening. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RelativePerfectHomFilteredColimit",
+  "declaration": "AlgebraicGeometry.relativePerfectHom_filtered_colimit",
+  "declarations": [
+   "AlgebraicGeometry.relativePerfectBaseAlgebra",
+   "AlgebraicGeometry.relativePerfectExtension",
+   "AlgebraicGeometry.relativePerfectTensorMap",
+   "AlgebraicGeometry.relativePerfectExtensionComp",
+   "AlgebraicGeometry.relativePerfectHomGroup",
+   "AlgebraicGeometry.relativePerfectHomMap",
+   "AlgebraicGeometry.relativePerfectRingAt",
+   "AlgebraicGeometry.relativePerfectRingTransition",
+   "AlgebraicGeometry.relativePerfectRingLimit",
+   "AlgebraicGeometry.relativePerfectRingToLimit",
+   "AlgebraicGeometry.relativePerfectHom_filtered_colimit"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RelativePerfectHomFilteredColimit.lean",
+  "statement": "theorem relativePerfectHom_filtered_colimit {I : Type u} [PartialOrder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) (i₀ : I) (A : CommAlgCat.{u} (F.obj i₀)) [Module.Flat (F.obj i₀) A] [Algebra.FinitePresentation (F.obj i₀) A] (K L : DerivedCategory (ModuleCat.{u} A)) (hK : DerivedCategory.IsPseudoCoherent K) (hL : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} (F.obj i₀)) a b ((ModuleCat.restrictScalars (algebraMap (F.obj i₀) A)).mapDerivedCategory.obj L)) : ∃ (H : Set.Ici i₀ ⥤ AddCommGrpCat.{u}) (e : ∀ i : Set.Ici i₀, H.obj i ≅ relativePerfectHomGroup A K L (relativePerfectRingAt F i₀ i)), (∀ (i j : Set.Ici i₀) (f : i ⟶ j) (m : H.obj i), (e j).hom (H.map f m) = relativePerfectHomMap A K L (relativePerfectRingTransition F i₀ (leOfHom f)) ((e i).hom m)) ∧ ∃ c : colimit H ≅ relativePerfectHomGroup A K L (relativePerfectRingLimit F i₀), ∀ (i : Set.Ici i₀) (m : H.obj i), c.hom (colimit.ι H i m) = relativePerfectHomMap A K L (relativePerfectRingToLimit F i₀ i) ((e i).hom m)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-122c68931",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read node, all 7 stmt_dep records, module, report (Worker report + Second reading by NO) and Stacks 0DHX(2). Lean matches every clause: directed poset with i0, F : I ⥤ CommRingCat.{u}, R = colimit F with legs colimit.ι, A flat + Algebra.FinitePresentation over F.obj i0, A_i/A are actual tensor rings via commAlgCatEquivUnder, K/L extended by recorded relativeDualizingDerivedExtension, hK IsPseudoCoherent (not perfect), hL torAmplitudeIn over R_{i0} after restrictScalars (unfolds to H^n(L⊗ᴸQ)=0 outside [a,b] for all Q). Transitions/legs = derived extension conjugated by adjunction-normalized koszulDiagonalExtensionComp. c pinned on every colimit leg, so it is the canonical comparison, not Nonempty. No extra flatness/Noetherian/perfectness. Edge cases (singleton, zero ring, K or L=0, a=b) admitted; universes follow the project convention. stmt_deps adds the existing landed def-sfb-polynomial-koszul-diagonal-system (owner of koszulDiagonalExtensionComp); strictly outside H2's new-node clause but accepted as an owner citation; closure check shows no cycle. lean.statement verbatim, one sorry, real defs, docstrings with source/blueprint and proof steps, lines ≤100. Not recompiled (no file changed); worker reports clean compile."
+ }
+}

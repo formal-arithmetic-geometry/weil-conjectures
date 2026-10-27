@@ -1,0 +1,350 @@
+{
+ "id": "lem-pur-coordinate-section-tensor-trace",
+ "kind": "statement",
+ "title": "Tensor and closed-adjunction consequences of coordinate scalar normalization",
+ "statement": "Let A be a finite commutative ring killed by a positive integer N invertible on a Noetherian scheme T. Let hI make the affine zero section Cartier. In the actual ordinary arrows [def-pur-coordinate-section-core-arrows, def-pur-coordinate-section-ordinary-arrows], assume the identity-normalized compact pushforward of its supported Kummer map followed by coordinate integration equals identity on A_T. Then CoprojectionNormalization [def-pur-coordinate-section-coprojection-arrows] holds: the unit orientation is invertible and on both the unit and each M_r=A_T(r)[2r] the canonical closed coprojection mate is invertible and identifies ordinaryOrientation with tensoring the unit orientation. For every r, the closed proper projection is invertible, ordinaryOrientation is invertible, its compact transpose is identity tensor the scalar map conjugated by the coefficient unitors, and its exceptional composite with CoordinateLine.comparison and exceptionalComposition is identity. The hypothesis is just the scalar equation; no twisted conclusion or pro-etale comparison is assumed.\n\nThe exact Lean statement is:\n\ntheorem coordinateSectionTensorTrace\n    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) [IsNoetherian T]\n    (hT : IsUnit (N : Γ(T, ⊤))) (hI : (sectionMap T).ker.IsInvertible)\n    (hnorm : ((sectionComposition A T).inv.app (Etale.ordinaryFiniteUnit A T) ≫\n    (compact A T).map (restrictedSupported A T N hN hA hT hI) ≫\n      CoordinateLine.integration A N hA T hN hT = 𝟙 _)) :\n    CoprojectionNormalization A T N hN hA hT hI ∧\n    ∀ r : ℕ, ∃ hpf : IsIso (closedProjection A T\n      (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)),\n    IsIso (ordinaryOrientation A T N hN hA hT hI\n      (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) hpf) ∧\n    ((sectionComposition A T).inv.app\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) ≫\n      (compact A T).map (tensorSupported A T N hN hA hT hI\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) hpf) ≫\n      (CoordinateLine.adjunction A N hA T hN hT).counit.app\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) =\n      (Etale.derivedTensorSingleUnitIso\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)).inv ≫\n      ((Etale.ordinaryFiniteTensor A T).obj\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)).map\n          ((sectionComposition A T).inv.app (Etale.ordinaryFiniteUnit A T) ≫\n            (compact A T).map (restrictedSupported A T N hN hA hT hI) ≫\n            CoordinateLine.integration A N hA T hN hT) ≫\n      (Etale.derivedTensorSingleUnitIso\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)).hom) ∧\n    (ordinaryOrientation A T N hN hA hT hI\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) hpf ≫\n      (closedImage A T).rightAdjoint.map\n        ((CoordinateLine.comparison A N hA T hN hT).hom.app\n          (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)) ≫\n      (exceptionalComposition A T).hom.app\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) = 𝟙 _)",
+ "stmt_deps": [
+  "def-pur-coordinate-section-core-arrows",
+  "def-pur-coordinate-section-ordinary-arrows",
+  "def-pur-coordinate-section-coprojection-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Rank-one supported Cartier normalization, even twists and finite etale-origin transport; expanded parent proof steps as specified below."
+ },
+ "proof": [
+  {
+   "text": "Finite etale twist pullback gives rank-one flat root lines. Their powers and even shifts are invertible and finite Tor. Proper projection for the closed section makes closedProjection and closedTensorProjection isomorphisms on every Tate input, including the literal unit.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mate of inverse closed projection followed by identity tensor the closed counit is coprojectionMate. Immersion twist identifies this mate as an isomorphism. Substitute the adjunct-counit equation to obtain the stated formula for ordinaryOrientation. The two adjunctions and the conjugate composition turn the scalar equation into the untwisted exceptional identity. Their comparison factors are isomorphisms, so cancellation makes unitOrientation invertible; its tensor and the coprojection mate make the twisted orientation invertible.",
+   "uses": [
+    "lem-pur-immersion-twist",
+    "lem-pur-coprojection",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the coefficient-first projection map to the supported arrow. The composition projection mate for ps=id identifies the two successive projections with the identity projection under sectionComposition. Use the actual coordinate adjunction counit formula. This gives identity tensor the scalar map with its unitors. Transposing with the two adjunct-counit identities gives the final exceptional identity. The shifts contribute (-1)^(2r*2)=1.",
+   "uses": [
+    "lem-sf-composition-projection-mate",
+    "lem-pur-coordinate-line-adjunction",
+    "lem-coef-etale-open-tensor",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-proper-coproducts-projection",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-coef-etale-open-tensor",
+  "lem-pur-coordinate-line-adjunction",
+  "lem-pur-coprojection",
+  "lem-pur-immersion-twist",
+  "lem-sf-composition-projection-mate",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Expanded parent proof; coordinate-specific assembly of its cited declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The supported Kummer class of the zero section of the affine line integrates to one, with its Tate twists normalized by projection",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "WeierstrassCurve.Affine.Point.toClass_zero",
+     "WeierstrassCurve.Affine.CoordinateRing.basis_zero",
+     "Height.mulHeight₁_zero",
+     "Height.mulHeight_zero",
+     "Polynomial.logMahlerMeasure_X",
+     "Polynomial.logMahlerMeasure_one",
+     "WeierstrassCurve.Affine.Point.toClass_eq_zero",
+     "Height.mulHeight₁_one"
+    ],
+    "digest": "9d457e29adf8c506"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUnit.pow",
+   "results": {
+    "n_hits": 2,
+    "top": [
+     "IsUnit.pow",
+     "IsUnit.unit_pow"
+    ],
+    "digest": "5f945a676e6f90f1"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "grep",
+   "query": "zeroSection.*[Ii]nvertible|[Ii]nvertible.*zeroSection",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed section of the affine line has positive projective Chern class after extension by zero and normalized compact support composition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "rieszContentAux_image_nonempty",
+     "exists_lt_rieszContentAux_add_pos",
+     "RealRMK.le_rieszMeasure_tsupport_subset",
+     "RealRMK.rieszMeasure_le_of_eq_one",
+     "CompactlySupportedContinuousMap.toRealLinear_nonneg",
+     "NNRealRMK.le_rieszMeasure_of_isCompact_tsupport_subset",
+     "MeasureTheory.Measure.modularCharacterFun_pos",
+     "ExistsContDiffBumpBase.u_int_pos"
+    ],
+    "digest": "0b9b060a6b80c30c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An effective Cartier divisor in the projective line has supported Kummer class whose compact image is the positive Chern class of O(1)",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "OnePoint.smul_some_eq_ite",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "MeromorphicOn.divisor",
+     "MeromorphicOn.divisor_zpow",
+     "WeierstrassCurve.Projective.Point.point",
+     "Projectivization.rep",
+     "MeromorphicOn.divisor_def"
+    ],
+    "digest": "167d9087386e6c71"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Chern\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|supported.*[Cc]hern|[Cc]hern.*supported",
+   "results": {
+    "n_hits": 25,
+    "top": [
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/KummerDedekind.lean",
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean",
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean",
+     "Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean"
+    ],
+    "digest": "33598ab28f6dafee"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a supported Cartier class with an invertible Tate object preserves its integration normalization and identifies its exceptional adjoint with the closed coprojection mate",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp",
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'",
+     "CategoryTheory.ihom.instIsLeftAdjointTensorLeft",
+     "CategoryTheory.exp.adjunction",
+     "CategoryTheory.ihom.adjunction",
+     "Algebra.IsIntegral.tensorProduct",
+     "CategoryTheory.Closed.adj",
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoAux"
+    ],
+    "digest": "ec9f22a06a3663dd"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The supported Cartier Kummer class of the coordinate zero divisor is the negative of the localization boundary of the coordinate Kummer class",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AddLocalization.Away.negSelf",
+     "MeromorphicOn.divisor",
+     "Algebra.unramifiedLocus_eq_compl_support",
+     "MeromorphicOn.divisor_sub_const_self",
+     "CochainComplex.HomComplex.CohomologyClass.mk_neg",
+     "ClassGroup.mk0",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.mk_mem_carrier",
+     "WeierstrassCurve.Affine.Point.toClass_eq_zero"
+    ],
+    "digest": "14f6de7a56042b0a"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact etale to proetale comparison transports normalized supported Kummer maps, trace counits, and their adjunction transposes",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "StandardEtalePair.HasMap.map",
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+     "StandardEtalePair.homEquiv",
+     "Algebra.Etale.comp",
+     "StandardEtalePresentation.mapEquiv",
+     "StandardEtalePresentation.lift_bijective",
+     "StandardEtalePair.homEquiv_apply_coe"
+    ],
+    "digest": "6411708b0080d577"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "grep",
+   "query": "coprojection|Cartier.*[Kk]ummer|[Kk]ummer.*[Cc]artier|proetale.*[Aa]djunction",
+   "results": {
+    "n_hits": 15,
+    "top": [
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+     "Mathlib/CategoryTheory/Distributive/Cartesian.lean",
+     "Mathlib/CategoryTheory/Distributive/Cartesian.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/DisjointCoproduct.lean"
+    ],
+    "digest": "12e2d2d4db47fed4"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact comparison between ordinary etale and proetale sites preserves supported Cartier maps, integration traces and exceptional adjunction composition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Equivalence.sheafCongr",
+     "Algebra.FormallyEtale.of_equiv",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "Algebra.Etale.formallyEtale",
+     "CategoryTheory.Equivalence.transportSheafificationAdjunction",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+     "CategoryTheory.Equivalence.sheafCongrPrecoherent",
+     "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility"
+    ],
+    "digest": "01ce17c49619ad20"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"tensor\"",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ",
+     "CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc",
+     "CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc",
+     "CategoryTheory.tensorLeftAdjunction",
+     "CategoryTheory.tensorRightAdjunction",
+     "CategoryTheory.Types.tensorProductAdjunction",
+     "CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction"
+    ],
+    "digest": "9e62f5e4c3e3a14d"
+   },
+   "date": "2026-10-25",
+   "verdict": "No statement of the required coordinate Cartier normalization; generic algebra, category theory or unrelated Kummer results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedCoordinateSectionNormalization",
+  "date": "2026-10-25",
+  "group": "A9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-twisted-coordinate-section-normalization",
+   "place": "Tensor and closed-adjunction consequences of coordinate scalar normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateSectionTensorTrace",
+  "file": "lean/Sheaf/Paper/CoordinateSectionTensorTrace.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateSectionNormalization.coordinateSectionTensorTrace",
+  "statement": "theorem coordinateSectionTensorTrace\n    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) [IsNoetherian T]\n    (hT : IsUnit (N : Γ(T, ⊤))) (hI : (sectionMap T).ker.IsInvertible)\n    (hnorm : ((sectionComposition A T).inv.app (Etale.ordinaryFiniteUnit A T) ≫\n    (compact A T).map (restrictedSupported A T N hN hA hT hI) ≫\n      CoordinateLine.integration A N hA T hN hT = 𝟙 _)) :\n    CoprojectionNormalization A T N hN hA hT hI ∧\n    ∀ r : ℕ, ∃ hpf : IsIso (closedProjection A T\n      (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)),\n    IsIso (ordinaryOrientation A T N hN hA hT hI\n      (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) hpf) ∧\n    ((sectionComposition A T).inv.app\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) ≫\n      (compact A T).map (tensorSupported A T N hN hA hT hI\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) hpf) ≫\n      (CoordinateLine.adjunction A N hA T hN hT).counit.app\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) =\n      (Etale.derivedTensorSingleUnitIso\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)).inv ≫\n      ((Etale.ordinaryFiniteTensor A T).obj\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)).map\n          ((sectionComposition A T).inv.app (Etale.ordinaryFiniteUnit A T) ≫\n            (compact A T).map (restrictedSupported A T N hN hA hT hI) ≫\n            CoordinateLine.integration A N hA T hN hT) ≫\n      (Etale.derivedTensorSingleUnitIso\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)).hom) ∧\n    (ordinaryOrientation A T N hN hA hT hI\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) hpf ≫\n      (closedImage A T).rightAdjoint.map\n        ((CoordinateLine.comparison A N hA T hN hT).hom.app\n          (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r)) ≫\n      (exceptionalComposition A T).hom.app\n        (Etale.SectionLocalDualizingComparisons.tateObject A N hA T r) = 𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T161924-L-149448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261025T161924-L-149448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

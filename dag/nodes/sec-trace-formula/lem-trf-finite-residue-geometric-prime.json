@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-finite-residue-geometric-prime",
+ "kind": "statement",
+ "title": "Geometric prime quotients above a finite residue field",
+ "statement": "Let $k$ be a field, $\\Omega/k$ an algebraically closed field extension [def-pc-field-extension, def-weil-algebraic-closure], and $T$ a commutative $k$-algebra. Let $\\mathfrak p\\subset T$ be maximal and suppose that $F=T/\\mathfrak p$ is finite-dimensional over $k$ [def-weil-finite-dimensional-subspace]. Put $S=T\\otimes_k\\Omega$ [def-weil-pbc-module-tensor-product]. For every prime $\\mathfrak q\\subset S$ with inverse image $\\mathfrak p$ under $t\\mapsto t\\otimes1$, the canonical map $F\\otimes_k\\Omega\\to S/\\mathfrak q$, $\\bar t\\otimes\\lambda\\mapsto(t\\otimes\\lambda)\\bmod\\mathfrak q$, is a well-defined surjective $\\Omega$-algebra homomorphism and $S/\\mathfrak q$ is finite-dimensional over $\\Omega$. Moreover $\\mathfrak q$ is maximal and both structural maps $\\Omega\\to S/\\mathfrak q$ and $\\Omega\\to\\kappa(\\mathfrak q)$ are isomorphisms of $\\Omega$-algebras, where $\\kappa(\\mathfrak q)=S_{\\mathfrak q}/\\mathfrak qS_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00FV (theorem-nullstellensatz), finite residue field and algebraically closed case; explicit tensor-quotient version of the finite-dimensional argument in the geometric field-stalk descent, original proof steps 3-4."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Write $B=S/\\mathfrak q$ and $\\pi:S\\to B$ for the quotient map. Since the inverse image of $\\mathfrak q$ is $\\mathfrak p$, replacing $t$ by $t+u$ with $u\\in\\mathfrak p$ changes $\\pi(t\\otimes\\lambda)$ by $\\pi((u\\otimes1)(1\\otimes\\lambda))=0$. Thus $\\beta:F\\times\\Omega\\to B$, $(\\bar t,\\lambda)\\mapsto\\pi(t\\otimes\\lambda)$, is well-defined and $k$-bilinear. The tensor universal property gives $h:F\\otimes_k\\Omega\\to B$ with this formula. Using $(x\\otimes a)(y\\otimes b)=xy\\otimes ab$ in these algebra tensor products, $h$ preserves products on pure tensors, hence on their finite sums, and sends $1\\otimes1$ to $1$. Moreover $h(1\\otimes\\lambda)=\\pi(1\\otimes\\lambda)$ and $h(\\bar t\\otimes\\lambda\\mu)=\\pi(1\\otimes\\mu)h(\\bar t\\otimes\\lambda)$; hence it is an $\\Omega$-algebra homomorphism. Every element of $B$ lifts to a finite sum $\\sum_i t_i\\otimes\\lambda_i$ in $S$, and is the image of $\\sum_i\\bar t_i\\otimes\\lambda_i$. Therefore $h$ is surjective.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property and pure-tensor generators; Section 00AR (section-rings-basic), quotient rings."
+   }
+  },
+  {
+   "text": "Choose a finite $k$-spanning family $e_1,\\ldots,e_r$ of $F$, using its assumed finite dimension. If $x=\\sum_j c_je_j$ with $c_j\\in k$, the tensor relations give $x\\otimes\\lambda=\\sum_j e_j\\otimes(c_j\\lambda)$. Since pure tensors generate, the elements $e_j\\otimes1$ span $F\\otimes_k\\Omega$ over $\\Omega$. Surjectivity and $\\Omega$-linearity of $h$ then show that $h(e_j\\otimes1)$ span $B$ over $\\Omega$. This proves the required finite dimensionality of $B$.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), explicit bilinearity relations and generators; finite spanning-family argument."
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak q$ is prime, so $B$ is nonzero and has no zero divisors: $\\pi(x)\\pi(y)=0$ means $xy\\in\\mathfrak q$, hence $x\\in\\mathfrak q$ or $y\\in\\mathfrak q$. With the $\\Omega$-algebra structure and finite dimension just established, apply [lem-weil-pbc-finite-dimensional-domain-is-field] to conclude that $B$ is a field. Consequently $\\mathfrak q$ is maximal: any ideal strictly containing it gives a nonzero ideal of $B$, which contains a nonzero element and its inverse and therefore contains $1$.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS (lemma-integral-over-field), part (1)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-alg-closed-finite-extension-trivial] to the field $B$, finite-dimensional over the algebraically closed field $\\Omega$. Its conclusion is bijectivity of the actual structural map $i:\\Omega\\to B$, $\\lambda\\mapsto\\pi(1\\otimes\\lambda)$. The inverse of a bijective algebra homomorphism is an algebra homomorphism, so this gives the asserted $\\Omega$-algebra isomorphism, with its specified structural map.",
+   "uses": [
+    "lem-weil-pbc-alg-closed-finite-extension-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GR (lemma-algebraically-closed), equivalence with triviality of algebraic field extensions."
+   }
+  },
+  {
+   "text": "We identify the residue field canonically, using the fraction description in [def-weil-pbc-localization-at-prime]. For $s\\notin\\mathfrak q$, $\\pi(s)\\ne0$ in the field $B$, so define $g:S_{\\mathfrak q}\\to B$ by $g(x/s)=\\pi(x)\\pi(s)^{-1}$. This respects fraction equality: if $u(xs^{\\prime}-x^{\\prime}s)=0$ with $u\\notin\\mathfrak q$, cancel the nonzero $\\pi(u)$ and the denominators in $B$. The fraction addition and multiplication formulas show that $g$ is a ring map. It is onto since $g(x/1)=\\pi(x)$, and its kernel is exactly $\\mathfrak qS_{\\mathfrak q}$: $g(x/s)=0$ iff $x\\in\\mathfrak q$; conversely it kills every generator $x/1$ for $x\\in\\mathfrak q$. It therefore induces an isomorphism $\\bar g:\\kappa(\\mathfrak q)\\to B$, inverse to $\\pi(x)\\mapsto[x/1]$. This is an $S$-algebra isomorphism and sends the structural image of each $\\lambda\\in\\Omega$ to $\\pi(1\\otimes\\lambda)=i(\\lambda)$. Thus the structural map $\\Omega\\to\\kappa(\\mathfrak q)$ is $\\bar g^{-1}\\circ i$ and is an $\\Omega$-algebra isomorphism.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO (definition-localization), fraction equality; Section 07BH (section-local-rings), residue field of a prime."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-dimensional-subspace",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit tensor quotient and finite spanning-family argument realizing the geometric field-stalk descent; Tag 00GS (lemma-integral-over-field), with Fields Tag 09GR (lemma-algebraically-closed) and localization fractions from Tag 00CO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "residueField.*[Aa]lgClosed|[Aa]lgClosed.*residueField|isMaximal.*[Ff]inite|[Ff]inite.*isMaximal",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"grep\", \"query\": \"residueField.*[Aa]lgClosed|[Aa]lgClosed.*residueField|isMaximal.*[Ff]inite|[Ff]inite.*isMaximal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"18fcb11d800b7a76\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fiber equivalences and quasi-finite residue-field instances do not establish the quotient factorization and finiteness from this one finite residue quotient. IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220-230) supplies only the scalar-field identification after integrality of the quotient has been proved. Several separate arguments are needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prime of a tensor product above an ideal with finite residue field has residue field the algebraically closed base field",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"leansearch\", \"query\": \"A prime of a tensor product above an ideal with finite residue field has residue field the algebraically closed base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsAlgebraicResidueFieldOfIsIntegral\", \"PrimeSpectrum.tensorProductTo\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Ideal.Fiber\", \"PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Algebra.QuasiFinite.instResidueField\", \"PrimeSpectrum.preimageEquivFiber_apply_asIdeal\"], \"digest\": \"097f841c19e2648a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fiber equivalences and quasi-finite residue-field instances do not establish the quotient factorization and finiteness from this one finite residue quotient. IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220-230) supplies only the scalar-field identification after integrality of the quotient has been proved. Several separate arguments are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.ResidueField, IsAlgClosed",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"loogle\", \"query\": \"Ideal.ResidueField, IsAlgClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fiber equivalences and quasi-finite residue-field instances do not establish the quotient factorization and finiteness from this one finite residue quotient. IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220-230) supplies only the scalar-field identification after integrality of the quotient has been proved. Several separate arguments are needed."
+  },
+  {
+   "tool": "grep",
+   "query": "map_surjective|of_isAlgClosed|bijective_algebraMap|bijective.*algebraMap|isAlgClosed.*bijective",
+   "results": "{\"t\": \"2026-10-22T06:11:54Z\", \"tool\": \"grep\", \"query\": \"map_surjective|of_isAlgClosed|bijective_algebraMap|bijective.*algebraMap|isAlgClosed.*bijective\", \"sub\": \"FieldTheory/IsAlgClosed\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\"], \"digest\": \"e499b7c10bb87e69\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fiber equivalences and quasi-finite residue-field instances do not establish the quotient factorization and finiteness from this one finite residue quotient. IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220-230) supplies only the scalar-field identification after integrality of the quotient has been proved. Several separate arguments are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let T be a k-algebra with a maximal ideal p such that T/p is finite over k. Over an algebraically closed extension Omega every prime of T tensor Omega above p is maximal with residue field Omega.",
+   "results": "{\"t\": \"2026-10-22T06:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"Let T be a k-algebra with a maximal ideal p such that T/p is finite over k. Over an algebraically closed extension Omega every prime of T tensor Omega above p is maximal with residue field Omega.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_symm\", \"PrimeSpectrum.coe_primesOverOrderIsoFiber_apply_asIdeal\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"PrimeSpectrum.coe_preimageOrderIsoFiber_apply_asIdeal\", \"PrimeSpectrum.preimageEquivFiber_apply_asIdeal\"], \"digest\": \"aec85717f8d585c7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fiber equivalences and quasi-finite residue-field instances do not establish the quotient factorization and finiteness from this one finite residue quotient. IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220-230) supplies only the scalar-field identification after integrality of the quotient has been proved. Several separate arguments are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any k-algebra T whose quotient by p is a finite dimensional field, the prime quotients above p after tensoring with an algebraically closed field are finite dimensional scalar fields, via their structural maps.",
+   "results": "{\"t\": \"2026-10-22T06:12:22Z\", \"tool\": \"leanfinder\", \"query\": \"For any k-algebra T whose quotient by p is a finite dimensional field, the prime quotients above p after tensoring with an algebraically closed field are finite dimensional scalar fields, via their structural maps.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.instFiniteResidueField\", \"Algebra.QuasiFinite.finite_fiber\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"Algebra.QuasiFiniteAt.baseChange\", \"Algebra.QuasiFinite.baseChange\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"algebra_finiteType_of_liesOver\"], \"digest\": \"d9a2b3c99d6f651b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fiber equivalences and quasi-finite residue-field instances do not establish the quotient factorization and finiteness from this one finite residue quotient. IsAlgClosed.algebraMap_bijective_of_isIntegral (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:220-230) supplies only the scalar-field identification after integrality of the quotient has been proved. Several separate arguments are needed."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_bijective_of_isIntegral|isField_of_finite|bijective_of_injective",
+   "results": "{\"t\": \"2026-10-23T04:42:03Z\", \"tool\": \"grep\", \"query\": \"algebraMap_bijective_of_isIntegral|isField_of_finite|bijective_of_injective\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\"], \"digest\": \"b4e683b89b6aa239\"}",
+   "date": "2026-10-23",
+   "verdict": "match for a cited ingredient only: IsAlgClosed.algebraMap_bijective_of_isIntegral proves scalar bijectivity after finiteness/integrality is known; it does not construct the tensor-quotient map or prove its finite dimension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime quotients of tensor product above a maximal ideal with finite dimensional residue field over an algebraically closed extension are scalar fields",
+   "results": "{\"t\": \"2026-10-23T04:42:03Z\", \"tool\": \"leansearch\", \"query\": \"Prime quotients of tensor product above a maximal ideal with finite dimensional residue field over an algebraically closed extension are scalar fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArtinianRing.fieldOfSubtypeIsMaximal\", \"Ideal.Fiber\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"PrimeSpectrum.nontrivial_iff_mem_rangeComap\", \"Algebra.QuasiFinite.finite_fiber\", \"Polynomial.fiberEquivQuotient\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\"], \"digest\": \"da63f694e11b7731\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits concern integral-domain scalar maps, quasi-finite algebras or fibre equivalences, without the required explicit quotient map and finite-dimensional argument from the given residue quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Algebra.IsIntegral",
+   "results": "{\"t\": \"2026-10-23T04:42:03Z\", \"tool\": \"loogle\", \"query\": \"IsAlgClosed, Algebra.IsIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsAlgClosed.algebraMap_bijective_of_isIntegral\"], \"digest\": \"65658ab9d5468d96\"}",
+   "date": "2026-10-23",
+   "verdict": "match for a cited ingredient only: IsAlgClosed.algebraMap_bijective_of_isIntegral proves scalar bijectivity after finiteness/integrality is known; it does not construct the tensor-quotient map or prove its finite dimension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dimensional algebra over an algebraically closed field that is an integral domain the scalar algebra map is bijective",
+   "results": "{\"t\": \"2026-10-23T04:42:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite dimensional algebra over an algebraically closed field that is an integral domain the scalar algebra map is bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed\", \"AlgHom.bijective\", \"IsAlgClosed.algebraMap_bijective_of_isIntegral\", \"Algebra.IsAlgebraic.algHom_bijective\", \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower\", \"Algebra.IsAlgebraic.bijective_of_isScalarTower'\", \"Algebra.IsAlgebraic.algHom_bijective₂\"], \"digest\": \"227f4f2da350fd71\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits concern integral-domain scalar maps, quasi-finite algebras or fibre equivalences, without the required explicit quotient map and finite-dimensional argument from the given residue quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime quotient of T tensor k Omega above a finite dimensional residue field is finite dimensional over Omega and its algebra map from Omega is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T04:50:52Z\", \"tool\": \"leanfinder\", \"query\": \"A prime quotient of T tensor k Omega above a finite dimensional residue field is finite dimensional over Omega and its algebra map from Omega is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFinite.finite_fiber\", \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"Algebra.QuasiFinite.instResidueField\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Ideal.ResidueField.exists_smul_eq_tmul_one\", \"Algebra.quasiFinite_iff\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"5a5a71911badcf21\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: the hits concern integral-domain scalar maps, quasi-finite algebras or fibre equivalences, without the required explicit quotient map and finite-dimensional argument from the given residue quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-field-stalk-descent",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Curves 0C4D arbitrary-field descent paragraph, sentence that the geometric singular stalk has multiplicity 1: algebraic residue-field calculation, original steps 3-4 of lem-trf-geometric-field-stalk-descent.",
+   "via": [
+    "lem-trf-geometric-field-stalk-descent",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-residue-geometric-prime",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave a five-step proof: explicit tensor-quotient map, finite spanning family, the existing finite-dimensional-domain field leaf, the existing algebraically-closed finite-extension leaf, and an explicit fraction-level residue-field identification. No new nodes are needed. Read all cited statements and Stacks sources; no separability, finite-type hypothesis on T, algebraicity of Omega/k, or reducedness of the tensor algebra is used.",
+  "blueprint": "The algebraic residue-field calculation in the arbitrary-field paragraph of Curves Tag 0C4D, extracted as original steps 3-4 of lem-trf-geometric-field-stalk-descent, below lem-trf-local-term-locality; retains its finite-dimensional scalar-extension route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-b46a53116",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-b46a53116 (reviewer sub-agent of L); spot-checked: I read the item and all eight cited nodes in full. Every cited node is a Mathlib leaf and none is merged. The delivery adds no new nodes, and no repair or re-split note exists for this item. The base had no proof; the statement is unchanged apart from adding def-weil-pbc-algebra-hom-quotient to stmt_deps. The parent lem-trf-geometric-field-stalk-descent, step 3, uses only 'q is maximal and κ(q)=Ω through the structural map'; its hypotheses (algebraic closure, finite type) are covered by the item's weaker ones. Step 1: u∈p gives u⊗1∈q, so the bilinear map is well defined; h comes from the universal property, is multiplicative on pure tensors, Ω-linear, and surjective because pure tensors generate. Step 2: x⊗λ=Σ(c_jλ)(e_j⊗1) gives finite dimension over Ω. Step 3: B is a domain, so by lem-weil-pbc-finite-dimensional-domain-is-field with K=Ω it is a field and q is maximal (Stacks 00GS(1), algebra.tex:7782). Step 4: lem-weil-pbc-alg-closed-finite-extension-trivial applies to the actual structural map λ↦π(1⊗λ) (Stacks 09GR, fields.tex:911). Step 5: g(x/s)=π(x)/π(s) is defined explicitly; its fraction-equality check, kernel qS_q and inverse are correct, so Ω→κ(q) is ḡ^{-1}∘i. proof_deps equals the union of the step uses. Tags 00FV, 00CX, 00GS, 09GR, 00CO, 07BH and 00AR are verified against tags/tags; no SGA is cited; the route has only Mathlib leaves, so no tool_uses are needed. Edge cases checked: k=Ω, T=0, F/k purely inseparable (non-reduced F⊗Ω), F/k separable with several q, Ω transcendental over k. The DAG search found no duplicate. Advisory: no DAG node defines the ring structure on a tensor product of algebras; the item, its parent and the localization node all use the module tensor node for it."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteResidueGeometricPrime",
+  "declaration": "Algebra.TensorProduct.finite_residue_geometric_prime",
+  "file": "lean/Sheaf/RingTheory/FiniteResidueGeometricPrime.lean",
+  "statement": "theorem finite_residue_geometric_prime (k : Type u) (Ω : Type v) (T : Type w) [Field k] [Field Ω] [IsAlgClosed Ω] [CommRing T] [Algebra k Ω] [Algebra k T] (p : Ideal T) [p.IsMaximal] [FiniteDimensional k (T ⧸ p)] (q : Ideal (T ⊗[k] Ω)) [q.IsPrime] (hq : q.comap (includeLeft : T →ₐ[k] T ⊗[k] Ω).toRingHom = p) : (fun (_instS : Algebra Ω (T ⊗[k] Ω)) (_instF : Algebra Ω ((T ⧸ p) ⊗[k] Ω)) ↦ (∃ h : ((T ⧸ p) ⊗[k] Ω) →ₐ[Ω] ((T ⊗[k] Ω) ⧸ q), (∀ (t : T) (a : Ω), h (Ideal.Quotient.mk p t ⊗ₜ[k] a) = Ideal.Quotient.mk q (t ⊗ₜ[k] a)) ∧ Function.Surjective h) ∧ FiniteDimensional Ω ((T ⊗[k] Ω) ⧸ q) ∧ q.IsMaximal ∧ Function.Bijective (algebraMap Ω ((T ⊗[k] Ω) ⧸ q)) ∧ Function.Bijective (algebraMap Ω q.ResidueField)) (rightAlgebra (R := k) (A := T) (B := Ω)) (rightAlgebra (R := k) (A := T ⧸ p) (B := Ω))",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fb2c030c",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Read item node, 6 Mathlib-leaf stmt_deps, module, report. Every clause matches: IsAlgClosed Ω (no algebraicity), CommRing T + Algebra k T, p maximal + FiniteDimensional k (T⧸p), q prime with comap includeLeft = p; h : (T⧸p)⊗Ω →ₐ[Ω] S⧸q pinned on all pure tensors (canonical) + surjective; FiniteDimensional Ω (S⧸q); q.IsMaximal; bijective algebraMap Ω to S⧸q and to q.ResidueField. Ω-structures come from rightAlgebra via applied lambda (local instances, no competing instance). Independent universes u v w. lean.statement verbatim in file; node diff vs side-live only in lean. Docstrings carry source tags, blueprint id, full 5-step proof; sorry only; both report sections present. Edge cases (T=0, inseparable/separable F, transcendental Ω) fine. No findings; no compile needed since no file changed."
+ }
+}

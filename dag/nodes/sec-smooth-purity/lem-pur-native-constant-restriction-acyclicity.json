@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-native-constant-restriction-acyclicity",
+ "kind": "statement",
+ "title": "Native constant restriction is acyclic for whole-tower direct image",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme morphism $g:X\\to Y$. Let $I$ be a K-injective cochain complex [def-pur-kinjective-complex] of native quotient-system module sheaves [def-coef-ringed-sequence-site]. Let V restrict first along the completed coefficient projections, then termwise along the actual constant-to-completed integral coefficient map [def-weil-completed-integral-coefficients], into strict constant integral towers. For any K-injective tower complex T and quasi-isomorphism $j:VI\\to T$, the chain map $g_*^{\\mathbf N}(j):g_*^{\\mathbf N}(VI)\\to g_*^{\\mathbf N}(T)$ is a quasi-isomorphism, where $g_*^{\\mathbf N}$ is ordinary whole-tower direct image [def-cbc-strict-constant-tower-operations]. No properness, boundedness, flatness, or K-injectivity of VI is assumed.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-completed-integral-coefficients",
+  "def-cbc-strict-constant-tower-operations",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to the identity coefficient morphism followed by the whole-sequence direct image."
+ },
+ "proof": [
+  {
+   "text": "Construct curry and uncurry exact equivalences between modules over the constant ring on the coefficient sequence site and strict constant-ring towers. The vertical sheaf criterion applies with independent site and coefficient universes. Form the constant-to-quotient ring-sheaf map from integralConstantQuotientOfUniverses and its consecutive compatibility. Evaluation on each slice, the limit-cone equations, and coefficientSequenceRestriction_evaluation identify scalar restriction with the displayed nativeRestriction. The characterization of coefficientSequenceRestriction on sections and horizontal transitions assembles these level isomorphisms into a tower isomorphism. The identity-on-sections restriction/pushforward comparison is constructed locally as pushforwardComp, pushforwardCongr for the commuting coefficient square, and inverse pushforwardComp; it does not use the finite-free compact-support composition theorem.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-topology",
+    "def-coef-ringed-sequence-site",
+    "def-weil-completed-integral-coefficients",
+    "def-pur-semilinear-compact-support-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already proved continuous_scalar_resolution helper of SemilinearCompactSupportCoefficientTransport to the geometric base-change functor on sequence sites and the constant-to-quotient coefficient map. That helper passes to small equivalent sites, applies normalized ringed-topos derived composition, and transports back. The geometric functor is continuous and representably flat, since its comma categories are products of the corresponding comma categories of the identity on natural numbers and pro-etale base change. This gives direct-image acyclicity of scalar restriction on the ringed sequence sites without requiring restriction to preserve K-injectives.",
+   "uses": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify sequence-site geometric pushforward with towerDirectImage by identity section maps. Apply the proved quasiIso_map_of_models transport helper, with identity on native modules and the exact uncurry equivalences on constant towers. Equivalences preserve K-injective complexes and homology and reflect isomorphisms, so the sequence-site acyclicity assertion transports to exactly the displayed chain map.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E; H8 explicit sequence-site comparison and reuse of the proved large-site scalar-resolution and quasi-isomorphism transport helpers. Maintenance J9: construct the ordinary restriction/pushforward comparison directly, removing the unrelated finite-free compact-support dependency and its circular proof path."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of K-injective complexes of sheaves is acyclic for derived direct image",
+   "results": "8 hits; SheafOfModules.restrictScalars and CochainComplex.IsKInjective.rightOrthogonal are components only.",
+   "date": "2026-10-26",
+   "verdict": "No specialized native-system/constant-tower unit assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of module sheaves direct image comparison identity on sections",
+   "results": "8 hits, including presheaf restriction and Scheme.Modules restriction; no sequence-site acyclicity.",
+   "date": "2026-10-26",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient_canonical_acyclic|square_exists|square_unique",
+   "results": "msearch grep: OK, zero Mathlib hits. Local project search finds coefficient_canonical_acyclic on small ringed sites and square_exists/square_unique; those do not themselves identify the native chosen restriction with constant-ring sequence-site restriction. blueprint_refs.py search restricted K-injective: zero matches.",
+   "date": "2026-10-26",
+   "verdict": "The new lemma isolates that concrete sequence-site acyclicity/transport step; no duplicate specialization exists."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeConstantSupportModel",
+  "date": "2026-10-26",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Finite scalar proper/open mate on strict reduction towers (returned comparison Steps 3, 4); Native compact-support reduction lift restricted to discrete constants; direct-image acyclicity used to derive the native-to-constant proper square",
+   "via": [
+    "def-pur-native-constant-support-model",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeConstantRestrictionAcyclicity",
+  "file": "lean/Sheaf/Paper/NativeConstantRestrictionAcyclicity.lean",
+  "declaration": "WeilConjectures.nativeConstantRestriction_push_quasiIso",
+  "statement": "theorem nativeConstantRestriction_push_quasiIso\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (I : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ)\n    [I.IsKInjective]\n    (T : CochainComplex (Towers\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) X) ℤ)\n    [T.IsKInjective]\n    (j : ((coefficientSequenceRestriction.{u, u} l E X ⋙\n      (Functor.whiskeringRight ℕᵒᵖ _ _).obj\n        (SheafOfModules.restrictScalars.{u + 1}\n          (integralConstantToCompletionOfUniverses.{u, u} l E X))).mapHomologicalComplex\n            (.up ℤ)).obj I ⟶ T) [QuasiIso j] :\n    QuasiIso (((towerDirectImage\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g).mapHomologicalComplex\n        (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-coef-ringed-sequence-site",
+  "def-pur-kinjective-complex",
+  "def-pur-semilinear-compact-support-coefficient-transport",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-pbc-diagram-site-topology",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T002312-L-74319",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T065927-L-3301597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

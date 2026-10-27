@@ -1,0 +1,142 @@
+{
+ "id": "lem-trf-canonical-torus-coaction-associativity",
+ "kind": "statement",
+ "title": "Canonical torus chart coactions satisfy the associativity law",
+ "statement": "Let $k$ be a field and $M$ a fine monoscheme with finite affine cover [def-trf-monoscheme-toric-realization]. Let $C$ be a torsion-free connected component of $M$, $L$ the group completion of its generic stalk, $X$ its component open in the toric realization $k[M]$, and $T=\\operatorname{Spec}k[L]$, with the group structure $e^l\\mapsto e^l\\otimes e^l$, $e^l\\mapsto1$, $e^l\\mapsto e^{-l}$ [def-sc-group-scheme]. Suppose $a:T\\times_k X\\to X$ is a morphism over $k$ whose restriction to every component affine chart $\\operatorname{Spec}k[P]$ is the spectrum of $e^p\\mapsto e^{\\deg(p)}\\otimes e^p$, followed by the chart inclusion. Then $a(gh,x)=a(g,a(h,x))$ as morphisms over $k$, with the canonical unitors and associator of fibre products.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.2.4, printed p.103; explicit chartwise verification and gluing in Step 6 of lem-trf-lattice-torus-coordinates-action."
+ },
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "def-sc-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The component chart images cover X. Base change by T twice gives a cover of T times T times X by products with the same charts.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The assumed formula for a factors its restriction through the same chart. On each such chart the composite using torus multiplication sends e^p to e^deg(p) tensor e^deg(p) tensor e^p by the comultiplication formula. Applying the coaction twice gives that identical tensor. Linearity proves equality on all of k[P]. The affine fibre-product comparison identifies the tensor associator with the fibre-product associator.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both global composites have the calculated restrictions to the product chart cover. Uniqueness of morphisms on an open cover proves their equality. Faithfulness of forgetting Over Spec k gives exactly the asserted equality over the base.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "lem-weil-pbc-open-fibre-product",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.2.4, printed p.103; explicit chartwise verification and gluing in Step 6 of lem-trf-lattice-torus-coordinates-action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsCanonicalTorusAction|coaction.*(counit|assoc)|torusAction.*(unit|assoc)",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned cover constructions and abstract ModObj axioms do not establish the law for the recorded canonical chart coaction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine monomial torus coaction satisfies the unit identity after gluing on a scheme open cover",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.Scheme.AffineOpenCover.openCover, AlgebraicGeometry.Scheme.affineBasisCover, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.isAffine_affineCover",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned cover constructions and abstract ModObj axioms do not establish the law for the recorded canonical chart coaction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModObj\", \"one_smul\"",
+   "results": "OK: 4 hits; CategoryTheory.ModObj.one_smul_self, CategoryTheory.ModObj.one_smul_self_assoc, CategoryTheory.ModObj.one_smul, CategoryTheory.ModObj.one_smul_assoc",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned cover constructions and abstract ModObj axioms do not establish the law for the recorded canonical chart coaction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomial coaction glued on toric scheme charts satisfies the associative action law for the group scheme spectrum of a group algebra",
+   "results": "OK: 8 hits; AlgebraicGeometry.Proj.awayι_toSpecZero_assoc, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc, AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap_assoc, AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc, AlgebraicGeometry.AffineSpace.map_toSpecMvPoly_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned cover constructions and abstract ModObj axioms do not establish the law for the recorded canonical chart coaction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LatticeTorusCoordinatesAction",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Remark 3.1.4 and 3.1.10(ii), Proposition 3.2.2 and 3.2.4--3.2.5, printed pp.98--100,103; smooth torus input in 2.3.16--2.3.17 and application in 3.2.19. No Stacks tag states the complete monoscheme realization assertion. New subargument: Expose VIII, Proposition 3.2.2 and 3.2.4--3.2.5, printed p.103, and Laurent chart input to Lemma 3.2.12(i), p.104. Re-split of returned parent Steps 5--6: basis coordinates, Hopf compatibility, coaction gluing and arbitrary-base finite presentation. No Stacks tag states this combined lattice-action comparison. Further substep: Step 6, the associativity diagram for the canonical chart coaction.",
+   "via": [
+    "lem-trf-lattice-torus-coordinates-action",
+    "lem-trf-toric-realization-finite-type",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalTorusCoactionAssociativity",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalTorusCoactionAssociativity.lean",
+  "declaration": "AlgebraicGeometry.Monoscheme.canonicalTorusCoaction_associativity",
+  "statement": "theorem canonicalTorusCoaction_associativity (k : Type u) [Field k] {M : Fine.{u}}\n    (C : ToricComponent M)\n    (a : ((Spec (.of (MonoidAlgebra k C.lattice))).asOver (Spec (.of k))) ⊗\n        Over.mk (componentToBase k C) ⟶ Over.mk (componentToBase k C))\n    (ha : IsCanonicalTorusAction k C a.left) :\n    (μ[((Spec (.of (MonoidAlgebra k C.lattice))).asOver (Spec (.of k)))] ▷\n      Over.mk (componentToBase k C)) ≫ a =\n        (α_ ((Spec (.of (MonoidAlgebra k C.lattice))).asOver (Spec (.of k)))\n          ((Spec (.of (MonoidAlgebra k C.lattice))).asOver (Spec (.of k)))\n          (Over.mk (componentToBase k C))).hom ≫\n            ((Spec (.of (MonoidAlgebra k C.lattice))).asOver (Spec (.of k))) ◁ a ≫ a",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T081127-L-1826814",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T081127-L-1826814",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

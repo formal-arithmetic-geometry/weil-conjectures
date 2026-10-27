@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-ordinary-line-scalar-balanced-comparison",
+ "kind": "statement",
+ "title": "Balanced ordinary signed-line scalar tensor comparison",
+ "statement": "Let $X$ be a scheme with its small pro-etale site and chosen universes as in [def-pur-ordinary-line-scalar-data]. Let $\\alpha:R\\to S$ be a map of commutative ring sheaves, $p$ a universal scalar presentation, and $L,K$ module sheaves over $R,S$. For each $m\\in\\mathbf Z$ fix $B_m:M_m\\otimes_R S\\cong N_m$, where $M_m=L^{[m]}$ and $N_m=K^{[m]}$. There is a natural isomorphism $o_m:E_p(-\\otimes_R M_m)\\cong E_p(-)\\otimes_S N_m$ of ordinary module-sheaf functors. Its forward map sends $s\\otimes(x\\otimes y)$ to $(s\\otimes x)\\otimes B_m(1\\otimes y)$; its inverse sends $(s\\otimes x)\\otimes B_m(q\\otimes y)$ to $sq\\otimes(x\\otimes y)$, using the fixed sheafification pure sections and object-equation transport of [def-pur-ordinary-line-scalar-data]. No local-freeness, flat ring-map, or derived-category comparison hypothesis is required.",
+ "stmt_deps": [
+  "def-pur-ordinary-line-scalar-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; the ordinary signed-line part of blueprint Tate-twist local freeness proof (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with tensoring by a locally free rank one sheaf",
+   "results": "8 hits including SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits concern free sheaves and ordinary pullback, without the representative-normalized unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso, leftDerivedNatIso_hom, leftDerivedNatIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Useful universal uniqueness API; it does not provide the ordinary balanced formula or the normalized evaluation square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorBinaryIso|tensorComparison|scalarTensorComparison_natural",
+   "results": "0 hits in the Mathlib search service; local rg finds the project scalar tensor core and ordinary tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project tensor comparison; no matching Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OrdinaryLineDerivedScalarComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), exact signed-line twists and actual evaluation; ordinary coefficient comparison.",
+   "via": [
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Construct each component from the existing scalar extension binary tensor core, transport the ordinary sheaf tensors through their sheafification identifications, and compose with B_m on the second factor. The component formula follows from the core generator formula.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the normalized ordinary scalar adjunction to test naturality on pure tensors; both maps apply the given module morphism to x. The inverse identity and bilinearity move q to the first tensor factor and multiply s and q, giving the inverse formula.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YY; explicit extraction of parent proof steps 5, 6 and 8 by M1."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OrdinaryLineScalarBalancedComparison",
+  "file": "lean/Sheaf/Algebra/Homology/OrdinaryLineScalarBalancedComparison.lean",
+  "declaration": "SheafOfModules.OrdinaryLineScalar.ordinary_scalar_line_balanced",
+  "statement": "theorem ordinary_scalar_line_balanced\n    (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}\n      (J := Scheme.ProEt.topology X) α)\n    (L : Modules.{t, a} X R) (K : Modules.{t, a} X S)\n    (B : ∀ m : ℤ, changeOfRingsOfUniverses.{t, t + 1, max a (t + 1), max a (t + 1)}\n      (J := Scheme.ProEt.topology X) α (power.{t, a} L m) ≅ power.{t, a} K m)\n    : ∃ o : ∀ m : ℤ, tensor.{t, a} L m ⋙ p.ordinary ≅\n        p.ordinary ⋙ tensor.{t, a} K m,\n      (∀ (m : ℤ) (M : Modules.{t, a} X R) (U : X.ProEtᵒᵖ)\n        (x : M.val.obj U) (y : (power.{t, a} L m).val.obj U) (s : S.obj.obj U),\n        ((o m).hom.app M).val.app U\n          (scalar.{t, a, w} p ((tensor.{t, a} L m).obj M) U s\n            (LineUnbounded.pureTensor.{t, a} X R M (power.{t, a} L m) U x y)) =\n        LineUnbounded.pureTensor.{t, a} X S (p.ordinary.obj M) (power.{t, a} K m) U\n          (scalar.{t, a, w} p M U s x)\n          ((B m).hom.val.app U (scalarExtensionSection α (power.{t, a} L m) U 1 y))) ∧\n      (∀ (m : ℤ) (M : Modules.{t, a} X R) (U : X.ProEtᵒᵖ)\n        (x : M.val.obj U) (y : (power.{t, a} L m).val.obj U) (s q : S.obj.obj U),\n        ((o m).inv.app M).val.app U\n          (LineUnbounded.pureTensor.{t, a} X S (p.ordinary.obj M) (power.{t, a} K m) U\n            (scalar.{t, a, w} p M U s x)\n            ((B m).hom.val.app U (scalarExtensionSection α (power.{t, a} L m) U q y))) =\n        scalar.{t, a, w} p ((tensor.{t, a} L m).obj M) U (s * q)\n          (LineUnbounded.pureTensor.{t, a} X R M (power.{t, a} L m) U x y))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "independent cc review: the deleted blocks of the original module against the new Data/Presentations/LineData modules (verbatim apart from blueprint tags), the item signature against the clone, the four direct importers and #print axioms compiled in sandbox /tmp/m1sb, the timing of the published original (106.6 s) against the delivered item (34 s), and the evaluation hole against its node and the Comparison.evaluation field"
+ }
+}

@@ -1,0 +1,51 @@
+# Q80 stage-1 delivery: lem-cbc-completed-proper-independent-origins
+
+## Files written
+
+- dag/nodes/sec-smooth-purity/lem-cbc-completed-proper-independent-origins.json — existing statement, now split into six proof steps. Its statement and statement dependencies are unchanged. The inherited metadata and searches are retained, and the searches actually run by Q80 are added.
+- citations.json — 28 step/node entries with verbatim statement excerpts.
+- report.md — this report. searches.jsonl is the unedited log maintained by msearch.py; prepare.py is sandbox-only preparation code.
+
+No new nodes; no new Mathlib leaves. The existing DAG already states the substantive interfaces the argument needs.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the exact blueprint id and for completed proper exchange, independent origins/witnesses, and the adic/base-change notions. No project declaration states this entire ambient naturality and independent-origin assertion. The ordinary étale proper-base-change declarations do not establish the completed-ring strict-tower claim.
+
+## WANTED
+
+None.
+
+## Audit findings and changes
+
+The item was statement-only, and the sandbox initially held no node, proof, report, or logged searches. I retained the imported statement. The older theorem thm-weil-pbc-complete-proetale explicitly assumes compatibility between the witnesses, so it is not sufficient for this item. Instead the finite exchange rectangle is used at each quotient, and the actual existing strict normalization identifies the resulting limit composite. The statement of lem-weil-pbc-strict-tower-exchange-mate-normalization itself assumes a witness separately at every level, with no compatibility requirement. The completed-base-change-map definition likewise now gives these independent witnesses. No hypothesis has been silently strengthened.
+
+The whole-DAG and whole-blueprint searches included completed proper exchange, ambient naturality, the strict tower/projection interfaces, and the cited Stacks tags 09C9 and 099N. Existing nodes supply the finite rectangle, canonical finite exchange, counit-normalized evaluation, perfect projection formula, levelwise cohomology criterion, reconstruction and direct-image/limit comparison. There was no reason to introduce another node for these facts, for a clause of the item, or for the few-line naturality calculation. The Mathlib search services were all available: the logged LeanFinder searches (two different formulations), LeanSearch, Loogle and source grep found no theorem about this completed pro-étale strict-tower composite. The hits concern stability of proper/étale morphisms under scheme base change, free-module sheaf pullback, local-cohomology diagrams, and ordinary module adic completion; none states this item.
+
+## Not duplicates
+
+No new nodes were created. Existing stronger/general interfaces are cited directly.
+
+## Review by Q80
+
+I read the chapter and unit records, the current blueprint proof of thm-cbc-complete-proetale (main-20261015), and the actual local Stacks sources: proetale.tex Tag 09C9 theorem-proper-base-change and Tag 099N lemma-pushforward-Noetherian-case, and sites-cohomology.tex Tag 07A7 remark-base-change, Tag 0944 lemma-projection-formula, and Tag 0A07 lemma-Rf-commutes-with-Rlim. The tag/label correspondence was checked in tags/tags. The Stacks proof chooses a bounded-below origin independently for each n; it does not need a common bound or transition maps between those origins. It omits the completed map construction. I therefore mark the proof as an agent assembly of the project's explicit strict normalizations, rather than attributing completed coefficient identifications or full ambient naturality to Stacks. No SGA source is used. There are no new nodes needing separate source review.
+
+For step 1 I read the statements of the profinite coefficient inverse-image theorem, derived tensor pullback, tower-derived evaluation normalization, perfect projection formula, levelwise tower abelianness, and the unbounded cohomological isomorphism criterion. The first supplies the coefficient ring isomorphisms for all scheme maps, so exact pullback is justified. The tensor theorem is simultaneous naturality, not just an objectwise identification. The evaluation theorem supplies the counit normalization, so evaluating the diagram adjunct really yields the ordinary projection adjunct. The perfect projection formula explicitly allows every ambient F, with no completeness hypothesis; the adic datum supplies the perfect P_n. Levelwise kernels and cokernels identify the cohomology of the actual strict tower, and the derived cohomology criterion detects invertibility. I checked the specified diagram-site construction in def-cbc-completed-exchange-map to keep its t and Pi maps; its definition is used for the construction, while the cited theorems prove its needed properties. The quotient diagram itself is not assumed perfect on the diagram site.
+
+For step 2 I checked that def-weil-pbc-ambient-ringed-exchange really defines a transformation of functors on the unrestricted category. The ringed projection theorem gives naturality in the object and coefficient variables. Writing the two conjugating isomorphisms U and V exposes the strict identity D(a)v_H=v_H'B(a): this is cancellation of three naturality equations, not a claim of faithfulness of evaluation. The tensor comparisons and their naturality are supplied by the cited tensor pullback theorem.
+
+For step 3 I checked the precise statement of prop-weil-pbc-direct-image-limits: its comparison is defined for EVERY strict tower and is the derived comparison of the equal underived composites, computed on K-injectives. Hence it is a natural isomorphism without a completeness hypothesis on either input. The separately cited Rlim theorem supplies an actual triangulated functor. I wrote the three equations for q, v, and c inverse and multiplied them to get the exact naturality equation in the item. This is the elementary assembly step, not a new theorem about completion.
+
+For step 4 I checked the finite evaluation theorem against unbounded ambient inputs and the tower evaluation theorem against counits. I added the scalar-change-adjunction theorem explicitly: its statement compares both derived pullback and derived direct image after restriction, and says their comparisons respect adjuncts. This prevents silently identifying finite-coefficient and completed-coefficient direct images. The intrinsic finite rectangle supplies precisely the equation w_n h_n = h'_n v_n for the specified finite projection maps and ambient exchange. I opened def-weil-pbc-four-arrows to check the directions, the inverse h_n, and the quotient-coefficient actions. Reconstruction translates intrinsic completeness into the quotient-unit condition where the four-corner notation uses it. The argument evaluates an already constructed strict map; it never builds a map by selecting lifts from its evaluations.
+
+For step 5 I opened thm-weil-pbc-finite-level-proetale. Its hypotheses are exactly finite commutative ring, proper p, and a bounded-below witnessed origin for this ONE H_n. Finiteness of P_n belongs to the adic datum; the witness gives the bounded-below property. Nothing uses compatibility of the witnesses. The subsequent kernel/cokernel and cohomology argument detects an isomorphism of an actual tower morphism, which is justified by the levelwise abelian theorem and unbounded isomorphism criterion. It does not claim that equality of evaluated maps implies equality. Rlim is applied only after that strict-tower isomorphism is established.
+
+For step 6 I read the full statements of Koszul reconstruction, direct-image/limit compatibility, strict-tower-exchange-mate-normalization and the completed-base-change-map definition. Reconstruction identifies the specified completion UNIT, not just an abstract isomorphism. Direct image preserves completeness. The normalization theorem gives v' = H' R(e) H inverse with these exact projection adjuncts; its hypotheses have no witness transition compatibility. Therefore equality with the named exchange holds already in the strict derived tower category. The source q factor and inverse target comparison are the definition's exact other two factors. This checks equality of the requested morphism, rather than just source/target agreement or equal evaluations. The cited definition's domain now retains independent witnesses, so equality is well typed.
+
+I tested the small cases conceptually against the constructions: H=0 gives zero corners and the unique isomorphism; identity p gives identity projection/counit factors; identity g gives the identity-square mate and the same canonical reconstruction maps; finite-level witnesses with lower bounds tending to minus infinity remain valid because no D+ hypothesis is made on the tower category or on Rlim. A morphism a with noncomplete endpoints is admitted in steps 1–3, before witnesses or completeness are imposed. Arbitrarily incompatible witness choices change none of the raw ambient factors or original quotient transitions. Exact restriction of scalars preserves isomorphisms; it is not treated as a full or faithful derived equivalence. I checked all proof dependencies for a path back to the item before writing the file. Every non-elementary step is under 2000 characters and contains a single argument with its substantive inputs cited. The sole elementary step is explicit composition of already supplied natural transformations.
+
+The non-definition inputs outside sk-prop-sf-cbc are generic proper-base-change, coefficient, evaluation, cohomology and derived-limit tools. They implement precisely the completed proper factor named by the unit and are declared in split_report.tool_uses. No unit route is replaced. The item is not the unit's key statement, so no unit record is modified. I checked delivery-errors B–E: self-contained inherited statement, exact source tags, real logged searches, no new-node duplication or relabelling, no uncited flatness/exactness/comparison claim, and no added hypotheses. No Lean, compiler, Lake or build tool was used; all writes stay in the assigned sandbox.
+
+## Unfinished work
+
+None in the stage-1 split. Server dry-run and delivery outcomes are reported by the required delivery tool.

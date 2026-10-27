@@ -1,0 +1,367 @@
+{
+ "id": "lem-sfb-derived-inflation-monoidal-normalization",
+ "kind": "statement",
+ "title": "Canonical monoidal inflation and invariant-adjunction normalization",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent profinite site and $G$ a profinite group, with internal module category $\\mathcal M_A$ and internal action category $\\mathcal A_G(A)$ as in [sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-sfb-condensed-action-module], in [def-weil-size-convention]. Let $T:\\mathcal M_A\\to\\mathcal A_G(A)$ be trivial inflation, and let $\\Gamma_G$ be its right adjoint with transpose defined by the fixed-section inclusion after every profinite base change [lem-sfb-condensed-product-action-inflation]. Use the ordinary unbounded derived categories [def-weil-abstract-derived-category], the ordinary internal relative tensor, and its K-flat derived tensor. Write $I=A[0]$ in either category.\n\nPut $\\mathscr E=\\operatorname{Sh}(*_{\\mathrm{pro\\acute et}})$, the sheaves on the small coherent profinite site, and $K=\\underline G$. Let $\\mathscr E^{K}\\simeq\\operatorname{Sh}(C_{K})$ be the action topos presented by the small action site $C_{K}$, and $p=p_{K}:\\mathscr E^{K}\\to\\mathscr E$ the trivial-action geometric morphism, both as in [lem-sfb-action-topos-geometric-restriction]. The action category $\\mathcal A_G(A)$ is the category of sheaves of modules over the commutative ring sheaf $p^{-1}A$ on the small site $C_{K}$, with $p^*=T$. Under this presentation the canonical derived pullback $Lp^*$ is canonically identified with the termwise exact triangulated functor $L=D(T)$, and the derived tensor on $D(\\mathcal A_G(A))$ is the internal action tensor, namely the K-flat derived tensor of the ringed site $(C_{K},p^{-1}A)$ with the unitors and symmetry of [lem-sf-ringed-derived-closed-symmetric-monoidal]. The canonical symmetric strong monoidal structure on $L$ has tensor and unit comparisons obtained from the ordinary coefficient-tensor identity and regular-unit identity; in particular $LI=I$. Its symmetry is the signed cochain symmetry. Its shifts are the termwise usual signed cochain shifts.\n\nThe derived adjunction $Lp^*\\dashv Rp_*$ identifies with the canonical adjunction $L\\dashv R\\Gamma_G$ of [lem-sfb-condensed-derived-restriction-calculus], with its existing unit and counit. It is computed on bounded-below objects by equivariant injective resolutions; on unbounded objects it is the K-injective derived adjunction. This actual adjunction commutes with the fixed canonical shifts, including its unit and counit. The strong tensor comparisons commute with the signed tensor/shift comparisons in both variables. In particular, for $S_n=I[-n]$, inflation identifies the comparison $r_{p,q}:S_{p+q}\\xrightarrow{\\sim}S_p\\otimes^LS_q$ formed by first extracting the first shift and then the second, and the unit multiplication, with the identically normalized comparison in the action category, for all integers $p,q$. These assertions include $A=0$ and $G=1$. For $G=1$, these identifications give the identity functor and identity adjunction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated internal bar normalization below the direct-image argument; extracted old steps 1–2 and the exact pullback tensor/shift normalization of step 4. Agent-formulated; exact non-SGA reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sfb-condensed-inflation-action-site-data",
+  "def-sfb-condensed-inflation-native-site-data",
+  "def-sfb-inflation-shift-unit-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-action-topos-geometric-restriction] with the small coherent profinite site, $R=A$ and $K=\\underline G$. Its action-site equivalence presents $\\mathscr E^K$ by the small site $C_K$ and identifies $p^*$ with exact trivial inflation. More explicitly [lem-sfb-internal-restriction-module-tensor] identifies module pullback by $r\\otimes m\\mapsto rm$, inverse $m\\mapsto1\\otimes m$; the action-site module tensor is precisely the underlying sheaf tensor with diagonal action. Its tensor comparisons are the identities on pure tensors and its regular-unit comparison is the identity. Thus the ringed-site module tensor in the statement is the ordinary internal action tensor, with no replacement by discrete representations. By [lem-sfb-condensed-product-action-inflation], its right adjoint is the invariant subsheaf after every profinite base change, with the specified inclusion transpose. This identifies the ordinary adjunction, not just the two functors.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sfb-internal-restriction-module-tensor",
+    "lem-sfb-condensed-product-action-inflation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal inflation infrastructure; ordinary action-site module identification."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-exact-derived-resolving-identification] to this exact ringed-topos pullback. Both sites are small in the fixed coefficient universe and the structural map is $p^{-1}A\\xrightarrow{1}p^{-1}A$, so all its hypotheses hold. It identifies the canonical $Lp^*$ with the termwise localization $D(T)$ on every complex, compatibly with every signed integer shift, and identifies the degree-zero regular-ring comparison with $T(A)[0]=A[0]$. It also supplies preservation of flat-term K-flat resolutions and all the direct sums in an unbounded total tensor. Hence the K-flat tensor computed on $(C_K,p^{-1}A)$ is the derived tensor of the ordinary action tensor identified in step 1; the equality is at the level of derived objects and representative comparisons, not only their cohomology groups.",
+   "uses": [
+    "lem-pur-exact-derived-resolving-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor (dual left-derived version); sites-cohomology.tex Tag 06YY, lemma-derived-base-change; representative normalization from the cited node."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-ringed-derived-monoidal-comparisons] for the ringed-topos morphism $p$. It gives a symmetric strong monoidal structure on the canonical $Lp^*$, with comparisons computed by ordinary pullback on flat-term K-flat representatives. Step 1 makes those ordinary comparisons the coefficient-tensor and regular-unit identities; step 2 identifies the functor with $L=D(T)$. The independently fixed native tensor constraints are those of [lem-sf-ringed-derived-closed-symmetric-monoidal]: associativity and both unitors are localized module-tensor constraints and symmetry is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$ in cochain bidegree $(i,j)$. Consequently the comparison is symmetric with respect to exactly those constraints; it is not a transported alternative monoidal structure. Its unit comparison is the stipulated $LI\\cong I$.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0FPT, lemma-symmetric-monoidal-derived. Cross-functor coherence is supplied by the cited comparison node."
+   }
+  },
+  {
+   "text": "For $p_*$ use the invariant inclusion transpose fixed in step 1. Apply [lem-sfb-resolving-derived-adjunction-normalization] with left adjoint $T$ and right adjoint $\\Gamma_G$. The left resolving class is flat-term K-flats, and the universal left derived comparison is the one fixed in step 2. Unbounded K-injective resolutions and the right derived pair are supplied by [lem-sfb-condensed-action-injective-infrastructure]. The normalization theorem says that a representative chain map $f:T(M)\\to J$ into a K-injective complex has derived transpose equal to the localization of its ordinary invariant-inclusion transpose followed by the right-derived computation unit. That is also the Hom bijection specifying the canonical $D(T)\\dashv R\\Gamma_G$ in the infrastructure node. Therefore the identified adjunctions have equal Hom bijections. Their units (transpose of $1_{LM}$) and counits (inverse transpose of $1_{RN}$) agree. The same infrastructure node supplies bounded-below equivariant injective computations, unbounded K-injective computations, and commutation of these actual units and counits with the fixed signed shifts; none is inferred just from an isomorphism of adjoint functors.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, via derived.tex Tag 09T5, lemma-derived-adjoint-functors; cited representative Hom normalization and internal-action infrastructure."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-pullback-tensor-canonical-shift-unit] to $p$. Its comparison is normalized on flat-term K-flat representatives by ordinary pullback of total tensor, exactly the comparison in step 3. It gives the two displayed shift equations separately for input 1 and input 2 and for every integer shift, as well as both regular-ring unit equations. Step 2 identifies its canonical pullback shifts with the stipulated termwise shifts. Form $r_{p,q}$ as the composite of the inverse multiplication $I\\to I\\otimes^L I$ shifted by $-p-q$, followed by the inverse signed tensor/shift isomorphisms extracting first $-p$ from the first factor and then $-q$ from the second factor (including the canonical addition comparison). Apply $L$ to this composite. The unit equation identifies its first arrow with that for the action-category regular ring; the first-variable shift equation identifies the next arrow; the second-variable equation identifies the last arrow. The zero/addition laws identify the intervening shift reassociations. Thus the entire composite is exactly the action-category $r_{p,q}$ in the prescribed order, with the same signs, for all integers $p,q$.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; more-algebra.tex Tag 0FNH, item-shift-tensor. Apply the two-variable signed equations of the cited node to the shifted regular-ring multiplication."
+   }
+  },
+  {
+   "text": "No step assumes $A\\ne0$, so $A=0$ is included (all unital modules and their derived objects are zero). If $G=1$, [lem-sfb-internal-restriction-geometric-coherence] identifies terminal-group actions with ordinary sheaves and restriction along the identity with the literal identity. The invariant condition in step 1 then imposes no restriction and its inclusion and both Hom transposes are identities. Apply the identity clause of [lem-sfb-ringed-derived-monoidal-comparisons]: the canonical derived comparisons identify both monoidal pullback and adjunction with the identity functor and identity adjunction. Thus all normalizations in steps 2–5 specialize to the identity ones, including the units, counits and ordered shifted-unit comparison.",
+   "uses": [
+    "lem-sfb-internal-restriction-geometric-coherence",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written internal inflation infrastructure, terminal-group and zero-coefficient checks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-exact-derived-resolving-identification",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-sfb-internal-restriction-geometric-coherence",
+  "lem-sfb-internal-restriction-module-tensor",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) motivates the inherited internal-bar infrastructure; the monoidal inflation normalization is agent-written, using Stacks Tags 015F, 06YY, 07A4, 07A6, 09T5, 0FPT, 0FNH through the cited general nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trivialDerived|derivedTrivialMonoidal|mapDerivedCategoryRightDerivedAdjunction",
+   "results": "{\"t\": \"2026-10-22T06:06:18Z\", \"tool\": \"grep\", \"query\": \"trivialDerived|derivedTrivialMonoidal|mapDerivedCategoryRightDerivedAdjunction\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and ordinary/light-condensed monoidal instances do not identify the internal action-site pullback, its prescribed monoidal models and the invariant-inclusion K-injective adjunction with their fixed shifts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image of a ringed topos preserves tensor units and signed tensor shift comparisons and its canonical right adjoint is derived invariants",
+   "results": "{\"t\": \"2026-10-22T06:06:18Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse image of a ringed topos preserves tensor units and signed tensor shift comparisons and its canonical right adjoint is derived invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"CategoryTheory.Adjunction.derived_unit\", \"CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso\", \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"7d15ba1c5dcc5fad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and ordinary/light-condensed monoidal instances do not identify the internal action-site pullback, its prescribed monoidal models and the invariant-inclusion K-injective adjunction with their fixed shifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.mapDerivedCategory\"",
+   "results": "{\"t\": \"2026-10-22T06:06:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor.mapDerivedCategory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryCompIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj\", \"CategoryTheory.Functor.mapDerivedCategoryIdIso_inv_app_singleFunctor_obj\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\"], \"digest\": \"ebb07d738aba519c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and ordinary/light-condensed monoidal instances do not identify the internal action-site pullback, its prescribed monoidal models and the invariant-inclusion K-injective adjunction with their fixed shifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact trivial inflation of internal modules with profinite group action is a strong symmetric monoidal derived functor and its canonical invariants adjunction commutes with signed shifts",
+   "results": "{\"t\": \"2026-10-22T06:06:31Z\", \"tool\": \"leanfinder\", \"query\": \"Exact trivial inflation of internal modules with profinite group action is a strong symmetric monoidal derived functor and its canonical invariants adjunction commutes with signed shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.Tor\", \"Rep.Tor_map\", \"Rep.Tor_obj\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\"], \"digest\": \"c520f17ce992998f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and ordinary/light-condensed monoidal instances do not identify the internal action-site pullback, its prescribed monoidal models and the invariant-inclusion K-injective adjunction with their fixed shifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on internal action module sheaves induces a symmetric monoidal derived functor whose invariants adjunction preserves signed cochain shifts",
+   "results": {
+    "t": "2026-10-23T11:36:52Z",
+    "tool": "leanfinder",
+    "query": "Exact inverse image on internal action module sheaves induces a symmetric monoidal derived functor whose invariants adjunction preserves signed cochain shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "CategoryTheory.Functor.mapExactFunctor_smul",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "CategoryTheory.Sheaf.symmetricCategory",
+     "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+     "Rep.Tor_map"
+    ],
+    "digest": "bc949f9f4a962b62"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected exact-functor localization and abstract adjunction/shift APIs; none states the internal action-site tensor identification with the prescribed invariants adjunction and both tensor/shift normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "trivialDerived|derivedTrivialMonoidal|mapDerivedCategoryRightDerivedAdjunction",
+   "results": {
+    "t": "2026-10-23T11:38:45Z",
+    "tool": "grep",
+    "query": "trivialDerived|derivedTrivialMonoidal|mapDerivedCategoryRightDerivedAdjunction",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected exact-functor localization and abstract adjunction/shift APIs; none states the internal action-site tensor identification with the prescribed invariants adjunction and both tensor/shift normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact trivial inflation of condensed module sheaves derived tensor adjunction compatible with shifts",
+   "results": {
+    "t": "2026-10-23T11:38:45Z",
+    "tool": "leansearch",
+    "query": "Exact trivial inflation of condensed module sheaves derived tensor adjunction compatible with shifts",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.IsTriangulated.commShift",
+     "CategoryTheory.Adjunction.IsTriangulated.mk''",
+     "CategoryTheory.Adjunction.IsTriangulated.mk'",
+     "CategoryTheory.Adjunction.CommShift.CompatibilityUnit",
+     "CategoryTheory.Adjunction.IsTriangulated.comp",
+     "CategoryTheory.Adjunction.IsTriangulated",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Adjunction.CommShift.CompatibilityCounit"
+    ],
+    "digest": "af38bbec994c8c45"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected exact-functor localization and abstract adjunction/shift APIs; none states the internal action-site tensor identification with the prescribed invariants adjunction and both tensor/shift normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.mapDerivedCategory\"",
+   "results": {
+    "t": "2026-10-23T11:38:46Z",
+    "tool": "loogle",
+    "query": "\"Functor.mapDerivedCategory\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.mapDerivedCategoryIdIso",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Functor.mapDerivedCategoryIdIso_hom_app_singleFunctor_obj",
+     "CategoryTheory.Functor.mapDerivedCategoryIdIso_inv_app_singleFunctor_obj",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh"
+    ],
+    "digest": "ebb07d738aba519c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected exact-functor localization and abstract adjunction/shift APIs; none states the internal action-site tensor identification with the prescribed invariants adjunction and both tensor/shift normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "results": {
+    "t": "2026-10-23T11:40:02Z",
+    "tool": "grep",
+    "query": "mapDerivedCategory|instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+    "sub": "Algebra",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean"
+    ],
+    "digest": "e71bc7993d6dc2d5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: inspected exact-functor localization and abstract adjunction/shift APIs; none states the internal action-site tensor identification with the prescribed invariants adjunction and both tensor/shift normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-inflation-graded-cup",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent-formulated internal bar normalization below the direct-image argument; extracted argument 1: old steps 1–2 and pullback compatibility in old step 4; exact source reference WANTED, not literally in the blueprint paragraph.",
+   "via": [
+    "lem-sfb-internal-inflation-graded-cup",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-derived-inflation-monoidal-normalization",
+  "worker": "stage1",
+  "summary": "Split into six steps using existing action-site, exact derived identification, ringed monoidal comparison, normalized derived adjunction and two-variable signed-shift nodes. No new nodes. Statement and statement dependencies retained. Hom bijections, rather than arbitrary adjoint uniqueness, identify the existing unit/counit; ordered shifted-unit maps are checked as composites.",
+  "blueprint": "Current latest direct-images proof paragraph (3) is the source of the ancestor direct-image argument. The inherited internal-bar normalization is agent-formulated below that paragraph, not literally a blueprint assertion. blueprint_refs.py ancestor reports null; its inherited via chain and precise from.place are retained. Steps 1–2 realize ordinary/exact inflation, 3 realizes tensor/unit/symmetry, 4 realizes the invariant-inclusion derived adjunction, 5 realizes the ordered tensor/shift normalization, and 6 realizes its edge cases. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-exact-derived-resolving-identification",
+    "why": "General exact ringed-pullback identification with termwise localization, including the fixed shifts and resolving comparisons; the unit internal-action nodes do not state this general representative comparison."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General canonical ringed-topos monoidal coherence and identity normalization, applied only to the action-topos projection; not a replacement of the direct-image route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Specifies the native K-flat tensor unitors and signed symmetry on any small ringed site, including the action site; explicitly part of the item statement."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "General representative Hom formula fixing the canonical derived adjunction, used to match the invariant-inclusion transpose; the internal-action infrastructure does not compare it to the ringed-topos derivation."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "General two-variable tensor/shift and unit equations for the canonical ringed pullback comparison; the internal-action unit has no such general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-exact-derived-resolving-identification",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-83d72ef26",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-83d72ef26 (reviewer sub-agent of L); spot-checked: I read the whole item: six steps and no new nodes. The statement and stmt_deps are identical to the live node, which is still unsplit on live and side-live, and there is no repair note. Step 1: the action-topos node (the profinite site has finite limits; the condensed group of G is a sheaf of groups), the module-tensor node (r⊗m↦rm, diagonal tensor, identity comparisons) and the product-inflation node (invariants after every base change, transposes) fit the item; R_K-modules are R-linear actions. Step 2: exact-derived-resolving-identification applies to p with identity ring map and exact T, giving Lp*≅D(T) with shifts and LI=I. Step 3: ringed monoidal comparisons and the native signed constraints apply; the representative formula comes from the step-5 node (Tag 07A4). Step 4: the 09T5/07A6 resolving normalization gives the same Hom bijection as the infrastructure node's canonical D(T)⊣RΓ, so units and counits agree; this is not inferred from isomorphic adjoints. Step 5: the two-variable shift and unitor equations rebuild r_{p,q} in the stated order for all integers p,q. Step 6: G=1 via literal identity restrictions plus the identity clause; A=0 is trivial. The five off-unit tool_uses are general ringed-site results and are accepted. Batch-5 flags: geometric-coherence and module-tensor reach lem-pd-sheaf-trilinear-universal only through module-tensor's proof; that node is generic trilinear universality of the sheaf tensor, not a step of Poincaré duality or the trace formula, so both are accepted. The only SGA string is 'non-SGA reference WANTED'."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedInflationMonoidalNormalization",
+  "declaration": "CategoryTheory.CondensedInflationNormalization.derivedInflationMonoidalNormalization",
+  "declarations": [
+   "CategoryTheory.CondensedInflationNormalization.PullbackIdentification",
+   "CategoryTheory.CondensedInflationNormalization.PullbackShiftIdentification",
+   "CategoryTheory.CondensedInflationNormalization.forgetLimits",
+   "CategoryTheory.CondensedInflationNormalization.forgetColimits",
+   "CategoryTheory.CondensedInflationNormalization.trivialForget",
+   "CategoryTheory.CondensedInflationNormalization.trivialForgetDerived",
+   "CategoryTheory.CondensedInflationNormalization.TerminalIdentity",
+   "CategoryTheory.CondensedInflationNormalization.Normalization",
+   "CategoryTheory.CondensedInflationNormalization.derivedInflationMonoidalNormalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedInflationMonoidalNormalization.lean",
+  "statement": "theorem derivedInflationMonoidalNormalization [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : Normalization A G",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06bf7fdb1",
+  "group": "Q110",
+  "result": "pass",
+  "note": "First real S2 delivery for this item. Statement and proof are unchanged from base; only stmt_deps (+3 new def nodes) and lean differ. Every clause matches the node with no extra hypotheses: Lp*≅D(T) as a universal left-derived pair with a unique representative-normalized iso; ∃ ActionSitePresentation with sections/restriction/act/scalars, tensor_pure, inflation_sections and the transpose-pinned directImage; native K-flat tensor via RingedDerivedTensorCoherence with the symmetry square; ∃!-pinned derivedTrivialTensor with tensor/unit models and LI=I via coefficientIso; SymmetrySquare with braidedCategory'; termwise shifts and triangulated; adjunction Hom formula (transpose), kinjective/bounded_below, adjunction CommShift; first/second shift squares ∀ n:ℤ; ordered r_{p,q} ∀ p,q:ℤ and multiplication; G trivial via TerminalIdentity with i=trivialForgetDerived and r pinned by the unit law; A=0 allowed. One sorry; source/blueprint docstrings on every declaration; lean records equal the file declarations; statement verbatim; no duplicates. Advisories: ∃ d in PullbackIdentification, the free unit iso e in NativeTensorIdentification and the free j in TerminalIdentity are content-free on their own (adjunction content is in transpose, ε is forced by μ, r is pinned by the unit law); owners def-sfb-condensed-derived-invariants/-cup/equivariant-bar-data are not item stmt_deps; the action-site-data node cites the theorem lem-sfb-action-topos-geometric-restriction for its spec structures and omits def-sfb-internal-action-site-basic; unused proof-dep imports. No compile (no file changed)."
+ }
+}

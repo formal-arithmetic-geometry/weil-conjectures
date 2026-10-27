@@ -1,0 +1,233 @@
+{
+ "id": "lem-pe-profinite-partition-incidence-limit",
+ "kind": "statement",
+ "title": "Profinite partition image incidence spaces reconstruct the pullback",
+ "statement": "Let $S,P$ be profinite spaces (compact Hausdorff and totally disconnected), let $X$ be any topological space, and let $f:S\\to P$ and $g:X\\to P$ be continuous. A finite clopen partition is a finite set of nonempty pairwise disjoint clopen subsets with union $S$; for empty $S$ it is empty. Let $I$ be the small nonempty directed poset of all such partitions, ordered by refinement. For $\\mathcal Q\\in I$ give its set of parts the discrete topology and put\n$$Y_{\\mathcal Q}=\\{(x,A)\\in X\\times\\mathcal Q:g(x)\\in f(A)\\}$$\nwith the subspace topology (equivalently, the disjoint union of $g^{-1}(f(A))$ over the parts). Refinement sends $(x,A')$ to $(x,A)$ for the unique containing part $A$. Give the set of compatible families $(y_{\\mathcal Q})_{\\mathcal Q\\in I}$ the subspace topology in $\\prod_{\\mathcal Q}Y_{\\mathcal Q}$, the topological inverse limit [def-kun-subspace-topology]. Writing $A_{\\mathcal Q}(s)$ for the unique part containing $s$, the map\n$$\\{(x,s)\\in X\\times S:g(x)=f(s)\\}\\longrightarrow\\varprojlim_{\\mathcal Q\\in I}Y_{\\mathcal Q},\\qquad(x,s)\\longmapsto((x,A_{\\mathcal Q}(s)))_{\\mathcal Q}$$\n(the left side with the subspace topology of the product $X\\times S$ [def-kun-subspace-topology])\nis a homeomorphism. More explicitly, a compatible choice of parts $(A_{\\mathcal Q})$ has intersection $\\{s\\}$ for a unique $s\\in S$, and $\\bigcap_{\\mathcal Q}f(A_{\\mathcal Q})=\\{f(s)\\}$. The coordinate maps $S\\to\\mathcal Q$ generate its topology. The statement includes empty $S$ and empty $X$, with both sides empty in either case.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+  "place": "*2.*, compactness and clopen separation: the paragraphs from “A compatible family” through continuity of the map to S; topological incidence form of Tag 097D, lemma-construct-profinite, proetale.tex."
+ },
+ "stmt_deps": [
+  "def-kun-subspace-topology"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib DiscreteQuotient S, a nonempty semilattice with top ordered from finer to coarser quotients. The explicit incidenceComparison uses ofLE_proj to give its compatibility. No nonemptiness assumption on S or X is introduced. For the final empty cases, the pullback is empty by either coordinate, and surjectivity of incidenceComparison then makes the incidence limit empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "Preliminaries, directed partitions; *2.*, index and empty cases made explicit."
+   }
+  },
+  {
+   "text": "Put e(s)(Q)=Q.proj s. Each coordinate is continuous, so e is continuous. Mathlib DiscreteQuotient.eq_of_forall_proj_eq makes e injective. Since S is compact and the product of the discrete quotients is Hausdorff, Continuous.isClosedEmbedding makes e an embedding. Its induced-topology equality expands using induced_iInf and induced_compose to give exactly the claimed infimum of induced quotient topologies. This replaces the explicit clopen-basis argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*, “clopen partitions separate the points” and topology of the map to S; Topology Tag 08ZZ, lemma-profinite-refine-open-covering."
+   }
+  },
+  {
+   "text": "For compatible a(Q), Mathlib DiscreteQuotient.exists_of_compat supplies s with Q.proj s=a(Q) for every Q. Mathlib DiscreteQuotient.eq_of_forall_proj_eq shows that a point in all the chosen fibres equals s. Conversely s belongs to every fibre. Therefore their intersection is {s}, and singleton injectivity gives uniqueness of the point with the two required intersection identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*, “the A_Q have intersection a single point s, and every s arises”; Topology Tag 005D, lemma-intersection-closed-in-quasi-compact."
+   }
+  },
+  {
+   "text": "For a fixed s, let p lie in every image f(Q.proj inverse({Q.proj s})). Define C_Q=f inverse({p}) intersect Q.proj inverse({Q.proj s}). These sets are closed by continuity, Hausdorff P and closed quotient fibres; they are compact as closed subsets of compact S, and nonempty by image membership. The quotient Q inf R refines both Q and R, and fiber_subset_ofLE with ofLE_proj makes the family downward directed. Apply the compact closed finite-intersection result, in the directed form IsCompact.nonempty_iInter_of_directed_nonempty_isCompact_isClosed, to obtain t in every C_Q. Equality of all projections gives t=s, hence p=f(s). Conversely f(s) lies in every image. This proves the image intersection identity, including for the compatible family of step 3.",
+   "uses": [
+    "lem-sfb-compact-closed-finite-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*, “Moreover” and the compact-fiber argument; Topology Tag 005D, lemma-intersection-closed-in-quasi-compact."
+   }
+  },
+  {
+   "text": "The comparison is injective: read x from its top coordinate, and recover equality of s from all its quotient coordinates. For an incidence family y, apply exists_of_compat to its second coordinates, obtaining s. All first coordinates equal x=(y(top)).first by compatibility with top. Incidence and the image-intersection equality of step 4 give g(x)=f(s). The pair (x,s) maps back to y coordinatewise, proving surjectivity. Form the equivalence E from this proved bijectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*, compatible primes identified with pairs (x,s); explicit two-sided inverse."
+   }
+  },
+  {
+   "text": "At each quotient Q the comparison is the subtype map induced by (x,s) mapping to (x,Q.proj s). Coordinate projections and Q.proj are continuous; continuous_pi and Continuous.subtype_mk give continuity into the product and then the compatible-family subtype. All subspaces carry the inherited topologies.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*, continuity of the partition coordinates; product and incidence subspace topologies written out."
+   }
+  },
+  {
+   "text": "The identity E(E inverse(y))=y gives both coordinate identities of its inverse. The inverse x coordinate is evaluation at top followed by subtype inclusion and first projection, hence continuous. After composition with the embedding e of step 2, the inverse s coordinate is, at every Q, evaluation at Q followed by subtype inclusion and second projection; continuous_pi proves this continuous. IsEmbedding.continuous_iff now gives continuity of the inverse s coordinate. Combining the coordinates and restricting to the pullback subtype gives a continuous inverse, hence a Homeomorph whose underlying function is incidenceComparison. No separation assumption on X is used.",
+   "uses": [
+    "def-kun-subspace-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+    "place": "*2.*, continuity of the map to S and the cartesian topological identification; Topology Tag 08ZZ, lemma-profinite-refine-open-covering."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-closed-finite-intersection",
+  "def-kun-subspace-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-thm-pe-wc-cover/det-pe-wc-cover-second-stage.proof.md",
+  "place": "Step 2 incidence form as expanded in the existing node; K4 Lean proof uses Mathlib DiscreteQuotient.exists_of_compat and eq_of_forall_proj_eq for reconstruction, compact closed intersections for images, and the compact-to-Hausdorff quotient-coordinate embedding for the topology and inverse continuity. The unit route and all four conclusions are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous map from a profinite space S to a Hausdorff space P compatible parts of all finite clopen partitions reconstruct S and the inverse limit of their image incidence spaces is the fiber product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.isIso_indexCone_lift\", \"module\": \"Mathlib/Topology/Category/Profinite/Product\", \"type\": \"∀ {ι : Type u} {X : ι → Type} [inst : (i : ι) → TopologicalSpace (X i)] {C : Set ((i : ι) → X i)}\\n  [inst_1 : ∀ (i : ι), T2Space (X i)] [inst_2 : ∀ (i : ι), TotallyDisconnectedSpace (X i)] (hC : IsCompact C),\\n  CategoryTheory.IsIso ((Profinite.limitConeIsLimit (Profinite.indexFunctor hC)).lift (Prof\", \"doc\": \"The lift of the index cone in the category of profinite spaces, constructed via the universal property of the limit cone, is an isomorphism. This means that the index cone is a limit cone and the lift\"}\n  {\"name\": \"Profinite.indexCone\", \"module\": \"Mathlib/Topology/Category/Profinite/Product\", \"type\": \"{ι : Type u} →\\n  {X : ι → Type} →\\n    [inst : (i : ι) → TopologicalSpace (X i)] →\\n      {C : Set ((i : ι) → X i)} →\\n        [inst_1 : ∀ (i : ι), T2Space (X i)] →\\n          [inst_2 : ∀ (i : ι), TotallyDisconnectedSpace (X i)] →\\n            (hC : IsCompact C) → CategoryTheory.Limits.Cone (Profinite.in\", \"doc\": \"Given a compact set $ C $ of continuous functions into a product of Hausdorff totally disconnected spaces, the index cone is a cone over the index functor in the category of profinite spaces. Its apex\"}\n  {\"name\": \"Profinite.isoindexConeLift\", \"module\": \"Mathlib/Topology/Category/Profinite/Product\", \"type\": \"{ι : Type u} →\\n  {X : ι → Type} →\\n    [inst : (i : ι) → TopologicalSpace (X i)] →\\n      {C : Set ((i : ι) → X i)} →\\n        [inst_1 : ∀ (i : ι), T2Space (X i)] →\\n          [inst_2 : ∀ (i : ι), TotallyDisconnectedSpace (X i)] →\\n            (hC : IsCompact C) → Profinite.of ↑C ≅ (Profinite.limitCone (\", \"doc\": \"The compact set $ C $ of continuous functions into a product of Hausdorff totally disconnected spaces is isomorphic to the limit of the index functor applied to $ C $. This is established by showing t\"}\n  {\"name\": \"Profinite.NobelingProof.iso_map\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    (J : I → Prop) →\\n      [inst : (i : I) → Decidable (J i)] → C(↑(Profinite.NobelingProof.π C J), ↑(Profinite.IndexFunctor.obj C J))\", \"doc\": \"The continuous map from the Nobeling projection image $\\\\pi(C,J)$ to the index functor image $\\\\text{IndexFunctor.obj}(C,J)$, defined by restricting functions to the subtype $\\\\{i \\\\in I \\\\mid J(i)\\\\}$ and \"}\n  {\"name\": \"Profinite.presentation.π\", \"module\": \"Mathlib/Topology/Category/Stonean/Basic\", \"type\": \"(X : Profinite) → Stonean.toProfinite.obj X.presentation ⟶ X\", \"doc\": \"The canonical epimorphism from the projective presentation of a profinite space $X$ (constructed as the space of ultrafilters on $X$ equipped with the canonical extremally disconnected topology) to $X\"}\n  {\"name\": \"Profinite.indexFunctor\", \"module\": \"Mathlib/Topology/Category/Profinite/Product\", \"type\": \"{ι : Type u} →\\n  {X : ι → Type} →\\n    [inst : (i : ι) → TopologicalSpace (X i)] →\\n      {C : Set ((i : ι) → X i)} →\\n        [∀ (i : ι), T2Space (X i)] →\\n          [∀ (i : ι), TotallyDisconnectedSpace (X i)] → IsCompact C → CategoryTheory.Functor (Finset ι)ᵒᵖ Profinite\", \"doc\": \"A functor from the opposite category of finite subsets of $\\\\iota$ to the category of profinite spaces, constructed using a compact set $C$ of continuous functions. For each finite subset $J$, it maps \"}\n  {\"name\": \"LightProfinite.lightToProfinite_map_proj_eq\", \"module\": \"Mathlib/Topology/Category/LightProfinite/AsLimit\", \"type\": \"∀ (S : LightProfinite) (n : ℕ),\\n  lightToProfinite.map (S.proj n) =\\n    (lightToProfinite.obj S).asLimitCone.π.app\\n      ((CategoryTheory.Limits.IsCofiltered.sequentialFunctor (DiscreteQuotient ↑(lightToProfinite.obj S).toTop)).obj\\n        (Opposite.op n))\", \"doc\": \"For a light profinite space $ S $ and natural number $ n $, applying the canonical inclusion functor $ \\\\text{lightToProfinite} $ to the projection morphism $ S.\\\\text{proj}(n) $ yields the component $ \"}\n  {\"name\": \"Profinite.NobelingProof.fin_comap_jointlySurjective\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Span\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I],\\n  IsClosed C →\\n    ∀ (f : LocallyConstant ↑C ℤ),\\n      ∃ s g,\\n        f =\\n          LocallyConstant.comap\\n            { toFun := Profinite.NobelingProof.ProjRestrict C fun x => x ∈ s, continuous_toFun := ⋯ } g\", \"doc\": \"For any closed set $ C $ and any locally constant function $ f : C \\\\to \\\\mathbb{Z} $, there exists a finite subset $ s \\\\subseteq I $ and a locally constant function $ g : \\\\prod_{i \\\\in s} \\\\{\\\\bot, \\\\top\\\\}\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and isoAsLimitConeLift reconstruct S alone. The proposed statement also reconstructs incidence with an arbitrary possibly non-Hausdorff X from images f(A), using compact fibers; the returned Profinite product-limit results do not state this form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactness proves the intersection of images of compatible clopen partition parts is the singleton image of their common point; inverse limit of incidence subsets is a pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.Nobeling.ι\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Induction\", \"type\": \"(S : Profinite) → ↑S.toTop → { C // IsClopen C } → Bool\", \"doc\": \"The function maps each element $ s $ of a profinite space $ S $ to an indicator function that, for every clopen subset $ C $ of $ S $, returns true if $ s $ is in $ C $ and false otherwise.\"}\n  {\"name\": \"Profinite.IndexFunctor.obj\", \"module\": \"Mathlib/Topology/Category/Profinite/Product\", \"type\": \"{ι : Type u} →\\n  {X : ι → Type} →\\n    [(i : ι) → TopologicalSpace (X i)] → Set ((i : ι) → X i) → (J : ι → Prop) → Set ((i : { i // J i }) → X ↑i)\", \"doc\": \"The set of continuous functions from the subtype \\\\{i : ι // J i\\\\} to X_i, obtained as the image of the set C under the precomposition map induced by the inclusion of the subtype into ι. This correspon\"}\n  {\"name\": \"Profinite.NobelingProof.C'\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"{I : Type u} →\\n  Set (I → Bool) →\\n    [inst : LinearOrder I] →\\n      [inst_1 : WellFoundedLT I] → {o : Ordinal.{u}} → (o < Ordinal.type fun x1 x2 => x1 < x2) → Set (I → Bool)\", \"doc\": \"Given a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, this set $ C' $ consists of all functions in $ C $ that evalua\"}\n  {\"name\": \"Profinite.exists_isClopen_of_cofiltered\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {U : Set ↑C.pt.toTop}\\n  (hC : CategoryTheory.Limits.IsLimit C),\\n  IsClopen U → ∃ j V, IsClopen V ∧ U = ⇑(CategoryTheory.ConcreteCategor\", \"doc\": \"In a cofiltered limit of profinite spaces, every clopen subset of the limit is the preimage of a clopen subset in some object of the diagram. Specifically, given a clopen set $ U $ in the limit space \"}\n  {\"name\": \"exists_clopen_partition_of_clopen_cover\", \"module\": \"Mathlib/Topology/Separation/Profinite\", \"type\": \"∀ {X : Type u_4} {I : Type u_5} [inst : TopologicalSpace X] [CompactSpace X] [T2Space X] [TotallyDisconnectedSpace X]\\n  [Finite I] {Z D : I → Set X},\\n  (∀ (i : I), IsClosed (Z i)) →\\n    (∀ (i : I), IsClopen (D i)) →\\n      (∀ (i : I), Z i ⊆ D i) →\\n        Set.univ.PairwiseDisjoint Z →\\n          ∃ C,\\n\", \"doc\": \"In a compact Hausdorff totally disconnected topological space $X$, given a finite index set $I$, closed sets $Z_i$ contained in clopen sets $D_i$ with pairwise disjoint $Z_i$, there exist clopen sets \"}\n  {\"name\": \"DiscreteQuotient.comp_finsetClopens\", \"module\": \"Mathlib/Topology/DiscreteQuotient\", \"type\": \"∀ (X : Type u_2) [inst : TopologicalSpace X] [inst_1 : CompactSpace X],\\n  ((Set.image fun t => t.carrier) ∘ SetLike.coe) ∘ DiscreteQuotient.finsetClopens X = fun x =>\\n    match x with\\n    | { toSetoid := f, isOpen_setOf_rel := isOpen_setOf_rel } => f.classes\", \"doc\": \"For a compact topological space $X$ with discrete quotient $S$, the image of the finite set of clopen subsets of $X$ (each being the preimage of a singleton in $S$ under the quotient map $\\\\pi: X \\\\to S\"}\n  {\"name\": \"Profinite.NobelingProof.iso_map\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    (J : I → Prop) →\\n      [inst : (i : I) → Decidable (J i)] → C(↑(Profinite.NobelingProof.π C J), ↑(Profinite.IndexFunctor.obj C J))\", \"doc\": \"The continuous map from the Nobeling projection image $\\\\pi(C,J)$ to the index functor image $\\\\text{IndexFunctor.obj}(C,J)$, defined by restricting functions to the subtype $\\\\{i \\\\in I \\\\mid J(i)\\\\}$ and \"}\n  {\"name\": \"Profinite.NobelingProof.ProjRestricts\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    {J K : I → Prop} →\\n      [inst : (i : I) → Decidable (J i)] →\\n        [inst_1 : (i : I) → Decidable (K i)] →\\n          (∀ (i : I), J i → K i) → ↑(Profinite.NobelingProof.π C K) → ↑(Profinite.NobelingProof.π C J)\", \"doc\": \"The function constructs a map from $\\\\pi(C, K)$ to $\\\\pi(C, J)$ by composing the homeomorphism induced by the subset relation $J \\\\subseteq K$ (via projection composition identity) with the Nobeling proj\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and isoAsLimitConeLift reconstruct S alone. The proposed statement also reconstructs incidence with an arbitrary possibly non-Hausdorff X from images f(A), using compact fibers; the returned Profinite product-limit results do not state this form."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"limit\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone\", \"module\": \"Mathlib.Topology.Category.Profinite.Extend\", \"type\": \" (S : Profinite) (i : DiscreteQuotient ↑S.toTop) : CategoryTheory.Epi (S.asLimitCone.π.app i)\", \"doc\": \"\"}\n  {\"name\": \"Condensed.instFinalOppositeDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceCostructuredArrowFintypeCatProfiniteOpToProfiniteOpPtAsLimitConeFunctorOp\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \" {S : Profinite} : (Profinite.Extend.functorOp S.asLimitCone).Final\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and isoAsLimitConeLift reconstruct S alone. The proposed statement also reconstructs incidence with an arbitrary possibly non-Hausdorff X from images f(A), using compact fibers; the returned Profinite product-limit results do not state this form."
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteQuotient|equiv.*[Ll]imit|[Ll]imit.*[Pp]artition",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Topology.DiscreteQuotient\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit.lean\", \"line\": \"193\", \"text\": \"  let S := f.discreteQuotient\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Extend.lean\", \"line\": \"25\", \"text\": \"the indexing category is `StructuredArrow S toProfinite` instead of `DiscreteQuotient S`.\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Extend.lean\", \"line\": \"205\", \"text\": \"instance (i : DiscreteQuotient S) : Epi (S.asLimitCone.π.app i) :=\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/AsLimit.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Topology.DiscreteQuotient\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/AsLimit.lean\", \"line\": \"20\", \"text\": \"1. `X.fintypeDiagram` is the functor `DiscreteQuotient X ⥤ FintypeCat` whose limit\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/AsLimit.lean\", \"line\": \"46\", \"text\": \"/-- The functor `DiscreteQuotient X ⥤ Fintype` whose limit is isomorphic to `X`. -/\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/AsLimit.lean\", \"line\": \"47\", \"text\": \"def fintypeDiagram : DiscreteQuotient X ⥤ FintypeCat where\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/AsLimit.lean\", \"line\": \"49\", \"text\": \"  map f := FintypeCat.homMk (DiscreteQuotient.ofLE f.le)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and isoAsLimitConeLift reconstruct S alone. The proposed statement also reconstructs incidence with an arbitrary possibly non-Hausdorff X from images f(A), using compact fibers; the returned Profinite product-limit results do not state this form."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Profinite space reconstructed from all finite clopen quotients with compatible closed image incidence conditions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Profinite\", \"module\": \"Mathlib.Topology.Category.Profinite.Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The category of compact Hausdorff totally disconnected topological spaces, constructed as a subtype of the category of topological spaces. A profinite space is a topological space that is both compact\"}\n  {\"name\": \"Profinite.lim\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": Limits.LimitCone X.diagram\", \"doc\": \"The profinite space $ X $ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to \"}\n  {\"name\": \"Profinite.asLimit\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": CategoryTheory.Limits.IsLimit X.asLimitCone\", \"doc\": \"The profinite space $X$ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to th\"}\n  {\"name\": \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : P ≅ (limit (toFiniteQuotientFunctor P ⋙ forget₂ FiniteGrp ProfiniteGrp))\", \"doc\": \"The canonical isomorphism from a profinite group $ P $ to the inverse limit of its finite quotient groups $ P/H $ (for open normal subgroups $ H $), which is also a homeomorphism. This equivalence map\"}\n  {\"name\": \"Profinite.of\", \"module\": \"Mathlib.Topology.Category.Profinite.Basic\", \"type\": \"(X : Type*) [TopologicalSpace X] [CompactSpace X] [T2Space X] [TotallyDisconnectedSpace X] : Profinite\", \"doc\": \"Given a topological space $ X $ that is compact, Hausdorff, and totally disconnected, this constructor embeds $ X $ into the category of profinite spaces.\"}\n  {\"name\": \"Profinite.isoAsLimitConeLift\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": X ≅ (limitCone.{u, u} X.diagram).pt\", \"doc\": \"For any profinite space $X$, there exists a canonical isomorphism between $X$ and the inverse limit of its discrete quotients in the category of profinite spaces. This establishes that every profinite\"}\n  {\"name\": \"ProfiniteGrp.isIso_toLimit\", \"module\": \"Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits\", \"type\": \"(P : ProfiniteGrp.{u}) : IsIso (toLimit P)\", \"doc\": \"For any profinite group $P$, the canonical continuous group homomorphism from $P$ to the inverse limit of its finite quotient groups (indexed by open normal subgroups) is an isomorphism. This establis\"}\n  {\"name\": \"Profinite.asLimitConeIso\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": X.asLimitCone ≅ limitCone.{u, u} _\", \"doc\": \"The isomorphism between the limit cone of a profinite space $X$ and the canonical inverse limit construction of its discrete quotients in the category of profinite spaces, establishing that $X$ is can\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and isoAsLimitConeLift reconstruct S alone. The proposed statement also reconstructs incidence with an arbitrary possibly non-Hausdorff X from images f(A), using compact fibers; the returned Profinite product-limit results do not state this form."
+  },
+  {
+   "tool": "grep",
+   "query": "incidence|isoAsLimitConeLift|asLimitCone",
+   "results": "Search returned 10 hits: Mathlib/Topology/Category/Profinite/AsLimit.lean, Mathlib/Topology/Category/Profinite/AsLimit.lean, Mathlib/Topology/Category/Profinite/AsLimit.lean, Mathlib/Topology/Category/Profinite/AsLimit.lean, Mathlib/Topology/Category/Profinite/AsLimit.lean, Mathlib/Topology/Category/Profinite/Extend.lean, Mathlib/Topology/Category/Profinite/Extend.lean, Mathlib/Topology/Category/Profinite/Extend.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: AsLimit.lean:47–102 reconstructs S itself from DiscreteQuotient; Extend.lean concerns that cone. Neither states the incidence pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact Hausdorff profinite space finite clopen partitions inverse limit reconstruction of a fiber product over another Hausdorff space",
+   "results": "Search returned 8 hits: Profinite, Profinite.lim, Profinite.of, Profinite.isoAsLimitConeLift, Profinite.asLimit, Profinite.asLimitConeIso, Profinite.exists_isClopen_of_cofiltered, Profinite.profiniteToCompHausEffectivePresentation. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Profinite.asLimit and isoAsLimitConeLift reconstruct S itself; the other hits concern profinite limits or presentations, not arbitrary X incidence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DiscreteQuotient\", \"limit\"",
+   "results": "Search returned 2 hits: Profinite.instEpiAppDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceπAsLimitCone, Condensed.instFinalOppositeDiscreteQuotientCarrierToTopTotallyDisconnectedSpaceCostructuredArrowFintypeCatProfiniteOpToProfiniteOpPtAsLimitConeFunctorOp. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the two results concern the epimorphic profinite quotient cone and finality, not the incidence pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of image incidence subsets X times finite clopen partitions of a profinite space S is homeomorphic to the fiber product X times_P S",
+   "results": "Search returned 8 hits: Profinite.NobelingProof.iso_map, Profinite.isIso_indexCone_lift, Profinite.NobelingProof.ProjRestricts, Profinite.pi, Profinite.isoindexConeLift, LightProfinite.lightToProfinite_map_proj_eq, CompHausLike.LocallyConstant.sigmaIso, InverseSystem.piLTLim. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned compact-product/finite-coordinate reconstruction and clopen partition lemmas do not state the image-incidence pullback for arbitrary X."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of the images of nested nonempty compact clopen partition parts is the image of their unique common point; reconstruction is continuous for the initial topology of partition coordinates",
+   "results": "Search returned 8 hits: Profinite.NobelingProof.continuous_CC'₁, exists_clopen_partition_of_clopen_cover, Profinite.IndexFunctor.obj, Profinite.IndexFunctor.π_app, Profinite.Nobeling.ι, CantorScheme.inducedMap, Profinite.NobelingProof.iso_map, Profinite.IndexFunctor.map. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned compact-product/finite-coordinate reconstruction and clopen partition lemmas do not state the image-incidence pullback for arbitrary X."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-pe-wc-cover-second-stage",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-wc-cover",
+ "blueprint": {
+  "from": {
+   "node": "det-pe-wc-cover-second-stage",
+   "place": "*2.*, compatible clopen parts, compactness of the fibers f^{-1}(p), and the topology generated by finite partitions (old split step 6 and the topological incidence argument of steps 7–9).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pe-profinite-partition-incidence-limit",
+  "worker": "stage1",
+  "summary": "Q74 expanded the compatible-partition compactness proof, verified both finite-intersection applications and all empty cases, and proved continuity in both directions by explicit open cylinders for arbitrary X. Reused existing Mathlib leaves for the clopen basis and closed finite-intersection property; no new nodes or statement changes. Project Lean searches found no full attachment. Repair of return L (returned head 83283702c61): re-read the current item and all three cited statements, retain the seven-step route on the current DAG, and distinguish the empty-X homeomorphism from the independent assertions about nonempty S, which are still proved in steps 2–4.",
+  "blueprint": "det-pe-wc-cover-second-stage, proof *2.*: compatible parts reconstruct s; compact fibers identify the intersection of images; partition coordinates recover the topology and give the topological pullback."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-fd0761a33",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-fd0761a33 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it with no fixes, no dropped nodes and no tool_uses. It is one commit with no new nodes, re-delivering head 83283702c612: an independent reader passed that head, then the landing gate refused it because a side completion had not been promoted to the live DAG, not for anything in the mathematics. Compared with that head, only the step 1 text and split_report.summary changed. Step 1 now handles empty S explicitly (no compatible choice of parts exists and the topology claim holds trivially) and afterwards assumes only that S is nonempty, so steps 2-4 also cover empty X; this is a correct completion. The statement, stmt_deps, proof_deps, source and steps 2-7 are identical. I re-read all of them. Source: I read the main-20261015 det-pe-wc-cover-second-stage.proof.md in full. The item states paragraph *2.* in incidence form for an arbitrary X: compatible parts meet in one point s, the intersection of the images f(A_Q) is {f(s)}, and the partition coordinates give the topology of S. The parent's step 1 uses the explicit map (x,s) to ((x,A_Q(s))), compatible with both coordinates, and the item also covers the parent's case C=0. The three cited nodes are all Mathlib leaves: the clopen basis (isTopologicalBasis_isClopen), the compact closed finite-intersection property (CompactSpace.iInter_nonempty) and the subspace topology. I read each statement and each says exactly what its step takes from it. Step checks: in step 2, S is T1, so a clopen inside S minus {t} separates two points. In step 3, compatibility puts A_R inside every A_Q, so finite intersections are nonempty, and the empty one is S itself. In step 4, P Hausdorff plus continuity makes f^-1(p) closed, and no separation condition on X is used. Step 5 gives Psi Phi = id and Phi Psi = id by uniqueness. Step 6 proves continuity of Phi through cylinders. Step 7 shows that s(y) lies in V exactly when the part chosen for the partition {V, S minus V} is V; this is an open cylinder, and the cylinder at the partition {S} is legal because S is nonempty. Small cases checked: S, X or P empty; S a single point; S a two-point discrete space with f constant or not. No SGA source is cited. An rg -L search for duplicates found none; lem-sfb-finite-quotient-fiber-product needs X profinite. Delivery-errors A-F are clean. Advisory only: the statement uses product topologies without citing a definition node; this dates from the base and the statement is unchanged. Maintainer note: this is a side-completion promotion loop; promote at landing rather than returning it again."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfinitePartitionIncidenceLimit",
+  "declaration": "ProfinitePartition.profinitePartitionIncidenceLimit",
+  "declarations": [
+   "ProfinitePartition.IncidenceStage",
+   "ProfinitePartition.IncidenceLimit",
+   "ProfinitePartition.incidenceComparison",
+   "ProfinitePartition.profinitePartitionIncidenceLimit"
+  ],
+  "file": "lean/Sheaf/Topology/ProfinitePartitionIncidenceLimit.lean",
+  "statement": "theorem profinitePartitionIncidenceLimit (S : Type u) (P : Type v) (X : Type w) [TopologicalSpace S] [TopologicalSpace P] [TopologicalSpace X] [CompactSpace S] [T2Space S] [TotallyDisconnectedSpace S] [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] (f : C(S, P)) (g : C(X, P)) : IsHomeomorph (incidenceComparison f g) ∧ (∀ a : (Q : DiscreteQuotient S) → Q, (∀ (Q Q' : DiscreteQuotient S) (h : Q ≤ Q'), DiscreteQuotient.ofLE h (a Q) = a Q') → ∃! s : S, (⋂ Q : DiscreteQuotient S, Q.proj ⁻¹' {a Q}) = {s} ∧ (⋂ Q : DiscreteQuotient S, f '' (Q.proj ⁻¹' {a Q})) = {f s}) ∧ (‹TopologicalSpace S› = ⨅ Q : DiscreteQuotient S, TopologicalSpace.induced Q.proj inferInstance) ∧ ((IsEmpty S ∨ IsEmpty X) → IsEmpty {z : X × S // g z.1 = f z.2} ∧ IsEmpty (IncidenceLimit f g))",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e311bf4f",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Each clause matches the node: DiscreteQuotient S is exactly the finite clopen partitions of a compact S (order finer≤coarser, transition maps ofLE); IncidenceStage/IncidenceLimit carry the subspace and product topologies with the node's incidence and compatibility conditions; incidenceComparison is the explicit canonical map; the conclusions are IsHomeomorph, ∃! s with both singleton intersections, the topology of S equal to ⨅ induced proj, and the explicit empty-S/empty-X clause. No extra assumptions on X; three independent universes. Edge cases (empty S, X or P; one-point S) checked. lean.statement matches the file verbatim; only the lean field differs from side-live; no duplicate in Mathlib or the side tree; report has Worker report and Second reading sections; source/blueprint docstrings present; proof is sorry. No compile run since no file was changed. Advisory: P compact and totally disconnected is kept as the node states, though only Hausdorff is used."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261023T103011-L-3032738",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

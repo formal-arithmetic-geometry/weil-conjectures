@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-geometric-semiabelian-split-quotient",
+ "kind": "statement",
+ "title": "Separable splitting of the toric part of a geometric semiabelian group",
+ "statement": "Let $k$ be any field [def-weil-field] and let $H/k$ be a smooth separated commutative group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-proper-morphism] with geometrically connected fibres (connected after every field extension). Suppose that over an algebraic closure $\\bar k$ [def-weil-algebraic-closure] the group $H_{\\bar k}$ is an extension, exact as sheaves for the faithfully flat finitely presented topology [def-pc-fppf-site], of a proper [def-weil-proper-morphism] smooth geometrically connected commutative group scheme by $(\\mathbf G_{m,\\bar k})^r$, where $r\\geq0$ and $\\mathbf G_{m,F}=\\operatorname{Spec}F[t,t^{-1}]$. There exist a finite Galois extension $K/k$ [def-pc-field-extension], an abelian variety $A/K$ [def-sc-abelian-variety], and a smooth surjective homomorphism $q:H_K\\to A$ identifying its kernel with $(\\mathbf G_{m,K})^r$. Finite Galois means finite, separable and normal as a field extension. The morphism $q$ is a torsor under this split torus: it is faithfully flat of finite presentation [def-sbc-locally-finite-presentation] and the morphism $(h,t)\\mapsto(h,h t)$ identifies $H_K\\times_K(\\mathbf G_{m,K})^r$ with $H_K\\times_AH_K$ [def-pc-fibre-product]. Here $H_K=H\\times_kK$ and all group operations and morphisms are over the indicated field.",
+ "source": {
+  "document": "literature/conrad-semistable-reduction-abelian-varieties-2011.pdf",
+  "place": "Conrad, Semistable Reduction for Abelian Varieties, Theorem 3.1, pp.7--8, geometric torus descends even over imperfect fields; local PDF WANTED; primary online https://math.stanford.edu/~conrad/DarmonCM/2011Notes/SemistableReduction.pdf. Milne iAG2017 Theorem 12.18(d) and Definition 12.14 give separable splitting; take a finite normal closure. No perfection assumption."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-field-extension",
+  "def-sc-abelian-variety",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-proper-morphism",
+  "def-weil-algebraic-closure",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Fix a separable closure $k^s\\subseteq\\bar k$ and write $\\overline T=\\mathbf G_{m,\\bar k}^r\\hookrightarrow H_{\\bar k}$ for the kernel in the hypothesis. Choose a prime $\\ell\\ne\\operatorname{char}k$. For each $a\\geq1$, [lem-sfb-smooth-group-invertible-multiplication] makes $H_{k^s}[\\ell^a]$ etale, with formation commuting with field extension. Apply [lem-exc-etale-field-gsets] over the separably closed field $k^s$: its absolute Galois group is trivial, so an etale $k^s$-scheme is a disjoint union of copies of $\\operatorname{Spec}k^s$. Consequently every $\\bar k$-point of $H_{k^s}[\\ell^a]$, including every point of $\\overline T[\\ell^a]$, is the extension of a unique $k^s$-point. We do not infer finiteness of $H[\\ell^a]$ from etaleness. Let $S\\subset H(k^s)$ be the union of the subsets corresponding to $\\overline T[\\ell^a](\\bar k)$. This union is a subgroup since the torsion subsets are nested.",
+   "uses": [
+    "def-pd-separable-closure",
+    "lem-sfb-smooth-group-invertible-multiplication",
+    "lem-exc-etale-field-gsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Conrad Theorem 3.1, printed p.8, torsion construction (local PDF WANTED); etale splitting is the field-etale classification. Stacks 0BF5 and 0BFH underlie the cited multiplication node."
+   }
+  },
+  {
+   "text": "The images of $S$ are dense in $\\overline T$. Indeed, a Laurent polynomial vanishing on all these points can be multiplied by a monomial to become a polynomial $f$ of degree less than $N=\\ell^a$ in each variable, for sufficiently large $a$. There are exactly $N$ distinct $N$th roots of unity in $\\bar k$: the polynomial $X^N-1$ splits and its derivative $NX^{N-1}$ has no common root with it. Thus $f$ vanishes on the full grid of these roots. Successive use of the fact that a polynomial of degree less than $N$ with $N$ distinct roots is zero, one variable at a time, gives $f=0$. Hence no nonzero Laurent polynomial vanishes on $S$, proving density in the affine scheme $\\overline T$. For $r=0$ the grid is the single identity point and the assertion remains true.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Conrad Theorem 3.1, printed p.8, density of prime-to-characteristic power torsion; explicit Laurent-polynomial argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dense-rational-closed-subscheme-descent] with $F=k^s$, $L=\\bar k$, $X=H_{k^s}$ and $Z=\\overline T$. The scheme $Z$ is reduced, and step 2 verifies the required density. It gives a reduced closed subscheme $T_s\\hookrightarrow H_{k^s}$ with $(T_s)_{\\bar k}=\\overline T$. This is affine by [lem-weil-pbc-fpqc-descend-affine], applied to its structure morphism and the faithfully flat affine field cover $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k^s$. To descend its subgroup structure, restrict multiplication, inverse and identity of $H_{k^s}$ to $T_s\\times T_s$, $T_s$ and $\\operatorname{Spec}k^s$. Each factors through $T_s$ because it does so after extension to $\\bar k$: on affine charts, the images of the defining ideal of $T_s$ become zero after tensoring with $\\bar k$, hence are zero already by [lem-sfb-field-extension-tensor-injective]. Uniqueness of factorization through the closed immersion gives all group identities and commutativity from those of $H$. Thus $T_s$ is an affine finite-type commutative group scheme whose geometric extension is $\\mathbf G_m^r$.",
+   "uses": [
+    "lem-sfb-dense-rational-closed-subscheme-descent",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "lem-sfb-field-extension-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Conrad Theorem 3.1, pp.7--8, descent of the geometric torus; coefficient descent input of the cited dense-rational node. Stacks 02L5, descent.tex lemma-descending-property-affine."
+   }
+  },
+  {
+   "text": "By [def-sfb-tori-multiplicative-type], $T_s$ is a torus and in particular is of multiplicative type. Apply [lem-sfb-multiplicative-character-antiduality] over $k^s$. It splits as $D_{k^s}(M)$: the finite separable extension allowed by that statement must equal $k^s$. Its scalar-extension character identification gives $M\\simeq X^*(\\overline T)\\simeq\\mathbf Z^r$, where the last equality is the case $s=1$ of [lem-sfb-split-torus-hom-matrices]. The group algebra of $\\mathbf Z^r$ is the Laurent polynomial algebra, so $D_{k^s}(M)\\simeq\\mathbf G_{m,k^s}^r$. Choose such an isomorphism and compose with $T_s\\hookrightarrow H_{k^s}$ to obtain a closed group homomorphism $j_s:\\mathbf G_{m,k^s}^r\\to H_{k^s}$ whose image over $\\bar k$ is exactly $\\overline T$.",
+   "uses": [
+    "def-sfb-tori-multiplicative-type",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-torus-hom-matrices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.14, Theorem 12.18(d), Corollary 12.19, Theorem 12.23, printed pp.236--240; coordinate character description."
+   }
+  },
+  {
+   "text": "Index by the finite Galois intermediate fields $E/k$ in $k^s$. They form a small directed set with union $k^s$: a finite set of separable elements lies in a finite Galois subextension by [lem-weil-pbc-finite-set-in-finite-galois-subextension]. The spectra have affine transition maps and limit $\\operatorname{Spec}k^s$ by [lem-weil-pbc-limit-affine-transition]. Both $\\mathbf G_{m,k}^r$ and $H$ are of finite presentation over $k$: their finite affine coordinate presentations are finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation], since a field is Noetherian; separatedness ensures quasi-separatedness, and finite type ensures quasi-compactness. Apply [lemma-nagata-morphism-descends] to $j_s$ between these fixed finitely presented schemes. This supplies a finite Galois intermediate field $K/k$ and a $K$-morphism $j:\\mathbf G_{m,K}^r\\to H_K$ whose extension to $k^s$ is $j_s$.",
+   "uses": [
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lemma-nagata-morphism-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.19, printed p.238, finite-stage splitting; finite-stage morphism descent via the cited approximation theorem. Stacks fields.tex 09DT/0EXM and limits.tex 01YW."
+   }
+  },
+  {
+   "text": "The map $j$ is a homomorphism: the equations for multiplication and identity hold after $k^s/K$, and equality of scheme morphisms is detected by this fpqc cover by [lem-a1-algebraic-space-fpqc-sheaf] (schemes are algebraic spaces). It is a monomorphism on all commutative $K$-algebra points. If $x,y\\in\\mathbf G_m^r(R)$ have $j(x)=j(y)$, extend $R$ to $R\\otimes_K k^s$. The map $j_s$ is a closed immersion, hence the two extended points coincide; their original points coincide by the same fpqc equality detection on $\\operatorname{Spec}R$. Therefore [lem-sfb-algebraic-group-monomorphism-closed-immersion] makes $j$ a closed immersion. This argument detects the scheme-theoretic subgroup, including infinitesimal test algebras, rather than only field-valued points.",
+   "uses": [
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-sfb-algebraic-group-monomorphism-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.34, printed pp.106--107, monomorphisms of algebraic groups are closed immersions; fpqc equality detection for the descended inclusion."
+   }
+  },
+  {
+   "text": "The scheme $H_K$ is geometrically integral by [lem-trf-smooth-connected-fibre-normal-integrality], applied to $H\\to\\operatorname{Spec}k$; the hypotheses are precisely smoothness and the assumed nonempty geometrically connected fibre. The split torus $\\mathbf G_{m,K}^r$ is smooth, separated, finite type and geometrically integral, directly from its Laurent polynomial coordinates over every extension field. The smoothness also follows from the torus assertion in [lem-sfb-multiplicative-type-largest-subtorus]. Apply [lem-sfb-smooth-commutative-subgroup-quotient] to $j$. It gives a smooth separated geometrically integral commutative group scheme $Q/K$ and a smooth surjective homomorphism $q:H_K\\to Q$ of finite presentation with kernel $j(\\mathbf G_m^r)$, and gives the isomorphism $(h,t)\\mapsto(h,hj(t))$ from $H_K\\times_K\\mathbf G_m^r$ to $H_K\\times_QH_K$. In particular $q$ is flat, surjective and of finite presentation, hence an fppf covering.",
+   "uses": [
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-smooth-commutative-subgroup-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.14, Corollary 5.27 and Proposition 1.63: represented smooth commutative quotient and torsor identity; Stacks 057J and 056T for smooth connected fibre integrality."
+   }
+  },
+  {
+   "text": "Let $B/\\bar k$ be the proper smooth geometrically connected commutative group in the original extension and $p:H_{\\bar k}\\to B$ its epimorphism of fppf sheaves. Both $p$ and $q_{\\bar k}$ have the same kernel $\\overline T$: this follows for $q$ from steps 5--7. They represent the same quotient sheaf. Explicitly, locally lift a section $b$ of $B$ to $h$ of $H_{\\bar k}$ and send it to $q(h)$. Two lifts differ by $\\overline T$, so this gives a unique glued section of $Q_{\\bar k}$. Conversely, lift a section of $Q_{\\bar k}$ fppf locally along $q$ and apply $p$; the kernel equality again makes the result independent of lifts. The two operations are inverse on local lifts, hence on all sections. Representable fppf sheaves therefore give an isomorphism of schemes $Q_{\\bar k}\\simeq B$. Fppf covering families and their base changes are [def-pc-fppf-site] and [lem-trf-fppf-covering-base-change]. They are fpqc covers by [lem-trf-fppf-covering-is-fpqc], so [lem-a1-algebraic-space-fpqc-sheaf], restricted to schemes, supplies exactly the gluing and equality detection just used. This establishes the comparison explicitly without using a quotient universal property absent from the cited quotient statement.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-a1-algebraic-space-fpqc-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Conrad Theorem 3.1, printed p.7, identification of the geometric quotient; Milne Corollary 5.27, printed p.105, fppf torsor quotient. Explicit kernel-and-local-lift sheaf argument."
+   }
+  },
+  {
+   "text": "The isomorphism of step 8 makes $Q_{\\bar k}$ proper. Apply [lem-weil-pbc-proper-morphism-fpqc-descent] along the fpqc field cover $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}K$ to conclude that $Q$ is proper over $K$. By step 7 it is also smooth and geometrically integral, in particular connected. Thus $A:=Q$ is an abelian variety by [def-sc-abelian-variety]. The finite Galois field $K$ of step 5 and the map $q$ of step 7 have every required property: smooth surjectivity, the specified split kernel of rank $r$, faithful flatness and finite presentation, and the torsor isomorphism with exactly the displayed right-translation formula. No change of the base field by a purely inseparable finite extension has occurred.",
+   "uses": [
+    "lem-weil-pbc-proper-morphism-fpqc-descent",
+    "def-sc-abelian-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Conrad Theorem 3.1, printed p.7, properness of the descended quotient; Stacks descent.tex proper fpqc descent (02KS plus separatedness and finite-type descent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-separable-closure",
+  "lem-sfb-smooth-group-invertible-multiplication",
+  "lem-exc-etale-field-gsets",
+  "def-weil-algebraic-closure",
+  "lem-sfb-dense-rational-closed-subscheme-descent",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-sfb-field-extension-tensor-injective",
+  "def-sfb-tori-multiplicative-type",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lemma-nagata-morphism-descends",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-smooth-commutative-subgroup-quotient",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-proper-morphism-fpqc-descent",
+  "def-sc-abelian-variety"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Conrad Theorem 3.1 torsion-density route, checked in primary online PDF pp.7--8 (local PDF WANTED), assembled explicitly using existing DAG nodes and Milne 12.18/12.19/12.23. Finite-stage descent of the inclusion replaces infinite Galois descent of the subgroup."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth commutative algebraic group geometrically an extension of an abelian variety by a torus has a split torus kernel and abelian quotient after a finite separable Galois field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAbelianGalois\", \"module\": \"Mathlib/FieldTheory/Galois/Abelian\", \"type\": \"(K : Type u_4) → (L : Type u_5) → [inst : Field K] → [inst_1 : Field L] → [Algebra K L] → Prop\", \"doc\": \"The property that the field extension $ L/K $ is Galois with an abelian Galois group\"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"Field.absoluteGaloisGroupAbelianization\", \"module\": \"Mathlib/FieldTheory/AbsoluteGaloisGroup\", \"type\": \"(K : Type u_1) → [Field K] → Type u_1\", \"doc\": \"The topological abelianization of the absolute Galois group $\\\\text{Gal}(\\\\overline{K}/K)$ is the quotient of the group by the closure of its commutator subgroup, equipped with the quotient topology ind\"}\n  {\"name\": \"IsAbelianGalois.tower_top\", \"module\": \"Mathlib/FieldTheory/Galois/Abelian\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Field M] [inst_4 : Algebra K M] [inst_5 : Algebra L M] [IsScalarTower K L M] [IsAbelianGalois K M],\\n  IsAbelianGalois L M\", \"doc\": \"If $ K $ is an abelian Galois extension of $ M $, then $ L $ is also an abelian Galois extension of $ M $ in the tower of field extensions $ L/K/M $.\"}\n  {\"name\": \"IsAbelianGalois.tower_bot\", \"module\": \"Mathlib/FieldTheory/Galois/Abelian\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Field M] [inst_4 : Algebra K M] [inst_5 : Algebra L M] [IsScalarTower K L M] [IsAbelianGalois K M],\\n  IsAbelianGalois K L\", \"doc\": \"Let $ K \\\\subseteq L \\\\subseteq M $ be a tower of fields. If the extension $ M/K $ is Galois with an abelian Galois group, then the intermediate extension $ L/K $ is also Galois with an abelian Galois g\"}\n  {\"name\": \"instIsAbelianGalois\", \"module\": \"Mathlib/FieldTheory/Galois/Abelian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], IsAbelianGalois K K\", \"doc\": \"The field extension of $ K $ over itself is Galois with an abelian Galois group.\"}\n  {\"name\": \"IsAbelianGalois.of_algHom\", \"module\": \"Mathlib/FieldTheory/Galois/Abelian\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} {M : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Field M] [inst_4 : Algebra K M] (f : L →ₐ[K] M) [IsAbelianGalois K M], IsAbelianGalois K L\", \"doc\": \"If $ L/K $ is a field extension and there exists an algebra homomorphism $ f : L → M $ over $ K $ where $ M/K $ is an abelian Galois extension, then $ L/K $ is also an abelian Galois extension. This m\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_split_injection\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {P : Type u_2}\\n  [inst_3 : CommRing P] [inst_4 : Algebra R P] [Algebra.FormallySmooth R P] [inst_6 : Algebra P A]\\n  [IsScalarTower R P A],\\n  Function.Surjective ⇑(algebraMap P A) →\\n    (Algebra.FormallySmoot\", \"doc\": \"Let $R, P, A$ be commutative rings such that $P$ is an $R$-algebra and $A$ is a $P$-algebra. Suppose the structure map $f: P \\\\to A$ is surjective with kernel $I$. Then, $A$ is a formally smooth $R$-al\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned field-Galois, abstract-group quotient, or formally smooth ring results do not supply a torus subgroup and abelian scheme quotient for a geometrically semiabelian group."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"torus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned field-Galois, abstract-group quotient, or formally smooth ring results do not supply a torus subgroup and abelian scheme quotient for a geometrically semiabelian group."
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semiAbelian|semi_abelian|[Mm]aximal[Tt]orus|split[Tt]orus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned field-Galois, abstract-group quotient, or formally smooth ring results do not supply a torus subgroup and abelian scheme quotient for a geometrically semiabelian group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of an abelian quotient and a torus kernel for a geometrically semiabelian variety over an arbitrary field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"QuotientGroup.Quotient.commGroup\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Defs\", \"type\": \"{G : Type*} [CommGroup G] (N : Subgroup G) : CommGroup (G ⧸ N)\", \"doc\": \"For any abelian group $G$ and its subgroup $N$, the quotient group $G/N$ inherits a canonical commutative group structure. This follows because every subgroup of an abelian group is normal, and the gr\"}\n  {\"name\": \"Abelianization\", \"module\": \"Mathlib.GroupTheory.Abelianization.Defs\", \"type\": \": Type u\", \"doc\": \"The abelianization of a group $ G $, denoted $ G^{\\text{ab}} $, is the quotient group $ G / [G, G] $, where $ [G, G] $ is the commutator subgroup of $ G $. This quotient group is abelian, and it is the\"}\n  {\"name\": \"Abelianization.lift\", \"module\": \"Mathlib.GroupTheory.Abelianization.Defs\", \"type\": \": (G →* A) ≃ (Abelianization G →* A)\", \"doc\": \"For any group $ G $ and abelian group $ A $, there is a natural bijection between group homomorphisms $ G \\to A $ and group homomorphisms $ G^{\\text{ab}} \\to A $, where $ G^{\\text{ab}} = G/[G, G] $ is the\"}\n  {\"name\": \"AddGroupExtension.quotientKerRightHomEquivRight\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"{N : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : AddGroup N] →\\n      [inst_1 : AddGroup G] →\\n        {E : Type u_3} → [inst_2 : AddGroup E] → (S : AddGroupExtension N E G) → E ⧸ S.rightHom.ker ≃+ G\", \"doc\": \"Given an additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ represented by $S$, the quotient of $E$ by the kernel of the surjective homomorphism $E \\\\to G$ (the right homomorphism of the extension) i\"}\n  {\"name\": \"Abelianization.commGroup\", \"module\": \"Mathlib.GroupTheory.Abelianization.Defs\", \"type\": \": CommGroup (Abelianization G)\", \"doc\": \"For any group $G$, its abelianization $G^{\\text{ab}} = G/[G, G]$ is an abelian group. This quotient group is constructed by factoring out the commutator subgroup $[G, G]$, which enforces the commutativ\"}\n  {\"name\": \"Abelianization.ker_of\", \"module\": \"Mathlib.GroupTheory.Abelianization.Defs\", \"type\": \": of.ker = commutator G\", \"doc\": \"The kernel of the canonical group homomorphism $\\\\pi: G \\\\to G^{\\\\text{ab}}$ from a group $G$ to its abelianization $G^{\\\\text{ab}} = G/[G, G]$ is equal to the commutator subgroup $[G, G]$. In symbols, $\\\\\"}\n  {\"name\": \"commGroupOfCyclicCenterQuotient\", \"module\": \"Mathlib.GroupTheory.SpecificGroups.Cyclic\", \"type\": \"[IsCyclic G'] (f : G →* G') (hf : f.ker ≤ center G) : CommGroup G\", \"doc\": \"Let $G$ and $G'$ be groups with $G'$ cyclic. If there exists a group homomorphism $f : G \\\\to G'$ such that the kernel of $f$ is contained in the center of $G$, then $G$ is abelian. This follows becaus\"}\n  {\"name\": \"instModuleQuotientAddSubgroupTorsion\", \"module\": \"Mathlib.GroupTheory.Torsion\", \"type\": \"{R M : Type*} [Ring R] [AddCommGroup M] [Module R M] : Module R (M ⧸ AddCommGroup.torsion M)\", \"doc\": \"For any ring $ R $ and $ R $-module $ M $, the quotient of $ M $ by its torsion subgroup inherits a canonical $ R $-module structure. This instance asserts that the torsion subgroup (elements of finit\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned field-Galois, abstract-group quotient, or formally smooth ring results do not supply a torus subgroup and abelian scheme quotient for a geometrically semiabelian group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic torus splits over a finite separable field extension and maximal tori of smooth connected commutative algebraic groups commute with field extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"{F : Type u_1} →\\n  {K : Type u_2} →\\n    (A : Type u_3) →\\n      [inst : Field F] →\\n        [inst_1 : Field K] →\\n          [inst_2 : Field A] →\\n            [inst_3 : Algebra F K] →\\n              [inst_4 : Algebra F A] →\\n                [Algebra.IsAlgebraic F K] →\\n                  (L : Type u_4) →\\n   \", \"doc\": \"Given a field extension $ L $ of $ F $ where every element of $ K $ has its minimal polynomial over $ F $ splitting in $ L $, there is a canonical equivalence between the set of $ F $-algebra homomorp\"}\n  {\"name\": \"AlgHom.card_of_splits\", \"module\": \"Mathlib/FieldTheory/PrimitiveElement\", \"type\": \"∀ (F : Type u_1) (E : Type u_2) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E]\\n  [inst_3 : FiniteDimensional F E] [Algebra.IsSeparable F E] (L : Type u_3) [inst_5 : Field L] [inst_6 : Algebra F L],\\n  (∀ (x : E), (Polynomial.map (algebraMap F L) (minpoly F x)).Splits) → Fintype.card (E →ₐ\", \"doc\": \"If $ E $ is a finite free $ F $-module and the minimal polynomial of every element of $ E $ over $ F $ splits in $ L $, then the number of $ F $-algebra homomorphisms from $ E $ to $ L $ is equal to t\"}\n  {\"name\": \"Algebra.IsAlgebraic.algHomEquivAlgHomOfSplits_apply_apply\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} (A : Type u_3) [inst : Field F] [inst_1 : Field K] [inst_2 : Field A]\\n  [inst_3 : Algebra F K] [inst_4 : Algebra F A] [inst_5 : Algebra.IsAlgebraic F K] (L : Type u_4) [inst_6 : Field L]\\n  [inst_7 : Algebra F L] [inst_8 : Algebra L A] [inst_9 : IsScalarTower F L A]\\n  \", \"doc\": \"Given a field extension $ L $ of $ F $ where every element of $ K $ has its minimal polynomial over $ F $ splitting in $ L $, and an $ F $-algebra $ A $ equipped with a scalar tower through $ L $, the\"}\n  {\"name\": \"AlgHom.natCard_of_splits\", \"module\": \"Mathlib/FieldTheory/PrimitiveElement\", \"type\": \"∀ (F : Type u_1) (E : Type u_2) [inst : Field F] [inst_1 : Field E] [inst_2 : Algebra F E] [FiniteDimensional F E]\\n  [Algebra.IsSeparable F E] (L : Type u_3) [inst_5 : Field L] [inst_6 : Algebra F L],\\n  (∀ (x : E), (Polynomial.map (algebraMap F L) (minpoly F x)).Splits) → Nat.card (E →ₐ[F] L) = Modu\", \"doc\": \"If every element $ x $ in $ E $ has its minimal polynomial over $ F $ split in $ L $, then the cardinality of the set of $ F $-algebra homomorphisms from $ E $ to $ L $ equals the finite rank $ [E:F] \"}\n  {\"name\": \"IntermediateField.algHomEquivAlgHomOfSplits\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"{F : Type u_1} →\\n  {K : Type u_2} →\\n    (A : Type u_3) →\\n      [inst : Field F] →\\n        [inst_1 : Field K] →\\n          [inst_2 : Field A] →\\n            [inst_3 : Algebra F K] →\\n              [inst_4 : Algebra F A] →\\n                [Algebra.IsAlgebraic F K] →\\n                  (L : IntermediateFie\", \"doc\": \"Let $F, K, A$ be fields, where $K$ and $A$ are $F$-algebras. Let $L$ be an intermediate field between $F$ and $A$. If for every element $x \\\\in K$, the minimal polynomial of $x$ over $F$ splits over $L\"}\n  {\"name\": \"IntermediateField.nonempty_algHom_of_splits\", \"module\": \"Mathlib/FieldTheory/Extension\", \"type\": \"∀ {F : Type u_1} {E : Type u_2} {K : Type u_3} [inst : Field F] [inst_1 : Field E] [inst_2 : Field K]\\n  [inst_3 : Algebra F E] [inst_4 : Algebra F K],\\n  (∀ (s : E), IsIntegral F s ∧ (Polynomial.map (algebraMap F K) (minpoly F s)).Splits) → Nonempty (E →ₐ[F] K)\", \"doc\": \"If the minimal polynomial of an element $ x $ over $ F $ splits in $ K $, then there exists an $ F $-algebra homomorphism from the intermediate field $ E $ to $ K $. This follows from the fact that sp\"}\n  {\"name\": \"IntermediateField.algHomEquivAlgHomOfSplits_apply_apply\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} (A : Type u_3) [inst : Field F] [inst_1 : Field K] [inst_2 : Field A]\\n  [inst_3 : Algebra F K] [inst_4 : Algebra F A] [inst_5 : Algebra.IsAlgebraic F K] (L : IntermediateField F A)\\n  (hL : ∀ (x : K), (Polynomial.map (algebraMap F ↥L) (minpoly F x)).Splits) (f : K →ₐ[F\", \"doc\": \"For an intermediate field $ L $ where the minimal polynomial of every element $ x \\\\in K $ splits in $ L $, the application of an $ F $-algebra homomorphism $ f: K \\\\to L $ to any $ x \\\\in K $ satisfies \"}\n  {\"name\": \"IntermediateField.algHomEquivAlgHomOfSplits_apply\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"∀ {F : Type u_1} {K : Type u_2} (A : Type u_3) [inst : Field F] [inst_1 : Field K] [inst_2 : Field A]\\n  [inst_3 : Algebra F K] [inst_4 : Algebra F A] [inst_5 : Algebra.IsAlgebraic F K] (L : IntermediateField F A)\\n  (hL : ∀ (x : K), (Polynomial.map (algebraMap F ↥L) (minpoly F x)).Splits) (φ₂ : K →ₐ[\", \"doc\": \"Let `F`, `K`, and `A` be fields, with `K` being an algebraic extension of `F`, and `L` an intermediate field such that `F ⊆ L ⊆ A`. Suppose that for every element `x ∈ K`, the minimal polynomial of `x\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned field-Galois, abstract-group quotient, or formally smooth ring results do not supply a torus subgroup and abelian scheme quotient for a geometrically semiabelian group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-picard-cube-face-detection",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces; field-fibre reduction: split torus quotient before applying the proper cube",
+   "via": [
+    "lem-sfb-relative-picard-cube-face-detection",
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-semiabelian-split-quotient",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Checked arbitrary imperfect fields using prime-to-characteristic torsion over a separable closure. Reused existing dense-rational closed-subscheme descent, character antiduality, morphism approximation, subgroup quotient and proper-descent nodes. No new node needed. Explicit density, subgroup descent, finite-stage monomorphism and geometric quotient comparison arguments are written in the steps.",
+  "blueprint": "Inherited auxiliary for det-thm-sf-ctf-stability-direct-images proof (3), stable Picard cube-face detection: split torus quotient on a field fibre before the proper cube. blueprint_refs ancestor returns None; retain that and the full inherited from.place/via. Searched all imported blueprint nodes for semiabelian and torus (no matches), and read current latest thm-sf-ctf-stability proof in sk-thm-sf-kunneth-verdier; no duplicate statement found.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-field-gsets",
+    "why": "Etale schemes over a separably closed field are disjoint unions of rational points; used only to rationalize toric torsion, with no finite-group assertion. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic descent of affineness of the closed torus model along an arbitrary field extension. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lemma-nagata-morphism-descends",
+    "why": "Generic approximation of a morphism between fixed finitely presented schemes; used to descend the split-torus inclusion to a finite Galois field. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic existence and affine coordinate formula for the limit of the finite Galois field spectra. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic fpqc sheaf property, restricted to schemes, detects homomorphism identities and injectivity on all test algebras after field extension. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic smooth geometrically connected fibre integrality supplies exactly the geometric-integrality hypothesis of the existing subgroup quotient node. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic stability of fppf covers under pullback, used for the explicit quotient-sheaf comparison. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic conversion of fppf covers to fpqc covers, allowing the existing fpqc morphism-sheaf theorem to apply. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-morphism-fpqc-descent",
+    "why": "Generic fpqc descent of properness, applied only to the quotient structure map. No node specific to the constructibility unit supplies this general scheme-theoretic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-field-gsets",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lemma-nagata-morphism-descends",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-proper-morphism-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-697f43730",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-697f43730 (reviewer sub-agent of L); spot-checked: I read the item and all 9 steps against every cited statement; there are no new nodes. Step 1: [n] is étale with an étale kernel, and étale k^s-schemes are disjoint unions of copies of Spec k^s, so the ℓ-power torsion points of T̄ are k^s-rational. Step 2: grids of roots of unity are dense in T̄. Step 3: the dense-rational descent hypotheses (finite type, reduced, dense) all hold; affineness descends by fpqc, and the group law descends by injectivity of B→B⊗K. Step 4: the antiduality splitting over k^s gives G_m^r; this agrees with local Milne 12.14/12.18(d)/12.19. Step 5: the finite Galois fields inside k^s are directed with union k^s (normality of k^s/k argued correctly), and Nagata descent with λ0=k gives K. Step 6: fpqc equality detection, then injectivity on all R-points, makes j a closed immersion. Step 7: geometric integrality of H comes from the trf smooth-connected-fibre node, and the quotient node's hypotheses are all met. Step 8: both maps are fppf epimorphisms with kernel T̄, and local-lift maps in both directions give Q_k̄≅B. Step 9: fpqc descent of properness, so Q is an abelian variety. Edge cases checked: r=0, nonsplit tori, imperfect k, H=Spec k. Conrad Thm 3.1 is not local; it is recorded as WANTED and the proof is marked agent-written. No duplicate node found in the DAG, no cycle, and no SGA citation. Batch-5: every flagged citation is a generic definition or a generic AG/commutative-algebra fact (algebraic-space definitions, exterior-power base change, smoothness descent, fppf⇒fpqc, fppf base change, smooth-fibre integrality), none of them part of the LTF/PD proofs, so all are accepted. All 9 declared tool_uses are accepted. FIX (B3): the item statement used 'separated', 'proper' and 'algebraic closure' without citing a definition node. I added [def-weil-proper-morphism] and [def-weil-algebraic-closure] to the statement text and stmt_deps; the meaning is unchanged and all other fields are verbatim.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricSemiabelianSplitQuotient",
+  "declaration": "AlgebraicGeometry.geometric_semiabelian_split_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricSemiabelianSplitQuotient.lean",
+  "statement": "theorem geometric_semiabelian_split_quotient {k : Type u} [Field k] (H : Grp (Over (Spec (.of k)))) [IsCommMonObj H.X] [Smooth H.X.hom] [IsSeparated H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [GeometricallyConnected H.X.hom] (r : ℕ) (hgeom : ∃ (B : Grp (Over (Spec (.of (AlgebraicClosure k))))) (i : MultiplicativeType.splitTorus (AlgebraicClosure k) r ⟶ (MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H) (p : (MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj H ⟶ B), IsCommMonObj B.X ∧ IsProper B.X.hom ∧ Smooth B.X.hom ∧ GeometricallyConnected B.X.hom ∧ IsPullback i.hom.hom (toUnit (MultiplicativeType.splitTorus (AlgebraicClosure k) r).X) p.hom.hom η[B.X] ∧ Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of (AlgebraicClosure k)))) (yoneda.map p.hom.hom)) : ∃ (K : Type u) (_ : Field K) (_ : Algebra k K), FiniteDimensional k K ∧ IsGalois k K ∧ ∃ (A : Grp (Over (Spec (.of K)))) (i : MultiplicativeType.splitTorus K r ⟶ (MultiplicativeType.baseChange (k := k) (K := K)).obj H) (q : (MultiplicativeType.baseChange (k := k) (K := K)).obj H ⟶ A), IsAbelianVariety A.X ∧ Smooth q.hom.hom.left ∧ Surjective q.hom.hom.left ∧ IsPullback i.hom.hom (toUnit (MultiplicativeType.splitTorus K r).X) q.hom.hom η[A.X] ∧ Flat q.hom.hom.left ∧ LocallyOfFinitePresentation q.hom.hom.left ∧ QuasiCompact q.hom.hom.left ∧ QuasiSeparated q.hom.hom.left ∧ ∃ e : ((MultiplicativeType.baseChange (k := k) (K := K)).obj H).X ⊗ (MultiplicativeType.splitTorus K r).X ≅ pullback q.hom.hom q.hom.hom, e.hom ≫ pullback.fst _ _ = fst ((MultiplicativeType.baseChange (k := k) (K := K)).obj H).X (MultiplicativeType.splitTorus K r).X ∧ e.hom ≫ pullback.snd _ _ = lift (fst ((MultiplicativeType.baseChange (k := k) (K := K)).obj H).X (MultiplicativeType.splitTorus K r).X) (snd ((MultiplicativeType.baseChange (k := k) (K := K)).obj H).X (MultiplicativeType.splitTorus K r).X ≫ i.hom.hom) ≫ μ[((MultiplicativeType.baseChange (k := k) (K := K)).obj H).X]",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e49637f0",
+  "group": "N9",
+  "result": "pass",
+  "note": "Item diff vs side-live: only lean record + added stmt_dep def-sfb-tori-multiplicative-type (landed N8, used for splitTorus/baseChange). lean.statement verbatim; single sorry; no defs/helpers/new nodes. Clause check: arbitrary field k; H Grp(Over Spec k) comm, Smooth, IsSeparated, LOFT+QC, GeometricallyConnected; hgeom over AlgebraicClosure k with B comm/proper/smooth/geom. connected, kernel IsPullback i/toUnit/p/η and fppf IsLocallySurjective (same encoding as landed HasSemiabelianGeometricFibres); conclusion ∃ K finite-dim IsGalois, A IsAbelianVariety, q smooth surjective flat LOFP+QC+QS, kernel IsPullback with splitTorus K r, torsor iso e pinned by fst and lift fst (snd≫i)≫μ. Edge cases r=0, trivial H/A, imperfect k, nonsplit torus, single universe u OK. All 12 stmt_deps via recorded decls; no duplicate in live Sheaf; item not yet stated live. Docstrings carry source place + blueprint and the 9 steps; plain imports = recorded proof_dep modules. Not recompiled (no change)."
+ }
+}

@@ -2,7 +2,7 @@
  "id": "lem-trf-composed-valuation-etale",
  "kind": "statement",
  "title": "Etale extensions commute with composition of finite-height valuations",
- "statement": "Let $F\\subseteq E$ be a finite field extension [def-pc-field-extension]. Let $A\\subset F$ and $B\\subset E$ be valuation rings [def-trf-valuation-ring] of finite height such that $B\\cap F=A$. Here height is the largest number of strict inclusions in a chain of prime ideals, and finite height means there are finitely many prime ideals. Put $k=A/\\mathfrak m_A$ and $l=B/\\mathfrak m_B$, where $\\mathfrak m_A=A\\setminus A^\\times$ and similarly for $B$. Let $C\\subseteq k$ and $D\\subseteq l$ be valuation rings of finite height with $D\\cap k=C$. If $A\\to B$ and $C\\to D$ are etale [def-weil-etale-morphism], then the inclusion of the inverse-image rings $\\{a\\in A:\\bar a\\in C\\}\\to\\{b\\in B:\\bar b\\in D\\}$ is etale. These inverse-image rings are the composed valuation rings in $F$ and $E$, respectively.",
+ "statement": "Let $F\\subseteq E$ be a finite field extension [def-pc-field-extension]. Let $A\\subset F$ and $B\\subset E$ be valuation rings [def-trf-valuation-ring] of finite height with fraction fields $F$ and $E$, respectively, such that $B\\cap F=A$. Here height is the largest number of strict inclusions in a chain of prime ideals, and finite height means there are finitely many prime ideals. Put $k=A/\\mathfrak m_A$ and $l=B/\\mathfrak m_B$, where $\\mathfrak m_A=A\\setminus A^\\times$ and similarly for $B$. Let $C\\subseteq k$ and $D\\subseteq l$ be valuation rings of finite height with fraction fields $k$ and $l$, respectively, such that $D\\cap k=C$. If $A\\to B$ and $C\\to D$ are etale [def-weil-etale-morphism], then the inclusion of the inverse-image rings $\\{a\\in A:\\bar a\\in C\\}\\to\\{b\\in B:\\bar b\\in D\\}$ is etale. These inverse-image rings are the composed valuation rings in $F$ and $E$, respectively.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "place": "Proposition 2.2.2, printed pp. 11--12, together with Lemma 2.1.6.",
@@ -13,9 +13,123 @@
   "def-trf-valuation-ring",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R=\\{a\\in A:\\bar a\\in C\\}$ and $S=\\{b\\in B:\\bar b\\in D\\}$, and abbreviate $\\mathfrak m_A=m$, $\\mathfrak m_B=m'$, $\\mathfrak m_C=p$, $\\mathfrak m_D=p'$. Apply [lemma-nagata-composite-valuation-ring] twice: $R,S$ are valuation rings with fraction fields $F,E$, $m\\subset R$, $m'\\subset S$, and their residue restriction maps give $R/m=C$ and $S/m'=D$. All identifications here send an element to its actual residue. A valuation ring is local by the following direct check: its nonunits are closed under multiplication by ring elements, and for two nonzero nonunits $x,y$, either $x/y$ or $y/x$ belongs to the ring, so $x+y$ is a ring multiple of a nonunit. Thus the nonunits form an ideal, and every proper ideal lies in it. In particular $R,S$ are local. An element $r\\in R$ is a unit exactly when its residue in $C$ is a unit: one direction follows by reducing its inverse, and the other by taking its inverse in $A$ and reducing. Hence the maximal ideals $n,n'$ of $R,S$ are the inverse images of $p,p'$, respectively, and $R/n=C/p$, $S/n'=D/p'$.",
+   "uses": [
+    "lemma-nagata-composite-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.2, notation paragraph; composition as in Lemma 2.1.4. Elementary locality and unit calculations supplied explicitly."
+   }
+  },
+  {
+   "text": "The inclusions $A\\to B$ and $C\\to D$ are local. For example, $a\\in A$ becomes a unit in $B$ precisely when $a^{-1}\\in B\\cap F=A$; the same argument uses $D\\cap k=C$. The induced map $k\\to l$ is therefore injective and agrees with the residue inclusion in the statement. By [def-weil-etale-morphism], the two assumed etale maps are unramified and locally of finite type. Apply [lem-trf-unramified-maximal-ideal-residue-criterion] to their closed points (the stalks of these local affine spectra are the rings themselves). It gives $m'=mB$, $p'=pD$, and finite separability of both $l/k$ and $(D/p')/(C/p)$. The inverse-image descriptions in Step 1 and the locality of $C\\to D$ also show $S\\cap F=R$ and $n'\\cap R=n$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-unramified-maximal-ideal-residue-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF, lemma-unramified-at-point, (1) implies (6); applied to both etale maps as in Temkin Proposition 2.2.2."
+   }
+  },
+  {
+   "text": "The $R$-module $S$ is torsion-free: if $0\\ne r\\in R$ and $rs=0$ in $S\\subset E$, the field cancellation law gives $s=0$. Since $R$ is a valuation ring by Step 1, [lem-trf-valuation-torsionfree-flat] makes $S$ flat over $R$.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0539, lemma-valuation-ring-torsion-free-flat; Temkin Proposition 2.2.2, first check."
+   }
+  },
+  {
+   "text": "For each $z\\in B$ there is $c\\in R\\setminus m$ with $cz\\in S$. To verify this, put $\\alpha=\\bar z\\in l$. If $\\alpha\\in D$, take $c=1$. Otherwise $\\alpha\\ne0$, and apply [lem-trf-valuation-value-group-torsion] to the finite extension $l/k$ from Step 2 and the valuation ring $D$ of $l$ (its fraction field is $l$, so every $z\\in l^\\times$ has $z$ or $z^{-1}$ in $D$): write $\\alpha^N=a u$ with $N\\ge1$, $a\\in k^\\times$, and $u,u^{-1}\\in D$. Since $\\alpha\\notin D$, its inverse is a nonunit of $D$. Therefore $a^{-1}=u\\alpha^{-N}$ is a nonunit of $D$, and $t=a^{-1}\\in D\\cap k=C$ is nonzero. Also $t\\alpha=u\\alpha^{1-N}\\in D$. Lift $t$ along the surjection $R\\to C$ to $c\\in R$. Its nonzero residue makes $c$ a unit of $A$, so $c\\notin m$, and $\\overline{cz}=t\\alpha\\in D$, as required. This writes out the denominator step without introducing a uniform localizing element.",
+   "uses": [
+    "lem-trf-valuation-value-group-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, algebraic value-group input; elementary denominator argument adapting Temkin Proposition 2.2.2."
+   }
+  },
+  {
+   "text": "The affine etale/ring etale equivalence [lem-weil-pbc-etale-ring-map-iff-etale-affine] gives finite presentations for $B$ over $A$ and $D$ over $C$, hence finite sets of algebra generators. Choose $z_1,\\ldots,z_r$ generating $B$ over $A$. For each $z_i$, Step 4 gives $c_i\\in R\\setminus m$ with $a_i=c_i z_i\\in S$. Since every $c_i$ is a unit in $A$, still $B=A[a_1,\\ldots,a_r]$. Consequently $m'=mB=m[a_1,\\ldots,a_r]\\subset R[a_1,\\ldots,a_r]$: in any finite sum of products of an element of $m$ and a polynomial over $A$, each coefficient belongs to the ideal $m$ of $A$, and hence to $R$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GJ, lemma-etale-characterize; Temkin Proposition 2.2.2, finite-generation paragraphs."
+   }
+  },
+  {
+   "text": "Lift a finite set of $C$-algebra generators of $D$ to $b_1,\\ldots,b_t\\in S$ using $S\\to D$. For $s\\in S$, express its residue as a polynomial in their residues with coefficients in $C$, and lift those finitely many coefficients to $R$. The resulting $q(b_1,\\ldots,b_t)\\in R[b_1,\\ldots,b_t]$ has the same residue as $s$. Thus $s-q(b_1,\\ldots,b_t)\\in m'\\subset R[a_1,\\ldots,a_r]$ by Step 5. This proves the actual equality $S=R[a_1,\\ldots,a_r,b_1,\\ldots,b_t]$, including when either generator list is empty. In particular $S$ is a finite type $R$-algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.2, final paragraph: residue generators and the inclusion of the coarse maximal ideal prove finite generation."
+   }
+  },
+  {
+   "text": "For every $d\\in m$ and $z\\in B$ choose such $c$ for $z$; then $d/c\\in m\\subset R$ because $c$ is a unit of $A$. Hence $dz=(d/c)(cz)\\in mS$. Using $m'=mB$ gives $m'=mS\\subset nS$. The image of $nS$ under $S\\to D$ is $pD=p'$, since $n\\to p$ and $S\\to D$ are surjective. The ideal $n'$ is exactly the inverse image of $p'$ and contains $m'$. Thus both $nS$ and $n'$ contain the kernel $m'$ and have the same image $p'$, so $nS=n'$. Moreover the residue extension $(S/n')/(R/n)$ is the finite separable extension $(D/p')/(C/p)$ of Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.2, maximal-ideal calculation; denominators supplied by Step 4 and quotient identifications by Step 1."
+   }
+  },
+  {
+   "text": "Let $P=R[X_1,\\ldots,X_{r+t}]$ and let $e:P\\twoheadrightarrow S$ be evaluation at the generators of Step 6. Apply [lem-trf-valuation-finite-type-module-presentation] with base valuation ring $R$, finite type algebra $P$, and $P$-module $S$. This module is cyclic (generated by $1$ because $e$ is surjective) and is $R$-flat by Step 3. Hence $S$ is finitely presented as a $P$-module. Now [lem-trf-finite-presentation-surjective-module-kernel] applied to the surjective $P$-linear map $e:P\\to S$ gives finitely many $P$-module generators of $\\ker e$. As $\\ker e$ is an ideal of $P$, those same generators generate it as an ideal. The evaluation map therefore presents $S$ as a polynomial algebra on finitely many variables modulo finitely many relations, exactly [def-weil-pbc-finitely-presented-algebra].",
+   "uses": [
+    "lem-trf-valuation-finite-type-module-presentation",
+    "lem-trf-finite-presentation-surjective-module-kernel",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 053E, lemma-flat-finite-type-valuation-ring-finite-presentation, (2); Tag 0519, algebra.tex lemma-extension (5), for the module kernel. This supplies the finite-presentation check in Temkin Proposition 2.2.2 without using RG as an uncited black box."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-local-flat-unramified-etale] to the actual inclusion $R\\to S$. The rings are local and the inclusion is local by Steps 1--2; Step 8 gives finite presentation, Step 3 flatness, and Step 7 both $nS=n'$ and finite separability of the residue extension. The criterion gives etaleness of $R\\to S$, equivalently etaleness of its affine spectrum map. Step 1 already identified these two rings as the composed valuation rings in $F,E$. This proves every clause of the statement.",
+   "uses": [
+    "lem-weil-pbc-local-flat-unramified-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U6, lemma-characterize-etale, local-ring specialization; conclusion of Temkin Proposition 2.2.2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-trf-finite-presentation-surjective-module-kernel",
+  "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "lem-trf-valuation-finite-type-module-presentation",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-trf-valuation-value-group-torsion",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-local-flat-unramified-etale",
+  "lemma-nagata-composite-valuation-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 2.2.2, printed pp. 11--12, read online at https://arxiv.org/html/0707.3953v3#S2.SS2; local archival PDF WANTED. Follows its flatness/maximal-ideal/finite-presentation argument; explicit finite-denominator variant uses the existing algebraic value-group lemma and replaces RG by Stacks 053E(2)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +165,94 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.trans\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h₁ : IsUnramifiedAtInfinitePlaces k K] [h₂ : IsUnramifiedAtInfinitePlaces K F], IsUnramifiedAtInfinite\", \"doc\": \"If the field extensions $ K/k $ and $ F/K $ are both unramified at all infinite places, then the composite extension $ F/k $ is also unramified at all infinite places. This means that the property of \"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.top\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h : IsUnramifiedAtInfinitePlaces k F], IsUnramifiedAtInfinitePlaces K F\", \"doc\": \"If the field extension $ k/F $ is unramified at all infinite places, then the extension $ K/F $ is also unramified at all infinite places. This means that the property of being unramified in archimede\"}\n  {\"name\": \"Algebra.Unramified.comp\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u_2) (B : Type u_3) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Unramified R A]\\n  [Algebra.Unramified A B], Algebra.Unramified R B\", \"doc\": \"Given commutative rings $R$, $A$, and $B$ with $A$ an $R$-algebra and $B$ an $A$-algebra, if the scalar actions satisfy the tower compatibility condition $R \\to A \\to B$, and $A$ is unramified over $R$ \"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_map_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [inst_5 : q.IsPrime]\\n  [inst_6 : q.LiesOver p],\\n  Algebra.IsUnramifiedAt R q ↔\\n    Algebra.IsSeparable p.ResidueField q.Resi\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces.bot\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (K : Type u_2) [inst_1 : Field K] (F : Type u_3) [inst_2 : Field F]\\n  [inst_3 : Algebra k K] [inst_4 : Algebra k F] [inst_5 : Algebra K F] [IsScalarTower k K F]\\n  [h₁ : IsUnramifiedAtInfinitePlaces k F] [Algebra.IsAlgebraic K F], IsUnramifiedAtInfinitePlaces k K\", \"doc\": \"If a field extension $ F/k $ is unramified at all infinite places and $ K $ is an algebraic extension of $ F $, then the extension $ K/k $ is also unramified at all infinite places.\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.comp\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is unramified over $ R $ at a prime ideal $ p $, and $ B $ is unramified over $ A $ at a prime ideal $ P $ lying over $ p $, then $ B $ is unramified over $ R $ at $ P $. This holds under the\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"IsUnramifiedAtInfinitePlaces\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Ramification\", \"type\": \"(k : Type u_1) → [inst : Field k] → (K : Type u_2) → [inst_1 : Field K] → [Algebra k K] → Prop\", \"doc\": \"The field extension $ K/k $ is unramified at all infinite places, meaning that the extension does not introduce ramification in the archimedean valuations corresponding to embeddings into $ \\\\mathbb{R}\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale extensions of valuation rings commute with composition of a valuation and a residue field valuation",
+   "results": "OK 8 hits; Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap, RingHom.Etale.stableUnderComposition, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, IsLocalRing.ResidueField.map_comp_residue, IsLocalRing.ResidueField.algebraMap_residue, IsLocalRing.ResidueField.map_map, IsLocalRing.ResidueField.lift_comp_residue, IsLocalRing.ResidueField.map_comp",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, Algebra.Etale",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compos.*valuation|valuation.*compos|residue.*[Ee]tale",
+   "results": "OK 6 hits; Mathlib/RingTheory/Valuation/RamificationGroup.lean, Mathlib/RingTheory/Valuation/RamificationGroup.lean, Mathlib/RingTheory/Valuation/RamificationGroup.lean, Mathlib/RingTheory/Valuation/RamificationGroup.lean, Mathlib/RingTheory/LocalRing/Etale.lean, Mathlib/RingTheory/LocalRing/Etale.lean; Mathlib/RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of valuations and etale extensions of valuation subrings",
+   "results": "OK 8 hits; Valuation.comap, ValuationSubring.comap_comap, Valuation.comap_apply, ValuationSubring.mapOfLE_comp_valuation, Valuation.HasExtension.mk, AddValuation.comap_comp, ValuativeExtension.compatible_comap, Valuation.map",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type flat algebra over a valuation ring is finitely presented",
+   "results": "OK 8 hits; Algebra.IsStandardSmooth.finitePresentation, Algebra.FinitePresentation.of_finiteType, AlgHom.FinitePresentation.of_finiteType, RingHom.FinitePresentation.of_finiteType, IsLocalization.Away.finitePresentation, Algebra.Smooth.finitePresentation, Module.FinitePresentation.iff_finitePresentation_of_finite, Algebra.FinitePresentation.of_finitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every overring of a finite height valuation ring is localization by one nonzero element",
+   "results": "OK 8 hits; Valuation.Integers.isFractionRing, ValuationSubring.ofPrime_localization, ValuationRing.TFAE, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation, ValuationRing.iff_isInteger_or_isInteger, ValuationRing.instIsFractionRingInteger, ValuationRing.isFractionRing_iff",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, IsLocalization.Away",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every overring of a valuation ring with finitely many prime ideals is obtained by inverting one element",
+   "results": "OK 8 hits; ValuationRing.isInteger_or_isInteger, ValuationRing.TFAE, ValuationSubring.primeSpectrumEquiv, ValuationRing.iff_isInteger_or_isInteger, ValuationSubring.ofPrime_localization, ValuationSubring.mem_or_inv_mem', of_isDiscreteValuationRing, ValuationSubring.le_ofPrime",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofPrime_localization|primeSpectrumEquiv|primeSpectrumOrderEquiv|finite.*[Pp]rime|[Ff]inite.*[Ss]pectrum",
+   "results": "OK 5 hits; Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean; Mathlib/RingTheory/Valuation",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valuation domain with finite prime spectrum has every prime localization equal to localization away from a single element",
+   "results": "OK 8 hits; ValuationSubring.ofPrime_localization, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsDedekindDomainDvr.is_dvr_at_nonzero_prime, ValuationSubring.primeSpectrumEquiv_apply, Localization.AtPrime.isLocalRing, IsDedekindDomainDvr, IsDedekindDomain.isDedekindDomainDvr, Localization.AtPrime.isDedekindDomain",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*spectrum|spectrum.*finite|finite.*[Pp]rime|[Pp]rime.*finite|Away",
+   "results": "OK 25 hits; Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Away/Lemmas.lean, Mathlib/RingTheory/Localization/Away/Lemmas.lean, Mathlib/RingTheory/Localization/Away/Lemmas.lean; Mathlib/RingTheory/Localization",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale valuation ring extension remains etale under compatible pullbacks of etale residue valuation rings",
+   "results": "OK 8 hits; Algebra.Etale.comp, Algebra.IsEtaleAt.comp, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.localization_map, Algebra.FormallyEtale.localization_base, StandardEtalePair.instEtaleRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -84,5 +282,32 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-composed-valuation-etale",
+  "worker": "stage1",
+  "summary": "Q51 checked Temkin Proposition 2.2.2 online and all cited node statements. Wrote an explicit nine-step argument, including denominator scaling, polynomial coefficients in the coarse maximal ideal, generation modulo that ideal, maximal-ideal equality, and a polynomial-module proof of finite presentation from existing nodes. No new nodes or statement changes; no Lean or compilation. Review FIX (Q51 S1 reader): the statement now says that A,B,C,D have fraction fields F,E,k,l (Temkin's valuations are on the fields); without it the literal statement is false (k=Q(s), l=k(sqrt s), A=k[x]_(x), B=l[x]_(x), C=D=Z_(p)), and Step 4 needs it.",
+  "blueprint": "Realizes the existing semistable-uniformization auxiliary branch below lem-trf-local-term-locality, via lem-trf-valued-curve-etale-parameter; Temkin Proposition 2.2.2 supporting Lemma 2.1.6. The current blueprint ancestor has the contracting-local-term route, not a new statement of this valuation lemma; no unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-474e6348f",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-474e6348f (reviewer sub-agent of L); spot-checked: Read the item in full (9 steps, no new nodes), every cited statement (composite valuation node, 02GF unramified criterion, 0539, 0ASJ value-group input, 02GJ, 053E(2), 0519(5), 00F3, 00U6) and Temkin's §2.1, Lemma 2.1.6 and Prop. 2.2.2 with its proof (arXiv html). All steps check out. The denominator in Step 4 works because a^{-1}=uα^{-N} lies in p'∩k=p and tα=uα^{1-N} lies in D. Steps 5–6 give S=R[a,b] because m'=mB⊂R[a]. Step 7 gives nS=n' because both ideals contain the kernel m' and map onto p'. Step 8 gives finite presentation over P from 053E(2) and 0519(5). Step 9 meets all four hypotheses of 00U6. One fault, fixed: the statement never said that A,B,C,D have fraction fields F,E,k,l. def-trf-valuation-ring uses the ring's own fraction field, so the literal statement is false. Counterexample: k=Q(s), l=k(√s), A=k[x]_(x), B=l[x]_(x), C=D=Z_(p); then S=R⊕xA·y is not of finite type over R. Step 4 needs D to be a valuation ring of l. FIX adds 'with fraction fields F and E' and 'with fraction fields k and l' to the statement, which is Temkin's setting of valuations on the fields, not a weakening. Step 4 now names the property, and split_report.summary records the change. The only citer, lem-trf-valued-curve-etale-parameter, applies the item to valuation rings of fields, so it does not break. Edge cases checked: field case, trivial residual valuations, N=1, α∈D, non-Noetherian rings. No SGA source. Finite height is unused but kept.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-local-ddbar-potential-calculus",
+ "kind": "statement",
+ "title": "Local complex Hessian forms and holomorphic pullback",
+ "statement": "Use the real and complex fields [def-weil-field]. Let $d,e\\geq0$, let $U\\subseteq\\mathbf C^d$ and $V\\subseteq\\mathbf C^e$ be open, and let $\\phi:U\\to\\mathbf R$ be $C^\\infty$ in real coordinates. Write $z_j=x_j+iy_j$, $\\partial_{z_j}=\\tfrac12(\\partial_{x_j}-i\\partial_{y_j})$ and $\\partial_{\\bar z_j}=\\tfrac12(\\partial_{x_j}+i\\partial_{y_j})$. On differential forms, $\\partial$ and $\\bar\\partial$ mean differentiation of the coefficients followed by exterior multiplication by $dz_j$ and $d\\bar z_j$, respectively. Define\n$$D_U\\phi=\\frac{i}{2\\pi}\\partial\\bar\\partial\\phi=\\frac{i}{2\\pi}\\sum_{r,s=1}^d\\frac{\\partial^2\\phi}{\\partial z_r\\partial\\bar z_s}\\,dz_r\\wedge d\\bar z_s.$$\nHere differential forms are alternating multilinear functions on real tangent vectors with complex coefficients; real means fixed by conjugation, closed means exterior derivative zero, and type $(1,1)$ means a sum of $dz_r\\wedge d\\bar z_s$ terms. Then $D_U\\phi$ is a smooth real closed form of type $(1,1)$, and $D_U$ is real-linear. If $F:V\\to U$ is holomorphic (its coordinate functions are locally convergent complex power series), then $F^*(D_U\\phi)=D_V(\\phi\\circ F)$, where pullback evaluates a form on the real differential of $F$. If $h:U\\to\\mathbf C$ is holomorphic and nowhere zero, then $\\log|h|^2$ is smooth and $D_U(\\log|h|^2)=0$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally. Read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf: I §3.C, (3.13)–(3.19), printed pp.23–25 (Wirtinger calculus and pullback); V §13, line-bundle curvature change of frame, and VI §4 Example (4.4), printed p.297. Log-modulus consequence follows by differentiating h and its conjugate; no global logarithm is assumed."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-kahler-coordinate-data"
+ ],
+ "proof": [
+  {
+   "text": "Work locally on the open real coordinate domain. By [lem-sfb-real-smooth-differentiation], every real partial derivative of $\\phi$ is smooth, and real differentiation is linear and obeys the product rule. Evaluation of a real differential on a fixed coordinate vector is a continuous real-linear map, so iterating this observation also gives smoothness of all coefficient derivatives. By [lem-sfb-real-second-derivative-symmetry], any two real coordinate derivatives commute on a smooth coefficient. Expanding $\\partial_{z_r}$ and $\\partial_{\\bar z_s}$ as the specified constant linear combinations therefore shows that any two Wirtinger derivatives commute on smooth coefficients. Real differentiation commutes with conjugation by the real chain rule, since conjugation is real-linear; hence $\\overline{\\partial_{z_r}a}=\\partial_{\\bar z_r}\\overline a$ and $\\overline{\\partial_{\\bar z_r}a}=\\partial_{z_r}\\overline a$.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-real-second-derivative-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly, Complex Analytic and Differential Geometry, I §3.C, equations (3.13)–(3.19), printed pp.23–25; read online from the author URL in the item source. Coordinate calculation expanded here from the cited Mathlib calculus statements."
+   }
+  },
+  {
+   "text": "Put $H_{rs}=\\partial_{z_r}\\partial_{\\bar z_s}\\phi$. Step 1 gives $\\overline{H_{rs}}=\\partial_{\\bar z_r}\\partial_{z_s}\\phi=H_{sr}$ because $\\phi$ is real. Conjugating the displayed formula for $D_U\\phi$ gives $(-i/2\\pi)\\sum_{r,s}H_{sr}\\,d\\bar z_r\\wedge dz_s$. Reversing the wedge factors and renaming $r,s$ recovers $D_U\\phi$, proving reality. Smoothness follows from the smooth coefficients, and type $(1,1)$ is exactly its displayed expansion. For real constants $a,b$, coefficient differentiation gives $H(a\\phi+b\\psi)=aH(\\phi)+bH(\\psi)$ by [lem-sfb-real-smooth-differentiation]; multiplication by $i/2\\pi$ proves real-linearity.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly, Complex Analytic and Differential Geometry, I §3.C, equations (3.13)–(3.19), printed pp.23–25; read online from the author URL in the item source. Coordinate calculation expanded here from the cited Mathlib calculus statements."
+   }
+  },
+  {
+   "text": "The real-coordinate formula for exterior differentiation, rewritten using $dz_k=dx_k+i\\,dy_k$ and $d\\bar z_k=dx_k-i\\,dy_k$, gives\n$$d(D_U\\phi)=\\frac{i}{2\\pi}\\sum_{k,r,s}\\left((\\partial_{z_k}H_{rs})dz_k\\wedge dz_r\\wedge d\\bar z_s+(\\partial_{\\bar z_k}H_{rs})d\\bar z_k\\wedge dz_r\\wedge d\\bar z_s\\right).$$\nIn the first sum $\\partial_{z_k}H_{rs}=\\partial_{z_r}H_{ks}$ by step 1: apply second-derivative symmetry to the smooth coefficient $\\partial_{\\bar z_s}\\phi$. Terms indexed by $(k,r)$ cancel by alternatingness; diagonal terms vanish. In the second sum $\\partial_{\\bar z_k}H_{rs}=\\partial_{\\bar z_s}H_{rk}$, by commuting the derivatives on smooth coefficients. Interchanging $k,s$ negates the three-fold wedge, so these terms cancel too. The smoothness and commutations used here are precisely [lem-sfb-real-smooth-differentiation] and [lem-sfb-real-second-derivative-symmetry]. Thus the form is closed.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-real-second-derivative-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly, Complex Analytic and Differential Geometry, I §3.C, equations (3.13)–(3.19), printed pp.23–25; read online from the author URL in the item source. Coordinate calculation expanded here from the cited Mathlib calculus statements."
+   }
+  },
+  {
+   "text": "For any holomorphic coordinate function $g$ on an open subset of $\\mathbf C^e$, [lem-sfb-analytic-real-smooth] gives real smoothness and a complex-linear real differential. Write $g_{x_a}=Dg[e_a]$. Complex-linearity gives $g_{y_a}=Dg[i e_a]=i g_{x_a}$, whence $\\partial_{\\bar w_a}g=0$ and $\\partial_{w_a}g=g_{x_a}$. By [lem-sfb-complex-analytic-derivative-rules], the complex differential of $g$ is analytic; evaluation at the fixed complex coordinate vector is complex-linear and analytic by [lem-sfb-complex-analytic-function-operations], so each $g_{w_a}$ is holomorphic as well. The same statements apply componentwise to $F$; the finite-tuple clause of [lem-sfb-complex-analytic-function-operations] makes $F$ analytic and thus real smooth. Conjugation and step 1 also give $\\partial_{w_a}\\overline g=0$ and $\\partial_{\\bar w_a}\\overline g=\\overline{g_{w_a}}$.",
+   "uses": [
+    "lem-sfb-analytic-real-smooth",
+    "lem-sfb-complex-analytic-derivative-rules",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly, Complex Analytic and Differential Geometry, I §3.C, equations (3.13)–(3.19), printed pp.23–25; read online from the author URL in the item source. Coordinate calculation expanded here from the cited Mathlib calculus statements."
+   }
+  },
+  {
+   "text": "Set $F_{r,a}=\\partial_{w_a}F_r$. The real chain rule in [lem-sfb-real-smooth-differentiation], expressed in the Wirtinger basis and using step 4, gives\n$$\\partial_{\\bar w_b}(\\phi\\circ F)=\\sum_s(\\partial_{\\bar z_s}\\phi)(F)\\,\\overline{F_{s,b}}.$$\nDifferentiate in $w_a$. Step 4 applied to the holomorphic $F_{s,b}$ shows $\\partial_{w_a}\\overline{F_{s,b}}=0$, and the remaining chain-rule terms give\n$$\\partial_{w_a}\\partial_{\\bar w_b}(\\phi\\circ F)=\\sum_{r,s}H_{rs}(F)F_{r,a}\\overline{F_{s,b}}.$$\nOn the other hand pullback, by its definition on tangent vectors, sends $dz_r$ to $\\sum_a F_{r,a}dw_a$ and $d\\bar z_s$ to $\\sum_b\\overline{F_{s,b}}d\\bar w_b$. Substitution in the formula for $D_U\\phi$ yields exactly the preceding coefficients multiplied by $i/2\\pi$. Hence $F^*D_U\\phi=D_V(\\phi\\circ F)$; the composite is smooth by the same real smooth composition rule.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly, Complex Analytic and Differential Geometry, I §3.C, equations (3.13)–(3.19), printed pp.23–25; read online from the author URL in the item source. Coordinate calculation expanded here from the cited Mathlib calculus statements."
+   }
+  },
+  {
+   "text": "Let $h$ be as in the final clause and put $q=|h|^2=(\\operatorname{Re}h)^2+(\\operatorname{Im}h)^2$. By [lem-sfb-analytic-real-smooth], $h$ is real smooth. Real and imaginary parts are real-linear, so [lem-sfb-real-smooth-differentiation] gives smoothness of $q$; since $h$ never vanishes, $q>0$, and its logarithm is smooth by the real logarithm and composition clauses. The real differential of the polynomial $|\\zeta|^2$ at $\\zeta$ on $v$ is $v\\overline\\zeta+\\zeta\\overline v$, by the product rule and real-linearity of conjugation. Thus the real chain rule and step 4 give\n$$\\partial_{z_r}\\log q=q^{-1}(\\partial_{z_r}h)\\overline h=\\frac{\\partial_{z_r}h}{h}.$$\nThe division is valid pointwise since $h\\ne0$, and $q=h\\overline h$. No branch of the complex logarithm has been introduced.",
+   "uses": [
+    "lem-sfb-analytic-real-smooth",
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly, Complex Analytic and Differential Geometry, I §3.C, equations (3.13)–(3.19), printed pp.23–25; read online from the author URL in the item source. Coordinate calculation expanded here from the cited Mathlib calculus statements."
+   }
+  },
+  {
+   "text": "By [lem-sfb-complex-analytic-derivative-rules] and [lem-sfb-complex-analytic-function-operations], each $h_{z_r}$ and $1/h$ is holomorphic, so $h_{z_r}/h$ is holomorphic. Step 4 then makes its $\\bar z_s$ derivative zero. Applying [lem-sfb-real-second-derivative-symmetry] to the smooth real function $\\log q$ from step 6, and expanding the Wirtinger derivatives as in step 1, gives\n$$\\partial_{z_r}\\partial_{\\bar z_s}\\log q=\\partial_{\\bar z_s}\\partial_{z_r}\\log q=\\partial_{\\bar z_s}(h_{z_r}/h)=0.$$\nEvery coefficient in $D_U(\\log|h|^2)$ therefore vanishes. Empty domains require no pointwise checks; when $d=0$ or $e=0$ the relevant sums and differential-form components are empty, so all formulas remain valid.",
+   "uses": [
+    "lem-sfb-complex-analytic-derivative-rules",
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-real-second-derivative-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "Demailly, Complex Analytic and Differential Geometry, I §3.C, equations (3.13)–(3.19), printed pp.23–25; read online from the author URL in the item source. Coordinate calculation expanded here from the cited Mathlib calculus statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-real-smooth-differentiation",
+  "lem-sfb-real-second-derivative-symmetry",
+  "lem-sfb-analytic-real-smooth",
+  "lem-sfb-complex-analytic-derivative-rules",
+  "lem-sfb-complex-analytic-function-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §3.C (3.13)–(3.19), printed pp.23–25, read online; explicit coordinate proof assembled from Mathlib calculus, including a direct log-modulus computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth real function the form i partial bar partial phi is real closed and commutes with holomorphic pullback and partial bar partial log norm holomorphic nonzero is zero",
+   "results": "OK 8 hits: AnalyticAt.harmonicAt_log_norm, HarmonicAt.analyticAt_complex_partial, Complex.circleTransformDeriv, AnalyticOnNhd.circleAverage_log_norm_of_ne_zero, HarmonicAt.differentiableAt_complex_partial, jacobiTheta₂_fderiv_undef, DifferentiableOn.isConservativeOn, Complex.circleTransformBoundingFunction. ",
+   "date": "2026-10-24",
+   "verdict": "no match: extDeriv_extDeriv is only d squared equals zero; AnalyticAt.harmonicAt_log_norm (Constructions.lean:107) is restricted to one complex variable and gives harmonicity, not the arbitrary-dimensional form or holomorphic pullback statement; source read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Holomorphic change of coordinates preserves the complex Hessian form and log absolute value of a nonvanishing holomorphic function is pluriharmonic",
+   "results": "OK 8 hits: AnalyticAt.harmonicAt_log_norm, AnalyticOnNhd.circleAverage_log_norm_of_ne_zero, ValueDistribution.proximity_sub_proximity_inv_eq_circleAverage, AnalyticAt.harmonicAt_conj, ContDiffAt.harmonicAt, AnalyticAt.harmonicAt_im, AnalyticAt.harmonicAt, harmonic_is_realOfHolomorphic. ",
+   "date": "2026-10-24",
+   "verdict": "no match: extDeriv_extDeriv is only d squared equals zero; AnalyticAt.harmonicAt_log_norm (Constructions.lean:107) is restricted to one complex variable and gives harmonicity, not the arbitrary-dimensional form or holomorphic pullback statement; source read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ddbar\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: extDeriv_extDeriv is only d squared equals zero; AnalyticAt.harmonicAt_log_norm (Constructions.lean:107) is restricted to one complex variable and gives harmonicity, not the arbitrary-dimensional form or holomorphic pullback statement; source read"
+  },
+  {
+   "tool": "grep",
+   "query": "ddbar|pluriharmonic|Wirtinger|dolbeault|Dolbeault",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: extDeriv_extDeriv is only d squared equals zero; AnalyticAt.harmonicAt_log_norm (Constructions.lean:107) is restricted to one complex variable and gives harmonicity, not the arbitrary-dimensional form or holomorphic pullback statement; source read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complex Hessian ddbar of a smooth real potential is a real closed one one form",
+   "results": "OK 8 hits: extDeriv_extDeriv_apply, extDerivWithin_extDerivWithin_apply, extDeriv_extDeriv, HasStrictDerivAt.real_of_complex, HasDerivAt.complexToReal_fderiv', InnerProductSpace.laplacianWithin_eq_iteratedFDerivWithin_complexPlane, Orientation.kahler, HasStrictDerivAt.complexToReal_fderiv'. ",
+   "date": "2026-10-24",
+   "verdict": "no match: extDeriv_extDeriv is only d squared equals zero; AnalyticAt.harmonicAt_log_norm (Constructions.lean:107) is restricted to one complex variable and gives harmonicity, not the arbitrary-dimensional form or holomorphic pullback statement; source read"
+  },
+  {
+   "tool": "grep",
+   "query": "harmonicAt_log_norm",
+   "results": "OK 5 hits: Mathlib/Analysis/InnerProductSpace/Harmonic/Constructions.lean, Mathlib/Analysis/InnerProductSpace/Harmonic/Constructions.lean, Mathlib/Analysis/InnerProductSpace/Harmonic/Constructions.lean, Mathlib/Analysis/InnerProductSpace/Harmonic/Constructions.lean, Mathlib/Analysis/InnerProductSpace/Harmonic/Constructions.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: extDeriv_extDeriv is only d squared equals zero; AnalyticAt.harmonicAt_log_norm (Constructions.lean:107) is restricted to one complex variable and gives harmonicity, not the arbitrary-dimensional form or holomorphic pullback statement; source read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth real potential its complex Hessian defines a real closed (1,1) form natural under holomorphic pullback and vanishes on log squared modulus of a nonzero holomorphic function",
+   "results": "8 hits: AnalyticAt.harmonicAt_log_norm, ValueDistribution.proximity_sub_proximity_inv_eq_circleAverage, HarmonicAt.differentiableAt_complex_partial, Complex.kahler, HarmonicAt.analyticAt_complex_partial, InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane, ContDiffAt.harmonicAt, InnerProductSpace.laplacianWithin_eq_iteratedFDerivWithin_complexPlane",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonicAt_log_norm concerns one variable; extDerivWithin_pullback concerns the real exterior derivative, not the type-split operators or the full Hessian statement. Sources checked; the smaller real and analytic calculus inputs are separate leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dolbeault partial bar partial operator commutes with holomorphic maps and log absolute value of a holomorphic unit is pluriharmonic",
+   "results": "8 hits: AnalyticAt.harmonicAt_log_norm, AnalyticOnNhd.circleAverage_log_norm_of_ne_zero, ValueDistribution.proximity_sub_proximity_inv_eq_circleAverage, circleAverage_log_norm_sub_const₁, AnalyticAt.harmonicAt_conj, AnalyticAt.harmonicAt_im, circleAverage_log_norm_sub_const_eq_posLog, circleAverage_log_norm_sub_const₀",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonicAt_log_norm concerns one variable; extDerivWithin_pullback concerns the real exterior derivative, not the type-split operators or the full Hessian statement. Sources checked; the smaller real and analytic calculus inputs are separate leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ddbar\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonicAt_log_norm concerns one variable; extDerivWithin_pullback concerns the real exterior derivative, not the type-split operators or the full Hessian statement. Sources checked; the smaller real and analytic calculus inputs are separate leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "ddbar|pluriharmonic|Wirtinger|Dolbeault",
+   "results": "0 hits: . Subdirectory: Analysis",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonicAt_log_norm concerns one variable; extDerivWithin_pullback concerns the real exterior derivative, not the type-split operators or the full Hessian statement. Sources checked; the smaller real and analytic calculus inputs are separate leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complex Hessian of a real potential is a closed real form and commutes with holomorphic pullback",
+   "results": "8 hits: extDerivWithin_pullback, harmonic_is_realOfHolomorphic, Orientation.kahler, Complex.kahler, complexOfReal_hasDerivWithinAt, HasDerivAt.complexToReal_fderiv', HasDerivAt.complexToReal_fderiv, InnerProductSpace.laplacian_eq_iteratedFDeriv_complexPlane",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonicAt_log_norm concerns one variable; extDerivWithin_pullback concerns the real exterior derivative, not the type-split operators or the full Hessian statement. Sources checked; the smaller real and analytic calculus inputs are separate leaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-projective-kahler-geometry",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Supporting input: Compact projective complex geometry and its Fubini--Study metric. Supporting input: coordinate-invariant complex Hessian calculus underlying the local Fubini–Study potentials in Demailly VI §4 (4.4).",
+   "via": [
+    "lem-sfb-analytic-projective-kahler-geometry",
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-ddbar-potential-calculus",
+  "worker": "stage1",
+  "summary": "Kept the statement and its normalizations. Expanded reality, closedness, holomorphic pullback and log-modulus vanishing into explicit coordinate calculations. Added three Mathlib calculus leaves; reused the existing complex-analytic derivative and function-operation leaves. All citations checked against statements, no global logarithm assumed.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), through the inherited analytic projective/Kodaira/GAGA supporting chain. Coordinate calculus is below the unit route; ancestor is null as reported by blueprint_refs.py; no same statement found across blueprint."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-2352527a7",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-2352527a7 (reviewer sub-agent of L); spot-checked: Read the item, its 7 steps, the 3 new Mathlib leaves, the cited derivative-rules and function-operations leaves, def-weil-field and the citer analytic-projective-kahler-geometry. The item is unsplit in live and side-live, has no repair note, and its statement and source are unchanged. Mathlib signatures checked: ContDiffAt.isSymmSndFDerivAt Symmetric.lean:533 (minSmoothness ℝ 2 = 2, IsSymmSndFDerivAt l.88 is the displayed equality); AnalyticOnNhd.contDiffOn Defs:718 (UniqueDiffOn from open U); ContDiffOn.restrict_scalars Operations:1049; AnalyticAt.differentiableAt FDeriv/Analytic:126; HasFDerivAt.restrictScalars RestrictScalars:56; ContDiffAt.add/mul/comp/fderiv_right/differentiableAt; HasFDerivAt.add/mul/comp; Real.hasDerivAt_log and Real.contDiffAt_log (Log/Deriv l.52/74). Each leaf is one declaration per clause with three search kinds. I recomputed every step: reality via conj H_rs = H_sr and wedge reversal; closedness via symmetric triple derivatives against antisymmetric wedges in (k,r) and (k,s); holomorphic g_y = i g_x, hence dbar g = 0 and g_w analytic; the pullback coefficients H_rs(F) F_ra conj(F_sb) match F*dz_r = sum F_ra dw_a; d log|h|^2 = h_z/h, which is holomorphic, then commutation gives 0, with no complex log. Edge cases tested: d=0 or e=0, phi=|z|^2 giving dx∧dy/pi, h=z on C minus 0, the diagonal map w to (w,w). No new node restates an item clause and no SGA is cited. Advisory: lem-sfb-real-derivative-complex-linear overlaps only the restrictScalars clause of lem-sfb-analytic-real-smooth, not the real C^∞ clause, so it is not a duplicate; 'log' in the pre-existing statement cites no def node. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Complex.LocalDdbarPotentialCalculus",
+  "declaration": "ComplexManifold.local_ddbar_potential_calculus",
+  "declarations": [
+   "ComplexManifold.ddbarCoordinateWedge",
+   "ComplexManifold.ddbarPotential",
+   "ComplexManifold.local_ddbar_potential_calculus"
+  ],
+  "file": "lean/Sheaf/Geometry/Complex/LocalDdbarPotentialCalculus.lean",
+  "statement": "theorem local_ddbar_potential_calculus (d : ℕ) (U : Set (Model d)) (hU : IsOpen U) (φ : Model d → ℝ) (hφ : ContDiffOn ℝ ∞ φ U) : ContDiffOn ℝ ∞ (ddbarPotential U φ) U ∧ (∀ z ∈ U, ∀ v : Fin 2 → Model d, star (ddbarPotential U φ z v) = ddbarPotential U φ z v) ∧ (∀ z ∈ U, extDerivWithin (ddbarPotential U φ) U z = 0) ∧ (∃ H : Model d → Fin d → Fin d → ℂ, ∀ z ∈ U, ddbarPotential U φ z = ∑ r : Fin d, ∑ s : Fin d, H z r s • ddbarCoordinateWedge r s) ∧ (∀ (ψ : Model d → ℝ), ContDiffOn ℝ ∞ ψ U → ∀ a b : ℝ, Set.EqOn (ddbarPotential U (fun z ↦ a * φ z + b * ψ z)) (fun z ↦ a • ddbarPotential U φ z + b • ddbarPotential U ψ z) U) ∧ (∀ (e : ℕ) (V : Set (Model e)), IsOpen V → ∀ F : Model e → Model d, Set.MapsTo F V U → (∀ r : Fin d, AnalyticOnNhd ℂ (fun z ↦ F z r) V) → ContDiffOn ℝ ∞ (φ ∘ F) V ∧ Set.EqOn (fun z ↦ (ddbarPotential U φ (F z)).compContinuousLinearMap (fderivWithin ℝ F V z)) (ddbarPotential V (φ ∘ F)) V) ∧ (∀ h : Model d → ℂ, AnalyticOnNhd ℂ h U → (∀ z ∈ U, h z ≠ 0) → ContDiffOn ℝ ∞ (fun z ↦ Real.log (‖h z‖ ^ 2)) U ∧ Set.EqOn (ddbarPotential U (fun z ↦ Real.log (‖h z‖ ^ 2))) 0 U)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two definition helpers construct precisely the coordinate wedge and normalized Hessian introduced in this node, using existing Wirtinger operators. Comparisons use EqOn on the open domains; no ambient extension assumption is made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a050bb8a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "All node clauses matched in Lean: wirtingerPartial(wirtingerBarPartial φ) order and signs exact, I/(2π) normalisation (|z|²→dx∧dy/π), ddbarCoordinateWedge = unnormalised alternatization consistent with Mathlib extDerivWithin, reality via star, closedness via extDerivWithin on open U, type (1,1) as explicit coefficient sum, real-linearity, pullback via compContinuousLinearMap(fderivWithin ℝ F V z) with AnalyticOnNhd coordinates and MapsTo, log‖h‖² smoothness and vanishing with real log. No stronger hypotheses, no universes; empty U/V, d=0, e=0 hold. No duplicate ddbar/wedge in Sheaf, WeilConjectures, DAG or Mathlib. lean.statement verbatim; added stmt_dep def-sfb-kahler-coordinate-data is landed on base and used. Helpers are real constructions, proof only sorry, docstrings with source and blueprint present. Advisory: Second reading section is the stock text. No file changed, no compile run."
+ }
+}

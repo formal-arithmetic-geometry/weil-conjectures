@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-smooth-fixed-residue-artinian-test",
+ "kind": "statement",
+ "title": "Smoothness from Artinian tests with the fixed residue field",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], locally of finite type [def-weil-finite-type-morphism], with $Y$ locally Noetherian [pqf-def-locnoeth]. Let $x\\in X$ and $k=\\kappa(x)$ [def-weil-residue-field]. A small extension is a surjection $B'\\twoheadrightarrow B$ of Artinian local commutative rings whose kernel has module length one, equivalently is one-dimensional over the residue field of $B'$ and is annihilated by its maximal ideal. Artinian means descending chains of ideals stabilize; local means that there is a unique maximal ideal. Suppose that for every small extension of these rings with residue fields identified with $k$, every map $a:\\operatorname{Spec}B\\to X$ restricting on $\\operatorname{Spec}k$ to the canonical point $x$, and every $b:\\operatorname{Spec}B'\\to Y$ with $fa=b\\operatorname{Spec}(B'\\to B)$, there is $a':\\operatorname{Spec}B'\\to X$ satisfying $a'\\operatorname{Spec}(B'\\to B)=a$ and $fa'=b$. Here all ring maps respect the residue-field identifications and affine spectra are [def-weil-affine-spectrum]. Then there is an open subscheme $N\\subseteq X$ containing $x$ such that $f|_N:N\\to Y$ is smooth [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HX (lemma-lifting-along-artinian-at-point), implication (4) to (1); small extensions are Tag 02HS (algebra.tex, definition-small-extension)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Choose $V=\\operatorname{Spec}R\\subseteq Y$ containing $f(x)$ from a Noetherian affine cover in [pqf-def-locnoeth]. From the finite-type affine cover in [def-weil-finite-type-morphism], choose $U=\\operatorname{Spec}A\\subseteq f^{-1}V$ containing $x$, with $A$ finitely generated over $R$. Factor the restriction through $V$. Write $\\mathfrak q$ for the prime of $A$ corresponding to $x$ and identify $\\kappa(\\mathfrak q)=\\kappa(x)=k$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-affine-spectrum",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "02HX (lemma-lifting-along-artinian-at-point), affine neighbourhood reduction"
+   }
+  },
+  {
+   "text": "Consider a small extension $\\varphi:B'\\to B$ with residues identified with $k$, and maps $\\rho:R\\to B'$, $a:A\\to B$ with $a\\circ(R\\to A)=\\varphi\\rho$ and $A\\to B\\to k$ the canonical residue map at $\\mathfrak q$. The affine spectrum correspondence gives a test square in $X,Y$. Its restriction to $\\operatorname{Spec}k$ is exactly $x$, so the hypothesis supplies a lift into $X$. By the unique-prime lemma $\\operatorname{Spec}B'$ has one point; the lift sends it to $x$, since its restriction along $\\operatorname{Spec}B\\to\\operatorname{Spec}B'$ is the original map. It therefore factors through $U$. Uniqueness of factorization through $V$ and the affine spectrum correspondence give an $R$-compatible ring lift $A\\to B'$. This proves precisely the fixed-residue ring lifting hypothesis of the next step.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "02HX (lemma-lifting-along-artinian-at-point), factor test maps and lifts into the chosen affines"
+   }
+  },
+  {
+   "text": "Choose finitely many $R$-algebra generators of $A$ and evaluate to obtain a surjection $\\alpha:P=R[t_1,\\ldots,t_d]\\to A$. Set $Q=\\alpha^{-1}(\\mathfrak q)$, $C=P_Q$, and $S=A_{\\mathfrak q}$. The induced map $C\\to S$ is surjective: lift the numerator and denominator of a fraction in $S$ along $\\alpha$; the lifted denominator lies outside $Q$. The finite-type Noetherian theorem and localization theorem make $C$ Noetherian; localization at $Q$ makes it local. Write $J=\\ker(C\\to S)$ and $\\mathfrak m=QC$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "02HT (lemma-smooth-test-artinian), polynomial presentation and localization"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-fixed-residue-lifts-truncated-section] to $R,A,\\mathfrak q,C\\to S$ and the ring lifting property proved in step 2. For every $N\\ge1$ this gives an $R$-algebra section of $C/(J^2+\\mathfrak m^N)\\to C/(J+\\mathfrak m^N)$. In particular no lift with a larger residue field has been assumed.",
+   "uses": [
+    "lem-sfb-fixed-residue-lifts-truncated-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "02HT (lemma-smooth-test-artinian), truncated quotients and successive application of (4)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-truncated-polynomial-sections-smooth] to the finite polynomial presentation of step 3 and the sections of step 4. Obtain $g\\notin\\mathfrak q$ for which $R\\to A_g$ is smooth.",
+   "uses": [
+    "lem-sfb-truncated-polynomial-sections-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "02HT (lemma-smooth-test-artinian), final conormal and smoothness argument"
+   }
+  },
+  {
+   "text": "The principal-localization open immersion identifies $\\operatorname{Spec}A_g$ with $D(g)\\subseteq U$, which contains $x$. The affine smoothness comparison makes $\\operatorname{Spec}A_g\\to V$ smooth. Compose with the open inclusion $V\\to Y$ and transport along this identification, using smoothness under restriction and isomorphism, to obtain a smooth morphism $f|_{D(g)}:D(g)\\to Y$. Since $U$ is open in $X$, $D(g)$ is the required open neighbourhood $N$ in $X$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "02HX (lemma-lifting-along-artinian-at-point), return from the affine smooth neighbourhood"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sfb-fixed-residue-lifts-truncated-section",
+  "lem-sfb-truncated-polynomial-sections-smooth",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HX (4) implies (1), reduction to Algebra Tag 02HT (4) implies (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type morphism to a locally Noetherian scheme is smooth at a point if small Artinian lifts with that residue field exist",
+   "sub": "",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, RingHom.smooth_def, RingHom.Smooth, AlgebraicGeometry.FormallyUnramified.recOn",
+   "date": "2026-10-23",
+   "verdict": "No match: smooth-locus and formally smooth stalk criteria do not give the small Artinian fixed-residue-field test. SmoothFiber assumes flatness and smooth fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth at a point criterion using small extensions of Artinian local rings with residue field equal to the residue field of the point",
+   "sub": "",
+   "results": "Read 8 returned hits: Algebra.IsSmoothAt, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, RingHom.Smooth.locally_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, RingHom.smooth_iff_locally_isStandardSmooth, Algebra.smoothLocus, AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+   "date": "2026-10-23",
+   "verdict": "No match: smooth-locus and formally smooth stalk criteria do not give the small Artinian fixed-residue-field test. SmoothFiber assumes flatness and smooth fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsSmooth\", \"IsArtinianRing\"",
+   "sub": "",
+   "results": "Read 0 returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match: smooth-locus and formally smooth stalk criteria do not give the small Artinian fixed-residue-field test. SmoothFiber assumes flatness and smooth fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "Artinian.*[Ll]ift|[Ll]ift.*Artinian|residue.*[Ss]mooth|[Ss]mooth.*residue",
+   "sub": "AlgebraicGeometry",
+   "results": "Read 5 returned hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: smooth-locus and formally smooth stalk criteria do not give the small Artinian fixed-residue-field test. SmoothFiber assumes flatness and smooth fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "isSmooth.*Artinian|Artinian.*isSmooth|lifting.*artinian",
+   "sub": "RingTheory",
+   "results": "Read 0 returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match: smooth-locus and formally smooth stalk criteria do not give the small Artinian fixed-residue-field test. SmoothFiber assumes flatness and smooth fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness of a finite type algebra at a prime from lifting small Artinian local extensions with residue field equal to that prime residue field",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.IsSmoothAt, Algebra.IsEtaleAt, Algebra.smoothLocus, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.Smooth, Algebra.instSmoothOfIsStandardSmooth, Algebra.smooth_iff",
+   "date": "2026-10-23",
+   "verdict": "No match: formal smoothness and smooth loci do not supply fixed-residue Artinian tests."
+  },
+  {
+   "tool": "grep",
+   "query": "Artinian.*[Ll]ift|[Ll]ift.*Artinian|residue.*[Ss]mooth|[Ss]mooth.*residue",
+   "sub": "AlgebraicGeometry",
+   "results": "Read 5 hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: formal smoothness and smooth loci do not supply fixed-residue Artinian tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsArtinianRing",
+   "sub": "",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match: formal smoothness and smooth loci do not supply fixed-residue Artinian tests."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Small extensions of Artinian local rings with fixed residue field detect smoothness at a point",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.IsSmoothAt, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.smoothLocus, Algebra.FormallyEtale.instFormallySmooth, Algebra.Smooth.of_isLocalization_Away, RingHom.Smooth.ofLocalizationSpanTarget, Algebra.FormallySmooth.mk, Algebra.smooth_iff",
+   "date": "2026-10-23",
+   "verdict": "No match: formal smoothness and smooth loci do not supply fixed-residue Artinian tests."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.IsSmoothAt\", \"IsArtinianRing\"",
+   "sub": "",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match: formal smoothness and smooth loci do not supply fixed-residue Artinian tests."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-versal-base-change-smooth",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, last paragraph: More on Morphisms lemma-lifting-along-artinian-at-point, using the fixed chart residue field.",
+   "via": [
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-fixed-residue-artinian-test",
+  "worker": "stage1",
+  "summary": "Separated fixed-residue truncated-section production from the conormal smoothness deduction; retained the affine diagram argument and exact residue marking. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, last paragraph: More on Morphisms lemma-lifting-along-artinian-at-point, using the fixed chart residue field. The six steps supply the fixed-residue smoothness test used in the Tag 0CXM chart argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic comparison of affine ring smoothness with scheme smoothness, needed to return from Tag 02HT; no same-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-0c190a90b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-0c190a90b (reviewer sub-agent of L); spot-checked: I read the source in more-morphisms.tex 02HX (all four conditions and the affine reduction) and the full proof of (4)⇒(1) of algebra.tex 02HT. The item statement is the same as the live node, and it is 02HX (4)⇒(1) with the residue field fixed to κ(x). Its citers use exactly that statement. I tested it on F_p(s^{1/p}) over F_p(s) with B'=F_p(s)[u]/((u^p−s)^2): there is no lift, so the test catches the inseparable non-smooth case, as it should. Step 1 picks U inside f^{-1}V; def-weil-finite-type-morphism allows this because it is stated for every affine V. Step 2 turns the ring test into the scheme test. The one-point Spec B' maps to x, so the lift factors through U, and uniqueness of the factorization through V gives R-compatibility. Steps 3–6 match 02HT and the cited statements say what the steps take from them. proof_deps is exactly the union of the steps' uses. New node 1 (fixed-residue lifts → truncated sections) is true by the 02HT filtration argument. The residue maps stay identities at each stage, so the fixed-residue test applies at every step. N=1 and E=F are trivial. It strictly strengthens the existing lem-weil-pbc-artinian-lifting-truncated-section, which assumes the stronger arbitrary-residue tests, so it is not a duplicate. New node 2 (truncated sections → A_g smooth) is true: Artin–Rees, then lem-weil-pbc-truncated-section-conormal-residue-kernel, then split injection and IsSmoothAt. No existing node states it. It has no lifting hypothesis, so it is strictly smaller than the item. The two nodes are of comparable size and the item proof is a short assembly of them. Both are statement-only, self-contained, and have correct sources and created metadata. Nothing cites SGA. I accept the tool_use lem-weil-pbc-smooth-ring-map-iff-smooth-affine (generic affine smoothness comparison). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothFixedResidueArtinianTest",
+  "declaration": "AlgebraicGeometry.smooth_near_of_fixed_residue_artinian_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothFixedResidueArtinianTest.lean",
+  "statement": "theorem smooth_near_of_fixed_residue_artinian_lifting {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [IsLocallyNoetherian Y] (x : X) (hlift : ∀ (B' B : CommRingCat.{u}) [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B] (q : B' ⟶ B), Function.Surjective q.hom → Module.length B' (RingHom.ker q.hom) = 1 → ∀ (r : B ⟶ X.residueField x), Function.Surjective r.hom → ∀ (a : Spec B ⟶ X) (b : Spec B' ⟶ Y), Spec.map r ≫ a = X.fromSpecResidueField x → a ≫ f = Spec.map q ≫ b → ∃ a' : Spec B' ⟶ X, Spec.map q ≫ a' = a ∧ a' ≫ f = b) : ∃ N : X.Opens, x ∈ N ∧ Smooth (N.ι ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-846f13b6a",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read 02HX (more-morphisms.tex 3575) and 02HS (algebra.tex 38937). Lean matches the node: LocallyOfFiniteType f, IsLocallyNoetherian Y, x : X, small extension = Artinian+local B',B (CommRingCat.{u}), surjective q, Module.length ker = 1. The residue marking ∀ r : B ⟶ κ(x) surjective with Spec.map r ≫ a = fromSpecResidueField x is equivalent to 'closed point ↦ x and κ(x)≅κ(m_B)' (02HX(4)). Square and lift clauses are exact; conclusion ∃ N : X.Opens, x ∈ N ∧ Smooth (N.ι ≫ f). Universe-u tests only weaken the hypothesis (stronger theorem, still provable). Not a duplicate: upstream smooth_near_iff_artinian_lifting_at_point / artinian_lifting_smooth_on_open_reverse state 02HX(3) with arbitrary residue fields. Only the lean field changed versus the live node; statement verbatim; docstrings carry source, blueprint id and the six steps; sorry only; no line over 100; plain imports are the proof_deps' mathlib_match files. Report has Worker report and Second reading sections. No changes, no compile."
+ }
+}

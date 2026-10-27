@@ -69,27 +69,33 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-pf-coherence",
  "lean": {
-  "module": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "module": "Sheaf.Paper.ScalarRoosComparison",
   "declaration": "WeilConjectures.scalarRoosMap",
   "declarations": [
    "WeilConjectures.scalarRoosBoundary",
+   "WeilConjectures.scalarRoosMap_existsUnique",
    "WeilConjectures.scalarRoosMap"
   ],
-  "statement": "def scalarRoosMap\n    {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]\n    {B : Type a'} [Category.{b'} B] [Abelian B] [HasCountableProducts B]\n    (F : A ⥤ B) [F.Additive] (C : ℕᵒᵖ ⥤ CochainComplex A ℤ)",
-  "branch": "newtargets-dag",
-  "by": "NI",
-  "date": "2026-10-21",
+  "statement": "def scalarRoosMap {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A] {B : Type a'} [Category.{b'} B] [Abelian B] [HasCountableProducts B] (F : A ⥤ B) [F.Additive] (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) : (F.mapHomologicalComplex (.up ℤ)).obj (integralOperationsRoos C) ⟶ integralOperationsRoos (C ⋙ F.mapHomologicalComplex (.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26",
   "existing": true,
-  "note": "Definition-only ownership of the existing plain declarations used by the item; no theorem conclusion from this owner module is required."
+  "note": "Existing additive Roos construction and unique coordinate characterization, relocated verbatim for per-file compile time. The generic module retains the proved coordinate naturality and strict tower assembly helpers. IntegralOperationsScalarComparisonModels and the original item publicly re-export the same declarations.",
+  "file": "lean/Sheaf/Paper/ScalarRoosComparison.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -106,5 +112,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Re-delivery after the H2 RETURN of 45a9246c0910. The Lean module is byte-identical (sha dda6b521…), so the earlier clause-by-clause check of the mathematics stands, and a reread found nothing new. The item changes only stmt_deps and lean: the theorem stmt_dep lem-pur-integral-operations-scalar-extension is dropped, all 18 base deps are kept, and six are added: def-sf-strict-roos-functor, def-sf-additive-roos-map, def-sf-integral-koszul-intrinsic-unit, def-sf-integral-open-operations, def-pur-integral-derived-operations and def-coef-ringed-sequence-site. lean.statement is verbatim. Script check: every project identifier used is owned by a cited node. The four new existing:true def nodes were read against their owner sources. integralOperationsRoosFunctor is cocone(1-s) with diagonal Pi.map and proved functor laws. scalarRoosMap is .choose of the proved local scalarRoosMap_existsUnique, not of the node theorem. integralKoszulIntrinsicUnit is e.inv ≫ Q(u,0) into mappingCocone(-(1-s)) of the Koszul tower. IntegralOpenReduction.* are pinned structures and abbrevs. None is hollow, statement fields are verbatim, and the H12 fields are correct. The new ids are absent live, all their stmt_deps exist live, and there is no cycle (1184-node closure). No compile, since no file was changed. Advisory: def-weil-strict-roos-model (roosF) overlaps def-sf-strict-roos-functor with transposed indices, but IntegralOnSlice.roos uses integralOperationsRoosFunctor, so the ownership record is correct. H11: the second reading is a self-reread."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f87f7",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T021328-L-2757675",
+  "kind": "interface",
+  "note": "independent cc review: old item (clone 7dea68d0df6) vs 6 delivered modules: 23 moved decls identical in signature/body, public re-export chain item→Models→ScalarRoosComparison; new sorry integralScalarPullbackRoosQuasiIso read against its node (true: finite-free product commutation + cofinal Roos); all 51 direct importers compiled against delivered modules: 47 OK, 4 timeouts that also time out against the published original"
  }
 }

@@ -1,0 +1,286 @@
+{
+ "id": "lem-pur-ordinary-unit-site-sections-transport",
+ "kind": "statement",
+ "title": "Transport of ordinary units and sections between the two sites",
+ "statement": "Let $f:Y\\to X$ be a quasi-compact, quasi-separated scheme morphism and $\\Lambda$ a finite discrete commutative ring. Work in the small-etale and small-pro-etale module derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules] with exact comparison $C_T=\\nu_T^*$ [def-weil-pbc-site-comparison-morphism]. Let $L$ be an etale sheaf of $\\Lambda$-modules on $X$, in degree zero. Put $l=f_{\\mathrm{et}}^{-1}$, $r=Rf_{\\mathrm{et},*}$ [def-weil-pbc-inverse-image, def-weil-pbc-direct-image] and $P=Lf_{\\mathrm{proet}}^*$, $s=Rf_{\\mathrm{proet},*}$ [def-weil-pbc-proetale-operations]. Write $\\eta^e,\\eta^p$ for the units, $a:C_Yl\\cong PC_X$ for the canonical pullback comparison [lem-weil-pbc-comparison-pullback], and $b:C_Xr\\to sC_Y$ for the counit-normalized comparison [lem-weil-pbc-comparison-direct-image-canonical-mate]. Then\n$$\\eta^p_{C_XL}=s(a_L)\\circ b_{lL}\\circ C_X(\\eta^e_L).$$\nIf $\\eta^e_L:L\\to rlL$ is invertible, the pro-etale unit $\\eta^p_{C_XL}$ is invertible, and the ordinary pullback maps\n$$R\\Gamma(X_{\\mathrm{et}},L)\\longrightarrow R\\Gamma(Y_{\\mathrm{et}},lL),\\qquad R\\Gamma(X_{\\mathrm{proet}},C_XL)\\longrightarrow R\\Gamma(Y_{\\mathrm{proet}},PC_XL)$$\nare isomorphisms of derived $\\Lambda$-modules. Under $a_L$ and the canonical global site comparisons [lem-weil-pbc-comparison-global-cohomology], these are the same morphism. Here ordinary sections and cohomology are [def-weil-pbc-sites-and-cohomology]; the etale section map is $R\\Gamma(X,\\eta^e_L)$ followed by the canonical Leray identification $R\\Gamma(X,rlL)\\cong R\\Gamma(Y,lL)$. Consequently the induced $H^q$ maps are the usual pullbacks for every $q\\in\\mathbf Z$, including zero groups in negative degrees. All displayed identifications are natural in the sheaf $L$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099R, section-comparison; agent named-unit and ordinary-sections refinement of the Transport paragraph of main-20261015/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md. The root-free adjunction calculation and injective-resolution argument are retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use unit_mateEquiv for the two derived pullback/direct-image adjunctions. The counit normalization identifies the given comparison with that mate by injectivity of the adjunction hom equivalence. Cancel the pullback-comparison isomorphism to obtain exactly the stated unit equation.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md",
+    "place": "Step 4, transport; fixed-scalar adjunction and right-derived-functor expansion by Q9."
+   }
+  },
+  {
+   "text": "In the existing fixed-scalar module-sheaf model, define normalized derived base change by removing its identity target functor. Its defining factorization on homotopy complexes determines it uniquely. Compare these factorizations to prove compatibility with natural transformations, composition of exact source functors and source natural isomorphisms. For an exact left adjoint, its normalized derived unit is the actual derived adjunction unit. Combining this with the derived composition isomorphism gives the stated unit/Leray identity on each site. The right adjoints preserve injectives because their left adjoints are exact.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md",
+    "place": "Step 4, transport; fixed-scalar adjunction and right-derived-functor expansion by Q9."
+   }
+  },
+  {
+   "text": "For the underived comparison square, apply the conjugate-equivalence unit equation to the composite adjunctions. Evaluate at the identity object of the etale site. The changes of terminal object in the section functors are given by the unique terminal arrows, as follows from uniqueness of right adjoints to the constant-sheaf functor. Naturality of the inverse pullback comparison, followed by uniqueness of terminal arrows, gives the square of ordinary section units. Apply normalized derived composition and natural-isomorphism compatibility from the preceding step. Substituting finiteComparisonGlobalSections and fixedComparisonPullbackPlus yields the stated derived comparison square.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-global-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md",
+    "place": "Step 4, transport; fixed-scalar adjunction and right-derived-functor expansion by Q9."
+   }
+  },
+  {
+   "text": "If the etale unit is invertible, all factors of the proved unit equation are invertible: the comparison mate is invertible for finite coefficients and qcqs f. Hence the pro-etale unit is invertible. Each unit/Leray identity then expresses ordinary section pullback as a functor applied to an isomorphism followed by the Leray isomorphism, so both section maps are invertible.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md",
+    "place": "Step 4, transport; fixed-scalar adjunction and right-derived-functor expansion by Q9."
+   }
+  },
+  {
+   "text": "A sheaf placed in degree zero is in D^{>=0}. An exact functor preserves this bound, by its homology comparison isomorphism and preservation of zero objects. Apply this to etale pullback, comparison pullback and pro-etale pullback. Right-derived global sections of each resulting bounded-below complex have zero homology in negative degrees by the general right-derived lower-bound theorem. All identities are identities of natural transformations before specialization to L.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md",
+    "place": "Step 4, transport; fixed-scalar adjunction and right-derived-functor expansion by Q9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-global-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md",
+  "place": "Step 4; Q9 proves the fixed-scalar unit, terminal-section and derived-normalization calculations directly, using the canonical mate and global comparison. Existing private normalization arguments from SupportSiteComparison inform the proof; no dependency on that module is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs scheme morphism an invertible etale derived pullback unit for a finite ring sheaf transports to the pro etale unit and canonical global cohomology pullback",
+   "results": "{\"t\": \"2026-10-22T06:12:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a qcqs scheme morphism an invertible etale derived pullback unit for a finite ring sheaf transports to the pro etale unit and canonical global cohomology pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"00909b6e7d8d36db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit mate of etale pro etale comparison preserves adjunction units and Leray derived global sections of etale origin finite sheaves",
+   "results": "{\"t\": \"2026-10-22T06:12:52Z\", \"tool\": \"leanfinder\", \"query\": \"The counit mate of etale pro etale comparison preserves adjunction units and Leray derived global sections of etale origin finite sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"CategoryTheory.Sheaf.adjunction_counit_app_val\", \"CategoryTheory.constantSheafAdj_counit_w\"], \"digest\": \"53b7b89fc9cfe770\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a qcqs scheme morphism an invertible etale derived pullback unit for a finite ring sheaf transports to the pro etale unit and canonical global cohomology pullback",
+   "results": "{\"t\": \"2026-10-22T06:12:53Z\", \"tool\": \"leansearch\", \"query\": \"For a qcqs scheme morphism an invertible etale derived pullback unit for a finite ring sheaf transports to the pro etale unit and canonical global cohomology pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.Scheme.inv_appTop\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.monObjAsOverPullback_one\"], \"digest\": \"365157223327619b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"unit\", \"mate\"",
+   "results": "{\"t\": \"2026-10-22T06:12:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"unit\\\", \\\"mate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|derived.*[Ss]ections|[Ss]ections.*[Dd]erived",
+   "results": "{\"t\": \"2026-10-22T06:12:53Z\", \"tool\": \"grep\", \"query\": \"mateEquiv|derived.*[Ss]ections|[Ss]ections.*[Dd]erived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\"], \"digest\": \"4e72a21dfdd999fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|globalSectionsUpperStarMap|rightDerived.*[Uu]nit",
+   "results": "{\"t\": \"2026-10-22T11:21:39Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorCompIso|globalSectionsUpperStarMap|rightDerived.*[Uu]nit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean\"], \"digest\": \"afc8c5f7ef7704ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections pullback via adjunction unit and Leray isomorphism is compatible with composition of morphisms of sites",
+   "results": "{\"t\": \"2026-10-22T11:21:40Z\", \"tool\": \"leansearch\", \"query\": \"Derived global sections pullback via adjunction unit and Leray isomorphism is compatible with composition of morphisms of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unitHomEquiv_comp_apply\", \"CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"CategoryTheory.GrothendieckTopology.Cover.pullbackComp\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.GrothendieckTopology.pullbackComp\"], \"digest\": \"baacef9e6539a8cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "{\"t\": \"2026-10-22T11:21:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp\", \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\"], \"digest\": \"d295d3bf12c461b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections on sites are functorial under composition of geometric morphisms and natural isomorphisms of inverse image functors via adjunction units and Leray comparison",
+   "results": "{\"t\": \"2026-10-22T11:21:41Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections on sites are functorial under composition of geometric morphisms and natural isomorphisms of inverse image functors via adjunction units and Leray comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.sheafComposeNatTrans\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"CategoryTheory.sheafComposeNatTrans_fac\", \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\", \"CategoryTheory.sheafComposeIso_hom_fac\", \"CategoryTheory.sheafCompose_comp\", \"SheafOfModules.pullbackComp\"], \"digest\": \"87f0a9137b98e9a9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs morphism of schemes the canonical etale proetale derived direct image mate carries adjunction units to units and identifies global cohomology pullback maps",
+   "results": "{\"t\": \"2026-10-22T11:21:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a qcqs morphism of schemes the canonical etale proetale derived direct image mate carries adjunction units to units and identifies global cohomology pullback maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\"], \"digest\": \"0582e94868ad0c2d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]eray|[Rr]ightDerived.*[Gg]lobal|[Dd]erived.*[Ss]ections",
+   "results": "{\"t\": \"2026-10-22T11:23:06Z\", \"tool\": \"grep\", \"query\": \"[Ll]eray|[Rr]ightDerived.*[Gg]lobal|[Dd]erived.*[Ss]ections\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"derived\"",
+   "results": "{\"t\": \"2026-10-22T11:23:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"derived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For geometric morphisms of topoi with fixed constant ring coefficients the derived sections pullback defined by unit and Leray comparison is natural and respects composition",
+   "results": "{\"t\": \"2026-10-22T11:23:08Z\", \"tool\": \"leanfinder\", \"query\": \"For geometric morphisms of topoi with fixed constant ring coefficients the derived sections pullback defined by unit and Leray comparison is natural and respects composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"PresheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"TopCat.Sheaf.pullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\"], \"digest\": \"d72f17641b6ac5c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: underived sheaf pullback/composition and abstract localization results do not give the derived-sections unit/Leray pasting assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-line-ordinary-invariance",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph, ordinary affine-line input: Transport of ordinary units and sections between the two sites; retained ordinary-invariance proof steps 6 and 7.",
+   "via": [
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordinary-unit-site-sections-transport",
+  "worker": "stage1",
+  "summary": "Expanded the counit-normalized mate into an explicit transpose calculation. Used its bounded-below isomorphism clause only on the degree-zero sheaf lL. Separated general geometric derived-sections pasting into one statement-only node; proved the named section comparison by the two composite geometric morphisms, and recorded cohomology and naturality without changing the statement.",
+  "blueprint": "Realizes the ordinary affine-line transport input to the shear paragraph of lem-pur-frame-independence, through Step 4 of main-20261015/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-a1-direct-image.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic finite-coefficient qcqs site-comparison tool; supplies invertibility of the named mate and its counit normalization, rather than replacing the affine-line proof."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic geometric pullback comparison for the two small sites; the unit has no separate comparison construction."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-global-cohomology",
+    "why": "Generic bounded-below ordinary global comparison, with its named derived-unit normalization; used to identify the vertical maps in the sections square."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic pro-etale constant-coefficient identification c_f; needed to apply the constant-ring sections lemma to the pro-etale module categories (maintainer reader FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-global-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-cd4d22f4d",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-cd4d22f4d (reviewer sub-agent of L); spot-checked: FIX for one missing citation (C4) in step 3. I read the item and the new node lem-pur-site-derived-sections-unit-pasting in full, together with every cited statement (canonical-mate, comparison-pullback, comparison-global-cohomology, derived-sections-pushforward, adjunction-mate, trf-geometric-morphism, proetale-operations/modules, proetale-constant-ring-map), the blueprint Step 4 transport in lem-pur-a1-direct-image.proof.md, and Stacks 015M, 04IA and 071J, whose labels I checked. Step 1: I redid the transpose calculation. The canonical-mate normalization, naturality of a and the triangle identity give transpose 1, so the step is correct. Step 2 uses the mate's invertibility only on lL in D^+. Steps 3 to 5 apply the new lemma's composition clause and its geometric 2-iso clause to f_et∘ν_Y and ν_X∘f_proet. This gives T^p_f T_ν_X = RΓ(a_L) T_ν_Y T^e_f, and T_ν is exactly the map of comparison-global-cohomology. The D^+ units agree with the unbounded units on D^+. The fault: the new lemma is stated for modules over the constant sheaf R, but step 3 applied it on the pro-etale side, where the ring is Λ_{T,proet}, without citing the identification f_proet^{-1}Λ_X ≅ Λ_Y. I added prop-weil-pbc-proetale-constant-ring-map to step 3, to proof_deps and to tool_uses, in fixes/dag/nodes/sec-smooth-purity/. The new node is a generic statement-only lemma and is true. Small cases checked: f^{-1} of the constant sheaf is constant, f_* preserves injectives, Γ f_* = Γ, and the 2-iso clause holds because h^{-1}1 ≅ 1 uniquely while an R-linear −1 is excluded. f = id, zero rings and empty sites also hold. It is not a duplicate of derived-unit-leray-comp, derivative pullback-laws, trf-module-derived-restriction-resolution or trf-site-object-derived-sections-pullback, all of which are for scheme-etale maps or ν only. It does not relabel the item. Batch-5 flag on def-trf-geometric-morphism: it is a general definition of geometric morphisms and 2-morphisms, not a step of the trace formula or Poincare duality, so I accept it. Tool uses accepted: canonical-mate, comparison-pullback, comparison-global-cohomology and prop-weil-pbc-proetale-constant-ring-map.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryUnitSiteSectionsTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.ordinaryUnitSiteTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ordinaryEtaleTerminalIso",
+   "AlgebraicGeometry.ProEtale.ordinaryEtaleLeray",
+   "AlgebraicGeometry.ProEtale.ordinaryEtaleSectionUnit",
+   "AlgebraicGeometry.ProEtale.ordinaryEtaleSectionPullback",
+   "AlgebraicGeometry.ProEtale.ordinaryProEtaleTerminalIso",
+   "AlgebraicGeometry.ProEtale.ordinaryProEtaleLeray",
+   "AlgebraicGeometry.ProEtale.ordinaryProEtaleSectionUnit",
+   "AlgebraicGeometry.ProEtale.ordinaryProEtaleSectionPullback",
+   "AlgebraicGeometry.ProEtale.ordinarySiteGlobalComparison",
+   "AlgebraicGeometry.ProEtale.ordinaryUnitSiteTransport",
+   "AlgebraicGeometry.ProEtale.ordinaryUnitSiteTransport_isIso",
+   "AlgebraicGeometry.ProEtale.ordinaryUnitSiteSections_comparison",
+   "AlgebraicGeometry.ProEtale.ordinaryUnitSiteSections_unit_leray",
+   "AlgebraicGeometry.ProEtale.ordinaryUnitSiteSections_negative"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryUnitSiteSectionsTransport.lean",
+  "statement": "theorem ordinaryUnitSiteTransport : (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).unit.app ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj L)) = (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.map ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).unit.app ((DerivedCategory.Plus.singleFunctor _ 0).obj L)) ≫ (fixedComparisonDirectImageMatePlus Λ f).app ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus.obj ((DerivedCategory.Plus.singleFunctor _ 0).obj L)) ≫ (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlus.map ((fixedComparisonPullbackPlus Λ f).hom.app ((DerivedCategory.Plus.singleFunctor _ 0).obj L))",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The recorded canonical mate and global comparison use the published fixed-scalar module-sheaf model. This module uses that same model and the existing finiteCoefficientRealization equivalence to interpret the intrinsic coefficient modules. The derived identity source of finiteComparisonGlobalSections is transported by mapDerivedCategoryPlusIdIso, without replacing its arrow. All theorem declarations retain finiteness, quasi-compactness and quasi-separatedness explicitly via include. The single-degree-zero functor embeds the arbitrary sheaf L. The five theorems together state all clauses; helpers construct the actual ordinary pullbacks and Leray isomorphisms with real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-361196002",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Only the item node's lean record and one new module are delivered; the node is otherwise identical to live and lean.statement is verbatim with all 14 declarations present. Hypotheses: qcqs f and finite CommRing Λ : Type (u+1), retained via include, same universes as the landed mate and global comparison, nothing stronger assumed. Unit equation: the actual derived pro-etale unit equals C_X(η^e) ≫ b(lL) ≫ s(a_L), with a = fixedComparisonPullbackPlus in the node's orientation and the same functors and adjunctions as fixedComparisonDirectImageMatePlus_counit. The isomorphism clause has only the IsIso(η^e) hypothesis and asserts all three isomorphisms. Section maps are right-derived base change of the actual sheaf unit plus terminal isos; the unit/Leray theorem states the node's RΓ(η)+Leray description on both sites, and the Leray direction is correct. The comparison square has no invertibility hypothesis; ordinarySiteGlobalComparison is finiteComparisonGlobalSections with only a canonical source isomorphism added. Cohomology is derived-first with explicit vanishing in negative degrees. No hollow definitions, no sorry data, source and blueprint docstrings present. Edge cases Λ=0, empty schemes, f=id, q≤0 covered. Advisory only: two unused plain imports (ProEtaleConstantRingMap kept for stage 3, Mates redundant); the second-reading section was written by the author; the cited pro-etale-operations and sites-and-cohomology records are not used directly, consistent with the landed mate's coefficient model. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261024T190739-L-49210",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

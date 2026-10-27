@@ -1,0 +1,119 @@
+# global build 2026-10-25T17:46:16Z of a514c59405: Sheaf.Paper.SupportedCoefficientLocalization failed
+error: Sheaf/Paper/SupportedCoefficientLocalization.lean:275:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (ClosedTestScalarModelCoherence.derivedSectionArrow { X := K, mon := inst✝⁶ }.X t W W' δ).app N ≫
+    (ClosedTestScalarModelCoherence.gamma a.hom W').app ((t)^*⟦{ X := K, mon := inst✝⁶ }.X⟧.mapDerivedCategory.obj N) ≫
+      (ClosedTestKInjectiveSectionModels.evaluation { X := R, mon := inst✝⁸ }.X W').rightDerivedFunctor.map
+        ((derivedComapUpperStarIso a.hom t).hom.app N)
+in the target expression
+  IsIso
+    ((ClosedTestScalarModelCoherence.derivedSectionArrow K t W W' δ).app N ≫
+      (ClosedTestScalarModelCoherence.gamma a.hom W').app ((t)^*⟦K⟧.mapDerivedCategory.obj N) ≫
+        (closedRestrictionPhi R T₀).map ((derivedComapUpperStarIso a.hom t).hom.app N))
+
+ℓ : ℕ
+inst✝⁹ : Fact (Nat.Prime ℓ)
+R K : Sheaf (coherentTopology Profinite) Ab
+inst✝⁸ : MonObj R
+inst✝⁷ : IsCommMonObj R
+inst✝⁶ : MonObj K
+inst✝⁵ : IsCommMonObj K
+a : { X := R, mon := inst✝⁸ } ⟶ { X := K, mon := inst✝⁶ }
+ha : IsEllLocalizationCoefficient ℓ a
+T₀ T : Scheme
+inst✝⁴ : CompactSpace ↥T
+inst✝³ : QuasiSeparatedSpace ↥T
+inst✝² : CompactSpace ↥T₀
+inst✝¹ : QuasiSeparatedSpace ↥T₀
+t : T₀ ⟶ T
+inst✝ : IsClosedImmersion t
+H : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj R T)
+hH :
+  IsIso
+    ((closedRestrictionRho R t).app
+      ((DerivedCategory.singleFunctor
+            (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat) (condensedRingObj R T)) 0).obj
+        H))
+U : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj { X := K, mon := inst✝⁶ }.X T) ⥤
+  CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj { X := R, mon := inst✝⁸ }.X T) :=
+  Mod.comap (coefficientMap a.hom T)
+M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj { X := K, mon := inst✝⁶ }.X T) :=
+  (Mod.extendScalars (coefficientMap a.hom T)).obj H
+N : DerivedCategory
+  (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj { X := K, mon := inst✝⁶ }.X T)) :=
+  (DerivedCategory.singleFunctor
+        (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj { X := K, mon := inst✝⁶ }.X T))
+        0).obj
+    M
+hr :
+  IsIso
+    ((closedRestrictionRho R t).app
+      ((DerivedCategory.singleFunctor
+            (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) AddCommGrpCat) (condensedRingObj R T)) 0).obj
+        ((Mod.comap (coefficientMap a.hom T)).obj ((Mod.extendScalars (coefficientMap a.hom T)).obj H))))
+e : U.mapDerivedCategory.obj N ≅
+  (DerivedCategory.singleFunctor
+        (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj { X := R, mon := inst✝⁸ }.X T))
+        0).obj
+    (U.obj M) :=
+  U.mapDerivedCategoryFactors.app
+      ((CochainComplex.singleFunctor
+            (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T) Ab) (condensedRingObj { X := K, mon := inst✝⁶ }.X T))
+            0).obj
+        M) ≪≫
+    DerivedCategory.Q.mapIso ((HomologicalComplex.singleMapHomologicalComplex U (ComplexShape.up ℤ) 0).app M)
+hi : IsIso ((closedRestrictionRho R t).app (U.mapDerivedCategory.obj N))
+W : T.ProEt := Scheme.ProEt.mk (𝟙 T)
+W' : T₀.ProEt := Scheme.ProEt.mk (𝟙 T₀)
+δ : W' ⟶ ClosedTestKInjectiveSectionModels.testFibre t W :=
+  MorphismProperty.Over.homMk (pullback.lift t (𝟙 T₀) ⋯) ⋯ True.intro
+hR : IsIso ((ClosedTestScalarModelCoherence.derivedSectionArrow R t W W' δ).app (U.mapDerivedCategory.obj N))
+hs :
+  (ClosedTestScalarModelCoherence.derivedSectionArrow { X := K, mon := inst✝⁶ }.X t W W' δ).app N ≫
+      (ClosedTestScalarModelCoherence.gamma a.hom W').app
+          ((t)^*⟦{ X := K, mon := inst✝⁶ }.X⟧.mapDerivedCategory.obj N) ≫
+        (ClosedTestKInjectiveSectionModels.evaluation { X := R, mon := inst✝⁸ }.X W').rightDerivedFunctor.map
+          ((derivedComapUpperStarIso a.hom t).hom.app N) =
+    (ClosedTestScalarModelCoherence.gamma a.hom W).app N ≫
+      (ClosedTestScalarModelCoherence.derivedSectionArrow { X := R, mon := inst✝⁸ }.X t W W' δ).app
+        ((ClosedTestDerivedExchangeModel.restrict a.hom T).obj N)
+hγ : IsIso ((ClosedTestScalarModelCoherence.gamma a.hom (Scheme.ProEt.mk (𝟙 T))).app N)
+hγ' :
+  IsIso ((ClosedTestScalarModelCoherence.gamma a.hom (Scheme.ProEt.mk (𝟙 T₀))).app ((t)^*⟦K⟧.mapDerivedCategory.obj N))
+⊢ IsIso
+    ((ClosedTestScalarModelCoherence.derivedSectionArrow K t W W' δ).app N ≫
+      (ClosedTestScalarModelCoherence.gamma a.hom W').app ((t)^*⟦K⟧.mapDerivedCategory.obj N) ≫
+        (closedRestrictionPhi R T₀).map ((derivedComapUpperStarIso a.hom t).hom.app N))
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    (derivedComapUpperStarIso a.hom t).hom.app N
+  has type
+    @Quiver.Hom
+      (DerivedCategory
+        (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T₀) Ab) (condensedRingObj { X := R, mon := inst✝⁸ }.X T₀)))
+      (instCategoryDerivedCategory
+          (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T₀) Ab)
+            (condensedRingObj { X := R, mon := inst✝⁸ }.X T₀))).toQuiver
+      (((t)^*⟦{ X := K, mon := inst✝⁶ }.X⟧.mapDerivedCategory ⋙
+            (Mod.comap (coefficientMap a.hom T₀)).mapDerivedCategory).obj
+        N)
+      (((Mod.comap (coefficientMap a.hom T)).mapDerivedCategory ⋙
+            (t)^*⟦{ X := R, mon := inst✝⁸ }.X⟧.mapDerivedCategory).obj
+        N)
+  but is expected to have type
+    @Quiver.Hom
+      (DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T₀) AddCommGrpCat) (condensedRingObj R T₀)))
+      (instCategoryDerivedCategory
+          (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology T₀) AddCommGrpCat) (condensedRingObj R T₀))).toQuiver
+      ((ClosedTestDerivedExchangeModel.restrict a.hom T₀).obj ((t)^*⟦K⟧.mapDerivedCategory.obj N))
+      (((Mod.comap (coefficientMap a.hom T)).mapDerivedCategory ⋙
+            (t)^*⟦{ X := R, mon := inst✝⁸ }.X⟧.mapDerivedCategory).obj
+        N)
+  in the application
+    (closedRestrictionPhi R T₀).map ((derivedComapUpperStarIso a.hom t).hom.app N)
+  
+  Note: The following definitions were not unfolded because their definition is not exposed:
+    inv ↦ 12
+    Shrink ↦ 6
+error: Lean exited with code 1

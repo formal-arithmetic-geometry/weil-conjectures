@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-dg-derived-admissible-triangles",
+ "kind": "statement",
+ "title": "Triangulation and graded-split exact triangles in a DG derived category",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. The category $D(A,d)$, with the shifts induced by $M[k]^i=M^{i+k}$ and $d_{M[k]}=(-1)^kd_M$, is triangulated in the sense of [def-weil-triangulated-category], and the localization functor from the homotopy category is exact. If $0\\to K\\xrightarrow{u}L\\xrightarrow{v}M\\to0$ is a short exact sequence of right differential graded $A$-modules which splits as a sequence of graded right $A$-modules, there exists a morphism $\\delta:M\\to K[1]$ for which $K\\xrightarrow{u}L\\xrightarrow{v}M\\xrightarrow{\\delta}K[1]$ is a distinguished triangle in $D(A,d)$. The first two arrows are the images of the specified inclusion and quotient maps. No compatibility of a graded splitting with the differentials is required.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KJ, proposition-homotopy-category-triangulated; Tag 09K8, definition-distinguished-triangle, with Tag 09K6, lemma-triangle-independent-splittings; Tag 09KW, lemma-acyclic, and Tag 09KX, definition-unbounded-derived-category."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-triangulated-category",
+  "def-sfb-dg-derived-category",
+  "def-sfb-dg-homotopy-structure",
+  "def-sfb-dg-graded-split-short-exact"
+ ],
+ "proof": [
+  {
+   "text": "Use $K_A$, the cone $C(f)=Y\\oplus X[1]$ with $d(y,x)=(d_Yy+fx,-d_Xx)$, and the signed cone triangle $T_f=(X,Y,C(f),f,i_f,-p_f)$. The Leibniz rule for its second coordinate has sign $(-1)^{n+1}$, which becomes $(-1)^n$ after applying $-d_X$; hence the unchanged right action makes it a DG module. A homotopy is an $A$-linear degree $-1$ map. Its composites with chain maps are homotopies, so quotienting maps defines an additive category with zero and finite direct sums. The shifts in the statement act on this category, sending $h$ to $(-1)^kh$ and having inverse $[-k]$. Declare triangles isomorphic to some $T_f$ distinguished. TR1 follows: every morphism has a chain-map representative; $C(1_X)$ contracts by $h(y,x)=(0,y)$, since $dh+hd=1$, giving the identity triangle. Isomorphism closure holds by definition.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KJ, proposition-homotopy-category-triangulated, TR1 setup; Tag 09KF, lemma-the-same-up-to-isomorphisms (signed cone convention)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dg-cone-rotation] to a representative $f$ of a standard cone triangle. Both its rotation and its inverse rotation are isomorphic to standard cone triangles. Rotation and inverse rotation preserve triangle isomorphisms, so distinguishedness is preserved in both directions. This is TR2 with last arrow $-f[1]$, not $f[1]$.",
+   "uses": [
+    "lem-sfb-dg-cone-rotation",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KH, lemma-homotopy-category-pre-triangulated, TR2; Tags 09KB and 09KC (the cone rotation input)."
+   }
+  },
+  {
+   "text": "For TR3, conjugate the two distinguished triangles to $T_f$ and $T_{f'}$. Represent the first two maps by chain maps $a:X\\to X'$ and $b:Y\\to Y'$. Their square commutes in $K_A$, so there is an $A$-linear degree $-1$ map $h$ with $bf-f'a=d_{Y'}h+hd_X$. The map $c(y,x)=(by+hx,ax)$ is a chain map: its upper-right chain-map equation is precisely that displayed homotopy equation, and its other equations are those for $a$ and $b$. Also $ci_f=i_{f'}b$ and $(-p_{f'})c=a[1](-p_f)$. This gives all three squares and, after undoing the triangle isomorphisms, proves TR3. Thus $K_A$ is pre-triangulated.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KD, lemma-functorial-cone, matrix computation; Tag 09KH, lemma-homotopy-category-pre-triangulated, TR3."
+   }
+  },
+  {
+   "text": "For TR4 choose composable chain representatives $f:X\\to Y$, $g:Y\\to Z$. By [lem-sfb-dg-composite-cone-contraction], the triangle on the three cones with maps $\\alpha(y,x)=(gy,x)$, $\\beta(z,x)=(z,fx)$, $\\gamma(z,y)=(-y,0)$ is isomorphic to $T_\\alpha$ and hence distinguished. The octahedral squares are $\\alpha i_f=i_{gf}g$, $p_{gf}\\alpha=p_f$, $\\beta i_{gf}=i_g$, and $p_g\\beta=f[1]p_{gf}$. Its last arrow is exactly $\\gamma=i_f[1](-p_g)$, as TR4 requires. For any prescribed distinguished triangles of these first arrows, TR3 completes the identity maps on their first two vertices to maps from the standard cones. Their third components are isomorphisms by [lem-sf-triangle-morphism-iso], which applies already to a pre-triangulated category. Conjugate $\\alpha,\\beta,\\gamma$ by these third isomorphisms. Every square and the last-arrow identity persist by substitution. This proves TR4 for the prescribed triangles, so $K_A$ is triangulated.",
+   "uses": [
+    "lem-sfb-dg-composite-cone-contraction",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KJ, proposition-homotopy-category-triangulated; Tag 09KI, lemma-two-split-injections, in cone coordinates. The arbitrary-cone reduction uses derived.tex Tag 014A, lemma-third-isomorphism-triangle."
+   }
+  },
+  {
+   "text": "Forget only to the underlying complexes of abelian groups. A homotopy acts trivially on cohomology because $(dh+hd)x=d(hx)$ for a cycle $x$; hence $H^n$ is defined on $K_A$. The cone fits into a degreewise split short exact sequence $0\\to Y\\xrightarrow{i_f}C(f)\\xrightarrow{p_f}X[1]\\to0$ of such complexes. Apply [lem-weil-pbc-complex-ses-homology-long-exact]. Its connecting homomorphism sends a cycle $x\\in X^{n+1}$, lifted to $(0,x)$, to $f(x)$, since $d(0,x)=(fx,0)$. Exactness therefore says $C(f)$ is acyclic if and only if all $H^n(f)$ are isomorphisms: if the middle cohomology groups vanish the adjacent maps are bijective, and conversely bijectivity forces those middle groups to vanish. The same exact sequence shows that two acyclic vertices of a cone triangle force the third acyclic. Thus the full replete subcategory $\\mathrm{Ac}$ of modules with all cohomology zero contains zero and is closed under shifts and distinguished triangles.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KW, lemma-acyclic; equation-les in dga.tex, from homology.tex Tag 0117, lemma-long-exact-sequence-cochain."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-triangulated-subcategory-cone-system] to $K_A$ and $\\mathrm{Ac}$. Its cone class $W$ is a multiplicative system admitting both fraction calculi and compatible with the triangulated structure. Step 5 identifies $W$ with precisely the quasi-isomorphisms, not a different class. Then [lem-pur-localization-triangles-05r6] supplies the triangulation on $W^{-1}K_A=D(A,d)$ and exactness of $Q$. Its characterization of distinguished triangles says they are the triangles isomorphic to localized signed cone triangles, exactly the class in the statement. Sizes are handled in the universes fixed in [def-weil-size-convention]: finite direct sums, shifts and the cone constructions stay in the object universe; localization is taken in the larger universe allowed there. No small-index colimit or change of coefficient category is used.",
+   "uses": [
+    "lem-trf-triangulated-subcategory-cone-system",
+    "lem-pur-localization-triangles-05r6",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KW and 09KX, lemma-acyclic (including its universe remark) and definition-unbounded-derived-category; derived.tex Tags 05RG (lemma-construct-multiplicative-system) and 05R6 (proposition-construct-localization)."
+   }
+  },
+  {
+   "text": "For the specified graded-split sequence choose degree-zero graded $A$-linear splittings $s:M\\to L$, $\\pi:L\\to K$ with $vs=1$, $\\pi u=1$, $u\\pi+sv=1$, $\\pi s=0$. Set $\\delta=\\pi d_Ls:M\\to K[1]$. In coordinates $L=K\\oplus M$ its differential is $\\left(\\begin{smallmatrix}d_K&\\delta\\\\0&d_M\\end{smallmatrix}\\right)$, so $d_L^2=0$ gives $d_K\\delta+\\delta d_M=0$. The Leibniz terms in $\\delta(ma)$ cancel because $\\pi s=0$, proving $\\delta(ma)=\\delta(m)a$; thus $\\delta$ is a DG map to $K[1]$. Define $q:C(u)\\to M$ by $q(l,k)=vl$, and $r:M\\to C(u)$ by $r(m)=(sm,-\\delta m)$. Direct multiplication gives $qr=1$ and $1-rq=dH+Hd$ for $H(l,k)=(0,\\pi l)$. These maps and $H$ are $A$-linear. Finally $qi_u=v$ and $(-p_u)r=\\delta$, so $(1_K,1_L,q)$ identifies $T_u$ with $(K,L,M,u,v,\\delta)$ in $K_A$. Exactness of $Q$ from Step 6 makes its image distinguished. The first two maps are literally $Q(u)$ and $Q(v)$; no splitting was required to commute with $d_L$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KF, lemma-the-same-up-to-isomorphisms (1), full contraction; Tag 09JU, lemma-admissible-ses. Applying the quotient of Tag 09KX gives the required derived triangle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-sfb-dg-cone-rotation",
+  "lem-sfb-dg-composite-cone-contraction",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "lem-pur-localization-triangles-05r6",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KH, 09KJ, 09KW, 09KX and 09KF. Cone-coordinate assembly of the Stacks argument, expanding every map and using the existing general triangulated-localization nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "triangleOfSES_distinguished|[Dd]ifferential[Gg]raded|DGModule",
+   "results": "Hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean ; Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a fixed abelian category; they do not give the DG-algebra action, DG homotopies, or localization at underlying cohomology isomorphisms. Read DerivedCategory/ShortExact.lean:31-93 and HomotopyCategory/DegreewiseSplit.lean:31-95. For a general DG algebra this is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\", \"distinguished\"",
+   "results": "Hits: CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a fixed abelian category; they do not give the DG-algebra action, DG homotopies, or localization at underlying cohomology isomorphisms. Read DerivedCategory/ShortExact.lean:31-93 and HomotopyCategory/DegreewiseSplit.lean:31-95. For a general DG algebra this is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of differential graded modules split on underlying graded modules yields a distinguished triangle in the DG derived category",
+   "results": "Hits: CochainComplex.triangleOfDegreewiseSplit, CochainComplex.triangleOfDegreewiseSplit_mor₃, CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, DerivedCategory.triangleOfSES_distinguished, DerivedCategory.triangleOfSES, CochainComplex.triangleOfDegreewiseSplit_obj₁, CochainComplex.triangleOfDegreewiseSplit_obj₂",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a fixed abelian category; they do not give the DG-algebra action, DG homotopies, or localization at underlying cohomology isomorphisms. Read DerivedCategory/ShortExact.lean:31-93 and HomotopyCategory/DegreewiseSplit.lean:31-95. For a general DG algebra this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the homotopy category of modules over a DG algebra at quasi isomorphisms preserves the triangles associated to graded split exact sequences",
+   "results": "Hits: HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit, CochainComplex.trianglehOfDegreewiseSplit, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.triangleOfSESIso, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, DerivedCategory.instPretriangulated, DerivedCategory.triangleOfSES, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a fixed abelian category; they do not give the DG-algebra action, DG homotopies, or localization at underlying cohomology isomorphisms. Read DerivedCategory/ShortExact.lean:31-93 and HomotopyCategory/DegreewiseSplit.lean:31-95. For a general DG algebra this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of differential graded modules is triangulated and a graded split short exact sequence gives a distinguished triangle",
+   "results": "Hits: DerivedCategory.triangleOfSES_distinguished, CochainComplex.trianglehOfDegreewiseSplit, DerivedCategory.triangleOfSES, CochainComplex.triangleOfDegreewiseSplit, CategoryTheory.ShortComplex.ShortExact.singleTriangle, CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished, HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit, DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary cochain complexes in a fixed abelian category; they do not give the DG-algebra action, DG homotopies, or localization at underlying cohomology isomorphisms. Read DerivedCategory/ShortExact.lean:31-93 and HomotopyCategory/DegreewiseSplit.lean:31-95. For a general DG algebra this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of differential graded modules over a differential graded algebra is triangulated and graded split exact sequences give triangles",
+   "results": "{\"t\": \"2026-10-24T00:38:19Z\", \"tool\": \"leanfinder\", \"query\": \"The derived category of differential graded modules over a differential graded algebra is triangulated and graded split exact sequences give triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSES\", \"DerivedCategory.instIsTriangulated\", \"CochainComplex.trianglehOfDegreewiseSplit\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.instPretriangulated\", \"DerivedCategory.triangleOfSES_distinguished\", \"DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh\", \"DerivedCategory.triangleOfSESIso\"], \"digest\": \"d047cdd6096906b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mapping cones and graded split short exact sequences for modules over a differential graded algebra give a triangulated derived category",
+   "results": "{\"t\": \"2026-10-24T00:38:40Z\", \"tool\": \"leansearch\", \"query\": \"Mapping cones and graded split short exact sequences for modules over a differential graded algebra give a triangulated derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone\", \"DerivedCategory.instIsTriangulated\", \"CategoryTheory.IsTriangulated.mk\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"CochainComplex.triangleOfDegreewiseSplit_mor₃\", \"CochainComplex.mappingConeCompTriangle\", \"CochainComplex.mappingConeHomOfDegreewiseSplitXIso\", \"DerivedCategory.mem_distTriang_iff\"], \"digest\": \"4e9ffe92f68febef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"rotate\"",
+   "results": "{\"t\": \"2026-10-24T00:38:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingCone\\\", \\\"rotate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.rotateTrianglehIso\", \"CochainComplex.mappingCone.rotateHomotopyEquiv\", \"CochainComplex.mappingCone.rotateHomotopyEquivComm₂Homotopy\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₃\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₃_assoc\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₂\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₂_assoc\", \"CochainComplex.mappingCone.triangleRotateShortComplex\"], \"digest\": \"4926899119d6b8bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|differential graded",
+   "results": "{\"t\": \"2026-10-24T00:38:14Z\", \"tool\": \"grep\", \"query\": \"DGModule|DifferentialGraded|differential graded\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\"], \"digest\": \"b00540e86065b3f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-finite-cell-compact",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 09R3, proposition-compact, implication (2) to (1), with the identity retraction of P. Supporting input for the finite-filtration induction: admissible exact triangles in the DG derived category (09K8, 09KW, 09KX).",
+   "via": [
+    "lem-sfb-dg-finite-cell-compact",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-derived-admissible-triangles",
+  "worker": "stage1",
+  "summary": "Proved TR1 and TR3 by DG cone matrices, isolated only the two genuine DG cone comparisons (rotation and iterated-cone contraction), and used the existing pre-triangulated two-isomorphisms theorem for arbitrary cones. Proved the acyclic cone criterion from the existing ordinary-complex long exact sequence, then reused general cone-class and localization leaves. The graded-split triangle is established by an explicit A-linear contraction preserving the specified first two maps. No change to the item statement or coefficient category.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 09R3, proposition-compact, implication (2) to (1), with the identity retraction of P. Supporting input for the finite-filtration induction: admissible exact triangles in the DG derived category (09K8, 09KW, 09KX). Latest blueprint: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting effectivity branch. The item has no imported blueprint ancestor (blueprint_refs ancestor returns None); inherited provenance retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-98208d891",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-98208d891 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, every cited statement (including MS1-MS6 in def-pur-saturated-triangulated-localization) and Stacks dga.tex: definition-homotopy, definition-cone, 09K6/09K8, 09KB, 09KC, 09KF, 09KH, 09KI, 09KJ (tags checked in tags/tags). The item statement is unchanged and matches Stacks: right modules, shifts leave the action unchanged, A-linear homotopies, cone triangles with third arrow -p, localization as in 09KX. Every step recomputed by hand: the cone is a DG module and C(1) contracts via h(y,x)=(0,y); the TR3 matrix c=(b,h;0,a); the four TR4 octahedral squares and gamma=i_f[1](-p_g), with conjugation to arbitrary prescribed triangles via lem-sf-triangle-morphism-iso, which needs only a pre-triangulated category (no circularity); the connecting map of the cone sequence is H(f), so the cone is acyclic iff f is a quasi-isomorphism; W equals the quasi-isomorphisms and gives exactly the 05r6 hypotheses; the 09KF(1) contraction r=(s,-delta), H=(0,pi l), (-p_u)r=delta. Both new nodes are true, checked with explicit homotopies: rotation h=(0,0,y); inverse rotation phi=fx-y, homotopy (0,0,x); composite cone h=(0,0,0,x) and J=(0,-x). Edge cases checked: f,g in {0,1}, the zero module, nonzero d_A. Each new node is a single cone identity corresponding to a source lemma (09KB/09KC, 09KI), strictly smaller than the item, and statement-only. Generalizations exist in sec-six-functors (lem-coef-dg-module-cone-triangulation, lem-coef-dg-abc-*), but that chapter is not used by sec-six-functors-basics and the first has a 987-node closure, so the item's own 09KH-09KJ route is kept; noted for the maintainer. Batch 5: lem-trf-triangulated-subcategory-cone-system is a Mathlib leaf (trW instances) stating the generic 05RG cone-class multiplicative system, with only def-weil-triangulated-category below it; it is not part of the trace-formula or Poincare-duality assumptions or their proofs, so accepted. All off-unit citations are Mathlib leaves or nodes on the unit route, so tool_uses=[] is correct. No SGA. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgDerivedAdmissibleTriangles",
+  "declaration": "CategoryTheory.DgAlgebra.nonempty_derivedAdmissibleTriangles",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.DerivedAdmissibleTriangles",
+   "CategoryTheory.DgAlgebra.nonempty_derivedAdmissibleTriangles"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgDerivedAdmissibleTriangles.lean",
+  "statement": "theorem nonempty_derivedAdmissibleTriangles (A : Algebra.{u}) : Nonempty (DerivedAdmissibleTriangles A)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20ae095b0",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery fixes both faults from the eb26 RETURN. H2: the theorem-node stmt_dep is replaced by the new def node def-sfb-dg-graded-split-short-exact, which matches Stacks 09JT(3) and records GradedSplitShortExact as existing:true on branch newtargets-dag; no other node owns it. H3: shiftComparison ties localization.commShiftIso to HomotopyStructure.shiftIso, DerivedStructure.shiftIso and factorIso for every n, M, S, e (types checked by hand), so exact refers to the canonical comparison. Node clauses checked: localization at cohomology isomorphisms via IsLocalization with cohomology pinned by cohomology_factors; triangulation from DerivedStructure with signed shifts and unchanged action; admissible triangle with first arrows literally Q.map of inclusion and projection and the section not required to commute with differentials. No extra hypotheses on A; single universe u. Statement field verbatim; only the theorem's sorry; docstrings and 7-step proof plan present; H4 searches found no duplicate. Edge cases A=0, zero modules and sequences, unbounded complexes, n=0 covered. Non-blocking: the landed DerivedStructure bundles HasCoproducts.{u}, which goes beyond the node but is true by Stacks 09QI (now cited). No file changed, so no compile."
+ }
+}

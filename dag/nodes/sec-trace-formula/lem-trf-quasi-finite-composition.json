@@ -13,55 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Choose generators $b_1,\\ldots,b_m$ for $B$ as an $A$-algebra and $c_1,\\ldots,c_n$ for $C$ as a $B$-algebra [def-weil-pbc-finite-type-algebra]. If $g:B\\to C$ is the second map, the elements $g(b_1),\\ldots,g(b_m),c_1,\\ldots,c_n$ generate $C$ as an $A$-algebra: substitute polynomial expressions in the $b_i$ for the coefficients of a polynomial in the $c_j$. Thus the composite is of finite type, as in Stacks Tag 00F4(1), used in Tag 00PO.",
+   "text": "Finite type is preserved by composition, by RingHom.FiniteType.comp (Stacks Tag 00F4).",
    "uses": [
     "def-weil-pbc-finite-type-algebra"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00PO, proof and Lemma Tag 00F4 (lemma-compose-finite-type), lines 540-594 and 30348-30349"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix a prime $\\mathfrak r\\subset C$ and let $\\mathfrak q$ and $\\mathfrak p$ be its successive inverse images in $B$ and $A$. Write $\\varphi:A\\to B$ for the first map. For $F=B\\otimes_A\\kappa(\\mathfrak p)$ and $j:B\\to F$, the point $\\overline{\\mathfrak q}$ is isolated by [def-weil-pbc-ring-map-quasi-finite-at-prime]. Choose a basic open $D(t)=\\{\\overline{\\mathfrak q}\\}$ in $\\operatorname{Spec}F$ [def-weil-affine-spectrum]. By the fibre-ring description in [def-weil-pbc-localization-at-prime], every element of $F$ is $j(b)/j(\\varphi(a))$ with $b\\in B$ and $a\\in A\\setminus\\mathfrak p$: lift it to a fraction in the localization of $B$ at the image of $A\\setminus\\mathfrak p$ and then reduce modulo $\\mathfrak p$. The denominator is a unit, so $D(t)=D(j(b))$. The bijection [lem-weil-pbc-fibre-ring-primes-bijection] and the identity $j(b)\\notin\\mathfrak Q\\iff b\\notin j^{-1}(\\mathfrak Q)$ give $b\\notin\\mathfrak q$, with $\\mathfrak q$ the only prime of $B$ over $\\mathfrak p$ avoiding $b$. Apply the identical argument to $B\\to C$, $\\mathfrak q$, and $\\mathfrak r$ to obtain $c\\notin\\mathfrak r$ such that $\\mathfrak r$ is the only prime of $C$ over $\\mathfrak q$ avoiding $c$. This is the elementary translation between conditions (1) and (3) of Tag 00PK, used in Tag 00PO.",
+   "text": "For each base prime p, PrimeSpectrum.preimageHomeomorphFiber identifies the topological fibre of Spec B to Spec A with Spec of the residue fibre ring. Every point q in this fibre is isolated by the hypothesis at q. Transport these open singletons back along the homeomorphism; discreteTopology_iff_isOpen_singleton proves that the topological fibre is discrete. Apply the same argument to Spec C to Spec B.",
    "uses": [
     "def-weil-pbc-ring-map-quasi-finite-at-prime",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-fibre-ring-primes-bijection"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00PO, proof, lines 30350-30357; Lemma Tag 00PK (lemma-isolated-point-fibre), condition (3), lines 30195-30230; Remark Tag 00E6 (remark-fundamental-diagram), lines 3422-3451, for the localization/quotient description"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $b'=g(b)\\in C$, where $g:B\\to C$ is the second map. Both $b'$ and $c$ avoid $\\mathfrak r$, so $b'c\\notin\\mathfrak r$. If a prime $\\mathfrak s\\subset C$ contracts to $\\mathfrak p$ in $A$ and avoids $b'c$, then $g^{-1}(\\mathfrak s)$ lies over $\\mathfrak p$ and avoids $b$, hence equals $\\mathfrak q$ by Step 2. Also $c\\notin\\mathfrak s$, so the other witness from Step 2 forces $\\mathfrak s=\\mathfrak r$. Under [lem-weil-pbc-fibre-ring-primes-bijection] for $A\\to C$, the basic open $D(j(b'c))$ in $\\operatorname{Spec}(C\\otimes_A\\kappa(\\mathfrak p))$ is therefore exactly $\\{\\overline{\\mathfrak r}\\}$ [def-weil-affine-spectrum]. Thus the fibre point is isolated. Step 1 supplies the finite-type hypothesis of [def-weil-pbc-ring-map-quasi-finite-at-prime], proving quasi-finiteness at the arbitrary prime $\\mathfrak r$ and hence the conclusion.",
+   "text": "For a prime p of A, the composite fibre is the inverse image under the continuous map Spec C to Spec B of the discrete fibre over p. Mathlib IsDiscrete.preimage' proves that this inverse image is discrete, since every fibre of Spec C to Spec B is discrete by the preceding step. PrimeSpectrum.comap is functorial, so this is exactly the fibre of the composite. Its singleton at r is open; transport it through PrimeSpectrum.preimageHomeomorphFiber for A to C. Together with finite type from the first step, this proves IsQuasiFiniteAtPrime for every r.",
    "uses": [
     "def-weil-pbc-ring-map-quasi-finite-at-prime",
-    "lem-weil-pbc-fibre-ring-primes-bijection",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-fibre-ring-primes-bijection"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00PO, proof, lines 30354-30360; Lemma Tag 00PK, condition (3)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
   "def-weil-pbc-finite-type-algebra",
-  "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "lem-weil-pbc-fibre-ring-primes-bijection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "J8",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00PO (lemma-quasi-finite-composition), lines 30342-30360; the isolated-point-to-basic-open translation is written out from Tag 00PK"
+  "place": "Algebra, Lemma Tag 00PO and finite-type composition Tag 00F4; the isolated-fibre composition step is expressed using Mathlib.Topology.DiscreteSubset, IsDiscrete.preimage', and PrimeSpectrum.preimageHomeomorphFiber instead of principal-open witnesses."
  },
  "mathlib_searches": [
   {
@@ -170,5 +155,26 @@
   "result": "pass",
   "note": "Exact statement and isolated-fibre dependencies verified; independent universes and edge cases checked; required report sections present; scompile.py server compilation succeeded."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261023T102958-L-3028046",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

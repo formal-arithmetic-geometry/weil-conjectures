@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-borel-quotient-affine-cell",
+ "kind": "statement",
+ "title": "Affine-space cell and regular geometry of a general Borel quotient",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $B\\subseteq G$ be a Borel subgroup: a maximal smooth connected solvable closed subgroup, where solvable means that successive derived subgroup schemes eventually become trivial, and the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. Let $Q=G/B$ denote the $F$-scheme representing the fppf sheafification of $A\\mapsto G(A)/B(A)$ on commutative $F$-algebras, where fppf coverings are jointly surjective flat finitely presented coverings. Then $Q$ is a regular [def-weil-regular-scheme], integral [def-pc-integral-scheme], Noetherian separated $F$-scheme [def-pc-scheme]. Here Noetherian means that $Q$ has a finite affine open cover by spectra of Noetherian rings, and separated means that its diagonal over $\\operatorname{Spec}\\mathbf Z$ is a closed immersion. There are an integer $n\\geq0$ and a dense open subscheme $U\\subseteq Q$ with an $F$-isomorphism $U\\simeq\\operatorname{Spec}F[t_1,\\ldots,t_n]$ [def-weil-affine-spectrum, def-weil-pbc-mv-polynomial-ring]. No reductivity hypothesis on $G$ is imposed; $G=B$ and $n=0$ are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 18.21, printed p.392, proof: apply Proposition 13.52 (p.275) as in the proof of Theorem 17.65 (p.374). Quotient existence and smoothness: Theorem 7.18 and Remark 7.16(c), pp.142--143; completeness: Theorem 17.9, p.354. Only the regular Noetherian separated integral geometry and affine-space cell are retained."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-borel-subgroup-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-homogeneous-orbit-quotient-geometry] with $H=B$. Its quotient represents exactly the fppf sheaf in the statement, so denote its canonical map by $q:G\\to Q$. It gives $Q$ separated and of finite type over $F$, $q$ faithfully flat, and $G\\times_F B\\simeq G\\times_QG$, $(g,b)\\mapsto(g,gb)$. A field is Noetherian because its only ideals are $(0)$ and $(1)$; hence [lem-weil-pbc-finite-type-over-noetherian] makes $Q$ Noetherian. Since $\\operatorname{Spec}F$ is affine, [lem-sc-separated-over-affine-scheme-separated] gives the absolute separation required here; [lem-weil-pbc-qcqs-over-affine] gives that $Q$ is quasi-separated.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.18 and Propositions 5.24--5.25, printed pp.104--105 and 143; Stacks morphisms.tex Tag 01T6 (lemma-finite-type-noetherian); schemes.tex Tags 01KN (lemma-affine-separated), 01KU (lemma-separated-permanence)."
+   }
+  },
+  {
+   "text": "Verify the quotient hypotheses needed in the next step. The composite $G\\xrightarrow{q}Q\\to\\operatorname{Spec}F$ is of finite type, so [lemma-nagata-finite-type-to-separated-target](a) makes $q$ locally of finite type. The Noetherian target $Q$ and [pqf-lem-lft-fp-locnoeth] make it locally of finite presentation. Since $G$ is affine and $Q$ quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $q$ of finite presentation, including quasi-compactness and quasi-separatedness. It is therefore an fppf covering by itself. For any $F$-scheme $T$ and $x:T\\to Q$, [lem-trf-fppf-covering-base-change] gives the fppf covering $T\\times_QG\\to T$, which is fpqc by [lem-trf-fppf-covering-is-fpqc]; its second projection to $G$ lifts $x$. For $a,b\\in G(T)$ the fibre-product isomorphism of [lem-sfb-homogeneous-orbit-quotient-geometry] says $q(a)=q(b)$ exactly when $b=ah$ for some $h\\in B(T)$, equivalently $a^{-1}b\\in B(T)$. Thus $q$ has every quotient property in [lem-sfb-algebraic-group-homogeneous-quotient].",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-algebraic-group-homogeneous-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks morphisms.tex Tags 01T8 (lemma-permanence-finite-type), 01TX (lemma-noetherian-finite-type-finite-presentation); schemes.tex Tags 03GI (lemma-quasi-compact-permanence), 01KV (lemma-compose-after-separated); topologies.tex Tags 021O (lemma-fppf), 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc)."
+   }
+  },
+  {
+   "text": "Now apply [lem-sfb-borel-quotient-proper-geometry] to $H=B$, $X=Q$ and $p=q$. The group $G$ is smooth connected affine of finite type, and $B$ is smooth connected closed by the Borel hypothesis. Step 2 supplied faithful flatness, finite presentation, the coset equality on every test scheme and fpqc-local lifts. The cited statement therefore gives that $Q$ is regular, Noetherian and geometrically integral. Taking the field extension $F/F$ gives integrality. Together with the absolute separation in Step 1 these are all the asserted geometric properties.",
+   "uses": [
+    "lem-sfb-borel-quotient-proper-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 5.26--5.27, printed p.105, Proposition 7.15, printed pp.142--143, and Theorem 17.9(a), printed p.354; regularity as in Stacks descent.tex Tag 036D (lemma-regular-local-smooth)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-general-flag-isolated-linear-action], choose $E$, an equivariant closed immersion $Q\\hookrightarrow\\mathbf P(E)$ and $\\lambda:\\mathbf G_m\\to G$ with finite reduced fixed subscheme. Restrict the representation and the left action along $\\lambda$. Since $Q$ is quasi-compact by Step 1, the closed immersion makes $Q$ projective by [def-pc-projective-morphism]. Step 3 gives that $Q$ is smooth and nonempty connected (it is integral), so [lem-sfb-projective-attracting-cells] applies with these data. Its open dense stratum $U$ is isomorphic to $\\mathbf A_F^n$ for $n\\geq0$. The affine-base clause of [def-sbc-affine-space] identifies this with $\\operatorname{Spec}F[t_1,\\ldots,t_n]$, as required.",
+   "uses": [
+    "lem-sfb-general-flag-isolated-linear-action",
+    "def-pc-projective-morphism",
+    "lem-sfb-projective-attracting-cells",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 18.21, proof, p.392: apply Proposition 13.52, p.275, by its Theorem 13.47/Corollary 13.49 attracting-cell proof and the general-flag setup in the proof of Theorem 17.65, p.374."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-morphism",
+  "def-sbc-affine-space",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-sfb-general-flag-isolated-linear-action",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-projective-attracting-cells",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lemma-nagata-finite-type-to-separated-target",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assembly of quotient geometry with the linear isolated-fixed-point action and the Bialynicki-Birula open attracting stratum, following Milne Lemma 18.21, p.392; Proposition 13.52 and the proof of Theorem 17.65, pp.275,374; Stacks Tags 01T6, 01T8, 01TX, 03GI, 01KV, 021O, 022C for quotient hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over an algebraically closed field modulo a Borel subgroup is a smooth projective integral scheme containing a dense open affine space",
+   "results": "{\"t\": \"2026-10-23T14:51:59Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group over an algebraically closed field modulo a Borel subgroup is a smooth projective integral scheme containing a dense open affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\"], \"digest\": \"b66532a5a4a8ff0e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary affine spaces, quasi-affineness, smooth loci, topological group quotients or analytic complements, not a Borel quotient or its affine-space cell"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|[Ff]lag[Vv]ariety|big[Cc]ell",
+   "results": "{\"t\": \"2026-10-23T15:01:50Z\", \"tool\": \"grep\", \"query\": \"Borel|[Ff]lag[Vv]ariety|big[Cc]ell\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary affine spaces, quasi-affineness, smooth loci, topological group quotients or analytic complements, not a Borel quotient or its affine-space cell"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected affine algebraic group over an algebraically closed field modulo a Borel subgroup has an open affine space cell",
+   "results": "{\"t\": \"2026-10-23T15:01:51Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected affine algebraic group over an algebraically closed field modulo a Borel subgroup has an open affine space cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"OpenNormalSubgroup.instSubgroupClass\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AddSubgroup.instFiniteQuotientOfContinuousAddOfCompactSpace\", \"QuotientGroup.instT2Space\", \"OpenNormalSubgroup\", \"OpenAddSubgroup.instInhabited\", \"OpenSubgroup.instSubgroupClass\"], \"digest\": \"a29116685d187242\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary affine spaces, quasi-affineness, smooth loci, topological group quotients or analytic complements, not a Borel quotient or its affine-space cell"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Borel\"",
+   "results": "{\"t\": \"2026-10-23T15:01:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary affine spaces, quasi-affineness, smooth loci, topological group quotients or analytic complements, not a Borel quotient or its affine-space cell"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel quotients of connected linear algebraic groups have a big cell isomorphic to affine space",
+   "results": "{\"t\": \"2026-10-23T15:01:52Z\", \"tool\": \"leanfinder\", \"query\": \"Borel quotients of connected linear algebraic groups have a big cell isomorphic to affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"isPathConnected_compl_of_one_lt_codim\", \"isAddQuotientCoveringMap_quotientMk_of_properlyDiscontinuousVAdd\", \"Subgroup.quotient_finite_of_isOpen\", \"isConnected_compl_of_one_lt_codim\", \"Subgroup.quotient_finite_of_isOpen'\"], \"digest\": \"5b49631e62554cf4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ordinary affine spaces, quasi-affineness, smooth loci, topological group quotients or analytic complements, not a Borel quotient or its affine-space cell"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth affine algebraic group modulo a Borel subgroup is a regular integral scheme with a dense open affine space cell",
+   "results": "{\"t\": \"2026-10-23T20:13:39Z\", \"tool\": \"leanfinder\", \"query\": \"A connected smooth affine algebraic group modulo a Borel subgroup is a regular integral scheme with a dense open affine space cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"f10a13d28ad4de77\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give general scheme properties, abstract or topological group quotients, smooth loci, Lie groups or a dense affine Zariski site; none constructs a scheme-theoretic Borel quotient with its affine-space cell"
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|flagVariety|bigCell",
+   "results": "{\"t\": \"2026-10-23T20:14:14Z\", \"tool\": \"grep\", \"query\": \"Borel|flagVariety|bigCell\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give general scheme properties, abstract or topological group quotients, smooth loci, Lie groups or a dense affine Zariski site; none constructs a scheme-theoretic Borel quotient with its affine-space cell"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected linear algebraic group divided by a maximal connected solvable subgroup contains a dense open affine space",
+   "results": "{\"t\": \"2026-10-23T20:14:15Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected linear algebraic group divided by a maximal connected solvable subgroup contains a dense open affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"QuotientAddGroup.dense_image_mk\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"QuotientGroup.dense_preimage_mk\", \"QuotientAddGroup.dense_preimage_mk\", \"Algebra.isOpen_smoothLocus\", \"solvable_quotient_of_solvable\", \"Subgroup.quotient_finite_of_isOpen\"], \"digest\": \"e96dcab50d5efd03\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give general scheme properties, abstract or topological group quotients, smooth loci, Lie groups or a dense affine Zariski site; none constructs a scheme-theoretic Borel quotient with its affine-space cell"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Borel\"",
+   "results": "{\"t\": \"2026-10-23T20:14:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"Borel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give general scheme properties, abstract or topological group quotients, smooth loci, Lie groups or a dense affine Zariski site; none constructs a scheme-theoretic Borel quotient with its affine-space cell"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flag varieties of connected linear algebraic groups are smooth complete and have an open cell isomorphic to affine n space",
+   "results": "{\"t\": \"2026-10-23T20:14:55Z\", \"tool\": \"leanfinder\", \"query\": \"Flag varieties of connected linear algebraic groups are smooth complete and have an open cell isomorphic to affine n space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instLieGroupOfTopWithTopENat\", \"instLieGroupOfSomeENatTopOfLEInfty\", \"LieGroup.of_le\", \"instLieGroupOfNatWithTopENat\", \"instLieGroupRealEuclideanSpaceFinOfNatNatModelWithCornersSelfTopWithTopENatCircle\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"LieGroup\"], \"digest\": \"e83d4f55f5cb1049\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results give general scheme properties, abstract or topological group quotients, smooth loci, Lie groups or a dense affine Zariski site; none constructs a scheme-theoretic Borel quotient with its affine-space cell"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-effective-picard-generators",
+  "date": "2026-10-24",
+  "group": "Q120"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Lemma 18.21 and its proof, printed p.392: divisor classes supported on the boundary of the affine-space cell, using Proposition 13.52 and the proof of Theorem 17.65. Geometric prerequisite in Milne Lemma 18.21: the open affine-space cell of the general Borel quotient, via Proposition 13.52 and the proof of Theorem 17.65.",
+   "via": [
+    "lem-sfb-flag-effective-picard-generators",
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-quotient-affine-cell",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Checked quotient finite presentation and fpqc-local lifts, reused the existing regular quotient geometry, and proved the affine-space clause using a linear action with isolated fixed points and the existing projective attracting-cell theorem. Created one statement-only general flag linear-action prerequisite, searched in Mathlib. Avoided the affine-space-cell sibling, which now depends on this item.",
+  "blueprint": "Realizes the inherited from.place supporting Milne Lemma 18.21 in the flag-effective-Picard-generators prerequisite: regular integral Noetherian separated quotient geometry and its affine-space open cell. Checked the current latest sk-thm-sf-ctf-stability unit; no unit route or statement was changed. blueprint_refs.py ancestor reports no surviving imported ancestor (from.node remains null), so the inherited exact place and via chain are retained. The affine-space step implements Proposition 13.52 through its attracting-cell argument; the new isolated-fixed-point linear-action node supplies its general-flag setup. It does not cite the sibling affine-space-cell result."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-df9819803",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-df9819803 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Item statement and stmt_deps are byte-identical to Q120's version; no repair note, so this is an ordinary one-level split. Source (Milne iAG2017, checked at the places): 18.21 (p.392) applies 13.52 as in the proof of 17.65 (p.374) for a general connected group, using Chevalley 4.27, 13.51, 13.52, 17.53 and 13.1; no reductivity is used. Step 1: lem-sfb-homogeneous-orbit-quotient-geometry with H=B gives Q separated and finite type, q faithfully flat, and the kernel pair G×B≅G×_QG; the Noetherian, absolute-separation and qcqs nodes then apply correctly. Step 2: Nagata (a) gives lft, pqf-lem-lft-fp-locnoeth (Q Noetherian) gives lfp, and qcqs-permanence(1) (G affine, Q quasi-separated) gives fp. So {q} is fppf; base change and fppf⇒fpqc give fpqc-local lifts, and the kernel pair gives a⁻¹b∈B(T). Every quotient condition of lem-sfb-algebraic-group-homogeneous-quotient is met. Step 3: borel-quotient-proper-geometry gives smooth, regular, Noetherian, geometrically integral, hence integral. Step 4: the new node gives E, ρ, a closed equivariant immersion and λ; restricting along λ makes Q projective (def-pc-projective-morphism, Q quasi-compact), smooth, connected and nonempty with Q^λ finite reduced. lem-sfb-projective-attracting-cells then gives a unique open dense stratum ≅A^d_F, and def-sbc-affine-space gives Spec F[t]. New node lem-sfb-general-flag-isolated-linear-action is statement-only and self-contained. It is true: Chevalley embedding closed by properness; for T⊂B, Q^T is finite (17.53), smooth (13.1) and nonempty (eB); 13.51 gives λ with P(E)^λ=P(E)^T, hence Q^λ=Q^T. Tested on G=B, GL2 (P¹, 2 fixed points), GL2×Ga, and characteristic p. It is setup, not a clause of the item. Not a duplicate: flag-torus-fixed-geometry is reductive only; general-borel-flag-variety and luna-borel-attraction-charts give no linear λ-action; searched with rg -L over cocharacter/Borel subgroup. Batch-5: lem-trf-fppf-covering-base-change and lem-trf-fppf-covering-is-fpqc are generic Mathlib leaves (Stacks 021O/022C). The homogeneous-quotient and orbit-quotient closures reach only def-/lem-trf algebraic-space and descent foundations; a closure BFS finds no thm/cor trace-formula or Poincaré-duality node and no nt-assume leaf, so all four flags are accepted as outside the assumptions. Other-unit citations are Mathlib leaves or definitions, so no tool_uses entry is needed. No SGA. Advisory only: Step 3 text omits 'smooth', which its cited statement gives and Step 4 uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelQuotientAffineCell",
+  "declaration": "AlgebraicGeometry.borel_quotient_affine_cell",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelQuotientAffineCell.lean",
+  "statement": "theorem borel_quotient_affine_cell {F : Type u} [Field F] [IsAlgClosed F] (G B : Over (Spec (.of F))) [GrpObj G] [GrpObj B] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : B ⟶ G) (hB : IsBorelGroupScheme i) (Q : Over (Spec (.of F))) (ηQ : coequalizer (yoneda.map (fst G B)) (yoneda.map (lift (fst G B) (snd G B ≫ i) ≫ μ[G])) ⟶ yoneda.obj Q) (hηQ : ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun f : yoneda.obj Q ⟶ Z.obj ↦ ηQ ≫ f)) : IsRegularScheme Q.left ∧ IsIntegral Q.left ∧ IsNoetherian Q.left ∧ Q.left.IsSeparated ∧ ∃ (n : ℕ) (U : Q.left.Opens), Dense (U : Set Q.left) ∧ ∃ e : U.toScheme ≅ Spec (.of (MvPolynomial (Fin n) F)), e.hom ≫ Spec.map (CommRingCat.ofHom (MvPolynomial.C : F →+* MvPolynomial (Fin n) F)) = U.ι ≫ Q.hom",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing Borel predicate and the coset coequalizer/sheafification interface of exists_homogeneous_fppf_quotient. The fppf topology is subcanonical, so no redundant sheafness hypothesis is imposed on the representable presheaf. The final equation makes the polynomial-spectrum isomorphism an F-isomorphism. Added only already-landed definition nodes for these notions to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b545d588e",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Milne 18.21: alg. closed F; G smooth connected affine finite-type GrpObj over Spec F; Borel via landed IsBorelGroupScheme (closed subgroup homomorphism, no normality); Q via the same coequalizer and sheafification interface as landed exists_homogeneous_fppf_quotient (right cosets, subcanonical, unique up to iso, satisfiable); conclusions IsRegularScheme (incl. local Noetherian), IsIntegral, IsNoetherian, absolute IsSeparated, ∃ n, dense open U, e : U ≅ Spec F[Fin n] over F. No extra hypotheses or universe restriction; G=B/n=0, trivial, solvable, non-reductive and any characteristic covered. Only node change: three landed def stmt_deps, all used; statement verbatim; sorry only; docstrings and 4-step plan present; lines ≤100. Not a duplicate (general-borel-flag-variety has no cell). No compile (no file changed). Advisory: second reading is a self-check by the same worker."
+ }
+}

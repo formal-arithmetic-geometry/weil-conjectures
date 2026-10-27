@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-etale-local-infinitesimal-lifts-smooth",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06DC (theorem-bootstrap), proof, final paragraph: smoothness of V -> Y from formal smoothness on objects and local finite presentation via the infinitesimal lifting criterion (Stacks 04AM/02H6); here in its etale-local scheme form, used in step 5 of lem-sfb-fppf-stack-algebraicity-bootstrap.",
+   "via": [
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Etale-local infinitesimal solutions imply smoothness",
+ "statement": "Let $f:V\\to W$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose that for every first order thickening $i:T_0\\hookrightarrow T$ of affine schemes (a closed immersion defined by an ideal $\\mathcal I$ with $\\mathcal I^2=0$) [def-sbc-first-order-thickening] and scheme maps $a_0:T_0\\to V$, $b:T\\to W$ with $fa_0=bi$, there is a jointly surjective family of etale maps $v_j:T_j\\to T$ [def-weil-etale-morphism] and maps $a_j:T_j\\to V$ with $fa_j=bv_j$ and $a_j|_{T_0\\times_TT_j}=a_0\\operatorname{pr}_{T_0}$, where the product is the scheme fibre product [def-pc-fibre-product]. Then $f$ is smooth [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04AM (lemma-smooth-formally-smooth), proof: sheaf of lifts and its torsor under the derivation module (Tags 061A lemma-sheaf, 061C lemma-action-sheaf), restricted to schemes; vanishing of H^1 of a quasi-coherent module on an affine etale site, etale-cohomology.tex Tag 03P2 (theorem-zariski-fpqc-quasi-coherent); conclusion via more-morphisms.tex Tag 02H6 (lemma-smooth-formally-smooth)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-first-order-thickening",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary affine first-order thickening $i:T_0\\hookrightarrow T$ and maps $a_0,b$ satisfying $fa_0=bi$. Apply [lem-sfb-etale-local-lift-torsor-quasi-coherent] to this square. It gives the quasi-coherent $\\mathcal O_T$-module $\\mathcal H$, the etale sheaf $\\mathcal L$ of compatible lifts, and the simply transitive $\\mathcal H_{\\mathrm{et}}$-action wherever a section exists.",
+   "uses": [
+    "lem-sfb-etale-local-lift-torsor-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, lemma-smooth-formally-smooth, sheaf-of-lifts torsor argument; Tags 061A, 061C, 061D for the lift sheaf and its action, restricted to schemes."
+   }
+  },
+  {
+   "text": "For each member $v_j:T_j\\to T$ of the jointly surjective etale family in the hypothesis, the given $a_j$ is a section of $\\mathcal L(T_j)$, since its two compatibility identities are exactly the defining identities of $\\mathcal L$. Translation by $a_j$ identifies the restriction of $\\mathcal L$ to $T_j$ with that of $\\mathcal H_{\\mathrm{et}}$: the bijections from Step 1 hold after every further restriction. Thus $\\mathcal L$ is an $\\mathcal H_{\\mathrm{et}}$-torsor in the general abelian-sheaf sense of [def-sc-gm-torsor].",
+   "uses": [
+    "def-sc-gm-torsor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 04AM, lemma-smooth-formally-smooth, sheaf-of-lifts torsor argument; Tags 061A, 061C, 061D for the lift sheaf and its action, restricted to schemes."
+   }
+  },
+  {
+   "text": "Since $T$ is affine and $\\mathcal H$ is quasi-coherent, [lem-sc-etale-affine-qcoherent] with $q=1$ gives $H^1(T_{\\mathrm{et}},\\mathcal H_{\\mathrm{et}})=0$. This applies to the module on $T$, not to a module on $T_0$ without a comparison.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, theorem-zariski-fpqc-quasi-coherent, affine case."
+   }
+  },
+  {
+   "text": "The torsor classification [lem-sc-torsor-h1] sends the trivial torsor to zero and is bijective. Step 3 therefore forces the torsor $\\mathcal L$ from Step 2 to be isomorphic to the trivial torsor $\\mathcal H_{\\mathrm{et}}$. The inverse image of its zero global section is an element of $\\mathcal L(T)$; by the defining section condition this is a map $a:T\\to V$ with $fa=b$ and $ai=a_0$.",
+   "uses": [
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1, zero class and trivial torsor."
+   }
+  },
+  {
+   "text": "The preceding construction works for every affine first-order thickening and every compatible pair $a_0,b$. These are precisely the quantified lifting problems in [def-sbc-formally-smooth], so $f$ is formally smooth.",
+   "uses": [
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H0, definition-formally-smooth."
+   }
+  },
+  {
+   "text": "Combine formal smoothness from Step 5 with the original locally finite presentation hypothesis. By [def-sbc-smooth-morphisms], these two properties say that $f$ is smooth.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H6, lemma-smooth-formally-smooth; the cited definition uses its equivalent formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "def-sc-gm-torsor",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1",
+  "lem-sfb-etale-local-lift-torsor-quasi-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 04AM (lemma-smooth-formally-smooth), pseudo-torsor argument (I)--(II), restricted to schemes; local sections supplied by the present hypothesis; Tag 03P2 and Tag 03AJ; conclusion by Tag 02H6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented scheme morphism is smooth if every square zero lifting problem has solutions etale locally on the affine test scheme",
+   "results": "{\"t\": \"2026-10-18T22:50:44Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented scheme morphism is smooth if every square zero lifting problem has solutions etale locally on the affine test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"4566c009f6891498\"}; Read hits: ordinary algebra FormallySmooth.exists_lift/of_comp_surjective concern global algebra lifts; scheme isSmooth_iff concerns standard smooth presentations; stalk formal-smooth criteria do not include etale-local solutions on arbitrary test schemes. No exact match or one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-18T22:50:44Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: ordinary algebra FormallySmooth.exists_lift/of_comp_surjective concern global algebra lifts; scheme isSmooth_iff concerns standard smooth presentations; stalk formal-smooth criteria do not include etale-local solutions on arbitrary test schemes. No exact match or one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth|formally_smooth|infinitesimal.*smooth",
+   "results": "{\"t\": \"2026-10-18T22:50:45Z\", \"tool\": \"grep\", \"query\": \"formallySmooth|formally_smooth|infinitesimal.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"c2e0e74769522e7e\"}; Read hits: ordinary algebra FormallySmooth.exists_lift/of_comp_surjective concern global algebra lifts; scheme isSmooth_iff concerns standard smooth presentations; stalk formal-smooth criteria do not include etale-local solutions on arbitrary test schemes. No exact match or one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal lifting criterion for smooth scheme morphisms with lifts existing etale locally on square zero thickenings",
+   "results": "{\"t\": \"2026-10-18T22:51:32Z\", \"tool\": \"leansearch\", \"query\": \"Infinitesimal lifting criterion for smooth scheme morphisms with lifts existing etale locally on square zero thickenings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.of_comp_surjective\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"Algebra.FormallyEtale\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"liftOfDerivationToSquareZero_apply\"], \"digest\": \"5c527ea82b1b655b\"}; Read hits: ordinary algebra FormallySmooth.exists_lift/of_comp_surjective concern global algebra lifts; scheme isSmooth_iff concerns standard smooth presentations; stalk formal-smooth criteria do not include etale-local solutions on arbitrary test schemes. No exact match or one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented morphism of schemes with etale local solutions of every infinitesimal square zero lifting problem is smooth",
+   "results": "{\"t\": \"2026-10-18T22:51:33Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely presented morphism of schemes with etale local solutions of every infinitesimal square zero lifting problem is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"adb8a552aebf5f0a\"}; Read hits: ordinary algebra FormallySmooth.exists_lift/of_comp_surjective concern global algebra lifts; scheme isSmooth_iff concerns standard smooth presentations; stalk formal-smooth criteria do not include etale-local solutions on arbitrary test schemes. No exact match or one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-18T22:51:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.instFormallySmoothMvPolynomial\", \"Algebra.FormallySmooth.of_equiv\"], \"digest\": \"98cd29f5dea5df3b\"}; Read hits: ordinary algebra FormallySmooth.exists_lift/of_comp_surjective concern global algebra lifts; scheme isSmooth_iff concerns standard smooth presentations; stalk formal-smooth criteria do not include etale-local solutions on arbitrary test schemes. No exact match or one-line specialization.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth|formally_smooth|infinitesimal.*smooth",
+   "results": "{\"t\": \"2026-10-23T14:45:23Z\", \"tool\": \"grep\", \"query\": \"formallySmooth|formally_smooth|infinitesimal.*smooth\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"c2e0e74769522e7e\"}; Read Smooth.lean:66-104,246-280 and RingTheory/Smooth/Basic.lean:126-136,371-380. Hits give smooth affine charts, smooth stalk criteria, or ring-level global lifting. None converts etale-local scheme lifts to a global affine lift; that requires the torsor argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local infinitesimal lifts for every square zero thickening imply a locally finitely presented scheme morphism is smooth",
+   "results": "{\"t\": \"2026-10-23T14:45:23Z\", \"tool\": \"leansearch\", \"query\": \"Etale local infinitesimal lifts for every square zero thickening imply a locally finitely presented scheme morphism is smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth\", \"RingHom.smooth_def\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.FormallySmooth.exists_lift\", \"AlgebraicGeometry.IsSmooth.mk\"], \"digest\": \"116060577ae800e3\"}; Read Smooth.lean:66-104,246-280 and RingTheory/Smooth/Basic.lean:126-136,371-380. Hits give smooth affine charts, smooth stalk criteria, or ring-level global lifting. None converts etale-local scheme lifts to a global affine lift; that requires the torsor argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\"",
+   "results": "{\"t\": \"2026-10-23T14:45:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.inst\", \"Algebra.FormallySmooth\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.FormallySmooth.polynomial\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.instFormallySmoothMvPolynomial\", \"Algebra.FormallySmooth.of_equiv\"], \"digest\": \"98cd29f5dea5df3b\"}; Read Smooth.lean:66-104,246-280 and RingTheory/Smooth/Basic.lean:126-136,371-380. Hits give smooth affine charts, smooth stalk criteria, or ring-level global lifting. None converts etale-local scheme lifts to a global affine lift; that requires the torsor argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism of schemes is smooth when square zero lifting problems admit solutions etale locally on the affine test scheme",
+   "results": "{\"t\": \"2026-10-23T14:45:24Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finitely presented morphism of schemes is smooth when square zero lifting problems admit solutions etale locally on the affine test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"975c3ec64bfc4814\"}; Read Smooth.lean:66-104,246-280 and RingTheory/Smooth/Basic.lean:126-136,371-380. Hits give smooth affine charts, smooth stalk criteria, or ring-level global lifting. None converts etale-local scheme lifts to a global affine lift; that requires the torsor argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally finitely presented scheme maps with an etale locally nonempty torsor of infinitesimal lifts are formally smooth",
+   "results": "{\"t\": \"2026-10-23T14:46:55Z\", \"tool\": \"leanfinder\", \"query\": \"Locally finitely presented scheme maps with an etale locally nonempty torsor of infinitesimal lifts are formally smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"20d013428903d8f0\"}; Read Smooth.lean:66-104,246-280 and RingTheory/Smooth/Basic.lean:126-136,371-380. Hits give smooth affine charts, smooth stalk criteria, or ring-level global lifting. None converts etale-local scheme lifts to a global affine lift; that requires the torsor argument.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-fppf-stack-algebraicity-bootstrap",
+  "date": "2026-10-23",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-local-infinitesimal-lifts-smooth",
+  "worker": "stage1",
+  "summary": "Statement retained exactly. Cited the scheme lift-sheaf/derivation-action node lem-sfb-etale-local-lift-torsor-quasi-coherent (reviewer-created 2026-10-23, same statement as the dropped lem-per node of the 2026-10-19 route pivot), affine etale quasi-coherent vanishing, and the arbitrary abelian-sheaf torsor-H1 theorem. The six explicit steps establish local nonemptiness, trivialize the torsor on affine T, produce a global lift, and unfold formal smoothness and smoothness. The dropped 2026-10-19 sec-deligne-laumon-a1 copy of this criterion is not cited. Fresh logged Mathlib searches found no exact or one-line match.",
+  "blueprint": "Historical prerequisite of det-thm-sf-ctf-stability-direct-images (3), reached through the inherited alteration/moduli/bootstrap chain in blueprint.from.place. The immediate use is lem-sfb-fppf-stack-algebraicity-bootstrap Step 5: pass from etale-local square-zero lifts for W -> T to smoothness. Current latest direct-images proof (3) assembles open/proper direct images; it does not explicitly spell out this historical prerequisite. The inherited null from.node and via are retained, as blueprint_refs ancestor returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic affine quasi-coherent etale cohomology vanishing at q=1; no node of this unit replaces this cohomological tool."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic classification for any abelian etale sheaf, including the zero/trivial-torsor correspondence; needed only to obtain the global lift."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-2691296c7",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-2691296c7 (reviewer sub-agent of L); spot-checked: I read the whole item, all six steps, and checked each against the statement it cites and against Stacks spaces-more-morphisms.tex 04AM (the pseudo-torsor argument, parts (I) and (II)), 061A, 061C and 061D, plus 03P2, 03AJ and 02H6. The statement and stmt_deps are unchanged from the base, and the item arrived unsplit with no proof, so the 2026-10-21 re-split rule does not apply. The mathematics is correct: Step 2 replaces 04AM part (I) by the hypothesis, the given jointly surjective étale family is an étale covering, and translation makes L an H_et-torsor in the general abelian clause of def-sc-gm-torsor. Step 3 is lem-sc-etale-affine-qcoherent with q=1 on the affine T. Step 4 is lem-sc-torsor-h1 (0 corresponds to the trivial torsor), which gives a global lift. Steps 5 and 6 are exact instances of def-sbc-formally-smooth over W and of def-sbc-smooth-morphisms (lfp plus formally smooth). Edge cases checked: I=0, T empty, f étale, A^1. MECHANICAL FINDING, confirmed: Step 1 cited lem-per-etale-local-lift-torsor-quasi-coherent, which is on line 1524 of route-pivot-dropped.txt (the 2026-10-19 artin-gabber section, Q31 lineage), and a reachable node may not cite it. Its content is generic scheme deformation theory (061A/061C/061D with the 04AM quasi-coherence argument) and involves none of the techniques forbidden for artin-gabber, so the fault is repairable. No live node can replace it: lem-sfb-space-infinitesimal-lift-pseudotorsor and lem-sfb-etale-space-infinitesimal-lifting both reach the item (a cycle), and lem-sfb-scheme-square-zero-lift-torsor is about flat deformations, not lifts of maps. FIX: I created the statement-only reviewer node lem-sfb-etale-local-lift-torsor-quasi-coherent (unsplit, created.item = this item, unit sk-thm-sf-ctf-stability) with the dropped node's statement, sources and four kinds of Mathlib search copied verbatim; blueprint.from is inherited and via = [item] + the item's via. Its statement is true (E is finitely presented because f is lfp, so i_*Hom is quasi-coherent; the action is simply transitive). It asserts no existence of lifts, so it does not restate the item. In the item, Step 1 now cites the new node, proof_deps is recomputed, the tool_uses entry for the dropped id is removed, and the dropped ids are removed from the summary. After the fix the closure contains no dropped id. Accepted tool uses: lem-sc-etale-affine-qcoherent and lem-sc-torsor-h1, both generic. No SGA source is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalInfinitesimalSmoothCriterion",
+  "declaration": "AlgebraicGeometry.smooth_of_etale_local_infinitesimal_lifts",
+  "statement": "theorem smooth_of_etale_local_infinitesimal_lifts {V W : Scheme.{u}} (f : V ⟶ W) [LocallyOfFinitePresentation f] (h : ∀ (T₀ T : Scheme.{u}) (i : T₀ ⟶ T) [IsAffine T₀] [IsAffine T], IsFirstOrderThickening i → ∀ (a₀ : T₀ ⟶ V) (b : T ⟶ W), a₀ ≫ f = i ≫ b → ∃ (J : Type u) (Tj : J → Scheme.{u}) (v : ∀ j : J, Tj j ⟶ T) (a : ∀ j : J, Tj j ⟶ V), (∀ j : J, Etale (v j)) ∧ (∀ t : T, ∃ (j : J) (x : Tj j), v j x = t) ∧ (∀ j : J, a j ≫ f = v j ≫ b) ∧ (∀ j : J, pullback.snd i (v j) ≫ a j = pullback.fst i (v j) ≫ a₀)) : Smooth f",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalInfinitesimalSmoothCriterion.lean",
+  "existing": false,
+  "note": "Returned delivery c3adc7338948 repair: this live node owns the theorem. Its statement is string-equal to the dropped lem-per node. The module and blueprint id follow the live route, outside both dropped lists; its lift-torsor dependency is the live lem-sfb node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f29c1f522",
+  "group": "NM",
+  "result": "pass",
+  "note": "Implements the c3adc7338948 RETURN: states the live lem-sfb node in the new module Sheaf.AlgebraicGeometry.EtaleLocalInfinitesimalSmoothCriterion, which is not on the route-pivot dropped lists; none of its imports is dropped; the node had lean:null; no duplicate declaration. Node differs from side-live only in lean; the 6 stmt_dep records are identical; lean.statement is verbatim. H3 clause by clause: affine first-order thickening (IsFirstOrderThickening = closed immersion with ker^2=⊥, same convention as FormallySmooth), commuting square, étale and jointly surjective family, lifts over b, restriction via pullback.snd ≫ a j = pullback.fst ≫ a₀, conclusion Smooth f. No extra assumptions; J : Type u loses nothing. Edge cases T=∅, I=0, V=∅ fine. No definitions, sorry only, docstrings carry source tags, blueprint id and the 6 proof steps; public imports = stmt_dep modules, plain imports = proof_dep modules, all present. Report sections present. Nothing compiled, as instructed; no file changed."
+ }
+}

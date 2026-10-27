@@ -1,0 +1,440 @@
+{
+ "id": "lem-trf-finite-ultrametric-almost-orthogonal-basis",
+ "kind": "statement",
+ "title": "Almost orthogonal bases for finite-dimensional ultrametric normed spaces",
+ "statement": "Let $K$ be a field [def-weil-field] with a complete, nontrivial, nonarchimedean real absolute value $|\\cdot|$: it is multiplicative, vanishes precisely at zero, has $|1|=1$, satisfies $|a+b|\\le\\max(|a|,|b|)$, and some nonzero $a$ has $|a|\\ne1$. Completeness is for the metric $d(a,b)=|a-b|$. Let $V$ be a finite-dimensional $K$-vector space [def-weil-finite-dimensional-subspace], with $n=\\dim_K V$ [def-weil-vector-space-dimension], and with a function $\\|\\cdot\\|:V\\to\\mathbf R_{\\ge0}$ satisfying $\\|v\\|=0\\Longleftrightarrow v=0$, $\\|av\\|=|a|\\|v\\|$ and $\\|v+w\\|\\le\\max(\\|v\\|,\\|w\\|)$. For every real $0<r<1$, there is a $K$-basis $(e_i)_{1\\le i\\le n}$ of $V$ such that, for every $(a_i)_{1\\le i\\le n}\\in K^n$, $$r\\max_{1\\le i\\le n}(|a_i|\\|e_i\\|)\\le\\left\\|\\sum_{i=1}^n a_i e_i\\right\\|.$$ For $n=0$ the basis is empty, and the empty maximum and sum are both zero.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Lemma 6.3.3, printed p. 48, choice of an r-orthogonal basis and its displayed defining inequality; the existence input is explicitly attributed there to Bosch–Güntzer–Remmert, Non-Archimedean Analysis, 2.6.1/3.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Equip $V$ with $d(v,w)=\\|v-w\\|$. Definiteness and the ultrametric inequality make this a Hausdorff metric. Addition and negation are continuous by $\\|(v+w)-(v_0+w_0)\\|\\le\\max(\\|v-v_0\\|,\\|w-w_0\\|)$ and $\\|-v\\|=\\|v\\|$. Scalar multiplication is continuous by $\\|av-bw\\|\\le\\max(|a|\\|v-w\\|,|a-b|\\|w\\|)$, with $|a|\\le\\max(|b|,|a-b|)$ locally bounded. Thus $V$ is a Hausdorff topological $K$-vector space.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.3.3, printed p. 48, r-orthogonal basis input (BGR 2.6.1/3); agent-written dimension-induction proof of this input."
+   }
+  },
+  {
+   "text": "Induct on $n$, with the assertion quantified over every normed space of dimension $n$ and every $0<r<1$. At $n=0$ use the empty basis. For $n>0$, discard successively any vector in the span of its predecessors from a finite spanning family; the remaining independent spanning family is a basis of $n$ elements. Let $W$ span its first $n-1$ elements and let $z$ be its last element. Then $V=W\\oplus Kz$ and $\\dim W=n-1$. Put $s=(1+r)/2$; then $0<s<1$ and $s^2-r=(1-r)^2/4>0$. The induction hypothesis gives an $s$-orthogonal basis $(e_i)_{i<n}$ of $W$ with its restricted norm.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.3.3, printed p. 48, r-orthogonal basis input (BGR 2.6.1/3); agent-written dimension-induction proof of this input."
+   }
+  },
+  {
+   "text": "By [lem-sfb-finite-dimensional-subspace-closed], $W$ is closed: the field is complete and nontrivially normed, the ambient space is Hausdorff and has continuous vector-space operations by step 1, and $W$ is finite-dimensional. Since $z\\notin W$, some ball of radius $\\epsilon>0$ about $z$ misses $W$. Hence $\\delta=\\inf_{w\\in W}\\|z-w\\|\\ge\\epsilon>0$; the infimum exists since the set is nonempty and bounded below. Because $\\delta/s>\\delta$, the definition of infimum gives $w_0\\in W$ with $\\|z-w_0\\|<\\delta/s$. Set $e=z-w_0$. Then $V=W\\oplus Ke$ and $s\\|e\\|<\\delta$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-subspace-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.3.3, printed p. 48, r-orthogonal basis input (BGR 2.6.1/3); agent-written dimension-induction proof of this input."
+   }
+  },
+  {
+   "text": "For $w\\in W$ and $a\\ne0$, one has $\\|w+ae\\|=|a|\\|z-(w_0-a^{-1}w)\\|\\ge|a|\\delta>s|a|\\|e\\|$. If $\\|w\\|>|a|\\|e\\|$, the two ultrametric inequalities for $w+ae$ and $w=(w+ae)-ae$ force $\\|w+ae\\|=\\|w\\|$. Otherwise the preceding lower bound gives $\\|w+ae\\|\\ge s\\max(\\|w\\|,|a|\\|e\\|)$. The same weak inequality holds when $a=0$, directly from $s<1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.3.3, printed p. 48, r-orthogonal basis input (BGR 2.6.1/3); agent-written dimension-induction proof of this input."
+   }
+  },
+  {
+   "text": "Write $w=\\sum_{i<n}a_i e_i$ and $M=\\max_{i<n}|a_i|\\|e_i\\|$, taking $M=0$ for an empty index set. The induction hypothesis gives $\\|w\\|\\ge sM$, so step 4 yields $\\|w+ae\\|\\ge s\\max(sM,|a|\\|e\\|)\\ge s^2\\max(M,|a|\\|e\\|)\\ge r\\max(M,|a|\\|e\\|)$. The family $(e_1,\\ldots,e_{n-1},e)$ is a basis because $e=z-w_0$ replaces the last vector of the chosen basis by subtracting an element of $W$. This proves the induction and the required inequality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Lemma 6.3.3, printed p. 48, r-orthogonal basis input (BGR 2.6.1/3); agent-written dimension-induction proof of this input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension",
+  "lem-sfb-finite-dimensional-subspace-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Agent-written proof of the r-orthogonal basis input cited in Temkin Lemma 6.3.3 (BGR 2.6.1/3); uses the existing finite-dimensional closed-subspace Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional ultrametric normed vector space over a complete nonarchimedean field has a t-orthogonal basis for every real zero less than t less than one",
+   "results": {
+    "t": "2026-10-24T08:39:32Z",
+    "tool": "leanfinder",
+    "query": "Finite dimensional ultrametric normed vector space over a complete nonarchimedean field has a t-orthogonal basis for every real zero less than t less than one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "Module.Basis.ofZLatticeBasis",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "IsUltrametricDist.invariantExtension"
+    ],
+    "digest": "8a676cec84a047d2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern a different basis norm, real/complex inner-product orthogonality, biorthogonal functionals, or ordinary finite-dimensional bounds; none produces an r-orthogonal basis for the given ultrametric norm."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|orthogonalBasis|exists.*basis",
+   "results": {
+    "t": "2026-10-24T08:40:48Z",
+    "tool": "grep",
+    "query": "orthogonal|orthogonalBasis|exists.*basis",
+    "sub": "Analysis/Normed/Module",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/FiniteDimension.lean",
+     "Mathlib/Analysis/Normed/Module/FiniteDimension.lean"
+    ],
+    "digest": "df2d20d23dd72d28"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern a different basis norm, real/complex inner-product orthogonality, biorthogonal functionals, or ordinary finite-dimensional bounds; none produces an r-orthogonal basis for the given ultrametric norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional nonarchimedean normed space over a complete field admits an almost orthogonal basis",
+   "results": {
+    "t": "2026-10-24T08:40:48Z",
+    "tool": "leansearch",
+    "query": "A finite dimensional nonarchimedean normed space over a complete field admits an almost orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FiniteDimensional.complete",
+     "LocallyCompactSpace.of_finiteDimensional_of_complete",
+     "Submodule.HasOrthogonalProjection.ofCompleteSpace",
+     "FiniteDimensional.of_locallyCompactSpace",
+     "OrthonormalBasis",
+     "Module.Basis.norm_isNonarchimedean",
+     "InnerProductSpace.gramSchmidtBasis",
+     "InnerProductSpace.gramSchmidtOrthonormalBasis"
+    ],
+    "digest": "052dc572b36a96e1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern a different basis norm, real/complex inner-product orthogonality, biorthogonal functionals, or ordinary finite-dimensional bounds; none produces an r-orthogonal basis for the given ultrametric norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsUltrametricDist, Basis",
+   "results": {
+    "t": "2026-10-24T08:40:48Z",
+    "tool": "loogle",
+    "query": "IsUltrametricDist, Basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Basis'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "inconclusive: loogle: unknown identifier 'Basis'; replaced by the corrected Module.Basis pattern and two semantic phrasings."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|Orthogonal|cartesian",
+   "results": {
+    "t": "2026-10-24T08:44:48Z",
+    "tool": "grep",
+    "query": "orthogonal|Orthogonal|cartesian",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern a different basis norm, real/complex inner-product orthogonality, biorthogonal functionals, or ordinary finite-dimensional bounds; none produces an r-orthogonal basis for the given ultrametric norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, IsUltrametricDist",
+   "results": {
+    "t": "2026-10-24T08:44:48Z",
+    "tool": "loogle",
+    "query": "Module.Basis, IsUltrametricDist",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern a different basis norm, real/complex inner-product orthogonality, biorthogonal functionals, or ordinary finite-dimensional bounds; none produces an r-orthogonal basis for the given ultrametric norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any r less than one a finite dimensional ultrametric space has a basis satisfying norm of sum at least r times maximum of norms of its terms",
+   "results": {
+    "t": "2026-10-24T08:46:18Z",
+    "tool": "leanfinder",
+    "query": "For any r less than one a finite dimensional ultrametric space has a basis satisfying norm of sum at least r times maximum of norms of its terms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean",
+     "IsUltrametricDist.isNonarchimedean_invariantExtension",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "IsUltrametricDist.exists_norm_finset_sum_le",
+     "ZLattice.normBound",
+     "IsUltrametricDist.exists_norm_finset_sum_le_of_nonempty",
+     "exists_seq_norm_le_one_le_norm_sub'",
+     "exists_norm_le_le_norm_sub_of_finset"
+    ],
+    "digest": "121ca06ced056ca8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern a different basis norm, real/complex inner-product orthogonality, biorthogonal functionals, or ordinary finite-dimensional bounds; none produces an r-orthogonal basis for the given ultrametric norm."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|cartesian|almost.*basis",
+   "results": {
+    "t": "2026-10-24T08:48:03Z",
+    "tool": "grep",
+    "query": "orthogonal|cartesian|almost.*basis",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean"
+    ],
+    "digest": "c163254eb6e7aef9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern a different basis norm, real/complex inner-product orthogonality, biorthogonal functionals, or ordinary finite-dimensional bounds; none produces an r-orthogonal basis for the given ultrametric norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional ultrametric normed vector space has an r orthogonal basis for every 0 < r < 1",
+   "results": {
+    "t": "2026-10-24T09:07:35Z",
+    "tool": "leanfinder",
+    "query": "A finite dimensional ultrametric normed vector space has an r orthogonal basis for every 0 < r < 1",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_orthonormalBasis",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "exists_seq_norm_le_one_le_norm_sub'",
+     "ZLattice.exists_forall_abs_repr_le_norm",
+     "exists_seq_norm_le_one_le_norm_sub",
+     "stdOrthonormalBasis",
+     "exists_norm_le_le_norm_sub_of_finset",
+     "OrthonormalBasis.instInhabited"
+    ],
+    "digest": "883cca20b80deb1e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not construct a basis almost orthogonal for the given ultrametric norm; inner-product bases, coefficient-defined basis norms and finite-dimensional completeness are different statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, IsUltrametricDist",
+   "results": {
+    "t": "2026-10-24T09:07:35Z",
+    "tool": "loogle",
+    "query": "Module.Basis, IsUltrametricDist",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not construct a basis almost orthogonal for the given ultrametric norm; inner-product bases, coefficient-defined basis norms and finite-dimensional completeness are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|cartesian|almost.*basis",
+   "results": {
+    "t": "2026-10-24T09:07:36Z",
+    "tool": "grep",
+    "query": "orthogonal|cartesian|almost.*basis",
+    "sub": "Analysis/Normed",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/Prod.lean",
+     "Mathlib/Analysis/Normed/Operator/BoundedLinearMaps.lean"
+    ],
+    "digest": "c163254eb6e7aef9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not construct a basis almost orthogonal for the given ultrametric norm; inner-product bases, coefficient-defined basis norms and finite-dimensional completeness are different statements."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|Orthogonal|cartesian",
+   "results": {
+    "t": "2026-10-24T09:12:25Z",
+    "tool": "grep",
+    "query": "orthogonal|Orthogonal|cartesian",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not construct a basis almost orthogonal for the given ultrametric norm; inner-product bases, coefficient-defined basis norms and finite-dimensional completeness are different statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite dimensional nonarchimedean normed space over a complete field admits an almost orthogonal basis",
+   "results": {
+    "t": "2026-10-24T09:12:25Z",
+    "tool": "leansearch",
+    "query": "A finite dimensional nonarchimedean normed space over a complete field admits an almost orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FiniteDimensional.complete",
+     "LocallyCompactSpace.of_finiteDimensional_of_complete",
+     "Submodule.HasOrthogonalProjection.ofCompleteSpace",
+     "FiniteDimensional.of_locallyCompactSpace",
+     "OrthonormalBasis",
+     "Module.Basis.norm_isNonarchimedean",
+     "InnerProductSpace.gramSchmidtBasis",
+     "InnerProductSpace.gramSchmidtOrthonormalBasis"
+    ],
+    "digest": "052dc572b36a96e1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not construct a basis almost orthogonal for the given ultrametric norm; inner-product bases, coefficient-defined basis norms and finite-dimensional completeness are different statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis of a finite dimensional nonarchimedean normed space with norm of every linear combination at least t times the maximum of the norms of its summands for any t less than one",
+   "results": {
+    "t": "2026-10-24T09:12:31Z",
+    "tool": "leanfinder",
+    "query": "A basis of a finite dimensional nonarchimedean normed space with norm of every linear combination at least t times the maximum of the norms of its summands for any t less than one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.norm_isNonarchimedean",
+     "Module.Basis.norm",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "ZLattice.normBound",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "ZLattice.normBound_pos",
+     "ZLattice.exists_forall_abs_repr_le_norm",
+     "Module.Basis.ofZLatticeBasis"
+    ],
+    "digest": "c22d379cfbd5fbad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not construct a basis almost orthogonal for the given ultrametric norm; inner-product bases, coefficient-defined basis norms and finite-dimensional completeness are different statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-close-embedding-degree",
+  "date": "2026-10-24",
+  "group": "Q36"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Lemma 6.3.3, printed p. 48; the weak bound by c specializes its strict bound using any c<c′<1, and zero is excluded from the strict inequality. Basis-existence input in the proof of Temkin Lemma 6.3.3 (BGR 2.6.1/3).",
+   "via": [
+    "lem-trf-analytic-close-embedding-degree",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-ultrametric-almost-orthogonal-basis",
+  "worker": "stage1",
+  "summary": "Proved the basis-existence input by dimension induction and approximate minimization of distance to a closed hyperplane. Reused the existing general finite-dimensional closed-subspace Mathlib leaf; created no nodes. Statement unchanged, including the empty case.",
+  "blueprint": "Realizes the basis-existence input of Temkin Lemma 6.3.3 (BGR 2.6.1/3) in the existing from.place chain under lem-trf-local-term-locality, proof (1)--(2); this auxiliary analytic argument is not separately a latest-blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-5369f40c6",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-5369f40c6 (reviewer sub-agent of L); spot-checked: Read the item and all five steps in full. The statement is byte-identical to the base (unsplit) copy in the Q36 snapshot, and there are no new nodes. I could not check the source at the cited place: the Temkin PDF (Lemma 6.3.3, p.48) is not in the local literature. The statement is the standard r-orthogonal-basis existence over a complete, nontrivially valued nonarchimedean field, and I verified it independently through the proof. The only citer, lem-trf-analytic-close-embedding-degree step 1, applies it to H/A with r=(1+c)/2, and every hypothesis holds there. Step 1: the metric is Hausdorff and addition and scalar multiplication are continuous, including continuity at b=0 and w=0. Step 2: the induction is quantified over all spaces and all r, and s=(1+r)/2 gives s²−r=(1−r)²/4. Step 3: lem-sfb-finite-dimensional-subspace-closed (Mathlib Submodule.closed_of_finiteDimensional, FiniteDimension.lean:530) applies with exactly the hypotheses step 1 supplies (complete, nontrivially valued K; Hausdorff topological vector space). The proof takes an approximate minimizer with ‖z−w0‖<δ/s and never assumes the minimum is attained, which is correct without local compactness. Step 4: from w+ae=a(z−(w0−a⁻¹w)) the bound ‖w+ae‖≥s·max(‖w‖,|a|‖e‖) holds in all three cases. Step 5: the chain s·max(sM,|a|‖e‖)≥s²·max≥r·max holds, and V=W⊕Ke gives the basis. Edge cases n=0, n=1 and cancellation all check. Duplicate search: lem-sfb-finite-ultrametric-best-approximation and lem-sfb-ultrametric-orthogonal-extension give exact orthogonality only over finite E/Q_ℓ, where they rely on local compactness. They do not cover a general complete K, so they are not duplicates. No tool_uses and no SGA. One cosmetic point: the report mentions citations.json and searches.jsonl, which are not in the commit. No changes."
+ }
+}

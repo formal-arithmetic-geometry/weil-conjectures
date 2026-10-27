@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-pbc-site-finite-constant-cone-step",
+ "kind": "statement",
+ "title": "One local finite constant cone lowers the cohomological interval",
+ "statement": "Let C be a small site with precoverage J [def-weil-pbc-sites-and-cohomology], B a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and assume the derived categories of ModuleCat(B)-valued sheaves on C/V exist for all V [def-weil-abstract-derived-category, def-pur-localized-ringed-site]. Let U be an object, K an object of D(Sh(C/U,Mod_B)), and a<b integers. Assume H^q(K)=0 outside [a,b] [def-weil-derived-cohomology-sheaves] and, for every q and arrow V to U, the restriction of H^q(K) to C/V becomes a constant finite B-module sheaf after a J-cover of V [def-weil-pbc-constant-sheaf, def-weil-finitely-generated-module]. There is a J-cover {V_i to U}, finite B-modules M_i, and objects L_i of D(Sh(C/V_i,Mod_B)) whose cohomology vanishes outside [a,b-1] and satisfies the same finite local constant condition on every further slice, together with distinguished triangles K|_(V_i) to L_i to constant(M_i) in degree b-1 to (K|_(V_i))[1] [def-weil-triangulated-category]. No tower, induction hypothesis, chain realization or whole-interval model is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, proof of lemma-locally-constant, finite free top-cohomology lifting and the cohomology of its cone"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finitely-generated-module",
+  "def-pur-localized-ringed-site",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "For each member of a cover trivializing H^b(K), choose a finite free coefficient module mapping onto the trivialized finite module. Use an arbitrary cochain representative of the restricted object and the epimorphism from cycles to homology; upper truncation is unnecessary. The private local_free_lift proof intersects the image sieves of the finitely many basis vectors, extracts a J-cover, and uses the terminal-object constant-sheaf adjunction on each flat slice to lift the generators. Compatibility of sheafification with restriction proves the lifting equation.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, proof of lemma-locally-constant, finite free top-cohomology lifting and the cohomology of its cone"
+   }
+  },
+  {
+   "text": "Include the lifted cycles in the restricted representative to obtain a chain map from the finite free constant single complex in degree b. The homology projection and the cycles comparison for an exact functor show that this map is epic on H^b. Localize it, transport along the representative isomorphism, flatten the derived restriction composition, and compose the two covers. This is the proved private local_top_epi lemma.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, proof of lemma-locally-constant, finite free top-cohomology lifting and the cohomology of its cone"
+   }
+  },
+  {
+   "text": "Complete the local top epimorphism to a distinguished triangle S -> K|V -> L -> S[1]. For the finite locally constant predicate on C/V, use the module-valued weak Serre bridge. The proved source-library homologyProperty theorem then gives finite locally constant cohomology for L, using constant single objects and exact restriction. The exact segment H^q(K|V) -> H^q(L) -> H^(q+1)(S) forces vanishing outside [a,b-1]: for q != b both outer terms vanish, while for q=b the first map is zero because H^b(S -> K|V) is epic and the second target vanishes. Rotate and use the single-functor shift isomorphism S[1] = constant(F)[b-1] to obtain the required triangle.",
+   "uses": [
+    "lem-weil-pbc-site-finite-locally-constant-weak-serre",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094G, proof of lemma-locally-constant, finite free top-cohomology lifting and the cohomology of its cone"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-weil-pbc-site-finite-locally-constant-weak-serre",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G, proof of lemma-locally-constant, finite free top-cohomology lifting and the cohomology of its cone",
+  "note": "R9: explicit finite-generator lifting and cone vanishing in Lean; the only new open statement is the abelian weak Serre encoding bridge, not a cone-step restatement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally lift a finite free constant sheaf to a bounded derived complex to kill top cohomology and obtain a cone of smaller amplitude",
+   "results": "Eight hits: mappingCone, mappingCone.lift and related cochain constructors, plus global sections cones. These construct formal cones but do not supply local finite-free top generators or finite locally constant cohomology of the cone.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded derived object with finite locally constant cohomology locally has a morphism from a finite free constant sheaf in its top degree whose cone has smaller cohomological amplitude",
+   "results": "Eight hits: derived fractions, support of Q and vanishing against projective/injective single objects. No local finite-free cone reduction on a site.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"homology\", \"Epi\"",
+   "results": "HomologySequence.epi_homologyMap_mor₁_iff and epi_homologyMap_mor₂_iff give exactness consequences; neither constructs the local morphism or its finite locally constant cone.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_site_finite_constant_cone_step|constant.*cone|cone.*locally.*constant|finite.*free.*epi.*lift in Sheaf/Paper, Sheaf/CategoryTheory, WeilConjectures/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "LocalFiniteEpiLifts provides the needed sheaf-level lift. Other cone hits concern adic systems, formal mapping cones or global sections; no one-step local derived reduction. The source-library and Mathlib signatures of the stated dependencies were read.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SiteFiniteConstantExtensionTower",
+  "group": "A2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), Tag 094G, finite free generator lift and the short exact sequence for the cone, before the induction hypothesis",
+   "via": [
+    "lem-weil-pbc-site-finite-constant-extension-tower",
+    "lem-weil-pbc-site-bounded-constant-graded-model",
+    "lem-weil-pbc-site-bounded-constant-model",
+    "lem-weil-pbc-locally-constant-tensor",
+    "lem-weil-pbc-nilpotent-reduction-lissity",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SiteFiniteConstantConeStep",
+  "file": "lean/Sheaf/Paper/SiteFiniteConstantConeStep.lean",
+  "declaration": "CategoryTheory.exists_site_finite_constant_cone_step",
+  "statement": "theorem exists_site_finite_constant_cone_step\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    (B : Type u) [CommRing B] [IsNoetherianRing B]\n    [∀ U : C, HasDerivedCategory.{w}\n      (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B))] :\n    let ρ := fun {U V : C} (f : V ⟶ U) ↦\n      @Functor.mapDerivedCategory _ _ _ _ _ _ _ _\n        (J.toGrothendieck.overMapPullback (ModuleCat.{u} B) f)\n        (Functor.additive_of_preserves_binary_products _) _\n        ⟨fun _ _ _ ↦ PreservesColimitsOfSize.preservesColimitsOfShape\n          (self := Adjunction.leftAdjoint_preservesColimits\n            (Functor.sheafAdjunctionCocontinuous (Over.map f) (ModuleCat.{u} B)\n              (J.toGrothendieck.over V) (J.toGrothendieck.over U)))⟩\n    ∀ (U : C) (K : DerivedCategory (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B)))\n      (a b : ℤ) (hab : a < b)\n      (hvan : ∀ q : ℤ, q < a ∨ b < q → IsZero\n        ((DerivedCategory.homologyFunctor\n          (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B)) q).obj K))\n      (hloc : ∀ (q : ℤ) (V : C) (g : V ⟶ U),\n        ∃ (I : Type u) (W : I → C) (f : ∀ i : I, W i ⟶ V),\n          Presieve.ofArrows W f ∈ J V ∧\n          ∀ i : I, ∃ M : ModuleCat.{u} B, Module.Finite B M ∧ Nonempty\n            ((J.toGrothendieck.overMapPullback (ModuleCat.{u} B) (f i ≫ g)).obj\n              ((DerivedCategory.homologyFunctor\n                (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B)) q).obj K) ≅\n              (constantSheaf (J.toGrothendieck.over (W i)) (ModuleCat.{u} B)).obj M)),\n      ∃ (I : Type u) (V : I → C) (f : ∀ i : I, V i ⟶ U),\n        Presieve.ofArrows V f ∈ J U ∧\n        ∀ i : I, ∃ (M : ModuleCat.{u} B), Module.Finite B M ∧\n          ∃ (L : DerivedCategory (Sheaf (J.toGrothendieck.over (V i)) (ModuleCat.{u} B))),\n            (∀ q : ℤ, q < a ∨ b - 1 < q → IsZero\n              ((DerivedCategory.homologyFunctor\n                (Sheaf (J.toGrothendieck.over (V i)) (ModuleCat.{u} B)) q).obj L)) ∧\n            (∀ (q : ℤ) (W : C) (g : W ⟶ V i),\n              ∃ (T : Type u) (Z : T → C) (h : ∀ t : T, Z t ⟶ W),\n                Presieve.ofArrows Z h ∈ J W ∧\n                ∀ t : T, ∃ N : ModuleCat.{u} B, Module.Finite B N ∧ Nonempty\n                  ((J.toGrothendieck.overMapPullback (ModuleCat.{u} B) (h t ≫ g)).obj\n                    ((DerivedCategory.homologyFunctor\n                      (Sheaf (J.toGrothendieck.over (V i)) (ModuleCat.{u} B)) q).obj L) ≅\n                    (constantSheaf (J.toGrothendieck.over (Z t)) (ModuleCat.{u} B)).obj N)) ∧\n            ∃ (iK : (ρ (f i)).obj K ⟶ L)\n              (δ : L ⟶ DerivedCategory.Q.obj\n                ((CochainComplex.singleFunctor _ (b - 1)).obj\n                  ((constantSheaf (J.toGrothendieck.over (V i)) (ModuleCat.{u} B)).obj M)))\n              (j : DerivedCategory.Q.obj\n                ((CochainComplex.singleFunctor _ (b - 1)).obj\n                  ((constantSheaf (J.toGrothendieck.over (V i)) (ModuleCat.{u} B)).obj M)) ⟶\n                    ((ρ (f i)).obj K)⟦(1 : ℤ)⟧),\n              Triangle.mk iK δ j ∈ distTriang _",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T065014-L-2667686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261026T100354-L-5532",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

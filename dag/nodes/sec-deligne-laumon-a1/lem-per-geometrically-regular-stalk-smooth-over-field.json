@@ -1,0 +1,287 @@
+{
+ "id": "lem-per-geometrically-regular-stalk-smooth-over-field",
+ "kind": "statement",
+ "title": "Geometric regularity of a stalk over a field gives smoothness near that point",
+ "statement": "Let $k$ be a field [def-weil-field] and let $g:Z\\to\\operatorname{Spec}k$ be a morphism of schemes [def-pc-scheme, def-weil-affine-spectrum] locally of finite type [def-weil-finite-type-morphism]. Let $z\\in Z$. If the local $k$-algebra $\\mathcal O_{Z,z}$ is geometrically regular over $k$ [def-weil-pbc-g-ring], then there exists an open subscheme $V\\subseteq Z$ containing $z$ for which $g|_V:V\\to\\operatorname{Spec}k$ is smooth [def-sbc-smooth-morphisms]. The $k$-algebra structure on the stalk is induced by $g$. No perfectness of $k$, closedness of $z$, or separability of $\\kappa(z)/k$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038U (lemma-geometrically-regular-at-point), (3) implies (1), and Tag 038X (lemma-geometrically-regular-smooth), geometric regularity at z implies smoothness at z; smoothness at a point means smoothness on an open neighbourhood."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-g-ring",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $z$ from the finite-type affine cover in [def-weil-finite-type-morphism]; write $\\mathfrak p$ for $z$. By [lem-weil-pbc-affine-open-stalk-localization], $A_{\\mathfrak p}\\cong\\mathcal O_{Z,z}$ via $a/s\\mapsto a_zs_z^{-1}$. This is a $k$-algebra isomorphism, since both structure maps take $c\\in k$ to the germ of $g^*c$. Thus $A_{\\mathfrak p}$ is geometrically regular. Set $K=\\kappa(\\mathfrak p)$ with residue map $\\rho:A\\to K$ [def-weil-pbc-localization-at-prime]. The finite-type residue-field theorem [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated], applied to $k\\to A$ and $\\mathfrak p$, gives that $K/k$ is finitely generated as a field.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038X (lemma-geometrically-regular-smooth), affine reduction; Tag 038U (lemma-geometrically-regular-at-point), local-ring formulation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] to the geometrically regular Noetherian $k$-algebra $A_{\\mathfrak p}$ and the finitely generated field extension $K/k$. It gives that $C=K\\otimes_k A_{\\mathfrak p}$ is a regular ring: every prime localization of $C$ is a regular local ring. Noetherianity of $A_{\\mathfrak p}$ is already included in the geometric-regularity hypothesis.",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0381 (lemma-geometrically-regular), (2) implies (1)"
+   }
+  },
+  {
+   "text": "Put $B=K\\otimes_k A$. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives the $K$-algebra map $\\epsilon:B\\to K$, $\\lambda\\otimes a\\mapsto\\lambda\\rho(a)$. It is surjective since $\\epsilon(\\lambda\\otimes1)=\\lambda$. Hence $\\mathfrak q=\\ker\\epsilon$ is maximal and its contraction under $j:A\\to B$, $a\\mapsto1\\otimes a$, is $\\mathfrak p$, because $\\epsilon(j(a))=\\rho(a)$ and $\\ker\\rho=\\mathfrak p$ [def-weil-pbc-localization-at-prime]. If $a_1,\\ldots,a_n$ generate $A$ over $k$, then $1\\otimes a_1,\\ldots,1\\otimes a_n$ generate $B$ over $K$: expand $a$ as a polynomial and expand tensors additively. Thus $B$ is finite type over $K$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038X (lemma-geometrically-regular-smooth), base-changed finite-type algebra; rational-point variant using Tag 0381"
+   }
+  },
+  {
+   "text": "Let $W=\\{1\\otimes s:s\\in A\\setminus\\mathfrak p\\}\\subset B$. Base change of localization [lem-weil-pbc-localization-base-change], with base ring $A$, gives $C\\cong W^{-1}B$ as $B$-algebras (the identification is $b\\otimes(a/s)\\mapsto b(1\\otimes a)/(1\\otimes s)$). Every $1\\otimes s\\in W$ has nonzero image $\\rho(s)$ under $\\epsilon$, so $\\mathfrak q\\cap W=\\emptyset$. By [lem-weil-pbc-localization-prime-residue-field-iso], $\\mathfrak r=\\mathfrak qC$ is prime, contracts to $\\mathfrak q$, and $B_{\\mathfrak q}\\cong C_{\\mathfrak r}$. Since $C$ is regular by step 2, $B_{\\mathfrak q}$ is regular local.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DK (lemma-tensor-localization); Tag 00E3 (lemma-spec-localization); local-ring identification used in Tag 038U"
+   }
+  },
+  {
+   "text": "The residue field at $\\mathfrak q$ is $K$ as a $K$-algebra: on $\\kappa(\\mathfrak q)=B_{\\mathfrak q}/\\mathfrak qB_{\\mathfrak q}$ the map is $[b/t]\\mapsto\\epsilon(b)/\\epsilon(t)$; its inverse sends $\\lambda$ to $[(\\lambda\\otimes1)/1]$ [def-weil-pbc-localization-at-prime]. These are inverse because $b-(\\epsilon(b)\\otimes1)\\in\\mathfrak q$, and $\\epsilon(t)\\ne0$ for $t\\notin\\mathfrak q$. Therefore $\\kappa(\\mathfrak q)/K$ is separable: its only intermediate field is $K$, with empty transcendence basis and separable degree-one minimal polynomials [def-weil-pbc-separable-field-extension].",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038X (lemma-geometrically-regular-smooth), separable-residue-field requirement; explicit rational-point calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-separable-residue-smooth] over the field $K$ to the finite-type $K$-algebra $B$ at $\\mathfrak q$: step 4 gives regularity and step 5 gives the required separable residue field. Thus $K\\to B$ is smooth at $\\mathfrak q$. Apply [lem-weil-pbc-smooth-at-prime-field-extension-descent] to $K/k$, $A$, and $\\mathfrak q$; its contracted prime is $\\mathfrak p$ by step 3. It supplies $f\\in A\\setminus\\mathfrak p$ such that $A_f$ is a smooth $k$-algebra.",
+   "uses": [
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-smooth-at-prime-field-extension-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TV (lemma-separable-smooth); Tag 02UQ (lemma-smooth-field-change-local); the final two inferences of Tag 038X"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}A_f$ identifies with the open subscheme $D(f)$ of $U$. Its image $V\\subset Z$ is open and contains $z$ because $f\\notin\\mathfrak p$. The structure morphism of this open subscheme is induced by $k\\to A_f$, so [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] and step 6 show that $g|_V$ is smooth. This is the required neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3 (lemma-standard-open-affine); affine smoothness: Morphisms Tag 01V6 (lemma-smooth-characterize), with Tag 02H6 (lemma-smooth-formally-smooth)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 038U and 038X, affine regular-local / separable-residue / field-descent argument; use Tag 0381 with K=kappa(p) to obtain a rational point instead of choosing the finite purely inseparable extension in the printed proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|IsGeometricallyRegular|exists_notMem_smooth|of_formallySmooth_fiber",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme over a field is smooth at a point precisely when its local ring is geometrically regular",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isSmooth_iff, RingHom.smooth_def, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, Algebra.IsSmoothAt",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt",
+   "results": "5 hits: Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.of_formallySmooth_fiber, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme locally of finite type over a field is smooth near a point if its local ring is geometrically regular over that field",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_iff, Algebra.smoothLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.basicOpen_subset_smoothLocus_iff_smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*regular|regular.*smooth",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring",
+   "subdirectory": "RingTheory/RegularLocalRing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity of a localization of a finite type algebra over a field is equivalent to the prime lying in the smooth locus",
+   "results": "8 hits: Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.smoothLocus_comap_of_isLocalization, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.Smooth.holdsForLocalizationAway, Algebra.smoothLocus, Algebra.IsStandardSmooth.localization_away",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth-locus results assume formal smoothness, and the fibre theorem assumes formal smoothness of the whole fibre; neither derives it from geometric regularity of a local ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt",
+   "results": "5 hits: Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.of_formallySmooth_fiber, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-locus results require formal smoothness; none derives it from geometric regularity of the stalk"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme locally of finite type over a field is smooth near a point whose local algebra is geometrically regular",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.smoothLocus, Algebra.IsSmoothAt",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-locus results require formal smoothness; none derives it from geometric regularity of the stalk"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|IsGeometricallyRegular|exists_notMem_smooth|of_formallySmooth_fiber",
+   "results": "9 hits: Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Locus.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-locus results require formal smoothness; none derives it from geometric regularity of the stalk"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric regularity of a local ring of a finite type algebra over a field implies smoothness at the prime",
+   "results": "8 hits: Algebra.IsSmoothAt, RingHom.smooth_def, Algebra.smoothLocus, Algebra.FormallySmooth, Algebra.FormallySmooth.of_perfectField, AlgebraicGeometry.IsSmooth.recOn, Algebra.smooth_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-locus results require formal smoothness; none derives it from geometric regularity of the stalk"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a finitely generated algebra over a field that is geometrically regular lies in the smooth locus",
+   "results": "8 hits: Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsStandardSmooth.localization_away, RingHom.Smooth.holdsForLocalizationAway, RingHom.Smooth.ofLocalizationSpanTarget, RingHom.isStandardSmooth_holdsForLocalizationAway",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-locus results require formal smoothness; none derives it from geometric regularity of the stalk"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-lfp-regular-stalk-smooth-neighborhood",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Supporting the smooth-neighborhood input of regular-precomposition descent, below lem-per-artin-gabber-affine-curve: the finite-type residue-field fibre must be smooth at the selected point (Stacks 038U and 038X). This is the local field case needed by the inherited Temkin Proposition 3.3.5 / Lemma 2.1.4 branch.",
+   "via": [
+    "lem-per-lfp-regular-stalk-smooth-neighborhood",
+    "lem-per-regular-precomposition-smooth-image",
+    "lem-per-elkik-rational-smooth-models",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-geometrically-regular-stalk-smooth-over-field",
+  "worker": "stage1",
+  "summary": "Retained the full statement, including imperfect fields and nonclosed points. Reused existing nodes only. Applied geometric regularity after the finitely generated extension kappa(p)/k, formed the rational evaluation point of kappa(p) tensor A, compared its local ring with a localization of kappa(p) tensor A_p, applied the separable-residue smoothness criterion, and descended smoothness. Checked every cited statement and recorded verbatim citations. No new nodes or Mathlib leaves.",
+  "blueprint": "Below lem-per-artin-gabber-affine-curve, inherited Temkin smooth-neighbourhood prerequisite for regular-precomposition descent: proves the residue-field fibre is smooth near the selected point. Latest blueprint ancestor and unit read; no chapter/unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "why": "Tag 0381 enlarges the defining finite purely inseparable tests to the finitely generated residue field; no node of the perverse unit states this commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Prime correspondence and the local-ring isomorphism after localization identify B_q with C_r; no perverse-unit node supplies this generic localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "why": "Tag 00TV gives smoothness of the finite-type base-changed algebra from its regular local ring and rational residue field; this generic algebra criterion is not a perverse-unit theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+    "why": "Tag 02UQ descends smoothness from K tensor A at q to A at p; no perverse-unit node states this generic field-descent tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Converts the smooth ring map k to A_f into the requested smooth scheme morphism; the affine comparison is a generic tool not supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-2398323df",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-2398323df (reviewer sub-agent of L); spot-checked: PASS, no fixes. The delivery is one commit with two files (the report and the item); there are no new nodes and no repair note. The statement is unchanged from the live unsplit node. It matches Stacks 038X, smoothness at x from geometric regularity at x, with the hypothesis in the local-ring form of 038U(3). I read 038U, 038X, 00TV and 02UQ in literature/stacks-project. The proof follows a correct agent variant of 038X. Instead of choosing k' by 030R, it base-changes to K=kappa(p), which is finitely generated over k (finite-type residue node with R=k, prime (0)), so 0381 gives that K tensor A_p is regular. It then takes the K-rational point q=ker(epsilon), lambda tensor a maps to lambda rho(a), whose contraction is p. Localization base change (00DK) plus the prime-correspondence node identify B_q with a localization of C at qC, so B_q is regular local. Since kappa(q)=K, the residue extension is trivially separable. 00TV gives K to B smooth at q, 02UQ descends this to some f outside p with A_f smooth over k, and the open immersion for D(f) plus the 01V6/02H6 node finish the proof. I opened every cited statement and its hypotheses match. The only unwritten identification is tensor associativity, (K tensor_k A) tensor_A A_p = K tensor_k A_p, which is one line. proof_deps equals the union of the step uses. Duplicate search with rg -L for 038U/038X found only the global field criterion and support-only mentions; none states this pointwise result. The parent node lem-per-lfp-regular-stalk-smooth-neighborhood cites the item exactly as stated. I accept the five declared tool_uses (sk-thm-p1 nodes for 0381, 00E3, 00TV, 02UQ and 01V6), all generic commutative algebra. Edge cases checked: empty Z; generic point of affine space; the closed point x^p=t of A^1 over F_p(t), where the proof works; Spec k[x]/(x^p-t), which correctly fails the hypothesis."
+ }
+}

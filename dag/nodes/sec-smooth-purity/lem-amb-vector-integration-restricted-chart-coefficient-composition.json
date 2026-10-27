@@ -1,0 +1,114 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Overlap calculation: coefficient comparison and normalized Tate transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affineTraceRightBaseChange affineLinearCoefficientDescent vectorIntegrationBaseCoefficientPullback",
+   "results": "No existing theorem combines the affine tower unit comparison with the ordered coefficient descent.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationRestrictedChartCoefficient",
+  "date": "2026-10-26",
+  "group": "D2"
+ },
+ "id": "lem-amb-vector-integration-restricted-chart-coefficient-composition",
+ "kind": "statement",
+ "title": "Geometric coefficient composition after tower descent",
+ "statement": "After replacing the affine-tower unit base-change map by its ordered Tate descent expression, the inverse-frame coefficient factors and the pasted inverse-image square compose to the direct restricted-chart coefficient. This is the geometric and inverse-image composition part and contains no affineTraceRightBaseChange factor.",
+ "stmt_deps": [
+  "def-amb-vector-integration-charts",
+  "def-amb-affine-linear-trace-action",
+  "lem-amb-vector-integration-restricted-chart-coefficient-core"
+ ],
+ "proof": [
+  {
+   "text": "Expand the chart coefficient and the Cartesian coefficient and cancel the adjacent affineLinearCoefficientDescent inverse and forward maps under pullback. A private named_compositor lemma proves the equality-of-composites transport by equality induction, using the recorded ordinaryFinitePullback functors. The private inverse_square_comparison identifies the explicit three chart factors with the inverse derived square comparison.",
+   "uses": [
+    "def-amb-vector-integration-charts",
+    "lem-amb-vector-integration-cartesian-prefix-action"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved orderedTateExactOpenComposition theorem to U contained in V contained in S. Conjugate its exact ordinary restriction equation by leftDerivedUpperStarIsoMapDerivedCategory. Naturality cancels the exact-to-derived comparisons and gives the composition equation for vectorIntegrationBaseCoefficientPullback with the named composite U.ι. The private uncompared_composite and base_coefficient_comp helpers carry out this calculation without a new transport construction.",
+   "uses": [
+    "lem-pur-ordered-tate-exact-open-composition",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved derivedSquareUpperStarIso_paste to the inverse-frame square and the affine tower restriction square, with their composite the restricted chart square. Take inverses and cancel the inverse base compositor. Naturality moves the base coefficient transport through the tower square. Substitute the preceding ordered coefficient composition equation and retain the inverse affine coefficient descent over U, exactly giving vectorIntegrationCartesianCoefficient.",
+   "uses": [
+    "lem-kun-derived-pullback-composition-monoidal",
+    "lem-amb-vector-integration-cartesian-prefix-action"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "lem-amb-vector-integration-cartesian-prefix-action",
+  "lem-pur-ordered-tate-exact-open-composition",
+  "lem-kun-derived-pullback-composition-monoidal"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+  "place": "Reuse orderedTateExactOpenComposition and source-library derivedSquareUpperStarIso_paste; conjugation, naturality and cancellation in Lean."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-vector-integration-restricted-chart-coefficient",
+   "place": "Inverse-frame and tower square composition.",
+   "via": [
+    "lem-amb-vector-integration-restricted-chart-coefficient"
+   ]
+  }
+ },
+ "same_as": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationRestrictedChartCoefficientComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationRestrictedChartCoefficientComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_restricted_chart_coefficient_composition",
+  "statement": "theorem vectorIntegration_restricted_chart_coefficient_composition\n    (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]\n    (U V : S.Opens) (hUV : U ≤ V)\n    (e : VectorBundleZeroSection.Trivialization S d F V) :\n    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (affineTraceMap (S.homOfLE hUV) d) (vectorIntegrationChart S d F V e)).hom.app\n        (vectorIntegrationCoefficient A N hA S d F) ≫\n      (ordinaryFinitePullback A (affineTraceMap (S.homOfLE hUV) d)).map\n        (((leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (vectorIntegrationChart S d F V e) (VectorBundleZeroSection.π S d F)).symm.app\n          (affineLinearBaseCoefficient A N hA S d) ≪≫\n      (eqToIso (congrArg (ordinaryFinitePullback A)\n        (vectorIntegrationChart_isPullback S d F V e).w)).app\n          (affineLinearBaseCoefficient A N hA S d) ≪≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (affineTraceProjection V.toScheme d) V.ι).app\n          (affineLinearBaseCoefficient A N hA S d) ≪≫\n      (ordinaryFinitePullback A (affineTraceProjection V.toScheme d)).mapIso\n        (vectorIntegrationBaseCoefficientPullback A N hA t V.ι hS d) ≪≫\n      (affineLinearCoefficientDescent A N hA t V.toScheme\n        (affineTracePullbackInvertible N V.ι hS) d).symm)).hom ≫\n      (ordinaryFinitePullback A (affineTraceMap (S.homOfLE hUV) d)).map\n        (affineLinearCoefficientDescent A N hA t V.toScheme\n          (affineTracePullbackInvertible N V.ι hS) d).hom ≫\n      ((derivedSquareUpperStarIso (ModuleCat.{u + 1} A)\n        (affineTraceMap_isPullback (S.homOfLE hUV) d).toCommSq).symm.app\n          (affineLinearBaseCoefficient A N hA V.toScheme d)).hom ≫\n      (ordinaryFinitePullback A (affineTraceProjection U.toScheme d)).map\n        (vectorIntegrationBaseCoefficientPullback A N hA t (S.homOfLE hUV)\n          (affineTracePullbackInvertible N V.ι hS) d).hom ≫\n      (affineLinearCoefficientDescent A N hA t U.toScheme\n        (affineTracePullbackInvertible N U.ι hS) d).symm.hom =\n    (vectorIntegrationCartesianCoefficient A N hA t (VectorBundleZeroSection.π S d F)\n      U.ι (affineTracePullbackInvertible N U.ι hS) d\n      (vectorIntegrationRestrictedChart S d F U V hUV e)\n      (vectorIntegrationRestrictedChart_isPullback S d F U V hUV e)\n      (affineLinearBaseCoefficient A N hA S d)\n      (vectorIntegrationBaseCoefficientPullback A N hA t U.ι hS d)).hom",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261026T181355-L-3455103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T222808-L-697180",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

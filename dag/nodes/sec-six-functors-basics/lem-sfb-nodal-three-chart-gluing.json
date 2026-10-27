@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-nodal-three-chart-gluing",
+ "kind": "statement",
+ "title": "Fibre geometry and regularity of a three-chart nodal gluing",
+ "statement": "Let $R$ be a DVR with uniformizer $\\pi$ and $n\\ge2$ [def-sc-discrete-valuation-ring]. Let $Z$ be an $R$-scheme with an open cover by\n$$U_x=\\operatorname{Spec}R[x,t]/(xt-\\pi),\\quad U_m=\\operatorname{Spec}R[r,s]/(rs-\\pi^{n-2}),\\quad U_y=\\operatorname{Spec}R[y,h]/(yh-\\pi)$$\n[def-weil-affine-spectrum, def-weil-polynomial-ring]. Assume the overlaps are $D(t)=D(r)$ with $r=t^{-1}$, $s=x^{n-2}t^{n-1}$, $x=\\pi r$; $D(h)=D(s)$ with $s=h^{-1}$, $r=y^{n-2}h^{n-1}$, $y=\\pi s$; and $D(x^{n-2}t^n)$ in $U_x$ for $U_x\\cap U_y$, with $y=x^{n-1}t^n$, $h=\\pi/y$ and the symmetric inverse. Then $Z\\to\\operatorname{Spec}R$ is flat and locally of finite presentation, with nonempty connected reduced one-dimensional nodal geometric fibres [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-trf-nodal-geometric-fibres]. Its generic fibre is the Laurent line. The outer charts are regular, and the only nonregular point of $Z$, if one exists, is the middle origin $(\\pi,r,s)$ for $n\\ge4$; its open local model is $\\operatorname{Spec}R[r,s]/(rs-\\pi^{n-2})$ [def-weil-regular-scheme]. For $n=2$ the middle chart is the smooth Laurent line $rs=1$, for $n=3$ it is regular, and in both cases $Z$ is regular. These fibre conclusions include connectedness after every algebraically closed extension, in arbitrary residue characteristic.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent three-chart gluing argument from inherited step 9, with the local chart properties of steps 2, 4 and 6. Tags 0C59 (lemma-nodal-family), 0C5A (definition-nodal-family) supply context; the connectedness calculation uses the explicit overlaps rather than any connected-fibres assertion from those tags."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply the DVR binomial local-geometry lemma with exponent $1$ to both outer chart rings and, when $n\\ge3$, with exponent $n-2\\ge1$ to the middle ring. These are flat $R$-algebras. For a point in one of these charts, the affine-stalk theorem identifies the structural stalk map with $R_{\\mathfrak p}\\to A_{\\mathfrak q}$; the flat-map local criterion makes this map flat. If $n=2$, then $rs=1$, so $U_m=D(r)=U_m\\cap U_x$ and the two outer charts already cover $Z$. Thus every structural stalk is flat, which is exactly flatness of $Z/R$. All three displayed chart rings, including $rs=1$, have two generators and one relation over $R$, so their affine neighbourhoods verify local finite presentation directly.",
+   "uses": [
+    "lem-sfb-dvr-binomial-local-geometry",
+    "lem-weil-pbc-flat-map-local-criterion",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (lemma-flat-localization), part (6); schemes.tex Tag 01HV (lemma-spec-sheaves), part (6); morphisms.tex Tags 01U3 (definition-flat), 01TP (definition-finite-presentation). Agent chartwise assembly."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field $\\Omega$ and a geometric point of $\\operatorname{Spec}R$. A DVR has dimension one, is local and is a domain, so its only primes are $(0)$ and $(\\pi)$. Write $a$ for the image of $\\pi$ in $\\Omega$; accordingly $a\\ne0$ or $a=0$. The affine fibre-product theorem gives the fibre charts with rings $\\Omega[x,t]/(xt-a)$, $\\Omega[r,s]/(rs-a^{n-2})$ and $\\Omega[y,h]/(yh-a)$, where the middle constant is $1$ for $n=2$. Explicitly the tensor-product identification sends $x\\otimes1,t\\otimes1,1\\otimes\\lambda$ to $x,t,\\lambda$, and its inverse sends these generators back; the relation on each side is precisely the displayed relation. The pulled-back open charts cover the fibre, since every point maps into a chart of $Z$. Their pairwise intersections have the same equations and invertibility conditions as in the hypothesis: a map into a principal open is exactly a map on which its defining function is invertible.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine fibre-product construction; algebra.tex Tag 00PD (lemma-characterize-dvr). Agent substitution of the explicitly given presentations and overlaps."
+   }
+  },
+  {
+   "text": "The binomial geometric-fibre lemma applies over $\\Omega$ to each of the three constants in step 2, including $1$. It makes every chart nonempty, connected, reduced and of pure dimension one. It also says that a chart is smooth away from its crossing, and everywhere smooth when its constant is nonzero. The fibre is reduced because every local ring is a local ring of one of these reduced open charts. It has dimension at most one by the open-cover dimension theorem, applied to the scheme's sober underlying space; it has dimension at least one since the strict prime chain at an outer crossing when $a=0$, or a length-one chain in the outer Laurent line when $a\\ne0$, remains a strict specialization chain in the whole fibre. At every crossing apply the monomial completion theorem with two variables and $J=(uv)$: its completed local ring is $\\Omega[[u,v]]/(uv)$. Stalks in an open chart are the ambient stalks. Smoothness is local on the source, so every nonsmooth point is one of the chart crossings just treated. This proves the reduced, one-dimensional and local nodal conditions in the definition.",
+   "uses": [
+    "lem-sfb-binomial-geometric-fibres",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-dimension-bound-open-cover",
+    "lem-weil-pbc-scheme-sober",
+    "lem-sfb-monomial-local-completion",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-trf-nodal-geometric-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C59 (lemma-nodal-family) and Tag 0C5A (definition-nodal-family), local nodal conditions only; algebra.tex Tag 0315 (lemma-completion-generalities), through the explicit monomial completion node; topology.tex Tag 0B7I through the cited dimension node. Agent assembly, not an appeal to these tags for connectedness."
+   }
+  },
+  {
+   "text": "The two adjacent intersections in the geometric fibre are nonempty. Indeed the first is $D(t)$ in the outer chart, with ring $\\Omega[t,t^{-1}]$ and $x=a/t$, and the second is $D(h)$ with ring $\\Omega[h,h^{-1}]$ and $y=a/h$. Their points $t=1$ and $h=1$ exist for every $a$, also in characteristic two. Each of the three charts is connected by step 3. If the fibre had a clopen partition, each chart would lie wholly in one part; the first adjacent intersection forces $U_x$ and $U_m$ into the same part, and the second forces $U_y$ into that part. Since the charts cover, the other part is empty. The nonempty charts also show that the fibre is nonempty. This argument applies to every chosen algebraically closed extension, so proves exactly the connectedness and nonemptiness demanded by the geometric-fibre definition.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-trf-nodal-geometric-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent explicit connectedness proof for the stated reciprocal overlaps; Tag 0C59 (lemma-nodal-family) supplies no connectedness assertion."
+   }
+  },
+  {
+   "text": "Put $K=\\operatorname{Frac}R$. In all generic charts $\\pi$ is a unit. Thus $x,t,r,s,y,h$ are units. Both adjacent intersections are therefore the entire respective generic charts: $D(t)=U_{x,K}$ and $D(r)=U_{m,K}$, and $D(h)=U_{y,K}$ and $D(s)=U_{m,K}$. Hence the open immersion $U_{x,K}\\to Z_K$ is surjective and identifies the whole generic fibre with this one chart. Its ring is $K[t,t^{-1}]$ by $x=\\pi/t$, as also given by the binomial geometric-fibre lemma. The middle and last coordinates are explicitly $r=t^{-1}$, $s=\\pi^{n-2}t$, $y=\\pi^{n-1}t$ and $h=\\pi^{2-n}t^{-1}$; these obey both adjacent and the given outer-to-outer transition. Thus the identification is the asserted Laurent line, with all three generic charts identified compatibly.",
+   "uses": [
+    "lem-sfb-binomial-geometric-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent Laurent-coordinate calculation for the explicit overlaps; algebraic field-chart identification is supplied by the cited binomial geometric-fibre node."
+   }
+  },
+  {
+   "text": "The DVR binomial local-geometry lemma at exponent $1$ says that every local ring in either outer chart is regular, including its origin. For $n\\ge3$ apply the same lemma to the middle chart at exponent $e=n-2$. It is regular outside $(\\pi,r,s)$ and regular at that point exactly when $e=1$. Hence $n=3$ gives a regular scheme, and for $n\\ge4$ the middle origin is the only possible nonregular point; the middle open chart itself is its stated local model. These conclusions pass to $Z$ because open-chart and ambient local rings agree. For $n=2$, $U_m=D(r)$ lies in $U_x$ as in step 1, so regularity follows already from the outer charts. Moreover $R[r,s]/(rs-1)\\cong R[r,r^{-1}]$, sending $s$ to $r^{-1}$. Its presentation $rs-1$ is standard smooth: the derivative with respect to $r$ is the unit $s$. The standard-smooth theorem and the ring-to-affine-scheme smoothness equivalence show that this middle Laurent line is smooth over $R$. All arguments used only a DVR and unit coefficients, imposing no residue-characteristic restriction.",
+   "uses": [
+    "lem-sfb-dvr-binomial-local-geometry",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr); Tag 00T6 (definition-standard-smooth), Tag 00T7 (lemma-standard-smooth); regularity is exactly the cited DVR binomial local-geometry statement. Agent open-chart assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-discrete-valuation-ring",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-connected-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-regular-scheme",
+  "lem-sc-dvr-dimension-one",
+  "lem-sfb-binomial-geometric-fibres",
+  "lem-sfb-dvr-binomial-local-geometry",
+  "lem-sfb-monomial-local-completion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-standard-smooth-is-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Explicit three-chart calculation supporting inherited chart-blowup step 9 and de Jong Lemma 3.13 local geometry; curves.tex Tags 0C59/0C5A provide nodal context only. Algebra, completion, affine-stalk, dimension and smoothness inputs are the existing nodes cited stepwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue the three arithmetic curve charts xt=pi, rs=pi^(n-2), yh=pi by r=1/t and s=1/h. The resulting curve over a DVR is flat with connected nodal geometric fibres, regular except possibly at the middle origin.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] →\\n                (W : WeierstrassCurve K) →\\n    \", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔ (Wei\", \"doc\": \"For a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the curve $ W $ has good reduction if and only if its reduction to the residue field of $ R $ is\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.GlueData\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "([Nn]odal|[Ss]emistable).*(glue|[Cc]onnected|[Ff]lat)|([Gg]lue|[Cc]onnected).*([Nn]odal|[Ss]emistable)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connectedness of the nodal special fibre obtained from the three charts in a point blowup of xy=pi^n.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : Scheme\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and a point $y \\\\in Y$, the fiber of $f$ over $y$ is the scheme obtained by taking the fiber product (pullback) of $f$ with the canonical morphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"(x : 𝒰.gluedCover.glued.carrier) : IsIso (𝒰.fromGlued.stalkMap x)\", \"doc\": \"For any point $x$ in the glued scheme constructed from an open cover $\\\\mathcal{U}$ of a scheme $X$, the stalk map induced by the canonical morphism from the glued scheme to $X$ is an isomorphism in th\"}\n  {\"name\": \"ModelWithCorners.IsBoundaryPoint\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.InteriorBoundary\", \"type\": \"(x : M)\", \"doc\": \"A point $x$ in a manifold with corners is a boundary point if the image of $x$ under the extended chart at $x$ lies in the frontier (boundary) of the model space's image in the normed vector space $E$\"}\n  {\"name\": \"ChartedSpace.LiftPropAt\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"(P : (H → H') → Set H → H → Prop) (f : M → M') (x : M)\", \"doc\": \"Given a property $ P $ on functions between model spaces $ H \\\\to H' $, subsets of $ H $, and points in $ H $, this defines a corresponding property on functions $ f:M \\\\to M' $ and points $ x \\\\in M $, \"}\n  {\"name\": \"extChartAt\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.ExtChartAt\", \"type\": \"(x : M) : PartialEquiv M E\", \"doc\": \"The extended chart at a point $x$ in a manifold with corners is constructed by composing the chart from the charted space structure with the model with corners $I$. This provides a local coordinate sy\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [LocallyOfFiniteType f] : JacobsonSpace (f.fiber y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) : IsPreimmersion (f.fiberι y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $y$ be a point in $Y$. The fiber of $f$ over $y$, denoted $X_y$, is the pullback $X \\\\times_Y \\\\operatorname{Spec}(\\\\kappa(y))$, where $\\\\kappa(y)$ is th\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_of_Z_eq_zero\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"{P : Fin 3 → R} (hPz : P z = 0) :\\n  W'.Nonsingular P ↔ W'.Equation P ∧ (3 * P x ^ 2 ≠ 0 ∨ P y ^ 2 + W'.a₁ * P x * P y - W'.a₂ * P x ^ 2 ≠ 0)\", \"doc\": \"For a point $ P = [X:Y:0] $ on a projective Weierstrass curve $ W' $, $ P $ is nonsingular if and only if $ P $ satisfies the curve equation (i.e., $ X = 0 $) and $ Y \\neq 0 $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing two outer crossing affine lines to middle hyperbola or two axes gives connected fibres and isolates singularity in the middle chart.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ContMDiffFiberwiseLinear.locality_aux₂\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/FiberwiseLinear\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F : Type u_3} [inst : TopologicalSpace B] [inst_1 : NontriviallyNormedField 𝕜]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace 𝕜 F] {EB : Type u_4} [inst_4 : NormedAddCommGroup EB]\\n  [inst_5 : NormedSpace 𝕜 EB] {HB : Type u_5} [inst_6 : TopologicalSpace HB] [\", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, a normed $\\\\mathbb{K}$-vector space $F$, and a topological space $B$, if an open partial homeomorphism $e$ of $B \\\\times F$ over an open subset $U \\\\subset\"}\n  {\"name\": \"writtenInExtChart_prod\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {M : Type u_3} {H : Type u_4} {E' : Type u_5} {M' : Type u_6} {H' : Type u_7}\\n  [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace 𝕜 E]\\n  [inst_3 : TopologicalSpace H] [inst_4 : TopologicalSpace M] {I : ModelWithCorners 𝕜 E H}\\n  [\", \"doc\": \"For manifolds with corners $M, M'$ and $N, N'$ with respective models $I, I'$ and $J, J'$, and functions $f:M\\\\to N$ and $g:M'\\\\to N'$, the extended chart representation of the product map $f\\\\times g$ a\"}\n  {\"name\": \"ContMDiffFiberwiseLinear.locality_aux₁\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/FiberwiseLinear\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F : Type u_3} [inst : TopologicalSpace B] [inst_1 : NontriviallyNormedField 𝕜]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace 𝕜 F] {EB : Type u_4} [inst_4 : NormedAddCommGroup EB]\\n  [inst_5 : NormedSpace 𝕜 EB] {HB : Type u_5} [inst_6 : TopologicalSpace HB] [\", \"doc\": \"Given a C^n-differentiable open partial homeomorphism $ e $ on $ B \\\\times F $, if for every point $ p \\\\in \\\\text{source}(e) $ there exists a neighborhood $ s $ containing $ p $ and a continuous family \"}\n  {\"name\": \"Icc_chartedSpaceChartAt\", \"module\": \"Mathlib/Geometry/Manifold/Instances/Real\", \"type\": \"∀ {x y : ℝ} [hxy : Fact (x < y)] {z : ↑(Set.Icc x y)},\\n  chartAt (EuclideanHalfSpace 1) z = if ↑z < y then IccLeftChart x y else IccRightChart x y\", \"doc\": \"For any point $ z $ in the closed interval $[x, y]$, the chart at $ z $ is defined as the left chart $ \\\\text{IccLeftChart}(x, y) $ if $ z < y $, and the right chart $ \\\\text{IccRightChart}(x, y) $ othe\"}\n  {\"name\": \"IccLeftChart\", \"module\": \"Mathlib/Geometry/Manifold/Instances/Real\", \"type\": \"(x y : ℝ) → [h : Fact (x < y)] → OpenPartialHomeomorph (↑(Set.Icc x y)) (EuclideanHalfSpace 1)\", \"doc\": \"The function $\\\\text{IccLeftChart}(x, y)$ defines a partial homeomorphism between the half-open interval $[x, y) \\\\subseteq \\\\mathbb{R}$ and an open subset of the 1-dimensional Euclidean half-space $\\\\{ z\"}\n  {\"name\": \"IccRightChart\", \"module\": \"Mathlib/Geometry/Manifold/Instances/Real\", \"type\": \"(x y : ℝ) → [h : Fact (x < y)] → OpenPartialHomeomorph (↑(Set.Icc x y)) (EuclideanHalfSpace 1)\", \"doc\": \"For real numbers $x < y$, this defines an open partial homeomorphism from the subset $(x, y] \\\\subseteq [x, y]$ to the subset $[0, y - x) \\\\subseteq \\\\mathbb{R}_{\\\\geq 0}$. The forward map sends $z \\\\in (x\"}\n  {\"name\": \"FiberwiseLinear.target_trans_PartialHomeomorph\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/FiberwiseLinear\", \"type\": \"∀ {𝕜 : Type u_1} {B : Type u_2} {F : Type u_3} [inst : TopologicalSpace B] [inst_1 : NontriviallyNormedField 𝕜]\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace 𝕜 F] {φ φ' : B → F ≃L[𝕜] F} {U U' : Set B} (hU : IsOpen U)\\n  (hφ : ContinuousOn (fun x => ↑(φ x)) U) (h2φ : ContinuousOn (fun x => ↑\", \"doc\": \"For a nontrivially normed field $\\\\mathbb{K}$, a topological space $B$, and a normed $\\\\mathbb{K}$-vector space $F$, consider continuous families $\\\\phi: U \\\\to \\\\mathrm{GL}(F)$ and $\\\\phi': U' \\\\to \\\\mathrm{\"}\n  {\"name\": \"Complex.isHomeomorphicTrivialFiberBundle_im\", \"module\": \"Mathlib/Analysis/Complex/ReImTopology\", \"type\": \"IsHomeomorphicTrivialFiberBundle ℝ Complex.im\", \"doc\": \"The function mapping each complex number to its imaginary part, $\\\\operatorname{Im}: \\\\mathbb{C} \\\\to \\\\mathbb{R}$, is a trivial fiber bundle. This means there exists a homeomorphism between the complex p\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give partial smoothness, algebra or Proj tools but not this statement or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "([Nn]odal|[Ss]emistable).*(glue|[Cc]onnected|[Ff]lat)|([Gg]lue|[Cc]onnected).*([Nn]odal|[Ss]emistable)",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general flatness, smoothness, field-spectrum or valuation-ring tools, not the stated three-chart gluing, generic fibre and regularity assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A curve with three charts xy equal to powers of a uniformizer is flat with connected nodal fibres; regularity is checked on the charts.",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.Flat.iff_flat_stalkMap, Algebra.Smooth.flat",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general flatness, smoothness, field-spectrum or valuation-ring tools, not the stated three-chart gluing, generic fibre and regularity assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.Scheme\", \"Flat\"",
+   "results": "OK 5 hit(s): AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Scheme.Hom.flat_appTop, AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat, AlgebraicGeometry.Scheme.instEffectiveEpiOfQuasiCompactOfSurjectiveOfFlat, AlgebraicGeometry.Scheme.ProEt.instRepresentablyFlatOverForget",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general flatness, smoothness, field-spectrum or valuation-ring tools, not the stated three-chart gluing, generic fibre and regularity assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing affine nodal curve charts over a discrete valuation ring gives connected nodal geometric fibres and regularity away from the middle origin.",
+   "results": "OK 8 hit(s): WeierstrassCurve.IsGoodReduction, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.ValuativeCommSq.domain, WeierstrassCurve.IsMinimal, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, WeierstrassCurve.minimal, AlgebraicGeometry.ValuativeCommSq.field",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general flatness, smoothness, field-spectrum or valuation-ring tools, not the stated three-chart gluing, generic fibre and regularity assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a DVR with uniformizer pi glue Spec R[x,t]/(xt-pi), Spec R[r,s]/(rs-pi^(n-2)) and Spec R[y,h]/(yh-pi); the generic fibre is Gm and special fibre is connected.",
+   "results": "OK 8 hit(s): WeierstrassCurve.IsGoodReduction, AlgebraicGeometry.Scheme.SpecToEquivOfField, IsDiscreteValuationRing.TFAE, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.ValuativeCommSq.domain, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general flatness, smoothness, field-spectrum or valuation-ring tools, not the stated three-chart gluing, generic fibre and regularity assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "date": "2026-10-22",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; de Jong Lemma 3.13: explicit local equation and one singular-point blowup, before global resolution or domination; base step 9: chart flatness, finite presentation, reduced nodality, global connectedness and middle singularity",
+   "via": [
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-three-chart-gluing",
+  "worker": "stage1",
+  "summary": "Q136 writes a six-step proof using existing DVR binomial geometry, field-binomial geometry, monomial completion and scheme-local tools. No new nodes. Explicit reciprocal intersections prove connectedness over every algebraically closed extension; n=2 is handled by Um being contained in Ux, with its standard-smooth Laurent presentation checked separately. Statement and inherited metadata are unchanged. Recorded fresh searches with two semantic phrasings and checked every cited statement.",
+  "blueprint": "Realizes the recorded from.place: inherited local chart-blowup step 9, flatness, finite presentation, reduced nodality, global fibre connectedness and middle singularity. The current sk-thm-sf-ctf-stability direct-images proof clause (3) remains the upper route. blueprint_refs.py ancestor reports None; retained the inherited null ancestor and via chain. Whole-blueprint searches for nodal, three-chart and binomial give no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-map-local-criterion",
+    "why": "Generic ring-flatness localization criterion identifying structural stalk flatness; the alteration unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic affine-open stalk dictionary used to transfer flatness, reducedness, completions and regularity; no alteration-specific substitute."
+   },
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Generic DVR dimension bound identifying the two possible image primes of a geometric point."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product dictionary for the actual geometric fibre chart rings."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-bound-open-cover",
+    "why": "Generic topological open-cover dimension bound, applied to the three geometric fibre charts."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Generic scheme sobriety needed for the open-cover dimension theorem."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-is-smooth",
+    "why": "Generic standard-smooth presentation theorem, used only for the n=2 middle Laurent chart."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine-scheme/ring smoothness comparison for that presentation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-dimension-bound-open-cover",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-2a49fc63b",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-2a49fc63b (reviewer sub-agent of L); spot-checked: Read the item's statement and all 6 steps in full; the delivery adds no new nodes and changes no statement. Statement: I recomputed the three charts as the blowup of xy=π^n at o (x-chart xu=π with y=x^{n-1}u^n, π-chart rs=π^{n-2}, overlaps D(u)=D(r) and D(x^{n-2}t^n), symmetric inverse x=y^{n-1}h^n, and n=2 with D(t^2)=D(t)); it is correct. Step 1: flatness via the A_e lemma, 00HT(6) and 01HV, never used at e=0 because U_m=D(r)⊂U_x when n=2; local finite presentation from 2 generators and 1 relation. Step 2: a DVR has only the primes (0) and (π); fibre charts via 01I4. Step 3: the binomial fibre lemma over Ω (a=0 and constant 1 allowed); dimension ≤1 via 0B7I and 01IS, ≥1 via the (x)⊊(x,y) chain; monomial completion with r=2, J=(T1T2) gives Ω[[u,v]]/(uv); 01V6 for the smooth locus. Step 4: connected because D(t) and D(h) are nonempty for every a; the empty outer-to-outer overlap is not used. Step 5: generic fibre Z_K=U_{x,K}=Spec K[t,t^{-1}]; transition formulas checked. Step 6: regularity from the e=1 and e=n-2 clauses (n=3 regular, n≥4 only the middle origin can be nonregular, n=2 contained in U_x); smoothness for n=2 from the standard smooth presentation rs-1 with unit derivative s (00T6, 00T7, 01V6). Small cases n=2, 3, 4 and >4 checked, with no characteristic restriction. Cited node statements and Stacks tags verified; no SGA. Only the parent cites the item, it does not cite the parent, and no duplicate found. The 8 declared generic tool uses are accepted. Batch-5 flag: lem-trf-polynomial-ring-regular-base (polynomial ring over a regular ring is regular, a Mathlib leaf) is generic commutative algebra outside the trace-formula and Poincaré-duality assumptions, so it is OK. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalThreeChartGluing",
+  "declaration": "AlgebraicGeometry.NodalThreeChart.gluing",
+  "declarations": [
+   "AlgebraicGeometry.NodalThreeChart.left",
+   "AlgebraicGeometry.NodalThreeChart.right",
+   "AlgebraicGeometry.NodalThreeChart.scalar",
+   "AlgebraicGeometry.NodalThreeChart.gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalThreeChartGluing.lean",
+  "statement": "theorem gluing (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (n : ℕ) (hn : 2 ≤ n) (Z : Scheme.{u}) (f : Z ⟶ Spec (.of R)) (ix : curve R π ⟶ Z) (im : curve R (π ^ (n - 2)) ⟶ Z) (iy : curve R π ⟶ Z) [IsOpenImmersion ix] [IsOpenImmersion im] [IsOpenImmersion iy] (hcover : Set.range ix ∪ Set.range im ∪ Set.range iy = Set.univ) (hx : ix ≫ f = toField R π) (hm : im ≫ f = toField R (π ^ (n - 2))) (hy : iy ≫ f = toField R π) (hxm : ix ⁻¹' Set.range im = (PrimeSpectrum.basicOpen (coord R π 1)).carrier) (hmx : im ⁻¹' Set.range ix = (PrimeSpectrum.basicOpen (coord R (π ^ (n - 2)) 0)).carrier) (hym : iy ⁻¹' Set.range im = (PrimeSpectrum.basicOpen (coord R π 1)).carrier) (hmy : im ⁻¹' Set.range iy = (PrimeSpectrum.basicOpen (coord R (π ^ (n - 2)) 1)).carrier) (hxy : ix ⁻¹' Set.range iy = (PrimeSpectrum.basicOpen (coord R π 0 ^ (n - 2) * coord R π 1 ^ n)).carrier) (hyx : iy ⁻¹' Set.range ix = (PrimeSpectrum.basicOpen (coord R π 0 ^ (n - 2) * coord R π 1 ^ n)).carrier) (htr : left ix im 1 * right ix im 0 = 1) (hs : right ix im 1 = left ix im 0 ^ (n - 2) * left ix im 1 ^ (n - 1)) (hxr : left ix im 0 = scalar ix im π * right ix im 0) (hhs : left iy im 1 * right iy im 1 = 1) (hr : right iy im 0 = left iy im 0 ^ (n - 2) * left iy im 1 ^ (n - 1)) (hys : left iy im 0 = scalar iy im π * right iy im 1) (hyy : right ix iy 0 = left ix iy 0 ^ (n - 1) * left ix iy 1 ^ n) (hh : right ix iy 1 * (left ix iy 0 ^ (n - 2) * left ix iy 1 ^ (n - 1)) = 1) (hxx : left ix iy 0 = right ix iy 0 ^ (n - 1) * right ix iy 1 ^ n) (ht : left ix iy 1 * (right ix iy 0 ^ (n - 2) * right ix iy 1 ^ (n - 1)) = 1) : Flat f ∧ (∃ hfp : LocallyOfFinitePresentation f, @HasNodalGeometricFibres _ _ f hfp ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback f g)) ∧ (∃ e : pullback f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))) ≅ Spec (.of (LaurentPolynomial (FractionRing R))), e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap (FractionRing R) (LaurentPolynomial (FractionRing R)))) = pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))) ∧ IsRegularScheme (curve R π) ∧ (∀ z : Z, ¬ IsRegularLocalRing (Z.presheaf.stalk z) → 4 ≤ n ∧ ∃ o : curve R (π ^ (n - 2)), o.asIdeal = Ideal.span {algebraMap R (Ring R (π ^ (n - 2))) π, coord R (π ^ (n - 2)) 0, coord R (π ^ (n - 2)) 1} ∧ im o = z) ∧ (n = 2 → Smooth (toField R (π ^ (n - 2))) ∧ (∃ e : curve R (π ^ (n - 2)) ≅ Spec (.of (LaurentPolynomial R)), e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R (LaurentPolynomial R))) = toField R (π ^ (n - 2))) ∧ IsRegularScheme Z) ∧ (n = 3 → IsRegularScheme (curve R (π ^ (n - 2))) ∧ IsRegularScheme Z)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50219ba37",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause. Hypotheses: DVR R with uniformizer π (maximal ideal = span{π}), n≥2, three open immersions from the BinomialPlaneCurve charts covering Z and lying over R; D(t)=D(r) and D(h)=D(s) as principal-open preimages with tr=1, s=x^{n-2}t^{n-1}, x=πr, hs=1, r=y^{n-2}h^{n-1}, y=πs on the intersection; outer overlap D(x^{n-2}t^n) with y=x^{n-1}t^n, h·x^{n-2}t^{n-1}=1 (equals π/y; the principal opens agree for all n≥2) and the symmetric inverse. Cocycle checked, so the hypotheses are realisable. Conclusions: Flat, ∃ LocallyOfFinitePresentation with HasNodalGeometricFibres (connected hence nonempty, dimension 1, completions Ω[[u,v]]/(uv)), reduced geometric fibres, generic fibre ≅ Spec K[t,t⁻¹] over K, outer charts regular, nonregular stalk → n≥4 and z = im of the (π,r,s) point, n=2 smooth Laurent middle chart and Z regular, n=3 middle chart and Z regular. Edge cases n=2/3/≥4, empty special-fibre outer overlap, empty Z, universe u, characteristic 2. Only the item's lean record changed; the statement is verbatim; docstrings carry source, blueprint id and six steps; proof is sorry; helpers are real restrictions; plan imports exist. Not recompiled per instruction; worker reports a clean compile in 2.2 s and 2.3 s. Notes: BinomialPlaneCurve Ring/curve/coord/toField come from the proof-dep theorem module lem-sfb-binomial-geometric-fibres without a stmt_dep (they name stmt_dep Mathlib objects; a later existing:true definition node is advisable); the second reading is the worker's self-reading but is substantive."
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-zl-weil-pull-compositor-equivariance",
+ "kind": "statement",
+ "title": "Frobenius equivariance of the specified common-stage pullback compositor",
+ "statement": "Fix a finite field datum D with base k_0 and algebraic closure k, a prime l different from its characteristic, and an algebraic closure Ω of Q_l, as in [def-weil-finite-field-fiber; def-weil-algebraically-closed-coefficients]. Let X,Y,Z be finite-type k_0-schemes, and f:X→Y, g:Y→Z morphisms over k_0. Use the specified common-stage geometric inverse images P_f, the normalized composition comparison c(f,g):P_(fg)≅P_g⋙P_f of [def-weil-derived-direct-image], and the geometric-Frobenius pullbacks Φ_X,Φ_Y,Φ_Z and normalized Frobenius squares s_f:P_f⋙Φ_X≅Φ_Y⋙P_f of [def-zl-weil-ind-sheaf-category]. Then the actual normalized compositor is equivariant: whiskerRight(c(f,g).hom,Φ_X) followed by compCommIso(s_g,s_f).hom equals s_(fg).hom followed by whiskerLeft(Φ_Z,c(f,g).hom). Here compCommIso is the pasted square with component s_f(P_g K) followed by P_f(s_g K). The equality is of natural transformations on the recorded common-stage constructible categories; it includes empty and nonreduced schemes and imposes no condition that an integral lattice be Frobenius-stable.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Pullback paragraph and composition/pasting paragraph; normalized pullback associativity specializes to geometric Frobenius squares."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-direct-image",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "The common-stage pullback representative formula and naturality of its normalized scalar comparison imply that pulling an arrow included from a fixed rational coefficient stage equals the inclusion of its rational pullback, up to the stated object equalities. The rational pure-tensor formula at scalar 1 specializes this to included integral arrows. Use HEq only to suppress equality-transport factors.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Pullback paragraph and composition/pasting paragraph; normalized pullback associativity specializes to geometric Frobenius squares."
+   }
+  },
+  {
+   "text": "The normalization equation of zlPullComp_existsUnique identifies its component on every included integral object with inclusion of the specified integral compositor. Replace all three compositors and the mapped compositor in the associativity equation using this formula and the preceding map formula. Apply inclusion and localization to the associativity clause of integralPullbackComposition. All omitted equality comparisons are restored by eqToHom. Every common-stage object is literally a pair of a finite field and a raw rationalized integral object, so this proves associativity at every object.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Pullback paragraph and composition/pasting paragraph; normalized pullback associativity specializes to geometric Frobenius squares."
+   }
+  },
+  {
+   "text": "Expand each Frobenius square as inverse compositor, geometric Frobenius naturality equality, and compositor. Precompose by the invertible c(Φ_X,fg). Apply associativity for (Φ_X,f,g), (f,Φ_Y,g), (f,g,Φ_Z), move equality comparisons by their naturality and cancel inverse compositors. The remaining equality comparisons coincide by proof irrelevance. Finally transport along functoriality of geometric base change, exactly the map_comp equality appearing in sfModelPullComposition.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "Pullback paragraph and composition/pasting paragraph; normalized pullback associativity specializes to geometric Frobenius squares."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pod-integral-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Pullback paragraph and composition/pasting paragraph; normalized pullback associativity specializes to geometric Frobenius squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of inverse image functors on Frobenius equivariant categories",
+   "results": "CategoryTheory.ObjectProperty.inverseImage; CategoryTheory.Functor.inv; CategoryTheory.MorphismProperty.inverseImage_equivalence_inverse_eq_map_functor; CategoryTheory.Functor.inv_fun_map; CategoryTheory.Abelian.PreservesImage.iso_inv_ι_assoc; CategoryTheory.Functor.fun_inv_map; CategoryTheory.Equivalence.congrFullSubcategory_inverse; CategoryTheory.MorphismProperty.IsMultiplicative.instInverseImage",
+   "date": "2026-10-25",
+   "verdict": "no match: these ordinary sheaf/pullback results do not identify the specified common-stage normalized compositor with its Frobenius squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A composition comparison for inverse image functors commutes with geometric Frobenius and lifts to Frobenius equivariant sheaves",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; SheafOfModules.freeFunctorCompPullbackIso; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "no match: these ordinary sheaf/pullback results do not identify the specified common-stage normalized compositor with its Frobenius squares"
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIsoCompIso|compCommIso|Frobenius.*[Cc]ompos in Mathlib/CategoryTheory/Endofunctor and Mathlib/CategoryTheory/Bicategory",
+   "results": "No matching declarations. Inspected EqToHom and Iso APIs for equality-transport and cancellation. The source library, outside Mathlib, proves mapOfNatIsoCompIsoOfIso, but requires exactly the equivariance equation established here.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReducedFrontierMixedGluing",
+  "date": "2026-10-25",
+  "group": "V9"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Final paragraph: the inclusions are over k_0 and the sequence and iterated restrictions are Weil equivariant; normalized composition is needed in the backward gluing argument.",
+   "via": [
+    "lem-zl-reduced-frontier-mixed-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZlWeilPullCompositorEquivariance",
+  "file": "lean/Sheaf/Paper/ZlWeilPullCompositorEquivariance.lean",
+  "declaration": "WeilConjectures.zlWeilPullCompositorEquivariance",
+  "statement": "theorem zlWeilPullCompositorEquivariance\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X Y Z : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]\n    (f : X ⟶ Y) (g : Y ⟶ Z) :\n    Functor.whiskerRight (sfModelPullComposition D l hl Ω f g).hom\n        (sfCommonStageWeilFrobeniusPullback D l hl X Ω) ≫\n      (CategoryTheory.Endofunctor.IsoAlgebra.compCommIso\n        (zlFrobeniusSquare D l hl Ω g) (zlFrobeniusSquare D l hl Ω f)).hom =\n    (zlFrobeniusSquare D l hl Ω (f ≫ g)).hom ≫\n      Functor.whiskerLeft (sfCommonStageWeilFrobeniusPullback D l hl Z Ω)\n        (sfModelPullComposition D l hl Ω f g).hom",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cefba",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T043406-L-1724229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-cefba",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T043406-L-1724229",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-zl-reduced-frontier-mixed-gluing and unit sk-i-dl-general-real realized steps; removed MixedWeightsStability (lem-a1-mixed-direct-summand: WeilSheaf/FrobeniusModule clauses, unused) vs the common-stage of_mono_cokernel (sk-d-dl-general-weights) actually used; new hole zlWeilPullCompositorEquivariance vs zlFrobeniusSquare/sfModelPullComposition definitions (associativity of ∃!-pinned zlPullComp); #print axioms in scratch sandbox"
+ }
+}

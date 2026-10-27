@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-ample-pullback-qc-immersion",
+ "kind": "statement",
+ "title": "Ample pullback by an immersion with quasi-compact source",
+ "statement": "Let $X$ and $Y$ be schemes [def-pc-scheme], let $i:Y\\to X$ be an immersion (a closed immersion into an open subscheme of $X$, followed by its inclusion) [def-weil-closed-immersion, def-weil-open-immersion], and assume $Y$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. If $L$ is an ample invertible $\\mathcal O_X$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], then its tensor pullback $i^*L$ [def-pc-module-pullback] is an ample invertible $\\mathcal O_Y$-module. No Noetherian, finite-type or separatedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0B3E, lemma-ample-on-locally-closed, condition (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of ampleness, $X$ is quasi-compact. Apply [lem-sfb-ample-nonvanishing-basis-criterion] to $L$: the opens $X_s$, with $s\\in\\Gamma(X,L^{\\otimes n})$ and $n\\geq1$, form a basis of $X$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sfb-ample-nonvanishing-basis-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0B3E, lemma-ample-on-locally-closed, proof, application of proposition-characterize-ample (01Q3) on X."
+   }
+  },
+  {
+   "text": "Put $M=i^*L$. By [lem-weil-pbc-invertible-pullback-tensor](1),(2), $M$ is invertible and, iterating the tensor comparison, $i^*(L^{\\otimes n})\\cong M^{\\otimes n}$. For a section $s$ as above let $t=i^*s$ under this comparison. Clause (3), applied to the invertible module $L^{\\otimes n}$, gives $t(y)=s(i(y))\\otimes1$ over $\\kappa(i(y))\\to\\kappa(y)$. A vector in the one-dimensional fibre stays nonzero after field extension: choose a basis and its coefficient is carried by an injective field map. Hence $Y_t=i^{-1}(X_s)$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0B3E, proof, tensor-power pullback and equality of nonvanishing loci; Modules Remark 0H78 (remark-pullback-s-open)."
+   }
+  },
+  {
+   "text": "Factor $i$ as a closed immersion $c:Y\\to U$ and an open immersion $j:U\\to X$. Their definitions identify $Y$ with a subspace of $U$ and $U$ with an open subspace of $X$. Thus every open $V\\subseteq Y$ has the form $i^{-1}(W)$ for an open $W\\subseteq X$: write $V=c^{-1}(A)$ for $A$ open in $U$, then write $A=j^{-1}(W)$. If $y\\in V$, step 1 gives $i(y)\\in X_s\\subseteq W$. Step 2 gives $y\\in Y_{i^*s}=i^{-1}(X_s)\\subseteq V$. Therefore the pulled-back positive-power sections already give a basis; allowing all sections of powers of $M$ still gives a basis.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0B3E, proof, reduction from (2) to (4) and the subspace-topology argument."
+   }
+  },
+  {
+   "text": "The scheme $Y$ is quasi-compact by hypothesis and $M$ is invertible by step 2. Step 3 verifies the basis condition for $M$, so [lem-sfb-ample-nonvanishing-basis-criterion] implies that $M=i^*L$ is ample. This proves both invertibility and ampleness.",
+   "uses": [
+    "lem-sfb-ample-nonvanishing-basis-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0B3E, proof, final application of proposition-characterize-ample (01Q3) on X′."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-ample-nonvanishing-basis-criterion",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0B3E, lemma-ample-on-locally-closed, proof of (4), specialized to condition (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(isAmple|IsAmple|ample).*(immersion|Immersion|restrict|Restrict)|ample-on-locally-closed",
+   "results": "{\"t\": \"2026-10-24T16:09:05Z\", \"tool\": \"grep\", \"query\": \"(isAmple|IsAmple|ample).*(immersion|Immersion|restrict|Restrict)|ample-on-locally-closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample line bundle restricts to an ample line bundle on every quasi compact open subscheme",
+   "results": "{\"t\": \"2026-10-24T16:09:05Z\", \"tool\": \"leansearch\", \"query\": \"An ample line bundle restricts to an ample line bundle on every quasi compact open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.instQuasiCompactMorphismRestrict\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.Scheme.restrict\", \"AlgebraicGeometry.Scheme.Hom.resLE\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.instQuasiSeparatedMorphismRestrict\"], \"digest\": \"93e8ca0323d6f20c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsImmersion\"",
+   "results": "{\"t\": \"2026-10-24T16:09:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"IsImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a morphism of schemes is a topological embedding and its source is compact then the inverse image of an ample line bundle is ample",
+   "results": "{\"t\": \"2026-10-24T16:09:06Z\", \"tool\": \"leanfinder\", \"query\": \"If a morphism of schemes is a topological embedding and its source is compact then the inverse image of an ample line bundle is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"AmpleSet.preimage\", \"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AmpleSet.preimage_iff\", \"AlgebraicGeometry.QuasiCompact.isCompact_preimage\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\"], \"digest\": \"3b2c68a10f773eae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of an ample invertible sheaf along an immersion with quasi compact source is ample",
+   "results": "{\"t\": \"2026-10-24T16:09:07Z\", \"tool\": \"leanfinder\", \"query\": \"The pullback of an ample invertible sheaf along an immersion with quasi compact source is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\"], \"digest\": \"b641b458618db700\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern quasi-affine schemes, immersion geometry, compactness or unrelated convex ample sets, and do not assert ampleness of an invertible module."
+  },
+  {
+   "tool": "grep",
+   "query": "(isAmple|IsAmple|ample).*(immersion|Immersion|restrict|Restrict)",
+   "results": "{\"t\": \"2026-10-24T16:43:01Z\", \"tool\": \"grep\", \"query\": \"(isAmple|IsAmple|ample).*(immersion|Immersion|restrict|Restrict)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"IsImmersion\"",
+   "results": "{\"t\": \"2026-10-24T16:43:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"IsImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback of an ample invertible sheaf along an immersion with quasi compact source is ample",
+   "results": "{\"t\": \"2026-10-24T16:43:03Z\", \"tool\": \"leanfinder\", \"query\": \"The pullback of an ample invertible sheaf along an immersion with quasi compact source is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion\", \"AlgebraicGeometry.of_targetAffineLocally_of_isPullback\"], \"digest\": \"b641b458618db700\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an ample line bundle to a quasi compact locally closed subscheme is ample",
+   "results": "{\"t\": \"2026-10-24T16:48:15Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of an ample line bundle to a quasi compact locally closed subscheme is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.morphismRestrict\", \"AlgebraicGeometry.HasAffineProperty.restrict\", \"AlgebraicGeometry.term_∣__\", \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.instQuasiCompactMorphismRestrict\"], \"digest\": \"8e806399c109d984\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Results concern basic opens of the structure sheaf, quasi-affine schemes, scheme immersions, or unrelated convex ample sets; none states the ampleness assertion for an arbitrary invertible sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lft-group-quasicompact-open-ample",
+  "date": "2026-10-25",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Ample invertible module on a quasi-compact open in a locally finite type group; field-fibre effectivity used in Anantharaman 4.1 before the trait component-envelope argument (inherited blueprint ancestry). Auxiliary for this item: restriction of an ample line to a quasi-compact open of a component, Stacks 0B3E(2).",
+   "via": [
+    "lem-sfb-lft-group-quasicompact-open-ample",
+    "lem-sfb-field-fpqc-group-form-effectivity",
+    "lem-sfb-trait-component-minimal-envelope",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-ample-pullback-qc-immersion",
+  "worker": "stage1",
+  "summary": "Followed the proof of Stacks 0B3E(2) through the basis criterion 01Q3. Added only the general nonvanishing-basis characterization, reused the closed pullback/tensor/fibre theorem, and wrote out the subspace-topology and field-extension arguments. No statement change.",
+  "blueprint": "The existing ancestry has from.node=null (confirmed by blueprint_refs ancestor); preserve that inherited route. This auxiliary supplies restriction of an ample line to a quasi-compact open of a component in lem-sfb-lft-group-quasicompact-open-ample, serving field-fibre effectivity in the inherited admissible-direct-image chain. Its steps implement the two applications of 01Q3 and the intervening pullback-basis argument in 0B3E. No matching blueprint assertion was found."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-216b81905",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-216b81905 (reviewer sub-agent of L); spot-checked: I read the whole item, the one new node, every cited statement, and Stacks properties.tex:4557 (01Q3), properties.tex:4759 (0B3E) and modules.tex:4404 (0H78). The 4 steps follow the 0B3E proof of (4), specialized to (2). Step 1: the ampleness definition (01PS) gives X quasi-compact, and the new criterion (01Q3 (1)=>(3)) gives a basis of nonvanishing loci X_s. Step 2: the Lean-closed lem-weil-pbc-invertible-pullback-tensor gives M=i^*L invertible (clause 1), the iso i^*(L^n)=M^n (clause 2) and the fibre value (i^*s)(y)=s(i(y))⊗1 (clause 3). The field-extension nonvanishing argument is written out, so Y_t equals i^{-1}(X_s) exactly. Step 3 is an elementary subspace-topology argument from the closed and open immersion definitions and assumes no affine preimages (A^2 minus 0 in A^2 is the reason). Step 4 applies 01Q3 (3)=>(1) on Y, which is quasi-compact by hypothesis. New node lem-sfb-ample-nonvanishing-basis-criterion matches 01Q3 (1)<=>(3) hypothesis by hypothesis (X quasi-compact, n>=1, no affine, Noetherian or separatedness assumption). It is statement-only and self-contained. I tested it on empty X and on Spec A with O_X; an infinite discrete union of points shows the quasi-compact hypothesis is needed. It is not a restated clause of the item. An rg -L search of the DAG (01Q3, 0B3E, characterize-ample, ample+basis/immersion) and reading of lem-sc-ample-proj-open, finite-affine-cover, proj-local-chart, lem-pc-ample-affine-loci-criterion, lem-trf-scheme-ample-canonical-proj-criterion, graded-immersion-ample-criterion and others found no duplicate. Only minor issue: the report mentions a citations.json that is not in the commit. No fixes."
+ }
+}

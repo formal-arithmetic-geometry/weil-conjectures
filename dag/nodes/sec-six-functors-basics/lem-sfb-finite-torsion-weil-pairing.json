@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-finite-torsion-weil-pairing",
+ "kind": "statement",
+ "title": "Prime-to-characteristic finite Weil pairings and their transition identities",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety], and use their dual varieties, normalized Poincare sheaves and dual pullbacks from [lem-sfb-abelian-polarization-calculus]. Let $\\ell$ be a prime different from $\\operatorname{char}k$. For $n\\geq1$ write $A[\\ell^n](k)=\\{x\\in A(k):\\ell^nx=0\\}$ and $\\mu_{\\ell^n}(k)=\\{z\\in k^\\times:z^{\\ell^n}=1\\}$. There are canonical bilinear pairings, written multiplicatively in the target,\n$$w_{A,n}:A[\\ell^n](k)\\times A^\\vee[\\ell^n](k)\\longrightarrow\\mu_{\\ell^n}(k),$$\nnamely the finite Weil pairings associated with the normalized Poincare sheaf. They are perfect: evaluation identifies either finite abelian group with the group of homomorphisms from the other into $\\mu_{\\ell^n}(k)$. For $u\\in A[\\ell^{n+1}](k)$ and $v\\in A^\\vee[\\ell^{n+1}](k)$,\n$$w_{A,n+1}(u,v)^\\ell=w_{A,n}(\\ell u,\\ell v).$$\nFor every group-scheme homomorphism $a:A\\to B$ [def-sc-group-scheme], and $x\\in A[\\ell^n](k)$, $y\\in B^\\vee[\\ell^n](k)$,\n$$w_{B,n}(a x,y)=w_{A,n}(x,a^\\vee y).$$\nFor every invertible sheaf $L$ on $A$ [def-sc-invertible-module], with $\\lambda=\\phi_L$ as in [lem-sfb-abelian-polarization-calculus], and $x,y\\in A[\\ell^n](k)$,\n$$w_{A,n}(x,\\lambda y)=w_{A,n}(y,\\lambda x)^{-1}.$$\nNo isogeny or ampleness assumption on $L$ is made.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I §13, printed pp.57–58: finite pairing construction and nondegeneracy, Lemma 13.1 (m=ell^n), Proposition 13.2(a),(d), read at finite torsion level (reduction of the integral formulas); also §9 Theorem 9.1 and Cartier-dual description on p.41. Only skew symmetry, not alternation at finite even level, is asserted."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "lem-sfb-abelian-polarization-calculus",
+  "def-sc-group-scheme",
+  "def-sc-invertible-module",
+  "def-sfb-abelian-rational-duality-data"
+ ],
+ "proof": [
+  {
+   "text": "First identify the two duals used below, without assuming their group laws agree. For each abelian variety $C$, [lem-sfb-abelian-polarization-calculus] and [lem-sfb-abelian-space-poincare-calculus] represent the same functor of rigidified algebraically trivial families over $\\operatorname{Spec}k$. The hypotheses of the latter hold: commutativity is [lem-sc-av-commutative], and the other properties are in the definition of an abelian variety. Yoneda gives an isomorphism $\\psi:C^\\vee\\simeq D$ preserving $0$ and the universal rigidified sheaf, where $D$ is the space dual. It is a group isomorphism: apply [lem-sc-rigidity] to\n$$h(s,t)=\\psi^{-1}(\\psi(s+t)-\\psi(s)-\\psi(t)):C^\\vee\\times C^\\vee\\to C^\\vee.$$\nThe first factor is proper geometrically connected and geometrically reduced by [lem-sc-abelian-variety-characterization]; the second is connected and the target separated of finite type. Since $h(s,0)=0$, rigidity makes $h$ independent of $s$, and $h(0,t)=0$ makes it zero. Thus the biadditivity and dual-pullback isomorphisms in the space node hold for exactly the dual and Poincare sheaf in this item. Uniqueness of representation identifies its $\\phi_L$ and $a^\\vee$ with those of the item as well.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sc-av-commutative",
+    "lem-sc-rigidity",
+    "lem-sc-abelian-variety-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §§8–9, pp.36–41; comparison of representing duals and group laws written out"
+   }
+  },
+  {
+   "text": "Write $P(z,b)$ for the fibre of the normalized Poincare sheaf. Use the two axis-preserving tensor laws of [lem-sfb-abelian-space-poincare-calculus]. They are associative, symmetric within either addition law, and satisfy interchange between the laws. Indeed, each of the two composites in any such diagram is an isomorphism between the same line modules, and preserves the rigidification at the first identity. Their quotient is a rigidification-preserving automorphism on $C\\times T$, with the other coordinates included in $T$, hence is the identity by the automorphism clause of that node. This also proves compatibility with an axis-preserving pullback comparison. Iterating the laws therefore gives unambiguous maps\n$$P(z,b)^{\\otimes m}\\simeq P(mz,b),\\qquad P(z,b)^{\\otimes m}\\simeq P(z,mb).$$\nTensor pullback and its action on pure tensors are [lem-weil-pbc-module-pullback-tensor]. All later comparisons use these normalized maps, not arbitrary trivializations of point fibres.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §§8–9, normalized universal family; coherence supplied by the uniqueness clause of the cited relative Poincare node"
+   }
+  },
+  {
+   "text": "For $m=\\ell^n$, $x\\in A[m](k)$ and $b\\in A^\\vee[m](k)$, the two maps of step 2, followed by the identity-axis trivializations, give\n$$t^1_m(x,b),t^2_m(x,b):P(x,b)^{\\otimes m}\\longrightarrow k.$$\nDefine $r_m(x,b)\\in k^\\times$ by $t^1_m=r_m t^2_m$. This is independent of any choice of a basis in $P(x,b)$. To check additivity in $x$, use $P(x+x',b)\\simeq P(x,b)\\otimes P(x',b)$. Interchange identifies each $t^i_m(x+x',b)$ with $t^i_m(x,b)\\otimes t^i_m(x',b)$, so taking ratios gives $r_m(x+x',b)=r_m(x,b)r_m(x',b)$. The second tensor law gives the same equality in $b$. The axis maps give $r_m(0,b)=r_m(x,0)=1$, hence $r_m(x,b)^m=r_m(mx,b)=1$. Thus $r_m$ has values in $\\mu_m(k)$. This two-trivialization construction is the finite Poincare Weil pairing, with the ratio convention $t^1/t^2$; set $w_{A,n}=r_{\\ell^n}$.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §13, p.57, finite pairing; Poincare-fibre construction of the same pairing expanded from §§8–9"
+   }
+  },
+  {
+   "text": "For nondegeneracy, fix $b\\in A^\\vee[m](k)$ and let $M=P(-,b)$. For arbitrary $z\\in A$, the first tensor law identifies $[m]^*M$ at $z$ with $P(z,b)^{\\otimes m}$; the second law and $mb=0$ give a trivialization $\\sigma:[m]^*M\\simeq\\mathcal O_A$. The map $q=[m]:A\\to A$ is finite flat and surjective by [lem-sc-mult-n-finite-flat] and [lem-sc-mult-n-isogeny], hence is an fpqc covering. Its kernel $H=A[m]$ is finite etale by [lem-sc-ntorsion-etale]. Over the algebraically closed field $k$, [lem-exc-etale-field-gsets] identifies $H$ with the constant scheme on $H(k)$ (the absolute Galois group is trivial). The group-law formulas give the isomorphism\n$$A\\times H\\simeq A\\times_{q,A,q}A,\\quad (z,x)\\mapsto(z,z+x),$$\nwhose inverse subtracts the first coordinate from the second. Consequently a trivialization of $q^*M$ is a morphism of descent data precisely when it is invariant under these translations, for every $x\\in H(k)$.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sc-mult-n-finite-flat",
+    "lem-sc-mult-n-isogeny",
+    "lem-sc-ntorsion-etale",
+    "lem-exc-etale-field-gsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §9, pp.41–42, kernel/character description of duality; I §13 p.57; fpqc cover and its overlap written explicitly"
+   }
+  },
+  {
+   "text": "Under the first-addition identification $P(z+x,b)\\simeq P(z,b)\\otimes P(x,b)$, the second-law trivialization $\\sigma$ gains the factor $t^2_m(x,b)$. The canonical deck identification of $q^*M$ gains $t^1_m(x,b)$ instead: its base points agree since $m(z+x)=mz$. Their quotient is $t^2_m/t^1_m=r_m(x,b)^{-1}$. Interchange in [lem-sfb-abelian-space-poincare-calculus] justifies these identifications on the whole overlap, not just its individual fibres. If $r_m(x,b)=1$ for all $x$, $\\sigma$ is therefore a compatible trivialization of the canonical descent datum. Apply the compatible-trivialization clause of [lem-pc-fpqc-descent], with the fpqc singleton $q$ of step 4, to conclude $M\\simeq\\mathcal O_A$. Rescale this isomorphism by its nonzero value at $0$ so that it respects the rigidification. The representing property in [lem-sfb-abelian-polarization-calculus] then implies $b=0$. This proves injectivity of $A^\\vee[m](k)\\to\\operatorname{Hom}(A[m](k),\\mu_m(k))$.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-pc-fpqc-descent",
+    "lem-sfb-abelian-polarization-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §9, pp.41–42, descent-character proof; Stacks Tag 023T, descent-proposition-fpqc-descent-quasi-coherent"
+   }
+  },
+  {
+   "text": "Put $g=\\dim A=\\dim A^\\vee$, the equality being part of [lem-sfb-abelian-polarization-calculus]. By [lem-sc-ntorsion-etale], both torsion groups are isomorphic to $(\\mathbf Z/m\\mathbf Z)^{2g}$. By [lem-sc-primitive-root], $\\mu_m(k)$ is cyclic of order $m$. Every character of $(\\mathbf Z/m\\mathbf Z)^{2g}$ is uniquely determined by the $2g$ arbitrary images of its coordinate generators. Thus its character group has $m^{2g}$ elements. The injection of step 5 is consequently a bijection. These characters separate points: for a nonzero coordinate $c\\bmod m$, the character sending its generator to a primitive $m$-th root $\\zeta$ takes the value $\\zeta^c\\ne1$. Surjectivity from step 5 therefore implies injectivity of the other evaluation map. Its source and target again have $m^{2g}$ elements, so it too is bijective. This proves both asserted perfectness clauses, including $g=0$.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sc-ntorsion-etale",
+    "lem-sc-primitive-root"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §13 p.57, nondegeneracy; I §9 p.41, Cartier-dual description; elementary finite-coordinate count"
+   }
+  },
+  {
+   "text": "Let $M=mr$, $u\\in A[M](k)$ and $v\\in A^\\vee[M](k)$. The two tensor laws identify $P(ru,rv)^{\\otimes m}$ with $P(u,v)^{\\otimes mr^2}$. Expand $t^1_m(ru,rv)$ by first adding $r$ copies of $u$, then $m$ copies, and expand the second variable into $r$ copies of $v$. Associativity and interchange from step 2 identify the result with $(t^1_M(u,v))^{\\otimes r}$. Expanding in the opposite order gives $t^2_m(ru,rv)=(t^2_M(u,v))^{\\otimes r}$ under the same identification. Taking ratios yields $r_m(ru,rv)=r_M(u,v)^r$. With $m=\\ell^n$ and $r=\\ell$, this is precisely $w_{A,n}(\\ell u,\\ell v)=w_{A,n+1}(u,v)^\\ell$. In particular the exponent is $\\ell$, despite multiplication by $\\ell$ in both input coordinates.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 13.1, p.57; expansion of the two normalized tensor-power maps"
+   }
+  },
+  {
+   "text": "For $a:A\\to B$, use the axis-preserving comparison $(a\\times1)^*P_B\\simeq(1\\times a^\\vee)^*P_A$ of [lem-sfb-abelian-space-poincare-calculus], identified in step 1 with the dual pullback fixed in the statement. It identifies $P_B(ax,y)$ with $P_A(x,a^\\vee y)$. Here $a$ is a homomorphism by hypothesis, and $a^\\vee$ is one as well: pulling back the trivial rigidified family gives $a^\\vee(0)=0$, so the morphism $h(s,t)=a^\\vee(s+t)-a^\\vee(s)-a^\\vee(t):B^\\vee\\times B^\\vee\\to A^\\vee$ satisfies $h(s,0)=0$ and $h(0,t)=0$, and [lem-sc-rigidity] applies exactly as in step 1 (the first factor is proper, geometrically connected and geometrically reduced by [lem-sc-abelian-variety-characterization]), giving $h=0$. Because $a$ and $a^\\vee$ are group homomorphisms, it carries the first $m$-fold addition map to the first and the second to the second; these are the normalized comparisons whose uniqueness was checked in step 2. It also carries each axis trivialization to the corresponding one. Therefore it identifies $t^1_m$ on the two fibres and separately identifies $t^2_m$. Their ratios give $r_{B,m}(ax,y)=r_{A,m}(x,a^\\vee y)$, the claimed finite adjunction identity.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sc-rigidity",
+    "lem-sc-abelian-variety-characterization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §9 opening paragraph p.41; finite version of Proposition 13.2(a), p.58, proved directly on the Poincare sheaf"
+   }
+  },
+  {
+   "text": "For an arbitrary invertible $L$, pull the Poincare sheaf back by $1\\times\\phi_L$. By [lem-sfb-abelian-space-poincare-calculus] and step 1 this is\n$$N_L=m_A^*L\\otimes p_1^*L^{-1}\\otimes p_2^*L^{-1}\\otimes q^*0^*L.$$\nCommutativity of $A$ [lem-sc-av-commutative] makes this normalized family symmetric under swapping $x,y$: the $m_A^*L$ and constant factors are unchanged, and the other two factors are interchanged by the ordinary tensor symmetry. This isomorphism preserves both axis trivializations. Consequently it swaps the first and second tensor-addition laws: each resulting comparison preserves the first identity rigidification, so uniqueness in [lem-sfb-abelian-space-poincare-calculus] makes the two composites equal. On $m$-torsion fibres it thus carries $t^1_m(x,\\phi_Ly)$ to $t^2_m(y,\\phi_Lx)$ and $t^2_m(x,\\phi_Ly)$ to $t^1_m(y,\\phi_Lx)$. Taking ratios proves\n$$r_m(x,\\phi_Ly)=r_m(y,\\phi_Lx)^{-1}.$$\nThis argument uses the normalized difference family for every invertible $L$, without an isogeny or ampleness hypothesis. It proves skew symmetry also for $\\ell=2$, without dividing by $2$.",
+   "uses": [
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sc-av-commutative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §8 pp.39–40, difference family; finite skew identity underlying Proposition 13.2(d), p.58"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-field-gsets",
+  "lem-pc-fpqc-descent",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-av-commutative",
+  "lem-sc-mult-n-finite-flat",
+  "lem-sc-mult-n-isogeny",
+  "lem-sc-ntorsion-etale",
+  "lem-sc-primitive-root",
+  "lem-sc-rigidity",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sfb-abelian-space-poincare-calculus",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I §§8–9 and §13 pp.57–58. Direct Poincare two-trivialization and descent proof supplying the exercises/omitted finite-level arguments, rather than assuming the Tate-module formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an abelian variety the finite Weil pairing on prime to characteristic torsion is perfect bilinear and compatible with multiplication",
+   "results": "8 hits; top: LinearMap.IsPerfPair.of_injective, LinearMap.IsPerfPair.compl₁₂, LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.congr, LinearMap.IsPerfPair, LinearMap.IsPerfPair.mk, LinearMap.IsPerfectCompl, RootPairing.isPerfPair_toLinearMap",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root-system polarizations do not construct the finite geometric Weil pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion Weil pairing abelian variety dual functoriality and inverse limit compatibility",
+   "results": "8 hits; top: RootPairing.CoPolarizationIn, RootDatum, RootPairing.Hom.weight_coweight_transpose_apply, RootPairing.Hom.weight_coweight_transpose, RootPairing.CoPolarizationIn_eq, CharacterModule.dual, CharacterModule.dual_apply, RootPairing.Hom.coroot_coweightMap",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root-system polarizations do not construct the finite geometric Weil pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Weil pairing on n torsion of abelian variety and dual has skew symmetric pullback by a line bundle homomorphism",
+   "results": "8 hits; top: RootPairing.PolarizationIn_eq, RootPairing.four_nsmul_coPolarization_compl_polarization_apply_root, RootPairing.CoPolarizationIn, RootPairing.toLinearMap_apply_PolarizationIn, RootPairing.PolarizationIn, RootPairing.coroot_eq_polarizationEquiv_apply_root, RootPairing.polarizationEquiv_apply, RootPairing.CoPolarization",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root-system polarizations do not construct the finite geometric Weil pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilPairing\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root-system polarizations do not construct the finite geometric Weil pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|PicardVariety|AlgebraicallyTrivial|WeilPairing",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract perfect pairings and root-system polarizations do not construct the finite geometric Weil pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilPairing|weil.pairing|biextension|Poincare|AbelianVariety",
+   "results": "1 hits; Mathlib/Dynamics/Ergodic/Conservative.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root or linear pairings, elliptic point maps and Poincare recurrence do not construct the geometric finite Weil pairing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Poincare line bundle defines a perfect bilinear Weil pairing on finite torsion of abelian varieties",
+   "results": "8 hits; LinearMap.IsPerfPair.of_injective, LinearMap.IsPerfPair.mk, LinearMap.IsPerfPair.congr, RootPairing.isPerfPair_toLinearMap, LinearMap.IsPerfPair.compl₁₂, LinearMap.IsPerfPair, LinearMap.IsPerfPair.of_bijective, LinearMap.IsPerfectCompl",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root or linear pairings, elliptic point maps and Poincare recurrence do not construct the geometric finite Weil pairing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The prime to characteristic Weil pairing between torsion points of an abelian variety and its dual is perfect and compatible with multiplication and pullback",
+   "results": "8 hits; RootPairing.PolarizationIn, RootPairing.CoPolarizationIn, RootPairing.four_nsmul_coPolarization_compl_polarization_apply_root, RootPairing.prod_rootFormIn_smul_coroot_mem_range_PolarizationIn, RootPairing.PolarizationIn_eq, WeierstrassCurve.Affine.Point.map_map, RootPairing.toPerfPair_comp_root, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract root or linear pairings, elliptic point maps and Poincare recurrence do not construct the geometric finite Weil pairing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-weil-pairing",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Remark 8.5, printed p.36; §9 opening, p.41; §13 pp.57–58, Lemma 13.1 and Proposition 13.2(a),(d): Weil pairings, passage to the inverse limit, functoriality and skew symmetry; nondegeneracy from the perfect finite Weil pairings and an isogeny on rational Tate modules. Supporting lemma: Chapter I §13, printed pp.57–58: finite pairing construction and nondegeneracy, Lemma 13.1 (m=ell^n), Proposition 13.2(a),(d), read at finite torsion level (reduction of the integral formulas); also §9 Theorem 9.1 and Cartier-dual description on p.41. Only skew symmetry, not alternation at finite even level, is asserted.",
+   "via": [
+    "lem-sfb-abelian-weil-pairing",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-torsion-weil-pairing",
+  "worker": "stage1",
+  "summary": "Kept every clause and hypothesis. Constructed the pairing by the two normalized Poincare power trivializations, proved bilinearity, derived perfectness by fpqc descent plus a finite-coordinate count, and computed transitions, dual adjunction and finite skew symmetry directly. Reused existing nodes; no new nodes. Checked the distinction between representing-functor isomorphisms and group isomorphisms.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited alteration / prime-to-characteristic level-rigidity supporting chain, with Milne I §§8–9 and 13 as its geometric prerequisite. The existing ancestry has no blueprint_kind terminal; blueprint_refs.py ancestor returns None, so its inherited null from.node and via list are retained. Whole-blueprint searches for Weil pairing, Poincare, biextension, biadditive and descent character found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-field-gsets",
+    "why": "Generic etale-field equivalence used only to identify the finite etale kernel over algebraically closed k with its constant point scheme, so pointwise translation invariance is invariance on the entire fpqc overlap. The six-functor unit has no replacement for this geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-field-gsets"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q121-2601ca9a8",
+  "group": "Q121",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-2601ca9a8 (reviewer sub-agent of L); spot-checked: Read the item's statement and all nine steps, every cited statement, and Milne AV I §13 pp.57–58 (e_m via g/(g∘t_a), Lemma 13.1, Proposition 13.2(a),(d), all proved there only as exercises), plus §§8–9. No new nodes; statement and stmt_deps unchanged; no cycle; no re-split note. Step 1: Yoneda gives ψ between the polarization-calculus dual and the space dual; ψ(0)=0 because φ_L(0)=[O]; rigidity applied to ψ⁻¹(ψ(s+t)−ψs−ψt) makes ψ a group isomorphism; hypotheses checked against lem-sc-rigidity. Step 2: associativity, commutativity and interchange follow from the space node's clause that a rigidification-preserving automorphism on A_T is the identity. Step 3: r_m=t¹/t² is bilinear with values in μ_m. It equals Milne's e_m up to inversion, and every asserted property is invariant under inversion. Step 4: [m] is finite flat surjective, hence a single-map fpqc covering; A[m] is étale and constant by etale-field-gsets (generic tool_use, accepted); A×H≅A×_A A. Step 5: recomputed the deck discrepancy as r⁻¹; fpqc-descent clause 3 then gives b=0. Step 6: the coordinatewise count m^{2g} gives both perfectness clauses, g=0 included. Step 7: rechecked the grouping of P(u,v)^{⊗mr²}; the exponent r agrees with Lemma 13.1. Step 9: the swap of N_L exchanges t¹ and t²; no ampleness, ℓ=2 fine. Edge cases A=0, n=1, ℓ=2, L trivial or non-ample, a=0 all hold. Batch-5: mult-n-finite-flat, mult-n-isogeny and ntorsion-etale reach sec-trace-formula only through lem-trf-rational-sequence-polynomial-forward-difference, a generic lemma about polynomial sequences that is neither assumption nor part of their proofs, so the citations are accepted. No duplicate found by a DAG-wide search for Weil pairing/biextension. FIX (C1/E5): step 8 asserted that a^∨ is a group homomorphism without justification, and neither cited node states it. Added the rigidity argument on a^∨(s+t)−a^∨s−a^∨t (a^∨(0)=0), citing lem-sc-rigidity and lem-sc-abelian-variety-characterization (already in proof_deps). Whole corrected item at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-torsion-weil-pairing.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.FiniteWeilPairing",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_finite_weilPairing",
+  "declarations": [
+   "AlgebraicGeometry.abelianFiniteTorsionPoints",
+   "AlgebraicGeometry.abelianPoincarePointModule",
+   "AlgebraicGeometry.IsPoincareFiniteWeilValue",
+   "AlgebraicGeometry.IsAbelianVariety.exists_finite_weilPairing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/FiniteWeilPairing.lean",
+  "statement": "theorem IsAbelianVariety.exists_finite_weilPairing (k : Type u) [Field k] [IsAlgClosed k] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k) : ∃ w : ∀ (A : AbelianVarietyWithDual k) (n : ℕ), abelianFiniteTorsionPoints A.variety (ℓ ^ (n + 1)) →* abelianFiniteTorsionPoints A.datum.dual (ℓ ^ (n + 1)) →* rootsOfUnity (ℓ ^ (n + 1)) k, (∀ (A : AbelianVarietyWithDual k) (n : ℕ) (x : abelianFiniteTorsionPoints A.variety (ℓ ^ (n + 1))) (y : abelianFiniteTorsionPoints A.datum.dual (ℓ ^ (n + 1))), IsPoincareFiniteWeilValue A (ℓ ^ (n + 1)) x y (w A n x y).val) ∧ (∀ (A : AbelianVarietyWithDual k) (n : ℕ), Finite (abelianFiniteTorsionPoints A.variety (ℓ ^ (n + 1))) ∧ Finite (abelianFiniteTorsionPoints A.datum.dual (ℓ ^ (n + 1))) ∧ Function.Bijective (w A n) ∧ Function.Bijective (w A n).flip) ∧ (∀ (A : AbelianVarietyWithDual k) (n : ℕ) (x : abelianFiniteTorsionPoints A.variety (ℓ ^ (n + 2))) (y : abelianFiniteTorsionPoints A.datum.dual (ℓ ^ (n + 2))) (x' : abelianFiniteTorsionPoints A.variety (ℓ ^ (n + 1))) (y' : abelianFiniteTorsionPoints A.datum.dual (ℓ ^ (n + 1))), x'.val = x.val ^ ℓ → y'.val = y.val ^ ℓ → (w A (n + 1) x y).val ^ ℓ = (w A n x' y').val) ∧ (∀ (A B : AbelianVarietyWithDual k) (a : A.variety ⟶ B.variety), IsMonHom a → ∀ aDual : B.datum.dual ⟶ A.datum.dual, Nonempty ((Scheme.Modules.pullback (a ▷ B.datum.dual).left).obj B.datum.poincare ≅ (Scheme.Modules.pullback (A.variety ◁ aDual).left).obj A.datum.poincare) → ∀ (n : ℕ) (x : abelianFiniteTorsionPoints A.variety (ℓ ^ (n + 1))) (y : abelianFiniteTorsionPoints B.datum.dual (ℓ ^ (n + 1))) (ax : abelianFiniteTorsionPoints B.variety (ℓ ^ (n + 1))) (ay : abelianFiniteTorsionPoints A.datum.dual (ℓ ^ (n + 1))), ax.val = x.val ≫ a → ay.val = y.val ≫ aDual → w B n ax y = w A n x ay) ∧ (∀ (A : AbelianVarietyWithDual k) (L : A.variety.left.Modules), L.IsInvertible → ∀ φ : A.variety ⟶ A.datum.dual, ClassifiesAbelianDifference A.datum L φ → ∀ (n : ℕ) (x y : abelianFiniteTorsionPoints A.variety (ℓ ^ (n + 1))) (φx φy : abelianFiniteTorsionPoints A.datum.dual (ℓ ^ (n + 1))), φx.val = x.val ≫ φ → φy.val = y.val ≫ φ → w A n x φy = (w A n y φx)⁻¹)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8ee5ac82",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Pairing value pinned by the descent-character predicate IsPoincareFiniteWeilValue (canonical pullbackComp/pullbackCongr deck map, nonempty trivialization, every σ; c unique since global units are constants) and equal to the node's r_m = t1/t2; probe compile confirmed 𝟙 A ^ m is the group-object power [m]. Bilinear via nested →*, both perfectness bijections plus finiteness, transition at ℓ^(n+2) with exponent ℓ, functoriality with aDual characterized as in polarization calculus/dualHomClassifies, skew symmetry for every invertible L via ClassifiesAbelianDifference with no ampleness. Edge cases g=0, ℓ=2, char 0, trivial/non-ample L checked. Node diff: lean record plus landed stmt_dep def-sfb-abelian-rational-duality-data; lean.statement verbatim; docstrings carry source, blueprint tag and all 9 steps; sorry only; no name clashes; item compiled with no error (7.8 s). Note: ClassifiesAbelianDifference/AbelianDualPoincareDatum are owned by def-sfb-abelian-dual-poincare-datum, reached only transitively through the rational-duality-data stmt_dep."
+ }
+}

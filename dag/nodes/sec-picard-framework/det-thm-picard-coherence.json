@@ -1,0 +1,246 @@
+{
+ "id": "det-thm-picard-coherence",
+ "kind": "statement",
+ "title": "Coherence of the higher direct images",
+ "statement": "Let $f:X\\to T$ be a proper morphism of finite presentation and $\\cF$ an\n$\\cO_X$-module of finite presentation, flat over $T$ (the standing\nassumptions of this subsubsection). Then:\n\n- **(a)** For every $g:T'\\to T$, with $f':X'\\to T'$ and $\\cF'$ the base\nchanges of $f$ and $\\cF$, the base change map\n$Lg^*Rf_*\\cF\\to Rf'_*\\cF'$ is an isomorphism in the derived category of\n$\\cO_{T'}$-modules. Moreover $Rf_*\\cF$ is locally computed by finite free\ncomplexes ([lem-pc-universal-finite-free-complex]): every\npoint of $T$ has an open neighbourhood $U$ and an integer $d_U\\ge0$ with a\ncomplex $P$ of finite free $\\cO_U$-modules concentrated in degrees\n$[0,d_U]$ such that for every $g:T'\\to U$, with\n$f':X'\\to T'$ and $\\cF'$ the base changes of $f$ and $\\cF$, one has\n$H^q(g^*P)\\cong R^qf'_*\\cF'$ for all $q$. In particular\n$R^qf_*\\cF|_U=0$ for all $q>d_U$.\n- **(b)** If $T$ is locally Noetherian, $R^qf_*\\cF$ is a coherent\n$\\cO_T$-module for all $q$; for this, flatness of $\\cF$ over $T$ is not\nneeded. If $T$ is locally Noetherian and $\\cF$ is flat over $T$, then\n$Rf_*\\cF$ is perfect: locally on $T$ it is represented by a bounded complex\nof finite locally free modules.\n- **(c)** If $T$ is quasi-compact, $R^qf_*\\cF=0$ for all $q\\gg0$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-coherence.md",
+  "place": "node det-thm-picard-coherence, order 791",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02O5"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-pc-universal-finite-free-complex",
+  "def-pc-morphism-conventions",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-perfect-complex",
+  "pqf-def-coherent",
+  "pqf-def-locnoeth",
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "For (a), apply [lem-pc-rf-perfect-base-change] with $S=T$ and $\\mathcal G=\\mathcal F$. Its properness, finite-presentation and relative-flatness hypotheses are exactly the standing assumptions. It identifies the canonical derived-to-ordinary module base-change map as an isomorphism for every $g:T'\\to T$. In particular this is the specified map, not just an unspecified isomorphism between its endpoints.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-coherence.proof.md",
+    "place": "First sentence: derived base change"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-universal-finite-free-complex] at each $t\\in T$. It supplies $U$, $d_U$ and a complex $P$ supported in $[0,d_U]$, together with $H^q(g^*P)\\cong R^qf'_*\\mathcal F'$ for every base change into $U$. Taking $g=\\mathrm{id}_U$, the base change of $f$ along the open immersion $U\\subseteq T$ is $f^{-1}(U)\\to U$ with the restriction of $\\mathcal F$, and [lem-pc-sections-open-base-change] identifies its $q$-th higher direct image with $(R^qf_*\\mathcal F)|_U$; hence $H^q(P)\\cong(R^qf_*\\mathcal F)|_U$ for all $q$. For $q>d_U$, both $P^q$ and its next term are zero, so its cycles and therefore $H^q(P)$ are zero. This proves the local vanishing $(R^qf_*\\mathcal F)|_U=0$ in (a).",
+   "uses": [
+    "lem-pc-universal-finite-free-complex",
+    "lem-pc-sections-open-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-coherence.proof.md",
+    "place": "Local finite free complex and local vanishing"
+   }
+  },
+  {
+   "text": "For the coherence assertion of (b), drop relative flatness. Properness implies finite type by [pqf-lem-proper-basic], so [pqf-lem-locnoeth-lft] makes $X$ locally Noetherian. The finite presentation of $\\mathcal F$ implies quasi-coherence by clause (0) of [lem-weil-pbc-quasi-coherent-finite-type-affine], and implies finite type by its local finite presentation: the finitely many target basis vectors generate the cokernel [def-weil-pbc-module-finite-type-presentation]. Hence [pqf-lem-coherent-ft-locnoeth] makes $\\mathcal F$ coherent. Now [lem-pc-coherent-hi] applies to this proper morphism over locally Noetherian $T$ and gives coherence of every $R^qf_*\\mathcal F$. No step here uses flatness.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-pbc-module-finite-type-presentation",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ, lemma-coherent-Noetherian, and 02O5, proposition-proper-pushforward-coherent (coherent.tex); Tag 01T6, lemma-finite-type-noetherian (morphisms.tex)"
+   }
+  },
+  {
+   "text": "When relative flatness is restored, [lem-pc-rf-perfect-base-change] also gives that $Rf_*\\mathcal F$ is perfect, in particular when $T$ is locally Noetherian. By [def-pc-perfect-complex], on an affine open it is represented by a bounded complex $\\widetilde{P^\\bullet}$ of finite projective modules. Each $P^i$ is a direct summand of a finite free module; localizing its inclusion and retraction preserves their identity composite. Thus each principal localization is finite projective, and [lem-sc-principal-open-finite-projective-tilde] with the whole affine open as $U$ says that every term $\\widetilde{P^i}$ is finite locally free. This is the local representative asserted in (b).",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex",
+    "lem-sc-principal-open-finite-projective-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B91(2), lemma-flat-proper-perfect-direct-image-general; Tag 08EB, lemma-perfect-affine"
+   }
+  },
+  {
+   "text": "For (c), the neighbourhoods $U_t$ from step 2 cover $T$. Quasi-compactness gives a finite subcover $U_1,\\ldots,U_s$. Put $N=\\max(\\{0,d_{U_1},\\ldots,d_{U_s}\\})$. If $q>N$, the sheaf $R^qf_*\\mathcal F$ restricts to zero on each $U_j$. Two sections on any open set have equal restrictions on its intersections with these $U_j$, and hence are equal by the sheaf separation axiom. Thus every section module is zero and $R^qf_*\\mathcal F=0$. If $T$ is empty, the empty subcover and $N=0$ give the same conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-coherence.proof.md",
+    "place": "Final finite-open-cover argument for (c)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-universal-finite-free-complex",
+  "lem-pc-sections-open-base-change",
+  "pqf-lem-proper-basic",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-pbc-module-finite-type-presentation",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "def-pc-perfect-complex",
+  "lem-sc-principal-open-finite-projective-tilde"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-perfect/det-thm-picard-coherence.proof.md",
+  "place": "Derived base change, local finite free complexes, coherence, perfectness, and finite-cover vanishing; assembled from the existing lemmas and the Stacks sources read below."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of a finitely presented module flat over a proper finitely presented scheme morphism are locally computed by a bounded finite free complex and commute with arbitrary derived base change",
+   "results": "AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.flat_iff, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, higherDirectImage",
+   "results": "Query error: loogle: unknown identifier 'AlgebraicGeometry'",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|proper.*coheren|coheren.*proper",
+   "results": "No hits (directory AlgebraicGeometry)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent cohomology of a proper scheme over a noetherian base and perfect derived pushforward",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper morphism coherent higher direct image derived base change finite free complex",
+   "results": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "proof_cites_literature",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 791,
+ "blueprint_uses": [
+  "lem-pc-universal-finite-free-complex",
+  "lem-pc-relatively-flat-canonical-module-base-change",
+  "lem-pc-rf-perfect-base-change"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+  "AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage",
+  "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict",
+  "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage",
+  "AlgebraicGeometry.exists_isIso_canonicalModuleBaseChange_of_isFlatOver",
+  "AlgebraicGeometry.noetherian_perfect_directImage"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage",
+  "AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage",
+  "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict",
+  "AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage",
+  "AlgebraicGeometry.exists_isIso_canonicalModuleBaseChange_of_isFlatOver",
+  "AlgebraicGeometry.noetherian_perfect_directImage"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-thm-picard-coherence",
+  "from": null,
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "det-thm-picard-coherence",
+  "worker": "stage1",
+  "summary": "Replaced the imported long paragraph by five checked assembly steps. Reused existing proper coherence, arbitrary derived base change and universal finite-free-complex statements; expanded the finite-presentation-to-coherence hypotheses and the finite-cover bound, and distinguished cohomology-level models from a derived representative. No new nodes, no statement change, no attachment claimed.",
+  "blueprint": "Steps 1, 2, 3, 4 and 5 realize respectively the first base-change sentence, the universal local-complex assertion, the 02O5 coherence assertion, the perfectness assertion, and the final quasi-compactness argument of the current blueprint proof. No fibre-dimension sharpening or counterexample is needed to establish the statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-universal-finite-free-complex",
+    "why": "The current item explicitly uses the existing generic proper-flat universal finite-complex theorem; it supplies the model used by this perfect-locus unit."
+   },
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "The current blueprint proof explicitly invokes this generic canonical base-change and perfectness theorem."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Transfers locally Noetherian structure along a locally finite type map in the coherence hypothesis check."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "The existing proper coherent higher-image theorem supplies precisely the Stacks 02O5 input explicitly called for by the current proof."
+   },
+   {
+    "node": "lem-sc-principal-open-finite-projective-tilde",
+    "why": "Converts the finite-projective terms of an affine strictly perfect representative to finite locally free sheaves; a generic module-sheaf tool."
+   },
+   {
+    "node": "lem-pc-sections-open-base-change",
+    "why": "Generic compatibility of higher direct images with restriction to an open of the base; used in step 2 to read the local complex as computing (R^qf_*F)|_U (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-universal-finite-free-complex",
+  "lem-pc-rf-perfect-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-coherent-hi",
+  "lem-sc-principal-open-finite-projective-tilde",
+  "lem-pc-sections-open-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-8f2c5af43",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-8f2c5af43 (reviewer sub-agent of L); spot-checked: I read the item's statement and all five steps, the base paragraph (live, imported), the blueprint proof (main-20261023-1620, latest and main-20261024 are identical) and every cited statement, and checked them against Stacks 02O5 (coherent.tex), 0B91(2), 08EB (perfect.tex), 01XZ and 01T6. The statement is unchanged and there are no new nodes. Step 1: the live statement of lem-pc-rf-perfect-base-change has exactly the item's hypotheses and the same canonical map, def-pc-derived-module-base-change-map. Step 2: lem-pc-universal-finite-free-complex matches clause (a). One fault (C1): the step used (R^qf_*F)|_U ≅ R^q(f|)_*(F|) without a citation. The existing node lem-pc-sections-open-base-change states this; the FIX cites it and adds it to proof_deps and tool_uses. Step 3: proper ⇒ finite type ⇒ X locally Noetherian; finite presentation ⇒ quasi-coherent (clause (0)) and finite type (cokernel definition) ⇒ coherent (01XZ) ⇒ lem-pc-coherent-hi. No flatness is used. I also corrected the source place: 01T6 is in morphisms.tex. Step 4: def-pc-perfect-complex gives the affine tilde(P) form (08EB); localizing the finite projective terms and applying lem-sc-principal-open-finite-projective-tilde makes them finite locally free. Step 5 is elementary (finite subcover, maximum of the d_U, sheaf axiom; empty T holds). No cited node depends on the item; edge cases f=id, F=0, empty T and the ∐P^n example all check out. Batch 5: lem-pc-coherent-hi reaches only generic nodes, def-trf-schematically-dense-open and two Mathlib leaves already reached through the base's citations. It is Stacks 02O5, which neither the trace-formula nor the Poincaré-duality assumption gives and which is not a step of their proofs, so I accept it. The corrected item file is fixes/dag/nodes/sec-picard-framework/det-thm-picard-coherence.json; the full review is review.md.; 1 file(s) fixed by the reviewer"
+ }
+}

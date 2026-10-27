@@ -1,0 +1,213 @@
+{
+ "id": "lem-sfb-etale-space-infinitesimal-lifting",
+ "kind": "statement",
+ "title": "Unique infinitesimal lifting for etale algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $E,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $p:E\\to Y$ be etale, meaning that its maps on etale scheme charts are etale morphisms of schemes [def-weil-etale-morphism]. Let $i:T_0\\hookrightarrow T$ be a first order thickening of affine $S$-schemes [def-sbc-first-order-thickening]. For morphisms $b:T\\to Y$ and $e_0:T_0\\to E$ with $p e_0=b i$, there is exactly one $e:T\\to E$ with $e i=e_0$ and $p e=b$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0616 (lemma-etale-formally-etale), implication (1) to (2), and Tag 04GC (definition-formally-etale), using definition-formally-smooth-etale-unramified. Only the affine square-zero lifting assertion is used."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-sbc-first-order-thickening",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary compatible etale chart diagram $v h=p u$ with $U,V$ schemes. By the chartwise etaleness hypothesis on $p$, the scheme morphism $h:U\\to V$ is etale. By [def-weil-etale-morphism], $h$ is flat and unramified (as well as locally of finite presentation). Only the first two properties will be needed.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM (lemma-etale-formally-etale), proof of (1) implies (2), first two sentences."
+   }
+  },
+  {
+   "text": "For any first order thickening $j:Z_0\\hookrightarrow Z$ of affine $S$-schemes and any square $h c_0=dj$ with $c_0:Z_0\\to U$, $d:Z\\to V$, regard $Z$ as a scheme over the scheme $V$ via $d$, and $Z_0$ via $dj$. Apply [lem-weil-pbc-flat-unramified-formally-etale] to $h$ with this base $V$ and the flatness and unramifiedness from step 1. It gives exactly one $c:Z\\to U$ over $V$ restricting to $c_0$. Such $c$ is an $S$-morphism since $h$ and $d$ are $S$-morphisms. Thus $P(h)$, in the notation of [lem-sfb-formally-etale-space-chart-locality], holds for every compatible chart diagram.",
+   "uses": [
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-sfb-formally-etale-space-chart-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM (lemma-etale-formally-etale), (1) implies (2), using Tag 04FF (lemma-unramified-flat-formally-etale)."
+   }
+  },
+  {
+   "text": "The reverse implication of [lem-sfb-formally-etale-space-chart-locality] now yields $P(p)$ from step 2. Substitute $T_0,T,i,e_0,b$ from the statement in the definition of $P(p)$. Its unique morphism $e:T\\to E$ satisfies precisely $e i=e_0$ and $p e=b$, proving both existence and uniqueness.",
+   "uses": [
+    "lem-sfb-formally-etale-space-chart-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0616 (lemma-etale-formally-etale), (1) implies (2), via Tag 04GD (lemma-formally-etale), (2) implies (1); Tag 04GC (definition-formally-etale)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-sfb-formally-etale-space-chart-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0616 (lemma-etale-formally-etale), proof of (1) implies (2), combined with more-morphisms.tex Tags 02HM and 04FF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism of algebraic spaces admits a unique lift across a square zero thickening of affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring-theoretic FormallyEtale and scheme Etale hits do not state infinitesimal lifting for algebraic spaces; passage to etale charts and descent is not a one-line specialization",
+   "digest": "11b5ad10d49de909"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyEtale\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.inst\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} [CommRing R] : Algebra.FormallyEtale R R\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] : Prop\", \"doc\": \"An `R`-algebra `A` is formally etale if both `Ω[A⁄R]` and `H¹(L_{A/R})` are zero.\\nFor the infinitesimal lifting definition, see `FormallyEtale.iff_comp_bijective`.\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism `R →+* A` is formally étale if it is formally unramified and formally smooth.\\nSee `Algebra.FormallyEtale`.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} {inst✝ : CommRing R} {inst✝¹ : CommRing A} {inst✝² : Algebra R A} [self : Algebra.Etale R A] : Algebra.FormallyEtale R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] [Algebra.FormallyEtale R A] : Algebra.FormallySmooth R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallyUnramified\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] [Algebra.FormallyEtale R A] : Algebra.FormallyUnramified R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} {inst✝ : CommRing R} {inst✝¹ : CommRing A} {inst✝² : Algebra R A} [self : Algebra.FormallyEtale R A] : Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} {inst✝ : CommRing R} {inst✝¹ : CommRing A} {inst✝² : Algebra R A} [self : Algebra.FormallyEtale R A] : Subsingleton Ω[A⁄R]\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A] : Algebra.FormallyEtale R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] : Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.FormallyEtale.mk\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] (subsingleton_kaehlerDifferential : Subsingleton Ω[A⁄R]) (subsingleton_h1Cotangent : Subsingleton (Algebra.H1Cotangent R A)) : Algebra.FormallyEtale R A\", \"doc\": \"\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \" (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] : Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring-theoretic FormallyEtale and scheme Etale hits do not state infinitesimal lifting for algebraic spaces; passage to etale charts and descent is not a one-line specialization",
+   "digest": "20bb24e96539c418"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|formallyEtale|formally_etale",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"131\", \"text\": \"instance [IsSepClosed k] [EssFiniteType k R] [FormallyEtale k R] : IsFiniteSplit k R := by\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"134\", \"text\": \"  exact .of_algEquiv (Algebra.FormallyEtale.equivPiOfIsSepClosed k R).symm\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"122\", \"text\": \"lemma FormallyEtale.of_comp {T : Type*} [CommRing T] {f : R →+* S} {g : S →+* T}\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"123\", \"text\": \"    (hf : f.FormallyUnramified) (h : (g.comp f).FormallyEtale) :\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"124\", \"text\": \"    g.FormallyEtale := by\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Unramified.lean\", \"line\": \"126\", \"text\": \"  exact Algebra.FormallyEtale.of_restrictScalars (R := R)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"line\": \"351\", \"text\": \"  formallyEtale :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Field.lean\", \"line\": \"49\", \"text\": \"  have : FormallyEtale (IntermediateField.adjoin K (Set.range v)) L :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Field.lean\", \"line\": \"50\", \"text\": \"    Algebra.FormallyEtale.of_isSeparable _ L\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"182\", \"text\": \"  have : FormallyEtale (MvPolynomial (Fin n) R) P' := .of_isLocalization M'\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"185\", \"text\": \"    .of_equiv (KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale R (MvPolynomial (Fin n) R) P')\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"245\", \"text\": \"attribute [local instance] FormallyEtale.of_formallyUnramified_of_field in\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Finite.lean\", \"line\": \"168\", \"text\": \"        (fun R ↦ (FiniteEtale.isoMk (Algebra.FormallyEtale.equivPiOfIsSepClosed Ω R.unop)).op)\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Finite.lean\", \"line\": \"172\", \"text\": \"          exact funext fun p ↦ Algebra.FormallyEtale.equivPiOfIsSepClosed_comap _ _ _\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Finite.lean\", \"line\": \"184\", \"text\": \"      simp [Algebra.FormallyEtale.equivPiOfIsSepClosed_comap,\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Finite.lean\", \"line\": \"185\", \"text\": \"        Algebra.FormallyEtale.equivPiOfIsSepClosed_self_apply] }\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"180\", \"text\": \"instance : Algebra.FormallyEtale R P.Ring := by\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"181\", \"text\": \"  refine Algebra.FormallyEtale.iff_comp_bijective.mpr fun S _ _ I hI ↦ ?_\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"446\", \"text\": \"      ((Algebra.FormallyEtale.iff_of_surjective hf).mp (.of_restrictScalars (R := R)))\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"36\", \"text\": \"  FormallyEtale R (Localization.AtPrime q)\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"50\", \"text\": \"  have : FormallyEtale (Localization.AtPrime p) (Localization.AtPrime P) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"52\", \"text\": \"  exact FormallyEtale.comp R (Localization.AtPrime p) _\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"56\", \"text\": \"  Set.ext fun _ ↦ FormallyEtale.iff_formallyUnramified_and_formallySmooth\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Locus.lean\", \"line\": \"66\", \"text\": \"  exact (Algebra.formallyEtale_iff _ _).trans\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Field.lean\", \"line\": \"18\", \"text\": \"- `Algebra.FormallyEtale.of_isSeparable`:\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring-theoretic FormallyEtale and scheme Etale hits do not state infinitesimal lifting for algebraic spaces; passage to etale charts and descent is not a one-line specialization",
+   "digest": "9facd9052b96ef5c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale maps of algebraic spaces have unique infinitesimal lifting against nilpotent closed immersions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(I : Ideal S) (hI : I ^ 2 = ⊥) (x : S) (hx : P.HasMap (Ideal.Quotient.mk I x)) : ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] (I : Ideal B) (hI : IsNilpotent I) (g₁ g₂ : A →ₐ[R] B)\\n  (h : (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I).comp g₂) : g₁ = g₂\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \":\\n  FormallyEtale R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Bijective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if for every $ R $-algebra $ B $ and every ideal $ I \\\\subseteq B $ with $ I^2 = 0 $, the natural map $ \\\\text{Hom}_R(A, B) \\\\to \\\\text{Hom}_R(A, B/I) \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \": Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring-theoretic FormallyEtale and scheme Etale hits do not state infinitesimal lifting for algebraic spaces; passage to etale charts and descent is not a one-line specialization",
+   "digest": "b14912134ab9517c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique extension of a section of an etale algebraic space from a nilpotent closed subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"StandardEtalePair.hom_ext\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : StandardEtalePair R} {f g : P.Ring →ₐ[R] S}, f P.X = g P.X → f = g\", \"doc\": \"For any commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and any $ R $-algebra $ S $, if two $ R $-algebra homomorphisms $ f $ and $ g $ from the standard étale ring extension $ R[\"}\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the ring-theoretic FormallyEtale and scheme Etale hits do not state infinitesimal lifting for algebraic spaces; passage to etale charts and descent is not a one-line specialization",
+   "digest": "23fd0aa3ec6a9732"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale morphisms of algebraic spaces are characterized by unique lifting across affine square zero thickenings",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "2853821e23695c07"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyEtale\"",
+   "results": "12 hits: Algebra.FormallyEtale.inst, Algebra.FormallyEtale, RingHom.FormallyEtale, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.instFormallySmooth, Algebra.FormallyEtale.instFormallyUnramified, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.FormallyEtale.subsingleton_kaehlerDifferential",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "20bb24e96539c418"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|formallyEtale|formally_etale",
+   "results": "25 hits: Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "079165e41781529e"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale maps of algebraic spaces admit a unique extension over a first order thickening",
+   "results": "8 hits: StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, RingHom.FormallyEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme/ring facts or unrelated chart properties, not algebraic-space infinitesimal lifting and its etale chart locality",
+   "digest": "d7b714e3daf2824a"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-effective-formal-chart-completed-atlas",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: An effective formal quotient atlas is a completed etale scheme chart. Comparison of the effective formal chart with a completed etale chart: the infinitesimal lifting input, applied after base change of the atlas to a nilpotent test.",
+   "via": [
+    "lem-sfb-effective-formal-chart-completed-atlas",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-space-infinitesimal-lifting",
+  "worker": "stage1",
+  "summary": "Retained the exact statement; expanded Stacks 0616 through flat unramified scheme lifting and a single new statement-only etale-chart locality lemma (04GD). Searched the current project, full DAG, blueprint, and Mathlib; checked every dependency statement and all square-zero and base-scheme hypotheses.",
+  "blueprint": "Inherited supporting infinitesimal-lifting prerequisite for the effective formal quotient atlas; the latest direct-images proof (3) is the compactification/direct-image assembly. The historical alteration lineage is retained. blueprint_refs ancestor returns None, so from.node remains null, with the precise inherited place and via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Scheme square-zero unique lifting is a generic infinitesimal tool. The unit supplies no replacement for the scheme case in the chart descent input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-unramified-formally-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-1a7945461",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-1a7945461 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-more-morphisms 0616 (lemma-etale-formally-etale), 04GC (definition-formally-etale), 04GD (lemma-formally-etale) and the functor definition at l.2443, plus more-morphisms 02HM and 04FF. The item statement, source and blueprint are byte-identical to live, where the item is still unsplit; this is a first split, not a re-split. Step 1 (elementary): def-weil-etale-morphism gives flat and unramified for every compatible chart h; 'every chart' matches the convention in lem-sfb-unramified-etale-compatible-charts. Step 2: lem-weil-pbc-flat-unramified-formally-etale is applied with base V, with Z over V via d and c0 a V-morphism because h c0 = dj; Z and Z0 are affine; an S-morphism c with hc = d is exactly a V-morphism, so P(h) holds. Step 3: the reverse direction of the new node gives P(p), which is literally the item. This is the Stacks 0616 route. New node chart-locality = 04GD (1)<=>(2) for arbitrary f. It is statement-only and self-contained, and it is true: an atlas diagram with surjective verticals exists, so 04GD (3)=>(1) applies. Tested on id of Spec k, on Spec k[e] -> Spec k and on empty X. It does not restate the item. I found no duplicate after checking the 03MJ criterion, compatible-charts, smooth-lift, lfp-unique-lifts-etale, the per-etale-local lifts node and the thickening nodes. Searches are real and mathlib_match is null. Batch-5 flag: def-trf-algebraic-space is the general definition of an algebraic space, outside both assumptions (the item already cites it on base), so I accept it. Tool use of 04FF node lem-weil-pbc-flat-unramified-formally-etale (unit sk-thm-p1) is accepted as a generic scheme tool. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSpaceInfinitesimalLifting",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_unique_affine_thickening_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSpaceInfinitesimalLifting.lean",
+  "statement": "theorem etale_unique_affine_thickening_lift {S : Scheme.{u}} {E Y : AlgebraicSpace S} (p : E ⟶ Y) (hp : MapIsLocally (@Etale) p) (T₀ T : Over S) [IsAffine T₀.left] [IsAffine T.left] (i : T₀ ⟶ T) (hi : IsFirstOrderThickening i.left) (b : yoneda.obj T ⟶ Y.obj.obj) (e₀ : yoneda.obj T₀ ⟶ E.obj.obj) (w : e₀ ≫ p.hom.hom = yoneda.map i ≫ b) : ∃! e : yoneda.obj T ⟶ E.obj.obj, yoneda.map i ≫ e = e₀ ∧ e ≫ p.hom.hom = b",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc770e96b",
+  "group": "N0",
+  "result": "pass",
+  "note": "Checked every clause against the node and Stacks spaces-more-morphisms (formally smooth/étale/unramified definition, formally-étale definition, Tag 0616): MapIsLocally (@Etale) p tests all compatible étale charts, equivalent to the usual definition and not stronger (p need not be representable); T₀, T affine in Over S with i over S and IsFirstOrderThickening i.left (closed immersion, ideal squared = 0); b, e₀ are maps of functors on Over S; square and ∃! with both equations match. Edge cases (empty tests, identity thickening, empty spaces), single universe as in the AlgebraicSpace interface, no extra hypotheses. No duplicate found (SpaceMapIsEtale is for space-to-scheme maps; the landed converse uses the same encoding). Node diff vs live: only the lean record and the added stmt_dep def-sfb-space-morphism-properties, which owns MapIsLocally and has landed. lean.statement verbatim; source/blueprint docstrings and proof steps present; proof is sorry; no definitions; report has both sections. No files changed, no compile run."
+ }
+}

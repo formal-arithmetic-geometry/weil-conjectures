@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-strict-scalar-pullback-comparison",
+ "kind": "statement",
+ "title": "Scalar extension and finite inverse image on actual unit generators",
+ "statement": "Fix a prime l and a finite extension E of ℚ_l, with independent scheme and coefficient universes. Use the actual finite inverse images and scalar generators of [def-pur-strict-quotient-expressions] and the normalized scalar adjunctions of [lem-coef-derived-system-evaluation-calculus]. Scalar extension commutes with finite geometric inverse image by a comparison satisfying the prescribed unit-generator formula, for every complex and every n ≤ m:\n\ntheorem strictScalarPullbackComparison {V W : Scheme.{t}} (g : V ⟶ W)\n    (K : Complex l E W) (SW : CoefficientDerivedSystemTensors l E W)\n    (DW : CoefficientFiniteQuotientCalculus l E W SW)\n    (SV : CoefficientDerivedSystemTensors l E V)\n    (DV : CoefficientFiniteQuotientCalculus l E V SV) {m n : ℕ} (hmn : n ≤ m) :\n    ∃ χ, ScalarPullbackIdentification l E g K hmn χ",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL: composition of inverse image and extension of scalars; adjunction units."
+ },
+ "stmt_deps": [
+  "def-pur-strict-quotient-expressions",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the actual sequence ring morphism gives the quotient-ring square. Compose sheaf module direct images around that square. Their comparison is identity on underlying sections. Uniqueness of left adjoints gives the ordinary scalar-pullback isomorphism, and its unit identity gives the specified generator formula. Apply mapHomologicalComplex and evaluate in each degree. The module also supplies private normalized-unit naturality calculations for the parent constructor proof.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-sf-ambient-pullback-tensor-coherence",
+    "lem-pur-integral-operations-well-defined",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL: composition of inverse image and extension of scalars; adjunction units."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-sf-ambient-pullback-tensor-coherence",
+  "lem-pur-integral-operations-well-defined",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; actual adjunctions and their unit identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq_hom_app|pushforwardComp|pushforwardCongr_inv_app_val_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/Sites/LeftExact.lean; Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-27",
+   "verdict": "partial match; compose the actual adjunctions and normalize their units"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\", \"unit\"",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app_assoc; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit_assoc; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_assoc",
+   "date": "2026-10-27",
+   "verdict": "partial match; compose the actual adjunctions and normalize their units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with inverse image of sheaves of modules by uniqueness of composite left adjoints and the adjunction unit",
+   "results": "SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-27",
+   "verdict": "partial match; compose the actual adjunctions and normalize their units"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictPullbackAdjointConstructor",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-strict-pullback-adjoint-constructor",
+   "place": "Scalar-comparison generator step of the actual inverse-image constructor."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictScalarPullbackComparison",
+  "file": "lean/Sheaf/Paper/StrictScalarPullbackComparison.lean",
+  "declaration": "WeilConjectures.StrictQuotient.strictScalarPullbackComparison",
+  "statement": "theorem strictScalarPullbackComparison {V W : Scheme.{t}} (g : V ⟶ W)\n    (K : Complex l E W) (SW : CoefficientDerivedSystemTensors l E W)\n    (DW : CoefficientFiniteQuotientCalculus l E W SW)\n    (SV : CoefficientDerivedSystemTensors l E V)\n    (DV : CoefficientFiniteQuotientCalculus l E V SV) {m n : ℕ} (hmn : n ≤ m) :\n    ∃ χ, ScalarPullbackIdentification l E g K hmn χ",
+  "by": "R3",
+  "date": "2026-10-27",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T201044-L-3359144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T201044-L-3359144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

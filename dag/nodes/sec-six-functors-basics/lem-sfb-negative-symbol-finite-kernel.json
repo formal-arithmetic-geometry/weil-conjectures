@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-negative-symbol-finite-kernel",
+ "kind": "statement",
+ "title": "Finite differentiability of kernels of sufficiently negative local symbols",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Fix integers $m\\geq1$, $p,q,k\\geq0$ and $r<-m-k$, and an open set $U\\subseteq\\mathbf R^m$. Let $a:U\\times\\mathbf R^m\\to\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q)$ be a symbol of order $r$ with the derivative estimates of [def-sfb-symbol-pseudodifferential-operators]. Let $\\chi,\\psi$ be smooth real functions on $U$ whose supports are compact subsets of $U$. For $x,y\\in U$, set $$H(x,y)=\\chi(x)\\psi(y)(2\\pi)^{-m}\\int_{\\mathbf R^m}e^{i(x-y)\\cdot\\xi}a(x,\\xi)\\,d\\xi,$$ and extend $H$ by zero to $\\mathbf R^m\\times\\mathbf R^m$. This is an absolutely convergent matrix integral and $H$ is $C^k$, with support contained in $\\operatorname{supp}\\chi\\times\\operatorname{supp}\\psi$. Its partial derivatives of total order at most $k$ are obtained by differentiating the integrand, including both spatial cutoffs; the corresponding integrals converge absolutely and locally uniformly in $(x,y)$. More precisely, for any fixed smooth compactly supported frequency cutoff $\\rho$ equal to one near zero, replacing $a(x,\\xi)$ by $a(x,\\xi)\\rho(\\xi/R)$ gives kernels tending to $H$ with all those derivatives locally uniformly as $R\\to\\infty$. For every smooth compactly supported $f:\\mathbf R^m\\to\\mathbf C^p$, the localized oscillatory quantization of the cited definition satisfies $$\\chi\\operatorname{Op}(a)(\\psi f)(x)=\\int_{\\mathbf R^m}H(x,y)f(y)\\,dy.$$ The right side is a $C^k$ function of $x$ and represents the same distribution. Its derivatives through order $k$ are the integrals with $\\partial_x^\\alpha H$. For real-valued $f$, replacing the left side by $\\chi\\operatorname{Re}\\operatorname{Op}(a)(\\psi f)$ and $H$ by $\\operatorname{Re}H$ gives the corresponding real matrix formula.",
+ "source": {
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3, (3.3)–(3.5), Schwartz kernel (3.8)–(3.9), pp.6–8, and regularizing operators (3.12), pp.9–10. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Finite differentiability version of the Fourier-kernel argument, with the 1/(2π)^m convention of def-sfb-symbol-pseudodifferential-operators."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Write $z=(x,y)$ and $c=(2\\pi)^{-m}$. On $U\\times U$ put $B(z,\\xi)=c\\chi(x)\\psi(y)e^{i(x-y)\\cdot\\xi}a(x,\\xi)$, and put $B=0$ elsewhere. For each fixed $\\xi$, this is smooth on all of $\\mathbf R^{2m}$: outside the compact sets $K=\\operatorname{supp}\\chi\\subset U$ and $L=\\operatorname{supp}\\psi\\subset U$ it is locally zero, including at the boundary of $U$. If either support is empty the conclusion is immediate, so assume both nonempty. The same zero-extension argument applies to each spatial derivative. Every derivative of either cutoff is bounded: apply [lem-sfb-compact-real-function-minimum] to the negative of its absolute value on its compact support (or on $K$ or $L$). Symbol estimates on $K$ are those of [def-sfb-symbol-pseudodifferential-operators].",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-real-function-minimum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED."
+   }
+  },
+  {
+   "text": "The Leibniz rule gives an explicit finite sum for $\\partial_x^\\alpha\\partial_y^\\beta B$. Index its terms by $\\alpha_1+\\alpha_2+\\alpha_3=\\alpha$ and $\\beta_1+\\beta_2=\\beta$; a term, apart from the multinomial coefficients and $c$, is\n$$ (\\partial^{\\alpha_1}\\chi)(x)(\\partial^{\\beta_1}\\psi)(y)e^{i(x-y)\\cdot\\xi}(i\\xi)^{\\alpha_2}(-i\\xi)^{\\beta_2}\\partial_x^{\\alpha_3}a(x,\\xi). $$\nThus for $|\\alpha|+|\\beta|=j\\leq k$ its norm is at most $C_{\\alpha\\beta}(1+|\\xi|)^{r+j}$, uniformly in $z$; the constants use only the cutoff bounds of step 1 and finitely many symbol estimates with frequency derivative zero. Since $r+j\\leq r+k<0$ and $1+t\\geq\\sqrt{1+t^2}$ for $t\\geq0$, this is at most $C_{\\alpha\\beta}w(\\xi)$, where $w(\\xi)=(1+|\\xi|^2)^{(r+k)/2}$. The identical bounds for full Frechet derivatives $D_z^jB$ follow by writing their finitely many coordinate entries and summing their absolute values. All these functions are Borel measurable (they are smooth).",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED."
+   }
+  },
+  {
+   "text": "Take $s=-(r+k)/2>m/2$. By [lem-sfb-euclidean-bracket-integrable], $w=(1+|\\xi|^2)^{-s}$ is integrable. The majorant criterion in [lem-sfb-vector-integral-majorant-linearity] therefore makes every integral of $D_z^jB$ ($0\\leq j\\leq k$) absolutely convergent. Here matrices and multilinear maps on finite-dimensional spaces are complete, and complex vector spaces may be regarded as real Banach spaces. Define $I_j(z)=\\int D_z^jB(z,\\xi)\\,d\\xi$. For any sequence $z_n\\to z$, the integrands converge pointwise and are bounded by $C_jw$; [lem-sfb-oscillatory-cutoff-convergence] shows $I_j(z_n)\\to I_j(z)$. Thus each $I_j$ is continuous, also across the zero-extension boundary. Apply [lem-sfb-dominated-integral-frechet-derivative] to $F=D_z^jB$ for $j<k$: its derivative is $D_z^{j+1}B$, bounded by $C_{j+1}w$ on the entire parameter neighbourhood, and all required measurability and initial integrability hypotheses have just been verified. Starting with $H=I_0$, induction gives $D^jH=I_j$ for $j\\leq k$. This proves $C^k$ regularity and the stated partial-derivative formulas. Since $B$ vanishes outside $K\\times L$, so does $H$.",
+   "uses": [
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-oscillatory-cutoff-convergence",
+    "lem-sfb-dominated-integral-frechet-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED."
+   }
+  },
+  {
+   "text": "Let $\\rho_R(\\xi)=\\rho(\\xi/R)$, $R>0$, and $M=\\sup|\\rho|<\\infty$, using [lem-sfb-compact-real-function-minimum] on the negative of $|\\rho|$ on its compact support. Spatial differentiation never differentiates $\\rho_R$. The argument of step 3 therefore gives $D^jH_R=\\int\\rho_R D_z^jB$ for $j\\leq k$, since $|\\rho_R|\\leq M$. Integral linearity and the majorant estimate of [lem-sfb-vector-integral-majorant-linearity] imply\n$$\\sup_z\\|D^jH_R(z)-D^jH(z)\\|\\leq C_j\\int |\\rho(\\xi/R)-1|w(\\xi)\\,d\\xi.$$\nThe scalar integrand tends to zero pointwise and is bounded by $(M+1)w$. Apply [lem-sfb-oscillatory-cutoff-convergence] to the filter $R\\to+\\infty$ to see that the bound tends to zero. This proves even global uniform convergence of all asserted derivatives. Absolute convergence is also uniform in the usual frequency-tail sense: apply the same dominated convergence node to $w(\\xi)\\mathbf1_{|\\xi|>T}$ as $T\\to\\infty$ and bound every derivative tail by $C_j\\int_{|\\xi|>T}w$. In particular the required locally uniform absolute convergence holds.",
+   "uses": [
+    "lem-sfb-compact-real-function-minimum",
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-oscillatory-cutoff-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED."
+   }
+  },
+  {
+   "text": "For the given test vector $f$, the scalar function $h(y)=\\|f(y)\\|$ is continuous and compactly supported, so [lem-sfb-continuous-compact-support-integrable] applied to $h$ regarded as complex-valued gives $\\int h<\\infty$. For fixed $x$, $\\|B(x,y,\\xi)f(y)\\|\\leq C_0 w(\\xi)h(y)$. This is a product of integrable factors. More explicitly, integrate its norm in $\\xi$ first using [lem-sfb-vector-integral-majorant-linearity]; the result is bounded by $C_0(\\int w)h(y)$ and hence integrable. The product criterion and Fubini equality of [lem-sfb-product-fubini-integral-swap] now apply to the Borel function $(y,\\xi)\\mapsto B(x,y,\\xi)f(y)$, and also to $\\rho_RBf$. Lebesgue measures are sigma-finite and the finite-dimensional vector target is a real Banach space. Consequently the cutoff quantization $T_Rf$ is exactly $\\int H_R(x,y)f(y)\\,dy$, with no conditionally convergent interchange.",
+   "uses": [
+    "lem-sfb-continuous-compact-support-integrable",
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-product-fubini-integral-swap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED."
+   }
+  },
+  {
+   "text": "Step 4 and the integral norm estimate give $\\sup_x\\|T_Rf(x)-G(x)\\|\\leq\\sup_{x,y}\\|H_R-H\\|\\int h\\to0$, where $G(x)=\\int H(x,y)f(y)\\,dy$. Pairing with any compactly supported smooth dual test $v$ gives a bound by this supremum times $\\int\\|v\\|$, which is finite by [lem-sfb-continuous-compact-support-integrable] applied to its continuous compactly supported norm. Thus the distributional limit defining the localized $\\chi\\operatorname{Op}(a)(\\psi f)$ in [def-sfb-symbol-pseudodifferential-operators] is the distribution represented by $G$. This identifies the oscillatory action with the displayed absolutely convergent kernel integral. It also proves cutoff independence in this range of orders.",
+   "uses": [
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-continuous-compact-support-integrable",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED."
+   }
+  },
+  {
+   "text": "For $0\\leq j\\leq k$, set $J_j(x)=\\int D_x^jH(x,y)f(y)\\,dy$. Step 3 and the integral bound give $\\|D_x^jH(x,y)f(y)\\|\\leq C_j(\\int w)h(y)$ uniformly in $x,y$. These are integrable majorants. Dominated convergence [lem-sfb-oscillatory-cutoff-convergence] makes each $J_j$ continuous, and [lem-sfb-dominated-integral-frechet-derivative] applied for $j<k$ gives $DJ_j=J_{j+1}$. The hypotheses hold because $H$ is $C^k$, the integrands are continuous in $y$, and the derivative bound holds on a full neighbourhood. Hence $G=J_0$ is $C^k$ with the claimed derivatives. Finally all finite-dimensional integrals can be taken coordinatewise. For real $f$, the equality $\\operatorname{Re}(Hf)=(\\operatorname{Re}H)f$ and real linearity of integration give the last formula, and the same derivative formulas pass to the real coordinates. If $p=0$ or $q=0$ all matrices or outputs are zero, so the same assertions hold.",
+   "uses": [
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-oscillatory-cutoff-convergence",
+    "lem-sfb-dominated-integral-frechet-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-compact-real-function-minimum",
+  "lem-sfb-euclidean-bracket-integrable",
+  "lem-sfb-vector-integral-majorant-linearity",
+  "lem-sfb-oscillatory-cutoff-convergence",
+  "lem-sfb-dominated-integral-frechet-derivative",
+  "lem-sfb-continuous-compact-support-integrable",
+  "lem-sfb-product-fubini-integral-swap"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "Demailly, Differential and pseudodifferential operators on manifolds, §3 (3.3)–(3.5), pp.6–7, (3.8)–(3.9), p.8, and (3.12), pp.9–10; finite-order version supplied by Q145, with the item's Fourier normalization. Online PDF read; locally WANTED. Explicit finite-order dominated-integration argument elaborating the source's all-order regularizing-kernel observation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A symbol of order less than minus the dimension minus k gives a C k kernel by absolutely convergent Fourier integration",
+   "results": "{\"t\": \"2026-10-24T04:13:53Z\", \"tool\": \"leanfinder\", \"query\": \"A symbol of order less than minus the dimension minus k gives a C k kernel by absolutely convergent Fourier integration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.contDiff_fourierIntegral\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral\", \"Real.contDiff_fourierIntegral\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral'\", \"VectorFourier.iteratedFDeriv_fourierIntegral\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\"], \"digest\": \"268ea65408458881\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: VectorFourier.contDiff_fourierIntegral (FourierTransformDeriv.lean:507) and iteratedFDeriv_fourierIntegral (:519) treat a fixed frequency function, not a position-dependent symbol and joint kernel regularity with spatial cutoffs and oscillatory-action identification. Source read at lines 497–529. This requires a parameter-integral argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierIntegral\", \"contDiff\"",
+   "results": "{\"t\": \"2026-10-24T04:13:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourierIntegral\\\", \\\"contDiff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"VectorFourier.contDiff_fourierIntegral\"], \"digest\": \"cdf79a7fe164d716\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: VectorFourier.contDiff_fourierIntegral (FourierTransformDeriv.lean:507) and iteratedFDeriv_fourierIntegral (:519) treat a fixed frequency function, not a position-dependent symbol and joint kernel regularity with spatial cutoffs and oscillatory-action identification. Source read at lines 497–529. This requires a parameter-integral argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "contDiff.*fourier|fourier.*contDiff|iteratedFDeriv_fourierIntegral",
+   "results": "{\"t\": \"2026-10-24T04:13:54Z\", \"tool\": \"grep\", \"query\": \"contDiff.*fourier|fourier.*contDiff|iteratedFDeriv_fourierIntegral\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\"], \"digest\": \"d1ee555348332599\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: VectorFourier.contDiff_fourierIntegral (FourierTransformDeriv.lean:507) and iteratedFDeriv_fourierIntegral (:519) treat a fixed frequency function, not a position-dependent symbol and joint kernel regularity with spatial cutoffs and oscillatory-action identification. Source read at lines 497–529. This requires a parameter-integral argument, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localized Fourier quantization of a symbol of order below minus m minus k has a C k integral kernel",
+   "results": "{\"t\": \"2026-10-24T04:15:32Z\", \"tool\": \"leansearch\", \"query\": \"Localized Fourier quantization of a symbol of order below minus m minus k has a C k integral kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourierIntegralInv\", \"Real.fourierIntegral\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral'\", \"VectorFourier.contDiff_fourierIntegral\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral\", \"Fourier.fourierIntegral_def\", \"SchwartzMap.fourierTransformCLM\", \"VectorFourier.fourierIntegral_continuous\"], \"digest\": \"9c872bc0c7159757\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: VectorFourier.contDiff_fourierIntegral (FourierTransformDeriv.lean:507) and iteratedFDeriv_fourierIntegral (:519) treat a fixed frequency function, not a position-dependent symbol and joint kernel regularity with spatial cutoffs and oscillatory-action identification. Source read at lines 497–529. This requires a parameter-integral argument, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth amplitude depending on position with integrable polynomial decay in frequency, its inverse Fourier integral is jointly differentiable in position and space",
+   "results": "{\"t\": \"2026-10-24T04:17:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth amplitude depending on position with integrable polynomial decay in frequency, its inverse Fourier integral is jointly differentiable in position and space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.contDiff_fourierIntegral\", \"Real.contDiff_fourierIntegral\", \"VectorFourier.differentiable_fourierIntegral\", \"Real.differentiable_fourierIntegral\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.contDiff_fourier\", \"Real.hasFDerivAt_fourierIntegral\", \"VectorFourier.fderiv_fourierIntegral\"], \"digest\": \"deb204bbfa031a1d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: VectorFourier.contDiff_fourierIntegral (FourierTransformDeriv.lean:507) and iteratedFDeriv_fourierIntegral (:519) treat a fixed frequency function, not a position-dependent symbol and joint kernel regularity with spatial cutoffs and oscillatory-action identification. Source read at lines 497–529. This requires a parameter-integral argument, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "contDiff_fourierIntegral|iteratedFDeriv_fourierIntegral",
+   "results": "{\"t\": \"2026-10-24T04:17:02Z\", \"tool\": \"grep\", \"query\": \"contDiff_fourierIntegral|iteratedFDeriv_fourierIntegral\", \"sub\": \"Analysis/Fourier/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\"], \"digest\": \"eedea1a7bd471a51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: VectorFourier.contDiff_fourierIntegral (FourierTransformDeriv.lean:507) and iteratedFDeriv_fourierIntegral (:519) treat a fixed frequency function, not a position-dependent symbol and joint kernel regularity with spatial cutoffs and oscillatory-action identification. Source read at lines 497–529. This requires a parameter-integral argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierIntegral\", \"contDiff\"",
+   "results": "{\"t\": \"2026-10-24T04:19:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourierIntegral\\\", \\\"contDiff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"VectorFourier.contDiff_fourierIntegral\"], \"digest\": \"cdf79a7fe164d716\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: VectorFourier.contDiff_fourierIntegral (FourierTransformDeriv.lean:507) and iteratedFDeriv_fourierIntegral (:519) treat a fixed frequency function, not a position-dependent symbol and joint kernel regularity with spatial cutoffs and oscillatory-action identification. Source read at lines 497–529. This requires a parameter-integral argument, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierIntegral\", \"contDiff\"",
+   "results": "{\"t\": \"2026-10-24T04:46:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourierIntegral\\\", \\\"contDiff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"VectorFourier.contDiff_fourierIntegral\"], \"digest\": \"cdf79a7fe164d716\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FourierTransformDeriv.lean:507–529 treats a fixed frequency function and does not give joint parameter-symbol regularity or the localized oscillatory action. Parametric convolution hits require compact support in the integration variable, absent for the untruncated symbol. Existing dominated-integration nodes supply proof tools, not a one-line specialization of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|oscillatory|contDiff_fourierIntegral|iteratedFDeriv_fourierIntegral",
+   "results": "{\"t\": \"2026-10-24T04:46:24Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|oscillatory|contDiff_fourierIntegral|iteratedFDeriv_fourierIntegral\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\"], \"digest\": \"eedea1a7bd471a51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FourierTransformDeriv.lean:507–529 treats a fixed frequency function and does not give joint parameter-symbol regularity or the localized oscillatory action. Parametric convolution hits require compact support in the integration variable, absent for the untruncated symbol. Existing dominated-integration nodes supply proof tools, not a one-line specialization of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Joint differentiability of a parameter dependent Fourier kernel for a negative order symbol with compact spatial cutoffs",
+   "results": "{\"t\": \"2026-10-24T04:46:25Z\", \"tool\": \"leansearch\", \"query\": \"Joint differentiability of a parameter dependent Fourier kernel for a negative order symbol with compact spatial cutoffs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.differentiable_fourierIntegral\", \"Real.differentiable_fourier\", \"MeasureTheory.contDiffOn_convolution_right_with_param_comp\", \"Real.fderiv_fourier\", \"VectorFourier.hasFDerivAt_fourierIntegral\", \"Real.differentiable_fourierChar\", \"Real.hasFDerivAt_fourierIntegral\", \"Real.differentiable_fourierIntegral\"], \"digest\": \"c4875a7f468db277\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FourierTransformDeriv.lean:507–529 treats a fixed frequency function and does not give joint parameter-symbol regularity or the localized oscillatory action. Parametric convolution hits require compact support in the integration variable, absent for the untruncated symbol. Existing dominated-integration nodes supply proof tools, not a one-line specialization of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A position dependent symbol of order r less than minus dimension minus k has a C k localized integral kernel with derivatives obtained under the frequency integral",
+   "results": "{\"t\": \"2026-10-24T04:46:30Z\", \"tool\": \"leanfinder\", \"query\": \"A position dependent symbol of order r less than minus dimension minus k has a C k localized integral kernel with derivatives obtained under the frequency integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.integralCLM\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.contDiff_fourierIntegral\", \"SchwartzMap.integral_clm_comp_lineDerivOp_right_eq_neg_left\", \"MeasureTheory.contDiffOn_convolution_right_with_param_aux\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\"], \"digest\": \"9e017e400b33bb95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: FourierTransformDeriv.lean:507–529 treats a fixed frequency function and does not give joint parameter-symbol regularity or the localized oscillatory action. Parametric convolution hits require compact support in the integration variable, absent for the untruncated symbol. Existing dominated-integration nodes supply proof tools, not a one-line specialization of this item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudodifferential-residual-kernel",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: paragraph following Proposition 3.6, printed p.13: regular operators and smooth integral kernels; residual-order formulation with equality of distributional actions. Local Fourier input: the inverse frequency integral of a symbol of order r < -m-k is a C^k kernel, before assembling the residual operator.",
+   "via": [
+    "lem-sfb-pseudodifferential-residual-kernel",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-negative-symbol-finite-kernel",
+  "worker": "stage1",
+  "summary": "Q145 kept the statement verbatim and split its proof into seven steps. Explicit Leibniz bounds reduce all derivatives to one integrable Euclidean bracket weight. Reuse existing nodes for that weight, dominated differentiation/convergence, Bochner estimates, compact support integrability and Fubini. No new nodes; no project attachment or exact Mathlib match. Cutoff convergence is uniform, the zero extension is justified, and the oscillatory distributional action is identified by pairing against tests.",
+  "blueprint": "Latest main-20261024 chapter, sk-thm-sf-ctf-stability unit and direct-images proof (3) read. This is the inherited analytic prerequisite below the residual-kernel lemma, whose Fourier-kernel argument is realized by steps 1–4 and action assertion by steps 5–7. Whole-blueprint searches dominated, Fubini, integrable, pseudodifferential, Fourier and kernel found no duplicate of the local analytic statement. Preserve inherited from.node=null, place and via (blueprint_refs ancestor returns None)."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-c90be745d",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-c90be745d (reviewer sub-agent of L); spot-checked: Statement and stmt_deps are unchanged: they are byte-identical to clones/live and clones/side-live, where the node is unsplit. The delivery has no new nodes. All 8 proof_deps are in the same unit (sk-thm-sf-ctf-stability), so no tool_uses are needed. Seven are Mathlib leaves (compact minimum, Japanese-bracket integrability, Bochner majorant/linearity, dominated convergence over countably based filters, the parametric-integral derivative, compact-support integrability, product integrability/Fubini); the eighth is def-sfb-symbol-pseudodifferential-operators. I read the Demailly PDF online, since it is absent locally: (3.3)-(3.5) pp.6-7, 3.8/(3.9) p.8 for the kernel, and 3.12 pp.9-10 where S^{-inf} gives a smooth kernel. The item is the finite-order analogue in the def's (2pi)^{-m}e^{i(x-y)xi} convention. Steps checked. Step 1: zero extension is locally zero at the boundary of U; the empty-support case is handled; the cutoff-derivative bounds come from compact minimum on -|d chi|. Step 2: the Leibniz phase factors are (i xi) and (-i xi), and the term bound (1+|xi|)^{r+j} <= (1+|xi|^2)^{(r+k)/2} uses r+k<0. Step 3: s=-(r+k)/2>m/2 is exactly r<-m-k; the majorant is global, so the neighbourhood hypothesis of the derivative node holds; the induction gives C^k, and k=0 needs only continuity. Step 4: rho(xi/R)->1 with majorant (M+1)w gives global uniform convergence. Step 5: product integrability holds before the swap. Step 6: the def's limit after pairing with tests identifies the localized action with G, independently of the cutoff. Step 7: x-derivatives of the y-integral, and the real-part clause used by lem-sfb-pseudodifferential-residual-kernel. The strict threshold is necessary: at r=-m-k the weight is not integrable. Two details are implicit but elementary: matrix-vector integral commutation, done coordinatewise, and measurability of the iterated norm, which is continuous by dominated convergence. Searching for duplicates found lem-sfb-compact-symbol-frequency-kernel, lem-sfb-compact-oscillatory-amplitude-reduction and lem-sfb-fourier-symbol-product-remainder, none of which states the item. No fixes."
+ }
+}

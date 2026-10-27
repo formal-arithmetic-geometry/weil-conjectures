@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-finite-free-ring-congruence-torsion",
+ "kind": "statement",
+ "title": "Finite-order elements in an integral ring cannot be congruent to one at level at least three",
+ "statement": "Let $R$ be a unital associative ring, not necessarily commutative, whose additive group is free of finite rank over $\\mathbf Z$ (that is, it has a finite $\\mathbf Z$-basis [def-weil-pbc-free-module]). Let $n\\geq3$ and $r\\geq1$ be integers and let $u,b\\in R$. If $u^r=1$ and $u=1+n b$, where $n b$ is the sum of $n$ copies of $b$, then $u=1$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Lemma 14.5, printed p.63, and the eigenvalue argument of Proposition 14.4(b), printed p.62: general finite-free-ring formulation using its left regular representation; the finite-order conclusion uses characteristic-zero semisimplicity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite $\\mathbf Z$-basis $e_1,\\ldots,e_d$ of $R$ using [def-weil-pbc-free-module]. For $x\\in R$, let $M_x\\in M_d(\\mathbf Z)$ have column $j$ the coordinates of $xe_j$. Associativity and distributivity give $M_{xy}=M_xM_y$, $M_{x+y}=M_x+M_y$ and $M_1=I$. This representation is injective: $M_x=M_y$ implies $(x-y)e_j=0$ for every $j$, hence $(x-y)1=0$ by expanding $1$ in the basis, so $x=y$. If $d=0$ then $R$ is the zero ring and the conclusion holds. Otherwise put $U=M_u$, $B=M_b$; the hypotheses give $U^r=I$ and $U=I+nB$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(b), printed p.62, integral-endomorphism argument; explicit left regular representation adaptation."
+   }
+  },
+  {
+   "text": "Work on $V=\\mathbf C^d$, with $U,B$ acting by the same integer matrices. The field $\\mathbf C$ is algebraically closed by [lem-weil-complex-algebraically-closed]. The nonzero polynomial $p=X^r-1$ annihilates $U$ and satisfies $p\\prime=rX^{r-1}$ and $p-(X/r)p\\prime=-1$, since $r\\ne0$ in characteristic zero. If $p=h^2k$, differentiation gives $p\\prime=2hh\\prime k+h^2k\\prime$. Thus $h$ divides both $p$ and $p\\prime$, hence divides $-1$ by the displayed identity; it cannot be nonconstant. Therefore $p$ is squarefree in the explicit sense of [lem-sfb-squarefree-annihilator-invariant-complements], which supplies invariant complements for $U$.",
+   "uses": [
+    "lem-weil-complex-algebraically-closed",
+    "lem-sfb-squarefree-annihilator-invariant-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(b), printed p.62: characteristic-zero semisimplicity of the finite-order operator."
+   }
+  },
+  {
+   "text": "For an eigenvalue $\\lambda$ of $U$, choose $v\\ne0$ with $Uv=\\lambda v$. Induction gives $U^rv=\\lambda^rv$, so $\\lambda^r=1$. From $U=I+nB$ obtain $Bv=\\alpha v$ for $\\alpha=(\\lambda-1)/n$. By [lem-weil-cayley-hamilton-free-module], $B$ on $\\mathbf Z^d$ satisfies a monic $q\\in\\mathbf Z[X]$ of degree $d\\geq1$. Applying $\\mathbf Z\\to\\mathbf C$ to each entry preserves the finite sums and products in $q(B)=0$, so this equation also holds over $\\mathbf C$. Inductively $B^iv=\\alpha^iv$, whence $0=q(B)v=q(\\alpha)v$. Since $v\\ne0$, $q(\\alpha)=0$, proving that $\\alpha$ is an algebraic integer in exactly the sense of [def-weil-algebraic-integer].",
+   "uses": [
+    "lem-weil-cayley-hamilton-free-module",
+    "def-weil-algebraic-integer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(b), printed p.62: integrality of eigenvalues, made explicit by Cayley-Hamilton."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algebraic-integer-root-unity-congruence] in $K=\\mathbf C$ to $\\lambda=1+n\\alpha$, using $n\\geq3$, $r\\geq1$, $\\lambda^r=1$ and the integrality proved in Step 3. It gives $\\lambda=1$ for every eigenvalue of $U$.",
+   "uses": [
+    "lem-sfb-algebraic-integer-root-unity-congruence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Lemma 14.5, printed p.63, applied in the eigenvalue argument of Proposition 14.4(b)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-invariant-complements-eigenspace-span], the eigenspaces of $U$ span $\\mathbf C^d$, since Step 2 supplies the invariant complements. Step 4 shows that $U$ is the identity on each nonzero eigenspace, hence on their sum: $U=I$ over $\\mathbf C$.",
+   "uses": [
+    "lem-sfb-invariant-complements-eigenspace-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(b), printed p.62: removal of the unipotent possibility by characteristic-zero semisimplicity."
+   }
+  },
+  {
+   "text": "Each entry of $U-I$ is an integer whose image in $\\mathbf C$ is zero. Injectivity of $\\mathbf Z\\to\\mathbf C$ gives $M_u=M_1$ over $\\mathbf Z$. Injectivity of the explicit representation in Step 1 now gives $u=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(b), printed p.62, faithfulness of the left regular representation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-complex-algebraically-closed",
+  "lem-sfb-squarefree-annihilator-invariant-complements",
+  "lem-weil-cayley-hamilton-free-module",
+  "def-weil-algebraic-integer",
+  "lem-sfb-algebraic-integer-root-unity-congruence",
+  "lem-sfb-invariant-complements-eigenspace-span"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 14.4(b), printed p.62, and Lemma 14.5, printed p.63; left regular representation and characteristic-zero semisimplicity adaptation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A ring finite free as an abelian group has no nonidentity finite order unit congruent to one modulo an integer n at least three",
+   "results": "8 hits; logged top results: NumberField.Units.rootsOfUnity_eq_one, instIsCyclicUnitsOfFinite, DirichletCharacter.exists_apply_ne_one_of_hasEnoughRootsOfUnity, MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity, ZModModule.char_ne_one, isUnit_iff_not_dvd_char, rootsOfUnity.fintype, LucasLehmer.X.card_units_lt",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned congruence subgroups only define level subgroups of SL(2,Z); the roots-of-unity result requires a coprimality hypothesis absent here; Minkowski convex-body theorems are unrelated"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOfFinOrder\", \"Matrix\"",
+   "results": "0 hits; logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned congruence subgroups only define level subgroups of SL(2,Z); the roots-of-unity result requires a coprimality hypothesis absent here; Minkowski convex-body theorems are unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "Minkowski|principalCongruence|congruence.*torsion|torsion.*congruence",
+   "results": "25 hits; logged top results: Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean, Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean, Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean, Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned congruence subgroups only define level subgroups of SL(2,Z); the roots-of-unity result requires a coprimality hypothesis absent here; Minkowski convex-body theorems are unrelated"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The principal congruence subgroup of GL d Z of level n at least three is torsion free",
+   "results": "8 hits; logged top results: CongruenceSubgroup.Gamma1, CongruenceSubgroup.Gamma1', CongruenceSubgroup.Gamma, CongruenceSubgroup.termΓ(_), CongruenceSubgroup.Gamma_is_cong_sub, CongruenceSubgroup.Gamma1_is_congruence, CongruenceSubgroup.Gamma0, CongruenceSubgroup.Gamma0_is_congruence",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned congruence subgroups only define level subgroups of SL(2,Z); the roots-of-unity result requires a coprimality hypothesis absent here; Minkowski convex-body theorems are unrelated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minkowski lemma an integer matrix of finite order congruent to identity modulo n greater than two equals identity",
+   "results": "8 hits; logged top results: FixedDetMatrices.reps_one_id, CongruenceSubgroup.Gamma1_to_Gamma0_mem, CongruenceSubgroup.Gamma_mem, CongruenceSubgroup.Gamma1_mem, FixedDetMatrices.reduce_mem_reps, FixedDetMatrices.reps, FixedDetMatrices.reduce_of_pos, CongruenceSubgroup.Gamma_mem'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned congruence subgroups only define level subgroups of SL(2,Z); the roots-of-unity result requires a coprimality hypothesis absent here; Minkowski convex-body theorems are unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "congruence|IsOfFinOrder",
+   "results": "4 hits; logged top results: Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean; searched Mathlib/LinearAlgebra/Matrix",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned congruence subgroups only define level subgroups of SL(2,Z); the roots-of-unity result requires a coprimality hypothesis absent here; Minkowski convex-body theorems are unrelated"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion|finite.order|IsOfFinOrder",
+   "results": "2 hits; logged top results: Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean; searched Mathlib/NumberTheory/ModularForms",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned congruence subgroups only define level subgroups of SL(2,Z); the roots-of-unity result requires a coprimality hypothesis absent here; Minkowski convex-body theorems are unrelated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite order element u of an associative ring finite free over the integers with u equal to 1 plus n b and n at least 3 must equal 1",
+   "results": "{\"t\": \"2026-10-22T07:27:52Z\", \"tool\": \"leanfinder\", \"query\": \"A finite order element u of an associative ring finite free over the integers with u equal to 1 plus n b and n at least 3 must equal 1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.Units.rootsOfUnity_eq_one\", \"pow_eq_one_iff_cases\", \"Nat.cast_pow_eq_one\", \"Pell.IsFundamental.zpow_eq_one_iff\", \"pow_eq_one_iff_of_ne_zero\", \"not_fermatLastTheoremFor_one\", \"FermatLastTheoremForThreeGen.Solution'.u\", \"zpow_eq_one_iff_cases₀\"], \"digest\": \"aa65f6121bc5b843\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence-subgroup definitions and rootsOfUnity_eq_one do not prove arbitrary-rank integral torsion congruence rigidity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOfFinOrder\", \"Matrix\"",
+   "results": "{\"t\": \"2026-10-22T07:27:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsOfFinOrder\\\", \\\"Matrix\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence-subgroup definitions and rootsOfUnity_eq_one do not prove arbitrary-rank integral torsion congruence rigidity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral matrix of finite order congruent to the identity modulo an integer n at least three is the identity",
+   "results": "{\"t\": \"2026-10-22T07:27:41Z\", \"tool\": \"leansearch\", \"query\": \"An integral matrix of finite order congruent to the identity modulo an integer n at least three is the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CongruenceSubgroup.Gamma\", \"CongruenceSubgroup.IsCongruenceSubgroup\", \"CongruenceSubgroup.Gamma1_mem\", \"CongruenceSubgroup.Gamma_mem\", \"FixedDetMatrices.reps_one_id\", \"CongruenceSubgroup.Gamma0_mem\", \"CongruenceSubgroup.Gamma_mem'\", \"Matrix.IsTotallyUnimodular.one_fromRows\"], \"digest\": \"b99cd8369758665f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence-subgroup definitions and rootsOfUnity_eq_one do not prove arbitrary-rank integral torsion congruence rigidity."
+  },
+  {
+   "tool": "grep",
+   "query": "Minkowski|principalCongruence|congruence.*torsion|torsion.*congruence",
+   "results": "{\"t\": \"2026-10-22T07:27:41Z\", \"tool\": \"grep\", \"query\": \"Minkowski|principalCongruence|congruence.*torsion|torsion.*congruence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/ClassNumber.lean\", \"Mathlib/NumberTheory/NumberField/ClassNumber.lean\", \"Mathlib/NumberTheory/NumberField/ClassNumber.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\"], \"digest\": \"3907e1eb90e1b2d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence-subgroup definitions and rootsOfUnity_eq_one do not prove arbitrary-rank integral torsion congruence rigidity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minkowski lemma principal congruence subgroup of GL d Z level n greater than two has no torsion",
+   "results": "{\"t\": \"2026-10-22T07:27:52Z\", \"tool\": \"leanfinder\", \"query\": \"Minkowski lemma principal congruence subgroup of GL d Z level n greater than two has no torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CongruenceSubgroup.strictPeriods_Gamma0\", \"CongruenceSubgroup.strictPeriods_Gamma1\", \"CongruenceSubgroup.Gamma\", \"CongruenceSubgroup.strictPeriods_Gamma\", \"CongruenceSubgroup.Gamma0\", \"CongruenceSubgroup.Gamma1\", \"CongruenceSubgroup.strictWidthInfty_Gamma1\", \"Subgroup.instHasDetPlusMinusOneFinOfNatNatRealOfIsArithmetic\"], \"digest\": \"943a5494c2865bad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: congruence-subgroup definitions and rootsOfUnity_eq_one do not prove arbitrary-rank integral torsion congruence rigidity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarized-abelian-odd-level-rigidity",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Lemma 14.5, printed p.63, and the eigenvalue argument of Proposition 14.4(b), printed p.62: general finite-free-ring formulation using its left regular representation; the finite-order conclusion uses characteristic-zero semisimplicity.",
+   "via": [
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-free-ring-congruence-torsion",
+  "worker": "stage1",
+  "summary": "Retained the exact finite-free associative-ring statement. Read Milne I 14.4(b) and 14.5; wrote the faithful integral left regular representation and the Cayley-Hamilton eigenvalue calculation. Reduced the arithmetic step to a strictly smaller root-of-unity lemma and exposed the characteristic-zero semisimplicity argument as two Mathlib leaves. No Lean attachment, statement change or route change. Repair of returned head 7ecddd2755e: compared the retained delivery with the current unsplit DAG and reread all current cited statements; their verbatim citation quotes still agree. Made the positive degree and entrywise coefficient-map calculation explicit in Step 3; retained all three searched supporting nodes and the inherited statement and ancestry. Rebuilt the delivery through deliver.py against the current DAG. Repair of latest returned head 7822f0e95f9: current-DAG comparison again finds the item unsplit and all three children absent; all seven citation quotes still agree. Step 2 now differentiates a hypothetical square factor explicitly and uses the displayed Bezout identity to rule it out. The retained child statements, actual search records and proof route are unchanged.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3), through the polarized-abelian odd-level rigidity input to the prime-to-characteristic full-level moduli construction; realizes the inherited Milne 14.4(b)/14.5 subargument with no Rosati assumption on R."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-0df729943",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-0df729943 (reviewer sub-agent of L); spot-checked: Third push of this item. Both earlier heads (7ecddd2755e, 7822f0e95f9) were approved on the mathematics and returned by L only for the landing refusal 'not in the live DAG … L promotes it'. The item is still unsplit live and in side-live, with no review and none of the three children, so the delivery is not superseded. There is no repair note. Diff against 7822f0e: the three new nodes are byte-identical, and the item changes only in Step 2 and the split_report. Step 2 now proves squarefreeness directly: if p=h²k, then h divides p and p'=2hh'k+h²k', so h divides p−(X/r)p'=−1. This is correct and is a real change, not an A6 re-push. Source: Milne AV I Prop 14.4(b) and Lemma 14.5, read at PDF pp.68-69. Milne's Rosati ending is replaced by characteristic-zero semisimplicity, which the item's source field already names. Steps: (1) the regular representation is well defined from def-weil-pbc-free-module, multiplicative, and injective by expanding 1; d=0 is handled. (2) X^r−1 is nonzero, annihilates U and is squarefree, so the child gives invariant complements. (3) Cayley-Hamilton over Z gives a monic q of degree d≥1; the entrywise change to C and q(α)v=0 give α=(λ−1)/n integral, matching def-weil-algebraic-integer. (4) The arithmetic child applies with n≥3, r≥1 and λ^r=1, so λ=1. (5) The eigenspace-span leaf applies to C^d, so U=I. (6) Z→C is injective, so u=1. New nodes: the root-unity congruence child is exactly Milne 14.5 over a characteristic-0 field. It is true, statement-only, and the sharp case n=2, ζ=−1 is excluded; tested with ζ=i and ζ=ω at n=3. The squarefree leaf matches isSemisimple_of_squarefree_aeval_eq_zero (Semisimple.lean:218, Field only) with isSemisimple_iff (line 74). The eigenspace leaf matches IsSemisimple.iSup_eigenspace_eq_top (Eigenspace/Semisimple.lean:92, IsAlgClosed and FiniteDimensional). The item is still true; tested with r=0 and n=2 (both false and excluded), Z[ε]/ε², M₂(Z) and rank 0. An rg -L duplicate search found no node stating the item or any child. proof_deps equals the union of the uses. There is no cycle and no SGA source. All cited existing nodes are Mathlib leaves, so no tool_uses are needed. Advisory: algebraic closedness is cited in Step 2 but used in Step 5; not changed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteFreeRingCongruenceTorsion",
+  "declaration": "eq_one_of_finite_free_ring_congruence",
+  "file": "lean/Sheaf/RingTheory/FiniteFreeRingCongruenceTorsion.lean",
+  "statement": "theorem eq_one_of_finite_free_ring_congruence {R : Type v} [Ring R] [Module.Free ℤ R] [Module.Finite ℤ R] (n r : ℕ) (hn : 3 ≤ n) (hr : 1 ≤ r) (u b : R) (hpow : u ^ r = 1) (hcongr : u = 1 + n • b) : u = 1",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aea7d4cc6",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement eq_one_of_finite_free_ring_congruence matches the node clause by clause: [Ring R] (noncommutative and zero ring allowed), Module.Free ℤ R + Module.Finite ℤ R = finite ℤ-basis (def-weil-pbc-free-module → Mathlib Module.Free), n r : ℕ with 3 ≤ n and 1 ≤ r cover all admissible integers, u^r=1, u=1+n•b with nsmul as specified, conclusion u=1. lean.statement is verbatim in the file; stmt_deps unchanged; no statement_change or new nodes. Edge cases: rank 0, r=1 and M_d(ℤ)/ℤ[ε] included; n=2 and r=0 counterexamples excluded; universe v free. Only a sorry theorem; docstrings carry Milne I 14.4(b)/14.5 and the blueprint id plus the 6 proof steps; the report has Worker report and Second reading by Q08. Imported AlgebraicIntegerRootUnityCongruence exists live. No duplicate in Mathlib or the project. Not recompiled (no change)."
+ }
+}

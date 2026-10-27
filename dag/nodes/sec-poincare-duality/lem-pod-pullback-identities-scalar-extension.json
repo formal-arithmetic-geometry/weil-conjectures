@@ -35,80 +35,69 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-trf-integral-pullback-comparison-realization] to the stated $E\\subset L$, $h,k,K$. In its notation take $F_{f,F}=Lf_F^*$ and $a_{f,K}=\\alpha^f_K$. Its formulas specify exactly the composition families $c^E,c^L$ and the scalar family in our statement, and its displayed composition/scalar equation is clause (1), with the same source and target. This is an equality obtained from entire quotient diagrams, not an inference from separate finite reductions. No finite Tor-amplitude assumption is required.",
+   "text": "Identify the section-normalized module counit with integralInverseImageCounit_existsUnique: the inverse of integralInverseImageCounitSite is exactly pullbackIdentitySiteUnit. Uniqueness identifies their module and derived counits. Use the existing canonical completion calculus and the natural specified kappa normalization. Transport the invertibility of the reconstruction unit from any IntegralComparisonSystem through uniqueness of left adjoints. This proves pullbackIdentityKappa_isIso and fixes lambda as its inverse.",
    "uses": [
+    "lem-pod-completed-inverse-image-scalar-counit",
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-coef-derived-system-evaluation-calculus",
     "lem-trf-integral-pullback-comparison-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
-    "place": "First paragraph, pullback identity; coefficient coherence needed for common-stage arrows. Stacks 099N (proetale, lemma-pushforward-Noetherian-case)(2),(5) and 0D6D (sites-cohomology, lemma-derived-pullback-composition); the cited node supplies their normalized simultaneous refinement."
+    "place": "First paragraph: 'Pullback uses g_X^*f^*=f^*g_Y^*' and the inverse automorphism squares, read at the algebraically closed level of def-weil-derived-pullback-tensor-hom, where an arrow over a common finite field acts through the scalar-extension comparisons of lem-pur-integral-operations-scalar-extension; the blueprint leaves the compatibility of these comparisons with the composition and inverse identifications implicit."
    }
   },
   {
-   "text": "For clause (2), abbreviate $P_F=Lg_F^*$, $Q_F=L\\bar g_F^*$, $G_F=g^{-1}$ and $H_F=\\bar g^{-1}$. Both $G_F$ and $H_F$ are the exact site equivalences of [lem-weil-proetale-isomorphism-inverse-image]; write $u_F:H_FG_F\\xrightarrow{\\sim}\\mathrm{id}$ for their canonical inverse-image identification. By [lem-weil-isomorphism-derived-pullback] these functors and $P_F,Q_F$ preserve the stated constructible complete domains. The normalization theorem makes the specified $\\kappa$ invertible there; set $\\lambda^{g,F}=(\\kappa^{g,F})^{-1}$ and likewise for $\\bar g$. Thus the defined inverse identity is $\\epsilon^F=u_F\\circ H_F(\\lambda^{g,F})\\circ\\lambda^{\\bar g,F}_{P_F(-)}$, with every component on its required domain.",
+   "text": "For an arbitrary supplied D, apply reduction to its counit-built composition and scalar comparisons. Naturality of the adjunction counit gives their exact mate equations (composition_reduction and scalar_reduction). The actual unit is invertible on the constructible target by D.coefficient.complete, so equality after simultaneous reduction reflects equality of ambient derived arrows. Postcompose by the invertible iterated pullback/scalar counits. Their naturality and the derived_mixed equation of integralQuotientMixedCoherence identify the two resulting entire-system maps. Cancel the counits and reflect equality through reduction, proving clause (1) for this D, without choosing a different coherent system.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-isomorphism-derived-pullback",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-quotient-system-mixed-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
-    "place": "First paragraph, inverse automorphism squares and their identity pasting. Stacks 03D6 (sites-modules, definition-pushforward) and 08TC (derived, definition-derived-limit), using the cited specified-comparison normalization."
+    "place": "First paragraph: 'Pullback uses g_X^*f^*=f^*g_Y^*' and the inverse automorphism squares, read at the algebraically closed level of def-weil-derived-pullback-tensor-hom, where an arrow over a common finite field acts through the scalar-extension comparisons of lem-pur-integral-operations-scalar-extension; the blueprint leaves the compatibility of these comparisons with the composition and inverse identifications implicit."
    }
   },
   {
-   "text": "Use $\\beta^g:T_XG_E\\xrightarrow{\\sim}G_LT_Y$ and $\\beta^{\\bar g}:T_YH_E\\xrightarrow{\\sim}H_LT_X$ exactly as defined in [lem-weil-isomorphism-comparison-scalar-extension]. The comparison $\\alpha$ in that node is its specified tensor-and-completion map $Lg_L^*(\\chi_Y)[\\delta_P]\\chi_X^{-1}$; by [lem-pod-isomorphism-scalar-comparison-agreement], applied to $g$ and to $\\bar g$, it equals the whole-system scalar comparison $\\alpha^g$, resp. $\\alpha^{\\bar g}$, of our statement. That node therefore gives $\\alpha^g T_X(\\kappa^{g,E})=\\kappa^{g,L}\\beta^g$ for our $\\alpha^g$. Multiplying by $\\lambda^{g,L}$ on the left and by $T_X(\\lambda^{g,E})$ on the right gives $\\lambda^{g,L}_{T_YK}\\alpha^g_K=\\beta^g_K T_X(\\lambda^{g,E}_K)$. Applying the same statement to $\\bar g$ gives $\\lambda^{\\bar g,L}_{T_XM}\\alpha^{\\bar g}_M=\\beta^{\\bar g}_M T_Y(\\lambda^{\\bar g,E}_M)$. These are cancellation of invertible maps, using the normalization fixed in Step 2.",
+   "text": "For g and inv g, isomorphismScalarComparisonAgreement identifies the given whole-system scalar map with isomorphismComparisonScalarAlpha. Cancel the invertible kappa factors in isomorphismComparison_scalarExtension to get lambda_scalar. Naturality of the natural specified kappa, after inversion on complete inputs, gives lambda_naturality. Naturality of the scalarCompletion transformation and of isomorphismScalarTensorDerived gives beta_naturality; only the required completion components are inverted.",
    "uses": [
+    "lem-pod-isomorphism-scalar-comparison-agreement",
     "lem-weil-isomorphism-comparison-scalar-extension",
-    "lem-pod-isomorphism-scalar-comparison-agreement"
+    "lem-weil-isomorphism-comparison-natural"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
-    "place": "First paragraph, inverse automorphism squares. Cancellation of the specified scalar-comparison square, not an additional geometric theorem."
+    "place": "First paragraph: 'Pullback uses g_X^*f^*=f^*g_Y^*' and the inverse automorphism squares, read at the algebraically closed level of def-weil-derived-pullback-tensor-hom, where an arrow over a common finite field acts through the scalar-extension comparisons of lem-pur-integral-operations-scalar-extension; the blueprint leaves the compatibility of these comparisons with the composition and inverse identifications implicit."
    }
   },
   {
-   "text": "Check the inverse-image counit for these $\\beta$ maps. Write $C_W=-\\otimes^L_{R_{E,W}}R_{L,W}$ and $\\chi_W:C_W\\xrightarrow{\\sim}T_W$ as in [lem-weil-finite-free-completed-scalar-comparison]. The cited scalar-comparison node defines $\\beta^g=G_L(\\chi_Y)b^g\\chi_X^{-1}$, and similarly for $\\bar g$. In the sectionwise model of [lem-weil-proetale-isomorphism-inverse-image], $b$ only reindexes the tensor: $x\\otimes a\\mapsto g^{-1}(x_0\\otimes a_0)$ with the transported coefficient action. Reindexing along $g$ and then $\\bar g$ returns both $x$ and $a$ to themselves. Hence on the same complexes $u_{L,C_YK}\\,H_L(b^g_K)b^{\\bar g}_{G_EK}=C_Y(u_{E,K})$. This equality persists under sheafification and localization because both maps are this identical sectionwise tensor map. Substitute the displayed formulas for $\\beta$; the adjacent $H_L(\\chi_X^{-1})H_L(\\chi_X)$ cancel. Naturality of $u_L$ and then of $\\chi_Y$ gives\n$$u_{L,T_YK}H_L(\\beta^g_K)\\beta^{\\bar g}_{G_EK}=\\chi_{Y,K}C_Y(u_{E,K})\\chi_{Y,H_EG_EK}^{-1}=T_Y(u_{E,K}).$$",
+   "text": "Expand both epsilon maps. Move the scalar map through lambda for inv g by lambda_naturality; substitute lambda_scalar for both g and inv g. Move inverse image of lambda past beta_inv by beta_naturality. Identify the normalized derived counits by uniqueness from Step 1 and substitute the second equation of completedInverseImage_scalarCounit. Functoriality of scalar extension combines the resulting factors to scalar extension of epsilon_E, proving clause (2). These are identities of entire ambient derived arrows, with no finite-reduction detection or Tor-amplitude bound.",
    "uses": [
-    "lem-weil-isomorphism-comparison-scalar-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-proetale-isomorphism-inverse-image"
+    "lem-pod-completed-inverse-image-scalar-counit"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
-    "place": "First paragraph, inverse square pastes to identity. Explicit cancellation of the tensor/completion conjugations; Stacks 03D6 (sites-modules, definition-pushforward)."
-   }
-  },
-  {
-   "text": "Expand the left side of clause (2) using Step 2. Naturality of $\\lambda^{\\bar g,L}$ for the arrow $\\alpha^g_K$, followed by the two equations of Step 3, rewrites it as\n$$u_L\\,H_L(\\beta^g_K)\\,H_L(T_X\\lambda^{g,E}_K)\\,\\beta^{\\bar g}_{P_EK}\\,T_Y(\\lambda^{\\bar g,E}_{P_EK}).$$\nNaturality of $\\beta^{\\bar g}$ for $\\lambda^{g,E}_K:P_EK\\to G_EK$ changes the middle pair to $\\beta^{\\bar g}_{G_EK}\\,T_Y(H_E\\lambda^{g,E}_K)$. Step 4 now changes the initial triple to $T_Y(u_{E,K})$. Functoriality of $T_Y$ identifies the resulting product with\n$$T_Y\\bigl(u_{E,K}\\circ H_E(\\lambda^{g,E}_K)\\circ\\lambda^{\\bar g,E}_{P_EK}\\bigr)=T_Y(\\epsilon^E_K).$$\nThe naturality of $\\lambda$ is part of [lem-weil-isomorphism-derived-pullback]; that of $\\beta$ follows directly from its natural $b,\\chi$ formula in [lem-weil-isomorphism-comparison-scalar-extension]. All these arrows have the source and target displayed in clause (2).",
-   "uses": [
-    "lem-weil-isomorphism-derived-pullback",
-    "lem-weil-isomorphism-comparison-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
-    "place": "First paragraph, pasting of inverse automorphism squares is identity; the explicit naturality and cancellation argument for the integral scalar comparisons."
+    "place": "First paragraph: 'Pullback uses g_X^*f^*=f^*g_Y^*' and the inverse automorphism squares, read at the algebraically closed level of def-weil-derived-pullback-tensor-hom, where an arrow over a common finite field acts through the scalar-extension comparisons of lem-pur-integral-operations-scalar-extension; the blueprint leaves the compatibility of these comparisons with the composition and inverse identifications implicit."
    }
   }
  ],
  "proof_deps": [
+  "lem-pod-completed-inverse-image-scalar-counit",
+  "lem-weil-isomorphism-comparison-natural",
+  "lem-coef-derived-system-evaluation-calculus",
   "lem-trf-integral-pullback-comparison-realization",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-trf-quotient-system-mixed-coherence",
   "lem-pod-isomorphism-scalar-comparison-agreement",
-  "lem-weil-finite-free-completed-scalar-comparison"
+  "lem-weil-isomorphism-comparison-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
-  "place": "First paragraph, pullback and inverse automorphism squares; explicit scalar-normalized pasting supplied from the existing comparison nodes."
+  "place": "First paragraph, pullback and inverse automorphism squares. T3: direct counit mate calculation for arbitrary D and componentwise normalized inverse-square pasting."
  },
  "mathlib_searches": [
   {
@@ -199,10 +188,11 @@
   }
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pod-pullback-identities-scalar-extension",
   "worker": "stage1",
-  "summary": "Reused whole-system realization for composition and the specified inverse-image scalar-comparison square. Proved inverse counit coherence by the sectionwise tensor formula and cancellation of the completion comparisons, then pasted the two lambda squares. No new nodes. Clarified canonical normalizations and repaired literal newline escapes. Reviewer fix (Q18 maintainer reader, 2026-10-21): Step 3 now cites the statement-only node lem-pod-isomorphism-scalar-comparison-agreement, which identifies the whole-system scalar comparison of lem-trf-integral-pullback-comparison-realization with the specified alpha used by lem-weil-isomorphism-comparison-scalar-extension.",
+  "group": "Q123",
+  "summary": "Human re-split order: unchanged statement; extracted two statement-only nodes of comparable size. Original Steps 2/3/5 are retained as a general inverse-comparison/counit expansion lemma, with geometric typing and normalization in the assembly. Original Step 4 becomes completed inverse-image scalar counit coherence. Existing whole-system composition theorem still proves clause (1). Full original arguments and their allocation are retained in report.md.",
   "blueprint": "prop-weil-operations proof sentence 1 invokes lem-fix-weil-operations. Step 1 realizes its pullback composition identity with coefficients. Steps 2–5 realize its inverse automorphism identity with coefficients, which is required before common-stage Frobenius transport.",
   "tool_uses": [
    {
@@ -224,28 +214,21 @@
    {
     "node": "lem-weil-isomorphism-comparison-scalar-extension",
     "why": "Generic scalar square for the specified kappa and its explicit beta conjugation, not a Weil-lift theorem."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Generic natural completion comparison chi identifies ordinary finite-free scalar tensor with actual integral scalar extension."
    }
   ]
  },
  "tool_uses": [
   "lem-trf-integral-pullback-comparison-realization",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
   "lem-weil-isomorphism-comparison-scalar-extension",
   "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q18-ba354b21a",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q123-e772870b8",
+  "group": "Q123",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-ba354b21a (reviewer sub-agent of L); spot-checked: I read in full the item, its base text (the statement-only node from the N5 18aaf87f FIX), all 5 steps, every cited statement, the iso-comparison scalar node's proof, the blueprint source (main-20261015 lem-fix-weil-operations.proof.md first paragraph; prop-weil-operations sentence 1) and citer Steps 2-4. No SGA. The worker's STATEMENT-DISPUTED is correct: if λ and α are only existential, choosing λ^g_E=-1 and λ^{ḡ}_E=+1 makes clause (2) say +1=-1. Fixing λ=κ^{-1} (def-weil-inverse-image-pullback-comparison(b), invertible on complete objects by the normalization node) and taking c, α from lem-trf picks out the canonical maps; no hypothesis was changed and nothing is weakened. Step 1: clause (1) is literally the composition/scalar equation of lem-trf-integral-pullback-comparison-realization, with the same hypotheses. Steps 2, 4 and 5: I recomputed the χ-cancellation, the b-counit identity on K-flat G_EP, and the pasting through naturality of λ^{ḡ} and β^{ḡ}; all are correct and every intermediate object is in D^b_c. One fault, C4/E5, in Step 3: the square ακ=κβ of lem-weil-isomorphism-comparison-scalar-extension holds for that node's α, the δ_P map of lem-weil-specified-pullback-comparison-alpha. The item's α is lem-trf's a=μ^{-1}λ. Both nodes claim to specify lem-pur's existential α, and no node in the DAG says they are equal. FIX: I added the statement-only node lem-pod-isomorphism-scalar-comparison-agreement (a_{g,K}=α_K for scheme isomorphisms g; unsplit, sk-lem-finite, created.item = this item, 2 grep searches recorded, blueprint.from = prop-weil-operations via [item, semilinear-lifts]). Step 3 now cites it and is marked non-elementary; proof_deps are updated. There is no cycle and no duplicate. I accept the 6 declared generic tool_uses (lem-trf, iso-inverse-image, iso-derived-pullback, κ normalization, iso-comparison-scalar, finite-free χ). Advisory: Step 2 of the citer lem-pod-semilinear-field-operation-lifts should fix λ=κ^{-1} to match clause (2).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-e772870b8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the repair note (human re-split, released 2026-10-22), the blueprint main-20261015 lem-fix-weil-operations proof (first paragraph) via prop-weil-operations sentence 1, and the base proof. The live item still has the Q18 five-step proof, so the delivery is not superseded. The statement is byte-identical to live. No SGA. Re-split: the five old step texts are kept verbatim in the report. Old Steps 1 and 2 (a citation and the setup) stay as assembly Steps 1 and 2. Old Step 3's cancellation and old Step 5's expansion become lem-pod-inverse-comparison-counit-transport. Old Step 4 becomes lem-pod-completed-inverse-image-scalar-counit, both equations included. The two nodes are about 1.9k and 2.2k characters, comparable size. The assembly is 2432 characters, 2750 after the fix. Transport node: I recomputed the proof (invert the two κ-squares, then use naturality of ν_L, the inverse d-square and naturality of e at λ_E). It is true, every composite is well typed, it assumes no u_E/u_L relation and it does not restate an item clause. Counit node: types checked. Equation 1 is the sectionwise σ/c reindexing coherence along gḡ=id from old Step 4. Equation 2 follows by χ-cancellation and naturality of u_L and χ_Y (recomputed). Edge cases g=id, E=L, K=0 and ramified L/E (R_L finite free) are fine. Assembly Step 3 instantiates the transport lemma correctly, with the κ-squares from lem-weil-isomorphism-comparison-scalar-extension and the α agreement from lem-pod-isomorphism-scalar-comparison-agreement, and v_F=ε^F. Step 4 is correct by functoriality of T_Y. rg -L search found no duplicates; lem-weil-point-automorphism-transport-scalar-extension and lem-pd-monoidal-adjunction-equivalence-transport state other things. FIX 1 (C4/E5): the transport lemma needs natural κ and β, and the old Step 5 sentence justifying this was dropped. I restored it in Step 3, citing the κ inverse G(u)^{-1}θ of the normalization node and b, χ naturality from lem-weil-isomorphism-comparison-scalar-extension and lem-weil-finite-free-completed-scalar-comparison. Step 3 uses and proof_deps are extended accordingly. FIX 2 (B9): both new nodes' blueprint.from.place named a lem-fix-weil-operations place instead of a prop-weil-operations proof place. I replaced it with prop-weil-operations proof sentence 1 at the inverse-automorphism-square passage. I accept the inherited generic tool_uses.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PullbackIdentitiesScalarExtension",
@@ -274,5 +257,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Node unchanged except lean; lean.statement verbatim; 8 declarations match; 3 sorries, all in named theorems with docstrings. Clause 1 = the realization dependency's scalarComposition equation with its D-built composition and scalar maps; the ∀ D form is the landed pattern because D's models are pinned by normalization. Clause 2: λ=(asIso κ).symm with κ=inverseImagePullbackComparisonDerived; κ invertibility follows from the Lean of the stmt_dep isomorphismDerivedPullbackComparisonNormalization; counit u = ∃!.choose pinned sectionwise by M.val.map of the Over.mapId/mapComp site unit (no existing counit, so no H4 duplicate); ε order and equation directions match the node. Common universe u as in the dependencies; no added hypotheses; edge cases E=L, g=𝟙, empty schemes covered. Advisory: two unused proof-only plain imports. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261025T071208-L-134174",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

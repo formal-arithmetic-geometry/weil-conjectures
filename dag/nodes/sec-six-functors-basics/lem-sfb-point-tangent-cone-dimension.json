@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-point-tangent-cone-dimension",
+ "kind": "statement",
+ "title": "Dimension and inclusion of algebraic tangent cones at a smooth ambient point",
+ "statement": "Let $k$ be algebraically closed [def-weil-field, def-weil-algebraic-closure], let $Y$ be a smooth separated geometrically integral finite-type $k$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-geometrically-irreducible, def-weil-finite-type-morphism], and let $p\\in Y(k)$ [def-pc-rational-point]. Separated means that the diagonal is a closed immersion. Then $d=\\dim Y$ is a finite nonnegative integer [def-kun-topological-krull-dimension] and the $k$-vector space $E=T_{Y/k,p}$ has dimension $d$ [def-sc-scheme-tangent-space]. Let $Z\\hookrightarrow Y$ be a reduced closed subscheme containing $p$ [def-weil-closed-immersion, def-pc-reduced-scheme], let $R=\\mathcal O_{Z,p}$ be its local ring [def-weil-pbc-module-stalk], and let $\\mathfrak m$ be the maximal ideal of $R$. The algebraic tangent cone\n$$C_pZ=\\operatorname{Spec}\\left(\\bigoplus_{n\\ge0}\\mathfrak m^n/\\mathfrak m^{n+1}\\right)$$\n[def-weil-affine-spectrum, def-weil-pbc-associated-graded-ring] is canonically a closed subscheme of the affine space associated to $E$. Here the affine space associated to $E$ has coordinate ring the symmetric algebra on the dual $E^*=\\operatorname{Hom}_k(E,k)$, that is, the tensor algebra modulo the relations $v\\otimes w-w\\otimes v$. One has\n$$\\dim C_pZ=\\dim R\\le\\dim Z\\le d,$$\nwhere ring dimension is [def-weil-pbc-krull-dimension-ring]. If $|Z|\\ne|Y|$, then $\\dim C_pZ<d$. If $D$ is a smooth locally closed $k$-subscheme of $Y$ containing $p$ with $|D|\\subseteq|Z|$, then the differential identifies $T_{D/k,p}$ with a linear subspace of $E$ whose associated affine subspace has underlying space contained in $|C_pZ|$. Locally closed means closed in an open subscheme of $Y$ [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00KQ (proposition-dimension), Tag 00P6 (lemma-dimension-graded), Tag 00NO (lemma-regular-graded), Tag 00OU (lemma-dimension-closed-point-finite-type-field). Geometric formulation used in Milne, Abelian Varieties, I.3.6, printed p.18: C_P(V_H) contained in C_P(Z) contained in Tgt_P(V), and dim C_P(Z)=dim Z locally at P. For a quotient local ring the associated-graded map is surjective degree by degree; restricting to an open neighbourhood preserves the local ring."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-pc-rational-point",
+  "def-kun-topological-krull-dimension",
+  "def-sc-scheme-tangent-space",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-module-stalk",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-open-immersion",
+  "def-sfb-tangent-base-scalars-stalk-maps",
+  "def-sfb-symmetric-algebra-construction"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{Y,p}$, $\\mathfrak n=\\mathfrak m_{Y,p}$, and $V=\\mathfrak n/\\mathfrak n^2$. A rational section induces inverse structural maps on the residue field and $k$, so $\\kappa(p)=k$. The smooth-scheme regularity lemma makes $A$ a Noetherian regular local ring. Its dimension is a finite nonnegative integer. The rational-point stalk dimension lemma gives $\\dim A=\\dim_pY$, and the irreducible locally algebraic dimension lemma gives $\\dim_pY=\\dim Y$, because $Y$ is integral and locally of finite type over $k$. Thus $d=\\dim Y=\\dim A$ is finite. The given point ensures that the rings and spaces here are nonempty.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-ag-rational-point-stalk-topological-local-dimension",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056S (lemma-smooth-regular), 0A21 (lemma-dimension-locally-algebraic), (2),(3); algebra.tex Tag 00KQ (proposition-dimension)."
+   }
+  },
+  {
+   "text": "The regular-local graded cotangent criterion gives $\\dim_kV=d$ and the canonical graded isomorphism $\\mu_A:\\operatorname{Sym}_k(V)\\xrightarrow{\\sim}\\operatorname{gr}_{\\mathfrak n}A$, sending $v_1\\cdots v_q$ to the product of representatives modulo $\\mathfrak n^{q+1}$. Rational tangent–cotangent duality identifies $E$ with $V^*$. Explicitly, for a basis $v_1,\\ldots,v_d$ of $V$, its dual basis $e_1,\\ldots,e_d$ is a basis of $E$, and evaluation sends $v_i$ to the functional $e_j\\mapsto\\delta_{ij}$. It therefore canonically identifies $V=E^*$, and $\\dim_kE=d$, also when $d=0$. The symmetric algebra in this identification is exactly the tensor-algebra quotient in the statement.",
+   "uses": [
+    "lem-sfb-regular-local-graded-cotangent-criterion",
+    "lem-sc-rational-tangent-cotangent-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NO (lemma-regular-graded), canonical multiplication map; varieties.tex Tag 0B2E (lemma-tangent-space-rational-point)."
+   }
+  },
+  {
+   "text": "The affine quotient description of a closed immersion identifies $R$ with $A/I$ for an ideal $I\\subseteq\\mathfrak n$, and $\\mathfrak m=\\mathfrak nR$. The affine-open stalk localization theorem identifies chart stalks with prime localizations, and the Spec-map stalk localization theorem identifies the actual stalk map with the map on fractions. The quotient map remains surjective after localization: a fraction in the localized quotient lifts by lifting its numerator and denominator, the latter being outside the maximal ideal. A quotient of a finitely generated affine $k$-algebra is generated by the images of the same generators, so $Z$ is locally of finite type over $k$. Ascending chains of ideals of $R$ lift to ascending chains of ideals of $A$, so $R$ is Noetherian. It is nonzero with residue field $k$. The canonical graded map $G(A\\to R)$ sends $[a]_q$ to its image $[\\bar a]_q$. It is surjective in every degree, since $\\mathfrak m^q$ is the image of $\\mathfrak n^q$: lift the finitely many coefficients and factors in a sum of products representing an element of $\\mathfrak m^q$. Hence the composite $\\operatorname{Sym}_k(E^*)\\xrightarrow{\\mu_A}\\operatorname{gr}_{\\mathfrak n}A\\twoheadrightarrow\\operatorname{gr}_{\\mathfrak m}R$ is a canonical graded surjection. Its spectrum is the required closed subscheme $C_pZ$ of the affine space of $E$, by the same affine quotient characterization of closed immersions.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-power-quotient-graded-comparison",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Affine quotient characterization (Morphisms Tag 01QO, lemma-closed-immersion); representative calculation for powers and their quotients."
+   }
+  },
+  {
+   "text": "Write $S=\\operatorname{gr}_{\\mathfrak m}R$. The maximal-adic graded-length bridge says that $S$ is standard graded over $k$ and $\\sum_{j=0}^{n-1}\\dim_kS_j=\\mathrm{length}_R(R/\\mathfrak m^n)$ for every $n\\ge1$. The Hilbert–Samuel growth theorem supplies a nonzero polynomial $Q$ agreeing eventually with this length and satisfying $\\deg Q=\\dim R$. Apply the standard-graded cumulative-dimension lemma to this very $Q$: $\\dim S=\\deg Q=\\dim R$. The ring-dimension definition identifies $\\dim\\operatorname{Spec}S=\\dim S$, giving $\\dim C_pZ=\\dim R$. This argument permits a nonreduced associated graded ring and a constant $Q$.",
+   "uses": [
+    "lem-trf-maximal-adic-graded-length-bridge",
+    "lem-trf-hilbert-samuel-growth-dimension",
+    "lem-sfb-standard-graded-cumulative-dimension",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P6 (lemma-dimension-graded), cumulative form, combined with the maximal-ideal Hilbert function in proposition-dimension, Tag 00KQ."
+   }
+  },
+  {
+   "text": "Apply the rational-point stalk dimension lemma to $Z$: $\\dim R=\\dim_pZ\\le\\dim Z$, since $Z$ itself is one of the open neighbourhoods in the definition of $\\dim_pZ$. A chain of irreducible closed subsets of $Z$ is a chain of the same length in $Y$, since $Z$ is closed in $Y$; hence $\\dim Z\\le d$. If $|Z|\\ne|Y|$, append $Y$ to any such chain in $Z$. This strictly increases its length because $Y$ is irreducible and every member is contained in the proper closed subset $Z$. Thus every chain in $Z$ has length at most $d-1$, so $\\dim C_pZ\\le\\dim Z<d$. For $d=0$ this shows that no proper $Z$ containing $p$ can occur.",
+   "uses": [
+    "lem-ag-rational-point-stalk-topological-local-dimension",
+    "def-kun-topological-dimension-at-point",
+    "def-kun-topological-krull-dimension",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Definition 0055 (definition-Krull), chain and neighbourhood definitions; varieties.tex 0A21, closed-point dimension."
+   }
+  },
+  {
+   "text": "Now let $D$ satisfy the final hypothesis and put $B=\\mathcal O_{D,p}$, with maximal ideal $\\mathfrak b$. Smoothness over $k$ makes $D$ reduced and makes $B$ regular local. Since $|D|\\subseteq|Z|$, the reduced-source factorization lemma applied to $D\\to Y$ gives a factorization $D\\to Z\\to Y$. Choose the open neighbourhood of $p$ in which $D$ is closed. The affine-open and Spec-map stalk localization theorems identify its local map with the localized coordinate quotient, as in step 3, giving a surjection $A\\twoheadrightarrow B$; the stalk is unchanged on that neighbourhood. Factoring through $R$ gives $A\\twoheadrightarrow R\\twoheadrightarrow B$. Both quotient maps send the maximal ideal onto the maximal ideal, and the residue fields are $k$, since these are the same rational point.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (lemma-map-into-reduction); varieties.tex Tags 056S (lemma-smooth-regular), 056T (lemma-smooth-geometrically-normal)."
+   }
+  },
+  {
+   "text": "Apply the canonical graded-map construction to $A\\twoheadrightarrow R\\twoheadrightarrow B$. The maps compose on representatives, and the second is degreewise surjective by the power-lifting argument of step 3. By regularity, $\\operatorname{gr}_{\\mathfrak b}B=\\operatorname{Sym}_k(\\mathfrak b/\\mathfrak b^2)$ canonically. The degree-one map $V\\twoheadrightarrow\\mathfrak b/\\mathfrak b^2$ is surjective, so its dual is injective: a functional whose pullback vanishes vanishes on every lifted vector. Tangent–cotangent naturality identifies that dual with $\\mathrm d(D\\to Y)_p$, realizing $T_{D/k,p}$ as a linear subspace of $E$. Under the regular graded identifications, the composite $\\operatorname{Sym}_k(E^*)\\to\\operatorname{gr}_{\\mathfrak b}B$ is exactly the symmetric-algebra map of this cotangent surjection: on a degree-one class it sends a representative in $A$ to its image in $B$, and agreement on generators determines an algebra map. Consequently its spectrum is the associated affine linear subspace of $E$. It factors through $\\operatorname{Spec}(\\operatorname{gr}_{\\mathfrak m}R)=C_pZ$, proving the asserted inclusion of underlying spaces (in fact a closed immersion).",
+   "uses": [
+    "lem-sfb-power-quotient-graded-comparison",
+    "lem-sfb-regular-local-graded-cotangent-criterion",
+    "lem-sc-rational-tangent-cotangent-duality",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NO (lemma-regular-graded), representative multiplication; varieties.tex Tags 0B2E and 0B2F (lemma-map-tangent-spaces); Milne AV I.3.6, printed p.18, tangent-cone inclusions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sfb-regular-local-graded-cotangent-criterion",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "def-weil-closed-immersion",
+  "lem-sfb-power-quotient-graded-comparison",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-sfb-standard-graded-cumulative-dimension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I.3.6, printed p.18, tangent-cone inclusions and dimension; expanded with the cited Stacks results and elementary quotient/chain calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded ring of the maximal ideal of a Noetherian local ring has the same Krull dimension as the original ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a regular element in the maximal ideal of a local ring $ R $, then the Krull dimension of $ R $ satisfies $ \\\\dim(R) = \\\\dim(R/(x)) + 1 $, where $ R/(x) $ denotes the quotient ring of $ R $ \"}\n  {\"name\": \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R], FiniteRingKrullDim R\", \"doc\": \"Every Noetherian local ring has finite Krull dimension. This instance asserts that if a commutative ring is both Noetherian (every ideal is finitely generated) and local (possessing a unique maximal i\"}\n  {\"name\": \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  IsSMulRegular R x → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R\", \"doc\": \"For a local ring $ R $, if $ x $ is a regular element in its maximal ideal, then the Krull dimension of the quotient ring $ R / (x) $ satisfies $ \\\\dim(R / (x)) + 1 = \\\\dim(R) $.\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ IsLocalRing.maximalIdeal R → ringKrullDim R ≤ ringKrullDim (R ⧸ x • ⊤) + 1\", \"doc\": \"If $ x $ is an element of the maximal ideal of a commutative semiring $ R $, then the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R/(x) $ plus one, i.e., $ \\\\dim(R) \\\\\"}\n  {\"name\": \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {x : R},\\n  x ∈ nonZeroDivisors R → x ∈ IsLocalRing.maximalIdeal R → ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a non-zero divisor in the maximal ideal of a local ring $ R $, then the Krull dimension of the quotient ring $ R / (x) $ satisfies $ \\\\dim(R / (x)) + 1 = \\\\dim(R) $, where $ (x) $ denotes th\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_card\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] {S : Finset R},\\n  ↑S ⊆ ↑(IsLocalRing.maximalIdeal R) → ringKrullDim R ≤ ringKrullDim (R ⧸ Ideal.span ↑S) + ↑S.card\", \"doc\": \"For a commutative ring $ R $ and a finite set $ S $ of elements in the maximal ideal of $ R $, the Krull dimension of $ R $ is at most the Krull dimension of the quotient ring $ R / I $ (where $ I $ i\"}\n  {\"name\": \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\", \"module\": \"Mathlib/RingTheory/Ideal/Height\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  ↑(IsLocalRing.maximalIdeal R).primeHeight = ringKrullDim R\", \"doc\": \"In a local ring $ R $, the prime height of the maximal ideal $ \\\\mathfrak{m} $ is equal to the Krull dimension of $ R $, i.e., $ \\\\operatorname{ht}(\\\\mathfrak{m}) = \\\\dim(R) $.\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib/RingTheory/KrullDimension/Regular\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R] {I : Ideal R},\\n  I ≠ ⊤ → ringKrullDim R ≤ ringKrullDim (R ⧸ I) + ↑(Submodule.spanFinrank I)\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the tangent-cone hits are from real/normed analysis; the algebra hits give local Krull dimension finiteness or dimension after quotient by a regular element. None states the dimension and closed-cone inclusion assertions for a closed subscheme of a smooth variety."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed subscheme of a smooth variety the algebraic tangent cone is a closed cone in the tangent space and its dimension equals the local dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"tangentConeAt_closure\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Basic\", \"type\": \": tangentConeAt 𝕜 (closure s) x = tangentConeAt 𝕜 s x\", \"doc\": \"For a set $ s $ in a topological additive commutative group $ E $ with an $ R $-module structure, the tangent cone at a point $ x $ of the closure of $ s $ is equal to the tangent cone at $ x $ of $ s\"}\n  {\"name\": \"tangentConeAt_def\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Defs\", \"type\": \"∀ (R : Type u_1) {E : Type u_2} [inst : AddCommGroup E] [inst_1 : SMul R E] [inst_2 : TopologicalSpace E] (s : Set E)\\n  (x : E), tangentConeAt R s x = {y | ClusterPt y (⊤ • nhdsWithin 0 ((fun x_1 => x + x_1) ⁻¹' s))}\", \"doc\": \"The tangent cone at $ x $ of a set $ s \\\\subseteq E $ in a topological module $ E $ over a ring $ R $ is the set of all cluster points $ y \\\\in E $ obtained by scaling neighborhoods around $ 0 $ in the \"}\n  {\"name\": \"tangentConeAt\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Defs\", \"type\": \"(R : Type u_1) → {E : Type u_2} → [AddCommGroup E] → [SMul R E] → [TopologicalSpace E] → Set E → E → Set E\", \"doc\": \"The tangent cone at $ x $ of a set $ s \\\\subseteq E $ is the set of all cluster points $ y \\\\in E $ obtained by scaling neighborhoods around $ 0 $ in the preimage of $ s $ under the translation map $ z \"}\n  {\"name\": \"tangentConeAt_univ\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Basic\", \"type\": \": tangentConeAt 𝕜 univ x = univ\", \"doc\": \"For any point $x$ in a topological $R$-module $E$ over a division semiring $\\\\mathbb{K}$, the tangent cone at $x$ of the universal set $E$ is equal to $E$ itself, i.e., $\\\\operatorname{TanCone}_x(E) = E\"}\n  {\"name\": \"zero_mem_tangentConeAt\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Basic\", \"type\": \"(hx : x ∈ closure s) : 0 ∈ tangentConeAt 𝕜 s x\", \"doc\": \"If $x$ is in the closure of a set $s$, then the zero vector $0$ is contained in the tangent cone at $x$ of $s$.\"}\n  {\"name\": \"mem_tangentConeAt_of_add_smul_mem\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Basic\", \"type\": \"{α : Type*} {l : Filter α} [l.NeBot] {c : α → 𝕜} (hc₀ : Tendsto c l (𝓝[≠] 0)) (hmem : ∀ᶠ n in l, x + c n • y ∈ s) :\\n  y ∈ tangentConeAt 𝕜 s x\", \"doc\": \"Let $ E $ be a topological module over a division ring $ \\\\mathbb{K} $, and let $ s \\\\subseteq E $. If there exists a non-bot filter $ l $ on a type $ \\\\alpha $, a function $ c : \\\\alpha \\\\to \\\\mathbb{K} $,\"}\n  {\"name\": \"zero_mem_tangentConeAt_iff\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Basic\", \"type\": \": 0 ∈ tangentConeAt 𝕜 s x ↔ x ∈ closure s\", \"doc\": \"The zero vector is in the tangent cone at $ x $ of the set $ s $ if and only if $ x $ is in the closure of $ s $.\"}\n  {\"name\": \"zero_mem_tangentCone\", \"module\": \"Mathlib.Analysis.Calculus.TangentCone.Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} [inst : AddCommGroup E] [inst_1 : Semiring 𝕜] [inst_2 : Module 𝕜 E]\\n  [inst_3 : TopologicalSpace E] [ContinuousAdd E] {s : Set E} {x : E}, x ∈ closure s → 0 ∈ tangentConeAt 𝕜 s x\", \"doc\": \"In a topological $\\\\mathbb{K}$-module $E$ with continuous addition, if $x$ is in the closure of a subset $s \\\\subseteq E$, then the zero vector $0 \\\\in E$ belongs to the tangent cone of $s$ at $x$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the tangent-cone hits are from real/normed analysis; the algebra hits give local Krull dimension finiteness or dimension after quotient by a regular element. None states the dimension and closed-cone inclusion assertions for a closed subscheme of a smooth variety."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"ringKrullDim\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the tangent-cone hits are from real/normed analysis; the algebra hits give local Krull dimension finiteness or dimension after quotient by a regular element. None states the dimension and closed-cone inclusion assertions for a closed subscheme of a smooth variety."
+  },
+  {
+   "tool": "grep",
+   "query": "tangent.?cone|associated.?graded.*dimension|dimension.*associated.?graded",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/IsManifold/Basic.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Analysis.RCLike.TangentCone\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/MFDeriv/Basic.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.Calculus.TangentCone.Prod\"}\n  {\"file\": \"Mathlib/Analysis/RCLike/TangentCone.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Analysis.Calculus.TangentCone.Real\"}\n  {\"file\": \"Mathlib/Analysis/RCLike/TangentCone.lean\", \"line\": \"24\", \"text\": \"theorem tangentConeAt_real_subset_isRCLikeNormedField :\"}\n  {\"file\": \"Mathlib/Analysis/RCLike/TangentCone.lean\", \"line\": \"25\", \"text\": \"    tangentConeAt ℝ s x ⊆ tangentConeAt 𝕜 s x := by\"}\n  {\"file\": \"Mathlib/Analysis/RCLike/TangentCone.lean\", \"line\": \"27\", \"text\": \"  exact tangentConeAt_mono_field\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.Analysis.Calculus.TangentCone.Prod\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.Analysis.Calculus.TangentCone.Prod\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"59\", \"text\": \"      ∀ u ∈ tangentConeAt ℝ t (φ (a, b)), ∀ v ∈ tangentConeAt ℝ t (φ (a, b)),\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"185\", \"text\": \"    have hdψ_mem (u) : dψ (a, b) u ∈ tangentConeAt ℝ t (φ (a, b)) := by\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"186\", \"text\": \"      refine tangentConeAt_mono hψUt.image_subset ?_\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CurveIntegral/Poincare.lean\", \"line\": \"188\", \"text\": \"      refine (hdψ _ hU).hasFDerivWithinAt.mapsTo_tangent_cone ?_\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Darboux.lean\", \"line\": \"46\", \"text\": \"      have : b - a ∈ posTangentConeAt (Icc a b) a :=\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Darboux.lean\", \"line\": \"47\", \"text\": \"        sub_mem_posTangentConeAt_of_segment_subset (segment_eq_Icc hab ▸ Subset.rfl)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Darboux.lean\", \"line\": \"54\", \"text\": \"      have : a - b ∈ posTangentConeAt (Icc a b) b :=\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Darboux.lean\", \"line\": \"55\", \"text\": \"        sub_mem_posTangentConeAt_of_segment_subset (by rw [segment_symm, segment_eq_Icc hab])\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/FDeriv/Defs.lean\", \"line\": \"68\", \"text\": \"`UniqueDiffOn s`, defined in `TangentCone.lean` express this property. We prove that indeed\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Analysis.Calculus.TangentCone.DimOne\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/Basic.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Analysis.Calculus.TangentCone.Real\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LocalExtr/Basic.lean\", \"line\": \"15\", \"text\": \"In a real normed space `E` we define `posTangentConeAt (s : Set E) (x : E)`.\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LocalExtr/Basic.lean\", \"line\": \"16\", \"text\": \"This would be the same as `tangentConeAt ℝ≥0 s x` if we had a theory of normed semifields.\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LocalExtr/Basic.lean\", \"line\": \"32\", \"text\": \"  `y` and `-y` belong to the positive tangent cone, then `f' y = 0`.\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LocalExtr/Basic.lean\", \"line\": \"51\", \"text\": \"* [Tangent cone](https://en.wikipedia.org/wiki/Tangent_cone);\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/LocalExtr/Basic.lean\", \"line\": \"55\", \"text\": \"local extremum, tangent cone, Fermat's Theorem\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/TangentCone/Prod.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Analysis.Calculus.TangentCone.Defs\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the tangent-cone hits are from real/normed analysis; the algebra hits give local Krull dimension finiteness or dimension after quotient by a regular element. None states the dimension and closed-cone inclusion assertions for a closed subscheme of a smooth variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed immersion induces an inclusion of algebraic tangent cones and a regular local ring has polynomial associated graded ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionInclusion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I J : X.IdealSheafData} (h : I ≤ J),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.IdealSheafData.inclusion h)\", \"doc\": \"For any scheme $X$ and ideal sheaf data $\\\\mathcal{I} \\\\leq \\\\mathcal{J}$ on $X$, the inclusion morphism from the closed subscheme defined by $\\\\mathcal{J}$ to the closed subscheme defined by $\\\\mathcal{I}\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and point $x \\\\in X$, the morphism of schemes $\\\\operatorname{Spec}(k(x)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ \"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Scheme.Hom.liftCoborder f)\", \"doc\": \"If $ f: X \\to Y $ is an immersion of schemes, then the morphism $ f $ lifted to the cobord of the image of $ f $ is a closed immersion. The cobord is the open subset of $ Y $ obtained as the complement\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {R : CommRingCat} (I : Ideal ↑R),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} {f : X ⟶ AlgebraicGeometry.Spec R},\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    ∃ I e,\\n      f =\\n        CategoryTheory.CategoryStruct.comp e.hom (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.IsPreimmersion I.subschemeι\", \"doc\": \"For any scheme $ X $ and ideal sheaf $ \\\\mathcal{I} $ on $ X $, the canonical morphism from the closed subscheme defined by $ \\\\mathcal{I} $ to $ X $ satisfies the conditions of a preimmersion in algebr\"}\n  {\"name\": \"AlgebraicGeometry.instIsPreimmersionFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecStalk x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is a preimmersion.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the tangent-cone hits are from real/normed analysis; the algebra hits give local Krull dimension finiteness or dimension after quotient by a regular element. None states the dimension and closed-cone inclusion assertions for a closed subscheme of a smooth variety."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-pointed-curves-dense",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne I.3.6, printed p.18: hyperplanes through P transverse to the tangent space, followed by the tangent-cone dimension argument. Historical alteration/Picard branch serving det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-abelian-product-axis-rigidity; the latest direct-images proof no longer contains the historical auxiliary Picard argument.",
+   "via": [
+    "lem-sfb-smooth-pointed-curves-dense",
+    "lem-sfb-abelian-product-axis-rigidity",
+    "lem-sfb-affine-product-algebraic-equivalence",
+    "lem-sfb-birigidified-affine-triviality-locus",
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power",
+    "lem-sfb-normal-group-square-power",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-point-tangent-cone-dimension",
+  "worker": "stage1",
+  "summary": "Expanded the tangent-cone argument into seven steps. Reused regular-local graded cotangent, smooth regularity, rational tangent duality, quotient graded-map, reduced factorization, and Hilbert–Samuel nodes. Added only the standard-graded cumulative Hilbert dimension input. Proved the closed-cone maps by representatives and the strict global bound by appending Y to chains; allowed dimension zero and nonreduced cones. Statement unchanged.",
+  "blueprint": "Historical Milne I.3.6 tangent-cone argument on the alteration/Picard auxiliary branch of direct-images proof (3), as recorded in blueprint.from. The latest sk-thm-sf-ctf-stability and its direct-images detailed proof omit that historical branch; no new route or unit realization is asserted. Steps 1–5 justify its cone dimension and proper-subset bound; steps 6–7 justify its cone inclusions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smoothness gives regular local rings of Y and D; generic scheme regularity tool, with no replacement of a unit step."
+   },
+   {
+    "node": "lem-ag-rational-point-stalk-topological-local-dimension",
+    "why": "Identifies the stalk dimension with local topological dimension at the given rational point, for Y and Z."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Identifies the dimension at p of irreducible Y with its global dimension."
+   },
+   {
+    "node": "lem-sc-rational-tangent-cotangent-duality",
+    "why": "Identifies rational tangent spaces and their differentials with the dual local cotangent spaces and maps."
+   },
+   {
+    "node": "lem-trf-maximal-adic-graded-length-bridge",
+    "why": "Relates cumulative graded dimensions to the local length function; generic filtered local algebra tool."
+   },
+   {
+    "node": "lem-trf-hilbert-samuel-growth-dimension",
+    "why": "Identifies the degree of the eventual length polynomial with local ring dimension."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Supplies reducedness of the smooth locally closed source D."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Turns the set-theoretic containment of reduced D into a factorization through Z."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies affine stalks and the actual stalk map with localization and its fraction map, needed to obtain the canonical local quotient for the closed immersions Z and D. Generic scheme-local tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-map-stalk-localization",
+    "why": "Identifies affine stalks and the actual stalk map with localization and its fraction map, needed to obtain the canonical local quotient for the closed immersions Z and D. Generic scheme-local tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-ag-rational-point-stalk-topological-local-dimension",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-trf-maximal-adic-graded-length-bridge",
+  "lem-trf-hilbert-samuel-growth-dimension",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-c7bb5753c",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-c7bb5753c (reviewer sub-agent of L); spot-checked: Ordinary split of a Q68 unsplit statement. The item statement is unchanged. Seven steps, each checked against its cited statements: steps 1-2 use smooth regularity 056S, 00KQ finiteness, the rational-point stalk dimension (00OU), 0A21(3), the regular graded criterion 00NO and tangent duality 0B2E. Step 3 is a closed-immersion affine quotient (01QO) with stalk localization (01HV), giving a surjective gr map. Step 4: bridge + Hilbert-Samuel + the new lemma give dim gr R = dim R. Step 5 uses the neighbourhood minimum and the append-Y chain bound. Steps 6-7 use 056T reducedness, the 0356 factorization, 0B2F naturality and the Sym uniqueness of 00DM. I tested Spec k, the cusp (nonreduced cone) and a Z with a large component away from p. New node lem-sfb-standard-graded-cumulative-dimension is statement-only and self-contained, and true by 00P6 (dim S = deg P + 1; a constant positive Q when P = 0). Checked on k, k[t]/t^e and polynomial rings. No duplicate: trf standard-graded Hilbert function, projective Hilbert-polynomial dimension and per associated-graded local dimension each differ. Batch 5: the trf bridge, Hilbert-Samuel and smooth-geometrically-normal nodes, and the regular-local criterion reaching Hilbert-Samuel, are generic commutative algebra (00K8/00KQ/056T), outside the trace-formula and Poincare-duality assumptions; accepted. The declared tool_uses are accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointTangentConeDimension",
+  "declaration": "AlgebraicGeometry.point_tangent_cone_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/PointTangentConeDimension.lean",
+  "statement": "theorem point_tangent_cone_dimension (k : Type u) [Field k] [IsAlgClosed k] (Y : Scheme.{u}) (s : Y ⟶ Spec (.of k)) [Smooth s] [IsSeparated s] [GeometricallyIntegral s] [LocallyOfFiniteType s] [QuasiCompact s] (p : s.fieldPoints k) (y : Y) (hp : p.1 (IsLocalRing.closedPoint k) = y) (Z : Scheme.{u}) (i : Z ⟶ Y) [IsClosedImmersion i] [IsReduced Z] (z : Z) (hz : i z = y) : ∃ d : ℕ, topologicalKrullDim Y = (d : WithBot ℕ∞) ∧ Module.Finite k (schemeTangentSpace k Y s y) ∧ Module.finrank k (schemeTangentSpace k Y s y) = d ∧ ∃ (c : IsLocalRing.maximalIdeal (Y.presheaf.stalk y) → Module.Dual k (schemeTangentSpace k Y s y)) (F : SymmetricAlgebra k (Module.Dual k (schemeTangentSpace k Y s y)) →+* Ideal.associatedGraded (IsLocalRing.maximalIdeal (Z.presheaf.stalk z))), (∀ (a : IsLocalRing.maximalIdeal (Y.presheaf.stalk y)) (θ : schemeTangentSpace k Y s y), ∃ hθ : θ.val (IsLocalRing.closedPoint (DualNumber (Y.residueField y))) = y, PowerMapLocalData.residueStructure k Y s y (c a θ) = ((eqToHom (congrArg (fun t : Y ↦ Y.presheaf.stalk t) hθ.symm) ≫ Scheme.stalkClosedPointTo θ.val).hom a).snd) ∧ (∀ b : k, F (algebraMap k (SymmetricAlgebra k (Module.Dual k (schemeTangentSpace k Y s y))) b) = Ideal.associatedGradedRingHom (IsLocalRing.maximalIdeal (Z.presheaf.stalk z)) (PowerMapLocalData.stalkStructure k Z (i ≫ s) z b)) ∧ (∀ a : IsLocalRing.maximalIdeal (Y.presheaf.stalk y), ∃ ha : PowerMapLocalData.stalkMapAt i z y hz a ∈ IsLocalRing.maximalIdeal (Z.presheaf.stalk z) ^ 1, F (SymmetricAlgebra.ι k (Module.Dual k (schemeTangentSpace k Y s y)) (c a)) = DirectSum.of (Ideal.associatedGradedPiece (IsLocalRing.maximalIdeal (Z.presheaf.stalk z))) 1 (Submodule.Quotient.mk ⟨PowerMapLocalData.stalkMapAt i z y hz a, ha⟩)) ∧ IsClosedImmersion (Spec.map (CommRingCat.ofHom F)) ∧ topologicalKrullDim (Spec (.of (Ideal.associatedGraded (IsLocalRing.maximalIdeal (Z.presheaf.stalk z))))) = ringKrullDim (Z.presheaf.stalk z) ∧ ringKrullDim (Z.presheaf.stalk z) ≤ topologicalKrullDim Z ∧ topologicalKrullDim Z ≤ (d : WithBot ℕ∞) ∧ (Set.range i ≠ Set.univ → topologicalKrullDim (Spec (.of (Ideal.associatedGraded (IsLocalRing.maximalIdeal (Z.presheaf.stalk z))))) < (d : WithBot ℕ∞)) ∧ ∀ (D : Scheme.{u}) (j : D ⟶ Y), IsImmersion j → Smooth (j ≫ s) → Set.range j ⊆ Set.range i → ∀ q : D, j q = y → ∃ (he : Function.Bijective (j.residueFieldMap q).hom) (L : schemeTangentSpace k D (j ≫ s) q →ₗ[k] schemeTangentSpace k Y s y), Function.Injective L ∧ (∀ θ : schemeTangentSpace k D (j ≫ s) q, HEq (L θ) (schemeTangentMap k D Y (j ≫ s) s j rfl q he θ)) ∧ Set.range (Spec.map (CommRingCat.ofHom (SymmetricAlgebra.lift ((SymmetricAlgebra.ι k (Module.Dual k (schemeTangentSpace k D (j ≫ s) q))).comp L.dualMap)).toRingHom)) ⊆ Set.range (Spec.map (CommRingCat.ofHom F))",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical coordinate map is characterized on constants and degree-one differentials, and the differential by HEq with schemeTangentMap. H2 repair of bcdb6abb57e4: the two added theorem dependencies are replaced by existing:true definition nodes def-sfb-tangent-base-scalars-stalk-maps and def-sfb-symmetric-algebra-construction owning the exact plain definitions used. Lean module unchanged; no mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8fbe5cb5c",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN of bcdb6abb57e4. The Lean module is byte-identical. The item changes only stmt_deps (theorem nodes lem-trf-power-map-smooth-graph-local-data and lem-weil-pbc-symmetric-algebra-universal-property replaced by new existing:true definition nodes def-sfb-tangent-base-scalars-stalk-maps and def-sfb-symmetric-algebra-construction) and lean.note. The new nodes match the source: stalkStructure/residueStructure/stalkMapAt/schemeTangentSpaceBaseModule are plain defs (toStalk≫stalkMap, residue composite, eqToHom≫stalkMap, Module.compHom) with no powerMap theorem use; Mathlib SymmetricAlgebra/ι/lift is the tensor-algebra quotient (Stacks 00DM). Their stmt_deps exist and the live DAG has no duplicate owner. Item not landed; parallel NF 8202 was RETURNED. Mathematics re-read: hypotheses, canonical F pinned on constants and degree-one classes, dim cone = dim R ≤ dim Z ≤ d, strict bound for proper Z, D clause with injective L HEq schemeTangentMap and Sym(L*) range inclusion. Edge cases d=0, Z=Y, Z={p}, cusp, components away from p, D missing p, any characteristic, universe u. Proof sorry only; docstrings and report sections present. Advisory: the Mathlib-branch definition node has status split (5 landed precedents). No compile (no file changed)."
+ }
+}

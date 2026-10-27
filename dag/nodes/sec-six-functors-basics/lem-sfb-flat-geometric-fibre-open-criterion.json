@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-flat-geometric-fibre-open-criterion",
+ "kind": "statement",
+ "title": "Geometric-fibre open-immersion criterion with flat source",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme] and $f:X\\to Y$ an $S$-morphism. Assume $X\\to S$ is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], $Y\\to S$ is locally of finite type [def-weil-finite-type-morphism], and $f$ is locally of finite presentation. For every geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$, with $\\Omega$ algebraically closed, form $f_{\\bar s}:X\\times_S\\operatorname{Spec}\\Omega\\to Y\\times_S\\operatorname{Spec}\\Omega$ using scheme fibre products [def-pc-fibre-product, def-weil-geometric-point]. If every $f_{\\bar s}$ is an open immersion [def-weil-open-immersion], then $f$ is an open immersion. If every $f_{\\bar s}$ is an isomorphism, then $f$ is an isomorphism. In particular both tests apply to a locally finitely presented map between smooth $S$-schemes [def-sbc-smooth-morphisms]. Empty schemes and empty fibres are allowed, and no reducedness or Noetherian assumption on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Stacks Tag 039E (lemma-morphism-between-flat), with morphisms.tex Tag 02GM (lemma-etale-flat-etale-fibres) and etale.tex Tag 025G (theorem-etale-radicial-open). This is their geometric-fibre criterion consequence: fibrewise flatness gives flatness, and geometric fibres of f are empty or a single reduced point, giving etale and universally injective; surjectivity gives the isomorphism clause."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and an algebraic closure $k=\\kappa(s)\\subset\\Omega$. By [lem-pc-field-extension-fpqc-cover], $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}k$ is an fpqc cover; by [lem-weil-pbc-fpqc-covering-axioms] its pullback $Y_s\\times_k\\operatorname{Spec}\\Omega\\to Y_s$ is an fpqc cover. The universal property [def-pc-fibre-product] identifies the pullback of $f_s:X_s\\to Y_s$ along this cover with $f_{\\bar s}$: both sources classify pairs consisting of an $X$-point and an $\\Omega$-point with the same $S$-image, and the projections agree. The hypothesis makes this map an open immersion, so [lem-galois-fpqc-descend-open-immersion] makes $f_s$ an open immersion. This works for every $s$, including empty fibres.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "def-pc-fibre-product",
+    "lem-galois-fpqc-descend-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02L3, lemma-descending-property-open-immersion; Topologies Tags 022D and 03L7"
+   }
+  },
+  {
+   "text": "An open immersion identifies its source with an open subscheme [def-weil-open-immersion]. Its local-ring maps at source points are therefore isomorphisms. Such an isomorphism makes the target local ring a free module of rank one over the source local ring, hence flat. Thus every $f_s$ is flat in the stalkwise sense [def-weil-flat-morphism]. Apply [lem-sfb-relative-flat-fibre-test] at each $x\\in X$: its hypotheses are precisely that $X\\to S$ is flat and locally of finite presentation and $Y\\to S$ is locally of finite type. Since $f_s$ is flat at the point over $x$, that criterion says $f$ is flat at $x$. Hence $f$ is flat.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-sfb-relative-flat-fibre-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 039E (lemma-morphism-between-flat), 039C (theorem-criterion-flatness-fibre), 05VJ (lemma-base-change-criterion-flatness-fibre)"
+   }
+  },
+  {
+   "text": "Fix $y\\in Y$, choose $\\Omega=\\overline{\\kappa(y)}$, and let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be the corresponding geometric point [def-weil-geometric-point]. Compose it with $Y\\to S$ to obtain $\\bar s$. By the fibre-product universal property [def-pc-fibre-product], the geometric fibre $X\\times_Y\\operatorname{Spec}\\Omega$ of $f$ is $X_{\\bar s}\\times_{Y_{\\bar s}}\\operatorname{Spec}\\Omega$, with the same projection to $\\operatorname{Spec}\\Omega$: both classify an $X$-point and an $\\Omega$-point whose $Y$-images agree. By [lem-weil-pbc-open-immersion-base-change] it is an open subscheme of $\\operatorname{Spec}\\Omega$. The only opens of this one-point scheme are the empty scheme and the whole scheme, so its structural map is respectively the empty map or the identity. Each is unramified by [def-weil-unramified-morphism]: it is locally of finite type and its diagonal is an identity on the source, hence an open immersion. A finite polynomial presentation is in particular a finite generating set, so local finite presentation of $f$ implies local finite type [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. Consequently [lem-trf-geometric-fibre-unramified-criterion] applies and proves $f$ unramified.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-unramified-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-trf-geometric-fibre-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02G8 (lemma-unramified-etale-fibres), 02G7; Schemes Tag 01JY; Descent Tag 02VM"
+   }
+  },
+  {
+   "text": "Let $K$ be any field and let $a,b:\\operatorname{Spec}K\\to X$ satisfy $f a=f b$. Choose an algebraic closure $K\\subset\\Omega$ [def-weil-algebraic-closure] and write $r:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$. The pairs $(a r,1)$ and $(b r,1)$ give maps into $X_{\\bar s}$, where $\\bar s$ is their common composite to $S$, and have the same image in $Y_{\\bar s}$ [def-pc-fibre-product]. An open immersion is an isomorphism onto an open subscheme, so maps into its source with the same composite are equal [def-weil-open-immersion]. Thus $a r=b r$. The singleton $\\{r\\}$ is an fpqc cover [lem-pc-field-extension-fpqc-cover]. Apply the uniqueness assertion of [lem-weil-pbc-fpqc-representable-descent] to the common restriction $a r=b r$ (its compatibility follows because it is the restriction of $a$). It gives $a=b$. The field-point criterion in [def-weil-radicial-morphism] now proves $f$ radicial.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S4 (lemma-universally-injective); Descent Tag 023Q"
+   }
+  },
+  {
+   "text": "We have proved flatness and unramifiedness, and local finite presentation of $f$ is assumed. Thus $f$ is etale by [def-weil-etale-morphism]. Together with radiciality, [lem-weil-pbc-radicial-etale-open] proves that $f$ is an open immersion.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-radicial-etale-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025G (theorem-etale-radicial-open)"
+   }
+  },
+  {
+   "text": "Under the stronger hypothesis that every $f_{\\bar s}$ is an isomorphism, each is an open immersion by the open-subscheme definition [def-weil-open-immersion], so the preceding argument applies. For any $y\\in Y$, take $\\bar y:\\operatorname{Spec}\\overline{\\kappa(y)}\\to Y$ and its composite $\\bar s$ to $S$ [def-weil-geometric-point]. The map $(\\bar y,1):\\operatorname{Spec}\\overline{\\kappa(y)}\\to Y_{\\bar s}$ lifts along $f_{\\bar s}^{-1}$ to $X_{\\bar s}$. Projection to $X$ gives a point mapping to $y$, by the projection equations [def-pc-fibre-product]. Thus $f$ is surjective on points. An open immersion identifies $X$ with an open subscheme $U$ of $Y$; surjectivity gives $U=Y$, and the same identification is an isomorphism $X\\simeq Y$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-geometric-point",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025G, conclusion for a surjective open immersion"
+   }
+  },
+  {
+   "text": "If $X$ and $Y$ are smooth over $S$, [lem-pc-smooth-flat] gives that both structure morphisms are flat and locally of finite presentation. A finitely presented algebra is finitely generated by its displayed polynomial variables, so $Y\\to S$ is locally of finite type [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. The assumed locally finitely presented map $f$ therefore satisfies all the hypotheses already used. No step required reducedness, Noetherianity, quasi-compactness or nonempty fibres; if $Y$ is empty the isomorphism assertion is vacuous and its open-subscheme identification still gives an isomorphism.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VE (lemma-smooth-locally-finite-presentation), 01VF (lemma-smooth-flat)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-pc-fibre-product",
+  "lem-galois-fpqc-descend-open-immersion",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "lem-sfb-relative-flat-fibre-test",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-unramified-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-trf-geometric-fibre-unramified-criterion",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-radicial-morphism",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-radicial-etale-open",
+  "lem-pc-smooth-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Assembly of Tags 039E/039C/05VJ, 02G8, 025G, 02L3, 01S4 and 023Q; geometric-fibre consequence written explicitly by Q115."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between smooth schemes over a base is an open immersion or an isomorphism if this holds on every geometric fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-immersion, smoothness/base-change and stalk criteria do not give the geometric-fibre criterion. IsOpenImmersion.of_flat_of_mono still requires flatness and monomorphy, which the present hypotheses must establish."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"Smooth\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" : CategoryTheory.MorphismProperty.Respects (@AlgebraicGeometry.Smooth) AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instSmoothOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.Smooth f\", \"doc\": \"Open immersions are smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.SmoothOfRelativeDimension 0 f\", \"doc\": \"Open immersions are smooth of relative dimension `0`.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-immersion, smoothness/base-change and stalk criteria do not give the geometric-fibre criterion. IsOpenImmersion.of_flat_of_mono still requires flatness and monomorphy, which the present hypotheses must establish."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(isIso|IsOpenImmersion)|isIso.*fiber|geometric.*fiber|fibral",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"19\", \"text\": \"- `GeometricallyIntegral.iff_geometricallyIntegral_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"20\", \"text\": \"  A scheme is geometrically integral over `S` iff the fibers of all\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"82\", \"text\": \"    GeometricallyIntegral (f.fiberToSpecResidueField s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"85\", \"text\": \"instance (s : S) [GeometricallyIntegral f] : IsIntegral (f.fiber s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"116\", \"text\": \"lemma GeometricallyIntegral.iff_geometricallyIntegral_fiber :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"20\", \"text\": \"- `GeometricallyReduced.iff_geometricallyReduced_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"21\", \"text\": \"  A scheme is geometrically reduced over `S` iff the fibers of all\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"67\", \"text\": \"    GeometricallyReduced (f.fiberToSpecResidueField s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"70\", \"text\": \"instance (s : S) [GeometricallyReduced f] : IsReduced (f.fiber s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"line\": \"97\", \"text\": \"def geometricFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] : etaleTopology.Point where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"19\", \"text\": \"- `GeometricallyIrreducible.iff_geometricallyIrreducible_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"20\", \"text\": \"  A scheme is geometrically irreducible over `S` iff the fibers of all\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"65\", \"text\": \"    GeometricallyIrreducible (f.fiberToSpecResidueField s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"68\", \"text\": \"instance (s : S) [GeometricallyIrreducible f] : IrreducibleSpace (f.fiber s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"119\", \"text\": \"lemma GeometricallyIrreducible.iff_geometricallyIrreducible_fiber :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"26\", \"text\": \"- `AlgebraicGeometry.geometrically_iff_forall_fiberToSpecResidueField`: `f : X ⟶ Y` is\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"27\", \"text\": \"  geometrically-`P` if and only if for every `y : Y`, the fiber `f ⁻¹ {y}` is geometrically-`P`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"102\", \"text\": \"lemma fiber_of_geometrically (hf : geometrically P f) (y : Y) : P (f.fiber y) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"106\", \"text\": \"/-- `P` holds geometrically for `f` if and only if all fibers are geometrically `P`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"107\", \"text\": \"lemma geometrically_iff_forall_fiberToSpecResidueField :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"304\", \"text\": \"  equifibered := (H.rightOp.whiskerRight _).comp (.of_isIso _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"344\", \"text\": \"  NatTrans.Coequifibered.of_isIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"24\", \"text\": \"- `GeometricallyConnected.iff_geometricallyConnected_fiber`: A scheme is geometrically connected\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"63\", \"text\": \"    GeometricallyConnected (f.fiberToSpecResidueField s) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"line\": \"66\", \"text\": \"instance (s : S) [GeometricallyConnected f] : ConnectedSpace (f.fiber s) :=\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-immersion, smoothness/base-change and stalk criteria do not give the geometric-fibre criterion. IsOpenImmersion.of_flat_of_mono still requires flatness and monomorphy, which the present hypotheses must establish."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise criterion for a morphism of flat schemes locally of finite presentation to be an open immersion or an isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \": @IsOpenImmersion = (topologically IsOpenEmbedding) ⊓ stalkwise (Function.Bijective ·)\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_stalk_iso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    ∀ [∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)],\\n      AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If the underlying continuous map of a morphism between schemes is a topological open embedding and the induced maps on all stalks are isomorphisms, then the morphism is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_openCover_source\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \"(f : X ⟶ Y) (𝒰 : X.OpenCover) (hf : Function.Injective f) (h𝒰 : ∀ i, IsOpenImmersion (𝒰.f i ≫ f)) : IsOpenImmersion f\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes. If there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that $ f $ is injective and each composition $ U_i \\\\to X \\\\xrightarrow{f} Y $ is an open immersion, t\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsOpenImmersion f] : Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \"(f : X ⟶ Y) (hf : Function.Injective f)\\n  (hX : ∀ x, ∃ (U : Scheme) (i : U ⟶ X) (_ : IsOpenImmersion i), x ∈ i.opensRange ∧ IsOpenImmersion (i ≫ f)) :\\n  IsOpenImmersion f\", \"doc\": \"Let $ f: X \\\\to Y $ be a morphism of schemes. If $ f $ is injective and for every point $ x \\\\in X $, there exists an open immersion $ i: U \\\\to X $ with $ x \\\\in \\\\text{im}(i) $ such that the composition \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-immersion, smoothness/base-change and stalk criteria do not give the geometric-fibre criterion. IsOpenImmersion.of_flat_of_mono still requires flatness and monomorphy, which the present hypotheses must establish."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of smooth schemes with all geometric base changes isomorphisms is an isomorphism using the fibrewise flatness criterion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary open-immersion, smoothness/base-change and stalk criteria do not give the geometric-fibre criterion. IsOpenImmersion.of_flat_of_mono still requires flatness and monomorphy, which the present hypotheses must establish."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes over a base with flat finitely presented source is an open immersion if every geometric fibre map is an open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally open if for every base change $ Y' \\\\to Y $, the induced morphism $ X \\\\times_Y Y' \\\\to Y' $ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are stalk criteria or require flatness and monomorphy already; they do not prove the relative geometric-fibre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"fiber\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are stalk criteria or require flatness and monomorphy already; they do not prove the relative geometric-fibre criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(geometric|fiber|fibre).*(openImmersion|open_immersion)|039E",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are stalk criteria or require flatness and monomorphy already; they do not prove the relative geometric-fibre criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative morphism is an isomorphism or open immersion if all geometric fibre maps are and its source is flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsOpenImmersion f] : Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is an open immersion if and only if its underlying map of topological spaces is an open embedding, and for every point $x \\\\in X$, the induced map on stalks $f_x^\\\\#: \"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_iff_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsOpenImmersion f ↔\\n    Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n      ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is an open immersion if and only if the underlying continuous map is an open embedding and, for every point $ x \\\\in X $, the induced map on stalks at $ x $ is an i\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} {f : X ⟶ Y} : IsOpenImmersion f ↔ IsOpenEmbedding f ∧ ∀ x, IsIso (f.stalkMap x)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is an open immersion if and only if its underlying continuous map is an open embedding and for every point $x \\\\in X$, the induced stalk map $f_x^\\\\#:\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are stalk criteria or require flatness and monomorphy already; they do not prove the relative geometric-fibre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise isomorphism criterion for a map between smooth schemes over an arbitrary base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_iff_isIso_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔\\n    CategoryTheory.IsIso f.base ∧ ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is an isomorphism if and only if its underlying continuous map of topological spaces is a homeomorphism, and for every point $x \\\\in X$, the induced \"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_stalk_iso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔\\n    CategoryTheory.IsIso f.base ∧ ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is an isomorphism if and only if the underlying continuous map on topological spaces is a homeomorphism, and for every point $x \\\\in X$, the induced map on stalks $f_\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instOverCoverOfIsIsoOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Over\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  (S : AlgebraicGeometry.Scheme) →\\n    [inst : P.IsStableUnderBaseChange] →\\n      [inst_1 : AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        [inst_2 : P.ContainsIdentities] →\\n          [inst_3 : P.RespectsIso] →\\n    \", \"doc\": \"Given a morphism property $ P $ containing identities and respecting isomorphisms, and an isomorphism $ f: X \\to Y $ of schemes over a base scheme $ S $, the cover of $ Y $ constructed from $ f $ in th\"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are stalk criteria or require flatness and monomorphy already; they do not prove the relative geometric-fibre criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*(iso|immersion)|fibre.*(iso|immersion)|flat.*of.*fiber",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"line\": \"79\", \"text\": \"noncomputable def Spec.fiberToSpecResidueFieldIso (R S : Type u) [CommRing R] [CommRing S]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"350\", \"text\": \"  rw [← (f.fiberHomeo _).symm.isOpen_image, Set.image_singleton]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"351\", \"text\": \"  exact (H.ge (Set.mem_univ a)).isClopen_singleton_asFiber.isOpen\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"414\", \"text\": \"    exact Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber.mpr (isOpen_discrete _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"304\", \"text\": \"  equifibered := (H.rightOp.whiskerRight _).comp (.of_isIso _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"344\", \"text\": \"  NatTrans.Coequifibered.of_isIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"52\", \"text\": \"    rw [Scheme.Hom.fiberToSpecResidueField, ← pullbackRightPullbackFstIso_inv_snd_snd]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"line\": \"63\", \"text\": \"    (Spec.fiberToSpecResidueFieldIso R S ⟨p, hp⟩)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"398\", \"text\": \"  rw [← (f.fiberHomeo (f x)).isOpen_image]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: candidates are stalk criteria or require flatness and monomorphy already; they do not prove the relative geometric-fibre criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-root-product-open-cell",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: the ordered root products and multiplication open cell, before proving that Weyl translates cover. Supporting input in the repaired proof: Conrad Theorem 5.1.13, proof, last paragraph: the isomorphism of smooth source and target is checked on geometric fibres; also used to identify S with Z_H(lambda).",
+   "via": [
+    "lem-sfb-relative-root-product-open-cell",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-geometric-fibre-open-criterion",
+  "worker": "stage1",
+  "summary": "Q115 gives a seven-step assembly from existing nodes: fpqc descent of ordinary fibre maps, relative flatness, geometric-fibre unramifiedness, field-point radiciality, the etale radicial criterion, surjectivity, and the smooth specialization. No new nodes and no statement change.",
+  "blueprint": "The inherited from.place traces this input to the geometric-fibre isomorphism check in the relative root-product open-cell prerequisite for det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint proof (3) only records the direct-image assembly; this created prerequisite realizes the inherited lower-level route. The ancestor command reports None, which is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-descend-open-immersion",
+    "why": "Generic fpqc descent of fibre maps; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic base change of an fpqc covering."
+   },
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic field-extension covering input."
+   },
+   {
+    "node": "lem-trf-geometric-fibre-unramified-criterion",
+    "why": "Generic scheme unramifiedness criterion; applied to f over Y, not over S."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic base change of the assumed open fibre immersion."
+   },
+   {
+    "node": "lem-weil-pbc-radicial-etale-open",
+    "why": "Generic open-immersion recognition theorem, Stacks 025G."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-descend-open-immersion",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-trf-geometric-fibre-unramified-criterion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-radicial-etale-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-cd4319063",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-cd4319063 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full; the delivery adds no new nodes, the statement is unchanged, and no fixes were needed. The statement is EGA IV 17.9.5 in the form of Stacks 039E+02GM+025G. I checked the hypotheses against more-morphisms.tex l.4682 (039E) and etale.tex l.1370 (025G). Step 1: X_s×_{Y_s}(Y_s×_kΩ)=X×_SΩ; fpqc descent of open immersions (02L3) then makes every ordinary fibre f_s an open immersion. Step 2: open immersions are flat, and the relative fibre flatness test (039E) gives f flat. Step 3: the geometric fibre of f at ȳ is the base change of f_{s̄}, hence open in the one-point Spec Ω, so it is empty or all of Spec Ω and in both cases unramified; 02G8 applied over Y gives f unramified. Step 4: open immersions are monomorphisms, so ar=br, and fpqc uniqueness (023Q) gives a=b, so f is radicial (01S4). Step 5: f is étale and radicial, so it is an open immersion (025G). Step 6: surjectivity follows by lifting (ȳ,1) through f_{s̄}^{-1}. Step 7: smooth gives flat and lfp. Edge cases I checked: empty source and empty fibres, id over a nonreduced base, and Spec k→Spec k[ε] (excluded by the flatness hypothesis). Duplicate search found no node with this statement; lem-pe-flat-lfp-monomorphism-open and lem-sfb-space-etale-monomorphism-open are alternative tools, not duplicates. Batch-5 check: lem-trf-localization-finite-presentation-ring-map (reached through lem-sfb-relative-flat-fibre-test) is pure commutative algebra, and lem-trf-geometric-fibre-unramified-criterion is Stacks 02G8. Neither is a step in the proof of the trace formula or of Poincaré duality, so both citations are accepted. The route is unchanged and no SGA source is used. The 6 declared generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatGeometricFibreOpenCriterion",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_isIso_of_geometric_fibres_of_flat",
+  "declarations": [
+   "AlgebraicGeometry.isOpenImmersion_isIso_of_geometric_fibres_of_flat",
+   "AlgebraicGeometry.isOpenImmersion_isIso_of_geometric_fibres_of_smooth"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatGeometricFibreOpenCriterion.lean",
+  "statement": "theorem isOpenImmersion_isIso_of_geometric_fibres_of_flat {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (hcomm : f ≫ q = p) [Flat p] [LocallyOfFinitePresentation p] [LocallyOfFiniteType q] [LocallyOfFinitePresentation f] : ((∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), IsOpenImmersion (((Over.pullback s).map (Over.homMk (U := Over.mk p) (V := Over.mk q) f hcomm)).left)) → IsOpenImmersion f) ∧ ((∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S), IsIso (((Over.pullback s).map (Over.homMk (U := Over.mk p) (V := Over.mk q) f hcomm)).left)) → IsIso f)",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb69b116e",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Checked both theorems clause by clause against the node and all 8 statement-dependency records (Scheme, Flat, LocallyOfFinitePresentation, LocallyOfFiniteType, pullback, inline geometric-point interface, IsOpenImmersion, Smooth). The fibre map ((Over.pullback s).map (Over.homMk f hcomm)).left is the canonical pullback.lift map (Mathlib Comma/Over/Pullback.lean:63-68). The open and iso tests have separate premises. The smooth version adds no extra hypotheses. Ω : Type u follows the geometric-point record. No nonempty, reduced or Noetherian hypotheses; flatness excludes Spec k -> Spec k[eps]. lean.statement matches the file verbatim. Both proofs are exactly sorry; docstrings carry source, blueprint tag and steps 1-7; all imports exist. No duplicate in the project's Sheaf/WeilConjectures trees; Mathlib has related criteria but not this test (worker searches agree). Report has Worker report and Second reading by Q99. No file changed, so no recompile. No findings."
+ }
+}

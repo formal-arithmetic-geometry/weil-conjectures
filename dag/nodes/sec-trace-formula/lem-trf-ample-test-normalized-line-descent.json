@@ -1,0 +1,172 @@
+{
+ "id": "lem-trf-ample-test-normalized-line-descent",
+ "kind": "statement",
+ "title": "Normalized restriction transitions and their arbitrary pullback descent",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $k:X\\to F$ a map of algebraic spaces with their small etale sites [def-trf-algebraic-space], and $M$ a line module on $F$. Let $(F_i\\to F)$ be scheme etale charts, and $(X_i\\to X)$ a jointly surjective family of scheme etale charts [def-trf-algebraic-space-jointly-surjective-family], indexed in any universe. Suppose maps $a_i:X_i\\to F_i$ satisfy equality of their composites to $F$. Write $M_i$ for the Zariski restrictions [def-trf-space-module-scheme-restriction]. Then there exist ordinary invertibility proofs for the $M_i$, normalized ordinary/etale identifications for them, represented double overlaps of the $F_i$, and transition isomorphisms induced by those identifications. There also exist represented double overlaps of the $X_i$, their maps to the original overlaps with both projection equations, and transitions of the literal modules $a_i^*M_i$ equal to the pulled original transitions. They satisfy the diagonal identity and triple-overlap cocycle on every scheme test. There exist a line module $N$ on $X$ and identifications with the literal $a_i^*M_i$ inducing precisely those transitions; they satisfy unique realization preserving every identification. For etale $k$, $N$ has the canonical etale comparison with restriction of $M$, with the prescribed composite-section formula. Normalization, transition transport, uniqueness and the comparison mean exactly the section equations of [def-trf-ample-test-normalized-section-equations], using ordinary identifications [def-sfb-ordinary-etale-identification] and tensor pullback [def-pc-module-pullback]. No ampleness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 04W8 and 060X; descent.tex Tags 03DX, 05VG and 03LC (1); preparation Steps 3--5 and normalized comparison in Step 8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-trf-space-module-scheme-restriction",
+  "def-trf-ample-test-normalized-section-equations",
+  "def-sfb-ordinary-etale-identification",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the scheme ordinary/etale line comparison to each restriction of M. Its tensor-unit normalization, on every Zariski open, yields the original identifications and ordinary invertibility.",
+   "uses": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-etale-line-sections-normalized-comparisons",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent both families of double overlaps by the representable diagonals. On original overlaps full faithfulness transports the identity of the same restriction of M to alpha. The given commuting triangles induce the maps of new overlaps to old ones.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-scheme-etale-invertible-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set beta equal to the specified pulled transition. Tensor-section restriction identity and composition laws make its identifications natural. The unit-normalized tensor composition maps are associative, as checked on pure tensors, so they transport the diagonal and cocycle equalities of alpha to beta.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-trf-tensor-sections-unit-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use effective invertible descent on X to obtain N and identifications inducing beta. Full faithfulness glues the local comparison maps for any other realization, and their local inverses; injectivity proves inverse identities and uniqueness. For arbitrary index universe choose a small covering subfamily by points of one scheme atlas and recover the rest by full faithfulness.",
+   "uses": [
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For etale k the restriction of M to X has the same local tensor-pullback identifications, with the tensor-composition section formula. The preceding unique-realization argument glues the prescribed unique isomorphism.",
+   "uses": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-etale-invertible-comparison",
+  "lem-trf-etale-line-sections-normalized-comparisons",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-trf-algebraic-space",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-trf-tensor-sections-unit-composition",
+  "lem-trf-algebraic-space-invertible-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 04W8 and 060X; descent.tex Tags 03DX, 05VG and 03LC (1); preparation Steps 3--5 and normalized comparison in Step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible module on an algebraic space has normalized etale chart identifications and its descent datum pulls back to arbitrary scheme tests",
+   "results": "Eight results, including Module.Invertible.instProjective, Scheme.Etale, IsEtale.instIsStableUnderBaseChangeScheme and Scheme.Modules.inv_app.",
+   "date": "2026-10-26",
+   "verdict": "No algebraic-space line descent or normalized section identification theorem; scheme and ring-level results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible module descent on an algebraic space along etale charts with normalized tensor pullback transitions and arbitrary base change",
+   "results": "Eight results: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, IsEtale.instFormallyUnramified, Algebra.Etale.exists_subalgebra_fg, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, its symm_D_algebraMap, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, and an IsEtale cancellation instance.",
+   "date": "2026-10-26",
+   "verdict": "No matching algebraic-space theorem. Existing project comparison/descent declarations provide components but not their normalized assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeRestriction|OrdinaryEtaleIdentification|IsQuasiCompactPresheafMap",
+   "results": "msearch grep returned zero Mathlib hits. Repository rg locates OrdinaryEtaleIdentification, AlgebraicSpaceInvertibleDescent and the item. blueprint_refs search scheme test returned zero imported blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "The concrete predicates and their assembly are project-specific. Reuse their existing definition owners; extract the six remaining existing equations without changing data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.AmpleSchemeTestLinePreparation",
+  "date": "2026-10-26",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the polarized-scheme descent sentence of lem-trf-local-term-locality, via the arbitrary-scheme-test reduction of lem-trf-algebraic-space-ample-local: old proof Steps 1 and 2 (base-changed covers, invertible cocycle descent, etale-test comparison, and quasi-compact separated preparation).; Normalized restriction transitions and their arbitrary pullback descent",
+   "via": [
+    "lem-trf-ample-scheme-test-line-preparation",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.AmpleTestNormalizedLineDescent",
+  "file": "lean/Sheaf/TraceFormula/AmpleTestNormalizedLineDescent.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_ampleTestNormalizedLineData",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.AmpleTestNormalizedLineData",
+   "AlgebraicGeometry.AlgebraicSpace.exists_ampleTestNormalizedLineData"
+  ],
+  "statement": "theorem exists_ampleTestNormalizedLineData {S : Scheme.{u}} {I : Type v} (F X : AlgebraicSpace S) (k : X ⟶ F) (M : F.Modules) (hM : F.IsLineModule M) (Fᵢ : I → F.EtaleSite) (Xᵢ : I → X.EtaleSite) (xF : ∀ i : I, (Xᵢ i).obj.left ⟶ (Fᵢ i).obj.left) (hcomm : ∀ i : I, (Xᵢ i).obj.hom ≫ k.hom.hom = yoneda.map (xF i) ≫ (Fᵢ i).obj.hom) (hcover : IsJointlySurjective (fun i : I ↦ (Xᵢ i).obj.hom)) : Nonempty (AmpleTestNormalizedLineData F X k M Fᵢ Xᵢ xF)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e2e3",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T082945-L-2243945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e2e3",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T082945-L-2243945",
+  "kind": "interface",
+  "note": "independent cc review: 6 defs moved byte-identical to clone; item signature/structure vs node lean.statement; 3 new sorry statements vs their nodes and the definitions of the qc/separated presheaf properties; no importers of item in clone"
+ }
+}

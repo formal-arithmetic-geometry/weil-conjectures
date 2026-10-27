@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-quotient-pullback-tensor-flat-model",
+ "kind": "statement",
+ "title": "The quotient pullback tensor equation on flat-term K-flat complexes",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and the actual integral and positive-power quotient coefficients R,S with reduction q:R to S [def-sfb-integral-quotient-coefficients]. Use internal module derived categories, their actual pullbacks L_R,L_S, scalar extensions D_T, scalar tensor isomorphisms b_T and the comparison lam:L_S D_Y isomorphic to D_X L_R, normalized by TensorNormalized and PullNormalized [lem-sfb-quotient-section-tensor-normalization]. For any scheme map f:X to Y and flat-term K-flat complexes P,Q of R_Y-modules [def-pc-kflat-complex, def-pc-flat-sheaf-modules], put U=Q_R(P) and V=Q_R(Q). Then lam_(U tensor V) followed by D_X(t_R(U,V)) and b_X(L_R U,L_R V) equals L_S(b_Y(U,V)) followed by t_S(D_Y U,D_Y V) and lam_U tensor lam_V, where t_R,t_S are the actual leftDerivedUpperStarTensor maps [def-sfb-module-object-projection-map]. This asserts equality on the given resolving models only; there is no flatness assumption on q, no boundedness assumption on P,Q, and no geometric hypothesis on f. The Lean index n:Nat denotes the positive exponent n+1.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (pullback tensor), 0G7E (preservation of flat K-flat complexes), 06YY (derived base change); blueprint latest integral proper-base-change proof paragraph (3)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "lem-sfb-integral-quotient-direct-image-comparison",
+  "def-sfb-module-object-projection-map",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-integral-quotient-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Use targetCompute_isIso and targetLocalization_isIso at P,Q. The latter is deduced from the given TensorNormalized b_X, without any exactness of quotient extension.",
+   "uses": [
+    "lem-sfb-quotient-tensor-flat-model-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply left_flat_computation with b_X and PullNormalized lam, and right_flat_computation with b_Y and the same lam. Both normalize the corresponding derived path after the same targetCompute map; they have the same sourceCompute and inverse target localization.",
+   "uses": [
+    "lem-sfb-quotient-tensor-left-flat-computation",
+    "lem-sfb-quotient-tensor-right-flat-computation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite ordinaryLeft to ordinaryRight using the proved signed-total ordinary_square. Transitivity identifies the two derived paths after targetCompute. Cancel this invertible target map to obtain exactly the original displayed equation on Q(P),Q(Q).",
+   "uses": [
+    "lem-sfb-quotient-tensor-flat-model-maps"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-tensor-flat-model-maps",
+  "lem-sfb-quotient-tensor-left-flat-computation",
+  "lem-sfb-quotient-tensor-right-flat-computation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); ordinary balancing from sites-modules.tex Tag 03EL (lemma-tensor-product-pullback).",
+  "note": "T2: restore quarantined attachment; compute the two paths internally, use proved ordinary monoidal naturality on signed totals, and cancel the actual invertible target computation. Two strictly smaller one-path computation statements remain."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between composite pullback and extension of scalars commutes with the tensor comparison of the derived functors",
+   "results": "8 hits, including SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc and ModuleCat.extendScalarsComp_hom_app_one_tmul; these are ordinary comparison formulas, not the normalized nonflat derived square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.IsMonoidal.tensor\"",
+   "results": "2 hits: CategoryTheory.NatTrans.IsMonoidal.tensor and tensor_assoc. They require a monoidality instance; they do not establish the normalized quotient comparison is monoidal.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Cc]omp.*[Tt]ensor|[Tt]ensor.*[Cc]omp.*leftDerived",
+   "results": "No Mathlib hits. Repository search finds Functor.map_leftDerivedTensorComparison_comp_eq_of_iso, whose exactness assumptions fail for the quotient scalar extension.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison for derived pullback commutes with extension of scalars on flat term K flat complexes without flatness of the ring homomorphism",
+   "results": "8 hits concerning flatness and preservation of finite limits by extension of scalars; no square equation on resolving complexes.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientPullbackTensorCoherence",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), coefficient quotient tensor calculation on flat-term K-flat representatives.",
+   "via": [
+    "lem-sfb-integral-quotient-projection-comparison",
+    "lem-sfb-quotient-pullback-tensor-coherence"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientPullbackTensorFlatModel",
+  "file": "lean/Sheaf/Paper/QuotientPullbackTensorFlatModel.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.quotient_pullback_tensor_flat_model",
+  "statement": "theorem quotient_pullback_tensor_flat_model\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)\n    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1}\n      (ModuleRingedComparison.modules (integral l E) T)]\n    [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1}\n      (ModuleRingedComparison.modules (finite l E n) T)]\n    (b : ∀ T : Scheme.{u}, TensorIso (reduction l E n) T)\n    (_hb : ∀ T : Scheme.{u}, QuotientSectionTensor.TensorNormalized\n      (reduction l E n) T (b T))\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (lam : D (reduction l E n) Y ⋙ L (finite l E n) f ≅\n      L (integral l E) f ⋙ D (reduction l E n) X)\n    (_hlam : PullNormalized (reduction l E n) f lam)\n    (P Q : CochainComplex (Modules (integral l E) Y) ℤ)\n    (_hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)\n    (_hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)\n    (_hPflat : ∀ i : ℤ, ObjectProperty.flat (P.X i))\n    (_hQflat : ∀ i : ℤ, ObjectProperty.flat (Q.X i)) :\n    lam.hom.app ((Functor.uncurry.obj\n      (CondensedRing.derivedTensor (integral l E) Y)).obj\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n        (D (reduction l E n) X).map\n          (((CondensedRing.leftDerivedUpperStarTensor (integral l E) f).app\n            (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj Q)) ≫\n        (b X).hom.app ((L (integral l E) f).obj (DerivedCategory.Q.obj P),\n          (L (integral l E) f).obj (DerivedCategory.Q.obj Q)) =\n      (L (finite l E n) f).map\n          ((b Y).hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫\n        ((CondensedRing.leftDerivedUpperStarTensor (finite l E n) f).app\n          ((D (reduction l E n) Y).obj (DerivedCategory.Q.obj P))).app\n            ((D (reduction l E n) Y).obj (DerivedCategory.Q.obj Q)) ≫\n        (Functor.uncurry.obj (CondensedRing.derivedTensor (finite l E n) X)).map\n          (Prod.mkHom (lam.hom.app (DerivedCategory.Q.obj P))\n            (lam.hom.app (DerivedCategory.Q.obj Q)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T012914-L-2345494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T094523-L-238743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

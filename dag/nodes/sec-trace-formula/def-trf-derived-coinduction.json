@@ -83,21 +83,40 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "lean": {
-  "module": "Sheaf.Algebra.Homology.DerivedCoinductionAdjunction",
-  "declaration": "ModuleCat.derivedCoinduction",
+  "module": "Sheaf.Algebra.Homology.DerivedCoinductionUnderlyingComparison",
+  "declaration": "ModuleCat.derivedCoinductionUnderlyingComparison",
   "declarations": [
-   "ModuleCat.derivedCoinduction"
+   "ModuleCat.derivedCoinduction",
+   "ModuleCat.coinductionComplexFunctor",
+   "ModuleCat.coinductionEvaluation",
+   "ModuleCat.derivedCoinductionModel",
+   "ModuleCat.derivedCoinductionAdjunction",
+   "ModuleCat.derivedCoinductionUnderlyingHom",
+   "ModuleCat.derivedCoinductionUnderlyingModel",
+   "ModuleCat.derivedCoinductionUnderlyingComparison"
   ],
-  "statement": "def derivedCoinduction :\n    DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedCoinductionUnderlyingComparison.lean",
+  "statement": "def derivedCoinductionUnderlyingComparison {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wB} (ModuleCat.{u} B)] : derivedCoinduction f ⋙ (restrictScalars f).mapDerivedCategory ≅ derivedCoinductionUnderlyingHom f",
   "branch": "newtargets-dag",
-  "by": "N2",
-  "date": "2026-10-18",
-  "existing": true,
-  "note": "Definition ownership for existing real construction data, as requested by the return on immutable head 3ba1c8264a7b. The owning module stays unchanged; no theorem is used to choose this data."
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B) superset repair of immutable head 7b0b6264336a, H2/H3. Preserve all five formerly owned constructions by public import, additionally own the existing derivedCoinductionUnderlyingHom and derivedCoinductionUnderlyingModel, and construct the canonical natural derivedCoinductionUnderlyingComparison from rightDerivedFunctorCompIso and exact restriction rightDerivedFunctorIsoMapDerivedCategory. The old definition record omitted the underlying-Hom helpers needed by the item. No construction is selected from derivedCoinductionAdjunction_spec; the new comparison has real data, no sorry and no per-object choice. The node statement is unchanged."
  },
  "reviewed": {
   "date": "2026-10-19",
@@ -108,11 +127,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1b96d6db0",
-  "group": "N2",
+  "reviewer": "NT-stage2-cc-00c7edacd",
+  "group": "Q67",
   "result": "pass",
-  "note": "Re-delivery of RETURNed 3ba1c8264a7b (theorem stmt_deps). Two new definition nodes with existing:true records on the unchanged modules repair it: def-trf-derived-coinduction owns ModuleCat.derivedCoinduction, def-trf-affine-diagonal-module-data owns relativeDualizingDerivedExtension and relativeDualizingModuleDiagonal. Item stmt_deps are now the 6 base def nodes plus these 2, with no theorem node; in the item record only lean and stmt_deps differ from live. Item .lean is byte-identical (sha e40d9949) to the previous head, which was accepted clause by clause; re-read against the node with the same mapping. New-node statements are verbatim in the live files (from 'def'); node texts match the bodies and sources 0A70/0A71 and 0E2U/06Y0; universes wR/wB stay free; definitions are real, not hollow; the declaration lists cover all owner-module decls used; no cycle; no sibling def node owns these decls in side live. nt_compile --json clean in 7.4 s, only the theorem is sorry. Advisory: two Lean definitions of derived scalar extension now exist (concrete K-flat relativeDualizingDerivedExtension and the abstract left-adjoint moduleDerivedExtension of def-zl-ring-derived-scalar-extension), both landed before this delivery; maintainer note only."
+  "note": "Re-delivery after RETURN of 7b0b6264336a; both findings fixed. H2: the item's stmt_deps drop the theorem node and add only the landed def-trf-derived-coinduction. That node differs from live only in lean (superset of Q38's five names plus derivedCoinductionUnderlyingHom/Model and the new comparison; nothing overwritten). H3: the existential comparison is replaced by the fixed natural iso derivedCoinductionUnderlyingComparison, built from rightDerivedFunctorCompIso and rightDerivedFunctorIsoMapDerivedCategory (both rightDerivedUnique from the units); real def, no choose or sorry. The final equation is true: with the pinned e and naturality in s it reduces to the unit-compatibility of those isos with the K-injective object isos (rightDerivedFunctorObjQIso is the inverse unit). Clauses checked: arbitrary CommRing map, independent wA/wB, injective terms, strict outside-[a,b] support, s direction, J = coinductionComplexFunctor with action (cφ)(x)=φ(xc), injective B-terms and support conclusions, D(B) iso pinned to model.symm ≪≫ C_f(s), K-injectivity as a conclusion. Edge cases B=0, a=b, f=id, Z→Z/2, Z→Q. No name collisions in live; docstrings with source and blueprint; only the theorem proof is sorry; statement verbatim. Not compiled (no change). Advisory: second reading by the same worker; OrdinaryModuleDerivedInternalHom import unused in the signature."
  }
 }

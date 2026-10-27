@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
-public import WeilConjectures.Statement
 public import Sheaf.Targets.EtaleSmooth
 public import Sheaf.Targets.EtaleSmoothRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper

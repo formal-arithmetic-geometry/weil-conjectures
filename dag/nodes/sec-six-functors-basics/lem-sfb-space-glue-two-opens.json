@@ -1,0 +1,466 @@
+{
+ "id": "lem-sfb-space-glue-two-opens",
+ "kind": "statement",
+ "title": "Gluing two algebraic spaces along specified open immersions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $B,A_1,A_2,T$ be algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Suppose $A_1,A_2,T$ are over $B$ and $k_i:T\\hookrightarrow A_i$ are open immersions over $B$, meaning representable morphisms whose every scheme base change is an open immersion [def-weil-open-immersion]. There exist an algebraic space $W$ over $B$ and open immersions $e_i:A_i\\hookrightarrow W$ over $B$, whose images cover $W$, with $e_1k_1=e_2k_2$, such that the induced map $T\\to A_1\\times_W A_2$ is an isomorphism. For every algebraic space $Z$ over $B$, restriction induces a bijection $$\\operatorname{Hom}_B(W,Z)\\ \\cong\\ \\operatorname{Hom}_B(A_1,Z)\\mathbin{\\times}_{\\operatorname{Hom}_B(T,Z)}\\operatorname{Hom}_B(A_2,Z).$$ No separatedness, quasi-compactness, or density assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WN (section-glueing-algebraic-spaces), with Tag 02WR (lemma-glueing-algebraic-spaces) applied to the sheaf pushout; the binary gluing used in spaces-more-morphisms.tex Tag 088Q (lemma-find-common-blowups), final paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Work on the bounded big fppf site over $S$, using the small skeleton and containing set universe of [def-weil-size-convention]. The maps $k_i$ are injective on sections: for $a\\in A_i(X)$ the pullback $h_X\\times_{A_i}T$ is an open subscheme of $X$, and its sections over $X$ are unique by [lem-weil-pbc-open-immersion-monomorphism]; Yoneda [lem-pc-yoneda] identifies these with the lifts of $a$. Define $P(X)=(A_1(X)\\amalg A_2(X))/\\sim$, identifying $k_1(t)$ with $k_2(t)$ for $t\\in T(X)$. Injectivity of both $k_i$ means that every equivalence class is either a singleton or precisely the pair associated with one $t$. Thus both $A_i(X)\\to P(X)$ are injective, and $A_1(X)\\times_{P(X)}A_2(X)=T(X)$. Restrictions preserve these descriptions. The quotient universal property, or [lem-weil-pbc-presheaf-colimits-sectionwise] for the finite span, makes $P$ its presheaf pushout.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-pc-yoneda",
+    "lem-weil-pbc-presheaf-colimits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WN (section-glueing-algebraic-spaces), sheaf gluing construction expanded using sites.tex Tag 00VB (section-limits-colimits-PSh); monicity from schemes.tex Tag 01L7 (lemma-immersions-monomorphisms)."
+   }
+  },
+  {
+   "text": "Form $W=P^\\#$ using [lem-trf-sieve-set-sheafification-exists], and let $e_i:A_i\\to W$ be the induced maps. Its adjunction gives $\\operatorname{Hom}(W,Z)=\\operatorname{Hom}(P,Z)$ for every fppf sheaf $Z$, hence the pushout mapping property. By [lem-weil-pbc-sheafification-sets-exact], sheafifying the cartesian square of Step 1 gives $T\\simeq A_1\\times_W A_2$, with its original two projections. Sheafifying $A_i\\times_P A_i\\simeq A_i$ likewise makes $e_i$ monic. Here sheafification fixes $T,A_i$, as follows directly from its adjunction and their sheaf property. Finally [lem-weil-pbc-site-sheafification-sections-local] says every section of $W$ is fppf locally represented by a section of $P$, and each such section has a representative in one of the $A_i$. Consequently the two maps $e_i$ locally cover $W$.",
+   "uses": [
+    "lem-trf-sieve-set-sheafification-exists",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00ZM (proposition-sheafification-adjoint-topology), 00WJ (lemma-sheafification-exact), 00WK (lemma-sections-sheafification); the pushout property is the adjunction argument of Tag 00WI (lemma-colimit-sheaves)."
+   }
+  },
+  {
+   "text": "Choose scheme atlases $p_i:h_{U_i}\\to A_i$ by [def-trf-algebraic-space]. The finite scheme coproduct $U=U_1\\amalg U_2$ exists by [lem-weil-pbc-scheme-coproduct-family] and lies in the chosen site bound. Its two disjoint open summands are an fppf covering by [lem-pc-zariski-coverings-are-fppf]. Since $W$ is a sheaf, the sections $e_ip_i$ glue to a section of $W(U)$, hence to $q:h_U\\to W$ by [lem-pc-yoneda]. They agree on the empty overlap by the sheaf axiom for the empty cover. This $q$ has the local lifting property required for open-subfunctor descent: first lift a section of $W$ to some $A_i$ using Step 2, then lift it through $p_i$ using [lem-a1-representable-etale-fppf-local-lifting], and compose the covering families. The resulting maps to $U_i$ followed by its inclusion into $U$ lift the original section through $q$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-pc-yoneda",
+    "lem-a1-representable-etale-fppf-local-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y (definition-algebraic-space), Tag 0262 (lemma-space-presentation), and Tag 02WR (lemma-glueing-algebraic-spaces), atlas construction; scheme coproducts via schemes.tex Tag 01JC (lemma-glue-schemes)."
+   }
+  },
+  {
+   "text": "Fix $i\\in\\{1,2\\}$ and let $j$ be the other index. The pullback $h_U\\times_W A_i$ restricts on $U_i$ to $h_{U_i}$ because $e_i$ is monic, and on $U_j$ to $h_{U_j}\\times_{A_j}T$ by the cartesian square of Step 2. The latter is represented by an open subscheme $V_{ji}\\subset U_j$, since $k_j$ is representable by open immersions. Thus $V_i=U_i\\amalg V_{ji}$ is an open subscheme of $U$. It represents $h_U\\times_W A_i$: for any map $X\\to U$, split $X$ by the inverse images of $U_1,U_2$; on each piece the asserted representation is the one just calculated. The local lifts into $A_i$ glue uniquely because $A_i$ is an fppf sheaf and the pieces form a Zariski, hence fppf, covering. The same argument glues the scheme maps into $V_i$; explicitly this is [lem-weil-pbc-scheme-morphism-gluing]. Both constructions commute with restriction and are inverse. Their projection is the open inclusion $V_i\\hookrightarrow U$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WR (lemma-glueing-algebraic-spaces), scheme-test open pieces; binary pushout intersection from sites.tex Tag 00WJ. The explicit disjoint-cover argument supplies the representing open needed for Tag 02WU (lemma-finding-opens)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fppf-local-open-subfunctor-descent] with $F=W$, $G=A_i$, $\\alpha=e_i$, and $q:h_U\\to W$. Monicity is Step 2, local lifting is Step 3, and the representing open above $U$ is Step 4. It follows that each $e_i$ is representable by open immersions. For any scheme test $X\\to W$ let $X_i=X\\times_W A_i$ be these open subschemes. Every section of $W$ locally lifts to one $A_i$ by Step 2, so an fppf covering of $X$ factors through these $X_i$. As fppf coverings are jointly surjective on points by [def-pc-fppf-site], $X=X_1\\cup X_2$. In particular the two open images cover on every scheme test, which gives the required covering of $W$.",
+   "uses": [
+    "lem-trf-fppf-local-open-subfunctor-descent",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), open-subfunctor descent; Tag 02WR (lemma-glueing-algebraic-spaces), first proof paragraph: local lifts force the representing opens to cover."
+   }
+  },
+  {
+   "text": "The sheaf coproduct $A_1\\amalg A_2$ is an algebraic space by [lem-trf-algebraic-space-coproduct]: the chosen atlases have finite coproduct $U_1\\amalg U_2$ in the site, so its size hypothesis is satisfied. Apply [lem-trf-algebraic-space-open-gluing] to the sheaf $W$ and the two subfunctors $A_i\\subset W$. They are algebraic spaces by assumption, their maps are representable open immersions by Step 5, their coproduct is algebraic by the preceding sentence, and the coproduct map is locally surjective by Step 2. Thus $W$ is an algebraic space over $S$.",
+   "uses": [
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-algebraic-space-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces), finite atlas size condition, and Tag 02WR (lemma-glueing-algebraic-spaces), all hypotheses."
+   }
+  },
+  {
+   "text": "The two structure maps $A_i\\to B$ agree on $T$, so Step 2 gives a unique map $b:W\\to B$. It makes both $e_i$ morphisms over $B$. For maps $g_i:A_i\\to Z$ over $B$ agreeing on $T$, Step 2 gives a unique sheaf map $g:W\\to Z$. Morphisms of algebraic spaces are natural transformations by [def-trf-algebraic-space], so this is an algebraic-space morphism. Both $b$ and the composite $W\\xrightarrow{g}Z\\to B$ restrict to the given structure map on each $A_i$, hence are equal by the same uniqueness. This proves precisely the asserted bijection of $\\operatorname{Hom}_B$ sets. Step 2 gives the asserted isomorphism from $T$ to the sheaf fibre product, and [lem-trf-space-fibre-products-etale-covers] identifies that product with the algebraic-space fibre product. All constructions allow empty opens and impose no separatedness, quasi-compactness or density condition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 088Q (lemma-find-common-blowups), final gluing paragraph, with the over-base mapping property expanded from sites.tex Tag 00WH (proposition-sheafification-adjoint)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-pc-yoneda",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-algebraic-space-open-gluing",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-trf-sieve-set-sheafification-exists",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 02WN, 02WQ, 02WR, 02WU; binary sheaf-pushout construction and over-B mapping argument expanded by Q38, using sites.tex Tags 00WH, 00WJ, 00WK and the gluing in spaces-more-morphisms.tex Tag 088Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue two algebraic spaces along a common open subspace with the two spaces as open subspaces covering the result",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.GlueData.glued",
+     "AlgebraicGeometry.Scheme.GlueData",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.toGlueData",
+     "AlgebraicGeometry.Scheme.GlueData.gluedScheme",
+     "AlgebraicGeometry.Scheme.GlueData.toGlueData",
+     "AlgebraicGeometry.Scheme.GlueData.ι",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "88dc5e7014620cd8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData and general CategoryTheory.GlueData do not supply an algebraic-space pushout with representable open inclusions and the specified intersection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pushout of two algebraic spaces along open immersions is an algebraic space and the intersection of the two opens is the gluing subspace",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.isPullback_opens_inf",
+     "AlgebraicGeometry.Scheme.GlueData.mk",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn",
+     "AlgebraicGeometry.Scheme.GlueData.f_open",
+     "AlgebraicGeometry.isPullback_opens_inf_le",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.mk",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.f_open",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusionType"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "f6445677c844b58e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData and general CategoryTheory.GlueData do not supply an algebraic-space pushout with representable open inclusions and the specified intersection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GlueData\"",
+   "results": {
+    "hits": [
+     "CategoryTheory.GlueData",
+     "CategoryTheory.GlueData'",
+     "CategoryTheory.GlueData.J",
+     "CategoryTheory.GlueData'.J",
+     "CategoryTheory.GlueData.ofGlueData'",
+     "CategoryTheory.GlueData.U",
+     "CategoryTheory.GlueData'.U",
+     "CategoryTheory.GlueData.diagram"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4364f716f4bcc02d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData and general CategoryTheory.GlueData do not supply an algebraic-space pushout with representable open inclusions and the specified intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Gg]lu[ei].*[Oo]pen|pushout.*[Oo]pen",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+     "Mathlib/AlgebraicGeometry/QuasiAffine.lean",
+     "Mathlib/AlgebraicGeometry/ColimitsOver.lean",
+     "Mathlib/AlgebraicGeometry/ColimitsOver.lean",
+     "Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+     "Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean"
+    ],
+    "n_hits": 25,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "82ff760404cad557"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.GlueData and general CategoryTheory.GlueData do not supply an algebraic-space pushout with representable open inclusions and the specified intersection."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|pushout.*[Oo]pen|[Gg]lu[ei].*[Ss]pace",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/QuasiAffine.lean",
+     "Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+     "Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+     "Mathlib/AlgebraicGeometry/Gluing.lean",
+     "Mathlib/AlgebraicGeometry/Gluing.lean",
+     "Mathlib/AlgebraicGeometry/Gluing.lean",
+     "Mathlib/AlgebraicGeometry/Gluing.lean",
+     "Mathlib/AlgebraicGeometry/Gluing.lean"
+    ],
+    "n_hits": 13,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "25d42fafe47efd19"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct scheme gluing or general categorical gluing, not representable open inclusions and the specified intersection for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GlueData\"",
+   "results": {
+    "hits": [
+     "CategoryTheory.GlueData",
+     "CategoryTheory.GlueData'",
+     "CategoryTheory.GlueData.J",
+     "CategoryTheory.GlueData'.J",
+     "CategoryTheory.GlueData.ofGlueData'",
+     "CategoryTheory.GlueData.U",
+     "CategoryTheory.GlueData'.U",
+     "CategoryTheory.GlueData.diagram"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4364f716f4bcc02d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct scheme gluing or general categorical gluing, not representable open inclusions and the specified intersection for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pushout of two algebraic spaces along a common open subspace exists with open embeddings and is a cartesian square",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne",
+     "AlgebraicGeometry.instIsOpenImmersionLeftSchemeDiscretePUnitMapWalkingSpanOverTopMorphismPropertySpan",
+     "AlgebraicGeometry.instIsOpenImmersionMapWalkingSpanSchemeSpan",
+     "AlgebraicGeometry.nonempty_isColimit_binaryCofanMk_of_isCompl",
+     "AlgebraicGeometry.isPullback_SpecMap_pushout",
+     "AlgebraicGeometry.isPullback_Spec_map_pushout",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullback_to_base_isOpenImmersion",
+     "AlgebraicGeometry.Scheme.GlueData.f_open"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "8a169b529994937a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct scheme gluing or general categorical gluing, not representable open inclusions and the specified intersection for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue algebraic spaces along open immersions to obtain a pushout algebraic space",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.GlueData.mk",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.casesOn",
+     "AlgebraicGeometry.SheafedSpace.GlueData.mk",
+     "AlgebraicGeometry.PresheafedSpace.GlueData.mk",
+     "AlgebraicGeometry.Scheme.GlueData.f_open",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData",
+     "AlgebraicGeometry.LocallyRingedSpace.GlueData.mk",
+     "AlgebraicGeometry.Scheme.GlueData.gluedScheme"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "1387a87c62d2c3ca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct scheme gluing or general categorical gluing, not representable open inclusions and the specified intersection for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf covered by two algebraic spaces with an identified open intersection is an algebraic space",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.GlueData.gluedScheme",
+     "AlgebraicGeometry.Scheme.GlueData.openCover",
+     "AlgebraicGeometry.Scheme.Cover.gluedCover",
+     "AlgebraicGeometry.Scheme.GlueData",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued",
+     "AlgebraicGeometry.Scheme.Cover.instIsOpenImmersionFromGlued",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData",
+     "AlgebraicGeometry.Scheme.Cover.gluedCover_U"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "61a53768095b727c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct scheme gluing or general categorical gluing, not representable open inclusions and the specified intersection for algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-common-admissible-blowups",
+  "date": "2026-10-24",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the Chow modification in the third paragraph. Construction input: Tag 088S proof, apply 088R to the chosen open immersion into projective space; affine-base projectivity is handled separately. Supporting Tag 088Q (lemma-find-common-blowups); U-admissible centres as defined in spaces-divisors.tex Tag 086B (definition-admissible-blowup).. Supporting Tag 088Q proof, final paragraph: glue the modified spaces along their common open product blowup.",
+   "via": [
+    "lem-sfb-space-common-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-glue-two-opens",
+  "worker": "stage1",
+  "summary": "Constructed the sectionwise pushout, sheafified with the correct small-site universe, calculated its exact intersection and monomorphisms, used the existing fppf open-subfunctor descent theorem, then applied the existing 02WQ/02WR criteria. Proved the over-B universal property explicitly. Statement unchanged; zero new nodes.",
+  "blueprint": "The inherited compactification prerequisite of sk-thm-sf-ctf-stability, through the item parent lem-sfb-space-common-admissible-blowups: precisely Stacks 088Q final paragraph, gluing along the common open product blowup. Read the latest sk-thm-sf-ctf-stability and chapter text; no unit or chapter route changed. The inherited ancestor chain currently resolves to null, as blueprint_refs.py ancestor reports; retained rather than inventing a blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-yoneda",
+    "why": "Generic full Yoneda bijection converts sections on schemes into sheaf maps; the item unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "why": "Generic presheaf-colimit calculation used to construct the binary pushout before sheafification."
+   },
+   {
+    "node": "lem-trf-sieve-set-sheafification-exists",
+    "why": "Generic existence and adjunction for set sheafification on the bounded small skeleton."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Generic preservation of finite limits identifies the overlap after sheafification."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representatives theorem supplies the open covering property."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic finite coproduct of atlas schemes, also verifying the size hypothesis in 02WQ."
+   },
+   {
+    "node": "lem-pc-zariski-coverings-are-fppf",
+    "why": "Generic topology comparison lets fppf sheaves glue over the two disjoint atlas pieces."
+   },
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "Generic local lifting for an atlas, used solely as a sheaf-cover tool without changing the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing of maps over a disjoint open cover in the explicit scheme-test computation."
+   },
+   {
+    "node": "lem-trf-fppf-local-open-subfunctor-descent",
+    "why": "Generic open-subfunctor descent turns the explicit atlas pullback into representability by open immersions."
+   },
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic 02WQ finite coproduct criterion supplies one explicit hypothesis of 02WR."
+   },
+   {
+    "node": "lem-trf-algebraic-space-open-gluing",
+    "why": "Generic 02WR algebraicity criterion, applied after constructing the sheaf and proving its open-cover hypotheses."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products identifies the constructed sheaf intersection with the product in the statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-monomorphism",
+    "why": "Generic scheme open-immersion monicity verifies sectionwise injectivity of each input map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-yoneda",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "lem-trf-sieve-set-sheafification-exists",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-a1-representable-etale-fppf-local-lifting",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-algebraic-space-open-gluing",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-immersion-monomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-408fe4bac",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-408fe4bac (reviewer sub-agent of L); spot-checked: PASS; no fixes written. I read the item in full. Its statement is unchanged; I tested it on T empty, T=A, k_1=id, empty A_i, and the non-separated affine line made of two lines glued along G_m. I also read every cited node statement, Stacks 02WR (statement and full proof) and the 088Q final paragraph, and checked the parent's use of the item. No repair note exists and live shows the item unsplit, so this delivery is not superseded. The 7 steps check out. (1) Sectionwise injectivity of k_i comes from scheme open-immersion monicity plus Yoneda. The set pushout of two injections gives the exact pullback T. (2) Sheafification is V-small. It preserves finite limits, which gives T≅A_1×_W A_2 and e_i monic, and local representatives give local covering. (3) q is built from the U_1⊔U_2 atlases, with local lifting through lem-a1 applied to p_i, not to q. (4) The explicit open V_i=U_i⊔V_ji represents h_U×_W A_i. (5) Every hypothesis of lem-trf-fppf-local-open-subfunctor-descent is met, and covering follows from joint surjectivity of fppf coverings. (6) The 02WQ size hypothesis holds and the 02WR hypotheses (1),(2a)-(2e) are each met. (7) The Hom_B bijection follows from the pushout uniqueness. proof_deps equals the union of the uses, and there is no cycle. There are no new nodes, and rg -L over dag/nodes finds no duplicate binary-gluing node. I accept all 14 declared tool_uses as generic black boxes; no SGA is cited. Batch-5: lem-a1-representable-etale-fppf-local-lifting reaches only def-trf-algebraic-space, a definition. lem-trf-algebraic-space-coproduct (02WQ), lem-trf-algebraic-space-open-gluing (02WR), lem-trf-fppf-local-open-subfunctor-descent (02WU) and lem-trf-sieve-set-sheafification-exists (00ZM) are general algebraic-space and site foundations in unit sk-i-curve-zero. Their closures contain only such trf foundation lemmas, none of which is a trace-formula or Poincaré-duality statement or proof step, so they are accepted."
+ }
+}

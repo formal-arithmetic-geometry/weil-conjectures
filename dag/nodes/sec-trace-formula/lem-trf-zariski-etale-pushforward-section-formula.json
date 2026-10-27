@@ -1,0 +1,121 @@
+{
+ "id": "lem-trf-zariski-etale-pushforward-section-formula",
+ "kind": "statement",
+ "title": "The counit mate in tensor-section coordinates equals module base change",
+ "statement": "Fix scheme Zariski-etale module contexts c and a family e of sheaf isomorphisms from extension of each quasi-coherent module to its tensor-section sheaf [lem-trf-etale-extension-free-presentations-hom]. Assume e is linear, natural in module maps, and identifies the extension unit on opens with the identity. For any scheme morphism a:U→T, a right-adjoint proof hp for the small-etale direct image, and an open-normalized right-adjoint square r, let H be quasi-coherent with quasi-coherent a_*H. For each etale test V→T, conjugating the section component of the counit mate zariskiEtalePushforwardComparison by e_T(a_*H) and e_U(H) equals the global-section component of the canonical moduleBaseChangeMap for the square V×_T U [def-sfb-module-base-change-map]. No invertibility of this map is asserted.",
+ "stmt_deps": [
+  "def-sfb-scheme-zariski-etale-module-constructions",
+  "def-sfb-module-base-change-map",
+  "lem-trf-etale-extension-free-presentations-hom",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03LC (3), section-comparison paragraph; cohomology.tex Tag 02N7 in degree zero; assigned parent proof steps 4–7."
+ },
+ "proof": [
+  {
+   "text": "Transpose the counit mate using the composite extension/restriction adjunctions. The conjugate-iso unit equation and normalization of r identify its transpose with pushforward of the extension unit. The open-unit condition for e identifies its value on an open section s with 1 tensor s.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On local tensor generators b tensor s, linearity gives the map b tensor s ↦ a_V-sharp(b) times v-prime-pullback(s). The degree-zero adjoint formula for the canonical module base-change map gives the same expression. Restriction functoriality and the normalized pullback composition make these formulas commute with maps of test schemes. Sheafification extends equality from these local generators to all sections, giving the displayed equation.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-map-sections",
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-flat-base-change-map-sections",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03LC (3), section-comparison paragraph; cohomology.tex Tag 02N7 in degree zero; assigned parent proof steps 4–7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The counit mate of Zariski etale module pullback comparison evaluated in tensor section coordinates is the canonical module flat base change map",
+   "results": "KaehlerDifferential.moduleBaseChange' and tensorKaehlerEquivOfFormallyEtale_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; Algebra.Etale.baseChange. No matching sheaf-level mate equality.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, SheafOfModules.pullback",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-26",
+   "verdict": "General adjunction machinery, not the stated scheme-site normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "zariskiEtalePushforwardComparison|gabberPreimageEtaleIso",
+   "results": "SchemeZariskiEtaleQuasiCoherentEquivalence defines the mate; ZariskiEtaleFunctorComparisonSquare is the assigned unfinished assembly. No separate theorem of this step.",
+   "date": "2026-10-26",
+   "verdict": "No existing independent lemma for this step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.ZariskiEtaleFunctorComparisonSquare",
+  "group": "N3",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-zariski-etale-functor-comparison-square",
+   "place": "Tag 03LC (3), section-comparison paragraph; cohomology.tex Tag 02N7 in degree zero; assigned parent proof steps 4–7.",
+   "via": [
+    "lem-trf-zariski-etale-functor-comparison-square"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.ZariskiEtalePushforwardSectionFormula",
+  "file": "lean/Sheaf/TraceFormula/ZariskiEtalePushforwardSectionFormula.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.zariskiEtale_pushforward_section_formula",
+  "statement": "theorem zariskiEtale_pushforward_section_formula\n    (c : ∀ T : Scheme.{u}, ZariskiEtaleModuleContext T)\n    (e : ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent],\n          (SheafOfModules.toSheaf (smallEtaleModuleRing T)).obj ((c T).extension.obj F) ≅\n            etaleTensorSectionsSheaf F)\n    (hlinear : ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent]\n            (V : T.Etale) (b : Γ(V.left, ⊤))\n            (s : ((c T).extension.obj F).val.obj (op V)),\n          (e T F).hom.hom.app (op V) (b • s) =\n            b • (@id (Γ((tensorPullback V.hom).obj F, ⊤))\n              ((e T F).hom.hom.app (op V) s)))\n    (hnatural : ∀ (T : Scheme.{u}) (F K : T.Modules) [F.IsQuasicoherent] [K.IsQuasicoherent]\n            (h : F ⟶ K) (V : T.Etale),\n          ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map\n            ((c T).extension.map h)).hom.app (op V) ≫ (e T K).hom.hom.app (op V) =\n              (e T F).hom.hom.app (op V) ≫ ((tensorPullback V.hom).map h).app ⊤)\n    (hopen : ∀ (T : Scheme.{u}) (F : T.Modules) [F.IsQuasicoherent] (W : T.Opens),\n          ((c T).adjunction.unit.app F).app W ≫\n              (e T F).hom.hom.app (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) ≫\n                (tensorOpenSectionIso T F W).hom = 𝟙 _)\n    {U T : Scheme.{u}} (a : U ⟶ T)\n    (hp : (smallEtaleModulePushforward a).IsRightAdjoint)\n    (r : smallEtaleModulePushforward a ⋙ (c T).restriction ≅\n      (c U).restriction ⋙ pushforward a)\n    (hr : ∀ (G : SmallEtaleModules U) (W : T.Opens),\n      (r.hom.app G).app W =\n        G.val.presheaf.map (AlgebraicGeometry.gabberPreimageEtaleIso a W).hom.op)\n    (H : U.Modules) [H.IsQuasicoherent] [((pushforward a).obj H).IsQuasicoherent]\n    (V : T.Etale) :\n    (e T ((pushforward a).obj H)).inv.hom.app (op V) ≫\n        ((SheafOfModules.toSheaf (smallEtaleModuleRing T)).map\n          (zariskiEtalePushforwardComparison a (c U) (c T) hp r H)).hom.app (op V) ≫\n        (e U H).hom.hom.app (op (a.Etale.obj V)) =\n      (moduleBaseChangeMap a (pullback.fst V.hom a) V.hom\n        (pullback.snd V.hom a) pullback.condition.symm H).app ⊤",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T082559-L-2192494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T082559-L-2192494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

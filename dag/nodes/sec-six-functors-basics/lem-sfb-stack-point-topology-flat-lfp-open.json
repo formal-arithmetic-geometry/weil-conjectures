@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-stack-point-topology-flat-lfp-open",
+ "kind": "statement",
+ "title": "Topology of algebraic stacks and openness of flat locally presented maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An algebraic stack over $S$ means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; stacks, representability and 2-fibre products have the conventions of [def-sfb-stable-pointed-moduli-groupoids], smoothness is [def-sbc-smooth-morphisms], and algebraic spaces are [def-trf-algebraic-space]. For an algebraic stack $\\mathcal X/S$, let $|\\mathcal X|$ be the set of field-valued objects $\\operatorname{Spec}K\\to\\mathcal X$, where $K$ is a field [def-weil-field, def-weil-affine-spectrum], modulo the equivalence identifying objects that become 2-isomorphic over a common field extension. Composition defines $|f|$ for a morphism of algebraic stacks. There is a topology on these point sets, agreeing with the usual topology on algebraic spaces [def-a1-space-point-topology], characterized by the following rule: for any smooth surjective scheme atlas $p:U\\to\\mathcal X$, a subset $W\\subseteq|\\mathcal X|$ is open if and only if $|p|^{-1}(W)$ is open in $|U|$; this rule is independent of the atlas. Every morphism of algebraic stacks induces a continuous map on point spaces. For every algebraic space $A/S$ and every flat locally finitely presented morphism $q:A\\to\\mathcal X$, the map $|q|:|A|\\to|\\mathcal X|$ is open. Here flatness and local finite presentation are tested after scheme base change on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation].",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 04XG (definition-points) and 04XL (lemma-topology-points), parts (1), (2), and the smooth-atlas description in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-stack-point-topology] to the algebraic stacks in the statement. It supplies the atlas-independent topology, agreement with the usual scheme and algebraic-space topologies, and continuity of every morphism. Its closed-subset atlas criterion gives the required open-subset criterion by taking complements: $|p|^{-1}(|\\mathcal X|\\setminus W)=|U|\\setminus|p|^{-1}(W)$. Composition on point classes is well-defined because a functor preserves the isomorphism over a common extension witnessing equivalence. It remains to prove openness for $q$.",
+   "uses": [
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XG (definition-points), following paragraph, and 04XL (lemma-topology-points), topology and continuity"
+   }
+  },
+  {
+   "text": "Fix a smooth surjective scheme atlas $p:U\\to\\mathcal X$. By [lem-sfb-stack-diagonal-space-source-representability], $q$ is representable by algebraic spaces, so $P=A\\times_{\\mathcal X}U$ is an algebraic space. Write $r:P\\to A$ and $s:P\\to U$. The chartwise base-change assertion of [lem-sfb-stack-chartwise-smooth-etale-calculus] gives that $s$, the base change of $q$, is flat and locally of finite presentation. By [lem-sfb-flat-lfp-space-universally-open], $|s|$ is open. The algebraic spaces $P$ and $A$ are algebraic stacks whose point topologies are the usual ones, so the continuity clause of [lem-sfb-stack-point-topology] makes $|r|$ continuous; thus for any open $O\\subseteq|A|$, $|r|^{-1}(O)$ is open in $|P|$.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-sfb-stack-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XL (lemma-topology-points), final paragraph; Tag 04XC (lemma-property-spaces-too) for base change; spaces-morphisms.tex Tag 042S (lemma-fppf-open)"
+   }
+  },
+  {
+   "text": "For open $O\\subseteq|A|$, we have $|p|^{-1}(|q|(O))=|s|(|r|^{-1}(O))$. One inclusion follows from the tautological 2-isomorphism $qr\\simeq ps$. For the reverse inclusion, take $u$ on the left and $a\\in O$ with $|p|(u)=|q|(a)$. Choose field-valued representatives of $u,a$. Their equal image classes mean that, over a common field extension $M$, their images in $\\mathcal X$ are isomorphic. The two pulled-back objects and that isomorphism are an object of the 2-fibre product $P$ over $M$, whose point maps to $u,a$. Hence $u$ lies on the right. The right side is open by step 2. The atlas criterion of [lem-sfb-stack-point-topology], in its complement form from step 1, implies that $|q|(O)$ is open. This proves openness for all $O$, without any surjectivity assumption on $q$.",
+   "uses": [
+    "lem-sfb-stack-point-topology",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XH (lemma-points-cartesian), explicit field-extension argument; Tag 04XL (lemma-topology-points), final displayed image equality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-sfb-stack-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XL (lemma-topology-points), proof, especially final paragraph; Tag 04XH (lemma-points-cartesian) for the explicitly written point argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraic.stack|UniversallyOpen.of_flat",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"147\", \"text\": \"instance (priority := low) UniversallyOpen.of_flat [Flat f] [LocallyOfFinitePresentation f] :\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: UniversallyOpen.of_flat and the other openness hits concern schemes. They do not give the smooth-atlas topology or the algebraic-space-to-stack assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The topology on field valued points of an algebraic stack makes every flat locally finitely presented morphism from an algebraic space an open continuous map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyOpen f],\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any schemes $X$ and $Y$, if a morphism $f : X \\to Y$ is universally open, then $f$ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: UniversallyOpen.of_flat and the other openness hits concern schemes. They do not give the smooth-atlas topology or the algebraic-space-to-stack assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf map of algebraic spaces to an Artin stack induces an open map on the underlying topological spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyOpen f],\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any schemes $X$ and $Y$, if a morphism $f : X \\to Y$ is universally open, then $f$ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"For any open cover 𝒰 of a scheme X, the underlying continuous map of the canonical morphism from the glued scheme constructed from 𝒰 to X is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is universally open, every base change $ Y' \\\\to Y $ induces an open map $ X \\\\times_Y Y' \\\\to Y' $ on the underlying topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyIsOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of a scheme morphism having an underlying continuous map that is an open map is Zariski-local at the source. That is, for any scheme morphism, if there exists a Zariski-open cover of its \"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => IsOpenMap)\", \"doc\": \"The property of being an open map for morphisms of schemes is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes is an open map (i.e., its underlying continuous map s\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyOpen f],\\n  (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is universally open, then the underlying continuous map of $ f $ satisfies the universal property of being an open map. That is, for every base chan\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: UniversallyOpen.of_flat and the other openness hits concern schemes. They do not give the smooth-atlas topology or the algebraic-space-to-stack assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat locally finitely presented morphism from an algebraic space to an algebraic stack is open",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] [Mono f] : IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[LocallyOfFinitePresentation f] (hf : GeneralizingMap f) : IsOpenMap f\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [UniversallyOpen f] : IsOpenMap f\", \"doc\": \"For any schemes $X$ and $Y$, if a morphism $f : X \\to Y$ is universally open, then $f$ is an open map of topological spaces.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsOpenImmersion f] : Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[IsOpenImmersion f] : UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: UniversallyOpen.of_flat and the other openness hits concern schemes. They do not give the smooth-atlas topology or the algebraic-space-to-stack assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"UniversallyOpen\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.UniversallyOpen\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionSchemeTopologicallyIsOpenMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : (AlgebraicGeometry.topologically @IsOpenMap).IsStableUnderComposition\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is universally open if the base change `X ×[Y] Y' ⟶ Y'`\\nalong any morphism `Y' ⟶ Y` is (topologically) an open map.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" : @AlgebraicGeometry.UniversallyOpen = (AlgebraicGeometry.topologically @IsOpenMap).universally\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (universally_isOpenMap : (AlgebraicGeometry.topologically @IsOpenMap).universally f) : AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A flat morphism, locally of finite presentation is universally open.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: UniversallyOpen.of_flat and the other openness hits concern schemes. They do not give the smooth-atlas topology or the algebraic-space-to-stack assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-flat-lfp-finite-type-surjectivity",
+  "date": "2026-10-22",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points detect surjectivity of flat locally presented maps. Supporting input for this split: Open-image input for the final paragraph of Tag 06N3 (theorem-DM).",
+   "via": [
+    "lem-sfb-stack-flat-lfp-finite-type-surjectivity",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-point-topology-flat-lfp-open",
+  "worker": "stage1",
+  "summary": "Reused the existing stack-topology and algebraic-space universal-openness nodes, checked representability and base-change hypotheses, and wrote the common-field-extension proof of the image identity. No new nodes. Corrected doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) alteration/moduli prerequisite chain, specifically the open-image input in the final paragraph of Stacks Tag 06N3. The topology and flat-lfp openness argument realizes the supporting Tag 04XL input; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-65246dc97",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-65246dc97 (reviewer sub-agent of L); spot-checked: I read Stacks 04XL (stacks-properties.tex l.938-1035, including the final image identity) and 04XH (l.802-831). The item's openness clause for an arbitrary flat lfp q:A->X from an algebraic space matches 04XL(2). Step 1: lem-sfb-stack-point-topology (unsplit, same unit) has matching hypotheses and gives the topology, continuity and agreement on spaces; its closed-set criterion becomes the open-set criterion by complements. Step 2: 045G-type representability gives that P=A x_X U is an algebraic space. s is flat and lfp by the base-change clause and by the item's own chartwise definition, and lem-sfb-flat-lfp-space-universally-open (042S) makes |s| open. Step 3, marked elementary, is the 04XH triple argument over a common extension M using the def-sfb 2-fibre-product objects, and it is correct. Checked edge cases: empty A or O, the identity atlas, nontrivial stabilizers, non-surjective q. No cycle; citers' uses are kept. Batch-5: all four flags reach sec-trace-formula only through the general def-trf-algebraic-space, so they are generic and accepted. FIX (C7/C8): step 2 cited lem-a1-space-point-open-calculus, a node of the unit sk-p-real-rankin, for continuity of |r|, and the worker wrote tool_uses for it. This unit's own lem-sfb-stack-point-topology gives that continuity, so I re-cited it, removed lem-a1 from uses and proof_deps, and deleted tool_uses. No tool use is accepted. No new nodes; no duplicates found (lem-sfb-smooth-presentation-closed-subsets works over a field only).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackPointTopologyFlatLfpOpen",
+  "declaration": "CategoryTheory.stackPointTopology_flat_lfp_open",
+  "declarations": [
+   "CategoryTheory.moduliSchemePointMap",
+   "CategoryTheory.moduliPointTopologicalSpace",
+   "CategoryTheory.moduliSpaceFieldObject",
+   "CategoryTheory.moduliSpaceFieldObject_rel",
+   "CategoryTheory.moduliSpacePointMap",
+   "CategoryTheory.moduliSpacePointMap_isHomeomorph",
+   "CategoryTheory.stackPointTopology_flat_lfp_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackPointTopologyFlatLfpOpen.lean",
+  "statement": "theorem stackPointTopology_flat_lfp_open {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (hF : IsAlgebraicModuliStack F) : (∀ (U : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U p → ∀ W : Set (ModuliPoints F), IsOpen W ↔ IsOpen (moduliSchemePointMap p ⁻¹' W)) ∧ (∀ (G : BasedCategory.{v₂, w₂} (Over S)), IsAlgebraicModuliStack G → ∀ f : BasedFunctor F G, Continuous (moduliPointMap f)) ∧ (∀ (A : AlgebraicSpace S) (q : BasedFunctor (discreteModuli A.obj.obj) F), ModuliSpaceTest @Flat q → ModuliSpaceTest @LocallyOfFinitePresentation q → IsOpenMap (moduliPointMap q ∘ moduliSpacePointMap A.obj.obj))",
+  "branch": "sheaf-dag",
+  "by": "Q146",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed algebraic-moduli-stack and DM-morphism-properties nodes for the general stack predicate, field-object quotient, induced point map and chartwise scheme tests. The module constructs the topology and residue-field/Yoneda comparison maps with real data; separate statements give algebraic-space topology agreement and the atlas/continuity/openness clauses. No existing point quotient is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42e4bfb37",
+  "group": "Q146",
+  "result": "pass",
+  "note": "The statement is unchanged from live; the delivery adds the Lean record and two landed definition nodes to stmt_deps (def-sfb-algebraic-moduli-stack, def-sfb-dm-stack-morphism-properties), whose records cover every declaration used, and lean.statement matches the file verbatim. Checked against Stacks 04XG/04XL: (1) for every smooth surjective scheme atlas p, IsOpen W iff the preimage under moduliSchemePointMap p (the residue-field Yoneda point map) is open; the topology is the iSup of coinduced topologies over all smooth atlases, so a set is open iff open on every atlas, with no atlas chosen and real data, matching the existing AlgebraicSpace.pointTopologicalSpace pattern; (2) every morphism to an algebraic stack G (independent universes) is continuous, with no representability hypothesis; (3) every q from an algebraic space that passes ModuliSpaceTest for Flat and for LocallyOfFinitePresentation (the existing chartwise tests) gives an open map, with the usual topology on algebraic-space points and no surjectivity hypothesis. Agreement with algebraic spaces is a separate declared homeomorphism theorem for the canonical Yoneda comparison; its well-definedness sorry theorem is true. No extra hypotheses (DM, finiteness) or universe restrictions. The field-point quotient and moduliPointMap are reused, not redefined. Mathlib's Quot topology cannot compete with the new instance, since ModuliFieldObject is a plain def. No other stack-point topology exists; the sibling lem-sfb-stack-point-topology has lean null. Edge cases checked: empty stack, empty U, empty A, empty O, non-algebraic F, non-surjective q, nontrivial stabilizers, identity scheme atlas, universes. Docstrings carry source places, blueprint ids and the three proof steps; all theorems are sorry; no pro-etale substitute; no file changed or compiled. Maintainer note: the topology now lives in this lemma's module; the sibling lem-sfb-stack-point-topology must reuse moduliPointTopologicalSpace and moduliSchemePointMap, and the stage-3 import direction must be arranged."
+ }
+}

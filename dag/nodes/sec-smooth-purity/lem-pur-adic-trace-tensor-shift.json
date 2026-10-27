@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-adic-trace-tensor-shift",
+ "kind": "statement",
+ "title": "Completion-normalized trace tensor shift square",
+ "statement": "Fix a prime l, a finite extension E of Q_l, schemes X,Y, a morphism f:X→Y with compactification c, normalized ringed models d, and an arbitrary integral object T on X. Use the projection/trace maps of [def-pur-adic-projection-trace-data] and signed tensor shifts of [def-pur-integral-operation-shift-data]. Assume chi at (P_c T,K) is invertible for every finite-Tor constructible integral K on Y. For every t:P_c T→1 and such K, the ordinary-tensor trace transported through chi and the actual left unitor satisfies adicTraceTensor_(K[1]); adicInputShift_K = completedTensor(1,adicInputShift_K); signedRightShift_(P_cT,K); adicTraceTensor_K[1]. This asserts only the trace tensor square, without a projection square, invertibility of a projection, a finite-Tor condition on T, or an exceptional transpose.",
+ "stmt_deps": [
+  "def-pur-adic-projection-trace-data",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-integral-operation-shift-data",
+  "def-pur-integral-ringed-projection-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, integral coefficients; expanded adic projection and trace shift calculation in lem-pur-adic-projection-shift-coherence, proof Steps 1-4."
+ },
+ "proof": [
+  {
+   "text": "On flat-term K-flat representatives, the second tensor shift multiplies first degree a by (-1)^a. A degree-zero cochain map t preserves a, so this scalar commutes with t tensor identity. The unit is in degree zero and its unitor has coefficient one, hence the unitor preserves the same square.",
+   "uses": [
+    "def-pur-integral-operation-shift-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized completion tensor model from [def-sf-integral-system-canonical-bridge]. The quotient augmentation has the displayed tensor in its product coordinates and zero shifted-cone coordinate. The normalized signed right shift has the same product reindexing and cone diagonal on both routes. Descend on K-flat models, cancel the invertible chi at these inputs, and apply naturality at the fully faithful inclusion shift comparison.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "def-pur-integral-operation-shift-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-operation-shift-data",
+  "def-sf-integral-system-canonical-bridge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, integral coefficients; expanded adic projection and trace shift calculation in lem-pur-adic-projection-shift-coherence, proof Steps 1-4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The completed tensor trace from a morphism to the unit commutes with shifting the second tensor factor",
+   "results": "NatTrans.shift_app_comm, NatTrans.CommShift.rightUnitor and CommShiftTwo lemmas; none identifies the normalized completed tensor comparison with the ordinary tensor unitor after chi.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.shift_app_comm",
+   "results": "NatTrans.shift_app_comm in Mathlib.CategoryTheory.Shift.CommShift; needs a supplied CommShift instance for the particular transformation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adicProjection|adicTraceTensor|Tensor.chi",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicProjectionShiftCoherence",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "lem-pur-adic-projection-shift-coherence"
+   ],
+   "place": "Step 2, integral coefficients; expanded adic projection and trace shift calculation in lem-pur-adic-projection-shift-coherence, proof Steps 1-4."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicTraceTensorShift",
+  "file": "lean/Sheaf/Paper/AdicTraceTensorShift.lean",
+  "declaration": "WeilConjectures.adicTraceTensorShift",
+  "statement": "theorem adicTraceTensorShift {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (d : RingedModels l E) (c : Compactification f)\n    (T : Integral l E X)\n    (hχ : ∀ K : finiteTorConstructibleIntegralCategory l E Y,\n      IsIso (((d.tensor Y).chi l E).app\n        ((PurCompactSupport.image (PurCompactSupport.completed l E) c).obj T, K.obj)))\n    (t : (PurCompactSupport.image (PurCompactSupport.completed l E) c).obj T ⟶\n      (calculus l E Y).integralClosed.monoidal.tensorUnit)\n    (K : finiteTorConstructibleIntegralCategory l E Y) :\n    adicTraceTensor l E d c T (K⟦(1 : ℤ)⟧).obj (hχ (K⟦(1 : ℤ)⟧)) t ≫\n        (adicInputShift l E Y K).hom =\n      (integralCompletedTensor l E Y).map\n          (Prod.mkHom (𝟙 _) (adicInputShift l E Y K).hom) ≫\n        ((tensorShifts l E).integralRight Y 1).hom.app\n          ((PurCompactSupport.image (PurCompactSupport.completed l E) c).obj T, K.obj) ≫\n        (adicTraceTensor l E d c T K.obj (hχ K) t)⟦(1 : ℤ)⟧'",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ee36",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T101823-L-3740839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5ee36",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T101823-L-3740839",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly vs three new sorried lemma nodes; moved def block vs published module (byte-identical); new node lean.statements vs files; CommShift instance on PurCompactSupport.image vs integralShifts.compactSupport (rfl); importers AdicTraceTransposeData/AdicUnitTraceReductionData compiled against delivered and published item"
+ }
+}

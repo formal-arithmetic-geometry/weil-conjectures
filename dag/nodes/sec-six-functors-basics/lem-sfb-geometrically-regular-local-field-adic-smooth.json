@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-geometrically-regular-local-field-adic-smooth",
+ "kind": "statement",
+ "title": "A geometrically regular local field algebra is adically formally smooth",
+ "statement": "Let $k$ be a field and let $(B,\\mathfrak n)$ be a commutative Noetherian local $k$-algebra [def-weil-pbc-noetherian-ring], where $\\mathfrak n$ is its unique maximal ideal. Assume that $B$ is geometrically regular over $k$ [def-weil-pbc-g-ring]. Then $k\\to B$ is formally smooth for the $\\mathfrak n$-adic topology [def-weil-pbc-formally-smooth-adic]. No finite-type, completeness, characteristic, or separability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EL, theorem-regular-fs, implication (1) implies (2), in characteristic zero and in positive characteristic; in characteristic zero geometric regularity in particular gives regularity by the trivial field extension."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=B/\\mathfrak n$. Taking the identity finite purely inseparable extension in [def-weil-pbc-g-ring] shows that $B$ is regular; localizing at its unique maximal ideal leaves $B$ unchanged, so it is regular local. If $\\operatorname{char}k=0$, [lem-weil-pbc-perfect-field-separating-basis] applied to every finitely generated intermediate field of $K/k$ shows that $K/k$ is separable, precisely as in [def-weil-pbc-separable-field-extension]. The new lemma [lem-sfb-regular-local-separable-residue-adic-smooth] therefore proves the conclusion in this case.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension",
+    "lem-sfb-regular-local-separable-residue-adic-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EL, theorem-regular-fs, characteristic-zero paragraph; Tag 07EJ, lemma-regular-implies-fs."
+   }
+  },
+  {
+   "text": "It remains to consider $\\operatorname{char}k=p>0$. The node [lem-weil-pbc-geometrically-regular-h1-injective] gives regular locality and injectivity of the canonical map $H_1(L_{K/k})\\to\\mathfrak n/\\mathfrak n^2$. Applying [lem-weil-pbc-h1-injective-differentials-injective-char-p] with exactly these canonical presentations and residue map yields an injective $K$-linear comparison $\\lambda:\\Omega_{k/\\mathbf F_p}\\otimes_k K\\to\\Omega_{B/\\mathbf F_p}\\otimes_B K$. These are the modules and universal derivations of [def-weil-pbc-kahler-differentials].",
+   "uses": [
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-h1-injective-differentials-injective-char-p",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07E5, proposition-characterization-geometrically-regular, (1) implies (3) and (3) implies (4); Tag 07EL, conditions (4) and (5)."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-fs-adic-small-kernel-criterion] for $k\\to B$ and $\\mathfrak n$. Thus fix a $k$-algebra $D$, an ideal $J$ with $J^2=0$, and a $k$-algebra map $g:B\\to D/J$ killing $\\mathfrak n^r$, $r\\ge1$, and assume that representatives of $g(\\mathfrak n)$ annihilate $J$. Multiplication through $g$ makes $J$ a $B$-module: changing a lift changes the product by $J^2=0$. The extra annihilation condition makes it a $K$-vector space. Every element $a\\in\\mathbf F_p$ satisfies $a^p=a$ (the Frobenius fixes $1$ and hence its sums), so [lem-weil-pbc-perfect-field-separating-basis] and [def-weil-pbc-separable-field-extension] show that $K/\\mathbf F_p$ is separable. Since $B$ is regular local, [lem-sfb-regular-local-separable-residue-adic-smooth] over $\\mathbf F_p$ gives a ring map $\\psi:B\\to D$ lifting $g$ and compatible with $\\mathbf F_p$.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-small-kernel-criterion",
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "def-weil-pbc-separable-field-extension",
+    "lem-sfb-regular-local-separable-residue-adic-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EL, theorem-regular-fs, last two paragraphs: reduction to kernels annihilated by the maximal ideal and lifting over the prime field."
+   }
+  },
+  {
+   "text": "Write $i:k\\to B$ and $\\varphi:k\\to D$ for the structure maps. The defect $\\delta=\\psi i-\\varphi:k\\to J$ is additive and zero on $\\mathbf F_p$. Since $J^2=0$, expanding $\\psi(i(a))=\\varphi(a)+\\delta(a)$ gives $\\delta(ab)=\\varphi(a)\\delta(b)+\\varphi(b)\\delta(a)$. By [def-weil-pbc-kahler-differentials] it factors as a $k$-linear map $\\Omega_{k/\\mathbf F_p}\\to J$, hence as a $K$-linear map $\\xi:\\Omega_{k/\\mathbf F_p}\\otimes_kK\\to J$, $\\xi(\\mathrm da\\otimes c)=c\\delta(a)$. View $\\xi$ on the image $P$ of the injection $\\lambda$ from step 2. Extend it to $\\widetilde\\xi:\\Omega_{B/\\mathbf F_p}\\otimes_BK\\to J$: if $P$ is the whole space there is nothing to extend; otherwise choose $v\\notin P$ and apply [lem-sfb-linear-map-extension-prescribed-value] with prescribed value zero. The composite $\\Delta(b)=\\widetilde\\xi(\\mathrm db\\otimes1)$ is a derivation $B\\to J$ and satisfies $\\Delta i=\\delta$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-sfb-linear-map-extension-prescribed-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EL, theorem-regular-fs, final paragraph, differential extension of the defect derivation."
+   }
+  },
+  {
+   "text": "Set $f=\\psi-\\Delta$. It is additive and preserves $1$. For $b,c\\in B$, the derivation identity and $J^2=0$ give $f(b)f(c)=\\psi(b)\\psi(c)-\\psi(b)\\Delta(c)-\\psi(c)\\Delta(b)=\\psi(bc)-\\Delta(bc)=f(bc)$; the $B$-action on $J$ is multiplication by any lift under $g$, so it may be computed with $\\psi$. Moreover $qf=g$, since $\\Delta(B)\\subseteq J$, and $fi=\\psi i-\\delta=\\varphi$. This is the required $k$-algebra lift for the reduced test. The small-kernel criterion now proves formal smoothness for all tests in [def-weil-pbc-formally-smooth-adic]. Explicitly, any resulting lift of a map killing $\\mathfrak n^r$ kills $\\mathfrak n^{2r}$, because it maps $\\mathfrak n^r$ into the square-zero ideal, so the lift is continuous as well.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-small-kernel-criterion",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EL, theorem-regular-fs, final sentence; Tag 07EC, lemma-formally-smooth, continuity of a square-zero lift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "def-weil-pbc-separable-field-extension",
+  "lem-sfb-regular-local-separable-residue-adic-smooth",
+  "lem-weil-pbc-geometrically-regular-h1-injective",
+  "lem-weil-pbc-h1-injective-differentials-injective-char-p",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-fs-adic-small-kernel-criterion",
+  "lem-sfb-linear-map-extension-prescribed-value",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EL, theorem-regular-fs, characteristic-zero case and (5) implies (2), using Tag 07E5 and Tag 07EJ; the already recorded small-kernel criterion supplies the filtration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically regular Noetherian local algebra over a field is formally smooth for the maximal ideal adic topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {Rₘ : Type u_6} [inst : CommRing R] [inst_1 : CommRing Rₘ] (M : Submonoid R) [inst_2 : Algebra R Rₘ]\\n  [IsLocalization M Rₘ], Algebra.FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity over an arbitrary imperfect field implies continuous lifts of algebra homomorphisms from a local ring through square zero extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g₁ g₂ : A →ₐ[R] B), (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically regular Noetherian local algebra over a field is formally smooth for the maximal ideal adic topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"Algebra.FormallySmooth.casesOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"GeometricallyRegular\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyRegular|geometricallyRegular|FormallySmoothAdic",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically regular Noetherian local algebra over a field is formally smooth for the maximal ideal adic topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.smoothLocus_eq_univ_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.smoothLocus R A = Set.univ ↔ Algebra.FormallySmooth R A\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$, the smooth locus of $A$ over $R$ (the set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where $A_\\\\mathfrak{p}$ is formally\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {Rₘ : Type u_6} [inst : CommRing R] [inst_1 : CommRing Rₘ] (M : Submonoid R) [inst_2 : Algebra R Rₘ]\\n  [IsLocalization M Rₘ], Algebra.FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric regularity implies lifting continuous algebra maps through square zero extensions for a local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.HoldsForLocalizationAway @RingHom.FormallySmooth\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth, then the canonical homomorphism from $ R $ to the localization of $ S $ at any element $ r $ also satisfies for\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.FormallySmooth.of_split\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {P : Type u_2}\\n  [inst_3 : CommRing P] [inst_4 : Algebra R P] [Algebra.FormallySmooth R P] (f : P →ₐ[R] A)\\n  (g : A →ₐ[R] P ⧸ RingHom.ker f.toRingHom ^ 2), f.kerSquareLift.comp g = AlgHom.id R A → Algebra.Fo\", \"doc\": \"If there exists an algebra homomorphism $ g : A \\\\to P / \\\\ker(f)^2 $ such that the composition of the kernel square lift with $ g $ equals the identity on $ A $, then the algebra $ A $ over $ R $ is fo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"GeometricallyRegular\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyRegular|FormallySmoothAdic",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically regular local algebra over a field is formally smooth in the adic topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.casesOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"(f : S →ₐ[R] A) (hf : Function.Surjective f) :\\n  ∃ (g : A →ₐ[R] AdicCompletion (ker f) S), (AdicCompletion.kerProj hf).comp g = AlgHom.id R A\", \"doc\": \"Let `R` be a commutative ring, and let `A` be a formally smooth `R`-algebra. For any `R`-algebra `S` and any surjective `R`-algebra homomorphism `f : S \\\\to A`, let `\\\\hat{S}` be the adic completion of \"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no adic formal smoothness criterion for arbitrary Noetherian local algebras; smoothness results assume discrete formal smoothness or finite presentation, and field results apply only to fields"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adic-formal-smoothness-descent",
+  "date": "2026-10-23",
+  "group": "Q111"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Adic formal smoothness ascends and descends through a smooth complete local map. Descent after completion: the geometrically regular closed fibre is adically formally smooth (the reverse field implication of Stacks 07EL).",
+   "via": [
+    "lem-sfb-adic-formal-smoothness-descent",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-geometrically-regular-local-field-adic-smooth",
+  "worker": "stage1",
+  "summary": "Checked Tag 07EL and its Tag 07EJ input. Retained the statement. Reused the two existing positive-characteristic cotangent criteria, the small-kernel lifting reduction and the vector-space extension leaf; the only new statement-only node is the separable-residue regular-local criterion 07EJ. Wrote the square-zero defect correction and the continuity calculation explicitly.",
+  "blueprint": "The inherited from.place locates the closed-fibre input in the alteration/deformation branch of det-thm-sf-ctf-stability-direct-images, proof (3). Steps 1-5 realize that supporting input by Tag 07EL. The current latest blueprint proof (3) concerns direct images and compactification, not this local algebra detail; no unit route is changed. The ancestor tool reports inherited blueprint.from.node = None, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometrically-regular-h1-injective",
+    "why": "Generic local algebra input to Tag 07EL: geometric regularity gives the residue H1 injection; the six-functors unit has no replacement local algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-h1-injective-differentials-injective-char-p",
+    "why": "Generic local algebra input to Tag 07EL: the same canonical H1 injection gives the absolute differential injection; the six-functors unit has no replacement local algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-small-kernel-criterion",
+    "why": "Generic local algebra input to Tag 07EL: reduce arbitrary square-zero kernels to kernels annihilated by the maximal ideal; the six-functors unit has no replacement local algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometrically-regular-h1-injective",
+  "lem-weil-pbc-h1-injective-differentials-injective-char-p",
+  "lem-weil-pbc-fs-adic-small-kernel-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-6959ffe7d",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-6959ffe7d (reviewer sub-agent of L); spot-checked: PASS, no fixes. Read Stacks more-algebra 07EL (theorem-regular-fs) and 07EJ (lemma-regular-implies-fs); both tags checked in tags/tags. Item statement = 07EL (1)⇒(2) in every characteristic, unchanged and not weakened. No repair note, so the re-split rule does not apply. Step 1 (char 0): the identity extension is finite purely inseparable, so B is regular local; the perfect-field separating-basis leaf gives K/k separable; then 07EJ. Step 2: geometrically-regular-h1-injective and h1-injective-differentials-injective-char-p, with matching presentations and λ(da⊗x)=d(a·1)⊗x. Step 3: the small-kernel criterion makes J a K-space; 𝐅_p is perfect, so the new 07EJ node over 𝐅_p gives ψ. Step 4: the defect δ is a derivation (checked using g∘i=q∘φ, so the k-module structures agree); ξ is extended via the Mathlib leaf LinearMap.exists_extend_of_notMem, with the full-image case handled separately; Δi=δ. Step 5: f=ψ−Δ multiplies correctly, qf=g, fi=φ, and the continuity remark holds. All of this matches 07EL's (5)⇒(2) paragraph. New node = Stacks 07EJ exactly (B1–B7 hold, 5 searches recorded). Tested on A=K=k, K[[t]], and the inseparable K=k(a^{1/p}) case, which shows separability is needed. Not a duplicate: rg -L found no other 07EJ node; the 00TV node needs finite type and the fs-adic nodes are converses. Not a restatement of the item, which allows an inseparable residue field. The three sk-thm-p1 tool_uses (h1-injective, h1→differentials, small-kernel criterion) are accepted as generic 07EL local algebra. No cycle (111-node closure), no missing or merged citations, no SGA, and the parent descent node's use matches the statement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricallyRegularLocalFieldAdicSmooth",
+  "declaration": "Algebra.formallySmoothAdic_of_isGeometricallyRegular",
+  "file": "lean/Sheaf/RingTheory/GeometricallyRegularLocalFieldAdicSmooth.lean",
+  "statement": "theorem formallySmoothAdic_of_isGeometricallyRegular (k : Type u) (B : Type v) [Field k] [CommRing B] [Algebra k B] [IsNoetherianRing B] [IsLocalRing B] (hB : IsGeometricallyRegular k B) : FormallySmoothAdic k B (IsLocalRing.maximalIdeal B)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3aeed2762",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Lean statement formallySmoothAdic_of_isGeometricallyRegular (Field k, CommRing/Algebra/IsNoetherianRing/IsLocalRing B, IsGeometricallyRegular k B ⊢ FormallySmoothAdic k B (maximalIdeal B)) matches the node and Stacks 07EL (1)⇒(2) clause by clause, using the recorded declarations of all three stmt_deps; no extra hypotheses or universe restriction; the redundant IsNoetherianRing binder is node-faithful. Node changed only in its lean record; statement field verbatim; source and blueprint docstrings plus the five-step proof docstring present; public imports = stmt_dep modules, plain imports = proof_dep modules, all checked to exist. No duplicate in side-live or slopmaster2 (only the converse exists, with the same binders). Edge cases checked: char 0/p, imperfect k, maximal ideal 0, zero ring. No defs, sorry only, nothing pro-étale. H11 advisory only: no second reading under the dispatcher policy, but the Worker report matches the clauses. No fixes and no compile needed."
+ }
+}

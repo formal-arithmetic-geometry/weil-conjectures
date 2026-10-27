@@ -1,0 +1,222 @@
+{
+ "id": "lem-weil-pbc-module-quotient-map-small-models",
+ "kind": "statement",
+ "title": "Small models of quotient maps from a fixed module sheaf",
+ "statement": "Let $X$ be a topological space, $\\mathcal O_X$ a sheaf of commutative rings, and let module sheaves and their morphisms mean those of [def-weil-sheaf-of-modules-category]. All sets of points and sections are taken in a fixed Grothendieck universe, and the index sets below are in that universe. Fix an $\\mathcal O_X$-module $\\mathcal M$. There are a set $T$, modules $Q_t$ and epimorphisms $q_t:\\mathcal M\\to Q_t$ for $t\\in T$ such that for every module $\\mathcal N$ and epimorphism $p:\\mathcal M\\to\\mathcal N$ there are $t\\in T$ and an isomorphism $\\psi:Q_t\\to\\mathcal N$ with $\\psi\\circ q_t=p$. One may take $T$ to be the set of all literal subsheaves of modules $\\mathcal K\\subseteq\\mathcal M$ (specified by submodules $\\mathcal K(W)\\subseteq\\mathcal M(W)$ stable under restriction and satisfying the sheaf axiom), and $q_{\\mathcal K}$ to be the cokernel of the inclusion $\\mathcal K\\to\\mathcal M$ in $\\Mod(\\mathcal O_X)$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01BC (lemma-set-isomorphism-classes-finite-type-modules), proof: parametrization by kernel subsheaves, generalized from the fixed finite-free source to a fixed module sheaf"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal U$ be the fixed universe. Since $X\\in\\mathcal U$, its set $\\operatorname{Op}(X)\\subseteq\\mathcal P(X)$ belongs to $\\mathcal U$. The product $\\prod_{W\\in\\operatorname{Op}(X)}\\mathcal P(\\mathcal M(W))$ is therefore a set in $\\mathcal U$. Let $T$ be its subset consisting of families $K(W)$ that are submodules, are stable under restriction, and satisfy the sheaf axiom. These conditions select a subset of a set. The operations and restriction maps of a literal subsheaf are inherited from $\\mathcal M$, so such a family determines exactly one literal module subsheaf $\\mathcal K\\subseteq\\mathcal M$; no additional unbounded choices of structure are needed.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: parametrization by kernel subsheaves; Tag 01AG, lemma-abelian, and preceding kernel/cokernel constructions (section Tag 01AF)"
+   }
+  },
+  {
+   "text": "For each literal subsheaf K in T, let i_K : K → M be its actual inclusion and take Q_K = cokernel(i_K), with q_K = cokernel.π(i_K), in the fixed-universe category of module sheaves. This cokernel exists by the abelian instance of [def-weil-sheaf-of-modules-category] and [def-sp-abelian]. The cokernel cofork is colimiting and its projection is epic. This categorical cokernel realizes the sheafification of the sectionwise quotient described in the source.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: parametrization by kernel subsheaves; Tag 01AG, lemma-abelian, and preceding kernel/cokernel constructions (section Tag 01AF)"
+   }
+  },
+  {
+   "text": "Fix an epimorphism p : M → N, and let A = kernel(p), i : A → M its kernel inclusion. The forgetful functor to presheaves of modules preserves finite limits, so i remains monic there; evaluation then makes every i_W injective. Define K(W) as the range submodule of i_W. Naturality of i proves restriction stability. Each i_W identifies A(W) linearly with K(W), and these identifications assemble into a presheaf isomorphism A.val ≅ K.toPresheafOfModules. Transfer the sheaf axiom from A along the underlying isomorphism of abelian presheaves. Full faithfulness of the forgetful functor lifts this to a module-sheaf isomorphism e : A ≅ K. Its hom followed by the literal inclusion equals i sectionwise. Transport the kernel universal property along e.symm to prove that the actual inclusion K → M is a kernel of p. This realizes the sectionwise kernel subsheaf of the source without reproving the gluing axiom.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: parametrization by kernel subsheaves; Tag 01AG, lemma-abelian, and preceding kernel/cokernel constructions (section Tag 01AF)"
+   }
+  },
+  {
+   "text": "Apply the abelian-category theorem that an epimorphism is a cokernel of any of its kernels, Abelian.epiIsCokernelOfKernel, to p and the literal kernel fork from the preceding step. This is the normal-epimorphism argument in [def-sp-abelian], and gives a colimiting cokernel cofork whose projection is exactly p.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: parametrization by kernel subsheaves; Tag 01AG, lemma-abelian, and preceding kernel/cokernel constructions (section Tag 01AF)"
+   }
+  },
+  {
+   "text": "The two cokernel properties, for $q_{\\mathcal K}$ and for $p$, give unique maps $\\psi:Q_{\\mathcal K}\\to\\mathcal N$ and $\\chi:\\mathcal N\\to Q_{\\mathcal K}$ with $\\psi q_{\\mathcal K}=p$ and $\\chi p=q_{\\mathcal K}$. Therefore $(\\chi\\psi)q_{\\mathcal K}=q_{\\mathcal K}$ and $(\\psi\\chi)p=p$. Uniqueness in the respective cokernel universal properties gives $\\chi\\psi=1_{Q_{\\mathcal K}}$ and $\\psi\\chi=1_{\\mathcal N}$. Hence $\\psi$ is an isomorphism with exactly $\\psi\\circ q_{\\mathcal K}=p$, proving both clauses with $t=\\mathcal K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: parametrization by kernel subsheaves; Tag 01AG, lemma-abelian, and preceding kernel/cokernel constructions (section Tag 01AF)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01BC proof, kernel-subsheaf parametrization generalized to a fixed source; Lean realization by B6 uses Mathlib categorical kernels and their sectionwise ranges, transport of the sheaf property by isomorphism, Abelian.epiIsCokernelOfKernel, and uniqueness of cokernels. Same dependencies and unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WellPowered|wellPowered|CoWellPowered|[Qq]uotient.*[Ss]mall",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Subobject.lean; Mathlib/Algebra/Category/ModuleCat/Subobject.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise limit smallness, presheaf well-poweredness, presentation structures and abstract GlueData do not assert this quotient-map or effective-cocycle parametrization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The epimorphic images of one module sheaf form a small set up to isomorphism",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.WellPowered, SheafOfModules",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotients of a fixed sheaf of modules on a ringed topological space admit a small set of representatives compatible with the quotient maps",
+   "results": "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.QuasicoherentData.I; SheafOfModules.isQuasicoherent; SheafOfModules.IsQuasicoherent; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.QuasicoherentData; SheafOfModules.IsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise limit smallness, presheaf well-poweredness, presentation structures and abstract GlueData do not assert this quotient-map or effective-cocycle parametrization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category of sheaves of modules is co-well-powered: quotients of a fixed sheaf form a small collection",
+   "results": "PresheafOfModules.wellPowered; SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; SheafOfModules.instAbelian; CategoryTheory.Sheaf.instIsGrothendieckAbelian; SheafOfModules.isQuasicoherent; LightCondensed.instIsGrothendieckAbelianLightCondMod; SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise limit smallness, presheaf well-poweredness, presentation structures and abstract GlueData do not assert this quotient-map or effective-cocycle parametrization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "CoWellPowered|coWellPowered|wellPowered.*sheaf|WellPowered.*Sheaf",
+   "results": "No hits; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoWellPowered|coWellPowered|wellPowered|quotient.*[Ss]mall",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Subobject.lean; Mathlib/Algebra/Category/ModuleCat/Subobject.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean; searched Algebra/Category/ModuleCat; Subobject.lean:67 and Presheaf/Generator.lean:97-99 read",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern presheaf subobjects, small sections, generators, presentations or Grothendieck abelianity, not the asserted literal-kernel-indexed quotient family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epimorphic images of a fixed module sheaf form a small set up to isomorphism",
+   "results": "SheafOfModules.GeneratingSections.ofEpi_s; ModuleCat.range_eq_top_of_epi; PresheafOfModules.epi_of_surjective; PresheafOfModules.epi_iff_surjective; CategoryTheory.instEpiSheafTypeToImage; CategoryTheory.Sheaf.isLocallySurjective_iff_epi'; PresheafOfModules.instEpiModuleCatCarrierObjOppositeRingCatApp; ModuleCat.epi_iff_range_eq_top",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern presheaf subobjects, small sections, generators, presentations or Grothendieck abelianity, not the asserted literal-kernel-indexed quotient family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotients of a fixed sheaf of modules form a small set up to isomorphism compatible with the quotient maps",
+   "results": "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; SheafOfModules.Presentation; ModuleCat.instSmallSubtypeForallCarrierObjMemSubmoduleSectionsSubmodule; SheafOfModules.QuasicoherentData.I; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.Presentation.IsFinite; PresheafOfModules.wellPowered; SheafOfModules.QuasicoherentData",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern presheaf subobjects, small sections, generators, presentations or Grothendieck abelianity, not the asserted literal-kernel-indexed quotient family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Co-well-powered category of sheaves of modules small family of epimorphisms with fixed domain",
+   "results": "PresheafOfModules.wellPowered; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; CategoryTheory.Sheaf.instIsGrothendieckAbelian; LightCondensed.instIsGrothendieckAbelianLightCondMod; CategoryTheory.Sheaf.ab5ofSize; SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat; CategoryTheory.SheafOfTypes.balanced",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern presheaf subobjects, small sections, generators, presentations or Grothendieck abelianity, not the asserted literal-kernel-indexed quotient family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-finite-presentation-representatives",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Current main-20261015 blueprint, lemma-weil-pbc-h1-constructible-representation.proof.md, second paragraph: the finite-pushforward lemma. This node supplies set-sized finite-presentation module indices for the existing finite-pushforward/approximation chain recorded in via; source Stacks 01BC. Supporting input: Small models of quotient maps from a fixed module sheaf.",
+   "via": [
+    "lem-weil-pbc-module-finite-presentation-representatives",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-module-quotient-map-small-models",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery 232a3fa2506 against the current unsplit DAG: retained the five-step kernel-parametrization proof and all recorded searches, re-read both current cited nodes and verified all six quotations. Made the quotient family explicit as sheafifications of the sectionwise quotients, with induced quotient maps; checked small-site hypotheses and normal-epi universal properties. No new nodes or statement change; no Lean writing or compilation. On resumption, made explicit that the cited cokernel assertion is applied within the category of modules valued in the fixed universe, so it supplies the required universe bound as well as existence.",
+  "blueprint": "main-20261015, lemma-weil-pbc-h1-constructible-representation.proof.md, second paragraph (finite-pushforward lemma), through the existing finite-pushforward/approximation chain in blueprint.from.via: supplies the kernel-parametrization input used by finite-presentation representatives.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-010381455",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-010381455 (reviewer sub-agent of L); spot-checked: This is the third delivery of the item. The earlier heads were 232a3fa25066 (PASS) and cc8c4c22595b (PASS), and both were refused at landing because the side completion was not promoted to the live DAG. In clones/live and clones/side-live the item is still unsplit with an empty proof, and there is no repair note. The delivery adds no new nodes. A field-by-field diff against cc8c shows that only one sentence of proof step 2 and the split_report changed. Statement, stmt_deps, proof_deps, source, proof_origin, created record and blueprint are identical, and steps 1, 3, 4 and 5 are byte-identical. The new step-2 sentence says the cokernel from the cited abelian-category statement lies in the category of module sheaves whose sections are in the fixed universe U. This is correct: X lies in U, so Op(X) is a U-small site, and def-weil-sheaf-of-modules-category states abelianity for a small site with cokernels given by sheafified sectionwise cokernels. Its Mathlib match is SheafOfModules.{v} with its abelian instance. I re-checked every step. Step 1: T is a subset of ∏_W P(M(W)), so T lies in U. Step 2: Q_K is the sheafification of W↦M(W)/K(W), giving one uniform family indexed by T, and q_K is epi by cokernel uniqueness. Step 3: the sectionwise kernel of p is a subsheaf, using only separatedness of N, and it is the categorical kernel. Step 4: def-sp-abelian gives p as the cokernel of some arrow a, which factors through the kernel, so p is the cokernel of the kernel. Step 5: the two comparison maps are mutually inverse, and ψ∘q_K = p. I read the source, Stacks modules.tex Tag 01BC (l.958-992): its proof parametrizes quotients by kernel subsheaves, and the item generalizes this to a fixed module. No SGA is cited. Edge cases checked: empty X, M = 0, K = 0, K = M, p an isomorphism. An rg -L search of the DAG found no duplicate, and the only citer, lem-weil-pbc-module-finite-presentation-representatives, is unaffected. No tool_uses and no fixes. Maintainer note: this is the third push of the same PASSed split; L must promote it to the live DAG to end the refusal loop."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.QuotientMapSmallModels",
+  "declaration": "SheafOfModules.exists_quotient_map_small_models",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/QuotientMapSmallModels.lean",
+  "statement": "theorem exists_quotient_map_small_models (X : RingedSpace.{u}) (M : ringedSiteModules.{u} (moduleRings X)) : ∃ (Q : {K : M.val.Submodule // Presheaf.IsSheaf (Opens.grothendieckTopology X) K.toPresheafOfModules.presheaf} → ringedSiteModules.{u} (moduleRings X)) (q : ∀ K, M ⟶ Q K), (∀ K, Epi (q K)) ∧ (∀ K, ∃ h : (⟨K.val.ι⟩ : (⟨K.val.toPresheafOfModules, K.property⟩ : ringedSiteModules.{u} (moduleRings X)) ⟶ M) ≫ q K = 0, Nonempty (IsColimit (CokernelCofork.ofπ (q K) h))) ∧ (∀ (N : ringedSiteModules.{u} (moduleRings X)) (p : M ⟶ N), Epi p → ∃ K, ∃ ψ : Q K ≅ N, q K ≫ ψ.hom = p)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb7b54d02",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause. X : RingedSpace.{u} with moduleRings X and ringedSiteModules.{u} = SheafOfModules in one universe u. T = literal subsheaves {K : M.val.Submodule // IsSheaf}. Clauses: Epi (q K); cokernel of the actual inclusion K.val.ι with the same Q, q; every epi p equals q K ≫ ψ.hom for an iso ψ. Edge cases (empty X, M=0, K=0, K=M, iso p) covered; statement true. lean.statement verbatim in file; only the lean field differs from side-live; no path collision; sorry-only, no definitions; source and blueprint docstrings with the 5 proof steps; no pro-étale substitute; both report sections present. No compile reproduced, no fixes. Advisory: moduleRings comes from a theorem-node module, a transparent Mathlib composite used routinely with def-weil-sheaf-of-modules-category."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261023T102424-L-2897217",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

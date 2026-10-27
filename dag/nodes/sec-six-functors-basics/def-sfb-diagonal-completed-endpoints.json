@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-diagonal-completed-endpoints",
+ "kind": "definition",
+ "title": "The source and target of the completed diagonal class",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and $Y$ a scheme. Put $P=\\mathbf P^1_Y$, $W=P\\times_Y P$, and let $\\Delta:P\\hookrightarrow W$ be the diagonal. On the small pro-etale site [def-weil-pbc-proetale-site], let $\\mathbf Z_{\\ell,X}=\\varprojlim_n(\\mathbf Z/\\ell^{n+1})_X$ and let $\\mathbf Z_{\\ell,X}(1)$ be the completed Tate line of [sk-def-sp-tate-twist]. Use modules over this completed ring sheaf [def-weil-sheaf-of-modules-category] and a chosen unbounded derived category [def-weil-abstract-derived-category], in any localization universe for which it exists. Define the completed diagonal domain to be the degree-zero object $\\Delta_*\\mathbf Z_{\\ell,P}[0]$, with its $\\mathbf Z_{\\ell,W}$-action restricted along the canonical inverse-image coefficient map induced by all finite quotient projections. Define its completed codomain to be $\\mathbf Z_{\\ell,W}(1)[2]$, namely the degree-zero completed Tate module followed by the positive shift two. These are objects, without a choice of an arrow between them and without an assertion that the endpoints are derived complete.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sp-tate-twist",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.md",
+  "place": "Clauses 1 and 3: the actual supported completed coefficient and shifted Tate endpoint"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived'_counit, Mathlib.Tactic.Module.reduceCoefficientwise, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous derived reduction of a strict coefficient tower, completed diagonal endpoints, and adjunction normalized supported source",
+   "results": "8 hits; Mathlib.Tactic.Module.reduceCoefficientwise, Mathlib.Tactic.Module.qNF.toNF, Mathlib.Tactic.LinearCombination.normStx, Mathlib.Tactic.tacticReduce__, SimplexCategoryGenRel.exists_normal_form_P_σ, Mathlib.Tactic.LinearCombination'.normStx, FixedDetMatrices.reduce_reduceStep, Algebra.SubmersivePresentation.comp",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "Generic search has no exact match; reuse the existing project definitions, without copying them."
+  },
+  {
+   "tool": "rg",
+   "query": "DiagonalDerivedReduction|DiagonalCompletionSpec|DiagonalCycleSystemSpec|diagonalScalarExtension|diagonalCompletedDomain|diagonalCompletedCodomain|NormalizedSource in lean/WeilConjectures and lean/Sheaf",
+   "results": "No upstream WeilConjectures matches. Sheaf matches: DiagonalTowerSystem, DiagonalTowerLimit, DiagonalTowerTrace (the definitions); DiagonalTowerTraceLimit, DiagonalCoefficientReference, DiagonalTowerCoefficients, DiagonalCoefficientCategory, CoefficientBidualEvaluationShiftOne (consumers).",
+   "date": "2026-10-23",
+   "verdict": "Exact existing project definitions; new nodes supply ownership only."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search 'diagonal derived reduction'; search 'normalized source'",
+   "results": "0 blueprint nodes for either query. DAG rg found the three theorem records and existing trace/reference definition consumers, but no definition node owning these eight declarations.",
+   "date": "2026-10-23",
+   "verdict": "Extract definition ownership from theorem modules, as requested by return H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-p1-adjunction-rational-triangle",
+  "date": "2026-10-23",
+  "group": "Q07"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Clauses 1 and 3: the actual supported completed coefficient and shifted Tate endpoint",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonalCompletedDomain",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalCompletedDomain",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedCodomain"
+  ],
+  "statement": "abbrev diagonalCompletedDomain (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})\n    [HasDerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y))] :\n    DerivedCategory.{w} (DiagonalCompleted ℓ (diagonalSurface Y))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2 ownership extraction only: these are the existing plain definitions in the published theorem module, not its theorem conclusion. No Lean declaration is redefined."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec20cd9d",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Re-delivery of the 69f9 H2 RETURN. Lean signature and body are byte-identical; only imports changed (5 definition modules made public imports, DiagonalTowerCoefficients made a plain proof import). stmt_deps drop det-prop-diagonal-tower-coefficients and -trace (both kept in proof_deps) and cite def-sfb-diagonal-coefficient-reference, -trace-limit-characterization, -trace-models plus three new existing:true ownership nodes (system-interface, completed-endpoints, normalized-source). check_existing is clean on all three; statements are verbatim with live; the prose matches the live declarations and the source places exist. No cycle, no theorem stmt_dep, no Lean moved. Seven dependency modules and records are unchanged from 69f9. H3 substance accepted at 69f9 still holds. Advisories: diagonalSurface in the signature is owned only by det-prop-diagonal-tower-system but is reached through the closure; second readings are self-readings; inherited ∃ CommShift in unitCounit_exact."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6cea6",
+  "group": "M3",
+  "result": "fix",
+  "landing": "20261026T222738-L-689439",
+  "kind": "interface",
+  "note": "independent cc review: clone DiagonalTowerLimit vs delivered Interface+Assembly+item: moved verbatim (only typed lambda binders in DiagonalCompletedLimitSpec); diagonalTower_limit sorry kept unchanged; sandbox compile of the 3 delivered modules + 5 direct importers all rc 0; axioms clean",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.diagonalTower_limit"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.diagonalTower_limit"
+  ]
+ }
+}

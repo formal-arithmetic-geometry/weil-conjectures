@@ -1,0 +1,329 @@
+{
+ "id": "lem-sfb-quotient-borel-torus-images",
+ "kind": "statement",
+ "title": "Images and lifts of Borel subgroups and maximal tori under quotients",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $\\mathbf G_a$ and $\\mathbf G_m$ for [def-sc-gm-ga]. Faithfully flat means that extension of scalars along the coordinate-algebra map is exact and detects zero modules. Solvable means that the successive scheme-theoretic derived subgroups eventually become trivial; the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. A torus means a group isomorphic to $\\mathbf G_m^r$, $r\\geq0$; a maximal torus is maximal under inclusion. A Borel subgroup means a maximal smooth connected solvable subgroup. Let $f:A\\to D$ be a faithfully flat homomorphism between smooth connected groups. For every Borel subgroup $B\\subseteq A$, its scheme-theoretic image $f(B)$ is a Borel subgroup of $D$, and $B\\to f(B)$ is faithfully flat. Every Borel subgroup of $D$ is such an image. For every maximal torus $T\\subseteq A$, its scheme-theoretic image $f(T)$ is a maximal torus of $D$, and $T\\to f(T)$ is faithfully flat. Every maximal torus of $D$ is such an image. No restriction is placed on $\\ker f$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.20 and its proof, printed pp.357--358, Borel and maximal-torus clauses; Theorem 5.39, printed p.108, for faithfully flat image factorizations."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "For every restriction of $f$ considered below, with codomain $D$ or an already constructed closed image, [lem-sfb-affine-homomorphism-flat-image] supplies a factorization $J\\twoheadrightarrow I\\hookrightarrow D$ with the first map faithfully flat. This factor is the scheme-theoretic image: the coordinate algebra of $I$ injects into that of $J$ by [lem-weil-pbc-faithfully-flat-universally-injective] applied to the module $F[I]$; hence the kernel of $F[D]\\to F[J]$ is exactly the defining ideal of $I$. In particular all the asserted restrictions onto images are faithfully flat. For a Borel $B$ put $C=f(B)$. Apply [lem-sfb-solvable-normal-image-geometry] to the faithfully flat map $B\\to C$ with its normal subgroup $N=B$ and image $I=C$. Its hypotheses require normality only inside $B$, which holds for $B$ itself. Thus $C$ is smooth, connected and solvable.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-sfb-solvable-normal-image-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.39 and Remark 5.42, p.108; Proposition 17.20, p.357, connected and solvable image argument."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-algebraic-group-homogeneous-quotient] to form the separated finite-type quotients $X=A/B$ and $Y=D/C$. The morphism $A\\to D\\to Y$ is invariant under right multiplication by $B$: locally it sends $ab$ and $a$ to the same coset because $f(b)\\in C$. The quotient kernel-pair formula and [lem-weil-pbc-fpqc-representable-descent] therefore descend this map to $\\bar f:X\\to Y$. It is surjective: for any geometric point of $Y$, first lift fpqc locally to $D$ and then along the faithfully flat map $A\\to D$; composition gives a local lift to $X$. Nonemptiness of the necessary base changes follows from [lem-weil-pbc-faithfully-flat-base-change] and [lem-weil-pbc-faithfully-flat-surjective-spectrum]. The scheme $X$ is proper by [lem-sfb-borel-quotient-proper-geometry]. Consequently [lem-weil-pbc-image-universally-closed] makes $Y$ proper, since $Y$ is separated and of finite type.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-weil-pbc-image-universally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, p.357, first paragraph; Proposition 5.21, pp.103--104, quotient universal property; A.75(d), descent of completeness under a surjection."
+   }
+  },
+  {
+   "text": "Here is the criterion of Proposition 17.19 in the case needed. Choose a smooth connected solvable subgroup $E$ of $D$ of largest dimension; the trivial subgroup starts the nonempty collection. By [lem-sfb-solvable-normal-subgroup-products], dimensions are bounded nonnegative integers and a proper inclusion of smooth connected groups strictly increases dimension. Thus $E$ is Borel. Left multiplication of $D$ on itself descends to an action on $Y=D/C$ by the quotient kernel-pair formula and [lem-weil-pbc-fpqc-representable-descent]; both action identities can be checked after lifting a quotient section. The proper nonempty finite-type scheme $Y$ has an $E$-fixed point by [lem-sfb-solvable-proper-fixed-point]. This point is represented by $d\\in D(F)$: lift the point fpqc locally using the quotient statement and then take a closed point in its nonempty finite-type fibre; [lem-weil-pbc-closed-point-residue-field-base] identifies its residue field with $F$. The quotient equality criterion says, on every $F$-algebra $R$, that $d_R^{-1}E(R)d_R\\subseteq C(R)$. Thus $d^{-1}Ed\\subseteq C$ as subgroup schemes. Since $C$ is smooth connected solvable, maximality of the Borel $d^{-1}Ed$ gives $C=d^{-1}Ed$. This proves that every Borel image is Borel without changing the kernel hypotheses.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 17.19 and 17.20, p.357; Theorem 17.3 (Borel fixed point), pp.351--352."
+   }
+  },
+  {
+   "text": "Choose one Borel $B_0$ of $A$ by the existence argument of step 3. Its image $C_0$ is Borel by steps 1--3. Apply [lem-sfb-algebraic-group-homogeneous-quotient] and [lem-sfb-borel-quotient-proper-geometry] to form the proper $D/C_0$. As in step 3, left multiplication descends to this quotient. By [lem-sfb-solvable-proper-fixed-point], the target Borel $C_1$ fixes a point $dC_0$. The same fibre and residue-field argument gives $d\\in D(F)$. Fixedness over every algebra gives $d^{-1}C_1d\\subseteq C_0$; Borel maximality makes this equality, so $C_1=dC_0d^{-1}$. Since $D$ is smooth, [lem-sfb-affine-group-homomorphism-image] applied to the given faithfully flat $f$ supplies $a\\in A(F)$ with $f(a)=d$. Conjugation is a group-scheme automorphism, so $aB_0a^{-1}$ is again maximal smooth connected solvable. The identity $f(a_R b a_R^{-1})=d_R f(b)d_R^{-1}$ after every scalar extension identifies its scheme-theoretic image with $C_1$. Faithful flatness of the restriction follows from step 1.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, p.358, conjugation and lifting of Borel subgroups; Theorem 17.9(b), p.354."
+   }
+  },
+  {
+   "text": "Let $T$ be maximal in $A$. Choose a smooth connected solvable subgroup containing $T$ of largest dimension, starting with $T$ itself (a torus is commutative). The dimension bounds and strict increase in [lem-sfb-solvable-normal-subgroup-products] make it a Borel $B$. Then $T$ is maximal in $B$. Put $C=f(B)$, a Borel by steps 1--3. Since $F$ is algebraically closed it is perfect. Apply [lem-sfb-perfect-solvable-unipotent-torus] to $B$ to obtain a smooth connected normal unipotent $U$ with torus quotient $P=B/U$. By [lem-sfb-solvable-torus-complements], $T\\to P$ is an isomorphism. Form the image $V=f(U)\\subseteq C$ by step 1. Apply [lem-sfb-unipotent-normal-quotient-image] to $B\\to C$ and $U$: $V$ is smooth connected normal unipotent. The quotient $R=C/V$ is affine finite type and smooth connected by [lem-sfb-affine-normal-quotient-geometry]. Since $U$ maps to $V$, the quotient universal properties induce $g:P\\to R$. The maps $B\\to C$ and $C\\to R$ are surjective on $F$-points by [lem-sfb-affine-group-homomorphism-image]. Thus $g$ is surjective on $F$-points (lift a point of $R$ to $B$ and then take its class in $P$). As $R$ is smooth, that node also makes $g$ faithfully flat. Apply [lem-sfb-torus-homomorphism-image] with source $P$, target $R$, image $I=R$ and closed immersion $\\mathrm{id}_R$: $R$ is a torus. This uses no reducedness of any kernel.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-unipotent-normal-quotient-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-affine-group-homomorphism-image",
+    "lem-sfb-torus-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, pp.357--358, maximal-torus paragraph; Theorem 16.33, p.336; quotient unipotence and torus quotients, Corollary 14.7, p.282, and Definition 12.14, p.236."
+   }
+  },
+  {
+   "text": "Let $S=f(T)\\subseteq C$, with faithfully flat restriction as in step 1. It is a torus by [lem-sfb-torus-homomorphism-image]. Tori are smooth and connected, so by the dimension bounds and strict increase in [lem-sfb-solvable-normal-subgroup-products] a torus subgroup of $C$ containing $S$ of largest dimension is a maximal torus $S_1$ of $C$ containing $S$. Apply [lem-sfb-solvable-torus-complements] to $(C,V,R)$ from step 5: the restriction $S_1\\to R$ is an isomorphism. The composite $T\\xrightarrow{\\sim}P\\xrightarrow{g}R$ is surjective on $F$-points by step 5; it is the restriction to $T$ of $B\\to C\\to R$, so it factors through $S\\subseteq S_1\\xrightarrow{\\sim}R$, and $S(F)\\to S_1(F)$ is surjective. Since $S_1$ is smooth, [lem-sfb-affine-group-homomorphism-image] makes the inclusion $S\\hookrightarrow S_1$ faithfully flat. Its coordinate-algebra map is surjective by the affine characterization of [def-weil-closed-immersion] and injective by [lem-weil-pbc-faithfully-flat-universally-injective]; hence $S=S_1$. Now $C$ is a Borel subgroup of $D$, so by [lem-sfb-borel-maximal-torus-conjugacy] for $D$ it contains a torus $S'$ maximal in $D$; $S'$ is a fortiori maximal in $C$. The conjugacy clause of the same node for the smooth connected group $C$ gives $c\\in C(F)$ with $S=cS'c^{-1}$. Conjugation by $c$ is an automorphism of $D$ preserving inclusions of tori, so $f(T)=S$ is maximal in $D$.",
+   "uses": [
+    "lem-sfb-torus-homomorphism-image",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-affine-group-homomorphism-image",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, pp.357--358, conclusion of the maximal-torus paragraph; Theorem 16.33(d), p.336; Theorem 17.10, pp.354--355, and the paragraph after Definition 17.12, p.355."
+   }
+  },
+  {
+   "text": "Choose a maximal torus $T_0$ of $A$: by [lem-sfb-solvable-normal-subgroup-products] a torus subgroup of $A$ of largest dimension exists (the trivial torus is one) and, tori being smooth connected, it is maximal. Step 6 makes $S_0=f(T_0)$ maximal in $D$. For any maximal torus $S_2$ of $D$, the conjugacy clause of [lem-sfb-borel-maximal-torus-conjugacy] for $D$ gives $d\\in D(F)$ with $S_2=dS_0d^{-1}$. Lift $d$ to $a\\in A(F)$ by [lem-sfb-affine-group-homomorphism-image], since $f$ is faithfully flat and $D$ is smooth. Then $aT_0a^{-1}$ is maximal, as conjugation and its inverse preserve inclusions of tori. For every $F$-algebra $R$ the identity $f(a_R t a_R^{-1})=d_Rf(t)d_R^{-1}$ identifies its image subgroup scheme with $S_2$. The restriction is faithfully flat by step 1. Together with step 4 this proves both image-surjectivity clauses, including rank zero.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-affine-group-homomorphism-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, p.358, final conjugation argument for maximal tori; Theorem 17.10, pp.354--355."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-sfb-solvable-normal-image-geometry",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-affine-group-homomorphism-image",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-unipotent-normal-quotient-image",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-torus-homomorphism-image",
+  "def-weil-closed-immersion",
+  "lem-sfb-borel-maximal-torus-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.20 and proof, pp.357--358; with the Borel criterion of 17.19 written out using Theorem 17.3, and Theorem 16.33 for the solvable torus quotient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective quotient homomorphism of smooth connected affine algebraic groups sends Borel subgroups and maximal tori onto Borel subgroups and maximal tori and every such target subgroup lifts",
+   "results": "Search returned 8 hits: QuotientGroup.rangeKerLift_surjective, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, QuotientGroup.lift_surjective_of_surjective, Ideal.Quotient.stabilizerHom_surjective_of_profinite, QuotientGroup.map_surjective_of_surjective, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, surjective_cosetToCuspOrbit, GrpCat.SurjectiveOfEpiAuxs.h_apply_fromCoset",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under a quotient map of algebraic groups every maximal torus and Borel subgroup is the image of one in the source",
+   "results": "Search returned 8 hits: CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, QuotientGroup.rootableBy, QuotientGroup.range_mk', QuotientGroup.map_mk'_self, Subgroup.quotientCenterEmbedding_apply, QuotientGroup.rangeKerLift_surjective, QuotientGroup.strictMono_comap_prod_map, QuotientGroup.le_comap_mk'",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\", \"MaximalTorus\"",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|MaximalTorus|IsMaximalTorus",
+   "results": "Search returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a maximal torus or Borel subgroup under a surjective morphism of algebraic groups is again maximal torus or Borel",
+   "results": "Search returned 8 hits: Sylow.coe_mapSurjective, Sylow.mapSurjective, Subgroup.map, Subgroup.map_top_of_surjective, Subgroup.Normal.map, Ideal.map_eq_top_or_isMaximal_of_surjective, AddSubgroup.comap_injective, Subgroup.isCoatom_map",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract groups, linear root pairings, or scheme morphism properties do not give this algebraic-group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every Borel subgroup and maximal torus of a quotient algebraic group lifts to the source and the image of each such subgroup is maximal",
+   "results": "{\"t\": \"2026-10-23T20:48:10Z\", \"tool\": \"leanfinder\", \"query\": \"Every Borel subgroup and maximal torus of a quotient algebraic group lifts to the source and the image of each such subgroup is maximal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"QuotientGroup.strictMono_comap_prod_map\", \"Subgroup.isQuotientCoveringMap\", \"Subgroup.quotientCenterEmbedding\", \"Subgroup.quotientCenterEmbedding_apply\", \"Subgroup.isQuotientCoveringMap_of_comm\", \"Subgroup.quotient_finite_of_isOpen'\"], \"digest\": \"d52477dcc5cf920a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or topological groups, Lie algebras, or general affine scheme morphisms; none states this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\", \"MaximalTorus\"",
+   "results": "{\"t\": \"2026-10-23T20:48:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"BorelSubgroup\\\", \\\"MaximalTorus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or topological groups, Lie algebras, or general affine scheme morphisms; none states this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|MaximalTorus|IsMaximalTorus",
+   "results": "{\"t\": \"2026-10-23T20:48:08Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|MaximalTorus|IsMaximalTorus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or topological groups, Lie algebras, or general affine scheme morphisms; none states this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient homomorphisms of connected algebraic groups preserve Borel subgroups and maximal tori",
+   "results": "{\"t\": \"2026-10-23T20:48:09Z\", \"tool\": \"leansearch\", \"query\": \"Quotient homomorphisms of connected algebraic groups preserve Borel subgroups and maximal tori\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.borelSpace\", \"QuotientAddGroup.map\", \"QuotientGroup.lift\", \"QuotientGroup.map\", \"QuotientGroup.map_mk\", \"QuotientGroup.quotientMapSubgroupOfOfLe_mk\", \"QuotientGroup.map_comp_map\", \"QuotientGroup.kerLift\"], \"digest\": \"fca43f63b6ed67ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract or topological groups, Lie algebras, or general affine scheme morphisms; none states this theorem for algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-isogeny-borel-root-compatibility",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input. Milne 22.20 proof: Proof of Proposition 18.18 (inverse image Borel and quotient flag variety); Corollary 17.84 (centre in every maximal torus); Definitions 23.1--23.2 and Propositions 23.4--23.5 (central isogenies induce root data with q(alpha)=1). Product and Borel decompositions: 21.29--21.35, 21.60 and proof of 23.13. Supporting input: Proposition 17.20 and its proof, printed pp.357--358, Borel and maximal-torus clauses; Theorem 5.39, printed p.108, for faithfully flat image factorizations.",
+   "via": [
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-dominant-character-highest-line",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-quotient-borel-torus-images",
+  "worker": "stage1",
+  "summary": "Split Milne 17.20 into flat image factorizations, properness of the induced Borel quotient, the fixed-point criterion and conjugate lifts; reduce the torus image to the existing solvable complement theorem. One smaller statement-only input: torus images without maximality; maximal-torus existence, conjugacy and Borel compatibility come from the existing lem-sfb-borel-maximal-torus-conjugacy and the dimension bounds (reviewer FIX: duplicate new node lem-sfb-maximal-tori-conjugacy-borel dropped). All kernel hypotheses retained; no statement change.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability read. Preserves the existing from.place chain through det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction and PGL geometric reductivity; these are supporting algebraic-group facts below the unit level. tools/blueprint_refs.py ancestor reports None because the inherited created.item chain is broken; inherited null ancestor retained rather than fabricated. The new input serves the Milne 17.20 torus paragraph; the conjugation paragraph uses the existing maximal-torus conjugacy node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
+    "why": "General coordinate-algebra injectivity for the flat image and a closed faithfully flat inclusion."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "General gluing of quotient maps and group actions along the homogeneous quotient cover."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "General preservation of faithful flatness for local lifts in the induced quotient map."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "General surjectivity on spectra for nonempty base-changed lifting fibres."
+   },
+   {
+    "node": "lem-weil-pbc-image-universally-closed",
+    "why": "General descent of properness under the surjective map A/B to D/C."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Nullstellensatz form needed to lift the fixed F-point to D(F)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-cc2384fdd",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-cc2384fdd (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all 20 cited statements in full. Against the source I read Milne iAG 17.6-17.20 (pp.353-358), 12.9 and 12.14 (pp.233-236) and 16.33. The item statement is unchanged, still unsplit on live, and faithful to Milne 17.20's Borel and maximal-torus clauses, scheme-theoretic with an arbitrary kernel. There is no re-split note for this item. Steps 1-7 are correct. Step 1: the flat image factor is the scheme-theoretic image, and the solvable-normal-image node applies with N=B normal in B. Step 2: the descended map A/B->D/C is surjective, so D/C is proper by the borel-quotient-proper-geometry and image-universally-closed nodes. Step 3: a largest-dimension E is Borel, the fixed point lifts to D(F) through a closed point, and d^-1 E d is contained in C. Steps 4 and 7: conjugate and lift through A(F)->D(F). Step 5: R=C/V is a torus via the complements node, the unipotent-normal-quotient-image node and the new torus-image node. Step 6: S=S_1, proved by a surjectivity argument on F-points plus injectivity of the faithfully flat inclusion. New node lem-sfb-torus-homomorphism-image is kept. It is true because X(I) embeds in X(T)=Z^r, so X(I) is torsion-free; it matches Milne p.236; I tested x->x^p (kernel mu_p), the trivial map and the projection G_m^2->G_m; a search of all multiplicative-type, diagonalizable and torus-quotient statements found no duplicate. New node lem-sfb-maximal-tori-conjugacy-borel is a C5/D duplicate. Its conjugacy clause is the existing lem-sfb-borel-maximal-torus-conjugacy, which is on the base, unsplit with empty proof_deps, and missing from the report's not-duplicates list. Its other two clauses take a few lines from that node plus the dimension bounds. FIX: I dropped that node and rewrote steps 6 and 7. They now get S_1 and T_0 by the largest-dimension argument from lem-sfb-solvable-normal-subgroup-products. For Borel compatibility: C contains a torus S' that is maximal in D, and conjugacy inside C moves S' onto S. I recomputed proof_deps and updated the split_report; the statement is unchanged. Cycle check: the closures of all proof_deps reach the item in neither the snapshot DAG nor the live DAG. Batch-5: all 9 flagged citations are generic algebraic-group or descent lemmas. The trf nodes they reach (flat tensor injection, geometrically connected point, algebraic-space definition, fpqc/fppf descent) are generic tools, not the trace formula, Poincare duality or steps of their proofs, so I accept them. tool_uses: six generic mathlib pbc leaves, accepted. No SGA is cited. Advisory: the item and the cited nodes use two equivalent definitions of solvable (derived series vs normal series with commutative quotients); the mismatch is inherited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.QuotientBorelTorusImages",
+  "declaration": "AlgebraicGeometry.quotient_borel_torus_images",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/QuotientBorelTorusImages.lean",
+  "statement": "theorem quotient_borel_torus_images {F : Type u} [Field F] [IsAlgClosed F] (A D : Grp (Over (Spec (.of F)))) [IsAffine A.X.left] [IsAffine D.X.left] [LocallyOfFiniteType A.X.hom] [QuasiCompact A.X.hom] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] [Smooth A.X.hom] [ConnectedSpace A.X.left] [Smooth D.X.hom] [ConnectedSpace D.X.left] (f : A ⟶ D) (hf : f.hom.hom.left.appTop.hom.FaithfullyFlat) : (∀ (B : Grp (Over (Spec (.of F)))) (iB : B ⟶ A), IsBorelGroupScheme iB.hom.hom → ∃ (C : Grp (Over (Spec (.of F)))) (iC : C ⟶ D) (r : B ⟶ C), IsBorelGroupScheme iC.hom.hom ∧ iB ≫ f = r ≫ iC ∧ r.hom.hom.left.appTop.hom.FaithfullyFlat) ∧ (∀ (C : Grp (Over (Spec (.of F)))) (iC : C ⟶ D), IsBorelGroupScheme iC.hom.hom → ∃ (B : Grp (Over (Spec (.of F)))) (iB : B ⟶ A) (r : B ⟶ C), IsBorelGroupScheme iB.hom.hom ∧ iB ≫ f = r ≫ iC ∧ r.hom.hom.left.appTop.hom.FaithfullyFlat) ∧ (∀ (T : Grp (Over (Spec (.of F)))) (iT : T ⟶ A), ReductiveTorusCentralizer.IsMaximalTorus iT → ∃ (S : Grp (Over (Spec (.of F)))) (iS : S ⟶ D) (r : T ⟶ S), ReductiveTorusCentralizer.IsMaximalTorus iS ∧ iT ≫ f = r ≫ iS ∧ r.hom.hom.left.appTop.hom.FaithfullyFlat) ∧ (∀ (S : Grp (Over (Spec (.of F)))) (iS : S ⟶ D), ReductiveTorusCentralizer.IsMaximalTorus iS → ∃ (T : Grp (Over (Spec (.of F)))) (iT : T ⟶ A) (r : T ⟶ S), ReductiveTorusCentralizer.IsMaximalTorus iT ∧ iT ≫ f = r ≫ iS ∧ r.hom.hom.left.appTop.hom.FaithfullyFlat)",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be092d3d0",
+  "group": "Q30",
+  "result": "pass",
+  "note": "The only changes are the item lean record, two added stmt_deps (landed def-sfb-borel-subgroup-scheme and def-sfb-reductive-torus-centralizer-terminology, both used in the Lean, no cycle) and one new module. The statement is verbatim. Hypotheses match the node: IsAlgClosed F; affine LFT+QC smooth connected A and D; f in Grp with F[D]->F[A] faithfully flat; no kernel, extra or universe assumptions. All four clauses of Milne 17.20 (Borel and maximal-torus images and lifts) are stated via a closed-subgroup factorization iB≫f=r≫iC with faithfully flat r, which pins C as the scheme-theoretic image. IsTorus over AlgebraicClosure is equivalent to split for algebraically closed F, and rank 0 is covered. Edge cases checked: identity, A→1, unipotent, Frobenius μ_p/α_p, SL2→PGL2, Gm×Ga→Gm. Proof is sorry only; docstrings carry source, blueprint and 7 steps; all imports exist; report has Worker report and Second reading by Q30 (advisory: self-audit). No duplicate found. No compile (no file changed)."
+ }
+}

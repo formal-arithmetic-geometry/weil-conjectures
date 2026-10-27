@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-ample-twist-hypercohomology-detection",
+ "kind": "statement",
+ "title": "Ample positive twists detect a nonzero quasi-coherent complex",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal L$ be an ample invertible $\\mathcal O_X$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category], with no boundedness assumption. Use the derived tensor of [def-pc-scheme-derived-tensor-structure] and put $H^p(X,E)=H^p(R\\Gamma(X,E))$ with $R\\Gamma$ as in [def-pc-global-derived-rhom]. If $K\\not\\simeq0$, there exist an integer $m\\geq0$ and $p\\in\\mathbf Z$ such that\n$$H^p\\bigl(X,K\\otimes^L_{\\mathcal O_X}\\mathcal L^{\\otimes m}\\bigr)\\neq0.$$",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "Ampleness [def-weil-pbc-ample-invertible-module] includes quasi-compactness. By [lem-weil-pbc-ample-scheme-separated], $X$ is separated, hence quasi-separated: its closed-immersion diagonal is quasi-compact. Apply [lem-sfb-qc-separated-quasicoherent-complex-model] to choose $F^\\bullet$ with quasi-coherent terms and $QF^\\bullet\\simeq K$. This uses neither a noetherian hypothesis nor a bound on the complex.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-ample-scheme-separated",
+    "lem-sfb-qc-separated-quasicoherent-complex-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology, proof."
+   }
+  },
+  {
+   "text": "Some $\\mathcal H^p(F^\\bullet)$ is nonzero: otherwise $F^\\bullet\\to0$ is a quasi-isomorphism, so $K\\simeq0$ by [def-weil-abstract-derived-category]. There is a point $x$ where this sheaf has nonzero stalk. Indeed, if every stalk were zero, each section would vanish on a neighbourhood of every point, by the germ description in [def-weil-pbc-module-stalk], and hence vanish by the sheaf axiom. By [def-weil-pbc-ample-invertible-module] choose $n\\geq1$ and $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ with $x\\in U=X_s$ affine. Put $M=\\mathcal L^{\\otimes n}$; on $U$ its section $s$ is a basis, since in every local rank-one frame its coefficient is a unit.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology, proof."
+   }
+  },
+  {
+   "text": "Put $Z=\\ker(d^p:F^p\\to F^{p+1})$. It is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]. Factor $d^{p-1}$ through $Z$, and write $H=\\operatorname{coker}(F^{p-1}\\to Z)=\\mathcal H^p(F^\\bullet)$. By [lem-weil-pbc-quasi-coherent-module-cokernel-image], $H$ is quasi-coherent and $Z(U)\\to H(U)$ is surjective. The affine counit of [lem-weil-pbc-affine-tilde-gamma-adjunction] implies $H(U)\\neq0$: otherwise $H|_U\\simeq\\widetilde{H(U)}=0$, contrary to $H_x\\neq0$. Choose $0\\neq\\tau\\in H(U)$ and a lift $a\\in Z(U)\\subset F^p(U)$. Thus $d^p(a)=0$. Choose $y\\in U$ with $\\tau_y\\neq0$, using the same germ/sheaf argument as in step 2.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology, proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-section-clearing-denominators-qcqs] to the invertible module $M$, section $s$ and quasi-coherent module $F^p$. There are $b\\geq0$ and $t\\in\\Gamma(X,F^p\\otimes M^{\\otimes b})$ with $t|_U=a\\otimes s^{\\otimes b}$. Its differential $v=(d^p\\otimes1)(t)$ in $\\Gamma(X,F^{p+1}\\otimes M^{\\otimes b})$ restricts to zero on $U$, because $a$ is a cycle. The coefficient $F^{p+1}\\otimes M^{\\otimes b}$ is quasi-coherent: on any trivialization of $M$ it is $F^{p+1}$. Apply [lem-sc-p1-section-restriction-s-torsion] to this coefficient and $s$. It gives $c\\geq0$ with $v\\otimes s^{\\otimes c}=0$. Hence $z=t\\otimes s^{\\otimes c}$ is a global cycle of $G^\\bullet=F^\\bullet\\otimes M^{\\otimes(b+c)}$, and $z|_U=a\\otimes s^{\\otimes(b+c)}$. Both applications have a quasi-compact quasi-separated source by step 1.",
+   "uses": [
+    "lem-sc-p1-section-clearing-denominators-qcqs",
+    "lem-sc-p1-section-restriction-s-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology, proof."
+   }
+  },
+  {
+   "text": "The complex $G^\\bullet$ represents $K\\otimes^L\\mathcal L^{\\otimes N}$ for $N=n(b+c)\\geq0$. To check the derived assertion directly, tensoring by a line bundle is exact on each trivializing open, where it is tensoring by $\\mathcal O_X$. It therefore takes every acyclic complex to an acyclic complex, so the degree-zero line bundle is K-flat in [def-pc-kflat-complex]. The construction of [def-pc-scheme-derived-tensor-structure] computes this derived tensor by the ordinary complex $G^\\bullet$. At $y$, multiplication by $s_y^{\\otimes(b+c)}$ is an isomorphism and identifies the class of $z_y$ with $\\tau_y\\neq0$. The stalk homology here is the stalk of the cohomology sheaf by [lem-weil-pbc-module-stalk-exact], applied to kernels, images and cokernels.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology, proof."
+   }
+  },
+  {
+   "text": "Choose a K-injective resolution $\\rho:G^\\bullet\\to I^\\bullet$ by [prop-pur-kinjective-resolutions-exist], on the Zariski site of all opens of $X$ (a set in a sufficiently large fixed universe). By [def-pc-global-derived-rhom], $H^p(X,QG^\\bullet)$ is $H^p(\\Gamma(X,I^\\bullet))$. The global cycle $\\rho(z)$ defines a class there. If it were zero, there would be $w\\in\\Gamma(X,I^{p-1})$ with $d(w)=\\rho(z)$; taking germs at $y$ makes $\\rho_y(z_y)$ a boundary. But [lem-weil-pbc-module-stalk-exact] makes $\\rho_y$ a quasi-isomorphism, since $\\rho$ is one and stalks preserve kernels, images and cokernels. Thus the nonzero class of $z_y$ from step 5 cannot map to a boundary. This contradiction proves $H^p(X,K\\otimes^L\\mathcal L^{\\otimes N})\\neq0$, with $N\\geq0$ as required.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pc-global-derived-rhom",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-sfb-qc-separated-quasicoherent-complex-model",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-p1-section-clearing-denominators-qcqs",
+  "lem-sc-p1-section-restriction-s-torsion",
+  "def-pc-kflat-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-weil-pbc-module-stalk-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0BQR, perfect-lemma-nonzero-some-cohomology, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero unbounded complex with quasi coherent cohomology has nonzero hypercohomology after some nonnegative power of an ample invertible sheaf",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.isZero_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived t-structure and quasicoherent presentation declarations contain no ample-twist detection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived t-structure and quasicoherent presentation declarations contain no ample-twist detection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*cohomolog|cohomolog.*ample|nonzero_some_cohomology",
+   "results": "2 hits: Mathlib/Algebra/Homology/ComplexShape.lean, Mathlib/Algebra/GroupWithZero/Action/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived t-structure and quasicoherent presentation declarations contain no ample-twist detection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive twists by an ample line bundle detect nonzero objects in derived quasi coherent category",
+   "results": "8 hits: HasDerivedCategory.standard, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.instHasZeroObject, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.Presentation.noConfusion",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract derived t-structure and quasicoherent presentation declarations contain no ample-twist detection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero complex of quasi coherent sheaves on a scheme with an ample invertible sheaf has nonzero derived global sections after a positive tensor power twist",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf section localization and abstract derived-category constructors do not state ample-twist detection for unbounded quasi-coherent complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "ample.*cohomolog|cohomolog.*ample|nonzero_some_cohomology",
+   "results": "2 hits: Mathlib/Algebra/GroupWithZero/Action/Defs.lean, Mathlib/Algebra/Homology/ComplexShape.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf section localization and abstract derived-category constructors do not state ample-twist detection for unbounded quasi-coherent complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The negative tensor powers of an ample invertible sheaf generate the unbounded derived category of quasi coherent sheaves",
+   "results": "8 hits: HasDerivedCategory.standard, HasDerivedCategory, SheafOfModules.QuasicoherentData.I, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.instIsTriangulated, DerivedCategory, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.QuasicoherentData.presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf section localization and abstract derived-category constructors do not state ample-twist detection for unbounded quasi-coherent complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: structure-sheaf section localization and abstract derived-category constructors do not state ample-twist detection for unbounded quasi-coherent complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-negative-twists-generator",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology.",
+   "via": [
+    "lem-sfb-projective-negative-twists-generator",
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ample-twist-hypercohomology-detection",
+  "worker": "stage1",
+  "summary": "Read Stacks 0BQR and its 08DB/01PW inputs. Kept the unbounded statement unchanged, reused both existing qcqs denominator lemmas, and exposed only the missing termwise quasi-coherent model. Wrote the local cycle, global extension, differential killing and nonvanishing in a K-injective global-section model explicitly.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Generator input in the proof of Tag 0BQU, after the self-Ext calculation. Input to Tag 0A9V: 0BQR, lemma-nonzero-some-cohomology. The six steps realize the entire 0BQR proof at this prerequisite of the projective-twist generator.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ample-scheme-separated",
+    "why": "Generic geometric consequence of absolute ampleness, needed for the quasi-coherent termwise model and the two qcqs section lemmas. No node in this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Closure of quasi-coherent modules under kernels, needed for the cycle sheaf. No node in this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Quasi-coherence of the cohomology quotient and surjectivity of its sections on the affine open; clause (3) is essential. No node in this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "The affine counit detects that a nonzero quasi-coherent sheaf on U has a nonzero global section. No node in this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-sc-p1-section-clearing-denominators-qcqs",
+    "why": "Ordinary section extension after multiplying by a power of an invertible-sheaf section, for arbitrary qcqs schemes. No node in this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-sc-p1-section-restriction-s-torsion",
+    "why": "A global section vanishing on the section-open is killed by a power of that section, applied to the differential. No node in this unit supplies this generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exactness of stalks identifies stalk homology and preserves the quasi-isomorphism to a K-injective resolution. No node in this unit supplies this generic statement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Unbounded K-injective resolution on the small Zariski ringed site, needed to turn a global cycle into hypercohomology. No node in this unit supplies this generic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ample-scheme-separated",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-p1-section-clearing-denominators-qcqs",
+  "lem-sc-p1-section-restriction-s-torsion",
+  "lem-weil-pbc-module-stalk-exact",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-46ec30bb3",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-46ec30bb3 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks 0BQR (perfect.tex l.4068-4106), 08DB (l.1584-1600) and 01PW (properties lemma-invert-s-sections), and opened the statement of every cited node. The item statement is unchanged and matches 0BQR exactly: any X, L ample, K≠0 in D_QCoh with no bound; RΓ=Rp_* and the K-flat derived tensor. The six steps carry the whole Stacks proof. (1) Ample gives qc, the ampleness node gives separated, which gives qs (the affine-intersection fact is two lines); the new node then gives a model F• with quasi-coherent terms. (2) Some H^p(F) has a nonzero stalk; ample def (2) gives x in X_s affine with s a basis there. (3) The kernel node, cokernel-image clauses (2)/(3) and the tilde-Γ counit (3) give H(U)≠0 and a cycle lift a with τ_y≠0. (4) Both lem-sc-p1 nodes (01PW) apply with qcqs X and an invertible M=L^n; they yield z=t⊗s^c, a global cycle of F⊗M^{b+c}. (5) L^N[0] is K-flat, so the ordinary tensor computes the derived tensor; the cone argument is a few lines, so 'elementary' is acceptable. Stalk exactness identifies the class of z_y with τ_y. (6) A K-injective resolution exists because the site of opens is small; def-pc-global-derived-rhom gives H^p(Γ(X,I)); if ρ(z) were a boundary, its germ at y would be one, which contradicts ρ_y being a quasi-iso. N=n(b+c)≥0 as required. New node lem-sfb-qc-separated-quasicoherent-complex-model: it is true as 08DB essential surjectivity, since separated implies affine diagonal. I tested it on affine X, empty X and unbounded K on P^n. It is self-contained, statement-only and unsplit, with source 08DB plus label, correct blueprint from/via, same_as [] and 8 searches; it does not restate the item. rg -L over dag/nodes for 08DB, 0BQR, affine diagonal, D(QCoh) and quasi-coherent-model wording found no duplicate; dq-coherator, tor-independent, alternating-Čech and affine models all state something else. Route: prop-pur-kinjective is on route through sk-def-sf-operations. The other declared tool_uses (ample⇒separated, QCoh kernel/cokernel-image, tilde-Γ, stalk exactness, the two 01PW nodes) are generic black boxes and are accepted. No SGA anywhere; proof_deps equals the union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleTwistHypercohomologyDetection",
+  "declaration": "AlgebraicGeometry.exists_nonzero_hypercohomology_ample_twist",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleTwistHypercohomologyDetection.lean",
+  "statement": "theorem exists_nonzero_hypercohomology_ample_twist (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wA} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] (L : X.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple X L) (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (hne : ¬ IsZero K) : ∃ (m : ℕ) (p : ℤ), ¬ IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) p).obj ((schemeDerivedGlobalSections X).obj (K ⊗ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (L.tensorPow m))))",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43736ce8f",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Statement exists_nonzero_hypercohomology_ample_twist matches node and Stacks 0BQR clause by clause: X : Scheme.{u}; L : X.Modules with [IsInvertible] and IsAmple (01PS, no extra separated/noetherian hypothesis); K : schemeDerivedCategory X with schemeDerivedQCohProperty and no bound; ¬IsZero K; ∃ m : ℕ, ∃ p : ℤ, ¬IsZero of H^p of schemeDerivedGlobalSections applied to K ⊗ single 0 (L.tensorPow m) using the global K-flat schemeDerivedTensorMonoidal. Universes u/w/wA independent and bound. Edge cases checked: empty X, K=0, m=0, negative p, unbounded K. lean.statement verbatim; sorry only; source and blueprint docstrings and 6-step proof docstring present; stmt_deps unchanged and imported publicly; plain imports equal the proof_dep modules (all exist in side-live); the module-less proof_dep qc-separated-quasicoherent-complex-model is correctly not imported. Live node unchanged, no lean record, no repair note; citer projective-negative-twists-generator compatible. No duplicate in side-live lean. No file changed, so no compile."
+ }
+}

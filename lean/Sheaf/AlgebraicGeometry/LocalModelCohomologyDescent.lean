@@ -13,6 +13,7 @@ import Sheaf.Paper.PullbackFiniteConstantLocalModel
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-!
 # Cohomology descent from finite scalar local models

@@ -1,0 +1,283 @@
+{
+ "id": "lem-pur-integral-reduction-uniform-tor",
+ "kind": "statement",
+ "title": "Uniform finite Tor bounds for all integral reductions",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$ and $A_n=R/t^n$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a separated finite-type scheme over a field $k$ of characteristic $p>0$, $p\\ne\\ell$ [def-weil-pbc-scheme-conventions]. On $T_{\\mathrm{proet}}$ put $\\widehat R_T=\\varprojlim_n(A_n)_T$. For any finite list $K^{(1)},\\ldots,K^{(s)}$ of objects of the completed integral constructible category $\\mathcal I_T(R)$ [def-weil-pbc-bounded-constructible-complete], write $K^{(i)}_n=K^{(i)}\\otimes^L_{\\widehat R_T}(A_n)_T$. There exist integers $a\\le b$ and a finite locally closed constructible stratification of $T$ such that every $K^{(i)}_n$ has intrinsically constructible cohomology, locally constant with finite $A_n$-module values on those strata [def-weil-proetale-constructible-sheaf], and Tor amplitude in $[a,b]$ over $(A_n)_T$: for every degree-zero $(A_n)_T$-module sheaf $V$, $H^q(K^{(i)}_n\\otimes^L_{(A_n)_T}V)=0$ if $q\\notin[a,b]$. The same interval works for all $i,n$, including after restriction to a stratum. More precisely, finitely many pro-etale local trivializations on these strata can be chosen with perfect $R$-complex values $P$ (bounded complexes of finite projective $R$-modules) in degrees $[a,b]$, whose reductions are the finite-projective $A_n$-complexes $P\\otimes_R A_n$. Each reduction admits the compatible bounded constructible etale-origin witnesses of the integral category and is therefore in the finite bounded constructible finite-Tor category $D^b_{ctf}(T,A_n)$ [def-weil-finite-tor-amplitude]. The empty list, zero complexes and empty scheme are allowed, with $[0,0]$ when all the complexes are zero.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, finite stratified-perfect models; agent-formulated uniform Tor consequence and open-closed assembly, returned item proof Steps 1–2."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Choose the common interval, stratification and finite perfect scalar charts from lem-pur-integral-finite-perfect-charts. Retain these data unchanged.",
+   "uses": [
+    "lem-pur-integral-finite-perfect-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.6.10(1)"
+   }
+  },
+  {
+   "text": "Scalar extension preserves finite projective terms. Exact slice restriction computes the reduced homology as the constant sheaf of the finite scalar homology module. Transport through the slice equivalence, and apply finite-model local constancy and stalk finiteness, to obtain intrinsic constructibility on the common strata.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-pbc-proetale-finite-model-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.6.10(1)"
+   }
+  },
+  {
+   "text": "Apply stratified_finite_projective_tor to every termwise scalar quotient complex on the common charts. Additive scalar extension preserves the zero terms outside the fixed interval, giving both global and stratum all-module Tor bounds.",
+   "uses": [
+    "lem-pur-stratified-finite-projective-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.6.10(1)"
+   }
+  },
+  {
+   "text": "Retain the compatible witnessed tower from membership. Its origins pull back to the reductions through the unit of the canonical coefficient-realization equivalence. Intrinsic constructibility yields constructible etale homology origins; full faithfulness of comparison identifies these with the homology of the retained origins. Tor amplitude gives their cohomological bounds by exact conservative inverse image. Thus the retained origins are bounded constructible. The original normalization equation is copied without modification, and the source bounded-constructible comparison gives constructibleFiniteTor.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete",
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.6.10(1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-finite-perfect-charts",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-pur-stratified-finite-projective-tor",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; proof assembled from finite perfect charts, all-module Tor descent and the retained compatible origins."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reductions of a stratified perfect completed integral sheaf complex have constructible cohomology and a uniform finite Tor amplitude",
+   "results": "[{\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}, {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ) [K.IsStrictlyGE n],\\n  (CochainComplex.cm5b.I K).IsStrictlyGE n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$ with enough injectives, this constructs a cochain complex $I K$ where each object $X^n$ is the injective replacement of $K.X^n$ from the original complex $K$, and \"}, {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}, {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}, {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}, {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}, {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}, {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: bounded derived support, ordinary adic completion and finite presentation do not give uniform Tor bounds for all completed sheaf reductions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible derived complete l-adic complex has uniformly bounded finite Tor amplitude modulo all powers of the uniformizer",
+   "results": "[{\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}, {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}, {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}, {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}, {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {y : N} {n : ℕ},\\n      f x ≡ y [SMOD I ^ n • ⊤\", \"doc\": \"Given a surjective linear map $ f : M \\\\to N $ composed with the quotient map to $ N/(I^n \\\\cdot N) $, for any $ x \\\\in M $, $ y \\\\in N $, and natural number $ n $, if $ f(x) \\\\equiv y \\\\mod I^n \\\\cdot N $, \"}, {\"name\": \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {y : N} {n : ℕ}, y ∈ I ^ n • ⊤ → ∃ x ∈ I ^ n • ⊤, f x \", \"doc\": \"Given a surjective linear map from the quotient module $ M/(I \\bullet M) $ to $ N/(I \\bullet N) $, for any element $ y $ in the $ n $-th power submodule $ I^n \\bullet N $ and natural number $ n $, there \"}, {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}, {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: bounded derived support, ordinary adic completion and finite presentation do not give uniform Tor bounds for all completed sheaf reductions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\", \"Perfect\"",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "No match: bounded derived support, ordinary adic completion and finite presentation do not give uniform Tor bounds for all completed sheaf reductions."
+  },
+  {
+   "tool": "grep",
+   "query": "stratified.*perfect|uniform.*Tor|TorAmplitude",
+   "results": "[]",
+   "date": "2026-10-22",
+   "verdict": "No match: bounded derived support, ordinary adic completion and finite presentation do not give uniform Tor bounds for all completed sheaf reductions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductions of a stratified perfect completed integral sheaf complex have constructible cohomology and a uniform finite Tor amplitude",
+   "results": "[{\"name\": \"HomologicalComplex.instIsSupportedOfIsStrictlySupported\", \"module\": \"Mathlib.Algebra.Homology.Embedding.IsSupported\", \"type\": \"[K.IsStrictlySupported e] : K.IsSupported e\", \"doc\": \"If a homological complex $ K $ is strictly supported by an embedding $ e $, then $ K $ is supported by $ e $.\"}, {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}, {\"name\": \"SheafOfModules.Finite.hasFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasFiniteLimits (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all finite limits. This includes the existenc\"}, {\"name\": \"HomologicalComplex.instHasFiniteLimits\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexLimits\", \"type\": \"[HasFiniteLimits C] : HasFiniteLimits (HomologicalComplex C c)\", \"doc\": \"If a category $ C $ has zero morphisms and finite limits, then the category of homological complexes over $ C $ with shape $ c $ also has finite limits.\"}, {\"name\": \"AlgebraicGeometry.isReduced_of_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : IsReduced X\", \"doc\": \"Every integral scheme is a reduced scheme. That is, if a scheme $X$ is integral (meaning it is both irreducible and reduced), then it necessarily satisfies the condition of being reduced (all its loca\"}, {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}, {\"name\": \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A : Type*} [Category* A] [HasFiniteColimits A] [HasWeakSheafify (coherentTopology CompHaus.{u}) A] :\\n  HasFiniteColimits (Condensed.{u} A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits and the category of compact Hausdorff spaces equipped with the coherent Grothendieck topology admits weak sheafification into $\\\\mathcal{A}$, then the ca\"}, {\"name\": \"HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLE\", \"type\": \"[K.IsStrictlySupported e] : IsIso (K.ιTruncLE e)\", \"doc\": \"If a homological complex $ K $ is strictly supported by an embedding $ e $, then the canonical morphism $ \\\\iota_{\\\\text{truncLE}}: K.\\\\text{truncLE}(e) \\\\to K $ is an isomorphism.\"}]",
+   "date": "2026-10-22",
+   "verdict": "No match: bounded derived support, ordinary adic completion and finite presentation do not give uniform Tor bounds for all completed sheaf reductions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed integral constructible complex has finite stratified perfect local models and reductions modulo all uniformizer powers with uniform Tor amplitude",
+   "results": "8 hits: BDeRhamPlus, BDeRham, PreTilt.exists_smodEq_untiltAux, IsAdicComplete.henselianRing, instCommRingBDeRhamPlus, IsAdicComplete.toIsPrecomplete, IsAdic.isPrecomplete_iff, PowerSeries.exists_isWeierstrassFactorization",
+   "date": "2026-10-22",
+   "verdict": "No match: returned declarations concern ordinary completion, bounded derived support or general sheaf finiteness, not simultaneous stratified perfect integral reduction models and uniform sheafwise Tor amplitude."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Tor amplitude of all finite reductions of a derived complete constructible integral sheaf complex",
+   "results": "8 hits: CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.IsFiniteType.mk, IsUltraUniformity.completion_iff, UniformSpace.Completion.comap_coe_eq_uniformity, IsUniformEmbedding.isComplete_iff, AbstractCompletion.isUniformInducing, SheafOfModules.Finite.forgetPreservesFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "No match: returned declarations concern ordinary completion, bounded derived support or general sheaf finiteness, not simultaneous stratified perfect integral reduction models and uniform sheafwise Tor amplitude."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded perfect complex of integral l-adic sheaves has one finite Tor interval for all reductions and a common constructible stratification",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.IsGE, DerivedCategory.isLE_Q_obj_iff, CondensedMod.IsSolid, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-22",
+   "verdict": "No match: returned declarations concern ordinary completion, bounded derived support or general sheaf finiteness, not simultaneous stratified perfect integral reduction models and uniform sheafwise Tor amplitude."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|stratified|Constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No match: returned declarations concern ordinary completion, bounded derived support or general sheaf finiteness, not simultaneous stratified perfect integral reduction models and uniform sheafwise Tor amplitude."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-condensed-exceptional-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport, adic-stage common bounds and stratifications; thm-pur-rational-and-qbar-purity proof Steps 1–2, integral lattice reductions used by the reconstruction parent. Finite-list uniform Tor refinement of Bhatt–Scholze Proposition 6.6.11.",
+   "via": [
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-integral-reduction-uniform-tor",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing stratified-perfect, finite-cover, reduction-comparison and stratum-detection nodes. The same finite term bounds control every reduction and arbitrary test sheaf. No new nodes, no change of statement or coefficient category.",
+  "blueprint": "Realizes the common bounds and stratifications in sk-thm-purity-transport adic Step 2 and integral lattice input to the rational transport; nearest blueprint ancestor is null, as returned by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Supplies the existing completed integral category/local perfect model equivalence; no purity assertion is substituted. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-sfb-finite-stratification-wide-pullback",
+    "why": "Generic finite common-refinement tool for the finite list. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Canonical ring-sheaf identification under the stratum projections. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic strong monoidality of derived inverse image used for local models and test modules. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-sfb-stratified-local-cohomological-bounds",
+    "why": "Finite covering selection and explicit min/max bounds, before n and V are chosen. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-chart-tensor-comparison",
+    "why": "Identifies the actual finite reduction with the scalar reduced complex on an unchanged chart. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Checks the adic datum for R and its uniformizer quotients. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-perfect-strata-uniform-reductions",
+    "why": "Supplies finite-level constructibility on the given strata only, without assuming Tor bounds. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-sfb-flat-scalar-realization-flat",
+    "why": "Generic flatness of constant module realizations on covering slices. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic bounded-flat computation of derived tensor on local models. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-derived-restriction-comparisons",
+    "why": "Exact restriction commutes with cohomology for actual inverse-image coefficients. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic jointly conservative stratum and covering restrictions to globalize local tensor vanishing. This unit has no alternative local coefficient-calculus statement."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Step 7: intrinsic pro-etale bounded constructible complexes come from D^b_c of the etale site (clause ii), so the integral-category witnesses L_n are bounded constructible; no node of this unit compares the two sites."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Step 7: full faithfulness of nu^* on D^+ identifies the given witness L_n with the constructible etale origin; generic site comparison, not part of the purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-proetale-constructible-origin",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-7c777ff24",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-7c777ff24 (reviewer sub-agent of L); spot-checked: Read all 7 steps and all 17 cited statements, plus Bhatt–Scholze Def 6.5.1 and its remark, Lemma 6.6.10(1) and Prop 6.6.11 (pdftotext). The coefficient category is right: 𝓘_T(R) = def-weil-pbc-bounded-constructible-complete with the actual completed ring R̂_T = lim(A_n)_T, and K_n is formed as in that definition. No new nodes and no repair note. Steps 1–6 hold. Step 1: characterization (i)⇒(ii); T Noetherian, finite-dimensional, ℓ invertible. Step 2: real fibre-product cones from wide-pullback with U=O_j=T, plus the completed-ring inverse-image comparison and tensor pullback. Step 3: finite qc selection, then min/max of term intervals, fixed before n and V. Step 4: chart tensor comparison with index n−1 and g the stratum immersion; constructibility only from perfect-strata-uniform-reductions. Step 5: projective ⇒ flat ⇒ flat realization ⇒ bounded flat K-flat, so each term vanishes outside [a,b] for arbitrary W. Step 6: exact restriction, tensor pullback and Noetherian stratum detection, also per stratum. Two faults, both repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-integral-reduction-uniform-tor.json. (1) C4/C2, Step 7: it claimed the witnesses are bounded constructible 'by membership', but the definition gives only L_n ∈ D^+(T_et), and the step was marked elementary. Repaired by citing lem-sf-proetale-constructible-origin (ii) (gives C_n ∈ D^b_c(T_et) with ν^*C_n ≅ K_n) and thm-weil-pbc-site-comparison (ν^* fully faithful on D^+, so L_n ≅ C_n). The step is now non-elementary with source BS Def 6.5.1; both nodes are added to proof_deps and declared in split_report.tool_uses; no cycle. (2) B3: the statement names the finite-Tor category without a citation; added [def-weil-finite-tor-amplitude] to the statement and stmt_deps. Duplicate candidates are not this statement: lem-coef-integral-residue-tor (finite-field datum, no common models), lem-sfb-adic-stratified-perfect and lem-sfb-adic-constructible-finite-reductions (discrete A, single K), perfect-strata-uniform-reductions (cohomological bounds only). Small cases: [R→tR] gives Tor interval [−1,0], also at n=1; shifts; direct sums; empty list or scheme gives [0,0]. No SGA. I accept the 12 declared tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurIntegralReductionUniformTor",
+  "declaration": "AlgebraicGeometry.Scheme.pur_integral_reduction_uniform_tor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pur_integral_reduction_uniform_tor"
+  ],
+  "file": "lean/Sheaf/Paper/PurIntegralReductionUniformTor.lean",
+  "statement": "theorem pur_integral_reduction_uniform_tor (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpl : p ≠ l) (T : Scheme.{u}) [T.Over (Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (s : ℕ) (K : Fin s → PbcCompletedDerived T (pbcPadicCoefficientDatum l E)) (_hK : ∀ j : Fin s, IsPbcBoundedConstructibleComplete T l E (K j)) : ∃ a b : ℤ, a ≤ b ∧ ((∀ j : Fin s, IsZero (K j)) → a = 0 ∧ b = 0) ∧ ∃ S : Stratification T, 0 < S.n ∧ (∀ (j : Fin s) (n : ℕ), (∀ q : ℤ, IsConstructibleProEtaleFixedModuleSheaf T (PbcQuotient (pbcPadicCoefficientDatum l E) n) ((DerivedCategory.homologyFunctor _ q).obj (purIntegralReduction T (pbcPadicCoefficientDatum l E) (K j) n))) ∧ AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (PbcQuotient (pbcPadicCoefficientDatum l E) n)) T a b (purIntegralReduction T (pbcPadicCoefficientDatum l E) (K j) n) ∧ AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (PbcQuotient (pbcPadicCoefficientDatum l E) n)) T (purIntegralReduction T (pbcPadicCoefficientDatum l E) (K j) n) ∧ ∀ r : Fin S.n, AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (PbcQuotient (pbcPadicCoefficientDatum l E) n)) (S.domain r) a b (purReductionOnStratum (S.immersion r) (pbcPadicCoefficientDatum l E) (K j) n)) ∧ (∀ (r : Fin S.n) (j : Fin s), ∃ (m : ℕ) (U : Fin m → (S.domain r).ProEt) (f : ∀ c : Fin m, U c ⟶ ProEt.mk (𝟙 (S.domain r))) (P : Fin m → CochainComplex (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)) ℤ), Presieve.ofArrows U f ∈ (ProEt.precoverage (S.domain r)).coverings _ ∧ ∀ c : Fin m, ((P c).IsStrictlyGE a ∧ (P c).IsStrictlyLE b) ∧ (∀ q : ℤ, Module.Projective (Padic.coefficientExtensionIntegers l E) ((P c).X q) ∧ Module.Finite (Padic.coefficientExtensionIntegers l E) ((P c).X q)) ∧ Nonempty (integralLocalDerived (S.immersion r) (pbcAdicCompletion T (pbcPadicCoefficientDatum l E)) (U c) (K j) ≅ integralLocalDerived (S.immersion r) (pbcAdicCompletion T (pbcPadicCoefficientDatum l E)) (U c) ((integralConstantDerived T (pbcPadicCoefficientDatum l E)).obj ((completedConstantQ _).obj (P c)))) ∧ ∀ n : ℕ, (∀ q : ℤ, Module.Projective (PbcQuotient (pbcPadicCoefficientDatum l E) n) ((purScalarReductionComplex (pbcPadicCoefficientDatum l E) (P c) n).X q) ∧ Module.Finite (PbcQuotient (pbcPadicCoefficientDatum l E) n) ((purScalarReductionComplex (pbcPadicCoefficientDatum l E) (P c) n).X q)) ∧ Nonempty (purFixedChart (S.domain r) (PbcQuotient (pbcPadicCoefficientDatum l E) n) (U c) (purReductionOnStratum (S.immersion r) (pbcPadicCoefficientDatum l E) (K j) n) ≅ purScalarComplexOnChart (S.domain r) (pbcPadicCoefficientDatum l E) (U c) (P c) n) ∧ ∀ q : ℤ, ∃ M : ModuleCat.{u + 1} (PbcQuotient (pbcPadicCoefficientDatum l E) n), Finite M ∧ Nonempty ((((DerivedCategory.homologyFunctor _ q).obj (purReductionOnStratum (S.immersion r) (pbcPadicCoefficientDatum l E) (K j) n)).over (U c)) ≅ ((constantSheaf ((ProEt.topology (S.domain r)).over (U c)) (ModuleCat.{u + 1} (PbcQuotient (pbcPadicCoefficientDatum l E) n))).obj M))) ∧ ∀ j : Fin s, ∃ (W : PbcWitnessedTower T (pbcPadicCoefficientDatum l E)) (e : ∀ n : ℕ, (pbcDerivedFunctionRealization T (pbcPadicCoefficientDatum l E) n).obj (W.K n) ≅ (pbcCompletedReduction T (pbcPadicCoefficientDatum l E) n).obj (K j)), (∀ n : ℕ, Etale.DerivedCategory.isBoundedConstructible (PbcQuotient (pbcPadicCoefficientDatum l E) n) T (W.origin n).L.obj) ∧ ∀ n : ℕ, (pbcDerivedFunctionRealization T (pbcPadicCoefficientDatum l E) n).map (W.theta n).hom ≫ (e n).hom = (pbcFunctionReduction T (pbcPadicCoefficientDatum l E) n).inv.app (W.K (n + 1)) ≫ (pbcDerivedExtend (pbcAdicQuotient T (pbcPadicCoefficientDatum l E) (n + 1) n (Nat.le_succ n))).map (e (n + 1)).hom ≫ (pbcReductionNormalization (pbcAdicProjection T (pbcPadicCoefficientDatum l E) (n + 1)) (pbcAdicQuotient T (pbcPadicCoefficientDatum l E) (n + 1) n (Nat.le_succ n)) (pbcAdicProjection T (pbcPadicCoefficientDatum l E) n) (pbcAdicProjection_comp T (pbcPadicCoefficientDatum l E) (n + 1) n (Nat.le_succ n)) (K j)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The original statement and all five construction bodies are unchanged. The five abbreviations now live in the publicly imported PurIntegralFinitePerfectCharts module. The theorem is assembled from charts, independently proved Tor descent, finite models and the retained normalized tower."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b0dd034e",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Only the item's lean record changes; the six stmt_deps are identical to side-live; the record statement is verbatim the file; Worker report and Second reading sections present. H3 clause by clause: coefficients are pbcPadicCoefficientDatum over the actual completed ring pbcAdicCompletion; K_n = pbcCompletedReduction transported by the inverse of the published exact pbcDerivedFunctionRealization equivalence; PbcQuotient n = A/I^(n+1) covers every A_m, m>=1; T separated, LocallyOfFiniteType+QuasiCompact over k, CharP p prime, p≠l, no extra hypotheses (uses the hypothesis-free IsPbcBoundedConstructibleComplete). ∃a≤b precedes the stratification, j, n, charts and test sheaves. Stratification T is finite, locally closed, constructible, covering, disjoint, with no nonemptiness field, so 0<S.n is harmless for the empty scheme. Intrinsic IsConstructibleProEtaleFixedModuleSheaf on every H^q, plus finite constant chart values on the strata. torAmplitudeIn tests every degree-zero sheaf, globally and after upperStar restriction to each stratum. constructibleFiniteTor is listed in def-weil-finite-tor-amplitude declarations. Finite charts carry projective finite P strictly in [a,b], a derived iso of integralLocalDerived as in IsIntegralStratifiedPerfect, termwise P⊗A_n finite projective, and a derived chart iso with the constant complex. The witness clause is verbatim PbcHasCompatibleEtaleOrigins plus isBoundedConstructible of the origins. The all-zero case forces [0,0]. Edge cases checked: empty list, zero list, empty scheme, n=0, universes. The 5 abbreviations are canonical compositions, not hollow; the only sorry is the theorem proof; docstrings carry source, blueprint id and all 7 steps; lines ≤95. Each plain import is exactly one recorded proof-dependency module; no name collisions. Advisory: decls owned by def nodes outside stmt_deps (integral-stratified-perfect-models, witness-compatibility, completed-constant-realization-data, derived-morphism-presheaves) need maintainer attention at stage 3; one redundant public TorAmplitude import. No change, no compile; worker compiled clean (15.2 s / 12.5 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-691b0",
+  "group": "T9",
+  "result": "fix",
+  "landing": "20261025T024000-L-2494315",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); 5 moved abbrevs vs clone bodies (verbatim, re-exported by public import); chart lemma vs item's accepted chart clause and integralPadicLocalPerfectCriterion (BS 6.6.11); node lean/proof fields vs Lean"
+ }
+}

@@ -26,10 +26,11 @@
  ],
  "proof": [
   {
-   "text": "Let X^0 be the set of generic points of the irreducible components of X. For eta in X^0 the stalk L_eta is free of rank one over O_{X,eta}, since L is locally isomorphic to O_X [def-sc-invertible-module]; choose a generator s_eta. By [lem-sc-meromorphic-sheaf-generic-product] with U=X, sending a global meromorphic section of L to its germs at the points of X^0 is a bijection K_X(L)(X) \\to prod_{eta in X^0} L_eta; let s be the meromorphic section of L corresponding to (s_eta)_eta.",
+   "text": "Choose a local free generator of L near each point using [def-sc-invertible-module]. Its germ is a free generator of the stalk, by the existing proved private helper AlgebraicGeometry.Scheme.Modules.stalk_generator_bijective in WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor (reused by a proof-only import all). The helper represents coefficients and module elements on smaller neighborhoods, and shrinks an equality of germs before applying uniqueness of the local coefficients [def-weil-pbc-module-stalk]. Apply [lem-sc-meromorphic-sheaf-generic-product]. Its normalized additive stalk identifications are linear: the localization map on stalks is linear and, under these identifications, is the identity (for O_X use the canonical structure-sheaf stalk identification). Hence it is surjective, and linearity transports to the identifications. On every open U, transport the component maps a_eta ↦ a_eta s_eta through the two product bijections to obtain an additive, O_X(U)-linear map F_U: K_X(U) → K_X(L)(U). The germ restriction formulas show that these maps commute with restriction, giving a morphism F of O_X-modules.",
    "uses": [
     "lem-sc-meromorphic-sheaf-generic-product",
-    "def-sc-invertible-module"
+    "def-sc-invertible-module",
+    "def-weil-pbc-module-stalk"
    ],
    "elementary": false,
    "source": {
@@ -38,9 +39,10 @@
    }
   },
   {
-   "text": "Let U be open in X. By [lem-sc-meromorphic-sheaf-generic-product] for U and its compatibility with multiplication, the map K_X(U) \\to K_X(L)(U), f \\mapsto fs, becomes prod_{eta in X^0 cap U} O_{X,eta} \\to prod_{eta in X^0 cap U} L_eta, (a_eta) \\mapsto (a_eta s_eta). Multiplication by a generator of a free rank-one module is injective, and a product of injective maps is injective. So K_X \\to K_X(L) is injective on every open, and s is a regular meromorphic section.",
+   "text": "Each F_U is injective: equality of its values implies equality of every generic coefficient, because scalar multiplication by the chosen free generator s_eta is injective; the product bijection for K_X then implies equality of sections. Therefore F is a monomorphism. Set s to be the composite O_X → K_X → K_X(L), using the canonical localization map. The unique extension property in [def-sc-meromorphic-module] identifies meromorphicSectionMap(s) with F, so s is a regular meromorphic section.",
    "uses": [
-    "lem-sc-meromorphic-sheaf-generic-product"
+    "lem-sc-meromorphic-sheaf-generic-product",
+    "def-sc-meromorphic-module"
    ],
    "elementary": true,
    "source": {
@@ -51,7 +53,9 @@
  ],
  "proof_deps": [
   "lem-sc-meromorphic-sheaf-generic-product",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-stalk",
+  "def-sc-meromorphic-module"
  ],
  "proof_origin": {
   "by": "document",
@@ -131,5 +135,26 @@
   "result": "pass",
   "note": "k field, X.Over Spec k + IsProper (proper over k), IsLocallyNoetherian, NoEmbeddedPoints, topologicalKrullDim X ≠ ⊤ (finite dim), L : X.Modules [IsInvertible]; conclusion ∃ s : unit X ⟶ meromorphicModule X L with Mono (meromorphicSectionMap X L s) = K_X → K_X(L) injective (landed def-sc-meromorphic-module). New associatedPoints = IsAssociatedPrime m_x of O_{X,x} (Stacks 02OJ def), NoEmbeddedPoints uses Mathlib genericPoints (= M1 14582dfc7's), not hollow (inferInstance fails); no landed associated-points/no-embedded-points declaration (M1/ass-weakass state it inline, bridgeable). Sandbox compile of all three modules clean."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261023T131755-L-2150525",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

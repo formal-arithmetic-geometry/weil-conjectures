@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-component-quotient-clopen-naturality",
+ "kind": "statement",
+ "title": "Natural clopen descent through the connected-component quotient",
+ "statement": "Use the universe conventions of [def-weil-size-convention]. Let $X,Y$ be arbitrary topological spaces and $f:X\\to Y$ a continuous map. For each topological space $Z$, write $\\operatorname{Clop}(Z)$ for its open and closed subsets and let $\\pi_0(Z)$ be its set of connected components (maximal connected subsets), with the quotient topology for the surjection $q_Z:Z\\to\\pi_0(Z)$ sending a point to its component. There is a unique continuous map $h:\\pi_0(X)\\to\\pi_0(Y)$ satisfying $h q_X=q_Y f$, and it sends the component of $x$ to the component of $f(x)$. For every $Z$, inverse image $\\beta_Z:\\operatorname{Clop}(\\pi_0(Z))\\to\\operatorname{Clop}(Z)$ along $q_Z$ is bijective; its inverse sends $U$ to $q_Z(U)$, which is clopen and satisfies $q_Z^{-1}(q_Z(U))=U$. For every clopen $V\\subseteq\\pi_0(Y)$ one has $\\beta_X(h^{-1}(V))=f^{-1}(\\beta_Y(V))$. Consequently $f^{-1}:\\operatorname{Clop}(Y)\\to\\operatorname{Clop}(X)$ is bijective if and only if $h^{-1}:\\operatorname{Clop}(\\pi_0(Y))\\to\\operatorname{Clop}(\\pi_0(X))$ is bijective. No compactness, separation, or nonemptiness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Agent component-quotient functoriality and natural clopen descent, expanding the clopen-saturation passage in Tag 0900 (lemma-pi0-profinite), proof. This statement does not claim the profiniteness conclusion of that tag."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-connected-component-maximality], $C_x$ is connected, contains $x$, and contains every connected subset through $x$. If $y\\in C_x$, maximality at $y$ gives $C_x\\subseteq C_y$; hence $x\\in C_y$ and maximality at $x$ gives the reverse inclusion. Thus these sets partition $X$ into precisely its maximal connected subsets. This justifies the point-component surjection $q_X$, and likewise for any other space. The Lean proof uses Mathlib's existing ConnectedComponents quotient rather than reconstructing this partition.",
+   "uses": [
+    "lem-sfb-connected-component-maximality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004T (lemma-connected-components), parts (3)–(4); elementary mutual-containment identification."
+   }
+  },
+  {
+   "text": "For a component $C_x$, the image $f(C_x)$ is connected: it contains $f(x)$, and the inverse images of a relatively clopen partition of $f(C_x)$ form such a partition of $C_x$; one part is empty, and surjectivity onto the image makes its corresponding image part empty. This uses exactly [def-weil-connected-scheme]. By [lem-sfb-connected-component-maximality], $f(C_x)\\subseteq C_{f(x)}$. Consequently $q_X(x)=q_X(x\\prime)$ implies $q_Y(f(x))=q_Y(f(x\\prime))$. The rule $h(q_X(x))=q_Y(f(x))$ is well defined. Surjectivity of $q_X$ proves its uniqueness and $h q_X=q_Y f$. In Lean choose Continuous.connectedComponentsMap; its value on mk is definitionally mk (f x). The uniqueness proof uses ContinuousMap.ext, surjective_coe and congrFun on the normalization equality.",
+   "uses": [
+    "lem-sfb-connected-component-maximality",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0376 (lemma-image-connected-space), proof; Tag 004T (lemma-connected-components), maximality. Agent quotient construction."
+   }
+  },
+  {
+   "text": "For open $W\\subseteq\\pi_0(Y)$, the quotient topology makes $q_Y^{-1}(W)$ open. Hence $q_X^{-1}(h^{-1}(W))=f^{-1}(q_Y^{-1}(W))$ is open by continuity of $f$. The defining quotient topology on $\\pi_0(X)$ then makes $h^{-1}(W)$ open. Thus $h$ is continuous; this argument also shows that each $q_Z$ is continuous. Lean uses Continuous.connectedComponentsMap_continuous and ConnectedComponents.continuous_coe, which already implement this quotient-topology argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZL (lemma-space-connected-components), quotient-topology construction; agent open-preimage calculation."
+   }
+  },
+  {
+   "text": "Let $U\\subseteq Z$ be clopen and $x\\in U$. By [lem-sfb-connected-component-maximality], $C_x$ is connected and contains $x$. The relatively clopen partition $C_x=(C_x\\cap U)\\amalg(C_x\\setminus U)$ has nonempty first part, so [def-weil-connected-scheme] forces $C_x\\subseteq U$. Thus $U$ is a union of whole components, and $q_Z^{-1}(q_Z(U))=U$. The private helper clopen_descent_aux obtains this identity by rewriting connectedComponents_preimage_image and IsClopen.biUnion_connectedComponent_eq, the existing Mathlib saturation proof based on the component maximality and connectedness above.",
+   "uses": [
+    "lem-sfb-connected-component-maximality",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0900 (lemma-pi0-profinite), proof sentence beginning “Since U_alpha is open and closed”; only the saturation argument is used."
+   }
+  },
+  {
+   "text": "Put $A=q_Z(U)$. The preceding equality and the quotient topology show $A$ open. Also $q_Z^{-1}(\\pi_0(Z)\\setminus A)=Z\\setminus U$ is open, so its quotient counterpart is open; hence $A$ is clopen. Continuity of $q_Z$ sends clopens to clopens by inverse image, since complements commute with inverse image. The identities $q_Z^{-1}(q_Z(U))=U$ and $q_Z(q_Z^{-1}(V))=V$ for all $V\\subseteq\\pi_0(Z)$ (surjectivity) exhibit $\\beta_Z$ and $U\\mapsto q_Z(U)$ as mutual inverses. Apply ConnectedComponents.isQuotientMap_coe.isClopen_preimage to the saturation identity. Injectivity of beta follows from Set.preimage_injective and surjective_coe; its surjectivity has the explicit witness q_Z(U). Both parts are proved in clopen_descent_aux.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0900 (lemma-pi0-profinite), same saturation sentence; agent quotient-topology and set-image expansion."
+   }
+  },
+  {
+   "text": "For clopen $V\\subseteq\\pi_0(Y)$ and $x\\in X$, membership in $\\beta_X(h^{-1}(V))$ means $h(q_X(x))\\in V$, equivalently $q_Y(f(x))\\in V$, equivalently $x\\in f^{-1}(\\beta_Y(V))$. This proves the claimed equality. All four inverse-image maps have clopen values because their maps are continuous. The chosen Mathlib component map makes the Lean carrier equality definitional, so rfl proves naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent naturality calculation from the normalization, expanding the component-quotient comparison following Tag 0900."
+   }
+  },
+  {
+   "text": "The equality gives $f^{-1}=\\beta_X\\circ h^{-1}\\circ\\beta_Y^{-1}$ and $h^{-1}=\\beta_X^{-1}\\circ f^{-1}\\circ\\beta_Y$ on clopens. Composition with mutually inverse bijections preserves and reflects injectivity and surjectivity, proving the final equivalence. No step selects a point unless one has already been given; for the empty space both clopen sets consist of the empty subset, so all assertions remain valid. In Lean name the four clopen functions F, H, beta_X and beta_Y. The square F composed with beta_Y = beta_X composed with H is rfl. Function.Bijective.of_comp_iff cancels the bijective beta_Y, and Function.Bijective.of_comp_iff' cancels beta_X. The helper is universe-polymorphic and therefore applies separately to X, Y and the quantified space Z.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent set-theoretic conjugacy consequence of the preceding naturality equality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-connected-component-maximality",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Explicit quotient construction and naturality argument expanding Tag 0900 (lemma-pi0-profinite), proof clopen-saturation sentence, with foundational component maximality from Tag 004T and the two-line image argument of Tag 0376. Stage-3 implementation by M3 (2026-10-23): reuse Mathlib component-map construction, saturation and quotient-clopen criterion, then prove the naturality square and cancel the two bijective clopen pullbacks. No new mathematical dependencies or unproved lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isClopen.*(preimage|image|connectedComponents)|connectedComponents.*(isClopen|Map)",
+   "results": "{\"t\": \"2026-10-22T05:56:47Z\", \"tool\": \"grep\", \"query\": \"isClopen.*(preimage|image|connectedComponents)|connectedComponents.*(isClopen|Map)\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/ClopenBox.lean\", \"Mathlib/Topology/Homeomorph/Lemmas.lean\", \"Mathlib/Topology/Homeomorph/Lemmas.lean\", \"Mathlib/Topology/Homeomorph/Lemmas.lean\", \"Mathlib/Topology/Homeomorph/Lemmas.lean\", \"Mathlib/Topology/Constructions.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\"], \"digest\": \"614fd52b87e628c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the quotient-map clopen criterion and the component-map construction are constituents; the bijection with explicit image inverse and its natural conjugacy still require the saturation and descent argument. The partition equivalences concern clopen decompositions, not this natural clopen equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clopen subsets of a topological space are naturally in bijection with clopen subsets of its connected component quotient",
+   "results": "{\"t\": \"2026-10-22T05:56:47Z\", \"tool\": \"leansearch\", \"query\": \"Clopen subsets of a topological space are naturally in bijection with clopen subsets of its connected component quotient\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedComponents\", \"IsClopen\"",
+   "results": "{\"t\": \"2026-10-22T05:56:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"ConnectedComponents\\\", \\\"IsClopen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ConnectedComponents.equivOfIsClopenOfIsConnected\", \"ConnectedComponents.equivOfIsClopen\", \"ConnectedComponents.exists_fun_isClopen_of_infinite\", \"ConnectedComponents.equivOfIsClopenOfIsConnected_mk\", \"ConnectedComponents.equivOfIsClopen_mk\", \"ConnectedComponents.equivOfIsClopen_symm_mk\"], \"digest\": \"70d27504db58ee9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the quotient-map clopen criterion and the component-map construction are constituents; the bijection with explicit image inverse and its natural conjugacy still require the saturation and descent argument. The partition equivalences concern clopen decompositions, not this natural clopen equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary topological spaces a continuous map induces a continuous normalized map on connected component quotients and quotient preimage naturally bijects clopen subsets",
+   "results": "{\"t\": \"2026-10-22T05:57:06Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary topological spaces a continuous map induces a continuous normalized map on connected component quotients and quotient preimage naturally bijects clopen subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DiscreteQuotient.comp_finsetClopens\", \"Continuous.connectedComponentsLift\", \"DiscreteQuotient.isClopen_preimage\", \"Continuous.connectedComponentsLift_apply_coe\", \"Topology.IsQuotientMap.isClopen_preimage\", \"DiscreteQuotient.ofIsClopen\", \"DiscreteQuotient.finsetClopens\", \"DiscreteQuotient.isClopen_setOf_rel\"], \"digest\": \"d89dcb19904b20c0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the quotient-map clopen criterion and the component-map construction are constituents; the bijection with explicit image inverse and its natural conjugacy still require the saturation and descent argument. The partition equivalences concern clopen decompositions, not this natural clopen equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "Clopens.*ConnectedComponents|ConnectedComponents.*Clopens|image.*[Ii]sClopen|[Ii]sClopen.*image",
+   "results": "{\"t\": \"2026-10-22T05:57:23Z\", \"tool\": \"grep\", \"query\": \"Clopens.*ConnectedComponents|ConnectedComponents.*Clopens|image.*[Ii]sClopen|[Ii]sClopen.*image\", \"sub\": \"Topology/Connected\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/CardComponents.lean\", \"Mathlib/Topology/Connected/CardComponents.lean\", \"Mathlib/Topology/Connected/CardComponents.lean\"], \"digest\": \"f9a3ec240682efac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the quotient-map clopen criterion and the component-map construction are constituents; the bijection with explicit image inverse and its natural conjugacy still require the saturation and descent argument. The partition equivalences concern clopen decompositions, not this natural clopen equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image under the projection to connected components is a natural equivalence of Boolean algebras of clopen subsets, with inverse taking images of clopens",
+   "results": "{\"t\": \"2026-10-22T05:57:41Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image under the projection to connected components is a natural equivalence of Boolean algebras of clopen subsets, with inverse taking images of clopens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DiscreteQuotient.comp_finsetClopens\", \"IsClopen.biUnion_connectedComponentIn\", \"LocallyConstant.ofIsClopen_fiber_zero\", \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"LocallyConstant.ofIsClopen_fiber_one\", \"PrimeSpectrum.basicOpen_isIdempotentElemEquivClopens_symm\", \"PrimeSpectrum.isIdempotentElemEquivClopens_symm_compl\", \"DiscreteQuotient.isClopen_preimage\"], \"digest\": \"76fa74ac297b39e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the quotient-map clopen criterion and the component-map construction are constituents; the bijection with explicit image inverse and its natural conjugacy still require the saturation and descent argument. The partition equivalences concern clopen decompositions, not this natural clopen equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponents_preimage_image|biUnion_connectedComponent_eq|clopensEquiv|clopen.*[Ee]quiv|[Ee]quiv.*clopen",
+   "results": "{\"t\": \"2026-10-22T05:58:25Z\", \"tool\": \"grep\", \"query\": \"connectedComponents_preimage_image|biUnion_connectedComponent_eq|clopensEquiv|clopen.*[Ee]quiv|[Ee]quiv.*clopen\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\"], \"digest\": \"c5d774596734c44e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the quotient-map clopen criterion and the component-map construction are constituents; the bijection with explicit image inverse and its natural conjugacy still require the saturation and descent argument. The partition equivalences concern clopen decompositions, not this natural clopen equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection onto the quotient of a topological space by connected components gives an equivalence on clopen subsets natural for continuous maps",
+   "results": "{\"t\": \"2026-10-22T05:58:26Z\", \"tool\": \"leansearch\", \"query\": \"The projection onto the quotient of a topological space by connected components gives an equivalence on clopen subsets natural for continuous maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConnectedComponents.isQuotientMap_coe\", \"DiscreteQuotient.isClopen_preimage\", \"DiscreteQuotient.proj_continuous\", \"Topology.IsQuotientMap.isClopen_preimage\", \"SeparationQuotient.continuous_mk\", \"ConnectedComponents\", \"DiscreteQuotient.isClopen_setOf_rel\", \"Continuous.connectedComponentsMap_continuous\"], \"digest\": \"09dacc7ade19a343\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the quotient-map clopen criterion and the component-map construction are constituents; the bijection with explicit image inverse and its natural conjugacy still require the saturation and descent argument. The partition equivalences concern clopen decompositions, not this natural clopen equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along the connected component quotient is a natural bijection of clopen subsets for continuous maps of arbitrary topological spaces",
+   "results": "{\"t\": \"2026-10-22T08:37:32Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image along the connected component quotient is a natural bijection of clopen subsets for continuous maps of arbitrary topological spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsQuotientMap.isClopen_preimage\", \"Topology.IsQuotientMap.preimage_connectedComponent\", \"DiscreteQuotient.isClopen_preimage\", \"DiscreteQuotient.comp_finsetClopens\", \"IsClopen.preimage\", \"DiscreteQuotient.ofIsClopen\", \"IsLocallyConstant.isClopen_fiber\", \"isClopen_connectedComponent\"], \"digest\": \"8984356c54ceeba3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the hits give quotient continuity, clopen preimage criteria, component functoriality, or partition equivalences; none gives the explicit image inverse and natural conjugacy of all the stated clopen maps. Read Mathlib/Topology/Connected/Clopen.lean:503–546,574–601; TotallyDisconnected.lean:292–306; LocallyConstant/Basic.lean:502–510."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedComponents\", \"IsClopen\"",
+   "results": "{\"t\": \"2026-10-22T08:37:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"ConnectedComponents\\\", \\\"IsClopen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ConnectedComponents.equivOfIsClopenOfIsConnected\", \"ConnectedComponents.equivOfIsClopen\", \"ConnectedComponents.exists_fun_isClopen_of_infinite\", \"ConnectedComponents.equivOfIsClopenOfIsConnected_mk\", \"ConnectedComponents.equivOfIsClopen_mk\", \"ConnectedComponents.equivOfIsClopen_symm_mk\"], \"digest\": \"70d27504db58ee9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the hits give quotient continuity, clopen preimage criteria, component functoriality, or partition equivalences; none gives the explicit image inverse and natural conjugacy of all the stated clopen maps. Read Mathlib/Topology/Connected/Clopen.lean:503–546,574–601; TotallyDisconnected.lean:292–306; LocallyConstant/Basic.lean:502–510."
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponentsMap|isQuotientMap_coe|connectedComponents_preimage_image|biUnion_connectedComponent_eq",
+   "results": "{\"t\": \"2026-10-22T08:37:32Z\", \"tool\": \"grep\", \"query\": \"connectedComponentsMap|isQuotientMap_coe|connectedComponents_preimage_image|biUnion_connectedComponent_eq\", \"sub\": \"Topology/Connected\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/TotallyDisconnected.lean\", \"Mathlib/Topology/Connected/TotallyDisconnected.lean\", \"Mathlib/Topology/Connected/TotallyDisconnected.lean\"], \"digest\": \"2e0626be3416cddf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the hits give quotient continuity, clopen preimage criteria, component functoriality, or partition equivalences; none gives the explicit image inverse and natural conjugacy of all the stated clopen maps. Read Mathlib/Topology/Connected/Clopen.lean:503–546,574–601; TotallyDisconnected.lean:292–306; LocallyConstant/Basic.lean:502–510."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clopen subsets of the connected component quotient naturally correspond bijectively to clopen subsets of the original space",
+   "results": "{\"t\": \"2026-10-22T08:37:32Z\", \"tool\": \"leansearch\", \"query\": \"Clopen subsets of the connected component quotient naturally correspond bijectively to clopen subsets of the original space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConnectedComponents.instTopologicalSpace\", \"Topology.IsQuotientMap.isClopen_preimage\", \"ConnectedComponents.totallyDisconnectedSpace\", \"TopologicalSpace.Clopens\", \"ConnectedComponents\", \"ConnectedComponents.t2\", \"DiscreteQuotient.ofIsClopen\", \"ConnectedComponents.mk\"], \"digest\": \"03f062bf9cba8b45\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the hits give quotient continuity, clopen preimage criteria, component functoriality, or partition equivalences; none gives the explicit image inverse and natural conjugacy of all the stated clopen maps. Read Mathlib/Topology/Connected/Clopen.lean:503–546,574–601; TotallyDisconnected.lean:292–306; LocallyConstant/Basic.lean:502–510."
+  },
+  {
+   "tool": "grep",
+   "query": "Clopens.*ConnectedComponents|ConnectedComponents.*Clopens|clopen.*[Ee]quiv|[Ee]quiv.*clopen",
+   "results": "{\"t\": \"2026-10-22T08:39:34Z\", \"tool\": \"grep\", \"query\": \"Clopens.*ConnectedComponents|ConnectedComponents.*Clopens|clopen.*[Ee]quiv|[Ee]quiv.*clopen\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Topology/Category/LightProfinite/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\"], \"digest\": \"7e1f0595eb8cccd9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the hits give quotient continuity, clopen preimage criteria, component functoriality, or partition equivalences; none gives the explicit image inverse and natural conjugacy of all the stated clopen maps. Read Mathlib/Topology/Connected/Clopen.lean:503–546,574–601; TotallyDisconnected.lean:292–306; LocallyConstant/Basic.lean:502–510."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function induces a unique continuous map on connected components; projection inverse image is a natural equivalence on clopen sets with inverse given by direct image",
+   "results": "{\"t\": \"2026-10-22T08:39:34Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous function induces a unique continuous map on connected components; projection inverse image is a natural equivalence on clopen sets with inverse given by direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Continuous.connectedComponentsLift\", \"Continuous.connectedComponentsMap\", \"Continuous.connectedComponentsLift_unique\", \"Continuous.connectedComponentsLift_apply_coe\", \"Continuous.connectedComponentsMap_continuous\", \"Continuous.connectedComponentsLift_continuous\", \"Continuous.connectedComponentsLift_comp_coe\", \"ConnectedComponents.continuous_coe\"], \"digest\": \"4969ad2b0f5231e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the entire statement: the hits give quotient continuity, clopen preimage criteria, component functoriality, or partition equivalences; none gives the explicit image inverse and natural conjugacy of all the stated clopen maps. Read Mathlib/Topology/Connected/Clopen.lean:503–546,574–601; TotallyDisconnected.lean:292–306; LocallyConstant/Basic.lean:502–510."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-spectral-clopen-component-homeomorphism",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; passage from generic clopen extension to the component-space comparison; original steps 1 and 3: construct the normalized continuous component map, descend saturated clopens, and identify the inverse-image square",
+   "via": [
+    "lem-sfb-spectral-clopen-component-homeomorphism",
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-component-quotient-clopen-naturality",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and wrote the quotient construction, its continuity, clopen saturation and descent, both inverse identities, the elementwise naturality square and conjugacy. Added one foundational Mathlib leaf for connectedness and maximality of point components, with genuine logged searches. All remaining arguments are explicit elementary steps; no compactness, separation, or nonemptiness assumption is used.",
+  "blueprint": "Preserves the inherited null ancestor and via chain (blueprint_refs ancestor confirms None). Realizes det-thm-sf-ctf-stability-direct-images paragraph (3) through the original steps 1/3 of lem-sfb-spectral-clopen-component-homeomorphism: normalized continuous component map and descent/naturality of clopens."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-2852e57bd",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-2852e57bd (reviewer sub-agent of L); spot-checked: I read the item, the new node, the cited nodes and the sources in full. The item statement is unchanged from base: it is byte-identical to the unsplit, proof-free node in the NO parent run. No re-split note applies to this item. All 7 steps check. Steps 1-2 build the components from the leaf's maximality, and the image of a connected set (Tag 0376) is connected via def-weil-connected-scheme, so h is well defined and unique by surjectivity of q_X. Step 3 proves continuity from the quotient topology. Step 4 proves saturation of clopens (C_x ∩ U is nonempty and relatively clopen, so C_x ⊆ U). Step 5 shows q(U) is clopen through its own inverse image and its complement's, and that β_Z and U ↦ q(U) are mutually inverse. Step 6 proves naturality pointwise from h q_X = q_Y f, and step 7 transfers bijectivity by conjugacy. This matches the saturation sentence of Tag 0900 (topology.tex 4232-4261). The new node lem-sfb-connected-component-maximality is a correct Mathlib leaf with one declaration per clause. mem_connectedComponent, isConnected_connectedComponent and IsConnected.subset_connectedComponent are at Topology/Connected/Basic.lean:516, 544 and 568-570, and the definition is at 494-495. The preconnected-versus-connected union agrees because the sets contain x. Its source, Tag 004T (topology.tex 658-695), is correct. It is not a restatement of the item and not a duplicate: a scan of the DAG found only versions with extra hypotheses (Noetherian, spectral, quasi-compact, schemes, Spec A, algebraic groups). Edge cases checked: empty spaces, a one-point space, discrete spaces, ℚ (components not open), Sierpiński space. No hidden hypotheses, no SGA, no cycle, no tool_uses. Advisory: the inherited item statement uses 'connected' without def-weil-connected-scheme in its stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.Connected.ComponentQuotientClopenNaturality",
+  "declaration": "ConnectedComponents.clopen_descent_naturality",
+  "file": "lean/Sheaf/Topology/Connected/ComponentQuotientClopenNaturality.lean",
+  "statement": "theorem clopen_descent_naturality {X : Type u} {Y : Type v} [TopologicalSpace X] [TopologicalSpace Y] (f : X → Y) (hf : Continuous f) : ∃ h : ContinuousMap (ConnectedComponents X) (ConnectedComponents Y), (h ∘ (mk : X → ConnectedComponents X) = (mk : Y → ConnectedComponents Y) ∘ f) ∧ (∀ g : ContinuousMap (ConnectedComponents X) (ConnectedComponents Y), g ∘ (mk : X → ConnectedComponents X) = (mk : Y → ConnectedComponents Y) ∘ f → g = h) ∧ (∀ x : X, h (mk x) = mk (f x)) ∧ (∀ (Z : Type w) [TopologicalSpace Z], Function.Bijective (fun V : TopologicalSpace.Clopens (ConnectedComponents Z) ↦ (⟨mk ⁻¹' (V : Set (ConnectedComponents Z)), V.isClopen.preimage continuous_coe⟩ : TopologicalSpace.Clopens Z)) ∧ ∀ U : TopologicalSpace.Clopens Z, IsClopen ((mk : Z → ConnectedComponents Z) '' (U : Set Z)) ∧ (mk : Z → ConnectedComponents Z) ⁻¹' ((mk : Z → ConnectedComponents Z) '' (U : Set Z)) = (U : Set Z)) ∧ (∀ V : TopologicalSpace.Clopens (ConnectedComponents Y), (mk : X → ConnectedComponents X) ⁻¹' (h ⁻¹' (V : Set (ConnectedComponents Y))) = f ⁻¹' ((mk : Y → ConnectedComponents Y) ⁻¹' (V : Set (ConnectedComponents Y)))) ∧ (Function.Bijective (fun U : TopologicalSpace.Clopens Y ↦ (⟨f ⁻¹' (U : Set Y), U.isClopen.preimage hf⟩ : TopologicalSpace.Clopens X)) ↔ Function.Bijective (fun V : TopologicalSpace.Clopens (ConnectedComponents Y) ↦ (⟨h ⁻¹' (V : Set (ConnectedComponents Y)), V.isClopen.preimage h.continuous⟩ : TopologicalSpace.Clopens (ConnectedComponents X))))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9856cf17a",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim. All 8 parts match the node: arbitrary X:u, Y:v, continuous f; ∃ continuous h with h∘mk = mk∘f; uniqueness over all continuous normalized g; point formula; ∀ Z:Type w, β_Z bijective, mk''U clopen and saturated (fixes inverse U↦q(U)); naturality on carriers; iff of bijectivity in node order. ConnectedComponents/mk carry the quotient topology (Mathlib Clopen.lean:510-546). Stacks 0900 saturation sentence needs no quasi-compactness. Empty, non-T2 and non-locally-connected cases covered. No duplicate: upstream connectedComponents_image_isClopen is one part only; spectral parent differs. No defs; sorry only; docstrings carry source, blueprint id and 7 steps; plain import = proof-dep module. No file changed, so no compile; worker reports clean compile. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261023T090717-L-702879",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

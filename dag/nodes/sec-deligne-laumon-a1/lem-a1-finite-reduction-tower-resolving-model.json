@@ -1,0 +1,288 @@
+{
+ "id": "lem-a1-finite-reduction-tower-resolving-model",
+ "kind": "statement",
+ "title": "Resolving models for finite-reduction pullback and strict derived tower pullback",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $g:T'\\to T$ be a morphism of schemes with $\\ell$ invertible on both schemes [def-weil-scheme-morphism-properties]. On the small pro-etale sites put $R_W=\\varprojlim_{n\\geq1}S_{W,n}$, $S_{W,n}=(A/t^n)_W$, with specified projections $\\pi_{W,n}$ and quotient transitions $q_{n+1,n}$ [def-weil-completed-integral-coefficients]. All finite levels are restricted along these projections. Write $c_g:g^{-1}R_T\\to R_{T'}$ for the projection-induced ring map and $G(M)=g^{-1}M\\otimes_{g^{-1}R_T}R_{T'}$ for ordinary module pullback [def-weil-pbc-completed-pullback]. Use unbounded cochain complexes and their derived localizations $Q$ [def-weil-abstract-derived-category], sheafified tensor [def-pur-sheaf-tensor-product], and direct-sum total tensor [def-pc-tensor-complex-sheaves]. A good complex means K-flat with flat terms [def-a1-flat-term-kflat-complex]. Set $Q_{W,n}=[R_W\\xrightarrow{t^n}R_W]$ in degrees $-1,0$, with transition $(t,1)$ and augmentation $\\epsilon_{W,n}:Q_{W,n}\\to S_{W,n}[0]$ equal to $\\pi_{W,n}$ in degree zero and zero in degree minus one [def-a1-principal-completed-koszul-towers].\n\nLet $\\mathcal P_T$ be the full homotopy subcategory of good $R_T$-complexes. On all complexes let $F(P)_n=P\\otimes_{R_T}S_{T,n}$ and $B_g^0(P)_n=\\operatorname{Res}_n g_n^*F(P)_n$, with the actual quotient transitions; finite module pullback $g_n^*$ is that of [def-pur-integral-finite-pullback], and $B_g^0$ is the strict construction of [def-a1-integral-finite-pullback-tower]. Write $\\operatorname{Tow}_{R_W}=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(R_W))$, $\\mathcal R(K)=K_\\bullet$ for strict derived reduction and $V_g=LG^{\\operatorname{Tow}}$ for strict derived tower pullback [def-weil-pbc-adic-coefficient-datum, def-weil-pbc-completed-pullback].\n\nThe construction $B_g^0$ respects chain homotopies, shifts and mapping-cone complexes and sends every quasi-isomorphism between good complexes to a levelwise quasi-isomorphism of strict towers. There exists an everywhere defined left derived pair $(B_g,\\beta)$ with $B_g:D(R_T)\\to D(\\operatorname{Tow}_{R_{T'}})$ and universal counit $\\beta:B_gQ\\to QB_g^0$, invertible on good complexes. For each good $P$, set $H(P)_n=P\\otimes Q_{T,n}$ and $a_P=(1_P\\otimes\\epsilon_{T,n})_n:H(P)\\to F(P)$. This is a strict quasi-isomorphism, natural in chain maps, with source levels good, source transitions $1_P\\otimes(t,1)$ and target transitions the actual quotients. The reduction computation identifies $QF(P)=\\mathcal R(QP)$, and the canonical tower-pullback computation is\n$$\\chi_P=\\varepsilon^{V}_{H(P)}\\circ V_g(Qa_P)^{-1}:V_g(\\mathcal R(QP))\\xrightarrow{\\sim}QGH(P),$$\nwhere $\\varepsilon^{V}$ is the universal left-derived counit of $V_g$. Both $\\chi_P$ and $\\beta_P$ are natural for chain maps between good complexes. These are computations of entire strict towers indexed by the small category $\\mathbf N_{\\geq1}^{op}$. No exactness of $G$ or invertibility of $c_g$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, lemma-find-existence-computes (left-derived dual); strict finite-reduction and Koszul resolving-model refinement, old proof steps 1-2."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-a1-flat-term-kflat-complex",
+  "def-a1-principal-completed-koszul-towers",
+  "def-pur-integral-finite-pullback",
+  "def-a1-integral-finite-pullback-tower",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized finite-reduction additive compatibility theorem for homotopies, shifts, cones, inclusion and connecting-map equations. This is exactly step 1 isolated from the resolving-class and Koszul arguments.",
+   "uses": [
+    "lem-a1-finite-reduction-additive-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a quasi-isomorphism of good complexes, use finiteReduction_quasiIso on each actual quotient. Apply the exact additive finite coefficient pullback and the exact scalar restriction. The evaluation criterion for quasi-isomorphisms of complexes of functors gives the whole-tower assertion.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved functorial_resolution with K-flat outputs and flat terms. Apply deriveFromFunctorialResolution to the localized strict finite-pullback functor and the good-complex object property. The previous inversion assertion supplies its hypothesis. Obtain the universal derived pair and computation on every good complex.",
+   "uses": [
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "def-a1-integral-completed-tower-pullback-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply principal_koszul_strict_replacement to each good P. Its augmentation is a levelwise quasi-isomorphism and every source level is good. The evaluation criterion makes the transposed augmentation a quasi-isomorphism. Its naturality is the existing strict comparison_naturality equation.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical scalar-normalized strict quotient-tower isomorphism N. Map it by transposition and Q and compose with the inverse of the reductionPair counit on P. This gives reductionIso r with r.hom followed by the counit equal to Q(N.hom), hence fixes its normalization. Naturality follows from N and the counit, cancelling the invertible counit.",
+   "uses": [
+    "lem-a1-finite-reduction-scalar-normalization",
+    "def-a1-integral-completed-tower-pullback-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The towerPull_exists computation criterion applies to the K-flat source levels. Thus the actual derived tower-pullback counit on the Koszul tower is invertible. The localized augmentation is invertible as well. Define a as Q(augmentation) followed by r, and chi as derivedPull.mapIso(a.symm) followed by the actual derived counit. This yields the specified chi formula in the entire strict-tower derived category.",
+   "uses": [
+    "def-a1-integral-completed-tower-pullback-universes",
+    "lem-a1-principal-koszul-strict-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine strict augmentation naturality with reductionIso naturality to obtain naturality of a. Precompose the desired chi equation with derivedPull.map(a.hom), cancel the inverse isomorphisms, and apply derivedCounit.naturality. Beta naturality is the naturality field of the universal counit constructed above.",
+   "uses": [
+    "def-a1-integral-completed-tower-pullback-universes",
+    "lem-a1-principal-koszul-strict-replacement"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-finite-reduction-additive-compatibility",
+  "lem-pur-integral-operations-well-defined",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-a1-finite-reduction-scalar-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, left-derived existence and computation; sites-cohomology Tags 06YS, 06YT, 06YP and 07A2. Q4 reuses the concrete independent-universe resolution and Koszul interfaces and assembles their actual counits, strict augmentation, scalar normalization and naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict tower of finite quotient tensor complexes followed by exact inverse image has a left derived functor computed on flat term K flat resolutions and on a compatible Koszul tower",
+   "results": "; CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived",
+   "results": "; CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.leftDerivedZeroIsoSelf, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.instIsIsoAppFromLeftDerivedZero, CategoryTheory.NatTrans.leftDerived. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|reductionTower|Koszul.*tower",
+   "results": "; Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on a ringed site the unbounded left derived functor of finite quotient reduction and exact pullback is computed by the strict tower of two term free resolutions",
+   "results": "; CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.rightDerived, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Tor_obj, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.toRightDerivedZero. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded derived functor of a tower of finite coefficient inverse images is computed by a strict Koszul K flat replacement",
+   "results": "; CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.mapDerivedCategoryFactorsh. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K.flat|Koszul.*tower|reductionTower",
+   "results": "; Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean, Mathlib/Computability/TuringMachine/Tape.lean. The only hits are unrelated ListBlank.flatMap declarations.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.totalLeftDerived",
+   "results": "; CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit. The generic derived-functor declarations require existence as input and do not assert this normalized strict Koszul-tower computation; ordinary sheaf pullback and abelian-category declarations do not state it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible tower of Koszul resolutions computes derived finite reduction followed by pullback on sheaves of modules",
+   "results": "; SheafOfModules.pullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp. The generic derived-functor declarations require existence as input and do not assert this normalized strict Koszul-tower computation; ordinary sheaf pullback and abelian-category declarations do not state it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules the strict tower of finite quotient pullbacks has a total left derived functor computed by flat term K flat resolutions",
+   "results": "; SheafOfModules.instAbelian, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, localCohomology.diagram, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Tor, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, CategoryTheory.Tor'. The generic derived-functor declarations require existence as input and do not assert this normalized strict Koszul-tower computation; ordinary sheaf pullback and abelian-category declarations do not state it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on unbounded complexes which preserves quasi isomorphisms between K flat complexes admits a universal left derived functor with invertible counit on K flat resolutions",
+   "results": "; CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso. The generic derived-functor declarations require existence as input and do not assert this normalized strict Koszul-tower computation; ordinary sheaf pullback and abelian-category declarations do not state it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-pullback-strict-tower-comparison",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof steps 6, 7 and 9, and the tower part of step 11: ordinary completed-ring pullback, balanced finite comparison, localization naturality and shifts. Extracted argument: Tag 06XN, lemma-find-existence-computes (left-derived dual); strict finite-reduction and Koszul resolving-model refinement, old proof steps 1-2.",
+   "via": [
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-finite-reduction-tower-resolving-model",
+  "worker": "stage1",
+  "summary": "Kept the statement. Reused existing coefficient-resolution, change-of-rings, K-flat tensor, strict-diagram and universal left-derived nodes. Wrote out additive homotopy/cone functoriality, finite quasi-isomorphism invariance, normalized Koszul augmentation, strict quotient transitions, and the whole-tower counit computation and naturality. No new nodes.",
+  "blueprint": "The first paragraph of lem-a1-finite-map-purity uses the finite-map fibre comparison. This item supplies only the resolving-model part of that comparison, through the recorded ancestor chain: old steps 1-2 of lem-a1-finite-pullback-strict-tower-comparison. It does not replace any weight or Fourier argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Generic ring-sheaf scalar extension preserves quasi-isomorphisms between K-flats; the affine-line unit has no coefficient-algebra replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-integral-quotient-resolution-normalization",
+    "why": "Generic integral coefficient regularity, actual quotient augmentation and finite free resolutions; no proper base-change or weight theorem is used."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exact inverse image over finite constant coefficient rings; no proper-base-change conclusion is used."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic levelwise abelian structure of inverse sequences, required to test a strict tower quasi-isomorphism."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolutions on a ringed site."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic universal left-derived construction from a resolving class."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic flat-term K-flat closure under total tensor, used only for P tensor Q_n."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic fixed K-flat tensor preservation of quasi-isomorphisms, used for the quotient augmentation."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic strict diagram replacement and quasi-isomorphism preservation under ringed-topos pullback; the unit has no alternative diagram construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-7648e33ad",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-7648e33ad (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and every cited statement in full, plus Stacks 06XN (derived.tex lines 5092-5117, dual LF part). No new nodes and the statement is unchanged. Not superseded: the item is unsplit with no proof on both live and side-live, and it is not on the drop list. No cycle; no SGA.\nStep 1: a termwise additive A_n preserves homotopies, shifts and cone matrices. Step 2: the change-of-rings K-flat lemma applies to π_n; finite-constant exactness covers any g; Res and levelwise cohomology finish it. Step 3: K-flat resolution plus the resolving-class theorem give (B_g, β), with β invertible on good complexes. Step 4: the sfb normalization lemma gives the ring isomorphism to the limit identifying the projections, K-flatness of [R→t^n R] and the exact-q augmentation quasi-isomorphism. Step 5: the total-tensor lemma makes H(P) good, and the fixed-good-factor lemma makes 1⊗ε_n a quasi-isomorphism. I re-checked that (t,1) is a chain map and that the augmentation square commutes. Step 6: the datum's K-flat computation applies, and (A,(t)) meets its hypotheses (Noetherian, finite perfect quotients, A/t finite hence torsion). Step 7: the diagram replacement lemma with J = N^op and c_g, plus the resolving-class theorem, gives ε^V invertible on objectwise-good towers, without exactness of G. Step 8: I re-derived the naturality algebra and it is correct.\nEdge cases checked: P=0, P=R[0], n=1, g=id, unbounded P, non-flat c_g. Accepted the generic tool uses; the levelwise-abelian entry is unneeded because that node is a Mathlib leaf.\nMaintainer notes: (1) the item applies the A_T-datum and V_g to R_W = lim of constant sheaves. This convention is inherited from the item's statement and its reviewed parent. The two presentations agree canonically, but stage 2 should use the def-pur-completed-coefficient-presentation-transport e/Φ transport if the Lean rings differ. (2) lem-sf-completed-coefficient-free-resolution would be a more direct cite for step 4. (3) lem-a1-principal-augmented-roos-descent overlaps steps 4-6 at the proof level only."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteReductionTowerResolvingModel",
+  "declaration": "WeilConjectures.FiniteReductionTower.finite_reduction_tower_resolving_model",
+  "declarations": [
+   "WeilConjectures.FiniteReductionTower.ShiftNormalization",
+   "WeilConjectures.FiniteReductionTower.ConeNormalization",
+   "WeilConjectures.FiniteReductionTower.ResolvingModel",
+   "WeilConjectures.FiniteReductionTower.finite_reduction_tower_resolving_model"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteReductionTowerResolvingModel.lean",
+  "statement": "theorem finite_reduction_tower_resolving_model (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : Nonempty (ResolvingModel l E g)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The structure packages all clauses of the statement, including the normalized whole-tower reduction computation, universal finite-derived pair, prescribed chi counit formula and naturality. Reuses the published independent-universe completed-tower specialization and actual Koszul/finite-tower definitions. The natural index n means exponent n+1. No theorem is proved. Maintainer FIX: the shift structure is pinned to the termwise finite-level shift (ShiftNormalization) and the cone comparison is a specified isomorphism of standard cone triangles (ConeNormalization), not a free CommShift or a bare Nonempty isomorphism.",
+  "fixed_by": "NT-stage2-cc-908e32394"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-908e32394",
+  "group": "Q124",
+  "result": "fix",
+  "note": "Records match side-live; the two added stmt_deps are landed def nodes; statement verbatim; hypotheses = node (l invertible on both schemes); universes u,t independent. B (DerivedPair), reductionIso (pinned via counit), normalization (generator pin = consumer's ReductionNormalization), chi_formula/chi_naturality and the Koszul tower clauses match the node. F1 (H3): `shift` was a free CommShift and `cone` a bare Nonempty object iso, weaker than step 1's identity-on-terms/cone-matrix identification. FIX adds ShiftNormalization (termwise mapCochainComplexShiftIso per level, as the landed consumer's FiniteShiftNormalization) and ConeNormalization (cone iso commutes with inr and triangle mor₃ via the pinned shift); lean-record.json adds both to declarations and keeps the statement verbatim (refit_record clean); report gains a Maintainer fix section. nt_compile --json of the fixed file: 50.1 s at load 172, exit 0, no warnings (control 24.4 s). Advisories: restated Koszul-lemma clauses; owner def-weil-integral-reduction-tower not in stmt_deps; placeholder second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T070617-L-3627537",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

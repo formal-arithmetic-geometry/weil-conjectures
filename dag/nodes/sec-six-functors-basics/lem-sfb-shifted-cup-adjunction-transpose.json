@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-shifted-cup-adjunction-transpose",
+ "kind": "statement",
+ "title": "Shifted-unit cup transpose under a monoidal adjunction",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be additive monoidal categories [def-sfb-monoidal-category] with biadditive tensor, units $I_{\\mathcal C},I_{\\mathcal D}$, and additive integer shifts with specified zero-shift and shift-addition isomorphisms. Let $L:\\mathcal C\\to\\mathcal D$ and $F:\\mathcal D\\to\\mathcal C$ be additive adjoints $L\\dashv F$. Suppose $L$ is strong monoidal, with inverse tensor comparison $t_{X,Y}:L(X\\otimes Y)\\xrightarrow{\\sim}LX\\otimes LY$ and unit comparison $\\ell:LI_{\\mathcal C}\\xrightarrow{\\sim}I_{\\mathcal D}$, and both functors have fixed shift comparisons for which the adjunction unit and counit commute with shifts. Write $S_n^{\\mathcal C}=I_{\\mathcal C}[-n]$ and $S_n^{\\mathcal D}=I_{\\mathcal D}[-n]$. Choose isomorphisms $r^{\\mathcal C}_{p,q}:S^{\\mathcal C}_{p+q}\\to S^{\\mathcal C}_p\\otimes S^{\\mathcal C}_q$ and $r^{\\mathcal D}_{p,q}$ of the same type, identified by $L$, $t$, $\\ell$ and the fixed shift comparisons.\n\nGive $F$ the lax monoidal structure $(e,\\mu)$ adjoint to $(\\ell,t)$, and put $C=FI_{\\mathcal D}$ and $M=F(m)\\mu_{I_{\\mathcal D},I_{\\mathcal D}}$, where $m:I_{\\mathcal D}\\otimes I_{\\mathcal D}\\to I_{\\mathcal D}$ is unit multiplication. Then $(C,M,e)$ is an associative unital algebra object, and the unit and counit of this adjunction are monoidal for these structures. If $\\varepsilon:LF\\to1$ is the counit, the precise normalization is\n$$\\varepsilon_{U\\otimes V}L(\\mu_{U,V})=(\\varepsilon_U\\otimes\\varepsilon_V)t_{FU,FV},\\qquad \\varepsilon_{I_{\\mathcal D}}L(e)=\\ell.$$\nFor $x:I_{\\mathcal D}\\to I_{\\mathcal D}[p]$, write $f=x[-p]:S_p^{\\mathcal D}\\to I_{\\mathcal D}$ using shift addition, and let $\\Phi_p(x):S_p^{\\mathcal C}\\to C$ be its adjoint under $LS_p^{\\mathcal C}\\cong S_p^{\\mathcal D}$. Define $a\\smile b=M(a\\otimes b)r^{\\mathcal C}_{p,q}$. Then $\\Phi_0(1)=e$ under the zero-shift identifications. For every $p,q\\in\\mathbf Z$, $x:I_{\\mathcal D}\\to I_{\\mathcal D}[p]$ and $y:I_{\\mathcal D}\\to I_{\\mathcal D}[q]$, the transpose of $\\Phi_p(x)\\smile\\Phi_q(y)$, transported along $LS^{\\mathcal C}_{p+q}\\cong S^{\\mathcal D}_{p+q}$, is exactly\n$$m\\bigl(x[-p]\\otimes y[-q]\\bigr)r^{\\mathcal D}_{p,q}.$$\nThe order of the two factors is as displayed; the assertion applies to arbitrary morphisms of these categories.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated internal bar normalization below the direct-image argument; extracted old steps 3–4, generic monoidal-adjunction specialization. Agent-formulated; exact non-SGA reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "det-def-sfb-ring-object-transport"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-monoidal-adjunction-mates] to $(\\ell,t)$ to obtain the specified lax structure on $F$. Its unit is the adjoint of $\\ell$. By [lem-sfb-monoidal-adjunction-unit-counit] the adjunction unit and counit are monoidal. The tensor equation for the monoidal counit is $\\varepsilon_{U\\otimes V}\\circ L(\\mu_{U,V})\\circ t_{FU,FV}^{-1}=\\varepsilon_U\\otimes\\varepsilon_V$; compose on the right with $t_{FU,FV}$ to get the first normalization. Its unit equation is $\\varepsilon_{I_{\\mathcal D}}\\circ L(e)\\circ\\ell^{-1}=1_{I_{\\mathcal D}}$; compose with $\\ell$ to get the second. These are precisely the composite lax structures in the cited statement.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-mates",
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-supplied generic algebra for the internal cup normalization, not a proof contained in that paragraph."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-tensor-unit-monoid] in $\\mathcal D$. Transport its monoid $(I_{\\mathcal D},m,1)$ through the lax monoidal functor $F$ by clause 1 of [det-def-sfb-ring-object-transport]. The resulting multiplication is $F(m)\\circ\\mu_{I_{\\mathcal D},I_{\\mathcal D}}=M$, and its unit is $F(1)\\circ e=e$. Thus $(C,M,e)$ is associative and unital.",
+   "uses": [
+    "lem-sfb-tensor-unit-monoid",
+    "det-def-sfb-ring-object-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-supplied generic algebra for the internal cup normalization, not a proof contained in that paragraph."
+   }
+  },
+  {
+   "text": "Write $h_n:LS_n^{\\mathcal C}\\xrightarrow{\\sim}S_n^{\\mathcal D}$ for the prescribed unit/shift comparison. The assumed compatibility of $r$ means exactly $(h_p\\otimes h_q)\\circ t_{S_p^{\\mathcal C},S_q^{\\mathcal C}}\\circ L(r^{\\mathcal C}_{p,q})=r^{\\mathcal D}_{p,q}\\circ h_{p+q}$. Put $a=\\Phi_p(x)$, $b=\\Phi_q(y)$, $f=x[-p]$, $g=y[-q]$. By the inverse Hom-bijection formula in [lem-weil-pbc-adjunction-of-natural-bijection], $\\varepsilon_I\\circ L(a)=f\\circ h_p$ and $\\varepsilon_I\\circ L(b)=g\\circ h_q$, where $I=I_{\\mathcal D}$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-supplied generic algebra for the internal cup normalization, not a proof contained in that paragraph."
+   }
+  },
+  {
+   "text": "Expand the transpose $T=\\varepsilon_I\\circ L(M\\circ(a\\otimes b)\\circ r^{\\mathcal C}_{p,q})$ using [lem-weil-pbc-adjunction-of-natural-bijection]. Counit naturality for $m$ gives $\\varepsilon_I\\circ L(F(m))=m\\circ\\varepsilon_{I\\otimes I}$. Hence the tensor normalization of step 1 gives $T=m\\circ(\\varepsilon_I\\otimes\\varepsilon_I)\\circ t_{C,C}\\circ L(a\\otimes b)\\circ L(r^{\\mathcal C}_{p,q})$. Naturality of $t$ rewrites this as $m\\circ((\\varepsilon_I\\circ L(a))\\otimes(\\varepsilon_I\\circ L(b)))\\circ t_{S_p^{\\mathcal C},S_q^{\\mathcal C}}\\circ L(r^{\\mathcal C}_{p,q})$. Substitute the two adjoint equations and the compatibility equation of step 3: $T=m\\circ(f\\otimes g)\\circ r^{\\mathcal D}_{p,q}\\circ h_{p+q}$. Precompose with $h_{p+q}^{-1}$ to obtain the stated transported transpose. Every operation preserves the displayed factor order; no symmetry, generators, or degree restriction is used.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-supplied generic algebra for the internal cup normalization, not a proof contained in that paragraph."
+   }
+  },
+  {
+   "text": "For $p=0$, under the specified zero-shift identifications, $f=1_I$ and $h_0=\\ell$. Thus $\\Phi_0(1)$ is the adjoint of $\\ell$, which is $e$ by the unit formula of [lem-sfb-monoidal-adjunction-mates]. This also covers zero objects and zero morphisms; the calculation in step 4 applies to all integers $p,q$.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-mates"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-supplied generic algebra for the internal cup normalization, not a proof contained in that paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-sfb-monoidal-adjunction-unit-counit",
+  "lem-sfb-tensor-unit-monoid",
+  "det-def-sfb-ring-object-transport",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); agent-supplied generic algebra for the internal cup normalization, not a proof contained in that paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "map_μ_comp_counit_app_tensor|rightAdjointLaxMonoidal|map_ε_comp_counit_app_unit",
+   "results": "{\"t\": \"2026-10-22T06:06:42Z\", \"tool\": \"grep\", \"query\": \"map_μ_comp_counit_app_tensor|rightAdjointLaxMonoidal|map_ε_comp_counit_app_unit\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\"], \"digest\": \"f05488c0fe459e6a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: map_μ_comp_counit_app_tensor and rightAdjointLaxMonoidal give the unshifted mate ingredients, not the full shifted-unit transpose theorem with normalized Phi, transported r, multiplication and cup unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.map_μ_comp_counit_app_tensor\"",
+   "results": "{\"t\": \"2026-10-22T06:06:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction.map_μ_comp_counit_app_tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\"], \"digest\": \"ecc585f6831ffabb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: map_μ_comp_counit_app_tensor and rightAdjointLaxMonoidal give the unshifted mate ingredients, not the full shifted-unit transpose theorem with normalized Phi, transported r, multiplication and cup unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The shifted adjunction bijection transposes the cup algebra multiplication on the right adjoint of the tensor unit to tensor product of negatively shifted arrows",
+   "results": "{\"t\": \"2026-10-22T06:06:43Z\", \"tool\": \"leansearch\", \"query\": \"The shifted adjunction bijection transposes the cup algebra multiplication on the right adjoint of the tensor unit to tensor product of negatively shifted arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.shift_unit_app\", \"CategoryTheory.Adjunction.rightAdjointCommShift_commShiftIso\", \"CategoryTheory.Adjunction.commShift_of_rightAdjoint\", \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right\", \"CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso\", \"CategoryTheory.Adjunction.rightAdjointCommShift\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\", \"CategoryTheory.Adjunction.commShift_op\"], \"digest\": \"77dd3281835b7c43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: map_μ_comp_counit_app_tensor and rightAdjointLaxMonoidal give the unshifted mate ingredients, not the full shifted-unit transpose theorem with normalized Phi, transported r, multiplication and cup unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In additive monoidal categories with shifts a strong monoidal adjunction sends the tensor of two shifted-unit endomorphisms to the cup product of their adjoints and sends the identity to the lax unit",
+   "results": "{\"t\": \"2026-10-22T06:06:54Z\", \"tool\": \"leanfinder\", \"query\": \"In additive monoidal categories with shifts a strong monoidal adjunction sends the tensor of two shifted-unit endomorphisms to the cup product of their adjoints and sends the identity to the lax unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"CategoryTheory.Adjunction.CommShift.CompatibilityUnit\", \"CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app\", \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_right\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\"], \"digest\": \"dd4ca0fc92902382\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: map_μ_comp_counit_app_tensor and rightAdjointLaxMonoidal give the unshifted mate ingredients, not the full shifted-unit transpose theorem with normalized Phi, transported r, multiplication and cup unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal left adjoint identifies products of shifted unit morphisms with cup products of their adjoints under the canonical lax monoidal right adjoint",
+   "results": "{\"t\": \"2026-10-23T11:39:11Z\", \"tool\": \"leanfinder\", \"query\": \"A strong monoidal left adjoint identifies products of shifted unit morphisms with cup products of their adjoints under the canonical lax monoidal right adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.mapMon_unit\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"CategoryTheory.frobeniusMorphism\"], \"digest\": \"0d4b679ef3013965\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete shifted cup theorem: these hits provide the monoidal-adjunction ingredients, but not the specified transported shifted-unit product and zero-degree identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map_μ_comp_counit_app_tensor\"",
+   "results": "{\"t\": \"2026-10-23T11:39:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"map_μ_comp_counit_app_tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\"], \"digest\": \"ecc585f6831ffabb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete shifted cup theorem: these hits provide the monoidal-adjunction ingredients, but not the specified transported shifted-unit product and zero-degree identity."
+  },
+  {
+   "tool": "grep",
+   "query": "map_μ_comp_counit_app_tensor|rightAdjointLaxMonoidal|unitAsMon",
+   "results": "{\"t\": \"2026-10-23T11:39:11Z\", \"tool\": \"grep\", \"query\": \"map_μ_comp_counit_app_tensor|rightAdjointLaxMonoidal|unitAsMon\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"], \"digest\": \"622ee4420c2a3095\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete shifted cup theorem: these hits provide the monoidal-adjunction ingredients, but not the specified transported shifted-unit product and zero-degree identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction transpose of the cup product of two maps from shifted tensor units is the tensor of their transposes followed by multiplication",
+   "results": "{\"t\": \"2026-10-23T11:39:12Z\", \"tool\": \"leansearch\", \"query\": \"The adjunction transpose of the cup product of two maps from shifted tensor units is the tensor of their transposes followed by multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.adjoint_map\", \"Module.Dual.transpose_comp\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"Module.Dual.transpose\", \"CategoryTheory.MonoidalClosed.compTranspose\", \"CategoryTheory.Types.tensorProductAdjunction\", \"CategoryTheory.tensorLeftAdjunction\", \"CategoryTheory.ihom.coev\"], \"digest\": \"9abf1439908d5d8e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete shifted cup theorem: these hits provide the monoidal-adjunction ingredients, but not the specified transported shifted-unit product and zero-degree identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a monoidal adjunction the inverse hom equivalence takes the multiplication of the lax right adjoint applied to the unit to the ordered tensor of arbitrary arrows",
+   "results": "{\"t\": \"2026-10-23T11:41:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a monoidal adjunction the inverse hom equivalence takes the multiplication of the lax right adjoint applied to the unit to the ordered tensor of arbitrary arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\", \"CategoryTheory.Adjunction.ε_comp_map_ε\", \"CategoryTheory.Adjunction.mapMon_unit\"], \"digest\": \"12ff2a3bb4d8ed1a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete shifted cup theorem: these hits provide the monoidal-adjunction ingredients, but not the specified transported shifted-unit product and zero-degree identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-inflation-graded-cup",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent-formulated internal bar normalization below the direct-image argument; extracted argument 2: old steps 3–4, generic shifted tensor-of-counits calculation; exact source reference WANTED, not literally in the blueprint paragraph.",
+   "via": [
+    "lem-sfb-internal-inflation-graded-cup",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-shifted-cup-adjunction-transpose",
+  "worker": "stage1",
+  "summary": "Retained the statement, reused the existing Mathlib monoidal-mate, monoidal unit/counit, monoid-transport and Hom-bijection nodes, and wrote the ordered transpose calculation with its comparison maps visible. Added one Mathlib leaf for the canonical monoid structure on the tensor unit. No project attachment found.",
+  "blueprint": "Paragraph (3) direct-image stability: agent-supplied internal-bar cup normalization below that argument. The current paragraph does not itself contain this generic algebra calculation; the inherited source attribution is contextual, and proof_origin is agent."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-f071893ea",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-f071893ea (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The item statement and stmt_deps are unchanged. This is a first split of an unsplit node that Q89 created; no repair note exists for it, and live and side-live still have it unsplit. Step 1: the mates and monoidal unit-counit leaves give the composite lax structure L(μ)t⁻¹, L(e)ℓ⁻¹ on LF; monoidality of the counit, composed with t and ℓ, gives exactly the two stated normalizations. Step 2: clause 1 of mapMon applied to Mon.trivial gives M=F(m)μ and unit F(1)e=e. Step 3: Ψ⁻¹(b)=ε∘F(b) gives ε_I L(a)=f h_p, and the r-compatibility equation is the natural reading of the hypothesis. Step 4: I recomputed it; counit naturality, the tensor normalization, naturality of t and the compatibility equation give m(f⊗g)r^D h_{p+q}, with factor order kept. Step 5: Φ_0(1)=Φ(ℓ)=e by the mates unit formula. proof_deps equal the union of uses. All cited nodes are Mathlib leaves, so there is no route problem and no tool_uses entry. New node lem-sfb-tensor-unit-monoid: the statement is true (the right unit law is λ_I=ρ_I by coherence), and the leaf Mon.trivial at Mon.lean:270 with the MonObj(𝟙_) instance at 130–134 is exact. All three search kinds are recorded, and an rg -L search of the DAG found no duplicate; it is strictly smaller than the item. The blueprint paragraph (3) of sk-thm-sf-ctf-stability-direct-images is identical in main-20261015 and latest; it gives context only, and the proof is correctly marked agent-written with WANTED. Edge cases checked: identity adjunction, negative degrees, p=q=0 with arbitrary r, and the zero category. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ShiftedCupAdjunctionTranspose",
+  "declaration": "CategoryTheory.Adjunction.shiftedCupAdjunctionTranspose",
+  "declarations": [
+   "CategoryTheory.Adjunction.shiftedCupUnitIso",
+   "CategoryTheory.Adjunction.shiftedCupNegativeArrow",
+   "CategoryTheory.Adjunction.shiftedCupPhi",
+   "CategoryTheory.Adjunction.shiftedCupProduct",
+   "CategoryTheory.Adjunction.shiftedCupAdjunctionTranspose"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ShiftedCupAdjunctionTranspose.lean",
+  "statement": "theorem shiftedCupAdjunctionTranspose {C : Type u₁} [Category.{v₁} C] [Preadditive C] [HasFiniteBiproducts C] [MonoidalCategory C] [MonoidalPreadditive C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] {D : Type u₂} [Category.{v₂} D] [Preadditive D] [HasFiniteBiproducts D] [MonoidalCategory D] [MonoidalPreadditive D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] (L : C ⥤ D) (F : D ⥤ C) [L.Additive] [F.Additive] [L.Monoidal] [L.CommShift ℤ] [F.CommShift ℤ] (adj : L ⊣ F) [adj.CommShift ℤ] [F.LaxMonoidal] [adj.IsMonoidal] (rC : ∀ p q : ℤ, (𝟙_ C)⟦-(p + q)⟧ ≅ (𝟙_ C)⟦-p⟧ ⊗ (𝟙_ C)⟦-q⟧) (rD : ∀ p q : ℤ, (𝟙_ D)⟦-(p + q)⟧ ≅ (𝟙_ D)⟦-p⟧ ⊗ (𝟙_ D)⟦-q⟧) (hr : ∀ p q : ℤ, L.map (rC p q).hom ≫ Functor.OplaxMonoidal.δ L _ _ ≫ ((shiftedCupUnitIso L p).hom ⊗ₘ (shiftedCupUnitIso L q).hom) = (shiftedCupUnitIso L (p + q)).hom ≫ (rD p q).hom) : (∃ A : MonObj (F.obj (𝟙_ D)), A.one = Functor.LaxMonoidal.ε F ∧ A.mul = Functor.LaxMonoidal.μ F (𝟙_ D) (𝟙_ D) ≫ F.map (λ_ (𝟙_ D)).hom) ∧ NatTrans.IsMonoidal adj.unit ∧ NatTrans.IsMonoidal adj.counit ∧ (∀ U V : D, L.map (Functor.LaxMonoidal.μ F U V) ≫ adj.counit.app (U ⊗ V) = Functor.OplaxMonoidal.δ L (F.obj U) (F.obj V) ≫ (adj.counit.app U ⊗ₘ adj.counit.app V)) ∧ (L.map (Functor.LaxMonoidal.ε F) ≫ adj.counit.app (𝟙_ D) = Functor.OplaxMonoidal.η L) ∧ (shiftedCupPhi adj 0 ((shiftFunctorZero D ℤ).inv.app (𝟙_ D)) = (shiftFunctorZero C ℤ).hom.app (𝟙_ C) ≫ Functor.LaxMonoidal.ε F) ∧ ∀ (p q : ℤ) (x : 𝟙_ D ⟶ (𝟙_ D)⟦p⟧) (y : 𝟙_ D ⟶ (𝟙_ D)⟦q⟧), (shiftedCupUnitIso L (p + q)).inv ≫ (adj.homEquiv _ _).symm (shiftedCupProduct F p q (rC p q) (shiftedCupPhi adj p x) (shiftedCupPhi adj q y)) = (rD p q).hom ≫ (shiftedCupNegativeArrow p x ⊗ₘ shiftedCupNegativeArrow q y) ≫ (λ_ (𝟙_ D)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four real-data helpers spell out the prescribed shifted-unit comparison, negatively shifted arrow, Phi, and ordered cup; the theorem states every clause. F.LaxMonoidal together with adj.IsMonoidal specifies exactly the mate structure, rather than imposing an independent compatibility assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83ece2762",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read the item node (only the lean field changed vs side-live), both stmt_deps (Mathlib leaves: MonoidalCategory and Functor.mapMon/MonObj), the module, report.md, and Mathlib Adjunction.IsMonoidal/rightAdjointLaxMonoidal (Functor.lean:947-1039) and the NatTrans.IsMonoidal unit/counit instances. Clause by clause: additive monoidal C,D with independent universes; HasShift with additive shifts; L.Monoidal with t=δ, ℓ=η; CommShift on L, F, adj; F.LaxMonoidal+adj.IsMonoidal pins the mate structure and is always realizable (instance at line 1008), so it adds no assumption; h_n = commShiftIso ≫ εIso⁻¹[-n]; hr is step 3's compatibility in diagrammatic form; the MonObj existential pins one=ε and mul=μ≫F(λ); unit and counit monoidal; both normalizations; Φ_0 clause with both zero-shift identifications; main formula for all p,q in ℤ and arbitrary x,y in displayed order. Checked by hand that the main formula and the degree-zero identity hold. Edge cases: zero and negative degrees, p+q=0, zero category, identity adjunction, non-braided. Helpers are real constructions; source and blueprint docstrings present; the only proof is sorry; lean.statement is verbatim. No file changed, so no recompile; the worker reports a clean compile. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T065946-L-3313079",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Adjunction.shiftedCupAdjunctionTranspose"
+  ],
+  "sorry_after": []
+ }
+}

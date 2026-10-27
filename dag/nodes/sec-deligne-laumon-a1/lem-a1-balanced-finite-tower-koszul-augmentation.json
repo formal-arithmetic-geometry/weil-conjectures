@@ -1,0 +1,133 @@
+{
+ "id": "lem-a1-balanced-finite-tower-koszul-augmentation",
+ "kind": "statement",
+ "title": "Normalized Koszul comparison intertwines normalized finite augmentations",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf{Q}_\\ell$, its valuation ring $A$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be any morphism of schemes [def-weil-scheme-morphism-properties]. On the small pro-etale site of $W$, write $R_W=\\varprojlim_n S_{W,n}$ and $S_{W,n}=(A/t^{n+1})_W$ with their specified projections and quotient transitions [def-weil-completed-integral-coefficients]. The scheme and coefficient universes are independent. Use the functors $G$, $F_W$ (reductions), $H_W$ (koszuls), $D_g$ (diagramPull), $B_g$ (finite), and the predicates BalancedNormalization, QuotientUnitNormalization, KoszulNormalization, ReductionNormalization, with their literal section formulas, from [def-a1-finite-pullback-strict-tower-data]. These act on all unbounded cochain complexes of $R_W$-module sheaves; tensor products are the sheafified tensor and their signed direct-sum totalization [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves]. For any supplied natural isomorphisms $\\lambda:G\\mathbin{\\ggg}F_X\\cong B_g$ and $C:F_Y\\mathbin{\\ggg}D_g\\cong B_g$ satisfying BalancedNormalization and QuotientUnitNormalization, respectively, there exists a natural isomorphism $\\theta:H_Y\\mathbin{\\ggg}D_g\\cong G\\mathbin{\\ggg}H_X$ satisfying KoszulNormalization on both basis vectors. For every complex $P$, the strict augmentation maps satisfy $\\theta_P\\,a_{GP}\\,\\lambda_P=G(a_P)\\,C_P$ in Lean composition order. Here $a$ is tensor with the specified principal Koszul quotient augmentation [def-a1-principal-completed-koszul-towers]. No goodness, boundedness, or flatness hypothesis on $P$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), displayed total-complex comparison; sites-modules.tex Tag 03EK (section-tensor-product); parent uniformizer clause of step 1 and steps 6-7."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-a1-finite-pullback-strict-tower-data",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-a1-principal-completed-koszul-towers"
+ ],
+ "proof": [
+  {
+   "text": "Constant residues and equality of all completed projections show that the coefficient map preserves the uniformizer. Apply cochain tensor pullback coherence and the action unitor to both Koszul terms. On either basis vector the map is ((x tensor e_j) tensor b) mapped to ((x tensor b) tensor e_j-prime). Preservation of the uniformizer proves compatibility with the (n+1)st-power differential and the (uniformizer,1) transition. Cochain coherence retains both differential summands and their signs, so the maps assemble into the normalized natural theta on all unbounded complexes.",
+   "uses": [
+    "def-sp-completed-uniformizer-section",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-a1-principal-completed-koszul-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the two augmentation composites on b times a pulled homogeneous tensor x tensor e_0. BalancedNormalization and QuotientUnitNormalization give the same finite generator times pi_n(b). On e_minus_1 both augmentations are zero. The two Koszul bases generate their terms, and the tensor direct-sum inclusions together with restricted pulled pure tensors determine maps by sheafification and sheaf separation. Hence the two strict tower chain maps agree at every level and degree, for all P and for every supplied normalized pair lambda,C.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-pc-tensor-complex-sheaves",
+    "def-a1-principal-completed-koszul-towers",
+    "def-a1-finite-pullback-strict-tower-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-completed-uniformizer-section",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-a1-principal-completed-koszul-towers",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-pc-tensor-complex-sheaves",
+  "def-a1-finite-pullback-strict-tower-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), displayed total-complex comparison; sites-modules.tex Tag 03EK (section-tensor-product); parent uniformizer clause of step 1 and steps 6-7. Explicit extraction by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a two term principal Koszul complex preserves basis generators and commutes with tensor augmentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase_tmul\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"Given commutative rings $ R, S, A, B $ with compatible $ R $-algebra structures and a pushout condition, the tensor product of Kähler differentials $ \\\\Omega_{A/R} \\\\otimes_A \\\\Omega_{B/S} $ is isomorphi\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_tmul\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"Given commutative rings $R$, $S$, $A$, and $B$ with compatible $R$-algebra structures and scalar tower conditions, the tensor product $S \\\\otimes_R \\\\Omega_{A/R}$ is equivalent to $\\\\Omega_{B/S}$. This e\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_tmul_D\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"For any elements $ b $ in the tensor product and $ a $ in the algebra, the tensor product equivalence between Kähler differentials satisfies $ \\\\operatorname{tensorKaehlerEquiv}(b \\\\otimes d(a)) = b \\\\cd\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase_symm_apply\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"For commutative rings $ R, S, A, B $ with compatible algebra structures and a pushout algebra $ B $, the inverse of the equivalence between $ \\\\Omega_{B/S} $ and $ S \\\\otimes_R \\\\Omega_{A/R} $ maps an el\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing A] [inst_4 : CommRing B] [inst_5 : Algebra R A] [inst_6 : Algebra R B]\\n  [inst_7 : Algebra A B] [inst_8 : Algebra S B] [inst_9 : IsScalarTower R A B] [i\", \"doc\": \"Given commutative semirings R, S, A, B with compatible algebra structures and a pushout algebra B, the tensor product S ⊗_R Ω_{A/R} admits a scalar tower structure where the actions of S and B on the \"}\n  {\"name\": \"KaehlerDifferential.cotangentComplexBaseChange_tmul\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {P : Type u_2} {A : Type u_3}\\n  [inst_2 : CommRing P] [inst_3 : CommRing A] [inst_4 : Algebra P S] [inst_5 : Algebra P A] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra S A] [inst_8 : IsScalarTower P S A] (a : A) (b : ↥(RingHom.ker (a\", \"doc\": \"Given commutative rings $P, S, A$ with compatible algebra structures and a scalar tower condition $P \\\\to S \\\\to A$, the cotangent complex base change of the tensor product $a \\\\otimes b$ equals the scal\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Let $R \\\\to S$ and $R \\\\to A$ be homomorphisms of commutative rings. If $B$ is the pushout of these maps (i.e., $B$ is isomorphic to the tensor product algebra $S \\\\otimes_R A$), then there is a natural \"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctor",
+   "results": "Warning: truncated output (original token count: 1570)\nTotal output lines: 13\n\n[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex.mapBifunctor\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Limits.HasZeroMorphisms C₁] [CategoryTheory.Limits.HasZeroMorphisms C₂] (K₁ : CochainComplex C₁ ℤ) (K₂ : CochainCompl\", \"doc\": \"Given `K₁ : CochainComplex C₁ ℤ`, `K₂ : CochainComplex C₂ ℤ`,\\na bifunctor `F : C₁ ⥤ C₂ ⥤ D`, this `mapBifunctor K₁ K₂ F : CochainComplex D ℤ`\\nis the total complex of the bicomplex obtained by applying\"}\n  {\"name\": \"CochainComplex.ιMapBifunctor\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Limits.HasZeroMorphisms C₁] [CategoryTheory.Limits.HasZeroMorphisms C₂] (K₁ : CochainComplex C₁ ℤ) (K₂ : CochainCompl\", \"doc\": \"The inclusion of a summand `(F.obj (K₁.X n₁)).obj (K₂.X n₂) ⟶ (mapBifunctor K₁ K₂ F).X n`\\nof the total cochain complex when `n₁ + n₂ = n`.\"}\n  {\"name\": \"CochainComplex.mapBifunctorShift₁Iso\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Limits.HasZeroMorphisms C₂] [CategoryTheory.Preadditive D] (K₁ : CochainComplex C₁ ℤ)\", \"doc\": \"The canonical isomorphism `mapBifunctor (K₁⟦x⟧) K₂ F ≅ (mapBifunctor K₁ K₂ F)⟦x⟧`.\\nThis isomorphism does not involve signs.\"}\n  {\"name\": \"CochainComplex.mapBifunctorShift₂Iso\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Limits.HasZeroMorphisms C₁] [CategoryTheory.Preadditive C₂] [CategoryTheory.Preadditive D] (K₁ : CochainComplex C₁ ℤ)\", \"doc\": \"The canonical isomorphism `mapBifunctor K₁ (K₂⟦y⟧) F ≅ (mapBifunctor K₁ K₂ F)⟦y⟧`.\\nThis isomorphism involves signs: on the summand `(F.obj (K₁.X p)).obj (K₂.X q)`, it is given\\nby the multiplication by\"}\n  {\"name\": \"CochainComplex.ι_mapBifunctorShift₁Iso_hom_f\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Limits.HasZeroMorphisms C₂] [CategoryTheory.Preadditive D] (K₁ : CochainComplex C₁ ℤ)\", \"doc\": \"\"}…70 tokens truncated…ory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Limits.HasZeroMorphisms C₂] [CategoryTheory.Preadditive D] (K₁ : CochainComplex C₁ ℤ)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Preadditive C₂] [CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C₁ (Catego\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Preadditive C₂] [CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C₁ (Catego\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Limits.HasZeroMorphisms C₂] [CategoryTheory.Preadditive D] {K₁ L₁ : CochainComplex C₁\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Limits.HasZeroMorphisms C₁] [CategoryTheory.Preadditive C₂] [CategoryTheory.Preadditive D] (K₁ : CochainComplex C₁ ℤ)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Preadditive C₂] [CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C₁ (Catego\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_inv_app\", \"module\": \"Mathlib.Algebra.Homology.BifunctorShift\", \"type\": \" {C₁ : Type u_1} {C₂ : Type u_2} {D : Type u_3} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Category.{v_3, u_3} D] [CategoryTheory.Preadditive C₁] [CategoryTheory.Preadditive C₂] [CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C₁ (Catego\", \"doc\": \"\"}\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Aa]ugmentation|[Aa]ugmentation.*Koszul",
+   "results": "[grep] OK 0 hit(s)\n No exact match: these ordinary module/tensor or completion constructions do not include this strict tower and generator normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BalancedFiniteTowerGeneratorComparison",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof steps 6, 7 and 9, and the tower part of step 11: ordinary completed-ring pullback, balanced finite comparison, localization naturality and shifts. Extracted argument: Tag 03EL, lemma-tensor-product-pullback; balanced coefficient-square and fixed-generator strict-tower refinement, old proof steps 6-7. Refinement here: Tag 07A4 (lemma-pullback-tensor-product), displayed total-complex comparison; sites-modules.tex Tag 03EK (section-tensor-product); parent uniformizer clause of step 1 and steps 6-7.",
+   "via": [
+    "lem-a1-balanced-finite-tower-generator-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BalancedFiniteTowerKoszulAugmentation",
+  "file": "lean/Sheaf/Paper/BalancedFiniteTowerKoszulAugmentation.lean",
+  "declaration": "WeilConjectures.BalancedFiniteTower.koszul_augmentation_compatibility",
+  "statement": "theorem koszul_augmentation_compatibility\n    (lambda : G l E g ⋙ reductions l E X ≅ finite l E g)\n    (c : reductions l E Y ⋙ diagramPull l E g ≅ finite l E g)\n    (hlambda : ∀ P : CochainComplex (Modules l E Y) ℤ,\n      BalancedNormalization l E g P (lambda.app P))\n    (hc : QuotientUnitNormalization l E g c) :\n    ∃ theta : koszuls l E Y ⋙ diagramPull l E g ≅ G l E g ⋙ koszuls l E X,\n      (∀ P : CochainComplex (Modules l E Y) ℤ,\n        KoszulNormalization l E g P (theta.app P)) ∧\n      (∀ P : CochainComplex (Modules l E Y) ℤ,\n        (theta.hom.app P) ≫ augmentation l E X ((G l E g).obj P) ≫ lambda.hom.app P =\n          (diagramPull l E g).map (augmentation l E Y P) ≫ c.hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070543-L-3612358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T070543-L-3612358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

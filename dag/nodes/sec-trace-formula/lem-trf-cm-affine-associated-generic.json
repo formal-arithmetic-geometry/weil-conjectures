@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-cm-affine-associated-generic",
+ "kind": "statement",
+ "title": "Associated points of a Cohen–Macaulay affine spectrum are component generic points",
+ "statement": "Let $T$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Assume that for every prime ideal $\\mathfrak q\\subset T$, the local ring $T_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is Cohen–Macaulay, meaning $\\operatorname{depth}(T_{\\mathfrak q})=\\dim T_{\\mathfrak q}$ [def-weil-pbc-depth; def-weil-pbc-krull-dimension-ring]. For $W=\\operatorname{Spec}T$ [def-weil-affine-spectrum] and any point $\\mathfrak q\\in W$, the following conditions are equivalent: (i) $\\mathfrak q$ is an associated point of $\\mathcal O_W$, meaning that the maximal ideal of $\\mathcal O_{W,\\mathfrak q}$ is the annihilator of a nonzero element of that stalk [def-trf-relative-assassin; def-weil-pbc-annihilator-associated-primes; def-weil-pbc-module-stalk]; (ii) $\\mathfrak q$ is a minimal prime of $T$, meaning that no prime ideal of $T$ is strictly contained in $\\mathfrak q$; (iii) $\\mathfrak q$ is a generic point [def-sc-generic-point] of an irreducible component [def-weil-irreducible-components] of $W$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DC (lemma-base-change-relative-assassin), proof, final sentence: associated primes are minimal; expanded using Algebra Tags 0BUS (lemma-CM-ass-minimal-support), 05BV (lemma-ass-minimal-prime-support), and 05BZ (lemma-localize-ass)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-trf-relative-assassin",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-pbc-module-stalk",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\mathfrak q\\in W$ and put $A=T_{\\mathfrak q}$ and $\\mathfrak m=\\mathfrak qA$. By [lem-weil-pbc-spec-domain-stalks-function-field], $\\mathcal O_{W,\\mathfrak q}\\cong A$ as $T$-algebras. The localization is local with maximal ideal $\\mathfrak m$ by [def-weil-pbc-localization-at-prime], and is Noetherian by [lem-weil-pbc-localization-noetherian]. Its dimension is a finite integer $e\\ge0$ by [lem-weil-pbc-noetherian-local-finite-krull-dimension]. Ring isomorphisms carry units, hence maximal ideals, to one another and carry annihilators to annihilators. Thus (i) says precisely that $\\mathfrak m$ is an associated prime of the $A$-module $A$. The hypothesis at $\\mathfrak q$ says $\\operatorname{depth}A=e$.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00KQ (proposition-dimension); Schemes Tag 01HV (lemma-spec-sheaves), part (6)."
+   }
+  },
+  {
+   "text": "Assume (i). Apply [lem-weil-pbc-cm-local-associated-prime-minimal] to the Noetherian local ring $A$ of step 1, its associated prime $\\mathfrak m$, and its depth equality (in particular $\\operatorname{depth}A\\ge e$). It follows that $\\mathfrak m$ is minimal in $\\operatorname{Spec}A$. If a prime $\\mathfrak p\\subsetneq\\mathfrak q$ existed in $T$, the inclusion-preserving bijection [lem-weil-pbc-primes-of-localization] would give primes $\\mathfrak pA\\subsetneq\\mathfrak qA=\\mathfrak m$: strictness follows because contraction is the inverse bijection. This contradicts minimality. Hence (ii) holds.",
+   "uses": [
+    "lem-weil-pbc-cm-local-associated-prime-minimal",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0BUS (lemma-CM-ass-minimal-support), for the local ring as its own module, and 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "Assume (ii). By [lem-weil-pbc-noetherian-minimal-prime-associated], there is $z\\in T$ with $\\operatorname{Ann}_T(z)=\\mathfrak q$. By [lem-weil-pbc-associated-prime-localization-depth-zero], there is $w\\in A$ with $\\operatorname{Ann}_A(w)=\\mathfrak qA=\\mathfrak m$. Necessarily $w\\ne0$, since the annihilator of zero is $A$ and $\\mathfrak m$ is proper. The stalk isomorphism established in step 1 transports $w$ and its annihilator to $\\mathcal O_{W,\\mathfrak q}$ and its maximal ideal. This is (i).",
+   "uses": [
+    "lem-weil-pbc-noetherian-minimal-prime-associated",
+    "lem-weil-pbc-associated-prime-localization-depth-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05BV (lemma-ass-minimal-prime-support), for $M=T$, and 05BZ (lemma-localize-ass), parts (1)--(2)."
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak p$, its closure is $V(\\mathfrak p)$: a closed set $V(I)$ contains $\\mathfrak p$ exactly when $I\\subseteq\\mathfrak p$, and then contains all of $V(\\mathfrak p)$. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], if $\\mathfrak q$ is minimal then $V(\\mathfrak q)$ is an irreducible component; the closure formula and [def-sc-generic-point] give (iii). Conversely, if $\\mathfrak q$ is generic for a component, that component is both $V(\\mathfrak q)$ and $V(\\mathfrak p)$ for a minimal prime $\\mathfrak p$. Membership of $\\mathfrak p$ and $\\mathfrak q$ in these equal sets gives $\\mathfrak q\\subseteq\\mathfrak p$ and $\\mathfrak p\\subseteq\\mathfrak q$, so they are equal. Thus (iii) implies (ii), completing all three equivalences.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-sc-generic-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ES (lemma-irreducible), parts (1) and (3); Topology Tag 004X (definition-generic-point)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-cm-local-associated-prime-minimal",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-noetherian-minimal-prime-associated",
+  "lem-weil-pbc-associated-prime-localization-depth-zero",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-sc-generic-point"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0BUS, 05BV, 05BZ, 00E3 and 00ES, assembling the final associated-prime argument of divisors.tex Tag 05DC; affine stalks from schemes.tex Tag 01HV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|associatedPrimes.*minimalPrimes|minimalPrimes.*associatedPrimes",
+   "results": "2 hits: Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; digest=efe127fe6231a0b4.  Minimal-prime topology and the inclusion of minimal primes in associated primes are ingredients only; none gives the Cohen–Macaulay converse and its affine stalk interpretation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Noetherian ring whose prime localizations are Cohen Macaulay the associated points of its affine scheme are precisely the generic points of irreducible components",
+   "results": "8 hits: genericPoints, genericPoints.ofComponent, genericPoints.component, AlgebraicGeometry.genericPoint_eq_bot_of_affine, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.isNoetherian_Spec; digest=cf2492db5aab6aba.  Minimal-prime topology and the inclusion of minimal primes in associated primes are ingredients only; none gives the Cohen–Macaulay converse and its affine stalk interpretation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, minimalPrimes",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c.  Minimal-prime topology and the inclusion of minimal primes in associated primes are ingredients only; none gives the Cohen–Macaulay converse and its affine stalk interpretation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated points of the structure sheaf on the spectrum of a Noetherian Cohen Macaulay ring are exactly its minimal primes and generic points of irreducible components",
+   "results": "8 hits: AlgebraicGeometry.genericPoint_eq_bot_of_affine, PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.quasiSober, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents, PrimeSpectrum.stableUnderGeneralization_singleton, PrimeSpectrum.instQuasiSoberElemZeroLocus, Ideal.IsMaximal.mem_associatedPrimes_of_isFractionRing; digest=27b3a8d0c0fb1769.  Minimal-prime topology and the inclusion of minimal primes in associated primes are ingredients only; none gives the Cohen–Macaulay converse and its affine stalk interpretation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every prime localization has depth equal to dimension then the maximal ideal is associated exactly at minimal primes, so the affine scheme has no embedded points",
+   "results": "8 hits: AlgebraicGeometry.genericPoint_eq_bot_of_affine, Ring.KrullDimLE.of_isLocalization, IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes, Ideal.mem_minimalPrimes_of_krullDimLE_zero, AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, Ideal.mem_minimalPrimes_iff_isPrime, Ring.krullDimLE_one_iff; digest=328229dfd3198968.  Minimal-prime topology and the inclusion of minimal primes in associated primes are ingredients only; none gives the Cohen–Macaulay converse and its affine stalk interpretation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated points of the structure sheaf of a Noetherian Cohen Macaulay affine scheme are exactly the minimal primes and generic points of irreducible components",
+   "results": "8 hits: PrimeSpectrum.zeroLocus_minimalPrimes, AlgebraicGeometry.genericPoint_eq_bot_of_affine, PrimeSpectrum.vanishingIdeal_irreducibleComponents, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes, PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents, PrimeSpectrum.quasiSober, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat; digest=c28686521966faa0. Read the returned types: these provide the minimal-prime topology or the minimal-prime inclusion, but not the local Cohen–Macaulay converse with affine stalk interpretation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|associatedPrimes.*minimalPrimes|minimalPrimes.*associatedPrimes",
+   "results": "2 hits: Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; digest=efe127fe6231a0b4. Read the returned types: these provide the minimal-prime topology or the minimal-prime inclusion, but not the local Cohen–Macaulay converse with affine stalk interpretation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated points of a Noetherian affine scheme whose local rings are Cohen Macaulay are precisely its minimal primes",
+   "results": "8 hits: minimalPrimes, associatedPrimes, IsAssociatedPrime, minimalPrimes.finite_of_isNoetherianRing, Ideal.finite_minimalPrimes_of_isNoetherianRing, Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes, AssociatePrimes.mem_iff, Ideal.minimalPrimes; digest=b8b1315fada620e2. Read the returned types: these provide the minimal-prime topology or the minimal-prime inclusion, but not the local Cohen–Macaulay converse with affine stalk interpretation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, minimalPrimes",
+   "results": "0 hits: ; digest=4f53cda18c2baa0c. Read the returned types: these provide the minimal-prime topology or the minimal-prime inclusion, but not the local Cohen–Macaulay converse with affine stalk interpretation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian ring with all prime localizations of depth equal to dimension, a prime is associated to the ring if and only if it is minimal",
+   "results": "8 hits: Ideal.IsMaximal.mem_associatedPrimes_of_isFractionRing, Ideal.primeHeight_eq_zero_iff, Ring.KrullDimLE.minimalPrimes_eq_setOf_isPrime, Ring.KrullDimLE.mem_minimalPrimes_iff, Ideal.mem_minimalPrimes_iff_isPrime, PrimeSpectrum.isMin_iff, Ideal.mem_minimalPrimes_of_krullDimLE_zero, Ring.KrullDimLE.mem_minimalPrimes_iff_le_of_isPrime; digest=c674fc07e337ac36. Read the returned types: these provide the minimal-prime topology or the minimal-prime inclusion, but not the local Cohen–Macaulay converse with affine stalk interpretation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-assassin-base-change",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first and second paragraphs: ascend the generic associated point and descend the special associated point, retaining the generic-residue-fibre condition. In the inherited 05DC argument: Tag 05DC (lemma-base-change-relative-assassin), proof, final sentence: associated primes are minimal; expanded using Algebra Tags 0BUS (lemma-CM-ass-minimal-support), 05BV (lemma-ass-minimal-prime-support), and 05BZ (lemma-localize-ass).",
+   "via": [
+    "lem-trf-relative-assassin-base-change",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cm-affine-associated-generic",
+  "worker": "stage1",
+  "summary": "Q74: split the three equivalences using existing affine-stalk, Noetherian-localization, finite-dimension, local Cohen–Macaulay, associated-prime-localization, and spectrum-component nodes. Checked the Stacks statements and every hypothesis, with no statement correction and no new nodes. Repeated the Mathlib search with two semantic phrasings; no exact item declaration was found in Mathlib or the project.",
+  "blueprint": "Realizes the inherited final 05DC associated-prime argument below lem-trf-local-term-locality, proof (1)--(2), semistable-alteration/nearby-cycle branch via relative-assassin-base-change. The inherited from.place identifies that branch; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cm-local-associated-prime-minimal",
+    "why": "Generic commutative algebra tool: a local Cohen–Macaulay ring has minimal associated primes. It supplies the local algebra in the inherited 05DC argument; no node of sk-i-curve-zero states that local algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cm-local-associated-prime-minimal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-e6e010575",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-e6e010575 (reviewer sub-agent of L); spot-checked: First delivery. It has no new nodes, and the item statement is unchanged. Source checked: divisors.tex 05DC (lines 1154-1166), where the associated primes of the CM ring κ(s')⊗κ(x) are its minimal primes; it is expanded through algebra 0BUS, 05BV, 05BZ, 00E3, 00ES, 00FN, 00KQ and schemes 01HV(1). Step 1: the stalk is isomorphic to T_q as T-algebras (spec-domain-stalks clause 1, valid for any ring), T_q is local, Noetherian and of finite dimension e, depth equals e (finite because mA≠A), and (i) becomes 'm is an annihilator'. Step 2, (i)⇒(ii): all hypotheses of cm-local-associated-prime-minimal hold, and 00E3 order-iso carries p⊊q to pA⊊m, a contradiction. Step 3, (ii)⇒(i): 05BV gives q=Ann(z), 05BZ gives Ann(w)=qT_q, w≠0. Step 4: the closure of {p} is V(p), proved inline; with 00ES(3) this gives (ii)⇔(iii) by mutual inclusion. Small cases tested: zero ring, field, k[x], k[ε]/ε², k×k; k[x,y]/(x²,xy) shows the CM hypothesis is necessary. The only citer, relative-assassin-base-change, uses the item as stated, and lem-trf-tensor-fields-cohen-macaulay supplies CM at every prime. lem-trf-affine-minimal-prime-stalk-annihilator covers only (ii)⇒(i), so it is not a duplicate; I found no other duplicate. Accepted tool_use: lem-weil-pbc-cm-local-associated-prime-minimal (0BUS, generic local algebra; no sk-i-curve-zero node states it). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohenMacaulayAffineAssociatedGeneric",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.associatedPoints_unit_spec_iff_minimalPrime_and_generic",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohenMacaulayAffineAssociatedGeneric.lean",
+  "statement": "theorem associatedPoints_unit_spec_iff_minimalPrime_and_generic {T : Type u} [CommRing T] [IsNoetherianRing T] (hcm : ∀ p : PrimeSpectrum T, (IsLocalRing.depth (R := Localization.AtPrime p.asIdeal) (Localization.AtPrime p.asIdeal) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime p.asIdeal)) (q : PrimeSpectrum T) : (q ∈ associatedPoints (SheafOfModules.unit (Spec (CommRingCat.of T)).ringCatSheaf) ↔ q.asIdeal ∈ minimalPrimes T) ∧ (q.asIdeal ∈ minimalPrimes T ↔ ∃ Z ∈ irreducibleComponents (Spec (CommRingCat.of T)), IsGenericPoint q Z)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b24b9cce8",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Only node lean changed; lean.statement verbatim in file; single sorry, no defs. Clauses match: IsNoetherianRing T at universe u; hcm = IsLocalRing.depth (regular-sequence def, Depth.lean:50) = ringKrullDim of T_p in WithBot ℕ∞ for all PrimeSpectrum p; (i) Scheme.Modules.associatedPoints (RelativeAssassin.lean:38, element-annihilator annihilatorAssociatedPrimes on moduleStalkFunctor stalk) of SheafOfModules.unit = O_W, nonzero witness implied by proper annihilator; (ii) minimalPrimes T; (iii) ∃ Z ∈ irreducibleComponents, IsGenericPoint q Z; (i↔ii)∧(ii↔iii). Edge cases zero ring/field/k[ε]/k[x]/k×k fine, k[x,y]/(x²,xy) excluded by hcm. Separate def-sc-associated-points (Mathlib IsAssociatedPrime) exists but node cites def-trf-relative-assassin, so delivery follows node. Name unique; affine-minimal-prime-stalk-annihilator covers only (ii)⇒(i). Docstrings carry source, blueprint, 4 steps; report has both sections; stmt_dep modules publicly imported. No compile run (no file changed). No findings."
+ }
+}

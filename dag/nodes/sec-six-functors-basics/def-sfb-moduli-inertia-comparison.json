@@ -1,0 +1,109 @@
+{
+ "id": "def-sfb-moduli-inertia-comparison",
+ "kind": "definition",
+ "title": "Canonical inertia map and inertia comparison of a stack morphism",
+ "status": "split",
+ "import_flags": [],
+ "statement": "For a functor $f:\\mathcal F\\to\\mathcal G$ over a base scheme [def-pc-scheme] with the fibred-groupoid and 2-fibre-product conventions of [def-sfb-stable-pointed-moduli-groupoids], the functor on inertia sends $(x,\\alpha)$ to $(f(x),f(\\alpha))$. The canonical inertia comparison $I_{\\mathcal F/S}\\to\\mathcal F\\times_{\\mathcal G}I_{\\mathcal G/S}$ sends $(x,\\alpha)$ to $(x,f(x),\\operatorname{id}_{f(x)})$ and sends an inertia arrow to its image together with the commuting square. It is a functor over the base.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DUA, remark-get-property-auts-from-diagonal and the canonical map $\\mathcal I_\\mathcal X\\to\\mathcal X\\times_\\mathcal Y\\mathcal I_\\mathcal Y$."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-moduli-inertia"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical functor on inertia of a morphism of categories fibred in groupoids and comparison to pullback inertia",
+   "results": "Eight hits on generic functors, automorphism maps and fibre categories; no matching canonical inertia comparison for the project interfaces.",
+   "date": "2026-10-24",
+   "verdict": "no existing Mathlib declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functor on inertia and canonical comparison to pullback inertia of categories fibred in groupoids",
+   "results": "Eight hits on generic fibre functors; no declaration of the project notion.",
+   "date": "2026-10-24",
+   "verdict": "no existing Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "moduliInertiaComparison|moduliInertiaMap|inertia",
+   "results": "No matching declaration in Mathlib or WeilConjectures; project declaration found only in Sheaf.AlgebraicGeometry.DmStabilizerIsomorphismOpenLocus.lean.",
+   "date": "2026-10-24",
+   "verdict": "existing project declaration used."
+  },
+  {
+   "tool": "grep",
+   "query": "def-sfb-moduli-inertia-comparison",
+   "results": "No existing DAG node; this repair creates the node.",
+   "date": "2026-10-24",
+   "verdict": "new DAG bookkeeping node for existing declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-stabilizer-preserving-etale",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0DUA canonical inertia comparison used in the stabilizer-preserving hypothesis of the Keel–Mori étale comparison.",
+   "via": [
+    "lem-sfb-keel-mori-stabilizer-preserving-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmStabilizerIsomorphismOpenLocus",
+  "declaration": "CategoryTheory.moduliInertiaMap",
+  "declarations": [
+   "CategoryTheory.moduliInertiaMap",
+   "CategoryTheory.moduliInertiaComparison"
+  ],
+  "statement": "def moduliInertiaMap {S : Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} (f : BasedFunctor F G) : BasedFunctor (moduliInertia F) (moduliInertia G)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing plain definitions in the landed DmStabilizerIsomorphismOpenLocus module. The theorem node lem-sfb-dm-stabilizer-isomorphism-open-locus was an inappropriate owner for these definitions; this definition node records both canonical declarations and replaces that theorem node in the item stmt_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-645f94087",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-645f94087",
+  "group": "NX",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches the node and Stacks 0DUV: field, DM stacks, finite inertia for both stacks (X1 copy implied), h representable/etale/proper-diagonal, IsEquivalence of the canonical moduliInertiaComparison, categorical moduli spaces with universal property only, unique hbar etale with closed-immersion diagonal, equivalence pinned by projections p1 and h. lean.statement verbatim. Only lean and stmt_deps differ from live; added deps own the declarations used. New existing:true def-sfb-moduli-inertia-comparison records the plain defs in the unchanged DmStabilizerIsomorphismOpenLocus module (accepted H2 repair pattern, no cycle, no duplicate). Notes only: inline het/hsep instead of IsEtaleModuliMap (same form as landed sibling); representable IsEtale for hbar is fine (Stacks 0418). No hollow defs, docstrings and 10 proof steps present, both report sections present; not recompiled, worker compile clean 58.9 s."
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-short-word-completion-isomorphism",
+ "kind": "statement",
+ "title": "Existing short-word completion transport is invertible",
+ "statement": "Fix a prime $\\ell$ and finite $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], a family of schemes $W_a$ on small pro-etale sites [def-weil-pbc-proetale-site], the recorded actual system operations and section-normalized ringed models [def-sf-integral-system-operations, def-sf-integral-system-canonical-bridge]. Let $B$ be a typed word in variables, coefficient units, tensor, separated finite-type quasi-compact pullback, proper direct image, and quasi-compact open extension, with at most three operation vertices. Its canonical completion transport is recursively identity on variables and units, tensor of child transports followed by the specified quotient-completion tensor unit, pullback of the child transport followed by the specified pullback completion unit, the right-adjoint realization transport on proper direct image, and open extension of the child transport. Let the integral inputs be finite-Tor constructible with normalized reductions and compatible etale origins, with all word systems normalized and satisfying common finite cohomological and Tor bounds [def-weil-finite-tor-amplitude, def-coef-normalized-dvr-tower, def-sf-integral-system-expression-domain]. Then this canonical transport from the ordinary ringed evaluation of $B$ to its completed evaluation is an isomorphism. This is exactly the already-published completionMap_isIso helper, independently of generator coherence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Completion transport of the canonical short generator words, as in the existing completionMap_isIso docstring, coherence steps 1--3."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-finite-tor-amplitude",
+  "def-coef-normalized-dvr-tower",
+  "def-sf-integral-system-expression-domain"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the word. Variables and units have identity completion transport. The shortWordIntegralDomain theorem puts each child of a tensor, pullback or proper-image vertex in the finite-Tor constructible domain (or identifies it with the scalar unit). primitiveCompletionEffectivity makes the specified tensor and pullback completion units and the reconstruction unit invertible there. Tensor and unary functors preserve the child isomorphisms. Proper image uses its fixed right-adjoint-conjugate realization; open extension applies its exact functor to the child isomorphism. This is exactly the current complete proof of completionMap_isIso.",
+   "uses": [
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-short-word-integral-domain",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-primitive-completion-effectivity",
+  "lem-sf-short-word-integral-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Completion transport of the canonical short generator words, as in the existing completionMap_isIso docstring, coherence steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical completion transport of a finite word of integral pullback tensor proper direct image and open extension is invertible on bounded constructible complete inputs",
+   "results": "AdicCompletion finite Noetherian tensor and pi equivalences and Proj pullbackAway isomorphisms; no result about the recorded derived word transport.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\", \"IsIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(isiso|isomorph)|(isiso|isomorph).*completion in Mathlib/CategoryTheory",
+   "results": "0 hits; project already states precisely this helper as completionMap_isIso, with sorry. This node supplies missing independent ownership, not duplicate Lean.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical completion of finite words of derived tensor pullback and proper image is an isomorphism on complete constructible inputs",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian and related ordinary module completion results; no derived sheaf word completion comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TensorAdjunctionReductionSquares",
+  "date": "2026-10-25",
+  "group": "C2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Completion transport of the canonical short generator words, as in the existing completionMap_isIso docstring, coherence steps 1--3.",
+   "via": [
+    "lem-sf-tensor-adjunction-reduction-squares",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.SixFunctors.ShortWordCompletionIsomorphism",
+  "file": "lean/Sheaf/SixFunctors/ShortWordCompletionIsomorphism.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.completionMap_isIso",
+  "declarations": [
+   "WeilConjectures.GeneratorReduction.completionMap_isIso"
+  ],
+  "statement": "theorem completionMap_isIso (o : Operations l E)\n    {a : S} (B : Word W location a)\n    (_hLength : B.length ≤ 3)\n    (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))\n    (lo hi torLo torHi : ℤ)\n    (_hAdm : ∀ k : I, Admissible l E\n      (IntegralSystemRealization.calculus l E (W (location k))) (K k) lo hi torLo torHi)\n    (_hIntermediate : Word.admissible l E W location o K lo hi torLo torHi B) :\n    IsIso (B.completionMap l E W location o K)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-25",
+  "note": "Existing proved completionMap_isIso moved verbatim to its independent module; GeneratorReductionStatement publicly re-exports it. This permits the tensor-square proof to import the helper without a cycle through generator coherence."
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.SixFunctors.TensorAdjunctionReductionSquares",
+  "worker": "C2",
+  "summary": "Registers an already-published independent completion-isomorphism helper, now proved in the current source; no Lean changes or new hole.",
+  "blueprint": "fix-prop-coherence maps-used sentence: pass between ordinary and completed short expressions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261025T163551-L-694568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a25ee",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261026T001415-L-4190115",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-sf-generator-reduction-coherence nodes (proof_deps = 4 forward squares + substitution + tensor squares); moved completionMap_isIso byte-identical to live; restored structuralReductionWordSubstitution identical to K4 dc9dd96 signature and its node; tensor adaptation = one import line, compiled"
+ }
+}

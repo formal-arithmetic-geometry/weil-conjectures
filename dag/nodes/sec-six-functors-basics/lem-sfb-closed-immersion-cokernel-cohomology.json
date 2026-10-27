@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-closed-immersion-cokernel-cohomology",
+ "kind": "statement",
+ "title": "Linear cohomology sequence for a closed-immersion cokernel",
+ "statement": "Let $k$ be a field [def-weil-field], let $X,Y$ be $k$-schemes [def-pc-scheme, def-weil-scheme-over-base], and let $i:Y\\hookrightarrow X$ be a closed immersion over $k$ [def-weil-closed-immersion]. Let $\\mathcal L,\\mathcal E$ be sheaves of $\\mathcal O_X$-modules and $\\mathcal M$ a sheaf of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category]. Define $(i_*\\mathcal M)(U)=\\mathcal M(i^{-1}U)$, with $\\mathcal O_X$ acting through the structure-sheaf map. Use module cohomology as right derived global sections [def-sc-ringed-space-module-cohomology], with the $k$-actions induced by the structure morphisms. There are canonical $k$-linear isomorphisms\n$$c^q:H^q(X,i_*\\mathcal M)\\xrightarrow{\\sim}H^q(Y,\\mathcal M)\\quad(q\\geq0),$$\nnatural in $\\mathcal M$, with $c^0$ the equality of global sections. For every short exact sequence $0\\to\\mathcal L\\to\\mathcal E\\xrightarrow{u}i_*\\mathcal M\\to0$, the right-derived-global-sections long exact sequence, after these identifications, is an exact sequence of $k$-vector spaces\n$$0\\to H^0(X,\\mathcal L)\\to H^0(X,\\mathcal E)\\xrightarrow{c^0H^0(u)}H^0(Y,\\mathcal M)\\xrightarrow{\\delta^0}H^1(X,\\mathcal L)\\to\\cdots\\to H^q(X,\\mathcal E)\\to H^q(Y,\\mathcal M)\\xrightarrow{\\delta^q}H^{q+1}(X,\\mathcal L)\\to\\cdots.$$\nHere $\\delta^q$ is the boundary of the specified module-sheaf sequence composed with $(c^q)^{-1}$. In particular, if $H^0(X,\\mathcal L)=H^1(X,\\mathcal L)=H^1(X,\\mathcal E)=H^2(X,\\mathcal E)=0$, then $c^0H^0(u)$ and $\\delta^1:H^1(Y,\\mathcal M)\\to H^2(X,\\mathcal L)$ are $k$-linear isomorphisms. No quasi-coherence, Noetherian, properness, or smoothness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD, label lemma-genus-plane-curve, proof: closed-immersion cohomology comparison and the two long-exact-sequence isomorphisms (returned steps 4 and 6), generalized to a specified module-sheaf cokernel sequence"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-module-cohomology-boundary"
+ ],
+ "proof": [
+  {
+   "text": "Write $M_{ab}$ for the underlying abelian sheaf. By [def-weil-closed-immersion], the underlying map of $i$ is a closed embedding, and $(i_*M)_{ab}=i_*(M_{ab})$ sectionwise. Apply [lem-sc-zariski-module-abelian-cohomology-agree] on $X$ and $Y$, obtaining natural additive comparisons $a_X^q,a_Y^q$ normalized to the identity on sections. The normalized closed-pushforward delta-functor isomorphism $t^q:H^q(Y,M_{ab})\\to H^q(X,i_*M_{ab})$ is supplied by [lem-sc-closed-pushforward-boundary-naturality]. Define $c^q=(a_Y^q)^{-1}(t^q)^{-1}a_X^q$. These are natural additive isomorphisms, and $c^0$ is the equality $(i_*M)(X)=M(Y)$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "lem-sc-closed-pushforward-boundary-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, lemma-cohomology-modules-abelian-agree; cohomology.tex Tag 02UV, lemma-cohomology-and-closed-immersions (normalized by degree-zero sections)"
+   }
+  },
+  {
+   "text": "For $\\lambda\\in k$, let $\\tau_M$ be multiplication by its image in $\\Gamma(Y,\\mathcal O_Y)$. Since $i$ is over $k$, $i_*\\tau_M$ is multiplication by the image of $\\lambda$ in $\\Gamma(X,\\mathcal O_X)$ on $i_*M$: both act sectionwise by the same element of $\\mathcal O_Y(i^{-1}U)$. Naturality from Step 1 gives $c^qH^q(X,i_*\\tau_M)=H^q(Y,\\tau_M)c^q$. By [lem-weil-pbc-module-cohomology-scalar-endomorphism] on both schemes, this reads $c^q(\\lambda x)=\\lambda c^q(x)$. Thus $c^q$ and its inverse are $k$-linear.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-scalar-endomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ, section-cohomology-sheaves, equation-cohomology-modules; Tag 02UV, natural closed-pushforward comparison"
+   }
+  },
+  {
+   "text": "The module-sheaf category is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives]. Global sections valued in $\\operatorname{Mod}_{\\Gamma(X,\\mathcal O_X)}$ is additive and left exact: kernels are sectionwise by [def-weil-sheaf-of-modules-category], and evaluation at $X$ preserves that kernel formula. Apply [lem-weil-pbc-right-derived-universal-delta-functor] with this target module category to the specified short exact sequence. It gives the entire exact sequence starting in degree zero, with all maps module-linear and with its canonical derived connecting morphisms; these are the boundaries of [def-sc-module-cohomology-boundary]. Restrict their scalars along $k\\to\\Gamma(X,\\mathcal O_X)$. This changes no underlying groups, kernels, or images, so the sequence stays exact and every map is $k$-linear.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-sc-module-cohomology-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B, lemma-higher-derived-functors (1),(2),(4), and Tag 05TE, lemma-right-derived-delta-functor; cohomology.tex Tag 01DZ, module-valued universal delta-functor"
+   }
+  },
+  {
+   "text": "Replace each $H^q(X,i_*M)$ in Step 3 by $H^q(Y,M)$ using $c^q$. The incoming arrow becomes $c^qH^q(u)$ and the outgoing arrow becomes $\\delta_X^q(c^q)^{-1}$, exactly the boundary specified in the statement. For adjacent maps $a,b$, an isomorphism $c$ carries $\\operatorname{im}(a)$ to $\\operatorname{im}(ca)$ and $\\ker(b)$ to $\\ker(bc^{-1})$; hence every exactness equality is preserved. Under the four vanishings the two relevant segments reduce to $0\\to H^0(X,E)\\to H^0(Y,M)\\to0$ and $0\\to H^1(Y,M)\\xrightarrow{\\delta^1}H^2(X,L)\\to0$. Each middle map has zero kernel and full image, and is therefore a bijective $k$-linear map, hence a $k$-linear isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BYD, lemma-genus-plane-curve, proof: the two isomorphisms from the long exact cohomology sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sc-closed-pushforward-boundary-naturality",
+  "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-sc-module-cohomology-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BYD, lemma-genus-plane-curve: general module-sheaf formulation assembled using Stacks 03FD, 02UV, 01DZ, 015B and 05TE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*cohomology|cohomology.*closedImmersion|pushforward.*cohomology|cohomology.*pushforward",
+   "results": "0 hits;  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent cohomology, and abstract complex connecting-isomorphism lemmas do not supply the geometric module/abelian comparison or its scalar-compatible closed-immersion identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact sequence L to E to i pushforward M on a scheme gives linear connecting maps to cohomology on a closed subscheme",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"cohomology\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent cohomology, and abstract complex connecting-isomorphism lemmas do not supply the geometric module/abelian comparison or its scalar-compatible closed-immersion identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes over a field the module sheaf cohomology comparison with direct image is linear and carries a short exact sequence to its cohomology boundary sequence",
+   "results": "8 hits; groupCohomology.map_cochainsFunctor_shortExact, groupCohomology.mapShortComplex₁_exact, groupCohomology.mapShortComplex₃_exact, groupCohomology.mapShortComplex₂_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, Algebra.H1Cotangent.exact_map_δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, Algebra.Generators.H1Cotangent.exact_map_δ'",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent cohomology, and abstract complex connecting-isomorphism lemmas do not supply the geometric module/abelian comparison or its scalar-compatible closed-immersion identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If zero to L to E to i star M to zero is exact for a closed immersion then vanishing of H0 L H1 L H1 E H2 E gives H0 E isomorphic H0 M and H1 M isomorphic H2 L",
+   "results": "8 hits; groupCohomology.isIso_δ_of_isZero, CategoryTheory.ShortComplex.ShortExact.isIso_δ, CategoryTheory.ShortComplex.ShortExact.δIso, groupHomology.isIso_δ_of_isZero, groupCohomology.mapShortComplex₁_exact, groupCohomology.mapShortComplex₃_exact, groupCohomology.mapShortComplex₂_exact, groupCohomology.shortComplexH0_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent cohomology, and abstract complex connecting-isomorphism lemmas do not supply the geometric module/abelian comparison or its scalar-compatible closed-immersion identification"
+  },
+  {
+   "tool": "grep",
+   "query": "lem-sfb-closed-immersion-cokernel-cohomology|IsClosedImmersion.*(δ|H0|H1)|moduleCohomology.*pushforward",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent cohomology, and abstract complex connecting-isomorphism lemmas do not supply the geometric module/abelian comparison or its scalar-compatible closed-immersion identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "7 hits; CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived pushforward, open restriction adjunctions, closed-immersion definitions or abelian sheaf cohomology definitions; none gives the arbitrary module comparison and specified linear boundary sequence"
+  },
+  {
+   "tool": "grep",
+   "query": "closedImmersion.*cohomology|cohomology.*closedImmersion|ClosedEmbedding.*cohomology|cohomology.*ClosedEmbedding",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived pushforward, open restriction adjunctions, closed-immersion definitions or abelian sheaf cohomology definitions; none gives the arbitrary module comparison and specified linear boundary sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion pushforward preserves cohomology of arbitrary sheaves of modules and the cohomology long exact sequence is linear over the base field",
+   "results": "8 hits; SheafOfModules.pushforward_map_val, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pushforward",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived pushforward, open restriction adjunctions, closed-immersion definitions or abelian sheaf cohomology definitions; none gives the arbitrary module comparison and specified linear boundary sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of direct image along a closed embedding equals cohomology on the closed subspace for sheaves of modules",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived pushforward, open restriction adjunctions, closed-immersion definitions or abelian sheaf cohomology definitions; none gives the arbitrary module comparison and specified linear boundary sequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion direct image module sheaf cohomology comparison and long exact sequence",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived pushforward, open restriction adjunctions, closed-immersion definitions or abelian sheaf cohomology definitions; none gives the arbitrary module comparison and specified linear boundary sequence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-plane-hypersurface-cohomology",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607, the cover C_i; explicit Fermat realization and genus computation from Stacks Tags 0BYA (curves-section-plane-curves) and 0BYD (curves-lemma-genus-plane-curve), literature/stacks-project/curves.tex. Local de Jong PDF WANTED; publisher PDF read.; Fermat geometric-fibre genus: the structure-sheaf cohomology calculation for a general plane hypersurface, Stacks 0BYD.; closed-immersion cohomology comparison and the two long-exact-sequence isomorphisms (returned steps 4 and 6), generalized to a specified module-sheaf cokernel sequence",
+   "via": [
+    "lem-sfb-plane-hypersurface-cohomology",
+    "lem-sfb-fermat-kummer-relative-curve",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-immersion-cokernel-cohomology",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary-module statement and all scalar and boundary normalizations. Assembled existing natural module/abelian and normalized closed-pushforward comparisons, checked scalar linearity using multiplication endomorphisms, and applied module-valued derived global sections. The two final isomorphisms follow by writing out the zero-ended exact segments. No new nodes or Mathlib leaves.",
+  "blueprint": "The ancestor command returns None for this audit-seed chain; retained its recorded from.node=null and precise from.place. This realizes the closed-immersion comparison and long-exact-sequence isomorphisms in Stacks 0BYD, serving the plane-hypersurface genus input below the recorded direct-image stability alteration route. Current latest thm-sf-ctf-stability proof read; no change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "Generic natural module-to-abelian comparison, with degree-zero normalization, needed on X and Y; no such comparison in this unit."
+   },
+   {
+    "node": "lem-sc-closed-pushforward-boundary-naturality",
+    "why": "Generic normalized closed-pushforward isomorphism of delta-functors; used only for its natural components and degree-zero identity."
+   },
+   {
+    "node": "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+    "why": "Identifies induced multiplication endomorphisms with the specified scalar actions; no such statement in this unit."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives theorem for the arbitrary module-sheaf category."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic derived-functor exact sequence and canonical boundaries in the module-valued target; no geometric route replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-sc-closed-pushforward-boundary-naturality",
+  "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-682d32a43",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-682d32a43 (reviewer sub-agent of L); spot-checked: First stage-1 split of lem-sfb-closed-immersion-cokernel-cohomology. Live is still unsplit and there is no repair note, so this is not a re-split order. Statement, stmt_deps and blueprint are unchanged against live, there are no new nodes, and proof_deps equals the union of the step uses. The 0BYD source uses the quasi-coherent relative-affine comparison; the item is stated for arbitrary modules and instead uses 02UV (any abelian sheaf, cohomology.tex l.3447) and 03FD (any ringed site, sites-cohomology.tex l.1862). Both apply without quasi-coherence, so this is a valid generalization. Step 1: c = a_Y^-1 t^-1 a_X. pqf-def-cohomology is built on def-sc-ringed-space-module-cohomology, and def-sc-topological-abelian-cohomology equals def-sc-zariski-cohomology, so the cited nodes compose. The closed-pushforward node states its normalized unique δ-morphism and that every component is an isomorphism; c is natural and c^0 is the equality of sections. Step 2: the scalar-endomorphism lemma on X and Y plus 'i over k' gives k-linearity; marking it elementary is justified. Step 3: enough injectives holds for any ringed space; Γ into Mod_Γ(O_X) is left exact because kernels are sectionwise; the universal δ-functor lemma allows any abelian target; its boundaries are the triangle boundaries of def-sc-module-cohomology-boundary by construction (015B/05TE). Step 4: elementary; the two zero-ended segments use exactly H^0(L), H^1(L), H^1(E), H^2(E) and never H^2(L). Edge cases checked: i = id, Y = ∅, a k-point. The five generic off-unit tool_uses are accepted. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionCokernelCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_cokernel_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.closedImmersionCokernelArrow",
+   "AlgebraicGeometry.Scheme.Modules.closedImmersionCokernelBoundary",
+   "AlgebraicGeometry.Scheme.Modules.closedImmersion_cokernel_cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionCokernelCohomology.lean",
+  "statement": "theorem closedImmersion_cokernel_cohomology (i : Y ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] : ∃ c : ∀ (q : ℕ) (M : Y.Modules), scalarCohomology (X ↘ Spec (.of k)) ((pushforward i).obj M) q ≃ₗ[k] scalarCohomology (Y ↘ Spec (.of k)) M q, (∀ (q : ℕ) (M : Y.Modules) (x : scalarCohomology (X ↘ Spec (.of k)) ((pushforward i).obj M) q), c q M x = moduleCohomologyEdgeMap i M q x) ∧ (∀ (q : ℕ) (M N : Y.Modules) (a : M ⟶ N) (x : scalarCohomology (X ↘ Spec (.of k)) ((pushforward i).obj M) q), c q N (scalarCohomologyMap (X ↘ Spec (.of k)) ((pushforward i).map a) q x) = scalarCohomologyMap (Y ↘ Spec (.of k)) a q (c q M x)) ∧ (∀ (M : Y.Modules) (s : ((pushforward i).obj M).val.obj (op ⊤)), c 0 M ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app ((pushforward i).obj M) s) = (RingedSpace.globalSectionsFunctor Y.toRingedSpace).toRightDerivedZero.app M (M.val.map (homOfLE (by simp : ⊤ ≤ i ⁻¹ᵁ ⊤)).op s)) ∧ (∀ (L E : X.Modules) (M : Y.Modules) (f : L ⟶ E) (u : E ⟶ (pushforward i).obj M) (w : f ≫ u = 0) (hS : (ShortComplex.mk f u w).ShortExact), Function.Injective (scalarCohomologyMap (X ↘ Spec (.of k)) f 0) ∧ (∀ q : ℕ, Function.Exact (scalarCohomologyMap (X ↘ Spec (.of k)) f q) (closedImmersionCokernelArrow i u q (c q M)) ∧ Function.Exact (closedImmersionCokernelArrow i u q (c q M)) (closedImmersionCokernelBoundary i f u w hS q (c q M)) ∧ Function.Exact (closedImmersionCokernelBoundary i f u w hS q (c q M)) (scalarCohomologyMap (X ↘ Spec (.of k)) f (q + 1))) ∧ ((IsZero (scalarCohomology (X ↘ Spec (.of k)) L 0) ∧ IsZero (scalarCohomology (X ↘ Spec (.of k)) L 1) ∧ IsZero (scalarCohomology (X ↘ Spec (.of k)) E 1) ∧ IsZero (scalarCohomology (X ↘ Spec (.of k)) E 2)) → Function.Bijective (closedImmersionCokernelArrow i u 0 (c 0 M)) ∧ Function.Bijective (closedImmersionCokernelBoundary i f u w hS 1 (c 1 M))))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1f996b09",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read the item node, all 9 stmt_dep records (byte-equal to live; the item differs only in +3 landed stmt_deps and the new lean record), the module and report (Worker report and Second reading present), and the dep sources ModuleCohomologyFMap/ModuleCohomologyBoundary/FieldLinearModuleCohomologyOperations. The comparison c is pinned to the canonical moduleCohomologyEdgeMap (Stacks 01F7), which is a true k-linear iso because i_* is exact and i is over k; the naturality and degree-0 section clauses are correct. Exactness: initial injectivity plus all three positions for every q, with the boundary being moduleCohomologyBoundary of the specified S composed with c.symm; the four-vanishing bijectivity is as in the node. No extra hypotheses; the k/scheme universe is forced by Spec. Helpers are fully specified, the only sorry is in the proof, the statement is verbatim, docstrings give source and blueprint, no pro-étale substitute. No compile reproduced, no fixes."
+ }
+}

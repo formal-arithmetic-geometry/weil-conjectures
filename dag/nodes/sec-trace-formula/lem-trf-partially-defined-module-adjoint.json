@@ -8,11 +8,56 @@
   "place": "Tag 0793, lemma-partially-defined-adjoint (the additive specialization)."
  },
  "stmt_deps": [
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the stipulated $L_P$ and natural bijections $\\theta_{P,X}$ for $P\\in\\mathcal P$. Put $i_P=\\theta_{P,L_P}(\\mathrm{id}_{L_P})$, as in the presentation lemma. For an arbitrary $B\\in\\mathcal B$, apply [lem-trf-partial-adjoint-generator-presentation]. It supplies a cokernel presentation $P_2\\xrightarrow{d}P_1\\xrightarrow{q}B$, with both terms in $\\mathcal P$, and the relation $D:L_{P_2}\\to L_{P_1}$ characterized by $\\theta_{P_2,L_{P_1}}(D)=i_{P_1}\\circ d$. Its conclusions give $\\theta_{P,X}(0)=0$ and $\\theta_{P_2,X}(a\\circ D)=\\theta_{P_1,X}(a)\\circ d$ for every $X,a$. The hypotheses are precisely the given epimorphic cover and natural corepresentations; projectivity is not needed.",
+   "uses": [
+    "lem-trf-partial-adjoint-generator-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof: first paragraph and the exact presentation in the second paragraph."
+   }
+  },
+  {
+   "text": "Take a cokernel $c:L_{P_1}\\to C_B$ of $D$, which exists in $\\mathcal A$ by [def-sp-abelian]. Apply [lem-trf-cokernel-corepresenting-bijection] with $L_i=L_{P_i}$ and $\\theta_{i,X}=\\theta_{P_i,X}$. Step 1 gives its cokernel hypothesis for $q$, its zero compatibility for both $\\theta_i$, and its relation formula for $D$; target naturality is part of the stipulated $\\theta$. The conclusion supplies bijections $\\psi_{B,X}:\\operatorname{Hom}_{\\mathcal A}(C_B,X)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal B}(B,R(X))$, characterized by $\\psi_{B,X}(v)\\circ q=\\theta_{P_1,X}(v\\circ c)$ and natural in $X$. Thus the required covariant Hom functor is corepresentable for every $B$.",
+   "uses": [
+    "def-sp-abelian",
+    "lem-trf-cokernel-corepresenting-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof: last paragraph, the cokernel and the displayed Hom identifications."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-right-adjoint-from-objectwise-representability] with $\\mathcal C=\\mathcal A^{\\mathrm{op}}$, $\\mathcal D=\\mathcal B^{\\mathrm{op}}$, and $F=R^{\\mathrm{op}}$. For $Y=B^{\\mathrm{op}}$, its presheaf $X\\mapsto\\operatorname{Hom}_{\\mathcal B^{\\mathrm{op}}}(R^{\\mathrm{op}}X,B^{\\mathrm{op}})$ is exactly $A\\mapsto\\operatorname{Hom}_{\\mathcal B}(B,R(A))$, represented on $\\mathcal A^{\\mathrm{op}}$ by $C_B^{\\mathrm{op}}$ through step 2. The cited criterion supplies a right adjoint $G:\\mathcal B^{\\mathrm{op}}\\to\\mathcal A^{\\mathrm{op}}$ and its natural Hom bijections. Reversing arrows gives $L=G^{\\mathrm{op}}:\\mathcal B\\to\\mathcal A$ and $\\operatorname{Hom}_{\\mathcal A}(L(B),A)\\cong\\operatorname{Hom}_{\\mathcal B}(B,R(A))$ natural in both variables, as required. Functor categories may be formed in a containing universe as in the cited criterion.",
+   "uses": [
+    "lem-sfb-right-adjoint-from-objectwise-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0793, lemma-partially-defined-adjoint, proof: final sentence, everywhere-defined adjoint; Categories Tag 0A8B, lemma-adjoint-exists, applied to opposite categories"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-partial-adjoint-generator-presentation",
+  "def-sp-abelian",
+  "lem-trf-cokernel-corepresenting-bijection",
+  "lem-sfb-right-adjoint-from-objectwise-representability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0793, lemma-partially-defined-adjoint, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +93,45 @@
    "results": "8 hits: CategoryTheory.LiftLeftAdjoint.constructLeftAdjoint, CategoryTheory.LiftLeftAdjoint.constructLeftAdjointObj, CategoryTheory.Functor.partialLeftAdjoint, CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_apply, CategoryTheory.abelianOfAdjunction, CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv, CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint, CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint. Digest a09271053a04aacd. Full outputs retained in lem-trf-partially-defined-module-adjoint-search-4.txt.",
    "date": "2026-10-19",
    "verdict": "no match: PartialAdjoint.lean defines the domain of a partial adjoint and closes it under colimits, but does not give the abelian epimorphic-generating-class extension criterion. Lifting/Left.lean requires two full adjunctions and a regular-epimorphic counit; these are not the present hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "isRightAdjoint_of_leftAdjointObjIsDefined|partially.?defined.?adjoint|adjunctionOfEquivLeft",
+   "results": "14 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean, Mathlib/CategoryTheory/Adjunction/Comma.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean. Digest a04aeb6061c362b7. ",
+   "date": "2026-10-22",
+   "verdict": "no match: read PartialAdjoint.lean 49--60, 135--147, 180--191 and Adjunction/Basic.lean 591--624. These supply objectwise representability and colimit closure but not the epimorphic-generator criterion; Lifting/Left requires full adjunctions. Other hits concern transfer, special module adjunctions, or homological evaluation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a left adjoint from an epimorphic generating class by a cokernel presentation",
+   "results": "8 hits: CategoryTheory.LiftLeftAdjoint.constructLeftAdjoint, CategoryTheory.AbelianOfAdjunction.hasCokernels, CategoryTheory.Functor.preservesEpimorphsisms_of_adjunction, CategoryTheory.Functor.preservesEpimorphisms_of_isLeftAdjoint, CategoryTheory.Functor.preservesEpimorphisms_of_adjunction, CategoryTheory.Adjunction.mapProjectivePresentation, CategoryTheory.Limits.cokernel.ofEpi, CategoryTheory.LiftLeftAdjoint.constructLeftAdjointObj. Digest c60e3c810cebd437. ",
+   "date": "2026-10-22",
+   "verdict": "no match: read PartialAdjoint.lean 49--60, 135--147, 180--191 and Adjunction/Basic.lean 591--624. These supply objectwise representability and colimit closure but not the epimorphic-generator criterion; Lifting/Left requires full adjunctions. Other hits concern transfer, special module adjunctions, or homological evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftAdjointObjIsDefined",
+   "results": "12 hits: CategoryTheory.Functor.leftAdjointObjIsDefined, CategoryTheory.Functor.partialLeftAdjoint, CategoryTheory.Functor.leftAdjointObjIsDefined_of_adjunction, CategoryTheory.Functor.isRightAdjoint_of_leftAdjointObjIsDefined_eq_top, CategoryTheory.Functor.isRightAdjoint_iff_leftAdjointObjIsDefined_eq_top, CategoryTheory.Functor.partialLeftAdjoint_obj, CategoryTheory.Functor.leftAdjointObjIsDefined_iff, CategoryTheory.Functor.leftAdjointObjIsDefined_colimit. Digest 046b21778211941a. ",
+   "date": "2026-10-22",
+   "verdict": "no match: read PartialAdjoint.lean 49--60, 135--147, 180--191 and Adjunction/Basic.lean 591--624. These supply objectwise representability and colimit closure but not the epimorphic-generator criterion; Lifting/Left requires full adjunctions. Other hits concern transfer, special module adjunctions, or homological evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor between abelian categories has a left adjoint if Hom from each object in an epimorphic generating class is corepresentable",
+   "results": "8 hits: CategoryTheory.abelianOfAdjunction, CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj, CategoryTheory.Functor.leftAdjointObjIsDefined_iff, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, CategoryTheory.Abelian.freyd_mitchell, CategoryTheory.AbelianOfAdjunction.hasCokernels, CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating. Digest 1e6b5ecf35b4cc80. ",
+   "date": "2026-10-22",
+   "verdict": "no match: read PartialAdjoint.lean 49--60, 135--147, 180--191 and Adjunction/Basic.lean 591--624. These supply objectwise representability and colimit closure but not the epimorphic-generator criterion; Lifting/Left requires full adjunctions. Other hits concern transfer, special module adjunctions, or homological evaluation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Corepresentability of Hom on a quotient follows by taking the cokernel of the partial left adjoint on a two term presentation",
+   "results": "8 hits: CategoryTheory.OrthogonalReflection.corepresentableBy, CategoryTheory.Functor.instIsCorepresentableCompObjOppositeTypeCoyonedaOpObjLeftAdjointObjIsDefined, HomologicalComplex.evalCompCoyonedaCorepresentable, HomologicalComplex.instIsCorepresentableCompEvalObjOppositeFunctorTypeCoyonedaOp, HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle, CategoryTheory.Functor.partialLeftAdjointObj, CategoryTheory.Adjunction.corepresentableBy. Digest 8bde8da8bebdc6ce. ",
+   "date": "2026-10-22",
+   "verdict": "no match: read PartialAdjoint.lean 49--60, 135--147, 180--191 and Adjunction/Basic.lean 591--624. These supply objectwise representability and colimit closure but not the epimorphic-generator criterion; Lifting/Left requires full adjunctions. Other hits concern transfer, special module adjunctions, or homological evaluation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-continuous-cocontinuous-derived-shriek",
@@ -84,5 +164,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-partially-defined-module-adjoint",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split request: retain the statement exactly and replace the 4018-character seven-step proof by assembly of two new statement-only unsplit nodes of comparable scope. The generator-presentation and transported-relation node carries old steps 1--4; the normalized cokernel Hom-bijection node carries old steps 5--6. Old step 7 remains, applying the existing objectwise representability criterion to the opposite functor. Full old arguments are retained verbatim in the report for the future workers. Executed and read logged Mathlib searches for both new statements, checked duplicate sources and the variance of all Hom formulas. No Lean written or compiled. Current landing-return repair: compared the retained delivery with the current shared DAG; only proof, proof_deps and split_report differ. Re-read all existing cited statements and source Tags 0793/0A8B; all hypotheses and verbatim citation quotes still apply. Rebuilt the two-node re-split on the current server base, preserving the prior search log and full arguments. Latest return at 166e6af1775: repeated the current-DAG comparison, verified the released repair order, retained both new nodes and every logged search, and made i_P explicit in assembly step 1. Initial current-base dry run passed at 1d1e8e7fec0; the final dry run follows the updated report. Repair of the 2026-10-22 16:28 UTC landing refusal at dd192ccaabd: compared every field against the current shared DAG, re-read all four current cited statements and Stacks 0793/0A8B, and retained both searched statement-only nodes and all original proof material. The initial current-base dry run passed at 14304d63741. Assembly step 2 now explicitly identifies L_i and theta_i and checks the cokernel, zero, relation and naturality hypotheses before invoking the second node. The delivery tool rebuilds on the current server DAG; final validation and push follow.",
+  "blueprint": "Auxiliary ordinary module lower-shriek construction in the inherited ancestry from lem-trf-local-term-locality, Proof (1)--(2), through lem-trf-continuous-cocontinuous-derived-shriek: the representing objects on free sheaf generators extend to all module sheaves. Steps 1--4 supply the partial adjoint and generator presentation, steps 5--6 the representing cokernel, and step 7 the global adjoint. The unit and chapter route are unchanged. Repair: new step 1 delegates old steps 1--4 to lem-trf-partial-adjoint-generator-presentation; step 2 delegates old steps 5--6 to lem-trf-cokernel-corepresenting-bijection; step 3 retains old step 7. This refines the ordinary lower-shriek supporting input, with no change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-9c38c19ce",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-9c38c19ce (reviewer sub-agent of L); spot-checked: I read in full Stacks homology.tex Tag 0793, lemma-partially-defined-adjoint (lines 7387-7454), and Tag 0A8B as used through lem-sfb-right-adjoint-from-objectwise-representability. Compared with the previously PASSed head dd192ccaabd6, both new nodes are byte-identical; the only changes are item step 2, which now matches L_i=L_{P_i}, theta_i=theta_{P_i} and every hypothesis of node 2, and the split_report summary. I re-checked everything on its merits. Node 1, lem-trf-partial-adjoint-generator-presentation (old steps 1-4): theta(a)=R(a)i_P follows from naturality, and theta(0)=0 from additivity. For the presentation, q is the cokernel of d=k∘r: def-sp-abelian makes q the cokernel of some t, t factors through k, and r is epi, so h∘d=0 gives h∘t=0. No projectivity is used. D is unique by bijectivity, and theta_2(aD)=theta_1(a)d. Node 2, lem-trf-cokernel-corepresenting-bijection (old steps 5-6): psi is well defined and its inverse is well defined, using theta_2 injective with theta_2(0)=0. Naturality follows by cancelling q. R need not be additive here, because theta(0)=0 is a hypothesis. Item: step 1 applies node 1 under the item's exact hypotheses. Step 2 applies def-sp-abelian (cokernel exists) and node 2. Step 3 applies the criterion to R^op on A^op→B^op; the presheaf variance and the H(a)(b)=b∘F(a) action match psi's naturality, and G^op is the left adjoint. Edge cases checked: B=0, d=0, d invertible, R=id, R=0, and P=Ob(B). Re-split rule: old steps 1-4 and 5-6 become two nodes of comparable size; old step 7 remains; nothing was shortened. Duplicate check: rg -L for 0793, partially-defined and corepresent finds no duplicate; the only other Tag 0793 hit is the parent citer lem-trf-continuous-cocontinuous-derived-shriek. B1-B9 are fine. No SGA is cited and there are no tool_uses. The earlier returns were landing refusals of an unpromoted side completion, not faults in the content; maintainer note: please promote this time."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PartiallyDefinedModuleAdjoint",
+  "declaration": "CategoryTheory.Functor.isRightAdjoint_of_epi_generating_class",
+  "file": "lean/Sheaf/CategoryTheory/PartiallyDefinedModuleAdjoint.lean",
+  "statement": "theorem isRightAdjoint_of_epi_generating_class {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [Abelian B] (R : A ⥤ B) [R.Additive] (P : Set B) (hcover : ∀ Y : B, ∃ Q : B, Q ∈ P ∧ ∃ q : Q ⟶ Y, Epi q) (hrep : ∀ Q ∈ P, ∃ LQ : A, ∃ theta : ∀ X : A, (LQ ⟶ X) ≃ (Q ⟶ R.obj X), ∀ (X X' : A) (f : X ⟶ X') (a : LQ ⟶ X), theta X' (a ≫ f) = theta X a ≫ R.map f) : R.IsRightAdjoint",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1d6de591",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read node, Stacks homology.tex Tag 0793 (7387-7454), both stmt_deps (Mathlib Abelian, Functor.Additive), Mathlib IsRightAdjoint, delivered module and report. Clause match: abelian A,B with independent universes u1 u2 v1 v2; [R.Additive] = node's additive specialization; P : Set B; hcover gives an epi Q -> Y for every Y; hrep gives exists LQ, exists theta : forall X, (LQ ⟶ X) ≃ (Q ⟶ R.obj X) with covariant naturality; conclusion R.IsRightAdjoint, correct orientation. Edge cases: empty P excluded by zero object, zero targets allowed, no hidden universe/projectivity/exactness assumption. lean.statement verbatim in file; node identical to live except lean; stmt_deps unchanged; record keys match landed records; not in route-pivot-dropped; first delivery; no duplicate in Mathlib/project; no defs, sorry only, docstrings carry source place, blueprint tag and 7 proof steps; Worker report and Second reading by Q29 present. Advisory: plain Yoneda/PartialAdjoint imports serve the proof deps only. No compile (no file changed)."
+ }
 }

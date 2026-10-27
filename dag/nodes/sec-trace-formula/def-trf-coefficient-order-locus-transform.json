@@ -1,0 +1,153 @@
+{
+ "id": "def-trf-coefficient-order-locus-transform",
+ "kind": "definition",
+ "title": "Coefficient order locus and regular coefficient-transform data",
+ "status": "split",
+ "statement": "Let $k$ be a field, $X,M$ schemes, $p:M\\to\\operatorname{Spec}k$, $i:X\\to M$, $a\\in X$, $m,n,s,Q\\in\\mathbf N$, $\\alpha:\\{0,\\ldots,s-1\\}\\to\\mathbf N^n$, and $D$ a specified regular Hilbert coefficient datum for these parameters [def-trf-regular-hilbert-coefficient-datum], with chart $e:U\\to M$, coefficient scheme $j:N\\hookrightarrow U$ and coefficients $c_{l\\gamma}$. Put $d_l=|\\alpha_l|$. Its coefficient order locus is the subset $S_D=\\{z\\in N:\\operatorname{germ}_z(c_{l\\gamma})\\in\\mathfrak m_z^{d_l-|\\gamma|}\\text{ for every }l,\\gamma\\text{ with }|\\gamma|<d_l\\}$, where $\\mathfrak m_z$ is the maximal ideal of $\\mathcal O_{N,z}$. For an empty vertex list this is all of $N$.\nLet $J\\subset\\mathcal O_N$ be a quasi-coherent ideal sheaf defining a closed subscheme of $N$ [def-sbc-closed-immersion-ideal-sheaf], and let $C\\subset U$ be its image under $j$. Write $\\pi:U'\\to U$ for the blowup of $C$ [def-nagata-global-blowup], $X'\\to U'$ for the scheme-theoretic strict transform of $X\\times_M U\\to U$, and $j':N'\\to U'$ for the scheme-theoretic strict transform of $j$ [def-nagata-strict-transform]. Write $\\rho:N'\\to N$ for its canonical map. For any $x'\\in X'$, a regular coefficient transform of $D,J$ at $x'$ consists of a regular Hilbert coefficient datum $D'$ for $X'\\to U'$ at $x'$ over $k$, with the same $m,n,s,\\alpha,Q$, together with a map $q:N_{D'}\\to N'$ whose square with $N_{D'}\\hookrightarrow U_{D'}$, $j':N'\\to U'$ and $e_{D'}:U_{D'}\\to U'$ is cartesian, and a regular function $h\\in\\Gamma(N_{D'},\\mathcal O_{N_{D'}})$. The pullback of the ideal of $C$ along $N_{D'}\\to U_{D'}\\to U'\\to U$ is required to be the principal ideal $(h)$. For every $l,\\gamma$, its coefficients satisfy $h^{d_l-|\\gamma|}c'_{l\\gamma}=(\\rho\\circ q)^*c_{l\\gamma}$ when $|\\gamma|<d_l$, and $c'_{l\\gamma}=h^{|\\gamma|-d_l}(\\rho\\circ q)^*c_{l\\gamma}$ otherwise. These are specifications of data and properties; neither existence of such a transform nor a Hilbert-function equality criterion is asserted.",
+ "stmt_deps": [
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13; BM 1997 Remark 9.5(1) (coefficient order locus) and proof of Theorem 9.4, printed p.278 (regular transform data). Exact existing definitions in Sheaf.AlgebraicGeometry.FormalCoefficientTransformCriterion, lines 42--50 and 299--323."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Order locus of weighted regular Hilbert coefficient functions and data for their regular transform on the strict transform of the coefficient scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MvPowerSeries.le_weightedOrder_map\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(φ : R →+* S) : f.weightedOrder w ≤ (f.map φ).weightedOrder w\", \"doc\": \"For any ring homomorphism $\\\\varphi : R \\\\to S$ and multivariate power series $f$ over $R$, the weighted order of $f$ with respect to a weight function $w$ is less than or equal to the weighted order of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instPartialOrder\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": PartialOrder (IdealSheafData X)\", \"doc\": \"For any scheme $X$, the set of ideal sheaf data on $X$ is endowed with a partial order. Given two ideal sheaf data $\\\\mathcal{I}$ and $\\\\mathcal{J}$, we define $\\\\mathcal{I} \\\\le \\\\mathcal{J}$ if for every\"}\n  {\"name\": \"MvPowerSeries.weightedOrder\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(f : MvPowerSeries σ R) : ℕ∞\", \"doc\": \"For a multivariate power series $ f $ over a semiring $ R $ with variables indexed by $ \\\\sigma $ and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, the weighted order of $ f $ is the minimal natural\"}\n  {\"name\": \"MvPowerSeries.weightedOrder_toSubring\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"(p : MvPowerSeries σ R) (T : Subring R) (hp : ∀ n, p.coeff n ∈ T) :\\n  (p.toSubring T hp).weightedOrder w = p.weightedOrder w\", \"doc\": \"For a multivariate power series $ p $ over a ring $ R $ with variables indexed by $ \\\\sigma $, if all coefficients of $ p $ lie in a subring $ T $ of $ R $, then the weighted order of $ p $ with respec\"}\n  {\"name\": \"MvPowerSeries.coeff_mul_prod_one_sub_of_lt_weightedOrder\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{R ι : Type*} [CommRing R] (d : σ →₀ ℕ) (s : Finset ι) (f : MvPowerSeries σ R) (g : ι → MvPowerSeries σ R)\\n  (h : ∀ i ∈ s, (weight w d) < weightedOrder w (g i)) : coeff d (f * ∏ i ∈ s, (1 - g i)) = coeff d f\", \"doc\": \"For a commutative ring $ R $ and variables indexed by $ \\\\sigma $, if each power series $ g_i $ has weighted order strictly greater than the weighted order of a monomial $ d $, then the coefficient of \"}\n  {\"name\": \"MvPowerSeries.coeff_mul_left_one_sub_of_lt_weightedOrder\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{d : σ →₀ ℕ} (h : (weight w d) < g.weightedOrder w) : coeff d (f * (1 - g)) = coeff d f\", \"doc\": \"For multivariate power series $ f $ and $ g $ over a semiring $ R $ with variables indexed by $ \\\\sigma $, and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, if the weighted order of $ g $ (the minim\"}\n  {\"name\": \"MvPowerSeries.coeff_mul_right_one_sub_of_lt_weightedOrder\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{d : σ →₀ ℕ} (h : (weight w d) < g.weightedOrder w) : coeff d ((1 - g) * f) = coeff d f\", \"doc\": \"For multivariate power series $ f $ and $ g $, if the weighted order of $ g $ is greater than the weight of a monomial $ d $, then the coefficient of $ d $ in the product $ (1 - g) \\\\cdot f $ equals th\"}\n  {\"name\": \"MvPowerSeries.weightedOrder_monomial\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Order\", \"type\": \"{d : σ →₀ ℕ} {a : R} [Decidable (a = 0)] : weightedOrder w (monomial d a) = if a = 0 then (⊤ : ℕ∞) else weight w d\", \"doc\": \"For a multivariate power series over a semiring $ R $ with variables indexed by $ \\\\sigma $, and a weight function $ w : \\\\sigma \\\\to \\\\mathbb{N} $, the weighted order of the monomial with coefficient $ a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; weighted power-series orders and ideal-sheaf ordering are different notions. Reuse the two exact landed project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "RegularHilbertCoefficientDatum.orderLocus, RegularCoefficientTransform",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'RegularHilbertCoefficientDatum.orderLocus'\n",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match; both exact declarations are in the landed project module."
+  },
+  {
+   "tool": "grep",
+   "query": "orderLocus|RegularCoefficientTransform|coefficient.*[Oo]rder AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'RegularCoefficientTransform|RegularHilbertCoefficientDatum.orderLocus' dag/nodes; rg -n 'orderLocus|RegularCoefficientTransform' lean/WeilConjectures lean/Sheaf; rg -n 'coefficient.*[Oo]rder[Ll]ocus|RegularCoefficientTransform' lean/.lake/packages/mathlib/Mathlib; python3 tools/blueprint_refs.py search 'coefficient order locus'",
+   "results": "0 blueprint nodes match 'coefficient order locus'\ndag/nodes/sec-trace-formula/lem-trf-formal-coefficient-transform-criterion.json\nlean/Sheaf/AlgebraicGeometry/FormalCoefficientTransformCriterion.lean:42:def RegularHilbertCoefficientDatum.orderLocus\nlean/Sheaf/AlgebraicGeometry/FormalCoefficientTransformCriterion.lean:132:            HilbertSamuel.function (i ≫ p) a) ↔ y ∈ D.j '' D.orderLocus) := by\nlean/Sheaf/AlgebraicGeometry/FormalCoefficientTransformCriterion.lean:299:structure RegularCoefficientTransform\nlean/Sheaf/AlgebraicGeometry/FormalCoefficientTransformCriterion.lean:353:    (hC : (J.support : Set D.N) ⊆ D.orderLocus) :\nlean/Sheaf/AlgebraicGeometry/FormalCoefficientTransformCriterion.lean:403:        Nonempty (RegularCoefficientTransform D J x')) := by\nNo matches in WeilConjectures or Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "Exact definitions exist only in FormalCoefficientTransformCriterion; the sole DAG record carrying them is a theorem node. Add a definition node with existing:true, as the independent return requires; do not redefine them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-common-power-hilbert-marking",
+  "date": "2026-10-23",
+  "group": "Q34"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Coefficient order locus and the regular coefficient-transform data in the common-power marking statement, especially the equality and persistence clauses; extracted from the already landed formal coefficient-transform criterion module.",
+   "via": [
+    "lem-trf-common-power-hilbert-marking",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalCoefficientTransformCriterion",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.RegularHilbertCoefficientDatum.orderLocus",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.RegularHilbertCoefficientDatum.orderLocus",
+   "AlgebraicGeometry.HilbertCoefficient.RegularCoefficientTransform"
+  ],
+  "statement": "def RegularHilbertCoefficientDatum.orderLocus\n    {k : Type u} [Field k] {X M : Scheme.{u}}\n    {p : M ⟶ Spec (.of k)} {i : X ⟶ M} {a : X} {m n s Q : ℕ}\n    {α : Fin s → Fin n →₀ ℕ} (D : RegularHilbertCoefficientDatum p i a m n s α Q) :\n    Set D.N",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2/H12 repair of returned immutable head d847f1bff96d: these are the plain definition and structure already landed in the unchanged module; neither is constructed from coefficient_regular_permissible or coefficient_equality_germ. Both are recorded here as definitions, without duplicating their code. The structure includes all coefficient identities, including degrees at least the vertex degree; it asserts no existence or Hilbert-function equality."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24a7de3d8",
+  "group": "Q34",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24a7de3d8",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Re-delivery of RETURN d847f1bff96d (H2/H12 theorem stmt_dep). The Lean module is byte-identical (sha256 61e4adaf). The item record differs from live only in stmt_deps (theorem node replaced by new def node def-trf-coefficient-order-locus-transform; flag and controlled-transform def nodes kept) and lean; the theorem stays in proof_deps. New node: existing:true on RegularHilbertCoefficientDatum.orderLocus and RegularCoefficientTransform in the unchanged landed FormalCoefficientTransformCriterion. Its TeX matches the Lean field by field (order locus; datum, supportMap/square, principal exceptional, coefficient identities in both degree ranges). stmt_deps equal the cited ids, all §5 fields are present, lean.statement is verbatim, no duplicate node exists, plain defs only. Item clauses re-read: coherence, cosupport=orderLocus, s=0 zero ideal, germ ambient equality, fraction-free charts identity via controlledTransformIdeal, transform nonincrease/equality on N'/persistence/off-centre isos, locally-constant general centre. Edge cases s=0, b=weight, empty centre, nonclosed points. Advisories: hH global on X; pqf-def-coherent record is a finite-type helper while the item correctly uses RingedSpace.IsCoherent (01BV); the second reading is a self-audit. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T092846-L-3474365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_boundary_chart",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_equality_germ",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_field_extension",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_free_variable",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_permissible_chart",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_boundary",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_etale",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_line",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_permissible"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_boundary_chart",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_equality_germ",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_free_variable",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_permissible_chart",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_boundary",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_etale",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_line",
+   "AlgebraicGeometry.HilbertCoefficient.coefficient_regular_permissible"
+  ]
+ }
+}

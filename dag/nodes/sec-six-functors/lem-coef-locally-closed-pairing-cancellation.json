@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-locally-closed-pairing-cancellation",
+ "kind": "statement",
+ "title": "Cancellation of the internal-adjunction pairing equation",
+ "statement": "For finite commutative rings A,B and an open j followed by a closed g, let I be the specified internalAdjunction. Assume I and the ordinary, evaluation, exceptional and compact comparison factors are invertible. From PairingChangeEquation, precomposing by scalar extension of inv I gives the displayed evaluation comparison. This assertion is only the categorical equality, with no constructibility or geometric finiteness conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof paragraph 4, Cancellation of the internal-adjunction pairing equation"
+ },
+ "stmt_deps": [
+  "def-coef-internal-adjunction-comparison-maps"
+ ],
+ "proof": [
+  {
+   "text": "Expand PairingChangeEquation. Expand the functor map of the composite, reassociate, precompose by F(inv I), and apply F(inv I) followed by F(I) = identity. The resulting equation is exactly the displayed composite. No geometric argument is used.",
+   "uses": [
+    "def-coef-normalized-comparison-word"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-comparison-word"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof paragraph 4, Cancellation of the internal-adjunction pairing equation",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functor maps preserve inverse cancellation of an invertible morphism in a composite pairing equation",
+   "results": "Functor.map_inv_hom_assoc and seven other generic cancellation results; none identifies the specified geometric word.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inv_comp_eq\"",
+   "results": "Five hits including CategoryTheory.IsIso.inv_comp_eq; generic categorical cancellation only.",
+   "date": "2026-10-25",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteCoefficientDirectImageMap_comp|PairingChangeEquation",
+   "results": "0 Mathlib hits. Local direct-image composition theorem gives the required factorization, not its locally closed finite-stage specialization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyClosedHomGenerator",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 4, Cancellation of the internal-adjunction pairing equation",
+   "via": [
+    "lem-coef-locally-closed-hom-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "merged_into": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyClosedPairingCancellation",
+  "file": "lean/Sheaf/Paper/LocallyClosedPairingCancellation.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoefficientPairingChange.pairingCancellation",
+  "statement": "theorem pairingCancellation\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    {S Z X : Scheme.{u}} (φ : A →+* B) (g : Z ⟶ X) [IsClosedImmersion g]\n    (j : S ⟶ Z) [IsOpenImmersion j]\n    (L : DerivedCategoryModule A S) (M : DerivedCategoryModule A X)\n    [IsIso (internalAdjunction A g j L M)]\n    [IsIso (ordinaryComparison φ g j\n      (((derivedHom (ModuleCat A) S).obj (op L)).obj ((exceptional A g j).obj M)))]\n    [IsIso (evaluationComparison φ S L ((exceptional A g j).obj M))]\n    [IsIso (etaleShriekLocallyClosedCoefficientMap φ g j M)]\n    [IsIso (compactComparison φ g j L)]\n    (hp : PairingChangeEquation φ g j L M\n      (asIso (etaleShriekLocallyClosedCoefficientMap φ g j M))) :\n    MappedComparisonEquation (scalarExtension φ X) (star B g j)\n    (derivedHom (ModuleCat B) X) (internalAdjunction A g j L M)\n    (ordinaryComparison φ g j\n      (((derivedHom (ModuleCat A) S).obj (op L)).obj ((exceptional A g j).obj M)))\n    (evaluationComparison φ S L ((exceptional A g j).obj M))\n    (((derivedHom (ModuleCat B) S).obj (op ((scalarExtension φ S).obj L))).map\n      (etaleShriekLocallyClosedCoefficientMap φ g j M))\n    (compactComparison φ g j L) ((scalarExtension φ X).obj M)\n    (internalAdjunction B g j ((scalarExtension φ S).obj L) ((scalarExtension φ X).obj M))\n    (evaluationComparison φ X ((shriek A g j).obj L) M)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "mathlib": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T203559-L-2830098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

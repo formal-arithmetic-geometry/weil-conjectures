@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-native-ringed-restriction-divisibility",
+ "kind": "statement",
+ "title": "Native Ringed Restriction Divisibility",
+ "status": "split",
+ "statement": "For a dense equivalence F:C→D of sites, a commutative ring sheaf R on D, a compatible global section a, U in C and a compatible section s on D/FU, s is locally divisible by a on a covering sieve if and only if its restricted section on C/U is locally divisible by the restricted a. This holds for zero sections, arbitrary covering sieves, and independent site and coefficient universes. Dependencies: [lem-pur-native-ringed-restriction-localization], [def-pur-ringed-principal-local-tests], [lem-pur-native-ringed-restriction-slices].",
+ "stmt_deps": [
+  "lem-pur-native-ringed-restriction-localization",
+  "def-pur-ringed-principal-local-tests",
+  "lem-pur-native-ringed-restriction-slices"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "Local principal divisibility is preserved and reflected by restriction. Pull back a covering sieve along the dense equivalence for one direction. For the converse push it forward; a resulting arrow factors through an image arrow, and naturality transports its chosen quotient along that factor. This works also for the zero generator and empty covers. Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-localization",
+    "def-pur-ringed-principal-local-tests",
+    "lem-pur-native-ringed-restriction-slices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-native-ringed-restriction-localization",
+  "def-pur-ringed-principal-local-tests",
+  "lem-pur-native-ringed-restriction-slices"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a dense equivalence F:C→D of sites, a commutative ring sheaf R on D, a compatible global section a, U in C and a compatible section s on D/FU, s is locally divisible by a on a covering sieve if and only if its restricted section on C/U is locally divisible by the restricted a. This holds for zero sections, arbitrary covering sieves, and independent site and coefficient universes.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.functorPushforward_mem_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {D : Type u_2}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {G : CategoryTheory.Functor C D}\\n  [self : CategoryTheory.Functor.IsDenseSubsite J\", \"doc\": \"For a dense subsite functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between categories equipped with Grothendieck topologies $ J $ and $ K $, a sieve $ S $ on an object $ X \\\\in \\\\mathcal{C} $ belongs to $ \"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_of_equivalence\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"(F : Sheaf K D) : ((sheafEquiv G J K D).inverse.obj F).IsConstant J ↔ IsConstant K F\", \"doc\": \"Given a dense subsite functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a sheaf $ F $ on $ \\\\mathcal{D} $ with respect to $ K $ is constant if and \"}\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv\", \"type\": \": (G.sheafPushforwardContinuous A J K).IsEquivalence\", \"doc\": \"For a dense subsite functor $ G : C \\to D $ between categories equipped with Grothendieck topologies $ J $ and $ K $, the sheaf pushforward functor $ G_* : \\text{Sh}(D, K) \\to \\text{Sh}(C, J) $ induced by\"}\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D)\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.\", \"doc\": \"Given a dense subsite functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, there is an equivalence of categories between the category of sheaves on $\"}\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.sheafEquiv\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.SheafEquiv\", \"type\": \": Sheaf J A ≌ Sheaf K A\", \"doc\": \"Given a dense subsite functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, this constructs an equivalence of categories between the category of sheav\"}\n  {\"name\": \"CategoryTheory.Functor.IsCoverDense.ext\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"[G.IsCoverDense K] (ℱ : Sheaf K (Type _)) (X : D) {s t : ℱ.val.obj (op X)}\\n  (h : ∀ ⦃Y : C⦄ (f : G.obj Y ⟶ X), ℱ.val.map f.op s = ℱ.val.map f.op t) : s = t\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be categories with a Grothendieck topology $J$ on $\\\\mathcal{D}$, and let $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a cover-dense functor. For any sheaf $\\\\mathcal{F}$ on $\\\\mat\"}\n  {\"name\": \"CategoryTheory.Functor.functorPushforward_mem_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.Basic\", \"type\": \"{X : C} {S : Sieve X} [G.IsDenseSubsite J K] : S.functorPushforward G ∈ K _ ↔ S ∈ J _\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ that is a dense subsite, a sieve $S$ on an object $X \\\\in \\\\mat\"}\n  {\"name\": \"CategoryTheory.Functor.locallyCoverDense_of_isCoverDense\", \"module\": \"Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology\", \"type\": \"[G.IsCoverDense K] : G.LocallyCoverDense K\", \"doc\": \"Given a cover-dense functor $ F : C \\to D $ with respect to a Grothendieck topology $ J $ on $ D $, there exists an induced Grothendieck topology on $ D $ where covering sieves are generated by morphis\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cover\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Parser.ParserState.recoveredErrors\", \"module\": \"Lean.Parser.Types\", \"type\": \" (self : Lean.Parser.ParserState) : Array (String.Pos.Raw × Lean.Parser.SyntaxStack × Lean.Parser.Error)\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.RecoveryContext\", \"module\": \"Lean.Parser.Basic\", \"type\": \" : Type\", \"doc\": \"Information about the state of the parse prior to the failing parser's execution\"}\n  {\"name\": \"Lean.Parser.instBEqRecoveryContext\", \"module\": \"Lean.Parser.Basic\", \"type\": \" : BEq Lean.Parser.RecoveryContext\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.instDecidableEqRecoveryContext\", \"module\": \"Lean.Parser.Basic\", \"type\": \" : DecidableEq Lean.Parser.RecoveryContext\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.instReprRecoveryContext\", \"module\": \"Lean.Parser.Basic\", \"type\": \" : Repr Lean.Parser.RecoveryContext\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.RecoveryContext.initialPos\", \"module\": \"Lean.Parser.Basic\", \"type\": \" (self : Lean.Parser.RecoveryContext) : String.Pos.Raw\", \"doc\": \"The position prior to the failing parser\"}\n  {\"name\": \"Lean.Parser.RecoveryContext.initialSize\", \"module\": \"Lean.Parser.Basic\", \"type\": \" (self : Lean.Parser.RecoveryContext) : ℕ\", \"doc\": \"The syntax stack height prior to the failing parser's execution\"}\n  {\"name\": \"Lean.Parser.recover\", \"module\": \"Lean.Parser.Basic\", \"type\": \" (parser handler : Lean.Parser.Parser) : Lean.Parser.Parser\", \"doc\": \"Recover from errors in `parser` using `handler` to consume input until a known-good state has appeared.\\nIf `handler` fails itself, then no recovery is performed.\\n\\n`handler` is run in the state immedia\"}\n  {\"name\": \"Lean.Parser.RecoveryContext.mk\", \"module\": \"Lean.Parser.Basic\", \"type\": \" (initialPos : String.Pos.Raw) (initialSize : ℕ) : Lean.Parser.RecoveryContext\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.instBEqRecoveryContext.beq\", \"module\": \"Lean.Parser.Basic\", \"type\": \" : Lean.Parser.RecoveryContext → Lean.Parser.RecoveryContext → Bool\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.instReprRecoveryContext.repr\", \"module\": \"Lean.Parser.Basic\", \"type\": \" : Lean.Parser.RecoveryContext → ℕ → Std.Format\", \"doc\": \"\"}\n  {\"name\": \"Lean.Parser.recover'\", \"module\": \"Lean.Parser.Basic\", \"type\": \" (parser : Lean.Parser.Parser) (handler : Lean.Parser.RecoveryContext → Lean.Parser.Parser) : Lean.Parser.Parser\", \"doc\": \"Recover from errors in `parser` using `handler` to consume input until a known-good state has appeared.\\nIf `handler` fails itself, then no recovery is performed.\\n\\n`handler` is provided with informatio\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (cover|Cover).*([iI]ff|equiv) Mathlib/ (local read-only Mathlib source)",
+   "results": "333 matching source lines. First matches:\nMathlib/Algebra/Lie/Nilpotent.lean:763:-- covering a Lie algebra morphism of (possibly different) Lie algebras.\nMathlib/NumberTheory/Padics/MahlerBasis.lean:310:The coefficients of a Mahler series can be recovered from the sum by taking forward differences at\nMathlib/CategoryTheory/ObjectProperty/SiteLocal.lean:56:    rw [CategoryTheory.Precoverage.mem_iff_exists_zeroHypercover] at hR\nMathlib/CategoryTheory/ObjectProperty/SiteLocal.lean:62:    rw [CategoryTheory.Precoverage.mem_iff_exists_zeroHypercover] at hR\nMathlib/Topology/Sets/Opens.lean:416:  rw [isCompact_iff_finite_subcover, CompleteLattice.isCompactElement_iff_exists_le_iSup_of_le_iSup]\nMathlib/Topology/Sets/OpenCover.lean:66:  rw [IsOpenCover, eq_top_iff, ← SetLike.coe_subset_coe] at hu\nMathlib/Topology/Sets/OpenCover.lean:70:  simpa [IsOpenCover, eq_top_iff, ← SetLike.coe_subset_coe, Set.iUnion_subtype] using hs\nMathlib/Topology/Sets/CompactOpenCovered.lean:86:  rw [iff_isCompactOpenCovered_sigmaMk, iff_of_unique]\nMathlib/Topology/Sets/CompactOpenCovered.lean:88:    convert! H i; rw [iff_isCompactOpenCovered_sigmaMk, iff_of_unique]\nMathlib/Topology/Sets/CompactOpenCovered.lean:170:  rw [iff_isCompactOpenCovered_sigmaMk, iff_of_unique]\nMathlib/Topology/Sets/CompactOpenCovered.lean:182:  rw [iff_isCompactOpenCovered_sigmaMk, iff_of_unique] at hU ⊢\nMathlib/Dynamics/TopologicalEntropy/NetEntropy.lean:211:  · obtain ⟨t, t_cover, t_mincard⟩ := (coverMincard_finite_iff T F U n).1 h",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeRingedRestrictionDivisibility",
+  "file": "lean/Sheaf/CategoryTheory/NativeRingedRestrictionDivisibility.lean",
+  "declaration": "CategoryTheory.NativeRestriction.localDivisibilityRestriction",
+  "statement": "theorem localDivisibilityRestriction\n    (a : (R.obj ⋙ forget CommRingCat).sections) (U : C)\n    (s : ((R.over (F.obj U)).obj ⋙ forget CommRingCat).sections) :\n    principalLocallyDivisible.{d, vd, max c vc r} R a (F.obj U) s ↔\n      principalLocallyDivisible.{c, vc, max d vd r}\n        (restrictedCommRing.{c, d, vc, vd, r} (K := K) F R)\n        (restrictedSection.{c, d, vc, vd, r} (K := K) F R a) U\n        (restrictedSection.{max c vc, max d vd, vc, vd, r}\n          (K := K.over U) (Over.post F) (R.over (F.obj U)) s)",
+  "declarations": [
+   "CategoryTheory.NativeRestriction.localDivisibilityRestriction"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

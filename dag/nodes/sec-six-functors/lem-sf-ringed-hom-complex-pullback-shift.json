@@ -1,0 +1,330 @@
+{
+ "id": "lem-sf-ringed-hom-complex-pullback-shift",
+ "kind": "statement",
+ "title": "Exact ringed pullback on ordinary Hom complexes respects signed source shifts",
+ "statement": "Let $f:(\\operatorname{Sh}(\\mathcal D),S)\\to(\\operatorname{Sh}(\\mathcal C),R)$ be a morphism of small ringed topoi with commutative ring sheaves, meaning a geometric inverse image $f^{-1}$ and a ring map $f^{-1}R\\to S$. Assume that module pullback $F=f^*=S\\otimes_{f^{-1}R}f^{-1}(-)$ is exact. Use module sheaves [def-weil-sheaf-of-modules-category], ordinary sheaf tensor and Hom [def-pur-sheaf-tensor-product, def-pur-sheaf-hom], their closed adjunction [lem-pc-sheaf-modules-tensor-closed], and the canonical tensor comparison $F(V\\otimes_R W)\\cong FV\\otimes_S FW$ [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. Apply $F$ termwise to integer-indexed cochain complexes. For arbitrary complexes $E,I$ of $R$-modules, let $H(E,I)=\\mathcal Hom_R^\\bullet(E,I)$ and $H'$ be the corresponding $S$-module Hom complex [def-pur-hom-complex]. For every $n,p\\in\\mathbf Z$, transpose the map\n$$F(H(E,I)^n)\\otimes_S FE^p\\xrightarrow{\\sim}F(H(E,I)^n\\otimes_R E^p)\\xrightarrow{F(\\mathrm{ev}_{n,p})}FI^{p+n},$$\nwhere $\\mathrm{ev}_{n,p}$ is evaluation after the $p$th product projection of the Hom complex. These transposes are the product projections of a chain map $c_{E,I}:F H(E,I)\\to H'(FE,FI)$, natural contravariantly in chain maps of $E$ and covariantly in chain maps of $I$.\n\nUse the cohomological shifts $E[m]^p=E^{p+m}$ with differential $(-1)^m d_E$ [def-weil-abstract-derived-category]. There are signed chain isomorphisms $s_{E,I,m}:H(E[m],I)\\xrightarrow{\\sim}H(E,I)[-m]$, with degree-$n$, $p$ component $f\\mapsto(-1)^{mn}f^{p-m}$, and likewise $s'$ on $\\mathcal D$. With the termwise identification $F(E[m])=(FE)[m]$, for every $m\\in\\mathbf Z$,\n$$s'_{FE,FI,m}\\circ c_{E[m],I}=c_{E,I}[-m]\\circ F(s_{E,I,m}).$$\nNeither $E$ nor $I$ is assumed bounded, flat or injective. No invertibility of $c$, preservation of infinite products by $F$, or derived Hom comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX, remark-pullback-internal-hom; extension to Hom complexes using sites-cohomology.tex, section-hom-complexes (Tag 0A8X) and lemma-RHom-triangulated (Tag 08JC). Agent formulation of the signed chain-level calculation."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-pur-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-module-pure-tensor",
+  "lem-sc-hom-complex-projections"
+ ],
+ "proof": [
+  {
+   "text": "Write $H^n=H(E,I)^n$ and let $\\theta_{V,W}:F(V\\otimes_R W)\\cong FV\\otimes_S FW$ be the natural tensor comparison. The exact module functor $F$ is additive, so it preserves sums, negatives and integer multiples of morphisms. For each $n,p$, set $a_{n,p}=F(\\mathrm{ev}_{n,p})\\circ\\theta_{H^n,E^p}^{-1}$. The tensor-Hom adjunction on $\\mathcal D$, using tensor symmetry to put $FE^p$ first, transposes $a_{n,p}$ to $q_{n,p}:FH^n\\to\\mathcal Hom_S(FE^p,FI^{p+n})$. By the defining product universal property of $H'(FE,FI)^n$, there is a unique $c^n$ with these projections. Transposition is additive: evaluate a sum of transposes and use the bilinearity of evaluation to obtain the sum of their uncurried maps. This construction only uses the product on $\\mathcal D$; it makes no assertion about applying $F$ to a product. In Lean reuse the already proved independent-coefficient tensor–Hom equivalence from the K-injective Hom-complex construction. Its inverse, composed with the braiding, defines uncurry with the tensor factors in evaluation order. Prove uncurry naturality from the three naturality identities of that equivalence and the braiding identity. The sectionwise formula for the equivalence and the sheafification adjunction unit give the pure-tensor normalization.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pur-sheaf-hom",
+    "lem-coef-hom-kflat-into-kinjective-independent-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EO (lemma-internal-hom-adjoint-tensor), 03EL (lemma-tensor-product-pullback), 0GMX (remark-pullback-internal-hom); agent construction using Tag 0A8X, section-hom-complexes."
+   }
+  },
+  {
+   "text": "Let $\\delta^n$ denote the differential of $H(E,I)$. The defining Hom differential, evaluated at its $p$th component, says\n$$\\mathrm{ev}_{n+1,p}\\circ(\\delta^n\\otimes1)=d_I^{p+n}\\circ\\mathrm{ev}_{n,p}-(-1)^n\\mathrm{ev}_{n,p+1}\\circ(1\\otimes d_E^p).$$\nApply the additive functor $F$ and precompose with $\\theta_{H^n,E^p}^{-1}$. Naturality of $\\theta$ changes this into\n$$a_{n+1,p}\\circ(F\\delta^n\\otimes1)=F(d_I^{p+n})\\circ a_{n,p}-(-1)^n a_{n,p+1}\\circ(1\\otimes Fd_E^p).$$\nUnder the natural closed adjunction, the left side is the transpose of the $p$th projection of $c^{n+1}\\circ F\\delta^n$, and the right side is the transpose of that of $\\delta'{}^n\\circ c^n$. The adjunction is injective on morphisms, and product projections jointly determine a morphism. Thus these two morphisms agree for every $n$, so $c$ is a chain map.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), displayed differential; agent evaluation calculation using sites-modules Tags 03EO and 03EL."
+   }
+  },
+  {
+   "text": "For chain maps $u:E'\\to E$ and $v:I\\to I'$, write $h=H(u,v):H(E,I)\\to H(E',I')$. By the componentwise definition of $h$, the $p$th evaluation satisfies\n$$\\mathrm{ev}^{E',I'}_{n,p}\\circ(h^n\\otimes1)=v^{p+n}\\circ\\mathrm{ev}^{E,I}_{n,p}\\circ(1\\otimes u^p).$$\nApply $F$ and use naturality of $\\theta$. The resulting equality says that, after projection to $\\mathcal Hom_S(FE'^p,FI'^{p+n})$ and transposition, both $c_{E',I'}\\circ Fh$ and $H'(Fu,Fv)\\circ c_{E,I}$ are the map\n$$F(v^{p+n})\\circ a^{E,I}_{n,p}\\circ(1\\otimes Fu^p).$$\nInjectivity of the adjunction and the product universal property give the required naturality in both variables.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes); agent componentwise naturality calculation with sites-modules Tags 03EO and 03EL."
+   }
+  },
+  {
+   "text": "Use the shifts specified in the statement. A degree-$n$ family in $H(E[m],I)$ has components $f^r:E^{r+m}\\to I^{r+n}$. Define $(s^nf)^p=(-1)^{mn}f^{p-m}$, which has source $E^p$ and target $I^{p+n-m}$. Its inverse in degree $n$ sends $g\\in H(E,I)^{n-m}$ to the family $f^r=(-1)^{mn}g^{r+m}$. These are maps of sheaves by the product universal property, and the two composites are identities since the reindexings are inverse and $(-1)^{2mn}=1$. The Lean proof reuses ordinaryLeftShift, whose inverse has precisely this signed reindexing. Compose the direct formula with its inverse, cancel the two signs, and transport the source index along (p-m)+m=p to obtain the requested formula.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes); agent signed reindexing with the cohomological shift convention in the statement."
+   }
+  },
+  {
+   "text": "Check that $s$ is a chain map by comparing degree $n$ to degree $n+1$ after each projection $p$. Expansion of $s^{n+1}\\delta f$ gives\n$$(-1)^{mn+m}d_I^{p+n-m}f^{p-m}-(-1)^{mn+n}f^{p-m+1}d_E^p.$$\nExpansion of $d_{H(E,I)[-m]}s^nf$ gives the same expression: its outer differential sign is $(-1)^m$, and its Hom precomposition sign is $-(-1)^{n-m}$. The identities $m(n+1)=mn+m$ and $(-1)^{2m}=1$ give precisely the two displayed coefficients. Hence $s$ is a chain isomorphism. This computation takes place on either ringed site, so it also constructs $s'$. This chain-isomorphism calculation is already proved by ordinaryLeftShift and is reused rather than repeated.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), displayed differential; agent signed calculation underlying Tag 08JC (lemma-RHom-triangulated)."
+   }
+  },
+  {
+   "text": "Since $F((-1)^m d)=(-1)^mF(d)$, termwise pullback identifies $F(E[m])$ with $(FE)[m]$, and likewise identifies $F(H[-m])$ with $(FH)[-m]$. Fix $n,p$ and put $B=H(E[m],I)^n$ and $\\sigma=s^n:B\\to H(E,I)^{n-m}$. Directly from the formula for $s$,\n$$\\mathrm{ev}^{E,I}_{n-m,p}\\circ(\\sigma\\otimes1)=(-1)^{mn}\\mathrm{ev}^{E[m],I}_{n,p-m}.$$\nProject both sides of the asserted comparison square to $\\mathcal Hom_S(FE^p,FI^{p+n-m})$ and transpose. For $s'\\circ c_{E[m],I}$ the result is\n$$(-1)^{mn}F(\\mathrm{ev}^{E[m],I}_{n,p-m})\\circ\\theta_{B,E^p}^{-1}.$$\nFor $c_{E,I}[-m]\\circ F(s)$ the result is\n$$F(\\mathrm{ev}^{E,I}_{n-m,p})\\circ\\theta_{H(E,I)^{n-m},E^p}^{-1}\\circ(F\\sigma\\otimes1).$$\nNaturality of $\\theta$ rewrites the latter as $F(\\mathrm{ev}^{E,I}_{n-m,p}\\circ(\\sigma\\otimes1))\\circ\\theta_{B,E^p}^{-1}$. The displayed evaluation identity and additivity of $F$ make this exactly the former expression. Injectivity of transposition and product projection extensionality prove equality of the chain maps.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL (lemma-tensor-product-pullback), 03EO (lemma-internal-hom-adjoint-tensor); agent signed evaluation calculation using sites-cohomology Tag 0A8X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-pur-sheaf-hom",
+  "def-weil-abstract-derived-category",
+  "lem-sc-hom-complex-projections",
+  "lem-coef-hom-kflat-into-kinjective-independent-coefficients",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, displayed Hom differential; evaluation construction using sites-modules Tags 0GMX, 03EL and 03EO. The chain and sign calculations are supplied explicitly, not quoted from Tag 08JC. Lean reuse: the proved independent-coefficient tensor–Hom equivalence, its naturality and section formulas, and ordinaryLeftShift from the recorded dependency modules; product projections check the differential, naturality and shift square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an exact pullback on modules on ringed sites the ordinary Hom complex pullback map commutes with signed shifts in the source complex",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.pullbackShiftFunctorAdd'_hom_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, CategoryTheory.ShortComplex.SnakeInput.snd_δ.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive strong monoidal functor induces a map between internal Hom complexes compatible with the differential and reindexing source shifts",
+   "results": "8 hits: CochainComplex.HomComplex.Cochain.map_v, CochainComplex.HomComplex.Cochain.map_ofHom, CochainComplex.shiftFunctor_map_f, CochainComplex.HomComplex.Cochain.map, CochainComplex.shiftFunctor_map_f', CochainComplex.HomComplex.δ_map, CochainComplex.HomComplex.Cochain.map_comp, CategoryTheory.Functor.mapCochainComplexSingleFunctor.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"map\"",
+   "results": "10 hits: CategoryTheory.MonoidalClosed.internalHom_map, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map_comp_π, CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor_obj_obj_obj_map, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map_app_comp_π, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map_comp_π_assoc, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.map_app_comp_π_assoc, CategoryTheory.MonoidalCategory.dayConvolutionInternalHomDiagramFunctor_obj_obj_map_app.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*[Cc]omparison|[Pp]ullback.*[Hh]om|[Hh]om.*[Pp]ullback",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact ringed site pullback on ordinary Hom complexes commutes with signed first variable shifts",
+   "results": "8 hits: CochainComplex.ShiftSequence.shiftIso, CochainComplex.HomComplex.Cochain.leftUnshift, CochainComplex.HomComplex.Cochain.δ_rightShift, CochainComplex.HomComplex.Cochain.leftShift, CochainComplex.shiftShortComplexFunctorIso, HomotopyCategory.homologyShiftIso_hom_app, CochainComplex.HomComplex.Cochain.shift, CochainComplex.mapBifunctorHomologicalComplexShift₁Iso.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|lemma δ_map|lemma map_v",
+   "results": "3 hits: 904, 908, 943.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|ihomComparison",
+   "results": "5 hits: 292, 296, 303, 305, 306.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "0 hits: . Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*[Cc]omparison|[Pp]ullback.*[Hh]om|[Hh]om.*[Pp]ullback",
+   "results": "25 hits: Mathlib/Condensed/Light/Sequence.lean, Mathlib/Condensed/Light/Sequence.lean, Mathlib/Topology/Gluing.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/Stonean/Limits.lean, Mathlib/Topology/Category/Stonean/Limits.lean. Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of sheaves of modules induces a chain map on internal Hom complexes respecting the signed first variable shift",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, TopCat.Sheaf.pullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackComp. Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive strong monoidal functor induces a natural map of internal Hom complexes compatible with signed shifts in the first argument",
+   "results": "8 hits: CategoryTheory.ShiftedHom.map, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.HasShift.Induced.add_hom_app_obj, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_hom_app_f, CategoryTheory.ShiftedHom.map_add, CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq, CochainComplex.shiftShortComplexFunctor'_hom_app_τ₁. Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|ihomComparison|HomComplex",
+   "results": "No hits in Mathlib/Algebra/Category/ModuleCat/Sheaf. No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|lemma δ_map|lemma map_v",
+   "results": "The initial supplied subdirectory Algebra/Homology/HomComplex.lean is not the Mathlib file path; zero hits from this invocation are not evidence of absence. A subsequent logged grep used Algebra/Homology/HomotopyCategory/HomComplex.lean and found Cochain.map (904), map_v (908) and δ_map (943), whose source was read.",
+   "date": "2026-10-22",
+   "verdict": "no match; wrong initial file path, corrected by a later search"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"map\"",
+   "results": "12 hits: CochainComplex.HomComplex.Cocycle.toCochainLinearMap, CochainComplex.HomComplex.Cocycle.toCochainLinearMap_apply, CochainComplex.HomComplex.Cochain.map, CochainComplex.HomComplex.δ_map, CochainComplex.HomComplex.Cochain.map_v, CochainComplex.HomComplex.Cochain.map_comp, CochainComplex.HomComplex.Cochain.map_ofHom, CochainComplex.HomComplex.Cochain.map_neg. Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ringed topoi the evaluation-defined pullback map on sheaf Hom complexes commutes with differentials and signed reindexing of source shifts",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit. Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def map|lemma δ_map|lemma map_v",
+   "results": "3 hits: 904, 908, 943. Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom|ihomComparison",
+   "results": "5 hits: 292, 296, 303, 305, 306. Read Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean:904-950 (global morphism cochains, not internal sheaf Hom); CategoryTheory/Monoidal/Closed/Basic.lean:292-310 (internal Hom in one closed category); PullbackContinuous and PullbackFree (ordinary pullback, not this Hom-complex comparison). No matching sheaf-valued comparison with signed source shifts.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-site-hom-comparison-thick",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: internal Hom is triangulated in the first variable and the comparison maps form morphisms of triangles; signed Hom-complex calculation underlying that assertion.",
+   "via": [
+    "lem-sf-site-hom-comparison-thick"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ringed-hom-complex-pullback-shift",
+  "worker": "stage1",
+  "summary": "Q47 checked Stacks 0GMX, 03EL, 03EO, 0A8X and 08JC; supplied the evaluation-based chain map, two-variable naturality, signed source-shift isomorphisms and their commutative square, without a product-preservation or boundedness hypothesis. All required non-elementary inputs are existing nodes; no new nodes were needed. Statement unchanged.",
+  "blueprint": "Nearest ancestor lem-weil-finite-duality-site-comparison, proof second paragraph: the comparison maps form morphisms of triangles because internal Hom is triangulated in its first variable. This item supplies the ordinary Hom-complex comparison and its signed source-shift square, through lem-sf-site-hom-comparison-thick.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Closed tensor-Hom adjunction and symmetry for ordinary module sheaves, a generic tool needed to transpose the evaluation maps on either site; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Naturality of ordinary tensor pullback on arbitrary small ringed topoi; a generic coefficient-independent tool, not a different proof of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-647d466b9",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-647d466b9 (reviewer sub-agent of L); spot-checked: I read all six steps and every cited statement, and recomputed the mathematics: def-pur-hom-complex differential d_M f-(-1)^n f d_L = Stacks 0A8X; closed adjunction natural in 3 variables; 03EL tensor comparison natural, hypotheses match small ringed topoi + ring map; shift convention as in def-weil-abstract-derived-category. Step 2 chain map: evaluated differential plus theta/adjunction naturality, rechecked. Step 3 naturality: both sides uncurry to Fv∘a∘(1⊗Fu), rechecked. Steps 4-5: s is a chain iso; I recomputed both sides as (-1)^{mn+m} d_I f^{p-m} - (-1)^{mn+n} f^{p-m+1} d_E^p. Step 6 square: both sides are (-1)^{mn} F(ev^{E[m],I}_{n,p-m})θ^{-1}, using c[-m]^n=c^{n-m} with no sign. Edge cases m=0, ±1, n of either parity, zero complexes, char 2; F is never pushed through a product. No new nodes; statement and stmt_deps unchanged; not under a re-split note. lem-sf-etale-hom-complex-pullback is the constant-coefficient special case, not a duplicate (advisory: it could cite this item). The parent lem-sf-site-hom-comparison-thick uses exactly the component formula, the naturality and the shift square. I accept both tool_uses (lem-pc-sheaf-modules-tensor-closed, lem-weil-pbc-ringed-topoi-module-pullback-tensor) as generic infrastructure, as for the étale sibling. No SGA; blueprint fields consistent; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedHomComplexPullbackShift",
+  "declaration": "CategoryTheory.RingedHomPullback.homComplex_pullback_shift",
+  "declarations": [
+   "CategoryTheory.RingedHomPullback.EvaluationFamily",
+   "CategoryTheory.RingedHomPullback.IsEvaluation",
+   "CategoryTheory.RingedHomPullback.SourceShiftFamily",
+   "CategoryTheory.RingedHomPullback.IsSignedSourceShift",
+   "CategoryTheory.RingedHomPullback.homComplex_pullback_shift"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedHomComplexPullbackShift.lean",
+  "statement": "theorem homComplex_pullback_shift (f : RingedPullback R S) [PreservesFiniteLimits f.L] (k : Comparison f) : ∃ (evR : EvaluationFamily.{c, v, max d t r} R) (evS : EvaluationFamily.{d, t, max c v r} S) (comparison : ∀ E I : Complex R, (pull f).obj (homComplex (R := R) E I) ⟶ homComplex (R := S) ((pull f).obj E) ((pull f).obj I)) (sR : SourceShiftFamily.{c, v, max d t r} R) (sS : SourceShiftFamily.{d, t, max c v r} S), IsEvaluation.{c, v, max d t r} R evR ∧ IsEvaluation.{d, t, max c v r} S evS ∧ (∀ (E I : Complex R) (n p q : ℤ) (h : p + n = q), ((comparison E I).f n ⊗ₘ 𝟙 (f.L.obj (E.X p))) ≫ evS ((pull f).obj E) ((pull f).obj I) n p q h = (k.mu ((homComplex (R := R) E I).X n) (E.X p)).inv ≫ f.L.map (evR E I n p q h)) ∧ (∀ (E E' I I' : Complex R) (u : E' ⟶ E) (z : I ⟶ I'), (pull f).map (((homComplexFunctor (R := R)).map u.op).app I ≫ ((homComplexFunctor (R := R)).obj (op E')).map z) ≫ comparison E' I' = comparison E I ≫ (((homComplexFunctor (R := S)).map ((pull f).map u).op).app ((pull f).obj I) ≫ ((homComplexFunctor (R := S)).obj (op ((pull f).obj E'))).map ((pull f).map z))) ∧ IsSignedSourceShift.{c, v, max d t r} R sR ∧ IsSignedSourceShift.{d, t, max c v r} S sS ∧ (∀ (E I : Complex R) (m : ℤ), comparison (E⟦m⟧) I ≫ (((homComplexFunctor (R := S)).map (((pull f).commShiftIso m).inv.app E).op).app ((pull f).obj I)) ≫ (sS ((pull f).obj E) ((pull f).obj I) m).hom = (pull f).map (sR E I m).hom ≫ ((pull f).commShiftIso (-m)).hom.app (homComplex (R := R) E I) ≫ (comparison E I)⟦-m⟧')",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed independently sized ringed-pullback presentation and canonical tensor comparison. Evaluation and signed shifts are existentially specified by their full component formulas; no arbitrary comparison or infinite-product preservation hypothesis. Added only the three landed interface nodes to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf70ad4ca",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Re-delivery of 5ef90f58e742 H2 RETURN: stmt_dep lem-pur-module-tensor-generator-calculus replaced by new existing:true definition node def-pur-module-pure-tensor owning CochainPullback.moduleTmul (ModuleTensorGenerators.lean:84, real sheafification-unit data, Stacks 03EK = sites-modules-section-tensor-product verified; record fields/stmt_deps valid; no duplicate). Lean module byte-identical to reviewed head; item statement/proof/proof_deps unchanged vs side-live. Re-checked all clauses: RingedPullback + PreservesFiniteLimits = exact pullback; canonical Comparison θ; IsEvaluation pins ev on moduleTmul pure tensors; c chain map with transpose equation; two-variable naturality with correct variance; IsSignedSourceShift (-1)^{mn} f^{p-m}; shift square via commShiftIso; signs recomputed. Mechanical finding: homComplexπ = Classical.choose homComplex_projections_exists, a theorem-constructed object → PASS on that point. Gates OK (sorry only on theorem, docstrings, no extra hypotheses). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T013932-L-4042171",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

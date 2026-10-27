@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-limit-preserving-isom-space-lft",
+ "kind": "statement",
+ "title": "Limit preservation makes representable Isom spaces locally of finite type",
+ "statement": "Let $S$ be a scheme. Work with schemes [def-pc-scheme] in the universes of [def-weil-size-convention]. Let $\\mathcal F$ be a category fibred in groupoids over $S$-schemes: each fibre is a groupoid, with pullback functors and coherent identity and composition isomorphisms. Assume limit preservation: on every small directed inverse system of affine $S$-schemes with limit $T$, objects over $T$ descend to a stage, isomorphisms descend to a sufficiently late common stage, and equality of isomorphisms is detected at a sufficiently late stage. Suppose every presheaf $T'\\mapsto\\operatorname{Isom}(a|_{T'},b|_{T'})$, for $a,b\\in\\mathcal F(T)$, is represented by an algebraic space $I_{a,b}$ over $T$ [def-trf-algebraic-space]. Then every $I_{a,b}\\to T$ is locally of finite type. In particular, for schemes $U,V$ locally of finite type over $S$ and objects $x\\in\\mathcal F(U)$, $y\\in\\mathcal F(V)$, the triples $(a:T\\to U,b:T\\to V,\\alpha:a^*x\\cong b^*y)$ are represented by an algebraic space $Z$, and $Z\\to U\\times_S V$, $Z\\to U$, $Z\\to V$, and the composites $W\\to Z\\to U$ and $W\\to Z\\to V$ for every etale scheme chart $W\\to Z$ are locally of finite type. Locally of finite type for spaces means locally of finite type on compatible etale scheme charts, using [def-weil-finite-type-morphism]; $U\\times_SV$ is [def-pc-fibre-product], and etale means [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 0CXI (lemma-diagonal); the fibre-product and chart consequences are the first paragraph of the proof of Tag 0CXM (lemma-base-change-versal)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-fibred-groupoid-limit-preserving",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Consider $\\Delta:\\mathcal F\\to\\mathcal F\\times\\mathcal F$. Over a scheme $B$ and a pair $(a,b)$, its base-change groupoid has objects $(c,u:c\\xrightarrow{\\sim}a,v:c\\xrightarrow{\\sim}b)$. Send this object to $v u^{-1}\\in\\operatorname{Isom}(a,b)$. Conversely send $\\delta:a\\xrightarrow{\\sim}b$ to $(a,\\mathrm{id},\\delta)$. A morphism between two triples, when it exists, is uniquely determined by $u$, and exists exactly when their images $vu^{-1}$ agree. These constructions commute with pullback using the given cartesian coherence. Thus this groupoid is equivalent to the discrete groupoid represented by $I_{a,b}$, naturally on $B$-schemes. The diagonal is therefore representable by algebraic spaces in the precise sense required by [lem-sfb-representable-lfp-object-limit-test].",
+   "uses": [
+    "lem-sfb-representable-lfp-object-limit-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CX (lemma-representable-by-spaces-limit-preserving), representability hypothesis; explicit diagonal fibre identification"
+   }
+  },
+  {
+   "text": "Verify the relative object-descent condition of [lem-sfb-representable-lfp-object-limit-test] for $\\Delta$. Fix a small nonempty directed affine system $T_i$ with limit $T$, a pair $(a_i,b_i)$ at stage $i$, $c\\in\\mathcal F(T)$, and $\\gamma=(u:c\\xrightarrow{\\sim}a_i|_T,v:c\\xrightarrow{\\sim}b_i|_T)$. By the assumed descent of isomorphisms, $\\delta=vu^{-1}$ descends to $\\delta_j:a_i|_{T_j}\\xrightarrow{\\sim}b_i|_{T_j}$ for some $j\\geq i$. Put $c_j=a_i|_{T_j}$, $\\alpha=u^{-1}:c_j|_T\\to c$ and $\\beta=(\\mathrm{id},\\delta_j):\\Delta(c_j)\\to(a_i,b_i)|_{T_j}$. Then $\\gamma\\Delta(\\alpha)=(uu^{-1},vu^{-1})=(\\mathrm{id},\\delta)=\\beta|_T$, exactly the required compatibility. All maps are isomorphisms because the fibres are groupoids. The cited criterion now gives that every $I_{a,b}\\to B$ is locally of finite presentation on etale scheme charts. No descent of objects over an arbitrary nonaffine base is being assumed.",
+   "uses": [
+    "lem-sfb-representable-lfp-object-limit-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06CX, implication from relative object descent to local finite presentation; explicit verification using artin.tex Tag 07XL (definition-limit-preserving)"
+   }
+  },
+  {
+   "text": "A finitely presented algebra $A[t_1,\\ldots,t_n]/(f_1,\\ldots,f_m)$ is generated as an $A$-algebra by the images of $t_1,\\ldots,t_n$. Therefore [def-sbc-locally-finite-presentation] implies [def-weil-finite-type-morphism] locally. Applying this observation to the same compatible etale scheme charts, with the chart test [lem-sfb-space-local-properties-chart-test], shows that every $I_{a,b}\\to B$ is locally of finite type. This uses no quasi-compactness or Noetherian assumption.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0464 (lemma-finite-presentation-finite-type), local clause; the finite-generation implication is written out"
+   }
+  },
+  {
+   "text": "Put $P=U\\times_SV$ with projections $p,q$, and $A=p^*x$, $B=q^*y$. By [def-pc-fibre-product], a map $T\\to P$ is exactly a pair of $S$-maps $a:T\\to U$, $b:T\\to V$. By the representing property in the hypothesis, $Z=I_{A,B}$ therefore represents precisely the triples in the statement. Step 3 gives $Z\\to P$ locally of finite type. By [lem-sfb-stack-finite-type-calculus], restricted to algebraic spaces (including schemes), $p$ and $q$ are locally of finite type as base changes of $V\\to S$ and $U\\to S$, respectively, and composition gives $Z\\to U$ and $Z\\to V$ locally of finite type. For any etale scheme chart $W\\to Z$, apply [lem-sfb-space-etale-presentation-property-criterion] with $P$ the local-finite-type property, which is etale local on source-and-target by [lem-sfb-scheme-etale-source-target-properties]. Take the target chart to be the identity of $U$, respectively $V$. Its every-presentation-diagram clause gives $W\\to U$ and $W\\to V$ locally of finite type even when $W\\to Z$ is not surjective.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 0CXM (lemma-base-change-versal), first proof paragraph; finite-type calculus: stacks-morphisms.tex Tags 06FT and 06FU; chart test: spaces-morphisms.tex Tag 03MJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-representable-lfp-object-limit-test",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-pc-fibre-product",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-scheme-etale-source-target-properties"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06CX (lemma-representable-by-spaces-limit-preserving), applied to the diagonal by explicit groupoid calculation; strengthens artin.tex Tag 0CXI to local finite presentation under the full isomorphism-descent hypothesis; consequences as in Tag 0CXM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A limit preserving category fibred in groupoids with representable diagonal has diagonal locally of finite type",
+   "sub": "",
+   "results": "Read 8 returned hits: CategoryTheory.PreGaloisCategory.FiberFunctor.instPreservesFiniteLimitsFintypeCat, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesPullbacks, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, AlgebraicGeometry.instHasFiniteLimitsScheme, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme",
+   "date": "2026-10-23",
+   "verdict": "No match: representable categorical functors preserving limits do not assert local finite type of Isom algebraic spaces. Scheme base-change instances assume local finite presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Limit preservation of a category fibred in groupoids implies that each representable Isom algebraic space is locally of finite type",
+   "sub": "",
+   "results": "Read 8 returned hits: CategoryTheory.Functor.representable_preservesLimits, CategoryTheory.Functor.representable_preservesLimit, CategoryTheory.Functor.representable_preservesLimitsOfShape, CategoryTheory.preservesLimitNatIso, CategoryTheory.Functor.corepresentable_preservesLimit, CategoryTheory.Functor.corepresentable_preservesLimits, CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize",
+   "date": "2026-10-23",
+   "verdict": "No match: representable categorical functors preserving limits do not assert local finite type of Isom algebraic spaces. Scheme base-change instances assume local finite presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.FiberedCategory\", \"FiniteType\"",
+   "sub": "",
+   "results": "Read 0 returned hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match: representable categorical functors preserving limits do not assert local finite type of Isom algebraic spaces. Scheme base-change instances assume local finite presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "RimSchlessinger|\\bversal\\b|limit.preserving.*diagonal",
+   "sub": "",
+   "results": "Read 3 returned hits: Mathlib/RingTheory/Extension/Cotangent/Basic.lean, Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean, Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: representable categorical functors preserving limits do not assert local finite type of Isom algebraic spaces. Scheme base-change instances assume local finite presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"FiniteType\"",
+   "sub": "",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and categorical representability hits do not state this theorem for fibred groupoids and algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A limit preserving category fibred in groupoids has locally finitely presented representable Isom algebraic spaces",
+   "sub": "",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion, AlgebraicGeometry.locallyOfFinitePresentation_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and categorical representability hits do not state this theorem for fibred groupoids and algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|limit.preserving.*[Ii]som|[Ii]som.*limit.preserving",
+   "sub": "",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and categorical representability hits do not state this theorem for fibred groupoids and algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A limit preserving groupoid valued moduli functor has locally finite type representable diagonal",
+   "sub": "",
+   "results": "OK 8 hits: CategoryTheory.Functor.relativelyRepresentable.diag_iff, CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj, CategoryTheory.flat_of_preservesFiniteLimits, CategoryTheory.Functor.relativelyRepresentable.of_diag, CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits, CategoryTheory.Limits.PreservesFiniteLimits.mk, CategoryTheory.Functor.corepresentable_preservesLimit, CategoryTheory.GrothendieckTopology.preservesLimit_diagramFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and categorical representability hits do not state this theorem for fibred groupoids and algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of points of an algebraic space commutes with directed affine inverse limits if and only if its structure morphism is locally of finite presentation",
+   "sub": "",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme finite-presentation and categorical representability hits do not state this theorem for fibred groupoids and algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-versal-base-change-smooth",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, first paragraph: local finite type of the representable diagonal and its chart pullbacks.",
+   "via": [
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-limit-preserving-isom-space-lft",
+  "worker": "stage1",
+  "summary": "Verified the diagonal fibre identification and checked relative object descent explicitly, using the existing general representable local-finite-presentation criterion. Forgetting the finite relations gives local finite type. The existing algebraic-space finite-type calculus and chart criterion supply every fibre-product and chart consequence. No statement change and no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, first paragraph: local finite type of the representable diagonal and its chart pullbacks.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-07100d949",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-07100d949 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the sources: artin.tex Tag 0CXI (lemma-diagonal, which concludes the diagonal is locally of finite type) and criteria.tex Tag 06CX (for representable maps, limit preserving on objects is equivalent to locally of finite presentation). The delivery has no new nodes and leaves the statement and stmt_deps unchanged. Step 1 is a genuinely elementary groupoid calculation: a morphism of triples is forced to be u'^{-1}u and exists iff vu^{-1}=v'u'^{-1}, so the fibre of the diagonal is the discrete Isom functor and the item's Isom hypothesis supplies exactly the representability the criterion lem-sfb-representable-lfp-object-limit-test needs. Step 2 checks relative object descent for the diagonal using only the item's isomorphism descent; I verified the required compatibility with x_j=a_i|T_j, alpha=u^{-1}, beta=(id,delta_j). The criterion then gives local finite presentation. Step 3 forgets the relations to get local finite type and transfers it with lem-sfb-space-local-properties-chart-test, which covers both properties on the same charts. Step 4 is the first paragraph of Tag 0CXM: the fibre-product universal property, base change and composition from lem-sfb-stack-finite-type-calculus (whose statement covers algebraic spaces), and the every-presentation-diagram clause of lem-sfb-space-etale-presentation-property-criterion with target chart the identity of U (respectively V); local finite type is etale local on source and target by lem-sfb-scheme-etale-source-target-properties. Edge cases checked: empty bases, one-stage systems, and no quasi-compactness assumed on U or V. There is no cycle and no duplicate in the DAG, and no SGA is cited. Batch-5 flags: the three algebraic-space nodes reach the trace-formula chapter only through def-trf-algebraic-space, a general definition already in the item's stmt_deps; the scheme etale-locality node reaches it only through lem-trf-smooth-composition, composition of smooth morphisms. Neither is part of the trace formula or Poincare duality, so all four are accepted. The only faults are cosmetic letter reuse (B and P) in step 4, which needs no fix."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitPreservingIsomSpaceFiniteType",
+  "declaration": "CategoryTheory.limit_preserving_isom_space_locallyOfFiniteType",
+  "declarations": [
+   "CategoryTheory.limit_preserving_isom_space_locallyOfFiniteType",
+   "CategoryTheory.limit_preserving_isom_space_fibreProduct"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitPreservingIsomSpaceFiniteType.lean",
+  "statement": "theorem limit_preserving_isom_space_locallyOfFiniteType {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsFibredInGroupoids F) (hLimits : FibredGroupoidLimit.IsLimitPreserving F) (hDiagonal : HasAlgebraicSpaceDiagonal F) (T : Over S) (x y : Functor.Fiber F.p T) (I : AlgebraicSpace S) (p : I.obj.obj ⟶ yoneda.obj T) (hI : ∃ e : ∀ (U : Over S) (q : U ⟶ T) (xU yU : Functor.Fiber F.p U) (a : xU.val ⟶ x.val) (b : yU.val ⟶ y.val), F.p.IsHomLift q a → F.p.IsHomLift q b → {z : I.obj.obj.obj (op U) // p.app (op U) z = q} ≃ (xU ≅ yU), ∀ (U U' : Over S) (f : U' ⟶ U) (q : U ⟶ T) (xU yU : Functor.Fiber F.p U) (xU' yU' : Functor.Fiber F.p U') (a : xU.val ⟶ x.val) (b : yU.val ⟶ y.val) (a' : xU'.val ⟶ x.val) (b' : yU'.val ⟶ y.val) (ha : F.p.IsHomLift q a) (hb : F.p.IsHomLift q b) (ha' : F.p.IsHomLift (f ≫ q) a') (hb' : F.p.IsHomLift (f ≫ q) b') (c : xU'.val ⟶ xU.val) (d : yU'.val ⟶ yU.val), F.p.IsHomLift f c → F.p.IsHomLift f d → c ≫ a = a' → d ≫ b = b' → ∀ (z : {z : I.obj.obj.obj (op U) // p.app (op U) z = q}) (z' : {z : I.obj.obj.obj (op U') // p.app (op U') z = f ≫ q}), z'.val = I.obj.obj.map f.op z.val → (e U' (f ≫ q) xU' yU' a' b' ha' hb' z').hom.val ≫ d = c ≫ (e U q xU yU a b ha hb z).hom.val) : MapIsLocally (@LocallyOfFiniteType) (ObjectProperty.homMk ⟨p⟩ : I ⟶ schemeSpace T)",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Two statements, both with sorry proofs: all naturally represented fibrewise Isom spaces are locally of finite type; the space of triples has the specified two projections and all five finite-type conclusions. Reuses the landed arbitrary-base limit-preservation, CFG, second-projection, scheme-space and universal chart-property interfaces. No definitions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18c66d449",
+  "group": "O2",
+  "result": "pass",
+  "note": "Checked against artin.tex Tag 0CXI (arbitrary base, no Noetherian hypothesis) and the 0CXM first paragraph. hF IsFibredInGroupoids, hLimits IsLimitPreserving (objects, arrows and arrow equalities over Type u directed affine systems) and hDiagonal HasAlgebraicSpaceDiagonal (equivalent to Isom representability) match the node. hI is the natural representing bijection copied verbatim from dm_isom_space_unramified; orientation checked. MapIsLocally LFT is chartwise LFT. The second theorem has x,y as cartesian sections, Z with an equivalence to moduliTwoFiberProduct, both projections pinned via ModuliTwoIso, the three MapIsLocally conclusions and the two etale-chart composites without surjectivity. U ⨯ V in Over S is canonically the fibre product. lean.statement is verbatim; the five added stmt_deps are landed def nodes declaring the used names, with no cycle and no theorem stmt_deps. Proofs are by sorry; docstrings have source, blueprint id and proof steps; Worker report and Second reading by O2 present. No compile (no change). Only a cosmetic docstring index slip (c_j=a_j); no fix needed."
+ }
+}

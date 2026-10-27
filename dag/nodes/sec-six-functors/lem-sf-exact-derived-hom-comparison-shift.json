@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-exact-derived-hom-comparison-shift",
+ "kind": "statement",
+ "title": "Shift square for the exact derived evaluation comparison",
+ "statement": "Let C,D be closed braided monoidal Grothendieck abelian categories with additive tensor and functorial flat resolutions. Let F:C->D be an additive exact strong monoidal left adjoint preserving flat objects. Equip D(F) with the transported canonical derived monoidal structure [lem-sf-exact-closed-derived-hom]. For M in D(C), equip RHom_C(-,M) and RHom_D(-,D(F)M) with any coherent integer shifts satisfying the all-degree normalization of [lem-sf-native-derived-hom-signed-exact]. The natural transformation with components D(F)RHom(K,M)->RHom(D(F)K,D(F)M) given by the canonical evaluation transpose commutes with their induced integer shifts. This statement asserts only the shift square; it assumes neither exactness of the two Hom functors nor invertibility of the comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sf-native-derived-hom-signed-exact",
+  "lem-sf-exact-closed-derived-hom"
+ ],
+ "proof": [
+  {
+   "text": "Represent M by a K-injective I, and resolve FI->J by a K-injective target. Form the ordinary Hom-complex comparison followed by postcomposition to J. On K-flat tensor representatives, uncurrying identifies its localization with exactly the canonical derived evaluation transpose.",
+   "uses": [
+    "lem-sf-ringed-hom-complex-pullback-shift",
+    "lem-pc-kflat-resolution",
+    "lem-sf-exact-closed-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+   }
+  },
+  {
+   "text": "Signed reindexing commutes with the ordinary comparison and with postcomposition. Localize this equation, identify the adjoint source shifts by evaluation, and multiply both rows by the common quadratic scalar. This is exactly the CommShift equation for any normalized structures.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-hom-complex-pullback-shift",
+  "lem-pc-kflat-resolution",
+  "lem-sf-exact-closed-derived-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-25",
+  "note": "Extracted genuine intermediate steps of the parent proof, not a restatement of its conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Signed contravariant derived internal Hom exactness and its evaluation comparison commuting with shifts",
+   "results": "CochainComplex.shiftEval; CochainComplex.HomComplex.Cochain.leftUnshift_v; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. These supply shift calculations and exact derived functors, not the native closed Hom signed structure or its comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom contravariant exact functor signed shifts and closed comparison natural transformation commutes with shifts",
+   "results": "Exact-functor localization shift instances and CategoryTheory.Adjunction.IsTriangulated.commShift. No signed first-variable closed Hom or comparison shift theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Tt]riangulat|[Tt]riangulat.*isIso; ihomComparison.*[Ss]hift|[Ss]hift.*ihomComparison",
+   "results": "No Mathlib match. Upstream mapTriangle and two-of-three, RetractArrow stability, and map_pre_app_comp_ihomComparison_app prove the categorical glue; upstream exists_distinguished_ihom_pre does not specify signed connecting maps.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SiteHomComparisonThick",
+  "date": "2026-10-25",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-site-hom-comparison-thick",
+   "place": "Shift square for the exact derived evaluation comparison",
+   "via": [
+    "lem-weil-finite-duality-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactDerivedHomComparisonShift",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedHomComparisonShift.lean",
+  "declaration": "CategoryTheory.Functor.exactDerivedHomComparison_shift",
+  "statement": "theorem exactDerivedHomComparison_shift\n    {C : Type c} [Category.{u + 1} C] [Abelian C]\n    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]\n    [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]\n    [Abelian.HasFunctorialFlatResolution C]\n    {D : Type d} [Category.{u + 1} D] [Abelian D]\n    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D]\n    [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]\n    [Abelian.HasFunctorialFlatResolution D]\n    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] (M : DerivedCategory C)\n    (sC : (MonoidalClosed.internalHom.flip.obj M).CommShift ℤ)\n    (sD : (MonoidalClosed.internalHom.flip.obj (F.mapDerivedCategory.obj M)).CommShift ℤ)\n    (hC : letI := sC; ∀ (K : DerivedCategory C) (n : ℤ),\n      ((MonoidalClosed.internalHom.flip.obj M).commShiftIso n).hom.app (op K) =\n        (n * (n + 1) / 2).negOnePow • (siteHomOppositeSourceShift K n).hom.app M)\n    (hD : letI := sD; ∀ (K : DerivedCategory D) (n : ℤ),\n      ((MonoidalClosed.internalHom.flip.obj (F.mapDerivedCategory.obj M)).commShiftIso n).hom.app\n          (op K) = (n * (n + 1) / 2).negOnePow •\n            (siteHomOppositeSourceShift K n).hom.app (F.mapDerivedCategory.obj M)) :\n    letI := sC\n    letI := sD\n    letI := exactClosedDerivedMonoidal F\n    ∀ β : MonoidalClosed.internalHom.flip.obj M ⋙ F.mapDerivedCategory ⟶\n      F.mapDerivedCategory.op ⋙ MonoidalClosed.internalHom.flip.obj (F.mapDerivedCategory.obj M),\n      (∀ K, β.app (op K) = closedComparison F.mapDerivedCategory K M) →\n        NatTrans.CommShift β ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50959",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T164119-L-953435",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50959",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T164119-L-953435",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 3 new nodes/modules against lem-sf-site-hom-comparison-thick, change record site-hom-native-shifts, existing nativeInternalHom_contravariant_exact (sign convention), unit sk-prop-sf-rf-shriek-preservation realized; importer LisseFlatHomSiteComparison compiled against delivery"
+ }
+}

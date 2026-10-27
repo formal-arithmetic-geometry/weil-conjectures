@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-constant-module-global-encoding",
+ "kind": "statement",
+ "title": "Global internal module encoding with coordinate-normalized inverse image",
+ "statement": "Let X be a scheme, Λ a commutative condensed ring, k a commutative ring in the coefficient universe, and c:constant_X(k)≅smallRing(X,Λ_X). There is an equivalence E from internal Λ_X-modules to sheaves of k-modules on the coefficient-sized pro-etale site of X. Its functor is exactly smallModules followed by restriction along c and coefficientModelFixedScalars. It sends the regular internal module to the constant regular k-module. For every f:Y→X and d:constant_Y(k)≅smallRing(Y,Λ_Y) satisfying the constant-section equation for the actual coefficientMap, internal inverse image followed by the explicit encoding with d is naturally isomorphic to E followed by fixed-scalar inverse image. This is a global statement without a slice and is conditional on the displayed coordinate equation; no finiteness, nonzero-ring, nonempty-scheme or scalar-normalization condition occurs.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-pbc-constant-sheaf",
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites Tag 00YV; Modules on Sites Tags 03CY and 03D2; the global-encoding and direct-adjoint parts of lem-sfb-constant-slice-module-encoding."
+ },
+ "proof": [
+  {
+   "text": "Compose the sectionModuleEquivalence with AsSmall pushforwardPushforwardEquivalence, restriction along c and the proved fixed-scalar equivalence. This constructs the equivalence with exactly the stated functor. The general coefficientModelFixedScalars_isEquivalence declaration is used from FiniteComparisonModelRealization; it has no finite-coefficient hypothesis.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-cbc-constant-ring-module-sheaves",
+    "def-sfb-integral-models-stacks-data",
+    "lem-ctf-finite-comparison-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section encoding sends the regular module to the ring module on identical sections. The inverse ring isomorphism identifies the scalar restriction of this module with the constant ring module. The proved monoidal fixed-scalar equivalence sends its unit to the constant regular k-module.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "def-weil-pbc-constant-sheaf",
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-ctf-finite-comparison-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two direct images have identical underlying sections at each base-changed test object. Their actions by a∈k agree by the assumed coordinate equation, so the identity is a natural module isomorphism. Whisker the existing internal/sectionwise lowerComparison with this identity. Conjugate the fixed-scalar adjunction by the two encoding equivalences, transport its right adjoint using this comparison, and apply leftAdjointUniq. Whiskering back by the target equivalence yields the asserted inverse-image natural isomorphism.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-cbc-constant-ring-module-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-cbc-constant-ring-module-sheaves",
+  "def-sfb-integral-models-stacks-data",
+  "def-weil-pbc-constant-sheaf",
+  "lem-ctf-finite-comparison-model-realization",
+  "lem-sfb-constant-scalar-restriction-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites Tag 00YV; Modules on Sites Tags 03CY and 03D2; the global-encoding and direct-adjoint parts of lem-sfb-constant-slice-module-encoding."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant ring sheaf inverse image isomorphism compatible with constant sections and Cartesian coefficient ring",
+   "date": "2026-10-26",
+   "results": "Search of the Mathlib interfaces for constant sheaves and inverse image. Project searches also read ProEtaleConstantRingMap, SheafPullbackForgetComparison and the actual condensed coefficient maps.",
+   "verdict": "The generic adjunction and constant comparisons are available; no theorem states transport of arbitrary coordinates for this reconstructed condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Sheaf",
+   "date": "2026-10-26",
+   "results": "12 hits, including Equivalence.sheafCongr and dense-subsite sheaf equivalences.",
+   "verdict": "Use sheafCongr for the slice; it does not itself provide the specified inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafCongr|sheafPushforwardContinuousComp|constantCommuteCompose",
+   "date": "2026-10-26",
+   "results": "25 hits, including Sites.Equivalence, Sites.Continuous and Sites.ConstantSheaf.",
+   "verdict": "These supply the proved site transport and constant-sheaf comparison used in the new fixed-scalar localization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantSliceModuleEncoding",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-constant-slice-module-encoding",
+   "place": "The proved global encoding and adjunction comparison, isolated after private irreducible-wrapper optimization to keep each file within 60 seconds.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModuleGlobalEncoding",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModuleGlobalEncoding.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.constant_module_global_encoding",
+  "statement": "theorem constant_module_global_encoding\n    (X : Scheme.{u})\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (k : Type (u + 1)) [CommRing k]\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅\n      smallRing X (condensedRingObj Λ X)) :\n    ∃ E : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ≌\n        Sheaf (Scheme.coefficientProEtaleModelTopology.{u, u} X) (ModuleCat.{u + 1} k),\n      E.functor = smallModules X (condensedRingObj Λ X) ⋙ ConstantCompletion.res c.hom ⋙\n        coefficientModelFixedScalars _ k ∧\n      Nonempty (E.functor.obj (Mod.regular (condensedRingObj Λ X)) ≅\n        (constantSheaf (Scheme.coefficientProEtaleModelTopology.{u, u} X)\n          (ModuleCat.{u + 1} k)).obj (ModuleCat.of k k)) ∧\n      ∀ {Y : Scheme.{u}} (f : Y ⟶ X)\n        (d : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} Y) k ≅\n          smallRing Y (condensedRingObj Λ Y)),\n        (∀ (V : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ) (a : k),\n          ((InternalModuleOperations.coefficientMap Λ f).hom.app\n            (AsSmall.down.op.obj V)).hom\n              (c.hom.hom.app V\n                ((toSheafify (Scheme.coefficientProEtaleModelTopology.{u, u} X)\n                  ((Functor.const _).obj (CommRingCat.of k))).app V a)) =\n            d.hom.hom.app ((Scheme.coefficientProEtaleModelBaseChange.{u, u} f).op.obj V)\n              ((toSheafify (Scheme.coefficientProEtaleModelTopology.{u, u} Y)\n                ((Functor.const _).obj (CommRingCat.of k))).app\n                  ((Scheme.coefficientProEtaleModelBaseChange.{u, u} f).op.obj V) a)) →\n        Nonempty (CondensedRing.upperStar Λ f ⋙\n          (smallModules Y (condensedRingObj Λ Y) ⋙ ConstantCompletion.res d.hom ⋙\n            coefficientModelFixedScalars _ k) ≅\n          E.functor ⋙ Scheme.coefficientProEtaleFixedModulePullback.{u, u} f k)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T152628-L-1143618",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T152628-L-1143618",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

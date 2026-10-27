@@ -64,7 +64,26 @@ composition commutes with every profinite base change. Substitute these identiti
 into the three character laws. The values determine the character record uniquely. -/
 theorem restrictCharacterExist (a : Character A G) (v : H →ₜ* G) :
     ∃! b : Character A H, ∀ S g, b.app S g = a.app S (v.toContinuousMap.comp g) := by
-  sorry
+  let b : Character A H :=
+    { app := fun S g ↦ a.app S (v.toContinuousMap.comp g)
+      one := fun S ↦ by
+        convert a.one S using 1
+        congr 1
+        ext x
+        exact v.map_one
+      mul := fun S g h ↦ by
+        convert a.mul S (v.toContinuousMap.comp g) (v.toContinuousMap.comp h) using 1
+        congr 1
+        ext x
+        exact v.map_mul (g x) (h x)
+      naturality := fun S T f g ↦ a.naturality S T f (v.toContinuousMap.comp g) }
+  refine ⟨b, fun _ _ ↦ rfl, ?_⟩
+  intro c hc
+  have h : c.app = b.app := by funext S g; exact hc S g
+  cases c
+  dsimp only at h
+  cases h
+  rfl
 
 /-- Actual precomposition of the condensed additive character on every test object.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/
@@ -83,6 +102,65 @@ def second (S : Profinite.{u})
     (z : sections A (Mod.regular A.X ⊞ Mod.regular A.X) S) : sectionRing A S :=
   ((biprod.snd : Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X).hom.hom.app (op S)) z
 
+private abbrev sectionMap {M N : Modules A} (f : M ⟶ N) (S : Profinite.{u}) :
+    sections A M S →ₗ[sectionRing A S] sections A N S :=
+  (((sectionsFunctor A).map f).val.app (op S)).hom
+
+private lemma sectionMap_comp {M N L : Modules A} (f : M ⟶ N) (g : N ⟶ L)
+    (S : Profinite.{u}) (z : sections A M S) :
+    sectionMap (A := A) (f ≫ g) S z = sectionMap (A := A) g S (sectionMap (A := A) f S z) := rfl
+
+private lemma sectionMap_id (M : Modules A) (S : Profinite.{u}) (z : sections A M S) :
+    sectionMap (A := A) (𝟙 M) S z = z := rfl
+
+private lemma sectionMap_zero {M N : Modules A} (S : Profinite.{u})
+    (z : sections A M S) : sectionMap (A := A) (0 : M ⟶ N) S z = 0 := rfl
+
+private lemma first_inl (S : Profinite.{u}) (x : sectionRing A S) :
+    first (A := A) S (sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = x := by
+  change sectionMap (A := A) (biprod.fst :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S (sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = x
+  rw [← sectionMap_comp, biprod.inl_fst, sectionMap_id]
+
+private lemma second_inl (S : Profinite.{u}) (x : sectionRing A S) :
+    second (A := A) S (sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = 0 := by
+  change sectionMap (A := A) (biprod.snd :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S (sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = 0
+  rw [← sectionMap_comp, biprod.inl_snd, sectionMap_zero]
+
+private lemma first_inr (S : Profinite.{u}) (x : sectionRing A S) :
+    first (A := A) S (sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = 0 := by
+  change sectionMap (A := A) (biprod.fst :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S (sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = 0
+  rw [← sectionMap_comp, biprod.inr_fst, sectionMap_zero]
+
+private lemma second_inr (S : Profinite.{u}) (x : sectionRing A S) :
+    second (A := A) S (sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = x := by
+  change sectionMap (A := A) (biprod.snd :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S (sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x) = x
+  rw [← sectionMap_comp, biprod.inr_snd, sectionMap_id]
+
+private lemma coordinates_ext (S : Profinite.{u})
+    (z w : sections A (Mod.regular A.X ⊞ Mod.regular A.X) S)
+    (h₁ : first (A := A) S z = first (A := A) S w)
+    (h₂ : second (A := A) S z = second (A := A) S w) : z = w := by
+  have total (x : sections A (Mod.regular A.X ⊞ Mod.regular A.X) S) :
+      sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (first (A := A) S x) +
+        sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (second (A := A) S x) = x := by
+    exact congrArg (fun f ↦ sectionMap (A := A) f S x)
+      (biprod.total (X := Mod.regular A.X) (Y := Mod.regular A.X))
+  rw [← total z, ← total w, h₁, h₂]
+
 /-- The unipotent action is specified on the fixed, actual biproduct module. Both
 coordinate equations determine every action operator, hence all of this datum uniquely.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/
@@ -96,6 +174,45 @@ structure UnipotentAction (a : Character A G) where
     first (A := A) S z + a.app S g * second (A := A) S z
   second_action : ∀ S g z, second (A := A) S (act S g z) = second (A := A) S z
 
+private def shear (S : Profinite.{u}) (r : sectionRing A S) :
+    Module.End (sectionRing A S) (sections A (Mod.regular A.X ⊞ Mod.regular A.X) S) :=
+  LinearMap.id + (sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S).comp
+    ((LinearMap.mulLeft (sectionRing A S) r).comp (sectionMap (A := A) (biprod.snd :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S))
+
+private lemma first_shear (S : Profinite.{u}) (r : sectionRing A S)
+    (z : sections A (Mod.regular A.X ⊞ Mod.regular A.X) S) :
+    first (A := A) S (shear S r z) = first (A := A) S z + r * second (A := A) S z := by
+  change sectionMap (A := A) (biprod.fst :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S
+    (z + sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (r * second S z)) = _
+  rw [map_add]
+  change first (A := A) S z + first (A := A) S
+    (sectionMap (A := A) (biprod.inl :
+      Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (r * second S z)) = _
+  rw [first_inl]
+
+private lemma second_shear (S : Profinite.{u}) (r : sectionRing A S)
+    (z : sections A (Mod.regular A.X ⊞ Mod.regular A.X) S) :
+    second (A := A) S (shear S r z) = second (A := A) S z := by
+  change sectionMap (A := A) (biprod.snd :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S
+    (z + sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (r * second S z)) = _
+  rw [map_add]
+  change second (A := A) S z + second (A := A) S
+    (sectionMap (A := A) (biprod.inl :
+      Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (r * second S z)) = _
+  rw [second_inl, add_zero]
+
+private lemma sectionMap_natural {M N : Modules A} (k : M ⟶ N)
+    (S T : Profinite.{u}) (f : T ⟶ S) (x : sections A M S) :
+    N.X.obj.map f.op (sectionMap (A := A) k S x) = sectionMap (A := A) k T (M.X.obj.map f.op x) :=
+  ConcreteCategory.congr_hom (k.hom.hom.naturality f.op).symm x
+
+set_option linter.unusedVariables false in
 /-- There is a unique unipotent action with the displayed two coordinates.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class).
 Proof: the sectionwise biproduct is a product. Conjugate the linear matrix with entries
@@ -103,7 +220,71 @@ Proof: the sectionwise biproduct is a product. Conjugate the linear matrix with 
 action law, its naturality proves restriction compatibility. The two projections are
 jointly injective, so any action satisfying these equations is this one. -/
 theorem unipotentActionExist (a : Character A G) : ∃! d : UnipotentAction a, True := by
-  sorry
+  let d : UnipotentAction a :=
+    { act := fun S ↦
+        { toFun := fun g ↦ shear S (a.app S g)
+          map_one' := by
+            ext z
+            apply coordinates_ext S
+            · rw [first_shear, a.one, zero_mul, add_zero]
+              rfl
+            · rw [second_shear]
+              rfl
+          map_mul' := by
+            intro g h
+            ext z
+            apply coordinates_ext S
+            · change first S (shear S (a.app S (g * h)) z) =
+                first S (shear S (a.app S g) (shear S (a.app S h) z))
+              rw [first_shear, first_shear, first_shear, second_shear, a.mul]
+              simp only [add_mul]
+              abel
+            · change second S (shear S (a.app S (g * h)) z) =
+                second S (shear S (a.app S g) (shear S (a.app S h) z))
+              rw [second_shear, second_shear, second_shear] }
+      naturality := by
+        intro S T f g z
+        change (Mod.regular A.X ⊞ Mod.regular A.X).X.obj.map f.op
+            (shear S (a.app S g) z) =
+          shear T (a.app T (g.comp f.hom.hom))
+            ((Mod.regular A.X ⊞ Mod.regular A.X).X.obj.map f.op z)
+        apply coordinates_ext T
+        · have hf := sectionMap_natural
+            (biprod.fst : Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S T f
+          have hs := sectionMap_natural
+            (biprod.snd : Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S T f
+          change ∀ x, A.X.obj.map f.op (first S x) =
+            first T ((Mod.regular A.X ⊞ Mod.regular A.X).X.obj.map f.op x) at hf
+          change ∀ x, A.X.obj.map f.op (second S x) =
+            second T ((Mod.regular A.X ⊞ Mod.regular A.X).X.obj.map f.op x) at hs
+          rw [← hf, first_shear, first_shear, map_add, ← hf, ← hs,
+            ← a.naturality S T f g]
+          congr 1
+          exact map_mul
+            ((InternalAbelianSheafModule.sectionRings
+              (coherentTopology Profinite.{u}) A.X).map f.op).hom _ _
+        · have hs := sectionMap_natural
+            (biprod.snd : Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S T f
+          change ∀ x, A.X.obj.map f.op (second S x) =
+            second T ((Mod.regular A.X ⊞ Mod.regular A.X).X.obj.map f.op x) at hs
+          rw [← hs, second_shear, second_shear, hs]
+      first_action := fun S g z ↦ first_shear S (a.app S g) z
+      second_action := fun S g z ↦ second_shear S (a.app S g) z }
+  refine ⟨d, trivial, ?_⟩
+  intro e _
+  have h : e.act = d.act := by
+    funext S
+    apply MonoidHom.ext
+    intro g
+    apply LinearMap.ext
+    intro z
+    apply coordinates_ext S
+    · exact (e.first_action S g z).trans (d.first_action S g z).symm
+    · exact (e.second_action S g z).trans (d.second_action S g z).symm
+  cases e
+  dsimp only at h
+  cases h
+  rfl
 
 /-- The unique normalized action, on the actual R direct-sum R module.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/
@@ -126,7 +307,17 @@ theorem extensionMaps (a : Character A G) :
       ((trivial (R := A.toMon) (P := G)).obj (Mod.regular A.X)) (extension a) biprod.inl ∧
     Profinite.CondensedAction.Equivariant (extension a)
       ((trivial (R := A.toMon) (P := G)).obj (Mod.regular A.X)) biprod.snd := by
-  sorry
+  constructor
+  · intro S g x
+    change sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x = (unipotentAction a).act S g
+      (sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S x)
+    apply coordinates_ext S
+    · rw [(unipotentAction a).first_action, second_inl, mul_zero, add_zero]
+    · exact ((unipotentAction a).second_action S g _).symm
+  · intro S g z
+    exact (unipotentAction a).second_action S g z
 
 /-- The first-coordinate inclusion with its actual action-category Hom type.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/
@@ -144,7 +335,8 @@ Proof: the underlying biproduct inclusion followed by the second projection is z
 This equality is the equivariant equality because forgetting the action is faithful. -/
 theorem extensionZero (a : Character A G) :
     extensionInclusion a ≫ extensionProjection a = 0 := by
-  sorry
+  apply Subtype.ext
+  exact biprod.inl_snd
 
 /-- The short complex is the unipotent extension with trivial endpoints.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/
@@ -158,7 +350,15 @@ is monic, its projection is epic and the first coordinate is the kernel of the s
 Exactness is detected by forgetting; the faithful exact forgetful functor detects these
 monomorphisms and epimorphisms as well. -/
 theorem extensionExact (a : Character A G) : (extensionSequence a).ShortExact := by
-  sorry
+  let F := CondensedBar.forgetAction (A := A) (G := G)
+  let : F.Faithful := ⟨fun h ↦ Subtype.ext h⟩
+  have hs : ((extensionSequence a).map F).ShortExact :=
+    (ShortComplex.Splitting.ofHasBinaryBiproduct
+      (Mod.regular A.X) (Mod.regular A.X)).shortExact
+  exact
+    { exact := ((forgetExact A G).2.2 (extensionSequence a)).mpr hs.exact
+      mono_f := F.mono_of_mono_map hs.mono_f
+      epi_g := F.epi_of_epi_map hs.epi_g }
 
 /-- The specified positive section lift of 1 into the second biproduct coordinate.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/
@@ -176,7 +376,29 @@ theorem extensionPositive (a : Character A G) (S : Profinite.{u}) (g : C(S, G)) 
       ((extension a).act S g (extensionOneSection a S)) (extensionOneSection a S) =
     (((biprod.inl : Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X).hom.hom.app
       (op S)) (a.app S g)) := by
-  sorry
+  apply coordinates_ext S
+  · change sectionMap (A := A) (biprod.fst :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S (_ - _) = _
+    rw [map_sub]
+    change first (A := A) S ((unipotentAction a).act S g (extensionOneSection a S)) -
+      first (A := A) S (extensionOneSection a S) = _
+    rw [(unipotentAction a).first_action]
+    change first (A := A) S (sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (1 : sectionRing A S)) +
+        a.app S g * second (A := A) S (sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (1 : sectionRing A S)) -
+      first (A := A) S (sectionMap (A := A) (biprod.inr :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (1 : sectionRing A S)) =
+        first (A := A) S (sectionMap (A := A) (biprod.inl :
+        Mod.regular A.X ⟶ Mod.regular A.X ⊞ Mod.regular A.X) S (a.app S g))
+    rw [first_inr, second_inr, first_inl, zero_add, mul_one, sub_zero]
+  · change sectionMap (A := A) (biprod.snd :
+        Mod.regular A.X ⊞ Mod.regular A.X ⟶ Mod.regular A.X) S (_ - _) = _
+    rw [map_sub]
+    change second (A := A) S ((unipotentAction a).act S g (extensionOneSection a S)) -
+      second (A := A) S (extensionOneSection a S) = _
+    rw [(unipotentAction a).second_action, sub_self]
+    exact (second_inl S (a.app S g)).symm
 
 /-- The connecting class applied to the invariant unit, before shifting down by one.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/
@@ -205,7 +427,21 @@ and equality on all sections is equality of these character records. -/
 theorem coefficientCharacterExist (φ : A ⟶ A') (a : Character A G) :
     ∃! b : Character A' G, ∀ S g,
       b.app S g = (φ.hom.hom.hom.app (op S)) (a.app S g) := by
-  sorry
+  let b : Character A' G :=
+    { app := fun S g ↦ (φ.hom.hom.hom.app (op S)) (a.app S g)
+      one := fun S ↦ by rw [a.one]; exact map_zero _
+      mul := fun S g h ↦ by rw [a.mul]; exact map_add _ _ _
+      naturality := fun S T f g ↦ by
+        rw [← a.naturality S T f g]
+        exact ConcreteCategory.congr_hom (φ.hom.hom.hom.naturality f.op).symm
+          (a.app S g) }
+  refine ⟨b, fun _ _ ↦ rfl, ?_⟩
+  intro c hc
+  have h : c.app = b.app := by funext S g; exact hc S g
+  cases c
+  dsimp only at h
+  cases h
+  rfl
 
 /-- Actual composition of a condensed additive character with the coefficient ring map.
 Source: paragraph (3) (blueprint: def-sfb-condensed-unipotent-class). -/

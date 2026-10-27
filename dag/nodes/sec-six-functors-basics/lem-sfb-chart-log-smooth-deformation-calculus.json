@@ -1,0 +1,372 @@
+{
+ "id": "lem-sfb-chart-log-smooth-deformation-calculus",
+ "kind": "statement",
+ "title": "Deformation and differential calculus for a logarithmically smooth chart",
+ "statement": "Let $f:(X,M)\\to(Y,N)$ be a morphism of locally Noetherian fs log schemes [def-trf-fs-log-blowup] that is log smooth in the chart sense of [def-per-fs-log-smooth-etale]. Define the relative logarithmic differential sheaf $\\omega_f$ as the sheaf of $\\mathcal O_X$-modules generated locally by $da$ for local functions $a$ and $d\\log m$ for local log sections $m$, with relations: $d$ is additive, $d(ab)=a\\,db+b\\,da$, $dc=0$ for functions from $Y$, $d\\log(mm')=d\\log m+d\\log m'$, $d\\alpha(m)=\\alpha(m)d\\log m$, and $d\\log f^\\flat(n)=0$ for sections $n$ of $N$.\n\nThen the underlying scheme map is locally of finite presentation [def-sbc-locally-finite-presentation], and $\\omega_f$ is finite locally free: etale locally it is isomorphic to $\\mathcal O_X^s$ for some finite $s$. These assertions and the following lifting statements are preserved by etale localization on $X$ and $Y$ [def-weil-etale-morphism].\n\nLet $(T_0,L_0)\\hookrightarrow(T,L)$ be a first order thickening of fine log schemes over $(Y,N)$, meaning a closed immersion of underlying schemes with square-zero ideal $\\mathcal I$ [def-sbc-first-order-thickening], with fine log structures. Here $T$ is an arbitrary scheme, not necessarily locally Noetherian, and a log structure on it means, as in [def-trf-fs-log-blowup] but without that hypothesis, a sheaf of commutative monoids $L$ on the small etale site $T_{\\mathrm{Et}}$ [def-weil-pbc-etale-site] with a homomorphism $\\alpha:L\\to(\\mathcal O_T,\\cdot)$ inducing an isomorphism $\\alpha^{-1}(\\mathcal O_T^\\times)\\simeq\\mathcal O_T^\\times$; it is fine if etale locally it has a chart by a finitely generated integral commutative monoid $P$, meaning that at each geometric point $\\bar t$, with $A=\\mathcal O_{T,\\bar t}$ [def-weil-pbc-geometric-stalks] and $\\beta:P\\to A$ the composite with $\\alpha$, the induced map $P\\oplus_{\\beta^{-1}(A^\\times)}A^\\times\\to L_{\\bar t}$ is an isomorphism; log morphisms are defined as in [def-trf-fs-log-blowup]. Require it to be strict: on each geometric stalk its log structure is the pushout of $L$ and $\\mathcal O_{T_0}^{\\times}$ over $\\mathcal O_T^{\\times}$. For every log morphism $a_0:(T_0,L_0)\\to(X,M)$ over $(Y,N)$, a lift $a:(T,L)\\to(X,M)$ exists etale locally on $T$.\n\nOn any open of $T$ with one such lift, all lifts form a torsor under relative log derivations. Explicitly a log derivation with values in $\\mathcal I$, with scalars acting through $a_0$, is a pair $(D,\\delta)$: $D:a_0^{-1}\\mathcal O_X\\to\\mathcal I$ is additive, vanishes on functions from $Y$, and satisfies $D(ab)=a_0^*(a)D(b)+a_0^*(b)D(a)$; $\\delta:a_0^{-1}M^{\\rm gp}\\to\\mathcal I$ is an additive homomorphism vanishing on $f^\\flat N^{\\rm gp}$, with $D(\\alpha(m))=a_0^*(\\alpha(m))\\delta(m)$. Such pairs are exactly the $\\mathcal O$-linear maps from the pullback of $\\omega_f$ to $\\mathcal I$, by $da\\mapsto D(a)$ and $d\\log m\\mapsto\\delta(m)$. Here the pullback means tensoring $a_0^{-1}\\omega_f$ with $\\mathcal O_{T_0}$ over $a_0^{-1}\\mathcal O_X$. Acting by $(D,\\delta)$ replaces a lift's ring map $a^\\sharp(b)$ by $a^\\sharp(b)+D(b)$ and its log map $a^\\flat(m)$ by $a^\\flat(m)(1+\\delta(m))$. Every pair of lifts is related in this way by a unique log derivation. The ideal is an $\\mathcal O_{T_0}$-module since $\\mathcal I^2=0$, and $1+\\mathcal I$ is identified with its additive group by $v\\mapsto1+v$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.6.3, proof, printed p.252, invokes Kato (1988), Theorem 3.5. Agent-formulated general deformation-theoretic input to that proof; WANTED: Kato, Logarithmic structures of Fontaine--Illusie, section 3, infinitesimal log smoothness, logarithmic differentials and Theorem 3.5. The full calculus is not stated verbatim in ILO."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-sbc-first-order-thickening",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "def-trf-log-ideal-chart-presentation",
+  "def-sfb-log-infinitesimal-lifting-properties",
+  "def-weil-pbc-sheafification",
+  "def-sc-gm-torsor"
+ ],
+ "proof": [
+  {
+   "text": "Choose compatible charts $P\\to Q$ on $V\\to B$ from the chart definition, and put $W=B\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$. The finite-presentation theorem for commutative monoids gives generators $q_1,\\ldots,q_r$ and finitely many relations $a_j=b_j$ for $Q$, hence $\\mathbf Z[Q]=\\mathbf Z[x_1,\\ldots,x_r]/(x^{a_j}-x^{b_j})$. If $p_1,\\ldots,p_t$ generate $P$, choose monomials $x^{v_k}$ representing their images. As a $\\mathbf Z[P]$-algebra this presentation adds just the equations $z^{p_k}=x^{v_k}$; they imply compatibility for all of $P$. Thus $\\mathbf Z[P]\\to\\mathbf Z[Q]$ is finitely presented. Over an affine $\\operatorname{Spec}R\\subset B$, the affine fibre-product formula identifies $W$ with $\\operatorname{Spec}(R\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q])$. Finite presentation is preserved by this scalar extension, so $W\\to B$ is locally of finite presentation.",
+   "uses": [
+    "def-per-fs-log-smooth-etale",
+    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, monoid presentation consequence via the cited node; finite-presentation scalar extension and affine fibre product as in the cited statements."
+   }
+  },
+  {
+   "text": "The comparison $c:V\\to W$ is smooth and therefore locally of finite presentation by the smoothness definition. The etale map $B\\to Y$ is locally of finite presentation. Composition with $W\\to B$ shows $V\\to Y$ is locally of finite presentation. The etale maps $V\\to X$ cover $X$, are flat and locally of finite presentation. Apply fppf source locality to this family: $f:X\\to Y$ is locally of finite presentation. This requires no quasi-compact cover and also covers $X=\\varnothing$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-etale-morphism",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-trf-lfp-fppf-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H6, lemma-smooth-formally-smooth; descent of local finite presentation through the cited fppf-source-locality statement."
+   }
+  },
+  {
+   "text": "Reduce a strict test square etale locally on $T$ to these charts. Pull back a chart neighbourhood $V\\to X$ along $a_0$; its projection to $T_0$ is etale, and these projections cover $T_0$. Thickening invariance lifts this etale cover to $T$. On affine opens of the lifted cover, the map $T_0\\to B$ extends uniquely to a scheme map $T\\to B$ over $Y$: $B\\to Y$ is etale, hence flat and unramified. Its log map is specified by the already fixed log map to $Y$: locally choose a chart for $N$, pull its sections to $L$, and use the associated-log universal property for the pulled-back log structure on $B$. This is compatible with the ring map because $T\\to B$ is over $Y$. Its reduction is the given base log map, by uniqueness on that chart. We now have a square over $(B,N_B)$ with $a_0:T_0\\to V$ and a fixed monoid chart $P\\to Q$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "sbc-lem-thickening-etale-site",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-sfb-fine-chart-logification-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, chart setup, pp.136--138; agent expansion of the etale-local reduction, using Stacks Tag 03SI and the cited formal-etale lemma."
+   }
+  },
+  {
+   "text": "At a corresponding geometric point of $T_0$ and $T$, write $J=\\mathcal I_{\\bar t}$, $E=L_{\\bar t}^{\\rm gp}$ and $E_0=L_{0,\\bar t}^{\\rm gp}$. Choose a fine chart of $L$ near this point. Strictness identifies $L_0$ with its reduced associated log structure, so the chart-thickening theorem says every fibre $L_{\\bar t}\\to L_{0,\\bar t}$ is a nonempty free $1+J$-torsor. Consequently $E\\to E_0$ is surjective with kernel $1+J$: if $m/n$ reduces to $1$, their reductions agree and $m=n(1+v)$ for a unique $v\\in J$. Moreover $L_{\\bar t}=E\\times_{E_0}L_{0,\\bar t}$: if $e$ reduces to $m_0$, choose $m$ above $m_0$, and $e/m\\in1+J$, hence $e\\in L_{\\bar t}$. Integrality permits these embeddings in the group completions. Finally $(1+v)(1+w)=1+(v+w)$ since $J^2=0$. This gives the exact abelian-group sequence $0\\to(J,+)\\to E\\to E_0\\to0$.",
+   "uses": [
+    "lem-sfb-fine-chart-logification-thickening",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, p.69, associated-log conventions; explicit elementary group-completion calculation from the cited strict chart-thickening statement."
+   }
+  },
+  {
+   "text": "The base log map and $a_0$ give compatible homomorphisms $a:P^{\\rm gp}\\to E$ and $b_0:Q^{\\rm gp}\\to E_0$ with $\\pi a=b_0u$. Group completions are finitely generated: the finite monoid generators also generate the groups. By the chart hypothesis $K=\\ker u$ and $C_{\\rm tors}$, for $C=\\operatorname{coker}u$, are finite of invertible orders near the image in $V$. Their orders are units on $T_0$ and then on $T$: if $rs=1+v$ with $v\\in J$, multiply $s$ by $1-v$ to obtain an inverse to $r$. Thus multiplication by both orders is an automorphism on the module $J$. The compatible abelian-group lifting lemma gives $h:Q^{\\rm gp}\\to E$ with $hu=a$ and $\\pi h=b_0$. Since $b_0(Q)$ lies in $L_{0,\\bar t}$, the cartesian description in step 4 gives $h(Q)\\subset L_{\\bar t}$. We have therefore lifted the monoid map compatibly with $P$, without having assumed a scheme map $T\\to W$.",
+   "uses": [
+    "def-per-fs-log-smooth-etale",
+    "lem-sfb-compatible-abelian-group-lifting",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, p.252, invokes Kato Theorem 3.5; agent-formulated forward chart-lifting argument, with its arithmetic isolated in the cited lemma."
+   }
+  },
+  {
+   "text": "Spread this stalk map to an etale neighbourhood of $\\bar t$. Represent the images of the finitely many $Q$-generators by local sections of $L$. Impose the finitely many relations of $Q$, compatibility on generators of $P$, and the finitely many reduction equalities to $a_0$. Each equality of germs holds after a pointed neighbourhood refinement, and cofilteredness gives a common refinement for the finite list. Thus $h:Q\\to\\Gamma(T,L)$ exists locally with exactly the required compatibility and reduction. Its structure functions give $\\mathbf Z[Q]\\to\\Gamma(T,\\mathcal O_T)$. Together with $T\\to B$ this defines a scheme map $T\\to W$, reducing to $ca_0$, by the affine-spectrum and fibre-product universal properties. Pass to affine opens of $T$ and apply the formal smoothness of $c:V\\to W$ to obtain a scheme lift $a:T\\to V$ over $W$. The associated-log universal property gives its unique log map prescribed by $h$, since the $Q$-functions of $a$ are exactly $\\alpha_Lh(q)$. Compatibility on $P$ makes this a log lift over $B$, and its reduction agrees with $a_0$ on both functions and log sections. This proves etale-local existence for every fine strict test, with no Noetherian assumption on $T$.",
+   "uses": [
+    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-fibre-product",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-fine-chart-logification-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2 and XVI Proposition 3.6.3, chart route; agent expansion of forward Kato chart lifting. Ordinary smooth lifting is Stacks Tag 02H6, lemma-smooth-formally-smooth."
+   }
+  },
+  {
+   "text": "The lifting property just proved persists under any compatible etale localization $e:X'\\to X$, $d:Y'\\to Y$ with pulled-back log structures. Given a test for $X'\\to Y'$, first lift its composite to $X\\to Y$ by step 6. Locally on affine $T$ lift $T_0\\to X'$ uniquely over that map to $X$, using formal etaleness of $e$. The two resulting maps $T\\to Y'$ over $Y$ agree on $T_0$, so uniqueness for the etale map $d$ makes them equal. Log maps on pulled-back structures are forced by the associated-log universal property. Thus this is a log lift over the specified $Y'$, not just over $Y$. The proof works with either localization the identity and needs no Noetherian test scheme.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-sfb-fine-chart-logification-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Formal etale uniqueness, Tag 02HG, definition-formally-etale, via the cited flat-unramified lifting statement; elementary associated-log identification."
+   }
+  },
+  {
+   "text": "Apply the logarithmic differential calculus from strict infinitesimal lifting to $f$. Its hypotheses are now verified: $X,Y$ are locally Noetherian fs, the underlying map is locally of finite presentation by steps 1--2, arbitrary fine strict first-order tests lift by steps 3--6, and this property persists under compatible etale localization by step 7. Its sheaf presentation has precisely the generators and relations defining $\\omega_f$ in the statement, so it is the same sheaf. The cited statement yields etale-local finite freeness of $\\omega_f$. It also supplies the stated sheaf of lifts and its action by relative log derivations. No converse chart criterion or the parent infinitesimal-criterion node is used.",
+   "uses": [
+    "lem-sfb-lifting-log-differential-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2, pp.136--138, and XVI Proposition 3.6.3, p.252; differential input: Kato Propositions 3.9--3.10 and proof 3.13, isolated in the cited live node (Kato source WANTED locally)."
+   }
+  },
+  {
+   "text": "For clarity the torsor formulas can also be read directly from the relations. An $\\mathcal O_{T_0}$-linear map $a_0^*\\omega_f\\to\\mathcal I$ sends $db$ and $d\\log m$ to $D(b)$ and $\\delta(m)$; the defining relations are exactly additivity, Leibniz, base vanishing, and $D(\\alpha(m))=a_0^*\\alpha(m)\\delta(m)$. Conversely these identities define such a map, uniquely on generators. As $\\mathcal I^2=0$, the formulas $a'^\\sharp(b)=a^\\sharp(b)+D(b)$ and $a'^\\flat(m)=a^\\flat(m)(1+\\delta(m))$ preserve multiplication. In particular $\\alpha(a'^\\flat(m))=a^\\sharp\\alpha(m)+a_0^*\\alpha(m)\\delta(m)=a'^\\sharp\\alpha(m)$. Thus they give the claimed action. For two lifts their difference on functions is $D$, and the unique unit ratio in each log-section fibre is $1+\\delta(m)$ by the strict-thickening statement. These differences satisfy the same identities, and their uniqueness proves freeness and transitivity on any open admitting a lift.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-sfb-fine-chart-logification-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, associated-log conventions; explicit square-zero computation from the stated presentation and the cited chart-thickening fibres."
+   }
+  },
+  {
+   "text": "For compatible etale localizations $e:X'\\to X$ and $d:Y'\\to Y$, set $Z=X\\times_Y Y'$. Both $Z\\to X$ and $X'\\to X$ are etale, the first by etale base change. The induced map $X'\\to Z$ is therefore etale by composition cancellation. Over affine opens, the cited affine fibre-product formula and finite-presentation scalar extension show $Z\\to Y'$ is locally of finite presentation. Composing with $X'\\to Z$ gives this property for $f':X'\\to Y'$. Etale localizations remain locally Noetherian: their affine coordinate rings are finitely presented, hence finite type, over Noetherian rings, and the cited Noetherian finite-type theorem applies. Their pulled-back log structures are fs by the same etale-local chart definition. Step 7 gives all the strict-test lifting hypotheses for $f'$, including their further etale localization. Apply the existing lifting-differential calculus to $f'$ to obtain finite freeness and its torsor statements. The calculations in step 9 use only restriction of functions, log sections and the square-zero ideal, so give precisely the same action formulas after localization.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-trf-fs-log-blowup",
+    "lem-sfb-lifting-log-differential-calculus",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Etale localization clause; ordinary etale cancellation and affine finite-presentation base change from the cited nodes. Agent argument following the same local chart route."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-per-fs-log-smooth-etale",
+  "def-sbc-first-order-thickening",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-trf-fs-log-blowup",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-geometric-stalks",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-compatible-abelian-group-lifting",
+  "lem-sfb-fine-chart-logification-thickening",
+  "lem-sfb-lifting-log-differential-calculus",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2, pp.136--138, and XVI Proposition 3.6.3, p.252, identify the Kato chart route; the forward chart-lifting argument is written out here. Kato sections 1 and 3 WANTED locally; differential freeness is cited from the existing lifting-calculus node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Chart logarithmic smooth morphisms have finite locally free log differentials and lift across strict square zero immersions",
+   "results": "{\"t\": \"2026-10-22T05:09:30Z\", \"tool\": \"leansearch\", \"query\": \"Chart logarithmic smooth morphisms have finite locally free log differentials and lift across strict square zero immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"RingHom.Smooth\", \"Algebra.FormallySmooth.lift\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"AlgebraicGeometry.IsEtale\", \"liftOfDerivationToSquareZero\", \"RingHom.FormallySmooth\"], \"digest\": \"09825030d35096ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]og[Ss]mooth|[Ll]og[Dd]erivation|logarithmic.*differential",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"grep\", \"query\": \"[Ll]og[Ss]mooth|[Ll]og[Dd]erivation|logarithmic.*differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Basic.lean\"], \"digest\": \"8d2baca0704d3778\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\", \"Derivation\"",
+   "results": "{\"t\": \"2026-10-22T05:09:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogSmooth\\\", \\\"Derivation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fine saturated monoid charts with invertible torsion kernel and cokernel give infinitesimal logarithmic smoothness",
+   "results": "{\"t\": \"2026-10-22T05:09:48Z\", \"tool\": \"leanfinder\", \"query\": \"Fine saturated monoid charts with invertible torsion kernel and cokernel give infinitesimal logarithmic smoothness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Smooth.locally_isStandardSmooth\", \"RingHom.smooth_iff_locally_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.instSmoothOfIsStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"ea6d234170dfd1cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A log smooth morphism admits etale local logarithmic lifts over a strict nilpotent thickening, and lifts form a torsor under logarithmic derivations",
+   "results": "{\"t\": \"2026-10-22T05:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"A log smooth morphism admits etale local logarithmic lifts over a strict nilpotent thickening, and lifts form a torsor under logarithmic derivations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Etale.formallyEtale\", \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"Algebra.FormallyEtale.instFormallySmooth\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"eb804c573d35901b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary smooth/etale ring or scheme theory, ordinary derivations, or logarithmic derivatives of functions do not give sheaf log structures and compatible monoid lifting"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fs-log-infinitesimal-criterion",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Infinitesimal characterization of logarithmic chart smoothness used in the two-stage lifting proof of composition and the strict pullback proof. Supporting input: Infinitesimal deformation calculus for chart-log-smooth morphisms.",
+   "via": [
+    "lem-sfb-fs-log-infinitesimal-criterion",
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-chart-log-smooth-deformation-calculus",
+  "worker": "stage1",
+  "summary": "Proved local finite presentation and chart lifting by finite monoid presentations, strict unit fibres and compatible abelian-group lifting; reused the existing differential theorem only after establishing all its infinitesimal hypotheses. Preserved the statement. One statement-only arithmetic input ports a dropped generic lemma to the live route; no dropped id is cited.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Infinitesimal characterization of logarithmic chart smoothness used in the two-stage lifting proof of composition and the strict pullback proof. Supporting input: Infinitesimal deformation calculus for chart-log-smooth morphisms.",
+  "tool_uses": [
+   {
+    "node": "def-per-fs-log-smooth-etale",
+    "why": "Generic Log smooth and log etale morphisms of fs log schemes used only for finite-presentation algebra, strict chart construction, etale localization or ordinary smooth lifting; no direct-image, purity, trace or perverse theorem is used and the alteration route is retained."
+   },
+   {
+    "node": "def-sbc-first-order-thickening",
+    "why": "Generic Thickenings and first order thickenings used only for finite-presentation algebra, strict chart construction, etale localization or ordinary smooth lifting; no direct-image, purity, trace or perverse theorem is used and the alteration route is retained."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic Smooth morphisms used only for finite-presentation algebra, strict chart construction, etale localization or ordinary smooth lifting; no direct-image, purity, trace or perverse theorem is used and the alteration route is retained."
+   },
+   {
+    "node": "lem-trf-fg-commutative-monoid-finite-presentation",
+    "why": "Generic Finite presentations of finitely generated commutative monoids used only for finite-presentation algebra, strict chart construction, etale localization or ordinary smooth lifting; no direct-image, purity, trace or perverse theorem is used and the alteration route is retained."
+   },
+   {
+    "node": "lem-trf-lfp-fppf-source-locality",
+    "why": "Generic Local finite presentation is fppf local on the source used only for finite-presentation algebra, strict chart construction, etale localization or ordinary smooth lifting; no direct-image, purity, trace or perverse theorem is used and the alteration route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic A flat unramified morphism has unique infinitesimal lifts (is formally etale, hence formally smooth) used only for finite-presentation algebra, strict chart construction, etale localization or ordinary smooth lifting; no direct-image, purity, trace or perverse theorem is used and the alteration route is retained."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic The etale site of a thickening used only for finite-presentation algebra, strict chart construction, etale localization or ordinary smooth lifting; no direct-image, purity, trace or perverse theorem is used and the alteration route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-per-fs-log-smooth-etale",
+  "def-sbc-first-order-thickening",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "lem-trf-lfp-fppf-source-locality",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "sbc-lem-thickening-etale-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-a4499b8d3",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-a4499b8d3 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement. Item status: still unsplit with no proof in live and side-live, no repair note, and not on route-pivot-dropped.txt. It is the live sfb copy of the dropped lem-per-log-smooth-infinitesimal-calculus. The delivery ports the forward Kato 3.5 argument onto live nodes and cites no dropped node; a script found no dropped id and no cycle in the closure. Source: ILO X Prop 1.2, pp.136-138, which explicitly adapts Kato 3.5 (converse direction); the forward chart => lifting direction is correctly marked agent-written (Kato is WANTED). Steps: (1) Redei presentation gives Z[P]->Z[Q] finitely presented, then base change and the affine fibre product give W->B lfp. (2) lfp of V->Y, then lfp source locality along the etale chart family; covers X empty. (3) 03SI lifts the etale cover to T; 02HM-type uniqueness gives T->B; the log map is forced by the pulled-back N. (4) Strictness matches the fine-chart-logification stalk identification, so fibres are 1+J torsors; checked the exact sequence 0->J->E->E_0->0 and L = E x_{E_0} L_0. (5) Orders of K and C_tors are units on V_i, hence on T_0 and T, so they act invertibly on J; the new lemma gives h with hu=a and pi h=b_0, and h(Q) lies in L. (6) Germs spread on a cofiltered neighbourhood; T->W is built before the smooth lift along c (this fixes the old per Step-4 fault); the logification universal property then gives the log lift. (7) Etale localization of the lifting property via formal etaleness and uniqueness over Y'. (8) The hypotheses of lem-sfb-lifting-log-differential-calculus are all verified (lfp, arbitrary fine strict tests, localization); its omega_f relations and torsor match the item. (9) Torsor formulas checked using I^2=0. (10) Base change, cancellation, lfp and Noetherian checks for f', then apply the differential node. New node lem-sfb-compatible-abelian-group-lifting: true. a|_K=0 because |K| acts injectively on J; Ext^1(Z/d,J)=J/dJ=0 and Ext^1(free,J)=0. Both counterexamples check, and so do trivial cases. It is statement-only, self-contained, has five real searches, carries correct blueprint/created fields, and is not a clause of the item. Its only identical copy is the dropped per node, so it is an accepted port; it differs from lem-sfb-divisible-unit-lattice-extension. Batch-5 flags: lem-trf-fg-commutative-monoid-finite-presentation (Redei; 5-node closure, pure algebra) and lem-trf-lfp-fppf-source-locality (generic lfp descent; 72-node closure of pbc/sbc lemmas only) are general results. Neither is a trace-formula or Poincare-duality statement or a step of their proofs, so both are accepted. Tool uses accepted as generic: the def-per/def-sbc definitions, 02HM, 03SI and the two trf nodes. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChartLogSmoothDeformationCalculus",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.chart_logSmooth_deformation_calculus",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartLogSmoothDeformationCalculus.lean",
+  "statement": "theorem EtaleLogHom.chart_logSmooth_deformation_calculus {X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y) (hf : f.IsLogSmooth) : (LocallyOfFinitePresentation f.base ∧ f.toLogMap.HasFiniteLocallyFreeDifferentials ∧ f.toLogMap.HasEtaleLocalInfinitesimalLifts ∧ f.toLogMap.HasLiftDerivationTorsors) ∧ ∀ (X' Y' : FineSaturatedLogScheme.{u}) (e : EtaleLogHom X' X) (d : EtaleLogHom Y' Y) (f' : EtaleLogHom X' Y'), e.toLogMap.IsStrictEtale → d.toLogMap.IsStrictEtale → e.toLogMap.CompositesEq f.toLogMap f'.toLogMap d.toLogMap → LocallyOfFinitePresentation f'.base ∧ f'.toLogMap.HasFiniteLocallyFreeDifferentials ∧ f'.toLogMap.HasEtaleLocalInfinitesimalLifts ∧ f'.toLogMap.HasLiftDerivationTorsors",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.logDifferentialStructureRing",
+   "AlgebraicGeometry.EtaleLogStructure.differentialSymbols",
+   "AlgebraicGeometry.EtaleLogStructure.freeDifferentials",
+   "AlgebraicGeometry.EtaleLogStructure.freeD",
+   "AlgebraicGeometry.EtaleLogStructure.freeDLog",
+   "AlgebraicGeometry.EtaleLogMap.IsDifferentialRelation",
+   "AlgebraicGeometry.EtaleLogMap.differentialRelations",
+   "AlgebraicGeometry.EtaleLogMap.differentialPresheaf",
+   "AlgebraicGeometry.EtaleLogMap.differentialSheaf",
+   "AlgebraicGeometry.EtaleLogMap.differentialGeneratorMap",
+   "AlgebraicGeometry.EtaleLogMap.sheafD",
+   "AlgebraicGeometry.EtaleLogMap.sheafDLog",
+   "AlgebraicGeometry.EtaleLogMap.HasFiniteLocallyFreeDifferentials",
+   "AlgebraicGeometry.LogRelativeEtaleTest",
+   "AlgebraicGeometry.LogRelativeEtaleTest.Map",
+   "AlgebraicGeometry.logTestReduction",
+   "AlgebraicGeometry.EtaleLogMap.LiftDerivation",
+   "AlgebraicGeometry.EtaleLogMap.LiftDifferentialFunctional",
+   "AlgebraicGeometry.EtaleLogMap.LiftDifferentialFunctional.Represents",
+   "AlgebraicGeometry.EtaleLogMap.LiftDerivation.Acts",
+   "AlgebraicGeometry.EtaleLogMap.HasLiftDerivationTorsors",
+   "AlgebraicGeometry.EtaleLogHom.chart_logSmooth_deformation_calculus"
+  ],
+  "note": "Return L repair: helper declarations consolidated into this owning module; structure ring constructed from the published Gm structure presheaf and its sheaf proof, transported by sheafCompose."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbb26c1b0",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery after return 64056ec4 (A6/H12). The prescribed repair is applied exactly. The three new nodes are dropped. A diff shows the helper declarations moved into the item module unchanged except for blueprint names, the ring name and one re-wrapped line; theorem signature and docstring are byte-identical to the 46d351aa PASS. Scheme.logDifferentialStructureRing = etaleStructurePresheaf ⋙ forget₂ with a genuine sorry-free sheaf proof from isSheaf_etaleStructurePresheaf (same sections and restrictions; no universe restriction). stmt_deps = 7 base + def-trf-log-ideal-chart-presentation, def-sfb-log-infinitesimal-lifting-properties, def-weil-pbc-sheafification, def-sc-gm-torsor, all definition nodes. The item record differs from side-live only in lean/stmt_deps. The statement is verbatim; all 22 declarations are present; one sorry (theorem); no name clashes live; lines ≤100. Mathematics re-read (ω_f relations, étale-local freeness, lifting, torsor, localization, edge cases). Advisories: the helper docstring lacks the same-as-trfEtaleStructureRing remark; maintainer H4 note on three RingCat structure-ring copies. No compile (no file changed)."
+ }
+}

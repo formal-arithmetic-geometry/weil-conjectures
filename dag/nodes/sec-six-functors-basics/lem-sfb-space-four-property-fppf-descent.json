@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-space-four-property-fppf-descent",
+ "kind": "statement",
+ "title": "Fppf descent and base change of four algebraic-space morphism properties",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $h:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. An fppf covering $\\{Y_i\\to Y\\}_{i\\in I}$ is a set-indexed jointly surjective family of flat locally finitely presented maps, with flatness and local finite presentation tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. For algebraic spaces, affine means that every affine scheme base change has affine scheme source [pqf-def-affine-morphism]; finite type means quasi-compact and locally of finite type on etale scheme charts [def-weil-finite-type-morphism], where quasi-compact means that pullback to any quasi-compact scheme has quasi-compact source and an algebraic space is quasi-compact if it admits a quasi-compact surjective etale scheme atlas [def-weil-pbc-quasi-compact-scheme]; quasi-finite means finite type with finite geometric fibres, namely fibres over spectra of algebraically closed fields [def-weil-algebraic-closure]; separated means that the diagonal is a closed immersion on every scheme base change [def-weil-closed-immersion]. Each property $P$ in the list affine, finite type, quasi-finite, separated is invariant under isomorphisms of morphisms and preserved by arbitrary algebraic-space base change. Separately for each $P$ and every fppf covering as above,\n$$P(h)\\ \\Longleftrightarrow\\ \\text{for every }i\\in I,\\ P(X\\times_Y Y_i\\to Y_i).$$",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tags 041Z (lemma-descending-property-affine), 041U (lemma-descending-property-finite-type), 0427 (lemma-descending-property-quasi-finite), 0421 (lemma-descending-property-separated), with definition-property-morphisms-local; fppf specialization as listed in stacks-properties.tex Section 04XB (section-properties-morphisms). Base change: spaces-morphisms.tex Tags 03WI (lemma-base-change-affine), 03XH (lemma-base-change-finite-type), 03XL (lemma-base-change-quasi-finite), 03KL (lemma-base-change-separated)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-sfb-space-affine-quasifinite-properties"
+ ],
+ "proof": [
+  {
+   "text": "For $h:X\\to Y$, its quasi-compactness convention is unchanged if quasi-compact algebraic-space tests are allowed: choose a quasi-compact surjective etale scheme atlas $U\\to Z$ of such a test $Z$. Scheme-test quasi-compactness supplies a quasi-compact scheme atlas $V\\to X\\times_YU$. Its composite $V\\to X\\times_YZ$ is surjective etale by base change and composition [lem-trf-space-representable-etale-scheme-tests], so the latter space is quasi-compact. The converse just restricts the tests to schemes; [lem-sfb-space-quasicompact-affine-tests] also permits affine tests. Now prove the arbitrary base-change assertions. For affineness of the pullback $h'$ along $Y'\\to Y$, every affine scheme test $T\\to Y'$ has source $(X\\times_YY')\\times_{Y'}T\\cong X\\times_YT$, which is affine by affineness of $h$. The isomorphism forgets the redundant $Y'$ coordinate, with inverse inserting its fixed map from $T$. Finite type is preserved by [lem-sfb-stack-finite-type-calculus], using its explicit agreement with ordinary algebraic-space notions. Separatedness is preserved by [lem-sfb-space-separated-fp-composition]. Suppose $h$ is quasi-finite in the precise finite-geometric-fibre sense of the statement. Its pullback $h':X\\times_YY'\\to Y'$ is of finite type by the preceding assertion. For every algebraically closed field $\\Omega$ and $\\operatorname{Spec}\\Omega\\to Y'$, its fibre identifies with $X\\times_Y\\operatorname{Spec}\\Omega$. On any test scheme the identification forgets the redundant $Y'$ coordinate and its inverse inserts the prescribed map to $Y'$. Thus its point set is finite by the hypothesis on $h$. This proves base-change stability for that definition of quasi-finite and hence every forward covering implication.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tags 041Z, 041U, 0421, 0427: forward implications; spaces-morphisms.tex 03WI, 03XH, 03KL; finite-geometric-fibre convention handled directly"
+   }
+  },
+  {
+   "text": "For reverse implications fix an affine scheme $T\\to Y$. Apply [lem-sfb-space-fppf-finite-affine-refinement] to obtain $p:T'=\\coprod_{j\\in J}V_j\\to T$, flat surjective between affines, with $\\{p\\}$ both fppf and fpqc, and maps $V_j\\to Y_{a(j)}$ over $Y$. Write $E=X\\times_YT$ and $E'=E\\times_TT'$. The restriction $E_j=E'\\times_{T'}V_j$ identifies with $X\\times_YV_j$ and hence with $(X\\times_YY_{a(j)})\\times_{Y_{a(j)}}V_j$. These identifications match the projections because all descriptions give the same pair of sections, one in $X$ and one in $V_j$, with equal image in $Y$. By Step 1, each $E_j\\to V_j$ has whichever one of the four properties is assumed for all the original pullbacks. This refinement will be used for affineness and for scheme tests of the diagonal.",
+   "uses": [
+    "lem-sfb-space-fppf-finite-affine-refinement",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041Z, affine-test reduction, and spaces-topologies.tex 0DFQ, finite affine refinement"
+   }
+  },
+  {
+   "text": "Assume all the original pullbacks are affine. Then each $E_j$ of Step 2 is an affine scheme since $V_j$ is affine. We check that $E'$ is represented by $\\coprod_jE_j$. A section of $E'$ on a scheme $W$ includes a map $W\\to T'$. The inverse images $W_j$ of the disjoint open-and-closed summands $V_j$ partition $W$; on $W_j$ the section is exactly a map to $E_j$. Conversely these local sections glue uniquely since $E'$ is a sheaf, giving a section of $E'$. The coproduct partition description in [lem-trf-fppf-sheaf-coproduct-partition] gives exactly the same data for the coproduct of the representing sheaves; the scheme coproduct represents it, because maps to a disjoint union are maps on such a clopen partition [lem-weil-pbc-scheme-coproduct-family]. These constructions are inverse and commute with restriction, also for $J=\\varnothing$. Finally [lem-weil-pbc-finite-affine-coproduct-spectrum] makes this finite coproduct of affine schemes affine.",
+   "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041Z, affine refinement assembly; finite disjoint union identification expanded on sections"
+   }
+  },
+  {
+   "text": "An affine scheme is quasi-affine by taking its whole open subscheme, which is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Thus $E'$ is a quasi-affine scheme. Apply [lem-sfb-space-quasi-affine-affine-descent] to $E\\to T$ and the flat surjection of affine schemes $p:T'\\to T$ from Step 2. It says that $E$ is represented by a quasi-affine scheme, in particular by a scheme; it does not yet assert affineness. Now $E\\to T$ is a scheme morphism and its pullback to the fpqc covering $\\{p\\}$ is affine, by [pqf-lem-affine-local-target] applied to the singleton affine open cover of $T'$ by itself, whose inverse image is the affine scheme $E'$. [lem-weil-pbc-fpqc-descend-affine] says that $E\\to T$ is affine. Since $T$ is affine, $E$ itself is affine by the defining inverse-image criterion [pqf-def-affine-morphism]. This holds for every affine $T\\to Y$, which is exactly affineness of $h$ in the statement.",
+   "uses": [
+    "lem-sfb-space-quasi-affine-affine-descent",
+    "lem-weil-pbc-fpqc-descend-affine",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041Z, scheme representability followed by scheme affineness descent; representability supplied here by the stronger quasi-affine input 0423"
+   }
+  },
+  {
+   "text": "Assume all the original pullbacks are of finite type. Their local finite type descends along the given fppf family by [lem-sfb-space-lft-smooth-fpqc-locality], and their quasi-compactness descends by [lem-sfb-space-quasicompact-fppf-local]. The latter uses tests on all quasi-compact algebraic spaces; Step 1 proves this equivalent to tests on quasi-compact schemes, and [lem-sfb-space-quasicompact-affine-tests] further permits affine tests. Consequently $h$ is locally of finite type and quasi-compact, which is finite type. Each property was descended separately; no flatness or separation of $h$ was assumed.",
+   "uses": [
+    "lem-sfb-space-lft-smooth-fpqc-locality",
+    "lem-sfb-space-quasicompact-fppf-local",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041U (lemma-descending-property-finite-type), combining 041L and 041S"
+   }
+  },
+  {
+   "text": "Assume all the original pullbacks $h_i$ are separated, and put $D=X\\times_YX$. The relative diagonal $\\Delta_h:X\\to D$ is representable: for any scheme $T\\to D$, its source on that test is the pullback of the representable absolute diagonal of $X$ along the pair of maps $T\\rightrightarrows X$. Explicitly, the section consists of $x\\in X(W)$ and $t\\in T(W)$ for which both $X$ coordinates of $t$ equal $x$; the equality in $Y$ is then automatic. This is a scheme by [def-trf-algebraic-space]. It suffices to prove it a closed immersion over each affine open $T_0\\subseteq T$, since [lem-weil-pbc-closed-immersion-affine-cover-criterion] first supplies affine inverse images and surjective ring maps on those opens, and then its converse supplies the global closed immersion. Apply the refinement in Step 2 to the composite $T_0\\to D\\to Y$, giving $T'=\\coprod_jV_j\\to T_0$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-sfb-space-fppf-finite-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0421 (lemma-descending-property-separated), diagonal argument, with affine scheme tests explicit"
+   }
+  },
+  {
+   "text": "The scheme test of $\\Delta_h$ over each $V_j$ in Step 6 is a scheme test of $\\Delta_{h_{a(j)}}$: its two $X$ coordinates together with the chosen $Y_{a(j)}$ coordinate give a map $V_j\\to X_{a(j)}\\times_{Y_{a(j)}}X_{a(j)}$. Pulling back the latter diagonal imposes precisely that the two $X$ coordinates agree. Hence it is a closed immersion. The maps $V_j\\to T_0$ are an fppf scheme covering by the refinement lemma and hence an fpqc covering by [lem-trf-fppf-covering-is-fpqc]. Apply [lem-pc-fpqc-descend-closed-immersion] to the represented scheme morphism over $T_0$. It is a closed immersion. Step 6 gives that every scheme test of $\\Delta_h$ is a closed immersion, so $h$ is separated. This never requires $X$ or $D$ to be schemes.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-fppf-finite-affine-refinement",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0421, final descent of the diagonal; scheme descent 02L6"
+   }
+  },
+  {
+   "text": "Assume all $h_i$ are quasi-finite as defined in the statement. Step 5 gives finite type for $h$. Fix an algebraically closed field $\\Omega$ and $y:\\operatorname{Spec}\\Omega\\to Y$. By [def-trf-algebraic-space-jointly-surjective-family], there are $i$, a field extension $L/\\Omega$, and a lift $\\operatorname{Spec}L\\to Y_i$. Choose an algebraic closure $\\Lambda$ of $L$ using [def-weil-algebraic-closure]. Then $F_\\Lambda=X\\times_Y\\operatorname{Spec}\\Lambda$ is a geometric fibre of $h_i$, so its point set is finite. Put $F_\\Omega=X\\times_Y\\operatorname{Spec}\\Omega$. The projection $|F_\\Lambda|\\to|F_\\Omega|$ is surjective: represent any point of $F_\\Omega$ by $\\operatorname{Spec}K\\to F_\\Omega$, so $K/\\Omega$ is a field extension. Apply [lem-trf-family-common-extension-field] to $K/\\Omega$ and $\\Lambda/\\Omega$, obtaining a common extension $M$ with embeddings agreeing on $\\Omega$. The representative over $M$ and the map $\\operatorname{Spec}M\\to\\operatorname{Spec}\\Lambda$ give a point of $F_\\Lambda$ above the original class by the fibre-product universal property. A surjective image of a finite set is finite. Thus every geometric fibre of $h$ is finite, giving quasi-finiteness. No claim that finite topological fibres are discrete for arbitrary spaces is used.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "def-weil-algebraic-closure",
+    "lem-trf-family-common-extension-field",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0427, fppf specialization; finite-geometric-fibre formulation handled directly by field lifting and amalgamation"
+   }
+  },
+  {
+   "text": "Finally let $(u,v)$ be an isomorphism from $h:X\\to Y$ to $\\widetilde h:\\widetilde X\\to\\widetilde Y$. Every scheme test of either arrow, after composing its target map with $v$ or $v^{-1}$, is isomorphic to the corresponding test of the other; the inverse maps are induced by $u$ and $u^{-1}$. Hence affineness and finite geometric fibre sets are invariant (the latter sets are bijective). Quasi-compactness is invariant because an isomorphism carries a quasi-compact etale atlas to one, and the same test correspondence applies. A compatible etale scheme chart pair for $h$ is one for $\\widetilde h$ after composing the chart maps with $u,v$, with the same scheme map between the charts; therefore local finite type, and with quasi-compactness finite type, are invariant. The two relative diagonals have isomorphic scheme tests by the same pair-of-sections description, so separatedness is invariant. These observations also cover the empty spaces. In particular the empty covering can occur only over the empty $Y$, whence $X$ is empty; the empty affine scheme, vacuous chart tests, empty fibres and empty diagonal satisfy all four properties. Together with Steps 1, 4, 5, 7 and 8 this proves each asserted equivalence and all the stated invariances.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Definition-property-morphisms-local, isomorphism remark after the definition; empty covering case explicit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-algebraic-closure",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-sfb-space-fppf-finite-affine-refinement",
+  "lem-sfb-space-lft-smooth-fpqc-locality",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-space-quasi-affine-affine-descent",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-quasicompact-fppf-local",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-trf-family-common-extension-field",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-fpqc-descend-affine",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "pqf-def-affine-morphism",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Assembly from 041Z, 041U, 0421 and 0427, using the existing stronger 0423 representability input for the affine reduction and a direct finite-geometric-fibre argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|representable.*stack",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks, not algebraic spaces and 2-fibre products of stacks; the required comparison is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks, not algebraic spaces and 2-fibre products of stacks; the required comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine finite type quasi finite and separated morphisms of algebraic spaces are stable under base change and local on the fppf target",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, Algebra.QuasiFinite.baseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks, not algebraic spaces and 2-fibre products of stacks; the required comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine finite type quasi finite and separated morphisms of algebraic spaces descend under faithfully flat locally finitely presented target covers",
+   "results": "8 hits: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks, not algebraic spaces and 2-fibre products of stacks; the required comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affineness separatedness quasi finiteness finite type descend along fppf covers of algebraic spaces, not only schemes",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.IsAffineHom.of_comp, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes or ordinary categorical pullbacks, not algebraic spaces and 2-fibre products of stacks; the required comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine finite type quasi finite separated morphisms of algebraic spaces satisfy fppf descent and arbitrary base change",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits are scheme morphism properties and scheme descent declarations; no algebraic-space version or one-line specialization. Full project grep for the item tag and algebraic-space notion found no finished attachment."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|IsAffineHom.*[Dd]escend",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits are scheme morphism properties and scheme descent declarations; no algebraic-space version or one-line specialization. Full project grep for the item tag and algebraic-space notion found no finished attachment."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine finite type quasi finite separated morphisms of algebraic spaces are fppf local on the target",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.affineAnd_isLocal_of_propertyIsLocal, AlgebraicGeometry.HasAffineProperty.isLocal_affineProperty, AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget, AlgebraicGeometry.affineAnd_isLocal, AlgebraicGeometry.IsSeparated.of_isAffineHom, AlgebraicGeometry.targetAffineLocally, AlgebraicGeometry.LocallyOfFiniteType.mk, AlgebraicGeometry.IsSeparated.hasAffineProperty",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits are scheme morphism properties and scheme descent declarations; no algebraic-space version or one-line specialization. Full project grep for the item tag and algebraic-space notion found no finished attachment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits are scheme morphism properties and scheme descent declarations; no algebraic-space version or one-line specialization. Full project grep for the item tag and algebraic-space notion found no finished attachment."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of affineness finite type finite geometric fibres and separatedness under flat locally finitely presented covers of algebraic spaces",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits are scheme morphism properties and scheme descent declarations; no algebraic-space version or one-line specialization. Full project grep for the item tag and algebraic-space notion found no finished attachment."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-representable-stack-fppf-locality",
+  "date": "2026-10-23",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Presentation and diagonal of an affine action quotient stack. Supporting general input: descent of properties of the diagonal from the smooth presentation, independent of quotient stacks and group actions. Supporting input: space-level base-change stability and fppf descent, before the scheme-test argument of 04XD.",
+   "via": [
+    "lem-sfb-representable-stack-fppf-locality",
+    "lem-sfb-affine-action-stack-presentation",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-four-property-fppf-descent",
+  "worker": "stage1",
+  "summary": "Proved the four fppf descent assertions separately. Reused space base-change/locality nodes, quasi-affine representability descent, scheme affine and closed-immersion descent, and field amalgamation. Created only finite affine refinement, statement-only; unchanged statement, including its literal finite-geometric-fibre definition.",
+  "blueprint": "Inherited blueprint.from.node is null (confirmed by blueprint_refs.py ancestor). Retained the full inherited alteration/moduli chain. These steps supply the space-level property input to the representable-stack locality argument supporting det-thm-sf-ctf-stability-direct-images (3); newest blueprint proof at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md read.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic scheme descent, sheaf coproduct, field-amalgamation, or fibre-product foundation used in the indicated proof step; this unit has no replacement and its alteration/moduli route is retained."
+   },
+   {
+    "node": "lem-trf-family-common-extension-field",
+    "why": "Generic scheme descent, sheaf coproduct, field-amalgamation, or fibre-product foundation used in the indicated proof step; this unit has no replacement and its alteration/moduli route is retained."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-coproduct-partition",
+    "why": "Generic scheme descent, sheaf coproduct, field-amalgamation, or fibre-product foundation used in the indicated proof step; this unit has no replacement and its alteration/moduli route is retained."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme descent, sheaf coproduct, field-amalgamation, or fibre-product foundation used in the indicated proof step; this unit has no replacement and its alteration/moduli route is retained."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme descent, sheaf coproduct, field-amalgamation, or fibre-product foundation used in the indicated proof step; this unit has no replacement and its alteration/moduli route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-affine",
+    "why": "Generic scheme descent, sheaf coproduct, field-amalgamation, or fibre-product foundation used in the indicated proof step; this unit has no replacement and its alteration/moduli route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-trf-family-common-extension-field",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-fpqc-descend-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-0bec9fbd0",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-0bec9fbd0 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The statement and stmt_deps are unchanged from the base, the item is still unsplit live, and there is no repair note. All 9 steps check against the cited statements. Step 1: the quasi-compact convention bridge uses the etale-tests composition and base-change clauses correctly; affine base change is elementary; finite type and separatedness follow from stack-finite-type-calculus and separated-fp-composition. Steps 2–4: E' is identified with the finite coproduct of the affine E_j; the hypotheses of quasi-affine-affine-descent hold (affine T'→T, flat surjective), so E is a scheme; fpqc-descend-affine and affine T then make E affine. Step 5: the lft and qc locality nodes accept fppf families with space members. Steps 6–7: the relative diagonal is representable, and closed immersion is checked on affine opens and descended along the refinement (fppf, hence fpqc). Step 8: the literal finite-geometric-fibre convention follows by a field lift and common extension; I checked compatibility in Y. Step 9: isomorphism invariance and the empty cases. There is no cycle; the affine-locality citation was correctly avoided. New node lem-sfb-space-fppf-finite-affine-refinement: true (étale atlases of T×_Y Y_i, open images, quasi-compactness of T), source Stacks 0DFQ proof (spaces-topologies l.1267–1303) is correct, statement-only, self-contained, five searches recorded. It is not a duplicate: lem-pc-fppf-affine-refinement takes scheme members, trf-space-qc-finite-affine-atlas-refinement refines an etale atlas, and fpqc-property-affine-criterion only defines space-fpqc coverings. Batch-5: every listed trf citation is a general foundation, not a step of the trace formula or Poincaré duality: the algebraic-space and jointly-surjective definitions, field amalgamation, fppf⇒fpqc, sheaf coproduct partition, and representable-etale tests. The sfb citations are flagged only because their closure reaches the def-trf-algebraic-space definition. Accepted. The six declared tool_uses are generic scheme-descent, sheaf and field black boxes; accepted. No SGA citations. Non-blocking: existing nodes lem-sfb-space-fpqc-property-affine-criterion and lem-sfb-space-fpqc-qc-separated-descent could have shortened Steps 3–7. The null blueprint.from.node is inherited from the base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFourPropertyFppfDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.four_property_fppf_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFourPropertyFppfDescent.lean",
+  "statement": "theorem four_property_fppf_descent {S : Scheme.{u}} (P : MorphismProperty (AlgebraicSpace S)) (hP : P = @MapIsAffine S ∨ P = @MapIsFiniteType S ∨ P = @MapIsQuasiFinite S ∨ P = @MapIsSeparated S) : (∀ {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (f' : X' ⟶ Y') (eX : X ≅ X') (eY : Y ≅ Y'), f ≫ eY.hom = eX.hom ≫ f' → (P f ↔ P f')) ∧ (∀ {X Y Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y), P f → P (enlargedFibreProductFst g f)) ∧ (∀ {I : Type w} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (Yᵢ : I → AlgebraicSpace S) (g : ∀ i : I, Yᵢ i ⟶ Y), (∀ i : I, MapIsFlat (g i)) → (∀ i : I, MapIsLocallyOfFinitePresentation (g i)) → IsJointlySurjective (fun i : I ↦ (g i).hom.hom) → (P f ↔ ∀ i : I, P (enlargedFibreProductFst (g i) f)))",
+  "branch": "sheaf-dag",
+  "by": "Q71",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb5d6cbd1",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-space-affine-quasifinite-properties, both modules and dep sources (AlgebraicSpace, MorphismProperties, ProperCurveModuli MapIsQuasiCompact, PointClasses, EnlargedEtaleRingedSite enlargedFibreProductFst, JointSurjectivity). Iso invariance, arbitrary base change (enlargedFibreProductFst g f : Y'×_Y X → Y'), and the fppf iff (I : Type w, chartwise flat+lfp, joint surjectivity on field points) match the node; hP disjunction = separately for each P; no extra hypotheses; empty cover OK. MapIsAffine = Stacks 03WF via an actual IsPullback with affine U; MapIsQuasiFinite = finite type + Finite Point of the geometric fibre (Ω : Type u), the node's explicit convention; not a duplicate (no space-affine predicate live; SpaceMapIsLocallyQuasiFinite is a different notion). lean.statement verbatim for both nodes; node diff vs live only lean + 4 def-owner stmt_deps; one sorry; docstrings/source/9 proof steps present; report sections present. No files changed, no compile needed."
+ }
+}

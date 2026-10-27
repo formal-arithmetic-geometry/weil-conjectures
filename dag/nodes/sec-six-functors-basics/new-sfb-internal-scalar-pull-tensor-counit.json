@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "id": "new-sfb-internal-scalar-pull-tensor-counit",
+ "title": "The X tensor presentation followed by the tensor-model target",
+ "statement": "Let a:Λ→Λ′ and f:X→Y be as in [def-sfb-internal-derived-scalar-comparisons], and let tX:TensorNormalization(a,X) satisfy TensorNormalized. For every homotopy complex P over Λ on Y, put FP=Fh(P) for ordinary pullback F, and form eH from the ordinary coefficient isomorphism e of [new-integral-residue-ordinary-tensor-square]. Then tX.derived at L_Λ(f)(Qh(P)), followed by scalarTensorPullModelTarget(a,f,P) of [def-sfb-internal-scalar-tensor-pull-models], is V_X(D_X(γ_f(P))) followed by V_X of the scalar counit at FP, exact restriction’s factorization at the scalar extension of FP, and Qh of the ordinary X tensor presentation followed by inverse homotopy single-tensor comparison and eH.inv whiskered by FP. No Y tensor normalization or scalar base-change comparison is assumed.",
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-scalar-tensor-pull-models",
+  "new-integral-residue-ordinary-tensor-square"
+ ],
+ "proof": [
+  {
+   "text": "Any TensorNormalized presentation equals the canonical presentation. Compare on a K-flat resolution, where the localization tensor comparison is invertible, and then extend to every derived object by naturality. The ordinary_hom field identifies the ordinary presentations.",
+   "uses": [
+    "lem-sfb-canonical-coefficient-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply tensorPullCounit_fac with the exact pullback functor, its computation counit, the restricted regular coefficients, the scalarTensorRegularPullIso coefficient comparison, and the restricted scalar-extension derived counit. Its coefficient hypothesis is scalar_regular_pull_counit.",
+   "uses": [
+    "new-sfb-internal-scalar-regular-pull-counit",
+    "new-integral-residue-tensor-pull-counit-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the canonical tensor presentation and its derived counit. The defining tensor-presentation equation identifies the remaining counit with exact restriction followed by the ordinary balanced tensor presentation. Functoriality and associativity give the asserted order.",
+   "uses": [
+    "lem-sfb-canonical-coefficient-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-canonical-coefficient-tensor-normalization",
+  "new-sfb-internal-scalar-regular-pull-counit",
+  "new-integral-residue-tensor-pull-counit-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraphs (1) and (3), normalized canonical scalar-reduction comparison; Stacks 07A4, 0D6D, 0D6E, 07A6, 06YY and 06YP.",
+  "note": "Step 1: isolate the X tensor presentation and target, with no scalar base-change comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor transport through a natural isomorphism agrees with composition on tensorators",
+   "date": "2026-10-26",
+   "results": "8 hits, including Monoidal.transport_mu, transport_delta, transport and natTransIsMonoidal_of_transport.",
+   "verdict": "Use transport_delta. The relative module tensor comparison is in the project source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"transport_δ\"",
+   "date": "2026-10-26",
+   "results": "Monoidal.transport_delta and its reassociated equation.",
+   "verdict": "Used in the native/transported comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapModComapMonoidal|tensorPullCounit_fac|scalarTensorRegularPullIso",
+   "date": "2026-10-26",
+   "results": "0 Mathlib hits. Local rg locates the project module-object constructions and the arbitrary-coefficient ordinary homotopy square.",
+   "verdict": "Apply the project square after proving equality of the oplax structures."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarPullRouteModel",
+  "date": "2026-10-26",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Proof paragraphs (1) and (3), identifying the canonical scalar reduction and tensor pullback maps. Step 1: isolate the X tensor presentation and target, with no scalar base-change comparison.",
+   "via": [
+    "lem-sfb-internal-scalar-pull-route-model"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.InternalScalarPullTensorCounit",
+  "file": "lean/Sheaf/Paper/InternalScalarPullTensorCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.scalar_pull_tensor_counit",
+  "statement": "theorem scalar_pull_tensor_counit (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (tX : TensorNormalization a X)\n    (hX : TensorNormalized a X tX)\n    (P : HomotopyCategory (Modules Λ Y) (.up ℤ)) :\n    let F := CondensedRing.upperStar Λ f\n    let FP := (F.mapHomotopyCategory (.up ℤ)).obj P\n    let e := CondensedRing.residueOrdinaryRestrictedRegularPullIso Λ Λ' a f\n    let eH := (F.mapHomotopyCategoryFactors (.up ℤ)).app\n        ((CochainComplex.singleFunctor _ 0).obj (B₀ a Y)) ≪≫\n      (HomotopyCategory.quotient _ (.up ℤ)).mapIso\n        ((F.mapCochainComplexSingleFunctor 0).app (B₀ a Y) ≪≫\n          (HomologicalComplex.single _ (.up ℤ) 0).mapIso e)\n    tX.derived.hom.app ((L Λ f).obj (DerivedCategory.Qh.obj P)) ≫\n        scalarTensorPullModelTarget a f P =\n      (V a X).map ((D a X).map ((pullCounit (Λ := Λ) f).app P)) ≫\n        (V a X).map ((scalarCounit a X).app FP) ≫\n        (V₀ a X).mapDerivedCategoryFactorsh.hom.app\n          (((extension a X).mapHomotopyCategory (.up ℤ)).obj FP) ≫\n        DerivedCategory.Qh.map\n          ((Mod.tensorPresentationHomotopyIso (coefficientMap a X)).hom.app FP ≫\n            (homotopyTensorSingleIso (B₀ a X)).inv.app FP ≫ eH.inv ▷ FP)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065524-L-3050427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065524-L-3050427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

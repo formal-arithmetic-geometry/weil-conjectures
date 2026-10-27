@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-fourier-symbol-product-remainder",
+ "kind": "statement",
+ "title": "Euclidean Fourier symbol product and first-order remainder",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and the symbol estimates and oscillatory-integral normalization of [def-sfb-symbol-pseudodifferential-operators]. Let $m\\geq1$, $p,q,t\\geq0$ and $r,s\\in\\mathbf Z$. Let $a\\in S^r(\\mathbf R^m;\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q))$ and $c\\in S^s(\\mathbf R^m;\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^q,\\mathbf C^t))$ both have compact $x$ support. Put $\\widehat a_x(\\eta,\\xi)=\\int e^{-iy\\cdot\\eta}a(y,\\xi)\\,dy$. The absolutely convergent integral $$q(x,\\xi)=(2\\pi)^{-m}\\int e^{ix\\cdot\\eta}c(x,\\xi+\\eta)\\widehat a_x(\\eta,\\xi)\\,d\\eta$$ defines a smooth symbol $q\\in S^{r+s}$ compactly supported in $x$, satisfying $q-ca\\in S^{r+s-1}$. For every real $\\lambda,\\mu,\\nu,\\tau\\in C_c^\\infty(\\mathbf R^m)$ there is a symbol $q_{\\lambda\\mu\\nu}\\in S^{r+s}$ compactly supported in $x$ such that $$\\lambda\\operatorname{Op}(c)\\mu\\nu\\operatorname{Op}(a)\\tau=\\operatorname{Op}(q_{\\lambda\\mu\\nu})\\tau,\\qquad q_{\\lambda\\mu\\nu}-\\lambda\\mu\\nu ca\\in S^{r+s-1}.$$ These are identities on all distributions for the localized transposes with both spatial cutoffs. For real operators replace each input symbol by $a_{\\mathbf R}(x,\\xi)=(a(x,\\xi)+\\overline{a(x,-\\xi)})/2$ and similarly for $c$; the same formula and estimates hold for their real distributional actions.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, (3.4)–(3.5) and Proposition 3.7, printed pp.12–13. Composition Proposition 3.7: Euclidean Fourier product and its first Taylor remainder. Agent-supplied local formulation. Supplemental course read online: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3, (3.3)–(3.6), 3.12–3.15, printed pp.6–12; coordinate-change and amplitude reduction details are supplied by the agent, not asserted to be proved in those notes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Write $w(v)=1+|v|$, $A(\\eta,\\xi)=\\widehat a_x(\\eta,\\xi)$, and call the requested symbol $Q$ to distinguish it from the rank $q$. Compact spatial support means one compact set for all frequencies. Local symbol estimates become global by taking a compact neighbourhood of this support; derivatives vanish off it. For each multi-index $\\beta$, apply [lem-sfb-compact-symbol-frequency-kernel] to the compactly supported symbol $\\partial_\\xi^\\beta a$ of order $r-|\\beta|$. Its Fourier variable is $\\eta/(2\\pi)$, so it gives\n$$\\|\\partial_\\xi^\\beta A(\\eta,\\xi)\\|\\leq C_{\\beta L}w(\\eta)^{-L}w(\\xi)^{r-|\\beta|}\\quad(L\\geq0).$$\nDifferentiation commutes with the spatial integral: on compact parameter neighbourhoods every integrand derivative is bounded by a constant times the indicator of the common compact support. That indicator is integrable by [lem-sfb-continuous-on-compact-integrable]. Iterated [lem-sfb-dominated-integral-frechet-derivative] gives the derivative formulas, including $\\eta$ derivatives inserting powers of $-iy$; [lem-sfb-oscillatory-cutoff-convergence] gives continuity of these derivatives. Thus $A$ is smooth. All uses are entrywise, and finite matrices give the norm estimates.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-symbol-frequency-kernel",
+    "lem-sfb-continuous-on-compact-integrable",
+    "lem-sfb-dominated-integral-frechet-derivative",
+    "lem-sfb-oscillatory-cutoff-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3.10, (3.11), printed p.9. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "For $0\\leq\\theta\\leq1$ the triangle inequality gives\n$$w(\\xi+\\theta\\eta)\\leq w(\\xi)w(\\eta),\\qquad\nw(\\xi)\\leq w(\\xi+\\theta\\eta)w(\\eta).$$\nRaise the first inequality to $u$ if $u\\geq0$, or take the reciprocal of the second to the power $-u$ if $u<0$. Consequently\n$$w(\\xi+\\theta\\eta)^u\\leq w(\\xi)^u w(\\eta)^{|u|}\\quad(u\\in\\mathbf Z).$$\nThis handles negative as well as positive symbol orders.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3.14, Peetre estimate following (3.15), printed p.11. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "By Leibniz, each formal derivative term of $\\partial_x^\\alpha\\partial_\\xi^\\beta Q$ has integrand\n$$e^{ix\\cdot\\eta}(i\\eta)^{\\alpha-\\gamma}\n(\\partial_x^\\gamma\\partial_\\xi^\\delta c)(x,\\xi+\\eta)\n(\\partial_\\xi^{\\beta-\\delta}A)(\\eta,\\xi),\n\\quad\\gamma\\leq\\alpha,\\ \\delta\\leq\\beta.$$\nSteps 1–2 bound this by\n$$Cw(\\xi)^{r+s-|\\beta|}\nw(\\eta)^{-L+|\\alpha-\\gamma|+|s-|\\delta||}.$$\nChoose $L>m+|\\alpha|+\\max_{\\delta\\leq\\beta}|s-|\\delta||$, increasing it for any further derivative. For $d>m$, $w(\\eta)^{-d}\\leq(1+|\\eta|^2)^{-d/2}$ is integrable by [lem-sfb-euclidean-bracket-integrable]. The entrywise majorant estimate proves absolute convergence and the integrated order bound. Locally in $(x,\\xi)$, the factor involving $\\xi$ is bounded; iterated dominated differentiation therefore justifies every formal derivative, and dominated convergence gives its continuity. Hence $Q$ is smooth and belongs to $S^{r+s}$. Outside the common compact spatial support of $c$ the integrand is zero, so $Q$ has compact spatial support.",
+   "uses": [
+    "lem-sfb-dominated-integral-frechet-derivative",
+    "lem-sfb-oscillatory-cutoff-convergence",
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3.14, derivatives of (3.15), printed p.11. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "For fixed $\\xi$, $a(\\cdot,\\xi)$ is entrywise compactly supported smooth, hence Schwartz. Schwartz Fourier inversion, with $\\eta=2\\pi\\theta$ and Jacobian $(2\\pi)^m$, gives\n$$a(x,\\xi)=(2\\pi)^{-m}\\int e^{ix\\cdot\\eta}A(\\eta,\\xi)\\,d\\eta.$$\nSubtract $c(x,\\xi)$ times this absolutely convergent integral from $Q$. The fundamental theorem of calculus on $\\theta\\mapsto c(x,\\xi+\\theta\\eta)$ yields the exact formula\n$$Q-ca=(2\\pi)^{-m}\\int e^{ix\\cdot\\eta}\n\\left[\\sum_{j=1}^m\\eta_j\\int_0^1\n(\\partial_{\\xi_j}c)(x,\\xi+\\theta\\eta)\\,d\\theta\\right]\nA(\\eta,\\xi)\\,d\\eta.$$\nThe interval integrands are continuous. Products remain in the displayed matrix order, with $c$ multiplying $a$ on the left.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-fourier-coordinate-rule",
+    "lem-sfb-euclidean-jacobian-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3.14, Taylor formula and Fourier inversion, pp.11–12, expansion index p=0. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "In a derivative term of $\\partial_x^\\alpha\\partial_\\xi^\\beta(Q-ca)$, let $\\gamma,\\delta$ be the derivatives falling on $c$. The bracket in step 4 is bounded by\n$$Cw(\\eta)w(\\xi)^{s-1-|\\delta|}w(\\eta)^{|s-1-|\\delta||}.$$\nThis follows by applying step 2 to $\\partial_x^\\gamma\\partial_\\xi^{\\delta+e_j}c$, uniformly for $\\theta\\in[0,1]$, whose interval has length one. Including phase derivatives and step 1 bounds the full integrand by\n$$Cw(\\xi)^{r+s-1-|\\beta|}\nw(\\eta)^{-L+1+|\\alpha-\\gamma|+|s-1-|\\delta||}.$$\nChoose $L$ so the last exponent is less than $-m$ for all finitely many derivative terms, and for further derivatives as needed. Bracket integrability and the entrywise integral estimate give\n$$\\|\\partial_x^\\alpha\\partial_\\xi^\\beta(Q-ca)\\|\n\\leq C_{\\alpha\\beta}w(\\xi)^{r+s-1-|\\beta|}.$$\nDominated differentiation over $[0,1]$ uses a constant majorant on each compact parameter neighbourhood; over $\\eta$ it uses the displayed integrable bound. Dominated convergence gives continuity. Thus this proves the estimates for every derivative of the remainder, exactly $Q-ca\\in S^{r+s-1}$.",
+   "uses": [
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-dominated-integral-frechet-derivative",
+    "lem-sfb-oscillatory-cutoff-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3.14, Taylor remainder, pp.11–12, expansion index p=0. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "For a compactly supported smooth input $f$, put $H_f(\\xi)=\\int e^{-iy\\cdot\\xi}f(y)\\,dy$. Schwartz inclusion and Fourier invariance make $H_f$ rapidly decreasing. The compact-symbol theorem gives $g=\\operatorname{Op}(a)f$ compactly supported smooth and, changing from its $2\\pi$ convention,\n$$H_g(\\zeta)=(2\\pi)^{-m}\\int A(\\zeta-\\xi,\\xi)H_f(\\xi)\\,d\\xi.$$\nApply that theorem's quantization formula to $c$ and $g$. The double integral for $\\operatorname{Op}(c)g$ has coefficient $(2\\pi)^{-2m}$. Translate $\\eta=\\zeta-\\xi$, with Jacobian one. Its norm is bounded by\n$$Cw(\\eta)^{-L+|s|}w(\\xi)^{r+s}|H_f(\\xi)|.$$\nThe first factor is integrable for $L>m+|s|$; rapid decay bounds the second by $Cw(\\xi)^{-d}$ for $d>m$. The product-integrability and Fubini node therefore allows swapping the integrals. The inner $\\eta$ integral equals $(2\\pi)^mQ(x,\\xi)$, leaving\n$$(2\\pi)^{-m}\\int e^{ix\\cdot\\xi}Q(x,\\xi)H_f(\\xi)\\,d\\xi\n=\\operatorname{Op}(Q)f(x).$$\nThe final equality is the compact-symbol theorem applied to the symbol from step 3. This proves equality of the specified oscillatory quantizations, including their cutoff limits.",
+   "uses": [
+    "lem-sfb-schwartz-test-inclusion-integrability",
+    "lem-sfb-schwartz-fourier-coordinate-rule",
+    "lem-sfb-compact-symbol-frequency-kernel",
+    "lem-sfb-euclidean-jacobian-integral",
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate",
+    "lem-sfb-product-fubini-integral-swap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3.14, derivation of (3.15), pp.10–11. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "Set $h=\\mu\\nu$, $b=ha$ and $d=\\lambda c$. Leibniz shows that $b\\in S^r$, $d\\in S^s$ with compact spatial support: every derivative of a fixed smooth compactly supported cutoff is bounded. Output multiplication multiplies the quantization symbol directly in its defining integral. Apply steps 1–6 to $(b,d)$ and call the result $q_{\\lambda\\mu\\nu}=Q_{d,b}$. It is independent of $\\tau$. For a test $f$, $\\tau f$ is a test and\n$$\\lambda\\operatorname{Op}(c)\\mu\\nu\\operatorname{Op}(a)(\\tau f)\n=\\operatorname{Op}(d)\\operatorname{Op}(b)(\\tau f)\n=\\operatorname{Op}(q_{\\lambda\\mu\\nu})(\\tau f).$$\nThe symbol has compact spatial support, order $r+s$, and\n$$q_{\\lambda\\mu\\nu}-db\n=q_{\\lambda\\mu\\nu}-\\lambda\\mu\\nu ca\\in S^{r+s-1}$$\nby step 5.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3.14, localized composition, p.10. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "Use only the test-function and transpose continuity clause of [lem-sfb-compact-oscillatory-amplitude-reduction], not its reduced-symbol conclusion. Apply it to\n$$\\lambda(x)c(x,\\xi)\\mu(y),\\quad\n\\nu(x)a(x,\\xi)\\tau(y),\\quad\nq_{\\lambda\\mu\\nu}(x,\\xi)\\tau(y).$$\nAll three amplitudes have compact $(x,y)$ support and satisfy the required estimates by Leibniz and the established symbol bounds. It follows that\n$$L_c=\\lambda\\operatorname{Op}(c)\\mu,\\quad\nL_a=\\nu\\operatorname{Op}(a)\\tau,\\quad\nL_Q=\\operatorname{Op}(q_{\\lambda\\mu\\nu})\\tau$$\nand their bilinear transposes act continuously on test functions, with compact support controlled by the relevant spatial projection. Their transpose extensions are precisely the localized distributional actions in the definition. In particular $L_a^tL_c^t\\phi$ is a legitimate compactly supported smooth test for every test $\\phi$.",
+   "uses": [
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, localized interpretation of §3.3–3.9; continuity supplied by the cited amplitude node. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "Step 7 gives $L_cL_af=L_Qf$ for all tests $f$. Pair with a test $\\phi$ and use the defining transpose identities:\n$$\\int f\\cdot(L_a^tL_c^t\\phi-L_Q^t\\phi)=0\\quad\\text{for every test }f.$$\nThe parenthesized difference is smooth with compact support by step 8. Testing a component against its complex conjugate gives a zero integral of its squared absolute value. Continuity then forces that component to vanish everywhere. Thus $L_a^tL_c^t\\phi=L_Q^t\\phi$. For every distribution $u$ the definition yields\n$$(L_cL_au)(\\phi)=u(L_a^tL_c^t\\phi)\n=u(L_Q^t\\phi)=(L_Qu)(\\phi).$$\nThis proves the asserted equality on all distributions by transposition with both spatial cutoffs.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, localized transpose extension of §3.14; explicit duality argument by Q83. Expanded argument by Q83."
+   }
+  },
+  {
+   "text": "Put $a^\\natural(x,\\xi)=\\overline{a(x,-\\xi)}$, $a_{\\mathbf R}=(a+a^\\natural)/2$, and similarly for $c$. Reflection and conjugation preserve all symbol bounds and compact spatial supports. On real inputs, conjugating the quantization integral and substituting $\\xi\\mapsto-\\xi$ gives $\\operatorname{Re}\\operatorname{Op}(a)=\\operatorname{Op}(a_{\\mathbf R})$, also the real-action clause of the amplitude node. Apply the construction to the two symmetrized input symbols. Indeed\n$$A_{a^\\natural}(\\eta,\\xi)=\\overline{A_a(-\\eta,-\\xi)},\\qquad\nQ_{c^\\natural,a^\\natural}(x,\\xi)=\\overline{Q_{c,a}(x,-\\xi)}.$$\nThe second identity follows by conjugating the absolutely convergent integral and substituting $\\eta\\mapsto-\\eta$, whose absolute Jacobian is one. Thus natural-fixed inputs give a natural-fixed output, and real cutoffs preserve this property. Steps 3 and 5 give the same estimates with leading product $c_{\\mathbf R}a_{\\mathbf R}$. The transpose equalities restrict to real tests and real distributions. All formulas also hold in zero ranks: the matrices and all integrals are then zero.",
+   "uses": [
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-euclidean-jacobian-integral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Proposition 3.7; supplemental course read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, real conjugation symmetry for (3.3) and (3.15); explicit extension by Q83. Expanded argument by Q83."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-compact-oscillatory-amplitude-reduction",
+  "lem-sfb-compact-symbol-frequency-kernel",
+  "lem-sfb-continuous-on-compact-integrable",
+  "lem-sfb-dominated-integral-frechet-derivative",
+  "lem-sfb-euclidean-bracket-integrable",
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-integrable-majorant-estimate",
+  "lem-sfb-oscillatory-cutoff-convergence",
+  "lem-sfb-product-fubini-integral-swap",
+  "lem-sfb-schwartz-fourier-coordinate-rule",
+  "lem-sfb-schwartz-test-inclusion-integrability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Part I §3.B, Proposition 3.7 (WANTED locally). Supplemental source read online: Demailly, Differential and pseudodifferential operators on manifolds, §3.10 and §3.14, (3.15), pp.9–12, https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Normalization, all derivative bounds and transpose extension expanded by Q83."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The oscillatory product symbol of two compactly supported symbols has order the sum and differs from the matrix product by one lower order",
+   "results": "{\"t\": \"2026-10-24T04:14:11Z\", \"tool\": \"leanfinder\", \"query\": \"The oscillatory product symbol of two compactly supported symbols has order the sum and differs from the matrix product by one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContDiffMapSupportedIn.seminorm_postcompLM_le\", \"HasCompactSupport.convolution_integrand_bound_left\", \"ContinuousLinearMap.bilinear_hasTemperateGrowth\", \"Function.HasTemperateGrowth.fun_mul\", \"Function.HasTemperateGrowth.mul\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.smulRightCLM\", \"HasCompactSupport.convolution_integrand_bound_right\"], \"digest\": \"b20be09592897afe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Schwartz spaces, ordinary coordinate changes or Fourier derivative estimates, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"symbol\"",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"symbol\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.ParserDescr.symbol\", \"Lean.ParserDescr.nonReservedSymbol\", \"Lean.ParserDescr.unicodeSymbol\", \"Std.Time.DateFormatSymbols\", \"Std.Time.DayPeriodSymbols\", \"Std.Time.DateFormatSymbols.enUS\", \"Std.Time.instInhabitedDayPeriodSymbols\", \"Std.Time.instReprDayPeriodSymbols\"], \"digest\": \"483941f8e9c4ea87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no relevant pseudodifferential or oscillatory declaration; symbol-name hits are parser syntax."
+  },
+  {
+   "tool": "grep",
+   "query": "symbol.*compos|compos.*symbol|quantiz|Quantiz",
+   "results": "{\"t\": \"2026-10-24T04:14:03Z\", \"tool\": \"grep\", \"query\": \"symbol.*compos|compos.*symbol|quantiz|Quantiz\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits in Mathlib/Analysis/."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of quantized symbols has leading term their matrix product",
+   "results": "{\"t\": \"2026-10-24T04:14:04Z\", \"tool\": \"leansearch\", \"query\": \"Composition of quantized symbols has leading term their matrix product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.toMatrixAlgEquiv'_comp\", \"LinearMap.toMatrix_mul\", \"LinearMap.toMatrixAlgEquiv_comp\", \"LinearMap.toMatrixAlgEquiv'_mul\", \"LinearMap.toMatrix'_comp\", \"LinearMap.toMatrix'_mul\", \"Matrix.toBilin_comp\", \"PEquiv.toMatrix_trans\"], \"digest\": \"abbe17dd33686daa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary asymptotic order, diffeomorphisms or matrices, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Taylor expansion in the frequency variable gives the first remainder estimate for the Kohn Nirenberg symbol product",
+   "results": "{\"t\": \"2026-10-24T04:14:14Z\", \"tool\": \"leanfinder\", \"query\": \"Taylor expansion in the frequency variable gives the first remainder estimate for the Kohn Nirenberg symbol product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral'\", \"FormalMultilinearSeries.taylorComp_sub_taylorComp_isBigO\", \"VectorFourier.norm_iteratedFDeriv_fourierPowSMulRight\"], \"digest\": \"3424254915bc5c14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Schwartz spaces, ordinary coordinate changes or Fourier derivative estimates, not this oscillatory symbol theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|Kohn|symbol.*compos|compos.*symbol",
+   "results": "{\"t\": \"2026-10-24T04:41:23Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|Kohn|symbol.*compos|compos.*symbol\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no pseudodifferential source/name hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Kohn Nirenberg product of two symbols is a symbol of the sum of their orders",
+   "results": "{\"t\": \"2026-10-24T04:41:24Z\", \"tool\": \"leansearch\", \"query\": \"The Kohn Nirenberg product of two symbols is a symbol of the sum of their orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HahnSeries.order_mul\", \"MvPowerSeries.order_mul\", \"PowerSeries.le_order_mul\", \"PowerSeries.le_order_prod\", \"MvPowerSeries.le_order_mul\", \"PowerSeries.order_mul_ge\", \"analyticOrderAt_mul\", \"MvPowerSeries.weightedOrder_mul\"], \"digest\": \"af513c0703d1563b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits: HahnSeries.order_mul, MvPowerSeries.order_mul, PowerSeries.le_order_mul, PowerSeries.le_order_prod, MvPowerSeries.le_order_mul, PowerSeries.order_mul_ge, analyticOrderAt_mul, MvPowerSeries.weightedOrder_mul; none states variable-frequency symbol composition. Fourier derivative tools are ingredients, not one-line specializations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudodifferential\"",
+   "results": "{\"t\": \"2026-10-24T04:41:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudodifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no pseudodifferential source/name hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of compactly spatially supported pseudodifferential symbols has leading symbol the matrix product and an order minus one Taylor remainder",
+   "results": "{\"t\": \"2026-10-24T04:41:26Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of compactly spatially supported pseudodifferential symbols has leading symbol the matrix product and an order minus one Taylor remainder\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.compCLM\", \"ContDiffMapSupportedIn.postcompCLM_apply\", \"ContDiffMapSupportedIn.postcompLM_apply\", \"ContDiffMapSupportedIn.seminorm_postcompLM_le\", \"TestFunction.postcompCLM\", \"SchwartzMap.compCLMOfAntilipschitz\", \"ContDiffMapSupportedIn.postcompLM\", \"SchwartzMap.compCLM_apply\"], \"digest\": \"bd99ae9f3601dee7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits: SchwartzMap.compCLM, ContDiffMapSupportedIn.postcompCLM_apply, ContDiffMapSupportedIn.postcompLM_apply, ContDiffMapSupportedIn.seminorm_postcompLM_le, TestFunction.postcompCLM, SchwartzMap.compCLMOfAntilipschitz, ContDiffMapSupportedIn.postcompLM, SchwartzMap.compCLM_apply; none states variable-frequency symbol composition. Fourier derivative tools are ingredients, not one-line specializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An oscillatory Fourier integral of symbols differs from their pointwise product by one order using the fundamental theorem of calculus in frequency",
+   "results": "{\"t\": \"2026-10-24T04:41:54Z\", \"tool\": \"leanfinder\", \"query\": \"An oscillatory Fourier integral of symbols differs from their pointwise product by one order using the fundamental theorem of calculus in frequency\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral'\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"Real.iteratedFDeriv_fourierIntegral\", \"VectorFourier.iteratedFDeriv_fourierIntegral\", \"VectorFourier.fderiv_fourierIntegral\"], \"digest\": \"a6e6a3d05ec01add\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits: VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le, VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral, Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le, VectorFourier.hasFTaylorSeriesUpTo_fourierIntegral', VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral, Real.iteratedFDeriv_fourierIntegral, VectorFourier.iteratedFDeriv_fourierIntegral, VectorFourier.fderiv_fourierIntegral; none states variable-frequency symbol composition. Fourier derivative tools are ingredients, not one-line specializations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudodifferential-leading-calculus",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit. Supporting local analytic input: Composition Proposition 3.7: Euclidean Fourier product and its first Taylor remainder.",
+   "via": [
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fourier-symbol-product-remainder",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded absolute Fourier product calculation, signed weight inequality, all symbol and Taylor remainder derivative estimates, cutoff specialization and transpose equality on distributions. Reused existing compact-symbol kernel and compact-amplitude continuity nodes; zero new nodes or Mathlib leaves. Checked real symmetrization, zero ranks, negative orders, common compact supports and Fourier conventions. No Lean writing or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit. Supporting local analytic input: Composition Proposition 3.7: Euclidean Fourier product and its first Taylor remainder. Steps 1–6 realize Euclidean composition and Taylor remainder; steps 7–10 supply cutoff and real distributional forms. Latest blueprint direct-images proof (3) read. Ancestor command reports None: inherited null from.node and via chain retained. No chapter/unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-65b3b2db4",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-65b3b2db4 (reviewer sub-agent of L); spot-checked: I read the item, the statements of all 12 cited nodes and the parent's citing steps 5–6, and checked every step by hand. The statement and stmt_deps are unchanged from the parent's creation. There are no new nodes and every citation is in unit sk-thm-sf-ctf-stability. Formula for q: re-derived from H_{Op(a)f}(ζ)=(2π)^{-m}∫A(ζ−ξ,ξ)H_f(ξ)dξ and η=ζ−ξ. Step 1: the kernel node is applied to ∂_ξ^β a, converting b̂(η/2π,ξ). Step 2: Peetre inequality including negative orders. Steps 3 and 5: exponent bookkeeping verified, giving ξ-exponents r+s−|β| and r+s−1−|β|; L is chosen per derivative. Step 4: inversion in the 2π convention plus the elementary fundamental theorem of calculus. Step 6: Fubini majorant w(η)^{−L+|s|}w(ξ)^{r+s}|H_f| is separable and integrable. Step 7: Op(λc)Op(μνa)τ. Steps 8–9: the amplitude node is used only for its stated continuity and transpose clause, and the duality is correct with no density argument. Step 10: re-derived Q_{c♮,a♮}(x,ξ)=conj Q_{c,a}(x,−ξ). Edge cases: zero ranks, c=χ(x), and c=χ iξ_j giving the correct first correction. No duplicate was found by rg -L over dag/nodes. The Demailly Hodge PDF is WANTED and the proof is marked agent; the mathematics was checked directly. The amplitude node is unsplit with empty proof_deps, so there is no cycle now; its future split must not use this item."
+ }
+}

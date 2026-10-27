@@ -1,0 +1,203 @@
+{
+ "id": "lem-sf-refinement-projection-counit",
+ "kind": "statement",
+ "title": "Directed proper-refinement comparison intertwines ambient projection maps",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. All schemes are finite-type $k$-schemes; their structure maps need not be separated [def-weil-scheme-morphism-properties]. On small pro-etale sites choose either $\\mathcal D_T=D(T_{\\mathrm{proet}},A_n)$ at a fixed level, or $\\mathcal D_T=D(\\mathscr S_T)$, where $\\mathscr S_T$ is the category of sheaves of $A_n$-modules $M_n$ with semilinear quotient transitions $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and componentwise transition-compatible morphisms. Use the ordinary unbounded, simultaneous ringed-diagram-site operations [lem-coef-semilinear-derived-sections]. Write $P_u=Lu^*$, $S_u=Ru_*$, $J_a=a_!$, and use the canonical conjugate compositors $d:P_uP_v\\cong P_{vu}$, $c:S_vS_u\\cong S_{vu}$, $e:J_bJ_a\\cong J_{ba}$ and normalized proper/open mate $\\Gamma_Q$ of [lem-sf-ambient-proper-open-pasting]. All equations include these compositors and the tensor associators. In the system case they are equations before evaluation or total limit, with every quotient transition retained.\nLet $f:X\\to Y$ be separated of finite type, let $c_a=(j_a:X\\hookrightarrow W_a,p_a:W_a\\to Y)$ for $a=1,2$ be compactifications, and let $u:W_1\\to W_2$ be proper with $uj_1=j_2$, $p_2u=p_1$ [def-weil-compactifications-refinements]. Set $F_a=S_{p_a}J_{j_a}$ and\n$$C_u=c_{p_2,u}J_{j_1}\\circ S_{p_2}\\Gamma_{(j_1,j_2,1_X,u)}:F_2\\longrightarrow F_1.$$\nFor $K\\in\\mathcal D_X$, $L\\in\\mathcal D_Y$ arbitrary, define $\\operatorname{PF}^{c_a}_{K,L}=S_{p_a}(\\delta_{j_a})\\pi_{p_a;J_{j_a}K,L}$ using the counit-defined $\\pi$ and normalized open tensor $\\delta$ [def-exchange-projection, lem-sf-open-tensor-normalization], with $P_{j_a}P_{p_a}\\cong P_f$. Then\n$$C_u(K\\otimes P_fL)\\operatorname{PF}^{c_2}_{K,L}=\\operatorname{PF}^{c_1}_{K,L}(C_uK\\otimes1_L).$$\nThis is a jointly natural equality in the displayed direction for the specified refinement map, for every unbounded input in both coefficient settings. It requires no inverse of $C_u$, Tor amplitude, constructibility or normalized-system hypothesis.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence: returned composition-projection-mate step 8 (identity-side mate and outer proper projection); agent expansion, not a verbatim blueprint theorem"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-ambient-proper-open-pasting",
+  "def-weil-compactifications-refinements",
+  "def-exchange-projection",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Expand the finite and simultaneous-system comparison and projection words using [def-sf-refinement-projection-words]. The local inner equation is [lem-sf-refinement-projection-local-tensor]. The outer proper compositor equation is [lem-sf-refinement-projection-proper-composition]. First-variable naturality of the proper projection moves gamma past the outer projection. Functoriality combines R(delta) with R(gamma); apply the local equation, naturality of comp, and the outer composition equation. Tensor functoriality combines the two comparison factors into exactly C_u(K). These are the proved projectionPasting equations in the factor-interface module. The system argument takes place in the actual simultaneous category, before evaluation.",
+   "uses": [
+    "def-sf-refinement-projection-words",
+    "lem-sf-refinement-projection-local-tensor",
+    "lem-sf-refinement-projection-proper-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-refinement-projection-words",
+  "lem-sf-refinement-projection-local-tensor",
+  "lem-sf-refinement-projection-proper-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "composition/refinement sentence, explicit Lean categorical pasting with separate local mate and proper composition equations; finiteProjection is the identical native construction at generic coefficients, sharing categorical instance data before specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compactification proper refinement map commutes with counit defined projection formula unbounded coefficient systems",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counitApp, isProperMap_fst_of_compactSpace, CompHausLike.LocallyConstant.incl_of_counitAppApp, isProperMap_snd_of_compactSpace, CompHausLike.LocallyConstant.counitApp_app, IsProperMap, isProperMap_iff_isCompact_preimage",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor compatibility of the directed map between compact support functors induced by a proper refinement",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, DirectedSystem.rTensor, DirectedSystem.lTensor, TensorProduct.directLimitLeft_rTensor_of, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, TensorProduct.instDirectedSystemCoeLinearMapIdLTensor, TensorProduct.instDirectedSystemCoeLinearMapIdRTensor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*(projection|tensor)|refinement.*projection",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula for derived direct image compatible with proper refinement of compactification",
+   "results": "8 hits: DiscreteQuotient.ofLE_proj, isProperMap_fst_of_compactSpace, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, isProperMap_snd_of_compactSpace, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.instMorphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified ambient geometric/system comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "refinement.*projection|projection.*refinement",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not identify the specified ambient pro-etale refinement map and its system projection compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula natural transformation is compatible with composition of derived pushforwards and compactification refinements",
+   "results": "8 hits: CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.sheafPushforwardContinuousComp, SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.Functor.RightExtension.postcomp₁_obj_left_map, CategoryTheory.Functor.sheafPushforwardContinuousComp', CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.ExponentiableMorphism.pushforwardComp, PresheafOfModules.pushforward_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not identify the specified ambient pro-etale refinement map and its system projection compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.MonoidalCategory",
+   "results": "12 hits: CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.Adjunction.map_η_comp_η_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.IsMonoidal.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not identify the specified ambient pro-etale refinement map and its system projection compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit projection formula maps of unbounded sheaves commute with proper refinements of compactifications",
+   "results": "8 hits: CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counitApp_app, CompHausLike.LocallyConstant.counitApp, CompHausLike.LocallyConstant.counitAppApp, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.incl_of_counitAppApp, TopCat.toSheafCompHausLike_val_map, CompHausLike.LocallyConstant.adjunction_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not identify the specified ambient pro-etale refinement map and its system projection compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "map_μ_comp_counit_app_tensor|rightDerivedNatTrans_comp",
+   "results": "5 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not identify the specified ambient pro-etale refinement map and its system projection compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper open square mate preserves projection formula maps and tensor action for derived sheaves",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.IsProper.isStableUnderBaseChange, Opens.mayerVietorisSquare, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, CategoryTheory.Square.map_f₃₄, Opens.mayerVietorisSquare', TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not identify the specified ambient pro-etale refinement map and its system projection compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-composition-projection-mate",
+  "date": "2026-10-22",
+  "group": "Q135"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "composition/refinement sentence: returned composition-projection-mate step 8 (identity-side mate and outer proper projection)",
+   "via": [
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-refinement-projection-counit",
+  "worker": "stage1",
+  "summary": "Kept the full ambient unbounded statement and both coefficient settings. Specialized the existing proper/open tensor compatibility to the identity-left refinement square, then used naturality and composition of the counit-defined projection under the outer proper direct image. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "Realizes the composition/refinement sentence of fix-prop-projection-formula.proof.md, specifically the directed refinement compatibility separated from lem-sf-composition-projection-mate; expands the compactification-independence sentence of prop-sf-pf-coherence.proof.md without assuming the comparison invertible.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic ringed-topos identity, naturality and composition laws for counit-defined projection maps; applied also on the ringed diagram sites, with no such outer-direct-image composition statement in this unit."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Supplies the simultaneous ringed diagram operations on all unbounded semilinear systems, already used to state the item; needed to apply the general ringed-topos projection calculus before evaluation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-98d4a25fe",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-98d4a25fe (reviewer sub-agent of L); spot-checked: There are no new nodes and the item statement is unchanged. All 4 steps check against the full statements of the cited nodes. Step 2 specializes lem-sf-proper-open-tensor-compatibility to Q=(j1,j2,1_X,u), which commutes (u j1=j2), is non-Cartesian and has u proper. pi_1=id comes from lem-sfb-ringed-projection-tensor-composition. Its Gamma (adjunct of lambda^-1) equals ambient-pasting's Gamma_Q (mate of a_Q) by the statements of tensor-compat, ambient-pasting and proper-open-projection-mate, and lem-sf-semilinear-proper-open-mate-pasting states the equality explicitly. Step 3 uses first-argument naturality of pi_{p2} along Gamma_K. Step 4 uses the lem-sfb composition identity for u then p2, plus naturality of c; the composite word was checked to equal PF^{c1}(C_uK x 1). The systems are modules over B_bullet in the inverse-sequence topos (lem-coef-semilinear-derived-sections), so the ringed-topos tool applies; at fixed level the setting is the ordinary ringed pro-etale site. Small cases pass: u=id, K=0 or L=0, and the non-Cartesian fold map Y⊔Y→Y. There is no cycle: the closure of the cited nodes does not contain the item. Duplicate scan: lem-pur-pf-refinement-compatibility is only the finite-level, D^+, etale-origin, invertible-theta special case, so it is not a duplicate. The two off-unit tool_uses are accepted. Batch-5 flag: the chain ends at lem-trf-adjoint-composition-coherence, a generic composite-adjunction associativity lemma with status mathlib. It is neither part of the trace formula nor of Poincare duality, and the item's existing stmt_dep closure (via lem-sf-ambient-proper-open-pasting) already reaches it, so this is accepted. Source is the fix-prop-projection-formula.proof.md coherence sentence, with an agent expansion; no SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RefinementProjectionCounit",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.refinementProjectionCounit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.RefinementProjection.finiteProjection",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.RefinementProjection.finiteComparison",
+   "WeilConjectures.IntegralSystemRealization.RefinementProjection.systemComparison",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.refinementProjectionCounit"
+  ],
+  "file": "lean/Sheaf/SixFunctors/RefinementProjectionCounit.lean",
+  "statement": "theorem refinementProjectionCounit (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) {X Y : Spaces F} {f : X ⟶ Y} [QuasiCompact f.hom.left] (c₁ c₂ : Compactification f.hom.left) (r : c₁.Refinement c₂) : (∀ (K : ProperOpenDerived (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) X.obj.left) (L : ProperOpenDerived (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) Y.obj.left), ((RefinementProjection.finiteProjection (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) c₂).app K).app L ≫ RefinementProjection.finiteComparison F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) r (((ProperOpenTensor (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) X.obj.left).obj K).obj ((ProperOpenPull (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) f.hom.left).obj L)) = ((ProperOpenTensor (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) Y.obj.left).map (RefinementProjection.finiteComparison F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) r K)).app L ≫ ((RefinementProjection.finiteProjection (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) c₁).app K).app L) ∧ (∀ (o : WeilConjectures.IntegralSystemRealization.Operations l E) (z : WeilConjectures.IntegralSystemRealization.Realizations l E F o) (K : WeilConjectures.IntegralSystemRealization.System l E X.obj.left) (L : WeilConjectures.IntegralSystemRealization.System l E Y.obj.left), WeilConjectures.IntegralSystemRealization.compactificationProjection l E o z.compositors z.openComparisons c₂ K L ≫ WeilConjectures.IntegralSystemRealization.RefinementProjection.systemComparison l E F o z r ((WeilConjectures.IntegralSystemRealization.calculus l E X.obj.left).systemClosed.tensor.obj (K, (WeilConjectures.IntegralSystemRealization.pull l E f.hom.left).obj L)) = (WeilConjectures.IntegralSystemRealization.calculus l E Y.obj.left).systemClosed.tensor.map (Prod.mkHom (WeilConjectures.IntegralSystemRealization.RefinementProjection.systemComparison l E F o z r K) (𝟙 L)) ≫ WeilConjectures.IntegralSystemRealization.compactificationProjection l E o z.compositors z.openComparisons c₁ K L)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3346ca2b6",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Clause-by-clause the Lean matches the node in both settings. finiteComparison = sId, then properOpenMate (definitionally ordinary.gamma, the Γ of ambient pasting), then the Calculus.sComp conjugate compositor, then eqToIso along hom_g. systemComparison = canonicalBridge.push(1) ≪≫ SemilinearProperOpen.sId, then z.properOpen.gamma (pinned by adjunct/canonical), then z.compositors.pushComp. PF = projectionMapOfCompactification (counit π, open δ, P_jP_p≅P_f) and compactificationProjection o z. Equation direction PF c2 ≫ C_u(T) = (C_u K⊗1) ≫ PF c1 is correct. QuasiCompact f is implied by the hypotheses. Nothing stronger is assumed: no IsIso, Tor, Cartesian or universe condition. n+1 covers all levels. Only the lean field changed. Statement verbatim, docstrings and proof steps present, single sorry, lines ≤99. No duplicate C_u on these presentations. No compile run because no file was changed. Advisories: uncited owners (ProperOpen*/properOpenMate owned by theorem lem-sf-proper-open-projection-mate; compactificationProjection/Realizations/Operations/SemilinearProperOpen.sId owned by def nodes), which stage 2 cannot add; ordinary.gamma/sComp written out inline because W_a are not Spaces objects; redundant ProperOpenProjectionMate import; push vs pull bridge normalization of the identity needs a stage-3 lemma."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-915b6",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T071105-L-3824606",
+  "kind": "interface",
+  "note": "independent cc review: item proof (Words.pasteNative from Local + proved Composition) against lem-sf-refinement-projection-counit and its plan; finiteComparison indexIso and finiteProjection presentation against change record (no users, item has 0 importers); new local-tensor sorry against plan step 2 and the pinned Compositors/ProperOpenCoherence; axioms on a scratch copy (sorryAx only from the local-tensor sorry and upstream ambientProperOpenPasting)"
+ }
+}

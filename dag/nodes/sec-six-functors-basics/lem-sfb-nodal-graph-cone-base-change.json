@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-nodal-graph-cone-base-change",
+ "kind": "statement",
+ "title": "Arbitrary base change and coherence of the nodal graph cone",
+ "statement": "Let $f:X\\to T$ be a flat locally finitely presented morphism of schemes such that every nonempty geometric fibre is equidimensional of dimension one and every nonsmooth geometric fibre point has completed local ring $\\Omega[[u,v]]/(uv)$ over its algebraically closed residue field. Put $D=\\operatorname{Sing}(f)$, the first-Fitting singular subscheme, with inclusion $i:D\\hookrightarrow X$. For every morphism $a:T'\\to T$, put $f':X\\times_TT'\\to T'$ and identify $D'=\\operatorname{Sing}(f')=D\\times_TT'$ by [lem-trf-nodal-family-fitting-singular]. Let $a_D:D'\\to D$ be the projection and let $\\mathcal G_f,\\mathcal G_{f'}$ be the graph conormal algebras of [lem-sfb-graph-cone-gluing]. The canonical graph-ideal comparison is an isomorphism\n$$c_a:a_D^*\\mathcal G_f\\xrightarrow{\\sim}\\mathcal G_{f'}.$$\nOn affine graph neighbourhoods it is the map $[b]\\otimes r\\mapsto[b\\otimes r]$ on ideal-power quotients. On the pullbacks of a nodal chart its coordinate expression for every $A$-algebra $A'$ is\n$$A'\\otimes_AA[u,v]/(uv)\\longrightarrow A'[u,v]/(uv),\\quad r\\otimes u\\mapsto ru,\\quad r\\otimes v\\mapsto rv.$$\nIt identifies the degree-zero basis and the bases $u^n,v^n$ in all positive degrees. For composable $a:T'\\to T$, $b:T''\\to T'$ one has $c_{a\\circ b}=c_b\\circ b_D^*c_a$ under canonical tensor associativity, and $c_{1_T}$ is the identity. These comparisons are natural under isomorphisms of families. They induce canonical isomorphisms\n$$\\operatorname{Proj}_{D'}\\mathcal G_{f'}\\xrightarrow{\\sim}(\\operatorname{Proj}_D\\mathcal G_f)\\times_DD'$$\ncompatible with the structural maps, identity base changes, compositions and family isomorphisms. No flatness is required of $a$. Here tensor pullback is [def-pc-module-pullback], fibre products are [def-pc-fibre-product], and relative Proj is [def-nagata-relative-proj]. Flatness, local finite presentation, geometric fibres, pure dimension, smoothness, completion and power series are [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [def-weil-geometric-fibre], [def-weil-pure-dimension], [def-sbc-smooth-morphisms], [def-weil-pbc-adic-completion], [def-weil-pbc-multivariate-power-series]. The singular subscheme is [def-trf-first-fitting-singular-subscheme].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0634; Tag 0635; Tag 02L4; Tag 0CBY. Divisors lemma-conormal-algebra-functorial and lemma-conormal-algebra-functorial-flat; Descent lemma-descending-property-isomorphism; Curves lemma-etale-local-structure-nodal-family. Agent comparison and coherence: old item Steps 7-8."
+ },
+ "stmt_deps": [
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-sfb-graph-cone-gluing",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-nagata-relative-proj",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-first-fitting-singular-subscheme"
+ ],
+ "proof": [
+  {
+   "text": "Flatness and local finite presentation of $f'$ follow respectively from [lem-weil-pbc-flat-morphism-base-change] and clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. For an algebraically closed field $\\Omega\\to T'$, the geometric fibre of $f'$ is the geometric fibre of $f$ at the composite $\\operatorname{Spec}\\Omega\\to T$, by the fibre-product universal property [def-pc-fibre-product]. Thus the pure-dimension and completed-node hypotheses hold for $f'$ too. Apply [lem-trf-nodal-family-fitting-singular] to identify $D'=D\\times_TT'$ scheme-theoretically. In particular this identification allows nonreduced singular schemes.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product",
+    "lem-trf-nodal-family-fitting-singular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C5B, lemma-base-change-nodal-family; Divisors Tag 0C3I, lemma-base-change-and-fitting-ideal-omega"
+   }
+  },
+  {
+   "text": "On an affine graph neighbourhood $Y=U\\times_VD_U$, with closed graph ideal $J$, its base change along $a_D$ is the corresponding graph neighbourhood for $f'$. Apply the existence clause of [lem-pur-conormal-algebra-flat-base-change], without its flatness hypothesis, to this Cartesian square of closed graphs. It gives the graded algebra map $[q]\\otimes r\\mapsto[q\\otimes r]$ on the ideal-power quotients. These maps commute with restriction: both orders send the representative $q$ to its restricted pullback and multiply by the restricted coefficient $r$. The restriction identifications of [lem-sfb-graph-cone-gluing] therefore identify the local maps on affine refinements of overlaps. They glue to $c_a:a_D^*\\mathcal G_f\\to\\mathcal G_{f'}$. Its degree-zero map is the canonical identification with $\\mathcal O_{D'}$.",
+   "uses": [
+    "lem-pur-conormal-algebra-flat-base-change",
+    "lem-sfb-graph-cone-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0634 and 0635, lemma-conormal-algebra-functorial and lemma-conormal-algebra-functorial-flat; affine representative maps and restriction"
+   }
+  },
+  {
+   "text": "Take the jointly covering etale nodal charts of [lem-sfb-nodal-graph-cone-chart]. By [lem-weil-pbc-etale-covering-base-change], their pullbacks cover $D'$ and remain etale; the pulled-back ambient nodal chart still has equation $uv-h'=0$. The chart lemma identifies the two graded algebras with the split-node algebras over $D_U$ and $D'_U$, preserving the homogeneous coordinate classes. On $\\operatorname{Spec}A\\subset D_U$ and $\\operatorname{Spec}A'\\subset D'_U$ above it, [lem-weil-pbc-module-pullback-affine-sections] identifies the source of the restricted comparison with $A'\\otimes_A A[u,v]/(uv)$. The representative formula in Step 2 sends $r\\otimes u^n$ to $ru^n$, $r\\otimes v^n$ to $rv^n$, and $r\\otimes1$ to $r$. This proves the asserted coordinate expression, including its agreement with the canonical comparison.",
+   "uses": [
+    "lem-sfb-nodal-graph-cone-chart",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, lemma-etale-local-structure-nodal-family; agent comparison of the homogeneous coordinate representatives after arbitrary base change"
+   }
+  },
+  {
+   "text": "The bases supplied by the chart lemma make the last map invertible in every degree for every $A$-algebra $A'$: the inverse sends $r$ in degree zero to $r\\otimes1$, and $ru^n+sv^n$ in degree $n>0$ to $r\\otimes u^n+s\\otimes v^n$. Products are respected since pure powers multiply as polynomials and mixed products vanish on both sides. Thus the pullback of $c_a$ to every covering chart is an isomorphism. These etale covering maps are flat by [lem-weil-pbc-fpqc-finer-than-etale]. Apply [lem-sc-flat-cover-module-isomorphism-reflection] degree by degree to conclude that $c_a$ is globally an isomorphism; the inverse of an invertible unital graded algebra map respects its algebra structure. This uses neither flatness of $a$ nor reducedness of $A$ or $A'$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-sc-flat-cover-module-isomorphism-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBY, split nodal chart calculation; Topologies Tag 022C and the existing flat-cover module reflection theorem"
+   }
+  },
+  {
+   "text": "For a second base change $b$, on a homogeneous representative an iterated pullback is generated by $([q]\\otimes r)\\otimes s$. Under tensor associativity the direct comparison sends it to $[q\\otimes1]\\,b^\\sharp(r)s$, and the two successive comparisons send it to exactly the same class. Pure tensors generate each homogeneous module, so the maps agree; restriction gives the global composition law. For the identity base change $[q]\\otimes r\\mapsto r[q]$ is the tensor-unit identification. For a family isomorphism with affine ring map $h^\\sharp$, the equality $(h^\\sharp\\otimes1)(q\\otimes r)=h^\\sharp(q)\\otimes r$ shows that its square with $c_a$ commutes. These are identities of the representative maps already constructed, not choices of local bases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0634, affine formula; agent identity, composition and family-isomorphism check on homogeneous pure tensors"
+   }
+  },
+  {
+   "text": "Apply [prop-nagata-relative-proj-functoriality], clause 2, to the graded isomorphism $c_a$: it induces $\\operatorname{Proj}_{D'}\\mathcal G_{f'}\\cong\\operatorname{Proj}_{D'}(a_D^*\\mathcal G_f)$. Apply [lemma-nagata-relative-proj-base-change-arbitrary] to $a_D$ and the quasi-coherent graded algebra $\\mathcal G_f$ to identify the latter scheme with $(\\operatorname{Proj}_D\\mathcal G_f)\\times_DD'$. Both maps are over $D'$, giving the required structural compatibility. The arbitrary-base-change lemma, rather than the flat-only clause of the functoriality node, is used here.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "lemma-nagata-relative-proj-base-change-arbitrary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3, lemma-relative-proj-base-change; relative Proj under a degree-preserving graded algebra isomorphism"
+   }
+  },
+  {
+   "text": "Check the remaining Proj compatibilities on its standard homogeneous charts [def-nagata-affine-proj, def-nagata-relative-proj]. If $z$ is homogeneous of positive degree and $p/z^m$ has degree zero, the coefficientwise map is $r\\otimes(p/z^m)\\mapsto(r\\otimes p)/(1\\otimes z)^m$. For iterated pullback, both orders replace a coefficient $(r\\otimes s)$ by $b^\\sharp(r)s$ and replace $p,z$ by their successive pullbacks, by Step 5. For the identity they fix the fraction; applying a family isomorphism replaces numerator and denominator by their images and commutes with the same formula. Such fractions define the structure sheaf maps and these standard charts cover Proj; the restriction/gluing data in the relative-Proj definition therefore give the global identity, composition and family-isomorphism equalities.",
+   "uses": [
+    "def-nagata-affine-proj",
+    "def-nagata-relative-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3, lemma-relative-proj-base-change; agent check on degree-zero homogeneous fractions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lem-sfb-graph-cone-gluing",
+  "lem-sfb-nodal-graph-cone-chart",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-sc-flat-cover-module-isomorphism-reflection",
+  "prop-nagata-relative-proj-functoriality",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "def-nagata-affine-proj",
+  "def-nagata-relative-proj"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0634/0635; explicit nodal-chart calculation from Curves Tag 0CBY and relative Proj Tag 01O3. Tensor-generator and homogeneous-fraction coherence checks written by Q55."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a flat locally finitely presented nodal family the conormal graded algebra of the graph of its first Fitting singular scheme commutes with arbitrary base change coherently",
+   "results": "{\"t\": \"2026-10-22T06:04:14Z\", \"tool\": \"leansearch\", \"query\": \"For a flat locally finitely presented nodal family the conormal graded algebra of the graph of its first Fitting singular scheme commutes with arbitrary base change coherently\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.FinitePresentation.baseChange\", \"RingHom.finitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"20b535fee6eb2db9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness or finite-presentation base change and cotangent-complex maps do not prove the nonflat associated-graded comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"baseChange\", \"conormal\"",
+   "results": "{\"t\": \"2026-10-22T06:04:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"baseChange\\\", \\\"conormal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Loogle is currently under load, please try again later.\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: loogle: Loogle is currently under load, please try again later."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal.*base[Cc]hange|base[Cc]hange.*conormal|nodal",
+   "results": "{\"t\": \"2026-10-22T06:04:14Z\", \"tool\": \"grep\", \"query\": \"conormal.*base[Cc]hange|base[Cc]hange.*conormal|nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness or finite-presentation base change and cotangent-complex maps do not prove the nonflat associated-graded comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented nodal family the conormal graded algebra of the graph of its first Fitting singular scheme commutes with arbitrary base change coherently",
+   "results": "{\"t\": \"2026-10-22T06:04:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat locally finitely presented nodal family the conormal graded algebra of the graph of its first Fitting singular scheme commutes with arbitrary base change coherently\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.cotangentComplexBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\"], \"digest\": \"cd407d7d8ad6e2d3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness or finite-presentation base change and cotangent-complex maps do not prove the nonflat associated-graded comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Although associated graded algebras need flat base change in general the graph cone of nodal curves commutes with nonflat base change by the split quadratic local model",
+   "results": "{\"t\": \"2026-10-22T06:04:24Z\", \"tool\": \"leanfinder\", \"query\": \"Although associated graded algebras need flat base change in general the graph cone of nodal curves commutes with nonflat base change by the split quadratic local model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"WeierstrassCurve.map_baseChange\", \"WeierstrassCurve.Projective.Equation.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Affine.Point.map_some\"], \"digest\": \"2decc476390a560a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness or finite-presentation base change and cotangent-complex maps do not prove the nonflat associated-graded comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|nodal|AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T04:13:08Z\", \"tool\": \"grep\", \"query\": \"conormal|nodal|AssociatedGraded\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no nodal graph comparison; the RingTheory hits concern a conormal module and its cotangent-complex inclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded algebra of a nodal curve singular graph commutes with nonflat base change",
+   "results": "{\"t\": \"2026-10-23T04:13:09Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded algebra of a nodal curve singular graph commutes with nonflat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.gradedComm_algebraMap_tmul\", \"DirectSum.GAlgebra.commutes\", \"GradedAlgebra\", \"TensorProduct.gradedComm_algebraMap\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"GradedTensorProduct.comm\", \"IsLocalization.Away.tensorEquiv\"], \"digest\": \"8101d3cd0c7f39e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smooth base change, elliptic-curve base change, polynomial tensor or graded tensor results do not state this nodal graph theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, AssociatedGraded, baseChange",
+   "results": "{\"t\": \"2026-10-23T04:13:09Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, AssociatedGraded, baseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "unavailable: loogle: unknown identifier 'AlgebraicGeometry'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conormal graded algebra of the singular graph of a nodal curve commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T04:13:10Z\", \"tool\": \"leanfinder\", \"query\": \"The conormal graded algebra of the singular graph of a nodal curve commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"WeierstrassCurve.baseChange\", \"Algebra.SubmersivePresentation.baseChange\", \"WeierstrassCurve.Jacobian.baseChange_nonsingular\", \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"WeierstrassCurve.Affine.baseChange_nonsingular\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\"], \"digest\": \"bac849e573fa0b01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smooth base change, elliptic-curve base change, polynomial tensor or graded tensor results do not state this nodal graph theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|nodal|AssociatedGraded.*[Bb]ase|[Bb]ase.*AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T04:14:46Z\", \"tool\": \"grep\", \"query\": \"conormal|nodal|AssociatedGraded.*[Bb]ase|[Bb]ase.*AssociatedGraded\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\"], \"digest\": \"9c4471aaca68889e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no nodal graph comparison; the RingTheory hits concern a conormal module and its cotangent-complex inclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AssociatedGraded\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T04:14:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"AssociatedGraded\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring the split node graded polynomial quotient A[u,v]/(u*v) with any A algebra preserves the degree zero basis and the two generators in every positive degree",
+   "results": "{\"t\": \"2026-10-23T04:14:53Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring the split node graded polynomial quotient A[u,v]/(u*v) with any A algebra preserves the degree zero basis and the two generators in every positive degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.baseChange\", \"MvPolynomial.rTensor_apply_X_tmul\", \"GradedTensorProduct.auxEquiv\", \"MvPolynomial.universalFactorizationMapPresentation_val\", \"TensorProduct.one_gradedMul\", \"TensorProduct.algebraMap_gradedMul\", \"MvPolynomial.tensorEquivSum_X_tmul_X\", \"MvPolynomial.tensorEquivSum_X_tmul_one\"], \"digest\": \"aef5b241e22c72ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smooth base change, elliptic-curve base change, polynomial tensor or graded tensor results do not state this nodal graph theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-branch-double-cover",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Relative graph-cone subargument: old Steps 7,8.",
+   "via": [
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-graph-cone-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Reused the existing graph gluing, nodal chart, general conormal comparison, flat-cover reflection and arbitrary relative-Proj base-change nodes. Gave the nonflat coordinate inverse and checked all algebra and Proj coherence laws explicitly. No new node is needed.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) branch: ILO X Lemma 2.2 alteration reduction, de Jong Lemma 5.7 branch-cover input, old nodal-branch Steps 7–8. The inherited created.item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); the precise inherited place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Keeps the given flatness after arbitrary base change; a generic permanence tool, not an alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Clause (3) keeps local finite presentation after arbitrary base change; no unit-specific replacement is involved."
+   },
+   {
+    "node": "lem-trf-nodal-family-fitting-singular",
+    "why": "Identifies the first-Fitting singular subscheme after arbitrary base change, as explicitly required in the item statement."
+   },
+   {
+    "node": "lem-pur-conormal-algebra-flat-base-change",
+    "why": "Its existence and representative-formula clauses construct the graph comparison without assuming the base map flat; the nodal chart separately proves invertibility."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Keeps the existing nodal chart family a jointly surjective etale cover after arbitrary base change."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Identifies sheaf pullback with the ordinary coefficient tensor product in each homogeneous degree."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Supplies flatness of the etale chart covering maps, to apply the existing module-isomorphism reflection theorem."
+   },
+   {
+    "node": "lem-sc-flat-cover-module-isomorphism-reflection",
+    "why": "Reflects degreewise isomorphisms along a jointly surjective flat family; no same-unit node supplies this generic module tool."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Clause 2 sends the already established graded algebra isomorphism to an isomorphism of Proj."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-base-change-arbitrary",
+    "why": "Supplies the unrestricted coefficientwise relative-Proj base-change isomorphism, which the flat-only functoriality clause cannot supply."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-sc-flat-cover-module-isomorphism-reflection",
+  "prop-nagata-relative-proj-functoriality",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-82d430bca",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-82d430bca (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full. The delivery has no new nodes, and the statement and stmt_deps are unchanged. It is not a re-split item: the base node was an unproved node created by Q38 for nodal-branch-double-cover. Step 1: flat base change (Mathlib leaf) and qcqs-permanence clause (3) carry over flatness and local finite presentation, geometric fibres are unchanged, and trf-nodal-family-fitting-singular gives Sing(f')=Sing(f)xT'. Step 2: the graph neighbourhoods give a Cartesian square (Y'=Y_U x_V V', Z_U x_{Y_U} Y' = Z'). The existence, formula and degree-0 clauses of pur-conormal-algebra-flat-base-change do not need flatness, and its direction (pullback of the original algebra to the base-changed one) matches. The maps glue through graph-cone-gluing. Step 3: the chart statement itself gives the bases u^n,v^n and preserves the coordinate classes. The base-changed chart W' with uv-h' is still etale, so the chart lemma applies to f'. Step 4: the explicit inverse on the bases is correct. Etale maps are flat by fpqc-finer-than-etale, and flat-cover-module-isomorphism-reflection (arbitrary modules, no quasi-compactness) applies degree by degree. Step 5 computes the composition, identity and family-isomorphism laws on generators. Step 6 uses Proj functoriality clause 2 and nagata-relative-proj-base-change-arbitrary for arbitrary g. Step 7 checks the coherences on D_+(z) fractions. Against Stacks 0635 (divisors.tex l.4454): Stacks gives only surjectivity for nonflat g, and the nodal basis gives the isomorphism here. Small cases: uv=t with t=s^2 gives D'=k[s]/s^2, nonreduced, and the comparison is A'[u,v]/(uv) on both sides; t=0 (nonflat) also works; the smooth case has D empty. The statement gives the B_{f'}≅B_f x_T T' that parent step 4 needs. No SGA is cited and no duplicate exists (siblings -chart and -fibre and graph-cone-gluing state different facts). I accept the worker's tool_uses as listed: the generic permanence, Fitting base-change, pur conormal, reflection and nagata Proj nodes. Maintainer note: blueprint.from.node is null because of an inherited created.item chain that ends at the non-node Sheaf.SixFunctors.CtfStabilityDirectImages; this is a base fault, not the delivery's."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalGraphConeBaseChange",
+  "declaration": "AlgebraicGeometry.GraphCone.NodalBaseChange.exists_nodalGraphCone_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.GraphCone.NodalBaseChange.Family",
+   "AlgebraicGeometry.GraphCone.NodalBaseChange.Family.diagram",
+   "AlgebraicGeometry.GraphCone.NodalBaseChange.Square",
+   "AlgebraicGeometry.GraphCone.NodalBaseChange.System",
+   "AlgebraicGeometry.GraphCone.NodalBaseChange.exists_nodalGraphCone_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalGraphConeBaseChange.lean",
+  "statement": "theorem exists_nodalGraphCone_baseChange : (∀ (F : Family.{u}) (T' : Scheme.{u}) (a : T' ⟶ F.T), ∃ (E : Family.{u}) (s : Square E F) (t : E.T ≅ T') (x : E.X ≅ pullback F.f a), s.t = t.hom ≫ a ∧ s.x = x.hom ≫ pullback.fst F.f a ∧ E.f ≫ t.hom = x.hom ≫ pullback.snd F.f a) ∧ ∀ K : Construction.{u}, Nonempty (System K)",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cc740d6a",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Read node, report, module, GraphConeGluing (Chart/ChartSquare/pieceMap/Gluing/Construction), nodal_family_fitting_singular, RelativeProj PullbackData/IsGradedBaseChangeAlong/relProjIsoPullback. Only lean field differs from base; statement verbatim; imports exist; single sorry, universe u. Family = verbatim trf hypotheses, no condition on a; diagram = actual first-Fitting singularDiagram; first conjunct gives the base-change family with cartesian Fitting square. Comparison = PullbackData (degreewise IsBaseChange = iso of pullback), pinned by representative [a]⊗r↦r[g♯a] on chart squares plus res_map/map_res, so not arbitrary. Identity/composition/isomorphism/naturality laws for algebras and Proj; relProjIsoPullback with fst/snd lemmas gives the Proj iso over D'. coordinateTensor is a standalone ring iso, tied to the comparison only through representative because the chart lemma has no Lean record; accepted. Edge cases (empty or smooth, nonflat t↦0, nonreduced s², zero ring, n=0,1) covered. No hollow defs, docstrings OK, no duplicates found. No file changed, no compile. No findings."
+ }
+}

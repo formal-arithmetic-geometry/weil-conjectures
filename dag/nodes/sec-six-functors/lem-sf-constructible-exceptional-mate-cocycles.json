@@ -1,0 +1,277 @@
+{
+ "id": "lem-sf-constructible-exceptional-mate-cocycles",
+ "kind": "statement",
+ "title": "Constructible exceptional mate cocycles",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. Use the small pro-etale coefficient categories and the specified six operations of [def-fix-six-functor-datum]. Finite inputs used for compact support carry compatible etale-origin witnesses; integral inputs are derived complete with compatible witnessed finite reductions, rational operations are raw localization, and algebraically closed coefficients are represented at a common finite coefficient field. All operations below are restricted to their stated constructible domains; tensor factors and comparisons have their stated finite-Tor hypotheses. Let $X\\xrightarrow fY\\xrightarrow gZ\\xrightarrow hW$ be separated finite-type morphisms of separated finite-type $k$-schemes. On each coefficient stage put $F_f=Rf_!$, $G_f=Rf^!$ and use their specified constructible adjunction, with unit $\\eta_f$ and counit $\\epsilon_f$. Use the canonical compact-support compositors, with their unit and associativity laws. On finite constructible finite-Tor inputs the quotient exceptional comparison is the one preserving the two explicit unit/counit equations of [lem-coef-finite-exceptional]. At integral coefficients use the coherent constructible adjoint of [prop-coef-integral-exceptional-adjoint], and at rational coefficients and finite scalar extensions those of [lem-coef-rational-operations]. These coefficient comparisons intertwine both Hom transposition maps\n$$a:F_fU\\to V\\longmapsto G_f(a)\\eta_{f,U},\\qquad b:U\\to G_fV\\longmapsto\\epsilon_{f,V}F_f(b).$$\nSuccessive transposition with $f,g$ agrees with transposition for $F_gF_f\\dashv G_fG_g$, whose unit and counit are\n$$(G_f\\eta_gF_f)\\eta_f,\\qquad\\epsilon_g(F_g\\epsilon_fG_g).$$\nThe inverses $c_{g,f}:G_{gf}\\cong G_fG_g$ of the conjugate comparisons $G_fG_g\\cong G_{gf}$ of [lem-sf-constructible-exceptional-compositor] therefore satisfy the identity and associative cocycle equations; the units and counits obey the displayed composite formulas after these identifications. Coefficient passage preserves these equations and all corresponding well-typed mates of identities and pasted comparison equations. Only the specified constructible exceptional adjoints occur: there is no claim that an arbitrary square mate of an isomorphism is invertible or that an unrestricted ambient pro-etale exceptional adjoint exists.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-exceptional-inverse-image",
+  "lem-coef-finite-exceptional",
+  "lem-coef-rational-operations",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-sf-constructible-exceptional-compositor"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout in the stated constructible domains. For any allowed coefficient passage write $T_X,T_Y$ for its functors, put primes on the target operations, and write $q:T_YF_f\\cong F'_fT_X$, $b:T_XG_f\\cong G'_fT_Y$. The constructible coefficient-adjunction theorem supplies precisely these comparisons, both triangle identities, and\n$$G'_f(q_U)b_{F_fU}T_X(\\eta_{f,U})=\\eta'_{f,T_XU},\\qquad \\epsilon'_{f,T_YV}F'_f(b_V)q_{G_fV}=T_Y(\\epsilon_{f,V}).$$\nFor a finite quotient these are the two displayed equations of lem-coef-finite-exceptional. Integral reduction uses the coherent integral adjunction, whose comparisons identify units and counits with the finite ones. Rationalization and finite scalar extension use the identifications preserving units and counits in lem-coef-rational-operations; the coefficient-adjunction theorem also specifies the common-stage comparisons and their cocycles. Thus these equations concern actual maps of the specified functors, with no assertion about an ambient pro-etale adjoint.",
+   "uses": [
+    "lem-sf-constructible-exceptional-adjunction-coefficients",
+    "lem-coef-finite-exceptional",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  },
+  {
+   "text": "For $a:F_fU\\to V$ its transported left-hand arrow is $a'=T_Y(a)q_U^{-1}:F'_fT_XU\\to T_YV$. Naturality of $b$ at $a$ and the unit equation of step 1 give\n$$b_VT_X(G_f(a)\\eta_{f,U})=G'_f(T_Ya)b_{F_fU}T_X\\eta_{f,U}=G'_f(a')\\eta'_{f,T_XU}.$$\nThis is the required forward transposition square, not merely agreement on objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  },
+  {
+   "text": "For $u:U\\to G_fV$, put $u'=b_VT_X(u)$. The counit equation of step 1 and naturality of $q$ at $u$ give\n$$\\epsilon'_{f,T_YV}F'_f(u')=T_Y(\\epsilon_{f,V})q_{G_fV}^{-1}F'_f(T_Xu)=T_Y(\\epsilon_{f,V}F_f(u))q_U^{-1}.$$\nThis is the inverse transposition square. The same computations apply to every allowed coefficient functor of step 1, without requiring it to be faithful or a finite quotient to be flat.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  },
+  {
+   "text": "Use the composite adjunction $F_gF_f\\dashv G_fG_g$. Its Hom bijection is the composite of the two Hom bijections, its unit is $\\eta^{g,f}=(G_f\\eta_gF_f)\\eta_f$, and its counit is $\\epsilon^{g,f}=\\epsilon_g(F_g\\epsilon_fG_g)$. Explicitly, successive transposition of $a:F_gF_fU\\to V$ is\n$$G_f(G_g(a)\\eta_{g,F_fU})\\eta_{f,U}=G_fG_g(a)\\eta^{g,f}_U;$$\nthe reverse is $\\epsilon^{g,f}_VF_gF_f(u)$. These are exactly the two displayed formulas in the item. The identity adjunction supplies the corresponding identity formulas.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  },
+  {
+   "text": "Write $\\alpha_{g,f}:F_gF_f\\cong F_{gf}$ and $d_{g,f}:G_fG_g\\cong G_{gf}$ for the specified conjugate of $\\alpha_{g,f}^{-1}$; put $c_{g,f}=d_{g,f}^{-1}$ as in the statement. The constructible compositor node identifies this actual $d$ by its Hom chain and pasted counit. Apply the unit and counit identities for a mate with $L_1=F_gF_f$, $R_1=G_fG_g$, $L_2=F_{gf}$, $R_2=G_{gf}$, identity side functors and square $\\alpha_{g,f}^{-1}$. They give\n$$d_{g,f,F_gF_fU}\\eta^{g,f}_U=G_{gf}(\\alpha_{g,f,U}^{-1})\\eta_{gf,U},$$\n$$\\epsilon_{gf,V}F_{gf}(d_{g,f,V})=\\epsilon^{g,f}_V\\alpha_{g,f,G_fG_gV}^{-1}.$$\nNaturality of $d$ and cancellation of the inverse isomorphisms rewrite these as\n$$c_{g,f,F_{gf}U}\\eta_{gf,U}=G_fG_g(\\alpha_{g,f,U})\\eta^{g,f}_U,$$\n$$\\epsilon_{gf,V}=\\epsilon^{g,f}_V\\alpha_{g,f,G_fG_gV}^{-1}F_{gf}(c_{g,f,V}).$$\nHence the original units and counits are precisely the composite ones under the stated identifications.",
+   "uses": [
+    "lem-sf-constructible-exceptional-compositor",
+    "lem-pur-mate-unit-compatibility",
+    "lem-amb-mate-unit-counit",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  },
+  {
+   "text": "The finite compact-support compositors are unital and associative by thm-sf-comp-composition; the completed-shriek composition-laws node supplies these same equations for the specified completed integral, raw rational and common-stage compositors. Conjugation is a bijection, sends identities to identities and reverses composition. Pasting along composite adjunctions identifies conjugates of whiskered compositors with the correspondingly whiskered conjugates. Apply these facts to\n$$\\alpha_{h,gf}(F_h\\alpha_{g,f})=\\alpha_{hg,f}(\\alpha_{h,g}F_f).$$\nFor $d$ this yields $d_{h,gf}(d_{g,f}G_h)=d_{hg,f}(G_fd_{h,g})$. Invert to obtain\n$$(c_{g,f}G_h)c_{h,gf}=(G_fc_{h,g})c_{hg,f}:G_{hgf}\\longrightarrow G_fG_gG_h.$$\nAll these equations use the canonical associators. Conjugating the two left unit equations gives the two right unit equations after the canonical identity-functor identifications. Only conjugates between adjoints to functors with the same source and target are inverted; no arbitrary square mate is asserted invertible.",
+   "uses": [
+    "thm-sf-comp-composition",
+    "lem-sf-completed-shriek-composition-laws",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-constructible-exceptional-compositor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  },
+  {
+   "text": "Coefficient compatibility with the specified $d$ is already stated for finite quotients and finite-free changes by the finite exceptional-compositor coefficient node, and for completed integral, rational and common-stage changes by the adic exceptional-compositor coefficient node. Suppressing components, their equation is\n$$b_{gf}T_X(d_{g,f})=d'_{g,f}(G'_fb_g)(b_fG_g).$$\nMultiplying by the inverses of $d,d'$ gives the explicit equation for the inverse compositor $c_{g,f}=d_{g,f}^{-1}$:\n$$(G'_fb_g)(b_fG_g)T_X(c_{g,f})=c'_{g,f}b_{gf}.$$\nThus coefficient passage carries the actual exceptional compositors, including their unit equations and triple cocycle, to the corresponding maps. At integral coefficients the cited result is an equality of coherent-system maps realized by the total inverse limit; it does not infer equality of derived morphisms from their separate finite evaluations. Rational and common-stage assertions are about the localized and common-stage maps themselves.",
+   "uses": [
+    "lem-sf-finite-exceptional-compositor-coefficients",
+    "lem-sf-adic-exceptional-compositor-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  },
+  {
+   "text": "For a general well-typed comparison square, expand its mate as unit insertion, application of its square map, and counit contraction, using def-weil-pbc-adjunction-mate. Steps 2 and 3 commute coefficient passage with each transposition; naturality commutes it with the square map. It therefore commutes with their composite, the mate. For a pasted square, the two pasting formulas of lem-weil-pbc-mate-pasting identify the mate of the paste with the paste of the mates, including pasting along composite adjunctions of step 4; the changing-adjunction formulas identify the conjugate comparisons in steps 5-7. Applying this bijection to both sides of any specified identity or pasted comparison equation preserves equality. This proves the last clause for all such well-typed mates. At a common finite coefficient field use the comparisons and cocycles of the coefficient-adjunction theorem, so the result is independent of the chosen representative. No additional ambient adjunction or invertibility statement has entered.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-constructible-exceptional-adjunction-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Agent-formulated sub-obligation for exceptional comparisons: units, counits and the explicit mate computation; returned proof steps 10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-mate-unit-counit",
+  "lem-coef-finite-exceptional",
+  "lem-coef-rational-operations",
+  "lem-pur-mate-unit-compatibility",
+  "lem-sf-adic-exceptional-compositor-coefficients",
+  "lem-sf-completed-shriek-composition-laws",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "lem-sf-constructible-exceptional-compositor",
+  "lem-sf-finite-exceptional-compositor-coefficients",
+  "lem-weil-pbc-mate-pasting",
+  "prop-coef-integral-exceptional-adjoint",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Exceptional-comparison sentence, expanded by explicit Hom transposition, composite units/counits and the Mathlib mate calculus; Stacks Tag 0DV0 for composite adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exceptional.*[Cc]oefficient|[Cc]oefficient.*exceptional|shriek.*[Cc]ocycle",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change for finite integral rational l-adic exceptional right adjoints compatibility of transposition and composite adjunction cocycles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} {C₃ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} C₃] {F₀₁ : CategoryTheory.Functor C₀ C₁}\", \"doc\": \"For adjunctions $F_{01} ⊣ G_{01}$, $F_{12} ⊣ G_{12}$, and $F_{13} ⊣ G_{13}$, the composition of whiskering a natural transformation $\\\\tau_{123}$ on the left with $\\\\text{leftAdjointCompNatTrans}$ and t\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} {C₃ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} C₃] {F₀₁ : CategoryTheory.Functor C₀ C₁}\", \"doc\": \"Given adjunctions $F_{01} ⊣ G_{01}$, $F_{12} ⊣ G_{12}$, and $F_{02} ⊣ G_{02}$, the equality establishes that the composition of the associator inverse, whiskered natural transformation, and left adjoi\"}\n  {\"name\": \"Rep.coindResAdjunction_counit_app\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {S : Subgroup G}\\n  [inst_2 : DecidableRel ⇑(QuotientGroup.rightRel S)] [inst_3 : S.FiniteIndex] (B : Rep k G),\\n  (Rep.coindResAdjunction k S).counit.app B =\\n    CategoryTheory.CategoryStruct.comp (Rep.indCoindIso ((Action.res (ModuleCat k) S.su\", \"doc\": \"For a finite index subgroup $ S $ of a group $ G $ and a $ k $-representation $ B $ of $ G $, the counit of the coinduction-restriction adjunction at $ B $ is given by composing the inverse of the iso\"}\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompIso_hom\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  {F₀₁ : CategoryTheory.Functor C₀ C₁} {F₁₂ : CategoryTheory.Functor C₁ C₂} {F₀₂ : CategoryTheory.Funct\", \"doc\": \"Given adjunctions $ F₀₁ ⊣ G₁₀ $ between categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, $ F₁₂ ⊣ G₂₁ $ between $ \\\\mathcal{D} $ and $ \\\\mathcal{E} $, and an isomorphism $ G₂₁ \\\\circ G₁₀ ≅ G₂₀ $ between th\"}\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompIso_hom_app\", \"module\": \"Mathlib/CategoryTheory/Adjunction/CompositionIso\", \"type\": \"∀ {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C₀]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₁] [inst_2 : CategoryTheory.Category.{v_3, u_3} C₂]\\n  {F₀₁ : CategoryTheory.Functor C₀ C₁} {F₁₂ : CategoryTheory.Functor C₁ C₂} {F₀₂ : CategoryTheory.Funct\", \"doc\": \"Given adjunctions $ F₀₁ ⊣ G₁₀ $ between categories $\\\\mathcal{C}_0$ and $\\\\mathcal{C}_1$, $ F₁₂ ⊣ G₂₁ $ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and an isomorphism $ G₂₁ \\\\circ G₁₀ \\\\cong G_{20} $ bet\"}\n  {\"name\": \"Rep.coindResAdjunction_homEquiv_apply\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {S : Subgroup G}\\n  [inst_2 : DecidableRel ⇑(QuotientGroup.rightRel S)] (A : Rep k ↥S) [inst_3 : S.FiniteIndex] {B : Rep k G}\\n  (f : Rep.coind S.subtype A ⟶ B),\\n  ((Rep.coindResAdjunction k S).homEquiv A B) f =\\n    (Rep.indResHomEquiv S.subtype \", \"doc\": \"For a finite index subgroup $ S $ of a group $ G $, the coinduction-restriction adjunction establishes a natural $ k $-linear isomorphism $\\\\text{Hom}(A, \\\\mathrm{Coind}_S(B)) \\\\cong \\\\text{Hom}(\\\\mathrm{R\"}\n  {\"name\": \"Rep.coindResAdjunction_homEquiv_symm_apply\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {S : Subgroup G}\\n  [inst_2 : DecidableRel ⇑(QuotientGroup.rightRel S)] (A : Rep k ↥S) [inst_3 : S.FiniteIndex] {B : Rep k G}\\n  (f : A ⟶ (Action.res (ModuleCat k) S.subtype).obj B),\\n  ((Rep.coindResAdjunction k S).homEquiv A B).symm f =\\n    Cate\", \"doc\": \"For a finite index subgroup $ S $ of a group $ G $, the inverse of the homomorphism equivalence in the coinduction-restriction adjunction between representations satisfies: applying the inverse of the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible exceptional inverse image coefficient comparisons preserve adjunction units counits and associative compact support composition under taking mates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\\\text{functorToPresheaves.ma\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram $ α $ between functors involving these adjoints, for any object $ d $ in category $ D $, the composition of $ L₂ $ applied to th\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit_symm\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, the inverse of the mate equivalence relates the counit of $ L₁ ⊣ R₁ $ with functorial\"}\n  {\"name\": \"LightCondSet.topCatAdjunction\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"lightCondSetToTopCat ⊣ topCatToLightCondSet\", \"doc\": \"The adjunction between the category $\\\\mathbf{Top}$ of topological spaces and the category $\\\\mathbf{LightCondSet}$ of light condensed sets, where the left adjoint functor $\\\\topCatToLightCondSet$ constr\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"For composed exponentiable morphisms $f: I \\\\to J$ and $g: J \\\\to K$ in a category $\\\\mathcal{C}$, the whiskered composition of the pushforward functors' hom transformation with the pullback along $f \\\\ci\"}\n  {\"name\": \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"module\": \"Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {I J K : C} (f : I ⟶ J) (g : J ⟶ K)\\n  [inst_1 : CategoryTheory.ChosenPullbacksAlong f] [inst_2 : CategoryTheory.ChosenPullbacksAlong g]\\n  [inst_3 : CategoryTheory.ChosenPullbacksAlong (CategoryTheory.CategoryStruct.comp f g)]\\n  [inst_4 : Categ\", \"doc\": \"Let `C` be a category with chosen pullbacks. Let `f: I → J` and `g: J → K` be composable morphisms such that `f`, `g`, and their composition `g ∘ f` are all exponentiable. Let `(g ∘ f)^*` and `(g ∘ f)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible exceptional inverse image coefficient comparisons preserve adjunction units counits and associative compact support composition under taking mates",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (A : adj.toComonad.Coalgebra) :\\n  ((comparisonAdjunction adj).counit.app A).f =\\n    (adj.homEquiv _ A.A).symm (equalizer.ι (G.map A.a) (adj.unit.app (G.obj A.A)))\", \"doc\": \"For adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, the counit component at a $ GF $-coalgebra $ A $ is given by applying the inverse of the adjunction's \"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : CategoryTheory.Adjunction.CoreUnitCounit F G),\\n  (CategoryTheory.Adjunction.mkOfUnitCounit adj).counit \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and a core unit-counit structure with natural transformations $\\\\eta:\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \": F ⋙ H ⊣ I ⋙ G\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $H \\\\dashv I$ between $\\\\mathcal{D}$ and $\\\\mathcal{E}$, the composite adjun\"}\n  {\"name\": \"CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions.OfAdjunction\", \"type\": \"(adj : G ⊣ F) : ((isomorphisms C₂).inverseImage G).functorCategory C₁ adj.unit\", \"doc\": \"Given an adjunction $ G \\\\dashv F $ between categories $ \\\\mathcal{C}_1 $ and $ \\\\mathcal{C}_2 $, the unit of the adjunction, when considered in the functor category $ \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ e\"}\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \": TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app\", \"module\": \"Mathlib.CategoryTheory.Monad.Comonadicity\", \"type\": \"[∀ A : adj.toComonad.Coalgebra, HasEqualizer (G.map A.a) (adj.unit.app (G.obj A.A))] (B : C) :\\n  (comparisonAdjunction adj).unit.app B = limit.lift _ (unitFork adj B)\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, if every $ GF $-coalgebra admits an equalizer of $ G(A.\\\\alpha) $ and the unit $ \\\\eta_{G(A)} $, then \"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedη.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ and functors $G : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2$, $F : \\\\mathcal{C}_2 \\\\to \\\\mathcal{C}_1$ forming an adjunction $G \\\\dashv \"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (homEquiv homEquiv_1 : (X : C) → (Y : D) → (F.obj X ⟶ Y) ≃ (X ⟶ G.obj Y)) (e_homEquiv : homEquiv = homEquiv_1)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, a natural isomorphism $\\\\mathrm{Hom}(F(X), Y) \\\\simeq \\\\mathrm{Hom}(X, \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.comp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"Composition of adjunctions.\"}\n  {\"name\": \"CategoryTheory.Equivalence.trans_toAdjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] (e' : D ≌ E) : (e.trans e').toAdjunction = e.toAdjunction.comp e'.toAdjunction\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_homEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_unit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_counit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_unit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.comp_unit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {H : CategoryTheory.Functor D E} {I : CategoryTheory.Functor E D} (adj₁ : F ⊣ G)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isMonoidal_comp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] {F : CategoryTheory.Functor C D} {G : \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_leftUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (CategoryTheory.Adjunction.id.comp adj)) L.leftUnitor.hom = R.rightUnitor.inv\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_rightUnitor_hom\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] {L : CategoryTheory.Functor A B} {R : CategoryTheory.Functor B A} (adj : L ⊣ R) : (CategoryTheory.conjugateEquiv adj (adj.comp CategoryTheory.Adjunction.id)) L.rightUnitor.hom = R.leftUnitor.inv\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern categorical primitives, ordinary modules or unrelated notions; none states these specified geometric coefficient comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*[Cc]ocycle|[Cc]oefficient.*[Tt]ranspos|conjugateEquiv_comp|comp_homEquiv",
+   "results": "Hits read: Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical primitives are reused through existing DAG leaves; other hits concern ordinary algebra or unrelated cocycles"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient change preserves units counits and Hom transposes of constructible exceptional inverse image",
+   "results": "Hits read: CategoryTheory.Equivalence.changeInverse_unitIso_hom_app, PowerSeries.map_invUnitsSub, CommMonCat.val_inv_units_map_hom_apply, MonCat.val_inv_units_map_hom_apply, Units.coe_map_inv, Polynomial.coeff_inv_units, CategoryTheory.instIsComonHomInv, CochainComplex.HomComplex.Cocycle.coe_units_smul; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical primitives are reused through existing DAG leaves; other hits concern ordinary algebra or unrelated cocycles"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "Hits read: CategoryTheory.mateEquiv_hcomp; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical primitives are reused through existing DAG leaves; other hits concern ordinary algebra or unrelated cocycles"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient change intertwines constructible exceptional adjunction Hom transposes and preserves composition cocycles",
+   "results": "Hits read: CochainComplex.HomComplex.Cocycle.toSingleMk_postcomp, CochainComplex.HomComplex.Cocycle.fromSingleMk_postcomp, groupCohomology.cocyclesMap_comp_isoCocycles₁_hom, CochainComplex.HomComplex.Cocycle.toSingleMk_precomp, CochainComplex.HomComplex.Cocycle.fromSingleMk_precomp, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁, groupCohomology.cochainsMap_f_2_comp_cochainsIso₂, groupCohomology.cochainsMap_f_3_comp_cochainsIso₃; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical primitives are reused through existing DAG leaves; other hits concern ordinary algebra or unrelated cocycles"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mates preserve identity and pasting of natural transformation squares and composite adjunction units counits",
+   "results": "Hits read: CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_counit, CategoryTheory.Bicategory.mateEquiv_apply', CategoryTheory.Bicategory.mateEquiv_square, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item: categorical primitives are reused through existing DAG leaves; other hits concern ordinary algebra or unrelated cocycles"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-coherence",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: The exceptional comparisons [lem-coef-finite-exceptional], [prop-coef-integral-exceptional-adjoint], [lem-coef-rational-operations] preserve units and counits, so their mates satisfy the same equations.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-constructible-exceptional-mate-cocycles",
+  "worker": "stage1",
+  "summary": "Q21 expands both transposition squares, the composite adjunction formulas, counit-normalized conjugation and the explicit triple cocycle. Reuses existing finite/adic compositor coefficient theorems and categorical Mathlib leaves; creates no nodes and keeps the statement unchanged. No ambient adjunction and no finite-evaluation faithfulness are used.",
+  "blueprint": "fix-prop-coherence.proof.md, exceptional comparisons sentence: steps 1-3 establish the transposition squares; 4-6 establish composite units/counits and cocycles; 7-8 establish coefficient preservation and well-typed pasted mates."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-3801d7bfb",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-3801d7bfb (reviewer sub-agent of L); spot-checked: Read the item, all 8 steps and every cited statement. Source: fix-prop-coherence.proof.md (main-20261015), sentence 'The exceptional comparisons ... preserve units and counits, so their mates satisfy the same equations'. No new nodes, statement unchanged, no re-split note; proof_deps equal the union of uses; no cycle (the only citer is fix-prop-coherence); unit route fine (verdier-exchange, biduality-general and comp-composition are all in the unit's uses; the rest are Mathlib leaves); no SGA. Recomputed each step. Steps 2-3: the forward and reverse transposition squares follow from naturality of b and q plus the unit and counit equations of lem-sf-constructible-exceptional-adjunction-coefficients. Step 4: the composite unit gives G_fG_g(a)η^{g,f}. Step 5: with L1=F_gF_f, L2=F_gf and square α^{-1}, the conjugate d is the compositor node's c. unit_mateEquiv and mateEquiv_counit give both identities, and the rewriting to c=d^{-1} is checked. Step 6: conjugation reverses composition, and clause 2 of lem-weil-pbc-mate-pasting gives the whiskering, so (c_{g,f}G_h)c_{h,gf}=(G_fc_{h,g})c_{hg,f} is checked. Step 7: the finite and adic compositor-coefficient equations b_x C(c)=c'G_f(b_g)b_f use the item's d and the counit-normalized b; the inverse equation is checked; ramified en is covered and the adic case is a system-level equality. Step 8 reads correctly once 'corresponding' mates are understood as having coefficient-compatible square maps (advisory wording only). Edge cases: identities, m=n, empty schemes, ramified extensions. Duplicate search: the coefficient-coherence, package-realization, verdier-hom-chain and ambient lem-sf-mate nodes differ. Batch 5: lem-pod-adic-limit-finite-modules is generic adic commutative algebra and lem-trf-site-functorial-flat-resolution is generic functorial flat resolutions; neither is a step of the trace-formula or Poincaré-duality proofs, so both citations are accepted, as in their own Q10 and Q15 reviews."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleExceptionalMateCocycles",
+  "declaration": "WeilConjectures.ConstructibleExceptionalMateCocycles.constructibleExceptionalMateCocycles",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.Transposition",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.Composite",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.Associative",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.Coefficient",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.SquareTransport",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.Unital",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.OperationTransposition",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.scalarIdentification",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.RingCoefficient",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.FieldCoefficient",
+   "WeilConjectures.ConstructibleExceptionalMateCocycles.constructibleExceptionalMateCocycles"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalMateCocycles.lean",
+  "statement": "theorem constructibleExceptionalMateCocycles (S : ∀ (E : FieldStage.{u} B.l) (n : ℕ+), SixFunctorOperationDatum D B E.carrier n n.pos) {X Y Z W : SixFunctorSpace D} [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] [IsSeparated Z.obj.hom] [IsSeparated W.obj.hom] (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] [IsSeparated h.hom.left] [LocallyOfFiniteType h.hom.left] [QuasiCompact h.hom.left] (P : System B.l B.Qbar D B.different (f := f.hom.left)) (Q : System B.l B.Qbar D B.different (f := g.hom.left)) (R : System B.l B.Qbar D B.different (f := (f ≫ g).hom.left)) (T : System B.l B.Qbar D B.different (f := h.hom.left)) (U : System B.l B.Qbar D B.different (f := (g ≫ h).hom.left)) (V : System B.l B.Qbar D B.different (f := ((f ≫ g) ≫ h).hom.left)) (IX : System B.l B.Qbar D B.different (f := (𝟙 X.obj.left))) (IY : System B.l B.Qbar D B.different (f := (𝟙 Y.obj.left))) (alpha : LeftCompositors B f g P Q R S) (beta : LeftCompositors B g h Q T U S) (gamma : LeftCompositors B (f ≫ g) h R T V S) (delta : LeftCompositors B f (g ≫ h) P U V S) (unitLeft : LeftCompositors B (𝟙 X) f IX P P S) (unitRight : LeftCompositors B f (𝟙 Y) P IY P S) (unitX : LeftCompositors B (𝟙 X) (𝟙 X) IX IX IX S) (unitY : LeftCompositors B (𝟙 Y) (𝟙 Y) IY IY IY S) (cf : Compactification f.hom.left) (cg : Compactification g.hom.left) (cx : Compactification (f ≫ g).hom.left) (ch : Compactification h.hom.left) (cgh : Compactification (g ≫ h).hom.left) (cfgh : Compactification ((f ≫ g) ≫ h).hom.left) : OperationTransposition B (P.ring.operation cf) ∧ OperationTransposition B (Q.ring.operation cg) ∧ OperationTransposition B (R.ring.operation cx) ∧ OperationTransposition B (T.ring.operation ch) ∧ (∀ s : Stage.{u} B.l, Composite B (P.ring.operation cf s) (Q.ring.operation cg s) (R.ring.operation cx s) (alpha.alpha cf cg cx s)) ∧ (∀ s : Stage.{u} B.l, Associative B (P.ring.operation cf s) (Q.ring.operation cg s) (T.ring.operation ch s) (R.ring.operation cx s) (U.ring.operation cgh s) (V.ring.operation cfgh s) (alpha.alpha cf cg cx s) (beta.alpha cg ch cgh s) (gamma.alpha cx ch cfgh s) (delta.alpha cf cgh cfgh s)) ∧ (∀ s : Stage.{u} B.l, Unital B (P.ring.operation cf s) (IX.ring.operation (.ofIsProper (𝟙 X.obj.left)) s) (IY.ring.operation (.ofIsProper (𝟙 Y.obj.left)) s) (unitX.alpha (.ofIsProper (𝟙 X.obj.left)) (.ofIsProper (𝟙 X.obj.left)) (.ofIsProper (𝟙 X.obj.left)) s) (unitY.alpha (.ofIsProper (𝟙 Y.obj.left)) (.ofIsProper (𝟙 Y.obj.left)) (.ofIsProper (𝟙 Y.obj.left)) s) (unitLeft.alpha (.ofIsProper (𝟙 X.obj.left)) cf cf s) (unitRight.alpha cf (.ofIsProper (𝟙 Y.obj.left)) cf s)) ∧ RingCoefficient B f g P Q R alpha cf cg cx ∧ FieldCoefficient B f g P Q R alpha cf cg cx ∧ (∀ (s t : Stage.{u} B.l) (TX : C B.l B.Qbar X.obj.left s ⥤ C B.l B.Qbar X.obj.left t) (TY : C B.l B.Qbar Y.obj.left s ⥤ C B.l B.Qbar Y.obj.left t) (TZ : C B.l B.Qbar Z.obj.left s ⥤ C B.l B.Qbar Z.obj.left t) (TW : C B.l B.Qbar W.obj.left s ⥤ C B.l B.Qbar W.obj.left t) (df : FieldComparison B.l B.Qbar (P.ring.operation cf s) (P.ring.operation cf t) TX TY) (dh : FieldComparison B.l B.Qbar (T.ring.operation ch s) (T.ring.operation ch t) TZ TW), SquareTransport B (P.ring.operation cf s) (P.ring.operation cf t) (T.ring.operation ch s) (T.ring.operation ch t) TX TY TZ TW df dh)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head a8f40e1493e5: actual LeftCompositors for all four triple-composition pairs, with an unconditional inverse exceptional cocycle. Both identity equations use the specified identity Systems at ofIsProper id and their actual LeftCompositors; the identity units are existential conclusions normalized by the actual identity-self compositors. Retains actual ring and field coefficient comparisons and canonical scalar endpoint identifications."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85d68fd31",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Re-delivery after H3 RETURN a8f4 fixes both points. Associative: U (g≫h) and V ((f≫g)≫h) systems and actual LeftCompositors beta/gamma/delta on the same S; the cocycle (c_{g,f}G_h)c_{h,gf}=(G_f c_{h,g})c_{hg,f} holds unconditionally at every stage for exceptionalIso.inv of those compositors; types and associator checked. Unital: IX/IY systems at ofIsProper 𝟙 and actual unitLeft/unitRight/unitX/unitY compositors; the units i,j are concluded and uniquely fixed by α_{id,id}=F_id(i) (F_id≅𝟭 is fully faithful); the left/right unit laws plus both inverse-compositor equations are equivalent given i,j, so not stronger than the node, which assumes the unit laws. Truth backed by originComposition_assoc and originComposition_id_left/right. Transposition, Composite, RingCoefficient, FieldCoefficient and SquareTransport unchanged from the accepted version. Node differs from side-live only by the lean block; six dependency records byte-identical; lean.statement verbatim; 11 declarations listed with docstrings; one sorry; no hollow definition, new node or universe restriction. Advisories: Second reading is a self-audit; integral composition pinned through reductions (inherited); three proof-only nodes still without Lean. No compile run (no file changed); delivery reports clean scompile and a deliver2 --no-push dry run OK."
+ }
+}

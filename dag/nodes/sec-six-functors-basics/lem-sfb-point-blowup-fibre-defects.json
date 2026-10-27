@@ -1,0 +1,630 @@
+{
+ "id": "lem-sfb-point-blowup-fibre-defects",
+ "kind": "statement",
+ "title": "Geometric fibre defects in regular surface point blowups",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Fix a uniformizer $\\pi\\in R$. Let $T\\to S$ be flat and of finite type [def-weil-flat-morphism, def-weil-finite-type-morphism], with $T$ regular of pure dimension two [def-weil-regular-scheme, def-kun-topological-krull-dimension]. For a closed point $x\\in T_k$, put $l=\\kappa(x)$ [def-weil-residue-field]. The blowup $q:T^+\\to T$ of the reduced point $x$ [def-nagata-global-blowup] is regular and has exceptional curve $E\\cong\\mathbf P^1_l$ [def-sc-p1-standard]. Its coefficient in the divisor of $\\pi$ is $d=\\max\\{r:\\pi\\in\\mathfrak m_x^r\\}$. Strict transforms of fibre components retain their coefficients and function fields. A component with coefficient greater than one stays nonreduced in the scheme-theoretic fibre. An exceptional $\\mathbf P^1_l$ for finite inseparable $l/k$ stays non-geometrically-reduced under strict transform. Every later point blowup with centre on a component of coefficient greater than one creates another component of coefficient greater than one. Every later point blowup centred on the strict transform of an exceptional $\\mathbf P^1_l$ with $l/k$ inseparable has centre residue field containing $l$ and again creates a non-geometrically-reduced exceptional curve. If $T\\to S$ has nodal geometric fibres near $x$, a centre at a nonsmooth fibre point has $d=2$. A centre at a smooth fibre point with $l/k$ separable has $d=1$ and the blowup remains nodal near $E$. The morphism $q$ has nonempty geometrically connected fibres (also without the nodality or separability assumptions). A smooth centre with $l/k$ inseparable instead creates a non-geometrically-reduced exceptional component. A nodal geometric fibre here is reduced of pure dimension one, and each nonsmooth closed point has completed local ring $\\Omega[[x,y]]/(xy)$ [def-weil-geometric-fibre, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The intermediate geometric fibres need not be connected. The map $q$ is proper [def-weil-proper-morphism], $T^+\\to S$ is flat and finitely presented, and if $T\\to S$ is projective then $T^+\\to S$ is projective [def-kun-projective].",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Agent fibre-divisor calculation from Tag 0AGQ (lemma-blowup), using the regular-parameter charts A[y/x] and A[x/y]; models.tex Tag 0CDC (example-blowup), including n=1, and Tag 0CDD (lemma-etale-local-at-worst-nodal). Inseparability persistence uses the inclusion of l in residue fields of points of P^1_l; no perfectness is assumed."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-residue-field",
+  "def-nagata-global-blowup",
+  "def-sc-p1-standard",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-proper-morphism",
+  "def-kun-projective",
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-strict-transform",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sfb-surface-point-blowup-data",
+  "def-weil-pure-dimension",
+  "def-pc-scheme-fibre",
+  "def-trf-projective-nodal-tower"
+ ],
+ "proof": [
+  {
+   "text": "First reduce to the integral component containing the centre. The finite-type Noetherian theorem makes $T$ Noetherian. A regular local ring is a domain, so distinct irreducible components cannot meet; there are finitely many components, hence each is open and closed. Each is integral and has dimension two. The DVR is universally catenary by the regular-ring catenarity theorem. For a component meeting the special fibre put $r=\\operatorname{trdeg}_K K(T_i)$. The dimension formula gives height at most $1+r$ at every point, and height exactly $1+r$ at a closed special-fibre point: its residue field is finite over $k$ by Zariski's lemma. Such a point exists since the special fibre is nonempty and finite type over $k$. Thus $\\dim T_i=1+r$, so $r=1$. In particular $l/k$ is finite and $A=\\mathcal O_{T,x}$ is regular local of dimension two. Flatness makes $\\pi$ a nonzerodivisor, in particular a nonzero element of its maximal ideal $\\mathfrak m$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-regular-local-domain",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-trf-regular-ring-universally-catenary",
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02IJ (lemma-dimension-formula), 00FV (theorem-nullstellensatz), 00NM (lemma-CM-ring-catenary); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Blowup commutes with localization, since localization is flat. Apply the local surface blowup geometry to $A$: above $x$ the blowup is regular and its scheme-theoretic fibre is the effective Cartier curve $E=\\mathbf P^1_l$. Away from $x$ it is an isomorphism. These two statements prove regularity of $T^+$ everywhere. The properness theorem for a finite-type centre applies because the reduced point ideal is locally finitely generated on the Noetherian scheme $T$. In particular $q$ is proper and of finite type. No excellence or perfectness hypothesis enters. The same holds at every stage of a sequence of point blowups centred at closed special-fibre points, by induction on the number of blowups: each $T_j$ is regular and finite type over $S$, and every closed special-fibre point $y$ of $T_{j+1}$ has $\\mathcal O_{T_{j+1},y}$ regular local of dimension two, by the closed-point clause of the local surface theorem when $y$ lies on the new exceptional curve and by the complement isomorphism otherwise. Hence step 1's conclusion about the local ring at the centre, which is all that this step and step 3 use, holds at every later centre.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "thm-nagata-global-blowup-complement",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0AGQ (lemma-blowup), 0AGR (lemma-blowup-regular); divisors.tex Tags 0805 (lemma-flat-base-change-blowing-up), 02NS (lemma-blowing-up-projective)."
+   }
+  },
+  {
+   "text": "Choose parameters $a,b$ of $A$. They form a regular sequence in both orders. Krull intersection gives $\\bigcap_n\\mathfrak m^n=0$; thus $\\pi\\ne0$ has finite order $d\\ge1$. The regular-sequence graded theorem identifies $\\operatorname{gr}_{\\mathfrak m}A$ with $l[\\bar a,\\bar b]$. Write $\\pi=\\sum_{i=0}^d c_i a^{d-i}b^i$. Its initial form $F(X,Y)=\\sum_i\\bar c_iX^{d-i}Y^i$ is nonzero, since otherwise this expression would belong to $\\mathfrak m^{d+1}$. On the $a$-chart $C=A[\\mathfrak m/a]=A[t]/(at-b)$ we have $\\pi=a^dG$ with $G=\\sum_i c_it^i$. Reduction modulo $a$ gives $C/(a)=l[t]$ and $\\bar G=F(1,t)\\ne0$. Therefore $G$ is a unit at the generic point $(a)$ of $E$. This local ring is a DVR with uniformizer $a$: it is regular and its maximal ideal is generated by $a$. Consequently the coefficient of $E$ in $\\operatorname{div}(\\pi)$ is exactly $d$. The $b$-chart gives the same value on the overlap.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "lem-pur-regular-sequence-graded-polynomial",
+    "prop-nagata-affine-blowup-chart-cover",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Agent chart calculation extending Tag 0AGQ (lemma-blowup); algebra.tex Tags 00NQ (lemma-regular-ring-CM), 00LN (lemma-regular-quasi-regular); more-algebra.tex Tag 0BIQ (lemma-blowup-regular-sequence)."
+   }
+  },
+  {
+   "text": "For an irreducible component $D$ of the special fibre, its generic point is different from the closed centre. The complement isomorphism and the definition of strict transform identify an open neighbourhood of this generic point with its inverse image. They therefore identify its function field and its local ring in the total surface, carrying $\\pi$ to $\\pi$. The coefficient (the valuation of $\\pi$ in that local DVR) is unchanged. The same reasoning applies at each stage of a sequence of point blowups.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "def-nagata-strict-transform",
+    "lemma-nagata-strict-transform-restrict"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E (lemma-strict-transform), restriction over the complement of the centre."
+   }
+  },
+  {
+   "text": "At a component generic point with coefficient $m>1$, write $\\pi=u z^m$ in its DVR, where $u$ is a unit. In the special-fibre local ring $A_{(z)}/(\\pi)$, the image of $z$ is nonzero and nilpotent, so the fibre remains nonreduced there. Now let $y$ be a later closed centre on this component. The regular local UFD theorem gives in $B=\\mathcal O_{T_j,y}$ a prime equation $h$ for the component, and a factorization $\\pi=h^m v$ with $v\\in B$ (the exponent agrees with the generic valuation). Since $h\\in\\mathfrak m_y$, we have $\\pi\\in\\mathfrak m_y^m$. Step 3 applied at $y$ shows that the new exceptional coefficient is at least $m>1$. This proves both assertions about multiplicity defects by induction on the number of later blowups.",
+   "uses": [
+    "lem-trf-regular-local-regular-ring-ufd",
+    "lem-weil-pbc-regular-local-localization",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AG0 (lemma-regular-local-UFD), together with the explicit order calculation in step 3."
+   }
+  },
+  {
+   "text": "Suppose an exceptional curve is $D=\\mathbf P^1_l$ with finite inseparable $l/k$. By the inseparable-element and tensor-nilpotent lemmas, $l\\otimes_k\\bar k$ has a nonzero nilpotent. This remains nonzero on the affine chart $(l\\otimes_k\\bar k)[t]$, so $D$ is not geometrically reduced. More precisely it remains nonzero in $l(t)\\otimes_k\\bar k$: the injection $l\\hookrightarrow l(t)$ stays injective after tensoring with the $k$-vector space $\\bar k$ (extend a basis). Thus the defect occurs at the component's generic point, and the function-field invariance of step 4 already shows that it survives any strict transform.",
+   "uses": [
+    "lem-pc-finite-inseparable-element",
+    "lem-pc-inseparable-tensor-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030V and 030W (lemma-characterize-separable-field-extensions), with the polynomial and rational-function extension calculation."
+   }
+  },
+  {
+   "text": "In fact each later strict transform of this $D$ is isomorphic to $D$. If the centre lies off $D$, this follows from the complement isomorphism. If it lies on $D$, the strict transform is the blowup of $D$ in that reduced point. Its ideal is invertible: on a standard affine chart $l[t]$ the point ideal is generated by its irreducible polynomial; near infinity use the other chart. These equations are nonzerodivisors, and away from the point the ideal is the unit ideal. The blowup of an invertible ideal is the identity. Thus every point $y$ on the transformed $D$ has a residue-field inclusion $l\\hookrightarrow\\kappa(y)$. For closed $y$, $\\kappa(y)/k$ is finite by Zariski's lemma and is inseparable since it contains an inseparable element of $l$. The new exceptional curve is $\\mathbf P^1_{\\kappa(y)}$ by step 2; step 6 proves it again non-geometrically-reduced. This gives the asserted persistence through arbitrarily many later point blowups.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "thm-nagata-strict-transform-is-blowup",
+    "cor-nagata-blowup-cartier-iso",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-pc-finite-inseparable-element",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E (lemma-strict-transform), identification with the blowup on D, and the invertible-ideal case; algebra.tex Tag 030W for inseparability."
+   }
+  },
+  {
+   "text": "Record the local comparison used in the next step. For an etale local map $A\\to B$ at chosen points, the discrete reduced fibre gives $\\mathfrak m_AB=\\mathfrak m_B$; flatness gives\n$$ (\\mathfrak m_A^r/\\mathfrak m_A^{r+1})\\otimes_{\\kappa(A)}\\kappa(B)\\cong\\mathfrak m_B^r/\\mathfrak m_B^{r+1}. $$\nTensoring a nonzero vector with a field extension does not kill it. Thus orders agree, as do dimensions of cotangent spaces. The etale local-dimension theorem gives $\\dim A=\\dim B$, so the definition of regularity shows that one local ring is regular exactly when the other is. A trait uniformizer also remains a uniformizer up to a unit: its ideal extends to the maximal ideal and the new local dimension is one. These arguments apply to both maps in a common pointed etale neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-sc-etale-local-dimension",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tag 02GL (lemma-etale-over-field); more-algebra.tex Tags 07QP (lemma-dimension-etale-extension) and 0AH0 (lemma-regular-etale-extension), whose proof is precisely the maximal-ideal and cotangent-space comparison written here."
+   }
+  },
+  {
+   "text": "Assume the geometric fibres are nodal near $x$ and $x$ is a nonsmooth fibre point. Apply the nodal-family etale local model. After a pointed etale extension of the trait and of $T$, the equation is $uv-h$ over an etale DVR $R'$. The node is $u=v=\\pi'=0$. The possibilities are $h=0$ or $h=\\epsilon(\\pi')^n$, $n\\ge1$; absorb the unit in one variable. The first possibility has zero divisors at the node and cannot be regular. In the second, the nodal-chart regularity criterion says that the total local ring is regular exactly when $n=1$. Hence the regular case is $uv=\\pi'$ and $\\pi'$ has order two: $(u,v)$ is a regular parameter system, and its associated graded is the polynomial ring with the nonzero degree-two monomial $\\bar u\\bar v$. By step 8 the uniformizer order is unchanged through these local etale maps, so $d=2$ in the original local ring, and step 3 gives exceptional coefficient two.",
+   "uses": [
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-pur-regular-sequence-graded-polynomial",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD (lemma-etale-local-at-worst-nodal) and Tag 0CDC (example-blowup), regular n=1 case; curves.tex Tag 0CBY (lemma-etale-local-structure-nodal-family)."
+   }
+  },
+  {
+   "text": "At a smooth fibre point, the flat-fibre smoothness criterion makes $T\\to S$ smooth near $x$: it is flat by hypothesis and locally of finite presentation since it is finite type over the Noetherian DVR. The smooth-fibre regularity theorem makes $A/(\\pi)=\\mathcal O_{T_k,x}$ regular, and the nonzerodivisor dimension formula gives dimension one. Since $A$ is regular local of dimension two, $\\pi$ cannot lie in $\\mathfrak m^2$: otherwise the quotient would still have embedding dimension two. Thus $d=1$, even when $l/k$ is inseparable. If $l/k$ is inseparable, steps 2 and 6 give the claimed non-geometrically-reduced exceptional curve despite its coefficient being one.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "lem-weil-pbc-smooth-fibre-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Algebra Tags 00TF (lemma-flat-fibre-smooth), 00TT (lemma-characterize-smooth-over-field), 00KW (lemma-one-equation), 00FP (lemma-Noetherian-finite-type-is-finite-presentation); embedding dimension definition of regularity."
+   }
+  },
+  {
+   "text": "For the separable smooth case use the smooth-point etale immersion slice $Z\\hookrightarrow T$, with $Z_k$ consisting of $x$ and $\\kappa(x)=l$. Locally this is a closed immersion, and $Z\\to S$ is etale. On $T\\times_S Z\\to Z$ it gives a section; restrict to affine neighbourhoods to make this a closed section. The centred smooth-section coordinate theorem gives an etale coordinate $t$ carrying that section to zero. At its point over $x$ the pulled-back reduced point ideal is $(\\pi',t)$: the diagonal factor of $l\\otimes_kl$ is $l$, an open and closed factor since $l/k$ is finite separable, and other factors can be removed near this point. The projection from $T\\times_S Z$ to $T$ and the coordinate map to $\\mathbf A^1_Z$ are etale there. The closed fibre of the slice is reduced because it is etale over $k$, and its immersion identifies its residue field with $l$. Put $R'=\\mathcal O_{Z,z}$ at the special point of the slice and let $\\pi'$ be the image of $\\pi$; step 8 makes $R'$ a DVR. Localize the affine section-coordinate neighbourhoods at $z$; this leaves their special-fibre charts unchanged. Flat base change of the blowup then gives the following two model charts, with etale maps from the corresponding actual charts:\n$$\\operatorname{Spec}R'[v],\\quad t=\\pi'v;\\qquad\\operatorname{Spec}R'[t,w]/(tw-\\pi').$$\nThese are the regular-sequence chart presentations for $(\\pi',t)$ and $(t,\\pi')$.",
+   "uses": [
+    "lem-trf-smooth-point-etale-immersion",
+    "lem-sc-smooth-section-affine-coordinates",
+    "thm-nagata-blowup-flat-base-change",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057G (lemma-slice-smooth); morphisms.tex Tag 054L (lemma-smooth-etale-over-affine-space); more-algebra.tex Tag 0BIQ (lemma-blowup-regular-sequence)."
+   }
+  },
+  {
+   "text": "The first chart in step 11 is smooth over $R'$. The second is the $n=1$ nodal chart, hence has reduced nodal geometric fibres by the nodal-chart theorem. On its special fibre $tw=0$, the exceptional curve $t=0$ and the strict transform $w=0$ meet in one ordinary node; on the other chart the special fibre is a smooth affine line. To transport this to $T^+$, use the charts of step 11 before localizing at $z$: over an affine open $Z'\\subseteq Z$ containing $z$, which is etale over $S$, they are $\\operatorname{Spec}\\Gamma(Z',\\mathcal O)[v]$ and $\\operatorname{Spec}\\Gamma(Z',\\mathcal O)[t,w]/(tw-\\pi)$, again with etale maps from the corresponding actual charts. Both are flat and finitely presented over $S$. Since $Z'\\to S$ is etale, each geometric fibre over $S$ is a disjoint union of copies of $\\mathbf A^1_\\Omega$, respectively of $\\{tw=c\\}$ with $c\\in\\Omega$. These are purely one-dimensional and smooth except at $t=w=0$ when $c=0$, where the completed local ring is $\\Omega[[t,w]]/(tw)$. Apply the etale source-locality theorem for nodal families to a model chart with the family consisting of its identity and the etale map from the actual chart: each actual chart is nodal of relative dimension one over $S$. Apply it again on a neighbourhood of $E$ in $T^+$, to the family of these actual charts together with the open complement of $E$. The charts are etale over $T^+$ by base change, and their images cover $E$. Hence $T^+\\to S$ is nodal of relative dimension one near $E$. Its geometric fibres there are reduced: they are smooth away from finitely many closed points, and at such a point the local ring injects into its completion $\\Omega[[u,v]]/(uv)$, which is reduced. Away from $E$, $q$ is an isomorphism, so after restricting to the original nodal neighbourhood these descriptions prove that $T^+\\to S$ remains nodal near $E$. No connectedness of the family fibres is used.",
+   "uses": [
+    "lem-sfb-dvr-nodal-chart-blowup-calculus",
+    "thm-nagata-global-blowup-complement",
+    "lem-trf-nodal-family-etale-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDC (example-blowup), n=1 nodal model for the t-chart; Tag 0CDD (lemma-etale-local-at-worst-nodal), etale-local interpretation."
+   }
+  },
+  {
+   "text": "For any geometric point of $T$ outside $x$ the fibre of $q$ is one point. For a geometric point over $x$, with algebraically closed field $\\Omega$ over $l$, it is $E\\times_l\\Omega=\\mathbf P^1_\\Omega$. Its two standard affine charts have the dense generic point given by the zero ideal and have nonempty intersection $\\operatorname{Spec}\\Omega[t,t^{-1}]$; hence their union is irreducible, in particular nonempty and connected. This proves that all geometric fibres of $q$ are nonempty and connected, including in the inseparable case. The claim concerns $q$, not $T^+\\to S$.",
+   "uses": [
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "thm-nagata-global-blowup-complement",
+    "def-sc-p1-standard"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGQ (lemma-blowup), E is the projective line over the centre residue field; direct standard-chart connectedness check."
+   }
+  },
+  {
+   "text": "Finally, on either chart near the exceptional curve its algebra is a subalgebra of the localization of the domain $A$, and the map $R\\to A$ is injective. Thus it is torsion free as an $R$-module. The PID torsion-free flatness theorem makes each such chart flat over $R$; away from $E$ flatness is the assumed flatness of $T$. The finite-type composition theorem makes $T^+\\to S$ finite type, since $q$ and $T\\to S$ are finite type. Over the Noetherian ring $R$, every affine finite-type presentation is finite presentation. Moreover $T^+$ is Noetherian, hence quasi-separated, and the morphism is quasi-compact; these give finite presentation globally. If $T\\to S$ is projective in the finite-projective-space convention, the projective-affine-base blowup theorem applies to its finite-type point ideal and proves projectivity of $T^+\\to S$.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-sfb-projective-affine-base-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0539 (lemma-valuation-ring-torsion-free-flat); algebra.tex Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation); morphisms.tex Tag 01TX (lemma-noetherian-finite-type-finite-presentation); divisors.tex Tag 02NS (lemma-blowing-up-projective)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-regular-local-domain",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-trf-regular-ring-universally-catenary",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-localization-flat",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-sfb-local-surface-maximal-blowup-geometry",
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "def-nagata-blowup-flat-base-change-map",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "def-nagata-strict-transform",
+  "lemma-nagata-strict-transform-restrict",
+  "lem-trf-regular-local-regular-ring-ufd",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-pc-finite-inseparable-element",
+  "lem-pc-inseparable-tensor-nilpotent",
+  "thm-nagata-strict-transform-is-blowup",
+  "cor-nagata-blowup-cartier-iso",
+  "def-sc-p1-standard",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-sc-etale-local-dimension",
+  "def-weil-regular-scheme",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-sfb-dvr-nodal-chart-blowup-calculus",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-trf-smooth-point-etale-immersion",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-nagata-blowup-chart-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-sfb-projective-affine-base-blowup",
+  "lem-trf-nodal-family-etale-source-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0AGQ/0AGR, with explicit fibre-order and inseparability arguments; models.tex Tags 0CDC/0CDD for nodal models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a regular surface over a discrete valuation ring, point blowups create exceptional projective lines with multiplicity equal to the order of the uniformizer and preserve inseparable residue defects",
+   "results": "{\"t\": \"2026-10-22T04:22:27Z\", \"tool\": \"leanfinder\", \"query\": \"In a regular surface over a discrete valuation ring, point blowups create exceptional projective lines with multiplicity equal to the order of the uniformizer and preserve inseparable residue defects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.isGoodReduction_iff\"], \"digest\": \"dec2c3b4006f4ce9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and polynomial root multiplicity do not describe geometric fibres of surface point blowups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Point blowups at separable smooth points preserve a nodal geometric special fibre; blowing up a node creates multiplicity two",
+   "results": "{\"t\": \"2026-10-22T04:22:24Z\", \"tool\": \"leansearch\", \"query\": \"Point blowups at separable smooth points preserve a nodal geometric special fibre; blowing up a node creates multiplicity two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"Polynomial.rootMultiplicity_le_one_of_separable\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth\", \"WeierstrassCurve.Jacobian.nonsingularLift_addMap\"], \"digest\": \"4b3de3d98d9640db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and polynomial root multiplicity do not describe geometric fibres of surface point blowups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T04:22:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and polynomial root multiplicity do not describe geometric fibres of surface point blowups."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*multiplicity|blowup|blow.up",
+   "results": "{\"t\": \"2026-10-22T04:22:24Z\", \"tool\": \"grep\", \"query\": \"exceptional.*multiplicity|blowup|blow.up\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and polynomial root multiplicity do not describe geometric fibres of surface point blowups."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blow.up|exceptional.*multiplicity",
+   "results": "{\"t\": \"2026-10-22T04:44:22Z\", \"tool\": \"grep\", \"query\": \"blowup|blow.up|exceptional.*multiplicity\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern meromorphic orders, elliptic-curve reduction, or general Proj properness, not regular-surface point-blowup fibre defects; grep and Loogle have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "blowing up a smooth surface at a closed point exceptional divisor multiplicity of a function",
+   "results": "{\"t\": \"2026-10-22T04:44:23Z\", \"tool\": \"leansearch\", \"query\": \"blowing up a smooth surface at a closed point exceptional divisor multiplicity of a function\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"multiplicity\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_multiplicity\", \"MeromorphicOn.divisor_zpow\", \"MeromorphicAt\", \"Meromorphic\", \"meromorphicOrderAt\", \"MeromorphicOn.divisor_apply\", \"MeromorphicOn.divisor_sub_const_self\"], \"digest\": \"3fcfdaf4b0562c04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern meromorphic orders, elliptic-curve reduction, or general Proj properness, not regular-surface point-blowup fibre defects; grep and Loogle have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"regular\"",
+   "results": "{\"t\": \"2026-10-22T04:44:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\", \\\"regular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern meromorphic orders, elliptic-curve reduction, or general Proj properness, not regular-surface point-blowup fibre defects; grep and Loogle have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional divisor of the blowup of a regular local surface has valuation equal to maximal ideal order, and inseparable projective lines are not geometrically reduced",
+   "results": "{\"t\": \"2026-10-22T04:44:25Z\", \"tool\": \"leanfinder\", \"query\": \"The exceptional divisor of the blowup of a regular local surface has valuation equal to maximal ideal order, and inseparable projective lines are not geometrically reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.valuation_Δ_aux\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal.val_Δ_maximal\", \"WeierstrassCurve.IsMinimal\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\"], \"digest\": \"426f3c8148bb58fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern meromorphic orders, elliptic-curve reduction, or general Proj properness, not regular-surface point-blowup fibre defects; grep and Loogle have no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Geometric fibre defects in regular surface point blowups",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-point-blowup-fibre-defects",
+  "worker": "stage1",
+  "summary": "Reuse existing regular-surface, regular-sequence, nodal-chart, strict-transform and field-tensor tools. Prove the exceptional coefficient by the initial form on a blowup chart, prove both defect-persistence assertions, and compute the smooth-centre charts. Clarify that nonempty connected geometric fibres belong to q, not the possibly disconnected family. No new nodes.",
+  "blueprint": "Realizes the point-blowup fibre-defect input of lem-sfb-common-nodal-model, itself serving the direct-image alteration reduction named in the inherited from.place. The ancestor command returns None because the inherited created.item chain ends without an imported blueprint node; retain the precise inherited place and via rather than invent an ancestor. Whole-blueprint searches for blowup, fibre blow, and geometrically inseparable found no equal statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic supporting result: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic supporting result: Regular local rings are domains. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Generic supporting result: Noetherian spaces have finitely many irreducible components. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-trf-regular-ring-universally-catenary",
+    "why": "Generic supporting result: Noetherian regular rings are universally catenary. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "why": "Generic supporting result: Dimension formula for finite type extensions of universally catenary domains. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic supporting result: Zariski's lemma: a field of finite type over a field is a finite extension. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic supporting result: A localization is a flat algebra. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic supporting result: Flat base change of blow-ups. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic supporting result: Complement of the center. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic supporting result: Properness of a blow-up. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic supporting result: A regular system of parameters is a regular sequence. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Generic supporting result: Krull intersection theorem for an ideal in the Jacobson radical. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic supporting result: Associated graded of a regular-sequence ideal is polynomial. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic supporting result: Finite affine chart cover. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-trf-blowup-chart-regular-sequence-presentation",
+    "why": "Generic supporting result: Affine blowup chart presentation for a regular sequence. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lemma-nagata-strict-transform-restrict",
+    "why": "Generic supporting result: Strict transform over the complement of the center. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-trf-regular-local-regular-ring-ufd",
+    "why": "Generic supporting result: The proved source-library regular local UFD theorem. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic supporting result: A localization of a regular local ring at a prime is a regular local ring. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-pc-finite-inseparable-element",
+    "why": "Generic supporting result: A finite nonseparable extension has an inseparable element. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-pc-inseparable-tensor-nilpotent",
+    "why": "Generic supporting result: An inseparable element produces a nilpotent after algebraic-closure base change. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "thm-nagata-strict-transform-is-blowup",
+    "why": "Generic supporting result: [stacks-project]. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "Generic supporting result: Blow-up of an effective Cartier center. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic supporting result: The fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-flat",
+    "why": "Generic supporting result: An etale algebra is flat. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-sc-etale-local-dimension",
+    "why": "Generic supporting result: Étale localizations preserve dimension. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-trf-nodal-family-etale-local-model",
+    "why": "Generic supporting result: Etale local model uv=h of an at-worst-nodal family of relative dimension one. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "why": "Generic supporting result: Dimension drops by one modulo a nonzerodivisor of the maximal ideal. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic supporting result: Finite type over a Noetherian ring is finite presentation. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+    "why": "Generic supporting result: Flat at a prime with smooth fibre implies smooth at the prime. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-fibre-regular-local",
+    "why": "Generic supporting result: Smooth fibres have regular local rings. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-trf-smooth-point-etale-immersion",
+    "why": "Generic supporting result: Smooth fibre point admits an etale immersion slice. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-sc-smooth-section-affine-coordinates",
+    "why": "Generic supporting result: Affine centred etale charts with regular coordinate equations. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic supporting result: Base change of an etale morphism of schemes is etale (Stacks 02GO). This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-pid-torsion-free-module-flat",
+    "why": "Generic supporting result: A torsion-free module over a principal ideal domain is flat. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic supporting result: Finite-type morphisms are stable under composition and base change. This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic supporting result: A locally Noetherian scheme is quasi-separated (Stacks 01OY). This supplies a local algebra or scheme tool; it does not replace the common-model alteration argument of the item unit."
+   },
+   {
+    "node": "lem-trf-nodal-family-etale-source-locality",
+    "why": "Generic supporting result (Codex review fix): nodality of relative dimension one is etale local on the source. It transports the nodal model chart of step 12 to the blowup; it does not replace the common-model alteration argument of the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-regular-local-domain",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-trf-regular-ring-universally-catenary",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-localization-flat",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lemma-nagata-strict-transform-restrict",
+  "lem-trf-regular-local-regular-ring-ufd",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-pc-finite-inseparable-element",
+  "lem-pc-inseparable-tensor-nilpotent",
+  "thm-nagata-strict-transform-is-blowup",
+  "cor-nagata-blowup-cartier-iso",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-sc-etale-local-dimension",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-trf-smooth-point-etale-immersion",
+  "lem-sc-smooth-section-affine-coordinates",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-trf-nodal-family-etale-source-locality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-a0318da76",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-a0318da76 (reviewer sub-agent of L); spot-checked: Read in full: the item's 14 steps, every cited statement, resolve.tex 0AGQ/0AGR and models.tex 0CDC/0CDD; the tag index confirms 0AH0. There are no new nodes. The mathematics is sound: order of pi = exceptional coefficient via gr_m A = l[X,Y] and the chart A[t]/(at-b); UFD exponent argument for multiplicity persistence; the strict transform of P^1_l is the blowup at an invertible ideal, so l lies in later residue fields; d=2 at regular nodes via 0CBY plus the n=1 criterion; d=1 at smooth points by embedding dimension. The statement correction is accepted: the worker's counterexample (two copies of P^1_R) disproves the family-connectedness reading, and the citer lem-sfb-common-nodal-model (steps 5 and 10) uses only connected fibres of q; the new clause holds for every centre. Batch-5: the 9 flagged citations are generic tools (00NM, 0BIQ, 0AG0, 0CBY, 057G, 054L, definitions). None is a trace-formula or Poincare-duality step, and by closure comparison they reach no trace-transport or poincare-duality node beyond what the citer already reaches; accepted. Two faults, both fixed in the item file: (1) C4 in step 12: the 'etale-chart clause' of lem-sfb-dvr-nodal-chart-blowup-calculus transports only normality, regularity and dimension, and the n>=2 charts, not nodality. Step 12 now cites lem-trf-nodal-family-etale-source-locality on the unlocalized charts over an etale Z', with their geometric fibres written out and reducedness derived; the node is added to uses, proof_deps and tool_uses. (2) D4 in step 2: added the induction setup so that later T_j have regular 2-dimensional local rings at closed special-fibre points (local-surface closed-point clause plus the complement isomorphism), which steps 5 and 7 need. Advisory, inherited from the base: 'geometrically reduced' and 'geometrically connected' have no definition node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointBlowupFibreDefects",
+  "declaration": "AlgebraicGeometry.SurfacePointBlowup.point_blowup_fibre_geometry",
+  "declarations": [
+   "AlgebraicGeometry.SurfacePointBlowup.point_blowup_fibre_geometry",
+   "AlgebraicGeometry.SurfacePointBlowup.point_blowup_component_defects",
+   "AlgebraicGeometry.SurfacePointBlowup.point_blowup_inseparable_defects"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PointBlowupFibreDefects.lean",
+  "statement": "theorem point_blowup_fibre_geometry (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) [Flat f] [LocallyOfFiniteType f] [QuasiCompact f] (hregular : IsRegularScheme X) (hpure : X.IsPureDimension 2) (p : X) (hp : IsClosed ({p} : Set X)) (hs : f p = IsLocalRing.closedPoint R) (π : R) (hπ : Irreducible π) : IsRegularScheme (pointIdeal p hp).blowup ∧ (∃ e : exceptional p hp ≅ ProjectiveLine (Spec (X.residueField p)), e.hom ≫ (ProjectiveLine (Spec (X.residueField p)) ↘ Spec (X.residueField p)) = exceptionalToField p hp) ∧ (∃ d : ℕ, 1 ≤ d ∧ HasOrder f p π d ∧ ∀ η : exceptional p hp, IsGenericPoint η Set.univ → coefficient (family f p hp) (exceptionalι p hp η) π = (d : ℕ∞)) ∧ IsProper (pointIdeal p hp).blowupMap ∧ Flat (family f p hp) ∧ LocallyOfFinitePresentation (family f p hp) ∧ QuasiCompact (family f p hp) ∧ QuasiSeparated (family f p hp) ∧ (IsHProjective f → IsHProjective (family f p hp)) ∧ GeometricallyConnected (pointIdeal p hp).blowupMap ∧ (IsNodalNear f {p} → ((¬ ∃ U : X.Opens, p ∈ U ∧ Smooth (U.ι ≫ f)) → HasOrder f p π 2) ∧ ((∃ U : X.Opens, p ∈ U ∧ Smooth (U.ι ≫ f)) → HasOrder f p π 1 ∧ (@Algebra.IsSeparableExtension ((Spec (.of R)).residueField (IsLocalRing.closedPoint R)) (X.residueField p) _ _ (residueMap f p hs).hom.toAlgebra → IsNodalNear (family f p hp) (Set.range (exceptionalι p hp)))))",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dccc9b5e9",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read the item node (statement unchanged; 4 stmt_deps added, none dropped), all 23 dependency records and their Lean declarations, both delivered modules, report.md and the new def node. All three theorems render every node clause with the given hypotheses and canonical maps: regularity, E≅P^1_l over l, d=max order with exceptional coefficient d, proper q, flat/lfp/qc/qs family, H-projectivity implication, geometrically connected q, nodal d=2/d=1 and nodal-near-E under separability, coefficient and function-field invariance along arbitrary TransformChains, nonreducedness and coefficient>1 persistence, inseparable non-geometric-reducedness with a compatible l→κ(y). Def node faithful and not hollow; no duplicate (OrdinaryBlowupTower is a different notion). Docstrings, verbatim statements, single universe u and sorry-only checked; no recompile, per instructions. Advisory: d=1 at a smooth centre stated without separability (true, node Step 10); pure dimension of T+ not stated; pointIdeal=vanishingIdeal vs Hom.ker record; geometrically reduced/connected have no DAG node; ProjectiveLine vs recorded TwistData; proof-plan-only imports."
+ }
+}

@@ -20,6 +20,13 @@ def _pdeathsig():
         ctypes.CDLL("libc.so.6", use_errno=True).prctl(1, _sig.SIGTERM, 0, 0, 0)   # PR_SET_PDEATHSIG
     except Exception:   # noqa: BLE001
         pass
+    # 2026-10-26 (the human): PR_SET_THP_DISABLE (prctl 41) for the Lean child, inherited across exec. Lean's heap is
+    # madvised for huge pages, and every fault then ran synchronous compaction (92-99% failed), which showed as
+    # memory pressure (PSI ~45%) that kept the slot governors from adding slots. Fail-safe: the compile runs anyway.
+    try:
+        ctypes.CDLL("libc.so.6", use_errno=True).prctl(41, 1, 0, 0, 0)   # PR_SET_THP_DISABLE
+    except Exception:   # noqa: BLE001
+        pass
 
 
 n = 0
@@ -30,7 +37,16 @@ data = sys.stdin.buffer.read()
 # 2026-10-21 (the human): at most SHEAF_COMPILE_SLOTS (40) calls compile at once; the others wait for a slot (a call
 # never fails for this, it only answers later; after 9 min of waiting it answers 75 and the caller retries). 80
 # concurrent single-file compiles had saturated the 80 cores and starved the global build, the landings and the reviews.
-_SLOTS = int(os.environ.get("SHEAF_COMPILE_SLOTS", "40")); _slot_fh = None
+_SLOTS = int(os.environ.get("SHEAF_COMPILE_SLOTS", "18"))   # the human, 2026-10-22: at most 24 single-file compiles at once (18 + 6 priority)
+_CAP = REPO / "local" / "compile-slots.cap"
+def _slots():
+    """2026-10-24 (the human): the ordinary slot count follows the machine load (95-100% of the cores busy); it is
+    written by ~/cc1/slot-governor.py and read again on every wait round."""
+    try:
+        return max(1, int(_CAP.read_text()))
+    except (OSError, ValueError):
+        return _SLOTS
+_slot_fh = None
 _sd = REPO / "local" / "compile-slots"; _sd.mkdir(parents=True, exist_ok=True)
 # 2026-10-22 (the human: the quarantine roots are fixed too slowly): a call compiling a rework or retire module
 # (coord/rework.tsv, coord/retire-items.tsv) is a root everything else waits for; it has SHEAF_COMPILE_PRIO_SLOTS (8)
@@ -56,7 +72,7 @@ def _prio_call(blob):
     except Exception:
         return False
 _PRIO = _prio_call(data)
-_PSLOTS = int(os.environ.get("SHEAF_COMPILE_PRIO_SLOTS", "8"))
+_PSLOTS = int(os.environ.get("SHEAF_COMPILE_PRIO_SLOTS", "6"))
 _pd = REPO / "local" / "compile-slots-prio"; _pd.mkdir(parents=True, exist_ok=True)
 _t0 = time.time()
 # 2026-10-22 (the human: calls expired although 40 slots should serve them): the slot wait was a free-for-all poll, so a
@@ -85,13 +101,20 @@ def _my_turn():
             older += 1
         elif not _PRIO:
             older += 1
-    return older < (_PSLOTS if _PRIO else _SLOTS)
+    return older < (_PSLOTS if _PRIO else _slots())
+# 2026-10-23: a caller over ssh that gave up (its ssh session ended, this process was reparented) no longer waits in
+# the queue: half of 674 waiting calls had no caller left and would have compiled for nobody (queue 639, timeouts)
+_ppid0 = os.getppid()
+def _caller_gone():
+    return os.getppid() != _ppid0
 while _slot_fh is None:
+    if _caller_gone():
+        sys.exit(141)
     if not _my_turn():
         if time.time() - _t0 > 540:
             sys.exit(75)
         time.sleep(3); continue
-    _pools = ([(_pd, _PSLOTS)] if _PRIO else []) + [(_sd, _SLOTS)]
+    _pools = ([(_pd, _PSLOTS)] if _PRIO else []) + [(_sd, _slots())]
     for _dir, _cnt in _pools:
         for _i in range(_cnt):
             _f = open(_dir / f"{_i}.lock", "a")
@@ -185,19 +208,27 @@ try:
     # its outputs, and a per-key lock makes a concurrent identical job wait for the first instead of compiling twice.
     import hashlib
     CACHE = H / "cc1" / "rset-cache"; PUB = LEAN / ".lake/build/lib/lean"
-    IMP = re.compile(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?(\S+)")
+    _SCAN = None
     def header_imports(path):
-        try: t = path.read_text(errors="ignore")
-        except OSError: return []
-        t = re.sub(r"/-.*?-/", "", t, flags=re.S); out = []
-        for l in t.split("\n"):
-            l = l.split("--", 1)[0].strip()
-            if not l or l in ("module", "prelude"): continue
-            m = IMP.match(l)
-            if not m: break
-            out.append(m.group(1))
-        return out
-    _fh = {}; _mk = {}
+        # Share the comment-aware parser used by source gates. Lean permits a
+        # public import to wrap before its module name; line scanning stopped
+        # there and silently lost that dependency and all following imports.
+        # 2026-10-27: the same parser, memoized by text in tools/leanindex.py's text cache (import_cycles._memo_imports,
+        # also used by the lander's import graph): parsing the ~10000 files of a closure took 20-65 s of one core
+        global _SCAN
+        if _SCAN is None:
+            import import_cycles
+            _SCAN = import_cycles._memo_imports()
+        try:
+            return sorted(_SCAN(path.read_text(errors="ignore")))
+        except OSError:
+            return []
+    # 2026-10-27: the closure keys are kept across the jobs of one call. Clearing them for every job re-read and parsed
+    # the whole import closure (~10000 modules, ~20 s of Python) per compiled job while holding a compile slot (a call
+    # with 46 delivered modules spent 15 min before its first compile). Only a key whose closure reaches a module that
+    # this call compiles itself (_VOL: its .lbuild object appears or changes between jobs), or an import cycle, can
+    # change between jobs; those are dropped before each job, the others are the same values as before.
+    _fh = {}; _mk = {}; _mv = {}; _VOL = set()
     def fhash(f):
         if f not in _fh: _fh[f] = hashlib.sha256(f.read_bytes()).hexdigest()
         return _fh[f]
@@ -212,11 +243,15 @@ try:
         elif po.exists():
             st = po.stat(); ident = f"P{st.st_mtime_ns}:{st.st_size}"; src = LEAN / rel.with_suffix(".lean")
         else:
-            _mk[mod] = "X" + mod; return _mk[mod]
-        _mk[mod] = hashlib.sha256((mod + ident + "|".join(mkey(i) for i in header_imports(src))).encode()).hexdigest()
+            _mk[mod] = "X" + mod; _mv[mod] = mod in _VOL; return _mk[mod]
+        vol, parts = mod in _VOL, []
+        for i in header_imports(src):
+            parts.append(mkey(i)); vol = vol or _mv.get(i, True)   # no flag yet: an import cycle in progress
+        _mk[mod] = hashlib.sha256((mod + ident + "|".join(parts)).encode()).hexdigest(); _mv[mod] = vol
         return _mk[mod]
     def job_key(j, f, cmd):
-        _mk.clear()
+        for m in [m for m in _mk if _mv.get(m, True)]:
+            del _mk[m]; _mv.pop(m, None)
         h = hashlib.sha256(json.dumps([os.path.realpath(LEANBIN), cmd[3:], j["rel"]]).encode())
         h.update(f.read_bytes())
         for i in header_imports(f): h.update(mkey(i).encode())
@@ -229,6 +264,17 @@ try:
                     shutil.rmtree(x) if x.is_dir() else x.unlink()
             except OSError: pass
     timeout = int(man.get("timeout", 60)); results = []; outputs = []
+    # 2026-10-26 (the human): `timeout` (the manifest's, 60 s) stays the ACCEPTANCE limit: a requested file whose compile
+    # takes longer is NOT accepted (exit 124, never cached). Lean itself is stopped only at RUN_LIMIT (300 s), so the
+    # declaration the file was slow on finishes and its messages and timings reach the worker (at 60 s Lean had printed
+    # nothing for it: 48% of worker compiles ended in a bare "timeout after 60 s").
+    RUN_LIMIT = max(timeout, int(os.environ.get("SHEAF_FILE_RUN_LIMIT", "120")))
+    def over_note(dt):
+        return (f"NOT ACCEPTED: this compile took {dt:.0f} s > {timeout} s, the limit for one file (every file must compile "
+                f"alone within {timeout} s). The compile was allowed to run up to {RUN_LIMIT} s only so that the slow "
+                "declarations finish and report: the messages above show them (to see where the time goes, add "
+                "`set_option profiler true` with `set_option profiler.threshold 100` at the top of the file while debugging, "
+                "and remove them before delivering). The cause is usually a definition that is expensive to unfold; change it, not the limit.\n")
     for j in man["jobs"]:
         if not safe(j["rel"]) or pathlib.PurePosixPath(j["rel"]).suffix != ".lean":
             raise SystemExit("bad path")
@@ -236,19 +282,21 @@ try:
     # real committed sources privately, using the same per-file limit and cache.
     # Never copy unverified objects from the global build tree into publication.
     sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-    from remote_compile_dependencies import missing_dependencies, DependencySourceError
+    from remote_compile_dependencies import missing_dependencies, compile_order, DependencySourceError
     try:
         dependencies = missing_dependencies(man["jobs"], root, lb, PUB, LEAN, REPO, header_imports)
+        scheduled = compile_order(man["jobs"], dependencies, root, header_imports)
+        _VOL.update(str(pathlib.PurePosixPath(j["rel"]).with_suffix("")).replace("/", ".") for j in scheduled)
     except (DependencySourceError, OSError, subprocess.CalledProcessError) as exc:
         dependencies = []
         results = [{"rel": j["rel"], "rc": 1, "out": f"Dependency source unavailable: {exc}\n",
                     "secs": 0, "arts": False} for j in man["jobs"]]
     dependency_notes = []
-    for j in ([] if results else dependencies + man["jobs"]):
+    for j in ([] if results else scheduled):
         rel = pathlib.PurePosixPath(j["rel"])
         if not safe(j["rel"]) or rel.suffix != ".lean": raise SystemExit("bad path")
         f = root / rel; t0 = time.time()
-        cmd = ["nice", "-n", "19", LEANBIN, *OPTS] + ([] if j.get("upstream") else ["-DautoImplicit=false"])
+        cmd = ["nice", "-n", "19", LEANBIN, "-j1", *OPTS]   # -j1: one core per single-file compile (the human, 2026-10-22) + ([] if j.get("upstream") else ["-DautoImplicit=false"])
         src = f
         if j.get("probe"):
             src = f.with_name(f.stem + "__probe.lean"); src.write_text(f.read_text() + j["probe"])
@@ -279,9 +327,15 @@ try:
                 key = None
         try:
             if not hit:
-                p = subprocess.run(cmd + [str(src)], preexec_fn=_pdeathsig, cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=LP, LEAN_NUM_THREADS="1"),
-                                   capture_output=True, text=True, timeout=timeout)
+                # 2026-10-25: stdbuf makes Lean flush each message line, so a compile stopped at the limit still
+                # returns the messages printed before the stop (piped, Lean held them all in its buffer)
+                t_run = time.time()
+                p = subprocess.run(["stdbuf", "-oL", "-eL"] + cmd + [str(src)], preexec_fn=_pdeathsig, cwd=str(LEAN), env=dict(os.environ, LEAN_PATH=LP, LEAN_NUM_THREADS="1"),
+                                   capture_output=True, text=True, timeout=RUN_LIMIT)
                 rc, out = p.returncode, p.stdout + p.stderr
+                if not j.get("dependency") and time.time() - t_run > timeout:   # finished, but too slow: not accepted
+                    rc = rc or 124
+                    out = out.rstrip("\n") + "\n" + over_note(time.time() - t_run)
                 if key and rc == 0:
                     try:
                         o = lb / rel.with_suffix(".olean"); tmp = CACHE / f"{key}.{os.getpid()}.tmp"; tmp.mkdir()
@@ -291,14 +345,23 @@ try:
                         os.rename(tmp, CACHE / key)
                     except OSError:
                         shutil.rmtree(CACHE / f"{key}.{os.getpid()}.tmp", ignore_errors=True)
-        except subprocess.TimeoutExpired:
-            rc, out = 124, None
+        except subprocess.TimeoutExpired as exc:
+            # 2026-10-25: keep what Lean printed before the limit (errors, goals of earlier declarations); a
+            # timeout with no message at all keeps out=None and the caller's standard text
+            partial = "".join(v.decode(errors="replace") if isinstance(v, bytes) else (v or "")
+                              for v in (exc.stdout, exc.stderr))
+            rc = 124
+            out = ((partial.rstrip("\n") + "\n") if partial.strip() else "") + (
+                f"NOT ACCEPTED: stopped after {RUN_LIMIT} s, the longest a compile may run (every file must compile alone "
+                f"within {timeout} s): the fault is usually a definition that is expensive to unfold, not the limit (the "
+                "messages above are those Lean printed before it was stopped; the slow part comes after the last "
+                "declaration they report)\n")
         finally:
             if j.get("probe"): src.unlink(missing_ok=True)
             if ckf: ckf.close()
         if j.get("dependency"):
             if rc:
-                diagnostic = out if out is not None else f"timeout after {timeout} s\n"
+                diagnostic = out if out is not None else f"timeout after {RUN_LIMIT} s\n"
                 diagnostic = (f"Dependency {j['dependency']} from {j['source_commit']} "
                               f"failed in the private compile overlay:\n{diagnostic}")
                 results = [{"rel": requested["rel"], "rc": rc, "out": diagnostic,
@@ -317,6 +380,17 @@ try:
             o = lb / rel.with_suffix(".olean")
             outputs += [x for x in o.parent.glob(o.stem + ".*") if x.is_file()]
         if rc and man.get("stop_on_fail"): break
+    # The caller associates results by manifest position, even when source
+    # dependencies required compiling its jobs in a different order.
+    by_rel = {result["rel"]: result for result in results}
+    if man.get("stop_on_fail") and any(result["rc"] for result in results):
+        failure = next(result for result in results if result["rc"])
+        for job in man["jobs"]:
+            by_rel.setdefault(job["rel"], {
+                "rel": job["rel"], "rc": 1, "secs": 0, "arts": False,
+                "out": f"NOT compiled: the request stopped after {failure['rel']} failed.\n"
+                       + (failure["out"] or "")})
+    results = [by_rel[job["rel"]] for job in man["jobs"] if job["rel"] in by_rel]
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w:gz", compresslevel=3) as t:
         r = json.dumps({"td": str(td), "results": results}).encode()

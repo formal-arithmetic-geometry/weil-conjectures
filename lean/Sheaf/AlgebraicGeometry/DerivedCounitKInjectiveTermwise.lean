@@ -7,15 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Derived counit on a K-injective representative
@@ -49,17 +40,14 @@ comparison back to the derived category.  Thus the displayed equality is exactly
 the representative assertion in the node, including the canonical comparison
 `u⁻¹ Q (u_* I) ≅ Q (u⁻¹ u_* I)`.
 
-The proof is the standard derived-adjunction calculation.  Exactness of inverse
-image gives its termwise derived functor and the quotient comparison.  The
-K-injective comparison identifies `R f_* (Q I)` with `Q (f_* I)`.  The homotopy
-adjunction has counit the componentwise sheaf counit; applying the quotient and
-composing the canonical comparisons gives the displayed derived counit.  This
-is the three-step proof recorded in the DAG node, using
-`prop-weil-pbc-inverse-image-modules-exact`,
-`def-weil-pbc-derived-inverse-image`,
-`lem-weil-pbc-exact-functor-derived-functor`,
-`lem-weil-pbc-kinjective-total-derived`, and
-`def-kun-unbounded-exchange`.
+Apply Mathlib's `Adjunction.derivedε_fac_app` to the termwise homotopy
+adjunction at the quotient of `I`.  This identifies the derived counit after
+precomposition with the image of the right-derived-functor unit.  That unit is
+invertible because `I` is K-injective.  Expand `rightDerivedFunctorObjQIso` and
+the quotient comparisons, and cancel the image of the unit.  The resulting
+identity is precisely the displayed five-factor formula.  This calculation uses
+the existing exact-functor and K-injective constructions directly; no separate
+Hom-bijection calculation or exchange theorem is required.
 -/
 theorem derivedCounitKInjectiveTermwise
     {X Y : Scheme.{u}} (R : Type (u + 1)) [CommRing R] (f : X ⟶ Y)
@@ -84,6 +72,27 @@ theorem derivedCounitKInjectiveTermwise
                 (Sheaf X.smallEtaleTopology (ModuleCat R)) (ComplexShape.up ℤ)).obj I)) ≫
         (DerivedCategory.quotientCompQhIso
             (Sheaf X.smallEtaleTopology (ModuleCat R))).hom.app I := by
-  sorry
+  let L := (f)^*[ModuleCat R]
+  let P := (f)_*[ModuleCat R]
+  let K := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I
+  have h := ((upperStarLowerStarAdjunction (ModuleCat R) f).mapHomotopyCategory
+    (ComplexShape.up ℤ)).derivedε_fac_app
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
+      L.mapDerivedCategoryFactorsh.hom P.rightDerivedFunctorUnit K
+  change L.mapDerivedCategory.map (P.rightDerivedFunctorUnit.app K) ≫
+    (mapDerivedUpperStarLowerStarAdjunction (ModuleCat R) f).counit.app
+      (DerivedCategory.Q.obj I) = _ at h
+  have hX : ∀ J, (DerivedCategory.quotientCompQhIso
+      (Sheaf X.smallEtaleTopology (ModuleCat R))).hom.app J = 𝟙 _ := fun _ ↦ rfl
+  have hYh : ∀ J, (DerivedCategory.quotientCompQhIso
+      (Sheaf Y.smallEtaleTopology (ModuleCat R))).hom.app J = 𝟙 _ := fun _ ↦ rfl
+  dsimp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, asIso_inv, Iso.app]
+  erw [hX, hYh, P.rightDerivedFunctor.map_id, Category.id_comp, Category.comp_id,
+    L.mapDerivedCategory.map_id, Category.id_comp, Category.comp_id]
+  apply (cancel_epi (L.mapDerivedCategory.map (P.rightDerivedFunctorUnit.app K))).1
+  rw [← L.mapDerivedCategory.map_comp_assoc, IsIso.hom_inv_id,
+    L.mapDerivedCategory.map_id, Category.id_comp]
+  exact h
 
 end AlgebraicGeometry.Etale

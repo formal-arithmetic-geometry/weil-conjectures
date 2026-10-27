@@ -1,0 +1,168 @@
+{
+ "id": "lem-sf-native-geometric-tensor-comparison",
+ "kind": "statement",
+ "title": "Native geometric realization commutes with the ambient derived tensor",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and a separated finite-type $k_0$-scheme $X_0$ [def-sf-native-weil-derived-framework]. Put $Y=X_0\\times_{k_0}\\overline{k_0}$ and $\\Lambda=\\underline{\\overline{\\mathbf Q}_\\ell}$ with its finite-subextension-valued condensed coefficient. Let $G$ be the actual nativeGeometricForget functor [lem-sf-weil-geometric-hom-constructibility]: forget the Weil structure, forget ambient scalar linearity, and restrict the ring action along nativeModuleCoefficientIso [lem-sf-weil-verdier-module-constructibility-comparison]. There is a natural isomorphism of bifunctors on the product of the entire native ambient derived category with itself, $G(K\\otimes^L_{B_Y}L)\\simeq G(K)\\otimes^L_{\\Lambda_Y}G(L)$. The source tensor is nativeDerivedTensor [def-sf-derived-weil-category-and-operations]; the target is the existing condensed derivedTensor [sk-def-sfb-derived-tensor-hom]. There is no boundedness, lissity, constructibility, Tor-amplitude or perfectness hypothesis on $K,L$, and no constructibility conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section Tensor product (Tag 03EK), bilinear universal property; sites-cohomology.tex, lemma-pullback-tensor-product (Tag 07A4), K-flat total-complex argument; blueprint latest fix-lem-tensor-adjunction.proof.md Step 1. Agent specialization to the existing scalar-forgetting equivalence and coefficient isomorphism."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-weil-geometric-hom-constructibility",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "Let Y be the geometric fiber and C the specified nativeDerivedClosedComparison. Apply native_ordinary_closed_tensor_models to C.homModels.ordinaryHom and its given product-total representatives. This supplies a closed structure S with exactly the canonical ordinary derived monoidal structure, for the same internal-Hom bifunctor as C.ordinaryClosed. No new tensor or Hom model is postulated.",
+   "uses": [
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-native-ordinary-closed-tensor-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare C.ordinaryClosed.tensor with S.tensor by their common internal Hom. For each pair (K,L), compose the Hom bijection for S with inverse transposition for C.ordinaryClosed. This bijection is natural in the target, so images of identities give inverse comparison arrows. Evaluation_naturality implies inverse transposition is natural in L: uncurry(a composed with Hom(g,id)) equals tensor(id,g) composed with uncurry(a). Together with adjunction naturality in K, this proves simultaneous naturality of the comparison for (f,g). Thus this is an isomorphism of bifunctors, not just separate choices for fixed L. Rewrite S.monoidal by its equality with the canonical structure.",
+   "uses": [
+    "def-sf-native-weil-closed-models",
+    "lem-sf-native-ordinary-closed-tensor-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let E be native scalar forgetting followed by restriction along nativeModuleCoefficientIso. Scalar forgetting is strong monoidal by nativeScalarForgetting_monoidal and an equivalence by nativeScalarForgetting_isEquivalence. Restriction along the coefficient-ring isomorphism is a strong monoidal equivalence too. Hence E is an additive exact monoidal equivalence and preserves flat objects. Apply the existing CategoryTheory.Functor.mapDerivedCategoryTensorComparison and its IsIso instance, then uncurry the resulting natural isomorphism. This identifies the canonical ordinary derived tensor followed by D(E) with D(E) on both inputs followed by condensed derivedTensor. This uses the standard K-flat construction of derived tensor; there are no boundedness or constructibility assumptions.",
+   "uses": [
+    "lem-sf-native-scalar-forgetting-monoidal",
+    "lem-sf-native-scalar-forgetting-equivalence",
+    "lem-sf-weil-verdier-module-constructibility-comparison",
+    "def-sfb-modobj-restriction-equivalence",
+    "def-sfb-comap-iso-strong-monoidal",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the common-internal-Hom tensor isomorphism by D(E) and compose it with the derived monoidal comparison. Whisker C.tensorComparison by D(E), precompose the ordinary coefficient comparison with nativeForget.prod nativeForget, and compose using the functor associators. The source is nativeDerivedTensor followed by nativeGeometricForget and the target is nativeGeometricForget on both inputs followed by condensed derivedTensor, definitionally and in the displayed input order.",
+   "uses": [
+    "def-sf-derived-weil-category-and-operations",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-geometric-hom-constructibility"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-native-ordinary-closed-tensor-models",
+  "def-sf-native-weil-closed-models",
+  "lem-sf-native-scalar-forgetting-monoidal",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "lem-sf-weil-verdier-module-constructibility-comparison",
+  "def-sfb-modobj-restriction-equivalence",
+  "def-sfb-comap-iso-strong-monoidal",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-weil-geometric-hom-constructibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 K-flat tensor comparison; implemented using the existing exact-monoidal derived tensor comparison after ordinary closed-model identification. Common-internal-Hom Yoneda comparison and full two-variable naturality written by H5; native Frobenius-forgetting tensor comparison retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact monoidal equivalence induces comparison isomorphism of derived tensor products",
+   "results": "8 hits including Monoidal.transportStruct, expComparison and equivalence transport; none compares these specified derived module tensors under scalar forgetting.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor preserves bounded constructible complexes of sheaves locally finite free",
+   "results": "8 hits, all LightCondensed monoidal structures or sheaf tensor sheaf conditions; no native scalar-forgetting derived tensor comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits give exact induced functors, composition, natural transformations, single and shift comparisons; no comparison of derived relative tensors.",
+   "date": "2026-10-25",
+   "verdict": "no tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Mm]onoidal|[Mm]onoidal.*mapDerivedCategory",
+   "results": "msearch grep returned 0 hits. Source rg found no ready-made derived tensor comparison for native scalar forgetting; only native closed-forgetful and abelian module comparison separately.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeDerivedWeilTensorConstructible",
+  "date": "2026-10-25",
+  "group": "M1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, first and fourth transpositions: identify the realized native tensor with the ordinary condensed tensor before applying existing tensor closure. Parent is a maintainer-seeded audit node with no blueprint ancestor.",
+   "via": [
+    "lem-sf-derived-weil-tensor-hom-adjunction",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeGeometricTensorComparison",
+  "file": "lean/Sheaf/Paper/NativeGeometricTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeGeometricForget_tensorComparison",
+  "statement": "theorem nativeGeometricForget_tensorComparison\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :\n    Nonempty (nativeDerivedTensor k₀ l X ⋙ nativeGeometricForget k₀ l X ≅\n      (nativeGeometricForget k₀ l X).prod (nativeGeometricForget k₀ l X) ⋙\n        Functor.uncurry.obj (ProEtale.CondensedRing.derivedTensor\n          (Profinite.padicAlgClRingObj l) (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-80399",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261025T123250-L-1849819",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261027T084419-L-3678011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

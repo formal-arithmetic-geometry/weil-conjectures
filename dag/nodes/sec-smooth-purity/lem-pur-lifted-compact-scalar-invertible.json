@@ -1,0 +1,127 @@
+{
+ "kind": "lemma",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "status": "split",
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalPurityPresentation",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "merged_into": null,
+ "id": "lem-pur-lifted-compact-scalar-invertible",
+ "title": "Integral compact-support scalar mate in lifted coefficients",
+ "statement": "Let l be prime, E and F finite extensions of Q_l and i:E→F a Q_l-algebra map. On the completed rings of the lifted datum [def-weil-pbc-bounded-constructible-complete], use the coefficient inverse-image identifications of [lem-cbc-integral-compact-support-uniform-restriction]. Let a be any Change of [def-pur-integral-compact-support-coefficient-data] whose coefficient maps are precisely pbcScalarCoefficientMap of [prop-weil-pbc-scalar-extension]. For Noetherian finite-dimensional X,Y with stalkwise invertible l, a quasi-compact f:X→Y and compactification c, the specified integral mate comparison(a,c) is an isomorphism on every bounded constructible complete lattice on X. The assertion concerns the given integral map only; it asserts neither naturality on rational fractions nor construction of a rational functor. The named coefficient system is the existing construction of [def-pur-rational-purity-coefficient-models].",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-pur-integral-compact-support-coefficient-data",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "prop-weil-pbc-scalar-extension",
+  "def-pur-rational-purity-coefficient-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-completed-integral-finite-free] to integralCompletedScalarMap, using its finite-projection normalization. The coefficientScalar_square of [def-pur-completed-coefficient-presentation-transport] identifies that map with pbcScalarCoefficientMap under purCoefficientIso. Transport the resulting finite-product basis through the inverse ring-sheaf isomorphisms using freeTransport. This proves the private liftedScalar_finiteFree helper, with no completeness or geometric hypotheses.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "def-pur-completed-coefficient-presentation-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ha Y to view that basis as the basis for the given Change a. Apply [lem-pur-finite-free-proper-scalar-comparison] to c.g and the exact open extension of K.obj. The open scalar component is invertible by openComparison_isIso, and comparison_factorization of [lem-pur-compact-support-integral-coefficient-comparison] is the proper scalar component followed by the proper image of the open scalar component. Functors preserve isomorphisms and so does composition; this proves the stated component invertible.",
+   "uses": [
+    "lem-pur-finite-free-proper-scalar-comparison",
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-completed-integral-finite-free",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-pur-finite-free-proper-scalar-comparison",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image after extension by zero preserves bounded constructible derived complete complexes over a finite extension valuation ring",
+   "results": "ShortComplex.Exact.map and ObjectProperty extension-closure results; no theorem about the PBC coefficient presentation. The scalar query finds ModuleCat.extendScalars and its flatness result, not the proper/open mate.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite free extension of coefficient rings the scalar extension comparison with proper direct image and open extension by zero is an isomorphism",
+   "results": "ModuleCat.extendScalarsComp, IsBaseChange.free and finitePow; none identifies the specified completed proper/open comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*[Dd]irect|[Dd]irect.*finiteFree|[Cc]ompact.*[Ss]upport in Mathlib category linear and derived functor modules; compact-support preservation and scalar mates in Sheaf/WeilConjectures; blueprint_refs compact support scalar and uniform restriction",
+   "results": "No Mathlib result. The project has cbcIntegralCompactSupport_uniformRestriction with an unlifted coefficient ring and a different coefficient-universe binder; integralCoefficientComparison concerns the intrinsic completed-ring presentation and fixed finite-field geometry. Both supply the source arguments, not a direct specialization to these lifted rings. No blueprint duplicate for the lifted preservation statement.",
+   "date": "2026-10-27",
+   "verdict": "A bridge for the existing lifted PBC operations is needed."
+  }
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.7.2 and 6.7.7, pp. 55–56, and Lemma 6.8.2(1), pp. 58–59; lifted presentation of the parent proof, Step 3: invertibility of the actual integral compact-support scalar mate"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Finite free proper factor via the existing direct-image coherence theorem and the normalized coefficient-square transport; followed by the published proper/open factorization. Lean proof by B3, 2026-10-27."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-rational-purity-transitivity-summands",
+   "place": "Step 3: invertibility of the actual integral compact-support scalar mate",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalPurityCompactScalarInvertible",
+  "file": "lean/Sheaf/Paper/RationalPurityCompactScalarInvertible.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcPurityCompactScalar_integral_isIso",
+  "statement": "theorem pbcPurityCompactScalar_integral_isIso (l : ℕ) [Fact l.Prime]\n    (E F : Type u) [Field E] [Field F] [Algebra (Padic l) E] [Algebra (Padic l) F]\n    [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]\n    (i : E →ₐ[Padic l] F)\n    (a : PurCompactSupport.Change\n      (pbcPurityCoefficients l E)\n      (pbcPurityCoefficients l F))\n    (ha : ∀ W, a.map W = pbcScalarCoefficientMap l E F i W)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] (c : Compactification f)\n    [IsNoetherian X] [IsNoetherian Y]\n    [dX : Fact (∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞))]\n    [dY : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))]\n    [iX : Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n    [iY : Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]\n    (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)) :\n    IsIso ((PurCompactSupport.comparison a c).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b8497",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T200526-L-3323140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T222553-L-669231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

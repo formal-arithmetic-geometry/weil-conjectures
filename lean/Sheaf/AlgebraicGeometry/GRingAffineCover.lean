@@ -6,6 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.RingTheory.GRing
+import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.RingTheory.AdicCompletionRingEquiv
 import WeilConjectures.RingTheory.RegularRingEquiv
 
@@ -48,6 +49,35 @@ theorem isGRing_of_affine_open_cover
     (hU : ⨆ i, (U i : X.Opens) = ⊤)
     (h : ∀ i, IsGRing Γ(X, U i)) (V : X.affineOpens) :
     IsGRing Γ(X, V) := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    isLocallyNoetherian_of_affine_cover hU (fun i ↦ (h i).1)
+  refine ⟨IsLocallyNoetherian.component_noetherian V, ?_⟩
+  intro q hq
+  let y : PrimeSpectrum Γ(X, V) := ⟨q, hq⟩
+  let x : X := V.2.fromSpec y
+  have hx : x ∈ (V : X.Opens) := (V.2.isoSpec.inv y).2
+  obtain ⟨i, hi⟩ : ∃ i, x ∈ (U i : X.Opens) := by
+    apply TopologicalSpace.Opens.mem_iSup.mp
+    rw [hU]
+    trivial
+  let p := ((U i).2.primeIdealOf ⟨x, hi⟩).asIdeal
+  let : Algebra Γ(X, U i) (X.presheaf.stalk x) :=
+    X.presheaf.algebra_section_stalk ⟨x, hi⟩
+  have : IsLocalization.AtPrime (X.presheaf.stalk x) p :=
+    (U i).2.isLocalization_stalk ⟨x, hi⟩
+  let a : Localization.AtPrime p ≃+* X.presheaf.stalk x :=
+    (IsLocalization.algEquiv p.primeCompl _ _).toRingEquiv
+  let : Algebra Γ(X, V) (X.presheaf.stalk x) :=
+    X.presheaf.algebra_section_stalk ⟨x, hx⟩
+  have : IsLocalization.AtPrime (X.presheaf.stalk x) q :=
+    V.2.isLocalization_stalk' y hx
+  let b : X.presheaf.stalk x ≃+* Localization.AtPrime q :=
+    (IsLocalization.algEquiv q.primeCompl _ _).toRingEquiv
+  let e := a.trans b
+  obtain ⟨E, hE⟩ := AdicCompletion.exists_ringEquiv
+    (IsLocalRing.maximalIdeal (Localization.AtPrime p))
+    (IsLocalRing.maximalIdeal (Localization.AtPrime q)) e
+    (IsLocalRing.map_ringEquiv_maximalIdeal e).symm
+  exact RingHom.IsRegular.of_ringEquiv _ _ e E hE ((h i).2 p)
 
 end AlgebraicGeometry

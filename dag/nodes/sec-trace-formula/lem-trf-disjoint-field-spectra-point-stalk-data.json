@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-disjoint-field-spectra-point-stalk-data",
+ "kind": "statement",
+ "title": "Canonical point and stalk data of an open partition by field spectra",
+ "statement": "Let $k$ be a field, let $Y$ be a scheme over $k$ [def-pc-scheme, def-weil-scheme-over-base], and let $(U_i)_{i\\in I}$ be pairwise disjoint open subschemes covering $Y$. For every $i$, let $L_i/k$ be a field extension [def-pc-field-extension] and fix a $k$-isomorphism $e_i:U_i\\simeq\\operatorname{Spec}L_i$ [def-weil-affine-spectrum]. Write $y_i$ for the unique point of $U_i$, viewed in $Y$. Then $i\\mapsto y_i$ is a bijection $I\\to Y$, every $y_i$ is closed [def-weil-closed-points], and the map $L_i\\simeq\\Gamma(U_i,\\mathcal O_Y)\\to\\mathcal O_{Y,y_i}$ induced by the germ is an isomorphism of $k$-algebras. Its composite with the canonical residue quotient $\\mathcal O_{Y,y_i}\\to\\kappa(y_i)$ [def-weil-residue-field] is an isomorphism of $k$-algebras as well. In particular the canonical residue quotient itself is an isomorphism. The index set $I$ may be empty or infinite; no finiteness or separability assumption is made on $L_i/k$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02G7 (lemma-unramified-over-field), part (1): extraction of the point and local-ring identifications for the displayed disjoint union of field spectra; these identifications do not use finiteness or separability."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-points",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-affine-spectrum], each $\\operatorname{Spec}L_i$ has exactly one point, so $U_i=\\{y_i\\}$ as a subset of $Y$ [def-pc-scheme]. The cover gives surjectivity of $i\\mapsto y_i$; pairwise disjointness gives injectivity, since $y_i=y_j$ would belong to $U_i\\cap U_j$. Thus it is a bijection, also when $I$ and $Y$ are empty.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7, lemma-unramified-over-field, part (1), disjoint field-spectrum description; elementary topology of that description"
+   }
+  },
+  {
+   "text": "For each $i$, the complement $Y\\setminus\\{y_i\\}=\\bigcup_{j\\ne i}U_j$ is open, since the $U_j$ are open and partition $Y$. Hence $\\{y_i\\}$ is closed, which is exactly closedness of $y_i$ [def-weil-closed-points]. This uses arbitrary unions of opens, not finiteness of $I$.",
+   "uses": [
+    "def-weil-closed-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7, lemma-unramified-over-field, proof, discrete-space description; elementary complement calculation"
+   }
+  },
+  {
+   "text": "Fix $i$. The open-subscheme structure identifies $\\mathcal O_{U_i}$ with $\\mathcal O_Y|_{U_i}$ [def-weil-open-immersion], so $e_i$ identifies $L_i$ with $\\mathcal O_Y(U_i)$ [def-weil-affine-spectrum]. Define an inverse to the germ map by $s_{y_i}\\mapsto s|_{U_i}$ for any section on an open neighbourhood $V$ of $y_i$. Here $U_i=\\{y_i\\}\\subseteq V$. This is well-defined: two representatives of one germ agree on some open neighbourhood $W$ of $y_i$ [def-weil-pbc-module-stalk], and $U_i\\subseteq W$. Restriction back from $U_i$ is the identity, and the germ of $s|_{U_i}$ equals the germ of $s$. Restrictions preserve ring operations. Thus the germ map is a ring isomorphism.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0078, section-stalks: representatives and equality of germs; restriction to an open singleton"
+   }
+  },
+  {
+   "text": "This is a $k$-algebra isomorphism: a scalar $a\\in k$ maps to its structure section on $U_i$, then to its germ; this is the stalk scalar map. Since $e_i$ is over $k$, its section identification sends the same scalar to that structure section [def-weil-scheme-over-base; def-weil-locally-ringed-space-morphism; def-pc-field-extension]. The stalk is therefore a field. Its maximal ideal is zero: a nonzero member would be a unit, forcing the ideal to contain $1$. By [def-weil-residue-field], the canonical residue map is quotient by this zero ideal, hence an isomorphism, with inverse $[r]\\mapsto r$. Quotient scalar maps are induced by the stalk scalar map, so it and its composite with $L_i\\to\\mathcal O_{Y,y_i}$ are $k$-algebra isomorphisms. No step used finiteness, algebraicity or separability.",
+   "uses": [
+    "def-weil-scheme-over-base",
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-field-extension",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7, lemma-unramified-over-field, part (1), point/local-ring interpretation; explicit scalar and zero-ideal calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-closed-points",
+  "def-weil-open-immersion",
+  "def-weil-pbc-module-stalk",
+  "def-weil-scheme-over-base",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-field-extension",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02G7, lemma-unramified-over-field, part (1); elementary extraction using the germ description in sheaves.tex, Tag 0078"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme partitioned by open spectra of field extensions, every point is closed and its stalk and residue field are canonically the corresponding field",
+   "results": "{\"t\": \"2026-10-22T06:10:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme partitioned by open spectra of field extensions, every point is closed and its stalk and residue field are canonically the corresponding field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.fromSpecStalk_closedPoint\"], \"digest\": \"7515ee82fa0f1be7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual open-restriction/stalk or field-point facts, not this complete canonical partition/germ/residue statement"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(Field|field)|[Ff]ield.*stalk|stalkIso",
+   "results": "{\"t\": \"2026-10-22T06:11:03Z\", \"tool\": \"grep\", \"query\": \"stalk.*(Field|field)|[Ff]ield.*stalk|stalkIso\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\"], \"digest\": \"8c5f7fc7d1b627c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual open-restriction/stalk or field-point facts, not this complete canonical partition/germ/residue statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme covered by pairwise disjoint open spectra of fields has closed points and its canonical residue map at each point is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:11:03Z\", \"tool\": \"leansearch\", \"query\": \"A scheme covered by pairwise disjoint open spectra of fields has closed points and its canonical residue map at each point is an isomorphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A partition of a scheme by singleton affine open subschemes identifies each stalk and residue field with the coordinate field, compatibly with the base field",
+   "results": "{\"t\": \"2026-10-22T06:11:21Z\", \"tool\": \"leanfinder\", \"query\": \"A partition of a scheme by singleton affine open subschemes identifies each stalk and residue field with the coordinate field, compatibly with the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.fromSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.residueField\"], \"digest\": \"d2eae45688a9535c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual open-restriction/stalk or field-point facts, not this complete canonical partition/germ/residue statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Opens.stalkIso",
+   "results": "{\"t\": \"2026-10-22T06:12:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.Scheme.Opens.stalkIso_inv\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_inv\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_inv_assoc\"], \"digest\": \"102b01db1f1e02b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual open-restriction/stalk or field-point facts, not this complete canonical partition/germ/residue statement"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkClosedPointIso|fromSpecResidueField_apply|isClosed_singleton_iff",
+   "results": "{\"t\": \"2026-10-22T06:16:17Z\", \"tool\": \"grep\", \"query\": \"stalkClosedPointIso|fromSpecResidueField_apply|isClosed_singleton_iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\"], \"digest\": \"4babfdd6411b4eb3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual open-restriction/stalk or field-point facts, not this complete canonical partition/germ/residue statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Opens.stalkIso",
+   "results": "{\"t\": \"2026-10-22T06:16:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens.stalkIso\", \"AlgebraicGeometry.Scheme.Opens.stalkIso_inv\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_inv\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Opens.germ_stalkIso_inv_assoc\"], \"digest\": \"102b01db1f1e02b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give individual open-restriction/stalk or field-point facts, not this complete canonical partition/germ/residue statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme covered by pairwise disjoint open spectra of fields has its points indexed by the cover and the canonical section to stalk and residue maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-23T04:29:14Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme covered by pairwise disjoint open spectra of fields has its points indexed by the cover and the canonical section to stalk and residue maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.isIso_stalkMap_coprodSpec\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.Scheme.affineBasisCover_obj\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.sigmaOpenCover_I₀\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\"], \"digest\": \"1529fbd83387a6e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits describe germ maps, individual stalks or finite coproducts, not all clauses of this arbitrary open partition statement"
+  },
+  {
+   "tool": "grep",
+   "query": "germ.*(Iso|iso)|[Ss]ingleton.*[Ss]talk|[Ss]talk.*[Ss]ingleton",
+   "results": "{\"t\": \"2026-10-23T04:30:56Z\", \"tool\": \"grep\", \"query\": \"germ.*(Iso|iso)|[Ss]ingleton.*[Ss]talk|[Ss]talk.*[Ss]ingleton\", \"sub\": \"Topology/Sheaves\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Stalks.lean\"], \"digest\": \"d50810488287906c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits describe germ maps, individual stalks or finite coproducts, not all clauses of this arbitrary open partition statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The germ map from sections over an open singleton to the stalk at its point is a ring isomorphism",
+   "results": "{\"t\": \"2026-10-23T04:30:56Z\", \"tool\": \"leansearch\", \"query\": \"The germ map from sections over an open singleton to the stalk at its point is a ring isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.algebra_section_stalk\", \"AlgebraicGeometry.Proj.stalkIso'_germ\", \"Filter.Germ.valueRingHom\", \"TopCat.Presheaf.stalk_open_algebraMap\", \"TopCat.Presheaf.Γgerm\", \"AlgebraicGeometry.openToLocalization\", \"AlgebraicGeometry.StructureSheaf.germ_toOpen\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_apply\"], \"digest\": \"1461a04e77cb7b02\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits describe germ maps, individual stalks or finite coproducts, not all clauses of this arbitrary open partition statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.germ, IsIso",
+   "results": "{\"t\": \"2026-10-23T04:30:56Z\", \"tool\": \"loogle\", \"query\": \"TopCat.Presheaf.germ, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "invalid pattern: Loogle reported unknown identifier 'IsIso'; corrected by the later query TopCat.Presheaf.germ"
+  },
+  {
+   "tool": "grep",
+   "query": "(germ|stalk).*(isIso|IsIso|isoOf|IsoOf)|[Ss]ubsingleton|[Uu]nique",
+   "results": "{\"t\": \"2026-10-23T04:32:39Z\", \"tool\": \"grep\", \"query\": \"(germ|stalk).*(isIso|IsIso|isoOf|IsoOf)|[Ss]ubsingleton|[Uu]nique\", \"sub\": \"Topology/Sheaves/Stalks.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"9\", \"34\", \"532\", \"610\", \"653\"], \"digest\": \"7abae0f344f94bd4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits describe germ maps, individual stalks or finite coproducts, not all clauses of this arbitrary open partition statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.germ",
+   "results": "{\"t\": \"2026-10-23T04:32:41Z\", \"tool\": \"loogle\", \"query\": \"TopCat.Presheaf.germ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TopCat.Presheaf.germ\", \"TopCat.Presheaf.germ_stalkSpecializes\", \"TopCat.Presheaf.stalk_hom_ext\", \"TopCat.Presheaf.stalk_hom_ext_iff\", \"TopCat.Presheaf.germ_stalkSpecializes_assoc\", \"TopCat.Presheaf.germ_res\", \"TopCat.Presheaf.stalkFunctor_map_germ\", \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom\"], \"digest\": \"b70aa903bafcde8e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits describe germ maps, individual stalks or finite coproducts, not all clauses of this arbitrary open partition statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf on a space with an open singleton has its sections on that singleton canonically isomorphic to its stalk there",
+   "results": "{\"t\": \"2026-10-23T04:32:42Z\", \"tool\": \"leanfinder\", \"query\": \"A presheaf on a space with an open singleton has its sections on that singleton canonically isomorphic to its stalk there\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.Γgerm\", \"TopCat.Presheaf.germ\", \"StalkSkyscraperPresheafAdjunctionAuxs.unit_app\", \"StalkSkyscraperPresheafAdjunctionAuxs.fromStalk\", \"StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper\", \"TopCat.Presheaf.stalkFunctor_obj\", \"TopCat.Presheaf.stalk\", \"StalkSkyscraperPresheafAdjunctionAuxs.to_skyscraper_fromStalk\"], \"digest\": \"65cd0617d347edd4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits describe germ maps, individual stalks or finite coproducts, not all clauses of this arbitrary open partition statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-unramified-over-field-local-criterion",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The field-spectrum point/stalk identification in old step 1 of lem-trf-unramified-over-field-local-criterion, through the nodal-curve lci criterion beneath the normal-cone specialization route of lem-trf-local-term-locality.",
+   "via": [
+    "lem-trf-unramified-over-field-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-disjoint-field-spectra-point-stalk-data",
+  "worker": "stage1",
+  "summary": "Proved the partition bijection and closedness directly, constructed the inverse of the actual germ map by restriction to the open singleton, and checked scalar maps and the canonical residue quotient. All steps are elementary with defining nodes cited. No statement change and no new nodes.",
+  "blueprint": "The field-spectrum point/stalk identification in old step 1 of lem-trf-unramified-over-field-local-criterion, on the existing recorded chain beneath lem-trf-local-term-locality; establishes that identification directly without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-e54b3df21",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-e54b3df21 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement is unchanged against clones/live, and the item is still unsplit on live and side-live, so no other group superseded it; there is no repair note. The statement is true, including empty I, infinite I, and inseparable or transcendental L_i. The citer lem-trf-unramified-over-field-local-criterion uses exactly the stated clauses. Source checks: Stacks 02G7 lemma-unramified-over-field part (1) and its proof (discrete space = disjoint union of field spectra), and sheaves.tex 0078 section-stalks (germ equivalence). Step 1 gets U_i={y_i} from the one-point Spec K in def-weil-affine-spectrum, with surjectivity from the cover and injectivity from disjointness. Step 2 shows the complement is a union of opens, which matches def-weil-closed-points. In step 3 the inverse is s_y ↦ s|_{U_i}; it is well defined because U_i ⊆ W, the germ-equality condition given in def-weil-pbc-module-stalk, and def-weil-open-immersion supplies the open-subscheme structure sheaf. In step 4, compatibility of scalars follows from e_i being over k; the stalk is then a field, its maximal ideal is 0, and the residue map (def-weil-residue-field) is an isomorphism. All steps are genuinely elementary, every use is in the cited statements, and proof_deps is the union of the step uses. Only mathlib definitions are cited, so there are no tool_uses and no cycle. An rg -L duplicate search found no node with this arbitrary-partition statement; lem-weil-pbc-spec-finite-product-fields is different. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DisjointFieldSpectraPointStalkData",
+  "declaration": "AlgebraicGeometry.disjoint_field_spectra_point_stalk_data",
+  "declarations": [
+   "AlgebraicGeometry.fieldSpectrumOpenPoint",
+   "AlgebraicGeometry.fieldSpectrumOpenSections",
+   "AlgebraicGeometry.fieldSpectrumOpenGerm",
+   "AlgebraicGeometry.disjoint_field_spectra_point_stalk_data"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DisjointFieldSpectraPointStalkData.lean",
+  "statement": "theorem disjoint_field_spectra_point_stalk_data (k : Type u) [Field k] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of k)) (I : Type v) (U : I → Y.Opens) (L : I → Type u) [∀ i, Field (L i)] [∀ i, Algebra k (L i)] (e : ∀ i, (U i).toScheme ≅ Spec (.of (L i))) (hdisjoint : Pairwise (fun i j ↦ Disjoint (U i) (U j))) (hcover : iSup U = ⊤) (hover : ∀ i, (e i).hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k (L i))) = (U i).ι ≫ f) : Function.Bijective (fun i ↦ (fieldSpectrumOpenPoint (e i)).val) ∧ ∀ i, (fieldSpectrumOpenPoint (e i)).val ∈ closedPoints Y ∧ IsIso (fieldSpectrumOpenGerm (e i)) ∧ (CommRingCat.ofHom (algebraMap k (L i)) ≫ fieldSpectrumOpenGerm (e i) = (Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ Y.presheaf.germ ⊤ (fieldSpectrumOpenPoint (e i)).val trivial) ∧ IsIso (fieldSpectrumOpenGerm (e i) ≫ Y.residue (fieldSpectrumOpenPoint (e i)).val) ∧ (CommRingCat.ofHom (algebraMap k (L i)) ≫ fieldSpectrumOpenGerm (e i) ≫ Y.residue (fieldSpectrumOpenPoint (e i)).val = (Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ Y.presheaf.germ ⊤ (fieldSpectrumOpenPoint (e i)).val trivial ≫ Y.residue (fieldSpectrumOpenPoint (e i)).val) ∧ IsIso (Y.residue (fieldSpectrumOpenPoint (e i)).val)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67a2255da",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and Stacks 02G7(1)/0078: k field, Y with f : Y ⟶ Spec k, disjoint covering opens U, L i field + Algebra k, e i : U i ≅ Spec L i with hover (k-iso) all correct; conclusions: bijection, closedPoints, IsIso of germ map from L, k-scalar equation (checked true via ΓSpecIso naturality + hover + restriction/germ), IsIso of composite with residue + scalar equation, IsIso residue. Helpers fieldSpectrumOpenPoint/Sections/Germ are real constructions with source/blueprint docstrings; proof sorry with 4-step docstring. Edge cases: empty I, infinite I, inseparable L ok; universes forced (k, L, Y in u; I in v). Records: only lean changed vs side-live, statement verbatim, no name clash, private import exists. No compile needed (no change)."
+ }
+}

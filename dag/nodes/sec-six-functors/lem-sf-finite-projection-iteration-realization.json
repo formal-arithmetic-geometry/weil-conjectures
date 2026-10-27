@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-finite-projection-iteration-realization",
+ "kind": "statement",
+ "title": "Realization of two successive finite projection components",
+ "statement": "For a finite operation stage S [def-sf-operation-stages], composable maps f:X→Y and g:Y→Z, arbitrary compactifications cf,cg, bounded constructible K on X and finite-Tor constructible L on Z [def-sf-constructible-projection-mates], the iteration PF_g followed by S_g(PF_f) is identified under the explicitly constructed iterationSourceComparison and iterationTargetComparison with the realization of the iteration of the two published fixed-scalar projection components. The comparisons are composites of supportRealization, fixedSupportRealization, the inverse coefficient-unit at the tensor input, and the two fixedPullRealization maps. No compact-support compositor or projection for fg appears.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Composition sentence: realization of the same specified projection maps and support compositors."
+ },
+ "proof": [
+  {
+   "text": "Expand both components as the conjugates defining component. Move the inner component through the outer support realization by naturality. Cancel the intermediate coefficient unit with its inverse.",
+   "uses": [
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply first-input naturality of the outer fixed projection to fixedSupportRealization for f, and second-input naturality of the inner fixed projection to fixedPullRealization for g. Tensor bifunctoriality interchanges the two independent input comparisons. Functoriality identifies the remaining boundary with iterationSourceComparison and iterationTargetComparison. This uses no composite-map projection or support compositor.",
+   "uses": [
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Explicit coefficient-unit cancellation in the composition sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Conjugating projection transformations by equivalences preserves iteration of two functors",
+   "results": "Function conjugation and generic category-equivalence results; no result about these prescribed derived support realizations.",
+   "date": "2026-10-27",
+   "verdict": "Use naturality of the published components and explicit coefficient units."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.unitIso; CategoryTheory.NatTrans.naturality",
+   "results": "Found equivalence unit, counit triangle and naturality statements; none specialize directly to the project-defined support normalizations.",
+   "date": "2026-10-27",
+   "verdict": "These generic lemmas supply the formal cancellations, not the geometric normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*composition|composition.*projection; iteration.*realization; finiteCompositionNormalization",
+   "results": "Mathlib has no compact-support comparison. The project has raw compositionProjectionMate, cartesianCompactSupportCompositor and finiteCompositionNormalization, but no equation identifying the iteration endpoints used here. Blueprint search for projection realization gave no matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "Separate iteration transport from projection-free compositor normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProjectionBinarySquare",
+  "date": "2026-10-27",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition sentence: coefficient realization of two successive support operations.",
+   "via": [
+    "lem-sf-finite-projection-binary-square",
+    "lem-sf-finite-projection-composition-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProjectionIterationRealization",
+  "file": "lean/Sheaf/Paper/FiniteProjectionIterationRealization.lean",
+  "declaration": "WeilConjectures.CompactSupportFiniteProjection.iteration_realization",
+  "declarations": [
+   "WeilConjectures.CompactSupportFiniteProjection.iterationSourceComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.iterationTensorComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.iterationTargetComparison",
+   "WeilConjectures.CompactSupportFiniteProjection.iteration_realization"
+  ],
+  "statement": "theorem iteration_realization :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let RX := realization (C := C) (E := E) (n := n) (hn := hn) X\n    let RZ := realization (C := C) (E := E) (n := n) (hn := hn) Z\n    let G := sfFixedCompactSupport (Padic.coefficientExtensionRing C.l E n) cg\n    let Pg := fixedDerivedPull (C := C) (E := E) (n := n) g\n    let k := RX.inverse.obj K.obj\n    let l := RZ.inverse.obj L.obj\n    let I := (intrinsicFiniteTorsionConstructible C.l E n hn Z.obj.left).ι\n    I.map (component S g cg ((S.finite.support f cf).obj K) L ≫\n        (S.finite.support g cg).map (component S f cf K ((torPull S g).obj L))) ≫\n      (iterationTargetComparison S f g cf cg K L).hom =\n    (iterationSourceComparison S f g cf cg K L).hom ≫\n      RZ.functor.map\n        (fixedComponent (C := C) (E := E) (n := n) (hn := hn) g cg\n          ((sfFixedCompactSupport (Padic.coefficientExtensionRing C.l E n) cf).obj k) l ≫\n          G.map (fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k\n            (Pg.obj l)))",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T050540-L-235778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T050540-L-235778",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

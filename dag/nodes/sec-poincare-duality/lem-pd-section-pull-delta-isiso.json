@@ -1,0 +1,260 @@
+{
+ "id": "lem-pd-section-pull-delta-isiso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Human re-split 2026-10-24 of def-pd-proetale-section-module-functors: pull_delta_isIso; original assembly Step 3. Seeded nt-target-poincare-isiso Verdier-exchange Step 2 prerequisites; no imported blueprint ancestor.",
+   "via": [
+    "def-pd-proetale-section-module-functors",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the specified section-pullback tensor mate",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $X,Y$ be schemes in universe $u$, and let $f:X\\to Y$ be any scheme morphism. Use the fixed small pro-etale sites [def-weil-pbc-proetale-site], with objects and module sections in universe $u+1$ and morphisms in universe $u$. Write $R_T$ for the section-ring sheaf of the pulled-back coefficients on $T$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Use exactly the coefficient map $c:R_Y\\to f_*R_X$, section-module functors $L=f^*_{\\rm sec}$ and $P=f_{*,\\rm sec}$ and specified adjunction $L\\dashv P$ of [def-pd-section-module-operations-data]. Module tensors are the sheafified balanced tensors [def-pur-sheaf-tensor-product], and their units are the regular modules $R_T$. Let $P$ carry its uniquely normalized lax structure: its tensor maps send every local pure tensor over $V$ to the same pure tensor over $V\\times_YX$, and its regular-unit map is $c$. Let $L$ have the oplax structure obtained as mate under the specified adjunction [lem-sfb-adjunction-oplax-mate], and write $a_M:M\\to PLM$ for the adjunction unit. For all $R_Y$-module sheaves $M,N$, the tensor mate $\\delta_{M,N}:L(M\\otimes_{R_Y}N)\\to LM\\otimes_{R_X}LN$, defined as the adjunct of $M\\otimes_{R_Y}N\\xrightarrow{a_M\\otimes a_N}PLM\\otimes_{R_Y}PLN\\xrightarrow{\\mu_{LM,LN}}P(LM\\otimes_{R_X}LN)$, is an isomorphism. This is invertibility of the actual chosen mate, with no flatness, finiteness, or boundedness hypothesis on $M,N$ or $f$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 03EL (lemma-tensor-product-pullback); specialized specified mate recorded in Sheaf.Paper.ProEtaleSectionModuleFunctors, pull_delta_isIso. Current read-only Lean declaration at lean/Sheaf/Paper/ProEtaleSectionModuleFunctors.lean:552; signature and docstring verified on 2026-10-24."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pd-section-module-operations-data",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-adjunction-oplax-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing internal pullback and its specified adjunction. Its normalized direct-image pairing agrees with the right-adjoint lax structure of the existing strong internal pullback: the balancing-projection equation determines the tensorator on pure tensors, and hence the entire lax structure. Thus internalPull_delta_isIso gives invertibility of the actual internal mate, with no additional assumptions. These are earlier proved declarations of the same module, based on [lem-sfb-trace-base-change-first] and [lem-sfb-adjunction-oplax-mate].",
+   "uses": [
+    "lem-sfb-trace-base-change-first",
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EL; fixed internal-section tensor and adjunction comparisons, with the explicit normalized-mate transport calculation."
+   }
+  },
+  {
+   "text": "Take the concrete tensor isomorphisms of the fixed internal-section equivalences from [lem-pe-internal-section-tensor-comparison]. They send internal pure tensors to section pure tensors and are natural in both variables. The direct-image comparison from [lem-sfb-internal-module-operations-transport] fixes every section. The internal pairing normalization and the section normalization [lem-pd-section-push-normalized-exists-unique] therefore make the tensor-pairing square commute on every pure tensor. Internal tensor hom extensionality extends this equality to the sheaf-module maps. The aliases and coefficient map remain exactly those of [def-pd-section-module-operations-data].",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-pd-section-push-normalized-exists-unique",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EL; fixed internal-section tensor and adjunction comparisons, with the explicit normalized-mate transport calculation."
+   }
+  },
+  {
+   "text": "The operations transport theorem gives the unit equation E(a_M);beta_LM;P(gamma_M)=b_EM for the specified adjunctions. First derive transport of the Hom bijections by expanding an adjunct as unit followed by direct image and using naturality of beta. Apply this to the internal tensor mate. The pairing square of Step 2, tensor naturality of E, and naturality of the section pairing identify its adjunct with the adjunct of gamma_(M tensor N);Lsec(e_MN);deltaSec_(EM,EN). Injectivity gives F(deltaInternal_MN);g_(LM,LN);(gamma_M tensor gamma_N)=gamma_(M tensor N);Lsec(e_MN);deltaSec_(EM,EN). All left-hand factors and the first two right-hand factors are isomorphisms, so the actual section mate is an isomorphism at EM,EN. This calculation is the private pullTensor_mate_transport helper, using the Mathlib mate formula [lem-sfb-adjunction-oplax-mate].",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EL; fixed internal-section tensor and adjunction comparisons, with the explicit normalized-mate transport calculation."
+   }
+  },
+  {
+   "text": "For arbitrary section modules M,N take essential-preimage isomorphisms E(M0) to M and E(N0) to N supplied by the equivalence. Naturality of the actual oplax tensor map identifies its composite with the image of their tensor with the invertible tensor map of Step 3 followed by the tensor of their images. Cancel the invertible first factor to conclude IsIso(deltaSec_MN). All constructions work for the identity map, zero modules, zero coefficient ring, and empty sites; no flatness or boundedness hypothesis is introduced.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03EL; fixed internal-section tensor and adjunction comparisons, with the explicit normalized-mate transport calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-trace-base-change-first",
+  "lem-sfb-adjunction-oplax-mate",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pd-section-push-normalized-exists-unique",
+  "def-pd-section-module-operations-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D7 and 03EL; K9 2026-10-26. Shorter route through the existing strong internal pullback, normalized pairing comparison, and explicit transport of the specified adjunction mates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor comparison of module sheaf inverse image given by the adjunction mate of normalized pushforward tensor pairing is invertible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Generic oplax-to-monoidal conversion assumes invertibility; cartesian tensor results concern products rather than module tensor. ModuleCat scalar formulas concern ordinary modules. No hit identifies and inverts this specified ringed-site tensor mate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"tensor\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) : CommRingCat\", \"doc\": \"Given `x : X` and `y : Y` such that `f x = s = g y`, this is `κ(x) ⊗[κ(s)] κ(y)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) : Nontrivial ↑T.tensor\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) : X.residueField T.x ⟶ T.tensor\", \"doc\": \"Given `x : X` and `y : Y` such that `f x = s = g y`, this is the\\ncanonical map `κ(x) ⟶ κ(x) ⊗[κ(s)] κ(y)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) : Y.residueField T.y ⟶ T.tensor\", \"doc\": \"Given `x : X` and `y : Y` such that `f x = s = g y`, this is the\\ncanonical map `κ(y) ⟶ κ(x) ⊗[κ(s)] κ(y)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) : AlgebraicGeometry.Spec T.tensor ⟶ CategoryTheory.Limits.pullback f g\", \"doc\": \"Given `x : X`, `y : Y` and `s : S` such that `f x = s = g y`,\\nthis is `Spec (κ(x) ⊗[κ(s)] κ(y)) ⟶ X ×ₛ Y`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T₁ T₂ : AlgebraicGeometry.Scheme.Pullback.Triplet f g} (e : T₁ = T₂) : T₁.tensor ≅ T₂.tensor\", \"doc\": \"Given propositionally equal triplets `T₁` and `T₂` over `f` and `g`, the corresponding\\n`T₁.tensor` and `T₂.tensor` are isomorphic.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g)) : (AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint t).tensor ⟶ (CategoryTheory.Limits.pullback f g).residueField t\", \"doc\": \"Given `t : X ×[S] Y` with projections to `X`, `Y` and `S` denoted by `x`, `y` and `s`\\nrespectively, this is the canonical map `κ(x) ⊗[κ(s)] κ(y) ⟶ κ(t)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g} (e : x = y) : (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).symm = AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : AlgebraicGeometry.Scheme.Pullback.Triplet f g} : AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯ = CategoryTheory.Iso.refl x.tensor\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y : AlgebraicGeometry.Scheme.Pullback.Triplet f g} (e : x = y) : (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e).inv = (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯).hom\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x y z : AlgebraicGeometry.Scheme.Pullback.Triplet f g} (e : x = y) (e' : y = z) : AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e ≪≫ AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr e' = AlgebraicGeometry.Scheme.Pullback.Tripl\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g) : CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.fst f g) = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpecResidu\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Generic oplax-to-monoidal conversion assumes invertibility; cartesian tensor results concern products rather than module tensor. ModuleCat scalar formulas concern ordinary modules. No hit identifies and inverts this specified ringed-site tensor mate."
+  },
+  {
+   "tool": "grep",
+   "query": "pull.*[δd]elta.*[Ii]so|pullback.*[Tt]ensor|[Tt]ensor.*pullback",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Generic oplax-to-monoidal conversion assumes invertibility; cartesian tensor results concern products rather than module tensor. ModuleCat scalar formulas concern ordinary modules. No hit identifies and inverts this specified ringed-site tensor mate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Oplax monoidal tensor comparison of ringed site module pullback is an isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Shapes.Pullbacks\", \"type\": \": IsIso (pullbackComparison G f g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ preserving the pullback of $G(f)$ and $G(g)$, \"}\n  {\"name\": \"CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : F.OplaxMonoidal]\\n  [inst_5 : CategoryTheory\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an oplax monoidal functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with invertible unit coherence $\\\\eta : F(I_\\\\mathcal{C}) \\\\to I_\\\\mathcal{D}$ and in\"}\n  {\"name\": \"CategoryTheory.Functor.Monoidal.μIso\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \"(X Y : C) : F.obj X ⊗ F.obj Y ≅ F.obj (X ⊗ Y)\", \"doc\": \"For objects $X$ and $Y$ in a monoidal category $\\\\mathcal{C}$, this is the isomorphism $F(X) \\\\otimes F(Y) \\\\cong F(X \\\\otimes Y)$ in $\\\\mathcal{D}$ provided by a monoidal functor $F : \\\\mathcal{C} \\\\to \\\\mat\"}\n  {\"name\": \"PresheafOfModules.monoidalCategoryStruct\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \": MonoidalCategoryStruct (PresheafOfModules.{u} (R ⋙ forget₂ _ _))\", \"doc\": \"For any category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the category of presheaves of modules over $R$ is equipped with a monoidal structure. The tensor produc\"}\n  {\"name\": \"PresheafOfModules.monoidalCategory\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal\", \"type\": \": MonoidalCategory (PresheafOfModules.{u} (R ⋙ forget₂ _ _))\", \"doc\": \"For any category $\\\\mathcal{C}$ and a presheaf $R : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{CommRing}$, the category of presheaves of modules over $R$ is equipped with a monoidal structure. The tensor produc\"}\n  {\"name\": \"CategoryTheory.Functor.OplaxMonoidal.instIsIsoδ\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Basic\", \"type\": \"(X Y : C) : IsIso (δ F X Y)\", \"doc\": \"For any objects $X$ and $Y$ in a monoidal category $\\\\mathcal{C}$, the tensor coherence morphism $\\\\delta_F(X, Y) : F(X \\\\otimes Y) \\\\to F(X) \\\\otimes F(Y)$ of an oplax monoidal functor $F : \\\\mathcal{C} \\\\t\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": pullback.{v} φ ≅ forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Generic oplax-to-monoidal conversion assumes invertibility; cartesian tensor results concern products rather than module tensor. ModuleCat scalar formulas concern ordinary modules. No hit identifies and inverts this specified ringed-site tensor mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars sheaf tensor product comparison equals specified adjunction mate with inverse multiplying scalars",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {M : ModuleCat R}\\n  {N : ModuleCat S} (φ : (ModuleCat.extendScalars f).obj M ⟶ N) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom (((ModuleCat.extendRestrictScalarsAdj f).homEquiv M N) φ)) m =\\n    (CategoryTheory.\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the adjunction between the extension of scalars functor and the restriction of scalars functor establishes a natural bijec\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : X ⟶ (ModuleCat.restrictScalars f).obj Y)\\n  (z : TensorProduct R ↑((ModuleCat.restrictScalars f).obj (ModuleCat.of S S)) ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrict\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, there is a natural bijection between $ R $-linear maps from $ X $ to the \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (g : (ModuleCat.extendScalars f).obj X ⟶ Y) (x : ↑X),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars f g)) x =\\n    (CategoryTheory.Concrete\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the natural bijection between $ R $-linear maps $ X → Y^{\\text{res}} $ and $ S $-linear maps $ X^{\\text{ext}} → Y $ sends an\"}\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (M : ModuleCat R) (m : ↑M),\\n  (CategoryTheory.ConcreteCategory.hom ((ModuleCat.extendRestrictScalarsAdj f).unit.app M)) m = 1 ⊗ₜ[R] m\", \"doc\": \"For a commutative ring homomorphism $ f : R \\\\to S $, the unit of the adjunction between the extension of scalars functor and the restriction of scalars functor, when applied to an element $ m $ of an \"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁),\\n  ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M\\n        (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M))\\n  \", \"doc\": \"For commutative rings $ R_1, R_2, R_3 $ with ring homomorphisms $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the hom-set equivalence induced by the adjunction between extension and restriction o\"}\n  {\"name\": \"ModuleCat.instIsLeftAdjointExtendScalars\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  (ModuleCat.extendScalars f).IsLeftAdjoint\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the extension of scalars functor from the category of $ R $-modules to the category of $ S $-modules along $ f $ is a\"}",
+   "date": "2026-10-24",
+   "verdict": "No complete match. Generic oplax-to-monoidal conversion assumes invertibility; cartesian tensor results concern products rather than module tensor. ModuleCat scalar formulas concern ordinary modules. No hit identifies and inverts this specified ringed-site tensor mate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The oplax tensor mate of normalized direct image for sheaves of modules on a ringed site is invertible",
+   "results": "8 hits; ; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide adjunctions or unit/free-module isomorphisms; generic monoidal invertibility assumes a strong structure, and cartesian results do not apply to module tensor. None proves this specified tensor mate invertible."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.OplaxMonoidal.δ, IsIso",
+   "results": "0 hits; loogle: unknown identifier 'Functor.OplaxMonoidal.δ'; ",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide adjunctions or unit/free-module isomorphisms; generic monoidal invertibility assumes a strong structure, and cartesian results do not apply to module tensor. None proves this specified tensor mate invertible."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback|instIsIsoδ",
+   "results": "0 hits; ; ",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide adjunctions or unit/free-module isomorphisms; generic monoidal invertibility assumes a strong structure, and cartesian results do not apply to module tensor. None proves this specified tensor mate invertible."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ringed module sheaf pullback tensor adjunction mate is an isomorphism",
+   "results": "8 hits; ; SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackIso",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide adjunctions or unit/free-module isomorphisms; generic monoidal invertibility assumes a strong structure, and cartesian results do not apply to module tensor. None proves this specified tensor mate invertible."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.δ, CategoryTheory.IsIso",
+   "results": "7 hits; ; CategoryTheory.Functor.Monoidal.instIsIsoδ, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal, CategoryTheory.Functor.Monoidal.ofOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_εIso, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso, CategoryTheory.Functor.OplaxMonoidal.instIsIsoδ, CategoryTheory.GrothendieckTopology.Point.instIsIsoδFunctorOppositePresheafFiber",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide adjunctions or unit/free-module isomorphisms; generic monoidal invertibility assumes a strong structure, and cartesian results do not apply to module tensor. None proves this specified tensor mate invertible."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars and inverse image of sheaves of modules commute with tensor products via the adjunction mate",
+   "results": "8 hits; ; SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "no match: hits provide adjunctions or unit/free-module isomorphisms; generic monoidal invertibility assumes a strong structure, and cartesian results do not apply to module tensor. None proves this specified tensor mate invertible."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pd-proetale-section-module-functors",
+  "date": "2026-10-24",
+  "group": "NF"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleSectionModuleFunctors",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.pull_delta_isIso",
+  "file": "lean/Sheaf/Paper/ProEtaleSectionModuleFunctors.lean",
+  "note": "Named theorem ownership explicitly requested in the released human stage-1 repair of 2026-10-24. Verified against the current read-only lean/Sheaf/Paper/ProEtaleSectionModuleFunctors.lean:552; signature and docstring read, proof contains sorry. No completed-proof attachment is claimed."
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pd-section-pull-delta-isiso",
+  "worker": "stage1",
+  "summary": "Reused the existing general ringed tensor mate theorem, algebraic inverse-image presentation, canonical module adjunction and unit-normalized uniqueness. Wrote the actual conjugation equation for the chosen presheaf/sheafification adjunction. No new nodes or statement changes. Read the recorded sorry-bearing Lean declaration; no finished attachment exists.",
+  "blueprint": "No imported blueprint ancestor: retain the seeded nt-target-poincare-isiso Verdier-exchange Step 2 prerequisite and human 2026-10-24 parent re-split, original assembly Step 3. This assembly supplies tensor invertibility without modifying the chapter or unit route. Latest blueprint sk-thm-sf-verdier-exchange and sk-def-sfb-finite-pushforward-pullback were read.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "The actual pro-etale set inverse image is geometric; this is site infrastructure, not a replacement for Verdier exchange."
+   },
+   {
+    "node": "lem-sp-proetale-algebraic-inverse-image",
+    "why": "Supplies the algebraic inverse-image presentation of the section ring, needed to instantiate the same-unit ringed tensor mate theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic canonical tensor-formula module adjunction, used to compare with the chosen section adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-extension-hom",
+    "why": "Generic scalar-extension Hom formula computes the canonical unit on section tensors."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-module-transport",
+    "why": "Underlying geometric adjunct formula computes the insertion unit of the canonical tensor-formula adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness of left adjoints fixes the comparison by its unit equation."
+   },
+   {
+    "node": "lem-sfb-adjunction-oplax-mate",
+    "why": "Generic tensor mate formula identifies the two composites under the specified adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-adjunction-oplax-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NF-36bc2cfdd",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-36bc2cfdd (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement, Stacks 03D7 (sites-modules.tex l.1197) and 03EL (l.3649), and the Lean pull_delta_isIso (ProEtaleSectionModuleFunctors.lean:552) with the specified upperStar, lowerStar, adjunction and coefficientMap in InternalModuleOperationsTransport.lean:266-303. Statement: it matches the Lean obligation (δ of leftAdjointOplaxMonoidal for the unique pure-tensor-normalized pushLax), is not weakened, and the no-flatness clause agrees with 03EL. Small cases checked: f=id, Λ=0, M=N=R, and R/I⊗R/J by right-exactness only. Proof: the specified L is Mathlib presheaf pullback followed by sheafification, not literally S⊗_A I. Step 3 handles this correctly through the unit-normalized uniqueness of left adjoints (conjugateEquiv), with e: L≅L0 and P(e)a=a0. Step 4 applies the same-unit lem-pd-ringed-tensor-adjunction-mate; all its hypotheses are verified. Step 5's adjunct computation of (e⊗e)δ = d0∘e_B is correct. Fix: Step 2 asserted that the composite bijection 'is the canonical adjunction' of lem-weil-pbc-ringed-topoi-module-adjunction, which that statement does not say (C3/C4). It also left implicit the identifications of the existential I',P' of geometric-module-transport with I,P. I rewrote proof[1].text to define L0⊣P as the composite, write out both identifications, and conclude by uniqueness of an adjunction given its unit, which is exactly the hypothesis of the tensor-mate theorem. Nothing else changed. No new nodes and no duplicate: lem-pd-section-ordinary-oplax-normalization depends on the parent, so citing it would create a cycle. Accepted tool_uses: det-pe-topos-functoriality-inverse-image and lem-sp-proetale-algebraic-inverse-image (off-route generic infrastructure). Stage-2 advisory: geometric_module_transport and module_pullback_pushforward_adjunction are stated for Type u sites with Category.{u}, so a small site model is needed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e75a5",
+  "group": "K9",
+  "result": "fix",
+  "landing": "20261026T070233-L-3486174",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + FinalRingedUnitMate vs published clone ec62da3, nodes def-pd-proetale-section-module-functors / lem-pd-section-pull-delta-isiso / lem-pd-final-ringed-unit-mate-isiso, change records, and all 11 direct importers compiled against the corrected item"
+ }
+}

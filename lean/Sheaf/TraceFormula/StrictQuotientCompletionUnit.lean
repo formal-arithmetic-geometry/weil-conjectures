@@ -9,6 +9,8 @@ public import Sheaf.Paper.CompletionUnitModels
 public import Sheaf.TraceFormula.StrictQuotientConeAugmentation
 import all Sheaf.Paper.CompletionUnitStrictQuotientModel
 import all Sheaf.Paper.IntegralAmbientOperationModels
+import all Sheaf.Paper.CoherentQuotientModelComparison
+import all Sheaf.Paper.CoherentPrimitiveReductionPresentation
 
 /-! # The actual completion unit in the strict quotient cone
 
@@ -202,7 +204,27 @@ theorem strictQuotientCompletionUnit
     · intro m n h
       ext i : 1
       exact M.transition (P.obj.X i) h
-  obtain ⟨a, ha, hrhoa⟩ := hrho P K e kappa hp
+  have hc : IsIntegralComparisonPresentationCoherent l E Y S P.obj K e kappa := by
+    unfold IsIntegralComparisonPresentationCoherent
+    let b := (((constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E Y)).mapHomologicalComplex
+      (.up ℤ)).homEquiv P.obj ((CompletionUnit.tower l E Y).obj K)).symm
+        ((M.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P.obj)
+    refine ⟨b, ?_, ?_⟩
+    · intro n i U x
+      exact ordinary_unit_section l E Y M P.obj n i U x
+    · have ht := derivedTranspose l E Y S M D P.obj K (𝟙 K)
+      have hQ : DerivedCategory.Q.map (𝟙 K) = 𝟙 (DerivedCategory.Q.obj K) :=
+        (DerivedCategory.Q (C := coefficientSequenceModules l E Y)).map_id K
+      have hε : D.reductionComparison.app P.obj ≫ DerivedCategory.Q.map (𝟙 K) =
+          e.hom := by
+        rw [hQ]
+        exact Category.comp_id _
+      have hM : (M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv P.obj K
+          (𝟙 K) = (M.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P.obj :=
+        (M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv_id P.obj
+      simp only [hε, hM, Adjunction.homEquiv_unit] at ht
+      convert ht using 1
+  obtain ⟨a, ha, hrhoa⟩ := hrho P K e kappa hp hc
   have ha' := normalized_tower_map l E Y K P.obj kappa a ha
   let c : P.obj ⟶ integralOperationsRoos
       (((CompletionUnit.tower l E Y).obj K).asFunctor) := M.coneAugmentation l E Y P.obj

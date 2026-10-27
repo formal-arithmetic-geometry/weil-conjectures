@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-oscillatory-linear-frequency-substitution",
+ "kind": "statement",
+ "title": "Parameter-dependent linear frequency substitution in a compact oscillatory kernel",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and the symbol and frequency-cutoff conventions of [def-sfb-symbol-pseudodifferential-operators]. Let $m\\geq1$, $p,q\\geq0$, $r\\in\\mathbf Z$, and let $W\\subset\\mathbf R^m\\times\\mathbf R^m$ be open. Let $B:W\\to\\mathrm{GL}_m(\\mathbf R)$ be smooth and set $F(x,y)=B(x,y)(x-y)$. Suppose $D_yF(x,y)$ is invertible on $W$. Let $b(x,y,\\eta)$ be a smooth complex $q\\times p$ matrix amplitude on $W\\times\\mathbf R^m$, vanishing outside a fixed compact subset $C\\subset W$ in the spatial variables, and satisfying, for all multi-indices, $$\\|\\partial_x^\\alpha\\partial_y^\\gamma\\partial_\\eta^\\beta b(x,y,\\eta)\\|\\leq C_{\\alpha\\gamma\\beta}(1+|\\eta|)^{r-|\\beta|}.$$ Define, on $W$, $$c(x,y,\\xi)=\\frac{b(x,y,B(x,y)^{-T}\\xi)}{|\\det B(x,y)|},$$ and extend both amplitudes by zero off $W$. For every $\\rho\\in C_c^\\infty(\\mathbf R^m)$ equal to one near zero, the kernels $$K_R^F(x,y)=(2\\pi)^{-m}\\int e^{iF(x,y)\\cdot\\eta}b(x,y,\\eta)\\rho(\\eta/R)\\,d\\eta$$ converge as $R\\to\\infty$ in the space of matrix-valued distributions on $\\mathbf R^{2m}$, independently of $\\rho$. This limit equals the distributional limit of $$(2\\pi)^{-m}\\int e^{i(x-y)\\cdot\\xi}c(x,y,\\xi)\\rho(\\xi/R)\\,d\\xi.$$ In particular replacing $\\rho(\\xi/R)$ in the latter integral by $\\rho(B(x,y)^{-T}\\xi/R)$ gives the same limit. Equality of kernels also gives equality of their actions and bilinear transposes on compactly supported smooth tests, hence equality of their extensions to all distributions whenever these transposes are continuous test-space maps. The support of every kernel and of its limit is contained in $C$.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, global quantization before Proposition 3.6, printed pp.12–13. Agent-supplied oscillatory change-of-frequency prerequisite. Supplemental source read online: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf, §3, (3.3)–(3.6), printed pp.6–7, and 3.12–3.14, pp.9–10. The parameter-dependent cutoff assertion is supplied by the agent, not claimed to be proved in these notes."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Write $z=(x,y)$ and work entrywise. On $C$, $B,B^{-1}$ and their derivatives are bounded; $|\\det B|$ has a positive lower bound. Thus $c$ is smooth after extension by zero, with support in $C$. For $R\\geq1$ compare the two old-frequency cutoffs $$h_R^0(z,\\eta)=\\rho(\\eta/R),\\qquad h_R^1(z,\\eta)=\\rho(B(z)^T\\eta/R).$$ For each multi-index $\\alpha$ their spatial derivatives are bounded independently of $R,\\eta$ on $C$. Indeed every differentiated term of $h_R^1$ is a bounded spatial coefficient times a derivative of $\\rho$ evaluated at $B^T\\eta/R$, times a product of components of $\\eta/R$. Wherever that derivative is nonzero, compact support of $\\rho$ and uniform invertibility of $B^T$ bound $|\\eta|/R$. For fixed $\\eta$, both cutoffs are identically one on a neighborhood of $C$ for all sufficiently large $R$, since $\\rho=1$ near zero. These facts hold for every choice of $\\rho$ in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent proof of the parameter-dependent frequency substitution prerequisite; supplemental Demailly course §3 (3.3)–(3.6), (3.11), 3.12–3.14 read online. Cutoff comparison supplied explicitly here, not claimed as a theorem of those notes."
+   }
+  },
+  {
+   "text": "For a scalar test $\\phi\\in C_c^\\infty(\\mathbf R^{2m})$ set $$I_R^j(\\eta)=\\int_W e^{iF(z)\\cdot\\eta}b(z,\\eta)h_R^j(z,\\eta)\\phi(z)\\,dz,\\qquad I(\\eta)=\\int_W e^{iF(z)\\cdot\\eta}b(z,\\eta)\\phi(z)\\,dz.$$ The invertible $D_yF$ makes $DF$ surjective, so the compact-submersion estimate applies with $n=2m,k=m,H=F$. The product rule, the amplitude hypothesis and step 1 give $p_N(b(\\cdot,\\eta)h_R^j\\phi)\\leq D_N(1+|\\eta|)^r p_N(\\phi)$, uniformly for $j=0,1,R\\geq1$; the same holds without $h_R^j$. Hence $$|I_R^j(\\eta)|+|I(\\eta)|\\leq E_Np_N(\\phi)(1+|\\eta|)^{r-N}.$$ Choose $N>r+m$. The last frequency power is bounded by a constant times $(1+|\\eta|^2)^{-(N-r)/2}$, which is integrable by the cited Euclidean bracket lemma. The majorant lemma therefore makes these frequency integrals absolutely convergent.",
+   "uses": [
+    "lem-sfb-compact-submersion-phase-estimate",
+    "lem-sfb-euclidean-bracket-integrable",
+    "lem-sfb-integrable-majorant-estimate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent proof of the parameter-dependent frequency substitution prerequisite; supplemental Demailly course §3 (3.3)–(3.6), (3.11), 3.12–3.14 read online. Cutoff comparison supplied explicitly here, not claimed as a theorem of those notes."
+   }
+  },
+  {
+   "text": "For fixed $\\eta$, step 1 gives $I_R^j(\\eta)=I(\\eta)$ eventually. Dominated convergence along $R\\to+\\infty$ (the at-top filter has a countable base), using step 2, gives the common limit $$(2\\pi)^{-m}\\int I(\\eta)\\,d\\eta.$$ The limit is independent of $j$ and of $\\rho$. Finite-cutoff integrands have compact support in $(z,\\eta)$, so Fubini identifies their tested kernels with the integrals of $I_R^j$. The bound in step 2, integrated in frequency, gives a constant times $p_N(\\phi)$; this proves continuity on each fixed compact test space and hence defines a distribution. It also gives uniform convergence on bounded test sets: both cutoffs equal one on $C\\times\\{|\\eta|\\leq T\\}$ once $R$ is large, while the integrable tail in step 2 tends to zero as $T\\to\\infty$, uniformly when $p_N(\\phi)$ is bounded. Thus the assertion holds also for the strong distribution topology.",
+   "uses": [
+    "lem-sfb-oscillatory-cutoff-convergence",
+    "lem-sfb-product-fubini-integral-swap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent proof of the parameter-dependent frequency substitution prerequisite; supplemental Demailly course §3 (3.3)–(3.6), (3.11), 3.12–3.14 read online. Cutoff comparison supplied explicitly here, not claimed as a theorem of those notes."
+   }
+  },
+  {
+   "text": "For each fixed $z\\in W$ and finite $R$, apply the Jacobian formula to $\\xi=B(z)^T\\eta$. Its absolute Jacobian is $|\\det B(z)|$, and $$F(z)\\cdot\\eta=(x-y)\\cdot\\xi,\\qquad c(z,\\xi)\\,d\\xi=b(z,\\eta)\\,d\\eta.$$ Consequently the standard-cutoff $c$ kernel, tested against $\\phi$, equals $(2\\pi)^{-m}\\int I_R^1(\\eta)\\,d\\eta$. With the cutoff $\\rho(B(z)^{-T}\\xi/R)$ it instead equals the integral of $I_R^0$. Fubini is legitimate: on the fixed compact spatial support $C$, either cutoff confines frequency to a bounded set for this fixed $R$, and all integrands are smooth there. Off $W$ both integrands vanish. Step 3 proves convergence and equality of the three requested limits.",
+   "uses": [
+    "lem-sfb-euclidean-jacobian-integral",
+    "lem-sfb-product-fubini-integral-swap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent proof of the parameter-dependent frequency substitution prerequisite; supplemental Demailly course §3 (3.3)–(3.6), (3.11), 3.12–3.14 read online. Cutoff comparison supplied explicitly here, not claimed as a theorem of those notes."
+   }
+  },
+  {
+   "text": "Every finite kernel vanishes off $C$. A test supported in its open complement has $b\\phi=0$, so its pairing with the limit in step 3 is zero as well. This proves the support assertion. For compactly supported smooth vector inputs $f(y)$ and dual tests $g(x)$, the matrix kernel is tested against the finite sum of products $g_a(x)f_b(y)$. The equality of kernel distributions therefore gives equality of their actions and bilinear transposes as distribution-valued pairings, with no complex conjugation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent proof of the parameter-dependent frequency substitution prerequisite; supplemental Demailly course §3 (3.3)–(3.6), (3.11), 3.12–3.14 read online. Cutoff comparison supplied explicitly here, not claimed as a theorem of those notes."
+   }
+  },
+  {
+   "text": "If the transposes are continuous maps of smooth compact test spaces as in the statement, their difference at a fixed output test is a smooth compactly supported vector function. Step 5 says that each component pairs to zero against every scalar smooth compact test. The smooth-test separation lemma makes it zero almost everywhere, and the continuous almost-everywhere equality lemma makes it zero pointwise. Hence the two transpose test maps are equal. Their extensions to distributions are equal because for every distribution $u$ and output test $g$ both are defined by $u(T^tg)$. This proves exactly the conditional assertion about all distributions; no test-space continuity was assumed merely from finite-cutoff substitution.",
+   "uses": [
+    "lem-sfb-smooth-test-ae-separation",
+    "lem-sfb-continuous-ae-pointwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "Agent proof of the parameter-dependent frequency substitution prerequisite; supplemental Demailly course §3 (3.3)–(3.6), (3.11), 3.12–3.14 read online. Cutoff comparison supplied explicitly here, not claimed as a theorem of those notes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-submersion-phase-estimate",
+  "lem-sfb-continuous-ae-pointwise",
+  "lem-sfb-euclidean-bracket-integrable",
+  "lem-sfb-euclidean-jacobian-integral",
+  "lem-sfb-integrable-majorant-estimate",
+  "lem-sfb-oscillatory-cutoff-convergence",
+  "lem-sfb-product-fubini-integral-swap",
+  "lem-sfb-smooth-test-ae-separation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Agent proof of the parameter-dependent frequency substitution prerequisite; supplemental Demailly course §3 (3.3)–(3.6), (3.11), 3.12–3.14 read online. Cutoff comparison supplied explicitly here, not claimed as a theorem of those notes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "oscillatory|pseudodifferential|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:43:55Z\", \"tool\": \"grep\", \"query\": \"oscillatory|pseudodifferential|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits in Mathlib/Analysis/."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of frequency variables in an oscillatory integral with a smooth invertible matrix depending on both spatial variables",
+   "results": "{\"t\": \"2026-10-24T04:43:56Z\", \"tool\": \"leansearch\", \"query\": \"Change of frequency variables in an oscillatory integral with a smooth invertible matrix depending on both spatial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourierIntegralInv\", \"Real.fourierIntegral\", \"Real.fourierIntegral_comp_linearIsometry\", \"Real.fourierInv_comp_linearIsometry\", \"Real.fourier_comp_linearIsometry\", \"MeasureTheory.integral_image_eq_integral_abs_det_fderiv_smul\", \"VectorFourier.fderiv_fourierIntegral\", \"Real.differentiable_fourierIntegral\"], \"digest\": \"fb3696c3f0c80865\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"oscillatory\"",
+   "results": "{\"t\": \"2026-10-24T04:43:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"oscillatory\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth parameter dependent invertible linear change of frequency preserves an oscillatory distribution kernel with compactly supported symbol amplitude",
+   "results": "{\"t\": \"2026-10-24T04:43:57Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth parameter dependent invertible linear change of frequency preserves an oscillatory distribution kernel with compactly supported symbol amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourier_evalCLM_eq\", \"VectorFourier.fourierPowSMulRight_iteratedFDeriv_fourierIntegral\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.fourierTransformCLM\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.integral_sesq_fourierIntegral_eq\", \"SchwartzMap.integral_bilin_fourierInv_eq\", \"SchwartzMap.integral_sesq_fourier_eq\"], \"digest\": \"ec6abeb6e4b19305\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariance of distributional oscillatory integrals under fiberwise linear substitutions including the absolute determinant Jacobian",
+   "results": "{\"t\": \"2026-10-24T04:43:58Z\", \"tool\": \"leanfinder\", \"query\": \"Invariance of distributional oscillatory integrals under fiberwise linear substitutions including the absolute determinant Jacobian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.integral_target_eq_integral_abs_det_fderiv_smul\", \"MeasureTheory.integral_image_eq_integral_abs_det_fderiv_smul\", \"MeasureTheory.lintegral_image_eq_lintegral_abs_det_fderiv_mul\", \"MeasurableEmbedding.withDensity_ofReal_comap_apply_eq_integral_abs_det_fderiv_mul\", \"MeasureTheory.lintegral_abs_det_fderiv_eq_addHaar_image\", \"MeasureTheory.lintegral_abs_det_fderiv_eq_addHaar_image₀\", \"MeasureTheory.lintegral_abs_det_fderiv_le_addHaar_image_aux1\", \"MeasureTheory.lintegral_abs_det_fderiv_le_addHaar_image_aux2\"], \"digest\": \"6257ca305230e563\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Fourier transforms, integrable change-of-variables or bundle coordinate maps do not assert distributional oscillatory cutoff invariance or pseudodifferential symbol transport."
+  },
+  {
+   "tool": "grep",
+   "query": "oscillatory|pseudodifferential|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T05:07:29Z\", \"tool\": \"grep\", \"query\": \"oscillatory|pseudodifferential|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distributional oscillatory kernels are unchanged by a spatially dependent invertible linear substitution in the frequency variable with the absolute determinant Jacobian",
+   "results": "{\"t\": \"2026-10-24T05:07:35Z\", \"tool\": \"leanfinder\", \"query\": \"Distributional oscillatory kernels are unchanged by a spatially dependent invertible linear substitution in the frequency variable with the absolute determinant Jacobian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.integral_target_eq_integral_abs_det_fderiv_smul\", \"MeasureTheory.integral_image_eq_integral_abs_det_fderiv_smul\", \"MeasureTheory.lintegral_image_eq_lintegral_abs_det_fderiv_mul\", \"MeasureTheory.Measure.addHaar_preimage_continuousLinearMap\", \"MeasureTheory.Measure.addHaar_preimage_continuousLinearEquiv\", \"MeasureTheory.Measure.map_linearMap_addHaar_eq_smul_addHaar\", \"MeasureTheory.Measure.map_linearMap_addHaar_pi_eq_smul_addHaar\", \"fourierIntegral_eq_half_sub_half_period_translate\"], \"digest\": \"2198f1731dfb9224\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Distributional limits of compactly supported oscillatory symbol kernels are invariant under parameter dependent invertible linear changes of the frequency variable",
+   "results": "{\"t\": \"2026-10-24T05:08:10Z\", \"tool\": \"leansearch\", \"query\": \"Distributional limits of compactly supported oscillatory symbol kernels are invariant under parameter dependent invertible linear changes of the frequency variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.fourierInv_comp_linearIsometry\", \"TemperedDistribution.fourierTransformInv_apply\", \"TemperedDistribution.fourierInv_apply\", \"Real.fourier_comp_linearIsometry\", \"SchwartzMap.fourierTransformCLM\", \"TemperedDistribution.fourierTransformInv_toTemperedDistributionCLM_eq\", \"TemperedDistribution.fourierTransformInvCLM\", \"TemperedDistribution.instFourierTransformInv\"], \"digest\": \"a9043b500d9d7d86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Fourier decay hits concern bilinear linear phases; Jacobian hits concern ordinary integrals. Neither states a uniform nonlinear submersion-phase estimate or cutoff-independent oscillatory kernel substitution."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-quantization-coordinate-change",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit. Supporting local analytic input: Global quantization before Proposition 3.6: change of coordinates and real bundle frames modulo one lower order. Analytic prerequisite: frequency substitution in the near-diagonal kernel, with its parameter-dependent cutoff justified distributionally.",
+   "via": [
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-oscillatory-linear-frequency-substitution",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Compared both cutoff families in the old frequency variable using one smaller compact-submersion phase estimate, dominated convergence, and the finite-cutoff Jacobian formula. Proved test continuity, support and conditional transpose extension explicitly. Added one statement-only analytic prerequisite; reused all existing elementary-analysis leaves.",
+  "blueprint": "Inherited global-quantization prerequisite below the Hodge/elliptic branch recorded in blueprint.from.place; steps supply the parameter-dependent cutoff gap before amplitude reduction. Current latest main-20261024 chapter, unit and direct-image proof read; no analytic duplicate in blueprint searches. blueprint_refs.py ancestor returns None; preserve the inherited null ancestor and existing via list."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-520cfdb3f",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-520cfdb3f (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. Item lem-sfb-oscillatory-linear-frequency-substitution: the statement and stmt_deps are word-for-word the same as live, where the node is still unsplit with no repair note, so this is a first split and not a re-split. The new node lem-sfb-compact-submersion-phase-estimate is true and only states the result (B1–B4 OK). It is the standard non-stationary-phase estimate: a surjective DH means DH^T is injective, compactness of C times the unit sphere gives a uniform lower bound, and N integrations by parts give the bound with (1+|eta|)^{-N}. I tested it with C empty, N=0, eta=0 and a constant H (which shows surjectivity is needed). Its searches were run and recorded, and Mathlib's decay hits are for linear phases only. Searching the DAG found no duplicate: amplitude-reduction, compact-symbol-frequency-kernel and fixed-support-fourier-lipschitz all differ, and the node is strictly smaller than the item and no clause of it. Steps: step 1 checks the chain rule for rho(B^T eta/R), whose derivatives are bounded because |eta|/R is bounded wherever a derivative of rho is nonzero, and both cutoffs are eventually 1 on C. Step 2 applies the estimate with H=F: D_yF invertible makes DF onto; the symbol bound with beta=0 plus the product rule give (1+|eta|)^{r-N}; and with N>r+m the bracket leaf applies with s=(N-r)/2>m/2. Measurability of I_R^j by continuity in eta is left implicit but is elementary. Step 3 is dominated convergence (Mathlib tendsto_integral_filter_of_dominated_convergence) entrywise. Fubini applies because the finite cutoffs have compact support in (z,eta). The bound C p_N(phi) makes the limit a distribution, and the ball/tail split gives convergence in the strong topology. Step 4 uses the Jacobian leaf with xi=B(z)^T eta: F.eta=(x-y).xi and c dxi = b deta. The cutoff directions are correct (h^1 is the standard c cutoff, h^0 the B^{-T} cutoff), and the absolute value handles det<0. Step 5 covers support and bilinear actions; step 6 uses smooth-test-ae-separation then continuous-ae-pointwise, and continuity of the transposes is the item's own conditional hypothesis. All proof_deps are in unit sk-thm-sf-ctf-stability, so there are no tool_uses. There is no cycle and no SGA. proof_origin is agent with an honest WANTED line for Demailly. The worker's dry run failed only on an SSH timeout."
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "id": "lem-pur-compact-support-scalar-limit-completed-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; auxiliary scalar-limit argument Steps 3--6, completed descent and the two projection equations.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completed descent and finite projections of the strict scalar-limit map",
+ "statement": "Let $\\ell$ be prime, $E,F$ finite extensions of $\\mathbf Q_\\ell$, $i:E\\to F$ a coefficient embedding, and $D$ a finite-field datum with $\\ell\\ne D.p$. Let $f:X\\to Y$ be separated and of finite type between separated finite-type $D.k$-schemes, with compactification $c$. Fix reduction calculi $S,S'$ of [def-coef-derived-system-calculus-data] and ramification data $e\\ge1$ as in [lem-pur-compact-support-strict-scalar-mate]. On the source finite-Tor constructible integral category there exists an invertible natural completed-coefficient comparison $\\gamma:C_Y P^c_E\\to P^c_F C_X$. Under scalarCompletion and scalarSupportLimit of [def-pur-compact-support-scalar-limit-maps], its constant restriction is exactly scalarLimitArrow. For every source object and every $n\\ge0$, the projection at exponent $e(n+1)$ of this specific strict limit arrow is the source projection tensored by finiteBalancing and followed by finiteTensorMap. After the specified completed coefficient transports, $\\gamma$ composed with scalarSupportPositiveProjection and the image of scalarReductionBalancing is the finite scalar adjunction unit followed by restriction of scalarReductionBalancing, the scalar-extended source scalarSupportCounit, and finiteTensorMap. These are the three explicit equations in the Lean statement. This asserts no normalization, completeness or effectivity conclusion about the individual towers.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Tag 07A6 (lemma-adjoint); application to the native proper/open coefficient system. The finite compact-support compatibility is more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings).",
+  "note": "Lean split/construction: lean/Sheaf/Paper/CompactSupportScalarLimitCompletedComparison.lean:66; source proof step is recorded in proof_origin and the declaration docstring."
+ },
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-coef-derived-system-calculus-data",
+  "lem-pur-compact-support-strict-scalar-mate"
+ ],
+ "proof": [
+  {
+   "text": "Apply the single-field native effectivity theorem to the E tower and the full F tower, using preservation of the finite-Tor constructible domain under scalar extension. Use the quotient-normalized coefficient comparisons to identify complete objects and their constant restrictions.",
+   "uses": [
+    "lem-pur-compact-support-native-effectivity",
+    "lem-pur-compact-support-coefficient-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fixed tensor-limit isomorphism, actual strict scalar mate and inverse arithmetic restriction give scalarLimitArrow. On complete objects restriction to constants is an equivalence. Transport the arrow through scalarCompletion and scalarSupportLimit and lift uniquely; uniqueness gives naturality, and reflection of isomorphisms gives IsIso gamma.",
+   "uses": [
+    "def-pur-compact-support-scalar-limit-maps",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-coefficient-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the retained projection: arithmetic restriction selects e(n+1)-1 and its block contribution vanishes; tensor interchange tensors coordinates. The evaluated strict mate and its finite balancing give the explicit constant projection equation.",
+   "uses": [
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-roos-cofinality",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this projection equation to completed coefficients using the quotient-normalized scalarCompletion. Scalar adjunction units insert 1 and scalarReductionBalancing multiplies the last two scalars. Naturality gives exactly the displayed completed projection equation, with the actual source counit.",
+   "uses": [
+    "lem-pur-compact-support-coefficient-models",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-native-effectivity",
+  "lem-pur-compact-support-coefficient-models",
+  "def-pur-compact-support-scalar-limit-maps",
+  "lem-pur-compact-support-strict-scalar-mate",
+  "lem-pur-compact-support-roos-cofinality",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Tag 07A6 (lemma-adjoint); application to the native proper/open coefficient system. The finite compact-support compatibility is more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings). Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; auxiliary scalar-limit argument Steps 3--6, completed descent and the two projection equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized compact support scalar extension derived inverse limit finite reduction projection adjunction",
+   "results": "8 unrelated Mathlib hits, including Condensed.profiniteSolidCounit; no normalized support-tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "effectivity of normalized DVR towers with canonical projection adjoints",
+   "results": "8 unrelated ring-theoretic/normalization hits, including IsDedekindDomainDvr.toIsNoetherian; no derived tower effectivity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv, homEquiv_unit and homEquiv_counit provide the adjunction API, but not native tower realization or scalar descent.",
+   "date": "2026-10-27",
+   "verdict": "partial match: generic adjunction API"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDVRTower_effectivity|coefficientConstantTower_roos|compactSupportSystem_normalized",
+   "results": "msearch returned zero Mathlib hits. Repository rg found normalizedDVRTower_effectivity, coefficientConstantTower_roos and the native normalization helper, used in the proved supporting modules.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match; project declarations used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "group": "D4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarLimitCompletedComparison",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarLimitCompletedComparison.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarLimitCompletedComparison",
+  "statement": "theorem scalarLimitCompletedComparison (c : Compactification f)\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (S' : CoefficientDerivedSystemCalculus.{u, u} l F X)\n    (e : ℕ) (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e)\n    : ∃ γ : (finiteTorConstructibleIntegral l E X).ι ⋙ scalarSupport l E c S ⋙\n        pbcDerivedExtend (completedCoefficientMap l E F i Y) ⟶\n      (finiteTorConstructibleIntegral l E X).ι ⋙\n        pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ scalarSupport l F c S',\n      IsIso γ ∧\n      ∀ (M : finiteTorConstructibleIntegralCategory l E X),\n    ((baseTensor l E F i Y).map\n          ((scalarSupportLimit l E c S).hom.app M.obj) ≫\n          scalarLimitArrow l E F i c S S' e he hepos M.obj =\n        (scalarCompletion l E F i Y).hom.app\n            ((scalarSupport l E c S).obj M.obj) ≫\n          (scalarConstantRestriction l F Y).map\n            (γ.app M) ≫\n          (scalarSupportLimit l F c S').hom.app\n            ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M.obj)) ∧\n    (∀ n : ℕ,\n      scalarLimitArrow l E F i c S S' e he hepos M.obj ≫\n          (scalarLimitProjection l F Y (e * (n + 1) - 1)).app\n            ((support l F c S').obj\n              ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M.obj)) ≫\n          (positiveSupportEvaluation l F c S' (e * (n + 1))\n            (Nat.mul_pos hepos (Nat.le_add_left 1 n))).hom.app\n              ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M.obj) ≫\n          (positiveRestriction l F Y (e * (n + 1))\n            (Nat.mul_pos hepos (Nat.le_add_left 1 n))).map\n              ((PurCompactSupport.image (PurCompactSupport.finite l F (e * (n + 1))\n                (Nat.mul_pos hepos (Nat.le_add_left 1 n))) c).map\n                  ((scalarReductionBalancing l E F i X e he hepos n).hom.app M.obj)) =\n        (baseTensor l E F i Y).map\n            ((scalarLimitProjection l E Y n).app ((support l E c S).obj M.obj) ≫\n              (supportEvaluation l E c S n).hom.app M.obj) ≫\n          (finiteBalancing l E F i Y e he hepos n).hom.app\n            ((PurCompactSupport.image (PurCompactSupport.finite l E (n + 1)\n              (Nat.le_add_left 1 n)) c).obj\n                ((pbcDerivedExtend (PurCompactSupport.projection l E (n + 1)\n                  (Nat.le_add_left 1 n) X)).obj M.obj)) ≫\n          (positiveRestriction l F Y (e * (n + 1))\n            (Nat.mul_pos hepos (Nat.le_add_left 1 n))).map\n              (PurCompactSupport.finiteTensorMap l E F i e he hepos n c M.obj)) ∧\n    (∀ n : ℕ,\n      γ.app M ≫\n          scalarSupportPositiveProjection l F c S' (e * (n + 1))\n            (Nat.mul_pos hepos (Nat.le_add_left 1 n))\n            ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M.obj) ≫\n          (pbcDerivedRestrict (PurCompactSupport.projection l F (e * (n + 1))\n            (Nat.mul_pos hepos (Nat.le_add_left 1 n)) Y)).map\n            ((PurCompactSupport.image (PurCompactSupport.finite l F (e * (n + 1))\n              (Nat.mul_pos hepos (Nat.le_add_left 1 n))) c).map\n                ((scalarReductionBalancing l E F i X e he hepos n).hom.app M.obj)) =\n        (pbcDerivedScalarAdjunction (PurCompactSupport.projection l F (e * (n + 1))\n          (Nat.mul_pos hepos (Nat.le_add_left 1 n)) Y)).unit.app _ ≫\n          (pbcDerivedRestrict (PurCompactSupport.projection l F (e * (n + 1))\n            (Nat.mul_pos hepos (Nat.le_add_left 1 n)) Y)).map\n            ((scalarReductionBalancing l E F i Y e he hepos n).hom.app\n                ((scalarSupport l E c S).obj M.obj) ≫\n              (pbcDerivedExtend ((PurCompactSupport.finiteChange l E F i e he hepos (n + 1)\n                (Nat.le_add_left 1 n)).map Y)).map (scalarSupportCounit l E c S n M.obj) ≫\n              PurCompactSupport.finiteTensorMap l E F i e he hepos n c M.obj))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

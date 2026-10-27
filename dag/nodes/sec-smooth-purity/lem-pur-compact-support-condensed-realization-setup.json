@@ -1,0 +1,227 @@
+{
+ "id": "lem-pur-compact-support-condensed-realization-setup",
+ "kind": "statement",
+ "title": "Reconstruction models and normalized coefficient encodings for compact support",
+ "statement": "Fix a prime $\\ell$ and a finite normed extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension]. For a compactification $c$ of a morphism $X\\to Y$ of schemes [def-weil-compactifications-refinements] and a derived coefficient-system calculus on every scheme [lem-coef-derived-system-evaluation-calculus], define the strict reduction/support tower and the actual derived-limit support functor using [lem-weil-compact-support-reduction-tower-functor] and [def-pur-completed-coefficient-presentation-transport]. IntegralModel records preservation of complete bounded constructibility [def-weil-pbc-bounded-constructible-complete], additivity, linearity, shift and triangulation structures, the tower evaluations and transitions, and coefficient normalization for this fixed functor; the record asserts no existence. Restrict and rationalize this actual functor, and define its coefficient-model limit counit. For every finite normed extension $F/\\mathbf Q_\\ell$ with a specified embedding $E\\to F$, and every embedding $E\\to\\overline{\\mathbf Q}_\\ell$, the pointwise coefficient maps are ring maps, compose as specified, and their internal extension-of-scalars functors are exact [lem-weil-pbc-condensed-flat-coefficient-calculus]. The completed integral scalar presentation has a unique ordinary and derived counit-normalized comparison [def-pur-operation-scalar-transport]. For the existing realization charts [lem-weil-pbc-condensed-e-realization], the internal coefficient map gives a unique map of reconstructed section rings with its specified section functions, and its integral coefficient square commutes. Section encodings are derived equivalences; the uniquely identity-on-sections restriction comparison has an invertible scalar-adjunction mate [def-weil-pbc-continuous-coefficient-module-encoding]. Descending the commuting tensor square through these equivalences defines the lattice scalar comparison. These are the original setup declarations, with unchanged mathematical content, separated from the simultaneous existence and coherence assertion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Strict-tower reconstruction and the integral/coefficient/section-encoding setup in the original realization node proof Steps 1--4 and 7--12; Bhatt--Scholze 6.7.2, 6.7.6--6.7.17 motivate the reconstruction and coefficient calculus, and Stacks 00YV and 06YY underlie section encoding and derived equivalences. This package of actual definitions and inherited auxiliary obligations is agent-formulated. It does not assert the existence of an IntegralModel or a simultaneous ComparisonFamily."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-compactifications-refinements",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-condensed-e-realization",
+  "def-weil-pbc-condensed-e-module-category",
+  "prop-weil-pbc-qbar-condensed-two-colimit",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pur-condensed-compact-support-projection",
+  "def-pur-semilinear-compact-support-coefficient-transport",
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-pur-operation-scalar-transport"
+ ],
+ "proof": [
+  {
+   "text": "Define the strict reduction/support tower, its actual derived-limit composite, the IntegralModel record, and its full-subcategory restriction. The record includes preservation, additivity, linearity, triangulation, evaluation and normalization data; defining the record asserts no existence. Whiskering the coefficient-model counit gives limitPresentation and alpha. Apply scalar localization to the additive linear restriction.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "def-pur-completed-coefficient-presentation-transport",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-dimensional p-adic coefficient embeddings are continuous by continuity of linear maps. Their pointwise maps define the continuous coefficient ring maps and the finite-valued algebraic-closure maps; coefficientMap transports their ring structure to each scheme. A coefficient field is continuously isomorphic to its image under any Q_l-algebra embedding into the algebraic closure: continuity in both directions follows from finite-dimensional Q_l-linearity. For a finite extension E to F, embed F into the algebraic closure using the algebraically closed lifting theorem, and restrict this embedding along E to F. Their images are finite intermediate fields with the first contained in the second. The specified coefficient map is the composite of the first image isomorphism, this subfield inclusion, and the inverse of the second image isomorphism. Apply the existing finite intermediate-field scalar flatness theorem. For an embedding E into the algebraic closure, factor the specified coefficient map through the same image isomorphism followed by the subfield-to-algebraic-closure map; apply its existing scalar flatness theorem. Scalar extension across an isomorphism is exact, and the scalar-composition isomorphisms give exactness of both composites.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sfb-subfield-flat",
+    "lem-sfb-qlbar-flat",
+    "def-pur-condensed-compact-support-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare integralCompletedScalarMap with completedCoefficientMap using their uniquely prescribed residue maps. Both ordinary scalar functors have the recorded sheafified change-of-rings objects and morphisms. Their object equalities therefore give a natural isomorphism that sends every pure tensor to the same tensor. The sheafification Hom equivalence and the ordinary tensor Hom extensionality theorem prove uniqueness. Transport exactness through that ordinary isomorphism. Compose its exact derived isomorphism with the inverse of completedTensorModel; completedTensorModel_counit and mapDerivedCategoryNatIso_fac give precisely the recorded universal-counit equation. This same counit is invertible on every complex, so localization extensionality and cancellation give uniqueness of the derived comparison. Proof irrelevance yields uniqueness of OperationScalarTransport. Retain scalarPresentation, integralScalar and the reduction coefficient comparison unchanged.",
+   "uses": [
+    "lem-pur-operation-scalar-transport-normalization",
+    "def-pur-operation-scalar-transport",
+    "def-pur-completed-coefficient-presentation-transport",
+    "def-pur-semilinear-compact-support-coefficient-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the reconstructed section-ring map from the actual internal coefficient map, using sectionwise extensionality for uniqueness. The normalized integral scalar theorem identifies the completed map pointwise, by finite residue comparison and injectivity of the valuation-ring inverse-limit presentation. The normalized section scalar theorem identifies the reconstructed field map pointwise, by the adjunction on profinite tests. After cancellation of the integral and section chart inverses, their two formulas and the inclusion normalizations prove realizedCoefficient_square.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-pur-normalized-realization-integral-scalar",
+    "lem-pur-normalized-realization-section-scalar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive section-module equivalence and its inverse induce equivalences on derived categories by localization of their ordinary unit and counit. Identify sectionFieldMap with sectionRingMap using its section normalization. Conjugating this map by the two section charts gives a strictly commuting ring square. In the two scalar-restriction composites this square identifies the scalar actions, so the identity on sections is linear and defines a natural isomorphism. All its components act identically on sections, which also proves uniqueness by sectionwise extensionality. Exact localization gives encodingRestriction. The inverse-mate theorem for equivalences makes encodingScalarMap invertible. Cancel the fully faithful derived encoding in the commuting tensor square to construct latticeScalar.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-pur-normalized-section-encoding-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-pur-condensed-compact-support-projection",
+  "def-pur-operation-scalar-transport",
+  "def-pur-semilinear-compact-support-coefficient-transport",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-normalized-realization-integral-scalar",
+  "lem-pur-normalized-realization-section-scalar",
+  "lem-pur-normalized-section-encoding-restriction",
+  "lem-pur-operation-scalar-transport-normalization",
+  "lem-sfb-qlbar-flat",
+  "lem-sfb-subfield-flat",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-pbc-condensed-e-realization",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The scalar-model comparison is constructed from the published ordinary object and morphism equations; its derived existence and uniqueness use completedTensorModel and its counit theorem (Stacks 03EK, 06YY). The section-encoding restriction comparison is the identity on sections and uses the general normalizedEncodingRestriction theorem. B2 (2026-10-27) proves the two flatness obligations by transporting the existing finite intermediate-field scalar flatness theorems across continuous field-image isomorphisms. The algebraically closed embedding is supplied by Mathlib IsAlgClosed.lift (Stacks 09GU). F3 (2026-10-27) proves realizedCoefficient_square: finite constant-section normalization and the valuation-ring positive-residue limit give the integral pointwise map; adjunction on profinite tests gives the field section map. The original inclusions and charts are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct the compact support tower from derived coefficient reduction and exact section encoding",
+   "results": "8 hits about compactly supported functions and derivatives; no derived coefficient setup.",
+   "date": "2026-10-26",
+   "verdict": "No match; retain the existing project setup."
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedRing.sectionRingMap",
+   "results": "0 hits; unknown identifier in Mathlib.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing project declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRingMap|encodingDerived_isEquivalence|OperationScalarTransport",
+   "results": "Remote Mathlib grep: 0 hits. Local project search and the opened item already provide these declarations.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib replacement; move the existing declarations unchanged."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCondensedRealization",
+  "date": "2026-10-26",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Setup for sk-thm-purity-transport Steps 2--3: strict tower reconstruction data and the specified coefficient/encoding maps, split from the original realization module for compile time.",
+   "via": [
+    "lem-pur-compact-support-condensed-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportCondensedRealizationSetup",
+  "file": "lean/Sheaf/Paper/CompactSupportCondensedRealizationSetup.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.IntegralModel",
+  "declarations": [
+   "WeilConjectures.CompactSupportCondensedRealization.strictTower",
+   "WeilConjectures.CompactSupportCondensedRealization.rawSupport",
+   "WeilConjectures.CompactSupportCondensedRealization.IntegralModel",
+   "WeilConjectures.CompactSupportCondensedRealization.integralSupport",
+   "WeilConjectures.CompactSupportCondensedRealization.reconstructedSystem",
+   "WeilConjectures.CompactSupportCondensedRealization.limitPresentation",
+   "WeilConjectures.CompactSupportCondensedRealization.alpha",
+   "WeilConjectures.CompactSupportCondensedRealization.coefficientEmbedding_continuous",
+   "WeilConjectures.CompactSupportCondensedRealization.fieldRingMap",
+   "WeilConjectures.CompactSupportCondensedRealization.fieldMap",
+   "WeilConjectures.CompactSupportCondensedRealization.fieldMap_isMonHom",
+   "WeilConjectures.CompactSupportCondensedRealization.fieldExtension_flat",
+   "WeilConjectures.CompactSupportCondensedRealization.omegaEmbedding_continuous",
+   "WeilConjectures.CompactSupportCondensedRealization.omegaEmbedding_finiteValued",
+   "WeilConjectures.CompactSupportCondensedRealization.omegaRingMap",
+   "WeilConjectures.CompactSupportCondensedRealization.omegaMap",
+   "WeilConjectures.CompactSupportCondensedRealization.omegaMap_isMonHom",
+   "WeilConjectures.CompactSupportCondensedRealization.omegaExtension_flat",
+   "WeilConjectures.CompactSupportCondensedRealization.fieldMap_id",
+   "WeilConjectures.CompactSupportCondensedRealization.fieldMap_comp",
+   "WeilConjectures.CompactSupportCondensedRealization.omegaMap_comp",
+   "WeilConjectures.CompactSupportCondensedRealization.integralSupport_additive",
+   "WeilConjectures.CompactSupportCondensedRealization.integralSupport_linear",
+   "WeilConjectures.CompactSupportCondensedRealization.rationalSupport",
+   "WeilConjectures.CompactSupportCondensedRealization.base_noetherian",
+   "WeilConjectures.CompactSupportCondensedRealization.base_dimension",
+   "WeilConjectures.CompactSupportCondensedRealization.base_primeUnit",
+   "WeilConjectures.CompactSupportCondensedRealization.RealizationAt",
+   "WeilConjectures.CompactSupportCondensedRealization.scalarModelTransport_subsingleton",
+   "WeilConjectures.CompactSupportCondensedRealization.scalarModelTransport_nonempty",
+   "WeilConjectures.CompactSupportCondensedRealization.scalarModelTransport",
+   "WeilConjectures.CompactSupportCondensedRealization.scalarPresentation",
+   "WeilConjectures.CompactSupportCondensedRealization.integralScalar",
+   "WeilConjectures.CompactSupportCondensedRealization.integralReduction",
+   "WeilConjectures.CompactSupportCondensedRealization.pasteReductionComparison",
+   "WeilConjectures.CompactSupportCondensedRealization.integralReductionScalar",
+   "WeilConjectures.CompactSupportCondensedRealization.IsIntegralScalarSquare",
+   "WeilConjectures.CompactSupportCondensedRealization.sectionFieldMap_existsUnique",
+   "WeilConjectures.CompactSupportCondensedRealization.sectionFieldMap",
+   "WeilConjectures.CompactSupportCondensedRealization.realizedFieldMap",
+   "WeilConjectures.CompactSupportCondensedRealization.realizedCoefficient_square",
+   "WeilConjectures.CompactSupportCondensedRealization.encodingDerived",
+   "WeilConjectures.CompactSupportCondensedRealization.encodingDerived_isEquivalence",
+   "WeilConjectures.CompactSupportCondensedRealization.encodingRestriction_existsUnique",
+   "WeilConjectures.CompactSupportCondensedRealization.encodingRestriction",
+   "WeilConjectures.CompactSupportCondensedRealization.encodingScalarMap",
+   "WeilConjectures.CompactSupportCondensedRealization.encodingScalarMap_isIso",
+   "WeilConjectures.CompactSupportCondensedRealization.latticeScalar"
+  ],
+  "statement": "structure IntegralModel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (R : ∀ W : Scheme.{u}, CoefficientDerivedSystemCalculus.{u, u} l E W)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a8b2f",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T021332-L-2758276",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T112339-L-1573736",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

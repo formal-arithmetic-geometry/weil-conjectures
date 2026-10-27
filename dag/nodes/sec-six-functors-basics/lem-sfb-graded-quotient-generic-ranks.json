@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-graded-quotient-generic-ranks",
+ "kind": "statement",
+ "title": "Simultaneous generic ranks after every prime quotient of a graded module",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Let $C=\\bigoplus_{d\\geq0}C_d$ be a commutative graded $A$-algebra with $C_0=A$ and $C_dC_e\\subseteq C_{d+e}$, of finite type as an ungraded $A$-algebra [def-weil-pbc-finite-type-algebra]. Let $M=\\bigoplus_{d\\geq0}M_d$ be a graded $C$-module, so $C_dM_e\\subseteq M_{d+e}$, finitely generated over $C$ and with every $M_d$ finitely generated over $A$ [def-weil-finitely-generated-module]. For every prime ideal $I\\subset A$, put $R=A/I$, $D=C\\otimes_A R$, and $N=M\\otimes_A R$. There is a grading-preserving $R$-linear isomorphism $N\\cong\\bigoplus_d N_d$ with $N_d=M_d\\otimes_A R$. There exist a nonzero $a\\in R$ and a function $r:\\mathbf N\\to\\mathbf N$ such that $N_a$ is free over $R_a$, possibly of infinite rank, and every $(N_d)_a$ is a direct summand of a finite free $R_a$-module, hence finite projective [def-weil-pbc-projective-module]. Here the ring and module localizations are those of [def-weil-ring-localization-away, def-weil-pbc-module-localization-away]. For every $d$ and every prime $\\mathfrak q\\in\\operatorname{Spec}R_a$ [def-weil-affine-spectrum],\n$$\\dim_{\\kappa(\\mathfrak q)}((N_d)_a\\otimes_{R_a}\\kappa(\\mathfrak q))=r(d).$$\nHere $\\kappa(\\mathfrak q)=(R_a)_{\\mathfrak q}/\\mathfrak q(R_a)_{\\mathfrak q}$ is its residue field. If $\\mathfrak p\\subset A$ contains $I$ and its image does not contain $a$, the corresponding residue fields are canonically identified, and\n$$M_d\\otimes_A\\kappa(\\mathfrak p)\\ \\cong\\ (N_d)_a\\otimes_{R_a}\\kappa(\\mathfrak q).$$\nConsequently the entire function $d\\mapsto\\dim_{\\kappa(\\mathfrak p)}(M_d\\otimes_A\\kappa(\\mathfrak p))$ is the same function $r$ on that one principal open of $V(I)$, simultaneously for every degree.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051R, lemma-generic-flatness-Noetherian, and Tag 00NX, lemma-finite-projective, clauses (3) and (8); graded direct-summand and quotient/localization fibre adaptation of the item proof steps 4--6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Fix a prime $I\\subset A$. Then $R=A/I$ is a nonzero domain: $xy\\in I$ forces $x\\in I$ or $y\\in I$. It is Noetherian, since the inverse image of an ideal $J\\subset R$ is a finitely generated ideal of $A$, and the images of those generators generate $J$. A finite algebra-generating list $c_i$ for $C$ gives the list $c_i\\otimes1$ for $D$; a finite $C$-generating list $m_j$ for $M$ gives the $D$-generators $m_j\\otimes1$ for $N$. Likewise each $N_d$ is finite over $R$. The mutually inverse maps\n$$N\\longrightarrow\\bigoplus_d(M_d\\otimes_A R),\\quad m\\otimes t\\longmapsto\\sum_d m_d\\otimes t,$$\nand $(m_d\\otimes t)\\longmapsto m_d\\otimes t$ on each summand are well defined by balanced bilinearity. The sums have finite support because $m=\\sum_d m_d$ does. Their composites are identities on pure tensors. Multiplication is degree-additive because it is so before tensoring; the same construction for $C$ grades $D$. Thus this is precisely the claimed grading of $N$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051R, lemma-generic-flatness-Noetherian, hypotheses; elementary quotient and graded base-change preparation"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-noetherian-algebra-module-generic-freeness] with base $R$, algebra $D$, and module $N$. Step 1 verifies all four hypotheses: $R$ is Noetherian and a domain, $D$ is a finite-type $R$-algebra, and $N$ is finite over $D$. We obtain one $a\\ne0$ with $F=N_a$ free over $B=R_a$, with no finiteness requirement on its basis. Fix this $a$ for the rest of the proof; it will serve every degree.",
+   "uses": [
+    "lem-pur-noetherian-algebra-module-generic-freeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051R, lemma-generic-flatness-Noetherian, conclusion"
+   }
+  },
+  {
+   "text": "Write $P_d=(N_d)_a$. The degree inclusion and projection localize to $i_d:P_d\\to F$ and $p_d:F\\to P_d$, by $x/a^e\\mapsto i_d(x)/a^e$ and $y/a^e\\mapsto p_d(y)/a^e$. The fraction equivalence relation proves these formulas well defined and gives $p_di_d=1$. Finite generators of $N_d$ localize to finite generators of $P_d$. Choose a basis $(e_j)_{j\\in J}$ of $F$. The images under $i_d$ of those finitely many generators involve only finitely many basis elements; let their union of supports be $T_d\\subset J$. Thus $i_d$ factors through the finite free submodule $F_{T_d}=\\bigoplus_{j\\in T_d}Be_j$, and restriction of $p_d$ is a retraction. Explicitly $F_{T_d}=i_d(P_d)\\oplus\\ker(p_d|_{F_{T_d}})$, since $z=i_dp_d(z)+(z-i_dp_d(z))$ and the intersection is zero. Hence $P_d$ is a direct summand of a finite free module and is finite projective by [def-weil-pbc-projective-module]. This uses no further localization and no basis compatible with the grading.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, clauses (2),(3); explicit finite-support retraction from Tag 051R freeness"
+   }
+  },
+  {
+   "text": "For each $d$, apply [lem-weil-pbc-finite-projective-rank-locally-constant] over $B$ to the finite projective $P_d$ from step 3. Every $(P_d)_{\\mathfrak q}$ is finite free over $B_{\\mathfrak q}$ and $\\rho_d(\\mathfrak q)=\\operatorname{rank}_{B_{\\mathfrak q}}(P_d)_{\\mathfrak q}$ is locally constant on $\\operatorname{Spec}B$. This is also the fibre dimension: the maps $(x/s)\\otimes u\\mapsto x\\otimes s^{-1}u$ and $x\\otimes u\\mapsto(x/1)\\otimes u$ identify $(P_d)_{\\mathfrak q}\\otimes_{B_{\\mathfrak q}}\\kappa(\\mathfrak q)$ with $P_d\\otimes_B\\kappa(\\mathfrak q)$, and the tensor images of a finite free basis form a basis over the residue field.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-rank-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, clause (8); fibre dimension obtained from a localized free basis"
+   }
+  },
+  {
+   "text": "Since $R$ is a domain and $a\\ne0$, $B=R_a$ is a nonzero domain: equality of fractions is cancellation after multiplication by a power of $a$. Its zero ideal $\\eta=(0)$ is prime. For any $\\mathfrak q\\in\\operatorname{Spec}B$, local constancy supplies an open neighbourhood on which $\\rho_d$ equals $\\rho_d(\\mathfrak q)$. A basic open $D(b)$ containing $\\mathfrak q$ lies in that neighbourhood. Here $b\\notin\\mathfrak q$ implies $b\\ne0$, so $\\eta\\in D(b)$. Therefore $\\rho_d(\\mathfrak q)=\\rho_d(\\eta)$. Set $r(d)=\\rho_d(\\eta)\\in\\mathbf N$. Step 4 now gives the required fibre dimension $r(d)$ at every prime, for each $d$, all over the same $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, clause (8); elementary constancy on the spectrum of a domain"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\supset I$ with $a\\notin\\overline{\\mathfrak p}=\\mathfrak p/I$. Its corresponding prime in $B$ is $\\mathfrak q=\\{x/a^e:x\\in\\overline{\\mathfrak p}\\}$. This is well defined because $\\overline{\\mathfrak p}$ is prime and $a\\notin\\overline{\\mathfrak p}$; its contraction is $\\overline{\\mathfrak p}$. Conversely any prime of $B$ is of this form, since $a$ is a unit and $x/a^e$ belongs to that prime exactly when $x/1$ does. The map\n$$B_{\\mathfrak q}/\\mathfrak q B_{\\mathfrak q}\\longrightarrow\\operatorname{Frac}(A/\\mathfrak p),\\qquad (x/a^e)/(y/a^f)\\longmapsto \\overline{x}\\,\\overline{a}^{f}/(\\overline{a}^{e}\\overline{y})$$\nis an isomorphism: the denominator $\\overline y$ is nonzero; all fractions of $A/\\mathfrak p$ occur using $e=f=0$; and a fraction maps to zero exactly when its numerator lies in $\\overline{\\mathfrak p}$, exactly the ideal being quotiented. The identical fraction argument identifies $A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ with $\\operatorname{Frac}(A/\\mathfrak p)$. Thus the residue fields are canonically identified compatibly with the maps from $A,R,B$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary prime and residue-field fraction calculation for the quotient/localization comparison in the item statement"
+   }
+  },
+  {
+   "text": "Use the field identification in step 6 and write it as $k=\\kappa(\\mathfrak p)=\\kappa(\\mathfrak q)$. For every degree the map\n$$P_d\\otimes_B k\\longrightarrow M_d\\otimes_A k,\\qquad ((m\\otimes t)/a^e)\\otimes u\\longmapsto m\\otimes (t a^{-e}u)$$\nis well defined: $I$ acts by zero on $k$, $a$ acts invertibly, and the balanced tensor relations and localization fraction relations hold on the right. Its inverse is $m\\otimes v\\mapsto((m\\otimes1)/1)\\otimes v$. The composites are identities, moving $t$ and $a^{-e}$ across the tensor sign by $B$-balancing. This proves the claimed fibre isomorphism in the opposite direction as well. Step 5 consequently identifies every original degree-$d$ fibre dimension with $r(d)$. The conditions $\\mathfrak p\\supset I$ and $a\\notin\\mathfrak p/I$ describe the one principal open $V(I)\\cap D(b)$ for any lift $b\\in A$ of $a$, completing simultaneous constancy.",
+   "uses": [
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary balanced-tensor calculation for the quotient/localization fibre comparison in the item statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "lem-pur-noetherian-algebra-module-generic-freeness",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-finite-projective-rank-locally-constant",
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051R, lemma-generic-flatness-Noetherian; Tag 00NX, lemma-finite-projective, clauses (2),(3),(8); explicit graded and fibre adaptation by O2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian domain a finite graded module with finite homogeneous pieces has one nonzero localization on which all pieces are finite projective of constant fibre rank simultaneously",
+   "results": "{\"t\": \"2026-10-22T07:12:51Z\", \"tool\": \"leanfinder\", \"query\": \"Over a Noetherian domain a finite graded module with finite homogeneous pieces has one nonzero localization on which all pieces are finite projective of constant fibre rank simultaneously\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.finiteType\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"Module.projective_of_localization_maximal'\", \"HomogeneousLocalization.deg\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"Module.Finite.of_isLocalized_maximal\", \"HomogeneousLocalization.Away.mk_surjective\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\"], \"digest\": \"cdc51030d001d91a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localization finite type and individual finite-projective rank lemmas do not produce one generic localization controlling every degree after each prime quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a Noetherian integral domain and a finite graded module admit a common generic localization of constant finite projective ranks in all degrees",
+   "results": "{\"t\": \"2026-10-22T07:13:47Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebra over a Noetherian integral domain and a finite graded module admit a common generic localization of constant finite projective ranks in all degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.finiteType\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"Algebra.FiniteType.of_span_eq_top_source\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.mk_surjective\", \"Algebra.EssFiniteType.cond\"], \"digest\": \"2b06fea0cf1b6a73\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localization finite type and individual finite-projective rank lemmas do not produce one generic localization controlling every degree after each prime quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous generic constancy of every homogeneous fibre dimension of a finite graded module over a Noetherian domain",
+   "results": "{\"t\": \"2026-10-22T07:13:37Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneous generic constancy of every homogeneous fibre dimension of a finite graded module over a Noetherian domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousSubmodule.ext_iff\", \"HomogeneousSubmodule.ext\", \"HomogeneousSubmodule.is_homogeneous'\", \"HomogeneousSubmodule.ext'\", \"Ideal.isHomogeneous_iff_forall_subset\", \"HomogeneousSubmodule.mk.injEq\", \"HomogeneousSubmodule.isHomogeneous\", \"HomogeneousSubmodule.mk.sizeOf_spec\"], \"digest\": \"e38a755da2d80f71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localization finite type and individual finite-projective rank lemmas do not produce one generic localization controlling every degree after each prime quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rankAtStalk, Module.Projective",
+   "results": "{\"t\": \"2026-10-22T07:13:02Z\", \"tool\": \"loogle\", \"query\": \"Module.rankAtStalk, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.Grassmannian.mk\"], \"digest\": \"83d59a237dc09253\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localization finite type and individual finite-projective rank lemmas do not produce one generic localization controlling every degree after each prime quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|exists).*free.*(graded|localizedModule)|(rankAtStalk.*constant)",
+   "results": "{\"t\": \"2026-10-22T07:13:01Z\", \"tool\": \"grep\", \"query\": \"(generic|exists).*free.*(graded|localizedModule)|(rankAtStalk.*constant)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\"], \"digest\": \"108f1eaf445b717f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: homogeneous localization finite type and individual finite-projective rank lemmas do not produce one generic localization controlling every degree after each prime quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "(generic|exists).*free.*(graded|localizedModule)|rankAtStalk.*constant",
+   "results": "{\"t\": \"2026-10-23T09:30:56Z\", \"tool\": \"grep\", \"query\": \"(generic|exists).*free.*(graded|localizedModule)|rankAtStalk.*constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"Mathlib/RingTheory/Flat/Rank.lean\"], \"digest\": \"108f1eaf445b717f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-presentation generic freeness, locally constant rank, and homogeneous localization results do not assert one common generic-free open for all graded pieces after a prime quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous generic constancy of all homogeneous fibre dimensions of a finite graded module over a Noetherian domain",
+   "results": "{\"t\": \"2026-10-23T09:30:56Z\", \"tool\": \"leansearch\", \"query\": \"Simultaneous generic constancy of all homogeneous fibre dimensions of a finite graded module over a Noetherian domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousSubmodule.ext\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"HomogeneousSubmodule.ext_iff\", \"HomogeneousSubmodule.ext'\", \"HomogeneousSubmodule.isHomogeneous\", \"HomogeneousSubmodule.is_homogeneous'\", \"Ideal.isHomogeneous_iff_forall_subset\"], \"digest\": \"e7f48f6c343794f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-presentation generic freeness, locally constant rank, and homogeneous localization results do not assert one common generic-free open for all graded pieces after a prime quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rankAtStalk, Module.Projective",
+   "results": "{\"t\": \"2026-10-23T09:30:56Z\", \"tool\": \"loogle\", \"query\": \"Module.rankAtStalk, Module.Projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.Grassmannian.mk\"], \"digest\": \"83d59a237dc09253\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-presentation generic freeness, locally constant rank, and homogeneous localization results do not assert one common generic-free open for all graded pieces after a prime quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite graded module over a finite type algebra over a Noetherian domain one nonzero localization makes the whole module free and every finite homogeneous piece projective of constant fibre rank",
+   "results": "{\"t\": \"2026-10-23T09:31:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite graded module over a finite type algebra over a Noetherian domain one nonzero localization makes the whole module free and every finite homogeneous piece projective of constant fibre rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.finiteType\", \"Module.basicOpen_subset_freeLocus_iff\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"Module.projective_of_localization_maximal'\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\"], \"digest\": \"1f02ae12d0e55e76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-presentation generic freeness, locally constant rank, and homogeneous localization results do not assert one common generic-free open for all graded pieces after a prime quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graded algebra module over an integral base admits one generic principal open where all finite degree pieces have constant residue field dimension",
+   "results": "{\"t\": \"2026-10-23T09:34:13Z\", \"tool\": \"leanfinder\", \"query\": \"A graded algebra module over an integral base admits one generic principal open where all finite degree pieces have constant residue field dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.finiteType\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"HomogeneousLocalization.instNontrivialAtPrime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\"], \"digest\": \"21a58cb2fcb55c36\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-presentation generic freeness, locally constant rank, and homogeneous localization results do not assert one common generic-free open for all graded pieces after a prime quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graded-fibre-hilbert-functions-finite",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: A simultaneous graded tail rank condition defines an immersion; Bourbaki 221 Lemma 3.5: finite flat stratification used before proving stationarity of the open upper-rank loci; item proof steps 4--5 and fibre comparison of step 6: prime quotient, one generic-free localization, finite-support retractions and simultaneous ranks",
+   "via": [
+    "lem-sfb-graded-fibre-hilbert-functions-finite",
+    "lem-sfb-graded-tail-rank-stratum",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-graded-quotient-generic-ranks",
+  "worker": "stage1",
+  "summary": "Reused the existing Noetherian algebra-module generic-freeness theorem and finite-projective locally constant rank leaf. Wrote the quotient grading, finite-support finite-free retractions, generic-point constancy, prime/residue-field comparison and both tensor maps explicitly. Statement unchanged; no new nodes.",
+  "blueprint": "Nearest blueprint ancestor is null (blueprint_refs.py ancestor confirms the inherited null). Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images proof (3), algebraic prerequisite through the parent graded-fibre Hilbert-function proof, steps 4--6: one generic-free localization and simultaneous ranks. The current latest direct-images proof was read; its compactification route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-noetherian-algebra-module-generic-freeness",
+    "why": "Tag 051R is a generic commutative algebra tool used on the finite-type pair D,N, not a replacement for a unit step; no node of this unit states algebra-module generic freeness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-noetherian-algebra-module-generic-freeness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-5c18868cd",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-5c18868cd (reviewer sub-agent of L); spot-checked: Pass with no fixes. The delivery is one commit containing only the item and the O2 report, with no new nodes. The statement keeps the form that parent lem-sfb-graded-fibre-hilbert-functions-finite step 2 uses: one a, one r, fibre isomorphisms on V(I)∩D(b). It is not a re-split note, and nothing cites SGA. I read the sources in algebra.tex: 051R at :28458 (hypotheses Noetherian, domain, finite type, finite module) and 00NX at :19027 (clauses 2, 3, 8, used correctly). Every cited node's statement says what its step takes from it. Step-by-step checks: step 1 covers the quotient domain, Noetherianity and the graded base change N≅⊕M_d⊗R. Step 2 applies 051R to (R,D,N) with all hypotheses verified. Step 3 makes P_d a summand of a finite free module through a finite-support retraction, which is correct even with an infinite basis. Step 4 takes the locally constant rank and the rank = fibre-dimension comparison. Step 5 gets constancy from the generic point of the domain R_a, since every D(b)∋q has b≠0. Step 6 gives the prime correspondence and residue fields Frac(A/p). Step 7 gives explicit inverse tensor maps; the only facts it needs are that I kills k and a is a unit in k. Small cases checked: Z[t]/(2t) over Z at I=0 (a=2, r=(1,0,0,…)) and at I=(2) (r≡1), M=0, A=0, and C=R[t]. No duplicate exists: searches for 051R and generic free found only ungraded or flatness nodes. I accept lem-pur-noetherian-algebra-module-generic-freeness as a cross-unit tool."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedQuotientGenericRanks",
+  "declaration": "Module.graded_quotient_generic_ranks",
+  "file": "lean/Sheaf/RingTheory/GradedQuotientGenericRanks.lean",
+  "statement": "theorem graded_quotient_generic_ranks {A : Type u} {C : Type v} {M : Type w} [CommRing A] [IsNoetherianRing A] [CommRing C] [Algebra A C] [AddCommGroup M] [Module C M] [Module A M] [IsScalarTower A C M] [Module.Finite C M] (𝒞 : ℕ → Submodule A C) (ℳ : ℕ → Submodule A M) [GradedAlgebra 𝒞] [DirectSum.Decomposition ℳ] [SetLike.GradedSMul 𝒞 ℳ] (hfiniteType : (algebraMap A C).FiniteType) (hA : Function.Injective (algebraMap A C)) (hzero : 𝒞 0 = LinearMap.range (Algebra.linearMap A C)) [∀ d : ℕ, Module.Finite A (ℳ d)] (I : Ideal A) [I.IsPrime] : (∃ e : ((A ⧸ I) ⊗[A] M) ≃ₗ[A ⧸ I] (⨁ d : ℕ, (A ⧸ I) ⊗[A] (ℳ d)), ∀ (d : ℕ) (t : A ⧸ I) (m : ℳ d), e.symm (DirectSum.lof (A ⧸ I) ℕ (fun j ↦ (A ⧸ I) ⊗[A] (ℳ j)) d (t ⊗ₜ[A] m)) = t ⊗ₜ[A] (m : M)) ∧ ∃ a : A ⧸ I, a ≠ 0 ∧ ∃ r : ℕ → ℕ, Module.Free (Localization.Away a) (LocalizedModule.Away a ((A ⧸ I) ⊗[A] M)) ∧ (∀ d : ℕ, (∃ n : ℕ, ∃ i : LocalizedModule.Away a ((A ⧸ I) ⊗[A] (ℳ d)) →ₗ[Localization.Away a] (Fin n → Localization.Away a), ∃ p : (Fin n → Localization.Away a) →ₗ[Localization.Away a] LocalizedModule.Away a ((A ⧸ I) ⊗[A] (ℳ d)), p.comp i = LinearMap.id) ∧ Module.Finite (Localization.Away a) (LocalizedModule.Away a ((A ⧸ I) ⊗[A] (ℳ d))) ∧ Module.Projective (Localization.Away a) (LocalizedModule.Away a ((A ⧸ I) ⊗[A] (ℳ d))) ∧ ∀ q : PrimeSpectrum (Localization.Away a), Module.finrank q.asIdeal.ResidueField (q.asIdeal.ResidueField ⊗[Localization.Away a] LocalizedModule.Away a ((A ⧸ I) ⊗[A] (ℳ d))) = r d) ∧ ∀ p : PrimeSpectrum A, I ≤ p.asIdeal → a ∉ Ideal.map (Ideal.Quotient.mk I) p.asIdeal → ∃ q : PrimeSpectrum (Localization.Away a), ∃ hq : p.asIdeal = Ideal.comap (algebraMap A (Localization.Away a)) q.asIdeal, ∃ e : p.asIdeal.ResidueField ≃+* q.asIdeal.ResidueField, e.toRingHom = Ideal.ResidueField.map p.asIdeal q.asIdeal (algebraMap A (Localization.Away a)) hq ∧ ∀ d : ℕ, (∃ E : (p.asIdeal.ResidueField ⊗[A] (ℳ d)) ≃+ (q.asIdeal.ResidueField ⊗[Localization.Away a] LocalizedModule.Away a ((A ⧸ I) ⊗[A] (ℳ d))), (∀ (k : p.asIdeal.ResidueField) (x : p.asIdeal.ResidueField ⊗[A] (ℳ d)), E (k • x) = e k • E x) ∧ ∀ (k : p.asIdeal.ResidueField) (m : ℳ d), E (k ⊗ₜ[A] m) = e k ⊗ₜ[Localization.Away a] (LocalizedModule.mkLinearMap (Submonoid.powers a) ((A ⧸ I) ⊗[A] (ℳ d)) ((1 : A ⧸ I) ⊗ₜ[A] m))) ∧ Module.finrank p.asIdeal.ResidueField (p.asIdeal.ResidueField ⊗[A] (ℳ d)) = r d",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f5798584",
+  "group": "NX",
+  "result": "pass",
+  "note": "First S2 delivery; the only node change is the lean record and lean.statement is verbatim. The Lean matches every hypothesis of the node (Noetherian A, graded C with C0=A via hA+hzero, RingHom.FiniteType, GradedSMul module, finite over C, finite pieces, prime I) and every conclusion (grading iso fixed on generators; one a≠0 and one r; N_a free; finite-free retraction, finite and projective; constant finrank over κ(q) for all q; canonical ResidueField.map iso; e-semilinear fibre comparison with pure-tensor formula; constant original fibre dimensions). Matches Stacks 051R. Universes u,v,w independent; generic-freeness proof dep is polymorphic. Edge cases M=0, A=0, Z[x]/(2x) checked. No definitions, sorry-only proof, docstrings carry source and blueprint. No findings, no compile needed."
+ }
+}

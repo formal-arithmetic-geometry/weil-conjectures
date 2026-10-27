@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-dvr-normalized-finite-stage-descent",
+ "kind": "statement",
+ "title": "Finite-stage descent from an algebraic normalized solution",
+ "statement": "Let $A\\to B$ be an injective local map of discrete valuation rings [def-sc-discrete-valuation-ring], with fraction fields $K\\subseteq L$ [def-pc-field-extension]. Suppose that $B\\cong U_{\\mathfrak p}$ as $A$-algebras for a finitely generated $A$-algebra $U$ [def-weil-pbc-finite-type-algebra] and a prime $\\mathfrak p$ [def-weil-pbc-localization-at-prime]. Let $P/K$ be algebraic, let $R_P$ be the integral closure of $A$ in $P$, and let $C_P$ be the integral closure of $B$ in $(L\\otimes_KP)_{\\mathrm{red}}$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]. Assume additionally that $C_P$ is a finitely generated module over $B\\otimes_AR_P$ via the canonical multiplication map [def-weil-finitely-generated-module]. Assume $R_P$ and $C_P$ are Noetherian [def-weil-pbc-noetherian-ring], have finitely many maximal ideals, and for every maximal ideal $q$ of $C_P$ the contraction $n=q\\cap R_P$ is maximal, the localizations $(R_P)_n$ and $(C_P)_q$ are discrete valuation rings, $n(C_P)_q=q(C_P)_q$, and $\\kappa(q)/\\kappa(n)$ is separable [def-weil-pbc-separable-field-extension] and finitely generated as a field extension. Then some finite subextension $K_0/K$ inside $P$ has the following property: writing $R_0$ for the integral closure of $A$ in $K_0$ and $C_0$ for the integral closure of $B$ in $(L\\otimes_KK_0)_{\\mathrm{red}}$, for every maximal ideal $q_0$ of $C_0$, $n_0=q_0\\cap R_0$ is maximal, $(R_0)_{n_0}$ and $(C_0)_{q_0}$ are discrete valuation rings, $n_0(C_0)_{q_0}=q_0(C_0)_{q_0}$, and $\\kappa(q_0)/\\kappa(n_0)$ is separable. Here local means pulling back the maximal ideal to the maximal ideal, finite means finite-dimensional, and reduction means quotienting by all nilpotents. The given algebraic extension $P$ and its local properties are hypotheses, not an asserted existence conclusion.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, last three proof paragraphs: filtered union of finite K_i, stabilization of branches and uniformizers, and descent of separable residue equations."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-finitely-generated-module",
+  "def-sfb-normalized-tensor-multiplication"
+ ],
+ "proof": [
+  {
+   "text": "Index the finite subextensions $F/K$ inside $P$ by inclusion; this is a directed set (use the compositum of two finite extensions). Write $R_F,C_F$ for the normalizations in the statement. Both systems have injective integral transition maps, and $R_P=\\bigcup_FR_F$, $C_P=\\bigcup_FC_F$. Indeed an element of a tensor algebra is a finite sum of pure tensors, and a monic equation has finitely many coefficients, so an integral element and its equation occur at one finite stage. An equality modulo nilpotents is witnessed by one finite power and therefore also occurs at a finite stage. Extension of fields reflects nilpotence, so the maps of the reduced tensor algebras are injective. Each element of a later normalization is still integral over $A$ or $B$, hence over the earlier normalization.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, last three paragraphs; corrected finite-normalization version (see report.md Source error)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dvr-algebraic-normalization-structure], case (a), to every finite $F/K$; apply case (b) to $P/K$, using the given essentially finite type presentation of $B$ and Noetherianity of $R_P$. Thus all normalizations have finitely many maximal ideals, maximal contractions, and the displayed local DVRs; in particular their sets of maximal ideals are finite and nonempty. Apply [lem-sfb-finite-normalization-algebraic-model], using exactly the extra finite-module hypothesis in the corrected statement. Start at its finite field $F_*$ and retain the canonical isomorphism $C_F\\otimes_{R_F}R_P\\cong C_P$ for every later finite stage.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-sfb-finite-normalization-algebraic-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, last three paragraphs; corrected finite-normalization version (see report.md Source error)."
+   }
+  },
+  {
+   "text": "The limit rings have finite spectra: the structure lemma gives finitely many domain factors of dimension one and finitely many maximal ideals. After increasing $F_*$, contraction is bijective on ALL primes, for both $R_F\\subseteq R_P$ and $C_F\\subseteq C_P$. For every pair of distinct limit primes choose an element in their symmetric difference. Put these finitely many elements in a common finite stage by step 1. Their contractions are then distinct and remain distinct at later stages. Lying over [lem-weil-pbc-integral-injective-lying-over] makes contraction surjective as well. Going up [pqf-lem-going-up] shows that its inverse preserves inclusion: lift an inclusion starting at its unique lower prime and use uniqueness of the upper lift. Thus these bijections identify maximal ideals and the primes contained in each maximal ideal. Write $q_F=q\\cap C_F$, $n=q\\cap R_P$, and $n_F=n\\cap R_F$; then $n_F=q_F\\cap R_F$.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "pqf-lem-going-up"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, last three paragraphs; corrected finite-normalization version (see report.md Source error)."
+   }
+  },
+  {
+   "text": "For each of the finitely many maximal ideals $n$ of $R_P$ choose a uniformizer $\\pi_n\\in(R_P)_n$. Express it as $a_n/s_n$ with $a_n,s_n\\in R_P$ and $s_n\\notin n$, and increase the finite stage to contain these numerators and denominators. Then $\\pi_n$ belongs to $(R_F)_{n_F}$ and is a nonunit there. A nonunit in a DVR which generates the maximal ideal after a local embedding into another DVR already generates the source maximal ideal: writing the source maximal ideal as $(t)$, if $\\pi_n=tu$ with $u$ a nonunit then its image lies in the square of the target maximal ideal, a contradiction. Apply this first to $(R_F)_{n_F}\\to(R_P)_n$. For $q$ above $n$, the hypothesis $n(C_P)_q=q(C_P)_q$ says that the same $\\pi_n$ is a uniformizer of $(C_P)_q$. Apply the same argument to $(C_F)_{q_F}\\to(C_P)_q$. Therefore $\\pi_n$ generates both finite-stage maximal ideals, giving $n_F(C_F)_{q_F}=q_F(C_F)_{q_F}$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-dvr-algebraic-normalization-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, last three paragraphs; corrected finite-normalization version (see report.md Source error)."
+   }
+  },
+  {
+   "text": "Fix $q_F$ and its unique lift $q$, and put $n=q\\cap R_P$. Localize the canonical isomorphism of step 2 by $C_F\\setminus q_F$. By the order-preserving spectrum bijection of step 3, the primes surviving in this localization of $C_P$ are exactly those contained in $q$. In particular there is just one maximal ideal, the one induced by $q$; all elements outside it are units. This localization is therefore $(C_P)_q$. Localizing the base by $R_P\\setminus n$ then changes neither side, since these elements already become units. Hence\n$$(C_F)_{q_F}\\otimes_{(R_F)_{n_F}}(R_P)_n\\cong(C_P)_q.$$\nQuotient by $\\pi_n$ and use step 4. The universal properties of the tensor product and quotient give the actual tensor-field isomorphism\n$$\\kappa(q_F)\\otimes_{\\kappa(n_F)}\\kappa(n)\\cong\\kappa(q).$$\nIt is an isomorphism of $\\kappa(n)$-algebras induced by residue maps, not merely equality of composita.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, last three paragraphs; corrected finite-normalization version (see report.md Source error)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-separability-tensor-field-descent] with $k=\\kappa(n_F)$, $k'=\\kappa(n)$ and $F=\\kappa(q_F)$. The tensor product is a field by step 5 and is separable over $k'$ by its identification with the hypothesized separable extension $\\kappa(q)/\\kappa(n)$. Thus $\\kappa(q_F)/\\kappa(n_F)$ is separable. The stage is common to all finitely many limit maximal ideals; by step 3 these exhaust the finite-stage ones. Set $K_0=F$. Step 2 gives the local DVRs and maximal contractions, step 4 the equality of maximal ideals, and this step the remaining residue-separability conclusion.",
+   "uses": [
+    "lem-sfb-separability-tensor-field-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, last three paragraphs; corrected finite-normalization version (see report.md Source error)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-sfb-finite-normalization-algebraic-model",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "pqf-lem-going-up",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sfb-separability-tensor-field-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, final three paragraphs, repaired by finite-algebra model descent; STATEMENT-DISPUTED counterexample in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic normalized base change of an essentially finite type extension of DVRs with Noetherian normalizations and ramification index one and separable residue extensions descends to some finite subextension",
+   "results": "{\"t\": \"2026-10-24T04:06:32Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic normalized base change of an essentially finite type extension of DVRs with Noetherian normalizations and ramification index one and separable residue extensions descends to some finite subextension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.Unramified.finiteType\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Ring.instFiniteNormalClosure_1\"], \"digest\": \"afb2cd5747e3f78e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.Smooth.exists_finiteType descends a smooth algebra to a finite type coefficient subalgebra; it does not descend normalized DVR branches and adic smoothness along fraction-field extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-24T04:06:28Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.Smooth.exists_finiteType descends a smooth algebra to a finite type coefficient subalgebra; it does not descend normalized DVR branches and adic smoothness along fraction-field extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*stage|exists.*[Ff]inite.*[Ss]mooth|[Ss]mooth.*[Cc]olimit|[Ii]ntegral[Cc]losure.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-24T04:06:28Z\", \"tool\": \"grep\", \"query\": \"finite.*stage|exists.*[Ff]inite.*[Ss]mooth|[Ss]mooth.*[Cc]olimit|[Ii]ntegral[Cc]losure.*[Cc]olimit\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\", \"Mathlib/RingTheory/Smooth/NoetherianDescent.lean\"], \"digest\": \"ceb6e0434a413930\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.Smooth.exists_finiteType descends a smooth algebra to a finite type coefficient subalgebra; it does not descend normalized DVR branches and adic smoothness along fraction-field extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend formally smooth local maps on normalized DVRs from an algebraic extension of the base fraction field to a finite subextension using uniformizers and separating transcendence bases",
+   "results": "{\"t\": \"2026-10-24T04:06:28Z\", \"tool\": \"leansearch\", \"query\": \"Descend formally smooth local maps on normalized DVRs from an algebraic extension of the base fraction field to a finite subextension using uniformizers and separating transcendence bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallySmooth\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.of_algebraicIndependent\", \"Algebra.FormallySmooth.casesOn\", \"Algebra.FormallySmooth.of_isLocalization\", \"Algebra.FormallySmooth.of_perfectField\"], \"digest\": \"d78d9b876ed9402d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.Smooth.exists_finiteType descends a smooth algebra to a finite type coefficient subalgebra; it does not descend normalized DVR branches and adic smoothness along fraction-field extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite stage descent of ramification index one and separable residue fields in an algebraic tower of normalizations of a fixed essentially finite type trait",
+   "results": "{\"t\": \"2026-10-24T04:06:33Z\", \"tool\": \"leanfinder\", \"query\": \"Finite stage descent of ramification index one and separable residue fields in an algebraic tower of normalizations of a fixed essentially finite type trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\"], \"digest\": \"b9b3b707acc33f87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.Smooth.exists_finiteType descends a smooth algebra to a finite type coefficient subalgebra; it does not descend normalized DVR branches and adic smoothness along fraction-field extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic normalized base change of essentially finite type DVRs with ramification index one and separable residue fields descends to a finite field subextension",
+   "results": "{\"t\": \"2026-10-24T04:38:18Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic normalized base change of essentially finite type DVRs with ramification index one and separable residue fields descends to a finite field subextension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"RingHom.EssFiniteType.residueFieldMap\"], \"digest\": \"7df6a1a17720571c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the item descends normalization and nonalgebraic residue separability; the hits concern algebraic unramifiedness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-essentially-finite-type-traits",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Finite-stage descent of the solution obtained only after the perfect-residue algebraic preparation.",
+   "via": [
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-normalized-finite-stage-descent",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the arbitrary algebraic-extension descent in the imported item is false, as shown by the explicit purely inseparable defect tower in report.md. Added the finite-module hypothesis for C_P over B tensor R_P, retaining all original conclusions. Split the repaired statement via finite normalization models, finite branch separation, explicit uniformizer descent and a genuine tensor-field identification before separability descent. Two statement-only new lemmas, no Lean or builds. The parent Epp proof must establish the new hypothesis or choose a different finite extension; reported, not silently repaired.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Finite-stage descent of the solution obtained only after the perfect-residue algebraic preparation. The six steps expand the historical final finite-stage descent. The latest blueprint direct-image proof no longer states this supporting algebra lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-injective-lying-over",
+    "why": "Generic integral-ring lying-over tool to lift finite-stage maximal ideals; no result of this unit replaces it."
+   },
+   {
+    "node": "pqf-lem-going-up",
+    "why": "Generic integral-ring going-up theorem to reflect prime inclusions after bijective contraction, ensuring localization removes generic branches as well as closed branches."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-injective-lying-over",
+  "pqf-lem-going-up"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-f05565eaf",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-f05565eaf (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus every cited statement, Stacks 09II (whole proof), 033G, 030U, 030W, 09EQ, and the parent lem-sfb-epp-essentially-finite-type-traits. STATEMENT-DISPUTED is confirmed. Counterexample: A=k[[t]] with k=F_p(c_0,c_1,...), α=(Σc_j t^{pj})^{1/p}, P=∪E((t)) over finite E⊂k^perf. R_P and C_P are DVRs with uniformizer t and residue field k^perf, so every hypothesis holds. Yet at each stage the residue extension contains c_j^{1/p} and is inseparable. Any finite K_0⊂P lies in some E((t)), so by 09EQ no finite K_0 is a solution. The gap sits in 09II's last paragraph itself, not only in the extraction: this P is exactly Stacks' p-base tower. Adding 'C_P finite over B⊗R_P' and keeping every conclusion gives a true statement. Steps 1-6 check: finite-stage data; structure lemma (a)/(b); spectrum bijection via separators, lying-over and going-up; uniformizer descent by the m² argument; a genuine tensor-field iso from localizing the model iso; separability descent. lem-sfb-finite-normalization-algebraic-model is true. Proof: T_P is Noetherian, so C_P is finitely presented and descends (05N9); R_F→R_P is faithfully flat (Dedekind base, torsion-free, integral); C_P is normal, so D_F is normal by 033G; the generic fibre descends, so D_F=C_F. lem-sfb-separability-tensor-field-descent is true (common field Ω, then 030U, injectivity, 030W). Neither node is a duplicate after a DAG-wide scan; neither restates a clause of the item. The tool_uses (lying-over, going-up) are Mathlib leaves; accepted. Cosmetic: the new nodes lack lean_audit, and the report mentions a citations.json that is not in the delivery. MAINTAINER: record the 09II source error in HUMAN.md. Parent lem-sfb-epp-essentially-finite-type-traits step 5 now cites the item without the new hypothesis, and cannot establish it in general: the counterexample is exactly its complete-base perfect-residue tower configuration. The parent must be reopened and re-routed; its statement (Epp) is not refuted, since K_1=L works."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrNormalizedFiniteStageDescent",
+  "declaration": "IsDiscreteValuationRing.exists_normalized_finite_stage",
+  "file": "lean/Sheaf/RingTheory/DvrNormalizedFiniteStageDescent.lean",
+  "statement": "theorem exists_normalized_finite_stage (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (B : Type v) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hinj : Function.Injective (algebraMap A B)) (K : Type w) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type x) [Field L] [Algebra B L] [IsFractionRing B L] [Algebra A L] [Algebra K L] [IsScalarTower A B L] [IsScalarTower A K L] (hfiniteType : ∃ (U : Type (max u v)) (_ : CommRing U) (_ : Algebra A U) (p : Ideal U) (_ : p.IsPrime), RingHom.FiniteType (algebraMap A U) ∧ Nonempty (B ≃ₐ[A] Localization.AtPrime p)) (P : Type y) [Field P] [Algebra K P] [Algebra.IsAlgebraic K P] [Algebra A P] [IsScalarTower A K P] (hfiniteModule : @Module.Finite (B ⊗[A] integralClosure A P) (normalizedUpperClosure B K L P) _ _ (normalizedTensorMultiplication A B K L P).toAlgebra.toModule) [IsNoetherianRing (integralClosure A P)] [IsNoetherianRing (normalizedUpperClosure B K L P)] (hmaxLower : Finite {n : Ideal (integralClosure A P) // n.IsMaximal}) (hmaxUpper : Finite {q : Ideal (normalizedUpperClosure B K L P) // q.IsMaximal}) (hlocal : ∀ (q : Ideal (normalizedUpperClosure B K L P)) [q.IsMaximal], (q.comap (normalizedLowerMap A B K L P)).IsMaximal ∧ IsDiscreteValuationRing (Localization.AtPrime (q.comap (normalizedLowerMap A B K L P))) ∧ (∃ hdom : IsDomain (Localization.AtPrime q), @IsDiscreteValuationRing (Localization.AtPrime q) _ hdom) ∧ Ideal.map ((algebraMap (normalizedUpperClosure B K L P) (Localization.AtPrime q)).comp (normalizedLowerMap A B K L P)) (q.comap (normalizedLowerMap A B K L P)) = Ideal.map (algebraMap (normalizedUpperClosure B K L P) (Localization.AtPrime q)) q ∧ @Algebra.IsSeparableExtension (q.comap (normalizedLowerMap A B K L P)).ResidueField q.ResidueField _ _ (Ideal.ResidueField.map (q.comap (normalizedLowerMap A B K L P)) q (normalizedLowerMap A B K L P) rfl).toAlgebra ∧ @IntermediateField.FG (q.comap (normalizedLowerMap A B K L P)).ResidueField _ q.ResidueField _ (Ideal.ResidueField.map (q.comap (normalizedLowerMap A B K L P)) q (normalizedLowerMap A B K L P) rfl).toAlgebra ⊤) : ∃ K₀ : IntermediateField K P, Module.Finite K K₀ ∧ ∀ (q : Ideal (normalizedUpperClosure B K L K₀)) [q.IsMaximal], (q.comap (normalizedLowerMap A B K L K₀)).IsMaximal ∧ IsDiscreteValuationRing (Localization.AtPrime (q.comap (normalizedLowerMap A B K L K₀))) ∧ (∃ hdom : IsDomain (Localization.AtPrime q), @IsDiscreteValuationRing (Localization.AtPrime q) _ hdom) ∧ Ideal.map ((algebraMap (normalizedUpperClosure B K L K₀) (Localization.AtPrime q)).comp (normalizedLowerMap A B K L K₀)) (q.comap (normalizedLowerMap A B K L K₀)) = Ideal.map (algebraMap (normalizedUpperClosure B K L K₀) (Localization.AtPrime q)) q ∧ @Algebra.IsSeparableExtension (q.comap (normalizedLowerMap A B K L K₀)).ResidueField q.ResidueField _ _ (Ideal.ResidueField.map (q.comap (normalizedLowerMap A B K L K₀)) q (normalizedLowerMap A B K L K₀) rfl).toAlgebra",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a20fe1730"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a20fe1730",
+  "group": "Q120",
+  "result": "fix",
+  "note": "The statement matches the node clause by clause (injective local DVR map, essentially finite type B, algebraic P, genuine multiplication map in the finite-module hypothesis, all local hypotheses, IsSeparableExtension + FG, conclusion with 5 clauses over a finite IntermediateField), and the edge cases are covered. Finding C6/H4: the new def module imported EppEssentiallyFiniteTypeTraits, the module of the theorem lem-sfb-epp-essentially-finite-type-traits, whose proof_deps contain this item, so stage 3 would hit an import cycle. FIX: NormalizedTensorMultiplication now imports only Mathlib and owns normalizedReducedTensor, normalizedUpperClosure, normalizedTensorMultiplication (body unchanged) and normalizedLowerMap (mu composed with includeRight). The item module only renames the helpers it uses. Fixes: the new-node JSON, the item lean-record.json with the verbatim statement, and report.md. nt_compile: both fixed files compiled clean (2.5 s, 4.9 s); a test file showed normalizedUpperClosure = eppUpperClosure by rfl and normalizedLowerMap = eppNormalizationMap. Maintainer: have the Epp module import this def module."
+ }
+}

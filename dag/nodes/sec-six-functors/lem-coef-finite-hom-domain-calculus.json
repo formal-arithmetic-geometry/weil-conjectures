@@ -1,0 +1,437 @@
+{
+ "id": "lem-coef-finite-hom-domain-calculus",
+ "kind": "statement",
+ "title": "Finite coefficient tensor domains and ambient evaluation transpose",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and integers $n\\ge m\\ge1$. Put $A=\\mathcal O_E/(\\varpi_E^n)$, $B=\\mathcal O_E/(\\varpi_E^m)$ with the quotient map [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Use ordinary unbounded derived categories of sheaves of modules over constant coefficient rings on small etale sites [def-weil-pbc-derived-categories]. Write $F_T=-\\otimes_A^LB$ on a scheme $T$, and $H_R(U,V)=R\\mathcal Hom_R(U,V)$ for $R=A,B$ [lem-pur-derived-change-of-rings, def-pur-derived-internal-hom]. The full subcategory $D^b_{ctf}$ consists of complexes with bounded constructible cohomology and Tor amplitude in some finite interval $[a,b]$: $\\mathcal H^i(K\\otimes_R^L W)=0$ for every degree-zero module sheaf $W$ and $i\\notin[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. The scheme $X$ is Noetherian. If $T\\in D^b_{ctf}(X,A)$ has Tor amplitude in $[a,b]$, it admits a flat constructible complex $P$ supported in $[a,b]$ representing it, and $P\\otimes_A B$ is a flat constructible K-flat $B$-complex in the same degrees representing $F_XT$; in particular $F_XT\\in D^b_{ctf}(X,B)$ with Tor amplitude in $[a,b]$. For a morphism $f:Y\\to X$ of separated finite-type $k$-schemes, exact etale inverse image preserves bounded constructibility and this Tor interval, and its canonical comparison $f_B^*F_X\\cong F_Yf_A^*$ is $B$-linear.\n\nOn the ambient derived categories the canonical tensor comparisons $F_X(U\\otimes_A^LV)\\cong F_XU\\otimes_B^LF_XV$, together with the constant-ring unit comparison, make $F_X$ strong symmetric monoidal. They are induced by reassociation on flat-term K-flat models, and agree with successive scalar-extension identifications $(T\\otimes_A^LB)\\otimes_B^LC\\cong T\\otimes_A^LC$ for $C=\\mathcal O_E/(\\varpi_E^r)$, $1\\le r\\le m$, and with the unit identifications when $n=m$.\n\nThere is a natural ambient adjunction $\\operatorname{Hom}(U,H_A(K,M))\\cong\\operatorname{Hom}(U\\otimes_A^LK,M)$, with counit evaluation, and likewise over $B$. Its transpose of reduced evaluation defines a unique map $v_{K,M}:F_XH_A(K,M)\\to H_B(F_XK,F_XM)$, using the preceding tensor comparison; this is the arrow of [def-sf-etale-finite-coefficient-hom-arrow]. For $K,M\\in D^b_{ctf}(X,A)$ both endpoints belong to $D^b_{ctf}(X,B)$. No invertibility assertion about this map is included.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
+  "place": "Proof paragraphs 1; returned proof steps 1, 2; extracted argument preserved verbatim in Q07 report, not a new literature theorem"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-constructible-complexes",
+  "def-kun-tor-amplitude",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-strong-monoidal-functor",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-weil-pbc-normalized-origin-scalar-comparisons",
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The finite coefficient rings and their actual quotient maps are those already fixed by the finite-Hom arrow. A finite-type scheme over the field is locally Noetherian and quasi-compact, hence Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, morphisms.tex lemma-finite-type-noetherian, applied to the structure morphism; finite-ring observation"
+   }
+  },
+  {
+   "text": "The finite coefficient rings and their actual quotient maps are those already fixed by the finite-Hom arrow. A finite-type scheme over the field is locally Noetherian and quasi-compact, hence Noetherian. Apply exists_etaleScalarFlatModel to the bounded derived object and the prescribed Tor interval. Convert exact right tensoring to two-sided flatness by symmetry. Its scalar-extended model has the same support, is constructible and K-flat, and represents the actual reduction. Transport bounded cohomology along the representing isomorphism, using the minimum of the lower and upper bounds to obtain an ordered interval.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-sp-etale-scalar-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Opening proof paragraph; the actual etale scalar maps and their normalization equations"
+   }
+  },
+  {
+   "text": "For $R=A$ or $B$, [prop-weil-pbc-inverse-image-modules-exact] identifies geometric module pullback with exact etale inverse image and identifies $f^{-1}R_X$ with $R_Y$. Exactness gives $\\mathcal H^i(f_R^*T)=f_R^*\\mathcal H^i(T)$ by preservation of kernels and cokernels. These sheaves are constructible by [prop-constructible-pullback] and vanish outside the original cohomological bounds. Pull $P$ of Step 2 back termwise: [lem-weil-pbc-ringed-topos-flat-module-pullback] makes each term flat, and [prop-constructible-pullback] makes it constructible; it is still zero outside $[a,b]$. By [lem-kun-kflat-criteria](1) this bounded flat complex is K-flat. For any degree-zero $R_Y$-module sheaf $W$, its ordinary tensor with $W$ therefore computes its derived tensor with $W$, and has zero terms outside $[a,b]$. This proves preservation of the stated Tor interval, as well as bounded constructibility. In Lean use the already proved etale boundedConstructible_leftDerivedUpperStar and torAmplitudeIn_leftDerivedUpperStar APIs, which package this argument. Convert the two bounded-constructibility presentations using their cohomological definitions and the constructible module-sheaf comparison; preserve the exact same Tor endpoints.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-kun-kflat-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 04JC (sites-modules lemma-flat-pullback-exact), Tag 05VD (sites-modules lemma-pullback-flat), Tag 06YQ; etale-cohomology lemma-pullback-constructible (095G)"
+   }
+  },
+  {
+   "text": "The recorded scalarPullbackIso is chosen from scalarPullbackIso_existsUnique. Its choose_spec supplies exactly the requested representative equation, for every K-flat complex and without boundedness hypotheses. This uses the normalization in [def-pur-etale-scalar-pullback-iso] directly; no additional comparison with termwise pullback is required here.",
+   "uses": [
+    "def-pur-etale-scalar-pullback-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 0G7E; normalized comparison on flat-term K-flat representatives"
+   }
+  },
+  {
+   "text": "View $A_X\\to B_X$ as a morphism of ringed topoi whose underlying geometric morphism is the identity. Applying [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives the natural ambient isomorphism $\\mu_{U,V}:F_X(U\\otimes_A^LV)\\cong F_XU\\otimes_B^LF_XV$. More explicitly choose flat-term K-flat models $P,Q$ for arbitrary $U,V$, using [lem-pc-kflat-resolution]. Their total tensor is again flat-term K-flat by [lem-pur-kflat-total-tensor-model], and their scalar extensions are flat-term K-flat by [lem-pur-kflat-change-of-rings]. Consequently every vertex of this comparison is computed by these same models. By [lem-weil-pbc-pullback-tensor-canonical-shift-unit], applied to this ringed-topos morphism, $\\mu$ is the unique natural transformation whose component at such $P,Q$ is the localization of the cochain comparison $c_{P,Q}$ of [lem-pur-cochain-pullback-tensor-coherence], composed with the computation and representative isomorphisms. That chain comparison sends $(x\\otimes y)\\otimes b$ to $(x\\otimes b)\\otimes(y\\otimes1)$, with inverse $(x\\otimes b)\\otimes(y\\otimes b')\\mapsto(x\\otimes y)\\otimes bb'$. These are local sheafified tensor generators, not a claim about tensor sheaves being computed on sections.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 07A2 and 07A4; lemma-pullback-tensor-product and its total-complex computation"
+   }
+  },
+  {
+   "text": "The coefficient-unit comparison is $F_X(A_X[0])\\cong B_X[0]$, represented by $a\\otimes b\\mapsto ab$; its inverse sends $b$ to $1\\otimes b$. By [lem-sf-ringed-derived-closed-symmetric-monoidal], the ambient associators, unitors and symmetry are the signed total-complex constraints. The chain comparison of [lem-pur-cochain-pullback-tensor-coherence] respects exactly these constraints and the scalar-action unit. Thus the associativity, both unit and symmetry diagrams for $\\mu$ commute after representing each object by a flat-term K-flat complex as in Step 5. The localized maps in these diagrams are the canonical derived maps by the representative normalization of $\\mu$ and of the unit comparison $u$ in [lem-weil-pbc-pullback-tensor-canonical-shift-unit] (which also states both unitor equations). Each derived object has such a representative and the diagrams are natural, so their commutativity on these representatives proves their commutativity on all objects. The same conclusion is stated directly by [lem-sfb-ringed-derived-monoidal-comparisons] for the ringed-topos morphism with identity geometric morphism and ring map $A_X\\to B_X$: its $t_h,e_h$ make $Lh^*=F_X$ symmetric strong monoidal for the derived associators, both unitors and the signed symmetry. This is the strong symmetric monoidal structure claimed in the statement. Taking inverses gives the tensorator and unit orientation of [def-sfb-strong-monoidal-functor].",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-sfb-strong-monoidal-functor",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPT (lemma-symmetric-monoidal-derived) and Tag 07A4, cochain tensor and scalar-action unit constraints"
+   }
+  },
+  {
+   "text": "For $A\\to B\\to C$, [lem-pur-system-scalar-model] supplies the normalized scalar models on this small site, and [lem-pur-system-scalar-coherence] supplies the natural derived composition and identity comparisons with their cochain normalization. On a flat-term K-flat $P$ the first comparison is $((x\\otimes b)\\otimes c)\\mapsto x\\otimes\\bar b c$, and its inverse is $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$. Successive scalar extension is computed on these actual complexes, since [lem-pur-kflat-change-of-rings] applies after each extension. The tensor square is also the composition equation of [lem-pur-cochain-pullback-tensor-coherence] for these identity geometric morphisms. Explicitly both routes send $((x\\otimes y)\\otimes b)\\otimes c$ to $(x\\otimes\\bar b c)\\otimes_C(y\\otimes1)$, and the unit square multiplies the same scalars. Thus the canonical tensor comparison agrees with successive extension. On the derived level this is the monoidality of the composition comparison $c_{f,g}:P_{gf}\\cong P_fP_g$ in [lem-sfb-ringed-derived-monoidal-comparisons] for the identity geometric morphisms with ring maps $A_X\\to B_X\\to C_X$; that comparison is computed by ordinary module pullback composition on flat-term K-flat complexes, hence equals the scalar associator above, normalized on the same models. Its clause on $P_{\\mathrm{id}}\\cong\\mathrm{id}$ gives the case $n=m$. For $n=m$, multiplication $x\\otimes a\\mapsto ax$ gives the identity comparison and the two tensor routes give $(ax)\\otimes y=x\\otimes(ay)$; the coefficient-unit comparison is multiplication as well. The comparisons are natural derived comparisons by the cited normalization theorem, so these checks prove the assertions on the ambient categories, including nonflat quotient towers.",
+   "uses": [
+    "lem-pur-system-scalar-model",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Normalized scalar models and derived associators; cochain composition formula; compare sites-cohomology Tags 0G7E and 0D6D"
+   }
+  },
+  {
+   "text": "Use the existing finiteHomEtaleClosed record at each coefficient level. Its adjunction is already between the specified right tensor and the published internal Hom. The inverse hom equivalence is tensoring a morphism with the identity followed by the counit evaluation. Applying the hom equivalence to t gives a morphism with that evaluation, and injectivity of the inverse equivalence proves uniqueness. This argument uses arbitrary unbounded objects, with no constructibility or perfection restriction.",
+   "uses": [
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), equation-internal-hom on global H0"
+   }
+  },
+  {
+   "text": "Uncurry reduced evaluation with the existing closed record at level m. The equivalence identity (e.symm(v)=t iff v=e(t)) identifies its unique transpose with etaleFiniteHomCanonical, whose body is coefficientBaseChangeHom. For naturality, prove the general closed-calculus identity: uncurry postcomposition by Hom(f,g) using the evaluation_naturality field in f and counit naturality in g. Uncurry precomposition using functoriality of tensor. Uncurry both sides of the coefficient-comparison naturality equation; naturality of the inverse tensor comparison in (Hom(f,g),identity) and (identity,f), followed by naturality of evaluation, makes the results equal. Injectivity of the inverse hom equivalence proves the desired equality. No monoidal coherence or invertibility of the Hom comparison is used. The uncurrying equation is first proved as a small API lemma, after which the comparison definition stays folded. A proved generic conjunction packages these calculations before the single specialization to the finite etale records.",
+   "uses": [
+    "def-sf-etale-finite-coefficient-hom-arrow"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Opening evaluation-transpose paragraph and the final evaluation-coherence paragraph; the categorical naturality calculation is written explicitly in Lean."
+   }
+  },
+  {
+   "text": "Obtain a finite dimension bound for the scheme. Apply finite_constructible_derivedHom_etale at exponent n+1 to the two inputs, and use the flat-model result to reduce this internal Hom and both inputs. Apply the same internal-Hom theorem at exponent m+1 to the reduced inputs. The displayed bounds c-b-2d and e-a+2d form an ordered interval, including degenerate intervals and the empty scheme. These prove precisely the two endpoint assertions, without proving invertibility of the comparison.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "cor-weil-finite-constructible-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Opening proof paragraph; the actual etale scalar maps and their normalization equations"
+   }
+  },
+  {
+   "text": "For the identity quotient, extensionality reduces the assertion to an element of the lifted coefficient ring. Ideal.Quotient.factor_eq for reflexive ideal inclusion sends its residue class to itself; both ring homomorphisms therefore agree. This proves finiteHomDomain_quotient_id without a scalar monoidal comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sp-etale-scalar-flat-model",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-kun-kflat-criteria",
+  "def-pur-etale-scalar-pullback-iso",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sfb-strong-monoidal-functor",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-scalar-coherence",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "lem-kun-dimension-finite-type",
+  "cor-weil-finite-constructible-hom"
+ ],
+ "proof_origin": "G7 proofs retained for flat-model, endpoints and quotient identity. P2 completes pullback using source-library etale stability and the existing scalar/pullback normalization. The monoidal and scalar-coherence statements retain their original plans. E4 proves finiteHomDomain_transpose directly from the normalized closed records and the evaluation-defined comparison, using proved private categorical helpers. The monoidal and scalar-coherence holes remain unchanged; all earlier proofs are retained. The four transpose clauses are packaged without mathematical change in FiniteHomDomainTransposeLaws to keep the coefficient-category parameters shared during kernel checking.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of bounded constructible finite Tor amplitude etale complexes preserves Tor interval and tensor Hom adjunction",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.FormallyEtale.instTensorProduct [Mathlib/RingTheory/Etale/Basic]; Algebra.FormallyEtale.of_restrictScalars [Mathlib/RingTheory/Etale/Basic]; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars [Mathlib/RingTheory/Etale/Basic]; KaehlerDifferential.isBaseChange_of_formallyEtale [Mathlib/RingTheory/Etale/Kaehler]; Algebra.FormallyEtale.comp [Mathlib/RingTheory/Etale/Basic]; Algebra.Etale.baseChange [Mathlib/RingTheory/Etale/Basic]; RingHom.Etale.isStableUnderBaseChange [Mathlib/RingTheory/RingHom/Etale]; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale [Mathlib/RingTheory/Etale/Kaehler] No match: ring etaleness and constructible subsets are not derived constructible module sheaves or Tor intervals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded flat constructible sheaf complexes remain bounded flat after quotient coefficients and etale inverse image",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.compatiblePreservingOfFlat [Mathlib/CategoryTheory/Sites/CoverPreserving]; AlgebraicGeometry.Scheme.Hom.flat_appLE [Mathlib/AlgebraicGeometry/Morphisms/Flat]; AlgebraicGeometry.Flat.flat_appLE [Mathlib/AlgebraicGeometry/Morphisms/Flat]; AlgebraicGeometry.flat_iff [Mathlib/AlgebraicGeometry/Morphisms/Flat]; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat [Mathlib/AlgebraicGeometry/Morphisms/Flat]; AlgebraicGeometry.Flat.flat_of_affine_subset [Mathlib/AlgebraicGeometry/Morphisms/Flat]; Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing [Mathlib/RingTheory/Smooth/Flat]; Algebra.Smooth.flat [Mathlib/RingTheory/Smooth/Flat] No match: ring etaleness and constructible subsets are not derived constructible module sheaves or Tor intervals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s); No hits. No match: ring etaleness and constructible subsets are not derived constructible module sheaves or Tor intervals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Tt]or|[Tt]or.*constructible|derived.*[Ii]nternalHom",
+   "results": "[grep] OK 3 hit(s); Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:687     · simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe, Finset.mem_image, comp_apply,; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:696     simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe,; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:697       AlgEquiv.toRingEquiv_toRingHom, Finset.mem_image, BasicConstructibleSetData.map, No match: ring etaleness and constructible subsets are not derived constructible module sheaves or Tor intervals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coefficient change preserves bounded constructible complexes finite Tor amplitude",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; No hits. ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Tt]or|[Tt]or.*constructible|derived.*[Ii]nternalHom",
+   "results": "3 hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean Read ModuleCat/ChangeOfRings.lean:400-405 and Condensed/Light/Monoidal.lean:35-61: ordinary modules and underived light-condensed sheaves do not give the ambient etale derived statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived etale module sheaves scalar extension strong symmetric monoidal finite Tor constructible",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, SheafOfModules.restrictScalars, PresheafOfModules.monoidalCategory, PresheafOfModules.monoidalCategoryStruct, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.restrictCoextendScalarsAdj Read ModuleCat/ChangeOfRings.lean:400-405 and Condensed/Light/Monoidal.lean:35-61: ordinary modules and underived light-condensed sheaves do not give the ambient etale derived statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "0 hits:  Read ModuleCat/ChangeOfRings.lean:400-405 and Condensed/Light/Monoidal.lean:35-61: ordinary modules and underived light-condensed sheaves do not give the ambient etale derived statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension on etale sheaves preserves constructible flat models and finite Tor amplitude with tensor Hom adjunction",
+   "results": "8 hits: Algebra.Etale.baseChange, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, KaehlerDifferential.isBaseChange_of_formallyEtale Read ModuleCat/ChangeOfRings.lean:400-405 and Condensed/Light/Monoidal.lean:35-61: ordinary modules and underived light-condensed sheaves do not give the ambient etale derived statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor Hom adjunction and strong symmetric monoidal derived extension of scalars for sheaves of modules",
+   "results": "8 hits: LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.monoidalCategoryStruct, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite Read ModuleCat/ChangeOfRings.lean:400-405 and Condensed/Light/Monoidal.lean:35-61: ordinary modules and underived light-condensed sheaves do not give the ambient etale derived statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-coef-finite-hom",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraphs 1; returned proof steps 1, 2",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-finite-hom-domain-calculus",
+  "worker": "stage1",
+  "summary": "Preserved the statement; supplied ten argument steps covering Noetherian hypotheses, finite flat constructible models, exact pullback and scalar comparison, ambient tensor and unit coherence, coefficient towers, closed adjunction, unique evaluation transpose and both ctf endpoints. All facts are existing nodes; no new nodes. Searches found no project attachment or Mathlib statement for the whole item.",
+  "blueprint": "thm-coef-finite-hom, opening proof paragraph (definition by reduced evaluation and preservation of endpoints), and final paragraph (successive scalar change); additionally the domain details extracted in returned proof steps 1-2 recorded in the item source.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence for the structure morphism; this unit does not reprove finite-type algebra."
+   },
+   {
+    "node": "lem-sp-etale-scalar-flat-model",
+    "why": "Generic bounded flat constructible scalar model for arbitrary finite rings; supplies the domain calculation, with no exceptional or purity route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact geometric inverse image over constant rings used on module sheaves."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic constructible sheaf pullback, applied termwise and to cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic flatness of module pullback, with no coefficient-flatness requirement."
+   },
+   {
+    "node": "lem-kun-kflat-criteria",
+    "why": "Bounded flat K-flat criterion for the pulled-back model."
+   },
+   {
+    "node": "lem-pur-etale-scalar-pullback-existence",
+    "why": "Canonical ambient coefficient/pullback isomorphism on ordinary etale categories."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ambient tensor comparison, used for the identity geometric morphism with changed coefficients."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat models for arbitrary unbounded objects."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic closure of flat-term K-flat complexes under total tensor."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic K-flat preservation through arbitrary coefficient maps."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Signed cochain tensor, unit and composition equations used for derived scalar coherence."
+   },
+   {
+    "node": "lem-pur-system-scalar-model",
+    "why": "Existence of actual normalized scalar models for arbitrary commutative ring sheaves."
+   },
+   {
+    "node": "lem-pur-system-scalar-coherence",
+    "why": "Canonical derived scalar composition and unit normalization on K-flat models."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite Krull dimension needed to apply the existing internal-Hom preservation bound."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Representative normalization of the generic derived pullback tensor comparison and its unit equations, for the identity geometric morphism with ring map A_X->B_X."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic symmetric strong monoidality of derived ringed-topos pullback and monoidality of its composition comparison, specialized to coefficient change A->B->C."
+   },
+   {
+    "node": "lem-pur-exact-pullback-signed-comparison",
+    "why": "Generic identification of the derived inverse image of an exact module pullback with its termwise localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sp-etale-scalar-flat-model",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-kun-kflat-criteria",
+  "lem-pur-etale-scalar-pullback-existence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-system-scalar-model",
+  "lem-pur-system-scalar-coherence",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-7aebd01c1",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-7aebd01c1 (reviewer sub-agent of L); spot-checked: I read the whole item, the report, every cited statement, the main-20261015 thm-coef-finite-hom statement and proof (opening paragraph), and the Q07 verbatim old steps 1-2. The statement is unchanged from the base. The item is unsplit on live and side-live, there are no new nodes and there is no SGA citation. The route matches the blueprint's 'tensor evaluation, reassociate, transpose' plus cor-weil-finite-constructible-hom. Correct as delivered: Step 2 is an exact specialization of lem-sp-etale-scalar-flat-model (any map of finite rings, no flatness assumed, same Tor interval); Step 3 uses exact pullback, flat-module pullback and bounded-flat K-flatness and keeps the same interval; Steps 8-9 use the closed structure with counit e∘(u⊗1), matching def-sf-etale-finite-coefficient-hom-arrow; Step 10 uses lem-kun-dimension-finite-type (d=0 for empty X) and the corollary at n and at m. Faults fixed in fixes/dag/nodes/sec-six-functors/lem-coef-finite-hom-domain-calculus.json: (C3) Steps 5-7 relied on the derived tensorator being the localized cochain comparison and used that as a 'representative assertion' of lem-weil-pbc-ringed-topoi-derived-tensor-pullback, but that node's statement asserts only a canonical natural isomorphism. Repaired by citing lem-weil-pbc-pullback-tensor-canonical-shift-unit (normalization of μ on flat-term K-flat models by c_{P,Q}, plus the unit and unitor equations) and lem-sfb-ringed-derived-monoidal-comparisons (symmetric strong monoidality of Lh^*, the monoidal composition comparison and P_id ≅ id), applied to identity geometric morphisms with ring maps A→B→C. (C1) Step 4 identified derived and exact inverse image with no cited statement; it now cites lem-pur-exact-pullback-signed-comparison. These three citations are added to tool_uses. I checked that none of them reaches the item or its parent, so there is no cycle. proof_deps is the union of the step uses. Small cases tested: X empty, n=m, the nonflat tower Z/8→Z/4→Z/2, a=b, and the residue module outside the ctf domain.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteHomDomainCalculus",
+  "declaration": "WeilConjectures.finiteHomDomain_flatModel",
+  "declarations": [
+   "WeilConjectures.finiteHomDomainCoeff",
+   "WeilConjectures.finiteHomDomainCoeffFinite",
+   "WeilConjectures.FiniteHomDomainMonoidal",
+   "WeilConjectures.FiniteHomDomainScalarComposition",
+   "WeilConjectures.FiniteHomDomainScalarIdentity",
+   "WeilConjectures.finiteHomDomain_flatModel",
+   "WeilConjectures.finiteHomDomain_pullback",
+   "WeilConjectures.finiteHomDomain_endpoints",
+   "WeilConjectures.finiteHomDomain_quotient_id",
+   "WeilConjectures.finiteHomDomainUnit",
+   "WeilConjectures.finiteHomDomain_monoidal",
+   "WeilConjectures.finiteHomDomain_scalarCoherence",
+   "WeilConjectures.finiteHomDomain_transpose",
+   "WeilConjectures.FiniteHomDomainTransposeLaws"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteHomDomainCalculus.lean",
+  "statement": "theorem finiteHomDomain_flatModel {n m : ℕ} (h : m ≤ n) (a b : ℤ) (hab : a ≤ b) (T : finiteHomEtale l E X n) (hT : Etale.DerivedCategory.isBoundedConstructible (finiteHomDomainCoeff l E n) X T) (hTor : Etale.DerivedCategory.hasTorAmplitudeIn (finiteHomDomainCoeff l E n) X a b T) : IsNoetherian X ∧ (∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (finiteHomDomainCoeff l E n))) ℤ, Etale.IsBoundedFlatComplex (finiteHomDomainCoeff l E n) a b P ∧ (∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (P.X i)) ∧ Nonempty (T ≅ _root_.DerivedCategory.Q.obj P) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P ∧ Etale.IsBoundedFlatComplex (finiteHomDomainCoeff l E m) a b (((ProEtale.etaleSheafExtendScalars (finiteHomQuotient l E h) X).mapHomologicalComplex (.up ℤ)).obj P) ∧ (∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf ((((ProEtale.etaleSheafExtendScalars (finiteHomQuotient l E h) X).mapHomologicalComplex (.up ℤ)).obj P).X i)) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((ProEtale.etaleSheafExtendScalars (finiteHomQuotient l E h) X).mapHomologicalComplex (.up ℤ)).obj P) ∧ Nonempty ((finiteHomEtaleReduction l E X h).obj T ≅ _root_.DerivedCategory.Q.obj (((ProEtale.etaleSheafExtendScalars (finiteHomQuotient l E h) X).mapHomologicalComplex (.up ℤ)).obj P))) ∧ Etale.DerivedCategory.isBoundedConstructible (finiteHomDomainCoeff l E m) X ((finiteHomEtaleReduction l E X h).obj T) ∧ Etale.DerivedCategory.hasTorAmplitudeIn (finiteHomDomainCoeff l E m) X a b ((finiteHomEtaleReduction l E X h).obj T)",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All clauses are stated by the listed theorems in this module. Positive exponents use the recorded arrow indexing n+1. Canonical tensor and unit maps and their all-complex representative normalizations use def-pur-exceptional-coefficient-normalizations directly. The scalar/pullback comparison has no boundedness or constructibility hypotheses. Helpers only group the canonical monoidal, scalar-composition and identity equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ebcf1f5cb",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Re-delivery after the 5f5aafb105ff RETURN. The H2 finding is repaired as requested: FiniteHomDomainNormalization, its DerivedTensorRightExact import and the theorem stmt_dep lem-derived-right-exact-tensor-comparison are gone. finiteHomDomain_monoidal now states ExceptionalCoefficients.TensorNormalization on tensorIso, an all-complex representative equation with the real sheafified balancing ordinaryOplax and the orientation F(U⊗V)→FU⊗FV. The added stmt_deps are all definition nodes owning used declarations: def-pur-exceptional-coefficient-normalizations (tensorIso, unitIso, TensorNormalization, UnitNormalization), def-weil-pbc-etale-constructible-sheaf, def-weil-pbc-inverse-image and def-kun-derived-tensor. No stmt_dep was dropped and no theorem node remains. The pullback representative clause no longer carries T/ctf hypotheses. The node statement, proof and proof_deps are unchanged from the base. All clauses were re-checked: flat model, pullback, monoidal, scalar composition and identity, unique transpose = etaleFiniteHomCanonical with naturality, ctf endpoints. Edge cases (empty X, a=b, exponent 1, identity quotient, nonflat tower) and universes are fine. lean.statement is verbatim and all 13 declarations exist. No hollow definitions, sorry only, docstrings complete. Advisory: the TensorNormalization and UnitNormalization conjuncts are choose_specs of the owning definition node. Nothing compiled, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e9053",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T023105-L-519178",
+  "kind": "interface",
+  "note": "independent cc review: finiteHomDomain_transpose: FiniteHomDomainTransposeLaws unfolded against the old 4-clause conjunction (H=finiteHomEtaleInternalHom, etaleFiniteHomCanonical = abbrev of coefficientBaseChangeHom), same proposition; node proof steps 8-9 against the private closed-calculus helpers; axioms clean; direct importer FiniteCoefficientVerdier compiles against the delivered module"
+ }
+}

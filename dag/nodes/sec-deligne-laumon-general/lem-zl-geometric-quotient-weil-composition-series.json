@@ -1,0 +1,223 @@
+{
+ "id": "lem-zl-geometric-quotient-weil-composition-series",
+ "kind": "statement",
+ "title": "Geometric quotient filtrations give Weil composition series",
+ "statement": "Fix finite-field and coefficient data $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k_0$, and $\\Qlb=\\overline{\\mathbf Q}_\\ell$ [d-real-setup]. Let $C_0/k_0$ be a smooth geometrically connected separated finite-type curve in the sense of [d-real-setup], put $C=(C_0)_k$, and choose a geometric generic point $\\bar\\eta$. Let $\\mathcal H$ be a classical lisse Weil sheaf [def-pod-lisse-l-adic-sheaves; def-wf-fundamental-representation] on $C_0$ with a given finite filtration $0=\\mathcal H_0\\subset\\cdots\\subset\\mathcal H_r=\\mathcal H$ by lisse Weil subsheaves. Assume each quotient $\\mathcal T_j=\\mathcal H_j/\\mathcal H_{j-1}$ is nonzero and its underlying local system on $C$ is irreducible, meaning that its stalk representation of $P=\\pi_1(C,\\bar\\eta)$ has no nonzero proper invariant subspace. Under the Weil fundamental representation of [def-wf-fundamental-representation], the given sheaf filtration gives a composition series of the finite-dimensional representation $V=\\mathcal H_{\\bar\\eta}$ of $W=W(C_0,\\bar\\eta)$ [def-real-weil-representation-operations; def-mg-weil-composition-series]. More precisely, each inclusion gives a $W$-stable subspace, successive representation quotients are canonically $\\mathcal T_{j,\\bar\\eta}$ with their prescribed Weil action, and each is an irreducible $W$-representation. Thus every prescribed quotient is a constituent of $\\mathcal H$ in the representation-theoretic sense. The assertion includes $r=0$ and does not require $\\mathcal H$ to be semisimple or the filtration to split.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2: geometrically irreducible quotients are constituents of the restricted real sheaf (old step 6 before applying curve purity)."
+ },
+ "stmt_deps": [
+  "d-real-setup",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-fundamental-representation",
+  "def-real-weil-representation-operations",
+  "def-mg-weil-composition-series"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized realization functor and its Hom dictionary [new-p6-etale-weil-realization; new-p6-etale-weil-fiber-hom] on the connected geometric curve. Its arrows are the actual prescribed stalk maps, so they are equivariant and preserve identities and composition. Full faithfulness of its composite with the full inclusion into Rep identifies a sheaf as zero exactly when its stalk is a subsingleton: a zero source makes the identity of its image the zero endomorphism by fullness, and zero reflection is standard full-faithful reflection. Finite dimension follows from etaleFundamentalRep_isLAdic [def-wf-fundamental-representation]. The supplied stalk exactness, specialized to the chosen point, already gives injectivity and surjectivity, without using the full exact tensor equivalence. Reverse induction along the finite diagram gives injectivity of every map to its last term. Let F_i be the image subrepresentation of that map, with LinearEquiv.ofInjective identifying the original stalk with F_i. Functoriality gives monotonicity, the initial zero stalk gives F_0=0 and the last identity gives F_r=V.",
+   "uses": [
+    "new-p6-etale-weil-realization",
+    "new-p6-etale-weil-fiber-hom",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 2: exact pullback makes the prescribed geometrically irreducible quotients irreducible constituents."
+   }
+  },
+  {
+   "text": "For each quotient q_j, transport its actual equivariant stalk map to F_{j+1} using the inverse image identification. Its kernel is the comap of F_j along the subtype, by the given exactness and the injectivity into V. The first isomorphism theorem for the transported surjective linear map yields F_{j+1}/F_j equivalent to the prescribed quotient stalk. Check equivariance on quotient representatives; the resulting equivalence satisfies exactly [e_{j+1}(v)] maps to q_j(v). Restrict any Weil-stable subspace of a quotient to the geometric subgroup using the defining restriction identity of etaleFundamentalRep [def-wf-fundamental-representation]. The assumed geometric irreducibility forces it to be zero or the whole stalk; zero reflection and the nonzero quotient hypothesis give a nontrivial stalk. Thus every prescribed quotient representation is irreducible.",
+   "uses": [
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 2: exact pullback makes the prescribed geometrically irreducible quotients irreducible constituents."
+   }
+  },
+  {
+   "text": "Transfer irreducibility across the quotient equivalences. Subrepresentation.isIrreducible_subquotient_iff makes each adjacent pair a cover. Construct the RelSeries with length exactly r and the image chain, and its Representation.CompositionSeries with the proved zero and top endpoints [def-mg-weil-composition-series]. The stalk equivalences have the required ambient-inclusion formula by construction. Each prescribed quotient is a constituent by isConstituent_of_equiv_subquotient applied to the inverse quotient equivalence [def-real-weil-representation-operations]. All constructions also apply at r=0: reverse induction starts with the last identity, the sole image is simultaneously zero and top, and all factor conclusions have empty index type. No splitting or semisimplicity enters.",
+   "uses": [
+    "def-mg-weil-composition-series",
+    "def-real-weil-representation-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 2: exact pullback makes the prescribed geometrically irreducible quotients irreducible constituents."
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-p6-etale-weil-realization",
+  "new-p6-etale-weil-fiber-hom",
+  "def-wf-fundamental-representation",
+  "def-mg-weil-composition-series",
+  "def-real-weil-representation-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 2, implemented by H8 using the normalized realization Hom dictionary, supplied stalk exactness, image subrepresentations and the first isomorphism theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically irreducible lisse quotient of a finite filtration of a real Weil sheaf on a smooth connected curve is an irreducible Weil representation constituent and punctually pure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"Representation.is_simple_module_iff_irreducible_ofModule\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} [inst : Monoid G] [inst_1 : Field k] (M : Type u_4) [inst_2 : AddCommGroup M]\\n  [inst_3 : Module (MonoidAlgebra k G) M],\\n  IsSimpleModule (MonoidAlgebra k G) M ↔ (Representation.ofModule M).IsIrreducible\", \"doc\": \"A module $ M $ over the monoid algebra $ k[G] $ is simple if and only if the corresponding representation of $ G $ on $ M $, obtained via restriction of scalars from $ k[G] $ to $ k $, is irreducible.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib/Topology/Sober\", \"type\": \"{α : Type u_1} → [inst : TopologicalSpace α] → [QuasiSober α] → ↑(irreducibleComponents α) → ↑(genericPoints α)\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"Representation.IsIrreducible\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"{G : Type u_1} →\\n  {k : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : Monoid G] →\\n        [inst_1 : Field k] → [inst_2 : AddCommGroup V] → [inst_3 : Module k V] → Representation k G V → Prop\", \"doc\": \"A representation of a monoid $ G $ on a vector space $ V $ over a field $ k $ is irreducible if the only $ G $-invariant subspaces of $ V $ are the trivial subspace $ \\\\{0\\\\} $ and $ V $ itself.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence of lisse Weil sheaves and Weil representations identifies geometric irreducibility with irreducibility on the geometric subgroup",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Representation.IsIrreducible\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"{G : Type u_1} →\\n  {k : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : Monoid G] →\\n        [inst_1 : Field k] → [inst_2 : AddCommGroup V] → [inst_3 : Module k V] → Representation k G V → Prop\", \"doc\": \"A representation of a monoid $ G $ on a vector space $ V $ over a field $ k $ is irreducible if the only $ G $-invariant subspaces of $ V $ are the trivial subspace $ \\\\{0\\\\} $ and $ V $ itself.\"}\n  {\"name\": \"Representation.is_simple_module_iff_irreducible_ofModule\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} [inst : Monoid G] [inst_1 : Field k] (M : Type u_4) [inst_2 : AddCommGroup M]\\n  [inst_3 : Module (MonoidAlgebra k G) M],\\n  IsSimpleModule (MonoidAlgebra k G) M ↔ (Representation.ofModule M).IsIrreducible\", \"doc\": \"A module $ M $ over the monoid algebra $ k[G] $ is simple if and only if the corresponding representation of $ G $ on $ M $, obtained via restriction of scalars from $ k[G] $ to $ k $, is irreducible.\"}\n  {\"name\": \"Representation.irreducible_iff_isSimpleModule_asModule\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} [inst : Monoid G] [inst_1 : Field k] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), ρ.IsIrreducible ↔ IsSimpleModule (MonoidAlgebra k G) ρ.asModule\", \"doc\": \"A representation $\\\\rho$ of a monoid $G$ over a field $k$ is irreducible if and only if the underlying module $\\\\rho.asModule$, viewed as a module over the monoid algebra $k[G]$, is a simple module (i.e\"}\n  {\"name\": \"Representation.isIrreducible_iff\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} [inst : Monoid G] [inst_1 : Field k] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), ρ.IsIrreducible ↔ IsSimpleOrder (Subrepresentation ρ)\", \"doc\": \"A representation $\\\\rho$ of a monoid $G$ on a vector space $V$ over a field $k$ is irreducible if and only if the poset of subrepresentations of $\\\\rho$ forms a simple order, meaning the only $G$-invari\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n  {\"name\": \"Representation.IsIrreducible.toIsSimpleOrder\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} {inst : Monoid G} {inst_1 : Field k} {inst_2 : AddCommGroup V}\\n  {inst_3 : Module k V} {ρ : Representation k G V} [self : ρ.IsIrreducible], IsSimpleOrder (Subrepresentation ρ)\", \"doc\": \"If a monoid representation $\\\\rho$ on a vector space $V$ over a field $k$ is irreducible, then the bounded order of subrepresentations of $\\\\rho$ is a simple order, meaning every subrepresentation is ei\"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Irreducible\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [P.IsIrreducible],\\n  IsSimpleModule (MonoidAlgebra R ↥P.weylGroup) P.weylGroupRootRep.asModule\", \"doc\": \"If a root pairing $ P $ is irreducible, then the module associated with the Weyl group representation of $ P $ over the group ring $ R[P.\\text{WeylGroup}] $ is a simple module, meaning its only submodu\"}\n  {\"name\": \"Rep.instProjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Projective V\", \"doc\": \"Every object $ V $ in the category $ \\\\text{Rep}(k, G) $ of representations of a monoid $ G $ over a ring $ k $ is a projective object. This means that for any epimorphism $ e : A \\\\to B $ in $ \\\\text{Re\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.IsIrreducible",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Representation.IsIrreducible\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) : Prop\", \"doc\": \"A representation `ρ` is irreducible if it is non-trivial and has no proper non-trivial\\nsubrepresentations.\"}\n  {\"name\": \"Representation.IsIrreducible.finrank_eq_one_of_isMulCommutative\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) [ρ.IsIrreducible] [FiniteDimensional k V] [IsAlgClosed k] [IsMulCommutative G] : Module.finrank k V = 1\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.instFiniteDimensionalAsModuleOfFinite\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) [ρ.IsIrreducible] [Finite G] : FiniteDimensional k ρ.asModule\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.instIsSimpleModuleMonoidAlgebraAsModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) [ρ.IsIrreducible] : IsSimpleModule (MonoidAlgebra k G) ρ.asModule\", \"doc\": \"\"}\n  {\"name\": \"Representation.irreducible_iff_isSimpleModule_asModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) : ρ.IsIrreducible ↔ IsSimpleModule (MonoidAlgebra k G) ρ.asModule\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.instSubsingletonIntertwiningMapOfIsEmptyEquiv\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} {W : Type u_4} [Monoid G] [Field k] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W] {ρ : Representation k G V} {σ : Representation k G W} [ρ.IsIrreducible] [σ.IsIrreducible] [IsEmpty (ρ.Equiv σ)] : Subsingleton (ρ.IntertwiningMap σ)\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.finrank_intertwiningMap_self\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) [ρ.IsIrreducible] [FiniteDimensional k V] [IsAlgClosed k] : Module.finrank k (ρ.IntertwiningMap ρ) = 1\", \"doc\": \"\"}\n  {\"name\": \"Representation.isSimpleModule_iff_irreducible_ofModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} [Monoid G] [Field k] (M : Type u_5) [AddCommGroup M] [Module (MonoidAlgebra k G) M] : IsSimpleModule (MonoidAlgebra k G) M ↔ (Representation.ofModule M).IsIrreducible\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.injective_or_eq_zero\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} {W : Type u_4} [Monoid G] [Field k] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W] {ρ : Representation k G V} {σ : Representation k G W} (f : ρ.IntertwiningMap σ) [ρ.IsIrreducible] : Function.Injective ⇑f ∨ f = 0\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.surjective_or_eq_zero\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} {W : Type u_4} [Monoid G] [Field k] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W] {ρ : Representation k G V} {σ : Representation k G W} [ρ.IsIrreducible] (g : σ.IntertwiningMap ρ) : Function.Surjective ⇑g ∨ g = 0\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.bijective_or_eq_zero\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} {W : Type u_4} [Monoid G] [Field k] [AddCommGroup V] [Module k V] [AddCommGroup W] [Module k W] {ρ : Representation k G V} {σ : Representation k G W} (f : ρ.IntertwiningMap σ) [ρ.IsIrreducible] [σ.IsIrreducible] : Function.Bijective ⇑f ∨ f = 0\", \"doc\": \"\"}\n  {\"name\": \"Representation.IsIrreducible.algebraMap_intertwiningMap_bijective_of_isAlgClosed\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] {ρ : Representation k G V} [ρ.IsIrreducible] [FiniteDimensional k V] [IsAlgClosed k] : Function.Bijective ⇑(algebraMap k (ρ.IntertwiningMap ρ))\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|punctuallyPure|geometric.*irreducib",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"47\", \"text\": \"lemma GeometricallyIntegral.eq_geometricallyReduced_inf_geometricallyIrreducible :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"49\", \"text\": \"      (@GeometricallyReduced ⊓ @GeometricallyIrreducible : MorphismProperty Scheme) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"51\", \"text\": \"    GeometricallyIrreducible.eq_geometrically, ← geometrically_inf]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"line\": \"56\", \"text\": \"  (GeometricallyIntegral.eq_geometricallyReduced_inf_geometricallyIrreducible.le _ _ _ ‹_›).1\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"74\", \"text\": \"lemma GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"12\", \"text\": \"# Geometrically Irreducible Schemes\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"15\", \"text\": \"- `AlgebraicGeometry.GeometricallyIrreducible`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"16\", \"text\": \"  We say that morphism `f : X ⟶ Y` is geometrically irreducible if for all `Spec K ⟶ Y` with `K`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"19\", \"text\": \"- `GeometricallyIrreducible.iff_geometricallyIrreducible_fiber`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"line\": \"20\", \"text\": \"  A scheme is geometrically irreducible over `S` iff the fibers of all\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Basic.lean\", \"line\": \"16\", \"text\": \"geometrically irreducible, geometrically connected etc. In this file\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"407\", \"text\": \"instance : GeometricallyIrreducible (𝔸(n; S) ↘ S) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"408\", \"text\": \"  rw [geometricallyIrreducible_iff]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"415\", \"text\": \"  GeometricallyIrreducible.irreducibleSpace (𝔸(n; S) ↘ S) (isOpenMap_over S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"436\", \"text\": \"  .of_geometricallyReduced_of_geometricallyIrreducible _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometrically irreducible lisse quotient of a finite filtration of a real Weil sheaf on a smooth connected curve is an irreducible Weil representation constituent and punctually pure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.IsIrreducible\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \"{G : Type u_1} →\\n  {k : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : Monoid G] →\\n        [inst_1 : Field k] → [inst_2 : AddCommGroup V] → [inst_3 : Module k V] → Representation k G V → Prop\", \"doc\": \"A representation of a monoid $ G $ on a vector space $ V $ over a field $ k $ is irreducible if the only $ G $-invariant subspaces of $ V $ are the trivial subspace $ \\\\{0\\\\} $ and $ V $ itself.\"}\n  {\"name\": \"Representation.irreducible_iff_isSimpleModule_asModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \": IsIrreducible ρ ↔ IsSimpleModule k[G] ρ.asModule\", \"doc\": \"A representation $\\\\rho$ of a monoid $G$ over a field $k$ is irreducible if and only if the underlying module $\\\\rho.asModule$, viewed as a module over the monoid algebra $k[G]$, is a simple module (i.e\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsReduced X] [H : IrreducibleSpace X] : IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"Representation.isIrreducible_iff\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} [inst : Monoid G] [inst_1 : Field k] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), ρ.IsIrreducible ↔ IsSimpleOrder (Subrepresentation ρ)\", \"doc\": \"A representation $\\\\rho$ of a monoid $G$ on a vector space $V$ over a field $k$ is irreducible if and only if the poset of subrepresentations of $\\\\rho$ forms a simple order, meaning the only $G$-invari\"}\n  {\"name\": \"Representation.IsIrreducible.mk\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} [inst : Monoid G] [inst_1 : Field k] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] {ρ : Representation k G V} [toIsSimpleOrder : IsSimpleOrder (Subrepresentation ρ)],\\n  ρ.IsIrreducible\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a vector space $V$ over a field $k$, if the lattice of subrepresentations of $\\\\rho$ is a simple order (i.e., every subrepresentation is either the triv\"}\n  {\"name\": \"Representation.IsIrreducible.casesOn\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \"{G : Type u_1} →\\n  {k : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : Monoid G] →\\n        [inst_1 : Field k] →\\n          [inst_2 : AddCommGroup V] →\\n            [inst_3 : Module k V] →\\n              {ρ : Representation k G V} →\\n                {motive : ρ.IsIrreducible → Sort u} →\\n                 \", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a vector space $V$ over a field $k$, this case analysis tool allows defining functions or proofs about the irreducibility of $\\\\rho$ by reducing to the \"}\n  {\"name\": \"Representation.IsIrreducible.rec\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \"{G : Type u_1} →\\n  {k : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : Monoid G] →\\n        [inst_1 : Field k] →\\n          [inst_2 : AddCommGroup V] →\\n            [inst_3 : Module k V] →\\n              {ρ : Representation k G V} →\\n                {motive : ρ.IsIrreducible → Sort u} →\\n                 \", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a vector space $V$ over a field $k$, this recursor allows defining functions or proofs about the irreducibility of $\\\\rho$ by reducing to the case where\"}\n  {\"name\": \"Representation.IsIrreducible.toIsSimpleOrder\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} {inst : Monoid G} {inst_1 : Field k} {inst_2 : AddCommGroup V}\\n  {inst_3 : Module k V} {ρ : Representation k G V} [self : ρ.IsIrreducible], IsSimpleOrder (Subrepresentation ρ)\", \"doc\": \"If a monoid representation $\\\\rho$ on a vector space $V$ over a field $k$ is irreducible, then the bounded order of subrepresentations of $\\\\rho$ is a simple order, meaning every subrepresentation is ei\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results do not state this geometric lisse-Weil-sheaf assertion or its full compatible descent/restriction conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|lisse.*Weil|Weil.*composition",
+   "results": "Hits: . Inspected returned signatures: abstract composition-series, irreducibility and fibre-functor results do not state the classical lisse Weil filtration assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact fibre functor on lisse Weil sheaves sends a filtration with geometrically irreducible quotients to a composition series",
+   "results": "Hits: CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.PreGaloisCategory.FiberFunctor, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize, CategoryTheory.PreGaloisCategory.FiberFunctor.instPreservesFiniteLimitsFintypeCat, CategoryTheory.PreGaloisCategory.FiberFunctor.mk, CategoryTheory.PreGaloisCategory.GaloisCategory.getFiberFunctor, CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize. Inspected returned signatures: abstract composition-series, irreducibility and fibre-functor results do not state the classical lisse Weil filtration assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.IsIrreducible",
+   "results": "Hits: Representation.IsIrreducible, Representation.IsIrreducible.finrank_eq_one_of_isMulCommutative, Representation.IsIrreducible.instFiniteDimensionalAsModuleOfFinite, Representation.IsIrreducible.instIsSimpleModuleMonoidAlgebraAsModule, Representation.irreducible_iff_isSimpleModule_asModule, Representation.IsIrreducible.instSubsingletonIntertwiningMapOfIsEmptyEquiv, Representation.IsIrreducible.finrank_intertwiningMap_self, Representation.isSimpleModule_iff_irreducible_ofModule. Inspected returned signatures: abstract composition-series, irreducibility and fibre-functor results do not state the classical lisse Weil filtration assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtration of lisse Weil sheaves with geometrically irreducible quotients gives a composition series of the Weil stalk representation",
+   "results": "Hits: exists_compositionSeries_of_isNoetherian_isArtinian, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, isFiniteLength_iff_exists_compositionSeries, isFiniteLength_of_exists_compositionSeries, Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge, Ideal.Filtration.Stable.exists_pow_smul_eq, CompositionSeries, Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge. Inspected returned signatures: abstract composition-series, irreducibility and fibre-functor results do not state the classical lisse Weil filtration assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under an exact equivalence a filtration whose quotients are irreducible on a subgroup is a composition series of the group representation",
+   "results": "Hits: Representation.IsIrreducible.toIsSimpleOrder, isFiniteLength_iff_exists_compositionSeries, JordanHolderModule.instJordanHolderLattice, CompositionSeries.Equivalent, CompositionSeries, isFiniteLength_of_exists_compositionSeries, Rep.coinvariantsShortComplex_shortExact, CompositionSeries.jordan_holder. Inspected returned signatures: abstract composition-series, irreducibility and fibre-functor results do not state the classical lisse Weil filtration assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-two-point-curve-constituent-purity",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 2: geometrically irreducible quotients are constituents of the restricted real sheaf (old step 6 before applying curve purity).",
+   "via": [
+    "lem-zl-two-point-curve-constituent-purity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-geometric-quotient-weil-composition-series",
+  "worker": "stage1",
+  "summary": "Q44 retained the statement and reused the existing classical etale lisse Weil exact equivalence. Wrote the canonical quotient map and the subgroup irreducibility argument, including the zero-length case; no new nodes, no Lean attachment. Searched the project and Mathlib and checked every cited statement.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md paragraph 2: geometrically, hence arithmetically, irreducible; exact pullback gives irreducible constituents. This item begins after the pullback and verifies precisely the given filtration is a representation composition series.",
+  "tool_uses": [
+   {
+    "node": "prop-wf-weil-sheaf-representation-equivalence",
+    "why": "Exact classical etale lisse Weil fibre equivalence on this very curve transports the prescribed inclusions, quotient maps and Weil actions; it is a generic dictionary tool, not a replacement for the unit curve-purity route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-8f7581d3b",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-8f7581d3b (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full, plus main-20261015 thm-zl-real-mixed-by-curves.proof paragraph 2 ('geometrically, hence arithmetically, irreducible; pullback is exact, so an irreducible constituent'), which the item expands. The statement is true. I tested r=0 (empty series), rank one, and a non-split unipotent rank-2 case; no splitting is needed, and nonzero quotients give strictness. All data come from d-real-setup (generic q, so the citer's use over F_{q^m} is covered). Step 1: prop-wf-weil-sheaf-representation-equivalence states, for the same curve, (F,phi), P and W, an exact equivalence whose short sequences are exact exactly on vector spaces, with subobjects and quotients corresponding. That gives the W-equivariant injections, the quotient isomorphism [v]->q_j(v), and nonzero stalks (an equivalence reflects zero). Step 2: by def-wf-fundamental-representation, rho on P x {0} is rho_geom, so a W-stable subspace is P-stable and the quotient is simple; this is genuinely elementary. Step 3: exactly the definitions in def-mg-weil-composition-series and def-real-weil-representation-operations (a constituent is a factor of *a* composition series, so no Jordan-Holder). Batch-5 flag: the full closure of the equivalence node does not contain the item (no cycle). Its sec-poincare-duality/sec-trace-formula members are definitions (lisse adic sheaves, l-adic representations) and generic lisse/Galois dictionary and pullback-coherence lemmas. It reaches no nt-assume leaf, no Poincare duality or trace formula theorem, and no batch-4 target, so it is a general foundation outside the assumptions; accepted. I accept the generic tool use of the equivalence node (unit sk-i-real-sheaves), since the unit route's 'pullback is exact' needs exactly this dictionary. No SGA, no new nodes, and no repair note (not a re-split). A search for duplicates over all snapshot statements found none. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricQuotientWeilCompositionSeries",
+  "declaration": "RealSheaves.geometricQuotientWeilCompositionSeries",
+  "declarations": [
+   "RealSheaves.geometricQuotientCurve_lft",
+   "RealSheaves.geometricQuotientCurve_qc",
+   "RealSheaves.geometricQuotientCurve_separated",
+   "RealSheaves.geometricQuotientCurve_noetherian",
+   "RealSheaves.geometricQuotientCurve_geometricSeparated",
+   "RealSheaves.geometricQuotientCurve_invertible",
+   "RealSheaves.curveQuotientWeilSheaf",
+   "RealSheaves.curveQuotientStalk",
+   "RealSheaves.curveQuotientStalkMap",
+   "RealSheaves.curveQuotientWeilRep",
+   "RealSheaves.geometricQuotientWeilCompositionSeries"
+  ],
+  "file": "lean/Sheaf/Paper/GeometricQuotientWeilCompositionSeries.lean",
+  "statement": "theorem geometricQuotientWeilCompositionSeries (hgeneric : IsGenericPoint (t (IsLocalRing.closedPoint κ)) Set.univ) (r : ℕ) (J : Fin (r + 1) ⥤ curveQuotientWeilSheaf S C₀) (T : Fin r → curveQuotientWeilSheaf S C₀) (q : ∀ j : Fin r, J.obj j.succ ⟶ T j) (hzero : IsZero (J.obj 0)) (hmono : ∀ j : Fin r, Mono (J.map (homOfLE j.castSucc_le_succ))) (hexact : ∀ (κ' : Type u) [Field κ'] [IsAlgClosed κ'] (x : Spec (.of κ') ⟶ S.geometricCurve C₀) (j : Fin r), Function.Injective (curveQuotientStalkMap S C₀ x (J.map (homOfLE j.castSucc_le_succ))) ∧ Function.Exact (curveQuotientStalkMap S C₀ x (J.map (homOfLE j.castSucc_le_succ))) (curveQuotientStalkMap S C₀ x (q j)) ∧ Function.Surjective (curveQuotientStalkMap S C₀ x (q j))) (hnonzero : ∀ j : Fin r, ¬ IsZero (T j)) (hirr : ∀ (j : Fin r) (A : Subrepresentation (Scheme.etaleGeometricRep S.l S.Qbar (T j).carrier t)), A = ⊥ ∨ A = ⊤) : FiniteDimensional S.Qbar (curveQuotientStalk S C₀ t (J.obj (Fin.last r))) ∧ ∃ (s : (curveQuotientWeilRep S C₀ t d D (J.obj (Fin.last r))).CompositionSeries) (hlen : s.length = r) (e : ∀ i : Fin (s.length + 1), curveQuotientStalk S C₀ t (J.obj (Fin.cast (congrArg Nat.succ hlen) i)) ≃ₗ[S.Qbar] (s.series i).toSubmodule), (∀ (i : Fin (s.length + 1)) (v : curveQuotientStalk S C₀ t (J.obj (Fin.cast (congrArg Nat.succ hlen) i))), (e i v : curveQuotientStalk S C₀ t (J.obj (Fin.last r))) = curveQuotientStalkMap S C₀ t (J.map (homOfLE (Fin.le_last (Fin.cast (congrArg Nat.succ hlen) i)))) v) ∧ (∀ j : Fin s.length, ∃ a : (s.factor j).Equiv (curveQuotientWeilRep S C₀ t d D (T (Fin.cast hlen j))), ∀ v : curveQuotientStalk S C₀ t (J.obj (Fin.cast hlen j).succ), a (Submodule.Quotient.mk (e j.succ v)) = curveQuotientStalkMap S C₀ t (q (Fin.cast hlen j)) v) ∧ ∀ j : Fin r, (curveQuotientWeilRep S C₀ t d D (T j)).IsIrreducible ∧ (curveQuotientWeilRep S C₀ t d D (T j)).IsConstituent (curveQuotientWeilRep S C₀ t d D (J.obj (Fin.last r)))",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-545a50a80",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read the item node (statement identical to live; no lean record yet), the source paragraph 2 of thm-zl-real-mixed-by-curves.proof, and the dependency declarations: EtaleLisseWeilSheaf, etaleGeometricRep on Aut(fiber t), EtaleWeilDegreeData, etaleFundamentalRep (pinned by its uniqueness theorem), Setup.IsCurve (exactly d-real-setup), Representation.CompositionSeries/factor, IsConstituent, DegreeDatum. Every hypothesis is rendered faithfully: the curve Fact, the geometric generic point, the filtration as a Fin (r+1) diagram with zero first term and mono adjacent maps, prescribed quotient maps q_j that are injective/exact/surjective at every geometric point (the abelian structure is only Nonempty, so this is the right form for lisse sheaves on the connected curve), nonzero quotients, and geometric irreducibility as every subrepresentation of the geometric stalk action being bot or top. Conclusions: finite dimension, a composition series pinned to the given chain (length r, ambient-inclusion equations), factor equivalences pinned to [v] -> q_j v, irreducible and constituent. r=0 covered; no splitting or semisimplicity assumed. Gates pass: helpers are abbrevs or existing-proof instances with source docstrings; only proof is sorry; classical etale sheaves, no pro-etale substitute; no duplicate notions; Worker report and Second reading sections present (self-rereading, disclosed). Note: coefficient universe u+1 is forced by the recorded def-wf-fundamental-representation interface and disclosed, so it is not a silent restriction. No files changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-54c85",
+  "group": "H8",
+  "result": "fix",
+  "landing": "20261024T231249-L-2197345",
+  "kind": "interface",
+  "note": "independent cc review: delivered proof and node proof/proof_deps against the clone's statement, unit sk-i-dl-general-real realized lists, and new-p6 realization/fiber-hom node statements; axioms via scratch compile"
+ }
+}

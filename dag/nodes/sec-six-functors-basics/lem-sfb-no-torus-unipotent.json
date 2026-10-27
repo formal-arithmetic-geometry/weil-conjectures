@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-no-torus-unipotent",
+ "kind": "statement",
+ "title": "A smooth connected affine group without a nontrivial torus is unipotent",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth [def-sbc-smooth-morphisms] connected [def-weil-connected-scheme] affine group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$. Closed subgroup schemes are as in [def-sc-group-scheme-subgroup]. A torus subgroup means a closed subgroup isomorphic over $k$ to $\\mathbf G_m^r$ for an integer $r\\geq0$ [def-sc-gm-ga]. Assume that every torus subgroup of $G$ is trivial. Then $G$ is unipotent in the following explicit sense: there exist an integer $m\\geq1$ and a homomorphism $\\rho:G\\to\\mathrm{GL}_{m,k}$ [def-sc-general-linear-group] which is a closed immersion [def-weil-closed-immersion] and such that, for every $g\\in G(k)$, the matrix $\\rho(g)-I_m$ is nilpotent, that is, $(\\rho(g)-I_m)^N=0$ for some integer $N\\geq1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.60, printed p.346 (PDF p.358); faithful-representation and geometric-unipotence formulation from Theorem 4.9 and Corollary 4.10, printed p.87, and Corollaries 14.6 and 14.12, printed pp.282--283."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-solvable-subgroup-flag-realization] to the trivial subgroup of $G$ to obtain a nonzero finite-dimensional $V$ and a faithful closed immersion $r:G\\hookrightarrow\\operatorname{GL}(V)$. The trivial subgroup is smooth, connected and solvable, so this application needs no solvability of $G$. The same node gives the projective finite-type complete flag scheme $X=\\operatorname{Fl}(V)$. The representation acts by $g(V_i)_i=(r(g)V_i)_i$ on flags. Among the $G(k)$-orbits choose one of least dimension. The boundary assertion of [lem-sfb-smooth-group-orbit-geometry] makes this orbit $O$ closed: a nonempty boundary would contain an orbit of strictly smaller dimension. With its reduced structure $O$ is proper by the closed-subscheme clause of the flag-realization node. Fix $x\\in O(k)$ and let $J=G_x$. By [lem-sfb-homogeneous-orbit-quotient-geometry], $O\\simeq G/J$ as schemes, including a possibly nonsmooth stabilizer $J$.",
+   "uses": [
+    "lem-sfb-solvable-subgroup-flag-realization",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, first two sentences, printed p.346; Theorem 4.9, p.87; Proposition 1.66, pp.27--28; Propositions 7.29--7.30, pp.146--147."
+   }
+  },
+  {
+   "text": "Put $K=(J^0)_{\\mathrm{red}}$. The last clause of [lem-sfb-solvable-subgroup-flag-realization] makes $K$ smooth, connected and solvable. By [lem-sfb-nested-homogeneous-quotient-geometry], the map $\\pi:Q=G/K\\to G/J\\simeq O$ is finite and faithfully flat; the source of this map is $G/K$. Finite morphisms are proper by [lem-sfb-affine-proper-finite]. Since $O$ is proper, [lem-weil-pbc-proper-composition] makes $Q$ proper over $k$. This uses neither smoothness of $J$ nor equality of $J$ and $K$.",
+   "uses": [
+    "lem-sfb-solvable-subgroup-flag-realization",
+    "lem-sfb-nested-homogeneous-quotient-geometry",
+    "lem-sfb-affine-proper-finite",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, third sentence, printed p.346; Proposition 7.15 Cartesian square and Remark 7.16(b), pp.142--143; Appendix A.76(a),(c), pp.583--584. The reversed arrow in the second sentence of Proposition 7.15 is a typographical error, already corrected in the cited nested-quotient node."
+   }
+  },
+  {
+   "text": "Since $k$ is algebraically closed it is perfect. By [lem-sfb-perfect-solvable-unipotent-torus], $K$ has a smooth connected normal unipotent subgroup $K_u$ and torus quotient $D=K/K_u$. Solvability defined by termination of the commutator series supplies the normal series with commutative quotients required there. Viewed as its own ambient group, the solvable group $K$ is a Borel subgroup of $K$. Thus [lem-sfb-borel-maximal-torus-conjugacy] supplies a maximal torus $T\\subseteq K$. Its composite inclusion into $G$ is a torus subgroup, so the hypothesis gives $T=1$. Apply [lem-sfb-solvable-torus-complements] to $K_u\\subseteq K$: the restriction $T\\to D$ is an isomorphism, hence $D=1$. By the scheme-theoretic kernel clause of [lem-sfb-affine-normal-quotient-geometry], the kernel of $K\\to D$ is $K_u$. As $D=1$, this kernel is all of $K$, proving $K=K_u$ and therefore unipotence of $K$.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, fourth through sixth sentences, p.346; Theorem 16.33(a)--(d), pp.335--336."
+   }
+  },
+  {
+   "text": "The explicit faithful geometric-unipotence condition on the smooth group $K$ gives, by [lem-sfb-geometric-unipotence-unitriangular-embedding], a closed unitriangular embedding; faithfulness here is injectivity on all algebra points. Thus the hypotheses of [lem-sfb-unipotent-homogeneous-quasiaffine] hold for $K\\subseteq G$. It gives an immersion $j:Q=G/K\\hookrightarrow\\mathbf A^n_k$. In particular $j$ is a monomorphism: both a closed immersion and an open immersion are injective on all test-scheme morphisms.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-unipotent-homogeneous-quasiaffine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, penultimate sentence, p.346; Proposition 14.26, p.286; Theorem 14.5 and Corollary 14.12, pp.281--283."
+   }
+  },
+  {
+   "text": "The scheme $Q$ is separated and of finite type and the quotient map $q:G\\to Q$ is faithfully flat by [lem-sfb-homogeneous-orbit-quotient-geometry]; it is also of finite presentation by [lem-sfb-nested-homogeneous-quotient-geometry] applied to $1\\subseteq K$. Apply [lem-sbc-smooth-flat-surjective-source-descent] to $G\\to Q\\to\\operatorname{Spec}k$: its composite is smooth, so $Q$ is smooth. By [sbc-lem-smooth-geometrically-reduced], $Q$ is reduced. It is nonempty because of $q(e)$, and connected because $q$ is surjective and $G$ is connected: any disconnection of $Q$ would pull back to two nonempty clopen subsets of $G$.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-nested-homogeneous-quotient-geometry",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, last two sentences, p.346; Proposition 7.12, p.141; quotient smoothness and connectedness are made explicit here."
+   }
+  },
+  {
+   "text": "The affine space target is separated over $k$, so properness of $Q$ and [lem-weil-pbc-proper-to-separated] make $j$ proper. It is a monomorphism by step 4, hence a closed immersion by [lem-pc-proper-monomorphism-closed]. A closed immersion into an affine scheme is affine by [lem-weil-pbc-closed-immersion-integral-separated-uc], so $Q$ is affine. Its proper structure morphism is therefore finite by [lem-sfb-affine-proper-finite].",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated",
+    "lem-pc-proper-monomorphism-closed",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sfb-affine-proper-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, final sentence, p.346; Appendix A.75(g), p.583, expanded using Stacks Tag 04XV (etale.tex, lemma-characterize-closed-immersion), Tag 01WN (morphisms.tex, lemma-finite-proper)."
+   }
+  },
+  {
+   "text": "Write $Q=\\operatorname{Spec}B$. By the definition of a finite morphism [def-weil-finite-integral-morphism], $B$ is a finite-dimensional $k$-algebra. Reducedness and nonemptiness of $Q$ say respectively that $B$ has no nonzero nilpotents and $1\\ne0$. By connectedness and [lem-pc-scheme-connected-iff-idempotents], its only idempotents are $0,1$. Hence [lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one] says that $k\\to B$ is an isomorphism. Therefore $Q\\simeq\\operatorname{Spec}k$ as a scheme, not just as a topological space.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-pc-scheme-connected-iff-idempotents",
+    "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, final sentence, p.346; Appendix A.75(g), p.583. The finite reduced connected algebra calculation spells out why this is the rational reduced point."
+   }
+  },
+  {
+   "text": "The quotient torsor identity in [lem-sfb-homogeneous-orbit-quotient-geometry] identifies the fibre of $q:G\\to Q$ over $q(e)$ with $K$: in $G\\times K\\simeq G\\times_QG$, pull back the first factor along the identity point. Since $Q=\\operatorname{Spec}k$, that fibre is all of $G$. Thus $K\\hookrightarrow G$ is an isomorphism of group schemes. From $K=K_u$ in step 3, $G$ satisfies the faithful geometric-unipotence hypothesis of [lem-sfb-geometric-unipotence-unitriangular-embedding]. Choose its closed immersion $i:G\\hookrightarrow\\operatorname{GL}_{m,k}$ factoring through $\\mathcal U_m$, with $m\\geq1$. For $g\\in G(k)$ put $A=i(g)-I_m$. This is strictly upper triangular. Every summand of $(A^m)_{ab}$ contains a product indexed by $a<i_1<\\cdots<i_{m-1}<b$, impossible among $m$ indices. Hence $A^m=0$. Taking $\\rho=i$ and $N=m$ proves precisely the claimed closed faithful representation and nilpotence condition.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.60 proof, last sentence, p.346; faithful unipotent matrix formulation: Corollary 14.6 and Theorem 14.5, pp.281--282; Corollary 4.10, p.87."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-subgroup-flag-realization",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-nested-homogeneous-quotient-geometry",
+  "lem-sfb-affine-proper-finite",
+  "lem-weil-pbc-proper-composition",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-unipotent-homogeneous-quasiaffine",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 16.60, printed p.346 (PDF p.358), with the cited preliminary results and the elementary finite reduced connected algebra calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(torus.*unipotent|unipotent.*torus|rank.zero.*unipotent)",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this result for smooth connected affine group schemes; Lie-algebra nilpotence and abstract-group central series are different assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected linear algebraic group of rank zero has a faithful unipotent matrix representation",
+   "results": "8 hits: LinearMap.det_eq_one_of_finrank_eq_zero; FiniteDimensional.of_rank_eq_zero; Rep.instInjective; SpecialLinearGroup.center_eq_bot_of_finrank_le_one; Module.subsingleton_of_rank_zero; nilpotencyClass_zero_iff_subsingleton; SpecialLinearGroup.subsingleton_of_finrank_eq_one; LieModule.rank. These concern vector-space ranks or abstract groups, not the torus rank of an affine group scheme.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this result for smooth connected affine group schemes; Lie-algebra nilpotence and abstract-group central series are different assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"unipotent\"",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this result for smooth connected affine group schemes; Lie-algebra nilpotence and abstract-group central series are different assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over an algebraically closed field containing no nontrivial torus is unipotent",
+   "results": "8 hits: RootPairing.GeckConstruction.instHasTrivialRadical; LieModule.instIsTriangularizableOfIsAlgClosed; CommGroup.nilpotencyClass_le_one; LieAlgebra.exists_isCartanSubalgebra_engel; LieAlgebra.subsingleton_of_hasTrivialRadical_lie_abelian; LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card; LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful; LieAlgebra.IsKilling.instHasTrivialRadical. Lie algebras and abstract groups, not algebraic group schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this result for smooth connected affine group schemes; Lie-algebra nilpotence and abstract-group central series are different assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every connected linear algebraic group with no multiplicative one parameter subgroup is unipotent",
+   "results": "8 hits: Group.IsVirtuallyNilpotent; IsSolvable; Group.IsNilpotent; isSolvable_of_top_eq_bot; Group.IsNilpotent.isVirtuallyNilpotent; Group.isNilpotent_iff; Group.isNilpotent_top; frattini_nilpotent. Abstract-group properties do not imply the algebraic-group assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this result for smooth connected affine group schemes; Lie-algebra nilpotence and abstract-group central series are different assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "(torus.*unipotent|unipotent.*torus)",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebras, abstract nilpotent groups and module rank do not give a theorem about torus subgroups of affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected linear algebraic group of torus rank zero is unipotent",
+   "results": "8 hits: SpecialLinearGroup.center_eq_bot_of_finrank_le_one, Module.subsingleton_of_rank_zero, nilpotencyClass_zero_iff_subsingleton, LieAlgebra.hasTrivialRadical_iff, CommGroup.isMulTorsionFree_iff_torsion_eq_bot, rank_eq_zero_iff, Submodule.bot_eq_top_of_rank_eq_zero, GrpCat.isZero_iff_subsingleton",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebras, abstract nilpotent groups and module rank do not give a theorem about torus subgroups of affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"unipotent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebras, abstract nilpotent groups and module rank do not give a theorem about torus subgroups of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine group over an algebraically closed field with no nontrivial torus has a faithful unipotent matrix representation",
+   "results": "8 hits: LieModule.instIsFaithfulMatrixForall, IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed, FDRep.simple_iff_end_is_rank_one, RootPairing.GeckConstruction.instHasTrivialRadical, IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed, LieModule.instIsTriangularizableOfIsAlgClosed, Matrix.SpecialLinearGroup.isEmbedding_mapGL, Matrix.SpecialLinearGroup.mapGL_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebras, abstract nilpotent groups and module rank do not give a theorem about torus subgroups of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every connected affine algebraic group containing no multiplicative one parameter subgroup is unipotent",
+   "results": "8 hits: Group.IsVirtuallyNilpotent, Group.IsNilpotent, isSolvable_of_top_eq_bot, CommGroup.nilpotencyClass_le_one, Group.isNilpotent_top, Group.isNilpotent_iff, CommGroup.isNilpotent, RootPairing.GeckConstruction.instHasTrivialRadical",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie algebras, abstract nilpotent groups and module rank do not give a theorem about torus subgroups of affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-maximal-torus-nilpotent",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 17.39(b), printed p.364; the proof invokes Corollaries 12.40 and 17.29. Only (b) is stated here, with the stronger base-field restriction needed by the parent proof. Supporting input for the proof of Corollary 17.29: Proposition 17.23, implication (d) to (a) to (b) to (c), printed p.359, as used in Proposition 17.28, printed p.360; nilpotent groups are solvable by their central series. Quotient argument for the central-maximal-torus input: after killing the maximal torus, apply Proposition 16.60 to H/S, before the unitriangular central-series calculation.",
+   "via": [
+    "lem-sfb-central-maximal-torus-nilpotent",
+    "lem-sfb-maximal-torus-centralizer-borel",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-no-torus-unipotent",
+  "worker": "stage1",
+  "summary": "Followed Milne Proposition 16.60 through a closed complete-flag orbit, the reduced identity stabilizer, its unipotent part and torus complement, and the proper quasi-affine homogeneous quotient. Reused the existing orbit, flag, nested quotient and solvable-group nodes, and created only the missing unipotent homogeneous-space immersion theorem. Made scheme-level pointness and the closed matrix representation explicit. Statement unchanged; no Lean attachment found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 17.39(b), printed p.364; the proof invokes Corollaries 12.40 and 17.29. Only (b) is stated here, with the stronger base-field restriction needed by the parent proof. Supporting input for the proof of Corollary 17.29: Proposition 17.23, implication (d) to (a) to (b) to (c), printed p.359, as used in Proposition 17.28, printed p.360; nilpotent groups are solvable by their central series. Quotient argument for the central-maximal-torus input: after killing the maximal torus, apply Proposition 16.60 to H/S, before the unitriangular central-series calculation. This split expands its terminal Proposition 16.60 input along the closed-flag-orbit proof; the current blueprint direct-images clause (3) remains the ancestor route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic scheme or finite-algebra tool used only in the proper quasi-affine quotient calculation of Milne Proposition 16.60; no specialized node in this unit supplies this general implication."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme or finite-algebra tool used only in the proper quasi-affine quotient calculation of Milne Proposition 16.60; no specialized node in this unit supplies this general implication."
+   },
+   {
+    "node": "lem-pc-scheme-connected-iff-idempotents",
+    "why": "Generic scheme or finite-algebra tool used only in the proper quasi-affine quotient calculation of Milne Proposition 16.60; no specialized node in this unit supplies this general implication."
+   },
+   {
+    "node": "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one",
+    "why": "Generic scheme or finite-algebra tool used only in the proper quasi-affine quotient calculation of Milne Proposition 16.60; no specialized node in this unit supplies this general implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-scheme-connected-iff-idempotents",
+  "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-512c27a92",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-512c27a92 (reviewer sub-agent of L); spot-checked: Read Milne iAG Prop 16.60 (printed p.346), 14.26 (p.286) and 14.5/14.6/14.12 (pp.281-283). The item's 8 steps follow 16.60 sentence by sentence and spell out what it leaves implicit. Step 1: a closed flag orbit of minimal dimension, identified with G/J. Step 2: K=(J^0)_red; G/K->G/J is finite in the correct direction, and the misprinted arrow in 7.15 is noted; this gives Q proper. Step 3: perfect-solvable gives K_u; borel-torus applied to K as its own Borel gives T=1; torus-complements gives D=1; the kernel clause gives K=K_u. Step 4: the unitriangular embedding plus the new node give an immersion j. Step 5: Q is smooth, reduced and connected. Step 6: j is proper and monic, hence a closed immersion; Q is affine, hence finite over k. Step 7: B finite-dimensional, reduced, with no nontrivial idempotents, so B=k. Step 8: the torsor fibre at e gives K=G, and (A)^m=0. I read every cited statement and checked its hypotheses. New node lem-sfb-unipotent-homogeneous-quasiaffine: a true special case of 14.26 (smooth U; the k-point condition is unipotence by 14.12), statement only and self-contained. Tested on U=1, U=G, the unitriangular subgroup of SL2 (quotient A^2 minus 0), and mu_p (excluded by smoothness). It is not a clause of the item. rg -L for quasi-affine/unipotent/14.26/16.60 found no duplicate: the nagata quasi-affine nodes, kostant-rosenlicht, chevalley-line-stabilizer and unipotent-normal-quotient-image all state other things. Tool uses accepted as generic: smooth source descent, smooth geometrically reduced, connected iff idempotents, finite reduced algebra. Batch 5: the trf nodes reached are lem-trf-fppf-covering-base-change, lem-trf-smooth-fpqc-base-descent and lem-trf-flat-tensor-preserves-injection (all Mathlib leaves) and def-trf-scheme-cover-descent-datum (a general definition). None is a step of the trace formula or Poincare duality, so OK. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NoTorusUnipotent",
+  "declaration": "AlgebraicGeometry.exists_unipotent_representation_of_no_torus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NoTorusUnipotent.lean",
+  "statement": "theorem exists_unipotent_representation_of_no_torus {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (hNoTorus : ∀ (r : ℕ) (i : (MultiplicativeType.splitTorus k r).X ⟶ G), IsClosedSubgroupScheme i → i = 1) : ∃ (m : ℕ), 1 ≤ m ∧ ∃ rho : G ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} m) k, IsMonHom rho ∧ IsClosedImmersion rho.left ∧ ∀ g : (Spec (.of k)).asOver (Spec (.of k)) ⟶ G, ∃ N : ℕ, 1 ≤ N ∧ ((GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} m) k k (g ≫ rho)).val - 1) ^ N = 0",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d51c6527d",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Item record changes only stmt_deps (+landed def-sfb-tori-multiplicative-type, whose splitTorus is used) and lean; lean.statement matches the file verbatim; new module has one sorry theorem and no defs. Clause check: alg-closed k; G Over Spec k with GrpObj, Smooth, ConnectedSpace, IsAffine, LocallyOfFiniteType+QuasiCompact; torus hypothesis as closed subgroup inclusions from splitTorus k r with i = 1, equivalent to the node's closed subgroup ≅ G_m^r being trivial (scheme-theoretic, since inclusions are injective on all algebra points), rank 0 included; conclusion m≥1, IsMonHom rho into GeneralLinearGroup (Index.{u} m) k (the same GL as def-sc-general-linear-group), IsClosedImmersion rho.left, and per k-point g some N≥1 with (homMulEquiv(g≫rho)-1)^N=0. Edge cases (trivial G, G_m excluded, G_a, any characteristic, empty scheme, m=0/N=0) and universes ok. No duplicate statement; advisory: existing SolvableGroupStructure.IsUnipotent is a different packaging, and the node states its explicit sense. Docstrings carry source and blueprint and all 8 steps; report sections present. No compile run (no file changed)."
+ }
+}

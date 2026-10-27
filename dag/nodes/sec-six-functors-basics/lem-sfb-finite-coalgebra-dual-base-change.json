@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-finite-coalgebra-dual-base-change",
+ "kind": "statement",
+ "title": "Finite coalgebra duality and its scalar-extension comparison",
+ "statement": "Let $k$ be a field [def-weil-field] and $D$ a finite-dimensional $k$-vector space with linear maps $\\Delta:D\\to D\\otimes_kD$ and $\\epsilon:D\\to k$ satisfying coassociativity and both counit identities. Use tensor products [def-weil-pbc-module-tensor-product]. Put $A=\\operatorname{Hom}_k(D,k)$ with convolution $(fg)(x)=(f\\otimes g)(\\Delta x)$ and unit $\\epsilon$ (the tensor of two functionals is followed by multiplication in $k$). Then $A$ is a finite-dimensional associative unital $k$-algebra, not assumed commutative. Evaluation $D\\to\\operatorname{Hom}_k(A,k)$ is a linear isomorphism, and it restricts to a bijection between elements $x\\in D$ satisfying $\\Delta x=x\\otimes x$, $\\epsilon(x)=1$, and unital $k$-algebra homomorphisms $A\\to k$. For every field extension $F/k$ [def-pc-field-extension], equip $D_F=F\\otimes_kD$ with the scalar-extended coalgebra structure. The map $\\theta_F:F\\otimes_kA\\to\\operatorname{Hom}_F(D_F,F)$ defined by $\\theta_F(a\\otimes f)(b\\otimes x)=abf(x)$ is an isomorphism of unital $F$-algebras, where the target has convolution multiplication. Zero-dimensional $D$ is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-field-extension",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-vector-space-free], $D$ has a basis. It is finite: finitely many generators of $D$ have coordinates supported in a finite union $J$, so every basis vector belongs to the span of $J$ and hence has its index in $J$. Thus $D$ is finite free, and [lem-weil-pbc-vector-space-projective] makes it projective. Apply [lem-sf-finite-projective-dual]: $A=D^*$ is finite-dimensional and the actual evaluation $e:D\\to A^*$, $e(x)(f)=f(x)$, is a linear isomorphism. Apply [lem-sfb-convolution-linear-map-algebra] with $(R,C,B)=(k,D,k)$ to obtain exactly the multiplication and unit of the statement. No cocommutativity is used.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free",
+    "lem-weil-pbc-vector-space-projective",
+    "lem-sf-finite-projective-dual",
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238."
+   }
+  },
+  {
+   "text": "If $\\Delta x=x\\otimes x$ and $\\epsilon(x)=1$, then $e(x)(fg)=(f\\otimes g)(\\Delta x)=f(x)g(x)$ and $e(x)(\\epsilon)=1$. Evaluation is $k$-linear, and the scalar map $c\\mapsto c\\epsilon$ is sent to $c\\epsilon(x)=c$. Thus $e(x)$ is a unital $k$-algebra map. This verifies multiplicativity and scalar compatibility directly, without assuming that $A$ is commutative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238."
+   }
+  },
+  {
+   "text": "Conversely, let $\\chi:A\\to k$ be a unital $k$-algebra map. Its underlying linear functional has a unique preimage $x$ under the evaluation isomorphism of Step 1. Then $\\epsilon(x)=\\chi(1_A)=1$, and for all $f,g\\in A$, $(f\\otimes g)(\\Delta x-x\\otimes x)=\\chi(fg)-\\chi(f)\\chi(g)=0$. By [lem-sfb-finite-free-tensor-dual] with $M=N=D$, every functional on $D\\otimes_kD$ is a linear combination of these product functionals: the dual-tensor map is surjective and pure tensors span its source by [def-weil-pbc-module-tensor-product]. Therefore every functional vanishes on $z=\\Delta x-x\\otimes x$. If $z\\ne0$, [lem-weil-pbc-vector-space-dual-separates] applied to the vector space $D\\otimes_kD$ gives a functional nonzero on $z$, a contradiction. Thus $x$ is group-like. Uniqueness in Step 1 proves the claimed bijection.",
+   "uses": [
+    "lem-sfb-finite-free-tensor-dual",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-vector-space-dual-separates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238."
+   }
+  },
+  {
+   "text": "Apply the dual-scalar comparison in [lem-trf-projective-exterior-scalar-comparisons] with its $(A,B,V)$ equal to $(k,F,D)$. Step 1 supplies a finite-free presentation, hence the required finite-free retract (identity maps suffice). Its dual clause is exactly the $F$-linear isomorphism $\\theta_F$ with $\\theta_F(a\\otimes f)(b\\otimes x)=abf(x)$. For clarity the scalar-extended coalgebra maps are $\\epsilon_F(b\\otimes x)=b\\epsilon(x)$ and $\\Delta_F(b\\otimes x)=\\sum_i(b\\otimes u_i)\\otimes_F(1\\otimes v_i)$ whenever $\\Delta x=\\sum_i u_i\\otimes v_i$. These formulas respect tensor balancing. Evaluating the two coassociative composites on $b\\otimes x$ gives $b$ times the scalar extension of the two composites for $x$; likewise each counit composite gives $b\\otimes x$. The tensor generation statement [def-weil-pbc-module-tensor-product] proves these identities everywhere. Consequently [lem-sfb-convolution-linear-map-algebra] also supplies the convolution algebra on $D_F^*$.",
+   "uses": [
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238."
+   }
+  },
+  {
+   "text": "For $a,c,b\\in F$, $f,g\\in A$ and $x\\in D$, write $\\Delta x=\\sum_i u_i\\otimes v_i$. Then $\\theta_F((a\\otimes f)(c\\otimes g))(b\\otimes x)=acb\\sum_i f(u_i)g(v_i)$. Using the displayed formula for $\\Delta_F$, the convolution product of $\\theta_F(a\\otimes f)$ and $\\theta_F(c\\otimes g)$ at $b\\otimes x$ is $\\sum_i abf(u_i)\\,c g(v_i)$, the same quantity. The commutation used here is in $F$, not in $A$. Bilinearity and generation by pure tensors [def-weil-pbc-module-tensor-product] extend equality to arbitrary inputs and arbitrary vectors of $D_F$. Finally $\\theta_F(1\\otimes\\epsilon)(b\\otimes x)=b\\epsilon(x)=\\epsilon_F(b\\otimes x)$; $F$-linearity gives the scalar-map compatibility. Thus the linear isomorphism of Step 4 is the required unital $F$-algebra isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238."
+   }
+  },
+  {
+   "text": "When $D=0$, $A=0$ and both bidual and base-change maps are the unique isomorphisms between zero vector spaces. The convolution algebra is the zero algebra, allowed as a unital $k$-algebra. No $x$ satisfies $\\epsilon(x)=1$, and there is no unital algebra homomorphism $0\\to k$ since $0=1$ in its source but $0\\ne1$ in $k$. Both sets in the bijection are therefore empty. All previous arguments also permit the empty basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-free",
+  "lem-weil-pbc-vector-space-projective",
+  "lem-sf-finite-projective-dual",
+  "lem-sfb-convolution-linear-map-algebra",
+  "lem-sfb-finite-free-tensor-dual",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-vector-space-dual-separates",
+  "lem-trf-projective-exterior-scalar-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§9(d), p.174, and Theorem 12.18, pp.237–238; explicit tensor separation and scalar-convolution calculation supplied by N5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dual|baseChange|convolution",
+   "results": "{\"t\": \"2026-10-23T14:39:45Z\", \"tool\": \"grep\", \"query\": \"dual|baseChange|convolution\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\"], \"digest\": \"683a1537b0dd2a0f\"}; Read Convolution.lean:55–68 (convolution product), Dual/BaseChange.lean (linear dual comparison), and GroupLike.lean. These give components but not the character bijection or the comparison as a convolution algebra isomorphism. No one-line specialization gives the entire statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional coalgebra dual algebra commutes with scalar extension and characters correspond to group like elements",
+   "results": "{\"t\": \"2026-10-23T14:39:46Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional coalgebra dual algebra commutes with scalar extension and characters correspond to group like elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.toDual\", \"AlgHom.extendScalars\", \"Subspace.instModuleDualFiniteDimensional\", \"isGroupLikeElem_iff\", \"IsGroupLikeElem.map\", \"algHomEquivSigma\", \"IsBaseChange.toDualBaseChange\", \"IsGroupLikeElem.comul_eq_tmul_self\"], \"digest\": \"c3117f32c16ae1c4\"}; Read Convolution.lean:55–68 (convolution product), Dual/BaseChange.lean (linear dual comparison), and GroupLike.lean. These give components but not the character bijection or the comparison as a convolution algebra isomorphism. No one-line specialization gives the entire statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"Dual\"",
+   "results": "{\"t\": \"2026-10-23T14:39:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"Dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Convolution.lean:55–68 (convolution product), Dual/BaseChange.lean (linear dual comparison), and GroupLike.lean. These give components but not the character bijection or the comparison as a convolution algebra isomorphism. No one-line specialization gives the entire statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The linear dual of a finite dimensional coalgebra is a convolution algebra, formation commutes with field extension, and algebra maps from the dual to the field correspond to group like elements",
+   "results": "{\"t\": \"2026-10-23T14:39:47Z\", \"tool\": \"leanfinder\", \"query\": \"The linear dual of a finite dimensional coalgebra is a convolution algebra, formation commutes with field extension, and algebra maps from the dual to the field correspond to group like elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InnerProductSpace.AlgebraOfCoalgebra.mul_def\", \"InnerProductSpace.algebraOfCoalgebra\", \"LinearMap.convCommRing\", \"LinearMap.convRing\", \"LinearMap.convCommSemiring\", \"LinearMap.convSemiring\", \"Coalgebra.Repr.convMul_apply\", \"LinearMap.convMul_apply\"], \"digest\": \"d074e662811c7de5\"}; Read Convolution.lean:55–68 (convolution product), Dual/BaseChange.lean (linear dual comparison), and GroupLike.lean. These give components but not the character bijection or the comparison as a convolution algebra isomorphism. No one-line specialization gives the entire statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional coalgebra dual algebra scalar extension tensor dual and characters group like elements",
+   "results": "{\"t\": \"2026-10-23T14:39:48Z\", \"tool\": \"leanfinder\", \"query\": \"Finite dimensional coalgebra dual algebra scalar extension tensor dual and characters group like elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isGroupLikeElem_iff\", \"IsGroupLikeElem.comul_eq_tmul_self\", \"Coalgebra.Repr.arbitrary\", \"Pi.comul_comp_finsuppLcoeFun\", \"Pi.comul_coe_finsupp\", \"Coalgebra.Repr.eq\", \"Coalgebra.sum_counit_tmul_eq\", \"Finsupp.comul_comp_lapply\"], \"digest\": \"1c967d4abd17f431\"}; Read Convolution.lean:55–68 (convolution product), Dual/BaseChange.lean (linear dual comparison), and GroupLike.lean. These give components but not the character bijection or the comparison as a convolution algebra isomorphism. No one-line specialization gives the entire statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupLike|groupLike|group.like|toDualBaseChange|baseChange",
+   "results": "{\"t\": \"2026-10-23T14:40:47Z\", \"tool\": \"grep\", \"query\": \"GroupLike|groupLike|group.like|toDualBaseChange|baseChange\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\", \"Mathlib/LinearAlgebra/Dual/BaseChange.lean\"], \"digest\": \"365f8e84d1540d98\"}; Read Convolution.lean:55–68 (convolution product), Dual/BaseChange.lean (linear dual comparison), and GroupLike.lean. These give components but not the character bijection or the comparison as a convolution algebra isomorphism. No one-line specialization gives the entire statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a finite dimensional coalgebra is an associative convolution algebra and its algebra characters are exactly evaluations at group like elements",
+   "results": "{\"t\": \"2026-10-23T18:59:18Z\", \"tool\": \"leanfinder\", \"query\": \"The dual of a finite dimensional coalgebra is an associative convolution algebra and its algebra characters are exactly evaluations at group like elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InnerProductSpace.algebraOfCoalgebra\", \"InnerProductSpace.AlgebraOfCoalgebra.mul_def\", \"GroupLike\", \"IsGroupLikeElem\", \"LinearMap.convRing\", \"LinearMap.convSemiring\", \"Coalgebra.Repr.convMul_apply\", \"LinearMap.convCommRing\"], \"digest\": \"663d01fb25f7ee05\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: convolution and linear dual base change are components; the group-like/character bijection and convolution compatibility require the written argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coalgebra\", \"Dual\"",
+   "results": "{\"t\": \"2026-10-23T18:59:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coalgebra\\\", \\\"Dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: convolution and linear dual base change are components; the group-like/character bijection and convolution compatibility require the written argument."
+  },
+  {
+   "tool": "grep",
+   "query": "convAlgebra|convRing|convMul_apply|isGroupLikeElem_iff",
+   "results": "{\"t\": \"2026-10-23T18:59:19Z\", \"tool\": \"grep\", \"query\": \"convAlgebra|convRing|convMul_apply|isGroupLikeElem_iff\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/Convolution.lean\", \"Mathlib/RingTheory/Coalgebra/GroupLike.lean\"], \"digest\": \"a9011fddd8c1197c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: convolution and linear dual base change are components; the group-like/character bijection and convolution compatibility require the written argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dual algebra of a finite dimensional coalgebra commutes with extension of scalars and characters correspond to group like vectors",
+   "results": "{\"t\": \"2026-10-23T18:59:19Z\", \"tool\": \"leansearch\", \"query\": \"Dual algebra of a finite dimensional coalgebra commutes with extension of scalars and characters correspond to group like vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.toDual\", \"Subspace.instModuleDualFiniteDimensional\", \"IsBaseChange.dual\", \"IsBaseChange.toDualBaseChange\", \"isGroupLikeElem_iff\", \"IsBaseChange.toDual_comp_apply\", \"Module.Dual.baseChange\", \"algHomEquivSigma\"], \"digest\": \"f607235e22ce5c43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the entire item: convolution and linear dual base change are components; the group-like/character bijection and convolution compatibility require the written argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometrically-diagonal-coalgebra-separable-basis",
+  "date": "2026-10-23",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Largest subtorus and smooth connected subgroups of groups of multiplicative type. Supporting input: Milne Theorem 12.23: character description needed before forming the torsion quotient in Notation 12.29. Supporting input for the character construction: separable splitting via the geometrically diagonal coordinate coalgebra. Supporting coalgebra input: §9(d), printed pp.174–175 (finite coalgebra/algebra duality), and equation (77), printed p.237; the finite-dual scalar comparison and group-like character interpretation used in Theorem 12.18(c)⇒(d), printed p.238.",
+   "via": [
+    "lem-sfb-geometrically-diagonal-coalgebra-separable-basis",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-coalgebra-dual-base-change",
+  "worker": "stage1",
+  "summary": "Split finite coalgebra duality into six steps. Reused projective biduality, vector-space tools and an existing scalar-dual comparison. Created two general Mathlib leaves (convolution and finite-free tensor duality); wrote out tensor separation, character correspondence, and multiplicativity of the specified scalar map, including D=0.",
+  "blueprint": "Inherited supporting input for det-thm-sf-ctf-stability-direct-images (3) through the recorded Milne chain: §9(d) and Theorem 12.18. Latest blueprint contains no separate coalgebra or tensor-dual node; ancestor tool reports null, retained faithfully. These are generic algebraic tools below the unit, not a replacement of its route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-exterior-scalar-comparisons",
+    "why": "Only its explicitly normalized ordinary dual scalar-comparison clause is used; a generic finite-projective module tool, not any trace-formula theorem or replacement of the six-functor route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-exterior-scalar-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-f0432d94a",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-f0432d94a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, Milne iAG2017 §9(d) p.174 with (77) p.237 and Thm 12.18 pp.237-238, and the Mathlib source of both leaves. The item statement is unchanged from live and is true for D=0 and for noncocommutative D; I tested it on the diagonal coalgebra k^n and on the dual of M2(k). Live still has the item unsplit with no repair note, so there is no supersession and no re-split rule. Steps: S1 uses vector-space-free/projective, the finite-basis argument (correct) and sf-finite-projective-dual for biduality, then the convolution leaf with (k,D,k), which gives (77). S2 is elementary. S3 shows a character's preimage is group-like via dualDistrib surjectivity on finite free D plus dual-separates on D⊗D. S4 uses the dual clause of lem-trf-projective-exterior-scalar-comparisons with (A,B,V)=(k,F,D); D finite free meets its hypothesis, no flatness is needed, and its formula is exactly theta_F; Delta_F and eps_F are checked on generators. S5: I recomputed both products as acb·Σf(u_i)g(v_i); the unit matches. S6: the D=0 sets are empty. proof_deps equals the union of the steps' uses, with no cycle and no SGA. New leaves: convolution matches LinearMap.convRing/convAlgebra/convMul_apply/convOne_apply/convAlgebraMap_apply (Convolution.lean:212/187/63/178/192), Mathlib's Coalgebra class and noncommutative B. Tensor-dual matches TensorProduct.dualDistribEquiv (Contraction.lean:462) and dualDistrib_apply (Dual/Lemmas.lean:1099). Neither is a clause of the item, and my DAG search found no duplicates. Batch-5: the trf citation is generic module algebra that neither assumption gives; its 45-node closure has no trace-formula or Poincaré theorem and no nt- target, and the same node is already an accepted tool_use in this unit (lem-sfb-rank-zero-perfect-determinant-section). I accept the declared tool_use. Advisory: the statement has no inline [def-weil-finite-dimensional-subspace], but that node is now in stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteCoalgebraDualBaseChange",
+  "declaration": "Coalgebra.finite_dual_baseChange",
+  "file": "lean/Sheaf/RingTheory/FiniteCoalgebraDualBaseChange.lean",
+  "statement": "theorem finite_dual_baseChange {k : Type u} [Field k] {D : Type v} [AddCommGroup D] [Module k D] [Coalgebra k D] [FiniteDimensional k D] (F : Type w) [Field F] [Algebra k F] : FiniteDimensional k (WithConv (Module.Dual k D)) ∧ (∃ e : D ≃ₗ[k] Module.Dual k (WithConv (Module.Dual k D)), ∀ (x : D) (f : WithConv (Module.Dual k D)), e x f = f x) ∧ (∃ c : {x : D // IsGroupLikeElem k x} ≃ (WithConv (Module.Dual k D) →ₐ[k] k), ∀ (x : {x : D // IsGroupLikeElem k x}) (f : WithConv (Module.Dual k D)), c x f = f x.val) ∧ (∃ θ : F ⊗[k] WithConv (Module.Dual k D) ≃ₐ[F] WithConv (Module.Dual F (F ⊗[k] D)), ∀ (a b : F) (f : WithConv (Module.Dual k D)) (x : D), θ (a ⊗ₜ[k] f) (b ⊗ₜ[k] x) = a * b * algebraMap k F (f x))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses Mathlib WithConv (Module.Dual k D) with LinearMap.convRing and LinearMap.convAlgebra: these already give exactly the stated associative unital convolution algebra with its usual additive and scalar structures. The theorem supplies finite dimension, the evaluation isomorphism and character bijection, and the F-algebra comparison, each specified by its evaluation formula. The scalar-extended coalgebra is TensorProduct.instCoalgebra with (R,S,A,B)=(k,F,F,D); no cocommutativity or nontriviality of D is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-906f5ee53",
+  "group": "Q98",
+  "result": "fix",
+  "note": "Lean exact: Field/FiniteDimensional/Coalgebra k D = node hypotheses (no IsCocomm, no Nontrivial); A = WithConv (Module.Dual k D) Mathlib convolution (convMul_apply/convOne_apply = node formulas); ∃ e evaluation iso pinned e x f = f x; ∃ c group-like ≃ (A →ₐ[k] k) pinned c x f = f x.val (IsGroupLikeElem = counit 1 ∧ comul x⊗x); ∃ θ : F⊗A ≃ₐ[F] WithConv(Dual F (F⊗D)) pinned on pure tensors a*b*algebraMap(f x), D_F coalgebra = TensorProduct.instCoalgebra (k,F,F,D); D=0 both sides empty; universes u,v,w independent; statement verbatim; node differs from live only in lean; docstrings and 6 steps present; no defs; sorry only; no duplicate found. Only fault H11: 'Second reading by Q98' says no reading was performed → FIX fixes/lem-sfb-finite-coalgebra-dual-base-change.report.md (worker report verbatim + real clause-by-clause second reading). No Lean change, no compile."
+ }
+}

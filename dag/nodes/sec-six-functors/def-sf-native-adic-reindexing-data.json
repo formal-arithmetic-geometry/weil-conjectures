@@ -1,0 +1,118 @@
+{
+ "id": "def-sf-native-adic-reindexing-data",
+ "kind": "definition",
+ "title": "Canonical native adic scalar tensor and Hom reindexing data",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a scheme isomorphism $g:X\\xrightarrow\\sim Y$, native normalized realizations $R_X,R_Y$ and their ordinary tensor data of [def-sf-native-adic-realization-data]. Define a coefficient reindexing datum as an isomorphism $g^{-1}R_Y\\cong R_X$ in the sectionwise inverse-image model of [def-sf-proetale-sectionwise-module-inverse-image], equal to the identity on the underlying finite-extension-valued continuous functions. Define ordinary module inverse image by this recorded sectionwise module functor with the transported ring action, its exactness by the recorded exactness theorem, and its derived functor by exact termwise derivation. For a finite coefficient field $E$, an integral reindexing datum is a balanced scalar-base-change isomorphism between this module pullback after integral extension to $R_Y$ and integral extension to $R_X$ after the completed integral module inverse image of [def-sf-adic-closed-reindexing-maps]. Require it on every pure section to send $a\\otimes x$ to the coefficient-reindexed $a\\otimes x$. Include a derived base-change isomorphism and require its representative equation through the universal derived-extension cochain counits and the exact inverse-image cochain factorizations. These are definitions, with no existence asserted. The scalar structural map uses [def-sf-native-adic-finite-normalization].",
+ "stmt_deps": [
+  "def-sf-native-adic-realization-data",
+  "def-sf-proetale-sectionwise-module-inverse-image",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-native-adic-finite-normalization"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.8 and Remark 6.8.15; HRS Lemma 7.9; normalized comparison data used in lem-sf-adic-qbar-constructible-realization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical data for tensor and internal Hom realization of constructible adic derived coefficients, with balanced integral normalization and scheme isomorphism coherence",
+   "results": "8 hits: ihom.adjunction, ihom.coev, MonoidalClosed.internalHomAdjunction₂, Types.tensorProductAdjunction, and AdicCompletion finite-module tensor-product equivalences/generator formulas. No native constructible realization/reindexing datum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized symmetric monoidal constructible adic realization data preserving internal Hom evaluation and arbitrary scheme isomorphisms",
+   "results": "8 hits: Scheme.Hom.normalizationDiagram, normalizationDiagramMap, normalization, and affine transition-limit section descent results. None is the requested data.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "([Rr]ealization.*[Tt]ensor|[Aa]dic.*[Ii]somorphism)",
+   "results": "Mathlib grep: 25 hits on padic/adic-completion ring equivalences, local cohomology and monadicity, no native realization datum.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg normalized.*realization.*data|realization.*isomorphism.*data|tensor.*realization.*data dag/nodes/sec-six-functors; rg tensorInclusion|inclusionTensor|stageTensor lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search common-stage inclusion tensor",
+   "results": "DAG and project searches found abstract IntegralTensorComparisonSystem (perfect-valued D(R_E), not native module sheaves), IntegralOpenReductionComparison (open-extension strict towers), SemilinearGeometryDerived (strict coefficient towers), and general common tensor descent. Read these statement/lean records: none supplies the native continuous ring realization or its ordinary sectionwise reindexing data. Existing actual coefficient, tensor, Hom, derived and reindexing constructions are reused. Blueprint search gives 0 matching inclusion-comparison nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Explicit canonical comparison data in the native realization obligation. The parent is a maintainer-created native obligation with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeAdicReindexingData",
+  "declaration": "WeilConjectures.AdicQbarRealization.IntegralReindex",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.RingReindex",
+   "WeilConjectures.AdicQbarRealization.modulePull",
+   "WeilConjectures.AdicQbarRealization.modulePullExact",
+   "WeilConjectures.AdicQbarRealization.modulePullAdditive",
+   "WeilConjectures.AdicQbarRealization.modulePullLimits",
+   "WeilConjectures.AdicQbarRealization.modulePullColimits",
+   "WeilConjectures.AdicQbarRealization.derivedPull",
+   "WeilConjectures.AdicQbarRealization.integralReindexRepresentative",
+   "WeilConjectures.AdicQbarRealization.integralReindexSections",
+   "WeilConjectures.AdicQbarRealization.IntegralReindex"
+  ],
+  "file": "lean/Sheaf/Paper/NativeAdicReindexingData.lean",
+  "statement": "structure IntegralReindex {Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] {R : LocallyFiniteAdicRealization.Realization l X} {S : LocallyFiniteAdicRealization.Realization l Y} (B : RingReindex l X g R S) (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Definition-only packaging of the exact canonical ordinary native comparison data needed by the parent. Every construction reuses the recorded coefficient/module/derived/operation definitions. All normalization and representative equations are retained; no existence theorem is chosen here."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 0705. H3 repaired: Family.sourceId_unit (pullbackTensorCommonComposition 𝟙 𝟙 M ≫ sourceId at F M = 𝟙, HEq along id_comp) is the pseudofunctor left-unit law; it fixes sourceId through essential surjectivity and naturality, so identity is no longer vacuous. H2 repaired: theorem stmt_deps replaced by def-zl-ringed-...-data plus four existing:true owners; each statement is verbatim in its unchanged module and all declarations exist; the other five Lean files are byte-identical to 0705. FIX: def-sf-adic-closed-reindexing-maps re-owned PodPartialClosed, .evaluation and podPairPullback, already owned by the on-base def-pod-partial-closed-interfaces (Q69, landed 15:55Z 10-22); fixes/def-sf-adic-closed-reindexing-maps.json removes them, cites the owner and rewrites the TeX. Advisory: def-sf-proetale-sectionwise-module-inverse-image duplicates Q15 def-weil-proetale-iso-sectionwise-inverse-image, landed 05:13Z after base 04:33Z; it cannot be cited by a FIX, so the maintainer should merge the nodes. No Lean changed and no compile was run."
+ }
+}

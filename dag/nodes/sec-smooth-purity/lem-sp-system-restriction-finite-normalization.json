@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-system-restriction-finite-normalization",
+ "kind": "statement",
+ "title": "Finite evaluation of normalized strict-system restriction comparisons",
+ "statement": "Fix a prime $\\ell$, a map $a:B_\\bullet\\to C_\\bullet$ of the finite $\\ell$-power-torsion coefficient sequences of [def-pur-etale-system-projection-data], schemes $X,Z,Y$, an open immersion $j:X\\hookrightarrow Z$, any morphism $p:Z\\to Y$, and ANY normalized Comparison datum $d$ of [def-sp-system-compact-support-restriction-data]. Use the actual geometric operations and evaluation comparisons of [def-sp-varying-ring-operations]. Then FiniteCompatibility d of [def-sp-system-compact-support-restriction-evaluation] is inhabited. Explicitly: the constant coefficient maps commute with the canonical geometric ring isomorphisms at every level; there are finite open comparisons normalized by the original derived open-adjunction units; evaluation of d.openPart is those comparisons after conjugation by restrictionEvaluation and evalJ; evaluation of d.properPart.iso is levelProper after conjugation by restrictionEvaluation and evalP. These are equalities of the specified comparison words, never an inference from faithfulness of evaluation.",
+ "stmt_deps": [
+  "def-sp-system-compact-support-restriction-data",
+  "def-pur-etale-system-projection-data",
+  "def-sp-varying-ring-operations",
+  "def-sp-system-compact-support-restriction-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 070Y; parent step 7, triangle-identity computation of the mate and evaluation."
+ },
+ "proof": [
+  {
+   "text": "naturality of the constant-sheaf pullback isomorphism proves LevelComm for both\ngeometric maps. Use the ordinary section comparison for open extension at each level\nand localize it; its summand adjunction gives openNormalized. Both system and level open\nmaps are the identity on the open summand and zero off it, so restrictionEvaluation and\nevalJ identify their localized words, giving openEvaluation. For the proper comparison,\nform the derived adjunction mate of the inverse-image coefficient square. On a\nK-injective H and a K-injective resolution v of its restriction, expand this mate as\nunit, inverse-image square, counit and the resolution map. The underived adjunction\ntriangle identity reduces it to the localized direct image of v. Thus it is the inverse\nof d.properPart.iso by its normalization. K-injective representatives and naturality\nextend that equality to the entire derived category. The specified evalP and evalG\nare adjunction mates, and their unit/counit equations carry this mate word to its level\nmate, with restrictionEvaluation identifying its vertical edges. The identical\nK-injective computation at the level shows that the inverse level mate is levelProper,\nwhose unique derived-unit normalization is fixed by the ring-sheaf change adjunction.\nInverting the evaluated mate identity gives properEvaluation. These constructions give\nevery field of FiniteCompatibility, and handle identity and nonflat maps and empty\nschemes without changing the argument.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-semilinear-derived-sections",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-direct-image-scalar-restriction-cocycle",
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E and 070Y; parent step 7, triangle-identity computation of the mate and evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-coef-semilinear-derived-sections",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-direct-image-scalar-restriction-cocycle",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 070Y; parent step 7, triangle-identity computation of the mate and evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact coefficient restriction commutes with extension by zero on a ringed sequence site with units and composition",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.unit_app, unit and Unit.map; RestrictionCoextensionAdj.unit and app; three Ext exact sequence statements. These are ordinary module units or unrelated exact sequence results, not whole-system open/proper restriction or finite-evaluation normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective normalized derived direct image of inverse systems commutes with restriction of scalars and satisfies composition and unit laws",
+   "results": "localCohomology.diagram and ofDiagram, Condensed.profiniteSolid/profiniteFree, CondensedMod.ofSheafProfinite and LightCondMod.ofSheafLightProfinite; ordinary module/condensed constructions rather than the specified normalized whole-system comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(rightDerived|[Cc]ocycle)|rightDerivedFunctorComparison; rg RestrictionIdentifications|ProperComparison|OpenComparison|GeometricSquare|FiniteCompatibility lean/Sheaf/Paper lean/WeilConjectures",
+   "results": "Mathlib PointwiseRightDerived gives six generic rightDerivedFunctorComparison declarations. Project search finds the existing data/evaluation specifications, the parent theorem and fixed finite-coefficient cocycle. Read their signatures: none states this factor result. Reuse these definitions and generic derived composition instead of duplicating a definition. Blueprint searches restriction coherence and restriction finite normalization both return zero nodes.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemCompactSupportRestrictionCocycle",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-finite-field-independence",
+   "place": "Tags 0D6E and 070Y; parent step 7, triangle-identity computation of the mate and evaluation.",
+   "via": [
+    "lem-weil-system-compact-support-restriction-cocycle",
+    "lem-weil-compact-support-normalized-scalar-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemRestrictionFiniteNormalization",
+  "file": "lean/Sheaf/Paper/SystemRestrictionFiniteNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SystemCompactSupportRestriction.systemRestrictionFiniteNormalization",
+  "statement": "theorem systemRestrictionFiniteNormalization (l : ℕ) [Fact l.Prime]\n    {B C : Etale.SystemProjection.Coefficients.{u} l} (a : B.rings ⟶ C.rings)\n    {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y)\n    (d : Comparison a j p) : Nonempty (FiniteCompatibility d)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T161855-L-134278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T161855-L-134278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

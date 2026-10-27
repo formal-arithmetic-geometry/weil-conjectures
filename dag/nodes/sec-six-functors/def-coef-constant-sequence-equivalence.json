@@ -1,0 +1,144 @@
+{
+ "id": "def-coef-constant-sequence-equivalence",
+ "kind": "definition",
+ "title": "Constructed constant-ring sequence equivalence with independent universes",
+ "status": "split",
+ "statement": "Let $C$ be a site with topology $J$, and let $O$ be a sheaf of commutative rings. Use the module category [def-weil-sheaf-of-modules-category] and the vertical sequence-ring and strict-system construction [lem-pur-system-ringed-sequence-site]. Site objects, arrows and coefficients may lie in independent universes $c,v,r$; modules and all sheafification data lie in $w=\\max(c,v,r)$. Define the equivalence from modules over the sequence ring of the constant $O$ diagram to ordinary inverse towers of $O$-modules as the inverse of the strict-system/sequence-site equivalence followed by the explicit constant-system/tower equivalence. The latter takes a strict system to its levels and transition arrows; its inverse assigns to a tower those same levels and arrows as a strict system. Its unit and counit have identity level maps. Both functors are additive. In both directions the section at $(n,U)$ is literally the section of level $n$ at $U$, vertical restrictions are those of that level, horizontal restrictions are the tower transitions, and components of module morphisms are unchanged. These sectionwise identifications are expressed as heterogeneous equalities, allowing the identity scalar restrictions.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0940, constant-ring vertical sequence site; sites-modules.tex Tag 03DA; Zheng Construction 4.1. Blueprint prop-coef-integral-dualizing proof paragraph 2, mapping complexes before inverse limits."
+ },
+ "proof": [
+  {
+   "step": 1,
+   "text": "Use the explicit strict-system/sequence-site equivalence of [lem-pur-system-ringed-sequence-site]. For constant coefficients, the strict-system/tower functors take the same levels and arrows, and the identity component maps give the unit and counit. The forward composite preserves addition: after extensionality at a tower level, a site object and a section, both sides are definitionally the same sum. Mathlib CategoryTheory.Equivalence.inverse_additive then proves additivity of the inverse.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "step": 2,
+   "text": "For the forward composite, sections, vertical restrictions and morphism components are definitional identities. The horizontal section map is sequenceSystemTransitionApp. The coefficient identity systemSequenceRing_horizontal specializes, for the constant diagram, to the identity ring homomorphism. Substitute this ring homomorphism and apply extensionality of linear maps to obtain the required heterogeneous equality.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "step": 3,
+   "text": "For the inverse composite, sections and morphism components are definitional identities. A vertical restriction first applies the tower map at an identity index, which is the identity by functoriality, and then applies the level restriction. A horizontal restriction applies the tower transition followed by restriction along an identity site arrow. Identify its scalar homomorphism with the identity by systemSequenceRing_horizontal, then use the presheaf map_id law and extensionality. These computations prove all four inverse sectionwise formulas.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof_origin": "Stacks 03DA and 0940; Zheng Construction 4.1; explicit Lean component calculations by H9, 2026-10-24. The same-universe proof supplies the pattern for the forward formulas; all three independent-universe theorems are proved without new holes.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant ring sequence sheaves equivalence ordinary module towers independent universes",
+   "results": "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; SheafOfModules.mk.inj; SheafOfModules.freeHomEquiv; SheafOfModules.mk.injEq; SheafOfModules; ModuleCat.Tilde.const.congr_simp; SheafOfModules.noConfusionType",
+   "date": "2026-10-23",
+   "verdict": "No independent-universe constant-ring sequence equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.const, CategoryTheory.Equivalence",
+   "results": "CategoryTheory.Limits.Cocone.equivStructuredArrow; CategoryTheory.Limits.Cone.equivCostructuredArrow; CategoryTheory.WithInitial.equivComma; CategoryTheory.WithTerminal.equivComma",
+   "date": "2026-10-23",
+   "verdict": "No independent-universe constant-ring sequence equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSequenceModule|systemTowerEquivalence",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No independent-universe constant-ring sequence equivalence."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-hom-tower-scalar-model",
+  "date": "2026-10-23",
+  "group": "Q64"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, derived extension-restriction mapping-complex calculation before limits; the constant tower and simultaneous representative.",
+   "via": [
+    "lem-coef-hom-tower-scalar-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantSequenceModuleEquivalenceOfUniverses",
+  "declaration": "CategoryTheory.ConstantCompletion.independentConstantSequenceEquivalence",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.independentSystem",
+   "CategoryTheory.ConstantCompletion.independentToTower",
+   "CategoryTheory.ConstantCompletion.independentFromTower",
+   "CategoryTheory.ConstantCompletion.independentSystemTowerEquivalence",
+   "CategoryTheory.ConstantCompletion.independentConstantSequenceEquivalence",
+   "CategoryTheory.ConstantCompletion.independentConstantSequenceEquivalence_additive",
+   "CategoryTheory.ConstantCompletion.independentConstantSequenceEquivalence_sections",
+   "CategoryTheory.ConstantCompletion.independentConstantSequenceEquivalence_inverse_sections"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantSequenceModuleEquivalenceOfUniverses.lean",
+  "statement": "def independentConstantSequenceEquivalence : systemSequenceModules.{c, v, max c v r} ((Functor.const ℕᵒᵖ).obj O) ≌ (ℕᵒᵖ ⥤ ringedSiteModules.{max c v r} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))",
+  "branch": "sheaf-dag",
+  "by": "Q64",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0316ac306",
+  "group": "Q64",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0316ac306",
+  "group": "Q64",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 60d594a7a827; diffed against that snapshot. R1 resolved: C4 record and module untouched (no dependency node delivered); new def node def-coef-constant-sequence-equivalence with a real independent-universe equivalence (independentToTower/FromTower with identity unit/counit, composed with strictSystemSequenceEquivalence.symm), additivity and sectionwise HEq theorems with proof plans, statement verbatim, all declarations listed, not a duplicate (C4's version is private and equal-universe only); the item cites it in stmt_deps and coefHomEquivalence is no longer .choose. R2 resolved: coefHomSequenceSections_iso is now ∃! with CoefHomSliceNormalization (coefficientHomComponent at level n = slice component at (n,U)); coefHomTower_representative isos have hom = coefHomRepresentativeMap (universal right-derived comparison, RΓ of the K-injective-augmentation internal comparison, eP/eI transports); main clause 2 is ∃ γ with CoefHomEvaluationNormalization over all P, I, eP, eI, which determines γ. Unchanged and still correct: α.inv/β.inv pinned to A.iso/B.iso, ∃!-pinned factorization squares, no flatness or boundedness, independent universes t,u, edge cases K=0, N=0, n=0 (A_1), empty W, K=R_W/ϖ; isomorphisms are in derived categories; real pro-étale site. DAG statement equal to live; Lean statements verbatim; only theorems use sorry. Advisory: the new pins use declarations owned by def-coef-hom-representative-evaluation and def-coef-hom-zero-cycle-class, reached through stmt_dep def-coef-ringed-sequence-site; the new module needlessly imports the C4 theorem module; coefHomInternalComparison is a local helper like others in the tree; the second reading was again by the same worker. No fix, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261024T190033-L-3867960",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

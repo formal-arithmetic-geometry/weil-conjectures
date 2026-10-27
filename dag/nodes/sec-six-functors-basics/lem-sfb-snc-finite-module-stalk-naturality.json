@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-snc-finite-module-stalk-naturality",
+ "kind": "statement",
+ "title": "Semilinear naturality of normalized finite module stalk actions",
+ "statement": "Let $p$ be a natural number, $Y$ a scheme, $C$ a finite labelled family of ideal sheaves, $I$ a subset of its labels, and $Q$ an SNC residual chart [def-sfb-snc-residual-chart-data]. Put $U=Q.puncturedResidual$ and $X=Q.puncturedTower$. Let $z:\\operatorname{Spec}\\Omega\\to X$ be a geometric point and let $d$ be normalized finite-fibre classification data [def-sfb-snc-finite-fibre-data] for the finite tame category of $Q$ [def-sfb-snc-finite-tame-sheaves]. Write $G=\\operatorname{SNCInertia}(p,|I|)$ and $y=u(z)$, where $u:X\\to U$ is the tower map. Let $R,S$ be arbitrary unital rings, $\\varphi:R\\to S$ a unital homomorphism, and $M,N$ sheaves of left $R$-modules and left $S$-modules on $U_{\\mathrm{proet}}$ [def-weil-sheaf-of-modules-category], each with underlying set sheaf finite tame. Let $f:M\\to\\operatorname{Res}_\\varphi N$ be an $R$-linear sheaf map. Suppose $t:M_y\\to\\operatorname{Res}_\\varphi(N_y)$ is an $R$-linear map with $\\iota_{M,V}t=f_V\\operatorname{Res}_\\varphi(\\iota_{N,V})$ for every pointed pro-etale neighbourhood $V$ of $y$, with $\\iota$ the geometric stalk coprojections [def-weil-proetale-geometric-stalk]. Then there are $R$-linear and $S$-linear actions $A,B$ of $G$ on $M_y,N_y$, normalized on every actual finite label as in SNCFiniteModuleStalkAction, such that $A(g)t=t\\operatorname{Res}_\\varphi(B(g))$ for every $g\\in G$. Neither a scalar-extension functor nor a scalar-comparison isomorphism is assumed; the rings need not be finite or commutative.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.1, pp.34-35; finite-operation consequence of natural normalized splittings (parent old Step 11); ILO IX Proposition 2.1 supplies the geometric context."
+ },
+ "stmt_deps": [
+  "def-sfb-snc-residual-chart-data",
+  "def-sfb-snc-finite-tame-sheaves",
+  "def-sfb-snc-finite-fibre-data",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-geometric-stalk",
+  "def-pod-ring-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Forgetting modules preserves the filtered neighbourhood colimit. Compose this comparison with d.fibreIso. The normalized-label equation identifies this bijection with moduleStalkLabel on every finite label. Thus those labels exhaust each actual module stalk.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite products preserved by d and its inclusion to interpret addition and zero as maps of finite tame set sheaves. Naturality for these and for negation and every scalar map identifies the induced label operations with the actual stalk operations. Since each d.fibre.map is equivariant, the root permutations preserve these operations. Conjugate them along the label bijection to obtain the required linear stalk actions, with group laws and normalization.",
+   "uses": [
+    "lem-sfb-normalized-finite-splitting-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars leaves the underlying sheaf unchanged, so the underlying map of f is a map of the finite tame set sheaves. Its fibre map is equivariant by d.fibre. The equation on coprojections identifies that map with t on normalized labels. Those labels exhaust the stalk, proving the equality of R-linear maps. The empty source label case cannot occur for a module, even over the zero ring; the zero module has one label.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-geometric-stalk",
+  "lem-sfb-normalized-finite-splitting-operations",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.1, pp.34-35; finite-operation consequence of natural normalized splittings (parent old Step 11); ILO IX Proposition 2.1 supplies the geometric context.",
+  "note": "Explicit finite-coefficient consequence of the cited sources; no unit route is changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized monodromy actions on the finite stalks of module sheaves commute with semilinear sheaf morphisms",
+   "results": "{\"t\": \"2026-10-26T08:16:04Z\", \"tool\": \"leansearch\", \"query\": \"Normalized monodromy actions on the finite stalks of module sheaves commute with semilinear sheaf morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.sectionsFunctor_map\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"ModuleCat.Tilde.toStalk\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.instAbelian\", \"SheafOfModules.sectionsMap\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"TopCat.Presheaf.mono_iff_stalk_mono\"], \"digest\": \"2b8c3ec855b4bdb1\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: results concern general module/sheaf operations, not normalized SNC finite-label monodromy or original-chart tame scalar closure."
+  },
+  {
+   "tool": "grep",
+   "query": "(tame|monodromy).*(scalar|module)|(scalar|module).*(tame|monodromy)",
+   "results": "{\"t\": \"2026-10-26T08:17:38Z\", \"tool\": \"grep\", \"query\": \"(tame|monodromy).*(scalar|module)|(scalar|module).*(tame|monodromy)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: results concern general module/sheaf operations, not normalized SNC finite-label monodromy or original-chart tame scalar closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContAction\", \"Module\"",
+   "results": "{\"t\": \"2026-10-26T08:17:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"ContAction\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: results concern general module/sheaf operations, not normalized SNC finite-label monodromy or original-chart tame scalar closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SNCFiniteFibreClassification",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; finite-coefficient consequence of parent Step 5 (old Step 11), semilinear naturality of normalized finite module stalk actions.",
+   "via": [
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SNCFiniteModuleStalkNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCFiniteModuleStalkNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sncFiniteModuleStalkAction_natural",
+  "statement": "theorem sncFiniteModuleStalkAction_natural {p : ℕ} {Y : Scheme.{u}} {a : ℕ} {C : Fin a → Y.IdealSheafData} {I : Finset (Fin a)} (Q : SNCResidualChart p C I) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Q.puncturedTower) (d : SNCFiniteFibreClassification Q z) (R S : Type (u + 1)) [Ring R] [Ring S] (φ : R →+* S) (M : Sheaf (Scheme.ProEt.topology Q.puncturedResidual) (ModuleCat.{u + 1} R)) (N : Sheaf (Scheme.ProEt.topology Q.puncturedResidual) (ModuleCat.{u + 1} S)) (hM : Q.finiteTame ((sheafCompose (Scheme.ProEt.topology Q.puncturedResidual) (forget (ModuleCat.{u + 1} R))).obj M)) (hN : Q.finiteTame ((sheafCompose (Scheme.ProEt.topology Q.puncturedResidual) (forget (ModuleCat.{u + 1} S))).obj N)) (f : M ⟶ (sheafCompose (Scheme.ProEt.topology Q.puncturedResidual) (ModuleCat.restrictScalars.{u + 1} φ)).obj N) (t : Scheme.proEtaleGeometricStalk (z ≫ Q.towerMap) M ⟶ (ModuleCat.restrictScalars.{u + 1} φ).obj (Scheme.proEtaleGeometricStalk (z ≫ Q.towerMap) N)) (ht : ∀ V : Scheme.ProEtaleGeometricNeighbourhood (z ≫ Q.towerMap), colimit.ι (Scheme.proEtaleGeometricStalkDiagram (z ≫ Q.towerMap) M) (op V) ≫ t = f.hom.app (op V.right) ≫ (ModuleCat.restrictScalars.{u + 1} φ).map (colimit.ι (Scheme.proEtaleGeometricStalkDiagram (z ≫ Q.towerMap) N) (op V))) : ∃ (A : SNCFiniteModuleStalkAction d M hM) (B : SNCFiniteModuleStalkAction d N hN), ∀ g : SNCInertia.{u} p (Fintype.card I), A.action g ≫ t = t ≫ (ModuleCat.restrictScalars.{u + 1} φ).map (B.action g)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ae394",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T092320-L-3422101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ae394",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T092320-L-3422101",
+  "kind": "interface",
+  "note": "independent cc review: item scalarReduction proof + 2 new sorry modules/nodes vs item statement, SNCFiniteFibreData/finiteTame defs, unit realized lists, node diffs, sandbox compile with #print axioms"
+ }
+}

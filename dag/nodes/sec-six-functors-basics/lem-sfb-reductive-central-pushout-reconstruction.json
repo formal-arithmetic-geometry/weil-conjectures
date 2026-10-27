@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-reductive-central-pushout-reconstruction",
+ "kind": "statement",
+ "title": "Reconstruction from the simply connected adjoint cover and the centre",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], with closed subgroup schemes [def-sc-group-scheme-subgroup]. Reductivity and maximal tori have the meanings of [def-sfb-reductive-torus-centralizer-terminology]. The centre $Z(G)$ is the subgroup functor of points commuting with every point after every commutative algebra extension. Quotients are represented fppf sheaf quotients as in [lem-sfb-affine-normal-quotient-geometry]. Let $G$ be reductive. Let $S$ be a perfect semisimple group, and let $q:S\\to G/Z(G)$ be a universal multiplicative covering whose kernel is $Z(S)$. Perfect means that the smallest closed subgroup through which the commutator morphism factors is the whole group. Semisimple means smooth and connected with no nontrivial smooth connected solvable normal subgroup; solvable means that iterated commutator subgroup schemes become trivial. Universal multiplicative covering means a faithfully flat homomorphism with finite central diagonalizable kernel such that for every faithfully flat $p:E\\to G/Z(G)$ with finite central diagonalizable kernel and smooth connected $E$, there is a unique $u:S\\to E$ satisfying $p\\circ u=q$. A diagonalizable group is $D_F(M)=\\operatorname{Spec}F[M]$ for a finitely generated abelian group $M$, with group algebra basis $e_m$, multiplication $e_me_n=e_{m+n}$ and comultiplication $e_m\\mapsto e_m\\otimes e_m$ [lem-sfb-multiplicative-character-antiduality]. Then $D=Z(G)$ is diagonalizable and there exists $v:S\\to G$ lifting $q$. Its restriction $\\varphi:Z(S)\\to D$ has torus cokernel, and the homomorphism $S\\times D\\to G$, $(s,d)\\mapsto v(s)d$, identifies $G$ with the fppf quotient $$G\\simeq(S\\times D)/\\{(z,\\varphi(z)^{-1}):z\\in Z(S)\\}.$$ Here torus means isomorphic to $\\mathbf G_m^r$ for some $r\\geq0$, with $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Moreover $G^{\\mathrm{der}}=\\operatorname{im}(v)\\simeq S/\\ker\\varphi$ as subgroup schemes of $G$, where $G^{\\mathrm{der}}$ denotes the smallest closed subgroup through which the commutator morphism factors. The homomorphism $\\varphi$ is not required to be injective or trivial. The statement includes the trivial group and all characteristics.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Definition 19.26, Proposition 19.27, Example 19.25 and Remark 19.30, printed pp.404--405. Use the simply connected covering in Remark 19.30, allowing a noninjective homomorphism on centres; Proposition 19.27 identifies the derived subgroup and torus quotient."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-multiplicative-character-antiduality",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-affine-group-centre-base-change], $D=Z(G)$ is a closed normal commutative subgroup. Choose a Borel subgroup using the existence assertion of [lem-sfb-borel-conjugation-cover], then a split maximal torus $T$ using [lem-sfb-borel-maximal-torus-conjugacy]. For every algebra $A$ and every $z\\in D(A)$, the definition of the centre makes $z$ commute with all $T(A')$ after every $A$-algebra extension. Hence $D\\subseteq C_G(T)=T$ by [lem-sfb-reductive-torus-self-centralizer]. This is a closed subgroup inclusion: the surjection $F[G]\\to F[D]$ factors through $F[T]$. Apply [lem-sfb-split-torus-subgroups-diagonalizable] to obtain $D\\simeq D_F(M)$. No root datum or rank-one classification is used.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-borel-conjugation-cover",
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.62(a), Proposition 17.61(a), p.372; Theorem 17.10, pp.354--355; Theorem 12.9(c), pp.233--234."
+   }
+  },
+  {
+   "text": "Put $H=G^{\\mathrm{der}}$. By [lem-sfb-smooth-connected-derived-subgroup] it is smooth, connected and normal. Form the closed image $I$ of $D\\times H\\to G$ using [lem-sfb-affine-homomorphism-flat-image]. Centrality of $D$ and normality of $H$ show that $I$ is normal (conjugate local expressions $dh$). By [lem-sfb-affine-normal-quotient-geometry] the quotient $G/I$ exists; it is commutative since it kills $H$. It also kills $D$, so its quotient map factors through $Q=G/D$. The resulting map $S\\xrightarrow{q}Q\\to G/I$ is trivial: its kernel contains all commutators of the perfect group $S$. As $q$ is an fppf epimorphism, $Q\\to G/I$ is trivial, and therefore $G/I=1$. Thus $G=DH$ and multiplication $D\\times H\\to G$ is faithfully flat. These equalities mean equality of fppf sheaves and closed subgroup schemes.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 19.25, p.404: the common commutative and perfect quotient argument, using the given perfect covering S instead of Corollary 21.50."
+   }
+  },
+  {
+   "text": "Set $K=D\\cap H$. Apply [lem-sfb-central-diagonalizable-derived-intersection-finite] to the smooth connected $G$ and central diagonalizable $D$ of step 1: $K$ is finite. It is diagonalizable by [lem-sfb-split-torus-subgroups-diagonalizable], since it is a closed subgroup of the split torus $T$ from step 1. The restriction $p:H\\to Q$ has kernel $K$ and is an fppf epimorphism: locally lift a point of $Q$ to $g\\in G$, then write $g=dh$ by step 2. The quotient statements of [lem-sfb-affine-normal-quotient-geometry] identify $H/K\\simeq Q$ and make $p$ faithfully flat. Its kernel is central, finite and diagonalizable and its source $H$ is smooth and connected. The stipulated universal property of $q$ therefore gives $u:S\\to H$ with $pu=q$. Define $v$ as $S\\xrightarrow{u}H\\hookrightarrow G$.",
+   "uses": [
+    "lem-sfb-central-diagonalizable-derived-intersection-finite",
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 19.30, p.405, lifting through the multiplicative isogeny of Example 19.25; Proposition 12.46(a), pp.245--246."
+   }
+  },
+  {
+   "text": "For $z\\in Z(S)$, $q(z)=1$, so $v(z)\\in\\ker(G\\to Q)=D$. Define $\\varphi=v|_{Z(S)}$. The homomorphism $m:S\\times D\\to G$, $m(s,d)=v(s)d$, is fppf locally surjective: for any $g$, lift its image in $Q$ locally to $s\\in S$, and put $d=v(s)^{-1}g\\in D$. Its kernel on every algebra is exactly $\\{(z,\\varphi(z)^{-1}):z\\in Z(S)\\}$, because $m(s,d)=1$ implies $q(s)=1$, and the assumed scheme-theoretic kernel of $q$ is $Z(S)$. The inverse-diagonal graph is closed and central. The fppf quotient universal property of [lem-sfb-affine-normal-quotient-geometry] now identifies $G$ with the stated quotient of $S\\times D$. This computation uses all algebra-valued points, not just field-valued points.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 19.26 and Remark 19.30, pp.404--405; explicit kernel calculation in their defining diagram."
+   }
+  },
+  {
+   "text": "Let $J=\\operatorname{im}(v)\\subseteq H$ be the closed faithfully flat image furnished by [lem-sfb-affine-homomorphism-flat-image]. From step 4, every point of $G$ is fppf locally $v(s)d$. Hence each commutator of points of $G$ is locally $v([s_1,s_2])$, so lies in $J$; membership in a closed subgroup descends along an fppf cover. Consequently the commutator morphism factors through $J$ and the defining minimality of $H$ gives $H\\subseteq J$. Since $J\\subseteq H$, $J=H$. Thus $u:S\\to H$ is faithfully flat. Its kernel is $\\ker\\varphi$: an element killed by $v$ is killed by $q$ and hence lies in $Z(S)$, where $v=\\varphi$. Applying [lem-sfb-affine-normal-quotient-geometry] to $S/\\ker\\varphi$ gives $H\\simeq S/\\ker\\varphi$ with the required inclusion into $G$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.27, pp.404--405, derived-subgroup identification; commutator computation for the quotient from step 4."
+   }
+  },
+  {
+   "text": "Since $u:S\\to H$ is fppf locally surjective, every $k\\in K$ lifts fppf locally to $s\\in S$ with $v(s)=k$. Then $q(s)=1$, so $s\\in Z(S)$. Conversely $v(Z(S))\\subseteq K$. Therefore $\\operatorname{im}\\varphi=K$ as fppf sheaves. Step 2 also gives $D/K\\simeq G/H$: $D\\to G/H$ is locally surjective with kernel $K$, so [lem-sfb-affine-normal-quotient-geometry] identifies these quotients. That same node says $G/H$ is smooth and connected. The quotient $D/K$ is diagonalizable by [lem-sfb-diagonalizable-quotient-character-kernel], and a smooth connected group of multiplicative type is a torus by [lem-sfb-multiplicative-type-largest-subtorus]. Over the algebraically closed $F$ this is $\\mathbf G_m^r$. Thus $\\operatorname{coker}\\varphi=D/K$ is a torus, as claimed. Nothing asserts that $\\varphi$ is injective, or that its finite image is reduced.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-diagonalizable-quotient-character-kernel",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 19.25, Definition 19.26, Proposition 19.27 and Remark 19.30, pp.404--405; Theorem 12.9(c), pp.233--234, and Definition 12.14, p.236."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-borel-conjugation-cover",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-central-diagonalizable-derived-intersection-finite",
+  "lem-sfb-diagonalizable-quotient-character-kernel",
+  "lem-sfb-multiplicative-type-largest-subtorus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Example 19.25, Definition 19.26, Proposition 19.27 and Remark 19.30, pp.404--405, with the given perfect cover supplying the perfectness argument, and Proposition 12.46(a), pp.245--246, supplying finite intersection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group is a central quotient of its simply connected derived covering group times its scheme theoretic centre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"of_quotient_center_nilpotent\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {G : Type u_1} [inst : Group G], Group.IsNilpotent (G ⧸ Subgroup.center G) → Group.IsNilpotent G\", \"doc\": \"If the quotient group $ G / Z(G) $, where $ Z(G) $ is the center of $ G $, is nilpotent, then the group $ G $ itself is nilpotent.\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"Subgroup.quotientCenterEmbedding\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] → {S : Set G} → Subgroup.closure S = ⊤ → G ⧸ Subgroup.center G ↪ ↑S → ↑(commutatorSet G)\", \"doc\": \"An injective function from the quotient group $ G / Z(G) $ (where $ Z(G) $ is the center of $ G $) to the commutator set of $ G $, constructed by composing quotient equivalences and embeddings. This m\"}\n  {\"name\": \"nilpotent_center_quotient_ind\", \"module\": \"Mathlib/GroupTheory/Nilpotent\", \"type\": \"∀ {P : (G : Type u_2) → [inst : Group G] → [Group.IsNilpotent G] → Prop} (G : Type u_2) [inst : Group G]\\n  [inst_1 : Group.IsNilpotent G],\\n  (∀ (G : Type u_2) [inst : Group G] [inst_2 : Subsingleton G], P G) →\\n    (∀ (G : Type u_2) [inst : Group G] [inst_2 : Group.IsNilpotent G], P (G ⧸ Subgroup.cen\", \"doc\": \"For any property $P$ of nilpotent groups, if $P$ holds for all trivial groups (base case) and whenever $P$ holds for the quotient group $G / Z(G)$ (where $Z(G)$ is the center of $G$), then $P$ also ho\"}\n  {\"name\": \"Subgroup.quotientCenterEmbedding_apply\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {S : Set G} (hS : Subgroup.closure S = ⊤) (g : G) (s : ↑S),\\n  (Subgroup.quotientCenterEmbedding hS) (↑g) s = ⟨⁅g, ↑s⁆, ⋯⟩\", \"doc\": \"There exists an injective group homomorphism from the quotient group $ G/Z(G) $ (where $ Z(G) $ is the center of $ G $) to the commutator set of $ G $. This embedding is constructed by composing quoti\"}\n  {\"name\": \"Abelianization\", \"module\": \"Mathlib/GroupTheory/Abelianization/Defs\", \"type\": \"(G : Type u) → [Group G] → Type u\", \"doc\": \"The abelianization of a group $ G $, denoted $ G^{\\text{ab}} $, is the quotient group $ G / [G, G] $, where $ [G, G] $ is the commutator subgroup of $ G $. This quotient group is abelian, and it is the\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"central\", \"quotient\"",
+   "results": "[loogle] OK 9 hit(s)\n  {\"name\": \"Submodule.Quotient.isCentralScalar\", \"module\": \"Mathlib.LinearAlgebra.Quotient.Defs\", \"type\": \" {R : Type u_1} {M : Type u_2} [Ring R] [AddCommGroup M] [Module R M] {S : Type u_3} [SMul S R] [SMul S M] [IsScalarTower S R M] (P : Submodule R M) [SMul Sᵐᵒᵖ R] [SMul Sᵐᵒᵖ M] [IsScalarTower Sᵐᵒᵖ R M] [IsCentralScalar S M] : IsCentralScalar S (M ⧸ P)\", \"doc\": \"\"}\n  {\"name\": \"RingCon.instIsCentralScalarQuotient\", \"module\": \"Mathlib.RingTheory.Congruence.Basic\", \"type\": \" {α : Type u_1} {R : Type u_3} [Add R] [MulOneClass R] [SMul α R] [IsScalarTower α R R] (c : RingCon R) [SMul αᵐᵒᵖ R] [IsCentralScalar α R] : IsCentralScalar α c.Quotient\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.quotientCentralizerEmbedding\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \" {G : Type u_1} [Group G] (g : G) : G ⧸ Subgroup.centralizer {g} ↪ ↑(commutatorSet G)\", \"doc\": \"Cosets of the centralizer of an element embed into the set of commutators.\"}\n  {\"name\": \"Subgroup.quotientCentralizerEmbedding_apply\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \" {G : Type u_1} [Group G] (g x : G) : (Subgroup.quotientCentralizerEmbedding g) ↑x = ⟨⁅x, g⁆, ⋯⟩\", \"doc\": \"\"}\n  {\"name\": \"LieSubmodule.Quotient.isCentralScalar\", \"module\": \"Mathlib.Algebra.Lie.Quotient\", \"type\": \" {R : Type u} {L : Type v} {M : Type w} [CommRing R] [LieRing L] [AddCommGroup M] [Module R M] [LieRingModule L M] {N : LieSubmodule R L M} {S : Type u_1} [Semiring S] [SMul S R] [Module S M] [IsScalarTower S R M] [SMul Sᵐᵒᵖ R] [Module Sᵐᵒᵖ M] [IsScalarTower Sᵐᵒᵖ R M] [IsCentralScalar S M] : IsCentr\", \"doc\": \"\"}\n  {\"name\": \"SeparationQuotient.instIsCentralScalar\", \"module\": \"Mathlib.Topology.Algebra.SeparationQuotient.Basic\", \"type\": \" {M : Type u_1} {X : Type u_2} [TopologicalSpace X] [SMul M X] [ContinuousConstSMul M X] [SMul Mᵐᵒᵖ X] [IsCentralScalar M X] : IsCentralScalar M (SeparationQuotient X)\", \"doc\": \"\"}\n  {\"name\": \"SeparationQuotient.instIsCentralVAdd\", \"module\": \"Mathlib.Topology.Algebra.SeparationQuotient.Basic\", \"type\": \" {M : Type u_1} {X : Type u_2} [TopologicalSpace X] [VAdd M X] [ContinuousConstVAdd M X] [VAdd Mᵃᵒᵖ X] [IsCentralVAdd M X] : IsCentralVAdd M (SeparationQuotient X)\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.comap_upperCentralSeries_quotient_center\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \" {G : Type u_1} [AddGroup G] (n : ℕ) : AddSubgroup.comap (QuotientAddGroup.mk' (AddSubgroup.center G)) (AddSubgroup.upperCentralSeries (G ⧸ AddSubgroup.center G) n) = AddSubgroup.upperCentralSeries G n.succ\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.comap_upperCentralSeries_quotient_center\", \"module\": \"Mathlib.GroupTheory.Nilpotent\", \"type\": \" {G : Type u_1} [Group G] (n : ℕ) : Subgroup.comap (QuotientGroup.mk' (Subgroup.center G)) (Subgroup.upperCentralSeries (G ⧸ Subgroup.center G) n) = Subgroup.upperCentralSeries G n.succ\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|semisimple|isogeny",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct a reductive algebraic group by pushing out the centre of its simply connected semisimple covering",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.center\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \": Subgroup G\", \"doc\": \"The subgroup of a group $G$ consisting of all elements that commute with every element of $G$. It is constructed by taking the submonoid of commuting elements and verifying closure under inverses, ens\"}\n  {\"name\": \"Subgroup.centerCongr_symm_apply_coe\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (e : G ≃* H) (s : ↥(Subsemigroup.center H)),\\n  ↑((Subgroup.centerCongr e).symm s) = e.symm ↑s\", \"doc\": \"For any group isomorphism $ e : G \\\\simeq^* H $ and any element $ s $ in the center of $ H $, the coercion of the inverse of the induced center isomorphism $ \\\\text{center}(G) \\\\simeq^* \\\\text{center}(H) \"}\n  {\"name\": \"instIsPushout\", \"module\": \"Mathlib.RingTheory.IsTensorProduct\", \"type\": \": Algebra.IsPushout R R S S\", \"doc\": \"For commutative semirings $ R $ and $ S $ with algebra structures $ R \\to R $ and $ R \\to S $, the algebra $ S $ satisfies the universal property of a pushout in the category of $ R $-algebras.\"}\n  {\"name\": \"Subgroup.center.isMulCommutative\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \": IsMulCommutative (center G)\", \"doc\": \"For any group $ G $, the center of $ G $ is an abelian group under the group operation.\"}\n  {\"name\": \"Subgroup.instNormalCenter\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \": (center G).Normal\", \"doc\": \"For any group $ G $, the center of $ G $ is a normal subgroup. This means that every element in the center commutes with all elements of $ G $, and conjugation by any element of $ G $ leaves the cente\"}\n  {\"name\": \"Subgroup.centerCongr_apply_coe\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Type u_2} [inst_1 : Group H] (e : G ≃* H) (r : ↥(Subsemigroup.center G)),\\n  ↑((Subgroup.centerCongr e) r) = e ↑r\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq H $ between groups $ G $ and $ H $, the induced isomorphism $ \\\\text{center}(G) \\\\simeq \\\\text{center}(H) $ satisfies $ e(z) = e(z) $ for all $ z \\\\in \\\\text{center\"}\n  {\"name\": \"Subgroup.centerCongr\", \"module\": \"Mathlib.GroupTheory.Subgroup.Center\", \"type\": \"{H} [Group H] (e : G ≃* H) : center G ≃* center H\", \"doc\": \"Given a group isomorphism $ e : G \\\\simeq^* H $ between groups $ G $ and $ H $, this constructs an induced group isomorphism $ \\\\text{center}(G) \\\\simeq^* \\\\text{center}(H) $ between their centers. The ce\"}\n  {\"name\": \"QuotientAddGroup.comap_comap_center\", \"module\": \"Mathlib.GroupTheory.QuotientGroup.Basic\", \"type\": \"∀ {G : Type u} [inst : AddGroup G] {H₁ : AddSubgroup G} [inst_1 : H₁.Normal] {H₂ : AddSubgroup (G ⧸ H₁)}\\n  [inst_2 : H₂.Normal],\\n  AddSubgroup.comap (QuotientAddGroup.mk' H₁)\\n      (AddSubgroup.comap (QuotientAddGroup.mk' H₂) (AddSubgroup.center ((G ⧸ H₁) ⧸ H₂))) =\\n    AddSubgroup.comap (QuotientAdd\", \"doc\": \"For an additive group $G$ with normal subgroups $H_1$ and $H_2$ in the quotient $G/H_1$, the preimage of the center of $(G/H_1)/H_2$ under the canonical projection $G \\\\to G/H_1$ coincides with the pre\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Central product presentation reductive group G equals (S times Z(G)) modulo inverse diagonal centre of S",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.quotientCenterEmbedding_apply\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {S : Set G} (hS : Subgroup.closure S = ⊤) (g : G) (s : ↑S),\\n  (Subgroup.quotientCenterEmbedding hS) (↑g) s = ⟨⁅g, ↑s⁆, ⋯⟩\", \"doc\": \"There exists an injective group homomorphism from the quotient group $ G/Z(G) $ (where $ Z(G) $ is the center of $ G $) to the commutator set of $ G $. This embedding is constructed by composing quoti\"}\n  {\"name\": \"Subgroup.quotientCenterEmbedding\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"{G : Type u_1} →\\n  [inst : Group G] → {S : Set G} → Subgroup.closure S = ⊤ → G ⧸ Subgroup.center G ↪ ↑S → ↑(commutatorSet G)\", \"doc\": \"An injective function from the quotient group $ G / Z(G) $ (where $ Z(G) $ is the center of $ G $) to the commutator set of $ G $, constructed by composing quotient equivalences and embeddings. This m\"}\n  {\"name\": \"MonoidHom.transferCenterPow\", \"module\": \"Mathlib/GroupTheory/Transfer\", \"type\": \"(G : Type u_1) → [inst : Group G] → [(Subgroup.center G).FiniteIndex] → G →* ↥(Subgroup.center G)\", \"doc\": \"For a group `G` where the center `Z(G)` has a finite index, this defines a monoid homomorphism from `G` to its center `Z(G)`. This homomorphism maps an element `g \\\\in G` to `g^{[G:Z(G)]}`, where `[G:Z\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"ConjClasses.mk_bijOn\", \"module\": \"Mathlib/GroupTheory/Subgroup/Center\", \"type\": \"∀ (G : Type u_2) [inst : Group G], Set.BijOn ConjClasses.mk (↑(Subgroup.center G)) (ConjClasses.noncenter G)ᶜ\", \"doc\": \"The conjugacy class map induces a bijection between the center of a group $ G $ and the set of singleton conjugacy classes in $ G $. Specifically, the function $ \\\\text{ConjClasses.mk} $ restricts to a\"}\n  {\"name\": \"MonoidHom.transfer_center_eq_pow\", \"module\": \"Mathlib/GroupTheory/Transfer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : (Subgroup.center G).FiniteIndex] (g : G),\\n  (MonoidHom.id ↥(Subgroup.center G)).transfer g = ⟨g ^ (Subgroup.center G).index, ⋯⟩\", \"doc\": \"For any element $g$ in a group $G$, the transfer homomorphism applied to the identity map on the center of $G$ evaluated at $g$ equals $g$ raised to the index of the center in $G$, and this element li\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"Subgroup.quotientCentralizerEmbedding_apply\", \"module\": \"Mathlib/GroupTheory/GroupAction/Quotient\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (g x : G), (Subgroup.quotientCentralizerEmbedding g) ↑x = ⟨⁅x, g⁆, ⋯⟩\", \"doc\": \"For any element $ x $ in the group $ G $, the image of the coset $ x C_G(g) $ under the injective embedding from the quotient group $ G / C_G(g) $ to the commutator set of $ G $ is the commutator $ [x\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-rank-one-classification",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Definition 19.26, Proposition 19.27, Example 19.25 and Remark 19.30, printed pp.404--405. Use the simply connected covering in Remark 19.30, allowing a noninjective homomorphism on centres; Proposition 19.27 identifies the derived subgroup and torus quotient.",
+   "via": [
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-central-pushout-reconstruction",
+  "worker": "stage1",
+  "summary": "Q106 checked the scheme-theoretic statement against Milne, replaced circular reliance on root-datum and rank-one structure by maximal-torus self-centralization and the given perfect cover, and supplied the fppf lift, inverse-diagonal kernel, derived image and torus-cokernel arguments. Two genuinely general statement-only inputs are isolated and searched; no statement is weakened.",
+  "blueprint": "The inherited from.place locates this in det-thm-sf-ctf-stability-direct-images proof (3), via rank-one classification. Its local argument realizes Milne Remark 19.30: steps 1--3 establish the multiplicative isogeny to which the covering universal property applies, steps 4--5 compute the reconstructed group and derived image, and step 6 computes the torus cokernel. blueprint_refs ancestor returns None for this pre-existing imported ancestry, retained verbatim; the latest blueprint direct-image proof was read."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-5f9c975c7",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-5f9c975c7 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited node's statement and Milne pp.233-236, 245-246 and 404-405. The item statement and stmt_deps are identical to live and side-live, where the item is still unsplit; no repair note exists; the new ids are free; there is no cycle; no SGA source is used. The route matches Milne Remark 19.30 / Proposition 19.27. Steps: (1) Z(G) lies in C_G(T)=T by the self-centralizer node, so it is diagonalizable by split-torus-subgroups. (2) G=Z(G)G^der follows from the perfect S and the faithfully flat q, since G/I is commutative and is killed by S. (3) K=D∩H is finite by new node 1 and diagonalizable inside T; H/K≅G/Z(G); the item's universal property applies to the smooth connected H and gives u. (4) The kernel of (s,d)↦v(s)d is the inverse-diagonal graph because ker q=Z(S); the elementary mark is accepted. (5) Commutators of G are locally v([s1,s2]), so J=H and ker u=ker φ. (6) im φ=K and D/K≅G/H is smooth and connected; D/K is diagonalizable by new node 2 and hence a torus by the largest-subtorus node. New node 1 extends 12.46(a) to central diagonalizable C; I checked it by the weight-block determinant argument (χ^{dim V_χ}=1). New node 2 is 12.9(b),(c), with directions checked. Neither duplicates central-torus-semisimple-derived-product, multiplicative-character-antiduality, commutative-multiplicative-type-extension or split-torus-subgroups. Small cases checked: GL_n, PGL_n, a torus, SL_n with nonreduced μ_n, and α=0/id/Z→Z/n. Advisory: 'Equivalently' in new node 2 is loose but the clause is true. All 7 batch-5 flags are generic algebra and geometry (descent, flatness, lattice projection, connectedness); the flagged closures contain no trf or pd theorem, proposition or corollary, no nt-assume node and no trace-transport node, so all are accepted."
+ }
+}

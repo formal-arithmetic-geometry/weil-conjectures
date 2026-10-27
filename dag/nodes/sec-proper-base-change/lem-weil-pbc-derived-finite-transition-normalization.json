@@ -1,0 +1,286 @@
+{
+ "id": "lem-weil-pbc-derived-finite-transition-normalization",
+ "kind": "statement",
+ "title": "Uniquely normalized derived finite quotient transition",
+ "statement": "Let $g:T'\\to T$ be a morphism of schemes. Use the Noetherian adic datum $A,I,P_n=A/I^n$, $S_{W,n}=(P_n)_W$, $B_W=\\varprojlim_n S_{W,n}$, projections $\\pi_{W,n}:B_W\\to S_{W,n}$ and quotient maps $q_{W,b,a}:S_{W,b}\\to S_{W,a}$ of [def-weil-pbc-adic-coefficient-datum], for $W=T,T'$ and positive indices. Use completed-coefficient module pullback $G=g^*$ and its strict-tower version $G^{\\mathrm{Tow}}$ of [def-weil-pbc-completed-pullback], and the fixed finite interfaces of [def-cbc-completed-reduction-finite-interfaces].\n\nLet $b\\geq a\\geq1$, and let $H_n(K)=Lg_n^*(K\\otimes^L_{B_T}S_{T,n})$. For a cochain complex $P$ of $B_T$-modules write $P_n=P\\otimes_{B_T}S_{T,n}$ and let $Q$ denote derived localization. Let\n$$v_{n,P}:H_n(QP)\\longrightarrow Q(g_n^*P_n)$$\nbe the canonical computation map formed from the universal derived scalar-extension counit and the exact finite pullback localization comparison (completedReductionFiniteModelMap in the fixed interface). These computation maps are natural in $P$, and are invertible on K-flat complexes [def-pc-kflat-complex]. Let\n$$\\delta_{b,a,P}:\\operatorname{Res}_{q_{T',b,a}}Q(g_a^*P_a)\\xrightarrow{\\sim}Q(\\operatorname{Res}_{q_{T',b,a}}g_a^*P_a)$$\nbe the exact restriction/localization comparison. Let $t^0_{b,a}:g_b^*(-\\otimes_{B_T}S_{T,b})\\to\\operatorname{Res}_{q_{T',b,a}}g_a^*(-\\otimes_{B_T}S_{T,a})$ be the ordinary transformation specified on all inverse-image tensor generators in [lem-weil-pbc-ordinary-finite-evaluation-transition], and apply it termwise to $P$.\n\nThere exists a unique natural transformation\n$$t_{b,a}:H_b\\longrightarrow\\operatorname{Res}_{q_{T',b,a}}H_a$$\nwhose component on every K-flat $P$ satisfies the equality in $D(\\operatorname{Mod}(S_{T',b}))$,\n$$Q(t^0_{b,a}(P))\\,v_{b,P}=\\delta_{b,a,P}\\,\\operatorname{Res}_{q_{T',b,a}}(v_{a,P})\\,t_{b,a}(QP).$$\nThis is precisely completedReductionTargetTransition with HasCompletedReductionTargetTransitionNormalization, rather than an arbitrarily chosen derived transition. The assertion concerns all derived inputs with no completeness, boundedness or flatness assumption on them, and includes equal indices. It does not assert that $S_{T',a}$ is flat over $S_{T',b}$, or that $t_{b,a}$ itself is invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Paragraph 1, actual finite quotient transition underlying the normalization square; expanded K-flat descent, existing Lean completedReductionTargetTransition_exists (line 1545). Agent-written interface refinement of Stacks Tag 099N (proetale.tex, lemma-pushforward-Noetherian-case), clause (5); explicit statement and proof in lean/Sheaf/Paper/CompletedPullbackReduction.lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-cbc-completed-reduction-finite-interfaces",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ordinary-finite-evaluation-transition"
+ ],
+ "proof": [
+  {
+   "text": "First check the specified computation arrows. Apply [lem-pur-derived-change-of-rings] to the actual sheaf map $\\pi_{T,n}:B_T\\to S_{T,n}$. For K-flat $P$, its identity resolution computes scalar extension, so the universal counit $QP\\otimes^L_{B_T}S_{T,n}\\to QP_n$ is invertible. The finite coefficient ring $P_n$ is finite and discrete by [def-weil-pbc-adic-coefficient-datum]; hence [prop-weil-pbc-proetale-constant-exact] applies to $g_n^*$. Its exact localization comparison is natural and invertible by [lem-weil-pbc-exact-functor-derived-factorization]. The fixed $v_{n,P}$ is the image of that scalar counit followed by this exact comparison, as specified in [def-cbc-completed-reduction-finite-interfaces]. It is therefore natural in $P$ and invertible on K-flat $P$. Restriction of scalars does not change underlying abelian sheaves or their kernels and cokernels, so it is exact; the same exact-functor result supplies the natural isomorphism $\\delta$ used in the statement.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-pbc-adic-coefficient-datum",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-cbc-completed-reduction-finite-interfaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+    "place": "Paragraph 1: finite-reduction computation; sites-cohomology.tex Tag 06YY (lemma-derived-base-change), specialized to change of rings; derived.tex Tag 015F (lemma-right-derived-exact-functor)."
+   }
+  },
+  {
+   "text": "Let $\\mathcal A=\\operatorname{Mod}(B_T)$ and $\\mathcal P$ be the full subcategory of all K-flat cochain complexes. Every complex receives a quasi-isomorphism from an object of $\\mathcal P$ by [lem-pc-kflat-resolution], with no boundedness condition. Use the quotient $p:C(\\mathcal A)\\to K(\\mathcal A)$: by the description of homotopy morphisms as complex maps modulo homotopy in [lem-pur-homotopy-category-triangulated], $p$ is full, surjective on objects and leaves objects unchanged. Set $\\mathcal S\\subset K(\\mathcal A)$ to have the same K-flat objects, so $\\mathcal P(P)$ iff $\\mathcal S(pP)$. Taking the homotopy image of the resolution gives a quasi-isomorphism from $\\mathcal S$ to every object of $K(\\mathcal A)$. Quasi-isomorphisms there have the right calculus of fractions and localize to $D(\\mathcal A)$ by [lem-pur-quasi-isos-saturated-triangulated]. Thus all hypotheses of [lem-weil-pbc-resolving-representative-whiskering] hold for $L=\\mathcal P\\hookrightarrow C(\\mathcal A)\\xrightarrow{Q}D(\\mathcal A)$. Its conclusion gives full faithfulness of restriction along $L\\times L$ into $\\mathcal E=D(\\operatorname{Mod}(S_{T',b}))$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-homotopy-category-triangulated",
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+    "place": "Paragraph 1: descent from K-flat representatives; sites-cohomology.tex Tag 06YS (lemma-K-flat-resolution); derived.tex Tag 05RT (lemma-acyclic); categories.tex Tags 04VI and 04VK."
+   }
+  },
+  {
+   "text": "Put $J=\\operatorname{Res}_{q_{T',b,a}}H_a$, $\\alpha_P=v_{b,P}$ and $\\beta_P=\\delta_{b,a,P}\\circ\\operatorname{Res}_{q_{T',b,a}}(v_{a,P})$. These are natural transformations on cochain complexes, and $\\beta_P$ is invertible on $\\mathcal P$ by step 1. By [lem-weil-pbc-ordinary-finite-evaluation-transition], $t^0_{b,a}$ is natural on module sheaves. Apply it in each degree. Its naturality for $d_P$ says precisely that the resulting maps commute with differentials; its naturality for a chain map gives naturality on complexes. Localizing yields $u_P=Q(t^0_{b,a}(P))$. Define, for $P\\in\\mathcal P$,\n$$\\theta_P=\\beta_P^{-1}\\circ u_P\\circ\\alpha_P:H_b(QP)\\longrightarrow J(QP).$$\nFor a chain map $f:P\\to P'$ between K-flat complexes, naturality of $\\alpha,u,\\beta$ gives\n$$J(Qf)\\theta_P=\\beta_{P'}^{-1}u_{P'}\\alpha_{P'}H_b(Qf)=\\theta_{P'}H_b(Qf).$$\nThus $\\theta$ is a natural transformation after restriction to $\\mathcal P$.",
+   "uses": [
+    "lem-weil-pbc-ordinary-finite-evaluation-transition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+    "place": "Paragraph 1: termwise ordinary quotient map followed by localization; CompletedPullbackReduction.lean, completedReduction_descend_map and completedReduction_descend_composite, lines 793-869."
+   }
+  },
+  {
+   "text": "Use the full part of the restriction theorem [lem-weil-pbc-resolving-representative-whiskering] from step 2. On $\\mathcal P\\times\\mathcal P$ the family $(P,R)\\mapsto\\theta_P$ is natural between the restrictions of $H_b\\circ\\operatorname{pr}_1$ and $J\\circ\\operatorname{pr}_1$, since these functors and this family ignore $R$. Lift it to a natural transformation $\\Theta:H_b\\circ\\operatorname{pr}_1\\to J\\circ\\operatorname{pr}_1$ on $D(\\mathcal A)\\times D(\\mathcal A)$. Restrict $\\Theta$ along the diagonal $K\\mapsto(K,K)$ and call the resulting transformation $t:H_b\\to J$. For every K-flat $P$ its component is $t(QP)=\\Theta_{(QP,QP)}=\\theta_P$. Hence\n$$\\beta_P\\circ t(QP)=\\beta_P\\circ\\beta_P^{-1}\\circ u_P\\circ\\alpha_P=u_P\\circ\\alpha_P,$$\nwhich is exactly the required normalization square. This uses the existing two-variable restriction theorem as stated; the diagonal turns its lift into the required one-variable transformation.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+    "place": "Paragraph 1: existence of the normalized derived transition; categories.tex Tag 04VK, applied via the existing resolving-representative theorem."
+   }
+  },
+  {
+   "text": "If $t'$ is another natural transformation satisfying the displayed square, then for every K-flat $P$ its equation and that for $t$ give $\\beta_P\\circ t'(QP)=\\beta_P\\circ t(QP)$. Cancel the invertible $\\beta_P$ to obtain $t'(QP)=t(QP)$. After precomposition by $\\operatorname{pr}_1$ the two transformations agree on all $(QP,QR)$ with $P,R\\in\\mathcal P$. Faithfulness in [lem-weil-pbc-resolving-representative-whiskering] gives $t'\\circ\\operatorname{pr}_1=t\\circ\\operatorname{pr}_1$ on the derived product. Evaluating at $(K,K)$ for each $K$ gives $t'(K)=t(K)$, hence $t'=t$. The name completedReductionTargetTransition in [def-cbc-completed-reduction-finite-interfaces] denotes the descent with this normalization, so uniqueness identifies it with the transformation just constructed.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "def-cbc-completed-reduction-finite-interfaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+    "place": "Paragraph 1: uniqueness of descent with the fixed K-flat equation; CompletedPullbackReduction.lean, lines 821-830 and 1518-1573."
+   }
+  },
+  {
+   "text": "Every input to the construction was an arbitrary complex or derived object. Step 2 supplies K-flat representatives for all of them, so neither completeness, boundedness nor flatness of the input was introduced. Only the computation $\\beta_P$ was inverted. The ordinary quotient formula and the argument apply for all $b\\geq a\\geq1$, including $b=a$, since quotient maps at equal indices are identities by [def-weil-pbc-adic-coefficient-datum]. No inverse of $t^0_{b,a}$ or $t_{b,a}$ and no flatness of $S_{T',a}$ over $S_{T',b}$ was used.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+    "place": "Paragraph 1: domain and equal-index check for the normalized quotient transition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-adic-coefficient-datum",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-cbc-completed-reduction-finite-interfaces",
+  "lem-pc-kflat-resolution",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-ordinary-finite-evaluation-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Paragraph 1, explicit K-flat normalization descent; refined using the existing Lean argument at lean/Sheaf/Paper/CompletedPullbackReduction.lean:793-869,1545-1573 and Stacks Tags 06YS,06YY,05RT,04VK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "CategoryTheory.Localization.liftNatTrans; CategoryTheory.Localization.liftNatTrans_id; CategoryTheory.Localization.liftNatIso_hom; CategoryTheory.Localization.liftNatIso_inv; CategoryTheory.Localization.comp_liftNatTrans; CategoryTheory.Localization.comp_liftNatTrans_assoc; CategoryTheory.Localization.liftNatTrans_app; CategoryTheory.NatTrans.CommShift.liftNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match: liftNatTrans and leftDerivedNatTrans assume localization/derived comparison data. Establishing the finite composite computation and its invertible K-flat target counit is additional work, so this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|descend.*composite",
+   "results": "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Bifunctor.lean; Mathlib/CategoryTheory/Localization/Bifunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: liftNatTrans and leftDerivedNatTrans assume localization/derived comparison data. Establishing the finite composite computation and its invertible K-flat target counit is additional work, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "unique derived quotient transition natural transformation descent K flat representatives localization",
+   "results": "CategoryTheory.Functor.leftDerivedUnique; CategoryTheory.Functor.rightDerivedUnique; CategoryTheory.Quotient.natTrans_ext; Module.Flat.localizedModule; CategoryTheory.Quotient.natTransLift; CategoryTheory.Localization.Construction.natTransExtension; CategoryTheory.Functor.leftDerivedNatTrans; CategoryTheory.Quotient.natTransLift_app",
+   "date": "2026-10-22",
+   "verdict": "no match: liftNatTrans and leftDerivedNatTrans assume localization/derived comparison data. Establishing the finite composite computation and its invertible K-flat target counit is additional work, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique derived quotient transition natural transformation descent K flat representatives localization",
+   "results": "CategoryTheory.Functor.leftDerivedUnique; CategoryTheory.Functor.rightDerivedUnique; CategoryTheory.Functor.leftDerivedNatTrans_fac; CategoryTheory.Functor.rightDerivedNatTrans_fac; CategoryTheory.Functor.leftDerived_ext; CategoryTheory.Functor.rightDerived_ext; CategoryTheory.Functor.leftDerived_fac_app; CategoryTheory.Functor.leftDerived_fac",
+   "date": "2026-10-22",
+   "verdict": "no match: liftNatTrans and leftDerivedNatTrans assume localization/derived comparison data. Establishing the finite composite computation and its invertible K-flat target counit is additional work, so this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatTrans|leftDerivedUnique",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived",
+   "date": "2026-10-22",
+   "verdict": "no match: liftNatTrans and leftDerivedNatTrans assume localization/derived comparison data. Establishing the finite composite computation and its invertible K-flat target counit is additional work, so this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique natural transformation on unbounded derived category specified by scalar quotient maps on K flat complexes",
+   "results": "DerivedCategory.left_fac; DerivedCategory.right_fac; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; DerivedCategory.instLinearCochainComplexIntQ; DerivedCategory.instLinearHomotopyCategoryIntUpQh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: liftNatTrans and leftDerivedNatTrans assume localization/derived comparison data. Establishing the finite composite computation and its invertible K-flat target counit is additional work, so this is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "CategoryTheory.Localization.liftNatTrans; CategoryTheory.Localization.liftNatTrans_id; CategoryTheory.Localization.liftNatIso_hom; CategoryTheory.Localization.liftNatIso_inv; CategoryTheory.Localization.comp_liftNatTrans; CategoryTheory.Localization.comp_liftNatTrans_assoc; CategoryTheory.Localization.liftNatTrans_app; CategoryTheory.NatTrans.CommShift.liftNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match: general localization and derived-natural-transformation APIs do not construct the specified finite composite computation, its K-flat invertibility, and its fixed ordinary generator normalization in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique natural transformation derived finite quotient transition computed on K flat sheaf complexes",
+   "results": "CategoryTheory.sheafComposeNatTrans_app_uniq; CategoryTheory.Sheaf.H; CategoryTheory.PreservesFiniteLimitsOfFlat.uniq; CategoryTheory.compatiblePreservingOfFlat; SheafOfModules.Presentation.map; SheafOfModules.Presentation.map_π_eq; CategoryTheory.GrothendieckTopology.plusLift_unique; localCohomology.diagram",
+   "date": "2026-10-22",
+   "verdict": "no match: general localization and derived-natural-transformation APIs do not construct the specified finite composite computation, its K-flat invertibility, and its fixed ordinary generator normalization in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|leftDerivedNatTrans|fullyFaithfulWhiskeringLeft",
+   "results": "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/Localization/Bifunctor.lean; Mathlib/CategoryTheory/Localization/Bifunctor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general localization and derived-natural-transformation APIs do not construct the specified finite composite computation, its K-flat invertibility, and its fixed ordinary generator normalization in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived transition natural transformation determined uniquely on K flat representatives",
+   "results": "CategoryTheory.PreservesFiniteLimitsOfFlat.uniq; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.leftDerivedNatTrans; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.rightDerivedNatTrans_app; CategoryTheory.NatTrans.rightDerived_id; CategoryTheory.Quotient.natTrans_ext; CategoryTheory.NatTrans.leftDerivedToHomotopyCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: general localization and derived-natural-transformation APIs do not construct the specified finite composite computation, its K-flat invertibility, and its fixed ordinary generator normalization in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations extend uniquely from resolving subcategory of complexes to derived category",
+   "results": "CategoryTheory.Functor.leftDerived_ext; CategoryTheory.InjectiveResolution.extMk_hom; DerivedCategory.left_fac; DerivedCategory.right_fac; CategoryTheory.Functor.rightDerived_ext; CategoryTheory.ProjectiveResolution.extMk_hom; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: general localization and derived-natural-transformation APIs do not construct the specified finite composite computation, its K-flat invertibility, and its fixed ordinary generator normalization in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lemma-weil-pbc-completed-pullback-reduction",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Paragraph 1, actual finite quotient transition underlying the normalization square; expanded K-flat descent, existing Lean completedReductionTargetTransition_exists (line 1545).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-derived-finite-transition-normalization",
+  "worker": "stage1",
+  "summary": "Proved normalization existence and uniqueness by conjugating the actual ordinary quotient map with canonical computation arrows on K-flat representatives, then applying existing resolving-representative full faithfulness. Reused all ingredients; no new nodes, no changed statement, no new assumptions. Made explicit the unary use of the existing product restriction theorem.",
+  "blueprint": "Expands paragraph 1 of lemma-weil-pbc-completed-pullback-reduction: finite quotient transition and compatibilities inherited from the tower; proves its canonical normalization on all derived inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic sheaf scalar-extension computation on K-flat complexes, needed for the fixed computation counit."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact-functor localization comparison, used for finite pullback and restriction."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded K-flat resolutions on a ringed site, needed for resolving-class descent."
+   },
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Supplies the homotopy category with complex maps modulo homotopy, so the quotient is full and surjective on objects."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Generic quasi-isomorphism calculus of fractions for the homotopy-to-derived localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-kflat-resolution",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-pur-quasi-isos-saturated-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-59ab32e8e",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-59ab32e8e (reviewer sub-agent of L); spot-checked: Read the item and every stmt_dep and proof_dep statement in full; no new nodes. The statement is byte-identical to live (diffed field by field); only the proof fields changed. The item is still unsplit live and has no repair note, so it is not superseded and not a re-split. Step 1: B_T is commutative, so lem-pur-derived-change-of-rings (2) with the identity K-flat resolution makes the counit invertible. P_n is finite and discrete, so prop-weil-pbc-proetale-constant-exact gives exactness, and its u^* agrees with g_n^* because P_n is commutative. The exact-functor factorization then gives a natural invertible v_{n,P}, matching the interface's ModelMap; restriction of scalars is exact (elementary) and gives δ. Step 2: C(A)→K(A) is full and identity on objects; the right calculus comes from MS2/MS3 of lem-pur-quasi-isos-saturated-triangulated and resolutions from lem-pc-kflat-resolution (unbounded), so every hypothesis of lem-weil-pbc-resolving-representative-whiskering holds; its product version is read in its proof. Step 3: types of α, u, β checked; t^0 applied termwise is a chain map by naturality, and θ=β⁻¹uα is natural on K-flat P. Step 4: (P,R)↦θ_P is natural on P×P, fullness lifts it, and restricting to the diagonal gives t(QP)=θ_P, which yields exactly the statement's square. Step 5: cancel β, use faithfulness, evaluate at (K,K); the identification with completedReductionTargetTransition comes from the interface's 'unique descent' wording and is not circular. Edge cases b=a, zero complex and unbounded inputs checked. No cycle (closure of 1139 nodes, parent not cited). No duplicate: lem-cbc-finite-quotient-transition-compatibility states a different compatibility. Tool uses accepted as generic black boxes: derived-change-of-rings and quasi-isos (sk-def-sf-operations), kflat-resolution (sk-thm-picard-semicon); exact-functor is on route via sk-def-exchange, and homotopy-category is a Mathlib leaf. Stacks tags 06YS/06YY/05RT/04VI/04VK/015F/099N verified in the tags file; no SGA; searches recorded. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackReductionData",
+  "declaration": "AlgebraicGeometry.Scheme.completedReductionTargetTransition_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedReductionTargetTransition_exists",
+   "AlgebraicGeometry.Scheme.HasCompletedReductionTargetTransitionNormalization",
+   "AlgebraicGeometry.Scheme.completedReductionTargetTransition"
+  ],
+  "statement": "theorem completedReductionTargetTransition_exists (a b : ℕ) (h : a ≤ b) :\n    ∃! τ : completedReductionFiniteTarget g d b ⟶\n        completedReductionFiniteTarget g d a ⋙\n          pbcDerivedRestrict (reductionCoefficientMap X d b a h),\n      HasCompletedReductionTargetTransitionNormalization g d a b h τ",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing unique-existence theorem with the specified HasCompletedReductionTargetTransitionNormalization K-flat equation. The fixed completedReductionTargetTransition is precisely the chosen witness of this theorem. General AdicCoefficientDatum, arbitrary scheme morphism, all unbounded derived inputs, a <= b including equal indices; natural index i encodes positive exponent i+1. No new module or changes to the reviewed statement and proof.",
+  "file": "lean/Sheaf/Paper/CompletedPullbackReductionData.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-023d9f804",
+  "group": "ND",
+  "result": "pass",
+  "note": "Records-only existing:true binding to completedReductionTargetTransition_exists (CompletedPullbackReduction.lean:1545). The statement is verbatim the file signature, and the node copy differs from live only in lean. Clause check: arbitrary g; actual adic quotient and completed sheaves; a<=b on N covers b>=a>=1 including equal indices; H_n = completedReductionFiniteTarget over all of D(Mod B_T); v = completedReductionFiniteModelMap (counit then mapDerivedCategoryFactors); delta = mapDerivedCategoryFactors of the exact restriction; t0 = completedReductionOrdinaryTransition (stmt_dep ∃!.choose, as for the PASSed sibling); ∃! τ with HasCompletedReductionTargetTransitionNormalization, whose K-flat equation equals the node's square in diagrammatic order; completedReductionTargetTransition is its .choose. No flatness, boundedness or invertibility hypotheses and no universe restriction. Advisory: pbcAdicCompletion, pbcModules and pbcDerivedRestrict belong to def-weil-pbc-bounded-constructible-tower, and completedReductionRestrictionFactors is listed only in the parent lemma's record; none is in stmt_deps, and all are existing decls in unchanged modules. No files changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; Data module vs old CompletedPullbackReduction (rebuilt PulledModelMap/normalization predicates proved equivalent to the old by scratch rfl/iff); new ArrowIsIso sorry = clause 2 of item; Coherence proved (axioms: sorryAx only from published upstream holes); 16 direct importers compiled against the sandbox build"
+ }
+}

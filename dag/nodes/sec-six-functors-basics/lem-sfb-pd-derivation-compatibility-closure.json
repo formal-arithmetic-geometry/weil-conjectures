@@ -1,0 +1,535 @@
+{
+ "id": "lem-sfb-pd-derivation-compatibility-closure",
+ "kind": "statement",
+ "title": "Propagation of divided-power compatibility for an odd derivation",
+ "statement": "Let $S$ be a commutative ring, let $A=\\bigoplus_{i\\geq0}A_i$ be a nonnegative strictly graded commutative unital $S$-algebra [def-sfb-nonnegative-strict-graded-algebra] with a graded divided-power structure $\\gamma$ [def-sfb-graded-divided-power-structure], and let $D:A_i\\to A_{i-1}$ be an $S$-linear map satisfying $D(xy)=D(x)y+(-1)^i xD(y)$ for homogeneous $x\\in A_i,y\\in A_j$. Set $A_i=0$ for $i<0$, and extend $D$ to finite sums by linearity. Define $C_D\\subseteq A_{\\mathrm{even},+}$ to consist of those $x$ satisfying $D(\\gamma_n(x))=D(x)\\gamma_{n-1}(x)$ for every $n\\geq1$, with $\\gamma_0(x)=1$. Then $0\\in C_D$; if $x,y\\in C_D$, then $x+y\\in C_D$; if $a\\in A_{\\mathrm{even}}$ and $x\\in C_D$, then $ax\\in C_D$; and if $m\\geq1$ and $x\\in C_D$, then $\\gamma_m(x)\\in C_D$. Finally $uv\\in C_D$ for any homogeneous odd-degree elements $u,v\\in A$. No freeness or square-zero hypothesis on $D$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PG (definition-divided-powers-graded), axioms (3)-(7); auxiliary calculus for the omitted operator-extension argument in Tag 09PS (lemma-get-derivation), proof (1),(2)."
+ },
+ "stmt_deps": [
+  "def-sfb-nonnegative-strict-graded-algebra",
+  "def-sfb-graded-divided-power-structure"
+ ],
+ "proof": [
+  {
+   "text": "The parity conventions and strict commutativity are those of [def-sfb-nonnegative-strict-graded-algebra]. Expand finite homogeneous sums: every even element commutes with every element, $D(A_{\\mathrm{even}})\\subseteq A_{\\mathrm{odd}}$, and $D(bc)=D(b)c+bD(c)$ for even $b,c$. Also $D(1)=0$ because $1\\in A_0$ and $A_{-1}=0$. By the scalar axiom of [def-sfb-graded-divided-power-structure], $\\gamma_n(0)=\\gamma_n(0\\cdot0)=0^n\\gamma_n(0)=0$ for $n\\geq1$. Consequently $0\\in C_D$. For every input the compatibility equation at $n=1$ is just $D(x)=D(x)1$. All calculations below are in $A$; integer coefficients mean repeated addition.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PF (section-tate), parity and strict-commutativity conventions; Tag 09PG (definition-divided-powers-graded), axioms (2),(4)."
+   }
+  },
+  {
+   "text": "Let $x,y\\in C_D$ and $n\\geq1$. Differentiate the sum axiom of [def-sfb-graded-divided-power-structure] term by term. The two end terms involving $D(\\gamma_0)$ vanish, and the defining equations for $C_D$ give\n$D(\\gamma_n(x+y))=D(x)\\sum_{i=1}^n\\gamma_{i-1}(x)\\gamma_{n-i}(y)+D(y)\\sum_{i=0}^{n-1}\\gamma_i(x)\\gamma_{n-i-1}(y)$.\nBoth sums equal $\\gamma_{n-1}(x+y)$ by the same sum axiom when $n>1$; when $n=1$ each sum is $1=\\gamma_0(x+y)$. Even factors commute with the odd factors $D(x),D(y)$ by [def-sfb-nonnegative-strict-graded-algebra]. Linearity now gives $D(\\gamma_n(x+y))=D(x+y)\\gamma_{n-1}(x+y)$. The positive even part is closed under addition, so $x+y\\in C_D$.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PG (definition-divided-powers-graded), axiom (6), differentiated using the assumed signed Leibniz rule."
+   }
+  },
+  {
+   "text": "Let $a\\in A_{\\mathrm{even}}$ and $x\\in C_D$. The positive even ideal is stable under $a$ by [def-sfb-nonnegative-strict-graded-algebra]. The even Leibniz rule gives $D(a^n)=n a^{n-1}D(a)$ for $n\\geq1$: the base $n=1$ is the identity, and differentiating $a^{n+1}=a^n a$ adds $a^nD(a)$ to $n a^nD(a)$. For $n\\geq2$, the scalar and product axioms of [def-sfb-graded-divided-power-structure] give\n$D(\\gamma_n(ax))=n a^{n-1}D(a)\\gamma_n(x)+a^nD(x)\\gamma_{n-1}(x)=(D(a)x+aD(x))a^{n-1}\\gamma_{n-1}(x)=D(ax)\\gamma_{n-1}(ax)$,\nwhere the middle equality is $x\\gamma_{n-1}(x)=n\\gamma_n(x)$. The case $n=1$ was checked in step 1. Thus $ax\\in C_D$, including for nonhomogeneous even $a$; no condition $D(a)=0$ was used.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PG (definition-divided-powers-graded), axioms (3),(4); elementary differentiation of powers of an even element."
+   }
+  },
+  {
+   "text": "Let $m\\geq1$, $x\\in C_D$ and $z=\\gamma_m(x)$, which lies in the positive even part by [def-sfb-graded-divided-power-structure]. The cases $m=1$ or $n=1$ are immediate. For $m,n\\geq2$ put $c=(nm)!/(n!(m!)^n)$ and $b=((n-1)m)!/((n-1)!(m!)^{n-1})$. These are the integer coefficients in the iteration axiom. Differentiating that axiom and using $x\\in C_D$ yields\n$D(\\gamma_n(z))=cD(x)\\gamma_{nm-1}(x)$.\nOn the other hand, the same axiom followed by the product axiom gives\n$D(z)\\gamma_{n-1}(z)=bD(x)\\gamma_{m-1}(x)\\gamma_{(n-1)m}(x)=b\\binom{nm-1}{m-1}D(x)\\gamma_{nm-1}(x)$.\nThe coefficients agree: as rational numbers both $c$ and $b\\binom{nm-1}{m-1}$ equal $(nm-1)!/((n-1)!(m-1)!(m!)^{n-1})$, by $(nm)!=nm(nm-1)!$, $n!=n(n-1)!$ and $m!=m(m-1)!$. Since the coefficients are integers, this is an integer equality, hence an equality of repeated-addition operators on $A$. Thus $z\\in C_D$ without cancelling any integer in $A$.",
+   "uses": [
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PG (definition-divided-powers-graded), axioms (3),(7); explicit integer factorial-coefficient calculation."
+   }
+  },
+  {
+   "text": "Let $u,v$ be homogeneous of positive odd degrees and set $w=uv$, which lies in the positive even part. By the odd-product axiom of [def-sfb-graded-divided-power-structure], $\\gamma_n(w)=0$ for $n\\geq2$. For $n\\geq3$ both sides of the compatibility equation vanish. For $n=2$ its right side is $D(w)w=(D(u)v-uD(v))uv$. Here $D(u),D(v)$ have even degree and therefore commute with $u,v$, while $vu=-uv$ and $u^2=v^2=0$ by [def-sfb-nonnegative-strict-graded-algebra]. Consequently $D(u)vuv=-D(u)uv^2=0$ and $uD(v)uv=D(v)u^2v=0$. Its left side is $D(\\gamma_2(w))=D(0)=0$. The $n=1$ case is the identity from step 1. Thus $uv\\in C_D$. This argument uses the independent odd-square axiom and applies also in characteristic two; none of the five steps used freeness or $D^2=0$.",
+   "uses": [
+    "def-sfb-nonnegative-strict-graded-algebra",
+    "def-sfb-graded-divided-power-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PG (definition-divided-powers-graded), axiom (5); Tag 09PF (section-tate), strict graded commutativity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-nonnegative-strict-graded-algebra",
+  "def-sfb-graded-divided-power-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tags 09PF/09PG, direct calculations from the axioms; supporting calculus for the operator extension whose details are omitted in Tag 09PS (lemma-get-derivation), proof (1),(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend an odd degree minus one derivation compatible with divided powers from a graded algebra to one adjoined exterior or divided power variable with prescribed image",
+   "results": {
+    "t": "2026-10-24T00:09:37Z",
+    "tool": "leanfinder",
+    "query": "Extend an odd degree minus one derivation compatible with divided powers from a graded algebra to one adjoined exterior or divided power variable with prescribed image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "liftOfDerivationToSquareZero",
+     "derivationToSquareZeroOfLift",
+     "liftOfDerivationToSquareZero_apply",
+     "derivationToSquareZeroEquivLift_apply_coe_apply",
+     "derivationToSquareZeroEquivLift",
+     "Derivation.liftKaehlerDifferential_comp_D",
+     "liftOfDerivationToSquareZero_mk_apply'",
+     "Derivation.liftOfRightInverse"
+    ],
+    "digest": "73e3f7aee345d89e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "divided.?power.*derivation|derivation.*divided.?power|graded.*derivation",
+   "results": {
+    "t": "2026-10-24T00:10:40Z",
+    "tool": "grep",
+    "query": "divided.?power.*derivation|derivation.*divided.?power|graded.*derivation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An odd derivation of a strictly graded commutative algebra compatible with divided powers on two even elements remains compatible on their sum, even scalar multiples and iterated divided powers",
+   "results": {
+    "t": "2026-10-24T00:10:40Z",
+    "tool": "leansearch",
+    "query": "An odd derivation of a strictly graded commutative algebra compatible with divided powers on two even elements remains compatible on their sum, even scalar multiples and iterated divided powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Derivation.instIsScalarTower",
+     "Derivation.map_add",
+     "Derivation.instAddMonoidHomClass",
+     "DividedPowers.dpow_add'",
+     "DividedPowers.dpow_add",
+     "Derivation.coe_add",
+     "Derivation.instAddCommGroup",
+     "Derivation.add_apply"
+    ],
+    "digest": "571c84fe3b576470"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"Derivation\"",
+   "results": {
+    "t": "2026-10-24T00:10:40Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"Derivation\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "dpow_(add|mul|comp)|derivation_ext|mkDerivationEquiv",
+   "results": {
+    "t": "2026-10-24T00:11:44Z",
+    "tool": "grep",
+    "query": "dpow_(add|mul|comp)|derivation_ext|mkDerivationEquiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/WittVector/Compare.lean",
+     "Mathlib/RingTheory/WittVector/Compare.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/SubDPIdeal.lean",
+     "Mathlib/RingTheory/DividedPowers/Padic.lean"
+    ],
+    "digest": "45296c81e84edda9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divided power compatible odd derivation identities are closed under sums, multiplication by even elements and iterated divided powers; they hold on products of odd elements",
+   "results": {
+    "t": "2026-10-24T00:11:45Z",
+    "tool": "leanfinder",
+    "query": "Divided power compatible odd derivation identities are closed under sums, multiplication by even elements and iterated divided powers; they hold on products of odd elements",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_add",
+     "DividedPowers.dpow_add'",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.dpow_sum",
+     "DividedPowers.mul_dpow",
+     "DividedPowers.dpow_mul_right",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "DividedPowers.exp_add"
+    ],
+    "digest": "785dc8ab0e57dcc7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free exterior and divided power graded algebra admits a unique signed derivation with any assigned homogeneous images of its generators",
+   "results": {
+    "t": "2026-10-24T00:11:46Z",
+    "tool": "leanfinder",
+    "query": "A free exterior and divided power graded algebra admits a unique signed derivation with any assigned homogeneous images of its generators",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.gradedAlgebra",
+     "ExteriorAlgebra.GradedAlgebra.liftι",
+     "ExteriorAlgebra.GradedAlgebra.ι",
+     "ExteriorAlgebra.lift_unique",
+     "ExteriorAlgebra.GradedAlgebra.liftι_eq",
+     "ExteriorAlgebra.GradedAlgebra.ι_apply",
+     "ExteriorAlgebra",
+     "ExteriorAlgebra.lift"
+    ],
+    "digest": "baee4d33475b7387"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "derivation|graded|odd",
+   "results": {
+    "t": "2026-10-24T00:13:12Z",
+    "tool": "grep",
+    "query": "derivation|graded|odd",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers.dpow_comp\"",
+   "results": {
+    "t": "2026-10-24T00:13:13Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers.dpow_comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_comp",
+     "DividedPowers.dpow_comp_from_gens"
+    ],
+    "digest": "ba60bc7a045805da"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a strictly graded commutative divided power algebra an odd derivation compatible with divided powers on x is compatible on a times x and on divided powers of x, and automatically on products of two odd elements",
+   "results": {
+    "t": "2026-10-24T00:13:15Z",
+    "tool": "leanfinder",
+    "query": "In a strictly graded commutative divided power algebra an odd derivation compatible with divided powers on x is compatible on a times x and on divided powers of x, and automatically on products of two odd elements",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_mul",
+     "CliffordAlgebra.odd_induction",
+     "DividedPowers.OfInvertibleFactorial.dpow_mul",
+     "Algebra.Generators.H1Cotangent.δAux_mul",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.mul_dpow",
+     "DividedPowers.dpow_mul_right",
+     "DividedPowers.dpow_smul_right"
+    ],
+    "digest": "410e73a2f0ea767e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: DividedPowers.dpow_add, dpow_mul, mul_dpow and dpow_comp are the input axioms only (RingTheory/DividedPowers/Basic.lean:87-96). DividedPowers.ideal_from_ringHom and dpow_comp_from_gens (RingTheory/DividedPowers/DPMorphism.lean:139,237) concern multiplicative ring maps; the odd operator D is not such a map. The search hits give no signed-derivation compatibility locus or odd-product assertion. Read these declarations and Derivation/ToSquareZero.lean:25-100; passing to a graded square-zero extension would require additional construction, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "divided.?power.*derivation|derivation.*divided.?power|graded.*derivation",
+   "results": {
+    "t": "2026-10-24T01:19:20Z",
+    "tool": "grep",
+    "query": "divided.?power.*derivation|derivation.*divided.?power|graded.*derivation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; Basic.lean:79-96 supplies the ordinary divided-power axioms, not their differentiation by an odd operator. DPMorphism.lean:62-65 requires a ring homomorphism, whereas D has a signed Leibniz rule and changes parity. SubDPIdeal results assume closure under divided powers; they do not establish this compatibility locus. No exact theorem or one-line specialization found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DividedPowers\", \"Derivation\"",
+   "results": {
+    "t": "2026-10-24T01:19:21Z",
+    "tool": "loogle",
+    "query": "\"DividedPowers\", \"Derivation\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; Basic.lean:79-96 supplies the ordinary divided-power axioms, not their differentiation by an odd operator. DPMorphism.lean:62-65 requires a ring homomorphism, whereas D has a signed Leibniz rule and changes parity. SubDPIdeal results assume closure under divided powers; they do not establish this compatibility locus. No exact theorem or one-line specialization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an odd derivation of a strictly graded commutative algebra, divided power compatibility is preserved under addition, even multiples and iterated divided powers and holds on odd products",
+   "results": {
+    "t": "2026-10-24T01:19:22Z",
+    "tool": "leanfinder",
+    "query": "For an odd derivation of a strictly graded commutative algebra, divided power compatibility is preserved under addition, even multiples and iterated divided powers and holds on odd products",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.dpow_add'",
+     "DividedPowers.dpow_add",
+     "DividedPowers.dpow_sum'",
+     "DividedPowers.exp_add",
+     "DividedPowers.dpow_sum",
+     "DividedPowers.dpow_comp",
+     "DividedPowers.OfInvertibleFactorial.dpow_add",
+     "DividedPowers.mul_dpow"
+    ],
+    "digest": "13b9cc8f3992481a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; Basic.lean:79-96 supplies the ordinary divided-power axioms, not their differentiation by an odd operator. DPMorphism.lean:62-65 requires a ring homomorphism, whereas D has a signed Leibniz rule and changes parity. SubDPIdeal results assume closure under divided powers; they do not establish this compatibility locus. No exact theorem or one-line specialization found."
+  },
+  {
+   "tool": "grep",
+   "query": "dpow_(add|mul|comp)|mul_dpow|dpow_zero",
+   "results": {
+    "t": "2026-10-24T01:20:17Z",
+    "tool": "grep",
+    "query": "dpow_(add|mul|comp)|mul_dpow|dpow_zero",
+    "sub": "RingTheory/DividedPowers",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/DPMorphism.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean",
+     "Mathlib/RingTheory/DividedPowers/Basic.lean"
+    ],
+    "digest": "19251789664acb40"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; Basic.lean:79-96 supplies the ordinary divided-power axioms, not their differentiation by an odd operator. DPMorphism.lean:62-65 requires a ring homomorphism, whereas D has a signed Leibniz rule and changes parity. SubDPIdeal results assume closure under divided powers; they do not establish this compatibility locus. No exact theorem or one-line specialization found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A divided power compatible odd derivation remains compatible on sums, scalar multiples and compositions of divided powers",
+   "results": {
+    "t": "2026-10-24T01:20:18Z",
+    "tool": "leansearch",
+    "query": "A divided power compatible odd derivation remains compatible on sums, scalar multiples and compositions of divided powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.IsDPMorphism.comp",
+     "DividedPowers.IsDPMorphism.of_comp",
+     "DividedPowers.dpow_mul",
+     "DividedPowers.dpow_sum'",
+     "DividedPowers.DPMorphism.comp",
+     "DividedPowers.DPMorphism.dpow_comp",
+     "DividedPowers.dpow_add",
+     "DividedPowers.casesOn"
+    ],
+    "digest": "452672af97c64701"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; Basic.lean:79-96 supplies the ordinary divided-power axioms, not their differentiation by an odd operator. DPMorphism.lean:62-65 requires a ring homomorphism, whereas D has a signed Leibniz rule and changes parity. SubDPIdeal results assume closure under divided powers; they do not establish this compatibility locus. No exact theorem or one-line specialization found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The set of elements on which a derivation respects divided powers is an ideal closed under divided powers",
+   "results": {
+    "t": "2026-10-24T01:20:19Z",
+    "tool": "leanfinder",
+    "query": "The set of elements on which a derivation respects divided powers is an ideal closed under divided powers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DividedPowers.SubDPIdeal.dpow_mem",
+     "DividedPowers.IsSubDPIdeal.dpow_mem",
+     "DividedPowers.SubDPIdeal",
+     "DividedPowers.IsSubDPIdeal",
+     "DividedPowers.IsSubDPIdeal.dividedPowers",
+     "DividedPowers.dpow_mem",
+     "DividedPowers.IsSubDPIdeal.self",
+     "DividedPowers.SubDPIdeal.mk'"
+    ],
+    "digest": "f3c54752e359cd34"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; Basic.lean:79-96 supplies the ordinary divided-power axioms, not their differentiation by an odd operator. DPMorphism.lean:62-65 requires a ring homomorphism, whereas D has a signed Leibniz rule and changes parity. SubDPIdeal results assume closure under divided powers; they do not establish this compatibility locus. No exact theorem or one-line specialization found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-graded-pd-odd-derivations",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Latest blueprint proof paragraph (3), ordinary direct-image branch and its etale-chart comparison, through the existing local complete-intersection comparison chain to Stacks 09PS (lemma-get-derivation), proof: lift the operator satisfying (1),(2), proceeding one variable at a time. This node supplies the omitted odd-operator extension without a square-zero condition. Supporting calculus: propagation of divided-power compatibility from the even generators to all even elements, using 09PG(3)-(7).",
+   "via": [
+    "lem-sfb-free-graded-pd-odd-derivations",
+    "lem-sfb-square-zero-dga-curvature",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pd-derivation-compatibility-closure",
+  "worker": "stage1",
+  "summary": "Kept the statement and its two definition dependencies unchanged. Supplied five explicit elementary calculations for zero, sums, arbitrary even multiples, iterated divided powers and homogeneous odd products. Read both dependency statements and Stacks 09PF/09PG/09PS, tested characteristic two and non-square-zero operators, and repeated logged Mathlib searches with a second semantic phrasing. No attachment, no new nodes, no source error.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), through the inherited local-complete-intersection/Tate-resolution chain. The five steps supply the compatibility propagation needed in the omitted one-variable operator extension of Stacks 09PS (1),(2), using 09PG(3)-(7). The inherited null ancestor and complete via chain are retained (blueprint_refs.py ancestor confirms null); whole-blueprint searches for divided power and derivation found no equivalent item. This is not the unit key node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-af17aa0e6",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-af17aa0e6 (reviewer sub-agent of L); spot-checked: Read the item and its five steps in full, both cited definition statements, and Stacks dpa.tex 09PF, 09PG axioms (1)-(7) and 09PS (lemma-get-derivation, whose operator extension says 'details omitted'). The delivery has zero new nodes and one commit containing the item and its report. The statement, deps, created record and blueprint provenance are kept; proof_deps equal stmt_deps, so there is no cycle. I checked each calculation. Step 1: D(1)=0 because A_-1=0, and gamma_n(0)=0 by the scalar axiom with a=0. Step 2: the sum axiom with reindexing; the D(gamma_0) end terms vanish and even factors commute with odd D(x), D(y). Step 3: D(a^n)=n a^{n-1}D(a), and x gamma_{n-1}(x)=n gamma_n(x) by the product axiom for n>=2; D(a) need not be 0. Step 4: I recomputed the iteration coefficients, and c=(nm)!/(n!(m!)^n) equals ((n-1)m)!/((n-1)!(m!)^{n-1})*C(nm-1,m-1) as integers, with no cancellation in A. Step 5: the odd-product axiom plus u^2=v^2=0 and vu=-uv kill D(w)w for n=2. Small cases tested: the zero ring, degree 0 only, D=0, char 2, and S<u,x> with Du=1, Dx=u, where D^2 is nonzero; the even-multiple case x*x checks out (12 u gamma_3 on both sides), as does the odd product u1u2. The statement matches what the parent's step 6 uses and is stronger, since it covers nonhomogeneous x. Duplicate search over gamma_{n-1}, 09PS and derivation/divided found adjoin-dga-cycle, square-zero-dga-curvature, split-square-zero-dp and pd-check-generators; none states this closure. The elementary marks are justified, the definitions explicitly state every input, and no SGA source is used. No fixes; no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PDDerivationCompatibilityClosure",
+  "declaration": "GradedAlgebra.pdDerivationCompatibilityLocus_closure",
+  "declarations": [
+   "GradedAlgebra.pdDerivationCompatibilityLocus",
+   "GradedAlgebra.pdDerivationCompatibilityLocus_closure"
+  ],
+  "file": "lean/Sheaf/RingTheory/PDDerivationCompatibilityClosure.lean",
+  "statement": "theorem pdDerivationCompatibilityLocus_closure {R : Type u} {A : Type v} [CommRing R] [Ring A] [Algebra R A] (𝒜 : ℕ → Submodule R A) [GradedAlgebra 𝒜] [IsStrictlyGradedCommutative 𝒜] (γ : GradedDividedPowers 𝒜) (D : A →ₗ[R] A) (hdegree : ∀ (i : ℕ) (x : A), x ∈ 𝒜 i → D x ∈ integerComponent 𝒜 ((i : ℤ) - 1)) (hleibniz : ∀ (i j : ℕ) (x y : A), x ∈ 𝒜 i → y ∈ 𝒜 j → D (x * y) = D x * y + (-1 : A) ^ i * (x * D y)) : (0 : evenSubalgebra 𝒜) ∈ pdDerivationCompatibilityLocus 𝒜 γ D ∧ (∀ (x y : evenSubalgebra 𝒜), x ∈ pdDerivationCompatibilityLocus 𝒜 γ D → y ∈ pdDerivationCompatibilityLocus 𝒜 γ D → x + y ∈ pdDerivationCompatibilityLocus 𝒜 γ D) ∧ (∀ (a x : evenSubalgebra 𝒜), x ∈ pdDerivationCompatibilityLocus 𝒜 γ D → a * x ∈ pdDerivationCompatibilityLocus 𝒜 γ D) ∧ (∀ (m : ℕ), 0 < m → ∀ (x : evenSubalgebra 𝒜), x ∈ pdDerivationCompatibilityLocus 𝒜 γ D → γ.dpow m x ∈ pdDerivationCompatibilityLocus 𝒜 γ D) ∧ (∀ (i j : ℕ) (u v : A), u ∈ 𝒜 (2 * i + 1) → v ∈ 𝒜 (2 * j + 1) → ∃ z : evenSubalgebra 𝒜, (z : A) = u * v ∧ z ∈ pdDerivationCompatibilityLocus 𝒜 γ D)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary set is the actual compatibility locus in the recorded even subalgebra, requiring positive-even-ideal membership. The single theorem states all five closure clauses. The final existential only packages the product as an element of the even subalgebra; its underlying value is fixed to u*v. No freeness or square-zero assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42c580fa9",
+  "group": "NW",
+  "result": "pass",
+  "note": "Only the item lean field differs from side-live; dep node files byte-identical; no new nodes; no live/side-live binding or name clash; lean.statement verbatim; both declarations listed. Lean matches node and Stacks dpa.tex 09PF/09PG/09PS(1),(2) clause by clause: CommRing R, noncommutative Ring A with independent universes, recorded GradedAlgebra/IsStrictlyGradedCommutative/GradedDividedPowers deps, R-linear D with hdegree via integerComponent (bottom in degree -1) and signed hleibniz, no freeness/D^2=0. Locus = positiveEvenIdeal plus the equation for all n>0, a real set, nonhomogeneous x included. Five clauses (0, sum, arbitrary even multiple, gamma_m for m>0, odd product pinned to u*v) neither weaker nor stronger. All five steps hand-checked against Mathlib dpow axioms, including the uniformBell coefficient identity and the char-2 odd-square argument. Edge cases fine. Docstrings, imports and the single sorry OK; report sections present. Not compiled (no file changed). No findings."
+ }
+}

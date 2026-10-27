@@ -1,0 +1,444 @@
+{
+ "id": "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+ "kind": "statement",
+ "title": "Integral orbit neighbourhoods produce invariant quasi-affine charts",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], let $p:S'\\to S$ be flat, surjective and quasi-compact [def-weil-pbc-fpqc-covering], and let $F$ be an fpqc sheaf of sets on $S$-schemes, namely a contravariant functor satisfying the covering equalizer condition. Suppose $F_{S'}$ is represented by an $S'$-scheme $P$ locally of finite presentation [def-pc-representable-functor, def-sbc-locally-finite-presentation]. Let $q:T\\to S$ be an integral surjective morphism [def-weil-finite-integral-morphism] such that $F_T$ is represented by a $T$-scheme $Y$. Set $R=F_{T\\times_ST}=Y\\times_S T$, a scheme, and let $r_0,r_1:R\\rightrightarrows Y$ be the two maps induced by the two projections of $T\\times_ST$ and the canonical identification of the two restrictions of $F$ [def-pc-fibre-product]. Suppose for every $y\\in Y$ the subset $|r_1|(|r_0|^{-1}(y))$ is contained in an affine open of $Y$. Then there is a set-indexed open covering $(U_i\\subseteq P)_{i\\in I}$ [def-weil-open-immersion] such that each $U_i\\to S'$ is quasi-affine [def-nagata-quasi-affine-morphism] and the canonical descent datum on $P$ relative to $S'/S$ restricts to $U_i$: under the canonical isomorphism between the two pullbacks of $P$ to $S'\\times_SS'$, the inverse-image open of $U_i$ on one side equals the inverse-image open on the other side. The restricted isomorphisms satisfy the cocycle of [def-pd-descent-datum]. No representing scheme for $F$ over $S$ is asserted.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Theorem 4.1, proof: invariant quasi-affine neighbourhood construction, pp.17-21, before the final appeal to quasi-affine effective descent. This records the neighbourhood output rather than representability. Localize on the base and use fpqc descent of invariant opens to return from the affine refinement. Anantharaman Proposition 4.1.1, printed p.54, cites this theorem. Primary text read at https://www.numdam.org/article/SAC_1967-1968__2__A5_0.pdf; archival copy WANTED. No single Stacks tag states this comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pd-descent-datum",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-representable-functor",
+  "def-weil-open-immersion",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Work first over an affine open $S_1\\subseteq S$. Its ring is Noetherian by [pqf-lem-affine-open-locnoeth]. Restrict $F,Y,P$ to $S_1$; each orbit $O$ in $Y_{S_1}$ is the original orbit, since the relation maps have the same $S$-coordinate. By hypothesis $O$ lies in an affine open $U\\subseteq Y$; we check that $U_1=U\\cap Y_{S_1}$ is a quasi-affine open of $Y_{S_1}$ containing $O$. Cover the quasi-compact $U$ by finitely many affine opens $U_k$, each mapping into an affine open $S_k$ of $S$. Then $S_1\\cap S_k$ is an open of the Noetherian affine $S_k$ [pqf-lem-affine-open-locnoeth], hence a finite union of principal opens, whose inverse images in $U_k$ are principal opens. So $U_1$ is a quasi-compact open subscheme of the affine $U$, i.e. quasi-affine. This is the orbit hypothesis of the approximation lemma used in Step 2. The integral surjection stays integral and surjective by [lem-sbc-integral-morphism-base-change, lem-weil-pbc-surjective-base-change], and the covering stays fpqc by [lem-weil-pbc-fpqc-covering-axioms]. Until the last step write $S$ for $S_1$. Apply [lem-galois-fpqc-singleton-affine-refinement] to $S'\\to S$, obtaining an affine fpqc cover $A\\to S$ with a map $A\\to S'$ induced by finitely many affine open inclusions. Put $P_A=F_A=P\\times_{S'}A$. On each of those open pieces this is a target-open restriction of $P$, so its map to $A$ is locally of finite presentation by the affine-local definition [def-sbc-locally-finite-presentation]. We will construct invariant quasi-affine opens in $P_A$ and descend them to the original $P$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-galois-fpqc-singleton-affine-refinement",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, beginning of proof, p.5-17, affine base and affine fpqc refinement; base-change permanence as in the cited scheme lemmas."
+   }
+  },
+  {
+   "text": "Fix $x\\in P_A$. Apply [lem-sfb-integral-orbit-finite-diagram-approximation]. Use its notation $F_0,P_0,B,Q,X,Z,D,g,v,L,j$. Thus $P_0\\subseteq P_A$ contains $x$, $P_0=X\\times_B A$, $Z_B=Z\\times_S B=X\\times_S Q$, and $g:Z_B\\to X$ is a finite integral surjection. The image of $j_B:L\\times_S B\\to Z_B$ is invariant under its kernel relation, because the datum induced by $D$ is the canonical datum relative to $Q_B/B$. Define $E=g(j_B(L\\times_S B))\\subseteq |X|$. Invariance says exactly $g^{-1}(E)=j_B(L\\times_S B)$: the saturation of this image under the kernel pair is itself. The image of $x$ in $X$ lies in $E$ by clause (4) of the cited approximation. The schemes $X,Z$ are Noetherian, since their structure maps are finitely presented over the affine finite-type Noetherian bases $B,Q$; [pqf-lem-locnoeth-lft] gives local Noetherianity and finite presentation supplies quasi-compactness. They are quasi-separated by their stated separatedness and [lem-pc-separated-quasi-separated].",
+   "uses": [
+    "lem-sfb-integral-orbit-finite-diagram-approximation",
+    "pqf-lem-locnoeth-lft",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1 reductions 1--5, pp.5-18--5-20, and beginning of reduction 6, p.5-21."
+   }
+  },
+  {
+   "text": "The morphism $j_B$ is a quasi-compact flat monomorphism by base change: flatness and quasi-compactness follow from [lem-weil-pbc-flat-morphism-base-change, lem-pc-quasi-compact-base-change], and monicity follows by comparing the two components of maps to a fibre product. Apply [lem-sfb-integral-descent-flat-monomorphism-subset] to $g:Z_B\\to X$ and $E$. It supplies a quasi-compact flat monomorphism $i:M\\to X$ with image $E$ and a $Z_B$-isomorphism $L\\times_S B\\simeq Z_B\\times_X M$. The latter scheme is affine by [lem-weil-pbc-fibre-product-affine-spectra], since $L,B,S$ are affine. Its map to $M$ is an integral surjection by [lem-sbc-integral-morphism-base-change, lem-weil-pbc-surjective-base-change]. It is universally closed by [pqf-lem-integral-univclosed], so [lem-weil-pbc-surjective-universally-closed-affine-target] makes $M$ affine. Now [lem-sfb-flat-monomorphism-quasiaffine-neighbourhood], applied to $i$ (its source $M$ is affine, hence quasi-affine) and the quasi-separated $X$, gives a quasi-compact quasi-affine open $H\\subseteq X$ containing $E$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-sfb-integral-descent-flat-monomorphism-subset",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "pqf-lem-integral-univclosed",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1 reduction 6, p.5-21, invoking printed Theorem 3.4, Proposition 3.5 and integral descent of affineness. Stacks Tag 01WM for universal closedness."
+   }
+  },
+  {
+   "text": "Put $N=v(Z_B\\setminus g^{-1}H)\\subseteq |Z|$. The map $v$ is the base change of the finitely presented affine map $B\\to S$; in affine coordinates its rings are obtained by adjoining the same finite generators and relations. Thus it is quasi-compact and locally of finite presentation. Both schemes are Noetherian and quasi-separated. The complement of the open $g^{-1}H$ is constructible, by [def-weil-constructible-subset]. Hence [lem-weil-pbc-chevalley-constructible-image] makes $N$ constructible. Also $N\\cap j(L)=\\varnothing$: [lem-weil-pbc-base-change-image] says a point over $j(L)$ belongs to the image of the base change $j_B(L\\times_S B)$ and therefore maps into $E\\subset H$. The image $j(L)$ is stable under generalization by the approximation lemma. If a point of $j(L)$ lay in $\\overline N$, [lem-weil-pbc-qcqs-scheme-spectral] and [lem-weil-pbc-spectral-proconstructible-closure-specialization], with the singleton constructible family $N$, would give a generalization in $N$, a contradiction. Therefore $V=Z\\setminus\\overline N$ is an open neighbourhood of $j(L)$ and $v^{-1}V\\subseteq g^{-1}H$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-chevalley-constructible-image",
+    "lem-sfb-integral-orbit-finite-diagram-approximation",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1 reduction 6, p.5-21, bad-image constructibility and open avoidance; Stacks 054J (lemma-chevalley) and 0903 (lemma-constructible-stable-specialization-closed) justify the avoidance step."
+   }
+  },
+  {
+   "text": "Let $d_0,d_1:Z\\times_S Q\\rightrightarrows Z$ be the two maps of $D$. They are integral, being base changes of $Q\\to S$, up to the datum isomorphism [lem-sbc-integral-morphism-base-change]. They are closed by [pqf-lem-integral-univclosed]. Put\n$$V_*=Z\\setminus d_1(d_0^{-1}(Z\\setminus V)).$$\nThis is open and contained in $V$, since the identity arrow puts every point outside $V$ into the removed subset. By [lem-pd-descent-orbit-saturated], the removed subset is a union of saturated orbits, so $d_0^{-1}V_*=d_1^{-1}V_*$. It contains $j(L)$: any arrow with target in that image has its source in the same image, by clause (4) of [lem-sfb-integral-orbit-finite-diagram-approximation], and hence has source in $V$. This proves explicitly the invariant shrinking used in the source.",
+   "uses": [
+    "lem-sbc-integral-morphism-base-change",
+    "pqf-lem-integral-univclosed",
+    "lem-pd-descent-orbit-saturated",
+    "lem-sfb-integral-orbit-finite-diagram-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1 reduction 6, p.5-21, replacing V by the complement of the saturation of its closed complement; compare the displayed shrinking in the proof of Theorem 4.2, p.5-18."
+   }
+  },
+  {
+   "text": "Let $V_{*,B}=v^{-1}V_*\\subseteq Z_B$. Under $Z_B\\simeq X\\times_S Q$ it is invariant under the kernel pair of $g$. Because $g$ is an integral surjection, it is closed [pqf-lem-integral-univclosed]. Thus\n$$U=X\\setminus g(Z_B\\setminus V_{*,B})$$\nis open, and $g^{-1}U=V_{*,B}$: the invariance says every fibre is entirely inside or entirely outside $V_{*,B}$. Since $V_{*,B}\\subseteq g^{-1}H$ and $g$ is surjective, $U\\subseteq H$. It contains $E$, because it contains the images of $j_B$. The open $U$ is quasi-compact since $X$ is Noetherian. Since $H$ is a quasi-compact open of an affine scheme, its open subscheme $U$, now known quasi-compact, is also a quasi-compact open of that affine scheme. Hence $U$ is quasi-affine as a scheme. Applying [lem-a1-quasi-affine-target-locality] to the singleton affine cover $B$ shows $U\\to B$ is quasi-affine. Its base change $U_A\\to A$ is quasi-affine by [lem-trf-quasi-affine-base-change], and $x\\in U_A$.",
+   "uses": [
+    "pqf-lem-integral-univclosed",
+    "lem-a1-quasi-affine-target-locality",
+    "lem-trf-quasi-affine-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1 reduction 6, end of p.5-21, passage from invariant V to an open inside the quasi-affine enlargement; Stacks Tag 01SO for base change."
+   }
+  },
+  {
+   "text": "We verify invariance of $U_A\\subseteq P_A$. Its inverse image in $F_{0,T\\times_S A}$ is the inverse image of $V_*\\subseteq Z=F_{0,Q}$, since $T\\to S$ factors through $Q$ and $g^{-1}U=v^{-1}V_*$. On $A\\times_S A$, the two pullbacks of $U_A$ therefore have equal pullbacks along the surjection $T\\times_S A\\times_S A\\to A\\times_S A$: both are defined by the same $Z$-section, with only the two $A$-coordinates exchanged. Surjectivity is preserved on the scheme models by [lem-weil-pbc-surjective-base-change]. A surjective map detects equality of inverse-image subsets, so the two opens coincide. The same assertion holds inside the full model of $F$, because $F_0\\subseteq F$ is a subfunctor. The canonical isomorphism therefore restricts to $U_A$; its cocycle is the original cocycle restricted to this open, by [def-pd-descent-datum].",
+   "uses": [
+    "lem-sfb-integral-orbit-finite-diagram-approximation",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, last four lines, p.5-21: equality detected after the integral surjective auxiliary base change."
+   }
+  },
+  {
+   "text": "Return to the given $S'\\to S$. On $F_{S'\\times_S A}=P\\times_S A$, the pullback of $U_A$ is an open, using the canonical identification with $P_A\\times_S S'$. Its two pullbacks over $A\\times_S A$ agree by the preceding invariance. The cover $P\\times_S A\\to P$ is fpqc by [lem-weil-pbc-fpqc-covering-axioms]. Hence [lem-weil-pbc-open-subscheme-fpqc-descent] gives an open $U'\\subseteq P$. Its pullback along the fpqc cover $S'\\times_S A\\to S'$ is the base change of $U_A\\to A$, so it is quasi-affine by [lem-trf-quasi-affine-base-change]. Consequently [lem-sfb-scheme-quasi-affine-fpqc-descent] proves $U'\\to S'$ quasi-affine. Equality on the two $S'$-overlaps is detected after their fpqc base change by $A\\to S$, where it is the equality already proved. The cocycle restricts as before. As $x$ varies, the $U_A$ cover $P_A$, so their base changes cover $P\\times_S A$; surjectivity of this cover implies the descended $U'$ cover $P$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-trf-quasi-affine-base-change",
+    "lem-sfb-scheme-quasi-affine-fpqc-descent",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Raynaud Theorem 4.1, p.5-17 affine refinement and p.5-21 final comparison; returning from the refinement by Stacks 03N0 (descent-lemma-open-fpqc-covering) and 02L7 (lemma-descending-property-quasi-affine)."
+   }
+  },
+  {
+   "text": "Finally let the affine open $S_1$ from the first step vary. An affine open immersion $S_1\\hookrightarrow S$ is quasi-compact: its intersection with any affine open of $S$ is an open in a Noetherian affine scheme and hence quasi-compact, using [pqf-lem-affine-open-locnoeth]. It is quasi-affine by the definition, since these intersections are quasi-compact opens of affine schemes. Its base change $S'_{S_1}\\hookrightarrow S'$ is quasi-affine by [lem-trf-quasi-affine-base-change]. The charts already obtained have quasi-affine structure maps to $S'_{S_1}$, so their structure maps to $S'$ are quasi-affine by [lem-sfb-quasiaffine-morphism-composition]. They remain invariant: both overlap maps have the same image in $S$, so being over $S_1$ is itself invariant. The restrictions of the canonical isomorphism still satisfy the cocycle. Taking all such charts covers $P$. This is a set-indexed family, since affine opens of $S$ and open subsets of each scheme model are sets. If $P$ is empty, the empty family suffices. No representing object over $S$ was used.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-trf-quasi-affine-base-change",
+    "lem-sfb-quasiaffine-morphism-composition",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Raynaud Theorem 4.1, p.5-17 local reduction on the base; Stacks 01SN (morphisms-lemma-composition-quasi-affine) for returning to the original base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-integral-orbit-finite-diagram-approximation",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-sfb-integral-descent-flat-monomorphism-subset",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-surjective-universally-closed-affine-target",
+  "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-weil-pbc-base-change-image",
+  "lem-pd-descent-orbit-saturated",
+  "lem-a1-quasi-affine-target-locality",
+  "lem-trf-quasi-affine-base-change",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-sfb-scheme-quasi-affine-fpqc-descent",
+  "lem-sfb-quasiaffine-morphism-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Raynaud Theorem 4.1 proof, pp.5-17--5-21, before the final effective-descent appeal; explicit bad-image avoidance, saturation and return from affine refinements using Stacks. Printed Theorem 3.4 and Proposition 3.5 are called 3.3 and 3.4 in that proof. Primary source read online; local archival copy WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral descent gives invariant quasi-affine open neighbourhoods on the locally finitely presented fpqc model when every descent orbit has an affine neighbourhood",
+   "results": "{\"t\": \"2026-10-24T12:50:05Z\", \"tool\": \"leanfinder\", \"query\": \"Integral descent gives invariant quasi-affine open neighbourhoods on the locally finitely presented fpqc model when every descent orbit has an affine neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\"], \"digest\": \"bf0b43f78370ed2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine scheme constructions and local representability do not construct invariant quasi-affine opens from an integral auxiliary cover and orbit neighbourhoods."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud integral descent invariant quasi-affine open charts for an fpqc scheme form",
+   "results": "{\"t\": \"2026-10-24T12:50:02Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud integral descent invariant quasi-affine open charts for an fpqc scheme form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn\"], \"digest\": \"80c5cdb464167618\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine scheme constructions and local representability do not construct invariant quasi-affine opens from an integral auxiliary cover and orbit neighbourhoods."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"DescentDatum\"",
+   "results": "{\"t\": \"2026-10-24T12:50:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"DescentDatum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine scheme constructions and local representability do not construct invariant quasi-affine opens from an integral auxiliary cover and orbit neighbourhoods."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*quasi|quasi.*invariant|integral.*descent",
+   "results": "{\"t\": \"2026-10-24T12:50:01Z\", \"tool\": \"grep\", \"query\": \"invariant.*quasi|quasi.*invariant|integral.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine scheme constructions and local representability do not construct invariant quasi-affine opens from an integral auxiliary cover and orbit neighbourhoods."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc scheme form with an integral scheme model and affine descent orbits has invariant relatively quasi-affine open charts",
+   "results": "{\"t\": \"2026-10-24T13:42:06Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc scheme form with an integral scheme model and affine descent orbits has invariant relatively quasi-affine open charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.Scheme.AffineCover.I₀\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.reduce_to_affine_nbhd\"], \"digest\": \"a74e769917a1bd5c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral and quasi-affine definitions and morphism-property descent do not supply the invariant chart construction."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*quasi|quasi.*invariant|integral.*descent",
+   "results": "{\"t\": \"2026-10-24T13:43:06Z\", \"tool\": \"grep\", \"query\": \"invariant.*quasi|quasi.*invariant|integral.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral and quasi-affine definitions and morphism-property descent do not supply the invariant chart construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral descent orbit affine neighbourhoods yield descent invariant relatively quasi-affine charts",
+   "results": "{\"t\": \"2026-10-24T13:43:07Z\", \"tool\": \"leansearch\", \"query\": \"Integral descent orbit affine neighbourhoods yield descent invariant relatively quasi-affine charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsIntegralHom.casesOn\"], \"digest\": \"e9abb07a2241dc16\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral and quasi-affine definitions and morphism-property descent do not supply the invariant chart construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsQuasiAffine, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-24T13:43:07Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsQuasiAffine, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsQuasiAffine'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid identifier probe: Loogle reported unknown identifier AlgebraicGeometry.IsQuasiAffine. Replaced by the recorded query AlgebraicGeometry.Scheme.IsQuasiAffine, CategoryTheory.Mono."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsQuasiAffine, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-24T13:47:21Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IsQuasiAffine, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Proposition 4.1.1 and Proposition 4.1.3 (scan OCR 4.1.5), printed pp.54-55: integral descent criterion and descent of affine neighbourhoods; restrict to integral covers which are also fpqc. Last property clause: Stacks Tags 02KU, 02L0, 02L2, descent.tex labels lemma-descending-property-separated, lemma-descending-property-finite-presentation, lemma-descending-property-flat. Supporting argument: invariant quasi-affine charts in the proof of the integral descent criterion",
+   "via": [
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+  "worker": "stage1",
+  "summary": "Nine-step proof. Two statement-only prerequisites isolate finite diagram approximation and general quasi-affine composition; integral descent of admissible subsets and the quasi-affine flat-monomorphism neighbourhood are the existing Raynaud nodes lem-sfb-integral-descent-flat-monomorphism-subset and lem-sfb-flat-monomorphism-quasiaffine-neighbourhood (reviewer FIX: the delivered duplicates were dropped). The proof explicitly removes the bad-image closure, saturates the complement, constructs the open on the finite model, checks invariance, descends opens back to the given fpqc model and extends from affine base opens. Statement unchanged.",
+  "blueprint": "Current latest main-20261024: det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent branch. Retain inherited null nearest blueprint ancestor and full via list, as blueprint_refs.py ancestor reports None. Whole-blueprint searches for invariant open, integral descent, finite approximation, admissible subset, semilocal and quasi-affine neighbourhood found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Affine opens of a locally Noetherian scheme. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-sbc-integral-morphism-base-change",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Integral morphisms are stable under arbitrary base change. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Base change of a surjective morphism is surjective. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Fpqc coverings satisfy the site covering axioms. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-galois-fpqc-singleton-affine-refinement",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: A singleton fpqc covering of an affine scheme has a finite affine-open refinement. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Finite type over a locally Noetherian base. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: A separated morphism of schemes is quasi-separated. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Base change of a flat morphism of schemes is flat. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Quasi-compact morphisms are stable under base change. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: The fibre product of affine schemes is the spectrum of the tensor product. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "pqf-lem-integral-univclosed",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Integral = affine + universally closed. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: A scheme receiving a surjective universally closed morphism from an affine scheme is affine. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-chevalley-constructible-image",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Chevalley's theorem: images of constructible sets. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: The underlying space of a quasi-compact quasi-separated scheme is spectral. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Closure points of an intersection of constructible sets in a spectral space are specializations. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-pd-descent-orbit-saturated",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: An orbit of a cartesian descent groupoid is saturated. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-a1-quasi-affine-target-locality",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Quasi-affineness can be checked on an affine target cover. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-trf-quasi-affine-base-change",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Quasi-affine morphisms are stable under arbitrary base change. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Generic scheme/topological tool in the Raynaud neighbourhood construction: Fpqc descent of compatible open subschemes. Its statement is used only for this property or construction; no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-base-change-image",
+    "why": "Step 4 uses the generic equality between inverse image of an image and image under base change to identify v^{-1}(j(L)); it does not replace the integral descent route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-galois-fpqc-singleton-affine-refinement",
+  "pqf-lem-locnoeth-lft",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-surjective-universally-closed-affine-target",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-proconstructible-closure-specialization",
+  "lem-pd-descent-orbit-saturated",
+  "lem-a1-quasi-affine-target-locality",
+  "lem-trf-quasi-affine-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-66f9ddc45",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-66f9ddc45 (reviewer sub-agent of L); spot-checked: I read Raynaud, Sém. Samuel 1967/68 exp. 5 (§§1–4, pp.5-01–5-21: 1.1–1.4, 2.2–2.4, Thm 3.3 (printed heading 3.4), Prop 3.4 (printed heading 3.5), the 4.1/4.2 proof reductions 1°–6°, Lemma 4.3) against the item and all four new nodes. The statement is unchanged; it is the invariant quasi-affine chart output of 4.1 before the effectivity appeal. Fault 1 (C5/B, duplicates): two new nodes repeat existing nodes from group Q07, which landed at 22:10:21 CST; the delivery commit is 22:11:23 and the snapshot shows both on the base, in the same unit. lem-sfb-integral-admissible-subset-descent duplicates lem-sfb-integral-descent-flat-monomorphism-subset (3.3(ii); the existing node assumes only a locally Noetherian base and gives the cartesian F'≅Y×_Z F). lem-sfb-flat-monomorphism-quasiaffine-enlargement duplicates lem-sfb-flat-monomorphism-quasiaffine-neighbourhood (3.4; the existing node allows a quasi-affine source). Both are dropped; Step 3 text, uses and proof_deps are repointed. Fault 2 (E1, Step 1): after restricting to an affine open S1 the step called the orbits 'the original orbits', but the approximation node needs each orbit in an affine open of Y_{S1}. When S is not separated, U∩Y_{S1} need not be affine, and an infinite orbit (T integral, not finite) need not have an affine neighbourhood inside it. Repair: Step 1 now proves U∩Y_{S1} is quasi-compact, hence quasi-affine, citing pqf-lem-affine-open-locnoeth with principal opens. The approximation node's orbit hypothesis is weakened from an affine open to a quasi-affine open. It stays true by the source proof: 1°–3° use only a quasi-compact, quasi-separated, quasi-affine V; after 3° Y is quasi-affine; 6° needs an affine neighbourhood of a finite set only. The approximation node matches 1°–5° and the start of 6°: F_{0,B}≅h_X is 4°'s claim, (***) gives the datum, and F_α is stable by 4.3. It is not a clause of the item. Steps 2–9 checked: kernel-pair invariance gives g^{-1}E=im j_B; X and Z are Noetherian. M is affine by the integral case of the universally-closed affine-target lemma. Step 4: Chevalley constructibility plus closure-specialization in a spectral space, with j(L) stable under generalization, gives V. Step 5: shrinking uses lem-pd-descent-orbit-saturated on a union of orbits. Step 6: U=X∖g(Z_B∖V_*B) is quasi-compact and lies in H. Step 7: invariance is detected through the surjection T×A×A→A×A. Step 8: open and quasi-affine fpqc descent. Step 9: S1→S is quasi-affine, then 01SN composition. lem-sfb-quasiaffine-morphism-composition (01SN) is true and has no duplicate. Batch-5 flags: lem-trf-quasi-affine-base-change (01SO), lem-a1-quasi-affine-target-locality (closure reaches the trf canonical affine embedding) and lem-sfb-scheme-quasi-affine-fpqc-descent are generic quasi-affine facts, not steps of the trace-formula or PD proofs; accepted. Fixes: the item JSON and the approximation-node JSON under fixes/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralDescentInvariantQuasiAffineCharts",
+  "declaration": "AlgebraicGeometry.exists_integral_descent_invariant_quasiaffine_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralDescentInvariantQuasiAffineCharts.lean",
+  "statement": "theorem exists_integral_descent_invariant_quasiaffine_charts {S S' T : Scheme.{u}} [IsLocallyNoetherian S] (p : S' ⟶ S) [Flat p] [Surjective p] [QuasiCompact p] (F : (Over S)ᵒᵖ ⥤ Type v) (hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over S) F) (P : Over S') [LocallyOfFinitePresentation P.hom] (rP : ((Over.map p).op ⋙ F).RepresentableBy P) (q : T ⟶ S) [IsIntegralHom q] [Surjective q] (Y : Over T) (rY : ((Over.map q).op ⋙ F).RepresentableBy Y) (horbit : ∀ y : Y.left, ∃ V : Y.left.Opens, IsAffineOpen V ∧ rY.overDescentDatum.toHom '' ((pullback.fst (Y.hom ≫ q) q) ⁻¹' {y}) ⊆ (V : Set Y.left)) : ∃ (I : Type u) (U : I → P.left.Opens), (∀ x : P.left, ∃ i : I, x ∈ U i) ∧ ∀ i : I, IsQuasiAffineHom ((U i).ι ≫ P.hom) ∧ (pullback.fst (P.hom ≫ p) p ⁻¹ᵁ U i) = (rP.overDescentDatum.toHom ⁻¹ᵁ U i) ∧ ∃ E : Over.DescentDatum p (Over.mk ((U i).ι ≫ P.hom)), ∀ {A : Scheme.{u}} (f₀ f₁ : A ⟶ S') (h : f₀ ≫ p = f₁ ≫ p) (a : Over.mk f₀ ⟶ Over.mk ((U i).ι ≫ P.hom)), (E.transport f₀ f₁ h a).left ≫ (U i).ι = (rP.overDescentDatum.transport f₀ f₁ h (Over.homMk (a.left ≫ (U i).ι) (by simpa only [Over.mk_hom, Category.assoc] using Over.w a))).left",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63bae7e9f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: S [IsLocallyNoetherian]; p [Flat][Surjective][QuasiCompact]; F with a genuine fpqc over-sheaf condition hF; P [LocallyOfFinitePresentation] with rP : RepresentableBy; q [IsIntegralHom][Surjective]; Y with rY. R = pullback (Y.hom≫q) q with r0 = fst and r1 = rY.overDescentDatum.toHom (canonical, not arbitrary); horbit uses an affine open. Conclusion: I : Type u opens covering P; IsQuasiAffineHom (ι≫P.hom), relative to S'; invariance as fst⁻¹ᵁU = toHom⁻¹ᵁU on P×_S S' (equivalent to the node's equality through the canonical iso); ∃ E : Over.DescentDatum compatible with rP's transport, which includes the cocycle. No extra assumptions; universes bound; edge cases (empty P, empty base, identity maps, infinite integral q) covered. lean.statement matches the file verbatim; the node record changes only lean; dependency copies identical to side-live; all imports exist. Unrecorded DescentDatum.IsInvariant is not cited and invariance is written inline as in the landed Q75 node, so no H4 issue. Docstrings carry source, blueprint id and 9 proof steps; proof is only sorry; Worker report and Second reading by Q58 present. No file changed, no compile run."
+ }
+}

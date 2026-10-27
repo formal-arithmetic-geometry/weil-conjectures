@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-negative-koszul-exterior-differential",
+ "kind": "statement",
+ "title": "Actual exterior coefficients of a fixed negative Koszul pure-tensor boundary",
+ "statement": "Let C be a small site with commutative ring sheaf O, A a commutative ring in the same universe, rho:A→End(O) a ring homomorphism, a:Fin r→A, and s:Fin r→sections(O) with rho(a_i)=ringedKoszulScalar O s_i. For a fixed n, integer q, and subset I with q=-card I, the canonical map ringedNegativeKoszulBasis O r s n I q followed by the actual negative Koszul differential is the sum, over L with q+1=-card L, of rho(exteriorKoszulCoefficient r (a_i^(n+1)) q I L) followed by ringedNegativeKoszulBasis O r s n L (q+1). Every basis inclusion is the existing explicit construction; no coordinate family, transition, duality or normalization is asserted.",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model",
+  "lem-sfb-exterior-koszul-basis-differential"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "proof": [
+  {
+   "text": "Apply the proved signed erased-index formula for the canonical negative basis. It gives the coefficient (-1)^(number of earlier selected indices) times a_i^(n+1), precomposed through rho, in the I.erase i coordinate, including the empty list. This supplies the negative boundary without a choice of coordinates.",
+   "uses": [
+    "lem-sfb-negative-koszul-signed-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+   }
+  },
+  {
+   "text": "Apply the exterior contraction formula to the increasing wedge on I. Omitting its ith vector leaves the increasing wedge on I.erase i; its position equals the number of earlier selected indices. The dual coordinate at L is one exactly when I.erase i=L, and zero otherwise. Hence the actual exteriorKoszulCoefficient is the identical signed erased-index sum. The ring homomorphism preserves sums, signs and powers, so substituting this identity in the preceding boundary expansion proves the displayed equality. For r=0 the negative complex is O[0] and the boundary is zero; empty index sets, zero rings and empty sites obey the same formulas.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-negative-koszul-signed-differential",
+  "lem-weil-pbc-koszul-differential",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, ordered Koszul generators and the graded Leibniz rule; algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul, finite free duality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul differential on the ordered wedge basis is the signed sum over erased indices, with sign counting earlier indices",
+   "results": "Eight hits: exterior differential forms, bar-complex differential, polynomial Kaehler differentials, ExteriorAlgebra.ιMulti. No ringed-site Koszul basis equation.",
+   "verdict": "Use the existing contraction and finite-coordinate declarations; the comparison of their actual coefficients remains necessary.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite ordered subset basis of a Koszul complex agrees with tensor product of two term complexes, differential contraction and diagonal transition maps",
+   "results": "Eight hits, including HomologicalComplex.unit_tensor_d₁ and tensor_unit_d₂, and unrelated tensor-generator calculations.",
+   "verdict": "Generic tensor unit formulas support the comparison but do not identify the exterior and negative matrices.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"ιMulti\"",
+   "results": "Twelve hits including exteriorPower.ιMulti_family and its functoriality and spanning API.",
+   "verdict": "Use the exterior basis and contraction APIs; no ringed-site boundary comparison.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "Three Mathlib hits concerning regular sequences, covariant derivatives and a local-cohomology comment. Local repository search found the signed finite coordinates and actual exterior basis coefficient definitions, but no theorem asserting this specific boundary comparison.",
+   "verdict": "The remaining statement is the fixed-boundary calculation, independent of the already constructed coproduct and tower transitions.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulDualBasis",
+  "group": "V1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1), finite Koszul models in the application of Stacks 099M: agreement of the exterior and ringed negative boundary matrices.",
+   "via": [
+    "lem-sfb-ringed-koszul-dual-basis",
+    "lem-sfb-exterior-koszul-scalar-realization",
+    "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+    "lem-sfb-adic-residue-koszul-tensor-cone-pro-zero",
+    "lem-sfb-adic-residue-strict-koszul-augmentation",
+    "lem-sfb-adic-residue-quotient-finite-projection",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedNegativeKoszulExteriorDifferential",
+  "file": "lean/Sheaf/CategoryTheory/RingedNegativeKoszulExteriorDifferential.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulBasis_exterior_d",
+  "statement": "theorem ringedNegativeKoszulBasis_exterior_d\n    {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}\n    (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]\n    (ρ : A →+* End (SheafOfModules.unit\n      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)))\n    (r : ℕ) (a : Fin r → A)\n    (s : Fin r → (O.obj ⋙ forget CommRingCat).sections)\n    (hρ : ∀ i, ρ (a i) = ringedKoszulScalar O (s i))\n    (n : ℕ) (q : ℤ) (I : exteriorKoszulIndex r q) :\n    ringedNegativeKoszulBasis O r s n I.1 q ≫\n        (ringedNegativeKoszul O r s n).d q (q + 1) =\n      ∑ L : exteriorKoszulIndex r (q + 1),\n        ρ (exteriorKoszulCoefficient r (fun i ↦ a i ^ (n + 1)) q I L) ≫\n          ringedNegativeKoszulBasis O r s n L.1 (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T202447-L-3459649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T202447-L-3459649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-acyclic-two-term-flag-determinants",
+ "kind": "statement",
+ "title": "Determinants and acyclic trivializations along a two-term filtration",
+ "statement": "Let $R$ be a commutative ring and let $N\\subseteq L\\subseteq P$ be inclusions of two-term cochain complexes of $R$-modules, zero outside degrees $-1,0$ [def-weil-abstract-derived-category]. Put $M=L/N$, $Q=P/N$ and $S=P/L$ with quotient differentials, and assume that all terms of $N,L,P,M,Q,S$ are finite projective (direct summands of finite free modules [def-weil-pbc-projective-module]). For each such complex $E$ set $D(E)=\\det_R(E^0)\\otimes_R\\det_R(E^{-1})^\\vee$, where $\\vee=\\operatorname{Hom}_R(-,R)$ and determinant lines and kernel-first exact-sequence maps are those of [lem-trf-projective-determinant-exact-sequence]. For a degreewise short exact sequence $0\\to A\\to B\\to C\\to0$, define $G_{A,B,C}:D(C)\\otimes_R D(A)\\xrightarrow{\\sim}D(B)$ by the degree-zero kernel-first determinant map tensored with the inverse dual of the degree-minus-one map, using ordinary tensor symmetry. Write $\\Xi=G_{N,L,M}$. Then, for all $x\\in D(S)$, $z_M\\in D(M)$, and $z_N\\in D(N)$,\n$$G_{N,P,Q}\\bigl(G_{M,Q,S}(x\\otimes z_M)\\otimes z_N\\bigr)=G_{L,P,S}\\bigl(x\\otimes\\Xi(z_M\\otimes z_N)\\bigr).$$\nIf $d_N,d_M,d_L$ are isomorphisms, let $\\delta_E\\in D(E)$ correspond to $\\det(d_E)$ under $D(E)\\cong\\operatorname{Hom}_R(\\det_R(E^{-1}),\\det_R(E^0))$ for $E=N,M,L$. Then $\\Xi(\\delta_M\\otimes\\delta_N)=\\delta_L$. Both identities hold for arbitrary local ranks, including rank zero, with precisely the displayed ordinary tensor permutations. In each degree the iterated maps in the first identity agree with the kernel-first map for the filtration $N^i\\subseteq L^i\\subseteq P^i$: a local basis wedge is sent to the ordered wedge of the $N^i$ basis, lifts of the $M^i$ basis into $L^i$, and lifts of the $S^i$ basis into $P^i$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJL (lemma-compose-surjections), omitted proof and its hints; Tags 0FJC (lemma-det-ses-functorial) and 0FJD (lemma-det-filtration)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-projective-module",
+  "lem-trf-projective-determinant-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Every degreewise quotient sequence in the statement splits: lift the identity of its projective quotient along the surjection using [def-weil-pbc-projective-module]. Thus localization preserves these sequences (localize their direct-sum splittings). Apply [lem-weil-pbc-finite-projective-standard-free-cover] to the finitely many terms and refine to a simultaneous finite free cover by taking products of the cover elements. These products generate the unit ideal, by multiplying expressions for $1$ on the original covers. By [lem-trf-projective-exterior-scalar-comparisons], determinants, duals, evaluation, ordinary symmetry and the kernel-first maps commute with these localizations. Consequently so do the explicitly defined $G$ maps and $\\delta_E$: for the latter the localized top exterior map of $d_E$ acts on a wedge by applying $d_E$ to every factor. It suffices to prove the identities on these charts and use [lem-weil-pbc-localized-span-eq-zero] on their differences. Work on one such chart below.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0FJD (lemma-det-filtration), localization hint; 0FJB (lemma-det-ses); scalar comparisons in Section 0FJ9 (section-determinants)."
+   }
+  },
+  {
+   "text": "In each degree $i=-1,0$, choose ordered bases $n_i,m_i,s_i$ of $N^i,M^i,S^i$, lift $m_i$ to $\\widetilde m_i$ in $L^i$ and lift $s_i$ to $\\widetilde s_i$ in $P^i$. Exactness shows that $(n_i,\\widetilde m_i)$ is a basis of $L^i$ and $(n_i,\\widetilde m_i,\\widetilde s_i)$ a basis of $P^i$: subtract lifts of the quotient coordinates to express any vector in the kernel; applying the quotient map to a relation first kills its quotient coefficients, then injectivity kills the kernel coefficients. The images $(m_i,\\overline{\\widetilde s_i})$ form a basis of $Q^i$. The wedge formula of [lem-trf-projective-determinant-exact-sequence] sends both parenthesizations of $n_i\\otimes m_i\\otimes s_i$ to $p_i=n_i\\wedge\\widetilde m_i\\wedge\\widetilde s_i$. As this tensor is a basis of the source line, the two degreewise maps agree. This also proves the final ordered-wedge clause.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJD (lemma-det-filtration), explicit computation in its hint, using Tag 0FJB (lemma-det-ses)."
+   }
+  },
+  {
+   "text": "Write $e_E^i$ for the determinant basis just chosen for each module, and put $u_E=e_E^0\\otimes(e_E^{-1})^\\vee$, where the dual basis takes value $1$ on $e_E^{-1}$. Unwinding the definition of $G$ and the wedge formula of [lem-trf-projective-determinant-exact-sequence] gives $G_{A,B,C}(u_C\\otimes u_A)=u_B$ for each sequence in the flag: in degree zero it sends the kernel and quotient bases to the concatenated basis; in degree $-1$ the inverse dual sends their dual tensor to the functional taking value $1$ on that same concatenation. Ordinary tensor symmetries introduce no scalar. Both sides of the first asserted identity therefore send $u_S\\otimes u_M\\otimes u_N$ to $u_P$. All three source lines are free of rank one on this chart, so multilinearity gives the equality for every $x,z_M,z_N$.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0FJD (lemma-det-filtration) and 0FJL (lemma-compose-surjections), determinant-line assembly with ordinary tensor permutations."
+   }
+  },
+  {
+   "text": "For the acyclic identity, choose bases $n$ of $N^{-1}$ and $m$ of $M^{-1}$ and lifts $\\widetilde m$ in $L^{-1}$. Use $d_N n$ as basis of $N^0$ and $d_M m$ as basis of $M^0$, possible because these differentials are isomorphisms. The vectors $d_L\\widetilde m$ lift $d_M m$ by the chain equation. Hence $(n,\\widetilde m)$ and $(d_N n,d_L\\widetilde m)$ are bases of $L^{-1}$ and $L^0$, by the kernel/quotient coordinate argument of Step 2. Let $n_\\wedge,m_\\wedge,\\ell_\\wedge$ denote their degree-minus-one wedges, with $\\ell_\\wedge=n\\wedge\\widetilde m$. By definition $\\delta_N=(\\bigwedge d_N)(n_\\wedge)\\otimes n_\\wedge^\\vee$ and likewise for $M,L$. The degree-zero kernel-first map of [lem-trf-projective-determinant-exact-sequence] sends $(\\bigwedge d_N)(n_\\wedge)\\otimes(\\bigwedge d_M)(m_\\wedge)$ to $(\\bigwedge d_L)(\\ell_\\wedge)$, and its degree-minus-one inverse dual sends $n_\\wedge^\\vee\\otimes m_\\wedge^\\vee$ to $\\ell_\\wedge^\\vee$. Thus the defining ordinary permutation in $\\Xi$ gives exactly $\\Xi(\\delta_M\\otimes\\delta_N)=\\delta_L$.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJC (lemma-det-ses-functorial), differential diagram; compare lemma-canonical-element-well-defined in Section 0FJI."
+   }
+  },
+  {
+   "text": "For any fixed input the difference of the two global expressions maps to zero on every member of Step 1's unit-ideal cover, so [lem-weil-pbc-localized-span-eq-zero] makes it zero. Apply this both to the trilinear identity and to the differential elements. The local computations used empty wedges equal to $1$, with their dual functional also equal to $1$, so include every zero-rank case without a permutation sign. Ranks may differ between charts because the argument is chartwise. If $R$ is the zero ring all modules and maps have one underlying element, and the same identities hold.",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJD (lemma-det-filtration), passage from local computation to global equality; Algebra Tag 00EO (lemma-cover), zero-element detection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-projective-exterior-scalar-comparisons",
+  "lem-weil-pbc-localized-span-eq-zero",
+  "lem-trf-projective-determinant-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0FJB (lemma-det-ses), 0FJC (lemma-det-ses-functorial), 0FJD (lemma-det-filtration), and 0FJL (lemma-compose-surjections); omitted hints expanded by explicit local wedge calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a filtration of two term finite projective complexes determinant exact sequence maps are associative and preserve differential trivializations for acyclic subquotients",
+   "results": "8 hits; top=['CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ', 'CategoryTheory.ProjectiveResolution.complex_exactAt_succ', 'CategoryTheory.ProjectiveResolution.exact_succ', 'CategoryTheory.ComposableArrows.Exact.opcyclesIsoCycles_hom_fac_assoc', 'CategoryTheory.ProjectiveResolution.exact₀', 'CategoryTheory.ComposableArrows.Exact.opcyclesIsoCycles_hom_fac', 'CategoryTheory.ShortComplex.Exact.liftFromProjective_comp_assoc', 'HomologicalComplex.HomologySequence.composableArrows₃_exact']; note=; digest=1a1e6304df61100a. The hits give exact projective resolutions, scalar detAux_comp/det_pi, and naturality of exterior powers in degrees zero and one. They do not give filtration determinant-line comparison or multiplication of acyclic differential generators.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel first exterior power isomorphisms for nested subcomplexes preserve canonical determinant elements of acyclic complexes",
+   "results": "8 hits; top=['ModuleCat.exteriorPower.iso₁_hom_naturality_assoc', 'ModuleCat.exteriorPower.iso₁_hom_naturality', 'ModuleCat.exteriorPower.iso₀_hom_naturality_assoc', 'ModuleCat.exteriorPower.iso₀_hom_naturality', 'exteriorPower.zeroEquiv_naturality', 'Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq', 'exteriorPower.alternatingMapLinearEquiv_symm_map', 'exteriorPower.presentation.isPresentationCore']; note=; digest=bb0859706afa5fea. The hits give exact projective resolutions, scalar detAux_comp/det_pi, and naturality of exterior powers in degrees zero and one. They do not give filtration determinant-line comparison or multiplication of acyclic differential generators.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant maps for a three step filtration of finite projective two term complexes satisfy associativity and multiply the acyclic differential trivializations",
+   "results": "8 hits; top=['LinearMap.detAux_comp', 'Filter.prod_assoc', \"HomologicalComplex.truncGE'Map_comp_assoc\", 'LinearMap.det_pi', \"HomologicalComplex.truncLE'Map_comp_assoc\", 'HomologicalComplex.mapBifunctor₂₃.ι_D₁_assoc', 'ComplexShape.Associative.mk', 'HomologicalComplex.truncLEMap_comp_assoc']; note=; digest=899b24d6794af75c. The hits give exact projective resolutions, scalar detAux_comp/det_pi, and naturality of exterior powers in degrees zero and one. They do not give filtration determinant-line comparison or multiplication of acyclic differential generators.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"ShortExact\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The hits give exact projective resolutions, scalar detAux_comp/det_pi, and naturality of exterior powers in degrees zero and one. They do not give filtration determinant-line comparison or multiplication of acyclic differential generators.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*filtration|det.*ShortExact|det.*shortExact",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The hits give exact projective resolutions, scalar detAux_comp/det_pi, and naturality of exterior powers in degrees zero and one. They do not give filtration determinant-line comparison or multiplication of acyclic differential generators.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*filtration|det.*[Ss]hortExact|determinantLine",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned statements: scalar endomorphism determinants, exterior functor naturality and exact-complex lifting do not state determinant-line flag associativity or the acyclic differential-element identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Determinant exact sequence isomorphisms for finite projective modules are compatible with a filtration and the determinants of isomorphisms",
+   "results": "8 hits; top=['Matrix.det_map', 'IsModuleFiltration.toIsFiltration', 'LinearEquiv.det', 'LinearMap.detAux_comp', 'LinearMap.det_eq_det_mul_det', 'LinearMap.det_map', 'LinearMap.det_pi', 'IsModuleFiltration']; note=; digest=4d9c0f4a0863f8f6. Read the returned statements: scalar endomorphism determinants, exterior functor naturality and exact-complex lifting do not state determinant-line flag associativity or the acyclic differential-element identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"ShortExact\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned statements: scalar endomorphism determinants, exterior functor naturality and exact-complex lifting do not state determinant-line flag associativity or the acyclic differential-element identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of determinant line exact sequence maps for filtered finite projective two term complexes and acyclic differential trivializations",
+   "results": "8 hits; top=['Profinite.NobelingProof.succ_exact', 'CategoryTheory.ShortComplex.Exact.liftFromProjective_comp_assoc', 'SnakeLemma.δ_aux', 'SnakeLemma.δ_eq', \"SnakeLemma.δ'_eq\", \"SnakeLemma.δ'\", 'SnakeLemma.δ', 'Algebra.H1Cotangent.exact_map_δ']; note=; digest=e7eaa9002ad404d3. Read the returned statements: scalar endomorphism determinants, exterior functor naturality and exact-complex lifting do not state determinant-line flag associativity or the acyclic differential-element identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det.*exact|exact.*det|det.*filtrat|filtrat.*det",
+   "results": "25 hits; top=['Mathlib/LinearAlgebra/SymplecticGroup.lean', 'Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Card.lean', 'Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean', 'Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean', 'Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean', 'Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean', 'Mathlib/LinearAlgebra/Orientation.lean', 'Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean']; note=; digest=e875d7c30e05f97a. Read the returned statements: scalar endomorphism determinants, exterior functor naturality and exact-complex lifting do not state determinant-line flag associativity or the acyclic differential-element identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Top exterior powers of short exact sequences of modules are associative for nested submodules and natural under isomorphisms",
+   "results": "8 hits; top=['ModuleCat.exteriorPower.iso₁_hom_naturality_assoc', 'ModuleCat.exteriorPower.iso₀_hom_naturality_assoc', 'ModuleCat.exteriorPower.iso₁_hom_naturality', 'exteriorPower.map_comp', 'exteriorPower.oneEquiv_naturality', 'exteriorPower.zeroEquiv_naturality', 'exteriorPower.map_comp_ιMulti_family', 'ModuleCat.exteriorPower.iso₀_hom_naturality']; note=; digest=8e6245b606aa5781. Read the returned statements: scalar endomorphism determinants, exterior functor naturality and exact-complex lifting do not state determinant-line flag associativity or the acyclic differential-element identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-surjective-two-term-determinant-calculus",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: Determinants and acyclic trivializations along a two-term filtration.",
+   "via": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-acyclic-two-term-flag-determinants",
+  "worker": "stage1",
+  "summary": "Q124 expands the omitted filtration and acyclic compatibility arguments into a simultaneous free-cover reduction, a kernel-first basis computation in each degree, explicit inverse-dual and ordinary-tensor calculations, and a differential-image-basis calculation. Existing scalar comparisons and zero detection supply the non-elementary inputs; no new nodes, no statement change. No completed project declaration or Mathlib match found.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: Determinants and acyclic trivializations along a two-term filtration.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-projective-module",
+    "why": "Generic projective lifting characterization splits the degreewise quotient sequences before localization."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Generic finite-free chart cover for each finite projective term; used without changing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localized-span-eq-zero",
+    "why": "Generic Mathlib zero-detection tool descends the two computed identities from a unit-ideal cover."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-localized-span-eq-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-aa78ac29a",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-aa78ac29a (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and self-contained, and no new nodes were added. I read the sources at their labels: Stacks more-algebra 0FJB (lemma-det-ses, l.36283), 0FJC (l.36337), 0FJD (lemma-det-filtration, l.36373, localization hint) and 0FJL (lemma-compose-surjections, l.37108), and Algebra 00EO (lemma-cover). Step 1: splitting the quotient sequences uses the lifting clause of def-weil-pbc-projective-module, and the product cover f_i g_j generates the unit ideal. Localization compatibility of det, duals, evaluation, symmetry, gamma and det(d_E) is supplied by lem-trf-projective-exterior-scalar-comparisons, including naturality of s_V for the isomorphism d_E. Descent to the global identity uses the leaf Module.eq_zero_of_isLocalized_span. Step 2: I checked the kernel/quotient basis argument; both bracketings give n∧m̃∧s̃, using lift-independence from lem-trf-projective-determinant-exact-sequence. Step 3: G(u_C⊗u_A)=u_B holds for all four sequences, via the kernel-first wedge in degree 0 and λ∘γ^{-1} taking value 1 on the concatenated wedge in degree -1. Step 4: δ_E=(∧d_E)e⊗e^∨, and d_L m̃ lifts d_M m by the chain-map property, so Ξ(δ_M⊗δ_N)=δ_L. Step 5: rank-0, varying-rank and zero-ring cases are handled correctly. I tested the identities on rank-0 terms, N=0, L=P and the zero ring. The ordinary tensor symmetry is part of the definition of G, so no sign issue arises. proof_deps equals the union of the step uses, and a BFS over proof_deps and stmt_deps finds no cycle. There are no SGA citations. Searching for 0FJC/0FJD/0FJL and the determinant node families found no duplicate. I accept the tool_uses: the projective definition, the standard free cover and the span-zero leaf, all generic. No fixes."
+ }
+}

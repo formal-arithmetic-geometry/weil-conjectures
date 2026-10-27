@@ -1,0 +1,149 @@
+{
+ "id": "lem-trf-log-unit-section-lift",
+ "kind": "statement",
+ "title": "A unit section has a unique lift to an étale log structure",
+ "statement": "Let X be a locally Noetherian scheme [pqf-def-locnoeth] and K an étale log structure [def-trf-fs-log-blowup], with its log axiom expressed on geometric stalks. For every étale X-scheme U [def-weil-pbc-etale-site] and every unit a of Γ(U, O_U), there exists exactly one section m of K on U with α_K(m)=a. No logification or chosen presentation is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI 1.1, printed p.69 (étale log conventions); explicit stalk-to-section argument for the log unit isomorphism, using Stacks Tags 03PT and 03PU, etale-cohomology.tex."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "For a ring unit section a on an étale test scheme U, at every geometric point of U the log stalk has a unique element over the germ of a: reflection of units and bijectivity of Units.map stalkAlpha give precisely this assertion. Represent that element on a pointed étale neighbourhood. Equality of its structural germ with the germ of a holds on a smaller pointed neighbourhood, by the filtered-colimit description of stalks. These neighbourhoods cover U.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.1, printed p.69 (étale log conventions); explicit stalk-to-section argument for the log unit isomorphism, using Stacks Tags 03PT and 03PU, etale-cohomology.tex."
+   }
+  },
+  {
+   "text": "If two log sections have the same prescribed unit image, their germs at every geometric point are units by reflection of units. Injectivity on log-stalk unit groups makes those germs equal. Geometric stalks detect equality of sections (the injectivity part of [lem-weil-pbc-sets-etale-iso-on-geometric-stalks]). Thus the locally constructed sections agree on overlaps. Glue them using the monoid-sheaf condition. Its structural image equals a because this is so on the cover and the étale structure presheaf is a sheaf (Scheme.isSheaf_etaleStructurePresheaf). The same germ argument proves uniqueness. On an empty test scheme the empty cover and the sheaf axiom give the unique section.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.1, printed p.69 (étale log conventions); explicit stalk-to-section argument for the log unit isomorphism, using Stacks Tags 03PT and 03PU, etale-cohomology.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI 1.1, printed p.69 (étale log conventions); explicit stalk-to-section argument for the log unit isomorphism, using Stacks Tags 03PT and 03PU, etale-cohomology.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Con.lift",
+   "results": "Search succeeded: 10 hits; top declarations: Con.lift, Con.lift_comp_mk', Con.lift_unique, Con.lift_coe, Con.lift_surjective_of_surjective, Con.ker_eq_lift_of_injective, Con.lift_mk', Con.lift_apply_mk'.",
+   "date": "2026-10-26",
+   "verdict": "No theorem provides unique sectionwise unit lifts for the stalkwise EtaleLogStructure interface."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleStructurePresheaf|logification|associatedLog",
+   "results": "Search succeeded: 0 hits; top declarations: .",
+   "date": "2026-10-26",
+   "verdict": "No theorem provides unique sectionwise unit lifts for the stalkwise EtaleLogStructure interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a log structure on the small etale site every unit section has a unique preimage under the structural monoid map",
+   "results": "Search succeeded: 8 hits; top declarations: Units.val_injective, Units.coeHom_injective, Units.ext_iff, IsLocalization.toLocalizationMap_sec, Submonoid.LocalizationMap.map_units, Subgroup.unit_of_mem_ofUnits, Units.coeHom, IsUnit.of_map.",
+   "date": "2026-10-26",
+   "verdict": "No theorem provides unique sectionwise unit lifts for the stalkwise EtaleLogStructure interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EtaleLogStructure\"",
+   "results": "Search succeeded: 0 hits; top declarations: .",
+   "date": "2026-10-26",
+   "verdict": "No theorem provides unique sectionwise unit lifts for the stalkwise EtaleLogStructure interface."
+  },
+  {
+   "tool": "grep",
+   "query": "unitSectionMap|existsUnique_unit_section|unitsBijective; FineSaturatedLogBlowup, LogConditionFineChartLocality, PrelogUnitPushoutPresentation and Mathlib Sites/EtalePoint",
+   "results": "The definition has only the geometric-stalk axiom. logCondition_etale_local assumes log structures on the restrictions; it does not directly provide the unconditional section theorem. prelogSectionUnit is an inverse-function definition without this correctness theorem. Mathlib supplies conservativity of geometric points.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrelogPushoutHomExtension",
+  "date": "2026-10-26",
+  "group": "K5"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fine-log chart-spreading input, through lem-trf-log-regular-sharp-chart, to the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2); Travaux de Gabber VI, 3.7(a), printed p. 75, final sentence extending the restriction of a splitting to a chart. Returned proof steps 4--5: extension formula on quotient pairs and both inverse maps of the universal-property bijection. The sectionwise unit isomorphism needed in proof step 2 of lem-trf-prelog-pushout-hom-extension.",
+   "via": [
+    "lem-trf-prelog-pushout-hom-extension",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LogUnitSectionLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogUnitSectionLift.lean",
+  "declaration": "AlgebraicGeometry.EtaleLogStructure.existsUnique_unit_section_lift",
+  "statement": "theorem EtaleLogStructure.existsUnique_unit_section_lift\n    {X : Scheme.{u}} [IsLocallyNoetherian X] (K : EtaleLogStructure X)\n    (U : X.Etaleᵒᵖ) (a : (X.etaleStructurePresheaf.obj U)ˣ) :\n    ∃! m : K.monoidSheaf.obj.obj U, K.alpha.app U m = a.val",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261026T082403-L-2168311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261026T082403-L-2168311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

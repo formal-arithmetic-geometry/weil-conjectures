@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-symbol-common-atlas",
+ "kind": "statement",
+ "title": "Uniform atlas for symbols modulo one lower operator order",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field] and the symbol, operator and distribution conventions of [def-sfb-symbol-pseudodifferential-operators]. Let $N$ be a compact oriented smooth manifold without boundary of dimension $m\\geq1$, with smooth Riemannian metric and positive volume form $dV$, and let $E,F$ be smooth finite-rank real vector bundles. There exist finitely many coordinate charts $U_i$ trivializing $E,F$, real $\\chi_i,\\psi_i\\in C_c^\\infty(U_i)$ with $\\sum_i\\chi_i=1$ and $\\psi_i=1$ on a neighborhood of $\\operatorname{supp}\\chi_i$, and compact sets $K_i\\Subset U_i$ in chart coordinates, with the following property simultaneously for every integer $s$. For every $A\\in\\Psi^s(E,F)$ there are smooth matrix symbols $a_i\\in S^s$ on $\\mathbf R^m\\times\\mathbf R^m$, each supported in $K_i$ in the $x$ variable and satisfying global uniform symbol estimates, such that $$A-\\sum_i\\chi_i\\operatorname{Re}\\operatorname{Op}(a_i)\\psi_i\\in\\Psi^{s-1}(E,F).$$ The charts, cutoffs and compact sets are independent of both $A$ and $s$. The remainder membership is for the given operators on all distributions. The statement allows arbitrary symbols of type $S^s_{1,0}$; it does not require homogeneous leading symbols.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally. Supplemental Demailly, Differential and pseudodifferential operators on manifolds, section 3, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf; 3.5–3.6, p.7, fixed partition quantization and lower-order discrepancies; supporting coordinate-change/localization statement formulated by the agent for general symbols (not only homogeneous symbols)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-symbol-pseudodifferential-operators"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite cover by coordinate domains $U_i$ trivializing both bundles: intersect local trivializations and shrink coordinate balls, then use compactness. The subordinate-partition theorem with $S=N$ gives smooth real $\\chi_i$ with $\\sum_i\\chi_i=1$ and closed supports contained in $U_i$. They are compact since $N$ is compact Hausdorff. The separating-cutoff theorem applied to the disjoint closed sets $N\\setminus U_i$ and $\\operatorname{supp}\\chi_i$ gives a real $\\psi_i$ vanishing near the former and equal to one near the latter. Its support is a compact subset of $U_i$. Set $K_i$ equal to its support in chart coordinates. These choices involve only $N,E,F$. The hypotheses for the two cited theorems hold: $N$ is Hausdorff, sigma-compact (already compact), and normal (disjoint closed subsets are compact, and finitely many separating Hausdorff neighborhoods separate them).",
+   "uses": [
+    "lem-sfb-smooth-subordinate-partition",
+    "lem-sfb-smooth-separating-cutoff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally; Demailly, Differential and pseudodifferential operators on manifolds, section 3, (3.3)--(3.6), printed pp.6--7, and (3.12)--(3.14), pp.9--10, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Agent-written localization details using the cited DAG interfaces; the notes do not prove this full arbitrary-symbol, all-distributions formulation."
+   }
+  },
+  {
+   "text": "Fix any integer $s$ and any $A\\in\\Psi^s(E,F)$. By the definition write $A=\\sum_j\\alpha_j\\operatorname{Re}\\operatorname{Op}(b_j)\\beta_j+R$ in finitely many charts $V_j$, with $b_j\\in S^s$ and compact spatial cutoffs. Amplitude reduction applied to $\\alpha_j(x)b_j(x,\\xi)\\beta_j(y)$ gives smooth kernels off the diagonal, and equality for the transposed actions on all distributions. Consequently $\\chi_i A(1-\\psi_i)$ is smoothing: its local amplitudes have the extra factor $\\chi_i(x)(1-\\psi_i(y))$, which vanishes near the diagonal since $\\psi_i=1$ near $\\operatorname{supp}\\chi_i$. All spatial supports remain compact inside $V_j\\times V_j$, so these smooth kernels extend by zero. In the convention using $dV(y)=v_j(y)\\,dy$ their kernels are divided by the smooth positive $v_j(y)$; this preserves smoothness. The localized original $R$ is smooth as well. Thus $A-\\sum_i\\chi_i A\\psi_i$ is smoothing, with the equality obtained from $\\sum_i\\chi_i=1$ on distributions.",
+   "uses": [
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-compact-oscillatory-amplitude-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally; Demailly, Differential and pseudodifferential operators on manifolds, section 3, (3.3)--(3.6), printed pp.6--7, and (3.12)--(3.14), pp.9--10, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Agent-written localization details using the cited DAG interfaces; the notes do not prove this full arbitrary-symbol, all-distributions formulation."
+   }
+  },
+  {
+   "text": "For each $i,j$, put $\\gamma_{ij}=\\psi_i\\alpha_j$. Its support is compact in $U_i\\cap V_j$: it lies in the intersection of the two compact supports, each contained in its chart. Omit zero terms. Smooth separation supplies $\\zeta_{ij}$ compactly supported in $U_i\\cap V_j$ and equal to one near $\\operatorname{supp}\\gamma_{ij}$. Decompose $\\psi_i\\alpha_j\\operatorname{Re}\\operatorname{Op}(b_j)\\beta_j$ into $L_{ij}=\\gamma_{ij}\\operatorname{Re}\\operatorname{Op}(b_j)(\\beta_j\\zeta_{ij}\\,\\cdot)$ and the term with $1-\\zeta_{ij}$. The latter has compact amplitude vanishing near the diagonal and hence is smoothing by amplitude reduction, exactly as in step 2. Therefore $\\psi_i A=\\sum_j L_{ij}+R_i$ for a smooth global kernel $R_i$. Both spatial variables of $L_{ij}$ are now localized in the overlap; this is why changing coordinates there is legitimate.",
+   "uses": [
+    "lem-sfb-smooth-separating-cutoff",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally; Demailly, Differential and pseudodifferential operators on manifolds, section 3, (3.3)--(3.6), printed pp.6--7, and (3.12)--(3.14), pp.9--10, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Agent-written localization details using the cited DAG interfaces; the notes do not prove this full arbitrary-symbol, all-distributions formulation."
+   }
+  },
+  {
+   "text": "Apply coordinate change to $L_{ij}$ from the $V_j$ coordinates and frames to those of $U_i$, restricting both coordinate domains to their overlap. The coordinate transition is a diffeomorphism and the two frame transitions are smooth invertible real matrices, so all hypotheses hold with order $s$, output cutoff $\\gamma_{ij}$ and input cutoff $\\beta_j\\zeta_{ij}$. Obtain $L_{ij}=\\operatorname{Re}\\operatorname{Op}(q_{ij})\\mu_{ij}+R_{ij}$ on all distributions. Here $q_{ij}\\in S^s$ has compact $x$ support in the overlap, $R_{ij}$ is smooth, and $\\mu_{ij}=1$ near $\\operatorname{supp}\\gamma_{ij}\\cup\\operatorname{supp}(\\beta_j\\zeta_{ij})$. Write $e_{ij}$ for the leading expression supplied by that theorem: the cotangent and frame transform of $b_j$, multiplied by $\\gamma_{ij}\\beta_j\\zeta_{ij}$ and averaged under $a(x,\\xi)\\mapsto\\overline{a(x,-\\xi)}$. Thus $q_{ij}-e_{ij}\\in S^{s-1}$ and $(\\mu_{ij}-1)e_{ij}=0$. Symbols, cutoffs and smooth kernels extend by zero into the fixed chart as asserted by the theorem. Density-dual transport includes its absolute Jacobian; no volume-preserving coordinate change is assumed.",
+   "uses": [
+    "lem-sfb-local-quantization-coordinate-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally; Demailly, Differential and pseudodifferential operators on manifolds, section 3, (3.3)--(3.6), printed pp.6--7, and (3.12)--(3.14), pp.9--10, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Agent-written localization details using the cited DAG interfaces; the notes do not prove this full arbitrary-symbol, all-distributions formulation."
+   }
+  },
+  {
+   "text": "For each $i,j$ consider $D_{ij}=\\chi_i\\operatorname{Re}\\operatorname{Op}(q_{ij})(\\mu_{ij}-1)\\psi_i$ in the fixed chart. Its compactly supported amplitude is $c_{ij}(x,y,\\xi)=\\chi_i(x)q_{ij}(x,\\xi)(\\mu_{ij}(y)-1)\\psi_i(y)$. Its diagonal value has order $s-1$, because it equals $\\chi_i(x)(q_{ij}-e_{ij})(x,\\xi)(\\mu_{ij}(x)-1)\\psi_i(x)$ by step 4. Multiplication by these fixed spatial functions preserves the derivative bounds by the finite Leibniz sum. Amplitude reduction gives $D_{ij}=\\operatorname{Re}\\operatorname{Op}(t_{ij})\\nu_{ij}+S_{ij}$, where $t_{ij}-c_{ij}(x,x,\\xi)\\in S^{s-1}$. Therefore $t_{ij}\\in S^{s-1}$ and $S_{ij}$ is smooth. Choose an output cutoff equal to one on the compact $x$ support of $t_{ij}$ using smooth separation. This is a defining finite representation in $\\Psi^{s-1}(E,F)$. The real-part and transpose clauses in amplitude reduction ensure this is the same $D_{ij}$ on every distribution.",
+   "uses": [
+    "lem-sfb-local-quantization-coordinate-change",
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-smooth-separating-cutoff",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally; Demailly, Differential and pseudodifferential operators on manifolds, section 3, (3.3)--(3.6), printed pp.6--7, and (3.12)--(3.14), pp.9--10, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Agent-written localization details using the cited DAG interfaces; the notes do not prove this full arbitrary-symbol, all-distributions formulation."
+   }
+  },
+  {
+   "text": "Set $a_i(x,\\xi)=\\psi_i(x)\\sum_jq_{ij}(x,\\xi)$, extended by zero to $\\mathbf R^m$. Each $q_{ij}$ has compact support inside the overlap and a smooth zero extension. Its local symbol estimates on a compact neighborhood of that support give global estimates after extension. Finite sums and the Leibniz rule therefore give global uniform estimates for $a_i\\in S^s$, with $x$ support contained in the fixed $K_i$. Since $\\chi_i\\psi_i=\\chi_i$, steps 3--5 give $\\chi_i A\\psi_i-\\chi_i\\operatorname{Re}\\operatorname{Op}(a_i)\\psi_i\\in\\Psi^{s-1}$. Combine these finitely many differences with the smoothing remainder of step 2. Smooth kernels belong to every order by the empty-sum clause; finite sums of order $s-1$ representations are obtained by concatenating their chart terms and adding their kernels. This proves the required remainder membership on all distributions. Only the symbols and the intermediate overlap cutoffs depend on $A,s$; the output charts, $\\chi_i,\\psi_i,K_i$ were fixed in step 1. No homogeneity was used.",
+   "uses": [
+    "lem-sfb-local-quantization-coordinate-change",
+    "def-sfb-symbol-pseudodifferential-operators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally; Demailly, Differential and pseudodifferential operators on manifolds, section 3, (3.3)--(3.6), printed pp.6--7, and (3.12)--(3.14), pp.9--10, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Agent-written localization details using the cited DAG interfaces; the notes do not prove this full arbitrary-symbol, all-distributions formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-subordinate-partition",
+  "lem-sfb-smooth-separating-cutoff",
+  "def-sfb-symbol-pseudodifferential-operators",
+  "lem-sfb-compact-oscillatory-amplitude-reduction",
+  "lem-sfb-local-quantization-coordinate-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "WANTED locally; Demailly, Differential and pseudodifferential operators on manifolds, section 3, (3.3)--(3.6), printed pp.6--7, and (3.12)--(3.14), pp.9--10, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. Agent-written localization details using the cited DAG interfaces; the notes do not prove this full arbitrary-symbol, all-distributions formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite fixed coordinate atlas represents any pseudodifferential operator modulo an operator one order lower",
+   "results": "{\"t\": \"2026-10-24T04:15:07Z\", \"tool\": \"leanfinder\", \"query\": \"A finite fixed coordinate atlas represents any pseudodifferential operator modulo an operator one order lower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffFiberwiseLinear.locality_aux₂\", \"Manifold.termCₛ^_⟮_;_,_⟯\", \"contDiffPregroupoid\", \"Manifold.termCMDiff____\", \"Continuous.exists_contMDiff_approx_and_eqOn\", \"Continuous.exists_contMDiff_approx\", \"ContMDiffFiberwiseLinear.locality_aux₁\", \"Manifold.termCMDiff[_]____\"], \"digest\": \"bacbf962185a3609\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth frame-coordinate changes, smooth approximation, compactly supported functions and manifold syntax do not give a common-atlas oscillatory representation modulo one lower operator order."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing coordinates in a localized pseudodifferential operator preserves the symbol order modulo one lower order",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"leansearch\", \"query\": \"Changing coordinates in a localized pseudodifferential operator preserves the symbol order modulo one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffWithinAt.coordChange\", \"contMDiffOn_continuousLinearMapCoordChange\", \"ContMDiffAt.coordChange\", \"ContMDiff.coordChange\", \"contMDiffOn_coordChangeL\", \"ContMDiff.coordChangeL\", \"ContMDiffOn.coordChangeL\", \"MDifferentiable.coordChangeL\"], \"digest\": \"e97ad9aedddcad3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth frame-coordinate changes, smooth approximation, compactly supported functions and manifold syntax do not give a common-atlas oscillatory representation modulo one lower operator order."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any fixed finite atlas a pseudodifferential operator has compactly supported local symbols modulo one lower order",
+   "results": "{\"t\": \"2026-10-24T04:26:33Z\", \"tool\": \"leanfinder\", \"query\": \"For any fixed finite atlas a pseudodifferential operator has compactly supported local symbols modulo one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExistsContDiffBumpBase.u_compact_support\", \"Continuous.exists_contMDiff_approx\", \"ContDiffMapSupportedInClass\", \"SmoothBumpFunction.hasCompactSupport\", \"ExistsContDiffBumpBase.w_compact_support\", \"Continuous.exists_contMDiff_approx_and_eqOn\", \"HasCompactSupport.toSchwartzMap\", \"TestFunction.hasCompactSupport\"], \"digest\": \"4e6ab252944c5943\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth frame-coordinate changes, smooth approximation, compactly supported functions and manifold syntax do not give a common-atlas oscillatory representation modulo one lower operator order."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudodifferential\"",
+   "results": "{\"t\": \"2026-10-24T04:15:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudodifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth frame-coordinate changes, smooth approximation, compactly supported functions and manifold syntax do not give a common-atlas oscillatory representation modulo one lower operator order."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|quantization|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:15:04Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|quantization|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth frame-coordinate changes, smooth approximation, compactly supported functions and manifold syntax do not give a common-atlas oscillatory representation modulo one lower operator order."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudodifferential|quantization|SymbolClass",
+   "results": "{\"t\": \"2026-10-24T04:59:34Z\", \"tool\": \"grep\", \"query\": \"pseudodifferential|quantization|SymbolClass\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth coordinate changes, bump functions, partitions or smooth approximation; none states oscillatory quantization or order reduction for general pseudodifferential operators."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Changing a finite coordinate atlas for a pseudodifferential operator changes its symbol representation by one lower order",
+   "results": "{\"t\": \"2026-10-24T04:59:34Z\", \"tool\": \"leansearch\", \"query\": \"Changing a finite coordinate atlas for a pseudodifferential operator changes its symbol representation by one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiff.coordChange\", \"VectorPrebundle.contMDiffOn_contMDiffCoordChange\", \"contMDiffOn_continuousLinearMapCoordChange\", \"ContMDiffOn.coordChangeL\", \"ContMDiff.coordChangeL\", \"MDifferentiable.coordChangeL\", \"contMDiffOn_coordChangeL\", \"ContMDiffVectorBundle.contMDiffOn_coordChangeL\"], \"digest\": \"8ae43d42c268e581\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth coordinate changes, bump functions, partitions or smooth approximation; none states oscillatory quantization or order reduction for general pseudodifferential operators."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudodifferential\"",
+   "results": "{\"t\": \"2026-10-24T04:59:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"pseudodifferential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth coordinate changes, bump functions, partitions or smooth approximation; none states oscillatory quantization or order reduction for general pseudodifferential operators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed finite atlas represents every pseudodifferential operator by compactly supported local symbols modulo one lower order",
+   "results": "{\"t\": \"2026-10-24T04:59:38Z\", \"tool\": \"leanfinder\", \"query\": \"A fixed finite atlas represents every pseudodifferential operator by compactly supported local symbols modulo one lower order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SmoothBumpCovering\", \"SmoothBumpCovering.toFun\", \"SmoothBumpCovering.fintype\", \"SmoothBumpCovering.c\", \"Continuous.exists_contMDiff_approx_and_eqOn\", \"Continuous.exists_contMDiff_approx\", \"SmoothBumpCovering.point_finite\", \"SmoothBumpCovering.ind\"], \"digest\": \"caad818d466b1032\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth coordinate changes, bump functions, partitions or smooth approximation; none states oscillatory quantization or order reduction for general pseudodifferential operators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported localization and change of coordinates give symbols of any integer order for an arbitrary finite smooth atlas",
+   "results": "{\"t\": \"2026-10-24T05:00:02Z\", \"tool\": \"leanfinder\", \"query\": \"Compactly supported localization and change of coordinates give symbols of any integer order for an arbitrary finite smooth atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contMDiff_of_mulTSupport\", \"contMDiff_of_tsupport\", \"ContMDiff.extend_one\", \"SmoothBumpFunction\", \"SmoothBumpCovering\", \"IsOpen.exists_msmooth_support_eq\", \"SmoothBumpCovering.toFun\", \"Continuous.exists_contMDiff_approx_and_eqOn\"], \"digest\": \"e098386945ddaa47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern smooth coordinate changes, bump functions, partitions or smooth approximation; none states oscillatory quantization or order reduction for general pseudodifferential operators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudodifferential-asymptotic-sum",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: paragraph following Definition 3.8, printed pp.13–14: the instruction to choose a symbol asymptotic to the expansion; general decreasing-order operator formulation. Supporting input for asymptotic summation: 3.5–3.6, p.7, fixed partition quantization and lower-order discrepancies; supporting coordinate-change/localization statement formulated by the agent for general symbols (not only homogeneous symbols).",
+   "via": [
+    "lem-sfb-pseudodifferential-asymptotic-sum",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symbol-common-atlas",
+  "worker": "stage1",
+  "summary": "Q63 supplies the common-atlas proof using existing subordinate-partition, smooth-separation, coordinate-change and amplitude-reduction nodes. The actual cutoff-removal remainder is computed from its diagonal amplitude; multiplication by the fixed psi_i enforces the order-independent compact supports. All identities use the cited distributional transpose assertions. Statement unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "Read latest sec-six-functors-basics and sk-thm-sf-ctf-stability, including det-thm-sf-ctf-stability-direct-images clause (3). The inherited analytic prerequisite serves the asymptotic-symbol step below that direct-image route. Steps 1--6 realize Demailly fixed-atlas quantization (3.5)--(3.6) with arbitrary S^s_{1,0} symbols, using existing analytic tools. Whole-blueprint searches pseudodifferential, symbol and partition found no same statement; blueprint_refs ancestor returns None, preserved as inherited."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-a230234c8",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-a230234c8 (reviewer sub-agent of L); spot-checked: Read the item in full; the statement is unchanged, there are no new nodes and there is no repair note. I read the full statements of all five cited nodes: def-sfb-symbol-pseudodifferential-operators, compact-oscillatory-amplitude-reduction, local-quantization-coordinate-change, and the two Mathlib leaves (partition of unity and separating cutoff). All are in the item's own unit, so there are no tool_uses. No cycle among the 43 reachable nodes; proof_deps equals the union of the step uses. Demailly pseudodiff.pdf is not in literature/; I fetched it read-only and read §3: (3.4), (3.5) quadratic-partition Op_σ, Remark 3.6 (dependence on choices only through lower-order terms) and 3.7. The source motivates the statement but does not prove it, so proof_origin=agent is correct. Step 1: the partition with S=N and separation of N∖U_i from supp χ_i give compact supp ψ_i ⊂ U_i, so K_i=supp ψ_i, fixed in advance. Step 2: the amplitude χ_iα_j b_j β_j(1−ψ_i) vanishes near the diagonal because the compact supp χ_i is at positive distance from {ψ_i≠1}; the off-diagonal clause then gives a smooth kernel. Step 3: γ=ψ_iα_j and ζ cut both variables down to U_i∩V_j, and the (1−ζ) term is smoothing. Step 4: the coordinate change applies with χ=γ and ψ=β_jζ; μ=1 near supp χ∪supp ψ gives (μ−1)e=0, also after the conjugation average because the spatial factors are real. Step 5: the diagonal of c is χ_i(μ−1)ψ_i(q−e), in S^{s−1}, so the reduced symbol t is in S^{s−1}. Step 6: χ_iAψ_i=χ_iψ_iAψ_i, a_i=ψ_iΣq_ij has x-support in K_i with global estimates, and the remainders concatenate. I verified the assembly term by term. Edge cases (any integer s, rank 0, smoothing A, orientation reversal, non-classical symbols) are all fine. leading-calculus covers only homogeneous symbols, so it is not a duplicate. The parent asymptotic-sum uses the item exactly as stated. No fixes."
+ }
+}

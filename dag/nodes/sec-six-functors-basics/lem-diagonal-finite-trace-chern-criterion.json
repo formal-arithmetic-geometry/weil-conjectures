@@ -1,0 +1,137 @@
+{
+ "id": "lem-diagonal-finite-trace-chern-criterion",
+ "kind": "statement",
+ "title": "Reconstruction of a finite projective-line trace from its Chern degree",
+ "statement": "Let R be a commutative condensed ring object, A a finite commutative ring, N a positive natural number with N A = 0, and Y a Noetherian scheme on which N is invertible. Give a Diagram d on a family L of R-module lines, finite realizations eY and eP, a line isomorphism i:eP(L(P)) ≅ A_P(1), and a FiniteTracePresentation p [def-diagonal-finite-arrow-equations, def-sfb-diagonal-coefficient-finite-realization, def-sfb-diagonal-coefficient-quotient-line]. Define c to be the composite isomorphism p.q_square.derived.iso on the shifted line, p.Rq of the shifted single-line isomorphism, and transport along p.q_canonical. Define t=c.inv followed by eY applied to d.traceq followed by eY.derivedUnit. Define FiniteTraceChernDegree to be the equality of the canonical Chern component with the identity. If the canonical Chern component biprod.inr followed by geoP1TwistedMap followed by t is the identity of A_Y, then FinitePresentedTraceEquation holds with i and p. No reference, scalar compatibility, completed trace, or reduction hypothesis is needed.",
+ "stmt_deps": [
+  "def-diagonal-finite-arrow-equations",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "sk-lem-geo-p1-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), reduction of the trace; trace proof paragraph (1), inverse positive unit/Chern splitting"
+ },
+ "proof": [
+  {
+   "text": "Construct shiftedLineIso and the comparison c by composing the existing shift, single, line and full-unit direct-image isomorphisms. Define t by c inverse followed by the realized supplied trace. These are explicit constructions, not choices.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-quotient-line",
+    "def-diagonal-finite-arrow-equations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use finiteLineComparison to put the positive line shifted by two in D≤-2, and finiteUnitComparison to put the coefficient unit in D≥0. Mathlib DerivedCategory.TStructure.t.zero makes the first summand of splitting.hom followed by t zero.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-quotient-line",
+    "def-sfb-diagonal-coefficient-finite-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The hypothesis, rewritten by p.hsplitting, makes the second component the identity. Biproduct hom extensionality gives splitting.hom followed by t equal to the second projection. Cancel the splitting and c. By the definition of geoP1Trace the resulting equality is precisely FinitePresentedTraceEquation.",
+   "uses": [
+    "def-diagonal-finite-arrow-equations",
+    "sk-lem-geo-p1-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "def-diagonal-finite-arrow-equations",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "sk-lem-geo-p1-cohomology"
+ ],
+ "proof_origin": {
+  "by": "S3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), twisting and projecting to the coefficient summand",
+  "note": "Agent extraction of the Chern-degree test from the source inverse-splitting argument. The unit component is proved by t-structure orthogonality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar reduction of the completed projective line trace integrates the positive Kummer Chern class to one",
+   "date": "2026-10-27",
+   "results": "8 hits, including Algebra.normalizedTrace and NumberField.dedekindZeta_residue; none concerns sheaf-theoretic traces or Chern classes.",
+   "verdict": "No matching geometric comparison. The existing Result.torsion_chern gives its system-level starting equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure.zero",
+   "date": "2026-10-27",
+   "results": "One hit: CategoryTheory.Triangulated.TStructure.zero, Mathlib.CategoryTheory.Triangulated.TStructure.Basic.",
+   "verdict": "Use directly for the positive shifted-line component; it does not give the scalar Chern-degree equation."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern.*trace|trace.*Chern",
+   "date": "2026-10-27",
+   "results": "0 hits in the launcher Mathlib search. Local rg of Sheaf and WeilConjectures found Result.torsion_chern and the finite trace definitions, but no normalized realized-trace Chern degree theorem.",
+   "verdict": "No duplicate of the remaining coefficient-comparison obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerTraceReduction",
+  "date": "2026-10-27",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), applying the coefficient functor to the projective-line trace, with its definition from det-prop-diagonal-tower-trace(1)",
+   "via": [
+    "lem-diagonal-uniformizer-trace-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalFiniteTraceChernCriterion",
+  "file": "lean/Sheaf/Paper/DiagonalFiniteTraceChernCriterion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finitePresentedTraceEquation_of_chern",
+  "statement": "theorem finitePresentedTraceEquation_of_chern [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (Y : Scheme.{u}) [IsNoetherian Y]\n    (hY : IsUnit (N : Γ(Y, ⊤))) (L : ∀ X : Scheme.{u}, Modules R X)\n    (d : Diagram R Y L) (eY : FiniteRealization R A Y)\n    (eP : FiniteRealization R A (ProjectiveLine Y))\n    (lineP : eP.F.obj (L (ProjectiveLine Y)) ≅ geoCartierLine A N hA (ProjectiveLine Y))\n    (p : FiniteTracePresentation R A N hN hA Y hY L d eY eP)\n    (hchern : FiniteTraceChernDegree R A N hN hA Y hY L d eY eP lineP p) :\n    FinitePresentedTraceEquation R A N hN hA Y hY L d eY eP lineP p",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.FiniteRealization.shiftedLineIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.FiniteTracePresentation.comparison",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.FiniteTracePresentation.realizedTrace",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.FiniteTraceChernDegree",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.finitePresentedTraceEquation_of_chern"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T235934-L-1472113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T235934-L-1472113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

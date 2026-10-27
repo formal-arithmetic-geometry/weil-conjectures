@@ -1,0 +1,323 @@
+{
+ "id": "lem-sf-rational-supported-adjoint-transport",
+ "kind": "statement",
+ "title": "Raw scalar localization preserves supported adjunctions and unique triangle maps",
+ "statement": "Fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $\\mathcal T_X,\\mathcal T_Z,\\mathcal T_U$ be linear triangulated categories [def-weil-triangulated-category, def-weil-linear-functor], with exact linear functors $i_*,i^*,i^!,j^*,j_*$ and adjunctions $i^*\\dashv i_*\\dashv i^!$ and $j^*\\dashv j_*$. Assume $i^*i_*\\to1$ and $j^*j_*\\to1$ are invertible, $j^*i_*=0$, and for each $K\\in\\mathcal T_X$ the exceptional counit $e_K:i_*i^!K\\to K$ and the open unit $u_K:K\\to j_*j^*K$ are the first two arrows of a distinguished triangle $i_*i^!K\\xrightarrow{e_K}K\\xrightarrow{u_K}j_*j^*K\\xrightarrow{\\delta_K}i_*i^!K[1]$ (a supported triangle). Units and counits are required to commute with the supplied exact shifts.\nTake the raw scalar localizations $\\mathcal T_T[1/\\varpi]$, whose objects are unchanged and whose Hom groups are tensored over $R$ with $E$ [def-weil-rationalization-karoubi]. The localized exact functors carry the localized adjunctions, including their units, counits and shift structures; the supported triangles remain distinguished, and closed-to-open orthogonality holds in all shifts. In each original or localized category, for every $f:K\\to L$ there is exactly one morphism between the supported triangles with middle component $f$. Its closed and open components are $i_*i^!f$ and $j_*j^*f$. In particular the connecting arrow is uniquely determined by $e_K,u_K$, and these arrows form a natural shift-compatible family.\nFor a separated finite-type scheme over a field in which $\\ell$ is invertible, the identification of the completed integral constructible category with the stratified-perfect category [def-weil-pbc-bounded-constructible-complete, def-weil-derived-complete-integral-detailed] induces an identification of these raw localizations, with the same objects and the same maps $h\\otimes a$. Thus the assertion applies to the specified rational $D^b_c(-,E)$ without an idempotent completion. The exact structure on an integral kernel right adjoint may be the unique adjunction-compatible shift structure of the right adjoint of an exact functor; coefficient linearity is induced by the linear Hom adjunction. Moreover $i^!j_*G=0$ for every $G$, and the adjunction unit $Q\\to i^!i_*Q$ is invertible in both the original and localized categories.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Vanishing and uniqueness; Rational stage, category identification before transport; returned steps 9–11"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-triangulated-category",
+  "def-weil-linear-functor",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "If an integral kernel right adjoint is initially supplied only as an ordinary right adjoint, give it the unique adjunction-compatible coherent shifts of [lem-weil-pbc-adjunction-shift-compatibility-unique]. The left adjoint is exact, so [lem-sf-triangulated-right-adjoint] makes this right adjoint exact for those shifts. Its coefficient linearity follows from [lem-sbc-linear-right-adjoint]. More explicitly, for $F\\dashv G$, the transpose $h\\mapsto G(h)\\eta_P$ and its inverse $a\\mapsto\\varepsilon_KF(a)$ are $R$-linear because $F,G$ are linear and composition is bilinear. Thus the supplied Hom adjunctions are linear, not merely bijections of sets. Apply this to $i_*\\dashv i^!$; the other functors and shifts are already supplied.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint",
+    "lem-sbc-linear-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact; linear Hom formulas and kernel-adjoint refinement of the item"
+   }
+  },
+  {
+   "text": "Use [lem-weil-linear-scalar-localization-triangulated] for the three raw localized categories and their exact localization functors. Apply [lem-pur-semilinear-scalar-localization] with $S=R$, $u=t=\\varpi$ and $\\phi=1_R$ to each supplied functor and to its unit, counit and shift comparisons. The functor acts by $F_E(h\\otimes a)=F(h)\\otimes a$, and the transformations have components $\\eta_P\\otimes1$, $\\varepsilon_K\\otimes1$. For every adjoint pair, the two triangle identities remain identities: each is a well-typed equation of whiskerings and composites preserved by that lemma. Hence these are adjunctions with exactly the localized unit and counit. Their Hom bijections are the tensor extensions of the two inverse linear maps of step 1, so remain inverse without any finite-generation assumption. Shift-compatibility equations are preserved by the same lemma, as are the inverse equations for $i^*i_*\\to1$ and $j^*j_*\\to1$. The image of each given supported triangle is distinguished, and its first two arrows are precisely the new exceptional counit and open unit.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Rational stage: exact linear functor, adjunction data and triangle maps rationalize"
+   }
+  },
+  {
+   "text": "In the original category, for $P\\in\\mathcal T_Z$, $N\\in\\mathcal T_U$ and $m,n\\in\\mathbf Z$, exactness of $i_*,j_*$ and $j^*\\dashv j_*$ give\n$$\\operatorname{Hom}(i_*P[m],j_*N[n])\\cong\\operatorname{Hom}(j^*i_*P[m],N[n])=0,$$\nsince $j^*i_*P=0$. The localized group is this zero module tensored with $E$, hence zero, by [def-weil-linear-scalar-localization]. Thus all the required orthogonality groups vanish in both categories; no faithfulness of scalar localization is assumed. The isomorphism $i^*i_*\\to1$ makes $i_*$ fully faithful by [lem-weil-pbc-adjunction-counit-iso-right-fully-faithful]. Consequently the unit $Q\\to i^!i_*Q$ is invertible by [lem-sp-adjunction-unit-fully-faithful-left]. Apply these two results also to the localized adjunctions, whose counit remains invertible by step 2.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
+    "lem-sp-adjunction-unit-fully-faithful-left"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing, rational Hom tensor formula, and Consequences: closed adjunction unit"
+   }
+  },
+  {
+   "text": "Work in either category and write $A_K=i_*i^!K$ and $B_K=j_*j^*K$. Naturality gives $fe_K=e_L(i_*i^!f)$ and $(j_*j^*f)u_K=u_Lf$. The vanishing in step 3 includes $\\operatorname{Hom}(A_K[1],B_L)=0$. Apply [lem-weil-pbc-triangle-morphism-extension](2) to the distinguished supported triangles for $K,L$: the two displayed squares therefore extend to a morphism of triangles and determine its first and third components uniquely. Its middle component is $f$, so the last square is\n$$\\delta_L(j_*j^*f)=(i_*i^!f)[1]\\delta_K.$$\nThe same node's clause (3), using $\\operatorname{Hom}(A_K[1],B_K)=0$, gives uniqueness of the connecting map for the fixed first two arrows. Identities and composites of these triangle maps have their prescribed middle components, so uniqueness also proves functoriality.",
+   "uses": [
+    "lem-weil-pbc-triangle-morphism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.1.9 and Corollary 1.1.10(ii), printed pages 23–24"
+   }
+  },
+  {
+   "text": "Shift the supported triangle three times by rotation (TR2 in [def-weil-triangulated-category]); its arrows are $-e_K[1],-u_K[1],-\\delta_K[1]$. Changing the signs of the first and third vertices gives the isomorphic distinguished triangle with arrows $e_K[1],u_K[1],-\\delta_K[1]$. The supplied adjunction-compatible shifts identify its first two arrows with $e_{K[1]},u_{K[1]}$. The connecting-map uniqueness of step 4 therefore identifies $\\delta_{K[1]}$ with $-\\delta_K[1]$ under those comparisons. Iterating and shifting backwards gives the usual $(-1)^n$ rule for every integer $n$. This is the signed shift compatibility of the connecting family; it is not an unsigned equality. Finally, for $H=i^!j_*G$, adjunction gives $\\operatorname{Hom}(H,H)\\cong\\operatorname{Hom}(i_*H,j_*G)=0$ by step 3. Hence $1_H=0$, which makes $H$ a zero object: every arrow to or from $H$ factors through its zero identity. This proves $i^!j_*G=0$ before and after localization.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Vanishing and uniqueness; Consequences: exceptional pullback of an open direct image"
+   }
+  },
+  {
+   "text": "Let $T$ be a separated finite-type scheme over the stated field. Its base $\\operatorname{Spec}k$ is Noetherian (a field has only the ideals $0,k$ and its spectrum has one point), so [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian. It is finite-dimensional by [lem-kun-dimension-finite-type], and $\\ell$ is invertible by hypothesis. All hypotheses of [lem-weil-pbc-integral-stratified-perfect-characterization] are thus satisfied. That statement identifies the completed integral category, including compatible etale-origin witnesses and uniform reduction bounds, with the stratified-perfect category and with [def-weil-derived-complete-integral-detailed], over the same completed ring sheaf and with the same reductions. These are full subcategories with exactly the same objects in the same ambient derived category. Their identification is therefore the identity on objects and Hom modules, rather than a new realization equivalence.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 6.6.11 and 6.8.11(3); the explicit comparison node retains the DAG witness and uniformity conditions"
+   }
+  },
+  {
+   "text": "By [def-weil-rationalization-karoubi] and [def-weil-linear-scalar-localization], raw rationalization keeps objects and replaces every Hom module $M$ by $M\\otimes_RE$. Apply this to the identity identification of step 6: it is again the identity on objects and sends $h\\otimes a$ to the very same $h\\otimes a$. Composition, shifts and the distinguished triangles agree because their integral data agree. Thus the results of steps 1–5 apply to the specified rational $D^b_c(-,E)$, with no idempotents adjoined.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Rational stage: category identification before transporting the supported adjunction and triangle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-sbc-linear-right-adjoint",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-pbc-adjunction-counit-iso-right-fully-faithful",
+  "lem-sp-adjunction-unit-fully-faithful-left",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Vanishing; Rational stage; Consequences, expanded using BBD 1.1.9–1.1.10, Stacks 05R6 and 0A8D, and the existing integral characterization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Raw scalar localization of linear triangulated categories preserves recollement adjunctions unique supported triangle connecting maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"Given two distinguished triangles $T_1$ and $T_2$ in a triangulated category $\\\\mathcal{D}$ that lie in the essential image of a shift-commuting functor $L$, and morphisms $a: T_1.X_1 \\\\to T_2.X_1$ and \"}\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"For any morphism $ f: X \\to Y $ in the category $ \\\\mathcal{D} $, there exist an object $ Z $, a morphism $ g: Y \\to Z $, and a morphism $ h: Z \\to X[1] $ such that the triangle $ f \\to g \\to h \\to X[1] $ li\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.HasShift C ℤ] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"The localized category $\\\\mathcal{C}[W^{-1}]$, obtained by localizing a triangulated category $\\\\mathcal{C}$ with respect to a morphism property $W$ compatible with the triangulation, inherits a canonic\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor between pretriangulated categories (commuting with integer-parameterized shifts, preserving preadditive structure, and respecting zero \"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.HasShift C ℤ] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a triangulated category $\\\\mathcal{C}$ with a morphism property $W$ compatible with its triangulated structure, the localization $\\\\mathcal{C}[W^{-1}]$ inherits a pretriangulated category structur\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"In an adjunction between pretriangulated categories, if the right adjoint is a triangulated functor (i.e., commutes with the integer-parameterized shift operation, preserves the preadditive structure,\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"If $\\\\mathcal{C}$ is a triangulated category and $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated localization functor (i.e., $L$ commutes with the integer-parameterized shift operation, preserves t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Localization'",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|rationalization.*(adjunction|triang)|localization.*orthogonal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linear triangulated recollement rationalization retains adjunctions orthogonality uniqueness of connecting morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[F.IsTriangulated] : adj.IsTriangulated\", \"doc\": \"An adjunction between functors $ F: C \\to D $ and $ G: D \\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ D \"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[G.IsTriangulated] : adj.IsTriangulated\", \"doc\": \"An adjunction between functors $ F: C \\\\to D $ and $ G: D \\\\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ \"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : C \\to D $ and $ G : D \\to C $ form an adjunction between pretriangulated categories $ C $ and $ D $, where both functors commute with integer-parameterized shift operations and the adjunction r\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_3 : CategoryTheory.Limits.HasZeroObject D] →\\n            [inst_4 : CategoryTheory\", \"doc\": \"An adjunction between functors $ F: C \\to D $ and $ G: D \\to C $ where both functors commute with the integer-parameterized shift operations in their respective pretriangulated categories $ C $ and $ D \"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"[G.IsTriangulated] : F.IsTriangulated\", \"doc\": \"In an adjunction between pretriangulated categories, if the right adjoint is a triangulated functor (i.e., commutes with the integer-parameterized shift operation, preserves the preadditive structure,\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with integer-parameterized shift operations, if functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ form a t\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.mk\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"A constructor for an adjunction between functors $ F: C \\to D $ and $ G: D \\to C $ that are triangulated, ensuring the adjunction respects the integer-parameterized shift operations and the triangulated\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given an adjunction between functors $ F: C \\to D $ and $ G: D \\to C $ in pretriangulated categories equipped with integer-parameterized shift operations, where both $ F $ and $ G $ commute with the shi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invert uniformizer Hom tensor field supported counit triangle unique natural completion without Karoubi envelope",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Idempotents.karoubiUniversal₁_counitIso\", \"module\": \"Mathlib/CategoryTheory/Idempotents/FunctorExtension\", \"type\": \"∀ (C : Type u_1) (D : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D],\\n  (CategoryTheory.Idempotents.karoubiUniversal₁ C D).counitIso =\\n    CategoryTheory.Idempotents.KaroubiUniversal₁.counitIso C D\", \"doc\": \"A natural isomorphism establishing the universal property of the Karoubi envelope, showing that composing the whiskered embedding functor with the functor extension yields a natural equivalence to the\"}\n  {\"name\": \"CategoryTheory.Idempotents.KaroubiUniversal₁.counitIso\", \"module\": \"Mathlib/CategoryTheory/Idempotents/FunctorExtension\", \"type\": \"(C : Type u_1) →\\n  (D : Type u_2) →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        ((CategoryTheory.Functor.whiskeringLeft C (CategoryTheory.Idempotents.Karoubi C)\\n                    (CategoryTheory.Idempotents.Karoubi D)).obj\\n   \", \"doc\": \"A natural isomorphism establishing the universal property of the Karoubi envelope, showing that composing the whiskered embedding functor with the functor extension yields a natural equivalence to the\"}\n  {\"name\": \"CategoryTheory.Idempotents.KaroubiUniversal₁.counitIso_hom_app_app_f\", \"module\": \"Mathlib/CategoryTheory/Idempotents/FunctorExtension\", \"type\": \"∀ (C : Type u_1) (D : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D]\\n  (X : CategoryTheory.Functor (CategoryTheory.Idempotents.Karoubi C) (CategoryTheory.Idempotents.Karoubi D))\\n  (P : CategoryTheory.Idempotents.Karoubi C),\\n  (((CategoryTheo\", \"doc\": \"For any categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functor $X : \\\\Karoubi(\\\\mathcal{C}) \\\\to \\\\Karoubi(\\\\mathcal{D})$, and object $P = (X, e) \\\\in \\\\Karoubi(\\\\mathcal{C})$, the morphism component of the coun\"}\n  {\"name\": \"CategoryTheory.Idempotents.KaroubiUniversal₁.counitIso_inv_app_app_f\", \"module\": \"Mathlib/CategoryTheory/Idempotents/FunctorExtension\", \"type\": \"∀ (C : Type u_1) (D : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D]\\n  (X : CategoryTheory.Functor (CategoryTheory.Idempotents.Karoubi C) (CategoryTheory.Idempotents.Karoubi D))\\n  (P : CategoryTheory.Idempotents.Karoubi C),\\n  (((CategoryTheo\", \"doc\": \"For any categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, functor $X : \\\\Karoubi(\\\\mathcal{C}) \\\\to \\\\Karoubi(\\\\mathcal{D})$, and object $P = (X, e) \\\\in \\\\Karoubi(\\\\mathcal{C})$, the inverse of the counit isomorph\"}\n  {\"name\": \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_hom\", \"module\": \"Mathlib/CategoryTheory/Idempotents/HomologicalComplex\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (α : Type u_3)\\n  [inst_2 : AddRightCancelSemigroup α] [inst_3 : One α],\\n  (CategoryTheory.Idempotents.karoubiCochainComplexEquivalence C α).counitIso.hom = CategoryTheory.eqToHom ⋯\", \"doc\": \"The counit isomorphism for the Karoubi equivalence between cochain complexes in a preadditive category $\\\\mathcal{C}$ and cochain complexes in its Karoubi envelope is given by the identity morphism ari\"}\n  {\"name\": \"CategoryTheory.Idempotents.karoubiUniversal₁_unitIso\", \"module\": \"Mathlib/CategoryTheory/Idempotents/FunctorExtension\", \"type\": \"∀ (C : Type u_1) (D : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D],\\n  (CategoryTheory.Idempotents.karoubiUniversal₁ C D).unitIso =\\n    (CategoryTheory.Idempotents.functorExtension₁CompWhiskeringLeftToKaroubiIso C D).symm\", \"doc\": \"The unit isomorphism of the categorical equivalence between functors $\\\\mathcal{C} \\\\to \\\\Karoubi(\\\\mathcal{D})$ and $\\\\Karoubi(\\\\mathcal{C}) \\\\to \\\\Karoubi(\\\\mathcal{D})$ is naturally isomorphic to the invers\"}\n  {\"name\": \"CategoryTheory.Idempotents.KaroubiKaroubi.counitIso\", \"module\": \"Mathlib/CategoryTheory/Idempotents/KaroubiKaroubi\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (CategoryTheory.Idempotents.KaroubiKaroubi.inverse C).comp\\n        (CategoryTheory.Idempotents.toKaroubi (CategoryTheory.Idempotents.Karoubi C)) ≅\\n      CategoryTheory.Functor.id (CategoryTheory.Idempotents.Karoubi (CategoryTheor\", \"doc\": \"The natural isomorphism between the composition of the inverse functor from the double Karoubi envelope to the single Karoubi envelope and the canonical embedding, establishing an equivalence between \"}\n  {\"name\": \"CategoryTheory.Idempotents.karoubiChainComplexEquivalence_counitIso_hom\", \"module\": \"Mathlib/CategoryTheory/Idempotents/HomologicalComplex\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (α : Type u_3)\\n  [inst_2 : AddRightCancelSemigroup α] [inst_3 : One α],\\n  (CategoryTheory.Idempotents.karoubiChainComplexEquivalence C α).counitIso.hom = CategoryTheory.eqToHom ⋯\", \"doc\": \"The hom component of the counit isomorphism in the Karoubi chain complex equivalence is equal to the identity morphism constructed from equality, establishing the equivalence's coherence condition for\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of a linear triangulated category preserves adjunction unit counit and unique orthogonal supported triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.HasShift C ℤ] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"The localized category $\\\\mathcal{C}[W^{-1}]$, obtained by localizing a triangulated category $\\\\mathcal{C}$ with respect to a morphism property $W$ compatible with the triangulation, inherits a canonic\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.HasShift C ℤ] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a triangulated category $\\\\mathcal{C}$ with a morphism property $W$ compatible with its triangulated structure, the localization $\\\\mathcal{C}[W^{-1}]$ inherits a pretriangulated category structur\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.HasShift C ℤ]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"If $ \\\\mathcal{C} $ is a triangulated category and $ W $ is a morphism property compatible with the triangulation, then the localized category $ \\\\mathcal{C}[W^{-1}] $ inherits a canonical triangulated \"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with integer-parameterized shift operations, if functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ form a t\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : C \\to D $ and $ G : D \\to C $ form an adjunction between pretriangulated categories $ C $ and $ D $, where both functors commute with integer-parameterized shift operations and the adjunction r\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"If $\\\\mathcal{C}$ is a triangulated category and $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated localization functor (i.e., $L$ commutes with the integer-parameterized shift operation, preserves t\"}\n  {\"name\": \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"module\": \"Mathlib/CategoryTheory/Localization/Triangulated\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (L : CategoryTheory.Functor C D)\\n  [inst_2 : CategoryTheory.HasShift C ℤ] [inst_3 : CategoryTheory.Preadditive C]\\n  [inst_4 : CategoryTheory.Limits.HasZeroObject C] [inst_5\", \"doc\": \"The localization functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor, meaning it commutes with the integer-parameterized shift operation, preserves the preadditive structure, and res\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"In an adjunction between pretriangulated categories, if the right adjoint is a triangulated functor (i.e., commutes with the integer-parameterized shift operation, preserves the preadditive structure,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component localization, adjunction or exactness facts only; no full statement including the integral category identification and supported-map uniqueness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.Linear",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.extLinearEquiv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction\", \"type\": \" {C : Type u_1} {D : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.HasExt C] [CategoryTheory.HasExt D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} [F.Additive] [G.Add\", \"doc\": \"The linear equivalence on `Ext`-modules that is induced by an adjunction\\nbetween exact linear functors.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component localization, adjunction or exactness facts only; no full statement including the integral category identification and supported-map uniqueness"
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|rationalization.*adjunction|scalarLocalization",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: component localization, adjunction or exactness facts only; no full statement including the integral category identification and supported-map uniqueness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raw scalar localization preserves adjunctions and orthogonality for supported localization triangles",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_unit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Adjunction.localization_counit_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \"(X₂ : C₂) :\\n  (adj.localization L₁ W₁ L₂ W₂ G' F').counit.app (L₂.obj X₂) =\\n    G'.map ((CatCommSq.iso F L₂ L₁ F').inv.app X₂) ≫\\n      (CatCommSq.iso G L₁ L₂ G').inv.app (F.obj X₂) ≫ L₂.map (adj.counit.app X₂)\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.localization_unit_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \"(X₁ : C₁) :\\n  (adj.localization L₁ W₁ L₂ W₂ G' F').unit.app (L₁.obj X₁) =\\n    L₁.map (adj.unit.app X₁) ≫\\n      (CatCommSq.iso F L₂ L₁ F').hom.app (G.obj X₁) ≫ F'.map ((CatCommSq.iso G L₁ L₂ G').hom.app X₁)\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.localization\", \"module\": \"Mathlib.CategoryTheory.Localization.Adjunction\", \"type\": \": G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$, and localization functors $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$, $L_2: \\\\mathcal{C}_2 \\\\to\"}\n  {\"name\": \"CategoryTheory.Adjunction.isLocalization_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Localization.CalculusOfFractions.OfAdjunction\", \"type\": \"(adj : G ⊣ F) (W : MorphismProperty C₁) (hW : W.IsInvertedBy G) (hW' : (W.functorCategory C₁) adj.unit) :\\n  G.IsLocalization W\", \"doc\": \"Let $\\\\mathcal{C}_1$ and $\\\\mathcal{D}$ be categories, and let $F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}_1$ be functors forming an adjunction $G \\\\dashv F$. Suppose $W$ is \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component localization, adjunction or exactness facts only; no full statement including the integral category identification and supported-map uniqueness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring Hom modules with a fraction field extends functors and adjunctions and preserves distinguished triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"DerivedCategory.instLinearCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Q\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category preserves the $ R $-linear structure, meaning that for any two objects, the induced map on hom\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"DerivedCategory.instLinearHomotopyCategoryIntUpQh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Qh\", \"doc\": \"The canonical functor $ Q^h $ from the homotopy category of integer-indexed chain complexes to the derived category preserves the $ R $-linear structure. This means: (1) For any two chain complexes $ \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.Functor (ModuleCat (CategoryTheory.End G)ᵐᵒᵖ) C\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines a functor from the category of modules over the opposite ring $ \\\\text{End}(G)^{\\\\text{op}} $ back to $ \\\\mathcal{C} \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] {G : C},\\n  (CategoryTheory.IsGrothendieckAbelian.tensorObj G).IsLeftAdjoint\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, the functor $ \\\\text{Mod}(\\\\text{End}(G)^{\\\\text{op}}) \\\\to \\\\mathcal{C} $ constructed via the tensorObj operation is a left adjoint\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.IsGrothendieckAbelian.tensorObj G ⊣ CategoryTheory.preadditiveCoyonedaObj G\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines an adjunction where the tensor functor $ \\\\text{tensorObj} \\\\, G $ (constructing objects in $ \\\\mathcal{C} $ from $ \\\\\"}\n  {\"name\": \"DerivedCategory.instLinear\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"(R : Type t) →\\n  [inst : Ring R] →\\n    (C : Type u) →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] → [inst_4 : HasDerivedCategory C] → CategoryTheory.Linear R (DerivedCategory C)\", \"doc\": \"For any abelian category $\\\\mathcal{C}$ and semiring $R$, its derived category inherits a canonical $R$-linear structure. This means that for any two objects in the derived category, the set of morphis\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component localization, adjunction or exactness facts only; no full statement including the integral category identification and supported-map uniqueness"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_rightAdjoint|triangleHom_ext|localization_unit_app",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"line\": \"118\", \"text\": \"lemma localization_unit_app (X₁ : C₁) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"60\", \"text\": \"lemma isTriangulated_rightAdjoint [F.IsTriangulated] : G.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"139\", \"text\": \"  have := isTriangulated_rightAdjoint adj.op\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"159\", \"text\": \"  rightAdjoint_isTriangulated := adj.isTriangulated_rightAdjoint\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"203\", \"text\": \"  rightAdjoint_isTriangulated := E.toAdjunction.isTriangulated_rightAdjoint\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: component localization, adjunction or exactness facts only; no full statement including the integral category identification and supported-map uniqueness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Vanishing and uniqueness; Rational stage, category identification before transport; returned steps 9–11",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-rational-supported-adjoint-transport",
+  "worker": "stage1",
+  "summary": "Reused all categorical and coefficient comparison lemmas already in the DAG; wrote scalar formulas, adjunction triangle identities, shifted orthogonality, BBD uniqueness, signed shift compatibility and zero-object consequences explicitly. No new nodes or statement changes.",
+  "blueprint": "prop-sf-localization-all-stages.proof.md: Vanishing, Rational stage and Consequences. The category identification uses the existing integral stratified-perfect characterization; all raw Hom tensors are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic preservation of linear functors, transformations and their equations by raw scalar localization; does not replace the supported-triangle route."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic triangulated structure and exactness of raw scalar localization needed in the rational stage."
+   },
+   {
+    "node": "lem-sbc-linear-right-adjoint",
+    "why": "Generic linearity of the kernel right adjoint; the supported localization unit does not prove this categorical scalar fact."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Required identification of the two integral coefficient presentations, including witnesses and uniform bounds; definitions alone do not give it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks the Noetherian hypothesis of the integral comparison for finite-type schemes over a field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-sbc-linear-right-adjoint",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-5127313d7",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-5127313d7 (reviewer sub-agent of L); spot-checked: PASS with no fixes and no new nodes. The item is still unsplit on live and side-live, and has no repair note of its own; the 10-21 re-split binds its parent prop-sf-localization-all-stages, not this child. Statement, stmt_deps and blueprint are byte-identical to live. proof_deps equals the union of the step uses. A BFS over the cited nodes' dependencies reaches neither the item nor its parent, so there is no cycle. No SGA is cited. Steps are 508–1073 characters each. I read the main-20261015 proof (Vanishing, Rational stage, Consequences) and every cited node's statement. S1: shift-compat-unique (iii)+(ii), triangulated-right-adjoint (whose unit/counit hypothesis (iii) supplies) and linear-right-adjoint give the kernel right adjoint's exactness and linearity. S2: semilinear-scalar-localization with S=R, φ=id, t=u=ϖ preserves whiskerings and equations, so both triangle identities survive and the localized pairs are adjunctions with unit and counit ⊗1. S3: Hom(i_*P[m],j_*N[n]) ≅ Hom(j^*i_*P[m],N[n]) = 0, and ⊗E of 0 is 0. Counit iso makes i_* fully faithful, which makes the unit Q→i^!i_*Q an iso; both lemmas are used in the correct direction. S4: BBD 1.1.9 clauses (2) and (3) with Hom(A_K[1],B_L)=0; I checked both directly. S5: three rotations then vertex signs (−1,1,−1) give (u[1],v[1],−w[1]), which I verified, so δ_{K[1]} = −δ_K[1]; 'shift-compatible' is read in the standard signed convention. H=i^!j_*G has End(H)=0, so H=0. S6: Spec k Noetherian, finite-type-over-noetherian and dimension-finite-type (def-kun-dimension matches the characterization's notion) satisfy the hypotheses of the characterization node, which states equality with def-weil-derived-complete-integral-detailed over the same ring sheaf and reductions, so the identification is the identity. S7: the raw localization of the identity, matching def-weil-rationalization-karoubi with no Karoubi completion. Edge cases checked: Z or U empty, K=0, torsion Homs, empty scheme, f=0 and f=identity. The departure from the blueprint's prop-weil-pbc-rational-transport is justified because the item is stated for arbitrary linear triangulated categories and needs whiskering equations. I accept the 5 declared tool_uses. triangle-morphism-extension and kun-dimension are slopmaster2-closed, and the remaining adjunction lemmas are Mathlib leaves. Stacks 05R6 and 0A8D tags verified. review_split's 'no such node' lines are a symlink artifact."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfRationalSupportedAdjointTransport",
+  "declaration": "WeilConjectures.sfRationalSupportedAdjointTransport",
+  "declarations": [
+   "WeilConjectures.SfSupportedAdjunctions",
+   "WeilConjectures.SfSupportedAdjunctions.triangle",
+   "WeilConjectures.SfSupportedConsequences",
+   "WeilConjectures.SfSupportedRawTriangulation",
+   "WeilConjectures.SfSupportedLocalizedFunctor",
+   "WeilConjectures.SfSupportedAdjunctionTransport",
+   "WeilConjectures.sfRationalSupportedAdjointTransport",
+   "WeilConjectures.sfSupportedRationalHomCoordinates",
+   "WeilConjectures.sfSupportedKernelRightAdjoint",
+   "WeilConjectures.sfSupportedCompletePresentation",
+   "WeilConjectures.sfSupportedPerfectPresentation",
+   "WeilConjectures.sfSupportedRawPredicateEquivalence",
+   "WeilConjectures.sfSupportedIntegralCategoryIdentification"
+  ],
+  "file": "lean/Sheaf/Paper/SfRationalSupportedAdjointTransport.lean",
+  "statement": "theorem sfRationalSupportedAdjointTransport (l : ℕ) [Fact l.Prime] (E : Type e) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Type u) [Category.{v} X] [Preadditive X] [Linear (Padic.coefficientExtensionIntegers l E) X] [HasZeroObject X] [HasShift X ℤ] [∀ n : ℤ, (shiftFunctor X n).Additive] [Pretriangulated X] [IsTriangulated X] [(shiftFunctor X (1 : ℤ)).Linear (Padic.coefficientExtensionIntegers l E)] (Z : Type x) [Category.{y} Z] [Preadditive Z] [Linear (Padic.coefficientExtensionIntegers l E) Z] [HasZeroObject Z] [HasShift Z ℤ] [∀ n : ℤ, (shiftFunctor Z n).Additive] [Pretriangulated Z] [IsTriangulated Z] [(shiftFunctor Z (1 : ℤ)).Linear (Padic.coefficientExtensionIntegers l E)] (U : Type z) [Category.{w} U] [Preadditive U] [Linear (Padic.coefficientExtensionIntegers l E) U] [HasZeroObject U] [HasShift U ℤ] [∀ n : ℤ, (shiftFunctor U n).Additive] [Pretriangulated U] [IsTriangulated U] [(shiftFunctor U (1 : ℤ)).Linear (Padic.coefficientExtensionIntegers l E)] (S : SfSupportedAdjunctions (Padic.coefficientExtensionIntegers l E) X Z U) : Nonempty (SfSupportedAdjunctionTransport (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) X Z U S)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The four listed theorem declarations jointly state all clauses: supported scalar transport and consequences, canonical Hom tensor E coordinates, ordinary kernel right-adjoint refinement, and the completed/detailed/stratified-perfect raw identification. Helper structures only package the data and clauses of this node; they introduce no replacement category or coefficient notion. The integral comparison reuses integralDetailedTransport and the published predicates, with equality elimination on their full subcategories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7f25412d",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Only the item's lean record and the new module SfRationalSupportedAdjointTransport.lean change; all other node fields match side-live; lean.statement verbatim; report has Worker report and Second reading sections. Every hypothesis matches the node (exact linear CommShift functors, three Adjunction.CommShift adjunctions, IsIso counits, j^*i_*=0, distinguished supported triangle with boundary as data; separated finite type over a field with IsUnit l). The Nonempty transport package is fully pinned: localized functors by objects, pure tensors and shifts (equal to ScalarLocalization.extension), units, counits and boundary HEq-pinned to localization images, and SfSupportedRawTriangulation pins every shift and the comparisons, so it is unique. Conclusions checked true (BBD 1.1.9 uniqueness and components, boundary uniqueness, negOnePow signed shift in Mathlib's convention, i^!j_*=0, unit iso), in both categories. Hom-coordinate, kernel-adjoint and integral-identification clauses correct; E : Type u forced by dependencies. Edge cases zero objects, f=0/id, negative shifts, torsion Homs, empty scheme, E=Q_l. No compile run (no changes). Advisories: IsIntegralStratifiedPerfect and integralDetailedTransport owners not in stmt_deps (stage-1 set unchanged); generic version of sfRationalHomCoordinates_existsUnique; proof-only plain imports; citers of the published D^b_c(-,E) instance (shift 1 pinned only) must identify the two triangulations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261026T092454-L-3435059",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.sfRationalSupportedAdjointTransport",
+   "WeilConjectures.sfSupportedIntegralCategoryIdentification",
+   "WeilConjectures.sfSupportedKernelRightAdjoint",
+   "WeilConjectures.sfSupportedRationalHomCoordinates"
+  ],
+  "sorry_after": [
+   "WeilConjectures.sfRationalSupportedAdjointTransport"
+  ]
+ }
+}

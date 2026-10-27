@@ -25,109 +25,53 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-finite-morphism-permanence](a), the geometric base change $a_Z$ is finite. The finite structure morphism is proper by [lem-weil-pbc-finite-proper]. Use its identity compactification; [lem-pod-proper-coincidence-frobenius] gives the natural identification $R\\Gamma_c(Z,M)\\simeq R\\Gamma(Z,M)$, including the specified transports. Apply [lem-zl-finite-adic-direct-image] to $a_Z:Z\\to s$ and its geometric point $\\operatorname{id}_s$. Its finite indexing set $P_{\\operatorname{id}_s}$ is $Z(k)=\\operatorname{Hom}_k(s,Z)$, and its restriction-map formula gives $e:H_c^0(Z,\\mathcal G)\\simeq\\bigoplus_{z\\in Z(k)}\\mathcal G_z$. Its naturality is for all morphisms of the underlying constructible sheaves, so also for morphisms of Weil sheaves. No assertion about $|Z_0|$ or dimensions is used yet.",
+   "text": "Apply [lem-a1-finite-geometric-sections-and-point-orbits] to the underlying constructible sheaf of $\\mathcal G$. It supplies the finite sets, $|P_x|=d_x\\geq1$, finite-dimensionality, the natural evaluation isomorphism $e$, and the cycles $T(z)=gzh^{-1}$, with $g^{d_x}z=zh^{d_x}$. Naturality for all underlying sheaf maps restricts to Weil-sheaf morphisms.",
+   "uses": [
+    "lem-a1-finite-geometric-sections-and-point-orbits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+    "place": "First sentence and displayed evaluation formula, corrected to geometric stalks and explicit Frobenius return; assembly after the 2026-10-22 re-split"
+   }
+  },
+  {
+   "text": "The finite structure morphism is proper by [lem-weil-pbc-finite-proper], so [lem-a1-proper-weil-iterate-germ-formula] applies with $Y_0=Z_0$ and $K=\\mathcal G$ in degree zero. Its $r=1$ identity, after $\\mathrm H^0$, is $e_zF=B_{1,z}e_{Tz}$, where each $B_{1,z}:\\mathcal G_{Tz}\\xrightarrow{\\sim}\\mathcal G_z$ is an isomorphism. Consequently conjugation by $e$ gives exactly one invertible block in output $z$, from input $Tz$. Since $T$ is one cycle on $P_x$, this preserves $V_x$ and cyclically permutes its stalk summands in direction $T^{-1}$.",
    "uses": [
     "lem-weil-pbc-finite-proper",
-    "lem-pod-proper-coincidence-frobenius",
-    "lem-zl-finite-adic-direct-image",
-    "lem-weil-pbc-finite-morphism-permanence"
+    "lem-a1-proper-weil-iterate-germ-formula"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
-    "place": "First sentence and displayed evaluation formula, corrected geometric-stalk interpretation"
+    "place": "First sentence and displayed evaluation formula, corrected to geometric stalks and explicit Frobenius return; assembly after the 2026-10-22 re-split"
    }
   },
   {
-   "text": "For a closed point $x$ of $Z_0$, finite type follows from finiteness of its structure morphism [def-weil-finite-integral-morphism], and [lem-kun-closed-point-field](a) gives a finite residue extension of positive degree $d_x$. By [def-weil-geometric-point], its lifts are the $k_0$-embeddings $\\kappa(x)\\hookrightarrow k$. The finite-field Galois theorem [lem-sfb-finite-field-galois-frobenius] says this extension is separable and Galois, with its $d_x$ automorphisms the powers of $c\\mapsto c^q$; after one embedding, all embeddings are obtained by those powers. Hence $|P_x|=d_x\\geq1$. The projection from the finite set $Z(k)$ of step 1 onto $|Z_0|$ is surjective, so $|Z_0|$ is finite. Write $h=\\operatorname{Spec}(\\gamma)$, $g=g_Z$, and $T(z)=gz h^{-1}$ using [def-weil-frobenius-detailed]. This source reparametrization makes $T(z)$ a $k$-point. On residue-field embeddings it is composition with $\\gamma^{-1}$, so $T$ acts on each $P_x$ in a cycle of length $d_x$; in particular $g^{d_x}z=z h^{d_x}$.",
+   "text": "For $z\\in P_x$, the return from step 1 is $T^{d_x}z=z$ and $g^{d_x}z=zh^{d_x}$. The returning-point assertion of [lem-a1-proper-weil-iterate-germ-formula], with $r=d_x$, therefore gives $e_zF^{d_x}=F_{x,z}e_z$ after $\\mathrm H^0$. Its three factors are the iterated point transport, the specified return comparison and the pulled-back iterated Weil map; thus it uses exactly the local-operator convention in the statement. All these formulas and $e$ extend from the same common coefficient-field stage.",
    "uses": [
-    "def-weil-finite-integral-morphism",
-    "lem-kun-closed-point-field",
-    "def-weil-geometric-point",
-    "lem-sfb-finite-field-galois-frobenius",
-    "def-weil-frobenius-detailed"
+    "lem-a1-proper-weil-iterate-germ-formula"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
-    "place": "First sentence and displayed evaluation formula, corrected geometric-stalk interpretation"
+    "place": "First sentence and displayed evaluation formula, corrected to geometric stalks and explicit Frobenius return; assembly after the 2026-10-22 re-split"
    }
   },
   {
-   "text": "Regroup the finite sum of step 1 by the fibres $P_x$. For the underlying degree-zero complex $M=\\operatorname{For}\\mathcal G$, [def-weil-local-frobenius-trace] interprets $\\mathcal G_z$ as $\\mathrm H^0(\\operatorname{Fib}_s(Lz^*M))$ at a common finite coefficient-field stage and states that this is finite-dimensional. A finite direct sum of these spaces is finite-dimensional, so $V$ is finite-dimensional. Scalar extension from that stage to $\\Qlb$ preserves this assertion.",
-   "uses": [
-    "def-weil-local-frobenius-trace"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
-    "place": "First sentence and displayed evaluation formula, corrected geometric-stalk interpretation"
-   }
-  },
-  {
-   "text": "Work at a common field stage $E$, and put $C=R\\Gamma_c(Z,-)$, $P=Lg^*$, $P_r=L(g^r)^*$. By [def-weil-global-geometric-frobenius], $F=C(\\theta)\\tau_{c,M}$. The transports are natural in every underlying derived morphism by [def-weil-frobenius-cohomology-transport]. Before replacing $P^r$ by $P_r$, induction gives\n$$F^r=C(\\theta\\circ P\\theta\\circ\\cdots\\circ P^{r-1}\\theta)\\circ\\tau_{c,P^{r-1}M}\\circ\\cdots\\circ\\tau_{c,M}.$$\nThe base $r=1$ is the definition. For the induction step, expand $F\\circ F^r$ and move $\\tau_{c,M}$ past the morphism $C(\\theta\\circ\\cdots\\circ P^{r-1}\\theta)$ by naturality; the new sheaf-map factor is $\\theta\\circ P(\\theta\\circ\\cdots\\circ P^{r-1}\\theta)$. Under the associative comparison of [lem-pod-integral-pullback-composition], rationalized as in the local-operator definition, this is $\\theta^{[r+1]}$ of [def-weil-local-frobenius-trace]. Thus\n$$F^r=C(\\theta^{[r]})\\circ\\tau^{[r]}_{c,M},$$\nwhere $\\tau^{[r]}$ is the iterated transport of [lem-a1-proper-sections-semilinear-germs]. This induction uses no assertion about reduction of a rational Weil isomorphism to an invertible lattice map.",
-   "uses": [
-    "def-weil-global-geometric-frobenius",
-    "def-weil-frobenius-cohomology-transport",
-    "lem-pod-integral-pullback-composition",
-    "def-weil-local-frobenius-trace",
-    "lem-a1-proper-sections-semilinear-germs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
-    "place": "First sentence and displayed evaluation formula, corrected geometric-stalk interpretation"
-   }
-  },
-  {
-   "text": "Let $z_r=T^rz$. Apply [lem-a1-proper-sections-semilinear-germs] to $Z_0,M,r,z$. The naturality of the derived germs, defined by the counit in that lemma, applied to $\\theta^{[r]}:P_rM\\to M$, and the identity of step 4 give\n$$e_zF^r=\\mathrm H^0\\!\\left(\\operatorname{Fib}_s(Lz^*\\theta^{[r]})\\circ\\operatorname{Fib}_s(b_{r,z,M})\\circ I_{Lz_r^*M}^{[r]}\\right)e_{z_r}.$$\nHere $b_{r,z,M}$ uses $g^rz=z_rh^r$; the lemma explicitly identifies evaluation after the specified compact-support exchange and point transport with this composite. For $r=1$ all three maps in parentheses are isomorphisms: the Weil structure is an isomorphism, $b_{1,z,M}$ is a pullback-composition comparison, and point transport is invertible by [lem-weil-frobenius-cohomology-transport-iso](1). Thus the only nonzero block in output stalk $z$ is the isomorphism from input stalk $Tz$. Consequently $F$ preserves each $V_x$ and permutes its stalk summands in the cycle $T^{-1}$. All formulas extend from the common stage to $\\Qlb$.",
-   "uses": [
-    "lem-a1-proper-sections-semilinear-germs",
-    "lem-weil-frobenius-cohomology-transport-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
-    "place": "First sentence and displayed evaluation formula, corrected geometric-stalk interpretation"
-   }
-  },
-  {
-   "text": "Fix $x$ and $z\\in P_x$, and take $r=d_x$ in step 5. Step 2 gives $z_r=z$ and the equality of scheme maps $g^rz=zh^r$. Consequently the coefficient of $e_z$ in that formula is\n$$\\mathrm H^0\\!\\left(\\operatorname{Fib}_s(Lz^*\\theta^{[r]})\\circ\\operatorname{Fib}_s(b_{r,z,M})\\circ I_{Lz^*M}^{[r]}\\right).$$\nThe three arrows, in this order, are the final stalk map, middle composition comparison, and initial iterated point transport in the displayed definition of $F_{x,z}$ in [def-weil-local-frobenius-trace]. They use the same specified pullback-composition comparisons; in particular the return is $g^rz=zh^r$, not $g^rz=z$. The coefficient therefore is $F_{x,z}$ by that definition, proving $e_zF^{d_x}=F_{x,z}e_z$.",
-   "uses": [
-    "def-weil-local-frobenius-trace"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
-    "place": "First sentence and displayed evaluation formula, corrected geometric-stalk interpretation"
-   }
-  },
-  {
-   "text": "A permutation of a finite collection of summands, with an isomorphism on every block, is invertible: use the inverse permutation and the inverse stalk maps. Conjugating by $e$ proves that $F$ is an automorphism of $V$. The naturality of $e$ was obtained in step 1. For empty $Z_0$ both sides are zero and this is the unique automorphism of the zero space.",
+   "text": "For completeness, the block operator from step 2 has inverse given in output $Tz$ by $B_{1,z}^{-1}$ applied to input $z$. The two composites are identities on every summand, hence on their finite sum. Conjugating by $e$ makes $F$ an automorphism. If $Z_0$ is empty, both sums and $V$ are zero, and the same argument gives the unique automorphism of the zero space.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
-    "place": "First sentence and displayed evaluation formula, corrected geometric-stalk interpretation"
+    "place": "First sentence and displayed evaluation formula, corrected to geometric stalks and explicit Frobenius return; assembly after the 2026-10-22 re-split"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
-  "def-weil-frobenius-cohomology-transport",
-  "def-weil-frobenius-detailed",
-  "def-weil-geometric-point",
-  "def-weil-global-geometric-frobenius",
-  "def-weil-local-frobenius-trace",
-  "lem-a1-proper-sections-semilinear-germs",
-  "lem-kun-closed-point-field",
-  "lem-pod-integral-pullback-composition",
-  "lem-pod-proper-coincidence-frobenius",
-  "lem-sfb-finite-field-galois-frobenius",
-  "lem-weil-frobenius-cohomology-transport-iso",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-finite-proper",
-  "lem-zl-finite-adic-direct-image"
+  "lem-a1-finite-geometric-sections-and-point-orbits",
+  "lem-a1-proper-weil-iterate-germ-formula",
+  "lem-weil-pbc-finite-proper"
  ],
  "proof_origin": {
   "by": "agent",
@@ -198,29 +142,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-finite-weil-sections-decomposition",
-  "worker": "stage1",
-  "summary": "Repaired the returned split: removed the redundant new evaluation node in favour of the current same-unit rational finite-direct-image theorem; isolated the missing derived-germ compatibility with specified iterated semilinear transport as a general proper-scheme lemma without a Weil structure. The item itself proves the global iterate factorization, normalized cyclic block permutation and local return identity. Finiteness precedes finite-dimensionality, which explicitly cites the rational-stalk definition.",
-  "blueprint": "Realizes the first sentence and displayed evaluation formula of the parent blueprint proof, replacing arithmetic invariants by geometric stalks and making the Frobenius return operator explicit.",
-  "tool_uses": [
-   {
-    "node": "lem-kun-closed-point-field",
-    "why": "Generic finite-type closed-point residue-field theorem used to count lifts; the affine-line unit provides no replacement."
-   },
-   {
-    "node": "lem-pod-proper-coincidence-frobenius",
-    "why": "Generic proper identity-compactification comparison of ordinary and compact cohomology with their specified Frobenius exchanges; needed to use finite-map stalk evaluation without changing the unit route."
-   },
-   {
-    "node": "lem-pod-integral-pullback-composition",
-    "why": "Generic coherent composition comparison for integral derived pullback, scalar-localized at the field stage; needed to identify the explicit global iterates with the local-operator convention."
-   },
-   {
-    "node": "lem-weil-frobenius-cohomology-transport-iso",
-    "why": "Generic invertibility of point transport at rational and common-stage coefficients; the unit has no distinct statement of this coefficient-level fact."
-   }
-  ]
+  "worker": "NY",
+  "summary": "Re-split ordered by the human: two independent statement-only work packages, finite-scheme evaluation/point-orbit geometry without a Weil structure and proper-scheme derived Weil-iterate/germ identities without finiteness. Original statement and statement dependencies retained. Four assembly steps below 3000 characters. All original arguments retained verbatim with work-package mapping in the report.",
+  "blueprint": "The corrected first geometric-stalk display of lem-a1-finite-boundary-weights and its ensuing local Frobenius stability, on the same unit route."
  },
  "tool_uses": [
   "lem-kun-closed-point-field",
@@ -229,12 +155,12 @@
   "lem-weil-frobenius-cohomology-transport-iso"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q140-666091d65",
-  "group": "Q140",
+  "reviewer": "NT-cc-NY-ca4792990",
+  "group": "NY",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-666091d65 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-a1-proper-sections-semilinear-germs, the statement of every cited node, Stacks 03QP (etale-cohomology.tex 8244-8290), Deligne Weil II (1.1.7)-(1.1.14), pp. 150-153, and the parent blueprint proof. The parent proof's arithmetic-invariants display is false: for Spec F_q and Frobenius acting by -1 the invariants are 0 but the stalk is 1-dimensional. The item states the correct sum of geometric stalks, so nothing is weakened. New node: the identity is type-correct, and T(z)=g z h^{-1} is a k-point because a_Y g = h a_Y. It is the derived form of transport of structure: the germ of g^*s at z is h^*(z_1^* s), and h^* on sections is the point transport. It holds on the cases I tried (Spec k_0, empty scheme, M=0, Spec F_{q^2}). It is not a restatement of the parent: it has no Weil structure and allows any proper Y_0. It is not a duplicate of lem-trf-graph-frobenius-point-exchange, lem-trf-finite-scheme-derived-germs, lem-trf-compact-frobenius-transport-composition, lem-pod-frobenius-exchange-degree-zero or lem-zl-finite-adic-direct-image, which are finite-coefficient, k-endomorphism-only or have no germs. Item steps: step 2 correctly gives the projection of T(z) as gamma^{-1} i, a d_x-cycle, and the return g^d z = z h^d. Step 4's induction F^r = C(theta^[r]) tau^[r] checks against theta^[n+1] = theta^[n] L(g^n)^* theta via the associativity of lem-pod-integral-pullback-composition. Step 5 gives blocks permuted by T^{-1}, invertible by lem-weil-frobenius-cohomology-transport-iso (1). Step 6 matches the displayed definition in def-weil-local-frobenius-trace arrow by arrow. I accept all four declared tool uses. Batch 5: lem-pod-integral-pullback-composition is pullback-composition coherence and is already in the item's closure through def-weil-local-frobenius-trace. lem-pod-proper-coincidence-frobenius is the general identification RGamma_c = RGamma for proper Y with Frobenius compatibility (Weil I (1.3)). Neither is given by the Poincare-duality or trace-formula assumptions, and neither closure reaches an nt-assume, target, PD or trace-formula theorem. The only newly reached sk-thm-trace-transport node, lem-weil-isomorphism-derived-pullback-comparison-normalization, is generic pullback normalization. Both citations are allowed. Two minor implicit points, both a couple of lines from cited definitions: finite implies separated and of finite type (step 1), and the embedding count via uniqueness of F_{q^d} (step 2). No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-ca4792990 (reviewer sub-agent of L); spot-checked: Re-split note (2026-10-22, human order, keep_plan) answered: item statement, stmt_deps and source are unchanged against live. The item proof is a 1768-character four-step assembly of two new statement-only unsplit nodes of comparable size. A (finite-geometric-sections-and-point-orbits) carries old steps 1-3. B (proper-weil-iterate-germ-formula) carries old steps 4-6. Old step 7 is item step 4. Nothing was dropped. Neither node restates the item: A has no Weil structure, B has no finiteness and no evaluation iso. Checked A: k-points of Z correspond to (x, k0-embedding), so |P_x|=d_x. With gamma=Frob_q=phi^{-1}, T(z)=gzh^{-1} acts by phi on embeddings as a d_x-cycle, so g^d z=z h^d. Stacks 03QP(1) (etale-cohomology.tex l.8245) gives the stalk sum. Small cases: empty, Spec F_q, F_{q^2}, nonreduced, M=0. Checked B: F^r=C(theta^[r])tau^[r] follows by naturality induction (abstract form lem-trf-global-frobenius-iterate-formula). The germ formula follows from semilinear-germs plus naturality for theta^[r]. Sources and targets type-check. The returning case equals the three-arrow F_x^(r) of def-weil-local-frobenius-trace. Rank-one Spec k0 case checked. Deligne Weil II (1.1.7)-(1.1.14) pp.150-153 read. Item steps 2-3 give the correct T^{-1} block permutation and the identity e_z F^{d_x}=F_{x,z} e_z. No duplicates: zl-finite-adic-direct-image, finite-etale-weil-fibre-comparison, semilinear-germs, trf-rational-global-frobenius-powers and fd-local-frobenius-naturality are each different. Batch 5: def-a1-proper-sections-germ-and-moving-point (A, B) and def-weil-local-frobenius-trace (B) are general definitions, already stmt_deps of the item; neither assumption gives them and neither is a step of the trace-formula or PD proof, so both are accepted. No SGA, no cycle, route inside sk-thm-dl-a1-upper. Advisory: A uses the def-a1 germ (proper Y_0) without saying finite implies proper; the item's tool_uses list is now cited only in the proof plans of A and B."
  },
  "lean": {
   "module": "Sheaf.Paper.A1FiniteWeilSectionsDecomposition",
@@ -269,5 +195,34 @@
   "result": "fix",
   "note": "Third delivery. Item Lean byte-identical to 21a25d28cf8d (sha 7746195a), whose mathematics was accepted. The item now cites the new existing:true def node def-a1-proper-sections-germ-and-moving-point instead of theorem lem-a1-proper-sections-semilinear-germs (kept in proof_deps), so H2 is satisfied. The new node's text matches the bodies of comparisons/integralCounit/integralGerm/rationalGerm/movingPoint (order of composites, r+1 convention). check_existing and check_new_node are clean. No cycle, no parallel def node. The theorem stmt_deps lem-trf-integral-pullback-comparison-realization, lem-pod-integral-pullback-composition and lem-pod-proper-coincidence-frobenius are genuine (.choose used). FIX (whole node in fixes/def-a1-proper-sections-germ-and-moving-point.json): drop the unused theorem cite fix-prop-adjunctions and add the body owners def-weil-system-operation-exchange-realization, def-coef-ringed-sequence-site, def-trf-integral-comparison-sequence-systems, def-weil-derived-complete-integral-detailed and def-weil-frobenius-point-transport, with matching TeX cites. All five are already in the closure; the checkers are clean on the fix. Advisory: integralDerivedPullback has no owner node anywhere in the DAG (base gap). nt_compile --json of the item module: 31.8 s, exit 0, only sorry."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-f4f74",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261024T184709-L-3113391",
+  "kind": "proof",
+  "note": "independent cc review: delivered A1FiniteWeilSectionsDecomposition.lean vs quarantine archive (abbrev→typed def with verbatim bodies, respectTransparency on, 7 plain imports dropped); node lean.statement vs delivered theorem; change record users vs grep of lean/ and quarantine/",
+  "sorry_before": [
+   "WeilConjectures.a1FiniteWeilSectionsDecomposition",
+   "WeilConjectures.a1FiniteWeilSectionsDecompositionRational"
+  ],
+  "sorry_after": [
+   "WeilConjectures.a1FiniteWeilSectionsDecomposition",
+   "WeilConjectures.a1FiniteWeilSectionsDecompositionRational"
+  ]
+ }
 }

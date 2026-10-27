@@ -4,20 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.LogEtaleRestrictionStalkComparison
+
 public import Sheaf.AlgebraicGeometry.LogRegularSharpChart
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 public import Sheaf.RingTheory.LogRegularSaturationNormality
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Sheaf.RingTheory.FormalMonoidRingDimension
-import WeilConjectures.RingTheory.StrictHenselizationNoetherian
-import WeilConjectures.RingTheory.CompletionDimension
-import WeilConjectures.RingTheory.CohenPowerSeriesPresentation
-import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
-import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
-import WeilConjectures.RingTheory.CohenRing
+import Sheaf.RingTheory.CompleteToricModel
+import Sheaf.AlgebraicGeometry.PointwiseLogRegularCompletion
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalStructure
+import WeilConjectures.RingTheory.AdicCompletionRingEquiv
+import Mathlib.Algebra.MonoidAlgebra.MapDomain
+import Mathlib.Algebra.MvPolynomial.Equiv
+import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Mathlib.Algebra.CharP.Basic
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.Data.ZMod.Basic
+import Mathlib.Algebra.Field.ULift
+import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 
 /-!
 # Completed sharp charts of log regular schemes
@@ -30,7 +35,7 @@ constructions. Multiplicative characteristic monoids are converted with `Additiv
 
 ## Main definitions
 
-* `strictLocalRingStrictHenselizationIso`: the canonical affine-colimit comparison.
+* `strictLocalRingStrictHenselizationIso`: re-exported from the definition module.
 * `EtaleLogStructure.sharpChartRingMap`: the structural chart map in that colimit.
 * `AddMonoidAlgebra.completedLocalModelMonomial`: the canonical model monomial.
 
@@ -49,32 +54,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
-
-/-- Canonical identification of the étale structure-ring stalk with the recorded
-strict henselization. Source: ILO VI 1.2, 1.6; the affine pointed-neighbourhood
-colimit description (blueprint: lem-trf-log-regular-completed-chart).
-It is induced by restriction to the initial affine neighbourhood subcategory. -/
-noncomputable def strictLocalRingStrictHenselizationIso
-    (X : Scheme.{u}) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (t : Spec (.of Ω) ⟶ X) : strictLocalRing X t ≅ Scheme.strictHenselizationRing t := by
-  let F := (equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods t)).inverse ⋙
-    Scheme.strictHenselizationAffineInclusion t ⋙ Scheme.AffinePointedEtaleNeighborhood.ι t
-  letI : F.Initial := (Scheme.strictHenselization_properties t).1
-  exact IsColimit.coconePointUniqueUpToIso
-    ((Scheme.pointSmallEtale t).isColimitPresheafFiberCocone X.etaleStructurePresheaf)
-    (colimit.isColimit
-      ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
-        X.etaleStructurePresheaf)) ≪≫
-    (Functor.Final.colimitIso F.op
-      ((CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
-        X.etaleStructurePresheaf)).symm ≪≫
-    HasColimit.isoOfNatIso
-      (F := F.op ⋙ (CategoryOfElements.π (Scheme.pointSmallEtale t).fiber).op ⋙
-        X.etaleStructurePresheaf)
-      (G := Scheme.strictHenselizationAffineDiagram t)
-      (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
-        intro i j f
-        rfl))
 
 /-- The ring-valued germ of a sharp chart in the affine-colimit strict henselization.
 Source: ILO VI 1.6, printed p. 70
@@ -105,6 +84,65 @@ noncomputable def completedLocalModelMonomial
 end AddMonoidAlgebra
 
 namespace AlgebraicGeometry
+
+private theorem completed_field_model_equiv
+    (K L : Type u) [Field K] [Field L] (e : K ≃+* L)
+    (P : Type u) [AddCommMonoid P] (n : ℕ) :
+    ∃ E : AddMonoidAlgebra.CompletedLocalModel K P n ≃+*
+        AddMonoidAlgebra.CompletedLocalModel L P n,
+      ∀ q : P, E (AddMonoidAlgebra.completedLocalModelMonomial K P n q) =
+        AddMonoidAlgebra.completedLocalModelMonomial L P n q := by
+  let f := MvPolynomial.mapEquiv (Fin n) (AddMonoidAlgebra.mapRingEquiv P e)
+  have hf (q : P) : f (MvPolynomial.C (AddMonoidAlgebra.single q (1 : K))) =
+      MvPolynomial.C (AddMonoidAlgebra.single q (1 : L)) := by
+    simp [f, MvPolynomial.mapEquiv_apply]
+  have hmon : f.toRingHom '' {g | ∃ q : P, q ≠ 0 ∧
+        g = MvPolynomial.C (AddMonoidAlgebra.single q (1 : K))} =
+      {g | ∃ q : P, q ≠ 0 ∧
+        g = MvPolynomial.C (AddMonoidAlgebra.single q (1 : L))} := by
+    ext g
+    constructor
+    · rintro ⟨_, ⟨q, hq, rfl⟩, rfl⟩
+      exact ⟨q, hq, hf q⟩
+    · rintro ⟨q, hq, rfl⟩
+      exact ⟨_, ⟨q, hq, rfl⟩, hf q⟩
+  have hvar : f.toRingHom '' Set.range (MvPolynomial.X : Fin n →
+        MvPolynomial (Fin n) (AddMonoidAlgebra K P)) =
+      Set.range (MvPolynomial.X : Fin n →
+        MvPolynomial (Fin n) (AddMonoidAlgebra L P)) := by
+    ext g
+    constructor
+    · rintro ⟨_, ⟨i, rfl⟩, rfl⟩
+      exact ⟨i, by simp [f, MvPolynomial.mapEquiv_apply]⟩
+    · rintro ⟨i, rfl⟩
+      exact ⟨_, ⟨i, rfl⟩, by simp [f, MvPolynomial.mapEquiv_apply]⟩
+  have hboundary : (AddMonoidAlgebra.localModelBoundaryIdeal K P n).map f.toRingHom =
+      AddMonoidAlgebra.localModelBoundaryIdeal L P n := by
+    simp only [AddMonoidAlgebra.localModelBoundaryIdeal, Ideal.map_sup, Ideal.map_span]
+    rw [hmon, hvar]
+  have hcompletion : AddMonoidAlgebra.localModelCompletionIdeal L P n =
+      (AddMonoidAlgebra.localModelCompletionIdeal K P n).map f.toRingHom := by
+    simpa only [AddMonoidAlgebra.localModelCompletionIdeal,
+      IsLocalRing.maximalIdeal_eq_bot, Ideal.map_bot, bot_sup_eq] using hboundary.symm
+  obtain ⟨E, hE⟩ := AdicCompletion.exists_ringEquiv _ _ f hcompletion
+  refine ⟨E, fun q ↦ ?_⟩
+  have h := DFunLike.congr_fun hE (MvPolynomial.C (AddMonoidAlgebra.single q (1 : K)))
+  change E (algebraMap _ _ (MvPolynomial.C (AddMonoidAlgebra.single q (1 : K)))) =
+    algebraMap _ _ (MvPolynomial.C (AddMonoidAlgebra.single q (1 : L)))
+  change E (algebraMap _ _ (MvPolynomial.C (AddMonoidAlgebra.single q (1 : K)))) =
+    algebraMap _ _ (f (MvPolynomial.C (AddMonoidAlgebra.single q (1 : K)))) at h
+  rw [hf] at h
+  exact h
+
+private theorem charZero_of_no_field
+    (A : Type u) [CommRing A] [IsDomain A]
+    (h : ¬ ∃ (K : Type u) (_ : Field K), Nonempty (K →+* A)) : CharZero A := by
+  apply (CharZero.charZero_iff_forall_prime_ne_zero A).2
+  intro p hp hz
+  let : Fact p.Prime := ⟨hp⟩
+  let : CharP A p := (CharP.charP_iff_prime_eq_zero hp).2 hz
+  exact h ⟨ULift.{u} (ZMod p), inferInstance,
+    ⟨(ZMod.castHom (dvd_refl p) A).comp ULift.ringEquiv.toRingHom⟩⟩
 
 /-- Completed local charts in equal and mixed characteristic, with the prescribed
 characteristic monoid and compatibility with the replacement chart.
@@ -223,7 +261,107 @@ theorem exists_completed_chart_of_logRegular
                       (AddMonoidAlgebra.completedLocalModelMonomial C _ n
                         (Additive.ofMul q))) =
                       algebraMap _ _ (X.logStructure.sharpChartRingMap t W' w' β' q)) := by
-  sorry
+  classical
+  obtain ⟨hA, _⟩ := strictHenselizationLocalStructure t
+  let := hA
+  let c := (strictLocalRingStrictHenselizationIso X.scheme t).commRingCatIsoToRingEquiv
+  let : IsLocalRing (strictLocalRing X.scheme t) := c.symm.isLocalRing
+  have hI : X.logStructure.nonunitIdeal t ≤
+      IsLocalRing.maximalIdeal (strictLocalRing X.scheme t) := by
+    apply Ideal.span_le.mpr
+    rintro _ ⟨m, hm, rfl⟩
+    exact (IsLocalRing.mem_maximalIdeal _).2
+      (fun h ↦ hm (X.logStructure.reflectsUnits Ω t m h))
+  let : Nontrivial (strictLocalRing X.scheme t ⧸ X.logStructure.nonunitIdeal t) :=
+    Ideal.Quotient.nontrivial_iff.mpr
+      (ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal _).ne_top hI)
+  let : IsLocalRing (strictLocalRing X.scheme t ⧸ X.logStructure.nonunitIdeal t) :=
+    IsLocalRing.of_surjective' _ Ideal.Quotient.mk_surjective
+  let := (_hX Ω t).1
+  have hreg := IsRegularLocalRing.of_isRegularRing_of_isLocalRing
+    (strictLocalRing X.scheme t ⧸ X.logStructure.nonunitIdeal t)
+  obtain ⟨hR, hRN, hRL, hfs, hsharp, W', w', hW', β', hβ', hident', hstrict,
+    hS, hSN, hSL, n, hequal, hmixed⟩ :=
+    exists_completed_chart_of_logRegularAt X t hreg (_hX Ω t).2
+  let := hR
+  let := hRN
+  let := hRL
+  let := hS
+  let := hSN
+  let := hSL
+  obtain ⟨E, hE⟩ := AdicCompletion.exists_ringEquiv
+    (IsLocalRing.maximalIdeal (strictLocalRing X.scheme t))
+    (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing t)) c
+    (IsLocalRing.map_ringEquiv_maximalIdeal c).symm
+  have hfield_iff :
+      (∃ (K : Type u) (_ : Field K), Nonempty (K →+* Scheme.strictHenselizationRing t)) ↔
+      (∃ (K : Type u) (_ : Field K), Nonempty (K →+* strictLocalRing X.scheme t)) := by
+    constructor
+    · rintro ⟨K, hK, ⟨f⟩⟩
+      exact ⟨K, hK, ⟨c.symm.toRingHom.comp f⟩⟩
+    · rintro ⟨K, hK, ⟨f⟩⟩
+      exact ⟨K, hK, ⟨c.toRingHom.comp f⟩⟩
+  let k := IsLocalRing.ResidueField.mapEquiv c
+  have hEchart (q : X.logStructure.characteristic t) :
+      E (algebraMap _ _ (X.logStructure.toEtalePrelogStructure.stalkAlpha t
+        (X.logStructure.toEtalePrelogStructure.germ t W' w' (β' q)))) =
+        algebraMap _ _ (X.logStructure.sharpChartRingMap t W' w' β' q) := by
+    exact DFunLike.congr_fun hE _
+  refine ⟨hA, W', w', β', hW', hβ', hident', n, ?_, ?_⟩
+  · intro hfield
+    obtain ⟨e, he⟩ := hequal (hfield_iff.mp hfield)
+    obtain ⟨F, hF⟩ := completed_field_model_equiv _ _ k.symm
+      (Additive (X.logStructure.characteristic t)) n
+    refine ⟨F.trans (e.symm.trans E), fun q ↦ ?_⟩
+    change E (e.symm (F _)) = _
+    rw [hF]
+    change E (e.symm (ToricMonoid.monomial _ _ n (Additive.ofMul q))) = _
+    rw [← he q, RingEquiv.symm_apply_apply]
+    exact hEchart q
+  · intro hnfield
+    have hnfield' := hnfield ∘ hfield_iff.mpr
+    obtain ⟨p, hp, hchar, C, hC, hCL, hCohen, ⟨eC⟩, θ, hθ, e, he⟩ :=
+      hmixed hnfield'
+    let := hC
+    let := hCL
+    let := hchar
+    have hchar' : CharP (IsLocalRing.ResidueField (Scheme.strictHenselizationRing t)) p :=
+      charP_of_injective_ringHom k.injective p
+    have hCmax : IsLocalRing.maximalIdeal C = Ideal.span {(p : C)} := by
+      obtain ⟨_, hCD, hDVR, hmax, _⟩ := hCohen
+      exact hmax
+    have hdomain := (AddMonoidAlgebra.completedLocalModel_normal
+      (Additive (X.logStructure.characteristic t)) hfs (by
+        intro a b hab
+        have hab' : Additive.toMul b * Additive.toMul a = 1 :=
+          (mul_comm _ _).trans hab
+        have ha : IsUnit (Additive.toMul a) := ⟨⟨_, _, hab, hab'⟩, rfl⟩
+        have hb : IsUnit (Additive.toMul b) := ⟨⟨_, _, hab', hab⟩, rfl⟩
+        exact ⟨hsharp _ ha, hsharp _ hb⟩) n).2 C p hCohen θ hθ |>.1
+    let := hdomain
+    let : IsDomain (AdicCompletion
+        (IsLocalRing.maximalIdeal (strictLocalRing X.scheme t))
+        (strictLocalRing X.scheme t)) := Function.Injective.isDomain e e.injective
+    let : Module.FaithfullyFlat (strictLocalRing X.scheme t)
+        (AdicCompletion (IsLocalRing.maximalIdeal (strictLocalRing X.scheme t))
+          (strictLocalRing X.scheme t)) :=
+      Module.FaithfullyFlat.of_flat_of_isLocalHom
+    let : IsDomain (strictLocalRing X.scheme t) :=
+      Function.Injective.isDomain (algebraMap _
+        (AdicCompletion (IsLocalRing.maximalIdeal (strictLocalRing X.scheme t))
+          (strictLocalRing X.scheme t)))
+        (FaithfulSMul.algebraMap_injective _ _)
+    have hzero := charZero_of_no_field (strictLocalRing X.scheme t) hnfield'
+    let := hzero
+    have hzero' : CharZero (Scheme.strictHenselizationRing t) :=
+      charZero_of_injective_ringHom c.injective
+    refine ⟨p, hp, hchar', hzero', C, hC, hCL, hCohen, ?_, θ, hθ,
+      e.symm.trans E, fun q ↦ ?_⟩
+    · exact ⟨(Ideal.quotEquivOfEq hCmax.symm).trans (eC.trans k)⟩
+    · change E (e.symm (Ideal.Quotient.mk (Ideal.span {θ})
+        (ToricMonoid.monomial C _ n (Additive.ofMul q)))) = _
+      rw [← he q, RingEquiv.symm_apply_apply]
+      exact hEchart q
 
 end AlgebraicGeometry
 

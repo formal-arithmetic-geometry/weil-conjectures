@@ -1,0 +1,287 @@
+{
+ "id": "lem-sp-chart-normalized-model-identification",
+ "kind": "statement",
+ "title": "Graph-normalized chart models and independent compactifications",
+ "statement": "Let $R$ be a finite commutative torsion ring. Let $U,V,Y$ be Noetherian schemes, meaning schemes with finite affine covers by spectra of Noetherian rings, and let $e:U\\to V$ be separated etale of finite type and $f:V\\to Y$ separated of finite type. Put $g=fe$ and choose compactifications $c_e,c_f,c_g$ with Noetherian middle schemes [def-weil-compactifications-refinements]. Work in the ordinary constant-$R$ module derived categories [def-weil-pbc-derived-categories]. For $h=e,f,g$ write $F_{h,R}^{c_h}=Rr_{h*,R}Dj_{h!,R}$ for the chosen compact-support candidate [def-amb-etale-compact-support], and put $E_R=De_{\\Sigma!,R}$ for exact etale sum extension [def-weil-pbc-etale-sum-extension].\nThe canonical family $c_{v,c}:F_{v,R}^c\\xrightarrow{\\sim}Dv_{\\Sigma!,R}$ of [lem-asd-etale-compact-support-normalization], as $v$ ranges over separated finite-type etale maps of Noetherian schemes, furnishes a graph-normalized datum of [def-sp-etale-compact-support-normalization]. In particular it admits sheaf maps $a_{v,c}:v_{\\Sigma!}\\to r_*j_!$ whose composite to $v_*$ is graph extension and whose degreewise descent followed by the right-derived unit is $c_{v,c}^{-1}$; it has the specified proper/open base-change, identity, composition, refinement and sum/evaluation counit normalizations of that datum.\nOn $D^+(U_{et},R)$ let $\\alpha_R:F_{f,R}^{c_f}F_{e,R}^{c_e}\\xrightarrow{\\sim}F_{g,R}^{c_g}$ be canonical compact-support composition [lem-amb-etale-compact-comparisons]. Then\n$$\\lambda_R=\\alpha_R\\circ F_{f,R}^{c_f}(c_{e,c_e}^{-1}):F_{f,R}^{c_f}E_R\\xrightarrow{\\sim}F_{g,R}^{c_g}$$\nis exactly the restricted-closure comparison of [def-sp-etale-adjoint-chart-comparison] for the displayed datum. For any second triple of Noetherian compactifications, let $\\rho_{h,R}:F_{h,R}^{c_h}\\xrightarrow{\\sim}F_{h,R}^{c'_h}$ be comparison through any common refinement. The actual maps satisfy\n$$c_{e,c'_e}\\circ\\rho_{e,R}=c_{e,c_e},\\qquad \\lambda'_R\\circ(\\rho_{f,R}E_R)=\\rho_{g,R}\\circ\\lambda_R.$$\nThese identities are independent of the chosen common refinement and satisfy its identity and cocycle laws.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts, specified left identification; old scalar-normalization Step 1 and the comparison/coherence part of Step 5"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-asd-etale-compact-support-normalization",
+  "def-sp-etale-compact-support-normalization",
+  "lem-amb-etale-compact-comparisons",
+  "def-sp-etale-adjoint-chart-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use canonicalEtaleCompactSupportNormalization, the explicit graph witness exposed by the existing normalization theorem module. Its comparison and sheafComparison fields are definitionally the canonical graph core maps. The original normalization module supplies vertical pasting and counit-preserving conjugacy once; no duplicate helper proofs or arbitrary existence witnesses are used.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "def-sp-etale-compact-support-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); graph normalization uses etale-cohomology.tex Tags 03S3, 03S5, 03S6 and 0F4L"
+   }
+  },
+  {
+   "text": "The unbounded refinement-normalization equation identifies the canonical comparison with the prescribed normalized open comparison followed by proper composition. Compose with N.comparison and apply N.refinement. For two arbitrary compactifications use their inf refinement and the unbounded cocycle to obtain rho(c,d) followed by N.comparison(d) = N.comparison(c). Cancel the latter isomorphism to obtain the inverse equation. Proper ambients are Noetherian by finite type over the Noetherian base.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sp-etale-compact-support-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); graph normalization uses etale-cohomology.tex Tags 03S3, 03S5, 03S6 and 0F4L"
+   }
+  },
+  {
+   "text": "Expand the chart model map and the restricted-closure comparison. Functoriality groups the inverse normalization and the input pairwise comparison; the inverse equation from Step 2 replaces their composite by the normalization for the restricted closure. The remaining tower and output comparison factors are identical. This proves equality on every unbounded input, hence on the required bounded-below inputs.",
+   "uses": [
+    "def-sp-etale-adjoint-chart-comparison",
+    "def-sp-etale-compact-support-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); graph normalization uses etale-cohomology.tex Tags 03S3, 03S5, 03S6 and 0F4L"
+   }
+  },
+  {
+   "text": "Apply the every-tower equation for the chosen unbounded compositor to cf and cg.ofComp(cf). Naturality of the comparison cf -> chosen(f), cancellation of its inverse, and Step 2 express the chart comparison as the comparison cf -> chosen(f), followed by the fixed chosen normalization inverse, the fixed compositor, and the comparison chosen(g) -> cg. All intermediate factors are the actual canonical arrows.",
+   "uses": [
+    "def-sf-etale-support-compositor",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); graph normalization uses etale-cohomology.tex Tags 03S3, 03S5, 03S6 and 0F4L"
+   }
+  },
+  {
+   "text": "Use the formula of Step 4 for each triple. Its middle normalization and compositor are the same. The cocycle equation for cf,cfprime,chosen(f) identifies the initial factors; the cocycle equation for chosen(g),cg,cgprime identifies the final factors. Associativity gives the displayed simultaneous model-change square. The first model-change equation is Step 2 evaluated on the bounded-below input.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); graph normalization uses etale-cohomology.tex Tags 03S3, 03S5, 03S6 and 0F4L"
+   }
+  },
+  {
+   "text": "Evaluate the unbounded identity and cocycle equations on Plus.ι(K). For an arbitrary common refinement rewrite the bounded-below pairwise comparison with the existing PlusRefinementIso equation. Use the unbounded-versus-bounded comparison compatibility and cancel the inclusion compatibility isomorphism to obtain the displayed arbitrary-common-refinement equality.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor); graph normalization uses etale-cohomology.tex Tags 03S3, 03S5, 03S6 and 0F4L"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-sp-etale-compact-support-normalization",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sp-etale-adjoint-chart-comparison",
+  "def-sf-etale-support-compositor",
+  "lem-amb-etale-compact-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7I, 0F7J, 0F7K; graph normalization from SGA 4 XVII 6.2.11",
+  "note": "K3 returned-packet repair: reuse the exposed canonical witness from the normalization module, eliminating duplicate private pasting and adjunction proofs. The remaining proof uses pairwise normalization and the unbounded tower compositor; all public statements and the unit route are preserved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalizedSumComparison|etaleAmbientLeftComparison|rightDerivedLowerShriekOfCompactificationIso",
+   "results": "{\"t\": \"2026-10-22T06:53:11Z\", \"tool\": \"grep\", \"query\": \"normalizedSumComparison|etaleAmbientLeftComparison|rightDerivedLowerShriekOfCompactificationIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, support of continuous functions and iso whiskering do not construct the normalized etale compact-support datum or identify the restricted-closure models."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The graph normalized etale sum extension and coherent compact support compositor identify independently chosen compactifications of a chart",
+   "results": "{\"t\": \"2026-10-22T06:53:12Z\", \"tool\": \"leansearch\", \"query\": \"The graph normalized etale sum extension and coherent compact support compositor identify independently chosen compactifications of a chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"extChartAt_coe\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\"], \"digest\": \"1e64a89868987566\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, support of continuous functions and iso whiskering do not construct the normalized etale compact-support datum or identify the restricted-closure models."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerRight",
+   "results": "{\"t\": \"2026-10-22T06:53:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.isoWhiskerRight\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isoWhiskerRight\", \"CategoryTheory.Functor.isoWhiskerRight_refl\", \"CategoryTheory.Functor.isoWhiskerRight_symm\", \"CategoryTheory.Functor.isoWhiskerRight_hom\", \"CategoryTheory.Functor.isoWhiskerRight_inv\", \"CategoryTheory.Functor.isoWhiskerRight_trans\", \"CategoryTheory.Functor.triangleIso\", \"CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight\"], \"digest\": \"8f8384b09ad8f692\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, support of continuous functions and iso whiskering do not construct the normalized etale compact-support datum or identify the restricted-closure models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison from composite compact support with etale sum extension to a chosen compactification is invariant under changing all three compactifications",
+   "results": "{\"t\": \"2026-10-22T06:53:20Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical comparison from composite compact support with etale sum extension to a chosen compactification is invariant under changing all three compactifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AbstractCompletion.compare_comp_eq_compare\", \"HasCompactMulSupport.extend_one\", \"CompactlySupportedContinuousMap.mk.inj\", \"CompactlySupportedContinuousMap.copy_eq\", \"CompactlySupportedContinuousMap.ContinuousMap.liftCompactlySupported\", \"CompactlySupportedContinuousMap.copy\", \"ContDiffMapSupportedIn.ext\", \"CompactlySupportedContinuousMap.ext\"], \"digest\": \"d50bdf1e00f80e89\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, support of continuous functions and iso whiskering do not construct the normalized etale compact-support datum or identify the restricted-closure models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale map followed by an affine space projection, the graph normalized compact support sum comparison agrees with the restricted closure chart comparison under independent compactification refinements",
+   "results": "{\"t\": \"2026-10-22T06:53:21Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale map followed by an affine space projection, the graph normalized compact support sum comparison agrees with the restricted closure chart comparison under independent compactification refinements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_contMDiff_zero_iff_one_iff_of_isClosed\", \"exists_contMDiff_support_eq_eq_one_iff\", \"exists_msmooth_zero_iff_one_iff_of_isClosed\", \"SmoothBumpFunction.isClosed_image_of_isClosed\", \"exists_contMDiffMap_one_nhds_of_subset_interior\", \"exists_msmooth_support_eq_eq_one_iff\", \"exists_contMDiffMap_zero_one_of_isClosed\", \"Metric.exists_contMDiffMap_forall_closedBall_subset\"], \"digest\": \"9c06e2e2e83c46ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme normalization, support of continuous functions and iso whiskering do not construct the normalized etale compact-support datum or identify the restricted-closure models."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale compact support normalization equals exact sum extension and is compatible with compactification refinements and composition",
+   "results": "{\"t\": \"2026-10-22T09:14:10Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale compact support normalization equals exact sum extension and is compatible with compactification refinements and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\"], \"digest\": \"1a28b75ea07c9062\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general whiskering, scheme normalization, free sheaves and ordinary direct-image adjunctions do not state the specified graph-normalized etale support identification and its independent-compactification equations."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Cc]ompact|[Cc]ompact.*etale|graph.*[Nn]ormalization",
+   "results": "{\"t\": \"2026-10-22T09:14:26Z\", \"tool\": \"grep\", \"query\": \"etale.*[Cc]ompact|[Cc]ompact.*etale|graph.*[Nn]ormalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"53eab4903714409f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general whiskering, scheme normalization, free sheaves and ordinary direct-image adjunctions do not state the specified graph-normalized etale support identification and its independent-compactification equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image with proper support along an etale morphism equals exact sum extension naturally in compactification choices",
+   "results": "{\"t\": \"2026-10-22T09:14:27Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image with proper support along an etale morphism equals exact sum extension naturally in compactification choices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp\", \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"0485ff4e1de669ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general whiskering, scheme normalization, free sheaves and ordinary direct-image adjunctions do not state the specified graph-normalized etale support identification and its independent-compactification equations."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLowerShriek|rightDerivedLowerShriek|compactificationSheafToDirectImage",
+   "results": "{\"t\": \"2026-10-22T09:14:52Z\", \"tool\": \"grep\", \"query\": \"etaleLowerShriek|rightDerivedLowerShriek|compactificationSheafToDirectImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general whiskering, scheme normalization, free sheaves and ordinary direct-image adjunctions do not state the specified graph-normalized etale support identification and its independent-compactification equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct sum extension of etale module sheaves is canonically isomorphic to derived compactly supported pushforward with coherent composition",
+   "results": "{\"t\": \"2026-10-22T09:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"Direct sum extension of etale module sheaves is canonically isomorphic to derived compactly supported pushforward with coherent composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mapFree\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.unitToPushforwardObjUnit\"], \"digest\": \"e8089594cee24992\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general whiskering, scheme normalization, free sheaves and ordinary direct-image adjunctions do not state the specified graph-normalized etale support identification and its independent-compactification equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-chart-left-scalar-normalization",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, specified left identification; old scalar-normalization Step 1 and the comparison/coherence part of Step 5",
+   "via": [
+    "lem-sp-chart-left-scalar-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-chart-normalized-model-identification",
+  "worker": "stage1",
+  "summary": "Assembled the existing canonical graph core and coherence into the required datum. Expanded the normalized compositor at the restricted compactification, cancelled the etale refinement using the explicit normalization equation, and calculated independent-model compatibility by naturality. No new node, no statement change, no Lean writing or compilation.",
+  "blueprint": "det-sp-reduction-exceptional, Charts: the sum-extension left identification and the comparison/coherence part of the chart coefficient argument, through lem-sp-chart-left-scalar-normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-compact-support-graph-sheaf-normalization",
+    "why": "Graph-extension normalization of the actual sheaf arrow, not a property of a chosen arbitrary isomorphism. This is a generic etale compact-support tool and keeps the reduction unit Charts route."
+   },
+   {
+    "node": "lem-asd-compact-support-graph-derived-isomorphism",
+    "why": "Invertibility and the homotopy normalization of the actual graph-derived map. This is a generic etale compact-support tool and keeps the reduction unit Charts route."
+   },
+   {
+    "node": "lem-asd-compact-support-graph-coherence",
+    "why": "The existing graph core obeys the exact base-change, proper-refinement and identity equations. This is a generic etale compact-support tool and keeps the reduction unit Charts route."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Canonical etale comparisons preserve refinements and the sum/evaluation counit. This is a generic etale compact-support tool and keeps the reduction unit Charts route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Bounded-below common-refinement independence, identity and cocycle equations. This is a generic etale compact-support tool and keeps the reduction unit Charts route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Proper/open tower normalization, compatibility with arbitrary refinements and equality on bounded-below inputs. This is a generic etale compact-support tool and keeps the reduction unit Charts route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-asd-compact-support-graph-coherence",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-156759256",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-156759256 (reviewer sub-agent of L); spot-checked: I read the item, its parent and the statements of all 11 cited nodes in full, plus the main-20261015 Charts paragraph and Stacks 0F7I (tags 0F7I/J/K/B and 03S3/5/6/0F4L resolve correctly). No new nodes; the statement and stmt_deps are unchanged. Step 1: the c of lem-asd-etale-compact-support-normalization is the inverse of the graph map. Graph-derived-iso (A finite, f quasi-compact separated étale) says this inverse defines the canonical comparison, and sheaf-normalization supplies the composite to v_*. Step 2: every field of def-sp-etale-compact-support-normalization is covered. Graph-coherence gives base change, refinement and identity. lem-asd-etale gives successive base change and the counit. The finite-type argument for separated étale maps between Noetherian schemes is correct. Step 3: with c_d C_c=c_c and ρ=C_{c'}^{-1}C_c, c_{c'}ρ=c_c; I checked the orientations. Step 4: lem-amb-unbounded pins α as I_g τ F_f(I_e) on D^+. With c_*=(c_g.ofComp c_f).restrict this gives the three-factor chart comparison, matching the live Lean etaleAmbientLeftComparison. Step 5: the naturality chain typechecks and is correct. Step 6 follows from lem-amb-etale. Edge cases checked: U empty, e=id. rg -L over dag/nodes found no duplicate. The six tool_uses are accepted. Batch-5 check: both flagged citations (graph-derived-iso, graph-coherence) end in the generic lisse-module node via proper base change. Neither is part of the trace-formula or Poincaré-duality proof, and both are already in the closure through the existing stmt_dep lem-asd-etale-compact-support-normalization; accepted. No fixes. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChartNormalizedModelIdentification",
+  "declaration": "AlgebraicGeometry.Etale.chart_normalized_model_identification",
+  "declarations": [
+   "AlgebraicGeometry.Etale.chartModelComposition",
+   "AlgebraicGeometry.Etale.chartNormalizedModelComparison",
+   "AlgebraicGeometry.Etale.chart_normalized_model_identification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartNormalizedModelIdentification.lean",
+  "statement": "theorem chart_normalized_model_identification (R : Type (u + 1)) [CommRing R] [Finite R] : ∃ N : EtaleCompactSupportNormalization R, (∀ {U V : Scheme.{u}} [IsNoetherian U] [IsNoetherian V] (e : U ⟶ V) [Etale e] [IsSeparated e] (ce : Compactification e), N.comparison e ce = canonicalEtaleCompactSupportComparison R e ce ∧ N.sheafComparison e ce = etaleCompactificationGraphMap R e ce) ∧ (∀ {U V Y : Scheme.{u}} [IsNoetherian U] [IsNoetherian V] [IsNoetherian Y] (e : U ⟶ V) (f : V ⟶ Y) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (ce : Compactification e) (cf : Compactification f) (cg : Compactification (e ≫ f)), (∀ K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} R)), (chartNormalizedModelComparison R N e f ce cf cg).hom.app (DerivedCategory.Plus.ι.obj K) = (etaleAmbientLeftComparison R N e f cf cg).hom.app (DerivedCategory.Plus.ι.obj K)) ∧ (∀ (ce' : Compactification e) (cf' : Compactification f) (cg' : Compactification (e ≫ f)) (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} R))), (rightDerivedLowerShriekOfCompactificationIso R ce ce').hom.app (DerivedCategory.Plus.ι.obj K) ≫ (N.comparison e ce').hom.app (DerivedCategory.Plus.ι.obj K) = (N.comparison e ce).hom.app (DerivedCategory.Plus.ι.obj K) ∧ (rightDerivedLowerShriekOfCompactificationIso R cf cf').hom.app ((etaleLowerShriek (ModuleCat.{u + 1} R) e inferInstance).mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj K)) ≫ (chartNormalizedModelComparison R N e f ce' cf' cg').hom.app (DerivedCategory.Plus.ι.obj K) = (chartNormalizedModelComparison R N e f ce cf cg).hom.app (DerivedCategory.Plus.ι.obj K) ≫ (rightDerivedLowerShriekOfCompactificationIso R cg cg').hom.app (DerivedCategory.Plus.ι.obj K))) ∧ (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (h : X ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h], (∀ (c : Compactification h) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (rightDerivedLowerShriekOfCompactificationIso R c c).hom.app (DerivedCategory.Plus.ι.obj K) = 𝟙 _) ∧ (∀ (c d t : Compactification h) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (rightDerivedLowerShriekOfCompactificationIso R c d).hom.app (DerivedCategory.Plus.ι.obj K) ≫ (rightDerivedLowerShriekOfCompactificationIso R d t).hom.app (DerivedCategory.Plus.ι.obj K) = (rightDerivedLowerShriekOfCompactificationIso R c t).hom.app (DerivedCategory.Plus.ι.obj K)) ∧ (∀ (c d t : Compactification h) (r : t.Refinement c) (s : t.Refinement d) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (rightDerivedLowerShriekOfCompactificationPlusCompatibility (ModuleCat.{u + 1} R) c).inv.app K ≫ DerivedCategory.Plus.ι.map ((rightDerivedLowerShriekOfCompactificationPlusRefinementIso R r ≪≫ (rightDerivedLowerShriekOfCompactificationPlusRefinementIso R s).symm).hom.app K) ≫ (rightDerivedLowerShriekOfCompactificationPlusCompatibility (ModuleCat.{u + 1} R) d).hom.app K = (rightDerivedLowerShriekOfCompactificationIso R c d).hom.app (DerivedCategory.Plus.ι.obj K)))",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two helper isomorphisms assemble the existing normalized tower and graph maps with real data. The theorem supplies a simultaneous graph-normalized datum, identifies lambda with the restricted-closure map on bounded-below inputs, and states both actual model-change equations and arbitrary-common-refinement independence, identity and cocycle laws. The unbounded candidates are evaluated at Plus.ι; no boundedness assertion is replaced by a cohomology-only statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29250ee4f",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Clause-by-clause match. R finite in Type (u+1); U,V,Y Noetherian; e separated étale finite type, f separated finite type; compactifications arbitrary, middle schemes Noetherian automatically. ∃ N : EtaleCompactSupportNormalization pinned: comparison = canonicalEtaleCompactSupportComparison and sheafComparison = etaleCompactificationGraphMap on exactly the structure's domain; all node fields are structure fields. α written as the tower formula = def-sf-etale-support-compositor definition = lem-amb _hom_eq triangle form, not H4. λ = α∘F_f(c_e⁻¹) equals etaleAmbientLeftComparison on D⁺ (body read, same factors). Both model-change identities correctly oriented on D⁺ with independent ce',cf',cg'. Identity, cocycle and every-common-refinement independence tied to lem-amb's PlusRefinementIso/PlusCompatibility, orientations checked. Edge cases (empty, zero ring, e=id, non-cartesian refinements) covered. Statement verbatim, one sorry, real helpers, docstrings with source/blueprint/6 steps, lines ≤96, report sections present; no files changed, no compile. Advisory only: canonicalEtaleCompactSupportComparison (theorem-owned proof_dep), etaleCompactificationGraphMap (def-f7 uncited) and upstream unbounded Iso/CompIso used without stmt_dep owners."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261024T190211-L-3985972",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-model-chart-orientation-assembly",
+ "kind": "statement",
+ "title": "From zero-section multiplication to the beta-delta chart equation",
+ "statement": "Fix a finite purity datum P [def-pur-conventions], d,e in N, and a family G of affine-model isomorphisms [def-pur-composition-model-orientation-coordinates]. Suppose its zero-section orientations satisfy b_(d+e) nu_(d,e) = mu(b_d tensor b_e) on every affine finite-type k-base. Suppose also that on every composable affine finite-type smooth pair of ranks d,e, the three beta orientations agree with these b_r in every actual compatible conormal frame. For every such pair f:U->V,g:V->T and every ordinary finite Tate transport t, kappa followed by delta_(gf) and beta_(gf) equals the tensor of delta_f followed by beta_f and the pullback of delta_g followed by beta_g, followed by the specified mu. All maps and normal-coordinate transports are those of [lem-pur-composition-compatible-dnc-charts].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "stmt_deps": [
+  "def-pur-composition-model-orientation-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "On each compatible affine coordinate chart, postcompose the actual DNC pasting identity with b_(d+e). Substitute zero-section multiplication and the three beta identifications, then use functoriality of tensor and pullback. Cover by these charts and descend the resulting equality by detection of automorphisms of the common shifted Tate target. This uses the beta hypothesis on all chart restrictions, not only on one affine smooth pair.",
+   "uses": [
+    "lem-pur-composition-compatible-dnc-charts",
+    "lem-pur-model-orientation-tate-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-composition-compatible-dnc-charts",
+  "lem-pur-model-orientation-tate-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical dualizing affine orientations zero section multiplicativity and detection of automorphisms of shifted Tate lines",
+   "results": "Orientation.map; CharacterModule.dual_zero; FractionalIdeal.dual_zero; Module.Basis.orientation; DomAddAct.mk_zero; instMulZeroClassOrderDual; OrderDual.instMulActionWithZero; AffineMap.zero_linear. None concerns the specified sheaf orientations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical smooth dualizing orientations respect composition and descend from affine charts",
+   "results": "inTangentCoordinates_eq; inTangentCoordinates; SmoothBumpCovering.comp_embeddingPiTangent_mfderiv; SingularManifold.comap_f; tangentCoordChange_comp; ModelWithCorners.coe_extChartAt_transContinuousLinearEquiv; ContinuousLinearEquiv.toTransContinuousLinearEquiv; mfderiv_extChartAt_comp_mfderivWithin_extChartAt_symm'. These are manifold coordinate results, not etale sheaf comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*orientation|orientation.*descent|compositionSourceFixed",
+   "results": "0 hits in the Mathlib search service.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositionModelOrientationDescent",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–2; From zero-section multiplication to the beta-delta chart equation",
+   "via": [
+    "lem-pur-composition-model-orientation-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModelChartOrientationAssembly",
+  "file": "lean/Sheaf/Paper/ModelChartOrientationAssembly.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.model_chart_orientation_assembly",
+  "statement": "theorem model_chart_orientation_assembly (P : PurityFiniteSetting.{u}) (G : P.ModelAffineGamma) {U V T : Scheme.{u}} [IsAffine U] [IsAffine V] [IsAffine T] (d e : ℕ) (f : U ⟶ V) (g : V ⟶ T) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] (aT : T ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aT] [QuasiCompact aT] (hzero : ∀ (B : Scheme.{u}) [IsAffine B] (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB], ModelZeroOrientationEquation P G B d e aB) (hbeta : ∀ (U' V' T' : Scheme.{u}) [IsAffine U'] [IsAffine V'] [IsAffine T'] (f' : U' ⟶ V') (g' : V' ⟶ T') [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f'] [IsSeparated g'] [LocallyOfFiniteType g'] [QuasiCompact g'] [SmoothOfRelativeDimension d f'] [SmoothOfRelativeDimension e g'] (aT' : T' ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aT'] [QuasiCompact aT'], ModelChartBetaIdentification P G d e f' g' aT') : ModelChartOrientationEquation P d e f g aT",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositionModelOrientationDefinitions.lean vs clone item module (definitions verbatim, only blueprint tags), item theorem statement vs clone (byte-identical), five split statements vs original conclusion conjuncts and PurityCompositionCoherence source normalization, item node fields vs clone (only proof/proof_deps/proof_origin/lean/tool_uses)"
+ }
+}

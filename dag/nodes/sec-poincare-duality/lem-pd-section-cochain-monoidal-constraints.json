@@ -1,0 +1,124 @@
+{
+ "id": "lem-pd-section-cochain-monoidal-constraints",
+ "kind": "statement",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "title": "The induced cochain tensor and unit maps are the fixed normalized comparisons",
+ "statement": "Let Λ be a commutative condensed ring, assume HasDerivedCategory for every section-module category, and let T be a scheme. Give the ordinary section equivalence E=(equivalence Λ T).functor any strong monoidal structure whose oplax maps are the fixed ordinary comparisons: δ_E(M,N)=(ordinaryTensorComparison Λ T M N).hom and η_E=(ordinaryUnitComparison Λ T).hom. For the induced strong monoidal structure on E.mapHomologicalComplex (.up ℤ), its oplax binary maps equal (cochainTensorComparison Λ T A B).hom for every pair of internal cochain complexes A,B, and its oplax unit equals (totalUnitComparison Λ T).hom. These are the native sum-total tensors on unbounded complexes, with no flatness hypothesis.",
+ "stmt_deps": [
+  "def-pd-proetale-section-module-functors",
+  "def-pd-section-cochain-tensor-comparison",
+  "def-pd-section-total-oplax-comparison-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4; signed direct-sum totalization and the unit complex in degree zero"
+ },
+ "proof": [
+  {
+   "text": "Componentwise equality δ_E=ordinaryTensorComparison identifies the ordinary oplax tensor natural transformation with sectionOrdinaryTensorMap. Apply HomologicalComplex.mapBifunctorComparison to this equality. The cochain monoidal construction uses precisely this totalized transformation as its oplax tensorator. sectionTotalComparison_eq identifies its result with the specified cochainTensorComparison.",
+   "uses": [
+    "def-pd-section-cochain-tensor-comparison",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4; signed direct-sum totalization and the unit complex in degree zero"
+   }
+  },
+  {
+   "text": "The explicit source-library mapCochainComplex_η formula gives the cochain oplax unit as the inverse of mapCochainComplexεIso. Expand its two isomorphism factors: it is the canonical single-map comparison followed by the single-complex functor applied to η_E. Substitute the normalized ordinary unit hypothesis. The resulting composite is exactly the hom of totalUnitComparison.",
+   "uses": [
+    "def-pd-section-total-oplax-comparison-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YU and 07A4; signed direct-sum totalization and the unit complex in degree zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-section-cochain-tensor-comparison",
+  "def-pd-section-total-oplax-comparison-data",
+  "def-pd-section-derived-tensor-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU and 07A4; signed direct-sum totalization and the unit complex in degree zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The monoidal structure induced on cochain complexes has tensor comparison the totalization of the ordinary tensor natural transformation and its unit is induced by the single complex functor",
+   "results": "8 hits in Mathlib.Algebra.Homology.Monoidal, including HomologicalComplex.monoidalCategory, monoidalCategoryStruct, ιTensorObj and unit tensor-totalization instances. None identifies the fixed project comparisons.",
+   "date": "2026-10-27",
+   "verdict": "use the existing proved source-library mapCochainComplexMonoidal and its explicit tensor/unit formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.δNatTrans",
+   "results": "0 hits; the service reports this source-library identifier as unknown. Local source inspection finds its component formula and mapCochainComplex_δ.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match; use the source-library construction and equality of natural transformations"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplex_η|mapCochainComplex_δ|mapBifunctorComparison",
+   "results": "0 Mathlib hits. Local source inspection finds mapCochainComplex_η and mapCochainComplex_δ in WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex.",
+   "date": "2026-10-27",
+   "verdict": "use the proved source-library formulas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionLocalizationUnitConstraints",
+  "date": "2026-10-27",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-section-localization-unit-constraints",
+   "place": "Identification of ordinary total tensor and unit comparisons in Step 1",
+   "via": [
+    "lem-pd-section-localization-unit-constraints"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionCochainMonoidalConstraints",
+  "file": "lean/Sheaf/Paper/SectionCochainMonoidalConstraints.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ResolvingOplaxConstraints.section_cochain_monoidal_constraints",
+  "statement": "theorem section_cochain_monoidal_constraints (T : Scheme.{u})\n    [(equivalence Λ T).functor.Monoidal]\n    (hd : ∀ M N : internalModules Λ T,\n      Functor.OplaxMonoidal.δ (equivalence Λ T).functor M N =\n        (ordinaryTensorComparison Λ T M N).hom)\n    (hη : Functor.OplaxMonoidal.η (equivalence Λ T).functor =\n      (ordinaryUnitComparison Λ T).hom) :\n    (∀ A B : CochainComplex (internalModules Λ T) ℤ,\n      Functor.OplaxMonoidal.δ\n        ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)) A B =\n          (cochainTensorComparison Λ T A B).hom) ∧\n    (Functor.OplaxMonoidal.η\n      ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)) =\n        (totalUnitComparison Λ T).hom)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T034709-L-3675686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T034709-L-3675686",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

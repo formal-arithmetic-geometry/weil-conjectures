@@ -1,0 +1,118 @@
+{
+ "id": "lem-sp-integral-tower-pull-tensor-constructible",
+ "kind": "statement",
+ "title": "Ordinary integral pullback and tensor preserve the constant-model constructible category.",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and the integral coefficient, reduction, and strict tower constructions of [def-sp-integral-direct-image-tower-data]. Ordinary integral pullback and tensor preserve the constant-model constructible category. The precise quantifiers, domains and canonical arrows are the Lean statement below.\n\ntheorem integral_pull_tensor_constructible\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]\n    (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] :\n    (∀ K : Constructible l E Y,\n      constantModelBoundedConstructible (spIntegralCondensed l E) X\n        ((pull l E f).obj K.obj)) ∧\n    (∀ (T : Scheme.{u}) [T.Over (Spec (.of k))]\n      [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]\n      [IsSeparated (T ↘ Spec (.of k))] (M N : Integral l E T),\n      constantModelBoundedConstructible (spIntegralCondensed l E) T M →\n      constantModelBoundedConstructible (spIntegralCondensed l E) T N →\n      constantModelBoundedConstructible (spIntegralCondensed l E) T\n        (((tensor l E T).obj M).obj N))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "stmt_deps": [
+  "def-sp-integral-direct-image-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "identify spIntegralCondensed with the continuous condensed integer coefficient\npresentation of DerivedNakayama.integerRing, retaining multiplication and scalar action.\nTransport the existing preserves_and_completed theorem through this coefficient\nidentification and through leftDerivedUpperStarIsoMapDerivedCategory. Its first clause\nis precisely ordinary derived pullback preservation, with no completion. Transport the\nfirst clause of integralTensorProduct through the same coefficient identification and\nthe existing relative derived tensor presentation. These equivalences preserve cohomology\nand finite scalar local models, so the constant-model constructibility predicates agree.\nThe characteristic hypotheses give p=ringChar k>0 and p≠l. No smoothness is needed.\nZero objects, empty schemes and the tensor unit have the same constructions.",
+   "uses": [
+    "det-lem-int-tensor-pullback",
+    "det-lem-int-tensor-product",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-lem-int-tensor-pullback",
+  "det-lem-int-tensor-product",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (1)-(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized strict tower of finite coefficient sheaves has derived inverse limit reconstructing an integral compact support direct image",
+   "results": "SheafOfModules.hasLimitsOfShape; SheafOfModules.hasLimit; CategoryTheory.Sheaf.ΓNatIsoLim; CategoryTheory.Sheaf.createsLimitsOfShape and generic sheaf limits.",
+   "date": "2026-10-25",
+   "verdict": "No match: none provides the specialized normalized integral strict tower comparisons or projection mates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": "CategoryTheory.Adjunction.comp; comp_homEquiv; triangle component identities.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction tools only; not this sheaf/tower comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported integral adic sheaf pushforward reconstructs from normalized finite quotient systems with uniform Tor amplitude and satisfies projection formula",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; AdicCompletion.eval_comp_of; IsAdicComplete.StrictMono.mkQ_comp_lift; AdicCompletion.of_apply.",
+   "date": "2026-10-25",
+   "verdict": "No match: these are scalar algebraic completions or local cohomology, not the unbounded strict system derived functors."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|derivedComplete|normalizedTower",
+   "results": "msearch returned unrelated compact support in analysis; local algebraic-geometry site search has no integral compact-support tower theorem.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib theorem. Existing project dependencies require transports between their independently specified presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralDirectImageTower",
+  "date": "2026-10-25",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Proof paragraph (3), pullback and tensor preservation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralTowerPullTensorConstructible",
+  "file": "lean/Sheaf/Paper/IntegralTowerPullTensorConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralDirectImageTower.integral_pull_tensor_constructible",
+  "statement": "theorem integral_pull_tensor_constructible (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] : (∀ K : Constructible l E Y, constantModelBoundedConstructible (spIntegralCondensed l E) X ((pull l E f).obj K.obj)) ∧ (∀ (T : Scheme.{u}) [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] (M N : Integral l E T), constantModelBoundedConstructible (spIntegralCondensed l E) T M → constantModelBoundedConstructible (spIntegralCondensed l E) T N → constantModelBoundedConstructible (spIntegralCondensed l E) T (((tensor l E T).obj M).obj N))",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "blueprint": "Exact component of the original proof, with the original unit route retained. Search of the whole imported blueprint found finite-coefficient coherence but no duplicate of this integral normalized comparison.",
+  "note": "Existing dependency statements are used through coordinate transport; this lemma isolates that transport and its specified canonical maps."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0fa3a",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261025T162022-L-206552",
+  "kind": "interface",
+  "note": "independent cc review: integral_direct_image_tower signature vs clone a25e16ef939 (byte-identical); IntegralDirectImageTowerData vs old interface (identical decls, only plain imports and respectTransparency options changed); five split sorry statements vs item clauses and node pinning; new node statement fields vs Lean signatures"
+ }
+}

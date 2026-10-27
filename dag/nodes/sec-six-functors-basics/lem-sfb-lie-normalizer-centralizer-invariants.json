@@ -1,0 +1,240 @@
+{
+ "id": "lem-sfb-lie-normalizer-centralizer-invariants",
+ "kind": "statement",
+ "title": "Lie spaces of scheme centralizers and normalizers as group invariants",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and all subgroups are closed [def-sc-group-scheme-subgroup]. For such a group $J$, put $\\operatorname{Lie}(J)=T_{J/F,e}$ [def-sc-scheme-tangent-space], equivalently the tangent vectors $\\ker(J(F[\\epsilon]/\\epsilon^2)\\to J(F))$. These are finite-dimensional $F$-vector spaces, and closed subgroup inclusions induce injective tangent maps. Conjugation by $G$ induces a rational linear action $\\operatorname{Ad}$ on $\\mathfrak g=\\operatorname{Lie}(G)$. For every closed subgroup $H\\subseteq G$, $\\mathfrak h=\\operatorname{Lie}(H)$ is $H$-stable for this action, so $H$ acts on $\\mathfrak g/\\mathfrak h$. For a rational action of a group $J$ on a vector space $V$, write $V^J=\\{v:\\operatorname{Ad}(j)(v\\otimes1)=v\\otimes1\\text{ for all commutative }F\\text{-algebras }A\\text{ and }j\\in J(A)\\}$, using the given action in place of $\\operatorname{Ad}$ for general $V$.\n\nLet $K,H\\subseteq G$, with $H$ smooth [def-sbc-smooth-morphisms]. Suppose $C,N\\subseteq G$ are closed subgroup schemes representing the functors\n$$C(A)=\\{g\\in G(A):g_{A'}k=kg_{A'}\\text{ for all commutative }A\\text{-algebras }A'\\text{ and }k\\in K(A')\\},$$\n$$N(A)=\\{g\\in G(A):g_{A'}H(A')g_{A'}^{-1}=H(A')\\text{ for all commutative }A\\text{-algebras }A'\\}.$$\nThen, as subspaces of $\\mathfrak g$ and $\\mathfrak g/\\mathfrak h$, respectively,\n$$\\operatorname{Lie}(C)=\\mathfrak g^K,\\qquad \\operatorname{Lie}(N)/\\mathfrak h=(\\mathfrak g/\\mathfrak h)^H.$$\nNo characteristic-zero, connectedness, reductivity, or smoothness of $C$ or $N$ is assumed. These are invariants of the whole group functor, not invariants of its Lie algebra.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 10.34 and proof, printed pp.197–198; tangent functor and adjoint action in Sections 10a–10d, printed pp.184–193. The smooth-H specialization suffices here; representability is an explicit hypothesis, not asserted in this node."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-sc-scheme-tangent-space",
+  "def-sfb-affine-group-dual-number-data",
+  "def-wf-lie-algebra-derivation",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-affine-group-dual-number-calculus] to the groups and inclusions in the statement. This gives finite-dimensional tangent spaces, injective linear tangent maps, the rational action $\\operatorname{Ad}_G$, and its compatibility with subgroup inclusions. For $h\\in H(R)$ and $u\\in\\mathfrak h\\otimes_F R$, that compatibility says $\\operatorname{Ad}_G(h)u$ is the image of $\\operatorname{Ad}_H(h)u$. Thus $\\mathfrak h$ is $H$-stable. The induced quotient action is rational: in a basis of $\\mathfrak g$ extending a basis of $\\mathfrak h$, its matrix is the quotient diagonal block of the regular matrix of the restricted action; the inverse comes from $h^{-1}$. Write $E_R$ for $E_{G,R}$, with formal parameter $\\delta$. Choose such a vector-space basis once. It also shows for every $R$ that the kernel of $\\mathfrak g\\otimes_F R\\to(\\mathfrak g/\\mathfrak h)\\otimes_F R$ is exactly $\\mathfrak h\\otimes_F R$; this uses only the direct-sum decomposition given by the basis.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.34, printed pp.197–198; dual-number calculus 10.6, 10.11, 10.14, 10.19–10.21, printed pp.188–193. The normalizer calculation omitted in the source is supplied explicitly."
+   }
+  },
+  {
+   "text": "Let $D=F[\\epsilon]/(\\epsilon^2)$ and $v\\in\\mathfrak g$. If $v\\in\\operatorname{Lie}(C)$, its tangent point $E_F(v)$ lies in $C(D)$. For any commutative $F$-algebra $R$ and $k\\in K(R)$, use the $D$-algebra $R[\\delta]$ with $\\epsilon\\mapsto\\delta$. The defining centralizer property gives $kE_R(v\\otimes1)k^{-1}=E_R(v\\otimes1)$. The conjugation identity and injectivity of $E_R$ in [lem-sfb-affine-group-dual-number-calculus] give $\\operatorname{Ad}(k)(v\\otimes1)=v\\otimes1$. This is exactly $v\\in\\mathfrak g^K$. Conversely suppose $v\\in\\mathfrak g^K$. For any $D$-algebra $S$ and $k\\in K(S)$, apply that invariance with $R=S$ to obtain $kE_S(v\\otimes1)k^{-1}=E_S(v\\otimes1)$ in $G(S[\\delta])$. Apply the ring map $S[\\delta]\\to S$ that fixes $S$ and sends $\\delta\\mapsto\\epsilon_S$, the image of $\\epsilon$ in $S$; it is defined since $\\epsilon_S^2=0$. Naturality of $E$ identifies the specialized point with the image of $E_F(v)$. It commutes with every such $k$, so $E_F(v)\\in C(D)$ and $v\\in\\operatorname{Lie}(C)$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.34, printed pp.197–198; dual-number calculus 10.6, 10.11, 10.14, 10.19–10.21, printed pp.188–193. The normalizer calculation omitted in the source is supplied explicitly."
+   }
+  },
+  {
+   "text": "Every element of $H(A)$ conjugates $H(A')$ onto itself after every extension $A\\to A'$, so $H\\subseteq N$ as subgroup functors and $\\mathfrak h\\subseteq\\operatorname{Lie}(N)$. For $v\\in\\operatorname{Lie}(N)$, $E_F(v)\\in N(D)$. Fix a commutative $F$-algebra $R$ and $h\\in H(R)$, and apply the normalizer property over the $D$-algebra $R[\\delta]$, $\\epsilon\\mapsto\\delta$. Then $E_R(v_R)hE_R(-v_R)h^{-1}$ lies in $H(R[\\delta])$ and reduces to the identity, where $v_R=v\\otimes1$. By addition and conjugation in [lem-sfb-affine-group-dual-number-calculus] it equals\n$$E_R(v_R-\\operatorname{Ad}(h)v_R).$$\nThe subgroup-kernel identification in that node therefore gives $v_R-\\operatorname{Ad}(h)v_R\\in\\mathfrak h\\otimes_F R$. The quotient-kernel description in step 1 says exactly that the class of $v$ is fixed by every $h\\in H(R)$, for every $R$. Hence $\\operatorname{Lie}(N)/\\mathfrak h\\subseteq(\\mathfrak g/\\mathfrak h)^H$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.34, printed pp.197–198; dual-number calculus 10.6, 10.11, 10.14, 10.19–10.21, printed pp.188–193. The normalizer calculation omitted in the source is supplied explicitly."
+   }
+  },
+  {
+   "text": "Conversely let $v\\in\\mathfrak g$ have $H$-fixed class. For every commutative $F$-algebra $R$ and $h\\in H(R)$, step 1 gives $v_R-\\operatorname{Ad}(h)v_R\\in\\mathfrak h\\otimes_F R$. The addition, conjugation and subgroup-kernel formulas of [lem-sfb-affine-group-dual-number-calculus] give\n$$E_R(v_R)hE_R(-v_R)h^{-1}=E_R(v_R-\\operatorname{Ad}(h)v_R)\\in H(R[\\delta]).$$\nTake any $D$-algebra $S$ and $h\\in H(S)$, set $R=S$ in this formula, and apply $S[\\delta]\\to S$, $\\delta\\mapsto\\epsilon_S$. If $x$ is the image of $E_F(v)$ in $G(S)$, naturality gives $xhx^{-1}h^{-1}\\in H(S)$, hence $xhx^{-1}\\in H(S)$. Apply the same calculation to $-v$ (its quotient class is also fixed) to obtain $x^{-1}H(S)x\\subseteq H(S)$. The two inclusions imply $xH(S)x^{-1}=H(S)$. This holds for every $D$-algebra $S$, so the defining functor of $N$ gives $E_F(v)\\in N(D)$, whence $v\\in\\operatorname{Lie}(N)$.",
+   "uses": [
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.34, printed pp.197–198; dual-number calculus 10.6, 10.11, 10.14, 10.19–10.21, printed pp.188–193. The normalizer calculation omitted in the source is supplied explicitly."
+   }
+  },
+  {
+   "text": "The preceding two steps identify $\\operatorname{Lie}(N)$ with the inverse image of $(\\mathfrak g/\\mathfrak h)^H$ under the quotient map $q:\\mathfrak g\\to\\mathfrak g/\\mathfrak h$. Since $q$ is surjective and its kernel is $\\mathfrak h\\subseteq\\operatorname{Lie}(N)$, restriction of $q$ induces an injective map $\\operatorname{Lie}(N)/\\mathfrak h\\to\\mathfrak g/\\mathfrak h$ whose image is exactly that fixed subspace: lift any fixed class to a vector $v$ and apply step 4. This proves the second equality as subspaces. Step 2 proves the first equality. All tests used arbitrary commutative algebras and the specified subgroup functors; no assertion about Lie-algebra invariants, or about smoothness of $C$ or $N$, entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.34, printed pp.197–198; dual-number calculus 10.6, 10.11, 10.14, 10.19–10.21, printed pp.188–193. The normalizer calculation omitted in the source is supplied explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-dual-number-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne Proposition 10.34: follows the given centralizer proof and supplies the omitted normalizer proof by the same dual-number substitution, without invoking the SHS reference."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Lie.*centralizer|Lie.*normalizer|normalizer.*Lie|centralizer.*Lie",
+   "results": "{\"t\": \"2026-10-23T21:30:49Z\", \"tool\": \"grep\", \"query\": \"Lie.*centralizer|Lie.*normalizer|normalizer.*Lie|centralizer.*Lie\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra/abstract-group normalizers do not identify the tangent space of a scheme normalizer with full group invariants"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebra of scheme theoretic centralizer and normalizer of smooth subgroup",
+   "results": "{\"t\": \"2026-10-23T21:30:50Z\", \"tool\": \"leansearch\", \"query\": \"Lie algebra of scheme theoretic centralizer and normalizer of smooth subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.normalizer\", \"LieSubmodule.normalizer\", \"LieSubalgebra.mem_normalizer_iff'\", \"LieSubalgebra.coe_normalizer_eq_normalizer\", \"LieSubalgebra.le_normalizer\", \"LieSubalgebra.mem_normalizer_iff\", \"LieSubmodule.normalizer_mono\", \"LieSubmodule.mem_normalizer\"], \"digest\": \"16424a829f6f6935\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra/abstract-group normalizers do not identify the tangent space of a scheme normalizer with full group invariants"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\", \"Lie\"",
+   "results": "{\"t\": \"2026-10-23T21:30:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalizer\\\", \\\"Lie\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieSubalgebra.normalizer\", \"LieSubalgebra.le_normalizer\", \"LieSubmodule.normalizer\", \"LieIdeal.idealizer_eq_normalizer\", \"LieSubmodule.normalizer_bot_eq_maxTrivSubmodule\", \"LieSubmodule.le_normalizer\", \"LieSubmodule.monotone_normalizer\", \"LieSubalgebra.ideal_in_normalizer\"], \"digest\": \"01afc26c97ffda0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra/abstract-group normalizers do not identify the tangent space of a scheme normalizer with full group invariants"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth closed subgroup of an affine algebraic group the quotient of the Lie algebra of its scheme normalizer by its Lie algebra is the fixed subspace of the adjoint quotient; Lie of centralizer is invariants",
+   "results": "{\"t\": \"2026-10-23T21:30:51Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth closed subgroup of an affine algebraic group the quotient of the Lie algebra of its scheme normalizer by its Lie algebra is the fixed subspace of the adjoint quotient; Lie of centralizer is invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.quotientCentralizerEmbedding_apply\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"LieSubalgebra.normalizer_eq_self_iff\", \"LieSubalgebra.normalizer_engel\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"LieSubmodule.gc_top_lie_normalizer\"], \"digest\": \"8b0ca377462ac696\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra/abstract-group normalizers do not identify the tangent space of a scheme normalizer with full group invariants"
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.*centralizer|Lie.*normalizer|normalizer.*Lie|centralizer.*Lie",
+   "results": "{\"t\": \"2026-10-23T21:31:41Z\", \"tool\": \"grep\", \"query\": \"Lie.*centralizer|Lie.*normalizer|normalizer.*Lie|centralizer.*Lie\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Engel.lean\", \"Mathlib/Algebra/Lie/Engel.lean\", \"Mathlib/Algebra/Lie/Engel.lean\", \"Mathlib/Algebra/Lie/Engel.lean\", \"Mathlib/Algebra/Lie/Engel.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\", \"Mathlib/Algebra/Lie/Nilpotent.lean\"], \"digest\": \"97cca262b3885e37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra/abstract-group normalizers do not identify the tangent space of a scheme normalizer with full group invariants"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tangent of a scheme theoretic normalizer equals the vectors whose class modulo subgroup tangent is fixed under conjugation by the whole subgroup, in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T21:31:43Z\", \"tool\": \"leanfinder\", \"query\": \"Tangent of a scheme theoretic normalizer equals the vectors whose class modulo subgroup tangent is fixed under conjugation by the whole subgroup, in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.conjAct_pointwise_smul_iff\", \"Subgroup.smul_coe\", \"Subgroup.conjAct_pointwise_smul_eq_self\", \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\", \"MulAut.conjNormal_val\", \"Subgroup.normalizerMonoidHom_apply_apply_coe\", \"Subgroup.normalizerMonoidHom_apply_symm_apply_coe\", \"Sylow.conj_eq_normalizer_conj_of_mem\"], \"digest\": \"cb59da97334863c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie-algebra/abstract-group normalizers do not identify the tangent space of a scheme normalizer with full group invariants"
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.*centralizer|Lie.*normalizer|normalizer.*Lie|centralizer.*Lie",
+   "results": "{\"t\": \"2026-10-23T22:25:32Z\", \"tool\": \"grep\", \"query\": \"Lie.*centralizer|Lie.*normalizer|normalizer.*Lie|centralizer.*Lie\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebra of a group scheme centralizer is the subspace fixed by the entire subgroup functor",
+   "results": "{\"t\": \"2026-10-23T22:25:33Z\", \"tool\": \"leansearch\", \"query\": \"Lie algebra of a group scheme centralizer is the subspace fixed by the entire subgroup functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"GroupLieAlgebra\", \"AddSubgroup.centralizer\", \"Subgroup.centralizer_eq_top_iff_subset\", \"Subalgebra.centralizer_eq_top_iff_subset\", \"Subalgebra.centralizer\", \"Subgroup.centralizer_closure\", \"ConjAct.fixedPoints_eq_center\"], \"digest\": \"74e65e87529f63ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalizer\", \"Lie\"",
+   "results": "{\"t\": \"2026-10-23T22:25:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalizer\\\", \\\"Lie\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieSubalgebra.normalizer\", \"LieSubalgebra.le_normalizer\", \"LieSubmodule.normalizer\", \"LieIdeal.idealizer_eq_normalizer\", \"LieSubmodule.normalizer_bot_eq_maxTrivSubmodule\", \"LieSubmodule.le_normalizer\", \"LieSubmodule.monotone_normalizer\", \"LieSubalgebra.ideal_in_normalizer\"], \"digest\": \"01afc26c97ffda0d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lie algebra of the scheme theoretic normalizer of a smooth closed subgroup modulo its Lie algebra equals group fixed vectors in the quotient of tangent spaces",
+   "results": "{\"t\": \"2026-10-23T22:25:35Z\", \"tool\": \"leanfinder\", \"query\": \"Lie algebra of the scheme theoretic normalizer of a smooth closed subgroup modulo its Lie algebra equals group fixed vectors in the quotient of tangent spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.normalizer\", \"LieSubmodule.normalizer\", \"LieSubalgebra.normalizer_eq_self_iff\", \"LieSubmodule.gc_top_lie_normalizer\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieSubmodule.top_lie_le_iff_le_normalizer\", \"LieSubmodule.le_normalizer\"], \"digest\": \"de79c6621ff90538\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tangent space of centralizer scheme consists of adjoint fixed vectors, normalizer tangent quotient consists of fixed classes under subgroup conjugation",
+   "results": "{\"t\": \"2026-10-23T22:25:37Z\", \"tool\": \"leanfinder\", \"query\": \"Tangent space of centralizer scheme consists of adjoint fixed vectors, normalizer tangent quotient consists of fixed classes under subgroup conjugation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.quotientCentralizerEmbedding_apply\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"LieSubmodule.gc_top_lie_normalizer\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieSubalgebra.normalizer_engel\", \"LieSubmodule.mem_normalizer\", \"LieSubalgebra.mem_normalizer_iff'\", \"LieSubalgebra.lie_mem_sup_of_mem_normalizer\"], \"digest\": \"4133dc2630f3a16f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract Lie algebras, manifolds, or algebra extensions; none identifies dual-number points of affine group schemes with scalar-extended tangent vectors and their conjugation action"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cartan-containing-normalizer-smooth",
+  "date": "2026-10-24",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically. Supporting lemma for Milne Theorem 17.48: Lemma 17.47, printed p.366; normalizer representability in Section 1i, Proposition 1.79 and Corollary 1.80, printed pp.30--31; Lie normalizer identity Proposition 10.34, printed pp.197--198. Auxiliary for Lemma 17.47: Proposition 10.34 and proof, printed pp.197–198; tangent functor and adjoint action in Sections 10a–10d, printed pp.184–193. The smooth-H specialization suffices here; representability is an explicit hypothesis, not asserted in this node.",
+   "via": [
+    "lem-sfb-cartan-containing-normalizer-smooth",
+    "lem-sfb-borel-scheme-normalizer",
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-lie-normalizer-centralizer-invariants",
+  "worker": "stage1",
+  "summary": "Checked Milne 10.34 against whole-group-functor invariants, supplied both directions of the normalizer calculation over arbitrary test algebras, and isolated the general scalar-extended infinitesimal-point calculus as one new unsplit statement. Statement and hypotheses retained. No project proof or Mathlib match found.",
+  "blueprint": "Supporting calculation for the alteration/plurinodal route of det-thm-sf-ctf-stability-direct-images proof (3), through Milne 17.47 and 10.34. The inherited blueprint ancestor is null (blueprint_refs.py ancestor reports None); place and via remain explicit. Current latest blueprint direct-image proof (3) was read; the imported auxiliary has no separate latest blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-6cb4718d0",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-6cb4718d0 (reviewer sub-agent of L); spot-checked: I read the item and the one new node lem-sfb-affine-group-dual-number-calculus in full, against Milne iAG2017 10.11, 10.14, 10.18–10.21 (printed pp.190–193) and Prop 10.34 (pp.197–198). The item statement and stmt_deps are byte-identical to live, where the item is still unsplit. No repair note. Step 2 follows Milne (67)⇔(68): R[δ] is a D-algebra by ε↦δ, the specialisation S[δ]→S with δ↦ε_S is well defined because ε_S²=0, and naturality of E is used correctly. Steps 3–4 supply the normalizer argument Milne omits. The commutator is E(v−Ad(h)v) and the subgroup-kernel clause puts v−Ad(h)v in h⊗R. The converse uses −v to get equality for every D-algebra S, which is exactly N(D). Step 5 is elementary. The new node is true: 10.19 works for every R because I/I² is finite-dimensional, Ad follows from 10.20, (60) and (61), and the subgroup clause from 10.14. I tested it on μ_p⊂G_m in characteristic p (E(a)=1+δa), on G_a, the trivial group and R=0. It does not restate the item: it mentions neither centralizer nor normalizer. It duplicates no existing node; I checked the lem-ag-identity-tangent-* family, lem-ag-lie-equivalence-multiplication, lem-ag-inf-points-commutative, sk-d-tangent and def-wf-lie-algebra-derivation. Same unit, no tool_uses, no SGA. Edge cases H=e, H=G, K=e and H finite étale all behave. Advisory only: the report names a citations.json that is not in the commit, and lean_audit is absent from both nodes, as on the sibling sfb nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieNormalizerCentralizerInvariants",
+  "declaration": "AlgebraicGeometry.lie_normalizer_centralizer_invariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieNormalizerCentralizerInvariants.lean",
+  "statement": "theorem lie_normalizer_centralizer_invariants (F : Type u) [Field F] [IsAlgClosed F] (G K H C N : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [IsAffine K.X.left] [LocallyOfFiniteType K.X.hom] [QuasiCompact K.X.hom] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [IsAffine C.X.left] [LocallyOfFiniteType C.X.hom] [QuasiCompact C.X.hom] [IsAffine N.X.left] [LocallyOfFiniteType N.X.hom] [QuasiCompact N.X.hom] [Smooth H.X.hom] (iK : K.X ⟶ G.X) (iH : H.X ⟶ G.X) (iC : C.X ⟶ G.X) (iN : N.X ⟶ G.X) [IsClosedSubgroupScheme iK] [IsClosedSubgroupScheme iH] [IsClosedSubgroupScheme iC] [IsClosedSubgroupScheme iN] (hC : ∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun c : points C.X A ↦ c ≫ iC) = {g : points G.X A | ∀ (B : Type u) [CommRing B] [Algebra F B] (f : A →ₐ[F] B) (k : points K.X B), points.map G.X f g * (k ≫ iK) = (k ≫ iK) * points.map G.X f g}) (hN : ∀ (A : Type u) [CommRing A] [Algebra F A], Set.range (fun n : points N.X A ↦ n ≫ iN) = {g : points G.X A | ∀ (B : Type u) [CommRing B] [Algebra F B] (f : A →ₐ[F] B), (fun h : points G.X B ↦ points.map G.X f g * h * (points.map G.X f g)⁻¹) '' Set.range (fun h : points H.X B ↦ h ≫ iH) = Set.range (fun h : points H.X B ↦ h ≫ iH)}) : ∃ D : AffineGroupDualNumberCalculus.Data G, Module.Finite F (GrpObj.Lie K.X) ∧ Module.Finite F (GrpObj.Lie H.X) ∧ Module.Finite F (GrpObj.Lie C.X) ∧ Module.Finite F (GrpObj.Lie N.X) ∧ Function.Injective (GrpObj.differential iK) ∧ Function.Injective (GrpObj.differential iH) ∧ Function.Injective (GrpObj.differential iC) ∧ Function.Injective (GrpObj.differential iN) ∧ (∀ (R : Type u) [CommRing R] [Algebra F R] (h : points H.X R) (v : R ⊗[F] GrpObj.Lie H.X), (D.Ad R (h ≫ iH)).toLinearEquiv (LinearMap.baseChange R (GrpObj.differential iH).toLinearMap v) ∈ LinearMap.range (LinearMap.baseChange R (GrpObj.differential iH).toLinearMap)) ∧ ∃ Q : ∀ (R : Type u) [CommRing R] [Algebra F R], points H.X R →* LinearMap.GeneralLinearGroup R (R ⊗[F] (GrpObj.Lie G.X ⧸ LinearMap.range (GrpObj.differential iH).toLinearMap)), (∀ (R : Type u) [CommRing R] [Algebra F R] (h : points H.X R) (v : R ⊗[F] GrpObj.Lie G.X), (Q R h).toLinearEquiv (LinearMap.baseChange R (LinearMap.range (GrpObj.differential iH).toLinearMap).mkQ v) = LinearMap.baseChange R (LinearMap.range (GrpObj.differential iH).toLinearMap).mkQ ((D.Ad R (h ≫ iH)).toLinearEquiv v)) ∧ (∀ (n : ℕ) (b : Module.Basis (ULift.{u} (Fin n)) F (GrpObj.Lie G.X ⧸ LinearMap.range (GrpObj.differential iH).toLinearMap)), ∃! ρ : H.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) F, IsMonHom ρ ∧ ∀ (R : Type u) [CommRing R] [Algebra F R] (h : points H.X R), Q R h = Matrix.GeneralLinearGroup.toLin' (b.baseChange R) (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) F R (h ≫ ρ))) ∧ LinearMap.range (GrpObj.differential iH).toLinearMap ≤ LinearMap.range (GrpObj.differential iN).toLinearMap ∧ (Set.range (GrpObj.differential iC) = {v : GrpObj.Lie G.X | ∀ (R : Type u) [CommRing R] [Algebra F R] (k : points K.X R), (D.Ad R (k ≫ iK)).toLinearEquiv (1 ⊗ₜ[F] v) = 1 ⊗ₜ[F] v}) ∧ (Set.range ((LinearMap.range (GrpObj.differential iH).toLinearMap).mkQ.comp (GrpObj.differential iN).toLinearMap) = {z | ∀ (R : Type u) [CommRing R] [Algebra F R] (h : points H.X R), (Q R h).toLinearEquiv (1 ⊗ₜ[F] z) = 1 ⊗ₜ[F] z})",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing plain structures owned by def-sfb-affine-group-dual-number-data, not a choice from the calculus existence theorem. That theorem remains a proof dependency only. The landed def-wf-lie-algebra-derivation and def-sc-general-linear-group own the Lie/differential/tangentPoint and GL/point-equivalence interfaces. D is an existential conclusion, never an extra assumption. The quotient action Q is determined by its scalar-extended quotient intertwining equation; its rationality is expressed by the unique morphism to GL in every finite basis. The second identity is equality of underlying sets of subspaces: the image of Lie(N) under g→g/h, together with h≤Lie(N), is the canonical embedded Lie(N)/h. No mathematical statement correction; Lean file unchanged from returned head cd26fdfb9b7d."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1461951e4",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Re-delivery of RETURN cd26fdfb9b7d (H2). All three requested repairs are in. (1) New def node def-sfb-affine-group-dual-number-data binds existing:true dualMap/reduction/Kernel/Data/Compatible in Sheaf.AlgebraicGeometry.AffineGroupDualNumberCalculus with no move or copy. Its TeX matches the Lean fields (finite, E Equiv onto Kernel, add/zero/neg/scale, normalize=tangentPoint, natural via dualMap, Ad by conjugation, regular ∃! ρ incl. n=0, and the three Compatible clauses). lean.statement is verbatim l.82, its stmt_deps all exist, and no parallel owner exists. (2) The item cites it instead of the theorem node; the theorem stays in proof_deps. (3) Landed def-wf-lie-algebra-derivation and def-sc-general-linear-group added. The item differs from live only in lean and in the three appended stmt_deps. The Lean file is byte-identical to cd26 (sha 484e85c8) and lean.statement is verbatim. Mathematics re-checked: D is unique (E fixed by normalize/natural/scale, Ad by conjugation), Q is determined by the surjective mkQ, hC/hN are exactly the node's functors, only H is smooth. Edge cases K=1, H=1, H=G with n=0, finite étale H, mu_p, R=0 all fine. Gates OK. No compile (no file changed). Advisory: the landed Data docstrings still say blueprint lem-sfb-affine-group-dual-number-calculus, and the theorem node record still lists the plain declarations; both are inherent to the requested existing:true route."
+ }
+}

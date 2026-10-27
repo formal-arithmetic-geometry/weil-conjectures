@@ -17,9 +17,9 @@
  ],
  "proof": [
   {
-   "text": "If $U$ is empty then $A$ is the zero ring and its unique element is annihilated by $T\\in C[T]$. Otherwise apply [lem-a1-affine-groupoid-invariant-rank-strata]. It gives a nonempty finite set $I$ of positive ranks and affine invariant pieces $U_r,R_r$ with both restricted projections of degree $r$. Put $A_r=\\Gamma(U_r,\\mathcal O)$ and $B_r=\\Gamma(R_r,\\mathcal O)$, and write $\\sigma_r,\\tau_r:A_r\\to B_r$ for their source and target maps. The restricted identity is still a section of both projections. We will construct a monic annihilator separately on each such piece, then combine them.",
+   "text": "Apply [lem-a1-affine-groupoid-rankwise-monic-gluing] to the given affine groupoid. It supplies the finite invariant rank pieces and the restriction isomorphisms for $A,B,C$. If $U$ is empty, its polynomial $T$ already proves the claim. Otherwise its index set $I$ is nonempty. Fix $a\\in A$ and write $a_r$ for its component on $U_r$; each $A_r$ is nonzero and the restricted groupoid has both projections of positive constant degree $r$.",
    "uses": [
-    "lem-a1-affine-groupoid-invariant-rank-strata"
+    "lem-a1-affine-groupoid-rankwise-monic-gluing"
    ],
    "elementary": false,
    "source": {
@@ -28,20 +28,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-sheaf-disjoint-union-product] repeatedly to the structure sheaves and these finite disjoint open decompositions. Restriction gives $A\\cong\\prod_{r\\in I}A_r$ and $B\\cong\\prod_{r\\in I}B_r$. Because $s^{-1}(U_r)=t^{-1}(U_r)=R_r$, the maps $\\sigma,\\tau$ have components $\\sigma_r,\\tau_r$ under these identifications. Thus an element $(a_r)_r$ is in $C$ exactly when $\\sigma_r(a_r)=\\tau_r(a_r)$ for every $r$. Hence $C\\cong\\prod_{r\\in I}C_r$, where $C_r=\\{a_r\\in A_r:\\sigma_r(a_r)=\\tau_r(a_r)\\}$. This last assertion is just equality in a product, not a claim that invariants commute with an arbitrary base change.",
+   "text": "For each rank piece, identify the affine object and arrow schemes with the spectra of their global section rings using Scheme.isoSpec. Naturality identifies the new source and target maps with Spec.map of the original appTop maps. Transport the identity, inverse and composition along these isomorphisms; composition uses the induced map between pullbacks, and each groupoid law follows by cancelling the object or arrow isomorphism and applying the original law. The source and target squares are pullbacks with horizontal isomorphisms, so finite local freeness and fibre degree r are preserved. Nonemptiness of the object piece makes its section ring nontrivial. Apply [lem-a1-affine-groupoid-constant-rank-norm-annihilator] to the transported groupoid and the component a_r. Its canonical polynomial is monic of degree r, belongs to the polynomial lifts of the appTop equalizer inclusion, and evaluates to zero. Choose a polynomial lift; injectivity of the subring inclusion reflects monicity and preserves degree, and evaluation of its coefficientwise image is evaluation through that inclusion. Rewriting C_r by the supplied equalizer equality gives precisely the polynomial required by the gluing statement.",
    "uses": [
-    "lem-weil-pbc-sheaf-disjoint-union-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, first paragraph: componentwise reduction"
-   }
-  },
-  {
-   "text": "Fix $a\\in A$, and let $a_r$ be its component on $U_r$. Apply [lem-a1-finite-locally-free-norm-characteristic-polynomial] to $\\varphi=\\sigma_r$ and $b=\\tau_r(a_r)$. Its hypothesis is precisely the degree-$r$ finite local freeness of $s_r$. It gives $P_r(T)=N_{\\sigma_r[T]}(T-\\tau_r(a_r))\\in A_r[T]$, of the form $T^r+\\sum_{j<r}p_{r,j}T^j$, and the equality $\\bigl(\\sigma_r[T](P_r)\\bigr)(\\tau_r(a_r))=0$ in $B_r$. This does not assume $B_r$ is globally free over $A_r$.",
-   "uses": [
-    "lem-a1-finite-locally-free-norm-characteristic-polynomial"
+    "lem-a1-affine-groupoid-constant-rank-norm-annihilator"
    ],
    "elementary": false,
    "source": {
@@ -50,29 +39,11 @@
    }
   },
   {
-   "text": "Apply [lem-a1-affine-groupoid-polynomial-norm-invariant] to the restricted groupoid $(U_r,R_r)$ and $F=T-a_r\\in A_r[T]$. Since $\\tau_r[T]$ fixes $T$, its norm $Q_F$ is exactly the $P_r$ just constructed. That lemma gives $P_r\\in C_r[T]$. Explicitly, for every coefficient $p_{r,j}$ we have $\\sigma_r(p_{r,j})=\\tau_r(p_{r,j})$. This supplies invariant coefficients rather than assuming that the norm itself descends without a theorem.",
+   "text": "Use the common-degree conclusion of [lem-a1-affine-groupoid-rankwise-monic-gluing] for these $P_r$ and $a$. With $d=\\max I$, it combines the coefficients of $T^{d-r}P_r$ through $C\\cong\\prod_rC_r$, producing a monic $Q\\in C[T]$ whose value at $a$ has every component zero, and hence $Q(a)=0$. Since $a$ was arbitrary, this is exactly integrality of $A$ over $C$.",
    "uses": [
-    "lem-a1-affine-groupoid-polynomial-norm-invariant"
+    "lem-a1-affine-groupoid-rankwise-monic-gluing"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, second paragraph: determinant trick after adjoining x"
-   }
-  },
-  {
-   "text": "The equality of the two images of each coefficient gives $\\bigl(\\sigma_r[T](P_r)\\bigr)(\\tau_r(a_r))=\\sum_j\\tau_r(p_{r,j})\\tau_r(a_r)^j=\\tau_r(P_r(a_r))$. Step 3 therefore gives $\\tau_r(P_r(a_r))=0$. The ring map $e_r^\\sharp:B_r\\to A_r$ satisfies $e_r^\\sharp\\circ\\tau_r=\\operatorname{id}_{A_r}$ because $t_r\\circ e_r=\\operatorname{id}_{U_r}$. Apply it to obtain $P_r(a_r)=0$. This is the explicit injectivity needed for the final descent of the annihilation equation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/groupoids.tex",
-    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, final sentences; the identity section supplies the injectivity there obtained from faithful flatness"
-   }
-  },
-  {
-   "text": "Let $d=\\max I$. For each $r\\in I$, set $Q_r(T)=T^{d-r}P_r(T)\\in C_r[T]$. Every $Q_r$ has the form $T^d+\\sum_{j<d}q_{r,j}T^j$ and vanishes at $a_r$. For each $j<d$, the finite tuple $(q_{r,j})_r$ is a single coefficient $q_j\\in C$ by step 2. Then $Q(T)=T^d+\\sum_{j<d}q_jT^j\\in C[T]$ is monic, and the components of $Q(a)$ in $A\\cong\\prod_rA_r$ are exactly $Q_r(a_r)=0$. Hence $Q(a)=0$. Since $a$ was arbitrary, $A$ is integral over $C$.",
-   "uses": [],
-   "elementary": true,
    "source": {
     "document": "literature/stacks-project/groupoids.tex",
     "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, first paragraph: explicit recombination of the constant-rank pieces"
@@ -80,10 +51,8 @@
   }
  ],
  "proof_deps": [
-  "lem-a1-affine-groupoid-invariant-rank-strata",
-  "lem-weil-pbc-sheaf-disjoint-union-product",
-  "lem-a1-finite-locally-free-norm-characteristic-polynomial",
-  "lem-a1-affine-groupoid-polynomial-norm-invariant"
+  "lem-a1-affine-groupoid-rankwise-monic-gluing",
+  "lem-a1-affine-groupoid-constant-rank-norm-annihilator"
  ],
  "proof_origin": {
   "by": "document",
@@ -172,20 +141,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-affine-groupoid-integral-invariants",
   "worker": "stage1",
-  "summary": "Followed Stacks 03BJ via invariant positive-rank pieces, determinant norm invariance and the locally free norm characteristic polynomial. Wrote the product equalizer and common-degree recombination explicitly. Used the identity section to justify injectivity of the target map. Preserved the statement, including nonreduced and disconnected cases; added the polynomial-ring statement dependency. No exact project attachment or Mathlib match was found. Three strictly smaller statement-only nodes were created.",
-  "blueprint": "Realizes the supporting integrality argument (groupoids-lemma-integral-over-invariants) in the affine quotient used in the fourth paragraph of the proof of 03XX, which supports the ancestor lem-a1-affine-hc0. The existing ancestry and unit binding are preserved.",
+  "summary": "Repair of the human re-split order: extracted two independent statement-only tasks of comparable size. Old steps 1,2,6 become invariant rank decomposition, product equalizers and explicit common-degree gluing; old steps 3,4,5 become the concrete constant-rank norm polynomial, coefficient invariance, Cayley-Hamilton and identity-section root comparison. The unchanged item now assembles them in three short steps. All old arguments are retained in the new interfaces and in the report; no Lean files changed. Landing-return repair of 08da2e1c8d6: compared the retained split with the current DAG, rechecked all cited interfaces and retained the approved argument; delivery rebases the stage-1 overlay onto current origin/sheaf-dag. The report records the side-completion promotion issue for L.",
+  "blueprint": "Preserves the existing ancestor lem-a1-affine-hc0 and unit. This is the supporting Stacks 03BJ affine-quotient argument beneath the historical lissity expansion; the actual current blueprint ancestor is the support/lissity proof, not a purported fourth paragraph. New from.place fields give exact current-item step and Stacks paragraph locators.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q01-aa729ff4a",
-  "group": "Q01",
+  "reviewer": "NT-cc-NL-f860158c1",
+  "group": "NL",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-aa729ff4a (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the cited statements in full, and checked them against Stacks groupoids.tex 03BH/03BI/03BJ (lines 4242-4368), exercises 02DU/02DV(1),(3) and algebra 00DX; all tag-to-label pairs were checked in tags/tags. The item statement still matches 03BJ, with no hypothesis added or dropped. Step 1: the rank-strata node covers the empty-U case and gives finite, positive-rank, affine, invariant pieces. Step 2: the Mathlib leaf for disjoint unions gives A, B and C as products, because s^{-1}(U_r)=t^{-1}(U_r). Step 3: the norm characteristic polynomial for sigma_r at tau_r(a_r) is annihilated by Cayley-Hamilton on local free charts. Step 4: the determinant trick for T-a_r makes P_r lie in C_r[T]. Step 5: e^sharp composed with tau is the identity because t∘e=id, so P_r(a_r)=0; this replaces the source's faithful-flatness argument and is valid. Step 6: padding by T^{d-r} glues the monic polynomials, which is correct. All new nodes are true and strictly smaller than the item; none restates one of its clauses. Rank strata: tested on the empty case, the identity case and a mixed-rank case; it is distinct from lem-weil-pbc-finite-locally-free-degree-locally-constant. Polynomial norm invariance: tested on the identity groupoid and a constant group action; it is distinct from lem-pd-finite-locally-free-norm-charts. Norm characteristic polynomial: tested on r=0, A=0 and a nilpotent element of k[eps]; Mathlib's charpoly needs Module.Free and the pinned Mathlib has no projective version, so this is not a one-line case of lem-weil-cayley-hamilton-free-module. B1-B9 pass: statement only, inline norm definition, tag+label sources, three kinds of search recorded, blueprint.from=lem-a1-affine-hc0 with the correct via. Route: the only off-unit citation is a Mathlib leaf, no tool_uses, no SGA. The item is not a target, so the base-change/coefficient check does not apply. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-f860158c1 (reviewer sub-agent of L); spot-checked: Second delivery of the 2026-10-21 re-split. The earlier head 08da2e1c8d64 got a maintainer PASS, but its landing was refused because the side completion had not been promoted (L's job). Compared with that snapshot, both new nodes are byte-identical; in the item only split_report.summary changed. I still reread all the mathematics. Sources read: Stacks groupoids.tex 4251-4366: 03BH determinant trick, 03BI invariant rank strata, 03BJ (paragraph 1 reduces to constant rank over finitely many pieces; paragraph 2 is the norm of x−f, Cayley-Hamilton and faithful flatness). Tag/label pairs 03BH/03BI/03BJ/01I5/00DX checked in tags/tags. No SGA. The old six steps are all kept in full. The rankwise-monic-gluing node carries old steps 1, 2 and 6: strata, products of A, B, C with σ/τ componentwise, ρ_C = ρ_A restricted, the T^{d−r} padding with ρ_A(Q(a))_r = a_r^{d−r}P_r(a_r) = 0, and the empty-U polynomial T. The constant-rank-norm-annihilator node carries old steps 3-5: P_a = N_{σ[T]}(T−τa) is monic of degree r because A ≠ 0 (norm-charpoly node with φ = σ, b = τa); its coefficients are invariant (polynomial-norm-invariant with F = T−a); τ(P_a(a)) = 0; and ε = e# with ε∘τ = id gives P_a(a) = 0, a valid replacement for Stacks' faithful flatness. The two nodes are of comparable size (1920/1568 characters) and neither restates the item: one takes the local monic equations as a hypothesis, the other is nonempty constant-rank only. The item is a 1216-character 3-step assembly. Every hypothesis of step 2 comes from step 1 (A_r ≠ 0; s_r, t_r finite locally free of degree r because they are restrictions over the open U_r). All citations are in the same unit and tool_uses is empty. B1-B5 and B9 hold, with five recorded searches per node and no Mathlib leaf (objSupIsoProdEqLocus is binary only; exists_monic_and_aeval_eq_zero gives neither this norm nor invariant coefficients). The DAG search found the rank-strata, invariant-norm, polynomial-norm-invariant, norm-charpoly, basis-descent and finite-group quotient nodes, none of which duplicates a new node. Edge cases tested: empty U, identity groupoid, Z/2 swap on k×k (P = (T−x)(T−y)), mixed ranks {1,2} with padding, dual numbers. Advisory only: the gluing node says 'degree r' rather than 'finite locally free of degree r', which follows automatically for a restriction over an open. Maintainer note: the content is identical to the PASSed 08da; the refusal was a promotion issue for L, not a fault of the delivery."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AffineGroupoidIntegralInvariants",
@@ -205,5 +174,26 @@
   "result": "pass",
   "note": "Read item, new def-a1-scheme-groupoid-laws, all stmt_deps, Stacks groupoids.tex 0231 axioms and 03BJ, upstream IsFiniteLocallyFree (side FiberDegree.lean:898) and Mathlib Spec.preimage. Lean matches the node clause by clause: canonical s♯,t♯ via Spec.preimage, C = RingHom.eqLocus (Iff.rfl to {a | σa = τa}), finite locally free instances, conclusion is exactly a monic annihilator over C; no extra assumptions, one universe; dropping the base S is equivalent. Scheme.IsGroupoid checked law by law (source/target/identity/inverse/composite endpoints, unit, inverse, associativity with correct fibre-product points); not hollow; identity groupoid satisfies it. lean.statement verbatim for both records; docstrings carry source, blueprint id and the six proof steps; proof is sorry; ancestry via chain is a valid DAG path. Edge cases: empty U, identity groupoid, mixed ranks. nt_compile --json: both modules compile clean (1.8 s / 1.9 s); probe module: axioms only sorryAx plus standard. No findings, no fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T082722-L-2214358",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

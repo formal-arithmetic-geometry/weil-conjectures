@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-scheme-artinian-smoothness-finite-type-tests",
+ "kind": "statement",
+ "title": "Artinian lifting with finite-type bottom maps detects scheme smoothness",
+ "statement": "Let $f:W\\to V$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], with $V$ locally Noetherian [pqf-def-locnoeth]. A local ring has a unique maximal ideal; an Artinian ring satisfies the descending chain condition on ideals. A small extension $\\varphi:B'\\twoheadrightarrow B$ means a surjection of Artinian local commutative rings whose kernel $I$ is square zero and has length one as a $B'$-module [def-weil-pbc-module-length]. Put $i=\\operatorname{Spec}\\varphi:\\operatorname{Spec}B\\to\\operatorname{Spec}B'$ [def-weil-affine-spectrum]. Suppose that for every small extension and every commutative square given by $b:\\operatorname{Spec}B\\to W$ and $c:\\operatorname{Spec}B'\\to V$ with $fb=ci$ and with $c$ of finite type, there exists $b':\\operatorname{Spec}B'\\to W$ such that $b'i=b$ and $fb'=c$. Then $f$ is smooth [def-sbc-smooth-morphisms]. No residue-field, separation or quasi-compactness hypothesis on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HY (lemma-lifting-along-artinian), implication (2) to (1). The square-zero condition in the definition of small extension is redundant and is made explicit for its subsequent use."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-module-length",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finite type point $w\\in W$, so the canonical map $p:\\operatorname{Spec}k\\to W$, $k=\\kappa(w)$, is finite type. For any affine open $D=\\operatorname{Spec}R\\subseteq V$ containing $f(w)$, choose an affine open $U=\\operatorname{Spec}A\\subseteq f^{-1}(D)$ containing $w$. Factor $p$ through $U$. The affine-pairs criterion applied to $f$ and to $p$ shows that $A$ is a finitely generated $R$-algebra and $k$ a finitely generated $A$-algebra. Explicitly, if $A=R[a_1,\\ldots,a_r]$ and $k=A[t_1,\\ldots,t_s]$ under the induced maps, then $k=R[\\bar a_1,\\ldots,\\bar a_r,t_1,\\ldots,t_s]$. Thus the canonical composite $\\operatorname{Spec}k\\to V$ has finitely generated coordinate algebra over every such $D$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-finite-type-points-detect-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HY (lemma-lifting-along-artinian), implication (2) to (1). The square-zero condition in the definition of small extension is redundant and is made explicit for its subsequent use."
+   }
+  },
+  {
+   "text": "Consider a test square for the fixed-residue criterion at $w$: a small extension $B'\\twoheadrightarrow B$ with residue fields identified with $k$, a map $b:\\operatorname{Spec}B\\to W$ restricting to $p$ on $\\operatorname{Spec}k$, and $c:\\operatorname{Spec}B'\\to V$ with $fb=ci$. Both Artinian spectra have one point, so $c$ maps that point to $f(w)$. For each affine open $D=\\operatorname{Spec}R\\subseteq V$ containing $f(w)$, factor $c$ through $D$. Its residue map is the canonical composite of step 1, hence $k$ is a finitely generated $R$-algebra. The Artinian finite-type residue criterion gives that $B'$ is finitely generated over $R$. For an affine open of $V$ not containing $f(w)$ the preimage is empty. These computations establish local finite type from its affine-cover definition. Every inverse image is empty or the one-point space $\\operatorname{Spec}B'$, hence quasi-compact. Thus $c$ is finite type, as required by the hypothesis of the item.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-unique-prime",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-affine-spectrum",
+    "lem-sfb-artinian-finite-type-residue-criterion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HY (lemma-lifting-along-artinian), implication (2) to (1). The square-zero condition in the definition of small extension is redundant and is made explicit for its subsequent use."
+   }
+  },
+  {
+   "text": "The fixed-residue criterion defines small extensions by length one. This also gives the square-zero condition required here: the nonzero kernel $I$ is simple, since an intermediate nonzero proper submodule would give a chain of length two. Any nonzero generator identifies $I$ with $B'/\\mathfrak m_{B'}$: its annihilator is maximal and the ring is local. Hence $\\mathfrak m_{B'}I=0$; since the proper ideal $I$ lies in $\\mathfrak m_{B'}$, $I^2=0$. By step 2 the bottom map $c$ is finite type. The assumed lifting property therefore supplies the lift for every fixed-residue test square at $w$. Apply the fixed-residue Artinian criterion to $f$, which is locally finite type with locally Noetherian target, to obtain an open neighbourhood $N_w$ of $w$ on which $f$ is smooth.",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "lem-sfb-smooth-fixed-residue-artinian-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HY (lemma-lifting-along-artinian), implication (2) to (1). The square-zero condition in the definition of small extension is redundant and is made explicit for its subsequent use."
+   }
+  },
+  {
+   "text": "Let $O$ be the union of all open subschemes $N\\subseteq W$ for which $f|_N$ is smooth. Step 3 shows that $O$ contains every finite type point of $W$. The open-subset consequence of the finite type point lemma gives $O=|W|$. Thus these open subschemes cover $W$. Smoothness local on the source now implies that $f$ is smooth. If $W$ is empty the same conclusion follows from the empty-cover clause of that lemma.",
+   "uses": [
+    "lem-sfb-finite-type-points-detect-open",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HY (lemma-lifting-along-artinian), implication (2) to (1). The square-zero condition in the definition of small extension is redundant and is made explicit for its subsequent use."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sfb-finite-type-points-detect-open",
+  "lem-weil-pbc-artinian-local-unique-prime",
+  "def-weil-affine-spectrum",
+  "lem-sfb-artinian-finite-type-residue-criterion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-module-length",
+  "lem-sfb-smooth-fixed-residue-artinian-test",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HY (lemma-lifting-along-artinian), proof of (2) implies (1), using Tag 02HX (4), Tag 02HV and finite type points (Tag 02J4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "artinian.*lift|lift.*artinian|artinian.*smooth|smooth.*artinian",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of scheme morphisms characterized by lifting small extensions of Artinian local rings finite type base map",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.casesOn, RingHom.smooth_def, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth.recOn, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.of_comp_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsArtinianRing\", \"IsSmooth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artinian infinitesimal lifting criterion for smooth scheme morphisms over a Noetherian base using finite type test algebras",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism to a locally Noetherian scheme is smooth iff it lifts small extensions of Artinian local rings with finite type bottom map",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this assertion about fibred groupoids or the Artinian-restricted smoothness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "artinian.*lift|lift.*artinian|artinian.*smooth|smooth.*artinian",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness definitions and forward formal-smooth lifting do not give the reverse criterion with Artinian finite-type tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsArtinianRing\", \"IsSmooth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness definitions and forward formal-smooth lifting do not give the reverse criterion with Artinian finite-type tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism to a locally Noetherian scheme is smooth if it lifts small Artinian extensions whose bottom map is finite type",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness definitions and forward formal-smooth lifting do not give the reverse criterion with Artinian finite-type tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artinian local small extension lifting with finite type bottom maps implies smoothness of a locally finite type scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, Algebra.FormallySmooth.exists_lift, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, Algebra.FormallyEtale.instFormallySmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness definitions and forward formal-smooth lifting do not give the reverse criterion with Artinian finite-type tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal criterion smooth scheme morphism testing Artin local rings with residue field fixed at a finite type point",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme smoothness definitions and forward formal-smooth lifting do not give the reverse criterion with Artinian finite-type tests"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-representable-infinitesimal-smoothness",
+  "date": "2026-10-23",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: last sentence, application of lemma-implies-smooth; Tag 07XX proof: smoothness of the chart W to V from Artinian lifting, using the global version Tag 02HY",
+   "via": [
+    "lem-sfb-artin-representable-infinitesimal-smoothness",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-artinian-smoothness-finite-type-tests",
+  "worker": "stage1",
+  "summary": "Q98: followed Tag 02HY via fixed-residue lifting at finite type points; expanded the affine passage needed for the existing algebraic Artinian residue criterion. Reused all supporting nodes; no new nodes. Checked the square-zero convention, local finite type versus finite type, the empty source, and arbitrary non-Jacobson/non-quasi-compact sources. No exact project or Mathlib attachment.",
+  "blueprint": "Preserves the inherited null ancestor and via chain. Realizes the local supporting Tag 02HY application at the end of the inherited place (Tag 07XX/07XY smoothness of W to V), subordinate to det-thm-sf-ctf-stability-direct-images proof (3). Whole-blueprint searches for artinian, small extension, 02HY and smoothness found no equivalent imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-292829dd5",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-292829dd5 (reviewer sub-agent of L); spot-checked: Read in full: the item's four steps, all 11 cited statements, and Stacks 02HY, 02HX(4), 02HV, 02J4 and 02HS in the local .tex files. The delivery has 0 new nodes, and the item's statement, stmt_deps and blueprint fields are unchanged from the base. Step 1: lft-affine-pairs applied to f and to p, with explicit generators, makes k a finitely generated R-algebra for every affine D containing f(w). Step 2: Spec B' has one point, the composite R->B'->k is the step-1 composite, and 02HV makes B' finitely generated over R; every preimage is empty or Spec B', so c is lft and quasi-compact, hence of finite type. Step 3: a length-1 kernel is simple, so I is B'/m, mI=0 and I^2=0; every fixed-residue test square is therefore an instance of the item's hypothesis, and the same-unit node for 02HX (4)=>(1) gives a smooth neighbourhood N_w. The 02HX (3) variant (pbc) would not work, because there c need not be of finite type. Step 4: the smooth opens cover all finite type points, so they cover W by 02J4, and smoothness is local on the source; W empty is covered. This route (every finite type point has a smooth neighbourhood) is equivalent to the source's contradiction via the closed non-smooth locus and needs no closedness node. Edge cases checked: empty source, non-Jacobson base, non-quasi-compact or non-separated source. No SGA citation, no route departure (the pbc nodes are mathlib leaves), no duplicate of 02HY in the DAG, no repair note, and the item is not superseded (still unsplit in clones/live and side-live)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeArtinianSmoothnessFiniteTypeTests",
+  "declaration": "AlgebraicGeometry.smooth_of_artinian_lifting_finite_type_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeArtinianSmoothnessFiniteTypeTests.lean",
+  "statement": "theorem smooth_of_artinian_lifting_finite_type_tests {W V : Scheme.{u}} (f : W ⟶ V) [LocallyOfFiniteType f] [IsLocallyNoetherian V] (hlift : ∀ (B' B : CommRingCat.{u}) [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B] (q : B' ⟶ B), Function.Surjective q.hom → (RingHom.ker q.hom) ^ 2 = ⊥ → Module.length B' (RingHom.ker q.hom) = 1 → ∀ (b : Spec B ⟶ W) (c : Spec B' ⟶ V), b ≫ f = Spec.map q ≫ c → LocallyOfFiniteType c → QuasiCompact c → ∃ b' : Spec B' ⟶ W, Spec.map q ≫ b' = b ∧ b' ≫ f = c) : Smooth f",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dffcd6e6c",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02HY (2)=>(1) clause by clause: LocallyOfFiniteType f, IsLocallyNoetherian V, Artinian local CommRingCat.{u} tests, surjective q, ker^2=⊥, Module.length ker = 1, commuting square, c LocallyOfFiniteType ∧ QuasiCompact (def-weil-finite-type-morphism record), lift with both identities, conclusion Smooth f (Mathlib Smooth.lean:62). No extra hypotheses on f; empty W allowed; same universe convention as landed SmoothFixedResidueArtinianTest. lean.statement verbatim; stmt_deps unchanged; no new nodes/defs; sorry only; docstrings with 02HY place, blueprint id and 4 proof steps; proof imports present in live. Report has both sections (second reading is a self-check, noted). No files changed, no compile run."
+ }
+}

@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-filtered-finite-free-projection",
+ "kind": "statement",
+ "title": "Filtered finite-free projection via bounded-below direct-image continuity",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], with small pro-etale sites in a coefficient universe [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $R_Y$ be a sheaf of commutative rings, fix $R_X\\cong f^{-1}R_Y$, and use sheaves of modules, ordinary unbounded derived categories and the canonical derived ringed adjunction $L=Lf_R^*\\dashv G=Rf_{*,R}$ with counit $\\varepsilon$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-pbc-proetale-operations]. Thus $L$ on degree-zero modules is exact inverse image. Use K-flat derived sheaf tensor and its canonical pullback comparison [def-pc-kflat-complex, def-pur-sheaf-tensor-product, lem-weil-pbc-ringed-topoi-derived-tensor-pullback].\n\nLet $I$ be a small nonempty filtered category [def-weil-pbc-category-colimit], let $(P_i)$ be a diagram of finite free $R_Y$-module sheaves, and let $v_i:P_i\\to B$ exhibit a colimit $B$ in $R_Y$-module sheaves. Assume $B$ and $LB$ are flat, where flat means that tensoring with the module is exact [def-pc-flat-sheaf-modules]. Fix $C\\in D^+(R_X)$ [def-weil-pbc-bounded-derived-subcategories] and $A=GC$. For any $R_Y$-module sheaf $P$, define\n$$\\delta_P:P\\otimes^L_{R_Y}A\\longrightarrow G(LP\\otimes^L_{R_X}C)$$\nto be the adjoint of the canonical pullback/tensor comparison followed by $1\\otimes\\varepsilon_C$ (with symmetry ordering the $P$ factor first).\n\nThen $\\delta_B$ is an isomorphism in $D(R_Y)$. More precisely, every $\\delta_{P_i}$ is an isomorphism, identified under any finite free presentation $P_i\\cong R_Y^{\\oplus d_i}$ and its pullback with the finite-biproduct comparison $A^{\\oplus d_i}\\to G(C^{\\oplus d_i})$. The actual cocone legs satisfy\n$$\\delta_B\\circ(v_i\\otimes1)=G(Lv_i\\otimes1)\\circ\\delta_{P_i}.$$\nFor any representative $K^\\bullet$ of $C$ vanishing below one integer $a$, the canonical map\n$$\\varinjlim_i H^qG(LP_i\\otimes^L C)\\xrightarrow{\\sim}H^qG(LB\\otimes^L C)$$\nis an isomorphism for every $q$; it is induced by $G(Lv_i\\otimes1)$ and the degreewise diagram $LP_i\\otimes K^\\bullet$. Under the leg-induced identification $H^q(B\\otimes^L A)\\cong\\varinjlim_iH^q(P_i\\otimes^L A)$, the map $H^q(\\delta_B)$ is the colimit of $H^q(\\delta_{P_i})$ followed by this continuity isomorphism. No assertion about unbounded filtered diagrams or infinite coproduct preservation is made.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), equation (5.4); agent finite-free projection and cocone assembly from returned proof steps 4-5"
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Compare any recorded tensor model to the native derived tensor using fully faithful whiskering on flat K-flat representatives [lem-weil-pbc-resolving-representative-whiskering, lem-pc-kflat-resolution, lem-sf-ringed-derived-native-tensor]. Consequently tensoring by a fixed object is additive and tensoring by the degree-zero unit is naturally isomorphic to the identity. The module pullback carries the unit to the unit [def-weil-pbc-projection-formula-arrows]. For the given canonical pullback comparison, naturality of adjuncts proves projection_naturality directly. For the unit, conjugate the tensor comparison by these two unit-action isomorphisms, obtaining a natural automorphism of L. Conjugacy under L ⊣ G gives an automorphism of G, so its component is invertible. Cancelling the target unit isomorphism shows that the actual projection at the unit is invertible. Choose the source unit identification as this projection followed by the target identification; this supplies exactly the existential unit normalization in the unchanged statement.",
+   "uses": [
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), equation (5.4); agent finite-free projection and cocone assembly from returned proof steps 4-5"
+   }
+  },
+  {
+   "text": "Both coefficient functors are additive, hence preserve finite coproducts, and direct image is additive. For any specified finite-free presentation, precompose with every coproduct injection. Naturality of the actual projection identifies its component with the coproduct of the rank-one projections followed by the direct-image comparison. This is the required sigmaComparison identity, including empty rank. All its factors are invertible, so every finite-free projection is invertible.",
+   "uses": [
+    "lem-sfb-left-resolution-additive-finite-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), equation (5.4); agent finite-free projection and cocone assembly from returned proof steps 4-5"
+   }
+  },
+  {
+   "text": "For source cohomology, choose one flat-term K-flat resolution of a representative of GC [lem-pc-kflat-resolution]. The native one-K-flat tensor comparison [lem-sf-ringed-derived-native-tensor], followed by comparison with the specified tensor model, identifies the source functor on coefficients with single(-) tensor that fixed complex followed by Q. Tensoring module sheaves preserves coefficient-sized colimits [lem-weil-pbc-independent-sheaf-tensor-colimits]; the existing complex bifunctor-colimit instances give the same for signed total tensor. Filtered colimits are exact because module sheaves are Grothendieck abelian [prop-pur-kinjective-resolutions-exist]. Homology preserves these exact colimits. Thus the mapped source cocone is colimiting, and its actual canonical desc is invertible. This argument needs no boundedness of GC and no flatness hypothesis on the varying coefficient.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "prop-pur-kinjective-resolutions-exist",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), equation (5.4); agent finite-free projection and cocone assembly from returned proof steps 4-5"
+   }
+  },
+  {
+   "text": "Finite coproducts of the tensor unit are flat; pullback preserves coproducts as a left adjoint and takes the unit to the unit. Thus each pulled-back finite-free coefficient is flat. For any representative K of C with common lower bound n, flat_single_derived_normalization [lem-pur-flat-single-derived-normalization] makes single(LP) K-flat for each coefficient in the diagram and for its stated flat colimit. The native one-K-flat tensor comparison and the exact-pullback/single comparison identify the strict signed-total diagram with the derived tensorTarget diagram. Naturality of those comparisons proves the leg equation for every actual v_i. The single-factor total-tensor formula shows every term and the colimit vanish below n. Pullback, single and total tensor preserve colimits, so the strict mapped cocone is colimiting.",
+   "uses": [
+    "lem-pur-flat-single-derived-normalization",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-weil-pbc-projection-formula-arrows",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), equation (5.4); agent finite-free projection and cocone assembly from returned proof steps 4-5"
+   }
+  },
+  {
+   "text": "Apply bounded continuity with the actual coefficient action [lem-pe-bounded-continuity-coefficient-restriction] to this uniformly bounded strict diagram and its actual colimit cocone. It gives the displayed strict desc isomorphism for every such K and every q. Existence of a bounded strict representative follows from the standard t-structure [def-sbc-standard-tstructure-derived-category]. Transport its mapped colimit cocone through the tensor comparison and its proven leg equation. This proves that the actual target desc is invertible.",
+   "uses": [
+    "lem-pe-bounded-continuity-coefficient-restriction",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), equation (5.4); agent finite-free projection and cocone assembly from returned proof steps 4-5"
+   }
+  },
+  {
+   "text": "Naturality of the projection transformation and the universal property of colimits give the displayed equality between source desc followed by H^q(delta_B) and the colimit of the finite-free projections followed by target desc. Both desc maps are invertible by the preceding steps; every component of the intervening natural transformation is invertible by finite-free normalization. Hence H^q(delta_B) is invertible for every integer q. The unbounded derived-category isomorphism criterion DerivedCategory.isIso_iff now proves delta_B invertible, without a separate bounded-below direct-image preservation theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), equation (5.4); agent finite-free projection and cocone assembly from returned proof steps 4-5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-pc-kflat-resolution",
+  "lem-pe-bounded-continuity-coefficient-restriction",
+  "lem-pur-flat-single-derived-normalization",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-left-resolution-additive-finite-coproducts",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "prop-pur-kinjective-resolutions-exist",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), equation (5.4), assembled with native derived tensor and actual cocone comparisons; unbounded cohomological detection replaces the redundant D-plus detection step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*[Ff]ormula|projection.*[Mm]ap",
+   "results": "20 hits; Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean; Mathlib/CategoryTheory/Action.lean; Mathlib/CategoryTheory/Bicategory/Functor/Pseudofunctor.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean; Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean; Mathlib/CategoryTheory/Bicategory/Functor/Prelax.lean; Mathlib/CategoryTheory/Adhesive/Basic.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical projection formula for filtered colimits of finite free sheaves on a pro etale site with bounded below derived direct image",
+   "results": "8 hits; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; SheafOfModules.Presentation.isColimit; SheafOfModules.isColimitFreeCofan; CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall; CategoryTheory.IsFiltered.final_fst; CategoryTheory.Sheaf.isColimitSheafifyCocone; CategoryTheory.IsFiltered.final_snd; SheafOfModules.mapFree",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism of schemes the derived projection map for a filtered colimit of finite free coefficient module sheaves is invertible on bounded below complexes",
+   "results": "8 hits; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of projection morphisms identifies the colimit of finite biproduct comparisons with the bounded below derived projection map for a filtered union of finite free modules",
+   "results": "8 hits; CategoryTheory.Limits.Concrete.colimit_rep_eq_zero; ModuleCat.FilteredColimits.M.mk_map; PresheafOfModules.isColimitFreeYonedaCoproductsCokernelCofork; ModuleCat.FilteredColimits.colimitCoconeIsColimit; ModuleCat.FilteredColimits.colimitCocone; ModuleCat.FilteredColimits.ι_colimitDesc_assoc; localCohomology.ofDiagram; localCohomology.hasColimitDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|finiteFree.*projection|projection.*finiteFree",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only parts of the infrastructure, not this normalized sheaf-derived statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism the canonical derived projection formula is an isomorphism for a filtered colimit of finite free coefficient sheaves and a bounded below complex",
+   "results": "8 hits; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec; AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; these provide colimit or resolution infrastructure, not the stated canonical sheaf-derived projection and its cocone compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived projection formula for a filtered colimit of finite free sheaves and bounded below derived pushforward",
+   "results": "8 hits; SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat; SheafOfModules.Presentation.isColimit; AlgebraicGeometry.PresheafedSpace.pushforwardDiagramToColimit; AlgebraicGeometry.PresheafedSpace.colimit; AlgebraicGeometry.PresheafedSpace.pushforwardDiagramToColimit_map; AlgebraicGeometry.PresheafedSpace.colimit_presheaf; SheafOfModules.isColimitFreeCofan; CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; these provide colimit or resolution infrastructure, not the stated canonical sheaf-derived projection and its cocone compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the projection morphism identifies its cohomology with the filtered colimit of finite biproduct comparisons",
+   "results": "8 hits; CategoryTheory.Functor.mapProjectiveResolution_π; Condensed.isColimitLocallyConstantPresheaf_desc_apply; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f; instPreservesHomologyFunctorAddCommGrpCatColim; LightCondensed.isColimitLocallyConstantPresheaf_desc_apply; CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality; CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀.f; CategoryTheory.Presieve.piComparison_fac",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; these provide colimit or resolution infrastructure, not the stated canonical sheaf-derived projection and its cocone compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qlbar-direct-image-comparison",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "Last paragraph: passage from finite E to the algebraic closure; projection/continuity assembly for the filtered finite-extension diagram",
+   "via": [
+    "lem-sfb-qlbar-direct-image-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-filtered-finite-free-projection",
+  "worker": "stage1",
+  "summary": "Preserved the mathematical statement and added its missing flatness and D-plus definition citations. Wrote eight steps: normalized mate naturality, finite-free coordinates, flat strict tensor models, source cohomology colimit, pulled-back strict diagram, arbitrary-ring bounded-below continuity, equality on actual cocone legs, and bounded-below cohomological detection. Reused existing nodes throughout; no new nodes. Read every cited statement, the source Lemma 5.3, Stacks 0B56/0944/03DB/03EP and the blueprint continuity complement. No exact project attachment or Mathlib match.",
+  "blueprint": "Realizes the last paragraph of lem-sfb-dc-lower-star-preserves, passage from finite E to the algebraic closure, through the unit sk-prop-open-coefficients step 3 and its prescribed bounded-below continuity route. Finite-free reduction and cocone assembly expand the created parent lem-sfb-qlbar-direct-image-comparison, rather than altering any unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic canonical ringed-topos mate naturality and unit normalization, not a constructible finiteness theorem. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic additive tensor and its unit for module sheaves. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-pur-flat-single-derived-normalization",
+    "why": "Generic flat degree-zero derived tensor models, needed to give a strict common-lower-bound diagram. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic fixed K-flat replacement used to verify maps in the flat parameter. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic exact module-sheaf filtered colimits and tensor-colimit comparison. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic passage from exact colimits of complexes to their cohomology. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-pullback-filtered-colimits",
+    "why": "Generic module-pullback colimit preservation supplies the actual pulled-back cocone. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic coefficient restriction and underlying colimit comparison; no etale or constant-coefficient restriction. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Grothendieck property on small ringed sites for bounded-below injective models. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives consequence of the Grothendieck property. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic bounded-below K-injective model, for the arbitrary module-sheaf category. The open-coefficient unit does not construct this general categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-plus-iso-on-cohomology",
+    "why": "Generic cohomology detection after verifying both vertices lie in D-plus. The open-coefficient unit does not construct this general categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-flat-single-derived-normalization",
+  "lem-pc-kflat-resolution",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-ce55f4217",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-ce55f4217 (reviewer sub-agent of L); spot-checked: I read the whole delivery and pass it unchanged. The live node is unsplit and this item has no repair note of its own. It is a node NP created for the re-split of lem-sfb-qlbar-direct-image-comparison (NP f25e0720 PASS), so a normal one-level split is expected here. The statement text is identical to live except two added notion citations (def-pc-flat-sheaf-modules, def-weil-pbc-bounded-derived-subcategories) and their stmt_deps; they add no hypothesis. The delivery has no new nodes and no SGA. Every bracketed citation in the steps is in that step's uses, proof_deps equals the union of uses, the steps are 701–1195 characters, and there are no doubled backslashes. Route: unit sk-prop-open-coefficients step 3 prescribes [sk-cor-pe-bounded-continuity], and step 6 cites det-pe-bounded-continuity-direct-image from that unit. Only uniformly bounded-below diagrams are used, so the disputed coproduct-continuity claim of the parent's B4 repair note is avoided. Source checks: HRS 5.3(1) and (5.4) at pdftotext lines 983–1010 (qcqs f_* commutes with filtered colimits in D^{≥n}); the Stacks tags 0B56, 0944, 03DB, 03EP, 06YU, 06YS, 013K, 070J and 05RR resolve to the cited labels. Step checks: 1) δ is the symmetric conjugate of the mate α of lem-weil-pbc-ringed-projection-mate-exact; the adjunct computation proves naturality, the cocone equation and δ_{R_Y}=1. 2) Evaluated on the basis injections, δ_P equals the biproduct comparison A^{⊕d}→G(C^{⊕d}), which is invertible because G is additive; d=0 gives zero objects. 3) Flat degree-zero factors compute ⊗^L termwise (lem-pur-flat-single-derived-normalization); naturality in the flat factor holds because P⊗T→P⊗M is a quasi-isomorphism for flat P. 4) λ_q comes from tensor/colimit commutation and exact filtered colimits, via src-weil-homology-preserves-exact-colimits. 5) Module pullback preserves the filtered colimit; the terms LP_i⊗K vanish below a for every i. 6) det-pe works with the ring-module direct image computed by the same K-injective resolution as G; restricting scalars along R_Y→f_*R_X keeps the underlying sheaves and colimits (module-sheaves-colimits-forgetful). 7) The elementary assembly on colimit injections is correct. 8) G maps D^+ to D^+ through bounded-below injective models, and the D^+ cohomological criterion applies. Edge cases checked: rank 0 and 1, varying ranks, non-injective transitions, zero ring. A DAG search found no duplicate. The 12 declared tool uses are generic and accepted. Advisory: the mathlib leaf lem-sfb-left-resolution-additive-finite-coproducts is off-unit but not listed in tool_uses; I do not count this as a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FilteredFiniteFreeProjection",
+  "declaration": "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.filteredFiniteFreeProjection",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.source",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.tensorTarget",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.target",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.projection",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.projection_naturality",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.projectionTransformation",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.strictTensor",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.finiteFreeNormalization",
+   "AlgebraicGeometry.Scheme.FilteredFiniteFreeProjection.filteredFiniteFreeProjection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FilteredFiniteFreeProjection.lean",
+  "statement": "theorem filteredFiniteFreeProjection [QuasiCompact f] [QuasiSeparated f] {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (P : I ⥤ proEtaleRingModules Y R) (v : Cocone P) (hv : IsColimit v) (hP : ∀ i : I, ∃ d : ℕ, Nonempty (P.obj i ≅ SheafOfModules.free (R := (sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) (ULift.{u + 1} (Fin d)))) (hB : SheafOfModules.IsFlatOnSite (J := ProEt.topology Y) (R := R) v.pt) (hLB : SheafOfModules.IsFlatOnSite (J := ProEt.topology X) (R := S) ((proEtaleRingModulePullback f R S c).obj v.pt)) (hC : ∃ n : ℤ, C.IsGE n) : IsIso (projection f R S c a b C v.pt) ∧ (∀ i : I, IsIso (projection f R S c a b C (P.obj i))) ∧ ∀ q : ℤ, IsIso (colimit.desc (P ⋙ source f R S c a C ⋙ DerivedCategory.homologyFunctor _ q) ((source f R S c a C ⋙ DerivedCategory.homologyFunctor _ q).mapCocone v)) ∧ IsIso (colimit.desc (P ⋙ target f R S c b C ⋙ DerivedCategory.homologyFunctor _ q) ((target f R S c b C ⋙ DerivedCategory.homologyFunctor _ q).mapCocone v)) ∧ colimit.desc (P ⋙ source f R S c a C ⋙ DerivedCategory.homologyFunctor _ q) ((source f R S c a C ⋙ DerivedCategory.homologyFunctor _ q).mapCocone v) ≫ (DerivedCategory.homologyFunctor _ q).map (projection f R S c a b C v.pt) = colimMap (Functor.whiskerLeft P (Functor.whiskerRight (projectionTransformation f R S c a b C) (DerivedCategory.homologyFunctor _ q))) ≫ colimit.desc (P ⋙ target f R S c b C ⋙ DerivedCategory.homologyFunctor _ q) ((target f R S c b C ⋙ DerivedCategory.homologyFunctor _ q).mapCocone v) ∧ ∀ (K : CochainComplex (proEtaleRingModules X S) ℤ) (n : ℤ), (∀ j : ℤ, j < n → IsZero (K.X j)) → (DerivedCategory.Q.obj K ≅ C) → ∃ (eta : P ⋙ strictTensor f R S c K ⋙ DerivedCategory.Q ≅ P ⋙ tensorTarget f R S c b C) (eB : DerivedCategory.Q.obj ((strictTensor f R S c K).obj v.pt) ≅ (tensorTarget f R S c b C).obj v.pt), (∀ (i : I) (j : ℤ), j < n → IsZero (((strictTensor f R S c K).obj (P.obj i)).X j)) ∧ (∀ j : ℤ, j < n → IsZero (((strictTensor f R S c K).obj v.pt).X j)) ∧ (∀ i : I, DerivedCategory.Q.map ((strictTensor f R S c K).map (v.ι.app i)) ≫ eB.hom = eta.hom.app i ≫ (tensorTarget f R S c b C).map (v.ι.app i)) ∧ Nonempty (IsColimit ((strictTensor f R S c K).mapCocone v)) ∧ IsIso (colimit.desc (P ⋙ strictTensor f R S c K ⋙ DerivedCategory.Q ⋙ proEtaleRingDerivedDirectImage f R S c ⋙ DerivedCategory.homologyFunctor _ q) ((strictTensor f R S c K ⋙ DerivedCategory.Q ⋙ proEtaleRingDerivedDirectImage f R S c ⋙ DerivedCategory.homologyFunctor _ q).mapCocone v))",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The complete node is realized by the main theorem together with projection_naturality (all actual legs) and finiteFreeNormalization (every finite free presentation, including rank zero); source, tensorTarget, target, projection, projectionTransformation and strictTensor are transparent canonical constructions from the recorded operations and tensor models. No natural-language statement or dependency is changed. Reviewer FIX (cc second reader, 2026-10-22): lean.declarations listed `projection` twice and omitted `projection_naturality`, the theorem that carries the node's actual-cocone equation; the list now names each of the nine declarations of the module once.",
+  "fixed_by": "NT-stage2-cc-567232715"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-567232715",
+  "group": "Q52",
+  "result": "fix",
+  "note": "Mathematics correct: all hypotheses/clauses match the node (qcqs f, arbitrary R_Y with c, flat B/LB, C∈D^+, actual cocone legs, every finite free presentation incl. d=0); δ_P = homEquiv(canonical ∃!-characterized tensor comparison ≫ 1⊗ε_C), P-first; δ_B/δ_{P_i} IsIso; cocone equation via projection_naturality; canonical λ_q/ρ_q colimit.desc IsIso and λ_q≫H^qδ_B = colimMap(H^qδ)≫ρ_q; uniform-bound strict K clause. HRS 5.3(1)/(5.4) checked. §1(B) dep records for def-weil-pbc-proetale-operations and lem-weil-pbc-ringed-topoi-derived-tensor-pullback are supersets via public imports, live unchanged since base, statement verbatim. FIX F1: item lean.declarations listed `projection` twice and omitted `projection_naturality` (the cocone-equation theorem) -> fixes/lem-sfb-filtered-finite-free-projection.lean-record.json with the 9 declarations, statement verbatim (refit_record clean); no Lean change, no compile. Advisories: existential unit identifications eA/eC in finiteFreeNormalization (linked by δ_R≫G eC=eA; no unitor API for ProEtaleTensorModel); existential eta/eB in the strict clause (canonical ρ_q stated directly); maintainer: an existing:true def node for ProEtaleTensorModel/proEtaleOrdinaryTensor."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261024T020757-L-2664823",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

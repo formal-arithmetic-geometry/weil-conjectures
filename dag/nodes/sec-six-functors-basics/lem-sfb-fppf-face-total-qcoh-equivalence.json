@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-fppf-face-total-qcoh-equivalence",
+ "kind": "statement",
+ "title": "Unbounded quasi-coherent descent on the face total site",
+ "statement": "Let $S$ be a scheme and $Z$ an algebraic space over $S$ [def-pc-scheme], [def-trf-algebraic-space]. Let $u:U_\\bullet\\to Z$ be an augmented simplicial algebraic space for which $U_0\\to Z$ and all higher matching maps are flat, locally finitely presented and surjective; the matching object is the finite limit of proper faces and its first term is $U_0\\times_ZU_0$. Discard the degeneracies and form the ringed total category $\\mathscr M$ of [lem-sfb-semisimplicial-ringed-total-category] using for each $U_n$ the enlarged etale site $\\mathcal C_{U_n}$ of algebraic spaces etale over $U_n$, with its extended structure sheaf, whose topos and module category are those of the small etale site $(U_{n,\\mathrm{et}},\\mathcal O_{U_n})$ [lem-trf-space-enlarged-etale-ringed-site-model], and for an injective order map with structure morphism $h:U_n\\to U_m$ the fibre-product functor $V\\mapsto U_n\\times_{U_m}V$ with its ring map; these give the canonical ringed morphisms of the small etale topoi, with coherent identity and composition comparisons [lem-trf-space-enlarged-ringed-composition-localization]. The augmentation is formed in the same way from $u_n:U_n\\to Z$. Let $u$ also denote the induced ringed total augmentation. A total module is called quasi-coherent when its components are quasi-coherent [def-trf-space-quasi-coherent-module] and its transitions are isomorphisms. These modules form a weak Serre subcategory (closed under kernels, cokernels and extensions). A derived total object lies in $D_{\\mathrm{QCoh}}(\\mathscr M)$, the full subcategory having quasi-coherent cohomology systems, if and only if it is cartesian and each $e_nB$ has quasi-coherent cohomology. The functors\n$$Lu^*:D_{\\mathrm{QCoh}}(\\mathcal O_Z)\\longrightarrow D_{\\mathrm{QCoh}}(\\mathscr M),\\qquad Ru_*:D_{\\mathrm{QCoh}}(\\mathscr M)\\longrightarrow D_{\\mathrm{QCoh}}(\\mathcal O_Z)$$\nare mutually quasi-inverse triangulated equivalences, with their adjunction unit and counit isomorphisms. Derived direct image is computed by K-injective resolutions and pullback by K-flat resolutions. This holds for unbounded complexes, without quasi-compactness or separatedness assumptions on $Z$ or the $U_n$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0DHF, lemma-coh-descent-qcoh-unbounded-for-fppf-hypercovering, and Tag 0D7M, lemma-quasi-coherent-sheaf: injective-order-map total-site adaptation, with the same affine cohomology bound zero. This face-only version is agent-supplied; it requires no flatness of degeneracy maps."
+ },
+ "stmt_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "def-sfb-space-fppf-hypercover",
+  "def-pur-cochain-coefficient-universe-transport"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-hypercover-augmentation-face-property] to the class of flat locally finitely presented surjections. Every face and augmentation component is flat, and every injective-order transition is a composite of faces, so all their module pullbacks are exact. By [lem-sfb-semisimplicial-ringed-total-category], $e_nu^*=u_n^*$ and evaluation is exact and jointly conservative. Consequently $u^*$ is exact: evaluate the image of a short exact sequence and use exactness of every $u_n^*$. The same total-category statement now says that cartesianness of a derived object is equivalent to invertibility of the transitions on each cohomology system. Since $e_nH^q(B)=H^q(e_nB)$, adding component quasi-coherence gives exactly the claimed characterization of $D_{\\mathrm{QCoh}}(\\mathscr M)$.",
+   "uses": [
+    "lem-sfb-hypercover-augmentation-face-property",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0DHF proof, first paragraph and Ad (1); use only faces, as supplied by the two cited nodes"
+   }
+  },
+  {
+   "text": "Write $\\mathcal A$ for the cartesian componentwise quasi-coherent modules. Kernels and cokernels of maps in $\\mathcal A$ are componentwise quasi-coherent by [lem-sfb-space-qcoh-kernels-colimits]; their transitions are isomorphisms because each face pullback is exact and thus carries the kernel and cokernel diagrams to the corresponding diagrams. For an extension of two such systems, [lem-sfb-space-qcoh-extension-closed] makes each middle component quasi-coherent. In the diagram of two short exact component sequences obtained along a face, the endpoint transitions are isomorphisms, so the middle transition is also: its kernel maps to zero in the quotient and then vanishes in the left term; a section of the target middle term lifts locally in the quotient and its remaining difference lifts in the left term. Thus $\\mathcal A$ is closed under extensions. The same two quasi-coherence statements give these closures downstairs on $Z$. These are precisely the weak Serre conditions.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-qcoh-extension-closed",
+    "lem-sfb-hypercover-augmentation-face-property",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0DHF proof, weak Serre paragraph; spaces-properties.tex 03M1, lemma-properties-quasi-coherent"
+   }
+  },
+  {
+   "text": "For the augmentation $u$, [lem-sfb-fppf-face-heart-descent] gives the equivalence $u^*:\\operatorname{QCoh}(Z)\\simeq\\mathcal A$ with inverse $u_*$. For each $G\\in\\operatorname{QCoh}(Z)$, [lem-sfb-fppf-face-heart-derived-unit] gives the actual adjunction unit $G\\xrightarrow{\\sim}Ru_*u^*G$. These are the heart and degree-zero acyclicity hypotheses of the unbounded criterion, for the face total augmentation itself. Both cited statements use exactly the matching-map hypotheses in force here, and neither asks for flat degeneracies.",
+   "uses": [
+    "lem-sfb-fppf-face-heart-descent",
+    "lem-sfb-fppf-face-heart-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0DHF proof, Ad (2)–(3); face adaptations of 0DHD and 0DHE"
+   }
+  },
+  {
+   "text": "Use the affine scheme objects $V\\to U_n$ as a basis of each enlarged etale site, and hence of the total site; scheme charts and then affine open covers give these coverings by [lem-trf-space-enlarged-etale-ringed-site-model]. Every covering of such a $V$ refines to a family with affine scheme domains by the same construction. The total and component module categories are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck] and so have enough injectives by [lem-sp-grothendieck-enough-injectives]. By [lem-sfb-semisimplicial-evaluation-free-adjoint], evaluation $e_n$ has an exact left adjoint $\\ell_n$. It therefore preserves injectives: extending a map into $e_nI$ across a monomorphism is adjoint to extending into $I$ across its monomorphic $\\ell_n$ image. For $F\\in\\mathcal A$ apply $e_n$ to an injective resolution of $F$ in $\\mathscr M$. It is an injective resolution of $F_n$ in the module sheaves on $\\mathcal C_{U_n}$, and in each degree sections at the total-site object $V$ are literally the sections of that evaluated module at $V$. Taking cohomology identifies $H^p_{\\mathrm{tot}}(V,F)$ with the derived module evaluation $H^p_{\\mathcal C_{U_n}}(V,F_n)$.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0DHF proof, Ad (4), affine-object basis and the comparison of total and component cohomology (lemma-sanity-check-modules), done here with the exact left adjoint of evaluation"
+   }
+  },
+  {
+   "text": "Let $W$ be $U_n$ or $Z$, let $F'$ be a quasi-coherent $\\mathcal O_W$-module, transported to $\\mathcal C_W$ by [lem-trf-space-enlarged-etale-ringed-site-model], and let $v:V\\to W$ be an affine scheme object. By [lem-pe-ringed-site-derived-evaluation-slice], applicable by the enough injectives of step 4, the derived module evaluation $H^p_{\\mathcal C_W}(V,F')$ is the abelian cohomology of $F'|_V$ at the final object of the slice $\\mathcal C_W/V$. By [lem-trf-space-enlarged-etale-ringed-site-model], postcomposition identifies $\\mathcal C_V$ with $\\mathcal C_W/V$ with the same coverings, and restriction to the slice with module pullback along the localization morphism of $v$; [lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence] transports the cohomology to $H^p_{\\mathcal C_V}(V,\\widetilde{v^*F'})$. The same model says that restriction to the scheme objects $V_{\\mathrm{et}}\\subset\\mathcal C_V$ is an equivalence of sheaf categories leaving sections at scheme objects unchanged. An equivalence preserves injectives, so this group is $H^p(V_{\\mathrm{et}},v^*F')$. The module $v^*F'$ is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent], hence $v^*F'\\simeq G_{\\mathrm{et}}$ for a Zariski quasi-coherent $G$ on $V$ by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Now [lem-sc-etale-affine-qcoherent] gives $H^p(V_{\\mathrm{et}},G_{\\mathrm{et}})=0$ for $p>0$. With step 4 ($W=U_n$, $F'=F_n$) this holds on the total site, and with $W=Z$ for every $F'\\in\\operatorname{QCoh}(Z)$ on $\\mathcal C_Z$, for every affine domain of every refined covering, with the common bound $d_V=0$. Thus both local bound hypotheses hold; no finite cover or global cohomological bound is needed.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0DHF proof, Ad (4)–(5), affine-object basis and bound zero; cohomology over an object as cohomology of the localized site (sites-cohomology.tex 03F3)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-unbounded-descent-criterion] with source the face total ringed topos, target the enlarged etale ringed topos of $Z$, and weak Serre categories $\\mathcal A$ and $\\operatorname{QCoh}(Z)$. Steps 1–2 supply flatness and the weak Serre hypotheses, step 3 supplies its heart equivalence and derived unit on modules, and steps 4–5 supply its two local bound hypotheses. It follows that $Lu^*=u^*$ and $Ru_*$ are inverse triangulated equivalences on the full unbounded subcategories defined by these cohomology conditions, with the canonical unit and counit isomorphisms. The enlarged-site equivalences identify these with precisely the small-etale categories in the statement. In particular the result applies without boundedness, quasi-compactness or separatedness assumptions.",
+   "uses": [
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "0DHF conclusion, using sites-cohomology.tex 0D7V, lemma-equivalence-unbounded-one"
+   }
+  },
+  {
+   "text": "The total site and all component sites are small relative to the module universe. Thus [lem-weil-pbc-ring-sheaves-grothendieck] makes their module categories Grothendieck, and [lem-sfb-grothendieck-k-injective] supplies K-injective resolutions. The definition [def-sfb-right-derived-functor] computes $Ru_*$ by applying $u_*$ to these resolutions. On the pullback side [lem-pc-kflat-resolution] gives unbounded K-flat resolutions with flat terms, and [lem-weil-pbc-ringed-topoi-derived-pullback] computes $Lu^*$ by termwise tensor pullback of them. Since $u^*$ is exact by step 1, these compute the already identified termwise functor. These statements apply to arbitrary complexes and require no extra geometric hypothesis.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "def-sfb-right-derived-functor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "06YS, lemma-K-flat-resolution; 06YY, lemma-derived-base-change; unbounded right-derived construction preceding 07A6, lemma-adjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-hypercover-augmentation-face-property",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-qcoh-extension-closed",
+  "lem-sfb-fppf-face-heart-descent",
+  "lem-sfb-fppf-face-heart-derived-unit",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sfb-ringed-unbounded-descent-criterion",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0DHF, proof: face-only adaptation, with the general criterion of Tag 0D7V"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded quasi coherent cohomological descent on the total small etale site of an fppf semisimplicial hypercover of an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.oneHypercover\", \"module\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → AlgebraicGeometry.Scheme.zariskiTopology.OneHypercover D.glued\", \"doc\": \"Given gluing data $ D $ for schemes, this constructs a one-step hypercover of the glued scheme $ D.\\\\text{glued} $ in the Zariski topology. It uses the indexing category $ J $, object diagram $ U $, an\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → C → Type (max (max u v) (u_1 + 1))\", \"doc\": \"For a site $(\\\\mathcal{C}, J)$ with Grothendieck topology $J$ and an object $S \\\\in \\\\mathcal{C}$, this is the quotient category of one-step hypercovers of $S$ obtained by identifying homotopic morphisms\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → C → Type (max (max u v) (w + 1))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and an object $X \\\\in \\\\mathcal{C}$, this defines the type of one-step hypercovers of $X$ in the site $(\\\\mathcal{C}, J)$, constructed in a\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.instBindScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover X) [AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  (f : (x : 𝒰.I₀) → CategoryTheory.PreZeroHypercover (𝒰.X x)) [∀ (x : 𝒰.I₀), AlgebraicGeometry.QuasiCompactCover (f x)],\\n  AlgebraicGeometry.QuasiCompactCover (𝒰.bind f)\", \"doc\": \"Given a scheme $X$, if $\\\\mathcal{U}$ is a quasi-compact pre-zero hypercover of $X$ and for each $x \\\\in \\\\mathcal{U}.I_0$ there is a quasi-compact pre-zero hypercover $f(x)$ of $\\\\mathcal{U}.X(x)$, then \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary quasicoherent sheaves and one-hypercovers do not give unbounded derived descent on algebraic spaces; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites, which a hypercover augmentation is not"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived quasi coherent modules on an algebraic space are equivalent to cartesian complexes on a flat hypercover with only face maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary quasicoherent sheaves and one-hypercovers do not give unbounded derived descent on algebraic spaces; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites, which a hypercover augmentation is not"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"If `e : C ≌ D`, then the pushforwards along `e.functor` and `e.inverse` forms an equivalence.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary quasicoherent sheaves and one-hypercovers do not give unbounded derived descent on algebraic spaces; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites, which a hypercover augmentation is not"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|cohomological.descent|semisimplicial",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"898\", \"text\": \"  · dsimp only [Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"899\", \"text\": \"      PreZeroHypercover.pullback₁_I₀, Equiv.refl_apply, PreZeroHypercover.pullback₁_X]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"21\", \"text\": \"that it is a dense subsite of the small étale site, and that it is `1`-hypercover\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"86\", \"text\": \"instance : Functor.IsOneHypercoverDense.{u} (AffineEtale.Spec S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"88\", \"text\": \"  isOneHypercoverDense_toOver_Spec _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"110\", \"text\": \"  Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"119\", \"text\": \"  Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"475\", \"text\": \"  dsimp only [Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"476\", \"text\": \"    PreZeroHypercover.pullback₁_X, ulift_X, ulift_f, PreZeroHypercover.pullback₁_f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"line\": \"76\", \"text\": \"  Precoverage.mem_iff_exists_zeroHypercover\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"line\": \"85\", \"text\": \"  rw [Precoverage.mem_iff_exists_zeroHypercover] at hR\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.DenseSubsite.OneHypercoverDense\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"69\", \"text\": \"instance isOneHypercoverDense_toOver_Spec :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"70\", \"text\": \"    Functor.IsOneHypercoverDense.{u} (CostructuredArrow.toOver P Scheme.Spec S)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"73\", \"text\": \"  Functor.IsOneHypercoverDense.of_hasPullbacks fun X ↦ by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"92\", \"text\": \"/-- A Zariski-`1`-hypercover of a scheme where all components are affine. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"93\", \"text\": \"@[simps! toPreOneHypercover_toPreZeroHypercover]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"95\", \"text\": \"def affineOneHypercover (X : Scheme.{u}) : zariskiTopology.OneHypercover X :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"97\", \"text\": \"    (X.affineCover.refineOneHypercover fun i j ↦\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"98\", \"text\": \"      (pullback (X.affineCover.f i) (X.affineCover.f j)).affineCover.toPreZeroHypercover)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"50\", \"text\": \"    · refine T.affineOneHypercover.isSheafFor_of_pullback hzar ?_ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"65\", \"text\": \"        refine V.affineOneHypercover.isSheafFor_of_pullback hzar (fun i ↦ ?_) (fun i j k ↦ ?_)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"81\", \"text\": \"    rw [← Scheme.Cover.forgetQc_toPreZeroHypercover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"189\", \"text\": \"    simp only [Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Directed.lean\", \"line\": \"190\", \"text\": \"      PreZeroHypercover.pullback₁_X, Iso.trans_inv, Iso.symm_inv, pullback.congrHom_inv,\"}\n\nDirectory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary quasicoherent sheaves and one-hypercovers do not give unbounded derived descent on algebraic spaces; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites, which a hypercover augmentation is not"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived quasi coherent descent for an fppf hypercover after forgetting degeneracy maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → C → Type (max (max u v) (u_1 + 1))\", \"doc\": \"For a site $(\\\\mathcal{C}, J)$ with Grothendieck topology $J$ and an object $S \\\\in \\\\mathcal{C}$, this is the quotient category of one-step hypercovers of $S$ obtained by identifying homotopic morphisms\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.toHOneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Homotopy\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (S : C) → CategoryTheory.Functor (J.OneHypercover S) (J.HOneHypercover S)\", \"doc\": \"The canonical functor from the category of one-step hypercovers of an object $S$ in a site $(\\\\mathcal{C}, J)$ to its homotopy category, which maps each one-step hypercover to itself and each morphism \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a generating family of one-step hypercovers in a site $(\\\\mathcal{C}, J)$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$, and a covering sieve $S$ containing the zeroth sie\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over the diagram indexed by a covering sieve $S$ c\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → Type (max (max u (w + 1)) v)\", \"doc\": \"A predicate assigning to each object $X$ in a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ a property of its one-step hypercovers, forming a family of conditions parameterized by o\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.toZeroHypercover_toPreZeroHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {S : C}\\n  (E : J.OneHypercover S), E.toZeroHypercover.toPreZeroHypercover = E.toPreZeroHypercover\", \"doc\": \"For any one-step hypercover $ E $ of an object $ S $ in a site $ (\\\\mathcal{C}, J) $, the composition of the canonical maps $ E \\\\to \\\\text{ZeroHypercover} \\\\to \\\\text{PreZeroHypercover} $ coincides with t\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over a diagram indexed by a covering sieve $S$ con\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {A : Type u'} →\\n        [inst_1 : CategoryTheory.Category.{v', u'} A] →\\n          {H : J.OneHypercoverFamily} →\\n            {P : CategoryTheory.Functor Cᵒᵖ A} →\\n              (∀ ⦃X : \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over the diagram indexed by a covering sieve $S$ c\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercovers and flat scheme morphisms do not provide unbounded derived quasi-coherent hyperdescent; the sheaf pushforward equivalence requires equivalent sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat hypercovers of algebraic spaces induce equivalences of unbounded derived categories with quasi coherent cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.GrothendieckTopology C → C → Type (max (max u v) (w + 1))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and an object $X \\\\in \\\\mathcal{C}$, this defines the type of one-step hypercovers of $X$ in the site $(\\\\mathcal{C}, J)$, constructed in a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"(S : Scheme.{u}) (𝒰 : PreZeroHypercover.{v} S) : S.quasiCompactCover 𝒰 ↔ QuasiCompactCover 𝒰\", \"doc\": \"For a scheme $ S $ and a pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\\\mathca\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.toHOneHypercover\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Homotopy\", \"type\": \"(S : C) : J.OneHypercover S ⥤ J.HOneHypercover S\", \"doc\": \"The canonical functor from the category of one-step hypercovers of an object $S$ in a site $(\\\\mathcal{C}, J)$ to its homotopy category, which maps each one-step hypercover to itself and each morphism \"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.HOneHypercover\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Homotopy\", \"type\": \"(S : C)\", \"doc\": \"For a site $(\\\\mathcal{C}, J)$ with Grothendieck topology $J$ and an object $S \\\\in \\\\mathcal{C}$, this is the quotient category of one-step hypercovers of $S$ obtained by identifying homotopic morphisms\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) [Flat f] [Surjective f] : Epi f\", \"doc\": \"Every flat and surjective morphism of schemes is an epimorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercovers and flat scheme morphisms do not provide unbounded derived quasi-coherent hyperdescent; the sheaf pushforward equivalence requires equivalent sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Equivalence\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"If `e : C ≌ D`, then the pushforwards along `e.functor` and `e.inverse` forms an equivalence.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercovers and flat scheme morphisms do not provide unbounded derived quasi-coherent hyperdescent; the sheaf pushforward equivalence requires equivalent sites"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|semisimplicial|cohomological.descent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.Zero\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\", \"line\": \"51\", \"text\": \"lemma mk_of_zeroHypercover [P.IsClosedUnderIsomorphisms]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\", \"line\": \"52\", \"text\": \"    (H : ∀ ⦃X : C⦄ (𝒰 : Precoverage.ZeroHypercover.{max u v} K X),\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\", \"line\": \"56\", \"text\": \"    rw [CategoryTheory.Precoverage.mem_iff_exists_zeroHypercover] at hR\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/SiteLocal.lean\", \"line\": \"62\", \"text\": \"    rw [CategoryTheory.Precoverage.mem_iff_exists_zeroHypercover] at hR\"}\n  {\"file\": \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"line\": \"76\", \"text\": \"lemma exists_mem_zeroHypercover_range {X : TopCat.{u}} (E : precoverage.ZeroHypercover X) :\"}\n  {\"file\": \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"line\": \"80\", \"text\": \"lemma isOpenEmbedding_f_zeroHypercover {X : TopCat.{u}} (E : precoverage.ZeroHypercover X) :\"}\n  {\"file\": \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"line\": \"98\", \"text\": \"      exact ⟨(x i).hom ∘ (isOpenEmbedding_f_zeroHypercover 𝒰 i).toHomeomorph.symm, by fun_prop⟩\"}\n  {\"file\": \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"line\": \"109\", \"text\": \"      obtain ⟨i, hi⟩ := exists_mem_zeroHypercover_range 𝒰 x\"}\n  {\"file\": \"Mathlib/Topology/Category/TopCat/GrothendieckTopology.lean\", \"line\": \"110\", \"text\": \"      exact ⟨i, (isOpenEmbedding_f_zeroHypercover 𝒰 i).isOpen_range.mem_nhds hi⟩\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.SheafOfTypes\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"34\", \"text\": \"Let `E` be a pre-`0`-hypercover with pairwise pullbacks. If `∐ᵢ Eᵢ` is a universal coproduct\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"36\", \"text\": \"`0`-hypercover `{ ∐ᵢ Eᵢ ⟶ S }` is exact if and only if the multifork for `E` is exact.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"39\", \"text\": \"def PreZeroHypercover.isLimitSigmaOfIsColimitEquiv (E : PreZeroHypercover.{w} S)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"line\": \"44\", \"text\": \"    [PreservesLimit (Discrete.functor fun i ↦ op (E.toPreOneHypercover.X i)) F]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"898\", \"text\": \"  · dsimp only [Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"line\": \"899\", \"text\": \"      PreZeroHypercover.pullback₁_I₀, Equiv.refl_apply, PreZeroHypercover.pullback₁_X]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.Zero\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"line\": \"185\", \"text\": \"      rw [mem_iff_exists_zeroHypercover] at hR\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"line\": \"187\", \"text\": \"      replace hleT (i : E.I₀) : ∃ (F : J.ZeroHypercover (E.X i)),\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"line\": \"190\", \"text\": \"        rw [mem_iff_exists_zeroHypercover] at hR'\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"line\": \"217\", \"text\": \"lemma PreZeroHypercover.isSheafFor_iff_of_iso {F : Cᵒᵖ ⥤ Type*} {S : C}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Hypercover.IsSheaf\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"line\": \"36\", \"text\": \"* `Functor.PreservesOneHypercovers`: a type-class expressing that a functor preserves\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"line\": \"37\", \"text\": \"  1-hypercovers of a certain size\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercovers and flat scheme morphisms do not provide unbounded derived quasi-coherent hyperdescent; the sheaf pushforward equivalence requires equivalent sites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-negative-ext-hyperdescent",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site.",
+   "via": [
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-face-total-qcoh-equivalence",
+  "worker": "stage1",
+  "summary": "Q82 checked the face-only adaptation of 0DHF. Kept the statement, proved weak Serre closure and derived cartesian characterization, checked all five unbounded criterion hypotheses with affine bound zero, and isolated three strictly smaller statement-only inputs. Reused space quasi-coherent closure, affine etale vanishing and resolution nodes. The existing exact evaluation left adjoint makes the component cohomology comparison a short resolution argument, so no new comparison node is needed.",
+  "blueprint": "Historical ancestry names det-thm-sf-ctf-stability-direct-images proof (3), through the existing derived-duality and hyperdescent chain. The current blueprint proof (3) supplies no face-total theorem; this split supplies the local supporting input on that existing chain. tools/blueprint_refs.py ancestor reports None because lem-sfb-admissible-direct-image was created for a module rather than a DAG node; preserve that ancestry rather than invent a blueprint id.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem. Added by the reviewer for the localized-site cohomology bridge of step 5."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem. Added by the reviewer for the localized-site cohomology bridge of step 5."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+    "why": "Generic ringed-site, quasi-coherent chart, affine cohomology or resolution input used as stated; the unit does not itself supply this supporting theorem. Added by the reviewer for the localized-site cohomology bridge of step 5."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective",
+  "def-sfb-right-derived-functor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-be386be69",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-be386be69 (reviewer sub-agent of L); spot-checked: I read Stacks 0DHF and its proof (Ad 1–5), 0DHD, 0DHE, 0D7V and its supporting lemmas (equivalence-bounded, map-version-one, bounded-in-image-*), and 0D6R. The item statement is unchanged from the base (the landed Q80 FIX text), and steps 1–3 and 5–6 follow the 0DHF structure correctly. New criterion node: this is 0D7V+0D6R with 'f flat' replaced by 'f^* exact'. That is true, because the Stacks proofs use flatness only for exactness of f^*. Face heart-descent and heart-derived-unit: both are true, since face-cartesian systems force the degeneracy transitions via d∘s=id and the semisimplicial alternating-face complex computes the same cohomology. I tested the constant hypercover with c(α)=λ^{n−m}; it is a coboundary. Both are strictly smaller than the item (criterion hypotheses (2) and (3)), and grep found no duplicates. Fault C3/C4 in step 4: it applied lem-sc-etale-affine-qcoherent (H^q of an affine scheme's own small étale site) directly to H^p on the enlarged site of U_n at V, without the localized-site bridge, and it used enough injectives uncited. FIX: step 4 is split into 4 (affine basis; Grothendieck ⇒ enough injectives via lem-sp-grothendieck-enough-injectives; e_n comparison) and 5 (lem-pe-ringed-site-derived-evaluation-slice; enlarged-model localization C_V≅C_W/V with restriction = v^*; lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence; topos equivalence with V_et; pullback qcoh; Zariski/étale equivalence; affine vanishing, bound 0). Old step 5 now says 'steps 4–5'; proof_deps = union of uses; 3 tool_uses entries added; there is no cycle. Batch-5 flags: the def-trf definitions, the enlarged site model, the 03DX Zariski/étale comparison, and the sfb nodes that reach def-trf-algebraic-space only through that definition are general inputs, not trace-formula or Poincaré steps, so they are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfFaceTotalQCohEquivalence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fppf_face_total_qcoh_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fppfFaceSite",
+   "AlgebraicGeometry.AlgebraicSpace.fppfFaceSpace",
+   "AlgebraicGeometry.AlgebraicSpace.fppfFaceMap",
+   "AlgebraicGeometry.AlgebraicSpace.FppfFaceTotalModel",
+   "AlgebraicGeometry.AlgebraicSpace.FppfFaceTotalModel.qcoh",
+   "AlgebraicGeometry.AlgebraicSpace.FppfFaceTotalModel.derivedQCoh",
+   "AlgebraicGeometry.AlgebraicSpace.fppfFaceRightComparison",
+   "AlgebraicGeometry.AlgebraicSpace.fppf_face_total_qcoh_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfFaceTotalQCohEquivalence.lean",
+  "statement": "theorem fppf_face_total_qcoh_equivalence {X : AlgebraicSpace S} (U : SimplicialObject (Over X)) (hU : IsSpaceFppfHypercover U) : Nonempty (FppfFaceTotalModel U) ∧ ∀ M : FppfFaceTotalModel U, M.qcoh.IsClosedUnderKernels ∧ M.qcoh.IsClosedUnderCokernels ∧ M.qcoh.IsClosedUnderExtensions ∧ M.derivedQCoh.IsTriangulated ∧ (DerivedCategory.homologyProperty (SheafOfModules.isQuasicoherent (fppfFaceSite X).rings)).IsTriangulated ∧ (∀ B : (M.rings.total M.sheaf).D, M.derivedQCoh B ↔ M.presentation.IsCartesian B ∧ ∀ i : SemiSimplexCategoryᵒᵖ, (DerivedCategory.homologyProperty (SheafOfModules.isQuasicoherent (M.rings.fibre i).rings)) ((M.presentation.evaluation i).derived.obj B)) ∧ (PreservesFiniteLimits M.totalAugmentation.pullback.ordinary ∧ PreservesFiniteColimits M.totalAugmentation.pullback.ordinary) ∧ ∃ (R : (M.rings.total M.sheaf).D ⥤ (fppfFaceSite X).D) (β : M.totalAugmentation.map.modules.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ R), R.IsRightDerivedFunctor β (HomotopyCategory.quasiIso (M.rings.total M.sheaf).modules (ComplexShape.up ℤ)) ∧ (∀ I : CochainComplex (M.rings.total M.sheaf).modules ℤ, I.IsKInjective → IsIso (fppfFaceRightComparison M.totalAugmentation.map.modules R β I)) ∧ ∃ a : M.totalAugmentation.pullback.derived ⊣ R, (∀ (P : CochainComplex (fppfFaceSite X).modules ℤ) (I : CochainComplex (M.rings.total M.sheaf).modules ℤ), (fppfFaceSite X).flat P → I.IsKInjective → ∀ f : (M.totalAugmentation.pullback.ordinary.mapHomologicalComplex (ComplexShape.up ℤ)).obj P ⟶ I, a.homEquiv _ _ (M.totalAugmentation.pullback.alpha P ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((M.totalAugmentation.pullback.adjunction.mapHomologicalComplex (ComplexShape.up ℤ)).homEquiv P I f) ≫ fppfFaceRightComparison M.totalAugmentation.map.modules R β I) ∧ (∀ K : (fppfFaceSite X).D, DerivedCategory.homologyProperty (SheafOfModules.isQuasicoherent (fppfFaceSite X).rings) K → M.derivedQCoh (M.totalAugmentation.pullback.derived.obj K) ∧ IsIso (a.unit.app K)) ∧ (∀ B : (M.rings.total M.sheaf).D, M.derivedQCoh B → DerivedCategory.homologyProperty (SheafOfModules.isQuasicoherent (fppfFaceSite X).rings) (R.obj B) ∧ IsIso (a.counit.app B)) ∧ ∃ (_ : M.totalAugmentation.pullback.derived.CommShift ℤ) (_ : R.CommShift ℤ), M.totalAugmentation.pullback.derived.IsTriangulated ∧ R.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The actual enlarged sites and their explicit coefficient lift are identified with the recorded semisimplicial total-category presentation by a normalized model; the theorem supplies a model and applies to every model. Projection-normalized comparisons and uniquely chart-normalized structural maps fix the geometric data. The sole postponed theorem states weak Serre closure, the cartesian/cohomology criterion, preservation of quasi-coherent cohomology, and canonical derived unit/counit isomorphisms, with the K-injective and K-flat representative adjunction formula. No boundedness, separation, quasi-compactness or degeneracy-flatness assumption. Two already landed definition nodes are added for the exact hypercover predicate and explicit coefficient transport. Reviewer FIX: the augmentation direct-image comparison is pinned to enlargedDirectCompositionIso itself (the conjugate of the inverse-image comparison has type direct(face) ⋙ direct(u_j) ≅ direct(u_i)); the delivered .symm had the reversed type, which made the model uninhabitable.",
+  "fixed_by": "NT-stage2-cc-5ca1698a9"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ca1698a9",
+  "group": "NW",
+  "result": "fix",
+  "note": "H3: in FppfFaceTotalModel.augmentationComparison, the conjugate of the augmentation comparison has type dir(face a) ⋙ dir(u_j) ≅ dir(u_i), but the pinned (enlargedDirectCompositionIso f u_j _).symm has the reversed type. HEq type-checks across unequal types, so the model is uninhabitable in practice and the clause Nonempty (FppfFaceTotalModel U) is unprovable. FIX: drop .symm (one token); fixed module compiles clean (19.6 s, exit 0); lean-record.json keeps the delivered statement verbatim; refit_record OK. All clauses otherwise checked against the node and Stacks 0DHF/0D7M: IsSpaceFppfHypercover hypothesis with no degeneracy flatness; enlarged sites with ULift ring; unitor, compositor, covering and ring pins in the right directions; qcoh is Mathlib isQuasicoherent as in def-trf-space-quasi-coherent-module; weak Serre closure; cartesian iff; universal right-derived R with K-injective computation; adjunction pinned on flat K-flat and K-injective representatives; unit and counit IsIso; triangulated clauses. No duplicates, no hollow defs, docstrings OK. Advisory: chartNormalizedUnderlyingMap's owner def-trf-enlarged-chart-normalized-ring-data is reached only transitively through lem-trf-space-enlarged-ringed-composition-localization, not as a direct stmt_dep."
+ }
+}

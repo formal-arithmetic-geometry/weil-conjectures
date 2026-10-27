@@ -1,0 +1,125 @@
+{
+ "id": "def-sf-open-tensor-scalar-unit-data",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "kind": "definition",
+ "title": "Concrete scalar-unit augmentation presentation data",
+ "statement": "On a Grothendieck site with sheafification, a sheaf R of commutative rings and V in the site, define the actual module extension, scalar extension and scalar restriction functors on unbounded complexes, their total-tensor source and slice source, their coefficient-level targets, and their pure-section generators. StrictTotals records the prescribed two-coefficient transition formulas and laws. Augmentation records the normalized ordinary and coefficient comparisons, scalar-unit maps, augmentation square and its functorial localization. These are exactly the presentation definitions of lem-sf-open-tensor-scalar-unit-augmentation; all names, universes, types, and construction bodies are preserved.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03DI and 0E8I; sites-cohomology.tex Tag 0GL1. Extracted construction from lem-sf-open-tensor-scalar-unit-augmentation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sf-cbc-slice-tensor-generator-coherence",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of sheaves of modules commutes with tensor scalar unit maps in strict coefficient towers of complexes",
+   "results": "Eight hits including SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul and ModuleCat.extendRestrictScalarsAdj_unit_app_apply; no strict open total-tensor tower construction.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the sheaf tensor universal properties and totalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "Ten hits on PresheafOfModulesOfCommRing tensor definitions and naturality; no strict scalar-unit tower or normalized open total comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match. Existing project module comparisons are the relevant inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison|scalarUnits|StrictTotals|targetLevel|sliceTargetLevel",
+   "results": "Mathlib search for mapBifunctorComparison returned no hits. Project rg found generic mapBifunctorComparison in the adopted library and the StrictTotals/targetLevel declarations only in the assigned module.",
+   "date": "2026-10-25",
+   "verdict": "Generic totalization can lift natural module pairings; the two required strict constructions are not already stated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenTensorScalarUnitAugmentation",
+  "date": "2026-10-25",
+  "group": "W9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-tensor-scalar-unit-augmentation",
+   "place": "The scalar-unit construction and normalized comparison steps; unchanged unit route."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenTensorScalarUnitData",
+  "file": "lean/Sheaf/Algebra/Homology/OpenTensorScalarUnitData.lean",
+  "declaration": "SheafOfModules.OpenTensorAugmentation.Augmentation",
+  "declarations": [
+   "SheafOfModules.OpenTensorAugmentation.extensionAdditive",
+   "SheafOfModules.OpenTensorAugmentation.scalarComplex",
+   "SheafOfModules.OpenTensorAugmentation.scalarRestriction",
+   "SheafOfModules.OpenTensorAugmentation.Inputs",
+   "SheafOfModules.OpenTensorAugmentation.source",
+   "SheafOfModules.OpenTensorAugmentation.sliceSource",
+   "SheafOfModules.OpenTensorAugmentation.targetLevel",
+   "SheafOfModules.OpenTensorAugmentation.sliceTargetLevel",
+   "SheafOfModules.OpenTensorAugmentation.extendTower",
+   "SheafOfModules.OpenTensorAugmentation.totalSection",
+   "SheafOfModules.OpenTensorAugmentation.sourceSection",
+   "SheafOfModules.OpenTensorAugmentation.targetSection",
+   "SheafOfModules.OpenTensorAugmentation.sliceTargetSection",
+   "SheafOfModules.OpenTensorAugmentation.sliceSourceSection",
+   "SheafOfModules.OpenTensorAugmentation.StrictTotals",
+   "SheafOfModules.OpenTensorAugmentation.StrictTotals.T",
+   "SheafOfModules.OpenTensorAugmentation.StrictTotals.S",
+   "SheafOfModules.OpenTensorAugmentation.extendInputs",
+   "SheafOfModules.OpenTensorAugmentation.lowerRoute",
+   "SheafOfModules.OpenTensorAugmentation.atInput",
+   "SheafOfModules.OpenTensorAugmentation.Augmentation"
+  ],
+  "statement": "structure Augmentation (A : AlgebraTowers.{c, v, r} R)",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e7691",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261024T191653-L-461485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e7691",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261024T191653-L-461485",
+  "kind": "interface",
+  "note": "independent cc review: item augmentation_exists proof vs node lem-sf-open-tensor-scalar-unit-augmentation; relocated OpenTensorScalarUnitData vs clone's OpenTensorScalarUnitAugmentation (diff: tags only); ScalarUnits/NormalizedComparison leaves vs old Augmentation fields and their new nodes"
+ }
+}

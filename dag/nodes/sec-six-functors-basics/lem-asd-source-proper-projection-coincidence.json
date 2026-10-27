@@ -1,0 +1,109 @@
+{
+ "id": "lem-asd-source-proper-projection-coincidence",
+ "kind": "statement",
+ "title": "Existing native proper projection-coincidence square",
+ "statement": "Let C be a Grothendieck abelian symmetric monoidal closed coefficient category admitting functorial flat resolutions and inverse image preserving flat objects. Equip C with a concrete structure whose forgetful functor reflects isomorphisms, preserves filtered colimits in the required universe and admits composition with sheaves on every small etale site. Let f:X to Y be proper, K an arbitrary unbounded C-valued etale complex on X, and L such a complex on Y. Write T for derived tensor, U for derived inverse image, F! for the chosen-compactification direct image with compact support, F* for ordinary derived direct image, c:F! isomorphic to F* for canonical proper coincidence, and p!,p* for the two projection maps constructed from adjunction counits and extension by zero. Then p!(K,L) followed by c at T(K,U L) equals T(c at K,1 at L) followed by p*(K,L). This is the existing, fully proved native source lemma, not the later complete six-functor coherence package. Every operation and map in this statement is its native constructed map.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.md",
+  "place": "Proper identification clause; existing native source proof ProjectionFormulaCoherence.lean:111-125."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For the chosen compactification c of f, expand the canonical proper comparison. Its hom is the direct-image composition comparison after the forget-supports map. The explicit equations rightDerivedLowerShriekIsoRightDerivedLowerStar_hom and rightDerivedLowerShriekToLowerStarComp_comp_eq identify it with compactificationForgetSupports at c.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The compactification projection is the composite proper direct-image projection and the open-immersion tensor comparison. The latter intertwines extension by zero with ordinary direct image. Apply the elementary composition law for counit projection maps to the two inverse-image/direct-image adjunctions of c.i and c.g and their composite f. The open-factor equality is derivedOpenImmersionLowerShriekProjectionIso_inv_comp_toLowerStar; the ordinary composite equality is rightDerivedLowerStarProjectionMap_comp with the canonical pullback composition comparison. Naturality and associativity give the forget-supports projection square. Substitute the identification of step 1. These are the complete existing source proofs in LowerShriekProjectionProper.lean:103-118 and ProjectionFormulaCoherence.lean:111-125; they use no projective-line adjunction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.md",
+  "place": "Existing source proof of the proper-identification clause, independently checked by #print axioms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The proper compact support projection map agrees with the direct image projection map through canonical proper coincidence",
+   "results": "isProperMap_snd_of_compactSpace; isProperMap_fst_of_compactSpace; CompactlySupportedContinuousMap.instFunLike; ContDiffMapSupportedIn.coe_of_support_subset; CompactlySupportedContinuousMap.noConfusion; ContDiffMapSupportedIn.toFun_eq_coe; ContDiffMapSupportedIn.Simps.coe; IsProperMap.isCompact_preimage",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of proper coincidence with the compact support and ordinary derived projection transformations",
+   "results": "TestFunction.coe_ofSupportedInCLM; Profinite.NobelingProof.projRestricts_eq_comp; CompactlySupportedContinuousMap.compLinearMap; TestFunction.coe_ofSupportedInLM; CompactlySupportedContinuousMap.comp; Profinite.IndexFunctor.map_comp_π_app; HasCompactSupport.fderiv_apply; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceAdjunction",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Proper projection compatibility used in the finite counit calculation.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/ProjectionFormulaCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar",
+  "statement": "theorem projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar (f : X ⟶ Y)\n    [IsProper f] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))\n    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :\n    ((projectionMap A f).app K).app L ≫\n        (rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app\n          (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) =\n      ((-⊗ᴸ-(Y)[A]).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar A f).hom.app K)).app L ≫\n        ((rightDerivedLowerStarProjectionMap A f).app K).app L",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26",
+  "note": "Existing source-library leaf: checked with #print axioms on 2026-10-26; exactly propext, Classical.choice and Quot.sound, no sorryAx. No Lean source file or declaration is changed or added for this node. The native source module does not import the assigned adjunction module."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,188 @@
+{
+ "id": "lem-route-boundary-vanishing-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-composition-interchange",
+   "via": [
+    "lem-sfb-proper-open-boundary-zero"
+   ],
+   "place": "Proof (3): the finite-coefficient instance of c^*Rr_*K ≅ R(r_c)_*a^*K = 0 when the pulled-back input vanishes; generalized to the arbitrary c quantified by the recorded Lean BoundaryVanishing predicate."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "boundaryVanishing_finite (statement)",
+ "statement": "Let $\\ell$ be prime, let $A$ be a finite commutative ring with $\\ell^n\\cdot1_A=0$ for some $n\\in\\mathbf N$, and let $k$ be a field of prime characteristic $p\\ne\\ell$ [def-weil-field]. Let $W$ and $\\overline Y$ be separated finite-type $k$-schemes and $r:W\\to\\overline Y$ a proper $k$-morphism [def-weil-finite-type-morphism; def-weil-proper-morphism]. Let $Z$ be any scheme and $c:Z\\to\\overline Y$ any morphism; no finiteness, separation, reducedness or immersion hypothesis is imposed on $Z$ or $c$. Put $T=W\\times_{\\overline Y}Z$, with projections $a:T\\to W$ and $r_Z:T\\to Z$ [def-pc-fibre-product].\n\nLet $\\Lambda$ be the sheafification of the constant ring presheaf with value $A$ on the profinite point [sk-def-sfb-condensed-ring; def-weil-pbc-constant-sheaf], and put $\\Lambda_S=p_S^*\\Lambda$ on every scheme $S$ [sk-def-sfb-pulled-back-coefficients]. Work in the ordinary unbounded derived categories of internal $\\Lambda_S$-modules, with total derived pullback and pushforward [sk-def-sfb-module-derived-pushpull]. For every $K\\in\\Dctf(W,\\Lambda)$ in the finite constant-local-model convention [det-def-sfb-constructible-tor-amplitude], assume also bounded constructibility in the general ring-object convention [sk-def-sfb-bounded-constructible]. Then\n$$\nLa^*K\\simeq0\\quad\\Longrightarrow\\quad Lc^*Rr_*K\\simeq0\n$$\nin $D(\\Mod_{\\Lambda_Z})$. This is the property denoted $\\operatorname{BoundaryVanishing}(\\Lambda,r,c)$ in the recorded Lean declaration; $\\Lambda$ is exactly its sheafified constant ring $(\\operatorname{finiteProperCoefficientRing} A).X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+  "place": "lem-sfb-proper-open-boundary-zero: the Lean of this node (declared in its module Sheaf.Paper.ProperOpenBoundaryZero) reaches _private.Sheaf.Paper.ProperOpenBoundaryZero.0.AlgebraicGeometry.ProEtale.CondensedRing.boundaryVanishing_finite, a sorry on the sorry route of batch3, batch4 with no node; Lean: SHEAF file lean/Sheaf/Paper/ProperOpenBoundaryZero.lean, declaration _private.Sheaf.Paper.ProperOpenBoundaryZero.0.AlgebraicGeometry.ProEtale.CondensedRing.boundaryVanishing_finite (module Sheaf.Paper.ProperOpenBoundaryZero, lines 499-511, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Choose $n$ as in the hypothesis. For every $x\\in A$, $\\ell^n x=(\\ell^n1_A)x=0$, so the coefficient ring is killed by a power of $\\ell$, including when $A$ is the zero ring and $n=0$. By [def-pc-fibre-product], the chosen projections satisfy $r\\circ a=c\\circ r_Z$ and exhibit $T$ as the pullback. Use this square with $g=c$, $g'=a$, $p=r$, and $p'=r_Z$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), finite-coefficient proper-base-change and zero-object calculation"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [det-thm-sfb-proper-base-change-finite] to this square and $K$. Its proper morphism $r$ is between separated finite-type $k$-schemes; $A$ is finite and killed by a power of $\\ell$ by step 1, and $K$ belongs to $\\Dctf(W,\\Lambda)$. Clause (2) allows arbitrary $g=c$; it requires no standing-scheme hypothesis on the new base $Z$. The canonical exchange is therefore invertible:\n$$\\beta_K:Lc^*Rr_*K\\xrightarrow{\\sim}R(r_Z)_*La^*K.$$\nThe exchange meant here is precisely the unit-square-counit mate of [def-sfb-finite-proper-exchange], in the internal module categories for the sheafified constant coefficient ring. The functors are the total derived composites of [sk-def-sfb-module-derived-pushpull], so no switch to derived abelian sheaves or a different coefficient model occurs. The extra general bounded-constructibility hypothesis is retained but is not needed for this application.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-finite",
+    "def-sfb-finite-proper-exchange",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), finite-coefficient proper-base-change and zero-object calculation"
+   }
+  },
+  {
+   "text": "Set $N=La^*K$, which is zero by hypothesis. Apply [def-sfb-module-derived-pushpull-adjunction] to $r_Z:T\\to Z$. For every $M\\in D(\\Mod_{\\Lambda_Z})$ its adjunction gives\n$$\\operatorname{Hom}(M,R(r_Z)_*N)\\cong\\operatorname{Hom}(Lr_Z^*M,N).$$\nThe right side is a singleton since $N$ is zero. Taking $M=R(r_Z)_*N$ gives $\\mathrm{id}=0$ on that object. Every map into or out of it is consequently zero, by composition with its identity; hence it is a zero object. Conjugating its zero identity by the isomorphism $\\beta_K$ of step 2 gives zero identity on $Lc^*Rr_*K$, proving the claimed vanishing.",
+   "uses": [
+    "def-sfb-module-derived-pushpull-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+    "place": "Proof (3), finite-coefficient proper-base-change and zero-object calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "det-thm-sfb-proper-base-change-finite",
+  "def-sfb-finite-proper-exchange",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-module-derived-pushpull-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md",
+  "place": "Proof (3), finite-coefficient specialization; explicit adjunction proof of zero preservation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'boundaryVanishing_finite' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|[Bb]oundary[Vv]anishing",
+   "results": "Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/AffineSpace.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/Cover/Directed.lean; Mathlib/AlgebraicGeometry/Cover/Directed.lean; Mathlib/AlgebraicGeometry/Cover/Directed.lean (25 hits; inspected returned types: geometry of base change, underived module pushforward or general zero-object facts, none states this derived finite-coefficient vanishing)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper base change for finite torsion coefficient sheaves and vanishing of derived pushforward after pullback",
+   "results": "IsBaseChange.finsuppPow; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk; IsBaseChange.finitePow; AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget (8 hits; inspected returned types: geometry of base change, underived module pushforward or general zero-object facts, none states this derived finite-coefficient vanishing)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.IsZero",
+   "results": "CategoryTheory.Functor.isZero; CategoryTheory.Limits.IsZero.obj; CategoryTheory.Functor.isZero_iff; CategoryTheory.Limits.IsZero.of_full_of_faithful_of_isZero; CategoryTheory.Functor.zero_obj; CategoryTheory.Limits.IsColimit.isZero_pt; CategoryTheory.Limits.IsColimit.ofIsZero; CategoryTheory.Limits.IsLimit.isZero_pt (12 hits; inspected returned types: geometry of base change, underived module pushforward or general zero-object facts, none states this derived finite-coefficient vanishing)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change implies that restriction of a proper derived direct image is zero if the pullback to the fibre product is zero, for finite torsion coefficients",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc (8 hits; inspected returned types: geometry of base change, underived module pushforward or general zero-object facts, none states this derived finite-coefficient vanishing)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*proper|BoundaryVanishing",
+   "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/Affine.lean; Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/Small.lean; Mathlib/AlgebraicGeometry/LimitsOver.lean (25 hits; inspected returned types: geometry of base change, underived module pushforward or general zero-object facts, none states this derived finite-coefficient vanishing)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived proper direct image with finite coefficients commutes with arbitrary inverse image on constructible complexes",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; SheafOfModules.pushforwardComp_inv_app_val_app; AlgebraicGeometry.Scheme.Hom.isConstructible_image; SheafOfModules.pushforwardComp; CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app; SheafOfModules.pushforward_assoc; CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app (8 hits; inspected returned types: geometry of base change, underived module pushforward or general zero-object facts, none states this derived finite-coefficient vanishing)",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sfb-proper-open-boundary-zero",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-comp-composition",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProperOpenBoundaryZero",
+  "file": "lean/Sheaf/Paper/ProperOpenBoundaryZero.lean",
+  "declaration": "_private.Sheaf.Paper.ProperOpenBoundaryZero.0.AlgebraicGeometry.ProEtale.CondensedRing.boundaryVanishing_finite",
+  "declarations": [
+   "_private.Sheaf.Paper.ProperOpenBoundaryZero.0.AlgebraicGeometry.ProEtale.CondensedRing.boundaryVanishing_finite"
+  ],
+  "statement": "private theorem boundaryVanishing_finite\n    (A : Type u) [CommRing A] [Finite A]\n    (ℓ : ℕ) [Fact ℓ.Prime] (hA : ∃ n : ℕ, (ℓ ^ n) • (1 : A) = 0)\n    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {W Ybar : Over (Spec (.of k))}\n    [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]\n    [LocallyOfFiniteType Ybar.hom] [QuasiCompact Ybar.hom] [IsSeparated Ybar.hom]\n    (r : W ⟶ Ybar) [IsProper r.left] (Z : Scheme.{u}) (c : Z ⟶ Ybar.left) :\n    BoundaryVanishing (finiteProperCoefficientRing A).X r.left c := by\n  -- REWORK: the kernel check of this proof hits a deterministic timeout\n  -- (red global build 2026-10-25, line 499); restore the delivered proof\n  -- with a kernel-cheap `asIso β`.\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-boundary-vanishing-finite",
+  "worker": "stage1",
+  "summary": "Expanded the provisional signature and private BoundaryVanishing definition in words, preserving all hypotheses and arbitrary Z,c. Reused finite proper base change and the derived adjunction; wrote the zero-object argument explicitly, with no new nodes. Verified the finite coefficient and internal-module derived-functor interfaces against their current source declarations.",
+  "blueprint": "det-sf-comp-composition-interchange proof (3): the finite coefficient base-change isomorphism and consequent vanishing, before open-closed detection or localizing extension."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NK-1d9000823",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-1d9000823 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit containing the item JSON and the report. It adds no new nodes and is not a re-split. Statement: I checked it hypothesis by hypothesis against the Lean definition BoundaryVanishing (ProperOpenBoundaryZero.lean:87-95) and the theorem boundaryVanishing_finite (lines 499-511). The matches are: A finite and killed by ell^n with n=0 allowed; char k a prime p different from ell; W and Ybar separated of finite type over k; r a proper k-morphism; Z and c arbitrary; K a constant-model Dctf object that is also bounded constructible; a the first projection of W x_Ybar Z. The coefficient Lambda is the sheafified constant ring finiteProperCoefficientRing A, and the pushforward and pullback are the total derived composites (CondensedModuleDerivedPushpull.lean:40-57). Edge cases A=0, K=0, empty Z or T, and c=id all hold. Step 1 builds the cartesian square from def-pc-fibre-product and checks the ell-power annihilation; it is elementary and correct. Step 2 uses clause (2) of det-thm-sfb-proper-base-change-finite. Its statement puts no condition on the new base Y', its proof step 4 says no qcqs assumption is imposed on X' or Y', and its Lean finiteProperBaseChange (lines 620-636) quantifies over arbitrary schemes X', Y' with the same coefficient and input class. So taking c arbitrary is legitimate, and the exchange is the unit-square-counit mate (def-sfb-finite-proper-exchange) in the internal-module categories. Step 3: the derived adjunction holds for every morphism, so a right adjoint sends the zero object to a zero object; the step is elementary and correct. proof_deps equals the union of the uses. No duplicate exists: the parent's statement is different and the item is strictly smaller than the base-change theorem. Mathlib searches were recorded for grep, LeanSearch, LeanFinder and Loogle. Accepted tool_use: det-thm-sfb-proper-base-change-finite, used as black-box finite proper base change; the parent lem-sfb-proper-open-boundary-zero already carries this tool_use. Batch-5 flags: (1) det-thm-sfb-proper-base-change-finite is a general six-functor tool, neither the trace formula nor Poincare duality nor a step of their proofs. It reaches sec-trace-formula only through a generic derived-monoidal lemma, and the parent already cites it. (2) def-sfb-module-derived-pushpull-adjunction is a general definition. Both are genuinely outside the assumed statements, so I accepted them. No fixes were written."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T071230-L-153722",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundaryVanishing_finite"
+  ],
+  "sorry_after": []
+ }
+}

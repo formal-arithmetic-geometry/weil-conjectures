@@ -12,6 +12,7 @@ import all Sheaf.CategoryTheory.FlatRestrictionDerivedMate
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import all Sheaf.Paper.StrictQuotientScalarBalancing
 import all Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionInverseImage
 
 /-! # Ordinary normalized adjoints on the transported pro-etale model
 

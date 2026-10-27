@@ -161,7 +161,9 @@ theorem isSheaf_lisseContinuousCommRingPresheafUniverses (X : Scheme.{u}) (T : T
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (Scheme.ProEt.topology X)
       (lisseContinuousCommRingPresheafUniverses X T) := by
-  sorry
+  exact Presheaf.isSheaf_of_isSheaf_comp _ _
+    (forget₂ CommRingCat.{max (u + 1) v} RingCat.{max (u + 1) v})
+    (isSheaf_continuousMapRingPresheaf X T)
 
 /-- The continuous commutative-ring sheaf in the maximum of the required universes.
 Source: Bhatt--Scholze, Definition 6.8.1.

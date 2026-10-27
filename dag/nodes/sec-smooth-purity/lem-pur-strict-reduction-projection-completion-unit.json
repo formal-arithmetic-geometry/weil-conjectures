@@ -1,0 +1,169 @@
+{
+ "id": "lem-pur-strict-reduction-projection-completion-unit",
+ "kind": "statement",
+ "title": "The strict projection extends the fixed completion unit",
+ "statement": "Let X,Y be small sites, f their geometric morphism with its algebraic constant coefficient lift, A a commutative ring and I an ideal [def-pur-adic-site-strict-quotient-interface]. For every F in the ordinary unbounded derived module category on X, let t be towerProjection and let a be directLimitIso. Then eta_Y(Rf_*F), followed by Rlim_Y(t_F) and a_(reduction_X F)^(-1), equals Rf_*(eta_X(F)). Here eta is the fixed quotient-tower completion unit [def-pur-strict-quotient-completion-data]. This is an equality of canonical morphisms before any completeness or perfectness assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Equation 0B56 (equation-projection-formula-map), Tags 0941 (lemma-derived-limit-is-ok) and 0A07 (lemma-Rf-commutes-with-Rlim); augmentation and adjunction-unit normalization."
+ },
+ "stmt_deps": [
+  "def-pur-adic-site-strict-quotient-interface",
+  "def-pur-strict-quotient-completion-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the derived quotient augmentation j as the adjunction transpose of the fixed completion unit under the constant/derived-limit adjunction. Thus the constant/limit unit followed by Rlim(j) equals the completion unit by the hom-equivalence inverse law. On a flat-term K-flat representative, the normalized delta adjunction and quotient-presentation laws identify its transpose with the ordinary cochain augmentation: use ordinaryUnit projections, ordinary_unit_factorization and naturality of limitComparison. Injectivity of the hom equivalence gives the representative factorization.",
+   "uses": [
+    "def-pur-strict-quotient-completion-data",
+    "lem-pur-strict-quotient-diagonal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0941 and 099M; ordinary limit unit followed by quotient insertions."
+   }
+  },
+  {
+   "text": "The moduleReductionPullIso insertion equation and naturality of pullInsertion prove the ordinary augmentation square. Descend this square on a single flat-term K-flat representative using the normalized full-cochain reductionPullIso equation; then use naturality to transport to every derived object. Inverse image along the constant coefficient ring isomorphism is invertible and natural, by scalarExtensionRingIso. This uses no finite-evaluation conclusion or extra Noetherian hypothesis. The full cochain square uses mapComplexSquare for the constant square and the published moduleReductionPullComplexIso for the reduction square.",
+   "uses": [
+    "def-pur-constant-coefficient-inverse-image-data",
+    "def-pur-adic-site-strict-quotient-interface",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "def-sf-complex-functor-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 and 06YY; pure tensors and universal derived comparisons."
+   }
+  },
+  {
+   "text": "Taking adjunction mates gives the strict projection/augmentation square. The unit mate identity and the definition of directLimitIso as the iterated adjunction conjugate give its limit specialization on the constant tower. Naturality moves the X augmentation through directLimitIso; cancel the inverse pair. The result is Rlim(towerProjection) followed by directLimitIso inverse, composed with the Y completion unit, equal to pushforward of the X completion unit. No perfectness or completeness is used. This is the explicit categorical calculation of Mathlib unit_mateEquiv and iterated_mateEquiv_conjugateEquiv, not an application of the general ringed tensor projection theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Equation 0B56 and Tag 0A07; adjunction units, mates and naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-site-strict-quotient-interface",
+  "def-pur-constant-coefficient-inverse-image-data",
+  "def-pur-strict-quotient-completion-data",
+  "def-sf-complex-functor-square",
+  "lem-pur-strict-quotient-diagonal-normalization",
+  "lem-weil-sheaf-scalar-extension-ring-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Adjunction transpose construction of the quotient augmentation; representative calculation using ordinary quotient insertions; strict augmentation square; Mathlib unit-mate and iterated-mate/conjugate identities followed by limit naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with direct image for perfect constant coefficients, compatibly with completion units",
+   "results": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; Derivation.compAlgebraMapL; Algebra.Extension.CotangentSpace.map; Derivation.compAlgebraMap; AdicCompletion.ofTensorProduct_naturality; ModuleCat.extendScalarsComp; AdicCompletion.instIsScalarTower; AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(app|comp)",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*projection|projection.*quotient|augmentation.*mate",
+   "results": "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean; Mathlib/Topology/FiberBundle/Basic.lean; Mathlib/Topology/Inseparable.lean; Mathlib/Topology/DiscreteQuotient.lean; Mathlib/Topology/Order/ProjIcc.lean; Mathlib/RepresentationTheory/Rep/Basic.lean; Mathlib/Analysis/Normed/Group/Quotient.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction mate of reduction by perfect quotient coefficients on a small ringed site is an isomorphism after evaluating a strict tower",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.mateEquiv; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous; PresheafOfModules.sheafificationAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_mateEquiv\"",
+   "results": "CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex_map_f|mapHomologicalComplex_obj_X",
+   "results": "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PerfectQuotientExchangeNormalization",
+  "date": "2026-10-24",
+  "group": "B7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; coefficient-compatibility clause (7) of sk-thm-sf-compatibility, through lem-pur-perfect-quotient-exchange-normalization: The strict projection extends the fixed completion unit.",
+   "via": [
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictReductionProjectionCompletionUnit",
+  "file": "lean/Sheaf/Paper/StrictReductionProjectionCompletionUnit.lean",
+  "declaration": "CategoryTheory.AdicSites.strictReductionProjectionCompletionUnit",
+  "statement": "theorem strictReductionProjectionCompletionUnit (F : X.derived A) :\n    (Y.unit A I).app ((f.push A).obj F) ≫\n        (Y.rlim A).map (f.towerProjection A I F) ≫\n        (f.directLimitIso A).inv.app ((X.reduction A I).obj F) =\n      (f.push A).map ((X.unit A I).app F)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7bed",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122541-L-1784662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7bed",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122541-L-1784662",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (byte-identical); relocated interface block vs clone (verbatim but for blueprint tags); 3 new sorried statements vs item clauses/nodes (strictly smaller, true); node proof fields vs Lean proof"
+ }
+}

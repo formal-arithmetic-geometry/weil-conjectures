@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-filtered-condensed-canonical-comparisons",
+ "kind": "statement",
+ "title": "Canonical bounded-constructible scalar comparisons",
+ "statement": "Fix a prime $\\ell$, a field $k$ of positive prime characteristic different from $\\ell$, separated finite-type $k$-schemes $X,Y$, a $k$-morphism $f:X\\to Y$, and a compactification $c$ [def-weil-pbc-scheme-conventions, def-weil-compactifications-refinements]. Write $\\mathcal C_H(T)$ and $\\mathcal C_\\Omega(T)$ for the bounded constructible condensed module-object categories and scalar functors $T^T_{H,H'}$, $T^T_{H,\\Omega}$ of [prop-weil-pbc-qbar-condensed-two-colimit], with $\\Omega=\\overline{\\mathbf Q}_\\ell$ carrying the finite-subextension-valued condensed coefficient ring. Write $P_H$ and $P_\\Omega$ for the fixed compact-support composites [lem-pur-compact-support-condensed-realization]. The data structures and displayed equations are [def-pur-filtered-condensed-representing-pair-data]. There exist comparison isomorphisms $s_{H,H'}:T^Y_{H,H'}P_H\\simeq P_{H'}T^X_{H,H'}$ for each finite inclusion, and $s_{H,\\Omega}:T^Y_{H,\\Omega}P_H\\simeq P_\\Omega T^X_{H,\\Omega}$ for each finite $H$. Under the recorded constructible inclusion isomorphisms their components are exactly the original condensedProjection mates. In Lean this is $\\exists s,\\ s.\\mathrm{IsCanonical}$. No representing pair is assumed or constructed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+  "place": "Filtered Hom-colimit display and final paragraph on descent of morphisms and relations; parent Steps 1--4."
+ },
+ "stmt_deps": [
+  "def-pur-filtered-condensed-representing-pair-data"
+ ],
+ "proof": [
+  {
+   "text": "for each finite inclusion and each inclusion into the closure, take the original\nproper/open projection mate. Its components on bounded constructible objects are\ninvertible by finiteProjection_isIso and omegaProjection_isIso. Conjugate through the\nrecorded inclusion compatibility isomorphisms, then lift the resulting transformation\nthrough the fully faithful constructible inclusion. Naturality follows from that of\nthe projection. Lift its inverse in the same way. Faithfulness proves the inverse\nidentities and the displayed normalization equations. This uses the finite-valued\nclosure ring throughout, including for an empty source scheme. If coefficient and scheme universes differ, lift the coefficient field to the scheme universe, transport the coefficient categories and projection mate along that ring equivalence, apply the realization projection theorem there, and transport invertibility back.",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-condensed-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-sp-qbar/sk-thm-sp-qbar.proof.md",
+  "place": "Filtered Hom-colimit display and final paragraph on descent of morphisms and relations; parent Steps 1--4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural Hom bijections determine isomorphism to a specified right adjoint",
+   "results": "8 hits including Adjunction.rightAdjointUniq, leftAdjointUniq, ofNatIsoRight and CoreHomEquiv.mk.inj.",
+   "date": "2026-10-25",
+   "verdict": "General adjunction facts handle the final transpose but do not supply finite-coefficient comparison or descent statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "12 hits including Adjunction.homEquiv, CoreHomEquiv and mkOfHomEquiv.",
+   "date": "2026-10-25",
+   "verdict": "These concern a supplied adjunction, not descent through the recorded coefficient categories."
+  },
+  {
+   "tool": "grep",
+   "query": "representableBy|homEquiv_eq",
+   "results": "25 hits, including Adjunction.representableBy and RepresentedBy. No coefficient descent theorem.",
+   "date": "2026-10-25",
+   "verdict": "No exact coefficient comparison/descent statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered descent of representing Hom bijections along finite coefficient scalar extensions",
+   "results": "8 hits: algHomEquivSigma, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv formulas, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, PresheafOfModules.restrictHomEquivOfIsLocallySurjective, AlgHom.extendScalars.",
+   "date": "2026-10-25",
+   "verdict": "No finite-coefficient constructible derived two-colimit descent result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FilteredCondensedRepresentingPair",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Filtered Hom-colimit display and final paragraph on descent of morphisms and relations; parent Steps 1--4.",
+   "via": [
+    "lem-pur-filtered-condensed-representing-pair",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FilteredCondensedCanonicalComparisons",
+  "file": "lean/Sheaf/Paper/FilteredCondensedCanonicalComparisons.lean",
+  "declaration": "WeilConjectures.FilteredCondensedRepresentingPair.canonical_scalar_comparisons",
+  "declarations": [
+   "WeilConjectures.FilteredCondensedRepresentingPair.canonical_scalar_comparisons"
+  ],
+  "statement": "theorem canonical_scalar_comparisons :\n    ∃ s : ScalarComparisons l k c, s.IsCanonical l k c",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6d2d5",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100852-L-3631318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6d2d5",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T100852-L-3631318",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone item file (verbatim move, tags only); item theorem statement vs original; 3 sorried split lemmas vs item's IsDescent/IsCanonical clauses (each implied, none a restatement); 5 direct importers compiled against delivered modules"
+ }
+}

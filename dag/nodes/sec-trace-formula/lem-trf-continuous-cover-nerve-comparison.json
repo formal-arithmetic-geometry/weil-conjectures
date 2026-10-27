@@ -1,0 +1,278 @@
+{
+ "id": "lem-trf-continuous-cover-nerve-comparison",
+ "kind": "statement",
+ "title": "Cover-local pullback preservation identifies the entire covering nerve",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology], with all objects, arrows and covering indices in the common universe [def-weil-size-convention], and let $u:\\mathcal C\\to\\mathcal D$ be a functor. Fix a covering $\\mathcal U=\\{f_t:U_t\\to U\\}_{t\\in T}$ of $\\mathcal C$. Assume that $u(\\mathcal U)=\\{u(f_t):u(U_t)\\to u(U)\\}_{t\\in T}$ is a covering of $\\mathcal D$ and that for every $t\\in T$ and every morphism $a:V\\to U$ the canonical map $$u(V\\times_U U_t)\\longrightarrow u(V)\\times_{u(U)}u(U_t)$$ is an isomorphism. No condition is imposed on other source coverings. Choose all tuple fibre products and their index maps for both families as in [def-weil-pbc-site-cech-complex]. For $n\\ge0$ and $\\mathbf t=(t_0,\\ldots,t_n)\\in T^{n+1}$ put $W_{\\mathbf t}=U_{t_0}\\times_U\\cdots\\times_U U_{t_n}$ and $P_{\\mathbf t}=u(U_{t_0})\\times_{u(U)}\\cdots\\times_{u(U)}u(U_{t_n})$. The canonical map $c_{\\mathbf t}:u(W_{\\mathbf t})\\to P_{\\mathbf t}$, characterized by $\\mathrm{pr}_k c_{\\mathbf t}=u(\\mathrm{pr}_k)$, is an isomorphism. For every map $\\alpha:\\{0,\\ldots,m\\}\\to\\{0,\\ldots,n\\}$, write $\\mathbf t\\alpha=(t_{\\alpha(0)},\\ldots,t_{\\alpha(m)})$, and let $\\alpha_W^*:W_{\\mathbf t}\\to W_{\\mathbf t\\alpha}$ and $\\alpha_P^*:P_{\\mathbf t}\\to P_{\\mathbf t\\alpha}$ be the projection-characterized index maps. Then $$c_{\\mathbf t\\alpha}\\circ u(\\alpha_W^*)=\\alpha_P^*\\circ c_{\\mathbf t}.$$ No global continuity, final object or preservation of arbitrary pullbacks is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof: the image covering and the displayed iterated fibre-product identity, with its projection-compatible canonical maps made explicit. The assertion isolates the assumptions of continuity for the one fixed covering only (Sites Tag 00WV, definition-continuous)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Write $p_k:W_{\\mathbf t}\\to U_{t_k}$ and $q_k:P_{\\mathbf t}\\to u(U_{t_k})$ for the chosen projections. Since $u(f_{t_k})u(p_k)=u(f_{t_k}p_k)$ is independent of $k$, the tuple universal property in [def-weil-pbc-site-cech-complex](a) gives a unique $c_{\\mathbf t}$ with $q_kc_{\\mathbf t}=u(p_k)$. We prove by induction on the positive tuple length that the cone $(u(W_{\\mathbf t}),u(p_k))$ itself has this universal property. For length one both chosen objects are $u(U_{t_0})$, their projections are identities and $c_{(t_0)}$ is the identity.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed iterated fibre-product identity; elementary expansion using Sites Tag 00WV, definition-continuous, condition (2)."
+   }
+  },
+  {
+   "text": "For the induction step write $\\mathbf t=(\\mathbf s,j)$, where $\\mathbf s$ is nonempty, put $V=W_{\\mathbf s}$, and let $a:V\\to U$ be its structure map. Let $v:W_{\\mathbf t}\\to V$ be the prefix index map and $l:W_{\\mathbf t}\\to U_j$ the last projection. Site axiom (iii) in [def-weil-pbc-sites-and-cohomology](1) gives $R=V\\times_U U_j$ with projections $r_1,r_2$. Its binary universal property means that pairs of maps into $V,U_j$ agreeing over $U$ lift uniquely to $R$. There are inverse maps $h:W_{\\mathbf t}\\to R$ and $k:R\\to W_{\\mathbf t}$: $h$ is specified by $(v,l)$, and $k$ by the tuple $(p_i^{\\mathbf s}r_1)_i,r_2$. These tuples have equal composites to $U$. The equations $hk=1_R$ and $kh=1_{W_{\\mathbf t}}$ follow by composing with $r_1,r_2$ and with every tuple projection respectively; the prefix equality $vk=r_1$ follows by composing with each $p_i^{\\mathbf s}$. This is a direct use of (a),(b) of the cited definition.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed iterated fibre-product identity; elementary expansion using Sites Tag 00WV, definition-continuous, condition (2)."
+   }
+  },
+  {
+   "text": "Since $u(\\mathcal U)$ is a covering, site axiom (iii) in [def-weil-pbc-sites-and-cohomology](1) also gives $Q=u(V)\\times_{u(U)}u(U_j)$ with projections $x,y$ and the binary universal property just stated. The hypothesis for precisely the original member $f_j:U_j\\to U$ and the morphism $a:V\\to U$ gives an isomorphism $b:u(R)\\to Q$ with $xb=u(r_1)$ and $yb=u(r_2)$. Thus $e=b\\,u(h):u(W_{\\mathbf t})\\to Q$ is invertible with inverse $u(k)b^{-1}$: the two composite equations are $b\\,u(hk)b^{-1}=1$ and $u(kh)=1$. Moreover $xe=u(v)$ and $ye=u(l)$. Consequently a pair of arrows into $u(V),u(U_j)$ agreeing over $u(U)$ lifts uniquely to $u(W_{\\mathbf t})$: lift to $Q$ by its binary instance of (a), then compose with $e^{-1}$. Only this specified base change is used.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed iterated fibre-product identity; elementary expansion using Sites Tag 00WV, definition-continuous, condition (2)."
+   }
+  },
+  {
+   "text": "To verify the induction claim, take an arbitrary object $Z$ of $\\mathcal D$ and arrows $z_i:Z\\to u(U_{s_i})$ and $z_*:Z\\to u(U_j)$ having a common composite to $u(U)$. By the induction hypothesis there is a unique $z:Z\\to u(V)$ with $u(p_i^{\\mathbf s})z=z_i$. Because $\\mathbf s$ is nonempty, $u(a)z=u(f_{s_0})z_0=u(f_j)z_*$. Step 3 therefore gives a unique $w:Z\\to u(W_{\\mathbf t})$ with $u(v)w=z$ and $u(l)w=z_*$. It has every required tuple projection, since $p_i^{\\mathbf t}=p_i^{\\mathbf s}v$. Conversely, any arrow with those tuple projections has prefix $z$ by the induction hypothesis and last projection $z_*$, hence equals $w$ by Step 3. This proves existence and uniqueness for the longer tuple and completes the induction.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed iterated fibre-product identity; elementary expansion using Sites Tag 00WV, definition-continuous, condition (2)."
+   }
+  },
+  {
+   "text": "Both $u(W_{\\mathbf t})$ with its mapped projections and $P_{\\mathbf t}$ are now tuple fibre products. The unique projection-compatible isomorphism in [def-weil-pbc-site-cech-complex](a) has forward map $c_{\\mathbf t}$ by Step 1, so this canonical map is an isomorphism. Equivalently, lift the projections of $P_{\\mathbf t}$ into $u(W_{\\mathbf t})$ using Step 4; each composite with $c_{\\mathbf t}$ is the identity because its projections are those of the identity. This also covers independently chosen, rather than recursively chosen, tuple products.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed iterated fibre-product identity; elementary expansion using Sites Tag 00WV, definition-continuous, condition (2)."
+   }
+  },
+  {
+   "text": "For an arbitrary $\\alpha:\\{0,\\ldots,m\\}\\to\\{0,\\ldots,n\\}$, compose the two asserted maps with the $k$-th projection $q'_k$ of $P_{\\mathbf t\\alpha}$. By (b) of [def-weil-pbc-site-cech-complex] and functoriality,\n$$q'_k c_{\\mathbf t\\alpha}u(\\alpha_W^*)=u(p'_k)u(\\alpha_W^*)=u(p'_k\\alpha_W^*)=u(p_{\\alpha(k)})=q_{\\alpha(k)}c_{\\mathbf t}=q'_k\\alpha_P^*c_{\\mathbf t}.$$\nThe uniqueness part of (a) makes the two maps equal. This includes repetitions and permutations of indices, as well as face and degeneracy maps. If $T$ is empty there are no positive-length tuples and both conclusions are vacuous; no empty product or final object has been used.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof, displayed iterated fibre-product identity; elementary expansion using Sites Tag 00WV, definition-continuous, condition (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof: explicit finite-tuple induction and all index-map equations for the displayed fibre-product identity, under the single-cover part of Sites Tag 00WV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous functor of sites preserves every iterated fibre product in the nerve of a covering and its omitting factor projections",
+   "results": "{\"t\": \"2026-10-22T06:44:37Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous functor of sites preserves every iterated fibre product in the nerve of a covering and its omitting factor projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CompatiblePreserving\", \"CategoryTheory.Presheaf.isSheafForIsSheafFor'\", \"CategoryTheory.Presieve.isSheafFor_of_preservesProduct\", \"CategoryTheory.Functor.isContinuous_of_coverPreserving\", \"CategoryTheory.GrothendieckTopology.diagramCompIso\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_diagramFunctor\", \"CategoryTheory.GrothendieckTopology.preservesLimits_diagramFunctor\"], \"digest\": \"6a3df89d1dd07883\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern binary pullbacks, sheaf compatibility or preservation of sheaf conditions; none supplies the induction and all tuple index-map equations under covering-only pullback preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"PreservesLimit\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T06:44:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"PreservesLimit\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesPairwisePullbacks.preservesLimit\"], \"digest\": \"53cb604c65dfd860\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern binary pullbacks, sheaf compatibility or preservation of sheaf conditions; none supplies the induction and all tuple index-map equations under covering-only pullback preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "(cechNerve|[Cc]ech).*(preserv|[Cc]ompar)|[Cc]ontinuous.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"grep\", \"query\": \"(cechNerve|[Cc]ech).*(preserv|[Cc]ompar)|[Cc]ontinuous.*[Pp]ullback\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Pullback.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\"], \"digest\": \"15853143d63c3903\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern binary pullbacks, sheaf compatibility or preservation of sheaf conditions; none supplies the induction and all tuple index-map equations under covering-only pullback preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous functor between sites carries the entire covering Cech nerve and its projection maps to the covering nerve of the image family",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"leansearch\", \"query\": \"A continuous functor between sites carries the entire covering Cech nerve and its projection maps to the covering nerve of the image family\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving base changes of covering arrows identifies all finite iterated intersections with their canonical projections",
+   "results": "{\"t\": \"2026-10-22T06:44:51Z\", \"tool\": \"leanfinder\", \"query\": \"A functor preserving base changes of covering arrows identifies all finite iterated intersections with their canonical projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CompatiblePreserving\", \"CategoryTheory.CompatiblePreserving.compatible\", \"CategoryTheory.coherentTopology.coverPreserving\", \"CategoryTheory.Functor.functorPushforward_equalizer_mem\", \"CategoryTheory.Functor.IsLocallyFaithful.functorPushforward_equalizer_mem\", \"CategoryTheory.Presieve.isSheafFor_of_preservesProduct\", \"CategoryTheory.Presieve.isSheafFor_over_map_op_comp_ofArrows_iff\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\"], \"digest\": \"241791d40db1c115\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern binary pullbacks, sheaf compatibility or preservation of sheaf conditions; none supplies the induction and all tuple index-map equations under covering-only pullback preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]reservesLimit.*[Pp]ullback|[Pp]reserves.*[Cc]ech|[Cc]ech.*[Pp]reserves",
+   "results": "{\"t\": \"2026-10-22T06:44:39Z\", \"tool\": \"grep\", \"query\": \"[Pp]reservesLimit.*[Pp]ullback|[Pp]reserves.*[Cc]ech|[Cc]ech.*[Pp]reserves\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/EffectiveEpi/Preserves.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/BinaryProducts.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\"], \"digest\": \"8fb62206700fc577\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern binary pullbacks, sheaf compatibility or preservation of sheaf conditions; none supplies the induction and all tuple index-map equations under covering-only pullback preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]reservesLimit.*[Pp]ullback|[Pp]reserves.*[Cc]ech|[Cc]ech.*[Pp]reserves",
+   "results": "{\"t\": \"2026-10-23T05:08:12Z\", \"tool\": \"grep\", \"query\": \"[Pp]reservesLimit.*[Pp]ullback|[Pp]reserves.*[Cc]ech|[Cc]ech.*[Pp]reserves\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\", \"Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean\"], \"digest\": \"747513b76e9ddb7f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the binary pullback comparison, pairwise-pullback predicate, cover-preservation and finite-product results. None gives the finite covering-tuple induction and all index-map equations under preservation only of base changes of this fixed family. The wide-pullback preservation result assumes the wide-pullback preservation that must be proved here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Preserving base change of the arrows in one covering family implies preservation of all its iterated fiber products and projection maps, without a globally continuous functor",
+   "results": "{\"t\": \"2026-10-23T05:08:12Z\", \"tool\": \"leansearch\", \"query\": \"Preserving base change of the arrows in one covering family implies preservation of all its iterated fiber products and projection maps, without a globally continuous functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.OneHypercover.IsPreservedBy.mk\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange.mk\", \"HomotopicalAlgebra.instIsStableUnderBaseChangeFibrations\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange.of_preZeroHypercoverFamily_of_isClosedUnderIsomorphisms\", \"CategoryTheory.CoverPreserving.mk\"], \"digest\": \"11cb317c5eb43efd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the binary pullback comparison, pairwise-pullback predicate, cover-preservation and finite-product results. None gives the finite covering-tuple induction and all index-map equations under preservation only of base changes of this fixed family. The wide-pullback preservation result assumes the wide-pullback preservation that must be proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"PreservesLimit\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T05:08:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"PreservesLimit\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesPairwisePullbacks.preservesLimit\"], \"digest\": \"53cb604c65dfd860\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the binary pullback comparison, pairwise-pullback predicate, cover-preservation and finite-product results. None gives the finite covering-tuple induction and all index-map equations under preservation only of base changes of this fixed family. The wide-pullback preservation result assumes the wide-pullback preservation that must be proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between sites that sends one fixed covering to a covering and preserves pullbacks of its members along every map to the covered object preserves all tuple intersections and every index map of that covering nerve",
+   "results": "{\"t\": \"2026-10-23T05:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A functor between sites that sends one fixed covering to a covering and preserves pullbacks of its members along every map to the covered object preserves all tuple intersections and every index map of that covering nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CoverPreserving\", \"CategoryTheory.CompatiblePreserving\", \"CategoryTheory.Functor.IsContinuous\", \"CategoryTheory.Functor.cover_lift\", \"CategoryTheory.CoverPreserving.cover_preserve\", \"CategoryTheory.Functor.isContinuous_of_coverPreserving\", \"CategoryTheory.Functor.IsCocontinuous.cover_lift\", \"CategoryTheory.Functor.IsCocontinuous\"], \"digest\": \"a344ecc4d9e66dd4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the binary pullback comparison, pairwise-pullback predicate, cover-preservation and finite-product results. None gives the finite covering-tuple induction and all index-map equations under preservation only of base changes of this fixed family. The wide-pullback preservation result assumes the wide-pullback preservation that must be proved here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Preservation of pullbacks of arrows in a single fixed family implies canonical preservation of each nonempty finite wide pullback of those arrows with compatibility for arbitrary maps of tuple indices",
+   "results": "{\"t\": \"2026-10-23T05:10:43Z\", \"tool\": \"leanfinder\", \"query\": \"Preservation of pullbacks of arrows in a single fixed family implies canonical preservation of each nonempty finite wide pullback of those arrows with compatibility for arbitrary maps of tuple indices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesLimitsOfShape.ofWidePullbacks\", \"CategoryTheory.Limits.hasPullback_of_preservesPullback\", \"CategoryTheory.GlueData.instHasPullbackMapF\", \"CategoryTheory.preservesFinOfPreservesBinaryAndTerminal\", \"CategoryTheory.Limits.isLimitOfHasPullbackOfPreservesLimit\", \"CategoryTheory.PreservesPullbacksOfInclusions\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesPullbacks\", \"CategoryTheory.IsPullback.map\"], \"digest\": \"aa2a630ab3d5b5d5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the binary pullback comparison, pairwise-pullback predicate, cover-preservation and finite-product results. None gives the finite covering-tuple induction and all index-map equations under preservation only of base changes of this fixed family. The wide-pullback preservation result assumes the wide-pullback preservation that must be proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComparison|PreservesPairwisePullbacks|preserves.*[Ww]idePullback",
+   "results": "{\"t\": \"2026-10-23T15:02:18Z\", \"tool\": \"grep\", \"query\": \"pullbackComparison|PreservesPairwisePullbacks|preserves.*[Ww]idePullback\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Sites/Continuous.lean\", \"Mathlib/CategoryTheory/Sites/JointlySurjective.lean\"], \"digest\": \"e0b1e1fc21f16b8c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the binary comparison and its projection equations (Limits/Shapes/Pullback/HasPullback.lean:415-430), pairwise-pullback predicate (Sites/Precoverage.lean:289-302), binary preservation (Limits/Preserves/Shapes/Pullbacks.lean:131-145), and wide-pullback-to-slice preservation (Limits/Preserves/Shapes/Over.lean:33-41). None proves the positive finite-tuple induction from base changes of only one fixed family or all tuple index-map equations. The wide-pullback result already assumes wide-pullback preservation; the other hits concern different notions or stronger global hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor preserves all iterated intersections of one covering family if it preserves each base change of a member of that family",
+   "results": "{\"t\": \"2026-10-23T15:02:18Z\", \"tool\": \"leansearch\", \"query\": \"A functor preserves all iterated intersections of one covering family if it preserves each base change of a member of that family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CompatiblePreserving\", \"CategoryTheory.Functor.IsCocontinuous\", \"CategoryTheory.CoverPreserving.mk\", \"CategoryTheory.Functor.PreservesEffectiveEpiFamilies.mk\", \"CategoryTheory.CoverPreserving.comp\", \"CategoryTheory.Limits.PreservesFiniteLimits\", \"CategoryTheory.coherentTopology.coverPreserving\", \"CategoryTheory.Functor.PreservesFiniteEffectiveEpiFamilies.mk\"], \"digest\": \"fdab1811242a4b5f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the binary comparison and its projection equations (Limits/Shapes/Pullback/HasPullback.lean:415-430), pairwise-pullback predicate (Sites/Precoverage.lean:289-302), binary preservation (Limits/Preserves/Shapes/Pullbacks.lean:131-145), and wide-pullback-to-slice preservation (Limits/Preserves/Shapes/Over.lean:33-41). None proves the positive finite-tuple induction from base changes of only one fixed family or all tuple index-map equations. The wide-pullback result already assumes wide-pullback preservation; the other hits concern different notions or stronger global hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"PreservesLimit\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T15:02:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Functor\\\", \\\"PreservesLimit\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesPairwisePullbacks.preservesLimit\"], \"digest\": \"53cb604c65dfd860\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the binary comparison and its projection equations (Limits/Shapes/Pullback/HasPullback.lean:415-430), pairwise-pullback predicate (Sites/Precoverage.lean:289-302), binary preservation (Limits/Preserves/Shapes/Pullbacks.lean:131-145), and wide-pullback-to-slice preservation (Limits/Preserves/Shapes/Over.lean:33-41). None proves the positive finite-tuple induction from base changes of only one fixed family or all tuple index-map equations. The wide-pullback result already assumes wide-pullback preservation; the other hits concern different notions or stronger global hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Preservation of base changes of one fixed family of arrows implies preservation of every nonempty finite wide pullback of those arrows and compatibility with all tuple index maps",
+   "results": "{\"t\": \"2026-10-23T15:02:20Z\", \"tool\": \"leanfinder\", \"query\": \"Preservation of base changes of one fixed family of arrows implies preservation of every nonempty finite wide pullback of those arrows and compatibility with all tuple index maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.IsStableUnderBaseChange\", \"CategoryTheory.MorphismProperty.Over.instPreservesFiniteLimitsTopPullback\", \"CategoryTheory.MorphismProperty.baseChange_map'\", \"CategoryTheory.MorphismProperty.instIsStableUnderBaseChangeFunctorFunctorCategoryOfHasPullbacks\", \"CategoryTheory.MorphismProperty.IsStableUnderBaseChangeAlong\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"CategoryTheory.Precoverage.instIsStableUnderBaseChangeComapOfPreservesLimitsOfShapeWalkingCospan\", \"CategoryTheory.MorphismProperty.relative_isStableUnderBaseChange\"], \"digest\": \"432d6e19008229ad\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the binary comparison and its projection equations (Limits/Shapes/Pullback/HasPullback.lean:415-430), pairwise-pullback predicate (Sites/Precoverage.lean:289-302), binary preservation (Limits/Preserves/Shapes/Pullbacks.lean:131-145), and wide-pullback-to-slice preservation (Limits/Preserves/Shapes/Over.lean:33-41). None proves the positive finite-tuple induction from base changes of only one fixed family or all tuple index-map equations. The wide-pullback result already assumes wide-pullback preservation; the other hits concern different notions or stronger global hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison for a nonempty finite wide pullback is an isomorphism by induction when a functor preserves binary base changes of each leg",
+   "results": "{\"t\": \"2026-10-23T15:03:39Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical comparison for a nonempty finite wide pullback is an isomorphism by induction when a functor preserves binary base changes of each leg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"CategoryTheory.Limits.PreservesPullback.iso\", \"CategoryTheory.Limits.PreservesPullback.iso_hom\", \"CategoryTheory.Limits.PreservesPullback.of_iso_comparison\", \"CategoryTheory.Limits.map_lift_pullbackComparison\", \"CategoryTheory.Limits.PreservesPullback.iso_hom_fst\", \"CategoryTheory.Limits.instIsIsoProdComparison\", \"CategoryTheory.Limits.map_lift_pullbackComparison_assoc\"], \"digest\": \"dece27265c3649d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the binary comparison and its projection equations (Limits/Shapes/Pullback/HasPullback.lean:415-430), pairwise-pullback predicate (Sites/Precoverage.lean:289-302), binary preservation (Limits/Preserves/Shapes/Pullbacks.lean:131-145), and wide-pullback-to-slice preservation (Limits/Preserves/Shapes/Over.lean:33-41). None proves the positive finite-tuple induction from base changes of only one fixed family or all tuple index-map equations. The wide-pullback result already assumes wide-pullback preservation; the other hits concern different notions or stronger global hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-site-pullback-injective-evaluation-acyclic",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization via Orgogozo Lemma 3.1.1: the ph/etale comparison used in the first descent isomorphism; bounded-below objectwise comparison in Stacks 0DD8: pullback of injective terms is evaluation-acyclic (0D6X). Extracted from the 0D6X argument: Tag 0D6X, lemma-pullback-injective-pre-limp, proof: the image covering and the displayed iterated fibre-product identity, with its projection-compatible canonical maps made explicit. Only the fixed-cover base-change assumptions are required; no condition on other coverings.",
+   "via": [
+    "lem-trf-site-pullback-injective-evaluation-acyclic",
+    "lem-trf-site-object-derived-sections-pullback",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-continuous-cover-nerve-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and its three statement dependencies unchanged. Expanded the 0D6X iterated-fibre-product identity into a positive-length induction using only the assumed base changes of members of the one fixed covering. Constructed the source rebracketing and its inverse, the binary image comparison and its inverse, verified the tuple universal property and every index-map equation. Reused the existing tuple universal-property definition; no new node or Mathlib leaf is necessary. Checked empty coverings, singleton tuples, repeated indices, arbitrary tuple choices and the absence of any terminal-object assumption.",
+  "blueprint": "Serves the existing blueprint.from chain from lem-trf-local-term-locality, its normal-cone-specialization/cohomological-descent input: the 0D6X iterated-fibre-product identity used by lem-trf-site-pullback-injective-evaluation-acyclic. Steps 1-5 prove that identity canonically for the single fixed covering; step 6 supplies all projection-characterized index-map equations needed for the Cech comparison. The current latest blueprint ancestor and unit were read; neither their route nor their statements are altered.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-d20d0c0d8",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-d20d0c0d8 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement and stmt_deps are byte-equal to live, where the item is still unsplit with no proof, and there is no repair note, so this is not a supersession or re-split. Source checked at Stacks 0D6X lemma-pullback-injective-pre-limp (sites-cohomology.tex 9278ff): the proof there asserts the iterated fibre-product identity with no argument. The hypotheses are exactly 00WV (a),(b) for the one fixed covering, as stated in def-weil-pbc-sites-and-cohomology(3). Step checks: (1) c_t comes from def-weil-pbc-site-cech-complex(a) on the image covering, and the length-1 base case uses the identity convention. (2) R=V×_U U_j exists by site axiom (iii); I checked h=(v,l), k=((p_i^s r1),r2), vk=r1, hk=1 and kh=1. (3) Q exists because u(U) is a covering; b is the hypothesis for f_j and a:V→U, e=b u(h) has inverse u(k)b^{-1}, and the pair-lifting follows. (4) The induction step uses a=f_{s0}p_0^s with s nonempty; existence and uniqueness hold for any test object Z. (5) The unique projection-compatible isomorphism from def (a) is c_t. (6) The equation for arbitrary α, including degeneracies, follows from (b) and the uniqueness in (a). Small cases tested: T empty (vacuous), n=0, repeated indices, u=id. Proof_deps equals the union of uses, and only the two definitions' statements are used, so there is no route or tool_use issue and no cycle. No SGA is cited. Both citers (lem-trf-site-pullback-injective-evaluation-acyclic step 2, lem-trf-continuous-precomposition-injective-module-cech step 2) get exactly the face-map case they need. The duplicate search over the DAG for ×_{u(U)}, iterated fibre and continuous+tuple found no equivalent node; finite-limits-from-terminal-pullbacks needs stronger hypotheses. The Mathlib searches record all three kinds, with correct no-match verdicts. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoverNerveComparison",
+  "declaration": "CategoryTheory.SiteCechComplex.cover_nerve_comparison",
+  "declarations": [
+   "CategoryTheory.SiteCechComplex.functorComparison",
+   "CategoryTheory.SiteCechComplex.cover_nerve_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoverNerveComparison.lean",
+  "statement": "theorem cover_nerve_comparison {C D : Type u} [Category.{u} C] [Category.{u} D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (F : C ⥤ D) {T : Type u} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (hcover : Presieve.ofArrows f hom ∈ J U) (himage : Presieve.ofArrows (fun t ↦ F.obj (f t)) (fun t ↦ F.map (hom t)) ∈ K (F.obj U)) (hbase : ∀ (t : T) (V : C) (a : V ⟶ U), PreservesLimit (cospan a (hom t)) F) (S : SiteCechComplex f hom) (P : SiteCechComplex (fun t ↦ F.obj (f t)) (fun t ↦ F.map (hom t))) : (∀ (n : ℕ) (t : Fin (n + 1) → T) (k : Fin (n + 1)), functorComparison F S P n t ≫ P.pr n t k = F.map (S.pr n t k)) ∧ (∀ (n : ℕ) (t : Fin (n + 1) → T), IsIso (functorComparison F S P n t)) ∧ (∀ (n m : ℕ) (t : Fin (n + 1) → T) (α : Fin (m + 1) → Fin (n + 1)), F.map (S.indexMap t α) ≫ functorComparison F S P m (t ∘ α) = functorComparison F S P n t ≫ P.indexMap t α)",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-398ec889d",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Read node, report, CoverNerveComparison.lean, SiteCechComplex and IsSiteForCoverings sources, Stacks 0D6X (sites-cohomology.tex:9278-9307). Every hypothesis matches: Type u sites with IsSiteForCoverings, hcover, himage, and hbase (PreservesLimit on cospan a (hom t), equivalent to the binary comparison being an iso because both pullbacks exist by the site axioms). The three conclusions (projection equations, IsIso, indexMap naturality for arbitrary alpha) are correct and in Lean order. functorComparison is canonical: unique map from P.universal, not hollow. lean.statement is verbatim. Docstrings carry source, blueprint and the six proof steps. sorry only. No duplicate in Mathlib or project trees. Edge cases (empty T, n=0, repeated indices, identity functor) are fine. No findings, no fixes, no compile needed."
+ }
+}

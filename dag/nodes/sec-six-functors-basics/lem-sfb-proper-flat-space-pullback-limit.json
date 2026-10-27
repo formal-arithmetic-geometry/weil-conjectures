@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-proper-flat-space-pullback-limit",
+ "kind": "statement",
+ "title": "Derived quasi-coherent tests of pullback and inverse limits",
+ "statement": "Use algebraic spaces over a scheme $S$ and their small etale sites and structure sheaves [def-trf-algebraic-space, def-pc-scheme], in the universes of [def-weil-size-convention]. Module sheaves and quasi-coherence are [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module]. Write $D(\\mathcal O_Z)$ for the derived category of module sheaves [def-weil-abstract-derived-category] and $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for its full subcategory of complexes with quasi-coherent cohomology sheaves. Sheaf tensor products are [def-pur-sheaf-tensor-product]. Let $A$ be a commutative ring and $f:Z\\to\\operatorname{Spec}A$ a flat proper finitely presented algebraic space. Spectra are [def-weil-affine-spectrum]; flatness and local finite presentation are tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Finite presentation means quasi-compact, quasi-separated and locally of finite presentation; quasi-separated means that the diagonal is quasi-compact. Proper means separated, quasi-compact, locally of finite type on etale charts, and universally closed; separated means the diagonal is a closed immersion and universally closed means closed after every algebraic-space base change [def-weil-proper-morphism, def-weil-finite-type-morphism]. Let $(M_n)_{n\\ge1}$ be an inverse sequence of $A$-modules with surjective transition maps and set $M=\\varprojlim_n M_n$, $\\mathcal F=\\mathcal O_Z\\otimes_A M$, and $\\mathcal G=\\varprojlim_n(\\mathcal O_Z\\otimes_A M_n)$. The canonical map $u:\\mathcal F\\to\\mathcal G$ induces a bijection $\\operatorname{Hom}_{D(\\mathcal O_Z)}(K,\\mathcal F[0])\\to\\operatorname{Hom}_{D(\\mathcal O_Z)}(K,\\mathcal G[0])$ for every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Put $F_n=\\mathcal O_Z\\otimes_A M_n$. Apply the flat affine-base projection lemma to $f$ (properness gives quasi-compactness and separatedness, hence quasi-separatedness): every $F_n$ is quasi-coherent and the transitions are surjective. The surjective quasi-coherent tower lemma therefore identifies $\\mathcal G[0]$ with $R\\varprojlim_nF_n[0]$. All limits here are in the ambient module derived category; we do not assert that $\\mathcal G$ is quasi-coherent.",
+   "uses": [
+    "lem-sfb-space-affine-derived-projection-formula",
+    "lem-sfb-space-surjective-qcoh-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3F, lemma-pullback-and-limits, proof"
+   }
+  },
+  {
+   "text": "Fix a perfect $E\\in D(\\mathcal O_Z)$ and put $E^\\vee=R\\mathcal Hom(E,\\mathcal O_Z)$. Ringed-site perfect duality makes $E^\\vee$ perfect and identifies $R\\mathcal Hom(E,N)$ naturally with $E^\\vee\\otimes^{\\mathbf L}N$ for every ambient $N$. Put $C=R\\Gamma(Z,E^\\vee)$. The flat proper perfect-sections lemma makes $C$ a perfect complex of $A$-modules. Applying the affine-base projection formula gives natural isomorphisms $R\\operatorname{Hom}_Z(E,F_n[0])\\cong C\\otimes_A^{\\mathbf L}M_n[0]$ and $R\\operatorname{Hom}_Z(E,\\mathcal F[0])\\cong C\\otimes_A^{\\mathbf L}M[0]$. The projection formula applies to $E^\\vee$, whose cohomology is quasi-coherent by the perfect-generation statement, which places every perfect object in that subcategory.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-flat-proper-space-perfect-sections",
+    "lem-sfb-space-affine-derived-projection-formula",
+    "lem-sfb-space-perfect-localizing-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3F, lemma-pullback-and-limits, proof"
+   }
+  },
+  {
+   "text": "Apply global derived Hom to the identification of step 1, then use its derived-limit comparison and the natural isomorphisms of step 2. This identifies $R\\operatorname{Hom}_Z(E,\\mathcal G[0])$ with $R\\varprojlim_n(C\\otimes_A^{\\mathbf L}M_n[0])$. Under these identifications $R\\operatorname{Hom}_Z(E,u)$ is the canonical comparison $C\\otimes_A^{\\mathbf L}M[0]\\to R\\varprojlim_n(C\\otimes_A^{\\mathbf L}M_n[0])$: the cone is induced by the maps $M\\to M_n$, and both the duality/projection isomorphisms and the resolution-derived comparison are natural for those maps. The perfect tensor-limit lemma says this comparison is an isomorphism. Taking $H^0$, using the cohomology identification in the global derived-Hom lemma, proves the required Hom bijection for every perfect $E$. This uses global Hom on the ambient derived category, so it remains valid for the possibly non-quasi-coherent limit.",
+   "uses": [
+    "lem-sfb-ringed-site-global-rhom-derived-limits",
+    "lem-sfb-perfect-tensor-surjective-module-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3F, lemma-pullback-and-limits, proof"
+   }
+  },
+  {
+   "text": "Use Hom exactness for distinguished triangles (and its rotations and opposite-category form). Choose a distinguished triangle $\\mathcal F[0]\\xrightarrow{u}\\mathcal G[0]\\to Q\\to\\mathcal F[1]$. For every perfect $E$ and integer $r$, the previous step also applies to the perfect complex $E[-r]$; the long exact Hom sequence gives $\\operatorname{Hom}(E,Q[r])=0$. Let $\\mathcal L$ be the class of $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ with $\\operatorname{Hom}(K,Q[r])=0$ for all integers $r$. The long exact Hom sequence makes $\\mathcal L$ closed under shifts and cones; a retract of a zero Hom group is zero; and $\\operatorname{Hom}(\\bigoplus_iK_i,Q[r])=\\prod_i\\operatorname{Hom}(K_i,Q[r])$ by the coproduct universal property. Thus it is closed under retracts and all set-indexed coproducts and contains every perfect object. The algebraic-space localizing-generation theorem gives $\\mathcal L=D_{\\mathrm{QCoh}}(\\mathcal O_Z)$. For any such $K$, the segment $\\operatorname{Hom}(K,Q[-1])\\to\\operatorname{Hom}(K,\\mathcal F[0])\\to\\operatorname{Hom}(K,\\mathcal G[0])\\to\\operatorname{Hom}(K,Q)$ has zero outside terms, which proves the asserted bijection.",
+   "uses": [
+    "lem-sfb-space-perfect-localizing-generation",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D3F, lemma-pullback-and-limits, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-affine-derived-projection-formula",
+  "lem-sfb-space-surjective-qcoh-limit",
+  "lem-sfb-ringed-site-perfect-duality",
+  "lem-sfb-flat-proper-space-perfect-sections",
+  "lem-sfb-space-perfect-localizing-generation",
+  "lem-sfb-ringed-site-global-rhom-derived-limits",
+  "lem-sfb-perfect-tensor-surjective-module-limit",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D3F, lemma-pullback-and-limits, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a proper flat finitely presented algebraic space the pullback of a surjective module inverse limit agrees with the inverse limit of pullbacks after derived quasi coherator",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"The function obtained by applying the forgetful functor from the category of schemes to the category of sets to the pullback comparison morphism is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ in the category of schemes, the comparison morphism induced by the forgetful functor from schemes to types is surjective. This means that every compat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, this constructs a cone over the diagram $ A.D'(j) $ by first applying the pullback functor along the affi\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The morphism $ g $ maps the object $ D(i') $ in the diagram to the pullback of $ f $ with itself, constructed by composing the diagram's morphism $ D(h_{i'i}) $ with the unique lift provided by the pu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits, scheme module pullbacks, and flat tensor functors do not give the derived quasi-coherent testing comparison for proper spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from all derived quasi coherent complexes to a pullback module inverse limit are computed before taking the inverse limit",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"SheafOfModules.createsLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {R : CategoryTheory.Sheaf J RingCat} →\\n            (F : CategoryTheory.Functor D (SheafOfModules R\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$ and $R$ a sheaf of rings on $\\\\mathcal{C}$. The forgetful functor from the category of sheaves of modules over $R$ to the category of pr\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.limitCone\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} →\\n      {J : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} J] →\\n          (F : CategoryTheory.Functor J (PresheafOfModules R)) →\\n            [∀ (X : Cᵒᵖ),\\n                  Sm\", \"doc\": \"Given a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $ and a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R) $, this cone has as its apex the presheaf of modules formed by taking limi\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits, scheme module pullbacks, and flat tensor functors do not give the derived quasi-coherent testing comparison for proper spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AlgebraicGeometry.IsProper",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits, scheme module pullbacks, and flat tensor functors do not give the derived quasi-coherent testing comparison for proper spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oherator|[Pp]ullback.*[Ll]imit|[Tt]ensor.*[Ll]imit",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"290\", \"text\": \"    (pullbackAwayιIso 𝒜 f_deg hm g_deg hm' hx).inv ≫ Limits.pullback.fst _ _ =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"296\", \"text\": \"    (pullbackAwayιIso 𝒜 f_deg hm g_deg hm' hx).inv ≫ Limits.pullback.snd _ _ =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"179\", \"text\": \"    IsPullback (d.natTrans.app i) (colimit.ι d.functor i) (𝒰.f i) d.toBase := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"180\", \"text\": \"  refine ⟨by simp, ⟨PullbackCone.IsLimit.mk _ ?_ ?_ ?_ ?_⟩⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"41\", \"text\": \"* `AlgebraicGeometry.Scheme.GlueData.vPullbackConeIsLimit` : `V i j` is the pullback\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"190\", \"text\": \"This is a pullback diagram (`vPullbackConeIsLimit`). -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"202\", \"text\": \"def vPullbackConeIsLimit (i j : D.J) : IsLimit (D.vPullbackCone i j) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"203\", \"text\": \"  𝖣.vPullbackConeIsLimitOfMap forgetToLocallyRingedSpace i j\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"204\", \"text\": \"    (D.toLocallyRingedSpaceGlueData.vPullbackConeIsLimit _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"359\", \"text\": \"    change IsIso (pullback.snd (colimit.desc F (cocone X)) U.1.ι)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"360\", \"text\": \"    let e := IsOpenImmersion.isoOfRangeEq (pullback.fst (colimit.desc F (cocone X)) U.1.ι)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"line\": \"126\", \"text\": \"      (isColimitOfPreserves (Over.pullback P ⊤ (𝒰.trans hij)) (d.isColimit j)) <|\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"line\": \"257\", \"text\": \"      have : _ ≫ pullback.snd _ _ = _ := Over.w ((d.isColimit i).desc (Functor.mapCocone _ s))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"226\", \"text\": \"    refine .of_hasCoproduct (fun _ ↦ pullback.cone _ _) (fun _ ↦ pullback.isLimit _ _) ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"569\", \"text\": \"  isLimitOfPreserves (Over.pullback (A.𝒰D.f j) ⋙ Over.forget _) (Over.isLimitConePost _ A.hc)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"1144\", \"text\": \"    refine ⟨⟨?_⟩, ⟨PullbackCone.IsLimit.mk _ ?_ ?_ ?_ ?_⟩⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/GluingOneHypercover.lean\", \"line\": \"59\", \"text\": \"    have ⟨φ, h₁, h₂⟩ := PullbackCone.IsLimit.lift' (D.vPullbackConeIsLimit i₁ i₂)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"577\", \"text\": \"instance forgetCreatesPullbackOfLeft : CreatesLimit (cospan f g) forget :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"583\", \"text\": \"instance forgetCreatesPullbackOfRight : CreatesLimit (cospan g f) forget :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"100\", \"text\": \"  have H := IsUniversalColimit.isPullback_of_isColimit_left\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"line\": \"198\", \"text\": \"    Iso.symm_inv, Category.assoc, pullbackSymmetry_inv_comp_snd, IsIso.inv_comp_eq, limit.lift_π,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"134\", \"text\": \"      simp only [pullback.congrHom_hom, limit.lift_π_assoc, PullbackCone.mk_pt, cospan_right,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"line\": \"426\", \"text\": \"  apply PullbackCone.isLimitAux'\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"line\": \"459\", \"text\": \"  exact ⟨⟨⟨_, isLimitOfHasPullbackOfPreservesLimit\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"line\": \"486\", \"text\": \"  hasPullbacks_of_hasLimit_cospan _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits, scheme module pullbacks, and flat tensor functors do not give the derived quasi-coherent testing comparison for proper spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a proper flat finitely presented algebraic space the pullback of a surjective module inverse limit agrees with the inverse limit of pullbacks after derived quasi coherator",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ S) (g : Y ⟶ S) [IsProper g] : IsProper (Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[RepresentablyFlat G] : PreservesFiniteLimits (G.sheafPullback A J K)\", \"doc\": \"If a functor $ G $ is representably flat, then its sheaf pullback functor preserves finite limits.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat f] : Flat (pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf limits, scheme module pullbacks, and flat tensor functors do not give the derived quasi-coherent testing comparison for proper spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from quasi coherent complexes commutes with the pullback of surjective inverse limits on proper flat algebraic spaces",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).l =\\n    (AlgebraicGeometry.Scheme.Modules.pullback f.as.unop).toCatHom\", \"doc\": \"For any morphism $f: X \\to Y$ between schemes, the left component of the pseudofunctor map applied to $f$ in the bicategory of module adjunctions equals the categorical morphism induced by the pullback\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme pullbacks, ordinary limits, and flatness; none gives this universal derived-Hom comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived quasi coherator of inverse limit of pullback modules proper flat finitely presented algebraic space",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, this constructs a cone over the diagram $ A.D'(j) $ by first applying the pullback functor along the affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, CategoryTheory.Limits.HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme pullbacks, ordinary limits, and flatness; none gives this universal derived-Hom comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.DerivedCategory",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.DerivedCategory'\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme pullbacks, ordinary limits, and flatness; none gives this universal derived-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "coherator|pullback.*inverse.*limit|proper.*flat.*limit",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme pullbacks, ordinary limits, and flatness; none gives this universal derived-Hom comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived quasi coherent tests of pullback and inverse limits on proper flat spaces",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat f] : Flat (pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ S) (g : Y ⟶ S) [IsProper g] : IsProper (Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ S) (g : Y ⟶ S) [IsProper f] : IsProper (Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[RepresentablyFlat G] : PreservesFiniteLimits (G.sheafPullback A J K)\", \"doc\": \"If a functor $ G $ is representably flat, then its sheaf pullback functor preserves finite limits.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.GlueData.vPullbackConeIsLimit\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"(i j : D.J) : IsLimit (𝖣.vPullbackCone i j)\", \"doc\": \"For each pair of objects $i, j$ in the indexing category $J$ of gluing data $D$, the pullback cone $D.vPullbackCone(i,j)$ for inclusion morphisms $\\\\iota_i : U(i) \\\\to D.\\\\text{glued}$ and $\\\\iota_j : U(j\"}\n  {\"name\": \"CategoryTheory.IsPullback.isLimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs\", \"type\": \"(h : IsPullback fst snd f g) : IsLimit h.cone\", \"doc\": \"In a category $\\\\mathcal{C}$, if a square formed by morphisms $P \\\\to X$, $P \\\\to Y$, $X \\\\to Z$, and $Y \\\\to Z$ satisfies the pullback property, then the corresponding pullback cone over the cospan diagra\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.GlueData.vPullbackConeIsLimit\", \"module\": \"Mathlib.Geometry.RingedSpace.PresheafedSpace.Gluing\", \"type\": \"(i j : D.J) : IsLimit (𝖣.vPullbackCone i j)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with all limits and gluing data $D$ for sheafed spaces over $\\\\mathcal{C}$, the pullback cone $D.vPullbackCone(i,j)$ for inclusion morphisms $\\\\iota_i : U(i) \\\\to D.\\\\text{g\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give underived scheme pullbacks, ordinary limits, and flatness; none gives this universal derived-Hom comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-square-zero-effectivity",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here.",
+   "via": [
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-flat-space-pullback-limit",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0D3F in the ambient module derived category, reused the surjective quasi-coherent tower, ringed-site perfect duality; separated the genuine algebraic-space generation, projection, perfect direct-image, ring tensor-limit and global-Hom derived-limit inputs. No statement change.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli/deformation prerequisite chain; this split realizes the supporting Tag 0D3F proof (surjective tower, perfect duality/projection, perfect sections/tensor limit, localizing extension). The imported created.item chain terminates at the missing id Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs.py ancestor returns None; inherited null ancestry retained and reported.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-site-perfect-duality",
+    "why": "General ringed-site perfect duality, valid for structure sheaves on small etale sites; the source 0D3F explicitly invokes it and it does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-site-perfect-duality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-127a33090",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-127a33090 (reviewer sub-agent of L); spot-checked: I read Stacks 0D3F (spaces-perfect l.6270) in full. The item statement is unchanged and matches the source's first sentence of the proof: R arbitrary, f proper, flat and of finite presentation, a tower with surjective transitions, and every K in D_QCoh. The four steps follow 0D3F. Step 1 uses 0D3E (the tower node needs no qcqs hypothesis) for G[0]=Rlim F_n in ambient D(O). Step 2 uses 08JJ duality, 08IN projection (E^vee lies in D_QCoh by the generation node) and 0CTM(1). Step 3 uses global RHom commuting with Rlim, the perfect case of 0D2L, and naturality in M->M_n; H^0 gives the bijection. Step 4 takes the cone, uses the Hom-triangle leaf and the closure class, and localizing generation finishes it. I checked hypotheses: proper gives qcqs, and Z is qcqs over an affine base. All five new nodes are true, strictly smaller than the item and not duplicates. The generation, projection and perfect-sections nodes are space versions; the existing nodes are for schemes, or for a single sheaf in the 0CTM(2) case. I tested small cases: Z/p over Z with the tower Z/p^n gives F_p on both sides, and Spec k and the empty space behave correctly. The global-RHom H^q clause overlaps lem-pur-rhom-global-sections; this is advisory. Batch 5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions (Stacks 025Y and 03G9), already in the base stmt_deps of the item, and not steps of the proof of the trace formula or of Poincare duality, so I accept them. There is no SGA citation. I accept the tool_use of ringed-site-perfect-duality as a general 08JJ lemma. FIX (B3 missing definition citations): global-rhom, projection-formula and perfect-sections now cite def-pur-ringed-site-zeroth-hypercohomology for the unbounded RGamma. The projection formula also cites def-weil-pbc-ringed-topos-morphism for Lf*/Rf_* and defines quasi-compact inline.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatSpacePullbackLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_flat_space_pullback_limit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.properFlatSpacePullbackLimitMap",
+   "AlgebraicGeometry.AlgebraicSpace.proper_flat_space_pullback_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatSpacePullbackLimit.lean",
+  "statement": "theorem proper_flat_space_pullback_limit {S : Scheme.{u}} (A : Type u) [CommRing A] (Y : Over S) (e : Y.left ≅ Spec (.of A)) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace Y) (hflat : MapIsFlat f) (hproper : MapIsProper f) (hfp : MapIsLocallyOfFinitePresentation f ∧ MapIsQuasiCompact f.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal f.hom.hom)) (M : ℕ → ModuleCat.{u} A) (r : ∀ n : ℕ, M (n + 1) ⟶ M n) (hsurj : ∀ n : ℕ, Function.Surjective (r n)) [HasDerivedCategory.{w} X.SmallModules] (K : X.DerivedQCoh) : Function.Bijective (fun (g : K.obj ⟶ (DerivedCategory.singleFunctor X.SmallModules 0).obj ((affineScalarPullback A Y e X f).obj (limit (Functor.ofOpSequence r)))) ↦ g ≫ (DerivedCategory.singleFunctor X.SmallModules 0).map (properFlatSpacePullbackLimitMap A Y e X f r))",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The scalar tensor is the existing universal affineScalarPullback, with the actual structural A-action on every chart. The comparison is Mathlib limit.post; its singleFunctor image induces the stated Hom bijection on the ambient derived module category, tested by every DerivedQCoh object. Natural index n represents n+1. The already landed small-ringed-model, scalar-pullback, derived-QCoh, representable-scheme and space-morphism notions are cited explicitly; no mathematical statement changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0db4b1295",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0D3F proof para 1: S/X/f:X→schemeSpace Y with e:Y.left≅Spec A; CommRing A only; MapIsFlat, MapIsProper (sep+fin type+univ closed), hfp = lfp∧qc∧qc diagonal (qc repeated from proper, harmless); ℕ-indexed tower n↦n+1 with surjective transitions; F=affineScalarPullback(lim M) (left adjoint of Γ with A-action = O⊗_A−), G=limit in all module sheaves (not QCoh); u=limit.post (canonical, not hollow); Function.Bijective of postcomposition with singleFunctor 0 map for every K:X.DerivedQCoh in ambient derived cat, w free. lean.statement verbatim; only sorry is the theorem proof; docstrings carry source and 4 steps; 6 added stmt_deps are landed def nodes owning used decls; no theorem stmt_deps, no dep record changes; proof-dep imports non-public, no cycle; no duplicate found. No file changed, so no compile."
+ }
+}

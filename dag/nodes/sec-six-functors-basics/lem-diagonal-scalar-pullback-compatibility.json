@@ -1,0 +1,135 @@
+{
+ "id": "lem-diagonal-scalar-pullback-compatibility",
+ "kind": "statement",
+ "title": "Propagation of diagonal pullback through scalar extensions",
+ "statement": "Let ell be prime and g:Yprime→Y a morphism of Noetherian schemes. Assume ell is invertible in every residue field of the two projective lines and their self-products. Let family and familyprime be Families of [def-sfb-diagonal-coefficient-diagrams], and let rootsP and rootsW be specified CartesianAdicComparisons of [sk-prop-sfb-cartesian-coefficients] along baseP g and baseW g. If their Z_ell diagrams have PullbackCompatibility of [def-sfb-diagonal-coefficient-pullback] using spIntegralComparison at the bottom field, then each pair of integral diagrams has PullbackCompatibility using spIntegralComparison; each pair of rational diagrams has PullbackCompatibility using rootsP.rational and rootsW.rational; and the closure diagrams have PullbackCompatibility using rootsP.qbar and rootsW.qbar. No completed class, derived reduction or Reference is assumed.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-diagonal-coefficient-pullback",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraphs (1), (2), and the final sentence of paragraph (3), scalar propagation"
+ },
+ "proof": [
+  {
+   "text": "For each E extend the given Z_ell class and trace pullback squares to O_E, a finite-free coefficient extension. Paste with the two Family.toIntegral scalar compatibilities. The normalized scalar/pullback compositor and uniqueness of mates give the new class and trace squares and preserve invertibility of the base-change mates. The Cartesian integral_inclusion equation from the bottom field fixes the line endpoints as spIntegralComparison. The supported-source maps are the canonical closed-support mates by their unit equations.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the integral pullback squares with Family.toRational on both bases. Localization at ell commutes with inverse image and, by bounded continuity, with the three direct images on the shifted lines in question. Equivalently the scalar compatibility records already supply the invertible scalar/direct-image components. The rational_scalar equations of rootsP and rootsW identify the localized line maps, giving the rational PullbackCompatibility.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-pullback",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "det-lem-bounded-continuity-direct-image",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the coherent rational diagram supplied by Family.rationalTransitions and pass the scalar and pullback diagrams to the filtered finite-field colimit using Family.toClosure, exact filtered colimits and bounded continuity. The qbar_coprojection equations of the two specified Cartesian comparisons identify the closure maps. Uniqueness of mates preserves the supported-source and modelExchange normalizations. No completed reference is used.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-pullback",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "det-lem-bounded-continuity-direct-image",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-lem-bounded-continuity-direct-image",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "W6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraphs (1), (2), and the final sentence of paragraph (3), scalar propagation",
+  "note": "Agent expansion of the specified source argument; the Lean proof remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change for completed diagonal cycle class and projective line trace, followed by integral and rational scalar extension",
+   "results": "Eight results, including LinearMap.trace_baseChange and elliptic-curve baseChange_add lemmas; none concerns the diagonal cycle class, derived trace, or normalized condensed coefficient pullback. Local searches found only the existing compatibility structures and their unproved assembly.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "The query returned general categorical naturality results, including pushout cocone and Grothendieck-map formulas. These do not supply geometric system or scalar-extension comparison coherence.",
+   "date": "2026-10-27",
+   "verdict": "General naturality is available; no complete compatibility theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackCompatibility|DiagonalTrace.*baseChange|diagonal.*[Bb]ase[Cc]hange",
+   "results": "Three Mathlib hits, all in CategoryTheory/MorphismProperty/Limits.lean concerning stability of diagonals under base change. Local rg on both library roots found the definitions of PullbackCompatibility and NonTorsionPullback and the original unfinished theorem, but no proof of either required compatibility.",
+   "date": "2026-10-27",
+   "verdict": "No existing completed or scalar diagonal compatibility theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalNonTorsionBaseChange",
+  "date": "2026-10-27",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraphs (1), (2), and the final sentence of paragraph (3), scalar propagation",
+   "via": [
+    "lem-diagonal-nontorsion-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalScalarPullbackCompatibility",
+  "file": "lean/Sheaf/Paper/DiagonalScalarPullbackCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCoefficient_scalarPullback",
+  "statement": "theorem diagonalCoefficient_scalarPullback\n    (l : ℕ) [Fact l.Prime] {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)\n    [IsNoetherian Y] [IsNoetherian Y']\n    [∀ x : ProjectiveLine Y, Invertible (l : (ProjectiveLine Y).residueField x)]\n    [∀ x : ProjectiveLine Y', Invertible (l : (ProjectiveLine Y').residueField x)]\n    [∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x)]\n    [∀ x : diagonalSurface Y', Invertible (l : (diagonalSurface Y').residueField x)]\n    (family : Family l Y) (family' : Family l Y')\n    (rootsP : CartesianAdicComparison l (baseP g))\n    (rootsW : CartesianAdicComparison l (baseW g))\n    (zl : PullbackCompatibility (Profinite.continuousMapRingObj.{u} ℤ_[l]) g\n      (zlLine l) family.zl family'.zl\n      (spIntegralComparison (baseP g) l (bottomField l))\n      (spIntegralComparison (baseW g) l (bottomField l))) :\n    (∀ E : PadicAlgCl.FiniteIntermediateField l,\n      Nonempty (PullbackCompatibility (Profinite.padicIntegersRingObj.{u} l E.1) g\n        (fun X ↦ spIntegralTwist X l E) (family.integral E) (family'.integral E)\n        (spIntegralComparison (baseP g) l E) (spIntegralComparison (baseW g) l E))) ∧\n    (∀ E : PadicAlgCl.FiniteIntermediateField l,\n      Nonempty (PullbackCompatibility (Profinite.continuousMapRingObj.{u} E.1) g\n        (fun X ↦ spRationalTwist X l E) (family.rational E) (family'.rational E)\n        (rootsP.rational E) (rootsW.rational E))) ∧\n    Nonempty (PullbackCompatibility (Profinite.padicAlgClRingObj.{u} l) g\n      (fun X ↦ spQbarTwist X l) family.closure family'.closure rootsP.qbar rootsW.qbar)",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261026T203026-L-3498965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261026T203026-L-3498965",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

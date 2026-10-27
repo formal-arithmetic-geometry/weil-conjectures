@@ -62,7 +62,24 @@ both restriction from `U` to the same two-factor product, by functoriality and
 its composite with the augmentation is zero, also for an empty covering. -/
 theorem coverAugmentation_comp_d :
     S.coverAugmentation R M ≫ (S.complex M.val.presheaf).d 0 1 = 0 := by
-  sorry
+  simp only [complex]
+  apply AddCommGrpCat.ext
+  intro s
+  funext t
+  have h (j : Fin 2) :
+      M.val.presheaf.map (S.indexMap t j.succAbove).op
+          (M.val.presheaf.map
+            (S.pr 0 (t ∘ j.succAbove) 0 ≫ f ((t ∘ j.succAbove) 0)).op s) =
+        M.val.presheaf.map (S.pr 1 t 0 ≫ f (t 0)).op s := by
+    rw [← AddCommGrpCat.comp_apply, ← Functor.map_comp, ← op_comp]
+    dsimp only [Function.comp_apply]
+    rw [← Category.assoc, S.indexMap_pr, S.comm]
+  change (∑ j : Fin 2, (-1 : ℤ) ^ j.val •
+    M.val.presheaf.map (S.indexMap t j.succAbove).op
+      (M.val.presheaf.map
+        (S.pr 0 (t ∘ j.succAbove) 0 ≫ f ((t ∘ j.succAbove) 0)).op s)) = 0
+  simp only [h]
+  simp [Fin.sum_univ_two]
 
 /-- The termwise module structure restricts scalars along the tuple product's map to `U`.
 Source: blueprint def-weil-pbc-cover-cech, final sentence
@@ -100,7 +117,29 @@ theorem coverScalarCochains_comm (c : R.obj.obj (op U)) (p : ℕ) :
     S.coverScalarCochains R M c p ≫ (S.complex M.val.presheaf).d p (p + 1) =
       (S.complex M.val.presheaf).d p (p + 1) ≫
         S.coverScalarCochains R M c (p + 1) := by
-  sorry
+  simp only [complex, CochainComplex.of_d]
+  apply AddCommGrpCat.ext
+  intro s
+  funext t
+  have h (j : Fin (p + 2)) :
+      R.obj.map (S.indexMap t j.succAbove).op
+          (R.obj.map
+            (S.pr p (t ∘ j.succAbove) 0 ≫ f ((t ∘ j.succAbove) 0)).op c) =
+        R.obj.map (S.pr (p + 1) t 0 ≫ f (t 0)).op c := by
+    rw [← RingCat.comp_apply, ← Functor.map_comp, ← op_comp]
+    dsimp only [Function.comp_apply]
+    rw [← Category.assoc, S.indexMap_pr, S.comm]
+  change (∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
+    M.val.map (S.indexMap t j.succAbove).op
+      (R.obj.map (S.pr p (t ∘ j.succAbove) 0 ≫
+        f ((t ∘ j.succAbove) 0)).op c • s (t ∘ j.succAbove))) =
+    R.obj.map (S.pr (p + 1) t 0 ≫ f (t 0)).op c •
+      (∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val •
+        M.val.map (S.indexMap t j.succAbove).op (s (t ∘ j.succAbove)))
+  simp only [M.val.map_smul, h, Finset.smul_sum]
+  apply Finset.sum_congr rfl
+  intro j _
+  exact smul_comm _ _ _
 
 /-- The actual scalar cochain map, used to induce the action on cohomology.
 Source: blueprint def-weil-pbc-cover-cech (blueprint: def-weil-pbc-cover-cech). -/
@@ -132,7 +171,41 @@ theorem coverCohomologyScalar_laws (p : ℕ) :
       S.coverCohomologyScalar R M p c + S.coverCohomologyScalar R M p d) ∧
     (∀ c d : R.obj.obj (op U), S.coverCohomologyScalar R M p (c * d) =
       S.coverCohomologyScalar R M p c * S.coverCohomologyScalar R M p d) := by
-  sorry
+  have hz : S.coverScalarMap R M 0 = 0 := by
+    ext q s
+    funext t
+    change R.obj.map (S.pr q t 0 ≫ f (t 0)).op 0 • s t = 0
+    simp
+  have ho : S.coverScalarMap R M 1 = 𝟙 _ := by
+    ext q s
+    funext t
+    change R.obj.map (S.pr q t 0 ≫ f (t 0)).op 1 • s t = s t
+    simp
+  have ha (c d : R.obj.obj (op U)) :
+      S.coverScalarMap R M (c + d) = S.coverScalarMap R M c + S.coverScalarMap R M d := by
+    ext q s
+    funext t
+    change R.obj.map (S.pr q t 0 ≫ f (t 0)).op (c + d) • s t =
+      R.obj.map (S.pr q t 0 ≫ f (t 0)).op c • s t + R.obj.map (S.pr q t 0 ≫ f (t 0)).op d • s t
+    simp [add_smul]
+  have hm (c d : R.obj.obj (op U)) :
+      S.coverScalarMap R M (c * d) = S.coverScalarMap R M d ≫ S.coverScalarMap R M c := by
+    ext q s
+    funext t
+    change R.obj.map (S.pr q t 0 ≫ f (t 0)).op (c * d) • s t =
+      R.obj.map (S.pr q t 0 ≫ f (t 0)).op c •
+        (R.obj.map (S.pr q t 0 ≫ f (t 0)).op d • s t)
+    simp [mul_smul]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · simp [coverCohomologyScalar, hz]
+  · simp only [coverCohomologyScalar, ho, HomologicalComplex.homologyMap_id]
+    rfl
+  · intro c d
+    simp [coverCohomologyScalar, ha, HomologicalComplex.homologyMap_add]
+  · intro c d
+    simp only [coverCohomologyScalar, hm, HomologicalComplex.homologyMap_comp,
+      AddCommGrpCat.hom_comp]
+    rfl
 
 /-- Cohomology as a module over the ring of sections on `U`, with the restriction action.
 Only the action laws are postponed; the scalar multiplication is the homology map above.

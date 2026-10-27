@@ -1,0 +1,139 @@
+{
+ "id": "def-sfb-integral-finite-scalar-model-interfaces",
+ "kind": "definition",
+ "title": "Specified integral finite scalar model interfaces",
+ "statement": "For commutative condensed coefficient rings and schemes, define the point module category, exact point pullback, pulled-back mono-cokernel complex and augmentation, geometric and scalar adjunctions, coefficient mate gamma, derived restriction, its conjugate pushforward comparison, and scalar-first projection. Define the normalized augmentation condition, point-composition comparison, DerivedAssertions and PerfectModel by exactly the formulas of the original integral finite scalar model interface. These are unchanged definitions moved to a dependency module, so the resolution and comparison statements can be stated separately without import cycles.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions and Formal properties"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-derived-categories",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "sk-def-sfb-pullback-from-point-comp",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-module-derived-pushpull-adjunction",
+  "sk-def-sfb-coefficient-change",
+  "det-prop-scalar-six-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sfb-coefficient-extension-integers-topology",
+  "def-sfb-continuous-sections-module",
+  "def-pd-section-derived-realization",
+  "def-sfb-continuous-map-condensed-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Finite free and finitely presented coefficient extensions and Formal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor by a two term finite free resolution commutes with right derived pushforward",
+   "results": "Mathlib rightDerived, rightDerived_map_eq, injective-resolution comparison lemmas; no normalized internal-module unbounded comparison theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂",
+   "results": "CategoryTheory.Pretriangulated.isIso₃_of_isIso₁₂ is the triangle step, but does not identify the scalar or projection arrows. LeanFinder square PID presentation search found Submodule.smithNormalFormCoeffs_ne_zero.",
+   "date": "2026-10-26",
+   "verdict": "tool lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousSectionsModule; projection.*isIso; IntegralFiniteScalar",
+   "results": "Padic.finite_integral_condensed_resolution already proves the arithmetic resolution. ProjectionMateExact gives a general exact transformation; no declaration supplies the full specified beta comparison. Blueprint searches finite free scalar, projection, finite integral and tensor comparison found no identical standalone specialization.",
+   "date": "2026-10-26",
+   "verdict": "use existing arithmetic theorem; new specialized derived interfaces needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFiniteScalarPerfectModel",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Specified integral finite scalar model interfaces",
+   "via": [
+    "lem-sfb-integral-finite-scalar-perfect-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralFiniteScalarModelDefinitions",
+  "file": "lean/Sheaf/Paper/IntegralFiniteScalarModelDefinitions.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.PerfectModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.PointModules",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.pointPull",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.pointRightAdditive",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.pointBraided",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.pointAbAdditive",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.pointPull_additive",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.complex",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.target",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.augmentation",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.geometricAdjunction",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.tensorPull",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.gamma",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.restriction",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.scalarAdjunction",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.restrictionPush",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.condensed",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.condensedMap",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.coefficientModuleIso",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.projection",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.targetZeroIso",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.scalarCounit",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.AugmentationNormalized",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.pointModuleComp",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.pointComplexComp",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.modelPull",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.DerivedAssertions",
+   "AlgebraicGeometry.ProEtale.IntegralFiniteScalar.PerfectModel"
+  ],
+  "statement": "def PerfectModel (O A : Type u) [CommRing O] [CommRing A] [TopologicalSpace O] [TopologicalSpace A] [IsTopologicalRing O] [IsTopologicalRing A] (a : O →+* A) (ha : Continuous a) (D : ScalarSixPullbackData.{u}) : Prop",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2512",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261025T202921-L-2766219",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2512",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261025T202921-L-2766219",
+  "kind": "interface",
+  "note": "independent cc review: item Lean and node lem-sfb-integral-finite-scalar-perfect-model and its 4 new nodes against the clone's sheaf-dag versions: target signature unchanged, the 27 moved defs verbatim; the overwritten K8 FiniteFreeScalarProjection checked against FiniteFreeProjectionExchange:248 and lem-pur-finite-free-scalar-projection"
+ }
+}

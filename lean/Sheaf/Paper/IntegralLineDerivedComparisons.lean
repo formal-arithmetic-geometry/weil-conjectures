@@ -6,6 +6,8 @@ Authors: SHEAF group J8
 module
 
 public import Sheaf.Paper.IntegralLineReductionDefinitions
+import Sheaf.Paper.IntegralLineNormalizedDerivedComparisons
+import Sheaf.Paper.IntegralLineSupportPreservation
 
 /-! # Derived signed line reduction
 
@@ -54,6 +56,13 @@ theorem integral_line_derived_comparisons
         ∀ n : ℕ, proEtaleCohomologicalSupport
           ((scalarReductionDerivedExtension.{u, u} l E X n).obj
             ((ordinary l E X L m).obj K)) ⊆ Set.Icc a z) := by
-  sorry
+  obtain ⟨d, hd⟩ := integral_line_normalized_derived_comparisons l E X L b hb
+  refine ⟨d, hd, ?_⟩
+  intro m K a z h n i hi
+  apply h n
+  apply finite_ordinary_support_subset l E X L n m
+  intro hzero
+  apply hi
+  exact hzero.of_iso ((DerivedCategory.homologyFunctor _ i).mapIso ((d m n).app K))
 
 end WeilConjectures.IntegralLineReduction

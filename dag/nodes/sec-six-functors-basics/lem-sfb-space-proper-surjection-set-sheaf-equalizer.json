@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-space-proper-surjection-set-sheaf-equalizer",
+ "kind": "statement",
+ "title": "Sheaf equalizer for a proper surjection of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Use algebraic spaces over $S$ [def-trf-algebraic-space], the universes of [def-weil-size-convention], sheaves of sets on small etale sites [def-weil-pbc-sites-and-cohomology], and the canonical sheaf adjunctions and composition comparisons of [lem-trf-space-enlarged-etale-ringed-site-model, lem-trf-space-enlarged-chart-ringed-morphism]. Fibre products are [lem-trf-space-fibre-products-etale-covers], and properness is [def-sfb-space-morphism-properties]. Let $h:V\\to U$ be a proper surjective morphism of algebraic spaces, where surjectivity means surjectivity on field-valued point classes. Put $R=V\\times_UV$, write $r_1,r_2:R\\to V$ for the projections, and put $a=hr_1=hr_2$. For every sheaf of sets $A$ on $U_{\\mathrm{et}}$, the adjunction unit is an equalizer diagram of sheaves of sets\n$$A\\xrightarrow{\\eta_h}h_*h^{-1}A\\mathrel{\\substack{\\longrightarrow\\\\[-.6ex]\\longrightarrow}}a_*a^{-1}A.$$\nThe $i$th arrow is $h_*$ applied to the unit $h^{-1}A\\to r_{i,*}r_i^{-1}h^{-1}A$, followed by the canonical composition comparisons. In particular the unit is a monomorphism, and its image consists exactly of sections whose two projection pullbacks agree. No representability, finite-presentation, Noetherianity, group-structure, or torsion assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-cohomology.tex",
+  "place": "Tag 0DFX (lemma-surjective-proper), full statement; canonical arrows normalized by the sheaf adjunction units and counits."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-set-sheaf-overlap-arrows"
+ ],
+ "proof": [
+  {
+   "text": "First verify injectivity of pullback on sections for any surjective space morphism $p:P\\to T$ and any set sheaf $F$ on $T_{\\mathrm{et}}$. If sections $s,t$ have equal pullbacks, fix $x:\\operatorname{Spec}\\Omega\\to T$. The field-point description [def-trf-algebraic-space-jointly-surjective-family] gives a field extension of $\\Omega$ lifting $x$ to $P$; enlarge it to an algebraically closed field $L$ [def-weil-algebraic-closure]. Write $e:\\operatorname{Spec}L\\to\\operatorname{Spec}\\Omega$ and $y:\\operatorname{Spec}L\\to P$ with $py=xe$. By [lem-sfb-space-geometric-points-conservative], equality upstairs gives equality of the germs at $xe$. These determine the original germs at $x$: put $G=x^{-1}F$ on the scheme $\\operatorname{Spec}\\Omega$ and apply [lem-weil-pbc-geometric-point-morphism-stalk-bijection] to its identity geometric point and $e$. The stalk comparisons of [lem-sfb-space-geometric-points-conservative] and the adjunction-compatible composition of [lem-trf-space-enlarged-ringed-composition-localization] identify that bijection with the germ map $F_x\\to F_{xe}$. Thus $s_x=t_x$ for every $x$, and geometric stalks detect equality. This proof applies to all subsequent surjective maps, with any pulled-back sheaf.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "def-weil-algebraic-closure",
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+    "lem-trf-space-enlarged-ringed-composition-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFX (lemma-surjective-proper), proof"
+   }
+  },
+  {
+   "text": "Evaluate the proposed diagram on affine scheme objects $j:T\\to U$ of the small etale site. They form a covering basis, since every scheme object has an affine open cover. Put $P=V\\times_U T$, $p:P\\to T$ and $F=j^{-1}A$. By [lem-trf-space-enlarged-chart-ringed-morphism], the middle and right section sets are $\\Gamma(P,p^{-1}F)$ and $\\Gamma(P\\times_TP,(p\\operatorname{pr}_i)^{-1}F)$. The localization and composition identifications of [lem-trf-space-enlarged-ringed-composition-localization] give exactly these identifications, including the two unit-induced arrows. The map $p$ is proper by [lem-sfb-space-proper-base-change] and surjective by [lem-sfb-space-smooth-surjective-fppf-locality]. It suffices to show the sectionwise equalizer on each such $T$: unique local antecedents then glue by the sheaf axiom, and equality can be checked on the same covers.",
+   "uses": [
+    "lem-trf-space-enlarged-chart-ringed-morphism",
+    "lem-trf-space-enlarged-ringed-composition-localization",
+    "lem-sfb-space-proper-base-change",
+    "lem-sfb-space-smooth-surjective-fppf-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFX (lemma-surjective-proper), proof"
+   }
+  },
+  {
+   "text": "The space $P$ is separated and of finite type over the affine scheme $T$, since $p$ is proper. Apply [lem-sfb-space-weak-chow] to obtain a proper universally surjective morphism $c:Z\\to P$ from a scheme. Its composite $q=pc:Z\\to T$ is proper by [lem-sfb-space-proper-composition] and surjective by composition of the field-point images. In particular $q$ is a proper surjection of schemes, with the ordinary scheme meaning of properness, as included in that composition node. The scheme fibre product $Z\\times_TZ$ maps to the space $P\\times_TP$ by $(c,c)$.",
+   "uses": [
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFX (lemma-surjective-proper), proof"
+   }
+  },
+  {
+   "text": "Let $b\\in\\Gamma(P,p^{-1}F)$ have equal pullbacks along the projections $P\\times_TP\\rightrightarrows P$. Its pullback $b_Z$ to $Z$ has equal pullbacks on $Z\\times_TZ$, by restriction along $(c,c)$. Apply [lem-sfb-etale-set-sections-ph-sheaf] to $F$ on the scheme $T$. The singleton proper surjection $q$ is a ph cover by [def-trf-ph-scheme-site]. The sheaf axiom for this cover therefore gives a unique $s\\in F(T)$ whose pullback along $q$ is $b_Z$. The transition maps in that node are inverse-image sections, so its matching condition is precisely the equality just obtained, not an unrelated comparison map.",
+   "uses": [
+    "lem-sfb-etale-set-sections-ph-sheaf",
+    "def-trf-ph-scheme-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFX (lemma-surjective-proper), proof"
+   }
+  },
+  {
+   "text": "The sections $p^{-1}s$ and $b$ of $p^{-1}F$ on $P$ agree after pullback along $c$, by the definition of $s$. Step 1, applied to the surjective map $c$ and the sheaf $p^{-1}F$, makes that pullback injective, hence $p^{-1}s=b$. Step 1 applied to $p$ proves uniqueness. Conversely a section pulled back from $T$ has equal projection pullbacks because $p\\operatorname{pr}_1=p\\operatorname{pr}_2$. We have proved the required equalizer on every affine etale $T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFX (lemma-surjective-proper), proof"
+   }
+  },
+  {
+   "text": "For clarity about normalization, the map on sections attached to a morphism $d$ is the map obtained by applying global sections to its adjunction unit; successive pullbacks compose under the adjunction-compatible comparisons of [lem-trf-space-enlarged-ringed-composition-localization]. Thus the two maps used above are $h_*$ of the units for $r_i$, followed by exactly the stated composition comparisons. The unique antecedents on the affine covering basis glue, and uniqueness makes them commute with restriction. They give the universal factorization through $A$ of any sheaf map equalizing the two arrows. The same uniqueness gives monicity of $\\eta_h$ and the asserted description of its image.",
+   "uses": [
+    "lem-trf-space-enlarged-ringed-composition-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tag 0DFX (lemma-surjective-proper), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-algebraic-closure",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "lem-sfb-space-proper-base-change",
+  "lem-sfb-space-smooth-surjective-fppf-locality",
+  "lem-sfb-space-weak-chow",
+  "lem-sfb-space-proper-composition",
+  "lem-sfb-etale-set-sections-ph-sheaf",
+  "def-trf-ph-scheme-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-cohomology.tex",
+  "place": "Tag 0DFX (lemma-surjective-proper), correcting the affine-target typo in its proof; scheme input is Tag 0DDW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper surjection of algebraic spaces every etale sheaf of sets is the equalizer of its pullback pushforward and the two double overlap maps",
+   "results": "{\"t\": \"2026-10-23T22:41:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper surjection of algebraic spaces every etale sheaf of sets is the equalizer of its pullback pushforward and the two double overlap maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"2dea3eb307149a85\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"equalizer\"",
+   "results": "{\"t\": \"2026-10-23T22:41:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"equalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(equaliz|descent)|equaliz.*proper",
+   "results": "{\"t\": \"2026-10-23T22:41:50Z\", \"tool\": \"grep\", \"query\": \"proper.*(equaliz|descent)|equaliz.*proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Condensed/Explicit.lean\", \"Mathlib/Condensed/Explicit.lean\"], \"digest\": \"659f5496b9b1d77c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of etale sheaf sections along a proper surjective morphism of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T22:41:50Z\", \"tool\": \"leansearch\", \"query\": \"Descent of etale sheaf sections along a proper surjective morphism of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\"], \"digest\": \"189781af5a4e8d78\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of sets on small etale sites satisfy the Cech equalizer condition for proper surjective covers of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T22:41:56Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of sets on small etale sites satisfy the Cech equalizer condition for proper surjective covers of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf\", \"CategoryTheory.Presheaf.isSheafForIsSheafFor'\", \"CategoryTheory.Presheaf.isSheaf_iff_isLimit_pretopology\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CategoryTheory.Presheaf.IsSheaf'\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda\", \"CategoryTheory.isSheaf_coherent\", \"CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition\"], \"digest\": \"9c0851ede7f454ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-property stability, ordinary adjunction/composition, and abstract sheaf conditions do not supply this proper etale set-sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(equaliz|descent)|equaliz.*proper",
+   "results": "{\"t\": \"2026-10-23T23:37:55Z\", \"tool\": \"grep\", \"query\": \"proper.*(equaliz|descent)|equaliz.*proper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Order/CompleteLattice/MulticoequalizerDiagram.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/RingTheory/LocalRing/Pullback.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\"], \"digest\": \"ab5c4bbd9497c13a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness, fpqc descent of scheme morphism properties, abstract sheaf equalizers and condensed equalizers do not give proper-surjective descent of arbitrary small etale set sheaves on spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper surjective morphisms of algebraic spaces give descent of arbitrary etale sheaf sections",
+   "results": "{\"t\": \"2026-10-23T23:37:55Z\", \"tool\": \"leansearch\", \"query\": \"Proper surjective morphisms of algebraic spaces give descent of arbitrary etale sheaf sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"CategoryTheory.Sheaf.isLocallySurjective_iff_epi'\"], \"digest\": \"339dfea99bcfdd07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness, fpqc descent of scheme morphism properties, abstract sheaf equalizers and condensed equalizers do not give proper-surjective descent of arbitrary small etale set sheaves on spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"equalizer\"",
+   "results": "{\"t\": \"2026-10-23T23:37:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"equalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness, fpqc descent of scheme morphism properties, abstract sheaf equalizers and condensed equalizers do not give proper-surjective descent of arbitrary small etale set sheaves on spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper surjection of algebraic spaces every etale sheaf of sets is the equalizer of its pullback pushforward and the two overlap maps",
+   "results": "{\"t\": \"2026-10-23T23:37:56Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper surjection of algebraic spaces every etale sheaf of sets is the equalizer of its pullback pushforward and the two overlap maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"7115d0bdb943f9a9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: properness, fpqc descent of scheme morphism properties, abstract sheaf equalizers and condensed equalizers do not give proper-surjective descent of arbitrary small etale set sheaves on spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proper-set-sheaf-base-change",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, through Alper Proposition 7.1.1 Hom exactness and Rydh (5.19)(i); supporting Rydh (5.17) proof, printed p.22: Corollary (5.16), proper-surjective input after the refinement (3.10); proper-surjection input, equalizer descent construction: proper base change for sheaves of sets (Stacks 0DG0).; Tag 0DG0 proof: supporting 0DFX (lemma-surjective-proper).",
+   "via": [
+    "lem-sfb-space-proper-set-sheaf-base-change",
+    "lem-sfb-proper-surjection-etale-space-effectivity",
+    "lem-sfb-space-qc-subtrusive-etale-descent",
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-homeomorphism-separated-etale-equivalence",
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-surjection-set-sheaf-equalizer",
+  "worker": "stage1",
+  "summary": "Read Stacks 0DFX, 0DDW, 089J and all cited statements. Preserved the item statement and its dependencies. Proved arbitrary-surjection injectivity from field lifts and stalk comparisons, then reduced on affine target charts, took the weak Chow scheme cover, descended by the ph sheaf condition and checked agreement by injectivity. Added only the general set-valued ph-extension theorem, because existing 0DDW nodes are abelian or torsion. Corrected the source proof typo Y affine to X affine in the argument, without changing the theorem.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route, at the recorded 0DG0 proof input 0DFX; realizes its proper-surjection equalizer argument by 0DDW and weak Chow. Current blueprint direct-images proof was read; no blueprint node states the new ph-extension theorem.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space-jointly-surjective-family",
+    "why": "Generic joint surjectivity of families on algebraic-space points used in proper-surjection section descent; no statement of this unit supplies this general interface."
+   },
+   {
+    "node": "def-weil-algebraic-closure",
+    "why": "Generic algebraic closure of a field used in proper-surjection section descent; no statement of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+    "why": "Generic a morphism of geometric points induces a bijection of etale stalks used in proper-surjection section descent; no statement of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-trf-space-enlarged-ringed-composition-localization",
+    "why": "Generic composition and etale ringed localization for enlarged sites used in proper-surjection section descent; no statement of this unit supplies this general interface."
+   },
+   {
+    "node": "lem-trf-space-enlarged-chart-ringed-morphism",
+    "why": "Generic chart-normalized ringed morphism on enlarged etale sites used in proper-surjection section descent; no statement of this unit supplies this general interface."
+   },
+   {
+    "node": "def-trf-ph-scheme-site",
+    "why": "Generic the big ph site of schemes used in proper-surjection section descent; no statement of this unit supplies this general interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "lem-trf-space-enlarged-chart-ringed-morphism",
+  "def-trf-ph-scheme-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-d3f28a276",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-d3f28a276 (reviewer sub-agent of L); spot-checked: Read Stacks 0DFX (spaces-more-cohomology.tex 149-186) and 0DDW (etale-cohomology.tex 22174-22240), plus every cited statement. The item's statement, stmt_deps and source are unchanged from Q30's creation. It matches 0DFX for arbitrary set sheaves, with the arrows normalized as h_* of the units for r_i followed by the composition comparisons. There is no repair note, so the re-split rules do not apply. The report's source error is real: the proof's 'Y affine' should be 'X affine', since weak Chow needs an affine target. Step 1 gets the field lift from def-trf-algebraic-space-jointly-surjective-family and an algebraic closure. It applies the scheme stalk-bijection lemma on Spec Omega, not on the space T, and uses conservativity and the stalk identifications of lem-sfb-space-geometric-points-conservative. Step 2 uses the chart direct-image formula and the localization/composition identifications. It takes properness base change for arbitrary g from lem-sfb-space-proper-base-change and surjectivity base change from the smooth-surjective-locality node. Step 3: P is proper over affine T, so separated and of finite type; weak Chow gives a scheme Z with c proper and universally surjective, and q is proper by the composition node and surjective by composing point maps. Step 4: the singleton proper surjection is a generating ph cover in def-trf-ph-scheme-site, and the matching condition follows via (c,c), with no abelian structure needed. Step 5 is elementary: step 1 applied to c with the sheaf p^{-1}F, and to p for uniqueness. Step 6 is basis gluing and does not use the parent's proper base change, so there is no cycle. The new node lem-sfb-etale-set-sections-ph-sheaf is exactly the sheaf assertion of 0DDW for set sheaves and is statement only. Its seven Mathlib searches found no match, and same_as is []. It duplicates no existing node: lem-trf-proper-surjection-etale-section-equalizer is abelian only, the ph torsion and comparison nodes are torsion abelian, and the effectivity node is about etale spaces. Q56's parallel scheme split created no nodes. The new node's closure contains neither the item nor the parent. Edge cases checked: empty T or U, empty F, identity cover, fold map, nonreduced base, and the non-surjective case where injectivity fails. All six declared tool uses are generic and accepted. Batch-5 flags: def-trf-ph-scheme-site and def-trf-algebraic-space-jointly-surjective-family are general definitions. lem-trf-space-enlarged-ringed-composition-localization is ringed-site formalism; I checked that its closure contains no poincare, nt-assume or trace-transport node. The sfb space lemmas (conservativity, proper base change, surjectivity locality, weak Chow, proper composition) reach sec-trace-formula only through def-trf-algebraic-space. None is a step of the proof of the trace formula or of Poincare duality, so no assumption leaf is needed. No SGA is used and no fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperSurjectionSetSheafEqualizer",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properSurjection_setSheaf_equalizer",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.properSurjection_setSheaf_equalizer"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperSurjectionSetSheafEqualizer.lean",
+  "statement": "theorem properSurjection_setSheaf_equalizer {V U : AlgebraicSpace S} (h : V ⟶ U) (hp : MapIsProper h) (hs : Function.Surjective (mapPoint h.hom.hom)) (A : Sheaf U.etaleTopology (Type (max (u + 1) w))) : ∃ c : (smallEtaleMorphism h).adj.unit.app A ≫ properDescentOverlapMap (enlargedFibreProductFst h h) h (enlargedFibreProductFst h h ≫ h) rfl A = (smallEtaleMorphism h).adj.unit.app A ≫ properDescentOverlapMap (properDescentSecondProjection h) h (enlargedFibreProductFst h h ≫ h) (ObjectProperty.hom_ext _ (Limits.pullback.condition)).symm A, Nonempty (IsLimit (Fork.ofι ((smallEtaleMorphism h).adj.unit.app A) c)) ∧ Mono ((smallEtaleMorphism h).adj.unit.app A) ∧ ∀ (T : U.EtaleSite), Function.Injective (((smallEtaleMorphism h).adj.unit.app A).hom.app (op T)) ∧ ∀ b : ((smallEtaleMorphism h).direct.obj ((smallEtaleMorphism h).inverse.obj A)).obj.obj (op T), (properDescentOverlapMap (enlargedFibreProductFst h h) h (enlargedFibreProductFst h h ≫ h) rfl A).hom.app (op T) b = (properDescentOverlapMap (properDescentSecondProjection h) h (enlargedFibreProductFst h h ≫ h) (ObjectProperty.hom_ext _ (Limits.pullback.condition)).symm A).hom.app (op T) b ↔ ∃ s : A.obj.obj (op T), ((smallEtaleMorphism h).adj.unit.app A).hom.app (op T) s = b",
+  "branch": "sheaf-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 ownership repair: the five concrete overlap helpers are now owned by def-sfb-space-set-sheaf-overlap-arrows in its own module, with existing geometric-morphism and enlarged-comparison definitions owned by their two new existing:true definition nodes. The theorem signature and proof dependencies are unchanged; neither proof theorem is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94bd1e9af",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Re-delivery of the b2d7 H2 return. The item now adds only def-sfb-space-set-sheaf-overlap-arrows to its original eight stmt_deps; both theorem nodes are back to proof_deps only, and the theorem signature is identical to b2d7. The five overlap helpers were moved byte-identical into their own module owned by that def node. Two existing:true def nodes own smallEtaleMorphism and enlargedCompositionIso/enlargedDirectCompositionIso; their signatures match the side-live source verbatim, both have real data, and no other DAG owner exists. All three new nodes pass the B12 field checks. Statement re-checked against Stacks 0DFX: hypotheses (MapIsProper, field-point surjectivity, arbitrary set sheaf, free w) and conclusions (IsLimit fork, Mono, sectionwise injectivity and image iff) are all correct; edge cases fine. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,252 @@
+{
+ "id": "lem-a1-principal-free-algebra-determinant-norm",
+ "kind": "statement",
+ "title": "Constructing the determinant norm from a principal free cover",
+ "statement": "Let $R,D$ be commutative rings, $\\rho:R\\to D$ unital, $r\\ge0$, and $f_1,\\ldots,f_m\\in R$ generate the unit ideal. Regard $D$ as an $R$-algebra through $\\rho$. Suppose each $D_{f_i}$ is free with a basis of $r$ elements over $R_{f_i}$ [def-weil-ring-localization-away, def-weil-pbc-module-localization-away, def-weil-pbc-free-module]. For $u\\in D$ let $\\mu_u$ be multiplication by $u$, and let $\\chi_u(Z)\\in R[Z]$ be its unique scalar-extension characteristic polynomial of [lem-weil-pbc-charpoly-locally-free-existence]. Then\n$$N_{D/R}:D\\to R,\\qquad N_{D/R}(u)=(-1)^r\\chi_u(0)$$\nis the unique function with the following local determinant characterization: for every $a\\in R$, every finite basis $e$ of $D_a$ over $R_a$, and $u\\in D$, its image in $R_a$ is the determinant of multiplication by $u/1$ in $e$ [def-weil-endomorphism-determinant]. More generally, for every unital ring map $R\\to R'$ making $D\\otimes_R R'$ free with an $r$-element basis $e$, the image of $N_{D/R}(u)$ equals $\\det(\\mu_u\\otimes1)$ in that basis [def-weil-module-base-change]. Thus the function is independent of the generating cover and all bases. If $p:\\operatorname{Spec}D\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] is the associated map and $p_*\\mathcal O_{\\operatorname{Spec}D}$ is quasi-coherent [pqf-def-coherent] (here $(p_*\\mathcal O)(W)=\\mathcal O(p^{-1}W)$), then for every affine open $V\\subseteq\\operatorname{Spec}R$ on which $\\Gamma(p^{-1}V,\\mathcal O)$ is finite free over $\\mathcal O(V)$, the restriction of $N_{D/R}(u)$ equals the determinant of multiplication by $u|_{p^{-1}V}$, in every finite basis. Zero rings, $r=0$, and the empty cover when $R=0$ are included.",
+ "source": {
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tags 02DU (exercises-exercise-trace-det)(1) and 02DV (exercises-exercise-trace-det-rings)(1); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), proof (3) implies (1), characteristic-polynomial gluing paragraph; old item proof steps 6-7."
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-charpoly-locally-free-existence",
+  "def-weil-endomorphism-determinant",
+  "def-weil-module-base-change",
+  "def-weil-affine-spectrum",
+  "pqf-def-coherent",
+  "def-weil-pbc-charpoly-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "For each $u\\in D$, multiplication $\\mu_u(d)=ud$ is $R$-linear, since $D$ is a commutative $R$-algebra. Apply [lem-weil-pbc-charpoly-locally-free-existence] to this endomorphism and the given principal cover and rank-$r$ bases. Denote its unique polynomial by $\\chi_u$ and set $N(u)=(-1)^r\\chi_u(0)$. This defines a function on all of $D$, with no choice of a global basis.",
+   "uses": [
+    "lem-weil-pbc-charpoly-locally-free-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph of (3) implies (1)."
+   }
+  },
+  {
+   "text": "Let $\\alpha:R\\to S$ be unital and $e$ an $r$-element basis of $D\\otimes_RS$. The scalar-extension characterization in [lem-weil-pbc-charpoly-locally-free-existence] gives $\\alpha(\\chi_u)=\\det(ZI_r-M_e)$, where $M_e$ is the matrix of $\\mu_u\\otimes1$. Evaluating at zero commutes with $\\alpha$. The permutation formula [def-weil-pbc-matrix-determinant] gives $\\det(-M_e)=(-1)^r\\det(M_e)$ by taking one minus sign out of each of the $r$ factors in every summand. Therefore $\\alpha(N(u))=(-1)^{2r}\\det(M_e)=\\det(M_e)$. This calculation includes empty matrices and zero coefficient rings.",
+   "uses": [
+    "lem-weil-pbc-charpoly-locally-free-existence",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph of (3) implies (1)."
+   }
+  },
+  {
+   "text": "In fact the equality in step 2 holds for any finite basis $e$ of $D\\otimes_RS$, say of size $k$. Put $g_i=\\alpha(f_i)$ and $T_i=S_{g_i}$. Applying $\\alpha$ to a relation $\\sum c_if_i=1$ shows that the $g_i$ generate the unit ideal. Over $T_i$ there is an $r$-element basis: extend the given basis over $R_{f_i}$ along $R_{f_i}\\to T_i$ and use [lem-weil-pbc-localization-module-tensor] and [lem-weil-pbc-module-base-change-transitive]. The basis $e$ also extends to a $k$-element basis over $T_i$ by [lem-weil-pbc-charpoly-free-module-properties](d). If $T_i\\ne0$, the two coordinate isomorphisms give $T_i^k\\simeq T_i^r$, so [lem-sfb-commutative-ring-invariant-basis-number] gives $k=r$; step 2 applies in that basis. If $T_i=0$, both elements being compared are its unique element. The localized matrix of multiplication is the entrywise image of $M_e$ by the same free-module properties; the permutation formula shows that taking its determinant commutes with $S\\to T_i$. Consequently $\\alpha(N(u))-\\det(M_e)$ maps to zero in every $T_i$. Apply [lem-weil-pbc-standard-covering-glue](i) over $S$ to conclude equality in $S$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-tensor",
+    "lem-weil-pbc-module-base-change-transitive",
+    "lem-weil-pbc-charpoly-free-module-properties",
+    "lem-sfb-commutative-ring-invariant-basis-number",
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-standard-covering-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph of (3) implies (1)."
+   }
+  },
+  {
+   "text": "For $S=R_a$, [lem-weil-pbc-localization-module-tensor] identifies $D\\otimes_RR_a$ with $D_a$, carrying $d\\otimes(b/a^q)$ to $bd/a^q$ and $\\mu_u\\otimes1$ to multiplication by $u/1$. Thus step 3 gives the required equality in every finite basis of $D_a$. If $N'$ is another function with this localization characterization, apply it at each $a=f_i$ in the given rank-$r$ basis. For every $u$, the element $N'(u)-N(u)$ has zero image in all $R_{f_i}$, hence is zero by [lem-weil-pbc-standard-covering-glue](i). This proves uniqueness. The characterization quantifies over all $a$ and all finite bases and contains no chosen generating cover, so uniqueness also proves independence of the cover and the bases.",
+   "uses": [
+    "lem-weil-pbc-localization-module-tensor",
+    "lem-weil-pbc-standard-covering-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph of (3) implies (1)."
+   }
+  },
+  {
+   "text": "For the affine-open assertion put $X=\\operatorname{Spec}R$, $F=p_*\\mathcal O_{\\operatorname{Spec}D}$ and $A=\\mathcal O_X(V)$. Here $F(W)=\\mathcal O(p^{-1}W)$, so $F(X)=D$. By hypothesis $F$ is quasi-coherent. Apply [lem-weil-pbc-module-pullback-affine-sections] to the open immersion $j:V\\hookrightarrow X$, the affine opens $X$ and $V$, and $F$. The unit-compatible isomorphism of [lem-weil-pbc-open-immersion-module-pullback-restriction] identifies pullback along $j$ with restriction and the pullback unit with the ordinary restriction of sections. The stated unit-normalized map therefore gives the $A$-linear isomorphism $c:D\\otimes_RA\\to F(V)$, $d\\otimes a\\mapsto a(d|_{p^{-1}V})$. Under $c$, scalar extension of $\\mu_u$ becomes multiplication by $u|_{p^{-1}V}$: on a pure tensor both composites have value $a((ud)|_{p^{-1}V})=u|_{p^{-1}V}\\,a(d|_{p^{-1}V})$. Pure tensors generate, so the maps agree. Transport any given finite basis of $F(V)$ by $c^{-1}$ and apply step 3 with $S=A$. The corresponding multiplication matrices have identical entries. This proves the affine-open determinant formula in every finite basis.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph of (3) implies (1)."
+   }
+  },
+  {
+   "text": "If $R=0$, unitality forces $D=0$; every unital scalar extension also has zero coefficient ring, and all asserted equalities and uniqueness hold in a singleton. This includes the empty generating cover: its span is the zero ideal, so it generates the unit ideal only when $R=0$. If $r=0$, the polynomial shape in [lem-weil-pbc-charpoly-locally-free-existence] is $\\chi_u=1$, so $N(u)=1_R$, agreeing with the empty determinant of [def-weil-pbc-matrix-determinant]. All arguments above allow zero localizations; step 3 invoked invariant basis number only for the nonzero ones.",
+   "uses": [
+    "lem-weil-pbc-charpoly-locally-free-existence",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph of (3) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-charpoly-locally-free-existence",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-weil-pbc-module-base-change-transitive",
+  "lem-weil-pbc-charpoly-free-module-properties",
+  "lem-sfb-commutative-ring-invariant-basis-number",
+  "lem-weil-pbc-standard-covering-glue",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 09XI (more-algebra-lemma-characterize-henselian-pair), characteristic-polynomial gluing paragraph of (3) implies (1).",
+  "note": "The Stacks exercises ask for this construction; the signed constant-coefficient and affine-open arguments are written out here, using existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebra free of constant rank on a finite principal cover construct a unique determinant norm from the constant coefficient of its glued characteristic polynomial and identify norm of T minus b with that characteristic polynomial",
+   "results": "OK 8 hits: Algebra.norm_apply, Algebra.norm_algebraMap_of_basis, Algebra.norm_eq_matrix_det, Algebra.norm_eq_one_of_not_exists_basis, associated_norm_prod_smith, Algebra.norm_one_add_smul, Algebra.norm, Algebra.norm_eq_zero_iff'. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib norm and determinant use a finite global basis (and default to 1 without one); free characteristic-polynomial formulas do not construct the locally free determinant norm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"charpoly\"",
+   "results": "OK 0 hits: . Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib norm and determinant use a finite global basis (and default to 1 without one); free characteristic-polynomial formulas do not construct the locally free determinant norm."
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly.*[Pp]rojective|[Pp]rojective.*charpoly|norm.*charpoly|charpoly.*norm",
+   "results": "OK 1 hits: Mathlib/RingTheory/Norm/Basic.lean. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib norm and determinant use a finite global basis (and default to 1 without one); free characteristic-polynomial formulas do not construct the locally free determinant norm."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra locally free on a principal cover has a unique function to the base ring whose images in every free scalar extension are determinants of multiplication given by signed constant coefficients of characteristic polynomials",
+   "results": "OK 8 hits: LinearMap.det_eq_sign_charpoly_coeff, LinearMap.detAux, LinearMap.charpoly, LinearMap.det_restrictScalars, LinearMap.polyCharpoly, LinearMap.free_of_det_ne_one, LinearMap.detAux_def, LinearMap.det_baseChange. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib norm and determinant use a finite global basis (and default to 1 without one); free characteristic-polynomial formulas do not construct the locally free determinant norm."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a determinant norm for an algebra locally free of constant rank on a principal open cover from its glued characteristic polynomial, with compatibility on every free scalar extension",
+   "results": "OK 8 hits: Algebra.norm_apply, Algebra.norm_localization, Algebra.norm_eq_matrix_det, Algebra.norm, Algebra.norm_eq_zero_iff', LinearMap.det_restrictScalars, Algebra.norm_eq_iff, associated_norm_prod_smith. Source read: Algebra.norm defaults to 1 without a finite global basis; norm_localization assumes Module.Free R S and Module.Finite R S. Matrix formulas only handle the free case.",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: global freeness required by norm localization; no locally free norm construction with the stated universal characterization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"charpoly\"",
+   "results": "OK 0 hits: . Source read: Algebra.norm defaults to 1 without a finite global basis; norm_localization assumes Module.Free R S and Module.Finite R S. Matrix formulas only handle the free case.",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: global freeness required by norm localization; no locally free norm construction with the stated universal characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly.*[Pp]rojective|[Pp]rojective.*charpoly|norm.*charpoly|charpoly.*norm",
+   "results": "OK 1 hits: Mathlib/RingTheory/Norm/Basic.lean. Source read: Algebra.norm defaults to 1 without a finite global basis; norm_localization assumes Module.Free R S and Module.Finite R S. Matrix formulas only handle the free case.",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: global freeness required by norm localization; no locally free norm construction with the stated universal characterization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "determinant norm of a finite locally free algebra compatible with localization and arbitrary free scalar extension",
+   "results": "OK 8 hits: Algebra.norm_localization, LinearMap.det_restrictScalars, Algebra.norm_apply, Algebra.intNorm_eq_of_isLocalization, Algebra.Norm.Transitivity.comp_det_mul_pow, AlgHom.map_det, Algebra.norm_eq_iff, Algebra.intNorm_eq_norm. Source read: Algebra.norm defaults to 1 without a finite global basis; norm_localization assumes Module.Free R S and Module.Finite R S. Matrix formulas only handle the free case.",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: global freeness required by norm localization; no locally free norm construction with the stated universal characterization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Norm on a finite projective algebra constructed as the signed constant coefficient of the locally glued characteristic polynomial",
+   "results": "OK 8 hits: Algebra.norm, spectralAlgNorm_of_finiteDimensional_normal, Algebra.intNormAux, ClassGroup.normBound, Algebra.norm_zero, Algebra.norm_apply, Algebra.intNorm_eq_norm, Algebra.norm_eq_matrix_det. Source read: Algebra.norm defaults to 1 without a finite global basis; norm_localization assumes Module.Free R S and Module.Finite R S. Matrix formulas only handle the free case.",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: global freeness required by norm localization; no locally free norm construction with the stated universal characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "det_eq_sign_charpoly_coeff|charpoly_coeff_zero|eval.*charpoly",
+   "results": "OK 19 hits: Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean. Source read: Algebra.norm defaults to 1 without a finite global basis; norm_localization assumes Module.Free R S and Module.Finite R S. Matrix formulas only handle the free case.",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: global freeness required by norm localization; no locally free norm construction with the stated universal characterization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Auxiliary affine-quotient algebra in the historical expansion beneath lem-a1-affine-hc0's lissity/support argument. Precise current use: lem-a1-affine-groupoid-integral-invariants, proof step 3; Stacks groupoids-lemma-integral-over-invariants, second paragraph, monicity and Cayley-Hamilton for the norm polynomial. The earlier 'fourth paragraph' locator was stale: the master blueprint ancestor has one support paragraph and main-20261015 has no proof text. Re-split of norm-polynomial item, old proof steps 6-7 (glued characteristic polynomials and determinant norm).",
+   "via": [
+    "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-principal-free-algebra-determinant-norm",
+  "worker": "stage1",
+  "summary": "Constructed the norm from the existing universal characteristic polynomial, derived the determinant identity directly from the permutation formula, handled arbitrary finite bases by localization and invariant basis number, proved uniqueness and the affine-open clause using the existing closed affine pullback section theorem. No new nodes and no statement change beyond defining direct-image notation and citing quasi-coherence.",
+  "blueprint": "Historical auxiliary affine-quotient algebra below lem-a1-affine-hc0; immediate parent lem-a1-finite-locally-free-norm-characteristic-polynomial step 4. The latest blueprint ancestor has a support/coefficient-comparison proof, not an explicit norm assertion; this split retains the historical auxiliary route rather than attributing norm statements to that latest text."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N5-243ba25d7",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-243ba25d7 (reviewer sub-agent of L); spot-checked: I read the item and all 9 cited statements in full; nothing needed changing and no fixes were written. The live and side-live item is still unsplit and there is no repair note, so nothing supersedes the delivery. Statement: the only change from base is the added [pqf-def-coherent] citation (which defines quasi-coherent) and the inline (p_*O)(W)=O(p^{-1}W); the meaning is unchanged. proof_deps equals the union of the step uses, there is no SGA, and every cited node is a Mathlib leaf or Lean-closed (charpoly_locallyFree_exists_unique, exists_tensorPullback_affine_sections), so there is no route issue and no tool_uses are needed. Source: Stacks exercises.tex 02DU(1) and 02DV(1),(3) are exercises, so proof_origin agent is correct. Step 1: hypotheses of charpoly-locally-free-existence match exactly. Step 2: eval-at-0 plus Leibniz sign (-1)^r; the det(TI-X) column convention agrees with def-weil-endomorphism-determinant. Step 3: a size-k basis is compared through T_i=S_{alpha(f_i)}; IBN is used only for T_i nonzero (its hypothesis), (d) gives entrywise matrices, then gluing (i) over S; k not equal to r forces S=0, which is consistent. Step 4: localization-tensor carries mu_u tensor 1 to multiplication by u/1; uniqueness by gluing (i). Step 5: pullback-affine-sections with j:V->X and affine opens X,V, combined with kappa(g|)=eta(g) at W=X, gives c(d tensor a)=a d|; Gamma(Spec D)=D comes from def-weil-affine-spectrum; I checked the pure-tensor computation. Step 6: R=0, the empty cover and r=0 (chi=1) are handled. Small cases: Z[i] gives a^2+b^2, RxR gives ab, D=R gives u. Duplicate check: lem-pd-finite-locally-free-norm-charts is a chart-glued section for finite flat finitely presented maps, with no rank, no chi formula, no base change and no uniqueness, so it is not a duplicate. No new nodes, so no D1 or D2 restatement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalFreeAlgebraNorm",
+  "declaration": "Algebra.principalFreeNorm_spec",
+  "declarations": [
+   "Algebra.localizedMul",
+   "Algebra.principalFreeNorm",
+   "Algebra.principalFreeNorm_spec",
+   "AlgebraicGeometry.principalFreeNorm_affineOpen"
+  ],
+  "file": "lean/Sheaf/RingTheory/PrincipalFreeAlgebraNorm.lean",
+  "statement": "theorem principalFreeNorm_spec {R : Type u} {D : Type v} [CommRing R] [CommRing D] [Algebra R D] {r m : ℕ} (f : Fin m → R) (hgen : Ideal.span (Set.range f) = ⊤) (hfree : ∀ i : Fin m, ∃ _e : Module.Basis (Fin r) (Localization.Away (f i)) (LocalizedModule.Away (f i) D), True) : (∀ (a : R) (k : ℕ) (e : Module.Basis (Fin k) (Localization.Away a) (LocalizedModule.Away a D)) (u : D), algebraMap R (Localization.Away a) (principalFreeNorm f hgen hfree u) = (LinearMap.toMatrix e e (localizedMul a u)).det) ∧ (∀ N : D → R, (∀ (a : R) (k : ℕ) (e : Module.Basis (Fin k) (Localization.Away a) (LocalizedModule.Away a D)) (u : D), algebraMap R (Localization.Away a) (N u) = (LinearMap.toMatrix e e (localizedMul a u)).det) → N = principalFreeNorm f hgen hfree) ∧ (∀ (S : Type (max u w)) [CommRing S] [Algebra R S] (e : Module.Basis (Fin r) S (S ⊗[R] D)) (u : D), algebraMap R S (principalFreeNorm f hgen hfree u) = (LinearMap.toMatrix e e ((LinearMap.mul R D u).baseChange S)).det)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The norm is defined by the existing Algebra.locallyFreeCharpoly; the main theorem gives local characterization, uniqueness and scalar extension, and the companion theorem gives the affine-open clause. Added the already landed characteristic-polynomial definition node to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbdfdc892",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, all 9 stmt_dep records, the Lean module, the report and the parent/sibling nodes in side-live. principalFreeNorm = (-1)^r*(locallyFreeCharpoly ...).eval 0, exactly the node formula and not hollow. Conjunct 1 quantifies over every a, every k and every Fin k basis of D_a; localizedMul is IsBaseChange.equiv conj of mu_u tensor 1, i.e. multiplication by u/1; k is not forced to equal r, which is right for zero localizations. Conjunct 2 is uniqueness as in the node. Conjunct 3 uses rank-r bases of S tensor D with S : Type (max u w), the same convention as the landed charpoly dependency; sign checked: charpoly = det(X-M), eval 0 = (-1)^r det M. The affine-open theorem uses the actual Spec.map, the pushforward of the unit module, IsQuasicoherent, every affine V and every finite basis, with ordinary restrictions. Edge cases covered: R=0 with the empty cover, r=0 (norm 1), zero localizations, empty V. lean.statement is verbatim; the added stmt_dep def-weil-pbc-charpoly-locally-free landed before the base. Not a duplicate of the parent's IsLocallyFreeDeterminantNorm (the parent uses this item as a proof dep; equivalent formulation), of lem-sfb-finite-locally-free-function-norm, or of Mathlib Algebra.norm (needs a global basis). Docstrings carry source, blueprint id and steps 1-6; sorry only; no SGA; report sections present. No file changed, so nothing compiled."
+ }
+}

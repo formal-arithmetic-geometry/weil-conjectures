@@ -1,0 +1,297 @@
+{
+ "id": "lem-sf-native-weil-constructible-abelian",
+ "kind": "statement",
+ "title": "Abelian ambient category and weak Serre constructible native Weil sheaves",
+ "statement": "Fix a finite field $k_0$ and a prime $\\ell\\ne\\operatorname{char}(k_0)$. Use the locally finite continuous $\\Omega=\\overline{\\mathbf Q}_\\ell$ coefficient sheaves, the categories $\\mathcal A_T$ of their module sheaves, the categories $\\mathcal W_T$ of pro-etale sheaves with invertible Frobenius structure, and the constructibility condition of [def-sf-native-weil-derived-framework]. Let $T$ be a $k_0$-scheme locally of finite type [def-weil-finite-type-morphism]. The category $\\mathcal W_T$ is Grothendieck abelian (it has a generator, all small colimits, and exact filtered colimits). The forgetful functor $\\operatorname{For}:\\mathcal W_T\\to\\mathcal A_T$ is exact and conservative. Let $\\mathcal C_T\\subset\\mathcal W_T$ be the full subcategory of objects whose underlying sheaf is constructible. It contains zero and is invariant under isomorphism. Kernels and cokernels in $\\mathcal W_T$ of morphisms between objects of $\\mathcal C_T$ belong to $\\mathcal C_T$. For every short exact sequence $0\\to F\\to E\\to G\\to0$ in $\\mathcal W_T$ with $F,G\\in\\mathcal C_T$, also $E\\in\\mathcal C_T$.",
+ "source": {
+  "document": "lean/WeilConjectures/WeilSheaf/Category.lean",
+  "place": "lines 134-155, 190-218; CategoryTheory/Endofunctor/IsoAlgebra.lean exact forgetful structure and isGrothendieckAbelian, lines 349-365; SixFunctors/ProEtale/Adic/Abelian.lean IsAdicConstructibleSheaf.kernel_cokernel, lines 492-552; Adic/Extension.lean IsAdicConstructibleSheaf.of_shortExact, lines 317-340."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the small model of the pro-etale site of $\\bar T$ in [def-weil-pbc-proetale-site], in one coefficient universe containing $\\Omega$. The native $B_{\\bar T}$-module objects in sheaves of $\\Omega$-vector spaces are the same as sheaves of $B_{\\bar T}$-modules: forget the constant-scalar action in one direction, and in the other restrict the $B_{\\bar T}$-action along constant functions $\\Omega\\to B_{\\bar T}$. The two operations are inverse on actions and morphisms, since $B$-linear maps already commute with constant scalars. Thus [lem-weil-pbc-ring-sheaves-grothendieck] applies to this actual ring sheaf and gives that $\\mathcal A_T$ is Grothendieck abelian.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ring-sheaves-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Module.lean",
+    "place": "AdicSheaf and its Grothendieck instance, lines 50-79; section-action interpretation of the native module objects."
+   }
+  },
+  {
+   "text": "The scheme automorphism $F_T$ has its specified inverse. Apply [lem-sf-native-adic-pullback-exact-lisse] to both: their inverse-image functors are exact, and the identity and composition comparisons show that they are mutually inverse. Hence $F_T^*$ is an exact autoequivalence of $\\mathcal A_T$. The first paragraph of [lem-sf-free-derived-weil-resolution], with $P=F_T^*$, now says exactly that $\\mathcal W_T=\\mathcal A_T^{F_T^*}$ is Grothendieck abelian and that $\\operatorname{For}$ is exact and conservative. In particular it preserves kernels and cokernels. This uses only the abelian assertion of that existing node, not its derived cyclic-resolution assertion.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-free-derived-weil-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean",
+    "place": "Autoequivalence section and isGrothendieckAbelian, lines 98-112, 366-385; WeilSheaf/Category.lean:134-155."
+   }
+  },
+  {
+   "text": "The zero underlying sheaf has a local model of rank zero on the one-stratum partition, so the zero Weil object belongs to $\\mathcal C_T$. Composing each given trivialization with the restriction of a sheaf isomorphism preserves the same partitions and ranks; therefore $\\mathcal C_T$ is invariant under isomorphisms. This also treats the empty scheme.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Constructible.lean",
+    "place": "Definitions IsAdicLisseSheaf, IsAdicStratifiedLisseSheaf, IsAdicConstructibleSheaf; rank zero and transport of the witnesses."
+   }
+  },
+  {
+   "text": "The morphism $\\bar T\\to\\operatorname{Spec}k$ is locally of finite type by [lem-weil-pbc-lft-base-change]. A field is Noetherian, since its only ideals are zero and the whole field. Applying [pqf-lem-locnoeth-lft] therefore shows that $\\bar T$ is locally Noetherian. Around any point choose an affine open $V$ inside the intersection of the open neighbourhoods on which the two sheaves under consideration admit finite lisse stratifications. By [pqf-lem-affine-open-locnoeth] its coordinate ring is Noetherian, and $V$ is a Noetherian scheme (it is affine, hence quasi-compact). The closed-subset minimal condition of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] gives Noetherian underlying topology. A subspace of a Noetherian space is Noetherian: for an increasing chain of its opens, take increasing finite unions of ambient open representatives, which stabilize. Thus every locally closed stratum used below has Noetherian underlying space. This uses no global quasi-compactness of $T$.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/Category.lean",
+    "place": "isLocallyNoetherian_geometricFiber, lines 198-204; Adic/Abelian.lean:502-514 (choosing an affine neighbourhood)."
+   }
+  },
+  {
+   "text": "On $V$ intersect the two finite partitions using the actual fibre products of their immersions into $V$. The projections are immersions by [lem-weil-pbc-immersion-base-change-lft]; their images are the intersections, so these pieces partition $V$. Their composites into $V$ are immersions by expanding the definition [def-weil-closed-immersion]: write each immersion as closed then open, restrict the second closed factor to the intervening open, and compose closed factors (surjective coordinate-ring maps compose) and open factors [def-weil-open-immersion]. Their images are the intersections, which are locally closed. They are constructible by [def-weil-constructible-subset], since the underlying space is Noetherian. By [lem-sf-native-adic-pullback-exact-lisse] the restrictions of both original lisse local models to each intersection are lisse. We have consequently obtained a common finite stratification $i_a:S_a\\to V$ on which both sheaves are lisse, with exact restriction functors $i_a^*$.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "def-weil-constructible-subset",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Common-stratification construction in Constructible section, lines 442-490; Extension.lean:290-315 uses the same fibre products."
+   }
+  },
+  {
+   "text": "Let $u:M\\to N$ be the underlying map of a morphism of constructible Weil sheaves. On each $S_a$ apply [lem-sf-native-adic-lisse-kernel-strata] to $i_a^*(u|_V)$, using the Noetherian topology established in Step 4. By exactness of restriction, [lem-sf-native-adic-pullback-exact-lisse] identifies its kernel and cokernel with the restrictions of $(\\ker u)|_V$ and $(\\operatorname{coker}u)|_V$. Refine the partition separately by the finite partitions supplied by that node. The elementary closed/open factorization argument of Step 5 makes the composite immersions locally closed; on the Noetherian $V$ these pieces are constructible. A finite union of finite indexing sets is finite, so the resulting partitions are witnesses that both underlying kernel and cokernel are constructible near the chosen point. Repeat at every point. Exactness of $\\operatorname{For}$ from Step 2 identifies the underlying kernels and cokernels in $\\mathcal W_T$ with these sheaves, proving the two closure assertions for $\\mathcal C_T$.",
+   "uses": [
+    "lem-sf-native-adic-lisse-kernel-strata",
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "def-weil-constructible-subset",
+    "lem-sf-free-derived-weil-resolution",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "IsAdicConstructibleSheaf.kernel_cokernel, lines 496-552; this step performs the actual refinement and passage back to fixed pairs."
+   }
+  },
+  {
+   "text": "Finally let $0\\to F\\to E\\to G\\to0$ be the sequence in the statement. Exact forgetting gives a short exact sequence of the underlying $B_{\\bar T}$-modules by Step 2. Use the common finite partition near each point from Steps 4-5 for $F$ and $G$. Exactness in [lem-sf-native-adic-pullback-exact-lisse] preserves the sequence under restriction to each $S_a$. Its end terms are lisse, so [lem-sf-native-adic-lisse-extension] gives a lisse middle term on that stratum. The same finite partition therefore witnesses constructibility of the middle term near the point; since the point was arbitrary, the native local constructibility definition gives $E\\in\\mathcal C_T$. No claim that the extension splits globally is used.",
+   "uses": [
+    "lem-sf-free-derived-weil-resolution",
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-native-adic-lisse-extension",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Extension.lean",
+    "place": "IsAdicStratifiedLisseSheaf.of_shortExact and IsAdicConstructibleSheaf.of_shortExact, lines 290-340."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-sf-free-derived-weil-resolution",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "def-weil-constructible-subset",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-sf-native-adic-lisse-kernel-strata",
+  "lem-sf-native-adic-lisse-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/WeilSheaf/Category.lean",
+  "place": "Native category construction and constructible closure instances, lines 134-218, with Adic/Abelian.lean:496-552 and Extension.lean:290-340. Explicit refinement proof following these project constructions; no comparison to a different adic coefficient category."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant pro etale adic sheaves form a Grothendieck abelian category and constructible sheaves form a weak Serre subcategory",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, CategoryTheory.Sheaf.instIsGrothendieckAbelian, Condensed.instAB4CondensedMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod, Condensed.instAB5CondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra, CategoryTheory.IsGrothendieckAbelian",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|adicConstructibleSheaf|IsAdicConstructibleSheaf",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible l adic sheaves with Frobenius action are closed under kernels cokernels and extensions",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.hasLimit, CategoryTheory.presheafToSheaf_additive, SheafOfModules.Finite.hasFiniteLimits, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.SheafOfTypes.adhesive",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weak Serre subcategory of locally finite continuous algebraic closure adic sheaves kernels cokernels extensions",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, CondensedMod, Condensed.instAB5CondensedMod, CondensedMod.IsSolid, instAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedUnderKernels\"",
+   "results": "9 hits: CategoryTheory.ObjectProperty.IsClosedUnderKernels, CategoryTheory.ObjectProperty.instIsClosedUnderKernelsOfIsClosedUnderSubobjects, CategoryTheory.ObjectProperty.instHasKernelsFullSubcategoryOfIsClosedUnderKernels, CategoryTheory.ObjectProperty.IsClosedUnderKernels.kernels_le, CategoryTheory.ObjectProperty.IsClosedUnderKernels.mk, CategoryTheory.ObjectProperty.isClosedUnderKernels_iff, CategoryTheory.ObjectProperty.instAbelianFullSubcategoryOfContainsZeroOfIsClosedUnderKernelsOfIsClosedUnderCokernelsOfIsClosedUnderFiniteProducts, CategoryTheory.ObjectProperty.instIsNormalEpiCategoryFullSubcategoryOfContainsZeroOfIsClosedUnderKernelsOfIsClosedUnderCokernels",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this result for native pro-etale adic sheaves with Frobenius structure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-shriek-triangulated",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package clause 3, applying compact support to the localization triangle: the native derived realization of lem-zl-morphism-open-closed-reduction. The created.item chain ends at the maintainer seed, so blueprint_refs.py ancestor returns None. lines 134-155, 190-218; CategoryTheory/Endofunctor/IsoAlgebra.lean exact forgetful structure and isGrothendieckAbelian, lines 349-365; SixFunctors/ProEtale/Adic/Abelian.lean IsAdicConstructibleSheaf.kernel_cokernel, lines 492-552; Adic/Extension.lean IsAdicConstructibleSheaf.of_shortExact, lines 317-340.",
+   "via": [
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-constructible-abelian",
+  "worker": "stage1",
+  "summary": "Split into seven explicit steps: native ring-module encoding, existing general fixed-pair Grothendieck theorem, zero/isomorphism closure, locally Noetherian geometric fibre, common finite strata, lisse-kernel refinement and lisse-extension descent. Created three strictly local native coefficient tools, all searched in Mathlib and backed by readable project declarations; no statement change.",
+  "blueprint": "Inherited seed route prop-functor-package clause 3 and lem-zl-morphism-open-closed-reduction: abelian and weak-Serre prerequisites for the native localization triangle. No blueprint ancestor exists; blueprint_refs.py reports None. The unit key theorem and its assembly route are not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ringed-site, locally Noetherian or immersion tool used to verify hypotheses of the native local stratification argument; no replacement of the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Generic ringed-site, locally Noetherian or immersion tool used to verify hypotheses of the native local stratification argument; no replacement of the six-operations unit route."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Generic ringed-site, locally Noetherian or immersion tool used to verify hypotheses of the native local stratification argument; no replacement of the six-operations unit route."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic ringed-site, locally Noetherian or immersion tool used to verify hypotheses of the native local stratification argument; no replacement of the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic ringed-site, locally Noetherian or immersion tool used to verify hypotheses of the native local stratification argument; no replacement of the six-operations unit route."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Generic ringed-site, locally Noetherian or immersion tool used to verify hypotheses of the native local stratification argument; no replacement of the six-operations unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-immersion-base-change-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-4d306f63b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-4d306f63b (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 new nodes, the framework definition def-sf-native-weil-derived-framework and the statement of every cited node. Read-only Lean checks (Constructible.lean:84-157, Abelian.lean:429, Extension.lean:279, UpperStar.lean:273, Module.lean:165-178/300-320) show the same native B_X coefficients, lisse predicate and constructibility predicate, and none of those five files contains sorry. No coefficient category is substituted, there is no base-change morphism here, and the statement is unchanged. Step 1: B-module objects in Ω-sheaves are sheaves of B-modules; the ring-sheaves Grothendieck node applies with the 𝒱-small pro-étale skeleton. Step 2: the pullback node makes F_T^* an exact autoequivalence, so the first paragraph of lem-sf-free-derived-weil-resolution gives 𝒲_T Grothendieck abelian with For exact and conservative; that node is on route through sk-prop-sf-biduality-general. Step 4 (01T6, Noetherian affine V, minimal closed subsets) gives Noetherian strata without global quasi-compactness. Step 5 refines the two partitions by immersion base change; finite unions of locally closed sets are constructible in a Noetherian space (005L in def-weil-constructible-subset). Steps 6 and 7 reduce to the lisse kernel-strata and extension nodes by exact restriction and the comp comparisons. The new nodes are true and match the Lean theorems; they are strictly weaker than the item and are not duplicates of any of the 8 native nodes I checked (e.g. pullback-frobenius-mates). Edge case: on the non-Noetherian profinite scheme ℤ_ℓ, multiplication by the identity function has a non-lisse cokernel, so the kernel-strata node's Noetherian hypothesis is necessary, and it states it. Tool uses accepted. No SGA source. Cosmetic only: the from.place fields have the source string appended; no change made."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.Category",
+  "declaration": "AlgebraicGeometry.instIsGrothendieckAbelianProEtaleWeilSheaf",
+  "declarations": [
+   "AlgebraicGeometry.instIsGrothendieckAbelianProEtaleWeilSheaf",
+   "CategoryTheory.Endofunctor.IsoAlgebra.abelian",
+   "CategoryTheory.Endofunctor.IsoAlgebra.instPreservesFiniteLimitsForget",
+   "CategoryTheory.Endofunctor.IsoAlgebra.instPreservesFiniteColimitsForget",
+   "CategoryTheory.Endofunctor.IsoAlgebra.instReflectsIsomorphismsForget",
+   "AlgebraicGeometry.ProEtale.instContainsZeroAdicSheafAdicConstructibleSheaf",
+   "AlgebraicGeometry.ProEtale.instIsClosedUnderIsomorphismsAdicSheafAdicConstructibleSheaf",
+   "AlgebraicGeometry.ProEtale.instIsClosedUnderKernelsAdicSheafAdicConstructibleSheaf",
+   "AlgebraicGeometry.ProEtale.instIsClosedUnderCokernelsAdicSheafAdicConstructibleSheaf",
+   "CategoryTheory.ObjectProperty.IsClosedUnderKernels.inverseImage",
+   "CategoryTheory.ObjectProperty.IsClosedUnderCokernels.inverseImage",
+   "AlgebraicGeometry.instIsClosedUnderExtensionsProEtaleWeilSheafObjectProperty",
+   "CategoryTheory.ObjectProperty.instContainsZeroInverseImageOfIsClosedUnderIsomorphismsOfPreservesZeroMorphismsOfHasZeroObject",
+   "CategoryTheory.ObjectProperty.instIsClosedUnderIsomorphismsInverseImage"
+  ],
+  "statement": "instance instIsGrothendieckAbelianProEtaleWeilSheaf :\n    IsGrothendieckAbelian.{u + 1} (ProEtaleWeilSheaf k₀ l X)",
+  "branch": "slopmaster2",
+  "by": "NK",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing native results, specialized to a finite field, ℓ different from its characteristic, and a locally finite type k₀-scheme. The entry module publicly exposes all listed declarations. ProEtaleWeilSheaf is the fixed-pair category of the actual locally finite continuous-coefficient AdicSheaf category, and WeilSheaf.objectProperty is the inverse image of adicConstructibleSheaf along IsoAlgebra.forget. The finite-limit and finite-colimit forgetful instances give exactness; ReflectsIsomorphisms gives conservativity. ContainsZero and isomorphism closure transfer through the existing Mathlib inverse-image instances. The listed kernel/cokernel inverse-image instances transfer the underlying constructible closure, using isLocallyNoetherian_geometricFiber. The native objectProperty extension instance states the final clause. All ten properties, and separately small colimits, AB5 and a separator, were consumer-checked by scompile.py; no duplicate statement module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-899db3333",
+  "group": "NK",
+  "result": "pass",
+  "note": "existing:true attachment, only the lean field changes (diffed vs live node). Statement verbatim = Category.lean:146-147 (live and side-live). Clauses: Grothendieck via the named IsoAlgebra instance; For exact via PreservesFiniteLimits/Colimits forget, conservative via ReflectsIsomorphisms; ContainsZero and iso-closure via adicConstructibleSheaf instances (Constructible.lean:323-328) plus Mathlib inverseImage; kernels/cokernels via IsAdicConstructibleSheaf.kernel_cokernel [IsLocallyNoetherian] (Abelian.lean:496-552) with isLocallyNoetherian_geometricFiber from LocallyOfFiniteType, transported by ObjectProperty.*.inverseImage; extensions via of_shortExact (Extension.lean:319-340) plus Mathlib inverseImage. Constructibility predicate matches the framework node's text; no stronger hypotheses (ambient results do not even need ell != char or lft); no extra universe equality; empty scheme, zero object and variable ranks OK; no substitute coefficients. Notes: open stage-1 re-split note (batch5) is a separate matter; isLocallyNoetherian_geometricFiber unlisted (advisory). No compile, no file changed."
+ }
+}

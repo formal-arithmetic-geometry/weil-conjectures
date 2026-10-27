@@ -1,0 +1,116 @@
+{
+ "id": "lem-z8-ordinary-finite-trace-scalar-square",
+ "kind": "statement",
+ "title": "Tensoring the ordinary scalar trace square",
+ "statement": "Canonical section variables and instances are those of the attached Lean module.\n\ntheorem ordinaryFiniteProjection_eq_ordered (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A X)\n    (K : DerivedCategoryModule A Y) :\n    ordinaryFiniteProjection A f L K =\n      (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).rightAdjointProjectionMap\n        (T_C := (derivedTensor (ModuleCat.{u + 1} A) X).flip)\n        (T_D := (derivedTensor (ModuleCat.{u + 1} A) Y).flip)\n        ((flipFunctor _ _ _).map\n          (canonicalPullbackTensorComparison (ModuleCat.{u + 1} A) f))).app L).app K\n\ntheorem ordinaryFiniteTraceCounit_of_scalar_square\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X X' Y Y' : Scheme.{u}} (q : X ⟶ Y) (q' : X' ⟶ Y') (f : Y' ⟶ Y) (g : X' ⟶ X)\n    [IsProper q] [IsProper q']\n    [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y]\n    [IsLocallyNoetherian X'] [CompactSpace X'] [IsLocallyNoetherian Y'] [CompactSpace Y']\n    (sq : CommSq g q' q f) (L : DerivedCategoryModule A X) (L' : DerivedCategoryModule A X')\n    (c : (ordinaryFinitePullback A g).obj L ≅ L')\n    (τ : (ordinaryFinitePushforward A q).obj L ⟶ ordinaryFiniteUnit A Y)\n    (τ' : (ordinaryFinitePushforward A q').obj L' ⟶ ordinaryFiniteUnit A Y')\n    (ht : (ordinaryFinitePullback A f).map τ ≫ (ordinaryFiniteUnitPullback A f).hom =\n      (derivedBaseChangeMap (ModuleCat.{u + 1} A) sq).app L ≫\n        (ordinaryFinitePushforward A q').map c.hom ≫ τ')\n    (K : DerivedCategoryModule A Y)\n    (e : (ordinaryFinitePullback A g).obj ((ordinaryFinitePullback A q).obj K) ≅\n      (ordinaryFinitePullback A q').obj ((ordinaryFinitePullback A f).obj K))\n    (he : e.hom = (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).inv.app K)\n    (hu : ((canonicalPullbackTensorComparison (ModuleCat.{u + 1} A) f).app K).app\n        (ordinaryFiniteUnit A Y) ≫\n      ((ordinaryFiniteTensor A Y').obj ((ordinaryFinitePullback A f).obj K)).map\n        (ordinaryFiniteUnitPullback A f).hom ≫\n      (derivedTensorSingleUnitIso ((ordinaryFinitePullback A f).obj K)).hom =\n        (ordinaryFinitePullback A f).map (derivedTensorSingleUnitIso K).hom) :\n    (ordinaryFinitePullback A f).map ((ordinaryFiniteTraceCounit A q L τ).app K) =\n      (derivedBaseChangeMap (ModuleCat.{u + 1} A) sq).app\n          ((ordinaryFiniteTwistedPullback A q L).obj K) ≫\n        (ordinaryFinitePushforward A q').map\n          (ordinaryFiniteTwistedPullbackComparison A q q' f g L L' K e c).hom ≫\n        (ordinaryFiniteTraceCounit A q' L' τ').app ((ordinaryFinitePullback A f).obj K)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Supported diagonal kernel, section projection contractions, and counit base change"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-z8-etale-canonical-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the ordinary ordered projections with the projections of the flipped tensor comparison. Present each prescribed counit as inverse projection followed by tensor of its scalar trace. The canonical projection/exchange mate square transports the assumed scalar trace square, and the supplied unit square removes the final unit comparison. The specified coefficient pullback map is exactly the tensor-square coefficient map. All component identities and the assembly have complete Lean proofs.",
+   "uses": [
+    "def-asd-ordinary-finite-trace-counit",
+    "lem-z8-etale-canonical-tensor-comparison",
+    "lem-amb-proper-coproducts-projection",
+    "lem-z8-etale-ordered-projection-comparison",
+    "lem-z8-etale-tensor-trace-base-change",
+    "lem-z8-ordinary-finite-trace-counit-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-trace-counit",
+  "lem-z8-etale-canonical-tensor-comparison",
+  "lem-amb-proper-coproducts-projection",
+  "lem-z8-etale-ordered-projection-comparison",
+  "lem-z8-etale-tensor-trace-base-change",
+  "lem-z8-ordinary-finite-trace-counit-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Explicit canonical-map calculation in the accompanying Lean module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projective line etale cohomology trace adjunction diagonal unit triangle identities",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*triangle|projective.*adjunction",
+   "results": "Generic adjunction, mate, monoidal and isomorphism cancellation APIs; no ready-made projective-line diagonal unit.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit",
+  "date": "2026-10-26",
+  "group": "Z8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-ordinary-finite-p1-diagonal-unit",
+   "place": "Explicit proof of the supported diagonal unit and its specified counit",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteTraceScalarSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteTraceScalarSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteTraceCounit_of_scalar_square",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteProjection_eq_ordered",
+   "AlgebraicGeometry.Etale.ordinaryFiniteTraceCounit_of_scalar_square"
+  ],
+  "statement": "theorem ordinaryFiniteTraceCounit_of_scalar_square\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X X' Y Y' : Scheme.{u}} (q : X ⟶ Y) (q' : X' ⟶ Y') (f : Y' ⟶ Y) (g : X' ⟶ X)\n    [IsProper q] [IsProper q']\n    [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Y] [CompactSpace Y]\n    [IsLocallyNoetherian X'] [CompactSpace X'] [IsLocallyNoetherian Y'] [CompactSpace Y']\n    (sq : CommSq g q' q f) (L : DerivedCategoryModule A X) (L' : DerivedCategoryModule A X')\n    (c : (ordinaryFinitePullback A g).obj L ≅ L')\n    (τ : (ordinaryFinitePushforward A q).obj L ⟶ ordinaryFiniteUnit A Y)\n    (τ' : (ordinaryFinitePushforward A q').obj L' ⟶ ordinaryFiniteUnit A Y')\n    (ht : (ordinaryFinitePullback A f).map τ ≫ (ordinaryFiniteUnitPullback A f).hom =\n      (derivedBaseChangeMap (ModuleCat.{u + 1} A) sq).app L ≫\n        (ordinaryFinitePushforward A q').map c.hom ≫ τ')\n    (K : DerivedCategoryModule A Y)\n    (e : (ordinaryFinitePullback A g).obj ((ordinaryFinitePullback A q).obj K) ≅\n      (ordinaryFinitePullback A q').obj ((ordinaryFinitePullback A f).obj K))\n    (he : e.hom = (derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq).inv.app K)\n    (hu : ((canonicalPullbackTensorComparison (ModuleCat.{u + 1} A) f).app K).app\n        (ordinaryFiniteUnit A Y) ≫\n      ((ordinaryFiniteTensor A Y').obj ((ordinaryFinitePullback A f).obj K)).map\n        (ordinaryFiniteUnitPullback A f).hom ≫\n      (derivedTensorSingleUnitIso ((ordinaryFinitePullback A f).obj K)).hom =\n        (ordinaryFinitePullback A f).map (derivedTensorSingleUnitIso K).hom) :\n    (ordinaryFinitePullback A f).map ((ordinaryFiniteTraceCounit A q L τ).app K) =\n      (derivedBaseChangeMap (ModuleCat.{u + 1} A) sq).app\n          ((ordinaryFiniteTwistedPullback A q L).obj K) ≫\n        (ordinaryFinitePushforward A q').map\n          (ordinaryFiniteTwistedPullbackComparison A q q' f g L L' K e c).hom ≫\n        (ordinaryFiniteTraceCounit A q' L' τ').app ((ordinaryFinitePullback A f).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Z8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1065e",
+  "group": "Z8",
+  "result": "fix",
+  "landing": "20261027T135451-L-3711227",
+  "kind": "interface",
+  "note": "independent cc review: 1065e8 vs fd5306 delivery (diff: duplicate square removed, TraceCoordinates reuses FiniteShiftedLineSquare) and adapted modules vs live clone; original FiniteP1TwistedUnitBaseChange compiled against delivered Arrows"
+ }
+}

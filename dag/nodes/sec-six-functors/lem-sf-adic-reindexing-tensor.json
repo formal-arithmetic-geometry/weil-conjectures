@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-adic-reindexing-tensor",
+ "kind": "statement",
+ "title": "Tensor and unit laws for normalized realization reindexing",
+ "statement": "Fix a prime l, a finite-field datum D and an arbitrary FamilyCore C [def-sf-adic-realization-isomorphism-data]. Assume its comparison satisfies integralRealizationAgreement for all finite integral constructible representatives. Its fixed SpaceData includes the finite quotient-completion tensor normalizations. Then the comparison obeys the tensor and coefficient-unit equations of Family for its specified ambient ReindexTensor and canonical common-stage pullback tensor and unit comparisons. These equations are for every common-stage pair, including pairs originally represented over different finite coefficient fields. No comparison data or identity/composition/Hom law is constructed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Remark 6.8.15; arbitrary scheme-isomorphism reindexing, including semilinear Frobenius; old step 12; HRS: literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf; precise map normalization is the agent-written argument retained in report.md."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Represent both common-stage inputs at their compositum and choose the flat-term\nK-flat models specified in their finite normalizations. Substitute the integral formula\nfor the comparison and the representative equations of finite normalization and tensor\nreindexing. Both tensor routes take r tensor x tensor s tensor y to rs tensor\n(x tensor y). The pure-section equations establish this on every homogeneous summand;\nthe signed total-tensor comparison makes it a cochain equality. The specified completion\ncomparison carries both quotient coaugmentations, including their zero shifted-product\ncoordinate, to the reindexed ones. Its scalar compatibility identifies these equalities\nwith the specified pullback tensor comparison. Descend by the K-flat representative\nisomorphisms, raw rationalization, and common-stage inclusion. For the unit both routes\nare scalar multiplication r tensor 1 maps to r. The unitor equation for the given\ntensorator, or its tensor equation with the coefficient unit and cancellation of the\ninvertible tensorators, fixes the unit comparison. This proves the displayed unit\nidentity for the specified canonicalCommonStagePullbackTensor_unit witness.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit stage-3 subargument of lem-sf-adic-realization-isomorphism-normalization; 6. Not claimed verbatim in the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural monoidal transformation commutes with internal Hom evaluation transpose",
+   "results": "Eight hits including CategoryTheory.ihom.ev_naturality and CategoryTheory.NatTrans.IsMonoidal. These concern generic closed monoidal categories, not the native adic/common-stage normalized maps.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between the common stage adic realization composed with pullback under scheme isomorphism and ordinary derived module inverse image",
+   "results": "Eight hits, including Scheme.Modules.pullbackId, pullbackCongr, restrictFunctorIsoPullback and comapIso identities. None states native adic realization normalization.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientBaseChangeHom|homEquiv_naturality_left_symm",
+   "results": "25 hits for generic adjunction naturality; no coefficientBaseChangeHom in Mathlib. Native adic comparisons are in the project library.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicRealizationIsomorphismNormalization",
+  "date": "2026-10-25",
+  "group": "B9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native obligation with no imported blueprint ancestor; lem-sf-adic-realization-isomorphism-normalization proof steps 6",
+   "via": [
+    "lem-sf-adic-realization-isomorphism-normalization",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingTensor",
+  "file": "lean/Sheaf/Paper/AdicReindexingTensor.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_tensor",
+  "statement": "theorem normalized_reindexing_tensor\n    (C : FamilyCore l D)\n    (h_integral_normalization : ∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n          (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)),\n        letI := (C.data T).units\n        letI := (C.data U).units\n        integralRealizationAgreement l g.hom (C.data T).realization (C.data U).realization\n          (C.ring T U g) E (C.integral T U g E) (C.comparison T U g)) :\n    (∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n      (M N : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) U.base.left),\n    letI := (C.data T).units\n    letI := (C.data U).units\n    (derivedPull l T.base.left g.hom (C.ring T U g)).map ((C.data U).tensor.tensor.hom.app (M, N)) ≫\n      (C.comparison T U g).inv.app ((commonStageDerivedTensor l (PadicAlgCl l) U.base.left).obj\n        (M, N)) ≫\n      (ordinary l T.base.left (C.data T).realization).map\n        (canonicalCommonStagePullbackTensor l (PadicAlgCl l) g.hom M N).hom =\n    (C.pullTensor T U g).tensor.hom.app\n        ((ordinary l U.base.left (C.data U).realization).obj M,\n         (ordinary l U.base.left (C.data U).realization).obj N) ≫\n      (C.data T).tensor.closed.tensor.map (Prod.mkHom\n        ((C.comparison T U g).inv.app M) ((C.comparison T U g).inv.app N)) ≫\n      (C.data T).tensor.tensor.hom.app ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,\n        (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N))\n    ∧ (∀ (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left),\n    letI := (C.data T).units\n    letI := (C.data U).units\n    (derivedPull l T.base.left g.hom (C.ring T U g)).map (C.data U).tensor.unit.hom ≫\n      (C.comparison T U g).inv.app (pullbackTensorCommonUnit l (PadicAlgCl l) U.base.left) ≫\n      (ordinary l T.base.left (C.data T).realization).map\n        (C.unit_spec T U g).exists.choose.hom =\n    (pullUnit l T.base.left g.hom (C.pullTensor T U g)).hom ≫ (C.data T).tensor.unit.hom)",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-3d4c5",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T142905-L-826383",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 4 split statements against AdicRealizationFamilyData Family/FamilyCore fields and pinning structures (RingReindex, IntegralReindex, ReindexTensor); item node proof_deps against Lean; unit sk-prop-sfb-cartesian-coefficients against core child proof_deps; importers AdicQbarConstructibleRealization + NativeWeilScalarFrobeniusCounit compiled against delivered modules"
+ }
+}

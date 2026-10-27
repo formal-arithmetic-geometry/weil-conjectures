@@ -4,7 +4,7 @@ Authors: SHEAF group H2 -/
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-public import Sheaf.Paper.FiniteDiscreteRealizationFunctor
+public import Sheaf.Paper.FiniteDiscreteRealizationCore
 
 /-! # Derived functor interfaces for condensed coefficient comparisons
 

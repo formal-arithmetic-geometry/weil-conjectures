@@ -1,0 +1,67 @@
+# Worker report
+
+1. Files written: dag/nodes/sec-six-functors-basics/lem-sfb-equivariant-coherent-localization-sequence.json (item, split, seven steps); dag/nodes/sec-six-functors-basics/lem-sfb-equivariant-coherent-submodule-extension.json (one new statement-only lemma, unsplit, no Mathlib match); citations.json (verbatim cited statements). No Lean files or repository files were written.
+2. Attachments: none. Searches of lean/WeilConjectures for the exact blueprint tag and equivariant coherent/localization terminology found no declaration stating the item.
+3. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), localization/devissage discussion, for historical corroboration of lem-sfb-equivariant-coherent-localization-sequence. It is not available in literature and is not used as a theorem. The proof is marked agent-written and is assembled from the actual Stacks ingredients. No SGA source is used.
+4. The imported item had no proof. Its statement is unchanged. The source Milne, Section 22d, Theorem 22.50, printed p.480 (PDF p.492), only invokes Nielsen's fixed-point theorem: it does not prove equivariant localization. I read that page and do not attribute this split to Milne. I read the current blueprint/latest direct-images proof (3) and its unit: this supporting localization argument remains below the existing concentration branch, without replacing any unit step. The nearest blueprint ancestor is null according to blueprint_refs.py ancestor; the existing detailed from.place and via chain are preserved, with an extension-step description appended for the new node.
+5. Nothing remains unfinished in the one-level split. The extension lemma is deliberately statement-only and remains a later stage-1 item.
+
+## Review by Q01
+
+I checked B1--B10, C1--C8, D1--D5 and E1--E7 against the node files and source text. The sole new lemma introduces its field, group, scheme, action, invariant open, ambient module and coherent submodule, and defines linearization inline. It carries no proof or proof dependencies. Its claim is stronger than merely extending an object on U and is strictly smaller than localization: it contains no Grothendieck group, kernel, surjectivity or devissage conclusion. It is not a relabelled clause of the item.
+
+For its mathematical basis I read groupoids.tex Tag 07TU, lemma-colimit-coherent (including the coherent pullback-intersection argument), Tag 09VH, lemma-pushforward, Tags 077R and 077S, and coherent.tex Tag 01Y1. A future proof can take the equivariant inverse image P of N under M -> j_*j^*M, approximate P by coherent equivariant modules using 07TU, and take their coherent images in P. Their restrictions exhaust N; finitely many local generators on a finite affine cover of U lie in one finite sum of those images, producing L. One must not assume that the approximation diagram consists of monomorphisms: its images are used. This argument is recorded here for the next worker, not hidden in the new statement. The current split itself does not use an unproved assertion of equivariant extension without citing this new node.
+
+Step 1 uses exactly the flat-field lemma (flatness over a field), affine permanence (affine base change and qcqs), finite type over Noetherian (Noetherianity), Cartesian groupoid pushforward-adjunction (ordinary j_* and i_* and their equivariant units), groupoid limits-colimits (underlying kernels/cokernels), coherent kernel-cokernel (coherent subquotients), and proper equivariant pushforward (the specified map for a closed immersion). I opened every cited statement. The Cartesian condition is invariance of U or W; a is identified with the projection by (g,y) -> (g,gy), with inverse (g,z) -> (g,g^{-1}z). Flatness follows on affines from tensoring over the field, including nonreduced nonsmooth groups. The base scheme Spec F is Noetherian because its only ideals are 0,F. Finite type gives Noetherian schemes; affine projections are qcqs. Restriction and closed direct image exactness are checked on stalks, so no exactness theorem is being taken from the bare definition of pushforward.
+
+Steps 2--4 each cite precisely the new submodule-extension statement, and use only the setup established in step 1 beyond it. Step 2 applies it inside j_*N, not inside a coherent object that has not yet been constructed. Step 3 applies it to the graph inside the restriction of E plus E'; each projection is an isomorphism on U, so its kernel and cokernel are supported on W. Their two short exact sequences explicitly compare classes. Step 4 extends N' as a submodule of a chosen extension of N, then takes the quotient, so every exact relation lifts and arbitrary choices are reconciled by step 3. These are elementary constructions from that cited extension statement, not an uncited Serre-quotient theorem or K-theory localization theorem. I checked both composites of the inverse maps; the subgroup H is initially generated by supported objects, not identified prematurely with closed pushforward.
+
+Step 5 uses the precise 01Y9 support-power statement from lem-weil-pbc-coherent-support-power-ideal-kills, the quasi-coherent tensor and image statements, coherence of subquotients, and exact flat pullback. These are what is needed to make I^rK an equivariant coherent submodule. I read coherent.tex lemma-power-ideal-kills-sheaf and its finite-affine-cover proof. No single exponent is required uniformly over all K. Step 6 uses only clause (1) of the closed coherent equivalence node (Tag 087T), not its formal-system clause, and the degree-zero flat-base-change assertion of lem-pc-flat-base-change-cohom. I read coherent.tex lemma-i-star-equivalence and lemma-flat-base-change-cohomology. The target and source maps are flat, i is qcqs, and all G-products used in the equivalence are finite-type F-schemes. Full faithfulness gives the descended linearization and its equations on the corresponding closed immersions, including on composable pairs; it is not inferred merely from set-theoretic support. The finite filtration is summed explicitly. Step 7 writes the finite-vector-space tensor identifications on sections and checks their diagonal equivariance. Exactness follows from finite direct sums and vector-space splittings. Thus R(G)-linearity is checked on representation generators and descends to their relations.
+
+Small cases checked: U=empty, W=empty, Y=empty, N=0, M=0, U=Y (the new lemma gives L=N), trivial G (ordinary coherent localization), and nonreduced groups such as alpha_p in characteristic p (no reductivity or taking invariants is used). For Y=Spec F[t], W=V(t^2), K=O/(t^3), I=(t^2) kills K after two steps and all filtration factors are genuinely I-annihilated modules on W; this checks that W need not be reduced. If the annihilator exponent is zero, K=0 and the sum is empty. The proof never identifies arbitrary topological support with factorization through W; it uses ideal powers first.
+
+All seven steps are below 2000 characters. I reviewed them for hidden subsidiary theorems: extension is the one extracted obligation; graph comparison, lifting a relation and summing the filtration are written out. Every cited node statement is copied verbatim into citations.json. Off-unit scheme/module tools are declared in split_report.tool_uses, not in maintainer-owned tool_uses. The exact msearch commands ran for both the item and new lemma, with two semantic phrasings, Loogle, grep and LeanSearch; the raw JSON log records were copied to mathlib_searches. The returned ordinary module localizations, abstract group subrepresentations and local finite-presentation data do not state the rational equivariant sheaf result. No service outage was recorded as absence.
+
+## Not duplicates
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-zl-prescribed-point-eventual-jet-system: states Eventual kernel basis, complement immersion and simultaneous jets; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-pc-cokernel-finite-presentation-noetherian: states Finitely presented cokernels on locally Noetherian schemes; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sc-riemann-roch: states Riemann–Roch on a proper smooth curve; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-weil-pbc-coherent-formal-modules-abelian: states The category of coherent formal modules is abelian; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-weil-pbc-coherent-kernel-cokernel-locnoeth: states ordinary coherent subquotient closure, without extending across an open or equivariance.
+
+lem-sfb-equivariant-coherent-submodule-extension vs def-sfb-scheme-groupoid-module: defines a groupoid module, without this extension theorem.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-ample-curve-first-jet-interpolation: states Eventual first-jet interpolation on an ample smooth curve; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-cartesian-groupoid-pushforward-adjunction: constructs quasi-coherent direct image and adjunction, with no coherent submodule extension.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-flat-noetherian-groupoid-coherent-approximation: states filtered approximation of a global groupoid module; it does not extend a specified submodule on an invariant open inside an ambient module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-groupoid-coinduction-adjunction: constructs groupoid coinduction and adjunction, not coherent extension across an invariant open.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-groupoid-module-limits-colimits: states abelian and colimit computations, with no finite coherent extension assertion.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-nodal-dual-support-dichotomy: states Full dual support or a proper subcurve carrying first cohomology; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-projective-curve-normalization-section-defect: states Bounded section defect under normalization of a generically reduced projective curve; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-space-coherent-filtered-union: concerns ordinary algebraic-space coherent approximation without a rational group linearization or prescribed open submodule.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-space-noetherian-coherent-support: states ordinary coherent support and subquotient properties on spaces, without equivariant extension.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-stack-qcoh-abelian: states abelianity of a quasi-coherent category, not extension of a coherent submodule.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-sfb-zariski-pushforward-filtered-colimit: states ordinary pushforward preserves filtered colimits, not existence of coherent equivariant submodules.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-trf-fibre-conormal-uniform-vanishing: states Uniform vanishing for all conormal layers of an ample closed fibre; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-trf-finite-ideal-twist-cohomology-comparison: states Finite ideal products: coherence and twisted cohomology comparison; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+lem-sfb-equivariant-coherent-submodule-extension vs lem-trf-finite-surjective-ample-reflection: states Ampleness descends and ascends along finite surjective morphisms; it has neither the invariant-open coherent equivariant submodule extension nor its specified ambient quasi-coherent module.
+
+DAG keyword searches, whole-blueprint searches (equivariant submodule; coherent extension; coherent localization; Grothendieck group), current blueprint text searches, and project Lean searches produced no matching existing extension node. The reused approximation/pushforward results are ingredients and are not replaced.

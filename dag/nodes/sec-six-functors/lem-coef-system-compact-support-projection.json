@@ -1,0 +1,620 @@
+{
+ "id": "lem-coef-system-compact-support-projection",
+ "kind": "statement",
+ "title": "Unbounded strict-system compact support and its projection comparison",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated finite type between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], with compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. For $W=X,Y,\\overline X$ and $\\tau=\\mathrm{et},\\mathrm{proet}$ [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], let $\\mathscr S_W^\\tau$ be the category of strict systems of $(A_n)_W$-module sheaves with semilinear quotient transitions and componentwise morphisms [lem-pur-coefficient-system-derived-comparison]; use its ordinary unbounded derived category [def-weil-abstract-derived-category], exact evaluations $e_n$ and, for $m\\ge n\\ge1$, derived quotient functors $T^W_{m,n}=-\\otimes^L_{A_m}A_n$ [def-weil-derived-tensor]. Write $t^M_{m,n}:T^W_{m,n}M_m\\to M_n$ for the scalar-extension adjunct of the actual transition. \nOn the etale systems put $F=Rp_{*,\\bullet}j_{!,\\bullet}$ and $F_n=Rp_{*,n}j_{!,n}$. This is an exact coproduct-preserving functor, with coproducts of systems as in [lem-pur-system-level-left-extension], with the canonical evaluation comparisons $e_nF\\cong F_ne_n$ of the system direct-image and open-extension operations of [lem-coef-semilinear-derived-sections]. Let $s=\\operatorname{Spec}k$ and $a_W:W\\to s$. For every $P\\in D(\\mathscr S_s^{\\mathrm{et}})$ and $M\\in D(\\mathscr S_X^{\\mathrm{et}})$, the geometric counit and the open-extension tensor comparison define an actual natural system projection map [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]\n$$\\pi_{P,M}:a_Y^*P\\otimes^L FM\\longrightarrow F(a_X^*P\\otimes^L M).$$\nIt is invertible and evaluates to the ordinary unbounded finite-coefficient projection map. The same construction for quotient coefficients defines canonical maps $q_{m,n}:T^Y_{m,n}F_m\\to F_nT^X_{m,n}$, namely the coefficient projection comparison $b_{m,n}$ of [lem-coef-semilinear-derived-sections] for $Rp_{*,\\bullet}$ composed with the termwise identification for $j_{!,\\bullet}$. They are invertible on all unbounded inputs; they are maps in the changed-coefficient derived category, satisfy the quotient cocycle and give\n$$t^{FM}_{m,n}=F_n(t^M_{m,n})q_{m,n,M_m}.$$\nAll maps are defined by the ringed sequence-site operations before evaluation. Their evaluation comparisons preserve the geometric inverse/direct-image units and counits. No boundedness assumption is made on $P$ or $M$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second proof paragraph, first RHom term: unbounded strict-etale compact support and projection before the finite adjunction; returned proof steps 1-3. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "lem-coef-semilinear-derived-sections",
+  "def-coef-etale-system-tensor-evaluation",
+  "def-coef-etale-system-derived-tensor-evaluation",
+  "def-coef-etale-system-image-tensor",
+  "def-coef-system-compact-support-data",
+  "def-coef-system-compact-support-transitions",
+  "def-coef-system-compact-support-evaluation",
+  "def-pur-etale-system-projection-data",
+  "def-coef-etale-support-projection-map"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-coef-semilinear-derived-sections] for the geometric morphism $p$ and the open localization $j$. They define $F=Rp_{*,\\bullet}j_{!,\\bullet}$ on the ordinary unbounded category, and their evaluation comparisons compose to $e_nF\\cong Rp_{*,n}j_{!,n}e_n=F_ne_n$. These comparisons preserve evaluated geometric units and counits. The system categories are Grothendieck and their derived direct images use K-injective resolutions, as in the cited theorem. Thus [lem-pc-right-derived-functor-triangulated] makes $Rp_{*,\\bullet}$ exact. Exact open extension induces an exact derived functor by [lem-weil-pbc-exact-functor-derived-factorization], so $F$ is exact. The functor and its comparisons are constructed on systems, rather than inferred from a diagram in the levelwise derived categories.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), applied to the sequence topoi; Tag 0B56 (equation-projection-formula-map). The existing semilinear-system theorem supplies the evaluation and open-localization comparisons."
+   }
+  },
+  {
+   "text": "The datum [def-weil-l-adic-coefficient-extension] makes every $A_n$ finite. The field $k$ is Noetherian (its only ideals are $0$ and $k$), and $\\operatorname{Spec}k$ is quasi-compact. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $Y$ Noetherian. The proper part $p$ is of finite type, so the same lemma makes $\\overline X$ Noetherian. Apply [lem-etale-proper-derived-lower-star-coproducts-for-grothendieck] to $p$ and each $A_n$. Exact open extension preserves coproducts: its system adjunction $j_!\\dashv j^*$ and [lem-weil-pbc-left-adjoint-preserves-colimits] apply. For an arbitrary small family $(M_i)$, evaluate the canonical map $\\bigoplus_i FM_i\\to F(\\bigoplus_i M_i)$. Componentwise coproducts and the comparisons of step 1 identify it with the canonical coproduct map for $Rp_{*,n}j_{!,n}$, hence with an isomorphism. Joint conservativity of the evaluations proves it is an isomorphism of derived systems, including for the empty family.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0F10 (lemma-finite-cd), 0F11 (lemma-finite-cd-mod-n-direct-sums), with the existing finite-ring coproduct theorem; morphisms.tex Tag 01T6 (lemma-finite-type-noetherian); categories.tex Tag 0038 (lemma-adjoint-exact)."
+   }
+  },
+  {
+   "text": "On the ringed sequence topoi put $H=a_Y^*P$ and $N=j_{!,\\bullet}M$. Form $H\\otimes^LRp_{*,\\bullet}N\\to Rp_{*,\\bullet}(p^*H\\otimes^LN)$ by the counit transpose of [lem-weil-pbc-ringed-projection-mate-exact], with canonical tensor symmetries. To obtain the open tensor map, choose a flat-term K-flat representative $L$ of $p^*H$. Its open restriction is K-flat by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For any representative $C$ of $M$, apply [lem-weil-pbc-ringed-slice-extension-tensor] to every summand $j_!C^r\\otimes L^s$. Their sum is the required chain isomorphism $j_!C\\otimes L\\cong j_!(C\\otimes j^*L)$: $j_!$ preserves direct sums by its adjunction and step 2, and the sheaf isomorphism is natural in both factors, hence commutes with the signed differentials. Exactness of $j_!$ and the K-flat computations identify its localization with the open derived tensor comparison, independent of representatives. Follow the proper projection by $Rp_{*,\\bullet}$ of this map. Pullback composition identifies $j^*p^*H=a_X^*P$. This defines the actual natural system map $\\pi_{P,M}$. The evaluation normalization of [lem-coef-semilinear-derived-sections] identifies its evaluations with the ordinary counit-defined proper/open projection maps.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map); Tag 0GL1 (lemma-j-shriek-and-tensor), whose statement is for an arbitrary ringed site; Tag 07A4 (lemma-pullback-tensor-product)."
+   }
+  },
+  {
+   "text": "For each $n$, apply [lem-etale-proper-projection-formula-finite] to $p$, $j_{!,n}M_n$ and $a_Y^*P_n$. Its finite-ring hypothesis was checked in step 2; its statement permits both inputs to be unbounded. Apply [lem-pur-etale-open-derived-tensor] to $j$, $M_n$ and $p^*a_Y^*P_n$; this theorem also permits arbitrary unbounded inputs. Under the evaluation normalization of step 3, their composite is precisely $e_n\\pi_{P,M}$. Both factors are invertible. Joint conservativity [lem-pur-system-level-left-extension] now makes $\\pi_{P,M}$ invertible. This uses evaluation to detect an isomorphism of an already constructed map; it does not use evaluation to assert equality or existence of morphisms.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G (lemma-projection-formula-proper-mod-n); sites-cohomology.tex Tag 0GL1; the same proper/open argument as more-etale.tex, lemma-projection-formula-Rf-lower-shriek."
+   }
+  },
+  {
+   "text": "For $m\\ge n$ use the scalar mate $b_{m,n}$ constructed by [lem-coef-semilinear-derived-sections] for $p$. Apply [lem-asd-proper-finite-coefficient-extension] to $A_m\\to A_n$, the proper $p$, and the arbitrary unbounded input $j_{!,m}M_m$. Its Noetherian and finite-ring hypotheses were checked in step 2. Its displayed counit transpose is exactly this $b_{m,n}$, and it proves invertibility in the changed-coefficient category itself, without assuming flatness of $A_n$ over $A_m$. Compose with $Rp_{*,n}$ of the canonical open scalar comparison from [lem-coef-etale-open-tensor]. This gives the stated $q_{m,n}:T^Y_{m,n}F_m\\to F_nT^X_{m,n}$ as an actual changed-coefficient natural isomorphism. The open comparison is normalized by balancing on the open and zero off it; thus it is the termwise comparison stipulated in the item.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); the counit normalization is sites-cohomology.tex Tag 0B56, and the open factor is Tag 0GL1."
+   }
+  },
+  {
+   "text": "For $l\\ge m\\ge n$, identify $T_{m,n}T_{l,m}\\cong T_{l,n}$ by the canonical derived scalar associator. The pullback/scalar squares for $p$ paste to the square for $A_l\\to A_n$: these are the composition comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] for the geometric and coefficient ringed-topos morphisms. Their coherence is induced by tensor reassociation and multiplication, sending $c\\otimes(b\\otimes x)$ to $cb\\otimes x$. Mate pasting [lem-weil-pbc-mate-pasting], clause (1), therefore gives $b_{l,n}=b_{m,n}T_{l,m}\\circ T_{m,n}b_{l,m}$ under the source and target associators. The open scalar comparisons satisfy the same successive-extension law by [lem-coef-etale-open-tensor]. Substitute these two identities in the proper/open definition of $q$ and use naturality of $b_{m,n}$ with respect to the open comparison. This yields $q_{l,n}=q_{m,n,T^X_{l,m}(-)}\\circ T^Y_{m,n}(q_{l,m})$. For equal indices the pullback square and its mate are identities by clause (4) of the mate-pasting lemma, and the open comparison is the scalar unit. Thus the quotient cocycle and identity laws hold for the specified maps, in their actual Hom sets.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint) and Tag 0E46 (remark-compose-base-change), applied to successive scalar squares; ordinary derived tensor composition and the open balancing maps."
+   }
+  },
+  {
+   "text": "The extension-form transition of $Rp_{*,\\bullet}N$ is $Rp_{*,n}(t^N_{m,n})b_{m,n,N_m}$ by [lem-coef-semilinear-derived-sections]. Take $N=j_{!,\\bullet}M$. Its transition is $j_{!,n}(t^M_{m,n})$ after the open scalar comparison, since this comparison is the termwise extension-by-zero balancing map [lem-coef-etale-open-tensor]. Substitution gives $t^{FM}_{m,n}=F_n(t^M_{m,n})q_{m,n,M_m}$, as asserted. The unit and counit compatibility is the one already supplied by the system evaluation comparisons in step 1. No step has imposed boundedness, normalization, finite Tor amplitude, or flatness of a coefficient quotient.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, with the extension-form transition identity of the existing semilinear-system theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-coef-etale-open-tensor",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second proof paragraph, first RHom term: the extracted ordinary strict-etale system obligation; proof assembled from the existing ringed-system theorem and Stacks finite-coefficient proper/open results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support on unbounded derived strict etale quotient coefficient systems preserves coproducts and has an invertible system projection formula with canonical coefficient change",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "StandardEtalePresentation.toPresentation_σ'",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose",
+      "doc": "For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\sigma' $ associated to the presentation"
+     },
+     {
+      "name": "StandardEtalePair.homEquiv_symm_apply",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯",
+      "doc": "For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\text{homEquiv} $ maps an element $ x \\in S $ satisfying $ P.\\text{Ha"
+     },
+     {
+      "name": "RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+      "module": "Mathlib/RingTheory/RingHom/StandardSmooth",
+      "type": "∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale",
+      "doc": "For any ring homomorphism $ f : R \\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\dots, x_n] \\to S $ such that $ g \\circ C = f $, whe"
+     },
+     {
+      "name": "RingHom.IsStandardSmooth.exists_etale_mvPolynomial",
+      "module": "Mathlib/RingTheory/RingHom/StandardSmooth",
+      "type": "∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale",
+      "doc": "Given a standard smooth ring homomorphism $ f : R \to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\ldots,x_n]_f \\to S $ such that $ g $ composed with the canonic"
+     },
+     {
+      "name": "StandardEtalePair.homEquiv",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "{R : Type u_1} →\n  {S : Type u_2} →\n    [inst : CommRing R] →\n      [inst_1 : CommRing S] →\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }",
+      "doc": "For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\n$$ \\operatorname{Hom}_{R\\text{-alg}}(P.\\text{Ring}, S) \\cong \\"
+     },
+     {
+      "name": "StandardEtalePresentation.toPresentation_val",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\n  (P : StandardEtalePresentation R S) (a : Fin 2),\n  P.toPresentation.val a =\n    (P.lift P.x ⋯)\n      (P.equivMvPolynomialQuotient.symm\n        ((Ideal.Quotient.mk\n            (Ideal.span\n              ",
+      "doc": "Given a standard étale presentation $ P $ of an $ R $-algebra $ S $, the $ i $-th generator ($ i = 0, 1 $) of the algebra presentation corresponds to the image of $ X_i $ in the quotient ring $ R[X_0,"
+     },
+     {
+      "name": "StandardEtalePair.instFormallyEtaleRing",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring",
+      "doc": "For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con"
+     },
+     {
+      "name": "StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+      "module": "Mathlib/RingTheory/Etale/StandardEtale",
+      "type": "∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\n  (P : StandardEtalePresentation R S), P.toSubmersivePresentation.toPresentation = P.toPresentation",
+      "doc": "For any standard étale presentation $ P $ of an $ R $-algebra $ S $, converting $ P $ to a submersive presentation, then to a pre-submersive presentation, and finally to an algebra presentation yields"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: coproduct comparison and evaluation adjunctions do not construct unbounded strict-etale compact support or its actual coefficient-linear projection and quotient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward and extension by zero commute with tensoring by an arbitrary derived inverse system of coefficient modules",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AdicCompletion.ofTensorProduct_naturality",
+      "module": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct",
+      "type": "∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\n    AdicCompletion.ofTensorProduct I N ",
+      "doc": "For any $ R $-linear map $ f : M \to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\text{map}_I(f) \\circ \\text{ofTensorProduct}_I(M) = \\text{ofTensorPro"
+     },
+     {
+      "name": "AdicCompletion.tensor_map_id_left_eq_map",
+      "module": "Mathlib/RingTheory/AdicCompletion/AsTensorProduct",
+      "type": "∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\n  TensorProduct.Alge",
+      "doc": "For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi"
+     },
+     {
+      "name": "LightCondensed.internallyProjective_iff_tensor_condition'",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\n  CategoryTheory.InternallyProjective P ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\n     ",
+      "doc": "Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\to B$ of light condensed $R$-modules, any light profinite space $S$"
+     },
+     {
+      "name": "LightCondensed.internallyProjective_iff_tensor_condition",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\n  CategoryTheory.InternallyProjective P ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\n     ",
+      "doc": "Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\to B$ of light condensed $R$-modules, any ligh"
+     },
+     {
+      "name": "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr",
+      "doc": "Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\mathcal{F}(P)$, is internally projective if an"
+     },
+     {
+      "name": "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr",
+      "doc": "For a light profinite space $ P $, the free $ R $-module $ \\text{Free}(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e: A \\to B "
+     },
+     {
+      "name": "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ",
+      "doc": "For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,"
+     },
+     {
+      "name": "LightCondensed.free_internallyProjective_iff_tensor_condition",
+      "module": "Mathlib/Condensed/Light/InternallyProjective",
+      "type": "∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj ",
+      "doc": "For a light condensed set $ P $, the free $ R $-module $ \\text{free}_R(P) $ is internally projective in the category of light condensed $ R $-modules if and only if for every epimorphism $ e : A \\to B"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: coproduct comparison and evaluation adjunctions do not construct unbounded strict-etale compact support or its actual coefficient-linear projection and quotient comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support on unbounded derived strict etale quotient coefficient systems preserves coproducts and has an invertible system projection formula with canonical coefficient change",
+   "results": {
+    "summary": "[leansearch] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "CompHausLike.instPreservesFiniteCoproductsTopCatCompHausLikeToTopOfHasExplicitFiniteCoproducts",
+      "module": "Mathlib.Topology.Category.CompHausLike.Limits",
+      "type": "(P) [HasExplicitFiniteCoproducts.{0} P] : PreservesFiniteCoproducts (compHausLikeToTop P)",
+      "doc": "If the category of compact Hausdorff-like spaces has explicit finite coproducts, then the canonical inclusion functor into the category of topological spaces preserves finite coproducts."
+     },
+     {
+      "name": "CompHausLike.instPreservesFiniteCoproductsToCompHausLike",
+      "module": "Mathlib.Topology.Category.CompHausLike.Limits",
+      "type": "{P' : TopCat.{u} → Prop} (h : ∀ (X : CompHausLike P), P X.toTop → P' X.toTop) :\n  PreservesFiniteCoproducts (toCompHausLike h)",
+      "doc": "Given predicates $P$ and $P'$ on topological spaces where $P(X) \\implies P'(X)$ for all compact Hausdorff-like spaces $X$, the canonical functor from the category $\\mathbf{CompHausLike}\\, P$ to $\\math"
+     },
+     {
+      "name": "CategoryTheory.Limits.PreservesCoproduct.inv_hom",
+      "module": "Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products",
+      "type": ": (PreservesCoproduct.iso G f).inv = sigmaComparison G f",
+      "doc": "When a functor $ G : \\mathcal{C} \\to \\mathcal{D} $ preserves the coproduct of a discrete diagram $ f : J \\to \\mathcal{C} $, the inverse of the isomorphism $ G(\\coprod f) \\cong \\coprod G(f(j)) $ is equ"
+     },
+     {
+      "name": "CategoryTheory.MorphismProperty.instIsStableUnderCoproductsMonomorphismsOfAB4OfSize",
+      "module": "Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim",
+      "type": "[HasCoproducts.{u'} C] [AB4OfSize.{u'} C] : IsStableUnderCoproducts.{u'} (monomorphisms C)",
+      "doc": "In a category satisfying the AB4 axiom (which requires all coproducts and exactness of coproducts), the property of being a monomorphism is stable under coproducts. That is, if each morphism in a fami"
+     },
+     {
+      "name": "CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction",
+      "module": "Mathlib.Condensed.Discrete.LocallyConstant",
+      "type": "[HasExplicitFiniteCoproducts.{u} P] : IsIso (adjunction P hs).unit",
+      "doc": "For a predicate $ P $ on compact Hausdorff-like spaces that has explicit finite coproducts, the unit of the adjunction between the functor constructing sheaves of locally constant functions and the se"
+     },
+     {
+      "name": "CategoryTheory.Limits.FormalCoproduct.ι_comp_coproductIsoSelf_hom_assoc",
+      "module": "Mathlib.CategoryTheory.Limits.FormalCoproducts",
+      "type": "∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (X : CategoryTheory.Limits.FormalCoproduct C) (i : X.I)\n  {Z : CategoryTheory.Limits.FormalCoproduct C} (h : X ⟶ Z),\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.Sigma.ι X.toFun i)\n      (CategoryTheory.CategoryStruct.comp X.cop",
+      "doc": "For any formal coproduct $ X $ in a category $ \\mathcal{C} $, there exists a canonical isomorphism between the coproduct of the diagram formed by $ X $'s indexed component objects and $ X $ itself. Th"
+     },
+     {
+      "name": "DerivedCategory.quotientCompQhIso",
+      "module": "Mathlib.Algebra.Homology.DerivedCategory.Basic",
+      "type": ": HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ Qh ≅ Q",
+      "doc": "The composition of the quotient functor from the category of chain complexes to the homotopy category followed by the functor to the derived category is naturally isomorphic to the direct localization"
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+      "module": "Mathlib.AlgebraicGeometry.Morphisms.Etale",
+      "type": ": IsStableUnderBaseChange @IsEtale",
+      "doc": "The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale."
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: coproduct comparison and evaluation adjunctions do not construct unbounded strict-etale compact support or its actual coefficient-linear projection and quotient comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.evaluation",
+   "results": {
+    "summary": "[loogle] OK 5 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.constantPresheafAdj",
+      "module": "Mathlib.CategoryTheory.Sites.ConstantSheaf",
+      "type": " {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (D : Type u_2) [CategoryTheory.Category.{v_2, u_2} D] {T : C} (hT : CategoryTheory.Limits.IsTerminal T) : CategoryTheory.Functor.const Cᵒᵖ ⊣ (CategoryTheory.evaluation Cᵒᵖ D).obj (Opposite.op T)",
+      "doc": "The constant presheaf functor is left adjoint to evaluation at a terminal object."
+     },
+     {
+      "name": "SSet.chainComplexFunctorAdjunction",
+      "module": "Mathlib.AlgebraicTopology.SimplicialSet.Homology.Basic",
+      "type": " (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasCoproducts C] [CategoryTheory.Preadditive C] (n : ℕ) : (CategoryTheory.Functor.postcompose₂.obj (HomologicalComplex.eval C (ComplexShape.down ℕ) n)).obj (SSet.chainComplexFunctor C) ⊣ (CategoryTheory.evaluation SSet C).obj (S",
+      "doc": "The adjunction `Hom(Cⁿ(-, X), F) ≃ Hom(X, F(Δ[n]))` for `R : C` and `F : SSet ⥤ C`."
+     },
+     {
+      "name": "AlgebraicTopology.singularChainComplexFunctorAdjunction",
+      "module": "Mathlib.AlgebraicTopology.SingularHomology.Basic",
+      "type": " (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasCoproducts C] [CategoryTheory.Preadditive C] (n : ℕ) : (CategoryTheory.Functor.postcompose₂.obj (HomologicalComplex.eval C (ComplexShape.down ℕ) n)).obj (AlgebraicTopology.singularChainComplexFunctor C) ⊣ (CategoryTheory.eval",
+      "doc": "The adjunction `Hom(Cⁿ(-, X), F) ≃ Hom(X, F(Δ[n]))` for `X : C` and `F : Top ⥤ C`."
+     },
+     {
+      "name": "CategoryTheory.evaluationAdjunctionLeft",
+      "module": "Mathlib.CategoryTheory.Adjunction.Evaluation",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasProductsOfShape (a ⟶ b) D] (c : C) : (CategoryTheory.evaluation C D).obj c ⊣ CategoryTheory.evaluationRightAdjoint D c",
+      "doc": "The adjunction showing that evaluation is a left adjoint."
+     },
+     {
+      "name": "CategoryTheory.evaluationAdjunctionRight",
+      "module": "Mathlib.CategoryTheory.Adjunction.Evaluation",
+      "type": " {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [CategoryTheory.Category.{v₂, u₂} D] [∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) : CategoryTheory.evaluationLeftAdjoint D c ⊣ (CategoryTheory.evaluation C D).obj c",
+      "doc": "The adjunction showing that evaluation is a right adjoint."
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: coproduct comparison and evaluation adjunctions do not construct unbounded strict-etale compact support or its actual coefficient-linear projection and quotient comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|compactSupport|Brown",
+   "results": {
+    "summary": "[grep] OK 3 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+      "line": "2",
+      "text": "Copyright (c) 2026 Thomas Browning, Christian Merten. All rights reserved."
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+      "line": "4",
+      "text": "Authors: Thomas Browning, Christian Merten"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean",
+      "line": "4",
+      "text": "Authors: Thomas Browning, Christian Merten"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: coproduct comparison and evaluation adjunctions do not construct unbounded strict-etale compact support or its actual coefficient-linear projection and quotient comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|compactSupport|semilinear",
+   "results": {
+    "summary": "0 hits; ",
+    "top": [],
+    "subdirectory": "CategoryTheory",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary evaluation adjunctions, underived sheaf pushforward, monoidal condensed sheaves or derived localization; none states compact support or the specified projection on unbounded semilinear quotient systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.evaluation",
+   "results": {
+    "summary": "5 hits; ",
+    "top": [
+     "CategoryTheory.constantPresheafAdj",
+     "SSet.chainComplexFunctorAdjunction",
+     "AlgebraicTopology.singularChainComplexFunctorAdjunction",
+     "CategoryTheory.evaluationAdjunctionLeft",
+     "CategoryTheory.evaluationAdjunctionRight"
+    ],
+    "subdirectory": "",
+    "digest": "12b4e3804f15377e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary evaluation adjunctions, underived sheaf pushforward, monoidal condensed sheaves or derived localization; none states compact support or the specified projection on unbounded semilinear quotient systems."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived projection formula and proper direct image of systems of sheaves with varying quotient coefficient rings",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "SheafOfModules.QuasicoherentData.I",
+     "HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+     "DerivedCategory.quotientCompQhIso",
+     "SheafOfModules.sheafificationCompPullback",
+     "CategoryTheory.hasExt_of_enoughProjectives",
+     "PresheafOfModules.Derivation.Universal.desc",
+     "SheafOfModules.Presentation",
+     "CategoryTheory.ShortComplex.moduleCatLeftHomologyData_π_hom"
+    ],
+    "subdirectory": "",
+    "digest": "bb9adaccb5daaf9d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary evaluation adjunctions, underived sheaf pushforward, monoidal condensed sheaves or derived localization; none states compact support or the specified projection on unbounded semilinear quotient systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived compact support of strict inverse systems of quotient coefficient sheaves commutes with tensor products and change of coefficients",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "localCohomology.diagram",
+     "CondensedMod.ofSheafProfinite",
+     "localCohomology.ofDiagram",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'"
+    ],
+    "subdirectory": "",
+    "digest": "72d30ca9c5649b23"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary evaluation adjunctions, underived sheaf pushforward, monoidal condensed sheaves or derived localization; none states compact support or the specified projection on unbounded semilinear quotient systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward on derived module sheaves satisfies projection formula for arbitrary complexes and commutes with coproducts",
+   "results": {
+    "summary": "8 hits; ",
+    "top": [
+     "SheafOfModules.pushforwardComp",
+     "SheafOfModules.pushforward_assoc",
+     "SheafOfModules.pushforward_map_val",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "SheafOfModules.pushforwardComp_hom_app_val_app",
+     "SheafOfModules.pushforwardComp_inv_app_val_app",
+     "PresheafOfModules.pushforwardComp",
+     "PresheafOfModules.pushforward_assoc"
+    ],
+    "subdirectory": "",
+    "digest": "3ed280af4c84fbe6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern ordinary evaluation adjunctions, underived sheaf pushforward, monoidal condensed sheaves or derived localization; none states compact support or the specified projection on unbounded semilinear quotient systems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Second proof paragraph, first RHom term: ordinary strict-etale compact support, system projection and quotient coefficient maps preceding the finite adjunction.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-system-compact-support-projection",
+  "worker": "stage1",
+  "summary": "Construct the proper/open system maps using the existing semilinear-system theorem. Prove coproduct preservation and projection invertibility by the canonical evaluations and the existing unbounded finite-ring theorems. Identify quotient maps as changed-coefficient counit mates, prove their cocycle by mate pasting and open tensor coherence, and derive the transition formula. No new nodes or statement changes.",
+  "blueprint": "prop-coef-integral-exceptional-adjoint, second proof paragraph first RHom term; the ordinary system compact-support/projection obligation extracted through lem-coef-finite-adjunction-diagram-realization and lem-coef-cartesian-section-adjoint-mates.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Ringed-topos derived counit projection and exactness, applied on the sequence topoi; the unit does not replace this general construction."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type preservation of Noetherianity verifies hypotheses for the proper coproduct and scalar-extension theorems."
+   },
+   {
+    "node": "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+    "why": "Generic ordinary unbounded finite-ring proper direct-image coproduct theorem; used before any exceptional adjoint or coefficient descent."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "General adjunction fact applied to exact system open extension."
+   },
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Componentwise coproducts and joint conservative evaluations of strict semilinear systems."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Ordinary unbounded open tensor comparison; its ringed-site source also constructs the comparison on the sequence topos."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General coherence of geometric and scalar pullback tensor/composition comparisons, used for construction and quotient cocycles."
+   },
+   {
+    "node": "lem-etale-proper-projection-formula-finite",
+    "why": "Unbounded finite-ring proper projection theorem for evaluated inputs, independent of the unit biduality route."
+   },
+   {
+    "node": "lem-asd-proper-finite-coefficient-extension",
+    "why": "Generic changed-coefficient proper projection mate, invertible on unbounded inputs without flatness."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic pasting and identity equations, proving the quotient cocycle for the specified counit mates."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic K-injective derived-functor exactness for the ordinary system direct image."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "K-flat pullback and tensor computation on the ringed sequence topoi."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "General sheaf-level open tensor identity on a ringed site, applied summand by summand to K-flat complexes on the sequence site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-977920fcd",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-977920fcd (reviewer sub-agent of L); spot-checked: I read all seven steps and every cited statement. The delivery adds no new nodes, and the item statement and stmt_deps are identical to the live copy, where the item is still unsplit. There is no cycle; its only citer is lem-coef-cartesian-section-adjoint-mates. No SGA source is used. Steps 1-2: exactness comes from lem-pc-right-derived-functor-triangulated plus the termwise exact j_! (exact-functor-derived-factorization). Coproduct preservation comes from lem-etale-proper-derived-lower-star-coproducts-for-grothendieck, with A_n finite by def-weil-l-adic-coefficient-extension(4) and Y and X̄ Noetherian by finite-type-over-noetherian. Coproducts are componentwise and evaluations are jointly conservative (lem-pur-system-level-left-extension). Steps 3-4: π is built on the sequence topoi from the counit transpose of ringed-projection-mate-exact and the 0GL1 chain computation via ringed-slice-extension-tensor. Its evaluations are the level maps (semilinear-derived-sections), which are invertible by 0F0G (lem-etale-proper-projection-formula-finite, unbounded) and lem-pur-etale-open-derived-tensor. Step 5: b_{m,n} is literally the β_L of lem-asd-proper-finite-coefficient-extension, invertible without flatness; the open factor is q_j from lem-coef-etale-open-tensor. Step 6: the cocycle follows from mate-pasting clauses (1) and (4) plus canonical pullback-composition coherence, written out. Step 7: the extension-form transition formula plus the j_! balancing gives t^{FM}=F_n(t^M)q. Small cases checked: identity f, zero input or empty coproduct, nonflat Z/l^2→Z/l, unbounded inputs. Batch-5: both flagged citations are general finite-ring étale facts (Stacks 0F0G and 0F11-type coproducts), not steps of the trace formula or Poincaré duality. Their closures meet those chapters only in generic nodes (lisse=module objects, schematically dense open, limit descent and others), so I accept them, as in earlier reviews (Q129/Q29/Q18). Advisories: (1) the slice lemma is applied to the constant sequence h_U, which is not representable; the identity holds by topos localization or level by level, so this is elementary. (2) Steps 5-6 overlap the existing unsplit lem-pur-etale-system-coefficient-projection (q_a with cocycle on étale systems), which could have been cited; this is not a fault. The 13 split_report tool_uses are generic and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemCompactSupportProjection",
+  "declaration": "AlgebraicGeometry.Etale.SystemCompactSupport.systemCompactSupportProjection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SystemCompactSupport.quotientTower",
+   "AlgebraicGeometry.Etale.SystemCompactSupport.systemCompactSupportProjection"
+  ],
+  "file": "lean/Sheaf/Paper/SystemCompactSupportProjection.lean",
+  "statement": "theorem systemCompactSupportProjection (k : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hlp : l ≠ k.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X Y : Over (Spec (CommRingCat.of k.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (c : Compactification f.left) : ∃ d : ProjectionData c Y.hom (quotientTower l E), ∃ e : ProjectionEvaluation d, ∃ tx : TransitionEvaluation X.left (quotientTower l E) e.ex, ∃ ty : TransitionEvaluation Y.left (quotientTower l E) e.ey, ∃ pi : d.source ⟶ d.target, (∃ (_ : d.support.F.CommShift ℤ), d.support.F.IsTriangulated) ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) d.support.F) ∧ (∀ (P : Derived (Spec (CommRingCat.of k.k)) (quotientTower l E)) (M : Derived X.left (quotientTower l E)), pi.app (P, M) = d.word P M) ∧ IsIso pi ∧ e.projectionLaw pi ∧ (∀ (m n : ℕ) (h : n ≤ m), IsIso (compactScalarMap (quotientMap (quotientTower l E) h) c)) ∧ (∀ (r m n : ℕ) (h : n ≤ m) (h' : m ≤ r), compactScalarMap (((quotientTower l E).map (homOfLE h').op) ≫ ((quotientTower l E).map (homOfLE h).op)).hom c = singlePath ((quotientTower l E).map (homOfLE h').op) ((quotientTower l E).map (homOfLE h).op) c) ∧ (∀ (m n : ℕ) (h : n ≤ m) (M : Derived X.left (quotientTower l E)), ty.reduction h (d.support.F.obj M) ≫ (e.support n).iso.hom.app M = (scalarExtension (quotientMap (quotientTower l E) h) Y.left).map ((e.support m).iso.hom.app M) ≫ (compactScalarMap (quotientMap (quotientTower l E) h) c).app ((e.ex m).E.obj M) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} ((quotientTower l E).obj (op n))) c).map (tx.reduction h M))",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-063b2d7fe",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery after the 320e29509b58 landing refusal. The only substantive change is that the item's proof_deps drops lem-pur-etale-support-projection-shift-unit; the union of step uses now equals proof_deps (17), matching the live record. All 7 Lean files are byte-identical to f9e9/320e. The new nodes and modules are absent from live (no clash). def-coef-etale-support-projection-map existing:true owns supportProjectionSource/Target/Map in live EtaleSupportProjectionShiftUnit; statement starts at the def keyword; proof_deps empty. Re-read every clause: FiniteFieldDatum, l≠p, finite E/Q_l, quotientTower R/varpi^(n+1); X, Y, f sep/LFT/QC with Compactification; F exact (CommShift ∧ IsTriangulated) and preserving coproducts for all I : Type (u+1), empty included; pi pinned to d.word (proper-counit transpose then inverse adjunction-pinned open projection), IsIso pi, projectionLaw against supportProjectionMap; IsIso compactScalarMap; cocycle = singlePath; transition formula via TransitionEvaluation.reduction. No boundedness or flatness assumption, universes bound, single sorry, docstrings and both report sections present. Advisories: base field unused; existential CommShift; redundant direct import. No change, so no compile."
+ }
+}

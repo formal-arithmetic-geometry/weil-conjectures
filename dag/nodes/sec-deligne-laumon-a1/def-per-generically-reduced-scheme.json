@@ -1,0 +1,112 @@
+{
+ "id": "def-per-generically-reduced-scheme",
+ "kind": "definition",
+ "title": "Generically reduced scheme",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Say that $X$ is generically reduced if, for every generic point $\\eta$ [def-sc-generic-point] of an irreducible component of $X$, the local ring $\\mathcal O_{X,\\eta}$ is reduced (has no nonzero nilpotents), using the local-ring reducedness of [def-pc-reduced-scheme]. This imposes no reducedness condition at other points.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-generic-point",
+  "def-pc-reduced-scheme"
+ ],
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "Section 7, Definition 7.2 and Theorem 7.5; explicit generic-reducedness specialization in lem-per-variety-rational-smooth-limit-models, statement and proof step 3; arXiv:0905.3580v1"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scheme is generically reduced if its local ring at every generic point of an irreducible component is reduced",
+   "results": "OK 8 hits: AlgebraicGeometry.isReduced_of_isReduced_stalk; isReduced_ofLocalizationMaximal; AlgebraicGeometry.IsReduced; AlgebraicGeometry.IsReduced.mk; AlgebraicGeometry.IsReduced.of_openCover; AlgebraicGeometry.isReduced_of_isAffine_isReduced; genericPoints; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced. None defines reducedness only at the generic points.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "generically reduced scheme reduced stalks at generic points of irreducible components",
+   "results": "OK 8 hits: AlgebraicGeometry.IsReduced; AlgebraicGeometry.isReduced_stalk_of_isReduced; AlgebraicGeometry.isReduced_of_isReduced_stalk; AlgebraicGeometry.isReduced_of_isIntegral; AlgebraicGeometry.IsReduced.component_reduced; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced; AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme; AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier. All impose reducedness everywhere or concern reduced schemes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep GenericallyReduced|genericallyReduced|generically reduced; rg same pattern in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search generically reduced; definition titles in dag/nodes",
+   "results": "Mathlib: OK 0 hits. WeilConjectures and Sheaf: no hits for generic reducedness. Blueprint: 0 blueprint nodes match generically reduced. Existing definition nodes include generic points and reduced schemes, but no generically reduced scheme. Mathlib.Topology.Sober defines genericPoints as the points whose closure is an irreducible component; reuse this.",
+   "date": "2026-10-24",
+   "verdict": "no match for the notion; reuse genericPoints and IsReduced for its constituents"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-variety-rational-smooth-limit-models",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The generic-reducedness hypothesis and conclusion of the rational-model lemma, via the regular-resolution branch of Step 3 (duality).",
+   "via": [
+    "lem-per-variety-rational-smooth-limit-models",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericallyReducedScheme",
+  "declaration": "AlgebraicGeometry.IsGenericallyReduced",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericallyReducedScheme.lean",
+  "statement": "def IsGenericallyReduced (X : Scheme.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2f57feac",
+  "group": "Q27",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2f57feac",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read item, both modules, new def node and all 5 stmt_dep records/declarations (IsRegularSchemeMorphism, Mathlib Smooth, IsSchemeTheoreticallyDominant, IsNoetherian, genericPoints, LocallyOfFiniteType∧QuasiCompact). Item differs from live only in lean + added stmt_dep def-per-generically-reduced-scheme; no statement change. Existence theorem: affine finite coproduct (Finite A, empty allowed), per-component CharZero fields, finite type, generic reducedness at genericPoints only; ∃ small nonempty directed I, limit cone in Scheme, affine generically reduced finite-type ULift-ℚ stages, smooth affine transitions, regular + schematically dominant projections. Comparison: arbitrary systems, Noetherian limits, regular h, ∀ i j₀ ∃ j≥j₀ smooth hji with h≫p_i = q_j≫hji; no extra hypotheses; identity case covered; proof steps 8-12 sound. New def is real (not hollow), matches node; no duplicate at base (only ring-level IsSerreR, global IsReduced). lean.statement verbatim for both; imports exist; universes all u; docstrings carry source/blueprint and the 12 steps; only sorry. Maintainer note: Q02 1f58a8e5 (PASS, unlanded) has an identical parallel copy GenericallyReducedResolution.GenericallyReduced that should be pointed at this node."
+ }
+}

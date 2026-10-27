@@ -12,73 +12,55 @@
  ],
  "proof": [
   {
-   "text": "Choose nonzero generators $g_1,\\ldots,g_s$ of $P$, discarding zero generators; $s=0$ exactly when $P=\\{0\\}$. For $p\\ne0$, a decomposition $p=p_1+\\cdots+p_l$ with $p_i\\ne0$ satisfies $l\\le\\sum_i w(p_i)=w(p)$ because each $w(p_i)$ is a positive integer. Such a decomposition exists with $l=1$, so the possible lengths form a nonempty finite subset of $\\{1,\\ldots,w(p)\\}$ and have an attained maximum $\\nu(p)$. No nonempty sum of nonzero elements is $0$, since its weight is positive. For any $M\\ge0$, an element of $P$ of weight at most $M$ is represented by a word of length at most $M$ in the $g_i$, since each generator has weight at least $1$. There are finitely many such words, including the empty word.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; agent-supplied coefficient refinement of the formal monoid algebra used there"
-   }
-  },
-  {
-   "text": "For fixed $p$, if $u+v=p$ with $u,v\\in P$, then $0\\le w(u),w(v)\\le w(p)$. Step 1 gives finitely many possible $u,v$, so convolution is defined. Similarly, the triples $u+v+t=p$ form a finite set; expanding both bracketings of a triple product gives the same finite sum $\\sum_{u+v+t=p}a_ub_vc_t$. This proves associativity, and commutativity, distributivity and the identity $z^0$ follow from the corresponding finite-sum formulas. In particular $z^uz^v=z^{u+v}$ and $C(a)z^p$ has coefficient $a$ at $p$ and zero elsewhere. Cancellation in $P\\subseteq G$ gives the shift formula: the coefficient of $z^sc$ at $p$ is $c_q$ if $p=s+q$ for some $q\\in P$, and is zero if there is no such $q$; that $q$ is unique.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; agent-supplied coefficient refinement of the formal monoid algebra used there"
-   }
-  },
-  {
-   "text": "Fix $n\\ge1$ and put $S_n=\\{p\\in P:\\nu(p)<n\\}$. Any generator word representing $p$ is a decomposition into nonzero summands, so its length is at most $\\nu(p)$; for $p=0$ use the empty word. Thus every $p\\in S_n$ is the value of one of the finitely many generator words of length less than $n$, and $S_n$ is finite. This argument also covers $s=0$, when $S_n=\\{0\\}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; agent-supplied coefficient refinement of the formal monoid algebra used there"
-   }
-  },
-  {
-   "text": "By [def-weil-pbc-noetherian-ring], choose generators $t_1,\\ldots,t_h$ of the ideal $\\mathfrak m$. For every $k\\ge1$, expanding products of $k$ finite sums from $\\mathfrak m=(t_1,\\ldots,t_h)$ shows directly that every element of $\\mathfrak m^k$ is a finite $A$-linear combination of products $t_{j_1}\\cdots t_{j_k}$. Conversely each such product lies in $\\mathfrak m^k$ by the definition of ideal multiplication. For $k=0$ use the empty product $1$. When $h=0$ and $k>0$, the ideal is zero and its elements have the empty-sum expression. Only distributivity and the definition of generated ideals are used.",
+   "text": "Apply [lem-trf-positive-monoid-convolution-length] to $P,G,w,A$, after choosing a finite nonzero generator list. It supplies the attained function $\\nu$, $\\nu(0)=0$, the finite set $S_n=\\{p:\\nu(p)<n\\}$, and the convolution ring with its constant homomorphism and monomial formulas. Thus all the operations and decomposition lengths in the statement are well-defined.",
    "uses": [
-    "def-weil-pbc-noetherian-ring"
+    "lem-trf-positive-monoid-convolution-length"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FM, section-Noetherian, first sentence; generated-ideal expansion is written explicitly"
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; assembly of the agent-supplied coefficient refinement, old steps 1--3: positive weights, maximal decomposition length, finite bounded-weight sets, convolution ring laws and shift, and finite low-length support."
    }
   },
   {
-   "text": "For each $p\\in S_n$, put $l=\\nu(p)$ and choose a decomposition $p=p_1+\\cdots+p_l$ attaining this length; when $p=0$, use the empty decomposition. Put $k=n-l>0$. The hypothesis and Step 4 express $a_p$ as a finite sum of terms $c\\,t_{j_1}\\cdots t_{j_k}$ with $c\\in A$. Consequently $a_pz^p$ is the finite sum of $C(c)C(t_{j_1})\\cdots C(t_{j_k})z^{p_1}\\cdots z^{p_l}$. There are exactly $k+l=n$ displayed factors in $\\mathfrak b$ after the scalar $C(c)$, so each term belongs to $\\mathfrak b^n$. Summing over the finite set $S_n$ gives a family $a^{<}\\in\\mathfrak b^n$ equal to $a$ on $S_n$ and zero elsewhere.",
+   "text": "By [def-weil-pbc-noetherian-ring], choose a finite generator list for $\\mathfrak m$, possibly empty. For $p\\in S_n$ use an attained decomposition of length $l_p=\\nu(p)<n$, given by [lem-trf-positive-monoid-convolution-length]; at $0$ use the empty decomposition. Apply [lem-trf-finite-support-monomial-ideal-power] with $J=\\mathfrak m$, $S=S_n$, and the maps $C,z$ of step 1. Its hypotheses hold because $a_p\\in\\mathfrak m^{n-l_p}$. It gives $a^{<}=\\sum_{p\\in S_n}C(a_p)z^p\\in\\mathfrak b^n$. By the coefficient formula from step 1 this family agrees with $a$ on $S_n$ and is zero elsewhere.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-trf-positive-monoid-convolution-length",
+    "lem-trf-finite-support-monomial-ideal-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; assembly of the agent-supplied coefficient refinement, old steps 4--5: finite ideal-generator expansion and finite low-length coefficient factorization, generalized to any commutative target ring and any finite set of chosen decompositions."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-high-length-prefix-division] with the same nonzero generator list and $n$. Its finite shifted-sum identity expresses the family $a^{\\ge n}$, equal to $a$ on the complement of $S_n$ and zero on $S_n$, as $\\sum_{I\\in T}z^{s_I}c^I$. For each $I$, its monomial identity writes $z^{s_I}$ as a product of exactly $n$ nonzero generator monomials. Each factor is in $\\mathfrak b$ by definition, so multiplication by $c^I\\in B$ and finite addition give $a^{\\ge n}\\in\\mathfrak b^n$. For $P=\\{0\\}$ the tail and the tuple sum are both zero, as covered by the cited lemma.",
+   "uses": [
+    "lem-trf-high-length-prefix-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; assembly of the agent-supplied coefficient refinement, old steps 6--7: coverage by generator prefixes, first-eligible partition, residual coefficient families and their finite shifted-sum identity."
+   }
+  },
+  {
+   "text": "Coefficientwise $a=a^{<}+a^{\\ge n}$, since $S_n$ and its complement partition $P$. The two summands belong to $\\mathfrak b^n$ by steps 2 and 3, so closure of this ideal under addition proves $a\\in\\mathfrak b^n$.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; agent-supplied coefficient refinement of the formal monoid algebra used there"
-   }
-  },
-  {
-   "text": "Let $T=\\{1,\\ldots,s\\}^n$, a finite set, and put $s_I=g_{i_1}+\\cdots+g_{i_n}$ for $I=(i_1,\\ldots,i_n)\\in T$. If $\\nu(p)\\ge n$, choose a decomposition of $p$ into at least $n$ nonzero summands, write each of its first $n$ summands as a nonempty word in the $g_i$, and take one generator from each word. The remaining terms sum to $q\\in P$, so $p=s_I+q$ for at least one $I\\in T$. Fix an order on $T$ and assign $p$ to the first eligible $I$, meaning the first for which $p-s_I\\in P$ in the ambient group $G$. This partitions $P\\setminus S_n$ into subsets $E_I$. No $p$ is lost or counted twice. If $s=0$, there are no such $p$, so the partition and the sums below are empty.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; agent-supplied coefficient refinement of the formal monoid algebra used there"
-   }
-  },
-  {
-   "text": "For $I\\in T$ define $c^I\\in B$ by $c^I_q=a_{s_I+q}$ when $s_I+q\\in E_I$, and $c^I_q=0$ otherwise. Every such family is an element of $B=A^P$; no convergence restriction is imposed. By the shift formula in Step 2, $z^{s_I}c^I$ equals $a$ on $E_I$ and is zero off $E_I$: cancellation ensures that each residual index contributes exactly once. Hence equality of coefficients gives $a-a^{<}=\\sum_{I\\in T}z^{s_I}c^I$. This is a finite sum, and $z^{s_I}=z^{g_{i_1}}\\cdots z^{g_{i_n}}$ is a product of $n$ elements of $\\mathfrak b$, so every summand belongs to $\\mathfrak b^n$. Step 5 and closure under finite addition now give $a\\in\\mathfrak b^n$, as required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI 1.6(i)--(ii), printed p. 70; agent-supplied coefficient refinement of the formal monoid algebra used there"
+    "place": "Exposé VI 1.6(i)--(ii), printed p. 70; assembly of the agent-supplied coefficient refinement, last sentence of old step 7: the low-length and high-length parts are complementary and closure of $\\mathfrak b^n$ under addition."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-noetherian-ring"
+  "lem-trf-positive-monoid-convolution-length",
+  "def-weil-pbc-noetherian-ring",
+  "lem-trf-finite-support-monomial-ideal-power",
+  "lem-trf-high-length-prefix-division"
  ],
  "proof_origin": {
   "by": "agent",
@@ -187,20 +169,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-finite-pattern-factorization",
   "worker": "stage1",
-  "summary": "Made the omitted positive weight type explicit as the group homomorphism G to Z used by the parent, removed theorem citations that do not define monoids or free groups, and wrote the entire factorization as seven elementary steps. Checked finite convolution, attained decomposition length, finite low-length support, ideal-generator expansion, cancellation and unique assignment of the infinite tail to finitely many generator prefixes. No new nodes. STATEMENT-DISPUTED: mere positivity without additivity would not define the convolution ring or finite nu; repaired to the parent/source intent.",
+  "summary": "Q78 repair of the human re-split return: statement unchanged; distributed all seven retained arguments among three comparable statement-only nodes (old steps 1--3, 4--5, 6--7). The parent is now a short assembly. New nodes remain unsplit with no proof steps. Full old arguments and the correspondence are retained in report.md; all new-node searches were run and results read. Rebased the retained Q78 split against the current shared DAG after the maintainer returned the side-completion promotion: re-read all cited statements and the current item metadata, retained the released stage-1 repair route and exact statement, and preserved the three new-node arguments and logged searches. No cited mathematical statement needed changing; delivery must now promote this re-split from the current live baseline. Final returned-landing audit: the initial current-base server dry run passed at 67b4bd9a143; comparison against the live parent confirms that only proof, proof_deps and split_report are replaced, with every current Lean/review field preserved. All five citation excerpts were checked against the current statements; no cited statement changed. The three helper ids are absent from the live DAG and the released keep_plan order remains applicable. Continued returned-landing repair on 2026-10-23: reconstructed the parent from the current shared-DAG record, overlaying only the retained proof, proof_deps and split_report; revalidated all five current citation excerpts and the unchanged three helper statements. The new current-baseline audit is recorded in report.md.",
   "blueprint": "The finite-pattern coefficient refinement under lem-trf-local-term-locality, via lem-trf-monoid-completion-coefficients: the low-nu part is a finite sum of n-factor terms and the high-nu part is partitioned by generator prefixes. This preserves the formal monoid algebra route supporting the local-term theorem.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q58-97a65378c",
-  "group": "Q58",
+  "reviewer": "NT-cc-Q78-8a747330e",
+  "group": "Q78",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-97a65378c (reviewer sub-agent of L); spot-checked: Read the complete item, cited Noetherian node, parent, unit/chapter route, ILO VI §1.6, Stacks Tag 00FM, delivery guidance, and report. Verified all seven proof steps, hypotheses, finite convolution, maximal-length argument, prefix partition, ideal-power factorization, edge cases, searches, duplicate/cycle absence, and route restrictions. Wrote review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-8a747330e (reviewer sub-agent of L); spot-checked: 5th head of the released keep_plan re-split (2026-10-22). Live and side-live still have the old 7-step item, and none of the 3 new ids exists in either. The statement and stmt_deps are unchanged. All old arguments become clauses of 3 comparable statement-only nodes: positive-monoid-convolution-length (old steps 1-3: l<=w(p), attained nu, finite sublevel sets and S_n, finite pairs and triples, ring laws, C, z^uz^v, unique shift), finite-support-monomial-ideal-power (old steps 4-5: description of J^k including k=0 and h=0, n-factor expansion) and high-length-prefix-division (old steps 6-7: prefix coverage, first-eligible E_I, c^I, shifted-sum identity). None of the 3 restates the item. The assembly is 4 steps, 1741 characters. I checked each statement: all three are true, tested on P={0}, n=1, h=0, S empty, the zero ring, and <2,3> in Z at p=6. The item's b matches node B with J=m, and node A supplies B's hypotheses on z. The cited definitions supply exactly what is used. I read ILO VI 1.6(i)-(ii) at printed p.70; the refinement is labelled as agent-supplied, and no SGA is cited. rg over the DAG finds no duplicate. Diffed against the prior head f334de89: the 3 new nodes are byte-identical and the item differs only in split_report, so that head's FIX was lost. Re-applied: (1) node C now defines z^p (identical to the prior fix file); (2) the source.place of item step 4, a copy of step 3's, now names the last sentence of old step 7. Fix files are in fixes/dag/nodes/sec-trace-formula/ and the full checks are in review.md.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RingTheory.FinitePatternFactorization",
@@ -220,5 +202,16 @@
   "result": "pass",
   "note": "All clauses match the node: Noetherian local A with its maximal ideal; G ≅ ℤ^r via hfree; P finitely generated with an injective map into G; w : G →+ ℤ positive on P∖0; the ring on P → A fully pinned (zero, one, pointwise add, convolution mul, finite pair sets), hence unique; the ideal is the span of C(𝔪) and the nonzero monomials; ν pinned by IsGreatest with ν 0 = 0; ℕ subtraction gives max(n−ν,0); conclusion a ∈ b^n. A constant scan of the compiled type finds no Pi.semiring, Pi.instMul or Pi.commRing (the Q11/Q142 fault); the only Pi.instAdd is inside G ≃+ (Fin r → ℤ). rfl confirms the explicit npow equals b ^ n. Only the lean field differs from the live node; the statement field is verbatim; the docstrings carry the source place, blueprint tag and 7 steps; sorry only; no new definitions. nt_compile --json is clean (1.3 s), and a broken-copy control shows errors. NY/Q101 definition modules never landed, so there is no H4 duplicate; the encoding matches the landed parent."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,135 @@
+{
+ "id": "def-sf-native-derived-tensor-layer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1 and fix-cor-verdier-exchange.proof.md Steps 1-2: the unchanged tensor and normalized open constructions used in the structural Hom chain; factoring the existing bundled construction into compilation layers.",
+   "via": [
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Native Weil tensor constructions below Verdier duality",
+ "statement": "Fix a finite field k₀, a prime ℓ invertible in k₀ and a k₀-scheme X. In the actual abelian category of pro-etale Weil module sheaves supplied by [def-sf-native-weil-derived-framework], define the functorial tensor map in its fixed right argument by conjugating the internal-Hom precomposition transformation under tensorIhomAdjunction. Its identity and composition laws are the conjugation laws. Curried tensor, with its right argument first, is this map together with the existing tensorFunctor; flip it to put the left argument first and totalize cochain complexes by the existing signed direct-sum total tensor of [def-pc-tensor-complex-sheaves]. NativeIsKFlat requires this actual total tensor to preserve quasi-isomorphisms in each variable. K-flat and K-injective resolution records retain their actual complexes, quasi-isomorphisms and respective properties. For a separated finite-type X, the derived tensor is exactly the tensor of the native closed structure of [lem-sf-weil-native-closed-forgetful], whose internal Hom identifies with the existing derivedHom. On two NativeIsKFlat complexes P,T its object at (QP,QT) is naturally isomorphic to Q of their actual total tensor, naturally in both chain maps. This is precisely the tensor-only part of the previously bundled category-and-operations definition; it introduces no different tensor, resolution notion, or model comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1; the tensor-only component of def-sf-derived-weil-category-and-operations or the generic/concrete components of def-sf-native-open-tensor-presentation-data, using the original existing Lean declaration bodies unchanged."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pur-hom-complex",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-native-weil-shriek-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Apply the additive-bifunctor K-flat tensor--Hom representability theorem [lem-sf-kflat-bifunctor-tensor-hom] to the actual native tensor/ihom parametrized adjunction. NativeIsKFlat supplies preservation of quasi-isomorphisms in the needed tensor variable, and the native closed comparison supplies the specified product-total Hom representatives.",
+   "uses": [
+    "lem-sf-kflat-bifunctor-tensor-hom",
+    "lem-sf-weil-native-closed-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose its natural Hom equivalences with the inverse of the chosen closed adjunction. Representability gives an isomorphism from the chosen derived tensor to the localized total tensor. Evaluate the source-variable naturality identity at the identity map and use target naturality to obtain the required both-variable square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-kflat-bifunctor-tensor-hom",
+  "lem-sf-weil-native-closed-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas RHom-from-K-flat-into-K-injective (0A96) and internal-hom (08J9), applied to the native additive tensor--Hom adjunction; elementary representability assembles the native models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor bifunctor K flat models for Frobenius equivariant sheaves",
+   "results": "OK 8 hits; Module.Flat.instTensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm, LinearMap.tensorEqLocusEquiv_apply, Module.Flat.iff_flat_tensorProduct, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_injective_linearMapₛ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nativeDerivedTensor\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "nativeTensorMap|NativeIsKFlat|nativeDerivedTensor",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib match: the project-specific construction is reused from its existing Lean declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedWeilTensorOperations",
+  "file": "lean/Sheaf/Paper/DerivedWeilTensorOperations.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedTensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeTensorMap",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeTensorMap_id",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeTensorMap_comp",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeTensorBifunctor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeTensorBifunctor_flip_additive",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeTensorBifunctor_flip_obj_additive",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeTensorTotal",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeIsKFlat",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeKFlatResolution",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeKInjectiveResolution",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedClosedComparison",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedTensor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedTensor_models"
+  ],
+  "statement": "def nativeDerivedTensor : DerivedCategory (ProEtaleWeilSheaf k₀ l X) × DerivedCategory (ProEtaleWeilSheaf k₀ l X) ⥤ DerivedCategory (ProEtaleWeilSheaf k₀ l X)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27",
+  "note": "Construction component factored from existing bundled definitions, whose exact declaration names, signatures and bodies are preserved. There is no new mathematical object or unproved theorem; the original module re-exports this module."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1eafb",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034622-L-3666564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1eafb",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261027T034622-L-3666564",
+  "kind": "interface",
+  "note": "independent cc review: Item exchange proof and the verbatim tensor-block and NativeOpenDerivedTensor extractions vs the clone (byte/line diff); sandbox compile of all 10 delivered modules plus VerdierDualLocalization, NativeWeilDualizingHomTransposition and root WeilConjectures, all OK; axioms propext/Classical.choice/Quot.sound plus sorryAx from existing holes"
+ }
+}

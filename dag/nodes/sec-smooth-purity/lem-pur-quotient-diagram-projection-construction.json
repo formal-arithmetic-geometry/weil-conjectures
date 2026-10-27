@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-quotient-diagram-projection-construction",
+ "kind": "statement",
+ "title": "Construction of normalized quotient reduction presentations",
+ "statement": "Let J and K be sites small in the coefficient universe, A a commutative Noetherian ring, I an ideal and uInv left adjoint to uPush an inverse image of topoi preserving finite limits. With Presentation of [def-pur-quotient-diagram-projection-data], there exists a Presentation of scalar extension from the constant A sheaves to the actual quotient systems A/I^(n+1), with the inverse-image quotient coefficients on K, whose geometric direct image and inverse image satisfy PullTransitionFormula. This assertion constructs the ordinary/derived reductions and their tensor normalizations; it asserts no coefficient-counit, projection-evaluation or arrow-naturality law.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-pullback-tensor-product (07A4), lemma-adjoint (07A6), equation-projection-formula-map (0B56); Zheng Construction 4.1",
+  "note": "Agent-formulated normalization auxiliary; proof expands the representative comparison argument."
+ },
+ "stmt_deps": [
+  "def-pur-quotient-diagram-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the inverse image ring sheaf functor and its module adjunction from the algebraic inverse image of the geometric morphism. Realize quotient systems as module sheaves on the ringed sequence sites.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-system-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On ordinary modules use tensor extension to each quotient ring. The transitions apply the quotient map to the coefficient factor. The scalar unit is x to x tensor 1, so all transition_unit and equal-index equations hold. Perform the same construction on K. Derive on flat-term K-flat resolutions; universal computation gives epsilon, universal and computes. Evaluation of the same representatives gives evaluation_model.",
+   "uses": [
+    "lem-pur-strict-quotient-diagonal-normalization",
+    "lem-pur-system-evaluation-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar tensor balancing multiplies the coefficient factors. On every total-degree summand use the inverse ordinary comparison; localize to obtain representative and finiteModel. Extension of a flat module is flat over the new ring, and the canonical quotient-system construction is a ringed inverse image followed by extension of scalars, so the ringed-topos flat-pullback theorem applies on the sequence site. Thus the ordinary reduction preserves flat terms. It preserves the K-flat representative class by scalar pullback.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image commutes with scalar extension: both unit maps insert 1. This gives ordinaryPull_insertion, then the common representative computation gives pull_representative and the derived pull comparison. Functorial inverse image gives qX and its two compatibility equations.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized singleton/geometric and scalar comparisons to identify derived direct-image evaluation with level direct image. Their counit equations and the lower-singleton transition equations give the asserted pull transition formula (its adjunction transpose supplies the push formula in the parent).",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-system-singleton-geometric-pullback",
+    "lem-pur-system-singleton-scalar-extension",
+    "lem-pur-system-evaluation-scalar-restriction-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-strict-quotient-diagonal-normalization",
+  "lem-pur-system-evaluation-topos",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-singleton-geometric-pullback",
+  "lem-pur-system-singleton-scalar-extension",
+  "lem-pur-system-evaluation-scalar-restriction-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A4, 07A6, 0B56; Zheng Construction 4.1, common flat-term K-flat representative argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct ordinary and derived scalar extension of module sheaves to an inverse system of quotient rings with geometric inverse image comparisons",
+   "results": "PresheafOfModules.pullback; SheafOfModules.restrictScalars; ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "Underived scalar operations only; no derived quotient-system presentation or its normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-24",
+   "verdict": "Generic counit formula does not construct normalized quotient reduction presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Dd]iagram|[Dd]iagram.*quotient|scalar.*[Ee]valuation",
+   "results": "Mathlib profinite group quotient diagrams and ModuleCat presheaf limit/colimit comparisons; no normalized quotient reduction presentation",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientDiagramProjectionEvaluation",
+  "date": "2026-10-24",
+  "group": "B8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof step 8).; quotient-diagram projection evaluation, ordinary reduction and tensor representative comparisons",
+   "via": [
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientDiagramProjectionConstruction",
+  "file": "lean/Sheaf/Paper/QuotientDiagramProjectionConstruction.lean",
+  "declaration": "SheafOfModules.QuotientDiagramProjection.quotientDiagramProjectionConstruction",
+  "statement": "theorem quotientDiagramProjectionConstruction\n    (J : GrothendieckTopology C) (K : GrothendieckTopology X)\n    (A : Type (max c v r)) [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf K (Type (max c v r)))\n    (uPush : Sheaf K (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] :\n    ∃ p : Presentation.{c, v, r} J K A I uInv uPush adj,\n      p.quotient.PullTransitionFormula J (finite.{c, v, r} J A I)\n        (quotientTransition.{c, v, r} J A I) p.source K uInv uPush adj",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bf0c8",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261024T184625-L-3081691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bf0c8",
+  "group": "B8",
+  "result": "fix",
+  "landing": "20261024T184625-L-3081691",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs old item definitions (byte-identical except added Prop field TensorReduction.flatTerms, change record present); construction sorry vs old item conclusion (implied, plus true flatness field); #print axioms of item and reductionTensorEvaluation (sorryAx only via construction hole and pre-existing upstream SemilinearSections.Data)"
+ }
+}

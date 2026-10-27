@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-space-module-tensor-composition",
+ "kind": "definition",
+ "title": "Tensor-normalized composition of algebraic-space module pullbacks",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X,Y,Z$ be algebraic spaces over $S$, with their small etale sites and structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use sheaves of modules [def-weil-sheaf-of-modules-category] and the tensor pullbacks, specified adjunction units and local tensor sections of [def-trf-space-etale-module-functors]. For arbitrary morphisms $a:X\\to Y$ and $b:Y\\to Z$, define the canonical natural isomorphism $\\gamma_{a,b}:a^*\\circ b^*\\simeq (b\\circ a)^*$, by the following unique tensor normalization. For an etale scheme $V\\to Z$, a chart $q=(T\\to Y,T\\to V)$ for $b$ over $V$, and a chart $r=(U\\to X,U\\to T)$ for $a$ over $T$, their composite chart for $b\\circ a$ is $(U\\to X,U\\to T\\to V)$; its triangle commutes by composition of the two chart triangles. For every module $M$ on $Z$, $c\\in\\mathcal O_X(U)$, $d\\in\\mathcal O_Y(T)$ and $m\\in M(V)$, the component of $\\gamma_{a,b}$ sends the iterated local tensor $c\\otimes(d\\otimes m)$ to $(c\\,r^\\sharp(d))\\otimes m$ on this composite chart, where $r^\\sharp:\\mathcal O_Y(T)\\to\\mathcal O_X(U)$ is pullback of regular functions along $U\\to T$. This condition determines a unique natural isomorphism; $\\gamma_{a,b}$ is that isomorphism, not a choice of an unnormalized comparison.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), the tensor adjunction and local tensor formula; Tag 03D8 (lemma-push-pull-composition-modules), composition isomorphisms; Tag 03G8 (lemma-morphism-ringed-topoi), compatibility of the canonical algebraic-space ringed-topos maps with composition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor pullback composition isomorphism for modules on algebraic spaces normalized on local pure tensors",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, PresheafOfModules.pullback_id_comp, PresheafOfModules.pullbackComp, TensorProduct.AlgebraTensorModule.rTensor_comp, PresheafOfModules.pullback_comp_id, AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc. General sheaf and scheme composition interfaces; the algebraic-space chart-normalized construction is the existing project declaration recorded below.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of tensor pullback of sheaves of modules is canonically isomorphic to pullback along the composite",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullback_comp_id, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_id_comp. General sheaf and scheme composition interfaces; the algebraic-space chart-normalized construction is the existing project declaration recorded below.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleTensorComposition|moduleCompositeChart|pullbackComp",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean. Local rg of lean/WeilConjectures found no moduleTensorComposition or moduleCompositeChart; lean/Sheaf found only SpaceFlatDirectImageBaseChange. DAG search found no definition node owning this construction.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-fp-module-limit-category",
+  "date": "2026-10-23",
+  "group": "Q04"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0D2X (2): descend the chosen line module to a stage of the proper-space approximation. Supporting input: 0D2X proof (2), both applications of module continuity 07V7: descend objects, then evaluation and its inverse with their equations. Canonical comparison of the iterated module pullbacks in the map-descent clause of 07V7.",
+   "via": [
+    "lem-sfb-space-fp-module-limit-category",
+    "lem-sfb-space-invertible-limit-descent",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatDirectImageBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.moduleTensorComposition",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.moduleCompositeChart_triangle",
+   "AlgebraicGeometry.AlgebraicSpace.moduleCompositeChart",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorComposition_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorComposition"
+  ],
+  "statement": "def moduleTensorComposition (a : X ⟶ Y) (b : Y ⟶ Z) :\n    moduleTensorPullback b ⋙ moduleTensorPullback a ≅ moduleTensorPullback (a ≫ b)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Ownership record requested by the independent review of returned head 0bf644afbde7. Reuses the four unchanged existing declarations, including the unique local-tensor characterization; the flat-base-change conclusion is not used."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73ac2c6dc",
+  "group": "Q04",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73ac2c6dc",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery repairing the H2 return of 0bf644af. The Lean module is byte-identical, so the earlier compile evidence stands; I did not compile. The item's stmt_deps swap lem-sfb-space-flat-direct-image-base-change for the new def-sfb-space-module-tensor-composition. That node is existing:true on the unchanged landed SpaceFlatDirectImageBaseChange module and records moduleCompositeChart_triangle, moduleCompositeChart, moduleTensorComposition_existsUnique and moduleTensorComposition. Its statement field is verbatim the file's signature, and its node statement (a^*∘b^* ≅ (b∘a)^*, normalized by c⊗(d⊗m) ↦ c·r♯(d)⊗m on composite charts) matches the ∃! predicate. Its stmt_deps cover ModuleChart, moduleChartScalar and moduleTensorSection. Tags 03D7, 03D8 and 03G8 verified; no other live owner of these declarations. Item re-read against 07V7 and 03DO(7): the pullback clause holds for every morphism; hqc, hqs, haff and the directed index set match the node and are no stronger; the object, map and eventual-equality clauses are correct, with the right comparison direction; edge cases covered. Gates: real def, sorry-only proofs, docstrings carry source place and blueprint id, no pro-étale substitute. Item not superseded in live."
+ }
+}

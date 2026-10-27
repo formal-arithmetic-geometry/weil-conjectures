@@ -1,0 +1,400 @@
+{
+ "id": "lem-sfb-equivariant-adic-fibre-realization",
+ "kind": "statement",
+ "title": "Equivariant adic fibre reconstruction with actual slice realization",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite norm-topological extension, $A=\\mathcal O_E$ and $\\varpi$ a uniformizer [def-weil-l-adic-coefficient-extension]. Let $B$ be a scheme and $u:X\\to B$ an object of its small pro-etale site [def-weil-pbc-proetale-site]. Let $G$ be a profinite group (an inverse limit of finite discrete groups), acting on $X$ over $B$, with profinite products $X[G]$ as in [def-sfb-profinite-test-objects]. Use internal modules [sk-def-sfb-module-objects], all-continuous coefficients $C_{A,B}=p_B^*C(-,A)$, $C_{E,B}=p_B^*C(-,E)$ [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients] and lisse modules [def-sfb-lisse-coefficient-module]. Let $N$ be lisse over $C_{A,B}$, put $F_n=N/\\varpi^nN$, and give each $u^*F_n$ its actual descent action. Suppose there are finite free $A/\\varpi^n$-modules $Q_n$ of a common rank $d\\geq0$, continuous $G$-linear actions on their discrete underlying sets, equivariant quotient transitions with $Q_{n+1}/\\varpi^nQ_{n+1}\\cong Q_n$, and isomorphisms $\\phi_n:u^*F_n\\xrightarrow{\\sim}\\underline{Q_n}_X$. Assume the $\\phi_n$ commute with the actual quotient projections and identify the descent arrow on $X[G]$ with $(x,g,v)\\mapsto(x,g,g\\cdot v)$.\nThen $Q=\\varprojlim_nQ_n$ is finite free over $A$, its inverse-limit topology is the $\\varpi$-adic topology, and $Q/\\varpi^nQ\\cong Q_n$ by the projections. There exist compatible bases of all $Q_n$, inducing $Q\\cong A^d$. The coordinate action on $Q$ is jointly continuous and extends to a norm-continuous representation $\\rho:G\\to\\operatorname{GL}_E(M)$ on $M=E\\otimes_AQ$. There are isomorphisms\n$$u^*N\\cong p_X^*C(-,Q),\\qquad u^*(N[1/\\varpi])\\cong p_X^*C(-,M),$$\nwith integral reduction maps exactly the $\\phi_n$ and with actual descent action exactly $\\rho$. These isomorphisms are natural for compatible morphisms of the finite data, and for pro-etale refinements $X'\\to X$ over $B$ together with continuous group maps and equivariant finite-data maps commuting with every projection. Replacing the compatible bases conjugates the matrices and induces an isomorphic equivariant coefficient module. No finite-image hypothesis on $\\rho$ is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Paragraph (3), tame-boundary extension expansion: returned proof steps 5 and 7, and the inverse-limit and change-of-basis part of step 9. Agent-formulated finite-free equivariant reconstruction using Lemma 6.8.2 and Proposition 6.8.4(1); topology and normalization included."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-profinite-test-objects",
+  "sk-def-sfb-module-objects",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-continuous-module-section-model",
+  "def-sfb-profinite-coefficient-linearization",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-equivariant-adic-fibre-data",
+  "def-sfb-equivariant-adic-fibre-realization-data",
+  "def-sfb-equivariant-adic-fibre-naturality-data",
+  "def-sfb-equivariant-adic-fibre-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Write $A_n=A/\\varpi^nA$, with indices $n\\geq1$. The valuation-ring theorem gives $0<|\\varpi|_E<1$, $\\varpi A=\\mathfrak m_A$, and the unit-times-power description of every nonzero scalar. The finite-quotient theorem gives that $A_n$ is local and finite, and $A_{n+1}\\to A_n$ is surjective. The assumed identification $Q_{n+1}/\\varpi^nQ_{n+1}\\cong Q_n$ is the one induced by its specified transition, so that transition is surjective with exactly that kernel. These are the maps used in the rest of the proof.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent expansion of Proposition 6.8.4(1): coefficient rings and actual transitions."
+   }
+  },
+  {
+   "text": "Choose a basis $(b_{1,i})_{1\\leq i\\leq d}$ of $Q_1$. Inductively, lift each $b_{n,i}$ through the specified surjection to $b_{n+1,i}\\in Q_{n+1}$. In any initially chosen basis of the free $A_{n+1}$-module $Q_{n+1}$, the matrix with these columns reduces modulo $\\varpi$ to an invertible matrix: its columns reduce to the basis of $Q_n/\\varpi Q_n$. Its determinant therefore lies outside the maximal ideal of the local ring $A_{n+1}$ and is a unit. The adjugate identity makes the matrix invertible. This proves the induction and supplies compatible isomorphisms $\\beta_n:A_n^d\\xrightarrow{\\sim}Q_n$. When $d=0$ every matrix and basis here is empty and the maps are the unique zero-module isomorphisms.",
+   "uses": [
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent expansion of Proposition 6.8.4(1), compatible-basis induction (the published proof leaves this part to the reader)."
+   }
+  },
+  {
+   "text": "The residue map $A\\to\\varprojlim_n A_n$ is an isomorphism of rings and a homeomorphism for the norm topology of $A$ and the inverse-limit topology, with the indicated projections: this is clause (1) of the profinite integer-tower theorem, whose $A_n$, transitions and reduction maps are those of step 1. The valuation-ring theorem gives $\\varpi^nA=\\{x:|x|_E\\leq|\\varpi|_E^n\\}$, and under this isomorphism $\\varpi^nA$ is the kernel of the $n$-th projection. The kernels of the projections form a neighbourhood basis of $0$ for the inverse-limit topology of discrete factors, so this topology is the $\\varpi$-adic topology.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent expansion of Lemma 6.8.2(1): the elementary complete-valued-ring calculation underlying the coefficient limit."
+   }
+  },
+  {
+   "text": "Apply the compatible $\\beta_n$ coordinate by coordinate to compatible sequences. Step 3 identifies their source with $A^d$; the inverse sends a sequence in the $Q_n$ to its $d$ compatible coordinate sequences. Thus $\\beta:A^d\\xrightarrow{\\sim}Q$ is $A$-linear and a homeomorphism for the product adic topology and the inverse-limit topology. The $n$-th projection is $\\beta_n$ composed with coordinate reduction. Its kernel is exactly $\\varpi^nQ$ and it is onto, proving $Q/\\varpi^nQ\\cong Q_n$ with the specified maps, and finite freeness of rank $d$. In these coordinates the product adic topology has neighbourhood basis $\\varpi^n A^d$, which proves the asserted topology on $Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent coordinate calculation supplementing Proposition 6.8.4(1)."
+   }
+  },
+  {
+   "text": "Define $g(q_n)_n=(gq_n)_n$. Equivariance of every transition makes this a compatible sequence, and the group and $A$-linearity laws hold at each coordinate; the inverse of the action of $g$ is the action of $g^{-1}$. For joint continuity, composing $G\\times Q\\to Q$ with its $n$-th projection gives $G\\times Q\\to G\\times Q_n\\to Q_n$, a continuous map by the hypothesis on the finite action. The defining subspace topology of the inverse limit then proves joint continuity. In the basis of step 4 the matrix entries $r_{ij}(g)$ are the coordinates of $g\\beta(e_j)$, hence are continuous $A$-valued functions. Extension of these matrices to $E$ defines $\\rho$ on $M=E\\otimes_AQ\\cong E^d$. Its inverse matrix is $r(g^{-1})$, also continuous. Consequently $\\rho:G\\to\\operatorname{GL}_E(M)$ is norm-continuous (the finite-dimensional matrix norm is the maximum of the entry norms). This argument uses only finite-level continuity, not a finite image for $\\rho$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent topological coordinate argument attached to the inverse-limit construction of Proposition 6.8.4(1)."
+   }
+  },
+  {
+   "text": "Identify the inverse image of an underlying abelian sheaf along $u$ with its slice restriction, by the pro-etale-object inverse-image theorem. Use the Cartesian-coefficient isomorphism $u^{-1}C_{A,B}\\cong C_{A,X}$ to transport its module action; thus $P=u^*N$ has underlying sheaf $N|_X$. Restriction is exact by the localized module adjunction theorem, so its actual scalar cokernels are $P/\\varpi^nP=u^*F_n$, with exactly the restricted quotient maps. A local finite free presentation of $N$ restricts to one of $P$, so $P$ is lisse. The integral-lisse nodes cited below are stated for the sheaves $V\\mapsto C(|V|,T)$; the continuous-coefficient realization theorem gives, for the totally disconnected rings $T=A,A_n,E$, monoid isomorphisms $p_X^*C(-,T)\\cong(V\\mapsto C(|V|,T))$ intertwining the pulled-back reduction maps $A\\to A_n$ and the inclusion $A\\to E$ with postcomposition. We transport $P$ and its quotient tower along these isomorphisms throughout steps 6--9, so $P$ is an integral lisse module in the sense of those nodes. The finite-constant coefficient comparison identifies the constant ring $(A_n)_X$ with the continuous finite coefficient ring, fixing scalar constants. Therefore the given $\\phi_n$, followed by $\\beta_n^{-1}$, identify this actual quotient tower of $P$ with the coordinate tower $(A_n)_X^d$, including every projection.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-sfb-lisse-coefficient-module",
+    "lem-sfb-integral-lisse-finite-constant",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1) and Proposition 6.8.4(1), with slice restriction; Stacks sites localization 00XZ and modules extension by zero 03DJ for the existing cited restriction theorem."
+   }
+  },
+  {
+   "text": "The completeness theorem for finite locally free integral modules says that the cone $P\\to(P/\\varpi^nP)_n$ is limiting. The coefficient-limit theorem says that $C(|-|,A)\\to(C(|-|,A_n))_n$ is limiting, with pointwise residue legs; by the realization isomorphisms of step 6, which intertwine the residue maps, $C_{A,X}\\to((A_n)_X)_n$ is limiting. Its $d$-fold direct sum is also limiting: for a cone to $((A_n)_X^d)_n$, take its $d$ coordinate cones, use the coefficient-limit property on each, and combine their unique maps. The tower isomorphisms of step 6 therefore give a unique isomorphism $h:P\\xrightarrow{\\sim}C_{A,X}^d$. Continuous functions into $Q\\cong A^d$ are precisely $d$ continuous $A$-valued coordinates; the inverse is $(f_i)\\mapsto\\sum_i f_i\\beta(e_i)$. Applying the additive inverse image $p_X^*$ to this finite direct-sum identification identifies $C_{A,X}^d$ with $p_X^*C(-,Q)$. Thus $h$ has $n$-th projection exactly $\\phi_n$ (after the canonical $Q/\\varpi^nQ=Q_n$ identification). The construction uses the cited coefficient-limit theorem on $X$, not an assertion that $p_X^*$ preserves arbitrary inverse limits.",
+   "uses": [
+    "lem-sfb-integral-lisse-module-complete",
+    "lem-sfb-integral-lisse-coefficient-limit",
+    "def-sfb-continuous-map-condensed-ring",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), Definition 6.8.3 and Proposition 6.8.4(1); normalized continuous coefficient cones as in the blueprint integral-limit proof, steps 1--4."
+   }
+  },
+  {
+   "text": "By the coefficient-localization colimit theorem, $C(|-|,E)$ is $C(|-|,A)[1/\\ell]$, with cocone maps $a\\mapsto\\ell^{-m}a$; the realization theorem's integral-to-field square transports this to $C_{E,X}=C_{A,X}[1/\\ell]$ with the same cocone maps. The valuation-ring theorem writes $\\ell=v\\varpi^e$ with $v\\in A^\\times$ and $e>0$, since $0<|\\ell|_E<1$. Thus inverting $\\ell$ and inverting $\\varpi$ give the same scalar localization: $\\ell^{-1}=v^{-1}\\varpi^{-e}$ and $\\varpi^{-1}=v\\varpi^{e-1}\\ell^{-1}$. Inverting scalars in the isomorphism $h$ gives $P[1/\\varpi]\\cong C_{E,X}^d$. Inverse image commutes with this sequential localization colimit, because it is a left adjoint and the coefficient map fixes scalar constants. The coordinate homeomorphism $M\\cong E^d$ gives $C_{E,X}^d\\cong p_X^*C(-,M)$, by the same finite-coordinate construction as step 7. This proves the claimed rational isomorphism on $u^*(N[1/\\varpi])$. The maps just constructed send $a/\\varpi^m$ to $h(a)/\\varpi^m$, so their normalization on integral sections is fixed.",
+   "uses": [
+    "lem-sfb-integral-lisse-localization-colimit",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-continuous-map-condensed-ring",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(2), with its canonical localization maps, and Proposition 6.8.4(1)."
+   }
+  },
+  {
+   "text": "Check equivariance as an equality of sheaf maps over the entire profinite parameter object $X[G]$. Both its projection to $X$ and its action map to $X$ give slice restrictions: the former is pro-etale, and the latter is its composite with the automorphism $(x,g)\\mapsto(gx,g)$. The inverse-image/restriction theorem and the Cartesian coefficients identify their pullbacks of $P$ and of its scalar quotients. Slice restriction preserves the limit cones used in step 7: evaluating at an object of the slice evaluates the same cone at its composite object, so the unique coordinate maps remain the same. After the $n$-th projection the descent arrow transported by $h$ is the map $(x,g,v)\\mapsto(x,g,gv)$ on $Q_n$, by the hypothesis on $\\phi_n$. The continuous action in step 5 induces on $C(-,Q)$ the map sending continuous functions $(g(s),q(s))$ to $(g(s)q(s))$; its $n$-th reduction is exactly this same finite action. Therefore the two sheaf maps into the limiting integral module agree by uniqueness of maps to a limit. Localizing their equality gives the claimed actual rational descent action $\\rho$. This establishes equality on $X[G]$, without inferring it just from the points $g\\in G$.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-profinite-test-objects",
+    "lem-sfb-integral-lisse-module-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent descent-arrow expansion of Proposition 6.8.4(1); Lemma 6.8.2 fixes every finite projection."
+   }
+  },
+  {
+   "text": "For compatible $A_n$-linear maps $f_n:Q_n\\to Q'_n$, define $f:Q\\to Q'$ by $f(q)_n=f_n(q_n)$. This is $A$-linear and continuous since all its finite-coordinate maps are continuous. In bases it has entries in $A$, so its extension to $E\\otimes_A Q$ is continuous as well. A compatible morphism of the sheaf data has, on its $n$-th quotient, the map specified by $\\phi_n'^{-1}\\underline{f_n}\\phi_n$. Composing either candidate naturality square for $h,h'$ with the $n$-th target projection gives exactly that square. The limiting property from step 7 makes the integral square commute; scalar localization makes the rational square commute. The same argument with the equivariance equations for $f_n$ gives equivariance of $f$ and of its rational extension.",
+   "uses": [
+    "lem-sfb-integral-lisse-module-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent naturality expansion of Proposition 6.8.4(1), using its projection-normalized construction."
+   }
+  },
+  {
+   "text": "For a pro-etale refinement $r:X'\\to X$ over $B$, its inverse image is slice restriction, including the canonical coefficient identifications. Restricting $h$ therefore gives the comparison determined by the restricted $\\phi_n$, since the limit cone and each projection restrict as in step 9. If $\\gamma:G'\\to G$ is continuous and $f_n:Q_n\\to Q'_n$ obey $f_n(\\gamma(g')v)=g'f_n(v)$, then $(f(q))_n=f_n(q_n)$ and equality of coordinates give $f(\\gamma(g')q)=g'f(q)$. On $X'[G']$, the finite diagrams are precisely the restricted diagrams over $X[G]$ precomposed with $\\gamma$; the assumed finite-data compatibility makes them commute. The limit property proves their integral compatibility and localization proves their rational compatibility. These projection equations also show that compositions of refinements and of compatible data maps give the same comparison.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-integral-lisse-module-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent refinement and group-map naturality expansion of Proposition 6.8.4(1)."
+   }
+  },
+  {
+   "text": "If $\\beta'_n$ is another compatible basis system, the matrices $c_n=\\beta_n^{-1}\\beta'_n\\in\\operatorname{GL}_d(A_n)$ and their inverses are compatible. Taking their entries in the scalar limit of step 3 gives mutually inverse $c,c^{-1}\\in\\operatorname{GL}_d(A)$, with $\\beta'=\\beta c$. Hence $r'(g)=c^{-1}r(g)c$ and the same formula holds over $E$. The induced equivariant coefficient isomorphism in coordinates is multiplication by $c$; with the intrinsic target $p_X^*C(-,Q)$ the two constructions of $h$ coincide because their projections are the same $\\phi_n$. The rational comparisons coincide on integral sections and hence on all local fractions. For $X=\\varnothing$ all sheaf comparisons are the unique maps, and for $d=0$ all module comparisons and action matrices above are the unique zero-dimensional ones. None of the arguments require a nonempty scheme, a fixed trivializing finite cover, or a connected base.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent change-of-basis and degenerate-case checks for the construction of Proposition 6.8.4(1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sfb-integers-profinite-tower",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-integral-lisse-finite-constant",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-sfb-integral-lisse-module-complete",
+  "lem-sfb-integral-lisse-coefficient-limit",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "lem-sfb-integral-lisse-localization-colimit",
+  "def-sfb-profinite-test-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, Lemma 6.8.2(1),(2), Definition 6.8.3 and Proposition 6.8.4(1), pp.58--59. The source leaves (1) to the reader; compatible bases, topological action, normalized actual descent and naturality are expanded here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(adic|inverseLimit).*(representation|equivariant)|continuous.*(monodromy|lisse)",
+   "results": "{\"t\": \"2026-10-22T05:57:38Z\", \"tool\": \"grep\", \"query\": \"(adic|inverseLimit).*(representation|equivariant)|continuous.*(monodromy|lisse)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Homotopy/Lifting.lean\"], \"digest\": \"b9d471bc447ac78e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct continuous l adic monodromy and sheaves from compatible finite quotient representations",
+   "results": "{\"t\": \"2026-10-22T05:57:39Z\", \"tool\": \"leansearch\", \"query\": \"Reconstruct continuous l adic monodromy and sheaves from compatible finite quotient representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor\", \"ProfiniteGrp.isIso_toLimit\", \"ProfiniteGrp.toLimit\", \"IsAdicComplete.StrictMono.lift\", \"instConcreteCategoryProfiniteGrpContinuousMonoidHomCarrierToTopTotallyDisconnectedSpaceToProfinite\", \"InfiniteGalois.algEquivToLimit_continuous\", \"Profinite.asLimitCone\", \"Profinite.isoAsLimitConeLift\"], \"digest\": \"9ed53e418ab44e2e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"Continuous\"",
+   "results": "{\"t\": \"2026-10-22T05:57:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAdicComplete\\\", \\\"Continuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of equivariant finite local systems identifies with continuous functions valued in a finite dimensional p adic representation",
+   "results": "{\"t\": \"2026-10-22T05:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse limit of equivariant finite local systems identifies with continuous functions valued in a finite dimensional p adic representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.profiniteGalGrpIsoLimit\", \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"Profinite.exists_locallyConstant_finite_aux\", \"Profinite.exists_locallyConstant_finite_nonempty\", \"InfiniteGalois.continuousMulEquivToLimit\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"ProfiniteGrp.toLimit\", \"ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor\"], \"digest\": \"0c918b9e4abb618d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite free modules with continuous profinite group actions reconstruct an adic representation and a continuous coefficient sheaf",
+   "results": "{\"t\": \"2026-10-22T05:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible finite free modules with continuous profinite group actions reconstruct an adic representation and a continuous coefficient sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteFree\", \"CondensedMod.ofSheafProfinite\", \"Condensed.profiniteSolid\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"LightCondMod.ofSheafLightProfinite\", \"Condensed.finFree\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"CondensedMod.LocallyConstant.functor\"], \"digest\": \"d0076f955807a058\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this combined geometric/coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limits of finite free representations and lisse pro etale sheaves",
+   "results": "{\"t\": \"2026-10-22T06:54:02Z\", \"tool\": \"leansearch\", \"query\": \"Inverse limits of finite free representations and lisse pro etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.limit\", \"ProfiniteGrp.isIso_toLimit\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"Profinite.hasLimits\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.isNatEquiv_piEquivLim\", \"SheafOfModules.hasLimit\", \"Profinite.asLimitCone\"], \"digest\": \"56e899bdf2b481bd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern general limits, free sheaves or topological bundle trivializations; none states the projection-normalized equivariant adic sheaf reconstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruct a continuous equivariant lisse sheaf from a compatible tower of finite free quotient representations",
+   "results": "{\"t\": \"2026-10-22T06:54:07Z\", \"tool\": \"leanfinder\", \"query\": \"Reconstruct a continuous equivariant lisse sheaf from a compatible tower of finite free quotient representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.ofSheafLightProfinite\", \"SheafOfModules.mapFree\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"Condensed.free\", \"LightCondMod.LocallyConstant.functor\", \"SheafOfModules.freeFunctor\"], \"digest\": \"dc01b7e8057b3c07\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern general limits, free sheaves or topological bundle trivializations; none states the projection-normalized equivariant adic sheaf reconstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite quotient trivializations give a projection normalized equivariant continuous coefficient sheaf",
+   "results": "{\"t\": \"2026-10-22T06:54:09Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible finite quotient trivializations give a projection normalized equivariant continuous coefficient sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsQuotientMap.trivializationOfSMulDisjoint\", \"hom_trivializationAt_baseSet\", \"hom_trivializationAt\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_target\", \"hom_trivializationAt_target\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_baseSet\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_source\"], \"digest\": \"8295d4c5f4c9fb90\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern general limits, free sheaves or topological bundle trivializations; none states the projection-normalized equivariant adic sheaf reconstruction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-root-tower-extension",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), tame-boundary extension expansion: returned proof steps 5 and 7, and the inverse-limit and change-of-basis part of step 9.",
+   "via": [
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-equivariant-adic-fibre-realization",
+  "worker": "stage1",
+  "group": "NY",
+  "summary": "No new nodes. Expanded the compatible-basis induction, the complete scalar limit, joint continuity and norm-continuous matrices. Used existing normalized integral module and coefficient cones and localization to reconstruct the actual sheaf. Proved descent over X[G] by finite-projection equality and proved morphism, refinement and change-of-basis compatibility. Statement unchanged; no Lean attachment found.",
+  "blueprint": "Inherited created-node chain has blueprint.from.node = null (confirmed by blueprint_refs ancestor). Realizes Paragraph (3), tame-boundary extension expansion, returned steps 5 and 7 and inverse-limit/change-of-basis part of step 9; the current blueprint integral-limit proof supplies the coefficient-cone route. No unit or chapter changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Valuation, units and uniformizer facts for the fixed coefficient field; generic scalar algebra, not a replacement geometric route. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finite local quotient rings and surjective residue transitions used for basis lifting. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Underlying abelian inverse image on a pro-etale object equals slice restriction, needed for the actual projection maps. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Canonical Cartesian coefficient isomorphisms and exact underlying inverse image for integral and field coefficients. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction for arbitrary ring sheaves, applied to the actual continuous integral ring. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "def-sfb-lisse-coefficient-module",
+    "why": "The existing finite locally free internal-module notion. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-finite-constant",
+    "why": "Normalized finite constant/continuous coefficient identification fixing scalar constants. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-module-complete",
+    "why": "The canonical quotient cone of a finite locally free integral module is limiting on every scheme. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-coefficient-limit",
+    "why": "Projection-normalized continuous integral coefficient limit on the actual slice scheme. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "def-sfb-continuous-map-condensed-ring",
+    "why": "Continuous functions and their pointwise operations. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point",
+    "why": "Additive inverse image from the condensed point preserves finite direct sums and colimits. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-localization-colimit",
+    "why": "Integral-to-field coefficient localization with specified cocone legs. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "def-sfb-profinite-test-objects",
+    "why": "The relative profinite parameter scheme on which the actual descent arrows are compared. No step of the current unit provides this generic input."
+   },
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Clause (1): O_E is the ring and topological inverse limit of its finite quotients; generic coefficient-ring fact, used as a black box in step 3. No step of the current unit provides it."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Identifies the condensed pullbacks p_X^*C(-,T) (T=A,A_n,E) of the item with the C(|V|,T) sheaves of the integral-lisse nodes, compatibly with reductions and A->E. No step of the current unit provides this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-integral-lisse-finite-constant",
+  "lem-sfb-integral-lisse-module-complete",
+  "lem-sfb-integral-lisse-coefficient-limit",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "lem-sfb-integral-lisse-localization-colimit",
+  "def-sfb-profinite-test-objects",
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-pbc-continuous-coefficient-realizations"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NY-403cbde1e",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-403cbde1e (reviewer sub-agent of L); spot-checked: I read the item in full: the unchanged statement and all 12 steps. I also read every cited statement and Bhatt–Scholze §6.8 (Lemma 4.2.12, Lemma 6.8.2(1), Definition 6.8.3, Proposition 6.8.4(1), pp. 58–59; the source leaves (1) to the reader, so the agent origin is correct). Live and side-live have the item unsplit with no reviewed record and no repair note, so the delivery is not superseded. There are no new nodes and no SGA citations. I tested d=0, empty X, trivial G, an infinite-image rank-1 character, ramified E with l=v*varpi^e, and non-qcqs B. Steps 1, 2, 4, 5 and 9–12 are correct; equivariance is proved on X[G] through the limit uniqueness, not only at points of G. Two repairable faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-equivariant-adic-fibre-realization.json. (1) Different coefficient categories identified silently in steps 6–8. The item's rings are p_X^*C(-,T), but finite-constant, module-complete, coefficient-limit and localization-colimit are stated through def-per-integral-lisse-reduction-data over def-weil-pbc-lisse-lattice-coefficients, the sheaves V->C(|V|,T). FIX: cite lem-weil-pbc-continuous-coefficient-realizations. For totally disconnected T=A, A_n, E it gives a monoid isomorphism that intertwines the reduction maps and the inclusion A->E, and P and its quotient tower are transported along it. (2) Step 3 re-proved O_E = lim A_n, ring and topology, which is clause (1) of the reviewed node lem-sfb-integers-profinite-tower. FIX: step 3 now cites that clause, and lem-weil-l-adic-extension-complete is dropped because no other step uses it. proof_deps is recomputed. tool_uses now adds both new citations and removes l-adic-extension-complete; I accept the other declared generic tool_uses. Neither new citation reaches the item, so the graph stays acyclic. Neither duplicate candidate states this claim: lem-per-normalized-tower-finite-free lacks the projection and topology data, and lem-sfb-lisse-lattice-constant-reductions gives only some compatible bases, not the prescribed phi_n.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EquivariantAdicFibreRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.EquivariantAdicFibre.exists_realization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.EquivariantAdicFibre.exists_realization",
+   "AlgebraicGeometry.ProEtale.EquivariantAdicFibre.realization_natural",
+   "AlgebraicGeometry.ProEtale.EquivariantAdicFibre.compatible_bases_conjugate",
+   "AlgebraicGeometry.ProEtale.EquivariantAdicFibre.realization_independent"
+  ],
+  "file": "lean/Sheaf/Paper/EquivariantAdicFibreRealization.lean",
+  "statement": "theorem exists_realization {B X : Scheme.{u}} (u : X ⟶ B) [WeaklyEtale u] (G : Profinite.{u}) [Group G] [IsTopologicalGroup G] (a : ProfiniteCoefficientAction X G) (hu : a.act ≫ u = coefficientParameterProjection X G ≫ u) (D : FiniteData l E G) (P : Data B X u G a hu D) : Nonempty (Realization P)",
+  "branch": "sheaf-dag",
+  "by": "Q31",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-795a2fe23",
+  "group": "Q31",
+  "result": "fix",
+  "note": "Read the item, all 6 modules, 5 new def nodes and the dependency declarations (ProfiniteCoefficientAction laws, coefficientDeckDescent, cartesianCoefficientLift, CoefficientExtension ideals/rings, chartComparison). Every node clause is rendered and pinned (Q compatible sections with inverse-limit topology, finite free, adic basis, proj surj/ker, coordinate action, rho on pure tensors, section-pinned models of C(-,Q)/C(-,M), reductions = phi_n, unit-normalized rational iso, naturality over refinements and gamma, basis conjugation and independence). Edge cases (d=0, empty X, n shift, ramified E, non-qcqs B) are fine; records verbatim, deps acyclic, imports exist, no collisions. H3 FAULT fixed: descentEnd was the a^*->pr^* arrow (phi_x phi_{gx}^-1 at (x,g)); for the left action and rho : G ->* ... this forces rho(g)rho(h)=rho(h)rho(g), so Data was empty for nonabelian actions with X nonempty (e.g. X=G=S3, standard rep) and the theorem vacuous; integral/rational_action had the same fault. fixes/EquivariantAdicFibreData.lean inverts the composite (pr^*->a^*, matching (x,g,v)->(x,g,gv)); signature unchanged; nt_compile --json clean 5.6 s and 13.1 s. Advisory: theorem node sk-prop-sfb-cartesian-coefficients cited for the plain def cartesianCoefficientLift (established precedent); descentEnd re-derives coefficientDeckDescent; partial Model overlap with ContinuousRepresentation.Realization."
+ }
+}

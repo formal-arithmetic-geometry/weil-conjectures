@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-integral-normalized-ring-refinement-laws",
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "title": "Integral-stage identity and composition for normalized ring refinement maps",
+ "statement": "Fix normalized construction records R,F,M,N with exactly the geometric hypotheses and coefficient categories of [def-sf-constructible-exceptional-coefficient-construction-data]. Fix one finite extension E of Q_l. At the completed integral stage Stage.integral E, the actual left refinement isomorphisms supplied by N satisfy identity and composition: N.refinement(id c).left = Iso.refl and N.refinement(r.comp t).left = N.refinement(r).left trans N.refinement(t).left. Only the integral coefficient case is asserted, with no finite, rational or closed coefficient laws. All comparisons and normalizations are those of the supplied records, not newly selected maps.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "The integral coefficient construction and compactification refinement compatibility; fixed integral case of lem-sf-normalized-ring-refinement-laws."
+ },
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Choose the natural integral open comparison given by exists_ring_open_refinement. Both it and the pointwise epsilon in the supplied RingRefinementNormalized have the same open-adjunction transpose followed by the same restriction. The open units are invertible. Consequently the transpose of the invertible open comparison is invertible and the normalization makes the restriction invertible; cancellation and the Hom equivalence identify the two comparisons on every object.",
+   "uses": [
+    "lem-sf-ring-open-refinement",
+    "lem-sf-integral-ringed-clopen-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use R.integralLeft as the compact-support realization. R.integralLeft_normalized gives the compatibility equation by cancelling the realization isomorphism. The supplied normalization of N then gives the integral pasting theorem normalization: the geometric proper compositor is definitionally its ringedPushComp, and epsilon is the natural comparison from the preceding step.",
+   "uses": [
+    "def-sf-constructible-exceptional-coefficient-construction-data",
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the integral compactification system realization. For each finite-Tor input extract its uniform Tor interval and apply integralRefinementDiagramAdmissibility to all eighteen words of the identity or binary refinement diagram. Supply these domains, the compatible realization and the normalized maps to integralNormalizedRefinementPasting. Its first two clauses give the asserted laws. These are actual integral equalities, requiring no detection by finite reductions and no absolute separatedness.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-refinement-diagram-admissibility",
+    "lem-sf-integral-normalized-refinement-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-normalized-refinement-pasting",
+  "lem-sf-integral-refinement-diagram-admissibility",
+  "lem-sf-integral-ringed-clopen-comparison",
+  "lem-sf-ring-open-refinement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "The integral coefficient construction and compactification refinement compatibility; fixed integral case of lem-sf-normalized-ring-refinement-laws."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralNormalizedRefinementPasting|integral.*refinement.*laws",
+   "results": "{\"t\": \"2026-10-27T10:27:31Z\", \"tool\": \"grep\", \"query\": \"integralNormalizedRefinementPasting|integral.*refinement.*laws\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib statement of the project-specific integral refinement laws. The existing project integralNormalizedRefinementPasting provides the general pasting theorem; the remaining step specializes its explicit normalization and domain hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_comp_eq",
+   "results": "{\"t\": \"2026-10-27T10:27:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Iso.inv_comp_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.inv_comp_eq\"], \"digest\": \"bcb7d82d78335e2f\"}",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib statement of the project-specific integral refinement laws. The existing project integralNormalizedRefinementPasting provides the general pasting theorem; the remaining step specializes its explicit normalization and domain hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity and composition for integral completed coefficient compactification refinement isomorphisms normalized by open adjunction unit",
+   "results": "{\"t\": \"2026-10-27T10:27:33Z\", \"tool\": \"leanfinder\", \"query\": \"identity and composition for integral completed coefficient compactification refinement isomorphisms normalized by open adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_\\u0393Spec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.Scheme.Hom.\\u03b9_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.\\u03b9_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.\\u03b9_fromNormalization_assoc\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec_inv_\\u03b9\", \"LaurentSeries.comparePkg\"], \"digest\": \"5f146b849faababb\"}",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib statement of the project-specific integral refinement laws. The existing project integralNormalizedRefinementPasting provides the general pasting theorem; the remaining step specializes its explicit normalization and domain hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedRingRefinementLaws",
+  "date": "2026-10-27",
+  "group": "H7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Integral coefficient case of the normalized ring refinement laws.",
+   "via": [
+    "lem-sf-normalized-ring-refinement-laws",
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-normalized-refinement-pasting",
+  "worker": "stage1",
+  "summary": "Q142: reuse existing intrinsic system mate-pasting, generator normalization, realization and actual reconstruction nodes. Identify the supplied integral e_u by its open transpose, reflect its invertibility through the actual reconstruction counit, invert system pasting, then cancel realized conjugations through the full inclusion. No new nodes or statement changes.",
+  "blueprint": "Exceptional inverse image definition: derived inverse limits and refinement-compatible adjunction; sk-thm-sf-tensor-hom, third Hom bijection and final coefficient compatibility. Existing broken ancestry is retained as blueprint.from.node=null, as in the reviewed parent; blueprint search found no equivalent imported normalized integral statement."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralNormalizedRingRefinementLaws",
+  "file": "lean/Sheaf/Paper/IntegralNormalizedRingRefinementLaws.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.integral_normalized_ring_refinement_laws",
+  "statement": "theorem integral_normalized_ring_refinement_laws\n    (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))\n    (F : CoefficientConstructionFields.{u, v} l Ω D hl R)\n    (M : CoefficientConstructionCommon.{u, v} l Ω D hl R F)\n    (N : CoefficientConstructionRefinements.{u, v} l Ω D hl R F M)\n    (E : FieldStage.{max u v} l) :\n    (∀ c : Compactification f, (N.refinement (.id c) (.integral E)).left = Iso.refl _) ∧\n    (∀ {a b c : Compactification f} (r : a.Refinement b) (t : b.Refinement c),\n      (N.refinement (r.comp t) (.integral E)).left =\n        (N.refinement r (.integral E)).left ≪≫\n          (N.refinement t (.integral E)).left)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-27"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e37cfac7",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after the e923 H2 RETURN. The item module is byte-identical to e923, whose mathematics was reviewed in full and found correct. The item record changes only stmt_deps (plus the new lean record). The 4 theorem stmt_deps are replaced by 4 new existing:true def owners: def-sf-completed-shriek-refinement-maps (completedShriekF, completedShriekRefinement), def-sf-refinement-diagram-words (refinementDiagramWords), def-sf-integral-refinement-normalization-data (refinementRestriction, finiteTorIntegralInclusion, coefficientPrimeUnit, proved) and def-sf-inverse-or-zero (inverseOrZero). Signatures and prose match the side-live source; none is hollow; no duplicate owner on live; no cycle; brief §5 fields present. Every other identifier in the statement is owned by a def node in the stmt_dep closure. Advisory: sfCompactSupportFiniteIntegralFunctor is reached through def-weil-integral-rational-qbar-compact-support, as in five landed citers; the def-sf-refinement-diagram-words lean.statement overruns into the next declaration, an extractor artefact that is cosmetic. No files changed, no compile."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T112355-L-1576708",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T112355-L-1576708",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

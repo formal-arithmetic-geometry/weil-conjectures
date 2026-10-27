@@ -1,0 +1,243 @@
+{
+ "id": "lem-sfb-semisimple-group-casimir-trace",
+ "kind": "statement",
+ "title": "Casimir endomorphism and trace for a semisimple algebraic group",
+ "statement": "Let $F$ be an algebraically closed field of characteristic zero [def-weil-field, def-weil-algebraic-closure]. A rational module for an affine finite-type $F$-group scheme $G$ [def-sc-group-scheme, def-weil-finite-type-morphism] means an $F$-vector space $V$ with a coaction $V\\to V\\otimes_F F[G]$ satisfying coassociativity and the counit identity. A submodule is a subspace whose coaction takes values in its tensor product with $F[G]$. A simple module is nonzero and has no proper nonzero submodule. An equivariant linear map means one commuting with coactions, equivalently with the actions after every commutative $F$-algebra extension. Assume $G$ is smooth and connected [def-sbc-smooth-morphisms, def-weil-connected-scheme] and semisimple: it has no nontrivial smooth connected solvable normal closed subgroup, where solvable means its successive commutator subgroup schemes eventually become trivial. Let $V$ be finite-dimensional, let $\\mathfrak g=T_eG$ be the tangent space at the identity [def-sc-scheme-tangent-space], write $r:G\\to\\operatorname{GL}(V)$ for the action morphism, and let $d r:\\mathfrak g\\to\\operatorname{End}_F(V)$ be the differential of its action. On dual-number points [def-sc-dual-numbers] this is specified by $r(1+\\epsilon x)=1+\\epsilon d r(x)$. Put $\\mathfrak h=d r(\\mathfrak g)\\subseteq\\operatorname{End}_F(V)$ and $n=\\dim_F\\mathfrak h$. The trace form $B(X,Y)=\\operatorname{Tr}_V(XY)$ on $\\mathfrak h$ is nondegenerate. For any basis $e_1,\\ldots,e_n$ of $\\mathfrak h$ and its $B$-dual basis $e^1,\\ldots,e^n$, the actual endomorphism\n$$c_V=\\sum_{i=1}^n e_i e^i\\in\\operatorname{End}_F(V)$$\nis independent of that basis, is $G$-equivariant, and satisfies $\\operatorname{Tr}_V(c_V)=n\\cdot1_F$. If the action on $V$ is nontrivial (its coaction is not $v\\mapsto v\\otimes1$), then $n>0$. For every rational submodule $W\\subseteq V$, $c_V(W)\\subseteq W$; if the induced action on $V/W$ is trivial, then $c_V(V)\\subseteq W$. Empty bases give $c_V=0$ when $\\mathfrak h=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 22c, The Casimir operator, printed pp.475-476; Proposition 22.41, printed p.477, for the nonzero differential image and trivial-quotient properties; Proposition 10.31, printed p.196, for differentiation and stabilizers."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-hopf-action-module-data"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-char-zero-differentiation-hom], $dr$ is a Lie homomorphism from the finite-dimensional tangent Lie algebra $\\mathfrak g$. By [lem-sfb-char-zero-semisimple-group-lie], $\\mathfrak g$ is semisimple. The corestriction $dr:\\mathfrak g\\to\\mathfrak h$ is surjective by the definition of $\\mathfrak h$ as its image. Apply [lem-sfb-semisimple-lie-surjective-image] to obtain semisimplicity of $\\mathfrak h$. Its inclusion in $\\operatorname{End}_F(V)$ is an injective Lie representation. Therefore [lem-sfb-faithful-semisimple-trace-form] gives exactly the required nondegeneracy of $B$.",
+   "uses": [
+    "lem-sfb-char-zero-differentiation-hom",
+    "lem-sfb-char-zero-semisimple-group-lie",
+    "lem-sfb-semisimple-lie-surjective-image",
+    "lem-sfb-faithful-semisimple-trace-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed pp.475-476, faithful trace form and passage to the differential image."
+   }
+  },
+  {
+   "text": "Choose a basis $(e_i)$ of $\\mathfrak h$. The matrix $(B(e_i,e_j))$ is invertible by nondegeneracy, so its inverse gives the unique dual basis $(e^i)$ with $B(e_i,e^j)=\\delta_i^j$. If $f_j=\\sum_i e_i A_{ij}$ is another basis, its dual is $f^j=\\sum_k(A^{-1})_{jk}e^k$. Hence\n$$\\sum_j f_j f^j=\\sum_{i,k,j}A_{ij}(A^{-1})_{jk}e_i e^k=\\sum_i e_i e^i.$$\nThus the displayed actual endomorphism is independent of the choice of basis; the calculation uses only bilinearity and $AA^{-1}=I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475, definition and basis independence of the Casimir operator (change-of-basis calculation expanded)."
+   }
+  },
+  {
+   "text": "For $X,Y,Z\\in\\mathfrak h$, cyclicity of matrix trace gives\n$$B([X,Y],Z)+B(Y,[X,Z])=\\operatorname{Tr}(XYZ-YZX)=0.$$\nWrite $[X,e_i]=\\sum_j a_{ji}e_j$. Pairing $[X,e^i]$ with $e_j$ then gives $[X,e^i]=-\\sum_j a_{ij}e^j$. Expanding commutators with products yields\n$$[X,c_V]=\\sum_{i,j}a_{ji}e_j e^i-\\sum_{i,j}a_{ij}e_i e^j=0,$$\nby exchanging $i,j$. Thus $c_V$ commutes with every $dr(x)$. The morphism criterion in [lem-sfb-char-zero-differentiation-hom], applied to $u=c_V:M=V\\to N=V$, proves rational $G$-equivariance, including every algebra extension.",
+   "uses": [
+    "lem-sfb-char-zero-differentiation-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed pp.475-476, Lie commutation and G-equivariance; Proposition 10.31 (graph-stabilizer criterion)."
+   }
+  },
+  {
+   "text": "Trace is linear, and every summand has trace $\\operatorname{Tr}_V(e_i e^i)=B(e_i,e^i)=1_F$. Consequently $\\operatorname{Tr}_V(c_V)=\\sum_{i=1}^n1_F=n\\cdot1_F$. For $n=0$ the only basis is empty and its sum is the zero endomorphism, with trace zero; nondegeneracy on the zero space is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475, displayed trace computation."
+   }
+  },
+  {
+   "text": "If $n=0$, then $dr=0$. Give the same vector space $V$ its trivial rational action, denoted $V_{\\rm triv}$, whose differential is zero by the dual-number formula. The linear identity $u:V_{\\rm triv}\\to V$ intertwines the two differentials. By [lem-sfb-char-zero-differentiation-hom] it intertwines their coactions, so the original coaction on $V$ is $v\\mapsto v\\otimes1$. Contrapositively, a nontrivial action has $n>0$.",
+   "uses": [
+    "lem-sfb-char-zero-differentiation-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.41, printed p.477, assertion that a nontrivial action has nonzero differential image; Proposition 10.31 with graph stabilizers."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq V$ be a rational submodule. Evaluate its action after scalar extension to $F[\\epsilon]/(\\epsilon^2)$. For $w\\in W$ and $x\\in\\mathfrak g$, the vector $(1+\\epsilon dr(x))w$ lies in $W\\otimes_F F[\\epsilon]$, hence its coefficient $dr(x)w$ of $\\epsilon$ lies in $W$. Thus every $e_i$ and $e^i$ preserves $W$, and so does their sum of products $c_V$. If the quotient action on $V/W$ is trivial, reducing $(1+\\epsilon dr(x))v$ modulo $W\\otimes_F F[\\epsilon]$ gives $dr(x)v\\in W$. Then $e^i(V)\\subseteq W$ and $e_i(W)\\subseteq W$, whence every $e_i e^i(V)\\subseteq W$ and $c_V(V)\\subseteq W$. This also holds for the empty sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.31, printed p.196, dual-number stabilizer calculation; Proposition 22.41, printed p.477, trivial quotient calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-char-zero-differentiation-hom",
+  "lem-sfb-char-zero-semisimple-group-lie",
+  "lem-sfb-semisimple-lie-surjective-image",
+  "lem-sfb-faithful-semisimple-trace-form"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, The Casimir operator, printed pp.475-476, and Proposition 22.41, printed p.477; explicit change-of-basis and commutator calculations expand the cited construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"casimir\"",
+   "results": "{\"t\": \"2026-10-23T13:52:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"casimir\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Casimir construction is present; returned trace-form, weight-space trace, and abstract-group equivariance declarations do not give this algebraic-group endomorphism and its trace"
+  },
+  {
+   "tool": "grep",
+   "query": "casimir|Casimir",
+   "results": "{\"t\": \"2026-10-23T13:56:33Z\", \"tool\": \"grep\", \"query\": \"casimir|Casimir\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Casimir construction is present; returned trace-form, weight-space trace, and abstract-group equivariance declarations do not give this algebraic-group endomorphism and its trace"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Casimir operator of semisimple algebraic group representation is group equivariant",
+   "results": "{\"t\": \"2026-10-23T13:56:33Z\", \"tool\": \"leansearch\", \"query\": \"Casimir operator of semisimple algebraic group representation is group equivariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.linHom.mem_invariants_iff_comm\", \"Representation.toCoinvariants_mk\", \"Action.HomSubtype\", \"Representation.Coinvariants.mk_self_apply\", \"LinearMap.sumOfConjugatesEquivariant\", \"Representation.invariants\", \"Representation.mem_invariants\", \"Representation.self_comp_norm\"], \"digest\": \"eb01b67954ae9cc8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Casimir construction is present; returned trace-form, weight-space trace, and abstract-group equivariance declarations do not give this algebraic-group endomorphism and its trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Casimir endomorphism of a rational representation has trace equal to the dimension of the image of the differential and preserves all submodules",
+   "results": "{\"t\": \"2026-10-23T13:56:34Z\", \"tool\": \"leanfinder\", \"query\": \"Casimir endomorphism of a rational representation has trace equal to the dimension of the image of the differential and preserves all submodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.trace_comp_toEnd_genWeightSpace_eq\", \"LieModule.trace_toEnd_genWeightSpace\", \"LieModule.traceForm_genWeightSpace_eq\", \"RootPairing.GeckConstruction.trace_toEnd_eq_zero\", \"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\", \"LieModule.trace_toEnd_genWeightSpaceChain_eq_zero\", \"LieSubmodule.traceForm_eq_zero_of_isTrivial\", \"LieModule.traceForm_eq_sum_genWeightSpaceOf\"], \"digest\": \"b15ac96f4b06a3dd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Casimir construction is present; returned trace-form, weight-space trace, and abstract-group equivariance declarations do not give this algebraic-group endomorphism and its trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a semisimple algebraic group over an algebraically closed field of characteristic zero the Casimir operator of a nontrivial rational representation is equivariant and has nonzero trace",
+   "results": "{\"t\": \"2026-10-23T13:56:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a semisimple algebraic group over an algebraically closed field of characteristic zero the Casimir operator of a nontrivial rational representation is equivariant and has nonzero trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.trace_toEnd_eq_zero\", \"LieModule.trace_toEnd_genWeightSpaceChain_eq_zero\", \"LieModule.trace_toEnd_genWeightSpace\", \"LieModule.trace_comp_toEnd_genWeightSpace_eq\", \"LieModule.exists_isRegular\", \"LieModule.traceForm_genWeightSpace_eq\", \"LieModule.traceForm_eq_sum_genWeightSpaceOf\", \"LieModule.traceForm_eq_sum_finrank_nsmul'\"], \"digest\": \"00c79e22034298e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no Casimir construction is present; returned trace-form, weight-space trace, and abstract-group equivariance declarations do not give this algebraic-group endomorphism and its trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Casimir operator of a finite dimensional rational module for a semisimple algebraic group in characteristic zero is equivariant and has trace the dimension of the differential image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.trace_toEnd_genWeightSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [IsPrincipalIdealRing R] [Module\", \"doc\": \"Let $ R $ be an integral domain that is also a principal ideal ring, and let $ M $ be a finite free $ R $-module. For a weight function $ \\\\chi: L \\\\to R $ and any $ x \\\\in L $, the trace of the endomorp\"}\n  {\"name\": \"LieModule.trace_comp_toEnd_genWeightSpace_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi: \\\\mathfrak{g} \\\\to R$, the trace of the endomorphism induced by the Lie br\"}\n  {\"name\": \"LieModule.traceForm_genWeightSpace_eq\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [Module.Free R M] [IsDomain R] [IsPrincipalIdealRing R] [inst_10 : LieRing.IsN\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a free $R$-module $M$ (with $R$ a domain and principal ideal ring, $M$ Noetherian, and $M$ admitting linear weights), t\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul'\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [inst_9 : LieMo\", \"doc\": \"For a Lie algebra $ L $ over a field $ K $ and a Lie module $ M $, the trace form $ \\\\text{traceForm}(K, L, M) $ is equal to the sum over all non-zero weights $ \\\\chi $ of $ M $ of the dimension $ \\\\text\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul_mul\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [LieModule.Line\", \"doc\": \"For a Lie algebra $ L $ over a field $ K $ and a Lie module $ M $, the trace form $ \\\\text{traceForm}(x, y) $ evaluated at elements $ x, y \\\\in L $ equals the sum over all weights $ \\\\chi $ of the dimens\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_finrank_nsmul\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : Field K] [inst_4 : LieAlgebra K L] [inst_5 : Module K M] [inst_6 : LieModule K L M]\\n  [inst_7 : FiniteDimensional K M] [inst_8 : LieRing.IsNilpotent L] [inst_9 : LieMo\", \"doc\": \"The trace form of a Lie module $ M $ over a field $ K $ with respect to a Lie algebra $ L $ is equal to the sum over all weights $ \\\\chi $ of the finite rank of the generalized weight space correspondi\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_genWeightSpaceOf\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsDomain R] [IsPrincipalIdealRing R\", \"doc\": \"Under the conditions that $ R $ is a principal ideal ring, $ M $ is a torsion-free and Noetherian $ R $-module, and the Lie algebra $ L $ over $ R $ is triangularizable on $ M $, the trace form on $ L\"}\n  {\"name\": \"RootPairing.GeckConstruction.trace_toEnd_eq_zero\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"For any element $ x $ in the Lie algebra $ \\\\mathfrak{b} $, the trace of the endomorphism obtained by applying the canonical map $ \\\\text{toEnd} $ to $ x $ (viewed as a linear operator on the direct sum\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: weight-space trace formulas and field-extension trace-dual bases do not construct the Casimir endomorphism of a rational algebraic-group representation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"casimir\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: weight-space trace formulas and field-extension trace-dual bases do not construct the Casimir endomorphism of a rational algebraic-group representation"
+  },
+  {
+   "tool": "grep",
+   "query": "casimir|Casimir",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: weight-space trace formulas and field-extension trace-dual bases do not construct the Casimir endomorphism of a rational algebraic-group representation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Casimir endomorphism for a semisimple algebraic group representation preserves rational submodules",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieSubmodule.toEnd_restrict_eq_toEnd\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"∀ {R : Type u} {L : Type v} {M : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  (N : LieSubmodule R L M) (x : L)\\n  (h : optParam (∀ (m : M) (hm : m ∈ ↑N), ((LieModu\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, an $R$-module $M$ equipped with a $\\\\mathfrak{g}$-module structure, and a $\\\\mathfrak{g}$-invariant submodule $N \\\\subseteq M$, the restricti\"}\n  {\"name\": \"Representation.invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : CommSemiring k] →\\n        [inst_1 : Group G] → [inst_2 : AddCommMonoid V] → [inst_3 : Module k V] → Representation k G V → Submodule k V\", \"doc\": \"For a commutative semiring $k$, group $G$, and $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, this is the submodule of $V$ consisting of all elements $v \\\\in V$ such tha\"}\n  {\"name\": \"Module.End.IsSemisimple.restrict\", \"module\": \"Mathlib.LinearAlgebra.Semisimple\", \"type\": \"{p : Submodule R M} (hp : p ∈ f.invtSubmodule) (hf : f.IsSemisimple) : IsSemisimple (f.restrict hp)\", \"doc\": \"If $ f $ is a semisimple endomorphism of an $ R $-module $ M $ and $ p $ is an $ f $-invariant submodule of $ M $, then the restriction of $ f $ to $ p $ is also semisimple. That is, the restricted en\"}\n  {\"name\": \"Representation.mem_invtSubmodule\", \"module\": \"Mathlib.RepresentationTheory.Submodule\", \"type\": \"{p : Submodule k V} : p ∈ ρ.invtSubmodule ↔ ∀ g, p ∈ Module.End.invtSubmodule (ρ g)\", \"doc\": \"A submodule $ p $ belongs to the sublattice of invariant submodules under a representation $ \\\\rho: G \\\\to \\\\mathrm{End}_k(V) $ if and only if for every $ g \\\\in G $, the submodule $ p $ is invariant unde\"}\n  {\"name\": \"Module.End.invtSubmodule\", \"module\": \"Mathlib.Algebra.Module.Submodule.Invariant\", \"type\": \": Sublattice (Submodule R M)\", \"doc\": \"The sublattice of submodules $ p $ of an $ R $-module $ M $ that are invariant under a given endomorphism $ f : M \\\\to M $, meaning $ f(p) \\\\subseteq p $. This collection forms a sublattice of the compl\"}\n  {\"name\": \"Module.End.IsFinitelySemisimple.restrict\", \"module\": \"Mathlib.LinearAlgebra.Semisimple\", \"type\": \"{p : Submodule R M} (hp : p ∈ f.invtSubmodule) (hf : f.IsFinitelySemisimple) : IsFinitelySemisimple (f.restrict hp)\", \"doc\": \"If $ f $ is a finitely semisimple endomorphism of an $ R $-module $ M $, and $ p $ is an $ f $-invariant submodule of $ M $, then the restriction of $ f $ to $ p $ is also finitely semisimple. This me\"}\n  {\"name\": \"Representation.invtSubmodule.top_mem\", \"module\": \"Mathlib.RepresentationTheory.Submodule\", \"type\": \": ⊤ ∈ ρ.invtSubmodule\", \"doc\": \"The entire module $ V $ is an invariant submodule under the representation $ \\\\rho $, meaning it belongs to the sublattice of submodules preserved by all endomorphisms $ \\\\rho(g) $ for $ g \\\\in G $.\"}\n  {\"name\": \"LieSubalgebra.toEnd_eq\", \"module\": \"Mathlib.Algebra.Lie.OfAssociative\", \"type\": \"(K : LieSubalgebra R L) {x : K} : LieModule.toEnd R K M x = LieModule.toEnd R L M x\", \"doc\": \"For any Lie subalgebra $\\\\mathfrak{g}' \\\\subseteq \\\\mathfrak{g}$ over a commutative ring $R$, and for any $x \\\\in \\\\mathfrak{g}'$, the $R$-linear endomorphism of the Lie module $M$ induced by $x$ via the s\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: weight-space trace formulas and field-extension trace-dual bases do not construct the Casimir endomorphism of a rational algebraic-group representation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sum of products of trace dual bases in the differential image of a rational representation has trace its dimension and commutes with a connected semisimple group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Basis.trace_traceDual_mul\", \"module\": \"Mathlib/RingTheory/Trace/Basic\", \"type\": \"∀ {K : Type u_4} {L : Type u_5} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] {ι : Type w}\\n  [inst_3 : FiniteDimensional K L] [inst_4 : Algebra.IsSeparable K L] [inst_5 : Finite ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι K L) (i j : ι), (Algebra.trace K L) (b.traceDual i * b j) =\", \"doc\": \"For a basis $ b $ of the field extension $ L/K $, the trace of the product of the dual basis element $ b^i $ and the basis element $ b_j $ is equal to the Kronecker delta $ \\\\delta_{i,j} $, i.e., $ \\\\ma\"}\n  {\"name\": \"Module.Basis.trace_mul_traceDual\", \"module\": \"Mathlib/RingTheory/Trace/Basic\", \"type\": \"∀ {K : Type u_4} {L : Type u_5} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] {ι : Type w}\\n  [inst_3 : FiniteDimensional K L] [inst_4 : Algebra.IsSeparable K L] [inst_5 : Finite ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι K L) (i j : ι), (Algebra.trace K L) (b i * b.traceDual j) =\", \"doc\": \"For a basis $ b $ of the field extension $ L/K $, the trace of the product of $ b_i $ and its dual basis element $ b_j^* $ (induced by the non-degenerate trace form $ \\\\text{Tr}_{L/K} $) satisfies $ \\\\t\"}\n  {\"name\": \"RootPairing.GeckConstruction.trace_toEnd_eq_zero\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"For any element $ x $ in the Lie algebra $ \\\\mathfrak{b} $, the trace of the endomorphism obtained by applying the canonical map $ \\\\text{toEnd} $ to $ x $ (viewed as a linear operator on the direct sum\"}\n  {\"name\": \"LieModule.trace_comp_toEnd_genWeightSpace_eq\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] [i\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi: \\\\mathfrak{g} \\\\to R$, the trace of the endomorphism induced by the Lie br\"}\n  {\"name\": \"LieModule.trace_toEnd_genWeightSpace\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [IsPrincipalIdealRing R] [Module\", \"doc\": \"Let $ R $ be an integral domain that is also a principal ideal ring, and let $ M $ be a finite free $ R $-module. For a weight function $ \\\\chi: L \\\\to R $ and any $ x \\\\in L $, the trace of the endomorp\"}\n  {\"name\": \"Module.Basis.traceDual_repr_apply\", \"module\": \"Mathlib/RingTheory/Trace/Basic\", \"type\": \"∀ {K : Type u_4} {L : Type u_5} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] {ι : Type w}\\n  [inst_3 : FiniteDimensional K L] [inst_4 : Algebra.IsSeparable K L] [inst_5 : Finite ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι K L) (x : L) (i : ι), (b.traceDual.repr x) i = ((Algebra.tr\", \"doc\": \"For any element $x$ in the field extension $L/K$ and any index $i$, the coefficient of $x$ in the trace dual basis corresponding to $i$ is equal to the trace form $\\\\text{Tr}_{L/K}(x b_i)$, where $b_i$\"}\n  {\"name\": \"LieModule.traceForm_eq_sum_genWeightSpaceOf\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [inst_8 : IsDomain R] [IsPrincipalIdealRing R\", \"doc\": \"Under the conditions that $ R $ is a principal ideal ring, $ M $ is a torsion-free and Noetherian $ R $-module, and the Lie algebra $ L $ over $ R $ is triangularizable on $ M $, the trace form on $ L\"}\n  {\"name\": \"LieModule.traceForm_genWeightSpace_eq\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [Module.Free R M] [IsDomain R] [IsPrincipalIdealRing R] [inst_10 : LieRing.IsN\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a free $R$-module $M$ (with $R$ a domain and principal ideal ring, $M$ Noetherian, and $M$ admitting linear weights), t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: weight-space trace formulas and field-extension trace-dual bases do not construct the Casimir endomorphism of a rational algebraic-group representation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-characteristic-zero-complete-reducibility",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Casimir endomorphism and trace for a semisimple algebraic group.",
+   "via": [
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimple-group-casimir-trace",
+  "worker": "stage1",
+  "summary": "Split the Casimir construction into four reusable algebraic-group/Lie-algebra prerequisites; proved basis independence, trace, commutation, and submodule/quotient clauses by explicit finite-dimensional calculations. Used a graph-morphism differentiation criterion rather than an implicit passage from Lie equivariance to group equivariance. Corrected doubled TeX backslashes without changing any mathematical hypothesis or conclusion.",
+  "blueprint": "The inherited blueprint.from.place locates the characteristic-zero complete-reducibility prerequisite beneath the direct-image alteration route. Steps realize its supporting Casimir construction exactly as Milne §22c; no unit or chapter route is replaced. The latest blueprint direct-images proof and the null nearest blueprint ancestor were checked."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-effad3e35",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-effad3e35 (reviewer sub-agent of L); spot-checked: I read the item and all four new nodes in full. The item statement is byte-identical to the one in the Q141 parent delivery; only the proof and split fields changed. This is a first split, not a 10-21 re-split. Sources checked in Milne iAG2017: §22c pp.475-476 (Casimir operator, faithful trace form via Cartan, g=a⊕b, Lie(G) semisimple), Prop 22.41 p.477, Prop 10.15 pp.190-191, Prop 10.31 p.196, Cartier 3.23 p.71, Thm 22.53 p.481. No SGA source is used. Step 1: the four cited nodes are applied with their hypotheses in force; the trace-form node is correctly applied to h=dr(g), which is faithful on V, not to g. Step 2: the dual of f_j=Σ_i e_i A_ij is f^j=Σ_k (A^-1)_jk e^k, which gives B(f_l,f^j)=δ_lj and the same actual sum. Step 3: the invariance identity is correct, [X,e^i]=-Σ_j a_ij e^j, the double sums cancel, and the differentiation node's Hom criterion (G connected, char 0) gives coaction equivariance. Steps 4-6 are elementary and correct, including the empty-sum case and the order e_i(W) after e^i(V)⊂W. New nodes: the differentiation-hom node is true (graph of u + 10.31 + Cartier + 10.15). Semisimple group ⇒ semisimple Lie algebra is true (Milne p.476 and 22.53). Surjective images of semisimple Lie algebras are semisimple, which is true. The faithful-representation trace form is nondegenerate, which is true by Cartan. None is a duplicate: lem-ag-lie-stable-subspace and lem-ag-killing-nondegenerate are over Q̄_ℓ; lem-ag-central-radical-quotient (also Q̄_ℓ) covers only the quotient by the centre; lem-wf-lie-algebra-derivation-bracket gives only the Lie-hom part for matrix groups; sk-lem-walg-killing covers only the adjoint (Killing) form. None restates a clause of the item. Tested on SL_2 standard rep (c=(3/2)I, trace 3=n), V trivial, G=1, V=0, W=0/V, and a factor-through-one-factor case. Advisory: the group-Lie node could cite def-sfb-semisimple-group-scheme; it carries the bracket through a lemma stmt_dep, which may matter at stage 2; Mathlib CartanCriterion.lean:176/258 are related but not exact candidates for the trace-form node. No tool_uses, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.SemisimpleGroupCasimirTrace",
+  "declaration": "AlgebraicGeometry.semisimpleGroup_casimir_trace",
+  "file": "lean/Sheaf/RepresentationTheory/SemisimpleGroupCasimirTrace.lean",
+  "statement": "theorem semisimpleGroup_casimir_trace (F : Type u) [Field F] [IsAlgClosed F] [CharZero F] (G : Scheme.{u}) [G.Over (Spec (.of F))] [GrpObj (G.asOver (Spec (.of F)))] [IsAffine G] (hG : IsSemisimpleGroupScheme (G.asOver (Spec (.of F)))) (V : Type v) [AddCommGroup V] [Module F V] [FiniteDimensional F V] (α : V →ₗ[F] V ⊗[F] Γ(G, ⊤)) (hcoassoc : HopfAction.Coassociative F Γ(G, ⊤) V α) (hcounit : HopfAction.Counital F Γ(G, ⊤) V α) : ∃ dr : GrpObj.Lie (G.asOver (Spec (.of F))) →ₗ[F] Module.End F V, (∀ x : GrpObj.Lie (G.asOver (Spec (.of F))), ∃ g : Γ(G, ⊤) →ₐ[F] DualNumber F, g.toRingHom = ((GrpObj.lieEquivTangent (G.asOver (Spec (.of F))) x).val.left.appTop ≫ (Scheme.ΓSpecIso (.of (DualNumber F))).hom).hom ∧ ∀ v : V, g.toLinearMap.lTensor V (α v) = v ⊗ₜ[F] (1 : DualNumber F) + dr x v ⊗ₜ[F] DualNumber.eps) ∧ (∀ X : LinearMap.range dr, (∀ Y : LinearMap.range dr, LinearMap.trace F V (X.val * Y.val) = 0) → X = 0) ∧ ∃ c : Module.End F V, (∀ b : Module.Basis (Fin (Module.finrank F (LinearMap.range dr))) F (LinearMap.range dr), ∃ d : Module.Basis (Fin (Module.finrank F (LinearMap.range dr))) F (LinearMap.range dr), ∀ i j, LinearMap.trace F V ((b i).val * (d j).val) = if i = j then 1 else 0) ∧ (∀ b d : Module.Basis (Fin (Module.finrank F (LinearMap.range dr))) F (LinearMap.range dr), (∀ i j, LinearMap.trace F V ((b i).val * (d j).val) = if i = j then 1 else 0) → c = ∑ i, (b i).val * (d i).val) ∧ α ∘ₗ c = c.rTensor Γ(G, ⊤) ∘ₗ α ∧ LinearMap.trace F V c = (Module.finrank F (LinearMap.range dr) : F) ∧ (α ≠ (TensorProduct.mk F V Γ(G, ⊤)).flip 1 → 0 < Module.finrank F (LinearMap.range dr)) ∧ (∀ W : Submodule F V, @RationalHighestWeight.IsStable F _ (Grp.mk (G.asOver (Spec (.of F)))) (inferInstanceAs (IsAffine G)) V _ _ α W → (∀ w ∈ W, c w ∈ W) ∧ ((∀ v : V, W.mkQ.rTensor Γ(G, ⊤) (α v) = W.mkQ v ⊗ₜ[F] (1 : Γ(G, ⊤))) → ∀ v : V, c v ∈ W)) ∧ (LinearMap.range dr = ⊥ → c = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existential differential is pinned by the actual canonical dual-number tangent points. The existential Casimir is pinned by its sum-of-products formula for every trace-dual pair of bases, whose existence is also asserted. Uses the landed semisimple group, rational stable subspace, and coaction predicates; their owning definition nodes are added to stmt_deps. All clauses, including the zero differential image and trivial quotient, are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-786b78855",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and Milne §22c/22.41/10.31: every clause is present and none is stronger. G is semisimple via IsSemisimpleGroupScheme; [IsAffine G] is implied by it. The rational coaction uses the existing Coassociative/Counital predicates. dr is pinned by the canonical lieEquivTangent dual-number points, in the same convention as the landed charZero_differentiation_hom. The trace form on range dr is nondegenerate. One c is fixed by the sum-of-products formula for every trace-dual basis pair, and dual-basis existence is asserted. Present: the coaction square, trace c = finrank, nontrivial action implies n>0, IsStable W gives c(W)⊆W, a trivial quotient gives c(V)⊆W, range dr = ⊥ gives c = 0. Edge cases V=0, n=0, trivial group, W=0/V are covered; universes u (forced) and v are independent. The delivery changes only stmt_deps (+3 landed def nodes) and lean; the statement is verbatim, there is one sorry, no definitions, and docstrings carry source and blueprint. Non-blocking notes: the coordinate Hopf instance owner def-sfb-coordinate-hopf-algebra is reached only transitively via def-sfb-rational-highest-weight-data; the SchemeTangentSpace import is unused (GrpObj.Lie is used, as in the proof deps). No file changed, so nothing compiled."
+ }
+}

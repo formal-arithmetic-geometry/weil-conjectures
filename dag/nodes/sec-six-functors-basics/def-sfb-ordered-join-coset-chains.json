@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-ordered-join-coset-chains",
+ "kind": "definition",
+ "title": "Tuple chains and explicit ordered-coset comparison maps",
+ "statement": "For a set Y and integer q, a tuple symbol is a list in Y of length q+1 and B_q(Y) is its free integer module on the specified Finsupp basis [def-weil-pbc-free-module]. A list of the wrong length denotes zero. The tuple boundary is alternating positional deletion and a map of sets acts coordinatewise. For a group G, subgroup H, n in N and a:Fin(n+1)→G, let X_i be the separately labeled subtype of elements ha_i, h∈H. Chosen vertices are ha_i and translation by g∈H sends x to gx. Use the colored-face chain groups and operators of [def-sfb-ordered-join-chains]. Arity k has degree k-1, including -1 when k=0. The recursive map P is identity on the empty generator at arity zero, sends h to the color-zero vertex ha_0 at arity one, and at higher arities applies the contraction based at the first entry to P of the alternating boundary. Erasure e lists vertices by increasing color. Define A=eP. These are the actual finite formulas extracted unchanged from [lem-sfb-ordered-join-coset-comparison], not arbitrary witnesses of an existence theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ordered-coset expansion, calculations 1–7; the arithmetic is not asserted by the blueprint itself."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-sfb-ordered-join-chains"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ordered-coset expansion, calculations 1–7; the arithmetic is not asserted by the blueprint itself."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant comparison from homogeneous tuple chains to an ordered join of subgroup cosets with uniform coordinate formula",
+   "results": "8 hits; Equidecomp.witness, GrpCat.SurjectiveOfEpiAuxs.g_apply_fromCoset, Equidecomp, Equidecomp.IsDecompOn, and subgroup action constructions. None concerns tuple or ordered-join chain maps.",
+   "date": "2026-10-26",
+   "verdict": "No matching comparison, erasure or tuple-chain construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free integer tuple chains and ordered colored join chains: forgetting colors commutes with alternating deletion and group translation; recursive comparison using a contraction has fixed finite formulas",
+   "results": "8 hits, concerning free group reductions (FreeGroup.Red.Step, FreeAddGroup.Red, their recursors and diamond lemmas). No chain erasure or recursive coset comparison.",
+   "date": "2026-10-26",
+   "verdict": "No matching statement or construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.linearCombination",
+   "results": "12 hits including Finsupp.linearCombination, linearCombination_single, linearCombination_apply and range_linearCombination. These supply linear extension and extensionality, but not the coset-specific formulas.",
+   "date": "2026-10-26",
+   "verdict": "Supporting Mathlib API, not an exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "orderedJoinCosetComparison|tupleBoundary|erasedComparison",
+   "results": "msearch Mathlib grep: zero hits. rg of lean/Sheaf and lean/WeilConjectures: only the assigned module defines or uses these constructions; no duplicate recursive comparison or erasure theorem.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicTopology.OrderedJoinCosetComparison",
+  "date": "2026-10-26",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent ordered-coset expansion, calculations 1–7; the arithmetic is not asserted by the blueprint itself.",
+   "via": [
+    "lem-sfb-ordered-join-coset-comparison",
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicTopology.OrderedJoinCosetChains",
+  "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinCosetChains.lean",
+  "declaration": "AlgebraicTopology.OrderedJoin.CosetComparison.TupleSymbol",
+  "declarations": [
+   "AlgebraicTopology.OrderedJoin.CosetComparison.TupleSymbol",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.TupleChain",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.tupleTerm",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.tupleBoundary",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.tupleMap",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.Coset",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.vertex",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.translateVertex",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.arityDegree",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.comparison",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.erasure",
+   "AlgebraicTopology.OrderedJoin.CosetComparison.erasedComparison"
+  ],
+  "statement": "def TupleSymbol (Y : Type u) (q : ℤ) : Type u",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6dd4c",
+  "group": "J5",
+  "result": "fix",
+  "landing": "20261026T091820-L-3378067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6dd4c",
+  "group": "J5",
+  "result": "fix",
+  "landing": "20261026T091820-L-3378067",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (identical statement); 12 moved defs vs clone block (verbatim, public re-export, 0 importers); split sorries vs item conjuncts 1,3 and 4 (verbatim, true); axioms via scratch --all compile"
+ }
+}

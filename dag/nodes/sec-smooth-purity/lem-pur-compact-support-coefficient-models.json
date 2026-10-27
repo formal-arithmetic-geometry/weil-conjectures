@@ -1,0 +1,420 @@
+{
+ "id": "lem-pur-compact-support-coefficient-models",
+ "kind": "statement",
+ "title": "Compatible coefficient models and finite-Tor domain for compact support",
+ "statement": "Fix the finite-field datum of [def-pur-conventions], with algebraic closure $k$ of characteristic $p$, a prime $\\ell\\ne p$, and finite extensions $E\\subset F$ of $\\mathbf Q_\\ell$. Write $A=\\mathcal O_E$, $B=\\mathcal O_F$, $t=\\varpi_E$, $v=\\varpi_F$ and $e\\geq1$ with $tB=v^eB$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated of finite type between separated finite-type $k$-schemes, and fix a compactification $c=(X\\xrightarrow{j}\\overline X\\xrightarrow{p_c}Y)$ with $j$ open and $p_c$ proper [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. On the small pro-etale sites [def-weil-pbc-proetale-site], put $R_W=\\widehat{\\mathcal O}_{E,W}$, $S_W=\\widehat{\\mathcal O}_{F,W}$ [def-weil-completed-integral-coefficients] and $C_W=-\\otimes^L_{R_W}S_W$ [lem-pur-derived-change-of-rings]. Let $M\\in D^b_{ctf}(X,\\mathcal O_E)$, the derived-complete bounded constructible category with a uniform Tor-amplitude interval for all reductions [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude]. Write $A_n=A/t^n$, $B_n=B/t^nB=B/v^{en}$, $M_n=M\\otimes^L_{R_X}(A_n)_X$, and $C_W^{(n)}=-\\otimes^L_{(A_n)_W}(B_n)_W$. For $H=E,F$, let $P_H^c$ be the integral compact-support functor attached to $c$, defined as the total derived inverse limit of its finite separately derived proper/open images [def-weil-integral-rational-qbar-compact-support].\n\nThe rings $A$ and $B$ are complete for their uniformizer-adic topologies; $\\bigcap_n t^nB=0$, and $B$ has an $A$-basis $b_1,\\ldots,b_r$ inducing compatible $A_n$-bases of $B_n$. Under restriction from completed coefficient sheaves to constant ring sheaves, the derived-complete categories, their quotient diagrams, quotient transitions and total derived inverse limits are identified canonically. In this model $C_W$ on complete objects is scalar extension by the finite free constant module $\\underline B_W$, with ordinary-tensor/strict-tower comparison $\\chi$ normalized by the quotient product map and zero shifted-product component [lem-weil-finite-free-completed-scalar-comparison]. These identifications commute with the coefficient inverse-image maps for every scheme morphism and with finite quotient maps. The ambient native derived localization tensor and its K-flat representative tensor have the same canonical associator and unit comparisons [lem-sf-ringed-derived-native-tensor].\n\nThe object $C_XM$ is derived complete and bounded constructible and has the same uniform Tor bounds as $M$. More explicitly, for every $a\\geq1$ and $en\\geq a$ there is the canonical balanced-tensor identification\n$$ (C_XM)\\otimes^L_{S_X}(B/v^a)_X\\cong M_n\\otimes^L_{(A_n)_X}(B/v^a)_X,$$\nand for every degree-zero $(B/v^a)_X$-module $N$, further tensoring is canonically $M_n\\otimes^L_{(A_n)_X}N$, with $N$ restricted to $A_n$. The integral compact-support values $P_E^cM$ and $P_F^c(C_XM)$ lie in the derived-complete bounded constructible categories on $Y$, where $P_E^c$ and $P_F^c$ are the reduction-limit functors of [def-weil-integral-rational-qbar-compact-support]. These assertions do not require smoothness or a purity isomorphism.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent auxiliary for purity-transport coefficient-extension step and thm-pur-rational-and-qbar-purity Proof Step 2; returned comparison Steps 1, 2, 7. Bhatt-Scholze Lemma 6.8.2(1), Definition 6.7.6 and Lemma 6.7.7; arithmetic and finite-Tor details are the agent argument retained in report.md.",
+  "note": "New statement-only task extracted under the human re-split decision of 2026-10-21; no numbered source is claimed to state the entire auxiliary. Full original argument and its source/node citations are preserved verbatim in report.md."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-pur-constant-scalar-tower-adjunction",
+  "def-pur-native-constant-support-model",
+  "def-weil-pbc-completed-constant-presentation-data",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "For either coefficient field H, use finite_module_adic_complete_and_hom on its integer ring. Its bijective canonical adic-completion map implies IsAdicComplete by AdicCompletion.of_bijective_iff. For separatedness, ramification and Ideal.map_pow rewrite the mapped nth ideal as (v^e)^n. The DVR maximal ideal is generated by v; since e is positive, (v^e) is contained in that proper maximal ideal. Apply the Krull-intersection lemma Ideal.iInf_pow_eq_bot_of_isLocalRing.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Opening sentence; elementary completeness/separatedness argument from the cited valued-field facts."
+   }
+  },
+  {
+   "text": "Use the public local-field integral-basis theorem with the actual scalar absolute-value compatibility. Its unique coordinate expansions give a bijective linear coordinate map and hence a Module.Basis; this is the private coefficientIntegralBasis argument with the two scalar algebra instances. Its basis coordinate equivalence is the displayed sum of scalar multiples. For every n, ramification identifies the target ideal with the image of the source ideal. Base-change that same basis to the source quotient and transport it along the standard quotient tensor equivalence; the private coefficientQuotientBasis proof records the generator formula. The inverse quotient-coordinate equivalence gives the requested coordinates; surjectivity of the quotient map supplies lifts, and injectivity of the coordinate equivalence proves uniqueness. This works also at n=0. The ordinary constant-module model still uses the basis/limit argument described in the following step.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Opening basis construction, realized with the actual inverse-limit coefficient sheaves."
+   }
+  },
+  {
+   "text": "Use the noetherian instance in the actual coefficient datum. The existing completed_constant_presentation_transport supplies the presentation transport. ConstantCompletion.equivalence, derivedReductionTowerComparison and derivedLimitRestriction supply the category equivalence, normalized tower comparison with all transitions, and derived-limit comparison with its counit. The completed and strict inverse-image squares are already in the coefficient-data declarations; the arbitrary quotient square is proEtaleConstantInverseImageMap_naturality for the explicitly constructed quotient ring homomorphism.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-presentation-transport",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pur-integral-compact-support-coefficient-data",
+    "def-pur-finite-compact-support-scalar-data",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Section derived-completion-noetherian; Tag 099M (lemma-naive-completion), using sites-modules Tag 093M (lemma-completion-flat) and algebraization Tag 099I (lemma-restriction-derived-complete-equivalence)."
+   }
+  },
+  {
+   "text": "Obtain component isomorphisms with their pure-tensor formulas from the ordinary-existence node. Build a natural isomorphism using NatIso.ofComponents: tensor-generator extensionality reduces naturality to pure tensors, where naturality of scalar extension and the component formulas prove the equation. The same extensionality argument proves uniqueness. The helper supplies objectwise basis comparisons only; the parent proves their naturality and uniqueness.",
+   "uses": [
+    "lem-pur-compact-support-coefficient-models-ordinary-existence",
+    "lem-pur-quotient-scalar-comparison-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Basis-induced scalar identification; balanced tensor formula on the constant/completed presentations."
+   }
+  },
+  {
+   "text": "For a derived-complete input, apply finiteFreeCompletedScalarComparison. Its scalar comparison is the prescribed completedScalarComparison, not an arbitrary isomorphism. The choose_spec of completedScalarComparison_existsUnique gives exactly the quotient-product normalization; the choose_spec of completedScalarChainComparison_existsUnique gives its chain-level zero shifted-product component.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1) for coefficient realization; specified ordinary/strict-tower comparison supplied by the cited DAG lemma."
+   }
+  },
+  {
+   "text": "For moduleBalancing, the existing inverse ordinaryTensorCancellation comparison has the required section formula. Uniqueness follows by precomposing with its inverse and using tensor-generator extensionality through the module sheafification adjunction. The quotient square and balanced reduction remain as proved. For furtherTensor, specialize the existing ordinaryTensorCancellation to pbcExtend at the retained quotient map, using its object and map identifications. Its inverse has the moduleBalancing normalization and therefore equals the chosen unique module map. Its naturality with the second module fixed gives a natural isomorphism between the two termwise tensor functors. Apply NatIso.mapHomologicalComplex, and conjugate by mapBifunctorSingle₂Iso on source and target to obtain the chain isomorphism. Its degreewise equation is the stated normalization. Compose the fixed mapDerivedCategoryFactors with DerivedCategory.Q.mapIso of this chain isomorphism. Any other witness has the same chain components after cancellation of the target mapBifunctorSingle₂Iso, hence the same chain isomorphism and the same localization. No flatness or positivity is needed for this chain-level identity; in particular the existing K-flat hypothesis is retained but unused. The native associator and unitor clauses still refer to the proved RingedDerivedNative comparisons.",
+   "uses": [
+    "def-pur-finite-compact-support-scalar-data",
+    "def-weil-compact-support-reduction-tower-data",
+    "lem-trf-site-derived-tensor-restriction",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); native localization normalization from lem-sf-ringed-derived-native-tensor."
+   }
+  },
+  {
+   "text": "Convert the intrinsic completeness of the input to the legacy integralCtfProperty using sfDerivedComplete_iff_legacy. Rewrite the stated ramification equality at level one into the principal-ideal equality expected by purAdicScalarExtensionTorBound. Apply that theorem to obtain preservation of every common Tor interval, and apply it again to the interval supplied by the input to recover the finiteTorConstructibleIntegral bounds.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-pur-adic-scalar-extension-tor-bound",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+    "place": "Step 1 finite-Tor lattice domain; elementary application of the Tor definition to the balanced formula of Step 6."
+   }
+  },
+  {
+   "text": "Apply sfIntegralScalarExtension_constructible to the input intrinsic constructible object. To apply finiteFreeCompletedScalarComparison at its legacy unrestricted interface, choose a prime different from l and construct a small finite-field datum; sfDerivedComplete_iff_legacy supplies the required completeness witness. The comparison is thus an isomorphism at M. The intrinsic constructible property is closed under isomorphism, so transport constructibility from the strict-tower scalar extension to pbcDerivedExtend. Combine with the unchanged Tor interval from the preceding step. No Noetherian or dimension comparison is needed in this assembly.",
+   "uses": [
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), constructible integral coefficient models; stratified-perfect and scalar-transport interfaces stated in the cited DAG nodes."
+   }
+  },
+  {
+   "text": "Apply the proved scalar clause to M. The existing normalized sfQcqsCompactSupportRealization_existsUnique, once for E and once for F, identifies the two ambient proper/open images with values of the actual constructible integral compact-support functors. Their values have the constructible property by their codomain. Transport this property across each realization isomorphism using closure under isomorphisms. At E, compose the same realization component with sfCompactSupportFiniteIntegralFunctor_obj to obtain the displayed value comparison. Retain the two specification and uniqueness proofs verbatim for the final two conjuncts.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.7; the reduction-limit realization and constructibility are the cited DAG interfaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-compact-support-scalar-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-compact-support-reduction-tower-data",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pur-adic-scalar-extension-tor-bound",
+  "lem-pur-compact-support-coefficient-models-ordinary-existence",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-local-field-integral-basis",
+  "lem-trf-site-derived-tensor-restriction",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-presentation-transport",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "R5",
+  "date": "2026-10-26",
+  "note": "Reduced ordinary comparison to objectwise basis isomorphisms and proved naturality and uniqueness using tensor generators."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of complete discrete valuation rings gives compatible constant and completed sheaf scalar models preserving uniform Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T05:58:15Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free extension of complete discrete valuation rings gives compatible constant and completed sheaf scalar models preserving uniform Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'\", \"AdicCompletion.instIsScalarTower_1\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.instIsScalarTower\", \"instCommRingBDeRhamPlus\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"68d24a0fee94bda2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic-completion tensor equivalences and scalar-tower instances do not identify derived-complete sheaf models, strict quotient transitions and uniform Tor bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral adic sheaves finite field coefficient extension compatible bases and strict quotient tower ordinary derived tensor comparison",
+   "results": "{\"t\": \"2026-10-22T05:58:16Z\", \"tool\": \"leanfinder\", \"query\": \"Integral adic sheaves finite field coefficient extension compatible bases and strict quotient tower ordinary derived tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.ofTensorProduct_tmul\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\"], \"digest\": \"e5c8a0da805cc9d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic-completion tensor equivalences and scalar-tower instances do not identify derived-complete sheaf models, strict quotient transitions and uniform Tor bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T05:58:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProduct\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProductInvOfPiFintype\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_surjective_of_finite\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.ofTensorProduct_tmul\"], \"digest\": \"9a64c003247c7a50\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic-completion tensor equivalences and scalar-tower instances do not identify derived-complete sheaf models, strict quotient transitions and uniform Tor bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*coefficient|coefficient.*completed|uniform.*[Tt]or|strict.*tower.*scalar",
+   "results": "{\"t\": \"2026-10-22T05:58:05Z\", \"tool\": \"grep\", \"query\": \"completed.*coefficient|coefficient.*completed|uniform.*[Tt]or|strict.*tower.*scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Group.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\"], \"digest\": \"a40ba993e0e5e1ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic-completion tensor equivalences and scalar-tower instances do not identify derived-complete sheaf models, strict quotient transitions and uniform Tor bounds."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of l adic coefficient fields preserves constructible complexes with uniform finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T05:58:06Z\", \"tool\": \"leansearch\", \"query\": \"Finite extension of l adic coefficient fields preserves constructible complexes with uniform finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"finiteExts\", \"FiniteField.instFiniteExtension_1\", \"NumberField.of_module_finite\", \"FiniteField.instFiniteExtension\", \"FiniteField.Extension\", \"instFiniteDimensionalFractionRingOfFinite\", \"Subfield.expChar\", \"FiniteField.algEquivExtension\"], \"digest\": \"df634f32b51dba2a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module adic-completion tensor equivalences and scalar-tower instances do not identify derived-complete sheaf models, strict quotient transitions and uniform Tor bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*coefficient|coefficient.*completed|uniform.*[Tt]or|strict.*tower.*scalar",
+   "results": "{\"t\": \"2026-10-22T06:55:08Z\", \"tool\": \"grep\", \"query\": \"completed.*coefficient|coefficient.*completed|uniform.*[Tt]or|strict.*tower.*scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/NumberTheory/RatFunc/Ostrowski.lean\", \"Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/InfiniteSum/Group.lean\", \"Mathlib/Topology/Algebra/Valued/ValuationTopology.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/AdicTopology.lean\"], \"digest\": \"ed40cff6956fccd4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion and scalar-tower declarations do not state the sheaf-derived equivalences, strict quotient comparisons or compact-support constructibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of l adic coefficient fields preserves constructible complexes with uniform finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T06:55:08Z\", \"tool\": \"leansearch\", \"query\": \"Finite extension of l adic coefficient fields preserves constructible complexes with uniform finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"finiteExts\", \"FiniteField.instFiniteExtension_1\", \"NumberField.of_module_finite\", \"FiniteField.instFiniteExtension\", \"FiniteField.Extension\", \"instFiniteDimensionalFractionRingOfFinite\", \"Subfield.expChar\", \"FiniteField.algEquivExtension\"], \"digest\": \"df634f32b51dba2a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion and scalar-tower declarations do not state the sheaf-derived equivalences, strict quotient comparisons or compact-support constructibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T06:55:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProduct\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProductInvOfPiFintype\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_surjective_of_finite\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.ofTensorProduct_tmul\"], \"digest\": \"9a64c003247c7a50\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion and scalar-tower declarations do not state the sheaf-derived equivalences, strict quotient comparisons or compact-support constructibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of complete discrete valuation rings gives compatible constant and completed sheaf scalar models preserving uniform Tor amplitude",
+   "results": "{\"t\": \"2026-10-22T06:55:19Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free extension of complete discrete valuation rings gives compatible constant and completed sheaf scalar models preserving uniform Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.instModuleOfIsScalarTower\", \"AdicCompletion.instIsScalarTower_1\", \"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.instIsScalarTower\"], \"digest\": \"da6abf2c97489b48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion and scalar-tower declarations do not state the sheaf-derived equivalences, strict quotient comparisons or compact-support constructibility."
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedComplete|TorAmplitude|proetale|ProEtale",
+   "results": "{\"t\": \"2026-10-22T06:55:32Z\", \"tool\": \"grep\", \"query\": \"DerivedComplete|TorAmplitude|proetale|ProEtale\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no declarations for these concepts in the searched CategoryTheory subtree."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral adic sheaves finite field coefficient extension compatible bases and strict quotient tower ordinary derived tensor comparison",
+   "results": "{\"t\": \"2026-10-22T06:55:42Z\", \"tool\": \"leanfinder\", \"query\": \"Integral adic sheaves finite field coefficient extension compatible bases and strict quotient tower ordinary derived tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.ofTensorProduct_tmul\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\"], \"digest\": \"e5c8a0da805cc9d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion and scalar-tower declarations do not state the sheaf-derived equivalences, strict quotient comparisons or compact-support constructibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-integral-coefficient-comparison",
+  "group": "Q13",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Compatible coefficient models and finite-Tor domain for compact support (returned comparison Steps 1, 2, 7)",
+   "via": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-compact-support-coefficient-models",
+  "worker": "stage1",
+  "summary": "N6: nine proof steps, no new nodes. Existing adic basis, constant-completion, normalized scalar, derived tensor and integral constructibility statements supply the non-elementary facts. The balanced reduction calculation proves the unchanged uniform Tor interval even at ramified nonflat quotients. Statement and imported metadata retained.",
+  "blueprint": "Ancestor thm-pur-rational-and-qbar-purity main-20261015 proof Step 2 (finite coefficient-stage independence): supplies the compatible integral models and finite-Tor compact-support domain used by the coefficient comparison. Unit sk-thm-sf-compatibility clause (7); no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 1; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 1, 3; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 2; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-adic-basis-limit",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 2, 4; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-pid-noetherian-normal",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 3; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 3; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-finite-free-scalar-coordinates",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 4; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 4; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 4, 6; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 5; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 6; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 8; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 8; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 8; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-constructible-scalar-transport",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 8; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Generic coefficient, derived-tensor or constructibility interface used in proof step(s) 9; supports coefficient compatibility without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic profinite coefficient inverse-image comparison used in proof step 4 for compatibility of the basis isomorphism with coefficient inverse images; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pur-adic-basis-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N6-dc55c60f0",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-dc55c60f0 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 9 steps and the statements of all 18 proof_deps and 12 stmt_deps. Sources checked: Bhatt–Scholze 6.7.6, 6.7.7, 6.8.2(1); Stacks 099M, 093M, 099I, 0D6D (read), 07A4, labels resolved via tags/tags; blueprint main-20261015 finite-free coefficients proof and thm-pur-rational-and-qbar-purity Step 1. No SGA is cited. Also compared with the Q13 parent's retained old Steps 1, 2 and 7, which this statement-only node must carry. Every argument is present. The basis comes from lem-sfb-local-field-integral-basis with lem-pur-adic-basis-limit (t=uv^e, en-th projection formula). The constant-completion equivalence, the finite-free tensor balancing and the normalized χ (zero shifted component) are each cited. The balanced reduction for en≥a goes through the monoidal pullback composition with no flatness assumed; I checked e=2, a=3, n=2. Constructibility goes through the stratified-perfect characterization, whose last clause identifies the two integral categories, plus the finite-free constructible scalar transport; X is Noetherian with finite Krull dimension and ℓ≠p. Compact-support outputs use lem-sf-integral-compact-support-constructible with the same R\\bar f_* j_! candidate and transitions as the definition. No cycle, the statement is unchanged, uses equal proof_deps, and the 16 declared tool_uses are accepted. Edge cases: M=0; E=F; unramified; ramified with a nonflat B/v^3 over Z/ℓ^2; torsion lattice with interval [-1,0]. Two repairs. (1) C5: Step 7 re-proved as 'elementary' the Tor-interval clause, which is the statement of the existing reviewed same-unit node lem-pur-adic-scalar-extension-tor-bound; it now cites that node, elementary false, no cycle, and the only node added to the closure is that one. (2) C1/C4: Step 4 claimed coefficient inverse-image maps send constant b_i to b_i with no node; old Step 2 cited lem-weil-pbc-profinite-coefficient-inverse-image for this. It is restored with the formulas c_{u,n} const↦const and π∘c_u=c_{u,n}∘u^{-1}π, and a tool_use entry was added. proof_deps recomputed. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-compact-support-coefficient-models.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportCoefficientModels",
+  "declaration": "WeilConjectures.compactSupportCoefficientModels",
+  "declarations": [
+   "WeilConjectures.compactSupportCoefficientModels_noetherian",
+   "WeilConjectures.compactSupportCoefficientModels_constant",
+   "WeilConjectures.compactSupportCoefficientModels_constantTower",
+   "WeilConjectures.compactSupportCoefficientModels_constantLimit",
+   "WeilConjectures.compactSupportCoefficientModels_ordinary",
+   "WeilConjectures.compactSupportCoefficientModels_chi",
+   "WeilConjectures.compactSupportCoefficientModels_arithmetic",
+   "WeilConjectures.compactSupportCoefficientQuotient",
+   "WeilConjectures.compactSupportCoefficientQuotientSheaf",
+   "WeilConjectures.compactSupportCoefficientQuotient_square",
+   "WeilConjectures.compactSupportCoefficientModels_inverseImage",
+   "WeilConjectures.compactSupportCoefficientBalancedReduction",
+   "WeilConjectures.compactSupportCoefficientModels_moduleBalancing",
+   "WeilConjectures.compactSupportCoefficientModels_furtherTensor",
+   "WeilConjectures.compactSupportCoefficientModels_scalar",
+   "WeilConjectures.compactSupportCoefficientModels"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportCoefficientModels.lean",
+  "statement": "theorem compactSupportCoefficientModels (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (e : ℕ) (hepos : 1 ≤ e) (he : PurCompactSupport.Ramification l E F i e) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (M : DerivedCategory (scalarReductionSource l E X)) (hM : finiteTorConstructibleIntegral l E X M) : sfIntegralConstructible l E Y ((PurCompactSupport.image (PurCompactSupport.completed l E) c).obj M) ∧ sfIntegralConstructible l F Y ((PurCompactSupport.image (PurCompactSupport.completed l F) c).obj ((pbcDerivedExtend (completedCoefficientMap l E F i X)).obj M)) ∧ Nonempty ((PurCompactSupport.image (PurCompactSupport.completed l E) c).obj M ≅ (sfIntegralCompactSupportValue l E D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c ⟨M, hM.1⟩).obj) ∧ (∃! τ : (sfIntegralConstructible l E X).ι ⋙ PurCompactSupport.image (PurCompactSupport.completed l E) c ≅ sfCompactSupportFiniteIntegralFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c E ⋙ (sfIntegralConstructible l E Y).ι, SfQcqsCompactSupportRealizationSpec l E D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c τ) ∧ (∃! τ : (sfIntegralConstructible l F X).ι ⋙ PurCompactSupport.image (PurCompactSupport.completed l F) c ≅ sfCompactSupportFiniteIntegralFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c F ⋙ (sfIntegralConstructible l F Y).ι, SfQcqsCompactSupportRealizationSpec l F D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c τ)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly state all clauses of the node. Repair of 37f19db0aafc: cite the finite scalar-data owner, omit the presentation-transport theorem dependency, and uniquely pin furtherTensor to localization of the degreewise section-normalized module-balancing chain isomorphism. No statement correction. Reviewer fix (H4): the three CompactSupportCoefficientNative associator/unitor squares were universe-general sorry copies of the proved CategoryTheory.RingedDerivedNative.associator_square, leftUnitor_square and rightUnitor_square of the cited lem-sf-ringed-derived-native-tensor; they are dropped and the node's native-tensor clause is rendered by those proved declarations.",
+  "fixed_by": "NT-stage2-cc-45f964714"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45f964714",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Re-delivery of 37f19db0: all three RETURN points repaired. (1) Theorem stmt_dep lem-weil-pbc-completed-constant-presentation-transport removed; CompletedConstantPresentationData is owned by the cited def-weil-pbc-completed-constant-presentation-data. (2) def-pur-finite-compact-support-scalar-data added: it owns Ramification/ramifiedMap/tensorComposition, is on the base and creates no cycle. (3) _furtherTensor is now ∃! δ = mapDerivedCategoryFactors ≪≫ Q.mapIso γ, with γ.hom.f k conjugate (via mapBifunctorSingle₂Iso) to the ∃!-pinned moduleBalancing (s⊗x)⊗z ↦ x⊗sz; γ and δ are unique and no flatness is assumed. Node JSON diff: only stmt_deps and lean.note; lean.statement verbatim. Other clauses rechecked (arithmetic, constant tower/limit, ordinary, χ, inverse-image/quotient squares, balanced reduction, Tor interval, compact-support constructibility and pinned realizations); no extra hypotheses; edge cases E=F, a<en, nonflat B/v^3, n=0, M=0. FIX H4: CompactSupportCoefficientNative.associator_square/leftUnitor_square/rightUnitor_square are universe-general sorry copies of the proved RingedDerivedNative.*_square of the cited lem-sf-ringed-derived-native-tensor (same fault as NJ F4, Q103 F3). They are deleted from the module (docstring now points to the proved declarations); the lean-record drops them (16 declarations remain) and extends the note. nt_compile --json on the fixed module: 12.8 s, exit 0, clean. Advisory: specialised restatements in _chi/_constant* kept; uncited definition-node owners (def-coef-ringed-tensor-hom-model, ConstantCompletion.* owners, etc.) as in 37f19."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261026T070817-L-3660453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -23,39 +23,23 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-fin-lisse-field-site-perfect], proved from the existing finite-ring local constant model theorem by choosing bases in its finite vector-space terms. Thus C is site-perfect on the ordinary etale coefficient site.",
-   "uses": [
-    "lem-fin-lisse-field-site-perfect"
-   ],
-   "elementary": false
+   "text": "Convert the existing global cohomology bounds [a,b] to DerivedCategory.IsGE a and IsLE b using isGE_iff and isLE_iff. The coefficient ring ULift (ZMod ell) is a finite field. Apply the already fully proved adopted theorem AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_homology_coefficientDual in WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual, with the unchanged finite-lisse cohomology hypothesis, to obtain both finite local constancy of the dual cohomology and its degree-reversed internal-Hom formula. This adopted proof is the truncation devissage through dualizable finite-lisse cohomology sheaves, not a use of the auxiliary site-perfect calculation.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-fin-lisse-field-dual-homology] over F_ell. Its conclusion is precisely the cohomology formula. For each q, [lem-weil-pbc-flc-dual] makes the ordinary dual of H^(-q)(C) finite locally constant. Transport this property across the inverse of the cohomology isomorphism.",
-   "uses": [
-    "lem-fin-lisse-field-dual-homology",
-    "lem-weil-pbc-flc-dual"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Site-perfectness implies derived dualizability by the proved source theorem DerivedCategory.IsSitePerfect.isDualizable. Choose its right dual and swap the exact pairing using symmetry. The source theorem isIso_derivedHomUpperStarComparison_of_exactPairing gives invertibility of the strong-monoidal internal-Hom comparison. Adjunction naturality identifies the map in the item with that comparison followed by RHom(v^*C,-) applied to the unit isomorphism. To identify the tensor factor, use the inverse uniqueness equation for leftDerivedUpperStarTensorIso: the monoidal multiplication is the inverse of its hom. Both factors are isomorphisms. This proves invertibility of the exact canonical map, not merely existence of an isomorphism. The Lean helper works with an abstract coefficient category and arbitrary second objects to avoid expensive monoidal-instance comparisons on ModuleCat. The comparison definition is factored through derivedHomPullbackAlongIsoComparison; its private transpose identity proves that this refactoring preserves the canonical evaluation transpose, as recorded in coord/changes/finite-lisse-field-dual-comparison.md.",
-   "uses": [
-    "lem-fin-lisse-field-site-perfect"
-   ],
-   "elementary": false
+   "text": "Apply the already proved isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf from the same adopted module, with those same bounds and cohomology hypothesis. Its coefficientDualComparison is definitionally the existing finiteLisseDualPullbackComparison: both are derivedHomUpperStarComparison followed by the internal-Hom functor applied to leftDerivedUpperStarUnitIso. Thus the exact canonical comparison in the node is invertible, without changing any definition or statement. No hypothesis about invertibility of ell is needed by this stronger adopted result; the existing hypothesis is retained verbatim.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-fin-lisse-field-dual-homology",
-  "lem-fin-lisse-field-site-perfect",
-  "lem-weil-pbc-flc-dual"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "group": "A7",
-  "date": "2026-10-18",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-lisse-field-dual.proof.md",
-  "place": "Finite local-free models, coefficient-dual homology, and formal strong-monoidal pullback comparison."
+  "group": "Q1",
+  "date": "2026-10-23",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-lisse-field-dual.proof.md",
+  "place": "Reuse the adopted bounded finite-lisse coefficient-dual theorems and prune the local-perfect detour."
  },
  "mathlib_searches": [
   {
@@ -126,7 +110,18 @@
   "def-weil-pbc-derived-categories"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -230,13 +225,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A7",
-  "result": "pass",
-  "landing": "20261018T071133-L-1663245",
+  "reviewer": "C-6d03c",
+  "group": "Q1",
+  "result": "fix",
+  "landing": "20261023T170058-L-2063293",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: finiteLisseFieldDual (unchanged signature) proved via adopted LisseFieldDual theorems isFiniteLocallyConstantSheaf_homology_coefficientDual / isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf (coefficientDualComparison = finiteLisseDualPullbackComparison by definition) against node lem-fin-lisse-field-dual; withdrawn hole sitePerfect_fieldDual_homology had only this parent"
  }
 }

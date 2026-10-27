@@ -15,108 +15,64 @@
  ],
  "proof": [
   {
-   "text": "Replace $\\mathcal P$ by its isomorphism closure $\\overline{\\mathcal P}$. It contains every zero object, is closed under finite biproducts, and still covers every object by epimorphisms. The acyclicity hypothesis remains true: choose termwise isomorphisms from objects of $\\mathcal P$ to the terms of an acyclic $\\overline{\\mathcal P}$-complex and conjugate its differentials. This gives an isomorphic acyclic $\\mathcal P$-complex with the same upper bound, and applying $F$ gives an isomorphism of complexes. Thus work with $\\overline{\\mathcal P}$ throughout without adding a hypothesis to the item.",
+   "text": "Put $\\overline{\\mathcal P}=\\{M\\cong P:P\\in\\mathcal P\\}$. Let $\\mathcal R$ consist of complexes $X$ presented as termwise sequential colimits of bounded above $\\overline{\\mathcal P}$-complexes $E_n$, with $H^j(E_n)=0$ for $j>n$ and colimit legs inducing isomorphisms for $j\\le n$; allow isomorphic presentations. Apply [lem-trf-truncation-colimit-resolving-cover] to each complex $K$. Its $E$, colimit legs and quasi-isomorphism $a:E\\to K$ show that every $K$ receives a quasi-isomorphism from an object of $\\mathcal R$.",
    "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0794, hypothesis (1); isomorphism-closure convention needed for applying Tag 06XX as stated in the existing node."
-   }
-  },
-  {
-   "text": "If $s:E\\to E'$ is a quasi-isomorphism between bounded above $\\overline{\\mathcal P}$-complexes, its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]. Its terms are $E'^i\\oplus E^{i+1}$, hence belong to $\\overline{\\mathcal P}$, and it is bounded above. The hypothesis makes $F(C(s))$ acyclic. Additivity identifies its differential matrix with the cone differential of $F(s)$, including the minus sign on the shifted summand. The same cone criterion in $\\mathcal B$ makes $F(s)$ a quasi-isomorphism. This supplies precisely the preservation hypothesis of [lem-trf-bounded-stage-roof-comparison].",
-   "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-weil-abstract-derived-category"
+    "lem-trf-truncation-colimit-resolving-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0794, first paragraph, cone argument."
+    "place": "Tag 0794, proposition-left-derived-exists, second paragraph and definition of the class in the claim."
    }
   },
   {
-   "text": "For any complex $K$, apply [lem-sfb-subcategory-truncation-resolution-system] to $\\overline{\\mathcal P}$. It gives bounded above $E_n$, strict compatible quasi-isomorphisms $E_n\\to T_n=\\tau_{\\le n}K$, and transition maps. Form the termwise sequential colimit $E=\\varinjlim E_n$ and its induced map $a:E\\to K$. Exactness of sequential colimits in $\\mathcal A$ and [src-weil-homology-preserves-exact-colimits] identify $H^i(E)$ with $\\varinjlim H^i(E_n)$. The explicit good truncation has $H^i(T_n)=H^i(K)$ for $i\\le n$ and zero for $i>n$ (kernel/image at the cutoff gives the same quotient). The transition maps act as the identity on $H^i(K)$ once $n\\ge\\max(1,i)$. The colimit of this eventually constant system is $H^i(K)$, with comparison $H^i(a)$: a compatible cocone is uniquely determined on that constant tail. Hence $a$ is a quasi-isomorphism.",
+   "text": "For any quasi-isomorphism $\\alpha:X\\to Y$ with $X,Y\\in\\mathcal R$, choose witnessing towers. If a presentation is given up to an isomorphism, compose its legs with that isomorphism; the colimit universal property and the cohomology conditions are preserved. All hypotheses of [lem-trf-resolution-colimit-quasi-isos] hold: the original bounded-above acyclicity hypothesis is on $\\mathcal P$, the towers have terms in its isomorphism closure, $F$ preserves sequential colimits, and these colimits are exact in $\\mathcal B$. Thus $F(\\alpha)$ is a quasi-isomorphism, so $Q_{\\mathcal B}K(F)$ inverts this arrow.",
    "uses": [
-    "lem-sfb-subcategory-truncation-resolution-system",
-    "src-weil-homology-preserves-exact-colimits",
-    "def-weil-pbc-category-colimit",
-    "def-weil-abstract-derived-category"
+    "lem-trf-resolution-colimit-quasi-isos"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XX, lemma-special-direct-system; Tag 0794, second paragraph."
+    "place": "Tag 0794, proposition-left-derived-exists, claim and final paragraph."
    }
   },
   {
-   "text": "Let $\\mathcal R$ be the class of complexes $X$ admitting a presentation $X=\\varinjlim E_n$ by bounded above $\\overline{\\mathcal P}$-complexes with structure maps $e_n:E_n\\to X$, such that $H^j(E_n)=0$ for $j>n$ and $H^j(e_n)$ is an isomorphism for $j\\le n$. Isomorphic presentations are allowed. Step 3 supplies a quasi-isomorphism from an object of $\\mathcal R$ to every $K$. Indeed its stages have the asserted vanishing because they resolve $T_n$; for $j\\le n$ the equation $a e_n=(T_n\\to K)(E_n\\to T_n)$ and the isomorphism $H^j(a)$ show that $H^j(e_n)$ is an isomorphism. This uses no functorial choice of the towers and no additional bound on their terms.",
+   "text": "Additivity identifies $F(K[1])$ with $F(K)[1]$ and sends the cone matrix $\\left(\\begin{smallmatrix}d_L&f\\\\0&-d_K\\end{smallmatrix}\\right)$ to $\\left(\\begin{smallmatrix}F(d_L)&F(f)\\\\0&-F(d_K)\\end{smallmatrix}\\right)$. Hence $K(F)$ preserves cone triangles and is exact. By [lem-pur-quasi-isos-saturated-triangulated], $Q_{\\mathcal B}$ is exact and quasi-isomorphisms in $K(\\mathcal A)$ have the fraction calculus, two-out-of-three and triangulated compatibility. Thus $Q_{\\mathcal B}K(F)$ has the setup of Situation 05S8. The identity $F(dh+hd)=F(d)F(h)+F(h)F(d)$ also shows that termwise application descends to homotopy classes.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0794, class of colimit resolutions used in the claim."
-   }
-  },
-  {
-   "text": "Take a quasi-isomorphism $\\alpha:X\\to Y$ between objects of $\\mathcal R$, and choose witnessing towers $E_n,G_n$. Step 2 verifies the preservation assumption of [lem-trf-bounded-stage-roof-comparison]; the augmentations satisfy all its other assumptions by the definition of $\\mathcal R$. For each $i$ the lemma gives isomorphisms $\\theta_n^i:H^i(F(E_n))\\to H^i(F(G_n))$ commuting with the transition maps, and satisfying $H^i(F(g_n))\\theta_n^i=H^i(F(\\alpha))H^i(F(e_n))$. In particular the comparison is compatible with the actual map $F(\\alpha)$ even though $\\alpha$ need not be induced by a map of towers.",
-   "uses": [
-    "lem-trf-bounded-stage-roof-comparison"
+    "lem-pur-quasi-isos-saturated-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0794, proof of the claim; bounded roofs and compatibility as n varies."
+    "place": "Tag 0794, reduction to Tag 06XN, lemma-find-existence-computes; Situation 05S8."
    }
   },
   {
-   "text": "Since $F$ preserves sequential colimits, $F(X)=\\varinjlim F(E_n)$ and $F(Y)=\\varinjlim F(G_n)$, compatibly with their structure maps. Exact sequential colimits in $\\mathcal B$ and [src-weil-homology-preserves-exact-colimits] identify their cohomology with the colimits of the stage cohomology. The transition equation in step 5 makes $\\theta_n^i$ a natural isomorphism of sequential diagrams, with natural inverse $(\\theta_n^i)^{-1}$. The colimit universal property sends these inverse families to inverse maps. The second equation in step 5 identifies that colimit map with $H^i(F(\\alpha))$, by its composites with every colimit leg. Thus $F(\\alpha)$ is a quasi-isomorphism.",
-   "uses": [
-    "src-weil-homology-preserves-exact-colimits",
-    "def-weil-pbc-category-colimit",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0794, final paragraph of the proof, using hypotheses (4) and (5)."
-   }
-  },
-  {
-   "text": "Use $C=K(\\mathcal A)$, its quasi-isomorphisms $W$, and $H=D(\\mathcal B)$ in [lem-pur-resolving-class-essential-constancy]. The required right calculus of fractions and two-out-of-three hold by [lem-pur-quasi-isos-saturated-triangulated]. Step 4 supplies $W$-arrows from $\\mathcal R$ to every object, and steps 5–6 show that $Q_{\\mathcal B}K(F)$ inverts every $W$-arrow between objects of $\\mathcal R$. Thus every denominator diagram $W/K\\to D(\\mathcal B)$ is essentially constant. The same quasi-isomorphism-system node gives the triangulated localization setup; additivity of $F$ preserves the shift and cone matrices displayed in step 2, so $K(F)$ is exact, and $Q_{\\mathcal B}$ is exact. These are the assumptions of Situation 05S8. By the definition in [def-pur-saturated-triangulated-localization], the essential constancy just proved says that the left derived functor is defined at every object, as required.",
+   "text": "Apply [lem-pur-resolving-class-essential-constancy] with $C=K(\\mathcal A)$, $W$ the quasi-isomorphisms, $H=D(\\mathcal B)$, functor $Q_{\\mathcal B}K(F)$ and class $\\mathcal R$. Use the images in $K(\\mathcal A)$ of the complexes of $\\mathcal R$. Every $W$-arrow between them has a quasi-isomorphism of complexes as representative, to which step 2 applies. Steps 1 and 2 give its resolution and inversion hypotheses; step 3 gives its fraction hypotheses. It makes every denominator diagram $W/K\\to D(\\mathcal B)$ essentially constant. By [def-pur-saturated-triangulated-localization], this is precisely that the left derived functor is defined at each $K$.",
    "uses": [
     "lem-pur-resolving-class-essential-constancy",
-    "lem-pur-quasi-isos-saturated-triangulated",
-    "def-pur-saturated-triangulated-localization",
-    "def-weil-abstract-derived-category"
+    "def-pur-saturated-triangulated-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XN, lemma-find-existence-computes, dual assertion; Tag 0794, reduction to this criterion; Situation 05S8 and Definition 05S9."
+    "place": "Tag 06XN, lemma-find-existence-computes, dual assertion; Tag 0794 conclusion and Definition 05S9."
    }
   }
  ],
  "proof_deps": [
+  "lem-trf-truncation-colimit-resolving-cover",
+  "lem-trf-resolution-colimit-quasi-isos",
   "def-weil-abstract-derived-category",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-sfb-subcategory-truncation-resolution-system",
-  "src-weil-homology-preserves-exact-colimits",
-  "def-weil-pbc-category-colimit",
-  "lem-trf-bounded-stage-roof-comparison",
-  "lem-pur-resolving-class-essential-constancy",
   "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
   "def-pur-saturated-triangulated-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0794, proposition-left-derived-exists, with its implicit bounded-stage comparison isolated as a statement-only helper."
+  "place": "Tag 0794, proposition-left-derived-exists; short assembly of the truncation-colimit covering lemma, colimit-tower inversion lemma and Tag 06XN essential-constancy criterion."
  },
  "mathlib_searches": [
   {
@@ -380,24 +336,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-unbounded-left-derived-criterion",
   "worker": "stage1",
-  "summary": "Read and followed Stacks 0794. Reused 06XX and exact-colimit homology nodes, verified the cone argument, normalized the class under isomorphisms without strengthening hypotheses, and isolated the compatible bounded-stage roof comparison. No statement change and no Lean writing.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. The seven steps realize the auxiliary Stacks 0794 input to unbounded lower shriek, preserving the ancestor/unit route; they do not replace the geometric local-term argument.",
+  "summary": "Landing-return repair against the current shared DAG: re-read all current cited statements and Stacks 0794, 06XX and 06XN; verified all six quotes verbatim. Retained the two independent statement-only helpers and their actual logged searches. Explicitly transported colimit cocones through the isomorphisms allowed in the resolving class, so the invariance helper applies to actual cocones with the prescribed apices. Preserved statement, Lean records and reviews. All seven original arguments remain in report.md.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. The seven steps realize the auxiliary Stacks 0794 input to unbounded lower shriek, preserving the ancestor/unit route; they do not replace the geometric local-term argument. The new nodes divide only the generic Stacks 0794 input, preserving the same route.",
   "tool_uses": [
-   {
-    "node": "lem-sfb-subcategory-truncation-resolution-system",
-    "why": "Generic compatible bounded-above resolutions (Tag 06XX), needed for the unbounded existence input already used by the parent; it does not replace any geometric step of the unit."
-   },
-   {
-    "node": "src-weil-homology-preserves-exact-colimits",
-    "why": "Generic homology/colimit comparison in any abelian category, used with exact sequential colimits; no node of this unit states this generality."
-   },
-   {
-    "node": "lem-pur-quasi-iso-cone-acyclic",
-    "why": "Generic mapping-cone criterion used to verify preservation on bounded stages."
-   },
    {
     "node": "lem-pur-resolving-class-essential-constancy",
     "why": "Generic right-fraction criterion translating resolutions into the exact 05S9 conclusion, with the resolving class constructed here."
@@ -416,12 +360,41 @@
   "lem-pur-quasi-isos-saturated-triangulated"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q104-a4fd730eb",
-  "group": "Q104",
+  "reviewer": "NT-cc-Q151-419a2aec7",
+  "group": "Q151",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-a4fd730eb (reviewer sub-agent of L); spot-checked: I read Stacks derived.tex Tag 0794 (proposition-left-derived-exists) in full. The item matches hypotheses (1)-(5) and the 05S9 everywhere-defined conclusion, with nothing weakened. Its seven steps are correct. Step 1 (isomorphism closure, elementary) is needed for the 06XX node's hypotheses. Step 2 is the cone criterion via lem-pur-quasi-iso-cone-acyclic, with F(C(s))=C(F(s)). Step 3 builds the 06XX tower and identifies cohomology through src-weil-homology-preserves-exact-colimits plus the eventually constant good-truncation system. Step 4 defines the class R by the identity a·ι_n=(T_n→K)e_n. Step 6 is the colimit of the natural isomorphism θ, identified with H^i(F(α)) through the colimit legs. Step 7 uses lem-pur-resolving-class-essential-constancy, lem-pur-quasi-isos-saturated-triangulated and def-pur-saturated-triangulated-localization; all their hypotheses are met. The new node lem-trf-bounded-stage-roof-comparison is true: φ_n is the unique D-morphism with g_nφ_n=αe_n, using G_n≅τ≤nY and E_n∈D^{≤n}. A P̄-resolved roof gives θ_n as an isomorphism, and F preserves homotopies, which gives the square. The transition equation follows by uniqueness in D^{≤n+1}. I tested it on X=Y=0, α=id, negative i, and stages with terms above n. It is statement-only and self-contained. It fills the source's 'exact same argument' compatibility gap, so it is not a restatement of the item (D1). A duplicate search over 0794, 05T7, 06XN, 06XX and the left-derived existence nodes found no duplicate of the helper or of the item. Stacks' α: Q→P against its diagrams is a harmless notational correction. I accept the five generic homological-algebra tool_uses. No SGA source is used. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-419a2aec7 (reviewer sub-agent of L); spot-checked: This is the 4th push of the human's 2026-10-22 re-split; the 3 earlier heads (a2594865, ac1cf0d1, 2a425c31) were each PASSed and then refused at landing ('completed in this project's DAG but not in the live DAG'). Field diff against 2a425c31: both new nodes are identical in every field; the item differs only in split_report and one added sentence in step 2 (transport an isomorphic presentation by composing the legs with the iso). That sentence is elementary and correct, since H^j(φe_n)=H^j(φ)H^j(e_n). I still read everything in full. Stacks derived.tex Tag 0794 (proposition-left-derived-exists), whole proof: item hypotheses (1)-(5) and the 05S9 conclusion match, nothing weakened, statement unchanged. Old steps 1/3/4 go to lem-trf-truncation-colimit-resolving-cover, which is true: P̄ meets the 06XX node's hypotheses, colim H^i(T_n)=H^i(K) using exact colimits in A and src-weil-homology-preserves-exact-colimits, and the leg conditions follow from a e_n=(T_n→K)r_n. Old steps 1/2/5/6 go to lem-trf-resolution-colimit-quasi-isos, also true: F(C(s))=C(F(s)) via lem-pur-quasi-iso-cone-acyclic supplies the hypothesis of lem-trf-bounded-stage-roof-comparison, and with exactness in B and F preserving colimits, colim θ = H^i(Fα) for any α. Old step 7 is assembly steps 3-4. I checked steps 3-4 against lem-pur-quasi-isos-saturated-triangulated, lem-pur-resolving-class-essential-constancy and def-pur-saturated-triangulated-localization (05S8/05S9); W-arrows in K(A) have quasi-isomorphism representatives, so step 2 applies. The assembly is 2406 characters and the two nodes are of comparable size; neither restates the item or one of its clauses. Edge cases: K=0, K in degree 5 or -3, X=Y=0, α=id, F=0/id, stages with terms above n. The rg -L duplicate scan (0794, 06XX, labels, colimit wordings) finds only module-sheaf, flat or K-flat nodes and the cited inputs. No SGA. The 5 generic tool_uses are accepted. No fixes. Maintainer note: the landing/promotion step, not the worker, needs attention."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnboundedLeftDerivedCriterion",
+  "declaration": "CategoryTheory.Functor.unbounded_leftDerived_definedAt_of_resolvingClass",
+  "file": "lean/Sheaf/CategoryTheory/UnboundedLeftDerivedCriterion.lean",
+  "statement": "theorem unbounded_leftDerived_definedAt_of_resolvingClass {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteColimits F] (P : A → Prop) (hzero : P (0 : A)) (hsum : ∀ (X Y : A), P X → P Y → P (X ⊞ Y)) (hcover : ∀ X : A, ∃ (Y : A) (p : Y ⟶ X), P Y ∧ Epi p) (hacyclic : ∀ K : CochainComplex A ℤ, (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) → (∀ i : ℤ, P (K.X i)) → K.Acyclic → ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic) [HasColimitsOfShape ℕ A] [HasColimitsOfShape ℕ B] [HasExactColimitsOfShape ℕ A] [HasExactColimitsOfShape ℕ B] [PreservesColimitsOfShape ℕ F] (X : HomotopyCategory A (ComplexShape.up ℤ)) : ∃ Y : DerivedCategory B, IsEssentiallyConstantProDiagram (MorphismProperty.Over.forget (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ⊤ X ⋙ Over.forget X ⋙ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) Y",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2e73bc26",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Tag 0794 (1)-(5) matched clause by clause: Additive+PreservesFiniteColimits, P(0), chosen ⊞ closure, Epi cover, bounded-above acyclic P-complexes stay acyclic via mapHomologicalComplex, HasColimitsOfShape/HasExactColimitsOfShape ℕ on A and B, PreservesColimitsOfShape ℕ F. Conclusion ∀ X : K(A), ∃ Y : D(B), IsEssentiallyConstantProDiagram(Over.forget quasiIso ⊤ X ⋙ Over.forget X ⋙ K(F) ⋙ Qh) Y is exactly the body of recorded IsTriangulatedLeftDerivedDefinedAt (hS unused in the def), so one definition per notion holds and no theorem stmt_dep is needed. Universes independent; lean.statement verbatim; node differs from live only in lean; sorry only; docstrings carry source and 7 steps; imports exist; parent citer ContinuousCocontinuousDerivedShriek step 6 fits. Advisory: unused HasDerivedCategory A binder; Second reading is an author self-check (H11 advisory under dispatcher policy). No compile (no change)."
+ }
 }

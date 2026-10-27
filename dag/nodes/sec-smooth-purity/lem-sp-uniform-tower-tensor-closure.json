@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-uniform-tower-tensor-closure",
+ "kind": "statement",
+ "title": "Ordinary tensor preserves uniformly constructible finite-Tor towers",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell [def-weil-l-adic-coefficient-extension]. Let T be a Noetherian scheme and use the ordinary strict coefficient towers and their section-preserving system realization [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian, det-sp-tower-shriek-levels]. If K and L are uniformly bounded constructible finite-Tor towers [sk-def-sp-normalized-towers], the inverse realization of the ordinary system-derived tensor of their realizations is again uniformly bounded constructible finite-Tor. Neither tower is assumed normalized. The coefficient at level n is the actual ell^(n+1) quotient.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), closure of the two tensor-source domains; levelwise tensor closure is lem-sf-tensor-ctf (i),(ii)."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-shriek-levels",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof": [
+  {
+   "text": "Choose common Tor intervals [a,b] and [c,d] for K and L. Evaluate their realized system tensor using levelComparison, the realization counit and tensorEvaluation. Each evaluation is identified with the ordinary intrinsic finite-coefficient tensor of the corresponding evaluations.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "det-sp-coefficient-towers-abelian",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite quotient, choose bounded constructible etale origins and reflect the specified Tor intervals through finite comparison. Apply boundedConstructible_tensor on the etale site and torAmplitudeIn_tensor, which adds the intervals to [a+c,b+d]. The coefficient and site comparison tensor isomorphisms identify this with the intrinsic pro-etale tensor; comparison preserves constructibility and the same Tor bound. This argument applies to any finite commutative constant ring on a Noetherian scheme.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the Tor interval against the degree-zero coefficient unit to get cohomology vanishing outside [a+c,b+d]. These endpoints are independent of the level. Along the evaluated tensor isomorphisms, transport this common cohomological interval, common Tor interval and levelwise constructibility back to the original strict tower category. No condition on transitions was used.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V2",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), tensor-source domains, reduced to the ordinary finite-level tensor closure and uniform interval arithmetic."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spConstructibleTorTowers.*tensor|tensor.*spConstructibleTorTowers",
+   "results": "0 hits through msearch; local source search found finiteCoefficient_tensor_ctf for uniformizer quotients and normalized_operations with a normalization hypothesis, neither this ordinary uniform tower interface.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product of two uniformly bounded constructible finite Tor amplitude towers has uniform finite Tor amplitude without normalization",
+   "results": "8 hits: HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, instFinitePresentationTensorProduct, CategoryTheory.Tor'_obj_obj, RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, IsReduced.tensorProduct_of_flat_of_forall_fg, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat. Ordinary tensor infrastructure; no uniform constructible tower theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorObj",
+   "results": "12 hits: tensorObj, rightUnitor, leftUnitor, ιTensorObj, associator, tensorHom and their auxiliary equations. These construct ordinary total tensor products and structural maps, not constructible finite-Tor uniform towers.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCtfPullbackDomains",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-proetale-ctf-pullback-domains",
+   "place": "Tower domain step: closure under ordinary derived tensor, separate from pullback and square comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.UniformTowerTensorClosure",
+  "file": "lean/Sheaf/Paper/UniformTowerTensorClosure.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.UniformTowerTensorClosure.tensor_mem",
+  "statement": "theorem tensor_mem\n    (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]\n    [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]\n    (b : SpTowerShriek.Base ell E) (q : SpTowerCalculus.Coordinates ell E b)\n    (T : Scheme.{u}) [IsNoetherian T]\n    (K L : spDerivedCoefficientTowers ell E T (q.abelian T))\n    (hK : spConstructibleTorTowers ell E T (q.abelian T) K)\n    (hL : spConstructibleTorTowers ell E T (q.abelian T) L) :\n    spConstructibleTorTowers ell E T (q.abelian T)\n      ((SpTowerCalculus.realization ell E b T (q.abelian T)).inverse.obj\n        ((SpTowerShriek.tensor ell E b T).obj\n          ((SpTowerCalculus.realization ell E b T (q.abelian T)).functor.obj K,\n            (SpTowerCalculus.realization ell E b T (q.abelian T)).functor.obj L)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "det-sp-tower-shriek-levels",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "def-weil-derived-tensor",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T203449-L-2819396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T203449-L-2819396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

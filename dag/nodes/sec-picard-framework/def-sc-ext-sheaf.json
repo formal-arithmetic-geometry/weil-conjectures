@@ -137,7 +137,32 @@
  "blueprint_kind": "definition",
  "blueprint_order": 688,
  "blueprint_uses": [],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.Ext"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.Ext",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ext",
+     "lines": [
+      68,
+      74
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lead_note": "Blueprint error (reviewer R-elf, 14:40 UTC): Ext^i_X(F,G) is defined as right derived functors of the contravariant Hom(-,G) on O_X-modules, which has no enough projectives; the correct definition (Stacks Cohomology, section \"Ext groups\", cohomology.tex line 10995) is R^i Hom_{O_X}(F,-)(G) via injective resolutions of G, or RHom in D(O_X). The split must state the definition that way and name the correction (E7). Corrected and split by L's writer W-ext1748, merged by L 17:53 UTC. Citing nodes to recheck at stage 3 (writer's report): lem-sc-ext-sheaf-to-global-spectral-sequence (Grothendieck composite holds only under the corrected definition), lem-sc-p1-ext-class-naturality (should cite def-pc-ext), lem-sc-p1-ext-pushout-postcompose, lem-sc-p1-ext-yoneda-associativity, lem-sc-p1-ext-yoneda-splicing-associative (say 'ringed space' against the scheme-only definition).",
@@ -205,5 +230,15 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $X$ be a scheme and $\\mathcal F,\\mathcal G$ be\n$\\mathcal O_X$-modules. The *Ext groups* are the morphism groups\nin the derived category $D(\\mathcal O_X)$ of the abelian category\nof $\\mathcal O_X$-modules:\n\n$$\n\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)\n:=\\operatorname{Hom}_{D(\\mathcal O_X)}(\\mathcal F,\\mathcal G[i])\n\\qquad(i\\geq0).\n$$\n\nSince the category of $\\mathcal O_X$-modules has enough injectives,\nthese are the right derived functors of the covariant functor\n$\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,-)$ evaluated at\n$\\mathcal G$, i.e.\n$\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)\n=H^i\\bigl(\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,\\mathcal I^\\bullet)\\bigr)$\nfor any injective resolution $\\mathcal G\\to\\mathcal I^\\bullet$; they\nare functorial (contravariantly) in $\\mathcal F$ as well. In particular\n$\\operatorname{Ext}^0_X(\\mathcal F,\\mathcal G) =\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$.",
+  "proof": [],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

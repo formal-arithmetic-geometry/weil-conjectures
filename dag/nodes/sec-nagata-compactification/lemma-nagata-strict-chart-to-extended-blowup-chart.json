@@ -52,6 +52,14 @@
   }
  ],
  "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.AffineBlowup.strictChartMap",
+    "AlgebraicGeometry.AffineBlowup.coe_strictChartMap_tmul"
+   ]
+  },
   "slopmaster2": {
    "state": "closed",
    "decls": [
@@ -83,16 +91,21 @@
  "chapter": "sec-nagata-compactification",
  "unit": "sk-lem-nagata-sketch-blowups",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "The assignment defining $\\sigma_a$ respects addition, multiplication, the\nlocalization relations in $A[I/a]$, and the two $A$-algebra structures.\nConsequently $\\sigma_a$ is a well-defined $B$-algebra homomorphism.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A\\to B$ be a ring map, let $I\\subseteq A$ be an ideal, let $a\\in I$\nwith image $b\\in B$, and put $J=IB$. There is a unique $B$-algebra\nhomomorphism\n\n$$\nC_a(A,B,I)=B\\otimes_AA[I/a]\\longrightarrow B_b,\n\\qquad y\\otimes c\\longmapsto y\\,\\overline c,\n$$\n\nwhere $\\overline c$ is the image of $c\\in A[I/a]\\subseteq A_a$ under the\nlocalized map $A_a\\to B_b$. Its image lies in the chart ring\n$B[J/b]\\subseteq B_b$. Consequently $\\sigma_a$ is a well-defined\n$B$-algebra homomorphism $C_a(A,B,I)\\to B[J/b]$.",
   "proof": [
    {
-    "text": "For $x,x'\\in I$, the relations\n\n$$\n\\frac{x+x'}a=\\frac xa+\\frac{x'}a,\n\\qquad\n\\frac xa\\frac{x'}a=\\frac{xx'}{a^2}\n$$\n\nhave the same images in $B_b$. The image of $A$ through the left tensor\nfactor equals its image through the chart factor. The universal properties\nof $A[I/a]$ and of $B\\otimes_AA[I/a]$ therefore give the stated map, and\nits displayed formula determines it uniquely.",
+    "text": "The structure map $B\\to B_b$ and the composite\n$A[I/a]\\subseteq A_a\\to B_b$ are $A$-algebra homomorphisms into a\ncommutative ring, so the universal property of\n$B\\otimes_AA[I/a]$ gives the unique $B$-algebra homomorphism with the\ndisplayed formula. For the image: $B[J/b]$ is a $B$-subalgebra of $B_b$,\nso it suffices to treat pure tensors $1\\otimes c$. Every $c\\in A[I/a]$ is\na fraction $x/a^n$ with $x\\in I^n$, and its image is $\\overline x/b^n$\nwith $\\overline x\\in I^nB=J^n$, which lies in $B[J/b]$. Sums are handled by\nadditivity. On chart generators the map is\n$y\\otimes(x/a)\\mapsto y\\,\\overline x/b$, which is the defining formula of\n$\\sigma_a$.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "lean": {
   "branch": "slopmaster2",

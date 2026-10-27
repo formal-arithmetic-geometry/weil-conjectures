@@ -520,26 +520,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-d3320f6db (reviewer sub-agent of L); spot-checked: I read the source, ILO IX 1.4 printed p.133 (pdf pp.138-139). The item realizes the induction on (Y'/G, T'/G), normalizes a dominant component of Y'×_Y Y_i, passes to its decomposition group, and reaches (*). Its statement is the same as Q74's text; no target is weakened and no SGA source is cited. I checked all 16 steps against the cited statements. Step 1: B is finite over A because A is Nagata, hence N-2, B lies in the integral closure of A in the finite extension L, and A is Noetherian. Step 2: the averaging idempotent shows that invariants commute with any base change when |G| is invertible. Steps 3-4: P is normal and étale over the regular U_1, its components are clopen and surject onto U_1, and G permutes them transitively. Step 5: the normalization is finite and excellent, and the H-action lifts uniquely. Step 6: V' is a connected H-torsor. Step 7: N is the normalization of Y_1 in the torsor's function field. Step 8: L_1^H=K_1, and B_1^H=A_1 by normality, so N/H=Y_1. Steps 9-12: the nodal-family base change applies, C_1 is integral via the flat injection into its generic fibre, projectivity comes from finite-over-projective plus 01WE, the Rydh quotient gives X_1, and the marking pulls back as a relative Cartier divisor. Steps 13-14: over U_1 the coset decomposition and Step 2 make r an isomorphism; r factors through Z_md because X_1 is reduced, and it is proper over the separated Z_md. Step 15: the pulled-back equation of E is a nonzerodivisor because the maps are dominant and the charts are domains. Step 16: cover members are generically finite and X_{K(Y)} is geometrically integral, so the md-components agree with those of the cover calculus. There is no cycle. The new node lem-per-admissible-quotient-affine-integral-charts is the general admissible quotient theorem (categorical, affine, integral, orbit fibres, B→B^H charts) and asserts no finiteness. It is true, and I tested it on the empty scheme, H=1, a Galois field, and the free affine case. It is not a duplicate of the generic-degree, projective-quotient or free-affine-quotient nodes, nor of the 03BJ/03BL nodes or the admissible-quotient definition. B1-B9 are satisfied. Batch-5 flags: excellent-normalization-preparation reaches only the trf affine-cover locality lemmas for excellence, G-ring, J-2 and catenarity; projective-nodal-family-geometry is pure geometry (Fitting ideals, differentials, valuation flatness); h-projective-composition is Stacks 01WE. None is part of the proof of the trace formula or of Poincaré duality, so all are accepted. I accepted all 25 declared generic tool_uses. No changes were made."
  },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.NodalQuotientNormalizedBaseRefinement",
-  "declaration": "AlgebraicGeometry.exists_normalizedNodalQuotientRefinement",
-  "declarations": [
-   "AlgebraicGeometry.MarkedNodalQuotientModel",
-   "AlgebraicGeometry.MarkedNodalQuotientModel.baseChangeActionMap",
-   "AlgebraicGeometry.normalizedNodalComponentMap",
-   "AlgebraicGeometry.normalizedNodalComponentBaseMap",
-   "AlgebraicGeometry.NormalizedNodalQuotientRefinement",
-   "AlgebraicGeometry.exists_normalizedNodalQuotientRefinement",
-   "AlgebraicGeometry.normalizedNodalQuotientRefinements_cover"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/NodalQuotientNormalizedBaseRefinement.lean",
-  "statement": "theorem exists_normalizedNodalQuotientRefinement (ell : ℕ) [Fact ell.Prime] (G : Type v) [Group G] [Finite G] (Y Y' C X : Scheme.{u}) [IsIntegral Y'] (Q : MarkedNodalQuotientModel ell G Y Y' C X) (Y₁ : Scheme.{u}) [IsIntegral Y₁] [IsAffine Y₁] [IsNoetherian Y₁] (hregular : IsRegularScheme Y₁) (hexcellent : ∀ U : Y₁.affineOpens, IsExcellent Γ(Y₁, U)) (u₁ : Y₁ ⟶ Y) [IsDominant u₁] [LocallyOfFiniteType u₁] [QuasiCompact u₁] (H₁ : Y₁.IdealSheafData) (hsnc : IsStrictNormalCrossingsBoundary H₁) (hsupport : (H₁.support : Set Y₁) = u₁ ⁻¹' (Q.T : Set Y)) (Z : Set ↥(pullback (C := Scheme.{u}) Q.b u₁)) (hZ : Z ∈ irreducibleComponents ↥(pullback (C := Scheme.{u}) Q.b u₁)) (hdominant : Dense (pullback.snd Q.b u₁ '' Z)) (F : Scheme.{u}) [IsIntegral F] (j : F ⟶ pullback Q.b u₁) [IsClosedImmersion j] (hcomponent : Set.range j = Z) : Nonempty (NormalizedNodalQuotientRefinement Q u₁ j Z)",
-  "branch": "newtargets-dag",
-  "by": "Q144",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "The first theorem states the refinement for any selected reduced dominant component. normalizedNodalQuotientRefinements_cover states the finite covering clause. The two structures package exactly the input hypotheses and output clauses; maps are canonical or uniquely pinned by commuting diagrams. 2026-10-20 (U): module Sheaf.AlgebraicGeometry.NodalQuotientNormalizedBaseRefinement deleted (dead: no target reaches it); this node is not reached either."
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -590,5 +571,23 @@
    "def-pc-geometrically-irreducible"
   ]
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/NodalQuotientNormalizedBaseRefinement.lean",
+  "module": "Sheaf.AlgebraicGeometry.NodalQuotientNormalizedBaseRefinement",
+  "declaration": "AlgebraicGeometry.exists_normalizedNodalQuotientRefinement",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

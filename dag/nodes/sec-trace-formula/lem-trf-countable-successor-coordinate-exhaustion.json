@@ -1,0 +1,304 @@
+{
+ "id": "lem-trf-countable-successor-coordinate-exhaustion",
+ "kind": "statement",
+ "title": "Countable successor closure and exhaustion by coordinate stages",
+ "statement": "Let $J$ be a set, $C\\subseteq J$ an at most countable subset, and $(F_j)_{j\\in J}$ a family of at most countable subsets of $J$. Define $A_0=C$, $A_{k+1}=A_k\\cup\\bigcup_{j\\in A_k}F_j$ for $k\\in\\mathbf N$, and $D=\\bigcup_{k\\in\\mathbf N}A_k$. Then the sequence $(A_k)$ is increasing, every $A_k$ and $D$ are at most countable, $C\\subseteq D$, and $F_j\\subseteq D$ for every $j\\in D$. Every finite subset $E\\subseteq D$ is contained in some $A_k$, including $E=\\varnothing$. For any commutative ring $R$ and any family $(N_j)_{j\\in J}$ of $R$-modules, put $M=\\bigoplus_{j\\in J}N_j$ [def-weil-pbc-direct-sum-modules] and write $M_B$ for the submodule of vectors supported in $B\\subseteq J$ [def-trf-coordinate-submodule]. There is an equality of subsets of $M$, $M_D=\\bigcup_{k\\in\\mathbf N}M_{A_k}$; thus every vector in $M_D$ lies in a single stage coordinate submodule. No generation or countability hypothesis on the modules or on $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511-20552: successive rows adjoin generators of summands hit by earlier projection images, traversed by anti-diagonals; regrouped into natural-number successor stages, with finite-support exhaustion of their union."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-trf-coordinate-submodule"
+ ],
+ "proof": [
+  {
+   "text": "The recursion gives $A_k\\subseteq A_{k+1}$, since $A_k$ is the first term in the defining union. Iterating these inclusions gives $A_k\\subseteq A_l$ whenever $k\\leq l$. Each $A_k$ is contained in $D$ by the definition of $D$, and $C=A_0\\subseteq D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552; explicit successor-stage regrouping of the countable support construction."
+   }
+  },
+  {
+   "text": "Induct on $k$ to show that $A_k$ is at most countable. The base $A_0=C$ is a hypothesis. If $A_k$ is at most countable, apply the restricted-union clause of [lem-trf-countable-unions] with $X=I=J$, $S=A_k$ and $B_j=F_j$. All $F_j$ are at most countable by hypothesis, so $\\bigcup_{j\\in A_k}F_j$ is at most countable. Its union with the at most countable set $A_k$ is at most countable by the binary-union clause, giving the induction step.",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552; explicit successor-stage regrouping of the countable support construction."
+   }
+  },
+  {
+   "text": "Apply the sequence clause of [lem-trf-countable-unions] to $T_k=A_k$, whose countability was proved in step 2. It gives countability of $D=\\bigcup_{k\\in\\mathbf N}A_k$.",
+   "uses": [
+    "lem-trf-countable-unions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552; explicit successor-stage regrouping of the countable support construction."
+   }
+  },
+  {
+   "text": "For $j\\in D$ there is $k$ with $j\\in A_k$. Every element of $F_j$ therefore belongs to $\\bigcup_{i\\in A_k}F_i\\subseteq A_{k+1}\\subseteq D$. This proves $F_j\\subseteq D$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552; explicit successor-stage regrouping of the countable support construction."
+   }
+  },
+  {
+   "text": "For a finite $E\\subseteq D$, prove existence of a containing stage by induction on the number of elements of $E$. The empty subset is contained in $A_0$. For $E=E_0\\cup\\{j\\}$ choose $k$ with $E_0\\subseteq A_k$ by induction and $l$ with $j\\in A_l$ by membership in $D$. Step 1 gives $A_k,A_l\\subseteq A_{\\max(k,l)}$, hence $E\\subseteq A_{\\max(k,l)}$. This includes $E=\\varnothing$ without choosing any index from it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552; explicit successor-stage regrouping of the countable support construction."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-direct-sum-modules], each $x\\in M$ has finite support $E=\\{j:x_j\\ne0\\}$. By [def-trf-coordinate-submodule], $x\\in M_B$ means precisely $E\\subseteq B$. Thus, for $x\\in M_D$, step 5 gives $E\\subseteq A_k$ for some $k$, and hence $x\\in M_{A_k}$. Conversely $x\\in M_{A_k}$ implies $E\\subseteq A_k\\subseteq D$, so $x\\in M_D$. These two inclusions prove the claimed equality of subsets of the same ambient $M$. If $x=0$, take $k=0$ since its support is empty. Only finite support was used; $R$ and the $N_j$ need no countability or generation assumption.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-trf-coordinate-submodule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552; explicit successor-stage regrouping of the countable support construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-countable-unions",
+  "def-weil-pbc-direct-sum-modules",
+  "def-trf-coordinate-submodule"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552; the source supplies the support-enlargement route, and Q51 writes the explicit set-theoretic successor recursion and finite-support argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "countable.*(closure|iterate|biUnion)|(?:closure|iterate).*countable",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"grep\", \"query\": \"countable.*(closure|iterate|biUnion)|(?:closure|iterate).*countable\", \"sub\": \"Data/Set\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/Countable.lean\"], \"digest\": \"ecdb3344aa3025d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The union of recursively enlarged countable subsets is countable and contains every finite subset in one finite stage",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"leansearch\", \"query\": \"The union of recursively enlarged countable subsets is countable and contains every finite subset in one finite stage\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.Countable, Monotone",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"loogle\", \"query\": \"Set.Countable, Monotone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Monotone.countable_not_continuousAt\", \"Monotone.countable_setOfPred_two_preimages\", \"Monotone.countable_setOf_two_preimages\"], \"digest\": \"e3ef41444f4a2815\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Starting with a countable subset and countable sets of successors, iteratively adjoining successors gives increasing countable stages whose union is countable and every finite subset is contained in a stage",
+   "results": "{\"t\": \"2026-10-22T06:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"Starting with a countable subset and countable sets of successors, iteratively adjoining successors gives increasing countable stages whose union is countable and every finite subset is contained in a stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.exists_seq_cover_iff_countable\", \"IsCountablySpanning\", \"Set.Countable.finiteExhaustion\", \"exists_seq_separating\", \"Set.exists_seq_iSup_eq_top_iff_countable\", \"Set.range_enumerateCountable_subset\", \"HasCountableSeparatingOn.exists_countable_separating\", \"exists_countable_separating\"], \"digest\": \"1da764654abc85eb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "grep",
+   "query": "iUnion|biUnion|directed",
+   "results": "{\"t\": \"2026-10-22T06:44:23Z\", \"tool\": \"grep\", \"query\": \"iUnion|biUnion|directed\", \"sub\": \"Algebra/DirectSum\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monotone sequence of subsets every finitely supported function supported on its union is supported on one stage",
+   "results": "{\"t\": \"2026-10-22T06:44:24Z\", \"tool\": \"leansearch\", \"query\": \"For a monotone sequence of subsets every finitely supported function supported on its union is supported on one stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.sUnion_mono_supsets\", \"Finsupp.support_mono\", \"DFinsupp.support_monotone\", \"Finsupp.supported_mono\", \"Finset.mem_sup_support_iff\", \"Finset.finsuppAntidiag_mono\", \"Finsupp.supported\", \"DFinsupp.support_mono\"], \"digest\": \"4e941419d04d8b61\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, Monotone",
+   "results": "{\"t\": \"2026-10-22T06:44:24Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, Monotone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a countable starting set C and countable successor sets F j, define A 0 = C and A (n+1) = A n union all F j for j in A n. The countable union D is countable and the coordinate submodule on D is the union of the coordinate submodules on A n",
+   "results": "{\"t\": \"2026-10-22T06:44:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a countable starting set C and countable successor sets F j, define A 0 = C and A (n+1) = A n union all F j for j in A n. The countable union D is countable and the coordinate submodule on D is the union of the coordinate submodules on A n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finsupp.instCountableSubtypeMemSubmoduleSpanRange\", \"IsCountablySpanning\", \"Profinite.NobelingProof.GoodProducts.span\", \"Profinite.NobelingProof.GoodProducts.spanFin\", \"Set.exists_seq_cover_iff_countable\", \"Profinite.NobelingProof.GoodProducts.union\", \"Profinite.NobelingProof.GoodProducts.span_iff_products\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\"], \"digest\": \"6fba36e4115ff7da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteExhaustion|FiniteExhaustion",
+   "results": "{\"t\": \"2026-10-22T06:44:47Z\", \"tool\": \"grep\", \"query\": \"finiteExhaustion|FiniteExhaustion\", \"sub\": \"Data/Set/FiniteExhaustion.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"14\", \"16\", \"23\", \"25\", \"26\"], \"digest\": \"ed606780e3a6fa17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "grep",
+   "query": "span_le_supported_biUnion_support|supported_iUnion",
+   "results": "{\"t\": \"2026-10-22T06:44:47Z\", \"tool\": \"grep\", \"query\": \"span_le_supported_biUnion_support|supported_iUnion\", \"sub\": \"LinearAlgebra/Finsupp\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Finsupp/Supported.lean\", \"Mathlib/LinearAlgebra/Finsupp/Supported.lean\", \"Mathlib/LinearAlgebra/Finsupp/Supported.lean\"], \"digest\": \"ecf8d23841ce9917\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "grep",
+   "query": "countable_iUnion|Countable.biUnion|Countable.union",
+   "results": "{\"t\": \"2026-10-22T06:44:47Z\", \"tool\": \"grep\", \"query\": \"countable_iUnion|Countable.biUnion|Countable.union\", \"sub\": \"Data/Set/Countable.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"214\", \"221\", \"223\", \"225\", \"228\"], \"digest\": \"eff1f82d5c63297c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Set.countable_iUnion and Set.Countable.biUnion (Data/Set/Countable.lean:214-233) handle unions once stage countability is established; they do not state the recursive successor construction or coordinate exhaustion. Set.Countable.finiteExhaustion (Data/Set/FiniteExhaustion.lean:71-84) chooses different finite stages, whereas the prescribed successor stages here can be infinite. Finsupp.supported_iUnion (LinearAlgebra/Finsupp/Supported.lean:136-153) concerns constant codomain and a submodule supremum, not exhaustion as a set by the specified recursive coordinate stages."
+  },
+  {
+   "tool": "grep",
+   "query": "countable_iUnion|Countable.biUnion|Countable.union",
+   "results": "{\"t\": \"2026-10-23T10:44:22Z\", \"tool\": \"grep\", \"query\": \"countable_iUnion|Countable.biUnion|Countable.union\", \"sub\": \"Data/Set/Countable.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"214\", \"221\", \"223\", \"225\", \"228\"], \"digest\": \"eff1f82d5c63297c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A countable union of at most countable sets is countable",
+   "results": "{\"t\": \"2026-10-23T10:44:23Z\", \"tool\": \"leansearch\", \"query\": \"A countable union of at most countable sets is countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.Countable.sUnion\", \"Set.Countable.sUnion_iff\", \"Set.Countable.biUnion\", \"Set.countable_iUnion\", \"Set.Countable.union\", \"Set.Countable.biUnion_iff\", \"Set.countable_iUnion_iff\", \"Set.countable_union\"], \"digest\": \"aab571ffdecd15fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.Countable, Monotone",
+   "results": "{\"t\": \"2026-10-23T10:44:23Z\", \"tool\": \"loogle\", \"query\": \"Set.Countable, Monotone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Monotone.countable_not_continuousAt\", \"Monotone.countable_setOfPred_two_preimages\", \"Monotone.countable_setOf_two_preimages\"], \"digest\": \"e3ef41444f4a2815\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iteratively add countable successor sets to a countable subset; the stages and their union are countable and every finitely supported vector on the union belongs to one stage",
+   "results": "{\"t\": \"2026-10-23T10:44:24Z\", \"tool\": \"leanfinder\", \"query\": \"Iteratively add countable successor sets to a countable subset; the stages and their union are countable and every finitely supported vector on the union belongs to one stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.Countable.finiteExhaustion\", \"IsCountablySpanning\", \"Finsupp.instCountableSubtypeMemSubmoduleSpanRange\", \"instCountableFinsupp\", \"instCountableDFinsupp\", \"IterateAddAct.instCountable\", \"Set.exists_seq_cover_iff_countable\", \"Set.countable_pi\"], \"digest\": \"8cfd0df9f1a4f382\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "grep",
+   "query": "Countable\\.union|alias.*Countable.biUnion|countable_iUnion",
+   "results": "{\"t\": \"2026-10-23T10:45:25Z\", \"tool\": \"grep\", \"query\": \"Countable\\\\.union|alias.*Countable.biUnion|countable_iUnion\", \"sub\": \"Data/Set\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/FiniteExhaustion.lean\"], \"digest\": \"9ea41019a8235862\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monotone sequence of subsets, every finitely supported dependent family supported on their union is supported on one stage",
+   "results": "{\"t\": \"2026-10-23T10:45:26Z\", \"tool\": \"leansearch\", \"query\": \"For a monotone sequence of subsets, every finitely supported dependent family supported on their union is supported on one stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DFinsupp.support_mono\", \"Finsupp.support_mono\", \"DFinsupp.support_monotone\", \"Finset.finsuppAntidiag_mono\", \"Finset.mem_sup_support_iff\", \"Set.sUnion_mono_supsets\", \"Finsupp.support_sup\", \"Finsupp.supported_mono\"], \"digest\": \"c4cb4d0a893491d7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.Countable, \"iUnion\"",
+   "results": "{\"t\": \"2026-10-23T10:45:26Z\", \"tool\": \"loogle\", \"query\": \"Set.Countable, \\\"iUnion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Set.countable_iUnion\", \"Set.countable_iUnion_iff\", \"Set.Countable.biUnion\", \"Set.Countable.biUnion_iff\", \"isMeagre_biUnion\", \"exists_of_not_isMeagre_biUnion\", \"interior_biUnion_of_isClosed\", \"dense_biUnion_interior_of_closed\"], \"digest\": \"cdb9b670ec4a998e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The union of a family of at most countable subsets indexed by an at most countable set is at most countable",
+   "results": "{\"t\": \"2026-10-23T10:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"The union of a family of at most countable subsets indexed by an at most countable set is at most countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.countable_iUnion\", \"Set.Countable.biUnion\", \"Set.Countable.sUnion\", \"Set.countable_iUnion_iff\", \"Set.Countable.sUnion_iff\", \"Set.Countable.biUnion_iff\", \"Set.Countable.union\", \"Set.countable_union\"], \"digest\": \"3029b59a891f05f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem Countable.union",
+   "results": "{\"t\": \"2026-10-23T10:46:02Z\", \"tool\": \"grep\", \"query\": \"theorem Countable.union\", \"sub\": \"Data/Set\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Data/Set/Countable.lean\", \"Mathlib/Data/Set/Countable.lean\"], \"digest\": \"33ede53a68d2fef0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: countable-union hits are isolated in lem-trf-countable-unions; finiteExhaustion chooses different finite stages and does not give the specified recursive stages or the dependent coordinate-submodule equality; ordered-support lemmas concern pointwise orders, not exhaustion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-countable-coordinate-closure",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Within the imported ancestor proof clause “In the proof of Tag 0593, Lemma 0590 reduces to countable generation by Theorem 058Y (theorem-projective-direct-sum)”: the proof of Tag 058Y invokes Theorem 058X (theorem-kaplansky-direct-sum). Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511–20552: the countable support-closure construction, stated here for one linear endomorphism; the source applies it to complementary projections. Extracted argument: Tag 058X, theorem-kaplansky-direct-sum, proof lines 20511-20552: successive rows adjoin generators of summands hit by earlier projection images, traversed by anti-diagonals; regrouped into natural-number successor stages, with finite-support exhaustion of their union. Returned parent proof steps 3, 5 and the maximum-stage portion of 6.",
+   "via": [
+    "lem-trf-countable-coordinate-closure",
+    "lem-trf-projective-kaplansky-direct-summand",
+    "lem-trf-projective-countable-decomposition",
+    "lem-trf-projective-over-local-free",
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-countable-successor-coordinate-exhaustion",
+  "worker": "stage1",
+  "summary": "Kept the statement and its statement dependencies. Wrote six explicit steps: stage inclusions; induction for countability; countability of the union; successor closure; finite-subset induction including the empty set; and equality of coordinate subsets by finite support. Added one Mathlib leaf for the general countable-union facts. Read the exact cited definition statements and the Mathlib source, and checked empty and uncountable-module cases.",
+  "blueprint": "The inherited nearest blueprint ancestor is lem-trf-local-term-locality. Its imported route descended through Tag 0593/0590 and Kaplansky Tags 058Y/058X. This split realizes precisely the Tag 058X countable support-enlargement subargument recorded in blueprint.from.place; the current latest ancestor proof is the contracting-correspondence proof, so it contains no separate successor-closure statement. No chapter or unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-001307d2c",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-001307d2c (reviewer sub-agent of L); spot-checked: The item statement is unchanged and true. Tested: C empty, all F_j empty, J=N with F_j={j+1}, E empty, x=0, and uncountable R or N_j. Six steps, each checked: (1) stage inclusions, elementary; (2) countability of each A_k by induction, using the biUnion and binary-union clauses of the new leaf with X=I=J, S=A_k, B_j=F_j; (3) countability of D from the sequence clause; (4) F_j is in D, elementary; (5) a finite E lies in a single stage via max(k,l), including E empty; (6) M_D equals the union of the M_{A_k}, from the statements of def-weil-pbc-direct-sum-modules (finite support) and def-trf-coordinate-submodule (zero outside A). proof_deps equals the union of the uses, and there is no cycle. The parent lem-trf-countable-coordinate-closure steps 2-3 use exactly these clauses. New leaf lem-trf-countable-unions: I checked Mathlib/Data/Set/Countable.lean myself (countable_iUnion line 214, Countable.biUnion_iff 225 with alias Countable.biUnion 233, Countable.union 241, Set.Countable at 49 defined via Countable of the subtype, which agrees with def-sfb-countable-set). It matches one declaration per clause, has a statement only, introduces its own objects and is not a relabelling. No duplicate node exists in the snapshot DAG, live, side-live or blueprint main-20261015. The source is Stacks algebra.tex Tag 058X lines 20495-20555, whose matrix rows and anti-diagonals are faithfully regrouped into stages A_k; proof_origin is agent. Same unit sk-i-curve-zero, tool_uses empty, no SGA. The item is unsplit on live and side-live and has no repair note, so this is not a re-split order. Advisory only: the item's stmt_deps lack def-sfb-countable-set (inherited from the base statement), and the report names citations.json/searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CountableSuccessorCoordinateExhaustion",
+  "declaration": "DirectSum.countable_successor_coordinate_exhaustion",
+  "declarations": [
+   "DirectSum.coordinateClosureStage",
+   "DirectSum.coordinateClosure",
+   "DirectSum.countable_successor_coordinate_exhaustion"
+  ],
+  "file": "lean/Sheaf/RingTheory/CountableSuccessorCoordinateExhaustion.lean",
+  "statement": "theorem countable_successor_coordinate_exhaustion {J : Type v} (C : Set J) (F : J → Set J) (hC : C.Countable) (hF : ∀ j : J, (F j).Countable) (R : Type u) [CommRing R] (N : J → Type w) [∀ j : J, AddCommGroup (N j)] [∀ j : J, Module R (N j)] : Monotone (coordinateClosureStage C F) ∧ (∀ k : ℕ, (coordinateClosureStage C F k).Countable) ∧ (coordinateClosure C F).Countable ∧ C ⊆ coordinateClosure C F ∧ (∀ j ∈ coordinateClosure C F, F j ⊆ coordinateClosure C F) ∧ (∀ E : Set J, E.Finite → E ⊆ coordinateClosure C F → ∃ k : ℕ, E ⊆ coordinateClosureStage C F k) ∧ (coordinateSubmodule R J N (coordinateClosure C F) : Set (⨁ j, N j)) = ⋃ k : ℕ, (coordinateSubmodule R J N (coordinateClosureStage C F k) : Set (⨁ j, N j))",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c70aa89f2",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Only the lean record differs from side-live. Every clause matches the node: increasing stages, countable stages and union, C⊆D, F_j⊆D for j∈D, finite E (incl. empty) in one stage, and M_D = ⋃ M_{A_k} as subsets of ⨁ N_j. Universes u/v/w are independent and match coordinateSubmodule. The ℕ-recursion defs are concrete (no hollow defs); the only proof is sorry; docstrings carry the source place and blueprint; the statement is verbatim; both imports are needed. No name clash or duplicate in side-live/sheaf/Mathlib, and no competing stage-2 delivery. Not recompiled: no file changed. Advisory only: def-sfb-countable-set is missing from stmt_deps, inherited from stage 1 and not changeable at stage 2."
+ }
+}

@@ -1,0 +1,237 @@
+{
+ "id": "lem-dl-a1-henselian-normalization-localization",
+ "kind": "statement",
+ "title": "Henselian normalization equals the chosen normalization localization and detects its stabilizer",
+ "statement": "Let $(A,\\mathfrak m)$ be a normal local domain [def-weil-pbc-normal-ring], let $K=\\operatorname{Frac}(A)$, and let $\\Omega/K$ be an algebraic field extension. Let $B\\subset\\Omega$ be the integral closure of $A$, i.e. the roots of monic polynomials over $A$ [def-weil-pbc-integral-closure], and let $\\mathfrak q$ be a maximal ideal of $B$ above $\\mathfrak m$. Put $T=B_{\\mathfrak q}\\subset\\Omega$ [def-weil-pbc-localization-at-prime], and assume that $T$ is a normal henselian local domain [def-weil-pbc-henselian-terminology] with fraction field $\\Omega$. Let $H$ be a henselization of $A$ [def-weil-pbc-henselization-at-prime], embedded as an $A$-subalgebra of $T$ by a local map. Assume $H$ is a domain and $\\Omega/\\operatorname{Frac}(H)$ is algebraic. Let $C\\subset\\Omega$ be the integral closure of $H$. Then $C$ is henselian local, $C=T$, and its unique maximal ideal $\\mathfrak n$ satisfies $B\\cap\\mathfrak n=\\mathfrak q$. If $G=\\operatorname{Aut}_K(\\Omega)$, then, as subgroups of $G$,\n$$ \\{\\sigma\\in G:\\sigma(\\mathfrak q)=\\mathfrak q\\}=\\operatorname{Aut}_{\\operatorname{Frac}(H)}(\\Omega). $$",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW, lemma-identify-inertia, decomposition-group comparison; direct normalization argument using more-algebra.tex Tag 092X, lemma-integral-over-henselian."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-integral-closure], $C$ is a subring of the field $\\Omega$, contains $H$, and is integral over $H$. In particular it is a nonzero domain. If $e^2=e$ in $C$, then $e(e-1)=0$, so $e=0$ or $1$. Apply [lem-trf-integral-component-henselian-permanence] to $H\\to C$: $H$ is henselian local by [def-weil-pbc-henselization-at-prime], and all the other hypotheses have just been checked. Thus $C$ is henselian local; write $\\mathfrak n$ for its unique maximal ideal.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-trf-integral-component-henselian-permanence",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 092X, lemma-integral-over-henselian, domain case; existing connected-integral permanence node specialized to the domain C."
+   }
+  },
+  {
+   "text": "One has $B\\subseteq C\\subseteq T$ inside $\\Omega$. Indeed a monic polynomial over $A$ witnessing $b\\in B$ is also a monic polynomial over $H$, giving $b\\in C$. Conversely, for $c\\in C$ its monic equation over $H\\subseteq T$ makes it integral over $T$. Since $c\\in\\Omega=\\operatorname{Frac}(T)$ and $T$ is normal, [def-weil-pbc-normal-ring] gives $c\\in T$. These are direct applications of the monic-equation definition [def-weil-pbc-integral-closure].",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0309, definition-domain-normal, and Tags 00GI/00GP, integral elements and integral closure."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak m_T$ be the maximal ideal of $T=B_{\\mathfrak q}$. By [def-weil-pbc-localization-at-prime], $\\mathfrak m_T=\\mathfrak qT$ and $B\\cap\\mathfrak m_T=\\mathfrak q$: if $b/1\\in\\mathfrak qT$, putting the finite sum of fractions over a common denominator $s\\notin\\mathfrak q$ gives $sb\\in\\mathfrak q$, hence $b\\in\\mathfrak q$ by primality; the other inclusion is immediate. Now $C\\cap\\mathfrak m_T$ is a proper ideal of the local ring $C$, so is contained in $\\mathfrak n$. Thus $\\mathfrak q\\subseteq B\\cap\\mathfrak n$. The latter is a proper ideal of $B$, so maximality of $\\mathfrak q$ gives $B\\cap\\mathfrak n=\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, definition-localization; Section 07BH, local rings and the paragraph defining the local ring R_p with maximal ideal pR_p. The ideal inclusions are the elementary argument written here."
+   }
+  },
+  {
+   "text": "For $s\\in B\\setminus\\mathfrak q$, the equality $B\\cap\\mathfrak n=\\mathfrak q$ says $s\\notin\\mathfrak n$, so $s$ is a unit in $C$. Every element $b/s$ of $T$ [def-weil-pbc-localization-at-prime] therefore belongs to $C$: the inverse of $s$ in the subring $C\\subseteq\\Omega$ is its field inverse. This gives $T\\subseteq C$, and step 2 gives the reverse inclusion. Hence $C=T$ as subrings of $\\Omega$, with $C$ henselian local and $B\\cap\\mathfrak n=\\mathfrak q$ as already proved.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, definition-localization, fraction description; Section 07BH, units outside the unique maximal ideal. Direct normalization comparison."
+   }
+  },
+  {
+   "text": "Every $\\sigma\\in G$ preserves $B$: applying $\\sigma$ to a monic equation over $A\\subseteq K$ gives the same equation for $\\sigma(b)$, and applying $\\sigma^{-1}$ gives equality. If $\\sigma(\\mathfrak q)=\\mathfrak q$, the formula $b/s\\mapsto\\sigma(b)/\\sigma(s)$ defines an $A$-automorphism of $T$ [def-weil-pbc-localization-at-prime]; it is local because an automorphism preserves units and hence the unique maximal ideal. Its composite with the given local embedding $i:H\\to T$ and $i$ itself are local $A$-maps into the henselian local ring $T$. Uniqueness in [def-weil-pbc-henselization-at-prime] implies $\\sigma\\circ i=i$. Thus $\\sigma$ fixes $H$ pointwise, and fixes every fraction $h_1/h_2$ with $h_2\\ne0$. This proves $\\{\\sigma:\\sigma(\\mathfrak q)=\\mathfrak q\\}\\subseteq\\operatorname{Aut}_{\\operatorname{Frac}(H)}(\\Omega)$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, decomposition-group comparison; ordinary henselization uniqueness as in algebra.tex Tag 04GS, lemma-henselian-functorial, and Tag 08HR, lemma-map-into-henselian-colimit. Explicit fraction action and direct universal-property argument."
+   }
+  },
+  {
+   "text": "Conversely, if $\\sigma\\in G$ fixes $\\operatorname{Frac}(H)$, it fixes $H$. Applying $\\sigma$ and $\\sigma^{-1}$ to monic equations over $H$ [def-weil-pbc-integral-closure] gives $\\sigma(C)=C$. Since $C=T$ is local, this automorphism preserves its unique maximal ideal $\\mathfrak n$. It also preserves $B$ by step 5, so $\\sigma(\\mathfrak q)=\\sigma(B\\cap\\mathfrak n)=B\\cap\\mathfrak n=\\mathfrak q$. This is the reverse subgroup inclusion and proves the asserted equality inside $G$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, decomposition-group comparison; direct reverse inclusion using the integral closure and its unique maximal ideal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-trf-integral-component-henselian-permanence",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Q91 direct proof of the ordinary-henselization decomposition-group comparison in Tag 0BSW, using the domain case of more-algebra.tex Tag 092X and the stated henselization universal property. The generality with arbitrary algebraic Omega/K is checked explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a henselian normal local domain embeds locally in a localization of a normalization then its integral closure in the common fraction field equals that localization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsIntegrallyClosed.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_1 : (P : Ideal R) → [inst : P.IsMaximal] → CommRing (Rₚ P)]\\n  [inst_2 : (P : Ideal R) → [inst_2 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_3 : P.IsMaximal], IsLocalization.AtPrime (Rₚ P) P] \", \"doc\": \"Let $ R $ be an integral domain. If for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ itself is integrally c\"}\n  {\"name\": \"IsIntegrallyClosed.of_localization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDomain R],\\n  (∀ (p : Ideal R), p ≠ ⊥ → ∀ [inst_2 : p.IsMaximal], IsIntegrallyClosed (Localization.AtPrime p)) →\\n    IsIntegrallyClosed R\", \"doc\": \"If $ R $ is an integral domain and for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ is integrally closed in\"}\n  {\"name\": \"isIntegrallyClosed_ofLocalizationMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"OfLocalizationMaximal fun R x => ∀ [IsDomain R], IsIntegrallyClosed R\", \"doc\": \"Let $ R $ be a commutative ring. If the localization of $ R $ at every maximal ideal is integrally closed in its fraction field whenever it is a domain, then $ R $ itself is integrally closed in its f\"}\n  {\"name\": \"IsLocalization.Away.integralClosure\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] [inst_2 : Algebra R S] {Rf : Type u_5}\\n  {Sf : Type u_6} [inst_3 : CommRing Rf] [inst_4 : CommRing Sf] [inst_5 : Algebra R Rf] [inst_6 : Algebra S Sf]\\n  [inst_7 : Algebra Rf Sf] [inst_8 : Algebra R Sf] [IsScalarTower R S Sf] [\", \"doc\": \"If $ R_f $ and $ S_f $ are localizations of $ R $ and $ S $ at $ f $ and $ \\\\text{algebraMap}(R,S)(f) $ respectively, then the integral closure of $ R_f $ in $ S_f $ is the localization of the integral\"}\n  {\"name\": \"IsIntegrallyClosed.of_localization\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] (S : Set (PrimeSpectrum R)),\\n  (∀ p ∈ S, IsIntegrallyClosed (Localization.AtPrime p.asIdeal)) →\\n    ⨅ p ∈ S, Localization.subalgebra (FractionRing R) p.asIdeal.primeCompl ⋯ = ⊥ → IsIntegrallyClosed R\", \"doc\": \"Let $ R $ be an integral domain. Suppose that for every prime ideal $ \\\\mathfrak{p} $ in a set $ S \\\\subseteq \\\\mathrm{Spec}(R) $, the localization $ R_{\\\\mathfrak{p}} $ is integrally closed in its fracti\"}\n  {\"name\": \"IsLocalization.integralClosure\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] [inst_2 : Algebra R S] {Rf : Type u_5}\\n  {Sf : Type u_6} [inst_3 : CommRing Rf] [inst_4 : CommRing Sf] [inst_5 : Algebra R Rf] [inst_6 : Algebra S Sf]\\n  [inst_7 : Algebra Rf Sf] [inst_8 : Algebra R Sf] [IsScalarTower R S Sf] [\", \"doc\": \"For a commutative semiring $ R $, its localization $ R_f $ at a submonoid $ M $, and an $ R $-algebra $ S $ with localization $ S_f $, the integral closure of $ R_f $ in $ S_f $ is the localization of\"}\n  {\"name\": \"IsIntegralClosure.isLocalization\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is a domain and $ K $ is algebraic over $ L $, then $ L $ is the localization of $ A $ at the multiplicative submonoid of non-zero divisors of $ A $.\"}\n  {\"name\": \"IsIntegralClosure.isLocalization_of_isSeparable\", \"module\": \"Mathlib/RingTheory/DedekindDomain/IntegralClosure\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : Field K] [inst_2 : Algebra A K] [IsFractionRing A K]\\n  (L : Type u_3) [inst_4 : Field L] (C : Type u_4) [inst_5 : CommRing C] [inst_6 : Algebra K L] [inst_7 : Algebra A L]\\n  [IsScalarTower A K L] [inst_9 : Algebra C L] [IsIntegralClosure \", \"doc\": \"If $ A $ is a domain and $ K $ is a separable algebra over $ L $, then $ L $ is the fraction field of $ A $, i.e., the localization of $ A $ at its non-zero divisors.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, IsLocalRing",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Ii]s[Ll]ocalRing|[Hh]enselian.*[Ii]ntegral|[Ii]ntegral.*[Hh]enselian",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Pi.lean\", \"line\": \"18\", \"text\": \"assert_not_exists IsIntegralClosure LinearIndependent IsLocalRing MvPolynomial\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Defs.lean\", \"line\": \"33\", \"text\": \"assert_not_exists IsIntegralClosure LinearIndependent IsLocalRing MvPolynomial\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral domain integral over a henselian local ring is local and its unique maximal ideal identifies the localization of a smaller integral closure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"IsLocalization.Away.integralClosure\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \"(f : R) [IsLocalization.Away f Rf] [IsLocalization.Away (algebraMap R S f) Sf]\\n  [Algebra (integralClosure R S) (integralClosure Rf Sf)]\\n  [IsScalarTower (integralClosure R S) (integralClosure Rf Sf) Sf]\\n  [IsScalarTower R (integralClosure R S) (integralClosure Rf Sf)] :\\n  IsLocalization.Away (algeb\", \"doc\": \"If $ R_f $ and $ S_f $ are localizations of $ R $ and $ S $ at $ f $ and $ \\\\text{algebraMap}(R,S)(f) $ respectively, then the integral closure of $ R_f $ in $ S_f $ is the localization of the integral\"}\n  {\"name\": \"Ring.instIsDomainNormalClosure\", \"module\": \"Mathlib.RingTheory.NormalClosure\", \"type\": \": IsDomain T\", \"doc\": \"The integral closure of a commutative ring $ S $ in a field $ E $ forms an integral domain under the operations inherited from $ E $. This means it contains no zero divisors, satisfying the domain pro\"}\n  {\"name\": \"IsIntegrallyClosed.of_isLocalization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \"[IsDomain R] (h : ∀ (P : Ideal R) [P.IsMaximal], IsIntegrallyClosed (Rₚ P)) : IsIntegrallyClosed R\", \"doc\": \"Let $ R $ be an integral domain. If for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ itself is integrally c\"}\n  {\"name\": \"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Extension\", \"type\": \"{Q : Ideal Sₚ} [Q.IsMaximal] [Algebra.IsIntegral Rₚ Sₚ] : Q ∈ (maximalIdeal Rₚ).primesOver Sₚ\", \"doc\": \"If $ Q $ is a maximal ideal in $ S_{\\\\mathfrak{p}} $ and $ S_{\\\\mathfrak{p}} $ is integral over $ R_{\\\\mathfrak{p}} $, then $ Q $ lies over the maximal ideal of $ R_{\\\\mathfrak{p}} $. This means the contr\"}\n  {\"name\": \"IsIntegrallyClosed.of_localization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \"[IsDomain R] (h : ∀ p : Ideal R, p ≠ ⊥ → [p.IsMaximal] → IsIntegrallyClosed (Localization.AtPrime p)) :\\n  IsIntegrallyClosed R\", \"doc\": \"If $ R $ is an integral domain and for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ is integrally closed in\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"isIntegrallyClosed_ofLocalizationMaximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.IntegrallyClosed\", \"type\": \": OfLocalizationMaximal fun R _ => ([IsDomain R] → IsIntegrallyClosed R)\", \"doc\": \"Let $ R $ be a commutative ring. If the localization of $ R $ at every maximal ideal is integrally closed in its fraction field whenever it is a domain, then $ R $ itself is integrally closed in its f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a henselization in an algebraic field extension equals a henselian normal localization of the integral closure, and automorphisms fixing the prime fix the henselization",
+   "results": "{\"t\": \"2026-10-24T00:14:09Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a henselization in an algebraic field extension equals a henselian normal localization of the integral closure, and automorphisms fixing the prime fix the henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.integralClosure\", \"IsLocalization.integralClosure\", \"galLift\", \"galLiftEquiv_apply\", \"Ideal.exists_comap_galRestrict_eq\", \"galRestrict'\", \"galRestrict\", \"galRestrict_apply\"], \"digest\": \"932bc23c9020559f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral-closure restriction and localization declarations do not identify a henselization or its pointwise stabilizer; henselian root-lifting and valuation-subring stabilizers do not state this comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, HenselianLocalRing",
+   "results": "{\"t\": \"2026-10-24T00:14:10Z\", \"tool\": \"loogle\", \"query\": \"integralClosure, HenselianLocalRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral-closure restriction and localization declarations do not identify a henselization or its pointwise stabilizer; henselian root-lifting and valuation-subring stabilizers do not state this comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli[sz]ation|henselian.*integralClosure|integralClosure.*henselian",
+   "results": "{\"t\": \"2026-10-24T00:14:10Z\", \"tool\": \"grep\", \"query\": \"henseli[sz]ation|henselian.*integralClosure|integralClosure.*henselian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral-closure restriction and localization declarations do not identify a henselization or its pointwise stabilizer; henselian root-lifting and valuation-subring stabilizers do not state this comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The decomposition group of a prime of the integral closure is the group of field automorphisms fixing the fraction field of the henselization",
+   "results": "{\"t\": \"2026-10-24T00:14:10Z\", \"tool\": \"leansearch\", \"query\": \"The decomposition group of a prime of the integral closure is the group of field automorphisms fixing the fraction field of the henselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galRestrict.congr_simp\", \"IsGaloisGroup.of_isFractionRing\", \"ValuationSubring.decompositionSubgroup\", \"IsGaloisGroup.to_isFractionRing\", \"coe_galRestrict_apply\", \"galRestrict_apply\", \"IsGaloisGroup.intermediateField\", \"Ring.instIsGaloisFractionRingNormalClosure\"], \"digest\": \"24dd51b70de724d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral-closure restriction and localization declarations do not identify a henselization or its pointwise stabilizer; henselian root-lifting and valuation-subring stabilizers do not state this comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "decompositionSubgroup|galRestrict|henselization",
+   "results": "{\"t\": \"2026-10-24T00:14:54Z\", \"tool\": \"grep\", \"query\": \"decompositionSubgroup|galRestrict|henselization\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\"], \"digest\": \"d1033f5d77252592\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral-closure restriction and localization declarations do not identify a henselization or its pointwise stabilizer; henselian root-lifting and valuation-subring stabilizers do not state this comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local embedding of a henselization into a henselian normal ring identifies its normalization and fixes the embedded henselization under local automorphisms",
+   "results": "{\"t\": \"2026-10-24T00:14:55Z\", \"tool\": \"leanfinder\", \"query\": \"A local embedding of a henselization into a henselian normal ring identifies its normalization and fixes the embedded henselization under local automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.toIsLocalRing\", \"galLift\", \"instHenselianRingMaximalIdeal\", \"HenselianRing\", \"HenselianLocalRing.is_henselian\", \"Field.henselian\"], \"digest\": \"195ba83ab3cf31d4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral-closure restriction and localization declarations do not identify a henselization or its pointwise stabilizer; henselian root-lifting and valuation-subring stabilizers do not state this comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-henselian-global-inertia-comparison",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Final paragraph of current rem-dl-a1-conventions: equivalence of lisse extension across infinity with trivial inertia; ordinary-henselization normalization and decomposition-group identification used by lem-dl-a1-henselian-global-inertia-comparison.",
+   "via": [
+    "lem-dl-a1-henselian-global-inertia-comparison",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-henselian-normalization-localization",
+  "worker": "stage1",
+  "summary": "Six-step direct comparison: specialize the existing connected integral henselian permanence theorem to C, use normality for C subset T, prove contraction to the chosen maximal q and invert denominators, then prove both subgroup inclusions by monic equations and henselization uniqueness. All cited statements were read; no new nodes or Mathlib leaves, and no hypothesis or conclusion changed. Added the existing integral-closure and localization definition citations.",
+  "blueprint": "Realizes the local algebra behind the final-paragraph extension/inertia equivalence of rem-dl-a1-conventions in literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-lem-wft-curve-heart/rem-dl-a1-conventions.md, through the existing global inertia comparison. The recorded setup unit has no proof steps to replace.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-component-henselian-permanence",
+    "why": "Generic integral-algebra permanence over a henselian local ring, used only for the domain C in step 1; the affine-line setup unit has no commutative-algebra permanence result. This follows its existing normalization route rather than replacing any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-component-henselian-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-5561a7996",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-5561a7996 (reviewer sub-agent of L); spot-checked: I read the 0-new-node S1 split of lem-dl-a1-henselian-normalization-localization in full and found no fault. The statement is the same as on base and live (still unsplit, 0 steps), except for the added integral-closure and localization definition citations; nothing is weakened. Step 1: C⊂Ω is a nonzero domain integral over the henselian H, so it has only the idempotents 0 and 1. This is exactly the hypothesis of lem-trf-integral-component-henselian-permanence (Stacks 092X), and the step uses only that node's stated conclusion that C is henselian local. Step 2: B⊆C⊆T because T is a normal domain with fraction field Ω. Step 3: B∩qT=q since T is a domain, and C∩m_T⊆𝔫; maximality of q, which is a hypothesis, then gives B∩𝔫=q. Step 4: elements of B outside q are units of C, so T⊆C and C=T. Step 5: σ with σq=q restricts to a local A-automorphism of T. The uniqueness clause of def-weil-pbc-henselization-at-prime gives σ∘i=i, so σ fixes Frac(H); this matches the uniqueness argument in the proof of Stacks 0BSW lemma-identify-inertia (pione.tex:2883). Step 6: if σ fixes Frac(H), it preserves C=T, its maximal ideal 𝔫 and B, so σq=q. Edge cases checked: A a field, Ω=K, and Ω/K purely inseparable or infinite (no step uses separability or finiteness). Duplicate search (henselization/normalization keywords, 0BSW, 092X) found no existing node stating this comparison. Batch-5 flag on lem-trf-integral-component-henselian-permanence: it is pure commutative algebra (092X) and neither assumption gives it. Its 188-node closure contains no other sec-trace-formula or sec-poincare-duality node, no thm-trf, no trace-transport and no target, and it does not reach the item. Flag accepted, and the generic tool_use is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianNormalizationLocalization",
+  "declaration": "Algebra.henselianNormalization_localization",
+  "file": "lean/Sheaf/RingTheory/HenselianNormalizationLocalization.lean",
+  "statement": "theorem henselianNormalization_localization (A : Type u) [CommRing A] [IsDomain A] [IsLocalRing A] [IsIntegrallyClosed A] (Ω : Type v) [Field Ω] [Algebra A Ω] (H : Type z) (K : Type w) [Field K] [Algebra A K] [IsFractionRing A K] [Algebra K Ω] [IsScalarTower A K Ω] [Algebra.IsAlgebraic K Ω] (q : Ideal (integralClosure A Ω)) [q.IsMaximal] (_hq : q.comap (algebraMap A (integralClosure A Ω)) = maximalIdeal A) [IsIntegrallyClosed (Localization.AtPrime q)] [HenselianLocalRing (Localization.AtPrime q)] [Algebra (Localization.AtPrime q) Ω] [IsFractionRing (Localization.AtPrime q) Ω] (_hTΩ : algebraMap (Localization.AtPrime q) Ω = Ideal.atPrimeToField q) [CommRing H] [HenselianLocalRing H] [Algebra A H] (_hHdomain : IsDomain H) [Algebra (Localization.AtPrime (maximalIdeal A)) H] [IsScalarTower A (Localization.AtPrime (maximalIdeal A)) H] (_hH : IsHenselizationAtPrime' A (maximalIdeal A) H) [Algebra H (Localization.AtPrime q)] [IsScalarTower A H (Localization.AtPrime q)] (_hHT : IsLocalHom (algebraMap H (Localization.AtPrime q))) (_hHTinj : Function.Injective (algebraMap H (Localization.AtPrime q))) [Algebra H Ω] [IsScalarTower A H Ω] [IsScalarTower H (Localization.AtPrime q) Ω] [Algebra (FractionRing H) Ω] [IsScalarTower H (FractionRing H) Ω] [Algebra.IsAlgebraic (FractionRing H) Ω] : ∃ (_ : HenselianLocalRing (integralClosure H Ω)), Set.range (algebraMap (integralClosure H Ω) Ω) = Set.range (algebraMap (Localization.AtPrime q) Ω) ∧ {b : integralClosure A Ω | (b : Ω) ∈ (integralClosure H Ω).val '' (maximalIdeal (integralClosure H Ω) : Set _)} = (q : Set (integralClosure A Ω)) ∧ MulAction.stabilizer (Ω ≃ₐ[K] Ω) q = (IntermediateField.adjoin K (Set.range (algebraMap (FractionRing H) Ω))).fixingSubgroup",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5af755b3c",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; statement verbatim. Every hypothesis and clause matches: integralClosure A Ω, maximal q over m, T=Localization.AtPrime q pinned by atPrimeToField, HenselianLocalRing/IsIntegrallyClosed/IsFractionRing T Ω, H via IsHenselizationAtPrime' with local injective A-embedding into T, Frac H algebra map unique by localization, C=T as equal ranges in Ω, B∩n=q as a set equality, canonical integralClosure MulSemiringAction stabilizer = fixingSubgroup of adjoin K Frac(H). No extra assumptions; universes u v w z independent. Edge cases A a field, Ω=K, inseparable/infinite covered. Docstrings carry source places, blueprint id and 6 steps; only sorry is the proof. Advisory: the henselization predicate only tests rings in Type(max u z) but T:Type v, so step 5 must use a small henselian subring of T shrunk to Type z (provable); atPrimeToField is an unowned upstream helper. No compile, since no file changed."
+ }
+}

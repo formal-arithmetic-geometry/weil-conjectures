@@ -1,0 +1,121 @@
+{
+ "id": "lem-pe-coefficient-comparison-continuity",
+ "kind": "lemma",
+ "title": "Continuity cocones of coefficient-sized etale inverse images",
+ "statement": "Let X be a scheme and A any commutative ring in the coefficient universe. For an A-module sheaf G on the coefficient-sized etale site and any affine etale presentation P of [det-pe-classical-definition-continuity-map], the projection-restriction cocone of the canonical comparison inverse image of G is a colimit in A-modules. The presentation has index in universe u+1 when X is in universe u; coefficients have independent size. This is a statement about all comparison inverse images with no stratification or constructibility hypothesis. The sites and comparison are [def-weil-pbc-site-comparison-morphism].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099S, lemma-limit-pullback, and lemma-describe-pullback-from-etale; blueprint continuity-map detail, canonical projection cocone"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "det-pe-classical-definition-continuity-map"
+ ],
+ "proof": [
+  {
+   "text": "Lift the presentation diagram to the coefficient-sized etale model. Its comparison image is naturally isomorphic to P.diagram followed by AsSmall.up. Reflect P.isLimit through the fully faithful site forgetful functor and preserve it with the AsSmall equivalence. Apply representable continuity and the full-faithful left-Kan-extension colimit criterion from WeilConjectures.CategoryTheory.Pro.PresheafColimit; transport preservation along the displayed diagram isomorphism. This constructs an actual IsColimit for the raw Kan-extension cocone.",
+   "uses": [
+    "lem-pe-coefficient-comparison-representables"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine-presentation sheafification invertibility at every stage and at the vertex. Naturality of toSheafify transports the raw Kan-extension colimit to the sheafified functor, using isColimitMapCoconeOfNatTrans. The definition of sheafPullback and sectionCocone identifies the result with the original theorem, with its projection maps unchanged.",
+   "uses": [
+    "lem-pe-coefficient-comparison-presentation-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-coefficient-comparison-representables",
+  "lem-pe-coefficient-comparison-presentation-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099S; K2 formal categorical Kan-extension and sheafification reduction, 2026-10-26"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale module sheaf locally constant on each stratum of a finite constructible stratification is classical and its affine inverse limit continuity map is an isomorphism",
+   "results": "['CompHausLike.LocallyConstantModule.functor', 'LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor', 'LightCondMod.LocallyConstant.functorIsoDiscreteAux₂', 'CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor', 'LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat', 'LightCondMod.isDiscrete_tfae', 'LightCondMod.LocallyConstant.functorIsoDiscreteComponents', 'LightCondMod.ofSheafLightProfinite']",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuityMap\"",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison_essImage_of_stratification|coefficientStratified|proEtaleComparisonSets_continuous",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented locally constant proetale module descends to the etale site, and etale origin is stable under finite stratifications and continuous on affine cofiltered limits.",
+   "results": "['Algebra.Etale.finitePresentation', 'SheafOfModules.isFinitePresentation', 'SheafOfModules.IsFinitePresentation.mk', 'SheafOfModules.IsFinitePresentation', 'SheafOfModules.quasicoherentDataOfIsFinitePresentation', 'Profinite.exists_locallyConstant', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation']",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientStratifiedContinuity",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "classicality detail: etale inverse image has the prescribed affine section colimit",
+   "via": [
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonContinuity",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientFixedComparison_isColimit",
+  "statement": "theorem coefficientFixedComparison_isColimit (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (G : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]\n    (P : AffinePresentation X I) :\n    Nonempty (IsColimit (sectionCocone P\n      ((AsSmall.up : X.ProEt ⥤ Scheme.coefficientProEtaleSiteModel.{u, v} X).op ⋙\n        ((Functor.sheafPullbackConstruction.sheafPullback\n          (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n          (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n          (Scheme.coefficientProEtaleModelTopology.{u, v} X)).obj G).obj)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T180758-L-4033505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T202345-L-2710045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

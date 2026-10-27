@@ -1,0 +1,121 @@
+{
+ "id": "def-trf-tensor-sections-unit-composition",
+ "kind": "definition",
+ "title": "Canonical tensor-pullback composition and global section unit",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A,B,C$ be schemes [def-pc-scheme], with ordinary module sheaves [def-weil-sheaf-of-modules-category] and tensor pullbacks $a^*$ [def-pc-module-pullback]. Use the canonical tensor-pullback adjunction $a^*\\dashv a_*$ of [lem-pc-module-pullback-adjunction], whose unit sends a section to its tensor $1\\otimes s$. For composable scheme maps $a:A\\to B$ and $b:B\\to C$, define tensorSectionsComp to be the natural isomorphism $c_{a,b}:a^*b^*\\simeq(b\\circ a)^*$ obtained by adjunction conjugacy from the canonical sectionwise pushforward composition identification $(b\\circ a)_*\\simeq b_*a_*$. Equivalently this is the inverse-oriented composition comparison of [def-pc-tensor-pullback-composition-iso] for $k=b\\circ a$ and the reflexive triangle equation; the specified adjunctions fix its unit normalization. For a scheme map $a:A\\to B$ and an arbitrary ordinary module $G$ on $B$, define tensorSectionsUnit to be the additive map $\\Gamma(B,G)\\to\\Gamma(A,a^*G)$ obtained by evaluating the adjunction unit $G\\to a_*a^*G$ on the whole of $B$ and restricting from $a^{-1}(B)$ to the whole of $A$ by the canonical equality $a^{-1}(B)=A$. These are definitions on arbitrary module sheaves, with no quasi-coherence, invertibility, or etaleness assumption and no presheaf-functoriality assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DR, Section quasi-coherent-sheaves, equation-quasi-coherent-presheaf (35.8.1): the canonical pullback-of-sections construction and its composition comparison, restricted to the small etale site in Tag 03DU. The concrete definitions are the global-section adjunction unit and the conjugate of pushforward composition; this node owns those maps, not the theorem that their restrictions form a presheaf."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical unit-normalized tensor pullback composition isomorphism and pullback of global module sections by the adjunction unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_unit_app\", \"CategoryTheory.Adjunction.unitAsIsoOfIso\", \"PresheafOfModules.unitHomEquiv\", \"SheafOfModules.pullbackComp\", \"CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"CategoryTheory.ChosenPullbacksAlong.iso_mapPullbackAdj_unit_app\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the two published project definitions without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical unit-normalized tensor pullback composition isomorphism and pullback of global module sections by the adjunction unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the two published project definitions without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSectionsComp|tensorSectionsUnit",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match; reuse the two published project definitions without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^(noncomputable )?def (tensorSectionsComp|tensorSectionsUnit)' lean/WeilConjectures lean/Sheaf; rg -l 'tensorSectionsComp|tensorSectionsUnit' dag/nodes/ --glob 'def-*.json'; blueprint_refs.py search tensorSectionsComp; blueprint_refs.py search tensorSectionsUnit",
+   "results": "The only declarations are WeilConjectures/AlgebraicGeometry/EtaleTensorSections.lean lines 45 and 54. DAG definition-node text matches def-weil-pbc-coherent-etale-restriction and def-sfb-ordinary-etale-identification, which use the maps without owning them. A scan of definition-node lean.declaration/declarations found no owner of either name. def-pc-tensor-pullback-composition-iso owns tensorPullbackCompositionIso, the reverse-oriented comparison with a triangle equation, but not these section-oriented names or the section unit. Both blueprint searches returned 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "Introduce an existing:true definition owner for the two concrete maps required by the return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ample-scheme-test-line-preparation",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the polarized-scheme descent sentence of lem-trf-local-term-locality, via the arbitrary-scheme-test reduction of lem-trf-algebraic-space-ample-local: old proof Steps 1 and 2 (base-changed covers, invertible cocycle descent, etale-test comparison, and quasi-compact separated preparation). Definition owner for the unit-normalized tensor composition and section pullback unit appearing in the ordinary/etale identifications and pulled transitions.",
+   "via": [
+    "lem-trf-ample-scheme-test-line-preparation",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleTensorSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorSectionsComp",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorSectionsComp",
+   "AlgebraicGeometry.Scheme.Modules.tensorSectionsUnit"
+  ],
+  "statement": "def tensorSectionsComp {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) :\n    tensorPullback b ⋙ tensorPullback a ≅ tensorPullback (a ≫ b)",
+  "branch": "slopmaster2",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership explicitly required by independent H2 return of a799091a0d34. Both declarations are existing plain defs in EtaleTensorSections. The composition is explicit adjunction conjugacy of pushforward composition; the section unit is the canonical adjunction unit evaluated at top with preimage-top transport. No module, copied data, or theorem conclusion is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bcf3e061c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bcf3e061c",
+  "group": "Q37",
+  "result": "pass",
+  "note": "bcf3 is a re-delivery of a7da (PASS) to clear its advisory. Step 3 now cites lem-sc-etale-qcoherent-presheaf-functorial in its text and uses, so proof_deps equals the union of uses; statement_change gains old_proof; the Lean change is 3 docstring lines (signature and definitions byte-identical to the compiled a7da/a799 file). check_statement_change(main, head) returned no errors; old_statement, old_stmt_deps, old_proof and old_proof_deps equal side-live main verbatim; only Step 3 differs and the only proof_deps addition is the functoriality theorem. Citation-only statement change (qc/separated references go to def-sfb-* owners); citer ample-local holds. All stmt_deps are on main or delivered (def-trf-tensor-sections-unit-composition existing:true, no rival owner on main). The §1(B) point-cover repair of qc-separated-etale-local is unchanged (node JSON read from the commit; the snapshot omits it). Mathematics re-checked clause by clause; edge cases covered; only sorry proofs; no compile (no file changed)."
+ }
+}

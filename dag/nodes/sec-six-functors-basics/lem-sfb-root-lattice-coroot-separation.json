@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-root-lattice-coroot-separation",
+ "kind": "statement",
+ "title": "Coroots separate vectors in the integral root span",
+ "statement": "Let $M,N$ be free $\\mathbf Z$-modules with finite bases [def-weil-pbc-free-module], in a perfect bilinear pairing $\\langle-,-\\rangle:M\\times N\\to\\mathbf Z$, meaning that the induced maps $M\\to\\operatorname{Hom}_{\\mathbf Z}(N,\\mathbf Z)$ and $N\\to\\operatorname{Hom}_{\\mathbf Z}(M,\\mathbf Z)$ are isomorphisms. Let $I$ be finite and let $a:I\\hookrightarrow M$ and $c:I\\hookrightarrow N$ be injective maps. Suppose $\\langle a_i,c_i\\rangle=2$ and, for every $i\\in I$, there is a permutation $\\sigma_i:I\\simeq I$ such that, for all $j\\in I$, $$a_{\\sigma_i(j)}=a_j-\\langle a_j,c_i\\rangle a_i,\\qquad c_{\\sigma_i(j)}=c_j-\\langle a_i,c_j\\rangle c_i.$$ Put $Q=\\operatorname{span}_{\\mathbf Z}\\{a_i:i\\in I\\}\\subseteq M$ [def-weil-submodule-span]. For every $x\\in Q$ with $x\\ne0$, there exists $i\\in I$ such that $\\langle x,c_i\\rangle\\ne0$. No spanning or reducedness assumption on the two families is imposed; $I=\\varnothing$ is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.44, printed p.618: nondegeneracy of the root/coroot rational-span pairing, restricted to the root lattice; C.37--C.43 give the self-dual axioms and proof. Integer-root-pairing formulation: Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean, RootPairing.exists_coroot_ne, lines 181--188."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-submodule-span"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A vector in the integer span of the roots of a finite root pairing is zero if it pairs to zero with every coroot",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.coPolarization_apply_eq_zero_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [inst_5 : Fintype ι]\\n  (n : N), P.CoPolarization n = 0 ↔ P.CorootForm n = 0\", \"doc\": \"For any element $ n $ in the $ R $-module $ N $, the copolarization map $ P.\\\\text{CoPolarization} $ sends $ n $ to zero if and only if the coroot bilinear form $ P.\\\\text{CorootForm} $ evaluated at $ n\"}\n  {\"name\": \"RootPairing.IsAnisotropic\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [Fintype ι] →\\n          [inst : AddCommGroup M] →\\n            [inst_1 : AddCommGroup N] →\\n              [inst_2 : CommRing R] → [inst_3 : Module R M] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"A property of a root pairing between $ R $-modules $ M $ and $ N $ asserting that the only element $ \\\\alpha \\\\in M $ satisfying $ \\\\langle \\\\alpha, \\\\beta \\\\rangle = 0 $ for all $ \\\\beta \\\\in N $ is $ \\\\alpha\"}\n  {\"name\": \"RootPairing.rootForm_self_eq_zero_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Fintype ι] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : CommRing R] [inst_4 : LinearOrder R] [IsStrictOrderedRing R] [inst_6 : Module R M]\\n  [inst_7 : Module R N] (P : RootPairing ι R M N) {x : M}, (P.RootForm x\", \"doc\": \"For any element $x$ in the $R$-module $M$, the bilinear form $B_P$ associated with the root pairing $P$ satisfies $B_P(x, x) = 0$ if and only if $x$ is in the kernel of $B_P$.\"}\n  {\"name\": \"RootPairing.isOrthogonal_iff_pairing_eq_zero\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} {i j : ι} [NeZero 2]\\n  [IsDomain R] [Module.IsTorsionFree R M], P.IsOrthogonal i j ↔ P.pairing\", \"doc\": \"Under the assumptions that 2 is non-zero in the commutative domain $ R $ and the module $ M $ is torsion-free, for a root pairing $ P $ over $ R $, the indices $ i $ and $ j $ are orthogonal if and on\"}\n  {\"name\": \"RootPairing.IsReduced\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Reduced\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → Prop\", \"doc\": \"Given a commutative ring $ R $, additive commutative $ R $-modules $ M $ and $ N $, and a root pairing between them, this is the proposition that the root pairing satisfies the reducedness condition.\"}\n  {\"name\": \"RootPairing.IsOrthogonal\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Defs\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → ι → ι → Prop\", \"doc\": \"For a root pairing $ P $ over a commutative ring $ R $, the indices $ i $ and $ j $ are called orthogonal if both pairings $ \\\\langle \\\\text{root}(i), \\\\text{coroot}(j)\\\\rangle $ and $ \\\\langle \\\\text{root}\"}\n  {\"name\": \"RootPairing.pairingIn_eq_zero_of_add_notMem_of_sub_notMem\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Lemmas\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) [Finite ι]\\n  [CharZero R] [inst_7 : P.IsCrystallographic] {i j : ι} [IsDomain R],\\n  i ≠ j →\\n  \", \"doc\": \"For distinct indices $i \\neq j$ with roots $\\\\alpha_i \\\\neq -\\\\alpha_j$, if neither $\\\\alpha_i + \\\\alpha_j$ nor $\\\\alpha_i - \\\\alpha_j$ belong to the root system $\\\\Phi$, then the integer-valued root pairing $\"}\n  {\"name\": \"RootPairing.InvariantForm.apply_root_root_zero_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/RootPositive\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_4} {N : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} (B : P.InvariantForm)\\n  (i j : ι) [IsDomain R] [NeZero 2], (B.form (P.root i)) (P.root j) = 0 \", \"doc\": \"For a root pairing $ P $ over an integral domain $ R $ with $ 2 \\neq 0 $, the bilinear form $ B.\\text{form} $ associated with an invariant form satisfies $ B.\\text{form}(\\text{root}(i), \\text{root}(j)) = 0\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no exact match in these hits: related polarization, anisotropy and root-form declarations; the subsequent Loogle and LeanSearch queries returned RootPairing.exists_coroot_ne and its source was read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing.exists_coroot_ne\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"RootPairing.exists_coroot_ne\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Nondegenerate\", \"type\": \" {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [Fintype ι] [AddCommGroup M] [AddCommGroup N] [CommRing R] [Module R M] [Module R N] (P : RootPairing ι R M N) (S : Type u_5) [CommRing S] [IsDomain R] [IsDomain S] [Algebra S R] [FaithfulSMul S R] [P.IsValuedIn S] [Module S M] [IsScalarTo\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.exists_coroot_ne (Nondegenerate.lean:181), with R = S = integers and the displayed data as RootPairing; anisotropy is inferred by instIsAnisotropicOfIsCrystallographic at line 87. The first semantic search returned related polarization facts; Loogle and LeanSearch returned the exact declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_coroot_ne|instIsAnisotropicOfIsCrystallographic|instIsValuedInSelf",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean\", \"line\": \"70\", \"text\": \"`RootPairing.instIsAnisotropicOfIsCrystallographic` and pairings over ordered scalars.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean\", \"line\": \"87\", \"text\": \"instance instIsAnisotropicOfIsCrystallographic [CharZero R] [P.IsCrystallographic] :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean\", \"line\": \"181\", \"text\": \"lemma exists_coroot_ne [P.IsAnisotropic]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean\", \"line\": \"203\", \"text\": \"    obtain ⟨i, hi⟩ := P.exists_coroot_ne S hx\"}\n  {\"file\": \"Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean\", \"line\": \"317\", \"text\": \"`RootPairing.instIsAnisotropicOfIsCrystallographic`. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.exists_coroot_ne (Nondegenerate.lean:181), with R = S = integers and the displayed data as RootPairing; anisotropy is inferred by instIsAnisotropicOfIsCrystallographic at line 87. The first semantic search returned related polarization facts; Loogle and LeanSearch returned the exact declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coroots separate nonzero vectors in the root span of a finite crystallographic root pairing",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RootPairing.ne_zero'\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"[NeZero (2 : R)] : (P.coroot i : N) ≠ 0\", \"doc\": \"In a root pairing between $R$-modules $M$ and $N$ over a commutative ring $R$, if $2$ is not zero in $R$, then the coroot $P.\\text{coroot}(i)$ is non-zero in $N$ for all indices $i$.\"}\n  {\"name\": \"RootPairing.exists_coroot_ne\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Nondegenerate\", \"type\": \"[P.IsAnisotropic] {x : P.rootSpan S} (hx : x ≠ 0) : ∃ i, P.coroot'In S i x ≠ 0\", \"doc\": \"In an anisotropic root pairing, for any non-zero element $ x $ in the root span over a semiring $ S $, there exists an index $ i $ such that the evaluation of the dual coroot functional $ \\\\text{coroot\"}\n  {\"name\": \"RootPairing.corootSpanMem\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.IsValuedIn\", \"type\": \"[Module S N] (i : ι) : P.corootSpan S\", \"doc\": \"For any index $i$ in the indexing type $\\\\iota$, the coroot element $\\\\alpha_i$ associated with the root pairing is contained in the submodule of $N$ generated by the image of the coroot embedding $\\\\iot\"}\n  {\"name\": \"RootPairing.coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] → [inst_3 : AddCommGroup N] → [inst_4 : Module R N] → RootPairing ι R M N → ι ↪ N\", \"doc\": \"Given a commutative ring $ R $, $ R $-modules $ M $ and $ N $, and a root pairing between them, this constructs the injective function (embedding) from the index type $ \\\\iota $ to the module $ N $, re\"}\n  {\"name\": \"RootPairing.injOn_dualMap_subtype_span_root_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Basic\", \"type\": \"[IsAddTorsionFree M] : InjOn ((span R (range P.root)).subtype.dualMap ∘ₗ P.toLinearMap.flip) (range P.coroot)\", \"doc\": \"Given a root pairing between $ R $-modules $ M $ and $ N $ with $ M $ torsion-free, the composition of the dual map associated to the root pairing with the inclusion of the span of roots into $ M $ is\"}\n  {\"name\": \"RootPairing.Base.linearIndepOn_coroot\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Base\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} (self : P.Base),\\n  LinearIndepOn R ⇑P.coroot ↑self.support\", \"doc\": \"For a root pairing $ P $ between $ R $-modules $ M $ and $ N $, the coroots $ P.\\text{coroot} $ are linearly independent over the commutative ring $ R $ when restricted to the finite support set $ \\text\"}\n  {\"name\": \"RootPairing.disjoint_corootSpan_ker_corootForm\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Finite.Nondegenerate\", \"type\": \": Disjoint (P.corootSpan R) (LinearMap.ker P.CorootForm)\", \"doc\": \"The submodule generated by coroots in $ N $ and the kernel of the coroot bilinear form on $ N $ are disjoint, meaning their intersection contains only the zero element.\"}\n  {\"name\": \"RootPairing.IsRootSystem.span_coroot_eq_top\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Defs\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} {inst : CommRing R} {inst_1 : AddCommGroup M}\\n  {inst_2 : Module R M} {inst_3 : AddCommGroup N} {inst_4 : Module R N} {P : RootPairing ι R M N}\\n  [self : P.IsRootSystem], Submodule.span R (Set.range ⇑P.coroot) = ⊤\", \"doc\": \"For any root system $ P $ over a commutative ring $ R $, the span of the coroots (the image of $ P.\\\\text{coroot} $) in the module $ N $ is equal to the entire module $ N $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: RootPairing.exists_coroot_ne (Nondegenerate.lean:181), with R = S = integers and the displayed data as RootPairing; anisotropy is inferred by instIsAnisotropicOfIsCrystallographic at line 87. The first semantic search returned related polarization facts; Loogle and LeanSearch returned the exact declaration."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "RootPairing.exists_coroot_ne",
+  "file": "Mathlib/LinearAlgebra/RootSystem/Finite/Nondegenerate.lean",
+  "line": 181,
+  "how": "specializes in one line: take R = S = integers, I the given finite index type, P.root = a, P.coroot = c and P.reflectionPerm = sigma (RootPairing fields, Defs.lean:82--98); apply P.exists_coroot_ne integers to x in P.rootSpan integers. The automatic IsValuedIn-self instance is IsValuedIn.lean:62, hence P.IsCrystallographic; instIsAnisotropicOfIsCrystallographic at Nondegenerate.lean:87 supplies IsAnisotropic. rootSpan is the integer span by IsValuedIn.lean:166, and algebraMap_coroot'In_apply at IsValuedIn.lean:224 identifies its conclusion with the displayed evaluation since the integer algebra map is the identity. Read Nondegenerate.lean:147--188, including the full hypotheses. No IsRootSystem, IsReduced, Nonempty I or finiteness of the Weyl group is assumed."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-root-datum-weyl-group",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting root-datum prerequisite of lem-sfb-rational-split-root-realization: Milne Appendix C.44, nondegeneracy of the root/coroot span pairing, used in C.46 after the displacement calculation of C.45; below det-thm-sf-ctf-stability-direct-images proof (3).",
+   "via": [
+    "lem-sfb-finite-root-datum-weyl-group",
+    "lem-sfb-rational-split-root-realization",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,152 @@
+{
+ "id": "lem-sp-complete-projection-reduction-square",
+ "kind": "statement",
+ "title": "Reduction square for the compact-support projection",
+ "statement": "Fix the normalized descent maps and presentations [def-sp-complete-projection-descent-maps]. For any compactification $c=(j:X\\hookrightarrow Z,p:Z\\to Y)$ of $f$, any normalized reduction/limit presentations on $X,Z,Y$, and arbitrary integral derived modules $M$ on $X$ and $K$ on $Y$, put $H=M\\otimes f^*K$. Assume only that the inverse open system projection at $(r_XM,G_p r_YK)$ is invertible. Let $\\pi_R:F_RM\\otimes K\\to F_RH$ be the actual integral compact-support projection [def-pur-integral-ringed-projection-maps], $\\theta$ the system projection, $b_N$ the reconstruction map, $\\mu$ the tensor/scalar isomorphism, and $\\nu_f$ the pullback/scalar isomorphism, all as defined by the descent maps. Then the square\n$$r_Y(\\pi_R);b_H;F_\\bullet(\\mu_{M,f^*K};(1\\otimes\\nu_{f,K}))=\\mu_{F_RM,K};(b_M\\otimes1);\\theta$$\ncommutes as an equality of whole derived coefficient-system morphisms. Composition is written in order of application. No completeness, boundedness, finite-type condition, proper-projection invertibility, or invertibility of the reconstruction maps is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraphs (2)-(3), normalized comparisons and projection descent"
+ },
+ "stmt_deps": [
+  "def-sp-complete-projection-descent-maps",
+  "def-pur-integral-ringed-projection-maps"
+ ],
+ "proof": [
+  {
+   "text": "The specified tensor and pullback models identify the derived comparisons on whole quotient complexes with the canonical scalar-extension maps: both send every pure tensor quotient augmentation to the same two augmentation generators, and the recorded representative squares descend this equality. Put $Z=\\bar X$ and let $q_T$ be the ringed sequence projection defining $r_T$, for $T=Z,Y$. For the commutative square with vertical edges $p:Z\\to Y$, $p_\\bullet:Z^{\\mathbf N}\\to Y^{\\mathbf N}$ and horizontal edges $q_Z,q_Y$, let $h_B:r_YRp_{*,R}B\\to Rp_{*,\\bullet}r_ZB$ be the mate of the canonical pullback square. In particular $h_B$ is the transpose under $Lp_\\bullet^*\\dashv Rp_{*,\\bullet}$ of $r_Z$ of the proper counit, after $\\nu_p$. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to this square, with arbitrary $B\\in D(R_Z)$ and $K\\in D(R_Y)$. It gives\n$$Rp_{*,\\bullet}(a^p_{B,K})h_{B\\otimes^LLp_R^*K}\\,r_Y(\\pi^p_R)=\\pi^p_\\bullet(h_B\\otimes1)\\mu_{Rp_{*,R}B,K},$$\nwhere $a^p=(1\\otimes\\nu_p)\\mu$. This is an equality in the derived category of systems, for the counit-defined projections $\\pi^p$; the cited theorem allows arbitrary ringed topoi and arbitrary structural ring maps. No invertibility of $h$ or $\\pi^p$ is used here.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), compatibility of the proper counit projection with reduction"
+   }
+  },
+  {
+   "text": "Let $d_N:r_Zj_{!,R}N\\xrightarrow{\\sim}j_{!,\\bullet}r_XN$ be the canonical open scalar comparison. The localized ringed-site and ringed-diagram assertions of [lem-sf-open-tensor-normalization] apply to the constant sequence ring $\\Delta R_Z\\to A_{\\bullet,Z}$ and its restriction to $X$. On quotient representatives $d$ is $[x]\\otimes a\\mapsto[x\\otimes a|_X]$. It carries the open unit to the system open unit: after restriction both sides are $x\\otimes a\\mapsto x\\otimes a$. This identity is simultaneous in the quotient diagram by [lem-coef-semilinear-derived-sections]; the scalar tensor and restriction comparisons are $\\mu,\\nu$ of the specified presentation.\n\nWrite $\\gamma_R:j_!N\\otimes^LJ\\to j_!(N\\otimes^Lj^*J)$ and $\\gamma_\\bullet$ for the inverse-unit open projection maps. Their inverses are the open adjuncts of unit tensor identity by [lem-sf-open-tensor-normalization]. Taking these adjuncts, the two routes in\n$$j_{!,\\bullet}(a^j_{N,J})\\,d_{N\\otimes^Lj^*J}\\,r_Z(\\gamma_R)=\\gamma_\\bullet(d_N\\otimes1)\\mu_{j_!N,J}$$\nrestrict to the same unit tensor identity, by the displayed formula for $d$ and the unit-compatible $\\mu,\\nu$. The open adjunction Hom bijection therefore gives the equality before evaluating the systems. Here $a^j=(1\\otimes\\nu_j)\\mu$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), compatibility of the inverse open unit projection with reduction"
+   }
+  },
+  {
+   "text": "For $N=M,H:=M\\otimes^Lf_R^*K$, denote the defined compactification/limit map by $\\alpha_N:F_RN\\to L_YF_\\bullet r_XN$. Its reconstruction transpose is\n$$b_N=e_{F_\\bullet r_XN}\\,r_Y(\\alpha_N):r_YF_RN\\longrightarrow F_\\bullet r_XN.$$\nWe check which comparison this is. The defining normalization writes $\\alpha_N$ as $Rp_{*,R}j_{!,R}(\\eta_N)$ followed by the open/limit and proper/limit comparisons and scalar restrictions. The proper/limit comparison is the direct-image composition comparison for $pq_Z=q_Yp_\\bullet$; by [lem-sfb-ringed-derived-monoidal-comparisons] that composition comparison is adjunction-compatible. Its conjugate is the proper mate $h$ in the first step. The open/limit comparison is conjugate to $d$ in the open step: its transpose is the open scalar map whose restriction is the same open unit, hence equals $d$ by the open adjunction Hom bijection. Pasting these squares by [lem-weil-pbc-mate-pasting], and cancelling $L_X(e)\\eta_{L_X}=1$ and $e_{r_X}r_X(\\eta)=1$, gives\n$$b_N=Rp_{*,\\bullet}(d_N)\\,h_{j_{!,R}N}.$$\nThese cancellations use the actual reduction/limit adjunction of the specified presentation. Thus this is the comparison specified in the question, not an identification inferred only from finite projections.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraphs (2)-(3), normalization by the compactification/limit comparisons and reconstruction counits"
+   }
+  },
+  {
+   "text": "Apply the proper step with $B=j_{!,R}M$ and the open step with $N=M$, $J=Lp_R^*K$, using $j^*Lp_R^*K\\cong Lf_R^*K$. The canonical pullback-composition comparisons are monoidal and adjunction-compatible by [lem-sfb-ringed-derived-monoidal-comparisons], so $a^j,a^p$ combine to the specified scalar tensor/pullback identification for $H$. Compose the proper equality with $Rp_{*,\\bullet}$ of the open equality. Naturality of $h$ moves $\\gamma_R$ past $h$; the reconstruction-transpose step then identifies each $Rp_{*,\\bullet}(d_N)h_{j_!N}$ with $b_N$. The result is\n$$b_H\\,r_Y(\\pi_R)=\\theta\\,(b_M\\otimes1)\\mu_{F_RM,K},$$\nwith the input tensor/pullback coordinates understood. This is the displayed square before any inverse reconstruction coordinate is introduced. It therefore does not require reconstruction invertibility or completeness.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), pasting the proper and open factor identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), parent proof steps 2-5, before descent by the completion units"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula morphism commutes with extension of scalars and reduction on ringed sites",
+   "results": "Ordinary ModuleCat extension/restriction of scalars comparisons, no derived whole-system square.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; constituent constructions are already used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction square for counit defined compact support projection transformation tensor extension of scalars on inverse systems",
+   "results": "8 hits in condensed solidification, profinite Nobeling, and internally projective condensed modules; no applicable square.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; constituent constructions are already used."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*reduction|reduction.*projection",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; constituent constructions are already used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteProjectionMateDescent",
+  "date": "2026-10-25",
+  "group": "C8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Paragraphs (2)-(3), normalized comparisons and projection descent",
+   "via": [
+    "lem-sp-complete-projection-mate-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompleteProjectionReductionSquare",
+  "file": "lean/Sheaf/Paper/CompleteProjectionReductionSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.projection_reduction_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompleteProjectionDescent.projection_reduction_square"
+  ],
+  "statement": "theorem projection_reduction_square {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (AX : SpNormalizedEquivalence l E X (m.abelian X) (m.red X)) (AZ : SpNormalizedEquivalence l E c.Z (m.abelian c.Z) (m.red c.Z)) (AY : SpNormalizedEquivalence l E Y (m.abelian Y) (m.red Y)) (M : Integral l E X) (K : Integral l E Y) (hOpen : IsIso (systemOpenInverse l E m c.i ((red l E m X).obj M) ((VaryingRing.G (rings l E) (transitions l E) c.g).obj ((red l E m Y).obj K)))) : (red l E m Y).map (ringedCompactificationProjection l E m.integral m.openIntegral c M K) ≫ reconstruction l E m c AX AZ AY (inputTensor l E m f M K) ≫ (systemImage l E c).map ((m.tensor X).hom.app (M, (ringedPull l E f).obj K) ≫ (m.systems X).closed.tensor.map (Prod.mkHom (𝟙 _) ((m.pull f).hom.app K))) = (m.tensor Y).hom.app ((integralImage l E c).obj M, K) ≫ (m.systems Y).closed.tensor.map (Prod.mkHom (reconstruction l E m c AX AZ AY M) (𝟙 _)) ≫ systemProjection l E m c ((red l E m X).obj M) ((red l E m Y).obj K) hOpen",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-98066",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T180546-L-4003932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-98066",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T180546-L-4003932",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/new modules vs clone (verbatim relocation of 22 defs with public re-export; item theorem statement byte-identical); projection_reduction_square vs stage-2 conjunct 1 multiplied by targetComparison.hom and node lem-sp-complete-projection-reduction-square; item node proof_deps vs Lean; both direct importers compiled against delivered modules"
+ }
+}

@@ -47,8 +47,37 @@ Source: Stacks Project, Tag 03EK (blueprint: lem-sp-invertible-tensor-scalar-ext
 Positive powers are left associated, with degree one equal to `M` as in the dependency. -/
 noncomputable def scalarTensorPower (R : Sheaf J CommRingCat.{u}) (M : Mod R) : ℕ → Mod R
   | 0 => 𝒪 R
+  | n + 1 => Nat.rec M (fun _ P ↦ 𝒯 P M) n
+
+/-- Tensor power at zero is the scalar unit.
+Source: Stacks 03EK (blueprint: def-sp-scalar-tensor-comparison-data). -/
+theorem scalarTensorPower_zero (R : Sheaf J CommRingCat.{u}) (M : Mod R) :
+    scalarTensorPower R M 0 = 𝒪 R := rfl
+
+/-- Tensor power at one is the original module.
+Source: Stacks 03EK (blueprint: def-sp-scalar-tensor-comparison-data). -/
+theorem scalarTensorPower_one (R : Sheaf J CommRingCat.{u}) (M : Mod R) :
+    scalarTensorPower R M 1 = M := rfl
+
+/-- Positive powers are left associated with the original module on the right.
+Source: Stacks 03EK (blueprint: def-sp-scalar-tensor-comparison-data). -/
+theorem scalarTensorPower_succ (R : Sheaf J CommRingCat.{u}) (M : Mod R) (n : ℕ) :
+    scalarTensorPower R M (n + 2) = 𝒯 (scalarTensorPower R M (n + 1)) M := rfl
+
+private noncomputable def legacyScalarTensorPower
+    (R : Sheaf J CommRingCat.{u}) (M : Mod R) : ℕ → Mod R
+  | 0 => 𝒪 R
   | 1 => M
-  | n + 2 => 𝒯 (scalarTensorPower R M (n + 1)) M
+  | n + 2 => 𝒯 (legacyScalarTensorPower R M (n + 1)) M
+
+private theorem scalarTensorPower_eq_legacy
+    (R : Sheaf J CommRingCat.{u}) (M : Mod R) :
+    ∀ n : ℕ, scalarTensorPower R M n = legacyScalarTensorPower R M n := by
+  intro n
+  induction n using Nat.twoStepInduction with
+  | zero => rfl
+  | one => rfl
+  | more n _ ih => exact congrArg (fun P ↦ (siteSheafTensorRight M).obj P) ih
 
 /-- The map on tensor powers induced by a module morphism.
 Source: Stacks Project, Tag 03EK (blueprint: lem-sp-invertible-tensor-scalar-extension). -/

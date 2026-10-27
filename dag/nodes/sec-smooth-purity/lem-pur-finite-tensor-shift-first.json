@@ -1,0 +1,161 @@
+{
+ "id": "lem-pur-finite-tensor-shift-first",
+ "kind": "statement",
+ "title": "Normalized finite tensor comparison respects its first input shift",
+ "statement": "Fix a finite coefficient setting P [def-pur-conventions], 1 <= m <= P.level, an arbitrary scheme T, and derived fixed-scalar sheaves U,V over P.Coefficient. Let F be finiteTensorReduction and sigma its adjunction-induced finiteTensorScalarShift [def-pur-finite-tensor-reduction-data], and put delta(U,V)=(finiteTensorCore.muIso U V).inv [def-pur-finite-signed-reduction-comparisons]. Write t1 and t2 for the native first- and second-variable derived tensor CommShift isomorphisms [def-weil-derived-tensor]. For every integer n, F(t1(U,V,n));sigma(n,U tensor V);delta(U,V)[n] = delta(U[n],V);(sigma(n,U) tensor 1);t1(FU,FV,n). Semicolons denote composition in application order. This assertion concerns only a shift of the first input; it does not assume a simultaneous tensor-shift compatibility.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product); more-algebra.tex Tag 0FNH, item-shift-tensor"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-signed-reduction-comparisons",
+  "def-weil-derived-tensor"
+ ],
+ "proof": [
+  {
+   "text": "For the finite coefficient setting P, level 1 <= m <= P.level and arbitrary scheme T, use flat-term K-flat representatives of both derived inputs. Apply change of rings termwise. The changed complexes remain flat-term K-flat, without assuming the coefficient quotient flat. The localization equivalence permits the following natural comparisons to descend.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); more-algebra.tex Tag 0FNH, item-shift-tensor"
+   }
+  },
+  {
+   "text": "The first-input shift is unsigned; both maps on each homogeneous summand send b tensor (x tensor y) to (b tensor x) tensor (1 tensor y). The cochain pullback tensor-shift theorem, applied to identity inverse image and the coefficient map, proves precisely this equality of cochain maps for all integers n. Equality is tested on every direct-sum summand, so no boundedness hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-cochain-pullback-tensor-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor; sites-cohomology.tex Tag 07A4"
+   }
+  },
+  {
+   "text": "The counit-normalized scalar shift descends the degreewise identity on scalar extension. Its uniqueness identifies it with the shift transported by the exact restriction adjunction used in finiteTensorScalarShift: the adjunction unit/counit equations give the same representative square. Integer iteration and inverses give this identification at every n. The derived tensor shift descent identifies each tensor shift with the native fixed tensor CommShift instance, since both have the recorded cochain normalization. The unique normalized core identifies its inverse tensorator with the descended scalar-first binary map. Localize the cochain square and conjugate by the representative isomorphisms. Naturality and essential surjectivity give the displayed one-variable square for all U and V.",
+   "uses": [
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-sbc-derived-scalar-extension-counit-shift",
+    "def-pur-finite-signed-reduction-comparisons",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product); more-algebra.tex Tag 0FNH, item-shift-tensor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-cochain-pullback-tensor-shift",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "def-pur-finite-signed-reduction-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product); more-algebra.tex Tag 0FNH, item-shift-tensor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived extension of scalars tensor comparison commutes with a shift in either input",
+   "results": "Exact functor CommShift and mapDerivedCategoryFactors shift instances; ordinary distribBaseChange. None identifies the normalized finite tensorator with its adjunction shift.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension monoidal tensor comparison commutes with tensor of shifted complexes",
+   "results": "Tor and ordinary homological-complex unitor equations; no normalized finite derived tensor square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.commShiftIso",
+   "results": "General shift commutation API; no theorem about finiteTensorCore.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift.*[Mm]onoidal|[Mm]onoidal.*commShift",
+   "results": "0 hits in remote Mathlib grep. Local searches found no specialized finite scalar tensor square. Source ShiftComparison gives commShift_of_tensorLeft_fac and commShift_of_tensorRight_fac, requiring homotopy comparison normalization. PullbackTensorCanonicalShiftUnit concerns intrinsic ringed-site tensor and an existential normalized shift, requiring identification with the fixed-scalar instances here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorShiftCoherence",
+  "date": "2026-10-26",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2: compatibility with pullback and invertible twist from associativity of derived tensor; expanded parent Step 6: signed integer shifts",
+   "via": [
+    "lem-pur-finite-tensor-shift-coherence",
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorShiftFirst",
+  "file": "lean/Sheaf/Paper/FiniteTensorShiftFirst.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorShiftFirst",
+  "statement": "theorem finiteTensorShiftFirst (P : PurityFiniteSetting.{u}) (m : ℕ) (hm : 1 ≤ m)\n    (hmn : m ≤ P.level) (T : Scheme.{u})\n    (U V : _root_.DerivedCategory\n      (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient))) (n : ℤ) :\n    (P.finiteTensorReduction m hm hmn T).map\n        ((((curriedTensor _).flip.obj V).commShiftIso n).hom.app U) ≫\n      (P.finiteTensorScalarShift m hm hmn T n).hom.app (U ⊗ V) ≫\n      ((P.finiteTensorCore m hm hmn T).μIso U V).inv⟦n⟧' =\n    ((P.finiteTensorCore m hm hmn T).μIso (U⟦n⟧) V).inv ≫\n      ((P.finiteTensorScalarShift m hm hmn T n).hom.app U) ▷\n        (P.finiteTensorReduction m hm hmn T).obj V ≫\n      ((((curriedTensor _).flip.obj\n          ((P.finiteTensorReduction m hm hmn T).obj V)).commShiftIso n).hom.app\n        ((P.finiteTensorReduction m hm hmn T).obj U))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261025T180911-L-4049651",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261025T180911-L-4049651",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

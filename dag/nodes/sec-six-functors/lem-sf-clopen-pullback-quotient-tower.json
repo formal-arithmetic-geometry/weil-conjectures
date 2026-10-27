@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-clopen-pullback-quotient-tower",
+ "kind": "statement",
+ "title": "Clopen restriction identifies the strict quotient and finite pullback towers",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme V, and a clopen open U of V. Use the global completed-integral quotient tower of [def-pur-integral-derived-operations], normalized ordinary complex restriction of [def-pur-open-completed-restriction-data], and the actual finite pullback tower of [def-a1-integral-finite-pullback-tower]. Restricting the quotient tower termwise is naturally isomorphic to the strict finite pullback tower along U to V. This is a natural isomorphism on all unbounded complexes, before forming any product or Roos complex and before derived localization; no prime invertibility, completeness, boundedness or constructibility is assumed.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-pur-integral-derived-operations",
+  "def-pur-open-completed-restriction-data",
+  "def-a1-integral-finite-pullback-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module (Tag 03D2), lemma-adjoint-pullback-pushforward-modules (Tag 03D7), lemma-push-pull-composition-modules (Tag 03D8), lemma-tensor-product-pullback (Tag 03EL); sites-cohomology.tex, Tag 06YY. Step 1 of lem-fix-clopen-integral-completion-restriction."
+ },
+ "proof": [
+  {
+   "text": "Use the proved normalized ordinary restriction/ambient pullback comparison, obtained by transposing the finite and completed coefficient isomorphisms under the site adjunction and applying module adjoint uniqueness.",
+   "uses": [
+    "lem-sf-clopen-ordinary-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use sf_clopen_coefficient_comparison and lift its ring isomorphisms through the fully faithful CommRing-to-Ring sheaf functor. Constant normalization and projection uniqueness identify the lifted datum with OpenCompletedRestriction.coefficients. Thus ordinarySfIso identifies the two existing ordinary restriction presentations.",
+   "uses": [
+    "lem-sf-clopen-coefficient-comparison",
+    "def-pur-open-completed-restriction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved strict scalar quotient tower comparison, whose naturality and transitions are checked on sheafified pure tensors.",
+   "uses": [
+    "lem-sf-clopen-scalar-quotient-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use IntegralOnSlice.globalTower_eq on both schemes and ordinarySfIso termwise to transport the strict quotient comparison to the specified global slice towers. Compose with ordinaryPullIso termwise and the already proved normalized IntegralAmbient.pullTowerModel. This gives the asserted strict pullback tower isomorphism before products, Roos cones or derived localization.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-normalized-integral-pullback-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-clopen-ordinary-pullback-comparison",
+  "lem-sf-clopen-coefficient-comparison",
+  "def-pur-open-completed-restriction-data",
+  "lem-sf-clopen-scalar-quotient-tower",
+  "def-pur-integral-derived-operations",
+  "lem-pur-normalized-integral-pullback-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-pullback-module (Tag 03D2), lemma-adjoint-pullback-pushforward-modules (Tag 03D7), lemma-push-pull-composition-modules (Tag 03D8), lemma-tensor-product-pullback (Tag 03EL); sites-cohomology.tex, Tag 06YY. Step 1 of lem-fix-clopen-integral-completion-restriction.",
+  "note": "J6 proves this strict-tower part from the existing normalized ambient pullback and clopen scalar quotient declarations; no new sorry is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a clopen subscheme commutes with the strict quotient tower of integral sheaves and identifies finite pullback",
+   "results": "Eight hits including Scheme.Opens.toScheme, IsIntegralHom.instMorphismRestrict, morphismRestrict and Scheme.restrictRestrictComm. None concerns the specified pro-etale module towers.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve hits including leftAdjointUniq, homEquiv_leftAdjointUniq_hom_app and unit_leftAdjointUniq_hom_app in Mathlib.CategoryTheory.Adjunction.Unique.",
+   "date": "2026-10-27",
+   "verdict": "Use leftAdjointUniq for ordinary module restriction; the whole strict tower is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*restrict|restrict.*quotient|pushforwardPushforwardAdj|leftAdjointUniq in Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean and Mathlib/CategoryTheory/Adjunction/Unique.lean; strict quotient restriction in dag/nodes and the latest blueprint",
+   "results": "Mathlib supplies pushforwardPushforwardAdj and adjoint uniqueness. The project supplies NormalizedIntegralPullbackTower and SfClopenScalarQuotientComparison. No existing node states their clopen strict-tower assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing generic and project lemmas; prove the coefficient normalization, naturality and transition assembly here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClopenIntegralCompletionRestriction",
+  "date": "2026-10-27",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Restriction/composition substep of the ordinary-to-completed tensor comparison, through the common-chart refinement; strict finite tower portion of step 1 of lem-fix-clopen-integral-completion-restriction.",
+   "via": [
+    "lem-fix-clopen-integral-completion-restriction",
+    "lem-fix-clopen-completed-restriction-comparison",
+    "lem-fix-clopen-projective-chart-common-refinement",
+    "lem-fix-constructible-projective-chart-refinement",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClopenPullbackQuotientTower",
+  "file": "lean/Sheaf/Paper/ClopenPullbackQuotientTower.lean",
+  "declaration": "WeilConjectures.clopenPullbackQuotientTower",
+  "statement": "theorem clopenPullbackQuotientTower\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (V : Scheme.{u}) (U : V.Opens) (hU : IsClosed (U : Set V)) :\n    Nonempty (IntegralOnSlice.tower l E V none ⋙\n      (Functor.whiskeringRight ℕᵒᵖ (IntegralOnSlice.Cx l E V none)\n        (IntegralOnSlice.Cx l E U.toScheme none)).obj\n          (OpenCompletedRestriction.complexRestriction l E U.ι) ≅\n      integralOperationsPullbackTowerFunctor l E U.ι)",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.ClopenIntegralCompletionRestriction",
+  "worker": "stage3",
+  "summary": "Proved strict-tower support lemma, with tensor-generator naturality and transition coherence; adds no hole.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-normalized-integral-pullback-tower",
+    "why": "Generic normalized scalar-association comparison for ambient pullback, specialized to the clopen inclusion; it does not replace the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T094428-L-224781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T094428-L-224781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

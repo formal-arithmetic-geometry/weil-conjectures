@@ -1,0 +1,153 @@
+{
+ "id": "lem-zl-bertini-product-coordinate-relations",
+ "kind": "statement",
+ "title": "Explicit ideal-coordinate products: vanishing, coverage and ratio relations",
+ "statement": "Let i:Z → Y be a closed immersion of schemes with ideal I, let S be a scheme, L an invertible module on Y, r ≤ n natural numbers, and sigma a global generating family of I tensor L^(n-r) [def-weil-pbc-scheme-conventions, def-weil-closed-immersion, def-sbc-closed-immersion-ideal-sheaf, def-sc-invertible-module, def-weil-pbc-generating-sections, def-pur-sheaf-tensor-product]. Let B be any coordinate type, j:Y → P(B;S), and e:j^* O(1) ≅ L^r [def-nagata-projective-space-base-change, def-pc-projective-space-twist, def-pc-module-pullback]. Put U=Y minus support(I). Let alpha_a be the image of sigma_a under I tensor L^(n-r) → L^(n-r), let beta_b=e(j^*T_b), let v_ab be alpha_a tensor beta_b transported by L^(n-r) tensor L^r ≅ L^n, and w_ab its canonical pullback to U. Then (1) every v_ab restricts to zero on Z; (2) at every point of U some w_ab is a local free generator; (3) the generating locus D(w_ab) [def-sc-section-generating-locus] lies over the b-th standard chart of j|_U, and on that locus w_ac=(j|_U)^*(T_c/T_b) w_ab for every c. There is no finiteness assumption on B and no immersion assumption on j.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-sc-section-generating-locus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD5, lemma-generate-over-complement, proof of the claim and the displayed product fractions"
+ },
+ "proof": [
+  {
+   "text": "Let U be the complement of the support of the closed immersion ideal. The ideal inclusion restricts to an isomorphism on U, and tensoring preserves this isomorphism. Thus the map from the free sheaf of the given ideal-twist generating sections to L^(n-r) is epic on U. Since L^(n-r) is invertible, some component generates at each point: in a rank-one local trivialization the coefficients generate the local ring, so not all lie in its maximal ideal. This is the existing exists_generatesAt_of_epi interface.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-pbc-generating-sections",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write alpha_a for these image sections and beta_b for the coordinate sections transported through the given isomorphism. The projective pair chart formulas identify the generating locus of beta_b with the inverse image of the b-th standard open. The standard opens cover, so at every point of U some alpha_a and some beta_b generate. In local bases write these sections as A times a basis and B times a basis; their tensor product has coefficient AB, which is a unit exactly when both A and B are units. Transport through the tensor-power isomorphism and pull back to U. The unit-preserving comparison of the two pullback adjunctions and nonvanishing_tensorPullback show that the resulting products generate at the same points.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-projective-pair-generating-locus",
+    "lem-sc-nonvanishing-iff-generates-at",
+    "lem-sc-nonvanishing-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each product construct its ideal-valued preimage explicitly: tensor the ideal-twist generator with beta_b, apply the associator to obtain I tensor (L^(n-r) tensor L^r), then apply I tensor E, where E identifies these powers with L^n. Naturality of the ideal inclusion and of the left unitor identifies its image with the prescribed product. The ideal-tensor restriction-kernel theorem, compared with canonical pullback through uniqueness of left adjoints, makes its restriction to Z zero.",
+   "uses": [
+    "lem-sc-closed-immersion-ideal-tensor-sections",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If a restricted product generates, the local-coefficient product criterion shows beta_b generates, hence its point lies over the b-th projective chart. On that chart beta_c equals the pulled-back ratio T_c/T_b times beta_b. Tensor this equation with alpha_a, transport through E, then pull back to U. Naturality of the adjunction unit under restriction and scalar multiplication gives the stated equation on the product generating locus. This proof needs neither finite coordinate types nor a field, and empty schemes and empty coordinate types are covered by the same cover argument.",
+   "uses": [
+    "lem-weil-pbc-projective-pair-chart-relation",
+    "lem-weil-pbc-projective-pair-generating-locus",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-generating-sections",
+  "def-sc-invertible-module",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-pair-generating-locus",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-sc-closed-immersion-ideal-tensor-sections",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-projective-pair-chart-relation",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0FD5, lemma-generate-over-complement, proof of the claim and the displayed product fractions"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.BertiniImmersionAux",
+  "date": "2026-10-26",
+  "group": "M8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Tag 0FD5 product sections in the immersive-system argument: vanishing on the closed subscheme, coverage off it, and cancellation in the displayed fractions",
+   "via": [
+    "lem-zl-bertini-product-system-immersion",
+    "lem-zl-bertini-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Products of ideal twist generators with projective coordinate sections vanish on the closed subscheme and their ratios equal the original projective coordinate ratios",
+   "results": "Elliptic-curve coordinate ratios and generic Proj ideal interfaces; no theorem combines ideal multiplication, local generation and the prescribed projective ratios.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.tmulSection",
+   "results": "No Mathlib match; the section tensor API is project source code.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tmulSection|ideal_image_tensor|nonvanishing_tensor in Mathlib and project sources; product sections in the blueprint",
+   "results": "No Mathlib theorem. The project has private ideal_image_tensor and nonvanishing_tensor proofs, and public nonvanishing_tensorPullback and projective-pair chart formulas; these are used in the proof. Blueprint search found no duplicate.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.BertiniProductCoordinates",
+  "file": "lean/Sheaf/DeligneLaumon/BertiniProductCoordinates.lean",
+  "declaration": "AlgebraicGeometry.bertini_product_coordinate_relations",
+  "statement": "theorem bertini_product_coordinate_relations\n    {Y Z S : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (L : Y.Modules) [L.IsInvertible] (n r : ℕ) (hrn : r ≤ n)\n    (σ : SheafOfModules.GeneratingSections (i.ker.toModules ⊗ₘ L.tensorPow (n - r)))\n    (B : Type u) (j : Y ⟶ ℙ(B; S))\n    (e : ProjectiveSpace.twistRestrict j 1 ≅ L.tensorPow r) :\n    let U : Y.Opens := i.ker.support.compl\n    let N := (Scheme.Modules.pullback U.ι).obj (L.tensorPow n)\n    let μ : i.ker.toModules ⊗ₘ L.tensorPow (n - r) ⟶ L.tensorPow (n - r) :=\n      i.ker.toModulesι ▷ L.tensorPow (n - r) ≫ (λ_ _).hom\n    let E : L.tensorPow (n - r) ⊗ₘ L.tensorPow r ≅ L.tensorPow n :=\n      (L.tensorPowAddIso (n - r) r).symm ≪≫\n        eqToIso (congrArg L.tensorPow (Nat.sub_add_cancel hrn))\n    let v : σ.I → B → Γ(L.tensorPow n, ⊤) := fun a b ↦ E.hom.app ⊤\n      (tmulSection (μ.app ⊤ ((σ.s a).val (op ⊤)))\n        (e.hom.app ⊤ (pullbackSection j (ProjectiveSpace.twistOneSection B S b))))\n    let w : σ.I → B → Γ(N, ⊤) := fun a b ↦ pullbackΓ U.ι (L.tensorPow n) (v a b)\n    (∀ a b, pullbackΓ i (L.tensorPow n) (v a b) = 0) ∧\n      (∀ x : U, ∃ a b, GeneratesAt (w a b) x) ∧\n      ∀ a b, ∃ hle : generatingLocus (w a b) ≤\n          (U.ι ≫ j) ⁻¹ᵁ ProjectiveSpace.standardOpen B S b,\n        ∀ c, N.presheaf.map (homOfLE\n          (le_top : generatingLocus (w a b) ≤ ⊤)).op (w a c) =\n            (U.ι ≫ j).appLE (ProjectiveSpace.standardOpen B S b)\n              (generatingLocus (w a b)) hle (ProjectiveSpace.coordRatio B S b c) •\n              N.presheaf.map (homOfLE\n                (le_top : generatingLocus (w a b) ≤ ⊤)).op (w a b)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261026T092049-L-3398262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261026T092049-L-3398262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

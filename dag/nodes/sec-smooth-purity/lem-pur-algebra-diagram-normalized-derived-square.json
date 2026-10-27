@@ -1,0 +1,101 @@
+{
+ "id": "lem-pur-algebra-diagram-normalized-derived-square",
+ "kind": "statement",
+ "title": "Existence and uniqueness of a normalized derived comparison",
+ "statement": "For additive functors F and G and exact horizontal functors x and y between abelian categories with chosen derived categories and K-injective resolutions, an ordinary isomorphism F followed by y to x followed by G induces a unique unit-normalized derived comparison isomorphism, provided G has invertible derived unit on x applied to every K-injective complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6E, normalized diagram direct image and derived composition."
+ },
+ "stmt_deps": [
+  "def-pur-algebra-diagram-normalization-interface"
+ ],
+ "proof": [
+  {
+   "text": "Apply derivedCoefficientComparison with the canonical right-derived units. These units satisfy the universal derived-functor property and are invertible on K-injectives. The acyclicity hypothesis supplies invertibility for the restricted target unit. Cancel the exact localization factorization isomorphisms to convert the universal-property equation into the displayed canonical normalization. Uniqueness is preserved by that conversion.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-diagram-ring-restriction-pushforward"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The ordinary and derived normalization parts of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of modules over a diagram of sheaf algebras commutes with geometric module direct image and its inverse-image adjunction",
+   "results": "No directly applicable library declaration; componentwise transport and induced module functors supply the construction.",
+   "date": "2026-10-25",
+   "verdict": "Construct normalized ordinary comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"counit\"",
+   "results": "CategoryTheory.mateEquiv_counit and mateEquiv_counit_symm.",
+   "date": "2026-10-25",
+   "verdict": "Used to normalize the inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans.*(comp|fac)|mateEquiv_counit",
+   "results": "Mathlib adjunction-mates and right-derived natural-transformation APIs.",
+   "date": "2026-10-25",
+   "verdict": "Use these APIs with the concrete module comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.AlgebraDiagramEvaluationAdjunctionNormalization",
+  "date": "2026-10-25",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+   "place": "Coherence of already constructed normalized derived comparisons"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramComparisonTools",
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramComparisonTools.lean",
+  "declaration": "CategoryTheory.algebraDiagramNormalizedDerivedSquare",
+  "statement": "theorem algebraDiagramNormalizedDerivedSquare\n    (hG : ∀ I : CochainComplex A ℤ, I.IsKInjective →\n      IsIso (G.rightDerivedFunctorUnitQ ((x.mapHomologicalComplex (.up ℤ)).obj I)))\n    (c : F ⋙ y ≅ x ⋙ G) :\n    ∃! b : F.rightDerivedFunctor ⋙ y.mapDerivedCategory ≅\n        x.mapDerivedCategory ⋙ G.rightDerivedFunctor,\n      AlgebraDiagramDerivedSquareNormalized F G x y c b",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "independent cc review: dda572889e4d vs passed delivery 983832b9a42f (diff -r: only module/node rename + one local irreducible attr) and vs clone original module/node (Defs interface line-diffed; item node field-diffed: only lean/proof/proof_deps/proof_origin); 0 importers by grep"
+ }
+}

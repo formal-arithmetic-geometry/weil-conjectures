@@ -258,5 +258,80 @@
    "AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme"
   ]
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+    "AlgebraicGeometry.ProEtale.laxMonoidal_pointLowerStar",
+    "AlgebraicGeometry.ProEtale.oplaxMonoidal_pointUpperStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_η_pointUpperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      419,
+      422
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.laxMonoidal_pointLowerStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      410,
+      413
+     ],
+     "kind": "instance",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.oplaxMonoidal_pointUpperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      415,
+      417
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Give $\\Sh(*_{\\mathrm{proét}},\\Ab)$ and $\\Sh((\\Spec\\Z)_{\\mathrm{proét}},\\Ab)$\nthe tensor products of [lem-weil-pbc-sheaf-tensor-closed], whose units are the\nconstant sheaves $\\Z$. The functor $p_*$ is lax monoidal. By the adjunction\n[def-sfb-point-adjunction], $p^*$ is therefore oplax monoidal. Its unit\ncomparison morphism $p^*\\Z\\to\\Z$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "$p_*$ is lax monoidal because restriction along $u$ commutes with the\nobjectwise tensor product and is compatible with sheafification.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the unit, the constant sheaf $\\Z$ is the sheafification of the constant\npresheaf $\\Z$. Moreover, $\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}}$\ninverts sheafification, since both sides are left adjoint to restriction of\nsheaves. So it suffices to compute $\\operatorname{Lan}_{u^{\\mathrm{op}}}$ of\nthe constant presheaf.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "At $V$, this Kan extension is the colimit of the constant diagram $\\Z$ over\nthe opposite of the category of pairs $(S,\\ V\\to u(S))$. That category is\nnonempty: take the one-point set and $V\\to\\Spec\\Z$. It is cofiltered,\nbecause $u$ preserves finite limits\n([lem-sfb-profinite-to-proetale-finite-limits]), and hence connected. So the\ncolimit is $\\Z$. The comparison map is therefore the identity of the\nconstant presheaf, and it remains an isomorphism after sheafification.",
+    "uses": [
+     "lem-sfb-profinite-to-proetale-finite-limits"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

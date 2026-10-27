@@ -1,0 +1,82 @@
+{
+ "id": "sk-r-linear-library",
+ "kind": "statement",
+ "title": "Tensor and exterior powers of filtered representations",
+ "statement": "Suppose $V$ and $V'$ have composition factors $A_1,\\ldots,A_t$ and\n$B_1,\\ldots,B_u$. There is a $W$-stable filtration of $V\\otimes V'$ with\ngraded pieces $A_a\\otimes B_b$, one for each pair $(a,b)$. There is a\n$W$-stable filtration of $\\bigwedge^rV$ with graded pieces\n\n$$\n\\bigotimes_{a=1}^t\\bigwedge\\nolimits^{n_a}A_a,\n\\qquad 0\\le n_a\\le\\dim A_a,\\qquad\\sum_an_a=r.\n$$\n\nThe simple factors of $V\\otimes V'$ and $\\bigwedge^rV$, counted with\nmultiplicity, are those of the respective graded pieces. Every displayed\nexterior-power piece is nonzero.\n\n*Complement.* Composition series exist, and the multiset of their simple\nfactors does not depend on the series (Jordan–Hölder); in particular these\nmultisets do not change when $V$ and $V'$ are replaced by their\nsemisimplifications. The dual of a filtered representation carries the\ndual filtration, with the duals of the graded pieces. Schur's lemma: an\nendomorphism of a simple representation commuting with the action is zero\nor invertible, and over $\\overline{\\mathbf Q}_\\ell$ it is a scalar; in\nparticular an invertible central element acts on a simple representation\nby a nonzero scalar.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/_section.md",
+  "place": "node sk-r-linear-library, order 3755"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For the tensor product, we first filter by the filtration on $V$, and then\nfilter each quotient $A_a\\otimes V'$ by the filtration on $V'$. Since\ntensoring over a field is exact, the quotients are as asserted.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "For the exterior power, lift bases of the $A_a$ to a basis of $V$ adapted\nto its filtration. A wedge of basis vectors determines a tuple $(n_a)$, by\ncounting how many vectors it uses from each lifted basis. The action is\nblock upper triangular, in the sense that each term of the image of a\nbasis wedge either has the same tuple or has one index replaced by a\nsmaller one. Choose a total order on the tuples compatible with these\nmoves. Then the spans of the initial segments of basis wedges form a\nstable filtration, and on the quotient indexed by $(n_a)$ the diagonal\nblocks act as on $\\bigotimes_a\\bigwedge^{n_a}A_a$. This space has dimension\n$\\prod_a\\binom{\\dim A_a}{n_a}>0$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Composition series exist by induction on dimension, and their multisets of\nsimple factors do not depend on the series. To see this, let $V_i$ and\n$W_j$ be two filtrations, and refine the first by $V_{i-1}+(V_i\\cap W_j)$\nand the second by $W_{j-1}+(W_j\\cap V_i)$. The two quotients indexed by\n$(i,j)$ are both naturally isomorphic to\n\n$$\n\\frac{V_i\\cap W_j}{(V_{i-1}\\cap W_j)+(V_i\\cap W_{j-1})}\n$$\n\nby the isomorphism $(U+V)/V\\simeq U/(U\\cap V)$. Applied to two composition\nseries, this refinement proves the Jordan–Hölder assertion. Applied to a\ncomposition series and to the tensor or exterior filtration, it proves the\nstatement about simple factors. In particular, these multisets do not\nchange when $V$ and $V'$ are replaced by their Weil semisimplifications.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The dual filtration is handled by the inverse transpose of a\nblock-triangular matrix. For Schur's lemma, kernel and image of a\ncommuting endomorphism are stable, hence trivial or everything; over the\nalgebraically closed field an eigenvalue $c$ of such an endomorphism gives\na nonzero stable eigenspace, which is the whole space.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [
+  "sk-i-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-algebraic-groups-lie-algebras/sk-r-linear-library/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 3755,
+ "blueprint_uses": [
+  "sk-i-restriction"
+ ],
+ "blueprint_lean": [
+  "CompositionSeries.jordan_holder",
+  "Representation.IsIrreducible.bijective_or_eq_zero",
+  "Representation.IsIrreducible.algebraMap_intertwiningMap_bijective_of_isAlgClosed",
+  "Subrepresentation.exists_subquotient_tprod_equiv"
+ ],
+ "blueprint_lean_not_found": [
+  "CompositionSeries.jordan_holder",
+  "Representation.IsIrreducible.bijective_or_eq_zero",
+  "Representation.IsIrreducible.algebraMap_intertwiningMap_bijective_of_isAlgClosed",
+  "Subrepresentation.exists_subquotient_tprod_equiv"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-i-restriction"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "sk-r-linear-library",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-r-linear-library"
+}

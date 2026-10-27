@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-two-term-cofactor-naturality",
+ "kind": "statement",
+ "title": "Cofactor maps are natural for derived isomorphisms of two-term projective complexes",
+ "statement": "Let $A$ be a commutative ring. Let $E=[P\\xrightarrow{u}Q]$ be a complex in degrees $-1,0$ of finite projective $A$-modules [def-weil-pbc-projective-module], with ranks $c,c+1$ at every prime, where $c\\geq0$. Put $D(E)=(\\bigwedge^c P)^\\vee\\otimes_A\\bigwedge^{c+1}Q$, where $V^\\vee=\\operatorname{Hom}_A(V,A)$ and exterior powers are [def-weil-pbc-exterior-algebra]. Define $w_E:\\operatorname{coker}(u)\\to D(E)$ by the following local formula: for a basis $p_1,\\ldots,p_c$ of $P$ and a lift $v\\in Q$ of $\\bar v\\in\\operatorname{coker}(u)$, its value is $(p_1\\wedge\\cdots\\wedge p_c)^\\vee\\otimes(u(p_1)\\wedge\\cdots\\wedge u(p_c)\\wedge v)$. This formula is independent of the basis and lift and defines an $A$-linear map. Let $E'=[P'\\to Q']$ be another such complex, of ranks $c',c'+1$, and let $a:E\\xrightarrow{\\sim}E'$ be an isomorphism in the derived category of $A$-modules [def-weil-abstract-derived-category]. Use the determinant comparison $D(a):D(E)\\xrightarrow{\\sim}D(E')$ of [lem-trf-two-term-perfect-determinant] on $\\operatorname{Spec}A$, normalized affine locally by the kernel-first exact-sequence construction: for a degreewise surjective quasi-isomorphism, use bases of the kernel followed by lifts of bases of the quotient in both degrees, and trivialize the determinant of the acyclic kernel by its differential. Then $D(a)\\circ w_E=w_{E'}\\circ H^0(a)$, with $H^0(E)=\\operatorname{coker}(u)$ and $H^0(E')=\\operatorname{coker}(u')$. No injectivity of $u$ or $u'$, and no regularity or reducedness of $A$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula; more-algebra.tex Tag 0FJM (lemma-determinant-two-term-complexes), kernel-first surjective comparison and good diagrams; perfect.tex Tags 0FJX and 0FJY. Agent-formulated algebraic naturality statement, not a claim that these tags state it verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-abstract-derived-category",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-trf-surjective-two-term-determinant-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-cofactor-local-descent] to $u$ and $u'$. Its unique maps have exactly the stipulated local formula, so these are $w_E,w_{E'}$, including basis/lift independence and linearity. It also supplies the localization identifications used below.",
+   "uses": [
+    "lem-sfb-cofactor-local-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula and omitted well-definedness check; algebra.tex Tag 00NX (lemma-finite-projective), Tag 00EK (lemma-cover-module), Tags 00DM and 0C6F. Agent-formulated construction for arbitrary differentials, without the source sequence injectivity hypothesis."
+   }
+  },
+  {
+   "text": "Now let $a:E\\xrightarrow{\\sim}E'$ be the given derived isomorphism. Both complexes are bounded above with projective terms, hence K-projective by the bounded-projective theorem. The K-projective Hom bijection represents $a$ by a chain map $f:E\\to E'$. Since cohomology factors through the derived category and $a$ is invertible, every $H^i(f)$ is an isomorphism; thus $f$ is a quasi-isomorphism. These statements use the ordinary derived category of modules, with no restriction on the ring or on the kernels of $u,u'$.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "lem-coef-kprojective-derived-hom-bijection",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B (lemma-morphisms-from-projective-complex); K-projectivity and the Hom bijection supplied by the two cited Mathlib leaves."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-good-two-term-surjective-diagrams] to this chain quasi-isomorphism $f$. Choose a finite free surjection $\\pi:F=A^n\\to P'$. The cited statement gives $M=[P\\oplus F\\xrightarrow{u\\oplus1}Q\\oplus F]$ and degreewise surjective quasi-isomorphisms $b:M\\to E$, $t:M\\to E'$ with $t\\simeq fb$. Consequently $t=ab$ in the derived category. The ranks of $M$ are $c+n,c+n+1$; thus the construction of step 1 also gives $w_M$.",
+   "uses": [
+    "lem-trf-good-two-term-surjective-diagrams",
+    "lem-sfb-cofactor-local-descent",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM (lemma-determinant-two-term-complexes), explicit good-diagram existence construction"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-surjective-cofactor-compatibility] to $b$ and $t$: it gives $T_bw_M=w_EH^0(b)$ and $T_tw_M=w_{E'}H^0(t)$. The normalization fixed in the statement identifies $T_b=D(b)$ and $T_t=D(t)$. Determinant functoriality gives $D(t)=D(a)D(b)$; cohomology functoriality gives $H^0(t)=H^0(a)H^0(b)$. Therefore $D(a)w_EH^0(b)=D(t)w_M=w_{E'}H^0(a)H^0(b)$. Since $H^0(b)$ is invertible, cancel it on the right to obtain $D(a)w_E=w_{E'}H^0(a)$.",
+   "uses": [
+    "lem-sfb-surjective-cofactor-compatibility",
+    "lem-trf-two-term-perfect-determinant",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, kernel-first good-diagram determinant and composition; perfect.tex Tags 0FJX and 0FJY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cofactor-local-descent",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "def-weil-abstract-derived-category",
+  "lem-trf-good-two-term-surjective-diagrams",
+  "lem-sfb-surjective-cofactor-compatibility",
+  "lem-trf-two-term-perfect-determinant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJM (lemma-determinant-two-term-complexes), good diagrams, assembled with local cofactor construction from duality.tex Tag 0E9Y"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coker.*determinant|determinant.*coker|quasiIso.*exterior|exterior.*quasiIso",
+   "results": "{\"t\": \"2026-10-22T04:23:12Z\", \"tool\": \"grep\", \"query\": \"coker.*determinant|determinant.*coker|quasiIso.*exterior|exterior.*quasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern individual exterior powers, square determinants/Cramer maps, or homology isomorphisms. None compares the cofactor map with determinant maps of derived isomorphisms between two-term complexes. Read Matrix.cramer (Mathlib/LinearAlgebra/Matrix/Adjugate.lean:94), Matrix.detRowAlternating (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:55), and exteriorPower.alternatingMapToDual_apply_ιMulti (Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57). Their statements do not supply that compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant evaluation map from H0 of a two term projective complex of rank one to its determinant is invariant under quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-22T04:23:13Z\", \"tool\": \"leansearch\", \"query\": \"The determinant evaluation map from H0 of a two term projective complex of rank one to its determinant is invariant under quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isoOfQuasiIsoAt.congr_simp\", \"isoOfQuasiIsoAt_inv_hom_id_assoc\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"CategoryTheory.ShortComplex.QuasiIso.isIso'\", \"isoOfQuasiIsoAt_hom_inv_id\", \"CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology\", \"CategoryTheory.ShortComplex.QuasiIso.casesOn\", \"instIsIsoHomologyMapOfQuasiIsoAt\"], \"digest\": \"cf3f523b30329afb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern individual exterior powers, square determinants/Cramer maps, or homology isomorphisms. None compares the cofactor map with determinant maps of derived isomorphisms between two-term complexes. Read Matrix.cramer (Mathlib/LinearAlgebra/Matrix/Adjugate.lean:94), Matrix.detRowAlternating (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:55), and exteriorPower.alternatingMapToDual_apply_ιMulti (Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57). Their statements do not supply that compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ExteriorPower\", \"coker\"",
+   "results": "{\"t\": \"2026-10-22T04:23:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"ExteriorPower\\\", \\\"coker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern individual exterior powers, square determinants/Cramer maps, or homology isomorphisms. None compares the cofactor map with determinant maps of derived isomorphisms between two-term complexes. Read Matrix.cramer (Mathlib/LinearAlgebra/Matrix/Adjugate.lean:94), Matrix.detRowAlternating (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:55), and exteriorPower.alternatingMapToDual_apply_ιMulti (Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57). Their statements do not supply that compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "determinant|detLine|determinantFunctor",
+   "results": "{\"t\": \"2026-10-22T04:23:21Z\", \"tool\": \"grep\", \"query\": \"determinant|detLine|determinantFunctor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern individual exterior powers, square determinants/Cramer maps, or homology isomorphisms. None compares the cofactor map with determinant maps of derived isomorphisms between two-term complexes. Read Matrix.cramer (Mathlib/LinearAlgebra/Matrix/Adjugate.lean:94), Matrix.detRowAlternating (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:55), and exteriorPower.alternatingMapToDual_apply_ιMulti (Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57). Their statements do not supply that compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a two term complex of finite projective modules with virtual rank one, the wedge of its differential gives a map from its cokernel to its determinant line, natural under quasi-isomorphisms",
+   "results": "{\"t\": \"2026-10-22T04:23:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a two term complex of finite projective modules with virtual rank one, the wedge of its differential gives a map from its cokernel to its determinant line, natural under quasi-isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SnakeLemma.δ\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"ModuleCat.exteriorPower.functor\", \"ModuleCat.exteriorPower.iso₁_hom_naturality\", \"CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom_apply\", \"CategoryTheory.ShortComplex.moduleCatOpcyclesIso\", \"CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom\"], \"digest\": \"08ca775724ec59d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern individual exterior powers, square determinants/Cramer maps, or homology isomorphisms. None compares the cofactor map with determinant maps of derived isomorphisms between two-term complexes. Read Matrix.cramer (Mathlib/LinearAlgebra/Matrix/Adjugate.lean:94), Matrix.detRowAlternating (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:55), and exteriorPower.alternatingMapToDual_apply_ιMulti (Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57). Their statements do not supply that compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cofactor wedge map cokernel of rectangular matrix to top exterior determinant, invariant under adding a contractible identity complex",
+   "results": "{\"t\": \"2026-10-22T04:23:31Z\", \"tool\": \"leanfinder\", \"query\": \"Cofactor wedge map cokernel of rectangular matrix to top exterior determinant, invariant under adding a contractible identity complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.cramer\", \"Matrix.detRowAlternating\", \"LinearMap.detAux\", \"LinearMap.detAux_def\", \"exteriorPower.alternatingMapToDual_apply_ιMulti\", \"Module.Basis.det\", \"exteriorPower.pairingDual_ιMulti_ιMulti\", \"Matrix.cramer_is_linear\"], \"digest\": \"1c43912f1489e211\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern individual exterior powers, square determinants/Cramer maps, or homology isomorphisms. None compares the cofactor map with determinant maps of derived isomorphisms between two-term complexes. Read Matrix.cramer (Mathlib/LinearAlgebra/Matrix/Adjugate.lean:94), Matrix.detRowAlternating (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean:55), and exteriorPower.alternatingMapToDual_apply_ιMulti (Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:57). Their statements do not supply that compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor|determinantLine|determinantFunctor|coker.*exterior|exterior.*quasiIso",
+   "results": "{\"t\": \"2026-10-22T04:40:20Z\", \"tool\": \"grep\", \"query\": \"cofactor|determinantLine|determinantFunctor|coker.*exterior|exterior.*quasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Matrix/Adjugate.lean\", \"Mathlib/LinearAlgebra/Vandermonde.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\"], \"digest\": \"f97b8c2e48df0329\"} Read Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean:25,33,37 (cofactorLinear, cofactorToLeft, cofactorToLeft_ιMulti_cons): these extract the left summand from a top wedge of M × N with N free, and do not compare cokernel cofactor maps under derived isomorphisms. Matrix.cramer at Mathlib/LinearAlgebra/Matrix/Adjugate.lean:94 is a square-matrix Cramer map.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofactor map from cokernel to determinant of two term projective complex is natural under quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-22T04:40:20Z\", \"tool\": \"leansearch\", \"query\": \"Cofactor map from cokernel to determinant of two term projective complex is natural under quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HomotopyCategory.quotient_map_mem_quasiIso_iff\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"HomologicalComplexUpToQuasiIso.homologyFunctorFactors\", \"HomologicalComplexUpToQuasiIso.homologyFunctorFactorsh\", \"CategoryTheory.ShortComplex.RightHomologyMapData.ofIsColimitCokernelCofork_φQ\", \"QuasiIso\"], \"digest\": \"935a26f835503a4f\"} Hits describe homology/cokernel identifications, naturality of the first exterior power, or homotopy-cofiber identities; none states determinant-line cofactor compatibility for quasi-isomorphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"coker\"",
+   "results": "{\"t\": \"2026-10-22T04:40:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"exteriorPower\\\", \\\"coker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cofactor wedge map from the cokernel of a two term finite projective complex of virtual rank one to its determinant line commutes with derived isomorphisms",
+   "results": "{\"t\": \"2026-10-22T04:40:21Z\", \"tool\": \"leanfinder\", \"query\": \"The cofactor wedge map from the cokernel of a two term finite projective complex of virtual rank one to its determinant line commutes with derived isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom_assoc\", \"ModuleCat.exteriorPower.iso₁_hom_naturality_assoc\", \"ModuleCat.exteriorPower.iso₁_hom_naturality\", \"ModuleCat.exteriorPower.iso₀_hom_naturality_assoc\", \"ModuleCat.exteriorPower.iso₀_hom_naturality\", \"CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom_apply\", \"exteriorPower.oneEquiv_naturality\", \"CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom\"], \"digest\": \"0e04c8d6e761ce8c\"} Hits describe homology/cokernel identifications, naturality of the first exterior power, or homotopy-cofiber identities; none states determinant-line cofactor compatibility for quasi-isomorphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinant|detLine|detFunctor",
+   "results": "{\"t\": \"2026-10-22T04:40:28Z\", \"tool\": \"grep\", \"query\": \"determinant|detLine|detFunctor\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adding a contractible identity complex does not change the wedge cofactor map into the determinant of a complex",
+   "results": "{\"t\": \"2026-10-22T04:40:30Z\", \"tool\": \"leanfinder\", \"query\": \"Adding a contractible identity complex does not change the wedge cofactor map into the determinant of a complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.homotopyCofiber.desc_f'\", \"CochainComplex.mappingCone.id\", \"HomologicalComplex.homotopyCofiber.sndX_inrX\", \"HomologicalComplex.homotopyCofiber.ext_to_X'\", \"CochainComplex.mappingCone.id_X\", \"HomologicalComplex.homotopyCofiber.ext_from_X'\", \"LinearMap.detAux_id\", \"HomologicalComplex.homotopyCofiber.d\"], \"digest\": \"0cf67129192d97f7\"} Hits describe homology/cokernel identifications, naturality of the first exterior power, or homotopy-cofiber identities; none states determinant-line cofactor compatibility for quasi-isomorphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lci-curve-fundamental-class",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; algebra input for invariance of the conormal cofactor map under the determinant comparisons of two presentations",
+   "via": [
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-two-term-cofactor-naturality",
+  "worker": "stage1",
+  "summary": "Repair of human re-split order: unchanged statement and normalization; two comparable statement-only nodes carry returned steps 1--3 and 4--5. Reuse the existing explicit good-diagram lemma for step 7; keep the K-projective representation and functorial cancellation as a short assembly. All eight returned arguments are mapped verbatim in report.md.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; algebra input for invariance of the conormal cofactor map under the determinant comparisons of two presentations The split supplies the algebraic compatibility needed by the lci fundamental class in this replacement prerequisite; no chapter or unit route is changed. The ancestor tool returns None for this inherited chain, so its existing null ancestor is retained. The repair only redistributes the same algebra argument: local construction, kernel-first comparison, projective chain representation and existing contractible enlargement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-two-term-perfect-determinant",
+    "why": "The determinant functor already named in the statement supplies identity/composition and its fixed comparisons; it is used only as generic determinant algebra."
+   },
+   {
+    "node": "lem-trf-good-two-term-surjective-diagrams",
+    "why": "The exact existing finite-free contractible enlargement of Tag 0FJM converts a chain quasi-isomorphism into two surjective ones; generic algebra, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "new-v2-generic-exterior-power-localization",
+  "lem-weil-pbc-cover-module-exact",
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-trf-good-two-term-surjective-diagrams"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-ddb1bf021",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-ddb1bf021 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item, both new nodes, every cited statement and the sources in full. The re-split note of 2026-10-22 (live/side-live repair-notes, keep_plan) is met. Statement and stmt_deps are byte-identical to the side-live Q06 node. All 8 old step texts appear verbatim in the report and are allocated: steps 1-3 to lem-sfb-cofactor-local-descent, steps 4-5 to lem-sfb-surjective-cofactor-compatibility, step 6 kept verbatim as assembly step 2, step 7 to the existing lem-trf-good-two-term-surjective-diagrams (its statement is exactly the 0FJM enlargement: M=[P+F->Q+F], t=(f^-1+pi, f^0+u'pi), surjective quasi-isomorphisms, t homotopic to fb), and step 8 kept as assembly step 4. The assembly is 1641 characters; the two new nodes carry about 2.7k and 2.2k characters of old argument, so they are comparable, and neither restates the item. Sources checked: duality.tex 0E9Y l.7510 (formula given, well-definedness omitted; node 1 supplies it for any u and finite projective terms); more-algebra.tex 0FJM l.37124 (good diagram); algebra.tex 00EK; the tags 00NX, 00DM, 0C6F and 064B resolve to the labels named. No SGA. Node 1 is true: the dual of the wedge power localizes through the transpose idempotent; the det g / det g^-1 cancellation and the repeated wedge factor give basis and lift independence; gluing with 00EK and injectivity give the map, show it kills u(P), and give uniqueness; the formula holds on any localization with P_B free. Node 2 is true: I recomputed Gamma_f, so T_f((k^p~)^v (x) (l^q~)) = p'^v (x) q'; the corrections z, z_j lie in N^0 = span(l) and vanish. Edge cases: c=0; u=0; k[eps] with u(a)=(eps a,0), w=eps y; [A->A^2] to [0->A] with both projections, sign +1; r=0; c'=0; zero ring; characteristic 2. Assembly steps: the K-projective representation uses Mathlib leaves; homotopic maps agree because the definition localizes K(A), so t=ab; ranks c+n, c+n+1; cancelling H^0(b) is elementary. Batch-5 flags: both lem-trf-good-two-term-surjective-diagrams (cited by the item) and lem-trf-surjective-two-term-determinant-calculus (cited by node 2) are generic Stacks 0FJM module algebra, not steps of the trace-formula or Poincare-duality proofs. Both are already in the item's base closure through stmt_dep lem-trf-two-term-perfect-determinant -> lem-trf-affine-two-term-determinant, so they add 0 closure nodes. Accepted. Accepted tool_uses: two-term-perfect-determinant and good-two-term-surjective-diagrams. Duplicate search over cofactor/0E9Y/0FJM: lem-trf-two-term-augmentation-determinant-normalization needs an injective differential and maps det W, so it is not a duplicate; the other candidates are geometric citers that depend on this item."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.TwoTermCofactorNaturality",
+  "file": "lean/Sheaf/LinearAlgebra/TwoTermCofactorNaturality.lean",
+  "declaration": "Module.twoTermCofactor_naturality",
+  "declarations": [
+   "Module.TwoTermComplex.cofactorComplex",
+   "Module.TwoTermComplex.cofactorCokernel",
+   "Module.TwoTermComplex.cofactorLine",
+   "Module.TwoTermComplex.cofactorContraction",
+   "Module.TwoTermCofactorPresentation",
+   "Module.TwoTermCofactorPresentation.lineIso",
+   "Module.TwoTermMap.IsCofactorRealization",
+   "Module.TwoTermCofactorGoodDiagram",
+   "Module.TwoTermCofactorGoodDiagram.determinant",
+   "Module.existsUnique_twoTermCofactorPresentation",
+   "Module.TwoTermComplex.cofactorPresentation",
+   "Module.twoTermCofactor_naturality"
+  ],
+  "statement": "theorem twoTermCofactor_naturality {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (E F : TwoTermComplex.{u, v} R) (c c' : ℕ) [Module.Finite R E.neg] [Module.Projective R E.neg] [Module.Finite R E.zero] [Module.Projective R E.zero] [Module.Finite R F.neg] [Module.Projective R F.neg] [Module.Finite R F.zero] [Module.Projective R F.zero] (hneg : ∀ p : PrimeSpectrum R, Module.rankAtStalk E.neg p = c) (hzero : ∀ p : PrimeSpectrum R, Module.rankAtStalk E.zero p = c + 1) (hneg' : ∀ p : PrimeSpectrum R, Module.rankAtStalk F.neg p = c') (hzero' : ∀ p : PrimeSpectrum R, Module.rankAtStalk F.zero p = c' + 1) (C : TwoTermCofactorPresentation E c) (C' : TwoTermCofactorPresentation F c') (a : DerivedCategory.Q.obj E.cofactorComplex ≅ DerivedCategory.Q.obj F.cofactorComplex) : Nonempty (TwoTermCofactorGoodDiagram E F a) ∧ ∃! p : (E.cofactorLine c ≃ₗ[R] F.cofactorLine c') × (E.cofactorCokernel ≃ₗ[R] F.cofactorCokernel), (∀ d : TwoTermCofactorGoodDiagram E F a, p.1 = d.determinant C C') ∧ (∀ (d : TwoTermCofactorGoodDiagram E F a) (x : d.middle.zero), p.2 ((LinearMap.range E.differential.hom).mkQ (d.left.zero.hom x)) = (LinearMap.range F.differential.hom).mkQ (d.right.zero.hom x)) ∧ p.1.toLinearMap.comp C.map = C'.map.comp p.2.toLinearMap",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "note": "The cofactor formula is expressed equivalently by contraction against every top wedge. Its uniquely determined construction is existsUnique_twoTermCofactorPresentation; cofactorPresentation selects that unique object. For every derived isomorphism the main theorem constructs the uniquely normalized determinant and H0 comparisons via all good diagrams, using the recorded kernel-first calculus and canonical exterior-inclusion identifications. The added statement dependency was already a proof dependency and has a landed Lean record."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a4916208",
+  "group": "NI",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: R any CommRing; landed TwoTermComplex with HomologicalComplex.double at -1,0; finite projective terms; rankAtStalk c, c+1 (and c', c'+1); cofactorLine = Dual(⋀^c P) ⊗ ⋀^(c+1) Q; w_E pinned by contraction formula map(u)(x)*ι v for all top wedges (determines the map since Dual J ⊗ M → Hom(J,M) is injective) plus Unique theorem; D(a) = T_right∘T_left⁻¹ for every good diagram (landed kernel-first kernelNormalizedDeterminantMap, kernel trivialized by its differential), good-diagram existence concluded for every derived iso; H^0(a) pinned on cokernels via relation Q(left)≫a = Q(right); final equation literal. Hand-checked sign +1 on [A→A²]→[0→A]. Edge cases zero ring, c=0, u=0, k[ε], char 2 ok; universes u, v, w free. stmt_deps gained only the landed calculus node (allowed); statement verbatim; declarations complete; docstrings source+blueprint; sorry only. Mechanical finding: kernelNormalizedDeterminantMap is Classical.choose of existsUnique_kernelNormalizedDeterminantMap in the theorem module, so the item depends on an object that theorem constructs → PASS on that point. Advisories: trf scheme determinant only imported (stage-3 bridge); H^0 not via homologyFunctor; cofactorPresentation unused; Associator import possibly redundant."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

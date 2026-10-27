@@ -20,9 +20,8 @@
  ],
  "proof": [
   {
-   "text": "Write $U:\\operatorname{Mod}(A_T)\\to\\operatorname{Ab}(T_{\\mathrm{et}})$ for the forgetful functor. Apply [lem-weil-pbc-module-sheaves-colimits-forgetful](1) to $\\mathcal O=A_T$ on the small etale site: $U$ is faithful and exact and preserves kernels and cokernels. Apply [lem-sp-exact-functor-preserves-homology](a)-(c) to $U$. Since an image is the kernel of the cokernel and a quotient is a cokernel, forgetting scalars also preserves images, quotients and cohomology, naturally in a complex. For ordinary $A$-modules the same identifications are literal: the kernel and image are the same additive subgroups with the restricted action, and a quotient has the same additive cosets with $a[m]=[am]$. In particular an exact sequence of $A$-modules can be checked after forgetting to abelian groups.",
+   "text": "For the coefficient forgetful functor ModuleCat A -> AddCommGrpCat, limits are preserved by the existing ModuleCat instances, and colimits by ModuleCat.forget₂CoinduceAdj. For its sheafCompose on the small etale site, compose with sheafToPresheaf: this is sheafToPresheaf followed by coefficient whiskering, so it preserves finite limits; sheafToPresheaf reflects them. The existing Sheaf.forget₂CoinduceAdj makes this sheaf forgetful functor a left adjoint, hence it preserves colimits as well. Apply [lem-sp-exact-functor-preserves-homology] to each of these two additive exact functors: PreservesImage.iso supplies the image comparison and mapHomologicalComplexHomologyIso supplies the natural cohomology comparison. This proves both auxiliary forgetful assertions without changing coefficient encodings.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-sp-exact-functor-preserves-homology"
    ],
    "elementary": false,
@@ -32,22 +31,21 @@
    }
   },
   {
-   "text": "For a geometric point $\\bar t$, use the pointed-neighbourhood colimit of [def-weil-pbc-geometric-stalks]. If $a\\in A$ and $m\\in\\mathcal F(V)$, define $a[m]=[a_Vm]$, where $a_V\\in A_T(V)$ is the constant section coming from sheafification of the constant presheaf [def-weil-pbc-constant-sheaf]. Restriction compatibility in [def-weil-sheaf-of-modules-category] gives $(a_Vm)|_W=a_W(m|_W)$, so this rule respects the colimit relations. The module identities hold on representatives and hence on germs. For a module-sheaf morphism $f$, $s_{\\bar t}(f)(a[m])=[f(a_Vm)]=a[f(m)]$, so the stalk maps are $A$-linear. Addition of maps is also preserved on representatives. Forgetting this action gives exactly the stalk of $U\\mathcal F$, since both use the same germs and relations.",
+   "text": "The pointed-neighbourhood colimit of [def-weil-pbc-geometric-stalks] is already computed in ModuleCat A by Point.sheafFiber, so the module structure and linearity of its maps are part of the coefficient category. Apply the coefficient-general instances underlying [prop-weil-pbc-geometric-stalks-exact] directly with ModuleCat A: filtered colimits commute with finite limits, giving finite-limit preservation; the skyscraper adjunction gives finite-colimit preservation. Point.sheafFiber_additive gives additivity from binary biproduct preservation. All three claims are existing instances or proved APIs; no reduction through abelian groups is needed.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category"
+    "prop-weil-pbc-geometric-stalks-exact"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Construction immediately before Tag 04EQ (lemma-stalk-exact-modules); etale-cohomology.tex Definition 040R (definition-stalk)"
    }
   },
   {
-   "text": "Given a short exact sequence of $A_T$-module sheaves, step 1 makes its underlying abelian-sheaf sequence short exact. The abelian geometric stalk functor is exact by [prop-weil-pbc-geometric-stalks-exact]. Its resulting exact sequence of abelian groups is the underlying sequence of the $A$-linear stalk maps from step 2. The elementary kernel/image description for ordinary modules in step 1 therefore makes that sequence short exact in $\\operatorname{Mod}(A)$. Thus $s_{\\bar t}$ is additive and exact; no finiteness property of the ring, the scheme or the sheaves entered the argument.",
+   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] to the additive exact module stalk functor from step 2. The natural comparison on consecutive terms implies that a quasi-isomorphism remains a quasi-isomorphism after termwise application; this is exactly HomologicalComplex.quasiIso_map_of_preservesHomology. The complexes are arbitrary integer-indexed complexes.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact"
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -56,9 +54,9 @@
    }
   },
   {
-   "text": "Let $C$ be any integer-indexed cochain complex of $A_T$-modules, with no boundedness assumption. Apply [lem-weil-pbc-exact-functor-complex-cohomology] with $F=s_{\\bar t}$, now an exact functor between abelian categories. In degree $i$, its comparison identifies the kernel of $s_{\\bar t}(d^i)$ with $s_{\\bar t}(\\ker d^i)$ and the image of $s_{\\bar t}(d^{i-1})$ with $s_{\\bar t}(\\operatorname{im}d^{i-1})$, compatibly with cycles and quotient projections. Taking the inverse of its natural comparison gives\n$$s_{\\bar t}(H^i(C))\\xrightarrow{\\sim}H^i(s_{\\bar t}C).$$\nIt is an isomorphism in $\\operatorname{Mod}(A)$, hence $A$-linear. This computation involves only the three consecutive terms in degrees $i-1,i,i+1$. If $f:C\\to C'$ is a quasi-isomorphism, naturality identifies $H^i(s_{\\bar t}f)$ with $s_{\\bar t}(H^i(f))$, which is invertible for every $i$. Thus the termwise stalk functor preserves quasi-isomorphisms.",
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to the same exact module stalk. Its mapDerivedCategoryFactors is precisely the required natural isomorphism Q followed by the derived stalk versus the termwise stalk followed by Q. No resolution or boundedness assumption occurs.",
    "uses": [
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
@@ -67,11 +65,10 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to $s_{\\bar t}$. It supplies a functor $D(s_{\\bar t})$ on the full unbounded derived categories and a natural identification $D(s_{\\bar t})(QC)\\cong Q(s_{\\bar t}C)$. Define $E_{\\bar t}=D(s_{\\bar t})(E)$. The representative description in [def-weil-derived-cohomology-sheaves] identifies $\\mathcal H^i(QC)$ with $H^i(C)$. Consequently step 4 gives the required comparison $(\\mathcal H^i(E))_{\\bar t}\\cong H^i(E_{\\bar t})$. This is natural on the derived category: both cohomology functors invert quasi-isomorphisms, and the naturality equation of step 4 for a quasi-isomorphism remains valid for its inverse, by composing with the two inverse maps. Morphisms in the localization are generated by complex maps and these inverses [def-weil-abstract-derived-category], so the same equation holds for every derived morphism. The comparison remains $A$-linear throughout.",
+   "text": "The natural unbounded derived cohomology comparison is the existing mapDerivedCategoryHomologyFunctorIso, the first assertion of [lem-weil-pbc-exact-functor-bounded-below], specialized to the module stalk. This is an isomorphism of functors into ModuleCat A, so it is A-linear. Its construction localizes the complex comparison of step 3 using step 4 and the representative comparison for [def-weil-derived-cohomology-sheaves]. Only the unbounded cohomology assertion of the cited generic theorem is used.",
    "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "def-weil-derived-cohomology-sheaves"
    ],
    "elementary": false,
    "source": {
@@ -80,10 +77,9 @@
    }
   },
   {
-   "text": "Fix $i$ and put $\\mathcal F=\\mathcal H^i(E)$. If $\\mathcal F=0$, its stalks are zero and the comparison just constructed gives $H^i(E_{\\bar t})=0$ for every geometric point. Conversely, suppose these cohomology modules vanish. The comparison and step 2 show that every geometric stalk of the underlying abelian sheaf $U\\mathcal F$ vanishes. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to U\\mathcal F$: every stalk map is an isomorphism, so $0\\to U\\mathcal F$ is an isomorphism. Hence $U\\mathcal F=0$. The faithfulness of $U$ in [lem-weil-pbc-module-sheaves-colimits-forgetful](1) now gives $\\mathrm{id}_{\\mathcal F}=0$, so $\\mathcal F$ is a zero object. This proves the equivalence for each integer $i$. On the empty scheme the stalk condition is vacuous and the same conservativity assertion still applies. No truncation or convergence argument has been used.",
+   "text": "Put F = H^i(E). If F is zero, its module stalk is zero because the stalk functor preserves zero morphisms. Transport across the comparison of step 5 to deduce vanishing of H^i of every derived stalk. Conversely suppose the latter vanish. Step 5 makes each stalk of F zero. Use the module-valued jointly faithful form of [lemma-weil-pbc-geometric-stalk-conservative], Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint, on id_F and 0. At the algebraic closure of each residue field, both maps coincide because that stalk is zero. Thus id_F = 0, which is equivalent to F being a zero object. The same jointly faithful theorem applies to the empty scheme; there are then no pointwise goals.",
    "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
    "source": {
@@ -93,22 +89,19 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-sp-exact-functor-preserves-homology",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category",
   "prop-weil-pbc-geometric-stalks-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-abstract-derived-category",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03PT (lemma-stalk-exact)(3) and 03PU (theorem-exactness-stalks), with the module-forgetful reduction of sites-modules.tex Tag 03DA (lemma-abelian) and Tag 04EQ (lemma-stalk-exact-modules), and termwise unbounded derivation of derived.tex Tag 015F (lemma-right-derived-exact-functor). The naturality and scalar-action details are written out."
+  "place": "Tags 03PT(3), 03PU and 04EQ; derived.tex Tag 015F. Lean uses the existing coefficient-general stalk exactness and jointly faithful geometric-stalk APIs directly in ModuleCat A, the coefficient and sheaf coinduction adjunctions for forgetting, and the existing natural unbounded derived-homology comparison. The abelian-forgetful detour is unnecessary."
  },
  "mathlib_searches": [
   {
@@ -221,7 +214,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "reviewed": {
@@ -259,5 +251,27 @@
   "group": "Q44",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of fa81cbfe6594. Diff vs that snapshot: the module only swaps `public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorStalk` for `WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper` and adds `attribute [local instance] CategoryTheory.GrothendieckTopology.Point.sheafFiber_additive` before the namespace; the seven theorem signatures, sorry bodies and docstrings are byte-identical. stmt_deps are back to the nine live definition nodes and only lean.note changed (accurately); the node differs from side-live only in `lean`. This exact variant compiled clean in 31.5 s in the prior review; the worker's scompile and deliver2 dry run were clean; no own compile (no file changed). lean.statement verbatim; DerivedCategoryModule = DerivedCategory(Sheaf T_et (ModuleCat.{u+1} A)); all clauses rendered as already checked in full (exactness, forgetful on sheaves and modules, quasi-iso preservation, mapDerivedCategory with factorization, natural comparison, zero detection with Ω quantified); edge cases empty T, A=0, unbounded complexes. Not dropped, no repair note, not superseded on side-live, no name clash, overlapping N9 node has no lean. Report has Worker report, Second reading by Q44 and a repair section. Advisory: pin the Nonempty isos to the canonical ones."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261022T144138-L-1508386",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

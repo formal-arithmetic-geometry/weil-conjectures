@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-polynomial-differential-base-change",
+ "kind": "statement",
+ "title": "Derived base change of a polynomial differential complex",
+ "statement": "Let $A\\to C$, $A\\to A'$, $f:C\\to C'$ and $A'\\to C'$ be a commutative square of commutative rings, and let $P_\\bullet\\to C$ be an augmented simplicial $A$-algebra whose terms are polynomial algebras $P_n=A[x_i\\mid i\\in I_n]$, for arbitrary sets $I_n$ [def-weil-pbc-mv-polynomial-ring]. No resolution condition is imposed. Give $P'_\\bullet=P_\\bullet\\otimes_A A'$ the augmentation $p\\otimes a'\\mapsto f(\\epsilon(p))a'$. Use the alternating-complex convention $s(M)^{-n}=M_n$, differential $\\sum_i(-1)^id_i$ and zero positive terms [lem-trf-cotangent-resolution-coherence], and Kähler differentials [def-weil-pbc-kahler-differentials]. Put $K=s(\\Omega^1_{P_\\bullet/A}\\otimes_{P_\\bullet}C)$ and $K'=s(\\Omega^1_{P'_\\bullet/A'}\\otimes_{P'_\\bullet}C')$. Every term of $K$ is a flat $C$-module and $K$ is K-flat [def-pc-module-kflat-complex]. There is a canonical isomorphism in $D(C')$ [def-weil-abstract-derived-category]\n$$\\Theta:QK\\otimes_C^{\\mathbf L}C'\\xrightarrow{\\sim}QK'.$$\nHere derived scalar extension is interpreted through [lem-trf-one-point-derived-ring-identification]. More precisely, if $c_K:QK\\otimes_C^{\\mathbf L}C'\\xrightarrow{\\sim}Q(K\\otimes_C C')$ is its canonical K-flat computation isomorphism, then $\\Theta=Q(\\theta)c_K$, where $\\theta:K\\otimes_C C'\\xrightarrow{\\sim}K'$ is a chain isomorphism represented on differential generators by\n$$(\\mathrm dp\\otimes c)\\otimes b'\\longmapsto\\mathrm d(p\\otimes1)\\otimes f(c)b'.$$\nIts component maps commute with every face and degeneracy of the differential modules. Tensor products mean [def-weil-pbc-module-tensor-product]. This holds for empty and infinite variable sets and without flatness of either ring map. Flat modules are as in [def-weil-pbc-flat-ring-map], and simplicial objects and their morphisms are as in [def-weil-pbc-simplicial-object].",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), proof: flatness of the polynomial differential module and its identification after scalar extension, written in the alternating polynomial-resolution model."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-kahler-differentials",
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-trf-one-point-derived-ring-identification",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-simplicial-object",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "For every $n$, apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] to $P_n=A[x_i\\mid i\\in I_n]$ and its augmentation to $C$. After interchanging the tensor factors, $K^{-n}=\\Omega^1_{P_n/A}\\otimes_{P_n}C$ has $C$-basis $e_i=\\mathrm dx_i\\otimes1$. This module is flat directly from [def-weil-pbc-flat-ring-map]: for an injection $N\\to N'$, identify $N\\otimes_C K^{-n}$ with the finitely supported families $\\bigoplus_{i\\in I_n}N$ by $z\\otimes\\sum c_i e_i\\mapsto(c_i z)_i$, with inverse $(z_i)_i\\mapsto\\sum z_i\\otimes e_i$, using [def-weil-pbc-module-tensor-product]. The induced map is coordinatewise the given injection, hence injective. The zero positive terms are flat by the same argument with the empty basis.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RX, lemma-differentials-polynomial-ring, proof; arbitrary-variable basis as in the cited node; definition-flat (00HB)."
+   }
+  },
+  {
+   "text": "The alternating-complex convention puts $K$ in degrees at most zero. The identification $N\\otimes_CK^{-n}\\cong\\bigoplus_{i\\in I_n}N$ of step 1 is natural in $N$, so tensoring with $K^{-n}$ carries a sequence $N_1\\to N_2\\to N_3$ exact at $N_2$ to its coordinatewise direct sum, which is exact; thus each term is flat also in the exact-sequence sense of [lem-pc-module-bounded-flat-kflat]. Together with step 1 this satisfies exactly the hypotheses of [lem-pc-module-bounded-flat-kflat], with $R=C$ and upper bound $0$. Its conclusion makes $K$ K-flat in the ordinary-module sense.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, lemma-derived-tor-quasi-isomorphism."
+   }
+  },
+  {
+   "text": "Regard $P_\\bullet$ as augmented to $C'$ by $f\\epsilon$. Put $L=s(\\Omega^1_{P_\\bullet/A}\\otimes_{P_\\bullet}C')$. The tensor universal property [def-weil-pbc-module-tensor-product] gives mutually inverse maps $a_n:(\\Omega^1_{P_n/A}\\otimes_{P_n}C)\\otimes_C C'\\to\\Omega^1_{P_n/A}\\otimes_{P_n}C'$ and $b_n$ by $a_n((\\omega\\otimes c)\\otimes b')=\\omega\\otimes f(c)b'$ and $b_n(\\omega\\otimes b')=(\\omega\\otimes1)\\otimes b'$. Balancing over $P_n$ uses its augmentation to $C$, and balancing over $C$ uses $f$; these relations also show $b_na_n=a_nb_n=1$. For any face or degeneracy $u:P_n\\to P_m$, both orders send $(\\mathrm dp\\otimes c)\\otimes b'$ to $\\mathrm d(u(p))\\otimes f(c)b'$. Such generators span by [def-weil-pbc-kahler-differentials]. Thus $a$ commutes with all these operators and their signed sums, giving a chain isomorphism $a:K\\otimes_C C'\\to L$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ, lemma-flat-base-change-cotangent-complex, coefficient identification in the proof; explicit tensor-balancing verification."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-simplicial-differential-base-change] with $R=A$, $R'=A'$, $T=C'$ and augmentation $f\\epsilon$. The ring square makes $f\\epsilon$ an augmentation compatible with $A\\to A'\\to C'$; its scalar extension is exactly $p\\otimes a'\\mapsto f(\\epsilon(p))a'$. The cited lemma gives a chain isomorphism $v:L\\to K'$ commuting with all faces and degeneracies, with $v(\\mathrm dp\\otimes t)=\\mathrm d(p\\otimes1)\\otimes t$. Set $\\theta=va$. Its formula is therefore $(\\mathrm dp\\otimes c)\\otimes b'\\mapsto\\mathrm d(p\\otimes1)\\otimes f(c)b'$, and both component isomorphisms commute with every simplicial operator. The cited lemma requires neither flatness nor a resolution.",
+   "uses": [
+    "lem-trf-simplicial-differential-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV, lemma-differentials-base-change, universal-derivation formula, applied simplicially as in the cited node."
+   }
+  },
+  {
+   "text": "Use the identity resolution $K\\xrightarrow{1}K$, which is K-flat by step 2. Clause (2) of [lem-pur-derived-change-of-rings], transported to ordinary modules by [lem-trf-one-point-derived-ring-identification], gives the canonical computation isomorphism $c_K:QK\\otimes_C^{\\mathbf L}C'\\to Q(K\\otimes_C C')$. Localization $Q$ [def-weil-abstract-derived-category] sends the inverse chain maps $\\theta,\\theta^{-1}$ to inverse maps, so $\\Theta=Q(\\theta)c_K$ is an isomorphism in $D(C')$. This is the specified canonical comparison. All arguments use finite-support tensor expressions, even when $I_n$ is infinite; for empty $I_n$ the differential module is zero. No step assumes that $P_\\bullet\\to C$ resolves $C$, that the augmentation is surjective, or that either ring map is flat.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-trf-one-point-derived-ring-identification",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ, lemma-flat-base-change-cotangent-complex, proof; K-flat computation of derived change of rings and the cited singleton-site identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-simplicial-differential-base-change",
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-one-point-derived-ring-identification",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QQ, lemma-flat-base-change-cotangent-complex, polynomial flatness and differential scalar-extension calculation; expanded in the arbitrary augmented simplicial model using Tags 00RX, 00RV and 064K."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The alternating complex of polynomial differentials is K-flat and its scalar extension is canonically isomorphic to the base changed differential complex",
+   "results": "8 hits; top=['KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'KaehlerDifferential.tensorKaehlerEquivBase', 'KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.exact_mapBaseChange_map', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply', 'Algebra.Extension.tensorH1Cotangent']; note=; digest=2454fa79e90d6a25. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:189-260 and Extension/Cotangent/Basic.lean:53-114. tensorKaehlerEquivBase and tensorKaehlerEquiv give module isomorphisms; alternatingFaceMapComplex.map makes an existing simplicial map a chain map. They do not together constitute a one-line specialization giving K-flatness and the specified derived isomorphism of arbitrary augmented simplicial polynomial differential complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of the full simplicial cotangent differential complex gives a chain isomorphism natural in faces and degeneracies",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.tensorKaehlerEquivBase', 'KaehlerDifferential.mapBaseChange', 'KaehlerDifferential.tensorKaehlerEquiv', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'AlgebraicTopology.alternatingFaceMapComplex', 'AlgebraicTopology.AlternatingFaceMapComplex.map']; note=; digest=5a63a970960adc2b. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:189-260 and Extension/Cotangent/Basic.lean:53-114. tensorKaehlerEquivBase and tensorKaehlerEquiv give module isomorphisms; alternatingFaceMapComplex.map makes an existing simplicial map a chain map. They do not together constitute a one-line specialization giving K-flatness and the specified derived isomorphism of arbitrary augmented simplicial polynomial differential complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"baseChange\"",
+   "results": "12 hits; top=['KaehlerDifferential.mapBaseChange', 'KaehlerDifferential.range_mapBaseChange', 'KaehlerDifferential.mapBaseChange_surjective', 'KaehlerDifferential.exact_mapBaseChange_map', 'KaehlerDifferential.mapBaseChange_tmul', 'KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange_tmul']; note=; digest=d50fd0e402ea8659. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:189-260 and Extension/Cotangent/Basic.lean:53-114. tensorKaehlerEquivBase and tensorKaehlerEquiv give module isomorphisms; alternatingFaceMapComplex.map makes an existing simplicial map a chain map. They do not together constitute a one-line specialization giving K-flatness and the specified derived isomorphism of arbitrary augmented simplicial polynomial differential complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv|cotangentComplexBaseChange|[Kk][Ff]lat",
+   "results": "25 hits; top=['Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean']; note=; digest=12ba37cede1f21db. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:189-260 and Extension/Cotangent/Basic.lean:53-114. tensorKaehlerEquivBase and tensorKaehlerEquiv give module isomorphisms; alternatingFaceMapComplex.map makes an existing simplicial map a chain map. They do not together constitute a one-line specialization giving K-flatness and the specified derived isomorphism of arbitrary augmented simplicial polynomial differential complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorKaehlerEquiv|cotangentComplexBaseChange|kFlat",
+   "results": "5 hits; top=['Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean', 'Mathlib/RingTheory/Kaehler/TensorProduct.lean']; note=; digest=def1783b4ac34f6f; subdirectory=RingTheory/Kaehler. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:183-270, Kaehler/Polynomial.lean:50-102 and Extension/Cotangent/Basic.lean:50-116. The differential tensor equivalences and presentation cotangent maps do not state K-flatness and the derived comparison for an arbitrary augmented simplicial algebra. Existing DAG leaves own the module-level results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change of alternating simplicial polynomial differential complexes is a natural chain isomorphism",
+   "results": "8 hits; top=['KaehlerDifferential.tensorKaehlerEquivBase', 'AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality', 'KaehlerDifferential.tensorKaehlerEquiv', 'AlgebraicTopology.DoldKan.PInfty_f_naturality_assoc', 'AlgebraicTopology.singularChainComplexFunctorIsoOfTotallyDisconnectedSpace', 'AlgebraicTopology.alternatingFaceMapComplex', 'AlgebraicTopology.AlternatingFaceMapComplex.obj', 'AlgebraicTopology.alternatingCofaceMapComplex']; note=; digest=996e495bb42893c9. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:183-270, Kaehler/Polynomial.lean:50-102 and Extension/Cotangent/Basic.lean:50-116. The differential tensor equivalences and presentation cotangent maps do not state K-flatness and the derived comparison for an arbitrary augmented simplicial algebra. Existing DAG leaves own the module-level results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"tensor\"",
+   "results": "12 hits; top=['instModuleTensorProductKaehlerDifferential', 'KaehlerDifferential.kerToTensor', 'KaehlerDifferential.kerCotangentToTensor', 'instIsScalarTowerTensorProductKaehlerDifferential', 'KaehlerDifferential.tensorProductTo_surjective', 'KaehlerDifferential.range_kerCotangentToTensor', 'KaehlerDifferential.kerToTensor_apply', 'KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange']; note=; digest=aeb848315dab33e4. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:183-270, Kaehler/Polynomial.lean:50-102 and Extension/Cotangent/Basic.lean:50-116. The differential tensor equivalences and presentation cotangent maps do not state K-flatness and the derived comparison for an arbitrary augmented simplicial algebra. Existing DAG leaves own the module-level results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmented simplicial polynomial algebra has a K-flat differential complex and derived scalar extension equals its base changed differential complex",
+   "results": "8 hits; top=['Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', \"KaehlerDifferential.moduleBaseChange'\", 'Algebra.Generators.H1Cotangent.δAux_ofComp', 'Algebra.Generators.H1Cotangent.exact_δ_map', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'KaehlerDifferential.exact_mapBaseChange_map', 'Algebra.H1Cotangent.exact_δ_mapBaseChange']; note=; digest=ed0c1e19afd58abc. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:183-270, Kaehler/Polynomial.lean:50-102 and Extension/Cotangent/Basic.lean:50-116. The differential tensor equivalences and presentation cotangent maps do not state K-flatness and the derived comparison for an arbitrary augmented simplicial algebra. Existing DAG leaves own the module-level results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorKaehlerEquiv\"",
+   "results": "11 hits; top=['KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap', 'KaehlerDifferential.tensorKaehlerEquiv', 'KaehlerDifferential.tensorKaehlerEquivBase', 'KaehlerDifferential.tensorKaehlerEquiv_tmul_D', 'KaehlerDifferential.tensorKaehlerEquivBase_tmul', 'KaehlerDifferential.tensorKaehlerEquivBase_symm_apply']; note=; digest=b56be07a22b32777. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:183-270, Kaehler/Polynomial.lean:50-102 and Extension/Cotangent/Basic.lean:50-116. The differential tensor equivalences and presentation cotangent maps do not state K-flatness and the derived comparison for an arbitrary augmented simplicial algebra. Existing DAG leaves own the module-level results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The alternating face complex of Kahler differentials of a simplicial free commutative algebra is bounded above flat and commutes with arbitrary scalar extension",
+   "results": "8 hits; top=['Algebra.Generators.H1Cotangent.exact_δ_map', 'KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.exact_mapBaseChange_map', 'Algebra.Generators.H1Cotangent.δAux', 'KaehlerDifferential.tensorKaehlerEquivBase', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.FormallySmooth.projective_kaehlerDifferential']; note=; digest=20ac24ac0377c0f0. Read Mathlib/RingTheory/Kaehler/TensorProduct.lean:183-270, Kaehler/Polynomial.lean:50-102 and Extension/Cotangent/Basic.lean:50-116. The differential tensor equivalences and presentation cotangent maps do not state K-flatness and the derived comparison for an arbitrary augmented simplicial algebra. Existing DAG leaves own the module-level results.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-flat-base-change",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Proof of Tag 08SJ: apply Tag 08QQ using the canonical derived tensor identification, not an assumption of flatness. Re-split: flat differential resolution and simplicial base-change identification; old proof steps 4--6.",
+   "via": [
+    "lem-trf-cotangent-flat-base-change",
+    "lem-trf-koszul-quotient-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-differential-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the statement and statement dependencies. Proved termwise flatness from the existing arbitrary-variable differential basis, applied the existing bounded-above K-flat theorem, wrote out the coefficient tensor isomorphism, applied the existing simplicial differential base-change lemma at T=C-prime, and localized its composite with the canonical K-flat computation. No new nodes. Repeated the Mathlib audit with logged commands and read all cited statements and source passages.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Proof of Tag 08SJ: apply Tag 08QQ using the canonical derived tensor identification, not an assumption of flatness. Re-split: flat differential resolution and simplicial base-change identification; old proof steps 4--6. Steps 1-2 realize the flat differential model; steps 3-4 its scalar-extension identification including the simplicial maps; step 5 the canonical derived computation. This retains the inherited cotangent-complex auxiliary route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module K-flat criterion applied to the nonpositive flat differential complex; no geometric unit step is replaced."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat derived scalar-extension computation, transported by the item's existing singleton-site comparison; the cotangent base-change route requires precisely this computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-91e5ba782",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-91e5ba782 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. This is a one-level split with no new nodes; statement and stmt_deps are unchanged. Source checked: Stacks Tag 08QQ (cotangent.tex l.985-1017). The proof takes only the flatness of Ω⊗B and the identification 'by inspection', not the theorem's Tor-independence hypothesis, which the item rightly does not assume. Step 1: the Mathlib leaf for the polynomial Kähler basis over any index set, applied with S=C, makes each term of K free; flatness in the injectivity sense follows from N⊗K^{-n}≅⊕N. Step 2: lem-pc-module-bounded-flat-kflat needs flatness as 'tensoring preserves exact sequences', which step 1 does not give. FIX: one sentence added to step 2: the step-1 identification is natural in N, so exactness is kept coordinatewise. Step 3: I checked the balancing maps a and b, both inverse composites, and that they commute with faces and degeneracies (which uses ε_m u=ε_n). Step 4: the simplicial differential base-change lemma applies with R=A, R'=A', T=C' and augmentation fε; its augmentation matches P', and its generator formula and face/degeneracy compatibility are in its statement. Step 5: clause (2) of lem-pur-derived-change-of-rings, applied to the identity K-flat resolution and moved to ordinary modules by the one-point identification, gives c_K, so Θ=Q(θ)c_K. Edge cases: empty and infinite variable sets, a nonflat square over Z/2, and C'=0. No cycle; the citer lem-trf-cotangent-flat-base-change uses exactly these clauses. No duplicate among lem-trf-derived-square-polynomial-resolution, lem-trf-cotangent-bar-term-identifications and the other candidates I checked. The two tool_uses (lem-pc-module-bounded-flat-kflat, lem-pur-derived-change-of-rings) are accepted; both are generic and already used the same way on many sk-i-curve-zero nodes. No SGA citation. The corrected item is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialDifferentialBaseChange",
+  "declaration": "Algebra.CotangentResolution.polynomial_differential_base_change",
+  "file": "lean/Sheaf/RingTheory/PolynomialDifferentialBaseChange.lean",
+  "statement": "theorem polynomial_differential_base_change {f g : Arrow CommRingCat.{u}} (q : f ⟶ g) (P : Augmentation f) (P' : Augmentation g) (h : AugmentedMap q P P') (hpolynomial : ∀ n : ℕ, ∃ (I : Type u) (e : CommRingCat.of (MvPolynomial I f.left) ≅ P.algebra.obj (op ⦋n⦌)), ∀ a : f.left, e.hom (MvPolynomial.C a) = P.base.app (op ⦋n⦌) a) (hbase : ∀ n : ℕ, CategoryTheory.IsPushout (P.base.app (op ⦋n⦌)) q.left (h.map.app (op ⦋n⦌)) (P'.base.app (op ⦋n⦌))) (D : DifferentialModel P) (D' : DifferentialModel P') : (∀ i : ℤ, Module.Flat f.right ((differentialComplex D).X i)) ∧ (HomologicalComplex.quasiIso (ModuleCat.{u} f.right) (.up ℤ)).kFlat (differentialComplex D) ∧ IsIso ((ModuleCat.ordinaryDerivedChangeOfRings q.right.hom).counit.app (differentialComplex D)) ∧ ∃ (s : D.module ⋙ ModuleCat.extendScalars q.right.hom ≅ D'.module) (θ : ((ModuleCat.extendScalars q.right.hom).mapHomologicalComplex (.up ℤ)).obj (differentialComplex D) ≅ differentialComplex D') (Θ : (ModuleCat.ordinaryDerivedExtendScalars q.right.hom).obj (DerivedCategory.Q.obj (differentialComplex D)) ≅ DerivedCategory.Q.obj (differentialComplex D')), (∀ (n : ℕ) (c : f.right) (b' : g.right) (p : P.algebra.obj (op ⦋n⦌)), s.hom.app (op ⦋n⦌) (b' ⊗ₜ[_, q.right.hom] ((D.termIso n).inv (differentialGenerator P n c p))) = (D'.termIso n).inv (differentialGenerator P' n (q.right c * b') (h.map.app (op ⦋n⦌) p))) ∧ (∀ (n : ℕ) (c : f.right) (b' : g.right) (p : P.algebra.obj (op ⦋n⦌)), θ.hom.f (-(n : ℤ)) (b' ⊗ₜ[_, q.right.hom] (complexGenerator D n c p)) = complexGenerator D' n (q.right c * b') (h.map.app (op ⦋n⦌) p)) ∧ Θ.hom = (ModuleCat.ordinaryDerivedChangeOfRings q.right.hom).counit.app (differentialComplex D) ≫ DerivedCategory.Q.map θ.hom",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d419a7b1",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Every node clause is rendered. Ring square via q : f ⟶ g. Arbitrary polynomial terms via hpolynomial (A-algebra iso, I : Type u), with no resolution condition. P' = P ⊗_A A' via a termwise IsPushout in CommRingCat; AugmentedMap and P'.triangle force the augmentation p⊗a' ↦ f(ε p)a'. Conclusions: termwise Module.Flat for all i : ℤ; kFlat; IsIso of the ordinaryDerivedChangeOfRings counit at K (c_K, correct direction); a simplicial iso s and a chain iso θ, both given by the generator formula and determined because generators span; Θ pinned by Θ.hom = counit ≫ Q.map θ.hom. Edge cases covered: empty/infinite I_n, C'=0, non-flat maps. Item changed only in lean and the added stmt_dep; dependency records identical to live; statement verbatim; docstrings and line widths OK; only sorry. Mechanical finding: ordinaryDerivedChangeOfRings = Classical.choice of nonempty_ordinaryDerivedChangeOfRings and ordinaryDerivedExtendScalars is its .F; these are objects built from the theorem and no definition node owns them, so PASS on that point. Advisory: the stage-1 theorem stmt_dep lem-trf-cotangent-resolution-coherence could be complemented by the landed definition node def-trf-cotangent-resolution-data, which owns the same declarations; some unneeded public imports (RingHom.Flat, OnePointDerivedRingIdentification). Not compiled (no change)."
+ }
+}

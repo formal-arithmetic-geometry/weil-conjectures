@@ -10,11 +10,12 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientData
 public import Sheaf.Paper.ProEtaleFixedModuleConstructible
 public import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
-import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
-import Sheaf.Algebra.Homology.ScalarHomTensorCancellation
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
+import Sheaf.Paper.CofinalCoefficientProjectionCocone
+import all Sheaf.SecSmoothPurity.ScalarExtensionFunctor
+import all Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import all Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 
 /-! # Cofinal finite reductions and constructibility
 
@@ -39,6 +40,8 @@ open SheafOfModules.SuccessiveDerivedQuotient
 
 namespace AlgebraicGeometry.ProEtale
 
+open AlgebraicGeometry.Scheme
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{u})
 
@@ -54,7 +57,13 @@ theorem sp_cofinal_finite_ideal_le (e : ℕ)
       v * Padic.coefficientExtensionUniformizer l E ^ e)
     (N j : ℕ) (h : j + 1 ≤ e * (N + 1)) :
     spEllIdeal l E ^ (N + 1) ≤ Padic.coefficientExtensionIdeal l E (j + 1) := by
-  sorry
+  change Ideal.span ({(l : Padic.coefficientExtensionIntegers l E)} :
+      Set (Padic.coefficientExtensionIntegers l E)) ^ (N + 1) ≤
+    Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) ^ (j + 1)
+  rw [hfactor, Ideal.span_singleton_mul_left_unit v.isUnit,
+    ← Ideal.span_singleton_pow, ← pow_mul]
+  exact Ideal.pow_le_pow_right h
 
 /-- The canonical quotient, sending the class of x to the class of x.
 Source: blueprint tower proof, quotient arithmetic
@@ -115,7 +124,21 @@ theorem sp_cofinal_finite_quotient_compatibility (e : ℕ)
       (sheafCompose (Scheme.ProEt.topology T)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
           (spCofinalFiniteCoefficientMap l E T e v hfactor N k h')) := by
-  sorry
+  cases e with
+  | zero =>
+    constructor
+    · intro M N j hMN h h'
+      omega
+    · intro N k j hkj h h'
+      omega
+  | succ e =>
+    obtain ⟨H, _, hb, hd, _⟩ :=
+      sp_cofinal_coefficient_projection_cocone l E T (e + 1) (by omega) v hfactor
+    constructor
+    · intro M N j hMN h h'
+      exact hb N M j hMN h h'
+    · intro N k j hkj h h'
+      exact hd N j k hkj h h'
 
 /-- The standard-localization instance of the recorded universal scalar presentation.
 This is only an abbreviation of the dependency's data, not a new tensor construction.
@@ -133,6 +156,61 @@ Source: blueprint coefficient convention
 instance spCofinalUniformizerQuotientFinite (j : ℕ) :
     Finite (Padic.coefficientExtensionRing l E (j + 1)) :=
   Padic.finite_coefficientExtensionRing l E (j + 1) (Nat.le_add_left 1 j)
+
+section
+attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
+  WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
+
+private theorem cofinalSiteSmall : EssentiallySmall.{u + 1} T.ProEt :=
+  essentiallySmallSelf.{0, u, u + 1} _
+
+attribute [local instance] cofinalSiteSmall
+
+private def cofinalPresentationScalarIso {A B : Type u} [CommRing A] [CommRing B]
+    (f : A →+* B)
+    (P : spCofinalScalarPresentation T (Scheme.proEtaleConstantRingMap (T := T) f)) :
+    P.derived ≅ scalarExtensionFunctor f T := by
+  let φ := Scheme.proEtaleConstantRingMap (T := T) f
+  let F := reductionChange T φ
+  let i : P.ordinary ≅ F := NatIso.ofComponents
+    (fun M ↦ eqToIso ((P.obj_eq M).trans (reductionChange_obj_eq T φ M).symm)) (by
+      intro M N g
+      dsimp only [eqToIso.hom]
+      rw [P.map_eq, reductionChange_map_eq]
+      simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_trans]
+      rfl)
+  let ih : P.ordinary.mapHomotopyCategory (.up ℤ) ≅ F.mapHomotopyCategory (.up ℤ) :=
+    { hom := i.hom.mapHomotopyCategory (.up ℤ)
+      inv := i.inv.mapHomotopyCategory (.up ℤ)
+      hom_inv_id := by
+        rw [← NatTrans.mapHomotopyCategory_comp, i.hom_inv_id,
+          NatTrans.mapHomotopyCategory_id]
+      inv_hom_id := by
+        rw [← NatTrans.mapHomotopyCategory_comp, i.inv_hom_id,
+          NatTrans.mapHomotopyCategory_id] }
+  have := P.universal
+  exact Functor.leftDerivedNatIso P.derived (reductionDerivedChange T φ)
+    P.counit (reductionDerivedCounit T φ)
+    (HomotopyCategory.quasiIso (SheafOfModules.SuccessiveDerivedQuotient.Modules.{u + 1, u, u + 1}
+      (Scheme.proEtaleConstantRing T A)) (.up ℤ))
+    (Functor.isoWhiskerRight ih DerivedCategory.Qh)
+
+private theorem cofinalTorIso {A : Type u} [CommRing A]
+    {K L : Scheme.proEtaleDerivedCategory T A} (i : K ≅ L) (a b : ℤ)
+    (h : Scheme.HasProEtaleTorAmplitude T A K a b) :
+    Scheme.HasProEtaleTorAmplitude T A L a b := by
+  obtain ⟨P, hf, hb, ⟨e⟩⟩ := (scalarExtension_tor_flat_model T A K a b h.1).mp h
+  exact (scalarExtension_tor_flat_model T A L a b h.1).mpr
+    ⟨P, hf, hb, ⟨i.symm ≪≫ e⟩⟩
+
+private theorem cofinalTorVanishing {A : Type u} [CommRing A]
+    (K : Scheme.proEtaleDerivedCategory T A) (a b : ℤ)
+    (h : Scheme.HasProEtaleTorAmplitude T A K a b) (i : ℤ) (hi : i < a ∨ b < i) :
+    IsZero ((DerivedCategory.homologyFunctor _ i).obj K) := by
+  obtain ⟨P, _, hb, ⟨e⟩⟩ := (scalarExtension_tor_flat_model T A K a b h.1).mp h
+  exact ((P.sc i).isZero_homology_of_isZero_X₂ (hb i hi)).of_iso
+    ((DerivedCategory.homologyFunctor _ i).mapIso e ≪≫
+      (DerivedCategory.homologyFunctorFactors _ i).app P)
 
 /-- Cofinal scalar associativity, its K-flat model, and transfer of constructibility
 and the same Tor interval. The completed ell projections are specified by equality
@@ -225,6 +303,71 @@ theorem sp_cofinal_finite_reduction_constructibility (e : ℕ) (he : 1 ≤ e)
         ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj
           ((p (WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j)).derived.obj
             K)) := by
-  sorry
+  obtain ⟨H, hH, _⟩ := sp_cofinal_coefficient_projection_cocone l E T e he v hfactor
+  have hc (N j : ℕ) (h : j + 1 ≤ e * (N + 1)) :
+      β N ≫ spCofinalFiniteCoefficientMap l E T e v hfactor N j h =
+        WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j := by
+    apply (sheafCompose (Scheme.ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map_injective
+    rw [Functor.map_comp, hβ N]
+    have hchoose : (sp_completed_coefficient_limit l E T).exists.choose =
+        (sp_completed_coefficient_limit l E T).choose :=
+      (sp_completed_coefficient_limit l E T).unique
+        (sp_completed_coefficient_limit l E T).exists.choose_spec
+        (sp_completed_coefficient_limit l E T).choose_spec.1
+    rw [hchoose]
+    convert (hH N j h).2.2.2.1 using 1
+    · rfl
+    · ext U x
+      rfl
+  refine ⟨?_, ?_, ?_⟩
+  · intro N j h
+    refine ⟨hc N j h, ?_⟩
+    refine ⟨n.derived (β N)
+      (spCofinalFiniteCoefficientMap l E T e v hfactor N j h) ≪≫
+        eqToIso (congrArg (fun f ↦ (p f).derived) (hc N j h)), rfl⟩
+  · intro N P hP hf
+    exact (SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
+      (J := Scheme.ProEt.topology T)
+      (β N) P (p (β N)).ordinary (p (β N)).obj_eq (p (β N)).map_eq hP
+        (fun i ↦ (SheafOfModules.flat_to_cat.{u + 1, u, u + 1} _ (P.X i) (hf i)).2)).1
+  · intro K a b hab hK j
+    have hj : j + 1 ≤ e * (j + 1) := Nat.le_mul_of_pos_left (j + 1) he
+    let q := spCofinalFiniteQuotient l E e v hfactor j j hj
+    let δ := WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j
+    let α : (p (β j)).derived ⋙
+        (p (spCofinalFiniteCoefficientMap l E T e v hfactor j j hj)).derived ≅
+          (p δ).derived :=
+      n.derived (β j) (spCofinalFiniteCoefficientMap l E T e v hfactor j j hj) ≪≫
+      eqToIso (congrArg (fun f ↦ (p f).derived) (hc j j hj))
+    let i : (scalarExtensionFunctor q T).obj ((p (β j)).derived.obj K) ≅
+        (p δ).derived.obj K :=
+      (cofinalPresentationScalarIso T q
+        (p (spCofinalFiniteCoefficientMap l E T e v hfactor j j hj))).symm.app _ ≪≫
+        α.app K
+    have hkill : (l ^ (j + 1) :
+        Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (j + 1)) = 0 :=
+      (hH j j hj).2.2.2.2.2.2.1
+    have hkill' : (l ^ (j + 1) : Padic.coefficientExtensionRing l E (j + 1)) = 0 :=
+      (hH j j hj).2.2.2.2.2.2.2
+    have hA : ∃ n : ℕ, ∀ x :
+        Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (j + 1),
+        (l ^ n) • x = 0 := by
+      refine ⟨j + 1, fun x ↦ ?_⟩
+      rw [nsmul_eq_mul, Nat.cast_pow, hkill, zero_mul]
+    have hB : ∃ n : ℕ, ∀ x : Padic.coefficientExtensionRing l E (j + 1),
+        (l ^ n) • x = 0 := by
+      refine ⟨j + 1, fun x ↦ ?_⟩
+      rw [nsmul_eq_mul, Nat.cast_pow, hkill', zero_mul]
+    obtain ⟨_, hconstructible, htor⟩ := scalarExtensionFunctor_preserves_constructible_tor
+      l hA hB q T ((p (β j)).derived.obj K)
+      (scalarExtension_bounded_of_tor T _ _ a b (hK j).2) (hK j).1 a b (hK j).2
+    have ht := cofinalTorIso T i a b htor
+    refine ⟨?_, ht, cofinalTorVanishing T _ a b ht⟩
+    intro k
+    exact constructibleProEtale_of_iso T _
+      ((DerivedCategory.homologyFunctor _ k).mapIso i) (hconstructible k)
+
+end
 
 end AlgebraicGeometry.ProEtale

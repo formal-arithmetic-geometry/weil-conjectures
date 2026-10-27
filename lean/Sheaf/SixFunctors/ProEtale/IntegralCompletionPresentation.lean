@@ -13,6 +13,7 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 import Sheaf.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquares
 import Sheaf.SixFunctors.ProEtale.IntegralReductionTransitionComparison
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Canonical completeness in the completed integral presentation
 

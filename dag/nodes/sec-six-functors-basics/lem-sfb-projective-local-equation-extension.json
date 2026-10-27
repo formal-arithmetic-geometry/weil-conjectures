@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-projective-local-equation-extension",
+ "kind": "statement",
+ "title": "Extension of a projective chart equation after a coordinate power",
+ "statement": "Let $R$ be a commutative ring, $n\\geq0$, and $B=R[z_0,\\ldots,z_n]$ with each variable of degree one. Put $P=\\operatorname{Proj}(B)$ [def-pc-proj], $U_j=D_+(z_j)=\\operatorname{Spec}(A_j)$ with $A_j=B_{(z_j),0}$ [def-nagata-homogeneous-localization-degree-zero], and let $i:Z\\hookrightarrow P$ be any closed immersion [def-weil-closed-immersion]. For $0\\leq j\\leq n$ set $Z_j=i^{-1}(U_j)$, and let $J_j$ be the kernel of $A_j\\to\\Gamma(Z_j,\\mathcal O_Z)$. Fix $a\\in\\{0,\\ldots,n\\}$. For every $f\\in J_a$ there exist integers $d,N\\geq0$ and a homogeneous polynomial $F\\in B_d$ such that $f=F/z_a^d$ in $A_a$ and, for every $0\\leq j\\leq n$, the function\n$$\\frac{z_a^N F}{z_j^{d+N}}\\in A_j$$\nrestricts to zero in $\\Gamma(Z_j,\\mathcal O_Z)$. In particular the same function on $U_a$ is $f=(z_a^NF)/z_a^{d+N}$. Vanishing here is equality of sections, including their nilpotent information; no reducedness, nonemptiness, Noetherian or finite-presentation assumption is imposed on $R$ or $Z$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 03GL, lemma-closed-in-projective-space, proof: converse J subset J', homogenization of f, the powers T_0^{d_i}, and the maximum over the standard charts."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By [def-nagata-homogeneous-localization-degree-zero], choose $d\\geq0$ and $F\\in B_d$ representing $f$ as $F/z_a^d$. This includes $f=0$, for which $d=0,F=0$ is permitted. Put $h_j=F/z_j^d\\in A_j$ for each $j$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space, proof: converse J subset J', homogenization of f, the powers T_0^{d_i}, and the maximum over the standard charts."
+   }
+  },
+  {
+   "text": "Write $C_j=\\Gamma(Z_j,\\mathcal O_Z)$ and $q_j:A_j\\to C_j$. By the affine description in [def-weil-closed-immersion], $Z_j\\cong\\operatorname{Spec}(A_j/J_j)$ over $U_j$, so $Z_j$ is affine and $C_j\\cong A_j/J_j$. Put $t_j=z_a/z_j\\in A_j$ and $s_j=q_j(t_j)$. By [lem-weil-pbc-proj-basic-open-intersection], $U_j\\cap U_a$ is the principal open $D_{U_j}(t_j)$. Applying [lem-weil-pbc-morphism-into-affine-scheme] to $Z_j\\to U_j$ identifies its preimage $Z_j\\cap Z_a$ with the principal open $D_{Z_j}(s_j)$. By clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme], the restriction $C_j\\to\\Gamma(Z_j\\cap Z_a,\\mathcal O_Z)$ is a localization at $s_j$. All these statements apply to empty affine schemes as well.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-proj-basic-open-intersection",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space, proof: converse J subset J', homogenization of f, the powers T_0^{d_i}, and the maximum over the standard charts."
+   }
+  },
+  {
+   "text": "On $U_j\\cap U_a$, restrictions are the graded localization maps of [def-pc-proj]. The fraction identity there is $h_j=t_j^d f$: both sides are $F/z_j^d$, since $(z_a/z_j)^d(F/z_a^d)=F/z_j^d$. Restrict this equality along $Z_j\\cap Z_a\\to U_j\\cap U_a$. Because $f\\in J_a$, the image of $f$ in $\\Gamma(Z_a,\\mathcal O_Z)$, and hence on $Z_j\\cap Z_a$, is zero. Thus $q_j(h_j)$ restricts to zero on $Z_j\\cap Z_a$. This is equality of actual sections, not vanishing in residue fields.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space, proof: converse J subset J', homogenization of f, the powers T_0^{d_i}, and the maximum over the standard charts."
+   }
+  },
+  {
+   "text": "The localization in Step 2 and [def-weil-ring-localization-away] imply that for each $j$ some $e_j\\geq0$ satisfies $s_j^{e_j}q_j(h_j)=0$ in $C_j$: use the defining fraction relation $q_j(h_j)/1=0/1$. Consequently $q_j(t_j^{e_j}h_j)=0$. The identity $t_j^{e_j}h_j=z_a^{e_j}F/z_j^{d+e_j}$ is multiplication of fractions. For $j=a$ one may choose $e_a=0$ because $h_a=f\\in J_a$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space, proof: converse J subset J', homogenization of f, the powers T_0^{d_i}, and the maximum over the standard charts."
+   }
+  },
+  {
+   "text": "Choose $N=\\max\\{e_0,\\ldots,e_n\\}$, which exists because $n\\geq0$ and the index set is finite and nonempty. For each $j$, $q_j(t_j^Nh_j)=s_j^{N-e_j}\\bigl(s_j^{e_j}q_j(h_j)\\bigr)=0$. But $t_j^Nh_j=z_a^NF/z_j^{d+N}$, as required, and $z_a^NF$ is homogeneous of degree $d+N$. On $U_a$, $z_a^NF/z_a^{d+N}=F/z_a^d=f$. For $n=0$ take $N=0$; for $Z_j=\\varnothing$ its section ring is the zero ring and the same equalities hold. The proof uses no reducedness, Noetherianity or finite-presentation hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space, proof: converse J subset J', homogenization of f, the powers T_0^{d_i}, and the maximum over the standard charts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-pc-proj",
+  "def-weil-closed-immersion",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-proj-basic-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 03GL, lemma-closed-in-projective-space, proof: converse J subset J', homogenization of f, the powers T_0^{d_i}, and the maximum over the standard charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A local equation vanishing on a closed subscheme of projective space extends to a globally vanishing homogeneous polynomial after multiplying by a power of the chart coordinate",
+   "results": "8 hits: AlgebraicGeometry.mem_basicOpen_den, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, ProjectiveSpectrum.mem_vanishingIdeal, AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply, AlgebraicGeometry.Proj.mem_basicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem', ProjectiveSpectrum.mem_basicOpen.  Read ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence pointwise and insensitive to nilpotent equations. Polynomial/Homogenize.lean:12-18,40-44 concerns only univariate polynomial homogenization. Neither gives this extension theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, homogenize",
+   "results": "0 hits: . loogle: unknown identifier 'homogenize' Read ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence pointwise and insensitive to nilpotent equations. Polynomial/Homogenize.lean:12-18,40-44 concerns only univariate polynomial homogenization. Neither gives this extension theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeniz|homogenis|vanish.*[Pp]roj|[Pp]roj.*vanish",
+   "results": "18 hits: Mathlib/NumberTheory/Height/MvPolynomial.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/LinearAlgebra/Projectivization/Constructions.lean, Mathlib/Tactic/Linarith/Oracle/SimplexAlgorithm/PositiveVector.lean.  Read ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence pointwise and insensitive to nilpotent equations. Polynomial/Homogenize.lean:12-18,40-44 concerns only univariate polynomial homogenization. Neither gives this extension theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend an equation of a closed subscheme on a standard affine chart of projective space by clearing denominators",
+   "results": "8 hits: DenomsClearable, AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.mk_mem_carrier, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.Proj.opensRange_awayι, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'.  Read ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence pointwise and insensitive to nilpotent equations. Polynomial/Homogenize.lean:12-18,40-44 concerns only univariate polynomial homogenization. Neither gives this extension theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous polynomial whose restriction vanishes on a closed projective subscheme in one chart can be multiplied by a coordinate power to vanish on every chart",
+   "results": "8 hits: ProjectiveSpectrum.vanishingIdeal, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul, ProjectiveSpectrum.mem_vanishingIdeal, ProjectiveSpectrum.homogeneousIdeal_le_vanishingIdeal_zeroLocus, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, ProjectiveSpectrum.coe_vanishingIdeal, ProjectiveSpectrum.zeroLocus, ProjectiveSpectrum.asHomogeneousIdeal.  Read ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence pointwise and insensitive to nilpotent equations. Polynomial/Homogenize.lean:12-18,40-44 concerns only univariate polynomial homogenization. Neither gives this extension theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"homogenize\"",
+   "results": "0 hits: .  Read ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence pointwise and insensitive to nilpotent equations. Polynomial/Homogenize.lean:12-18,40-44 concerns only univariate polynomial homogenization. Neither gives this extension theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeniz|homogenis|vanishingIdeal",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence does not retain nilpotent equations. Read QuasiCompact.lean:250-256: affine power-annihilation is an ingredient, not the projective extension statement; Basic.lean:176 gives chart sections only. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a section vanishing on a closed subscheme in one standard affine chart of projective space by a power of its homogeneous coordinate",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.Proj.basicOpenIsoAway, ProjectiveSpectrum.vanishingIdeal, ProjectiveSpectrum.coe_vanishingIdeal, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence does not retain nilpotent equations. Read QuasiCompact.lean:250-256: affine power-annihilation is an ingredient, not the projective extension statement; Basic.lean:176 gives chart sections only. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"vanish\"",
+   "results": "12 hits: ProjectiveSpectrum.vanishingIdeal, ProjectiveSpectrum.subset_vanishingIdeal_zeroLocus, ProjectiveSpectrum.vanishingIdeal_closure, ProjectiveSpectrum.vanishingIdeal_singleton, ProjectiveSpectrum.vanishingIdeal_univ, ProjectiveSpectrum.subset_zeroLocus_vanishingIdeal, ProjectiveSpectrum.zeroLocus_vanishingIdeal_eq_closure, ProjectiveSpectrum.subset_zeroLocus_iff_subset_vanishingIdeal. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence does not retain nilpotent equations. Read QuasiCompact.lean:250-256: affine power-annihilation is an ingredient, not the projective extension statement; Basic.lean:176 gives chart sections only. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local equation of a closed subscheme of projective space extends to an equation on all standard charts after multiplication by a power of the chart coordinate",
+   "results": "8 hits: AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.Proj.basicOpen, AlgebraicGeometry.Proj, AlgebraicGeometry.mem_basicOpen_den, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence does not retain nilpotent equations. Read QuasiCompact.lean:250-256: affine power-annihilation is an ingredient, not the projective extension statement; Basic.lean:176 gives chart sections only. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a projective space over an arbitrary ring a homogeneous equation vanishing on a closed subscheme over one chart can be multiplied by a coordinate power to vanish on the entire subscheme",
+   "results": "8 hits: ProjectiveSpectrum.mem_vanishingIdeal, AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, ProjectiveSpectrum.vanishingIdeal, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul, AlgebraicGeometry.Proj.mem_basicOpen, AlgebraicGeometry.mem_basicOpen_den, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:88-108: vanishingIdeal is an intersection of prime ideals, hence does not retain nilpotent equations. Read QuasiCompact.lean:250-256: affine power-annihilation is an ingredient, not the projective extension statement; Basic.lean:176 gives chart sections only. No full match.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Step 3 of lem-sfb-projective-hilbert-polynomial-representability (Grothendieck, Bourbaki Expose 221, Remark 3.9, the equations of E): the homogeneous ideal I_E of E over an affine open Spec A of S; ultimately the projective Hilbert schemes of de Jong 3.9 underlying the relative morphism scheme. This supports clause (3) of det-thm-sf-ctf-stability-direct-images via the recorded alteration/Hilbert-scheme chain; the immediate use is Hilbert representability, proof Step 3, homogeneous equations defining E. Extraction of returned proof Steps 4,5,6: Extension of a projective chart equation after a coordinate power. Mechanical ancestor is null: created.item chain ends at the stage-3 module name Sheaf.SixFunctors.CtfStabilityDirectImages, not a DAG node. The textual blueprint support is the retained det-thm-sf-ctf-stability-direct-images place above.",
+   "via": [
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-local-equation-extension",
+  "worker": "stage1",
+  "group": "Q33",
+  "summary": "Followed Stacks 03GL, converse inclusion: chose a homogeneous fraction, identified overlaps on each affine closed subscheme, used the defining localization kernel criterion and took a finite maximum. All ingredients already exist as Mathlib/definition nodes; no new nodes or statement changes. Checked actual section vanishing, including nilpotents and empty charts.",
+  "blueprint": "Retains the recorded homogeneous-equations subtask below det-thm-sf-ctf-stability-direct-images clause (3), through Hilbert representability. The five steps realize precisely Stacks 03GL converse inclusion, homogenization, overlap restriction and coordinate powers. The mechanical blueprint ancestor remains null as already recorded: the created.item chain terminates at a module name rather than a DAG id."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-11df804a9",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-11df804a9 (reviewer sub-agent of L); spot-checked: I read the whole item and all seven cited statements, and the source: Stacks 03GL (constructions-lemma-closed-in-projective-space), the converse paragraph of the proof. This is an S1 first split. The item is still unsplit with no repair note in live and in side-live. The statement and stmt_deps are byte-identical to the base, and there are no new nodes. Step 1: the degree-1 homogeneous fraction F/z_a^d (def-nagata-homogeneous-localization-degree-zero). Step 2: the affine description from def-weil-closed-immersion (01QO) gives C_j=A_j/J_j. lem-weil-pbc-proj-basic-open-intersection with d=e=1 gives U_j∩U_a=D(z_a/z_j); it uses the same AlgebraicGeometry.Proj as def-pc-proj. lem-weil-pbc-morphism-into-affine-scheme gives the preimage (Z_j)_{s_j}, and clause (0) of lem-weil-pbc-affine-ideals-closed-subscheme gives the localization at s_j. Step 3: the fraction identity h_j=t_j^d f plus naturality of i^#. Step 4: the kernel clause of def-weil-ring-localization-away. Step 5: the finite maximum. Every hypothesis holds, the elementary flags are justified, proof_deps equals the union of the uses, and all cited nodes are definitions or Mathlib leaves, so there are no route or tool_uses issues. Duplicate search: lem-sfb-homogeneous-quotient-chart-kernel and lem-per-projective-closed-subscheme-homogeneous-ideal are not this statement. The parent's Step 3 uses exactly this conclusion. Edge cases I tested: f=0, n=0, R=0 or Z empty, Z=P, the nonreduced V(z_1^2) case on P^1, and empty overlaps. The 'no such node' output of tools/review_split.py is a symlink artifact; I read all seven cited nodes directly. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLocalEquationExtension",
+  "declaration": "AlgebraicGeometry.projective_local_equation_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLocalEquationExtension.lean",
+  "statement": "theorem projective_local_equation_extension (R : Type u) [CommRing R] (n : ℕ) (Z : Scheme.{u}) (i : Z ⟶ @Proj _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R))) [IsClosedImmersion i] (a : Fin (n + 1)) (f : HomogeneousLocalization.Away (homogeneousSubmodule (Fin (n + 1)) R) (X a)) (hf : i.app (@Proj.basicOpen _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R)) (X a)) (@Proj.awayToSection _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R)) (X a) f) = 0) : ∃ (d N : ℕ) (F : homogeneousSubmodule (Fin (n + 1)) R d), f = @HomogeneousLocalization.Away.mk ℕ _ _ _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R)) _ _ (isHomogeneous_X R a) d F (by simp) ∧ (∀ j : Fin (n + 1), i.app (@Proj.basicOpen _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R)) (X j)) (@Proj.awayToSection _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R)) (X j) (@HomogeneousLocalization.Away.mk ℕ _ _ _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R)) _ _ (isHomogeneous_X R j) (d + N) (X a ^ N * (F : MvPolynomial (Fin (n + 1)) R)) (by simpa [Nat.add_comm] using (isHomogeneous_X_pow a N).mul F.property))) = 0) ∧ f = @HomogeneousLocalization.Away.mk ℕ _ _ _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) R) (MvPolynomial.gradedAlgebra (σ := Fin (n + 1)) (R := R)) _ _ (isHomogeneous_X R a) (d + N) (X a ^ N * (F : MvPolynomial (Fin (n + 1)) R)) (by simpa [Nat.add_comm] using (isHomogeneous_X_pow a N).mul F.property)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4629ca2c3",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps (def-pc-proj, def-nagata-homogeneous-localization-degree-zero, def-weil-closed-immersion), Stacks 03GL converse, module and report (both sections present). Lean matches clause by clause: arbitrary CommRing R, n:ℕ, Fin(n+1), Proj with explicit MvPolynomial.gradedAlgebra (total-degree homogeneousSubmodule grading), [IsClosedImmersion i]; hf = i.app U_a ∘ Proj.awayToSection f = 0 is exactly f∈J_a; conclusion ∃ d N (F:B_d): f=F/z_a^d (Away.mk = x/f^n), ∀ j z_a^N F/z_j^{d+N} ↦ 0 in Γ(i⁻¹U_j), and f=z_a^N F/z_a^{d+N}. Math true (powers of s_j on D(s_j), max N). Edge cases f=0, n=0, R=0, empty Z/charts, nonreduced Z admitted; universe u forced only by Z⟶Proj. lean.statement verbatim; stmt_deps unchanged and used; no new nodes/instances/helpers; only sorry; docstrings have source and blueprint tag and the 5-step plan. No duplicate in side-live lean/Sheaf or WeilConjectures (parent ProjectiveClosedSubschemeHomogeneousIdeal only sketches these steps in a docstring). No change, so no compile."
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "id": "lem-pur-resolution-normalized-comparison",
+ "kind": "statement",
+ "title": "Unique comparison normalized on functorial resolutions",
+ "statement": "Let W be a morphism property on C, Q:C→D its localization, and q:Id_C→P a functorial replacement with every q_X in W (hence Q(q_X) invertible). Let O:C→H, S,T:D→H, and let κ:Q⋙T≅U be a specified model isomorphism. If α:O→Q⋙S and β:O→U have invertible components on every P(X), there is a unique natural isomorphism e:S≅T with α_X ≫ e_{Q(X)} ≫ κ_X = β_X for every X.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0941; agent-formulated normalization subargument of compact-support realization Step 11."
+ },
+ "proof": [
+  {
+   "text": "Invert α at P(X), compose with β at P(X), and conjugate by S(Q(q_X)) and T(Q(q_X)). These component maps assemble as a natural isomorphism between Q⋙S and Q⋙T. Fully faithful precomposition with localization descends it to e.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of α and β along q_X cancels α at P(X) and gives the normalization equation at every X. For two normalized comparisons first cancel α at P(X), then use their naturality and cancel T(Q(q_X)); essential surjectivity of Q proves equality. For a specified model isomorphism κ, first replace β by β followed by κ inverse. Postcompose the resulting normalization by κ; cancelling κ proves equivalence of the two normalization predicates and preserves uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": "G1: proved by fully faithful precomposition with localization, using functorial replacements and cancellation of a specified model isomorphism. No new sorry.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of derived functors is uniquely normalized by transformations invertible on functorial resolutions",
+   "results": "Found rightDerivedUnique and the exact localization API; no direct formulation with two transformations invertible only after replacement.",
+   "date": "2026-10-27",
+   "verdict": "Use fully faithful precomposition and the existing restricted-system acyclicity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "One exact hit in Mathlib.CategoryTheory.Localization.Predicate, used to descend the normalized comparison.",
+   "date": "2026-10-27",
+   "verdict": "Reuse this Mathlib API."
+  },
+  {
+   "tool": "grep",
+   "query": "resolutionNormalizedComparison|coefficientRestrictionLimitAcyclicity|restricted_limit_acyclic",
+   "results": "No existing normalized replacement theorem. Found proved WeilConjectures.CompletionUnit.restricted_limit_acyclic and SheafOfModules.RestrictedTowerResolution.acyclicity, including the explicit strict-system equivalence and restriction characterization.",
+   "date": "2026-10-27",
+   "verdict": "Prove the new specialization from existing acyclicity; no new acyclicity assumption."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2, whole-system derived-limit coefficient transport; normalized-limit Step 11 of the compact-support prerequisite.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ResolutionNormalizedComparison",
+  "file": "lean/Sheaf/CategoryTheory/ResolutionNormalizedComparison.lean",
+  "declaration": "CategoryTheory.Localization.resolutionNormalizedComparison",
+  "statement": "theorem resolutionNormalizedComparison\n    {C D H : Type*} [Category C] [Category D] [Category H]\n    (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]\n    (P : C ⥤ C) (q : 𝟭 C ⟶ P) (hq : ∀ X, W (q.app X))\n    (O : C ⥤ H) (S T : D ⥤ H) (U : C ⥤ H) (κ : Q ⋙ T ≅ U)\n    (α : O ⟶ Q ⋙ S) (β : O ⟶ U)\n    (hα : ∀ X, IsIso (α.app (P.obj X))) (hβ : ∀ X, IsIso (β.app (P.obj X))) :\n    ∃! e : S ≅ T, ∀ X,\n      α.app X ≫ e.hom.app (Q.obj X) ≫ κ.hom.app X = β.app X",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T012834-L-2338232",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T012834-L-2338232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

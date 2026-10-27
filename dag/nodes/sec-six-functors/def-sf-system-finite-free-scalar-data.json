@@ -1,0 +1,155 @@
+{
+ "id": "def-sf-system-finite-free-scalar-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Coefficient preservation of tensor reassociation, evaluation, adjunction units and counits, and their mates in latest fix-prop-coherence.proof.md; scalar-square steps as identified below.",
+   "via": [
+    "lem-sf-system-proper-open-scalar-square",
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The canonical exact finite-free scalar calculus on strict systems",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let A and B be inverse sequences of commutative rings with compatible maps φ_n:A_n→B_n. On the pro-etale ringed sequence site [lem-coef-semilinear-derived-sections], define scalar extension E by the existing sheafified sectionwise tensor model, scalar restriction by restriction of scalars, and their normalized adjunction. A compatible basis family [Bases] gives exactness of E by sectionwise flatness [lem-pur-constant-finite-free-section-basis]. Define T as its exact derived localization, ell as the localization of the conjugate of the uniquely identity-on-sections restriction/direct-image square, chi as its proper-adjunction mate, and beta as the inverse of its open-adjunction inverse mate. These are the same explicit definitions formerly in lem-sf-system-proper-open-scalar-square, with their names, signatures and bodies unchanged; this node owns their construction data independently of the coherence theorem.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Section 5, Lemma 5.13 and Constructions 5.14–5.15 (pp. 34–35), coefficient-system proper/open operations. Agent-formulated finite-free scalar naturality of their intrinsic mate, including non-Cartesian squares; not a verbatim assertion of Zheng."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-open-tensor-normalization",
+  "def-sf-diagram-system-operation-shifts",
+  "def-coef-semilinear-proper-open-mate",
+  "def-sf-semilinear-proper-open-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply the constant-sheaf functor to the given compatibility equation to obtain levelCompatibility. For each test object of the sequence site, use lem-pur-constant-finite-free-section-basis to obtain a finite free basis for the coefficient section ring over the original section ring. Hence each section-ring map is flat. The presheaf scalar functor preserves finite limits because evaluation jointly reflects limits and each evaluated functor is exact sectionwise extension of scalars. Sheafification is exact, and the specified cochain model identifies its ordinary functor with this presheaf scalar functor followed by sheafification. Thus extension_exact gives finite-limit preservation. Finite-colimit preservation follows independently from the recorded scalar adjunction. This proof does not require positive rank or compatibility of the chosen bases; these hypotheses remain in the public signature. The existing exact localization T is consequently well typed on the whole system category.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-constant-finite-free-section-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Section 5, Lemma 5.13; agent exact finite-free model for arbitrary strict ring systems, rather than an assertion of Zheng"
+   }
+  },
+  {
+   "text": "For restrictionPush_existsUnique, naturality of the constant structural direct-image map gives the commutative coefficient-ring square. Compose the ordinary pushforward composition and coefficient-congruence isomorphisms: the resulting restriction/direct-image comparison is identity on each sequence-site section. Componentwise extensionality gives its uniqueness. ellOrdinary is its prescribed conjugate under the two composed left adjunctions. For an open immersion, its inverse-image functor is also explicit precomposition along the open site map with the inverse transpose coefficient isomorphism. Naturality of the site adjunction unit proves that the inverse mate of the restriction/direct-image comparison is invertible. Changing to the chosen inverse-image adjunction preserves invertibility. Two successive mate identities show that the open-extension/scalar inverse mate is a conjugate of that invertible comparison. Exact localization of this inverse mate proves betaInv_isIso for the stipulated ell and betaInv.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero) and 0E8I (lemma-j-shriek-and-tensor); ordinary tensor/unit calculation on the diagram topos"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-constant-finite-free-section-basis",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Extracted from lem-sf-system-proper-open-scalar-square; Section 5, Lemma 5.13 and Constructions 5.14–5.15 (pp. 34–35), coefficient-system proper/open operations. Agent-formulated finite-free scalar naturality of their intrinsic mate, including non-Cartesian squares; not a verbatim assertion of Zheng."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars inverse image functor comparison preserves composition and the identity and clopen projection",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.extendScalarsId and CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; no theorem for strict sheaf systems and their specified comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no match: ring-module pseudofunctor laws alone do not identify the sheaf-system maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with an adjunction mate and composition of inverse image functors",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; ModuleCat.homEquiv_extendScalarsId; CategoryTheory.mateEquiv_apply.",
+   "date": "2026-10-27",
+   "verdict": "no match: these give algebraic components or the mate formula, not the required normalized system identities"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mateEquiv_hcomp|conjugateEquiv_mateEquiv_vcomp in Mathlib/CategoryTheory/Adjunction/Mates.lean; scalarIntrinsicAlphaCube|scalarInverseImageCoherence across lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has generic mate composition; no existing declaration for these coefficient-system cubes. Other scalar coherence modules use finite constant coefficients or different model choices.",
+   "date": "2026-10-27",
+   "verdict": "no match for the geometric scalar cube or the specified ell coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SystemProperOpenScalarSquare",
+  "date": "2026-10-27",
+  "group": "A2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SystemProperOpenScalarData",
+  "file": "lean/Sheaf/SixFunctors/SystemProperOpenScalarData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.levelMap",
+  "statement": "abbrev levelMap (X : Scheme.{u}) (n : ℕ) : coefficients A X n ⟶ coefficients B X n",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.levelMap",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.levelCompatibility",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.calculus",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.E",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.restriction",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.scalarAdj",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.coefficientModule",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.Bases",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.extension_exact",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.extensionLimits",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.extensionColimits",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.T",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.restrictionPush_existsUnique",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.ellOrdinary",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.scalarShift",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.ell",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.chi",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.betaInv",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.betaInv_isIso",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Scalar.beta"
+  ],
+  "note": "Verbatim extraction of all construction declarations and their already proved auxiliary theorems. No object or field is chosen from a newly introduced existence theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-29e45",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T021254-L-2751689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-29e45",
+  "group": "A2",
+  "result": "fix",
+  "landing": "20261027T021254-L-2751689",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs clone's item prefix (verbatim except private-helper rename); new sorry statements vs pinned pComp/pId/ell/alpha definitions in SemilinearProperOpenMatePasting; item proof vs node steps; both direct importers + transitive EISM compiled against delivered files"
+ }
+}

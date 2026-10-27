@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-finite-smooth-diagonal-coordinates",
+ "kind": "lemma",
+ "title": "Diagonal exceptional mate in graph-normalized coordinates",
+ "statement": "Let $\\ell$ be prime, $n\\ge1$, and $A=\\mathbb Z/\\ell^n$ in the coefficient universe. Let $f:X\\to Y$ be separated, etale, locally of finite type, quasi-compact and compactifiable between Noetherian schemes, with $\\ell$ invertible at every stalk of both schemes [def-pc-scheme, def-asd-compactifiable]. Let $N$ be a family of compact-support/sum comparisons satisfying the graph and homotopy normalization equations [def-pur-finite-smooth-comparison-coordinates]. Use the unchanged coordinate and factor constructions [def-pur-finite-smooth-gamma-constructions]. Then finiteSmoothDiagonalFactor followed by finiteSmoothSectionCoordinates for the first projection and the diagonal equals finiteSmoothOmegaCoordinates for $f$, as an equality of arrows $\\omega_f\\to A_X$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-asd-compactifiable",
+  "def-pur-finite-smooth-comparison-coordinates",
+  "def-pur-finite-smooth-gamma-constructions"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "Three-factor formula at relative dimension zero; expanded in the existing proof steps of lem-pur-finite-smooth-gamma-normalization."
+ },
+ "proof": [
+  {
+   "text": "Fix the following normalization for any separated finite-type etale map $e:V\\to T$ between Noetherian schemes and a compactification $c$. Write $F_e=Re_!$, $S_e=D(e_{\\Sigma!})$. The canonical comparison $c_e:F_e\\xrightarrow{\\sim}S_e$ exists on the whole unbounded category by [lem-sfb-quasifinite-compact-support-exact]. We use its graph-normalized comparison, exactly the $c_e^c$ of [lem-pur-etale-support-map-compatibility], not an arbitrary functor isomorphism. The sum adjunction $S_e\\dashv e^*$ is [lem-amb-etale-adjoint-locality], and $F_e\\dashv e^\\times$ is [thm-amb-etale-exceptional-adjoint]. The Hom bijections send $a:F_eM\\to K$ first to $a c_e(M)^{-1}:S_eM\\to K$, then to its sum-adjoint. They give the unique natural isomorphism $\\rho_{e,K}:e^\\times K\\to e^*K$ satisfying\n$$\\epsilon^c_{e,K}=\\epsilon^\\Sigma_{e,K}\\,c_e(e^*K)\\,F_e(\\rho_{e,K}).$$\nIndeed start with the counit, which corresponds to the identity of $e^\\times K$ under the first adjunction; naturality then gives the displayed counit equation. The inverse Hom bijections and the triangle identities give its inverse. This specifies the adjunction-preserving coordinates, including $\\omega_e\\cong A_V$.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-etale-adjoint-locality",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  },
+  {
+   "text": "We compute exceptional base change in the coordinates of Step 1. For a square with etale vertical map $e$, write $h:V'\\to V$, $g:T'\\to T$, $e':V'\\to T'$, and $\\chi:h^*e^*\\cong e'^*g^*$. By [lem-pur-etale-support-map-compatibility](1), the actual proper/open exchange $C:g^*F_e\\to F_{e'}h^*$ becomes the specified sum exchange $b:g^*S_e\\to S_{e'}h^*$. Its inverse is the conjugate defined in [def-weil-pbc-etale-shriek-base-change-map]. That conjugate's unit--exchange--counit formula, with the two triangle identities, gives\n$$g^*\\epsilon^\\Sigma_{e,K}\\circ b_{e^*K}^{-1}=\\epsilon^\\Sigma_{e',g^*K}\\circ S_{e'}(\\chi_K).\\tag{E}$$\nConcretely the underived exchange is the restriction identification of [lem-weil-pbc-etale-underived-exchange-restriction]; both composites evaluate the section on the pulled-back lift. This is an equality of sheaf maps, hence degreewise of complexes, and of their descended maps for the exact sum and inverse-image functors. Substituting (E) and the counit equation of Step 1 into the defining transpose $g^*\\epsilon^c\\circ C^{-1}$ of [prop-asd-smooth-base-change] shows that $\\beta_{e,g,K}$ becomes precisely $\\chi_K$. For $K=A_T$ it is the unit identification $h^*A_V\\to A_{V'}$. Applying this to $e=f$, $g=f$, and pulling back by $\\Delta$ proves that the first factor of $\\alpha_f$ is the identity in these coordinates.",
+   "uses": [
+    "lem-pur-etale-support-map-compatibility",
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-etale-underived-exchange-restriction",
+    "prop-asd-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "Three-factor finite purity formula and its relative-dimension-zero normalization, expanded by the agent using the Stacks graph and projection maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-amb-etale-adjoint-locality",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "prop-asd-smooth-base-change",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "Three-factor formula at relative dimension zero; expanded in the existing proof steps of lem-pur-finite-smooth-gamma-normalization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale smooth purity dimension zero canonical right adjoint tensor map sum counit normalization",
+   "results": "8 hits, all generic etale/smooth algebra results; first Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero. No comparison of the specified derived maps.",
+   "date": "2026-10-27",
+   "verdict": "No matching finite smooth coordinate normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits, including rightAdjointUniq, homEquiv_symm_rightAdjointUniq_hom_app and rightAdjointUniq_inv_app. Their source Mathlib/CategoryTheory/Adjunction/Unique.lean was read.",
+   "date": "2026-10-27",
+   "verdict": "Use these for the formal final counit calculation; the geometric and tensor coordinate equations remain."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSmoothGammaMap|finite_smooth_gamma_normalization|finiteSmoothRankZeroFactor",
+   "results": "0 Mathlib hits. Local rg finds the definitions and the single postponed normalization theorem in the assigned module; no alternate proof.",
+   "date": "2026-10-27",
+   "verdict": "No existing normalization to apply."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale separated diagonal normal cone rank zero deformation specialization tensor orientation",
+   "results": "8 hits: IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, IsEtale, diagonal_Spec_map, Scheme.Etale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.Etale.formallyEtale, FormallyUnramified.isOpenImmersion_diagonal, Algebra.FormallyEtale.instTensorProduct.",
+   "date": "2026-10-27",
+   "verdict": "The diagonal clopen geometry has Mathlib inputs, already recorded in the parent DAG. No specified Rees-specialization or tensor-coordinate equation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothGammaNormalization",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Three-factor formula at relative dimension zero; expanded in the existing proof steps of lem-pur-finite-smooth-gamma-normalization.",
+   "via": [
+    "lem-pur-finite-smooth-gamma-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothDiagonalNormalization",
+  "file": "lean/Sheaf/Paper/FiniteSmoothDiagonalNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteSmoothDiagonal_coordinates",
+  "statement": "theorem finiteSmoothDiagonal_coordinates\n    (ell n : ℕ) [Fact ell.Prime] (hn : 1 ≤ n)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    (hX : ∀ x : X, IsUnit (ell : X.presheaf.stalk x))\n    (hY : ∀ y : Y, IsUnit (ell : Y.presheaf.stalk y))\n    (f : X ⟶ Y) [Etale f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [HasCompactification f]\n    (N : FiniteSmoothCompactSupportComparisons (NoetherianSectionSpecialization.Coeff ell n))\n    (hN : FiniteSmoothComparisonNormalized (NoetherianSectionSpecialization.Coeff ell n) N) :\n    finiteSmoothDiagonalFactor _ f ≫\n        (finiteSmoothSectionCoordinates _ N (pullback.fst f f) (pullback.diagonal f)).hom =\n      (finiteSmoothOmegaCoordinates _ N f).hom",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8bfa2",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261027T131504-L-2945560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8bfa2",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261027T131504-L-2945560",
+  "kind": "interface",
+  "note": "independent cc review: 16 moved defs byte-identical to the published item module; item statement unchanged; 3 holes = verbatim conjuncts of the item; direct importer FiniteSmoothPurityMaps compiled OK against the delivered files; axioms checked"
+ }
+}

@@ -1,0 +1,300 @@
+{
+ "id": "def-sfb-stack-small-etale-restriction",
+ "kind": "definition",
+ "title": "Cartesian small etale restriction of big-fppf module sheaves",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $p:\\mathcal X\\to\\mathit{Sch}/S$ be a category fibred in groupoids [def-sfb-stable-pointed-moduli-groupoids], with its big fppf topology and regular-function structure sheaf $\\mathcal O_{\\mathcal X}$ from [def-sfb-stack-quasi-coherent-algebra]. For $x\\in\\mathcal X(T)$, the projection functor $\\mathcal X/x\\to\\mathit{Sch}/T$ sends an arrow to its underlying scheme arrow. It is an equivalence: cartesian lifting supplies essential surjectivity and cartesian uniqueness supplies bijections on arrows. Compose the forgetful functor $T_{\\mathrm{et}}\\to\\mathit{Sch}/T$ for the small etale site [def-weil-pbc-etale-site] with an inverse of this equivalence to obtain $\\lambda_x:T_{\\mathrm{et}}\\to\\mathcal X/x$, and with $\\mathcal X/x\\to\\mathcal X$ to obtain $\\widetilde\\lambda_x$. The counit identifies the scheme below $\\widetilde\\lambda_x(V\\to T)$ with $V$. The lift is continuous for the small etale and big fppf topologies: an etale covering lifts to an fppf covering and cartesian uniqueness identifies its matching diagrams. Define $\\mathcal O_{x,\\mathrm{et}}=\\widetilde\\lambda_x^*\\mathcal O_{\\mathcal X}$ by precomposition; thus on a lifted etale test it is the original regular-function ring, canonically $\\Gamma(V,\\mathcal O_V)$, in the total site's common coefficient universe. For module sheaves [def-weil-sheaf-of-modules-category] define $\\mathrm{res}_{x,\\mathrm{et}}:\\operatorname{Mod}(\\mathcal O_{\\mathcal X})\\to\\operatorname{Mod}(\\mathcal O_{x,\\mathrm{et}})$ by the same precomposition on sections and linear maps, equivalently the continuous module pushforward along $\\widetilde\\lambda_x$ with the identity ring map. For every arrow $a:y\\to x$ above $u:T'\\to T$ and every etale test $V\\to T$, let its lifted restriction arrow be the unique arrow $\\widetilde\\lambda_y(T'\\times_T V)\\to\\widetilde\\lambda_x(V)$ lying above the fibre-product projection under the counit identifications, and whose composite to $x$ equals the composite through $y$ and $a$. The required base triangle follows from the counits and the fibre-product equation. These arrows are natural in $V$, by faithfulness of the slice comparison, and define the corresponding restriction natural transformation. No algebraicity, quasi-coherence, flatness, or finiteness hypothesis is needed for these constructions.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex; literature/stacks-project/stacks-sheaves.tex",
+  "place": "section-locally-quasi-coherent; equation-comparison-modules preceding definition-flat-base-change; definition-pullback: restriction to a test scheme by cartesian lifts."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "lem-sfb-fibred-test-object-ringed-localization",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put $P_x:\\mathcal X/x\\to\\mathit{Sch}/T$. Apply [lem-sfb-fibred-test-object-ringed-localization] with $\\mathcal C=\\mathcal X$, $U=T$ and $\\tau=\\mathrm{fppf}$. Its hypotheses are exactly the fibred-groupoid and inherited fppf-site hypotheses here. It gives the equivalence $P_x$ and the regular-function identification. Choose a quasi-inverse $Q_x$ with counit $\\epsilon:P_xQ_x\\simeq\\mathrm{id}$. Let $i:T_{\\mathrm{et}}\\to\\mathit{Sch}/T$ be the forgetful functor of [def-weil-pbc-etale-site]; define $\\lambda_x=Q_xi$ and $L_x=\\widetilde\\lambda_x$ by forgetting the arrow to $x$. Write $q_V:L_x(V)\\to x$ and $\\epsilon_V:p(L_x(V))\\simeq V$. The counit is a morphism over $T$, so $p(q_V)=v\\epsilon_V$ for $v:V\\to T$. These are the required scheme identifications; the choice is a quasi-inverse to an equivalence, not a choice of unrelated data.",
+   "uses": [
+    "lem-sfb-fibred-test-object-ringed-localization",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06W0 (lemma-localizing), 06W1 (definition-pullback), 06W2 (equation-comparison-push), 06W9 (lemma-localizing-structure-sheaf), 06WC (equation-comparison-modules)."
+   }
+  },
+  {
+   "text": "For a covering $\\{V_i\\to V\\}$ in $T_{\\mathrm{et}}$, the underlying maps of $\\{L_x(V_i)\\to L_x(V)\\}$ are identified with $\\{V_i\\to V\\}$ by naturality of $\\epsilon$. Each is flat and locally of finite presentation by [def-weil-etale-morphism], and they are jointly surjective. Hence the lifted family is fppf by [def-pc-fppf-site], and covers the total site by [def-sfb-stack-quasi-coherent-algebra]. For any $W\\to V$ in $T_{\\mathrm{et}}$, its pullback with $V_i\\to V$ is the scheme pullback by [def-weil-pbc-etale-site]. Every total-category arrow is strongly cartesian by the unique-factorization clause of [def-sfb-stable-pointed-moduli-groupoids]. Apply [lem-sfb-cartesian-lift-pullback-square] to $L_x(V_i)\\to L_x(V)\\leftarrow L_x(W)$: its base pullback is the scheme $V_i\\times_VW$ after the counit identifications, and the arrow from $L_x(V_i\\times_VW)$ to $L_x(W)$ is a cartesian lift of its projection. Thus the canonical comparison to the total-category pullback is an isomorphism. This verifies both conditions of continuity in [def-weil-pbc-sites-and-cohomology](3), including preservation of the overlaps.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "def-weil-pbc-etale-site",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-cartesian-lift-pullback-square",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/categories.tex",
+    "place": "Tag 00WV (definition-continuous), conditions (1)--(2); Tag 06N4 (lemma-strongly-cartesian-fibre-product)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-site-continuous-pushforward-sheaf], precomposition with $L_x$ sends sheaves of sets and abelian groups to sheaves. Set $\\mathcal O_{x,\\mathrm{et}}(V)=\\mathcal O_{\\mathcal X}(L_x(V))$ and $(\\mathrm{res}_{x,\\mathrm{et}}M)(V)=M(L_x(V))$. Retain the original ring operations, module actions and restrictions. The module semilinearity equation of [def-weil-sheaf-of-modules-category] is unchanged under precomposition; ring and module axioms hold at every object. On a module morphism $f$, use the linear component $f_{L_x(V)}$; identities and composition are inherited componentwise. Thus this defines the claimed functor on module sheaves. The ring identification in [lem-sfb-fibred-test-object-ringed-localization] identifies these coefficient rings canonically with $\\Gamma(V,\\mathcal O_V)$, with the same restriction maps. With the coefficient ring defined as this precomposition, its structure map to itself is the identity, so the construction is precisely continuous module pushforward with that ring map. All evaluations use the common universe fixed in the hypothesis.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sfb-fibred-test-object-ringed-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06W0 (lemma-localizing), 06W1 (definition-pullback), 06W2 (equation-comparison-push), 06W9 (lemma-localizing-structure-sheaf), 06WC (equation-comparison-modules)."
+   }
+  },
+  {
+   "text": "Fix $a:y\\to x$ over $u:T'\\to T$. By [lem-weil-pbc-etale-base-change-finite-limits], $B_u(V)=T'\\times_TV$ is a functor on small etale tests, with projections $r_V:B_u(V)\\to V$ and $b_V:B_u(V)\\to T'$. Write $\\epsilon^x_V:p(L_x(V))\\simeq V$ and $\\epsilon^y_{B_u(V)}:p(L_y(B_u(V)))\\simeq B_u(V)$. The required underlying arrow is $h_V=(\\epsilon^x_V)^{-1}r_V\\epsilon^y_{B_u(V)}$. The counit identities from step 1 and the fibre-product equation $v r_V=u b_V$ of [def-pc-fibre-product] give\n$$p(q^x_V)h_V=v\\epsilon^x_V(\\epsilon^x_V)^{-1}r_V\\epsilon^y_{B_u(V)}=u b_V\\epsilon^y_{B_u(V)}=p(aq^y_{B_u(V)}).$$\nThus $h_V$ is a morphism in the scheme slice from $P_x(aq^y_{B_u(V)})$ to $P_x(q^x_V)$. The equivalence in [lem-sfb-fibred-test-object-ringed-localization] gives a unique preimage $t_V:L_y(B_u(V))\\to L_x(V)$ in the slice over $x$. In particular $q^x_Vt_V=aq^y_{B_u(V)}$ and $p(t_V)=h_V$. This proves existence and uniqueness with the precise base triangle.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-pc-fibre-product",
+    "lem-sfb-fibred-test-object-ringed-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06W0 (lemma-localizing), 06W1 (definition-pullback), 06W2 (equation-comparison-push), 06W9 (lemma-localizing-structure-sheaf), 06WC (equation-comparison-modules)."
+   }
+  },
+  {
+   "text": "Let $f:V\\to W$ be a morphism of etale tests. Both $L_x(f)t_V$ and $t_WL_y(B_u(f))$ are arrows from $(L_y(B_u(V)),aq^y_{B_u(V)})$ to $(L_x(W),q^x_W)$ in $\\mathcal X/x$: the triangles follow from the definition of $Q_xi$ and $Q_yi$ as functors into the slices, and from step 4. Naturality of the counits gives\n$$p(L_x(f))h_V=(\\epsilon^x_W)^{-1}f r_V\\epsilon^y_{B_u(V)},\\qquad h_Wp(L_y(B_u(f)))=(\\epsilon^x_W)^{-1}r_W B_u(f)\\epsilon^y_{B_u(V)}.$$\nThese are equal because $f r_V=r_WB_u(f)$, the defining projection equation for the induced fibre-product map in [def-pc-fibre-product]. Faithfulness of $P_x$ from [lem-sfb-fibred-test-object-ringed-localization] gives $L_x(f)t_V=t_WL_y(B_u(f))$. This is the naturality of $t:L_yB_u\\to L_x$. Applying a module presheaf contravariantly gives its restriction comparison, natural also in module morphisms by their defining naturality square. No algebraicity, quasi-coherence, flatness of $u$, or finiteness was used.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-fibred-test-object-ringed-localization",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06W0 (lemma-localizing), 06W1 (definition-pullback), 06W2 (equation-comparison-push), 06W9 (lemma-localizing-structure-sheaf), 06WC (equation-comparison-modules)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fibred-test-object-ringed-localization",
+  "def-weil-pbc-etale-site",
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-cartesian-lift-pullback-square",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06W0 (lemma-localizing), 06W1 (definition-pullback), 06W2 (equation-comparison-push), 06W9 (lemma-localizing-structure-sheaf), 06WC (equation-comparison-modules)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules on a stack to the small etale site of a test scheme by cartesian lifts",
+   "results": "{\"t\": \"2026-10-24T12:04:18Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of sheaves of modules on a stack to the small etale site of a test scheme by cartesian lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ModuleCat.tildeInModuleCat\", \"SheafOfModules.restrictScalars\"], \"digest\": \"1c51c9f3bd20dd3c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; existing project helpers are relocated without duplication under the maintainer return."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian restriction from a category fibred in groupoids big fppf module sheaves to small etale site of a test scheme",
+   "results": "{\"t\": \"2026-10-24T12:04:19Z\", \"tool\": \"leanfinder\", \"query\": \"Cartesian restriction from a category fibred in groupoids big fppf module sheaves to small etale site of a test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"993ca70a6f33cf6d\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; existing project helpers are relocated without duplication under the maintainer return."
+  },
+  {
+   "tool": "grep",
+   "query": "moduliTestSlice|moduliEtaleLift|moduliEtaleModuleRings|moduliEtaleRestriction",
+   "results": "{\"t\": \"2026-10-24T12:04:17Z\", \"tool\": \"grep\", \"query\": \"moduliTestSlice|moduliEtaleLift|moduliEtaleModuleRings|moduliEtaleRestriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; existing project helpers are relocated without duplication under the maintainer return."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l moduliTestSlice|moduliEtaleLift|moduliEtaleModuleRings|moduliEtaleRestriction dag/nodes lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search cartesian small etale restriction",
+   "results": "Only lean/Sheaf/AlgebraicGeometry/StackLqcCoherator.lean and dag/nodes/sec-six-functors-basics/lem-sfb-stack-lqc-coherator.json matched. No definition node owned these helpers. No WeilConjectures match; 0 blueprint nodes match. The helpers are moved to their new owning module and removed from the coherator module, which publicly imports it.",
+   "date": "2026-10-24",
+   "verdict": "Ownership extraction required by the independent review, not a second definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules on a category fibred in groupoids to the small etale site of a test scheme",
+   "results": "{\"t\": \"2026-10-24T13:21:17Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of sheaves of modules on a category fibred in groupoids to the small etale site of a test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.over\", \"AlgebraicGeometry.Scheme.Modules\", \"ModuleCat.tilde\", \"SheafOfModules.forgetToSheafModuleCat\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj\", \"SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections\", \"AlgebraicGeometry.Scheme.PresheafOfModules\"], \"digest\": \"7b3fb54bc81c247e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme modules, ordinary fibres or already-equivalent slice functors, not the complete fibred-groupoid small-etale construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, Functor.IsContinuous",
+   "results": "{\"t\": \"2026-10-24T13:21:49Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward, Functor.IsContinuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.IsContinuous'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable: query rejected for unknown identifier; retried with SheafOfModules.pushforward"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFibredInGroupoids|isEquivalence.*[Oo]ver|[Oo]ver.*isEquivalence",
+   "results": "{\"t\": \"2026-10-24T13:21:49Z\", \"tool\": \"grep\", \"query\": \"IsFibredInGroupoids|isEquivalence.*[Oo]ver|[Oo]ver.*isEquivalence\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\"], \"digest\": \"3d8fd6f9a7c887c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme modules, ordinary fibres or already-equivalent slice functors, not the complete fibred-groupoid small-etale construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules on a stack to the small etale site by cartesian lifts",
+   "results": "{\"t\": \"2026-10-24T13:22:20Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of sheaves of modules on a stack to the small etale site by cartesian lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"PresheafOfModules.restrictScalarsObj\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"ModuleCat.Tilde.toOpen\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"f1ec30d28d31aa7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme modules, ordinary fibres or already-equivalent slice functors, not the complete fibred-groupoid small-etale construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category fibered in groupoids induces an equivalence from the slice over an object to the slice of the base category",
+   "results": "{\"t\": \"2026-10-24T13:22:22Z\", \"tool\": \"leanfinder\", \"query\": \"A category fibered in groupoids induces an equivalence from the slice over an object to the slice of the base category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"CategoryTheory.Pseudofunctor.CoGrothendieck.instIsEquivalenceαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor\", \"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse_obj_fiber\", \"CategoryTheory.Over.instIsEquivalenceObjPost\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceFunctor_obj_fiber\", \"HasFibers.category\"], \"digest\": \"852cf4237a0bcec3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme modules, ordinary fibres or already-equivalent slice functors, not the complete fibred-groupoid small-etale construction"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|pushforward_obj|def over|IsContinuous",
+   "results": "{\"t\": \"2026-10-24T13:24:33Z\", \"tool\": \"grep\", \"query\": \"def pushforward|pushforward_obj|def over|IsContinuous\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"38\", \"44\", \"51\", \"59\", \"76\"], \"digest\": \"845e4818b25421af\"}",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic continuous module pushforward exists (PushforwardContinuous.lean:44-49); continuity and cartesian lift construction must still be supplied"
+  },
+  {
+   "tool": "grep",
+   "query": "isEquivalence|[Oo]ver|[Ss]lice",
+   "results": "{\"t\": \"2026-10-24T13:28:02Z\", \"tool\": \"grep\", \"query\": \"isEquivalence|[Oo]ver|[Ss]lice\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fiber.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fiber.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fiber.lean\"], \"digest\": \"50cdfc043f996d18\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme modules, ordinary fibres or already-equivalent slice functors, not the complete fibred-groupoid small-etale construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "{\"t\": \"2026-10-24T13:28:02Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardId\", \"SheafOfModules.pushforward\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver\", \"SheafOfModules.overPushforwardOverAdj\", \"SheafOfModules.isLeftAdjoint_pushforward_of_isIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardNatTrans\"], \"digest\": \"044b55baec8a6901\"}",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic continuous module pushforward exists (PushforwardContinuous.lean:44-49); continuity and cartesian lift construction must still be supplied"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Precomposition along a continuous functor of sites defines a pushforward functor on sheaves of modules",
+   "results": "{\"t\": \"2026-10-24T13:28:03Z\", \"tool\": \"leansearch\", \"query\": \"Precomposition along a continuous functor of sites defines a pushforward functor on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuous\", \"SheafOfModules.pushforward\", \"PresheafOfModules.pushforward₀\", \"TopCat.Sheaf.pushforward\", \"TopCat.Presheaf.pushforward\", \"PresheafOfModules.pushforward₀_obj\", \"CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map\", \"SheafOfModules.pushforward_map_val\"], \"digest\": \"0d3f2983b7d66623\"}",
+   "date": "2026-10-24",
+   "verdict": "partial match: generic continuous module pushforward exists (PushforwardContinuous.lean:44-49); continuity and cartesian lift construction must still be supplied"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-qcoh-flat-atlas-exactness",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: module tensor closure and flat-atlas detection before the smooth-etale surjectivity consequence; canonical cartesian small-etale restriction used by the flat-atlas tests.",
+   "via": [
+    "lem-sfb-stack-qcoh-flat-atlas-exactness",
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "import_flags": [],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmallEtaleRestriction",
+  "declaration": "CategoryTheory.moduliEtaleRestriction",
+  "declarations": [
+   "CategoryTheory.moduliTestSlice",
+   "CategoryTheory.moduliTestSlice_isEquivalence",
+   "CategoryTheory.moduliEtaleLiftOver",
+   "CategoryTheory.moduliEtaleLift",
+   "CategoryTheory.moduliEtaleLiftSchemeIso",
+   "CategoryTheory.moduliEtaleLift_isContinuous",
+   "CategoryTheory.moduliEtaleModuleRings",
+   "CategoryTheory.moduliEtaleRestriction",
+   "CategoryTheory.moduliEtaleLiftArrow_w",
+   "CategoryTheory.moduliEtaleLiftArrow",
+   "CategoryTheory.moduliEtaleLiftArrow_naturality",
+   "CategoryTheory.moduliEtaleLiftTransformation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmallEtaleRestriction.lean",
+  "statement": "def moduliEtaleRestriction {S : Scheme.{u}}\n    (F : BasedCategory.{v, w} (Over S)) (hF : IsFibredInGroupoids F) (x : F.obj) :\n    ringedSiteModules.{max (u + 1) v w} (moduliModuleRings F hF) ⥤\n      ringedSiteModules.{max (u + 1) v w} (moduliEtaleModuleRings F hF x)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair requested by L at immutable head b0ebbc58f14f: extracted the existing cartesian small-etale restriction helpers, slice equivalence, continuity and lifted-arrow construction unchanged from StackLqcCoherator. Their definitions now have this definition-node owner; the coherator publicly imports the new module. The four named theorem obligations are stated in the node and have full proof docstrings."
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-stack-small-etale-restriction",
+  "worker": "stage1",
+  "summary": "Preserved the entire definition and its existing Lean record; supplied five construction-verification steps for the slice equivalence, continuity, actual module functor, base triangle and naturality. Reused existing ringed-localization and cartesian-pullback nodes, with no new nodes. Recorded actual new Mathlib searches in addition to inherited history.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md, especially (3). Its current proof uses compactification; the inherited from.place instead describes an older alteration/moduli prerequisite chain. This auxiliary definition has no own imported blueprint text and ancestor reports null; retained that inherited ancestry without inventing a current blueprint claim. The verification follows Stacks 06W0/06W1/06W2/06W9/06WC and changes no unit route. Whole-blueprint searches for small etale restriction, cartesian restriction, fibred test object and 06W0 found no imported duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic continuous-precomposition sheaf criterion 00WW, after explicit verification of 00WV; no replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-44ad2c0db",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-44ad2c0db (reviewer sub-agent of L); spot-checked: I read the item in full, every cited statement, and Stacks stacks-sheaves 06W0/06W1/06W2 (with tags 06W9/06WC/00WV/00WW/06N4 checked in tags/tags). The statement is unchanged; the delivery adds a five-step proof and no new nodes. Base-change morphism: the arrow t_V: L_y(T'×_T V) → L_x(V) over the projection gives M(L_x V) → (u_* res_y M)(V). This is Stacks' c_phi of 06W2 in the same direction. Coefficient category: Mod(O_X fppf) → Mod(O_{x,et}) with the identity ring map and O_{x,et}(V)=Γ(V,O_V); there is no flatness or isomorphism claim. Step 1: the localization lemma applied with tau=fppf gives the slice equivalence, and p(q_V)=vε_V holds because the counit lies over T. Step 2: the two clauses of 00WV. Étale maps are flat and lfp, so the lifted family is an fppf cover. Every arrow is strongly cartesian by the unique-factorization clause, so the cartesian-square lemma applies with an ε-conjugated base pullback, and the lifted overlaps are total-category pullbacks. Step 3: the 00WW tool lemma plus pointwise module structure. Steps 4 and 5 are elementary; I recomputed p(q^x_V)h_V = u b_V ε^y = p(a q^y), and naturality reduces to f r_V = r_W B_u(f). The 06W2 presheaf-naturality check that Stacks omits is written out. Edge cases checked: V empty, u a closed immersion (not flat), nontrivial automorphisms, X = Sch/S. Duplicates: no new nodes. The closest existing nodes, lem-sfb-fibred-big-etale-restriction-calculus and lem-sfb-stack-small-etale-comparison-calculus, are comparison lemmas, not this definition. The added stmt_deps are justified by the statement (fibre product, continuity, the slice equivalence as the theorem behind well-definedness); a cycle check is clean. I accept the declared tool use of lem-weil-pbc-site-continuous-pushforward-sheaf (generic 00WW). Batch 5: the flagged path reaches def-trf-projective-bundle-morphism only via def-sfb-stable-pointed-moduli-groupoids. That node was already a stmt_dep on the base. The delivery adds only two nodes to the closure: the localization lemma and the cartesian-square lemma. Neither is in the trace-formula or Poincaré chapters. The reached node is a general projective-bundle definition, not a step of either assumed proof, so no assumption leaf is needed. The inherited blueprint place mismatch is reported honestly. Stage-2 note: unify the module's sorried moduliTestSlice_isEquivalence with the localization lemma when that lemma gets Lean."
+ }
+}

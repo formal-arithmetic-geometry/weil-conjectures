@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-fppf-local-algebraic-space",
+ "kind": "statement",
+ "title": "Fppf-local algebraic-space representability with a bounded family of charts",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $F$ be a sheaf of sets on the big fppf site of $T$ [def-pc-fppf-site]. Let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering. Suppose that the sheaf $F_i=h_{T_i}\\times F$ is an algebraic space over $T_i$ [def-trf-algebraic-space], for every $i$. Suppose there are representable surjective etale scheme charts $V_i\\to F_i$ such that the scheme $\\coprod_{i\\in I}V_i$ belongs to the chosen big site; the algebraic-space coproduct under this chart condition is [lem-trf-algebraic-space-coproduct], and scheme coproducts are [lem-weil-pbc-scheme-coproduct-family]. Then $F$ is an algebraic space over $T$. In particular the size condition is satisfied when $I$ and all the charts $V_i$ are small in one Grothendieck universe and the big site contains their scheme coproduct. Here $h_Z(W)=\\operatorname{Mor}_T(W,Z)$, and products of sheaves are evaluated objectwise.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04SK (lemma-locally-algebraic-space), with spaces.tex Tag 02WQ (lemma-coproduct-algebraic-spaces) for the sufficient chart-size condition."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-algebraic-space-coproduct"
+ ],
+ "proof": [
+  {
+   "text": "Put $U=\\coprod_iF_i$ in fppf sheaves on $(\\mathit{Sch}/T)_{fppf}$ and let $q:U\\to F$ be induced by the second projections $F_i=h_{T_i}\\times F\\to F$. Each $F_i$ is given as an algebraic space over $T_i$; by part (1) of [lem-sfb-space-change-base-to-integers] for $g:T_i\\to T$, the same sheaf viewed over $T$ (with $j_!$ given by the displayed coproduct formula, which recovers $h_{T_i}\\times F$) is an algebraic space over $T$, and the chart $V_i$ viewed as a $T$-scheme still maps surjectively and etale to it. The supplied charts $V_i\\to F_i$ and their site-valued scheme coproduct satisfy exactly [lem-trf-algebraic-space-coproduct], so $U$ is an algebraic space over $T$. This is where the chart-size hypothesis is used.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lem-trf-algebraic-space-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WQ (lemma-coproduct-algebraic-spaces); Tag 03I4 (lemma-change-base-scheme), part (3)"
+   }
+  },
+  {
+   "text": "Fix a site scheme $Z\\to T$ and $a\\in F(Z)$. Set $Z_i=Z\\times_TT_i$ and $P_a=\\coprod_i Z_i$ using [def-pc-fibre-product] and [lem-weil-pbc-scheme-coproduct-family], in the bound of [def-weil-size-convention]. There is a natural isomorphism $h_{P_a}\\simeq h_Z\\times_FU$ over $h_Z$. Indeed [lem-trf-fppf-sheaf-coproduct-partition] describes a section $u\\in U(W)$ by a clopen partition $W=\\coprod_iW_i$ and pairs $(b_i,s_i)\\in T_i(W_i)\\times F(W_i)$. A section of the right hand side is $(g,u)$ with $g:W\\to Z$ and $q(u)=g^*a$; this equation says exactly $s_i=(g|_{W_i})^*a$. Thus its data reduce to the partition and the maps $(g|_{W_i},b_i):W_i\\to Z_i$. They glue uniquely to a map $W\\to P_a$; conversely inverse images of the summands of $P_a$ recover this data. The two operations are inverse and commute with restriction, by the restriction clause of the partition lemma and uniqueness of gluing. Hence this identifies the sheaves and their projections, without using a diagonal for $F$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention",
+    "lem-trf-fppf-sheaf-coproduct-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04SK (lemma-locally-algebraic-space), fibre-square calculation in the proof; spaces.tex Tags 0F15 and 02WO"
+   }
+  },
+  {
+   "text": "By [lem-trf-fppf-covering-base-change], $\\{Z_i\\to Z\\}_i$ is an fppf covering. Thus every $Z_i\\to Z$ is flat and locally of finite presentation and their images cover $Z$ [def-pc-fppf-site]. The map $p_a:P_a\\to Z$ restricts to these maps on its disjoint open summands. For a point of $P_a$ in $Z_i$ its source local ring and its map from the target local ring are those for $Z_i\\to Z$, so it is flat [def-weil-flat-morphism]. Affine neighbourhoods witnessing finite presentation for $Z_i\\to Z$ remain affine open neighbourhoods in $P_a$, so $p_a$ is locally of finite presentation [def-sbc-locally-finite-presentation]. The union of the images gives surjectivity. This uses neither finiteness of $I$ nor quasi-compactness.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-pc-fppf-site",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021O (lemma-fppf), (3); morphisms.tex Tags 01U3 and 01TP"
+   }
+  },
+  {
+   "text": "Regard the scheme $P_a$ as the algebraic space $h_{P_a}$ over $Z$ by [def-trf-scheme-algebraic-space]; by part (1) of [lem-sfb-space-change-base-to-integers] for $Z\\to T$ this is the sheaf $h_{P_a}$ on $(\\mathit{Sch}/T)_{fppf}$ of step 2 together with its map to $h_Z$. The scheme-comparison clause of [lem-sfb-space-local-properties-chart-test] identifies the flatness and local finite presentation in step 3 with their algebraic-space meanings. Surjectivity also holds on point classes: a field-valued point of $Z$ has an underlying point in the image of some $Z_i$; a common residue-field extension of this field and that of a point above it gives a lift representing the same point class. Steps 1--3 therefore verify every scheme-test hypothesis of [lem-sfb-fppf-space-atlas-bootstrap] for $q:U\\to F$. Apply that theorem to obtain that $F$ is an algebraic space. The final sufficient size condition of the item is precisely its assumed site membership of the chart coproduct: a small family of small schemes has a small disjoint union, and the stated big-site containment supplies the remaining condition.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04SK (lemma-locally-algebraic-space), final application of Tag 04S6 (theorem-final-bootstrap)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-algebraic-space-coproduct",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-size-convention",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-fppf-covering-base-change",
+  "def-pc-fppf-site",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-fppf-space-atlas-bootstrap",
+  "lem-sfb-space-change-base-to-integers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04SK (lemma-locally-algebraic-space), with spaces.tex Tag 02WQ (lemma-coproduct-algebraic-spaces); explicit scheme-test calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf which is an algebraic space locally on an fppf cover of the base is an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski\", \"type\": \"AlgebraicGeometry.Scheme.zariskiTopology.Subcanonical\", \"doc\": \"The Zariski topology on the category of schemes is the Grothendieck topology where covering families are collections of open immersions whose images cover the target scheme. This topology satisfies th\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  (∀ (x : ↑X.toTopCat),\\n      ∃ R f,\\n        x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base) ∧\\n          AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f) →\\n    AlgebraicGeometry.Scheme\", \"doc\": \"A locally ringed space $ X $ is a scheme if every point $ x \\\\in X $ is contained in the image of an open immersion from the spectrum of some commutative ring $ R $. This establishes that $ X $ is loca\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f)\\n  (i : (CategoryTheory.Precove\", \"doc\": \"Given a diagram of schemes $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, the open covers $\\\\mathcal{U}_X(i)$ constructed f\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of algebraic space representability for sheaves with local etale scheme atlases",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)),\\n  (AlgebraicGeometry.Scheme.LocalRepresentabi\", \"doc\": \"Given a sheaf $F$ on the category of schemes with the Zariski topology, an index type $\\\\iota$, a family of schemes $X_i$, and morphisms from the Yoneda embedding of $X_i$ to $F$ that are open immersio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i))\\n  [CategoryTheory.Presheaf.IsLocallySurjective\", \"doc\": \"The morphism from the Yoneda embedding of a glued scheme constructed via Zariski gluing data to a sheaf is locally surjective with respect to the Zariski topology. This means that for every scheme, th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locally_algebraic_space|locallyAlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space representability is local on the base for the fppf topology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(𝒰 : Y.OpenCover) [∀ i, IsAffine (𝒰.X i)] : P f ↔ ∀ i, Q (𝒰.pullbackHom f i)\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ such that each $ \\\\mathcal{U}_i $ is affine. Then $ f $ has the affine property if and only if for every in\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \": IsZariskiLocalAtTarget P\", \"doc\": \"The property of morphisms of schemes with affine targets is Zariski local at the target. Specifically, if a morphism $ f : X \\to Y $ satisfies this property and $ S $ is a Zariski covering sieve on $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.RepresentableBy (glueData hf).glued\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : MorphismProperty Scheme\", \"doc\": \"A morphism property $ P $ of schemes holds locally on affine opens of the target if, for every morphism $ f : X \\\\to Y $ and every affine open subset $ U \\\\subseteq Y $, the restriction $ f|_U : f^{-1}(\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, rings, Zariski open gluing or abstract prestack conditions; none supplies the algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf is an algebraic space if it becomes an algebraic space after an fppf cover of the base",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme, AlgebraicGeometry.SheafedSpace.instCategory, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space bootstrap; the representability hits require relatively representable open immersions and give Zariski scheme gluing, and FlatDescent only descends properties of already given scheme morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space bootstrap; the representability hits require relatively representable open immersions and give Zariski scheme gluing, and FlatDescent only descends properties of already given scheme morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|locally_algebraic_space|locallyAlgebraicSpace",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space bootstrap; the representability hits require relatively representable open immersions and give Zariski scheme gluing, and FlatDescent only descends properties of already given scheme morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space representability is local on the base for the fppf topology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.HasAffineProperty.iff_of_openCover, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.HasAffineProperty.instIsZariskiLocalAtTarget, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.targetAffineLocally",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space bootstrap; the representability hits require relatively representable open immersions and give Zariski scheme gluing, and FlatDescent only descends properties of already given scheme morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of algebraic space representability for sheaves with local etale scheme atlases",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space bootstrap; the representability hits require relatively representable open immersions and give Zariski scheme gluing, and FlatDescent only descends properties of already given scheme morphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-groupoid-fppf-quotient",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: The fppf quotient of a smooth algebraic-space groupoid. Supporting input in the proof of algebraic.tex Tag 04WZ: descend the locally represented Isom sheaf; bootstrap.tex lemma-quotient-stack-isom uses lemma-locally-algebraic-space.",
+   "via": [
+    "lem-sfb-smooth-groupoid-fppf-quotient",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-local-algebraic-space",
+  "worker": "stage1",
+  "group": "Q126",
+  "summary": "Read Stacks 04SK and 02WQ and reused the existing coproduct, partition, fppf-cover base-change and bootstrap nodes. Expanded the scheme-test fibre-product identification and the local-ring/affine-neighbourhood argument for the disjoint union. Statement unchanged; no new nodes, no Lean writes or compiles. Logged searches and read the closest Mathlib candidates, which do not state algebraic-space representability.",
+  "blueprint": "The inherited from.place records the historical alteration/moduli/groupoid chain ending in the locally represented Isom sheaf in bootstrap.tex. Steps 1--4 realize precisely its 04SK prerequisite. Read latest sk-thm-sf-ctf-stability/_section.md and direct-images.proof.md (3); do not replace their unit route. blueprint_refs ancestor returns None for this historical chain, so its existing null from.node and via list are retained. Whole-blueprint searches for 04SK, locally algebraic space and fppf found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algebraic-space-coproduct",
+    "why": "Generic bounded coproduct theorem for algebraic spaces, explicitly needed by source 04SK; no unit-specific substitute."
+   },
+   {
+    "node": "lem-trf-fppf-sheaf-coproduct-partition",
+    "why": "Generic description of sections of a coproduct of fppf sheaves by clopen partitions; used to verify the source fibre square without assuming F algebraic."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic base-change axiom for fppf covering families; makes each scheme test of the atlas fppf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algebraic-space-coproduct",
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-f5fd068a4",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-f5fd068a4 (reviewer sub-agent of L); spot-checked: Read the whole item (4 steps, no new nodes; statement unchanged) against Stacks bootstrap 04SK, spaces 02WQ and spaces 03I4. The statement is a faithful form of 04SK. Hypothesis (3) is replaced by 02WQ's sufficient chart condition, which is stronger, so no target is weakened. It is not a duplicate of 04S6 (lem-sfb-fppf-space-atlas-bootstrap), which assumes the atlas this item constructs. One fault: step 1 applied lem-trf-algebraic-space-coproduct to the F_i as algebraic spaces over T, but the item only gives them as algebraic spaces over T_i. That passage is Stacks 03I4(3), which is non-elementary. FIX: cited the existing node lem-sfb-space-change-base-to-integers, part (1) with g:T_i->T, in step 1. I checked that j_!X(W) equals (h_{T_i} x F)(W) and that the chart V_i transfers. Also cited it in step 4 for h_{P_a} over Z versus over T, and added it to proof_deps. It is in the same unit and creates no cycle. Steps 2-4 checked by hand: the fibre square h_Z x_F U = coprod_i Z x_T T_i via the partition lemma; p_a is flat, lfp and surjective by 021O(3) and locality on the source; point-class surjectivity via a common field extension; every hypothesis of 04S6 holds. Edge cases checked: empty I, the identity cover, infinite I. Batch-5 flags: the partition lemma (0F15/02WO), covering base change (021O), def-trf-scheme-algebraic-space, and the chart-test and bootstrap nodes (which reach def-trf-algebraic-space) are generic algebraic-space foundations. None is a step in the proof of the trace formula or of Poincaré duality, so all are accepted. Accepted the three generic trf tool_uses. No SGA is cited and no re-split note applies.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfLocalAlgebraicSpace",
+  "declaration": "AlgebraicGeometry.isAlgebraicSpace_of_fppf_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfLocalAlgebraicSpace.lean",
+  "statement": "theorem isAlgebraicSpace_of_fppf_cover {S : Scheme.{u}} (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (I : Type v) (T : I → Over S) (hcover : Presieve.ofArrows (fun i ↦ (T i).left) (fun i ↦ (T i).hom) ∈ Scheme.fppfPrecoverage S) (Fi : ∀ i, AlgebraicSpace (T i).left) (e : ∀ i, (Fi i).obj.obj ≅ (Over.map (T i).hom).op ⋙ F.obj) (V : ∀ i, Over (T i).left) (p : ∀ i, yoneda.obj (V i) ⟶ (Fi i).obj.obj) (hp : ∀ i, AlgebraicSpace.IsEtale (p i) ∧ AlgebraicSpace.IsSurjective (p i)) (Vcoprod : Over S) (ι : ∀ i, (Over.map (T i).hom).obj (V i) ⟶ Vcoprod) (hV : Nonempty (IsColimit (Cofan.mk Vcoprod ι))) : AlgebraicSpace.IsAlgebraicSpace F",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2605d870b",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read the node, Stacks 04SK with the paragraph before it, 02WQ, AlgebraicSpace.lean (IsRepresentableWith/IsEtale/IsSurjective/IsAlgebraicSpace), algebraicSpace_coproduct and SpaceChangeBase. All clauses match: the fppf cover is fppfPrecoverage membership; F_i is a bundled AlgebraicSpace over T_i with an iso to the restriction (Over.map).op ⋙ F.obj (the source's own form, already used in landed modules); étale surjective charts are tested over T_i; the chart coproduct is a colimit cofan witness (same interface as algebraicSpace_coproduct); the conclusion is IsAlgebraicSpace F. The index universe v is a true generalization: a colimit in Over S forces u-small many nonempty charts. Edge cases checked: empty I, identity cover, infinite cover, empty charts. Only the lean field differs from live, the statement is verbatim, and the stmt_deps are unchanged and used. No duplicate in lean/Sheaf or Mathlib. No definitions, proof is sorry only, docstrings carry the source, the blueprint tag and 4 proof steps; the report sections are present. Advisory: the plain import EnlargedEtaleRingedSite is unused but harmless. No compile run (no file changed)."
+ }
+}

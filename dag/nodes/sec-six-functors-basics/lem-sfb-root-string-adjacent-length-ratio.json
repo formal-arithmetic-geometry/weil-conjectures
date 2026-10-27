@@ -1,0 +1,201 @@
+{
+ "id": "lem-sfb-root-string-adjacent-length-ratio",
+ "kind": "statement",
+ "title": "Squared-length ratio between adjacent roots in a string",
+ "statement": "Let $I$ be finite, let $V,W$ be vector spaces over $\\mathbf Q$ [def-weil-field], and let $P:\\mathrm{RootPairing}\\ I\\ \\mathbf Q\\ V\\ W$ be a reduced crystallographic root pairing in the Mathlib sense: injective root and coroot families with a perfect bilinear pairing, root-coroot value $2$, simultaneous reflection permutations, integral root-coroot pairings, and no proportional roots except a root and its negative. Write $a_i=P.\\mathrm{root}(i)$. Let $b:V\\times V\\to\\mathbf Q$ be a symmetric bilinear form, positive definite in the sense that $b(x,x)>0$ for $x\\ne0$, and invariant under each root reflection $s_i(x)=x-\\langle x,P.\\mathrm{coroot}(i)\\rangle a_i$. Let $i,j,k\\in I$ with $a_i,a_j$ linearly independent over $\\mathbf Q$ and $a_k=a_i+a_j$. Put $p=P.\\mathrm{chainBotCoeff}(i,j)$ and $q=P.\\mathrm{chainTopCoeff}(i,j)$, the largest nonnegative integers with $a_j-pa_i$ and $a_j+qa_i$ roots. Then $$q\\,b(a_k,a_k)=(p+1)b(a_j,a_j).$$",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C, Section g, printed pp.621--622, table (180) and the four rank-two root diagrams, with the invariant inner product of C.19. Agent-formulated adjacent-root length identity read from these diagrams; Section 23h, Theorem 23.71, pp.508--509 motivates its use."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\alpha=a_i$, $\\beta=a_j$, $\\gamma=a_k=\\alpha+\\beta$, $A=b(\\alpha,\\alpha)$, $B=b(\\beta,\\beta)$, $D=b(\\gamma,\\gamma)$, and $t=p-q\\in\\mathbf Z$. All three roots are nonzero since their root-coroot values are $2$, so $A,B,D>0$. For any root $a_l$ and any $x$, set $c=\\langle x,P.\\mathrm{coroot}(l)\\rangle$. Since $s_l(a_l)=-a_l$, invariance and bilinearity give $b(x,a_l)=b(x-ca_l,-a_l)=-b(x,a_l)+c b(a_l,a_l)$, hence $2b(x,a_l)=c b(a_l,a_l)$. This is the formula of C.20, obtained directly from the stated hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.19--C.20, printed p.611, and Section g, printed pp.621--622; agent algebraic verification of the adjacent-root identity."
+   }
+  },
+  {
+   "text": "The endpoint-difference node gives $\\langle\\beta,P.\\mathrm{coroot}(i)\\rangle=t$, so step 1 implies $2b(\\alpha,\\beta)=tA$ and $D=B+(t+1)A$. The interval node applied at $z=1$ gives $q\\ge1$, because $\\gamma$ is a root. The length-bound node gives $p+q\\le3$. Consequently $(p,q)$ is one of $(0,1),(0,2),(0,3),(1,1),(1,2),(2,1)$.",
+   "uses": [
+    "lem-sfb-root-string-endpoint-difference",
+    "lem-sfb-root-string-integer-interval",
+    "lem-sfb-root-string-length-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.19--C.20, printed p.611, and Section g, printed pp.621--622; agent algebraic verification of the adjacent-root identity."
+   }
+  },
+  {
+   "text": "If $t=-1$ (the pairs $(0,1)$ and $(1,2)$), then $D=B$ and $q=p+1$, so $qD=(p+1)B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.19--C.20, printed p.611, and Section g, printed pp.621--622; agent algebraic verification of the adjacent-root identity."
+   }
+  },
+  {
+   "text": "For $(p,q)=(0,2)$ or $(0,3)$, one has $t=-q$ and $D=B-(q-1)A>0$, so $B>(q-1)A$. The integer $r=\\langle\\alpha,P.\\mathrm{coroot}(j)\\rangle$ satisfies $rB=2b(\\alpha,\\beta)=-qA$ by step 1. Thus $-2<r<0$: for $q=2$ use $B>A$, and for $q=3$ use $B>2A$. Hence $r=-1$ and $B=qA$. Substitution gives $D=A$ and therefore $qD=B=(p+1)B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.19--C.20, printed p.611, and Section g, printed pp.621--622; agent algebraic verification of the adjacent-root identity."
+   }
+  },
+  {
+   "text": "The remaining pairs are $(p,q)=(1,1)$ and $(2,1)$. Now $t=p-1$ and $D=B+pA$. The integer $u=\\langle\\alpha,P.\\mathrm{coroot}(k)\\rangle$ satisfies $uD=2b(\\alpha,\\gamma)=(p+1)A$ by step 1 and bilinearity. Since $A,B>0$ and $p=1$ or $2$, we have $0<u<2$ (for $p=1$, $D>A$; for $p=2$, $D>2A$). Thus $u=1$, whence $D=(p+1)A$ and $B=A$. It follows that $qD=D=(p+1)B$, completing all cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.19--C.20, printed p.611, and Section g, printed pp.621--622; agent algebraic verification of the adjacent-root identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-root-string-endpoint-difference",
+  "lem-sfb-root-string-integer-interval",
+  "lem-sfb-root-string-length-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix C.19--C.20, printed p.611, and Section g, printed pp.621--622; agent algebraic verification of the adjacent-root identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "chain.*(rootForm|length|form)|rootForm.*chain|chainBotCoeff_sub_chainTopCoeff",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"grep\", \"query\": \"chain.*(rootForm|length|form)|rootForm.*chain|chainBotCoeff_sub_chainTopCoeff\", \"sub\": \"LinearAlgebra/RootSystem\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Relations.lean\", \"Mathlib/LinearAlgebra/RootSystem/Finite/G2.lean\", \"Mathlib/LinearAlgebra/RootSystem/Finite/G2.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\", \"Mathlib/LinearAlgebra/RootSystem/Chain.lean\"], \"digest\": \"0371476687d52bc8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Chain.lean gives endpoint differences; Finite/Lemmas.lean gives possible length ratios and Finite/G2.lean gives particular G2 equalities. None of the returned declarations states q times the length of the adjacent root equals p plus one times the original length for arbitrary i,j,k and an invariant positive form."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root string endpoints p and q satisfy beta coroot alpha equals p minus q and q times squared length alpha plus beta equals p plus one times squared length beta",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"leansearch\", \"query\": \"Root string endpoints p and q satisfy beta coroot alpha equals p minus q and q times squared length alpha plus beta equals p plus one times squared length beta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.rootSystem_pairing_apply\", \"RootPairing.root_coroot_two\", \"RootPairing.coroot_eq_polarizationEquiv_apply_root\", \"RootPairing.EmbeddedG2.long_eq_three_mul_short\", \"RootPairing.coroot_eq_coreflection_of_root_eq\", \"LieAlgebra.IsKilling.chainLength_nsmul\", \"RootPairing.pairing_eq_add_of_root_eq_smul_add_smul\", \"RootPairing.RootPositiveForm.two_mul_apply_root_root\"], \"digest\": \"857817988c34596e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Chain.lean gives endpoint differences; Finite/Lemmas.lean gives possible length ratios and Finite/G2.lean gives particular G2 equalities. None of the returned declarations states q times the length of the adjacent root equals p plus one times the original length for arbitrary i,j,k and an invariant positive form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite crystallographic root system if gamma equals alpha plus beta and the alpha string through beta has endpoints minus p and q then q times squared length gamma equals p plus one times squared length beta",
+   "results": "{\"t\": \"2026-10-23T23:30:43Z\", \"tool\": \"leanfinder\", \"query\": \"In a finite crystallographic root system if gamma equals alpha plus beta and the alpha string through beta has endpoints minus p and q then q times squared length gamma equals p plus one times squared length beta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.EmbeddedG2.long_eq_three_mul_short\", \"RootPairing.InvariantForm.apply_eq_or_aux\", \"RootPairing.InvariantForm.apply_eq_or\", \"RootPairing.RootPositiveForm.rootLength_le_of_pairingIn_eq\", \"RootPairing.RootPositiveForm.rootLength_lt_of_pairingIn_notMem\", \"RootPairing.four_smul_rootForm_sq_eq_coxeterWeight_smul\", \"RootPairing.chainBotCoeff_add_chainTopCoeff_eq_pairingIn_chainTopIdx\"], \"digest\": \"7c2643b46e1d3866\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Chain.lean gives endpoint differences; Finite/Lemmas.lean gives possible length ratios and Finite/G2.lean gives particular G2 equalities. None of the returned declarations states q times the length of the adjacent root equals p plus one times the original length for arbitrary i,j,k and an invariant positive form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The alpha string through beta satisfies q norm squared alpha plus beta equals p plus one norm squared beta for every reflection invariant bilinear form",
+   "results": "{\"t\": \"2026-10-23T23:32:04Z\", \"tool\": \"leanfinder\", \"query\": \"The alpha string through beta satisfies q norm squared alpha plus beta equals p plus one norm squared beta for every reflection invariant bilinear form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.InvariantForm.isOrthogonal_reflection\", \"RootPairing.EmbeddedG2.shortAddLongRoot_shortRoot\", \"RootPairing.RootPositiveForm.isOrthogonal_reflection\", \"RootPairing.InvariantForm.apply_reflection_reflection\", \"LinearMap.IsReflective.reflective_reflection\", \"RootPairing.InvariantForm.apply_eq_or\", \"RootPairing.RootPositiveForm.rootLength_reflectionPerm_self\", \"RootPairing.EmbeddedG2.twoShortAddLongRoot_shortRoot\"], \"digest\": \"81e1f2d2b0449553\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Chain.lean gives endpoint differences; Finite/Lemmas.lean gives possible length ratios and Finite/G2.lean gives particular G2 equalities. None of the returned declarations states q times the length of the adjacent root equals p plus one times the original length for arbitrary i,j,k and an invariant positive form."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.chainBotCoeff, RootPairing.chainTopCoeff",
+   "results": "{\"t\": \"2026-10-23T23:30:42Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.chainBotCoeff, RootPairing.chainTopCoeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.chainBotCoeff_add_chainTopCoeff_le_three\", \"RootPairing.chainBotCoeff_reflectionPerm_left\", \"RootPairing.chainBotCoeff_reflectionPerm_right\", \"RootPairing.chainTopCoeff_reflectionPerm_left\", \"RootPairing.chainTopCoeff_reflectionPerm_right\", \"RootPairing.chainBotCoeff_chainTopIdx\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.chainBotCoeff_sub_chainTopCoeff\"], \"digest\": \"0990ad2828c2a81b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the endpoint-difference and endpoint-shift lemmas returned by this query do not state an adjacent squared-length ratio for an invariant form."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For adjacent roots beta and alpha plus beta in an alpha string with endpoints minus p and q prove q times the squared length of alpha plus beta equals p plus one times squared length beta",
+   "results": "{\"t\": \"2026-10-24T00:01:20Z\", \"tool\": \"leanfinder\", \"query\": \"For adjacent roots beta and alpha plus beta in an alpha string with endpoints minus p and q prove q times the squared length of alpha plus beta equals p plus one times squared length beta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.EmbeddedG2.long_eq_three_mul_short\", \"RootPairing.EmbeddedG2.threeShortAddTwoLongRoot_longRoot\", \"RootPairing.EmbeddedG2.threeShortAddLongRoot_longRoot\", \"RootPairing.EmbeddedG2.twoShortAddLongRoot_shortRoot\", \"RootPairing.EmbeddedG2.shortAddLongRoot_shortRoot\", \"RootPairing.EmbeddedG2.shortAddLongRoot_eq\", \"RootPairing.four_smul_rootForm_sq_eq_coxeterWeight_smul\"], \"digest\": \"5bdef742dc51351a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are G2 special-root length identities, root-positive-form evaluation formulas, and a different chain coefficient product involving five indices; none states the general adjacent-root identity. Read the returned GeckConstruction/Lemmas.lean and G2.lean declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflection invariant positive bilinear form adjacent root length root string endpoint identity q B alpha plus beta alpha plus beta equals p plus one B beta beta",
+   "results": "{\"t\": \"2026-10-24T00:01:50Z\", \"tool\": \"leanfinder\", \"query\": \"Reflection invariant positive bilinear form adjacent root length root string endpoint identity q B alpha plus beta alpha plus beta equals p plus one B beta beta\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.RootPositiveForm.rootLength\", \"RootPairing.RootPositiveForm.rootLength_reflectionPerm_self\", \"RootPairing.chainBotCoeff_mul_chainTopCoeff\", \"RootPairing.RootPositiveForm.pairingIn_mul_eq_pairingIn_mul_swap\", \"RootPairing.EmbeddedG2.shortAddLongRoot_shortRoot\", \"RootPairing.EmbeddedG2.threeShortAddLongRoot_longRoot\", \"RootPairing.EmbeddedG2.threeShortAddTwoLongRoot_longRoot\", \"RootPairing.RootPositiveForm.two_mul_apply_root_root\"], \"digest\": \"d557f1751c4f489b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are G2 special-root length identities, root-positive-form evaluation formulas, and a different chain coefficient product involving five indices; none states the general adjacent-root identity. Read the returned GeckConstruction/Lemmas.lean and G2.lean declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-opposition-root-bracket-norm",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, Chevalley bases, printed pp.508--509, especially Theorem 23.71; extending the prescribed simple-root pinning, with rationality from bracket construction over the split rational form. Supporting input: Section 23h, Theorem 23.71, printed pp.508--509: agent-stated conditional local, squared-norm formulation of the root-string calculation. Unlike existence of a Chevalley basis, this assertion takes only two already normalized root vectors as input. Supporting calculation: Appendix C, Section g, printed pp.621--622, table (180) and the four rank-two root diagrams, with the invariant inner product of C.19. Agent-formulated adjacent-root length identity read from these diagrams; Section 23h, Theorem 23.71, pp.508--509 motivates its use.",
+   "via": [
+    "lem-sfb-opposition-root-bracket-norm",
+    "lem-sfb-chevalley-root-normalization",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-root-string-adjacent-length-ratio",
+  "worker": "stage1",
+  "summary": "Reused the existing interval and endpoint-difference Mathlib leaves; added one Mathlib leaf for p+q<=3. Derived the invariant-form formula directly and checked all six endpoint cases using crystallographic integrality and positivity. No statement change, Lean writing, compiler, or source-library attachment.",
+  "blueprint": "Current latest blueprint: det-thm-sf-ctf-stability-direct-images, proof (3), the compactification/open-direct-image route whose imported alteration prerequisites lead to the Chevalley normalization input. This item is the local adjacent-root calculation beneath that prerequisite; steps 1--5 verify the identity suggested by Milne C.19--C.20 and table (180), without replacing a unit-level route. blueprint_refs.py ancestor returns None, retained exactly as in the imported provenance chain."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-805eae0e0",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-805eae0e0 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged and is still unsplit on live, so another group has not already split it; there is no re-split note for this item. Step 1: from b(x,a_l)=b(x-c a_l,-a_l) it derives <x,a_l^v> b(a_l,a_l)=2b(x,a_l); this is correct and matches Milne C.20 (PDF p.623). Step 2 cites three statements. Endpoint-difference gives p-q=pairingIn j i=<beta,alpha^v> (Chain.lean:405), so D=B+(t+1)A. Integer-interval at z=1 gives q>=1. The new bound gives p+q<=3. That leaves exactly six (p,q) cases. Steps 3-5 are integer inequalities that I rechecked. t=-1 gives D=B. For (0,q), r=<alpha,beta^v>=-qA/B lies in (-2,0), so B=qA and D=A. For (p,1), u=<alpha,gamma^v>=(p+1)A/D lies in (0,2), so D=(p+1)A and B=A. Integrality and positivity are used only where the hypotheses provide them, and proof_deps equals the union of the cited nodes. New node lem-sfb-root-string-length-bound is a one-line specialisation to R=Q of Mathlib RootPairing.chainBotCoeff_add_chainTopCoeff_le_three [IsReduced] (Chain.lean:475; section variables at 35-40). Its endpoint convention matches the lemmas at 137-164, not Mathlib's swapped docstrings. It is statement-only, self-contained and true (A2/B2/G2 give 1/2/3). A scan of all DAG nodes found no duplicate. I checked the item on G2, B2 and A2 cases. No SGA, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.RootSystem.AdjacentRootLengthRatio",
+  "declaration": "RootPairing.adjacent_root_length_ratio",
+  "file": "lean/Sheaf/LinearAlgebra/RootSystem/AdjacentRootLengthRatio.lean",
+  "statement": "theorem adjacent_root_length_ratio {I : Type u} [Finite I] {V : Type v} [AddCommGroup V] [Module ℚ V] {W : Type w} [AddCommGroup W] [Module ℚ W] (P : RootPairing I ℚ V W) [P.IsCrystallographic] [P.IsReduced] (b : LinearMap.BilinForm ℚ V) (hsymm : b.IsSymm) (hpos : ∀ x : V, x ≠ 0 → 0 < b x x) (hinv : ∀ l : I, b.IsOrthogonal (P.reflection l)) (i j k : I) (hij : LinearIndependent ℚ ![P.root i, P.root j]) (hk : P.root k = P.root i + P.root j) : (P.chainTopCoeff i j : ℚ) * b (P.root k) (P.root k) = ((P.chainBotCoeff i j : ℚ) + 1) * b (P.root j) (P.root j)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5da41bc4",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Read node, def-weil-field, module, report. Signature matches every node clause: Finite I, Q-modules V,W with independent universes, RootPairing with IsCrystallographic and IsReduced, b symmetric and positive on all nonzero x, IsOrthogonal under every P.reflection (IsOrthogonal takes f : M → M, so the coerced LinearEquiv is accepted), independent pair, root k = root i + root j; conclusion chainTopCoeff * b(k,k) = (chainBotCoeff + 1) * b(j,j) in Q. Bot/top convention checked against the Chain.lean definitions, not the swapped docstrings. lean.statement verbatim; node differs from live only by its lean record. Identity checked on A2, B2 and G2 for all six (p,q) cases; empty or rank-one systems are vacuous; the independence hypothesis excludes junk values. No defs, proof is sorry, source and blueprint docstrings present, no name collision, both report sections present. No compile needed (no file changed). No findings."
+ }
+}

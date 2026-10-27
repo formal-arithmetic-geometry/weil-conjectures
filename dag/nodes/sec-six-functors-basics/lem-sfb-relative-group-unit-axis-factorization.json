@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-relative-group-unit-axis-factorization",
+ "kind": "statement",
+ "title": "Relative factorization of group-product units by the identity axes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $p:G\\to S$ a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with geometrically connected fibres and identity $e$. A commutative group scheme has addition, inverse and identity satisfying the commutative group identities, and separated means that its diagonal is a closed immersion. Assume either that $p$ is proper [def-weil-proper-morphism], or that $S$ is reduced, meaning that all its local rings have no nonzero nilpotents [def-pc-reduced-scheme]. For $n\\geq1$, put $P_n=G\\times_S\\cdots\\times_SG$ with $n$ factors [def-pc-fibre-product], let $p_n:P_n\\to S$ be its structure morphism, let $\\pi_i:P_n\\to G$ be projection, and let $a_i:G\\to P_n$ insert its argument in coordinate $i$ and $e$ in all other coordinates. Write $e_n:S\\to P_n$ for the all-identity section. For every unit $u\\in\\Gamma(P_n,\\mathcal O_{P_n})^\\times$ (a global regular function with a multiplicative inverse), there is an equality of regular functions on $P_n$,\n$$u=p_n^*(e_n^*u)^{1-n}\\prod_{i=1}^n\\pi_i^*(a_i^*u).$$\nThe star on functions denotes the pullback of regular functions along a scheme morphism. In particular, if $a_i^*u=1$ for every $i$, then $u=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.48, identity (79), and Remark 12.50 (geometric Rosenlicht input). Agent relative formulation: reduced smooth source permits checking identities on geometric fibres; proper case follows from universal structure-sheaf pushforward (Stacks Tag 0E0L, perfect-lemma-proper-flat-geom-red-connected)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Put $c=e_n^*u$ and $u_i=a_i^*u$, all units since pullback preserves multiplication and inverses. Define the unit $v=u\\,p_n^*(c^{n-1})\\prod_{i=1}^n\\pi_i^*(u_i^{-1})$ on $P_n$. For a fixed $j$, the fibre-product identities give $\\pi_j a_j=\\mathrm{id}_G$, $\\pi_i a_j=ep$ for $i\\ne j$, $p_n a_j=p$ and $e^*u_i=c$. Consequently $a_j^*v=u_jp^*(c^{n-1})u_j^{-1}\\prod_{i\\ne j}p^*(c^{-1})=1$. Also $e_n^*v=e^*a_j^*v=1$, since $n\\ge1$. It remains to prove that every such axis-trivial unit $v$ equals $1$. For $n=1$, $a_1=\\mathrm{id}_G$ already proves this; the arguments below also include that case.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, identity (79): normalization at the chosen identity points; agent finite-product normalization"
+   }
+  },
+  {
+   "text": "First suppose $p$ is proper. Smoothness implies flatness [lem-pc-smooth-flat] and geometrically reduced fibres [sbc-lem-smooth-geometrically-reduced]. Finite presentation and geometric connectedness are hypotheses. Thus [lem-sc-proper-flat-global-sections] applies to $p$ and gives the canonical isomorphism $\\mathcal O_T\\simeq(p_T)_*\\mathcal O_{G_T}$ for every $T\\to S$, including nonreduced $T$. Set $P_0=S$. The projection $q_m:P_m=P_{m-1}\\times_SG\\to P_{m-1}$ is such a base change. Taking global sections gives a bijective pullback $q_m^*: \\Gamma(P_{m-1},\\mathcal O)\\to\\Gamma(P_m,\\mathcal O)$. Iterating, $v=p_n^*d$ for a unique $d\\in\\Gamma(S,\\mathcal O_S)$. Applying $e_n^*$ yields $d=e_n^*v=1$, hence $v=1$. This uses universal pushforward for $p$ itself; no reducedness of $S$ is used.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-proper-flat-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E0L, lemma-proper-flat-geom-red-connected; smooth inputs: Tags 01VF and 056T"
+   }
+  },
+  {
+   "text": "Now suppose $S$ is reduced. We show by induction that every $P_m$ is reduced, starting with $P_0=S$. The projection $q_m:P_m\\to P_{m-1}$ is a base change of $p$, hence smooth by [lem-pc-proper-base-change](2). Unpack the affine-local smooth-ring definition in [def-sbc-smooth-morphisms]: around any point of $P_m$ choose affine opens $U\\to V$ for $q_m$ with $R=\\mathcal O(V)\\to A=\\mathcal O(U)$ smooth. By induction and [def-pc-reduced-scheme], $R$ is reduced. Then $A$ is reduced by [lem-sfb-smooth-algebra-over-reduced-ring] (Tag 033B, which does not assume $R$ Noetherian). Localizations of a reduced ring are reduced: if $(a/s)^N=0$, some denominator $t$ kills $a^N$, so $(ta)^N=0$, whence $ta=0$ and $a/s=0$. Thus the local rings on this affine cover are reduced. Thus $P_m$ is reduced. This proves the claim for arbitrary reduced $S$, without adding a local Noetherian hypothesis.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-sbc-smooth-morphisms",
+    "def-pc-reduced-scheme",
+    "lem-sfb-smooth-algebra-over-reduced-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033B, lemma-reduced-goes-up; affine-local smoothness Tag 01V5; reducedness Tag 01J1"
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field $F$ and a morphism $\\operatorname{Spec}F\\to S$. Write $H=G_F$ and $H_m=P_m\\times_S\\operatorname{Spec}F$, with $H_0=\\operatorname{Spec}F$. The maps $H_m\\to H_{m-1}$ are base changes of $p$, hence smooth by [lem-pc-proper-base-change]. Their fibres are base extensions of fibres of $p$, hence geometrically connected by hypothesis, and $H_m$ is nonempty because of its identity point. Inductively apply [lem-sbc-smooth-connected-generic-geometry-core] to these maps, beginning with the integral normal field spectrum. It gives that each $H_m$ is integral with integrally closed local rings. Each is of finite type over $F$: $H\\to\\operatorname{Spec}F$ is of finite presentation, hence of finite type, and [lem-sfb-finite-type-composition-base-change] gives the finite-type assertion inductively. Finally $H$ is separated by [lem-weil-pbc-separated-base-change]. Each $H_m$ is separated as well: in $H_m\\times_FH_m$, pull back the closed diagonal of $H$ along each pair of coordinate projections, using [lem-weil-pbc-closed-immersion-base-change]. The intersection is closed, locally defined by the sum of these ideals. Its functor of points consists exactly of pairs of equal tuples, so it is the diagonal of $H_m$. Thus $H_{m-1}$ and $H$ meet all hypotheses of Rosenlicht's product lemma for $m\\ge2$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; normal connected source input from lem-sbc-smooth-connected-generic-geometry-core; permanence Tags 01VB, 01T3, 01T4, 01KU and 01JY"
+   }
+  },
+  {
+   "text": "On the schemes $H_m$, prove by induction on $m\\ge1$ that a unit $w$ whose identity-axis restrictions are all $1$ equals $1$. The case $m=1$ is the identity restriction. For $m\\ge2$, apply [lem-sfb-rosenlicht-product-unit-factorization] to $X=H_{m-1}$ and $Y=H$ with points $e_{m-1}$ and $e$. Its displayed identity gives, as regular functions, $w(x,y)=w(x,e)w(e_{m-1},y)w(e_{m-1},e)^{-1}$. The unit $w(x,e)$ has every one of its $m-1$ axis restrictions equal to $1$, so equals $1$ by induction. The last-axis condition says $w(e_{m-1},y)=1$, and restriction to the identity gives $w(e_{m-1},e)=1$. Hence $w=1$. Apply this to the pullback $v_F$: pullback preserves the axis identities from Step 1. Thus $v_F=1$ for every such $F\\to S$.",
+   "uses": [
+    "lem-sfb-rosenlicht-product-unit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, identity (79), and Remark 12.50; elementary induction on the number of factors"
+   }
+  },
+  {
+   "text": "Let $h=v-1$. For any $x\\in P_n$, choose an algebraic closure $\\Omega$ of $\\kappa(x)$. The morphism $\\operatorname{Spec}\\Omega\\to P_n$ factors through $P_n\\times_S\\operatorname{Spec}\\Omega$ by the fibre-product universal property. Step 5 for the composite $\\operatorname{Spec}\\Omega\\to S$ shows the image of $h(x)\\in\\kappa(x)$ in $\\Omega$ is zero. Since a field extension is injective, $h(x)=0$. On each affine open $U\\subseteq P_n$, [lem-weil-pbc-qc-scheme-vanishing-section-nilpotent] applies to $h|_U$, since affine schemes are quasi-compact and the section vanishes in every residue field. It is nilpotent. Step 3 and [def-pc-reduced-scheme] say $\\Gamma(U,\\mathcal O_U)$ is reduced, so $h|_U=0$. These equalities on an affine cover imply $h=0$ by the sheaf axiom, i.e. $v=1$. This is why fibrewise testing is valid here; no assertion that geometric fibres detect nilpotents on an arbitrary base is made.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J1, lemma-reduced; residue-field vanishing and nilpotence as in More on Morphisms Tag 03GY, lemma-stein-universally-closed, proof"
+   }
+  },
+  {
+   "text": "In either case $v=1$. Substituting the expression of Step 1 and multiplying by the inverse unit factors gives $u=p_n^*(c^{1-n})\\prod_i\\pi_i^*(a_i^*u)$, the required equality. If every $a_i^*u=1$, then $c=e^*a_1^*u=1$ and this formula gives $u=1$. The proof also covers $S=\\varnothing$: every section ring is then the zero ring and the displayed unit identities are unique.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, identity (79); elementary rearrangement of Step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-pc-smooth-flat",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-proper-flat-global-sections",
+  "lem-pc-proper-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-pc-reduced-scheme",
+  "lem-sfb-smooth-algebra-over-reduced-ring",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-rosenlicht-product-unit-factorization",
+  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Relative extension of Proposition 12.48 and Remark 12.50, using Stacks Tags 0E0L and 033B. Both cases and the finite-product induction are written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A unit on a product of smooth geometrically connected schemes over a reduced base is the product of its restrictions to the coordinate axes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Prod.isUnit_iff\", \"module\": \"Mathlib.Algebra.Group.Prod\", \"type\": \"{x : M × N} : IsUnit x ↔ IsUnit x.1 ∧ IsUnit x.2\", \"doc\": \"An element $(a, b)$ in the product monoid $M \\\\times N$ is a unit if and only if $a$ is a unit in $M$ and $b$ is a unit in $N$.\"}\n  {\"name\": \"MulEquiv.prodUnits\", \"module\": \"Mathlib.Algebra.Group.Prod\", \"type\": \": (M × N)ˣ ≃* Mˣ × Nˣ\", \"doc\": \"For any monoids $M$ and $N$, the group of units $(M \\\\times N)^\\\\times$ is canonically isomorphic to the product group $M^\\\\times \\\\times N^\\\\times$. This isomorphism maps a unit $(u, v) \\\\in M^\\\\times \\\\time\"}\n  {\"name\": \"IsUnit.unit_mul\", \"module\": \"Mathlib.Algebra.Group.Units.Defs\", \"type\": \"(ha : IsUnit a) (hb : IsUnit b) : (ha.mul hb).unit = ha.unit * hb.unit\", \"doc\": \"If $ a $ and $ b $ are units in a monoid $ M $, then the unit corresponding to their product $ ab $ is equal to the product of the units corresponding to $ a $ and $ b $.\"}\n  {\"name\": \"Pi.isUnit_iff\", \"module\": \"Mathlib.Algebra.Group.Pi.Units\", \"type\": \": IsUnit x ↔ ∀ i, IsUnit (x i)\", \"doc\": \"An element $x$ in the product monoid $\\\\prod_{i \\\\in I} M_i$ is a unit if and only if each component $x(i)$ is a unit in the corresponding monoid $M_i$.\"}\n  {\"name\": \"IsUnit.apply\", \"module\": \"Mathlib.Algebra.Group.Pi.Units\", \"type\": \"∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → Monoid (M i)] {x : (i : ι) → M i},\\n  IsUnit x → ∀ (i : ι), IsUnit (x i)\", \"doc\": \"If $x$ is a unit in the product monoid $\\\\prod_{i \\\\in \\\\iota} M_i$, then for every index $i$, the component $x_i$ is a unit in the monoid $M_i$.\"}\n  {\"name\": \"Prod.instSubsingletonUnits\", \"module\": \"Mathlib.Algebra.Group.Prod\", \"type\": \"[Subsingleton Mˣ] [Subsingleton Nˣ] : Subsingleton (M × N)ˣ\", \"doc\": \"Given two monoids $M$ and $N$, the group of units of their product monoid $M \\\\times N$ is canonically isomorphic to the product of their individual groups of units $M^\\\\times \\\\times N^\\\\times$. This mea\"}\n  {\"name\": \"Pi.isAddUnit_iff\", \"module\": \"Mathlib.Algebra.Group.Pi.Units\", \"type\": \"∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → AddMonoid (M i)] {x : (i : ι) → M i},\\n  IsAddUnit x ↔ ∀ (i : ι), IsAddUnit (x i)\", \"doc\": \"An element $ x $ in the product of additive monoids $ \\\\prod_{i \\\\in I} M_i $ is an additive unit if and only if each component $ x_i $ is an additive unit in the corresponding monoid $ M_i $. The produ\"}\n  {\"name\": \"MulEquiv.val_piUnits_symm_apply\", \"module\": \"Mathlib.Algebra.Group.Pi.Units\", \"type\": \"∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → Monoid (M i)] (f : (i : ι) → (M i)ˣ) (x : ι),\\n  ↑(MulEquiv.piUnits.symm f) x = ↑(f x)\", \"doc\": \"There is a multiplicative equivalence $\\\\left(\\\\prod_{i \\\\in I} M_i\\\\right)^\\\\times \\\\simeq^* \\\\prod_{i \\\\in I} (M_i)^\\\\times$ between the group of units of a product monoid $\\\\prod_{i \\\\in I} M_i$ and the produ\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Rosenlicht lemma: invertible regular functions on a product with sections factor as products of functions from the factors over a reduced base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f g : R) (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hu₁ : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl) (hu₂ : ∀ x ∈ U, f ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R f g U hu₁ * AlgebraicGeometry.StructureSheaf.const R g \", \"doc\": \"For elements $f, g$ in a commutative ring $R$ and an open set $U$ in the prime spectrum of $R$ satisfying conditions $hu₁$ and $hu₂$, the product of the constant sections with values $f$ and $g$ over \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f g₁ g₂ : R) (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hu₁ : ∀ x ∈ U, g₁ ∈ x.asIdeal.primeCompl) (hu₂ : ∀ x ∈ U, g₂ ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R g₁ g₂ U hu₂ * AlgebraicGeometry.StructureSheaf.co\", \"doc\": \"For constants $f, g_1, g_2$ in a commutative ring $R$ and an open set $U$ in the prime spectrum $\\\\operatorname{Spec}(R)$, the product of the constant sections $\\\\operatorname{const}_R(g_1, g_2, U)$ and\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_mul\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f₁ f₂ g₁ g₂ : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu₁ : ∀ x ∈ U, g₁ ∈ x.asIdeal.primeCompl)\\n  (hu₂ : ∀ x ∈ U, g₂ ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R f₁ g₁ U hu₁ * AlgebraicGeometry.StructureSh\", \"doc\": \"For a commutative ring $R$ and an open set $U$ in the prime spectrum $\\\\operatorname{Spec}(R)$, the product of two constant sections $\\\\text{const}_R(f_1, g_1, U)$ and $\\\\text{const}_R(f_2, g_2, U)$ in t\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_mul_cancel\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f g₁ g₂ : R) (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hu₁ : ∀ x ∈ U, g₁ ∈ x.asIdeal.primeCompl) (hu₂ : ∀ x ∈ U, g₂ ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R f g₁ U hu₁ * AlgebraicGeometry.StructureSheaf.con\", \"doc\": \"For a commutative ring $R$, in the structure sheaf on its prime spectrum $\\\\operatorname{Spec}(R)$, if $f, g_1, g_2 \\\\in R$ and $U \\\\subseteq \\\\operatorname{Spec}(R)$ is an open set satisfying conditions \"}\n  {\"name\": \"IsLocalization.Away.sec_spec\", \"module\": \"Mathlib/RingTheory/Localization/Away/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {S : Type u_2} [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (x : R)\\n  [inst_3 : IsLocalization.Away x S] (s : S),\\n  s * (algebraMap R S) (x ^ (IsLocalization.Away.sec x s).2) = (algebraMap R S) (IsLocalization.Away.sec x s).1\", \"doc\": \"For any element $ s \\\\in S $, where $ S $ is the localization of a commutative semiring $ R $ at the submonoid generated by powers of an element $ x $, the following holds: $ s \\\\cdot \\\\varphi(x^{\\\\mathrm\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] (U : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ)\\n  (a b : (x : ↥(Opposite.unop U)) → HomogeneousLocalization.AtPrime 𝒜 (↑x).asHomogeneousIdeal.\", \"doc\": \"For any open set $U$ in the projective spectrum of a graded ring $\\\\mathcal{A}$, if sections $a$ and $b$ over $U$ are expressible as homogeneous fractions $r/s$ with denominators $s$ (homogeneous of de\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))),\\n  IsUnit ((CategoryTheory.ConcreteCategory.hom (X.toToΓSpecMapBasicOpen r)) r)\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, the restriction of $r$ to the basic open set $X_{D(r)}$ (the preimage of $D(r)$ under the $\\\\Gamma$-Spec ma\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"unit\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.basicOpen_of_isUnit\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \" (X : AlgebraicGeometry.Scheme) {U : X.Opens} {f : ↑(X.presheaf.obj (Opposite.op U))} (hf : IsUnit f) : X.basicOpen f = U\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.adjunction.counit\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {X : AlgebraicGeometry.Scheme} : AlgebraicGeometry.ΓSpec.adjunction.unit.app X = X.toSpecΓ\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {R : CommRingCatᵒᵖ} : AlgebraicGeometry.ΓSpec.adjunction.counit.app R = AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.counit.app R\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.adjunction_counit_app\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" {R : CommRingCatᵒᵖ} : AlgebraicGeometry.ΓSpec.adjunction.counit.app R = (AlgebraicGeometry.Scheme.ΓSpecIso (Opposite.unop R)).inv.op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \" (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] : CategoryTheory.IsIso (AlgebraicGeometry.ΓSpec.adjunction.unit.app X)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.specPUnitIsInitial\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \" : CategoryTheory.Limits.IsInitial (AlgebraicGeometry.Spec ↧PUnit.{u + 1})\", \"doc\": \"`Spec 0` is the initial object in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \" {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] (f : ↑(X.presheaf.obj (Opposite.op ⊤))) : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.app X.toSpecΓ (PrimeSpectrum.basicOpen f))\", \"doc\": \"If `U` is qcqs, then `Γ(X, D(f)) ≃ Γ(X, U)_f` for every `f : Γ(X, U)`.\\nThis is known as the **Qcqs lemma** in [R. Vakil, *The rising sea*][RisingSea].\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafData) : Y.kerAdjunction.unit.app I = CategoryTheory.eqToHom ⋯\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction_counit_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" (Y : AlgebraicGeometry.Scheme) (f : (CategoryTheory.Over Y)ᵒᵖ) : Y.kerAdjunction.counit.app f = (CategoryTheory.Over.homMk (AlgebraicGeometry.Scheme.Hom.toImage (Opposite.unop f).hom) ⋯).op\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.exists_isUnit_germ_eq\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \" (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X] (f : ↑X.functionField) (hf : f ≠ 0) : ∃ U ∈ X.affineOpens, ∃ f', ∃ (x : Nonempty ↥↑U), (CategoryTheory.ConcreteCategory.hom (X.germToFunctionField U)) f' = f ∧ IsUnit f'\", \"doc\": \"For `f` an element of the function field of `X`, there exists some open set `U ⊆ X` such that\\n`f` is a unit in `Γ(X, U)`.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instEtaleHomDiscretePUnit\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \" (X : AlgebraicGeometry.Scheme) (Y : X.Etale) : AlgebraicGeometry.Etale Y.hom\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|[Uu]nits.*[Pp]roduct|[Pp]roduct.*[Uu]nits",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible regular function on a product of proper smooth schemes with connected fibers comes from the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X] [∀ (i : ι), IsLocalRing ↑(R i)],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is a compact space and each $R_i$ is a local ring, then the function mapping morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\operatorname{Spec}(R_i) \\\\to X$ is surj\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))),\\n  IsUnit ((CategoryTheory.ConcreteCategory.hom (X.toToΓSpecMapBasicOpen r)) r)\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, the restriction of $r$ to the basic open set $X_{D(r)}$ (the preimage of $D(r)$ under the $\\\\Gamma$-Spec ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Rosenlicht lemma: units on powers of a smooth connected group scheme over a reduced base factor into restrictions to identity axes",
+   "results": "8 hits; returned declarations/files: AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, StandardEtalePair.hasMap_X, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types. Smooth affine charts, abstract monoid units, adjunction units and fibre-product point descriptions do not assert factorization of global units into identity-axis restrictions over a reduced or proper base."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|[Uu]nits.*[Pp]roduct|[Pp]roduct.*[Uu]nits",
+   "results": "0 hits; returned declarations/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types. Smooth affine charts, abstract monoid units, adjunction units and fibre-product point descriptions do not assert factorization of global units into identity-axis restrictions over a reduced or proper base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every invertible regular function on a product of smooth connected group schemes is determined by its restrictions to the coordinate axes over a reduced base",
+   "results": "8 hits; returned declarations/files: AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord, Pi.isRegular_iff, isRegular_mul_iff, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, MulEquiv.piUnits, Pi.isAddLeftRegular_iff, smoothSheafCommRing.coeFun, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types. Smooth affine charts, abstract monoid units, adjunction units and fibre-product point descriptions do not assert factorization of global units into identity-axis restrictions over a reduced or proper base."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"unit\"",
+   "results": "12 hits; returned declarations/files: AlgebraicGeometry.Scheme.basicOpen_of_isUnit, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.ΓSpec.adjunction_unit_app, AlgebraicGeometry.ΓSpec.adjunction_counit_app', AlgebraicGeometry.ΓSpec.adjunction_counit_app, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, AlgebraicGeometry.specPUnitIsInitial, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types. Smooth affine charts, abstract monoid units, adjunction units and fibre-product point descriptions do not assert factorization of global units into identity-axis restrictions over a reduced or proper base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible global regular functions on a scheme fibre product of smooth connected algebraic groups are products of functions from the factors up to a base unit",
+   "results": "8 hits; returned declarations/files: AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.isMonHom_fst_id_right, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types. Smooth affine charts, abstract monoid units, adjunction units and fibre-product point descriptions do not assert factorization of global units into identity-axis restrictions over a reduced or proper base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-cubical-rigidification",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative factorization of group-product units by the identity axes",
+   "via": [
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-group-unit-axis-factorization",
+  "worker": "stage1",
+  "summary": "Unchanged statement; split the proper and reduced-base cases using existing DAG nodes only. Wrote the normalization, integral geometric-product hypotheses, Rosenlicht induction and residue-field/nilpotence argument explicitly. No new nodes, attachments or Lean changes.",
+  "blueprint": "Inherited support chain for det-thm-sf-ctf-stability-direct-images, proof (3), via relative cubical rigidification. The latest direct-image proof uses compactification; this auxiliary node supplies its existing cubical support branch. Whole-blueprint searches for Rosenlicht and invertible regular function found no matching imported node. ancestor reports None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Geometric reducedness of smooth fibres is a generic geometric input to the proper case, not a replacement for the constructibility route."
+   },
+   {
+    "node": "lem-sc-proper-flat-global-sections",
+    "why": "Universal degree-zero structure-sheaf pushforward is the proper-case input explicitly named in the item source; no same-unit node states the scheme theorem."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Uses only the smooth base-change clause to identify the iterated product projections as smooth; a generic permanence tool."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Its integral normal source conclusion verifies the hypotheses of Rosenlicht for geometric products. No same-unit node gives normal integral source over an arbitrary integral normal base."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-proper-flat-global-sections",
+  "lem-pc-proper-base-change",
+  "lem-sbc-smooth-connected-generic-geometry-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-b1f4be813",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-b1f4be813 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full against Milne Prop. 12.48 / identity (79) and Remark 12.50 (pp.246-247), Stacks 0E0L (perfect.tex:8097) and Stacks 033B (algebra.tex:46511). The delivery has 0 new nodes and no re-split note applies. The statement is unchanged apart from the added stmt_dep def-pc-geometrically-irreducible, which the statement uses. proof_deps equals the union of the step uses, and no cited node's closure reaches the item, so there is no cycle. Step 1: I recomputed the axis normalization (pi_i a_j = e p for i not j, e^*u_i = c); it is correct. Step 2: flatness (lem-pc-smooth-flat) and geometrically reduced fibres (sbc-lem-smooth-geometrically-reduced), with finite presentation and connectedness as hypotheses, meet every hypothesis of lem-sc-proper-flat-global-sections. Its universal clause gives bijective q_m^* on global sections, so v = p_n^*(e_n^*v) = 1 even over a nonreduced base. Step 3: P_m is reduced through the affine-local smooth description and Tag 033B, with no Noetherian hypothesis. Step 4: the hypotheses of lem-sbc-smooth-connected-generic-geometry-core hold inductively from Spec F (fibres are G_s tensor kappa(y), geometrically connected; source nonempty), and finite type and separatedness of H_m are checked through the cited mathlib nodes. Step 5: the induction uses the displayed identity in the Rosenlicht node's statement at F-points e_{m-1}, e, and the base case and inductive step are both written. Step 6: residue-field vanishing goes through the Omega-point, the nilpotence lemma is applied only on affine opens because it needs quasi-compactness, reducedness then kills the nilpotent, and the sheaf axiom glues. Edge cases checked: n=1, G=S, empty S, split torus. The two counterexamples (G_a^2 over k[eps]; a constant order-2 group) show both alternative hypotheses and connectedness are needed. The only citer, cubical-rigidification steps 3-5, uses the item exactly as stated. I accept all 4 declared tool_uses as generic black boxes: sbc-lem-smooth-geometrically-reduced, lem-sc-proper-flat-global-sections, the smooth clause of lem-pc-proper-base-change, and lem-sbc-smooth-connected-generic-geometry-core. Batch-5 check: lem-sc-proper-flat-global-sections is the generic Stacks 0E0L. Its closure meets sec-trace-formula and sec-poincare-duality only in two definitions (def-trf-schematically-dense-open, def-pod-ring-scalar-extension) and two Mathlib leaves (lem-trf-affine-open-limit-descent, lem-pod-separated-finite-type-base-change). It is neither the trace formula nor Poincare duality nor a step of their proofs, so it is genuinely outside the assumed statements. The source carries no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeGroupUnitAxisFactorization",
+  "declaration": "AlgebraicGeometry.relative_group_unit_axis_factorization",
+  "declarations": [
+   "AlgebraicGeometry.groupIdentityAxis",
+   "AlgebraicGeometry.groupPowerIdentitySection",
+   "AlgebraicGeometry.relative_group_unit_axis_factorization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeGroupUnitAxisFactorization.lean",
+  "statement": "theorem relative_group_unit_axis_factorization {S : Scheme.{u}} (G : Over S) [CommGrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] [GeometricallyConnected G.hom] (hbase : IsProper G.hom ∨ IsReduced S) (n : ℕ) (hn : 1 ≤ n) (u : (Γ((∏ᶜ (fun _ : Fin n => G)).left, ⊤))ˣ) : (u : Γ((∏ᶜ (fun _ : Fin n => G)).left, ⊤)) = ↑(Units.map (∏ᶜ (fun _ : Fin n => G)).hom.appTop.hom.toMonoidHom ((Units.map (groupPowerIdentitySection G n).left.appTop.hom.toMonoidHom u) ^ (1 - (n : ℤ))) * ∏ i : Fin n, Units.map (Pi.π (fun _ : Fin n => G) i).left.appTop.hom.toMonoidHom (Units.map (groupIdentityAxis G n i).left.appTop.hom.toMonoidHom u)) ∧ ((∀ i : Fin n, (groupIdentityAxis G n i).left.appTop (u : Γ((∏ᶜ (fun _ : Fin n => G)).left, ⊤)) = 1) → (u : Γ((∏ᶜ (fun _ : Fin n => G)).left, ⊤)) = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45e54c59a",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, source, module, report. Live node = snapshot except lean (lean null live; not superseded). Clause check: CommGrpObj in Over S uses Mathlib's fibre-product cartesian instance (Pullbacks.lean:712); Smooth/IsSeparated/LocallyOfFinitePresentation+QuasiCompact = finite presentation; GeometricallyConnected (nonempty fibres automatic via identity section); hbase genuine disjunction; hn : 1 ≤ n; groupIdentityAxis uses MonObj.Hom.one = toUnit ≫ η (End is a plain def, so 1 ≠ 𝟙), so other coordinates are e∘p; groupPowerIdentitySection from Over.mk (𝟙 S); exponent 1-(n:ℤ) integer; both conjuncts match the formula and the 'in particular' clause; statement field verbatim. Edge cases n=1, n=2, n=0 excluded, empty S, nonreduced+proper, non-Noetherian reduced. Helpers have real data and docstrings; proof sorry; Rosenlicht proof dep unsplit with no lean record (import impossible, not a fault). No compile (no file changed)."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-direct-image-integer-local-class",
+ "kind": "statement",
+ "title": "Normalized derived direct-image local classes on integer K-injective complexes",
+ "statement": "Let f:X→Y be a morphism of ringed spaces whose module-sheaf categories have chosen derived categories. Let I be an integer K-injective complex on X, K a derived object, r:K≅Q(I), and q an integer. Put D=f_*, F=abelian presheaf sections, P=D⋙F, J=D(I). Let b identify inverse-open hypercohomology of K with H^q(P I) using r, the recorded resolution comparison for identity_I, and homologyFunctorFactors. Let d identify H^q(Rf_*K) with H^q(J) using r, the published rightDerivedFunctorObjQIso, and homologyFunctorFactors. Then b.inv followed by topEdgeLocalLeray.inv, topEdgeLocalClass at Rf_*K, and F(d.hom) equals the abelian sheafification unit on H^q(FJ) followed by the underlying map of localSectionComplexSheafificationIso(Y,q,J). All comparisons are exactly those of [lem-weil-pbc-derived-adjunction-top-edge] and [lem-trf-unbounded-direct-image-section-presheaf].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images, bounded-below-complex local class calculation; Tags 0BKJ and 0D5X"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-derived-adjunction-top-edge",
+  "lem-trf-unbounded-direct-image-section-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the local Leray unit equation on the K-injective complex I. This identifies the inverse recorded direct-image resolution comparison with the derived-section unit on J.",
+   "uses": [
+    "lem-weil-pbc-direct-image-complex-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the recorded and published direct-image resolution models by the supplied-representative normalization. Transport the Leray equation by r and take homology.",
+   "uses": [
+    "lem-weil-pbc-direct-image-resolution-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use local-class naturality to transport along the published resolution isomorphism. Apply the local-class formula for the derived-section unit and cancel homologyFunctorFactors.",
+   "uses": [
+    "lem-weil-pbc-local-hypercohomology-complex-unit-class",
+    "lem-weil-pbc-square-local-class-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-direct-image-complex-unit",
+  "lem-weil-pbc-direct-image-resolution-normalization",
+  "lem-weil-pbc-local-hypercohomology-complex-unit-class",
+  "lem-weil-pbc-square-local-class-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E4, lemma-describe-higher-direct-images, bounded-below-complex local class calculation; Tags 0BKJ and 0D5X"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The comparison between two right derived functors is natural on K-injective resolutions and independent of the chosen representative",
+   "results": "8 hits: Functor.rightDerived_map_eq, InjectiveResolution.rightDerived_app_eq, NatTrans.rightDerived, InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, InjectiveResolution.toRightDerivedZero_naturality and its assoc version, LocalizerMorphism.rightDerivedFunctorComparison_fac and fac_app. The latter are related abstract factorization lemmas; none is the fixed recorded/published comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact normalization match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso_hom",
+   "results": "1 hit: CategoryTheory.Functor.mapIso_hom in Mathlib.CategoryTheory.Iso. Used to expand the canonical comparison maps; not the normalization itself.",
+   "date": "2026-10-26",
+   "verdict": "elementary functorial identity"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorObjQIso",
+   "results": "0 Mathlib hits. Repository search locates the adopted API and the already proved Functor.rightDerivedFunctor_map_Q_map_comp_objQIso_hom in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact; the proof uses this directly.",
+   "date": "2026-10-26",
+   "verdict": "use adopted proved naturality; no exact comparison theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DirectImageComplexLocalClass",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Agreement of classical resolution classes and derived local classes; Local class computation for a nonnegative K-injective direct-image complex; Normalized derived direct-image local classes on integer K-injective complexes",
+   "via": [
+    "lem-weil-pbc-direct-image-complex-local-class",
+    "lem-weil-pbc-square-resolution-local-class",
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectImageIntegerLocalClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageIntegerLocalClass.lean",
+  "declaration": "AlgebraicGeometry.directImage_integer_localClass",
+  "declarations": [
+   "AlgebraicGeometry.directImage_integer_localClass"
+  ],
+  "statement": "theorem directImage_integer_localClass\n    {X Y : RingedSpace.{u}}\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))]\n    (f : X ⟶ Y) (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)\n    [I.IsKInjective]\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X)))\n    (r : K ≅ DerivedCategory.Q.obj I) (q : ℤ) :\n    let D := RingedSpace.moduleDirectImage f\n    letI : D.Additive := RingedSpace.moduleDirectImage_additive f\n    let F := RingedSpace.localAbelianSections Y\n    let P := D ⋙ F\n    let J := (D.mapHomologicalComplex (.up ℤ)).obj I\n    let b := (RingedSpace.inverseOpenHypercohomologyPresheaf f q).mapIso r ≪≫\n      (DerivedCategory.homologyFunctor _ q).mapIso\n        (P.rightDerivedFunctorOfQuasiIsoResolutionsObjIso\n          (RingedSpace.localSectionsEnoughKInjectives X) (𝟙 I)) ≪≫\n      (DerivedCategory.homologyFunctorFactors _ q).app _\n    let d := (DerivedCategory.homologyFunctor _ q).mapIso\n        (D.rightDerivedFunctor.mapIso r ≪≫ D.rightDerivedFunctorObjQIso I) ≪≫\n      (DerivedCategory.homologyFunctorFactors _ q).app J\n    b.inv ≫ (RingedSpace.topEdgeLocalLeray f q K).inv ≫\n        RingedSpace.topEdgeLocalClass Y q ((RingedSpace.derivedModuleDirectImage f).obj K) ≫\n        F.map d.hom =\n      (sheafificationAdjunction (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).unit.app\n          (((F.mapHomologicalComplex (.up ℤ)).obj J).homology q) ≫\n        (sheafToPresheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}).map\n          (RingedSpace.localSectionComplexSheafificationIso Y q J).hom",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T121039-L-2746413",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261026T121039-L-2746413",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

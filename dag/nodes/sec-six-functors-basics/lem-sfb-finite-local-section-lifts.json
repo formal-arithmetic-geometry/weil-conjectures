@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-finite-local-section-lifts",
+ "kind": "statement",
+ "title": "Simultaneous local lifts of finitely many sections",
+ "statement": "Let C be a category with a Grothendieck topology J (maximal sieves cover, and covering sieves satisfy pullback stability and transitivity), D a concrete category, F,G:C^op→D presheaves, and q:F→G locally surjective [def-cbc-generalized-cover]: for each section s over U, the sieve of arrows f:V→U admitting a preimage of G(f)(s) under q_V covers U. For any finite index type I and sections s_i of G over U, there is a covering sieve S on U such that for every f:V→U in S there are a_i in F(V), simultaneously for all i, with q_V(a_i)=G(f)(s_i). The category and value universes are independent. The empty finite type is allowed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00Z5, lemma-topology-basic, finite intersections; Mathlib/CategoryTheory/Sites/LocallySurjective.lean, imageSieve_mem."
+ },
+ "stmt_deps": [
+  "def-cbc-generalized-cover"
+ ],
+ "proof": [
+  {
+   "text": "For a finite subset b of the index set, inductively intersect the image sieves of its sections. The empty subset uses the maximal covering sieve; adding an index uses Mathlib Presheaf.imageSieve_mem and GrothendieckTopology.intersection_covering. Membership in the intersection gives a preimage for every index in b. Apply this to the finite universal set and choose the individual preimages.",
+   "uses": [
+    "def-cbc-generalized-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Z5, lemma-topology-basic, finite intersections; Mathlib/CategoryTheory/Sites/LocallySurjective.lean, imageSieve_mem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-generalized-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00Z5, lemma-topology-basic, finite intersections; Mathlib/CategoryTheory/Sites/LocallySurjective.lean, imageSieve_mem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many sections of a locally surjective presheaf morphism lift simultaneously on one covering sieve",
+   "date": "2026-10-26",
+   "results": "8 hits, including Presheaf.imageSieve_mem and locally-surjective criteria for coherent and topological sites.",
+   "verdict": "Use imageSieve_mem once per section and finite intersections; no simultaneous finite-tuple theorem returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.imageSieve_mem",
+   "date": "2026-10-26",
+   "results": "1 hit: CategoryTheory.Presheaf.imageSieve_mem.",
+   "verdict": "The single-section covering statement is the base input to the finite induction."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ss]ection|[Ff]inite.*[Ll]ift|[Ff]inite.*[Ll]ocal",
+   "date": "2026-10-26",
+   "results": "25 broad Mathlib hits, mostly unrelated topology/number theory; source search in Sites/LocallySurjective.lean found no finite-family theorem.",
+   "verdict": "Prove the finite-family statement directly from imageSieve_mem and intersection_covering."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiscreteCoefficientLocalModels",
+  "date": "2026-10-26",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-model comparison (1)--(2), discrete residue finite-presentation step; Simultaneous local lifts of finitely many sections",
+   "via": [
+    "lem-sfb-discrete-coefficient-local-models",
+    "lem-sfb-discrete-coefficient-model",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteLocalSectionLifts",
+  "file": "lean/Sheaf/CategoryTheory/FiniteLocalSectionLifts.lean",
+  "declaration": "CategoryTheory.Presheaf.finite_local_section_lifts",
+  "statement": "theorem finite_local_section_lifts\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    {D : Type w} [Category.{z} D] {FD : D → D → Type*} {CD : D → Type t}\n    [∀ X Y, FunLike (FD X Y) (CD X) (CD Y)] [ConcreteCategory D FD]\n    {F G : Cᵒᵖ ⥤ D} (q : F ⟶ G) [IsLocallySurjective J q]\n    {U : C} {ι : Type*} [Finite ι] (s : ι → ToType (G.obj (op U))) :\n    ∃ S : Sieve U, S ∈ J U ∧\n      ∀ (V : C) (f : V ⟶ U), S f →\n        ∃ a : ι → ToType (F.obj (op V)), ∀ i, q.app (op V) (a i) = G.map f.op (s i)",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261026T071302-L-3909786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261026T071302-L-3909786",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

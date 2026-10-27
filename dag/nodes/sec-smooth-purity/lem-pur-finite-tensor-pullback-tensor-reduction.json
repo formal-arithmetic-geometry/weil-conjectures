@@ -1,0 +1,160 @@
+{
+ "id": "lem-pur-finite-tensor-pullback-tensor-reduction",
+ "kind": "statement",
+ "title": "Fixed-scalar coefficient pullback respects binary tensor comparison",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], positive levels 1 <= m <= P.level, arbitrary schemes X,Y and f:X -> Y. Use Q_T=finiteTensorReduction [def-pur-finite-tensor-reduction-data], delta_T(U,V)=(finiteTensorCore.muIso U V).inv [def-pur-finite-signed-reduction-comparisons], c_f(K)=finiteTensorPullbackComparison [def-pur-finite-tensor-fixed-comparisons], and t_A,f(K,L)=finiteTensorPullbackTensor.hom (and similarly over B) [def-pur-composition-comparisons]. For every pair of derived fixed-scalar sheaves K,L on Y, the equation Q_X(t_A,f(K,L));delta_X(f_A^*K,f_A^*L);(c_f(K) tensor c_f(L)) = c_f(K tensor L);f_B^*(delta_Y(K,L));t_B,f(Q_Y K,Q_Y L) holds. Semicolons are composition in application order. No field-structure morphism on X or Y, coefficient flatness, smoothness or finite-Tor hypothesis on K,L is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Step 2; expanded lem-pur-finite-tensor-presentation-reduction, proof Step 7; Stacks Tag 07A4"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-finite-tensor-reduction-data",
+  "def-pur-finite-tensor-fixed-comparisons",
+  "def-pur-composition-comparisons",
+  "def-pur-finite-signed-reduction-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives of the derived inputs. Derived geometric pullback and coefficient extension are computed on these representatives: ringed pullback preserves flat-term K-flatness, and coefficient change preserves K-flatness without flatness of the quotient.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Proof Step 2; expanded lem-pur-finite-tensor-presentation-reduction, proof Step 7; Stacks Tag 07A4"
+   }
+  },
+  {
+   "text": "Apply the coefficient-extension tensor square of cochainPullbackTensorCoherence to the geometric pullback and the constant coefficient quotient. On a pure tensor both composites put the same quotient scalar into the first pulled-back tensor factor. This is equality of cochain maps, not an inference from local equality of arbitrary derived arrows.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Proof Step 2; expanded lem-pur-finite-tensor-presentation-reduction, proof Step 7; Stacks Tag 07A4"
+   }
+  },
+  {
+   "text": "The scalar unit sends x to x tensor 1. The transpose of the cochain coefficient arrow is consequently the recorded scalar-adjunction mate. Identify the binary map with finiteTensorCore by its representative normalization, and the pullback tensor map with the canonical exact pullback tensor comparison. Their realization transports are precisely those defining finiteTensorPullbackComparison and finiteTensorPullbackTensor.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-pur-finite-tensor-fixed-comparisons",
+    "def-pur-composition-comparisons",
+    "def-pur-finite-signed-reduction-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Proof Step 2; expanded lem-pur-finite-tensor-presentation-reduction, proof Step 7; Stacks Tag 07A4"
+   }
+  },
+  {
+   "text": "Descend the cochain equality through the localization equivalence and transport it through the scalar presentations and pullback model isomorphisms. Naturality and the adjunction triangle identities cancel the realization units and counits. Faithfulness of realization gives the fixed-scalar equality. Naturality along representative isomorphisms gives the result for all derived inputs. The same proof includes identity maps, empty schemes and equal coefficient levels.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pur-finite-tensor-fixed-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+    "place": "Proof Step 2; expanded lem-pur-finite-tensor-presentation-reduction, proof Step 7; Stacks Tag 07A4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-pur-finite-tensor-fixed-comparisons",
+  "def-pur-composition-comparisons",
+  "def-pur-finite-signed-reduction-comparisons",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/thm-pur-finite-reduction-of-purity.proof.md",
+  "place": "Proof Step 2; expanded lem-pur-finite-tensor-presentation-reduction, proof Step 7; Stacks Tag 07A4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension pullback comparison is monoidal and compatible with composition of inverse image functors",
+   "results": "8 hits: PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackIso; PresheafOfModules.pullback_comp_id; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; CategoryTheory.GrothendieckTopology.overMapPullbackComp. These are ordinary pullback or free-object comparisons, not the fixed-scalar derived coefficient diagrams.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits, including CategoryTheory.mateEquiv, mateEquiv_vcomp, mateEquiv_hcomp and conjugateEquiv_mateEquiv_vcomp. Generic mates compose, but none identifies the recorded finite coefficient, realization and pullback comparison maps in the displayed equations.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor.*scalar|scalar.*pullback.*comp",
+   "results": "0 remote Mathlib hits. Local searches in lean/Sheaf and lean/WeilConjectures found no separately stated fixed-scalar pullback tensor square or composition square; the two assertions occur together in the parent.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorPresentationReduction",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-reduction-of-purity",
+   "place": "Proof Step 2; expanded parent proof Step 7, tensor square",
+   "via": [
+    "lem-pur-finite-tensor-presentation-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorPullbackTensorReduction",
+  "file": "lean/Sheaf/Paper/FiniteTensorPullbackTensorReduction.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTensorPullbackTensorReduction",
+  "statement": "theorem finiteTensorPullbackTensorReduction (P : PurityFiniteSetting.{u})\n    (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∀ K L,\n      (P.finiteTensorReduction m hm hmn X).map\n          (P.finiteTensorPullbackTensor f K L).hom ≫\n        ((P.finiteTensorCore m hm hmn X).μIso\n          ((P.smoothPurityPullback f).obj K) ((P.smoothPurityPullback f).obj L)).inv ≫\n        ((P.finiteTensorPullbackComparison m hm hmn f K).hom ⊗ₘ\n          (P.finiteTensorPullbackComparison m hm hmn f L).hom) =\n      (P.finiteTensorPullbackComparison m hm hmn f (K ⊗ L)).hom ≫\n        ((P.finiteReductionSetting m hm).smoothPurityPullback f).map\n          ((P.finiteTensorCore m hm hmn Y).μIso K L).inv ≫\n        ((P.finiteReductionSetting m hm).finiteTensorPullbackTensor f\n          ((P.finiteTensorReduction m hm hmn Y).obj K)\n          ((P.finiteTensorReduction m hm hmn Y).obj L)).hom",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T065021-L-2672551",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T065021-L-2672551",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

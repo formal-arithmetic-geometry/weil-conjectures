@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-smooth-atlas-open-image",
+ "kind": "statement",
+ "title": "Open images of restricted smooth atlases",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X$ be an algebraic stack over $S$: a stack in groupoids for etale coverings, with diagonal representable by algebraic spaces and a representable smooth surjective scheme atlas. Stacks, representability and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces use [def-trf-algebraic-space]. Let $p:U\\to\\mathcal X$ be a representable smooth surjective atlas from a scheme, and let $j:V\\hookrightarrow U$ be an open immersion [def-weil-open-immersion]. Then $p\\circ j$ is representable and smooth, and factors through an algebraic open substack $\\mathcal W\\subseteq\\mathcal X$ as a representable smooth surjection $V\\to\\mathcal W$. An open substack is a strictly full substack whose pullback by every scheme is an open subscheme. For every scheme $T\\to\\mathcal X$, the open subscheme $T\\times_{\\mathcal X}\\mathcal W$ is the open image of the algebraic-space map $V\\times_{\\mathcal X}T\\to T$. Smoothness of representable maps is tested after scheme base change on etale scheme charts, using [def-sbc-smooth-morphisms]; surjectivity means surjectivity on points after every scheme base change. Empty $V$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 05UP (lemma-open-image-substack), statement and proof, especially the definition of the fibre category and T_0 as the image of V times_X T to T. Smoothness of the composite is the open restriction in that proof, using morphisms.tex Tag 01VC (lemma-open-immersion-smooth). For the etale-stack convention, criteria.tex Tag 076V (lemma-stacks-etale) identifies it with the fppf algebraic-stack convention."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $g=p\\circ j$. The open immersion $j$ is etale by [lem-weil-pbc-etale-composition-cancellation](1), hence smooth by [lem-sfb-stack-chartwise-smooth-etale-calculus]. It is representable by schemes: its scheme pullbacks are the inverse-image open subschemes. The composition assertion of the same calculus node, applied to $j$ and $p$, makes $g$ representable by algebraic spaces and smooth.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GP (lemma-open-immersion-etale), 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth); algebraic.tex Tag 045B, representable composition"
+   }
+  },
+  {
+   "text": "For a scheme $T$ and $x:T\\to\\mathcal X$, let $E_x=V\\times_{\\mathcal X,x}T$ and $a_x:E_x\\to T$. Representability of $g$ makes $E_x$ an algebraic space. Base change in [lem-sfb-stack-chartwise-smooth-etale-calculus] makes $a_x$ smooth, hence flat and locally of finite presentation. Thus [lem-sfb-flat-lfp-space-universally-open] shows that $I_x=\\operatorname{im}(|E_x|\\to|T|)$ is open. Endow $I_x\\subseteq T$ with its open subscheme structure [def-weil-open-immersion].",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 05UP (lemma-open-image-substack), smooth pullback and its open image; spaces-morphisms.tex Tag 042S (lemma-fppf-open)"
+   }
+  },
+  {
+   "text": "For $h:T\\prime\\to T$, reassociating the triples in the 2-fibre product [def-sfb-stable-pointed-moduli-groupoids] gives $E_{x h}\\simeq E_x\\times_TT\\prime$, compatibly with projection to $T\\prime$. The point-image formula of [lem-a1-space-point-open-calculus] gives $I_{x h}=h^{-1}(I_x)$ as subsets, hence as open subschemes. An isomorphism $x\\simeq y$ induces an isomorphism $E_x\\simeq E_y$ over $T$, so $I_x=I_y$. These equalities hold for arbitrary scheme maps, not just etale ones.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-a1-space-point-open-calculus",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 05UP, the two cartesian squares; spaces-properties.tex Tag 03H4 (lemma-points-cartesian), point-image base-change formula"
+   }
+  },
+  {
+   "text": "Define $\\mathcal W(T)$ as the full subgroupoid of $\\mathcal X(T)$ on objects $x$ with $I_x=T$, equivalently $a_x$ surjective on points. Step 3 makes this predicate invariant under isomorphism and stable under pullback, so it defines a strictly full fibred subcategory. It is an etale substack: isomorphism sheaves are those of $\\mathcal X$; a descent datum descends in $\\mathcal X$ to $x$, and its restrictions lie in $\\mathcal W$ exactly when the inverse images of $I_x$ on the jointly surjective etale cover are the whole cover members. This forces $I_x=T$. These are precisely the stack conditions of [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 05UP, definition of the fibre category, with the stack condition expanded from etale descent"
+   }
+  },
+  {
+   "text": "For a scheme test $x:T\\to\\mathcal X$, an object of $T\\times_{\\mathcal X}\\mathcal W$ over $T\\prime$ is $(h:T\\prime\\to T,w,\\alpha:xh\\simeq w)$. Step 3 makes its existence equivalent to $h^{-1}(I_x)=T\\prime$, or $h(T\\prime)\\subseteq I_x$. By [lem-weil-pbc-morphism-factors-through-open-subscheme], this is equivalent to a unique factorization through $I_x$. For fixed $h$, any two pairs $(w,\\alpha)$ have exactly one arrow respecting their comparison maps, namely $\\alpha\\prime\\alpha^{-1}$, because $\\mathcal W$ is full. Taking $w=xh$ gives a preferred pair whenever the predicate holds. This identifies the fibre product with the discrete fibred groupoid of $I_x$, compatibly with pullbacks. Thus $\\mathcal W\\to\\mathcal X$ is representable by open immersions, and its scheme pullback is exactly the asserted open image.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 05UP, identification of the pullback with T_0; schemes.tex Tag 01HI (lemma-restrict-map-to-opens)"
+   }
+  },
+  {
+   "text": "The diagonal section of $V\\times_{\\mathcal X}V\\to V$, given by $(v,v,\\mathrm{id}_{g(v)})$, proves $I_g=V$. Thus the object $g\\in\\mathcal X(V)$ belongs to $\\mathcal W(V)$ and supplies $q:V\\to\\mathcal W$ with composite $g$. For any scheme $T\\to\\mathcal W$ with underlying object $x$, full faithfulness identifies $V\\times_{\\mathcal W}T$ with $E_x$: the isomorphism of images in $\\mathcal X$ is already an isomorphism in $\\mathcal W$. Hence this is an algebraic space and its projection is the smooth $a_x$ of step 2. It is surjective since $x\\in\\mathcal W(T)$ means $I_x=T$. Therefore $q$ is representable, smooth and surjective by the scheme-test definitions.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 05UP, diagonal section and final smooth-surjectivity argument"
+   }
+  },
+  {
+   "text": "For schemes $A,B\\to\\mathcal W$, full faithfulness also identifies $A\\times_{\\mathcal W}B$ with $A\\times_{\\mathcal X}B$. The latter is an algebraic space: it is a scheme pullback of the representable diagonal of $\\mathcal X$. Thus the diagonal of $\\mathcal W$ is representable by algebraic spaces. Together with the etale-stack condition from step 4 and the smooth surjective scheme atlas $q$ from step 6, this proves algebraicity in the statement's convention. If $V$ is empty, every $E_x$ and $I_x$ is empty; consequently $\\mathcal W$ is the empty open substack and $q$ is the empty atlas. If $V=U$, the atlas hypothesis gives $I_x=T$ for every $x$, so $\\mathcal W=\\mathcal X$. No nonemptiness or quasi-compactness was used.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 05UP, algebraicity, checked by its defining diagonal and atlas; algebraic.tex Tag 05UN (lemma-open-fibred-category-is-algebraic)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-open-immersion",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 05UP (lemma-open-image-substack), proof; the etale-stack convention is handled by direct descent, and algebraicity by its diagonal and the constructed atlas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth surjective atlas U to an algebraic stack and an open subscheme V of U have an open image substack with a smooth surjective map from V",
+   "results": "{\"t\": \"2026-10-22T07:19:25Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth surjective atlas U to an algebraic stack and an open subscheme V of U have an open image substack with a smooth surjective map from V\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionF\", \"AlgebraicGeometry.Scheme.Cover.instIsOpenImmersionFromGlued\"], \"digest\": \"28f4c276fd0edc3e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "open.image.substack|AlgebraicStack|smooth.atlas|smooth.*open.*image",
+   "results": "{\"t\": \"2026-10-22T07:19:47Z\", \"tool\": \"grep\", \"query\": \"open.image.substack|AlgebraicStack|smooth.atlas|smooth.*open.*image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of an open part of a smooth atlas is an open substack and the restricted atlas is smooth surjective onto its image",
+   "results": "{\"t\": \"2026-10-22T07:19:47Z\", \"tool\": \"leansearch\", \"query\": \"The image of an open part of a smooth atlas is an open substack and the restricted atlas is smooth surjective onto its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalDiffeomorph.isOpen_range\", \"ChartedSpaceCore.openPartialHomeomorph\", \"IsLocalDiffeomorph.image\", \"StructureGroupoid.restriction_in_maximalAtlas\", \"TopologicalSpace.Opens.chart_eq\", \"restr_mem_maximalAtlas\", \"StructureGroupoid.subtypeRestr_mem_maximalAtlas\", \"ChartedSpace.atlas\"], \"digest\": \"2d007e552642c13d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-22T07:19:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Stack\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks are images of smooth restricted scheme presentations of algebraic stacks",
+   "results": "{\"t\": \"2026-10-22T07:20:41Z\", \"tool\": \"leanfinder\", \"query\": \"Open substacks are images of smooth restricted scheme presentations of algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"e35083b50ea1b238\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ring maps or manifold charts, not an open image or finite affine presentation of an algebraic stack; there is no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|open.image.substack|smooth.atlas",
+   "results": "{\"t\": \"2026-10-23T09:33:53Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|open.image.substack|smooth.atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme smoothness/open-immersion or scheme-image statements, not the algebraic-stack image construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct the open image substack of a representable smooth morphism from a scheme",
+   "results": "{\"t\": \"2026-10-23T09:33:53Z\", \"tool\": \"leansearch\", \"query\": \"Construct the open image substack of a representable smooth morphism from a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.opensRange\", \"AlgebraicGeometry.IsOpenImmersion.isOpen_range\", \"AlgebraicGeometry.Scheme.Opens.opensRange_ι\", \"AlgebraicGeometry.Scheme.Hom.image_le_opensRange\", \"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.Scheme.Hom.toImage\", \"AlgebraicGeometry.Scheme.image_basicOpen\", \"AlgebraicGeometry.IsSmooth.mk\"], \"digest\": \"0b15109d59d01dd1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme smoothness/open-immersion or scheme-image statements, not the algebraic-stack image construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T09:33:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Stack\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme smoothness/open-immersion or scheme-image statements, not the algebraic-stack image construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of an open subscheme of a smooth atlas of an algebraic stack is an open substack with a smooth surjective atlas",
+   "results": "{\"t\": \"2026-10-23T09:34:04Z\", \"tool\": \"leanfinder\", \"query\": \"The image of an open subscheme of a smooth atlas of an algebraic stack is an open substack with a smooth surjective atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsOpenImmersion.isOpen_range\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"4f252101ecf459da\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme smoothness/open-immersion or scheme-image statements, not the algebraic-stack image construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism from a scheme to a stack factors as a smooth surjection onto an open substack",
+   "results": "{\"t\": \"2026-10-23T09:34:04Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism from a scheme to a stack factors as a smooth surjection onto an open substack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"0db90752fb4f75f5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: only scheme smoothness/open-immersion or scheme-image statements, not the algebraic-stack image construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-stack-affine-smooth-atlas",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Open substacks and finite etale decorations of a smooth finite-diagonal stack. A finite-type affine smooth chart before restricting it to the open substack and pulling it through the finite etale decoration. Ancestor repaired from the inherited explicit place: main-20261015 direct-images proof (3), open-direct-image finiteness via the alteration-moduli prerequisites. Open-image input in the finite affine-subcover construction: Stacks 04YC, proof of (1) implies (2).",
+   "via": [
+    "lem-sfb-finite-type-stack-affine-smooth-atlas",
+    "lem-sfb-dm-open-finite-etale-permanence",
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-atlas-open-image",
+  "worker": "stage1",
+  "summary": "Q20 follows Stacks 05UP by constructing the strictly full image substack, identifying every scheme test with the open point image, and checking descent, diagonal and the restricted atlas. Statement unchanged; all supporting lemmas already exist. No new nodes. All seven proof steps are below 2000 characters.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), open-direct-image finiteness and its alteration/moduli prerequisites, as specified in the inherited from.place. The finite affine-subcover prerequisite uses the restricted smooth atlas open images of Stacks 04YC, proved here by 05UP. Ancestor command returns None and the inherited null ancestor is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Only the arbitrary fibre-product point-image formula is used; the unit has no separate statement of this general algebraic-space point calculus."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Only factorization of a scheme map through an open subscheme containing its point image is used; this is a generic scheme tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Only clause (1), open immersions of schemes are etale, is used before applying the unit's representable smooth calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-daaab9f82",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-daaab9f82 (reviewer sub-agent of L); spot-checked: I read Stacks stacks-properties.tex 05UP, statement and proof. The item specialises it to a scheme atlas U and adds the image clause T×_X W = im(V×_X T→T), which the proof gives as 'T×_X Y represented by T_0'. In place of the fppf 05UN, the delivery checks the etale stack property (step 4), the diagonal (step 7) and the atlas (step 6) directly, which is correct. Statement and stmt_deps are identical to side-live; the item is unsplit in live and side-live and has no repair note, so it is not superseded. Steps: (1) 02GP open immersion is etale, then the chartwise calculus gives smooth and composition. (2) Base change gives a_x smooth, hence flat and lfp; 042S then makes I_x open. (3) The lem-a1 fibre-product point-image formula gives I_{xh}=h^{-1}(I_x). (4) Descent works by joint surjectivity; elementary is correct. (5) The 01HI factorisation and fullness give T×_X W ≃ h_{I_x}. (6) The diagonal section gives g∈W(V), and fullness gives V×_W T=E_x. (7) The diagonal is the pullback of X's diagonal. Small cases checked: V empty, V=U, empty T, and one component of a two-point atlas of a point (W=X while W×_X U≠V; the item correctly does not claim equality). No duplicate found: invariant-open-substack-descent needs an invariant V, and the 05UP hits in sec-six-functors are Kerodon tags. There are no new nodes. The lem-a1 tool_use is accepted as generic point calculus; the two weil-pbc nodes are mathlib leaves. Batch-5: the three flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, which is outside the assumed trace-formula and Poincaré statements, so they are accepted. No SGA citation. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAtlasOpenImage",
+  "declaration": "CategoryTheory.smooth_atlas_open_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAtlasOpenImage.lean",
+  "statement": "theorem smooth_atlas_open_image {S : Scheme.{u}} (X : BasedCategory.{v, w} (Over S)) (hX : IsAlgebraicModuliStack X) (U V : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj U)) X) (hp : IsSmoothModuliAtlas X U p) (j : V ⟶ U) (hj : IsOpenImmersion j.left) : IsRepresentableByAlgebraicSpaces ((discreteModuliMap (yoneda.map j)).comp p) ∧ ModuliSpaceTest @Smooth ((discreteModuliMap (yoneda.map j)).comp p) ∧ ∃ (W : OpenModuliSubstack X) (q : BasedFunctor (discreteModuli (yoneda.obj V)) W.category), IsAlgebraicModuliStack W.category ∧ IsSmoothModuliAtlas W.category V q ∧ Nonempty (ModuliTwoIso (q.comp (fullModuliInclusion X W.property)) ((discreteModuliMap (yoneda.map j)).comp p)) ∧ ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) X), ∃ (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T) (O : Over S) (i : O ⟶ T) (e : BasedFunctor (discreteModuli (yoneda.obj O)) (moduliTwoFiberProduct t (fullModuliInclusion X W.property))), HasSpaceBaseChange ((discreteModuliMap (yoneda.map j)).comp p) T t Z a ∧ IsOpenImmersion i.left ∧ e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberFst t (fullModuliInclusion X W.property))) (discreteModuliMap (yoneda.map i))) ∧ Set.range i.left = {x : T.left | ∃ (A : Over S) (b : yoneda.obj A ⟶ Z.obj.obj), AlgebraicSpace.IsEtale b ∧ ∃ y : A.left, (yoneda.preimage (b ≫ a)).left y = x}",
+  "branch": "sheaf-dag",
+  "by": "Q59",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2cb018f94",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records and the exact side-live declarations (HasSpaceBaseChange, IsRepresentableByAlgebraicSpaces, IsSmoothModuliAtlas, IsAlgebraicModuliStack, OpenModuliSubstack, ModuliSpaceTest, SpaceMapIsSurjective). Every clause rendered: composite p∘j representable + chartwise smooth; ∃ OpenModuliSubstack W algebraic with smooth surjective atlas q and 2-iso factorisation; for every scheme test, T×_X W represented by an open immersion whose range equals the étale-chart point image of the pinned (HasSpaceBaseChange) space V×_X T → T, the same convention as SpaceMapIsSurjective. No extra hypotheses, empty V/T/X and V=U fine, universes independent. Added stmt_deps (algebraic-moduli-stack, open-moduli-substack, dm-stack-morphism-properties) are landed defs on the base and used. Statement verbatim, single sorry, docstrings with source+blueprint+7 steps, report sections present, no duplicate, no new defs, no import cycle. No compile (no change)."
+ }
+}

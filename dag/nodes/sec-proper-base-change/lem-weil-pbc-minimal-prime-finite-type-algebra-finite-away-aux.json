@@ -14,15 +14,26 @@
  ],
  "proof": [
   {
-   "text": "Choose algebra generators, use finite-dimensionality of the fibre over the minimal prime to obtain monic equations, clear denominators and annihilators after shrinking, and reduce all monomials by the resulting monic equations. The resulting bounded monomials give the displayed finite spanning family, including the empty family of generators of the zero localization.",
+   "text": "Use the prime-spectrum fibre equivalence to make the spectrum of p.Fiber S finite. The finite-spectrum finite-type algebra theorem gives Module.Finite over p.ResidueField. Restrict scalars along the surjective residue map from R_p, and transport across Ideal.Fiber.algEquivQuotient to obtain that S_p / pS_p is finite over R_p. This avoids lifting polynomial coefficients from the residue field.",
    "uses": [
     "lem-weil-pbc-fibre-ring-primes-bijection",
     "pqf-lem-finite-type-algebra-finite-spectrum",
-    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "lem-weil-pbc-fibre-ring-localization-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The maximal ideal of R_p is its nilradical by minimality of p, and its extension J to S_p is contained in the nilradical. For x in S_p take a monic annihilating polynomial P for its class in the finite quotient S_p/J. Then P(x) lies in J, so P(x)^n=0 for some n. The monic polynomial P^n shows that x is integral over R_p. This argument also covers the zero quotient.",
+   "uses": [
     "lem-weil-pbc-minimal-prime-reduced-localization-field",
     "lem-weil-pbc-locally-nilpotent-extension"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each of finitely many algebra generators x, use IsIntegral.exists_multiple_integral_of_isLocalization to clear coefficients and IsLocalization.exists_isIntegral_smul_of_isIntegral_map to clear an annihilator. Thus m_x x is integral over R for some m_x outside p. Let g be their product. Each m_x is a unit in R_g, so each localized generator is integral over R_g. Their images still generate S_g: a fraction has numerator in the algebra they generate and its denominator inverse comes from R_g. Apply fg_adjoin_of_finite, followed by Submodule.fg_iff_exists_fin_generating_family, to obtain the required finite spanning family. For an empty set of algebra generators the product is 1; the adjoin and finite-generation results include the zero ring.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -35,7 +46,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02ML, lemma-generically-finite"
+  "place": "Tag 02ML, lemma-generically-finite; denominator clearing implemented using Mathlib localization-integrality lemmas"
  },
  "mathlib_searches": [
   {
@@ -109,14 +120,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M5",
+  "group": "B8",
   "result": "pass",
-  "landing": "20261018T071204-L-1672258",
-  "kind": "interface",
+  "landing": "20261025T094918-L-3272494",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

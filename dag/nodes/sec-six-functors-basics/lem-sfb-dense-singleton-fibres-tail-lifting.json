@@ -1,0 +1,481 @@
+{
+ "id": "lem-sfb-dense-singleton-fibres-tail-lifting",
+ "kind": "statement",
+ "title": "Lifting tail density through dense singleton fibres",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $T$ be a compact Hausdorff space, $V$ a Hausdorff space, and $q:T\\to V$ a continuous surjection. Suppose $S\\subseteq T$ is dense and $q^{-1}(\\{q(s)\\})=\\{s\\}$ for every $s\\in S$. Let $v:\\mathbb N\\to V$ satisfy: for every nonempty open $B\\subseteq V$ and every $N\\in\\mathbb N$, there is $k\\ge N$ with $v_k\\in B$. For every nonempty open $U\\subseteq T$, the set\n$$B_U=V\\setminus q(T\\setminus U)=\\{y\\in V:q^{-1}(\\{y\\})\\subseteq U\\}$$\nis nonempty and open. Consequently, for every $N\\in\\mathbb N$ there is $k\\ge N$ such that the nonempty fibre $q^{-1}(\\{v_k\\})$ is contained in $U$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-formulated pure-topology auxiliary, old proof Step 6: dense graph singleton fibres and the closed-complement argument. No theorem in the blueprint asserts this fact; external reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Fix a nonempty open $U\\subseteq T$. For $y\\in V$, membership $y\\notin q(T\\setminus U)$ says that there is no $x\\notin U$ with $q(x)=y$. This is equivalent to every $x\\in q^{-1}(\\{y\\})$ lying in $U$. Hence $B_U=V\\setminus q(T\\setminus U)=\\{y\\in V:q^{-1}(\\{y\\})\\subseteq U\\}$. This is a pointwise set identity and does not require surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written topology auxiliary of lem-sfb-countable-split-profinite-cover, final tail-density argument. This auxiliary is not asserted by the blueprint."
+   }
+  },
+  {
+   "text": "The complement $C=T\\setminus U$ is closed in the compact space $T$. By [lem-weil-pbc-closed-in-quasi-compact], $C$ is quasi-compact in its induced topology. Restrict $q$ to $C$; this map $q|_C:C\\to V$ is continuous, since the inverse image of an open $W\\subseteq V$ is $C\\cap q^{-1}(W)$, open in $C$. Apply [lem-weil-pbc-continuous-image-quasi-compact] to this restriction: its image $q(C)$ is quasi-compact in $V$. As $V$ is Hausdorff, [lem-sfb-compact-subset-hausdorff-closed] makes $q(C)$ closed in $V$. Therefore its complement $B_U$ is open.",
+   "uses": [
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "lem-sfb-compact-subset-hausdorff-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YD, lemma-closed-map, proof of closedness, using Tags 005C (lemma-closed-in-quasi-compact), 04Z9 (lemma-image-quasi-compact), and 08YB(1) (lemma-quasi-compact-in-Hausdorff)."
+   }
+  },
+  {
+   "text": "Choose $u\\in U$. Density of $S$ means $u\\in\\overline S$, so its open neighbourhood $U$ meets $S$; take $s\\in S\\cap U$. By hypothesis $q^{-1}(\\{q(s)\\})=\\{s\\}\\subseteq U$, and the set identity of Step 1 gives $q(s)\\in B_U$. Thus $B_U$ is nonempty. Equivalently, if $q(s)=q(x)$ for some $x\\notin U$, the singleton-fibre hypothesis forces $x=s\\in U$, a contradiction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written topology auxiliary of lem-sfb-countable-split-profinite-cover, final tail-density argument. This auxiliary is not asserted by the blueprint."
+   }
+  },
+  {
+   "text": "Let $N\\in\\mathbb N$. Steps 2 and 3 show that $B_U$ is nonempty and open, so the assumed tail condition for $v$ gives $k\\ge N$ with $v_k\\in B_U$. Step 1 yields $q^{-1}(\\{v_k\\})\\subseteq U$. Surjectivity of $q$ gives an $x\\in T$ with $q(x)=v_k$, proving that this fibre is nonempty. Since $U$ and $N$ were arbitrary, this proves every asserted clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image; agent-written topology auxiliary of lem-sfb-countable-split-profinite-cover, final tail-density argument. This auxiliary is not asserted by the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-sfb-compact-subset-hausdorff-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, contextual only: explicit topology auxiliary for the final step of lem-sfb-countable-split-profinite-cover. Closedness follows the proof of Stacks Tag 08YD."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous surjection from a compact Hausdorff space with dense singleton fiber points sends every open set to a neighborhood of whole fibers and lifts a tail dense sequence",
+   "results": {
+    "t": "2026-10-22T06:09:39Z",
+    "tool": "leanfinder",
+    "query": "A continuous surjection from a compact Hausdorff space with dense singleton fiber points sends every open set to a neighborhood of whole fibers and lifts a tail dense sequence",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "exists_compact_surjective_zorn_subset",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "CompactT2.Projective",
+     "exists_nat_bool_continuous_surjective_of_compact",
+     "exists_nat_nat_continuous_surjective_of_completeSpace",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "Profinite.IndexFunctor.surjective_π_app"
+    ],
+    "digest": "23b5013fdc0d1804"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: isClosedMap_iff_kernImage gives openness only; Continuous.isClosedMap supplies closedness. Nonemptiness from a dense set of singleton fibres and tail lifting are additional arguments, not one-line specialization of a hit."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, Continuous",
+   "results": {
+    "t": "2026-10-22T06:09:40Z",
+    "tool": "loogle",
+    "query": "IsClosedMap, Continuous",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "IsClosedMap.isQuotientMap",
+     "Topology.IsClosedEmbedding.of_continuous_injective_isClosedMap",
+     "IsClosedMap.of_inverse",
+     "Topology.IsClosedEmbedding.isClosedEmbedding_iff_continuous_injective_isClosedMap",
+     "IsClosedMap.of_comp_surjective",
+     "IsClosedMap.closure_image_eq_of_continuous",
+     "IsClosedMap.comap_nhdsSet_eq",
+     "IsClosedMap.comap_nhds_eq"
+    ],
+    "digest": "d0d191ba0dd6b8b2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: isClosedMap_iff_kernImage gives openness only; Continuous.isClosedMap supplies closedness. Nonemptiness from a dense set of singleton fibres and tail lifting are additional arguments, not one-line specialization of a hit."
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*fiber|singleton.*fibre|IsClosedMap.*preimage|IsClosedMap.*image",
+   "results": {
+    "t": "2026-10-22T06:09:40Z",
+    "tool": "grep",
+    "query": "singleton.*fiber|singleton.*fibre|IsClosedMap.*preimage|IsClosedMap.*image",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/IsClosedRestrict.lean",
+     "Mathlib/Topology/MetricSpace/ProperSpace.lean",
+     "Mathlib/Topology/Semicontinuity/Hemicontinuity.lean",
+     "Mathlib/Topology/Defs/Basic.lean",
+     "Mathlib/Topology/Homeomorph/Defs.lean",
+     "Mathlib/Topology/Separation/Hausdorff.lean",
+     "Mathlib/Topology/Continuous.lean",
+     "Mathlib/Topology/Inseparable.lean"
+    ],
+    "digest": "a6a0d37d1fdc6921"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: isClosedMap_iff_kernImage gives openness only; Continuous.isClosedMap supplies closedness. Nonemptiness from a dense set of singleton fibres and tail lifting are additional arguments, not one-line specialization of a hit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed continuous surjection with dense singleton fibers every nonempty open set contains entire fibers over a nonempty open subset of the target",
+   "results": {
+    "t": "2026-10-22T06:09:40Z",
+    "tool": "leansearch",
+    "query": "For a closed continuous surjection with dense singleton fibers every nonempty open set contains entire fibers over a nonempty open subset of the target",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DenseRange.exists_mem_open",
+     "IsClosedMap.frequently_nhds_fiber",
+     "DenseRange.subset_closure_image_preimage_of_isOpen",
+     "isProperMap_iff_isClosedMap_and_compact_fibers",
+     "IsClosedMap.isEvenlyCovered_of_openPartialHomeomorph",
+     "IsOpenQuotientMap.dense_preimage_iff",
+     "Dense.preimage",
+     "IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph"
+    ],
+    "digest": "f33d3ae279262c14"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: isClosedMap_iff_kernImage gives openness only; Continuous.isClosedMap supplies closedness. Nonemptiness from a dense set of singleton fibres and tail lifting are additional arguments, not one-line specialization of a hit."
+  },
+  {
+   "tool": "grep",
+   "query": "isClosedMap_iff_kernImage|isOpenMap_iff|frequently_nhds_fiber",
+   "results": {
+    "t": "2026-10-22T06:11:51Z",
+    "tool": "grep",
+    "query": "isClosedMap_iff_kernImage|isOpenMap_iff|frequently_nhds_fiber",
+    "sub": "Topology/Maps/Basic.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "492",
+     "493",
+     "498",
+     "501",
+     "504"
+    ],
+    "digest": "e6723321efab3386"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: isClosedMap_iff_kernImage gives openness only; Continuous.isClosedMap supplies closedness. Nonemptiness from a dense set of singleton fibres and tail lifting are additional arguments, not one-line specialization of a hit."
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*fiber|singleton.*fibre|isClosedMap_iff_kernImage|theorem.*isClosedMap",
+   "results": {
+    "t": "2026-10-23T11:39:41Z",
+    "tool": "grep",
+    "query": "singleton.*fiber|singleton.*fibre|isClosedMap_iff_kernImage|theorem.*isClosedMap",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Maps/Proper/Basic.lean",
+     "Mathlib/Topology/Maps/Proper/Basic.lean",
+     "Mathlib/Topology/Maps/Proper/Basic.lean",
+     "Mathlib/Topology/Maps/Basic.lean",
+     "Mathlib/Topology/Maps/Basic.lean",
+     "Mathlib/Topology/Maps/Basic.lean",
+     "Mathlib/Topology/Maps/Basic.lean",
+     "Mathlib/Topology/Maps/Basic.lean"
+    ],
+    "digest": "1ac4b702f4be0e73"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits give closed-map kernel-image openness, nearby topology, or projectivity, not dense-singleton-fibre nonemptiness together with tail lifting. Read the hits and the compact-to-Hausdorff declaration; a second semantic phrasing also gives no full match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed surjection with dense singleton fibers maps complements of closed sets to nonempty open kernels",
+   "results": {
+    "t": "2026-10-23T11:39:41Z",
+    "tool": "leansearch",
+    "query": "Closed surjection with dense singleton fibers maps complements of closed sets to nonempty open kernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsClosedMap",
+     "TopologicalSpace.Closeds.compl",
+     "isOpenMap_iff_kernImage",
+     "dense_compl_singleton_iff_not_open",
+     "isClosedMap_iff_kernImage",
+     "image_subset_closure_compl_image_compl_of_isOpen",
+     "isOpenMap_iff_closure_kernImage",
+     "Dense.preimage"
+    ],
+    "digest": "ccc370bc8bcf30d8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits give closed-map kernel-image openness, nearby topology, or projectivity, not dense-singleton-fibre nonemptiness together with tail lifting. Read the hits and the compact-to-Hausdorff declaration; a second semantic phrasing also gives no full match."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedMap, Continuous",
+   "results": {
+    "t": "2026-10-23T11:39:42Z",
+    "tool": "loogle",
+    "query": "IsClosedMap, Continuous",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "IsClosedMap.isQuotientMap",
+     "Topology.IsClosedEmbedding.of_continuous_injective_isClosedMap",
+     "IsClosedMap.of_inverse",
+     "Topology.IsClosedEmbedding.isClosedEmbedding_iff_continuous_injective_isClosedMap",
+     "IsClosedMap.of_comp_surjective",
+     "IsClosedMap.closure_image_eq_of_continuous",
+     "IsClosedMap.comap_nhdsSet_eq",
+     "IsClosedMap.comap_nhds_eq"
+    ],
+    "digest": "d0d191ba0dd6b8b2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits give closed-map kernel-image openness, nearby topology, or projectivity, not dense-singleton-fibre nonemptiness together with tail lifting. Read the hits and the compact-to-Hausdorff declaration; a second semantic phrasing also gives no full match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous surjection from a compact space to a Hausdorff space with dense singleton fibres lifts tail dense sequences through nonempty open sets",
+   "results": {
+    "t": "2026-10-23T11:39:42Z",
+    "tool": "leanfinder",
+    "query": "A continuous surjection from a compact space to a Hausdorff space with dense singleton fibres lifts tail dense sequences through nonempty open sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompactT2.Projective",
+     "exists_compact_surjective_zorn_subset",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "DenseRange.some",
+     "DenseRange.exists_mem_open",
+     "IsDenseInducing",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "IsDenseInducing.mk'"
+    ],
+    "digest": "13463ec7e3fab959"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits give closed-map kernel-image openness, nearby topology, or projectivity, not dense-singleton-fibre nonemptiness together with tail lifting. Read the hits and the compact-to-Hausdorff declaration; a second semantic phrasing also gives no full match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every continuous map from a compact topological space to a Hausdorff topological space sends closed subsets to closed subsets",
+   "results": {
+    "t": "2026-10-23T11:44:29Z",
+    "tool": "leanfinder",
+    "query": "Every continuous map from a compact topological space to a Hausdorff topological space sends closed subsets to closed subsets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Continuous.isClosedMap",
+     "CompHausLike.isClosedMap",
+     "Continuous.isProperMap",
+     "CompactlyGeneratedSpace.isClosed'",
+     "LightProfinite.isClosedMap",
+     "IsProperMap.isClosedMap",
+     "Continuous.isClosedEmbedding",
+     "IsClosed.relImage_of_isCompact"
+    ],
+    "digest": "6fb9fd1fc167c8e9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: Continuous.isClosedMap supplies closedness only; the singleton-fibre nonemptiness and tail-density arguments remain. Its compactness ingredients already have DAG Mathlib leaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "Continuous.isClosedMap",
+   "results": {
+    "t": "2026-10-23T11:44:29Z",
+    "tool": "loogle",
+    "query": "Continuous.isClosedMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Continuous.isClosedMap"
+    ],
+    "digest": "8224ca1d8b8b91e0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: Continuous.isClosedMap supplies closedness only; the singleton-fibre nonemptiness and tail-density arguments remain. Its compactness ingredients already have DAG Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "Continuous.isClosedMap",
+   "results": {
+    "t": "2026-10-23T11:44:29Z",
+    "tool": "grep",
+    "query": "Continuous.isClosedMap",
+    "sub": "Topology/Separation/Hausdorff.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "673"
+    ],
+    "digest": "f876367ecaf2c722"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: Continuous.isClosedMap supplies closedness only; the singleton-fibre nonemptiness and tail-density arguments remain. Its compactness ingredients already have DAG Mathlib leaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous map from a compact space to a Hausdorff space is a closed map",
+   "results": {
+    "t": "2026-10-23T11:44:30Z",
+    "tool": "leansearch",
+    "query": "A continuous map from a compact space to a Hausdorff space is a closed map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompHausLike.isClosedMap",
+     "Continuous.isClosedMap",
+     "IsClosedMap",
+     "IsProperMap.isClosedMap",
+     "IsHomeomorph.isClosedMap",
+     "TopologicalSpace.Compacts.continuous_toCloseds",
+     "Homeomorph.isClosedMap",
+     "Continuous.isClosedEmbedding"
+    ],
+    "digest": "86484fe8b26edb3b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: Continuous.isClosedMap supplies closedness only; the singleton-fibre nonemptiness and tail-density arguments remain. Its compactness ingredients already have DAG Mathlib leaves."
+  },
+  {
+   "tool": "grep",
+   "query": "Continuous.isClosedMap",
+   "results": {
+    "t": "2026-10-23T11:45:36Z",
+    "tool": "grep",
+    "query": "Continuous.isClosedMap",
+    "sub": "Topology/Separation",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Separation/Hausdorff.lean"
+    ],
+    "digest": "503dcf2f9507fe65"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: Continuous.isClosedMap supplies closedness only; the singleton-fibre nonemptiness and tail-density arguments remain. Its compactness ingredients already have DAG Mathlib leaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an irreducible closed map with dense singleton fibres the kernel image of a nonempty open subset is nonempty open and a frequently dense sequence has entire fibres inside it",
+   "results": {
+    "t": "2026-10-23T11:45:37Z",
+    "tool": "leanfinder",
+    "query": "For an irreducible closed map with dense singleton fibres the kernel image of a nonempty open subset is nonempty open and a frequently dense sequence has entire fibres inside it",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsClosedMap.frequently_nhds_fiber",
+     "IsPreirreducible.preimage_of_dense_isPreirreducible_fiber",
+     "isClosedMap_iff_kernImage",
+     "DenseRange.exists_mem_open",
+     "IsPreirreducible.preimage_of_isPreirreducible_fiber",
+     "isOpenMap_iff_kernImage",
+     "image_mem_irreducibleComponents_of_isPreirreducible_fiber",
+     "preimage_mem_irreducibleComponents_of_isPreirreducible_fiber"
+    ],
+    "digest": "69a38311fb0d9fd6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits give closed-map kernel-image openness, nearby topology, or projectivity, not dense-singleton-fibre nonemptiness together with tail lifting. Read the hits and the compact-to-Hausdorff declaration; a second semantic phrasing also gives no full match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-countable-split-profinite-cover",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; agent topology auxiliary, old proof Step 6: dense graph singleton fibres and the closed-complement argument. The blueprint does not state this auxiliary.",
+   "via": [
+    "lem-sfb-countable-split-profinite-cover",
+    "lem-sfb-norm-algcl-profinite-cech-exact",
+    "lem-sfb-norm-algcl-bar-augmentation",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dense-singleton-fibres-tail-lifting",
+  "worker": "stage1",
+  "summary": "Proved the set identity pointwise, derived closedness of q(T\\setminus U) from three existing Mathlib leaves (closed subsets of compact spaces, continuous compact images, compact subsets of Hausdorff spaces), exhibited q(s) in B_U using density and the singleton whole-fibre hypothesis, and applied the explicit tail condition and surjectivity. No new nodes, no changed statement, no Lean attachment. Read Stacks 08YD and its three compactness ingredients, current blueprint paragraph (3), and every cited statement.",
+  "blueprint": "Paragraph (3), open direct image of det-thm-sf-ctf-stability-direct-images, through the existing auxiliary chain recorded in blueprint.from.via: the dense-graph singleton-fibre and closed-complement argument of the final step of lem-sfb-countable-split-profinite-cover. The current blueprint gives only the direct-image context and does not state this pure-topology auxiliary."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-649bdb4ad",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-649bdb4ad (reviewer sub-agent of L); spot-checked: The statement is unchanged and there are no new nodes; this is not a re-split, since the item was statement-only, created by Q117. Step 1 is a pointwise identity B_U = {y : fibre ⊆ U}. Step 2 follows the proof of Stacks 08YD (topology.tex lemma-closed-map, line 3257) through three Mathlib-leaf nodes whose statements I checked: lem-weil-pbc-closed-in-quasi-compact (005C) gives that C = T∖U is quasi-compact; lem-weil-pbc-continuous-image-quasi-compact (04Z9(1)) is applied to the continuous restriction q|_C; lem-sfb-compact-subset-hausdorff-closed (08YB(1)) makes q(C) closed in Hausdorff V. Step 3 uses density to find s in S∩U, whose singleton fibre puts q(s) in B_U, and does not need U saturated. Step 4 applies the tail property to the nonempty open B_U and gets a nonempty fibre from surjectivity. Every hypothesis is used except Hausdorffness of T, which is harmless. Edge cases U=T, T empty, finite discrete T and multi-point fibres outside q(S) all hold. The parent lem-sfb-countable-split-profinite-cover uses exactly this conclusion with S = Γ. Duplicate search: the only 08YD node, lem-sfb-compact-hausdorff-surjection-quotient, states only the quotient property, and no node states a topological closed map or the item. No SGA source, no tool_uses, no changes."
+ }
+}

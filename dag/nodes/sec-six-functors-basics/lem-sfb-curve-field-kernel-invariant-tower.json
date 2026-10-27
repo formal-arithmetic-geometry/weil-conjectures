@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-curve-field-kernel-invariant-tower",
+ "kind": "statement",
+ "title": "Kernel invariant fields in towers of curve base extensions",
+ "statement": "Let $L\\subset D$ be a field extension such that $D\\otimes_L T$ is a domain for every field extension $T/L$. Let $J$ be a finite group acting on $L$ and $D$ with compatible inclusion. Let $L'/L$ be finite, let $J'$ be a finite group with a surjection $\\rho:J'\\to J$, and let $J'$ act on $L'$ compatibly with the $J$-action on $L$. Give $D'=D\\otimes_L L'$ the diagonal action $j'(d\\otimes a)=\\rho(j')(d)\\otimes j'(a)$. Put $N=\\ker\\rho$ and $M=(L')^N$, and suppose $M/L$ is purely inseparable.\n\nThe algebras $D'$ and $D_M=D\\otimes_L M$ are fields, and the natural embeddings identify $(D')^N=D_M$. The extensions $D'/D$ and $D_M/D$ are finite, and $D_M/D$ is purely inseparable. For a further finite group $H$ and a surjection $\\beta:J\\to H$, put $A=\\ker\\beta$, $A'=\\ker(\\beta\\rho)$. Let $K\\subseteq L^A$ and $F\\subseteq D^A$ be subfields with $L^A/K$ and $D^A/F$ purely inseparable. Then $(L')^{A'}/K$ and $(D')^{A'}/F$ are purely inseparable. In particular these conclusions can be iterated through a finite tower of such group surjections and finite base-field extensions, starting with $D^A=F$ and $L^A=K$ or with purely inseparable extensions of these fields. The case $J'=J$, $\\rho=1$, with a compatible action on a finite purely inseparable extension $L'/L$, is included.\n\nAll fields, extensions and purely inseparable extensions use [def-weil-field], [def-pc-field-extension] and [def-pc-field-tower]. A group action here is by field automorphisms, not assumed faithful. For a subgroup $U$ acting on a field $T$, $T^U=\\{x\\in T:ux=x\\text{ for every }u\\in U\\}$. Tensor product means [def-weil-pbc-module-tensor-product], with multiplication on pure tensors as above; the embeddings of $D,D_M,L'$ are the canonical ones. In characteristic zero every stated purely inseparable extension is equality.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Remarks 2.3(iii), §2.6 and §§3.2,3.5,3.11; returned proof Steps 7--8, tensor fixed fields and characteristic powers. Agent-expanded field algebra. Local PDF WANTED; publisher scan consulted online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For $j\\in J'$, compatibility on $L$ makes the proposed diagonal map respect the tensor relation: the images of $(ld)\\otimes a$ and $d\\otimes(la)$ are respectively $\\rho(j)(l)\\rho(j)(d)\\otimes j(a)$ and $\\rho(j)(d)\\otimes j(l)j(a)$, which agree since $j(l)=\\rho(j)(l)$. Additivity and multiplication are preserved on pure tensors. The map for $j^{-1}$ is its inverse, and the group law holds on generators. Thus this is an action by field automorphisms once the tensor algebra is a field. Every element of $N$ fixes both $L$ and $D$ pointwise; consequently $L\\subseteq M=(L')^N$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property and bilinearity relations; elementary check of the given compatible semilinear actions."
+   }
+  },
+  {
+   "text": "Choose an $L$-basis of the vector space $M$ and extend its image to an $L$-basis of $L'$ by lem-weil-pbc-vector-space-basis-through-vector. The latter basis has $[L':L]$ elements by def-weil-vector-space-dimension, so the former is finite. Hence $M/L$ is finite. The scalar-extension basis theorem, switching the tensor factors by $d\\otimes a\\mapsto a\\otimes d$, makes $D'$ and $D_M$ finite-dimensional over $D$. Both are domains by the universal domain hypothesis, applied to $T=L'$ and $T=M$. The finite-dimensional-domain lemma therefore makes both algebras fields, finite over $D$. The tensor-inclusion lemma supplies the canonical embeddings of each field factor.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-dimension",
+    "def-weil-vector-space-scalar-extension",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-common-extension-fields-tensor-inclusions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CV (section-tensor-product) and Tag 05G5 (base change preserves finite generation); agent specialization of the cited basis-extension, scalar-extension, field-of-finite-dimensional-domain and tensor-inclusion statements."
+   }
+  },
+  {
+   "text": "Apply lem-sfb-tensor-kernel-inseparable-invariants with its base field $K=L$, left field $L_{\\mathrm{left}}=D$, right field $M_{\\mathrm{right}}=L'$, acting group $N_{\\mathrm{acting}}=J'$, normal subgroup $Q=N$, and auxiliary subfield $R=D^J$. The quotient $J'/N$ has the same action as $J$ because $\\rho$ is surjective with kernel $N$. All tensor-field and finite-extension hypotheses were verified in step 2. The kernel fixes $D$ pointwise, the right fixed field is our $M$, and $M/L$ is purely inseparable by hypothesis. The remaining hypothesis is the identity extension $D^J/R$. The cited equality gives $(D')^N=D\\otimes_L M=D_M$ under the natural embeddings, and its next clause gives pure inseparability of $D_M/D$.",
+   "uses": [
+    "lem-sfb-tensor-kernel-inseparable-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Remarks 2.3(iii), p.602, and §2.6, p.603: composition of equivariant alterations; agent-written field-algebra specialization using the existing tensor/two-kernel lemma. Publisher PDF read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "We have $A'=\\rho^{-1}(A)$ and $N\\subseteq A'$. The restriction $\\rho:A'\\to A$ is surjective: for $a\\in A$, any lift $j\\in J'$ satisfies $\\beta\\rho(j)=\\beta(a)=1$. Its kernel is $N$. Thus $A'/N$ acts on $D$ and $L$ exactly as $A$ does. Also $N$ is normal in $A'$, being the kernel of this restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Remarks 2.3(iii), p.602, and §2.6, p.603: composition of equivariant alterations; agent-written field-algebra specialization using the existing tensor/two-kernel lemma. Publisher PDF read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "Apply the same tensor/two-kernel lemma with base $L$, left field $D$, right field $L'$, acting group $A'$, normal subgroup $N$, and $R=F$. Step 4 identifies the quotient action with that of $A$; the hypothesis on its left fixed field is precisely $D^A/F$ purely inseparable. Its conclusion gives $(D')^{A'}/F$ purely inseparable. Apply it a second time with left field $L$ and $R=K$. Here $L\\otimes_L L'\\cong L'$ by $l\\otimes a\\mapsto la$, inverse $a\\mapsto1\\otimes a$; these maps are inverse by the tensor relations and intertwine the actions since $j(la)=\\rho(j)(l)j(a)$. The quotient-fixed left field is $L^A$, with the required purely inseparable extension over $K$. This gives $(L')^{A'}/K$ purely inseparable. Neither application assumes faithful actions.",
+   "uses": [
+    "lem-sfb-tensor-kernel-inseparable-invariants",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Remarks 2.3(iii), p.602, and §2.6, p.603: composition of equivariant alterations; agent-written field-algebra specialization using the existing tensor/two-kernel lemma. Publisher PDF read online; local copy WANTED."
+   }
+  },
+  {
+   "text": "For iteration write $J_i\\twoheadrightarrow J_{i-1}$, $L_i/L_{i-1}$ and $D_i=D_{i-1}\\otimes_{L_{i-1}}L_i$ for the given finite tower, with the kernel-fixed-constants hypothesis at each stage. Put $A_i=\\ker(J_i\\to J_0\\xrightarrow{\\beta}H)$. Induct on $i$: at $i=0$ the assumed extensions $D_0^{A_0}/F$ and $L_0^{A_0}/K$ are purely inseparable, including the stated equality case. For the induction step apply steps 1--5 to stage $i$ with $\\beta$ replaced by $J_{i-1}\\to H$; step 5 gives exactly the two inductive conclusions at $i$. For every field extension $T/L_i$, scalar-extension associativity gives $D_i\\otimes_{L_i}T\\cong D_{i-1}\\otimes_{L_{i-1}}T$, explicitly $((d\\otimes a)\\otimes t)\\mapsto d\\otimes at$, inverse $d\\otimes t\\mapsto(d\\otimes1)\\otimes t$. The tensor relations make these inverse maps, and the formula preserves products of pure tensors, hence all products by additivity. It is therefore an algebra isomorphism. Its right side is a domain by the preceding stage’s hypothesis, so the universal domain hypothesis persists and each induction step is legitimate. If $\\rho$ is the identity then $N=1$ and $M=L'$, giving the stated special case. In characteristic zero the definition of purely inseparable makes all such extensions equalities.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "def-pc-field-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00D0 (lemma-transitive), tensor associativity; finite induction for de Jong Remarks 2.3(iii), p.602, and §2.6, p.603."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-vector-space-dimension",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-common-extension-fields-tensor-inclusions",
+  "lem-sfb-tensor-kernel-inseparable-invariants",
+  "def-pc-field-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Remarks 2.3(iii), p.602, and §2.6, p.603: composition of equivariant alterations; agent-written field-algebra specialization using the existing tensor/two-kernel lemma. Publisher PDF read online; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Purely inseparable kernel fixed fields in a tower of semilinear tensor field extensions",
+   "results": "{\"t\": \"2026-10-22T06:06:30Z\", \"tool\": \"leanfinder\", \"query\": \"Purely inseparable kernel fixed fields in a tower of semilinear tensor field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"perfectClosure.isPurelyInseparable\", \"IsPurelyInseparable.tower_bot\", \"IsPurelyInseparable.tower_top\", \"IsPurelyInseparable.trans\", \"IntermediateField.isPurelyInseparable_tower_top\", \"IntermediateField.isPurelyInseparable_tower_bot\", \"le_perfectClosure_iff\", \"Algebra.FormallyUnramified.range_eq_top_of_isPurelyInseparable\"], \"digest\": \"5fe6f651feb16c5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; related basic results do not state this construction or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product with a geometrically integral field commutes with invariants of a finite group and purely inseparable fixed field towers",
+   "results": "{\"t\": \"2026-10-22T06:06:38Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product with a geometrically integral field commutes with invariants of a finite group and purely inseparable fixed field towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.to_isFractionRing\", \"Algebra.isInvariant_of_isGalois\", \"IsGaloisGroup.iff_isFractionRing\", \"Algebra.isInvariant_of_isGalois'\", \"FixedPoints.isSeparable\", \"FixedPoints.isIntegral\", \"IsGalois.of_fixed_field\", \"IsGaloisGroup.of_isFractionRing\"], \"digest\": \"a7261adcbdc3eebf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; related basic results do not state this construction or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IntermediateField.fixedField",
+   "results": "{\"t\": \"2026-10-22T06:06:29Z\", \"tool\": \"loogle\", \"query\": \"IsPurelyInseparable, IntermediateField.fixedField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; related basic results do not state this construction or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField.*[Tt]ensor|[Tt]ensor.*fixedField|[Ii]nvariant.*[Pp]urely[Ii]nseparable",
+   "results": "{\"t\": \"2026-10-22T06:06:29Z\", \"tool\": \"grep\", \"query\": \"fixedField.*[Tt]ensor|[Tt]ensor.*fixedField|[Ii]nvariant.*[Pp]urely[Ii]nseparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; related basic results do not state this construction or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Purely inseparable kernel fixed fields in a tower of semilinear tensor field extensions",
+   "results": "{\"t\": \"2026-10-22T06:06:29Z\", \"tool\": \"leansearch\", \"query\": \"Purely inseparable kernel fixed fields in a tower of semilinear tensor field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable\", \"IsPurelyInseparable.tower_top\", \"IsPurelyInseparable.tower_bot\", \"IntermediateField.isSeparable_tower_top\", \"IsPurelyInseparable.mk\", \"IntermediateField.isPurelyInseparable_tower_top\", \"IntermediateField.isPurelyInseparable_tower_bot\", \"isPurelyInseparable_iff\"], \"digest\": \"a1aa02528b396d5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected all returned signatures; related basic results do not state this construction or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel fixed fields and purely inseparable towers after tensoring a geometrically integral field with a finite field extension",
+   "results": "{\"t\": \"2026-10-22T11:06:15Z\", \"tool\": \"leanfinder\", \"query\": \"Kernel fixed fields and purely inseparable towers after tensoring a geometrically integral field with a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.tower_top\", \"IsPurelyInseparable.tower_bot\", \"isPurelyInseparable_iff_fd_isPurelyInseparable\", \"IntermediateField.isPurelyInseparable_tower_top\", \"IntermediateField.isPurelyInseparable_tower_bot\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"perfectClosure.isPurelyInseparable\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\"], \"digest\": \"b5b2b23b1e705725\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; basic purely inseparable tower, tensor-power and Galois fixed-point facts do not state the semilinear tensor-kernel tower assertion or specialize to all its clauses in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField.*[Tt]ensor|[Tt]ensor.*fixedField|[Ii]nvariant.*[Pp]urely[Ii]nseparable",
+   "results": "{\"t\": \"2026-10-22T11:06:40Z\", \"tool\": \"grep\", \"query\": \"fixedField.*[Tt]ensor|[Tt]ensor.*fixedField|[Ii]nvariant.*[Pp]urely[Ii]nseparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching combined tensor/fixed-field/pure-inseparability declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed subfield of the kernel of a group surjection after finite extension of constants is purely inseparable over the original invariant field",
+   "results": "{\"t\": \"2026-10-22T11:06:40Z\", \"tool\": \"leansearch\", \"query\": \"The fixed subfield of the kernel of a group surjection after finite extension of constants is purely inseparable over the original invariant field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.fixedPoints_eq_bot\", \"isPurelyInseparable_iff\", \"separableClosure.isPurelyInseparable\", \"IsGaloisGroup.fixedPoints_fixingSubgroup\", \"fixedByFinite\", \"IsPurelyInseparable.inseparable\", \"IsGaloisGroup.subgroup\", \"InfiniteGalois.fixedField_bot\"], \"digest\": \"3d095a08a2917bf4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; basic purely inseparable tower, tensor-power and Galois fixed-point facts do not state the semilinear tensor-kernel tower assertion or specialize to all its clauses in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T11:06:40Z\", \"tool\": \"loogle\", \"query\": \"IsPurelyInseparable, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\"], \"digest\": \"8285363d6773bfd6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-power lemmas concern purely inseparable base change alone, not semilinear kernel invariants or the full tower statement; Basic.lean:669--698 read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariants of a semilinear action on a tensor product of fields commute with extension of constants and preserve purely inseparable invariant field extensions",
+   "results": "{\"t\": \"2026-10-22T11:07:31Z\", \"tool\": \"leanfinder\", \"query\": \"Invariants of a semilinear action on a tensor product of fields commute with extension of constants and preserve purely inseparable invariant field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"IsPurelyInseparable.tower_bot\", \"IsPurelyInseparable.tower_top\", \"FixedPoints.intermediateField\", \"IntermediateField.isPurelyInseparable_tower_top\", \"perfectClosure.isPurelyInseparable\", \"IsPurelyInseparable.trans\"], \"digest\": \"eed23f3a7c068674\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; basic purely inseparable tower, tensor-power and Galois fixed-point facts do not state the semilinear tensor-kernel tower assertion or specialize to all its clauses in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-single-curve-nodal-reduction",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; Remarks 2.3(iii), §2.6 and §§3.2,3.5,3.11; returned proof Steps 7--8, tensor fixed fields and characteristic powers. Agent-expanded field algebra.",
+   "via": [
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-field-kernel-invariant-tower",
+  "worker": "stage1",
+  "summary": "Verified the tensor fields and finite degrees by basis extension, scalar extension and the existing domain-to-field leaf. Reused the already existing tensor/two-kernel invariant-field node, with all substitutions and hypotheses explicit, rather than creating duplicate clause nodes. Gave the group-kernel calculation, two fixed-field applications and tower induction including persistence of universal integrality. Statement unchanged; no new nodes. Repair of returned head 43528ac9c23: compared the retained delivery with the current live DAG and reread every cited statement. The tensor/two-kernel invariant node is now split and reviewed; its statement is identical, as are all other cited statements. Made the tower base-change algebra isomorphism and its preservation of multiplication explicit. Rebuilt on current origin/sheaf-dag for maintainer promotion from the side completion; statement, citations and recorded searches retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; Remarks 2.3(iii), §2.6 and §§3.2,3.5,3.11; returned proof Steps 7--8, tensor fixed fields and characteristic powers. Agent-expanded field algebra. The field-algebra subargument of the single-curve preparation is realized by steps 1--6; no unit or chapter route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-a5e9e4a94",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-a5e9e4a94 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and the statement is unchanged. This head re-delivers 43528ac9c23b, which was refused at landing (side completion not promoted). Against that head, the only change is step 6: it now writes out the algebra isomorphism ((d⊗a)⊗t)↦d⊗at with its inverse and checks that it is multiplicative, so universal integrality carries over to each stage. I read every cited statement in full: tensor-kernel-inseparable-invariants (same unit sk-thm-sf-ctf-stability, split and reviewed, no cycle back to the item), basis-through-vector, vector-space-dimension, scalar-extension (basis and associativity clauses), finite-dimensional-domain-is-field, tensor-inclusions, module-tensor-product and pc-field-tower. Step 1: the semilinear balancing check is correct. Step 2: M/L is finite by basis extension; D' and D_M are finite over D, are domains by T=L' and T=M, and are therefore fields. Step 3: the tensor-kernel node is applied with K=L, left=D, right=L', group J', Q=N, R=D^J; all hypotheses hold and it gives (D')^N=D_M with D_M/D purely inseparable. Step 4: A'=ρ^{-1}(A), with kernel N. Step 5: two applications, with R=F and with left=L via L⊗_L L'≅L', give (D')^{A'}/F and (L')^{A'}/K purely inseparable. Step 6: induction on cumulative kernels with base case, successor step and persistence of the domain hypothesis; the ρ=id and characteristic-0 cases follow from the definitions. I tested small cases: trivial groups, N=1, zero-length towers, and F_p(t) with t^{1/p} and D=L(s), which gives a nontrivial purely inseparable D_M/D, consistent with the statement. The parent single-curve nodal reduction uses exactly the stated clauses. No SGA citation, no tool_uses needed, no fixes. de Jong is not available locally; the worker read the publisher PDF, and the field algebra is agent-written and labelled as such."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CurveFieldKernelInvariantTower",
+  "declaration": "Algebra.curveFieldKernelInvariantStep",
+  "declarations": [
+   "Algebra.curveFieldTensorDiagonal",
+   "Algebra.curveFieldKernelInvariantStep",
+   "Algebra.curveFieldTowerMap",
+   "Algebra.curveFieldKernelInvariantTower"
+  ],
+  "file": "lean/Sheaf/FieldTheory/CurveFieldKernelInvariantTower.lean",
+  "statement": "theorem curveFieldKernelInvariantStep (L : Type u) (D : Type v) (L' : Type w) [Field L] [Field D] [Field L'] [Algebra L D] [Algebra L L'] [FiniteDimensional L L'] (hgeom : ∀ (T : Type (max u v w)) [Field T] [Algebra L T], IsDomain (D ⊗[L] T)) (J : Type g) (J' : Type g') [Group J] [Group J'] [Finite J] [Finite J'] (ρ : J' →* J) (hρ : Function.Surjective ρ) (σL : J →* (L ≃+* L)) (σD : J →* (D ≃+* D)) (σL' : J' →* (L' ≃+* L')) (hD : ∀ j : J, (σD j).toRingHom.comp (algebraMap L D) = (algebraMap L D).comp (σL j).toRingHom) (hL' : ∀ j : J', (σL' j).toRingHom.comp (algebraMap L L') = (algebraMap L L').comp (σL (ρ j)).toRingHom) (M : IntermediateField L L') (hM : ∀ a : L', a ∈ M ↔ ∀ j : J', ρ j = 1 → σL' j a = a) (hpi : IsPurelyInseparable L M) : IsField (D ⊗[L] L') ∧ IsField (D ⊗[L] M) ∧ FiniteDimensional D (D ⊗[L] L') ∧ FiniteDimensional D (D ⊗[L] M) ∧ IsPurelyInseparable D (D ⊗[L] M) ∧ (∀ x : D ⊗[L] L', (∀ j : J', ρ j = 1 → curveFieldTensorDiagonal L D L' J J' ρ σL σD σL' hD hL' j x = x) ↔ x ∈ Set.range (Algebra.TensorProduct.map (AlgHom.id L D) M.val)) ∧ (∀ (H : Type h) [Group H] [Finite H] (β : J →* H), Function.Surjective β → ∀ (K : Subfield L) (F : Subfield D), (∀ a : K, ∀ j : J, β j = 1 → σL j a = a) → (∀ d : F, ∀ j : J, β j = 1 → σD j d = d) → (∀ a : L, (∀ j : J, β j = 1 → σL j a = a) → ∃ n : ℕ, a ^ (ringExpChar L ^ n) ∈ K) → (∀ d : D, (∀ j : J, β j = 1 → σD j d = d) → ∃ n : ℕ, d ^ (ringExpChar D ^ n) ∈ F) → (∀ a : L', (∀ j : J', β (ρ j) = 1 → σL' j a = a) → ∃ n : ℕ, ∃ b : K, a ^ (ringExpChar L' ^ n) = algebraMap L L' b) ∧ (∀ x : D ⊗[L] L', (∀ j : J', β (ρ j) = 1 → curveFieldTensorDiagonal L D L' J J' ρ σL σD σL' hD hL' j x = x) → ∃ n : ℕ, ∃ b : F, x ^ (ringExpChar D ^ n) = Algebra.TensorProduct.includeLeft (R := L) (S := D) (B := L') (b : D)))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "One-step statement and finite-tower iteration, with canonical tensor diagonal and composite embeddings. Fixed fields are rendered elementwise; purely inseparable fixed-field extensions use the exact Mathlib exponential-characteristic power criterion. No assumption of faithful actions. Tensor rings use IsField without replacing their canonical ring structures."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24eda7c91",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Lean exact. Step theorem: fields/Algebra/FiniteDimensional; hgeom over Type(max u v w), equivalent to all universes; canonical diagonal = mapRingHom (tmul formula checked); M fixed field via IntermediateField+hM; IsField x2, FiniteDimensional x2, IsPurelyInseparable D (D⊗M), fixed-point iff range(map id M.val); A/A' clauses via elementwise isPurelyInseparable_iff_pow_mem with ringExpChar; rho=id and char 0 covered. Tower: e ring isos from the actual tensor rings with he; hD forces the diagonal action; hgeom at stage 0 only; composite β via hβρ; curveFieldTowerMap is real recursion; hβ/hLD for i>0 redundant (advisory). n=0 and trivial-group edge cases checked; statement verbatim; no name clashes; no hollow defs. Sole fault H11: 'Second reading by Q25' says no reading took place → FIX fixes/lem-sfb-curve-field-kernel-invariant-tower.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean change, so no compile."
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "stage3-pur-scalar-tower-composition",
+ "kind": "statement",
+ "title": "Composition of normalized strict scalar comparisons",
+ "statement": "Fix a prime $\\ell$, finite coefficient fields $E,L,F$ over $\\mathbf Q_\\ell$, and algebra homomorphisms $i:E\\to L$, $j:L\\to F$. On any scheme $W$, use the quotient sequence ring sheaves, termwise scalar extension $S_i$, and the specified associator $a_W:S_iS_j\\simeq S_{j\\circ i}$ induced by $c\\otimes(b\\otimes x)\\mapsto c\\,j(b)\\otimes x$ [def-trf-integral-comparison-sequence-systems]. Let $T$ be signed total tensor and let $\\sigma$ be its unique pure-tensor-normalized scalar comparison [def-pur-scalar-extension-tower-data]. For every $f:X\\to Y$, write $P_E,P_L,P_F$ for the termwise quotient-system pullbacks and $\\kappa_i:P_ES_{i,X}\\simeq S_{i,Y}P_L$ for their specified scalar associations. The two successive pullback/scalar comparisons, followed by $a_Y$, equal $a_X$ followed by $\\kappa_{j\\circ i}$. Also the two successive scalar/tensor comparisons, followed by the tensor of $a_Y$ with itself, equal $a_Y$ on the tensor followed by $\\sigma_{j\\circ i}$. These are equalities of natural isomorphisms of actual integer cochain complexes of modules on the whole sequence site, retaining every quotient transition and their inverse maps. Equivalently, CompositionSquare for the displayed kappa and associator data and TensorCompositionSquare for the displayed sigma and associator data both hold. No flatness assumption on finite quotient coefficient maps is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL and 07A4; composition step 7 of lem-pur-scalar-extension-tower-coherence."
+ },
+ "stmt_deps": [
+  "def-pur-scalar-extension-tower-data",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the pullback composition through the two successive scalar extension/restriction adjunctions and the geometric pullback/direct-image adjunction. Test the result on pullback unit sections. Naturality moves each scalar section through the first comparison. The normalized kappa formulas identify the two successive operations, and the specified scalar associator multiplies the two coefficient-one factors; ring maps preserve one, so this is the direct kappa formula. Adjunction injectivity gives the first equality.",
+   "uses": [
+    "stage3-pur-normalized-scalar-tower-comparisons",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the tensor composition transpose through both scalar adjunctions and test on homogeneous total-tensor generators in each degree. The sigma formulas move each coefficient to the first tensor factor and insert one in the second. Naturality of total-tensor generators identifies the image under the two associators with the tensor of their values on each factor. The scalar associator formula identifies these values with the direct scalar sections, since both coefficients are one. The direct sigma formula is therefore the same value. Homogeneous generators, cochain extensionality and natural-transformation extensionality prove the tensor equality; Iso.ext retains equality of inverse maps. Both equations are in the sequence-site module category, hence include all quotient transitions. Combine the two proved equalities by conjunction.",
+   "uses": [
+    "stage3-pur-normalized-scalar-tower-comparisons",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-scalar-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "stage3-pur-normalized-scalar-tower-comparisons",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-scalar-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "D2: complete generator proofs of the two original composition equations; isolate this self-contained proof after profiling the combined file."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "results": "OK 1 hits: ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "date": "2026-10-27",
+   "verdict": "The ordinary module associator has the same coefficient multiplication formula. Reuse the already stated sequence-site associator and normalized generator interfaces to lift it to strict sheaf cochains."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(composition|square)|ScalarExtensionTower",
+   "results": "OK 14 hits: Mathlib/Geometry/Manifold/Algebra/SmoothFunctions.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean",
+   "date": "2026-10-27",
+   "verdict": "The ordinary module associator has the same coefficient multiplication formula. Reuse the already stated sequence-site associator and normalized generator interfaces to lift it to strict sheaf cochains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive scalar extension commutes with tensor and geometric pullback, and its associator multiplies the two coefficients on pure tensors of complexes of sheaves",
+   "results": "OK 8 hits: ModuleCat.ExtendScalars.smul_tmul, ModuleCat.extendScalars_assoc, ModuleCat.ExtendScalars.obj', AlgHom.extendScalars, ModuleCat.extendScalars_assoc_assoc, ModuleCat.ExtendScalars.map_tmul, TensorProduct.AlgebraTensorModule.tensorTensorTensorComm, instSMulCommClassTensorAlgebra",
+   "date": "2026-10-27",
+   "verdict": "The ordinary module associator has the same coefficient multiplication formula. Reuse the already stated sequence-site associator and normalized generator interfaces to lift it to strict sheaf cochains."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionTowerCoherence",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Successive coefficient-extension coherence of the actual integral quotient systems, original strict composition step 7.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionTowerComposition",
+  "file": "lean/Sheaf/Paper/ScalarExtensionTowerComposition.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.composition",
+  "statement": "theorem composition (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F] (j : L →ₐ[ℚ_[l]] F) {X Y : Scheme.{u}} (f : X ⟶ Y) : CompositionSquare (pull l E f) (pull l L f) (pull l F f) (scalar l E L ι Y) (scalar l L F j Y) (scalar l E F (j.comp ι) Y) (scalar l E L ι X) (scalar l L F j X) (scalar l E F (j.comp ι) X) (kappa l E L ι f) (kappa l L F j f) (kappa l E F (j.comp ι) f) (scalarComp l E L ι F j Y) (scalarComp l E L ι F j X) ∧ TensorCompositionSquare (tensor l E Y) (tensor l L Y) (tensor l F Y) (scalar l E L ι Y) (scalar l L F j Y) (scalar l E F (j.comp ι) Y) (scalarComp l E L ι F j Y) ((comparisons l).sigma E L ι Y) ((comparisons l).sigma L F j Y) ((comparisons l).sigma E F (j.comp ι) Y)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27",
+  "note": "The original composition signature and name are retained; the completed proof is publicly re-exported by ScalarExtensionTowerCoherence. No sorry is split off."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6309c",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T135058-L-3664568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6309c",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T135058-L-3664568",
+  "kind": "interface",
+  "note": "independent cc review: 6309 Lean byte-identical to the 8af9 delivery (reviewed FIX), Rational split withdrawn, 8af9 node fixes taken; 3 delivered modules + 3 direct importers on main compiled OK in /tmp/d2s6309"
+ }
+}

@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-dg-property-p-resolution",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: restrict derived tensor to D_QCoh using lemma-tensor-with-QCoh-complex (09MA). Within lem-sfb-space-dg-tensor-quasicoherent, steps 3 and 4 (Tag 09MA proof, first sentence: 'Let P be a differential graded E-module with property P', the resolution of an arbitrary module by Tag 09KP, lemma-resolve).",
+   "via": [
+    "lem-sfb-space-dg-tensor-quasicoherent",
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "Property-(P) resolution of a right DG module over an arbitrary DG algebra",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$; its cohomology is $H^i(M)=\\ker(d:M^i\\to M^{i+1})/d(M^{i-1})$, and a quasi-isomorphism is a homomorphism of differential graded modules (degree-preserving, $A$-linear, commuting with the differentials) inducing isomorphisms on all $H^i$. For $k\\in\\mathbf Z$ let $A[k]$ be the shifted module with $A[k]^i=A^{i+k}$, differential $(-1)^kd_A$ and right action by multiplication. Say that a right differential graded $A$-module $P$ has property (P) if there is a filtration $0=F_0P\\subset F_1P\\subset F_2P\\subset\\cdots$ by differential graded submodules such that $P=\\bigcup_{n\\geq0}F_nP$, each inclusion $F_nP\\subset F_{n+1}P$ admits a left inverse as a map of graded right $A$-modules (not necessarily commuting with $d$), and each quotient $F_{n+1}P/F_nP$ is isomorphic, as a differential graded $A$-module, to a direct sum $\\bigoplus_{j\\in J_n}A[k_{nj}]$ over a set $J_n$ (possibly empty) with integers $k_{nj}$. Let $A$ and $M$ have their underlying sets in the module universe $u$. Then there exist a right differential graded $A$-module $P$ with property (P), whose underlying sets and index sets $J_n$ lie in $u$, and a quasi-isomorphism $q:P\\to M$, which may moreover be taken degreewise surjective. No boundedness, countability or commutativity assumption on $A$ or $M$ is imposed; the case $M=0$ is included.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KP, lemma-resolve (statement and proof, via Tag 09KN, lemma-good-quotient); property (P) as defined in Tag 09KK, section-P-resolutions; admissibility of the inclusions by Tag 09KJ, lemma-target-graded-projective."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-property-p-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Set $M_0=M$. Inductively apply [lem-sfb-dg-two-layer-free-cover] to $M_i$, obtaining $\\pi_i:Q_i\\to M_i$ and its basis sets $U_i,V_i$, and put $M_{i+1}=\\ker\\pi_i$ with its induced differential and right action. This is a DG submodule since $\\pi_i$ commutes with both. Write $j_{i+1}:M_{i+1}\\hookrightarrow Q_i$ and $f_{i+1}=j_{i+1}\\pi_{i+1}$. Then $f_if_{i+1}=0$ and $\\pi_0f_1=0$, since $\\pi_i j_{i+1}=0$. Thus the chosen covers give an exact augmented chain $\\cdots\\to Q_2\\to Q_1\\to Q_0\\to M\\to0$ in every degree.",
+   "uses": [
+    "lem-sfb-dg-two-layer-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, lemma-resolve, proof"
+   }
+  },
+  {
+   "text": "Write $Z^r(T)=\\ker(d_T:T^r\\to T^{r+1})$. The augmented chain is also exact on $Z^r$ for every $r$. Indeed a cycle $x\\in Q_i^r$ in the kernel of the next arrow lies in $M_{i+1}^r$; its differential there is zero because $j_{i+1}$ is injective. Surjectivity on cocycles of $\\pi_{i+1}$ lifts $x$ to a cycle in $Q_{i+1}^r$. At the augmented end, surjectivity on cocycles of $\\pi_0$ gives $Z^r(Q_0)\\to Z^r(M)\\to0$. The converse inclusions follow from the vanishing consecutive composites.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, lemma-resolve, proof"
+   }
+  },
+  {
+   "text": "Define $P^n=\\bigoplus_{i\\geq0}Q_i^{n+i}$ with the unchanged right action. For homogeneous $x\\in Q_i^b$, of total degree $b-i$, put $D(x)=f_i(x)+(-1)^id_{Q_i}(x)$, omitting $f_0$. Both terms have total degree $b-i+1$. In $D^2$, the pure terms vanish and the mixed terms cancel: their signs are $(-1)^{i-1}$ and $(-1)^i$, while $f_i$ commutes with the internal differentials. The coefficient of $x\\,d_A(a)$ in $D(xa)$ is $(-1)^{i+b}=(-1)^{b-i}$, so the DG Leibniz rule holds. Let $q:P\\to M$ be $\\pi_0$ on $Q_0$ and zero on the other summands. The identity $\\pi_0f_1=0$ and the fact that $\\pi_0$ is a DG map show that $q$ is a DG map. It is degreewise surjective because $\\pi_0$ is.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, lemma-resolve, proof"
+   }
+  },
+  {
+   "text": "Forget the DG action and view the augmented chain as complexes of $\\mathbf Z$-modules. Steps 1 and 2 verify degreewise exactness and exactness of every augmented cocycle sequence, precisely the hypotheses of [lem-pc-derived-total-resolution-quasi-iso]. Its column $p=-i$ is $Q_i$, so its direct-sum total has differential $f_i+(-1)^id_{Q_i}$ and augmentation $q$. The cited theorem gives isomorphisms $H^n(P)\\to H^n(M)$ for every $n$. Thus $q$ is a quasi-isomorphism as defined in the item; forgetting the action did not change cycles or boundaries.",
+   "uses": [
+    "lem-pc-derived-total-resolution-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, lemma-resolve, final sentence, applying homology.tex Tag 09IZ, lemma-good-resolution-gives-qis"
+   }
+  },
+  {
+   "text": "Use the bases supplied by [lem-sfb-dg-two-layer-free-cover]. Give $e_u\\in Q_i$, $u\\in U_i$, height $2i$, and $e_v\\in Q_i$, $v\\in V_i$, height $2i+1$; their total degree is $t_w-i$. Let $F_nP$ be the graded span of basis vectors of height strictly less than $n$. Then $F_0P=0$. The internal differential of a $U_i$ generator is zero, and that of a $V_i$ generator is in the span of $U_i$; the horizontal differential lands in $Q_{i-1}$, whose heights are at most $2i-1$. Hence $D$ strictly lowers generator heights. The Leibniz rule makes each $F_nP$ a DG submodule. Every element has finite basis support, so these submodules exhaust $P$. Deleting all coordinates of height $n$ is a graded right $A$-linear retraction $F_{n+1}P\\to F_nP$. Modulo $F_nP$ a generator $e_w$ of height $n$ is closed, and $D(e_wa)=(-1)^{t_w-i}e_wd_A(a)$. Consequently its summand is $A[i-t_w]$ as a DG module, and $F_{n+1}P/F_nP$ is the direct sum of these shifts. This proves property (P), including its zero initial term.",
+   "uses": [
+    "lem-sfb-dg-two-layer-free-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, lemma-resolve, proof"
+   }
+  },
+  {
+   "text": "All kernels are subsets of the preceding $u$-small modules. The cover lemma keeps every $Q_i,U_i,V_i$ in $u$, and $\\mathbf N,\\mathbf Z\\in u$. Countable disjoint unions and sets of finite-support functions over $u$-small sets remain in the Grothendieck universe $u$, so the total module and every height-index set $J_n$ lie in $u$. No step used boundedness or a countability bound on $A$ or $M$. For $M=0$ one may instead choose $P=0$, $q=0\\to0$, $F_nP=0$ and all $J_n=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, lemma-resolve, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-two-layer-free-cover",
+  "lem-pc-derived-total-resolution-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KP, lemma-resolve, proof using Tag 09KN, lemma-good-quotient, and homology.tex Tag 09IZ, lemma-good-resolution-gives-qis; zero-based filtration written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded in Mathlib/ (recursive, -l)",
+   "results": "0 files",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has no differential graded modules over a differential graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "SemiFree|semiFree|semi-free|PropertyP in Mathlib/ (recursive, -l)",
+   "results": "0 files",
+   "date": "2026-10-24",
+   "verdict": "no match: no semi-free or property-(P) resolutions in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "SemiFree|semiFree|PropertyP in lean/Sheaf and lean/WeilConjectures of the project (recursive, -l)",
+   "results": "Sheaf/CategoryTheory/SmallDgCategory.lean, line 5, a module docstring naming the removed SemiFreeDGModule only",
+   "date": "2026-10-24",
+   "verdict": "no match: the former SemiFreeDGModule module was removed at the 2026-10-18 route pivot."
+  },
+  {
+   "tool": "leansearch",
+   "query": "every differential graded module over a differential graded algebra has a semi-free quasi-isomorphic resolution",
+   "results": "not run: the search service is not reachable from the review sandbox",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SemiFree\"",
+   "results": "not run: the search service is not reachable from the review sandbox",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|[Ss]emi.?free|[Pp]ropertyP",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A differential graded module over a DG algebra has a semi free resolution",
+   "results": "8 hits: ModuleCat.projectiveResolution, Module.Free.of_basis, GradedAlgebra, Module.Free.trans, SetLike.gmodule.congr_simp, Rep.barResolution, Module.Finite.exists_free_surjective, Module.Relations.Solution.IsPresentation.free",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\"",
+   "results": "12 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, HomotopyEquiv.isKProjective, CochainComplex.isKProjective_of_iso, CochainComplex.isKProjective_iff_of_iso, CochainComplex.instIsKProjectiveExtendNatIntEmbeddingDownNatOfProjectiveX, CochainComplex.instIsKProjectiveObjIntShiftFunctor, CochainComplex.isKProjective_shift_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unbounded differential graded module over an associative differential graded algebra admits a surjective quasi isomorphism from a semi free module with a split countable filtration",
+   "results": "8 hits: DerivedCategory.instEssSurjCochainComplexIntQ, CochainComplex.cm5b, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, HomotopyCategory.quotient_obj_surjective, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, HomotopyCategory.instEssSurjHomologicalComplexQuotient",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|[Dd]ifferential.?[Gg]raded|[Ss]emi.?free",
+   "results": "5 hits: Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded module free cover surjective on cycles built from disks and spheres",
+   "results": "8 hits: Module.Relations.surjective_toQuotient, Algebra.Presentation.differentials.surjective_hom₁, CategoryTheory.ShortComplex.cyclesIsKernel, ModuleCat.projectiveResolution, ModuleCat.instProjectiveObjFree, HomologicalComplex.toCycles, groupHomology.instEpiModuleCatH2π, CategoryTheory.ShortComplex.moduleCatToCycles",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free differential graded module with a two step filtration covers a module and all its cycles",
+   "results": "8 hits: IsModuleFiltration.toIsFiltration, IsModuleFiltration, Ideal.stableFiltration, HomologicalComplex.cycles, CategoryTheory.ShortComplex.cyclesIsKernel, IsModuleFiltration.rec, Ideal.Filtration.Stable, Ideal.Filtration",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedModule\"",
+   "results": "2 hits: GradedModule.isModule, GradedModule.linearEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right module over a graded ring with differential admits a two layer graded free DG cover surjective both on homogeneous elements and on cocycles",
+   "results": "8 hits: HomogeneousLocalization.Away.mk_surjective, GradedRing.projZeroRingHom'_surjective, HomogeneousLocalization.mk_surjective, CochainComplex.HomComplex.Cocycle.toSingleMk_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semi free DG resolution with property P over an arbitrary noncommutative differential graded ring",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution, CategoryTheory.HasProjectiveResolution, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.HasProjectiveResolutions, CategoryTheory.projectiveResolution, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.InjectiveResolution, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-dg-tensor-quasicoherent",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-property-p-resolution",
+  "worker": "stage1",
+  "summary": "Checked Stacks 09KP, 09KN, 09KK, 09K0 and 09IZ. Constructed the successive-kernel resolution, verified exactness on cocycles, gave the signed DG total and explicit height filtration starting at zero, and reused the existing 09IZ total-resolution theorem over Z. Created only the unrestricted two-layer DG free-cover input. Corrected the source tag 09KJ to 09K0; the statement is unchanged.",
+  "blueprint": "Realizes the inherited property-(P) prerequisite to 09MA within latest det-thm-sf-ctf-stability-direct-images proof (3), through the existing ancestry. blueprint_refs.py ancestor returns None, retained with its complete via chain; no same statement was found among blueprint nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-total-resolution-quasi-iso",
+    "why": "General 09IZ direct-sum total resolution theorem for complexes over a ring, applied over Z to underlying abelian groups; this is exactly the tool called in the final sentence of 09KP, and no same-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-total-resolution-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-e222a793e",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-e222a793e (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-sfb-dg-two-layer-free-cover, the cited lem-pc-derived-total-resolution-quasi-iso, and Stacks dga 09KK, 09KN, 09KP and 09K0 plus homology 09IZ. The item statement is byte-identical to live and side-live, and no re-split note exists for this item. Steps 1-2: the successive kernels give an augmented chain that is exact in every degree, and exact on cocycles by the cover's cocycle surjectivity. Step 3: D = f_i + (-1)^i d is the 09KP formula; checked that D squared vanishes, the Leibniz sign is (-1)^{b-i}, and q is a surjective DG map. Step 4: 09IZ applied over Z with matching sign and indexing; it is a tool from another unit, recorded in tool_uses and accepted. Step 5: heights 2i and 2i+1 strictly drop under D; F_0 = 0; the quotient generator e_w spans A[i - t_w] with the correct sign. This also repairs the source's indexing, where F_0 = P_0 is not a sum of shifts. Step 6: the u bound holds and M = 0 is covered. The new node is a self-contained, statement-only form of 09KN, checked against its disk and cocycle construction on small cases (N = 0, the zero ring, Z/2 over Z, d_A nonzero). It is not a duplicate: the existing cover assumes countability, the Drinfeld semi-free replacement gives no u bound or surjectivity, and the pc covers have zero d_A. FIX: the item's source.place still named Tag 09KJ (proposition-homotopy-category-triangulated) for lemma-target-graded-projective; corrected to 09K0. The report claimed this correction, but the file was unchanged. Only the source field changed, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-dg-property-p-resolution.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgPropertyPResolution",
+  "declaration": "CategoryTheory.DgAlgebra.exists_propertyP_resolution",
+  "file": "lean/Sheaf/CategoryTheory/DgPropertyPResolution.lean",
+  "statement": "theorem exists_propertyP_resolution (A : Algebra.{u}) (M : RightModule A) : ∃ (P : RightModule A) (q : P ⟶ M), HasPropertyP A P ∧ quasiIsomorphisms A q ∧ ∀ n : ℤ, Function.Surjective (((underlying A).map q).f n)",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d492c975",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Read the item, the new def-sfb-dg-property-p-filtration node and module, the theorem module, the DgAlgebraDerivedCategory framework, the sibling CompleteDualFreeFiltration and Stacks dga.tex section-P-resolutions/09KP. Property (P) is rendered faithfully: F0=0; DG submodules by injective embeddings; exhaustive; additive right-A-linear retractions not commuting with d; DG quotient by surjection plus exactness; coordinates as a DirectSum (finite support) of A^{n+k} with (-1)^k d_A and unchanged action; HEq only reassociates degrees; index sets in Type u. The theorem has arbitrary A and M, concludes quasiIsomorphisms (QuasiIso of the underlying complex) plus degreewise surjectivity, and adds no hypotheses. Edge cases (M=0, empty index sets, negative shifts, u=0) are covered. Item diff vs side-live: only lean and stmt_deps, which add the new def node (H2 OK); statements verbatim; lines ≤100; docstrings with source, blueprint and proof steps; proof is sorry. No existing PropertyP/SemiFree declaration or DAG def node. Nothing compiled (no file changed). Notes: the Q76 second reading is brief but enumerates the clauses; the item source.place still says 09KJ instead of 09K0 (separate maintainer fix, outside H2 scope)."
+ }
+}

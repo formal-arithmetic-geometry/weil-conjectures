@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-semiabelian-trait-specialization-agreement",
+ "kind": "statement",
+ "title": "Agreement of trait specializations of a semiabelian homomorphism",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $P,Q\\to S$ be smooth separated commutative group schemes of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation] with semiabelian geometric fibres. All group operations are morphisms satisfying the commutative group identities. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Semiabelian geometric fibres have the meaning of [def-sfb-semiabelian-geometric-fibres]. Write $\\eta$ for the generic point, $K=\\kappa(\\eta)$, and fix a $K$-group homomorphism $u:P_\\eta\\to Q_\\eta$ [def-weil-residue-field, def-pc-scheme-fibre]. For $i=1,2$, let $R_i$ be either a field or a discrete valuation ring [def-weil-field, def-sc-discrete-valuation-ring], with fraction field $L_i$, residue field $k_i$, and a morphism $a_i:\\operatorname{Spec}R_i\\to S$ whose generic point maps to $\\eta$ and whose closed point maps to the same point $s\\in S$. Suppose $v_i:P\\times_S\\operatorname{Spec}R_i\\to Q\\times_S\\operatorname{Spec}R_i$ are group homomorphisms restricting to the base change of $u$ over $L_i$ [def-pc-fibre-product]. Let $\\Omega$ be any algebraically closed field and $\\kappa(s)$-embeddings $k_i\\hookrightarrow\\Omega$ [def-weil-algebraic-closure, def-pc-field-extension]. Then the induced homomorphisms on the common geometric fibre agree: $$(v_1)_\\Omega=(v_2)_\\Omega:P_s\\times_{\\kappa(s)}\\Omega\\longrightarrow Q_s\\times_{\\kappa(s)}\\Omega.$$ The extensions $v_i$ are hypotheses; the conclusion asserts only agreement of their specializations, not existence over $S$.",
+ "source": {
+  "document": "literature/faltings-finiteness-theorems-abelian-varieties.pdf",
+  "place": "Chapter II, section 2, Lemma 1 proof, printed pp.10-11, valuation-ring reduction for graph fibres. Agent-formulated compatibility input making that omitted reduction explicit; the torsion/normality argument is described in the report, not claimed to be a verbatim theorem of Faltings. Local copy WANTED; primary PDF read online at https://www-fourier.univ-grenoble-alpes.fr/~lefourns/contenu/Zywina/Faltings.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-weil-field",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-fibre-product",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{S,s}$. Both trait maps give local injections $A\\to R_i$: their generic points map to $\\eta$, so a nonzero element of the domain $A\\subset K$ cannot map to zero. Normality of $S$ makes $A$ a normal domain. Use [lem-sfb-normal-strict-local-trait-lifts] with the specified embeddings in $\\Omega$ to obtain the same strict henselization $H$ of $A$, strict henselizations $B_i$ of $R_i$, and injective local maps $H\\to B_i$. Write $F=\\operatorname{Frac}H$ and $F_i=\\operatorname{Frac}B_i$; these maps embed $F$ in $F_i$ compatibly with $K$. All closed geometric evaluations in $\\Omega$ commute. This includes the field case: if $R_i$ is a field, $s=\\eta$ and $A=K$.",
+   "uses": [
+    "lem-sfb-normal-strict-local-trait-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GU, lemma-strictly-henselian-functorial; dominance/normality supplied by the cited node."
+   }
+  },
+  {
+   "text": "For any strictly henselian local ring $C$ evaluated at a closed geometric point $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}C$, and any etale $C$-scheme $E$, evaluation gives a bijection $E(C)\\to E_{\\Omega}(\\Omega)$. Indeed the subcanonical clause of [lem-sfb-space-etale-pullback-chart-comparison], applied to schemes viewed as algebraic spaces, makes $h_E$ a sheaf; [lem-weil-pbc-sets-strictly-henselian-open-sections-stalk] identifies its sections with its geometric stalk, and [lem-galois-stalk-representable] identifies that stalk with geometric fibre points, sending a section to its evaluation. These identifications apply for $C=H$ and $C=B_i$. For every etale $H$-scheme $E$, the square with top map $E(H)\\to E(B_i)$ and bottom the identity of $E_\\Omega(\\Omega)$ commutes by composing the section with the closed geometric evaluation. Since both vertical maps are bijections, the top map is a bijection too.",
+   "uses": [
+    "lem-sfb-space-etale-pullback-chart-comparison",
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "lem-galois-stalk-representable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian; representable-stalk evaluation assembled from the three cited statements."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ nonzero in $\\Omega$. It is a unit in $H$ and in $B_i$, since its closed residue is nonzero. The pullbacks $P_H,Q_H$ are smooth by the smooth clause of [lem-pc-proper-base-change]. Apply [lem-sfb-smooth-group-invertible-multiplication] to them, regarded as group algebraic spaces: the scheme kernels $P_H[n],Q_H[n]$ are etale and their formation commutes with base change. Fix $x\\in P_\\Omega[n](\\Omega)$. Step 2 gives $a\\in P_H[n](H)$ evaluating to $x$, and its pullbacks $a_i$ to $B_i$ also evaluate to $x$. The sections $v_i(a_i)$ belong to $Q_H[n](B_i)$ because $v_i$ are homomorphisms. Step 2 therefore gives sections $b_i\\in Q_H[n](H)$ whose pullbacks are $v_i(a_i)$. Over $F_i$ each $b_i$ equals $u_F(a_F)$, since $v_i$ restricts to $u$. This equality already holds over $F$: the equalizer is closed, being the pullback of the closed diagonal of $Q$ by [lem-pc-closed-imm-base-change], and an ideal of $F$ that vanishes in the field extension $F_i$ is zero. The closed equalizer of $b_1,b_2$ over $\\operatorname{Spec}H$ is then all of $\\operatorname{Spec}H$, since its ideal maps to zero under the injection $H\\to F$. Hence $b_1=b_2$ and evaluation in $\\Omega$ gives $(v_1)_\\Omega(x)=(v_2)_\\Omega(x)$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-smooth-group-invertible-multiplication",
+    "lem-pc-closed-imm-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BF5, lemma-group-scheme-addition-tangent-vectors, via the existing invertible-multiplication node; closed equalizers by the cited closed-immersion base-change theorem."
+   }
+  },
+  {
+   "text": "Let $Z\\hookrightarrow P_\\Omega$ be the equalizer of $(v_1)_\\Omega,(v_2)_\\Omega$. It is closed because it is a base change of the closed diagonal of $Q$, by [lem-pc-closed-imm-base-change]. Step 3 shows that every $\\Omega$-point killed by an invertible positive integer factors through $Z$. The group $P_\\Omega$ is smooth, separated, of finite type and semiabelian, by the hypotheses, the smooth base-change clause of [lem-pc-proper-base-change], and [lem-pod-separated-finite-type-base-change] (finite presentation implies finite type by its finite generating presentation and quasi-compactness). Apply [lem-sfb-semiabelian-prime-to-torsion-schematic-density] to get $Z=P_\\Omega$ as schemes. This is precisely equality of the two homomorphisms, including their scheme morphisms.",
+   "uses": [
+    "lem-pc-closed-imm-base-change",
+    "lem-pc-proper-base-change",
+    "lem-sfb-semiabelian-prime-to-torsion-schematic-density",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I section 10; agent semiabelian schematic-density input isolated in the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-strict-local-trait-lifts",
+  "lem-sfb-space-etale-pullback-chart-comparison",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-galois-stalk-representable",
+  "lem-pc-proper-base-change",
+  "lem-sfb-smooth-group-invertible-multiplication",
+  "lem-pc-closed-imm-base-change",
+  "lem-sfb-semiabelian-prime-to-torsion-schematic-density",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Torsion/normality expansion of the omitted valuation comparison in Faltings II section 2 Lemma 1; Stacks Tags 04GU, 06DI and 03QO, with the cited existing nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two extensions of the same generic homomorphism of semiabelian groups along traits through a normal base induce the same geometric special fibre homomorphism",
+   "results": "{\"t\": \"2026-10-24T02:47:27Z\", \"tool\": \"leanfinder\", \"query\": \"Two extensions of the same generic homomorphism of semiabelian groups along traits through a normal base induce the same geometric special fibre homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"galLiftEquiv_apply\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Scheme.Hom.residueFieldMap_congr\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\"], \"digest\": \"3aa206e5191e144d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned signatures; valuation-ring inclusions, general valuative criteria, residue-field maps and normalization extensionality do not assert the semiabelian homomorphism theorem. A second semantic phrasing was run."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Specialization of a semiabelian group homomorphism is independent of the discrete valuation ring through a normal integral base",
+   "results": "{\"t\": \"2026-10-24T02:47:26Z\", \"tool\": \"leansearch\", \"query\": \"Specialization of a semiabelian group homomorphism is independent of the discrete valuation ring through a normal integral base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.localizationMapOfSpecializes\", \"PrimeSpectrum.localizationMapOfSpecializes.congr_simp\", \"ValuationSubring.subtype\", \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZero\", \"ValuationSubring.unitGroupToResidueFieldUnits\", \"ValuationSubring.mapOfLE.congr_simp\", \"Valuation.HasExtension.instIsLocalHomValuationInteger\", \"ValuationSubring.mapOfLE_valuation_apply\"], \"digest\": \"a155d121b0cba26d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned signatures; valuation-ring inclusions, general valuative criteria, residue-field maps and normalization extensionality do not assert the semiabelian homomorphism theorem. A second semantic phrasing was run."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"specialization\", \"hom\"",
+   "results": "{\"t\": \"2026-10-24T02:47:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"specialization\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned signatures; valuation-ring inclusions, general valuative criteria, residue-field maps and normalization extensionality do not assert the semiabelian homomorphism theorem. A second semantic phrasing was run."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|speciali[sz].*(homomorphism|torsion)|(homomorphism|torsion).*speciali[sz]",
+   "results": "{\"t\": \"2026-10-24T02:47:25Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|speciali[sz].*(homomorphism|torsion)|(homomorphism|torsion).*speciali[sz]\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned signatures; valuation-ring inclusions, general valuative criteria, residue-field maps and normalization extensionality do not assert the semiabelian homomorphism theorem. A second semantic phrasing was run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime to characteristic torsion and normality identify special fibre maps obtained by extending a generic semi abelian homomorphism over two different traits",
+   "results": "{\"t\": \"2026-10-24T02:47:28Z\", \"tool\": \"leanfinder\", \"query\": \"Prime to characteristic torsion and normality identify special fibre maps obtained by extending a generic semi abelian homomorphism over two different traits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"galLift\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"galLift_comp\", \"galLiftEquiv_apply\", \"galRestrict'_galLift\", \"galLift_galRestrict'\"], \"digest\": \"588f5e682d1d9c51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned signatures; valuation-ring inclusions, general valuative criteria, residue-field maps and normalization extensionality do not assert the semiabelian homomorphism theorem. A second semantic phrasing was run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two trait extensions of a generic semiabelian homomorphism over a normal integral scheme have equal geometric specializations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"AlgebraicGeometry.ValuativeCriterion.Existence = (AlgebraicGeometry.topologically @SpecializingMap).universally\", \"doc\": \"The valuative criterion for existence of a scheme morphism is equivalent to the universal property that its underlying continuous map is a specializing map, meaning this property is preserved under al\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  (AlgebraicGeometry.topologically @SpecializingMap).universally f → AlgebraicGeometry.ValuativeCriterion.Existence f\", \"doc\": \"If a morphism of schemes is universally specializing (topologically), then it satisfies the valuative criterion for existence. Specifically, for any valuative commutative square involving the morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {X : AlgebraicGeometry.Scheme}\\n  {f₁ f₂ : (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })},\\n  f₁ = f₂ ↔\\n    ∃ (e : f₁.fst = f₂.fst),\\n      f₁.snd = CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueF\", \"doc\": \"For a scheme $X$ and points $x, y \\\\in X$, if $x = y$, then the residue fields $\\\\kappa(x)$ and $\\\\kappa(y)$ are isomorphic via the identity isomorphism on $\\\\kappa(x)$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x')\\n  (y : ↑(Y.presheaf.stalk ((TopCat.Hom.hom f.base) x'))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n      ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.stalkSpecializes ⋯)) y) =\\n    \", \"doc\": \"For a morphism of schemes $ f : X \\to Y $, if $ x $ specializes to $ x' $ in $ X $, then the diagram involving the stalk maps at $ x $ and $ x' $ and the specialization-induced maps on $ Y $ and $ X $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x x' : ↥X) (h : x ⤳ x'),\\n  CategoryTheory.CategoryStruct.comp (Y.presheaf.stalkSpecializes ⋯) (AlgebraicGeometry.Scheme.Hom.stalkMap f x) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap f x') (X.presheaf.stalkSpecializes\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Let $x, x'$ be points in the underlying topological space of $X$ such that $x$ specializes to $x'$ (denoted $x \\\\rightsquigarrow x'$). This induces a canonica\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) X\", \"doc\": \"For any scheme $X$ and points $x,y$ in $X$ where $x$ specializes to $y$, the morphism of schemes obtained by applying the spectrum map to the specialization-induced morphism between stalks of the stru\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuations, residue-field maps and abstract torsion do not compare semiabelian special-fibre morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Specializations of homomorphisms of semiabelian group schemes agree over two discrete valuation rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.localizationMapOfSpecializes\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{x y : PrimeSpectrum R} (h : x ⤳ y) : Localization.AtPrime y.asIdeal →+* Localization.AtPrime x.asIdeal\", \"doc\": \"Given prime ideals $\\\\mathfrak{p}$ and $\\\\mathfrak{q}$ in the prime spectrum of a commutative semiring $R$, if $\\\\mathfrak{p}$ specializes to $\\\\mathfrak{q}$, this constructs the canonical ring homomorphi\"}\n  {\"name\": \"PrimeSpectrum.localizationMapOfSpecializes.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {x y : PrimeSpectrum R} (h : x ⤳ y),\\n  PrimeSpectrum.localizationMapOfSpecializes h = PrimeSpectrum.localizationMapOfSpecializes h\", \"doc\": \"For any commutative semiring $ R $ and prime ideals $\\\\mathfrak{p}$ and $\\\\mathfrak{q}$ in its prime spectrum $\\\\operatorname{Spec}(R)$, if $\\\\mathfrak{p}$ specializes to $\\\\mathfrak{q}$ (i.e., every neigh\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"(H : ValuativeCriterion.Existence f) : SpecializingMap f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"DualNumber.algHom_ext'_iff\", \"module\": \"Mathlib.Algebra.DualNumber\", \"type\": \"∀ {R : Type u_1} {B : Type u_3} {A : Type u_4} [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Semiring B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] {f g : DualNumber A →ₐ[R] B},\\n  f = g ↔\\n    f.comp (TrivSqZeroExt.inlAlgHom R A A) = g.comp (TrivSqZeroExt.inlAlgHom R A A) ∧\\n      f.toL\", \"doc\": \"Two $ R $-algebra homomorphisms from the ring of dual numbers over $ A $ to $ B $ are equal if and only if they agree on the base ring $ A $ and on the nilpotent element $ \\\\varepsilon $ (which generat\"}\n  {\"name\": \"ValuationSubring.mapOfLE.congr_simp\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \"∀ {K : Type u} [inst : Field K] (R S : ValuationSubring K) (h : R ≤ S), R.mapOfLE S h = R.mapOfLE S h\", \"doc\": \"Let $K$ be a field, and let $R$ and $S$ be valuation subrings of $K$ such that $R$ is a subring of $S$. The canonical homomorphism from the value group of $R$ to the value group of $S$, induced by the\"}\n  {\"name\": \"SemiNormedGrp₁.Hom.ext\", \"module\": \"Mathlib.Analysis.Normed.Group.SemiNormedGrp\", \"type\": \"∀ {M N : SemiNormedGrp₁} {x y : M.Hom N}, x.hom' = y.hom' → x = y\", \"doc\": \"Two homomorphisms between semi-normed groups are equal if and only if their underlying normed additive group homomorphisms are equal, i.e., for all semi-normed groups $M,N$ and homomorphisms $x,y : M \"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"module\": \"Mathlib.AlgebraicGeometry.ValuativeCriterion\", \"type\": \"(H : (topologically @SpecializingMap).universally f) : ValuativeCriterion.Existence f\", \"doc\": \"If a morphism of schemes is universally specializing (topologically), then it satisfies the valuative criterion for existence. Specifically, for any valuative commutative square involving the morphism\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZeroMod.congr_simp\", \"module\": \"Mathlib.RingTheory.DedekindDomain.SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] (v v_1 : IsDedekindDomain.HeightOneSpectrum R),\\n  v = v_1 → ∀ (n : ℕ), v.valuationOfNeZeroMod n = v_1.valuationOfNeZeroMod n\", \"doc\": \"For any commutative Dedekind domain $ R $ with fraction field $ K $, if two valuations $ v $ and $ v_1 $ in the height one spectrum of $ R $ are equal, then for every natural number $ n $, the induced\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuations, residue-field maps and abstract torsion do not compare semiabelian special-fibre morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"specialization\", \"hom\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuations, residue-field maps and abstract torsion do not compare semiabelian special-fibre morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|speciali[sz].*homomorphism",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuations, residue-field maps and abstract torsion do not compare semiabelian special-fibre morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime to characteristic torsion determines the specialization of a semi abelian group morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AddCommGroup.primaryComponent\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"(G : Type u_1) → [inst : AddCommGroup G] → (p : ℕ) → [hp : Fact (Nat.Prime p)] → AddSubgroup G\", \"doc\": \"For an additive commutative group $G$ and a prime number $p$, this constructs the additive subgroup of $G$ consisting of all elements whose additive order is a power of $p$. This subgroup is closed un\"}\n  {\"name\": \"AddCommGrpCat.enoughInjectives\", \"module\": \"Mathlib/Algebra/Category/Grp/EnoughInjectives\", \"type\": \"CategoryTheory.EnoughInjectives AddCommGrpCat\", \"doc\": \"The category of additive commutative groups (abelian groups) has enough injective objects, meaning every object can be embedded into an injective object within the category.\"}\n  {\"name\": \"AddIsTorsion.extension_closed\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ {G : Type u_1} {H : Type u_2} [inst : AddGroup G] {N : AddSubgroup G} [inst_1 : AddGroup H] {f : G →+ H},\\n  N = f.ker → AddMonoid.IsTorsion H → AddMonoid.IsTorsion ↥N → AddMonoid.IsTorsion G\", \"doc\": \"If $ G $ is an additive group with a normal subgroup $ N $ that is the kernel of a homomorphism $ f : G → H $, and both $ H $ and $ N $ are torsion additive monoids (i.e., every element has finite add\"}\n  {\"name\": \"IsTorsion.extension_closed\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ {G : Type u_1} {H : Type u_2} [inst : Group G] {N : Subgroup G} [inst_1 : Group H] {f : G →* H},\\n  N = f.ker → Monoid.IsTorsion H → Monoid.IsTorsion ↥N → Monoid.IsTorsion G\", \"doc\": \"If $ N $ is the kernel of a group homomorphism $ f : G \\to H $, and both $ N $ and $ H $ are torsion groups (i.e., every element has finite order), then $ G $ is also a torsion group.\"}\n  {\"name\": \"AddIsTorsion.quotient_iff\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ {G : Type u_1} {H : Type u_2} [inst : AddGroup G] {N : AddSubgroup G} [inst_1 : AddGroup H] {f : G →+ H},\\n  Function.Surjective ⇑f → N = f.ker → AddMonoid.IsTorsion ↥N → (AddMonoid.IsTorsion H ↔ AddMonoid.IsTorsion G)\", \"doc\": \"Given a surjective additive monoid homomorphism $ f : G → H $ from an additive group $ G $ to an additive group $ H $, if the kernel $ N $ of $ f $ is a torsion additive monoid (i.e., every element of\"}\n  {\"name\": \"IsTorsion.quotient_iff\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ {G : Type u_1} {H : Type u_2} [inst : Group G] {N : Subgroup G} [inst_1 : Group H] {f : G →* H},\\n  Function.Surjective ⇑f → N = f.ker → Monoid.IsTorsion ↥N → (Monoid.IsTorsion H ↔ Monoid.IsTorsion G)\", \"doc\": \"Let $ f : G \\\\to H $ be a surjective group homomorphism with kernel $ N $. If $ N $ is a torsion subgroup, then $ H $ is a torsion group if and only if $ G $ is a torsion group.\"}\n  {\"name\": \"AddCommGroup.coe_primaryComponent\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ (G : Type u_1) [inst : AddCommGroup G] (p : ℕ) [hp : Fact (Nat.Prime p)],\\n  ↑(AddCommGroup.primaryComponent G p) = {g | ∃ n, addOrderOf g = p ^ n}\", \"doc\": \"The coercion of the p-primary component of an additive commutative group $ G $ is equal to the set $ \\\\{ g \\\\in G \\\\mid \\\\exists n, \\\\text{addOrderOf}(g) = p^n \\\\} $.\"}\n  {\"name\": \"AddIsTorsion.of_surjective\", \"module\": \"Mathlib/GroupTheory/Torsion\", \"type\": \"∀ {G : Type u_1} {H : Type u_2} [inst : AddGroup G] [inst_1 : AddGroup H] {f : G →+ H},\\n  Function.Surjective ⇑f → AddMonoid.IsTorsion G → AddMonoid.IsTorsion H\", \"doc\": \"If $ G $ and $ H $ are additive groups, $ f : G \\to H $ is a surjective additive monoid homomorphism, and $ G $ is a torsion additive monoid (i.e., every element of $ G $ has finite additive order), th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: valuations, residue-field maps and abstract torsion do not compare semiabelian special-fibre morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-generic-graph-finite-fibres",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited independent power-prolongation route below sk-thm-sf-ctf-stability: Faltings II section 2 Lemma 1, valuation-ring comparison of graph fibres; torsion/normality compatibility input.",
+   "via": [
+    "lem-sfb-semiabelian-generic-graph-finite-fibres",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-trait-specialization-agreement",
+  "worker": "stage1",
+  "summary": "Expanded the independent trait-specialization input into strict-local torsion comparison and schematic density. Reused existing smooth-group multiplication and strict-local representable-stalk results. Added only dominant compatible strict henselizations and semiabelian schematic torsion density, both statement-only and searched. Corrected doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "Inherited independent power-prolongation route below sk-thm-sf-ctf-stability: Faltings II section 2 Lemma 1, valuation-ring comparison of graph fibres; torsion/normality compatibility input. The inherited blueprint ancestor is null, confirmed by blueprint_refs.py ancestor. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability; no chapter/unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "why": "Generic sections of an etale sheaf of sets over a strictly henselian local open are its stalk used exactly as in the proof step; the inherited unit supplies no replacement for this scheme/site tool."
+   },
+   {
+    "node": "lem-galois-stalk-representable",
+    "why": "Generic stalk of a representable etale sheaf at a geometric point used exactly as in the proof step; the inherited unit supplies no replacement for this scheme/site tool."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic proper and smooth morphisms are stable under base change used exactly as in the proof step; the inherited unit supplies no replacement for this scheme/site tool."
+   },
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic the ideal sheaf of a base-changed closed immersion used exactly as in the proof step; the inherited unit supplies no replacement for this scheme/site tool."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Only separated finite-type base-change permanence is used, as a generic scheme tool to check the density lemma hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-galois-stalk-representable",
+  "lem-pc-proper-base-change",
+  "lem-pc-closed-imm-base-change",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-bf4d4542b",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-bf4d4542b (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, Stacks 04GU and 06DI, and the delivery-errors list A–F. The review is in review.md. No fixes were needed. Step 1: A=O_{S,s} is local, normal and injects into each R_i. The kernel is inside the prime of η, which is (0). Both embeddings fix the same κ(s)↪Ω, so the strict henselization H is the same for i=1,2. Step 2: E(C)→E_Ω(Ω) is a bijection for étale E over a strictly henselian C. It composes subcanonicity (the stated clause of space-etale-pullback-chart-comparison), the germ bijection (sets-strictly-henselian-open-sections-stalk) and galois-stalk-representable, so marking it elementary is right. Step 3: n is a unit in H and B_i, and smooth-group-invertible-multiplication applies as stated. b_i agree generically through Frac H⊂Frac B_i⊇L_i. The closed-equalizer ideal arguments over F and over the domain H are written out. Step 4: all hypotheses of the density lemma are checked, and it gives Z=P_Ω. New node trait-lifts is true. Injectivity of H→B follows because elements of H are algebraic over Frac A, and a nonzero constant term in A cannot map to 0. Cases tested: two fields, a field with a DVR, transcendental or inseparable residue extensions. New node schematic-density is true: torsion is dense in the torus and the abelian quotient, and G is smooth, hence reduced. Cases tested: rank 0, G=Spec F, characteristic p. Neither new node restates the item, and neither duplicates an existing node. The trait-hom-extension pair, the torus rigidity node and the abelian or diagonal density nodes differ. No re-split note applies. No SGA citation. Batch-5: chart-comparison and smooth-group-invertible-multiplication reach sec-trace-formula only through generic algebraic-space, site and fppf foundations. Their computed closures contain no nt-assume and no trace-formula or Poincaré-duality step, so both are accepted. The split_report tool_uses (five generic scheme and site tools) are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianTraitSpecializationAgreement",
+  "declaration": "AlgebraicGeometry.semiabelian_trait_specializations_agree",
+  "declarations": [
+   "AlgebraicGeometry.baseChangeGroupHomAlong",
+   "AlgebraicGeometry.semiabelian_trait_specializations_agree"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianTraitSpecializationAgreement.lean",
+  "statement": "theorem semiabelian_trait_specializations_agree {S : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (P Q : Grp (Over S)) [IsCommMonObj P.X] [IsCommMonObj Q.X] [Smooth P.X.hom] [IsSeparated P.X.hom] [LocallyOfFinitePresentation P.X.hom] [QuasiCompact P.X.hom] [Smooth Q.X.hom] [IsSeparated Q.X.hom] [LocallyOfFinitePresentation Q.X.hom] [QuasiCompact Q.X.hom] (hP : HasSemiabelianGeometricFibres P) (hQ : HasSemiabelianGeometricFibres Q) (uη : (Over.pullback (S.fromSpecResidueField (genericPoint S))).mapGrp.obj P ⟶ (Over.pullback (S.fromSpecResidueField (genericPoint S))).mapGrp.obj Q) (R L : Fin 2 → Type u) [∀ i, CommRing (R i)] [∀ i, IsDomain (R i)] [∀ i, IsLocalRing (R i)] (hR : ∀ i, IsField (R i) ∨ IsDiscreteValuationRing (R i)) [∀ i, Field (L i)] [∀ i, Algebra (R i) (L i)] [∀ i, IsFractionRing (R i) (L i)] (a : ∀ i, Spec (.of (R i)) ⟶ S) (j : ∀ i, S.residueField (genericPoint S) ⟶ CommRingCat.of (L i)) (hgeneric : ∀ i, Spec.map (j i) ≫ S.fromSpecResidueField (genericPoint S) = Spec.map (CommRingCat.ofHom (algebraMap (R i) (L i))) ≫ a i) (v : ∀ i, (Over.pullback (a i)).mapGrp.obj P ⟶ (Over.pullback (a i)).mapGrp.obj Q) (hv : ∀ i, baseChangeGroupHomAlong P Q (a i) (Spec.map (j i) ≫ S.fromSpecResidueField (genericPoint S)) (Spec.map (CommRingCat.ofHom (algebraMap (R i) (L i)))) (hgeneric i) (v i) = baseChangeGroupHomAlong P Q (S.fromSpecResidueField (genericPoint S)) (Spec.map (j i) ≫ S.fromSpecResidueField (genericPoint S)) (Spec.map (j i)) rfl uη) (s : S) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (es : S.residueField s →+* Ω) (e : ∀ i, IsLocalRing.ResidueField (R i) →+* Ω) (hspecial : ∀ i, Spec.map (CommRingCat.ofHom es) ≫ S.fromSpecResidueField s = Spec.map (CommRingCat.ofHom ((e i).comp (IsLocalRing.residue (R i)))) ≫ a i) : baseChangeGroupHomAlong P Q (a 0) (Spec.map (CommRingCat.ofHom es) ≫ S.fromSpecResidueField s) (Spec.map (CommRingCat.ofHom ((e 0).comp (IsLocalRing.residue (R 0))))) (hspecial 0) (v 0) = baseChangeGroupHomAlong P Q (a 1) (Spec.map (CommRingCat.ofHom es) ≫ S.fromSpecResidueField s) (Spec.map (CommRingCat.ofHom ((e 1).comp (IsLocalRing.residue (R 1))))) (hspecial 1) (v 1)",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical restriction helper uses only Over.pullbackComp and equality transport. Generic and special commuting triangles encode the induced field embeddings; the conclusion is equality of scheme morphisms on a single chosen geometric pullback."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3bbc8b80",
+  "group": "NN",
+  "result": "pass",
+  "note": "Every clause matches the node: S normal (stalk IsDomain∧IsIntegrallyClosed), integral, locally Noetherian; P,Q are Grp(Over S) with IsCommMonObj, Smooth, IsSeparated, LFP+QuasiCompact and HasSemiabelianGeometricFibres (same binders as the landed normal_semiabelian_hom_extension). uη is the hom over Spec κ(η). The traits are a field or a DVR. hgeneric (Spec κ(η)→S is mono) and hspecial (closed point ↦ s, e_i compatible with es) are equivalent to the node's point and embedding conditions. hv and the conclusion use the helper on the same pullback. baseChangeGroupHomAlong is a real eqToHom/pullbackComp construction, not a duplicate of baseChangeHom. Universe u is forced by Scheme.{u} and matches the dependency. lean.statement is verbatim; docstrings carry the source place, blueprint id and 4 proof steps; the proof is sorry only; the report has both sections. No changes, so no compile."
+ }
+}

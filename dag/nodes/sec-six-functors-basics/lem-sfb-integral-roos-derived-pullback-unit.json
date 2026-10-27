@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-integral-roos-derived-pullback-unit",
+ "kind": "statement",
+ "title": "Derived interpretation of the integral pulled quotient Roos augmentation",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A=\\mathcal O_E$ and uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be a morphism of separated finite-type $k$-schemes [sk-def-sfb-dc-setting]. On the small pro-étale sites put $C_Z=(A)_Z$, $R_Z=\\mathcal O_{E,Z}$ and $S_{n,Z}=(A/\\pi^n)_Z$ for $Z=X,Y$, $n\\geq1$ [def-weil-pbc-constant-sheaf, sk-def-sfb-pulled-back-coefficients]. Write $i_Z:C_Z\\to R_Z$ for the constant-function map, $r_Z=\\operatorname{Res}_{i_Z}$ for scalar restriction [def-pc-sheaf-restrict-scalars], and $g_R^*,g_C^*$ for module pullback along the canonical coefficient maps [sk-def-sfb-module-pushforward-pullback, sk-def-sfb-coefficient-morphisms].\n\nLet $P$ be a flat-term K-flat complex of $R_Y$-modules, put $Q=r_YP$, and form the augmented strict quotient towers\n$$T_n=g_R^*(P\\otimes_{R_Y}S_{n,Y}),\\quad U_n=g_R^*P\\otimes_{R_X}S_{n,X},\\quad V_n=g_C^*(Q\\otimes_{C_Y}S_{n,Y})$$\n[def-pc-kflat-complex, def-pc-flat-sheaf-modules, def-pc-tensor-complex-sheaves]. Use unbounded derived categories with localization $\\mathsf q$ [def-weil-abstract-derived-category]. Define $\\mathsf R(W)=\\operatorname{Cone}(1-s:\\prod_nW_n\\to\\prod_nW_n)[-1]$ with differential $D(y,x)=(-dy-(1-s)x,dx)$ and $\\alpha_W(z)=(0,(b_{W,n}z)_n)$ for its quotient augmentation. Let $\\rho_W:\\mathsf q\\mathsf R(W)\\cong R\\!\\lim W$ be the comparison normalized on a K-injective tower by the inclusion $z\\mapsto(0,(z_n)_n)$ [lem-weil-strict-roos-comparison].\n\nUnder $R_Z\\cong\\varprojlim_n S_{n,Z}$, the coefficient map $c_g:g^{-1}\\varprojlim_nS_{n,Y}\\to\\varprojlim_nS_{n,X}$ defined by finite projections [def-weil-pbc-completed-pullback] equals the canonical Cartesian coefficient isomorphism $a_R:g^{-1}R_Y\\cong R_X$. In particular, for every $n$,\n$$\\mathrm{pr}_{n,X}a_R=a_{n}\\,g^{-1}\\mathrm{pr}_{n,Y},\\qquad a_n:g^{-1}S_{n,Y}\\cong S_{n,X}.$$\nIn the derived category of strict $R_X$-towers, the complex $T$ with its augmentation represents $Lg^*_{\\operatorname{Tow}}(\\mathsf q(P\\otimes_{R_Y}S_{n,Y}))_n$ together with the derived pulled quotient augmentation. In the respective derived tower categories, $U$ and $V$ represent the finite derived reduction towers of $Lg_R^*[P]$ and $Lg_C^*[Q]$; the identification for $V$ is the generator-normalized constant tensor-pullback comparison.\n\nThere are natural derived isomorphisms $\\mathsf q\\mathsf R(U)\\cong (Lg_R^*[P])^\\wedge$ in $D(R_X)$ and $\\mathsf q\\mathsf R(V)\\cong (Lg_C^*[Q])^\\wedge$ in $D(C_X)$, carrying $\\mathsf q\\alpha_U$ and $\\mathsf q\\alpha_V$ to the respective actual derived-completion units. Also $\\rho_T\\mathsf q\\alpha_T$ is the augmented strict-derived-tower map obtained by the constant-tower unit followed by derived inverse limit of the pulled quotient augmentation. On derived-complete inputs this is the comparison of [def-weil-pbc-completed-pullback]. On derived-complete inputs, the scalar-restricted construction is precisely constant-coefficient completed inverse image; on arbitrary inputs the same formula is ordinary inverse image followed by derived completion with its unit [lem-weil-pbc-constant-completion-equivalence]. These identifications retain the distinction between $D(R_X)$ and $D(C_X)$ and impose no boundedness, constructibility or completeness condition on $[P]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives. Agent-written strict cochain refinement; Stacks proetale.tex Tags 099M (lemma-naive-completion), 099N (lemma-pushforward-Noetherian-case), clauses (2),(5)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-constant-sheaf",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pc-sheaf-restrict-scalars",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Both coefficient maps into the completed ring have equal finite projections. The limit universal property gives equality; projection_comm gives the displayed finite squares.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the normalized strict cone representatives and their derived-limit comparisons, independently of the parent strict normalization theorem. Obtain preservation of the flat K-flat class and the four counit isomorphisms. Localize the augmentations by their coordinate normalization.",
+   "uses": [
+    "lem-sfb-integral-roos-chain-representatives",
+    "lem-sfb-integral-roos-resolving-counits",
+    "lem-sfb-integral-roos-augmentation-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the descent theorem to the fixed chain comparisons and the localized unit equations, using the resolving counits for its invertibility hypotheses. It supplies the natural completion isomorphisms and their unit identities. Assemble them with the chosen chain data, resolving predicates, four counit isomorphisms and the localized completed-pullback equation.",
+   "uses": [
+    "lem-sfb-integral-roos-completion-isomorphisms"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sfb-integral-roos-chain-representatives",
+  "lem-sfb-integral-roos-resolving-counits",
+  "lem-sfb-integral-roos-augmentation-localization",
+  "lem-sfb-integral-roos-completion-isomorphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph and Comparison with the Stacks Project; explicit natural isomorphisms on the flat K-flat subcategory, constructed from normalized Roos comparisons and inverse derived counits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The completed coefficient structure map defined by finite projections agrees with Cartesian inverse image and the pulled quotient Roos augmentation represents the derived completion unit without completeness hypotheses",
+   "results": "AdicCompletion.sumInv_comp_sum [Mathlib.RingTheory.AdicCompletion.Functoriality]; AdicCompletion.pi [Mathlib.RingTheory.AdicCompletion.Functoriality]; AdicCompletion.kerProj [Mathlib.RingTheory.AdicCompletion.Algebra]; IsAdicComplete.of_comp_lift [Mathlib.RingTheory.AdicCompletion.Basic]; IsAdicComplete.of_lift [Mathlib.RingTheory.AdicCompletion.Basic]; AdicCompletion.lift [Mathlib.RingTheory.AdicCompletion.Basic]; AdicCompletion.transitionMap_comp_eval_apply [Mathlib.RingTheory.AdicCompletion.Basic]; AdicCompletion.eval [Mathlib.RingTheory.AdicCompletion.Basic]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an unbounded K flat sheaf complex identify derived pullback of the augmented finite quotient tower and its scalar restricted Roos completion with ordinary inverse image followed by derived completion",
+   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat [Mathlib/CategoryTheory/Sites/Pullback]; SheafOfModules.freeFunctorCompPullbackIso [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree]; SheafOfModules.sheafificationCompPullback [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous]; SheafOfModules.pullbackComp [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous]; SheafOfModules.pullbackIso [Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "PresheafOfModules.pullbackId [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullbackObjIsDefined [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullback [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullbackObjIsDefined_eq_top [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullbackObjIsDefined_free_yoneda [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullbackPushforwardAdjunction [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullbackComp [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullback_comp_id [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullback_id_comp [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModules.pullback_assoc [Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback]; PresheafOfModulesOfCommRing.pullback [Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing]; PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction [Mathlib.Algebra.Category.ModuleCat.Presheaf.OfCommRing]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]omplet.*pullback|pullback.*[Cc]omplet|[Kk][Ff]lat.*[Rr]eduction",
+   "results": "Mathlib/Topology/Algebra/UniformField.lean:203 /-- The pullback of a completable topological field along a uniform inducing; Mathlib/Order/CompleteLattice/Basic.lean:954 /-- Pullback a `CompleteLattice` along an injection. -/; Mathlib/Geometry/Manifold/VectorField/LieBracket.lean:518 private lemma mpullbackWithin_mlieBracketWithin_aux [CompleteSpace E']; Mathlib/Order/CompleteBooleanAlgebra.lean:729 /-- Pullback a `CompleteDistribLattice.MinimalAxioms` along an injection. -/; Mathlib/Order/CompleteBooleanAlgebra.lean:745 /-- Pullback a `CompleteDistribLattice` along an injection. -/; Mathlib/Order/CompleteBooleanAlgebra.lean:759 /-- Pullback a `CompletelyDistribLattice.MinimalAxioms` along an injection. -/; Mathlib/Order/CompleteBooleanAlgebra.lean:770 /-- Pullback a `CompletelyDistribLattice` along an injection. -/; Mathlib/Order/CompleteBooleanAlgebra.lean:789 /-- Pullback a `CompleteBooleanAlgebra` along an injection. -/",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of pullback from the point identifies every finite projection of the completed ring structure map; quotient tower completion units over constant and completed coefficients agree under restriction",
+   "results": "AdicCompletion.factorₐ_evalₐ_one [Mathlib/RingTheory/AdicCompletion/Algebra]; IsAdicComplete.of_liftRingHom [Mathlib/RingTheory/AdicCompletion/RingHom]; IsAdicComplete.ofAlgEquiv_comp_liftRingHom [Mathlib/RingTheory/AdicCompletion/RingHom]; AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ [Mathlib/RingTheory/AdicCompletion/Algebra]; AdicCompletion.mk_ofAlgEquiv_symm [Mathlib/RingTheory/AdicCompletion/Algebra]; AdicCompletion.mk_smul_top_ofAlgEquiv_symm [Mathlib/RingTheory/AdicCompletion/Algebra]; AdicCompletion.evalOneₐ_liftAlgHom [Mathlib/RingTheory/AdicCompletion/Algebra]; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq [Mathlib/RingTheory/Smooth/AdicCompletion]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the normalized sheaf-complex assertion, including its specified strict maps and units"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]oos|derivedCompletion|[Kk][Ff]lat",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion, abstract limits, or module pullback results do not state the augmented unbounded sheaf-tower and actual derived-completion-unit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of finite reductions of an unbounded sheaf complex computes derived completion and its unit",
+   "results": "AdicCompletion; AdicCompletion.of; instHasLimitsOfShapeCondensed; InverseSystem.invLimEquiv; instHasLimitsCondensedMod; SheafOfModules.hasLimit; Profinite.lim'; SheafOfModules.hasLimitsOfShape",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion, abstract limits, or module pullback results do not state the augmented unbounded sheaf-tower and actual derived-completion-unit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "PresheafOfModules.pullbackId; PresheafOfModules.pullbackObjIsDefined; PresheafOfModules.pullback; PresheafOfModules.pullbackObjIsDefined_eq_top; PresheafOfModules.pullbackObjIsDefined_free_yoneda; PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModules.pullbackComp; PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion, abstract limits, or module pullback results do not state the augmented unbounded sheaf-tower and actual derived-completion-unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded K flat complex of sheaves of modules has its quotient tower Roos cone equal to derived completion, with quotient augmentation equal to the completion unit",
+   "results": "localCohomology.diagram; CategoryTheory.PreservesFiniteLimitsOfFlat.lift; CochainComplex.cm5b; localCohomology.ofDiagram; CategoryTheory.PreservesFiniteLimitsOfFlat.fac; AdicCompletion.flat_of_isNoetherian; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion, abstract limits, or module pullback results do not state the augmented unbounded sheaf-tower and actual derived-completion-unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Cartesian inverse image of continuous coefficient ring sheaves identifies the finite quotient projections, and exact pullback of strict reduction towers preserves their completion augmentations",
+   "results": "AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion.transitionMap_comp_eval_apply; AdicCompletion.transitionMap_comp_eval; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'; IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary adic module completion, abstract limits, or module pullback results do not state the augmented unbounded sheaf-tower and actual derived-completion-unit comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-pullback-strict-roos-normalization",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "First paragraph: the target of c_K is the completion of g^*K; Comparison with the Stacks Project: the restricted target and unit give completed inverse image. Returned proof step 10: identify c_g and the augmented derived representatives.",
+   "via": [
+    "lem-sfb-integral-pullback-strict-roos-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-roos-derived-pullback-unit",
+  "worker": "stage1",
+  "summary": "Split the augmented derived interpretation into ten steps using existing nodes only. Verified coefficient projections by naturality, exact tower pullback without false K-flatness claims for finite quotients, flat scalar restriction, strict derived reductions with units and transitions, the signed Roos comparison, and both actual completion units. Kept the statement and coefficient categories unchanged. No finished project declaration states all clauses; no new nodes or Mathlib leaves.",
+  "blueprint": "Realizes det-lem-int-tensor-pullback.proof.md first paragraph (Cartesian coefficient maps, compatible finite reductions and c_K as the completion unit), and Comparison with the Stacks Project (scalar restriction, derived limits and completed inverse image); only the strict cochain normalization is added.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-ring fact verifies the Noetherian and regular-uniformizer hypotheses; it does not replace the unit route."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Canonical integral coefficient limit presentation needed to compare the two coefficient maps."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exactness of ordinary coefficient pullback is the explicit first sentence of the blueprint argument."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Noetherian constant/completed comparison supplies flatness, the actual completion units and the complete-category equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "why": "Generic flat scalar restriction preserves the unbounded K-flat representative; the unit has no separate statement of this fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic unbounded K-flat pullback computation for both coefficient rings."
+   },
+   {
+    "node": "lem-pe-kflat-scalar-tower-realization",
+    "why": "Generic normalization of finite derived scalar-extension units and all quotient transitions on a single K-flat representative."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic levelwise exactness of strict towers verifies that exact pullback computes the whole derived tower."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic strict-diagram replacement supplies the representative used by the defined derived tower pullback."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic exactness of countable module products verifies the Roos comparison hypothesis for both ring sheaves."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic normalized strict-tower derived-limit comparison identifies the augmentation itself."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-67b4ff816",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-67b4ff816 (reviewer sub-agent of L); spot-checked: Read the item and all 10 steps in full, with the statements of all 19 proof_deps. No new nodes; statement and stmt_deps match live. The item is O3's 2026-10-22 child of the strict-roos-normalization re-split, has no repair note of its own (so this is a first split), is not in the drop list, is still unsplit live, has no SGA, and introduces no cycle. Route matches main-20261015 det-lem-int-tensor-pullback.proof.md (first paragraph: Cartesian coefficients, exact g^*, c_K as completion map; Comparison with Stacks) and Stacks 099N(2),(5) at proetale.tex l.4336. Steps check out: (1) DVR, finite quotients and the length-one resolution give the adic-datum hypotheses; R_Z = lim by det-prop (3). (2) c_g = a_R by naturality of alpha at A->A/pi^n plus limit uniqueness. (3) Flatness, then flat restriction and ringed-topos pullback give flat-term K-flat Q, H_R, H_C. (4) strict-quotient-completion beta (n+1 reindexed) and the epsilon equations of the kflat-scalar-tower realization. (5) Exact levelwise g_R^* preserves tower quasi-isos; the constant tower is in the resolving class; no false K-flatness of P(x)S_n. (6) Sibling augmented-quotient-towers clauses lambda b_T=b_U, theta r b_T=b_V d_P. (7) Products exact for R_X and C_X; sign check D(0,b^Pi z)=(0,b^Pi dz); Roos normalization z|->(0,(z_n)). (8) Koszul vs Rlim with units preserved, for arbitrary N. (9) Diagonal R(lambda) and naturality of rho. (10) Hypothesis f_n r(b_n)=b'_n v verified for the scalar-Roos sibling. Edge cases g=id, P=0, P=R_Y[0] and noncomplete P are fine. One repair: Step 2 claimed the exactness clause of sk-prop-sfb-cartesian-coefficients for g_C^*, but discrete O_E is not on that node's admissible list. That exactness is never used (Step 5 needs only g_R^*). Corrected node written to fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-roos-derived-pullback-unit.json; Step 2's last sentence now applies only to g_R^*. Advisory: partial overlap with NF pulled-reduction-strict-tower-comparison and lem-a1-integral-pullback-completed-comparison, in a statement fixed by O3, not by this split. All 11 tool_uses accepted as generic inputs.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralRoosDerivedPullbackUnit",
+  "declaration": "WeilConjectures.IntegralPullbackStrictRoos.integralRoosDerivedPullbackUnit",
+  "file": "lean/Sheaf/Paper/IntegralRoosDerivedPullbackUnit.lean",
+  "statement": "theorem integralRoosDerivedPullbackUnit (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X Y : Scheme.{u}} (g : X ⟶ Y) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [g.IsOver (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] : completedCoefficientMap g (datum l E) = ((datum l E).integralRingIso g).hom ∧ (∀ n : ℕ, ((datum l E).integralRingIso g).hom ≫ (datum l E).projection X n = (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map ((datum l E).projection Y n) ≫ ((datum l E).finiteRingIso g n).hom) ∧ ∃ (d : pullR l E g ⋙ res l E X ≅ res l E Y ⋙ pullC l E g) (a : T l E g ≅ U l E g) (e : T l E g ⋙ towerRes l E X ≅ V l E g) (αT : alphaTType l E g) (αU : alphaUType l E g) (αV : alphaVType l E g) (ε : EType l E g) (κR : kappaType X (R l E X)) (jR : inclusionType X (R l E X)) (κC : kappaType X (C l E X)) (jC : inclusionType X (C l E X)) (eR : ObjectProperty.ι (GoodR l E Y) ⋙ cxU l E g ⋙ roosF ⋙ DerivedCategory.Q ≅ ObjectProperty.ι (GoodR l E Y) ⋙ cxPullR l E g ⋙ DerivedCategory.Q ⋙ pbcActualCompletion (datum l E) X) (eC : ObjectProperty.ι (GoodR l E Y) ⋙ cxV l E g ⋙ roosF ⋙ DerivedCategory.Q ≅ ObjectProperty.ι (GoodR l E Y) ⋙ cxRes l E Y ⋙ cxPullC l E g ⋙ DerivedCategory.Q ⋙ OrderedExchange.completion (datum l E) X), PulledReduction.IsOrdinaryNormalized (datum l E) g d.inv ∧ IsLambdaNormalized l E g a ∧ (∀ (M : ModR l E Y) (n : ℕ), (e.hom.app M).app (op n) = d.hom.app (((redR l E Y).obj M).obj (op n)) ≫ (pullC l E g).map (((OrderedExchange.ordinaryRho (datum l E) Y).inv.app M).app (op n))) ∧ IsAugmentationNormalized l E g αT αU αV ∧ IsENormalized l E g e ε ∧ (∀ P : complexesR l E Y, (cxRes l E X).map (αT P) ≫ (ε P).hom = (dComplex l E g d).hom.app P ≫ αV P) ∧ IsUnitNormalized X (R l E X) κR jR ∧ IsUnitNormalized X (C l E X) κC jC ∧ IsConstantUnitNormalized l E g d a e αV κC ∧ (∀ (P : complexesR l E Y) (hP : GoodR l E Y P), GoodR l E X ((cxPullR l E g).obj P) ∧ GoodC l E Y ((cxRes l E Y).obj P) ∧ GoodC l E X ((cxPullC l E g).obj ((cxRes l E Y).obj P)) ∧ IsIso (towerCounit l E g P) ∧ IsIso (completedOrdinaryPullbackComplexCounit g (datum l E) P) ∧ IsIso (completedReductionTowerComplexCounit X (datum l E) ((cxPullR l E g).obj P)) ∧ IsIso (OrderedExchange.reductionComplexCounit (datum l E) X (((res l E Y ⋙ pullC l E g).mapHomologicalComplex (.up ℤ)).obj P)) ∧ DerivedCategory.Q.map (αU P) ≫ eR.hom.app ⟨P, hP⟩ = (pbcActualCompletionUnit (datum l E) X).app (DerivedCategory.Q.obj ((cxPullR l E g).obj P)) ∧ DerivedCategory.Q.map (αV P) ≫ eC.hom.app ⟨P, hP⟩ = (OrderedExchange.unit (datum l E) X).app (DerivedCategory.Q.obj ((cxPullC l E g).obj ((cxRes l E Y).obj P))) ∧ completedOrdinaryPullbackComplexCounit g (datum l E) P ≫ DerivedCategory.Q.map (αT P) ≫ κR.hom.app ((cxT l E g).obj P) = completedPullbackComparison g (datum l E) (DerivedCategory.Q.obj P) ≫ (completedRlim X (R l E X)).map (towerCounit l E g P))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the already published strict tower, augmentation, and cone-coordinate definitions from IntegralPullbackStrictRoosNormalization, without invoking that parent theorem. States the child derived interpretation with projection-normalized coefficient equality, strict representative counits, natural derived completion isomorphisms over both coefficient rings, and whole-morphism completion-unit equations. No input completeness, boundedness or constructibility assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-076086615",
+  "group": "NB",
+  "result": "pass",
+  "note": "Snapshot node = live + lean record only; statement verbatim; sorry-only theorem with source and blueprint docstrings and the 10-step proof plan. c_g=a_R rendered as completedCoefficientMap = datum.integralRingIso.hom plus per-n projection_comm; integralRingIso is the canonical Cartesian comparison (integralRingMap_isIso). All witnesses pinned: d (IsOrdinaryNormalized), a (balanced generators), e (component formula), alphas (0,b) in all degrees, eps (IsENormalized), kappa/j (IsUnitNormalized). eR: target pbcActualCompletion (reflector), pinned uniquely by its unit equation; eC: OrderedExchange.completion/unit = quotient-tower Rlim, the project's constant convention (same as ConstantCompletion). T augmentation stated after Rlim, which fixes the tower map via the Delta-Rlim adjunction. No extra hypotheses or universe restrictions; edge cases fine. Advisories: helpers owned by the parent theorem (citing it = cycle; no stage-3 import of the child into the parent module); OrderedExchange/PulledReduction/roosF owners not in stmt_deps; c_g clauses already proved privately; two owners of constant completion; proof-only imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-51f79",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261025T203123-L-2784613",
+  "kind": "interface",
+  "note": "independent cc review: item proof (assembleRoos over 4 sorried substeps + proved reflector comparison) vs unchanged item statement and parent IsComparison/IsLocalized/IsConstantUnitNormalized defs; unit sk-lem-int-tensor realized=[] vs removed imports; item node diff vs clone (proof/proof_deps/proof_origin/tool_uses only)"
+ }
+}

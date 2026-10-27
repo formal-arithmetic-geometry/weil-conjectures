@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-finite-type-component-open-qc",
+ "kind": "statement",
+ "title": "Connected components of a finite-type scheme over a field are quasi-compact open finite-type subschemes",
+ "statement": "Let $k$ be a field and $C$ a scheme of finite type over $k$ [def-pc-scheme, def-weil-finite-type-morphism]. Let $c\\in C$, and let $T\\subseteq |C|$ be its connected component, namely the maximal connected subset containing $c$ [def-weil-connected-scheme]. Then $T$ is open and quasi-compact (every cover of $T$ by open subsets has a finite subcover). With the open subscheme structure [def-weil-open-immersion], $T$ is a nonempty connected scheme of finite type over $k$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057K, lemma-local-local-structure-finite-type, proof paragraph beginning 'Let $T$ be the connected component': the Noetherianity and open-component argument, without the smoothness assumption, with quasi-compactness and finite type of the open subscheme made explicit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Every ideal of the field $k$ is either $(0)$ or $(1)$: a nonzero element of an ideal is invertible. Thus $k$ is Noetherian. The single affine chart $\\operatorname{Spec}k$, with coordinate ring $k$, makes $\\operatorname{Spec}k$ locally Noetherian, and its one-point space is quasi-compact. Apply [lem-weil-pbc-finite-type-over-noetherian] to the given structure map $C\\to\\operatorname{Spec}k$. Hence $C$ is a Noetherian scheme. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], its closed subsets satisfy the minimal condition; equivalently its open subsets satisfy the ascending-chain condition.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OV, definition-noetherian, and Tag 01OZ, lemma-Noetherian-topology."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-noetherian-connected-components-open] to the underlying space of $C$, whose Noetherian hypothesis was verified in step 1. Its connected component $T$ containing $c$ is open. Apply [lem-sfb-noetherian-space-compact-subsets] to the subset $T\\subseteq |C|$: every open cover of $T$ has a finite subcover, so $T$ is quasi-compact.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 04MF, lemma-locally-Noetherian-locally-connected; 04ME, lemma-locally-connected; 04ZA, lemma-Noetherian-quasi-compact. This is the open-component inference in More on Morphisms Tag 057K, lemma-local-local-structure-finite-type."
+   }
+  },
+  {
+   "text": "Give $T$ the open subscheme structure $(T,\\mathcal O_C|_T)$ and write $j:T\\hookrightarrow C$ for its inclusion [def-weil-open-immersion]. Its underlying topology is the subspace topology, so it is connected by the defining property of the connected component, and nonempty because it contains $c$. This is connectedness in [def-weil-connected-scheme].",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IO, definition-open-immersion; Topology Tag 004S, definition-connected-components."
+   }
+  },
+  {
+   "text": "For every affine open $V\\subseteq C$, the inverse image $j^{-1}(V)$ is the subspace $T\\cap V$. It is quasi-compact by [lem-sfb-noetherian-space-compact-subsets], applied to this subset of $|C|$. Its subspace topologies from $T$ and from $C$ coincide: a relatively open set in $T\\cap V$ is the intersection with an open set of $C$. Thus every open cover in either topology has the same finite-subcover property. The affine-preimage definition in [def-weil-finite-type-morphism] proves that $j$ is a quasi-compact morphism.",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04ZA, lemma-Noetherian-quasi-compact, part (2); Schemes Tag 01K4, lemma-quasi-compact-affine."
+   }
+  },
+  {
+   "text": "The map $j$ is an open immersion and is quasi-compact by step 4. Therefore [lem-weil-pbc-qc-open-immersion-finite-type] makes $j$ of finite type. Both $j$ and $C\\to\\operatorname{Spec}k$ are now of finite type, so part (1) of [lem-sfb-finite-type-composition-base-change] makes their composite $T\\to\\operatorname{Spec}k$ of finite type. Together with steps 2 and 3 this proves every clause.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T5, lemma-immersion-locally-finite-type; Tag 01T3, lemma-composition-finite-type."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-weil-open-immersion",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057K, lemma-local-local-structure-finite-type, the Noetherian/open-component paragraph; expanded using Tags 01T6, 01OZ, 04MF, 04ME, 04ZA, 01T5 and 01T3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A connected component of a scheme of finite type over a field is open quasi compact and of finite type",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.isCompact_iff_exists\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the compact-open and Noetherian scheme declarations do not give openness of connected components and finite type of their open subschemes in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNoetherian\", \"connectedComponent\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: the compact-open and Noetherian scheme declarations do not give openness of connected components and finite type of their open subschemes in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponent|connected.*[Cc]omponent",
+   "results": "{\"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the compact-open and Noetherian scheme declarations do not give openness of connected components and finite type of their open subschemes in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type scheme over field connected component open quasi compact",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type schemes over a noetherian ring are noetherian and their connected components are quasi compact open subschemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsNoetherian\", \"AlgebraicGeometry.IsArtinianScheme.isNoetherianScheme\", \"AlgebraicGeometry.isNoetherian_iff\", \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the compact-open and Noetherian scheme declarations do not give openness of connected components and finite type of their open subschemes in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponent|LocallyConnected",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: the compact-open and Noetherian scheme declarations do not give openness of connected components and finite type of their open subschemes in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected component of a finite type scheme over a field is open quasi compact and finite type",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\"], \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits provide individual compactness, Noetherianity or connectedness tools, not all clauses by one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, connectedComponent",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits provide individual compactness, Noetherianity or connectedness tools, not all clauses by one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponent|LocallyConnected",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"sub\": \"AlgebraicGeometry\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits provide individual compactness, Noetherianity or connectedness tools, not all clauses by one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type scheme over a field connected component open quasi compact",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.Scheme.OpenCover.compactSpace\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\"], \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits provide individual compactness, Noetherianity or connectedness tools, not all clauses by one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a Noetherian topological space connected components are open and every subset is compact",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalSpace.noetherianSpace_iff_opens\", \"instPrespectralSpaceOfNoetherianSpace\", \"TopologicalSpace.NoetherianSpace.compactSpace\", \"TopologicalSpace.NoetherianSpace\", \"TopologicalSpace.NoetherianSpace.isCompact\", \"TopologicalSpace.noetherianSpace_iff_isCompact\", \"TopologicalSpace.noetherianSpace_set_iff\", \"TopologicalSpace.noetherianSpace_TFAE\"], \"sub\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits provide individual compactness, Noetherianity or connectedness tools, not all clauses by one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNoetherian.noetherianSpace|isNoetherian.*Spec|isLocallyNoetherian",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"21\", \"29\", \"32\", \"38\", \"57\"], \"sub\": \"AlgebraicGeometry/Noetherian.lean\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: hits provide individual compactness, Noetherianity or connectedness tools, not all clauses by one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-component-pure-transcendental",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The 057K local-structure ingredient in the inherited 057S flatification route of lem-trf-local-term-locality: 'As Y_s is Noetherian we see that T is open', including quasi-compactness and finite type; returned item proof step 1.",
+   "via": [
+    "lem-trf-smooth-component-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-type-component-open-qc",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Expanded the Noetherian/open-component argument of 057K into five steps, reusing existing nodes for Noetherianity, topological Noetherianity, component openness, compactness of all subsets, finite type of a quasi-compact open immersion and composition. Distinguished compactness of T from quasi-compactness of its inclusion by checking every affine preimage. No new nodes. The two project Noetherian-space declarations cover only a tool, not the whole item.",
+  "blueprint": "Preserves the recorded ancestor lem-trf-local-term-locality and its inherited 057S/057K flatification subroute, specifically the 057K sentence “As Y_s is Noetherian we see that T is open” identified in blueprint.from.place. The current latest blueprint proof of that ancestor contains no independent restatement of this auxiliary finite-type component result.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-d50c4ca4d",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-d50c4ca4d (reviewer sub-agent of L); spot-checked: Read the item and all 12 cited nodes in full. Read Stacks 057K (more-morphisms.tex lemma-local-local-structure-finite-type: 'As Y_s is Noetherian we see that T is open') and Topology 04ZA/04MF. The statement, stmt_deps and blueprint are byte-identical to side-live, where the item is still unsplit, so the split is not superseded; the only citer, lem-trf-smooth-component-pure-transcendental step 1, uses exactly these clauses. Step 1: k is Noetherian because its only ideals are (0) and (1); the one-chart Spec k is quasi-compact and locally Noetherian; finite-type-over-noetherian then makes C Noetherian; the minimal condition on closed sets gives ACC on opens by complements. Step 2: lem-sfb-noetherian-connected-components-open has exactly the ACC hypothesis. It is unsplit in another unit but slopmaster2-closed (NoetherianSpace.isOpen_connectedComponent, sorry-free), so it is a closed tool; the all-subsets compactness leaf needs DCC, which step 1 supplies. Step 3 (elementary): the component is connected by maximality and nonempty since it contains c. Step 4 (elementary): j^{-1}(V)=T∩V is compact, which is the affine-preimage quasi-compactness of def-weil-finite-type-morphism. Step 5: quasi-compact open immersion gives finite type, and composition clause (1) gives finite type over k. Tested on the empty C (vacuous), Spec k, k[ε]/ε², two disjoint affine lines and the line with doubled origin; no separatedness is used. No new nodes. No duplicate in the DAG or in blueprint main-20261015, no SGA, search records are honest. tool_uses [] is acceptable; if the route check treats the closed unsplit component node as route, record it as a generic topology tool. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeConnectedComponent",
+  "declaration": "AlgebraicGeometry.finiteType_connectedComponent_open_quasiCompact",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeConnectedComponent.lean",
+  "statement": "theorem finiteType_connectedComponent_open_quasiCompact {k : Type u} [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (c : C) : ∃ U : C.Opens, (U : Set C) = connectedComponent c ∧ IsCompact (U : Set C) ∧ ConnectedSpace U.toScheme ∧ LocallyOfFiniteType (U.ι ≫ (C ↘ Spec (.of k))) ∧ QuasiCompact (U.ι ≫ (C ↘ Spec (.of k)))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65ff5d8e8",
+  "group": "NC",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim in file. Clauses match: Field k, C : Scheme.{u} with Over Spec k + LocallyOfFiniteType + QuasiCompact (exact def-weil-finite-type-morphism convention, no extra hypotheses); ∃ U : C.Opens with set = connectedComponent c (pinned), IsCompact, ConnectedSpace U.toScheme (includes nonempty), LocallyOfFiniteType/QuasiCompact of U.ι ≫ structure map. Edge cases (empty C vacuous, Spec k, nonreduced, disjoint lines, doubled origin, any char) covered; single universe u. No duplicate in side-live/Mathlib; side NoetherianSpace helper only a private proof tool. No defs, sorry-only proof, source/blueprint docstrings with 5 proof steps, report sections present. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T092419-L-3430593",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.finiteType_connectedComponent_open_quasiCompact"
+  ],
+  "sorry_after": []
+ }
+}

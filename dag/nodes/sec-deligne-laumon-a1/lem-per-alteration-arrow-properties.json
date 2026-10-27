@@ -1,0 +1,287 @@
+{
+ "id": "lem-per-alteration-arrow-properties",
+ "kind": "statement",
+ "title": "Morphisms between alteration objects are maximally finite dominant and finite type",
+ "statement": "Let $S$ be a Noetherian scheme, meaning a scheme admitting a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring], and let $\\ell$ be a prime. Let $X\\to S$ and $T\\to S$ be objects of $\\operatorname{alt}/S$ [def-per-prime-to-ell-alteration-topology]. Thus both sources are reduced [def-pc-reduced-scheme], both structural maps are of finite type [def-weil-finite-type-morphism], and each generic point of either source maps to a generic point of $S$ with finite residue-field extension [def-weil-irreducible-components, def-weil-residue-field, def-pc-field-extension]. Here a generic point of a component means a point whose closure is that component. For every $S$-morphism $u:X\\to T$, the morphism $u$ is of finite type and sends each generic point $x$ of a component of $X$ to a generic point of a component of $T$, with $\\kappa(x)/\\kappa(u(x))$ finite through the induced residue-field map. These assertions include the empty source.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Proposition 1.1.10 and 1.2.3, printed pp.24--25, for maximal dominance and finite generic residue extensions. Finite type is the affine finite-generation cancellation and Noetherian quasi-compactness used in the proof of 1.2.6, printed p.25."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-per-prime-to-ell-alteration-topology",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:X\\to S$ and $b:T\\to S$ for the structure maps, so $b\\circ u=a$. By the object definition [def-per-prime-to-ell-alteration-topology], $a,b$ are of finite type. Hence [lem-weil-pbc-finite-type-over-noetherian] makes $X,T$ Noetherian; in particular $X$ is quasi-compact and $T$ locally Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated], $T$ is quasi-separated. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] now makes $u$ quasi-compact. Clause (a) of [lemma-nagata-finite-type-to-separated-target], applied to $b\\circ u=a$, makes $u$ locally of finite type. These two properties are exactly finite type [def-weil-finite-type-morphism]. No separatedness of $b$ is required.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian) and 01T8 (lemma-permanence-finite-type); properties.tex Tag 01OY (lemma-locally-Noetherian-quasi-separated); schemes.tex Tag 03GI (lemma-quasi-compact-permanence). This supplies the finite-type input implicit in ILO II 1.2.6."
+   }
+  },
+  {
+   "text": "Fix a generic point $x$ of a component of $X$, and put $s=a(x)$ and $y=u(x)$. The alteration-object hypothesis makes $s$ generic in a component of $S$ [def-per-prime-to-ell-alteration-topology]. By [lem-sc-irreducible-components-cover], $y$ lies in a component $C$ of $T$, and [lem-sc-scheme-sober] gives its generic point $y\\prime$, so $y\\in\\overline{\\{y\\prime\\}}$. Again the object hypothesis makes $s\\prime=b(y\\prime)$ generic in a component of $S$. Continuity of $b$ gives $s\\in\\overline{\\{s\\prime\\}}$, whence $\\overline{\\{s\\}}\\subseteq\\overline{\\{s\\prime\\}}$. Both are irreducible components; maximality [def-weil-irreducible-components] forces equality, and uniqueness of their generic point [lem-sc-scheme-sober] gives $s=s\\prime$. Thus $y,y\\prime$ both lie over $s$.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 1.1.10, proof, printed p.24: choose a maximal generalization of y and compare its image with s; component existence and sobriety are Stacks Tags 004W and 01IS."
+   }
+  },
+  {
+   "text": "For the component generic point $y\\prime$ of $T$, the object hypothesis gives $\\kappa(y\\prime)/\\kappa(s)$ finite [def-per-prime-to-ell-alteration-topology]. Apply [lem-trf-finite-residue-point-closed-in-fibre] to the finite-type map $b:T\\to S$ at $y\\prime$: this point is closed in $T_s$. The first projection identifies the topology of $T_s$ with the subspace $b^{-1}(s)$ [def-pc-scheme-fibre]. Since $y,y\\prime$ lie in that subspace and $y\\in\\overline{\\{y\\prime\\}}$ in $T$, the subspace-closure identity puts $y$ in the closure of $y\\prime$ in $T_s$. Closedness gives $y=y\\prime$. Thus $u(x)$ is a component generic point of $T$.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 1.1.10, proof, printed p.24: equality y=y prime in the fibre; Stacks Tag 01TE (morphisms.tex, lemma-algebraic-residue-field-extension-closed-point-fibre) and Tag 01K1 (schemes.tex, lemma-fibre-topological)."
+   }
+  },
+  {
+   "text": "The induced maps on residue fields [def-weil-residue-field] give $\\kappa(s)\\to\\kappa(y)\\to\\kappa(x)$. Their composite is the map for $a=b\\circ u$: on local rings this is composition, and passing to quotients by the maximal ideals preserves composition. Each map is injective because it is a field homomorphism [def-pc-field-extension], so these are compatible subfields. The object hypothesis gives $\\kappa(x)$ finite-dimensional over $\\kappa(s)$ [def-per-prime-to-ell-alteration-topology]. Choose a finite $\\kappa(s)$-spanning family in $\\kappa(x)$. The same family spans over the larger subfield $\\kappa(y)$, because every expression with coefficients in $\\kappa(s)$ is an expression with coefficients in $\\kappa(y)$. Hence $\\kappa(x)/\\kappa(y)$ is finite through the specified induced map. This holds for every component generic point $x$. If $X$ is empty there are no such points; Step 1 still proves finite type. If $S$ or $T$ is empty, the existence of the structural maps or of $u$ forces the appropriate source to be empty.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-field-extension",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 1.1.10, last sentence of proof, and 1.2.3, second bullet, printed pp.24--25; explicit finite-spanning-family argument for the intermediate field."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-prime-to-ell-alteration-topology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-nagata-finite-type-to-separated-target",
+  "def-weil-finite-type-morphism",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "def-weil-irreducible-components",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Proposition 1.1.10 and 1.2.3, printed pp.24--25, with finite-type cancellation supplied by Stacks Tags 01T8, 01T6, 01OY and 03GI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "maximally|genericallyFinite|generic.*finite",
+   "results": "0 hits:  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type cancellation and ordinary dominance do not assert preservation of component generic points for arrows between alteration objects; the conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, \"of_comp\"",
+   "results": "2 hits: AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.Etale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type cancellation and ordinary dominance do not assert preservation of component generic points for arrows between alteration objects; the conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes over S between maximally dominant S schemes is maximally dominant if the target has finite residue extensions at generic points; if the source does too the morphism does too",
+   "results": "8 hits: AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.IsDominant, AlgebraicGeometry.IsDominant.comp_iff, AlgebraicGeometry.IsDominant.of_comp, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.instIsDominantCompScheme, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type cancellation and ordinary dominance do not assert preservation of component generic points for arrows between alteration objects; the conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyOfFiniteType|IsDominant|finiteType_of_comp|locallyOfFiniteType_of_comp",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type cancellation and ordinary dominance do not assert preservation of component generic points for arrows between alteration objects; the conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between generically finite reduced schemes over a Noetherian base are finite type and have finite generic residue field extensions",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type cancellation and ordinary dominance do not assert preservation of component generic points for arrows between alteration objects; the conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsDominant",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type cancellation and ordinary dominance do not assert preservation of component generic points for arrows between alteration objects; the conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism between objects of the prime-to-ell alteration category is of finite type and is maximally dominant and finite on generic residue fields",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-type cancellation and ordinary dominance do not assert preservation of component generic points for arrows between alteration objects; the conjunction is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "maximally|genericallyFinite|generic.*finite",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: finite type cancellation is covered, but no result states maximal dominance of arrows between alteration objects or the complete conjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An S morphism between maximally dominant generically finite schemes preserves generic points of irreducible components",
+   "results": "8 hits: AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.IsDominant, AlgebraicGeometry.IsDominant.mk, AlgebraicGeometry.IsDominant.respectsIso, AlgebraicGeometry.IsDominant.rec, AlgebraicGeometry.Scheme.Over, AlgebraicGeometry.instIsDominantOfSurjective, AlgebraicGeometry.Scheme.Hom.asOverProp",
+   "date": "2026-10-24",
+   "verdict": "no match: finite type cancellation is covered, but no result states maximal dominance of arrows between alteration objects or the complete conjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, \"of_comp\"",
+   "results": "2 hits: AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.Etale.of_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: finite type cancellation is covered, but no result states maximal dominance of arrows between alteration objects or the complete conjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism over a Noetherian scheme between reduced finite type schemes with finite generic residue extensions preserves component generic points and is finite type",
+   "results": "8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: finite type cancellation is covered, but no result states maximal dominance of arrows between alteration objects or the complete conjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between finite type schemes over a Noetherian base with finite residue fields at component generic points is maximally dominant",
+   "results": "8 hits: AlgebraicGeometry.IsDominant, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.instIsDominantOfSurjective, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.isDominant_of_of_appTop_injective",
+   "date": "2026-10-24",
+   "verdict": "no match: finite type cancellation is covered, but no result states maximal dominance of arrows between alteration objects or the complete conjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-alteration-site-localization",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor finiteness/duality branch, through III Proposition 6.2 closed-fibre gluing: interpreting the pointed-etale-neighborhood cover in alt/T as a cover of the same object T in alt/S before the cover is pulled to P_i times_S T. ILO II 1.1.10, proof of 1.2.6 and 2.3.1 supply the category and generator identifications. Child: Expose II Proposition 1.1.10 and 1.2.3, printed pp.24--25, for maximal dominance and finite generic residue extensions. Finite type is the affine finite-generation cancellation and Noetherian quasi-compactness used in the proof of 1.2.6, printed p.25.",
+   "via": [
+    "lem-per-alteration-site-localization",
+    "lem-per-alteration-cover-closed-fibre-shrink",
+    "lem-per-uniformization-complete-local-descent",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-alteration-arrow-properties",
+  "worker": "stage1",
+  "summary": "Checked ILO II 1.1.10 and 1.2.3 against the unchanged statement. Proved finite type using existing cancellation, Noetherianity and quasi-compactness tools, and wrote the component-generic-point and intermediate-field arguments explicitly. Reused all existing DAG nodes, with no new nodes and no Mathlib leaf claim. Read every cited statement, checked nonseparated and empty cases, and recorded fresh item searches and verbatim citations.",
+  "blueprint": "Realizes the inherited Artin-Gabber ancestor Step 3 finiteness/duality branch through ILO III 6.2 and alteration-site localization: ILO II 1.1.10 proves the arrow properties needed to regard objects over T as objects over S. No unit or chapter route is changed. The newest blueprint ancestor and unit were read; there is no separate blueprint alteration-arrow node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic algebraic-geometry tool: finite-type sources over the given Noetherian base are Noetherian; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic quasi-separatedness tool for the Noetherian target T, needed for finite-type cancellation without separatedness; no node of this unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-morphism permanence: quasi-compact X and quasi-separated T imply quasi-compact u; not a replacement of the perverse/Fourier route."
+   },
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Only clause (a), unrestricted local-finite-type cancellation, is used; no separatedness assumption or Nagata compactification proof is imported."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Generic topology tool choosing a component containing y; no curve, cohomology, or duality input."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic scheme topology: components have unique generic points; no perverse-unit node states it."
+   },
+   {
+    "node": "lem-trf-finite-residue-point-closed-in-fibre",
+    "why": "Stacks 01TE as a generic scheme-theory tool: a point with finite residue extension is closed in its fibre; no trace-formula assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-trf-finite-residue-point-closed-in-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-068e180c2",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-068e180c2 (reviewer sub-agent of L); spot-checked: The statement matches ILO II Prop. 1.1.10 and 1.2.3 bullet 2 (pdf pp.29-31): arrows of alt/S are maximally finite dominant (ℓ=1 form). Finite type is added, and nothing is over-claimed: no prime-to-ℓ degree, no surjectivity. Steps 2-4 follow the ILO proof of 1.1.10 line by line: maximal generization y′ lies over s, κ(y′)/κ(s) is finite so y′ is closed in T_s and y=y′, and the intermediate extension is finite. Step 1 is correct: X and T are Noetherian (01T6), T is quasi-separated (01OY), u is quasi-compact (03GI clause), u is locally of finite type by Nagata clause (a), and no separatedness is needed. I checked all 13 cited statements, plus the empty-source, non-separated-T and disjoint-component cases. There are no new nodes and no duplicate (alteration-cover-calculus and generic-fibre-finiteness-criterion state different things). Batch-5 flag: lem-trf-finite-residue-point-closed-in-fibre is generic Stacks 01TE with generic deps (fibre homeomorphism, lft base change, Jacobson fibre). It is neither the trace formula nor Poincaré duality nor a step of their proofs, so I accept it. I accept all seven generic split_report tool_uses. No SGA is used and no unit route changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlterationArrowProperties",
+  "declaration": "AlgebraicGeometry.PrimeToEllAlteration.alterationArrow_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlterationArrowProperties.lean",
+  "statement": "theorem alterationArrow_properties {S : Scheme.{u}} [IsNoetherian S] (ell : ℕ) [Fact ell.Prime] {X T : Alt S} (u : X ⟶ T) : LocallyOfFiniteType u.hom.left ∧ QuasiCompact u.hom.left ∧ ∀ x : X.obj.left, closure ({x} : Set X.obj.left) ∈ irreducibleComponents X.obj.left → closure ({u.hom.left x} : Set T.obj.left) ∈ irreducibleComponents T.obj.left ∧ (u.hom.left.residueFieldMap x).hom.Finite",
+  "branch": "sheaf-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1342db472",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Node unchanged except lean record; lean.statement equals the file signature exactly. Clause match: IsNoetherian S = finite affine Noetherian cover; ell prime binder kept for context; X T : Alt S reuses the landed def-per-prime-to-ell-alteration-topology Alt (LocallyOfFiniteType, QuasiCompact, IsReduced, generic points to generic points with finite residueFieldMap), so all object hypotheses are present and none is stronger; u : X ⟶ T is an arbitrary Over-morphism; conclusion LocallyOfFiniteType ∧ QuasiCompact (finite-type record convention), closure{x} ∈ irreducibleComponents → closure{u x} ∈ irreducibleComponents ∧ (residueFieldMap x).hom.Finite (direction κ(u x)→κ(x) correct). Empty source vacuous with finite type still asserted; empty S/T forced; multiple components; no extra separatedness/nonempty/degree assumptions; one universe u. All 8 stmt_dep records read; private import FiniteResiduePointClosedInFibre exists in side-live and imports only Mathlib. Single sorry theorem, no definitions, source/blueprint docstrings and 4-step proof docstring present; report has Worker report and Second reading sections. Not recompiled (no change made)."
+ }
+}

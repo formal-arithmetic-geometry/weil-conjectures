@@ -1,0 +1,228 @@
+{
+ "id": "lem-dl-a1-ind-etale-residue-action-rigidity",
+ "kind": "statement",
+ "title": "Residue kernel detected by fixing an ind-etale local algebra with separably closed residue",
+ "statement": "Let $H$ be a commutative local ring with residue field $\\kappa$, let $R$ be a local ind-etale $H$-algebra [def-weil-pbc-ind-etale-algebra] with residue field a chosen separable closure $\\kappa_s/\\kappa$ [def-pd-separable-closure], and let $T$ be a henselian local $H$-algebra [def-weil-pbc-henselian-terminology] with residue field $E$ algebraic over $\\kappa$. Assume the structural maps from $H$ are local, and let $i:R\\hookrightarrow T$ be an injective local $H$-map inducing a $\\kappa$-embedding $j:\\kappa_s\\hookrightarrow E$. Let $\\Gamma$ be any group acting on $T$ by $H$-algebra automorphisms. Then $E/j(\\kappa_s)$ is purely inseparable: in characteristic $p>0$ every $x\\in E$ has $x^{p^n}\\in j(\\kappa_s)$ for some $n\\geq0$, and in characteristic zero $E=j(\\kappa_s)$. Every induced residue automorphism preserves $j(\\kappa_s)$, so restriction defines a homomorphism $r:\\Gamma\\to\\operatorname{Gal}(\\kappa_s/\\kappa)$. For every $\\gamma\\in\\Gamma$ the following are equivalent:\n$$ r(\\gamma)=1\\quad\\Longleftrightarrow\\quad\\gamma|_E=1\\quad\\Longleftrightarrow\\quad\\gamma(i(x))=i(x)\\ \\text{for all }x\\in R. $$\nHere the residue action is obtained by reducing the given action on $T$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW, lemma-identify-inertia, uniqueness with prescribed residue action; algebra.tex Tag 08HR, lemma-map-into-henselian-colimit; fields.tex Tag 030K, lemma-separable-first."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-pd-separable-closure",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\pi:T\\to E=T/\\mathfrak m_T$. Every automorphism $\\gamma$ preserves $\\mathfrak m_T$: it preserves units and nonunits, and the latter form the maximal ideal. Thus $\\bar\\gamma(\\pi(t))=\\pi(\\gamma(t))$ is a well-defined field automorphism. Since $\\gamma$ fixes $H$ and $H\\to T$ is local, $\\bar\\gamma$ fixes $\\kappa$. On representatives, $\\overline{\\gamma\\delta}=\\bar\\gamma\\bar\\delta$ and $\\overline{1}=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, residue action; quotient construction written out"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-separable-first-purely-inseparable] to the algebraic extension $E/\\kappa$, and denote its separable subfield by $E_s$. We claim $E_s=j(\\kappa_s)$. The inclusion $j(\\kappa_s)\\subseteq E_s$ follows because the chosen closure is separable algebraic by [def-pd-separable-closure]. Conversely, for $a\\in E_s$, its minimal polynomial $P\\in\\kappa[X]$ is separable, as defined in [def-weil-pbc-separable-algebraic-extension]. A Bezout identity for $P,P'$ remains an identity over $\\kappa_s$, so $P$ stays separable there. By the splitting formulation [def-kun-separably-closed], it is a product of linear factors over $\\kappa_s$. Evaluating those factors at $a$ inside the field $E$ forces $a=j(b)$ for a root $b\\in\\kappa_s$. Therefore $E_s=j(\\kappa_s)$. The cited separable-first theorem now gives exactly the asserted $p$-power condition, or $E=j(\\kappa_s)$ in characteristic zero.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-pd-separable-closure",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-kun-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030K, lemma-separable-first, statement and proof; identification using the definition of separable closure"
+   }
+  },
+  {
+   "text": "For $a\\in E_s$, a separable polynomial over $\\kappa$ vanishing at $a$ also vanishes at $\\bar\\gamma(a)$, because $\\bar\\gamma$ fixes its coefficients. Hence $\\bar\\gamma(E_s)\\subseteq E_s$; applying this to $\\gamma^{-1}$ gives equality. With $E_s=j(\\kappa_s)$ from step 2, set $r(\\gamma)=j^{-1}\\bar\\gamma j$. It is a $\\kappa$-automorphism of $\\kappa_s$, so belongs to $\\operatorname{Gal}(\\kappa_s/\\kappa)$, the group of all such automorphisms. Cancelling $jj^{-1}$ in the composite gives $r(\\gamma\\delta)=r(\\gamma)r(\\delta)$, and $r(1)=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, residue restriction; elementary coefficient calculation"
+   }
+  },
+  {
+   "text": "If $r(\\gamma)=1$, then $\\bar\\gamma$ fixes $j(\\kappa_s)$ pointwise. In characteristic $p>0$, for $a\\in E$ choose $n$ from step 2. Then $(\\bar\\gamma(a)-a)^{p^n}=\\bar\\gamma(a^{p^n})-a^{p^n}=0$. A field has no nonzero nilpotents, so $\\bar\\gamma(a)=a$. In characteristic zero, step 2 already gives $E=j(\\kappa_s)$. The reverse implication is restriction. This proves $r(\\gamma)=1\\Longleftrightarrow\\bar\\gamma=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HE, definition-purely-inseparable; elementary uniqueness of a purely inseparable root"
+   }
+  },
+  {
+   "text": "Suppose $r(\\gamma)=1$. Apply the uniqueness assertion of [lem-weil-pbc-map-into-henselian-colimit] with its base ring $H$, source algebra $R$, target $T$, primes $\\mathfrak p=\\mathfrak m_H$, $\\mathfrak q=\\mathfrak m_R$, and residue map $\\tau=j:\\kappa_s\\to E$. The required filtered etale presentation is precisely [def-weil-pbc-ind-etale-algebra]. The target is henselian by hypothesis. Both $i$ and $\\gamma\\circ i$ are $H$-algebra maps with inverse image of $\\mathfrak m_T$ equal to $\\mathfrak m_R$, since $i$ is local and $\\gamma$ preserves $\\mathfrak m_T$; the structural maps are local, so these primes lie over $\\mathfrak m_H$. Their residue maps are respectively $j$ and $\\bar\\gamma\\circ j=j$. The cited uniqueness gives $\\gamma\\circ i=i$, as required.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR, lemma-map-into-henselian-colimit, uniqueness with prescribed prime and residue embedding"
+   }
+  },
+  {
+   "text": "Conversely, assume $\\gamma(i(x))=i(x)$ for every $x\\in R$. For $b\\in\\kappa_s=R/\\mathfrak m_R$, choose a representative $x\\in R$. Then $\\bar\\gamma(j(b))=\\pi(\\gamma(i(x)))=\\pi(i(x))=j(b)$. Thus $r(\\gamma)=1$. Together with steps 4 and 5 this proves all three conditions equivalent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, lemma-identify-inertia, fixing the strict local subalgebra; quotient representatives written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "def-pd-separable-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-kun-separably-closed",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW, lemma-identify-inertia, residue-action argument generalized using algebra.tex Tag 08HR and fields.tex Tag 030K; assembly and elementary details by Q96."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a henselian local target fix an ind etale local subalgebra with separable closure residue field exactly when they act trivially on the algebraic residue extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"IsLocalRing.ResidueField.mapAut_apply\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsLocalRing R] (f : R ≃+* R),\\n  IsLocalRing.ResidueField.mapAut f = IsLocalRing.ResidueField.mapEquiv f\", \"doc\": \"For any commutative local ring $ R $ and ring automorphism $ f : R ≃+* R $, the automorphism induced on the residue field $ R/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal) via th\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"Ideal.ResidueField.algHom_ext_iff\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Ideal\", \"type\": \"∀ {R : Type u_1} {A : Type u_3} {B : Type u_4} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] {I : Ideal A} [inst_5 : I.IsPrime] {f g : I.ResidueField →ₐ[R] B},\\n  f = g ↔ f.comp (IsScalarTower.toAlgHom R A I.ResidueField) = g.comp (IsS\", \"doc\": \"For commutative rings $ R $, $ A $, and $ B $ with $ R $-algebra structures on $ A $ and $ B $, and a prime ideal $ I $ in $ A $, two $ R $-algebra homomorphisms $ f, g : \\text{ResidueField}(I) \\to B $ \"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, AlgEquiv",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AlgEquiv.isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" {F : Type u_1} {E : Type u_2} [CommRing F] [Ring E] [Algebra F E] {K : Type u_3} [Ring K] [Algebra F K] (e : K ≃ₐ[F] E) [IsPurelyInseparable F K] : IsPurelyInseparable F E\", \"doc\": \"Transfer `IsPurelyInseparable` across an `AlgEquiv`.\"}\n  {\"name\": \"AlgEquiv.isPurelyInseparable_iff\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \" {F : Type u_1} {E : Type u_2} [CommRing F] [Ring E] [Algebra F E] {K : Type u_3} [Ring K] [Algebra F K] (e : K ≃ₐ[F] E) : IsPurelyInseparable F K ↔ IsPurelyInseparable F E\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]nd[Ee]tale.*([Aa]ut|[Rr]esidue)|[Hh]enseli.*[Aa]ut|[Aa]ut.*[Hh]enseli",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of ind etale maps into a henselian local ring implies that trivial residue action fixes the source with separably closed residue field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \"(I : Ideal S) (hI : I ^ 2 = ⊥) (x : S) (hx : P.HasMap (Ideal.Quotient.mk I x)) : ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \":\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧ (maximalIdeal R).map (algebraMap R S) = maximalIdeal S\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"HenselianLocalRing.mk\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [toIsLocalRing : IsLocalRing R],\\n  (∀ (f : Polynomial R),\\n      f.Monic →\\n        ∀ (a₀ : R),\\n          Polynomial.eval a₀ f ∈ IsLocalRing.maximalIdeal R →\\n            IsUnit (Polynomial.eval a₀ (Polynomial.derivative f)) →\\n              ∃ a, f.IsRoot a ∧ a - a₀ \", \"doc\": \"A commutative local ring $ R $ is Henselian if for every monic polynomial $ f \\\\in R[X] $, whenever $ a_0 \\\\in R $ satisfies $ f(a_0) \\\\in \\\\mathfrak{m} $ (the maximal ideal) and $ f'(a_0) $ is a unit in \"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(K : Type*) [Field K] : HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this local-ring comparison; see report source inspection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a henselian local ring fix an ind etale local subalgebra if and only if their action on its separable closure residue field is trivial",
+   "results": "[leanfinder] OK 8 hit(s); IsLocalRing.ResidueField.mapAut_apply, galLiftEquiv, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, IsLocalRing.ResidueField.mapAut, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.isSeparable_residueField_iff, ValuationSubring.inertiaSubgroup",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue maps, formally unramified algebras or transfer of pure inseparability, not the complete ind-etale rigidity statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]nd[Ee]tale.*([Aa]ut|[Rr]esidue)|[Hh]enseli.*[Aa]ut|[Aa]ut.*[Hh]enseli",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue maps, formally unramified algebras or transfer of pure inseparability, not the complete ind-etale rigidity statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two maps from an ind etale algebra to a henselian local ring are equal if they induce the same residue field map",
+   "results": "[leansearch] OK 8 hit(s); IsLocalRing.ResidueField.map.congr_simp, Ideal.ResidueField.algHom_ext, Ideal.ResidueField.ringHom_ext, Ideal.ResidueField.ringHom_ext_iff, Ideal.ResidueField.mapₐ.congr_simp, IsLocalRing.ResidueField.map, Ideal.ResidueField.liftₐ.congr_simp, Ideal.ResidueField.map.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue maps, formally unramified algebras or transfer of pure inseparability, not the complete ind-etale rigidity statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, AlgEquiv",
+   "results": "[loogle] OK 2 hit(s); AlgEquiv.isPurelyInseparable, AlgEquiv.isPurelyInseparable_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue maps, formally unramified algebras or transfer of pure inseparability, not the complete ind-etale rigidity statement"
+  },
+  {
+   "tool": "grep",
+   "query": "map_into_henselian|[Ii]nd[Ee]tale|[Ii]nd_[Ee]tale",
+   "results": "[grep] OK 0 hit(s); scope Mathlib/RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue maps, formally unramified algebras or transfer of pure inseparability, not the complete ind-etale rigidity statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a local ring acts trivially on the residue field exactly when it fixes an ind etale subalgebra whose residue field is a separable closure of the base residue field",
+   "results": "[leanfinder] OK 8 hit(s); IsLocalRing.ResidueField.mapAut_apply, IsLocalRing.ResidueField.mapAut, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.instFormallyUnramifiedResidueField, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.instFormallyUnramifiedResidueField_1, Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern residue maps, formally unramified algebras or transfer of pure inseparability, not the complete ind-etale rigidity statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-dl-a1-henselian-global-inertia-comparison",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-d-dl-a1-setup",
+ "blueprint": {
+  "from": {
+   "node": "rem-dl-a1-conventions",
+   "place": "Second paragraph, equivalence of extension across infinity with trivial inertia: normal-local comparison used through lem-dl-a1-weil-kernel-inertia; returned comparison proof steps 11 and 12.",
+   "via": [
+    "lem-dl-a1-henselian-global-inertia-comparison",
+    "lem-dl-a1-weil-kernel-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-dl-a1-ind-etale-residue-action-rigidity",
+  "worker": "stage1",
+  "summary": "Proved the residue rigidity statement in six steps, reusing the existing separable-first Mathlib leaf and henselian-colimit uniqueness theorem. Identified the embedded separable closure with the separable subfield, checked preservation and the group law, and gave both kernel implications. No new nodes, no statement change, no Lean writing or compilation.",
+  "blueprint": "rem-dl-a1-conventions, final paragraph: equivalence between extension across infinity and trivial inertia, through lem-dl-a1-weil-kernel-inertia and lem-dl-a1-henselian-global-inertia-comparison. This item supplies only the residue-action rigidity used in that comparison, retaining the given ancestry. Current latest blueprint places the conventions under sk-lem-wft-curve-heart. Searches for residue action and ind-etale found no equivalent imported blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "Generic uniqueness of maps from an ind-etale algebra into a henselian local ring, with fixed prime and residue map; the affine-line conventions unit contains no such algebra theorem. It supplies a local algebra tool without changing the inertia route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-959d7cfeb",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-959d7cfeb (reviewer sub-agent of L); spot-checked: I read the item and its six steps in full. The delivery has 0 new nodes and an unchanged statement and stmt_deps. The item is still unsplit on live and side-live, and there is no repair note. Unit sk-d-dl-a1-setup has no steps, so it imposes no route. I checked the sources against the tags file: pione.tex 0BSW (lemma-identify-inertia, line 2883; its proof uses uniqueness of A^sh given the residue map, which is step 5's argument), algebra 08HR and fields 030K. Statement check: E_s=j(kappa_s) via the separable-first leaf, def-pd-separable-closure, Bezout and def-kun-separably-closed splitting, so E/j(kappa_s) is purely inseparable. kappa is fixed because H->T is local. r(gamma)=1 iff the residue action is trivial, by the p-power argument and reducedness. r(gamma)=1 implies gamma∘i=i by the uniqueness of lem-weil-pbc-map-into-henselian-colimit; I checked each hypothesis: R ind-etale gives the filtered étale colimit, p=m_H and q=m_R by locality, i^{-1}(m_T)=m_R, gamma(m_T)=m_T, and tau=j. The converse holds because R->kappa_s is surjective. Small cases tested: Frobenius on F̄_p, a purely inseparable residue extension, T=R[ε]/ε², characteristic 0, and the trivial group. proof_deps equals the union of uses. I accept the tool_use lem-weil-pbc-map-into-henselian-colimit (generic Stacks 08HR; the conventions unit has no algebra route that would replace it). No cycle: the only citer is henselian-global-inertia-comparison step 3. Six DAG candidates for duplicates (real-henselian-residue-galois-action, strict-henselization-residue-automorphism-lift, wf-strict-henselian-fraction-inertia, residue-action-krull-continuity, separable-normalization-local-embeddings, wf-henselian-finite-galois-lift) state different facts. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IndEtaleResidueActionRigidity",
+  "declaration": "Algebra.indEtale_residue_action_rigidity",
+  "file": "lean/Sheaf/RingTheory/IndEtaleResidueActionRigidity.lean",
+  "statement": "theorem indEtale_residue_action_rigidity (H : Type u) [CommRing H] [IsLocalRing H] (R : Type v) [CommRing R] [IsLocalRing R] [Algebra H R] [IsLocalHom (algebraMap H R)] (hR : RingHom.IndEtaleAcrossUniverses (algebraMap H R)) [IsSepClosure (ResidueField H) (ResidueField R)] (T : Type w) [CommRing T] [HenselianLocalRing T] [Algebra H T] [IsLocalHom (algebraMap H T)] [Algebra.IsAlgebraic (ResidueField H) (ResidueField T)] (i : R →ₐ[H] T) [IsLocalHom i] (hi : Function.Injective i) (Γ : Type g) [Group Γ] (ρ : Γ →* (T ≃ₐ[H] T)) : IsPurelyInseparable (ResidueField.mapAlgHom' i).fieldRange (ResidueField T) ∧ (∀ (p : ℕ), p.Prime → ringChar (ResidueField H) = p → ∀ x : ResidueField T, ∃ n : ℕ, x ^ (p ^ n) ∈ Set.range (ResidueField.mapAlgHom' i)) ∧ (ringChar (ResidueField H) = 0 → Function.Surjective (ResidueField.mapAlgHom' i)) ∧ (∀ γ : Γ, Set.MapsTo (ResidueField.mapAlgEquiv' (ρ γ)) (Set.range (ResidueField.mapAlgHom' i)) (Set.range (ResidueField.mapAlgHom' i))) ∧ ∃ r : Γ →* (ResidueField R ≃ₐ[ResidueField H] ResidueField R), (∀ (γ : Γ) (x : ResidueField R), ResidueField.mapAlgHom' i (r γ x) = ResidueField.mapAlgEquiv' (ρ γ) (ResidueField.mapAlgHom' i x)) ∧ ∀ γ : Γ, (r γ = 1 ↔ ResidueField.mapAlgEquiv' (ρ γ) = 1) ∧ (ResidueField.mapAlgEquiv' (ρ γ) = 1 ↔ ∀ x : R, ρ γ (i x) = i x)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e888f87",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Item adds only its lean field; the 3 stmt_dep records match side-live exactly; statement verbatim with the file. Clause-by-clause match: H local; R local with IndEtaleAcrossUniverses (recorded ULift transport); IsSepClosure on ResidueField R; T HenselianLocalRing with E algebraic over κ; local structure maps; injective local i : R →ₐ[H] T with j = mapAlgHom' i; Γ any group with ρ : Γ →* (T ≃ₐ[H] T). Conclusions: E purely inseparable over the image of j, p-power clause for prime ringChar, surjectivity in char 0, MapsTo preservation, r unique by injectivity of j, both equivalences. No extra hypotheses; universes u v w g independent and bound. The theorem is true (030K, 08HR uniqueness via map_into_henselian_colimit, p-power argument). Edge cases checked: char 0, n=0, i=id, trivial or non-faithful Γ, non-reduced T, Frobenius. No new definitions, only the proof is sorry, docstrings give sources, blueprint id and the 6 steps; plain imports are proof-dependency modules. Advisory: the def-pd-separable-closure record lists a theorem about IsSepClosure; the item uses the class itself, which is the recorded notion. No compile run, since no file changed."
+ }
+}

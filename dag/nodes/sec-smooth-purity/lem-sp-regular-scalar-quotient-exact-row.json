@@ -1,0 +1,337 @@
+{
+ "id": "lem-sp-regular-scalar-quotient-exact-row",
+ "kind": "statement",
+ "title": "Regular scalar Koszul resolutions and the four-term quotient exact row",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe, $R$ a sheaf of commutative rings and $t$ a global section such that multiplication by $t$ is injective on $R(U)$ for every site object $U$. Use sheaves of modules [def-weil-sheaf-of-modules-category], cochain conventions [def-weil-abstract-derived-category] and total tensor complexes [def-pc-tensor-complex-sheaves]. Put $B_k=R/t^kR$ for $k\\geq1$, with its canonical quotient projection and reduction maps, where quotient means sheafification of sectionwise quotient. The augmented complex $K_k=[R\\xrightarrow{t^k}R]\\to B_k[0]$, in degrees $-1,0$, has augmentation the quotient in degree zero and zero elsewhere; it is a finite free K-flat resolution [def-pc-kflat-complex]. For $n\\geq m\\geq1$, total tensor with $B_n[0]$ identifies $B_n\\otimes_R K_m$ with $P_{n,m}=[B_n\\xrightarrow{t^m}B_n]$, in the same degrees, and its augmentation to $B_m[0]$ is coefficient reduction in degree zero. There is a well-defined $B_n$-linear map $a_{n,m}:B_m\\to B_n$ characterized on local representatives by $\\bar x\\mapsto t^{n-m}x\\bmod t^n$. The sequence of $B_n$-module sheaves\n$$0\\longrightarrow B_m\\xrightarrow{a_{n,m}}B_n\\xrightarrow{t^m}B_n\\xrightarrow{\\mathrm{red}}B_m\\longrightarrow0$$\nis exact. Its left image is the ideal subsheaf $t^{n-m}B_n$. All assertions include $n=m$, with $a_{m,m}=1$ and middle scalar map zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First paragraph, the two nonzero cohomology objects of the displayed coefficient tensor; returned proof steps 4–6; explicit agent expansion of the coefficient calculation (not a theorem stated verbatim by Bhatt–Scholze)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pe-principal-power-ring-quotients",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-cbc-regular-quotient-cone-basic"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sp-regular-scalar-quotient-presentation to the chosen positive level. Apply the exact degree-zero single functor to this short exact module sequence, and use mappingCone.descShortComplex. Its quasi-isomorphism property follows from lem-pc-cone-short-exact-quasi-iso. The inr-desc equation and the single functor component formula give the required degree-zero quotient normalization.",
+   "uses": [
+    "lem-sp-regular-scalar-quotient-presentation",
+    "lem-pc-cone-short-exact-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone term in degree i is R[0]^(i+1) biproduct R[0]^i. At -1 and 0 a zero summand disappears, giving the asserted unit isomorphisms; elsewhere both summands are zero. The unit is flat by its tensor unit isomorphisms, zero is flat, and finite biproducts preserve flatness. Thus the cone is bounded above with flat terms. Apply the independent-coefficient bounded-flat criterion, which has exactly the universes of the statement, to obtain K-flatness. The zero and finite-biproduct flatness instances are supplied by the adopted source flat/K-flat API; they are proved categorical facts, not additional unproved lemmas.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the ring reduction and the exact module row from lem-sp-regular-scalar-quotient-module-row. Its second zero composite constructs the augmentation from the scalar cone P to the single of the endpoint, using mappingCone.descShortComplex of the degree-zero single of that short complex. No short exactness of this two-arrow complex is claimed or needed. The inr-desc equation gives its normalized degree-zero component.",
+   "uses": [
+    "lem-sp-regular-scalar-quotient-module-row"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the normalized chain isomorphism from lem-sp-regular-scalar-quotient-tensor-comparison. Combine its two coordinate equations with the module row and the constructed augmentation. This is the full required conjunction, including the image subobject and the diagonal identities, without changing any quotient or scalar map.",
+   "uses": [
+    "lem-sp-regular-scalar-quotient-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-regular-scalar-quotient-presentation",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-regular-scalar-quotient-module-row",
+  "lem-sp-regular-scalar-quotient-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First proof paragraph: the displayed coefficient tensor and its two cohomology objects. W3: explicit cone augmentation, support, K-flatness and assembly from the quotient-module calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of commutative rings with a regular global scalar t, the two term t power Koszul complex is a finite free K-flat resolution and multiplication by t^(n-m) identifies R/t^m with the kernel of t^m on R/t^n",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+     "Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "Algebra.smoothLocus_eq_compl_support_inter",
+     "Algebra.FormallySmooth.projective_kaehlerDifferential",
+     "Algebra.Smooth.flat",
+     "Algebra.FormallySmooth.iff_split_injection"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-module exactness and flatness declarations do not give this sheaf exact row with its specified maps together with the augmented finite free K-flat resolutions. The grep hit LocalCohomology.lean:45 is a future-work comment."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*(quotient|homology)|quotient.*[Nn]onzero[Dd]ivisor|IsKFlat",
+   "results": {
+    "subdirectory": "Algebra",
+    "count": 1,
+    "hits": [
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-module exactness and flatness declarations do not give this sheaf exact row with its specified maps together with the augmented finite free K-flat resolutions. The grep hit LocalCohomology.lean:45 is a future-work comment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"homology\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-module exactness and flatness declarations do not give this sheaf exact row with its specified maps together with the augmented finite free K-flat resolutions. The grep hit LocalCohomology.lean:45 is a future-work comment."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence between quotients by powers of a regular element and K-flatness of the augmented two term free Koszul resolution",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Ideal.exact_mulQuot_quotOfMul",
+     "RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last",
+     "QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last",
+     "IsSMulRegular.smulShortComplex_shortExact",
+     "Ideal.Quotient.factorPowSucc",
+     "Module.Flat.iff_rTensor_exact",
+     "Module.Flat.rTensor_exact",
+     "Module.Flat.rTensor_shortComplex_exact"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-module exactness and flatness declarations do not give this sheaf exact row with its specified maps together with the augmented finite free K-flat resolutions. The grep hit LocalCohomology.lean:45 is a future-work comment."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular element t in a commutative ring sheaf gives exact sequence 0 R/t^m to R/t^n by t^(n-m) to R/t^n by t^m to R/t^m to 0 and a K flat two term free resolution",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+     "RingTheory.Sequence.IsWeaklyRegular.of_flat",
+     "Module.Flat.of_forall_exists_factorization",
+     "exact_of_isLocalized_span",
+     "RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat",
+     "exact_of_isLocalized_maximal",
+     "Module.Flat.iff_forall_exists_factorization"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary-module exactness and flatness declarations do not give this sheaf exact row with its specified maps together with the augmented finite free K-flat resolutions. The grep hit LocalCohomology.lean:45 is a future-work comment."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|exact_mulQuot_quotOfMul|smulShortComplex_shortExact",
+   "results": {
+    "subdirectory": "",
+    "count": 6,
+    "hits": [
+     "Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+     "Mathlib/RingTheory/Regular/Category.lean",
+     "Mathlib/RingTheory/Depth/Rees.lean",
+     "Mathlib/RingTheory/Depth/Rees.lean",
+     "Mathlib/RingTheory/OrderOfVanishing/Basic.lean",
+     "Mathlib/RingTheory/OrderOfVanishing/Basic.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary-module exactness (Regular/Category.lean:51, Regular/IsSMulRegular.lean:173, OrderOfVanishing/Basic.lean:91) and sheaf presentation constructors (Sheaf/Quasicoherent.lean:74–114). None states this exact quotient-sheaf row with the specified maps and finite free K-flat augmented complexes. The grep finds no KFlat/kFlat declaration in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequence of quotient sheaves by powers of a nonzero divisor with finite free K-flat Koszul resolution",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last",
+     "RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last",
+     "QuotSMulTop.map_exact",
+     "Module.Flat.lTensor_exact",
+     "Ideal.Quotient.factorPowSucc",
+     "LinearMap.exact_subtype_mkQ",
+     "CategoryTheory.exact_d_f",
+     "CategoryTheory.InjectiveResolution.exact_succ"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary-module exactness (Regular/Category.lean:51, Regular/IsSMulRegular.lean:173, OrderOfVanishing/Basic.lean:91) and sheaf presentation constructors (Sheaf/Quasicoherent.lean:74–114). None states this exact quotient-sheaf row with the specified maps and finite free K-flat augmented complexes. The grep finds no KFlat/kFlat declaration in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSMulRegular\", \"exact\"",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last",
+     "RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last",
+     "IsSMulRegular.smulShortComplex_shortExact"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary-module exactness (Regular/Category.lean:51, Regular/IsSMulRegular.lean:173, OrderOfVanishing/Basic.lean:91) and sheaf presentation constructors (Sheaf/Quasicoherent.lean:74–114). None states this exact quotient-sheaf row with the specified maps and finite free K-flat augmented complexes. The grep finds no KFlat/kFlat declaration in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular global scalar in a sheaf of rings gives a two term K-flat free resolution of its power quotient and an exact four term quotient row",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "SheafOfModules.relationsOfIsCokernelFree",
+     "SheafOfModules.relationsOfIsCokernelFree_I",
+     "SheafOfModules.relationsOfIsCokernelFree_s",
+     "SheafOfModules.generatorsOfIsCokernelFree_I",
+     "SheafOfModules.generatorsOfIsCokernelFree_s",
+     "SheafOfModules.presentationOfIsCokernelFree_relations",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat",
+     "RingTheory.Sequence.IsWeaklyRegular.of_flat"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary-module exactness (Regular/Category.lean:51, Regular/IsSMulRegular.lean:173, OrderOfVanishing/Basic.lean:91) and sheaf presentation constructors (Sheaf/Quasicoherent.lean:74–114). None states this exact quotient-sheaf row with the specified maps and finite free K-flat augmented complexes. The grep finds no KFlat/kFlat declaration in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a nonzero divisor resolves a quotient sheaf by two copies of the structure ring; kernel on higher power quotients is the complementary power ideal",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Ideal.quotientToQuotientRangePowQuotSuccAux_mk",
+     "Ideal.quotCotangent",
+     "Ideal.quotientToQuotientRangePowQuotSucc_mk",
+     "Ideal.powQuotPowSuccEquivMapMkPowSuccPow",
+     "Ideal.quotientToQuotientRangePowQuotSucc",
+     "Ideal.quotEquivPowQuotPowSucc",
+     "Ideal.quotientToQuotientRangePowQuotSuccAux",
+     "Ideal.exact_mulQuot_quotOfMul"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ordinary-module exactness (Regular/Category.lean:51, Regular/IsSMulRegular.lean:173, OrderOfVanishing/Basic.lean:91) and sheaf presentation constructors (Sheaf/Quasicoherent.lean:74–114). None states this exact quotient-sheaf row with the specified maps and finite free K-flat augmented complexes. The grep finds no KFlat/kFlat declaration in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-ell-coefficient-fiber",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "First paragraph, the two nonzero cohomology objects of the displayed coefficient tensor; returned proof steps 4–6",
+   "via": [
+    "lem-sp-ell-coefficient-fiber"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-regular-scalar-quotient-exact-row",
+  "worker": "stage1",
+  "summary": "Statement preserved. Expanded the regular-scalar calculation into the augmented quasi-isomorphism, explicit unit tensor formulas and K-flatness using the existing general ringed-site theorem, signed tensor/augmentation identification, well-defined injective quotient map, sectionwise kernel-image calculation and exact sheafification. No new nodes: the only non-elementary tools already exist; all scalar algebra is written out. Checked n=m, m=1, unit t and zero ring, and non-domain rings with a regular polynomial variable.",
+  "blueprint": "Realizes the first paragraph of sk-lem-sp-tower, where the displayed coefficient derived tensor has H^{-1}=H^0 equal to the lower quotient; retains the ancestor via lem-sp-ell-coefficient-fiber.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "why": "Generic exact sheafification on a ringed site transports the sectionwise quotient rows; no lemma of sk-lem-sp-tower states this general tool."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic bounded-above flat K-flatness applies to the two-term free resolution; it supplies no alternative to the unit coefficient calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-f2118d7f6",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-f2118d7f6 (reviewer sub-agent of L); spot-checked: Read the whole item: 6 steps, no new nodes, statement unchanged. Also read its parent lem-sp-ell-coefficient-fiber, which uses the K-flat resolutions, P_{n,m}, the augmentation, the exact row and B_n-linearity (step 3 works over S=B_n), and the sk-lem-sp-tower main-20261015 first paragraph (H^0=H^{-1}=O/ℓ^m), which the item realizes. Checked Stacks 06YQ lemma-bounded-flat-K-flat, 03EI and 03CY at the source. Steps 1-5 are correct: k-fold cancellation, an exact sheafified Koszul row, the unit isomorphism making R flat, bounded-above flat complexes being K-flat by lem-pc-bounded-above-flat-kflat-site (all its hypotheses hold), Tot with sign (-1)^0, and the sectionwise kernel/image algebra. Tested t a unit, the zero ring, n=m, m=1, and (Z/6)[s] with t=s. FIX (C1/B3): step 6 said 'the quotient actions induce the B_n-module actions' without a node. That needs sheafification over the presheaf of rings Q_n (Stacks 03CY with O a presheaf), and the only node cited is for O a sheaf. In fixes/dag/nodes/sec-smooth-purity/lem-sp-regular-scalar-quotient-exact-row.json, step 6 now cites def-weil-pbc-sheafification, lem-pc-sites-module-sheafification-interface (Mathlib leaf on any site, 03CY) with O=Q_n, and lem-pc-sites-sheafification-underlying-sets (the module B_n is the regular one). proof_deps is updated to match; nothing else changed. No duplicates in the DAG (Koszul, regular-scalar and quotient-tower nodes searched). Accepted the tool use of lem-pc-bounded-above-flat-kflat-site. Maintainer notes: that node's source says 06YS but the lemma is Tag 06YQ; the item's statement uses 'sheafification' with no bracketed definition node (advisory). No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RegularScalarQuotientExactRow",
+  "declaration": "CategoryTheory.RegularScalarQuotient.regularScalarQuotient_exactRow",
+  "declarations": [
+   "CategoryTheory.RegularScalarQuotient.regularScalarQuotient_exactRow"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RegularScalarQuotientExactRow.lean",
+  "statement": "theorem regularScalarQuotient_exactRow\n    (hregular : ∀ U : Cᵒᵖ, Function.Injective\n      (fun x : R.obj.obj U ↦ (@id (R.obj.obj U) (t.val U)) * x)) :\n    (∀ k : ℕ, ∃ ε : principalKoszul R t k ⟶ single (Q R t k),\n      CochainComplex.IsKFlatResolutionIndependentCoefficients ε ∧\n      koszulRight R t k ≫ ε.f 0 = ringMap (projection R t k) ≫ singleIn (Q R t k) ∧\n      Nonempty ((principalKoszul R t k).X (-1) ≅ unit R) ∧\n      Nonempty ((principalKoszul R t k).X 0 ≅ unit R) ∧\n      ∀ i : ℤ, i ≠ -1 → i ≠ 0 → IsZero ((principalKoszul R t k).X i)) ∧\n    ∀ (n m : ℕ) (_hm : m ≤ n),\n      ∃ red : B R t n ⟶ B R t m,\n      projection R t n ≫ red = projection R t m ∧\n      ∃ (a : (res red).obj (unit (B R t m)) ⟶ unit (B R t n))\n        (ε : P R t n m ⟶ single ((res red).obj (unit (B R t m))))\n        (e : tensor R t n m ≅ restrictedP R t n m),\n        (∀ (U : Cᵒᵖ) (x : R.obj.obj U),\n          a.val.app U ((projection R t m).hom.app U x) =\n            (projection R t n).hom.app U ((@id (R.obj.obj U) (t.val U)) ^ (n - m) * x)) ∧\n        rightIn (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1) ≫ ε.f 0 =\n          ringMap red ≫ singleIn ((res red).obj (unit (B R t m))) ∧\n        tensorIn R t n m (-1) (koszulLeft R t m) ≫ e.hom.f (-1) =\n          (res (projection R t n)).map\n            (leftIn (B R t n) (scalarImage R t (projection R t n))\n              (unit (B R t n)) (m + 1)) ∧\n        tensorIn R t n m 0 (koszulRight R t m) ≫ e.hom.f 0 =\n          (res (projection R t n)).map\n            (rightIn (B R t n) (scalarImage R t (projection R t n))\n              (unit (B R t n)) (m + 1)) ∧\n        Mono a ∧ Epi (ringMap red) ∧\n        (∃ ha : a ≫ mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1) = 0,\n          (ShortComplex.mk a (mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1)) ha).Exact) ∧\n        (∃ hb : mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1) ≫ ringMap red = 0,\n          (ShortComplex.mk (mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1)) (ringMap red) hb).Exact) ∧\n        imageSubobject a = imageSubobject\n          (mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (n - m)) ∧\n        (∀ h : n = m,\n          red = eqToHom (congrArg (B R t) h) ∧\n          (∀ (U : Cᵒᵖ) (x : (B R t m).obj.obj U),\n            a.val.app U x = (eqToHom (congrArg (B R t) h.symm)).hom.app U x) ∧\n          mul (B R t n) (scalarImage R t (projection R t n))\n            (unit (B R t n)) (m + 1) = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Natural level n denotes the positive exponent n+1. Reuses principalPowerRingQuotient and principalKoszul; all existential arrows are pinned by quotient-projection or coordinate equations. The two-term comparison is an actual normalized chain isomorphism, and the exact row is stated over B_n. W3: all original notation declarations moved unchanged to RegularScalarQuotientNotation and re-exported publicly; their lean attachment is def-sp-regular-scalar-quotient-notation. The parent statement is unchanged up to the unused binder name _hm."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-242b08cd8",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Fresh S2 delivery; node changes only lean + 3 landed-owner stmt_deps; lean.statement verbatim; 21 decls listed; only sorry is main theorem; docstrings carry source and blueprint id. Clause check: index k = exponent k+1; Koszul augmentation pinned in degree 0 (quasi-iso, K-flat, rank-one terms, zero elsewhere); red pinned by projections; chain iso tensor ≅ res P pinned on both summands, signs consistent; a B_n-linear with a([x])=[t^(n-m)x]; Mono/Exact/Exact/Epi over B_n; image subobject = t^(n-m)B_n; n=m identities and zero middle map. Inherited HasSheafify/HasSheafCompose binders hold for essentially small sites. Edge cases covered; no duplicate notions. No fix, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5fcaf",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T164638-L-1046783",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Notation/Presentation/ModuleRow/TensorComparison modules and 5 node files against clone sheaf-dag item module and node, change record and cited dep nodes (lem-pc-cone-short-exact-quasi-iso=Mathlib quasiIso_descShortComplex, lem-weil-pbc-independent-bounded-flat-kflat)"
+ }
+}

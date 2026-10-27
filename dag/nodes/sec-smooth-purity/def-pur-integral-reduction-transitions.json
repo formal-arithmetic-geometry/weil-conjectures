@@ -1,0 +1,109 @@
+{
+ "id": "def-pur-integral-reduction-transitions",
+ "kind": "definition",
+ "title": "Canonical integral reduction adjunction and quotient transitions",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $X$, a finite-field datum $D$ of characteristic $p$ with $\\ell\\ne p$, and the completed and finite coefficient sheaves $R_X=\\varprojlim_{n\\ge1}B_{n,X}$, $B_{n,X}=(\\mathcal O_E/\\varpi_E^n)_X$ and canonical quotient restrictions of [def-coef-normalized-dvr-tower]. Let $L_n:D(R_X)\\to D(B_{n,X})$ be integral derived reduction [def-weil-integral-derived-reduction], and $\\operatorname{Res}_n$ restriction along $R_X\\to B_{n,X}$. Define $\\mathfrak a_n:L_n\\dashv\\operatorname{Res}_n$ to be the actual tensor-unit-normalized derived adjunction of [lem-weil-derived-scalar-extension-restriction-adjunction], with unit $\\eta_n$. For every $m\\ge n\\ge1$ and $M\\in D(R_X)$ define the canonical semilinear reduction transition $t_{m,n}(M):L_mM\\to\\operatorname{Res}_{m,n}(L_nM)$ as the inverse Hom-adjunction image under $\\mathfrak a_m$ of the composite $M\\xrightarrow{\\eta_n}\\operatorname{Res}_n L_nM\\xrightarrow{e_{m,n}^{-1}}\\operatorname{Res}_m\\operatorname{Res}_{m,n}L_nM$, where $e_{m,n}:\\operatorname{Res}_m\\circ\\operatorname{Res}_{m,n}\\cong\\operatorname{Res}_n$ is the canonical restriction comparison induced by the completion projection equation. This defines the actual transitions for all quotient pairs, including equal indices; it asserts no finiteness or effectivity theorem.",
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-derived-reduction"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-normalized-dvr-effectivity.md",
+  "place": "Canonical coefficient comparisons and final paragraph: maps induced by tower projections and coefficient augmentations; the normalized transitions used in main-20261015 thm-pur-adic-reconstruction proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalizedDVRIntegralAdjunction|normalizedDVRReductionTransition",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No independent Mathlib definition of this coefficient-specific transition; reuse the existing project definitions by moving their ownership."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv\"",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.homEquiv', CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit, CategoryTheory.Adjunction.homEquiv_counit, CategoryTheory.Adjunction.homEquiv_symm_apply, CategoryTheory.Adjunction.homEquiv_id, CategoryTheory.Adjunction.homEquiv_symm_id",
+   "date": "2026-10-22",
+   "verdict": "No independent Mathlib definition of this coefficient-specific transition; reuse the existing project definitions by moving their ownership."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived coefficient reduction transition adjunct of the smaller quotient unit",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.derivedε, AdicCompletion.transitionMap_comp_reduceModIdeal, CategoryTheory.Adjunction.derivedη_fac_app_assoc, QuotientAddGroup.instCoeQuotientAddSubgroup",
+   "date": "2026-10-22",
+   "verdict": "No independent Mathlib definition of this coefficient-specific transition; reuse the existing project definitions by moving their ownership."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -l normalizedDVRIntegralAdjunction|normalizedDVRReductionTransition dag/nodes lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search reduction transition",
+   "results": "0 blueprint nodes match reduction transition. Exact names occur in the effectivity theorem node and consumers, not an owning definition node; no WeilConjectures hit. Sheaf.Paper.NormalizedDVREffectivity defines both. Move these definitions unchanged, rather than duplicate them.",
+   "date": "2026-10-22",
+   "verdict": "No definition node owns these maps; the maintainer expressly requires a definition owner."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-adic-source-finiteness-reductions",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Proof, compatibility with transition maps of the normalized system; integral quotient normalization used by source reductions.",
+   "via": [
+    "lem-pur-adic-source-finiteness-reductions"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralReductionTransitions",
+  "declaration": "WeilConjectures.integralQuotientReductionTransition",
+  "declarations": [
+   "WeilConjectures.integralQuotientReductionTransition"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralReductionTransitions.lean",
+  "statement": "abbrev integralQuotientReductionTransition (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) {m n : ℕ} (h : n ≤ m) (M : completedIntegralDerivedCategory l E X D hl) : (scalarReductionDerivedExtension l E X m).obj M ⟶ (normalizedDVRRes l E X h).obj ((scalarReductionDerivedExtension l E X n).obj M)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reviewer fix (landing): the two constructions stay in the published, stage-3-proved module Sheaf.Paper.NormalizedDVREffectivity (unchanged live text), because the landing index refuses an intra-delivery move ('declares names ... also in'). This module publicly re-exports them and adds one transparent abbrev alias of normalizedDVRReductionTransition; this node owns both names listed here.",
+  "fixed_by": "NT-stage2-cc-80e6e565c"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80e6e565c",
+  "group": "NP",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80e6e565c",
+  "group": "NP",
+  "result": "fix",
+  "note": "80e6e565 is byte-identical to the PASSed 30374169 except blueprint-index. That head's landing was refused by the nt_parallel2 intra-delivery-move false positive ('IntegralReductionTransitions declares names ... also in NormalizedDVREffectivity'); the tool is unchanged since Oct 19, so this head would be refused again. Substance re-checked: all six conjuncts match the node (U in D^b_ctf; r,s,a,b quantified before n with -2d shifts; IsIso of the actual purAdicSourceReduction; direct-quotient square for all n<=m; unit/composition cocycles), no extra hypotheses or arbitrary maps, universes kept, statement verbatim (check_lean_text []). New def node matches the two live definitions. FIX in the landed Q14 735d / Q97 c6be shape: fixes/NormalizedDVREffectivity.lean = live text byte-identical; fixes/IntegralReductionTransitions.lean = public re-export + abbrev integralQuotientReductionTransition := normalizedDVRReductionTransition (docstrings with source/blueprint); fixes/def-pur-integral-reduction-transitions.json lean-only (abbrev primary, 2 re-exported names, existing:false, note; check_lean_text []); report + reviewer-fix section. Item module/record/stmt_deps unchanged. nt_compile --json rc 0: def 1.9 s, item 14.4 s clean. Maintainer: land with --revert-nodes lem-coef-normalized-dvr-effectivity (delivered record describes the move); add def-pur-integral-reduction-transitions to that node's stmt_deps; fix the nt_parallel2 index bug."
+ }
+}

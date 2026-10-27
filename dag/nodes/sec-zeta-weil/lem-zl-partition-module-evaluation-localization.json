@@ -1,0 +1,280 @@
+{
+ "id": "lem-zl-partition-module-evaluation-localization",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Exact module evaluation and termwise derived localization at a partition object",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with pullbacks, a strict initial object $\\varnothing$, and disjoint finite coproducts stable under pullback. Assume the component inclusions of every finite coproduct are a covering, including the empty covering of $\\varnothing$. Fix an object $W$ such that every covering of $W$ refines a finite coproduct decomposition of $W$. Let $\\mathcal O$ be a sheaf of commutative rings, $A=\\mathcal O(W)$, and $E(M)=M(W)$ on module sheaves [def-weil-sheaf-of-modules-category]. For every small diagram $(M_i)$, its sectionwise module colimit presheaf $P(U)=\\operatorname{colim}_i M_i(U)$ has $P(\\varnothing)=0$ and the restriction map $P(\\coprod_a U_a)\\to\\prod_aP(U_a)$ is an isomorphism. Its module sheafification [def-weil-presheaf-modules-sheafification] has underlying sets the set sheafification, and $P(W)\\to P^\\#(W)$ is an $A$-linear isomorphism. Consequently $E$ preserves all small colimits and is exact (kernels are sectionwise and cokernels are sheafified sectionwise cokernels). For ordinary unbounded derived categories [def-weil-abstract-derived-category], termwise $E$ preserves cohomology and all quasi-isomorphisms, and its localization $D(E)$ is canonically the total right derived functor $RE$ [def-sfb-right-derived-functor], with the canonical right-derived unit. Explicitly, for every K-injective resolution $K\\to I$ [def-pur-kinjective-complex], the map $E(K)\\to E(I)$ is a quasi-isomorphism identifying the termwise model with $RE(K)$. The resulting unit comparison $A[0]\\to RE(\\mathcal O[0])$ is the identity on $A[0]$. These assertions allow an empty indexing category, $W=\\varnothing$, and the zero coefficient ring.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), exact coherent evaluation; Stacks Tags 0F63 (proetale.tex, lemma-presheaf-value-weakly-contractible), 03DA (sites-modules.tex, lemma-abelian), 03DB (lemma-limits-colimits), 079P (injectives.tex, theorem-K-injective-embedding-grothendieck); arbitrary ring-sheaf extension of the argument"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "For a finite colimiting cofan, pull back the decomposition along one component. The stable coproduct cocone has initial off-diagonal components by disjointness. Define a retraction of the diagonal pullback projection by the other projection on the diagonal and the unique initial maps off the diagonal. The diagonal lift of the identity shows this retraction is the identity, so the two diagonal pullback projections agree and the component inclusion is monic. The underlying set presheaf of each module sheaf satisfies the empty-cover and finite-component-cover sheaf conditions. Mathlib Presieve.preservesProduct_of_isSheafFor therefore shows that each underlying abelian presheaf preserves finite products, including the empty product; forgetful reflection transfers preservation from sets to abelian groups.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definitions of module sheaves; finite disjoint covering sheaf condition"
+   }
+  },
+  {
+   "text": "The underlying abelian presheaf of the sectionwise module colimit is a colimit of the underlying abelian presheaves: PresheafOfModules.toPresheaf preserves colimits. The pointwise colimit is naturally the flipped diagram followed by colim. The flipped diagram preserves finite products because every evaluation does. In any preadditive category, colim preserves finite products (Mathlib CategoryTheory.instPreservesFiniteProductsFunctorColimOfPreadditive, via finite biproducts). Thus the colimit abelian presheaf preserves finite products. Forget to sets and apply preservation to the opposite of any colimiting cofan to obtain the stated bijection, and to the initial object to obtain its singleton value. Empty diagrams, empty families and zero rings are included in these categorical arguments.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-limits-colimits-abelian-presheaves, sectionwise colimit presentation; elementary finite direct-sum calculation"
+   }
+  },
+  {
+   "text": "By [def-weil-presheaf-modules-sheafification], the underlying abelian sheaf of module sheafification is the abelian sheafification, with its canonical linear unit. By [lem-pc-sites-sheafification-underlying-sets], forgetting this abelian sheafification to sets gives the set sheafification, including the unit map. Steps 1-2 show that the underlying set presheaf of $P$ has singleton value on $\\varnothing$ and sends finite coproducts to products. Apply [lem-zl-partition-refinement-sheafification] at $W$; its strictness, pullback, disjointness, covering and finite-refinement assumptions are exactly our site assumptions. It gives a bijection $P(W)\\to P^\\#(W)$. This map is $A$-linear by the module-sheafification definition; a bijective linear map has a linear inverse, so it is an $A$-module isomorphism, natural in the diagram.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-zl-partition-refinement-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0F63, lemma-presheaf-value-weakly-contractible; module sheafification as in sites-modules Tag 03CY"
+   }
+  },
+  {
+   "text": "The small-diagram colimit formula in [lem-weil-pbc-module-sheaves-colimits-forgetful] identifies $\\operatorname{colim}_i M_i$ with $P^\\#$. Consequently step 3 identifies the canonical map $\\operatorname{colim}_i E(M_i)\\to E(\\operatorname{colim}_iM_i)$ with that same isomorphism. Thus $E$ preserves all small colimits, including cokernels and the initial zero object. By [lem-weil-pbc-module-sheaves-limits-sectionwise], evaluation also preserves kernels. Evaluation is additive since addition of maps is sectionwise. In an abelian category, exactness means that image equals kernel; since image is the kernel of the cokernel, preservation of kernels and cokernels gives exactness of $E$. These statements also give the asserted sectionwise-kernel and sheafified-sectionwise-cokernel formulas.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA and 03DB, lemma-abelian and lemma-limits-colimits"
+   }
+  },
+  {
+   "text": "For a complex $K$, put $Z^n=\\ker d^n$ and $B^n=\\operatorname{im}d^{n-1}$. Exactness identifies $E(Z^n)$ with $\\ker E(d^n)$ and $E(B^n)$ with $\\operatorname{im}E(d^{n-1})$; applying $E$ to the quotient $Z^n/B^n$ gives $E(H^nK)\\cong H^n(EK)$. This identification is natural for chain maps, since all maps are induced by the kernel inclusions and quotient projections. Thus every quasi-isomorphism remains one. Apply [lem-weil-pbc-exact-functor-derived-factorization] to the additive exact functor $E$: it supplies its termwise localization $D(E)$ and the natural factorization $\\varphi_K:D(E)(QK)\\xrightarrow{\\sim}Q(EK)$ in the ordinary unbounded derived categories. No boundedness or preservation of injectives by $E$ is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; exact-functor factorization"
+   }
+  },
+  {
+   "text": "Apply lem-weil-pbc-exact-functor-derived-functor to E and its canonical Mathlib factorization mapDerivedCategoryFactors. Its right-derived clause supplies the specified canonical unit. Mathlib rightDerivedUnique and rightDerived_ext give existence and uniqueness of the unit-compatible comparison with any right-derived pair. For any quasi-isomorphism s:K→I, exactness implies E(s) is a quasi-isomorphism. Naturality of the arbitrary unit eta writes eta_K followed by RE(Qs) as Q(E(s)) followed by eta_I. Substitute unit compatibility at I and cancel the comparison isomorphism and the canonical factorization isomorphism; the resulting composite is precisely Q(E(s)). This argument applies in particular to every K-injective resolution and requires no existence theorem for resolutions.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; universal right-derived property and naturality of its canonical unit"
+   }
+  },
+  {
+   "text": "Finally $E(\\mathcal O[0])=\\mathcal O(W)[0]=A[0]$ termwise. The identification $RE\\cong D(E)$ just obtained is compatible with the unit by [def-sfb-right-derived-functor]; therefore the composite $A[0]=Q(E\\mathcal O[0])\\xrightarrow{\\eta_{\\mathcal O[0]}}RE(\\mathcal O[0])\\cong D(E)(\\mathcal O[0])\\xrightarrow{\\varphi}A[0]$ is the identity. Equivalently, in a K-injective model it is $Q(E(s))$ followed by its inverse. If $W=\\varnothing$, the empty covering gives $A=0$ and every $E(M)=0$; all the displayed identities hold in the zero module category. The same arguments allow the zero coefficient ring and an empty indexing category throughout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, canonical unit of the termwise exact derived functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-zl-partition-refinement-sheafification",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "HRS Lemma 4.1(1) and Stacks Tags 0F63, 03DA, 03DB, 015F; S2 uses Mathlib finite-product preservation by colim in preadditive categories instead of a quotient presentation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a site with disjoint finite coproducts whose terminal covers refine to finite partitions, evaluation of sheaves of modules at the terminal object is exact and preserves all small colimits",
+   "results": "8 hits; Condensed.instAB5CondensedMod, Condensed.hasExactColimitsOfShape, Condensed.instAB4StarCondensedMod, Condensed.instAB4CondensedMod, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.ab5ofSize, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.instPreservesFiniteColimitsSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreadditiveOfHasFiniteColimits",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf colimit preservation and AB axioms do not supply evaluation after sheafification or its right-derived unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, CategoryTheory.Limits.PreservesColimits",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf colimit preservation and AB axioms do not supply evaluation after sheafification or its right-derived unit."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Pp]reservesColimits|[Pp]reservesColimits.*evaluation",
+   "results": "5 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf colimit preservation and AB axioms do not supply evaluation after sheafification or its right-derived unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at a partition-refinable object of a ringed site preserves colimits of module sheaves",
+   "results": "8 hits; PresheafOfModules.hasColimit, PresheafOfModules.colimitPresheafOfModules, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, PresheafOfModules.evaluation_preservesColimit, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat, PresheafOfModules.evaluation_preservesColimitsOfSize, PresheafOfModules.Finite.evaluation_preservesFiniteColimits, PresheafOfModules.evaluation_preservesColimitsOfShape",
+   "date": "2026-10-22",
+   "verdict": "No match: presheaf colimit preservation and AB axioms do not supply evaluation after sheafification or its right-derived unit."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Pp]reservesColimit|[Pp]reservesColimit.*evaluation",
+   "results": "6 hits; Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: the source hits give presheaf colimits or existence of sheaf colimits, not their evaluation at a partition-refinable object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact global sections at a projective object of a ringed site are their own unbounded right derived functor",
+   "results": "8 hits; CategoryTheory.Sheaf.Γ, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, AlgebraicGeometry.PresheafedSpace.Γ, CategoryTheory.instIsRightAdjointSheafΓ, CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, AlgebraicGeometry.LocallyRingedSpace.Γ, AlgebraicGeometry.SheafedSpace.Γ",
+   "date": "2026-10-22",
+   "verdict": "No match: global sections and projective-object derived-zero declarations do not state exact cocontinuous evaluation on this ringed site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of module sheaves at an object whose covers admit finite disjoint partition refinements is exact and preserves colimits, and its termwise derived functor equals right derived sections",
+   "results": "8 hits; CategoryTheory.Sheaf.instIsGrothendieckAbelian, SheafOfModules.instAbelian, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.hasExactColimitsOfShape, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf",
+   "date": "2026-10-22",
+   "verdict": "No match: Grothendieck or exact-colimit axioms, projective finite-colimit coyoneda, and coherent sheaf criteria do not give the full partition-evaluation statement in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimits|preservesColimit|exact",
+   "results": "22 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: the source hits give presheaf colimits or existence of sheaf colimits, not their evaluation at a partition-refinable object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of sheaves of modules on a coherent projective object preserve arbitrary colimits and are an exact functor",
+   "results": "8 hits; CategoryTheory.preservesFiniteColimits_preadditiveCoyonedaObj_of_projective, Condensed.hasExactColimitsOfShape, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp, Condensed.instAB4StarCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, Condensed.instAB4CondensedMod, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp",
+   "date": "2026-10-22",
+   "verdict": "No match: Grothendieck or exact-colimit axioms, projective finite-colimit coyoneda, and coherent sheaf criteria do not give the full partition-evaluation statement in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-contractible-derived-sections-tensor",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Lemma 4.1(1): tensor compatibility and exact termwise evaluation used to compare dualizable objects, before the perfect/lisse equivalence. Re-split of lem-zl-contractible-derived-sections-tensor: old steps 2-3.",
+   "via": [
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-partition-module-evaluation-localization",
+  "worker": "stage1",
+  "summary": "Q39 supplies the proof from sectionwise finite-component gluing and module colimit presentations, existing finite-partition sheafification, and exact-functor derived localization. All conclusions and statement dependencies are retained. Existing nodes suffice: no new node, no Lean edit or compiler. The right-derived unit is checked on every K-injective resolution and on the coefficient complex.",
+  "blueprint": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Lemma 4.1(1): tensor compatibility and exact termwise evaluation used to compare dualizable objects, before the perfect/lisse equivalence. Re-split of lem-zl-contractible-derived-sections-tensor: old steps 2-3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "General module sheaf colimit formula for an arbitrary small ringed site, used as a categorical tool in the partition evaluation argument."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General unbounded K-injective existence for module sheaves on small ringed sites; no replacement of a smooth-proper-purity unit step."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "General localization theorem for exact functors, including the right-derived unit, applied after exactness of evaluation has been proved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-5bf4a94d9",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-5bf4a94d9 (reviewer sub-agent of L); spot-checked: PASS, no changes. Read the item and its 7 steps in full, every cited node's statement, Stacks 0F63 (proetale.tex lemma-presheaf-value-weakly-contractible) and HRS 2305.18131 Lemma 4.1(1) on p. 8. There are no new nodes and no SGA is cited. Step 1: the sheaf condition for a finite disjoint covering gives M(∅)=0 and M(U)=∏M(U_a), and the identities r_a j_b=δ_ab and Σ j_a r_a=1 hold. Step 2: the sectionwise module colimit has the abelian colimit as underlying group, and finite biproducts commute with it. Step 3: every hypothesis of lem-zl-partition-refinement-sheafification (same unit) matches the item's, and lem-pc-sites-sheafification-underlying-sets gives the underlying-set sheafification. Step 4: colimits-forgetful(2) gives colim=P^#, and limits-sectionwise gives kernels, so E is exact. Step 5: exact-functor-derived-factorization (Mathlib leaf) applies. Step 6: exact-functor-derived-functor's Kan-extension property is the universal property of def-sfb-right-derived-functor, and prop-pur-kinjective-resolutions-exist gives that node's resolution hypothesis. The naturality formula eta_K=RE(Qs)^{-1} eta_I Q(Es) checks, and the model comparison composes to Q(Es). Step 7: the unit composite is φφ^{-1}=id. Edge cases checked: empty diagram, W=∅ (A=0), zero ring, one and two components. The parent lem-zl-contractible-derived-sections-tensor step 2 uses exactly this statement, and the statement is not weakened. det-pe-wc-sections-exact and det-pe-wc-sections-derived cover only affine w-contractible objects of the pro-étale site. The parent also needs the profinite site, so this item generalizes them and does not duplicate them. Accepted tool uses: module-sheaves-colimits-forgetful, exact-functor-derived-functor, kinjective-resolutions-exist. Maintainer note: the det-pe nodes could later cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PartitionModuleEvaluation",
+  "declaration": "CategoryTheory.partitionModuleEvaluation_derived",
+  "declarations": [
+   "CategoryTheory.partitionModuleRings",
+   "CategoryTheory.partitionModuleEvaluation",
+   "CategoryTheory.partitionModuleUnitComplex",
+   "CategoryTheory.partitionModuleColimit_sections",
+   "CategoryTheory.partitionModuleEvaluation_preservesColimits",
+   "CategoryTheory.partitionModuleEvaluation_additive",
+   "CategoryTheory.partitionModuleEvaluation_preservesFiniteColimits",
+   "CategoryTheory.partitionModuleEvaluation_homology",
+   "CategoryTheory.partitionModuleUnitEvaluationIso",
+   "CategoryTheory.partitionModuleEvaluation_derived",
+   "CategoryTheory.partitionModuleEvaluation_resolution",
+   "CategoryTheory.partitionModuleEvaluation_unit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PartitionModuleEvaluation.lean",
+  "statement": "theorem partitionModuleEvaluation_derived : ((partitionModuleEvaluation J O W).mapDerivedCategory).IsRightDerivedFunctor (partitionModuleEvaluation J O W).mapDerivedCategoryFactors.inv (HomologicalComplex.quasiIso (ringedSiteModules (partitionModuleRings J O)) (ComplexShape.up ℤ)) ∧ ∀ (RE : DerivedCategory (ringedSiteModules (partitionModuleRings J O)) ⥤ DerivedCategory (ModuleCat.{max u v w} ((partitionModuleRings J O).obj.obj (op W)))) (η : (partitionModuleEvaluation J O W).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RE), RE.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ringedSiteModules (partitionModuleRings J O)) (ComplexShape.up ℤ)) → ∃! e : (partitionModuleEvaluation J O W).mapDerivedCategory ≅ RE, (partitionModuleEvaluation J O W).mapDerivedCategoryFactors.inv ≫ Functor.whiskerLeft DerivedCategory.Q e.hom = η",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "All clauses are stated in this module: sectionwise colimit properties, underlying set sheafification with its unit, invertible linear unit at W, cocontinuity, additivity, exactness, preservation of homology/quasi-isomorphisms, universal unit-compatible derived comparison, the resolution equation, and normalization on A[0]. Fact binders package precisely the recorded partition-site assumptions; they add no mathematical assumptions. The helper abbreviations are canonical Mathlib constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11f23a86a",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_deps, the source place, the module and the report (Worker report + Second reading by Q04 present). Site hypotheses (hdisjoint/hstable/hcover/hrefine, strict initial, pullbacks, finite coproducts) are verbatim those of bijective_toSheafify_of_partition_refinement; arbitrary CommRingCat sheaf; universes u,v,w,d1,d2 independent; HasSheafify/WEqualsLocallyBijective are what the recorded PresheafOfModules.sheafification needs. All clauses rendered: Subsingleton P(empty), bijective partition restriction, set-sheafification iso with unit equation, IsIso of the W-component of the linear unit, PreservesColimitsOfSize, Additive, PreservesFiniteColimits (+ Mathlib evaluationPreservesFiniteLimits), PreservesHomology/QuasiIso, IsRightDerivedFunctor of mapDerivedCategory with exists-unique unit-compatible iso to every right-derived pair, resolution equation (checked by hand), unit identity on A[0] via the real single-functor comparison. Edge cases (empty I, n=0, W initial, zero ring) allowed. The chosen pair of def-sfb-right-derived-functor is not named, but def-sfb-right-derived-exact (rightDerivedFunctorOfQuasiIsoResolutionsIsoMapDerivedCategory + _hom_fac) bridges it to mapDerivedCategory for exact additive F, and the parent consumes mapDerivedCategory: not H4. A FIX adding an explicit bridge elaborated but was dropped (redundant, +10 s). lean.statement verbatim, 12 declarations present, only the lean field changed, docstrings/proof steps/line lengths OK, all sorry, no hollow defs. Compile: full module timed out at 60 s under load ~65 (50 s CPU); prefixes through _resolution clean in 35 s. Maintainer: land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-4c052",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T101321-L-3682330",
+  "kind": "interface",
+  "note": "independent cc review: delivered PartitionModuleEvaluation.lean vs clones/live and node lem-zl-partition-module-evaluation-localization; abbrev→def + explicit return type vs change record (no users); #print axioms on scratch copy: no sorryAx"
+ }
+}

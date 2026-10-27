@@ -1,0 +1,308 @@
+{
+ "id": "lem-sfb-finite-kernel-equal-dimension-isogeny",
+ "kind": "statement",
+ "title": "The finite-kernel criterion for equal-dimensional abelian varieties",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety], and let $f:A\\to B$ be a homomorphism of $k$-group schemes [def-sc-group-scheme]. Suppose $\\dim A=\\dim B$ [def-pc-dimension] and the scheme-theoretic kernel $\\ker f=A\\times_{B,f,e_B}\\operatorname{Spec}k$ is finite over $k$, in the sense of [def-sc-group-scheme]. Then $f$ is surjective and finite locally free [def-pc-finite-locally-free].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Proposition 7.1(c) implies (d), printed p.32; finite local freeness is the locally free conclusion in its proof. Equivalently Stacks Project, Morphisms, Tag 02KB, lemma-finite-flat, literature/stacks-project/morphisms.tex, identifies finite flat morphisms over a locally Noetherian target with finite locally free morphisms."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-pc-dimension",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-abelian-variety] and [def-weil-proper-morphism], $A$ is proper and $B$ is separated, both of finite type over $k$. Apply [pqf-lem-image-proper] over $\\operatorname{Spec}k$: the scheme-theoretic image $i:Z\\hookrightarrow B$ is closed and proper over $k$, and $f=i\\circ g$ with $g:A\\to Z$ proper and surjective. By [lem-sc-abelian-variety-characterization], $B$ is irreducible. These schemes are nonempty, since the identity of $A$ maps into $Z$.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism",
+    "pqf-lem-image-proper",
+    "lem-sc-abelian-variety-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, proof, printed p.32"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-kernel-group-fibres] to $f$. Every scheme fibre $A_b$ has dimension at most zero. The same holds for every fibre of $g$: a closed immersion identifies the residue fields at $z$ and $i(z)$, and $A\\times_Z\\operatorname{Spec}\\kappa(z)=A\\times_B\\operatorname{Spec}\\kappa(i(z))$ by the fibre-product universal property. Thus all fibres of $g$ have dimension at most zero.",
+   "uses": [
+    "lem-sfb-finite-kernel-group-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, proof, printed p.32"
+   }
+  },
+  {
+   "text": "Use [lem-pc-scheme-dimension-local-rings] to read the given dimensions as topological Krull dimensions. They are finite by [lem-kun-dimension-finite-type]. Since $Z$ is a nonempty closed subspace of $B$, inclusion of chains gives $0\\leq\\dim Z\\leq\\dim B<\\infty$. Apply [lem-zl-finite-type-fibre-image-dimension-bounds] to $g:A\\to Z$, with $d=\\dim Z$ and fibre bound $n=0$, obtaining $\\dim A\\leq\\dim Z$. If $Z\\neq B$ as a closed subset, append the irreducible closed subset $B$ to every strict chain of nonempty irreducible closed subsets of $Z$. Each remains closed in $B$, so $\\dim Z+1\\leq\\dim B$. This contradicts $\\dim A=\\dim B$ and $\\dim A\\leq\\dim Z$. Hence $i(Z)=B$ topologically, and surjectivity of $g$ proves surjectivity of $f$. No equality of closed subschemes is needed.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-kun-dimension-finite-type",
+    "lem-zl-finite-type-fibre-image-dimension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, proof, printed p.32"
+   }
+  },
+  {
+   "text": "The surjectivity just proved and the given finite scheme-theoretic kernel make $f$ an isogeny by [def-sc-isogeny]. Apply [lem-sc-isogeny-degree]: $f$ is finite and flat, and $f_*\\mathcal O_A$ is locally free of rank equal to the order of the kernel.",
+   "uses": [
+    "def-sc-isogeny",
+    "lem-sc-isogeny-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I Proposition 7.1, proof, printed p.32"
+   }
+  },
+  {
+   "text": "The scheme $B$ is locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is of finite type over the spectrum of the field $k$. The finite morphism $f$ is locally of finite type: finite module generators of an affine section algebra also generate it as an algebra. Therefore [pqf-lem-lft-fp-locnoeth] makes $f$ locally of finite presentation. Together with finite and flat from Step 4, this is exactly finite local freeness in [def-pc-finite-locally-free].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, lemma-finite-flat, equivalence (1) and (2), and Tag 01TX, lemma-noetherian-finite-type-finite-presentation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-sc-abelian-variety",
+  "def-sc-isogeny",
+  "def-weil-proper-morphism",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-isogeny-degree",
+  "lem-sfb-finite-kernel-group-fibres",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "pqf-lem-image-proper",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I Proposition 7.1, proof, printed p.32"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between abelian varieties with equal dimensions and finite scheme theoretic kernel is finite flat and surjective",
+   "results": "8 hits; AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.Flat.isIso_of_surjective_of_mono, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.IsFinite.toIsAffineHom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism between abelian varieties of the same dimension with finite kernel is a finite locally free surjective morphism",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.recOn, AlgHom.Finite.of_surjective, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgHom.Finite, AddGroup.fintypeOfKerOfCodom, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.toIsAffineHom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|IsIsogeny|AbelianVariety|finiteKernel",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*dimension|dimension.*kernel|finite.*kernel",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of connected proper smooth group schemes with finite kernel and equal dimension is an isogeny",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instOfIsIsoScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instRespectsIsoSchemeSurjective, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.FormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Flat\", \"Surjective\"",
+   "results": "12 hits; AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite-kernel homomorphism of equal-dimensional abelian varieties is surjective and finite locally free",
+   "results": "8 hits; AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgHom.Finite.of_surjective, ax_grothendieck_of_locally_finite, Algebra.FinitePresentation.ker_fG_of_surjective, AlgHom.FinitePresentation.of_surjective, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime_or_zero, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: generic finite/flat morphism results do not deduce surjectivity or finiteness from equal dimensions and finite group-scheme kernel"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|IsIsogeny|AbelianVariety",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism or abstract group facts do not establish the finite-kernel equal-dimension criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite kernel homomorphism of equal dimensional abelian varieties is a finite flat surjection",
+   "results": "8 hits: AlgHom.Finite, Group.fintypeOfKerOfCodom, AddGroup.fintypeOfKerOfCodom, Group.fintypeOfKerEqRange, Subgroup.finiteIndex_ker, AlgebraicGeometry.Scheme.Hom.ker, AddGroup.fintypeOfKerEqRange, AddMonoidHom.finite_iff_finite_ker_range; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism or abstract group facts do not establish the finite-kernel equal-dimension criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism or abstract group facts do not establish the finite-kernel equal-dimension criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between abelian varieties of equal dimension with finite kernel is surjective and finite locally free",
+   "results": "8 hits: AlgebraicGeometry.IsFinite, AlgHom.Finite.of_surjective, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, RingHom.surjective_of_epi_of_finite, AlgHom.FiniteType.of_surjective, RingHom.Finite.of_surjective, ax_grothendieck_of_locally_finite; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism or abstract group facts do not establish the finite-kernel equal-dimension criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Surjective\", \"Flat\"",
+   "results": "12 hits: AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation, AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'; ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic morphism or abstract group facts do not establish the finite-kernel equal-dimension criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equal-dimension-abelian-retract",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: A retract of equal-dimensional abelian varieties is an isomorphism. Milne I Proposition 7.1(c) implies (d), with finite local freeness over the Noetherian target.",
+   "via": [
+    "lem-sfb-equal-dimension-abelian-retract",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-kernel-equal-dimension-isogeny",
+  "worker": "stage1",
+  "summary": "Followed Milne I Proposition 7.1: proper image, finite fibres from the kernel, fibre/image dimension bound, a written chain argument for surjectivity, then the existing isogeny-degree theorem and Noetherian local finite presentation. One statement-only group-scheme fibre lemma; statement unchanged.",
+  "blueprint": "The existing from.place identifies the alteration/curve-level chain supporting det-thm-sf-ctf-stability-direct-images (3). This split discharges its equal-dimensional abelian-retract prerequisite by Milne I Proposition 7.1, not a replacement of the unit route. The latest direct-images proof (3) has reorganized the high-level preservation step, but this supporting lemma is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   },
+   {
+    "node": "lem-sc-isogeny-degree",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   },
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   },
+   {
+    "node": "pqf-lem-image-proper",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic supporting result used for the Milne I Proposition 7.1 argument (as specified in its proof step); the constructible-functor unit has no competing abelian-variety or scheme-dimension theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-isogeny-degree",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "pqf-lem-image-proper",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-df03a1bdb",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-df03a1bdb (reviewer sub-agent of L); spot-checked: Read Milne AV I Prop 7.1 and its proof (printed p.32): the item statement is exactly (c)=>(d) with the scheme kernel, and is unchanged. Step 1: A is proper and B is separated of finite type, so pqf-lem-image-proper applies and gives a closed proper image Z with A->Z proper surjective; B is irreducible by lem-sc-abelian-variety-characterization. Step 2: the new node gives finite fibres; Z->B is a closed immersion (mono) with equal residue fields, so the fibres of g equal those of f. Step 3: stalk dimension equals topological dimension (lem-pc-scheme-dimension-local-rings), which is finite (kundim is the topological one); lem-zl fibre/image bound with d=dim Z and n=0 gives dim A<=dim Z; appending B to a maximal chain gives dim Z<dim B if Z≠B, a contradiction, so f is surjective. Step 4: def-sc-isogeny and the lem-sc-isogeny-degree statement give finite flat. Step 5: B is Noetherian, finite implies locally of finite type, which gives locally finite presentation by pqf-lem-lft-fp-locnoeth; that is def-pc-finite-locally-free verbatim. New node lem-sfb-finite-kernel-group-fibres: self-contained, statement only, true (translate by an Omega-point after base change to the closure of the residue field, then fpqc descent of finiteness; empty fibres allowed). Tested on the subvariety inclusion, Frobenius/[p] with non-reduced kernel, the zero map (excluded) and non-connected G. It is not a clause of the item and not a duplicate (rg -L over dag/nodes and blueprint main-20261015; the argument appears only inside the lem-sc-isogeny-degree proof, under surjectivity). No cycle, no SGA, not a re-split. Accepted the 8 cross-unit generic tool_uses listed in split_report. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.FiniteKernelEqualDimension",
+  "declaration": "AlgebraicGeometry.surjective_and_isFiniteLocallyFree_of_finite_ker_of_dim_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/FiniteKernelEqualDimension.lean",
+  "statement": "theorem surjective_and_isFiniteLocallyFree_of_finite_ker_of_dim_eq {k : Type u} [Field k] [IsAlgClosed k] {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (f : A ⟶ B) [IsMonHom f] (hdim : A.left.dim = B.left.dim) [IsFinite (GrpObj.ker f).hom] : Surjective f.left ∧ f.left.IsFiniteLocallyFree",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6674bfd4",
+  "group": "NP",
+  "result": "pass",
+  "note": "Checked lem-sfb-finite-kernel-equal-dimension-isogeny against Milne I 7.1(c)=>(d) and Stacks 02KB. Every hypothesis matches a recorded dependency declaration: alg. closed field (no char restriction), IsAbelianVariety (proper/smooth/connected), IsMonHom f, Scheme.dim, IsFinite (GrpObj.ker f).hom with ker = pullback f eta_B, the scheme fibre product. Conclusion Surjective f.left ∧ f.left.IsFiniteLocallyFree is exactly def-pc-finite-locally-free; no extra assumptions. Edge cases (dim 0, char p non-reduced kernels, nonemptiness, single universe u) are fine. No existing criterion: upstream IsIsogeny assumes surjectivity; no name collision. Node copy differs from live only in lean; statement verbatim; sorry-only proof; docstrings carry source, blueprint id and 5 proof steps; imports exist; report sections present. No recompile per instructions; worker reports clean compiles. No findings."
+ }
+}

@@ -1,0 +1,257 @@
+{
+ "id": "lem-trf-lci-fibre-tensor-transition",
+ "kind": "statement",
+ "title": "Tensor transition and complete-intersection fibre comparison after scalar extension",
+ "statement": "Let $R_0\\to R_k\\xrightarrow{\\alpha}R_j$ be homomorphisms of commutative rings, let $B_0,C_0$ be commutative $R_0$-algebras, and let $\\varphi_0:B_0\\to C_0$ be an $R_0$-algebra homomorphism. For $t=k,j$ put $B_t=R_t\\otimes_{R_0}B_0$, $C_t=R_t\\otimes_{R_0}C_0$ and $\\varphi_t=1\\otimes\\varphi_0:B_t\\to C_t$; use the maps induced by $\\alpha$ for the transition from $k$ to $j$. Assume $\\varphi_k$ is flat [def-weil-pbc-flat-ring-map], of finite presentation [def-weil-pbc-finitely-presented-algebra], and that for every prime $\\mathfrak p\\subset B_k$ the fibre $C_k\\otimes_{B_k}\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] is a local complete intersection over $\\kappa(\\mathfrak p)$ [def-weil-pbc-complete-intersection-over-field]. Then the following hold.\nThere is a $B_j$-algebra isomorphism\n$$\\theta:B_j\\otimes_{B_k}C_k\\xrightarrow{\\sim}C_j,\\qquad (r\\otimes b)\\otimes(s\\otimes c)\\longmapsto r\\alpha(s)\\otimes\\varphi_0(b)c,$$\nwhose inverse sends $r\\otimes c$ to $(r\\otimes1)\\otimes(1\\otimes c)$. Under $\\theta$, $\\varphi_j$ is the map $x\\mapsto x\\otimes1$. For every prime $\\mathfrak q\\subset B_j$, its inverse image $\\mathfrak p\\subset B_k$ is prime and the induced field homomorphism $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ gives a $\\kappa(\\mathfrak q)$-algebra isomorphism\n$$C_j\\otimes_{B_j}\\kappa(\\mathfrak q)\\ \\cong\\ (C_k\\otimes_{B_k}\\kappa(\\mathfrak p))\\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q),$$\ncompatible with the canonical maps from $C_k$ and $\\kappa(\\mathfrak q)$. The algebra $C_k\\otimes_{B_k}\\kappa(\\mathfrak p)$ is of finite type over $\\kappa(\\mathfrak p)$ [def-weil-pbc-finite-type-algebra]. The map $\\varphi_j$ is flat and of finite presentation, and for every prime $\\mathfrak q\\subset B_j$ its fibre $C_j\\otimes_{B_j}\\kappa(\\mathfrak q)$ is a local complete intersection over $\\kappa(\\mathfrak q)$. No flatness or finite-presentation assumption on $\\alpha$ or on $R_0\\to B_0$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SN (lemma-base-change-syntomic), proof, with definition-lci expanded; tensor and residue-field comparison as displayed in the preceding lemma-syntomic-descends. The two iterated-base-change maps are stated explicitly."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\beta:B_k\\to B_j$ and $\\gamma:C_k\\to C_j$ for the transition maps. The two maps $\\varphi_j:B_j\\to C_j$ and $\\gamma:C_k\\to C_j$ agree on $B_k$: on $s\\otimes b$ both give $\\alpha(s)\\otimes\\varphi_0(b)$. The tensor pushout property therefore gives $\\theta(x\\otimes y)=\\varphi_j(x)\\gamma(y)$, hence the displayed formula. The compatible maps $R_j\\to B_j\\otimes_{B_k}C_k$, $r\\mapsto(r\\otimes1)\\otimes1$, and $C_0\\to B_j\\otimes_{B_k}C_k$, $c\\mapsto1\\otimes(1\\otimes c)$, give a ring map $\\eta:C_j\\to B_j\\otimes_{B_k}C_k$ with the stated inverse formula. It is $B_j$-linear: $1\\otimes(1\\otimes\\varphi_0(b))=(1\\otimes b)\\otimes1$ by balancing over $B_k$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV/00CX (section-tensor-product, lemma-tensor-product), tensor universal property; comparison implicit in Tag 00SN (lemma-base-change-syntomic)."
+   }
+  },
+  {
+   "text": "The composites are identities on pure tensors. First $\\theta\\eta(r\\otimes c)=r\\otimes c$. For the other composite, balancing over $B_k$ gives $((r\\otimes b)\\otimes(s\\otimes c))=(r\\alpha(s)\\otimes1)\\otimes(1\\otimes\\varphi_0(b)c)$, which is exactly its image under $\\eta\\theta$. Pure tensors generate, so these are inverse ring maps. Also $\\theta(x\\otimes1)=\\varphi_j(x)$, proving the asserted identification of the structure map.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV/00CX, tensor balancing relations, and Tag 00SN (lemma-base-change-syntomic)."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q$ of $B_j$ and set $\\mathfrak p=\\beta^{-1}(\\mathfrak q)$. It is proper since $\\beta(1)=1\\notin\\mathfrak q$, and $ab\\in\\mathfrak p$ implies $\\beta(a)\\beta(b)\\in\\mathfrak q$, hence $a\\in\\mathfrak p$ or $b\\in\\mathfrak p$. The composite $B_k\\to B_j\\to\\kappa(\\mathfrak q)$ has kernel $\\mathfrak p$, by the kernel clause of the residue-field lemma. Every element outside $\\mathfrak p$ has nonzero, hence invertible, image. Its factorization clause gives the unique map $\\iota:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ compatible with $B_k$. A unital map between fields is injective, since its kernel cannot contain $1$.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Local rings, paragraph after Tag 07BI (definition-local-ring), induced map of residue fields; Tag 00CT (proposition-localize-quotient)."
+   }
+  },
+  {
+   "text": "Put $K=\\kappa(\\mathfrak q)$ and $k=\\kappa(\\mathfrak p)$. Apply tensor cancellation first over $B_k\\to B_j\\to K$, using $\\theta$, and then over $B_k\\to k\\to K$. With the symmetry $a\\otimes b\\mapsto b\\otimes a$ (whose inverse is the same balanced map), these yield $C_j\\otimes_{B_j}K\\cong C_k\\otimes_{B_k}K\\cong(C_k\\otimes_{B_k}k)\\otimes_kK$. Explicitly, after replacing $C_j$ by $B_j\\otimes_{B_k}C_k$, the comparison is $(x\\otimes c)\\otimes\\lambda\\mapsto(c\\otimes1)\\otimes\\overline{x}\\lambda$; its inverse is $(c\\otimes a)\\otimes\\lambda\\mapsto(1\\otimes c)\\otimes\\iota(a)\\lambda$. Here $\\overline{x}$ is the residue of $x\\in B_j$ in $K$. These formulas follow from the cancellation formulas and show that $c\\in C_k$ maps to $(c\\otimes1)\\otimes1$ and $\\lambda\\in K$ to $(1\\otimes1)\\otimes\\lambda$. Thus both required canonical maps are preserved.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SM (lemma-syntomic-descends), displayed residue-fibre identity; Tag 00D2 (lemma-tensor-with-bimodule), tensor cancellation."
+   }
+  },
+  {
+   "text": "Apply flat module base change to $B_k\\to B_j$ and the flat $B_k$-module $C_k$. The result is flat over $B_j$, and the $B_j$-linear isomorphism $\\theta$ identifies it with $C_j$, so $\\varphi_j$ is flat. Apply clause (1) of finite-presentation base change to the same rings: $B_j\\to B_j\\otimes_{B_k}C_k$ is of finite presentation. Composing its presentation isomorphism with $\\theta$ gives a presentation of $C_j$ over $B_j$. Separately, applying clause (1) to $B_k\\to k$ shows that $k\\otimes_{B_k}C_k$ is finitely presented over $k$. Swapping tensor factors gives the same assertion for $A=C_k\\otimes_{B_k}k$. A finite presentation has finitely many algebra generators by its definition, so $A$ is of finite type over $k$.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HI (lemma-flat-base-change) and 05G5 (lemma-base-change-finiteness), part (4); Tag 00F3 (definition-finite-type)."
+   }
+  },
+  {
+   "text": "By hypothesis $A=C_k\\otimes_{B_k}k$ is a local complete intersection over $k$. Step 5 verifies the finite-type hypothesis of the field-change lemma, and step 3 supplies the field extension $k\\to K$. That lemma implies $A\\otimes_kK$ is a local complete intersection over $K$. The $K$-algebra isomorphism of step 4 identifies this algebra with $C_j\\otimes_{B_j}K$. Pull the defining principal-open generators across this $K$-algebra isomorphism. The induced localization isomorphisms carry each polynomial presentation to a presentation of the corresponding localization; their bijections on prime ideals preserve chains and therefore Krull dimension. Thus the transported principal opens form a cover with the same global complete-intersection presentations and dimensions, proving that the latter algebra is a local complete intersection too (including the zero-ring convention). This holds for every $\\mathfrak q$. Every base-change result used allows an arbitrary base ring map; no flatness of $\\alpha$ or finite presentation of $R_0\\to B_0$ entered.",
+   "uses": [
+    "lem-weil-pbc-lci-field-change",
+    "def-weil-pbc-complete-intersection-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SJ (lemma-lci-field-change), applied as in Tag 00SN (lemma-base-change-syntomic); Tag 00S9 (definition-lci-field)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-lci-field-change",
+  "def-weil-pbc-complete-intersection-over-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00SN (lemma-base-change-syntomic), expanded using the residue-fibre identity of 00SM, flat base change 00HI, finite-presentation base change 05G5(4), and field change 00SJ; elementary explicit tensor formulas supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "syntomic|[Ll]ocal[Cc]omplete[Ii]ntersection|[Cc]omplete[Ii]ntersection",
+   "results": "{\"t\": \"2026-10-22T06:11:33Z\", \"tool\": \"grep\", \"query\": \"syntomic|[Ll]ocal[Cc]omplete[Ii]ntersection|[Cc]omplete[Ii]ntersection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or etale base-change hits require stronger hypotheses; flatness and finite-presentation hits give only two clauses, and no syntomic or local-complete-intersection source declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor base change preserves flat finite presentation and local complete intersection fibres",
+   "results": "{\"t\": \"2026-10-22T06:11:34Z\", \"tool\": \"leansearch\", \"query\": \"Tensor base change preserves flat finite presentation and local complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"Module.Flat.baseChange\"], \"digest\": \"317ca4fbce1c553e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or etale base-change hits require stronger hypotheses; flatness and finite-presentation hits give only two clauses, and no syntomic or local-complete-intersection source declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Syntomic\"",
+   "results": "{\"t\": \"2026-10-22T06:11:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or etale base-change hits require stronger hypotheses; flatness and finite-presentation hits give only two clauses, and no syntomic or local-complete-intersection source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented algebra with local complete intersection residue field fibres retains these properties after arbitrary base change with the residue fibre equal to a field extension",
+   "results": "{\"t\": \"2026-10-22T06:12:02Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented algebra with local complete intersection residue field fibres retains these properties after arbitrary base change with the residue fibre equal to a field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\"], \"digest\": \"971e58b80a091167\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or etale base-change hits require stronger hypotheses; flatness and finite-presentation hits give only two clauses, and no syntomic or local-complete-intersection source declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebras B and C over R and a map of R algebras B to C, changing scalars gives the relative tensor identity and transports complete intersection fibres along residue field embeddings",
+   "results": "{\"t\": \"2026-10-22T06:12:03Z\", \"tool\": \"leanfinder\", \"query\": \"For algebras B and C over R and a map of R algebras B to C, changing scalars gives the relative tensor identity and transports complete intersection fibres along residue field embeddings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.SubmersivePresentation.baseChange\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"Algebra.FinitePresentation.baseChange\", \"Algebra.Etale.baseChange\", \"Algebra.Smooth.baseChange\", \"RingHom.EssFiniteType.isStableUnderBaseChange\"], \"digest\": \"88de1a0c342a4c0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth or etale base-change hits require stronger hypotheses; flatness and finite-presentation hits give only two clauses, and no syntomic or local-complete-intersection source declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Syntomic\"",
+   "results": "{\"t\": \"2026-10-23T09:58:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stronger smooth or etale hypotheses, or only individual flatness/finite-presentation clauses; no declaration gives the full item."
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|localCompleteIntersection|isLocalCompleteIntersection",
+   "results": "{\"t\": \"2026-10-23T09:58:11Z\", \"tool\": \"grep\", \"query\": \"syntomic|localCompleteIntersection|isLocalCompleteIntersection\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stronger smooth or etale hypotheses, or only individual flatness/finite-presentation clauses; no declaration gives the full item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a flat finitely presented algebra preserves local complete intersection fibres",
+   "results": "{\"t\": \"2026-10-23T09:58:11Z\", \"tool\": \"leansearch\", \"query\": \"Base change of a flat finitely presented algebra preserves local complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.Flat.isBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"FinitePresentation.of_isBaseChange\", \"Algebra.Smooth.baseChange\", \"Algebra.FinitePresentation.baseChange\"], \"digest\": \"bac4874e8e771992\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stronger smooth or etale hypotheses, or only individual flatness/finite-presentation clauses; no declaration gives the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor transition between scalar extensions identifies residue field fibres and preserves flat finite presentation and local complete intersection fibres",
+   "results": "{\"t\": \"2026-10-23T09:58:12Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor transition between scalar extensions identifies residue field fibres and preserves flat finite presentation and local complete intersection fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.fiberIsoOfBijectiveResidueField\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_symm\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"Algebra.Etale.baseChange\"], \"digest\": \"eb81b0af539dcdee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stronger smooth or etale hypotheses, or only individual flatness/finite-presentation clauses; no declaration gives the full item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local complete intersection algebras over a field remain local complete intersections after an arbitrary field extension; syntomic ring maps are stable under base change",
+   "results": "{\"t\": \"2026-10-23T10:00:32Z\", \"tool\": \"leanfinder\", \"query\": \"Local complete intersection algebras over a field remain local complete intersections after an arbitrary field extension; syntomic ring maps are stable under base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.IsStandardOpenImmersion.isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\"], \"digest\": \"ac772355dd4e4877\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern stronger smooth or etale hypotheses, or only individual flatness/finite-presentation clauses; no declaration gives the full item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-intersection-fibres-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2): the nodal local equation used below lem-trf-nodal-etale-chart. Stacks 0CBY first proof first paragraph reduces to a finite-type integer model; its use of 0C5F requires syntomic (flat with local complete intersection fibres) descent, the first sentence of the 0C5F proof. Extracted obligation: old proof step 5: tensor transition isomorphism, residue-field fibre comparison, and propagation of flatness, finite presentation and complete-intersection fibres.",
+   "via": [
+    "lem-trf-complete-intersection-fibres-limit-descent",
+    "lem-trf-nodal-family-noetherian-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lci-fibre-tensor-transition",
+  "worker": "stage1",
+  "summary": "Q156 checked all comparison maps, read each cited statement, and reused six existing algebra tool lemmas. No new nodes. The finite-type hypothesis for field change is obtained from finite-presentation base change. The original statement is retained.",
+  "blueprint": "Historical nearby-duality/alteration obligation recorded in blueprint.from.place, specifically the tensor-transition and complete-intersection-fibre persistence part of lem-trf-complete-intersection-fibres-limit-descent. Current latest lem-trf-local-term-locality proof (1)--(2) instead invokes contracting correspondences; no claim is made that its text contains this historical algebra calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lci-field-change",
+    "why": "Generic field-extension invariance of complete intersections, needed after the explicit fibre comparison; the unit has no corresponding commutative-algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lci-field-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-19eccf6bb",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-19eccf6bb (reviewer sub-agent of L); spot-checked: PASS: the item's statement is unchanged from live, and all six steps are correct. This is a first split with no new nodes, not a re-split; the only stmt_deps addition is the existing mathlib tensor-pushout node. Steps 1-2: rechecked by hand that theta and eta exist (both maps agree on B_k and on R_0), that eta is B_j-linear, and that both composites are the identity by balancing. Step 3: the inverse image prime and kappa(p)->kappa(q) follow from clauses (a) and (d) of prime-residue-field-algebra. Step 4: recomputed both tensor-cancellation applications, (B_k,B_j,C_k,K) and (B_k,kappa(p),C_k,K), and both explicit formulas; they match the step and preserve the canonical maps. Step 5: flat base change 00HI plus clause (1) of 05G5(4), applied twice; a finite presentation gives finite type. Step 6: forward direction of 00SJ, then a definitional transport along the K-algebra isomorphism, with the zero-ring convention covered. Source check: Stacks algebra.tex 00SN and 00SM read; the 00SJ hypothesis matches the cited node; no SGA anywhere. Edge cases checked: alpha=id, Z->F_p, B_j=0, C_0=0. Duplicate search over the DAG for syntomic, 00SN and lci: lem-trf-syntomic-locus-base-change is scheme-level in the local-ring formulation, so not a duplicate. The parent limit-descent step 4 cites the item as stated. Accepted tool_use: lem-weil-pbc-lci-field-change, a generic off-route tool from sk-thm-p1. The worker wrote tool_uses themselves, against delivery-errors A8; harmless. tools/review_split.py reports 'no such node' for every citation because the snapshot's chapter directories are symlinks; checked all ids with find -L."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LciFibreTensorTransition",
+  "declaration": "Algebra.lci_fibre_tensor_transition",
+  "declarations": [
+   "Algebra.lciFibreTensorTransition",
+   "Algebra.lci_fibre_tensor_transition"
+  ],
+  "file": "lean/Sheaf/RingTheory/LciFibreTensorTransition.lean",
+  "statement": "theorem lci_fibre_tensor_transition (R₀ : Type u₀) (Rₖ : Type uₖ) (Rⱼ : Type uⱼ) (B₀ : Type v) (C₀ : Type w) [CommRing R₀] [CommRing Rₖ] [CommRing Rⱼ] [CommRing B₀] [CommRing C₀] [Algebra R₀ Rₖ] [Algebra R₀ Rⱼ] [Algebra R₀ B₀] [Algebra R₀ C₀] (α : Rₖ →ₐ[R₀] Rⱼ) (φ₀ : B₀ →ₐ[R₀] C₀) : lciFibreTensorTransition R₀ Rₖ Rⱼ B₀ C₀ α φ₀",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The transparent proposition lciFibreTensorTransition binds the canonical tensor maps and scalar actions using real Mathlib data; the theorem asserts precisely that proposition. Fibres are Ideal.Fiber (residue field on the left), so both sides of the displayed comparison are canonically commuted. Independent universes for all five rings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ae2e143b",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Item statement checked clause by clause against node and Stacks 00SN/00SM: rings and α as R₀-algebra map (composite tower), Bₜ/Cₜ tensor rings, φₜ=lTensor φ₀, β/γ=map α id, letI algebra structures only from these maps; hypotheses RingHom.Flat/FinitePresentation φₖ and ∀p lci of Ideal.Fiber with finite-type witness (predicate domain, no restriction); θ with forward/inverse formulas and θ(x⊗1)=φⱼx; ∀q p=comap β q, ι=ResidueField.map, fibre iso e in Mathlib Fiber order (commuted, noted) pinned by the Cₖ-compatibility (generation argument), finite-type clause, flat/fp/lci conclusions for φⱼ. Dep records (RingHom.Flat, Algebra.FinitePresentation, Ideal.Fiber, IsLocalCompleteIntersection with FiniteType instance arg, RingHom.FiniteType) read; same notions. Node diff vs live = lean field only; lean.statement verbatim. No hollow def (transparent Prop of Mathlib data), proof sorry with 6 steps in docstring, source/blueprint docstrings, independent universes, no extra hypotheses. Edge cases α=id, ℤ→𝔽_p, Bⱼ=0, C₀=0. No duplicate (parent is scheme-level). No recompile (no change). Advisory only: Prop def naming."
+ }
+}

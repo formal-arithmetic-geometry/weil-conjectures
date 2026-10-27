@@ -1,0 +1,164 @@
+{
+ "id": "lem-pur-etale-support-sum-compositor-component",
+ "kind": "statement",
+ "title": "Objectwise graph comparison support compositor equation",
+ "statement": "Let A be a finite commutative ring and U --e--> X --v--> T separated, quasi-compact etale arrows of Noetherian schemes. For compactifications c of e, d of v and k of e followed by v, and for every derived-category object M on U, the component at M of the specified proper/open support compositor followed by the canonical composite graph comparison equals the component at M of the horizontal composite of the graph comparisons for e and v followed by the derived etale sum compositor.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7J, 0F7K and 0F50; Step 1 of lem-pur-etale-normalized-mates-composition-pasting, objectwise calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-pur-etale-sum-composition-counit"
+ ],
+ "proof": [
+  {
+   "text": "For each compactification, construct the section-preserving isomorphism from its open/proper sheaf functor to the proper-support functor using the open and proper specializations and support composition. Zariski main gives a finite compactification, where the graph map is invertible. Transport that graph map through the support isomorphisms to an arbitrary compactification. Both maps have the same composite into ordinary direct image by graph normalization; cancel the monic compactification inclusion. Thus the actual graph sheaf map is invertible for every compactification.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "thm-pqf-zmt-factorization",
+    "lem-sfb-etale-finite-compactification-sheaf-iso",
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-sfb-compactification-sheaf-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized etale identifications and section-preserving composition supplied by quasifiniteCompactSupportExact. Its nested-summand clause and etaleSumSheafCompIso_summand identify the two sheaf maps after transposing across the composite sum/restriction adjunction: move the first support identification past the second unit by naturality, then use the prescribed Over.mapComp restriction. Injectivity of the adjunction equivalence identifies these maps. Naturality of the support identifications and inclusions, followed by their normalization equations, proves that etaleSumSheafCompIso preserves the section in ordinary composite direct image.",
+   "uses": [
+    "lem-sfb-quasifinite-compact-support-exact",
+    "lem-pur-etale-sum-composition-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exactCompactificationUnit for an invertible graph sheaf map is literally the inverse canonical graph comparison: unfold the two localization-descent formulas. The unit for a composite sheaf isomorphism is the derived first isomorphism followed by the second unit; prove this by localization extensionality and the exact-derived natural-isomorphism factorization formula.",
+   "uses": [
+    "lem-asd-compact-support-graph-derived-isomorphism",
+    "def-sfb-exact-compactification-unit",
+    "def-asd-compact-support-graph-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set cPrime = k.ofComp d. Apply exactCompactificationUnit_tower to the two sum-extension functors, their graph sheaf isomorphisms for cPrime.restrict and d, and etaleSumSheafCompIso followed by the graph isomorphism for d.comp cPrime. The normalization premise is Step 2 and graph normalization. Identify all units using Step 3. Apply exactCompactificationUnit_refinement from c to cPrime.restrict and from d.comp cPrime to k; graph normalization gives each premise. These equations transport the forward-unit tower equation to precisely the compactification comparisons in the statement.",
+   "uses": [
+    "lem-sfb-exact-compactification-unit-tower",
+    "lem-sfb-exact-compactification-unit-refinement",
+    "lem-asd-compact-support-graph-sheaf-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate at M. Naturality moves the inverse comparison for v past the compactification change for e; functoriality and the two refinement equations identify the result with the tower equation. The exact-derived composition comparison and the descended sheaf sum compositor combine to derivedEtaleSumCompIso by definition. Precompose with the invertible horizontal inverse graph comparison, use the forward-unit equation, and cancel the inverse graph comparisons to obtain the displayed component equation.",
+   "uses": [
+    "lem-pur-etale-sum-composition-counit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-asd-compact-support-graph-comparison",
+  "def-sfb-exact-compactification-unit",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-pur-etale-sum-composition-counit",
+  "lem-sfb-compactification-sheaf-refinement",
+  "lem-sfb-etale-finite-compactification-sheaf-iso",
+  "lem-sfb-exact-compactification-unit-refinement",
+  "lem-sfb-exact-compactification-unit-tower",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "thm-pqf-zmt-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F50 (lemma-f-shriek-composition) and 0F7J (lemma-shriek-composition), using the existing normalized exact-unit tower and refinement theorems; B4, 2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical graph comparison between compactly supported pushforward and etale sum extension respects composition on unbounded derived categories",
+   "results": "Eight results concerning exact derived functor localization comparisons; none identifies the actual etale compact-support graph map or its compositor.",
+   "date": "2026-10-27",
+   "verdict": "No match for this geometric normalization; exact derived comparisons are used through the existing project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.hcomp",
+   "results": "No hits; identifier not resolved by service. Local source search finds NatTrans.hcomp and exchange, used in the combining proof.",
+   "date": "2026-10-27",
+   "verdict": "Generic horizontal composition alone does not identify the geometric maps."
+  },
+  {
+   "tool": "grep",
+   "query": "compactificationEtaleComparison.*[Cc]omp|derivedEtaleSumCompIso",
+   "results": "No Mathlib hits. Local project search finds the sum compositor and graph comparison base-change API, but no statement of their support-composition compatibility.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSupportSumCompositor",
+  "date": "2026-10-27",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-support-sum-compositor",
+   "place": "Proof Step 1, objectwise support/sum compositor equation",
+   "via": [
+    "lem-pur-etale-support-sum-compositor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportSumCompositorComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportSumCompositorComponent.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSupportSumCompositor_app",
+  "statement": "theorem etaleSupportSumCompositor_app\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]\n    (e : U ⟶ X) (v : X ⟶ T)\n    [Etale e] [Etale v] [IsSeparated e] [IsSeparated v]\n    [QuasiCompact e] [QuasiCompact v]\n    (c : Compactification e) (d : Compactification v) (k : Compactification (e ≫ v))\n    (M : DerivedCategoryModule A U) :\n    ((Functor.isoWhiskerRight\n        (rightDerivedLowerShriekOfCompactificationIso A c (k.ofComp d).restrict) _ ≪≫\n      rightDerivedLowerShriekOfCompactificationCompIso A d (k.ofComp d) ≪≫\n      rightDerivedLowerShriekOfCompactificationIso A (d.comp (k.ofComp d)) k).hom.app M ≫\n        (canonicalEtaleCompactSupportComparison A (e ≫ v) k).hom.app M) =\n      (NatTrans.hcomp (canonicalEtaleCompactSupportComparison A e c).hom\n          (canonicalEtaleCompactSupportComparison A v d).hom ≫\n        (derivedEtaleSumCompIso A e v).hom).app M ",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T050616-L-244255",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T064431-L-2174697",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

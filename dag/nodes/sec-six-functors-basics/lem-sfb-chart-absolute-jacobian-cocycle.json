@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-chart-absolute-jacobian-cocycle",
+ "kind": "statement",
+ "title": "Absolute chart Jacobians form a smooth positive cocycle",
+ "statement": "Let $N$ be a smooth real $m$-manifold without boundary [def-sfb-smooth-real-manifold], with $m\\geq0$. For smooth charts $x_i:U_i\\to V_i\\subseteq\\mathbf R^m$ and $p\\in U_i\\cap U_j$, define $g_{ij}(p)=|\\det D(x_j\\circ x_i^{-1})(x_i(p))|$, where $D$ is the ordinary real derivative on the open coordinate domain and the determinant [def-weil-pbc-matrix-determinant] in dimension zero is $1$. Then $g_{ij}$ is smooth and strictly positive on $U_i\\cap U_j$, and its reciprocal is smooth there. On $U_i$ one has $g_{ii}=1$; on $U_i\\cap U_j$ one has $g_{ji}g_{ij}=1$; on $U_i\\cap U_j\\cap U_k$ one has $g_{ik}=g_{jk}g_{ij}$. These assertions hold for every choice of smooth charts compatible with the given atlas, with no orientation, separation, countability, or compactness hypothesis.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: inherited Part I §3.A–3.B, printed pp.11–13 (not independently verified), real test-density convention supporting the parent definition. Agent-stated well-definedness input, using the ordinary chain rule, smoothness of derivatives and determinants, and smoothness of absolute value away from zero. No claim of having read this unavailable source."
+ },
+ "stmt_deps": [
+  "def-sfb-smooth-real-manifold",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "If $m=0$, every derivative is the unique linear endomorphism of $\\mathbf R^0$ and its determinant is the empty determinant $1$. Thus every $g_{ij}$ and its reciprocal is the constant $1$, which is smooth; all three identities are $1=1$. Empty overlaps impose no conditions. Henceforth assume $m\\geq1$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+    "place": "Matrix.det_isEmpty:94; constants: ContDiff/Basic.lean:111; agent zero-dimensional case"
+   }
+  },
+  {
+   "text": "Put $W_{ij}=x_i(U_i\\cap U_j)$ and $F_{ij}=x_j\\circ x_i^{-1}:W_{ij}\\to W_{ji}$. These domains are open because the chart maps are homeomorphisms on open sets. Both $F_{ij}$ and its inverse $F_{ji}$ are smooth: for atlas charts this is the definition, and for charts compatible with the atlas, near any $u=x_i(p)$ choose an atlas chart $y$ at $p$ and write $F_{ij}=(x_j\\circ y^{-1})\\circ(y\\circ x_i^{-1})$ on an open neighbourhood of $u$, a composite of smooth maps. The smooth differentiation lemma therefore gives differentiability and smoothness of $u\\mapsto DF_{ij}(u)$ on $W_{ij}$.",
+   "uses": [
+    "def-sfb-smooth-real-manifold",
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+    "place": "ContDiffAt.fderiv_right:724; agent restriction to open chart overlaps"
+   }
+  },
+  {
+   "text": "For $u=x_i(p)$ put $v=F_{ij}(u)=x_j(p)$. The equalities $F_{ji}\\circ F_{ij}=\\mathrm{id}$ near $u$ and $F_{ij}\\circ F_{ji}=\\mathrm{id}$ near $v$, differentiated by the chain rule, give $DF_{ji}(v)DF_{ij}(u)=I$ and $DF_{ij}(u)DF_{ji}(v)=I$. Represent these maps by their standard real $m\\times m$ matrices. Determinant multiplicativity gives $\\det DF_{ji}(v)\\det DF_{ij}(u)=1$; here $\\det I=1$ follows directly from the Leibniz formula, whose only nonzero summand is the identity permutation. Neither determinant is zero, so $g_{ij}(p)>0$. Taking absolute values gives $g_{ji}(p)g_{ij}(p)=1$. Also $F_{ii}=\\mathrm{id}$ and its derivative is $I$, so $g_{ii}=1$.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+    "place": "Matrix.det_mul:138; FDeriv/Comp.lean HasFDerivAt.comp:105; agent inverse-chart and identity calculations"
+   }
+  },
+  {
+   "text": "Write $d_{ij}(u)=\\det DF_{ij}(u)$. Each matrix entry of $DF_{ij}$ is smooth: evaluation on a fixed standard basis vector followed by a coordinate projection is a continuous real-linear functional on the finite-dimensional space of linear maps. Expand the determinant by its finite Leibniz sum. Smoothness of sums, products and constants proves that $d_{ij}$ is smooth. At $u_0$ it is nonzero by step 3; continuity supplies a neighbourhood on which $|d_{ij}(u)-d_{ij}(u_0)|<|d_{ij}(u_0)|/2$. On this neighbourhood its sign is constant, and $|d_{ij}|$ is either $d_{ij}$ or $-d_{ij}$. Both are smooth by the scalar calculus lemma. Thus $g_{ij}$ is smooth in the $x_i$ coordinates. In any other compatible chart $x_t$, its expression is $|d_{ij}|\\circ(x_i\\circ x_t^{-1})$ on the appropriate open overlap, smooth by composition. This is precisely smoothness on $U_i\\cap U_j$.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "def-weil-pbc-matrix-determinant",
+    "def-sfb-smooth-real-manifold"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+    "place": "ContDiffAt.comp:223; ContDiff/Operations.lean add:184 and mul:450; agent finite determinant expansion and local sign argument"
+   }
+  },
+  {
+   "text": "Apply step 4 to the reversed pair of charts to obtain smoothness of $g_{ji}$. Since step 3 gives $g_{ji}(p)g_{ij}(p)=1$ with $g_{ij}(p)>0$, pointwise real division identifies $g_{ij}^{-1}=g_{ji}$. The reciprocal is therefore smooth. This uses no theorem about smooth inversion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+    "place": "agent substitution of the reverse-pair identity from steps 3 and 4"
+   }
+  },
+  {
+   "text": "At a triple-overlap point put $u=x_i(p)$ and $v=x_j(p)$. On the open triple-overlap coordinate domain, cancellation of $x_j^{-1}x_j$ gives $F_{ik}=F_{jk}\\circ F_{ij}$. The chain rule gives $DF_{ik}(u)=DF_{jk}(v)DF_{ij}(u)$. Determinant multiplicativity and the elementary real identity $|ab|=|a||b|$ give $g_{ik}(p)=g_{jk}(p)g_{ij}(p)$. All operations above occur on open Euclidean neighbourhoods of the point, so no orientation, Hausdorffness, countability or compactness assumption has been used.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation",
+    "lem-sfb-matrix-cramer-determinant-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+    "place": "HasFDerivAt.comp, Mathlib/Analysis/Calculus/FDeriv/Comp.lean:105; Matrix.det_mul, Determinant/Basic.lean:138; agent triple-overlap calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-matrix-determinant",
+  "lem-sfb-real-smooth-differentiation",
+  "def-sfb-smooth-real-manifold",
+  "lem-sfb-matrix-cramer-determinant-identities"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: inherited Part I §3.A–3.B, printed pp.11–13, not independently verified. Agent proof from the existing calculus and determinant nodes; no assertion of reading the missing Demailly source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The absolute determinants of derivatives of smooth coordinate transitions form a positive smooth multiplicative cocycle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ContMDiff.coordChangeL\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {M : Type u_5} {E : B → Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB]\\n  {HB : Type u_8} [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4\", \"doc\": \"If $ f: M \\\\to M' $ is a $ C^n $-differentiable function whose image lies within the base sets of two trivializations $ e $ and $ e' $, then the coordinate change maps $ e.\\\\text{coordChangeL}(f(y)) $ b\"}\n  {\"name\": \"ContMDiff.coordChange\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {M : Type u_5} {E : B → Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB]\\n  {HB : Type u_8} [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4\", \"doc\": \"If $f$ and $g$ are $C^n$-differentiable functions with images lying in the base sets of trivializations $e$ and $e'$, then the coordinate change map $y \\\\mapsto e.\\text{coordChange}(e', f(y), g(y))$ is \"}\n  {\"name\": \"ContMDiffOn.coordChangeL\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {M : Type u_5} {E : B → Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB]\\n  {HB : Type u_8} [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4\", \"doc\": \"If a function $f$ is $\\\\mathcal{C}^n$-differentiable on a set $s$ and maps $s$ into the base sets of two linear trivializations $e$ and $e'$ of a vector bundle, then the coordinate change map between t\"}\n  {\"name\": \"ContMDiffOn.coordChange\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {M : Type u_5} {E : B → Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB]\\n  {HB : Type u_8} [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4\", \"doc\": \"If functions $ f $ and $ g $ are $ C^n $-differentiable on a set $ s $, and $ f $ maps $ s $ into the base set of trivialization $ e $ while $ g $ maps $ s $ into the base set of trivialization $ e' $\"}\n  {\"name\": \"contMDiffOn_coordChangeL\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {E : B → Type u_6} [inst : NontriviallyNormedField 𝕜]\\n  {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB] {HB : Type u_8}\\n  [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4 : TopologicalS\", \"doc\": \"The coordinate change map between two linear trivializations of a vector bundle is $ C^n $-differentiable on the intersection of their base sets, where the coordinate change is defined as the composit\"}\n  {\"name\": \"ContMDiffAt.coordChangeL\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {M : Type u_5} {E : B → Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB]\\n  {HB : Type u_8} [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4\", \"doc\": \"If a function $ f $ is $ C^n $-differentiable at a point $ x $ and $ f(x) $ lies in the base sets of two linear trivializations $ e $ and $ e' $, then the map sending $ y $ to the linear equivalence b\"}\n  {\"name\": \"ContMDiffAt.coordChange\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {M : Type u_5} {E : B → Type u_6}\\n  [inst : NontriviallyNormedField 𝕜] {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB]\\n  {HB : Type u_8} [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4\", \"doc\": \"If functions $ f $ and $ g $ are $ C^n $-differentiable at $ x $, and $ f(x) $ lies in the domains of charts $ e $ and $ e' $, then the coordinate change composition $ e.\\text{coordChange}(e', f(y), g(\"}\n  {\"name\": \"contMDiffAt_coordChangeL\", \"module\": \"Mathlib/Geometry/Manifold/VectorBundle/Basic\", \"type\": \"∀ {n : WithTop ℕ∞} {𝕜 : Type u_1} {B : Type u_2} {F : Type u_4} {E : B → Type u_6} [inst : NontriviallyNormedField 𝕜]\\n  {EB : Type u_7} [inst_1 : NormedAddCommGroup EB] [inst_2 : NormedSpace 𝕜 EB] {HB : Type u_8}\\n  [inst_3 : TopologicalSpace HB] {IB : ModelWithCorners 𝕜 EB HB} [inst_4 : TopologicalS\", \"doc\": \"For any point $ x $ in the intersection of the base sets of two linear trivializations $ e $ and $ e' $ of a vector bundle, the coordinate change map $ b \\\\mapsto (e.\\\\text{coordChangeL} \\\\, \\\\mathbb{K} \\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the two semantic phrasings and Loogle return bundle-coordinate regularity, diffeomorphism composition, and measure change-of-variables, not this absolute chart-Jacobian cocycle. Targeted Geometry grep finds no cocycle. ContDiffAt.abs (Deriv/Abs.lean:32) is a constituent calculus result, not a one-line specialization proving all the chart, derivative, determinant and cocycle clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"fderiv\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"MeasureTheory.aemeasurable_ofReal_abs_det_fderivWithin\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) : AEMeasurable (f\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.aemeasurable_toNNReal_abs_det_fderivWithin\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) : AEMeasurable (f\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.addHaar_image_le_lintegral_abs_det_fderiv\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) : μ (f '' s) ≤ ∫⁻\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.addHaar_image_eq_zero_of_det_fderivWithin_eq_zero\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) (h'f' : ∀ x ∈ s, (f' x).det = 0) : μ (f \", \"doc\": \"A version of Sard lemma in fixed dimension: given a differentiable function from `E` to `E` and\\na set where the differential is not invertible, then the image of this set has zero measure.\"}\n  {\"name\": \"MeasureTheory.lintegral_abs_det_fderiv_eq_addHaar_image\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) (hf : Set.InjOn f\", \"doc\": \"Change of variable formula for differentiable functions, set version: if a function `f` is\\ninjective and differentiable on a measurable set `s`, then the measure of `f '' s` is given by the\\nintegral o\"}\n  {\"name\": \"MeasureTheory.map_withDensity_abs_det_fderiv_eq_addHaar\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasureTheory.NullMeasurableSet s μ) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s \", \"doc\": \"Change of variable formula for differentiable functions, set version: if a function `f` is\\ninjective and differentiable on a null measurable set `s`, then the pushforward of the measure with\\ndensity `\"}\n  {\"name\": \"MeasureTheory.lintegral_abs_det_fderiv_eq_addHaar_image₀\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasureTheory.NullMeasurableSet s μ) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s \", \"doc\": \"Change of variable formula for differentiable functions, set version: if a function `f` is\\ninjective and differentiable on a null measurable set `s`, then the measure of `f '' s` is given\\nby the integ\"}\n  {\"name\": \"MeasureTheory.lintegral_abs_det_fderiv_le_addHaar_image\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) (hf : Set.InjOn f\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.addHaar_image_le_lintegral_abs_det_fderiv_aux2\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (h's : μ s ≠ ⊤) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) :\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.lintegral_image_eq_lintegral_abs_det_fderiv_mul\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) (hf : Set.InjOn f\", \"doc\": \"Change of variable formula for differentiable functions: if a function `f` is\\ninjective and differentiable on a measurable set `s`, then the Lebesgue integral of a function\\n`g : E → ℝ≥0∞` on `f '' s` \"}\n  {\"name\": \"MeasureTheory.lintegral_abs_det_fderiv_le_addHaar_image_aux2\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (h's : μ s ≠ ⊤) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) (\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.restrict_map_withDensity_abs_det_fderiv_eq_addHaar\", \"module\": \"Mathlib.MeasureTheory.Function.Jacobian\", \"type\": \" {E : Type u_1} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] {s : Set E} {f : E → E} {f' : E → E →L[ℝ] E} [MeasurableSpace E] [BorelSpace E] (μ : MeasureTheory.Measure E) [μ.IsAddHaarMeasure] (hs : MeasurableSet s) (hf' : ∀ x ∈ s, HasFDerivWithinAt f (f' x) s x) (hf : Set.InjOn f\", \"doc\": \"Change of variable formula for differentiable functions, set version: if a function `f` is\\ninjective and differentiable on a measurable set `s`, then the pushforward of the measure with\\ndensity `|(f' \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the two semantic phrasings and Loogle return bundle-coordinate regularity, diffeomorphism composition, and measure change-of-variables, not this absolute chart-Jacobian cocycle. Targeted Geometry grep finds no cocycle. ContDiffAt.abs (Deriv/Abs.lean:32) is a constituent calculus result, not a one-line specialization proving all the chart, derivative, determinant and cocycle clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "abs.*det.*(comp|mul)|contDiff.*abs|det_fderiv",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"442\", \"text\": \"theorem abs_det_completeBasis_equivFunL_symm :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"589\", \"text\": \"theorem abs_det_fderiv_expMapBasis (x : realSpace K) :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"596\", \"text\": \"    smulRight_apply, one_apply_eq_self, one_smul, abs_mul, abs_det_completeBasis_equivFunL_symm,\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"614\", \"text\": \"  rw [lintegral_image_eq_lintegral_abs_det_fderiv_mul volume hs\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"line\": \"616\", \"text\": \"  simp_rw [abs_det_fderiv_expMapBasis]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"126\", \"text\": \"theorem det_fderivPolarCoordRealSymm (x : realMixedSpace K) :\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"131\", \"text\": \"    ← ContinuousLinearMap.det, det_fderivPiPolarCoordSymm]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"147\", \"text\": \"    integral_image_eq_integral_abs_det_fderiv_smul volume\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"152\", \"text\": \"  simp_rw [det_fderivPolarCoordRealSymm, Finset.abs_prod, abs_of_mem_polarCoordReal_target K hx]\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/PolarCoord.lean\", \"line\": \"159\", \"text\": \"    lintegral_image_eq_lintegral_abs_det_fderiv_mul volume\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/CMField.lean\", \"line\": \"434\", \"text\": \"    ← abs_mul, ← Matrix.det_mul_column, ← Matrix.det_reindex_self f, Matrix.reindex_apply]\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Petersson.lean\", \"line\": \"84\", \"text\": \"    Subgroup.HasDetPlusMinusOne.abs_det hg, Complex.ofReal_one, one_zpow, one_mul, norm_σ]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"line\": \"34\", \"text\": \"See `natAbs_det_basis_change` for a more familiar formulation of this result. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/FreeModule/Finite/CardQuotient.lean\", \"line\": \"58\", \"text\": \"            Int.natAbs_eq_iff_associated.mpr (LinearMap.associated_det_comp_equiv _ _ _)\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"111\", \"text\": \"theorem det_fderivPolarCoordSymm (p : ℝ × ℝ) :\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"149\", \"text\": \"      integral_target_eq_integral_abs_det_fderiv_smul volume\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"151\", \"text\": \"      simp_rw [det_fderivPolarCoordSymm]\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"165\", \"text\": \"      rw [lintegral_image_eq_lintegral_abs_det_fderiv_mul volume _\"}\n  {\"file\": \"Mathlib/Analysis/SpecialFunctions/PolarCoord.lean\", \"line\": \"167\", \"text\": \"      · simp_rw [det_fderivPolarCoordSymm]; rfl\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"line\": \"277\", \"text\": \"See `natAbs_det_basis_change` for a more familiar formulation of this result. -/\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/Measure.lean\", \"line\": \"97\", \"text\": \"  have main := MeasureTheory.lintegral_image_eq_lintegral_abs_det_fderiv_mul\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/AbsolutelyContinuous.lean\", \"line\": \"312\", \"text\": \"theorem _root_.ContDiffOn.absolutelyContinuousOnInterval {E : Type*} [NormedAddCommGroup E]\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/AbsolutelyMonotone.lean\", \"line\": \"67\", \"text\": \"theorem contDiffOn (hf : AbsolutelyMonotoneOn f s) : ContDiffOn ℝ ∞ f s := by\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/JacobianOneDim.lean\", \"line\": \"49\", \"text\": \"    lintegral_image_eq_lintegral_abs_det_fderiv_mul volume hs\"}\n  {\"file\": \"Mathlib/MeasureTheory/Function/JacobianOneDim.lean\", \"line\": \"60\", \"text\": \"    integrableOn_image_iff_integrableOn_abs_det_fderiv_smul volume hs\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the two semantic phrasings and Loogle return bundle-coordinate regularity, diffeomorphism composition, and measure change-of-variables, not this absolute chart-Jacobian cocycle. Targeted Geometry grep finds no cocycle. ContDiffAt.abs (Deriv/Abs.lean:32) is a constituent calculus result, not a one-line specialization proving all the chart, derivative, determinant and cocycle clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For smooth diffeomorphisms the absolute Jacobian determinant is smooth nonzero and multiplicative under composition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Diffeomorph.symm_trans'\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"(h₁ : M ≃ₘ^n⟮I, I'⟯ M') (h₂ : M' ≃ₘ^n⟮I', J⟯ N) : (h₁.trans h₂).symm = h₂.symm.trans h₁.symm\", \"doc\": \"Given two diffeomorphisms $ h_1 : M ≃ₘ^n⟮I, I'⟯ M' $ and $ h_2 : M' ≃ₘ^n⟮I', J⟯ N $, their composition is the diffeomorphism $ M ≃ₘ^n⟮I, J⟯ N $ obtained by composing the underlying smooth maps and the\"}\n  {\"name\": \"Diffeomorph.contMDiffAt_comp_diffeomorph_iff\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"{m} (h : M ≃ₘ^n⟮I, J⟯ N) {f : N → M'} {x} (hm : m ≤ n) : ContMDiffAt I I' m (f ∘ h) x ↔ ContMDiffAt J I' m f (h x)\", \"doc\": \"Let $ M $, $ N $, and $ M' $ be manifolds modeled on normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $. For any $ m \\\\leq n $, if $ h : M \\\\to N $ is a $ C^n $-diffeomorphism and $ f \"}\n  {\"name\": \"Diffeomorph.trans\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"(h₁ : M ≃ₘ^n⟮I, I'⟯ M') (h₂ : M' ≃ₘ^n⟮I', J⟯ N) : M ≃ₘ^n⟮I, J⟯ N\", \"doc\": \"Given two diffeomorphisms $ h_1 : M ≃ₘ^n⟮I, I'⟯ M' $ and $ h_2 : M' ≃ₘ^n⟮I', J⟯ N $, their composition is the diffeomorphism $ M ≃ₘ^n⟮I, J⟯ N $ obtained by composing the underlying smooth maps and the\"}\n  {\"name\": \"Diffeomorph.contMDiffAt_diffeomorph_comp_iff\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"{m} (h : M ≃ₘ^n⟮I, J⟯ N) {f : M' → M} (hm : m ≤ n) {x} : ContMDiffAt I' J m (h ∘ f) x ↔ ContMDiffAt I' I m f x\", \"doc\": \"Let $ M, N, M' $ be smooth manifolds modeled on normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $. For a $ C^n $-diffeomorphism $ h : M \\\\to N $ and a function $ f : M' \\\\to M $, if $\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.comp_jacobian_eq_jacobian_smul_jacobian\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Submersive\", \"type\": \"[Finite σ] [Finite σ'] : (Q.comp P).jacobian = P.jacobian • Q.jacobian\", \"doc\": \"Given finite sets $\\\\sigma$ and $\\\\sigma'$, the Jacobian of the composition of two pre-submersive presentations $P$ and $Q$ is equal to the product of their individual Jacobians, i.e., $(Q \\\\circ P).\\\\tex\"}\n  {\"name\": \"Diffeomorph.contMDiffOn_comp_diffeomorph_iff\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"{m} (h : M ≃ₘ^n⟮I, J⟯ N) {f : N → M'} {s} (hm : m ≤ n) :\\n  ContMDiffOn I I' m (f ∘ h) s ↔ ContMDiffOn J I' m f (h.symm ⁻¹' s)\", \"doc\": \"Let $ M, N, M' $ be manifolds modeled on normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $, with $ h : M \\\\to N $ a $ C^n $-diffeomorphism. For any function $ f : N \\\\to M' $ and subs\"}\n  {\"name\": \"Diffeomorph.contMDiff_diffeomorph_comp_iff\", \"module\": \"Mathlib.Geometry.Manifold.Diffeomorph\", \"type\": \"{m} (h : M ≃ₘ^n⟮I, J⟯ N) {f : M' → M} (hm : m ≤ n) : ContMDiff I' J m (h ∘ f) ↔ ContMDiff I' I m f\", \"doc\": \"Let $ M, N, M' $ be manifolds modeled on normed vector spaces over a nontrivially normed field $ \\\\mathbb{K} $, with $ h : M \\\\to N $ a $ C^n $-diffeomorphism and $ f : M' \\\\to M $ a function. For any $ \"}\n  {\"name\": \"OpenPartialHomeomorph.MDifferentiable.symm_comp_deriv\", \"module\": \"Mathlib.Geometry.Manifold.MFDeriv.Atlas\", \"type\": \"{x : M} (hx : x ∈ e.source) :\\n  (mfderiv I' I e.symm (e x)).comp (mfderiv I I' e x) = ContinuousLinearMap.id 𝕜 (TangentSpace I x)\", \"doc\": \"For a diffeomorphism $ e: M \\to M' $ between manifolds modeled on a normed vector space $ E $ over a nontrivially normed field $ \\\\mathbb{K} $, the composition of the Fréchet derivative of $ e^{-1} $ at\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the two semantic phrasings and Loogle return bundle-coordinate regularity, diffeomorphism composition, and measure change-of-variables, not this absolute chart-Jacobian cocycle. Targeted Geometry grep finds no cocycle. ContDiffAt.abs (Deriv/Abs.lean:32) is a constituent calculus result, not a one-line specialization proving all the chart, derivative, determinant and cocycle clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "jacobian|abs_det|det.*(fderiv|mfderiv)|fderiv.*det",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Riemannian/PathELength.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.MeasureTheory.Function.JacobianOneDim\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the two semantic phrasings and Loogle return bundle-coordinate regularity, diffeomorphism composition, and measure change-of-variables, not this absolute chart-Jacobian cocycle. Targeted Geometry grep finds no cocycle. ContDiffAt.abs (Deriv/Abs.lean:32) is a constituent calculus result, not a one-line specialization proving all the chart, derivative, determinant and cocycle clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "contDiff.*abs|ContDiff.*abs|contDiff.*det|ContDiff.*det|theorem.*det_comp",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/NormDet.lean\", \"line\": \"325\", \"text\": \"theorem normDet_comp (f : U →ₗ[𝕜] V) (g : V →ₗ[𝕜] W) :\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/NormDet.lean\", \"line\": \"349\", \"text\": \"theorem normDet_comp_of_finrank_eq [FiniteDimensional 𝕜 V] (f : U →ₗ[𝕜] V) (g : V →ₗ[𝕜] W)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/AbsolutelyMonotone.lean\", \"line\": \"67\", \"text\": \"theorem contDiffOn (hf : AbsolutelyMonotoneOn f s) : ContDiffOn ℝ ∞ f s := by\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Taylor.lean\", \"line\": \"520\", \"text\": \"  · apply ContDiffOn.absolutelyContinuousOnInterval\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Taylor.lean\", \"line\": \"525\", \"text\": \"    grind [ContDiffOn.absolutelyContinuousOnInterval, uniqueDiffOn_uIcc,\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/Abs.lean\", \"line\": \"30\", \"text\": \"theorem contDiffAt_abs {x : ℝ} (hx : x ≠ 0) : ContDiffAt ℝ n (|·|) x := contDiffAt_norm ℝ hx\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/Abs.lean\", \"line\": \"32\", \"text\": \"theorem ContDiffAt.abs (hf : ContDiffAt ℝ n f x) (h₀ : f x ≠ 0) :\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/Abs.lean\", \"line\": \"35\", \"text\": \"theorem contDiffWithinAt_abs {x : ℝ} (hx : x ≠ 0) (s : Set ℝ) :\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/Abs.lean\", \"line\": \"36\", \"text\": \"    ContDiffWithinAt ℝ n (|·|) s x := (contDiffAt_abs hx).contDiffWithinAt\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/Deriv/Abs.lean\", \"line\": \"38\", \"text\": \"theorem ContDiffWithinAt.abs (hf : ContDiffWithinAt ℝ n f s x) (h₀ : f x ≠ 0) :\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the two semantic phrasings and Loogle return bundle-coordinate regularity, diffeomorphism composition, and measure change-of-variables, not this absolute chart-Jacobian cocycle. Targeted Geometry grep finds no cocycle. ContDiffAt.abs (Deriv/Abs.lean:32) is a constituent calculus result, not a one-line specialization proving all the chart, derivative, determinant and cocycle clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "abs.*det.*(comp|mul)|jacobian.*cocycle",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: constituent derivative, bundle-coordinate or determinant results do not directly state all chart-Jacobian cocycle clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute determinants of derivatives of coordinate changes give a smooth density transition cocycle",
+   "results": "8 hits; MeasurableEquiv.withDensity_ofReal_map_symm_apply_eq_integral_abs_det_fderiv_mul, MeasureTheory.restrict_map_withDensity_abs_det_fderiv_eq_addHaar, MeasureTheory.map_withDensity_abs_det_fderiv_eq_addHaar, MeasurableEquiv.withDensity_ofReal_map_symm_apply_eq_integral_abs_deriv_mul, ContMDiff.coordChange, MDifferentiableOn.coordChange, MDifferentiable.coordChangeL, MDifferentiableWithinAt.coordChange",
+   "date": "2026-10-24",
+   "verdict": "no match: constituent derivative, bundle-coordinate or determinant results do not directly state all chart-Jacobian cocycle clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"fderiv\"",
+   "results": "12 hits; MeasureTheory.aemeasurable_ofReal_abs_det_fderivWithin, MeasureTheory.aemeasurable_toNNReal_abs_det_fderivWithin, MeasureTheory.addHaar_image_le_lintegral_abs_det_fderiv, MeasureTheory.addHaar_image_eq_zero_of_det_fderivWithin_eq_zero, MeasureTheory.lintegral_abs_det_fderiv_eq_addHaar_image, MeasureTheory.map_withDensity_abs_det_fderiv_eq_addHaar, MeasureTheory.lintegral_abs_det_fderiv_eq_addHaar_image₀, MeasureTheory.lintegral_abs_det_fderiv_le_addHaar_image",
+   "date": "2026-10-24",
+   "verdict": "no match: constituent derivative, bundle-coordinate or determinant results do not directly state all chart-Jacobian cocycle clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute determinants of smooth chart transition derivatives form a smooth positive cocycle",
+   "results": "8 hits; ContMDiff.coordChange, ContMDiffOn.coordChange, ContMDiff.coordChangeL, ContMDiffOn.coordChangeL, contMDiffOn_coordChangeL, contDiffOn_fderiv_coord_change, ContMDiffAt.coordChange, ContMDiffAt.coordChangeL",
+   "date": "2026-10-24",
+   "verdict": "no match: constituent derivative, bundle-coordinate or determinant results do not directly state all chart-Jacobian cocycle clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "det_mul|det_one",
+   "results": "5 hits; Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: constituent derivative, bundle-coordinate or determinant results do not directly state all chart-Jacobian cocycle clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth positive Jacobian determinant of a diffeomorphism between open real Euclidean sets, chain rule under composition",
+   "results": "8 hits; OpenPartialHomeomorph.MDifferentiable.comp_symm_deriv, OpenPartialHomeomorph.MDifferentiable.symm_comp_deriv, mfderiv_comp_of_eq, mfderiv_comp_apply_of_eq, MeasureTheory.integral_target_eq_integral_abs_det_fderiv_smul, OpenPartialHomeomorph.MDifferentiable.mfderiv, mfderivWithin_comp_of_preimage_mem_nhdsWithin_of_eq, mfderivWithin_comp_of_preimage_mem_nhdsWithin",
+   "date": "2026-10-24",
+   "verdict": "no match: constituent derivative, bundle-coordinate or determinant results do not directly state all chart-Jacobian cocycle clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "ContDiffAt.fderiv_right|HasFDerivAt.comp|ContDiffAt.comp|ContDiffAt.mul",
+   "results": "25 hits; Mathlib/Analysis/Calculus/DSlope.lean, Mathlib/Analysis/Calculus/DifferentialForm/Basic.lean, Mathlib/Analysis/Calculus/Deriv/Basic.lean, Mathlib/Analysis/Calculus/Deriv/Comp.lean, Mathlib/Analysis/Calculus/Deriv/Comp.lean, Mathlib/Analysis/Calculus/Deriv/Comp.lean, Mathlib/Analysis/Calculus/Deriv/Comp.lean, Mathlib/Analysis/Calculus/Deriv/Comp.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: constituent derivative, bundle-coordinate or determinant results do not directly state all chart-Jacobian cocycle clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-smooth-density-line",
+  "date": "2026-10-24",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization. Supporting input: the density line with the absolute-Jacobian transition rule; density-line construction: Absolute chart Jacobians form a smooth positive cocycle",
+   "via": [
+    "def-sfb-smooth-density-line",
+    "def-sfb-smooth-bundle-test-distributions",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chart-absolute-jacobian-cocycle",
+  "worker": "stage1",
+  "summary": "Proved the positive smooth absolute chart-Jacobian cocycle in six steps, reusing the existing smooth-differentiation and determinant Mathlib leaves, with no new nodes. Included dimension zero, sign-local smoothness, reciprocal as reversed transition, and exact triple-overlap evaluation points. Added the determinant definition citation without changing the mathematical statement. Missing Demailly source is explicitly WANTED.",
+  "blueprint": "Supports the density-line construction below det-thm-sf-ctf-stability-direct-images, proof (3), along the inherited analytic prerequisite chain. Read the newest blueprint latest/main-20261024 direct-images proof (3). The inherited from.node is null because the created.item chain terminates at the Lean module Sheaf.SixFunctors.CtfStabilityDirectImages, not a DAG node; preserved this recorded chain as blueprint_refs.py ancestor reports."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-29ae491ff",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-29ae491ff (reviewer sub-agent of L); spot-checked: I read the 6-step split of lem-sfb-chart-absolute-jacobian-cocycle in full. It has no new nodes. The statement is unchanged apart from an added determinant-definition citation and its stmt_dep. I checked the small cases m=0, m=1 with x↦−x, and scaling 2·3=6; the cocycle order matches what def-sfb-smooth-density-line and the vector-bundle-core node need. The four cited nodes support each step. I read ContDiffAt.fderiv_right (Comp.lean:724), det_isEmpty (Basic.lean:94) and det_mul (Basic.lean:138). The dim-0 case is handled before the n≥1 det_mul node is used. Step 3 evaluates the inverse derivatives at x_i(p) and x_j(p), so the points are right. Step 4 shows the absolute value is smooth because the determinant's sign is locally constant. Step 6 uses the chain rule at v=x_j(p). An rg -L search found no duplicate node, and no SGA source is cited. The Demailly source is honestly marked WANTED and the proof is labelled agent-written. FIX: step 2 claimed without argument that the transition between charts that are only compatible with the atlas is smooth. The corrected text proves it locally by factoring through an atlas chart y: F_ij=(x_j∘y⁻¹)∘(y∘x_i⁻¹). Only the step-2 text changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.ChartAbsoluteJacobianCocycle",
+  "declaration": "OpenPartialHomeomorph.chartAbsoluteJacobian_cocycle",
+  "declarations": [
+   "OpenPartialHomeomorph.chartAbsoluteJacobian",
+   "OpenPartialHomeomorph.chartAbsoluteJacobian_cocycle"
+  ],
+  "file": "lean/Sheaf/Geometry/Manifold/ChartAbsoluteJacobianCocycle.lean",
+  "statement": "theorem chartAbsoluteJacobian_cocycle {m : ℕ} {N : Type u} [TopologicalSpace N] [ChartedSpace (EuclideanSpace ℝ (Fin m)) N] [IsManifold (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin m))) ∞ N] (x y : OpenPartialHomeomorph N (EuclideanSpace ℝ (Fin m))) (hx : x ∈ IsManifold.maximalAtlas (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin m))) ∞ N) (hy : y ∈ IsManifold.maximalAtlas (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin m))) ∞ N) : ContMDiffOn (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin m))) (modelWithCornersSelf ℝ ℝ) ∞ (x.chartAbsoluteJacobian y) (x.source ∩ y.source) ∧ (∀ p ∈ x.source ∩ y.source, 0 < x.chartAbsoluteJacobian y p) ∧ ContMDiffOn (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin m))) (modelWithCornersSelf ℝ ℝ) ∞ (fun p ↦ (x.chartAbsoluteJacobian y p)⁻¹) (x.source ∩ y.source) ∧ (∀ p ∈ x.source, x.chartAbsoluteJacobian x p = 1) ∧ (∀ p ∈ x.source ∩ y.source, y.chartAbsoluteJacobian x p * x.chartAbsoluteJacobian y p = 1) ∧ (∀ z : OpenPartialHomeomorph N (EuclideanSpace ℝ (Fin m)), z ∈ IsManifold.maximalAtlas (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin m))) ∞ N → ∀ p ∈ x.source ∩ y.source ∩ z.source, x.chartAbsoluteJacobian z p = y.chartAbsoluteJacobian z p * x.chartAbsoluteJacobian y p)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary definition gives the actual ordinary derivative matrix determinant of the node; maximal-atlas membership quantifies over all compatible charts. No statement correction or new notion is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-715e9c563",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (ChartedSpace/IsManifold self model on EuclideanSpace ℝ (Fin m) with ∞; Matrix.det), the module, report and the citer def-sfb-smooth-density-line. Each clause matches: all three charts in maximalAtlas (every compatible chart); chartAbsoluteJacobian = |det| of the fderiv of y∘x.symm at x p, which equals the transition's derivative (they agree on an open neighbourhood); ContMDiffOn into 𝓘(ℝ,ℝ) on the overlap, positivity, reciprocal smoothness, g_ii=1, g_ji g_ij=1, g_ik=g_jk g_ij in node order. m=0 (empty det = 1) and empty overlaps covered; no extra topological hypotheses; universe u free. Helper def has real data and source/blueprint docstrings; theorem proof is sorry with the 6-step plan; lean.statement verbatim in the file; non-lean node fields equal live; no duplicate notion in the live DAG, lean/Sheaf or Mathlib. Not recompiled (nothing changed); worker reports clean scompile and dry run."
+ }
+}

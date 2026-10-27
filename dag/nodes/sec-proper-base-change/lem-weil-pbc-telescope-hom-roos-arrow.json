@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-telescope-hom-roos-arrow",
+ "kind": "statement",
+ "title": "Hom of the telescope comparison is isomorphic to the ordinary-limit Roos arrow",
+ "statement": "Let O be a commutative ring sheaf on a small site, E a sequential diagram of ordinary complexes, I any coefficient complex, and X a complex of inverse towers. Given a natural isomorphism e:E.op ⋙ Hom(-,I) ≅ X.asFunctor, and f:Cone(1-shift on the direct sum of E)→colim E whose unshifted restriction is telescopeToColimit and whose shifted cochain restriction is zero, the arrow Hom(f,I) is isomorphic in the arrow category to the actual zero-second-coordinate arrow ExactProductsRoos.comparison.app X. Neither K-injectivity nor a quasi-isomorphism hypothesis or conclusion occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, lemma-colim-and-lim-of-duals; derived.tex Tag 0949, lemma-colim-hocolim, explicit ordinary-complex calculation"
+ },
+ "stmt_deps": [
+  "def-pur-hom-complex",
+  "lem-pc-complex-hocolim-colimit",
+  "lem-weil-pbc-exact-products-roos-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply ringedHomComplexColimitCone_isLimit and postcompose by the specified tower isomorphism e. The termwise ordinary-limit cone of X is limiting by HomologicalComplex.isLimitOfEval. Their unique cone-point isomorphism a identifies every colimit-leg restriction with the corresponding ordinary-limit projection.",
+   "uses": [
+    "lem-weil-pbc-ringed-hom-complex-colimit-cone",
+    "lem-weil-pbc-exact-products-roos-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "InternalHomCoproductFanIsLimit applied to the evaluation of the coproduct cofan, followed by commuting the two product universal properties, makes Hom(S,I) the product of Hom(E_n,I). Transport the factors by e to obtain b:Hom(S,I) ≅ product(X), with its projection equations. Additivity and functoriality of Hom, checked with the recorded Hom projections, identify precomposition by telescopeColimitShift with the Roos difference by evaluation at each product projection.",
+   "uses": [
+    "lem-sc-internal-hom-coproduct-fan",
+    "lem-sc-hom-complex-projections",
+    "lem-pc-complex-hocolim-colimit",
+    "lem-weil-pbc-exact-products-roos-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved first-Hom coordinate lemmas in SignedDoubleHomCone.Calculation: inB/outB and inA/outA are inverse graded decompositions, and inB_d/inA_d give their differentials. In degree n multiply outA by n.negOnePow. The inverse is the sum of inB and n.negOnePow times inA. The binary cone identities prove the inverse equations; the two differential formulas and negOnePow_succ prove the chain-map equation. This gives Hom(Cone(u),I) ≅ mappingCocone(-Hom(u,I)). Transport along the arrow isomorphism with both legs b to get the required target isomorphism.",
+   "uses": [
+    "lem-sf-double-hom-cone-comparison",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the arrow square on the two raw cone projections. On the first, hf₁ and contravariant functoriality give precomposition by telescopeToColimit; testing at each product projection identifies it with a followed by inclusion. On the second, evaluate hf₂ in each source degree and use the Hom projection formula: precomposition followed by outA is zero. The specified Roos comparison has first coordinate inclusion and second coordinate zero by comparisonApp_f. Cone projection extensionality completes Arrow.isoMk.",
+   "uses": [
+    "lem-pc-complex-hocolim-colimit",
+    "lem-sc-hom-complex-projections",
+    "lem-weil-pbc-exact-products-roos-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-hom-complex-colimit-cone",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-sc-internal-hom-coproduct-fan",
+  "lem-sc-hom-complex-projections",
+  "lem-pc-complex-hocolim-colimit",
+  "lem-sf-double-hom-cone-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, lemma-colim-and-lim-of-duals; derived.tex Tag 0949, lemma-colim-hocolim; explicit product and signed cone calculation by A3 using the proved first-Hom coordinate API of SignedDoubleHomCone."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom sends direct sums to products and mapping cones to mapping fibres",
+   "results": "Eight hits about closed category internal Hom, Day convolution and direct sums; none provides the signed chain-level telescope/Roos arrow comparison or strict Koszul evaluation.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free Koszul complex dual tensor evaluation isomorphism natural in the differential and chain maps",
+   "results": "Eight hits about Kaehler differentials and finite dimensional evaluation. No theorem for the actual sheaf Koszul tower. Loogle CochainComplex.mappingCocone finds constructors and coordinate projection identities, but no Hom-of-telescope comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul|Hom.*[Tt]elescope",
+   "results": "Mathlib has no complex Koszul construction. Source HomComplexMappingCone concerns the second variable. SignedDoubleHomCone has proved private coordinate and differential formulas relevant to the first-variable calculation. InternalHomCoproduct supplies a sheaf-level universal property. RingedKoszulColimitHomOrdinaryLimit only asserts a limit isomorphism with a unit equation, not a tower evaluation isomorphism or the telescope map normalization. Blueprint Koszul search finds no duplicate of either precise algebraic step.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulRoosInclusion",
+  "date": "2026-10-26",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Ordinary finite Koszul Hom/telescope calculation supporting Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-koszul-roos-inclusion",
+    "lem-weil-pbc-ringed-koszul-tensor-tower-limit-acyclic",
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TelescopeHomRoosArrow",
+  "file": "lean/Sheaf/Algebra/Homology/TelescopeHomRoosArrow.lean",
+  "declaration": "CategoryTheory.telescopeHom_roos_arrow_iso",
+  "statement": "theorem telescopeHom_roos_arrow_iso\n    (O : Sheaf J CommRingCat.{u}) (E : ℕ ⥤ ringedSiteComplex O)\n    (I : ringedSiteComplex O)\n    (X : CochainComplex (ℕᵒᵖ ⥤ SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ℤ)\n    (e : E.op ⋙ (homComplexFunctor (R := O)).flip.obj I ≅ X.asFunctor)\n    (f : CochainComplex.mappingCone (CochainComplex.telescopeColimitShift O E) ⟶\n      colimit E)\n    (hf₁ : CochainComplex.mappingCone.inr (CochainComplex.telescopeColimitShift O E) ≫\n      f = CochainComplex.telescopeToColimit O E)\n    (hf₂ : (CochainComplex.mappingCone.inl (CochainComplex.telescopeColimitShift O E)).comp\n      (CochainComplex.HomComplex.Cochain.ofHom f) (add_zero _) = 0) :\n    Nonempty (Arrow.mk (((homComplexFunctor (R := O)).map f.op).app I) ≅\n      Arrow.mk (ExactProductsRoos.comparison.app X))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T202249-L-2699801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261026T000851-L-4137750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

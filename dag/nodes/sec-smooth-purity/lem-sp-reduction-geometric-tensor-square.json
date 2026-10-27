@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-reduction-geometric-tensor-square",
+ "kind": "statement",
+ "title": "Geometric compatibility of specified normalized reduction tensor comparisons",
+ "statement": "Fix ell,E, schemes T and Tprime on which ell is invertible, and g:Tprime to T. Fix coefficient-tower realizations D,Dprime, normalized reductions r,rprime and any specified monoidal reduction towers M,Mprime satisfying their strict generator, signed-total summand and derived-counit normalizations. There exists a SpReductionPullbackTower p for these given reductions and a SpReductionPullbackCoherence for these same M,Mprime and p. Thus the coefficient, evaluation, generator and derived-counit normalizations, and the tensor and unit geometric comparison squares, hold for already specified endpoint monoidal towers. This theorem constructs no endpoint monoidal tower.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL (sites-modules.tex), 07A4, 0G7E and 0D6D; blueprint/latest integral direct-image proof (3)."
+ },
+ "stmt_deps": [
+  "def-sp-reduction-monoidal-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Pull back integral coefficients from the point and the constant quotient coefficients. Their canonical identifications fix constant sections and commute with every actual completion projection. On the sequence site take the geometric inverse image, whose product-site Kan-extension generators are the original pulled-back sections. This gives the integral, level and sequence algebraic module inverse images and their exactness.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "def-weil-proetale-inverse-image",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two composite ringed inverse images agree on module generators q tensor a; their ring maps agree by the projection equations. The normalized composition and geometric 2-isomorphism comparisons give ordinary and derived comparison nu on whole systems. K-flat pullback computations identify its representative square with the displayed counit square. Evaluation on Kan generators proves the evaluation-section normalization.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the two prescribed monoidal towers, take the normalized inverse-image tensor models. The composition comparison tensor and unit diagrams supply the required equations. On flat-term K-flat pairs they use exactly the balancing map fixed by the towers summand and derived squares. Two-variable localization uniqueness identifies them with the prescribed mu maps on all derived systems. No faithfulness of level evaluation is used.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-proetale-inverse-image",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), refined from the existing eight-step proof of lem-sp-reduction-derived-monoidal-tower."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars strong monoidal K flat complexes of sheaf modules",
+   "results": "8 hits: light condensed monoidal structures and ordinary module flatness; no coherent derived reduction system comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoreMonoidal\"",
+   "results": "CoreMonoidal and its structural projections and constructors only.",
+   "date": "2026-10-25",
+   "verdict": "Generic monoidal interface; no normalized reduction-system comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of scalars to inverse systems preserves tensor products with K flat representative comparisons",
+   "results": "8 hits: ordinary module flatness, direct-limit tensor maps, and Kan-extension exactness.",
+   "date": "2026-10-25",
+   "verdict": "No match for the derived system comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "sp_reduction_derived_monoidal|kFlat_total_tensor_model|changeOfRings_isKFlat_independentCoefficients",
+   "results": "Mathlib service: 0 hits. Local rg: existing total-tensor and scalar-extension lemmas supply the two representative-class proofs. No existing strict reduction balancing, normalized descent or geometric square theorem.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the two existing representative-class theorems; state only the three missing comparison steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityReductionDerivedMonoidalTower",
+  "date": "2026-10-25",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-reduction-derived-monoidal-tower",
+   "place": "Comparison interfaces and original proof steps 1--8",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityReductionGeometricSquare",
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionGeometricSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction_geometric_tensor_square",
+  "statement": "theorem sp_reduction_geometric_tensor_square\n    (hl : ∀ x : T, IsUnit (l : T.residueField x))\n    (D : SpCoefficientTowersAbelian l E T) (r : SpReductionTower l E T D)\n    (M : SpReductionMonoidalTower l E T D r)\n    {T' : Scheme.{u}} (hl' : ∀ x : T', IsUnit (l : T'.residueField x)) (g : T' ⟶ T)\n    (D' : SpCoefficientTowersAbelian l E T') (r' : SpReductionTower l E T' D')\n    (M' : SpReductionMonoidalTower l E T' D' r') :\n    ∃ p : SpReductionPullbackTower l E T D r g D' r',\n      Nonempty (SpReductionPullbackCoherence l E T D r M g D' r' M' p)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "independent cc review: item theorem's assembly proof and the 47 relocated interface declarations (byte-identical to the clone apart from blueprint tags) against node lem-sp-reduction-derived-monoidal-tower, the new def node and the three new sorry nodes (strict balancing, descent, geometric square)"
+ }
+}

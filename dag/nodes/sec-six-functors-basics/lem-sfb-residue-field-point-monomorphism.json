@@ -1,0 +1,112 @@
+{
+ "id": "lem-sfb-residue-field-point-monomorphism",
+ "kind": "statement",
+ "title": "A scheme point has a monomorphic residue-field representative",
+ "statement": "Let $U$ be a scheme [def-pc-scheme] and $u\\in U$ a point with residue field $\\kappa(u)$ [def-weil-residue-field]. The canonical morphism $i_u:\\operatorname{Spec}\\kappa(u)\\to U$ of [lem-weil-pbc-morphism-from-spec-field, def-weil-affine-spectrum] is a monomorphism of schemes: for every scheme $T$ and morphisms $a,b:T\\to\\operatorname{Spec}\\kappa(u)$, the equality $i_u\\circ a=i_u\\circ b$ implies $a=b$. No closedness or local-closedness assumption on $u$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01L6 (lemma-injective-points-surjective-stalks), applied to the canonical residue-field point morphism, whose unique stalk map is the residue surjection."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical morphism Spec of the residue field at a point into a scheme is a monomorphism",
+   "results": "Hits: AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.fromSpecResidueField_apply, AlgebraicGeometry.instIsPreimmersionFromSpecStalk",
+   "date": "2026-10-23",
+   "verdict": "match: Scheme.instIsPreimmersionFromSpecResidueField followed by IsPreimmersion.instMonoScheme; sources read at lines 241 and 65 respectively"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical morphism from the spectrum of the residue field of a scheme point to that scheme is a monomorphism",
+   "results": "Hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.IsClosedImmersion.SpecMap_residue, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "match: Scheme.instIsPreimmersionFromSpecResidueField followed by IsPreimmersion.instMonoScheme; sources read at lines 241 and 65 respectively"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecResidueField\", CategoryTheory.Mono",
+   "results": "Hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the qualified query returned zero hits; the match was found through the semantic searches and verified by source grep"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPreimmersion.*Mono|IsPreimmersion \\(X.fromSpecResidueField",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/AlgebraicGeometry/ResidueField.lean",
+   "date": "2026-10-23",
+   "verdict": "match: Scheme.instIsPreimmersionFromSpecResidueField followed by IsPreimmersion.instMonoScheme; sources read at lines 241 and 65 respectively"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every preimmersion of schemes is a monomorphism",
+   "results": "Hits: AlgebraicGeometry.IsPreimmersion.instMonoScheme, AlgebraicGeometry.IsOpenImmersion.mono, AlgebraicGeometry.IsOpenImmersion.le_monomorphisms, AlgebraicGeometry.IsImmersion, AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme, AlgebraicGeometry.IsSeparated.isSeparated_of_mono, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono, AlgebraicGeometry.IsImmersion.toIsPreimmersion",
+   "date": "2026-10-23",
+   "verdict": "match: Scheme.instIsPreimmersionFromSpecResidueField followed by IsPreimmersion.instMonoScheme; sources read at lines 241 and 65 respectively"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.IsPreimmersion.instMonoScheme",
+  "file": "AlgebraicGeometry/ResidueField.lean",
+  "how": "specializes in one line: infer the monomorphism of U.fromSpecResidueField u from AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField (Mathlib/AlgebraicGeometry/ResidueField.lean:241-244) and AlgebraicGeometry.IsPreimmersion.instMonoScheme (Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean:65-66). Both declarations read in source; no additional hypothesis.",
+  "line": 241,
+  "matches": [
+   {
+    "declaration": "AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField",
+    "file": "AlgebraicGeometry/ResidueField.lean",
+    "line": 241
+   },
+   {
+    "declaration": "AlgebraicGeometry.IsPreimmersion.instMonoScheme",
+    "file": "AlgebraicGeometry/Morphisms/Preimmersion.lean",
+    "line": 65
+   }
+  ]
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-decent-quasicompact-monomorphic-points",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: Finiteness for field-valued maps over closed base points, before using the rational section identity. Supporting lemma for Tag 08AL: Tag 03JV (lemma-UR-finite-above-x), implication (6) to (4), pointwise; Tag 03I8 (definition-very-reasonable). Proof of the supporting implication: residue-field inclusion of a chart point is a monomorphism, used to embed its kernel relation into an etale field scheme (Tag 03JU, proof (2) to (3)).",
+   "via": [
+    "lem-sfb-decent-quasicompact-monomorphic-points",
+    "lem-sfb-decent-space-finite-field-map",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-fibred-cover-detects-exactness",
+ "kind": "statement",
+ "title": "Locally covering fibred functors detect exactness of abelian sheaves",
+ "statement": "Fix the universes and small-skeleton convention of [def-weil-size-convention] and a scheme $S$ [def-pc-scheme]. Categories fibred in groupoids, their morphisms, 2-isomorphisms and 2-fibre products have the meanings of [def-sfb-stable-pointed-moduli-groupoids]. Give each such category its big etale site: objects and arrows are those of the fibred category and coverings lie over jointly surjective etale families of schemes. Abelian sheaves mean abelian-group-valued contravariant functors satisfying the covering equalizer condition [def-weil-pbc-sites-and-cohomology]. Pullback $e^{-1}$ is precomposition. For $v:\\mathcal V\\to\\mathcal X$ and an abelian sheaf $N$ on $\\mathcal V$, put $(v_*N)(x)=\\Gamma(\\mathcal V\\times_{\\mathcal X}T,N|_{\\mathcal V\\times_{\\mathcal X}T})$ for $x$ over $T$, where $\\Gamma$ is the group of compatible families over all objects and restriction is precomposition with the projection. Let $f:\\mathcal U\\to\\mathcal X$ be a morphism such that every object $x$ of $\\mathcal X$ admits an etale covering $\\{x_i\\to x\\}$ with each $x_i$ isomorphic to $f(z_i)$ for some $z_i\\in\\mathcal U$. For any complex $F\\xrightarrow aG\\xrightarrow bH$ of abelian sheaves on $\\mathcal X$, meaning $ba=0$, if the complex of precomposed sheaves $f^{-1}F\\xrightarrow{f^{-1}a}f^{-1}G\\xrightarrow{f^{-1}b}f^{-1}H$ is exact at its middle term, then $F\\xrightarrow aG\\xrightarrow bH$ is exact at $G$. In particular this criterion also applies with $F=0$ or $H=0$. No faithfulness, algebraicity or representability assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XD (lemma-check-exactness-covering), with the etale topology; the augmented-complex formulation includes the degree -1 identity."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For either site, put $K=\\ker(b)$. Its sections are $K(x)=\\ker(G(x)\\to H(x))$ by sectionwise computation of kernels. Since $ba=0$, $a$ factors uniquely as $F\\xrightarrow{c}K\\hookrightarrow G$. The complex is exact at $G$ if and only if $c$ is an epimorphism, and this is equivalent to local surjectivity of $c$. Thus exactness is equivalent to the following criterion: every section $s\\in G(x)$ with $b(s)=0$ is, on some covering of $x$, in the image of $a$. The identical argument applies to the assumed exact complex on $\\mathcal U$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XD, lemma-check-exactness-covering, proof; local-section formulation from sites-modules.tex Tag 03CN, lemma-abelian-abelian (2), (5), (6)."
+   }
+  },
+  {
+   "text": "Fix an object $x$ and $s\\in G(x)$ with $b(s)=0$. Choose the covering $r_i:x_i\\to x$ and isomorphisms $\\alpha_i:f(z_i)\\xrightarrow{\\sim}x_i$ from the hypothesis. Put $s_i=G(\\alpha_i)G(r_i)(s)\\in G(f(z_i))=(f^{-1}G)(z_i)$. Naturality gives $(f^{-1}b)(s_i)=H(\\alpha_i)H(r_i)b(s)=0$. This uses only restriction maps and the stated local-image hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XD, lemma-check-exactness-covering, proof; local-section formulation from sites-modules.tex Tag 03CN, lemma-abelian-abelian (2), (5), (6)."
+   }
+  },
+  {
+   "text": "Apply the local lifting criterion of step 1 to the exact precomposed complex on $\\mathcal U$, at $z_i$ and $s_i$. There is a covering $q_{ij}:w_{ij}\\to z_i$ and $t_{ij}\\in(f^{-1}F)(w_{ij})=F(f(w_{ij}))$ such that $a(t_{ij})=G(f(q_{ij}))(s_i)$. Because $f$ is a functor over schemes, the family $f(q_{ij}):f(w_{ij})\\to f(z_i)$ lies over the same jointly surjective etale family as $q_{ij}$, so it is a covering in $\\mathcal X$. Compose it with the singleton isomorphism-cover $\\alpha_i$ and then with $r_i$. The covering axioms imply that the resulting family $r_i\\alpha_i f(q_{ij}):f(w_{ij})\\to x$ is a covering. Contravariant functoriality rewrites the displayed equality as $a(t_{ij})=s|_{f(w_{ij})}$.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XD, lemma-check-exactness-covering, proof; local-section formulation from sites-modules.tex Tag 03CN, lemma-abelian-abelian (2), (5), (6)."
+   }
+  },
+  {
+   "text": "We have produced the local lifts required in step 1 for every kernel section over every object of $\\mathcal X$. Therefore $c:F\\to K$ is locally surjective, hence epic, and $F\\to G\\to H$ is exact at $G$. Nothing in the construction requires nonzero terms: for $F=0$ the local lifts assert that every kernel section is locally zero, and for $H=0$ every section of $G$ is a kernel section. Thus both stated endpoint cases follow as well.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XD, lemma-check-exactness-covering, proof; local-section formulation from sites-modules.tex Tag 03CN, lemma-abelian-abelian (2), (5), (6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XD (lemma-check-exactness-covering), using its local covering argument and the explicit local exactness criterion of Tag 03CN(6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exact_iff|reflects.*[Ee]xact|[Ee]xact.*locally",
+   "results": "Hits read: Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/LocallyInjective.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean Search directory Mathlib/CategoryTheory/Sites/",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness reflection for faithful functors does not establish faithfulness of this fibred-site precomposition; stalk criteria are for topological spaces, not the stated sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"exact_iff\"",
+   "results": "Hits read: TopCat.Sheaf.exact_iff_stalkFunctor_map_exact",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness reflection for faithful functors does not establish faithfulness of this fibred-site precomposition; stalk criteria are for topological spaces, not the stated sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of abelian sheaves on a site is exact if its pullback to a locally surjective fibred category is exact",
+   "results": "Hits read: CategoryTheory.IsPullback.exact_shortComplex', CategoryTheory.ShortComplex.Exact.recOn, CategoryTheory.ShortComplex.Exact.casesOn, CategoryTheory.ShortComplex.exact_iff_of_hasForget, CategoryTheory.ShortComplex.ab_exact_iff, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness reflection for faithful functors does not establish faithfulness of this fibred-site precomposition; stalk criteria are for topological spaces, not the stated sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of abelian sheaves on a fibred category is detected by precomposition with a locally essentially surjective functor",
+   "results": "Hits read: CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.extensiveTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Functor.exact_tfae, Condensed.hasExactLimitsOfShape, CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.GrothendieckTopology.Point.instHasExactColimitsOfShapeOppositeElementsFiberOfLocallySmallOfAB5OfSizeOfHasFiniteLimits",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness reflection for faithful functors does not establish faithfulness of this fibred-site precomposition; stalk criteria are for topological spaces, not the stated sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor of categories fibred in groupoids whose image locally covers every object reflects exact sequences of abelian sheaves",
+   "results": "Hits read: CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Functor.IsLocallyFaithful, CategoryTheory.extensiveTopology.isLocallySurjective_iff, CategoryTheory.Functor.reflects_exact_of_faithful, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.instReflectsIsomorphismsSheafSheafCompose",
+   "date": "2026-10-24",
+   "verdict": "no match: general exactness reflection for faithful functors does not establish faithfulness of this fibred-site precomposition; stalk criteria are for topological spaces, not the stated sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally essentially surjective functor between categories fibred in groupoids detects exactness of abelian sheaves by precomposition",
+   "results": "Actual search hits: CategoryTheory.coherentTopology.isLocallySurjective_iff, CategoryTheory.extensiveTopology.isLocallySurjective_iff, CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.Functor.exact_tfae, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf. Search subdirectory: (all/default).",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern sheafification, special Mayer--Vietoris complexes or exact functors; they do not establish detection along the stated locally covering functor of fibred categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"exact\"",
+   "results": "Actual search hits: CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.Sheaf.hasExactColimitsOfShape, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.H.longSequence_exact, CategoryTheory.Sheaf.H.longSequence_exact₁', CategoryTheory.Sheaf.H.longSequence_exact₃', CategoryTheory.Sheaf.H.longSequence_exact₂'. Search subdirectory: (all/default).",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern sheafification, special Mayer--Vietoris complexes or exact functors; they do not establish detection along the stated locally covering functor of fibred categories."
+  },
+  {
+   "tool": "grep",
+   "query": "reflects_exact|exact_iff|[Ff]ibred|[Ff]ibered",
+   "results": "Actual search hits: Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean. Search subdirectory: CategoryTheory/Sites.",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern sheafification, special Mayer--Vietoris complexes or exact functors; they do not establish detection along the stated locally covering functor of fibred categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of abelian sheaves is reflected by restriction to a locally covering fibred category",
+   "results": "Actual search hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.HasSheafify.isLeftExact, CategoryTheory.sheafIsAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.hasExactColimitsOfShape, SheafOfModules.instAbelian, PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf, TopCat.Sheaf.forget. Search subdirectory: (all/default).",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern sheafification, special Mayer--Vietoris complexes or exact functors; they do not establish detection along the stated locally covering functor of fibred categories."
+  },
+  {
+   "tool": "grep",
+   "query": "reflects_exact_of_faithful|exact_iff_epi|exact_iff.*kernel|epi.*kernel",
+   "results": "Actual search hits: Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/ShortComplex/Ab.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean. Search subdirectory: Algebra/Homology/ShortComplex.",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern sheafification, special Mayer--Vietoris complexes or exact functors; they do not establish detection along the stated locally covering functor of fibred categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of abelian sheaves along a covering functor reflects exactness using local lifting of kernel sections",
+   "results": "Actual search hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, Condensed.hasExactLimitsOfShape, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, CategoryTheory.Sheaf.hasExactColimitsOfShape. Search subdirectory: (all/default).",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern sheafification, special Mayer--Vietoris complexes or exact functors; they do not establish detection along the stated locally covering functor of fibred categories."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-relative-cech-module-augmentation-exact",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Exact augmented relative Cech complex for stack module sheaves. Supporting input: Locally covering fibred functors detect exactness of abelian sheaves.",
+   "via": [
+    "lem-sfb-stack-relative-cech-module-augmentation-exact",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibred-cover-detects-exactness",
+  "worker": "stage1",
+  "summary": "Checked Stacks 06XD and 03CN(2),(5),(6), and all cited DAG statements. Gave the local-kernel-section proof in four steps, using three existing Mathlib leaves for sectionwise kernels, exactness via the kernel lift, and local surjectivity of epis. Covers are pushed forward only because they have unchanged base schemes; no fullness or faithfulness is used. No new nodes. Added the existing definitions of exactness and etale morphisms as statement dependencies.",
+  "blueprint": "Supporting exactness-detection input to the relative Cech augmentation in the chain under det-thm-sf-ctf-stability-direct-images, proof (3). The current item has blueprint.from.node=null; retained that inherited ancestry and searched the current blueprint/DAG for equivalent statements (none). Steps 1--4 realize Stacks 06XD by its local-covering argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-c8c97f53f",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-c8c97f53f (reviewer sub-agent of L); spot-checked: Shape: one commit touching the item JSON and the Q120 report only, with no new nodes. The item is still unsplit in live and side-live with an identical statement; there is no repair note, so no supersession or re-split rule applies. The statement is unchanged; stmt_deps only add def-weil-pbc-exact-sequence and def-weil-etale-morphism, both used by the statement. Source: I read stacks-sheaves.tex Tag 06XD (lemma-check-exactness-covering), statement and proof. The item is its étale, middle-term case with the same two hypotheses and nothing weakened. The delivered proof is a direct local-lifting version of Stacks' argument through x^{-1} on (Sch/T)_τ. Step 1: kernel sectionwise (lem-weil-pbc-sheafification-exact cl.1), exact iff the kernel factorization is epi (exact-iff-epi-kernel-lift), epi iff locally surjective on any site (site-abelian-sheaf-epi-locally-surjective). This is correct; that the precomposed terms are sheaves on U is a presupposition of the unchanged statement and elementary. Step 2: naturality, elementary. Step 3: def-sfb-stable-pointed-moduli-groupoids makes morphisms functors over Sch/S, so f(q_ij) lies over the same étale covering; site axioms (i) and (ii) give the composite covering, and contravariance gives a(t_ij)=s|. Step 4: correct, including the F=0 and H=0 cases. Edge cases checked: f = identity, U empty (empty covers force G(x)=0), x_i only isomorphic to f(z_i), f neither full nor faithful. The rg duplicate search found no node stating 06XD or a generalization; fibred-big-etale-restriction-calculus and cartesian-section-covering-restriction are different results. The parent's step 4 uses the item exactly as stated. The route is Stacks, with no SGA and no tool_uses. The unused v_* convention and the odd source.place phrase are inherited and left unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibredCoverDetectsExactness",
+  "declaration": "CategoryTheory.exact_of_fibred_etale_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibredCoverDetectsExactness.lean",
+  "statement": "theorem exact_of_fibred_etale_cover {S : Scheme.{u}} {U : BasedCategory.{v₁, w₁} (Over S)} {X : BasedCategory.{v₂, w₂} (Over S)} (hU : IsFibredInGroupoids U) (hX : IsFibredInGroupoids X) (f : BasedFunctor U X) (hcover : ∀ x : X.obj, ∃ R : Presieve x, R ∈ Scheme.etalePrecoverage.comap (X.p ⋙ Over.forget S) x ∧ ∀ (y : X.obj) (r : y ⟶ x), R r → ∃ z : U.obj, Nonempty (f.toFunctor.obj z ≅ y)) (K : ShortComplex (Sheaf (Scheme.etalePrecoverage.comap (X.p ⋙ Over.forget S)).toGrothendieck AddCommGrpCat.{max u v₁ w₁ v₂ w₂ a})) (L : ShortComplex (Sheaf (Scheme.etalePrecoverage.comap (U.p ⋙ Over.forget S)).toGrothendieck AddCommGrpCat.{max u v₁ w₁ v₂ w₂ a})) (hL : L.map (sheafToPresheaf _ _) = (K.map (sheafToPresheaf _ _)).map ((Functor.whiskeringLeft _ _ _).obj f.toFunctor.op)) (hexact : L.Exact) : K.Exact",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Inherited big etale sites are the Mathlib etale precoverage comapped along the projection to schemes. The equality hL identifies the underlying three-term complex with precomposition on objects and arrows; it adds no continuity or exactness assumption on f."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8cefc298e",
+  "group": "NP",
+  "result": "pass",
+  "note": "First S2 delivery of lem-sfb-fibred-cover-detects-exactness. Only the lean field changed; the statement is verbatim in the file; one theorem exact_of_fibred_etale_cover with sorry and no defs. Clauses: IsFibredInGroupoids (dep decl) on U and X; BasedFunctor f (no faithfulness or representability); big etale site = Scheme.etalePrecoverage.comap (p ⋙ Over.forget S).toGrothendieck, pullback-stable for categories fibred in groupoids, so its sheaves are the covering-equalizer sheaves; hcover = covering presieve whose domains are isomorphic to f-images; L pinned by hL equality of underlying presheaf complexes to the precomposition of K (objects and both arrows; satisfiable since precomposition gives sheaves); hexact L.Exact ⇒ K.Exact (ShortComplex.Exact, the exact-sequence dep notion); F=0/H=0 covered. Coefficient universe max u v1 w1 v2 w2 a fits the size convention, no forced equalities. No duplicate site or criterion decl in side-live or Mathlib; docstrings carry Stacks 06XD and the blueprint id with the 4-step plan; imports are dep and proof_dep modules. Not compiled (no changes); worker reports clean scompile."
+ }
+}

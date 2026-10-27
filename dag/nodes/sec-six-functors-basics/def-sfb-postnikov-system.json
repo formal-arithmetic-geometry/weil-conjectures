@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-postnikov-system",
+ "kind": "definition",
+ "title": "Finite and countable Postnikov systems and their morphisms",
+ "status": "split",
+ "statement": "Let $\\mathcal T$ be a pre-triangulated category [def-weil-triangulated-category] and let $X_\\bullet$ be a complex indexed by $\\mathbf N$ with arrows $d_{r+1}:X_{r+1}\\to X_r$. For $N\\in\\mathbf N\\cup\\{\\infty\\}$ a normalized Postnikov system through $N$ consists of objects $Y_r$ and maps $a_r:Y_r\\to X_r$ for $0\\le r\\le N$, an equality $Y_0=X_0$ identifying $a_0$ with the identity, and maps $b_{r+1}:X_{r+1}\\to Y_r$, $c_{r+1}:Y_r\\to Y_{r+1}[1]$ for $r+1\\le N$, such that $Y_{r+1}\\xrightarrow{a_{r+1}}X_{r+1}\\xrightarrow{b_{r+1}}Y_r\\xrightarrow{c_{r+1}}Y_{r+1}[1]$ is distinguished and $a_r b_{r+1}=d_{r+1}$. Restriction to $M\\le N$ retains these objects and maps. For a map of complexes $u:X_\\bullet\\to X'_\\bullet$, a map of systems over $u$ is a family $g_r:Y_r\\to Y'_r$, with $g_0=u_0$ under the degree-zero equalities, satisfying all three triangle squares $a'_rg_r=u_ra_r$, $b'_ru_r=g_{r-1}b_r$, $g_r[1]c_r=c'_rg_{r-1}$ for $1\\le r\\le N$. Its restriction retains the same components. The connecting sequence has vertices $Y_r[r]$ and arrows $c_{r+1}[r]:Y_r[r]\\to Y_{r+1}[r+1]$, using the canonical shift-composition identification.",
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0D7Z (definition-postnikov-system), normalized by Y_0=X_0 and a_0=1 as in the consuming node; example-key-postnikov for the infinite system and shifted connecting arrows."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Postnikov system of a chain complex in a triangulated category and morphism of Postnikov systems",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ChainComplex.truncate\", \"module\": \"Mathlib.Algebra.Homology.Augment\", \"type\": \"[HasZeroMorphisms V] : ChainComplex V ℕ ⥤ ChainComplex V ℕ\", \"doc\": \"The truncation functor maps a chain complex $ C $ over a category $ V $ with natural number indices to a new chain complex where each object $ C_i $ is replaced by $ C_{i+1} $, and differentials are c\"}\n  {\"name\": \"CategoryTheory.Triangulated.Octahedron\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Triangulated\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a triangulated category $\\\\mathcal{C}$ with objects $X_1, X_2, X_3$ and morphisms $u_{12}: X_1 \\\\to X_2$, $u_{23}: X_2 \\\\to X_3$, $u_{13}: X_1 \\\\to X_3$ satisfying $u_{12} \\\\circ u_{23} = u_{13}$, th\"}\n  {\"name\": \"CategoryTheory.Pretriangulated.TriangleMorphism\", \"module\": \"Mathlib.CategoryTheory.Triangulated.Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.HasShift C ℤ] →\\n      CategoryTheory.Pretriangulated.Triangle C → CategoryTheory.Pretriangulated.Triangle C → Type v\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a category structure and a shift operation parameterized by the integers $\\\\mathbb{Z}$, the type of morphisms between two triangles in $\\\\mathcal{C}$ is defined, with\"}\n  {\"name\": \"CategoryTheory.Triangulated.SpectralObject.Hom\", \"module\": \"Mathlib.CategoryTheory.Triangulated.SpectralObject\", \"type\": \"{C : Type u_1} →\\n  {ι : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} ι] →\\n        [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n          [inst_3 : CategoryTheory.HasShift C ℤ] →\\n            [inst_4 : CategoryTheory.Preadditi\", \"doc\": \"Given a pretriangulated category $\\\\mathcal{C}$ with a zero object, integer-shift operation, preadditive structure, and additive shift functors, this is the type of morphisms between two spectral objec\"}\n  {\"name\": \"CochainComplex.mappingCone\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \": CochainComplex C ℤ\", \"doc\": \"Given a morphism $\\\\phi: F \\\\to G$ between cochain complexes in a preadditive category $\\\\mathcal{C}$, the mapping cone is a cochain complex constructed by assigning to each index $i$ the object $F_{i+1}\"}\n  {\"name\": \"HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated\", \"type\": \"(T₁ T₂ : Triangle (HomotopyCategory C (ComplexShape.up ℤ))) (hT₁ : T₁ ∈ distinguishedTriangles C)\\n  (hT₂ : T₂ ∈ distinguishedTriangles C) (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂)\\n  (fac : T₁.mor₁ ≫ b = a ≫ T₂.mor₁) :\\n  ∃ (c : T₁.obj₃ ⟶ T₂.obj₃), T₁.mor₂ ≫ c = b ≫ T₂.mor₂ ∧ T₁.mor₃ ≫ a⟦(1 : ℤ)\", \"doc\": \"Let $\\\\mathcal{C}$ be a preadditive category. In the homotopy category of cochain complexes over $\\\\mathcal{C}$, let\\n$$ X_1 \\\\xrightarrow{f_1} Y_1 \\\\xrightarrow{g_1} Z_1 \\\\xrightarrow{h_1} X_1[1] $$\\nand\\n$$\"}\n  {\"name\": \"DerivedCategory.instIsTriangulated\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": IsTriangulated (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $\\\\mathcal{C}$, obtained by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical triangulated structure. This struc\"}\n  {\"name\": \"CategoryTheory.Over.postMap\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Basic\", \"type\": \"{F G : T ⥤ D} (e : F ⟶ G) : post F ⋙ map (e.app X) ⟶ post G\", \"doc\": \"Given natural transformations $\\\\eta: F \\\\Rightarrow G$ between functors $F, G: \\\\mathcal{T} \\\\to \\\\mathcal{D}$, the function constructs a natural transformation $\\\\text{post} F \\\\Rightarrow \\\\text{post} G$ w\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: truncations, spectral objects and individual triangle morphisms do not define Postnikov systems of a prescribed complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable Postnikov systems extending finite systems in a triangulated category under vanishing shifted Hom groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.IsGE\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a category $ C $ with a triangulated structure, this proposition holds for an object $ X $ and integer $ n $ if $ X $ satisfies the condition of being greater or equal to the shift by $ n $, as \"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.IsLE\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a category $ C $ with a category instance, preadditive structure, zero object, shift operation parameterized by integers $\\\\mathbb{Z}$, additive shift functors, and pretriangulated structure, thi\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.exists_triangle\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"For any object $A$ in a triangulated category $\\\\mathcal{C}$ equipped with a t-structure $t$, and for any integers $n_0$ and $n_1$ satisfying $n_1 = n_0 + 1$, there exist objects $X$ and $Y$ in $\\\\mathc\"}\n  {\"name\": \"CategoryTheory.IsTriangulated.mk'\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Triangulated\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"A category $\\\\mathcal{C}$ with a preadditive structure, zero object, integer-parameterized shift operation, and additive shift functors is triangulated if for any composable morphisms $u_{12}: X_1 \\\\to \"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"In a triangulated category equipped with a t-structure, for every object $A$, there exist objects $X$ and $Y$ such that $X$ belongs to the subcategory of objects concentrated in degrees $\\\\leq 0$, $Y$ \"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.ge\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"For a triangulated category $\\\\mathcal{C}$ with integer-indexed shift functors, this defines the property of objects belonging to the $n$-th truncation subcategory of a t-structure, i.e., objects conce\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.ge_one_le\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] [inst_3 : CategoryTheory.HasShift C ℤ]\\n  [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] [inst_5 : CategoryTheory.Pretriangulated\", \"doc\": \"In a triangulated category equipped with a t-structure, the subcategory of objects concentrated in degrees ≥1 is contained within the subcategory of objects concentrated in degrees ≥0.\"}\n  {\"name\": \"CategoryTheory.Triangulated.TStructure.le\", \"module\": \"Mathlib/CategoryTheory/Triangulated/TStructure/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\\n    \", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a category structure, preadditive structure, zero object, integer-parameterized shift operation, additive shift functors, pretriangulated structure, and a \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: truncations, spectral objects and individual triangle morphisms do not define Postnikov systems of a prescribed complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Postnikov\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: truncations, spectral objects and individual triangle morphisms do not define Postnikov systems of a prescribed complex"
+  },
+  {
+   "tool": "grep",
+   "query": "Postnikov|postnikov|Toda",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: truncations, spectral objects and individual triangle morphisms do not define Postnikov systems of a prescribed complex"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-countable-postnikov-extension-comparison",
+  "date": "2026-10-24",
+  "group": "Q103"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Postnikov data, finite restriction, and comparison maps used by the countable Postnikov extension/comparison input to flat semisimplicial derived realization.",
+   "via": [
+    "lem-sfb-countable-postnikov-extension-comparison",
+    "lem-sfb-flat-semisimplicial-derived-realization",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.PostnikovSystem",
+  "declaration": "CategoryTheory.Triangulated.PostnikovSystem",
+  "declarations": [
+   "CategoryTheory.Triangulated.PostnikovSystem",
+   "CategoryTheory.Triangulated.PostnikovSystem.restrict",
+   "CategoryTheory.Triangulated.PostnikovSystem.Hom",
+   "CategoryTheory.Triangulated.PostnikovSystem.Hom.restrict",
+   "CategoryTheory.Triangulated.PostnikovSystem.connecting"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/PostnikovSystem.lean",
+  "statement": "structure PostnikovSystem (K : ChainComplex C ℕ) (N : WithTop ℕ)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6020ef733",
+  "group": "Q103",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6020ef733",
+  "group": "Q103",
+  "result": "pass",
+  "note": "New def-sfb-postnikov-system (PostnikovSystem/restrict/Hom/connecting) matches Stacks 0D7Z with the node's Y_0=X_0, a_0=1 normalisation; triangles, a_r b_{r+1}=d_{r+1}, all three Hom squares and the c_{r+1}[r] connecting arrow via shiftFunctorAdd' 1 r checked. Item theorems: existence hypothesis = 0D83 Hom(X_i[i-j-2],X_j)=0 for i>j+2; comparison hypothesis = 0D82 mixed Hom(X_i[i-j-1],X'_j)=0 for i>j+1. Existence, one-step extension and extension to N keep prescribed data by restriction equality; comparison step and full comparison carry the iso clause (true by 014A 2-out-of-3); no uniqueness claimed. Edge cases N=0,1,2,⊤ and first obstructions (3,0),(2,0) checked; universes free; IsTriangulated is the node's own assumption. No hollow definitions, only `by sorry`, docstrings with source and blueprint tags, statement fields verbatim, only lean and stmt_deps changed in the item record; no duplicate notion in Mathlib or the project. No file changed, so no compile."
+ }
+}

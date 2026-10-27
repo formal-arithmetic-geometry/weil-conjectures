@@ -20,118 +20,76 @@
  ],
  "proof": [
   {
-   "text": "Put $s=\\operatorname{Spec}k$ and write $a:X\\to s$ for the structure map. By [lem-sfb-field-action-derived-section-transport] use the exact normalized equivalences $E_R$ from field module sheaves to condensed $G$-modules. They identify $\\mathcal K_R$ with $D(E_R)Ra_{*,R}$, preserve scalar adjunction units and counits, and identify the specified $\\beta_R$ with the canonical coefficient projection for $a$. Thus this is a comparison of the actual maps of the statement. The same input identifies forgetting $G$ with geometric derived sections over $X^s$ and makes it an exact conservative functor; below this permits detecting an isomorphism after forgetting the action.",
+   "text": "Write $a:X\\to s=\\operatorname{Spec}k$. Since $a$ is separated of finite type with affine target, [lem-weil-pbc-qcqs-over-affine] makes $X$ qcqs. Apply [lem-sfb-field-action-derived-section-transport]: $K_R=D(E_R)Ra_{*,R}$ with t-exact transport preserving scalar units, counits and the specified projections. Forgetting $G$ is exact conservative and gives geometric derived sections over $X^s$, so detects invertibility of the actual $\\beta_R$.",
    "uses": [
-    "lem-sfb-field-action-derived-section-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric finite-coefficient cohomology and coefficient projection; agent expansion, with the remaining norm generator input explicitly isolated."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-dc-lower-star-preserves] with coefficient $\\underline E$ to $a:X\\to s$. Its hypotheses are met: $\\underline E$ for the finite normed $E$ is one of its coefficient rings, and $X$, $s$ and $a$ lie in the setting of the item ($k$ of characteristic $p\\ne\\ell$, separated finite-type $k$-schemes). Its input is bounded constructible in the stratified local-finite-presentation sense, whereas $V$ is given in the finite constant local model sense; a finite constant local model is locally finitely presented by [det-def-sfb-constructible-local-model], on the same constructible strata, so $V$ qualifies. Hence every $H^q(Ra_{*,A}V)$ is constructible in the local-finite-presentation sense, and only finitely many are nonzero. Since $s=\\operatorname{Spec}k$ is Noetherian and $\\underline E$ carries certificate (i), [lem-sfb-adic-constructibility-predicate-comparison] converts this into the finite constant local model sense of [sk-def-sfb-constructible]. On the one-point scheme $s$ the only nonempty stratum is $s$ itself, and a finitely presented $E$-module is a finite-dimensional vector space, hence free of finite rank. So on a pro-étale cover each $H^q(Ra_{*,A}V)$ is $A_{U_i}^{n_i}$, that is, lisse [def-sfb-lisse-coefficient-module]. The last clause of [lem-sfb-field-action-derived-section-transport] gives a finite-dimensional norm-topological $E$-representation $W_q$ of $G$ realizing it. T-exactness of $D(E_A)$ identifies this realization with $H^q(K_A)$. Since there are only finitely many nonzero cohomology sheaves, choose $W_q=0$ outside the same finite interval. This proves boundedness in the equivariant category, without taking arithmetic invariants.",
-   "uses": [
-    "lem-sfb-dc-lower-star-preserves",
-    "det-def-sfb-constructible-local-model",
-    "lem-sfb-adic-constructibility-predicate-comparison",
-    "sk-def-sfb-constructible",
-    "def-sfb-lisse-coefficient-module",
-    "lem-sfb-field-action-derived-section-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric finite-coefficient cohomology and coefficient projection; agent expansion, with the remaining norm generator input explicitly isolated."
-   }
-  },
-  {
-   "text": "For $R=C$, apply [lem-sfb-qlbar-direct-image-comparison] to $a$ and the bounded (hence bounded-below) complex $V$. The morphism is qcqs because it is separated of finite type; in particular the source is qcqs by [lem-weil-pbc-qcqs-over-affine]. This theorem uses exactly the finite-subextension-valued ring $C$, not $B$. It says the counit-adjoint projection is an isomorphism in the target module derived category. Applying $D(E_C)$ and the unit/counit normalization in [lem-sfb-field-action-derived-section-transport] proves that the actual $\\beta_C$ is an isomorphism.",
-   "uses": [
-    "lem-sfb-qlbar-direct-image-comparison",
     "lem-weil-pbc-qcqs-over-affine",
     "lem-sfb-field-action-derived-section-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric finite-coefficient cohomology and coefficient projection; agent expansion, with the remaining norm generator input explicitly isolated."
+    "place": "Paragraph (3), assembly of independent returned-proof arguments"
    }
   },
   {
-   "text": "For $R=B$, forget $G$ using [lem-sfb-field-action-derived-section-transport]. The resulting map is the coefficient projection $B\\otimes_A^L Rp_{X^s*}V^s\\to Rp_{X^s*}(B_{X^s}\\otimes^L_{A_{X^s}}V^s)$, where $V^s=u^*V$. Pullback is exact by [det-prop-sfb-module-pullback-exact-main], so $H^q(V^s)=u^*H^q(V)$ and $V^s$ is bounded. By [det-def-sfb-constructible-local-model] each $H^q(V)$ is constructible in the local-finite-presentation sense, and [lem-weil-pbc-module-constructible-pullback] shows that $u^*H^q(V)$ is again constructible in that sense. The scheme $X^s$ is separated of finite type over the separably closed positive-characteristic field $k^s$, hence Noetherian, so [lem-sfb-adic-constructibility-predicate-comparison] (certificate (i) for $\\underline E$) puts $V^s$ in $\\Dbc(X^s,E)$ of [sk-def-sfb-constructible], the finite constant local model convention used by the generator lemma. By [det-lem-integral-models-generators](1), $V^s$ is obtained by finitely many cones and shifts from objects $Q=(a_!L_0)[1/\\ell]$, with $a:S\\hookrightarrow X^s$ locally closed and $L_0$ lisse finite free over $\\mathcal O_{E,S}$. The coefficient field remains this same $E$; no field descent of the whole complex is being asserted.",
+   "text": "On each stratum, finite constant local models are locally finitely presented by [det-def-sfb-constructible-local-model]. Apply [lem-sfb-dc-lower-star-preserves] to $a$ with $A=\\underline E$: both schemes are separated finite type over $k$, and $p\\ne\\ell$. Thus $M=Ra_{*,A}V$ is bounded constructible in the stratified local-finite-presentation sense. Apply [lem-sfb-geometric-finite-cohomology-model] to $M$ with the transport of step 1 to obtain the equivariant $W_q$ and their finite vanishing interval.",
    "uses": [
-    "lem-sfb-field-action-derived-section-transport",
-    "det-prop-sfb-module-pullback-exact-main",
     "det-def-sfb-constructible-local-model",
-    "lem-weil-pbc-module-constructible-pullback",
-    "lem-sfb-adic-constructibility-predicate-comparison",
-    "sk-def-sfb-constructible",
-    "det-lem-integral-models-generators"
+    "lem-sfb-dc-lower-star-preserves",
+    "lem-sfb-geometric-finite-cohomology-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric finite-coefficient cohomology and coefficient projection; agent expansion, with the remaining norm generator input explicitly isolated."
+    "place": "Paragraph (3), assembly of independent returned-proof arguments"
    }
   },
   {
-   "text": "For each generator $Q$ just obtained, [lem-sfb-supported-lattice-norm-projection], applied with $K=k^s$ and $T=X^s$, proves invertibility of exactly this projection map. To pass through the finite construction, fix the coefficient object $B$ and use [lem-sfb-ringed-projection-first-shift]: projection is a natural transformation of exact functors in the geometric input, compatible with its shifts and the third arrows of triangles. Thus the isomorphism locus contains every shift of a generator and is closed under cones by [lem-sf-triangle-two-out-of-three]. Induction on the finite number of shifts and cones in step 4 proves invertibility for $V^s$. Exact conservativity of forgetting $G$ from step 1 now proves invertibility of $\\beta_B$ in $D(\\mathcal A_G(B))$. This uses no commutation of tensor with an infinite totalization.",
+   "text": "For $C$, $a$ is qcqs and $V$ bounded below. The canonical projection is invertible by [lem-sfb-qlbar-direct-image-comparison], using finite-subextension-valued $C$. Its normalized transport by [lem-sfb-field-action-derived-section-transport], applicable by step 1, proves invertibility of the specified $\\beta_C$.",
    "uses": [
-    "lem-sfb-supported-lattice-norm-projection",
-    "lem-sfb-ringed-projection-first-shift",
-    "lem-sf-triangle-two-out-of-three",
+    "lem-sfb-qlbar-direct-image-comparison",
     "lem-sfb-field-action-derived-section-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric finite-coefficient cohomology and coefficient projection; agent expansion, with the remaining norm generator input explicitly isolated."
+    "place": "Paragraph (3), assembly of independent returned-proof arguments"
    }
   },
   {
-   "text": "It remains to check the prescribed square rather than choose unrelated isomorphisms. Work first on $s_{\\mathrm{proet}}$ and use the canonical coefficient maps $A_s\\to C_s\\xrightarrow{c_s}B_s$. The normalized projections are the $\\chi$ of [lem-pur-ringed-coefficient-projection-cocycle]. Its cocycle identity identifies the projection for the composite $A_s\\to B_s$ with the successive projections for $A_s\\to C_s$ and $C_s\\to B_s$, under balanced tensor associativity. Precompose the latter identity with the scalar unit $C_s\\otimes^L_{A_s}Ra_*V\\to\\operatorname{Res}_{c_s}(B_s\\otimes^L_{A_s}Ra_*V)$. The scalar adjunction triangle identity then gives\n$$\\operatorname{Res}_{c_s}(\\chi_{A,B})\\circ\\gamma_s=\\kappa_s\\circ\\chi_{A,C}.$$\nMore explicitly, the transpose of either side is $Ra_*V\\to\\operatorname{Res}_{A,B}Ra_{*,B}(B_X\\otimes^L_{A_X}V)$ induced by the same unit $v\\mapsto1\\otimes v$; the route through $C$ sends it to $1\\otimes v\\mapsto c(1)\\otimes v=1\\otimes v$. Uniqueness of adjoints proves equality of these derived arrows. Transport by the coefficient-compatible equivalences of [lem-sfb-field-action-derived-section-transport] gives exactly $\\operatorname{Res}_c(\\beta_B)\\circ\\gamma=\\kappa\\circ\\beta_C$. This is an equality in the $C$-equivariant derived category and therefore remains one after restriction to $A$.",
+   "text": "Apply [lem-sfb-geometric-generator-projection-devissage] with this $k,k^s,X,E,\\Omega,V$. It gives the geometric pullback, its finite lattice-generator construction, and invertibility of the unit-normalized norm projection. By [lem-sfb-field-action-derived-section-transport] this is exactly the forgotten $\\beta_B$; exact conservativity gives its invertibility in $D(\\mathcal A_G(B))$. No infinite totalization is involved.",
    "uses": [
-    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-sfb-geometric-generator-projection-devissage",
     "lem-sfb-field-action-derived-section-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric finite-coefficient cohomology and coefficient projection; agent expansion, with the remaining norm generator input explicitly isolated."
+    "place": "Paragraph (3), assembly of independent returned-proof arguments"
    }
   },
   {
-   "text": "All projections in the preceding steps are the counit-adjoint maps. Naturality in $V$ follows from naturality of the derived scalar unit and the comparison with restriction, preserved by the normalized transport. Compatibility with the canonical shifts follows from [lem-sfb-ringed-projection-first-shift] and the shift compatibility in [lem-pur-ringed-coefficient-projection-cocycle] and [lem-sfb-field-action-derived-section-transport]. These give the claimed naturality and shift assertion for both isomorphisms and their square. If $V=0$ or $X=\\varnothing$, every geometric object and map here is zero; if $G=1$, transport forgets no action and the same proof applies.",
+   "text": "Apply [lem-sfb-geometric-coefficient-square-transport] on $s_{\\mathrm{proet}}$ to $A_s\\to C_s\\to B_s$ and $a$. Transport its equality by [lem-sfb-field-action-derived-section-transport]. Because both inputs preserve scalar units and restriction comparisons, its $\\gamma,\\kappa,\\beta$ are the maps specified here, giving $\\operatorname{Res}_c(\\beta_B)\\circ\\gamma=\\kappa\\circ\\beta_C$ in the $C$-equivariant category and then over $A$. The same inputs give naturality and shift compatibility. For $V=0$ or $X=\\varnothing$ the objects vanish; $G=1$ removes no additional information.",
    "uses": [
-    "lem-sfb-ringed-projection-first-shift",
-    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-sfb-geometric-coefficient-square-transport",
     "lem-sfb-field-action-derived-section-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), geometric finite-coefficient cohomology and coefficient projection; agent expansion, with the remaining norm generator input explicitly isolated."
+    "place": "Paragraph (3), assembly of independent returned-proof arguments"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-field-action-derived-section-transport",
-  "lem-sfb-dc-lower-star-preserves",
-  "det-def-sfb-constructible-local-model",
-  "lem-sfb-adic-constructibility-predicate-comparison",
-  "sk-def-sfb-constructible",
-  "def-sfb-lisse-coefficient-module",
-  "lem-sfb-qlbar-direct-image-comparison",
   "lem-weil-pbc-qcqs-over-affine",
-  "det-prop-sfb-module-pullback-exact-main",
-  "lem-weil-pbc-module-constructible-pullback",
-  "det-lem-integral-models-generators",
-  "lem-sfb-supported-lattice-norm-projection",
-  "lem-sfb-ringed-projection-first-shift",
-  "lem-sf-triangle-two-out-of-three",
-  "lem-pur-ringed-coefficient-projection-cocycle"
+  "lem-sfb-field-action-derived-section-transport",
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-dc-lower-star-preserves",
+  "lem-sfb-geometric-finite-cohomology-model",
+  "lem-sfb-qlbar-direct-image-comparison",
+  "lem-sfb-geometric-generator-projection-devissage",
+  "lem-sfb-geometric-coefficient-square-transport"
  ],
  "proof_origin": {
   "by": "agent",
@@ -399,15 +357,11 @@
   "date": "2026-10-22",
   "item": "lem-sfb-geometric-condensed-finite-scalar-model",
   "worker": "stage1",
-  "summary": "Kept the complete statement. Separate rational finite-dimensionality, finite-subextension projection and all-continuous norm projection; prove the latter by finite lattice generator devissage after exact conservative forgetting of G. Isolate field/action transport and the genuinely smaller supported lattice projection input; retain actual adjunction units in the coefficient square. No cyclic proper/open comparison inputs used.",
-  "blueprint": "Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md: geometric finite-E cohomology and coefficient projection before Galois invariants. Ancestor command reports null; preserve the inherited null and via chain.",
+  "summary": "Repair the human re-split request: preserve the statement, split field cohomology, geometric norm generator devissage and the scalar-unit square into three independent unsplit nodes; retain all seven old arguments verbatim with allocation and proof guidance in report.md. Parent is a short assembly. Landing-return repair: rebased on the current DAG, reread every external assembly citation, and distinguished the newly reported 0B56 tower-augmentation node. Renewed landing-return repair: establish the transport qcqs hypothesis in step 1 and explicitly identify the stratified local-finite-presentation output in step 2; preserved the three-child split and all logged searches.",
+  "blueprint": "Paragraph (3), same geometric finite-coefficient route. Inherited null ancestor and complete via chain retained.",
   "tool_uses": [
    {
     "node": "lem-sfb-dc-lower-star-preserves",
-    "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "sk-def-sfb-constructible",
     "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
    },
    {
@@ -417,34 +371,6 @@
    {
     "node": "lem-weil-pbc-qcqs-over-affine",
     "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "det-prop-sfb-module-pullback-exact-main",
-    "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-module-constructible-pullback",
-    "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "det-lem-integral-models-generators",
-    "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "lem-sfb-ringed-projection-first-shift",
-    "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "lem-sf-triangle-two-out-of-three",
-    "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "lem-pur-ringed-coefficient-projection-cocycle",
-    "why": "Generic exact pullback / bounded constructible rational direct image / normalized derived projection or triangulated two-out-of-three tool; used with its full stated hypotheses, not to replace the unit route."
-   },
-   {
-    "node": "lem-sfb-adic-constructibility-predicate-comparison",
-    "why": "Generic comparison of the two constructibility conventions (local finite presentation vs finite constant local model) for E coefficients on Noetherian schemes; converts the output of the finiteness and pullback tools into the convention of the lisse clause and the generator lemma. No node of the unit states it."
    }
   ]
  },
@@ -462,12 +388,12 @@
   "lem-sfb-adic-constructibility-predicate-comparison"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NV-c47afc973",
-  "group": "NV",
+  "reviewer": "NT-cc-Q45-5e88f15ca",
+  "group": "Q45",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-c47afc973 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, blueprint main-20261015 direct-images paragraph (3) and Bhatt–Scholze Ex. 4.1.10 / Prop. 6.8.4. First delivery: the statement is byte-identical to base, the item is still unsplit live and side-live, it is not in the dropped list, and there is no cycle and no SGA source. One fault (C4/E1) in steps 2 and 4. lem-sfb-dc-lower-star-preserves and lem-weil-pbc-module-constructible-pullback work with constructibility in the local-finite-presentation sense (sk-def-sfb-bounded-constructible / def-sfb-constructible-module). The steps read their output as the finite-constant-local-model sense, which the lisse step and det-lem-integral-models-generators(1) need; det-def-sfb-constructible-local-model says the converse fails in general. Fixed in the item: constant model ⇒ lfp by det-def-sfb-constructible-local-model, and lfp ⇒ constant model by lem-sfb-adic-constructibility-predicate-comparison on the Noetherian schemes Spec k and X^s (E̲ has certificate (i)). Lisse now cites def-sfb-lisse-coefficient-module. proof_deps regenerated, and the adic comparison added as a declared tool use. Steps 1, 3, 5, 6 and 7 check: the Q̄_ℓ filtered-union projection for β_C, generator dévissage with the shift-compatible projection and two-out-of-three, conservative forgetting of G, and the square verified by transposes with c(1)=1. New nodes: field-action transport is true (B–S 4.1.10: Spec k_proét = profinite G-sets, so condensed G-modules; lisse = finite continuous representations) and is not a duplicate of the field-site or Galois-descent nodes. Supported-lattice norm projection is a strictly smaller generator case: separably closed base, one lattice, no action, no square. It is true for the point and the zero/empty cases, plausible otherwise, and marked WANTED; the qcqs elliptic-family counterexample does not apply because ranks are bounded here. Batch 5: dc-lower-star → lem-pd-section-derived-pushpull-normalization is a generic internal/section normalization, not a Poincaré duality step, accepted. integral-models-generators → def-pod-l-adic-representations is a definition, accepted. The adic comparison added by the fix brings no new trace-formula or Poincaré-duality reach: its hits are a subset of those of the unflagged qlbar comparison.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-5e88f15ca (reviewer sub-agent of L); spot-checked: Third head of the 2026-10-21 re-split (old proof: 7 steps, ~6986 chars). The three new nodes are byte-identical to the PASSed 3cf97085 head. The item changes only in two places: step 1 now proves X is qcqs via lem-weil-pbc-qcqs-over-affine (the citation moved from step 3), and step 2 now says the constant models are lfp stratum by stratum and that the dc-lower-star output is lfp-constructible. Live and side-live still carry the NV 7-step proof and none of the child ids, so the delivery is not superseded. The statement and stmt_deps are unchanged, every cited statement equals live, there is no SGA citation and no cycle. Size: the parent has 5 steps and 2264 chars; the children are 1570, 2315 and 1823 chars. Allocation: old steps 1 and 3 are kept as parent steps; old step 2 becomes the finite-cohomology node plus the dc-lower-star step; old steps 4-5 become the generator node plus the conservative lift; old steps 6-7 become the square node plus transport. Nothing was dropped, and no child restates the equivariant item. Step checks: (1) field-action transport gives D(E_R)Ra_* ≅ K_R for qcqs X, identifies β, and makes forgetting G exact and conservative. (2) dc-lower-star applies with Λ=E̲ (dc-setting needs only char p≠ℓ and a separated finite-type morphism), and its lfp output is the hypothesis of the finite-cohomology node. (3) qlbar-direct-image-comparison uses the filtered-union C and needs a qcqs map and bounded-below V, both of which hold. (4) The generator node's π_{V^s} with T=X^s is exactly the forgotten β_B. (5) The square node on s_proet with A→C→B is transported by E_C. New nodes: the finite-cohomology node is true for any k (Spec k is Noetherian, certificate family E, one stratum, finitely presented E-modules are free, t-exactness). The generator node follows from u^*, integral-models-generators(1), the supported-lattice node with K=k^s, and two-out-of-three. I checked the square node by transposes: Res_a(m)η^a=η^{ca} because c(1)=1, and the restriction comparisons compose, so both sides equal d^{ca}G_A(η^{ca}). Overlap with topos-scalar-mate-transitivity (Q154) and scalar-direct-image-mate-coherence (NM): those are counit-form composition laws, so this is not a duplicate (advisory). Accepted tool uses: dc-lower-star, qlbar-direct-image-comparison, qcqs-over-affine. No fixes. Maintainer note: this is a landing-return re-delivery of a PASSed split, and L should promote it."
  },
  "lean": {
   "module": "Sheaf.Paper.GeometricCondensedFiniteScalarModel",
@@ -532,5 +458,37 @@
   "group": "NP",
   "result": "pass",
   "note": "Re-delivery after the 7f3441a3 RETURN (R1, H13/H4). sk-def-sfb-qlbar-condensed is byte-identical to live and the dependency module FiniteSubextensionCondensedRingOfUniverse is removed. The 16 arbitrary-Omega helpers moved into the item namespace GeometricFiniteScalar.FiniteSubextension, identical to the earlier ones except for blueprint tags. The item node differs from live only in lean. Independent H3 check: hypotheses l prime, CharP p != l, IsSepClosure, separated finite type, NormedAlgebra/IsAlgClosure Omega without completeness, finite E; C = finite-subextension-valued subring; constantModel Dbc V; t.bounded; CohomologyModel pins sections/restriction/scalar/action with Subsingleton W outside [lo,hi]; beta = homEquiv transpose of K_A(unit) followed by the ScalarData comparison; gamma and kappa pinned; Square.commutes in the node's order; CommShift from leftAdjointCommShift. Existential packaging follows the descent Assertion convention: ActionAbelian is Prop-only, GeometricData and ScalarData are pinned. Edge cases and universes OK. H4: existing FiniteSubextension/EllAdic code is PadicAlgCl-specific. H5/H6: 5 sorry (4 helper postponed theorems with proof docstrings, plus the main theorem). Statement verbatim; declaration list equals the file. No compile (no file changed). Advisories: unused private proof-dependency imports (H9); a stage-3 identification with padicAlgClRingObj at Omega = PadicAlgCl; the descent theorem-node stmt_dep is used only for its structures."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a1345",
+  "group": "W5",
+  "result": "fix",
+  "landing": "20261025T052000-L-38144",
+  "kind": "proof",
+  "note": "independent cc review: delivered GeometricCondensedFiniteScalarModel.lean (byte-identical to returned 7e16) vs published module, item node lem-sfb-geometric-condensed-finite-scalar-model, stage-3 §2 import rule; 4 proofs checked with #print axioms",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.GeometricFiniteScalar.FiniteSubextension.finiteIntermediateFields_directed",
+   "AlgebraicGeometry.ProEtale.GeometricFiniteScalar.FiniteSubextension.finiteValued_closed",
+   "AlgebraicGeometry.ProEtale.GeometricFiniteScalar.FiniteSubextension.finiteValued_comp",
+   "AlgebraicGeometry.ProEtale.GeometricFiniteScalar.FiniteSubextension.isSheaf_ringPresheaf",
+   "AlgebraicGeometry.ProEtale.GeometricFiniteScalar.geometric_condensed_finite_scalar_model"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.GeometricFiniteScalar.geometric_condensed_finite_scalar_model"
+  ]
  }
 }

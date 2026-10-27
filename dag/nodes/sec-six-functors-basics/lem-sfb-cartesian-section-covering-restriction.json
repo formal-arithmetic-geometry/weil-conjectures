@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-cartesian-section-covering-restriction",
+ "kind": "statement",
+ "title": "Cartesian section morphisms extend uniquely from a locally covering subsieve",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $(\\mathcal C,J)$ be a site [def-weil-pbc-topos] small in the larger universe, and let $\\mathcal Q$ be a category fibred in groupoids with fibre objects and arrows in that universe. Assume that $\\mathcal Q$ is a prestack: for every $V$ and $a,b\\in\\mathcal Q(V)$, the presheaf on $\\mathcal C/V$ assigning to $h:W\\to V$ the set $\\operatorname{Isom}(h^*a,h^*b)$ is a sheaf for the induced topology (a sieve on an object $h:W\\to V$ covers exactly when its underlying sieve on $W$ belongs to $J(W)$). For a sieve $S$ on $T$, let $\\operatorname{Sec}_{\\mathcal Q}(S)$ be the groupoid of cartesian sections over its full subcategory of $\\mathcal C/T$: objects are families $x_f\\in\\mathcal Q(\\operatorname{dom}f)$ with coherent isomorphisms $h^*x_f\\cong x_{fh}$, and arrows are families of fibre isomorphisms commuting with these comparisons. Let $K\\subseteq S$ be sieves on $T$, not necessarily covering $T$, and suppose $f^*K\\in J(V)$ for every $f:V\\to T$ in $S$. Then for any $x,y\\in\\operatorname{Sec}_{\\mathcal Q}(S)$, restriction is a bijection\n$$\\operatorname{Isom}_{\\operatorname{Sec}_{\\mathcal Q}(S)}(x,y)\\;\\xrightarrow{\\ \\sim\\ }\\;\\operatorname{Isom}_{\\operatorname{Sec}_{\\mathcal Q}(K)}(x|_K,y|_K).$$\nEquivalently, restriction of cartesian sections from $S$ to $K$ is fully faithful.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 02ZN (lemma-stackify), naive proof, final construction checks (4) and (8); less naive proof, morphisms on refinements. The locally covering sieve formulation is the descent-of-morphisms argument underlying those checks."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-topos"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\alpha:x|_K\\to y|_K$ be an arrow. Write $c^x_{f,h}:h^*x_f\\xrightarrow{\\sim}x_{fh}$ and $c^y_{f,h}$ for the transition isomorphisms. For $f:V\\to T$ in $S$ and $h:W\\to V$ with $fh\\in K$, put\n$$b_{f,h}=(c^y_{f,h})^{-1}\\alpha_{fh}c^x_{f,h}\\in\\operatorname{Isom}(h^*x_f,h^*y_f).$$\nComposition is read right to left. For any $k:Z\\to W$, the sieve property gives $fhk\\in K$. Naturality of $\\alpha$ says $\\alpha_{fhk}c^x_{fh,k}=c^y_{fh,k}k^*\\alpha_{fh}$. Substituting this in the formula for $b_{f,hk}$ and using the coherence identities $c^x_{f,hk}=c^x_{fh,k}k^*c^x_{f,h}$ and the same identity for $y$ gives $b_{f,hk}=k^*b_{f,h}$. These equalities include the canonical comparison $(hk)^*\\cong k^*h^*$; they are identities in that common parenthesization, not an assumption of strict pullbacks. Thus $(b_{f,h})_{h\\in f^*K}$ is a matching family in the isomorphism presheaf for $x_f,y_f$ on $\\mathcal C/V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN, lemma-stackify, naive proof final checks (4) and (8), and less naive proof morphisms on refinements; the following supplies the omitted descent-of-morphisms check using Sites Tag 00Z8 (definition-sheaf-sets-topology)."
+   }
+  },
+  {
+   "text": "For each $f:V\\to T$ in $S$, take the sieve on $1_V$ in $\\mathcal C/V$ consisting of the arrows $h\\to1_V$ with $h\\in f^*K$. It covers: its underlying sieve is $f^*K\\in J(V)$ by the hypothesis. The isomorphism presheaf for $x_f,y_f$ is a sheaf by the prestack hypothesis. Apply exactly the unique-amalgamation clause of [def-weil-pbc-topos] to the matching family from step 1. Its unique amalgamation, identified using the unit pullback isomorphisms, is\n$$\\beta_f:x_f\\xrightarrow{\\sim}y_f,\\qquad h^*\\beta_f=b_{f,h}\\quad(h\\in f^*K).$$\nThere is no descent of objects here: $x_f,y_f$ are already given, and we glue elements of their stated isomorphism sheaf. The index sets are in the fixed larger universe because the site and its fibre arrows are.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN, lemma-stackify, naive proof final checks (4) and (8), and less naive proof morphisms on refinements; the following supplies the omitted descent-of-morphisms check using Sites Tag 00Z8 (definition-sheaf-sets-topology)."
+   }
+  },
+  {
+   "text": "The family $\\beta$ is compatible with every section transition. Indeed, let $h:W\\to V$ with $f\\in S$, so $fh\\in S$. Compare in $\\operatorname{Isom}(x_{fh},y_{fh})$ the two elements $\\beta_{fh}$ and\n$$\\gamma=c^y_{f,h}(h^*\\beta_f)(c^x_{f,h})^{-1}.$$\nFor any $k:Z\\to W$ with $fhk\\in K$, the gluing formulas give\n$$k^*\\gamma=(k^*c^y_{f,h})b_{f,hk}(k^*c^x_{f,h})^{-1}=(c^y_{fh,k})^{-1}\\alpha_{fhk}c^x_{fh,k}=k^*\\beta_{fh}.$$\nThe middle equality is obtained by substituting $b_{f,hk}$ and cancelling the two factors $k^*c_{f,h}$ using the same coherence identities as in step 1. As $(fh)^*K\\in J(W)$, unique amalgamation for the isomorphism sheaf of $x_{fh},y_{fh}$, as defined in [def-weil-pbc-topos], implies $\\gamma=\\beta_{fh}$. This is exactly $\\beta_{fh}c^x_{f,h}=c^y_{f,h}h^*\\beta_f$. Thus $\\beta$ is an arrow of cartesian sections; its pointwise inverses satisfy the inverse equation, hence it is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN, lemma-stackify, naive proof final checks (4) and (8), and less naive proof morphisms on refinements; the following supplies the omitted descent-of-morphisms check using Sites Tag 00Z8 (definition-sheaf-sets-topology)."
+   }
+  },
+  {
+   "text": "If $f\\in K$, then $1_V\\in f^*K$. The gluing equation at $h=1_V$ gives $\\beta_f=\\alpha_f$, after the section unit comparison isomorphisms. Consequently $\\beta|_K=\\alpha$, proving surjectivity of restriction. If $\\delta,\\epsilon:x\\to y$ have the same restriction to $K$, then for each $f\\in S$ and each $h\\in f^*K$, their compatibility with $c^x,c^y$ gives\n$$h^*\\delta_f=(c^y_{f,h})^{-1}\\delta_{fh}c^x_{f,h}=(c^y_{f,h})^{-1}\\epsilon_{fh}c^x_{f,h}=h^*\\epsilon_f.$$\nThe uniqueness clause of [def-weil-pbc-topos] for the same covering sieve on $1_V$ gives $\\delta_f=\\epsilon_f$ for every $f$, so $\\delta=\\epsilon$. This proves injectivity and hence the asserted bijection for every $x,y$. Since all arrows in the section categories are invertible, these are their entire Hom sets, proving full faithfulness.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN, lemma-stackify, naive proof final checks (4) and (8), and less naive proof morphisms on refinements; the following supplies the omitted descent-of-morphisms check using Sites Tag 00Z8 (definition-sheaf-sets-topology)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 02ZN, lemma-stackify, omitted final descent-of-morphisms checks; explicit sieve proof from Sites Tag 00Z8, definition-sheaf-sets-topology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a prestack restriction of cartesian sections from a sieve to a covering subsieve is fully faithful",
+   "results": "{\"t\": \"2026-10-23T11:56:28Z\", \"tool\": \"leanfinder\", \"query\": \"For a prestack restriction of cartesian sections from a sieve to a covering subsieve is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.GrothendieckTopology.yonedaFullyFaithful\"], \"digest\": \"b7fd1b81bcee5786\"}; Inspected Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:52-64 and 316-327, and DescentData.lean:483 and 615. fullyFaithfulPullFunctor is about a refinement functor between family descent-data categories with the refining family covering T. It does not state cartesian-section restriction for arbitrary S locally covered by K. A comparison of section groupoids with the family descent-data presentation and a local-on-S argument would be needed, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|fully_faithful|restrict.*[Ss]ieve",
+   "results": "{\"t\": \"2026-10-23T11:57:03Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|fully_faithful|restrict.*[Ss]ieve\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"5af702be1ef8b23a\"}; Inspected Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:52-64 and 316-327, and DescentData.lean:483 and 615. fullyFaithfulPullFunctor is about a refinement functor between family descent-data categories with the refining family covering T. It does not state cartesian-section restriction for arbitrary S locally covered by K. A comparison of section groupoids with the family descent-data presentation and a local-on-S argument would be needed, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a locally covering full subsieve induces a bijection on isomorphisms between cartesian sections of a prestack",
+   "results": "{\"t\": \"2026-10-23T11:57:04Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to a locally covering full subsieve induces a bijection on isomorphisms between cartesian sections of a prestack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.imageSieve\", \"CategoryTheory.Presheaf.isLocallySurjective_of_iso\", \"CategoryTheory.Pretopology.has_isos\", \"CategoryTheory.GrothendieckTopology.pullbackId\", \"CategoryTheory.GrothendieckTopology.Cover.pullbackId\", \"CategoryTheory.Presieve.compatibleEquivGenerateSieveCompatible\", \"CategoryTheory.Sheaf.isLocallySurjective_of_iso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\"], \"digest\": \"f0da396bc5bee20c\"}; Inspected Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:52-64 and 316-327, and DescentData.lean:483 and 615. fullyFaithfulPullFunctor is about a refinement functor between family descent-data categories with the refining family covering T. It does not state cartesian-section restriction for arbitrary S locally covered by K. A comparison of section groupoids with the family descent-data presentation and a local-on-S argument would be needed, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrestack\", \"fullyFaithful\"",
+   "results": "{\"t\": \"2026-10-23T11:57:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrestack\\\", \\\"fullyFaithful\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\"], \"digest\": \"edb33f88ee7a3c8a\"}; Inspected Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:52-64 and 316-327, and DescentData.lean:483 and 615. fullyFaithfulPullFunctor is about a refinement functor between family descent-data categories with the refining family covering T. It does not state cartesian-section restriction for arbitrary S locally covered by K. A comparison of section groupoids with the family descent-data presentation and a local-on-S argument would be needed, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prestack cartesian natural transformation on a covering subcategory extends uniquely to the sieve containing it",
+   "results": "{\"t\": \"2026-10-23T11:57:06Z\", \"tool\": \"leanfinder\", \"query\": \"A prestack cartesian natural transformation on a covering subcategory extends uniquely to the sieve containing it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsPrestackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\"], \"digest\": \"d51eaa1bdd0f6fbf\"}; Inspected Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:52-64 and 316-327, and DescentData.lean:483 and 615. fullyFaithfulPullFunctor is about a refinement functor between family descent-data categories with the refining family covering T. It does not state cartesian-section restriction for arbitrary S locally covered by K. A comparison of section groupoids with the family descent-data presentation and a local-on-S argument would be needed, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulPullFunctor",
+   "results": "{\"t\": \"2026-10-23T12:03:47Z\", \"tool\": \"grep\", \"query\": \"fullyFaithfulPullFunctor\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"a563afcacb6b4a15\"}; Inspected Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:52-64 and 316-327, and DescentData.lean:483 and 615. fullyFaithfulPullFunctor is about a refinement functor between family descent-data categories with the refining family covering T. It does not state cartesian-section restriction for arbitrary S locally covered by K. A comparison of section groupoids with the family descent-data presentation and a local-on-S argument would be needed, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulPullFunctor\"",
+   "results": "{\"t\": \"2026-10-23T12:03:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"fullyFaithfulPullFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.DescentData.fullyFaithfulPullFunctor\"], \"digest\": \"43b7929d2971428b\"}; Inspected Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:52-64 and 316-327, and DescentData.lean:483 and 615. fullyFaithfulPullFunctor is about a refinement functor between family descent-data categories with the refining family covering T. It does not state cartesian-section restriction for arbitrary S locally covered by K. A comparison of section groupoids with the family descent-data presentation and a local-on-S argument would be needed, not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|fully_faithful|restrict.*[Ss]ieve",
+   "results": "{\"t\": \"2026-10-23T13:06:41Z\", \"tool\": \"grep\", \"query\": \"fullyFaithful|fully_faithful|restrict.*[Ss]ieve\", \"sub\": \"CategoryTheory/Sites/Descent\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/IsStack.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\"], \"digest\": \"5af702be1ef8b23a\"}; Read Mathlib/CategoryTheory/Sites/Descent/DescentData.lean:475-485, 600-622 and Precoverage.lean:52-64, 316-327. These state descent of morphisms for a covering family/presieve, not restriction between arbitrary sieves S and K locally covering only S. The comparison/localization is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a locally covering full subsieve induces a bijection on isomorphisms between cartesian sections of a prestack",
+   "results": "{\"t\": \"2026-10-23T13:06:41Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to a locally covering full subsieve induces a bijection on isomorphisms between cartesian sections of a prestack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.imageSieve\", \"CategoryTheory.Presheaf.isLocallySurjective_of_iso\", \"CategoryTheory.Pretopology.has_isos\", \"CategoryTheory.GrothendieckTopology.pullbackId\", \"CategoryTheory.GrothendieckTopology.Cover.pullbackId\", \"CategoryTheory.Presieve.compatibleEquivGenerateSieveCompatible\", \"CategoryTheory.Sheaf.isLocallySurjective_of_iso\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\"], \"digest\": \"f0da396bc5bee20c\"}; Read Mathlib/CategoryTheory/Sites/Descent/DescentData.lean:475-485, 600-622 and Precoverage.lean:52-64, 316-327. These state descent of morphisms for a covering family/presieve, not restriction between arbitrary sieves S and K locally covering only S. The comparison/localization is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrestack\", \"fullyFaithful\"",
+   "results": "{\"t\": \"2026-10-23T13:06:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrestack\\\", \\\"fullyFaithful\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\"], \"digest\": \"edb33f88ee7a3c8a\"}; Read Mathlib/CategoryTheory/Sites/Descent/DescentData.lean:475-485, 600-622 and Precoverage.lean:52-64, 316-327. These state descent of morphisms for a covering family/presieve, not restriction between arbitrary sieves S and K locally covering only S. The comparison/localization is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prestack cartesian natural transformation on a covering subcategory extends uniquely to the sieve containing it",
+   "results": "{\"t\": \"2026-10-23T13:06:42Z\", \"tool\": \"leanfinder\", \"query\": \"A prestack cartesian natural transformation on a covering subcategory extends uniquely to the sieve containing it\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsPrestackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\"], \"digest\": \"d51eaa1bdd0f6fbf\"}; Read Mathlib/CategoryTheory/Sites/Descent/DescentData.lean:475-485, 600-622 and Precoverage.lean:52-64, 316-327. These state descent of morphisms for a covering family/presieve, not restriction between arbitrary sieves S and K locally covering only S. The comparison/localization is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a prestack restriction of cartesian sections from a sieve to a covering subsieve is fully faithful",
+   "results": "{\"t\": \"2026-10-23T13:06:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a prestack restriction of cartesian sections from a sieve to a covering subsieve is fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.GrothendieckTopology.yonedaFullyFaithful\"], \"digest\": \"b7fd1b81bcee5786\"}; Read Mathlib/CategoryTheory/Sites/Descent/DescentData.lean:475-485, 600-622 and Precoverage.lean:52-64, 316-327. These state descent of morphisms for a covering family/presieve, not restriction between arbitrary sieves S and K locally covering only S. The comparison/localization is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Pseudofunctor.DescentData.fullyFaithfulPullFunctor",
+  "file": "Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean",
+  "line": 323,
+  "reason": "Family descent-data restriction, not cartesian sections on arbitrary locally covered sieves; comparison and localization required."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prestack-sieve-descent-completion",
+  "date": "2026-10-23",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Stackification of groupoids: local objects, isomorphisms and extension. Supporting construction: Tag 02ZN (lemma-stackify), final descent-data construction in both proofs, including checks (1)-(8) in the naive proof; covering-sieve formulation avoids requiring fibre products of arbitrary base arrows. Descent-of-morphisms input: restriction of cartesian sections to a locally covering subsieve is fully faithful.",
+   "via": [
+    "lem-sfb-prestack-sieve-descent-completion",
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cartesian-section-covering-restriction",
+  "worker": "stage1",
+  "summary": "Retained the statement and its earlier Mathlib search evidence. Supplied the explicit morphism-extension argument: conjugate local components into each fibre isomorphism sheaf, glue on f^*K, check section compatibility by a second unique-amalgamation calculation, then verify restriction and injectivity. All steps are direct substitutions or applications of the unique-amalgamation axiom already stated in def-weil-pbc-topos and of the prestack hypothesis. No new nodes, no statement correction, no strictification or fibre products assumed.",
+  "blueprint": "Supporting descent-of-morphisms check in the inherited blueprint.from.place chain: Tag 02ZN stackification, final checks (4) and (8), serving prestack sieve descent completion. Read the current latest sk-thm-sf-ctf-stability unit and direct-images proof; this is a generic local prerequisite below its nodes, not a replacement of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-4fe8d889c",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-4fe8d889c (reviewer sub-agent of L); spot-checked: I read the item in full. Its statement is unchanged against live and side-live (both unsplit, no repair note, not superseded). I also read the statements of def-weil-pbc-topos (sieves, axioms (i)-(iii), J-sheaf as unique amalgamation) and def-weil-size-convention, the parent lem-sfb-prestack-sieve-descent-completion (steps 2-5 and 7 use the item exactly within its hypotheses), and Stacks stacks.tex l.1478-1727 Tag 02ZN. Both 02ZN proofs omit checks (4)/(8) and the morphism colimit, so proof_origin by:agent is correct. I recomputed each step. Step 1: b_{f,hk}=k^*b_{f,h} follows from the cocycle c_{f,hk}=c_{fh,k}k^*c_{f,h} and naturality of α at fh∈K; this is pure substitution and correctly elementary. Step 2: the sieve {h∈f^*K} on 1_V covers by hypothesis, the Isom presheaf is a sheaf because Q is a prestack, and unique amalgamation gives β_f. Step 3: k^*γ=(c^y_{fh,k})^{-1}α_{fhk}c^x_{fh,k}=k^*β_{fh} after cancelling the k^*c_{f,h} factors; uniqueness on (fh)^*K (fh∈S) gives compatibility of β with the transitions. Step 4: β_f=b_{f,1}=1^*α_f for f∈K, which holds even without unit normalisation, giving surjectivity; injectivity follows from uniqueness on f^*K; Hom=Isom in a groupoid. Small cases tested: K=S, S=∅, K=∅ with ∅ covering (both sides singletons), and the minimal topology (forces K=S). proof_deps equals the union of uses; LeanSearch, Loogle, LeanFinder and grep searches are recorded, and the fullyFaithfulPullFunctor candidate is correctly not a leaf. Only a definition is cited, so there is no route issue, no tool_uses, and no SGA. There are no new nodes; I found no duplicate after an rg -L for prestack, fibred in groupoids and 02ZN and reading 6 candidate statements. Advisory: 'category fibred in groupoids' has no definition node in the inherited statement, phrased the same way as the reviewed parent; blueprint.from.node null is inherited ancestry. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartesianSectionCoveringRestriction",
+  "declaration": "CategoryTheory.Pseudofunctor.bijective_sieveSectionRestriction_mapIso",
+  "declarations": [
+   "CategoryTheory.Pseudofunctor.sieveSectionRestriction",
+   "CategoryTheory.Pseudofunctor.bijective_sieveSectionRestriction_mapIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CartesianSectionCoveringRestriction.lean",
+  "statement": "theorem bijective_sieveSectionRestriction_mapIso {C : Type w} [SmallCategory C] (J : GrothendieckTopology C) (Q : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}) (hQ : ∀ V : C, IsGroupoid (Q.obj (.mk (op V)))) [Q.IsPrestack J] {T : C} (S K : Sieve T) (hKS : K ≤ S) (hcover : ∀ (V : C) (f : V ⟶ T), S f → K.pullback f ∈ J V) (x y : Q.DescentData (fun f : S.arrows.category ↦ f.obj.hom)) : Function.Bijective ((sieveSectionRestriction Q hKS).mapIso : (x ≅ y) → ((sieveSectionRestriction Q hKS).obj x ≅ (sieveSectionRestriction Q hKS).obj y))",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd87987b0",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Read node, Lean module, report, stmt_dep records (size convention, def-weil-pbc-topos import) and Mathlib DescentData/IsPrestack/Presieve.category source. Clauses match: Type w small site, Cat.{w,w} pseudofunctor with groupoid fibres, IsPrestack (Hom sheaf on J.over = Isom sheaf), K ≤ S with no covering of T, hcover = f^*K ∈ J V for f ∈ S, sections = DescentData on all arrows of S (faithful presentation, no fibre products), real reindexing restriction functor, conclusion Bijective mapIso on x ≅ y (= fully faithful in groupoids). lean.statement verbatim; node statement unchanged vs side-live (only lean added); no rival declaration in side-live or Mathlib (fullyFaithfulPullFunctor needs a cover of T). Edge cases S=∅, K=∅, K=S covered. Docstrings with source place and blueprint, proof steps in docstring, sorry only, report sections present. No fixes, no compile needed. Advisory: hQ is explicit rather than an instance."
+ }
+}

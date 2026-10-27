@@ -1,0 +1,124 @@
+{
+ "id": "lem-amb-finite-tate-normalized-comparisons",
+ "kind": "statement",
+ "title": "Normalized comparison isomorphisms for finite Tate powers",
+ "statement": "Fix a prime l, a finite extension E/Q_l and n>=0, with A=O_E/varpi_E^(n+1) and its universe lift [def-weil-l-adic-coefficient-extension]. Use the specified pro-etale and etale Tate twists [def-coefficient-twists-detailed, def-asd-finite-etale-tate-twist], and the pure root generators and normalization predicates [def-pur-finite-tate-site-comparison]. There is a family b(T,hT,r,hA,k): nu_T^* B_(r,T)(k) ≅ P_T(k), for every scheme T with l invertible in global sections, every r>=0 with l^(r+1)A=0, and every k>=0. Every b satisfies IsFiniteTateSiteComparison: on every pro-etale W over an etale U it maps the comparison-unit pure etale root tensor to the prescribed pro-etale tensor whenever all finite root projections agree as actual units. This statement asserts existence and normalization only.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03PK, 03Q1, 099R, 0GLZ and 03EK; assembly steps 1-3 of lem-amb-finite-tate-site-descent."
+ },
+ "stmt_deps": [
+  "def-pur-finite-tate-site-comparison",
+  "def-weil-l-adic-coefficient-extension",
+  "def-coefficient-twists-detailed",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For fixed T,r and hA, apply the fixed-scalar root-tensor presentation. Obtain the finite-root site comparison sigma and its root-unit and pure-tensor formulas. Invertibility of l implies invertibility of l^(r+1). The root-unit formula and the supplied equality of actual units identify the Cartier root with the tower projection, since the finite-root inclusion is monic. Compose sigma with the inverse presentation. Applying the presentation proves its normalization in degree one.",
+   "uses": [
+    "lem-amb-finite-tate-root-tensor-presentation",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The monoidal comparison adjunction gives unit_app_unit_comp_map_eta and unit_app_tensor_comp_map_delta. Evaluate these equations on constant scalar sections and pure tensors. The lax monoidal pushforward/inclusion equation identifies their components with the usual local tensor maps. Naturality of the comparison tensorator and of the inclusion tensor map extends these equations from toProEt(U) to every pro-etale W mapping to U.",
+   "uses": [
+    "lem-amb-comparison-pure-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the scalar restriction unit comparison after the monoidal unit isomorphism for comparison inverse image to construct degree zero. Its normalization follows from the unit section equation of step 2. For degree k+2 apply the monoidal comparison inverse image tensor isomorphism, tensor the already constructed degree k+1 and degree one isomorphisms, and compose with the explicit scalar restriction tensor comparison. The tensor section equation of step 2, naturality of the inclusion tensor map, the two induction normalizations, and the pure formula of the scalar restriction comparison prove exactly the recursive generator equation. Two-step natural induction supplies all degrees. Choose these already constructed normalized isomorphisms for each T,hT,r,hA,k to obtain the required family.",
+   "uses": [
+    "lem-amb-constant-scalar-explicit-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-finite-tate-root-tensor-presentation",
+  "lem-amb-finite-root-site-comparison",
+  "lem-amb-comparison-pure-sections",
+  "lem-amb-constant-scalar-explicit-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent K4",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03PK, 03CY, 03EK and 03EL; monoidal comparison adjunction and explicit left-associated tensor-power induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite Tate sheaf comparison normalized roots of unity tensor powers pullback coherence",
+   "results": "8 hits including SheafOfModules.pullbackObjFreeIso and pullbackIso; none states finite Tate normalization or its coherence.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.isoEquiv",
+   "results": "FullyFaithful.isoEquiv and its apply lemmas supply categorical uniqueness but not comparison existence or coherence.",
+   "date": "2026-10-25",
+   "verdict": "Use the fully faithful equivalence for uniqueness only."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_tate_normalized|finite_tate_site_descent|FiniteRootSiteComparisonSpec",
+   "results": "msearch Mathlib: 0 hits. Local library has AmbTateRootProjectionData and FiniteRootSiteComparisonSpec, with different ringed and fixed scalar presentations; neither states this assembly.",
+   "date": "2026-10-25",
+   "verdict": "Reuse these dependencies; separate the remaining assembly conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTateSiteDescent",
+  "date": "2026-10-25",
+  "group": "Q8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-finite-tate-site-descent",
+   "place": "Proof steps 1-3, separated from categorical uniqueness.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTateNormalizedComparisons",
+  "file": "lean/Sheaf/Paper/FiniteTateNormalizedComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_tate_normalized_comparisons",
+  "statement": "theorem finite_tate_normalized_comparisons :\n    ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →\n      ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj\n        (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅ finiteTateProSheaf l E n T k,\n    (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ)\n      (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),\n      IsFiniteTateSiteComparison l E n T r hA k (b T hT r hA k))",
+  "branch": "sheaf-dag",
+  "by": "Q8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-96e60",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261025T003330-L-3230059",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T094434-L-226277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

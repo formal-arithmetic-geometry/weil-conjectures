@@ -1,0 +1,286 @@
+{
+ "id": "lem-pur-clopen-stratification-models",
+ "kind": "statement",
+ "title": "Transport of immersed constructibility stratifications and finite module models across a clopen partition",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $I$ be a finite set, and let $j_i:X_i\\hookrightarrow X$ be pairwise disjoint open and closed immersions whose images cover $X$ [def-weil-open-immersion, def-weil-closed-immersion]. A constructible stratification here means a finite disjoint covering by immersed locally closed subschemes [def-constructible-stratification] whose images are constructible subsets [def-weil-constructible-subset]; empty strata are permitted.\n\nFor every such stratification $(s_\\nu:S_\\nu\\hookrightarrow X)_{\\nu\\in J}$ and every $i$, the immersed schemes $S_\\nu\\times_X X_i\\hookrightarrow X_i$, with their fibre-product scheme structures, form a constructible stratification of $X_i$. Conversely, for any constructible stratifications $(s_{i,\\nu}:S_{i,\\nu}\\hookrightarrow X_i)_{\\nu\\in J_i}$, the composites $j_i s_{i,\\nu}$ form a constructible stratification of $X$, indexed by the finite set $\\bigsqcup_iJ_i$. The stratum schemes and their structures are unchanged in this second construction.\n\nLet $A$ be any finite commutative ring and let $F$ be a sheaf of modules over the constant ring sheaf $A_X$ on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. Use ordinary module inverse images with their canonical constant-ring identifications [def-weil-pbc-proetale-operations]. If $F|_{S_\\nu}$ is locally constant with finite $A$-module models [def-weil-proetale-locally-constant-sheaf], then the restricted stratification on $X_i$ trivializes $F|_{X_i}$ with those same models on the base-changed trivializing covers. If stratifications of the $X_i$ trivialize $F|_{X_i}$ with chosen locally constant finite-module models, the union stratification trivializes $F$ with exactly those models and covers. Thus $F$ is constructible [def-weil-proetale-constructible-sheaf] if and only if each $F|_{X_i}$ is constructible. The assertions include empty components and the empty cover of the empty scheme; if the definition requires a positive number of strata, one empty stratum may be used.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 005J (lemma-open-immersion-constructible-inverse-image) and 09YD (lemma-quasi-compact-open-immersion-constructible-image); agent immersed-strata and module-model extension, extracted from returned item steps 1-3. Constructibility definition: main-20261015 blueprint, def-weil-finite-torsion-constructibility."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-constructible-stratification",
+  "def-weil-constructible-subset",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Add the given constructibility fields to the finite locally closed stratification to obtain Scheme.Stratification X. Apply [lemma-constructible-pullback-stratification] along j_i. Its domains and immersions are the actual fibre products and second projections. Its range equations, local closedness, constructibility, disjointness and covering fields give exactly clopenStratification_pullback. This works with zero or empty strata.",
+   "uses": [
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005J and the cited immersed-stratification pullback"
+   }
+  },
+  {
+   "text": "For each sigma index (i,n), compose the existing stratum immersion with j_i. Composition preserves immersions and its image is j_i of the original stratum image. This image is constructible by [lem-weil-pbc-constructible-image-retrocompact-open]: the range of j_i is closed, so intersecting it with a compact open is compact, hence the range is retrocompact. Within a component use injectivity of j_i and the old disjointness; across components use the given disjointness of ranges. The component and stratum covering equalities give the sigma-indexed covering equality. This proves clopenStratification_union without changing any domain scheme.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-constructible-image-retrocompact-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 09YD; composition of immersions and elementary set calculations"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-proetale-constant-module-pullback-encoding] for the two morphisms and their composite. The fixed-module inverse-image compositor identifies the encoded composite intrinsic tensor pullback with the encoded iterated intrinsic tensor pullback. Lift the isomorphism through the fully faithful equivalence of [lem-weil-pbc-proetale-constant-module-encoding]. These comparisons use the published canonical coefficient maps, not an arbitrary coefficient action. For the fibre-product square combine the two compositors with its equation.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-weil-pbc-proetale-constant-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D8 and 093R; specialization through the published constant-module encoding"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-proetale-pullback-locally-constant] to the first projection of each stratum fibre product and the supplied local finite models. It yields exactly the required base-changed objects, their covering property, and the same modules. Restrict the isomorphism of step 3 over each member and compose with its model. This proves clopenStratification_pullback_models.",
+   "uses": [
+    "lem-exc-proetale-pullback-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D8 and 093R; specialization through the published constant-module encoding"
+   }
+  },
+  {
+   "text": "For each component stratum restrict the composite comparison from step 3 over each of the supplied cover members, then compose with the supplied model isomorphism. No stratum scheme, cover object, covering arrow or module is altered. This proves clopenStratification_union_models.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D8 and 093R; specialization through the published constant-module encoding"
+   }
+  },
+  {
+   "text": "Convert intrinsic constructibility to fixed-module finite-model constructibility using [lem-weil-pbc-proetale-constant-module-constructibility]. For the forward direction pull back its stratification. On each stratum, [lem-pur-proetale-finite-local-constancy-pullback], transported through the encoding and its finite-local-constancy comparison, preserves finite local models; the pullback-square equation and fixed-module compositors identify the desired restriction. For the reverse direction choose a stratification on each component, use step 2 for the sigma-indexed union, and reindex the finite sigma type by Fin of its cardinality. The fixed-module compositor transports its finite local models to the composite immersions. Convert back using the constructibility encoding comparison. Its existing positive-stratification argument covers a zero-cardinality union on the empty scheme. Thus no nonempty partition, stratum, component, or nonzero-ring hypothesis is added.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-pur-proetale-finite-local-constancy-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-comparison/def-weil-finite-torsion-constructibility.md",
+    "place": "Finite stratification definition; Stacks 093R and the published constant-module encoding comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-pullback-stratification",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-constructible-image-retrocompact-open",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-exc-proetale-pullback-locally-constant",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-pur-proetale-finite-local-constancy-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 005J and 09YD; Stacks sites-modules 03D8 and 093R. Lean proof by M7 uses the existing constant-module encoding and pullback comparisons to avoid a separate intrinsic coefficient-compositor proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]lopen.*[Ss]tratif|[Ss]tratif.*[Cc]lopen|[Cc]onstructible.*[Pp]ro[Ee]tale",
+   "results": "Actual logged hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite clopen partitions preserve constructibility stratifications with their subscheme structures and finite constant sheaf models",
+   "results": "Actual logged hits: exists_clopen_partition_of_clopen_cover, isClopen_iInter_of_finite, Topology.IsConstructible, Topology.IsConstructible.biInter, Topology.IsConstructible.sInter, isClopen_biInter_finset, Topology.IsLocallyConstructible, Profinite.instHasExplicitFiniteCoproductsTotallyDisconnectedSpaceCarrier",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsClopen",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite clopen partitions of schemes transport finite locally closed constructibility stratifications and locally constant finite module models on the pro-etale site",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, exists_clopen_partition_of_clopen_cover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine, TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of finite modules is constructible on a disjoint union if and only if on each component, with pullback strata and union of locally closed immersions",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, CategoryTheory.Sheaf.instHasFiniteCoproducts, Topology.IsLocallyConstructible.iff_of_isOpenCover, Topology.IsLocallyConstructible.biUnion, Topology.IsLocallyConstructible.iUnion, Topology.IsConstructible.biUnion",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*stratif|stratif.*clopen|constructible.*pro.?etale",
+   "results": "Actual hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of finite modules on a finite disjoint union of open and closed subschemes is constructible exactly when each restriction is constructible",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Modules, Topology.IsConstructible.sUnion, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFiniteType.mk, SheafOfModules.IsFiniteType, SheafOfModules.IsFiniteType.casesOn, AlgebraicGeometry.Scheme.Modules.restrict, SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsClopen",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite clopen partitions of schemes transport constructible immersed stratifications and locally constant finite module models on the pro-etale site",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, exists_clopen_partition_of_clopen_cover, AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of finite modules on a disjoint union are detected componentwise by pulling back and joining finite locally closed stratifications",
+   "results": "Actual hits: CompHausLike.LocallyConstantModule.functor, SheafOfModules.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstantModule.functor_obj_val, TopCat.toSheafCompHausLike, LightCondMod.ofSheafLightProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-clopen-finite-constructibility-bounds",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion: finite-clopen finite-level constructibility subargument of old step 8; returned item steps 1-3 (strata and their trivializing models).",
+   "via": [
+    "lem-pur-clopen-finite-constructibility-bounds",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-stratification-models",
+  "worker": "Q36 direct-delivery stage1",
+  "summary": "Proved restriction and union of immersed constructible strata using existing pullback and constructible-subset nodes, gave the immersion factorization and retrocompactness argument explicitly, used ordinary pro-etale module compositors with canonical constant-ring coherence, retained the precise pulled-back and unchanged covers, and checked finite-stalk/model conversion and empty cases. No statement change and no new nodes.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant: the finite-clopen constructibility subargument already extracted into lem-pur-clopen-finite-constructibility-bounds, strata and finite-model clauses.",
+  "tool_uses": [
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic immersed-stratification base change gives the actual fibre-product schemes and image preimages; no conventions-unit node replaces it."
+   },
+   {
+    "node": "lem-trf-constant-coefficient-composition",
+    "why": "Generic constant-ring composition ensures the ordinary module comparisons use the prescribed A-actions, rather than an arbitrary coefficient isomorphism."
+   },
+   {
+    "node": "lem-exc-proetale-pullback-locally-constant",
+    "why": "Generic arbitrary-scheme pro-etale pullback lemma supplies exactly the base-changed covers and identical finite module models."
+   },
+   {
+    "node": "lem-sf-proetale-lisse-finite-models",
+    "why": "Generic finite-stalk to finite-local-model conversion bridges the definition of constructibility and the chosen-model assertions."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-model-stalks",
+    "why": "Generic converse conversion makes the finite geometric stalk requirement explicit."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic identification of the inverse image along an object W of the pro-etale site with the restriction F|_W converts the inverse-image finite models of lem-sf-proetale-lisse-finite-models into the restriction form of local constancy; no conventions-unit node gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-stratification",
+  "lem-exc-proetale-pullback-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-66c7a57bb",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-66c7a57bb (reviewer sub-agent of L); spot-checked: Read the item in full (6 steps, 0 new nodes). The statement is unchanged against the live node, which is still unsplit in live and side-live, and there is no repair note. Tested I={*}, two points, empty component, I=∅ (N≥1 met by one empty stratum, model 0), nonreduced strata, and non-quasi-compact X (each U_i is closed, hence retrocompact). Step 1 checked: pullback-stratification node plus 005J. Step 2 checked: explicit immersion factorisation, retrocompactness, then 09YD (topology.tex:2620). Step 3 checked: ordinary pullback comparison; lem-trf-constant-coefficient-composition gives c_{kh} as the composite. Step 4 checked: lem-exc-proetale-pullback-locally-constant gives the base-changed covers with the same models (093R). Step 5 is elementary. Step 6 coefficient category agrees with def-weil-proetale-constructible-sheaf and main-20261015 def-weil-finite-torsion-constructibility. FIX (C4): in step 6, lem-sf-proetale-lisse-finite-models gives inverse-image models along covering objects, but steps 4 and 5 need the restriction form F|_{U_j}. Added clause (3) of lem-sfb-proetale-object-inverse-image-restriction (r^*G ≅ G|_W as A_W-modules) in both directions, added it to proof_deps and declared it as a tool use; its closure has no trace-formula or Poincaré nodes and no cycle. Batch 5: lem-trf-constant-coefficient-composition is the generic coherence of canonical constant-ring identifications under composition. Neither assumption gives it and it is not a step of their proofs; its 219-node closure has no other sec-trace-formula or sec-poincare-duality node. Accepted. Tool uses accepted: the five declared generic nodes plus the added one. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClopenStratificationModels",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleProEtaleModuleSheaf_iff_clopen",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.clopenStratification_pullback",
+   "AlgebraicGeometry.Scheme.clopenStratification_union",
+   "AlgebraicGeometry.Scheme.clopenStratification_pullback_models",
+   "AlgebraicGeometry.Scheme.clopenStratification_union_models",
+   "AlgebraicGeometry.Scheme.isConstructibleProEtaleModuleSheaf_iff_clopen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenStratificationModels.lean",
+  "statement": "theorem isConstructibleProEtaleModuleSheaf_iff_clopen (X : Scheme.{u}) (I : Type v) [Finite I] (Xi : I → Scheme.{u}) (j : ∀ i, Xi i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)] (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k)))) (hcover : (⋃ i, Set.range (j i)) = Set.univ) (A : Type u) [CommRing A] [Finite A] (F : proEtaleRingModules X (proEtaleConstantRing X A)) : IsConstructibleProEtaleModuleSheaf X A F ↔ ∀ i, IsConstructibleProEtaleModuleSheaf (Xi i) A (proEtaleConstantModulePullback (j i) A F)",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The five declarations state the geometric pullback and sigma-indexed union, the exact chosen-cover finite-model assertions in both directions, and the intrinsic constructibility equivalence. Geometry uses the recorded finite locally closed immersed stratification with explicit constructible-image hypotheses. The recorded constructibility dependency publicly exports both its fixed-module and intrinsic ring-sheaf predicates; the latter is the one used here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5544df52f",
+  "group": "Q141",
+  "result": "pass",
+  "note": "Item node changed only by adding the lean record; all 11 dependency node files are byte-identical to side-live; lean.statement appears verbatim; five sorry theorems, no definitions. Clauses match: fibre-product restriction with pullback.snd and five stratification conditions; sigma-indexed union keeping the original stratum schemes; model transport on the exact base-changed or identical covers with the same M (hypotheses shaped like IsLocallyConstantProEtaleModuleSheaf); iff on the recorded intrinsic IsConstructibleProEtaleModuleSheaf. Edge cases: empty index set means empty X and one empty stratum suffices (Stratification has no nonempty field); empty strata and zero ring allowed; no qc/Noetherian/Nontrivial assumption; index set has its own universe. Advisories: proEtaleConstantModuleSheafOver comes from the original locally-constant module, matching the predicate; proEtaleConstantModulePullback and proEtaleBaseChange are owned by def-weil-proetale-inverse-image, outside stmt_deps; the second reading is a self-reread. No changes, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261024T190322-L-4021622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

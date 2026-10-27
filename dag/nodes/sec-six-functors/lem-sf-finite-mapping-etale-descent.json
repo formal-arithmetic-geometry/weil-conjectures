@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2: the finite mapping-complex adjunction is the ordinary etale internal exceptional adjunction transported through finite site comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural transformation descent along fully faithful essentially surjective functor",
+   "results": "Functor.essImage.liftFunctorCompIso and general essential-image lemmas; these do not assemble the specified finite mapping comparison or normalized transpose.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural derived mapping complex adjunction from internal exceptional adjunction via etale proetale comparison",
+   "results": "Adjunction.derived, derivedε, derivedη and their factorization equations. No finite mapping descent with the specified comparison equations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteMappingAdjunction|finiteMappingGlobalHom|finiteMappingPairing; NatIso.ofComponents; isIso_app_iff_of_iso",
+   "results": "Only the assigned module defines these comparison lists; Mathlib supplies generic natural-isomorphism construction and isomorphism transport. No duplicate theorem or definition found. Blueprint search for mapping adjunction found no imported node.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteMappingAdjunction",
+  "date": "2026-10-25",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Paragraph 2: the finite mapping-complex adjunction is the ordinary etale internal exceptional adjunction transported through finite site comparisons.",
+   "via": [
+    "lem-coef-finite-mapping-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sf-finite-mapping-etale-descent",
+ "title": "Descent of the canonical etale mapping transformation",
+ "statement": "Fix the finite-field datum D, a prime l different from its characteristic, a finite extension E of Q_l, a positive coefficient level r=n+1, a separated finite-type scheme X over Spec(D.k), and a compactification c of its structure morphism. Use the canonical maps and the intrinsic finite-Tor constructible domain of [def-sf-finite-mapping-adjunction-data]. There exists a natural transformation tau from global internal Hom into the prescribed dualizing object to the coefficient dual of compact-support global sections. For every etale finite-Tor constructible J, J is bounded below, its comparison pullback belongs to the intrinsic finite-Tor constructible domain, and the composite of its three Hom comparison arrows, tau on that pullback, and the two dual transport arrows equals the four-arrow ordinary etale adjunction composite. Equality includes the endpoints. This statement asserts descent and agreement, not invertibility or the transpose identity.",
+ "stmt_deps": [
+  "def-sf-finite-mapping-adjunction-data"
+ ],
+ "proof": [
+  {
+   "text": "Finite duality site comparison gives the equivalence from the etale finite-Tor\nconstructible category to the intrinsic pro-etale category. Its specified comparison\nidentifies internal Hom into the dualizing object. Transport its Nagata presentation\nto c using compactification independence and uniqueness of the ordinary etale right\nadjoint. On an etale input J, take the ordinary internal exceptional adjunction with\nsecond argument the unit, then Leray and the evaluation-defined etale point duality.\nPrecompose with the inverse global Hom comparison and postcompose with the inverse\ndual compact-support/global comparison. Bounded constructibility supplies J's lower\nbound; Tor comparison shows its pullback is in the intrinsic finite-Tor domain.\nAll factors are natural, including compactification independence. Full faithfulness\nof the origin equivalence descends this natural transformation. Changing an origin\nuses its unique lifted isomorphism and naturality, so the component is independent\nof that choice. Evaluating the descended transformation on any J gives the displayed\nsquare, with exactly the listed comparison factors and no scalar choice.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-weil-finite-duality-site-comparison",
+    "prop-asd-internal-adjunction",
+    "lem-sf-class-compact-support-comparison",
+    "lem-weil-pbc-comparison-global-cohomology",
+    "lem-coef-finite-point-internal-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2: the finite mapping-complex adjunction is the ordinary etale internal exceptional adjunction transported through finite site comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-weil-finite-duality-site-comparison",
+  "prop-asd-internal-adjunction",
+  "lem-sf-class-compact-support-comparison",
+  "lem-weil-pbc-comparison-global-cohomology",
+  "lem-coef-finite-point-internal-hom-evaluation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2: the finite mapping-complex adjunction is the ordinary etale internal exceptional adjunction transported through finite site comparisons."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteMappingEtaleDescent",
+  "file": "lean/Sheaf/SixFunctors/FiniteMappingEtaleDescent.lean",
+  "declaration": "WeilConjectures.finiteMappingEtaleDescent",
+  "statement": "theorem finiteMappingEtaleDescent (hl : l ≠ D.p)\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] :\n    ∃ τ : finiteMappingGlobalHom D l E n X c ⟶\n      (finiteMappingCompactSections D l E n X c).op ⋙\n        coefficientDerivedDual\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))),\n      (∀ (J : Etale.DerivedCategoryModule\n          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X)\n        (hJ : finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X J),\n        ∃ (hplus : DerivedCategory.TStructure.t.plus J)\n          (hpro : finiteTorConstructibleProEtaleModule l E (n + 1) (Nat.succ_pos n) X\n            ((ProEtale.comparisonUpperStar\n              (ModuleCat.{u + 1} (ULift.{u + 1, u}\n                (Padic.coefficientExtensionRing l E (n + 1)))) X).mapDerivedCategory.obj J)),\n          FiniteMappingSameComposite\n            (finiteMappingHomComparisonArrows\n                (Padic.coefficientExtensionRing l E (n + 1)) c J ++\n              [Arrow.mk (τ.app (op ⟨_, hpro⟩))] ++\n                finiteMappingDualTransportArrows\n                  (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))\n                  c ⟨J, hplus⟩)\n            (finiteMappingEtaleGammaArrows\n              (Padic.coefficientExtensionRing l E (n + 1)) D.k c J))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0849e",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261025T095537-L-3438955",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0849e",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261025T095537-L-3438955",
+  "kind": "interface",
+  "note": "independent cc review: unchanged finiteMappingAdjunction statement vs NatIso.ofComponents assembly of three true, strictly simpler sorried clauses (descent / isIso / transpose); 19 relocated defs vs published bodies (identical after comment strip); reader gate: 5 delivered modules + 3 direct importers compiled clean"
+ }
+}

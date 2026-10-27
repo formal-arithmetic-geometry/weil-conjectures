@@ -1,0 +1,767 @@
+{
+ "id": "lem-trf-tate-torsionfree-fibre-polynomial",
+ "kind": "statement",
+ "title": "Minimal polynomial and maximal-fibre formula over a Tate algebra",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial real-valued nonarchimedean absolute value, and let $d\\ge0$ and $T=K\\langle U_1,\\ldots,U_d\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation]. Let $C\\ne0$ be an affinoid $K$-algebra and let $j:T\\hookrightarrow C$ be an injective $K$-algebra homomorphism making $C$ a finitely generated $T$-module. Suppose $C$ is torsion-free over $T$: for $t\\in T\\setminus\\{0\\}$, $j(t)c=0$ implies $c=0$. For each $c\\in C$ there is a unique monic polynomial $p_c(Z)=Z^r+\\sum_{i=1}^r t_iZ^{r-i}\\in T[Z]$, of degree $r\\ge1$, whose principal ideal equals the kernel of evaluation $T[Z]\\to C$, $Z\\mapsto c$ [def-weil-polynomial-ring]. For every maximal ideal $\\mathfrak m\\subset T$, the set $Y_{\\mathfrak m}=\\{\\mathfrak n\\in\\operatorname{Max}C:j^{-1}(\\mathfrak n)=\\mathfrak m\\}$ is finite and nonempty, and\n$$\\max_{\\mathfrak n\\in Y_{\\mathfrak m}}|c\\bmod\\mathfrak n|=\\max_{1\\le i\\le r}|t_i\\bmod\\mathfrak m|^{1/i}.$$\nThe absolute values on these finite residue fields are the unique extensions of that on $K$ [lem-trf-affinoid-supremum-seminorm-calculus]. Neither $C$ being reduced nor $c$ being separable is assumed.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4, Lemma 12(i)-(ii), printed pp.25-27; primary PDF read online 2026-10-24, archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-polynomial-ring",
+  "lem-trf-affinoid-supremum-seminorm-calculus"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-tate-integrally-closed], $T$ is an integrally closed domain. By [lem-weil-pbc-finite-algebra-is-integral], choose a monic $h\\in T[Z]$ with $h(c)=0$. Put $F=\\operatorname{Frac}(T)$ and $D=(T\\setminus\\{0\\})^{-1}C$. The map $C\\to D$ is injective: $c/1=0$ means $tc=0$ for some nonzero $t\\in T$, so torsion-freeness gives $c=0$. The same argument makes $F\\to D$ injective. Among nonzero annihilators of $c/1$ in $F[Z]$, take one of least degree and divide by its leading coefficient to obtain a monic $p_F$. Its degree $r$ is positive because $D\\ne0$. Long division over $F$ shows that it divides every annihilator: the remainder also vanishes and has smaller degree. Thus $p_F\\mid h_F$. Apply [lem-sfb-normal-monic-divisor-descent] to $T,F,h,p_F$ to obtain $p\\in T[Z]$ mapping to $p_F$. Injectivity $T\\to F$ makes $p$ monic of degree $r$, and injectivity $C\\to D$ gives $p(c)=0$.",
+   "uses": [
+    "lem-trf-tate-integrally-closed",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sfb-normal-monic-divisor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Divide any $g\\in T[Z]$ with $g(c)=0$ by the monic $p$: cancelling its leading term repeatedly gives $g=qp+v$ with $\\deg v<r$. Then $v(c)=0$. Its image in $F[Z]$ is a lower-degree annihilator, hence zero by the preceding minimality, so coefficient injectivity gives $v=0$. Conversely every multiple of $p$ vanishes. Hence the evaluation kernel is $(p)$. Any other monic generator divides $p$ and is divided by $p$; degrees add over the domain $T$, so both quotients are constants, and comparison of leading coefficients makes them $1$. This proves uniqueness. Write $p=Z^r+\\sum_{i=1}^r t_iZ^{r-i}$ and set $A=T[c]\\subset C$. Evaluation induces the explicit isomorphism $T[Z]/(p)\\to A$, sending $[g]$ to $g(c)$; surjectivity is the definition of $A$ and injectivity is the kernel equality just proved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak m\\in\\operatorname{Max}T$ and put $k=T/\\mathfrak m$. Since $C$ is a finite $T$-module, $T\\subset C$ is integral by [lem-weil-pbc-finite-algebra-is-integral]; [pqf-lem-lying-over] lifts $\\mathfrak m$ to a prime of $C$, and [lem-weil-pbc-integral-prime-over-maximal-maximal] makes this lift maximal. Thus $Y_{\\mathfrak m}$ is nonempty. If $e_1,\\ldots,e_N$ span $C$ over $T$, their residues span $C/\\mathfrak m C$ over $k$. This finite-dimensional commutative $k$-algebra is Artinian by [lem-weil-pbc-finite-dim-algebra-artinian] and has finite spectrum by [lem-sfb-artinian-spectrum-finite]. Its maximal ideals correspond to $Y_{\\mathfrak m}$ by inverse image under the quotient map. Indeed a maximal ideal containing $\\mathfrak m C$ contracts to a proper ideal containing the maximal ideal $\\mathfrak m$, hence contracts to $\\mathfrak m$. Therefore $Y_{\\mathfrak m}$ is finite. By [lem-trf-affinoid-supremum-seminorm-calculus], $k$ and every $C/\\mathfrak n$ are finite field extensions of $K$ with unique extending absolute values.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "pqf-lem-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-artinian-spectrum-finite",
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\Omega$ of $K$ by [lem-pc-algebraic-closure-exists-unique]. Since $k/K$ is finite, embed $k$ in $\\Omega$ over $K$ by [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed]. Give $\\Omega$ the multiplicative nonarchimedean extending norm from [lem-trf-spectral-norm-algebraic-extension]. By [lem-sfb-algebraic-absolute-value-unique], its restriction to $k$ agrees with the residue absolute value. Let $\\bar p\\in k[Z]$ be the reduction of $p$. Its leading coefficient remains $1$, so its degree is $r\\ge1$. Over $\\Omega$ it factors into $r$ monic linear factors: repeatedly take a root using algebraic closedness and divide by $Z-\\alpha$, decreasing degree until the monic constant $1$ remains. Keep repetitions in this list of roots.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The same $T$-module generators of $C$ span it over $A=T[c]$, so $A\\subset C$ is finite and hence integral by [lem-weil-pbc-finite-algebra-is-integral]. A root $\\alpha\\in\\Omega$ of $\\bar p$ defines $A\\simeq T[Z]/(p)\\to\\Omega$ by $[g]\\mapsto\\bar g(\\alpha)$. Its image is $k[\\alpha]$, a finite-dimensional domain over $k$, hence a field: multiplication by a nonzero element is injective and therefore surjective. Its kernel $\\mathfrak q$ is maximal and contracts to $\\mathfrak m$. Apply [pqf-lem-lying-over] to the injection $A\\subset C$, obtaining a prime $\\mathfrak n$ contracting to $\\mathfrak q$; [lem-weil-pbc-integral-prime-over-maximal-maximal] makes it maximal. It lies in $Y_{\\mathfrak m}$. The inclusion $A/\\mathfrak q\\hookrightarrow C/\\mathfrak n$ sends the residue of $c$ to that of $c$. Pulling the absolute value of $\\Omega$ back to $A/\\mathfrak q\\simeq k[\\alpha]$, and restricting the absolute value of $C/\\mathfrak n$ to that field, gives two absolute values extending that of $K$. They agree by [lem-sfb-algebraic-absolute-value-unique], so $|\\alpha|=|c\\bmod\\mathfrak n|$. Lying-over was applied before taking the quotient; no injection after reduction is asserted.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "pqf-lem-lying-over",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal",
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Conversely, for any $\\mathfrak n\\in Y_{\\mathfrak m}$, the embedding $k\\hookrightarrow C/\\mathfrak n$ is induced by $T\\to C$. The extension $C/\\mathfrak n$ is algebraic over $k$ (it is finite over $K$). Apply [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to extend our chosen embedding $k\\to\\Omega$ to $C/\\mathfrak n\\to\\Omega$. The image $\\beta$ of $c\\bmod\\mathfrak n$ satisfies $\\bar p(\\beta)=0$, since $p(c)=0$. Uniqueness [lem-sfb-algebraic-absolute-value-unique], now on $C/\\mathfrak n$ over $K$, shows $|\\beta|=|c\\bmod\\mathfrak n|$. Thus the set of absolute values of roots of $\\bar p$ is exactly the set of fibre values $|c\\bmod\\mathfrak n|$; roots and maximal ideals need not be in bijection, and multiplicities do not affect maxima.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tate-root-spectral-formula] with base field $k$, extension field $\\Omega$, the restriction of its multiplicative nonarchimedean norm, and the linear factorization of $\\bar p$ from step 4. It gives the maximum root norm as $\\max_{0\\le j<r}|\\bar p_j|^{1/(r-j)}$. Substitute $j=r-i$; then $\\bar p_{r-i}=t_i\\bmod\\mathfrak m$. Steps 5 and 6 identify the maximum root norm with $\\max_{\\mathfrak n\\in Y_{\\mathfrak m}}|c\\bmod\\mathfrak n|$, proving the formula. Both maxima are over finite nonempty sets. Repeated factors, inseparable roots and nilpotents in $C$ have not been discarded at any stage, and the argument also includes $d=0$ and $c=0$.",
+   "uses": [
+    "lem-trf-tate-root-spectral-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-sfb-artinian-spectrum-finite",
+  "lem-sfb-normal-monic-divisor-descent",
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-trf-tate-integrally-closed",
+  "lem-trf-tate-root-spectral-formula",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "pqf-lem-lying-over"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4 Lemma 12(i)-(ii), printed pp.26-27 (PDF pp.27-28); primary PDF read online 2026-10-24; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite torsion free algebra over a Tate algebra has a monic minimal polynomial whose coefficient spectral value is the supremum of values on maximal ideals",
+   "results": {
+    "t": "2026-10-24T08:41:30Z",
+    "tool": "leanfinder",
+    "query": "A finite torsion free algebra over a Tate algebra has a monic minimal polynomial whose coefficient spectral value is the supremum of values on maximal ideals",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "norm_root_le_spectralValue",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralAlgNorm_def",
+     "spectralValue"
+    ],
+    "digest": "87e95924ae3b47db"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: max_norm_root_eq_spectralValue is a split-polynomial root calculation over a normed FIELD; minpoly and IsAdjoinRootMonic.minpoly_eq concern algebraic annihilators. Neither constructs the principal evaluation kernel over a Tate algebra together with the maximal-fibre norm formula. Read SpectralNorm.lean:240-330; no affinoid/Tate declaration found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralValue\"",
+   "results": {
+    "t": "2026-10-24T08:41:31Z",
+    "tool": "loogle",
+    "query": "\"spectralValue\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "spectralValue",
+     "spectralValueTerms",
+     "spectralValueTerms_finite_range",
+     "spectralValueTerms_bddAbove",
+     "spectralValue_nonneg",
+     "spectralValueTerms_nonneg",
+     "spectralValueTerms_of_natDegree_le",
+     "spectralValue_X_pow"
+    ],
+    "digest": "b5b5787dc7c0db18"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: max_norm_root_eq_spectralValue is a split-polynomial root calculation over a normed FIELD; minpoly and IsAdjoinRootMonic.minpoly_eq concern algebraic annihilators. Neither constructs the principal evaluation kernel over a Tate algebra together with the maximal-fibre norm formula. Read SpectralNorm.lean:240-330; no affinoid/Tate declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|minpoly.*spectralValue",
+   "results": {
+    "t": "2026-10-24T08:41:31Z",
+    "tool": "grep",
+    "query": "TateAlgebra|affinoid|minpoly.*spectralValue",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "5b6075a2084b8bb7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: max_norm_root_eq_spectralValue is a split-polynomial root calculation over a normed FIELD; minpoly and IsAdjoinRootMonic.minpoly_eq concern algebraic annihilators. Neither constructs the principal evaluation kernel over a Tate algebra together with the maximal-fibre norm formula. Read SpectralNorm.lean:240-330; no affinoid/Tate declaration found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal polynomial of an element in a finite torsion free algebra over a Tate algebra determines the supremum norm on its maximal spectrum",
+   "results": {
+    "t": "2026-10-24T08:41:31Z",
+    "tool": "leansearch",
+    "query": "Minimal polynomial of an element in a finite torsion free algebra over a Tate algebra determines the supremum norm on its maximal spectrum",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "minpoly",
+     "minpoly.min",
+     "minpoly.aeval",
+     "minpoly.ne_zero_of_finite",
+     "minpoly.degree_le_of_ne_zero",
+     "Polynomial.annIdealGenerator_eq_minpoly",
+     "minpoly.coe_equivAdjoin",
+     "IsAdjoinRootMonic.minpoly_eq"
+    ],
+    "digest": "303f943bebd56dc8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: max_norm_root_eq_spectralValue is a split-polynomial root calculation over a normed FIELD; minpoly and IsAdjoinRootMonic.minpoly_eq concern algebraic annihilators. Neither constructs the principal evaluation kernel over a Tate algebra together with the maximal-fibre norm formula. Read SpectralNorm.lean:240-330; no affinoid/Tate declaration found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion free extensions of restricted convergent power series rings have a minimal annihilating polynomial and its fibrewise root norms equal its coefficient spectral value",
+   "results": {
+    "t": "2026-10-24T08:44:58Z",
+    "tool": "leanfinder",
+    "query": "Finite torsion free extensions of restricted convergent power series rings have a minimal annihilating polynomial and its fibrewise root norms equal its coefficient spectral value",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "norm_root_le_spectralValue",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralValue",
+     "spectralValueTerms",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralValueTerms_of_lt_natDegree"
+    ],
+    "digest": "2884a4b3f04817b8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: max_norm_root_eq_spectralValue is a split-polynomial root calculation over a normed FIELD; minpoly and IsAdjoinRootMonic.minpoly_eq concern algebraic annihilators. Neither constructs the principal evaluation kernel over a Tate algebra together with the maximal-fibre norm formula. Read SpectralNorm.lean:240-330; no affinoid/Tate declaration found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"max_norm_root_eq_spectralValue\"",
+   "results": {
+    "t": "2026-10-24T09:15:48Z",
+    "tool": "loogle",
+    "query": "\"max_norm_root_eq_spectralValue\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue"
+    ],
+    "digest": "5ae0c927b2901aab"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Tate algebra of restricted power series over a complete nonarchimedean field is a unique factorization domain and integrally closed",
+   "results": {
+    "t": "2026-10-24T09:15:48Z",
+    "tool": "leanfinder",
+    "query": "The Tate algebra of restricted power series over a complete nonarchimedean field is a unique factorization domain and integrally closed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.instUniqueFactorizationMonoid",
+     "PowerSeries.hasUnitMulPowIrreducibleFactorization",
+     "PowerSeries.instIsDiscreteValuationRing",
+     "PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain",
+     "PowerSeries.idealX",
+     "LaurentSeries.instAlgebraRatFuncAdicCompl",
+     "LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers",
+     "LaurentSeries.mem_integers_of_powerSeries"
+    ],
+    "digest": "2aa5fa24a64392e8"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|restricted.*series.*[Ff]actorial|[Tt]ate.*integrally",
+   "results": {
+    "t": "2026-10-24T09:16:51Z",
+    "tool": "grep",
+    "query": "TateAlgebra|affinoid|restricted.*series.*[Ff]actorial|[Tt]ate.*integrally",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The maximum norm of roots of a split monic polynomial is the maximum of the absolute values of its coefficients raised to inverse indices",
+   "results": {
+    "t": "2026-10-24T09:16:51Z",
+    "tool": "leansearch",
+    "query": "The maximum norm of roots of a split monic polynomial is the maximum of the absolute values of its coefficients raised to inverse indices",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Polynomial.cauchyBound_zero",
+     "Polynomial.coeff_le_of_roots_le",
+     "Polynomial.cauchyBound",
+     "norm_root_le_spectralValue",
+     "Polynomial.coeff_bdd_of_roots_le",
+     "max_norm_root_eq_spectralValue",
+     "Polynomial.mahlerMeasure_of_degree_eq_one",
+     "spectralValue"
+    ],
+    "digest": "b2bb19ccea045cd4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite torsion free algebra over a Tate algebra has a principal monic evaluation kernel and coefficient spectral values equal the maximum on each maximal fibre",
+   "results": {
+    "t": "2026-10-24T09:17:09Z",
+    "tool": "leanfinder",
+    "query": "A finite torsion free algebra over a Tate algebra has a principal monic evaluation kernel and coefficient spectral values equal the maximum on each maximal fibre",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "norm_root_le_spectralValue",
+     "spectralValueTerms_finite_range",
+     "spectralValue_le_one_iff",
+     "spectralValue_eq_zero_iff",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul"
+    ],
+    "digest": "c0f3fde6793fa0da"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted convergent power series over a complete valued field form a normal integral domain by Weierstrass preparation and unique factorization",
+   "results": {
+    "t": "2026-10-24T09:17:11Z",
+    "tool": "leanfinder",
+    "query": "Restricted convergent power series over a complete valued field form a normal integral domain by Weierstrass preparation and unique factorization",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.hasUnitMulPowIrreducibleFactorization",
+     "PowerSeries.instIsDiscreteValuationRing",
+     "PowerSeries.instUniqueFactorizationMonoid",
+     "PowerSeries.instNormalizationMonoid",
+     "PowerSeries.idealX",
+     "PowerSeries.exists_isWeierstrassFactorization",
+     "PowerSeries.IsWeierstrassFactorization",
+     "PowerSeries.instIsDomain"
+    ],
+    "digest": "6062bc4fe20d5644"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem max_norm_root_eq_spectralValue|def spectralValue|def spectralValueTerms",
+   "results": {
+    "t": "2026-10-24T09:18:43Z",
+    "tool": "grep",
+    "query": "theorem max_norm_root_eq_spectralValue|def spectralValue|def spectralValueTerms",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "2fa3865978f9d8e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restricted power series Tate algebra over a complete nonarchimedean field is an integrally closed domain",
+   "results": {
+    "t": "2026-10-24T09:18:44Z",
+    "tool": "leansearch",
+    "query": "Restricted power series Tate algebra over a complete nonarchimedean field is an integrally closed domain",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsIntegrallyClosedIn",
+     "integralClosure",
+     "instIsDomainSubtypeMemSubalgebraIntegralClosure",
+     "Ring.instIsDomainNormalClosure",
+     "completeIntegralClosure",
+     "isIntegrallyClosed_iff_isIntegrallyClosedIn",
+     "Valuation.Integers.isIntegrallyClosed_integers",
+     "IsDedekindDomainInv.integrallyClosed"
+    ],
+    "digest": "43d107c3801a4538"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\"",
+   "results": {
+    "t": "2026-10-24T09:18:44Z",
+    "tool": "loogle",
+    "query": "\"Tate\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Lean.Macro.State",
+     "Lean.Macro.instInhabitedState",
+     "Lean.Macro.State.macroScope",
+     "EStateM.dummySave",
+     "_private.Init.Prelude.0.Lean.Macro.State.expandedMacroDecls",
+     "EStateM",
+     "EStateM.Backtrackable",
+     "EStateM.Result"
+    ],
+    "digest": "7f3136703288883a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a polynomial expressed as a product of linear factors over a nonarchimedean normed field the maximum root norm equals its spectral value",
+   "results": {
+    "t": "2026-10-24T09:18:46Z",
+    "tool": "leanfinder",
+    "query": "For a polynomial expressed as a product of linear factors over a nonarchimedean normed field the maximum root norm equals its spectral value",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "norm_root_le_spectralValue",
+     "spectralValue",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralValue_X_sub_C",
+     "spectralValue_le_one_iff"
+    ],
+    "digest": "512274ec3b5190ff"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Minimal polynomial and maximal ideal fibre coefficient norm formula for finite torsion free affinoid algebras over restricted power series rings",
+   "results": {
+    "t": "2026-10-24T09:18:48Z",
+    "tool": "leanfinder",
+    "query": "Minimal polynomial and maximal ideal fibre coefficient norm formula for finite torsion free affinoid algebras over restricted power series rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "Algebra.intNormAux",
+     "Algebra.PowerBasis.norm_gen_eq_coeff_zero_minpoly",
+     "spectralAlgNorm",
+     "spectralNorm",
+     "Ideal.relNorm_eq_pow_of_isMaximal",
+     "Algebra.PowerBasis.norm_gen_eq_prod_roots",
+     "spectralAlgNorm_def"
+    ],
+    "digest": "5c5240d5b25ae9e4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem max_norm_root_eq_spectralValue",
+   "results": {
+    "t": "2026-10-24T09:35:59Z",
+    "tool": "grep",
+    "query": "theorem max_norm_root_eq_spectralValue",
+    "sub": "Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "294"
+    ],
+    "digest": "51e2c6ee1876c8d0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniqueFactorizationMonoid\", \"PowerSeries\"",
+   "results": {
+    "t": "2026-10-24T09:36:00Z",
+    "tool": "loogle",
+    "query": "\"UniqueFactorizationMonoid\", \"PowerSeries\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "PowerSeries.instUniqueFactorizationMonoid",
+     "PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain"
+    ],
+    "digest": "a61a03d786690e40"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonarchimedean norm on a field extension sends the maximum norm of roots of a split polynomial to its spectral value",
+   "results": {
+    "t": "2026-10-24T09:36:06Z",
+    "tool": "leanfinder",
+    "query": "A nonarchimedean norm on a field extension sends the maximum norm of roots of a split polynomial to its spectral value",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "max_norm_root_eq_spectralValue",
+     "norm_root_le_spectralValue",
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "isNonarchimedean_spectralNorm",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "norm_le_spectralNorm",
+     "spectralAlgNorm_def"
+    ],
+    "digest": "40da0249d05d02b1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "^instance.*UniqueFactorization|UniqueFactorizationMonoid|isNoetherianRing",
+   "results": {
+    "t": "2026-10-24T09:39:09Z",
+    "tool": "grep",
+    "query": "^instance.*UniqueFactorization|UniqueFactorizationMonoid|isNoetherianRing",
+    "sub": "RingTheory/PowerSeries",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/PowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/PowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/PowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/PowerSeries/Inverse.lean",
+     "Mathlib/RingTheory/PowerSeries/Ideal.lean",
+     "Mathlib/RingTheory/PowerSeries/Ideal.lean",
+     "Mathlib/RingTheory/PowerSeries/Ideal.lean",
+     "Mathlib/RingTheory/PowerSeries/Ideal.lean"
+    ],
+    "digest": "aea12ba150f45448"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem max_norm_root_eq_spectralValue|^def spectralValueTerms|^def spectralValue",
+   "results": {
+    "t": "2026-10-24T09:39:09Z",
+    "tool": "grep",
+    "query": "^theorem max_norm_root_eq_spectralValue|^def spectralValueTerms|^def spectralValue",
+    "sub": "Analysis/Normed/Unbundled",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+     "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean"
+    ],
+    "digest": "2fa3865978f9d8e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted convergent power series in finitely many variables form a factorial and integrally closed domain over a complete nonarchimedean field",
+   "results": {
+    "t": "2026-10-24T09:39:09Z",
+    "tool": "leanfinder",
+    "query": "Restricted convergent power series in finitely many variables form a factorial and integrally closed domain over a complete nonarchimedean field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.instUniqueFactorizationMonoid",
+     "PowerSeries.instIsDiscreteValuationRing",
+     "PowerSeries.instIsDomain",
+     "PowerSeries.idealX",
+     "PowerSeries.hasUnitMulPowIrreducibleFactorization",
+     "PowerSeries.isNoetherianRing",
+     "MvPowerSeries.instIsLocalRing",
+     "PowerSeries.instUniqueFactorizationMonoidOfIsPrincipalIdealRingOfIsDomain"
+    ],
+    "digest": "795610556468697a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedSeries|restrictedPowerSeries|Tate algebra",
+   "results": {
+    "t": "2026-10-24T09:46:13Z",
+    "tool": "grep",
+    "query": "TateAlgebra|RestrictedSeries|restrictedPowerSeries|Tate algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: Generic polynomial spectral values and formal PowerSeries results do not state the finite torsion-free Tate-algebra fibre theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite torsion free algebra over a Tate algebra has a monic minimal polynomial generating its evaluation kernel and a fibrewise spectral norm formula",
+   "results": {
+    "t": "2026-10-24T09:46:13Z",
+    "tool": "leansearch",
+    "query": "A finite torsion free algebra over a Tate algebra has a monic minimal polynomial generating its evaluation kernel and a fibrewise spectral norm formula",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "minpoly.monic",
+     "minpoly.ker_eval",
+     "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+     "spectralNorm",
+     "IsAdjoinRoot.mkOfAdjoinEqTop",
+     "spectralAlgNorm",
+     "norm_root_le_spectralValue",
+     "IsAdjoinRootMonic.mkOfAdjoinEqTop"
+    ],
+    "digest": "b27e019f9bef8fad"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: minpoly.ker_eval requires IsDomain S and thus excludes the nonreduced and product algebras allowed here; the split-root theorem supplies only the numerical calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-affinoid-spectral-equation",
+  "date": "2026-10-24",
+  "group": "NG"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality: Bosch Section 1.4 Lemma 12(i)-(ii) gives the torsion-free Tate-algebra minimal polynomial and maximal-fibre spectral formula.",
+   "via": [
+    "lem-trf-finite-affinoid-spectral-equation",
+    "lem-trf-affinoid-powerbounded-integral",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-torsionfree-fibre-polynomial",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Bosch Lemma 12(i)-(ii) into seven steps, preserving the monic evaluation-kernel construction and using lying-over on T[c]⊂C before reduction. Cited the existing lem-trf-tate-integrally-closed for normality of T (reviewer FIX: the delivered factoriality node duplicated it and was dropped) and added the general split-root spectral formula as a Mathlib leaf. Reused integral lying-over, finite-dimensional Artinian finiteness, algebraic embeddings, spectral norm existence and absolute-value uniqueness.",
+  "blueprint": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality; steps realize Bosch Section 1.4 Lemma 12(i)-(ii).",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-lying-over",
+    "why": "Generic integral-ring lying-over, applied to T⊂C and T[c]⊂C; no curve-unit route is replaced."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Generic existence of an algebraic closure, used only for the root calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-lying-over",
+  "lem-pc-algebraic-closure-exists-unique"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-63e5c7f42",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-63e5c7f42 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, unit sk-i-curve-zero, and the Mathlib sources max_norm_root_eq_spectralValue (SpectralNorm.lean:290-298 and 101-115) and IsIntegrallyClosed.eq_map_mul_C_of_dvd (GaussLemma.lean:80). Bosch 1.4 Lemma 12 is not in literature/: the report records it as WANTED and proof_origin is agent, so I checked the argument directly instead of against the text. The statement is unchanged and true. I tested it on d=0, c=0, K[ε]/ε² with c=ε, and K×K with c=(0,1). All seven steps are correct. Step 1: descent of the monic divisor through the injective maps C→D and F→D. Step 2: monic division and uniqueness. Step 3: lying-over and Artinian finiteness of C/mC. Steps 4 and 5: lying-over is applied to the injection T[c]⊂C before reduction, and uniqueness of absolute values is applied on the finite extension A/q. Step 6: the embedding C/n→Ω extends the chosen k→Ω. Step 7: the Mathlib leaf applies over the base field k with the spectral norm. The leaf lem-trf-tate-root-spectral-formula is an exact one-line specialization and duplicates no existing node. FIX, C5: lem-trf-tate-factorial-normal duplicates the existing lem-trf-tate-integrally-closed. That node is on the base, in the same unit, cited by the reviewed split lem-trf-tate-galois-trace-supremum-bound, and states exactly the normal-domain fact step 1 uses. The new node's UFD clause is used nowhere. I dropped the new node and repointed step 1. Second fix, C1: step 3 relied on integrality of T⊂C that step 1 never established; it now cites lem-weil-pbc-finite-algebra-is-integral. proof_deps was recomputed. All off-unit citations are Mathlib leaves, so the declared tool_uses are harmless and accepted. No cycle and no SGA citation. The corrected item is under fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ }
+}

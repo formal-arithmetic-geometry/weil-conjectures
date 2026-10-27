@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-finite-branch-ample-descent",
+ "kind": "statement",
+ "title": "Descent of an ample line bundle through a finite-branch quotient",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $X,Y$ be proper $S$-schemes [def-weil-proper-morphism]. Let $a:X\\to Y$ be a finite surjective $S$-morphism [def-weil-finite-integral-morphism, def-weil-surjective-morphism]. Let $T\\hookrightarrow Y$ be a closed immersion [def-weil-closed-immersion], and put $Z=X\\times_YT$ [def-pc-fibre-product]. Assume that $|Z|$ is finite and that $a$ induces an isomorphism $X\\setminus Z\\xrightarrow{\\sim}Y\\setminus T$. Let $L$ be an ample invertible $\\mathcal O_X$-module [def-sc-invertible-module, def-weil-pbc-ample-invertible-module], and let $U\\subseteq X$ be an affine open containing $Z$. Then there exist an open neighbourhood $W\\subseteq Y$ of $T$ [def-weil-open-immersion], a trivialization of $L|_{a^{-1}W}$, and an invertible $\\mathcal O_Y$-module $M$ with $M|_W\\cong\\mathcal O_W$ and $a^*M\\cong L$ [def-pc-module-pullback]; on $Y\\setminus T$, $M$ identifies with $L|_{X\\setminus Z}$ through the given isomorphism. The sheaf $M$ is ample. There are an integer $n\\geq0$ and a closed $S$-immersion $Y\\hookrightarrow\\mathbf P(\\{0,\\ldots,n\\};S)$; in particular $Y/S$ is projective in the finite-projective-space convention [def-kun-projective]. Empty $Z,T$, nonclosed points of $Z$, and nonnormal or disconnected schemes are allowed. No flatness of $a$, existence of a group action, or etale branch assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Agent extraction of old steps 6--8: Tag 0F20 (lemma-quasi-affine-invertible-nonvanishing-section); explicit two-open module gluing in sheaves.tex (lemma-glue-sheaves and lemma-glue-sheaves-structures); coherent.tex Tag 0B5V (lemma-surjective-finite-morphism-ample); ample immersion and proper monomorphism closed-immersion arguments as cited in the retained report."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-open-immersion",
+  "def-pc-module-pullback",
+  "def-kun-projective"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-affine-invertible-finite-set-section to the affine scheme $U$, the restriction $L|_U$, and the finite subset $|Z|$. Obtain $s\\in\\Gamma(U,L|_U)$ nonzero in every residue-field fibre over $|Z|$. By lem-weil-pbc-nonvanishing-section-trivializes, $V=U_s$ is open and $s$ gives an isomorphism $\\tau:\\mathcal O_V\\xrightarrow{\\sim}L|_V$. Thus $|Z|\\subseteq V\\subseteq U$. Restriction preserves the local rank-one presentations of $L$, so the section lemma applies. Neither lemma requires the points of $Z$ to be closed.",
+   "uses": [
+    "lem-sfb-affine-invertible-finite-set-section",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0F20 (lemma-quasi-affine-invertible-nonvanishing-section), affine specialization; modules.tex Tag 01CY (lemma-s-open)."
+   }
+  },
+  {
+   "text": "Put $C=|X|\\setminus V$. Since $a$ is finite, lem-weil-pbc-finite-closed-map-finite-fibres says $a(C)$ is closed. Set $W=Y\\setminus a(C)$. For $t\\in|T|$, every point above $t$ belongs to $|Z|=a^{-1}(|T|)\\subseteq V$, hence $t\\notin a(C)$. Therefore $|T|\\subseteq W$. Also $a^{-1}W\\subseteq V$ directly from the definition of $W$. Restrict $\\tau$ to get $\\tau_W:\\mathcal O_{a^{-1}W}\\xrightarrow{\\sim}L|_{a^{-1}W}$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN (lemma-finite-proper); closed-image shrinking as in divisors.tex Tag 0BUT (lemma-finite-trivialize-invertible-upstairs)."
+   }
+  },
+  {
+   "text": "Let $D=Y\\setminus T$, $E=X\\setminus Z$, and let $b:E\\xrightarrow{\\sim}D$ be the given isomorphism. Transport $L|_E$ along $b$ to an invertible module $N$ on $D$. The two opens $W,D$ cover $Y$. On $W\\cap D$, the inverse image under $b$ lies in $a^{-1}W$, so $\\tau_W$ transports to an isomorphism $\\alpha:\\mathcal O_{W\\cap D}\\xrightarrow{\\sim}N|_{W\\cap D}$. Use $\\alpha$ for the transition from $\\mathcal O_W$ to $N$, $\\alpha^{-1}$ for the reverse transition, and identities on equal indices. All cocycle equalities reduce to $\\alpha^{-1}\\alpha=1$ or $\\alpha\\alpha^{-1}=1$. Clause (2) of lem-weil-pbc-glue-sheaves-of-modules gives a module $M$ with charts $c_W:M|_W\\xrightarrow{\\sim}\\mathcal O_W$ and $c_D:M|_D\\xrightarrow{\\sim}N$, satisfying $c_D=\\alpha c_W$ on the overlap. These charts make $M$ locally free of rank one, hence invertible in the sense of def-sc-invertible-module. They give the asserted identifications on $W$ and $D$.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AL (lemma-glue-sheaves) and 00AM (lemma-glue-sheaves-structures), applied to a two-open cover."
+   }
+  },
+  {
+   "text": "We verify $a^*M\\cong L$ with the actual transition maps. By pullback functoriality and the identification of open-immersion pullback with restriction, $c_W$ gives on $a^{-1}W$ the map $a^*M\\to\\mathcal O_{a^{-1}W}\\xrightarrow{\\tau_W}L$; here the pullback of $\\mathcal O_W$ is $\\mathcal O_{a^{-1}W}$ by the tensor unit formula in def-pc-module-pullback. On $E$, pulling back $c_D$ along $b$ gives $a^*M|_E\\xrightarrow{\\sim}b^*N\\xrightarrow{\\sim}L|_E$. On $E\\cap a^{-1}W$, the equality $c_D=\\alpha c_W$ and the definition of $\\alpha$ show that both maps send a local section to the same multiple of $s$. Thus they agree. Clause (1) of lem-weil-pbc-glue-sheaves-of-modules glues these maps on the open cover $X=a^{-1}W\\cup E$. Their inverse local maps agree as well, and glue to an inverse by the same clause; their two composites are identities by uniqueness of gluing. This proves the claimed global isomorphism.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0097 (lemma-push-pull-composition-modules), Tag 00A0 (lemma-j-pullback), and Tag 04TN (lemma-glue-maps)."
+   }
+  },
+  {
+   "text": "The isomorphism $a^*M\\cong L$ and lem-sc-ample-iso imply that $a^*M$ is ample. Apply lem-trf-finite-surjective-ample-reflection with its source $Y$ equal to our $X$, its target $X$ equal to our $Y$, its morphism $f=a$, and its line bundle $\\mathcal L=M$. Its hypotheses are precisely the Noetherian ring $R$, properness of both schemes over $R$, finiteness and surjectivity of $a$, and invertibility of $M$, all already given or proved. It follows that $M$ is ample.",
+   "uses": [
+    "lem-sc-ample-iso",
+    "lem-trf-finite-surjective-ample-reflection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V (lemma-surjective-finite-morphism-ample); properties.tex Definition 01PS for invariance under module isomorphism."
+   }
+  },
+  {
+   "text": "Properness of $Y\\to S$ includes finite type, hence local finite type. Apply lem-weil-pbc-ample-very-ample-immersion-affine-base with $A=R$, $X=Y$, and $\\mathcal L=M$. Since $S=\\operatorname{Spec}R$ is affine, this gives an integer $n\\geq0$ and an $S$-immersion $i:Y\\to P_n=\\operatorname{Proj}(R[x_0,\\ldots,x_n])$. Here $q_n:P_n\\to S$ is the structure morphism specified by that lemma; the comparison of $P_n$ with $\\mathbf P(\\{0,\\ldots,n\\};S)$ is made in step 7.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VT (lemma-finite-type-over-affine-ample-very-ample), implication (1) to (5); constructions.tex Definition 01NF (definition-projective-space)."
+   }
+  },
+  {
+   "text": "By lem-weil-pbc-projective-space-proj-separated, $P_n\\to S$ is separated. Since $Y\\to S$ is proper, lemma-nagata-proper-to-separated-target makes $i$ proper. The proper immersion lemma lem-weil-pbc-proper-immersion-closed now makes $i$ a closed immersion. Apply lem-nagata-affine-proj-scalar-extension with its ring map $\\mathbf Z\\to R$, its graded ring $A=\\mathbf Z[T_0,\\ldots,T_n]$, $B=R[x_0,\\ldots,x_n]$ and $\\beta:R\\otimes_{\\mathbf Z}A\\xrightarrow{\\sim}B$, $r\\otimes T_k\\mapsto rx_k$: the square formed by $P_n\\to\\operatorname{Proj}A$, $q_n=p_B$ and $\\operatorname{Spec}R\\to\\operatorname{Spec}\\mathbf Z$ is cartesian, so there is an isomorphism $\\theta:P_n\\xrightarrow{\\sim}\\mathbf P(\\{0,\\ldots,n\\};S)=S\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}A$ with first projection $\\circ\\,\\theta=q_n$. Then $\\theta\\circ i$ is a closed immersion over $S$. Together with $n\\geq0$, this is exactly projectivity in def-kun-projective. If $Z$ is empty, surjectivity of $a$ forces $T$ empty; the section and shrinking construction still works (one may take $V=W=\\varnothing$), and gluing is then just transport through $X\\cong Y$. Empty schemes and disconnected or nonnormal schemes require no change to any argument.",
+   "uses": [
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lemma-nagata-proper-to-separated-target",
+    "lem-weil-pbc-proper-immersion-closed",
+    "lem-nagata-affine-proj-scalar-extension",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6 (lemma-image-proper-scheme-closed); schemes.tex Tag 01IQ (lemma-immersion-when-closed); constructions.tex Tag 01NH (lemma-projective-space-separated)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-proper-morphism",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-ample-iso",
+  "lem-sfb-affine-invertible-finite-set-section",
+  "lem-trf-finite-surjective-ample-reflection",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lemma-nagata-proper-to-separated-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Assembly of Tag 0F20 and 01CY; sheaves.tex 00AL/00AM/04TN; coherent.tex 0B5V; morphisms.tex 01VT/01W6; schemes.tex 01IQ. Explicit finite closed-image shrinking and overlap compatibility supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf descends through a finite surjective morphism which is an isomorphism outside a finite set of branches and the quotient is projective",
+   "results": "{\"t\": \"2026-10-22T06:13:35Z\", \"tool\": \"leanfinder\", \"query\": \"An ample invertible sheaf descends through a finite surjective morphism which is an isomorphism outside a finite set of branches and the quotient is projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\"], \"digest\": \"938641dd084e0a84\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and fpqc morphism descent do not descend an invertible sheaf through a finite, generally nonflat pinching map; the grep ample hits are occurrences in example."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a proper scheme descends along a finite quotient supported on finitely many points by trivializing on an affine neighbourhood of the branches",
+   "results": "{\"t\": \"2026-10-22T06:14:49Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle on a proper scheme descends along a finite quotient supported on finitely many points by trivializing on an affine neighbourhood of the branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"VectorBundleCore.trivializationAt\"], \"digest\": \"c7f9bad636d9a052\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and fpqc morphism descent do not descend an invertible sheaf through a finite, generally nonflat pinching map; the grep ample hits are occurrences in example."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ample\"",
+   "results": "{\"t\": \"2026-10-22T06:14:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and fpqc morphism descent do not descend an invertible sheaf through a finite, generally nonflat pinching map; the grep ample hits are occurrences in example."
+  },
+  {
+   "tool": "grep",
+   "query": "ample|invertible.*descen|descen.*invertible",
+   "results": "{\"t\": \"2026-10-22T06:14:28Z\", \"tool\": \"grep\", \"query\": \"ample|invertible.*descen|descen.*invertible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\"], \"digest\": \"93f686c1fba56e3f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj and fpqc morphism descent do not descend an invertible sheaf through a finite, generally nonflat pinching map; the grep ample hits are occurrences in example."
+  },
+  {
+   "tool": "grep",
+   "query": "ample|invertible.*descen|descen.*invertible",
+   "results": "{\"t\": \"2026-10-23T09:28:06Z\", \"tool\": \"grep\", \"query\": \"ample|invertible.*descen|descen.*invertible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\"], \"digest\": \"83f003e9031f4a68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction/properness and fpqc morphism descent do not prove nonflat line-bundle gluing and ample projectivity; grep hits are example text."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a proper scheme descends along a finite morphism that is an isomorphism away from finitely many points by gluing trivializations",
+   "results": "{\"t\": \"2026-10-23T09:28:06Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle on a proper scheme descends along a finite morphism that is an isomorphism away from finitely many points by gluing trivializations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.Pullback.gluing_f\", \"AlgebraicGeometry.Scheme.Pullback.gluing\"], \"digest\": \"03c050b2085d5921\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction/properness and fpqc morphism descent do not prove nonflat line-bundle gluing and ample projectivity; grep hits are example text."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ample\"",
+   "results": "{\"t\": \"2026-10-23T09:28:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction/properness and fpqc morphism descent do not prove nonflat line-bundle gluing and ample projectivity; grep hits are example text."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf descends through a finite surjective morphism which is an isomorphism outside a finite set and the descended ample bundle makes the quotient projective",
+   "results": "{\"t\": \"2026-10-23T09:28:07Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible sheaf descends through a finite surjective morphism which is an isomorphism outside a finite set and the descended ample bundle makes the quotient projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"a1a85151800ae0ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction/properness and fpqc morphism descent do not prove nonflat line-bundle gluing and ample projectivity; grep hits are example text."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|isAmple|[Aa]mple|[Ii]nvertible.*[Dd]escen|[Dd]escen.*[Ii]nvertible",
+   "results": "{\"t\": \"2026-10-23T09:29:02Z\", \"tool\": \"grep\", \"query\": \"IsAmple|isAmple|[Aa]mple|[Ii]nvertible.*[Dd]escen|[Dd]escen.*[Ii]nvertible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"44530469aaad825d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction/properness and fpqc morphism descent do not prove nonflat line-bundle gluing and ample projectivity; grep hits are example text."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let f X to Y be finite surjective between proper schemes over an affine Noetherian base and isomorphic off a finite closed subset. An ample line bundle trivial near the exceptional points glues to an ample line bundle on Y giving a projective embedding.",
+   "results": "{\"t\": \"2026-10-23T09:29:12Z\", \"tool\": \"leanfinder\", \"query\": \"Let f X to Y be finite surjective between proper schemes over an affine Noetherian base and isomorphic off a finite closed subset. An ample line bundle trivial near the exceptional points glues to an ample line bundle on Y giving a projective embedding.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\"], \"digest\": \"d820dcc2a3cad2d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj construction/properness and fpqc morphism descent do not prove nonflat line-bundle gluing and ample projectivity; grep hits are example text."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-etale-branch-pinching",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches; old proof steps 6--8 (saturated trivializing neighbourhood, two-open line-bundle gluing, ampleness reflection and finite-projective-space embedding)",
+   "via": [
+    "lem-sfb-trait-etale-branch-pinching",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-branch-ample-descent",
+  "worker": "stage1",
+  "summary": "Q53: proved the finite-branch descent by a nonvanishing section on the given affine open, finite closed-image shrinking, explicit two-open module gluing and pullback compatibility, then finite-surjective ampleness reflection and a proper projective-space immersion. Reused existing nodes throughout; no new nodes, no Lean changes, no statement change.",
+  "blueprint": "Inherited null ancestor and via chain retained (blueprint_refs.py ancestor confirms null). Steps 1--4 realize the trivializing-neighbourhood and two-open line-bundle construction extracted as old pinching step 6; step 5 realizes ampleness reflection; steps 6--7 realize finite-projective-space embedding. Latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3) is the ancestral direct-image context, not a proof of the pinching tool.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic tool used in finite-branch line-bundle descent: Identity and composition for tensor-formula module pullback. The unit supplies no replacement for this Zariski module or ampleness tool."
+   },
+   {
+    "node": "lem-sc-ample-iso",
+    "why": "Generic tool used in finite-branch line-bundle descent: Ampleness is invariant under isomorphisms of invertible modules. The unit supplies no replacement for this Zariski module or ampleness tool."
+   },
+   {
+    "node": "lem-trf-finite-surjective-ample-reflection",
+    "why": "Generic tool used in finite-branch line-bundle descent: Ampleness descends and ascends along finite surjective morphisms. The unit supplies no replacement for this Zariski module or ampleness tool."
+   },
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "Generic tool used in finite-branch line-bundle descent: An ample invertible module over an affine base: a power is the pullback of O(1) along an immersion into projective space. The unit supplies no replacement for this Zariski module or ampleness tool."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Generic tool used in finite-branch line-bundle descent: Glueing morphisms and sheaves of modules along an open covering. The unit supplies no replacement for this Zariski module or ampleness tool."
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Generic tool used in finite-branch line-bundle descent: A section of an invertible module trivializes it where it does not vanish. The unit supplies no replacement for this Zariski module or ampleness tool."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Generic tool (Stacks 01N2, maintainer FIX): identifies Proj(R[x_0..x_n]) from the affine-base immersion lemma with the base-change projective space P({0..n};Spec R) of def-kun-projective. The unit supplies no replacement for this Proj scalar-extension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-ample-iso",
+  "lem-trf-finite-surjective-ample-reflection",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-905276197",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-905276197 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps in full, plus every cited node statement. Checked the sources: Stacks 0B5V (coherent.tex line 4548), 0F20, 01CY, the 00AL/00AM/04TN gluing lemmas, 01VT, 01NH and 01N2. The statement is true and unchanged; small cases checked: Z empty forces T empty, X empty gives P^0_S, nonclosed points are allowed. The parent node lem-sfb-trait-etale-branch-pinching step 4 uses exactly these conclusions. Not a duplicate: lem-sfb-finite-normal-ample-descent needs a normal integral target. Steps 1-5 are correct. Step 1 uses one nonvanishing section on U. Step 2 shrinks to W=Y minus a(X minus V), and both inclusions were checked. Step 3 glues over two opens with transitions alpha and alpha^{-1}; the cocycles reduce to alpha alpha^{-1}=1, giving c_D = alpha c_W. Step 4 glues a^*M to L using the module pullback and restriction lemmas. Step 5 applies 0B5V, and all its hypotheses are present. One fault (C1/C4): def-kun-projective needs a closed immersion into P({0..n};S) = S x_Z Proj Z[T]. Step 6 only claimed that Proj(R[x_0..x_n]), from the immersion lemma, is this space. FIX: step 7 now cites the existing node lem-nagata-affine-proj-scalar-extension (Stacks 01N2) with (Z, R, Z[T], R[x]). This gives the isomorphism theta over S, and theta composed with i is the closed immersion. proof_deps are updated, the node is added to split_report.tool_uses, and every step stays under 2000 characters. Batch 5: lem-trf-finite-surjective-ample-reflection is the general ampleness lemma 0B5V. Its closure contains only coherent-cohomology trf lemmas and no trace-formula or Poincare-duality node. Neither assumption leaf gives it, so it is accepted as generic. The declared tool_uses are accepted. No SGA source is used, and no nodes are dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteBranchAmpleDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_ample_descent_of_finite_branches",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteBranchAmpleDescent.lean",
+  "statement": "theorem exists_ample_descent_of_finite_branches (R : Type u) [CommRing R] [IsNoetherianRing R] (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of R))] [Y.Over (Spec (CommRingCat.of R))] [IsProper (X ↘ Spec (CommRingCat.of R))] [IsProper (Y ↘ Spec (CommRingCat.of R))] (a : X ⟶ Y) [a.IsOver (Spec (CommRingCat.of R))] [IsFinite a] [Surjective a] (T : Scheme.{u}) (t : T ⟶ Y) [IsClosedImmersion t] [Finite (CategoryTheory.Limits.pullback (C := Scheme.{u}) a t)] (D : Y.Opens) (hD : (D : Set Y) = (Set.range t)ᶜ) [IsIso (a ∣_ D)] (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) (U : X.Opens) (hU : IsAffineOpen U) (hZU : Set.range (CategoryTheory.Limits.pullback.fst (C := Scheme.{u}) a t) ⊆ (U : Set X)) : ∃ W : Y.Opens, Set.range t ⊆ (W : Set Y) ∧ Nonempty (L.restrict (a ⁻¹ᵁ W).ι ≅ SheafOfModules.unit _) ∧ ∃ (M : Y.Modules) (hM : M.IsInvertible), Nonempty (M.restrict W.ι ≅ SheafOfModules.unit _) ∧ Nonempty ((tensorPullback a).obj M ≅ L) ∧ Nonempty (M.restrict D.ι ≅ (tensorPullback (inv (a ∣_ D))).obj (L.restrict (a ⁻¹ᵁ D).ι)) ∧ @IsAmple Y M hM ∧ (∃ (n : ℕ) (i : Y ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of R))), IsClosedImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of R)) ↘ Spec (CommRingCat.of R) = Y ↘ Spec (CommRingCat.of R)) ∧ IsHProjective (Y ↘ Spec (CommRingCat.of R))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-838024310",
+  "group": "NX",
+  "result": "pass",
+  "note": "Clause-by-clause check of exists_ample_descent_of_finite_branches against the node: Noetherian R, proper X/Y over Spec R, finite surjective S-morphism a, closed immersion t, Finite on the actual pullback a t, the iso off Z given as IsIso (a ∣_ D) with D = (range t)ᶜ (induced by a), invertible ample L, affine U containing range(pullback.fst). Conclusion: W ⊇ range t, trivialization of L on a⁻¹W, invertible M trivial on W, tensorPullback a M ≅ L, M|_D ≅ transport of L|_{a⁻¹D} along inv(a∣_D), IsAmple M, closed S-immersion into ℙ(ULift (Fin (n+1)); S) commuting with the structure maps, and IsHProjective. Matches def-kun-projective and the ProjectiveSpace model. Statement verbatim; node differs from live only in lean; stmt_dep records cover all declarations; no new defs; sorry only; docstrings carry sources, blueprint and 7 steps; private imports exist. Edge cases Z=T=∅, empty schemes, R=0, n=0, nonclosed points allowed; single universe u. No findings; no compile since nothing changed."
+ }
+}

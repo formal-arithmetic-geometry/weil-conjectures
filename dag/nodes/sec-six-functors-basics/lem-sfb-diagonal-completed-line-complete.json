@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-diagonal-completed-line-complete",
+ "kind": "statement",
+ "title": "Completeness of an actual completed Z_l line",
+ "statement": "Let l be a prime and S a Noetherian scheme. Fix the derived localizations of [def-sfb-diagonal-trace-models]. Let L be a locally free module sheaf of rank one over the actual completed coefficient ring purTwistZlCompletion(S,l) [det-prop-diagonal-tower-limit]. Its degree-zero complex has complete underlying constant coefficients: for every V in D(S_proet,ULift Z_l) on which l times the identity is invertible, Hom(V,diagonalCompletedUnderlying(l,S)(L[0])) is a subsingleton. This includes the regular coefficient module and the empty scheme. It assumes no invertibility of l on S and specifies no Tate line, shift or direct image.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "derived completeness of the completed coefficient generators before taking direct image"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "det-prop-diagonal-tower-limit"
+ ],
+ "proof": [
+  {
+   "text": "From finite local freeness of rank one, choose a covering family on each pro-etale object and convert the local free rank-one isomorphisms to isomorphisms with the regular completed coefficient module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the local descent completeness theorem to this covering family.",
+   "uses": [
+    "lem-sfb-diagonal-completed-line-complete-aux"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-completed-line-complete-aux"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), local trivialization and descent",
+  "by": "T2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of the sheaves Z/l^n and the Tate module of roots of unity are derived complete",
+   "results": "8 hits including ordinary AdicCompletion, ProfiniteGrp.isIso_toLimit and inverse-system equivalences; no derived sheaf completeness assertion.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed constant coefficient unit and the completed Tate line are derived l-complete on the pro-etale site",
+   "results": "8 hits on BDeRhamPlus, Witt-vector completeness and ordinary AdicCompletion; no sheaf derived completeness assertion.",
+   "date": "2026-10-27",
+   "verdict": "Use the completed-line argument, keeping its exact coefficient encoding explicit."
+  },
+  {
+   "tool": "grep",
+   "query": "purTwistZlModule|ConstantCompletion.equivalence|diagonalCompletedUnderlying",
+   "results": "The Mathlib search returned 0 hits. Local rg finds the unit/root-line definitions, PurTwistSheafLocallyFree, and CompletedLineComplete. The last uses completed O_E and IsDerivedComplete with a finite-field datum, rather than scalar orthogonality after diagonalCompletedUnderlying.",
+   "date": "2026-10-27",
+   "verdict": "No existing statement directly applies to the actual completed Z_l line with the diagonal localization choices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceCompletedHomBijection",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), derived completeness of the completed coefficient generators before taking direct image",
+   "via": [
+    "lem-sfb-diagonal-trace-completed-hom-bijection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCompletedLineComplete",
+  "file": "lean/Sheaf/Paper/DiagonalCompletedLineComplete.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalCompletedLine_complete",
+  "statement": "theorem diagonalCompletedLine_complete (l : ℕ) [Fact l.Prime] (S : Scheme.{u})\n    [IsNoetherian S] [DiagonalTraceLocalizations l S]\n    (L : DiagonalCompleted l S) (hL : L.IsFiniteLocallyFreeOfRank 1) :\n    ∀ V : DerivedCategory (DiagonalMod l S), IsIso (l • 𝟙 V) →\n      Subsingleton (V ⟶ (diagonalCompletedUnderlying l S).obj\n        ((DerivedCategory.singleFunctor (DiagonalCompleted l S) 0).obj L))",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261026T222600-L-670134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T235937-L-1472435",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

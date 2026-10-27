@@ -11,6 +11,7 @@
   "def-pc-perfect-ring-complex",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-finite-perfect-adic-tower-data",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-ringed-derived-restriction",
@@ -20,61 +21,41 @@
  ],
  "proof": [
   {
-   "text": "Work on connected components of Noetherian affine refinements of the given cover. Descend each finite-level perfect local model to a bounded etale origin by finite-ring derived comparison. Full faithfulness uniquely lifts the normalized quotient maps and their cocycles; the given local models give lisse finite cohomology and a uniform Tor bound.",
+   "text": "Obtain an etale cover with a fixed normalized algebraic stalk tower and separate local markings at each level.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-ringed-derived-restriction"
+    "lem-weil-pbc-finite-perfect-adic-stalk-models"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the exact geometric stalk to the descended normalized diagram. Derived tensor pullback and constant-stalk comparison identify the algebraic consecutive reduction maps and their adjunctions. The residue stalk is perfect by its given local finite-projective model. Keep this algebraic system without taking its inverse limit or choosing an A-complex.",
+   "text": "For each chart obtain the finite locally constant Isom-sheaf tower, nonempty geometric stalks, and reduction-compatible evaluation on affine weakly contractible objects and their restrictions.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "def-pc-perfect-ring-complex"
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Finite-ring derived local constancy gives finite locally constant isomorphism sheaves between the etale levels and their fixed stalk models. Their stalks are nonempty on a connected chart. Apply compatible finite derived trivializations, with the actual algebraic and etale normalization maps, to obtain a single pro-etale cover and compatible isomorphisms at every level.",
+   "text": "Apply the existing finite-lisse tower section-cover theorem to obtain compatible sections on one pro-etale cover of each chart; compose these with the initial etale cover.",
    "uses": [
-    "lem-weil-pbc-finite-ring-derived-local-constancy",
-    "lem-weil-pbc-compatible-finite-derived-trivializations"
+    "lem-weil-pbc-finite-lisse-tower-section-cover"
    ],
    "elementary": false
   },
   {
-   "text": "The normalized scalar projections and finite coefficient identifications identify restriction of the actual strict quotient diagram with completed constant realization of the algebraic stalk diagram. The compatible markings give an isomorphism of whole diagrams. Assemble the coverings by transitivity; an empty chart uses its empty covering.",
-   "uses": [
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "def-weil-pbc-ringed-derived-restriction"
-   ],
-   "elementary": false
+   "text": "On every member of the generated covering sieve, evaluate the sections after restriction along its factorization through a covering object. The section equations and evaluation square give consecutive naturality. NatTrans.ofOpSequence supplies naturality for all arrows; component invertibility makes the transformation an isomorphism. Package it with the chosen algebraic tower.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-ring-complex",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-ringed-derived-restriction",
-  "lem-weil-pbc-compatible-finite-derived-trivializations",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-finite-ring-derived-local-constancy",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "thm-weil-pbc-site-comparison"
+  "lem-weil-pbc-finite-lisse-tower-section-cover",
+  "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+  "lem-weil-pbc-finite-perfect-adic-stalk-models"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, lemma-connected-adic-lisse: the etale origins and normalized algebraic stalk diagram, with compatible local markings (Tags 09B1 and 09BV)."
+  "place": "Tag 09C6, finite normalized stalk models, and Tag 09BV, common finite-lisse section cover. Lean proof assembles all transitions and composes the covers."
  },
  "mathlib_searches": [
   {
@@ -141,16 +122,9 @@
   "by": "W3",
   "date": "2026-10-21",
   "declarations": [
-   "AlgebraicGeometry.Scheme.finitePerfectAdicAlgebraDerived",
-   "AlgebraicGeometry.Scheme.finitePerfectAdicConstant",
-   "AlgebraicGeometry.Scheme.finitePerfectAdicConstant_exact",
-   "AlgebraicGeometry.Scheme.finitePerfectAdicDerivedConstant",
-   "AlgebraicGeometry.Scheme.FinitePerfectAdicAlgebraTower",
-   "AlgebraicGeometry.Scheme.finitePerfectAdicLocalRealization",
-   "AlgebraicGeometry.Scheme.finitePerfectAdicRestrictedTower",
-   "AlgebraicGeometry.Scheme.FinitePerfectAdicLocalTower",
    "AlgebraicGeometry.Scheme.finitePerfectAdicTower_extraction"
-  ]
+  ],
+  "note": "K6: original data declarations are preserved verbatim in the publicly imported FinitePerfectAdicTowerData module, attached to def-weil-pbc-finite-perfect-adic-tower-data. The extraction theorem and its signature stay here. Common-cover construction and diagram assembly are proved from the two strictly finite-level obligations and the existing finite-lisse section-cover theorem."
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -163,14 +137,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W3",
-  "result": "pass",
-  "landing": "20261021T012429-L-2190159",
+  "reviewer": "C-8f3fd",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261027T050617-L-244429",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered TowerData vs clone item lines 1-133 (verbatim move); new sorry statements vs Stacks 09C6/09BV and completedAdicReduction (K-flat, normalized); node stmt_deps vs declarations used; 3 direct importers compiled OK against delivered modules"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

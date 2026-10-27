@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-normal-torus-finite-etale-splitting",
+ "kind": "statement",
+ "title": "Finite étale splitting of a torus over an affine normal Noetherian base",
+ "statement": "Let $S$ be an affine normal Noetherian scheme [def-pc-scheme] [pqf-def-locnoeth] [def-weil-pbc-normal-ring], where normal means that every local ring is a normal domain. Here Noetherian means locally Noetherian and quasi-compact [def-weil-pbc-quasi-compact-scheme]. For any scheme $U$, define $\\mathbf G_{m,U}$ by gluing $\\operatorname{Spec}A[t,t^{-1}]$ over affine opens $\\operatorname{Spec}A\\subseteq U$, with multiplication, unit and inverse induced by $t\\mapsto t\\otimes t$, $t\\mapsto1$, and $t\\mapsto t^{-1}$ [def-weil-affine-spectrum] [def-weil-laurent-polynomial-ring]. An $S$-group scheme here means a group object in $S$-schemes, with multiplication, inverse and unit morphisms satisfying the group identities. Let $T$ be such a group scheme which is fppf locally isomorphic to $\\mathbf G_{m,S}^r$, with finite locally constant rank $r\\geq0$ [def-pc-fppf-site]. Then $T\\to S$ is affine, smooth and of finite presentation [pqf-def-affine-morphism] [def-sbc-smooth-morphisms] [def-sbc-locally-finite-presentation]. There exists a finite étale surjection $u:S'\\to S$ [def-weil-etale-morphism] [def-weil-finite-integral-morphism] [def-weil-surjective-morphism], hence a finite flat locally finitely presented surjection [def-pc-finite-locally-free], such that $S'$ is a finite disjoint union of normal integral affine Noetherian schemes $S'_j$ [def-pc-integral-scheme], and $T\\times_SS'_j\\simeq\\mathbf G_{m,S'_j}^{r_j}$ as group schemes for every $j$. The empty base and rank zero are allowed. Fibre products use [def-pc-fibre-product], and finite presentation uses [def-weil-pbc-scheme-conventions].",
+ "source": {
+  "document": "literature/cesnavicius-torsors-regular.pdf",
+  "place": "Appendix A.1.3 (tori) and A.1.8 (isotriviality over locally Noetherian geometrically unibranch bases), arXiv:2201.06424v4, printed pp.50–52; affine Noetherian specialization. WANTED local copy. Normality and finite component refinements are part of the stated specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-pc-fppf-site",
+  "pqf-def-affine-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-finite-locally-free",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-laurent-polynomial-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-relative-torus"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-noetherian-finite-components], $S$ has finitely many irreducible components. Every quasi-compact open has finitely many components as well: it is a quasi-compact open of a locally Noetherian scheme, hence Noetherian. Apply [lem-sfb-normal-locally-finite-components] to obtain a finite disjoint clopen decomposition $S=\\coprod_a S_a$ into normal integral schemes. Each $S_a$ is Noetherian: it is locally Noetherian as an open, and quasi-compact as a closed subset of quasi-compact $S$. If $S$ is empty take $S'=S$ and the identity; all assertions are vacuous. Otherwise it suffices to construct a finite etale splitting cover of each nonempty $S_a$ and take their disjoint union. Each $S_a$ is connected because it is integral.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-sfb-normal-locally-finite-components",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles; Tag 033M, lemma-normal-Noetherian."
+   }
+  },
+  {
+   "text": "First $T$ is commutative: multiplication and multiplication after swapping the factors agree on the given fppf splitting cover. On each affine test scheme the cover admits a finite affine fppf refinement by [lem-pc-fppf-affine-refinement]; its finite disjoint union is an fpqc cover. Uniqueness in [lem-weil-pbc-fpqc-representable-descent] tests equality of the two maps there, hence globally. Apply [lem-sfb-relative-torus-character-reconstruction] to $T$. It gives the etale lattice sheaf $M=X^*(T)$, the isomorphism $T\\simeq D_S(M)$ and arbitrary base-change compatibility. Its structure-map clause proves that $T\\to S$ is affine, smooth and of finite presentation. On each connected $S_a$ the locally constant rank of $M$ is a single integer $r_a\\geq0$: distinct rank loci are disjoint open subsets whose union is $S_a$. Write $M_a=M|_{S_a}$.",
+   "uses": [
+    "lem-sfb-relative-torus-character-reconstruction",
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cesnavicius-torsors-regular.pdf",
+    "place": "Appendix A.1.2 (tori), A.1.3 (biduality), A.1.8 (isotriviality); https://arxiv.org/html/2201.06424v4, online text read, local copy WANTED. Reconstruction supplied by the existing relative-character node."
+   }
+  },
+  {
+   "text": "On $(S_a)_{\\mathrm{et}}$ form the sheaf $P_a$ of bases of $M_a$: a section over $U$ is an isomorphism $\\underline{\\mathbf Z^{r_a}}|_U\\xrightarrow{\\sim}M_a|_U$. Maps and their inverses glue uniquely, so this is a sheaf. On an etale chart trivializing $M_a$, $P_a$ is the constant sheaf with value $\\operatorname{GL}_{r_a}(\\mathbf Z)$. An isomorphism is determined by the images of the finitely many standard basis vectors. By [lem-weil-pbc-constant-sheaf-sections-locally-constant], these are Zariski-locally constant integer vectors, hence locally a single matrix; invertibility says that the matrix is in $\\operatorname{GL}_{r_a}(\\mathbf Z)$. Conversely such a locally constant matrix gives the isomorphism and its inverse. Thus $P_a$ is locally constant and locally nonempty. Its comparison inverse image $F_a=\\nu_{S_a}^*P_a$ is locally constant and locally nonempty on $(S_a)_{\\mathrm{proet}}$: the same trivializing charts are pro-etale covers by [lem-pur-etale-proetale-cover]; inverse image of [def-weil-pbc-site-comparison-morphism] preserves constants and local trivializations. This uses finite-limit and colimit preservation: the constant sheaf of a set is a coproduct of terminal sheaves. No finiteness of $\\operatorname{GL}_{r_a}(\\mathbf Z)$ is asserted.",
+   "uses": [
+    "lem-pur-etale-proetale-cover",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9, printed pp.67–68; Lemma 7.4.10 and its proof, printed p.71; application to the sheaf of lattice bases."
+   }
+  },
+  {
+   "text": "The scheme $S_a$ is nonempty, connected, normal and Noetherian by step 1. Apply [lem-a1-normal-locally-constant-finite-section] to $F_a$. It supplies a finite etale surjection $v_a:Y_a\\to S_a$ and $s_a\\in F_a(Y_a)$. By [det-pe-classical-sheaves-unit], $P_a\\to\\nu_{S_a,*}\\nu_{S_a}^*P_a$ is an isomorphism. Direct image here is restriction by [def-weil-pbc-site-comparison-morphism]. Evaluating at the etale object $Y_a\\to S_a$ therefore gives $F_a(Y_a)=P_a(Y_a)$ canonically. Thus $s_a$ is a basis $\\underline{\\mathbf Z^{r_a}}\\simeq M_a|_{Y_a}$. The base-change and constant-lattice clauses of [lem-sfb-relative-torus-character-reconstruction] give $T\\times_S Y_a\\simeq\\mathbf G_{m,Y_a}^{r_a}$ as group schemes.",
+   "uses": [
+    "lem-a1-normal-locally-constant-finite-section",
+    "det-pe-classical-sheaves-unit",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sfb-relative-torus-character-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9, printed pp.67–68; Lemma 7.4.10 and its proof, printed p.71; application to the sheaf of lattice bases."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-etale-normal-generic-components] to $Y_a\\to S_a$, whose base is normal integral Noetherian. It decomposes $Y_a$ into finitely many clopen normal integral subschemes $Y_{a,j}$. Also $Y_a$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: a finite morphism is of finite type, since finitely many module generators also generate its algebra; an affine preimage is quasi-compact. Each $Y_{a,j}$ is locally Noetherian as an open and quasi-compact as a closed subset of $Y_a$, hence Noetherian. Form $S'=\\coprod_aY_a$ using [lem-weil-pbc-scheme-coproduct-family], with $u$ equal to $v_a$ on each summand. Over the disjoint clopen bases $S_a$, it is the given finite etale surjection, so it is finite etale and surjective over $S$. In particular $S'$ is affine because a finite morphism is affine and $S$ is affine. Each clopen $Y_{a,j}\\subset S'$ is affine: by [lem-weil-pbc-spec-clopen-idempotent] its underlying open in $\\operatorname{Spec}B=S'$ is $D(e)$ for an idempotent $e$, and its open subscheme is $\\operatorname{Spec}B_e$. Restrict the step-4 isomorphism to each component and set $r_{a,j}=r_a$.",
+   "uses": [
+    "lem-sfb-finite-etale-normal-generic-components",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BQL, lemma-finite-etale-covering-normal-unramified, first proof paragraph; properties.tex Tag 01OZ, lemma-Noetherian-topology; algebra.tex Tag 00EE, lemma-disjoint-decomposition."
+   }
+  },
+  {
+   "text": "By [def-weil-etale-morphism], $u$ is flat and locally of finite presentation. Together with finiteness, this is exactly finite local freeness in [def-pc-finite-locally-free]. Surjectivity was proved in step 5. In rank zero the basis sheaf has the single empty basis, the reconstructed group is the trivial group $\\mathbf G_m^0$, and the argument applies. For a nonempty base the cover has nonempty fibres; for the empty base use the identity from step 1.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GI, definition-etale; only the cited definitions of etale and finite locally free are used here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-sfb-normal-locally-finite-components",
+  "pqf-def-locnoeth",
+  "lem-sfb-relative-torus-character-reconstruction",
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-pur-etale-proetale-cover",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-a1-normal-locally-constant-finite-section",
+  "det-pe-classical-sheaves-unit",
+  "lem-sfb-finite-etale-normal-generic-components",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "def-weil-etale-morphism",
+  "def-pc-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Application of Lemmas 7.3.9 and 7.4.10 to the lattice-basis sheaf, using existing relative torus reconstruction; component refinements from Stacks Tags 0357 and 0BQL. Online torus-survey Appendix A.1.2–A.1.8 checked; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torus over a normal connected Noetherian scheme becomes a split multiplicative group after a finite etale surjective base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  Nontrivial ↑T.tensor\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, the pushout $T.tensor$ in the category of commutative rings constructed from the residue field maps is\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|isotrivial|multiplicativeType",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A form of a split torus over a normal Noetherian base is split by a finite etale covering",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.Etale.casesOn\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.Etale R A → Sort u_1} →\\n            (t : Algebra.Etale R A) →\\n              ((formallyEtale : Algebra.FormallyEtale R A) →\\n                  (finitePre\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, this function enables case analysis on the property that $ A $ is étale over $ R $ by specifying how to handle the two\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K L] : FormallyEtale K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For a commutative ring $ K $ and a $ K $-algebra $ L $ of essential finite type, $ L $ is formally étale over $ K $ if and only if $ L $ is separable over $ K $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R A ↔ FormallyUnramified R A ∧ FormallySmooth R A\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally étale if and only if it is both formally unramified and formally smooth over $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The character lattice of a torus on a normal scheme has finite monodromy and is trivial on a finite etale cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a continuous multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [(X : C) → MulAction G (F.obj X).carrier] →\\n              [inst : TopologicalS\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_continuous\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (X : Action FintypeCat (CategoryTheory.Aut F)) [inst_3 : TopologicalSpace X.V.carrier] [DiscreteTopol\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, given a continuous action $X$ of the automorphism group $\\\\mathrm{Aut}(F)$ on finite types equipped with the discrete topology, there exists an object $A \\\\in \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  CategoryTheory.PreGaloisCategory.IsFundamentalGroup F (CategoryTheory.Aut F)\", \"doc\": \"For a pre-Galois category $\\\\mathcal{C}$ and a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, the automorphism group $\\\\mathrm{Aut}(F)$ of the functor $F$ serves as the fundamental group of the Gal\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; none states this relative scheme/group-action theorem, nor a one-line generalization. The second semantic phrasing also has no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus over a normal Noetherian scheme is split by a finite etale surjective cover",
+   "results": "{\"t\": \"2026-10-24T03:36:58Z\", \"tool\": \"leanfinder\", \"query\": \"A torus over a normal Noetherian scheme is split by a finite etale surjective cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"digest\": \"d168947a190a9cbf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern topological tori, field Galois theory, generic etale algebras or normalization, not relative torus splitting over normal schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\"",
+   "results": "{\"t\": \"2026-10-24T03:38:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.leftAnnihilatorUSize\", \"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.leftRightAnnihilatorUSize\", \"Lean.Compiler.LCNF.Simp.ConstantFold.Folder.rightAnnihilatorUSize\", \"UnitAddTorus\", \"UnitAddTorus.mFourierCoeff\", \"UnitAddTorus.mFourier\", \"UnitAddTorus.measurableEquivPiIoc\", \"UnitAddTorus.lintegral_preimage\"], \"digest\": \"7bd74e45ead7d160\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern topological tori, field Galois theory, generic etale algebras or normalization, not relative torus splitting over normal schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|isotrivial|multiplicativeType",
+   "results": "{\"t\": \"2026-10-24T03:38:04Z\", \"tool\": \"grep\", \"query\": \"torus|isotrivial|multiplicativeType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Topology/Instances/AddCircle/Real.lean\", \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\"], \"digest\": \"10337a2ba4bb7f4e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern topological tori, field Galois theory, generic etale algebras or normalization, not relative torus splitting over normal schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A form of a multiplicative group is trivial on a finite etale covering of a normal base",
+   "results": "{\"t\": \"2026-10-24T03:38:05Z\", \"tool\": \"leansearch\", \"query\": \"A form of a multiplicative group is trivial on a finite etale covering of a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"IsGaloisGroup.fixedPoints_bot\", \"IsGaloisGroup.mulEquivCongr\", \"IsGaloisGroup.fixingSubgroup_top\", \"SemidirectProduct.mulEquivProd\", \"groupCohomology.coboundaries₁_eq_bot_of_isTrivial\", \"Polynomial.Gal.uniqueGalOfSplits\"], \"digest\": \"52a4ef9abbb0faef\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern topological tori, field Galois theory, generic etale algebras or normalization, not relative torus splitting over normal schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: pass on an affine normal base to a finite étale splitting cover; also supplies the smooth affine finite-presentation properties of the acting torus.",
+   "via": [
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-torus-finite-etale-splitting",
+  "worker": "stage1",
+  "summary": "Reused existing relative torus reconstruction and the normal-base finite-section theorem. Constructed the locally constant basis sheaf explicitly, recovered its finite-cover section through the comparison unit, and checked normal integral affine Noetherian components. No new nodes. Clarified the relative multiplicative-group notation because def-sc-gm-ga is field-only; mathematical hypotheses and conclusions unchanged.",
+  "blueprint": "Realizes the inherited relative-torus-quotient prerequisite (finite etale splitting and smooth affine finite presentation), on the alteration route below det-thm-sf-ctf-stability-direct-images, proof (3). The inherited created.item chain has no blueprint ancestor: tools/blueprint_refs.py ancestor returns None; from.node and via retained. Current latest blueprint main-20261024 searched; no equivalent torus statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic scheme/sheaf tool for the stated descent, component, constant-section, finite-section, comparison-unit or idempotent conclusion; no trace formula or duality result is used."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Generic scheme/sheaf tool for the stated descent, component, constant-section, finite-section, comparison-unit or idempotent conclusion; no trace formula or duality result is used."
+   },
+   {
+    "node": "lem-a1-normal-locally-constant-finite-section",
+    "why": "Generic scheme/sheaf tool for the stated descent, component, constant-section, finite-section, comparison-unit or idempotent conclusion; no trace formula or duality result is used."
+   },
+   {
+    "node": "det-pe-classical-sheaves-unit",
+    "why": "Generic scheme/sheaf tool for the stated descent, component, constant-section, finite-section, comparison-unit or idempotent conclusion; no trace formula or duality result is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-a1-normal-locally-constant-finite-section",
+  "det-pe-classical-sheaves-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-ae7d22b99",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-ae7d22b99 (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full. No new nodes; the item is still unsplit in live, so no other group superseded it, and there is no re-split note. The statement change is a correct clarification: the field-only def-sc-gm-ga is replaced by an explicit glued G_{m,S}, and the finite/surjective/fibre-product/quasi-compact definitions are now cited. Hypotheses and conclusion are unchanged, and the only citer (relatively-ample-subtorus step 0) is still served. Step checks: (1) the finite-components hypothesis of lem-sfb-normal-locally-finite-components is met because quasi-compact opens are Noetherian; S_a are Noetherian, integral and connected. (2) Commutativity: finite affine fppf refinement gives one affine faithfully flat map, which is an fpqc covering, and descent uniqueness gives equality; reconstruction clauses used as stated, structure map smooth/affine/fp. (3) The basis sheaf is locally constant GL_r(Z) via LC_Zar sections of Z^r. Sheafification of the constant set presheaf is implicit but standard (remark only). ν^* keeps constant sheaves and étale covers are pro-étale covers. (4) lem-a1 hypotheses hold exactly; the unit iso for sheaves of sets gives an actual basis over Y_a; reconstruction gives the splitting. (5)-(6) Components are clopen D(e), S' is affine and finite étale surjective, and finite locally free follows from the definitions. Edge cases checked: empty base, rank 0, norm torus over a field, mixed ranks; normality is needed (nodal Z-cover). Bhatt-Scholze Lemmas 7.3.9 and 7.4.10 read in the local PDF. Česnavičius A.1.8 source inherited, no local copy (WANTED). No duplicate in a DAG-wide torus scan. Batch-5: the full closures of reconstruction (via lem-trf-smooth-fpqc-base-descent) and lem-a1 (via def-trf-scheme-universe-enlargement) contain only generic trf algebraic-space/fppf-descent nodes and no Poincaré-duality, trace-transport or nt- node, so both are accepted. tool_uses accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalTorusFiniteEtaleSplitting",
+  "declaration": "AlgebraicGeometry.normal_torus_finite_etale_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalTorusFiniteEtaleSplitting.lean",
+  "statement": "theorem normal_torus_finite_etale_splitting (S : Scheme.{u}) [IsAffine S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (T : Over S) [GrpObj T] (hT : IsRelativeTorus T) : IsAffineHom T.hom ∧ Smooth T.hom ∧ (LocallyOfFinitePresentation T.hom ∧ QuasiCompact T.hom ∧ QuasiSeparated T.hom) ∧ ∃ (S' : Scheme.{u}) (f : S' ⟶ S), IsFinite f ∧ Etale f ∧ Surjective f ∧ f.IsFiniteLocallyFree ∧ ∃ (n : ℕ) (U : Fin n → S'.Opens) (r : Fin n → ℕ), (∀ j, IsClosed (U j : Set S')) ∧ (∀ i j, i ≠ j → Disjoint (U i) (U j)) ∧ (⨆ j, U j) = ⊤ ∧ ∀ j, IsIntegral (U j).toScheme ∧ IsAffine (U j).toScheme ∧ IsLocallyNoetherian (U j).toScheme ∧ CompactSpace (U j).toScheme ∧ (∀ x : (U j).toScheme, IsDomain ((U j).toScheme.presheaf.stalk x) ∧ IsIntegrallyClosed ((U j).toScheme.presheaf.stalk x)) ∧ Nonempty ((Over.map ((U j).ι ≫ f)).op ⋙ yonedaGrpObj T ≅ relativeSplitTorusFunctor (U j).toScheme (r j))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-589d52668",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Delta vs side-live: lean record + added landed stmt_dep def-sfb-relative-torus (IsRelativeTorus/relativeSplitTorusFunctor used, read in RelativeTorus.lean). Statement verbatim. Clauses checked: affine + locally Noetherian S (qc from affine), stalkwise normal domain, GrpObj T with IsRelativeTorus (fppf cover, varying ℕ ranks); conclusion IsAffineHom/Smooth/LFP∧QC∧QS; finite+étale+surjective+IsFiniteLocallyFree f; finite clopen disjoint covering family U : Fin n → S'.Opens with integral/affine/loc. Noetherian/compact/normal pieces; group-functor iso via Over.map ((U j).ι ≫ f) matching the landed def's local form. Edge cases: empty S (n=0, identity), rank 0, varying ranks, single universe u. No duplicate declaration, no new defs, sorry only, docstrings with source/blueprint/6 steps, all imports exist. Advisory only: CompactSpace redundant with IsAffine. No compile (no file changed)."
+ }
+}

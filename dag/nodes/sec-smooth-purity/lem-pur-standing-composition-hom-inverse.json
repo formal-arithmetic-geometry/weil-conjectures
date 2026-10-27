@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-standing-composition-hom-inverse",
+ "kind": "statement",
+ "title": "Explicit inverse followed by the standing compositor is the identity",
+ "statement": "With P,f,g,L and b as in [def-pur-standing-composition-inverse], let c:(gf)!L→f!g!L be the specified standing counit mate of [pur9-def-upper-shriek-composition]. Then b ≫ c = id_f!g!L. No smoothness or absolute separatedness of the schemes is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/pur9-def-upper-shriek-composition.md",
+  "place": "The specified counit mate and its inverse-transpose argument in thm-pur-composition-coherence"
+ },
+ "stmt_deps": [
+  "def-pur-standing-composition-inverse",
+  "pur9-def-upper-shriek-composition",
+  "thm-sf-comp-composition",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof": [
+  {
+   "text": "The inverse of the Hom equivalence E_K is exactly the displayed b formula, since inverse composition reverses the order: inverse f transpose, inverse g transpose, alpha inverse, then gf transpose. Naturality in K is obtained from full faithfulness on etale representatives, fixedCompactSupportComparisonIso naturality and both adjunction naturalities. Put R=(gf)!L and V=f!g!L. Then c=E_R(id) and b=E_V.symm(id). Naturality gives E_K(a)=a≫c; thus b≫c=id. Apply injectivity of E_R to c≫b and id; naturality and b≫c=id give c≫b=id. Both objects have the required plus etale-origin witnesses. Empty schemes, zero objects and the zero coefficient ring require no extra assumption.",
+   "uses": [
+    "pur9-def-upper-shriek-composition",
+    "thm-sf-comp-composition",
+    "thm-sf-ambient-adjoint-class",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pur9-def-upper-shriek-composition",
+  "thm-sf-comp-composition",
+  "thm-sf-ambient-adjoint-class",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/pur9-def-upper-shriek-composition.md",
+  "place": "The specified counit mate and its inverse-transpose argument in thm-pur-composition-coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of Hom equivalences implies the two inverse equations for their representing morphisms",
+   "results": "Adjunction.homEquiv_naturality_left_symm/right_symm and related naturality lemmas, Mathlib.CategoryTheory.Adjunction.Basic; no comparison-class compositor statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic adjunction naturality is only a proof ingredient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse of a natural equivalence of represented Hom functors given by two adjunction transposes",
+   "results": "Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm; Adjunction.representableBy_homEquiv; ParametrizedAdjunction naturality. None mentions the standing pro-etale comparison-class functors.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "standingExceptionalCompositionInverse|standingExceptionalComposition_inverse_hom|standingExceptionalComposition_hom_inverse in Mathlib/CategoryTheory; inspect Adjunction/Basic.lean and Iso.lean",
+   "results": "No standing exceptional comparison in Mathlib. Adjunction.homEquiv_naturality_left_symm (Basic.lean:226) and Iso constructor (Iso.lean:53) supply only generic ingredients.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; new specialized declarations needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityCompositionCoherence",
+  "date": "2026-10-26",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Exceptional compositor invertibility; separate inverse construction and two inverse equations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StandingExceptionalCompositionInverseRight",
+  "file": "lean/Sheaf/Paper/StandingExceptionalCompositionInverseRight.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.standingExceptionalComposition_hom_inverse",
+  "statement": "theorem standingExceptionalComposition_hom_inverse (P : WeilConjectures.PurityFiniteSetting.{u})\n    {X Y S : Scheme.{u}}\n    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]\n    [S.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]\n    [QuasiCompact (X ↘ Spec (.of P.field.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]\n    [QuasiCompact (Y ↘ Spec (.of P.field.k))]\n    [LocallyOfFiniteType (S ↘ Spec (.of P.field.k))]\n    [QuasiCompact (S ↘ Spec (.of P.field.k))]\n    (f : X ⟶ Y) (g : Y ⟶ S)\n    [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    (L : DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} P.Coefficient) S) :\n    standingExceptionalCompositionInverse P f g L ≫\n      standingExceptionalComposition P f g L = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T205025-L-3095158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261025T205025-L-3095158",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

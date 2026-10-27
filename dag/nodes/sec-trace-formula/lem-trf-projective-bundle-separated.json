@@ -14,76 +14,56 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal E)$. By [def-trf-projective-bundle-morphism], the given $\\pi$ is $\\operatorname{Proj}_S(\\mathcal A)\\to S$. The symmetric-algebra sheaf is quasi-coherent by [lem-weil-pbc-quasi-coherent-symmetric-algebra]. Its grading by symmetric degree is the grading of [lem-weil-pbc-symmetric-algebra-graded], realized on affine sections by [def-trf-canonical-symmetric-graded-algebra]. Thus it is an input of the relative-Proj construction. No finite-type or local-freeness hypothesis on $\\mathcal E$ is needed.",
+   "text": "Let A be the canonical affine-basis symmetric graded algebra of E [def-trf-canonical-symmetric-graded-algebra]. The projective bundle in [def-trf-projective-bundle-morphism] has structure morphism A.relProjHom [def-nagata-relative-proj]. Its grading and coefficientwise base-change proofs are already fields of A, so no separate existential symmetric-algebra comparison is needed here.",
    "uses": [
+    "def-trf-canonical-symmetric-graded-algebra",
     "def-trf-projective-bundle-morphism",
-    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-    "lem-weil-pbc-symmetric-algebra-graded",
-    "def-trf-canonical-symmetric-graded-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01OB, constructions-definition-projective-bundle and the paragraph preceding it (symmetric algebra quasi-coherent and graded)"
-   }
-  },
-  {
-   "text": "For each affine open $U\\subseteq S$, set $C_U=\\Gamma(U,\\mathcal A)$ and $P_U=\\pi^{-1}(U)$. The relative-Proj affine restriction theorem [lemma-nagata-relative-proj-exists] identifies $P_U$ with $\\operatorname{Proj}(C_U)$, compatibly with its structural morphism $p_U:P_U\\to U$. In [def-nagata-relative-proj] this structural map is explicitly the Proj degree-zero map followed by the spectrum map induced by $\\mathcal O_S(U)\\to (C_U)_0$. In particular the local model is an ordinary Proj of a graded ring; it is not asserted to be affine or to be projective space.",
-   "uses": [
-    "lemma-nagata-relative-proj-exists",
     "def-nagata-relative-proj"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O2, constructions-lemma-relative-proj-separated, affine restriction sentence; construction in Tag 01NY, constructions-lemma-relative-proj"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-trf-proj-separated] the scheme $\\operatorname{Proj}(C_U)$ is separated, so its canonical morphism to $\\operatorname{Spec}\\mathbf Z$ is separated. The composite of $p_U:P_U\\to U$ with the canonical $U\\to\\operatorname{Spec}\\mathbf Z$ is that same morphism under the isomorphism of Step 2. Apply clause (b) of [lem-weil-pbc-separated-cancellation] to this composite to obtain that $p_U$ is separated. No separatedness of $S$ and no finite-generation condition on $C_U$ is used.",
+   "text": "Use the directed affine open cover of S. For each affine open U, the chart square supplied by [lemma-nagata-relative-proj-exists] identifies Proj(A(U)) with the fibre product of A.relProjHom and the open immersion U into S [def-pc-fibre-product] and [def-weil-open-immersion]. Flip this square and use its canonical pullback isomorphism: its composite with the second pullback projection is A.toOpen U.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scheme Proj(A(U)) is separated by [lem-trf-proj-separated]. Hence A.toOpen U is separated by separated cancellation [lem-weil-pbc-separated-cancellation], as implemented by Mathlib Scheme.instIsSeparatedOfIsSeparated. Separatedness respects isomorphisms, so the canonical pullback projection to U is separated as well.",
    "uses": [
     "lem-trf-proj-separated",
     "lem-weil-pbc-separated-cancellation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O2, constructions-lemma-relative-proj-separated, using Tag 01MC (Proj separated) and Schemes Tag 01KV (separated cancellation)"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $P=\\mathbf P_S(\\mathcal E)$, $Q=P\\times_SP$, and $q:Q\\to S$ for the common base map. The open subschemes $W_U=q^{-1}(U)$ for affine opens $U\\subseteq S$ cover $Q$. By the fibre-product universal property [def-pc-fibre-product], $W_U=P_U\\times_U P_U$: maps to either side are exactly pairs of maps to $P$ with equal base map factoring through $U$. Factoring through an open subscheme means restricting the continuous and sheaf maps [def-weil-open-immersion], so this identification is also an identification of the indicated open subschemes. The inverse image of $W_U$ under $\\Delta_\\pi$ is $P_U$, and the restricted map is $\\Delta_{p_U}$ because both its projections are the identity. Step 3 and [def-weil-proper-morphism] say that every such restricted diagonal is a closed immersion. Clause (1) of [lem-weil-pbc-closed-finite-etale-zariski-local], applied to the open cover $(W_U)$ of the TARGET $Q$ of the diagonal, makes $\\Delta_\\pi$ a closed immersion. By [def-weil-proper-morphism] this is precisely separatedness of $\\pi$.",
+   "text": "Apply Mathlib IsZariskiLocalAtTarget.of_openCover for IsSeparated to the directed affine cover. Its separatedness locality instance follows from the diagonal criterion [def-weil-proper-morphism] and closed-immersion locality [lem-weil-pbc-closed-finite-etale-zariski-local]. The separated pullback projections of the preceding step therefore prove separatedness of A.relProjHom. This packages the original diagonal gluing argument without introducing additional statements.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-open-immersion",
     "def-weil-proper-morphism",
     "lem-weil-pbc-closed-finite-etale-zariski-local"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O2, constructions-lemma-relative-proj-separated, first sentence; expanded via Schemes Tag 01HL (lemma-closed-local-target) and Tag 01KK (definition-separated)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-trf-projective-bundle-morphism",
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-  "lem-weil-pbc-symmetric-algebra-graded",
   "def-trf-canonical-symmetric-graded-algebra",
-  "lemma-nagata-relative-proj-exists",
+  "def-trf-projective-bundle-morphism",
   "def-nagata-relative-proj",
-  "lem-trf-proj-separated",
-  "lem-weil-pbc-separated-cancellation",
+  "lemma-nagata-relative-proj-exists",
   "def-pc-fibre-product",
   "def-weil-open-immersion",
+  "lem-trf-proj-separated",
+  "lem-weil-pbc-separated-cancellation",
   "def-weil-proper-morphism",
   "lem-weil-pbc-closed-finite-etale-zariski-local"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01OD (lemma-projective-bundle-separated), expanded using the proof of Tag 01O2 (lemma-relative-proj-separated), Tag 01MC and Schemes Tags 01KV, 01HL"
+  "place": "Tags 01OD and 01O2, implemented using Mathlib Proj.instIsSeparated, Scheme.instIsSeparatedOfIsSeparated, IsZariskiLocalAtTarget.of_openCover, and the source relative-Proj chart pullbacks."
  },
  "mathlib_searches": [
   {
@@ -229,7 +209,18 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-18",
   "item": "lem-trf-projective-bundle-separated",
@@ -243,9 +234,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -272,5 +261,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The theorem states separatedness of the canonical relative-Proj structure morphism for the symmetric algebra of an arbitrary quasi-coherent module, with no finite-type or local-freeness hypothesis."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261023T103131-L-3058448",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

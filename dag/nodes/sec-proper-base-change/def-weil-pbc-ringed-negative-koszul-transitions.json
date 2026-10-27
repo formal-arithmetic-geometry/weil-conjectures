@@ -1,0 +1,130 @@
+{
+ "id": "def-weil-pbc-ringed-negative-koszul-transitions",
+ "kind": "definition",
+ "title": "Explicit inverse transitions for the existing negative two-term tensor",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$ and commutative ring sheaf $\\mathcal O$. Use the negative two-term factors, their ordered tensor and basis of [def-cbc-signed-koszul-completion-model], and the scalar map and total tensor of [def-weil-pbc-ringed-koszul-system]. For a global section $b$ and $m\\in\\mathbf N$, define the factor transition from exponent $m+2$ to $m+1$ to have multiplication by $b$ in degree $-1$, identity in degree zero, and zero elsewhere, with the canonical two-term identifications. Its chain equation is $b b^{m+1}=b^{m+2}$. Define the transition on an ordered tensor recursively by tensoring the first-factor transition with the tail transition. For zero factors the transition is the identity of $\\mathcal O[0]$. All these maps are explicit constructions, with no existential choice. For the empty tensor, inverse Hom-unit evaluation is a chain isomorphism to the positive internal dual, and it intertwines the identity transitions and the empty-subset degree-zero unit.",
+ "stmt_deps": [
+  "def-cbc-signed-koszul-completion-model",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul, the finite free negative Koszul complex and its dual identification; Modules on Sites Tags 03D8, 03EK and 0GMW for coefficient realization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, lemma-derived-completion-koszul. The ordered two-term calculations and coefficient realization details are expanded by B6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The negative Koszul complex of module sheaves is the internal dual of the positive Koszul complex and commutes with scalar extension",
+   "results": "8 hits: HomologicalComplex.unop, opposite homology comparisons, extendOpIso, FGModuleCatDual, and Hom-complex shifts. None identifies these Koszul complexes or transports their transitions and units.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of a tensor product of finite free complexes is the tensor product of the dual complexes",
+   "results": "8 hits, including TensorProduct.dualDistribEquiv, PiTensorProduct.dualDistribEquiv, dualTensorHomEquiv and map_dualTensorHom. These concern modules and provide no chain-level sheaf comparison with the stated units.",
+   "date": "2026-10-26",
+   "verdict": "Useful underlying module duality, no direct chain-level theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dual\", \"tensor\"",
+   "results": "12 hits: leftDualTensorIso, rightDualTensorIso, tensor dual instances, TensorProduct.dualDistrib and dualTensorHomEquiv. No statement about the present module-sheaf complexes.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*(dual|tensor)|Koszul.*(dual|tensor)",
+   "results": "0 Mathlib hits through msearch. Local rg found the negative two-term tensor and basis in SignedKoszulCompletionModel. Read its definitions, RingedKoszulSystem, HomComplexToSingle, HomTensorTotal, and the completed tensor transport modules. None states either required normalized finite comparison.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing negative tensor; add only its explicit transition API and the two comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilNegativeKoszulTensorDualTransport",
+  "date": "2026-10-26",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The finite negative Koszul complexes and the unit in the derived-inverse-limit formula of def-weil-pbc-completed-pullback: Explicit inverse transitions for the existing negative two-term tensor.",
+   "via": [
+    "lem-weil-pbc-negative-koszul-tensor-dual-transport",
+    "lem-weil-pbc-completed-koszul-coefficient-comparison",
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedNegativeKoszulTransitions",
+  "file": "lean/Sheaf/CategoryTheory/RingedNegativeKoszulTransitions.lean",
+  "declaration": "CategoryTheory.ringedNegativeKoszulTransition",
+  "statement": "def ringedNegativeKoszulTransition : (r : ℕ) →\n    (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) → (m : ℕ) →\n      ringedNegativeKoszul O r b (m + 1) ⟶ ringedNegativeKoszul O r b m",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringedNegativeKoszulFactorTransitionF",
+   "CategoryTheory.ringedNegativeKoszulFactorTransitionF_comm",
+   "CategoryTheory.ringedNegativeKoszulFactorTransition",
+   "CategoryTheory.ringedNegativeKoszulTransition",
+   "CategoryTheory.ringedNegativeKoszulZeroDuality"
+  ]
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T001000-L-4157372",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T001000-L-4157372",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

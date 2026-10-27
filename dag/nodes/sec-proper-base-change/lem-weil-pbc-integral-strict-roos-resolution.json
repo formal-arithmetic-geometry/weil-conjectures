@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-integral-strict-roos-resolution",
+ "kind": "statement",
+ "title": "Universal resolution normalization of the completed-coefficient Roos comparison",
+ "statement": "For any adic coefficient datum d over a commutative ring A in universe u+1 and any scheme U in universe u, the literal integral Roos functor on complexes of strict N-op towers of pbcModules U (pbcAdicCompletion U d), followed by localization, is naturally isomorphic to localization followed by completedTowerRlim d U. For every quasi-isomorphism r:X to I with I K-injective and all I terms injective, the ordinary termwise limit maps to the Roos complex of I by iota whose first coordinates are precisely the limit projections and whose shifted coordinates vanish. Under rho, derived r followed by the canonical K-injective derived-limit computation and Q(iota) equals Q(Roos(r)). The coefficient module and literal Roos notation are as in [def-weil-pbc-proper-integral-ordinary-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks sites-cohomology.tex lemma-derived-limit-is-ok (Tag 0941). Original strict-model matching proof step 4."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-proper-integral-ordinary-data"
+ ],
+ "proof": [
+  {
+   "text": "Use Grothendieckness of module sheaves and their tower category, and exactness of countable pro-etale products, to specialize the existing normalizedRoosIso to the universal derived-limit unit, transported by strictTowerLimitIso. The literal integral Roos functor and the shifted mapping-cone functor are identical.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "det-pe-products-exact",
+    "stage3-pur-canonical-tower-roos-comparison",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a K-injective tower I the limit inclusion roosι is a quasi-isomorphism. Its first coordinates are the ordinary limit projections and its shifted coordinates are zero. Transport along the canonical termwise-limit isomorphism. The normalization equation and the derived-unit computation cancel to give rho(I) followed by the derived-limit computation and Q(iota) equal to identity. Naturality of rho along any quasi-isomorphism r gives the required formula for every resolution.",
+   "uses": [
+    "lem-weil-strict-roos-derivation",
+    "lem-sf-strict-roos-derived-limit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "det-pe-products-exact",
+  "stage3-pur-canonical-tower-roos-comparison",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-strict-roos-derivation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks sites-cohomology.tex lemma-derived-limit-is-ok (Tag 0941). Original strict-model matching proof step 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category with exact countable products the shifted mapping cone of one minus shift of a tower computes the total right derived inverse limit with its universal unit",
+   "results": "Eight mapping-cone, sequential-product and ordinary limit formulas; no normalized Roos comparison.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shifted cone of one minus shift on a countable tower is naturally isomorphic to derived inverse limit normalized by its limit inclusion on every K injective resolution",
+   "results": "General injective-resolution naturality and cone-shift formulas only.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalized statement."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos; normalizedRoosIso; strictTowerLimitIso",
+   "results": "Mathlib has no Roos hit. The local library proves normalizedRoosIso, strictTowerLimitIso and roos_inclusion_quasiIso; this proof specializes those existing helpers and derives the explicit two coordinates and resolution equation. Blueprint search for Roos resolution returns zero nodes.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing generic proof; add only its explicit normalization corollary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictModelMatchingExists",
+  "date": "2026-10-27",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice proof paragraph: identification of ordinary integral pullback and the actual quotient-tower completion comparison; original ordinary-input proof steps 5–7. Parent comparison step(s) 2–3. Stacks sites-cohomology.tex lemma-derived-limit-is-ok (Tag 0941). Original strict-model matching proof step 4.",
+   "via": [
+    "lem-weil-pbc-integral-strict-model-matching",
+    "lem-weil-pbc-proper-integral-strict-model-comparison",
+    "lem-weil-pbc-proper-integral-ordinary-inputs",
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStrictRoosResolution",
+  "file": "lean/Sheaf/Paper/IntegralStrictRoosResolution.lean",
+  "declaration": "WeilConjectures.pbc_integral_strict_roos_resolution",
+  "statement": "theorem pbc_integral_strict_roos_resolution\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Scheme.{u}) :\n    ∃ ρ : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙\n        integralOperationsRoosFunctor ⋙ DerivedCategory.Q ≅\n      DerivedCategory.Q ⋙ completedTowerRlim d U,\n      ∀ (X I : CochainComplex (pbcTowers U (pbcAdicCompletion U d)) ℤ)\n        (r : X ⟶ I) [QuasiIso r] [I.IsKInjective]\n        (_hi : ∀ i : ℤ, Injective (I.X i)),\n        ∃ ι : ((lim : pbcTowers U (pbcAdicCompletion U d) ⥤\n              pbcModules U (pbcAdicCompletion U d)).mapHomologicalComplex (.up ℤ)).obj I ⟶\n            integralOperationsRoos I.asFunctor,\n          (∀ (n : ℕ) (i : ℤ),\n            ι.f i ≫ (CochainComplex.mappingCocone.fst\n                (towerTransitionEndomorphism (K := fun n : ℕ ↦ I.asFunctor.obj (op n))\n                  (integralOperationsTowerStep I.asFunctor))).f i ≫\n              (Pi.π (fun m : ℕ ↦ I.asFunctor.obj (op m)) n).f i =\n            ((NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app I).f i) ∧\n          (∀ (i j : ℤ) (hij : i + -1 = j),\n            ι.f i ≫ (CochainComplex.mappingCocone.snd\n                (towerTransitionEndomorphism (K := fun n : ℕ ↦ I.asFunctor.obj (op n))\n                  (integralOperationsTowerStep I.asFunctor))).v i j hij = 0) ∧\n          ρ.hom.app X ≫ (completedTowerRlim d U).map (DerivedCategory.Q.map r) ≫\n              (Functor.rightDerivedFunctorObjQIso\n                (lim : pbcTowers U (pbcAdicCompletion U d) ⥤\n                  pbcModules U (pbcAdicCompletion U d)) I).hom ≫ DerivedCategory.Q.map ι =\n            DerivedCategory.Q.map (integralOperationsRoosFunctor.map\n              (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map r))",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

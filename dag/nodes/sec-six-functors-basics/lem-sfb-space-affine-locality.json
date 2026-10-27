@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-space-affine-locality",
+ "kind": "statement",
+ "title": "Etale target locality and permanence of affine space morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use algebraic spaces over $S$ with their fppf sheaves and small etale structure sheaves [def-trf-algebraic-space]. All indexing sets are small in the universes of [def-weil-size-convention]. A space is quasi-compact if it admits a surjective etale chart from a quasi-compact scheme; a morphism is quasi-compact if its pullback over every affine scheme test has quasi-compact source. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$, respectively the relative diagonal for a morphism, is quasi-compact. A morphism is affine if it is representable and its pullback over every affine scheme test has affine scheme source [pqf-def-affine-morphism]. Let $f:X\\to Y$ be a morphism of algebraic spaces. The morphism $f$ is affine if and only if there is a scheme $V$ and a representable surjective etale morphism $V\\to Y$ such that $X\\times_Y V\\to V$ is an affine morphism of schemes. Affine morphisms are stable under arbitrary algebraic-space base change and composition; they are quasi-compact and separated (their representable diagonal is a closed immersion [def-weil-closed-immersion]). If $Y$ is a scheme and $f$ is affine, then $X$ is a scheme, and if $Y$ is affine, $X$ is affine. If $Y$ is quasi-compact and quasi-separated and $f$ is affine, then $X$ is quasi-compact and quasi-separated.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03WG (lemma-affine-local), 03WH (lemma-composition-affine), 03WI (lemma-base-change-affine); quasi-compactness and separation from 03KG (lemma-quasi-compact-local) and 03KM (lemma-separated-local), tested by scheme affine morphisms; composition of quasi-compact maps and separated-over-quasi-separated give the last clause."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "pqf-def-affine-morphism",
+  "def-weil-closed-immersion",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "First establish the affine-test recognition needed throughout. Suppose a morphism $h:A\\to B$ of spaces has affine scheme source after every affine scheme test of $B$. For any scheme $T\\to B$, choose an affine open cover $(T_i)$ of $T$ and put $A_T=A\\times_BT$. The subfunctors $A_T\\times_TT_i$ are represented by affine schemes. Their inclusions are representable open immersions: on any scheme $Z\\to A_T$, their pullbacks are the open subschemes $Z\\times_TT_i$, which cover $Z$. The fppf sheaf $A_T$ is a Zariski sheaf, so [lem-pc-schemes-criterion] applies and represents $A_T$ by a scheme. Its map to $T$ is affine because the inverse image of each affine open of $T$ is affine. Thus $h$ is representable and affine. Conversely, an affine scheme morphism satisfies the affine-test condition: its base change is affine and an affine morphism over an affine scheme has affine source by [lem-weil-pbc-affine-morphism-permanence](1),(2). In particular an affine space map to a scheme has scheme source, and its source is affine when the target is affine.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space",
+    "lem-pc-schemes-criterion",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03WG (lemma-affine-local), affine-test recognition; Schemes Tag 01JJ (lemma-glue-functors)"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $V\\to Y$, supplied by the definition of an algebraic space. If $f$ is affine, its base change to $V$ is affine by the base-change clause of [lem-sfb-space-four-property-fppf-descent]; Step 1 makes it an affine morphism of schemes. Conversely, suppose such an atlas has affine scheme pullback. This scheme pullback satisfies the space affine-test predicate by Step 1. The singleton $\\{V\\to Y\\}$ is an fppf covering: it is jointly surjective and, on every etale scheme chart of $Y$, the pulled-back map is an etale scheme morphism, hence flat and locally of finite presentation by [def-weil-etale-morphism]. Apply the affine clause of [lem-sfb-space-four-property-fppf-descent]. It gives the affine-test predicate for $f$, and Step 1 supplies representability. This proves both implications without assuming $X$ or $Y$ schematic.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-four-property-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03WG (lemma-affine-local), (1) iff (4); spaces-descent.tex Tag 041Z (lemma-descending-property-affine)"
+   }
+  },
+  {
+   "text": "For any algebraic-space map $Y'\\to Y$ and affine scheme $T\\to Y'$, transitivity of sheaf fibre products identifies $(X\\times_YY')\\times_{Y'}T$ with $X\\times_YT$, an affine scheme. Step 1 therefore makes $X\\times_YY'\\to Y'$ representable and affine. This is arbitrary base change, not only scheme base change.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03WI (lemma-base-change-affine), transitivity of fibre products"
+   }
+  },
+  {
+   "text": "Let $X\\xrightarrow fY\\xrightarrow gZ$ both be affine and let $T\\to Z$ be an affine scheme test. Then $Y_T=Y\\times_ZT$ is an affine scheme, and $X\\times_ZT\\simeq X\\times_YY_T$ is an affine scheme by the affine-test condition for $f$. Step 1 supplies representability for $gf$, so $gf$ is affine. This proves composition directly from tests.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03WH (lemma-composition-affine), transitivity of fibre products"
+   }
+  },
+  {
+   "text": "Use the scheme atlas $V\\to Y$ from Step 2. The map $f_V:X_V\\to V$ is an affine scheme morphism, hence is quasi-compact and separated by [lem-weil-pbc-affine-morphism-permanence](3). These scheme properties give the space-level tests of [lem-trf-space-qc-separated-etale-local] for $f_V$: for an affine scheme $Z\\to V$, the scheme $X_V\\times_VZ$ is affine over the affine $Z$ by [lem-weil-pbc-affine-morphism-permanence](1),(2), hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs] and its own quasi-compact atlas; and for a scheme $T\\to X_V\\times_VX_V$, the test $T\\times_{X_V\\times_VX_V}X_V\\to T$ is the base change of the closed immersion $\\Delta_{f_V}$, hence a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Apply [lem-trf-space-qc-separated-etale-local] to this singleton jointly surjective etale family. It follows that $f$ is quasi-compact and its representable diagonal $\\Delta_f$ is a closed immersion. No quasi-compactness of $V$, or of $Y$, is required here.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-space-qc-separated-etale-local",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03KG (lemma-quasi-compact-local), 03KM (lemma-separated-local); morphisms.tex Tag 01S7 (lemma-affine-separated)"
+   }
+  },
+  {
+   "text": "We will use the equivalent quasi-compact-test formulation explicitly. If $h:A\\to B$ has quasi-compact pullback source over every affine scheme test, let $C\\to B$ have quasi-compact space source. The atlas/topological equivalence in [lem-a1-space-etale-open-image] and [lem-sfb-qc-space-affine-etale-atlas] give an affine scheme atlas $U\\to C$. Now $A\\times_BU$ is quasi-compact, so by the definition it has a quasi-compact scheme atlas $P\\to A\\times_BU$. The composite $P\\to A\\times_BC$ is surjective etale by base change and composition of atlases. Thus $A\\times_BC$ is quasi-compact by the same definition. Conversely the formulation for all quasi-compact spaces includes affine schemes by [lem-weil-pbc-affine-scheme-qcqs]. Consequently quasi-compactness is stable under base change and composition: for composable $h,k$ and quasi-compact $C\\to\\operatorname{target}(k)$, first $\\operatorname{source}(k)\\times C$ is quasi-compact and then its pullback under $h$ is quasi-compact. This is just successive application of the formulation proved above.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KG (lemma-quasi-compact-local), (3) implies (1); Tags 03HF (lemma-base-change-quasi-compact), 03HG (lemma-composition-quasi-compact)"
+   }
+  },
+  {
+   "text": "If $Y$ is quasi-compact, apply Step 6 to the quasi-compact $f$ of Step 5 with $C=Y$ and its identity map: $X$ is quasi-compact. For quasi-separatedness put $D=\\operatorname{Spec}\\mathbf Z$. View $X$, $Y$ and $f$ as algebraic spaces and a morphism over $D$ by [lem-sfb-space-change-base-to-integers](1),(2); by its clause (1) the fibre products over $Y$ are unchanged, and Steps 5 and 6, proved for an arbitrary base scheme, apply over $D$. The absolute diagonal factors as $X\\xrightarrow{\\Delta_f}X\\times_YX\\xrightarrow bX\\times_DX$, where $b$ is the pullback of $\\Delta_{Y/D}$ along $f\\times f$. Since $Y$ is quasi-separated, $\\Delta_{Y/D}$ is quasi-compact, hence so is $b$ by Step 6. Every affine scheme test of $\\Delta_f$ is a closed immersion of schemes, hence affine by [lem-weil-pbc-closed-immersion-integral-separated-uc](b). Its source is affine by [lem-weil-pbc-affine-morphism-permanence](2), and quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Thus $\\Delta_f$ is quasi-compact by the affine-test definition. Step 6 makes the composite $\\Delta_{X/D}$ quasi-compact, proving that $X$ is quasi-separated. The fibre products and this factorization are taken absolutely over $D$, not merely over the originally fixed scheme $S$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03HF, 03HG; lemma-separated-over-separated, diagonal factorization; morphisms.tex Tag 01SE (lemma-closed-immersion-affine)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "lem-pc-schemes-criterion",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-change-base-to-integers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 03WG, 03WH, 03WI, 03KG, 03KM; affine-test recognition via Schemes 01JJ; explicit absolute-diagonal factorization for the final clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affineness of a morphism of algebraic spaces can be checked after a surjective etale scheme cover of the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.of\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"Given a morphism property $ P $ for schemes, this constructs a property that assigns to each morphism $ X \\\\to Y $ with affine target $ Y $ the proposition $ P(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme →\\n  outParam AlgebraicGeometry.AffineTargetMorphismProperty → Prop\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.toProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme\", \"doc\": \"A function that converts a predicate on morphisms of schemes with affine targets into a general morphism property by asserting the existence of a proof that the target is affine, combined with the ori\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism to a quasi compact quasi separated algebraic space has quasi compact quasi separated source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiSeparated f ↔ QuasiSeparatedSpace ↥X\", \"doc\": \"For schemes $X$ and $Y$, if $Y$ is quasi-separated, then a morphism $f: X \\\\to Y$ is quasi-separated if and only if $X$ is a quasi-separated topological space.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.QuasiSeparated g],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-compact, and $ g $ is quasi-separated, then $ f $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(etale|descent)|quasiCompact.*affine",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"208\", \"text\": \"  apply quasiCompact_iff_forall_isAffineOpen.mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"129\", \"text\": \"    have inst : QuasiCompact (Y.affineCover.pullbackHom f i) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"702\", \"text\": \"lemma Hom.ker_apply (f : X.Hom Y) [QuasiCompact f] (U : Y.affineOpens) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"775\", \"text\": \"    (f : X.Hom Y) [QuasiCompact f] (𝒰 : X.OpenCover) (U : Y.affineOpens) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"873\", \"text\": \"      have inst : QuasiCompact (𝒰.f i ≫ f) := HasAffineProperty.iff_of_isAffine.mpr\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"27\", \"text\": \"- `AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv`: The category of sheaves on the\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"46\", \"text\": \"def AffineEtale (S : Scheme.{u}) : Type (u + 1) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"50\", \"text\": \"namespace AffineEtale\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"54\", \"text\": \"protected def mk {R : CommRingCat.{u}} (f : Spec R ⟶ S) [Etale f] : AffineEtale S :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"line\": \"59\", \"text\": \"protected def Spec (S : Scheme.{u}) : S.AffineEtale ⥤ S.Etale :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"186\", \"text\": \"lemma ideal_map (I : X.IdealSheafData) (f : X ⟶ Y) [QuasiCompact f] (U : Y.affineOpens)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"19\", \"text\": \"(`quasiCompact_iff_forall_isAffineOpen`).\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"97\", \"text\": \"theorem quasiCompact_iff_forall_isAffineOpen :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"98\", \"text\": \"    QuasiCompact f ↔ ∀ U : Y.Opens, IsAffineOpen U → IsCompact (f ⁻¹ᵁ U : Set X) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"120\", \"text\": \"    simp only [quasiCompact_iff_forall_isAffineOpen, isCompact_iff_compactSpace,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"line\": \"222\", \"text\": \"    have _ : QuasiCompact (Y.affineCover.pullbackHom f i) := MorphismProperty.pullback_snd _ _ ‹_›\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"line\": \"59\", \"text\": \"  quasiCompact_iff_forall_isAffineOpen.mpr fun _ hU ↦ (hU.preimage f).isCompact\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"82\", \"text\": \"theorem quasiCompact_affineProperty_iff_quasiSeparatedSpace [IsAffine Y] (f : X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"110\", \"text\": \"    (by ext; exact quasiCompact_affineProperty_iff_quasiSeparatedSpace _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"186\", \"text\": \"  rw [← quasiCompact_affineProperty_iff_quasiSeparatedSpace X.toSpecΓ]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"257\", \"text\": \"  have : QuasiCompact (f ≫ Y.toSpecΓ) := HasAffineProperty.iff_of_isAffine.mpr ‹_›\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"line\": \"25\", \"text\": \"see the file `Mathlib.AlgebraicGeometry.Sites.AffineEtale`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"line\": \"51\", \"text\": \"/-- Any quasicompact locally closed subscheme of a quasi-affine scheme is quasi-affine. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Sites.AffineEtale\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"line\": \"68\", \"text\": \"      (Functor.Elements.precomp (AffineEtale.Spec S)\"}\n\nSearch directory: Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine morphisms of algebraic spaces are etale local on the target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.isLocal_affineProperty\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : outParam AlgebraicGeometry.AffineTargetMorphismProperty} [self : AlgebraicGeometry.HasAffineProperty P Q],\\n  Q.IsLocal\", \"doc\": \"For any morphism property $ P $ of schemes and an affine target morphism property $ Q $, if $ P $ has the affine property $ Q $, then $ Q $ is local on the target scheme.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  {Q : outParam AlgebraicGeometry.AffineTargetMorphismProperty},\\n  Q.IsLocal → P = AlgebraicGeometry.targetAffineLocally Q → AlgebraicGeometry.HasAffineProperty P Q\", \"doc\": \"Given a morphism property $ P $ of schemes and an affine target morphism property $ Q $, if $ Q $ is local on the target and $ P $ coincides with the property of holding locally on affine opens of the\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(𝒰 : Y.OpenCover) [∀ i, IsAffine (𝒰.X i)] : P f ↔ ∀ i, Q (𝒰.pullbackHom f i)\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ such that each $ \\\\mathcal{U}_i $ is affine. Then $ f $ has the affine property if and only if for every in\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.of_isLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.AffineTargetMorphismProperty.of P)\", \"doc\": \"If a morphism property $ P $ on schemes is Zariski-local at the target, then the property obtained by restricting $ P $ to morphisms with affine targets satisfies the affine property.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)) →\\n    AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ under $ f $ is affine, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : MorphismProperty Scheme\", \"doc\": \"A morphism property $ P $ of schemes holds locally on affine opens of the target if, for every morphism $ f : X \\\\to Y $ and every affine open subset $ U \\\\subseteq Y $, the restriction $ f|_U : f^{-1}(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the geometric hits have scheme sources and targets; none states this assertion for algebraic spaces. Abstract descent and colimit lemmas do not identify the algebraic-space objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affineness of a morphism of algebraic spaces is local for a surjective etale target scheme cover",
+   "results": "8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal, AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal, AlgebraicGeometry.HasAffineProperty.isLocal_affineProperty, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.AffineCover, AlgebraicGeometry.HasAffineProperty.of_isLocalAtTarget, AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.Scheme.AffineCover.map_prop. Search log digest 7218ca4409edef40.",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Scheme morphisms, not morphisms of algebraic spaces; the full item is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineHom\", \"comp\"",
+   "results": "6 hits; AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.instIsAffineHomCompScheme, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated, AlgebraicGeometry.IsAffineHom.of_comp, AlgebraicGeometry.IsAffineHom.comp_iff, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj. Search log digest 171f6e5ff587edd0.",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Scheme morphisms, not morphisms of algebraic spaces; the full item is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsAffineHom",
+   "results": "5 hits; 23, 27, 30, 47, 51. Search log digest 7be20406781c39be.",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Scheme morphisms, not morphisms of algebraic spaces; the full item is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine morphisms of algebraic spaces are representable and stable under base change and composition",
+   "results": "8 hits; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.IsAffineHom.mk, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine. Search log digest 413435cac2b6be09.",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Scheme morphisms, not morphisms of algebraic spaces; the full item is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism to a quasi compact quasi separated algebraic space has quasi compact quasi separated source",
+   "results": "8 hits; AlgebraicGeometry.quasiCompact_over_affine_iff, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom. Search log digest b266bc593490d89d.",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Scheme morphisms, not morphisms of algebraic spaces; the full item is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|IsAffineHom|isAffineHom",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean. Search log digest b2a694f6582566e3.",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Scheme morphisms, not morphisms of algebraic spaces; the full item is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-limits-schematic-stages",
+  "date": "2026-10-23",
+  "group": "Q108"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 07SF/07SQ/07SR: affine projections, eventual affine bases, and eventual schematic fibres; applies before any scheme-only limit lemma. Supporting lemma for the 07SF/07SQ/07SR proof: Etale target locality and permanence of affine space morphisms.",
+   "via": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-locality",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Reused existing fppf affine descent, the Zariski scheme representability criterion, scheme affine permanence, and etale-local qc/separation. Wrote out affine-test recognition, arbitrary base change and composition, the equivalence of affine tests with all quasi-compact-space tests, and the absolute diagonal factorization proving qcqs permanence. Read each cited statement and tested empty schemes and nonschematic qcqs targets.",
+  "blueprint": "Supporting affine-space-morphism calculus for the 07SF/07SQ/07SR affine-limit argument recorded in blueprint.from.place, under direct-images proof (3). The current latest sk-thm-sf-ctf-stability-direct-images.proof.md retains direct-image preservation and compactification but no longer spells out the older alteration chain; this split is a general geometry prerequisite and changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Sheaf fibre products and pullback of surjective etale atlases; general geometry used to implement the affine tests."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Target-etale locality of quasi-compactness and closed-diagonal separation; the sfb affine statement needs exactly this generic locality tool."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only the equivalence of topological quasi-compactness with existence of a quasi-compact scheme atlas, needed to apply the same-unit affine-atlas node."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Composition of representable surjective etale atlas maps, needed in the quasi-compact-test equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-542fd22f0",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-542fd22f0 (reviewer sub-agent of L); spot-checked: The proof is correct. I fixed two missing citations (C1/C3) in the item; there are no new nodes. Checks: the item is still unsplit in live and side-live, with no repair note. The statement matches Stacks 03WG (1)<=>(4) (spaces-morphisms.tex l.3692), 03WH and 03WI, and Stacks' absolute quasi-separated definition (spaces-properties.tex l.76). Steps 1-4 and 6 are correct: Step 1 checks every hypothesis of 01JJ (lem-pc-schemes-criterion, Lean-closed); Step 2's single étale chart is an fppf covering in the sense of lem-sfb-space-four-property-fppf-descent; Steps 3-4 are fibre-product transitivity; Step 6 goes |C| qc -> affine atlas -> atlas of the pullback, then composes. Fault 1, Step 5: turning 'affine => qc and separated' for X_V->V into the space-level tests of lem-trf-space-qc-separated-etale-local needs base change of closed immersions, which was not cited. Fixed by citing lem-weil-pbc-closed-immersion-base-change, plus permanence (1),(2) and lem-weil-pbc-affine-scheme-qcqs for the qc tests. Fault 2, Step 7: the step views X and Y as spaces over Spec Z without citing anything for the change of base scheme. Fixed by citing the same-unit reviewed node lem-sfb-space-change-base-to-integers (03I4), clauses (1),(2). The diagonal factorisation X->X×_Y X->X×_Z X is correct. Batch 5: the three trf nodes (space fibre products, étale-local qc/separated, representable étale tests) are generic algebraic-space foundations, and a1-space-etale-open-image and sfb-qc-space-affine-etale-atlas reach the trace-formula chapter only through def-trf-algebraic-space; none is a step of the trace formula or Poincaré duality, so all are accepted. I accept the four declared tool_uses. No duplicate of the item exists among the 13 nodes citing 03WG/03WH/03WI, there is no cycle, and no SGA is cited. Edge cases checked: empty spaces, non-qc atlas, non-separated non-schematic Y, non-quasi-separated S.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineLocality",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_locality_and_permanence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineLocality.lean",
+  "statement": "theorem affine_locality_and_permanence {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) : (MapIsAffine f ↔ ∃ (V : Over S) (a : yoneda.obj V ⟶ Y.obj.obj), IsEtale a ∧ IsSurjective a ∧ ∃ (U : Over S) (p : U ⟶ V) (q : yoneda.obj U ⟶ X.obj.obj), IsPullback q (yoneda.map p) f.hom.hom a ∧ IsAffineHom p.left) ∧ (MapIsAffine f → IsRepresentable f.hom.hom ∧ (∀ (X' Y' : AlgebraicSpace S) (g : Y' ⟶ Y) (p : X' ⟶ X) (f' : X' ⟶ Y'), IsPullback p.hom f'.hom f.hom g.hom → MapIsAffine f') ∧ (∀ (Z : AlgebraicSpace S) (g : Y ⟶ Z), MapIsAffine g → MapIsAffine (f ≫ g)) ∧ IsQuasiCompactPresheafMap f.hom.hom ∧ IsSeparatedPresheafMap f.hom.hom ∧ (∀ (V : Over S), Nonempty (Y.obj.obj ≅ yoneda.obj V) → ∃ (U : Over S), Nonempty (X.obj.obj ≅ yoneda.obj U) ∧ (IsAffine V.left → IsAffine U.left)) ∧ ((∃ (V : Over S) (a : yoneda.obj V ⟶ Y.obj.obj), CompactSpace V.left ∧ IsEtale a ∧ IsSurjective a) → IsAbsolutelyQuasiSeparated Y → (∃ (U : Over S) (a : yoneda.obj U ⟶ X.obj.obj), CompactSpace U.left ∧ IsEtale a ∧ IsSurjective a) ∧ IsAbsolutelyQuasiSeparated X))",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are rendered together. The affine-test predicate is promoted to representability explicitly. Base change ranges over arbitrary cartesian squares of algebraic spaces, and the final quasi-separatedness predicate is absolute, over Spec Z. Existing definition nodes for the four reused predicates are added to stmt_deps; no mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ea02c24f",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Every clause of lem-sfb-space-affine-locality checked against Stacks 03WG/03WH/03WI/03KG/03KM and the dependency definitions: atlas iff (IsEtale/IsSurjective include representability; IsAffineHom on p.left; V not required affine or qc), IsRepresentable conclusion supplies representability missing from MapIsAffine, arbitrary sheaf-square base change with correct orientation, composition f ≫ g, IsQuasiCompactPresheafMap and IsSeparatedPresheafMap (closed-immersion diagonal), scheme/affine target via Nonempty iso, qcqs via the node's inline atlas definition plus absolute IsAbsolutelyQuasiSeparated. The four added stmt_deps are base definition nodes owning predicates the statement uses (the two in SpaceQCSeparatedEtaleLocal owned with existing:true, records identical to live); no cycle. lean.statement verbatim; node otherwise unchanged; docstrings carry source, blueprint and all 7 steps; proof is sorry; single universe u; edge cases empty/non-qc/non-separated/non-scheme base change covered. No new definitions, no H4 duplicate found. No compile (no changes)."
+ }
+}

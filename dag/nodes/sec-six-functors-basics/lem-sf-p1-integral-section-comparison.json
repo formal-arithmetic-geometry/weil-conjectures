@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-p1-integral-section-comparison",
+ "kind": "statement",
+ "title": "Proper exchange transports the diagonal section unit",
+ "statement": "Let A be a finite commutative ring, f:X -> S proper, and i:X ≅ P=ProjectiveLine(S) over S. For either projection a of the self-product, use q, diagonalUnit, diagonalLift, projectionComparison and constantComparison from [def-sf-p1-integral-transport-data], and ordinary alpha_a from [lem-amb-p1-diagonal-integrals]. Then diagonalUnit_a followed by Rp_a! of diagonalLift and projectionComparison at RDelta_P* A_P equals constantComparison inverse followed by Li* alpha_a. This is an equation before inserting any supported class; it has no N, twist, splitting, trace, or Ext representative hypothesis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image."
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-amb-p1-diagonal-integrals"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinarySection_exchange, which pastes inverse constant-object proper exchange for the diagonal and projection by naturality. This proves the ordinary constant-object section transport independently of compact supports and of the tensor-unit comparison.",
+   "uses": [
+    "lem-sf-p1-ordinary-section-exchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply diagonalSection_forgetSupports to coefficient object Li* A_P and the intact inverse constantComparison. Rewrite diagonalLift and projectionComparison by the proved defining equalities using ordinaryProperForgetComparison. Expand the whiskered comparison and the functor map of the composite diagonal lift. Naturality of proper forget-supports moves inverse diagonal exchange to the right of that comparison. Substitute the proper-support normalization. From constantComparison = ordinaryFiniteUnitPullback followed by constantUnit, cancel constantUnit hom against its inverse within the coefficient map. Apply the ordinary section transport equation to the resulting ordinary composite. Finally combine the two remaining inverse coefficient factors, obtaining constantComparison inverse followed by pullback of projectiveLineDiagonalAlpha.",
+   "uses": [
+    "lem-sf-diagonal-section-forget-supports",
+    "def-sf-p1-integral-transport-data",
+    "def-sf-ordinary-proper-forget-comparison",
+    "lem-sf-p1-diagonal-lift-proper-forget",
+    "lem-sf-p1-projection-proper-forget"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-p1-ordinary-section-exchange",
+  "lem-sf-diagonal-section-forget-supports",
+  "def-sf-p1-integral-transport-data",
+  "def-sf-ordinary-proper-forget-comparison",
+  "lem-sf-p1-diagonal-lift-proper-forget",
+  "lem-sf-p1-projection-proper-forget"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image.",
+  "note": "U3: separate ordinary constant-object exchange from proper-support normalization, then paste by naturality. No target or statement change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct a trace diagonal datum by pulling back a supported class across an isomorphism of projective lines",
+   "results": "Mathlib pullback.diagonal_comp and pullbackDiagonalMapIso provide the underlying geometry; no derived trace-diagonal datum or comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match for the derived comparison; geometric pullback maps used directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical proper exchange comparison of diagonal section unit with ordinary derived composition unit",
+   "results": "CategoryTheory.Adjunction.derived_unit, derived_eta/epsilon factorization lemmas, and LocalizerMorphism.rightDerivedFunctorComparison_fac_app; no specialization to these proper-support and constant-object maps.",
+   "date": "2026-10-26",
+   "verdict": "Generic adjunction ingredients only; no statement of the required comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*diagonal.*trace|diagonal.*derived.*unit",
+   "results": "msearch Mathlib grep returned zero hits. Local rg inspected TraceDiagonal/Basic, UpperLowerStar, LowerShriekToLowerStar, LowerShriekTransport, ProjectiveLineDiagonalData, and OrdinaryFiniteP1Arrows. The endpoints and canonical component maps exist but not their section/trace comparison equations.",
+   "date": "2026-10-26",
+   "verdict": "No existing combined statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1IntegralTransport",
+  "group": "X6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The equation M = Rp2_* Delta_* M, the diagonal is a section for either projection, and substitution of canonical pullback counits before applying direct image.",
+   "via": [
+    "lem-sf-p1-integral-transport",
+    "lem-sf-p1-coordinate-integrals",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1IntegralSectionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1IntegralSectionComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.sectionComparison",
+  "statement": "theorem sectionComparison\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]\n    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (a : Bool) :\n    diagonalUnit A f a ≫\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (projection f a)).map\n          (diagonalLift A f i hi) ≫\n        (projectionComparison A f i hi a).hom.app\n          ((ordinaryFinitePushforward A (pullback.diagonal (ProjectiveLine S ↘ S))).obj\n            (ordinaryFiniteUnit A (ProjectiveLine S))) =\n      (constantComparison A i).inv ≫\n        (ordinaryFinitePullback A i.hom).map (projectiveLineDiagonalAlpha A S a)",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261026T071454-L-3936973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8afc0",
+  "group": "U3",
+  "result": "fix",
+  "landing": "20261027T135443-L-3709832",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 8 new nodes/modules vs packet; adapted SfP1IntegralTransportData vs clone (diff = endpoint repairs only); delivered Lean identical to d31b0807c07b, whose FIX was dropped; transitive user SfP1ExchangeIsoTransport + all 16 direct importers compiled against corrected set (27 files OK)"
+ }
+}

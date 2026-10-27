@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-hartogs-punctured-affine-extension",
+ "kind": "statement",
+ "title": "Hartogs extension across the origin in several variables",
+ "statement": "Work over $\\mathbf C$ [def-weil-field]. Let $m\\geq2$ be an integer, and let $f:\\mathbf C^m\\setminus\\{0\\}\\to\\mathbf C$ be holomorphic, meaning represented near every point of its domain by a convergent complex power series in the $m$ coordinates. There is a unique entire holomorphic function $F:\\mathbf C^m\\to\\mathbf C$ whose restriction to $\\mathbf C^m\\setminus\\{0\\}$ is $f$. No boundedness or prescribed limit at the origin is assumed.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally: Demailly, Complex Analytic and Differential Geometry, I §3.D, Hartogs extension theorem (3.28), printed p.28, specialized to Omega=C^m and K={0}; uniqueness by continuity and density. Read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Write $(z,w)\\in\\mathbf C\\times\\mathbf C^{m-1}$ and put $P=\\{w:|w_j|<1\\text{ for all }j\\}$ and $D=\\{z:|z|<1\\}$. The restriction $g(\\zeta,w)=f(\\zeta,w)$ is holomorphic on $\\{1/2<|\\zeta|<3/2\\}\\times P$, since $\\zeta\\ne0$. Apply [lem-sfb-holomorphic-circle-integral-parameters] with $c=0,R=1,\\epsilon=1/2$ to obtain the holomorphic function $H(z,w)=(2\\pi i)^{-1}\\int_{|\\zeta|=1}f(\\zeta,w)/(\\zeta-z)\\,d\\zeta$ on $D\\times P$.",
+   "uses": [
+    "lem-sfb-holomorphic-circle-integral-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A, formula (3.3), printed p.21; I §3.B, formulas (3.8)--(3.9), printed p.22; isolated-puncture specialization of I §3.D, Theorem (3.28), printed p.28. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "Fix $w\\in P\\setminus\\{0\\}$. The map $z\\mapsto(z,w)$ has analytic coordinates (identity and constants), hence is analytic by [lem-sfb-complex-analytic-function-operations]. Its image avoids the origin, so composition gives an analytic slice $h_w(z)=f(z,w)$ on all of $\\mathbf C$. The same node gives continuity, and [lem-sfb-analytic-germ-differentiable] gives complex differentiability at each point. Thus all closed-disc continuity and open-disc differentiability hypotheses of [lem-sfb-cauchy-circle-formula] hold, and its formula gives $H(z,w)=f(z,w)$ for $z\\in D$.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-analytic-germ-differentiable",
+    "lem-sfb-cauchy-circle-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A, formula (3.3), printed p.21; I §3.B, formulas (3.8)--(3.9), printed p.22; isolated-puncture specialization of I §3.D, Theorem (3.28), printed p.28. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "If $z\\in D\\setminus\\{0\\}$, take $w_k=(1/(k+2),0,\\ldots,0)\\in P\\setminus\\{0\\}$. This is possible since $m-1\\geq1$, and $w_k\\to0$. Both $H$ and $f$ are continuous at $(z,0)$ by [lem-sfb-complex-analytic-function-operations]. Step 2 gives $H(z,w_k)=f(z,w_k)$; taking limits proves $H(z,0)=f(z,0)$. Together with Step 2, $H=f$ on $(D\\times P)\\setminus\\{0\\}$.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A, formula (3.3), printed p.21; I §3.B, formulas (3.8)--(3.9), printed p.22; isolated-puncture specialization of I §3.D, Theorem (3.28), printed p.28. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "Define $F(0)=H(0,0)$ and $F(x)=f(x)$ for $x\\ne0$. Step 3 makes $F=H$ on $D\\times P$, an open neighborhood of the origin. At a nonzero point, a ball of radius less than its distance to the origin avoids $0$, and $F=f$ there. Thus every point has a neighborhood on which $F$ is represented by the convergent power series of $H$ or of $f$. This proves that $F$ is entire and extends $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A, formula (3.3), printed p.21; I §3.B, formulas (3.8)--(3.9), printed p.22; isolated-puncture specialization of I §3.D, Theorem (3.28), printed p.28. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  },
+  {
+   "text": "For two entire extensions $F_1,F_2$, their values agree at every nonzero point by the restriction condition. By [lem-sfb-complex-analytic-function-operations] they are continuous at $0$. Along $x_k=(1/(k+2),0,\\ldots,0)\\to0$ their equal values therefore have limits $F_1(0)$ and $F_2(0)$; uniqueness of limits in $\\mathbf C$ gives $F_1(0)=F_2(0)$. Hence $F_1=F_2$. No estimate on $f$ near $0$ was used.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A, formula (3.3), printed p.21; I §3.B, formulas (3.8)--(3.9), printed p.22; isolated-puncture specialization of I §3.D, Theorem (3.28), printed p.28. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-holomorphic-circle-integral-parameters",
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-analytic-germ-differentiable",
+  "lem-sfb-cauchy-circle-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Explicit isolated-puncture Cauchy-integral proof using I §3.A (3.3) and I §3.B (3.8)--(3.9), pp.21--22, for the specialization of (3.28), p.28. Demailly read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf; absent locally, so marked agent-written. This is not the Bochner--Martinelli proof of the general compact-hole theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs extension theorem every holomorphic function on punctured complex affine space of dimension at least two extends holomorphically across the origin",
+   "results": "[leanfinder] OK 8 hit(s) Complex.instTietzeExtension, Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt, Complex.differentiableOn_compl_singleton_and_continuousAt_iff, Complex.differentiableOn_update_limUnder_of_bddAbove, Complex.differentiableOn_update_limUnder_of_isLittleO, Complex.HadamardThreeLines.diffContOnCl_interpStrip, Complex.HadamardThreeLines.diffContOnCl_invInterpStrip, Complex.differentiableOn_update_limUnder_insert_of_isLittleO",
+   "date": "2026-10-24",
+   "verdict": "no match: one-variable removable-singularity results require continuity or boundedness; no several-variable Hartogs extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isolated singularity of a holomorphic function in several complex variables is removable",
+   "results": "[leanfinder] OK 8 hit(s) Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt, MeromorphicNFAt, MeromorphicAt, Complex.differentiableOn_compl_singleton_and_continuousAt_iff, Complex.differentiableOn_update_limUnder_of_isLittleO, MeromorphicNFOn, Meromorphic, MeromorphicAt.eventually_analyticAt",
+   "date": "2026-10-24",
+   "verdict": "no match: one-variable removable-singularity results require continuity or boundedness; no several-variable Hartogs extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hartogs\"",
+   "results": "[loogle] OK 0 hit(s) ",
+   "date": "2026-10-24",
+   "verdict": "no match: one-variable removable-singularity results require continuity or boundedness; no several-variable Hartogs extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hartogs theorem holomorphic functions extend across an isolated point in complex dimension at least two",
+   "results": "[leansearch] OK 8 hit(s) Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt, Complex.differentiableOn_update_limUnder_of_isLittleO, AnalyticAt.exists_mem_nhds_analyticOnNhd, AnalyticAt, Complex.differentiableOn_update_limUnder_of_bddAbove, harmonic_is_realOfHolomorphic, DifferentiableOn.analyticOn, Complex.analyticOn_univ_iff_differentiable",
+   "date": "2026-10-24",
+   "verdict": "no match: one-variable removable-singularity results require continuity or boundedness; no several-variable Hartogs extension"
+  },
+  {
+   "tool": "grep",
+   "query": "Hartogs|isolated.*singular|punctured.*(holomorphic|analytic)",
+   "results": "[grep] OK 2 hit(s) Mathlib/MeasureTheory/Measure/Decomposition/Lebesgue.lean, Mathlib/MeasureTheory/Measure/Decomposition/Lebesgue.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: one-variable removable-singularity results require continuity or boundedness; no several-variable Hartogs extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs extension holomorphic functions on punctured complex vector space dimension at least two extend to the whole space",
+   "results": "[leanfinder] OK 8 hit(s): Complex.instTietzeExtension, Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt, Differentiable.apply_eq_of_tendsto_cocompact, Complex.differentiableOn_compl_singleton_and_continuousAt_iff, Complex.differentiableOn_update_limUnder_of_bddAbove, Complex.IsExactOn, DifferentiableOn.isExactOn_ball, Complex.differentiableOn_update_limUnder_of_isLittleO",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are one-variable removable-singularity theorems with continuity or growth hypotheses, not several-variable Hartogs extension with no condition at the origin"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isolated singularity is removable for a complex analytic function on a finite dimensional complex vector space of dimension greater than one",
+   "results": "[leanfinder] OK 8 hit(s): Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt, MeromorphicNFAt, MeromorphicAt, AnalyticAt.of_meromorphicOrderAt_pos, AnalyticAt.meromorphicNFAt, MeromorphicAt.analyticAt, Complex.differentiableOn_compl_singleton_and_continuousAt_iff, AnalyticOnNhd.meromorphicNFOn",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are one-variable removable-singularity theorems with continuity or growth hypotheses, not several-variable Hartogs extension with no condition at the origin"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hartogs\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are one-variable removable-singularity theorems with continuity or growth hypotheses, not several-variable Hartogs extension with no condition at the origin"
+  },
+  {
+   "tool": "grep",
+   "query": "Hartogs|punctured.*(holomorphic|analytic)|isolated.*singular",
+   "results": "[grep] OK 0 hit(s): ; Mathlib/Analysis",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are one-variable removable-singularity theorems with continuity or growth hypotheses, not several-variable Hartogs extension with no condition at the origin"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Holomorphic functions of several complex variables have removable isolated singularities",
+   "results": "[leansearch] OK 8 hit(s): Complex.analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt, Complex.differentiableOn_update_limUnder_of_isLittleO, Meromorphic, Complex.differentiableOn_update_limUnder_of_bddAbove, MeromorphicAt, DifferentiableOn.analyticOn, MeromorphicOn.eventually_analyticAt, MeromorphicOn.eventually_codiscreteWithin_analyticAt",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are one-variable removable-singularity theorems with continuity or growth hypotheses, not several-variable Hartogs extension with no condition at the origin"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-projective-structure-cohomology",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Supporting input: Hartogs extension across the origin in several variables.",
+   "via": [
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-hartogs-punctured-affine-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Constructed a local extension by a circle integral with m-1 parameters, proved equality on nonzero parameter slices by the one-variable Cauchy formula, then used explicit sequences for equality on the remaining punctured axis and uniqueness. Reused the analytic-function operations leaf. Three new nodes: one parameter-integral input and two Mathlib leaves. Checked Demailly online, every cited statement, the m=2 edge case, and no-boundedness condition.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Supporting input: Hartogs extension across the origin in several variables. The explicit Cauchy construction realizes the Hartogs input in the analytic projective-space structure-sheaf vanishing prerequisite. No unit or chapter route is changed; blueprint_refs ancestor reports None for the inherited seed chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-bbbd2db3d",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-bbbd2db3d (reviewer sub-agent of L); spot-checked: First split; no re-split note exists, and the item statement is unchanged. All five steps are correct. Step 1: lem-sfb-holomorphic-circle-integral-parameters applies with c=0, R=1, eps=1/2 because the annulus times P avoids 0, giving H jointly holomorphic on D×P. Step 2: for w≠0, z↦(z,w) is analytic by the operations node's tuple, linear and constant clauses; composition with f, then continuity and the analytic-germ-differentiable leaf, give the hypotheses of lem-sfb-cauchy-circle-formula, so H=f on D×{w}. Step 3: w_k=(1/(k+2),0,…) uses m−1≥1, and continuity of H and f at (z,0)≠0 gives H=f on (D×P)∖{0}. Step 4: local gluing makes F entire. Step 5: uniqueness by continuity at 0. Mathlib checked: DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul at CauchyIntegral.lean:552–559 (closure ball = closedBall for R>0, circleMap positively oriented) and AnalyticAt.differentiableAt at FDeriv/Analytic.lean:126; both are exact specializations. The parameter-integral node is true, statement-only and self-contained. Tested on d=0, g=1/ζ (H=0, so it asserts no extension and does not restate the item) and polynomial g. Mathlib has no Osgood or parametric-analytic-integral result. DAG search found only algebraic depth-two Hartogs nodes and unrelated analytic nodes; the germ leaf only partly overlaps inverse-toolkit (1), and the operations node has no differentiability clause, so I accept it. Edge cases: m=2 works; m=1 fails exactly at step 3 (1/z). Demailly is absent locally, so proof_origin=agent is correct. Blueprint from.node is null, inherited; route unchanged; no SGA; no tool_uses; no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.HartogsPuncturedAffineExtension",
+  "declaration": "Complex.existsUnique_entire_extension_of_punctured_affine",
+  "file": "lean/Sheaf/Analysis/Complex/HartogsPuncturedAffineExtension.lean",
+  "statement": "theorem existsUnique_entire_extension_of_punctured_affine (m : ℕ) (hm : 2 ≤ m) (f : (Fin m → ℂ) → ℂ) (hf : AnalyticOnNhd ℂ f ({0}ᶜ : Set (Fin m → ℂ))) : ∃! F : (Fin m → ℂ) → ℂ, AnalyticOnNhd ℂ F Set.univ ∧ Set.EqOn F f ({0}ᶜ : Set (Fin m → ℂ))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c96e3eef",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Complex.existsUnique_entire_extension_of_punctured_affine matches node clause by clause: m:ℕ with 2≤m; total f with AnalyticOnNhd on {0}ᶜ (f 0 ignored, open domain); ∃! F analytic on univ with EqOn F f {0}ᶜ (F 0 forced by continuity, so uniqueness is the node's); no boundedness. Edge cases m=2 true, m=1/0 excluded (1/z). Only the lean field changed vs live; lean.statement verbatim; docstrings carry Demailly I §3.D (3.28) p.28, the blueprint tag and 5 proof steps. stmt_deps [def-weil-field] (Mathlib Field). Plain imports are the Mathlib modules of the 3 stated proof deps; circle-integral-parameters is unsplit and correctly not imported. No defs, sorry-only, no pro-étale. No Mathlib/project duplicate; no supersession in side-live. Not recompiled per instructions; no fixes."
+ }
+}

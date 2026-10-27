@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-native-adic-encoding-bounded-constructible",
+ "kind": "statement",
+ "title": "The fixed native encoding preserves bounded constructible generators",
+ "statement": "Let ell be prime and let T be a Noetherian scheme. Use the native locally finite adic coefficient ring and the specified encoding into module objects over the pulled-back finite-subextension condensed algebraic closure of Q_ell [def-sf-native-weil-derived-framework, lem-sf-native-adic-encoding-ordinary-operations]. The ordinary derived encoding carries every bounded complex with native constructible cohomology to a bounded complex with constructible module-object cohomology [sk-def-sfb-constructible]. Here constructible module objects mean a finite stratification with pro-etale locally finitely presented restrictions, as in the adopted source library. This is a one-way inclusion of generator classes, for the specified encoding, with no proper morphism, coproduct conclusion, or absolute separatedness assumption.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Proper direct image bullet; native generator comparison in step 4 of lem-sf-locally-finite-adic-compact-support-sums."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Under the specified encoding [lem-sf-native-adic-encoding-ordinary-operations], the regular native module becomes the regular condensed module: the underlying map is the identity followed by scalar restriction along coefficientIso. Use Mod.regularIsoComapRegular. The encoding is additive and an equivalence, hence preserves finite biproducts. Applying it to the finite sum of regular modules identifies every finite free module with the finite free module of the same rank, including rank zero.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each native lisse module, shrink the covering presieve to a small pro-etale cover. The specified pullComparison and the finite-free isomorphism of step 1 identify each pulled-back encoded module with a finite free module, whose zero presentation proves finite presentation. Condensed pullback is raw mapMod pullback followed by extension along the coefficient isomorphism alpha. Mod.extendScalarsIsoComapInv and Mod.comapComp identify its restriction back along alpha with raw pullback. Finite presentation is invariant under this scalar restriction and under isomorphism. Thus encoded lisse modules are pro-etale locally finitely presented.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A Noetherian scheme is qcqs. Apply the existing source theorem IsAdicConstructibleSheaf.isAdicStratifiedLisseSheaf in Adic.ExtensionByZero. It globalizes local native stratifications by finite open covering and constructible locally closed differences. Reindex its finite strata by Fin n and use the same schemes, immersions, constructibility, coverage, and disjointness to form Scheme.Stratification. On each stratum apply step 2, pullComparison, and scalar restriction along the coefficient isomorphism. This gives exactly the raw-pullback local finite presentations required by IsConstructibleModuleObject.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified encoding is exact. Functor.bounded_mapDerivedCategory_obj preserves boundedness, and mapDerivedCategoryHomologyFunctorIso identifies each cohomology object with the encoding of the original native cohomology. Apply step 3 and transport constructibility along this isomorphism. The two clauses together prove boundedConstructible of the derived image.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Lean proof: encode regular and finite free modules; transport lisse covers, global stratifications, finite presentation, and cohomology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence on categories of sheaves of modules preserving finite free modules and restrictions sends bounded constructible complexes to bounded constructible complexes",
+   "results": "Eight hits: SheafOfModules.mapFree, its coprojection equations, freeHomEquiv, PullbackConstruction.adjunction, and sheafCongrPrecoherent equivalence results. These concern ordinary sectionwise modules or site equivalences, not the fixed internal native encoding or constructible generators.",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison. The proof uses the existing internal-module finite-biproduct and cohomology APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence between categories of sheaves of modules taking finite free modules and restriction functors to their counterparts carries bounded constructible complexes to bounded constructible complexes",
+   "results": "Eight general condensed-module hits, including CompHausLike.LocallyConstantModule.functor, Condensed.free, CondensedMod.ofSheafCompHaus, the AB4/AB4Star instances and instAbelianCondensedMod. No native adic constructible-generator comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match; use the existing native encoding and prove the generator comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryHomologyFunctorIso",
+   "results": "Unknown identifier in the Mathlib service; the declaration is in the adopted source library and was read there.",
+   "date": "2026-10-27",
+   "verdict": "The source exact-functor cohomology API supplies the final derived step."
+  },
+  {
+   "tool": "grep",
+   "query": "encoding_boundedConstructible|encoding.*constructible|constructible_encoding",
+   "results": "No service hits. Local rg inspected NativeAdicEncodingCore, NativeModuleConstructibilityComparison, NativeForgetConstructibleCriterion, Adic.ExtensionByZero, ProEtaleModule.IsoClosed, and FinitelyPresentedComap. Core supplies the fixed encoding, its equivalence and the pullback square. The public sectionwise comparison has separated finite-type hypotheses; the fixed-encoding Weil criterion is still sorry and restricted to geometric fibers. No unconditional fixed-encoding generator comparison exists.",
+   "date": "2026-10-27",
+   "verdict": "Prove the needed one-way Noetherian comparison directly using native finite stratification and finite-free models."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeAdicCompactSupportSums",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Supplied anchor lem-a1-local-boundary-duality, steps 1–2: exceptional adjunction; current cor-coef-verdier-weil-equivariance, final paragraph: First two bullet points and final paragraph: open extension and proper direct image on the localizing hulls. Agent-formulated version for the native locally-finite coefficient sheaf and finite-type schemes without absolute separatedness; this precise coefficient/domain variant is the unsplit obligation, not an invocation of the stronger whole-ambient assertion. Proper-factor coproduct assertion; no open extension or target-hull assertion. Generator-encoding comparison only.",
+   "via": [
+    "lem-sf-native-adic-proper-coproducts",
+    "lem-sf-locally-finite-adic-compact-support-sums",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeAdicEncodingConstructible",
+  "file": "lean/Sheaf/Paper/NativeAdicEncodingConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.NativeEncoding.encoding_boundedConstructible",
+  "statement": "theorem encoding_boundedConstructible (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) [IsNoetherian T] :\n    DerivedCategory.boundedAdicConstructible l T ≤\n      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l) T)).inverseImage\n        (derivedEncoding l T)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T235954-L-1475329",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T235954-L-1475329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

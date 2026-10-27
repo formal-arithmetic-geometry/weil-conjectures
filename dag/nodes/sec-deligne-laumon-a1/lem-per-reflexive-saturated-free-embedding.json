@@ -1,0 +1,210 @@
+{
+ "id": "lem-per-reflexive-saturated-free-embedding",
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Assume $M$ is reflexive. Choose generators $m_1,\\ldots,m_s$ of $M$. The linear map $E:M^*\\to R^s$, $\\varphi\\mapsto(\\varphi(m_j))_j$, is injective: a functional vanishing on every generator vanishes on $\\sum_j a_jm_j$ by linearity. By [lem-weil-pbc-noetherian-submodule-finite], its image is finite; the bijection onto this image shows that $M^*$ is finite. Choose generators of $M^*$ and the resulting surjection $v:R^n\\to M^*$. Its kernel is finite by the same cited node, so generators of that kernel give $u:R^m\\to R^n$ with $\\operatorname{im}u=\\ker v$. This constructs the finite presentation $R^m\\xrightarrow{u}R^n\\xrightarrow{v}M^*\\to0$, allowing empty generating sets.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV2 (more-algebra-lemma-characterize-reflexive), proof; reverse implication expanded using the proof of Tag 0EB8 (more-algebra-lemma-sequence-reflexive)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-module-hom-left-exact](1) to this presentation with target $R$. It gives an injective $v^*:M^{**}\\to(R^n)^*$ with image $\\ker u^*$. Clause (2) identifies $(R^n)^*$ with $R^n$ and $(R^m)^*$ with $R^m$ by their coordinate functionals. Thus, writing $d:R^n\\to R^m$ for $u^*$ in coordinates and $j:M^{**}\\to R^n$ for $v^*$, one has $\\operatorname{im}j=\\ker d$.",
+   "uses": [
+    "lem-weil-pbc-module-hom-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV2 (more-algebra-lemma-characterize-reflexive), proof; reverse implication expanded using the proof of Tag 0EB8 (more-algebra-lemma-sequence-reflexive)."
+   }
+  },
+  {
+   "text": "Let $N=\\operatorname{im}d\\subseteq R^m$ and let $q:R^n\\to N$ be $d$ with its codomain restricted to its image. This is surjective by definition. It has kernel $\\operatorname{im}j$. The module $N$ is torsion free: if $0\\ne a\\in R$ and $ay=0$, each coordinate satisfies $ay_k=0$ in the domain $R$, hence every $y_k=0$. Since $\\eta_M:M\\to M^{**}$ is an isomorphism by the assumed reflexivity, $i=j\\eta_M$ is injective and has image $\\ker q$. This is the required short exact sequence, with $r=n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV2 (more-algebra-lemma-characterize-reflexive), proof; reverse implication expanded using the proof of Tag 0EB8 (more-algebra-lemma-sequence-reflexive)."
+   }
+  },
+  {
+   "text": "Conversely, take the asserted sequence $0\\to M\\xrightarrow{i}F\\xrightarrow{q}N\\to0$ with $F=R^r$ and $N$ torsion free. The elements $q(e_k)$ generate $N$: lift $y$ through $q$ and expand the lift in the coordinate basis. Thus [lem-per-torsion-free-bidual-injective] makes $\\eta_N$ injective. The evaluation $\\eta_F$ is an isomorphism: for $z\\in F^{**}$ its inverse is the vector $(z(\\pi_k))_k$, where $\\pi_k$ are the coordinate functionals; any functional is $\\sum_k\\varphi(e_k)\\pi_k$, proving both inverse identities. Also $\\eta_M$ is injective, since $\\eta_M(m)=0$ implies $(\\pi_k\\circ i)(m)=0$ for every $k$, hence $i(m)=0$ and $m=0$.",
+   "uses": [
+    "lem-per-torsion-free-bidual-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV2 (more-algebra-lemma-characterize-reflexive), proof; reverse implication expanded using the proof of Tag 0EB8 (more-algebra-lemma-sequence-reflexive)."
+   }
+  },
+  {
+   "text": "By [lem-per-finite-injection-bidual-injective], $i^{**}:M^{**}\\to F^{**}$ is injective; $M$ and $F$ are finite and $R$ is a Noetherian domain. Given $x\\in M^{**}$, put $v=\\eta_F^{-1}(i^{**}x)$. For each $\\psi\\in N^*$ one has $\\eta_N(qv)(\\psi)=\\psi(qv)=\\eta_F(v)(\\psi\\circ q)=x(\\psi\\circ q\\circ i)=0$, since $qi=0$. Injectivity of $\\eta_N$ implies $qv=0$. Exactness supplies $m\\in M$ with $i(m)=v$. For every $\\varphi\\in F^*$, $i^{**}(\\eta_M(m))(\\varphi)=\\varphi(i(m))=\\eta_F(v)(\\varphi)$, so $i^{**}(\\eta_M(m))=i^{**}(x)$. Its injectivity gives $\\eta_M(m)=x$. Hence $\\eta_M$ is bijective and therefore an isomorphism, proving reflexivity.",
+   "uses": [
+    "lem-per-finite-injection-bidual-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AV2 (more-algebra-lemma-characterize-reflexive), proof; reverse implication expanded using the proof of Tag 0EB8 (more-algebra-lemma-sequence-reflexive)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-module-hom-left-exact",
+  "lem-per-torsion-free-bidual-injective",
+  "lem-per-finite-injection-bidual-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AV2 (more-algebra-lemma-characterize-reflexive), proof; reverse implication expanded using the proof of Tag 0EB8 (more-algebra-lemma-sequence-reflexive)."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-flat-base-change-reflexive-modules",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "title": "Reflexive finite modules are saturated submodules of finite free modules",
+ "statement": "Let $R$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring] and let $M$ be a finitely generated $R$-module. Write $M^*=\\operatorname{Hom}_R(M,R)$ and call $M$ reflexive if the evaluation map $M\\to M^{**}$, $m\\mapsto(\\varphi\\mapsto\\varphi(m))$, is an isomorphism. An $R$-module $N$ is torsion free if $an=0$ with $0\\ne a\\in R$ implies $n=0$. Then $M$ is reflexive if and only if there exist an integer $r\\ge0$, an $R$-module $N$ which is torsion free, and a short exact sequence $0\\to M\\xrightarrow{i}R^r\\xrightarrow{q}N\\to0$. Here $i$ is injective, $q$ is surjective, and $\\ker q=\\operatorname{im}i$; $R^r$ denotes the finite free module of $r$-tuples, including $R^0=0$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AV2 (more-algebra-lemma-characterize-reflexive), entire statement; finite free module written as R^r."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a Noetherian domain is reflexive if and only if it embeds into a finite free module with torsion free quotient",
+   "results": "{\"t\": \"2026-10-24T01:58:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite module over a Noetherian domain is reflexive if and only if it embeds into a finite free module with torsion free quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.of_finite_of_free\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.free_iff_isTorsionFree\", \"Module.Finite.left\", \"Module.free_of_finite_type_torsion_free'\", \"Module.IsReflexive.to_isTorsionFree\", \"Module.IsReflexive\", \"Module.free_of_finite_type_torsion_free\"], \"digest\": \"c8d5eb26bd6589c0\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:205-260 and Dual/Lemmas.lean:251-275. IsReflexive is the bidual evaluation definition; of_finite_of_free and the finite-projective instance prove reflexivity under stronger hypotheses; of_split requires a retraction. None gives the saturated finite-free embedding characterization over arbitrary Noetherian domains. The PID freeness results likewise require a PID. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflexivity of a finitely generated module over a Noetherian domain is equivalent to being a second syzygy",
+   "results": "{\"t\": \"2026-10-24T01:59:00Z\", \"tool\": \"leanfinder\", \"query\": \"Reflexivity of a finitely generated module over a Noetherian domain is equivalent to being a second syzygy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive\", \"Module.IsReflexive.of_finite_of_free\", \"Module.finitePresentation_iff_finite\", \"Module.IsReflexive.of_split\", \"Module.IsReflexive.to_isTorsionFree\", \"instInvertibleReprₛ\", \"Module.finitePresentation_of_finite\"], \"digest\": \"5fdab454f02daac5\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:205-260 and Dual/Lemmas.lean:251-275. IsReflexive is the bidual evaluation definition; of_finite_of_free and the finite-projective instance prove reflexivity under stronger hypotheses; of_split requires a retraction. None gives the saturated finite-free embedding characterization over arbitrary Noetherian domains. The PID freeness results likewise require a PID. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite reflexive module is the kernel of a map between finite free modules over a Noetherian domain",
+   "results": "{\"t\": \"2026-10-24T01:58:31Z\", \"tool\": \"leansearch\", \"query\": \"A finite reflexive module is the kernel of a map between finite free modules over a Noetherian domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.Finite.kerRepr\", \"Module.IsReflexive.of_finite_of_free\", \"Module.FinitePresentation.mk\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"ModuleCat.kernelIsLimit\", \"Module.finitePresentation_of_free_of_surjective\", \"Module.IsReflexive.of_split\"], \"digest\": \"74b42c830762b79c\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:205-260 and Dual/Lemmas.lean:251-275. IsReflexive is the bidual evaluation definition; of_finite_of_free and the finite-projective instance prove reflexivity under stronger hypotheses; of_split requires a retraction. None gives the saturated finite-free embedding characterization over arbitrary Noetherian domains. The PID freeness results likewise require a PID. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive",
+   "results": "{\"t\": \"2026-10-24T01:58:32Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.IsReflexive.to_isTorsionFree\", \"MulOpposite.instModuleIsReflexive\", \"Module.equiv\", \"Module.IsReflexive.of_split\", \"Module.instIsReflexiveDual\", \"Module.Dual.instIsReflecive\", \"Module.evalEquiv\"], \"digest\": \"2897c181297b98fd\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:205-260 and Dual/Lemmas.lean:251-275. IsReflexive is the bidual evaluation definition; of_finite_of_free and the finite-projective instance prove reflexivity under stronger hypotheses; of_split requires a retraction. None gives the saturated finite-free embedding characterization over arbitrary Noetherian domains. The PID freeness results likewise require a PID. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive",
+   "results": "{\"t\": \"2026-10-24T01:58:31Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"c98b727e4fdd64bf\"}; Read Mathlib/LinearAlgebra/Dual/Defs.lean:205-260 and Dual/Lemmas.lean:251-275. IsReflexive is the bidual evaluation definition; of_finite_of_free and the finite-projective instance prove reflexivity under stronger hypotheses; of_split requires a retraction. None gives the saturated finite-free embedding characterization over arbitrary Noetherian domains. The PID freeness results likewise require a PID. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated module over a Noetherian domain is reflexive precisely when it embeds in finite free with torsion free cokernel",
+   "results": "{\"t\": \"2026-10-24T02:26:39Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated module over a Noetherian domain is reflexive precisely when it embeds in finite free with torsion free cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.IsReflexive.of_finite_of_free\", \"Module.IsReflexive\", \"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive.to_isTorsionFree\", \"Module.free_of_finite_type_torsion_free'\", \"Module.free_iff_isTorsionFree\", \"Module.instFiniteDimensionalOfIsReflexive\", \"StrongRankCondition.of_isNoetherian\"], \"digest\": \"66af41b449c049d8\"}; Read the pinned Mathlib Dual/Defs.lean:205-265 and Dual/Lemmas.lean:251-275: reflexivity of finite free/projective modules, direct summands and duals of reflexive modules do not give this criterion for arbitrary finite modules over Noetherian domains. No exact match or one-line specialization. Earlier Q31 records are retained as inherited searches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive",
+   "results": "{\"t\": \"2026-10-24T02:26:37Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.IsReflexive.to_isTorsionFree\", \"MulOpposite.instModuleIsReflexive\", \"Module.equiv\", \"Module.IsReflexive.of_split\", \"Module.instIsReflexiveDual\", \"Module.Dual.instIsReflecive\", \"Module.evalEquiv\"], \"digest\": \"2897c181297b98fd\"}; Read the pinned Mathlib Dual/Defs.lean:205-265 and Dual/Lemmas.lean:251-275: reflexivity of finite free/projective modules, direct summands and duals of reflexive modules do not give this criterion for arbitrary finite modules over Noetherian domains. No exact match or one-line specialization. Earlier Q31 records are retained as inherited searches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|reflexive",
+   "results": "{\"t\": \"2026-10-24T02:26:36Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|reflexive\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"c98b727e4fdd64bf\"}; Read the pinned Mathlib Dual/Defs.lean:205-265 and Dual/Lemmas.lean:251-275: reflexivity of finite free/projective modules, direct summands and duals of reflexive modules do not give this criterion for arbitrary finite modules over Noetherian domains. No exact match or one-line specialization. Earlier Q31 records are retained as inherited searches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reflexive finite modules over a Noetherian integral domain are exactly saturated submodules of finite free modules",
+   "results": "{\"t\": \"2026-10-24T02:26:37Z\", \"tool\": \"leansearch\", \"query\": \"Reflexive finite modules over a Noetherian integral domain are exactly saturated submodules of finite free modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.instIsReflexiveOfFiniteOfProjective\", \"Module.IsReflexive\", \"Module.IsReflexive.of_finite_of_free\", \"isNoetherian_of_finite\", \"Module.Finite.of_finite\", \"Module.IsReflexive.of_split\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"IsNoetherian.noetherian\"], \"digest\": \"9c01b2d3adcc0c35\"}; Read the pinned Mathlib Dual/Defs.lean:205-265 and Dual/Lemmas.lean:251-275: reflexivity of finite free/projective modules, direct summands and duals of reflexive modules do not give this criterion for arbitrary finite modules over Noetherian domains. No exact match or one-line specialization. Earlier Q31 records are retained as inherited searches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. The finite-free embedding criterion used before and after base change in Tag 0EB9.",
+   "via": [
+    "lem-per-flat-base-change-reflexive-modules",
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-reflexive-saturated-free-embedding",
+  "worker": "stage1",
+  "summary": "Preserved the statement and inherited searches. Read Stacks 0AV2 and its proof inputs 0EB8 and 0AV0. Constructed a finite presentation of the dual using the existing Noetherian submodule Mathlib leaf, dualized with the existing Hom-left-exact leaf, and wrote the converse diagram chase explicitly. Two new statement-only nodes isolate evaluation injectivity and double-dual injectivity; neither restates a direction of the embedding characterization.",
+  "blueprint": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. The finite-free embedding criterion used before and after base change in Tag 0EB9. Steps 1-3 supply the finite-free saturated embedding used in the flat-reflexivity refinement; Steps 4-5 prove its converse via the claim of Tag 0EB8. This is inherited historical regular-pair lineage under latest ancestor proof Step 3, not a new claim that the geometric ancestor uses 0AV2 explicitly."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-0115a6d39",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-0115a6d39 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all four cited nodes and Stacks more-algebra.tex lines 5150-5335 (0AV0 lemma-reflexive-torsion-free, 0EB8 lemma-sequence-reflexive, 0AV2 lemma-characterize-reflexive; tags confirmed in tags/tags). The item statement is exactly 0AV2: a Noetherian domain, a finite module, reflexivity defined as bijectivity of the evaluation map, and a finite free module with torsion-free quotient. No hypothesis is added or dropped and the statement is unchanged from base. Steps 1-2 build a finite presentation of M* with the Mathlib leaf lem-weil-pbc-noetherian-submodule-finite, then dualize it with lem-weil-pbc-module-hom-left-exact (1)+(2); the hypotheses im u = ker v and v surjective hold. Step 3 is genuinely elementary: torsion freeness of a submodule of R^m is checked coordinate by coordinate. Step 4 cites the new node lem-per-torsion-free-bidual-injective (0AV0(3)); its finiteness hypothesis is checked because the q(e_k) generate N. Step 5 cites the new node lem-per-finite-injection-bidual-injective (the claim in the proof of 0EB8, lines 5286-5305). I rechecked its explicit diagram chase equation by equation; it correctly avoids assuming that the top bidual row is exact. Both new nodes are true, statement-only, self-contained, and strictly smaller than the item rather than restating one of its clauses. I tested them on Z/a, (x,y) in k[x,y], multiplication by 2 on Z, and zero modules. Each records five searches. Mathlib only has eval-injectivity for modules with a basis, free modules or vector spaces over a field, so neither node is a Mathlib leaf. No duplicate: in the snapshot DAG, 0AV0/0EB8/0AV2 appear only in the parent and this delivery, and the height-one criterion and lattice nodes say something different. Every cited node is a Mathlib leaf or in the same unit, so the route is fine and no tool_uses are needed. There is no cycle, proof_deps equals the union of the steps' uses, and no SGA source is used. Minor point, no change made: the item statement says 'finitely generated' without a bracketed citation, but def-weil-finitely-generated-module is in its stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ReflexiveSaturatedFreeEmbedding",
+  "declaration": "Module.isReflexive_iff_exists_exact_finite_free",
+  "file": "lean/Sheaf/RingTheory/ReflexiveSaturatedFreeEmbedding.lean",
+  "statement": "theorem isReflexive_iff_exists_exact_finite_free (R : Type u) (M : Type v) [CommRing R] [IsDomain R] [IsNoetherianRing R] [AddCommGroup M] [Module R M] [Module.Finite R M] : Module.IsReflexive R M ↔ ∃ (r : ℕ) (N : Type (max u v)) (_ : AddCommGroup N) (_ : Module R N), Module.IsTorsionFree R N ∧ ∃ (i : M →ₗ[R] (Fin r → R)) (q : (Fin r → R) →ₗ[R] N), Function.Injective i ∧ Function.Exact i q ∧ Function.Surjective q",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-870661d2f",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Statement matches Stacks 0AV2 / node clause by clause: IsDomain+IsNoetherianRing R, Module.Finite M, IsReflexive (bijective Dual.eval), ∃ r:ℕ (r=0 allowed), arbitrary N in Type (max u v) (no loss: forward N lifts via ULift, converse is existential), IsTorsionFree (= node's condition over a domain), Injective i ∧ Exact i q ∧ Surjective q. Only the lean field changed vs live; stmt_dep nodes identical; lean.statement verbatim in file; no live binding by another group; proof-helper decls exist live; Mathlib notions only, no hollow defs, only sorry, source/blueprint docstrings and 5-step plan present; both report sections present. Edge cases M=0, r=0, zero ring, field, Z/2 consistent. No compile rerun per instructions; no fixes."
+ }
+}

@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-constructible-module-affine-limit-hom",
+ "kind": "statement",
+ "title": "Morphisms of constructible etale module sheaves descend along affine inverse limits",
+ "statement": "Let $I$ be a nonempty directed set and $(X_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms [pqf-def-affine-morphism], with limit $X$ and projections $p_i:X\\to X_i$ [lem-weil-pbc-limit-affine-transition]. Let $\\Lambda$ be a finite commutative ring, fix $i\\in I$, and let $P_i,Q_i$ be constructible sheaves of $\\Lambda$-modules on $(X_i)_{\\mathrm{et}}$ [def-weil-pbc-etale-constructible-sheaf]. Write $t_{ji}:X_j\\to X_i$ for the transition morphism when $j\\ge i$, and put $P_j=t_{ji}^{-1}P_i$ and $Q_j=t_{ji}^{-1}Q_i$. All inverse images are module inverse images over the constant ring sheaves, and all morphisms below are $\\Lambda$-linear [def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category, def-weil-pbc-inverse-image, lem-pe-constant-left-module-inverse-image]. Use the canonical inverse-image composition comparisons [lem-weil-pbc-inverse-image-composition] to identify $p_j^{-1}P_j$ with $p_i^{-1}P_i$, and likewise for $Q_i$.\n\n(1) Every morphism $a:p_i^{-1}P_i\\to p_i^{-1}Q_i$ is the inverse image of a morphism $a_j:P_j\\to Q_j$ for some $j\\ge i$, under these comparisons.\n\n(2) If $a,b:P_i\\to Q_i$ have equal inverse images on $X$, then $t_{ji}^{-1}a=t_{ji}^{-1}b$ for some $j\\ge i$.\n\nNo Noetherian hypothesis on the schemes is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU, label lemma-category-is-colimit, part (3): the Faithful and Fully faithful paragraphs, specialized to finite commutative coefficient rings; not the essential-surjectivity assertion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-inverse-image",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite affine free presentation theorem to $P_i$ on the qcqs scheme $X_i$. Write $B_i\\xrightarrow{d_i}A_i\\xrightarrow{q_i}P_i\\to0$, where $A_i=\\bigoplus_{r=1}^n j_{U_r!}\\underline\\Lambda$ and $B_i=\\bigoplus_{s=1}^m j_{V_s!}\\underline\\Lambda$, with all $U_r,V_s$ affine etale over $X_i$, and $q_i$ a cokernel of $d_i$. At every later stage and on $X$ use inverse image to define $A,B,d,q$. Exact additive inverse image preserves this cokernel and these finite sums. The composition comparisons identify their subsequent pullbacks with the pullbacks directly from $i$. In particular each $q$ is an epimorphism, and a map out of $A$ vanishing on $d$ factors uniquely through $q$.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-presentation",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09YU (lemma-category-is-colimit), proof of (3), and 095N (lemma-category-constructible-modules), affine presentation"
+   }
+  },
+  {
+   "text": "For any transition or projection $h:T\\to X_i$, the free-module base-change theorem identifies $h^{-1}j_{W!}\\underline\\Lambda$ with $j_{W_T!}\\underline\\Lambda$ and identifies maps from it to $h^{-1}Q_i$ with sections on $W_T$. This correspondence is natural in the target. More explicitly, for a later pullback $k$, a map represented by $s$ becomes the map represented by $\\eta_k(s)$: this is exactly the generating-section identity in the cited free-module theorem. If the target is itself a pullback, compose with the canonical comparison $k^{-1}h^{-1}Q_i\\cong(hk)^{-1}Q_i$. The resulting section map is precisely $\\rho$ in the section-colimit theorem, since both are defined by this unit followed by that composition comparison. Thus maps from any pulled-back finite sum $A_i$ or $B_i$ are determined by their finitely many generating sections, and further pullback acts on these sections by $\\rho$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-free-etale-module",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-limit-pullback-sections-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S6 (lemma-shriek-base-change) and 09YQ (theorem-colimit), degree zero; the section comparison used in 09YU Fully faithful"
+   }
+  },
+  {
+   "text": "We will use the following direct test for maps from either of the fixed finite free sums. Suppose $l\\ge i$ and $u,v:t_{li}^{-1}A_i\\to Q_l$ become equal on $X$. For each $U_r$ the corresponding sections $s_r,t_r\\in Q_l(U_r\\times_{X_i}X_l)$ have equal images on the limit by step 2. Apply section continuity to the original affine object $U_r$ and sheaf $Q_i$, with base index $i$. Write $\\Phi_r$ for its bijective colimit-to-section map and $\\iota_l$ for the stage-$l$ colimit map. Then $\\Phi_r(\\iota_l(s_r-t_r))=\\rho_l(s_r)-\\rho_l(t_r)=0$, so injectivity gives $\\iota_l(s_r-t_r)=0$. The elementwise zero criterion gives $k_r\\ge l$ where this difference is zero, hence where the two sections coincide. Directedness gives a single $k\\ge k_r$ for all $r$; the transition identities for $\\rho$ preserve those equalities at $k$. Step 2 and the finite coproduct universal property give $t_{kl}^{-1}u=t_{kl}^{-1}v$. The identical argument applies with the family $V_s$ and $B_i$. With an empty family there is only one map and take $k=l$. Notice that no constructibility of the free sums at later stages, nor of $Q_l$, was needed.",
+   "uses": [
+    "lem-weil-pbc-limit-pullback-sections-colimit",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-inverse-image-free-etale-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YU, faithful argument expanded using 09YQ (theorem-colimit), degree zero; Algebra 00D6/00D7 for eventual equality"
+   }
+  },
+  {
+   "text": "To prove (2), precompose the given $a,b:P_i\\to Q_i$ with $q_i$. Their inverse images after precomposition are equal. Apply the test of step 3 to $a q_i,b q_i:A_i\\to Q_i$ to obtain a stage $j$ where $a_j q_j=b_j q_j$. Since $q_j$ remains a cokernel, it is an epimorphism: cancelling $q_j$ gives $a_j=b_j$. These are exactly $t_{ji}^{-1}a$ and $t_{ji}^{-1}b$, with the comparisons fixed above.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YU, Faithful and proof of (3); finite presentation replaces the equality-locus argument"
+   }
+  },
+  {
+   "text": "For (1), start with $a:P_X\\to Q_X$. By step 2 each component of $a q_X:A_X\\to Q_X$ corresponds to a section $s_r\\in Q_X(U_r\\times_{X_i}X)$. The section-colimit theorem gives $j_r\\ge i$ and a section $s_{r,j_r}\\in Q_{j_r}(U_r\\times_{X_i}X_{j_r})$ mapping to $s_r$. Choose one $j\\ge j_r$ for all $r$ and transport these sections by $\\rho_{j j_r}$. The cocone identities ensure their images are still $s_r$. The free-module evaluation bijection and the finite coproduct universal property assemble them into $b_j:A_j\\to Q_j$. By step 2 its pullback is $a q_X$. If the generator family is empty, take $j=i$ and the unique map from the empty coproduct.",
+   "uses": [
+    "lem-weil-pbc-limit-pullback-sections-colimit",
+    "lem-weil-pbc-inverse-image-free-etale-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YU, Fully faithful and proof of (3), lifting each generating section by 09YQ and taking a finite upper bound"
+   }
+  },
+  {
+   "text": "The pullback of $b_j d_j:B_j\\to Q_j$ is $(a q_X)d_X=a(q_Xd_X)=0$. Apply the $B_i$ version of the test in step 3 to $b_j d_j$ and the zero map, obtaining $k\\ge j$ with $b_k d_k=0$. Since $q_k$ is a cokernel of $d_k$, there is a unique $a_k:P_k\\to Q_k$ with $a_k q_k=b_k$. Write $C_P:p_k^{-1}P_k\\xrightarrow{\\sim}P_X$ and $C_Q:p_k^{-1}Q_k\\xrightarrow{\\sim}Q_X$ for the fixed comparisons. Pulling back $a_kq_k=b_k$ and using their naturality gives $(C_Q\\circ p_k^{-1}(a_k)\\circ C_P^{-1})q_X=a q_X$. Cancel the epimorphism $q_X$ to obtain $C_Q\\circ p_k^{-1}(a_k)\\circ C_P^{-1}=a$, exactly the inverse-image equality required in (1). This proves (1). All constructed arrows are morphisms in the module-sheaf category, so they are $\\Lambda$-linear throughout.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09YU, Fully faithful and proof of (3); 095N cokernel presentation and 09YQ detect the finitely many relations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-module-finite-presentation",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-free-etale-module",
+  "lem-weil-pbc-limit-pullback-sections-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU (lemma-category-is-colimit), Faithful/Fully faithful and proof of (3), expanding the omitted module argument with 095N and 09YQ; eventual equality also uses Algebra 00D6/00D7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between constructible etale module sheaves over a scheme inverse limit descend to a finite stage and equality is detected eventually",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit descent of scheme morphisms and structure-ring sections, universal properties of presheaf-module colimits, and constructible subsets do not give descent or eventual equality of morphisms of constructible etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hom set of constructible sheaves on a qcqs scheme limit with affine transition maps is the filtered colimit of finite stage Hom sets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"If every morphism in a diagram $ D $ of schemes is affine, and each scheme in $ D $ is compact and quasi-separated, then the cocone formed by applying the global sections functor $ \\\\Gamma $ to the opp\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit descent of scheme morphisms and structure-ring sections, universal properties of presheaf-module colimits, and constructible subsets do not give descent or eventual equality of morphisms of constructible etale module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible etale module sheaves morphisms descend under affine inverse limits of quasi compact quasi separated schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfShape D (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M N : X.Modules) : Type u\", \"doc\": \"Given a scheme $X$, this defines the type of homomorphisms between two sheaves of modules over the structure sheaf of $X$. Each homomorphism is a morphism of modules that satisfies the sheaf condition\"}\n  {\"name\": \"SheafOfModules.Finite.hasFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasFiniteLimits (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all finite limits. This includes the existenc\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit descent of scheme morphisms and structure-ring sections, universal properties of presheaf-module colimits, and constructible subsets do not give descent or eventual equality of morphisms of constructible etale module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Hom\", \"colimit\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ {X Y : Cᵒᵖ} (f : X ⟶ Y), CategoryTheory.Limits.PreservesColimit (F.comp (PresheafOfModules.evaluatio\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModules R} {cM : CategoryTheory.Limits.Cocone M.presheaf} (hcM : CategoryTheory.Limits.IsColimit cM) {N : Type w} \", \"doc\": \"Auxiliary definition for `homEquiv`. This is the universal property\\nof `PresheafOfModules.ModuleColimit`, as an abelian group.\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModule\", \"doc\": \"This is the universal property of `PresheafOfModules.ModuleColimit` as a module.\\nSee also `PresheafOfModules.colimitAdjunction`.\"}\n  {\"name\": \"PresheafOfModules.colimitAdjunction_homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) (F : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv_naturality_left\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv_naturality_right\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv_naturality_left_symm\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv'_symm_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModules R} {cM : CategoryTheory.Limits.Cocone M.presheaf} (hcM : CategoryTheory.Limits.IsColimit cM) {N : ModuleCa\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv'_app_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModules R} {cM : CategoryTheory.Limits.Cocone M.presheaf} (hcM : CategoryTheory.Limits.IsColimit cM) {N : ModuleCa\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv_app_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.ModuleColimit.homEquiv_symm_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {M : PresheafOfModule\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.colimitAdjunction_homEquiv_symm_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.IsCofiltered C] [CategoryTheory.InitiallySmall C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {cR : CategoryTheory.Limits.Cocone R} (hcR : CategoryTheory.Limits.IsColimit cR) {F : PresheafOfModule\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit descent of scheme morphisms and structure-ring sections, universal properties of presheaf-module colimits, and constructible subsets do not give descent or eventual equality of morphisms of constructible etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(descen|[Hh]om|[Ll]imit)|([Hh]om|descen).*constructible",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"687\", \"text\": \"    · simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe, Finset.mem_image, comp_apply,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"688\", \"text\": \"        BasicConstructibleSetData.map, RingHom.coe_coe, isEmptyRingEquiv_eq_coeff_zero, pow_one,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"696\", \"text\": \"    simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"697\", \"text\": \"      AlgEquiv.toRingEquiv_toRingHom, Finset.mem_image, BasicConstructibleSetData.map,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"721\", \"text\": \"          BasicConstructibleSetData.map, RingHom.coe_coe, S', e] at hxS\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean\", \"line\": \"148\", \"text\": \"  rw [← iUnion_range_comap_comp_evalRingHom, ConstructibleSetData.toSet]\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"67\", \"text\": \"    (isConstructible_comap_image (RingHom.finitePresentation_algebraMap.mpr ‹_›)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"121\", \"text\": \"nonrec lemma Scheme.Hom.isLocallyConstructible_image (f : X ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"165\", \"text\": \"lemma Scheme.Hom.isConstructible_image (f : X ⟶ Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"line\": \"172\", \"text\": \"lemma Scheme.Hom.isConstructible_preimage (f : X ⟶ Y) {s : Set Y} (hs : IsConstructible s) :\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-limit descent of scheme morphisms and structure-ring sections, universal properties of presheaf-module colimits, and constructible subsets do not give descent or eventual equality of morphisms of constructible etale module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom between constructible etale module sheaves commutes with affine transition limits of quasi compact quasi separated schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom, SheafOfModules.Hom, SheafOfModules.Hom.mk, AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.Hom.recOn, AlgebraicGeometry.Scheme.Modules.Hom.app, PresheafOfModules.Hom, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern structure-sheaf sections, scheme morphisms, or universal properties of module colimits; none states affine-limit continuity of Hom for constructible etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of constructible etale module sheaves on a qcqs affine transition inverse limit descend to a finite stage with eventual equality",
+   "results": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern structure-sheaf sections, scheme morphisms, or universal properties of module colimits; none states affine-limit continuity of Hom for constructible etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For constructible sheaves of modules the Hom set after inverse image to an affine scheme limit is the filtered colimit of the Hom sets at the finite stages",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern structure-sheaf sections, scheme morphisms, or universal properties of module colimits; none states affine-limit continuity of Hom for constructible etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem exists_app_map_eq_map_of_isLimit|theorem exists_app_map_eq_zero_of_isLimit|def homEquiv|def colimitAdjunction",
+   "results": "Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/CategoryTheory/Limits/IsLimit.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/RingTheory/Etale/StandardEtale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern structure-sheaf sections, scheme morphisms, or universal properties of module colimits; none states affine-limit continuity of Hom for constructible etale module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_app_map_eq_map_of_isLimit|exists_app_map_eq_zero_of_isLimit|exists_appTop_π_eq_of_isLimit",
+   "results": "714, 718, 794, 823, 827",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern structure-sheaf sections, scheme morphisms, or universal properties of module colimits; none states affine-limit continuity of Hom for constructible etale module sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-local-system-affine-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Local-system input for the smooth full-level cover, before choosing a frame. Non-Noetherian local-system input: descending the finite locally constant coefficient sheaf in the proof of Stacks 0GLI, paragraph beginning \"In this paragraph we reduce to the case where S is Noetherian\". In the proof of Stacks 0GL2, the passage from a limit trivialization to a stage trivialization uses the faithful and fully faithful parts of Stacks 09YU(3). This split realizes the 09YU(3) morphism prerequisite by finite affine free generators, eventual equality of generating sections, and killing the finitely many relations.",
+   "via": [
+    "lem-sfb-finite-local-system-affine-limit-descent",
+    "lem-sfb-smooth-proper-finite-cohomology-local-system",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-constructible-module-affine-limit-hom",
+  "worker": "stage1",
+  "summary": "Rebased the retained six-step split onto the current live unsplit item and reread all cited statements. Replaced the free-family lifting citation by explicit finite section lifting using section continuity and free-module evaluation; this avoids an ill-typed comparison formula in that existing node. Equality is detected on generators, finitely many relations are killed, and the map factors through the preserved cokernel. Statement and statement dependencies unchanged; zero new nodes. On the subsequent repair retry, made the equality test explicitly apply colimit injectivity and the elementwise zero criterion to the difference of generating sections; revalidated all fourteen quotations on the current live DAG. Current-DAG repair on 2026-10-23: wrote the colimit injectivity equation and the final conjugation by the domain and target comparisons explicitly, and strengthened step 2 citation quotations to cover the unit and transition formulas actually used. All six live dependency statements were reread; the statement and route remain unchanged.",
+  "blueprint": "Inherited origin: det-thm-sf-ctf-stability-direct-images proof (3), the finite-local-system affine-limit input downstream of the alteration/local-system route. This item realizes 09YU(3) Faithful/Fully faithful, invoked in steps 5-6 of lem-sfb-finite-local-system-affine-limit-descent. The computed ancestor is None because the inherited created.item chain ends at a Lean module item; its from.node is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constructible-module-finite-presentation",
+    "why": "Gives the finite affine free cokernel presentation of the constructible source on a qcqs scheme; the present unit has no substitute for this generic module-sheaf presentation."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Preserves the presentation, finite sums and cokernels under module inverse image; this is a generic functorial tool rather than a replacement for a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Fixes the canonical composition comparisons and their compatibility with adjunction units; needed to compare successive stage pullbacks with the limit pullback."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-free-etale-module",
+    "why": "Identifies maps from a free etale module with sections and specifies the pullback of each generating section; no node of this unit provides this generic evaluation calculation."
+   },
+   {
+    "node": "lem-weil-pbc-limit-pullback-sections-colimit",
+    "why": "Gives section continuity with the actual unit-induced transition maps for affine etale objects over qcqs stages; supplies both lifting and detection of the finitely many generating sections."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "Detects equality of two represented elements at a later stage of a small filtered module colimit; a generic algebra tool used after section continuity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constructible-module-finite-presentation",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-free-etale-module",
+  "lem-weil-pbc-limit-pullback-sections-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-c52256d10",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-c52256d10 (reviewer sub-agent of L); spot-checked: PASS with no changes. This is the 4th delivery of the item. Heads f33b8b3b, 5e5710ae and 1982df4b were each reviewed PASS, and each landing was refused because the item was 'completed here but not in live'. In clones/live and side-live the item is still unsplit with no proof. There is no repair note, and the only citer is its parent lem-sfb-finite-local-system-affine-limit-descent. Compared with 1982df4b, only the proof text of steps 3 and 6 and split_report changed; all other fields are identical and there are 0 new nodes. Step 3 now writes Φ_r(ι_l(s_r−t_r))=ρ_l(s_r)−ρ_l(t_r)=0 before using injectivity. Step 6 now names C_P and C_Q and cancels q_X from (C_Q∘p_k^{-1}(a_k)∘C_P^{-1})q_X=a q_X. Both are correct and only more explicit. I reread Stacks 09YU (etale-cohomology.tex, lemma-category-is-colimit, Faithful/Fully faithful and the proof of (3), 'using 095N … Details omitted'). The item is its faithful and fully faithful half for finite Λ, qcqs X_i and affine transitions, and it is not weakened. I read all six cited statements in full; each is identical in the snapshot and in live. Step 1: the 095N presentation applies within its scope (qcqs, finite Λ, affine generators), and exact inverse image keeps the cokernel. Step 2: θ/ε with the composition comparison c gives ρ. The compatibility θ_{p_i}=θ_{p_j}∘p_j^{-1}θ_t∘c^{-1} follows in a few lines from the uniqueness of θ and composition (2), so the step is elementary as marked. Step 3: section continuity with base i, Q_i and the original affine U_r, then the elementwise zero criterion and a finite upper bound. No constructibility of the target and no affine intersections are assumed. Step 4: cancelling q_j proves (2). Steps 5-6 lift the sections, kill the relations, factor through the cokernel and cancel q_X, which proves (1). Edge cases checked: Λ=0, P=0, empty relations, singleton I, empty X. The 09YU duplicate search (24 hits) finds only essential-surjectivity descent, free-source arrow and hom-lift, and Noetherian-only Ext and derived-Hom continuity nodes. There is no cycle and no SGA source. I accept the generic pbc and exchange tool_uses. Maintainer note: promote this item instead of asking for another re-delivery. The uncited node lem-weil-pbc-affine-free-etale-module-eventual-hom-lift still has the ill-typed formula π_j^{-1}(a)∘C_G^{-1}; it should read π_j^{-1}(a)∘C_A=C_G∘f."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleAffineLimitHom",
+  "declaration": "AlgebraicGeometry.Scheme.constructible_module_affineLimit_hom",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleAffineLimitHom.lean",
+  "statement": "theorem constructible_module_affineLimit_hom {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {j k : Iᵒᵖ} (f : j ⟶ k), IsAffineHom (D.map f)] [∀ j : Iᵒᵖ, CompactSpace (D.obj j)] [∀ j : Iᵒᵖ, QuasiSeparatedSpace (D.obj j)] (c : Cone D) (hc : IsLimit c) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (i : I) (P Q : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hP : IsConstructibleEtaleModuleSheaf P) (hQ : IsConstructibleEtaleModuleSheaf Q) : (∀ a : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj P ⟶ (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj Q, ∃ (j : I) (h : i ≤ j) (aⱼ : (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).obj P ⟶ (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).obj Q), (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op j)) (D.map (homOfLE h).op) (c.π.app (op i)) (c.w (homOfLE h).op).symm).hom.app P ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op j))).map aⱼ ≫ (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op j)) (D.map (homOfLE h).op) (c.π.app (op i)) (c.w (homOfLE h).op).symm).inv.app Q = a) ∧ (∀ a b : P ⟶ Q, (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).map a = (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).map b → ∃ (j : I) (h : i ≤ j), (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).map a = (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).map b)",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-872cadfde",
+  "group": "O4",
+  "result": "pass",
+  "note": "Only the item node (lean field only) and the new module ConstructibleModuleAffineLimitHom.lean differ from side-live; 0 new nodes. The Lean statement matches the node and Stacks 09YU(3) (faithful and fully faithful half, finite Λ): directed nonempty preorder I : Type u, D : Iᵒᵖ ⥤ Scheme.{u}, qcqs stages, IsAffineHom transitions, any limit cone, Λ : Type (u+1) finite comm ring (forced by IsConstructibleEtaleModuleSheaf, whose Scheme.Stratification has constructible strata), hP and hQ. Clause (1) type-checked against Etale.upperStarComp h₁=p_j h₂=t_ji h₁₂=p_i with the cone identity (c.w).symm: hom.app P ≫ p_j^*.map aⱼ ≫ inv.app Q = a is the canonical conjugated pullback. Clause (2) is eventual equality of t_ji^*.map a and t_ji^*.map b. Edge cases (singleton I, empty limit, Λ=0, P=0, empty generator families) are covered. No defs; proof is sorry; docstrings carry the source place, blueprint id and six proof steps; statement field verbatim; public imports are stmt_dep modules and non-public imports are proof_dep modules, all present in side-live; no duplicate declaration and no other stage-2 delivery of the item. Report has Worker report and Second reading sections. No file changed, so no compile; the worker reports a clean scompile."
+ }
+}

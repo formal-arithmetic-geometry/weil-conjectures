@@ -1,0 +1,130 @@
+{
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorTransport",
+  "date": "2026-10-27",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-coefficient-restriction-tensor-comparison",
+   "place": "Strictly smaller tensor-coherence component of the coefficient restriction comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tags 07A4, 07A6 and 03EL; the coefficient-isomorphism tensor subargument of Tag 0B56."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along an isomorphism of sheaves of rings commutes with derived tensor product and canonical tensor pullback comparison",
+   "results": "Eight hits on ordinary presheaf/sheaf scalar restriction and ModuleCat scalar restriction functoriality. No derived tensor/pullback coherence statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula morphism transported along an equivalence of coefficient rings and a natural tensor comparison",
+   "results": "Eight unrelated polynomial law, algebra presentation and adic completion tensor hits. No sheaf-derived coefficient tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Id|id|[Ee]quiv)|mapDerivedCategory.*[Ii]d",
+   "results": "25 returned Mathlib hits on ordinary scalar restriction and unrelated algebra. Direct source searches find canonical geometric tensor pullback and adjunction normalization, but no restriction/tensor coherence for the arbitrary original-site coefficient models. blueprint_refs.py search coefficient tensor restriction finds zero blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; retain existing normalized pullback and restriction definitions"
+  }
+ ],
+ "id": "lem-pbc-coefficient-restriction-tensor-comparison-existence",
+ "title": "Existence of the coefficient restriction tensor comparison",
+ "statement": "For the data of lem-pbc-coefficient-restriction-tensor-comparison, there exists a normalized natural isomorphism between the tensor model after restriction along the coefficient isomorphism and the restricted tensor model.",
+ "proof": [
+  {
+   "text": "Apply ringIso_tensor_transport to c on the original small pro-etale site. Its kflat_iff and flat_iff clauses show that termwise restriction preserves flat-term K-flat representatives. Its totalIso and total_naturality clauses supply a natural isomorphism from restriction of signed total tensor to signed total tensor of restrictions. The scalarModules and scalarRestriction abbreviations are definitionally the proEtaleRingModules and pbcRestrict used here.",
+   "uses": [
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "def-sfb-proetale-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve every homotopy object by the existing independent-coefficient flat-term K-flat resolution. Transfer the exact tensorRight clause to IsFlatOnSite using siteSheafTensorRightIso. Apply resolvingRepresentativesFullyFaithfulWhiskering to the homotopy quotient and its quasi-isomorphism localization, then transfer through quotientCompQhIso to the complex localization. This gives full faithfulness of precomposition along the product of the representative inclusions followed by Q.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tensorComparisonDescent with the exact restriction factorization mapDerivedCategoryFactors, the supplied representative isomorphisms of aX and z, and the preceding signed-total natural isomorphism. The factorization is an isomorphism on every complex, hence on representatives and their tensors. The resulting natural isomorphism has direction aX.tensor followed by derived restriction to the tensor of the two restricted factors; take its inverse to obtain the displayed conclusion.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-sfb-proetale-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "def-sfb-proetale-tensor-model",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex; literature/stacks-project/categories.tex",
+  "place": "Tags 06YS, 06YU, 03EK, 07A4 and 04VK. H3 uses the existing ring-isomorphism tensor transport and representative descent theorems; no new unresolved statements or changes to the supplied tensor models."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientTensorComparisonExists",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientTensorComparisonExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorTransport.tensorComparison_exists",
+  "statement": "theorem tensorComparison_exists {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (aY : ProEtaleTensorModel Y R)\n    (z : ProEtaleTensorModel X\n      ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))\n    (aX : ProEtaleTensorModel X S) :\n    Nonempty (((pbcDerivedRestrict c.hom).prod (pbcDerivedRestrict c.hom)) ⋙ z.tensor ≅\n      aX.tensor ⋙ pbcDerivedRestrict c.hom)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261027T050629-L-247015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T052608-L-456662",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

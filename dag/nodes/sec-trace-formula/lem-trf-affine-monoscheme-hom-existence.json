@@ -1,0 +1,172 @@
+{
+ "id": "lem-trf-affine-monoscheme-hom-existence",
+ "kind": "statement",
+ "title": "Existence of a local morphism to an ordinary affine monoid spectrum",
+ "statement": "Let P be a fine commutative monoid and T any space with a sheaf A of commutative monoids, using the unsharpened spectrum A(P) and local morphisms of [def-trf-fine-fan-blowup] and [def-trf-monoscheme-toric-realization]. For every monoid homomorphism phi : P -> Gamma(T,A), there exists a sheafed-space morphism f : T -> A(P) local on all stalks whose pullback of the canonical numerator p is phi(p) for every p. No uniqueness or naturality is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\varphi:P\\to\\Gamma(T,\\mathcal A)$. In any commutative monoid, $x+y$ is a unit if and only if both $x,y$ are units: an inverse $z$ of $x+y$ makes $y+z$ an inverse of $x$ and $x+z$ an inverse of $y$. Thus $\\mathfrak p_t=\\{p\\in P:\\varphi(p)_t\\notin\\mathcal A_t^\\times\\}$ is a proper ideal with addition-closed complement, including the possibility $\\mathfrak p_t=\\varnothing$. For $a\\in P$, let $V_a=\\{t:\\varphi(a)_t\\in\\mathcal A_t^\\times\\}$. If $t\\in V_a$, represent an inverse germ by a section $v$ near $t$; the germ equality $\\varphi(a)_t+v_t=0$ holds as an equality of sections on a smaller neighborhood, by the germ definition [def-trf-fine-fan-blowup]. Hence $V_a$ is open. The map $f(t)=\\mathfrak p_t$ satisfies $f^{-1}D(a)=V_a$ and is continuous because the $D(a)$ form a basis.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(i), proof, p.99: the prime ideal defined from inverse images of stalk units; continuity spelled out from 3.1.3 and 3.1.6."
+   }
+  },
+  {
+   "text": "On $V_a$, the local inverse sections of Step 1 agree on overlaps: two inverses $v,w$ of a section $s$ satisfy $v=v+(s+w)=(v+s)+w=w$. The sheaf gluing axiom therefore gives a global inverse $v_a$ of $\\varphi(a)|_{V_a}$, also when $V_a=\\varnothing$. Define\n$$\\lambda_a:P[a^{-1}]\\longrightarrow\\mathcal A(V_a),\\qquad p-na\\longmapsto\\varphi(p)|_{V_a}+nv_a.$$\nThis is well-defined even though $\\mathcal A(V_a)$ need not be integral: equality $p-na=p'-n'a$ in $P^{\\mathrm{gp}}$ gives $p+n'a=p'+na$ in the integral monoid $P$; apply $\\varphi$ and add $(n+n')v_a$. The formula preserves addition and extends $\\varphi$. It is the unique such homomorphism since the image of $-a$ must be $v_a$. For an inclusion $D(b)\\subseteq D(a)$, the localization restriction $P[a^{-1}]\\to P[b^{-1}]$ of [def-trf-fine-fan-blowup] fixes $P$. Its composite with $\\lambda_b$ and the restriction of $\\lambda_a$ to $V_b\\subseteq V_a$ agree on $P$ and send $-a$ to the unique inverse of $\\varphi(a)|_{V_b}$, so agree everywhere. Thus the $\\lambda_a$ commute with all basic-open restrictions.",
+   "uses": [
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(i), p.99, the straightforward sheaf construction, using the explicit localizations and sheaf of 3.1.2--3.1.3, p.98."
+   }
+  },
+  {
+   "text": "The functor $\\mathcal G(U)=\\mathcal A(f^{-1}U)$ is a sheaf on $X=\\operatorname{Spec}_{\\mathrm{mon}}P$: inverse images carry an open cover and its pairwise intersections to an open cover and its intersections, so matching families glue by the sheaf axiom for $\\mathcal A$. By [def-trf-fine-fan-blowup], $\\widetilde P(D(a))=P[a^{-1}]$. Apply clause (a) of [lem-weil-pbc-sheaf-morphism-on-basis] with coefficient category the commutative monoids, source $\\widetilde P$, target $\\mathcal G$, and basis $\\{D(a):a\\in P\\}$. Step 2 supplies exactly its restriction-compatible family. We obtain a unique sheaf homomorphism $\\psi:\\widetilde P\\to f_*\\mathcal A$ having components $\\lambda_a$ on the basic opens.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(i), proof, p.99: extension to the structure sheaf; the general basis-extension theorem is the cited existing node (Stacks 009O)."
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak p$, [lem-trf-monoid-prime-minimal-neighborhood] gives its smallest neighborhood $D(b)$ and $P[b^{-1}]=P-F$, where $F=P\\setminus\\mathfrak p$. A germ at $\\mathfrak p$ is uniquely its restriction to this smallest neighborhood, so [def-trf-fine-fan-blowup] identifies $\\widetilde P_{\\mathfrak p}=P-F$ and the germ of a canonical numerator with that numerator. For $t\\in T$ use $\\mathfrak p=f(t)$ and $F=P\\setminus\\mathfrak p$. The induced stalk map from Step 3 sends\n$$p-c\\longmapsto\\varphi(p)_t-\\varphi(c)_t\\qquad(p\\in P,\\ c\\in F),$$\nwhere the minus sign means addition of the inverse unit. Indeed each $c\\in F$ is inverted on $D(c)$ and Step 2 gives this formula there. By the last equivalence of [lem-trf-monoid-prime-minimal-neighborhood], the numerator $p$ is a unit in $P-F$ exactly when $p\\in F$. Since $c$ is a unit in $P-F$, the same criterion holds for $p-c$. Its image is a unit exactly when $\\varphi(p)_t$ is a unit, which by the definition of $f(t)$ is again $p\\in F$. Consequently the stalk map is local. Steps 1--3 define a local morphism $G(\\varphi)$.",
+   "uses": [
+    "lem-trf-monoid-prime-minimal-neighborhood",
+    "def-trf-fine-fan-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.8(i), proof, p.99: the uniquely defined local map from the monoid localization; stalks from 3.1.2--3.1.4, p.98."
+   }
+  },
+  {
+   "text": "On D(1), which is the whole spectrum, the section map constructed above sends each numerator p to phi(p), because the image of 1 and its inverse are both 1. Thus its global numerator pullback is exactly phi. This establishes existence, without using uniqueness or the affine universal property.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "lem-trf-monoid-prime-minimal-neighborhood",
+  "def-trf-monoscheme-toric-realization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(i), printed p.99, with 3.1.2--3.1.6, pp.98--99; details of the straightforward sheaf construction written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every homomorphism from a fine commutative monoid P to global sections of a sheaf of commutative monoids extends to a local morphism to the ordinary monoid spectrum of P.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \"{X : LocallyRingedSpace.{u}} {R : CommRingCat.{u}} {f : R ⟶ Γ.obj (op X)} {β : X ⟶ Spec.locallyRingedSpaceObj R}\\n  (w : X.toΓSpec.base ≫ (Spec.locallyRingedSpaceMap f).base = β.base)\\n  (h :\\n    ∀ r : R,\\n      f ≫ X.presheaf.map (homOfLE le_top : (Opens.map β.base).obj (basicOpen r) ⟶ _).op =\\n       \", \"doc\": \"Given a locally ringed space $ X $ and a commutative ring $ R $, if a morphism $ \\\\beta: X \\\\to \\\\operatorname{Spec}(R) $ satisfies two conditions: (1) its base map agrees with the composition of the Γ-S\"}\n  {\"name\": \"AlgebraicGeometry.toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"(R : CommRingCat.{u}) : R ⟶ Γ.obj (op (Spec.toLocallyRingedSpace.obj (op R)))\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to the global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its prime spectrum, induced by the structure sh\"}\n  {\"name\": \"Submonoid.LocalizationMap.AwayMap.lift\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Away\", \"type\": \"(hg : IsUnit (g x)) : N →* P\", \"doc\": \"Given a commutative monoid $M$ with submonoid $S$ generated by an element $x$, a localization map $f : M → N$ sending $S$ to units in $N$, and a monoid homomorphism $g : M → P$ such that $g(x)$ is a u\"}\n  {\"name\": \"Submonoid.LocalizationMap.lift_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"(z v) : f.lift hg z = v ↔ g (f.sec z).1 = g (f.sec z).2 * v\", \"doc\": \"Given a commutative monoid $M$ with submonoid $S$, a commutative monoid $N$ equipped with a localization map $f : M → N$ sending $S$ to units in $N$, and a monoid homomorphism $g : M → P$ to another c\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.AwayMap.lift\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Away\", \"type\": \"(hg : IsAddUnit (g x)) : B →+ C\", \"doc\": \"Given additive commutative monoids $M$, $N$, and $P$, a submonoid $S$ of $M$ generated by an element $x$, a localization map $f : M → N$ inverting $S$, and an additive monoid homomorphism $g : M →+ P$\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.lift\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"{M : Type u_1} →\\n  [inst : AddCommMonoid M] →\\n    {S : AddSubmonoid M} →\\n      {N : Type u_2} →\\n        [inst_1 : AddCommMonoid N] →\\n          {P : Type u_3} →\\n            [inst_2 : AddCommMonoid P] → S.LocalizationMap N → {g : M →+ P} → (∀ (y : ↥S), IsAddUnit (g ↑y)) → N →+ P\", \"doc\": \"Given additive commutative monoids $M$, $N$, and $P$, a submonoid $S$ of $M$, a localization map $f : M → N$ with respect to $S$, and an additive monoid homomorphism $g : M →+ P$ such that $g(s)$ is a\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : CommRingCat.of R ⟶ (structureSheaf R).presheaf.stalk x\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this is the canonical ring homomorphism from $ R $ to the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u} [inst_1 : CommRing S] (f : R →+* S)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (x : CategoryTheory.ToType { carrier := R, commRing := inst }),\\n  (AlgebraicGeometry.StructureSheaf.comap f U\\n        ((TopologicalSpace.Opens\", \"doc\": \"For a commutative ring $ R $ and an open subset $ U $ of its prime spectrum $ \\\\operatorname{Spec}(R) $, there exists a canonical ring homomorphism from $ R $ to the ring of sections $ \\\\mathcal{O}(U) $\"}\n\nInspected the returned signatures and their source: ring-spectral results require commutative rings or locally ringed spaces. The monoid-localization lift/ext lemmas concern a single monoid homomorphism, not a sheafed-space morphism and its locality. None states this ordinary monoid-spectrum assertion. Searches of the project and the current blueprint found only the parent universal property, its downstream spectrum_hom_universal restatement, and sharp variants; the downstream restatement depends on the parent and cannot be used here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a local morphism to the unsharpened spectrum of a fine commutative monoid with a prescribed pullback on canonical global sections.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpec\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  X ⟶ AlgebraicGeometry.Spec.locallyRingedSpaceObj (AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))\", \"doc\": \"The morphism from a locally ringed space $ X $ to the locally ringed space $ \\\\operatorname{Spec}(\\\\Gamma(X)) $, constructed by mapping $ X $ to the prime spectrum of its global sections $ \\\\Gamma(X) $ v\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecBase\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  X.toTopCat ⟶ AlgebraicGeometry.Spec.topObj (AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))\", \"doc\": \"The continuous map from a locally ringed space $ X $ to the prime spectrum of its ring of global sections $ \\\\Gamma(X) $, defined by sending each point $ x \\\\in X $ to the prime ideal in $ \\\\Gamma(X) $ c\"}\n  {\"name\": \"AlgebraicGeometry.Spec.preimage\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"{R S : CommRingCat} → (AlgebraicGeometry.Spec S ⟶ AlgebraicGeometry.Spec R) → (R ⟶ S)\", \"doc\": \"The function constructs the preimage of a morphism from a scheme $X$ to $\\\\operatorname{Spec}(S)$ under the contravariant Spec functor, corresponding to a ring homomorphism $S \\\\to \\\\Gamma(X, \\\\mathcal{O}\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))) →\\n    (AlgebraicGeometry.Spec.structureSheaf ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))).val.obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      X.presheaf.\", \"doc\": \"For a locally ringed space $X$ and element $r$ in its ring of global sections $\\\\Gamma(X)$, this is the canonical ring homomorphism from the localization $\\\\Gamma(X)_r$ to the ring of sections over the \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  X.toSheafedSpace ⟶\\n    AlgebraicGeometry.Spec.toSheafedSpace.obj (Opposite.op (AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\", \"doc\": \"A morphism in the category of sheafed spaces over commutative rings, constructed from the continuous map sending a locally ringed space $X$ to the prime spectrum of its global sections $\\\\Gamma(X)$, pa\"}\n  {\"name\": \"AlgebraicGeometry.Spec.locallyRingedSpaceMap\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"{R S : CommRingCat} →\\n  (R ⟶ S) → (AlgebraicGeometry.Spec.locallyRingedSpaceObj S ⟶ AlgebraicGeometry.Spec.locallyRingedSpaceObj R)\", \"doc\": \"Given commutative rings $ R $ and $ S $ and a ring homomorphism $ f : R → S $, this constructs the morphism of locally ringed spaces from $ \\\\operatorname{Spec}(S) $ to $ \\\\operatorname{Spec}(R) $. It c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\\n  (f :\\n    (AlgebraicGeometry.Spec.structureSheaf ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))).val.obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      X.preshe\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, a morphism $f$ from the localization $\\\\Gamma(X)_r$ to the sections over the basic open subset $X_{D(r)}$ s\"}\n  {\"name\": \"AlgebraicGeometry.Spec.map\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{R S : CommRingCat} → (R ⟶ S) → (AlgebraicGeometry.Spec S ⟶ AlgebraicGeometry.Spec R)\", \"doc\": \"Given a ring homomorphism $ f : R → S $, this constructs the contravariant morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ induced by $ f $, using the locally ringed space stru\"}\n\nInspected the returned signatures and their source: ring-spectral results require commutative rings or locally ringed spaces. The monoid-localization lift/ext lemmas concern a single monoid homomorphism, not a sheafed-space morphism and its locality. None states this ordinary monoid-spectrum assertion. Searches of the project and the current blueprint found only the parent universal property, its downstream spectrum_hom_universal restatement, and sharp variants; the downstream restatement depends on the parent and cannot be used here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_local_affine_hom|MonoidSpectrum|MonoidalSpace",
+   "results": "[grep] OK 0 hit(s)\n\nInspected the returned signatures and their source: ring-spectral results require commutative rings or locally ringed spaces. The monoid-localization lift/ext lemmas concern a single monoid homomorphism, not a sheafed-space morphism and its locality. None states this ordinary monoid-spectrum assertion. Searches of the project and the current blueprint found only the parent universal property, its downstream spectrum_hom_universal restatement, and sharp variants; the downstream restatement depends on the parent and cannot be used here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineMonoschemeHomUniversal",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, 3.1.17--3.1.23, Lemmas 3.2.9, 3.2.12 and 3.2.15, Lemma 3.2.17 and Corollary 3.2.18, printed pp.101--105; regular-over-Q application in 3.2.19, p.106. Re-split of lem-trf-toric-monoid-comparison, original step(s) 7: Saturated monomial blowup charts commute with free monoid products. Supporting input for the categorical monoscheme chart pullback: ILO VIII Lemma 3.1.8(i), p.99, the unsharpened spectrum/global-sections bijection used with the amalgamated sum in Remark 3.1.23. Split of the affine-monoscheme universal property: construction, locality, and numerator pullback, original steps 1-4 and 6.",
+   "via": [
+    "lem-trf-affine-monoscheme-hom-universal",
+    "lem-trf-saturated-blowup-product-charts",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineMonoschemeHomExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMonoschemeHomExistence.lean",
+  "declaration": "AlgebraicGeometry.Monoscheme.exists_local_affine_hom",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.exists_local_affine_hom"
+  ],
+  "statement": "theorem exists_local_affine_hom (P : Type u) [CommMonoid P] (hP : FineFan.IsFine P)\n    (T : SheafedSpace CommMonCat.{u}) (φ : P →* T.presheaf.obj (op ⊤)) :\n    ∃ f : T ⟶ affine P, FineFan.IsLocalMorphism f ∧\n      (SheafedSpace.Γ.map f.op).hom.comp (affineSection P) = φ",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T092841-L-3472970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T092841-L-3472970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

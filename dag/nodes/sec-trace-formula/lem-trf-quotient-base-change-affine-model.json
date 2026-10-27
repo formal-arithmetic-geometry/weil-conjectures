@@ -1,0 +1,137 @@
+{
+ "id": "lem-trf-quotient-base-change-affine-model",
+ "kind": "statement",
+ "title": "Affine models of base change by a quotient",
+ "statement": "Let $A,D$ be commutative rings, $I\\subset A$ an ideal, $X$ a scheme [def-pc-scheme], $p:X\\to\\operatorname{Spec}A$ a morphism, and $j:\\operatorname{Spec}D\\to X$ any morphism [def-weil-affine-spectrum]. Put $Z=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$ [def-pc-fibre-product] with projection $i:Z\\to X$, and let $\\alpha:A\\to D$ correspond to $j\\circ p$. There is an isomorphism $e:Z\\times_X\\operatorname{Spec}D\\simeq\\operatorname{Spec}(D/\\alpha(I)D)$ whose composite with the quotient-spectrum map to $\\operatorname{Spec}D$ is the second projection. No openness, finiteness or reducedness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JO (section-fibre-products); Tag 01I4 (lemma-fibre-product-affine-schemes). Tensoring with a quotient, as in the affine fibre-product construction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Paste the two defining pullback squares. The result is the pullback of j followed by p and Spec(A/I) over Spec A.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The affine pullback is Spec(D tensor_A A/I). The ring equivalence D/ID to this tensor product sends the class of d to d tensor 1, with inverse d tensor a-bar mapped to the class of d alpha(a). The adopted source library packages precisely this as CommRingCat.isPushout_quotient. Applying Spec gives the quotient pullback square. Compare the two pullback cones; their first projections give the asserted equation.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JO (section-fibre-products); Tag 01I4 (lemma-fibre-product-affine-schemes). Tensoring with a quotient, as in the affine fibre-product construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The base change of Spec of a ring quotient is Spec of the quotient by the extended ideal",
+   "results": "8 hits including AlgebraicGeometry.pullbackSpecIso. This supplies the affine fibre-product formula but not the pasted quotient/projection assertion. Local source search found CommRingCat.isPushout_quotient, which the Lean proof uses.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base change of a closed subscheme Spec A/I along a morphism Spec D to Spec A is Spec of D divided by the extended ideal",
+   "results": "8 hits including closed-immersion base change, liftQuotient, spec_of_quotient_mk, IdealSheafData.comapIso and IsClosedImmersion.Spec_iff. None is the full stated arbitrary-affine-morphism projection equation.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", \"IsPullback\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotIdealMapEquivTensorQuot|isPullback_SpecMap_of_isPushout",
+   "results": "14 hits including AlgebraicGeometry.isPullback_SpecMap_of_isPushout (Mathlib/AlgebraicGeometry/Pullbacks.lean:794) and Algebra.TensorProduct.quotIdealMapEquivTensorQuot (Mathlib/RingTheory/TensorProduct/Quotient.lean:51). Used through the proved source-library quotient-pushout theorem.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothStrictLocalClosedFibreModel",
+  "date": "2026-10-26",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Re-split of lem-trf-smooth-geometric-stalk-algebra: old step 4 (closed fibre as a smooth residue-field strict local ring). Stage-3 refinement: closed-fibre model old step 3: affine quotient formula with its projection.",
+   "via": [
+    "lem-trf-smooth-strict-local-closed-fibre-model",
+    "lem-trf-smooth-geometric-stalk-algebra",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuotientBaseChangeAffineModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientBaseChangeAffineModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.quotient_base_change_affine_model",
+  "statement": "theorem quotient_base_change_affine_model {X : Scheme.{u}} (A : CommRingCat.{u})\n    (p : X ⟶ Spec A) (I : Ideal A) (D : CommRingCat.{u}) (j : Spec D ⟶ X) :\n    ∃ e : pullback (pullback.fst p (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) j ≅\n        Spec (.of (D ⧸ Ideal.map (Spec.preimage (j ≫ p)).hom I)),\n      e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)) = pullback.snd _ j",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T105332-L-1160430",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T105332-L-1160430",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

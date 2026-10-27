@@ -1,0 +1,285 @@
+{
+ "id": "lem-trf-small-sheaf-coproduct-labels",
+ "kind": "statement",
+ "title": "Small sheaf coproducts: local labels, monicity and the empty-cover criterion",
+ "statement": "Let $\\mathcal D$ be a site [def-weil-pbc-sites-and-cohomology], small in a universe containing its objects and morphisms [def-weil-size-convention], and let $I$ be a small set. Let $(G_i)_{i\\in I}$ be sheaves of sets on $\\mathcal D$. Define the presheaf $P$ by $P(V)=\\coprod_{i\\in I}G_i(V)=\\{(i,s):i\\in I,\\ s\\in G_i(V)\\}$, with label-preserving restriction maps. There exists a sheafification $\\eta:P\\to C=P^\\#$ [def-weil-pbc-sheafification]. With $c_i(s)=\\eta(i,s)$, the cofan $(C,(c_i)_i)$ is a coproduct in sheaves [def-weil-pbc-category-colimit]: for every sheaf $H$, precomposition induces a bijection $\\operatorname{Hom}(C,H)\\simeq\\prod_{i\\in I}\\operatorname{Hom}(G_i,H)$. Each $c_i$ is injective on every section set and is a monomorphism, meaning that postcomposition with $c_i$ cancels between morphisms of sheaves. Every $a\\in C(V)$ has a covering $\\{V_\\alpha\\to V\\}_\\alpha$ and labelled sections $(i_\\alpha,s_\\alpha)\\in P(V_\\alpha)$ whose images are $a|_{V_\\alpha}$. If $i\\ne j$ and $s\\in G_i(V)$, $t\\in G_j(V)$ satisfy $c_i(s)=c_j(t)$, then the empty family is a covering of $V$. For every sheaf $H$, $H(V)$ is a singleton whenever the empty family covers $V$. If $I=\\varnothing$, then $C(V)$ is a singleton when the empty family covers $V$ and is empty otherwise.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00WI (lemma-colimit-sheaves), specialized to small discrete diagrams; Tag 00WK (lemma-sections-sheafification) and Theorem 00WB (theorem-plus), for local labels and local equality. Agent formulation of the labelled-sum monicity and empty-cover consequences."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Construct P as the labelled sigma presheaf. Put K = J.toGrothendieck and C = K.sheafify P, the concrete double-plus sheafification. Mathlib GrothendieckTopology.sheafify_isSheaf proves that C is a sheaf; its toSheafify_sheafifyLift and sheafify_hom_ext prove the required factorization bijection. These APIs work in Type(max u v w), by the usual smallness instances for multiequalizers and covering colimits. Set eta = K.toSheafify P and c_i equal to the label-i inclusion followed by eta.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Theorem 00WB (theorem-plus), part (4), and Proposition 00WH (proposition-sheafification-adjoint)"
+   }
+  },
+  {
+   "text": "For a family of sheaf morphisms $f_i:G_i\\to H$, define a presheaf morphism $f:P\\to H$ by $f_V(i,s)=(f_i)_V(s)$. Naturality is exactly the naturality of the $f_i$, since restrictions preserve labels. Every presheaf map out of $P$ has this form uniquely, by evaluation on each pair $(i,s)$. The universal property of $\\eta$ now extends $f$ uniquely to $\\bar f:C\\to H$ with $\\bar f c_i=f_i$. Conversely, these equations determine $f=\\bar f\\eta$ on every pair and then determine $\\bar f$. Thus the specified precomposition map is a bijection and the cofan is a coproduct. This argument also applies when $I$ is empty.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WI (lemma-colimit-sheaves), discrete-diagram case; direct verification of the universal property"
+   }
+  },
+  {
+   "text": "First prove that every K-covering sieve contains an actual J-covering presieve, by induction on Precoverage.Saturate. Generating covers and the maximal sieve are immediate. In the pullback case index a covering presieve by its actual arrows (a type in max u v); use the pullbacks supplied by IsSiteForCoverings and downward closure of the sieve. In the transitive case choose one refining cover for each distinct covering arrow and use the bind axiom. Next prove local injectivity and local surjectivity of toPlus in the larger value universe from the concrete plus representative and equality APIs, exactly as in Mathlib LocallyInjective and LocallySurjective. Compose these properties for the two plus units. The covering image sieve of eta, refined to an actual J-presieve by the preceding induction, supplies the local labelled representatives.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK (lemma-sections-sheafification), local representatives"
+   }
+  },
+  {
+   "text": "For two sections of G_i with equal images, local injectivity of eta gives a covering equalizer sieve. The covering-refinement helper supplies an actual J-cover. Equality of pairs with fixed first coordinate implies equality of their second coordinates. Apply the separatedness of G_i for this J-cover to conclude equality of the sections. Mathlib Sheaf.mono_of_injective then gives Mono c_i by sectionwise cancellation.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Theorem 00WB (theorem-plus), local equality; Definition 00VR (definition-sheaf), separatedness"
+   }
+  },
+  {
+   "text": "For distinct labels i and j with equal images, local injectivity of eta and covering refinement give a J-covering presieve R on which the corresponding pairs agree. Applying Sigma.fst on every arrow would give i=j. Thus R has no arrows and equals the bottom presieve, which therefore belongs to J V.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Theorem 00WB (theorem-plus), local equality; Definition 00VH (definition-site) and the project reindexing convention"
+   }
+  },
+  {
+   "text": "If the bottom presieve covers V, its generated bottom sieve belongs to K V. Mathlib Sheaf.isTerminalOfBotCover then makes H(V) a terminal type. Types.isTerminalEquivUnique supplies its element and uniqueness, yielding both Nonempty and Subsingleton.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definition 00VR (definition-sheaf), equalizer for the empty covering"
+   }
+  },
+  {
+   "text": "If $I=\\varnothing$, every $P(W)$ is empty. If $a\\in C(V)$ existed, step 3 would give a covering $(W_\\beta\\to V)_{\\beta\\in B}$ together with $p_\\beta\\in P(W_\\beta)$. There can be no $\\beta$, since its $p_\\beta$ would belong to the empty set. Hence $B$ is empty and the same reindexing convention shows that the empty family covers $V$. Consequently $C(V)$ is empty whenever the empty family does not cover $V$; when it does cover $V$, step 6 makes $C(V)$ a singleton. These are both cases of the final assertion.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WK (lemma-sections-sheafification), empty presheaf; Definition 00VR (definition-sheaf)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00WB, 00WH, 00WI and 00WK; U3 implementation using Mathlib concrete double-plus sheafification and its universal-property API. Covering refinement is an induction on saturation under the stated covering-presieve axioms. The private larger-universe local-plus proofs generalize the corresponding Mathlib proofs without changing any public statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafify.*(coprod|sigma)|coprod.*sheafify|finitary_extensive|sigma.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-22T05:59:52Z\", \"tool\": \"grep\", \"query\": \"sheafify.*(coprod|sigma)|coprod.*sheafify|finitary_extensive|sigma.*[Ss]heaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LeftExact.lean\"], \"digest\": \"b0528327a8b6f545\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this full statement: finite extensivity, general sheafification and local bijectivity are available, but do not by one-line specialization give the arbitrary indexed labelled-sum sectionwise inclusions and the empty-cover criterion; read LeftExact.lean:313-330 and LocallyBijective.lean:125-137."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coproduct of sheaves of sets has monic summand inclusions and sections locally lift to a labelled summand",
+   "results": "{\"t\": \"2026-10-22T05:59:52Z\", \"tool\": \"leansearch\", \"query\": \"The coproduct of sheaves of sets has monic summand inclusions and sections locally lift to a labelled summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MonoCoprod.mono_ι\", \"AlgebraicGeometry.LocallyRingedSpace.coproduct\", \"CategoryTheory.Limits.MonoCoprod.monoCoprodType\", \"CategoryTheory.Limits.MonoCoprod\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"AlgebraicGeometry.instMonoCoprodScheme\", \"CategoryTheory.Limits.Sigma.ι\", \"CategoryTheory.instMonoCoprodOfFinitaryExtensive\"], \"digest\": \"8b164bbd36103ebb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this full statement: finite extensivity, general sheafification and local bijectivity are available, but do not by one-line specialization give the arbitrary indexed labelled-sum sectionwise inclusions and the empty-cover criterion; read LeftExact.lean:313-330 and LocallyBijective.lean:125-137."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfTypes\", \"coprod\"",
+   "results": "{\"t\": \"2026-10-22T05:59:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfTypes\\\", \\\"coprod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this full statement: finite extensivity, general sheafification and local bijectivity are available, but do not by one-line specialization give the arbitrary indexed labelled-sum sectionwise inclusions and the empty-cover criterion; read LeftExact.lean:313-330 and LocallyBijective.lean:125-137."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the pointwise disjoint union of a small family of set sheaves is their coproduct, with injective inclusions and locally labelled sections",
+   "results": "{\"t\": \"2026-10-22T06:00:02Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of the pointwise disjoint union of a small family of set sheaves is their coproduct, with injective inclusions and locally labelled sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.freeYoneda\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"SheafOfModules.isColimitFreeCofan\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"CategoryTheory.typesGlue\", \"CategoryTheory.typesGlue_eval\", \"CategoryTheory.Sheaf.isSeparator\", \"SheafOfModules.freeCofan_inj\"], \"digest\": \"d35786f8566cd11b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this full statement: finite extensivity, general sheafification and local bijectivity are available, but do not by one-line specialization give the arbitrary indexed labelled-sum sectionwise inclusions and the empty-cover criterion; read LeftExact.lean:313-330 and LocallyBijective.lean:125-137."
+  },
+  {
+   "tool": "grep",
+   "query": "presheafToSheaf.*(Colimit|colimit)|isLocally(Surjective|Injective).*sheaf|sheafify.*(mono|Mono)",
+   "results": "{\"t\": \"2026-10-22T06:01:12Z\", \"tool\": \"grep\", \"query\": \"presheafToSheaf.*(Colimit|colimit)|isLocally(Surjective|Injective).*sheaf|sheafify.*(mono|Mono)\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/LocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\", \"Mathlib/CategoryTheory/Sites/LocallySurjective.lean\"], \"digest\": \"b1481391b7af43e0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this full statement: finite extensivity, general sheafification and local bijectivity are available, but do not by one-line specialization give the arbitrary indexed labelled-sum sectionwise inclusions and the empty-cover criterion; read LeftExact.lean:313-330 and LocallyBijective.lean:125-137."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a small site the sheafification of an indexed disjoint union of sheaves is a coproduct; different labels can agree only on an object with the empty covering",
+   "results": "{\"t\": \"2026-10-22T06:01:13Z\", \"tool\": \"leansearch\", \"query\": \"On a small site the sheafification of an indexed disjoint union of sheaves is a coproduct; different labels can agree only on an object with the empty covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"AlgebraicGeometry.LocallyRingedSpace.coproduct\", \"CategoryTheory.SheafOfTypes.finitary_extensive\", \"CategoryTheory.GrothendieckTopology.sheafification\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"CategoryTheory.Sheaf.isSeparator\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types\"], \"digest\": \"e32fc589dfc44498\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for this full statement: finite extensivity, general sheafification and local bijectivity are available, but do not by one-line specialization give the arbitrary indexed labelled-sum sectionwise inclusions and the empty-cover criterion; read LeftExact.lean:313-330 and LocallyBijective.lean:125-137."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of a disjoint union of sheaves of sets has monic inclusions and locally labelled sections, and distinct labels agree only when the empty family covers",
+   "results": "{\"t\": \"2026-10-22T06:58:18Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of a disjoint union of sheaves of sets has monic inclusions and locally labelled sections, and distinct labels agree only when the empty family covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isSeparator\", \"CategoryTheory.typesGlue\", \"TopCat.Sheaf.existsUnique_gluing\", \"CategoryTheory.Presheaf.isLocallyInjective_toPlus\", \"CategoryTheory.GrothendieckTopology.Plus.sep\", \"TopCat.Presheaf.IsSheaf.isSheafUniqueGluing\", \"TopCat.Sheaf.existsUnique_gluing'\", \"CategoryTheory.GrothendieckTopology.Plus.meqOfSep\"], \"digest\": \"7424d1816bfbb7f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: isColimitSheafifyCocone gives the colimit clause; isLocallyInjective_toSheafify and isLocallySurjective_toSheafify give local equality and representatives; isTerminalOfBotCover gives singleton values, but the labelled-sum monicity and converse empty-cover assertions require the arguments of this split. Read Sites/Limits.lean:189-219, LocallyInjective.lean:163-193, LocallySurjective.lean:291-306, Sheaf.lean:467-473, LeftExact.lean:319-330."
+  },
+  {
+   "tool": "grep",
+   "query": "coprod|MonoCoprod|isLocallyInjective_toSheafify|isLocallySurjective_toSheafify",
+   "results": "{\"t\": \"2026-10-22T06:58:42Z\", \"tool\": \"grep\", \"query\": \"coprod|MonoCoprod|isLocallyInjective_toSheafify|isLocallySurjective_toSheafify\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/Subcanonical.lean\", \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\", \"Mathlib/CategoryTheory/Sites/CoproductSheafCondition.lean\"], \"digest\": \"c6ba48857b38a6b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: isColimitSheafifyCocone gives the colimit clause; isLocallyInjective_toSheafify and isLocallySurjective_toSheafify give local equality and representatives; isTerminalOfBotCover gives singleton values, but the labelled-sum monicity and converse empty-cover assertions require the arguments of this split. Read Sites/Limits.lean:189-219, LocallyInjective.lean:163-193, LocallySurjective.lean:291-306, Sheaf.lean:467-473, LeftExact.lean:319-330."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coproduct of sheaves of sets is the sheafification of the pointwise disjoint union, with sections locally from a summand and monomorphic inclusions",
+   "results": "{\"t\": \"2026-10-22T06:58:42Z\", \"tool\": \"leansearch\", \"query\": \"A coproduct of sheaves of sets is the sheafification of the pointwise disjoint union, with sections locally from a summand and monomorphic inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.MonoCoprod.monoCoprodType\", \"TopCat.binaryCofan\", \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"AlgebraicGeometry.LocallyRingedSpace.coproduct\", \"AlgebraicGeometry.instMonoCoprodScheme\", \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"CategoryTheory.Limits.Types.isCoprodOfMono\", \"CategoryTheory.Limits.CoproductsOfShapeDisjoint.coproductDisjoint\"], \"digest\": \"bd00ae64d63ea7f9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: isColimitSheafifyCocone gives the colimit clause; isLocallyInjective_toSheafify and isLocallySurjective_toSheafify give local equality and representatives; isTerminalOfBotCover gives singleton values, but the labelled-sum monicity and converse empty-cover assertions require the arguments of this split. Read Sites/Limits.lean:189-219, LocallyInjective.lean:163-193, LocallySurjective.lean:291-306, Sheaf.lean:467-473, LeftExact.lean:319-330."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfTypes\", \"coprod\"",
+   "results": "{\"t\": \"2026-10-22T06:58:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfTypes\\\", \\\"coprod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: isColimitSheafifyCocone gives the colimit clause; isLocallyInjective_toSheafify and isLocallySurjective_toSheafify give local equality and representatives; isTerminalOfBotCover gives singleton values, but the labelled-sum monicity and converse empty-cover assertions require the arguments of this split. Read Sites/Limits.lean:189-219, LocallyInjective.lean:163-193, LocallySurjective.lean:291-306, Sheaf.lean:467-473, LeftExact.lean:319-330."
+  },
+  {
+   "tool": "grep",
+   "query": "initial.*(obj|empty)|empty.*(cover|sheaf)|coproduct.*(mono|Mono)",
+   "results": "{\"t\": \"2026-10-22T07:01:57Z\", \"tool\": \"grep\", \"query\": \"initial.*(obj|empty)|empty.*(cover|sheaf)|coproduct.*(mono|Mono)\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Point/Presheaf.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"Mathlib/CategoryTheory/Sites/Sheaf.lean\"], \"digest\": \"531c374d9a95dede\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: isColimitSheafifyCocone gives the colimit clause; isLocallyInjective_toSheafify and isLocallySurjective_toSheafify give local equality and representatives; isTerminalOfBotCover gives singleton values, but the labelled-sum monicity and converse empty-cover assertions require the arguments of this split. Read Sites/Limits.lean:189-219, LocallyInjective.lean:163-193, LocallySurjective.lean:291-306, Sheaf.lean:467-473, LeftExact.lean:319-330."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On any small site the empty coproduct sheaf is singleton exactly on objects covered by the empty family; distinct summand labels in a sheaf coproduct coincide only on such objects",
+   "results": "{\"t\": \"2026-10-22T07:01:57Z\", \"tool\": \"leansearch\", \"query\": \"On any small site the empty coproduct sheaf is singleton exactly on objects covered by the empty family; distinct summand labels in a sheaf coproduct coincide only on such objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"CategoryTheory.Sheaf.isTerminalOfBotCover\", \"CategoryTheory.Sheaf.isSeparator\", \"TopCat.Sheaf.isTerminalOfEqEmpty\", \"AlgebraicGeometry.Scheme.empty\", \"CategoryTheory.Limits.CoproductDisjoint.mk\", \"TopCat.Presheaf.isSheaf_on_punit_iff_isTerminal\", \"TopCat.Sheaf.isTerminalOfEmpty\"], \"digest\": \"a77b4f3171cd1ada\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: isColimitSheafifyCocone gives the colimit clause; isLocallyInjective_toSheafify and isLocallySurjective_toSheafify give local equality and representatives; isTerminalOfBotCover gives singleton values, but the labelled-sum monicity and converse empty-cover assertions require the arguments of this split. Read Sites/Limits.lean:189-219, LocallyInjective.lean:163-193, LocallySurjective.lean:291-306, Sheaf.lean:467-473, LeftExact.lean:319-330."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fppf-sheaf-coproduct-partition",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the Tag 02WQ coproduct in the etale-relation quotient used in polarized scheme descent: the scheme-test decomposition needed to fill the omitted diagonal verification and to test the coproduct atlas. Historical ancestry through lem-trf-local-term-locality is retained. Re-split of the supporting fppf-partition argument: old proof steps 1, 2 and 9 (coproduct, labels and empty index).",
+   "via": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
+    "lem-trf-algebraic-space-coproduct",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-small-sheaf-coproduct-labels",
+  "worker": "stage1",
+  "summary": "Seven steps prove all clauses using existing general sheafification and local-sections nodes. The coproduct universal property, sectionwise injectivity, categorical cancellation, distinct-label empty-cover criterion and empty-index computation are written explicitly. No new nodes; statement unchanged. Searched project declarations and the whole blueprint; no full attachment or Mathlib match.",
+  "blueprint": "Auxiliary small-site coproduct input along the recorded ancestry from lem-trf-local-term-locality: supports the fppf partition lemma used in the etale-relation quotient and polarized scheme descent branch. Steps realize the predecessor fppf-partition proof steps 1, 2 and 9 (coproduct, labels, empty index). The main-20261015 local-term blueprint update concerns the geometric top-level route; this generic sheaf input does not replace it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-plus-theorem",
+    "why": "Generic small-site set-sheafification existence and universal property; this unit has no family-site theorem supplying it."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representatives and local equality for sheafification on a covering-family site; needed for labels and the empty-cover criterion, with no replacement of the geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-07b465180",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-07b465180 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the mathematics is correct. The delivery is one commit on de5ca6d with two files: the item and the report. It adds no new nodes and leaves the statement and stmt_deps unchanged; proof_deps equals the union of the step uses. Live still has the item unsplit and there is no repair note, so it is not superseded. There is no SGA. Sources checked in tags/tags and sites.tex: 00WI lemma-colimit-sheaves (lines 2114-2131) and 00WK lemma-sections-sheafification (lines 2156-2175); the cited nodes carry 00WB/00WH. Step by step: step 1 uses clauses (2) and (3) of the plus theorem (P^{++} is a sheaf with the universal property), not the bare definition. Step 2 proves the discrete-colimit Hom bijection by hand, including I empty. Step 3 gets the local labels from the sections-local node. Step 4 gets sectionwise injectivity from local equality plus the G_i equalizer condition, then monicity by evaluating at every section. Step 5: for i != j, local equality forces the covering's index set B to be empty, and the explicit bijective-reindexing convention of def-weil-pbc-sites-and-cohomology turns that into the empty family covering V. Step 6: over an empty covering both products are singletons, so H(V) is a singleton. Step 7: for I empty every P(W) is empty, so any section forces an empty covering; the converse is step 6. Edge cases tested: I empty with and without empty covers, a singleton I, open covers of a topological space, and infinite I. Duplicate search (00WI, coproducts of sheaves, empty family, labelled sum): finite-extensivity and finite-subcoproducts cover finite or topological-space cases only, and nothing else states the item. Accepted tool_uses: lem-weil-pbc-sheafification-plus-theorem and lem-weil-pbc-site-sheafification-sections-local (unit sk-thm-p1), both generic site-sheafification black boxes that replace no step of sk-i-curve-zero. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.SmallSheafCoproductLabels",
+  "declaration": "CategoryTheory.small_sheaf_coproduct_labels",
+  "declarations": [
+   "CategoryTheory.sheafCoproductLabelPresheaf",
+   "CategoryTheory.small_sheaf_coproduct_labels"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/SmallSheafCoproductLabels.lean",
+  "statement": "theorem small_sheaf_coproduct_labels {D : Type u} [Category.{v} D] (J : Precoverage D) (hJ : J.IsSiteForCoverings) {I : Type w} (G : I → Sheaf J.toGrothendieck (Type (max u v w))) : ∃ (C : Sheaf J.toGrothendieck (Type (max u v w))) (eta : sheafCoproductLabelPresheaf (fun i ↦ (G i).obj) ⟶ C.obj) (c : ∀ i : I, G i ⟶ C), (∀ (i : I) (V : D) (s : (G i).obj.obj (op V)), (c i).hom.app (op V) s = eta.app (op V) ⟨i, s⟩) ∧ (∀ H : Sheaf J.toGrothendieck (Type (max u v w)), Function.Bijective (fun f : C ⟶ H ↦ eta ≫ f.hom)) ∧ Nonempty (IsColimit (Cofan.mk C c)) ∧ (∀ H : Sheaf J.toGrothendieck (Type (max u v w)), Function.Bijective (fun f : C ⟶ H ↦ fun i : I ↦ c i ≫ f)) ∧ (∀ (i : I) (V : D), Function.Injective ((c i).hom.app (op V))) ∧ (∀ i : I, Mono (c i)) ∧ (∀ (V : D) (a : C.obj.obj (op V)), ∃ S : Presieve V, S ∈ J V ∧ ∀ (W : D) (f : W ⟶ V), S f → ∃ (i : I) (s : (G i).obj.obj (op W)), eta.app (op W) ⟨i, s⟩ = C.obj.map f.op a) ∧ (∀ (V : D) (i j : I) (s : (G i).obj.obj (op V)) (t : (G j).obj.obj (op V)), i ≠ j → (c i).hom.app (op V) s = (c j).hom.app (op V) t → (⊥ : Presieve V) ∈ J V) ∧ (∀ (H : Sheaf J.toGrothendieck (Type (max u v w))) (V : D), (⊥ : Presieve V) ∈ J V → Nonempty (H.obj.obj (op V)) ∧ Subsingleton (H.obj.obj (op V))) ∧ (IsEmpty I → ∀ V : D, ((⊥ : Presieve V) ∈ J V → Nonempty (C.obj.obj (op V)) ∧ Subsingleton (C.obj.obj (op V))) ∧ ((⊥ : Presieve V) ∉ J V → IsEmpty (C.obj.obj (op V))))",
+  "branch": "sheaf-dag",
+  "by": "Q63",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper constructs the pointwise labelled disjoint-sum presheaf. The theorem existentially supplies its universal sheafification and inclusions, with all local-label, monicity and empty-cover clauses. Uses the recorded IsSiteForCoverings axioms without stronger precoverage assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c03c0b64",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Node copy matches live except lean; lean.statement matches the file verbatim; stmt-dep imports public, proof-dep imports plain and matching the live node records. Every clause checked: the helper builds the labelled Σ presheaf from real data (no Mathlib/project duplicate); sheafification existence and universal property are conclusions; c_i are pinned to eta; IsColimit plus explicit Hom bijection; sectionwise injective and Mono. Local labels on an actual J-presieve hold because, under IsSiteForCoverings (isos, bind, covering pullbacks over Type(max u v)), sieves containing a J-presieve already form J.toGrothendieck. Distinct labels imply bottom presieve in J V; empty cover gives singleton H(V); empty I gives both directions. No extra hypotheses, universes independent, sorry only, docstrings with source and blueprint. No recompile (unchanged; worker scompile clean). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261023T103322-L-3097975",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

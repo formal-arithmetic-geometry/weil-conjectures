@@ -1,0 +1,269 @@
+{
+ "id": "lem-trf-pointed-etale-polynomial-solution-globalization",
+ "kind": "statement",
+ "title": "Globalization of a pointed etale polynomial solution",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak p\\subset A$ a prime ideal, and $R=A_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. Let $E$ be a commutative $R$-algebra with $\\operatorname{Spec}E\\to\\operatorname{Spec}R$ etale [def-weil-etale-morphism], and let $\\mathfrak q\\subset E$ be a prime contracting to the maximal ideal $\\mathfrak pR$. Let $n,m\\geq0$, let $f_1,\\ldots,f_m\\in A[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring], and let $c_1,\\ldots,c_n\\in E$ satisfy $f_j(c)=0$ for every $j$, with coefficients evaluated through $A\\to R\\to E$. There exist a commutative etale $A$-algebra $A'$, an $A$-algebra map $j:A'\\to E$, and elements $b_1,\\ldots,b_n\\in A'$ satisfying $f_j(b)=0$ for every $j$ and $j(b_i)=c_i$ for every $i$. For $\\mathfrak p'=j^{-1}(\\mathfrak q)$ one has $\\mathfrak p'\\cap A=\\mathfrak p$, and the induced local homomorphism\n$$\\theta:A'_{\\mathfrak p'}\\longrightarrow E_{\\mathfrak q}$$\nis an isomorphism of $R$-algebras carrying $b_i/1$ to $c_i/1$. In particular the induced residue-field isomorphism $\\kappa(\\mathfrak p')\\to\\kappa(\\mathfrak q)$ commutes with the structural maps from $\\kappa(\\mathfrak p)$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 0CAR, lemma-approximation-property-variant, proof after the local approximation: descend the etale algebra, lift the finite solution after principal localization, and identify the local rings."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [new-lem-sbc-prime-localization-etale-algebra-model] to the given etale $A_{\\mathfrak p}$-algebra $E$. It gives an etale $A$-algebra $C$, an $A$-algebra map $i:C\\to E$, and a multiplicative subset $M\\subset C$ making $E$ an $M$-localization of $C$ through $i$. This uses precisely the supplied etaleness; neither Noetherianity nor a G-ring assumption is needed for this globalization.",
+   "uses": [
+    "new-lem-sbc-prime-localization-etale-algebra-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0CAR (lemma-approximation-property-variant), proof: globalization paragraph; expanded using algebra.tex Tags 00U2 (10), 00CO, 00CP and 00E3."
+   }
+  },
+  {
+   "text": "By the fraction criterion in [lem-weil-pbc-localization-of-localization], choose $u_i\\in C$, $v_i\\in M$ with $c_i=i(u_i)i(v_i)^{-1}$. Put $d=\\prod_{i=1}^n v_i\\in M$, $D=C[1/d]$, and $x_i=u_i(\\prod_{k\\ne i}v_k)/d\\in D$. The universal property [lem-weil-pbc-ring-localization-universal-property] gives $i_D:D\\to E$ extending $i$, since $i(d)$ is a unit; its formula gives $i_D(x_i)=c_i$. Moreover powers of $d$ lie in $M$, so clause (2) of [lem-weil-pbc-localization-of-localization], with the two localizations $C\\to D$ and $C\\to E$, makes $i_D$ a localization at the image $M_D$ of $M$ in $D$. For $n=0$, take $d=1$ and no $x_i$.",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0CAR (lemma-approximation-property-variant), proof: globalization paragraph; expanded using algebra.tex Tags 00U2 (10), 00CO, 00CP and 00E3."
+   }
+  },
+  {
+   "text": "Write $e_j=f_j(x_1,\\ldots,x_n)\\in D$. As $i_D$ is an $A$-algebra map, expanding each polynomial as a finite sum of coefficient times monomial gives $i_D(e_j)=f_j(c)=0$. The kernel criterion for the $M_D$-localization from [lem-weil-pbc-localization-of-localization] supplies $w_j\\in M_D$ with $w_je_j=0$ in $D$. Let $t=\\prod_{j=1}^m w_j\\in M_D$. For each $j$, $te_j=(\\prod_{h\\ne j}w_h)(w_je_j)=0$. Set $A'=D[1/t]$ and let $b_i$ be the image of $x_i$. Since $t$ becomes a unit, $f_j(b)=e_j/1=0$. If $m=0$, take $t=1$.",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0CAR (lemma-approximation-property-variant), proof: globalization paragraph; expanded using algebra.tex Tags 00U2 (10), 00CO, 00CP and 00E3."
+   }
+  },
+  {
+   "text": "Since $i_D(t)$ is a unit, [lem-weil-pbc-ring-localization-universal-property] extends $i_D$ to an $A$-algebra map $j:A'\\to E$, and $j(b_i)=i_D(x_i)=c_i$. Clause (2) of [lem-weil-pbc-localization-of-localization], now applied to $D\\to D[1/t]$ and the $M_D$-localization $D\\to E$, shows that $j$ is a localization at the image $M'$ of $M_D$ in $A'$. Finally apply clause (2) of [lem-weil-pbc-etale-algebra-finite-presentation-localization] twice: $C$ is etale over $A$, hence $D=C[1/d]$ is etale over $A$, and so is $A'=D[1/t]$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0CAR (lemma-approximation-property-variant), proof: globalization paragraph; expanded using algebra.tex Tags 00U2 (10), 00CO, 00CP and 00E3."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-prime-residue-field-iso] to the localization $j:A'\\to E$ at $M'$ and the specified prime $\\mathfrak q\\subset E$. It makes $\\mathfrak p'=j^{-1}(\\mathfrak q)$ prime and gives the canonical isomorphism $\\theta:A'_{\\mathfrak p'}\\to E_{\\mathfrak q}$, $a/s\\mapsto j(a)/j(s)$, together with its induced residue-field isomorphism. The composite $A\\to A'\\to E$ is the original structural map, and the contraction of $\\mathfrak q$ to $A_{\\mathfrak p}$ is $\\mathfrak pA_{\\mathfrak p}$; its contraction to $A$ is $\\mathfrak p$ by [def-weil-pbc-localization-at-prime] and its fraction description. Thus $\\mathfrak p'\\cap A=\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0CAR (lemma-approximation-property-variant), proof: globalization paragraph; expanded using algebra.tex Tags 00U2 (10), 00CO, 00CP and 00E3."
+   }
+  },
+  {
+   "text": "Every $s\\in A\\setminus\\mathfrak p$ maps outside $\\mathfrak p'$ and therefore to a unit of $A'_{\\mathfrak p'}$. The universal property [lem-weil-pbc-ring-localization-universal-property] gives its $R=A_{\\mathfrak p}$-algebra structure. Both $R\\to E_{\\mathfrak q}$ maps, one through $\\theta$ and the other through $E$, extend the same map from $A$; uniqueness makes them equal. Hence $\\theta$ is an $R$-algebra isomorphism, and its formula gives $\\theta(b_i/1)=c_i/1$. Passing to residue fields gives compatible maps from $R$ which kill $\\mathfrak pR$, and hence compatible maps from $R/\\mathfrak pR=\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime]. This proves the final compatibility without choosing an unrelated residue-field isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 0CAR (lemma-approximation-property-variant), proof: globalization paragraph; expanded using algebra.tex Tags 00U2 (10), 00CO, 00CP and 00E3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-lem-sbc-prime-localization-etale-algebra-model",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 0CAR (lemma-approximation-property-variant), last paragraph of proof; explicit finite fraction and annihilator argument using the existing unpointed model and localization nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite tuple solving polynomial equations in an etale algebra over localization at a prime descends to a global etale algebra with the same pointed local ring",
+   "results": "{\"t\": \"2026-10-22T06:22:39Z\", \"tool\": \"leanfinder\", \"query\": \"A finite tuple solving polynomial equations in an etale algebra over localization at a prime descends to a global etale algebra with the same pointed local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"StandardEtalePresentation\", \"Algebra.IsEtaleAt\"], \"digest\": \"ca86a98739fb9678\"} No match: principal localization stability and the open etale locus concern a supplied finite-presentation algebra, and faithfully-flat descent concerns a different base-change problem. None spreads the given algebra and finite solution from a prime localization while preserving its pointed local ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(etale|IsEtale).*(descen|localiz)|descen.*(etale|IsEtale)",
+   "results": "{\"t\": \"2026-10-22T06:23:00Z\", \"tool\": \"grep\", \"query\": \"(etale|IsEtale).*(descen|localiz)|descen.*(etale|IsEtale)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/RingHom/Etale.lean\", \"Mathlib/RingTheory/RingHom/Etale.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\"], \"digest\": \"9e14a02ef0391171\"} No match: principal localization stability and the open etale locus concern a supplied finite-presentation algebra, and faithfully-flat descent concerns a different base-change problem. None spreads the given algebra and finite solution from a prime localization while preserving its pointed local ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial solutions in an etale algebra over a prime localization spread to an etale algebra over the original ring preserving the local ring at a chosen prime",
+   "results": "{\"t\": \"2026-10-22T06:23:01Z\", \"tool\": \"leansearch\", \"query\": \"Polynomial solutions in an etale algebra over a prime localization spread to an etale algebra over the original ring preserving the local ring at a chosen prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.localization_map\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_isLocalization\"], \"digest\": \"ce097469813c0062\"} No match: principal localization stability and the open etale locus concern a supplied finite-presentation algebra, and faithfully-flat descent concerns a different base-change problem. None spreads the given algebra and finite solution from a prime localization while preserving its pointed local ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsLocalization.AtPrime",
+   "results": "{\"t\": \"2026-10-22T06:23:01Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsLocalization.AtPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No match: principal localization stability and the open etale locus concern a supplied finite-presentation algebra, and faithfully-flat descent concerns a different base-change problem. None spreads the given algebra and finite solution from a prime localization while preserving its pointed local ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread finitely many elements and polynomial relations from an etale algebra over A localized at a prime to an etale A algebra inducing an isomorphism of local rings",
+   "results": "{\"t\": \"2026-10-22T06:25:21Z\", \"tool\": \"leanfinder\", \"query\": \"Spread finitely many elements and polynomial relations from an etale algebra over A localized at a prime to an etale A algebra inducing an isomorphism of local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"807fa52076615871\"} No match: principal localization stability and the open etale locus concern a supplied finite-presentation algebra, and faithfully-flat descent concerns a different base-change problem. None spreads the given algebra and finite solution from a prime localization while preserving its pointed local ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale algebra over a localization S inverse A descends to an etale A algebra whose localization is the given algebra",
+   "results": "{\"t\": \"2026-10-23T11:33:54Z\", \"tool\": \"leanfinder\", \"query\": \"An etale algebra over a localization S inverse A descends to an etale A algebra whose localization is the given algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.FormallyEtale.localization_base\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"3dc63123516f880e\"} Read the hits and Mathlib Etale/Locus.lean:103, Etale/QuasiFinite.lean:379, Smooth/NoetherianDescent.lean:294, and RingHom/Etale.lean:73-76. These respectively shrink a supplied finitely presented algebra, split a finite-type quasifinite fibre, descend to a finitely generated subalgebra, or test etaleness locally. None gives this finite-solution globalization with its specified pointed local-ring map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsLocalization",
+   "results": "{\"t\": \"2026-10-23T11:34:46Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsLocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the hits and Mathlib Etale/Locus.lean:103, Etale/QuasiFinite.lean:379, Smooth/NoetherianDescent.lean:294, and RingHom/Etale.lean:73-76. These respectively shrink a supplied finitely presented algebra, split a finite-type quasifinite fibre, descend to a finitely generated subalgebra, or test etaleness locally. None gives this finite-solution globalization with its specified pointed local-ring map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebras over a localization descend to etale algebras over the original ring",
+   "results": "{\"t\": \"2026-10-23T11:34:46Z\", \"tool\": \"leansearch\", \"query\": \"Etale algebras over a localization descend to etale algebras over the original ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.of_isLocalization_Away\", \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.Etale\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"27870765891f7832\"} Read the hits and Mathlib Etale/Locus.lean:103, Etale/QuasiFinite.lean:379, Smooth/NoetherianDescent.lean:294, and RingHom/Etale.lean:73-76. These respectively shrink a supplied finitely presented algebra, split a finite-type quasifinite fibre, descend to a finitely generated subalgebra, or test etaleness locally. None gives this finite-solution globalization with its specified pointed local-ring map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ee]tale|[Ee]tale.*(localiz|descen)|localiz.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T11:34:46Z\", \"tool\": \"grep\", \"query\": \"exists.*[Ee]tale|[Ee]tale.*(localiz|descen)|localiz.*[Ee]tale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/TotallySplit.lean\", \"Mathlib/RingTheory/TotallySplit.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"34e59bea38837d5b\"} Read the hits and Mathlib Etale/Locus.lean:103, Etale/QuasiFinite.lean:379, Smooth/NoetherianDescent.lean:294, and RingHom/Etale.lean:73-76. These respectively shrink a supplied finitely presented algebra, split a finite-type quasifinite fibre, descend to a finitely generated subalgebra, or test etaleness locally. None gives this finite-solution globalization with its specified pointed local-ring map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite solution of polynomial equations in an etale algebra over a prime localization lifts to an etale algebra over the original ring with isomorphic pointed local rings",
+   "results": "{\"t\": \"2026-10-23T11:39:19Z\", \"tool\": \"leanfinder\", \"query\": \"A finite solution of polynomial equations in an etale algebra over a prime localization lifts to an etale algebra over the original ring with isomorphic pointed local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"StandardEtalePresentation\", \"Algebra.Etale.of_isLocalizationAway\", \"StandardEtalePair.lift\", \"Algebra.Etale.of_isLocalization_Away\", \"StandardEtalePair.hasMap_X\"], \"digest\": \"107b6cf047e5e6f2\"} Read the hits and Mathlib Etale/Locus.lean:103, Etale/QuasiFinite.lean:379, Smooth/NoetherianDescent.lean:294, and RingHom/Etale.lean:73-76. These respectively shrink a supplied finitely presented algebra, split a finite-type quasifinite fibre, descend to a finitely generated subalgebra, or test etaleness locally. None gives this finite-solution globalization with its specified pointed local-ring map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite polynomial solution in an etale algebra over a local ring A p spreads to an etale A algebra with the same local ring at the chosen prime",
+   "results": "{\"t\": \"2026-10-23T11:42:38Z\", \"tool\": \"leansearch\", \"query\": \"A finite polynomial solution in an etale algebra over a local ring A p spreads to an etale A algebra with the same local ring at the chosen prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.IsEtaleAt.comp\", \"Algebra.Etale.recOn\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.Etale.formallyEtale\", \"Algebra.instEtaleOfIsStandardEtale\", \"RingHom.Etale\"], \"digest\": \"02e680835f58b707\"} Read the hits and Mathlib Etale/Locus.lean:103, Etale/QuasiFinite.lean:379, Smooth/NoetherianDescent.lean:294, and RingHom/Etale.lean:73-76. These respectively shrink a supplied finitely presented algebra, split a finite-type quasifinite fibre, descend to a finitely generated subalgebra, or test etaleness locally. None gives this finite-solution globalization with its specified pointed local-ring map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(descen|spread)|exists.*(model|localization)|exists.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T11:42:39Z\", \"tool\": \"grep\", \"query\": \"polynomial.*(descen|spread)|exists.*(model|localization)|exists.*[Ee]tale\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/Locus.lean\"], \"digest\": \"de80121b983bf893\"} Read the hits and Mathlib Etale/Locus.lean:103, Etale/QuasiFinite.lean:379, Smooth/NoetherianDescent.lean:294, and RingHom/Etale.lean:73-76. These respectively shrink a supplied finitely presented algebra, split a finite-type quasifinite fibre, descend to a finitely generated subalgebra, or test etaleness locally. None gives this finite-solution globalization with its specified pointed local-ring map.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-artin-approximation-etale-local-map",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0CAU proof, affine reduction: invoke Smoothing Ring Maps, Lemma 0CAR (lemma-approximation-property-variant) for the polynomial equations in the completion. Globalizing the polynomial solution and preserving the pointed local ring (old item steps 5-8).",
+   "via": [
+    "lem-trf-artin-approximation-etale-local-map",
+    "lem-trf-local-map-completion-approximation",
+    "lem-trf-isomorphism-completion-approximation",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-pointed-etale-polynomial-solution-globalization",
+  "worker": "stage1",
+  "summary": "Preserved statement and existing searches. Reused the existing unpointed etale prime-localization model; wrote out both finite localization operations, retained E as a localization throughout, and identified the pointed local ring and residue-field maps by the existing localization comparison. No new nodes.",
+  "blueprint": "The affine approximation/globalization ingredient of lem-trf-local-term-locality reached through the recorded approximation chain; realizes exactly Tag 0CAR final proof paragraph (descend etale algebra, lift finite solution, identify local rings), without changing the contracting-correspondence unit route.",
+  "tool_uses": [
+   {
+    "node": "new-lem-sbc-prime-localization-etale-algebra-model",
+    "why": "Generic unpointed etale model for the given algebra over a prime localization; the trace-formula unit has no ring-descent replacement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic localization comparison, used for the canonical local-ring and residue-field isomorphisms; not a replacement of a trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-lem-sbc-prime-localization-etale-algebra-model",
+  "lem-weil-pbc-localization-prime-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-3fe58fdf9",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-3fe58fdf9 (reviewer sub-agent of L); spot-checked: Read Stacks 0CAR (smoothing.tex, lemma-approximation-property-variant): its final paragraph descends R''=R'⊗R_p (00U2), lifts the solution after a principal localization and identifies R''_{p''}=R'_{p'}. The item states this globalization step with the statement unchanged; G-ring and Noetherian are only needed in the parent. Six steps, all checked against the full cited statements. (1) The unpointed model node gives C étale over A, i:C→E and E as an M-localization. (2) c_i=i(u_i)i(v_i)^{-1}, d=∏v_i∈M, x_i=u_i∏_{k≠i}v_k/d, and i_D(x_i)=c_i checked by hand; localization-of-localization clause (2) applies with {d^k}⊆M, so i_D is a localization at M_D. (3) i_D is an A-algebra map (A→C→E = A→A_p→E); kernel criterion (c) gives w_j, t=∏w_j kills every e_j, so f_j(b)=0 in D[1/t] using annihilators only, with no cancellation. (4) j extends i_D because i_D(t) is a unit; clause (2) applies again; étaleness from (2) of the étale-localization node applied twice. (5) The residue-field iso node (1)-(3) is applied to j and q; p'∩A=p via pA_p∩A=p. (6) The R-structure on A'_{p'} comes from p'∩A=p; universal-property uniqueness makes θ R-linear; θ(b_i/1)=c_i/1; the residue maps factor through κ(p). Edge cases checked: n=0 or m=0 (d=1 or t=1), zero divisors, A a field, no hidden Noetherian or henselian hypothesis. The parent's use (A', b, p', θ, residue compatibility) is fully supplied. No cycle: no proof_dep closure contains the item. No duplicate: the rg searches find only the parent chain, and the model node is strictly weaker and is cited. 12 searches across three kinds; blueprint.from and same_as filled. Live and side-live still unsplit; no repair note, so the re-split rule does not apply. No SGA cited. Accepted tool_uses: new-lem-sbc-prime-localization-etale-algebra-model and lem-weil-pbc-localization-prime-residue-field-iso, both generic ring-theory black boxes with no replacement in unit sk-i-curve-zero. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PointedEtalePolynomialSolutionGlobalization",
+  "declaration": "AlgebraicGeometry.Scheme.pointedEtalePolynomialSolutionGlobalization",
+  "file": "lean/Sheaf/RingTheory/PointedEtalePolynomialSolutionGlobalization.lean",
+  "statement": "theorem pointedEtalePolynomialSolutionGlobalization (A E : CommRingCat.{u}) (p : PrimeSpectrum A) (α : Localization.AtPrime p.asIdeal →+* E) (hα : Etale (Spec.map (CommRingCat.ofHom α))) (q : PrimeSpectrum E) (hq : IsLocalRing.maximalIdeal (Localization.AtPrime p.asIdeal) = q.asIdeal.comap α) (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) A) (c : Fin n → E) (hc : ∀ k, MvPolynomial.eval₂ (α.comp (algebraMap A (Localization.AtPrime p.asIdeal))) c (f k) = 0) : ∃ (A' : CommRingCat.{u}) (a : A →+* A') (j : A' →+* E) (b : Fin n → A'), Etale (Spec.map (CommRingCat.ofHom a)) ∧ j.comp a = α.comp (algebraMap A (Localization.AtPrime p.asIdeal)) ∧ (∀ k, MvPolynomial.eval₂ a b (f k) = 0) ∧ (∀ i, j (b i) = c i) ∧ ∃ (p' : PrimeSpectrum A') (hpq : p'.asIdeal = q.asIdeal.comap j) (hp' : p.asIdeal = p'.asIdeal.comap a), ∃ θ : Localization.AtPrime p'.asIdeal ≃+* Localization.AtPrime q.asIdeal, θ.toRingHom = Localization.localRingHom p'.asIdeal q.asIdeal j hpq ∧ θ.toRingHom.comp (Localization.localRingHom p.asIdeal p'.asIdeal a hp') = (algebraMap E (Localization.AtPrime q.asIdeal)).comp α ∧ (∀ i, θ (algebraMap A' (Localization.AtPrime p'.asIdeal) (b i)) = algebraMap E (Localization.AtPrime q.asIdeal) (c i)) ∧ (IsLocalRing.ResidueField.mapEquiv θ).toRingHom.comp (Ideal.ResidueField.map p.asIdeal p'.asIdeal a hp') = Ideal.ResidueField.map p.asIdeal q.asIdeal (α.comp (algebraMap A (Localization.AtPrime p.asIdeal))) ((Localization.AtPrime.under_maximalIdeal (I := p.asIdeal)).symm.trans ((congrArg (Ideal.comap (algebraMap A (Localization.AtPrime p.asIdeal))) hq).trans (Ideal.comap_comap _ _)))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a0756ae9",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Node unchanged apart from the new lean field; matches Stacks 0CAR last proof paragraph. Every hypothesis and conclusion clause checked against the Lean: q contracts to the maximal ideal of A_p; eval2 through A→A_p→E; A' étale via Spec.map; j an A-algebra map; b solves f in A' and j(b_i)=c_i; p'=j^-1(q) (hpq) and p'∩A=p (hp'); θ pinned to localRingHom p' q j; compatible with the A_p-structures; θ(b_i/1)=c_i/1; mapEquiv θ commutes with ResidueField.map from κ(p) (Mathlib signatures read). Statement is true and neither weaker nor stronger. Edge cases n=0, m=0, zero divisors, A a field, zero rings checked. Single universe u is forced by Spec.map. No defs, sorry-only proof, source and blueprint docstrings with the six-step proof, imported proof-dep modules exist in side-live, no pro-étale substitute, statement field verbatim, report has Worker report and Second reading sections. No findings."
+ }
+}

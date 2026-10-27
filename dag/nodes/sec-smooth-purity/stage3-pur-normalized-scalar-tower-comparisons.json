@@ -1,0 +1,122 @@
+{
+ "id": "stage3-pur-normalized-scalar-tower-comparisons",
+ "kind": "statement",
+ "title": "Unique normalized scalar and pullback comparisons on quotient cochains",
+ "statement": "Fix a prime $\\ell$. For every finite extension $E$ of $\\mathbf Q_\\ell$ and scheme $W$, use the quotient coefficient sequence ring sheaf and its module category [def-trf-integral-comparison-sequence-systems]. Let $T_{E,W}$ be signed direct-sum total tensor on integer cochain complexes of these modules [def-pc-tensor-complex-sheaves]. For every finite coefficient homomorphism $i:E\\to L$, let $S_i$ be termwise extension of scalars; for every scheme morphism $f:X\\to Y$, let $F_E$ be the termwise sequence-site module pullback [def-weil-proetale-inverse-image]. There is exactly one pair of families of natural isomorphisms $\\sigma:T_{E,W}S_i\\simeq(S_i,S_i)T_{L,W}$ and $c:T_{E,Y}F_E\\simeq(F_E,F_E)T_{E,X}$ such that on every local homogeneous tensor the scalar map sends $b\\otimes(x\\otimes y)$ to $(b\\otimes x)\\otimes(1\\otimes y)$ and the pullback map sends $b\\cdot u(x\\otimes y)$ to $(b\\cdot u(x))\\otimes u(y)$, where $u$ denotes the pullback adjunction unit. All natural transformations are maps on the whole sequence site, retaining quotient transitions. Equivalently, the type Comparisons of [def-pur-scalar-extension-tower-data] with these formulas has a Unique structure.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL and 07A4; original comparisons_existsUnique and its generator-normalized construction from lem-pur-scalar-extension-tower-coherence."
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-proetale-inverse-image",
+  "def-pur-scalar-extension-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the existing sheaf scalar total-tensor comparison to the coefficient-sequence ring map. Its formula at coefficient one extends to arbitrary coefficients by scalar linearity and balancing. The normalized cochain pullback/tensor comparison supplies the pullback family. These give the two maps and their required formulas. For uniqueness transpose the scalar map through its extension/restriction adjunction, and transpose the pullback map through the geometric pullback/direct-image adjunction. Homogeneous tensor generators determine each degreewise map, hence both natural isomorphisms. Proof irrelevance identifies their formula fields. Thus the existing ComparisonData record has exactly one inhabitant. Inverses and all quotient restrictions are retained because every map is a natural transformation on the sequence site.",
+   "uses": [
+    "lem-pur-integral-tensor-reduction-tower-comparison",
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-system-scalar-generators",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-system-scalar-generators",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "D2: relocate the already proved normalized comparison construction verbatim into a self-contained module after profiling the coherence file."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with pullback and tensor for sheaf cochain complexes, on pure tensors",
+   "results": "OK 8 hits: SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies generic adjunction and tensor generators, not this sequence-site normalized comparison pair. Reuse the existing project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(composition|square)|ScalarExtensionTower",
+   "results": "OK 14 hits: Mathlib/Geometry/Manifold/Algebra/SmoothFunctions.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies generic adjunction and tensor generators, not this sequence-site normalized comparison pair. Reuse the existing project constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence and uniqueness of scalar extension and pullback tensor comparisons determined by their values on pure tensor sections of complexes of sheaves of modules",
+   "results": "OK 8 hits: ModuleCat.ExtendScalars.hom_ext, ModuleCat.extendScalars, ModuleCat.ExtendScalars.obj', ModuleCat.ExtendScalars.map', PresheafOfModules.pullback, PresheafOfModules.Sheafify.instNonemptySMulCandidate, ModuleCat.ExtendScalars.map_tmul, Algebra.Generators.extendScalars_val",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies generic adjunction and tensor generators, not this sequence-site normalized comparison pair. Reuse the existing project constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionTowerCoherence",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Canonical strict quotient scalar and pullback tensor comparisons used in the integral scalar-extension coherence, original proof steps 3--4.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionTowerComparisonData",
+  "file": "lean/Sheaf/Paper/ScalarExtensionTowerComparisonData.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.comparisons_existsUnique",
+  "declarations": [
+   "WeilConjectures.ScalarExtensionTower.sequenceSmall",
+   "WeilConjectures.ScalarExtensionTower.siteSmall",
+   "WeilConjectures.ScalarExtensionTower.scalarAdditive",
+   "WeilConjectures.ScalarExtensionTower.comparisons_existsUnique"
+  ],
+  "statement": "theorem comparisons_existsUnique : Nonempty (Unique (Comparisons l))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27",
+  "note": "Existing declarations and proof bodies moved without signature or definition changes. ScalarExtensionTowerCoherence publicly re-exports them. The relocated definitions (Complex, tensor, scalar, pull, kappa, Comparisons, comparisons, leftRoute, rightRoute and their generic cores and squares) stay owned by the definition node def-pur-scalar-extension-tower-data; this node owns the theorem and the two size instances and scalarAdditive formerly recorded only at lem-pur-scalar-extension-tower-coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6309c",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T135058-L-3664568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-6309c",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T135058-L-3664568",
+  "kind": "interface",
+  "note": "independent cc review: 6309 Lean byte-identical to the 8af9 delivery (reviewed FIX), Rational split withdrawn, 8af9 node fixes taken; 3 delivered modules + 3 direct importers on main compiled OK in /tmp/d2s6309"
+ }
+}

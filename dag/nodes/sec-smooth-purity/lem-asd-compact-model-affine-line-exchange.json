@@ -1,0 +1,119 @@
+{
+ "id": "lem-asd-compact-model-affine-line-exchange",
+ "kind": "statement",
+ "title": "Affine-line exceptional exchange for the compact dual model",
+ "statement": "Let Lambda be a finite commutative ring that is a field and S an affine scheme on which its exponent is invertible. For any Cartesian square of the affine-line projection p: A^1_S -> S whose base-changed projection is quasi-compact and compactifiable, the canonical exceptional inverse-image exchange, defined as the mate of inverse compact-support exchange, is an isomorphism on the full unbounded derived category of etale Lambda-module sheaves.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Affine-line model case, obtained by restricting the projective-line adjunction; the elementary case used in the smooth chart reduction."
+ },
+ "stmt_deps": [
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing projectiveLineExceptionalBaseChange theorem to the projective-line projection over the given affine base and each of its Cartesian squares. This theorem is stated over arbitrary bases and for arbitrary finite commutative coefficients, so the field and affine hypotheses need no extra reduction.",
+   "uses": [
+    "lem-asd-projective-line-exceptional-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor the affine-line projection through AffineSpace.toRelativeProjectiveSpace followed by the projective-line projection, using AffineSpace.toRelativeProjectiveSpace_over. The chart is an open immersion and is quasi-compact because its composite with the projective projection is quasi-compact. Apply isIso_rightDerivedUpperShriekBaseChangeMap_of_comp: its open-immersion factor is invertible by isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right, and its projective factor by the preceding step. These are the canonical mates, and their composition law is the mate-pasting identity. The same Lean argument applies to zero complexes and the empty affine base.",
+   "uses": [
+    "lem-asd-projective-line-exceptional-base-change",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-projective-line-exceptional-base-change",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Projective-line model restricted to the standard affine chart; reuses the existing canonical projective-line exchange and the proved composition/open-immersion lemmas in SmoothDuality.BaseChangeCharts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine line exceptional inverse image canonical mate of compact support base change is invertible",
+   "results": "Eight affine-space and affine-adjunction geometry hits; no derived etale exceptional exchange theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "Twelve adjunction equivalence facts; no canonical exceptional exchange model.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AffineLineBaseChange|isIso_rightDerivedUpperShriekBaseChangeMap_of_affineLine",
+   "results": "The source gives the smooth chart reduction in SmoothDuality.Etale. Its affine-line implementation in SmoothDuality.SmoothBaseChange imports the current model transitively through ProjectiveLineTraceModel, AffineLineKunneth, Stability and Deligne finiteness, so it cannot be imported by the model. Retain the existing chart reduction, isolating only its affine-line model case.",
+   "date": "2026-10-26",
+   "verdict": "existing theorem unavailable here because its proof imports this parent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional base change for affine line projection over affine scheme with finite field coefficients",
+   "results": "Eight affine-space, affine-morphism and scalar-extension results; no exceptional derived exchange theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-compact-dual-model",
+   "place": "Affine-line model case of smooth exceptional exchange in the relative dual presentation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompactModelAffineLineExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactModelAffineLineExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactModelAffineLineExchange",
+  "statement": "theorem compactModelAffineLineExchange\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (_hfield : IsField Λ) :\n    AffineLineBaseChange Λ",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7b578",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T135749-L-4062135",
+  "kind": "interface",
+  "note": "independent cc review: compactModelAffineLineExchange proof (chart toRelativeProjectiveSpace + of_comp + of_isOpenImmersion_right + projectiveLineExceptionalBaseChange) against node lem-asd-compact-model-affine-line-exchange (statement unchanged, only proof fields changed); import-only changes in unclaimed TraceModel/ExceptionalBaseChange against clone and change record; 5 affected importers OK per §3b; no import cycle; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

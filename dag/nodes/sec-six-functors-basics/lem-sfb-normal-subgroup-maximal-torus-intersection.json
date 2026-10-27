@@ -1,0 +1,332 @@
+{
+ "id": "lem-sfb-normal-subgroup-maximal-torus-intersection",
+ "kind": "statement",
+ "title": "Maximal tori in a connected normal subgroup by intersection",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $F$-group scheme [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme] of finite type [def-weil-finite-type-morphism], and let $M\\subseteq G$ be a smooth connected closed normal subgroup scheme [def-sc-group-scheme-subgroup]. Let $T\\subseteq G$ be a maximal torus, in the sense of [def-sfb-reductive-torus-centralizer-terminology]; over $F$ a torus is a group isomorphic to $\\mathbf G_m^r$ for some integer $r\\geq0$, with $\\mathbf G_m$ as in [def-sc-gm-ga]. Form the scheme-theoretic intersection $D=M\\times_G T$ [def-pc-fibre-product]. Let $D^t=(D_{\\mathrm{red}})^\\circ$, where reduction is quotient by the nilradical [def-weil-pbc-scheme-reduction] and the superscript denotes the connected component of the identity with its open subscheme structure. Then $D^t$ is a closed subgroup of $D$, is a split torus, and its induced inclusion in $M$ is a maximal torus of $M$. No reductivity of $G$ or $M$ is assumed, and $D$ need not be smooth or reduced. The rank-zero torus is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.85, printed pp.379-380; notation 12.29, printed p.241, and Remark 12.5, printed p.232, identify the largest subtorus of a multiplicative group with its reduced identity component over an algebraically closed field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "The projection $D=M\\times_G T\\to T$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. On every $F$-algebra its points are the intersection of two subgroups, so it is a closed subgroup by [def-sc-group-scheme-subgroup]. The affine coordinate algebra of $D$ is a quotient of that of $T$; a finite generating set descends, so $D$ is affine of finite type, using [def-weil-closed-immersion, def-weil-finite-type-morphism]. The same quotient argument applies to $M\\subseteq G$. By [lem-sfb-locally-algebraic-group-identity-component], $D^0$ is open and closed and $H=(D^0)_{\\mathrm{red}}$ is a smooth connected closed subgroup. Reduction has unchanged underlying space and restricts to an open subscheme by quotienting the restricted structure sheaf by its nilradical [def-weil-pbc-scheme-reduction]. Thus $H=(D_{\\mathrm{red}})^0=D^t$. Since $H$ is a smooth connected closed subgroup of the torus $T$, [lem-sfb-multiplicative-type-largest-subtorus] makes $H$ a torus; over $F$ it is split.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-pbc-scheme-reduction",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+   }
+  },
+  {
+   "text": "Every torus $U$ mapping as a closed subgroup into $D$ factors through $H$. Indeed $U$ is smooth by [lem-sfb-multiplicative-type-largest-subtorus], hence reduced by [sbc-lem-smooth-geometrically-reduced] applied to $U\\to\\operatorname{Spec}F$. Pulling a nilpotent function back to a reduced scheme gives zero, so the map factors through $D_{\\mathrm{red}}$ by its quotient definition [def-weil-pbc-scheme-reduction]. Its connected image contains the identity, hence lies in the identity component. Since this component is open, restricting the target gives the factorization through $H$. It remains a closed subgroup inclusion: on affine coordinate rings a surjection factoring through a quotient induces a surjection from that quotient.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+   }
+  },
+  {
+   "text": "We justify the maximal-torus choices in the source. For $X=M$ or $G$, [lem-kun-dimension-finite-type] gives a finite dimension bound. Every torus $V\\subseteq X$ is smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus], and reduced by [sbc-lem-smooth-geometrically-reduced]. Apply [lem-sfb-locally-algebraic-group-identity-component] to $V$: since $V=V^0=V_{\\mathrm{red}}$, it is integral. It is nonempty because it has an identity. By the chain definition [def-kun-dimension], its dimension is a nonnegative integer at most $\\kundim X$: every chain of irreducible closed subsets of a closed subspace is such a chain in $X$.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+   }
+  },
+  {
+   "text": "Given a torus $A\\subseteq X$, choose among torus subgroups containing $A$ one, $V$, of greatest dimension; this nonempty family has dimensions in the finite interval of step 3. If $V\\subsetneq W$ for a torus subgroup $W$ of $X$, then $|V|$ is a proper closed subset of $|W|$. To see this, write $V=\\operatorname{Spec}(F[W]/J)$ using [def-weil-closed-immersion]. As $F[W]$ is a domain, equality of underlying spaces would force $J$ into the zero prime and hence $J=0$. Since $W$ is irreducible, appending $|W|$ to a longest irreducible closed chain in $|V|$ gives $\\kundim W\\geq\\kundim V+1$ by [def-kun-dimension], a contradiction. Therefore $V$ is a maximal torus of $X$ containing $A$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-kun-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+   }
+  },
+  {
+   "text": "Apply steps 3–4 first to $X=M$ and its identity torus $A=\\mathbf G_m^0$ to obtain a maximal torus $S\\subseteq M$. The identity is a closed subgroup since $M$ is affine: the evaluation $F[M]\\to F$ is surjective. Apply the same argument to $X=G$ and the torus $S\\subseteq G$ to obtain a maximal torus $R\\subseteq G$ containing $S$. The composite inclusion is closed since the composite of surjective coordinate homomorphisms is surjective [def-weil-closed-immersion].",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+   }
+  },
+  {
+   "text": "Both $R$ and the prescribed $T$ are maximal tori of the smooth connected affine finite-type group $G$ over the algebraically closed field $F$. Apply the maximal-torus clause of [lem-sfb-borel-maximal-torus-conjugacy] to get $g\\in G(F)$ with $gRg^{-1}=T$ as subgroup schemes. Conjugation $c_g$ is an automorphism, with inverse $c_{g^{-1}}$, by the group identities [def-sc-group-scheme]. Normality of $M$ gives $c_g(M)=M$ on every commutative $F$-algebra, by [def-sc-group-scheme-subgroup]. Thus $S_1=c_g(S)$ is a torus subgroup of $M$ and of $T$, hence of their fibre product $D$. It is maximal in $M$: a torus in $M$ containing $S_1$ pulls back under $c_{g^{-1}}$ to a torus containing $S$.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+   }
+  },
+  {
+   "text": "By step 2, $S_1\\subseteq H$. Step 1 makes $H$ itself a torus subgroup of $M$. Maximality of $S_1$ in $M$ therefore gives $S_1=H$. Consequently $D^t=H$ is a closed split torus in $D$ and a maximal torus of $M$. All choices permit the identity torus: if the greatest dimension is zero the same strict-chain argument proves maximality. No smoothness or reducedness of $D$ and no reductivity of either ambient group entered the argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-dimension",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.85, printed pp.379–380; Theorem 17.10, pp.354–355; Definition 12.14, p.236, and Notation 12.29, p.241. Maximal-containing-torus argument expanded by finite dimension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group G and a smooth normal subgroup N, the largest subtorus of the intersection of a maximal torus T with N is a maximal torus of N",
+   "results": "{\"t\": \"2026-10-23T23:41:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth connected affine algebraic group G and a smooth normal subgroup N, the largest subtorus of the intersection of a maximal torus T with N is a maximal torus of N\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"frattini\", \"frattini_characteristic\", \"frattini_le_coatom\", \"Subgroup.normalCore_eq_iSup\", \"Subgroup.NormalizerCondition.normal_of_coatom\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"frattini_nongenerating\"], \"digest\": \"6eea5dbba47d4103\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"maximal\", \"torus\"",
+   "results": "{\"t\": \"2026-10-23T23:41:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"maximal\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "maximalTorus|maximal_torus|reductive|subtorus",
+   "results": "{\"t\": \"2026-10-23T23:41:55Z\", \"tool\": \"grep\", \"query\": \"maximalTorus|maximal_torus|reductive|subtorus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced identity component of the intersection of a maximal torus with a normal subgroup variety is a maximal torus of the subgroup",
+   "results": "{\"t\": \"2026-10-23T23:41:56Z\", \"tool\": \"leansearch\", \"query\": \"The reduced identity component of the intersection of a maximal torus with a normal subgroup variety is a maximal torus of the subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"Subgroup.subgroupOf\", \"Subgroup.normal_iInf_normal\", \"Subgroup.normal_subgroupOf\", \"Subgroup.normal_subgroupOf_of_le_normalizer\", \"Subgroup.Normal.pathComponentOne\", \"Subgroup.Normal.subgroupOf\", \"AddSubgroup.normal_iInf_normal\"], \"digest\": \"133cccd86fbe12a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal tori of a normal algebraic subgroup are obtained by intersecting maximal tori of its connected ambient algebraic group",
+   "results": "{\"t\": \"2026-10-23T23:41:58Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal tori of a normal algebraic subgroup are obtained by intersecting maximal tori of its connected ambient algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"Subgroup.normalCore_eq_iSup\", \"Subgroup.normalCore_le\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"Subgroup.NormalizerCondition.normal_of_coatom\", \"frattini_le_coatom\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\"], \"digest\": \"31170419135d86ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract or topological subgroups, Frattini groups, or Lie algebras, not tori and reductivity of affine group schemes; the AlgebraicGeometry grep and Loogle return no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "maximalTorus|maximal_torus|subtorus|MultiplicativeType",
+   "results": "{\"t\": \"2026-10-24T00:06:45Z\", \"tool\": \"grep\", \"query\": \"maximalTorus|maximal_torus|subtorus|MultiplicativeType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits concern abstract/topological subgroups, Cartan Lie subalgebras, or root-system constructions; none states the affine group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maximal tori intersect a connected normal algebraic subgroup in a group whose reduced identity component is a maximal torus",
+   "results": "{\"t\": \"2026-10-24T00:06:46Z\", \"tool\": \"leansearch\", \"query\": \"Maximal tori intersect a connected normal algebraic subgroup in a group whose reduced identity component is a maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normal_subgroupOf\", \"Subgroup.normal_iInf_normal\", \"AddSubgroup.normal_addSubgroupOf_of_le_normalizer\", \"AddSubgroup.normal_iInf_normal\", \"Subgroup.Normal.subgroupOf\", \"Subgroup.connectedComponentOfOne\", \"Subgroup.normal_inf_normal\", \"Subgroup.subgroupOf_normalizer_eq\"], \"digest\": \"66284f3a480f4992\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits concern abstract/topological subgroups, Cartan Lie subalgebras, or root-system constructions; none states the affine group-scheme result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"maximal\", \"torus\"",
+   "results": "{\"t\": \"2026-10-24T00:06:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"maximal\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits concern abstract/topological subgroups, Cartan Lie subalgebras, or root-system constructions; none states the affine group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a smooth connected affine algebraic group over an algebraically closed field, the reduced identity component of the intersection of a maximal torus with a smooth connected normal subgroup is a maximal torus of that subgroup",
+   "results": "{\"t\": \"2026-10-24T00:06:47Z\", \"tool\": \"leanfinder\", \"query\": \"In a smooth connected affine algebraic group over an algebraically closed field, the reduced identity component of the intersection of a maximal torus with a smooth connected normal subgroup is a maximal torus of that subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"frattini_le_coatom\", \"LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan\"], \"digest\": \"bdb4cdcbfda611e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits concern abstract/topological subgroups, Cartan Lie subalgebras, or root-system constructions; none states the affine group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two maximal tori of a smooth connected linear algebraic group are conjugate and every torus is contained in a maximal torus",
+   "results": "{\"t\": \"2026-10-24T00:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"Any two maximal tori of a smooth connected linear algebraic group are conjugate and every torus is contained in a maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\"], \"digest\": \"62084ebb8c207bb9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits concern abstract/topological subgroups, Cartan Lie subalgebras, or root-system constructions; none states the affine group-scheme result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Argument of 23.24 and the final paragraph completing 23.18, printed p.492, in the general form of a surjective reductive homomorphism with an isomorphism on maximal tori and lifted simple root groups; rank comparison and Weyl conjugation use 21.51 and 21.39, and the big cells use 21.84. This is a supporting criterion, not the isogeny existence theorem. Supporting kernel-finiteness step: Milne Corollary 17.85 and Corollary 21.53, applied to the reduced identity component of a closed normal subgroup. Supporting structural lemma: Corollary 17.85, printed pp.379-380; notation 12.29, printed p.241, and Remark 12.5, printed p.232, identify the largest subtorus of a multiplicative group with its reduced identity component over an algebraically closed field.",
+   "via": [
+    "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+    "lem-sfb-torus-simple-root-isomorphism-criterion",
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-subgroup-maximal-torus-intersection",
+  "worker": "stage1",
+  "summary": "Read Milne 17.85 and its 17.10 and 12.29 inputs. Retained the statement, supplied the conjugacy argument, expanded maximal-containing-torus choices by bounded dimension, and justified reduced neutral component and torus factorizations using existing DAG statements. No new nodes. Project searches found no attachment; Mathlib searches found no match.",
+  "blueprint": "Realizes the supporting normal-subgroup intersection input to the 17.85/21.53 kernel-finiteness argument, through the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route. Read the newest blueprint through literature/blueprint/latest; no blueprint node restates this lemma. ancestor command returns null for this inherited created.item chain; retained its recorded from/via.",
+  "tool_uses": [
+   {
+    "node": "def-kun-dimension",
+    "why": "Generic Dimension used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "def-sc-group-scheme",
+    "why": "Generic Group schemes over a field used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "def-sc-group-scheme-subgroup",
+    "why": "Generic Subgroup schemes used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic Closed immersion of schemes used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic Morphisms of finite type used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "def-weil-pbc-scheme-reduction",
+    "why": "Generic The reduction of a scheme used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic Base change of a closed immersion is a closed immersion used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic Smooth morphisms have geometrically reduced fibres used in the dimension, subgroup, or reduction argument below Milne 17.85; this unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-dimension",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-7a9e55436",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-7a9e55436 (reviewer sub-agent of L); spot-checked: I read the item's 7 steps in full against Milne iAG2017 Cor 17.85 (pp.379-380) and its proof, plus Notation 12.29. The split follows Milne's proof (T' maximal in N, T'' ⊇ T' maximal in G, conjugate T'' to T by 17.10); 17.82 is not needed because F is algebraically closed. The statement and stmt_deps are identical to the live and side-live clone node, which is still unsplit with an empty proof, so no other group has split it. There are no new nodes and no re-split note. I checked every cited statement verbatim: closed-immersion base change; the subgroup definition (subgroups and normality on all algebras); the identity-component node ((G^0)_red is smooth, connected, integral and has the same space, so (D_red)^0 = (D^0)_red); the clause 'smooth connected closed subgroup of a torus is a torus' in the largest-subtorus node; smooth implies geometrically reduced; finite dimension in finite type; the dimension chain definition; and the Borel/maximal-torus conjugacy node (smooth connected affine finite-type G over an algebraically closed field, no reductivity, equality as subgroup schemes). Its 'maximal under inclusion' agrees with def-sfb-reductive-torus-centralizer-terminology through step 4's closed-immersion argument. The step 4 dimension argument (J ≠ 0 in the domain F[W] gives a proper closed subset, so the dimension rises) is correct, and steps 5-7 assemble correctly: S1 = gSg^{-1} lies in M ∩ T = D and in H by step 2, and maximality gives S1 = H. I tested GL2/SL2, M=1, M=G, G a torus, G unipotent, and μ_p parts in characteristic p. There is no cycle (DFS closure of 11019 nodes) and no duplicate (searched dag/nodes for '17.85' and 'maximal tor'). Batch-5: both flagged citations reach lem-trf-smooth-fpqc-base-descent, a generic Mathlib leaf on fpqc descent of smoothness that is neither trace formula nor Poincaré duality, so both are accepted. The split_report tool_uses (definitions, closed-immersion base change, kun dimension finiteness, smooth ⇒ geometrically reduced) are accepted as generic. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NormalSubgroupMaximalTorusIntersection",
+  "declaration": "AlgebraicGeometry.normalSubgroup_maximalTorus_intersection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NormalSubgroupMaximalTorusIntersection.lean",
+  "statement": "theorem normalSubgroup_maximalTorus_intersection (F : Type u) [Field F] [IsAlgClosed F] (G M T : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] [Smooth M.X.hom] [ConnectedSpace M.X.left] (iM : M ⟶ G) [IsClosedSubgroupScheme iM.hom.hom] [IsNormalSubgroupScheme iM.hom.hom] (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) : ∃ (D H : Grp (Over (Spec (.of F)))) (pM : D ⟶ M) (pT : D ⟶ T), IsPullback pM.hom.hom pT.hom.hom iM.hom.hom iT.hom.hom ∧ ∃ U : D.X.left.nilradical.subscheme.Opens, (U : Set D.X.left.nilradical.subscheme) = D.X.left.nilradical.subschemeι ⁻¹' connectedComponent (GrpObj.onePoint D.X) ∧ ∃ (e : H.X ≅ Over.mk (U.ι ≫ D.X.left.nilradical.subschemeι ≫ D.X.hom)) (j : H ⟶ D), j.hom.hom.left = e.hom.left ≫ U.ι ≫ D.X.left.nilradical.subschemeι ∧ IsClosedSubgroupScheme j.hom.hom ∧ (∃ n : ℕ, Nonempty (H ≅ MultiplicativeType.splitTorus F n)) ∧ ReductiveTorusCentralizer.IsMaximalTorus (j ≫ pM)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f0961e3c",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Node clauses match the Lean one by one: hypotheses on G and M, and on T via IsMaximalTorus (read at Terminology.lean:30), are not stronger. D is an existential IsPullback of group maps with a forced law. D^t is the preimage of connectedComponent(onePoint) in nilradical.subscheme, with H pinned by e and j. The conclusions are closed subgroup, split torus (iso to splitTorus, n=0 allowed) and IsMaximalTorus(j≫pM), matching Milne 17.85. Only the item lean field changed; the 11 dependency nodes are identical to side-live; the statement is verbatim; imports exist; no existing duplicate; docstrings carry source, blueprint and 7 steps; sorry only. Edge cases: M trivial, M=G, unipotent G, nonreduced D in char p. Not compiled (no change). Advisory: import ToriMultiplicativeType directly."
+ }
+}

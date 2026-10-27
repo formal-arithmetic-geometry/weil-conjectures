@@ -1,0 +1,197 @@
+{
+ "id": "lem-trf-etale-line-sections-coordinates",
+ "kind": "statement",
+ "title": "Construction of module-valued tensor-section coordinates for line modules",
+ "statement": "For schemes $X$ [def-pc-scheme] in the size convention [def-weil-size-convention], write $\\operatorname{Inv}(X)$ for the full category of invertible modules [def-sc-invertible-module], with all module maps. On the small etale site [def-weil-pbc-etale-site] put $\\mathcal O_{X,\\mathrm{et}}(u:U\\to X)=\\Gamma(U,\\mathcal O_U)$. Write $\\operatorname{Line}(X_{\\mathrm{et}})$ for the full category of $\\mathcal O_{X,\\mathrm{et}}$-module sheaves [def-weil-sheaf-of-modules-category] trivial on some arbitrary jointly surjective etale family. Let $S_X(L)$ be the actual tensor-section sheaf [def-sc-etale-qcoherent-module], with its normalized restrictions, and let $c_{w,v}$ and $e_u$ be respectively the normalized tensor-pullback composition and structure-module isomorphisms for [def-pc-module-pullback], in the directions $w^*v^*\\to(vw)^*$ and $u^*\\mathcal O_X\\to\\mathcal O_U$. There exist functors $A_X:\\operatorname{Inv}(X)\\to\\operatorname{Line}(X_{\\mathrm{et}})$, additive sheaf isomorphisms $\\alpha_{X,L}:A_X(L)_{\\mathrm{Ab}}\\simeq S_X(L)$, and module-sheaf isomorphisms $\\epsilon_X:A_X(\\mathcal O_X)\\simeq\\mathcal O_{X,\\mathrm{et}}$. Every etale $v:Y\\to X$ pulls invertible $L$ back to an invertible module, with witnesses $p_{v,L}$, and there are module-presheaf isomorphisms $\\beta_{v,L}:A_X(L)|_{Y_{\\mathrm{et}}}\\simeq A_Y(v^*L)$. Here restriction evaluates at $w:W\\to Y$ by $vw$. These data satisfy precisely the following coordinate requirements: $\\alpha_{X,L,u}(rs)=r\\alpha_{X,L,u}(s)$; for every module map $h:L\\to K$, $\\alpha_{X,K,u}(A_X(h)_u(s))=\\Gamma(u^*h)(\\alpha_{X,L,u}(s))$; $\\epsilon_{X,u}(s)=\\Gamma(e_u)(\\alpha_{X,\\mathcal O_X,u}(s))$; and $\\alpha_{Y,v^*L,w}(\\beta_{v,L,w}(s))=\\Gamma(c_{w,v,L}^{-1})(\\alpha_{X,L,vw}(s))$. No inverse-unit formula, coherence equation, or frames for every prescribed cover are asserted.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX, proposition-equivalence-quasi-coherent (2), construction of the associated functor; Tag 03LC, proposition-equivalence-quasi-coherent-functorial (1), and remark-change-topologies-ringed-sites; Tag 05VG, lemma-equivalence-quasi-coherent-properties, finite local freeness specialized to rank one."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-size-convention",
+  "def-sc-invertible-module",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Form the module presheaf on the actual tensor-section groups using the sectionwise scalar actions. Semilinearity gives module restrictions and quasi-coherent descent gives their sheaf condition. Naturality of the adjunction unit and of the composition comparison makes the sectionwise pulled-back module maps natural. Pullback functor laws give a functor on all module morphisms. Its underlying additive coordinate map is the identity.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-sc-invertible-module",
+    "lem-sc-etale-qcoherent-descent",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjoint structure-module map is multiplication on local tensors with inverse inserting 1. The tensor-unit restriction equation gives its naturality, and linearity makes it a module-sheaf isomorphism epsilon. Its coordinate formula follows from its definition.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-sc-etale-tensor-unit-restriction-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare tensor pullback with the ordinary module pullback by adjoint uniqueness. Ordinary pullback preserves Zariski rank-one trivializations, so tensor pullback preserves invertibility. At an etale w use sections of c_w,v inverse to define beta. Left-adjoint associativity and unit naturality give its restriction square; each component is linear. Its inverse is natural by cancellation.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a Zariski trivializing cover. It is etale, and beta, the image of its frames, and epsilon trivialize the constructed module on the localized sites. The slice small-etale site at U -> X is the small-etale site of U by composition; its structure-ring maps are the same. This gives the line property. Restrict the constructed functor to these full subcategories.",
+   "uses": [
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-sc-invertible-module",
+  "lem-sc-etale-qcoherent-descent",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-etale-tensor-unit-restriction-equation",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-sc-left-adjoint-composition-iso-associativity",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03DR, 03DX (2), 03LC (1), 05VG; explicit normalized adjunction computations expanding the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent module on a scheme defines a sheaf of modules on the small etale site, compatible with pullback",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.IsQuasicoherent",
+     "AlgebraicGeometry.Scheme.Modules"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "The results concern local presentation data or the category of modules on a scheme. They do not construct the small-etale tensor-section module functor with its specified comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.mk",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "top": [
+     "PresheafOfModules.mk"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "The constructor builds a module presheaf from module objects and semilinear restrictions. It supplies no tensor-section naturality, descent, or normalized comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSectionsComp|CoversTop",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "top": [
+     "CategoryTheory.GrothendieckTopology.coversTop_iff_of_isTerminal",
+     "CategoryTheory.GrothendieckTopology.CoversTop.over"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "Covering-family lemmas are available, but no normalized module-valued tensor-section construction. Also inspected the existing EtaleTensorSections and EtaleTensorSectionsMapNaturality modules and the parent comparison theorem; the parent depends on this item and cannot be used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition isomorphism of two left adjoints satisfies associativity and the unit constraints",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompIso",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+     "CategoryTheory.Adjunction.leftAdjointUniq_trans"
+    ]
+   },
+   "date": "2026-10-26",
+   "verdict": "The generic associativity and unitality tools are used for tensor-coordinate coherence. None constructs a module-valued tensor-section functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.TraceFormula.EtaleLineSectionsNormalizedComparisons",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: interpret the polarization on each scheme atlas and its overlaps as a line module on the small etale site, compatibly with pullback (Stacks 03DX, 05VG, 03LC). Returned comparison proof steps 1–3 (normalized functor and restrictions). Construction step.",
+   "via": [
+    "lem-trf-etale-line-sections-normalized-comparisons",
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TraceFormula.EtaleLineSectionsCoordinates",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/EtaleLineSectionsCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_line_sections_coordinates",
+  "statement": "theorem etale_line_sections_coordinates :\n    ∃ (A : ∀ X : Scheme.{u}, TrfInvertibleModules X ⥤ TrfEtaleLineModules X)\n      (α : ∀ (X : Scheme.{u}) (L : TrfInvertibleModules X),\n        trfLineSections ((A X).obj L) ≅ trfInvertibleSections L)\n      (ε : ∀ X : Scheme.{u},\n          ((A X).obj (trfStructureInvertible X)).obj ≅\n            SheafOfModules.unit (trfEtaleStructureRing X))\n      (p : ∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (L : TrfInvertibleModules X),\n          ((Modules.tensorPullback v).obj L.obj).IsInvertible)\n        (β : ∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (L : TrfInvertibleModules X),\n          (PresheafOfModules.pushforward₀ (trfEtaleCompose v)\n            (trfEtaleStructureRing X).obj).obj ((A X).obj L).obj.val ≅\n          ((A Y).obj ⟨(Modules.tensorPullback v).obj L.obj, p X Y v L⟩).obj.val),\n      (∀ (X : Scheme.{u}) (L : TrfInvertibleModules X) (U : X.Etale)\n        (r : Γ(U.left, ⊤)) (s : ((A X).obj L).obj.val.obj (op U)),\n        (α X L).hom.hom.app (op U) (r • s) =\n          (((Modules.tensorPullback U.hom).obj L.obj).smul r).hom\n            ((α X L).hom.hom.app (op U) s)) ∧\n      (∀ (X : Scheme.{u}) (L K : TrfInvertibleModules X) (h : L.obj ⟶ K.obj)\n        (U : X.Etale) (s : ((A X).obj L).obj.val.obj (op U)),\n        (α X K).hom.hom.app (op U)\n          ((trfComparisonMap (A X) h).val.app (op U) s) =\n        ((Modules.tensorPullback U.hom).map h).app ⊤ ((α X L).hom.hom.app (op U) s)) ∧\n      (∀ (X : Scheme.{u}) (U : X.Etale)\n        (s : ((A X).obj (trfStructureInvertible X)).obj.val.obj (op U)),\n        (ε X).hom.val.app (op U) s = (trfTensorUnit U.hom).hom.app ⊤\n          ((α X (trfStructureInvertible X)).hom.hom.app (op U) s)) ∧\n        (∀ (X Y : Scheme.{u}) (v : Y ⟶ X) [Etale v] (L : TrfInvertibleModules X)\n          (W : Y.Etale) (s : ((A X).obj L).obj.val.obj\n            (op ((trfEtaleCompose v).obj W))),\n          (α Y ⟨(Modules.tensorPullback v).obj L.obj, p X Y v L⟩).hom.hom.app (op W)\n              ((β X Y v L).hom.app (op W) s) =\n            ((Modules.tensorSectionsComp W.hom v).inv.app L.obj).app ⊤\n              ((α X L).hom.hom.app (op ((trfEtaleCompose v).obj W)) s))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T100359-L-8423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T100359-L-8423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

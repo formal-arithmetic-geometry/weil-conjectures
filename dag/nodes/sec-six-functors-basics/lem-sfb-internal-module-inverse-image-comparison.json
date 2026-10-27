@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-internal-module-inverse-image-comparison",
+ "kind": "statement",
+ "title": "Internal and sectionwise module inverse images agree for a geometric morphism",
+ "statement": "Let $C,D$ be sites small in a common coefficient universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. On each site assume abelian sheafification exists and its local equivalences are monoidal, and use the sheafified objectwise tensor over $\\mathbf Z$ [sk-def-sfb-sheaf-tensor]. Let $u:\\operatorname{Sh}(D)\\to\\operatorname{Sh}(C)$ be a geometric morphism [def-trf-geometric-morphism]. Write $L=u^{-1}$ on sets and on abelian sheaves, using the induced finite-product lift on algebraic operations. Give the abelian lift the canonical strong monoidal structure obtained by inverting the oplax structure which is mate, under $L\\dashv u_*$, to the canonical lax structure on $u_*$ induced by the sheafified tensor. Write $\\mu^L$ for its tensorator. Then $\\mu^L_{A,B}:LA\\otimes LB\\to L(A\\otimes B)$ agrees with the map induced by the set inverse image of the universal bilinear pairing $A\\times B\\to A\\otimes B$ and the inverse product comparison; the unit map agrees with that induced by inverse image of the constant integer section $1$.\n\nLet $R$ be a commutative ring object of $\\operatorname{Sh}(C,\\operatorname{Ab})$ and put $S=L(R)$ with this transported ring structure [sk-def-sfb-transport]. Let $R_{\\mathrm{sec}},S_{\\mathrm{sec}}$ and $E_R,E_S$ denote reconstructed section-ring sheaves and internal/sectionwise module equivalences [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Let $L_{R_{\\mathrm{sec}}}$ be inverse image of sectionwise module sheaves: it applies $L$ to underlying sheaves, ring operations and scalar action using the inverse finite-product comparison [def-weil-pbc-algebraic-inverse-image]. There are a canonical ring-sheaf isomorphism and a natural module-sheaf isomorphism\n$$\\sigma_R:S_{\\mathrm{sec}}\\xrightarrow{\\sim}L(R_{\\mathrm{sec}}),\\qquad\n\\theta_M:E_S(\\operatorname{mapMod}(L)M)\\xrightarrow{\\sim}L_{R_{\\mathrm{sec}}}(E_RM),$$\nwhere the second is semilinear over $\\sigma_R$. Under the canonical comparisons of underlying inverse-image sheaves, both maps are identities. In particular $\\sigma_R$ intertwines addition, zero, multiplication and one, and $\\theta_M$ intertwines addition and the scalar action $L(\\gamma_M)\\circ\\mu^L_{R,M}$ with the finite-product inverse image of the sectionwise scalar action. Applied termwise to any unbounded cochain complex $P$ [def-weil-abstract-derived-category], these maps give an isomorphism of complexes over $\\sigma_R$, natural in $P$, intertwining each differential with $L(d_P)$; hence also an isomorphism of their images in the derived category. No K-flatness, termwise flatness or enough-points hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module: finite-product inverse image of scalar actions. The comparison with internal monoidal transport is the extracted argument of the parent proof step 2; supplementary algebraic-lift and tensor references are recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "sk-def-sfb-sheaf-tensor",
+  "def-trf-geometric-morphism",
+  "sk-def-sfb-transport",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-abstract-derived-category",
+  "def-trf-abelian-inverse-image-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=u_*$, $\\eta,\\epsilon$ for the set adjunction unit and counit, and $\\lambda_{A,B}:L(A\\times B)\\cong LA\\times LB$, $\\rho_{H,K}:G(H\\times K)\\cong GH\\times GK$ for the product comparisons, with $\\lambda_*,\\rho_*$ their terminal-object versions. The right adjoint preserves these products [lem-weil-pbc-right-adjoint-preserves-limits]; the supplied lifted adjunction, its unit_eq, and [def-trf-abelian-inverse-image-presentation] identify the underlying unit and transpose formulas. Write $p_{A,B}:A\\times B\\to A\\otimes B$ for the universal bilinear pairing. The universal property of the integer tensor product, extended by the sheafification adjunction, applies to the sheafified objectwise tensor [sk-def-sfb-sheaf-tensor]: additivity is integer linearity, and sectionwise maps extend uniquely through sheafification [def-weil-pbc-sheafification]. Unpack the canonical lax structure on $G$: its tensor map $m_{H,K}$ is the unique additive sheaf extension of the bilinear map $G(p_{H,K})\\rho_{H,K}^{-1}$; its unit $e:\\mathbf Z_C\\to G\\mathbf Z_D$ extends $n\\mapsto n\\,G(1_D)\\rho_*^{-1}$. Product preservation carries the separate-additivity equations to those of this pairing. Thus\n$$m_{H,K}p_{GH,GK}=G(p_{H,K})\\rho_{H,K}^{-1},\\qquad e1_C=G(1_D)\\rho_*^{-1}.$$\nThese are extension formulas for sheafified tensors, not a claim that arbitrary sections of a tensor sheaf are pure tensors. Lean construction: tensorPresheafLift uses TensorProduct.liftAddHom; tensorLift extends it through sheafificationAdjunction and the canonical strong tensor comparison. tensor_ext and tensor_ext3 descend the tensor uniqueness tests through sheafification, without assuming pure tensors generate all sheaf sections globally. unitLift and unit_ext use the sheafified constant integer presheaf. transportedPairing_graph and transportedPairing_add_left/right construct the finite-product transport, and its universal sections prove associativity, unitality and symmetry. normalization_unique fixes the resulting lax structure. Right additivity follows from left additivity and symmetry. The triple tensor test is justified by the monoidality of local equivalences and the sheaf property of its target. The right-unit law follows from the left-unit law and braiding.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "def-trf-abelian-inverse-image-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, universal bilinear characterization; sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi"
+   }
+  },
+  {
+   "text": "Let $d_{A,B}:L(A\\otimes B)\\to LA\\otimes LB$ be the specified oplax tensor comparison. By its definition as mate [lem-sfb-monoidal-adjunction-mates], its abelian adjunct is $m_{LA,LB}(\\eta_A\\otimes\\eta_B)$, so\n$$G(d_{A,B})\\eta_{A\\otimes B}p_{A,B}=G(p_{LA,LB})\\rho_{LA,LB}^{-1}(\\eta_A\\times\\eta_B).$$\nHere naturality of $p$ and step 1 give the equality. Naturality of the unit with the two projections gives\n$$\\rho_{LA,LB}\\,G(\\lambda_{A,B})\\eta_{A\\times B}=\\eta_A\\times\\eta_B.$$\nAlso $\\eta_{A\\otimes B}p_{A,B}=G(Lp_{A,B})\\eta_{A\\times B}$. Consequently the first equation says that the two maps $d_{A,B}Lp_{A,B}$ and $p_{LA,LB}\\lambda_{A,B}$ have the same adjunct under the SET adjunction. Its injective Hom bijection gives\n$$d_{A,B}Lp_{A,B}=p_{LA,LB}\\lambda_{A,B}.$$\nThe use of the set adjunction is legitimate even though $p$ is not additive on the product: the supplied lifted adjunction, its unit_eq, and [def-trf-abelian-inverse-image-presentation] identify the unit used in the abelian mate formula with the original set unit. Now $d_{A,B}$ is invertible. Applying $L$ and $\\lambda$ to the separate-additivity equations of $p_{A,B}$ shows that $L(p_{A,B})\\lambda_{A,B}^{-1}$ is separately additive for the lifted group laws $L(+)\\lambda^{-1}$, so by step 1 it equals $\\varphi\\,p_{LA,LB}$ for a unique additive $\\varphi$. Then $d\\varphi p_{LA,LB}=dL(p)\\lambda^{-1}=p_{LA,LB}$, so $d\\varphi=1$ by uniqueness. Additive $\\alpha,\\beta:L(A\\otimes B)\\to T$ are equal iff their adjuncts $G(\\alpha)\\eta,G(\\beta)\\eta$ agree after $p_{A,B}$ (step 1), i.e. iff $\\alpha L(p)=\\beta L(p)$ by set injectivity; as $\\varphi dL(p)=\\varphi p\\lambda=L(p)$, $\\varphi d=1$. By definition $\\mu^L_{A,B}=d_{A,B}^{-1}=\\varphi$, and cancellation yields\n$$\\mu^L_{A,B}p_{LA,LB}=L(p_{A,B})\\lambda_{A,B}^{-1}.$$\nThis also constructs the required induced additive map: it is $\\mu^L$ itself, and the tensor universal property in step 1 gives uniqueness. In Lean, tensor_graph_of_normalization reads the tensor graph equation directly from the normalization on the universal product.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-mates",
+    "def-trf-geometric-morphism",
+    "def-trf-abelian-inverse-image-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback: adjunction and the universal bilinear pairing; explicit mate normalization"
+   }
+  },
+  {
+   "text": "For the oplax unit $d_0:L\\mathbf Z_C\\to\\mathbf Z_D$, [lem-sfb-monoidal-adjunction-mates] gives $G(d_0)\\eta_{\\mathbf Z_C}=e$. Naturality at the set map $1_C:*_C\\to|\\mathbf Z_C|$, step 1 and terminal-object uniqueness give\n$$G(d_0L1_C)\\eta_{*_C}=e1_C=G(1_D)\\rho_*^{-1}=G(1_D\\lambda_*)\\eta_{*_C}.$$\nInjectivity of the set adjunction therefore gives $d_0L1_C=1_D\\lambda_*$. Moreover $d_0$ is invertible: let $\\varphi_0:\\mathbf Z_D\\to L\\mathbf Z_C$ be the additive map with $\\varphi_01_D=L(1_C)\\lambda_*^{-1}$ (unique by the next paragraph). Then $d_0\\varphi_01_D=1_D$, so $d_0\\varphi_0=1$. Additive maps $L\\mathbf Z_C\\to T$ are determined by their adjuncts under the supplied lifted adjunction; unit_eq and [def-trf-abelian-inverse-image-presentation] identify these adjuncts on underlying sheaves, and they are determined by their value on $1_C$, hence by precomposition with $L1_C$ (set injectivity); since $\\varphi_0d_0L1_C=\\varphi_01_D\\lambda_*=L1_C$, $\\varphi_0d_0=1$. Inverting $d_0$ gives the claimed unit formula\n$$(d_0^{-1})1_D=L(1_C)\\lambda_*^{-1}.$$\nAn additive sheaf map out of $\\mathbf Z_D$ is determined by this section: on the constant integer presheaf it must send $n$ to $n$ times that section, and [def-weil-pbc-sheafification] extends this map uniquely. Thus this is exactly the unit map induced by inverse image of $1$, including its sheafification normalization. In Lean, unit_graph_of_normalization reads the unit graph equation directly from normalization on the terminal sheaf.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-mates",
+    "def-weil-pbc-sheafification",
+    "def-trf-abelian-inverse-image-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; sm Tag 03EK unit is sheafified constant integers"
+   }
+  },
+  {
+   "text": "Let $b_R:R\\otimes R\\to R$ and $v_R:\\mathbf Z_C\\to R$ be the internal multiplication and unit, and put $a_R=b_Rp_{R,R}$, $1_R=v_R1_C$. By [def-sfb-modobj-transport], the transported multiplication and unit are $L(b_R)\\mu^L_{R,R}$ and $L(v_R)d_0^{-1}$. Reconstruct the section ring using [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Steps 2 and 3 identify its multiplication and one with\n$$L(b_R)\\mu^L_{R,R}p_{LR,LR}=L(a_R)\\lambda_{R,R}^{-1},\\qquad L(v_R)d_0^{-1}1_D=L(1_R)\\lambda_*^{-1}.$$\nAddition and zero are $L(+)\\lambda^{-1}$ and $L(0)\\lambda_*^{-1}$ by the graph equations of [def-trf-abelian-inverse-image-presentation]. These are precisely the operations of the algebraic inverse image [def-weil-pbc-algebraic-inverse-image]. The canonical underlying comparison therefore preserves addition, zero, multiplication and one; its inverse does too. It defines $\\sigma_R$, the identity after the stated underlying-sheaf identifications. The private graph_compare_add and graph_compare_bilinear lemmas share the generalized-section calculation for the ring and module comparisons.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-trf-abelian-inverse-image-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module; Tag 03EK; sites.tex Tag 00YV, ring operations"
+   }
+  },
+  {
+   "text": "For an internal module $M$, write $\\gamma_M:R\\otimes M\\to M$ for its action and $a_M=\\gamma_Mp_{R,M}$ for the corresponding sectionwise bilinear action. This correspondence follows from the universal property of the integer tensor product and the sheafification adjunction; the module associativity and unit identities become $(rs)m=r(sm)$ and $1m=m$ upon precomposition with the universal pairings, so this is the section action in the canonical equivalence. [def-sfb-modobj-transport] gives the transported action $L(\\gamma_M)\\mu^L_{R,M}$. Its reconstructed section action, by step 2, is\n$$L(\\gamma_M)\\mu^L_{R,M}p_{LR,LM}=L(a_M)\\lambda_{R,M}^{-1}.$$\nThis is the scalar action specified by [def-weil-pbc-algebraic-inverse-image]. Additions agree by the abelian lift as in step 4. The identity on the common underlying inverse-image abelian sheaf is therefore additive and semilinear over $\\sigma_R$; the same identity is its inverse. It gives $\\theta_M$ using the unchanged underlying sheaves of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. On every module morphism $h$, both functors have underlying map $L(h)$, by the two cited transport definitions and the canonical section equivalence. Hence $\\theta$ is natural.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-trf-abelian-inverse-image-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module, action and functoriality; Tag 03EK universal pairing"
+   }
+  },
+  {
+   "text": "Apply step 5 to every $P^n$ and to the module map $d_P^n:P^n\\to P^{n+1}$. Naturality gives\n$$\\theta_{P^{n+1}}\\,E_S(\\operatorname{mapMod}(L)(d_P^n))=L_{R_{\\mathrm{sec}}}(E_R(d_P^n))\\,\\theta_{P^n}.$$\nUnder the common underlying-sheaf identifications, both differential maps are $L(d_P^n)$. Thus these components and their inverses are chain maps and give the asserted isomorphism of unbounded complexes over $\\sigma_R$, natural in $P$. Identify the coefficient categories through $\\sigma_R$; applying the localization functor $Q$ of [def-weil-abstract-derived-category] to these mutually inverse chain maps gives mutually inverse morphisms in the derived category. This last assertion concerns the images of the displayed complexes and needs no resolution, no derived tensor calculation and no assertion about preserving arbitrary quasi-isomorphisms. All preceding equations are identities of sheaf maps, so no bound, flatness or enough-points assumption has entered.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RR, section-derived-categories, localization of complexes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-transport",
+  "def-trf-abelian-inverse-image-presentation",
+  "def-trf-geometric-morphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 (lemma-pullback-module), 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback), and sites.tex Tag 00YV. A5 formalizes the six-step argument using integer-tensor extensions and the sheafification adjunction directly, the normalized finite-product presentation, and the actual monoidal-adjunction mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sectionModuleEquivalence|internal.*module.*(pullback|inverse)|mapMod",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/RingTheory/Morita/Matrix.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern sectionwise module pullbacks or free modules, not comparison with internal module transport for arbitrary geometric morphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of internal modules over an abelian sheaf ring agrees with inverse image of sectionwise module sheaves under the section module equivalence",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.unitHomEquiv\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app\", \"AlgebraicGeometry.Scheme.Modules.inv_app\", \"Submodule.comap_equiv_eq_map_symm\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply\", \"SheafOfModules.fullyFaithfulForget\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern sectionwise module pullbacks or free modules, not comparison with internal module transport for arbitrary geometric morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackId\", \"PresheafOfModules.pullbackObjIsDefined\", \"PresheafOfModules.pullback\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern sectionwise module pullbacks or free modules, not comparison with internal module transport for arbitrary geometric morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sectionwise equivalence from internal modules in abelian sheaves to sheaves of modules commutes with geometric inverse image and monoidal mapMod transport",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern sectionwise module pullbacks or free modules, not comparison with internal module transport for arbitrary geometric morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModuleEquivalence|internal.*(module|ring)|module.*internal",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"CategoryTheory/Sites\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern sectionwise module pullbacks or free modules, not comparison with internal module transport for arbitrary geometric morphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\"",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"PointedContMDiffMap.instAlgebraSomeENatTopContMDiffMapModelWithCornersSelf\", \"PointedContMDiffMap.instIsScalarTowerSomeENatTopContMDiffMapModelWithCornersSelf\", \"LeftInvariantDerivation.instFunLikeContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instCoeDerivationContMDiffMapModelWithCornersSelfSomeENatTop\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern sectionwise module pullbacks or free modules, not comparison with internal module transport for arbitrary geometric morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism of arbitrary sheaf topoi lifts internal ring and module objects and the equivalence with sectionwise ring and module sheaves intertwines its inverse images, including complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullback\", \"SheafOfModules.pushforwardCongr\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern sectionwise module pullbacks or free modules, not comparison with internal module transport for arbitrary geometric morphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModuleEquivalence|internal.*module.*inverse|bilinear.*sheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"CategoryTheory\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give sectionwise site-induced pullback/free modules, presheaf tensors or light condensed tensors; none compares arbitrary geometric inverse image with the internal mapMod transport and its specified mate tensorator"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal modules in tensor abelian sheaves are compatible with inverse image of sheaves of modules along a geometric morphism",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give sectionwise site-induced pullback/free modules, presheaf tensors or light condensed tensors; none compares arbitrary geometric inverse image with the internal mapMod transport and its specified mate tensorator"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackId\", \"PresheafOfModules.pullbackObjIsDefined\", \"PresheafOfModules.pullback\", \"PresheafOfModules.pullbackObjIsDefined_eq_top\", \"PresheafOfModules.pullbackObjIsDefined_free_yoneda\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give sectionwise site-induced pullback/free modules, presheaf tensors or light condensed tensors; none compares arbitrary geometric inverse image with the internal mapMod transport and its specified mate tensorator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image on abelian sheaves transports tensor ring objects and internal modules in agreement with finite product transport of their sectionwise algebraic structures",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"PresheafOfModules.Monoidal.tensorObj\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give sectionwise site-induced pullback/free modules, presheaf tensors or light condensed tensors; none compares arbitrary geometric inverse image with the internal mapMod transport and its specified mate tensorator"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|MonObj|bilinear",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"Algebra/Category/ModuleCat/Sheaf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give sectionwise site-induced pullback/free modules, presheaf tensors or light condensed tensors; none compares arbitrary geometric inverse image with the internal mapMod transport and its specified mate tensorator"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\"",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"PointedContMDiffMap.instAlgebraSomeENatTopContMDiffMapModelWithCornersSelf\", \"PointedContMDiffMap.instIsScalarTowerSomeENatTopContMDiffMapModelWithCornersSelf\", \"LeftInvariantDerivation.instFunLikeContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instCoeDerivationContMDiffMapModelWithCornersSelfSomeENatTop\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give sectionwise site-induced pullback/free modules, presheaf tensors or light condensed tensors; none compares arbitrary geometric inverse image with the internal mapMod transport and its specified mate tensorator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of abelian sheaves has tensor comparison induced by inverse image of the universal bilinear map; its transported internal ring and module structures equal their algebraic inverse images",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give sectionwise site-induced pullback/free modules, presheaf tensors or light condensed tensors; none compares arbitrary geometric inverse image with the internal mapMod transport and its specified mate tensorator"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-module-mapmod-pullback-kflat",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sfb-module-derived-factorization",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-module-mapmod-pullback-kflat",
+   "place": "Parent lem-sfb-module-mapmod-pullback-kflat proof, opening sentence identifying mapMod with module inverse image; live split step 2, including ring multiplication/unit, module action and complex differentials.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-module-inverse-image-comparison",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Prove normalization of the actual mate tensorator and unit by set-adjunction injectivity, then calculate the reconstructed ring operations, scalar action and chain differentials. Reuse the lifted abelian adjunction and sheaf-tensor universal property, with no restriction to site-induced geometric morphisms or enough points.",
+  "blueprint": "Realizes the opening inverse-image identification in the main-20261015 parent proof and live parent split step 2; steps 1–3 fix its tensor/unit normalization, steps 4–5 its ring/action comparison and step 6 its unbounded-complex clause.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic universal property of sheafified sectionwise tensor, used over integer coefficients to identify the canonical bilinear pairings; the unit route has no alternative universal-property node."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-c9a50cd48",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-c9a50cd48 (reviewer sub-agent of L); spot-checked: Read the item, all 14 cited statements, Stacks 03D2 (lemma-pullback-module, sites-modules.tex l.1020) and parent lem-sfb-module-mapmod-pullback-kflat step 2. The statement and stmt_deps are unchanged from side-live, the item is unsplit in live and side-live, there is no repair note, no new nodes and no SGA. Steps recomputed: the step-1 lax unpacking is correct. In step 2, G(d)eta p = m(eta⊗eta)p = G(p)rho^{-1}(eta×eta), and with rho G(lambda)eta = eta×eta, set-adjunction injectivity gives dLp = p lambda. Step 3 gives d0 L1 = 1 lambda_*. Steps 4-5 substitute into def-sfb-modobj-transport, def-weil-pbc-internal-abelian-sheaf-module-equivalence and def-weil-pbc-algebraic-inverse-image (elementary). Step 6 applies termwise naturality and then Q. The declared tool use lem-pc-sites-sheaf-tensor-bilinear-universal (generic, Lean-closed; O = Z_C, where biadditive is the same as Z_C-bilinear) is accepted. Edge cases checked: identity morphism, zero ring and zero sheaves, empty site, unbounded complexes. One fault (E5/D5): the statement presupposes the mate d and d0 are invertible ('obtained by inverting'), but step 2 said 'by hypothesis' and no cited node proves it for an arbitrary geometric morphism. FIX: steps 2 and 3 now prove invertibility. In step 2, phi is the additive extension of L(p)lambda^{-1}, d phi = 1 by bilinear uniqueness, and phi d = 1 because additive maps out of L(A⊗B) are determined by precomposition with L(p). Step 3 has the analogous phi0 with 1_D mapped to L(1_C)lambda_*^{-1}. lem-weil-pbc-adjunction-lifts-abelian-group-objects was added to step 3's uses (already in proof_deps). The new steps are 1885 and 1274 characters. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalModuleInverseImageComparison",
+  "declaration": "CategoryTheory.InternalModuleInverseImage.internalModuleInverseImageComparison",
+  "declarations": [
+   "CategoryTheory.InternalModuleInverseImage.tensorSection",
+   "CategoryTheory.InternalModuleInverseImage.integerOne",
+   "CategoryTheory.InternalModuleInverseImage.TensorNormalization",
+   "CategoryTheory.InternalModuleInverseImage.directLax_existsUnique",
+   "CategoryTheory.InternalModuleInverseImage.directLax",
+   "CategoryTheory.InternalModuleInverseImage.inverseOplax",
+   "CategoryTheory.InternalModuleInverseImage.inverseBraided_existsUnique",
+   "CategoryTheory.InternalModuleInverseImage.inverseBraided",
+   "CategoryTheory.InternalModuleInverseImage.underlyingULift",
+   "CategoryTheory.InternalModuleInverseImage.ComplexComparison",
+   "CategoryTheory.InternalModuleInverseImage.ComparisonStatement",
+   "CategoryTheory.InternalModuleInverseImage.internalModuleInverseImageComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalModuleInverseImageComparison.lean",
+  "statement": "theorem internalModuleInverseImageComparison : (inverseBraided J K f A B adj unit_eq).toMonoidal.toOplaxMonoidal = inverseOplax J K f A B adj ∧ TensorNormalization J K f.inverse A (inverseBraided J K f A B adj unit_eq).toMonoidal.toLaxMonoidal ∧ ComparisonStatement J K f A (inverseBraided J K f A B adj unit_eq)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical direct-image lax structure and inverse-image strong braided structure are chosen only from existence-and-uniqueness statements; the latter has oplax structure equal to the actual adjunction mate. TensorNormalization uses all generalized sections, not merely global sections or globally pure tensors. ComparisonStatement supplies the normalized ring isomorphism, the semilinear natural module isomorphism, and ComplexComparison on every unbounded complex with its natural derived image. A, B and unit_eq present the induced finite-product abelian adjunction, using the existing AbelianInverseImagePresentation interface. No hypothesis of flatness, boundedness or enough points is imposed. All helper declarations belong to the canonical comparison specified by this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df64570d4",
+  "group": "NL",
+  "result": "pass",
+  "note": "Item changed only in lean and stmt_deps; the added stmt_dep def-trf-abelian-inverse-image-presentation is a landed definition node with a lean record (allowed by brief-stage2 l.167). lean.statement verbatim; all 12 declarations present; sorry only in the three named theorems; docstrings carry source, blueprint tag and the six node steps. Clauses checked: canonical direct lax structure as the unique TensorNormalization-normalized lax structure (pins m∘p=G(p)ρ⁻¹ and e(1)); inverseOplax is literally adj.leftAdjointOplaxMonoidal; inverseBraided is the unique braided structure with that oplax mate plus normalization (steps 2-3 in sorry'd inverseBraided_existsUnique, not hollow); adj+unit_eq presents the canonical lifted adjunction; transported ring via letI q; σ ring-sheaf iso and θ σ-semilinear natural iso, both pinned to the canonical underlying comparisons through the recorded AlgebraicInverseImageOfUniverses/sectionModuleEquivalence interfaces; ComplexComparison over all unbounded ℤ-complexes with a derived-category iso equal to Q.map of the chain iso. No flatness, boundedness or enough-points hypothesis; independent site universes. Edge cases: identity morphism, zero ring/modules, empty site, unbounded complexes. No compile run (nothing changed). Advisory H9: four plain proof-API imports (TensorBilinearUniversal, CommGrp_, Adjunction.Limits, Sheafification) unused by the statement."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261024T014404-L-2188990",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

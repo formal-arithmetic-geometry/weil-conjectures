@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Choose affine open neighbourhoods $U'_i\\subseteq T'$ covering $T'$, each mapping into some affine open $U_i\\subseteq T$. Indeed, for a point $t'$ first choose an affine open $U_i$ containing $g(t')$, then an affine neighbourhood of $t'$ contained in the open $g^{-1}(U_i)$. This uses [lem-weil-pbc-affine-opens-basis], first on $T$ and then on $T'$. Put $Z_i=f^{-1}(U_i)$ and $Z'_i=(f')^{-1}(U'_i)$. The universal property [def-pc-fibre-product] identifies $Z'_i$ with $Z_i\\times_{U_i}U'_i$: a map to either scheme is a pair of maps to $X$ and $U'_i$ whose composites to $T$ agree, and the map to $X$ factors through $Z_i$ because the second map lands over $U_i$. The projection $a_i:Z'_i\\to Z_i$ is therefore the base change of $U'_i\\to U_i$.",
+   "text": "Choose affine open neighbourhoods $U'_i\\subseteq T'$ covering $T'$, each mapping into some affine open $U_i\\subseteq T$. Indeed, for a point $t'$ first choose an affine open $U_i$ containing $g(t')$, then an affine neighbourhood of $t'$ contained in the open $g^{-1}(U_i)$. This uses [lem-weil-pbc-affine-opens-basis], first on $T$ and then on $T'$. Put $Z_i=f^{-1}(U_i)$ and $Z'_i=(f')^{-1}(U'_i)$. The universal property [def-pc-fibre-product] identifies $Z'_i$ with $Z_i\\times_{U_i}U'_i$: a map to either scheme is a pair of maps to $X$ and $U'_i$ whose composites to $T$ agree, and the map to $X$ factors through $Z_i$ because the second map lands over $U_i$. The projection $a_i:Z'_i\\to Z_i$ is therefore the base change of $U'_i\\to U_i$. In Lean take the index type of all pairs (U_i, U_i′) of affine opens with U_i′ contained in g inverse-image U_i. The affine basis gives membership in this cover point by point. Mathlib Scheme.Hom.isPullback_resLE restricts the original pullback square to these four opens, using the containment to simplify the intersection.",
    "uses": [
     "lem-weil-pbc-affine-opens-basis",
     "def-pc-fibre-product"
@@ -52,12 +52,13 @@
    }
   },
   {
-   "text": "The morphism $U'_i\\to U_i$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], since both its source and target are affine schemes. Its base change $a_i:Z'_i\\to Z_i$ is affine by clause (1) of [lem-weil-pbc-affine-morphism-permanence]. The hypothesis makes $L|_{Z_i}$ ample. Hence [lem-weil-pbc-pullback-ample-invertible] gives that $a_i^*(L|_{Z_i})$ is ample on $Z'_i$. The restriction of $L'$ to $Z'_i$ is this very pullback: the two composites $Z'_i\\to X$ agree, so functoriality of module pullback [def-pc-module-pullback] identifies their pullbacks of $L$. Thus $L'|_{Z'_i}$ is ample for every $i$.",
+   "text": "The morphism $U'_i\\to U_i$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine], since both its source and target are affine schemes. Its base change $a_i:Z'_i\\to Z_i$ is affine by clause (1) of [lem-weil-pbc-affine-morphism-permanence]. The hypothesis makes $L|_{Z_i}$ ample. Hence [lem-weil-pbc-pullback-ample-invertible] gives that $a_i^*(L|_{Z_i})$ is ample on $Z'_i$. The restriction of $L'$ to $Z'_i$ is this very pullback: the two composites $Z'_i\\to X$ agree, so functoriality of module pullback [def-pc-module-pullback] identifies their pullbacks of $L$. Thus $L'|_{Z'_i}$ is ample for every $i$. Lean uses the proved nonempty_tensorPullbackComp comparisons from WeilConjectures.AlgebraicGeometry.TensorPullback on both composites and the equation resLE_comp_ι. The resulting module isomorphism transports ampleness by [lem-sc-ample-iso]. No section-normalized adjunction is needed.",
    "uses": [
     "lem-weil-pbc-morphism-affine-schemes-affine",
     "lem-weil-pbc-affine-morphism-permanence",
     "lem-weil-pbc-pullback-ample-invertible",
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "lem-sc-ample-iso"
    ],
    "elementary": false,
    "source": {
@@ -88,12 +89,13 @@
   "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-pullback-ample-invertible",
   "def-pc-module-pullback",
-  "lem-trf-scheme-relative-ample-affine-cover"
+  "lem-trf-scheme-relative-ample-affine-cover",
+  "lem-sc-ample-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0893 (lemma-ample-base-change), with the implicit quasi-compactness checked from 01PS and preserved by Schemes 01K5; affine pullback is 0892 (2), and locality is 01VJ (3) implies (1)."
+  "place": "Tag 0893 (lemma-ample-base-change), with the implicit quasi-compactness checked from 01PS and preserved by Schemes 01K5; affine pullback is 0892 (2), and locality is 01VJ (3) implies (1). Lean realization by C8, 2026-10-26: the same five steps, using isPullback_resLE for the restricted square, all subordinate affine pairs for the covering, and nonempty_tensorPullbackComp plus isAmple_iff_of_iso for transport."
  },
  "mathlib_searches": [
   {
@@ -216,5 +218,26 @@
   "note": "Wrote review.md. Checked source, all statement dependencies, exact declarations, universe correction and sole citer, edge cases, docstrings, signature equality, and route-pivot exclusions. Immutable Lean module compiled through scompile.py with exit code 0 and no diagnostics. No fixes needed; branch head unchanged.",
   "statement_corrected": true
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T081325-L-1920067",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

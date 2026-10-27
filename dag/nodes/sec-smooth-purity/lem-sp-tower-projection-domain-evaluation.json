@@ -1,0 +1,281 @@
+{
+ "id": "lem-sp-tower-projection-domain-evaluation",
+ "kind": "statement",
+ "title": "Uniform tower tensor domain and evaluation of projection transposes",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ of a scheme morphism $f=pj$ [def-weil-compactifications-refinements]. Put $A_n=\\mathcal O_E/\\ell^n$ for $n\\ge1$. On each scheme $T$ use the varying-ring category $\\operatorname{Tow}(T,\\mathcal O_E)$ of modules over $(A_{n,T})_n$ on the inverse-system pro-étale topos, its ordinary unbounded derived category, and its exact level evaluations [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Use the simultaneous derived section models of [lem-coef-semilinear-derived-sections] for derived tensor over this ring system, exact termwise inverse image, exact termwise $j_!$, and derived direct image with its specified adjunction. Set $F=Rp_{*,\\bullet}j_{!,\\bullet}$ on bounded-below inputs [det-sp-tower-shriek-levels].\n\nLet $C_\\bullet\\in D(\\operatorname{Tow}(X,\\mathcal O_E))$ and $B_\\bullet\\in D(\\operatorname{Tow}(Y,\\mathcal O_E))$. Suppose there are integers $a\\le b$ and $u\\le v$, independent of $n$, such that $\\mathcal H^i(C_n)=0$ for $i\\notin[a,b]$ and $B_n$ has Tor amplitude $[u,v]$, meaning $\\mathcal H^i(B_n\\otimes_{A_n}^LN)=0$ for every degree-zero module sheaf $N$ and $i\\notin[u,v]$ [def-weil-proetale-tor-amplitude]. Then $C_\\bullet,B_\\bullet,j_{!,\\bullet}C_\\bullet$ are bounded below, and both\n$$C_\\bullet\\otimes^Lf^{-1}B_\\bullet,\\qquad j_{!,\\bullet}C_\\bullet\\otimes^Lp^{-1}B_\\bullet$$\nhave cohomology only in $[a+u,b+v]$. At every level this computation admits representatives $T_n$ for $C_n$ supported in $[a,b]$ and flat-term K-flat representatives $P_n$ for $B_n$ supported in $[u,v]$; the signed total tensors $T_n\\otimes f^{-1}P_n$ and $j_!T_n\\otimes p^{-1}P_n$ represent the evaluated derived tensors. Here flat means tensoring with a term is exact, and K-flat means total tensor with every acyclic complex is acyclic [def-pc-flat-sheaf-modules, def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. These level representatives are not required to form a strict tower.\n\nThe counit transpose under $p^{-1}\\dashv Rp_{*,\\bullet}$ and the unit transpose under $j_{!,\\bullet}\\dashv j^{-1}$ define actual derived tower maps, natural in both inputs,\n$$\\pi_p:FC_\\bullet\\otimes^LB_\\bullet\\to Rp_{*,\\bullet}(j_{!,\\bullet}C_\\bullet\\otimes^Lp^{-1}B_\\bullet),\\quad \\pi_j:j_{!,\\bullet}(C_\\bullet\\otimes^Lf^{-1}B_\\bullet)\\to j_{!,\\bullet}C_\\bullet\\otimes^Lp^{-1}B_\\bullet.$$\nThe transposes use the canonical pullback/tensor comparisons and respectively $\\varepsilon\\otimes1$ and $\\eta\\otimes1$. Their evaluations are exactly the corresponding finite proper and open projection maps, and $(Rp_{*,\\bullet}\\pi_j)_n=Rp_*((\\pi_j)_n)$ under the canonical comparisons $(FD)_n\\simeq Rp_*j_!D_n$ for $D=C_\\bullet$ and $D=C_\\bullet\\otimes^Lf^{-1}B_\\bullet$. No constructibility, normalization, or invertibility of these projection maps is asserted or required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), tensor domain and simultaneous projection mate evaluation; tensor model from Stacks Tag 08G1 (sites-cohomology-lemma-tor-amplitude); additional K-flat pullback and derived tensor sources itemized in report.md"
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-compactifications-refinements",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-shriek-levels",
+  "lem-coef-semilinear-derived-sections",
+  "sk-def-sp-coefficient-towers"
+ ],
+ "proof": [
+  {
+   "text": "Compare siteDerivedTensorIndependentCoefficients with wfSiteDerivedTensor by restricting the published homotopy tensor descent comparison to the flat-term K-flat cochain representatives and applying cochain_tensor_model_rigidity. Transfer the Tor test along this natural isomorphism. Apply torAmplitude_iff_exists_bounded_flat_model to each B_n with the uniform interval [v,w]. A complex supported in that interval has vanishing homology outside it, so the representing isomorphism gives the bounds on B_n. The exact evaluation homology comparison and componentwise exactness detect zero tower homology, giving lower bounds on C and B; the exact open extension preserves the lower bound on C.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model",
+    "det-sp-coefficient-towers-abelian",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-cochain-tensor-model-rigidity",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G1, lemma-tor-amplitude; system exactness as specified in lem-coef-semilinear-derived-sections"
+   }
+  },
+  {
+   "text": "Use Mathlib DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE on each C_n with its two cohomology bounds. It returns a representative T_n strictly supported in [a,b] and an isomorphism C_n ≅ Q(T_n). Thus no separately imported truncation theorem or compatibility between levels is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations; explicit kernel/cokernel formulas"
+   }
+  },
+  {
+   "text": "Apply isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite to each bounded flat representative P_n, using the upper support bound w. This is the proved bounded-above flat K-flat criterion, so no filtration construction is repeated here.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat, bounded special case with finite filtration written out"
+   }
+  },
+  {
+   "text": "Restrict the given level tensor model to flat-term K-flat representatives. The canonical pro-etale tensor pullback theorem makes the exact inverse images of P_n K-flat. The ringedTensorComparison_extension theorem computes tensor with any one K-flat factor for the actual prescribed level tensor. Compose this with tensorEvaluation, pullEvaluation and mapDerivedCategoryFactors to identify the first evaluated tensor with its signed total. Compose openEvaluation with exact open extension of the representing isomorphism to obtain the second identification. Exact inverse image and open extension preserve zero terms. For an out-of-range total degree every pair of summand indices has at least one zero factor; the total coproduct universal property makes the term zero. Transfer the resulting homology bounds along the representing isomorphisms and detect tower homology componentwise.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-tensor-comparison-extension",
+    "lem-coef-semilinear-derived-sections",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 06YU (definition-derived-tor); simultaneous evaluation from lem-coef-semilinear-derived-sections"
+   }
+  },
+  {
+   "text": "Use the existing maps_natural and properMap_evaluation laws of the tower compact-support projection interface. They are the recorded naturality and finite evaluation of the specified counit transpose, with the actual properMap unchanged.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), tower projection formula; explicit proper mate word supplied by lem-coef-semilinear-derived-sections"
+   }
+  },
+  {
+   "text": "For openTensor inverse naturality, apply injectivity of the open derived adjunction homEquiv. Rewrite each adjunct by Operations.openTensor_mate. Naturality of the pullback tensor comparison and of the open adjunction unit identify the two resulting tensor morphisms. Use the existing openMap_evaluation law for the specified finite open transpose.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), tower projection formula; open-adjunction transpose and evaluation from lem-coef-semilinear-derived-sections"
+   }
+  },
+  {
+   "text": "Finally let \\alpha_N:e_nGN\\xrightarrow{\\sim}Rp_*e_nN be the system lemma's natural direct-image comparison. Its naturality for the actual map \\pi_j:JA\\to JC_\\bullet\\otimes^LL says \\alpha_{JC\\otimes L}\\circ e_nG(\\pi_j)=Rp_*(e_n\\pi_j)\\circ\\alpha_{JA}. This is the claimed equality (Rp_{*,\\bullet}\\pi_j)_n=Rp_*((\\pi_j)_n) under the canonical comparisons. For D=C_\\bullet and D=A, compose \\alpha_{JD} with the exact open evaluation e_nJD=j_!D_n to obtain (FD)_n\\simeq Rp_*j_!D_n. Step 1 and Step 4 put these two D in the stipulated bounded-below domain of F. All constructions were made before evaluation; no faithfulness of evaluations on morphisms or strict compatibility of the bounded level representatives is used.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), projection formula; natural direct-image and open evaluation comparisons from lem-coef-semilinear-derived-sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ringed-site-tor-flat-model",
+  "det-sp-coefficient-towers-abelian",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "def-pc-tensor-complex-sheaves",
+  "det-sp-tower-shriek-levels"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3); G4 proof using Mathlib bounded representatives, the proved flat-model and one-K-flat tensor comparison, exact level homology detection and adjunction naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]or[Aa]mplitude|[Tt]or_[Aa]mplitude|semilinear.*[Ss]ection|coefficientTower",
+   "results": "5 hits: Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform cohomological interval for tensor of a complex tower with a finite Tor amplitude tower and evaluation of adjunction projection maps",
+   "results": "8 hits: HomologicalComplex.tensorObj, HomologicalComplex.tensorHom, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorTensorUnit, Rep.torIso, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.rightUnitor'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived towers of varying ring module sheaves with uniform cohomology and Tor amplitude have bounded tensor products and evaluation preserves their proper and open projection mates",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For inverse systems of sheaves over quotient rings tensor with a bounded flat complex gives the sum of degree intervals and adjunction transposes evaluate levelwise",
+   "results": "8 hits: localCohomology.diagram, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|semilinear.*[Ss]ection|coefficientTower",
+   "results": "5 hits: Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean, Mathlib/ModelTheory/Arithmetic/Presburger/Semilinear/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of tensor products and projection formula adjunction maps in derived categories of inverse systems of module sheaves over quotient rings",
+   "results": "8 hits: TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ, SheafOfModules.PullbackConstruction.adjunction, TensorProduct.directLimitLeft, ModuleCat.monoidalClosedHomEquiv, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived varying coefficient towers with uniform cohomology bounds and Tor amplitude admit bounded tensor products and evaluation of projection adjunction transposes",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', CategoryTheory.Tor'_obj_obj, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor a complex with bounded cohomology with a finite Tor amplitude complex of sheaves; derived evaluation commutes with adjunction units and counits",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor_map",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-compact-support-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Proof paragraph (3), 'The tower projection formula (an isomorphism of towers, being levelwise the finite projection formula)': uniform tensor domain and coherent evaluation of the projection maps (returned steps 2,3)",
+   "via": [
+    "lem-sp-tower-compact-support-projection-formula"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-tower-projection-domain-evaluation",
+  "worker": "stage1",
+  "summary": "Q22: kept the statement and existing provenance, reused the general ringed-site flat model and simultaneous derived-section calculus; wrote out boundedness, good truncation, finite K-flatness, tensor degree sums, both actual mate words and the natural direct-image comparison square. No new nodes and no Lean changes.",
+  "blueprint": "det-sp-integral-direct-image-tower proof paragraph (3), the tower projection formula sentence: its domain and level evaluation, before the independent finite isomorphism argument.",
+  "tool_uses": [
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Exact componentwise evaluation and cohomology detection of uniform tower bounds."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Existing simultaneous derived-section calculus supplies actual system operations and coherent evaluation, as explicitly assumed by the item."
+   },
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "General fixed-K-flat tensor computation permits an arbitrary, possibly nonflat, bounded representative T_n."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General ringed-topos pullback preserves flat-term K-flat models; used for exact constant-ring inverse images."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-coefficient-towers-abelian",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-286439f4b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-286439f4b (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full, the statements of all 12 cited nodes, blueprint main-20261015 sk-prop-sp-integral-adjunction-direct-image paragraph (3), the parent lem-sp-tower-compact-support-projection-formula and Stacks 08G1, 06YQ, 0G7E, 07A4, 06YU and 0118 (checked against tags/tags). The statement and stmt_deps are byte-identical to the Q59 creation and the live node, and live is still unsplit. Step 1: the flat-model lemma's condition (1) is exactly def-weil-proetale-tor-amplitude, so P_n lies in [u,v]. Exact evaluation and componentwise zero detection give bounds a and u, and exact j_! on systems gives bound a for j_!C. Step 2: τ≥aτ≤b with a qis roof; the a=b endpoint is H^a. Step 3: the finite column filtration argument for a bounded flat complex is correct and elementary. Advisory: it could have cited lem-pc-bounded-above-flat-kflat-site (06YQ). Step 4: the pullback lemma applies because the constant-ring map is an isomorphism, so u^*=u^{-1}; the fixed-K-flat tensor allows a non-flat T_n; total degrees lie in [a+u,b+v]; system tensor evaluates to level tensor. Steps 5-6: both mate words have the right direction and match lem-coef's general projection transpose and open adjunction. Step 7: the naturality square of e_nG≅Rp_*e_n gives the equality. Advisory: these comparisons are lem-coef's, and the parent needs only invertibility. Edge cases checked: zero inputs, a=b, u=v, empty schemes, j=id. No SGA. Tool uses accepted: det-sp-coefficient-towers-abelian, lem-coef-semilinear-derived-sections and the two generic pbc K-flat/pullback tools. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerProjectionDomainEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerProjection.tower_projection_domain_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.levelOpenComplex",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.tower_projection_domain_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/TowerProjectionDomainEvaluation.lean",
+  "statement": "theorem tower_projection_domain_evaluation (base : Base l E) (o : Operations l E base) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (C : D l E X) (B : D l E Y) (a b v w : ℤ) (_hab : a ≤ b) (_hvw : v ≤ w) (_hC : ∀ n : ℕ, ((Ev l E X n).obj C).IsGE a ∧ ((Ev l E X n).obj C).IsLE b) (_hB : ∀ n : ℕ, HasRingedSiteTorAmplitudeOfUniverses.{u + 1, u, u + 1, u + 2} (SpTowerShriek.B l E Y n) ((Ev l E Y n).obj B) v w) : C.IsGE a ∧ B.IsGE v ∧ ((openD l E base (o.openOp c.i)).obj C).IsGE a ∧ (((tensor l E base X).obj (C, (pull l E base (o.geometry f)).obj B)).IsGE (a + v) ∧ ((tensor l E base X).obj (C, (pull l E base (o.geometry f)).obj B)).IsLE (b + w)) ∧ (((tensor l E base c.Z).obj ((openD l E base (o.openOp c.i)).obj C, (pull l E base (o.geometry c.g)).obj B)).IsGE (a + v) ∧ ((tensor l E base c.Z).obj ((openD l E base (o.openOp c.i)).obj C, (pull l E base (o.geometry c.g)).obj B)).IsLE (b + w)) ∧ (∀ n : ℕ, ∃ T : CochainComplex (SemilinearSections.Mod.{u + 1, u, u + 1} (ProEt.topology X) (SpTowerShriek.B l E X n)) ℤ, ∃ P : CochainComplex (SemilinearSections.Mod.{u + 1, u, u + 1} (ProEt.topology Y) (SpTowerShriek.B l E Y n)) ℤ, (∀ i : ℤ, i < a ∨ b < i → IsZero (T.X i)) ∧ (∀ i : ℤ, i < v ∨ w < i → IsZero (P.X i)) ∧ SemilinearSections.flatTerms.{u + 1, u, u + 1} (ProEt.topology Y) (SpTowerShriek.B l E Y n) P ∧ CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} P ∧ Nonempty ((Ev l E X n).obj C ≅ DerivedCategory.Q.obj T) ∧ Nonempty ((Ev l E Y n).obj B ≅ DerivedCategory.Q.obj P) ∧ Nonempty ((Ev l E X n).obj ((tensor l E base X).obj (C, (pull l E base (o.geometry f)).obj B)) ≅ DerivedCategory.Q.obj ((SemilinearSections.totalTensor.{u + 1, u, u + 1} (ProEt.topology X) (SpTowerShriek.B l E X n)).obj (T, ((proEtaleConstantRingPullback (R l E n) f).mapHomologicalComplex (.up ℤ)).obj P))) ∧ Nonempty ((Ev l E c.Z n).obj ((tensor l E base c.Z).obj ((openD l E base (o.openOp c.i)).obj C, (pull l E base (o.geometry c.g)).obj B)) ≅ DerivedCategory.Q.obj ((SemilinearSections.totalTensor.{u + 1, u, u + 1} (ProEt.topology c.Z) (SpTowerShriek.B l E c.Z n)).obj ((levelOpenComplex l E base c.i n).obj T, ((proEtaleConstantRingPullback (R l E n) c.g).mapHomologicalComplex (.up ℤ)).obj P)))) ∧ (∀ (C' : D l E X) (B' : D l E Y) (h : C ⟶ C') (k : B ⟶ B'), (source l E base o c).map (Prod.mkHom h k) ≫ properMap l E base o c C' B' = properMap l E base o c C B ≫ (middle l E base o c).map (Prod.mkHom h k) ∧ (openSource l E base o c).map (Prod.mkHom h k) ≫ openMap l E base o c C' B' = openMap l E base o c C B ≫ (middle l E base o c).map (Prod.mkHom h k)) ∧ (∀ (C' : D l E X) (B' : D l E Y) (h : C ⟶ C') (k : B ⟶ B'), (openD l E base (o.openOp c.i)).map ((tensor l E base X).map (Prod.mkHom h ((pull l E base (o.geometry c.i)).map ((pull l E base (o.geometry c.g)).map k)))) ≫ (o.openTensor c.i C' ((pull l E base (o.geometry c.g)).obj B')).inv = (o.openTensor c.i C ((pull l E base (o.geometry c.g)).obj B)).inv ≫ (tensor l E base c.Z).map (Prod.mkHom ((openD l E base (o.openOp c.i)).map h) ((pull l E base (o.geometry c.g)).map k))) ∧ (∀ n : ℕ, (Ev l E Y n).map (properMap l E base o c C B) ≫ ((o.geometry c.g).pushEvaluation n).hom.app ((tensor l E base c.Z).obj ((openD l E base (o.openOp c.i)).obj C, (pull l E base (o.geometry c.g)).obj B)) ≫ (proEtaleConstantRingPushforward (R l E n) c.g).rightDerivedFunctor.map (((base.calculus c.Z).tensorEvaluation n).hom.app ((openD l E base (o.openOp c.i)).obj C, (pull l E base (o.geometry c.g)).obj B) ≫ (levelTensor l E base c.Z n).map (Prod.mkHom (𝟙 _) (((o.geometry c.g).pullEvaluation n).hom.app B))) = ((base.calculus Y).tensorEvaluation n).hom.app ((F l E base o c).obj C, B) ≫ (levelTensor l E base Y n).map (Prod.mkHom (((o.geometry c.g).pushEvaluation n).hom.app ((openD l E base (o.openOp c.i)).obj C)) (𝟙 _)) ≫ finiteProperMap l E base (o.geometry c.g) n ((openD l E base (o.openOp c.i)).obj C) B) ∧ (∀ n : ℕ, (Ev l E c.Z n).map ((o.openTensor c.i C ((pull l E base (o.geometry c.g)).obj B)).inv) ≫ ((base.calculus c.Z).tensorEvaluation n).hom.app ((openD l E base (o.openOp c.i)).obj C, ((pull l E base (o.geometry c.g)).obj B)) ≫ (levelTensor l E base c.Z n).map (Prod.mkHom ((openEvaluation l E base (o.openOp c.i) n).hom.app C) (𝟙 _)) = (openEvaluation l E base (o.openOp c.i) n).hom.app ((tensor l E base X).obj (C, (pull l E base (o.geometry c.i)).obj ((pull l E base (o.geometry c.g)).obj B))) ≫ (sfIntrinsicDerivedOpen (R l E n) c.i).map (((base.calculus X).tensorEvaluation n).hom.app (C, (pull l E base (o.geometry c.i)).obj ((pull l E base (o.geometry c.g)).obj B)) ≫ (levelTensor l E base X n).map (Prod.mkHom (𝟙 _) (((o.geometry c.i).pullEvaluation n).hom.app ((pull l E base (o.geometry c.g)).obj B)))) ≫ finiteOpenMap l E base o c.i n C ((pull l E base (o.geometry c.g)).obj B)) ∧ (∀ n : ℕ, (Ev l E Y n).map (openMap l E base o c C B) ≫ ((o.geometry c.g).pushEvaluation n).hom.app ((tensor l E base c.Z).obj ((openD l E base (o.openOp c.i)).obj C, (pull l E base (o.geometry c.g)).obj B)) = ((o.geometry c.g).pushEvaluation n).hom.app ((openD l E base (o.openOp c.i)).obj ((tensor l E base X).obj (C, (pull l E base (o.geometry c.i)).obj ((pull l E base (o.geometry c.g)).obj B)))) ≫ (proEtaleConstantRingPushforward (R l E n) c.g).rightDerivedFunctor.map ((Ev l E c.Z n).map ((o.openTensor c.i C ((pull l E base (o.geometry c.g)).obj B)).inv)))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing SpTowerShriek ordinary unbounded system model and recorded ringed-site Tor test. Reuses the already published properMap, openTensor inverse and finite projection words from TowerCompactSupportProjectionFormula; no duplicate arrow or tensor is defined. States uniform tensor intervals, independent bounded flat K-flat level models, naturality, both finite projection evaluation equations and the pushEvaluation square."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e7442194",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Lean statement and node record are exact: only the lean field changed; lean.statement matches the file; hypotheses (a≤b, v≤w, levelwise IsGE/IsLE, recorded Tor-amplitude test against all degree-zero modules, universes u+1/u/u+1/u+2) and every conclusion clause match the node. Explicit bounds a,v,a are slightly stronger than 'bounded below' and are what step 1 proves (accepted). The ∀n ∃T P level representatives have term support, flatTerms, IsKFlatIndependentCoefficients and Nonempty isos to Q T, Q P and Q(totalTensor) with termwise pullback and termwise j_!. properMap and openTensor.inv (pinned by openTensor_mate) are π_p and π_j; naturality and evaluation equations end in finiteProperMap/finiteOpenMap; the last clause is the pushEvaluation square on π_j. Not hollow, only sorry, docstrings OK, edge cases covered. Sole fault H11: the second reading was a self-check; fixes/lem-sp-tower-projection-domain-evaluation.report.md keeps the worker report verbatim and adds an independent clause-by-clause reading. Advisory: the arrows are owned by the parent theorem lem-sp-tower-compact-support-projection-formula (citing it would be a cycle; stmt_deps unchanged), so stage 3 must omit the reverse import; flatTerms owner def-coef-semilinear-system-models is uncited."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T143410-L-989823",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-noetherian-stratified-model-product-embedding",
+ "kind": "statement",
+ "title": "Small stratified products and their unit-component embeddings for supplied module families",
+ "statement": "Fix universes $\\mathcal U\\in\\mathcal V$ and scheme bounds [def-weil-size-convention]. Let $X$ be a quasi-compact locally Noetherian scheme [def-weil-pbc-quasi-compact-scheme, pqf-def-locnoeth]. Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with $A=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and coefficient sheaves $R_T=p_T^*\\underline A$ [sk-def-sfb-pulled-back-coefficients, def-sfb-integral-model-condensed-coefficients]. Use the module categories, pullbacks, pushforwards and specified adjunction units $\\eta_a$ of [sk-def-sfb-module-pushforward-pullback]. For every bounded scheme $T$ admitting a locally closed immersion into $X$, suppose given a set $I_T\\in\\mathcal V$ and a family of $R_T$-modules $(F_{T,t})_{t\\in I_T}$; their sections are in $\\mathcal V$. No local-model or constructibility condition is imposed on these supplied modules. Let $H$ be all finite locally closed scheme stratifications $h=(a_s:S_s\\hookrightarrow X)_{s<n(h)}$ in the fixed bound [def-constructible-stratification]. Then $H$ and $J=\\coprod_{h\\in H}\\prod_{s<n(h)}I_{S_s}$ belong to $\\mathcal V$. For every $j=(h,(t_s)_s)\\in J$, the product $P_j=\\prod_{s<n(h)}a_{s*}F_{S_s,t_s}$ exists. Through the internal-to-sectionwise equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence, def-weil-sheaf-of-modules-category], its sections are $P_j(V)=\\prod_s(a_{s*}F_{S_s,t_s})(V)\\in\\mathcal V$, and its empty product is the zero module sheaf. For every $R_X$-module $M$, every $j=(h,(t_s)_s)$ and every tuple of isomorphisms $\\varphi_s:a_s^*M\\xrightarrow{\\sim}F_{S_s,t_s}$, the map $u:M\\to P_j$ with components $a_{s*}(\\varphi_s)\\circ\\eta_{a_s,M}$ is a monomorphism. Equivalently, any $M$ whose restrictions on some finite stratification are represented by the supplied families admits such a $j$, tuple of isomorphisms and monomorphism. This assertion includes empty strata and, when $X$ is empty, the empty stratification.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), final sentence: finite stratifications and gluing morphisms; extracted product-bound proof steps 4–7: bounded stratification codes, sectionwise products and the geometric verification of the joint-adjunction embedding hypotheses."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-integral-model-condensed-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-constructible-stratification",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "In the fixed scheme bound [def-weil-size-convention], the scheme codes and their morphism codes are sets in $\\mathcal V$. For each $n\\in\\mathbf N$, encode a candidate stratification by an $n$-tuple of bounded schemes and $n$ morphisms to $X$. The immersion, disjoint-image and covering conditions of [def-constructible-stratification] cut out a subset of these codes. The union of these subsets over $n$ is $H\\in\\mathcal V$. For each $h$, the finite dependent product $\\prod_{s<n(h)}I_{S_s}$ is in $\\mathcal V$ by closure of a Grothendieck universe under indexed products; its dependent sum over $H$ is $J\\in\\mathcal V$. These are actual bounded codes, not isomorphism classes; distinct codes cause no problem.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-constructible-stratification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratification and gluing data form a set; explicit product embedding argument"
+   }
+  },
+  {
+   "text": "Fix a labelled stratification j and take the existing categorical product of its factors stratifiedModelFactors. The category of internal modules is abelian, hence has finite products. The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] preserves this product, and evaluation on every V preserves it by [lem-weil-pbc-module-sheaves-limits-sectionwise]. Compose evaluation with the module forgetful functor to Type. Its mapped fan is limiting, hence is uniquely isomorphic to the ordinary dependent product of the underlying section types. The projection equations identify the isomorphism with the displayed section comparison, proving its bijectivity. Every section type is in universe u+1.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits), limits paragraph, and 03CO (lemma-limits-colimits-abelian-sheaves), clause (2)"
+   }
+  },
+  {
+   "text": "The existing module-pullback interface [sk-def-sfb-module-pushforward-pullback] provides additivity and preservation of finite limits. To check joint zero detection, first observe that quasi-compact locally Noetherian X is Noetherian. Each immersion domain has Noetherian underlying space via its topological embedding, so its immersion into X is quasi-compact. The stratification covering equation says that these finitely many immersions jointly cover X. For an internal module N whose pullbacks vanish, use the existing upperStarObjXIso comparison to conclude that all corresponding pullbacks of its underlying abelian sheaf vanish. Apply [lem-pod-finite-qc-proetale-abelian-detection] to the identity of this abelian sheaf; each pulled-back identity is zero since its object is zero. Its identity is therefore zero. Faithfulness of Mod.forget identifies the identity and zero of N, proving that N is zero. This applies to arbitrary modules and to the empty family.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-pod-finite-qc-proetale-abelian-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/DetectionAb.lean",
+    "place": "eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp, together with upperStarObjXIso and isZero_of_isZero_X in ModuleObject/OpenClosed.lean; Noetherian-domain quasi-compactness from Mathlib."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-joint-adjunction-model-embedding] with the module pullbacks, direct images, and precisely the supplied upperStarLowerStarAdjunction of [sk-def-sfb-module-pushforward-pullback]. The previous step checks joint zero detection, and the existing pullback instances check additivity and kernel preservation. Use the given models and isomorphisms phi. The theorem proves that Pi.lift of the required components is monic. The ordinary Pi.lift projection equations give exactly unit.app M followed by lowerStar.map (phi s).hom for the chosen categorical product cone.",
+   "uses": [
+    "lem-sfb-joint-adjunction-model-embedding",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratification and gluing data form a set; explicit product embedding argument"
+   }
+  },
+  {
+   "text": "If the restrictions of $M$ on some $h$ are represented by the supplied families, choose for each of its finitely many positions a label $t_s$ and an isomorphism $\\varphi_s$. This defines $j\\in J$, and step 4 supplies the map. Conversely, such a tuple of isomorphisms is exactly a witness that the restrictions are represented. Empty label sets simply remove the corresponding labelled stratifications from $J$; there is no unconditional assertion that $J$ is nonempty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratification and gluing data form a set; explicit product embedding argument"
+   }
+  },
+  {
+   "text": "If n=0, Fin n is empty. Product extensionality proves that the identity and zero on the chosen product agree, because there are no projections to check. Thus its point is a zero object. The same finite quasi-compact detection theorem [lem-pod-finite-qc-proetale-abelian-detection] already permits an empty family when X is empty, so the proof of monicity remains valid. Empty strata are allowed throughout: the embedding and Noetherian-domain arguments apply unchanged, and the stratification covering equation supplies all required surjectivity.",
+   "uses": [
+    "def-constructible-stratification",
+    "lem-pod-finite-qc-proetale-abelian-detection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratification and gluing data form a set; explicit product embedding argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-constructible-stratification",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pod-finite-qc-proetale-abelian-detection",
+  "lem-sfb-joint-adjunction-model-embedding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), final sentence; T4 formalization uses categorical products and their section comparisons, the proved adopted finite quasi-compact abelian-sheaf detection theorem, and the existing joint-adjunction model embedding criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian scheme a small family of stratum module sheaves yields a small family of finite direct image products and adjunction unit monomorphisms",
+   "results": "8 hits: AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, SheafOfModules.IsFiniteType, CategoryTheory.isEventuallyConstant_of_isNoetherianObject, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, CategoryTheory.isNoetherianObject_iff_isEventuallyConstant, SheafOfModules.GeneratingSections.IsFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: individual adjunction-unit facts and ordinary products do not give the small stratified family with the geometric joint-zero-detection hypotheses checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Mono",
+   "results": "6 hits: CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms, CategoryTheory.Adjunction.faithful_L_of_mono_unit_app, CategoryTheory.Adjunction.unit_mono_of_L_faithful, CategoryTheory.MonoOver.mapPullbackAdj, CategoryTheory.Subobject.mapPullbackAdj, CategoryTheory.adhesive_of_reflective",
+   "date": "2026-10-22",
+   "verdict": "no match: individual adjunction-unit facts and ordinary products do not give the small stratified family with the geometric joint-zero-detection hypotheses checked"
+  },
+  {
+   "tool": "grep",
+   "query": "(stratif|stratum).*(product|mono)|joint.*(unit|adjunction)|unit.*mono",
+   "results": "25 hits: Mathlib/CategoryTheory/MarkovCategory/Basic.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Monoidal/Subcategory.lean, Mathlib/CategoryTheory/Endomorphism.lean; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: individual adjunction-unit facts and ordinary products do not give the small stratified family with the geometric joint-zero-detection hypotheses checked"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restrictions to finitely many strata jointly detect zero objects and give embeddings by adjunction units into products of pushforwards",
+   "results": "8 hits: HomologicalComplex.isZero_iff_isStrictlySupported_and_isStrictlySupportedOutside, CategoryTheory.Limits.zeroProdIso, CategoryTheory.Limits.hasZeroObject_of_hasFiniteBiproducts, HomologicalComplex.IsStrictlySupported.isZero, CategoryTheory.Limits.prodZeroIso, HomologicalComplex.IsStrictlySupported.mk, HomologicalComplex.IsStrictlySupportedOutside.isZero, CategoryTheory.Limits.HasFiniteBiproducts.casesOn",
+   "date": "2026-10-22",
+   "verdict": "no match: individual adjunction-unit facts and ordinary products do not give the small stratified family with the geometric joint-zero-detection hypotheses checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite stratifications labelled by small families of sheaves give a small indexed collection of pushforward product targets with prescribed unit component embeddings",
+   "results": "8 hits: CategoryTheory.PresheafIsFinite, SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, CategoryTheory.Sheaf.instHasFiniteProducts, CategoryTheory.Presieve.preservesProduct_of_isSheafFor, CategoryTheory.presheafIsGeneratedBy_of_isFinite, CategoryTheory.Presieve.isSheafFor_iff_preservesProduct, CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeVal, CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: individual adjunction-unit facts and ordinary products do not give the small stratified family with the geometric joint-zero-detection hypotheses checked"
+  },
+  {
+   "tool": "grep",
+   "query": "stratif|stratum|joint.*detect|unit_mono",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mono|mono.*adjunction|adjunction.*mono",
+   "results": "25 hits: Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean, Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean, Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean, Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: full stratified product and geometric unit-embedding assertion absent; sectionwise limits reused from existing Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "stratif|stratum|joint.*adjunction",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: full stratified product and geometric unit-embedding assertion absent; sectionwise limits reused from existing Mathlib leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small family of finite stratifications with small sets of module sheaf labels has small product targets and monic adjunction unit maps",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, stalkSkyscraperSheafAdjunction, SheafOfModules.hasLimitsOfSize, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, SheafOfModules.Finite.hasFiniteLimits, instMonoidalClosedLightCondSet, CompHausLike.LocallyConstant.adjunction, LightCondensed.instSmallHom",
+   "date": "2026-10-22",
+   "verdict": "no match: full stratified product and geometric unit-embedding assertion absent; sectionwise limits reused from existing Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Mono",
+   "results": "6 hits: CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms, CategoryTheory.Adjunction.faithful_L_of_mono_unit_app, CategoryTheory.Adjunction.unit_mono_of_L_faithful, CategoryTheory.MonoOver.mapPullbackAdj, CategoryTheory.Subobject.mapPullbackAdj, CategoryTheory.adhesive_of_reflective",
+   "date": "2026-10-22",
+   "verdict": "no match: full stratified product and geometric unit-embedding assertion absent; sectionwise limits reused from existing Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite stratification of a Noetherian scheme gives a monomorphism from every module sheaf into the product of the pushforwards of its restrictions",
+   "results": "8 hits: Profinite.NobelingProof.succ_mono, AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, PresheafOfModules.injective_of_mono, PresheafOfModules.instMonoModuleCatCarrierObjOppositeRingCatApp, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mono_f₁₃, CategoryTheory.Sheaf.mono_of_isLocallyInjective, PresheafOfModules.mono_iff_surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: full stratified product and geometric unit-embedding assertion absent; sectionwise limits reused from existing Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jointly conservative exact inverse image functors along strata give injectivity of the map into a finite product of direct images",
+   "results": "8 hits: CategoryTheory.Functor.eventually_injective, CategoryTheory.Functor.eval_section_injective_of_eventually_injective, AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective, CategoryTheory.PreGaloisCategory.evaluation_injective_of_isConnected, CategoryTheory.Functor.Fiber.fiberInclusion_obj_inj, CategoryTheory.Functor.isMittagLeffler_of_exists_finite_range, CategoryTheory.Functor.isMittagLeffler_iff_subset_range_comp, Profinite.NobelingProof.CC_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: full stratified product and geometric unit-embedding assertion absent; sectionwise limits reused from existing Mathlib leaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stratified-constant-model-product-bound",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-integral-heart-triangulated",
+   "place": "Paragraph (2), final sentence: finite stratifications and gluing morphisms; extracted product-bound proof steps 4–7: bounded stratification codes, sectionwise products and the geometric verification of the joint-adjunction embedding hypotheses.",
+   "via": [
+    "lem-sfb-stratified-constant-model-product-bound"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-noetherian-stratified-model-product-embedding",
+  "worker": "stage1",
+  "summary": "NG: split using existing sectionwise-limits, Cartesian-coefficient, Noetherian-stratum-detection and joint-adjunction embedding nodes. Wrote bounded H/J coding and checked the prescribed unit components, arbitrary supplied families and empty cases. No statement change, no new nodes, no attachment or Mathlib match for the full item.",
+  "blueprint": "Realizes det-lem-int-integral-heart-triangulated paragraph (2), final sentence on finite stratifications and gluing data, specifically the product-bound expansion steps 4–7 recorded in this item source.",
+  "tool_uses": [
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Cartesian coefficient pullback is exact and agrees on underlying abelian sheaves with inverse image; this generic coefficient tool supplies the precise hypothesis for the abstract embedding lemma."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic zero detection for arbitrary abelian sheaves on a Noetherian stratified scheme, used with identity covers; the integral-heart unit does not state this geometric tool."
+   },
+   {
+    "node": "lem-sfb-joint-adjunction-model-embedding",
+    "why": "Generic abelian-category adjunction embedding criterion, used after checking all its geometric hypotheses; it does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sfb-joint-adjunction-model-embedding"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NG-ab8a6312c",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-ab8a6312c (reviewer sub-agent of L); spot-checked: No new nodes. The item statement, stmt_deps, source and blueprint are byte-equal to live, and the item is still unsplit live and on side-live. It is not on the drop list, has no repair note and uses no SGA. Step 1 codes H and J as bounded tuples by elementary universe closure. Step 2 bounds the sections through the finite-lower-star formula G(V×_X S), takes the product from the sectionwise-limits Mathlib leaf over a finite discrete diagram, and transports it through the internal↔sectionwise equivalence, which by its statement keeps sections identical. Step 3: O_E is an admissible coefficient in cartesian-coefficients, so a_s^* is exact, equals a_s^{-1} on underlying sheaves, and is therefore additive and preserves kernels; noetherian-stratum-detection with identity covers gives joint zero detection for arbitrary abelian sheaves on qc locally Noetherian X, matching the item's hypotheses. Step 4 applies joint-adjunction-model-embedding with the specified adjunction of module-pushforward-pullback; I checked that lemma (ker u = K gives F_sK ↪ F_sM with zero adjunct, so K=0). Steps 5–6 cover label choice, the empty product and X=∅ correctly. Tested Spec k (u ≅ φ) and the DVR case j_!R → j_*R (mono). The statement matches its citer, the stratified-constant-model product bound. The 3 tool_uses are generic and used within their hypotheses, so I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NoetherianStratifiedModelProductEmbedding",
+  "declaration": "AlgebraicGeometry.ProEtale.noetherian_stratified_model_product_embedding",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralStratifiedModelModules",
+   "AlgebraicGeometry.ProEtale.LocallyClosedModelDomain",
+   "AlgebraicGeometry.ProEtale.stratificationModelDomain",
+   "AlgebraicGeometry.ProEtale.StratifiedModelIndex",
+   "AlgebraicGeometry.ProEtale.stratifiedModelFactors",
+   "AlgebraicGeometry.ProEtale.integralStratifiedModelSections",
+   "AlgebraicGeometry.ProEtale.noetherian_stratified_model_product_embedding"
+  ],
+  "file": "lean/Sheaf/Paper/NoetherianStratifiedModelProductEmbedding.lean",
+  "statement": "theorem noetherian_stratified_model_product_embedding (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (I : LocallyClosedModelDomain X → Type (u + 1)) (F : ∀ T : LocallyClosedModelDomain X, I T → integralStratifiedModelModules l E T.val) : ∀ j : StratifiedModelIndex X I, ∃ c : Fan (stratifiedModelFactors l E X I F j), Nonempty (IsLimit c) ∧ (∀ V : X.ProEt, Function.Bijective (fun x : (integralStratifiedModelSections l E X V).obj c.pt ↦ fun s : Fin j.1.n ↦ (integralStratifiedModelSections l E X V).map (c.π.app ⟨s⟩) x)) ∧ (j.1.n = 0 → IsZero c.pt) ∧ (∀ (M : integralStratifiedModelModules l E X) (φ : ∀ s : Fin j.1.n, (CondensedRing.upperStar (integralModelCondensedCoefficients l E).X (j.1.immersion s)).obj M ≅ F (stratificationModelDomain j.1 s) (j.2 s)), ∃ f : M ⟶ c.pt, Mono f ∧ ∀ s : Fin j.1.n, f ≫ c.π.app ⟨s⟩ = (CondensedRing.upperStarLowerStarAdjunction (integralModelCondensedCoefficients l E).X (j.1.immersion s)).unit.app M ≫ (CondensedRing.lowerStar (integralModelCondensedCoefficients l E).X (j.1.immersion s)).map (φ s).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "H is the recorded finite locally closed stratification type in Type (u + 1), and J is the displayed dependent sum StratifiedModelIndex in the same universe. Families are supplied on exactly those bounded schemes admitting an immersion into X, without choosing an immersion as family data. The theorem existentially supplies a product cone, its sectionwise comparison through the recorded equivalence, the empty-product zero property, and monic maps with the specified unit components. No arbitrary product object is extracted into a definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3eff7246e",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Only the item node (lean field only; statement/stmt_deps/source/proof byte-equal to live) and the new module Sheaf/Paper/NoetherianStratifiedModelProductEmbedding.lean differ from side-live. Clause match: CompactSpace + IsLocallyNoetherian X; l, E binders as the recorded integralModelCondensedCoefficients; R_T = condensedRingObj; families on {T // ∃ immersion into X} with I : Type (u+1); H = Scheme.FiniteLocallyClosedStratification, J = Σ h, Π_s I; ∃ limit Fan of CondensedRing.lowerStar factors; sections bijective via the actual projections through sectionModuleEquivalence + evaluation; n=0 → IsZero; ∀ M φ ∃ mono f with components unit.app M ≫ lowerStar.map φ.hom (adjunction read: upperStar ⊣ lowerStar). No extra hypotheses. Edge cases (X empty, empty labels, empty strata) correct. Helpers transparent, not hollow, with source/blueprint docstrings; 6 proof steps; single sorry; lean.statement verbatim; report sections present; no name collisions. Advisory: helpers parallel those of the landed citer StratifiedConstantModelProductBound (Stratum/Index/Modules); they cannot be imported because of the proof cycle, and the citer can still apply the item. No compile (no FIX); worker reports clean compiles at 15.4/9.3 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-c2471",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261023T152023-L-432163",
+  "kind": "proof",
+  "note": "independent cc review: delivered item module vs clones/live (signature and definitions identical, sorry replaced by a proof with clean axioms); node proof_deps vs Lean uses (DetectionAb theorem = lem-pod-finite-qc-proetale-abelian-detection, mono_pi_lift_adjunction_models); unit sk-lem-int-integral-heart realized empty"
+ }
+}

@@ -1,0 +1,332 @@
+{
+ "id": "lem-sfb-induced-unit-torus-characters",
+ "kind": "statement",
+ "title": "The unit torus of a finite separable extension has permutation characters",
+ "statement": "Let $k$ be any field [def-weil-field], let $k^s/k$ be a separable closure [def-pd-separable-closure], and let $L/k$ be a finite separable field extension [def-pc-field-extension]: $L$ is finite-dimensional over $k$ [def-weil-finite-dimensional-subspace] and the minimal polynomial of every element has distinct roots in an algebraic closure [def-weil-algebraic-closure]. There is an affine $k$-torus $Q_L$ [def-sfb-tori-multiplicative-type, def-sc-group-scheme], of finite type [def-weil-finite-type-morphism], with natural group isomorphisms\n$$Q_L(R)\\simeq(L\\otimes_k R)^\\times$$\nfor all commutative $k$-algebras $R$, where $Q_L(R)=\\operatorname{Hom}_k(\\operatorname{Spec}R,Q_L)$ [def-weil-affine-spectrum], tensor products have the algebra structure of [lem-weil-pbc-algebra-tensor-pushout-universal-property], and $B^\\times$ is the group of multiplicatively invertible elements of a ring $B$. Put $E=\\operatorname{Hom}_{k\\text{-alg}}(L,k^s)$ and $\\Gamma=\\operatorname{Gal}(k^s/k)$. Then the character group of [lem-sfb-multiplicative-character-antiduality] has a $\\Gamma$-equivariant identification\n$$X^*(Q_L)\\simeq\\mathbf Z[E].$$\nHere $\\mathbf Z[E]$ is the free abelian group with basis $e_\\sigma$, $\\sigma\\in E$, and $\\gamma e_\\sigma=e_{\\gamma\\circ\\sigma}$. Under the natural identification $L\\otimes_k k^s\\simeq\\prod_{\\sigma\\in E}k^s$, $a\\otimes b\\mapsto(\\sigma(a)b)_\\sigma$, the basis vector $e_\\sigma$ corresponds to the coordinate character $((z_\\tau)_\\tau\\mapsto z_\\sigma)$. These assertions include $L=k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 2.54--2.55, printed p.57 (represented group functor); 2.59--2.61, printed pp.58--59 (scalar extension and splitting); Lemma 12.61, printed p.251 (permutation character module). Affineness also follows from the affine restriction construction, Stacks Tag 0BL3, lemma-hom-from-finite-locally-free-into-affine, more-morphisms.tex."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pd-separable-closure",
+  "def-pc-field-extension",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-multiplicative-character-antiduality",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite $k$-basis of $L$; its size $d$ is positive since $L$ is a field. Apply [lem-sfb-finite-algebra-units-affine-chart] with $A=L$. It gives $U=D(N)\\subseteq\\operatorname{Spec}B$, $B=k[x_1,\\ldots,x_d]$, and natural bijections $U(R)\\simeq(L\\otimes_kR)^\\times$ for every commutative $k$-algebra $R$. By [lem-weil-pbc-affine-open-section-vanishing-prime](b), $U=\\operatorname{Spec}B_N$. The localization presentation [lem-weil-pbc-localization-away-polynomial-quotient] gives $B_N\\simeq B[t]/(Nt-1)$, generated over $k$ by $x_1,\\ldots,x_d,t$. Thus the one affine chart of $U$ is finitely generated over $k$. It is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so [def-weil-finite-type-morphism] makes $U$ of finite type.",
+   "uses": [
+    "lem-sfb-finite-algebra-units-affine-chart",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.54--2.55, p.57; Proposition 12.60, p.250, multiplication-matrix affine chart."
+   }
+  },
+  {
+   "text": "Transport the units-group operations through the bijections in Step 1, and call the resulting group scheme $Q_L$. Here is the representability check behind the functor-of-points criterion in [def-sc-group-scheme]. In the category of affine $k$-schemes, multiplication is a natural transformation $h_{U\\times_kU}\\to h_U$, inversion is $h_U\\to h_U$, and the constant unit is $h_{\\operatorname{Spec}k}\\to h_U$. Products stay affine by [lem-weil-pbc-fibre-product-affine-spectra]. Full faithfulness [lem-galois-yoneda-fully-faithful] turns these transformations into morphisms; their group identities follow from the units identities and injectivity of that same bijection on morphisms. Therefore $Q_L$ is affine of finite type and the bijections in Step 1 are natural group isomorphisms, also for nonreduced test rings.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.55, p.57; Proposition 3.1, p.64, represented group-valued functor."
+   }
+  },
+  {
+   "text": "First, $L/k$ is separable algebraic in the sense of [def-weil-pbc-separable-algebraic-extension]. Every $\\beta\\in L$ is algebraic, as $1,\\beta,\\ldots,\\beta^{d}$ are linearly dependent for $d=\\dim_kL$. If its minimal polynomial $\\mu$ were not separable [def-pc-separable-polynomial], then by [def-weil-coprime-polynomials] $\\mu$ and $\\mu'$ would have a nonconstant common divisor in $k[T]$, with a root $r$ in the algebraic closure [def-weil-algebraic-closure]. Writing $\\mu=(T-r)Q$ there gives $\\mu'=Q+(T-r)Q'$, so $Q(r)=\\mu'(r)=0$ and $r$ is a repeated root of $\\mu$, contrary to the hypothesis on $L/k$. Apply [lem-zl-finite-separable-tensor-primitive-presentation] with $E=L$ and $K=k^s$. It gives $L=k(\\alpha)$, the monic irreducible minimal polynomial $P\\in k[T]$ of positive degree, and a $k^s$-algebra isomorphism $k^s\\otimes_kL\\simeq k^s[T]/(P_{k^s})$ taking $b\\otimes g(\\alpha)$ to $[bg(T)]$. In particular $P$ is separable. In the coprimality definition [def-pc-separable-polynomial], a Bezout identity $UP+VP'=1$ remains such an identity after coefficient extension; hence $P_{k^s}$ is separable. The field $k^s$ is separably closed by [def-pd-separable-closure], so [lem-trf-separable-polynomial-linear-factorization] gives $P_{k^s}=\\prod_{i=1}^n(T-r_i)$. No two roots coincide: a repeated factor would make both $P_{k^s}$ and its derivative vanish at that root, contradicting the Bezout identity. Since $P$ has positive degree, $n\\geq1$.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-coprime-polynomials",
+    "def-weil-algebraic-closure",
+    "lem-zl-finite-separable-tensor-primitive-presentation",
+    "def-pc-separable-polynomial",
+    "def-pd-separable-closure",
+    "lem-trf-separable-polynomial-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.61, p.59, the finite separable tensor decomposition, expanded using a primitive element."
+   }
+  },
+  {
+   "text": "In $k^s[T]$ put $I_i=(T-r_i)$. For $i\\ne j$, the difference of the two generators is the nonzero scalar $r_j-r_i$, so $I_i+I_j=(1)$. Their intersection equals their product: for two coprime ideals $I,J$ write $1=u+v$ with $u\\in I,v\\in J$, and for $x\\in I\\cap J$ use $x=xu+xv\\in IJ$; induction gives the finite-family assertion (the product of ideals coprime to $J$ is coprime to $J$, by multiplying identities modulo $J$). Thus $\\bigcap_i I_i=(P_{k^s})$. The Chinese remainder isomorphism [lem-pc-crt-ideal-quotient-product] and evaluation $k^s[T]/(T-r_i)\\simeq k^s$ give $k^s[T]/(P_{k^s})\\simeq\\prod_i k^s$, by $[g]\\mapsto(g(r_i))_i$. A $k$-algebra map $L\\to k^s$ is uniquely determined by the image of $\\alpha$, and those images are exactly the roots of $P$: use $L\\simeq k[T]/(P)$ from [lem-weil-pbc-minimal-polynomial-quotient-field-iso] and the evaluation bijection [lem-asd-polynomial-quotient-hom-equivalence]. Every such map is injective since it is a unital map of fields. Reindexing by $E=\\operatorname{Hom}_{k\\text{-alg}}(L,k^s)$ and swapping the tensor factors therefore gives the precise algebra isomorphism $\\theta:L\\otimes_kk^s\\simeq\\prod_{\\sigma\\in E}k^s$, $a\\otimes b\\mapsto(\\sigma(a)b)_\\sigma$.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-asd-polynomial-quotient-hom-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.61, p.59, canonical embedding-indexed tensor decomposition."
+   }
+  },
+  {
+   "text": "For a commutative $k^s$-algebra $R$, tensor associativity identifies $L\\otimes_kR$ with $(L\\otimes_kk^s)\\otimes_{k^s}R$: the map $(a\\otimes b)\\otimes r\\mapsto a\\otimes br$ has inverse $a\\otimes r\\mapsto(a\\otimes1)\\otimes r$, well-defined by the tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]. After $\\theta$, [lem-weil-pbc-tensor-finite-product] identifies this algebra with $\\prod_{\\sigma\\in E}R$; its module isomorphism preserves multiplication and unit by the pure-tensor formulas. Taking units gives $(Q_L)_{k^s}(R)\\simeq\\prod_{\\sigma\\in E}R^\\times$, naturally in $R$, since a tuple is invertible exactly when every coordinate is invertible. For the left side, the affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] and scalar-extension adjunction [lem-weil-pbc-algebra-tensor-base-change-universal-property] identify its points with $Q_L(R)$. The right side is the point functor of $\\mathbf G_m^E$ [def-sc-gm-ga]. Full faithfulness [lem-galois-yoneda-fully-faithful] makes these inverse natural maps an isomorphism of group schemes. Extending the same isomorphism to an algebraic closure gives a split torus there; hence $Q_L$ is a torus by [def-sfb-tori-multiplicative-type].",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-tensor-finite-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+    "def-sc-gm-ga",
+    "lem-galois-yoneda-fully-faithful",
+    "def-sfb-tori-multiplicative-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.59--2.61, pp.58--59, scalar extension and splitting of restriction of scalars."
+   }
+  },
+  {
+   "text": "Set $\\chi_\\sigma=\\operatorname{pr}_\\sigma$ in the split coordinates of Step 5. By the definition of $X^*$ in [lem-sfb-multiplicative-character-antiduality], its underlying group is $\\operatorname{Hom}_{k^s\\text{-grp}}((Q_L)_{k^s},\\mathbf G_m)$. Apply [lem-sfb-split-torus-hom-matrices] over $k^s$, with source rank $|E|$ and target rank $1$ (choose any enumeration of the finite set $E$). Every character is uniquely $\\prod_{\\sigma\\in E}\\chi_\\sigma^{m_\\sigma}$, with $m_\\sigma\\in\\mathbf Z$. The resulting isomorphism $\\mathbf Z[E]\\to X^*(Q_L)$ takes $e_\\sigma$ to $\\chi_\\sigma$ and is independent of the enumeration, since this formula specifies it on every labelled basis vector.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-split-torus-hom-matrices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.61, p.251; split character calculation, Theorem 12.9(b), pp.234--235."
+   }
+  },
+  {
+   "text": "Check the action by conjugation, as defined in [lem-sfb-multiplicative-character-antiduality], on the coordinate functions themselves. The $\\sigma$-coordinate linear form on $L\\otimes_kk^s$ is $\\lambda_\\sigma(a\\otimes b)=\\sigma(a)b$. For $\\gamma\\in\\Gamma$, conjugating this form gives\n$$\\bigl(\\gamma\\lambda_\\sigma(1\\otimes\\gamma^{-1})\\bigr)(a\\otimes b)=\\gamma\\bigl(\\sigma(a)\\gamma^{-1}(b)\\bigr)=(\\gamma\\circ\\sigma)(a)b=\\lambda_{\\gamma\\circ\\sigma}(a\\otimes b).$$\nEquality holds on pure tensors and hence on their finite sums. Restriction to units gives equality of the regular coordinate characters, since they are restrictions of these linear forms on the affine space of $L$ used in Step 1. Thus $\\gamma\\chi_\\sigma=\\chi_{\\gamma\\circ\\sigma}$ as scheme characters, not merely as functions on rational points. The map in Step 6 is therefore $\\Gamma$-equivariant. If $L=k$, its basis has one element, $N(x)=x$, $Q_k=\\mathbf G_m$, and the unique character basis vector is the identity character; all assertions include this case.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.61, p.251, equivariance of the embedding-indexed character basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-algebra-units-affine-chart",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-coprime-polynomials",
+  "def-weil-algebraic-closure",
+  "lem-zl-finite-separable-tensor-primitive-presentation",
+  "def-pc-separable-polynomial",
+  "def-pd-separable-closure",
+  "lem-trf-separable-polynomial-linear-factorization",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-asd-polynomial-quotient-hom-equivalence",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-split-torus-hom-matrices"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "2.54--2.61, pp.57--59; Proposition 12.60 and Lemma 12.61, pp.250--251; explicit tensor and conjugation details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weilRestriction|restrictionOfScalars|IsTorus",
+   "results": "{\"t\": \"2026-10-24T09:19:35Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weilRestriction|restrictionOfScalars|IsTorus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern module restriction of scalars, ordinary units representations, Hilbert 90, or affine space; none represents the finite-separable unit torus with its character basis"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Characters of restriction of scalars of the multiplicative group form a permutation Galois module",
+   "results": "{\"t\": \"2026-10-24T09:19:36Z\", \"tool\": \"leansearch\", \"query\": \"Characters of restriction of scalars of the multiplicative group form a permutation Galois module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.instModuleCarrierObjRestrictScalars\", \"RestrictScalars\", \"RestrictScalars.moduleOrig\", \"Representation.ofModule\", \"Submodule.restrictScalars\", \"RestrictScalars.addEquiv\", \"Representation.ofModule_asAlgebraHom_apply_apply\"], \"digest\": \"d23edd18261e0aae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern module restriction of scalars, ordinary units representations, Hilbert 90, or affine space; none represents the finite-separable unit torus with its character basis"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilRestriction\", \"Galois\"",
+   "results": "{\"t\": \"2026-10-24T09:19:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilRestriction\\\", \\\"Galois\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern module restriction of scalars, ordinary units representations, Hilbert 90, or affine space; none represents the finite-separable unit torus with its character basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Weil restriction of the multiplicative group along a finite separable field extension is a torus with permutation character lattice indexed by embeddings",
+   "results": "{\"t\": \"2026-10-24T09:19:39Z\", \"tool\": \"leanfinder\", \"query\": \"The Weil restriction of the multiplicative group along a finite separable field extension is a torus with permutation character lattice indexed by embeddings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.Hilbert90.aux\", \"galRestrict\", \"galRestrictHom\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"groupCohomology.norm_ofAlgebraAutOnUnits_eq\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"coe_galRestrict_apply\", \"galRestrict_apply\"], \"digest\": \"0fa79674eb9e25ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern module restriction of scalars, ordinary units representations, Hilbert 90, or affine space; none represents the finite-separable unit torus with its character basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The units functor R to units of L tensor R is an affine torus with character basis Hom k L separable closure",
+   "results": "{\"t\": \"2026-10-24T09:19:40Z\", \"tool\": \"leanfinder\", \"query\": \"The units functor R to units of L tensor R is an affine torus with character basis Hom k L separable closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.ofAlgebraAutOnUnits\", \"AlgebraicGeometry.AffineSpace\", \"Field.absoluteGaloisGroupAbelianization\", \"AlgebraicGeometry.AffineSpace.functor\", \"CommRing.Pic.mapAlgebra_apply\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"CommRing.Pic.mapAlgebra\"], \"digest\": \"6fe10fd17878f8e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern module restriction of scalars, ordinary units representations, Hilbert 90, or affine space; none represents the finite-separable unit torus with its character basis"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite separable extension units tensor algebra torus permutation character lattice",
+   "results": "{\"t\": \"2026-10-24T09:47:39Z\", \"tool\": \"leanfinder\", \"query\": \"finite separable extension units tensor algebra torus permutation character lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.Hilbert90.aux\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"groupCohomology.norm_ofAlgebraAutOnUnits_eq\", \"NumberField.Units.logEmbeddingEquiv\", \"NumberField.IsCMField.unitsMulComplexConjInv\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"NumberField.IsCMField.unitsMulComplexConjInv_apply_torsion\", \"NumberField.Units.fundSystem\"], \"digest\": \"471a1f3d04c3685b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary unit-group representations, finite-group or number-field characters, not an algebraic group scheme with this character lattice"
+  },
+  {
+   "tool": "loogle",
+   "query": "Norm, Algebra.TensorProduct, IsTorus, Character",
+   "results": "{\"t\": \"2026-10-24T09:47:40Z\", \"tool\": \"loogle\", \"query\": \"Norm, Algebra.TensorProduct, IsTorus, Character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.TensorProduct'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|restrictionOfScalars|IsTorus|Character",
+   "results": "{\"t\": \"2026-10-24T09:47:40Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|restrictionOfScalars|IsTorus|Character\", \"sub\": \"Mathlib/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary unit-group representations, finite-group or number-field characters, not an algebraic group scheme with this character lattice"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil restriction multiplicative group finite separable extension character group",
+   "results": "{\"t\": \"2026-10-24T09:48:47Z\", \"tool\": \"leansearch\", \"query\": \"Weil restriction multiplicative group finite separable extension character group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulChar.ext\", \"MulChar.pow_card_eq_one\", \"MulChar.finite\", \"MulChar.apply_mem_rootsOfUnity_orderOf\", \"MulChar.ext_iff\", \"AlgEquiv.restrictNormal\", \"MulChar.orderOf_dvd_card_sub_one\", \"MulChar.recOn\"], \"digest\": \"faafbd2c31a8f36a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary unit-group representations, finite-group or number-field characters, not an algebraic group scheme with this character lattice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The group scheme of units of a finite separable algebra has permutation characters",
+   "results": "{\"t\": \"2026-10-24T09:48:49Z\", \"tool\": \"leanfinder\", \"query\": \"The group scheme of units of a finite separable algebra has permutation characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.norm_ofAlgebraAutOnUnits_eq\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"groupCohomology.Hilbert90.aux\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular\", \"groupCohomology.exists_div_of_norm_eq_one\", \"FDRep.simple_iff_char_is_norm_one\", \"IsGaloisGroup.mulEquivAlgEquiv\"], \"digest\": \"2fc1fcf84ffcc778\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ordinary unit-group representations, finite-group or number-field characters, not an algebraic group scheme with this character lattice"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weilRestriction|IsTorus|torus",
+   "results": "{\"t\": \"2026-10-24T09:57:00Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weilRestriction|IsTorus|torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"Mathlib/Topology/Instances/AddCircle/Real.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\", \"Mathlib/Analysis/Fourier/AddCircleMulti.lean\"], \"digest\": \"f770dc3f39c4895c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all 13 hits concern analytic or topological tori; none constructs an algebraic torus or its character lattice"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-induced-quotient",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, passage from a rational fixed coset to an element of G(k), using 25.9(b). Supporting input to Milne 25.9(b): Theorem 17.93(b), used for the rational translate in 25.9(a). Milne 17.93(b), proof: 'which are unirational over k (see 12.64)'. Supporting input: Proposition 12.63, printed p.251, with Lemma 12.61 and Definition 12.62. The displayed product of restrictions has the stated unit functor. A redundant factor L=k allows m>=1, also for the trivial torus. Supporting input to Proposition 12.63: Lemma 12.61, the character basis of one restriction of the multiplicative group.",
+   "via": [
+    "lem-sfb-torus-induced-quotient",
+    "lem-sfb-torus-unirational-parametrization",
+    "lem-sfb-infinite-field-reductive-rational-density",
+    "lem-sfb-field-parabolic-quotient-rational-lift",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-induced-unit-torus-characters",
+  "worker": "stage1",
+  "summary": "Constructed the affine unit group using the existing general finite-algebra chart, proved the embedding-indexed separable tensor splitting via existing polynomial and CRT nodes, then computed the character basis and Galois conjugation. No new nodes. Statement unchanged.",
+  "blueprint": "Inherited ancestry has null from.node (confirmed by blueprint_refs ancestor). The recorded place traces det-thm-sf-ctf-stability-direct-images proof (3) through the alteration prerequisites to Milne 12.63. Steps 1--5 realize its unit-torus construction prerequisite; steps 6--7 realize the use of Milne 12.61 in that argument. Current latest blueprint and full-blueprint searches for torus, permutation character, separable tensor and unit torus yield no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-finite-separable-tensor-primitive-presentation",
+    "why": "Generic explicit finite-separable tensor presentation, used only to expand Milne 2.61; no same-unit node gives this presentation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-finite-separable-tensor-primitive-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-17f14a411",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-17f14a411 (reviewer sub-agent of L); spot-checked: I read Milne iAG 2.54–2.61 (pp.57–59) and 12.60–12.63 (pp.250–251), the item, and every cited statement. There are no new nodes. The statement and stmt_deps are byte-identical to the live base, so the target is not weakened. Steps 1, 2 and 4–7 check out: the units chart gives affine D(N)=Spec B_N of finite type; Yoneda on affine k-schemes gives the group law; CRT is applied with pairwise coprime ideals; embeddings correspond to roots of P via the minimal-polynomial quotient and polynomial-quotient Hom nodes, giving θ(a⊗b)=(σ(a)b); base change gives (Q_L)_{k^s}≅G_m^E, and composing with an embedding k^s→k̄ makes Q_L a torus; the split-torus Hom matrices with s=1 give the characters; and conjugation gives γχ_σ=χ_{γσ} as regular functions (λ_σ=Σσ(e_i)x_i), the left action matching Milne 12.61. Small cases checked: L=k, C/R, finite fields, imperfect k. FIX (one gap, C1/E5): Step 3 said 'P is separable by the hypothesis on L/k', but the item's hypothesis is 'distinct roots in k̄', while the tool lem-zl-finite-separable-tensor-primitive-presentation and def-pc-separable-polynomial need coprimality with the derivative. I prepended the short distinct-roots ⇒ separable-algebraic argument. It cites def-weil-coprime-polynomials, def-weil-algebraic-closure and def-weil-pbc-separable-algebraic-extension, which I also added to the step's uses and proof_deps (step now 1450 characters). The fix is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-induced-unit-torus-characters.json. Batch-5 flag: lem-trf-separable-polynomial-linear-factorization is a Mathlib leaf (Polynomial.Splits.eq_prod_roots_of_monic with IsSepClosed.splits_of_separable) with empty proof_deps. It is a general field-theory fact that neither assumption gives and that is not a step of their proofs; it sits in sec-trace-formula only because of a Temkin branch. It is genuinely outside the assumed statements, so the citation is kept. I accept the tool_use lem-zl-finite-separable-tensor-primitive-presentation: it is generic algebra, used only to expand Milne 2.61, and no node in the unit gives the separable-closure presentation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InducedUnitTorusCharacters",
+  "declaration": "AlgebraicGeometry.MultiplicativeType.exists_inducedUnitTorus_characters",
+  "file": "lean/Sheaf/AlgebraicGeometry/InducedUnitTorusCharacters.lean",
+  "statement": "theorem exists_inducedUnitTorus_characters (k ks L : Type u) [Field k] [Field ks] [Field L] [Algebra k ks] [IsSepClosure k ks] [Algebra k L] [FiniteDimensional k L] [Algebra.IsSeparable k L] : ∃ Q : Grp (Over (Spec (.of k))), IsAffine Q.X.left ∧ LocallyOfFiniteType Q.X.hom ∧ QuasiCompact Q.X.hom ∧ IsTorus Q ∧ ∃ e : ∀ (R : Type u) [CommRing R] [Algebra k R], (StandardGroupSchemes.affine k R ⟶ Q.X) ≃* (L ⊗[k] R)ˣ, (∀ (R S : Type u) [CommRing R] [CommRing S] [Algebra k R] [Algebra k S] (f : R →ₐ[k] S) (p : StandardGroupSchemes.affine k R ⟶ Q.X), e S (StandardGroupSchemes.map k f ≫ p) = Units.map (Algebra.TensorProduct.map (AlgHom.id k L) f).toMonoidHom (e R p)) ∧ ∃ theta : (L ⊗[k] ks) ≃ₐ[k] ((L →ₐ[k] ks) → ks), (∀ (a : L) (b : ks) (σ : L →ₐ[k] ks), theta (a ⊗ₜ[k] b) σ = σ a * b) ∧ ∃ chi : FreeAbelianGroup (L →ₐ[k] ks) ≃ GeometricCharacters ks Q, (∀ x y : FreeAbelianGroup (L →ₐ[k] ks), (chi (x + y)).hom.hom = (chi x).hom.hom * (chi y).hom.hom) ∧ (∀ (γ : ks ≃ₐ[k] ks) (x : FreeAbelianGroup (L →ₐ[k] ks)), IsConjugate γ (chi x) (chi (FreeAbelianGroup.map (fun σ : L →ₐ[k] ks ↦ γ.toAlgHom.comp σ) x))) ∧ (∀ (R : Type u) [CommRing R] [Algebra k R] [Algebra ks R] [IsScalarTower k ks R] (σ : L →ₐ[k] ks) (p : StandardGroupSchemes.affine k R ⟶ Q.X) (q : StandardGroupSchemes.affine ks R ⟶ ((baseChange (K := ks)).obj Q).X), q.left ≫ scalarProjection Q = p.left → (Scheme.ΓSpecIso (.of R)).hom (q.left.appTop (characterElement (chi (FreeAbelianGroup.of σ)))) = Algebra.TensorProduct.productMap (((Algebra.ofId ks R).restrictScalars k).comp σ) (AlgHom.id k R) (e R p : L ⊗[k] R))",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-084a57daf",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read node, 11 stmt_deps, snapshot module, report, and the dependency declarations (GeometricCharacters, IsConjugate, scalarProjection, characterElement, baseChange, IsTorus, StandardGroupSchemes.affine/map) plus the antiduality conventions. Node differs from live only in lean; lean.statement verbatim; sorry-only; no defs; docstrings carry source, blueprint id and 7-step plan; report sections present. Clauses match: any field k, IsSepClosure ks, FiniteDimensional + Algebra.IsSeparable L (equivalent to distinct roots); Q affine, LocallyOfFiniteType+QuasiCompact, IsTorus; e R a MulEquiv on Hom-group points natural in every R (zero/nonreduced included); theta pinned by pure-tensor formula; chi : FreeAbelianGroup E equivalent to GeometricCharacters with sum to pointwise product; IsConjugate unwound on coordinates gives gamma chi_sigma = chi_{gamma o sigma}, matching antiduality and Milne 12.61; basis characters pinned as scheme coordinate characters on all ks-algebras via productMap. Edge cases L=k, finite k, C/R, imperfect k ok. H4: no unit-torus declaration in project Lean; related DAG nodes have no Lean record. Advisories: theta unlinked (harmless); L in universe u (no loss). No file changed, not recompiled."
+ }
+}

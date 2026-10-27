@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer
 public import Sheaf.Paper.ModuleCupCanonicalHZeroIdentification
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 
 /-! # Ordinary integral etale cup products
 
@@ -22,6 +26,7 @@ followed by the existing tensor/single-complex identification.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 universe u v w
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
@@ -39,7 +44,16 @@ functors preserve the sheaf condition because their underlying groups and restri
 maps agree. The identity maps of underlying groups give the unit and counit. -/
 @[instance] theorem integralForget_isEquivalence (X : Scheme.{u}) :
     (integralForget X).IsEquivalence := by
-  sorry
+  let U := ModuleCat.restrictScalars (ULift.ringEquiv (R := ℤ)).symm.toRingHom ⋙
+    forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}
+  let e := U.asEquivalence
+  let S := sheafCompose X.smallEtaleTopology U
+  have : S.EssSurj := ⟨fun P ↦ by
+    let Q := (sheafCompose X.smallEtaleTopology e.inverse).obj P
+    refine ⟨Q, ⟨?_⟩⟩
+    exact ObjectProperty.isoMk _ (Functor.isoWhiskerLeft P.obj e.counitIso)⟩
+  have : S.IsEquivalence := {}
+  exact this
 
 /-- The inverse of the integral-forgetting equivalence, with its canonical counit.
 Source: Stacks 03FD (blueprint: def-wf-ordinary-etale-cup). -/
@@ -69,24 +83,32 @@ def ordinaryEtaleTensorMap (X : Scheme.{u})
 
 /-- The canonical module-derived class comparison is bijective over the integers.
 Source: Stacks 03FD (blueprint: def-wf-ordinary-etale-cup).
-Proof: integral forgetting is an exact equivalence, hence gives bijections on Ext.
-The integral generator is the identity under its constant-sheaf comparison, so
-precomposition with it is also a bijection. Compose the two bijections. -/
+Proof: specialize the proved normalized comparison for arbitrary coefficient rings
+and arbitrary base schemes to ULift Z. Its constant free rank-one generator and
+injective-resolution argument apply without further assumptions. -/
 theorem integralClass_bijective (X : Scheme.{u})
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) (n : ℕ) :
     Function.Bijective (ordinaryFiniteClass (ULift.{u + 1} ℤ) X M n) := by
-  sorry
+  exact ordinaryFiniteClass_bijective_arbitraryBase (ULift.{u + 1} ℤ) X M n
+
+section LiftObjectInstances
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
+  DerivedCategory.singleFunctors Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 
 /-- Realize an ordinary class as a derived integral-module morphism. The inverse is
 uniquely determined by bijectivity. Source: Stacks 03FD
 (blueprint: def-wf-ordinary-etale-cup). -/
 def integralClassLift (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (x : Sheaf.H F n) :
-    (DerivedCategory.singleFunctor _ 0).obj
-        (ordinaryFiniteConstant (ULift.{u + 1} ℤ) X) ⟶
-      ((DerivedCategory.singleFunctor _ 0).obj ((integralLift X).obj F))⟦(n : ℤ)⟧ :=
+    ordinaryFiniteUnit (ULift.{u + 1} ℤ) X ⟶
+      (ordinaryFiniteDegreeZero (ULift.{u + 1} ℤ) X ((integralLift X).obj F))⟦(n : ℤ)⟧ :=
   Function.surjInv (integralClass_bijective X ((integralLift X).obj F) n).surjective
     (Sheaf.H.map (integralLiftIso X F).inv n x)
+
+end LiftObjectInstances
 
 end AlgebraicGeometry.Etale
 
@@ -140,6 +162,13 @@ end DerivedCategory
 
 namespace AlgebraicGeometry.Etale
 
+section CupObjectInstances
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
+  DerivedCategory.singleFunctors Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
+
 /-- Ordinary cup on arbitrary abelian etale sheaves. The pairing is lifted through
 fully faithful integral forgetting; the two ordinary classes are lifted through its
 canonical cohomology comparison. Source: Stacks 0FPJ, 03FD and Remark 0B6C
@@ -153,6 +182,8 @@ def ordinaryEtaleCup (X : Scheme.{u})
       (DerivedCategory.ordinaryCupOfClasses
         ((integralForget X).preimage (e ≫ (integralLiftIso X H).inv)) p q
         (integralClassLift X F p x) (integralClassLift X G q y)))
+
+end CupObjectInstances
 
 /-- Integral presentation of the ordinary inverse-image comparison.
 Source: Stacks 03D7 and 03FD (blueprint: def-wf-ordinary-etale-cup). -/

@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-stack-inertia-separated-diagonal",
+ "kind": "statement",
+ "title": "Separated inertia and separated diagonal of a DM stack",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Stacks in groupoids, Deligne--Mumford stacks, representability by algebraic spaces and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. For a morphism representable by algebraic spaces, separated means that on every scheme base change its algebraic-space diagonal is a closed immersion [def-weil-closed-immersion], tested on scheme charts. Let $\\mathcal X$ be a Deligne--Mumford stack over $S$. Its inertia $I_{\\mathcal X}$ has objects $(x,\\alpha)$ over $T$, where $x\\in\\mathcal X(T)$ and $\\alpha\\in\\operatorname{Aut}(x)$, and arrows $v$ satisfying $v\\alpha=\\beta v$; its projection $p:I_{\\mathcal X}\\to\\mathcal X$ forgets the automorphism. Let $e:\\mathcal X\\to I_{\\mathcal X}$ send $x$ to $(x,1_x)$. The following are equivalent: $p$ is separated; the representable diagonal $\\Delta_{\\mathcal X/S}:\\mathcal X\\to\\mathcal X\\times_S\\mathcal X$ is separated; and $e$ is a closed immersion. Closed immersion of a representable stack map means a closed immersion of schemes on every scheme base change. This holds also for the underlying stack over $\\operatorname{Spec}\\mathbf Z$, so that $p$ is separated if and only if $\\Delta_{\\mathcal X/\\operatorname{Spec}\\mathbf Z}$ is separated.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), part (1), for the structure morphism to S and to Spec Z; Tag 050Q (lemma-inertia) for representability of inertia."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-sfb-separated-representable-moduli-map",
+  "def-sfb-moduli-inertia",
+  "def-sfb-relative-moduli-inertia",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "The DM atlas is a smooth surjective atlas because every representable etale map is smooth [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Apply [lem-sfb-relative-inertia-second-diagonal-geometry] to $\\mathcal X\\to S$. It gives representability of $p$ and of $q=\\Delta_{\\mathcal X/S}$, and identifies $\\Delta_q$ with $e$. The scheme-test definition of separatedness of a representable map $q:A\\to B$ is equivalent to closedness of $\\Delta_q$: for a scheme $T\\to A\\times_B A$, its two objects and their comparison over $B$ define two sections of $A_T\\to T$, where $A_T=T\\times_B A$. The pullback of $\\Delta_q$ is exactly their equalizer, hence the scheme test of $\\Delta_{A_T/T}$ along this pair. Conversely every scheme test of $\\Delta_{A_T/T}$ is a test of $\\Delta_q$ by the same description of triples in the $2$-fibre product [def-sfb-stable-pointed-moduli-groupoids]. Closed immersion in both descriptions means the same scheme morphism is a closed immersion [def-weil-closed-immersion]. Thus $q$ is separated if and only if $e$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-relative-inertia-second-diagonal-geometry",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-closed-immersion",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (lemma-diagonal-diagonal), (1)(b) iff (c); identification immediately preceding the lemma and Tag 050Q (lemma-inertia)."
+   }
+  },
+  {
+   "text": "Fix a scheme $T$ and $x\\in\\mathcal X(T)$. Unpack [def-sfb-stable-pointed-moduli-groupoids]: the base change $G=T\\times_{\\mathcal X}I_{\\mathcal X}$ is the sheaf $\\operatorname{Aut}(x)$, an algebraic space by step 1. Explicitly $(y,\\beta,v:y\\xrightarrow{\\sim}x)$ goes to $v\\beta v^{-1}$; its inverse sends $g$ to $(x,g,1_x)$. The comparison $v$ gives the natural isomorphism to the original triple, and arrows are uniquely determined by $v$. Composition and inverse of automorphisms give the group operations on $G$, naturally in all $T$-schemes. For a scheme map $a:V\\to I_{\\mathcal X}$ represented by $(y,\\alpha)$, the $2$-fibre product $V\\times_{I_{\\mathcal X}}\\mathcal X$ along $e$ is the subfunctor of $V$ where $\\alpha=1_y$: an object is an isomorphism $w:z\\xrightarrow{\\sim}y$ with $w=\\alpha w$, forcing $\\alpha=1_y$. When this holds $(z,w)=(y,1_y)$ is an object and the unique arrow between two choices is $w_2^{-1}w_1$. These identifications commute with every further scheme base change.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), displayed Isom(x,x) square; Tag 0CL0 (lemma-diagonal-diagonal), proof (1); expanded functor-of-points calculation."
+   }
+  },
+  {
+   "text": "Assume $p$ separated. For an arbitrary scheme test $a:T\\to I_{\\mathcal X}$ given by $(x,\\alpha)$, the algebraic space $G=\\operatorname{Aut}(x)$ of step 2 is separated over $T$ by the definition of separatedness of $p$. Thus $\\Delta_{G/T}$ is a closed immersion. The two sections $(\\alpha,1_x)$ give a scheme map $T\\to G\\times_TG$, where the product exists by [lem-trf-space-fibre-products-etale-covers]. Its pullback of $\\Delta_{G/T}$ is the identity locus $\\alpha=1_x$, so is a scheme closed in $T$ by the scheme-test meaning of closed immersion [def-weil-closed-immersion]. Step 2 identifies this actual scheme over $T$ with $T\\times_{I_{\\mathcal X}}\\mathcal X$. This proves that every scheme test of $e$ is a closed immersion, hence that $e$ is a closed immersion.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (lemma-diagonal-diagonal), (1)(a) implies (c); spaces-groupoids.tex Tag 06P6 (lemma-group-scheme-separated), forward implication, written directly on arbitrary scheme tests."
+   }
+  },
+  {
+   "text": "Conversely assume $e$ is a closed immersion. For every scheme $T\\to\\mathcal X$ with object $x$, form $G=\\operatorname{Aut}(x)$ and $G\\times_TG$ as in steps 2 and 3 [lem-trf-space-fibre-products-etale-covers]. A scheme test $V\\to G\\times_TG$ is a pair of automorphisms $(g,h)$ of $x|_V$. Send it to the object $(x|_V,g^{-1}h)$ of inertia. By step 2 its pullback of $e$ is the subfunctor of $V$ where $g^{-1}h=1$, or equivalently $g=h$; this is precisely $V\\times_{G\\times_TG}G$ along $\\Delta_{G/T}$. Because $e$ is closed, this is a scheme closed in $V$ [def-weil-closed-immersion]. The equality holds naturally on every further test scheme, so it identifies morphisms, including nilpotent structure, and not just geometric points. Thus $\\Delta_{G/T}$ is a closed immersion and $G\\to T$ is separated. As $T\\to\\mathcal X$ was arbitrary, $p$ is separated. Together with step 1 this gives the three equivalences.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (lemma-diagonal-diagonal), (1)(c) implies (a); spaces-groupoids.tex Tag 06P6 (lemma-group-scheme-separated), cartesian difference-map square, with its pointwise exercise written out."
+   }
+  },
+  {
+   "text": "For the absolute diagonal put $R=\\mathcal X\\times_{\\mathbf Z}\\mathcal X$ and $P=\\mathcal X\\times_S\\mathcal X$. The map $P\\to R$ is the $2$-base change of the scheme diagonal $S\\to S\\times_{\\mathbf Z}S$: both specify that the two structural maps agree. Hence it is representable by algebraic spaces, and so is the composite $\\mathcal X\\to P\\to R$, by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Here its first factor is representable by step 1; the scheme diagonal is a map of algebraic spaces. The second diagonal of this composite is again $e$, directly from [def-sfb-stable-pointed-moduli-groupoids]: in $\\mathcal X\\times_{\\Delta,R,\\Delta}\\mathcal X$ a triple is $(x,y,(u,v))$ with isomorphisms $u,v:x\\to y$. Send it to $(x,v^{-1}u)$; the inverse sends $(x,\\alpha)$ to $(x,x,(\\alpha,1_x))$, and $(1_x,v)$ gives the natural comparison. The second diagonal $(x,x,(1_x,1_x))$ goes to $(x,1_x)$. All automorphisms and their base-scheme tests are unchanged on forgetting $S$, since an object over a scheme supplies its structural map to $S$. The scheme-test argument of step 1 therefore applies to this representable absolute diagonal and gives separatedness exactly when $e$ is closed; steps 3--4 give separatedness exactly when $p$ is separated. This argument needs no separatedness of $S$.",
+   "uses": [
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (lemma-diagonal-diagonal), (1); categories.tex Tag 034H (lemma-inertia-fibred-category), explicit triple formula; algebraic.tex Tags 0301 and 0302, composition and base change of representability."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-inertia-second-diagonal-geometry",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-closed-immersion",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), part (1), with the group difference-map argument of spaces-groupoids.tex Tag 06P6 (lemma-group-scheme-separated) expanded on scheme tests; Tag 050Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic stack its inertia projection is separated if and only if its diagonal is separated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed identity section of an inertia group algebraic space equivalent to separated stack diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  X.IsSeparated ↔\\n    AlgebraicGeometry.IsClosedImmersion\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Separated inertia implies separated diagonal of algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\", \"IsSeparated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*separat|separat.*inertia|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or ordinary categorical pullbacks, not the asserted algebraic-space or stack property; scheme properness cancellation was inspected in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*separat|separat.*inertia|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness/closed diagonals and topological separatedness do not state the inertia equivalence for stacks or algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack has separated diagonal exactly when its inertia has closed identity section",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": @IsSeparated = MorphismProperty.diagonal @IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"isSeparatedMap_iff_isClosed_diagonal\", \"module\": \"Mathlib.Topology.SeparatedMap\", \"type\": \"{f : X → Y} : IsSeparatedMap f ↔ IsClosed f.pullbackDiagonal\", \"doc\": \"A function $ f: X \\\\to Y $ is a separated map if and only if the diagonal subset of the pullback of $ f $ with itself is closed in the product topology.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness/closed diagonals and topological separatedness do not state the inertia equivalence for stacks or algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inertia\", \"separated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness/closed diagonals and topological separatedness do not state the inertia equivalence for stacks or algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inertia projection of an algebraic stack is separated if and only if its diagonal is separated, equivalently its neutral inertia section is a closed immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  X.IsSeparated ↔\\n    AlgebraicGeometry.IsClosedImmersion\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.IsSeparated ↔ AlgebraicGeometry.IsSeparated (CategoryTheory.Limits.terminal.from X)\", \"doc\": \"A scheme $X$ is separated if and only if the unique morphism from $X$ to the terminal object in the category of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [X.IsSeparated], AlgebraicGeometry.IsSeparated f\", \"doc\": \"A scheme $ X $ is separated if it satisfies the condition $ X.\\\\text{IsSeparated} $, which asserts that the diagonal morphism $ X \\\\to X \\\\times X $ is a closed immersion.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness/closed diagonals and topological separatedness do not state the inertia equivalence for stacks or algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group object in algebraic spaces is separated precisely when the identity section is a closed immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"@AlgebraicGeometry.IsSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"A morphism of schemes is separated if and only if its diagonal morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  X.IsSeparated ↔\\n    AlgebraicGeometry.IsClosedImmersion\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsClosedImmersion\\n  @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a closed immersion and a separated morphism is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.lift (CategoryTheory.CategoryStruct.id X) f ⋯)\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f g : X ⟶ Y) [Y.IsSeparated],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.equalizer.ι f g)\", \"doc\": \"If $ Y $ is a separated scheme and $ f, g : X \\\\to Y $ are morphisms of schemes, then the equalizer morphism $ \\\\iota : \\\\mathrm{Eq}(f, g) \\\\to X $ is a closed immersion. This follows from the separatedne\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme separatedness/closed diagonals and topological separatedness do not state the inertia equivalence for stacks or algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-separated-source-separated-inertia-target",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Separated-source cancellation for a finite-inertia target. New supporting input: Tag 0CL0 (lemma-diagonal-diagonal), part (1), for the structure morphism to S and to Spec Z; Tag 050Q (lemma-inertia) for representability of inertia.",
+   "via": [
+    "lem-sfb-stack-separated-source-separated-inertia-target",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-inertia-separated-diagonal",
+  "worker": "stage1",
+  "summary": "Reused the existing relative-inertia/second-diagonal geometry and algebraic-space fibre products. Expanded the group difference-map square directly on arbitrary scheme tests in both directions, with actual morphisms and identity loci. No new nodes and no statement change. Checked Spec Z independently of separatedness of S; no project attachment or Mathlib match. The absolute diagonal is treated by its representable factorization through the relative product and an explicit double-diagonal triple calculation.",
+  "blueprint": "Current latest sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), direct-image preservation input in the inherited alteration/moduli prerequisite chain. The newest text no longer spells out that old chain. Retained the existing precise from.place and null ancestor (blueprint_refs.py ancestor returns None); whole-blueprint inertia, separated diagonal, group algebraic space, second diagonal and neutral section searches give no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of fibre products of algebraic spaces, needed to test the group diagonal; no trace-formula conclusion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-061b57d4b",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-061b57d4b (reviewer sub-agent of L); spot-checked: First delivery, not a re-split. It has 0 new nodes; the statement and stmt_deps are unchanged, and the item gets 5 proof steps. Sources read: Stacks 0CL0(1) with the paragraph before it (second diagonal = e via 034H), 050Q, and 06P6 (section of a separated map; the cartesian difference square). Step 1 takes, from the actual statement of lem-sfb-relative-inertia-second-diagonal-geometry, that the diagonal and p are representable and that the second diagonal is e. Its hypothesis (algebraic stack) is met because a DM étale atlas is smooth by the representable calculus, and I checked the scheme-test equivalence 'q separated iff Δ_q closed'. Step 2: the pullback of e along (y,α) is {α=1}, since an arrow w from (z,1) satisfies w=αw; checked. Step 3: pulling back Δ_{G/T} along (α,1) gives a closed {α=1}; correct. Step 4: the pullback of e along (x,g^{-1}h) is {g=h}, which is the 06P6 square on all scheme tests including nilpotent ones; correct. Step 5: X×_S X is the base change of S→S×_Z S, the composite is representable, and the triples (x,y,(u,v)) map to (x,v^{-1}u), so I_X and e are unchanged and no separatedness of S is needed; correct. Edge cases checked: empty stack, scheme X (including a non-separated S), BG with non-commutative G, nilpotent tests. Duplicate search over 06P6/0CL0/050Q and inertia or group space with separated: only field-based group nodes and 0CL0(4)/(5) nodes, so no duplicate. Batch-5 flags: relative-inertia and the representable calculus reach only def-trf-algebraic-space, a definition; lem-trf-space-fibre-products-etale-covers is the generic 02X2 fibre-product existence and not part of the trace-formula or Poincaré proofs. All three are acceptable. The declared tool_use of lem-trf-space-fibre-products-etale-covers (forming G×_T G) is accepted. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackInertiaSeparatedDiagonal",
+  "declaration": "CategoryTheory.stack_inertia_separated_diagonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackInertiaSeparatedDiagonal.lean",
+  "statement": "theorem stack_inertia_separated_diagonal {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsDeligneMumfordModuliStack F) : (IsSeparatedRepresentableModuliMap (moduliInertiaProjection F) ↔ IsSeparatedRepresentableModuliMap (moduliRelativeDiagonal (moduliBaseStructure F))) ∧ (IsSeparatedRepresentableModuliMap (moduliInertiaProjection F) ↔ ModuliSchemeTest @IsClosedImmersion (moduliInertiaNeutral F)) ∧ (IsSeparatedRepresentableModuliMap (moduliInertiaProjection F) ↔ IsSeparatedRepresentableModuliMap (moduliRelativeDiagonal (moduliBaseStructure (BasedCategory.ofFunctor (F.p ⋙ Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S)))))) ∧ (IsSeparatedRepresentableModuliMap (moduliInertiaProjection (BasedCategory.ofFunctor (F.p ⋙ Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S)))) ↔ IsSeparatedRepresentableModuliMap (moduliRelativeDiagonal (moduliBaseStructure (BasedCategory.ofFunctor (F.p ⋙ Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S)))))) ∧ (IsSeparatedRepresentableModuliMap (moduliInertiaProjection (BasedCategory.ofFunctor (F.p ⋙ Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S)))) ↔ ModuliSchemeTest @IsClosedImmersion (moduliInertiaNeutral (BasedCategory.ofFunctor (F.p ⋙ Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S)))))",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.moduliInertiaNeutral",
+   "CategoryTheory.stack_inertia_separated_diagonal"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7579e6ab8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Q05 lem-sfb-stack-inertia-separated-diagonal 7579e6ab: five conjuncts checked against 0CL0(1)/050Q/034H: p sep ⇔ Δ_{X/S} sep (moduliRelativeDiagonal of moduliBaseStructure; the vertical comparison makes it X×_S X) ⇔ e closed (ModuliSchemeTest @IsClosedImmersion); p ⇔ Δ_{X/Z} via ofFunctor(F.p ⋙ Over.map specULiftZIsTerminal.from S); TFAE over Z (inertia unchanged since Over.map is faithful). Only hypothesis is IsDeligneMumfordModuliStack; universes independent. Earlier H2 repaired (change-to-integers theorem dep/import removed, inlined). New def node def-sfb-separated-representable-moduli-map matches Stacks 0CL0/03HL, reuses IsSeparatedPresheafMap, no live duplicate or name clash. moduliInertiaNeutral is a real canonical helper (relative neutral section + inclusion) in its own module. Item differs from live only in lean+stmt_deps (all on base except the new node); statements verbatim; one sorry; docstrings, proof steps and report sections present. No file changed, so no compile."
+ }
+}

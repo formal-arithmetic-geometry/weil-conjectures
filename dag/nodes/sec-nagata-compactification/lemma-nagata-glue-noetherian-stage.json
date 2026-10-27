@@ -58,19 +58,43 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-nagata-compactification",
  "unit": "sk-prop-nagata-sketch-approximation",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Every $S_\\lambda$ is of finite type over $\\mathbf Z$, and every transition\nmorphism $t_{\\mu\\lambda}$ is affine.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Every $S_\\lambda$ is of finite type over $\\mathbf Z$, and every transition\nmorphism $t_{\\mu\\lambda}$ is affine. Moreover, the comparison cone\n$\\kappa_S$ of [def-nagata-glued-limit-comparison] is a limit cone, so the\nglued stages $S_\\lambda$, indexed by the valid stages, form a Noetherian\napproximation of $S$.",
   "proof": [
    {
     "text": "The gluing axioms hold at each valid stage, so the schemes are defined.\nEach one is covered by finitely many spectra of finitely generated\n$\\mathbf Z$-algebras, proving finite type. On the chosen charts each\ntransition is affine by construction; the indexing refinement makes those\ncharts cover every inverse image, proving global affineness.",
     "uses": [],
     "elementary": null
+   },
+   {
+    "text": "For the limit property, a cone over a cofiltered system of schemes is a\nlimit cone as soon as its restrictions over the members of an open cover\nof one stage are limit cones. Use the stage $\\lambda_0=\\lambda_{\\mathrm{glue}}(S)$\nand its charts $\\operatorname{Spec}(A_{\\lambda_0,a})$. Over such a chart\nthe system restricts to the spectra $\\operatorname{Spec}(A_{\\lambda,a})$,\n$\\lambda\\geq\\lambda_0$, and the cone restricts to the maps\n$U_a\\to\\operatorname{Spec}(A_{\\lambda,a})$. The valid stages are directed\n([lemma-nagata-valid-refinements-directed]) and cofinal\n([def-nagata-affine-gluing-valid-stage]), so every section of\n$\\Gamma(S,U_a)$ lies in some $A_{\\lambda,a}$ and $\\Gamma(S,U_a)$ is the\ndirected union of the $A_{\\lambda,a}$. Since $\\operatorname{Spec}$ takes\nfiltered colimits of rings to limits, the restricted cone exhibits\n$U_a=\\operatorname{Spec}\\Gamma(S,U_a)$ as\n$\\varprojlim_\\lambda\\operatorname{Spec}(A_{\\lambda,a})$. Hence $\\kappa_S$\nis a limit cone, and together with the first part the glued stages form a\nNoetherian approximation of $S$.",
+    "uses": [
+     "lemma-nagata-valid-refinements-directed",
+     "def-nagata-affine-gluing-valid-stage"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

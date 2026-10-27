@@ -1,0 +1,153 @@
+{
+ "id": "lem-pbc-scalar-rational-exactness",
+ "kind": "statement",
+ "title": "Exactness and shift descent for rational scalar extension",
+ "statement": "Let l be prime. Coefficient fields are finite extensions of Q_l with specified Q_l-algebra embeddings. Use the actual completed coefficient sheaves and raw rationalizations of [def-weil-l-adic-coefficient-extension] and [def-weil-pbc-rational-category]. Schemes supporting a constructible rational category are assumed noetherian, finite-dimensional, with l invertible; ambient operation comparisons are for arbitrary scheme morphisms g : X → Y in the actual ambient derived categories. For a finite coefficient-field embedding and a noetherian finite-dimensional scheme with l invertible, the integral constructible restriction has the unique shift structure fixed by its full faithful inclusion into the ambient derived category. Raw rational localization gives the unique rational shift structure fixed by the localization square. The resulting rational tensor functor is additive and triangulated, and its balanced rational composition isomorphisms respect those shifts.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Order 1307; existing scalar-extension component, relocated without changing signatures or proofs."
+ },
+ "stmt_deps": [
+  "lem-pbc-scalar-triangulation-adapters",
+  "lem-pbc-scalar-tensor-construction",
+  "lem-pbc-scalar-tensor-composition",
+  "lem-pbc-scalar-ambient-shift-normalization",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-rational-category"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the ambient shift comparison by the full faithful integral inclusion. Fullness constructs the integral shift map and its inverse; faithfulness gives naturality, coherence and uniqueness. The scalar Hom formula on tensors with scalar one supplies the identity-component localization square.",
+   "uses": [
+    "lem-pbc-scalar-ambient-shift-normalization",
+    "lem-pbc-scalar-tensor-construction",
+    "lem-pbc-scalar-triangulation-adapters"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify raw scalar localization with categorical rationalization using the tensor-Hom equivalence. The localization lifting transports the integral shift structure to the rational tensor functor. Surjectivity on objects and the localization comparison determine it uniquely. Faithful inclusion and localization detect the shifted balanced composition equation.",
+   "uses": [
+    "lem-pbc-scalar-tensor-composition",
+    "lem-pbc-scalar-ambient-shift-normalization",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-pur-coefficient-associator-shifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit-normalized derived tensor comparison preserves distinguished triangles. Its full integral restriction therefore preserves inherited triangles. Every rational triangle is isomorphic to an integral image triangle, so the localization square proves rational exactness. Additivity follows directly from the additive tensor-Hom map.",
+   "uses": [
+    "lem-pur-coefficient-scalar-shifts",
+    "lem-pbc-scalar-triangulation-adapters",
+    "lem-pbc-scalar-tensor-construction",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-scalar-ambient-shift-normalization",
+  "lem-pbc-scalar-tensor-construction",
+  "lem-pbc-scalar-triangulation-adapters",
+  "lem-pbc-scalar-tensor-composition",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-pur-coefficient-associator-shifts",
+  "lem-pur-coefficient-scalar-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Compilation partition of the already stated and partially proved scalar-extension package; unchanged mathematical argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of l adic coefficient fields on constructible derived sheaves commutes with direct image and base change",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum algebraMap_adicCompletion, adicCompletion algebra structures, BDeRhamPlus and BDeRham. These concern coefficient rings, not constructible derived sheaf functors.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
+   "results": "0 hits; unknown identifier CategoryTheory.MonoidalCategory.associator",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension|changeOfRings|ChangeOfRings",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension for constructible adic sheaves and coherent base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcScalarExtension",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Existing companion declarations; compilation partition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcScalarRationalShift",
+  "file": "lean/Sheaf/Paper/PbcScalarRationalShift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcRationalScalarExact",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarInclusionIso",
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarShift_exists",
+   "AlgebraicGeometry.Scheme.pbcIntegralScalarShift",
+   "AlgebraicGeometry.Scheme.pbcScalarLocalization_naturality",
+   "AlgebraicGeometry.Scheme.pbcScalarLocalizationIso",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarShift_exists",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarShift",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarExact",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarAdditive",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarTriangulated"
+  ],
+  "statement": "theorem pbcRationalScalarExact : (pbcRationalScalarExtension l E F i T dim.out inv.out).Additive ∧ (pbcRationalScalarExtension l E F i T dim.out inv.out).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Existing declarations moved verbatim from PbcScalarExtension, with local reducibility scope and import changes only. No new mathematical statement or proof hole."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "independent cc review: The 152 declarations of the clone's original PbcScalarExtension (2c77716690b) against the 12 delivered modules: identical text, and identical public types, hints and def values in the compiled environment (only generated proof-lemma names differ); all 60 direct importers compiled against the delivered modules (57 OK; 2 slow but just as slow against the published version)"
+ }
+}

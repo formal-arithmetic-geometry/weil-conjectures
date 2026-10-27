@@ -153,7 +153,62 @@
   "prop-pc-xk-integral"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme",
+     "lines": [
+      550,
+      569
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.ZeroLocusDual",
+     "lines": [
+      181,
+      197
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.ZeroLocusDual",
+     "lines": [
+      199,
+      205
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme",
+     "lines": [
+      595,
+      631
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-lem-picard-zero-dictionary",
  "split_report": {
@@ -239,7 +294,11 @@
   "sorry_after": []
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $k$ be a field and let $X$ be a $k$-scheme which is proper, smooth of\nrelative dimension $1$ and geometrically integral over $k$, of genus\n$g=\\dim_kH^1(X,\\mathcal O_X)$, with a $k$-rational point $\\sigma$. Let $T$ be\na scheme over $k$ and let\n$\\mathcal{L}\\in F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ (with $F$ as in\n[lem-pc-f-open-subfunctor]). Let $\\mathcal{N}$ be an invertible\n$\\mathcal{O}_T$-module with $Rf_{T,*}\\mathcal{L}\\cong\\mathcal{N}[0]$ (for instance\n$\\mathcal N=f_{T,*}\\mathcal L$), and let $s$ be the section\nof $\\mathcal{L}\\otimes_{\\mathcal{O}_{X_T}}f_T^*\\mathcal{N}^{-1}$ corresponding to the adjunction\nmap $f_T^*\\mathcal{N}\\to\\mathcal{L}$ (via\n$\\operatorname{Hom}(f_T^*\\mathcal{N},\\mathcal{L})\\cong H^0(X_T,\\mathcal{L}\\otimes f_T^*\\mathcal{N}^{-1})$,\nthe tensor-Hom adjunction, $\\mathcal{N}$ invertible). Then the\nzero scheme $D:=Z(s)$, which is also the zero scheme of the adjunction\nmap, is a relative effective Cartier divisor on $X_T/T$ (its ideal sheaf\nis invertible and $D\\to T$ is flat) which is finite locally free of\ndegree $g$ over $T$.",
   "proof": [
    {
@@ -254,15 +313,14 @@
     "elementary": false
    },
    {
-    "text": "We verify that every fibre $D_t\\subset X_t$ ($t\\in T$,\n$X_t=X_{\\kappa(t)}$) is an effective Cartier divisor on $X_t$; then\n$D$ is a relative effective Cartier divisor by [lem-pc-recd-locally-principal],\nand the first claim follows.\nLet $\\kappa=\\kappa(t)$ and pass to the fibre: the base change of\n$Rf_{T,*}\\mathcal{L}\\cong\\mathcal{N}[0]$ along $\\operatorname{Spec}\\kappa\\to T$ gives\n([lem-pc-rf-base-change-flat-module])\n$Rf_{\\kappa,*}\\mathcal{L}_t\\cong\\mathcal{N}_t[0]$ with $\\mathcal{N}_t$ an invertible\n$\\mathcal{O}_\\kappa$-module, i.e. a $1$-dimensional $\\kappa$-vector space\n$\\mathcal{N}_t\\cong\\kappa$. (The hypotheses of the lemma apply: $X_t\\to\\operatorname{Spec} \\kappa$ is proper of finite presentation and $\\mathcal{L}_t$ is finite\npresentation and flat over $\\kappa$.) Hence\n$H^0(X_t,\\mathcal{L}_t)\\cong\\mathcal{N}_t$ and $H^1(X_t,\\mathcal{L}_t)=0$ (and\n$H^i(X_t,\\mathcal{L}_t)=0$ for $i\\ge2$ by [lem-pc-vanishing-above-dim],\n$\\dim X_t=1$; the equality $H^0\\cong\\mathcal{N}_t$ also uses the canonical\nidentification of $H^0$ of the complex $\\mathcal{N}_t[0]$, [lem-pc-degree-zero-properties]).\nIn particular $\\dim_\\kappa H^0(X_t,\\mathcal{L}_t)=1$.\nConsider the identical analysis for $\\mathcal{O}$. First\n$H^0(X,\\mathcal O_X)=k$: it is a finite $k$-algebra since $X$ is proper\n([lem-pc-coherent-hi]), and by flat base change\n([lem-pc-flat-base-change-cohom]) its base change to an algebraic closure\n$\\bar k$ is $H^0(X_{\\bar k},\\mathcal O)$, a finite $\\bar k$-algebra which is a\ndomain because $X_{\\bar k}$ is integral, hence equal to $\\bar k$. So $X_t$ is\nproper and smooth of relative dimension $1$ over $\\kappa$ with\n$H^0(X_t,\\mathcal{O})=H^0(X,\\mathcal{O})\\otimes_k\\kappa=\\kappa$\n([lem-pc-flat-base-change-cohom]) and\n$\\dim_\\kappa H^1(X_t,\\mathcal{O})=\\dim_\\kappa(H^1(X,\\mathcal{O})\\otimes_k\\kappa)=g$\n([lem-pc-flat-base-change-cohom], the genus being\n$\\dim_kH^1(X,\\mathcal{O})$, [def-pc-genus]); by\n[lem-pc-vanishing-above-dim] the higher cohomology of both vanishes, so [cor-picard-degree-g] applies.\nTherefore\n\n$$\n\\deg(\\mathcal{L}_t)=\\chi(X_t,\\mathcal{L}_t)-\\chi(X_t,\\mathcal{O}_t)=1-(1-g)=g\n$$\n\n([def-pc-degree-line-bundle]; $\\chi$ is defined by\n[def-pc-euler-characteristic]; the finite-dimensionality and the\nfiniteness of the sum are [lem-pc-coherent-hi]).",
+    "text": "We verify that every fibre $D_t\\subset X_t$ ($t\\in T$,\n$X_t=X_{\\kappa(t)}$) is an effective Cartier divisor on $X_t$; then\n$D$ is a relative effective Cartier divisor by [lem-pc-recd-locally-principal],\nand the first claim follows.\nLet $\\kappa=\\kappa(t)$ and pass to the fibre. Since $F$ is a subfunctor of\n$\\operatorname{Pic}_{X/k,\\sigma}$ ([lem-pc-f-open-subfunctor]), the pullback\n$\\mathcal{L}_t$ of $\\mathcal L$ to $X_t$ lies in $F(\\operatorname{Spec}\\kappa)$:\n$Rf_{\\kappa,*}\\mathcal{L}_t$ is an invertible $\\mathcal{O}_\\kappa$-module, i.e. a\n$1$-dimensional $\\kappa$-vector space, placed in degree $0$. On the point\n$\\operatorname{Spec}\\kappa$ the higher direct images are the cohomology groups,\nso $\\dim_\\kappa H^0(X_t,\\mathcal{L}_t)=1$ and $H^i(X_t,\\mathcal{L}_t)=0$ for\nall $i\\ge1$.\nConsider the identical analysis for $\\mathcal{O}$. First\n$H^0(X,\\mathcal O_X)=k$: it is a finite $k$-algebra since $X$ is proper\n([lem-pc-coherent-hi]), and by flat base change\n([lem-pc-flat-base-change-cohom]) its base change to an algebraic closure\n$\\bar k$ is $H^0(X_{\\bar k},\\mathcal O)$, a finite $\\bar k$-algebra which is a\ndomain because $X_{\\bar k}$ is integral, hence equal to $\\bar k$. So $X_t$ is\nproper and smooth of relative dimension $1$ over $\\kappa$ with\n$H^0(X_t,\\mathcal{O})=H^0(X,\\mathcal{O})\\otimes_k\\kappa=\\kappa$\n([lem-pc-flat-base-change-cohom]) and\n$\\dim_\\kappa H^1(X_t,\\mathcal{O})=\\dim_\\kappa(H^1(X,\\mathcal{O})\\otimes_k\\kappa)=g$\n([lem-pc-flat-base-change-cohom], the genus being\n$\\dim_kH^1(X,\\mathcal{O})$, [def-pc-genus]); by\n[lem-pc-vanishing-above-dim] the higher cohomology of both vanishes, so [cor-picard-degree-g] applies.\nTherefore\n\n$$\n\\deg(\\mathcal{L}_t)=\\chi(X_t,\\mathcal{L}_t)-\\chi(X_t,\\mathcal{O}_t)=1-(1-g)=g\n$$\n\n([def-pc-degree-line-bundle]; $\\chi$ is defined by\n[def-pc-euler-characteristic]; the finite-dimensionality and the\nfiniteness of the sum are [lem-pc-coherent-hi]).",
     "uses": [
      "lem-pc-recd-locally-principal",
-     "lem-pc-rf-base-change-flat-module",
-     "lem-pc-vanishing-above-dim",
-     "lem-pc-degree-zero-properties",
+     "lem-pc-f-open-subfunctor",
      "lem-pc-coherent-hi",
      "lem-pc-flat-base-change-cohom",
      "def-pc-genus",
+     "lem-pc-vanishing-above-dim",
      "cor-picard-degree-g",
      "def-pc-degree-line-bundle",
      "def-pc-euler-characteristic"
@@ -270,8 +328,10 @@
     "elementary": false
    },
    {
-    "text": "The section $s_t\\in H^0(X_t,\\mathcal{M}_t)$ with $\\mathcal{M}_t=\\mathcal{L}_t\\otimes f_t^*\\mathcal{N}_t^{-1}$ is non-zero: by the tensor–Hom adjunction of\nthe statement, applied to the fibre data (with\n$Rf_{t,*}\\mathcal{L}_t\\cong\\mathcal{N}_t[0]$), we have\n$H^0(X_t,\\mathcal{M}_t)\\cong\\operatorname{Hom}(\\mathcal{N}_t,H^0(X_t,\\mathcal{L}_t))\\cong\\kappa$\nand $s_t$ corresponds to the identity endomorphism of $\\mathcal{N}_t$, i.e. $s_t=1$ under these identifications). Since $X_t$ is integral\n($X$ being geometrically integral), a non-zero\nglobal section $s_t$ of an invertible module has non-zero stalk\n$s_{t,x}\\neq0$ in $\\mathcal{M}_{t,x}$ for every $x\\in X_t$ (the restriction map\n$\\mathcal{M}_{t,x}\\hookrightarrow\\mathcal{M}_{t,\\eta}$ to the generic stalk is injective\nby integrality, and $s_{t,\\eta}\\neq0$ since $s_t\\neq0$). Hence the ideal\n$\\mathcal{I}_{Z(s_t),x}$ is generated by a non-zero element of the local ring\n$\\mathcal{O}_{X_t,x}$, which is regular of dimension $1$\n([lem-sc-smooth-regular]), hence a DVR\n([lem-sc-regular-dim1-dvr]); in a DVR a non-zero element generates\nan invertible ideal. Therefore $\\mathcal{I}_{Z(s_t)}$ is invertible: $D_t$ is an\neffective Cartier divisor.",
+    "text": "The restriction $s_t\\in H^0(X_t,\\mathcal{M}_t)$ of $s$, with\n$\\mathcal{M}_t=\\mathcal{L}_t\\otimes f_t^*\\mathcal{N}_t^{-1}$, is non-zero. To\nsee this, choose an affine open $V=\\operatorname{Spec}(A)\\ni t$ of $T$ over\nwhich $\\mathcal N$ is trivial, $\\mathcal N|_V\\cong\\mathcal O_V$, and a finite\ncover $\\mathcal U$ of $X_V$ by affine opens ($X_V\\to V$ is proper, hence\nseparated and quasi-compact). Over $V$ one has $f_{V,*}\\mathcal L\\cong\\mathcal O_V$\nand $R^qf_{V,*}\\mathcal L=0$ for $q>0$, so by [lem-pc-cech-resolution] the Cech\ncomplex $\\check C^\\bullet(\\mathcal U,\\mathcal L)$ has cohomology $A$ in degree\n$0$, generated by a section $\\ell\\in H^0(X_V,\\mathcal L)$, and $0$ elsewhere;\nit is quasi-isomorphic to $A[0]$. Over $V$ the section $s$ is $\\ell$ times the\npullback of a generator of $\\mathcal N^{-1}|_V$, since the adjunction map\n$f_V^*\\mathcal N|_V\\to\\mathcal L|_{X_V}$ sends the generator $1$ to $\\ell$. By\n[lem-pc-rf-base-change-flat-module], applied to the affine bases $V$ and\n$\\operatorname{Spec}\\kappa$ and to $\\mathcal L$, which is flat over $V$, the\nbase-change map\n$A[0]\\otimes_A\\kappa=\\check C^\\bullet(\\mathcal U,\\mathcal L)\\otimes^{\\mathbf L}_A\\kappa\\to\\check C^\\bullet(\\mathcal U_t,\\mathcal L_t)$,\ninduced by restricting sections to $X_t$, is an isomorphism in $D(\\kappa)$.\nOn $H^0$ this says that the restriction $\\ell|_{X_t}$ is a basis of the\none-dimensional space $H^0(X_t,\\mathcal L_t)$; in particular $\\ell|_{X_t}\\neq0$\nand hence $s_t\\neq0$. Since $X_t$ is integral\n($X$ being geometrically integral), a non-zero\nglobal section $s_t$ of an invertible module has non-zero stalk\n$s_{t,x}\\neq0$ in $\\mathcal{M}_{t,x}$ for every $x\\in X_t$ (the restriction map\n$\\mathcal{M}_{t,x}\\hookrightarrow\\mathcal{M}_{t,\\eta}$ to the generic stalk is injective\nby integrality, and $s_{t,\\eta}\\neq0$ since $s_t\\neq0$). Hence the ideal\n$\\mathcal{I}_{Z(s_t),x}$ is generated by a non-zero element of the local ring\n$\\mathcal{O}_{X_t,x}$, which is regular of dimension $1$\n([lem-sc-smooth-regular]), hence a DVR\n([lem-sc-regular-dim1-dvr]); in a DVR a non-zero element generates\nan invertible ideal. Therefore $\\mathcal{I}_{Z(s_t)}$ is invertible: $D_t$ is an\neffective Cartier divisor.",
     "uses": [
+     "lem-pc-cech-resolution",
+     "lem-pc-rf-base-change-flat-module",
      "lem-sc-smooth-regular",
      "lem-sc-regular-dim1-dvr"
     ],
@@ -289,6 +349,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-torus-fixed-scheme-smooth",
+ "kind": "statement",
+ "title": "Smoothness of fixed schemes of torus actions on smooth affine schemes",
+ "statement": "Let $k$ be a field [def-weil-field], and let $T$ be an affine group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$ such that $T_{\\bar k}\\simeq(\\mathbf G_m)^r$ for an algebraic closure $\\bar k/k$ and an integer $r\\geq0$ [def-weil-algebraic-closure, def-sc-gm-ga]. Let $X$ be an affine finite-type $k$-scheme [def-pc-scheme] smooth over $k$ [def-sbc-smooth-morphisms]. Let $a:T\\times_kX\\to X$ be a morphism satisfying the group-action associativity and identity laws, with product as in [def-pc-fibre-product]. Define the fixed subfunctor by $$X^T(A)=\\{x\\in X(A):a(t,x_{A\\prime})=x_{A\\prime}\\text{ for every commutative }A\\text{-algebra }A\\prime\\text{ and every }t\\in T(A\\prime)\\}.$$ If a closed subscheme $F\\hookrightarrow X$ [def-weil-closed-immersion] represents this subfunctor, then $F$ is smooth over $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.1, printed p.254, with proof through Theorem 13.7, printed p.256; tori are linearly reductive (opening sentence of Chapter 13, and Theorem 12.30). This is the general fixed-scheme smoothness input, not Corollary 13.10 restated."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Write $X=\\operatorname{Spec}B$ and $F=\\operatorname{Spec}(B/I)$ using the given closed immersion. A quotient of a finite-type $k$-algebra is finite type; it is finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation], since a field is Noetherian. The same holds after any field extension. The fixed-functor description commutes with field extension: for a $K$-algebra $R$, an $R$-algebra $R'$ is already a $K$-algebra, and the universal quantifier over $R'$ and $t\\in T(R')$ is identical before and after scalar extension. Thus $F_K$ represents $(X_K)^{T_K}$, with its closed immersion obtained by tensoring the quotient $B\\twoheadrightarrow B/I$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.1, reduction by extension of the base field; elementary affine base-change check"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-large-algclosed-jacobson] to $F_{\\bar k}$ to choose an algebraically closed extension $K/\\bar k$ for which $F_K$ is Jacobson and every closed point has residue field $K$. Now $T_K\\simeq(\\mathbf G_m)^r$. Field extensions are flat by [lem-pc-field-extension-flat]. Since $X$ is locally finitely presented, [lem-sfb-scheme-lfp-smooth-flat-base-change] implies that $X_K$ is smooth at every point; these smooth open neighbourhoods cover $X_K$, so $X_K\\to\\operatorname{Spec}K$ is smooth by [lem-weil-pbc-smooth-local-on-source]. Hence [lem-weil-pbc-smooth-scheme-over-field-regular] says that every local ring of $X_K$ is regular. We work over $K$ through step 7.",
+   "uses": [
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-pc-field-extension-flat",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 13.6 and Theorem 13.7, printed p.256"
+   }
+  },
+  {
+   "text": "Fix a closed point $x\\in F_K$, which is $K$-rational. Set $A=\\mathcal O_{X_K,x}$, with maximal ideal $\\mathfrak m$, and let $J=(t^*f-f:t\\in T_K(K),f\\in\\mathfrak m)$. Apply [lem-sfb-torus-fixed-local-ideal-jets]: $\\mathcal O_{F_K,x}\\cong A/J$, and for every $n\\geq1$ the finite-dimensional spaces $\\mathfrak m/\\mathfrak m^{n+1}$ and $V=\\mathfrak m/\\mathfrak m^2$ are rational $T_K$-representations with equivariant quotient map. The local ring $A$ is regular by step 2. Put $d=\\dim_K V$.",
+   "uses": [
+    "lem-sfb-torus-fixed-local-ideal-jets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 13.6 and Theorem 13.7, printed p.256"
+   }
+  },
+  {
+   "text": "A finite-dimensional representation of $(\\mathbf G_m)^r$ has simultaneous integer weights by repeated application of [lem-sfb-gm-representation-weight-basis] to its $r$ commuting factors: the weight spaces for the first factor are preserved by every other factor, so decompose each of them for the second factor, and continue. Equivariant maps preserve each simultaneous weight space. Choose a weight basis $v_1,\\ldots,v_d$ of $V$, numbering its nonzero weights first, say $1\\leq i\\leq s$. For a fixed $n\\geq1$ choose any preimage of each $v_i$ in $\\mathfrak m/\\mathfrak m^{n+1}$ and take its component of weight $\\chi_i$, the weight of $v_i$. Weight preservation shows that this component still maps to $v_i$. Denote it $w_i$ and choose a lift $u_i\\in\\mathfrak m$. This supplies an equivariant linear section on $V$, with no assumption that the full local ring is a rational representation.",
+   "uses": [
+    "lem-sfb-gm-representation-weight-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 13.6 and Theorem 13.7, printed p.256"
+   }
+  },
+  {
+   "text": "The classes $w_i$ generate $A/\\mathfrak m^{n+1}$ as a $K$-algebra. Indeed, since they lift a basis of $\\mathfrak m/\\mathfrak m^2$, replace an element of $\\mathfrak m$ by its linear expression in the $u_i$ modulo $\\mathfrak m^2$; replace the factors of each residual product in the same way, increasing the residual degree at each stage. After degree $n$ the remainder vanishes. Let $L_n$ be the ideal generated by $w_1,\\ldots,w_s$. Each nonzero weight $\\chi_i$ takes a value different from $1$ at some $t\\in(K^\\times)^r$: vary a coordinate with nonzero exponent, using that a nonzero polynomial has finitely many roots and $K$ is infinite. Then $t^*w_i-w_i=(\\chi_i(t)-1)w_i$, so $L_n$ lies in the image of $J$. Conversely the quotient by $L_n$ is generated by the images of the weight-zero $w_i$ and scalars, all fixed by $T_K(K)$, so every difference vanishes there. Thus the image of $J$ is exactly $L_n$, or $J+\\mathfrak m^{n+1}=(u_1,\\ldots,u_s)+\\mathfrak m^{n+1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.6, last paragraph: explicit truncated-polynomial calculation of the difference ideal"
+   }
+  },
+  {
+   "text": "The integer $s$ is fixed by the weights of $V$, independently of $n$. For every $n\\geq1$ the lifts $u_1,\\ldots,u_d$ have basis classes in $\\mathfrak m/\\mathfrak m^2$, and step 5 supplies the required ideal equality. Apply [lem-sfb-regular-quotient-parameter-approximation] to $A$, $J$ and $s$. It gives regularity of $A/J$, hence of $\\mathcal O_{F_K,x}$. This includes $s=0$ and $s=d$.",
+   "uses": [
+    "lem-sfb-regular-quotient-parameter-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 13.6 and Theorem 13.7, printed p.256"
+   }
+  },
+  {
+   "text": "At the closed point $x$ of $F_K$, the residue field is $K$ and is therefore finite separable over $K$. Apply [lem-sfb-regular-separable-affine-smooth-neighbourhood] with the whole affine scheme $F_K$ to get a smooth open neighbourhood of $x$. The largest smooth open $W\\subseteq F_K$ exists by [lem-sfb-space-maximal-smooth-open] (schemes are a special case). It contains every closed point by the preceding argument. Its closed complement must be empty, since the closed points of $F_K$ are dense in every closed subset by the choice in step 2. Thus $F_K$ is smooth over $K$, including when it is empty.",
+   "uses": [
+    "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+    "lem-sfb-space-maximal-smooth-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Lemma 13.6 and Theorem 13.7, printed p.256"
+   }
+  },
+  {
+   "text": "The field extension $K/k$ gives a flat surjection of spectra by [lem-pc-field-extension-flat, lem-pc-field-extension-surjective]. Its base change $F_K\\to F$ is surjective by [lem-weil-pbc-surjective-base-change]. For any $y\\in F$, choose $y_K$ above it. The morphism $F\\to\\operatorname{Spec}k$ is locally finitely presented by step 1, so [lem-sfb-scheme-lfp-smooth-flat-base-change] transfers smoothness at $y_K$ to smoothness at $y$. These smooth open neighbourhoods cover $F$; [lem-weil-pbc-smooth-local-on-source] yields smoothness of $F/k$.",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.1, printed p.256, descent after the algebraically closed-field proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-scheme-large-algclosed-jacobson",
+  "lem-pc-field-extension-flat",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sfb-torus-fixed-local-ideal-jets",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-regular-quotient-parameter-approximation",
+  "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+  "lem-sfb-space-maximal-smooth-open",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 13.1 through Lemmas 13.3, 13.4, 13.6 and Theorem 13.7, printed pp.254--256; torus specialization via Theorem 12.12, printed pp.234--235."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fixed point subscheme of a smooth affine variety under an algebraic torus action is smooth",
+   "results": "8 hits; top: AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.instSmoothOfIsStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, Algebra.isOpen_smoothLocus, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.smoothLocus. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest 68dcdcf331d57ba2.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed locus of a linearly reductive algebraic group acting on a smooth scheme",
+   "results": "8 hits; top: MulAction.fixedPoints, FixedPoints.mem_subgroup, MulAction.IsFixedBlock, MulAction.smul_inv_mem_fixedBy_iff_mem_fixedBy, FixedPoints.subgroup, AddAction.fixedPoints, FixedPoints.subalgebra, AddAction.vadd_mem_fixedBy_iff_mem_fixedBy. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest 53064913a31a5cde.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixed\", \"Smooth\"",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedPoint|fixedSubscheme|linearlyReductive|torus",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Mathlib/AlgebraicGeometry/ searched. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedSubscheme|linearlyReductive|torus",
+   "results": "0 hits; returned names/files: none. Searched Mathlib/AlgebraicGeometry. Basic smoothness and abstract fixed-point sets do not state smoothness of an algebraic-group fixed subscheme. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed locus of a diagonalizable algebraic group acting on a smooth variety",
+   "results": "8 hits; returned names/files: MulAction.fixedPoints, FixedPoints.mem_subgroup, AddAction.fixedPoints, AddAction.fixedBy, MulAction.fixedBy, AddAction.vadd_mem_fixedBy_iff_mem_fixedBy, FixedPoints.subgroup, MulAction.smul_mem_fixedBy_iff_mem_fixedBy. Basic smoothness and abstract fixed-point sets do not state smoothness of an algebraic-group fixed subscheme. Logged digest c00e931ecd1679c4.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixed\", \"Smooth\"",
+   "results": "0 hits; returned names/files: none. Basic smoothness and abstract fixed-point sets do not state smoothness of an algebraic-group fixed subscheme. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed subscheme of a smooth affine scheme under an algebraic torus action is smooth",
+   "results": "8 hits; returned names/files: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, Algebra.instSmoothOfIsStandardSmooth, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth. Basic smoothness and abstract fixed-point sets do not state smoothness of an algebraic-group fixed subscheme. Logged digest 54e01a4fd14073ad.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-centralizer-smooth-connected",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 13.1, printed p.254, with proof through Theorem 13.7, printed p.256; tori are linearly reductive (opening sentence of Chapter 13, and Theorem 12.30). This is the general fixed-scheme smoothness input, not Corollary 13.10 restated.",
+   "via": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-fixed-scheme-smooth",
+  "worker": "stage1",
+  "summary": "Followed Milne 13.6 using rational finite jets and explicit weight lifts. Added two statement-only inputs (local fixed ideal/jets and regular quotient approximation), reused the G_m weight-basis node factor by factor, and supplied the scheme-theoretic field reduction and smoothness descent. No statement change and no Lean attachment.",
+  "blueprint": "Inherited chain serves det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction; this item discharges the fixed-scheme smoothness input of the torus-centralizer supporting lemma, through Milne 13.6 rather than restating Theorem 13.1. Current blueprint/latest searched for fixed scheme, diagonalizable, parameters and regular quotient; no equivalent blueprint node. Ancestor tool reports None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Finite-type affine quotient over a field is finitely presented. This is a generic tool; no node of this unit replaces this statement."
+   },
+   {
+    "node": "lem-pc-field-extension-flat",
+    "why": "Flatness of a field extension is needed for pointwise smooth base change. This is a generic tool; no node of this unit replaces this statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Local rings of the smooth ambient scheme are regular. This is a generic tool; no node of this unit replaces this statement."
+   },
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "A field-extension spectrum map is surjective. This is a generic tool; no node of this unit replaces this statement."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Surjectivity of the field-extension projection after base change to F. This is a generic tool; no node of this unit replaces this statement."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Assemble the smooth open neighbourhoods after descent. This is a generic tool; no node of this unit replaces this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-smooth-local-on-source"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-a3ef73579",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-a3ef73579 (reviewer sub-agent of L); spot-checked: Read in full: Milne iAG2017 Ch.13a, printed pp.254-256 (13.1, 13.2(a)(b), Lemmas 13.3/13.4/13.5/13.6, Theorem 13.7), the item, both new nodes and every cited statement. The route is Milne 13.6, then 13.3 and 13.4, with two improvements: the G-fixed scheme is identified directly with A/J (no use of Lemma 13.5 or reducedness), and the weight decomposition comes from lem-sfb-gm-representation-weight-basis, applied one torus factor at a time and valid in every characteristic. New node lem-sfb-torus-fixed-local-ideal-jets is true: for B graded by weights, the differences t*f-f over t in T(k) span the nonzero-weight components because k is infinite; at a fixed rational point J = I_F A, using the fraction formula for g/h; m_x is T-stable, so the jets carry coactions. New node lem-sfb-regular-quotient-parameter-approximation is Milne 13.3, true by a degree-by-degree Hilbert-Samuel comparison with A/(u_1..u_s); I checked s=0, s=d, d=0 and J=(u^2). Neither new node restates the item. Duplicate search with rg -L over fixed scheme, torus, Hilbert-Samuel and regular-system terms found no duplicate. Steps 1 and 3-8 check, including the hypotheses of every cited node: lfp from 00FP, Jacobson clauses (i)/(ii) in steps 3 and 7, separable residue field in step 7, flat base change at a point in steps 2 and 8. FIX: step 2 applied lem-weil-pbc-smooth-scheme-over-field-regular (which needs X_K smooth) when it only had 'smooth at every point'; it now cites lem-weil-pbc-smooth-local-on-source to pass from one to the other (this node was already in proof_deps). Batch-5 flags: lem-trf-smooth-at-point-fibre-criterion (Stacks 01V9) and def-trf-algebraic-space (025Y) are generic scheme and algebraic-space foundations, neither the trace formula nor Poincaré duality nor a step of their proofs, so both are accepted. The declared tool_uses (00FP, field-extension flat/surjective, 056S, 01S1, 01V6) are accepted. No SGA citation. Live item is still unsplit and the new ids are not on live.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusFixedSchemeSmooth",
+  "declaration": "AlgebraicGeometry.torus_fixed_scheme_smooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusFixedSchemeSmooth.lean",
+  "statement": "theorem torus_fixed_scheme_smooth {k : Type u} [Field k] (T : Grp (Over (Spec (.of k)))) [IsAffine T.X.left] [LocallyOfFiniteType T.X.hom] [QuasiCompact T.X.hom] (hT : MultiplicativeType.IsTorus T) (X : Over (Spec (.of k))) [IsAffine X.left] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [Smooth X.hom] [action : ModObj T.X X] (F : Over (Spec (.of k))) (i : F ⟶ X) [IsClosedImmersion i.left] (hfixed : ∀ (A : CommAlgCat.{u} k) (x : (algSpec (.of k)).obj (op A) ⟶ X), (∃ z : (algSpec (.of k)).obj (op A) ⟶ F, z ≫ i = x) ↔ ∀ (A' : CommAlgCat.{u} k) (f : A ⟶ A') (t : (algSpec (.of k)).obj (op A') ⟶ T.X), t • ((algSpec (.of k)).map f.op ≫ x) = (algSpec (.of k)).map f.op ≫ x) : Smooth F.hom",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0347f3f2a",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Item changes only lean + stmt_deps gain of landed def-sfb-tori-multiplicative-type (allowed, §6); 10 dep records identical to live; lean.statement verbatim. Clause match: Field k; T : Grp(Over Spec k) affine + LocallyOfFiniteType+QuasiCompact; hT IsTorus = Grp-iso of AlgebraicClosure base change to splitTorus n (iterated recorded G_m, rank 0 unit); X affine finite type Smooth; ModObj T.X X = action with exactly one_smul/mul_smul over cartesian (fibre product) Over; F, i, IsClosedImmersion; hfixed = image of F(A) in X(A) equals fixedness under every A→A' and t∈T(A') via algSpec and Hom smul (i mono ⇒ representing condition); conclusion Smooth F.hom. Edge cases r=0, empty F/X, all characteristics, same universe u for test algebras. No hollow defs, sorry only, source and blueprint docstrings with 8 proof steps, imports = proof_dep realisations. No duplicate fixed-scheme notion or theorem in project Lean or Mathlib. Compile not reproduced; no fixes."
+ }
+}

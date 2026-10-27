@@ -1,0 +1,294 @@
+{
+ "id": "lem-trf-prime-to-p-trace-frobenius-bound",
+ "kind": "statement",
+ "title": "Prime-to-p finite trace: norm and Frobenius error bound",
+ "statement": "Let $F\\subseteq E$ be complete fields [def-weil-field] with compatible nontrivial nonarchimedean real absolute values: $|x|=0$ iff $x=0$, $|xy|=|x||y|$, $|1|=1$ and $|x+y|\\le\\max(|x|,|y|)$. Put $F^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring] and $\\widetilde F=F^\\circ/\\{x:|x|<1\\}$, and let $p=\\operatorname{char}\\widetilde F>0$. Assume $E/F$ is finite Galois of degree $n$ with $p\\nmid n$; here Galois means normal and separable, normal means every irreducible polynomial over $F$ with a root in $E$ splits over $E$, and separable means the minimal polynomial of each element has distinct roots. Define $\\operatorname{Tr}_{E/F}(x)$ as the trace of the $F$-linear endomorphism $y\\mapsto xy$ of $E$ and put $T(x)=n^{-1}\\operatorname{Tr}_{E/F}(x)$, where $n$ denotes its nonzero image in $F$. Then $T:E\\to F$ is $F$-linear, $T(c)=c$ for every $c\\in F$, and for every $x\\in E$ one has $$|T(x)|\\le|x|,\\qquad |T(x^p)-T(x)^p|\\le |p|\\,|x|^p.$$ The integer $p$ in $|p|$ denotes its image in $F$, so the second right-hand side is zero when $\\operatorname{char}F=p$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Agent-supplied averaging-of-conjugates estimate for the coefficient-normalization supplement to Temkin Proposition 6.2.4, proof, printed p. 47; this estimate is not stated as a theorem of Temkin. The contextual primary source was read at https://arxiv.org/html/0707.3953v3#S6.SS2; local archival PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Every natural integer has absolute value at most one, by induction using the ultrametric inequality and $|1|=1$. The residue of $n$ in $\\widetilde F$ is nonzero, since that field has characteristic $p$ and $p\\nmid n$. Thus $|n|=1$, so $n\\ne0$ and $|n^{-1}|=1$. Compatibility of absolute values gives an injection $\\widetilde F\\hookrightarrow\\widetilde E$: the map on unit balls has kernel exactly $\\{a\\in F:|a|<1\\}$. Therefore $\\operatorname{char}\\widetilde E=p$ as well. These quotients are fields: an element of the unit ball has nonzero residue precisely when its norm is one, in which case its inverse also belongs to the unit ball. Also $n\\ge1$, since $E$ contains its nonzero unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent-supplied normalized-trace supplement to Proposition 6.2.4; elementary assembly using Lemma 6.2.10(i), printed p.46; primary text read at https://arxiv.org/html/0707.3953v3#S6.SS2 on 2026-10-24; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Choose an $F$-basis of $E$ with $n$ elements and let $M_x$ be the matrix of multiplication by $x$. Then $M_{x+y}=M_x+M_y$ and $M_{cx}=cM_x$ for $c\\in F$. Summing diagonal entries proves that $x\\mapsto\\operatorname{Tr}_{E/F}(x)$, hence $T$, is $F$-linear. For $c\\in F$, $M_c=cI_n$, so $\\operatorname{Tr}_{E/F}(c)=nc$ and $T(c)=c$. This uses the definition of the trace of a finite-dimensional endomorphism, not an identification with Mathlib's characteristic-zero normalized trace.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent-supplied normalized-trace supplement to Proposition 6.2.4; elementary assembly using Lemma 6.2.10(i), printed p.46; primary text read at https://arxiv.org/html/0707.3953v3#S6.SS2 on 2026-10-24; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Put $G=\\operatorname{Aut}_F(E)$. For $\\sigma\\in G$, the absolute values $u(z)=|z|$ and $v(z)=|\\sigma(z)|$ both restrict to $|\\cdot|_F$. The extension is algebraic: for each $z$, the $n+1$ vectors $1,z,\\ldots,z^n$ are linearly dependent. Apply [lem-sfb-algebraic-absolute-value-unique], with complete nontrivially valued base $F$, to obtain $|\\sigma(z)|=|z|$ for all $z$.",
+   "uses": [
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "spectralNorm_unique_field_norm_ext, lines 770-773, applied to the two extending absolute values."
+   }
+  },
+  {
+   "text": "The group $G$ is finite by [lem-trf-galois-trace-sum] and nonempty because it contains the identity. Write $S=\\sum_{\\sigma\\in G}\\sigma(x)$ and $U=\\sum_{\\sigma\\in G}\\sigma(x^p)$. The same node identifies $S=\\operatorname{Tr}_{E/F}(x)$ and $U=\\operatorname{Tr}_{E/F}(x^p)$ inside $E$. By [lem-trf-nonarchimedean-finite-sums] and step 3, $|S|\\le\\max_\\sigma|\\sigma(x)|=|x|$. Step 1 and compatibility on $F$ give $|T(x)|=|n^{-1}S|\\le|x|$.",
+   "uses": [
+    "lem-trf-galois-trace-sum",
+    "lem-trf-nonarchimedean-finite-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/RingTheory/Trace/Basic.lean",
+    "place": "trace_eq_sum_automorphisms, lines 263-272, followed by Mathlib/Algebra/Order/Ring/IsNonarchimedean.lean, apply_sum_le_sup, lines 134-137."
+   }
+  },
+  {
+   "text": "Apply the first inequality of [lem-trf-nonarchimedean-prime-power-root-estimates] in $E$ with exponent $q=p^1=p$ and the nonempty family $(\\sigma(x))_{\\sigma\\in G}$. Its residue-characteristic hypothesis was checked in step 1. Automorphisms preserve powers, so $\\sum_\\sigma\\sigma(x)^p=U$; step 3 yields $|S^p-U|\\le |p|\\,|x|^p$. Apply that same first inequality in $F$ to the $n\\ge1$ copies of $1$, again with $q=p$, to get $|n^p-n|\\le |p|$. Since $|n|=1$, the identity $n^{p-1}-1=(n^p-n)/n$ gives $|n^{p-1}-1|\\le|p|$. No assertion about roots from the cited node is used.",
+   "uses": [
+    "lem-trf-nonarchimedean-prime-power-root-estimates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent-supplied normalized-trace supplement to Proposition 6.2.4; elementary assembly using Lemma 6.2.10(i), printed p.46; primary text read at https://arxiv.org/html/0707.3953v3#S6.SS2 on 2026-10-24; archival PDF WANTED."
+   }
+  },
+  {
+   "text": "Inside $E$ the exact algebraic identity is $$T(x^p)-T(x)^p=n^{-p}(U-S^p)+n^{-1}(1-n^{1-p})U.$$ Step 4 applied to $x^p$ gives $|U|\\le|x^p|=|x|^p$. Moreover $|n^{-p}|=|n^{-1}|=1$ and $|1-n^{1-p}|=|n^{p-1}-1|\\le|p|$ by steps 1 and 5. Each of the two displayed summands consequently has absolute value at most $|p|\\,|x|^p$. The two-term ultrametric inequality gives the desired bound, also in $F$ by compatibility. When $\\operatorname{char}F=p$, this upper bound is zero and gives the asserted exact equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Agent-supplied normalized-trace supplement to Proposition 6.2.4; elementary assembly using Lemma 6.2.10(i), printed p.46; primary text read at https://arxiv.org/html/0707.3953v3#S6.SS2 on 2026-10-24; archival PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-trf-galois-trace-sum",
+  "lem-trf-nonarchimedean-finite-sums",
+  "lem-trf-nonarchimedean-prime-power-root-estimates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Normalized-trace supplement supplied in the parent node; averaging argument assembled here from the existing Galois trace and absolute-value uniqueness nodes and Temkin Lemma 6.2.10(i). Not asserted to be a theorem stated by Temkin."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a complete nonarchimedean valued field residue characteristic p, normalized trace in a prime-to-p Galois extension satisfies norm bound and commutes with pth powers modulo p",
+   "results": "{\"t\": \"2026-10-24T09:48:03Z\", \"tool\": \"leanfinder\", \"query\": \"In a complete nonarchimedean valued field residue characteristic p, normalized trace in a prime-to-p Galois extension satisfies norm bound and commutes with pth powers modulo p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"prod_galRestrict_eq_norm\", \"Algebra.normalizedTrace\", \"Algebra.normalizedTrace_map\", \"Algebra.normalizedTrace_algebraMap_apply\", \"Algebra.normalizedTrace_algebraMap_apply_eq_self\", \"Algebra.normalizedTrace_algebraMap\", \"Algebra.normalizedTrace_intermediateField\", \"Algebra.normalizedTrace_algebraMap_of_lifts\"], \"digest\": \"2e360ca7325e5248\"}\nRead hits: Algebra.normalizedTrace and its map, algebraMap, intermediateField identities (Mathlib/FieldTheory/NormalizedTrace); prod_galRestrict_eq_norm (Mathlib/RingTheory/IntegralClosure/IntegralRestrict).",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite Galois extension of complete nonarchimedean valued fields of degree n prime to residue characteristic p, averaging conjugates is norm nonincreasing and its pth power error is bounded by norm p times norm x to p",
+   "results": "{\"t\": \"2026-10-24T09:53:56Z\", \"tool\": \"leansearch\", \"query\": \"For a finite Galois extension of complete nonarchimedean valued fields of degree n prime to residue characteristic p, averaging conjugates is norm nonincreasing and its pth power error is bounded by norm p times norm x to p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.norm_eq_prod_automorphisms\", \"prod_galRestrict_eq_norm\", \"IsUltrametricDist.invariantExtension\", \"IsUltrametricDist.isNonarchimedean_algNormOfAlgEquiv\", \"spectralNorm_eq_iSup_of_finiteDimensional_normal\", \"Algebra.algebraMap_intNorm_of_isGalois\", \"IsUltrametricDist.isPowMul_algNormOfAlgEquiv\", \"IsUltrametricDist.isNonarchimedean_invariantExtension\"], \"digest\": \"0440452e23322dde\"}\nRead hits: Algebra.norm_eq_prod_automorphisms; prod_galRestrict_eq_norm; IsUltrametricDist.invariantExtension, isNonarchimedean_algNormOfAlgEquiv, isPowMul_algNormOfAlgEquiv, isNonarchimedean_invariantExtension; spectralNorm_eq_iSup_of_finiteDimensional_normal; Algebra.algebraMap_intNorm_of_isGalois.",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.trace",
+   "results": "{\"t\": \"2026-10-24T09:51:30Z\", \"tool\": \"loogle\", \"query\": \"Algebra.trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.trace\", \"Algebra.trace_self\", \"Algebra.trace_self_apply\", \"Algebra.trace_algebraMap_of_basis\", \"Algebra.trace_algebraMap\", \"Algebra.trace_eq_matrix_trace\", \"Algebra.trace_eq_zero_of_not_exists_basis\", \"Algebra.trace_prod\"], \"digest\": \"823bbab16b0f24fe\"}\nRead hits: Algebra.trace, trace_self, trace_self_apply, trace_algebraMap_of_basis, trace_algebraMap, trace_eq_matrix_trace, trace_eq_zero_of_not_exists_basis, trace_prod, trace_trace_of_basis, trace_trace, traceForm_apply, trace_comp_trace_of_basis, all in Mathlib.RingTheory.Trace.Defs.",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*pow|pow.*trace|normalizedTrace",
+   "results": "{\"t\": \"2026-10-24T09:53:56Z\", \"tool\": \"grep\", \"query\": \"trace.*pow|pow.*trace|normalizedTrace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/LucasLehmer.lean\", \"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\", \"Mathlib/FieldTheory/Finite/Trace.lean\"], \"digest\": \"1cab003bda1d1df0\"}\nRead hits: Mathlib/FieldTheory/NormalizedTrace.lean:22,27,28,29,32; Mathlib/LinearAlgebra/Matrix/Charpoly/FiniteField.lean:53 (FiniteField.trace_pow_card), 60 (ZMod.trace_pow_card); Mathlib/FieldTheory/Finite/Trace.lean:49 (algebraMap_trace_eq_sum_pow); Mathlib/RingTheory/Trace/Basic.lean:79 (PowerBasis.trace_gen_eq_nextCoeff_minpoly); other hits concern Lucas-Lehmer, cyclotomic discriminants, power bases, and trace forms.",
+   "date": "2026-10-24",
+   "verdict": "no match: the trace and finite-field identities and invariant norms do not give the valued pth-power error estimate; Algebra.normalizedTrace requires characteristic zero. The present degree-normalized finite trace also covers equal characteristic p."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*pow|pow.*trace|normalizedTrace",
+   "results": {
+    "t": "2026-10-24T11:39:37Z",
+    "tool": "grep",
+    "query": "trace.*pow|pow.*trace|normalizedTrace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/Cyclotomic/Discriminant.lean",
+     "Mathlib/NumberTheory/Cyclotomic/Discriminant.lean",
+     "Mathlib/NumberTheory/LucasLehmer.lean",
+     "Mathlib/NumberTheory/LucasLehmer.lean",
+     "Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean",
+     "Mathlib/FieldTheory/Minpoly/MinpolyDiv.lean",
+     "Mathlib/FieldTheory/Finite/Trace.lean",
+     "Mathlib/FieldTheory/Finite/Trace.lean"
+    ],
+    "digest": "cd40f8e1ee2c22aa"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give the trace definition, its scalar identities, finite-field Frobenius identities, and spectral norms, but none states both valued-field estimates. The public Algebra.normalizedTrace assumes CharZero; the item also covers characteristic p."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite extension of complete ultrametric fields of degree prime to p the average of Galois conjugates satisfies a Frobenius congruence modulo p with a norm bound",
+   "results": {
+    "t": "2026-10-24T11:39:37Z",
+    "tool": "leansearch",
+    "query": "For a finite extension of complete ultrametric fields of degree prime to p the average of Galois conjugates satisfies a Frobenius congruence modulo p with a norm bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FiniteField.Extension.frob",
+     "FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp",
+     "Algebra.norm_eq_prod_automorphisms",
+     "IsUltrametricDist.invariantExtension",
+     "FiniteField.frobeniusAlgEquivOfAlgebraic",
+     "FiniteField.frobeniusAlgEquivOfAlgebraic_apply",
+     "FiniteField.Extension.exists_frob_pow_eq",
+     "FiniteField.Extension.frob_apply"
+    ],
+    "digest": "9856996f7b428cca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give the trace definition, its scalar identities, finite-field Frobenius identities, and spectral norms, but none states both valued-field estimates. The public Algebra.normalizedTrace assumes CharZero; the item also covers characteristic p."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.trace",
+   "results": {
+    "t": "2026-10-24T11:39:37Z",
+    "tool": "loogle",
+    "query": "Algebra.trace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Algebra.trace",
+     "Algebra.trace_self",
+     "Algebra.trace_self_apply",
+     "Algebra.trace_algebraMap_of_basis",
+     "Algebra.trace_algebraMap",
+     "Algebra.trace_eq_matrix_trace",
+     "Algebra.trace_eq_zero_of_not_exists_basis",
+     "Algebra.trace_prod"
+    ],
+    "digest": "823bbab16b0f24fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give the trace definition, its scalar identities, finite-field Frobenius identities, and spectral norms, but none states both valued-field estimates. The public Algebra.normalizedTrace assumes CharZero; the item also covers characteristic p."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized trace over a finite Galois extension of complete nonarchimedean fields with degree prime to residue characteristic p is norm contracting and has pth power error at most norm p times norm x to p",
+   "results": {
+    "t": "2026-10-24T11:39:38Z",
+    "tool": "leanfinder",
+    "query": "A normalized trace over a finite Galois extension of complete nonarchimedean fields with degree prime to residue characteristic p is norm contracting and has pth power error at most norm p times norm x to p",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.intNormAux",
+     "prod_galRestrict_eq_norm",
+     "isPowMul_spectralNorm_of_finiteDimensional_normal",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "Algebra.map_intNormAux",
+     "Algebra.algebraMap_intNorm",
+     "RingOfIntegers.dvd_norm"
+    ],
+    "digest": "a2a6a507df826006"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give the trace definition, its scalar identities, finite-field Frobenius identities, and spectral norms, but none states both valued-field estimates. The public Algebra.normalizedTrace assumes CharZero; the item also covers characteristic p."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-critical-coset-coefficient-normalization",
+  "date": "2026-10-24",
+  "group": "Q103"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: Lemma 6.1.2(i), pp. 37–38, and type 2/3 clause of Proposition 6.2.4, p. 42, proved pp. 47–48. The former identifies the unrestricted polynomial infimum with the critical coset infimum. Supporting input for critical-polynomial minimization: Agent-supplied coefficient normalization and normalized-trace descent supplement to the first paragraph of the proof of Proposition 6.2.4, printed p. 47; scaling as in Proposition 6.1.4(ii), printed p. 38. The trace-descent assertion is supplied by Q23, not asserted to be a quoted theorem of Temkin. Supporting estimate: degree-normalized trace is nonexpanding and commutes with the pth-power map up to an error of norm at most |p| |x|^p.",
+   "via": [
+    "lem-trf-critical-coset-coefficient-normalization",
+    "lem-trf-analytic-critical-polynomial-minimum",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-prime-to-p-trace-frobenius-bound",
+  "worker": "stage1",
+  "summary": "O1 checked the complete finite Galois hypotheses, preserved the statement, and supplied a six-step averaging proof using four existing nodes. No new nodes: uniqueness makes conjugates isometric, the Galois trace formula and ultrametric sum bound give contraction, and two applications of the existing prime-power error estimate (conjugates and n copies of 1) control the Frobenius error. Equal characteristic and degree one are included.",
+  "blueprint": "Historical analytic input under lem-trf-local-term-locality, through the coefficient-normalization supplement to Temkin Proposition 6.2.4, first proof paragraph: supplies precisely the normalized-trace contraction and Frobenius-error estimate needed for trace descent. The current latest blueprint locality node and sk-i-curve-zero use contracting correspondences; this split stays below the already assigned analytic auxiliary chain and replaces no unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-6521118fd",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-6521118fd (reviewer sub-agent of L); spot-checked: Ordinary one-level split with no new nodes; no repair note exists, so the re-split rule does not apply. The statement is unchanged and is used exactly by step 4 of the parent lem-trf-critical-coset-coefficient-normalization; there is no cycle. Step 1: |m|<=1 for every integer, |n|=1 since p does not divide n, and the residue characteristic of E is p via the kernel of F° to the residue field of E. Step 2: trace linearity and Tr(c)=nc. Step 3: lem-sfb-algebraic-absolute-value-unique (Mathlib leaf, so off-unit use is allowed) gives |σz|=|z|; its hypotheses hold: complete nontrivial base, algebraic extension, two extending absolute values. Step 4: lem-trf-galois-trace-sum and the first clause of lem-trf-nonarchimedean-finite-sums give |T x|<=|x|. Step 5: the first inequality of lem-trf-nonarchimedean-prime-power-root-estimates with q=p, applied once in E to the conjugates and once in F to n copies of 1, gives |n^{p-1}-1|<=|p|. That inequality matches Temkin 0707.3953v3 Lemma 6.2.10(i), printed p.46. Step 6: I checked the identity n^{-1}U - n^{-p}S^p = n^{-p}(U-S^p) + n^{-1}(1-n^{1-p})U by expansion; the ultrametric inequality finishes. Tested n=1, x=0, char F=p (exact equality since n^p=n in F_p) and p=2, n=3. Duplicate search found nothing: the affinoid trace-supremum bound, the l-adic retraction and dense-subfield descent all state other things. proof_deps equal the union of uses, all three kinds of Mathlib search are recorded, blueprint fields are filled, and no SGA is cited. No changes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PrimeToPTraceFrobeniusBound",
+  "declaration": "Algebra.finiteDegreeNormalizedTrace_primeTo_residueChar",
+  "declarations": [
+   "Algebra.finiteDegreeNormalizedTrace",
+   "Algebra.finiteDegreeNormalizedTrace_primeTo_residueChar"
+  ],
+  "file": "lean/Sheaf/FieldTheory/PrimeToPTraceFrobeniusBound.lean",
+  "statement": "theorem finiteDegreeNormalizedTrace_primeTo_residueChar (F : Type u) (E : Type v) [NontriviallyNormedField F] [NontriviallyNormedField E] [IsUltrametricDist F] [IsUltrametricDist E] [CompleteSpace F] [CompleteSpace E] [Algebra F E] [FiniteDimensional F E] [IsGalois F E] (hcompat : ∀ c : F, ‖algebraMap F E c‖ = ‖c‖) (p : ℕ) (hp : 0 < p) [CharP (IsLocalRing.ResidueField (NormedField.valuation (K := F)).integer) p] (hn : ¬ p ∣ Module.finrank F E) : (∀ c : F, finiteDegreeNormalizedTrace F E (algebraMap F E c) = c) ∧ ∀ x : E, ‖finiteDegreeNormalizedTrace F E x‖ ≤ ‖x‖ ∧ ‖finiteDegreeNormalizedTrace F E (x ^ p) - (finiteDegreeNormalizedTrace F E x) ^ p‖ ≤ ‖(p : F)‖ * ‖x‖ ^ p",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6aaba868b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: NontriviallyNormedField+IsUltrametricDist+CompleteSpace for F,E; hcompat norm compatibility; residue field of NormedField.valuation integer with CharP p, 0<p; FiniteDimensional+IsGalois; ¬p∣finrank; conclusions T(c)=c, ‖T x‖≤‖x‖, ‖T(x^p)-T(x)^p‖≤‖(p:F)‖‖x‖^p, F-linearity via E →ₗ[F] F type. Helper finiteDegreeNormalizedTrace = finrank⁻¹ • Algebra.trace is real data and the node's own T; Mathlib normalizedTrace needs CharZero, side-live DegreeNormalizedTrace is the Milne curve trace (different notion). Math checked (|n|=1, isometric conjugates, multinomial p-divisibility, step-6 identity). Edge cases x=0, n=1, char p (equality), mixed char, independent universes u v. lean.statement verbatim; node unchanged apart from lean vs side-live; docstrings with source/blueprint and 6-step plan; single sorry; lines ≤100. Minor: private proof-dep imports unused by statement (not blocking). No file changed, no compile run."
+ }
+}

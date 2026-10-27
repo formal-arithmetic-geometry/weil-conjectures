@@ -1,0 +1,219 @@
+{
+ "id": "lem-trf-coinduction-polynomial-refinement",
+ "kind": "statement",
+ "title": "Derived coinduction cancels added evaluation variables",
+ "statement": "Let $R\\to P\\xrightarrow{\\psi} A$ be homomorphisms of commutative rings, let $m\\geq0$, and choose $g_1,\\ldots,g_m\\in P$. Set $Q=P[y_1,\\ldots,y_m]$ [def-weil-pbc-mv-polynomial-ring], let $\\pi:Q\\twoheadrightarrow P$ send $y_i$ to $g_i$, and set $\\chi=\\psi\\pi$. For a ring map $T\\to B$, write $C_B^T:D(T)\\to D(B)$ for derived coinduction [def-trf-derived-coinduction], namely $\\operatorname{Hom}_T(B,I)$ for a K-injective representative $I$ with action $(b h)(b')=h(b'b)$. Use ordinary unbounded module derived categories [def-weil-abstract-derived-category] and derived scalar extension [lem-pur-derived-change-of-rings]. There is an isomorphism of functors $D(R)\\to D(A)$\n$$C_A^Q(-\\otimes_R^{\\mathbf L}Q)[m]\\ \\cong\\ C_A^P(-\\otimes_R^{\\mathbf L}P).$$\nThere is also an isomorphism of functors $D(Q)\\to D(P)$\n$$C_P^Q(-)\\ \\cong\\ (-\\otimes_Q^{\\mathbf L}P)[-m].$$\nThe comparisons may depend on the ordered variables and the chosen $g_i$; no comparison independent of those choices is asserted. No flatness of $P/R$, surjectivity of $\\psi$, Noetherianity, or boundedness of the input complex is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0BZH (lemma-compute-for-effective-Cartier-algebraic) and 0BZJ (lemma-well-defined), evaluation quotient and induction on the added polynomial variables."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-derived-coinduction",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "First work with one variable: $S=T[y]$, $q:S\\to T$, $y\\mapsto g$, and $z=y-g$. For $f=\\sum a_k y^k$ the identity\n$$f(y)-f(g)=(y-g)\\sum_{k\\geq1}a_k\\sum_{j=0}^{k-1}y^{k-1-j}g^j$$\nshows $\\ker q=(z)$; constants show surjectivity. Multiplication by $z$ is injective: if $f\\ne0$ and $a_d\\ne0$ is its highest nonzero coefficient, the coefficient of $y^{d+1}$ in $zf$ is $a_d$. Thus $S\\xrightarrow{z}S\\to T\\to0$ is exact. The ideal $I=(z)$ is free of rank one via $a\\mapsto az$, and the displayed two-term finite free resolution makes $T[0]$ perfect over $S$ by [def-pc-perfect-ring-complex]. If $S=0$ the maps and claims are the unique zero maps and the same free-module identifications still apply.",
+   "uses": [
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZJ, lemma-well-defined, one-variable evaluation quotient; elementary verification of its kernel and finite free resolution."
+   }
+  },
+  {
+   "text": "For this quotient, [lem-trf-cartier-quotient-derived-dual] gives $D_T=C_T^S(S[0])\\cong\\operatorname{Hom}_T(I\\otimes_S T,T)[-1]$ in $D(T)$. The generator $z$ identifies $I\\otimes_S T$ with $T$, so its dual identifies with $T$ by evaluation on $z\\otimes1$. Since Step 1 proved perfection, [lem-trf-perfect-algebra-coinduction-tensor] now gives, naturally for every $M\\in D(S)$,\n$$C_T^S(M)\\cong M\\otimes_S^{\\mathbf L}D_T\\cong(M\\otimes_S^{\\mathbf L}T)[-1].$$\nThe second isomorphism uses functoriality in the second tensor factor from [lem-pc-derived-tensor-second-factor-functor]. Shifting the second factor by $-1$ shifts its total tensor by $-1$: on a summand $F^a\\otimes T^b$ the cochain identification multiplies by $(-1)^a$, which respects the two tensor differentials. All these maps are $T$-linear; the dual comparison is in $D(T)$, and the perfect-algebra comparison retains that same action.",
+   "uses": [
+    "lem-trf-cartier-quotient-derived-dual",
+    "lem-trf-perfect-algebra-coinduction-tensor",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZH, lemma-compute-for-effective-Cartier-algebraic, using Tag 0BZE, lemma-RHom-is-tensor-special."
+   }
+  },
+  {
+   "text": "For arbitrary ring maps $S\\to T\\to B$, [lem-trf-derived-coinduction-adjunction] identifies each coinduction as the right adjoint of scalar restriction. The composite of the two restriction functors is restriction along $S\\to B$. Hence [lem-cat-right-adjoint-composition] supplies a natural isomorphism\n$$C_B^S\\cong C_B^T C_T^S.$$\nCoinduction commutes with shifts: in its defining K-injective model, shifting $I$ shifts $\\operatorname{Hom}_T(B,I)$ with the same differential signs and the same action. A shifted K-injective is K-injective, since testing Hom from an acyclic complex reduces to testing its opposite shift. In particular $C_B^T(L[r])\\cong C_B^T(L)[r]$. Identity coinduction is the identity, by $\\operatorname{Hom}_T(T,I)\\cong I$, $h\\mapsto h(1)$ [def-trf-derived-coinduction].",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-cat-right-adjoint-composition",
+    "def-trf-derived-coinduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0C0F, lemma-composition-right-adjoints; Tag 0A71, lemma-RHom-ext, and the K-injective construction in section-trivial."
+   }
+  },
+  {
+   "text": "Put $Q_i=P[y_1,\\ldots,y_i]$ and let $q_i:Q_i\\to Q_{i-1}$ evaluate $y_i$ at $g_i$. Inductively construct a natural isomorphism\n$$C_P^{Q_i}(M)\\cong(M\\otimes_{Q_i}^{\\mathbf L}P)[-i]\\quad(M\\in D(Q_i)).$$\nFor $i=0$ use identity coinduction and $M\\otimes_P P=M$. For the successor, Step 3 identifies $C_P^{Q_i}$ with $C_P^{Q_{i-1}}C_{Q_{i-1}}^{Q_i}$; apply Step 2 to the latter factor, then the induction hypothesis and shift compatibility. This gives\n$$((M\\otimes_{Q_i}^{\\mathbf L}Q_{i-1})\\otimes_{Q_{i-1}}^{\\mathbf L}P)[-i].$$\nTo identify its tensor with $M\\otimes_{Q_i}^{\\mathbf L}P$, choose a K-flat representative $F$ of $M$. Scalar extension preserves K-flatness by [lem-pc-kflat-extension-of-scalars], and [lem-pc-derived-tensor-second-factor-functor] computes both derived extensions on these representatives. The required cochain isomorphism sends $(f\\otimes a)\\otimes p$ to $f\\otimes\\pi_{i-1}(a)p$, with inverse $f\\otimes p\\mapsto(f\\otimes1)\\otimes p$, where $\\pi_{i-1}:Q_{i-1}\\to P$ is evaluation. Balancing proves the inverse identities; both maps commute with differentials and with maps of $F$. Resolution independence is included in the cited tensor-functor statement. At $i=m$ this is the second asserted functor isomorphism, including $m=0$.",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZJ, lemma-well-defined, induction on the added variables; K-flat computation of successive scalar extensions."
+   }
+  },
+  {
+   "text": "For $K\\in D(R)$ put $M=K\\otimes_R^{\\mathbf L}Q$. A K-flat representative $F$ of $K$ extends to the K-flat $Q$-complex $F\\otimes_R Q$ by [lem-pc-kflat-extension-of-scalars]. The computation rule of [lem-pc-derived-tensor-second-factor-functor] identifies\n$$(K\\otimes_R^{\\mathbf L}Q)\\otimes_Q^{\\mathbf L}P\\cong K\\otimes_R^{\\mathbf L}P.$$\nThe cochain maps are $(f\\otimes q)\\otimes p\\mapsto f\\otimes\\pi(q)p$ and $f\\otimes p\\mapsto(f\\otimes1)\\otimes p$, natural in $F$. This uses no flatness of $P/R$. Combine this identification with Step 4 to obtain $C_P^Q(K\\otimes_R^{\\mathbf L}Q)\\cong(K\\otimes_R^{\\mathbf L}P)[-m]$, naturally in $K$.",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZJ, lemma-well-defined, final tensor substitution, computed without a flatness assumption."
+   }
+  },
+  {
+   "text": "Finally apply Step 3 to $Q\\xrightarrow{\\pi}P\\xrightarrow{\\psi}A$ and then apply $C_A^P$ to Step 5. The resulting natural isomorphisms are\n$$C_A^Q(K\\otimes_R^{\\mathbf L}Q)[m]\\cong C_A^P(C_P^Q(K\\otimes_R^{\\mathbf L}Q))[m]\\cong C_A^P((K\\otimes_R^{\\mathbf L}P)[-m])[m]\\cong C_A^P(K\\otimes_R^{\\mathbf L}P).$$\nThe last map uses the shift comparison of Step 3 and cancels the two shifts. This is in $D(A)$ throughout. Choices of the ordered generators provide the trivializations in Step 2 and fix the order of induction; no independence of those choices has been used. Neither the adjunction nor the tensor computations required $\\psi$ surjective, bounded input, or Noetherian rings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZJ, lemma-well-defined, the displayed composite and shift cancellation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "lem-trf-cartier-quotient-derived-dual",
+  "lem-trf-perfect-algebra-coinduction-tensor",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-cat-right-adjoint-composition",
+  "def-trf-derived-coinduction",
+  "lem-pc-kflat-extension-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0BZH and 0BZJ; one-variable Cartier computation and its induction, with explicit K-flat tensor substitutions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom coinduction along evaluation P[y] to P cancels one polynomial variable with shift minus one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {ι : Type u_2} (c : ComplexShape ι) (i : ι) [inst_3 : DecidableEq ι]\\n  (hi : ∀ (j : ι), ¬c.Rel i j) (X : C) {K : HomologicalComplex C \", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms, index type $\\\\iota$, complex shape $c$, and index $i \\\\in \\\\iota$ with no outgoing relations, the composition of the evaluation functor at $i$ with the C\"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {ι : Type u_2} →\\n          (c : ComplexShape ι) →\\n            (i : ι) →\\n              [inst_3 : DecidableEq ι]\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms, index type $\\\\iota$, complex shape $c$, and index $i \\\\in \\\\iota$ with no outgoing relations, the composition of the evaluation functor at $i$ with the C\"}\n  {\"name\": \"CochainComplex.shiftEval\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Shift\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      (n i i' : ℤ) →\\n        n + i = i' →\\n          ((CategoryTheory.shiftFunctor (CochainComplex C ℤ) n).comp (HomologicalComplex.eval C (ComplexShape.up ℤ) i) ≅\\n            HomologicalComplex\", \"doc\": \"For any cochain complex $ X $ in a preadditive category $ \\\\mathcal{C} $, shifting $ X $ by an integer $ n $ and then evaluating at index $ i $ is naturally isomorphic to evaluating $ X $ at index $ i'\"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {ι : Type u_2} {c : ComplexShape ι} {i₀ i₁ : ι} (hi₀₁ : c.Rel i₀ i₁)\\n  (h : i₀ ≠ i₁) (X : C) {K : HomologicalComplex C c}\\n  (g : Homol\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms and a zero object, distinct indices $i_0 \\\\neq i_1$, and a homological complex $K$, the composition of the evaluation functor at $i_0$ with the Coyoneda\"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {ι : Type u_2} →\\n          {c : ComplexShape ι} →\\n            {i₀ i₁ : ι} →\\n              (hi₀₁ : c.Rel i₀ i₁)\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms and a zero object, indices $i_0 \\\\neq i_1$, and a homological complex $K$, the composition of the evaluation functor at $i_0$ with the Coyoneda embeddin\"}\n  {\"name\": \"CochainComplex.shiftEval_hom_app\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Shift\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C] (n i i' : ℤ)\\n  (hi : n + i = i') (X : CochainComplex C ℤ),\\n  (CochainComplex.shiftEval C n i i' hi).hom.app X = (HomologicalComplex.XIsoOfEq X ⋯).hom\", \"doc\": \"For any cochain complex $ X $ in a preadditive category $ \\\\mathcal{C} $, the homomorphism component of the natural isomorphism between shifting $ X $ by $ n $ and evaluating at index $ i $ versus eval\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.fromSingleEquiv\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {X : C} →\\n          {K : CochainComplex C ℤ} →\\n            {p q n : ℤ} →\\n              p + n = q →\\n                CochainComple\", \"doc\": \"For integers $p, q, n$ satisfying $p + n = q$, this establishes an additive equivalence between cochains of degree $n$ in the homomorphism complex $\\\\text{Hom}(\\\\text{Single}_p(X), K)$ and morphisms $X \"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.toSingleEquiv\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {X : C} →\\n          {K : CochainComplex C ℤ} →\\n            {p q n : ℤ} →\\n              p + n = q →\\n                CochainComple\", \"doc\": \"For cochain complexes $K$ and $L$ in a preadditive category $\\\\mathcal{C}$, and integers $p, q, n$ satisfying $p + n = q$, this defines an additive equivalence between the cochains in degree $n$ of the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"polynomial\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "grep",
+   "query": "coinduct|polynomial.*[Dd]ual|[Dd]ual.*polynomial",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/Homotopy.lean\", \"line\": \"555\", \"text\": \"`Homotopy.mkCoinductive` allows us to build a homotopy of cochain complexes inductively,\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Homotopy.lean\", \"line\": \"560\", \"text\": \"section MkCoinductive\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Homotopy.lean\", \"line\": \"597\", \"text\": \"/-- An auxiliary construction for `mkCoinductive`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Homotopy.lean\", \"line\": \"602\", \"text\": \"in `mkCoinductive`.\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Homotopy.lean\", \"line\": \"609\", \"text\": \"def mkCoinductiveAux₁ :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining a polynomial variable does not change the shifted derived coinduction presentation functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicIndependent.mvPolynomialOptionEquivPolynomialAdjoin\", \"module\": \"Mathlib.RingTheory.AlgebraicIndependent.Basic\", \"type\": \"(hx : AlgebraicIndependent R x) : MvPolynomial (Option ι) R ≃+* Polynomial (adjoin R (Set.range x))\", \"doc\": \"Given an algebraically independent set $ x $ over $ R $, this constructs an algebra isomorphism between the multivariate polynomial ring $ R[\\\\text{Option } \\\\iota] $ and the polynomial ring $ \\\\text{Pol\"}\n  {\"name\": \"Polynomial.derivation_ext\", \"module\": \"Mathlib.Algebra.Polynomial.Derivation\", \"type\": \"{D₁ D₂ : Derivation R R[X] A} (h : D₁ X = D₂ X) : D₁ = D₂\", \"doc\": \"For any two derivations $ D_1 $ and $ D_2 $ from the polynomial ring $ R[X] $ to an $ R $-algebra $ A $, if $ D_1(X) = D_2(X) $, then $ D_1 = D_2 $.\"}\n  {\"name\": \"IsAdjoinRootMonic\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \"{R : Type u} →\\n  (S : Type v) → [inst : CommSemiring R] → [inst_1 : Semiring S] → [Algebra R S] → Polynomial R → Type (max u v)\", \"doc\": \"The inductive structure asserting that a semiring $ S $ is obtained by adjoining a root of a given monic polynomial over a commutative semiring $ R $, equipped with an $ R $-algebra structure.\"}\n  {\"name\": \"IsAdjoinRootMonic.noConfusion\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \"{P : Sort u_1} →\\n  {R : Type u} →\\n    {S : Type v} →\\n      {inst : CommSemiring R} →\\n        {inst_1 : Semiring S} →\\n          {inst_2 : Algebra R S} →\\n            {f : Polynomial R} →\\n              {t : IsAdjoinRootMonic S f} →\\n                {R' : Type u} →\\n                  {S' : Type v} →\\n     \", \"doc\": \"A structure on a semiring $ S $, given a commutative semiring $ R $ and a polynomial $ f \\\\in R[x] $, asserting that $ S $ is generated as an $ R $-algebra by a root of $ f $.\"}\n  {\"name\": \"IsAdjoinRoot.noConfusionType\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \"Sort u_1 →\\n  {R : Type u} →\\n    {S : Type v} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : Semiring S] →\\n          [inst_2 : Algebra R S] →\\n            {f : Polynomial R} →\\n              IsAdjoinRoot S f →\\n                {R' : Type u} →\\n                  {S' : Type v} →\\n                    [i\", \"doc\": \"A structure on a semiring $ S $, given a commutative semiring $ R $ and a polynomial $ f \\\\in R[x] $, asserting that $ S $ is generated as an $ R $-algebra by a root of $ f $. This is witnessed by a su\"}\n  {\"name\": \"AdjoinRoot\", \"module\": \"Mathlib.RingTheory.AdjoinRoot\", \"type\": \"[CommRing R] (f : R[X]) : Type _\", \"doc\": \"The quotient ring $ R[X]/(f) $ obtained by taking the polynomial ring over a commutative ring $ R $ and quotienting by the ideal generated by the polynomial $ f $. This construction adjoins a root of \"}\n  {\"name\": \"Algebra.FinitePresentation.polynomial\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"[FinitePresentation R A] : FinitePresentation R A[X]\", \"doc\": \"Given a commutative semiring $ R $ and an $ R $-algebra $ A $ that is finitely presented over $ R $, the polynomial ring $ A[X] $ is also finitely presented over $ R $. This instance asserts that the \"}\n  {\"name\": \"AdjoinRoot.finitePresentation\", \"module\": \"Mathlib.RingTheory.AdjoinRoot\", \"type\": \"[CommRing S] [Algebra S R] [FinitePresentation S R] : FinitePresentation S (AdjoinRoot f)\", \"doc\": \"Given a commutative semiring $ S $ and an $ S $-algebra structure on a commutative ring $ R $, the quotient ring $ R[X]/(f) $ obtained by adjoining a root of the polynomial $ f $ inherits an $ S $-alg\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular principal quotient derived coinduction equals derived tensor shifted by minus one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.Tor_obj\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] (n : ℕ) (X : Rep k G),\\n  (Rep.Tor k G n).obj X = ((Rep.coinvariantsTensor k G).obj X).leftDerived n\", \"doc\": \"For any commutative ring $k$, group $G$, natural number $n$, and representation $X$ in $\\\\text{Rep}(k, G)$, the $n$-th Tor functor applied to $X$ is defined as the $n$-th left-derived functor of the co\"}\n  {\"name\": \"Rep.Tor_map\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] (n : ℕ) {X Y : Rep k G} (f : X ⟶ Y),\\n  (Rep.Tor k G n).map f = CategoryTheory.NatTrans.leftDerived ((Rep.coinvariantsTensor k G).map f) n\", \"doc\": \"For any commutative ring $k$, group $G$, natural number $n$, and morphism $f : X \\to Y$ in the category $\\\\text{Rep}(k, G)$ of representations, the induced map $\\\\text{Tor}_n^{k,G}(f)$ is equal to the $n\"}\n  {\"name\": \"DerivedCategory.Qh_obj_singleFunctors_obj\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (n : ℤ) (X : C),\\n  DerivedCategory.Qh.obj (((HomotopyCategory.singleFunctors C).functor n).obj X) =\\n    (DerivedCategory.singleFunctor C n).obj X\", \"doc\": \"For any integer $n$ and object $X$ in an abelian category $\\\\mathcal{C}$, applying the localization functor $Qh$ from the homotopy category of chain complexes to the derived category to the single-term\"}\n  {\"name\": \"DerivedCategory.instLinearCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Q\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category preserves the $ R $-linear structure, meaning that for any two objects, the induced map on hom\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        (n : ℤ) → DerivedCategory.singleFunctor C n ≅ (CochainComplex.singleFunctor C n).comp DerivedCategory.Q\", \"doc\": \"For each integer $ n $, the single-term complex functor from category $ \\\\mathcal{C} $ to its derived category is naturally isomorphic to the composition of the single-term cochain complex functor (con\"}\n  {\"name\": \"Rep.torIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) →\\n        {B : Rep k G} →\\n          (P : CategoryTheory.ProjectiveResolution B) →\\n            (n : ℕ) →\\n              ((Rep.Tor k G n).obj A).obj B ≅\\n                HomologicalComplex.homology (HomologicalComplex.\", \"doc\": \"For a commutative ring $ k $ and group $ G $, given representations $ A $ and $ B $, and a projective resolution $ P $ of $ B $, the $ n $-th Tor functor $ \\\\text{Tor}_n(A, B) $ is isomorphic to the $ \"}\n  {\"name\": \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : CommGroup G] →\\n      [inst_2 : Fintype G] →\\n        (A : Rep k G) →\\n          (g : G) →\\n            (hg : ∀ (x : G), x ∈ Subgroup.zpowers g) →\\n              HomologicalComplex.coinvariantsTensorObj A (Rep.FiniteCyclicGroup.resolution k g⁻¹ ⋯).co\", \"doc\": \"For a commutative ring $ k $, finite cyclic group $ G $, and representation $ A $, if every element of $ G $ lies in the cyclic subgroup generated by $ g $, then the chain complex formed by the coinva\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-shriek-calculus",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Re-split task: old steps 3--4, cancellation of evaluation variables and polynomial refinement.",
+   "via": [
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coinduction-polynomial-refinement",
+  "worker": "stage1",
+  "summary": "N5 checked the Stacks proof without adding hypotheses, supplied the evaluation-kernel and tensor maps, reused the action-preserving perfect-algebra comparison and adjunction, and isolated only the effective-Cartier derived-dual object computation.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Algebraic upper shriek: polynomial models, coinduction, composition and flat base change. Re-split task: old steps 3--4, cancellation of evaluation variables and polynomial refinement. Realizes evaluation-variable cancellation by the one-variable Cartier calculation and induction; no alteration route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic unbounded module tensor computation and resolution independence; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-kflat-extension-of-scalars",
+    "why": "Generic K-flatness under arbitrary scalar extension, needed to compute iterated tensors without flatness; this unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-extension-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-d828837bb",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-d828837bb (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks dualizing.tex: 0BZH (lemma-compute-for-effective-Cartier-algebraic) with its proof, and 0BZJ (lemma-well-defined) with its induction, plus 0C0F and 0A71. The item statement is unchanged and true with no surjectivity, flatness, Noetherian or bound hypotheses; m=0 gives identities. The base item was unsplit with an empty proof and is still unsplit in the newer dagsnaps (latest 59b26c5), so it is not superseded. Steps: (1) is elementary and correct; the kernel of evaluation is (y-g), multiplication by the monic y-g is injective over any T including Z/4, and the two-term free resolution gives perfection. (2) applies the new node to I=(z), which is free of rank 1, then the perfect-algebra coinduction tensor using Step 1, then the second-factor functor; the explicit (-1)^a shift sign is correct. (3) uses the adjunction for any ring map plus the Mathlib leaf right-adjoint composition; shift and identity compatibility are written directly on the K-injective model. (4) is an induction with explicit base and successor (D4 met), using K-flat extension of scalars and explicit balanced maps. (5) is the same pattern with no flatness of P/R. (6) is the elementary assembly. The parent's step 2 uses the item in the form stated. New node lem-trf-cartier-quotient-derived-dual: the statement, C(S[0]) = (I tensor B)^dual [-1] in D(B) for an invertible ideal, is exactly the object computation in the 0BZH proof. I tested Z with I=(2), I=S, the non-principal invertible ideal (2,1+sqrt(-5)) in Z[sqrt(-5)], and checked that I=0 is excluded. The node has a statement only, is self-contained, records LeanFinder, LeanSearch, Loogle and grep searches, and is strictly smaller than the item. Closest existing node: lem-sc-koszul-regular-sequence-dual-complex, which works in D(A) for a global Koszul-regular sequence. It is a proof input for the new node, not a duplicate; the report's not-duplicate list omits it (advisory). Route: unit sk-i-curve-zero. Accepted tool_uses: lem-pc-derived-tensor-second-factor-functor and lem-pc-kflat-extension-of-scalars, both generic. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CoinductionPolynomialRefinement",
+  "declaration": "ModuleCat.coinduction_polynomial_refinement",
+  "file": "lean/Sheaf/Algebra/Homology/CoinductionPolynomialRefinement.lean",
+  "statement": "theorem coinduction_polynomial_refinement {R P A : Type u} [CommRing R] [CommRing P] [CommRing A] (ρ : R →+* P) (ψ : P →+* A) (m : ℕ) (g : Fin m → P) : Nonempty ((ordinaryDerivedExtendScalars ((MvPolynomial.C : P →+* MvPolynomial (Fin m) P).comp ρ) ⋙ derivedCoinduction (ψ.comp (MvPolynomial.eval g))) ⋙ shiftFunctor (DerivedCategory (ModuleCat.{u} A)) (m : ℤ) ≅ ordinaryDerivedExtendScalars ρ ⋙ derivedCoinduction ψ) ∧ Nonempty (derivedCoinduction (MvPolynomial.eval g) ≅ ordinaryDerivedExtendScalars (MvPolynomial.eval g) ⋙ shiftFunctor (DerivedCategory (ModuleCat.{u} P)) (-(m : ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74dab2da9",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Both clauses render the node exactly: (ext(C∘ρ) ⋙ C_{ψ∘eval g}) ⋙ [m] ≅ ext ρ ⋙ C_ψ, and C_{eval g} ≅ ext(eval g) ⋙ [−m], each as Nonempty functor isos (choice-dependence allowed). Deps derivedCoinduction (rightDerivedFunctor of coextendScalars) and ordinaryDerivedExtendScalars (universal pair F) are real and correctly used. No extra hypotheses; single universe u as required by the dep APIs; m=0, zero rings and zero divisors covered. lean.statement verbatim; node differs from live only in lean. Private imports are exactly the proof-dep modules; docstrings carry the source, the blueprint id and the 6 proof steps; proof is sorry. No duplicate found (rg derivedCoinduction; polynomialDualityRefinement is a different one-step datum). Report has Worker report and Second reading by Q71 sections. No compile needed, no file changed."
+ }
+}

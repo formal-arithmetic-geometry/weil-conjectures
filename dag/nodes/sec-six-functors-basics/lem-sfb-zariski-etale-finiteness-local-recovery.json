@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-zariski-etale-finiteness-local-recovery",
+ "kind": "statement",
+ "title": "Local recovery of Zariski finiteness on an etale cover",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $c$ a proof-only canonical comparison context [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], and $F$ a quasi-coherent Zariski module [pqf-def-coherent]. If $c.\\mathrm{extension}(F)$ has finite type on the small etale site, there exists a family $(f_i:Y_i\\to T)_{i\\in I}$ of etale maps [def-weil-etale-morphism], with $I$ in the object universe of the small etale site, which is an fpqc covering [def-weil-pbc-fpqc-covering], and every tensor pullback $f_i^*F$ [def-pc-module-pullback] has finite type on $Y_i$. If the extension of $F$ is of finite presentation, there is such a family with every ordinary scheme-module pullback $f_i^*F$ of finite presentation. Tensor and ordinary pullbacks are the canonically isomorphic left adjoints to pushforward. This asserts finiteness only on the covering members, not descent to $T$. Empty schemes, empty covering families and zero modules are included.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05VG, lemma-equivalence-quasi-coherent-properties, lem-sfb-scheme-etale-module-exact-finiteness-comparison proof step 4, and the etale-to-fpqc covering identification of step 5, before finiteness descent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the site-local finite-type or finite-presentation condition at the final etale object to choose a covering with finite generators or finite free presentations. The index is in the object universe since the site objects and arrows are in that universe. The slice over each covering member U is U_et. Tensor-pullback composition identifies the restricted extension with the extension of u^*F, and the pullback is quasi-coherent.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-sc-etale-qcoherent-module",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the finite free terms with extensions of Zariski finite free modules. Full faithfulness lifts the finite generating maps or the presentation matrices. For finite generation the lifted map has a quasi-coherent cokernel whose extension is zero; faithfulness forces its identity to be zero, so the map is epi. For finite presentation the Zariski cokernel extends to the required etale module; full faithfulness lifts the comparison isomorphism and its inverse identities, giving a finite presentation of u^*F.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Etale covering families are fpqc. This supplies the displayed precoverage membership without descending finiteness to T. Uniqueness of left adjoints to module pushforward gives the canonical isomorphism between tensor and ordinary pullbacks, so either presentation can be used. The empty cover and rank-zero presentations satisfy the same construction.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sc-etale-qcoherent-module",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05VG, lemma-equivalence-quasi-coherent-properties; explicit local presentation argument in lem-sfb-scheme-etale-module-exact-finiteness-comparison proof step 4, and the etale-to-fpqc covering identification of step 5, before finiteness descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent Zariski module whose associated etale module is finitely presented becomes finitely presented on an etale cover",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.mk, Algebra.Etale.finitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation. No theorem giving the site comparison step.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type finite presentation etale module sheaf yields fpqc covering where Zariski pullback is finite type or finitely presented",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, Algebra.Etale.finitePresentation, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.smallEtaleTopology. No theorem giving the site comparison step.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFiniteType.*pullback|isFinitePresentation.*pullback|IsFinitePresentation.*pushforward",
+   "results": "0 hits: . No theorem giving the site comparison step.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SchemeEtaleModuleExactFinitenessComparison",
+  "date": "2026-10-26",
+  "group": "T2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Exactness and finiteness in the Zariski-small-etale module comparison.; lem-sfb-scheme-etale-module-exact-finiteness-comparison proof step 4, and the etale-to-fpqc covering identification of step 5, before finiteness descent",
+   "via": [
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ZariskiEtaleFinitenessLocalRecovery",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiEtaleFinitenessLocalRecovery.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.zariskiEtale_finiteness_local_recovery",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.zariskiEtale_finiteness_local_recovery"
+  ],
+  "statement": "theorem zariskiEtale_finiteness_local_recovery (T : Scheme.{u})\n    (c : ZariskiEtaleModuleContext T) (F : T.Modules) [F.IsQuasicoherent] :\n    ((c.extension.obj F).IsFiniteType →\n      ∃ (I : Type (u + 1)) (Y : I → Scheme.{u}) (f : ∀ i, Y i ⟶ T),\n        (∀ i, Etale (f i)) ∧\n          Presieve.ofArrows Y f ∈ Scheme.fpqcPrecoverage T ∧\n          ∀ i, ((tensorPullback (f i)).obj F).IsFiniteType) ∧\n    ((c.extension.obj F).IsFinitePresentation →\n      ∃ (I : Type (u + 1)) (Y : I → Scheme.{u}) (f : ∀ i, Y i ⟶ T),\n        (∀ i, Etale (f i)) ∧\n          Presieve.ofArrows Y f ∈ Scheme.fpqcPrecoverage T ∧\n          ∀ i, ((pullback (f i)).obj F).IsFinitePresentation)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T092636-L-3450296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T092636-L-3450296",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

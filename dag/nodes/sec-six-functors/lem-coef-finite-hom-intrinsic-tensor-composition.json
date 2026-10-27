@@ -1,0 +1,126 @@
+{
+ "id": "lem-coef-finite-hom-intrinsic-tensor-composition",
+ "kind": "statement",
+ "title": "Composition square of intrinsic finite scalar tensorators",
+ "statement": "Let $X$ be any scheme, $\\ell$ a prime and $E/\\mathbf Q_\\ell$ a finite extension. For $n\\ge m\\ge r\\ge0$ use the ambient intrinsic derived categories at positive exponents $n+1,m+1,r+1$ and the normalized quotient scalar extensions $F,G,J$ [def-sf-etale-finite-coefficient-hom-arrow, lem-coef-derived-system-evaluation-calculus, def-coef-normalized-dvr-tower, def-weil-derived-pullback-tensor-hom]. Write $T_n,T_m,T_r$ for their closed-record tensor functors, $\\mu:T_nF\\cong(F\\times F)T_m$, $\\nu:T_mG\\cong(G\\times G)T_r$, $\\xi:T_nJ\\cong(J\\times J)T_r$ for the fixed quotient-calculus tensorators, and $\\alpha:F G\\cong J$ for finiteHomIntrinsicAssoc, the left-adjoint mate of normalized restriction composition. Then for all ambient $K,M$, $G(\\mu_{K,M})\\,\\nu_{FK,FM}\\,T_r(\\alpha_K,\\alpha_M)=\\alpha_{T_n(K,M)}\\,\\xi_{K,M}$, with compositions written in diagram order. This is a tensor square, with no Hom comparison or invertibility claim about Hom.",
+ "stmt_deps": [
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final paragraph: associativity of tensor product gives the successive-quotient identities, specifically the tensor square before taking its unique closed transpose."
+ },
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat models of the two tensor inputs. The normalized quotient calculus computes its tensorators by ordinary scalar balancing and its quotient adjunctions by extension/restriction of scalars. The prescribed left-adjoint associator is represented by successive multiplication of coefficients.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-system-scalar-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Final paragraph: associativity of tensor product gives the successive-quotient identities, specifically the tensor square before taking its unique closed transpose."
+   }
+  },
+  {
+   "text": "Both routes send the same pure tensor to (x tensor bc) tensor (y tensor 1). The signed cochain tensor coherence gives equality before localization, also for identity quotients and zero inputs. K-flat change of rings permits nonflat quotients. The monoidal derived comparison descends this equality; naturality with respect to the resolutions gives the square for every ambient pair.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-kflat-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Final paragraph: associativity of tensor product gives the successive-quotient identities, specifically the tensor square before taking its unique closed transpose."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-system-scalar-model",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-kflat-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final paragraph: associativity of tensor product gives the successive-quotient identities, specifically the tensor square before taking its unique closed transpose."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is symmetric monoidal and its tensor comparison commutes with composition of changes of coefficient rings",
+   "results": "8 hits: ModuleCat.extendScalarsComp and its associativity formulas, plus the module extension pseudofunctor. These concern ordinary modules, not the normalized intrinsic ringed-site derived tensorators and adjunction mate.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\", \"leftAdjointCompIso\"",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Ss]calar.*[Cc]omp|[Ss]calar.*[Tt]ensor.*[Cc]oher",
+   "results": "13 hits in PicardGroup, AdicCompletion, Kaehler, RingHom.Flat, Smooth.Local, TensorProduct, Etale.QuasiFinite, UniversalFactorizationRing. None is a derived scalar/tensor composition square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientHomChange",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Final paragraph: associativity of tensor product gives the successive-quotient identities, specifically the tensor square before taking its unique closed transpose."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteHomIntrinsicTensorComposition",
+  "file": "lean/Sheaf/Paper/FiniteHomIntrinsicTensorComposition.lean",
+  "declaration": "WeilConjectures.finiteHomIntrinsic_tensorComposition",
+  "statement": "theorem finiteHomIntrinsic_tensorComposition\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) (K M : normalizedDVRDerived l E X n) :\n    let S := (coefficientDerivedSystemEvaluationCalculus l E X).choose\n    let μ := S.quotientCalculus.tensor h\n    let ν := S.quotientCalculus.tensor k\n    let ξ := S.quotientCalculus.tensor (k.trans h)\n    let α := finiteHomIntrinsicAssoc l E X h k\n    let F := coefficientFiniteQuotientDerived l E X h\n    let G := coefficientFiniteQuotientDerived l E X k\n    G.map (μ.hom.app (K, M)) ≫ ν.hom.app (F.obj K, F.obj M) ≫\n        (finiteIntrinsicClosed l E X r).tensor.map\n          (Prod.mkHom (α.hom.app K) (α.hom.app M)) =\n      α.hom.app ((finiteIntrinsicClosed l E X n).tensor.obj (K, M)) ≫\n        ξ.hom.app (K, M)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ff606",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T070125-L-3398793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ff606",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T070125-L-3398793",
+  "kind": "interface",
+  "note": "independent cc review: item proof + FiniteHomEtaleIso/LisseProjectiveConstantModels against thm-coef-finite-hom plan, new sorry statements against their nodes, the 14 direct importers compiled against the delivered modules, the 5 unit-route modules still in the transitive import closure"
+ }
+}

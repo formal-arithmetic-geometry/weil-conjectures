@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-finite-geometric-tensor-exchange",
+ "kind": "statement",
+ "title": "Geometric base change of the tensor counit transpose",
+ "statement": "Fix P, separated finite-type k0-models X0,Y0 and a separated finite-type morphism f0, and put f,gX,gY,Q,R as in [def-pur-finite-geometric-purity-coordinates]. Let M be bounded constructible of finite Tor amplitude on Y, and choose any etale presentations c0:C(M0)~N(M) and c1:C(M1)~N(RM). Let t_(M,c0), t_(RM,c1), S_M and e_omega be the explicit tensor factors and unit exchange of [lem-pur-finite-geometric-purity-factorization], and e_M the unique compact-support counit mate. Then Q(t_(M,c0));e_M=S_M;(1 tensor e_omega);t_(RM,c1). No relative dimension, diagonal orientation, shift or primitive root appears in this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "Geometric base change of the tensor counit transpose"
+ },
+ "stmt_deps": [
+  "def-pur-finite-geometric-purity-coordinates",
+  "lem-pur-finite-geometric-purity-factorization",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Use the etale presentations and the canonical realization units in the definition of the two theta maps. Retagging changes neither the compact-support functor nor its proper/open exchange and refinement. The compact projection base-change identity identifies the inverse projection transformations in these presentations.",
+   "uses": [
+    "def-pur-finite-geometric-purity-coordinates",
+    "lem-pur-finite-geometric-purity-factorization",
+    "lem-sp-compact-projection-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Clause (2), inverse projection"
+   }
+  },
+  {
+   "text": "Apply the tensor-counit exchange calculus to the actual compact-support exchange. Its unit counit equation gives ordinary exceptional base change at A_Y followed by the ordinary unit comparison; under canonical comparison this is e_omega. At M the counit equation and uniqueness identify the exchange with e_M. The two composites have the same inverse-projection/unit-counit transpose, so injectivity of the bounded etale-origin Hom bijection gives equality.",
+   "uses": [
+    "lem-sp-tensor-counit-exchange-calculus",
+    "def-weil-exceptional-inverse-image",
+    "def-pur-finite-geometric-purity-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Clause (2), tensor transpose and counit mate"
+   }
+  },
+  {
+   "text": "Tensor pullback, the square compositor and the two realization units are precisely S_M. The exceptional images of the inverse realization units finish t_(M,c0) and t_(RM,c1), giving the displayed equality. Origin and bounded-below preservation justify all transpose domains.",
+   "uses": [
+    "lem-pur-finite-geometric-purity-factorization",
+    "def-pur-finite-geometric-purity-coordinates",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+    "place": "Comparison coordinates and domains"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-geometric-purity-coordinates",
+  "lem-pur-finite-geometric-purity-factorization",
+  "lem-sp-compact-projection-base-change",
+  "lem-sp-tensor-counit-exchange-calculus",
+  "def-weil-exceptional-inverse-image",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "The two factors (1)--(2), in the fixed-scalar Frobenius coordinates of the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change of the normalized diagonal orientation on finite coefficient sheaves with a roots of unity twist",
+   "results": "IsBaseChange.finsuppPow and MorphismProperty.IsStableUnderBaseChange.diagonal; neither states purity of finite coefficient sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor counit transpose commutes with compact support base change, exceptional adjunction mate",
+   "results": "CategoryTheory.coev_expComparison and ExponentiableMorphism.pushforwardComp_hom_counit; general mate tools, no normalized finite geometric purity identity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurityTheta|diagonalDualizing|tensorCounit",
+   "results": "No hits. These constructions belong to this project.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteGeometricPurityMate",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Steps 1--2: finite purity square and compact-support counit mate; Geometric base change of the tensor counit transpose",
+   "via": [
+    "lem-pur-finite-geometric-purity-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteGeometricTensorExchange",
+  "file": "lean/Sheaf/Paper/FiniteGeometricTensorExchange.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.geometricPurityTensor_exchange",
+  "statement": "theorem geometricPurityTensor_exchange\n    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology (P.frobeniusFiber Y₀).left)\n      (ModuleCat.{u + 1} P.Coefficient)))\n    (hM : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos\n      (P.frobeniusFiber Y₀).left\n      ((Scheme.sfIntrinsicDerivedEquivalence (P.frobeniusFiber Y₀).left P.Ring).functor.obj M))\n    (M₀ M₁ : Etale.DerivedCategoryModule P.Coefficient (P.frobeniusFiber Y₀).left)\n    (e₀ : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient)\n      (P.frobeniusFiber Y₀).left).mapDerivedCategory.obj M₀ ≅\n        P.geometricPurityRealized (P.frobeniusFiber Y₀).left M)\n    (e₁ : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient)\n      (P.frobeniusFiber Y₀).left).mapDerivedCategory.obj M₁ ≅\n        P.geometricPurityRealized (P.frobeniusFiber Y₀).left\n          ((P.smoothPurityPullback (P.frobeniusGaloisMap Y₀)).obj M)) :\n    (P.smoothPurityPullback (P.frobeniusGaloisMap X₀)).map\n        (P.geometricPurityTensorFactor (P.frobeniusMap f₀)\n          (P.frobeniusFiber Y₀).hom M M₀ e₀) ≫\n      P.geometricPurityMate X₀ Y₀ f₀ M hM =\n    (P.geometricPurityTensorSquare (P.frobeniusMap f₀) (P.frobeniusFiber Y₀).hom\n        (P.frobeniusGaloisMap X₀) (P.frobeniusGaloisMap Y₀)\n        (P.field.frobenius_square_cartesian X₀ Y₀ f₀).2.2.2.2.1 M).hom ≫\n      ((smoothPurityTensor P.Coefficient (P.frobeniusFiber X₀).left).obj\n        ((P.smoothPurityPullback (P.frobeniusMap f₀)).obj\n          (P.geometricPurityRealized (P.frobeniusFiber Y₀).left\n            ((P.smoothPurityPullback (P.frobeniusGaloisMap Y₀)).obj M)))).map\n        (P.geometricPurityDualizingExchange (P.frobeniusMap f₀)\n          (P.frobeniusFiber Y₀).hom (P.frobeniusGaloisMap X₀)\n          (P.frobeniusGaloisMap Y₀)\n          (P.field.frobenius_square_cartesian X₀ Y₀ f₀).2.2.2.2.2.1) ≫\n      P.geometricPurityTensorFactor (P.frobeniusMap f₀) (P.frobeniusFiber Y₀).hom\n        ((P.smoothPurityPullback (P.frobeniusGaloisMap Y₀)).obj M) M₁ e₁",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (byte-identical); FiniteGeometricPurityCoordinates vs clone FiniteGeometricPurityMate (verbatim extraction + 4 rfl private lemmas + 3 helpers made public); 4 new node lean.statements vs Lean text; two sorry statements read for truth against the parent equation and the published base-change map definitions"
+ }
+}

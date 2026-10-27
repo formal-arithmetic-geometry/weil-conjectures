@@ -1,0 +1,229 @@
+{
+ "id": "lem-trf-local-homotopy-unit-determinant-lift",
+ "kind": "statement",
+ "title": "A determinant-trivial chain automorphism lifting a local homotopy",
+ "statement": "Let $R$ be a commutative local ring (a commutative ring with exactly one maximal ideal), and let $P=[P^{-1}\\xrightarrow{d_P}P^0]$, $Q=[Q^{-1}\\xrightarrow{d_Q}Q^0]$ be complexes of finite free $R$-modules, zero in other degrees [def-weil-pbc-free-module, def-weil-abstract-derived-category]. Let $a,b:P\\to Q$ be morphisms surjective in both degrees, and let $h:P^0\\to Q^{-1}$ be $R$-linear with $b^0-a^0=d_Qh$ and $b^{-1}-a^{-1}=hd_P$. There is a submodule $U\\subseteq P^{-1}$ such that both $a^{-1}|_U$ and $b^{-1}|_U$ are isomorphisms onto $Q^{-1}$. Let $s:Q^{-1}\\to P^{-1}$ be the inverse of $a^{-1}|_U$ followed by the inclusion, and put $t=sh$. Then $a^{-1}t=h$, $k^{-1}=1+td_P$ and $k^0=1+d_Pt$ define a chain automorphism $k:P\\xrightarrow{\\sim}P$ with $ak=b$. More precisely in $P^{-1}=\\ker a^{-1}\\oplus U$, $k^{-1}$ has block form $\\left(\\begin{smallmatrix}1&0\\\\ C&B\\end{smallmatrix}\\right)$ with $B=(a^{-1}|_U)^{-1}(b^{-1}|_U)$, so its inverse has blocks $\\left(\\begin{smallmatrix}1&0\\\\-B^{-1}C&B^{-1}\\end{smallmatrix}\\right)$; if $w=(k^{-1})^{-1}$, then $(k^0)^{-1}=1-d_Pwt$. In any finite bases $\\det(k^0)=\\det(k^{-1})$. Thus the induced automorphism $D(k)=\\det(k^0)\\otimes(\\det(k^{-1})^{-1})^\\vee$ of $D(P)=\\det_R(P^0)\\otimes_R\\det_R(P^{-1})^\\vee$ is the identity, where $\\det_R$ is the top exterior power [def-weil-pbc-exterior-algebra] and $\\vee=\\operatorname{Hom}_R(-,R)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJK (lemma-homotopic-surjections), first two and final paragraphs, and Tag 0FJF (lemma-det-switch); explicit inverse refinement of the block calculation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite bases of $P^{-1}$ and $Q^{-1}$, giving isomorphisms $P^{-1}\\simeq R^{\\oplus n}$ and $Q^{-1}\\simeq R^{\\oplus m}$ by [def-weil-pbc-free-module]. Apply [lem-trf-local-common-summand-surjections] to the coordinate versions of $a^{-1},b^{-1}$; the ring is local and both maps are surjective by hypothesis. Transport its submodule back to $P^{-1}$. It gives the required $U$, both restriction isomorphisms, and $P^{-1}=\\ker(a^{-1})\\oplus U$. Define $s$ as in the statement, so $a^{-1}s=1$ and $\\operatorname{im}(s)\\subseteq U$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-trf-local-common-summand-surjections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), first two and final proof paragraphs; explicit algebraic refinement."
+   }
+  },
+  {
+   "text": "Set $t=sh$, $K=1+td_P$ on $P^{-1}$ and $L=1+d_Pt$ on $P^0$. Then $a^{-1}t=h$. Direct expansion gives $d_PK=Ld_P$, so $(K,L)$ is a chain endomorphism. Also $a^{-1}K=a^{-1}+hd_P=b^{-1}$, while $a^0L=a^0+a^0d_Pt=a^0+d_Qa^{-1}t=a^0+d_Qh=b^0$, using the chain-map identity for $a$ and the two given homotopy equations. Thus $ak=b$ degreewise.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), first two and final proof paragraphs; explicit algebraic refinement."
+   }
+  },
+  {
+   "text": "Write $N=\\ker(a^{-1})$. Since $td_P$ has image in $U$, the $N$-component of $K$ on $N\\oplus U$ is the projection to $N$. On $U$, its $U$-component is $B=(a^{-1}|_U)^{-1}(b^{-1}|_U)$: both maps take values in $U$ and applying the injective $a^{-1}|_U$ gives $b^{-1}|_U$. On $N$ put $C=td_P|_N:N\\to U$. Hence $K=\\left(\\begin{smallmatrix}1&0\\\\ C&B\\end{smallmatrix}\\right)$, with $B$ invertible. Multiplying in both orders shows that $w=\\left(\\begin{smallmatrix}1&0\\\\-B^{-1}C&B^{-1}\\end{smallmatrix}\\right)$ satisfies $wK=Kw=1$. No basis or freeness assertion for $N$ is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), first two and final proof paragraphs; explicit algebraic refinement."
+   }
+  },
+  {
+   "text": "Put $V=1-d_Pwt$ on $P^0$. The identities $(1+td_P)w=w(1+td_P)=1$ give $wt+td_Pwt=t$ and $wt+wtd_Pt=t$, respectively, after right composition with $t$. Therefore $LV=1+d_P(t-wt-td_Pwt)=1$ and $VL=1+d_P(t-wt-wtd_Pt)=1$. Thus $L^{-1}=V$. Multiplying $d_PK=Ld_P$ on the left by $V$ and on the right by $w$ gives $Vd_P=d_Pw$, so the degreewise inverses form a chain map. This proves the chain-automorphism assertion with the stated inverse formula, without any quasi-isomorphism hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), first two and final proof paragraphs; explicit algebraic refinement."
+   }
+  },
+  {
+   "text": "In any chosen finite bases let $D$ represent $d_P$ and $T$ represent $t$. The matrices of $L$ and $K$ are $I+DT$ and $I+TD$, respectively. Apply [lem-trf-rectangular-determinant-switch] with $A=D$, $B=T$. Their rectangular sizes are the two finite ranks of $P$, so its hypotheses hold and it yields $\\det(L)=\\det(K)$ in these bases. In particular this includes either rank being zero.",
+   "uses": [
+    "lem-trf-rectangular-determinant-switch"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJF (lemma-det-switch), rectangular-matrix identity; Tag 0FJK first proof paragraph."
+   }
+  },
+  {
+   "text": "For a basis $e_1,\\ldots,e_r$ of a finite free module, [lem-weil-pbc-exterior-power-free-basis] with $n=r$ shows that the top exterior power is free with basis the single element $e_1\\wedge\\cdots\\wedge e_r$ (for $r=0$ the generator is $1$). For an endomorphism with matrix $M$, multilinearity and alternation in [def-weil-pbc-exterior-algebra] expand $Me_1\\wedge\\cdots\\wedge Me_r$ in basis coordinates; terms with a repeated index vanish and reordering gives the sign, so the image is $\\sum_{\\sigma}\\operatorname{sgn}(\\sigma)\\prod_i M_{\\sigma(i),i}\\,e_1\\wedge\\cdots\\wedge e_r=\\det(M)\\,e_1\\wedge\\cdots\\wedge e_r$. Thus the top exterior actions of $L$ and $K$ are multiplication by the same scalar $\\delta$ of Step 5. The top exterior action is multiplicative on pure wedges, so the action of $w=K^{-1}$ is the inverse, $\\delta$ is a unit and this action is multiplication by $\\delta^{-1}$. Precomposition by that scalar on the dual line is again multiplication by $\\delta^{-1}$. Consequently $D(k)$ multiplies the tensor of the top-wedge generator for $P^0$ and the dual generator for $P^{-1}$ by $\\delta\\delta^{-1}=1$. This tensor generates $D(P)$, hence $D(k)=1$.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK (lemma-homotopic-surjections), determinant cancellation; elementary exterior-power expansion from the determinant definition in Tag 0FJF."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-trf-local-common-summand-surjections",
+  "lem-trf-rectangular-determinant-switch",
+  "def-weil-pbc-exterior-algebra",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0FJK (lemma-homotopic-surjections) and 0FJF (lemma-det-switch); explicit two-sided inverse and exterior-generator calculations refine the source proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a commutative local ring two homotopic surjective maps of finite free two term complexes differ by an automorphism one plus d h with determinant ratio one",
+   "results": "8 hits; top=['Algebra.SubmersivePresentation.aevalDifferentialEquiv', 'AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant', 'ComplexShape.QFactorsThroughHomotopy_of_exists_prev', 'AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId', 'AlgebraicTopology.DoldKan.homotopyQToZero', 'CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne_comp', 'AlgebraicTopology.DoldKan.homotopyPToId', 'instQFactorsThroughHomotopyDown']; note=; digest=fe4cd372a4b422c8. Homotopy and projective-resolution hits do not construct a chain automorphism factoring the two surjections. Matrix.det_one_add_mul_comm (Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401) supplies only the rectangular determinant equality, already node lem-trf-rectangular-determinant-switch; it does not give the homotopy lift.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopic surjections factor through a chain automorphism with components identity plus t d and identity plus d t and equal determinants",
+   "results": "8 hits; top=['AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant', 'AlgebraicTopology.DoldKan.homotopyPToId', 'AlgebraicTopology.DoldKan.homotopyPInftyToId_hom', 'AlgebraicTopology.DoldKan.homotopyPInftyToId', 'Homotopy.mkInductiveAux₂', 'AlgebraicTopology.DoldKan.homotopyQToZero', 'Homotopy.mkInductiveAux₃', 'Homotopy.mkInductive']; note=; digest=cbeb2ba64254518e. Homotopy and projective-resolution hits do not construct a chain automorphism factoring the two surjections. Matrix.det_one_add_mul_comm (Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401) supplies only the rectangular determinant equality, already node lem-trf-rectangular-determinant-switch; it does not give the homotopy lift.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy between surjections of finite free two term complexes can be lifted to an invertible chain endomorphism with identity action on the determinant line over a local ring",
+   "results": "8 hits; top=['CategoryTheory.ProjectiveResolution.liftHomotopy', 'CochainComplex.mappingCone.liftHomotopy', 'CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc.congr_simp', 'HomotopyEquiv.homotopyInvHomId', 'CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc', 'homotopic', 'CategoryTheory.InjectiveResolution.descHomotopy', 'CategoryTheory.ShortComplex.Homotopy']; note=; digest=091c07843a6c5b19. Homotopy and projective-resolution hits do not construct a chain automorphism factoring the two surjections. Matrix.det_one_add_mul_comm (Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401) supplies only the rectangular determinant equality, already node lem-trf-rectangular-determinant-switch; it does not give the homotopy lift.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.det, \"add\"",
+   "results": "9 hits; top=['MeasureTheory.Measure.addHaar_image_linearMap', 'MeasureTheory.Measure.addHaar_image_continuousLinearMap', 'MeasureTheory.Measure.addHaar_preimage_linearEquiv', 'MeasureTheory.Measure.addHaar_image_continuousLinearEquiv', 'MeasureTheory.Measure.addHaar_preimage_continuousLinearEquiv', 'MeasureTheory.Measure.map_linearMap_addHaar_eq_smul_addHaar', 'MeasureTheory.Measure.addHaar_preimage_linearMap', 'MeasureTheory.Measure.addHaar_preimage_continuousLinearMap']; note=; digest=c2c21e945201ac15. Homotopy and projective-resolution hits do not construct a chain automorphism factoring the two surjections. Matrix.det_one_add_mul_comm (Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401) supplies only the rectangular determinant equality, already node lem-trf-rectangular-determinant-switch; it does not give the homotopy lift.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "one_add.*comp|det_one_add|homotop.*surject",
+   "results": "25 hits; top=['Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean', 'Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean', 'Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean', 'Mathlib/Topology/Connected/PathConnected.lean', 'Mathlib/Topology/Connected/LocallyPathConnected.lean', 'Mathlib/NumberTheory/BernoulliPolynomials.lean', 'Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean', 'Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean']; note=; digest=6fd9ee576007791a. Homotopy and projective-resolution hits do not construct a chain automorphism factoring the two surjections. Matrix.det_one_add_mul_comm (Mathlib/LinearAlgebra/Matrix/SchurComplement.lean:401) supplies only the rectangular determinant equality, already node lem-trf-rectangular-determinant-switch; it does not give the homotopy lift.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotop.*surject|common.?complement|det_one_add_mul_comm",
+   "results": "25 hits; top=['Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean', 'Mathlib/Algebra/Homology/HomotopyCategory/Triangulated.lean']; note=; digest=dea2602798f8ccae. Homotopy-category, Dold-Kan and homotopy-constructor hits do not construct the required automorphism. Matrix.det_one_add_mul_comm supplies only the rectangular identity, already represented by lem-trf-rectangular-determinant-switch.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homotopic surjections of two term finite free complexes over a commutative local ring differ by an automorphism whose determinant is one",
+   "results": "8 hits; top=['HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy', 'CategoryTheory.ShortComplex.Homotopy', 'HomotopyCategory.homotopyOfEq', 'CategoryTheory.ShortComplex.Homotopy.homologyMap_congr', 'CategoryTheory.ShortComplex.Homotopy.mk.injEq', 'CategoryTheory.ShortComplex.HomotopyEquiv', 'CategoryTheory.ShortComplex.QuasiIso.isIso', 'Homotopy.ofEq']; note=; digest=b91cc3d439dc9b3c. Homotopy-category, Dold-Kan and homotopy-constructor hits do not construct the required automorphism. Matrix.det_one_add_mul_comm supplies only the rectangular identity, already represented by lem-trf-rectangular-determinant-switch.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, LinearEquiv",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Homotopy-category, Dold-Kan and homotopy-constructor hits do not construct the required automorphism. Matrix.det_one_add_mul_comm supplies only the rectangular identity, already represented by lem-trf-rectangular-determinant-switch.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopic degreewise surjections between finite free two term complexes over a local ring factor through a chain automorphism with trivial determinant line action",
+   "results": "8 hits; top=['instQFactorsThroughHomotopyDown', 'ComplexShape.QFactorsThroughHomotopy', 'instQFactorsThroughHomotopyIntUp', 'ComplexShape.QFactorsThroughHomotopy_of_exists_prev', 'Homotopy.map_eq_of_inverts_homotopyEquivalences', 'HomologicalComplex.cylinder.map_ι₀_eq_map_ι₁', 'AlgebraicTopology.DoldKan.homotopyQToZero', 'HomologicalComplex.homotopyCofiber.descEquiv']; note=; digest=fdf3501b77af1764. Homotopy-category, Dold-Kan and homotopy-constructor hits do not construct the required automorphism. Matrix.det_one_add_mul_comm supplies only the rectangular identity, already represented by lem-trf-rectangular-determinant-switch.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a chain homotopy to an automorphism with components identity plus t d and identity plus d t using a common complement of kernels of two surjective linear maps",
+   "results": "8 hits; top=['Homotopy.mkInductiveAux₂', 'AlgebraicTopology.DoldKan.homotopyPInftyToId', 'AlgebraicTopology.DoldKan.homotopyPToId', 'Homotopy.mkInductive', 'Homotopy.mkInductiveAux₃', 'Homotopy.mkInductiveAux₁', 'Homotopy.mkCoinductive', 'AlgebraicTopology.DoldKan.homotopyQToZero']; note=; digest=97bf63f80819b944. Homotopy-category, Dold-Kan and homotopy-constructor hits do not construct the required automorphism. Matrix.det_one_add_mul_comm supplies only the rectangular identity, already represented by lem-trf-rectangular-determinant-switch.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-surjective-two-term-determinant-calculus",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Repair subargument: A determinant-trivial chain automorphism lifting a local homotopy.",
+   "via": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-local-homotopy-unit-determinant-lift",
+  "worker": "stage1",
+  "summary": "Split the local homotopy lifting construction using the existing common-summand and rectangular determinant nodes. Checked every clause and supplied block inverses, both products for the degree-zero inverse, chain inverse compatibility, and determinant-line cancellation. No new nodes, statement changes, or Lean writes.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry through the auxiliary two-term determinant calculus of Stacks 0FJK. Latest blueprint proof (1)--(2) uses contracting-correspondence specialization; the inherited descendant provides local determinant algebra within that historical route, without changing the unit or chapter.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-157f1126f",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-157f1126f (reviewer sub-agent of L); spot-checked: Read the full item, all 6 steps and Stacks more-algebra 0FJK (lemma-homotopic-surjections) and 0FJF. Read the cited statements: def-weil-pbc-free-module, lem-trf-local-common-summand-surjections, lem-trf-rectangular-determinant-switch (Mathlib leaf), def-weil-pbc-exterior-algebra. There are no new nodes, the statement is unchanged and there is no re-split note. The source's surjectivity argument for k^0 needs a quasi-isomorphism; the item replaces it with an explicit inverse V=1-d w t. I checked K w = w K = 1 on the N⊕U block form, LV = VL = 1, V d = d w, a k = b and a^{-1}t = h. Step 5 applies the rectangular det-switch to the sizes rk P^0 and rk P^{-1}. The D(k) convention matches lem-trf-two-term-normalization-locality-equivariance. Edge cases checked: zero ranks, h=0, d=0 and residue field F_2. Grepping 0FJK across the DAG found no duplicate. One fault (C1/C5): step 6 sketched inline that e_1∧…∧e_r is a basis of the top exterior power and marked the step elementary. That is the statement of the existing Mathlib leaf lem-weil-pbc-exterior-power-free-basis. FIX: step 6 now cites it with n=r and is marked non-elementary, and the node is added to proof_deps; the rest of the step is unchanged. The corrected node is in fixes/dag/nodes/sec-trace-formula/. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LocalHomotopyUnitDeterminantLift",
+  "declaration": "LinearMap.exists_local_homotopy_unit_determinant_lift",
+  "file": "lean/Sheaf/TraceFormula/LocalHomotopyUnitDeterminantLift.lean",
+  "statement": "theorem exists_local_homotopy_unit_determinant_lift {R : Type u} [CommRing R] [IsLocalRing R] {P₁ : Type v₁} [AddCommGroup P₁] [Module R P₁] {P₀ : Type v₂} [AddCommGroup P₀] [Module R P₀] {Q₁ : Type v₃} [AddCommGroup Q₁] [Module R Q₁] {Q₀ : Type v₄} [AddCommGroup Q₀] [Module R Q₀] [Module.Free R P₁] [Module.Finite R P₁] [Module.Free R P₀] [Module.Finite R P₀] [Module.Free R Q₁] [Module.Finite R Q₁] [Module.Free R Q₀] [Module.Finite R Q₀] (dP : P₁ →ₗ[R] P₀) (dQ : Q₁ →ₗ[R] Q₀) (a₁ b₁ : P₁ →ₗ[R] Q₁) (a₀ b₀ : P₀ →ₗ[R] Q₀) (ha : a₀.comp dP = dQ.comp a₁) (hb : b₀.comp dP = dQ.comp b₁) (ha₁ : Function.Surjective a₁) (hb₁ : Function.Surjective b₁) (ha₀ : Function.Surjective a₀) (hb₀ : Function.Surjective b₀) (h : P₀ →ₗ[R] Q₁) (hh₀ : b₀ - a₀ = dQ.comp h) (hh₁ : b₁ - a₁ = h.comp dP) : ∃ (U : Submodule R P₁) (eA eB : U ≃ₗ[R] Q₁), eA.toLinearMap = a₁.domRestrict U ∧ eB.toLinearMap = b₁.domRestrict U ∧ IsCompl (LinearMap.ker a₁) U ∧ ∃ (s : Q₁ →ₗ[R] P₁) (t : P₀ →ₗ[R] P₁) (K : P₁ ≃ₗ[R] P₁) (L : P₀ ≃ₗ[R] P₀) (C : LinearMap.ker a₁ →ₗ[R] U), s = U.subtype.comp eA.symm.toLinearMap ∧ t = s.comp h ∧ a₁.comp t = h ∧ K.toLinearMap = LinearMap.id + t.comp dP ∧ L.toLinearMap = LinearMap.id + dP.comp t ∧ dP.comp K.toLinearMap = L.toLinearMap.comp dP ∧ a₁.comp K.toLinearMap = b₁ ∧ a₀.comp L.toLinearMap = b₀ ∧ U.subtype.comp C = (t.comp dP).comp (LinearMap.ker a₁).subtype ∧ (∀ (n : LinearMap.ker a₁) (x : U), K ((n : P₁) + (x : P₁)) = (n : P₁) + ((C n + eA.symm (eB x) : U) : P₁)) ∧ (∀ (n : LinearMap.ker a₁) (x : U), K.symm ((n : P₁) + (x : P₁)) = (n : P₁) + ((eB.symm (eA (x - C n)) : U) : P₁)) ∧ L.symm.toLinearMap = LinearMap.id - dP.comp (K.symm.toLinearMap.comp t) ∧ dP.comp K.symm.toLinearMap = L.symm.toLinearMap.comp dP ∧ (∀ (r₁ r₀ : ℕ) (c₁ : Module.Basis (Fin r₁) R P₁) (c₀ : Module.Basis (Fin r₀) R P₀), Matrix.det (LinearMap.toMatrix c₀ c₀ L.toLinearMap) = Matrix.det (LinearMap.toMatrix c₁ c₁ K.toLinearMap)) ∧ TensorProduct.map (exteriorPower.map (Module.finrank R P₀) L.toLinearMap) (exteriorPower.map (Module.finrank R P₁) K.symm.toLinearMap).dualMap = LinearMap.id",
+  "branch": "sheaf-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-760ef87c8",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Node unchanged except new lean record; lean.statement verbatim equals the file signature; proof sorry only, no defs; docstrings carry source 0FJK/0FJF, blueprint id and 6 steps; report has Worker report + Second reading by Q54. Every hypothesis matches the node: IsLocalRing, 4 finite free modules in independent universes, both chain-map equations, all 4 surjectivity hypotheses, homotopy signs b-a. Every conclusion is pinned: U with eA/eB = domRestrict, IsCompl ker U, s = incl∘eA⁻¹, t = s h, a₁t = h, K = 1+t dP, L = 1+dP t, dP K = L dP, ak = b. Hand-checked the block form K(n+x) = n+(Cn+eA⁻¹eB x), the inverse block formula eB⁻¹eA(x−Cn), L⁻¹ = 1−dP K⁻¹ t, det equality for all Fin bases, and the determinant-line clause map(⋀top L, (⋀top K⁻¹)^∨) = id. Edge cases covered: ranks 0, Q⁻¹ = 0, h = 0, dP = 0, F₂. No duplicate found in side-live or Mathlib. No findings."
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "id": "def-sp-proetale-ordinary-tensor-pullback-total",
+ "kind": "definition",
+ "title": "Ordinary small pro-etale tensor, pure sections and canonical total pullback comparison",
+ "status": "split",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism. Use the small pro-etale module categories and the identified-coefficient module pullback $F=f_R^*$ of [def-weil-pbc-proetale-operations], for commutative ring sheaves $R$ on $Y$ and $S$ on $X$ and a fixed $c:f^{-1}R\\simeq S$. The ordinary tensor bifunctor is the existing sheafified tensor [def-pur-sheaf-tensor-product]. Its pure-section pairing sends $(m,n)$ over an object $U$ to the sheafification image of $m\\otimes_{R(U)}n$. Define the canonical natural isomorphism $\\mu_{M,N}:F(M\\otimes_R N)\\simeq FM\\otimes_S FN$ by the unique unit-section normalization sending the inverse-image unit of $m\\otimes n$ to the tensor of the two inverse-image unit sections, for every site object and all its sections. For arbitrary unbounded cochain complexes $P,Q$, use the signed direct-sum total tensor of [def-pc-tensor-complex-sheaves]. Define $\\kappa_{P,Q}:\\operatorname{Tot}(FP\\otimes_S FQ)\\simeq F\\operatorname{Tot}(P\\otimes_R Q)$ by summing $\\mu_{P^p,Q^q}^{-1}$ in every bidegree and the canonical preservation-of-coproducts comparison. This fixes its direction and every summand map, with the usual total differential signs; it is not a choice of an arbitrary chain isomorphism. No boundedness, flatness or K-flatness is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback; signed total construction of Homology Tag 012Z"
+ },
+ "proof": [
+  {
+   "text": "Instantiate the existing independently sized normalized ringed tensor comparison with the unit-normalized pro-etale algebraic inverse image and the displayed coefficient extension. This supplies its scalar insertion q and its natural isomorphisms mu, with the full generalized pure-tensor formula.",
+   "uses": [
+    "lem-pur-canonical-ringed-tensor-comparison-independent-universes",
+    "lem-pur-proetale-inverse-image-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generalized pure formula to the product of the two underlying module sheaves, its two projections, and the sheafified pure tensor map. Evaluate at the set-inverse-image unit of (m,n). Naturality of the unit and the normalized algebraic lift identify the resulting inverse-image sections. The scalar insertion formula and the normalized module adjunction identify q of those sections with the prescribed module unit. This gives the required section formula.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-pod-canonical-module-adjunction-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, transpose the two candidate hom maps through the specified module adjunction. Their transposes agree on all pure sections by the required formula; the sheafification adjunction and sectionwise tensor induction imply equality. Iso.ext and function extensionality finish. The existing signed total construction and its invertibility theorem then produce the stipulated total isomorphism.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-proetale-operations",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-canonical-ringed-tensor-comparison-independent-universes",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-pod-canonical-module-adjunction-unit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback: normalized tensor universal property and module adjunction; Lean specialization by N3, 2026-10-25."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proEtaleOrdinaryTensor|proEtaleTensorPair|proEtaleTensorPullbackTotalIso|proEtaleConstantRingMap",
+   "results": "{\"t\": \"2026-10-22T11:13:01Z\", \"tool\": \"grep\", \"query\": \"proEtaleOrdinaryTensor|proEtaleTensorPair|proEtaleTensorPullbackTotalIso|proEtaleConstantRingMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration; reuse the published Sheaf definition without copying."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor product pullback of sheaves of modules and its signed total comparison on unbounded complexes",
+   "results": "{\"t\": \"2026-10-22T11:13:01Z\", \"tool\": \"leansearch\", \"query\": \"Canonical tensor product pullback of sheaves of modules and its signed total comparison on unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\"], \"digest\": \"be6457c4801e1c74\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration; reuse the published Sheaf definition without copying."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaf ring homomorphism induced by a ring homomorphism and tensor pullback total complex natural comparison",
+   "results": "{\"t\": \"2026-10-22T11:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"Constant sheaf ring homomorphism induced by a ring homomorphism and tensor pullback total complex natural comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"5ee78b6644ff9b7a\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib declaration; reuse the published Sheaf definition without copying."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n proEtaleOrdinaryTensor|proEtaleTensorPullbackTotalIso|proEtaleConstantRingMap lean/WeilConjectures lean/Sheaf; rg -l the same names dag/nodes; blueprint_refs.py search tensor pullback / constant ring map",
+   "results": "No WeilConjectures match. Sheaf.Paper.ProEtaleCanonicalTensorPullback owns tensor, pairing and canonical total comparison; Sheaf.Paper.StratumScalarExtension owns the constant-ring map. No definition node owns these declarations. Blueprint searches both return 0 nodes.",
+   "date": "2026-10-22",
+   "verdict": "Existing Sheaf definitions; add ownership nodes only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-proetale-scalar-balancing-chain",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Step 1 tensor-pullback identification, ordinary scalar balancing and its chain normalization",
+   "via": [
+    "lem-sp-proetale-scalar-balancing-chain",
+    "lem-sp-proetale-scalar-tensor-normalization",
+    "lem-sp-direct-image-change-ring-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleTensorPullbackModels",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotalIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensor",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPair",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotal",
+   "AlgebraicGeometry.Scheme.proEtaleTensorPullbackTotalIso"
+  ],
+  "statement": "def proEtaleTensorPullbackTotalIso\n    (P Q : CochainComplex (proEtaleRingModules Y R) ℤ)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "R1 definition ownership: reuse the existing published construction unchanged, with its canonical normalization. No theorem is assumed in place of this definition. E4, 2026-10-27: declarations moved verbatim to the supporting model module, publicly re-exported from ProEtaleCanonicalTensorPullback; types and definitional data unchanged.",
+  "file": "lean/Sheaf/Paper/ProEtaleTensorPullbackModels.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22ae55e73",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22ae55e73",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 49085731679a; diffed old/new module: only import, Step-8 docstring and final conjunct changed; node statement unchanged vs live. R2 repaired: total clause now F(single2Iso_Y).hom >> T.hom.app P = (proEtaleTensorPullbackTotalIso f A_Y A_X c_A P B_Y[0]).inv >> mapBifunctorMap 1 (singleMapHomologicalComplex >> single(scalarMateCoefficientPullback)) >> single2Iso_X.hom. Checked tensorPullbackTotal = unsigned mu^-1 summands (RingedTopoiCanonicalTensorPullback:147), direction Tot(FP x FQ)->F Tot, and that scalarMateCoefficientPullback = beta at the unit then the unique normalized unit pullback = c_B. In degree i this says t = (1 x c_B) o mu, i.e. node Step 3; non-tautological. R1 repaired: scalar-mate / tensor-pullback-total / constant-ring-map now cited via definition owners (def-sp-proetale-scalar-mate-identifications plus 2 new existing:true nodes whose statements match the source verbatim and that no other node owns) plus def-weil-pbc-ring-restriction-pullback-comparison. Mechanical finding: lem-weil-pbc-ring-sheaf-change-adjunction kept for its genuine asIso typing use of proEtaleRingRestrictionPullbackInv_isIso -> PASS on that point. Hypotheses, universes, edge cases (f=id, X empty, B=0, Z/4->Z/2, unbounded P), H5/H6/H8 and statement verbatim OK. No compile (no file changed); worker compile clean. Advisory: pre-existing sorried proEtaleOrdinaryTensorPullback_existsUnique (ProEtaleCanonicalTensorPullback:128) has no DAG node carrying its proof obligation."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-67945",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T235852-L-1462983",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clone (byte-identical); Models module vs clone item prefix (verbatim modulo renamed private helpers); delivered set + all 37 direct importers compiled against it; slow importers timed against published originals; axioms of the 4 main theorems; node lean records/proof_deps vs Lean"
+ }
+}

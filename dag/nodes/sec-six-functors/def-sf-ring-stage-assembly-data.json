@@ -1,0 +1,122 @@
+{
+ "id": "def-sf-ring-stage-assembly-data",
+ "kind": "definition",
+ "title": "Ring-only exceptional coefficient assembly and extension by field operations",
+ "statement": "Fix a prime l, a closure Ω of Q_l, a finite-field datum D with l ≠ D.p, finite-type D.k-schemes X and Y, and a separated finite-type D.k-morphism f:X→Y, without absolute separatedness of X or Y. Define RingStageAssembly to contain only the finite and integral portion of CoefficientConstructionRing [def-sf-constructible-exceptional-coefficient-construction-data]: operations for every compactification c and RingStage s, left ambient realizations, the fixed finite-right realization, integralLeft and its prescribed tower normalization, scalar restrictions at both endpoints independent of c, finite and integral scalar equality and realization normalizations, counit-normalized invertible scalar mates and their proper/open q normalization, and scalar identity/composition maps. Also retain leftShift for every ring realization using the inherited inclusion shifts [def-sf-constructible-exceptional-assembly-data]. No rational or closed operations occur. Given rational and closed operations and the rational-left realization, extendOperation is the four-case operation family and complete constructs CoefficientConstructionRing by reusing every ring-only field verbatim. These are explicit case distinctions, not existence choices.",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-sf-constructible-exceptional-assembly-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Proposition 5.24 and Construction 5.25; coefficient construction steps 1--5, separating the ring-only data from its field extension"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Proposition 5.24 and Construction 5.25; coefficient construction steps 1--5, separating the ring-only data from its field extension; explicit assembly of the existing normalized coefficient statements."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CoefficientConstructionRing|exists_coefficient_stages|exists_field_descent",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct normalized exceptional coefficient adjunctions from finite coefficient operations integral reconstruction and rational field descent",
+   "results": "Mathlib.Tactic.Ring.ExtractCoeff.e', Mathlib.Tactic.Ring.ExtractCoeff, IsLocalization.coeffIntegerNormalization, Algebra.SubmersivePresentation.coeffs, Polynomial.integralNormalization_coeff, IsLocalization.integerNormalization_coeff, IsLocalization.integerNormalization_spec, Mathlib.Tactic.Module.qNF.toNF",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "grep",
+   "query": "RingStageAssembly|exceptional.*[Rr]ing.*[Ss]tage|[Ff]ield.*[Ss]tage.*[Aa]ssembly",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite integral coefficient exceptional adjunction scalar mates normalized compact support",
+   "results": "MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport, HasCompactSupport.smul_left, ContDiffMapSupportedIn.coe_smul, MeasureTheory.HasFiniteIntegral.smul, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, MeasureTheory.hasFiniteIntegral_smul_iff, ContDiffMapSupportedIn.instSMul",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localize an integral adjunction and descend its compatible functors to common finite subfields of an algebraic closure",
+   "results": "IsAlgClosed.lift_def, galLift, IsAlgClosed.lift, galRestrict'_galLift, IsIntegralClosure.isLocalization, galLiftEquiv_apply, Algebra.Extension.localization, IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset",
+   "date": "2026-10-27",
+   "verdict": "No equivalent coefficient-stage assembly statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCoefficientStages",
+  "date": "2026-10-27",
+  "group": "Y5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Coefficient adjunction stages: finite/integral partial datum and four-case extension",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRingStageAssemblyData",
+  "file": "lean/Sheaf/Paper/ExceptionalRingStageAssemblyData.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.RingStageAssembly",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.RingStageAssembly",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.RingStageAssembly.extendOperation",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.RingStageAssembly.complete"
+  ],
+  "statement": "structure RingStageAssembly (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)\n    {X Y : Scheme.{max u v}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]",
+  "branch": "sheaf-dag",
+  "by": "Y5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261027T013011-L-2357535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261027T013011-L-2357535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

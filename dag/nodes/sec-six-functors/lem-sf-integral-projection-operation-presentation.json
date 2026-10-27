@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-integral-projection-operation-presentation",
+ "kind": "statement",
+ "title": "Integral operation projection in completed ordinary coordinates",
+ "statement": "Fix a finite-field datum $D$, coefficient datum $C$ with prime $\\ell\\ne p$, and finite extension $E/\\mathbf Q_\\ell$. Let $H$ be the higher operation datum [def-sf-operation-stages]. Let $X,Y$ be finite-type schemes over the specified algebraic closure, $f:X\\to Y$ separated of finite type, and $c=(X\\hookrightarrow Z\\to Y)$ a compactification. Choose any representative-normalized ordinary derived tensor models $a_X,a_Z,a_Y$ over the completed coefficient sheaves [def-pur-compact-support-completed-projection-data]. For arbitrary integral bounded constructible $K$ on $X$ and $L$ on $Y$, the ambient arrow underlying the operation projection of [def-sf-constructible-projection-mates] for $H.integralExchange$ is isomorphic to the arrow $\\operatorname{integralMap}(f,c,a_X,a_Z,a_Y,K,L)$ of [def-pur-compact-support-completed-projection-data]. This compares two presentations at the same integral coefficient ring; there is no reduction-level parameter.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "def-exchange-projection",
+  "def-pur-compact-support-completed-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply integralProperOperationProjection_isIso to the proper factor of the compactified identity square. Expand the supplied projection into the proper counit component, proper image of the supplied open isomorphism, and the compact-support endpoint isomorphisms. Every factor is invertible, so the operation projection is invertible. The cast maps in projectionComponent are isomorphisms as well.",
+   "uses": [
+    "lem-sf-integral-proper-operation-projection-isomorphism",
+    "def-sf-operation-stages",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+   }
+  },
+  {
+   "text": "Compare the source objects. The support construction value equality and the qcqs support realization identify the operation support object with the ordinary proper/open image. Choose flat-term K-flat representatives of that image and L. The two signed-total representative comparisons identify the supplied ordinary tensor model with the ordinary tensor in constructibleTensorCompletion; its invertible tau then identifies it with integralCompletedTensor. Normalize H.integralTensor and apply the source completion-unit isomorphism from integralDomains.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "lem-pc-kflat-resolution",
+    "def-sf-operation-stages",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-pur-compact-support-completed-projection-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+   }
+  },
+  {
+   "text": "The independent concrete integral_isIso proof in SfProEtaleProjectionFormula makes integralMap invertible. If e identifies the sources of invertible p and q, set the target comparison to p inverse followed by e followed by q. The square commutes by cancellation. Arrow.isoMk gives the required arrow isomorphism. This uses only the existential arrow-isomorphism statement, without prescribing its endpoint components.",
+   "uses": [
+    "sk-thm-sf-pf-proetale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-proper-operation-projection-isomorphism",
+  "def-sf-operation-stages",
+  "def-exchange-projection",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pc-kflat-resolution",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-pur-compact-support-completed-projection-data",
+  "sk-thm-sf-pf-proetale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Adic reconstruction and specified-map compatibility; presentation comparisons in the integral-stage reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Changing tensor model and constant scalar realization conjugates the derived proper open compact support projection morphism",
+   "results": "Eight unrelated LightCondensed tensor/projectivity and monoidal sheafification results. No compact-support projection presentation comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.isoMk",
+   "results": "CategoryTheory.Arrow.isoMk and its four component equations. It constructs the final arrow isomorphism from endpoint isomorphisms and a commuting square.",
+   "date": "2026-10-26",
+   "verdict": "Useful for combining comparisons; does not supply the geometric presentation square."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Pp]resentation|[Pp]resentation.*projection",
+   "results": "Seven unrelated hits in Data/QPF/Multivariate/Constructions/Prj, Data/Matrix/PEquiv, RepresentationTheory/Rep/Basic, RepresentationTheory/Intertwining and CategoryTheory/Limits/Presentation.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStageProjectionReduction",
+  "date": "2026-10-26",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral operation projection in completed ordinary coordinates",
+   "via": [
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralProjectionOperationPresentation",
+  "file": "lean/Sheaf/Paper/IntegralProjectionOperationPresentation.lean",
+  "declaration": "WeilConjectures.integralProjection_operationPresentation",
+  "statement": "theorem integralProjection_operationPresentation\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E]\n    (H : SixFunctorHigherOperations D C E)\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]\n    (c : Compactification f.hom.left)\n    (aX : SfProEtaleProjection.TensorModel C.l E X.obj.left)\n    (aZ : SfProEtaleProjection.TensorModel C.l E c.Z)\n    (aY : SfProEtaleProjection.TensorModel C.l E Y.obj.left)\n    (K : sfIntegralConstructibleCategory C.l E X.obj.left)\n    (L : sfIntegralConstructibleCategory C.l E Y.obj.left) :\n    Nonempty (Arrow.mk (compactSupportProjectionComponent H.integralExchange f c K L).hom ≅\n      Arrow.mk (SfProEtaleProjection.integralMap C.l E D C.different f.hom.left c\n        aX aZ aY K L).hom)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T070736-L-3650845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T222603-L-670879",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

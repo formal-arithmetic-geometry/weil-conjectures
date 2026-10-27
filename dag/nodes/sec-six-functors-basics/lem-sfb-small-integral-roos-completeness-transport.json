@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-small-integral-roos-completeness-transport",
+ "kind": "statement",
+ "title": "Small integral Roos augmentation from local completed-ring completeness",
+ "statement": "Let ell be prime, let E/Q_ell be finite in an arbitrary universe, let F/Q_ell be a finite extension in the universe of a Noetherian scheme X, and let e be an isomorphism of condensed ring objects from the continuous integers of the canonical small presentation of E to the continuous integers of F. For every unbounded complex K of internal modules over the pulled-back small coefficient ring, transport K by restriction along e inverse and then by IntegralConstantModel.modulesFunctor for F. If this transported complex is locally derived complete for the kernel of the first positive quotient, then the specified SmallAdicCompletion augmentation on a K-flat representative of K is invertible after localization. No constructibility, boundedness, or finite Tor-amplitude hypothesis is imposed.",
+ "stmt_deps": [
+  "def-sfb-small-coefficient-derived-completion",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/algebraization.tex; literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Tags 099L and 099M (section-derived-completion-noetherian and lemma-naive-completion); Tag 0A0E (lemma-derived-completion-koszul); integral-heart-local-model clause (2), Completeness, comparison with the explicit quotient Roos augmentation"
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized completed-section predicate and internal completion comparison for F. The scalar restriction along pointComparison inverse cancels its forward restriction. Transport through the resulting derived isomorphisms gives ordinary AdicCompletion derived completeness of G(K).",
+   "uses": [
+    "lem-sfb-integral-models-completion-transport",
+    "lem-sfb-internal-completion-stacks-comparison",
+    "def-sfb-integral-constant-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a flat-term K-flat representative P of K. The exact monoidal scalar equivalence G preserves K-flatness. The representative-independent ordinary completion criterion makes the ordinary augmentation for G(P) invertible after Q.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the strict augmented Roos comparison to identify the image of the small augmentation with the ordinary augmentation followed by an isomorphism. Exact equivalences reflect quasi-isomorphisms, so the small augmentation is inverted by Q. Supply P, its localization isomorphism and this invertibility in the definition of small derived completeness.",
+   "uses": [
+    "lem-sfb-small-integral-roos-comparison",
+    "def-sfb-small-coefficient-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N2",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/algebraization.tex; literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Existing ordinary-completion comparison plus monoidal transport of the strict quotient Roos augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completeness is preserved by an equivalence of coefficient rings and computed by the inverse limit of derived quotients",
+   "results": "AdicCompletion and its ring-map universal properties; Ring.DirectLimit.congr. No sheaf-derived-completion transport.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules over complete discrete valuation rings are derived complete",
+   "results": "CondensedMod, CondensedMod.IsSolid, AdicCompletion.module and condensed-module realization declarations. No normalized internal/Roos completeness transport.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "Ordinary module adic completion, ring equivalence and algebra-map completeness lemmas; no derived sheaf result.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|IsLocallyDerivedRingedIdealComplete|roos in Mathlib/CategoryTheory/Sites and Mathlib/Algebra/Homology/DerivedCategory; SmallAdicCompletion.IsDerivedComplete in lean/Sheaf and lean/WeilConjectures",
+   "results": "No Mathlib match. The small completion predicate is only consumed by the item and its parent. The ordinary-universe IntegralCompletionPresentation and ringed constant-completion APIs do not state this independent-universe comparison. Blueprint search small integral Roos has no match.",
+   "date": "2026-10-26",
+   "verdict": "new comparison needed"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHeartConstructibleModuleComplete",
+  "date": "2026-10-26",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-integral-heart-local-model",
+   "place": "Clause (2), Completeness: identify the canonical derived reduction-limit map with the explicit small-coefficient Roos augmentation",
+   "via": [
+    "lem-sfb-integral-heart-constructible-module-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmallIntegralRoosCompletenessTransport",
+  "file": "lean/Sheaf/Paper/SmallIntegralRoosCompletenessTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.smallIntegralRoosCompletenessTransport",
+  "statement": "theorem smallIntegralRoosCompletenessTransport\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [Field E]\n    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E]\n    (F : Type u) [Field F] [Algebra (Padic ℓ) F] [FiniteDimensional (Padic ℓ) F]\n    (e : Mon.mk (SmallAdicCompletion.Coefficients.integerRing.{u} ℓ E) ≅\n      sfbCondensedIntegers ℓ F)\n    (X : Scheme.{u}) [IsNoetherian X]\n    (K : DerivedCategory (SmallAdicCompletion.Modules ℓ E X)) :\n    Scheme.IsSfbAdicComplete X (IntegralConstantCompletion.ideal ℓ F)\n      ((Mod.comap (coefficientMap e.inv.hom X) ⋙\n        IntegralConstantModel.modulesFunctor ℓ F X).mapDerivedCategory.obj K) →\n      SmallAdicCompletion.IsDerivedComplete ℓ E X K",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-small-coefficient-derived-completion",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sfb-integral-models-completion-transport",
+  "lem-sfb-internal-completion-stacks-comparison",
+  "lem-sfb-small-integral-roos-comparison",
+  "sk-def-pe-derived-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261026T002651-L-105820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T023603-L-584355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

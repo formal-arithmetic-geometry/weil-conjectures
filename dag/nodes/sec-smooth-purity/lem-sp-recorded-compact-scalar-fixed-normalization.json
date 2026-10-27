@@ -1,0 +1,129 @@
+{
+ "id": "lem-sp-recorded-compact-scalar-fixed-normalization",
+ "kind": "statement",
+ "title": "The recorded intrinsic compact scalar arrow has its fixed-module proper/open normal form",
+ "statement": "Let A and B be finite commutative unital rings and φ:A→B a unital homomorphism. For schemes X,Y and a compactification c=(X→Z→Y) [def-pc-scheme, def-weil-compactifications-refinements], let J_A be exact fixed-module pro-etale extension by zero along c.i and R_A the fixed-module derived direct image along c.g [def-weil-pbc-proetale-operations, lem-weil-extension-by-zero-exact]. Work with fixed modules over ULift A and ULift B and their intrinsic realization equivalences [def-weil-pbc-proetale-modules, def-weil-proetale-inverse-image]. Write T for fixed scalar extension [def-weil-pbc-witness-compatibility]. Let γ:T_Y R_A→R_B T_Z be the geometric counit mate of scalarPullbackProEtaleIso [lem-sfb-scalar-site-comparison-normalized-data], and s:T_Z J_A≅J_B T_X the composite-left-adjoint uniqueness comparison OpenScalarSite.scalarOpen [lem-sp-open-scalar-site-coherence]. Then the genuine transported recorded intrinsic coefficient arrow [def-sp-et-proet-coefficient-transport, def-sp-reduction-direct-image-comparison] is exactly γ evaluated after J_A followed by R_B(s). This is equality of natural transformations on the entire fixed-module pro-etale derived category; there is no etale-origin or boundedness hypothesis, and no assertion of invertibility of γ or of the coefficient arrow.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-extension-by-zero-exact",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-witness-compatibility",
+  "lem-sfb-scalar-site-comparison-normalized-data",
+  "lem-sp-open-scalar-site-coherence",
+  "def-sp-et-proet-coefficient-transport",
+  "def-sp-reduction-direct-image-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper/open factorization; the agent-written realization normalization of Step 3 of lem-sp-transported-compact-scalar-site-square, expanding the Charts paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md."
+ },
+ "proof": [
+  {
+   "text": "Apply the fully faithful intrinsic realization functor at Y to identify the fixed-module composite γ after J_A followed by R_B(s) with transport of the recorded intrinsic reduction comparison. The fully faithful preimage equation expands its image as the scalar presentation inverse, support presentation inverse, recorded arrow, scalar presentation hom and support presentation hom. For the proper factor, the direct-image presentation changes adjunction coordinates by the unique pullback comparison preserving units, followed by the K-injective-normalized realization comparison. Transpose under the geometric adjunction: the resulting counit equation is precisely that of the fixed-module proper scalar mate. For the open factor, cancel the realization unit in supportPresentation. The open coordinate isomorphism is left-adjoint uniqueness, hence its scalar map agrees with reductionOpenScalarIso by equality of their open-unit transposes. The section-identity comparison defining scalarPresentation preserves the scalar adjunction units, so these proper and open identifications paste without an extra automorphism. Cancel the realization unit/counit pairs and use faithfulness to descend equality. This proves the equality of natural transformations by extensionality; only presentation isomorphisms have been inverted, never a coefficient mate. No change of site is involved in this step.",
+   "uses": [
+    "def-sp-et-proet-coefficient-transport",
+    "def-sp-reduction-direct-image-comparison",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-trf-open-square-exchange",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sp-open-scalar-site-coherence",
+    "lem-sfb-scalar-site-comparison-normalized-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-et-proet-coefficient-transport",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-trf-open-square-exchange",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sp-open-scalar-site-coherence",
+  "lem-sfb-scalar-site-comparison-normalized-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper/open factorization; the agent-written realization normalization of Step 3 of lem-sp-transported-compact-scalar-site-square, expanding the Charts paragraph of literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived scalar extension commutes with etale proetale comparison and transported coefficient map",
+   "results": "8 hits, on ordinary etale ring maps and Kahler differentials; no derived intrinsic-realization/proper-open normalization.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation defined as the proper scalar adjunction mate followed by extension by zero is preserved under an equivalence of coefficient module categories",
+   "results": "8 hits: ModuleCat extension/restriction Hom equivalences, restriction/coextension adjunctions and Adjunction.homAddEquiv_zero. None compares the prescribed derived proper/open presentation maps.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportSiteComparison|transportedRecordedReductionDirectImageComparison",
+   "results": "msearch Mathlib grep: 0 hits. Project searches found the transport definition and its consumers; no existing equality with the fixed proper/open composite. FiniteRealizationScalarMate and FiniteOpenScalarRealizationTransport normalize scalar transposes in different presentation coordinates, rather than this recorded intrinsic arrow.",
+   "date": "2026-10-27",
+   "verdict": "No existing declaration of this normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleProEtaleCompactScalarSquare",
+  "date": "2026-10-27",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts, realization normalization of the recorded proper/open coefficient arrow (Step 3 of lem-sp-transported-compact-scalar-site-square).",
+   "via": [
+    "lem-sp-transported-compact-scalar-site-square",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RecordedCompactScalarNormalization",
+  "file": "lean/Sheaf/Paper/RecordedCompactScalarNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.recordedCompactScalar_fixed_normalization",
+  "statement": "theorem recordedCompactScalar_fixed_normalization\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :\n    transportedRecordedReductionDirectImageComparison φ c\n        (reductionDirectImageComparison φ c.i c.g) =\n      whiskerLeft\n          (openImmersionLowerShriek\n            (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory\n          (mateEquiv\n            (derivedUpperStarLowerStarAdjunction\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.g)\n            (derivedUpperStarLowerStarAdjunction\n              (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c.g)\n            (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso (uliftRingHom φ) c.g).hom)).natTrans ≫\n        whiskerRight (OpenScalarSite.scalarOpen (uliftRingHom φ) c.i).hom\n          (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c.g).rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T112447-L-1586418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T112447-L-1586418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

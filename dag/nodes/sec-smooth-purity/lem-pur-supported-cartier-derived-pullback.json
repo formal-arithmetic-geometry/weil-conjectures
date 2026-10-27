@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-supported-cartier-derived-pullback",
+ "kind": "statement",
+ "title": "Supported Cartier Kummer pullback in the fixed bounded-below presentation",
+ "statement": "Fix a prime $\\ell$, a finite extension $F/\\mathbf Q_\\ell$, $n\\geq0$, and $A=\\mathcal O_F/\\varpi_F^{n+1}$ [def-pur-finite-tate-site-comparison]. Let $z:B\\hookrightarrow X$ and $z':B'\\hookrightarrow X'$ be closed immersions with invertible ideal sheaves, and let $g:B'\\to B$ and $v:X'\\to X$ give a chosen Cartesian square. Assume $\\ell$ is invertible on $X$ and $X'$. Write $c_z:z_*A_B\\to A_X(1)[2]$ and $c_{z'}:z'_*A_{B'}\\to A_{X'}(1)[2]$ for the specified pro-etale Cartier Kummer arrows in $D^+$ [def-pur-line-kummer-compact-images], and $\\beta:v^{-1}z_*A_B\\to z'_*A_{B'}$ for the canonical supported-constant exchange [def-pur-supported-constant-exchange-maps, def-pur-section-compact-source-maps]. Suppose every map $d:v^{-1}z_*A_B\\to z'_*A_{B'}$ preserving the constant restriction $A_X\\to z_*A_B$, under the prescribed constant pullback comparison, equals $\\beta$. There exists a projection-normalized Tate sheaf pullback isomorphism $p:v^{-1}A_X(1)\\cong A_{X'}(1)$ [def-pur-finite-tate-site-comparison] such that the actual derived arrows satisfy $v^{-1}(c_z)\\,p[2]=\\beta\\,c_{z'}$, including the exact-pullback single and shift comparisons. No flatness, finiteness, base-field or section hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3: base-change compatibility, and Step 2 first paragraph: identify the geometric-fibre morphism; previous expanded proof steps 3--4"
+ },
+ "stmt_deps": [
+  "def-pur-line-kummer-compact-images",
+  "def-pur-section-compact-source-maps",
+  "def-pur-finite-tate-site-comparison",
+  "def-pur-supported-constant-exchange-maps"
+ ],
+ "proof_deps": [
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-supported-constant-exchange-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Extract the Cartier Kummer base-change isomorphisms and Ext equation. Identify the supported comparison by the constant restriction equation and its uniqueness. Apply Ext.hom and the exact functor realization formulas, then reflect the resulting equality through the fully faithful D+ inclusion, cancelling its single and shift comparison isomorphisms.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-pur-supported-constant-exchange-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3: supported Kummer pullback, before compact pushforward"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedCartierDerivedPullback",
+  "declaration": "AlgebraicGeometry.SupportedCartierDerivedPullback.supported_cartier_derived_pullback",
+  "file": "lean/Sheaf/Paper/SupportedCartierDerivedPullback.lean",
+  "existing": false,
+  "statement": "theorem supported_cartier_derived_pullback (l : ℕ) [Fact l.Prime] (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F] (n : ℕ) {B X B' X' : Scheme.{u}} {g : B' ⟶ B} {v : X' ⟶ X} (z : B ⟶ X) (z' : B' ⟶ X') [IsClosedImmersion z] [IsClosedImmersion z'] (sqZ : ChosenCartesianSquare g z' z v) (hI : z.ker.IsInvertible) (hI' : z'.ker.IsInvertible) (hX : IsUnit (l : Γ(X, ⊤))) (hX' : IsUnit (l : Γ(X', ⊤))) (hnorm : ∀ d : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l F n)) v).obj (SupportedConstantNormalization.supported (finiteTateCoefficient l F n) true z) ⟶ SupportedConstantNormalization.supported (finiteTateCoefficient l F n) true z', (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l F n)) v).map (SupportedConstantNormalization.restriction (finiteTateCoefficient l F n) true z) ≫ d = (SupportedConstantNormalization.unitIso (finiteTateCoefficient l F n) true v).hom ≫ SupportedConstantNormalization.restriction (finiteTateCoefficient l F n) true z' → d = SupportedConstantNormalization.exchange (finiteTateCoefficient l F n) true sqZ) : ∃ p : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l F n)) v).obj (finiteTateProSheaf l F n X 1) ≅ finiteTateProSheaf l F n X' 1, IsFiniteTateProPullback l F n X v 1 p ∧ (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l F n)) v).mapDerivedCategoryPlus.map (proClass l F n z hI hX) ≫ (((ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l F n)) v).mapDerivedCategoryPlus.commShiftIso (2 : ℤ)).app _ ≪≫ (shiftFunctor _ (2 : ℤ)).mapIso ((Functor.mapDerivedCategoryPlusSingleFunctor (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l F n)) v) 0).app _ ≪≫ (DerivedCategory.Plus.singleFunctor _ 0).mapIso p)).hom = SectionCompactSource.proBeta (finiteTateCoefficient l F n) sqZ ≫ proClass l F n z' hI' hX'",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LineZeroClassExchange",
+  "date": "2026-10-26",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 3: pullback compatibility of the supported Kummer class, before applying compact pushforward",
+   "via": [
+    "lem-pur-line-zero-class-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Supported Cartier Kummer class in bounded below derived category commutes with arbitrary pullback and normalized constant source comparison",
+   "verdict": "No match: returned derived-category fraction and t-structure lemmas concern representation by complexes, not Cartier Kummer normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "verdict": "Found generic exact-functor Ext maps, composition and mk0 naturality. They do not identify the canonical supported constant comparison or its Kummer class."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*pullback|cartier.*baseChange",
+   "verdict": "No hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of supported Cartier Kummer classes under pullback in bounded below derived categories",
+   "verdict": "No exact match: returned sheaf-module pullback and generic mapDerivedCategorySingleFunctor comparisons, not the normalized supported Kummer equation."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T205617-L-3302888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T205617-L-3302888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

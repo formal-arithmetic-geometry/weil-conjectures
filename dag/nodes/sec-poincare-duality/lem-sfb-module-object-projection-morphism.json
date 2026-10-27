@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-module-object-projection-morphism",
+ "kind": "statement",
+ "title": "Invertibility normalization for the canonical module-object projection",
+ "statement": "Let Λ be a commutative condensed ring, f : X → Y a morphism of schemes, K an arbitrary object of D(Mod_{Λ_X}), and L an arbitrary object of D(Mod_{Λ_Y}). Use the specified derived adjunction Lf* ⊣ Rf* and its canonical monoidal structure [sk-def-sfb-module-derived-pushpull, sk-def-sfb-derived-tensor-hom]. The canonical module-object projection map π_{f,K,L} [def-sfb-module-object-projection-map] is invertible if and only if the projection morphism of this monoidal adjunction is invertible. Both maps, their categories and endpoints are definitionally identical: the adjoint transpose of the oplax tensor comparison followed by counit tensor identity. No properness, boundedness, constructibility or coefficient-finiteness assumption is needed.",
+ "stmt_deps": [
+  "def-sfb-module-object-projection-map",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "Paragraph (3), canonical projection mate; the same adjoint-transpose convention in nt-target-poincare-isiso Step 2 and def-sfb-module-object-projection-map."
+ },
+ "proof": [
+  {
+   "text": "Unfold the record projections defining moduleObjectProjectionMap and the adjunction projection morphism. Both use the same leftDerivedUpperStarTensor comparison, counit tensor identity, and adjunction hom equivalence, in the same category. Reflexivity proves the equivalence of their IsIso predicates, including the category and endpoints.",
+   "uses": [
+    "def-sfb-module-object-projection-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "Paragraph (3), canonical projection mate; the same adjoint-transpose convention in nt-target-poincare-isiso Step 2 and def-sfb-module-object-projection-map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-object-projection-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "Paragraph (3), canonical projection mate; the same adjoint-transpose convention in nt-target-poincare-isiso Step 2 and def-sfb-module-object-projection-map."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection morphism of a monoidal adjunction is the adjoint transpose of its tensor comparison followed by the counit tensor identity, so the two canonical projection maps are invertible exactly in the same cases",
+   "results": "Eight hits, including Mathlib.CategoryTheory.Monoidal.Closed.Functor.frobeniusMorphism and frobeniusMorphism_mate (the left-adjoint Frobenius square in closed monoidal categories), and monoidal adjunction counit lemmas. None is the local right-adjoint module-object projection-map normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match: unfold the two local definitions and prove the IsIso equivalence by reflexivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection morphism of a monoidal adjunction equals the adjoint transpose of the tensor comparison followed by the counit tensor identity",
+   "results": "Eight generic monoidal-adjunction identities, including leftAdjoint_ε, map_μ_comp_counit_app_tensor and rightAdjointLaxMonoidal_μ; none identifies the two local projection-map definitions.",
+   "date": "2026-10-22",
+   "verdict": "Use the actual local definitions; the IsIso normalization is reflexive."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.projectionMorphism",
+   "results": "0 hits: unknown identifier in the Mathlib index.",
+   "date": "2026-10-22",
+   "verdict": "The declaration is in the adopted source library, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleObjectProjectionMap_eq|projectionMorphism",
+   "results": "0 Mathlib hits; repository search finds the local projectionMorphism definition and the assigned proper-projection statement but no equality API.",
+   "date": "2026-10-22",
+   "verdict": "A normalization API for invertibility of the existing map is needed."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.PoincareDuality.ProperProjectionFormulaBounded",
+  "date": "2026-10-22",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-condensed-proper-projection-formula",
+   "place": "Identify the actual canonical module-object mate with the displayed monoidal adjunction projection component.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.ModuleObjectProjectionMorphism",
+  "file": "lean/Sheaf/PoincareDuality/ModuleObjectProjectionMorphism.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_moduleObjectProjectionMap_iff",
+  "statement": "theorem isIso_moduleObjectProjectionMap_iff\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)))\n    (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj Λ Y))) :\n    IsIso (moduleObjectProjectionMap Λ f K L) ↔\n      IsIso ((derivedUpperStarLowerStarAdjunction Λ f).projectionMorphism K L)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261022T040148-L-2814682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261022T040148-L-2814682",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

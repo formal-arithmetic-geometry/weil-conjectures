@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-module-derived-functor-compositor-shifts",
+ "kind": "statement",
+ "title": "Canonical shifts of module derived functors and pullback compositors",
+ "statement": "Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For a scheme $T$, let $R_T$ be its pullback from the point [sk-def-sfb-pulled-back-coefficients] and let $D_T=D(\\operatorname{Mod}_{R_T})$ be the ordinary unbounded derived category [def-weil-abstract-derived-category] of module objects [sk-def-sfb-module-objects]. For every scheme morphism $u:S\\to T$, use the specified total derived functors $P_u=Lu^*:D_T\\to D_S$ and $G_u=Ru_*:D_S\\to D_T$ of [sk-def-sfb-module-derived-pushpull], computed on K-flat and K-injective resolutions respectively. Write $D(u^*)$ for termwise exact pullback followed by localization, and let $c_u:P_u\\xrightarrow{\\sim}D(u^*)$ be its canonical comparison [def-sfb-left-derived-exact]. Give $D(u^*)$ the termwise integer shifts, $P_u$ the shifts transported along $c_u$, and $G_u$ its fixed K-injective shifts. These $P_u$ and $G_u$ are exact functors, and $c_u$ agrees with the comparison obtained by shifting the K-flat resolutions, for every integer shift.\nFor composable $S\\xrightarrow{u}T\\xrightarrow{v}U$, let $b_{u,v}:(vu)^*\\xrightarrow{\\sim}u^*v^*$ be the ordinary module pullback compositor [def-sfb-module-upper-star-comp] and let $m_{u,v}:P_{vu}\\xrightarrow{\\sim}P_uP_v$ be the specified derived compositor of [prop-sfb-module-left-derived-upper-star-comp]. Under $c_{vu},c_u,c_v$ and the canonical termwise derived composition identification, $m_{u,v}$ is the localized termwise map $b_{u,v}$; its degree-$r$ representative on $M[n]$ is $b_{u,v,M^{r+n}}$. The compositor and its inverse commute with all the specified integer shifts.\nFor any commutative square $p:X\\to Y$, $g:Y'\\to Y$, $g':X'\\to X$, $p':X'\\to Y'$ with $gp'=pg'$, let $\\theta:P_{p'}P_g\\xrightarrow{\\sim}P_{g'}P_p$ be $m_{p',g}^{-1}$ followed by the identification $P_{gp'}=P_{pg'}$ and $m_{g',p}$. For every $K\\in D_Y$ and every integer $n$, $s^n_{P_{g'}P_p}\\circ\\theta_{K[n]}=\\theta_K[n]\\circ s^n_{P_{p'}P_g}$, where $s^n$ denotes the composite shift comparisons. No cartesian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015F (lemma-right-derived-exact-functor), 014X (lemma-additive-exact-homotopy-category) and 05SE (proposition-derived-functor); exact termwise descent and its canonical compositor normalization, specialized to module objects",
+  "external": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3); expanded canonical normalization argument extracted from lem-sfb-derived-exchange-exact-normalization"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-left-derived-exact",
+  "prop-sfb-module-left-derived-upper-star-comp",
+  "def-weil-triangulated-category",
+  "def-sfb-module-upper-star-comp",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the published additivity and exactness instances for the ordinary module pullback from [sk-def-sfb-module-pushforward-pullback]. The exact termwise derived functor and its localization factorization are triangulated and shift compatible by [lem-weil-pbc-exact-functor-derived-factorization]. The specified comparison [def-sfb-left-derived-exact] transports the shifts. Mathlib CommShift.ofIso_compatibility and isTriangulated_of_iso transport exactness and make the comparison commute with shifts. Whisker with Q and compose with the exact termwise factorization to obtain shift compatibility on complexes.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-left-derived-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); canonical resolution and compositor calculations supplied here"
+   }
+  },
+  {
+   "text": "The specified derived pushforward of [sk-def-sfb-module-derived-pushpull] is the published total right derived functor of the additive ordinary pushforward of [sk-def-sfb-module-pushforward-pullback]. Apply [lem-pc-right-derived-functor-triangulated] with its fixed K-injective shifts; no alternative shift structure is introduced.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); canonical resolution and compositor calculations supplied here"
+   }
+  },
+  {
+   "text": "The universal comparison [def-sfb-left-derived-exact] is leftDerivedUnique. Its factorization identity, evaluated on the homotopy image of any complex, identifies the comparison followed by the termwise factorization of [lem-weil-pbc-exact-functor-derived-factorization] with the universal counit. Expand mapDerivedCategoryFactorsh_hom_app and the identity components of quotientCompQhIso and mapHomotopyCategoryFactors. This proves modulePullbackResolutionCounit_eq on every complex. Naturality proves the first resolution equation; shift compatibility from the first step proves the second. Neither equation needs the K-flatness or quasi-isomorphism assumption, so no preservation-of-K-flatness lemma is required.",
+   "uses": [
+    "def-sfb-left-derived-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); canonical resolution and compositor calculations supplied here"
+   }
+  },
+  {
+   "text": "The canonical comparison [def-sfb-left-derived-exact] is definitionally the published leftDerivedFunctorIsoMapDerivedCategory. Expand the compositor [prop-sfb-module-left-derived-upper-star-comp], namely leftDerivedFunctorNatIso followed by leftDerivedFunctorCompIso. Cancel the exact comparison for the intermediate composite. Naturality interchanges the two whiskered comparisons, and inverse cancellation gives the stated exact-normalization equality. For [def-sfb-module-upper-star-comp], the component of its termwise map on M[n] in degree r is definitionally its original component on M.X(r+n).",
+   "uses": [
+    "def-sfb-left-derived-exact",
+    "prop-sfb-module-left-derived-upper-star-comp",
+    "def-sfb-module-upper-star-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); canonical resolution and compositor calculations supplied here"
+   }
+  },
+  {
+   "text": "Use the published proved instances commShift_mapDerivedCategoryNatIso_hom and commShift_mapDerivedCategoryCompIso_hom from WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor. They descend the degreewise shift equations through the universal property [lem-weil-pbc-localization-universal-property], using the shift-compatible factorizations [lem-weil-pbc-exact-functor-derived-factorization]. Solve the exact-normalization equation of step 4 for the compositor by composing with the inverses of the two whiskered comparisons. Each factor commutes with shifts by step 1 and [lem-weil-pbc-commshift-nattrans-comp-whisker]. Therefore so does their composite, and its inverse by Mathlib of_iso_inv.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); canonical resolution and compositor calculations supplied here"
+   }
+  },
+  {
+   "text": "For the arbitrary commutative square, the two compositors and their inverses commute with shifts by step 5. Equality of composite scheme morphisms induces a shift-compatible identification: substitute the equality, reducing to the identity natural transformation of the same specified derived functor. The square comparison is the composite of these three maps, so [lem-weil-pbc-commshift-nattrans-comp-whisker] applies. Its shift_app_comm component at K and n, reversed, is precisely the claimed equation. No cartesian hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category), 015F (lemma-right-derived-exact-functor), 05SE (proposition-derived-functor); canonical resolution and compositor calculations supplied here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-left-derived-exact",
+  "def-weil-triangulated-category",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-sfb-module-left-derived-upper-star-comp",
+  "def-sfb-module-upper-star-comp",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Stacks Tags 014X, 015F and 05SE; canonical exact-functor descent and normalization, implemented by P2 using published compositor definitions, universal counit factorization, and shift-compatible localization. Realizes paragraph (3) of det-thm-sfb-proper-base-change-rational."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Cc]ommShift|[Cc]ommShift.*leftDerived|mapDerivedCategory.*[Cc]omp",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies exact termwise functors and their shift-compatible maps, but not this normalization of the specified K-flat module pullbacks and derived compositors together with the canonical K-injective pushforward. This requires identifying the project constructions, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical K-flat derived module pullback equals exact termwise pullback compatibly with integer shifts and pullback composition isomorphisms; K-injective module pushforward is triangulated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For any additive functor $ F $ between abelian categories preserving finite limits/colimits and homology, the natural transformation associated with the derived functor factorization commutes with the\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies exact termwise functors and their shift-compatible maps, but not this normalization of the specified K-flat module pullbacks and derived compositors together with the canonical K-injective pushforward. This requires identifying the project constructions, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback compositor for sheaves of modules over a condensed ring commutes with the canonical integer shifts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  conjugateEquiv ((pullbackPushforwardAdjunction.{v} φ).comp (pullbackPushforwardAdjunction.{v} ψ))\\n      (pullbackPushforwardAdjunction.{v} _) (pullbackComp.{v} φ ψ).inv =\\n    (pushforwardComp.{v} φ ψ).hom\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"CategoryTheory.NatTrans.commShiftPullback\", \"module\": \"Mathlib.CategoryTheory.Shift.Pullback\", \"type\": \"(τ : F ⟶ G) [NatTrans.CommShift τ B] : NatTrans.CommShift (PullbackShift.natTrans φ τ) A\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with shift operations parameterized by an additive monoid $B$, an additive monoid homomorphism $\\\\phi : A \\\\to B$, and a natural transformation $\\\\tau : F\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"{I : Type u} (i : I) : (pullback φ).map (ιFree i) ≫ (pullbackObjFreeIso φ I).hom = pullbackObjUnitToUnit φ ≫ ιFree i\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\\n      pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ (G.sheafPushforwardContinuous RingCat.{u} K K').map ψ') =\\n    (associator _ _ _).symm ≪≫\\n      isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫\\n        pullbackComp.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies exact termwise functors and their shift-compatible maps, but not this normalization of the specified K-flat module pullbacks and derived compositors together with the canonical K-injective pushforward. This requires identifying the project constructions, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.NatTrans.CommShift",
+   "results": "[loogle] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {F : CategoryTheory.Functor C₁ C₂} [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Functor.mapDerivedCategoryIdIso C₁).hom ℤ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpMapDerivedCategoryId\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] : CategoryTheory.NatTrans.CommShift (CategoryTheory.Localization.Lifting.iso DerivedCategory.Q (HomologicalComplex.quasiIso C₁ (ComplexShape.up ℤ)) DerivedCategory.Q (CategoryTheory.Functor.i\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C₂) [F.Additive] [CategoryTheory.Limits.PreservesFin\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory_1\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor\", \"type\": \" {C₁ : Type u_1} [CategoryTheory.Category.{v_1, u_1} C₁] [CategoryTheory.Abelian C₁] [HasDerivedCategory C₁] {C₂ : Type u_2} [CategoryTheory.Category.{v_2, u_2} C₂] [CategoryTheory.Abelian C₂] [HasDerivedCategory C₂] {C₃ : Type u_3} [CategoryTheory.Category.{v_3, u_3} C₃] [CategoryTheory.Abelian C₃]\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies exact termwise functors and their shift-compatible maps, but not this normalization of the specified K-flat module pullbacks and derived compositors together with the canonical K-injective pushforward. This requires identifying the project constructions, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*[Cc]ommShift|mapDerivedCategoryCompIso|mapDerivedCategoryFactors",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"41\", \"line\": \"noncomputable def mapDerivedCategoryFactors \", \"text\": \"\"}\n  {\"file\": \"47\", \"line\": \"lemma mapDerivedCategoryFactors_hom_naturality {X Y \", \"text\": \" CochainComplex C₁ ℤ} (f : X ⟶ Y) :\"}\n  {\"file\": \"48\", \"line\": \"    F.mapDerivedCategory.map (DerivedCategory.Q.map f) ≫ F.mapDerivedCategoryFactors.hom.app Y =\", \"text\": \"\"}\n  {\"file\": \"49\", \"line\": \"      F.mapDerivedCategoryFactors.hom.app X ≫\", \"text\": \"\"}\n  {\"file\": \"51\", \"line\": \"  F.mapDerivedCategoryFactors.hom.naturality f\", \"text\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies exact termwise functors and their shift-compatible maps, but not this normalization of the specified K-flat module pullbacks and derived compositors together with the canonical K-injective pushforward. This requires identifying the project constructions, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functors descend termwise to triangulated derived functors and their derived natural isomorphisms and composition comparisons commute with shifts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For any additive functor $ F $ between abelian categories preserving finite limits/colimits and homology, the natural transformation associated with the derived functor factorization commutes with the\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For any additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories commutes with the integer-parameteriz\"}\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"Given an additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories is triangulated. This means it commu\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"The natural isomorphism asserting that the induced functor from the homotopy category to the derived category commutes with the integer shift operation, ensuring that shifting a complex before or afte\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib supplies exact termwise functors and their shift-compatible maps, but not this normalization of the specified K-flat module pullbacks and derived compositors together with the canonical K-injective pushforward. This requires identifying the project constructions, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical total derived pullback of module sheaves agrees with exact termwise pullback with integer shifts and the specified pullback compositor; K-injective direct image is triangulated",
+   "results": "OK 8 hits; SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: exact termwise functor infrastructure only; pinned Mathlib ExactFunctor.lean:36-108 read. Specified K-flat comparisons and module compositor normalization require the project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*CommShift|CommShift.*mapDerivedCategory|mapDerivedCategoryCompIso",
+   "results": "OK 4 hits; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: exact termwise functor infrastructure only; pinned Mathlib ExactFunctor.lean:36-108 read. Specified K-flat comparisons and module compositor normalization require the project constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.NatTrans.CommShift",
+   "results": "OK 8 hits; CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryIdIsoInt, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpMapDerivedCategoryId, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomIsoQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory_1",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: exact termwise functor infrastructure only; pinned Mathlib ExactFunctor.lean:36-108 read. Specified K-flat comparisons and module compositor normalization require the project constructions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact module pullbacks have canonical shift compatible total left derived functors and composition isomorphisms",
+   "results": "OK 8 hits; CategoryTheory.Functor.totalLeftDerived, CategoryTheory.NatTrans.PullbackShift.natIsoComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.LeftExactFunctor.whiskeringLeft_obj_obj_obj, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: exact termwise functor infrastructure only; pinned Mathlib ExactFunctor.lean:36-108 read. Specified K-flat comparisons and module compositor normalization require the project constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on abelian categories induces a triangulated functor on unbounded derived categories; natural transformations and composition comparisons commute with all integer shifts",
+   "results": "OK 8 hits; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: exact termwise functor infrastructure only; pinned Mathlib ExactFunctor.lean:36-108 read. Specified K-flat comparisons and module compositor normalization require the project constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-exchange-exact-normalization",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "proof paragraph (3), \"all functors are exact and the maps are natural transformations of exact functors\": Canonical shifts of module derived functors and pullback compositors",
+   "via": [
+    "lem-sfb-derived-exchange-exact-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-module-derived-functor-compositor-shifts",
+  "worker": "stage1",
+  "summary": "Q119 gives a zero-new-node split, reusing exact module pullback, canonical exact-derived comparison, K-injective triangulatedness and localization uniqueness. Checks the comparison on shifted K-flat resolutions, fixes the compositor through its localized component equation, and proves the shift equation and its inverse before composing the arbitrary commutative-square comparison. The statement is unchanged.",
+  "blueprint": "Realizes det-thm-sfb-proper-base-change-rational proof paragraph (3), the exactness and shift compatibility required for canonical-exchange triangle devissage; nearest blueprint ancestor confirmed by blueprint_refs. Whole-blueprint searches exact functor, compositor, integer shifts, pullback composition found no exact restatement.",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness theorem for the actual module pullbacks for arbitrary schemes and condensed rings; needed to apply exact-derived factorization."
+   },
+   {
+    "node": "prop-sfb-module-left-derived-upper-star-comp",
+    "why": "Specifies the actual derived compositor induced by the ordinary one; the present argument checks its normalization and shifts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-sfb-module-left-derived-upper-star-comp"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-2d040bd80",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-2d040bd80 (reviewer sub-agent of L); spot-checked: I read the whole Q119 zero-new-node split. Statement and stmt_deps are unchanged, there is no repair note, and the base proof was empty (the node was created 2026-10-22 by Q38 for lem-sfb-derived-exchange-exact-normalization). All 6 steps check out. (1) P_u is exact: det-prop-sfb-module-pullback-exact-main makes f^* exact, so lem-weil-pbc-exact-functor-derived-factorization applies; the transported shift makes c_u a triangle iso, and TR1 isomorphism-closure gives exactness. (2) G_u is exact by lem-pc-right-derived-functor-triangulated, which is unsplit but Lean-closed. Its Lean (RightDerivedFunctor/Triangulated.lean:94-99) transports the shift from K(Inj), so it is the K-injective shift; the degreewise identification u_*(I[n])=(u_*I)[n] is correct. (3) I recomputed both tensor reindexings against the differential in def-sfb-preserves-kflat-quasi-iso: identity on V[n]⊗B, sign (-1)^{np} on B⊗V[n]. So shifted K-flat resolutions are valid and F(t[n])=F(t)[n]. (4) q∘m=Q(B)∘e_h type-checks and descends by localization clauses (2)/(3). Since e_u=a_u∘c_uQ=ε_u (def-sfb-left-derived-exact), it is the same equation as step 4 of prop-sfb-module-left-derived-upper-star-comp, so m is that node's compositor and not a free choice. (5) The shift compatibility of e and q follows from factorization clause (2) and the commshift whisker/composition leaf; it reduces to B_{M[n]}=B_M[n], then extends by clause (3). (6) I checked the inverse identity and the θ chain; only gp'=pg' is used, no cartesian hypothesis. Sources: Stacks 014X/05SE/015F labels at derived.tex lines 3431/4895/5884, and blueprint det-thm-sfb-proper-base-change-rational.proof.md paragraph (3). No SGA is cited. I accept both declared tool_uses: det-prop-sfb-module-pullback-exact-main and prop-sfb-module-left-derived-upper-star-comp, both generic and from sk-def-sfb-dc-restricted-functors. No duplicate exists: lem-sfb-ambient-qcqs-exchange-canonical-shifts (Q145) overlaps the parent's exchange clause, and lem-sfb-exact-derived-composition and lem-sfb-exact-derived-natural-iso do not treat shifts. Edge cases n=0, n=±1, identity maps and a non-cartesian square all hold. review_split's 'no such node' errors are an artefact of the chapter symlinks; every cited node exists. Maintainer note: the statement of lem-pc-right-derived-functor-triangulated should name its K-injective shift structure, which only the Lean currently fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModuleDerivedFunctorCompositorShifts",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_functors_exact_and_comparison_shifts",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackComplexComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackResolutionCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_derived_functors_exact_and_comparison_shifts",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_resolution_shift_normalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackDerivedCompositor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_compositor_exact_normalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_compositor_shift_degree",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_compositor_commShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.modulePullbackSquareComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.module_pullback_square_shift"
+  ],
+  "file": "lean/Sheaf/Paper/ModuleDerivedFunctorCompositorShifts.lean",
+  "statement": "theorem module_derived_functors_exact_and_comparison_shifts : (moduleObjectDerivedPullback Λ f).IsTriangulated ∧ (moduleObjectDerivedPushforward Λ f).IsTriangulated ∧ NatTrans.CommShift (modulePullbackExactComparison Λ f).hom ℤ ∧ NatTrans.CommShift (modulePullbackComplexComparison Λ f).hom ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The six theorem declarations together render every clause: exactness with the specified shifts; comparison on K-flat resolutions and their integer shifts; canonical compositor normalization; its degree-r representative on M[n]; shifts of the compositor and inverse; and the displayed shift equation for an arbitrary commutative square. Helpers give only the actual canonical comparisons and their specified shift structures. Named moduleObjectDerivedPullback and moduleObjectDerivedPushforward are the recorded definitions, definitionally equal to the published total derived functors; no new functors or arbitrary comparisons are selected. §1(B), Q14 return repair: the former module owned the comparison and two shift instances as plain definitions under a theorem node. Those three declarations now belong to def-sfb-module-derived-functor-shifts in Sheaf.Paper.ModuleDerivedFunctorShifts, publicly imported here. Their names, bodies and all six theorem statements are preserved; this record lists only declarations still owned by this module.",
+  "fixed_by": "NT-stage2-cc-735d3bd09"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-735d3bd09",
+  "group": "Q14",
+  "result": "fix",
+  "note": "735d3bd0 is byte-identical to the PASSed 2472d1bb, whose landing was refused by the landing tool's false positive on moves inside one delivery ('ModuleDerivedFunctorShifts declares names also in ModuleDerivedFunctorCompositorShifts'). Substance re-checked: square orientation, Phi=c*Rf_*, Psi=Rf'_*a*, IsTriangulated x2, shift equation for all n and L, shift compatibility of the f/f' units and counits and of the localized square, triangle morphism with the exchange components; Stacks tags 015F/0DVC/05SU/014X/05SE match. existing:true on the compositor module cannot land: the merge tool's non-module #check of it fails on the AcyclicKFlatTensor Sheaf/WeilConjectures clash (reproduced). FIX: ModuleDerivedFunctorCompositorShifts.lean restored to live text (byte-identical, nothing moved); ModuleDerivedFunctorShifts.lean publicly re-exports it and adds an rfl abbrev modulePullbackCanonicalExactComparison as primary declaration; def-sfb-module-derived-functor-shifts.json lean record updated (three re-exported names in declarations, existing:false); report addendum. Item module and record unchanged. nt_compile --json rc 0: def module 2.5 s, item 5.9 s, rfl check 2.2 s. check_lean_text gives [] on both records. Notes: delivered compositor record narrowed and its note stale (land with --revert-nodes if the live record is preferred); compositor stmt_deps lack the def node; both tool issues remain."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T231859-L-3654776",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

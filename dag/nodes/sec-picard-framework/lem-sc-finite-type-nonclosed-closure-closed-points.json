@@ -25,33 +25,29 @@
  ],
  "proof": [
   {
-   "text": "Put $Z=\\overline{\\{z\\}}$. The closure of a singleton is an irreducible closed subset, with generic point $z$. Since $z$ is not closed, $Z$ contains a point $y\\ne z$; equivalently $z$ specializes to $y$. Then $\\overline{\\{y\\}}\\subseteq Z$ is irreducible and closed, and $\\overline{\\{y\\}}\\ne Z$ because an irreducible closed subset of a scheme has a unique generic point and $y\\ne z$. Thus $\\overline{\\{y\\}}\\subsetneq Z$ is a chain of irreducible closed subsets of length $1$, and $\\dim Z\\ge 1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0A21 (lemma-dimension-locally-algebraic), dimension argument for the closure of a nonclosed point"
-   }
-  },
-  {
-   "text": "The scheme $X$ is locally of finite type over the field $k$, and $Z$ is irreducible, closed, and positive-dimensional by step 1. Applying [lem-sc-positive-dimensional-locally-algebraic-closed-points] to $Z$ shows that $Z$ contains infinitely many closed points of $X$.",
+   "text": "By [lem-sc-lft-over-field-jacobson-space], X is Jacobson. Thus, for Z = closure {z}, the closed points of X in Z have closure Z. In Lean this is LocallyOfFiniteType.jacobsonSpace f followed by closure_inter_closedPoints isClosed_closure.",
    "uses": [
-    "lem-sc-positive-dimensional-locally-algebraic-closed-points"
+    "lem-sc-lft-over-field-jacobson-space"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), together with Tag 0A21 (lemma-dimension-locally-algebraic)"
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), part (2)"
    }
+  },
+  {
+   "text": "Suppose S = Z ∩ closedPoints X is finite. Express S as the finite union of its closed singleton subsets. Then S is closed (Set.Finite.isClosed_biUnion), so its closure is S. The preceding equality gives S = Z. Since z belongs to Z, z belongs to closedPoints X, contradicting the assumption that {z} is not closed. Hence S is infinite. This uses only the definition of closed points, finite unions of closed sets, and the Jacobson equality from step 1.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-positive-dimensional-locally-algebraic-closed-points"
+  "lem-sc-lft-over-field-jacobson-space"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0478 and 0A21"
+  "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), part (2); elementary finite-closed-union argument from the Jacobson property, written by W5, 2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -119,5 +115,26 @@
   "result": "pass",
   "note": "k alg. closed = [Field k] [IsAlgClosed k]; X lft over k = f : X ⟶ Spec (CommRingCat.of k) [LocallyOfFiniteType f] (same form as E1 d74407fbc), no qc added; z not closed = ¬ IsClosed {z}; conclusion (closure {z} ∩ closedPoints X).Infinite, ambient closed points; no Mathlib/upstream statement of it (JacobsonSpace gives density only); docstring carries both proof steps"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261023T110030-L-3641341",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

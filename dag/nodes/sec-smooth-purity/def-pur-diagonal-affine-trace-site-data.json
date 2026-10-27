@@ -1,0 +1,160 @@
+{
+ "id": "def-pur-diagonal-affine-trace-site-data",
+ "kind": "definition",
+ "title": "Fixed endpoint-retaining data for diagonal affine trace comparison",
+ "statement": "In the finite setting of [def-pur-conventions], retain the original constructions and predicates of [def-pur-diagonal-affine-trace-coordinates] and [def-pur-smooth-trace] on separated finite-type bases. IntegrationInput is uniquely the original proIntegration in the datum scalar coordinates. actualMaps records the actual smoothPurityMap and coefficientValuedSmoothTrace with their computed endpoints; transportedMaps records sourceCoordinates, comparison of ordinaryTranspose followed by boundedSiteRho and the given etale presentation isomorphism, and compact-support image of sourceCoordinates followed by proIntegration and intrinsic realization. MapAgreement is heterogeneous equality of both arrows. ordinaryPlus asserts boundedness below of every finite-Tor constructible ordinary input and of OrdinarySource at every annihilating exponent and affine rank. TraceSquare is IntegrationSiteSquare for the actual proIntegration on that source. rankZeroUnitSource is identity pullback followed by tensor unit and right unitor; rankZeroOrdinarySource is its uniquely specified endpoint transport. rankZeroOrdinarySupport is the proper-identity support/direct-image isomorphism. rankZeroMaps applies these identity-adjunction maps and the canonical site and realization comparisons, with no purity map in its construction. RankZeroActual equates actualMaps at rank zero to rankZeroMaps. Conclusion universally quantifies over ordinary presentations and annihilators and conjoins MapAgreement, TraceSquare, ProjectiveNormalization and RankZeroActual. These are the existing definitions extracted verbatim from the item; no new notion or hypothesis is introduced.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+  "place": "Kummer normalization sentence, expanded by the affine-model comparison proof steps 1--4 in lem-pur-diagonal-affine-trace-site-comparison."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-affine-space",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-site",
+  "def-coefficient-twists-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-amb-etale-compact-support",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "def-amb-p1-trace",
+  "def-amb-vector-integration",
+  "lem-pur-vector-integration-site-comparison",
+  "def-exchange-projection",
+  "def-sf-comparison-derived-pullback",
+  "def-pur-diagonal-affine-trace-coordinates",
+  "def-pur-affine-line-purity-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For integrationInput_existsUnique and rankZeroOrdinarySource_existsUnique use the original arrow and rankZeroUnitSource as witnesses, HEq.rfl for their specifications, and eq_of_heq for uniqueness. For ordinaryPlus extract finite cohomological endpoints of Ke. Prove the ordered Tate coefficient bounded by induction, using finite Tate-line flatness, the degree-zero single-complex Tor interval and the shift by two. Pullback preserves the finite Tor interval of Ke. Bounded tensor with that pullback is bounded; tensor symmetry gives OrdinarySource. All definitions are extracted verbatim.",
+   "uses": [
+    "def-pur-diagonal-affine-trace-coordinates",
+    "def-weil-pbc-constructible-complexes",
+    "lem-asd-finite-etale-twist-line",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-diagonal-affine-trace-coordinates",
+  "def-weil-pbc-constructible-complexes",
+  "lem-asd-finite-etale-twist-line",
+  "lem-kun-tensor-sym"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/cor-pur-dualizing-object-purity.md",
+  "place": "Kummer normalization sentence, expanded by the affine-model comparison proof steps 1--4 in lem-pur-diagonal-affine-trace-site-comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine space smooth purity agrees with ordered integration on etale and proetale sites and its rank zero identity",
+   "results": "Eight results: Algebra.IsStandardSmoothOfRelativeDimension.id, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.IsEtale.instIsSmooth and related scheme smoothness statements. None concerns derived purity, Kummer traces or site comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional transpose of affine space Kummer integration agrees with smooth purity trace",
+   "results": "Eight results about number-field volume integrals, integral affine-space morphisms, and submersive presentations. These do not compare derived exceptional transposes or etale/proetale integration.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_symm_apply",
+   "results": "CategoryTheory.Adjunction.homEquiv_symm_apply in Mathlib.CategoryTheory.Adjunction.Basic identifies the inverse transpose with functor map followed by counit. It supplies abstract cancellation, but no geometric comparison or normalization.",
+   "date": "2026-10-25",
+   "verdict": "abstract tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Tt]race|smoothPurity|Kummer.*integration in Mathlib/AlgebraicGeometry; MapAgreement|TraceSquare|RankZeroActual|transportedMaps|rankZeroMaps in lean/Sheaf and dag/nodes",
+   "results": "No Mathlib match. Library matches are the definitions in the item and its coordinate owner; no independent theorem states their specialized equations. Blueprint search for affine trace returns zero matches; existing projection-purity, ordered-transpose and vector-site statements use different coordinate presentations.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate independent assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalAffineTraceSiteComparison",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Kummer normalization sentence, expanded by the affine-model comparison proof steps 1--4 in lem-pur-diagonal-affine-trace-site-comparison.",
+   "via": [
+    "lem-pur-diagonal-affine-trace-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalAffineTraceSiteData",
+  "file": "lean/Sheaf/Paper/DiagonalAffineTraceSiteData.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.Conclusion",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.integrationInput_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.integrationInput",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.actualMaps",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.transportedMaps",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.ordinaryPlus",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.MapAgreement",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.TraceSquare",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.rankZeroUnitSource",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.rankZeroOrdinarySource_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.rankZeroOrdinarySource",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.rankZeroOrdinarySupport",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.rankZeroMaps",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.RankZeroActual",
+   "WeilConjectures.PurityFiniteSetting.DiagonalAffineTrace.Conclusion"
+  ],
+  "statement": "def Conclusion\n    (K : Scheme.proEtaleDerivedCategory S (projectionSetting F C E n).Ring)\n    (hK : finiteTorConstructible C.l E (n + 1) (Nat.succ_pos n) S K) (d : ℕ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bce7a",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164021-L-937086",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bce7a",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164021-L-937086",
+  "kind": "interface",
+  "note": "independent cc review: data module vs clone item module (verbatim move, re-exported); item proof vs the four Conclusion conjuncts; three new sorry theorems vs old conjuncts and their node lean.statements; item node vs clone (only lean/proof/proof_deps/proof_origin changed)"
+ }
+}

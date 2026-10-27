@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-torus-equivariant-quotient-fixed-surjectivity",
+ "kind": "statement",
+ "title": "Torus fixed groups preserve surjections of connected affine algebraic groups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field] [def-weil-algebraic-closure]. Let $H,J$ be smooth connected affine $k$-group schemes of finite type [def-sc-group-scheme] [def-sbc-smooth-morphisms] [def-weil-connected-scheme] [def-weil-finite-type-morphism]. Let $R\\simeq\\mathbf G_m^r$ be a torus, $r\\geq0$, acting on both groups by group automorphisms, and let $q:H\\to J$ be a faithfully flat homomorphism which is $R$-equivariant. For either group define its fixed subgroup functor by requiring invariance under all $R(V)$ after every further base change. The induced map $H^R\\to J^R$ is faithfully flat and finitely presented, with scheme-theoretic kernel $(\\ker q)^R$. Consequently $J^R$ is the fppf sheaf quotient $H^R/(\\ker q)^R$. The kernel of $q$ need not be smooth or connected.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Corollary 3.3.5 proof, printed p.101: surjectivity on torus centralizers for surjections of smooth connected affine groups over a field. The scheme version uses the smooth fixed groups and the faithfully flat quotient map onto the group-theoretic image; it includes inseparable kernels. WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-fppf-group-quotient-presentation",
+  "def-sfb-universal-scheme-action-fixed-points"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-reduced-normal-kernel-factorization] to $q$ and the acting group $R$. Obtain $q=b\\circ a$, $a:H\\to P=H/(\\ker q)_{\\mathrm{red}}$ a smooth quotient torsor and $b:P\\to J$ finite faithfully flat radicial, all $R$-equivariant. The rank-zero torus is a smooth connected acting group too. By [lem-sfb-relative-torus-automorphism-fixed-group], $H^R,P^R,J^R$ are smooth connected affine groups of finite presentation; equivariance restricts $a,b$ to homomorphisms $a^R,b^R$.",
+   "uses": [
+    "lem-sfb-reduced-normal-kernel-factorization",
+    "lem-sfb-relative-torus-automorphism-fixed-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  },
+  {
+   "text": "Put $L=(\\ker q)_{\\mathrm{red}}$. Apply [lem-sfb-homogeneous-cotangent-associated-bundle] to the smooth closed subgroup $L\\subset H$ and its quotient torsor $a$. In particular $da_e:\\operatorname{Lie}H\\to\\operatorname{Lie}P$ is surjective. Differentiating the equivariance identity makes this a homomorphism of rational $R$-representations. Apply [lem-sfb-split-torus-representation-weight-decomposition] to both tangent spaces: for a weight-zero vector $w$ in the target, choose a lift $v=\\sum_\\chi v_\\chi$. Equivariance and uniqueness of the weight decomposition give $da_e(v_0)=w$. Thus $da_e$ is surjective on invariant tangent spaces.",
+   "uses": [
+    "lem-sfb-homogeneous-cotangent-associated-bundle",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  },
+  {
+   "text": "For any one of the three groups $G$, a tangent vector of $G^R$ is a point $x\\in G(k[\\epsilon]/(\\epsilon^2))$ reducing to $1$ and fixed under $R$ after every further algebra extension. Such an $x$ lies in $G^R$ exactly when its tangent vector in $\\operatorname{Lie}G$ is invariant under the full differentiated $R$-action: substitute $k[\\epsilon]$ into the defining universal fixed-point identity. Hence $\\operatorname{Lie}(G^R)=(\\operatorname{Lie}G)^R$, naturally for equivariant homomorphisms. Step 2 therefore says that $d(a^R)_e$ is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  },
+  {
+   "text": "Factor $a^R$ by [lem-sfb-algebraic-group-homomorphism-factorization] as $H^R\\xrightarrow{u}I\\xrightarrow{j}P^R$, where $u$ is faithfully flat and finitely presented and $j$ is a closed immersion. The source $H^R$ is smooth, so [lem-sbc-smooth-flat-surjective-source-descent] makes $I$ smooth over $k$. Since $d(a^R)_e=dj_e\\circ du_e$ is surjective, $dj_e$ is surjective. The group $P^R$ is connected; [lem-sfb-smooth-subgroup-full-tangent] now gives $I=P^R$. Thus $a^R$ is faithfully flat and finitely presented.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sbc-smooth-flat-surjective-source-descent",
+    "lem-sfb-smooth-subgroup-full-tangent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  },
+  {
+   "text": "Let $y\\in J^R(k)$. Finite faithful flatness and radiciality of $b$ give a unique $x\\in P(k)$ with $b(x)=y$. For $t\\in R(k)$, equivariance gives $b(t\\cdot x)=t\\cdot y=y$, so uniqueness gives $t\\cdot x=x$. This equality holds as a morphism $R\\to P$: $R$ is the spectrum of the reduced finitely generated Laurent polynomial algebra, and [lem-wf-affine-nullstellensatz-vanishing] applied to coordinate differences identifies the orbit morphism with the constant morphism at $x$. Consequently $x$ is fixed functorially after every algebra extension. We have proved $P^R(k)\\to J^R(k)$ surjective; this uses no separability of $b$.",
+   "uses": [
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  },
+  {
+   "text": "Factor $b^R$ as $P^R\\to I\\hookrightarrow J^R$ by [lem-sfb-algebraic-group-homomorphism-factorization]. Step 5 puts every $k$-point of $J^R$ in this closed image. The smooth affine group $J^R$ is reduced by [sbc-lem-smooth-geometrically-reduced]. Its image ideal vanishes at every $k$-point, so [lem-wf-affine-nullstellensatz-vanishing] makes that ideal zero. Thus $I=J^R$ and $b^R$ is faithfully flat and finitely presented. Its composite with $a^R$ is $q^R$. Flatness of this composite is [lem-pc-flat-compose], surjectivity is composition of the underlying surjections, and finite presentation follows on affine coordinate rings from [lem-weil-pbc-finite-presentation-base-change-composition](2).",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-pc-flat-compose",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  },
+  {
+   "text": "For every $k$-scheme $U$, the kernel of $q^R$ consists of the $h\\in H(U)$ satisfying $q(h)=1$ and the universal $R$-fixed identity. These are exactly the points of $(\\ker q)^R(U)$. This equality is natural in $U$, so it identifies the scheme-theoretic kernels, including nilpotents; no replacement of $\\ker q$ by its reduction is made in this assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  },
+  {
+   "text": "Finally apply [lem-sfb-algebraic-group-homomorphism-factorization] to $q^R$. Its image factor is all of $J^R$, since $q^R$ is faithfully flat. The quotient clause of that node and step 7 identify $J^R$ with the fppf sheafification of $U\\mapsto H^R(U)/(\\ker q)^R(U)$, which is the asserted quotient.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent expansion of Conrad Corollary 3.3.5, printed p.101; Milne Algebraic Groups, Chapters 5, 10, 12, 13 and 17"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reduced-normal-kernel-factorization",
+  "lem-sfb-relative-torus-automorphism-fixed-group",
+  "lem-sfb-homogeneous-cotangent-associated-bundle",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-sfb-smooth-subgroup-full-tangent",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-flat-compose",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent proof of the general surjectivity input cited by Conrad Corollary 3.3.5, using reduction of the kernel, exactness of torus weight zero, and radicial uniqueness. Conrad itself cites Borel 11.14 Corollary 2 instead of proving this input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixed.*surject|surject.*centralizer|torus",
+   "results": "{\"t\": \"2026-10-24T08:18:23Z\", \"tool\": \"grep\", \"query\": \"fixed.*surject|surject.*centralizer|torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", Function.Surjective",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torus equivariant surjection of smooth connected algebraic groups is surjective on fixed subgroups",
+   "results": "{\"t\": \"2026-10-24T08:18:24Z\", \"tool\": \"leansearch\", \"query\": \"A torus equivariant surjection of smooth connected algebraic groups is surjective on fixed subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SubAddAction.ofFixingAddSubgroup_equivariantMap_injective\", \"SubMulAction.ofFixingSubgroup_equivariantMap_injective\", \"SubAddAction.of_fixingAddSubgroupEmpty_mapScalars_surjective\", \"FixedPoints.toAlgAut_surjective\", \"SubMulAction.of_fixingSubgroupEmpty_mapScalars_surjective\", \"SubMulAction.fixingSubgroupEquivFixingSubgroup_coe_apply\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"SubMulAction.fixingSubgroupEquivFixingSubgroup\"], \"digest\": \"7693af0ec4500add\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective equivariant homomorphism connected smooth affine algebraic groups under a torus induces surjection on centralizers",
+   "results": "{\"t\": \"2026-10-24T08:18:32Z\", \"tool\": \"leanfinder\", \"query\": \"Surjective equivariant homomorphism connected smooth affine algebraic groups under a torus induces surjection on centralizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"CategoryTheory.PreGaloisCategory.AutGalois.π_surjective\", \"CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected\", \"MonoidHom.FixedPointFree.commutatorMap_surjective\", \"FixedPoints.toAlgAut_surjective\", \"CategoryTheory.PreGaloisCategory.autMap_surjective_of_isGalois\"], \"digest\": \"01c3aa1242783a6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed points functor on smooth connected affine algebraic groups is right exact for a torus action",
+   "results": "{\"t\": \"2026-10-24T08:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"The fixed points functor on smooth connected affine algebraic groups is right exact for a torus action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.Tor\", \"FDRep.instHasFiniteLimits\", \"CategoryTheory.RightExactFunctor.ofExact_obj\", \"CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\"], \"digest\": \"c8e6888bdb4a6a1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern abstract groups, topological tori, or general scheme properties; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus equivariant surjection of smooth connected affine algebraic groups is faithfully flat on fixed subgroups",
+   "results": "{\"t\": \"2026-10-24T09:29:56Z\", \"tool\": \"leanfinder\", \"query\": \"A torus equivariant surjection of smooth connected affine algebraic groups is faithfully flat on fixed subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"FixedPoints.toAlgAut_surjective\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"Module.FaithfullyFlat.of_comap_surjective\", \"Module.FaithfullyFlat.of_specComap_surjective\", \"CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\"], \"digest\": \"242ef6197d50c0bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read returned hits: AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, FixedPoints.toAlgAut_surjective, RingHom.FaithfullyFlat.codescendsAlong_surjective, Module.FaithfullyFlat.of_comap_surjective, Module.FaithfullyFlat.of_specComap_surjective, CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family. These concern abstract groups, ring lifts, normalization, or general flatness; none gives this algebraic-group assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "fixed.*surject|surject.*centralizer|torus",
+   "results": "{\"t\": \"2026-10-24T09:30:32Z\", \"tool\": \"grep\", \"query\": \"fixed.*surject|surject.*centralizer|torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fixed point group of a split torus preserves surjective homomorphisms of smooth connected affine group schemes",
+   "results": "{\"t\": \"2026-10-24T09:30:32Z\", \"tool\": \"leansearch\", \"query\": \"The fixed point group of a split torus preserves surjective homomorphisms of smooth connected affine group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.subgroup\", \"MulActionHom.map_mem_fixedBy\", \"FixedPoints.mem_subgroup\", \"FixedPoints.toAlgAut_surjective\", \"FixedPoints.subalgebra\", \"smul_mem_fixedPoints_of_normal\", \"MulActionHom.map_mem_fixedPoints\", \"fixingSubgroup\"], \"digest\": \"87078850f4edc849\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read returned hits: FixedPoints.subgroup, MulActionHom.map_mem_fixedBy, FixedPoints.mem_subgroup, FixedPoints.toAlgAut_surjective, FixedPoints.subalgebra, smul_mem_fixedPoints_of_normal, MulActionHom.map_mem_fixedPoints, fixingSubgroup. These concern abstract groups, ring lifts, normalization, or general flatness; none gives this algebraic-group assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", Function.Surjective",
+   "results": "{\"t\": \"2026-10-24T09:30:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: No hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient map between connected algebraic groups induces a surjection on torus centralizers even with inseparable kernel",
+   "results": "{\"t\": \"2026-10-24T09:30:35Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient map between connected algebraic groups induces a surjection on torus centralizers even with inseparable kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientGroup.rangeKerLift_surjective\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"Subgroup.quotientCentralizerEmbedding\", \"Subgroup.goursat_surjective\", \"QuotientGroup.map_surjective_of_surjective\", \"QuotientGroup.lift_surjective_of_surjective\", \"MonoidHom.range_eq_top_of_cancel\", \"QuotientAddGroup.lift_surjective_of_surjective\"], \"digest\": \"2074d5e7afd08659\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read returned hits: QuotientGroup.rangeKerLift_surjective, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Subgroup.quotientCentralizerEmbedding, Subgroup.goursat_surjective, QuotientGroup.map_surjective_of_surjective, QuotientGroup.lift_surjective_of_surjective, MonoidHom.range_eq_top_of_cancel, QuotientAddGroup.lift_surjective_of_surjective. These concern abstract groups, ring lifts, normalization, or general flatness; none gives this algebraic-group assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-central-multiplicative-quotient",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Torus fixed groups preserve surjections of connected affine algebraic groups. Corollary 3.3.5 proof, printed p.101: surjectivity on torus centralizers for surjections of smooth connected affine groups over a field. The scheme version uses the smooth fixed groups and the faithfully flat quotient map onto the group-theoretic image; it includes inseparable kernels.",
+   "via": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-equivariant-quotient-fixed-surjectivity",
+  "worker": "stage1",
+  "summary": "Q72 supplies an eight-step proof, one new generic reduced-kernel factorization prerequisite, and reuses fixed-group representability, tangent quotient, weights, smooth descent, homomorphism factorization and Nullstellensatz nodes. Statement unchanged, including arbitrary nonsmooth/disconnected kernels.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability and direct-images proof (3). This is a supporting algebraic-group input in its inherited alteration/moduli chain. blueprint_refs ancestor returns null (the chain terminates at a Lean module); retained that inherited null, with the precise Conrad p.101 place, rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic descent of smoothness over k along a faithfully flat finitely presented map, used for the scheme-theoretic image; no replacement of a unit step."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic affine Nullstellensatz detects equality of orbit morphisms and the zero image ideal over the algebraically closed field."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-over-field reducedness, needed for the image ideal argument, not a different route through the unit."
+   },
+   {
+    "node": "lem-pc-flat-compose",
+    "why": "Generic closure of flat scheme maps under composition for q^R."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic finite presentation of the composite map on affine coordinate rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-flat-compose",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-1bbbe5da5",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-1bbbe5da5 (reviewer sub-agent of L); spot-checked: First split of an unsplit item; the statement is unchanged (compared with the earlier copy in run N0 6993). Steps checked against the cited statements. S1: the new reduced-kernel factorization with A=R (r=0 allowed), then relative-torus-automorphism-fixed-group, which applies because P is smooth and connected. S2: homogeneous-cotangent gives the exact sequence 0→Lie L→Lie H→T_oP→0; the weight decomposition then lifts weight-zero vectors. S3: Lie(G^R)=(Lie G)^R, by reducing to the universal point over O(R)[ε]; correct. S4: homomorphism factorization, then smooth source descent, then smooth-subgroup-full-tangent on the connected P^R. S5: b is finite and radicial, so each k-point has a unique preimage; it is R(k)-fixed, and the Nullstellensatz on the reduced Laurent ring makes it fixed scheme-theoretically. S6: J^R is reduced and the image ideal vanishes at every k-point, so it is zero. S7: kernel identity. S8: the quotient clause gives J^R=H^R/(ker q)^R. The new node lem-sfb-reduced-normal-kernel-factorization is true: N_red is smooth over the perfect field; H×L and A×L are reduced, so L is normal and action-stable; b is an N/L-torsor, hence finite, flat and radicial. It is not a clause of the item and not a duplicate of affine-normal-quotient-geometry, homomorphism-factorization or radicial-isogeny-torus-centralizers. Every stmt_dep exists. Batch-5 flags: lem-trf-smooth-fpqc-base-descent and lem-trf-fppf-covering-base-change are generic descent leaves (sk-i-curve-zero, status mathlib), not steps of the trace formula or of Poincare duality, so both are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusEquivariantQuotientFixedSurjectivity",
+  "declaration": "AlgebraicGeometry.torus_equivariant_quotient_fixed_surjectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusEquivariantQuotientFixedSurjectivity.lean",
+  "statement": "theorem torus_equivariant_quotient_fixed_surjectivity {k : Type u} [Field k] [IsAlgClosed k] (H J R : Grp (Over (Spec (.of k)))) [IsAffine H.X.left] [Smooth H.X.hom] [ConnectedSpace H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] [IsAffine J.X.left] [Smooth J.X.hom] [ConnectedSpace J.X.left] [LocallyOfFiniteType J.X.hom] [QuasiCompact J.X.hom] (r : ℕ) (hR : Nonempty (R ≅ MultiplicativeType.splitTorus k r)) [ModObj R.X H.X] [ModObj R.X J.X] (hH : ∀ (U : Over (Spec (.of k))) (t : U ⟶ R.X) (x y : U ⟶ H.X), t • (x * y) = (t • x) * (t • y)) (hJ : ∀ (U : Over (Spec (.of k))) (t : U ⟶ R.X) (x y : U ⟶ J.X), t • (x * y) = (t • x) * (t • y)) (q : H ⟶ J) [Flat q.hom.hom.left] [Surjective q.hom.hom.left] [IsModHom R.X q.hom.hom] : ∃ (HF JF : Grp (Over (Spec (.of k)))) (iH : HF ⟶ H) (iJ : JF ⟶ J) (qF : HF ⟶ JF), IsClosedImmersion iH.hom.hom.left ∧ IsClosedImmersion iJ.hom.hom.left ∧ (∀ (U : Over (Spec (.of k))) (x : U ⟶ H.X), (∃ z : U ⟶ HF.X, z ≫ iH.hom.hom = x) ↔ x ∈ universalActionFixedPoints R H.X U) ∧ (∀ (U : Over (Spec (.of k))) (x : U ⟶ J.X), (∃ z : U ⟶ JF.X, z ≫ iJ.hom.hom = x) ↔ x ∈ universalActionFixedPoints R J.X U) ∧ qF ≫ iJ = iH ≫ q ∧ Flat qF.hom.hom.left ∧ Surjective qF.hom.hom.left ∧ LocallyOfFinitePresentation qF.hom.hom.left ∧ QuasiCompact qF.hom.hom.left ∧ QuasiSeparated qF.hom.hom.left ∧ (∀ (U : Over (Spec (.of k))) (x : U ⟶ H.X), (∃ z : U ⟶ GrpObj.ker qF.hom.hom, z ≫ GrpObj.kerι qF.hom.hom ≫ iH.hom.hom = x) ↔ x ≫ q.hom.hom = 1 ∧ x ∈ universalActionFixedPoints R H.X U) ∧ IsFppfGroupQuotient (Grp.ofHom (GrpObj.kerι qF.hom.hom)) qF",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6cb61de2",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Conrad Cor 3.3.5 p.101: k alg closed; H,J smooth connected affine finite-type Grp(Over Spec k); R ≅ splitTorus k r (r=0 allowed); ModObj actions + multiplicativity = action by automorphisms; q flat+surjective, IsModHom equivariant. Conclusion: closed subgroups HF,JF representing universalActionFixedPoints on all U; qF pinned by its commuting square; Flat/Surjective/LFP/QC/QS; ker qF points = {x | x≫q=1 ∧ universally fixed} on all U; IsFppfGroupQuotient(kerι qF, qF). No extra hypotheses; single universe u. New def node universalActionFixedPoints is a real predicate matching its node; no existing duplicate in the live lean trees. Both statements verbatim; stmt_deps added (tori, fppf quotient, new def) are used and landed or new. 8-step proof docstring, only sorry. Notes: second reading is a self-reading but substantive; parallel Q87 delivery eb7c of the same item with its own UniversalFixedSubgroup def is in review, so whichever lands second must rebind."
+ }
+}

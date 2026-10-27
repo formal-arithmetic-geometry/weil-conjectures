@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-charzero-lie-detects-factorization",
+ "kind": "statement",
+ "title": "Characteristic-zero Lie containment detects factorization through a closed subgroup",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field]. Let $G,H$ be affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], with $G$ smooth and connected [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $K\\hookrightarrow H$ be a closed subgroup scheme [def-sc-group-scheme-subgroup] and $f:G\\to H$ a $k$-group-scheme homomorphism. Write $\\operatorname{Lie}(J)=T_{J/k,e}$ for the tangent space of any such group [def-sc-scheme-tangent-space], and regard $\\operatorname{Lie}(K)$ as a subspace of $\\operatorname{Lie}(H)$ by its closed immersion. If $df_e(\\operatorname{Lie}(G))\\subseteq\\operatorname{Lie}(K)$, then $f$ factors uniquely through $K\\hookrightarrow H$ as a homomorphism of $k$-group schemes. No smoothness, connectedness or normality is assumed for $K$ or $H$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.14, printed p.190 (Lie preserves fibre products), Proposition 10.15, printed pp.190-191, and Cartier Theorem 3.23, printed p.71, applied to G times_H K. This factorization form is an agent-stated immediate corollary of those results, not a separate numbered theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra-derivation",
+  "lem-ag-lie-identity-tangent-equiv"
+ ],
+ "proof": [
+  {
+   "text": "Form $P=G\\times_H K$, with projections $p:P\\to G$ and $q:P\\to K$. The fibre-product universal property gives $P(R)=\\{(g,a):f(g)=i(a)\\}$ for every commutative $k$-algebra $R$, where $i:K\\hookrightarrow H$. Componentwise multiplication and inversion preserve this condition because $f,i$ are homomorphisms; the identity pair also satisfies it. These operations are morphisms by the universal property and satisfy the group diagrams after both projections, so $P$ is a group scheme and $p,q$ are homomorphisms. Base change of $i$ makes $p$ a closed immersion. Thus $P$ is affine: if $G=\\operatorname{Spec}C$, then $P=\\operatorname{Spec}(C/I)$ by the affine description of closed immersions. The affine finite-type algebra lemma makes $C$ finitely generated over $k$, hence the images of those generators generate $C/I$. The definition of finite type, using this single affine chart, makes $P$ finite type over $k$. In particular $p$ is a closed subgroup scheme.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "lem-pc-affine-finite-type-algebra",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.14 (fibre products of algebraic groups); affine closed-immersion description in Stacks 01QO and finite-type affine characterization 01T2."
+   }
+  },
+  {
+   "text": "Compute the differential of $p$ directly on tangent vectors. Put $D=\\operatorname{Spec}(k[\\epsilon]/(\\epsilon^2))$. Given $v\\in T_{G/k,e_G}$, the hypothesis supplies $w\\in T_{K/k,e_K}$ with $f\\circ v=i\\circ w$. The fibre-product universal property gives a unique $u:D\\to P$ with $p\\circ u=v$ and $q\\circ u=w$. Its restriction to $\\operatorname{Spec}k\\hookrightarrow D$ is the identity pair, so $u\\in T_{P/k,e_P}$ and $dp_e(u)=v$. Thus $dp_e$ is surjective. It is also injective: $i$ is injective on points over every $k$-algebra by the definition of a closed subgroup; equal $G$-projections force equal $K$-projections and hence equal maps into $P$. This is the fibre-product tangent calculation, without any smoothness assumption on $H$ or $K$.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "def-pc-fibre-product",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.14, printed p.190, Lie preserves fibred products; here the dual-number proof is written explicitly."
+   }
+  },
+  {
+   "text": "Apply Cartier smoothness to the finite-type $k$-group scheme $P$. Characteristic zero is precisely its field hypothesis, so $P$ is smooth. Now apply the smooth closed subgroup full-tangent criterion to $p:P\\hookrightarrow G$: the ambient group $G$ is affine, finite type and connected by hypothesis; $P$ is smooth by Cartier; and $dp_e$ is surjective by the preceding step. It follows that $p$ is an isomorphism of group schemes over $k$.",
+   "uses": [
+    "lem-sfb-cartier-characteristic-zero-smooth",
+    "lem-sfb-smooth-subgroup-full-tangent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 3.23, printed p.71, and Proposition 10.15, printed pp.190-191. Cartier also: Stacks Tag 047N, groupoids-lemma-group-scheme-characteristic-zero-smooth."
+   }
+  },
+  {
+   "text": "Define $\\widetilde f=q\\circ p^{-1}:G\\to K$. It is a homomorphism, since both projections and the inverse of the group-scheme isomorphism $p$ are homomorphisms. The fibre-product relation $i\\circ q=f\\circ p$ yields $i\\circ\\widetilde f=f$. If $h:G\\to K$ is any other homomorphism with $i\\circ h=f$, then $(\\mathrm{id}_G,h):G\\to P$ is the unique lift of that pair. Its composite with $p$ is $\\mathrm{id}_G$, hence it equals $p^{-1}$, and projecting to $K$ gives $h=\\widetilde f$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.14-10.15, factorization corollary by the universal property of the inverse image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-pc-affine-finite-type-algebra",
+  "def-weil-finite-type-morphism",
+  "def-sc-scheme-tangent-space",
+  "lem-sfb-cartier-characteristic-zero-smooth",
+  "lem-sfb-smooth-subgroup-full-tangent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Factorization corollary assembled from 10.14, Proposition 10.15 (pp.190-191), and Theorem 3.23 (p.71); explicit universal-property and dual-number arguments by Q158."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a connected algebraic group in characteristic zero factors through a closed subgroup if its differential does",
+   "results": "{\"t\": \"2026-10-24T08:32:19Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a connected algebraic group in characteristic zero factors through a closed subgroup if its differential does\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_mono_of_isConnected\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"controlled_closure_of_complete\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"Subgroup.connectedComponentOfOne\"], \"digest\": \"4f32ebe2ba8540b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie subalgebra inclusions or Galois/topological categories. Mathlib has no algebraic-group differential containment criterion; the AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characteristic zero closed subgroup containing the Lie algebra of a connected algebraic group is the whole group",
+   "results": "{\"t\": \"2026-10-24T08:32:18Z\", \"tool\": \"leanfinder\", \"query\": \"Characteristic zero closed subgroup containing the Lie algebra of a connected algebraic group is the whole group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.engel_zero\", \"LieAlgebra.IsKilling.invtSubmoduleToLieIdeal_top\", \"LieAlgebra.le_zeroRootSubalgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.zeroRootSubalgebra_eq_of_is_cartan\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieSubalgebra.ucs_eq_self_of_isCartanSubalgebra\"], \"digest\": \"2ac637c620550481\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie subalgebra inclusions or Galois/topological categories. Mathlib has no algebraic-group differential containment criterion; the AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedSubgroupScheme",
+   "results": "{\"t\": \"2026-10-24T08:32:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedSubgroupScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsClosedSubgroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie subalgebra inclusions or Galois/topological categories. Mathlib has no algebraic-group differential containment criterion; the AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.*(subgroup|factor)|differential.*subgroup|Cartier",
+   "results": "{\"t\": \"2026-10-24T08:32:16Z\", \"tool\": \"grep\", \"query\": \"Lie.*(subgroup|factor)|differential.*subgroup|Cartier\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie subalgebra inclusions or Galois/topological categories. Mathlib has no algebraic-group differential containment criterion; the AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebra detects containment of connected algebraic groups characteristic zero",
+   "results": "{\"t\": \"2026-10-24T08:32:17Z\", \"tool\": \"leansearch\", \"query\": \"Lie algebra detects containment of connected algebraic groups characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.mem_ofLe\", \"GroupLieAlgebra\", \"LieSubalgebra.le_def\", \"LieSubalgebra.gi\", \"LieSubalgebra.lieSpan_le\", \"LieSubalgebra.subset_lieSpan\", \"LieSubalgebra.toSubmodule_le_toSubmodule\", \"LieSubalgebra.mem_coe\"], \"digest\": \"eba64387e639920e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are Lie subalgebra inclusions or Galois/topological categories. Mathlib has no algebraic-group differential containment criterion; the AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GrpObj, IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T09:07:18Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GrpObj, IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GrpObj'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Lie.*(subgroup|factor)|differential.*subgroup|Cartier",
+   "results": "{\"t\": \"2026-10-24T09:07:19Z\", \"tool\": \"grep\", \"query\": \"Lie.*(subgroup|factor)|differential.*subgroup|Cartier\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth closed subgroup with the same tangent space as a connected algebraic group is the group",
+   "results": "{\"t\": \"2026-10-24T09:07:19Z\", \"tool\": \"leansearch\", \"query\": \"A smooth closed subgroup with the same tangent space as a connected algebraic group is the group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup.mk.inj\", \"ClosedSubgroup.recOn\", \"ClosedSubgroup.ext\", \"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup.mk.injEq\", \"ClosedSubgroup\", \"ClosedSubgroup.ext_iff\", \"ClosedAddSubgroup.mk.inj\"], \"digest\": \"2a64d3755b77e3a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth closed subgroup of a connected algebraic group with equal tangent Lie algebra is the whole group over any field",
+   "results": "{\"t\": \"2026-10-24T09:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth closed subgroup of a connected algebraic group with equal tangent Lie algebra is the whole group over any field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"GroupLieAlgebra\", \"instLieGroupOfTopWithTopENat\", \"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfTopWithTopENat\", \"instLieGroupOfNatWithTopENat\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\"], \"digest\": \"b748f91f84444c64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a connected algebraic group in characteristic zero factors through a closed subgroup when its differential lands in the subgroup Lie algebra",
+   "results": "{\"t\": \"2026-10-24T09:09:16Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a connected algebraic group in characteristic zero factors through a closed subgroup when its differential lands in the subgroup Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupLieAlgebra\", \"LieHom.surjective_rangeRestrict\", \"LieAlgebra.IsExtension.range_eq_top\", \"Function.Surjective.isEngelian\", \"controlled_closure_of_complete\", \"LieHom.rangeRestrict_apply\", \"LieHom.mem_range\", \"LieAlgebra.Extension.incl_apply_mem_ker\"], \"digest\": \"7032f697ded2ee40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary field a smooth closed algebraic subgroup with surjective tangent inclusion equals its connected ambient group",
+   "results": "{\"t\": \"2026-10-24T09:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"Over an arbitrary field a smooth closed algebraic subgroup with surjective tangent inclusion equals its connected ambient group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"instLieGroupOfTopWithTopENat\", \"Subgroup.coe_pathComponentOne\", \"Subgroup.Normal.pathComponentOne\", \"LieGroup\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"instLieGroupOfNatWithTopENat\"], \"digest\": \"fb010e0089eb68b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(Lie|tangent).*(subgroup|closedImmersion)|same.*Lie",
+   "results": "{\"t\": \"2026-10-24T09:10:19Z\", \"tool\": \"grep\", \"query\": \"(Lie|tangent).*(subgroup|closedImmersion)|same.*Lie\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"8eadb81392555972\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T09:10:20Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\"], \"digest\": \"dde6e3f6ca46fb98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern topological/manifold Lie groups and abstract Lie homomorphisms; Loogle gives only general closed-immersion properties (or unknown group-scheme identifier); source grep gives no algebraic-group tangent containment criterion. None states the smooth closed subgroup criterion or the factorization criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-charzero-ad-nilpotence-group-criterion",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction. Supporting prerequisite: Proposition 17.80 proof, printed p.378, characteristic-zero exclusion, read with additive Jordan decomposition (17.74, p.377), Proposition 10.15 (p.190), and descending central series (6.38, p.133). This is an agent-stated intermediate criterion implicit in the exclusion, not a separately numbered assertion in Milne. Springer 1998, 13.3.5, cited there for details, is WANTED. Supporting step: Integrating the lowering-operator subgroup of GL(g) using Cartier smoothness and Milne 10.14-10.15.",
+   "via": [
+    "lem-sfb-charzero-ad-nilpotence-group-criterion",
+    "lem-sfb-central-semisimple-restricted-subalgebra",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-charzero-lie-detects-factorization",
+  "worker": "stage1",
+  "summary": "Q158 retains the statement and splits its inverse-image proof into group construction, explicit tangent lifting, Cartier plus the smooth full-tangent subgroup criterion, and unique factorization. One new statement-only supporting node is Milne 10.15 over arbitrary fields (any characteristic). Searches of the full DAG, blueprint and project Lean exclude an existing general match; searches are logged. No Lean written or compiled.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/linearization/PGL chain; local prerequisite recorded in the inherited place ending in Milne 10.14-10.15. Realizes precisely the full-tangent factorization used by lem-sfb-charzero-ad-nilpotence-group-criterion. The ancestor tool returns None; the inherited null from.node and via chain are retained. No unit or chapter route changes. Whole-blueprint searches: Lie algebra, equal Lie, smooth subgroup.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine finite-type coordinate-ring characterization, needed only to verify that the closed inverse-image group has finite type; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-20f1f8223",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-20f1f8223 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item, the new node, every cited statement, and the source: Milne Algebraic Groups 10.14 and Prop 10.15 with its proof and counterexamples (pp.190-191), and Cartier via lem-sfb-cartier-characteristic-zero-smooth (Stacks 047N). The item statement is unchanged from the Q141 base, which had an empty proof. Step 1: P=G×_H K is a group scheme; p is a closed immersion by base change (01QR leaf); P=Spec(C/I) by the affine description of closed immersions; and P is of finite type because lem-pc-affine-finite-type-algebra (01T2) makes C finitely generated. Step 2: tangent surjectivity of p follows from the dual-number lift and uniqueness of the induced morphism, which shows the lift restricts to e_P. Step 3: P is smooth by Cartier in characteristic 0, and the new node applies with A=G (affine, finite type, connected) and B=P. Step 4: f̃=q∘p⁻¹, and uniqueness holds because (id,h) is a section of the isomorphism p. Every hypothesis is in force where it is used. The new node lem-sfb-smooth-subgroup-full-tangent is exactly Milne 10.15 over an arbitrary field; I checked it against Milne's dimension-chain proof and on small cases: B=A, α_p⊂G_a (excluded, B not smooth), G_m×ℤ/2 (excluded, A disconnected), e⊂α_p and G_m⊂G_m×α_p (tangent map not surjective). It is statement-only, self-contained and links every notion to a definition node. It is not a duplicate: sk-p-geometry is in another unit and works over an algebraically closed field of characteristic 0; lem-wf-same-lie-closed-subgroup covers only Q̄_ℓ matrix groups; lem-sfb-smooth-subgroup-tangent-generation is Corollary 10.17 over an algebraically closed field. It does not restate the item. I accept the declared tool use lem-pc-affine-finite-type-algebra as a generic fact. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CharZeroLieDetectsFactorization",
+  "declaration": "AlgebraicGeometry.existsUnique_factorization_of_lie_containment_of_charZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/CharZeroLieDetectsFactorization.lean",
+  "statement": "theorem existsUnique_factorization_of_lie_containment_of_charZero (k : Type u) [Field k] [CharZero k] (G H K : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [GrpObj K] [IsAffine G.left] [IsAffine H.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [Smooth G.hom] [ConnectedSpace G.left] (i : K ⟶ H) [IsClosedSubgroupScheme i] (f : G ⟶ H) [IsMonHom f] (hLie : ∀ v : schemeTangentSpace k G.left G.hom (GrpObj.unitSection G (IsLocalRing.closedPoint k)), ∃ w : schemeTangentSpace k K.left K.hom (GrpObj.unitSection K (IsLocalRing.closedPoint k)), GrpObj.differential f ((GrpObj.lieIdentityTangentEquiv G).symm v) = GrpObj.differential i ((GrpObj.lieIdentityTangentEquiv K).symm w)) : ∃! g : G ⟶ K, IsMonHom g ∧ g ≫ i = f",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c5ade6c9",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Item node differs from live only in lean and stmt_deps; added def-wf-lie-algebra-derivation (owner of GrpObj.Lie/differential) and lem-ag-lie-identity-tangent-equiv; no cycle (BFS); the 8 dep records equal live; lean.statement verbatim. Mechanical finding: the statement uses GrpObj.lieIdentityTangentEquiv, which is that theorem node's own constructed linear equivalence (its module has only that def and _apply), so it genuinely depends on the theorem's object: PASS on that point. Maths matches the node and Milne 10.14/10.15 + Cartier 3.23: char-0 field, G/H affine finite type (LocallyOfFiniteType+QuasiCompact), G smooth and connected, IsClosedSubgroupScheme i, IsMonHom f; hLie is equivalent to range df ⊆ range di since the equivalences are bijections; conclusion ∃! g, IsMonHom g ∧ g ≫ i = f; no assumptions on K/H; single universe u. Edge cases K=H, K=e, disconnected G, char p Frobenius checked. One sorry, no defs, source/blueprint/proof docstrings present, both report sections present. No compile (no file changed). Advisory: redundant public SchemeTangentSpace import."
+ }
+}

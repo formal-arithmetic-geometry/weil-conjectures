@@ -1,0 +1,372 @@
+{
+ "id": "lem-sfb-nodal-uniform-smooth-divisor",
+ "kind": "statement",
+ "title": "Uniform smooth-support divisors for numerically trivial twists on a nodal curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure] and let $C/k$ be a nonempty proper connected reduced nodal curve of pure dimension one [def-trf-nodal-geometric-fibres], [def-weil-proper-morphism], [def-pc-reduced-scheme], [def-weil-pure-dimension]. Put $g=\\dim_kH^1(C,\\mathcal O_C)$, with cohomology as in [def-sc-sheaf-cohomology-functor]. For every reduced irreducible component $Z$, let $\\nu_Z:\\widetilde Z\\to C$ be its normalization map [def-weil-pbc-reduced-normalization]. For an invertible module $A$ [def-sc-invertible-module], write $\\deg_Z(A)=\\chi(\\widetilde Z,\\nu_Z^*A)-\\chi(\\widetilde Z,\\mathcal O_{\\widetilde Z})$ [def-pc-degree-line-bundle], [def-pc-euler-characteristic], [def-pc-module-pullback]. Let $H,L$ be invertible modules with $\\deg_Z(H)>0$ and $\\deg_Z(L)=0$ for every $Z$, and put $h=\\sum_Z\\deg_Z(H)$. For every integer $m\\geq2g+1$ there is an effective Cartier divisor $E$ [def-pc-divisor-line-bundle] on $C$, supported entirely in the smooth locus of $C/k$ [def-sbc-smooth-morphisms], such that\n$$L\\otimes H^{\\otimes m}\\cong\\mathcal O_C(E),\\qquad \\dim_k\\Gamma(E,\\mathcal O_E)=mh.$$\nTensor products and powers are those of invertible modules [def-pur-sheaf-tensor-product]. The divisor can have multiplicities; no reducedness of $E$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E3F, lemma-global-generation. The uniform nodal consequence is obtained by the subcurve genus bound and avoidance of finitely many section hyperplanes; its full argument and the existing degree inputs are recorded in report.md. This consequence is not asserted to be the verbatim statement of 0E3F."
+ },
+ "stmt_deps": [
+  "def-pc-degree-line-bundle",
+  "def-pc-divisor-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-module-pullback",
+  "def-pc-reduced-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-sc-sheaf-cohomology-functor",
+  "def-trf-nodal-geometric-fibres",
+  "def-weil-algebraic-closure",
+  "def-weil-field",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=L\\otimes H^{\\otimes m}$. Since $g$ is a vector-space dimension, $g\\geq0$ and $m\\geq1$. Tensor products and pullbacks preserve invertibility by [lem-weil-pbc-invertible-pullback-tensor]. Apply [lem-trf-proper-field-invertible-coherent] to $C$: it is Noetherian and $A,\\mathcal O_C$ are coherent. Every closed subscheme $B\\subseteq C$ is proper by [lem-weil-pbc-closed-immersion-proper], hence is Noetherian by the same proper-field lemma. In particular its invertible modules and structure sheaf are coherent. Their cohomology is finite-dimensional by [lem-pc-euler-characteristic-well-defined].",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0AYR and 0AYX; proper-coherent finiteness as in coherent.tex Tags 02O5--02O6."
+   }
+  },
+  {
+   "text": "Let $B\\subseteq C$ be any nonempty reduced connected closed subscheme of dimension one. It is a reduced union of irreducible components of $C$: in a one-dimensional Noetherian space every proper irreducible closed subset of an irreducible component is a closed point; any zero-dimensional component of $B$ would be an isolated open-and-closed point, contrary to connectedness and dimension one. Form $0\\to I_B\\to\\mathcal O_C\\to i_*\\mathcal O_B\\to0$. The ideal is quasi-coherent by [def-sbc-closed-immersion-ideal-sheaf]; on a Noetherian affine its ideal is finitely generated, hence it is coherent by [pqf-lem-coherent-ft-locnoeth]. Thus [lem-sc-noetherian-cohomology-above-dimension] gives $H^2(C,I_B)=0$. Apply [lem-sfb-closed-immersion-cokernel-cohomology] to this sequence: $H^1(C,\\mathcal O_C)\\to H^1(B,\\mathcal O_B)$ is surjective, so $g_B:=h^1(B,\\mathcal O_B)\\leq g$. The same vanishing theorem kills $H^q(B,\\mathcal O_B)$ for $q>1$, and [lem-weil-pbc-proper-reduced-algclosed-global-sections-product] gives $H^0(B,\\mathcal O_B)=k$. Consequently $\\chi(B,\\mathcal O_B)=1-g_B$. This includes $B=C$; no smoothness of $B$ is used.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sfb-closed-immersion-cokernel-cohomology",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3F subcurve condition; genus bound from the closed-subscheme cohomology sequence, rather than an uncited dual-graph calculation."
+   }
+  },
+  {
+   "text": "For each reduced irreducible component $Z$, [lem-sc-normalization-properties](a) makes its normalization finite, proper, birational and one-dimensional. Thus [lem-per-birational-curve-degree-invariance] identifies the Euler degree on $Z$ with the degree on its normalization used in the item. Apply [lem-trf-degree-weighted-irreducible-components] on $B$ and on $C$. Since these schemes are reduced, each generic local ring is a field (a reduced local ring with just one prime), so its length over itself is one. Hence for every invertible module $M$ on $C$,\n$$\\deg_B(M|_B)=\\sum_{Z\\subseteq B}\\deg_Z(M),\\qquad \\deg_C M=\\sum_{Z\\subseteq C}\\deg_Z(M).$$\nThese sums are finite. Pullback commutes with tensor products by [lem-weil-pbc-invertible-pullback-tensor]. The tensor-degree formula [lem-trf-curve-degree-tensor-additive], iterated $m$ times on the normalized components, gives $\\deg_Z(A)=\\deg_Z(L)+m\\deg_Z(H)=m\\deg_Z(H)$. Each positive integer $\\deg_Z(H)$ is at least one. Since $B$ contains a component, $\\deg_B(A|_B)\\geq m\\geq2g+1\\geq2g_B+1$. Also $\\deg_C A=mh$.",
+   "uses": [
+    "lem-sc-normalization-properties",
+    "lem-per-birational-curve-degree-invariance",
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0AYU (lemma-degree-birational-pullback), 0AYW (lemma-degree-in-terms-of-components), 0AYX (lemma-degree-tensor-product)."
+   }
+  },
+  {
+   "text": "Fix any reduced closed point $x\\subset C$. Its residue field is $k$ by [lem-weil-pbc-closed-point-residue-field-base]. For a reduced closed subcurve $B$, the scheme $x\\times_C B$ is either empty or $x$: its ring is the quotient of $k$ by the image of the ideal of $B$, which is either $k$ or zero. Thus its space of functions has dimension at most one. If $H^1(C,I_x\\otimes A)\\ne0$, apply [lem-sfb-curve-ideal-h1-subcurve-obstruction] to $C,A,x$. It supplies a nonempty reduced connected closed subcurve $B$ with\n$$\\deg_B(A|_B)\\leq -2\\chi(B,\\mathcal O_B)+\\dim_k\\Gamma(x\\times_C B,\\mathcal O)\\leq2g_B-1.$$\nThis contradicts Step 3. Therefore $H^1(C,I_x\\otimes A)=0$ for every closed $x$. The obstruction lemma assumes properness, reducedness, connectedness and dimension one, all present; it does not require irreducibility or projectivity.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), specialized to the reduced point x; the numerical argument underlying Tag 0E3F."
+   }
+  },
+  {
+   "text": "Tensor the ideal sequence of $x$ with $A$. It remains exact by [lem-sc-ext-tensor-exact]. By [lem-pc-closed-immersion-coherent-cohomology] its quotient is $i_*(A|_x)$. The cohomology sequence [lem-sfb-closed-immersion-cokernel-cohomology] and Step 4 now make the evaluation $V:=H^0(C,A)\\to A(x)$ surjective. In particular its kernel is a proper $k$-linear subspace for every closed point $x$. By Step 1, $V$ is finite-dimensional. This argument supplies the point evaluations needed below directly, without using any uncited global-generation theorem.",
+   "uses": [
+    "lem-sc-ext-tensor-exact",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-sfb-closed-immersion-cokernel-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0E3E--0E3F, evaluation by the point ideal sequence; cohomology.tex Tag 02UV for closed pushforward."
+   }
+  },
+  {
+   "text": "The nonsmooth locus $N$ of $C/k$ is a finite set of closed $k$-points: apply [lem-trf-nodal-marking-special-point-incidence] with the identity extension $k\\subseteq k$ and empty marking. Its finite-type, pure-dimension and split-node hypotheses are precisely those of $C$. The components of $C$ are a finite list by Step 3. For each component choose a closed point $q_Z$ on it using [lem-sc-lft-over-field-jacobson-space]: the closed points of $C$ are dense in every nonempty closed component. Let $T=N\\cup\\{q_Z\\}_Z$, a finite set. The field $k$ is infinite by [lem-sfb-separably-closed-field-infinite], since algebraic closedness implies that every nonconstant separable polynomial has a root. Apply [lem-pc-finite-linear-avoidance] to the kernels of the evaluations $V\\to A(x)$ for $x\\in T$; they are proper by Step 5. Choose $s\\in V$ outside their union. It is nonzero at every node and every $q_Z$, hence its restriction to each component has nonzero generic value: a section of an invertible module on an integral scheme that is zero generically is zero on every affine trivialization, since the affine domain injects into its fraction field, and so is zero at $q_Z$.",
+   "uses": [
+    "lem-trf-nodal-marking-special-point-incidence",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-sfb-separably-closed-field-infinite",
+    "lem-pc-finite-linear-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59--0C5B for the finite nodal singular set; finite linear avoidance as in the proof of Tag 0E3F; varieties.tex Tag 0478 for closed points."
+   }
+  },
+  {
+   "text": "Let $E=Z(s)$ as in [def-pc-zero-scheme]. On an affine trivialization $A|_U=\\mathcal O_Ue$, write $s=ae$. The coordinate ring $R$ is reduced and $a$ is nonzero modulo every minimal prime meeting $U$, by Step 6. If $ab=0$, then in each domain $R/\\mathfrak p$ for a minimal prime, $b=0$; hence $b$ belongs to the intersection of the minimal primes, the nilradical, which is zero. Thus $a$ is a nonzerodivisor. Its principal ideal is the local defining ideal of $E$, so $E$ is an effective Cartier divisor by [def-pc-divisor-line-bundle]. At every point of $N$, the value $s(x)$ is nonzero, so the local coefficient is a unit and $x\\notin E$. Therefore $E$ is supported in the smooth locus. This proves regularity on the whole reduced curve, including at nodes, rather than assuming that nonzero sections on a reducible curve are automatically regular.",
+   "uses": [
+    "def-pc-zero-scheme",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OQ (definition-zero-scheme-s), local principal-ideal construction; regularity checked directly in a reduced ring."
+   }
+  },
+  {
+   "text": "The section $s:\\mathcal O_C\\to A$ has Cartier zero scheme by Step 7, so [lem-pc-zero-scheme-divisor-iso] gives $A\\cong\\mathcal O_C(E)$. The degree-length clause of [lem-pc-degree-base-change], applied on the proper one-dimensional scheme $C$ to the effective Cartier divisor $E$, gives\n$$\\dim_k\\Gamma(E,\\mathcal O_E)=\\deg_C\\mathcal O_C(E)=\\deg_C A=mh,$$\nwhere the last equality is Step 3. No assertion that $s$ has simple zeros was made, so multiplicities in $E$ are retained, as required.",
+   "uses": [
+    "lem-pc-zero-scheme-divisor-iso",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYY (lemma-degree-effective-Cartier-divisor); divisors.tex Tag 01X0 (lemma-characterize-OD)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-pc-zero-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-degree-base-change",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-finite-linear-avoidance",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-per-birational-curve-degree-invariance",
+  "lem-sc-ext-tensor-exact",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-normalization-properties",
+  "lem-sfb-closed-immersion-cokernel-cohomology",
+  "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+  "lem-sfb-separably-closed-field-infinite",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-nodal-marking-special-point-incidence",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tags 0E3E--0E3F: existing ideal-cohomology obstruction gives the required evaluations; agent assembly with the closed-subcurve genus bound, component degrees and finite avoidance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a connected reduced nodal curve of arithmetic genus g a line bundle with degree at least 2g on every connected subcurve is globally generated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sufficiently positive twist of a multidegree zero line bundle on a nodal curve admits an effective Cartier divisor supported in the smooth locus with uniform degree bound",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"{n : ℤ} (hn : 2 < n.natAbs) (h : (n : R) ≠ 0) : 0 < (W.preΨ n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is an integer with $ |n| > 2 $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-division polynomial $ \\\\Psi_n $ associa\"}\n  {\"name\": \"WeierstrassCurve.natDegree_ΨSq_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"[NoZeroDivisors R] {n : ℤ} (hn : 1 < n.natAbs) (h : (n : R) ≠ 0) : 0 < (W.ΨSq n).natDegree\", \"doc\": \"For a Weierstrass curve $W$ over a ring $R$ with no zero divisors, if $n$ is an integer with $|n| > 1$ and $n \\\\neq 0$ in $R$, then the natural degree of the squared division polynomial $\\\\Psi^{(n)}(X)$\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"{n : ℕ} (hn : 2 < n) (h : (n : R) ≠ 0) : 0 < (W.preΨ' n).natDegree\", \"doc\": \"For a Weierstrass curve $ W $ over a commutative ring $ R $, if $ n $ is a natural number satisfying $ 2 < n $ and $ n \\neq 0 $ in $ R $, then the natural degree of the pre-normalized division polynomi\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ'_le\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(n : ℕ) : (W.preΨ' n).natDegree ≤ (n ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any natural number $ n $, the natural degree of the $ n $-th pre-normalized division polynomial $ \\\\Psi'_n $ associated with a Weierstrass curve satisfies $ \\\\deg(\\\\Psi'_n) \\\\leq \\\\frac{n^2 - 4}{2} $ i\"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_zero\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\", \"type\": \"(k : ℕ) (D : ℕ → ℕ) : degBound k D 0 = 1\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound function for multivariate polynomials evaluated at the zero polynomial yields 1, i.e., $\\\\text{degBound}(k, D, \"}\n  {\"name\": \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\", \"type\": \"(k : ℕ) (D : ℕ → ℕ) : ∀ n, 0 < degBound k D n\", \"doc\": \"For any natural number $k$ and function $D : \\\\mathbb{N} \\\\to \\\\mathbb{N}$, the degree bound $\\\\text{degBound}\\\\,k\\\\,D\\\\,n$ satisfies $0 < \\\\text{degBound}\\\\,k\\\\,D\\\\,n$ for all $n \\\\in \\\\mathbb{N}$.\"}\n  {\"name\": \"WeierstrassCurve.natDegree_preΨ_le\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(n : ℤ) : (W.preΨ n).natDegree ≤ (n.natAbs ^ 2 - if Even n then 4 else 1) / 2\", \"doc\": \"For any integer $ n $, the natural degree of the pre-division polynomial $ \\\\Psi_n $ for a Weierstrass curve satisfies $ \\\\deg(\\\\Psi_n) \\\\leq \\\\frac{|n|^2 - 4}{2} $ if $ n $ is even, and $ \\\\deg(\\\\Psi_n) \\\\le\"}\n  {\"name\": \"WeierstrassCurve.natDegree_Ψ₂Sq_pos\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.DivisionPolynomial.Degree\", \"type\": \"(h : (4 : R) ≠ 0) : 0 < W.Ψ₂Sq.natDegree\", \"doc\": \"If $4 \\\\neq 0$ in the ring $R$, then the natural degree of the second division polynomial $\\\\Psi_2^2$ for a Weierstrass curve is positive.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GloballyGenerated\", \"genus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(nodal|subcurve|arithmeticGenus|arithmetic_genus|multidegree).*(section|generat|divisor)|(section|generat|divisor).*(nodal|subcurve|arithmeticGenus|arithmetic_genus|multidegree)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"529\", \"text\": \"section Nodal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"578\", \"text\": \"theorem eval_nodal_not_at_node [Nontrivial R] [NoZeroDivisors R] {x : R}\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"630\", \"text\": \"section NodalWeight\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"671\", \"text\": \"  simp_rw [Lagrange.basis, basisDivisor, nodalWeight, prod_mul_distrib, map_prod, ←\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read all hits; none concerns line-bundle degrees or a relative curve Hilbert/divisor functor, and none specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "(nodal|subcurve|multidegree|arithmeticGenus).*(section|divisor|generat)|(section|divisor|generat).*(nodal|subcurve|multidegree|arithmeticGenus)",
+   "results": "Read 4 hits: Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean; semantic hits are localization, smooth-locus, Weierstrass or analytic divisor facts; grep hits are Lagrange interpolation. None states the nodal-curve numerical divisor assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Numerically trivial twists of an ample line bundle on a nodal curve have an effective divisor in the smooth locus for exponent at least twice the arithmetic genus plus one",
+   "results": "Read 8 hits: Algebra.smoothLocus, WeierstrassCurve.natDegree_preΨ_pos, WeierstrassCurve.Jacobian.nonsingularLift_iff, MeromorphicOn.divisor_zpow, WeierstrassCurve.natDegree_preΨ'_pos, WeierstrassCurve.Jacobian.NonsingularLift, WeierstrassCurve.natDegree_ΨSq_pos, MeromorphicOn.divisor_pow; semantic hits are localization, smooth-locus, Weierstrass or analytic divisor facts; grep hits are Lagrange interpolation. None states the nodal-curve numerical divisor assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GloballyGenerated\"",
+   "results": "Read 0 hits: ; semantic hits are localization, smooth-locus, Weierstrass or analytic divisor facts; grep hits are Lagrange interpolation. None states the nodal-curve numerical divisor assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle of sufficiently large positive degree on every component of a nodal proper curve has a regular section avoiding all nodes",
+   "results": "Read 8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'; semantic hits are localization, smooth-locus, Weierstrass or analytic divisor facts; grep hits are Lagrange interpolation. None states the nodal-curve numerical divisor assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf on a reduced proper curve with degree at least twice the genus on every connected subcurve is generated by global sections",
+   "results": "Read 8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, WeierstrassCurve.Affine.CoordinateRing.XYIdeal'; semantic hits are localization, smooth-locus, Weierstrass or analytic divisor facts; grep hits are Lagrange interpolation. None states the nodal-curve numerical divisor assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-multidegree-zero-locus",
+  "date": "2026-10-23",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Openness, boundedness and separation of the multidegree-zero locus. Uniform smooth-support divisors for numerically trivial twists on a nodal curve.",
+   "via": [
+    "lem-sfb-nodal-multidegree-zero-locus",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-uniform-smooth-divisor",
+  "worker": "stage1",
+  "summary": "Proved the uniform divisor assertion without changing its statement and without creating nodes: genus monotonicity follows from the ideal sequence and H^2 vanishing; component degrees and the existing ideal-cohomology obstruction yield surjective point evaluations; finite linear avoidance supplies a section avoiding the nodes and all component-generic zeros; reduced-ring regularity and the degree-length formula finish. Read each cited statement and recorded verbatim citation witnesses.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/relative-Picard prerequisite, through the multidegree-zero locus. Current latest blueprint direct-images proof (3) is the outer route; this is a created auxiliary numerical curve lemma, with no blueprint node stating it. The inherited blueprint.from.node is null and tools/blueprint_refs.py ancestor returns None; its existing place/via are preserved.",
+  "tool_uses": [
+   {
+    "node": "def-pc-divisor-line-bundle",
+    "why": "Generic The module $\\mathcal{O}_X(D)$ of an effective Cartier divisor input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "def-pc-zero-scheme",
+    "why": "Generic The zero scheme of a section input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic Coherent modules under a closed immersion input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Generic Degree: base change and tensor products input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Generic Well-definedness of the Euler characteristic input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-pc-zero-scheme-divisor-iso",
+    "why": "Generic A morphism of invertible modules whose zero scheme is an effective Cartier divisor $D$ gives $\\mathcal N\\cong\\mathcal O_X(D)\\otimes\\mathcal M$ input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-per-birational-curve-degree-invariance",
+    "why": "Generic Birational pullback preserves line-bundle degree on proper integral curves input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-sc-ext-tensor-exact",
+    "why": "Generic Tensoring by finite locally free module is exact input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Generic Properties of the normalization input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Generic Degree is additive on tensor products of invertible modules on proper schemes of dimension at most one input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "Generic Degree as a multiplicity-weighted sum over integral components input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-nodal-marking-special-point-incidence",
+    "why": "Generic Special-point incidence on nodal components under closed-field extension input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic Noetherianity and coherence of invertible modules on a proper scheme over a field input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic Pullback and tensor product of invertible modules, and their fibres input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic Global functions on a proper reduced scheme over an algebraically closed field input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Coherence on locally Noetherian schemes input used exactly as stated for the numerical curve argument; no statement of this unit replaces this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-divisor-line-bundle",
+  "def-pc-zero-scheme",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-degree-base-change",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-per-birational-curve-degree-invariance",
+  "lem-sc-ext-tensor-exact",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-normalization-properties",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-nodal-marking-special-point-incidence",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-9cfd4ea10",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-9cfd4ea10 (reviewer sub-agent of L); spot-checked: I read the item and all 25 cited statements in full. There are 0 new nodes and the statement and stmt_deps are unchanged. Source: Stacks curves.tex 0E3E (lemma-vanishing-on-gorenstein) is faithfully the cited lem-sfb-curve-ideal-h1-subcurve-obstruction. The item applies it with Z = one reduced point to get surjective evaluations, which is the 0E3F argument, and proof_origin is agent. Step 1 (proper over k gives Noetherian, coherence and finite cohomology): correct. Step 2: subcurve B is a union of components; H^2(C,I_B)=0 by the vanishing-above-dimension node gives g_B<=g; the global-sections-product node gives H^0=k, so chi(O_B)=1-g_B; correct. Step 3: normalization (a) is birational, so 0AYU degree invariance applies; generic multiplicities are 1 by reducedness; with tensor additivity, deg_B(A|_B)>=m>=2g_B+1 and deg_C A=mh; correct. Step 4: if H^1(I_x A) were nonzero, 0E3E would give deg<=2g_B-1, a contradiction; correct. Step 5: tensor exactness, the projection formula and the cohomology sequence make the evaluation surjective; correct. Step 6: nodal-incidence node with L=k and F empty gives a finite singular locus; Jacobson q_Z; k infinite; finite linear avoidance; correct. Step 7 (elementary): a is a nonzerodivisor in reduced R because it avoids all minimal primes, so E is Cartier and misses the nodes; correct. Step 8: zero-scheme iso plus the degree-length clause give mh; correct. Edge cases (P^1, two P^1 at a node, cycle with g=1, irreducible nodal cubic, B=C) all hold. No duplicate: sibling nodal nodes (linear-series with omega(D), Clifford subcurve, nodal RR) state different results. The 17 off-unit generic tool_uses are all declared and accepted. Batch-5: all 9 flagged citations (pc degree/Euler, 0AYU, 0E3E, the four trf curve lemmas, reduced global sections) are generic coherent-curve facts that neither the trace formula nor Poincare duality gives; accepted. Artin-Gabber route flag: lem-per-birational-curve-degree-invariance has a dropped Qbar ancestry, but its statement and proof are generic 0AYU with no Qbar, duality, Gabber, de Jong or stable reduction. It is used only at Step 3 for the normalized-degree comparison; justified. No SGA. No fixes."
+ }
+}

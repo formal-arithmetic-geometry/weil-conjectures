@@ -1,0 +1,101 @@
+{
+ "id": "def-sf-proetale-ring-identity-comparison",
+ "kind": "definition",
+ "title": "Pro-etale ring identity comparison",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $R$ a sheaf of commutative rings on its small pro-etale site [def-weil-pbc-proetale-site]. Use the canonical inverse-image functor and its adjunction [def-weil-proetale-inverse-image]. Define the canonical ring identity comparison $c_{X,R}:(\\mathrm{id}_X)^{-1}R\\xrightarrow{\\sim}R$ as follows: take the inverse of the canonical direct-image identity isomorphism $(\\mathrm{id}_X)_*\\simeq\\mathrm{id}$ induced by $V\\times_X X\\simeq V$ on site objects; apply the adjoint conjugation equivalence from the identity adjunction to $(\\mathrm{id}_X)^{-1}\\dashv(\\mathrm{id}_X)_*$; and evaluate the resulting inverse-image identity isomorphism at $R$. Thus this is the comparison fixed by the adjunction unit and the projection-preserving identity of site base change, with no freely chosen ring automorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00VE (lemma-adjoints-u), adjoint conjugation specialized to the identity site map; identity coefficient normalization in lem-sf-ringed-restriction-exchange-open-descent"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical identity comparison for inverse image of a sheaf of commutative rings along the identity scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.comap_id'; AlgebraicGeometry.Spec.preimage_id; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; AlgebraicGeometry.Scheme.Modules.pullbackId; AlgebraicGeometry.Scheme.id_appTop; CategoryTheory.GrothendieckTopology.overMapPullbackId; TopCat.Presheaf.Pushforward.id_inv_app",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions are reused; Mathlib search has no exact pro-etale definition owner"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical identity comparison for inverse image of a sheaf of commutative rings along the identity scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.comap_id_eq_map; AlgebraicGeometry.Scheme.Hom.id_appIso; AlgebraicGeometry.Scheme.Hom.id_app; AlgebraicGeometry.StructureSheaf.comap_id'; AlgebraicGeometry.Scheme.id_app; AlgebraicGeometry.StructureSheaf.comap_id; AlgebraicGeometry.Scheme.Modules.Hom.id_app; AlgebraicGeometry.Scheme.Hom.id_appTop",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions are reused; Mathlib search has no exact pro-etale definition owner"
+  },
+  {
+   "tool": "grep",
+   "query": "ringId|lowerStarId",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions are reused; Mathlib search has no exact pro-etale definition owner"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ringed-restriction-exchange-open-descent",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Continuous-module proper exchange realization for prop-functor-package clause 2: returned proof steps 4, 5, 9 and 10 of lem-sf-continuous-adic-proper-base-change-restriction; independent normalized ringed restriction exchange and open descent argument. Definition ownership for the normalized pro-etale ring identity comparison.",
+   "via": [
+    "lem-sf-ringed-restriction-exchange-open-descent",
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison",
+  "declaration": "AlgebraicGeometry.ProEtaleTensorComparison.ringId",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleTensorComparison.ringId"
+  ],
+  "statement": "def ringId {X : Scheme.{u}} (R : Rings X) : inverseRing (𝟙 X) R ≅ R",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing published definitions with actual canonical data; this definition node owns the plain constructions independently of the theorem that owns their source module. No declaration is introduced or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80940312e",
+  "group": "Q97",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80940312e",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Re-delivery of f1c53ce3 (RETURN H2). All corrections made: theorem stmt_deps lem-sfb-proetale-open-restriction-counit, lem-pur-proetale-inverse-image-tensor-comparison and lem-weil-pbc-ringed-square-localization replaced by new existing:true def owners def-sf-proetale-open-restriction-data (14 plain ProEtaleOpenRestriction defs; Sectionwise signature verbatim; TeX matches the bodies) and def-sf-proetale-ring-identity-comparison (ringId = conjugateIsoEquiv of lowerStarId.symm), plus def-sfb-proetale-composite-coefficients (record identical to live); used declarations are all owned by cited def nodes and the closure contains no theorem. def-weil-pbc-ambient-ringed-exchange record is a strict superset of live (2 general declarations added, existing:false and file kept); CondensedAmbientExchange.lean adds only a transitively redundant public import (harmless, advisory). Item Lean differs from f1c5 by one import swap (the dropped module was unused); signatures and verbatim statement unchanged; f1c5's clause-by-clause maths verdict holds, spot re-check done (resolution formula, open descent incl. empty cover, identity case pinned by unique existence, no universe or extra hypotheses). No FIX, so no compile; worker reports clean compiles (21.9 s / 18.0 s)."
+ }
+}

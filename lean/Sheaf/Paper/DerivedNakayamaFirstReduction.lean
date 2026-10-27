@@ -9,6 +9,7 @@ public import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 import Sheaf.Paper.CompletionTriangleComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-!
 # Derived Nakayama from the first reduction

@@ -1,0 +1,84 @@
+{
+ "id": "lem-sfb-ultrametric-space-totally-disconnected",
+ "kind": "statement",
+ "title": "Ultrametric metric spaces are totally disconnected",
+ "statement": "Use the universe convention of [def-weil-size-convention], with the spaces and function sets formed in the containing universe. Let $(M,d)$ be a metric space, with its metric topology, and suppose $d(x,z)\\leq\\max(d(x,y),d(y,z))$ for all $x,y,z\\in M$. Then $M$ is totally separated: any two distinct points are separated by a subset that is both open and closed. In particular $M$ is totally disconnected: every connected subset has at most one point. No completeness, compactness, or nonemptiness assumption is made.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, totally disconnected target hypothesis; general metric tool from Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean:25 and Mathlib/Topology/Connected/TotallyDisconnected.lean:218."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ultrametric metric space is totally disconnected and every connected subset has at most one point",
+   "results": "OK: 8 hits; instTotallySeparatedSpaceOfIsUltrametricDist, instTotallyDisconnectedSpaceUltrafilter, Profinite.instTotallyDisconnectedSpaceCarrierToTop, IsPreconnected.subsingleton, TotallyDisconnectedSpace, IsTotallyDisconnected, ConnectedComponents.totallyDisconnectedSpace, TotallySeparatedSpace.totallyDisconnectedSpace",
+   "date": "2026-10-22",
+   "verdict": "match: ultrametric total separation at Ultra/TotallySeparated.lean:25 and its inferred total-disconnectedness instance at Connected/TotallyDisconnected.lean:218; both sources read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUltrametricDist\", \"TotallySeparatedSpace\"",
+   "results": "OK: 1 hits; instTotallySeparatedSpaceOfIsUltrametricDist",
+   "date": "2026-10-22",
+   "verdict": "match: ultrametric total separation at Ultra/TotallySeparated.lean:25 and its inferred total-disconnectedness instance at Connected/TotallyDisconnected.lean:218; both sources read."
+  },
+  {
+   "tool": "grep",
+   "query": "IsUltrametricDist.*Totally|TotallyDisconnectedSpace|TotallySeparatedSpace",
+   "results": "OK: 3 hits; Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean, Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean, Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean ; Mathlib/Topology/MetricSpace/Ultra",
+   "date": "2026-10-22",
+   "verdict": "match: ultrametric total separation at Ultra/TotallySeparated.lean:25 and its inferred total-disconnectedness instance at Connected/TotallyDisconnected.lean:218; both sources read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every ultrametric metric space is totally separated and hence totally disconnected",
+   "results": "OK: 8 hits; instTotallySeparatedSpaceOfIsUltrametricDist, isTotallyDisconnected_of_isTotallySeparated, IsTotallySeparated.isTotallyDisconnected, TotallySeparatedSpace.totallyDisconnectedSpace, TotallyDisconnectedSpace, IsUltrametricDist.mk, instTotallySeparatedSpaceOfTotallyDisconnectedSpace, TotallySeparatedSpace.mk",
+   "date": "2026-10-22",
+   "verdict": "match: ultrametric total separation at Ultra/TotallySeparated.lean:25 and its inferred total-disconnectedness instance at Connected/TotallyDisconnected.lean:218; both sources read."
+  },
+  {
+   "tool": "grep",
+   "query": "TotallySeparatedSpace.totallyDisconnectedSpace|connectedComponentsLift_(unique|comp_coe)|continuous_coe|surjective_coe",
+   "results": "OK: 15 hits; Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean ; Mathlib/Topology/Connected",
+   "date": "2026-10-22",
+   "verdict": "match: ultrametric total separation at Ultra/TotallySeparated.lean:25 and its inferred total-disconnectedness instance at Connected/TotallyDisconnected.lean:218; both sources read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instTotallySeparatedSpaceOfIsUltrametricDist",
+  "file": "Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean",
+  "line": 25,
+  "how": "exact, one declaration per clause: instTotallySeparatedSpaceOfIsUltrametricDist at Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean:25 gives total separation; TotallySeparatedSpace.totallyDisconnectedSpace at Mathlib/Topology/Connected/TotallyDisconnected.lean:218 is the inferred instance giving total disconnectedness. The latter means every preconnected subset is subsingleton, hence every connected subset is. The displayed inequality is exactly IsUltrametricDist; the source example at Ultra/TotallySeparated.lean:32 is inferInstance with no further hypotheses."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ultrametric-component-map-extension",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; returned proof steps 5-6: ultrametric total disconnectedness, continuous component factorization and the explicit inverse ring map; Lemma 4.2.12, totally disconnected target hypothesis; general metric tool from Mathlib/Topology/MetricSpace/Ultra/TotallySeparated.lean:25 and Mathlib/Topology/Connected/TotallyDisconnected.lean:218.",
+   "via": [
+    "lem-sfb-ultrametric-component-map-extension",
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

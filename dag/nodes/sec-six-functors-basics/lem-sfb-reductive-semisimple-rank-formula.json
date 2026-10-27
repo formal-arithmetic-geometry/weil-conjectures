@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-reductive-semisimple-rank-formula",
+ "kind": "statement",
+ "title": "Semisimple rank from a maximal torus and the radical",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Use reductivity, maximal tori, and scheme-theoretic centralizer points as in [def-sfb-reductive-torus-centralizer-terminology]. A torus is a group isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Let $H$ be reductive and let $T\\subseteq H$ be a maximal torus. Let $R\\subseteq H$ be a central torus which contains every smooth connected solvable normal subgroup of $H$, and let $Q=H/R$ be the represented fppf quotient of [lem-sfb-affine-normal-quotient-geometry]. Here solvable means that successive commutator subgroup schemes eventually become trivial, and the fppf quotient means sheafification of $A\\mapsto H(A)/R(A)$ for faithfully flat finitely presented coverings. Every central torus of $H$ is contained in $T$; in particular $R\\subseteq T$. The quotient torus $T/R$ is a maximal torus of $Q$, and $$\\operatorname{rank}(Q)=\\dim T-\\dim R.$$ Rank means the dimension of a maximal torus, dimension means Krull dimension of the scheme, and this rank of $Q$ is the semisimple rank of $H$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.20 (images of maximal tori under quotient maps), printed pp.357--358; Corollaries 17.61--17.62, printed pp.372--373; Definition 19.20 and Proposition 19.21(a), printed pp.401--402. The radical is the central torus, so dim R = dim Z(H)."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sc-gm-ga",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Let $C\\subseteq H$ be any central torus. For every commutative $F$-algebra $A$, each $c\\in C(A)$ commutes with every $t\\in T(B)$ after every $A$-algebra extension $B$. Thus $C(A)\\subseteq C_H(T)(A)$. The scheme-theoretic equality $C_H(T)=T$ from [lem-sfb-reductive-torus-self-centralizer] applies because $F$ is algebraically closed, $H$ is reductive, and $T$ is maximal. Consequently the inclusion of subgroup functors $C\\subseteq H$ factors through $T\\subseteq H$. This proves $C\\subseteq T$ as subgroup schemes, and in particular $R\\subseteq T$.",
+   "uses": [
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.61(a),(b), printed p.372"
+   }
+  },
+  {
+   "text": "The tori $T$ and $R$ are smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus]. Since $R$ is central it is normal in $H$. Apply [lem-sfb-affine-normal-quotient-geometry] to $R\\subseteq H$. It gives a quotient homomorphism $q:H\\to Q$ which is faithfully flat and finitely presented, with scheme-theoretic kernel $R$. It also gives that $Q$ is affine, finite type, smooth and connected, since reductivity includes smoothness and connectedness of $H$. Thus $q$ satisfies the smooth connected group hypotheses needed for the maximal-torus image theorem.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 12.14 and following paragraph, p.236; Propositions 5.25--5.29, p.105"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-quotient-borel-torus-images] to $q$ and $T$. Its scheme-theoretic image $S=q(T)$ is a maximal torus of $Q$, and $q_T:T\\to S$ is faithfully flat. The kernel of $q|_T:T\\to Q$ is the scheme-theoretic intersection $T\\cap\\ker q=T\\cap R=R$, using Step 1. The homomorphism theorem [lem-sfb-algebraic-group-homomorphism-factorization] identifies the image of this homomorphism with its represented fppf quotient by the kernel, hence gives $T/R\\simeq S$, compatibly with the homomorphisms into $Q$. In particular $T/R$, viewed through this closed inclusion in $Q$, is the maximal torus $S$.",
+   "uses": [
+    "lem-sfb-quotient-borel-torus-images",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.20, pp.357--358; Theorem 5.39 and Remark 5.42, p.108"
+   }
+  },
+  {
+   "text": "Let the smooth connected affine group $T$ act on the affine finite-type scheme $S$ by $t\\cdot s=q_T(t)s$. The homomorphism identity for $q_T$ and the group identities give the action identities. The orbit map of $1\\in S(F)$ is $q_T$, which is surjective; thus its orbit $O_1$ has underlying topological space $|S|$. For every commutative $F$-algebra $A$, its stabilizer consists exactly of the $t\\in T(A)$ with $q_T(t)=1$, so the scheme-theoretic stabilizer is $R$, including on nonreduced algebras. Apply [lem-sfb-smooth-group-orbit-geometry] with acting group $T$, target $S$ and point $1$: it gives $\\dim O_1=\\dim T-\\dim R$. Krull dimension depends only on the underlying topological space, by [def-kun-topological-krull-dimension], so $\\dim S=\\dim O_1$. This argument requires no identification of an orbit with a possibly nonreduced image as schemes.",
+   "uses": [
+    "lem-sfb-smooth-group-orbit-geometry",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.4 and 7.11, pp.139--141, and Proposition 5.23, p.104"
+   }
+  },
+  {
+   "text": "Since $S\\simeq T/R$ is a maximal torus of $Q$, the stated definition of rank gives $\\operatorname{rank}(Q)=\\dim S=\\dim T-\\dim R$. Finally $R$ is smooth and connected by Step 2, is normal by centrality, and is solvable because it is commutative: on every test algebra it is a product of groups of units, whose commutators are $1$. Together with the hypothesis that $R$ contains every smooth connected solvable normal subgroup of $H$, this says exactly that $R$ is the radical of $H$. Therefore the rank of $Q=H/R$ is the semisimple rank of $H$, as in Definition 19.20.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 19.20 and Proposition 19.21(a), pp.401--402"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-quotient-borel-torus-images",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 17.61 and 17.20; Definition 19.20 and Proposition 19.21(a), with quotient identification (Theorem 5.39) and quotient dimension (Propositions 5.23 and 7.11) made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The image of a maximal torus in a quotient algebraic group is maximal and semisimple rank of a reductive group is rank minus dimension of its radical",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.rank\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"(R : Type u_1) →\\n  (L : Type u_3) →\\n    [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → [Module.Finite R L] → [Module.Free R L] → ℕ\", \"doc\": \"The rank of a Lie algebra $ L $ over a commutative ring $ R $ is defined as the nilpotent rank of the associated linear map $ \\\\varphi $, corresponding to the trailing degree of the characteristic poly\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L],\\n  ↑(Module.finrank K L) ≤ Cardinal.mk K → ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$, if the dimension of $\\\\mathfrak{g}$ as a vector space over $K$ satisfies $\\\\dim_K(\\\\mathfrak{g}) \\\\leq |K|$, then there exists an element $x \\\\in \\\\mathfra\"}\n  {\"name\": \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"module\": \"Mathlib/Algebra/Lie/CartanExists\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  [Infinite K], ∃ x, (LieSubalgebra.engel K x).IsCartanSubalgebra\", \"doc\": \"For an infinite field $ K $, there exists an element $ x $ in the Lie algebra $ L $ such that the Engel subalgebra associated with $ x $ forms a Cartan subalgebra of $ L $. This means the maximal gene\"}\n  {\"name\": \"LieAlgebra.isRegular_iff_finrank_engel_eq_rank\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (K : Type u_7) {L : Type u_8} [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [inst_3 : Module.Finite K L] (x : L),\\n  LieAlgebra.IsRegular K x ↔ Module.finrank K ↥(LieSubalgebra.engel K x) = LieAlgebra.rank K L\", \"doc\": \"An element $ x $ in a Lie algebra $ \\\\mathfrak{g} $ over a field $ K $ is regular if and only if the finite rank of its Engel subalgebra $ \\\\mathrm{engel}_K(x) $ equals the rank of the Lie algebra $ \\\\ma\"}\n  {\"name\": \"LieAlgebra.rank_le_finrank\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [Nontrivial R], LieAlgebra.rank R L ≤ Module.finrank R L\", \"doc\": \"For a non-trivial commutative ring $ R $ and a Lie algebra $ L $ over $ R $, the rank of $ L $ is less than or equal to its finite rank, i.e., $ \\\\operatorname{rank}_R(L) \\\\leq \\\\operatorname{finrank}_R(\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive algebraic group quotient by its radical torus rank dimension formula",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"rank_quotient_add_rank_of_isDomain\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Localization\", \"type\": \"[IsDomain R] (M' : Submodule R M) : Module.rank R (M ⧸ M') + Module.rank R M' = Module.rank R M\", \"doc\": \"For any domain $ R $ and any submodule $ M' $ of an $ R $-module $ M $, the rank of the quotient module $ M/M' $ plus the rank of $ M' $ equals the rank of $ M $. Symbolically, $ \\\\operatorname{rank}(M\"}\n  {\"name\": \"Group.rank\", \"module\": \"Mathlib.GroupTheory.Rank\", \"type\": \"[h : FG G] : ℕ\", \"doc\": \"The rank of a finitely generated group $G$ is defined as the minimal cardinality of a generating set for $G$. This is computed as the least natural number $n$ such that $G$ can be generated by $n$ ele\"}\n  {\"name\": \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"module\": \"Mathlib.RingTheory.KrullDimension.Regular\", \"type\": \"{I : Ideal R} (h : I ≠ ⊤) : ringKrullDim R ≤ ringKrullDim (R ⧸ I) + I.spanFinrank\", \"doc\": \"For a commutative ring $ R $ and a proper ideal $ I $ of $ R $, the Krull dimension of $ R $ is less than or equal to the sum of the Krull dimension of the quotient ring $ R/I $ and the finite rank of\"}\n  {\"name\": \"Subgroup.rank_congr\", \"module\": \"Mathlib.GroupTheory.Rank\", \"type\": \"{H K : Subgroup G} [Group.FG H] [Group.FG K] (h : H = K) : rank H = rank K\", \"doc\": \"If $H$ and $K$ are finitely generated subgroups of a group $G$ and $H = K$, then the rank of $H$ equals the rank of $K$.\"}\n  {\"name\": \"rank_quotient_eq_of_le_torsion\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Torsion.Basic\", \"type\": \"{R M : Type*} [CommRing R] [AddCommGroup M] [Module R M] {M' : Submodule R M} (hN : M' ≤ torsion R M) :\\n  Module.rank R (M ⧸ M') = Module.rank R M\", \"doc\": \"Let $ R $ be a commutative ring and $ M $ an $ R $-module that is an additive commutative group. If a submodule $ M' $ of $ M $ is contained within the torsion submodule of $ M $ over $ R $, then the \"}\n  {\"name\": \"Ideal.rank_pow_quot\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[IsDedekindDomain S] [p.IsMaximal] [P.IsPrime] (hP0 : P ≠ ⊥) (i : ℕ) (hi : i ≤ e) :\\n  Module.rank (R ⧸ p) (Ideal.map (Ideal.Quotient.mk (P ^ e)) (P ^ i)) = (e - i) • Module.rank (R ⧸ p) (S ⧸ P)\", \"doc\": \"In a Dedekind domain $ S $, for a maximal ideal $ \\\\mathfrak{p} $ and a non-zero prime ideal $ \\\\mathfrak{P} $ with ramification index $ e $ over $ \\\\mathfrak{p} $, and for any natural number $ i \\\\leq e \"}\n  {\"name\": \"HasRankNullity.rank_quotient_add_rank\", \"module\": \"Mathlib.LinearAlgebra.Dimension.RankNullity\", \"type\": \"∀ {R : Type v} {inst : Ring R} [self : HasRankNullity.{u, v} R] {M : Type u} [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] (N : Submodule R M), Module.rank R (M ⧸ N) + Module.rank R ↥N = Module.rank R M\", \"doc\": \"For any ring $ R $ satisfying the rank-nullity property, an $ R $-module $ M $, and a submodule $ N $ of $ M $, the rank of $ M $ is equal to the sum of the ranks of $ N $ and the quotient module $ M/\"}\n  {\"name\": \"rank_quotient_add_rank_of_divisionRing\", \"module\": \"Mathlib.LinearAlgebra.Dimension.DivisionRing\", \"type\": \"(p : Submodule K V) : Module.rank K (V ⧸ p) + Module.rank K p = Module.rank K V\", \"doc\": \"For any submodule $ p $ of a vector space $ V $ over a division ring $ K $, the sum of the dimensions of the quotient space $ V/p $ and the subspace $ p $ equals the dimension of $ V $. Formally, $ \\\\d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rank\", \"quotient\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"rank_quotient_le\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Constructions\", \"type\": \" {R : Type u} {M : Type v} [Ring R] [AddCommGroup M] [Module R M] (p : Submodule R M) : Module.rank R (M ⧸ p) ≤ Module.rank R M\", \"doc\": \"\"}\n  {\"name\": \"Submodule.finrank_quotient_le\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Constructions\", \"type\": \" {R : Type u} {M : Type v} [Ring R] [AddCommGroup M] [Module R M] [StrongRankCondition R] [Module.Finite R M] (s : Submodule R M) : Module.finrank R (M ⧸ s) ≤ Module.finrank R M\", \"doc\": \"The dimension of a quotient is bounded by the dimension of the ambient space.\"}\n  {\"name\": \"rank_quotient_add_rank_le\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Constructions\", \"type\": \" {R : Type u} {M : Type v} [Ring R] [AddCommGroup M] [Module R M] [Nontrivial R] (M' : Submodule R M) : Module.rank R (M ⧸ M') + Module.rank R ↥M' ≤ Module.rank R M\", \"doc\": \"\"}\n  {\"name\": \"Module.finrank_quotient_add_finrank_le\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Finite\", \"type\": \" {R : Type u_1} {M : Type u_2} [Ring R] [AddCommGroup M] [Module R M] [StrongRankCondition R] [Module.Finite R M] (N : Submodule R M) : Module.finrank R (M ⧸ N) + Module.finrank R ↥N ≤ Module.finrank R M\", \"doc\": \"Similar to `rank_quotient_add_rank_le` but for `finrank` and a finite `M`.\"}\n  {\"name\": \"HasRankNullity.rank_quotient_add_rank\", \"module\": \"Mathlib.LinearAlgebra.Dimension.RankNullity\", \"type\": \" {R : Type v} {inst : Ring R} [self : HasRankNullity.{u, v} R] {M : Type u} [AddCommGroup M] [Module R M] (N : Submodule R M) : Module.rank R (M ⧸ N) + Module.rank R ↥N = Module.rank R M\", \"doc\": \"\"}\n  {\"name\": \"Submodule.rank_quotient_add_rank\", \"module\": \"Mathlib.LinearAlgebra.Dimension.RankNullity\", \"type\": \" {R : Type u_1} {M : Type u} [Ring R] [AddCommGroup M] [Module R M] [HasRankNullity.{u, u_1} R] (N : Submodule R M) : Module.rank R (M ⧸ N) + Module.rank R ↥N = Module.rank R M\", \"doc\": \"\"}\n  {\"name\": \"Submodule.finrank_quotient_add_finrank\", \"module\": \"Mathlib.LinearAlgebra.Dimension.RankNullity\", \"type\": \" {R : Type u_1} {M : Type u} [Ring R] [AddCommGroup M] [Module R M] [HasRankNullity.{u, u_1} R] [StrongRankCondition R] [Module.Finite R M] (N : Submodule R M) : Module.finrank R (M ⧸ N) + Module.finrank R ↥N = Module.finrank R M\", \"doc\": \"Rank-nullity theorem using `finrank`.\"}\n  {\"name\": \"Submodule.finrank_quotient\", \"module\": \"Mathlib.LinearAlgebra.Dimension.RankNullity\", \"type\": \" {R : Type u_2} {M : Type u} [Ring R] [AddCommGroup M] [Module R M] [HasRankNullity.{u, u_2} R] [StrongRankCondition R] [Module.Finite R M] {S : Type u_1} [Ring S] [SMul R S] [Module S M] [IsScalarTower R S M] (N : Submodule S M) : Module.finrank R (M ⧸ N) = Module.finrank R M - Module.finrank R ↥N\", \"doc\": \"Rank-nullity theorem using `finrank` and subtraction.\"}\n  {\"name\": \"rank_quotient_add_rank_of_divisionRing\", \"module\": \"Mathlib.LinearAlgebra.Dimension.DivisionRing\", \"type\": \" {K : Type u} {V : Type v} [DivisionRing K] [AddCommGroup V] [Module K V] (p : Submodule K V) : Module.rank K (V ⧸ p) + Module.rank K ↥p = Module.rank K V\", \"doc\": \"Also see `rank_quotient_add_rank`.\"}\n  {\"name\": \"rank_quotient_add_rank_of_isDomain\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Localization\", \"type\": \" {R : Type uR} {M : Type uM} [CommRing R] [AddCommGroup M] [Module R M] [IsDomain R] (M' : Submodule R M) : Module.rank R (M ⧸ M') + Module.rank R ↥M' = Module.rank R M\", \"doc\": \"The **rank-nullity theorem** for commutative domains. Also see `rank_quotient_add_rank`.\"}\n  {\"name\": \"finrank_quotient_span_eq_natDegree\", \"module\": \"Mathlib.RingTheory.AdjoinRoot\", \"type\": \" {K : Type u_5} [Field K] {f : Polynomial K} : Module.finrank K (Polynomial K ⧸ Ideal.span {f}) = f.natDegree\", \"doc\": \"See `finrank_quotient_span_eq_natDegree'` for a version over a ring when `f` is monic.\"}\n  {\"name\": \"IsLocalRing.spanFinrank_eq_finrank_quotient\", \"module\": \"Mathlib.Algebra.Module.SpanRankOperations\", \"type\": \" {R : Type u_1} [CommRing R] {M : Type u_3} [AddCommGroup M] [Module R M] [IsLocalRing R] (N : Submodule R M) (fg : N.FG) : N.spanFinrank = Module.finrank (R ⧸ IsLocalRing.maximalIdeal R) (↥N ⧸ IsLocalRing.maximalIdeal R • ⊤)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimpleRank|semisimple.rank|[Mm]aximalTorus|[Mm]aximal.torus",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of a maximal torus under a surjective homomorphism of smooth connected algebraic groups is a maximal torus",
+   "results": "[leanfinder] OK 8 hit(s). Subgroup.isCoatom_comap_of_surjective, frattini_le_comap_frattini_of_surjective, Group.rank_le_of_surjective, Sylow.coe_mapSurjective, IsZGroup.of_surjective, IsTorsion.of_surjective, map_derivedSeries_eq, derivedSeries_le_map_derivedSeries",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern abstract groups, module ranks or Lie algebras, not maximal tori and ranks of algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimpleRank|[Mm]aximalTorus|[Mm]aximal.torus|central.torus",
+   "results": "[grep] OK 0 hit(s). No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern abstract groups, module ranks or Lie algebras, not maximal tori and ranks of algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reductive algebraic group the rank of the quotient by its radical torus equals the dimension of a maximal torus minus the radical dimension",
+   "results": "[leansearch] OK 8 hit(s). rank_quotient_add_rank_of_isDomain, rank_quotient_add_rank_le, rank_quotient_le, rank_quotient_eq_of_le_torsion, rank_quotient_add_rank_of_divisionRing, Group.rank, Subgroup.rank_congr, AddSubgroup.rank_congr",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern abstract groups, module ranks or Lie algebras, not maximal tori and ranks of algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"quotient\"",
+   "results": "[loogle] OK 0 hit(s). No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern abstract groups, module ranks or Lie algebras, not maximal tori and ranks of algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semisimple rank equals rank minus dimension of the connected central torus radical for a reductive group scheme",
+   "results": "[leanfinder] OK 8 hit(s). LieAlgebra.rank, LieAlgebra.rank_le_finrank, LieAlgebra.isRegular_iff_finrank_engel_eq_rank, LieModule.rank_eq_natTrailingDegree, LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, LieAlgebra.rank_le_finrank_engel, LieModule.rank, LieAlgebra.IsKilling.finrank_rootSpace_eq_one",
+   "date": "2026-10-23",
+   "verdict": "no match: returned types concern abstract groups, module ranks or Lie algebras, not maximal tori and ranks of algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-rank-one-reflections",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Semisimple rank from a maximal torus and the radical.",
+   "via": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-semisimple-rank-formula",
+  "worker": "stage1",
+  "summary": "Q47 supplies five proof steps using seven existing nodes and creates no nodes. Central-torus containment is deduced on all test algebras from the existing self-centralizer theorem; quotient images and the homomorphism theorem identify T/R with a maximal torus; the existing orbit dimension theorem supplies the numerical formula. The radical is identified directly from the hypotheses, avoiding the cyclic existing radical-quotient theorem. Missing field, algebraic-closure and Krull-dimension statement dependencies are recorded; the statement is unchanged.",
+  "blueprint": "The inherited from.place supplies this supporting input to lem-sfb-reductive-rank-one-reflections, in the existing chain serving det-thm-sf-ctf-stability-direct-images proof (3). Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3) uses the proper/open direct-image route. Steps 1--5 realize the inherited Milne rank-formula input without altering that route. Whole-blueprint searches for semisimple rank and maximal torus found no exact duplicates. blueprint_refs.py ancestor returns None; the inherited from.node=null is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-f979eff34",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-f979eff34 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and all 7 cited statements, and checked them against Milne iAG2017 17.61(a,b) p.372, 17.20 p.357, Def 19.20 and 19.21(a) pp.401-402. The statement is unchanged; only def-weil-field, def-weil-algebraic-closure and def-kun-topological-krull-dimension were added to stmt_deps, each for something the text already uses. Step 1: a central C lies in C_H(T)=T (self-centralizer node, F algebraically closed). Step 2: tori are smooth and connected; the quotient node gives q faithfully flat with kernel R and Q smooth and connected. Step 3: torus-images gives S=q(T) maximal and T->S faithfully flat; ker q|_T = T∩R = R; the homomorphism theorem identifies T/R with S (the image identification is elementary because O(I)->O(T) is injective). Step 4: orbit dimension with G=T, X=S, x=1, stabilizer R and q_T surjective gives dim S = dim T - dim R by the topological Krull dimension. Step 5: R is the radical by the hypothesis, so Def 19.20 applies; correctly elementary. proof_deps = union of the step citations; no cycle (closures computed; the cyclic radical-quotient node is avoided); no SGA; no duplicates found by rg -L for semisimple rank, 17.61 and 19.21. Small cases H=1, a torus, GL_n (n-1), SL_2 in char 2 (non-reduced centre, R=1) and PGL_2 are all correct. Batch-5: the three flagged trf nodes (split-lattice-torus-projection, smooth-fpqc-base-descent = Stacks 02VL, fppf-covering-base-change = 021O) are generic scheme lemmas whose closures contain no trace-formula, Poincare or nt-assume nodes, so they are accepted as outside the assumptions. No fixes."
+ }
+}

@@ -1,0 +1,331 @@
+{
+ "id": "lem-sfb-proper-adjoint-diagonal-pair",
+ "kind": "statement",
+ "title": "Diagonal pair associated to proper flat duality over a qcqs base",
+ "statement": "Let $S$ be a quasi-compact quasi-separated scheme and $f:X\\to S$ proper, flat and of finite presentation [def-pc-scheme], [def-weil-pbc-scheme-conventions], [def-weil-proper-morphism], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. Let $a$ be a right adjoint to $Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(S)$ [def-pc-derived-category], [def-pc-derived-direct-image]. Set $K=a(\\mathcal O_S)$. Then $K$ is pseudo-coherent and locally has finite Tor amplitude over $S$, and there is a canonical diagonal class $\\xi_a$ for which $(K,\\xi_a)$ is a coherent relative dualizing pair [def-trf-coherent-relative-dualizing-pair]. More precisely, if $p_1,p_2:X\\times_SX\\to X$, $b$ is right adjoint to $Rp_{2,*}$ and $c$ is right adjoint to $R\\Delta_*$, then $b(\\mathcal O_X)\\simeq Lp_1^*K$ by proper flat base change, $cb\\simeq\\mathrm{id}$ by adjunction composition, and $\\xi_a$ is the diagonal-coinduction adjunct of $\\mathcal O_X\\simeq c(Lp_1^*K)$. Under the canonical proper-flat right-adjoint base-change isomorphisms for maps $S'\\to S$ of qcqs schemes, the induced pair is identified with the derived pullback pair. In particular these classes agree on base-open overlaps and are preserved by trace-preserving identifications of right-adjoint images. No Noetherian or smoothness assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E4L (lemma-properties-relative-dualizing), 0E2P (lemma-van-den-bergh, equation-pre-rigid), 0E2Z (lemma-flat-proper-relative-dualizing), and 0E4P (remark-relative-dualizing-complex-bis); canonical class compatibility by the adjunction mates in those constructions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pur-derived-internal-hom",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Work with structure-module complexes, not constant torsion coefficients. Properness makes the diagonal closed. The projections of $P=X\\times_SX$ and the pullbacks of $f$ to affine opens of $S$ are proper and flat, by proper base change and pointwise flatness under base change. They remain locally finitely presented: on an affine chart, base change carries a presentation $R[x_1,\\ldots,x_n]/(r_1,\\ldots,r_m)$ to the same finite presentation over the new ring. The finite-presentation convention includes quasi-compactness and quasi-separatedness. Thus $X,P$ and all these proper pullbacks over qcqs bases are qcqs: finite affine covers of the base have quasi-compact inverse images, and quasi-separatedness is checked by the closed relative diagonal and the quasi-compact diagonal of the base. We can therefore choose the projection and diagonal right adjoints on $D_{\\mathrm{QCoh}}$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "lem-pc-proper-base-change",
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0AAB (lemma-proper-flat-base-change), 0E2P (lemma-van-den-bergh), setup; qcqs right adjoints are Tag 0A9E (lemma-twisted-inverse-image)."
+   }
+  },
+  {
+   "text": "For every affine open $V\\subset S$, proper-flat right-adjoint base change identifies $K|_{X_V}$ with $a_V(\\mathcal O_V)$. The exact Zariski--etale equivalence intertwines direct images and sends structure modules to structure modules, so transporting its adjunction Hom bijection identifies $\\epsilon_{X_V}^*a_V(\\mathcal O_V)$ with the etale right-adjoint unit image. Apply the affine adjoint-unit theorem to obtain its pseudo-coherence and local finite relative Tor amplitude. Etale pseudo-coherence descent gives pseudo-coherence of $K|_{X_V}$; the relative Tor comparison gives local finite Tor dimension over $V$ on the Zariski site. These statements are local on $X$, so the inverse images of the affine opens prove both claims for $K$ over $S$. Testing each local relative Tor interval against the inverse-image ring itself bounds the cohomology of $K$ on that open. A finite subcover of the qcqs scheme $X$ gives a global lower bound. The flat projection $p_1$ preserves it: at each stalk its tensor pullback is tensor with a flat local ring, which preserves the kernel/image sequences defining cohomology. Thus its termwise pullback preserves quasi-isomorphisms and computes derived pullback, and $H^i(Lp_1^*K)=p_1^*H^i(K)$. Consequently $M=Lp_1^*K$ is bounded below. No Noetherian affine charts are used.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-relative-tor-comparison",
+    "def-pc-finite-tor-dimension-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4L (lemma-properties-relative-dualizing), clause (1); spaces-perfect.tex Tags 08HE and 0DK7 for the site comparison."
+   }
+  },
+  {
+   "text": "Take $b$ right adjoint to $Rp_{2,*}$ and $c$ right adjoint to $R\\Delta_*$. Proper-flat right-adjoint base change for the square with both bottom and right maps equal to $f$ gives $b(\\mathcal O_X)\\simeq Lp_1^*a(\\mathcal O_S)=M$. Derived direct-image composition identifies $Rp_{2,*}R\\Delta_*$ with the identity because $p_2\\Delta=\\mathrm{id}_X$. The right-adjoint composition theorem, including its unit and counit normalization, identifies $cb$ with the identity. Evaluate its inverse at $\\mathcal O_X$ and then use $b(\\mathcal O_X)\\simeq M$ to obtain an isomorphism $h:\\mathcal O_X\\xrightarrow{\\sim}c(M)$. Define $\\xi_a=\\varepsilon^\\Delta_M\\circ R\\Delta_*h$. This is the specified diagonal-coinduction adjunct, with no choice of an additional scalar.",
+   "uses": [
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2P (lemma-van-den-bergh), equation-pre-rigid, with the unit object rather than the tensor-square equation."
+   }
+  },
+  {
+   "text": "Apply closed-section coinduction to $p=p_2$, $i=\\Delta$, and the bounded-below object $M$ from step 2. Its normalized isomorphism identifies $R\\Delta_*h$ with multiplication by $\\xi_a$ as a map $\\Delta_*\\mathcal O_X\\to R\\mathcal Hom_P(\\Delta_*\\mathcal O_X,M)$. Since $h$ is an isomorphism, so are its image and this multiplication map. Together with step 2, these are exactly the three requirements in the supplied coherent relative dualizing-pair definition. In particular this checks the actual multiplication class, rather than merely an unspecified isomorphism of the two objects.",
+   "uses": [
+    "lem-sfb-flat-section-coinduction",
+    "def-trf-coherent-relative-dualizing-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Z (lemma-flat-proper-relative-dualizing); Tag 0E2T (definition-relative-dualizing-complex)."
+   }
+  },
+  {
+   "text": "Write $\\beta:b(\\mathcal O_X)\\xrightarrow{\\sim}M$ for the comparison in step 3. Under $R\\Delta_*\\dashv c$ and then $Rp_{2,*}\\dashv b$, the composite-adjunction normalization says precisely that $j=\\beta^{-1}\\xi_a:\\Delta_*\\mathcal O_X\\to b(\\mathcal O_X)$ corresponds to $\\mathrm{id}_{\\mathcal O_X}$. Equivalently,\n$$\\varepsilon^b_{\\mathcal O_X}\\circ Rp_{2,*}(j)=\\mathrm{id}_{\\mathcal O_X},$$\nusing $Rp_{2,*}\\Delta_*\\mathcal O_X=\\mathcal O_X$. The adjunction is a bijection on Hom sets, so this equation determines $j$ uniquely. This furnishes a second characterization of the class without any assertion about uniqueness of arbitrary dualizing pairs.",
+   "uses": [
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2P, equation-pre-rigid: composite adjunction evaluated at the identity."
+   }
+  },
+  {
+   "text": "Let $g:S'\\to S$ have qcqs source, put $h=g_X:X'\\to X$, and $t:P'=X'\\times_{S'}X'\\to P$. The pullback-pair theorem supplies $d:Lt^*\\Delta_*\\mathcal O_X\\simeq\\Delta'_*\\mathcal O_{X'}$ and the pulled class. The square $(p_2,h)$ is cartesian: $P'\\simeq P\\times_X X'$. Write $B:Lt^*b(\\mathcal O_X)\\simeq b'(\\mathcal O_{X'})$ for proper-flat right-adjoint base change and set $j_g=B\\circ Lt^*j\\circ d^{-1}$. By its definition [def-sc-duality-equation-base-change-map], $B$ is the composite of $Lt^*b$ of the unit of $Lh^*\\dashv Rh_*$, the inverse of the conjugate $\\theta$ of the ordinary base-change map $\\beta_{p_2}:Lh^*Rp_{2,*}\\to Rp'_{2,*}Lt^*$ (invertible by [lem-sc-proper-flat-right-adjoint-basechange-hbeta] for the proper flat finitely presented $p_2$ over the qcqs $X$), and the counit of $Lt^*\\dashv Rt_*$; unwinding the conjugate gives $\\varepsilon^{b'}\\circ Rp'_{2,*}(B)=Lh^*(\\varepsilon^b)\\circ\\beta_{p_2}^{-1}$. This counit formula, with the pasted-square law, gives\n$$\\varepsilon^{b'}\\circ Rp'_{2,*}(j_g)=Lh^*(\\varepsilon^b\\circ Rp_{2,*}j)=\\mathrm{id}_{\\mathcal O_{X'}}.$$\nHere the ordinary direct-image base-change arrows and the composite $p_2\\Delta=\\mathrm{id}$ cancel by mate pasting and its identity clause; no invertibility of a diagonal exceptional base-change map is required. Step 5 over $S'$ now gives $j_g=j'$. Finally paste the self-product base-change square $(f,f)$ with $g$ in the two orders. The same mate-pasting law identifies $Lp_1'^*(Lh^*K\\simeq a'(\\mathcal O_{S'}))\\circ Lt^*\\beta$ with $\\beta'\\circ B$, after pullback associators. Multiplying $j_g=j'$ by these comparisons proves that the proper-flat right-adjoint base-change isomorphism carries the pulled $\\xi_a$ to $\\xi_{a'}$.",
+   "uses": [
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-weil-pbc-mate-pasting",
+    "def-sc-duality-equation-base-change-map",
+    "lem-sc-proper-flat-right-adjoint-basechange-hbeta"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E4P (remark-relative-dualizing-complex-bis), 0B6J (lemma-trace-map-and-base-change); explicit adjunction-mate argument for the compatibility left unstated in 0E4P."
+   }
+  },
+  {
+   "text": "For base-open overlaps use step 6 with the overlap mapping to $S$ (or an affine open cover of the overlap). Its class is the pullback of the same global class. The identity and iterated-pullback clauses of the pair base-change theorem identify the two successive restrictions, so they agree. For another adjunction choice, the canonical comparison between right adjoints has the pasted counit normalization of the right-adjoint composition theorem; applying it to the identity in step 5 preserves $j$ and hence $\\xi_a$. More generally a trace-preserving isomorphism $\\alpha:a(\\mathcal O_S)\\to\\widetilde a(\\mathcal O_S)$ satisfies $\\widetilde\\varepsilon\\,Rf_*\\alpha=\\varepsilon$. Under $Rf_*\\dashv\\widetilde a$ this equality says that $\\alpha$ is the unique adjunct of $\\varepsilon$, hence is the component of that canonical adjoint comparison. It therefore preserves the diagonal class too.",
+   "uses": [
+    "lem-sfb-relative-dualizing-pair-base-change",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4P; identity and composition compatibility of the normalized adjuncts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-pc-proper-base-change",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-sc-proper-flat-right-adjoint-basechange",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-affine-adjoint-unit-properties",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "lem-sfb-etale-relative-tor-comparison",
+  "def-pc-finite-tor-dimension-over",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-cat-right-adjoint-composition",
+  "lem-sfb-flat-section-coinduction",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-sfb-relative-dualizing-pair-base-change",
+  "lem-weil-pbc-mate-pasting",
+  "def-sc-duality-equation-base-change-map",
+  "lem-sc-proper-flat-right-adjoint-basechange-hbeta"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "Q47 stage-1 worker",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E4L, 0E2P, 0E2Z and 0E4P; site transfer and the explicit counit argument supplement the source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented morphism over a quasi compact quasi separated base the right adjoint image of the structure sheaf is relatively perfect and its diagonal rigidity class gives a relative dualizing pair",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)]\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [∀ (i : I), QuasiSeparatedSpace ↥(D.obj i)],\\n  \", \"doc\": \"For any diagram of schemes where all morphisms are affine and each scheme is compact and quasi-separated, the right opposite of the global sections functor (mapping schemes to their global sections in\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward being a right adjoint is the opposite adjunction; other hits supply only properness or flatness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat coherent duality adjoint structure sheaf diagonal rigidity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.MonoidalClosed (CategoryTheory.Sheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R))\", \"doc\": \"For any commutative ring $ R $, the category of sheaves on light profinite spaces (compact Hausdorff, totally disconnected, second-countable topological spaces) equipped with the coherent Grothendieck\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward being a right adjoint is the opposite adjunction; other hits supply only properness or flatness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward being a right adjoint is the opposite adjunction; other hits supply only properness or flatness"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingComplex|diagonal.*rigid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward being a right adjoint is the opposite adjunction; other hits supply only properness or flatness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat morphism right adjoint diagonal relative dualizing pair",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.diag_iff\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \"{X : D} [HasPullbacks C] [PreservesLimitsOfShape WalkingCospan F] :\\n  F.relativelyRepresentable (Limits.diag X) ↔ ∀ ⦃a : C⦄ (g : F.obj a ⟶ X), F.relativelyRepresentable g\", \"doc\": \"For a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, if $ \\\\mathcal{C} $ has pullbacks and $ F $ preserves pullbacks, then $ F $ is relatively representable for the diagonal morphism $ \\\\Delta_X : X \\\\to X\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"CategoryTheory.RepresentablyFlat.of_isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"[F.IsRightAdjoint] : RepresentablyFlat F\", \"doc\": \"Every right adjoint functor between categories is representably flat.\"}\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable.of_diag\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \"{X : D} (h : F.relativelyRepresentable (Limits.diag X)) ⦃a : C⦄ (g : F.obj a ⟶ X) : F.relativelyRepresentable g\", \"doc\": \"If the diagonal morphism $\\\\Delta_X : X \\\\to X \\\\times X$ is relatively representable with respect to the functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, then for any object $a \\\\in \\\\mathcal{C}$ and morphism $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward being a right adjoint is the opposite adjunction; other hits supply only properness or flatness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented scheme morphism the right adjoint image of the structure sheaf has a canonical diagonal relative dualizing class",
+   "results": "8 hits; top=['AlgebraicGeometry.AffineTargetMorphismProperty.diagonal', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback', 'AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal', 'AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal', 'AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover', 'AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal', 'AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction']; digest=e2990043ec701743; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward/pullback adjunction and flatness/diagonal morphism-property hits do not state coherent relative duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality relative dualizing complex rigidity diagonal proper flat base change",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction', 'AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj', \"LightCondensed.internallyProjective_iff_tensor_condition'\", 'LightCondensed.internallyProjective_iff_tensor_condition', 'CategoryTheory.ExponentiableMorphism.coev_ev', 'LightCondensed.free_internallyProjective_iff_tensor_condition']; digest=b33b17d69a8ca401; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward/pullback adjunction and flatness/diagonal morphism-property hits do not state coherent relative duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward/pullback adjunction and flatness/diagonal morphism-property hits do not state coherent relative duality"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingComplex|diagonal.*rigid",
+   "results": "0 hits; top=[]; digest=4f53cda18c2baa0c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward/pullback adjunction and flatness/diagonal morphism-property hits do not state coherent relative duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat right adjoint structure sheaf diagonal relative dualizing pair",
+   "results": "8 hits; top=['CategoryTheory.RepresentablyFlat.of_isRightAdjoint', 'AlgebraicGeometry.Flat.mk', 'AlgebraicGeometry.instReflectiveLocallyRingedSpaceOppositeCommRingCatToLocallyRingedSpace', \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit_app'\", 'AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ', 'AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction', 'AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules', 'CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify']; digest=7291de94126df32c; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary pushforward/pullback adjunction and flatness/diagonal morphism-property hits do not state coherent relative duality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "date": "2026-10-23",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family. Derived-complex prerequisite: proper flat duality and its normalized polynomial models, before applying the regular-equation calculation. Supporting input: Diagonal pair associated to proper flat duality over a qcqs base.",
+   "via": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-adjoint-diagonal-pair",
+  "worker": "stage1",
+  "summary": "Unchanged qcqs statement split through affine finiteness with explicit Zariski/etale transfer, normalized composite adjunction, closed-section coinduction and a counit calculation of arbitrary base-change compatibility. Two general statement-only inputs; no Noetherian or smoothness hypothesis.",
+  "blueprint": "Nearest-ancestor tool returns null, as on the live item. Inherited place: det-thm-sf-ctf-stability-direct-images, supporting proper-flat duality prerequisite to the relative nodal dualizing line; no replacement of the unit route. Current latest sk-thm-sf-ctf-stability-direct-images.proof.md read; the detailed stable-curve ancestry is inherited DAG history. No blueprint node states either new generic input.",
+  "tool_uses": [
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "def-weil-pbc-scheme-conventions",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "lem-sc-proper-flat-right-adjoint-basechange",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "def-pc-finite-tor-dimension-over",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "def-trf-coherent-relative-dualizing-pair",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic structure-module duality/site-comparison or adjunction tool used with exactly its stated hypotheses; this unit has no substitute."
+   },
+   {
+    "node": "def-sc-duality-equation-base-change-map",
+    "why": "Definition of the canonical proper-flat right-adjoint base-change map B used in step 6 (its counit formula); added by the reviewer, generic duality definition of sk-thm-picard-duality."
+   },
+   {
+    "node": "lem-sc-proper-flat-right-adjoint-basechange-hbeta",
+    "why": "Invertibility of the ordinary base-change map for the proper flat projection, required by the definition of B in step 6; added by the reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-proper-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-pc-proper-base-change",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-sc-proper-flat-right-adjoint-basechange",
+  "def-pc-finite-tor-dimension-over",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-cat-right-adjoint-composition",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-weil-pbc-mate-pasting",
+  "def-sc-duality-equation-base-change-map",
+  "lem-sc-proper-flat-right-adjoint-basechange-hbeta"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-a206daf25",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-a206daf25 (reviewer sub-agent of L); spot-checked: Read the item (7 steps), both new nodes, every cited statement, and Stacks duality 0E4L/0E2P/0E2Z/0E2T/0E4P/0A9X/0A77, spaces-perfect 0DK7 and more-morphisms 0695/0683. The item statement is identical to the Q60-created base. Orientation checked: p_2 is the base change of f along f, so b(O_X)≅Lp_1^*K, which matches lem-sc-proper-flat-right-adjoint-basechange and the definition of the coherent relative dualizing pair. New node lem-sfb-flat-section-coinduction matches 0A9X+0A77: the section is pseudo-coherent by 0695/0683 and M is bounded below. The multiplication-by-ξ normalization was checked on K-injectives and on the cases i=id and Z=∅. New node lem-sfb-etale-relative-tor-comparison is 0DK7 (1)+(2) with no extra hypotheses. Neither is a duplicate after a statement regex over the whole DAG: the hits are étale-Λ, Noetherian Koszul or perfect-immersion nodes, and the trf affine Tor criterion. Neither restates a clause of the item. Steps 1-5 and 7 are correct. Step 2 transfers to the étale site with the affine adjoint-unit theorem and returns by pseudo-coherence descent plus the new Tor comparison; the lower bound and flat p_1 pullback are elementary. Step 6 computes the counit correctly, but it used the counit formula of the right-adjoint base-change map B, which the cited theorem states only as 'canonical' (C3/C4). FIX: step 6 now cites def-sc-duality-equation-base-change-map and lem-sc-proper-flat-right-adjoint-basechange-hbeta, spells out the formula, and adds both to proof_deps and tool_uses. Batch-5: all four flagged paths reach only generic trf definitions or the Zariski/étale comparison square (def-trf-schematically-dense-open, def-trf-algebraic-space, lem-trf-zariski-etale-functor-comparison-square). None is a trace-formula or Poincaré-duality step, so all are accepted; the added cites were already in the closure. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-affine-countable-perfect-tensor",
+ "kind": "statement",
+ "title": "Affine countability after tensoring with a perfect complex",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A$ be a commutative ring and $Y=\\operatorname{Spec}A$ [def-weil-affine-spectrum, def-pc-scheme], considered on its small etale site with structure sheaf [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived category [def-weil-abstract-derived-category], and quasi-coherence [def-trf-space-quasi-coherent-module]. Let $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and suppose that $\\mathcal H^j(L)(Y)$ is countable for every $j\\in\\mathbf Z$. Let $Q\\in D(\\mathcal O_Y)$ be perfect, meaning etale locally represented by a bounded complex of direct summands of finite free structure modules [def-weil-pbc-strict-perfect-coefficient-package]. Then $H^nR\\Gamma(Y,L\\otimes^{\\mathbf L}_{\\mathcal O_Y}Q)$ is countable for every $n\\in\\mathbf Z$. Derived tensor uses K-flat resolutions and derived global sections use K-injective resolutions [def-pur-ringed-site-zeroth-hypercohomology]. No boundedness of $L$, Noetherian hypothesis on $A$, or countability of $A$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CRP (lemma-countable-cohomology), affine paragraph of the proof; small-etale interpretation explicitly used in spaces-perfect.tex Tag 0CRU (lemma-countable-cohomology), affine base case."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-weil-affine-spectrum",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "First $Q$ has quasi-coherent cohomology. On an etale scheme cover choose the bounded local models in the hypothesis. The structure module is quasi-coherent by its one-generator presentation. A direct summand $F$ of $\\mathcal O^r$, with inclusion $i$ and retraction $p$, is the kernel of $1-ip$ on $\\mathcal O^r$. The kernel, image and cokernel assertions of [lem-sfb-space-qcoh-kernels-colimits] therefore make each term, each cycle module, each boundary module and their cohomology quotient quasi-coherent. Exactness of etale restriction and the jointly surjective etale-cover test in [lem-sfb-space-derived-etale-chart-calculus] imply that $Q$ itself has quasi-coherent cohomology. This supplies the essential-image hypothesis before applying the derived equivalence; perfectness alone is not silently taken as an input to that equivalence.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08JL (lemma-pseudo-coherent), perfect local-model case; Tag 08F2 (lemma-check-quasi-coherence-on-covering); spaces-properties.tex Tag 03M1 (lemma-properties-quasi-coherent)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-affine-etale-derived-module-realization], choose an unbounded $A$-module complex $M^\\bullet$ and $a_A(M^\\bullet)\\simeq L$. Its cohomology and section comparisons give $H^j(M^\\bullet)\\cong\\mathcal H^j(L)(Y)$, hence these modules have countable underlying sets. By [lem-sfb-scheme-derived-etale-qcoh-comparison] and step 1, choose $Q_0\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Y,\\mathrm{Zar}})$ with $\\epsilon_Y^*Q_0\\simeq Q$. The reverse implication of [lem-sfb-etale-detects-perfect] makes $Q_0$ Zariski perfect. Apply [lem-pc-perfect-affine-bounded-projective] to obtain $Q_0\\simeq\\widetilde{P^\\bullet}$ with $P^\\bullet$ bounded and each $P^a$ finite projective over $A$. The associated-etale functor in the first citation is Zariski tilde followed by $\\epsilon_Y^*$, so also $L\\simeq\\epsilon_Y^*\\widetilde{M^\\bullet}$. All comparisons here concern unbounded derived categories; the boundedness is only on $P^\\bullet$.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-sfb-etale-detects-perfect",
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CRP (lemma-countable-cohomology), affine paragraph; Tags 06Z0 (lemma-affine-compare-bounded) and 08EB (lemma-perfect-affine); spaces-perfect.tex Tags 071Q and 08HG (lemma-descend-perfect)."
+   }
+  },
+  {
+   "text": "Projective modules are flat by [lem-weil-pbc-projective-module-flat], so [lem-pc-module-bounded-flat-kflat] makes $P^\\bullet$ K-flat. The ordinary-module tensor computation [lem-pc-source-kflat-module-tensor-model] represents $P^\\bullet\\otimes_A^{\\mathbf L}M^\\bullet$ by $T^\\bullet=\\operatorname{Tot}(P^\\bullet\\otimes_A M^\\bullet)$; its terms and differential are the signed total tensor of [def-pc-tensor-complex-sheaves], on the one-object site for $A$-modules. Clause (3) of [lem-pc-affine-derived-pullback-tensor-tilde] gives $Q_0\\otimes^{\\mathbf L}\\widetilde{M^\\bullet}\\simeq\\widetilde{T^\\bullet}$. Apply the derived pullback tensor isomorphism [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $\\epsilon_Y$. Its pullback is exact by [lem-sfb-scheme-derived-etale-qcoh-comparison], so its left derived functor is its termwise functor. Thus $Q\\otimes^{\\mathbf L}L\\simeq a_A(T^\\bullet)$. The inverse-comparison of [lem-sfb-affine-etale-derived-module-realization] now yields an isomorphism in $D(A)$,\n$$R\\Gamma(Y,Q\\otimes^{\\mathbf L}L)\\simeq T^\\bullet.$$\nThis is an identification of derived objects, not just individual cohomology groups. No resolution of $M^\\bullet$ with a boundedness condition has been used.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-scheme-derived-etale-qcoh-comparison",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DX (lemma-quasi-coherence-tensor-product), clause (2), and Tag 0CRP affine paragraph; sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product); more-algebra.tex Tag 064K."
+   }
+  },
+  {
+   "text": "Fix a degree $a$. Choose finitely many generators of $P^a$ [def-weil-finitely-generated-module], giving a surjection $p:A^r\\to P^a$. The lifting characterization of [def-weil-pbc-projective-module], applied to $1_{P^a}$ and $p$, gives $i:P^a\\to A^r$ with $pi=1$. Tensor these two maps with every term of $M^\\bullet$. They are chain maps $P^a\\otimes_A M^\\bullet\\to(M^\\bullet)^r\\to P^a\\otimes_A M^\\bullet$ with composite the identity, since the differentials here act only on $M^\\bullet$. They induce an injection\n$$H^j(P^a\\otimes_A M^\\bullet)\\hookrightarrow H^j((M^\\bullet)^r)=H^j(M^\\bullet)^r.$$\nThe equality follows by taking kernels, images and quotients coordinate by coordinate in a finite direct sum. A finite product of countable sets is countable: take injections into $\\mathbf N$ and then the usual injection $\\mathbf N^r\\to\\mathbf N$ (including the singleton for $r=0$). Consequently every group on the left is countable. This argument uses neither countability of $A$ nor countability of the terms of $M^\\bullet$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CRP (lemma-countable-cohomology), last two sentences of the affine paragraph; algebra.tex Tags 0518 (definition-finite) and 05CF (lemma-characterize-projective)."
+   }
+  },
+  {
+   "text": "Choose $a\\le b$ with $P^c=0$ outside $[a,b]$. For $c\\le b+1$, set $T_c=\\operatorname{Tot}((\\sigma_{\\ge c}P)\\otimes_A M)$, where $\\sigma_{\\ge c}$ is the stupid truncation of [lem-sf-module-stupid-truncation-short-exact]. Tensor its short exact sequence with $M$ and totalize to obtain\n$$0\\longrightarrow T_{c+1}\\longrightarrow T_c\\longrightarrow\\operatorname{Tot}(P^c[-c]\\otimes_A M)\\longrightarrow0.$$\nThis remains degreewise split exact: in each total degree inclusion inserts zero in the $P^c\\otimes M$ coordinate and projection takes that coordinate. Both are chain maps because the upper tail is a subcomplex; the quotient differential is $(-1)^c(1\\otimes d_M)$. Its degree-$n$ cohomology is $H^{n-c}(P^c\\otimes M)$, countable by step 4 (the constant sign changes neither kernels nor images). Start with $T_{b+1}=0$ and descend through the finitely many integers $b,\\ldots,a$. By [lem-weil-pbc-complex-ses-homology-long-exact], $H^n(T_c)$ has kernel, under its map to the quotient cohomology, equal to the image of the countable $H^n(T_{c+1})$. This kernel is countable and the image in the quotient cohomology is countable. Choose one lift for each element of that image. The addition map from the product of the kernel and this set of lifts onto $H^n(T_c)$ is surjective, so $H^n(T_c)$ is countable. This proves the inductive claim for every $n$ simultaneously. In particular every $H^n(T_a)=H^n(T^\\bullet)$ is countable.",
+   "uses": [
+    "lem-sf-module-stupid-truncation-short-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CRP (lemma-countable-cohomology), induction on the length of the finite projective complex; homology.tex Tag 0117 (lemma-long-exact-sequence-cochain)."
+   }
+  },
+  {
+   "text": "Taking cohomology of the derived isomorphism in step 3 and using step 5 proves countability of $H^nR\\Gamma(Y,Q\\otimes^{\\mathbf L}L)$. The canonical symmetry of derived tensor identifies this with the group in the statement, $H^nR\\Gamma(Y,L\\otimes^{\\mathbf L}Q)$. The zero complex, empty spectrum ($A=0$), ranks zero and negative degrees are included: the zero case starts the same induction, and its interval length is finite independently of $n$.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CRP (lemma-countable-cohomology), conclusion of the affine paragraph; symmetric derived tensor from sites-cohomology.tex Tag 0FPT."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-scheme-derived-etale-qcoh-comparison",
+  "lem-sfb-etale-detects-perfect",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "lem-sf-module-stupid-truncation-short-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CRP (lemma-countable-cohomology), affine paragraph; small-etale passage as in spaces-perfect.tex Tag 0CRU, using Tags 071Q and 08HG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "countable.*(cohom|homology)|((cohom|homology).*countable)",
+   "results": "0 hits; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countable hypercohomology quasicoherent perfect complex algebraic space",
+   "results": "8 hits; CategoryTheory.CountableAB4.mk, CategoryTheory.instCountableAB4OfAB4OfSize, ContinuousCohomology.MultiInd.complex, SheafOfModules.QuasicoherentData.IsFinitePresentation, CategoryTheory.CountableAB4.casesOn, CategoryTheory.CountableAB4Star.recOn, SheafOfModules.quasicoherentDataOfIsFinitePresentation, CategoryTheory.CountableAB4Star",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"homology\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an unbounded quasicoherent complex tensored with a perfect complex on an affine scheme is countable if all cohomology modules are countable",
+   "results": "8 hits; LightCondensed.instCountableAB4StarLightCondMod, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, LightCondensed.instIsGrothendieckAbelianLightCondMod, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CochainComplex.IsKProjective, CategoryTheory.Sheaf.H",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable cohomology modules remain countable after derived tensor product with a bounded complex of finite projective modules",
+   "results": "8 hits; LightCondensed.instCountableAB4StarLightCondMod, CochainComplex.isKProjective_of_projective, CategoryTheory.Tor, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', Rep.isZero_Tor_succ_of_projective, CategoryTheory.Tor'_obj_obj, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*(cohom|homology|perfect)|((cohom|homology|perfect).*countable)",
+   "results": "0 hits; subdirectory Mathlib/Algebra",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countability of cohomology of a quasicoherent complex tensored with a perfect complex on an affine scheme",
+   "results": "8 hits; CategoryTheory.instCountableAB4StarOfAB4StarOfSize, SheafOfModules.IsQuasicoherent.casesOn, CategoryTheory.CountableAB4Star, CategoryTheory.CountableAB4.mk, SheafOfModules.QuasicoherentData.I, CochainComplex.HomComplex.instAddCommGroupCohomologyClass, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, LightCondensed.instCountableAB4StarLightCondMod",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"tensor\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern countable coproduct axioms, abstract derived-category constructions or quasicoherent presentations, not countability of the underlying cohomology sets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a complex with countable cohomology tensored with a bounded complex of finite projective modules is countable",
+   "results": "{\"t\": \"2026-10-23T23:21:07Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a complex with countable cohomology tensored with a bounded complex of finite projective modules is countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instCountableAB4StarLightCondMod\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\"], \"digest\": \"820baebc03458f94\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern countable (co)product axioms, topological perfect sets, generic K-projectivity or sheaf cohomology, not the countable underlying sets in the present affine perfect-tensor assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"homology\"",
+   "results": "{\"t\": \"2026-10-23T23:21:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Countable\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern countable (co)product axioms, topological perfect sets, generic K-projectivity or sheaf cohomology, not the countable underlying sets in the present affine perfect-tensor assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "countable.*(cohom|homology|perfect)|(cohom|homology|perfect).*countable",
+   "results": "{\"t\": \"2026-10-23T23:21:07Z\", \"tool\": \"grep\", \"query\": \"countable.*(cohom|homology|perfect)|(cohom|homology|perfect).*countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Topology/Perfect.lean\", \"Mathlib/Topology/Perfect.lean\", \"Mathlib/Topology/Perfect.lean\", \"Mathlib/Topology/Perfect.lean\", \"Mathlib/Topology/Perfect.lean\", \"Mathlib/Topology/MetricSpace/Perfect.lean\"], \"digest\": \"dc19eff0cf146002\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern countable (co)product axioms, topological perfect sets, generic K-projectivity or sheaf cohomology, not the countable underlying sets in the present affine perfect-tensor assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Countability of cohomology after derived tensor with perfect complex on affine scheme",
+   "results": "{\"t\": \"2026-10-23T23:21:08Z\", \"tool\": \"leansearch\", \"query\": \"Countability of cohomology after derived tensor with perfect complex on affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instCountableAB4StarLightCondMod\", \"CategoryTheory.instCountableAB4StarOfAB4StarOfSize\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"CategoryTheory.CountableAB4.mk\", \"CategoryTheory.CountableAB4Star\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\"], \"digest\": \"273a412b4c507cfe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern countable (co)product axioms, topological perfect sets, generic K-projectivity or sheaf cohomology, not the countable underlying sets in the present affine perfect-tensor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme the hypercohomology of a quasicoherent complex tensored with a perfect object is countable when its cohomology modules are countable",
+   "results": "{\"t\": \"2026-10-23T23:23:04Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine scheme the hypercohomology of a quasicoherent complex tensored with a perfect object is countable when its cohomology modules are countable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instCountableAB4StarLightCondMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CochainComplex.IsKProjective\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CategoryTheory.Sheaf.H\"], \"digest\": \"d94cd5c26745a28c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern countable (co)product axioms, topological perfect sets, generic K-projectivity or sheaf cohomology, not the countable underlying sets in the present affine perfect-tensor assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Countable\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T23:23:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Countable\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern countable (co)product axioms, topological perfect sets, generic K-projectivity or sheaf cohomology, not the countable underlying sets in the present affine perfect-tensor assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-countable-hypercohomology",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, final paragraph invoking countability of cohomology on etale charts. Affine base case of Tag 0CRU, supplied by the finite-projective tensor calculation in the affine paragraph of Tag 0CRP.",
+   "via": [
+    "lem-sfb-space-countable-hypercohomology",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-countable-perfect-tensor",
+  "worker": "stage1",
+  "summary": "Realized the affine finite-projective tensor argument of Tag 0CRP on the small etale site using existing DAG comparison lemmas. Checked quasi-coherence before the derived equivalence, descended perfectness, identified the full derived tensor/sections object, and wrote the finite stupid-truncation induction and countable-extension argument explicitly. Statement unchanged; no new nodes.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain, at the affine base case of 0CRU/0CRP named in blueprint.from.place. Current latest blueprint proof (3) read; no unit or chapter route changed. Ancestor tool reports None, preserved as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "Generic affine module, ringed-site tensor, or complex homological-algebra input for the Tag 0CRP affine calculation; this unit has no replacement statement. Used only as a black box below the inherited unit route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic affine module, ringed-site tensor, or complex homological-algebra input for the Tag 0CRP affine calculation; this unit has no replacement statement. Used only as a black box below the inherited unit route."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic affine module, ringed-site tensor, or complex homological-algebra input for the Tag 0CRP affine calculation; this unit has no replacement statement. Used only as a black box below the inherited unit route."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine module, ringed-site tensor, or complex homological-algebra input for the Tag 0CRP affine calculation; this unit has no replacement statement. Used only as a black box below the inherited unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic affine module, ringed-site tensor, or complex homological-algebra input for the Tag 0CRP affine calculation; this unit has no replacement statement. Used only as a black box below the inherited unit route."
+   },
+   {
+    "node": "lem-sf-module-stupid-truncation-short-exact",
+    "why": "Generic affine module, ringed-site tensor, or complex homological-algebra input for the Tag 0CRP affine calculation; this unit has no replacement statement. Used only as a black box below the inherited unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic affine module, ringed-site tensor, or complex homological-algebra input for the Tag 0CRP affine calculation; this unit has no replacement statement. Used only as a black box below the inherited unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-module-stupid-truncation-short-exact",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-e54aba06a",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-e54aba06a (reviewer sub-agent of L); spot-checked: Read the item, all 18 cited statements and Stacks 0CRP's affine paragraph (perfect.tex 8291ff); a single commit (item + report), no new nodes, statement unchanged and still unsplit live, so no supersession. Steps checked: (1) quasi-coherent cohomology of the étale-perfect Q via summand = ker(1-ip), 03M1 kernel/cokernel closure and the 08F2 cover test. (2) The 071Q realization a_A gives H^j(M)=H^j(L)(Y), countable; the ε^* equivalence gives Q_0, 08HG makes it Zariski perfect, 08EB gives Q_0 ≃ P̃. (3) P is K-flat (projective ⇒ flat, bounded flat ⇒ K-flat); the tensor model gives P⊗^L M = Tot; 08DX(3), the 07A4 pullback with exact ε^*, and the RΓ quasi-inverse give RΓ(Q⊗L) ≅ T in D(A). (4) The split surjection A^r→P^a gives an injection into H^j(M)^r. (5) The stupid-truncation SES is degreewise split; the long exact sequence and a countable-extension argument run over the finite interval, base T_{b+1}=0. (6) Tensor symmetry. Edge cases A=0, Q=0, a single term in a negative degree, unbounded M, uncountable A all work. No cycle. Batch 5: the four sfb qcoh/realization nodes reach only def-trf-algebraic-space (the general algebraic-space definition, already a stmt_dep), and etale-detects-perfect reaches only lem-trf-zariski-etale-functor-comparison-square (generic Zariski/étale module comparison, 03FH/03LC). Neither is part of the trace formula or Poincaré duality, so it is acceptable. The generic pc/pbc/sf tool_uses are accepted. Advisory: Zariski D_QCoh is written with site quasi-coherence versus pqf-def-coherent, which is the same notion."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCountablePerfectTensor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.countable_affine_hypercohomology_tensor_perfect",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineCountableEtaleSpace",
+   "AlgebraicGeometry.AlgebraicSpace.countable_affine_hypercohomology_tensor_perfect"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCountablePerfectTensor.lean",
+  "statement": "theorem countable_affine_hypercohomology_tensor_perfect (A : Type u) [CommRing A] [HasDerivedCategory.{w} (affineCountableEtaleSpace A).SmallModules] (L : (affineCountableEtaleSpace A).DerivedModules) (hL : (affineCountableEtaleSpace A).derivedQCohProperty L) (hcount : ∀ j : ℤ, Countable (SheafOfModules.unit (affineCountableEtaleSpace A).smallStructureRings ⟶ (DerivedCategory.homologyFunctor (affineCountableEtaleSpace A).SmallModules j).obj L)) (Q : (affineCountableEtaleSpace A).DerivedModules) (hQ : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} (affineCountableEtaleSpace A).smallStructureSheaf Q) (n : ℤ) : Countable ((ringedSiteZerothHypercohomologyOfUniverses.{u, u, u, w} (affineCountableEtaleSpace A).smallEtaleModelTopology (affineCountableEtaleSpace A).smallStructureSheaf).obj (((affineCountableEtaleSpace A).derivedDualityModel.closed.tensor.obj (L, Q))⟦n⟧))",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing equivalent small affine etale ringed model of the represented Spec A. The helper abbreviation only specializes schemeSpace to Spec A over itself. Hom from its structure module is exactly global sections, so hcount tests only sections over Y, not over every affine etale chart. H^n R-Gamma is the recorded zeroth hypercohomology of the n-shift. Existing definition nodes for this site encoding are added to stmt_deps; no mathematical statement changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f13dd959",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Clause-by-clause match. L: unbounded DerivedModules + derivedQCohProperty (D_QCoh). hcount: Countable (unit ⟶ H^j L) = H^j(L)(Y), tests Y only, matches Stacks 0CRP affine case. Q: IsPerfectOnRingedSiteOfUniverses.{u,u,u,w}. Conclusion: ringedSiteZerothHypercohomologyOfUniverses of (derivedDualityModel.closed.tensor (L,Q))⟦n⟧ = H^n RΓ(L⊗^L Q); tensor fixed on K-flats via models.iso, countability iso-invariant. No boundedness/Noetherian/Countable A; A : Type u, free w, no universe equation. Edge cases A=0, zero objects, rank 0, negative degrees covered. All used decls owned by stmt_deps; 3 added deps are existing nodes, records identical to live; node otherwise unchanged vs live; statement verbatim, single sorry; docstrings carry source/blueprint/6 proof steps; abbrev only specializes schemeSpace; landed citer SpaceCountableHypercohomology uses same encoding; not superseded. No compile (no files changed); worker reports clean scompile."
+ }
+}

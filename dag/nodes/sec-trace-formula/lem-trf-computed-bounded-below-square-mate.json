@@ -1,0 +1,151 @@
+{
+ "id": "lem-trf-computed-bounded-below-square-mate",
+ "kind": "statement",
+ "title": "A computed bounded-below square has the expected derived mate factorization",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal A',\\mathcal B'$ be abelian categories [def-sp-abelian] with derived categories [def-weil-abstract-derived-category] and bounded-below subcategories [def-weil-pbc-bounded-derived-subcategories], in arbitrary compatible universes [def-weil-size-convention]. Suppose $\\mathcal A,\\mathcal A'$ have enough injectives [def-sp-injective-resolutions]. Give additive adjunctions $L:\\mathcal B\\rightleftarrows\\mathcal A:R$ and $L':\\mathcal B'\\rightleftarrows\\mathcal A':R'$ with $L,L'$ exact, and exact additive functors $G:\\mathcal B\\to\\mathcal B'$ and $H:\\mathcal A\\to\\mathcal A'$. Write $K(F)$ for termwise application on bounded-below homotopy categories, $q$ for homotopy localization, $D(F)$ for exact descent, and $\\phi_{F,N}:D(F)(qN)\\xrightarrow{\\sim}qK(F)N$ for the exact-functor comparisons [lem-weil-pbc-exact-functor-derived-factorization]. Use the canonical derived adjunctions [lem-trf-bounded-below-derived-adjunction] $D(L)\\dashv U=\\mathbf R R$ and $D(L')\\dashv U'=\\mathbf R R'$, with comparison units $\\alpha_P:qK(R)P\\to U(qP)$ and $\\alpha'_{P'}:qK(R')P'\\to U'(qP')$ [lem-weil-pbc-right-derived-plus-injective]. Let $\\sigma:L'G\\to HL$ be arbitrary, let $b:GR\\to R'H$ be its ordinary mate [def-weil-pbc-adjunction-mate], and give a derived square $\\theta:D(L')D(G)\\to D(H)D(L)$. For every $N\\in K^+(\\mathcal B)$ put $A_N=\\phi_{L',K(G)N}\\circ D(L')(\\phi_{G,N})$ and $B_N=\\phi_{H,K(L)N}\\circ D(H)(\\phi_{L,N})$. Assume\n$$B_N\\circ\\theta_{qN}=q(\\sigma^K_N)\\circ A_N,$$\nwhere $\\sigma^K$ is the termwise transformation, with the canonical termwise composition identifications. If $m:D(G)U\\to U'D(H)$ is the mate of $\\theta$ [def-weil-pbc-adjunction-mate], then for every $P\\in K^+(\\mathcal A)$,\n$$m_{qP}\\circ D(G)(\\alpha_P)=U'(\\phi_{H,P}^{-1})\\circ\\alpha'_{K(H)P}\\circ q(K(b)_P)\\circ\\phi_{G,K(R)P}.$$\nNeither $\\sigma$ nor either comparison unit is assumed invertible, and $H$ need not preserve injectives.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac, lines 419–484"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-adjunction-mate",
+  "lem-trf-bounded-below-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Expand mateEquiv into the primed derived unit, image of θ, and image of the unprimed derived counit. Naturality of the unit and θ moves D⁺(G)(α_P) next to the counit. The counit comparison of [lem-trf-bounded-below-derived-adjunction] replaces that pair by q of the termwise counit and the exact L comparison. Naturality of the H comparison and the assumed hθ then replace the inside composite by q of σ followed by H of this counit.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The primed unit comparison of [lem-trf-bounded-below-derived-adjunction] and naturality of the right-derived comparison unit [lem-weil-pbc-right-derived-plus-injective] replace the remaining transpose by q of the termwise mate followed by the primed comparison unit. The termwise identity is [lem-weil-pbc-termwise-adjunction-homotopy]. Functoriality and associativity give exactly the equation, retaining the G comparison and inverse H comparison at the two ends. This is the complete existing Lean proof in the cited source, valid also for σ = 0, identity squares, noninvertible σ, and zero categories.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "source",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+  "place": "CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac, lines 419–484"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of a square on bounded below derived categories computed by a natural transformation on complexes factors through the right derived comparison units",
+   "results": "Eight generic derived-functor hits, including Adjunction.derivedε and rightDerivedNatTrans_app; no computed-square mate theorem.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match. The complete source theorem is available."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"derived\"",
+   "results": "Zero hits.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulWhiskeringLeft|map_preimage",
+   "results": "Source PlusAdjunction.lean:419–484 contains a complete proof; Mathlib Localization.Predicate supplies fullyFaithfulWhiskeringLeft and Functor.FullyFaithful.map_preimage supplies its defining identity.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing source theorem without redeclaring or reproving it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BoundedBelowDerivedMateModel",
+  "group": "G6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Computation of the localized square mate; existing generic computed-square source theorem used by lem-trf-bounded-below-derived-mate-model.",
+   "via": [
+    "lem-trf-bounded-below-derived-mate-model",
+    "lem-trf-big-small-etale-localization-derived-pushforward",
+    "lem-trf-proper-small-big-etale-derived-comparison",
+    "lem-trf-ph-etale-comparison-hypotheses",
+    "lem-trf-ph-big-etale-torsion-acyclicity",
+    "lem-trf-ph-etale-torsion-comparison",
+    "lem-trf-proper-hypercover-etale-descent",
+    "lem-trf-nearby-proper-hyperdescent",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
+  "declaration": "CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac",
+  "statement": "theorem derivedPlus_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')\n    (σ : TwoSquare G L L' G')\n    (θ : TwoSquare G.mapDerivedCategoryPlus L.mapDerivedCategoryPlus L'.mapDerivedCategoryPlus\n      G'.mapDerivedCategoryPlus)\n    (hθ : ∀ N : HomotopyCategory.Plus C₂,\n      θ.natTrans.app (DerivedCategory.Plus.Qh.obj N) ≫\n          G'.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app N) ≫\n          G'.mapDerivedCategoryPlusFactorsh.hom.app (L.mapHomotopyCategoryPlus.obj N) =\n        L'.mapDerivedCategoryPlus.map (G.mapDerivedCategoryPlusFactorsh.hom.app N) ≫\n          L'.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj N) ≫\n          DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus σ.natTrans).app N))\n    (K : HomotopyCategory.Plus C₁) :\n    G.mapDerivedCategoryPlus.map (R.rightDerivedFunctorPlusUnit.app K) ≫\n        (mateEquiv adj.derivedPlus adj'.derivedPlus θ).natTrans.app\n          (DerivedCategory.Plus.Qh.obj K) =\n      G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫\n        DerivedCategory.Plus.Qh.map\n          ((NatTrans.mapHomotopyCategoryPlus (mateEquiv adj adj' σ).natTrans).app K) ≫\n        R'.rightDerivedFunctorPlusUnit.app (G'.mapHomotopyCategoryPlus.obj K) ≫\n        R'.rightDerivedFunctorPlus.map (G'.mapDerivedCategoryPlusFactorsh.inv.app K)",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "CategoryTheory.Adjunction.derivedPlus_mateEquiv_app_fac",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction",
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "open": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T081940-L-2107608",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261026T081940-L-2107608",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

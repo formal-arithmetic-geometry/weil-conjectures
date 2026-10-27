@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-ordered-tate-exponent-pullback",
+ "kind": "statement",
+ "title": "Pullback commutes with the ordered finite Tate root transition",
+ "statement": "Let ell be prime, E a finite extension of Q_ell, n>=0, and A=finiteTateCoefficient ell E n. Let f:X->Y be any scheme morphism with ell invertible on Y. Let r<=s, and suppose ell^(r+1) and ell^(s+1) annihilate A. Choose normalized OrdinaryFiniteTwistTransport tr and ts at those exponents. For every d>=0, write B_Y and B_X for baseExponentComparison in degree d. If P_r and P_s are vectorIntegrationBaseCoefficientPullback along f, then f^*(B_Y.hom) followed by P_r.hom equals P_s.hom followed by B_X.hom. This involves only the ordered shifted Tate coefficient: no bundle, frame, compact support or trace is present. Neither Noetherian nor finite-type hypotheses are imposed on X and Y.",
+ "stmt_deps": [
+  "def-pur-finite-site-coordinates",
+  "def-amb-vector-integration-charts",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "Canonical Tate identifications in local vector integration; parent local-trace proof Step 3, coefficient naturality before compact support. Expanded using finite Tate descent, Stacks 03PK and 03Q1."
+ },
+ "proof": [
+  {
+   "text": "The normalized root pullback commutes with the power map: compose both sides with inclusion in units and evaluate on roots. Scalar-extend and transpose under pullback/direct image; equality on pure coefficient-root generators gives the line square. Finite Tate descent identifies its normalized exponent transition with this root-power map.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-finite-tate-site-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the degree-zero derived embedding and the shift comparison. Naturality gives the shifted-line transition square.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on d, using the recursive formulas for baseExponentComparison and vectorIntegrationBaseCoefficientPullback. At zero both transition maps are identities. At a successor use naturality of tensor pullback, the induction hypothesis and the shifted-line square on the two factors. Bifunctoriality gives the ordered square, including d=0, empty schemes and equal exponents.",
+   "uses": [
+    "def-pur-finite-site-coordinates",
+    "def-amb-vector-integration-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-vector-integration-charts",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-pur-finite-site-coordinates",
+  "lem-amb-finite-tate-site-descent",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.proof.md",
+  "place": "Canonical Tate identifications in local vector integration; parent local-trace proof Step 3, coefficient naturality before compact support. Expanded using finite Tate descent, Stacks 03PK and 03Q1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an ordered tensor product of shifted finite Tate lines commutes with the power transition on roots of unity",
+   "results": "Eight scheme pullback carrier tensorCongr lemmas; none concerns derived finite Tate coefficients or normalized traces. A separate affine trace root-transition search returned eight cyclotomic-character and roots-of-unity lemmas, with no sheaf trace theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits headed by CategoryTheory.NatTrans.naturality, plus pullback/pushout and other generic naturality declarations. This supplies the exchange and compact-support comparison squares, not the geometric normalization equations.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality only"
+  },
+  {
+   "tool": "grep",
+   "query": "affineTraceCounit.*transition|baseExponentComparison; root transition; ordered affine",
+   "results": "The library has the baseExponentComparison construction and the finite-type affineTranspose_exponent_transition, whose conclusion is an adjunct on the pro-etale site and cannot apply on arbitrary Noetherian bases. IntegrationExponentTransposeTransport imports the parent VectorIntegrationSiteComparison and cannot be used here. No matching coefficient pullback or ordinary ordered counit theorem was found. Blueprint-reference searches found no node for these equations.",
+   "date": "2026-10-27",
+   "verdict": "No applicable existing theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorLocalTraceExponent",
+  "date": "2026-10-27",
+  "group": "T1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedTateExponentPullback",
+  "file": "lean/Sheaf/Paper/OrderedTateExponentPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.baseExponentComparison_pullback",
+  "statement": "theorem baseExponentComparison_pullback\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (n : ℕ)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (hY : IsUnit (l : Γ(Y, ⊤)))\n    (r s : ℕ) (hrs : r ≤ s)\n    (hr : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (hs : ((l ^ (s + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)\n    (tr : Etale.OrdinaryFiniteTwistTransport (Scheme.finiteTateCoefficient l E n)\n      (l ^ (r + 1)) hr)\n    (ts : Etale.OrdinaryFiniteTwistTransport (Scheme.finiteTateCoefficient l E n)\n      (l ^ (s + 1)) hs) (d : ℕ) :\n    (Etale.ordinaryFinitePullback (Scheme.finiteTateCoefficient l E n) f).map\n        (baseExponentComparison l E n Y hY r s hrs hr hs d).hom ≫\n      (Etale.vectorIntegrationBaseCoefficientPullback _ (l ^ (r + 1)) hr tr f\n        (by simpa only [Nat.cast_pow] using hY.pow (r + 1)) d).hom =\n    (Etale.vectorIntegrationBaseCoefficientPullback _ (l ^ (s + 1)) hs ts f\n        (by simpa only [Nat.cast_pow] using hY.pow (s + 1)) d).hom ≫\n      (baseExponentComparison l E n X\n        (by simpa using hY.map f.appTop.hom) r s hrs hr hs d).hom",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Canonical Tate identifications in local vector integration; parent local-trace proof Step 3, coefficient naturality before compact support. Expanded using finite Tate descent, Stacks 03PK and 03Q1.",
+   "via": [
+    "lem-pur-vector-local-trace-exponent",
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201513-L-3387922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T201513-L-3387922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

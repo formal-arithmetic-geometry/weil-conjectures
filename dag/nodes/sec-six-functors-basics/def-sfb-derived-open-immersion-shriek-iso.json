@@ -218,7 +218,60 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-ff3baecef (reviewer sub-agent of L); spot-checked: I read the whole item, the new leaf, every cited statement, blueprint order 1745, the unit proof's Extension by zero paragraph (proof.md:31-35), Mathlib Localization/Adjunction.lean:33-131, Stacks 04VG (categories.tex:4406), Stacks 015F (derived.tex:5884) and master ChangeOfCoefficients.lean:298-309 with OpenImmersionLowerShriek.lean:79-81. The statement is unchanged. Its coefficient category is layer B D(Mod_{Lambda_X}) and it has the same conjugate square and direction as master derivedOpenImmersionShriekIso. Neither master nor the item assumes flatness. Master builds its adjunction with mapDerivedCategoryAdjunction. That has the same unit on Q(K) as the item's adjunction from Adjunction.localization, so the conjugate is the same isomorphism. Step 1: j_! is exact for any condensed ring by sk-def-sfb-module-lower-shriek, and lem-weil-pbc-exact-functor-derived-factorization (015F) then gives F_B with its factorization. G_B is the levelwise D(j^*) named in the statement of def-sfb-derived-comap-upper-star-iso. Its factorization is part of what 'levelwise' means in sk-def-sfb-derived-categories, so I accept it. Step 2: j_! is additive because exact, and j^* is additive by def-sfb-module-upper-star. Clause (a) of lem-weil-pbc-termwise-adjunction-homotopy gives the adjunction on complexes. Step 3: I checked the orientations p: Lbar Q1 ≅ Q2 L and q: Rbar Q2 ≅ Q1 R against CatCommSq.iso. They are its symm, and the unit and counit formulas match localization_unit_app (line 118) and localization_counit_app (line 125) exactly. Step 4: with A=D(Lambda_X), B=D(Lambda'_X), A'=D(Lambda_U), B'=D(Lambda'_U), e is derived-comap-upper-star-iso at f=j, mapping B to A', and the conjugate is T^X D(j_!) ≅ D(j_!) T^U. New leaf lem-sfb-adjunction-localization: an exact Mathlib match with one declaration per clause, statement only, self-contained, cites the localization definition node. Tested on Q=id, on empty categories and with W = all morphisms. Duplicate search through rg found nothing that states it: lem-sc-localization-nested-adjunction-mate, lem-sc-derived-open-shriek-derived-adjunction, def-sfb-dc-open-lower-shriek-adjunction, lem-pc-derived-adjoint-functors and the localization universal property all state other things. No existing node states the layer-B ambient adjunction either, since unit sk-prop-sfb-module-derived-factorization clause 6 has no realizing node. Accepted tool_uses: lem-weil-pbc-termwise-adjunction-homotopy (a black box for its clause (a); no node of the route gives it) and def-sfb-module-upper-star (a definition). lem-weil-pbc-exact-functor-derived-factorization is a Mathlib leaf. No SGA is cited and there is no cycle. FIX: in the item, the source.place of steps 1-3 and proof_origin.place still described the old route (lem-weil-pbc-localization-universal-property, 04VG, Predicate.lean). I rewrote them to name the unit paragraph and 015F, 08BJ and Localization/Adjunction.lean:89,118,125. Nothing else changed.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenImmersionShriekIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenImmersionShriekIso",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+     "lines": [
+      290,
+      301
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.hasProjectionFormula_openImmersion",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs",
+     "lines": [
+      79,
+      84
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-open-projection-formula",
+      "sk-def-sfb-module-lower-shriek"
+     ],
+     "below": true
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
+     "lines": [
+      174,
+      177
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-module-mapmod-pullback-kflat"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "lean": {
   "branch": "master",
   "existing": true,
@@ -228,5 +281,15 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenImmersionShriekIso"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients: the blueprint item def-sfb-derived-open-immersion-shriek-iso's upstream Lean declarations, proved in live (sweep of the propagation)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $a\\colon\\Lambda\\to\\Lambda'$ be a morphism of commutative condensed rings, with derived\nextensions of scalars $T^X$ ([sk-def-sfb-coefficient-change]), and $j\\colon U\\to X$ an open\nimmersion. The natural isomorphism\n\n$$\nT^X\\circ D(j_!)\\;\\cong\\;D(j_!)\\circ T^U\\colon D(\\Mod_{\\Lambda_U})\\longrightarrow\nD(\\Mod_{\\Lambda'_X})\n$$\n\non the unbounded derived categories, with $D(j_!)$ the levelwise extension by zero\n([sk-def-sfb-module-lower-shriek]), is the conjugate ([def-sfb-conjugate-pull-iso]) of the\nisomorphism $D(\\operatorname{Res}_{a_U})\\circ D(j^*)\\cong D(j^*)\\circ D(\\operatorname{Res}_{a_X})$\nof [def-sfb-derived-comap-upper-star-iso] along the adjunctions $D(j_!)\\dashv D(j^*)$\n([sk-prop-sfb-module-derived-factorization]) and $T\\dashv D(\\operatorname{Res})$\n([det-def-sfb-derived-extension-of-scalars]). No flatness of $a$ is needed.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

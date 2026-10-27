@@ -1,0 +1,234 @@
+{
+ "id": "lem-sf-relative-hom-witness-transport",
+ "kind": "statement",
+ "title": "Relative Hom functions extend independently of fully faithful witnesses",
+ "statement": "Let $\\mathcal A,\\mathcal P,\\mathcal Q$ be categories [def-nagata-category], let $C:\\mathcal A\\to\\mathcal P$ induce bijections on all Hom sets, and let $\\mathcal D\\subseteq\\mathcal Q$ be a full subcategory. Give functors $F,E:\\mathcal P\\to\\mathcal Q$, $J,G:\\mathcal D\\to\\mathcal P$, a natural isomorphism $q:F\\xrightarrow{\\sim}E$ and natural bijections\n$$a_{K,Y}:\\operatorname{Hom}_{\\mathcal Q}(FK,Y)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal P}(K,JY),\\qquad b_{L,Y}:\\operatorname{Hom}_{\\mathcal Q}(ECL,Y)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathcal P}(CL,GY),$$\nfor $K\\in\\mathcal P$, $L\\in\\mathcal A$, $Y\\in\\mathcal D$, with naturality in both variables as in [lem-weil-pbc-adjunction-of-natural-bijection]. Suppose a natural isomorphism $\\theta:J\\xrightarrow{\\sim}G$ satisfies\n$$b_{L,Y}(h q_{CL}^{-1})=\\theta_Ya_{CL,Y}(h)$$\nfor every $h:FCL\\to Y$. If $\\alpha:CL\\xrightarrow{\\sim}K$ is an isomorphism, define for $z:EK\\to Y$\n$$b^\\alpha_{K,Y}(z)=b_{L,Y}(z E(\\alpha))\\alpha^{-1}.$$\nThen this is a bijection and\n$$b^\\alpha_{K,Y}(h q_K^{-1})=\\theta_Ya_{K,Y}(h)$$\nfor every $h:FK\\to Y$. For any second witness $\\beta:CL'\\xrightarrow{\\sim}K$ there is a unique isomorphism $t:L\\xrightarrow{\\sim}L'$ with $C(t)=\\beta^{-1}\\alpha$, and $b^\\alpha_{K,Y}=b^\\beta_{K,Y}$. Thus $b^\\alpha$ defines a natural family $\\bar b$ on the full subcategory of objects isomorphic to some $CL$, independent of the witness. Its inverse satisfies\n$$\\bar b_{K,Y}^{-1}(\\theta_Y g)=a_{K,Y}^{-1}(g)q_K^{-1}.$$\nAny already specified natural relative Hom bijection whose value at the identity witness is $b$ is equal to $\\bar b$. In particular, the units and counits obtained from these Hom functions by transposing identities [lem-weil-pbc-adjunction-of-natural-bijection] agree under $q,\\theta$ whenever they are defined: if $FK\\in\\mathcal D$, then $\\bar b_{K,FK}(q_K^{-1})=\\theta_{FK}a_{K,FK}(1_{FK})$; if $JY$ lies in the stated full subcategory, then\n$$\\bar b_{JY,Y}(a_{JY,Y}^{-1}(1_{JY})q_{JY}^{-1})=\\theta_Y.$$\nThese assertions impose no relative adjunction outside the stated domains. Composition is read right to left.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second paragraph: locally closed exceptional comparison; returned expanded Steps 6–7 (actual Hom functions, units/counits, witness transport and naturality). Agent-formulated categorical consequence of Stacks categories.tex, Tag 0037 (definition-adjoint), ensuing unit/counit formulas and naturality."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof": [
+  {
+   "text": "For every K in P and Y in D, construct e(K,Y) as the composite of the Hom equivalence given by precomposition with q_K, a(K,Y), and postcomposition with theta_Y. These are Mathlib Iso.homFromEquiv and Iso.homToEquiv, so the composite is an equivalence with value a(K,Y)(q_K followed by z) followed by theta_Y. After Step 2 identifies the transported witness function with e(K,Y), its bijectivity follows from Equiv.bijective.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and following paragraph defining unit and counit; explicit agent calculation for the relative domains."
+   }
+  },
+  {
+   "text": "Naturality of $q$ gives $q_K^{-1}E(\\alpha)=F(\\alpha)q_{CL}^{-1}$. Thus the assumed equality on $CL$ and naturality of $a$ give\n$$b^\\alpha_{K,Y}(hq_K^{-1})=b_{L,Y}(hF(\\alpha)q_{CL}^{-1})\\alpha^{-1}=\\theta_Ya_{CL,Y}(hF(\\alpha))\\alpha^{-1}=\\theta_Ya_{K,Y}(h).$$\nTaking $h=zq_K$ yields $b^\\alpha_{K,Y}(z)=\\theta_Ya_{K,Y}(zq_K)$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and following paragraph defining unit and counit; explicit agent calculation for the relative domains."
+   }
+  },
+  {
+   "text": "The bijective Hom maps give a FullyFaithful structure via Mathlib Functor.FullyFaithful.nonempty_iff_map_bijective. Its isoEquiv is an equivalence between isomorphisms L to L-prime and isomorphisms CL to CL-prime, with forward map C.mapIso. Apply its inverse to alpha followed by beta inverse. The right inverse law proves the specified image, and injectivity gives uniqueness.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and following paragraph defining unit and counit; explicit agent calculation for the relative domains."
+   }
+  },
+  {
+   "text": "The last formula in Step 2 contains no witness, so both witness functions equal the equivalence e(K,Y) constructed in Step 1. Define bar(K,Y)=e(K,Y) for K in the essential image. For f:K-prime to K, naturality of q moves q_K-prime past E(f), and naturality of a gives bar(K-prime,Y)(E(f) followed by z)=f followed by bar(K,Y)(z). For v:Y to Y-prime, naturality of a followed by naturality of theta gives bar(K,Y-prime)(z followed by v)=bar(K,Y)(z) followed by G(v).",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and following paragraph defining unit and counit; explicit agent calculation for the relative domains."
+   }
+  },
+  {
+   "text": "Substitute $h=a_{K,Y}^{-1}(g)$ in Step 2. It gives $\\bar b_{K,Y}(a_{K,Y}^{-1}(g)q_K^{-1})=\\theta_Yg$. Bijectivity from Step 1 proves exactly the asserted inverse formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and following paragraph defining unit and counit; explicit agent calculation for the relative domains."
+   }
+  },
+  {
+   "text": "Let $d$ be any already specified natural family on the same full subcategory with $d_{CL,Y}=b_{L,Y}$ at the identity witness. Naturality at $\\alpha:CL\\to K$ gives $d_{K,Y}(z)\\alpha=b_{L,Y}(zE(\\alpha))$. Composing with $\\alpha^{-1}$ proves $d_{K,Y}(z)=b^\\alpha_{K,Y}(z)=\\bar b_{K,Y}(z)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and following paragraph defining unit and counit; explicit agent calculation for the relative domains."
+   }
+  },
+  {
+   "text": "For K in the essential image with FK in D, apply the normalization formula of Step 2 to the identity of FK, canceling composition with the identity, to obtain the stated unit comparison. For Y in D with JY in the essential image, apply that formula to a(JY,Y).symm(identity). The inverse law of the equivalence a and the category identity law give theta_Y, which is precisely the stated counit comparison. These are substitutions in relative Hom functions and do not construct a global adjunction.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), natural Hom bijections and following paragraph defining unit and counit; explicit agent calculation for the relative domains."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0037 (definition-adjoint), natural Hom bijections and the following unit/counit formulas; explicit categorical calculations formalized by U7 using Mathlib Iso Hom equivalences and Functor.FullyFaithful.isoEquiv, 2026-10-23."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of two natural relative adjunction Hom bijections on the essential image of a fully faithful functor extends independently of an isomorphism witness and identifies units and counits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Restrict\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {C' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Restrict\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {C' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} C'] →\\n            {D' : Type u₄} →\\n              [inst_3 : CategoryTheory.Category.{\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{C}', \\\\mathcal{D}'$ with fully faithful functors $i_\\\\mathcal{C}: \\\\mathcal{C} \\\\to \\\\mathcal{C}'$ and $i_\\\\mathcal{D}: \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, an\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreHomEquiv.mk.inj\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst_1 : CategoryTheory.Category.{v₂, u₂} D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  {homEquiv : (X : C) → (Y : D) → (F.obj X ⟶ Y) ≃ (X ⟶ G.obj Y)}\\n  {homEquiv_naturality_left_symm :\\n    autoPara\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and adjoint functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, if two core hom-set equivalences between $F$ and $G$ hav\"}\n  {\"name\": \"CategoryTheory.Adjunction.Triple.fullyFaithfulEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Triple\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G : CategoryTheory.Functor D C} →\\n            {H : CategoryTheory.Functor C D} →\\n              Categor\", \"doc\": \"Given an adjunction triple consisting of functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and $H: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ with adjunctions $F \\\\dashv G$ and $G \\\\dashv H\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreHomEquivUnitCounit\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        CategoryTheory.Functor C D → CategoryTheory.Functor D C → Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"The inductive type defining the equivalence between hom-sets $\\\\mathrm{Hom}(F(X), Y)$ and $\\\\mathrm{Hom}(X, G(Y))$ for functors $F: C \\\\to D$ and $G: D \\\\to C$, which forms the core of an adjunction via t\"}\n  {\"name\": \"CategoryTheory.Adjunction.mk'_homEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G),\\n  (CategoryTheory.Adjunction.mk' adj).homEquiv =\", \"doc\": \"Given functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $, and a hom-set equivalence $ \\\\text{Hom}(F(X), Y) \\\\cong \\\\text{Hom}(X, G(Y)) $ defining an adjunction core, the\"}\n  {\"name\": \"CategoryTheory.Adjunction.adjunctionOfEquivRight\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          {G_obj : D → C} →\\n            (e : (X : C) → (Y : D) → (F.obj X ⟶ Y) ≃ (X ⟶ G_obj Y)) →\\n              (he :\\n \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural equivalence $e_{X,Y} : \\\\text{Hom}(F(X), Y) \\\\simeq \\\\text{Hom}(X, G(Y))$ for all $X \\\\in \\\\math\"}\n  {\"name\": \"CategoryTheory.Adjunction.CoreHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Adjunction/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        CategoryTheory.Functor C D → CategoryTheory.Functor D C → Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, this is the type of natural equivalences between hom-sets $\\\\math\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, CategoryTheory.Adjunction.homEquiv",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(essImage|EssentialImage|essential image).*(adjunction|homEquiv)|homEquiv.*(essImage|EssentialImage)|restrictFullyFaithful_homEquiv",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"line\": \"76\", \"text\": \"lemma restrictFullyFaithful_homEquiv_apply {X : C} {Y : D} (f : L.obj X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"367\", \"text\": \"    (((G.op.ranAdjunction A).restrictFullyFaithful_homEquiv_apply\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport a natural bijection of hom sets along an isomorphism in a fully faithful essential image independently of the chosen witness",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.homNatIso'_hom_app_down\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) (X X_1 : C)\\n  (a : (F.comp (CategoryTheory.uliftCoyoneda.{v₁, v₂, u₂}.obj (Opposite.op (F.obj X)))).obj X_1),\\n  ((hF.homNa\", \"doc\": \"For a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and objects $ X, X_1 \\\\in \\\\mathcal{C} $, the component of the natural isomorphism $ \\\\text{homNatIso}' $ at $ X_1 $ satisfies $ (\\\\alpha_{\"}\n  {\"name\": \"CategoryTheory.Iso.homToEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C} (α : X ≅ Y) {Z : C} (f : Z ⟶ X),\\n  α.homToEquiv f = CategoryTheory.CategoryStruct.comp f α.hom\", \"doc\": \"Given an isomorphism $\\\\alpha: X \\\\cong Y$ in a category $\\\\mathcal{C}$ and an object $Z$, the hom-sets $\\\\mathrm{Hom}(Z, X)$ and $\\\\mathrm{Hom}(Z, Y)$ are in bijection. This equivalence is defined by prec\"}\n  {\"name\": \"CategoryTheory.Iso.homCongr\", \"module\": \"Mathlib.CategoryTheory.HomCongr\", \"type\": \"{X Y X₁ Y₁ : C} (α : X ≅ X₁) (β : Y ≅ Y₁) : (X ⟶ Y) ≃ (X₁ ⟶ Y₁)\", \"doc\": \"Given isomorphisms $\\\\alpha: X \\\\cong X_1$ and $\\\\beta: Y \\\\cong Y_1$ in a category $\\\\mathcal{C}$, this defines a bijection between hom-sets $\\\\text{Hom}(X,Y)$ and $\\\\text{Hom}(X_1,Y_1)$ by conjugating morp\"}\n  {\"name\": \"CategoryTheory.Iso.homFromEquiv\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \"(α : X ≅ Y) {Z : C} : (X ⟶ Z) ≃ (Y ⟶ Z)\", \"doc\": \"Given an isomorphism $ \\\\alpha: X \\\\cong Y $ in a category $ \\\\mathcal{C} $ and any object $ Z $, this function defines an equivalence between the hom-sets $ \\\\text{Hom}(X, Z) $ and $ \\\\text{Hom}(Y, Z) $. \"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \"{G : C ⥤ D} (e : F ≅ G) : G.FullyFaithful\", \"doc\": \"Given a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an isomorphism $ e : F \\\\cong G $ between functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the functor $ G $ is also fully faithfu\"}\n  {\"name\": \"CategoryTheory.Iso.homToEquiv\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \"(α : X ≅ Y) {Z : C} : (Z ⟶ X) ≃ (Z ⟶ Y)\", \"doc\": \"Given an isomorphism $\\\\alpha: X \\\\cong Y$ in a category $\\\\mathcal{C}$ and an object $Z$, this function constructs an equivalence between the hom-sets $\\\\mathrm{Hom}(Z, X)$ and $\\\\mathrm{Hom}(Z, Y)$ by pr\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.preimageIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \"{X Y : C} (e : F.obj X ≅ F.obj Y) : X ≅ Y\", \"doc\": \"Given a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an isomorphism $ e : F(X) \\\\cong F(Y) $ in $ \\\\mathcal{D} $, this constructs the isomorphism $ X \\\\cong Y $ in $ \\\\mathcal{C} $ by ta\"}\n  {\"name\": \"CategoryTheory.Iso.homFromEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : C} (α : X ≅ Y) {Z : C} (f : X ⟶ Z),\\n  α.homFromEquiv f = CategoryTheory.CategoryStruct.comp α.inv f\", \"doc\": \"Given an isomorphism $ \\\\alpha: X \\\\cong Y $ in a category $ \\\\mathcal{C} $ and any object $ Z $, precomposing with $ \\\\alpha^{-1} $ defines a bijection between the hom-sets $ \\\\text{Hom}(X, Z) $ and $ \\\\te\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural hom equivalences on isomorphic objects are independent of presentation by a fully faithful embedding and recover unit counit identities",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.homNatIso'\", \"module\": \"Mathlib/CategoryTheory/Yoneda\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          F.FullyFaithful →\\n            (X : C) →\\n              F.comp (CategoryTheory.uliftCoyoneda.{v₁, v₂, u₂}.obj (\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a fully faithful functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and an object $X \\\\in \\\\mathcal{C}$, this constructs a natural isomorphism between the compo\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.homEquiv\", \"module\": \"Mathlib/CategoryTheory/Functor/FullyFaithful\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} → F.FullyFaithful → {X Y : C} → (X ⟶ Y) ≃ (F.obj X ⟶ F.obj Y)\", \"doc\": \"For a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this defines a bijection between the hom-set $ \\\\text{Hom}_{\\\\mathcal{C}}(X,Y) $ and $ \\\\text{Hom}_{\\\\mathcal{D}}(F(X),F(Y)) $ for any obj\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.isoEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Functor/FullyFaithful\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} (i : X ≅ Y), hF.isoEquiv i = F.mapIso i\", \"doc\": \"For a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural equivalence between isomorphism types $ X \\\\cong Y $ in $ \\\\mathcal{C} $ and $ F(X) \\\\cong F(Y) $ in $ \\\\mathcal{D} $ is given\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.homNatIso\", \"module\": \"Mathlib/CategoryTheory/Yoneda\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          F.FullyFaithful →\\n            (X : C) →\\n              F.op.comp (CategoryTheory.uliftYoneda.{v₁, v₂, u₂}.obj \", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and a fully faithful functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, there exists a natural isomorphism between the functors $F^{\\\\text{op}} \\\\circ \\\\text{ulift\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.homNatIso'_hom_app_down\", \"module\": \"Mathlib/CategoryTheory/Yoneda\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) (X X_1 : C)\\n  (a : (F.comp (CategoryTheory.uliftCoyoneda.{v₁, v₂, u₂}.obj (Opposite.op (F.obj X)))).obj X_1),\\n  ((hF.homNa\", \"doc\": \"For a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and objects $ X, X_1 \\\\in \\\\mathcal{C} $, the component of the natural isomorphism $ \\\\text{homNatIso}' $ at $ X_1 $ satisfies $ (\\\\alpha_{\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.isoEquiv\", \"module\": \"Mathlib/CategoryTheory/Functor/FullyFaithful\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} → F.FullyFaithful → {X Y : C} → (X ≅ Y) ≃ (F.obj X ≅ F.obj Y)\", \"doc\": \"For a fully faithful functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, there is a natural equivalence between the type of isomorphisms $ X \\\\cong Y $ in $ \\\\mathcal{C} $ and the type of isomorphisms $ F(X) \\\\\"}\n  {\"name\": \"CategoryTheory.Functor.RepresentableBy.ofIsoObj_homEquiv\", \"module\": \"Mathlib/CategoryTheory/Yoneda\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {F : CategoryTheory.Functor Cᵒᵖ (Type w)} {X Y : C}\\n  (R : F.RepresentableBy X) (e : Y ≅ X) {Z : C}, (R.ofIsoObj e).homEquiv = e.homToEquiv.trans R.homEquiv\", \"doc\": \"Given a contravariant functor $ F : \\\\mathcal{C}^\\\\mathrm{op} \\\\to \\\\mathrm{Type}\\\\,v $, objects $ X, Y \\\\in \\\\mathcal{C} $, and an isomorphism $ e : Y \\\\cong X $, if $ F $ is representable by $ X $, then the\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.homNatIsoMaxRight\", \"module\": \"Mathlib/CategoryTheory/Yoneda\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{max v₁ v₂, u₂} D] →\\n        {F : CategoryTheory.Functor C D} →\\n          F.FullyFaithful →\\n            (X : C) → F.op.comp (CategoryTheory.yoneda.obj (F.obj X)) ≅ CategoryTheo\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and a fully faithful functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, there exists a natural isomorphism between the functors $F^{\\\\text{op}} \\\\circ \\\\text{ulift\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport natural relative Hom bijections along isomorphic objects independently of fully faithful presentation and compare unit and counit",
+   "results": "OK 8 hits: CategoryTheory.Functor.FullyFaithful.ofIso, CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app, CategoryTheory.Functor.FullyFaithful.homNatIso'_hom_app_down, CategoryTheory.Functor.RepresentableBy.uniqueUpToIso_hom, CategoryTheory.Functor.RepresentableBy.ofIsoObj_homEquiv, CategoryTheory.Yoneda.ext, CategoryTheory.Functor.FullyFaithful.isoEquiv, CategoryTheory.Functor.fullyFaithfulCancelRight",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(essImage|EssentialImage|essential image).*(adjunction|homEquiv)|homEquiv.*(essImage|EssentialImage)|restrictFullyFaithful_homEquiv",
+   "results": "OK 5 hits: Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a natural relative hom equivalence from the image of a fully faithful functor to its essential image by conjugation with an isomorphism",
+   "results": "OK 8 hits: CategoryTheory.Equivalence.fullyFaithfulToEssImage, CategoryTheory.Localization.Preadditive.homEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.Functor.FullyFaithful.homEquiv, CategoryTheory.Functor.FullyFaithful.homMulEquiv, CategoryTheory.Functor.FullyFaithful.preimageIso, CategoryTheory.conjugateEquiv_iso, CategoryTheory.Functor.FullyFaithful.ofIso",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful, CategoryTheory.Adjunction.homEquiv",
+   "results": "OK 1 hits: CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural hom equivalences on isomorphic objects are independent of presentation by a fully faithful embedding and recover unit counit identities",
+   "results": "OK 8 hits: CategoryTheory.Functor.FullyFaithful.homNatIso', CategoryTheory.Functor.FullyFaithful.homEquiv, CategoryTheory.Functor.FullyFaithful.isoEquiv_apply, CategoryTheory.Functor.FullyFaithful.homNatIso, CategoryTheory.Functor.FullyFaithful.homNatIso'_hom_app_down, CategoryTheory.Functor.FullyFaithful.isoEquiv, CategoryTheory.Functor.RepresentableBy.ofIsoObj_homEquiv, CategoryTheory.Functor.FullyFaithful.homNatIsoMaxRight",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-locally-closed-relative-transpose-normalization",
+  "date": "2026-10-22",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Second paragraph: locally closed exceptional comparison; returned expanded Steps 6–7 (actual Hom functions, units/counits, witness transport and naturality).",
+   "via": [
+    "lem-sf-locally-closed-relative-transpose-normalization",
+    "lem-weil-finite-duality-locally-closed-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-relative-hom-witness-transport",
+  "worker": "stage1",
+  "summary": "Preserved the statement and proved all clauses by explicit inverses, naturality, cancellation and bijectivity of the fully faithful Hom maps. The witness-free formula proves independence and naturality without a new lemma. No new nodes. Searched the project and Mathlib, inspected the candidates, and checked the relative unit/counit domains.",
+  "blueprint": "lem-weil-finite-duality-site-comparison, second proof paragraph: the sentence that locally closed exceptional inverse image commutes with comparison; this item supplies the witness-independent relative Hom transport required by the expanded locally closed comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-45bcf7dab",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-45bcf7dab (reviewer sub-agent of L); spot-checked: I read the item in full: 7 elementary steps, no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the creating Q29 snapshot, and the Q29 fixes did not touch this node. Each step checks with correct types. Step 1: the inverse of b^α is u↦b^{-1}(uα)E(α^{-1}). Step 2: q_K^{-1}E(α)=F(α)q_{CL}^{-1}, then the hypothesis and naturality of a on all of P give b^α(z)=θ_Y a_K(zq_K), with no witness left. Step 3: t lies over β^{-1}α:CL→CL', and injectivity of C on Hom sets gives the two inverse identities and uniqueness. Step 4: naturality in K uses E(f)q_{K'}=q_K F(f); naturality in Y uses a(vx)=J(v)a(x) and naturality of θ. Steps 5–7 are direct substitutions; the unit clause needs FK∈D and the counit clause needs JY in the essential image, and both are assumed. The cited leaves def-nagata-category and lem-weil-pbc-adjunction-of-natural-bijection state exactly the category axioms, the naturality laws and the identity-transpose conventions used. Both are Mathlib leaves, so there is no route issue and no tool_use to accept. Source: Stacks 0037 categories-definition-adjoint, categories.tex lines 3344–3390, mapped at tags line 124; proof_origin agent is correct. The parent's Step 3 hypothesis Φ(hq_p^{-1})=θ_M adj_p(h) matches the item's hypothesis. Small tests: the identity witness gives b^1=b; for one-object group categories with central q,θ, b^α(z)=θzq for every α; empty A or D is vacuous; if CL=CL' the hypothesis forces b_L=b_{L'}. An rg -L search for witness, relative Hom/adjunction and essential-image Hom-bijection nodes found no duplicate. No SGA is cited. Changes: none."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeHomWitnessTransport",
+  "declaration": "CategoryTheory.relative_hom_witness_transport",
+  "file": "lean/Sheaf/CategoryTheory/RelativeHomWitnessTransport.lean",
+  "statement": "theorem relative_hom_witness_transport {A : Type uA} [Category.{vA} A] {P : Type uP} [Category.{vP} P] {Q : Type uQ} [Category.{vQ} Q] (C : A ⥤ P) (hC : ∀ L L' : A, Function.Bijective (C.map : (L ⟶ L') → _)) (D : ObjectProperty Q) (F E : P ⥤ Q) (J G : D.FullSubcategory ⥤ P) (q : F ≅ E) (a : ∀ (K : P) (Y : D.FullSubcategory), (F.obj K ⟶ Y.obj) ≃ (K ⟶ J.obj Y)) (b : ∀ (L : A) (Y : D.FullSubcategory), (E.obj (C.obj L) ⟶ Y.obj) ≃ (C.obj L ⟶ G.obj Y)) (ha_left : ∀ {K' K : P} (f : K' ⟶ K) (Y : D.FullSubcategory) (h : F.obj K ⟶ Y.obj), a K' Y (F.map f ≫ h) = f ≫ a K Y h) (ha_right : ∀ (K : P) {Y Y' : D.FullSubcategory} (v : Y ⟶ Y') (h : F.obj K ⟶ Y.obj), a K Y' (h ≫ v.hom) = a K Y h ≫ J.map v) (hb_left : ∀ {L' L : A} (f : L' ⟶ L) (Y : D.FullSubcategory) (z : E.obj (C.obj L) ⟶ Y.obj), b L' Y (E.map (C.map f) ≫ z) = C.map f ≫ b L Y z) (hb_right : ∀ (L : A) {Y Y' : D.FullSubcategory} (v : Y ⟶ Y') (z : E.obj (C.obj L) ⟶ Y.obj), b L Y' (z ≫ v.hom) = b L Y z ≫ G.map v) (θ : J ≅ G) (hθ : ∀ (L : A) (Y : D.FullSubcategory) (h : F.obj (C.obj L) ⟶ Y.obj), b L Y (q.inv.app (C.obj L) ≫ h) = a (C.obj L) Y h ≫ θ.hom.app Y) : (∀ (K : P) (L : A) (α : C.obj L ≅ K) (Y : D.FullSubcategory), Function.Bijective (fun z : E.obj K ⟶ Y.obj ↦ α.inv ≫ b L Y (E.map α.hom ≫ z)) ∧ ∀ h : F.obj K ⟶ Y.obj, α.inv ≫ b L Y (E.map α.hom ≫ q.inv.app K ≫ h) = a K Y h ≫ θ.hom.app Y) ∧ (∀ (K : P) (L L' : A) (α : C.obj L ≅ K) (β : C.obj L' ≅ K), (∃! t : L ≅ L', C.mapIso t = α ≪≫ β.symm) ∧ ∀ Y : D.FullSubcategory, (fun z : E.obj K ⟶ Y.obj ↦ α.inv ≫ b L Y (E.map α.hom ≫ z)) = (fun z : E.obj K ⟶ Y.obj ↦ β.inv ≫ b L' Y (E.map β.hom ≫ z))) ∧ ∃ bar : ∀ (K : C.EssImageSubcategory) (Y : D.FullSubcategory), (E.obj K.obj ⟶ Y.obj) ≃ (K.obj ⟶ G.obj Y), (∀ (K : C.EssImageSubcategory) (L : A) (α : C.obj L ≅ K.obj) (Y : D.FullSubcategory) (z : E.obj K.obj ⟶ Y.obj), bar K Y z = α.inv ≫ b L Y (E.map α.hom ≫ z)) ∧ (∀ (K : C.EssImageSubcategory) (Y : D.FullSubcategory) (h : F.obj K.obj ⟶ Y.obj), bar K Y (q.inv.app K.obj ≫ h) = a K.obj Y h ≫ θ.hom.app Y) ∧ (∀ {K' K : C.EssImageSubcategory} (f : K' ⟶ K) (Y : D.FullSubcategory) (z : E.obj K.obj ⟶ Y.obj), bar K' Y (E.map f.hom ≫ z) = f.hom ≫ bar K Y z) ∧ (∀ (K : C.EssImageSubcategory) {Y Y' : D.FullSubcategory} (v : Y ⟶ Y') (z : E.obj K.obj ⟶ Y.obj), bar K Y' (z ≫ v.hom) = bar K Y z ≫ G.map v) ∧ (∀ (K : C.EssImageSubcategory) (Y : D.FullSubcategory) (g : K.obj ⟶ J.obj Y), (bar K Y).symm (g ≫ θ.hom.app Y) = q.inv.app K.obj ≫ (a K.obj Y).symm g) ∧ (∀ d : ∀ (K : C.EssImageSubcategory) (Y : D.FullSubcategory), (E.obj K.obj ⟶ Y.obj) ≃ (K.obj ⟶ G.obj Y), (∀ {K' K : C.EssImageSubcategory} (f : K' ⟶ K) (Y : D.FullSubcategory) (z : E.obj K.obj ⟶ Y.obj), d K' Y (E.map f.hom ≫ z) = f.hom ≫ d K Y z) → (∀ (K : C.EssImageSubcategory) {Y Y' : D.FullSubcategory} (v : Y ⟶ Y') (z : E.obj K.obj ⟶ Y.obj), d K Y' (z ≫ v.hom) = d K Y z ≫ G.map v) → (∀ (L : A) (Y : D.FullSubcategory), d (C.toEssImage.obj L) Y = b L Y) → d = bar) ∧ (∀ (K : C.EssImageSubcategory) (hF : D (F.obj K.obj)), bar K ⟨F.obj K.obj, hF⟩ (q.inv.app K.obj) = a K.obj ⟨F.obj K.obj, hF⟩ (𝟙 (F.obj K.obj)) ≫ θ.hom.app ⟨F.obj K.obj, hF⟩) ∧ (∀ (Y : D.FullSubcategory) (hJ : C.essImage (J.obj Y)), bar ⟨J.obj Y, hJ⟩ Y (q.inv.app (J.obj Y) ≫ (a (J.obj Y) Y).symm (𝟙 (J.obj Y))) = θ.hom.app Y)",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-122e58bf8",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Each hypothesis and clause matches the node under diagrammatic composition: hθ, b^α = α.inv ≫ b(E.map α.hom ≫ z), the ∃! lift over α≪≫β.symm, bar on C.EssImageSubcategory with witness formula, normalization, two-sided naturality and inverse formula, uniqueness of natural d with identity-witness value b, and unit/counit clauses guarded by D(F K) and C.essImage(J Y). Proof checked by hand: hypotheses consistent and non-vacuous. No stronger assumptions, six independent universes, autoImplicit false. Statement field verbatim; sorry only; docstrings carry source and all 7 steps. Both Mathlib-leaf stmt_deps unchanged and used. No new nodes, definitions or duplicates (restrictFullyFaithful needs a global adjunction). Live node has no lean record yet. Not compiled since no file changed; worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261023T103412-L-3130220",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

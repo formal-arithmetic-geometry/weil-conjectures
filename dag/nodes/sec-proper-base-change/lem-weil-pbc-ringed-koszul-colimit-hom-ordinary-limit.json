@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit",
+ "kind": "statement",
+ "title": "Finite Koszul evaluation identifies Hom of the colimit with the ordinary tensor-tower limit",
+ "statement": "Let C be a small category with Grothendieck topology J, O a sheaf of commutative rings, r a natural number (including zero), and b a Fin r-indexed family of global sections. Use the actual strict positive Koszul diagram P, its augmentation, dual tensor-tower functor T and ordinary-limit unit of [def-weil-pbc-ringed-koszul-system]. There is a natural isomorphism e:Hom(colim P,-) ≅ lim T(-) on cochain complexes of O-module sheaves. For every complex N, inverse evaluation at one N -> Hom(O[0],N), followed by precomposition with the colimit augmentation and e_N, is exactly the specified ordinary-limit unit N -> lim T(N). No derived category or K-injectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex Tag 0A0A, lemma-colim-and-lim-of-duals; Tag 0941, lemma-derived-limit-is-ok; more-algebra.tex Tag 0913, lemma-extended-alternating-Cech-is-colimit-koszul; derived.tex Tag 0949, lemma-colim-hocolim"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply finite Koszul evaluation to identify, for every coefficient complex, the inverse diagram of Hom complexes with the strict tensor tower, with naturality in coefficients and the finite-stage unit equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-finite-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical cone Hom(colim P,N) over the stagewise Homs is limiting. Postcompose by finite evaluation to obtain a limiting cone over the strict tensor tower. Its degreewise ordinary limit is another limit cone; their unique cone-point isomorphism constructs e_N. Joint monicity of its projections, naturality of precomposition and coefficient naturality of finite evaluation prove that these e_N form a natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-hom-complex-colimit-cone",
+    "lem-weil-pbc-ringed-koszul-finite-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the desired unit equation with each tensor-limit projection. The cone-point comparison identifies that projection with the colimit inclusion followed by finite evaluation. Functoriality of Hom and colimit.ι_desc reduce the augmentation to the finite-stage Koszul projection. The finite evaluation unit equation gives the tensor-unit component, which also is the ordinary-limit unit followed by that projection. Joint monicity proves the equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-finite-evaluation",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-koszul-finite-evaluation",
+  "lem-weil-pbc-ringed-hom-complex-colimit-cone",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, finite evaluation and Hom of a colimit",
+  "note": "V4: ordinary-complex assembly by uniqueness of limit cones; unit equality proved by actual projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The comparison from ordinary inverse limit to derived inverse limit is an isomorphism for Hom of a direct system of perfect complexes into a K-injective complex",
+   "results": "8 hits: injective-resolution comparison isomorphisms, localization quasi-isomorphism criterion and inverse-system equivalences. No exact unbounded strict-tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite perfect Koszul Hom evaluation identifies internal Hom from the colimit with the inverse limit of dual tensor complexes",
+   "results": "8 hits: light condensed internal Hom and ModuleCat evaluation, finite dimensional dual evaluation. No Koszul chain-complex or strict inverse-limit comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\"",
+   "results": "12 hits: universal-property definitions and general uniqueness/invertibility criteria; no acyclicity result for this tower.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Cc]olimit|[Ll]imit.*homComplex|comparison.*isIso",
+   "results": "25 hits: generic preservation comparisons and HomComplex kernels; no finite Koszul evaluation or limit-acyclicity statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulHomLimitComparison",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedKoszulColimitHomOrdinaryLimit",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulColimitHomOrdinaryLimit.lean",
+  "declaration": "CategoryTheory.exists_ringedKoszul_colimitHom_ordinaryLimit_iso",
+  "statement": "theorem exists_ringedKoszul_colimitHom_ordinaryLimit_iso :\n    ∃ e : (homComplexFunctor (R := O)).obj (op (colimit (ringedKoszulDiagram O r b))) ≅\n        ringedKoszulTensorTowerFunctor O r b ⋙\n          (lim : (ℕᵒᵖ ⥤ SheafOfModules.{u}\n            ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ⥤ _).mapHomologicalComplex\n              (.up ℤ),\n      ∀ N : ringedSiteComplex O, (ringedHomUnitEvaluationIso O N).inv ≫\n        ((homComplexFunctor (R := O)).map\n          (colimit.desc _ (ringedKoszulAugmentationCocone O r b)).op).app N ≫\n        e.hom.app N = (by\n          exact ringedKoszulLimitUnit O r b N)",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T142801-L-764548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T212006-L-4187679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

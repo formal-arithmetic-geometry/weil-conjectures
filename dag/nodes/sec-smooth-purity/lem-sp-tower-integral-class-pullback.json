@@ -1,0 +1,164 @@
+{
+ "id": "lem-sp-tower-integral-class-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Reduction of the triangle identities: the trace of the projective line p_i is the base change of q; naturality of the hyperplane Chern component used to compare the splitting maps; integral extension steps 1--3",
+   "via": [
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Naturality of integral line-bundle extension classes on pro-etale towers",
+ "statement": "Let $f:X\\to Y$ be an arbitrary morphism of schemes. Use the pro-etale inverse image of [def-weil-proetale-inverse-image] componentwise on abelian towers [def-sp-tower-class-systems], denoted $F:D(\\mathrm{Ab}(Y))\\to D(\\mathrm{Ab}(X))$. Let $z:F\\mathbf Z_{\\bullet,Y}\\to\\mathbf Z_{\\bullet,X}$ be adjoint to the constant-section map, and $a:F G_Y[1]\\to G_X[1]$ the shifted derived comparison induced by pullback of full units, where $G_T=\\operatorname{const}(\\mathbf G_{m,T})$. All single and shift comparisons are the canonical exact-functor ones. For any invertible module $L$ on $Y$ [def-sc-invertible-module], let $\\lambda_L:\\mathbf Z_{\\bullet,Y}\\to G_Y[1]$ be lineBundleClass of [def-sp-tower-class-reduction], defined by the canonical Picard torsor class, etale-to-pro-etale inverse image, the full-units comparison, and the constant-tower functor. Then $F(\\lambda_L)a=z\\lambda_{f^*L}$, with composition written from left to right. No invertibility of the full-units comparison and no flatness of $f$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), Kummer connecting class and its coefficient-linear realization; agent-formulated geometric naturality of that construction, needed by the base-change-of-trace sentence in det-sp-tower-p1-adjunction; steps 1--3"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-sp-tower-class-systems",
+  "def-sc-invertible-module",
+  "def-sp-tower-class-reduction"
+ ],
+ "proof": [
+  {
+   "text": "On abelian systems write F=f inverse componentwise, obtained by whiskering the exact pro-etale abelian inverse image of [def-weil-proetale-inverse-image]. Limits and colimits of functors are componentwise. The constant-integer map is the adjoint of the constant-section map; the full-units map is adjoint to restriction along the fibre-product projection on each chart. These give z and a after exact-derived single and shift comparisons. No coefficient extension enters this step.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), geometric naturality of the coefficient-linear Kummer construction (agent expansion)"
+   }
+  },
+  {
+   "text": "Represent the integral line-bundle class explicitly. Choose Zariski frames $e_a$ of $L$, with $e_b=g_{ab}e_a$. Glue $\\mathbf G_m\\times\\mathbf Z$ by $(u,m)_b\\mapsto(g_{ab}^m u,m)_a$, with product $(u,m)(v,k)=(uv,m+k)$. The cocycle identity is the gluing identity; projection to $m$ is locally split and has kernel $\\mathbf G_m$. The fibre at $1$ is the frame torsor of $L$. The named correspondence of [lem-sc-line-bundle-torsor] and [lem-sc-torsor-h1], used on the Zariski site, therefore identifies this extension with the class of $L$; the identical local formulas define it on the pro-etale site. Its constant-system connecting map $\\lambda_L:\\mathbf Z_\\bullet\\to G_Y[1]$ is its extension class by [lem-weil-pbc-ext-one-extension-classification]. It is the integral class entering [det-sp-tower-classes](2). This description also fixes the direction of the transitions, so it describes $L$, rather than its inverse.",
+   "uses": [
+    "lem-sc-line-bundle-torsor",
+    "lem-sc-torsor-h1",
+    "lem-weil-pbc-ext-one-extension-classification",
+    "det-sp-tower-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), geometric naturality of the coefficient-linear Kummer construction (agent expansion)"
+   }
+  },
+  {
+   "text": "Let $a:F G_Y\\to G_X$ be induced by pullback of units. On the inverse images of the trivializing opens the map from the pulled extension to that of $f^*L$ is $(u,m)\\mapsto(a(u),m)$. It glues because $a(g_{ab}^mu)=a(g_{ab})^m a(u)$; the pulled frames have transitions $a(g_{ab})$. It is a morphism of short exact sequences with endpoints $a$ and the constant-integer identification $z:F\\mathbf Z_\\bullet\\simeq\\mathbf Z_\\bullet$. The functorial connecting-morphism statements [lem-weil-pbc-exact-functor-ses-triangle-image] and [lem-weil-pbc-complex-ses-triangle] give\n$$a[1]F(\\lambda_L)=\\lambda_{f^*L}z.$$\nHere $a$ need not be an isomorphism. Exactness of inverse image, rather than flatness of the scheme morphism, is what allows the first row. All extension transitions are identities, so the gluing map and this equation are maps of whole systems.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-ses-triangle-image",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), naturality of the cone boundary; exact inverse-image application"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-sc-line-bundle-torsor",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-ext-one-extension-classification",
+  "det-sp-tower-classes",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraphs (1)-(2), expanded using Stacks Tags 0152, 03AJ, 07A4 and 0G7E and the existing strict-diagram scalar coherence lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The integral line bundle extension class in the derived category of abelian sheaves is natural under inverse image and pullback of units",
+   "results": "SheafOfModules.pullbackObjUnitToUnit, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, and generic injective-resolution naturality; no integral Picard extension statement.",
+   "date": "2026-10-25",
+   "verdict": "no match: generic module unit comparisons do not identify the line-bundle extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral line bundle extension class naturality under inverse image of sheaves and pullback of units",
+   "results": "SheafOfModules.pullbackObjUnitToUnit, pullbackObjFreeIso_hom_naturality, and Scheme.Hom.naturality; no matching line-bundle class statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lineBundleClass|chernRealization|Kummer",
+   "results": "Mathlib NumberTheory.KummerDedekind, PadicVal.Basic and FieldTheory.KummerExtension; no sheaf-theoretic Kummer or tower realization theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernPullback",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIntegralClassPullback",
+  "file": "lean/Sheaf/Paper/TowerIntegralClassPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.tower_integralClass_pullback",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull_additive",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull_limits",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.abPull_colimits",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.unitsDirect",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.integerPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.unitsPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.integerDerivedPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.unitsDerivedPull",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.tower_integralClass_pullback"
+  ],
+  "statement": "theorem tower_integralClass_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (L : Y.Modules) [Scheme.Modules.IsInvertible L] :\n    (abPull f).mapDerivedCategory.map (lineBundleClass Y (Scheme.Pic.ofIsInvertible L)) ≫\n        unitsDerivedPull f =\n      integerDerivedPull f ≫\n        lineBundleClass X (Scheme.Pic.ofIsInvertible ((Scheme.Modules.pullback f).obj L))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T142755-L-759893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T142755-L-759893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

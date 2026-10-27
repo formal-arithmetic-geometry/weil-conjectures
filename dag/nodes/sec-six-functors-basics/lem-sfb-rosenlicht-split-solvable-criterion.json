@@ -1,0 +1,376 @@
+{
+ "id": "lem-sfb-rosenlicht-split-solvable-criterion",
+ "kind": "statement",
+ "title": "Rosenlicht splitting criterion for a solvable group dominated by a split torus",
+ "statement": "Let $k$ be a field [def-weil-field], and let $G$ be a smooth geometrically connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Suppose $G$ is solvable in the group-scheme sense of [def-sfb-solvable-group-structure]: it has a finite descending series of closed subgroup schemes, normal in their predecessors, with commutative represented fppf quotients. Assume there is a $k$-morphism of schemes $f:(\\mathbf G_{m,k})^N\\to G$, for some integer $N\\geq0$, whose image is dense in the underlying topological space. The morphism need not be a homomorphism. Then $G$ admits a finite series $G=G_0\\supseteq\\cdots\\supseteq G_m=1$ of smooth geometrically connected closed $k$-subgroups [def-sc-group-scheme-subgroup], each normal in its predecessor, with represented fppf quotients $G_i/G_{i+1}$ isomorphic to $\\mathbf G_a$ or $\\mathbf G_m$ [def-sc-gm-ga]. If $G$ is unipotent in the sense of [def-sfb-solvable-group-structure], all these quotients can be chosen isomorphic to $\\mathbf G_a$. Here unipotence means existence of a faithful finite-dimensional closed matrix representation in which every geometric point differs nilpotently from the identity, and a represented fppf quotient has the meaning in [def-sfb-solvable-group-structure]. The empty series is permitted for $G=1$. There is no perfectness or characteristic restriction on $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.58 (Rosenlicht), printed p.345; split solvable convention in Section 16g, p.343; splitness of the unipotent subgroup in Proposition 16.54 and its proof, p.344."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "For any smooth geometrically connected affine group $H$ occurring below, [lem-trf-smooth-connected-fibre-normal-integrality] makes $H$ geometrically integral. Thus its coordinate ring is a domain, and a dense morphism into $H$ has injective pullback: a function vanishing on the image vanishes at every prime, hence is nilpotent and therefore zero. If $\\dim H=0$, [lem-pc-zero-dimensional-closed-subscheme-finite], applied to $H\\hookrightarrow H$, makes $k[H]$ a finite-dimensional domain, hence a field (multiplication by a nonzero element is an injective endomorphism of a finite-dimensional vector space and is surjective). Evaluation at the identity embeds this field into $k$, identically on $k$, so $k[H]=k$ and $H=1$. In particular every nontrivial such $H$ has positive dimension.",
+   "uses": [
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "lem-pc-zero-dimensional-closed-subscheme-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, dimension induction; Corollary 5.26 and Propositions 1.34-1.35 for group-variety geometry."
+   }
+  },
+  {
+   "text": "Split series are closed under extension in the precise form needed here. If $N\\triangleleft H$ and $N,H,Q=H/N$ are smooth geometrically connected, take the inverse images in $H$ of the terms of a split series for $Q$, then append a split series for $N$. The correspondence and quotient clauses of [lem-sfb-affine-normal-quotient-geometry] identify each quotient in the lifted segment with the corresponding quotient for $Q$, and give closed normal inclusions. Its smoothness and connectedness clause, applied after every field extension, makes every inverse-image term smooth and geometrically connected. The appended terms already have these properties. The same argument gives additive-only series when both input series have additive-only quotients.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16g, p.343: extensions of split solvable groups are split."
+   }
+  },
+  {
+   "text": "First treat a smooth geometrically connected group $H$ of multiplicative type dominated by $f:T_0=\\mathbf G_m^N\\to H$. Replace $f$ by $h(t)=f(1)^{-1}f(t)$, so $h(1)=1$. Over $\\bar k$, embed $H_{\\bar k}$ in a power of $\\mathbf G_m$ using the meaning of multiplicative type in [lem-sfb-unipotent-to-multiplicative-trivial]. For any coordinate unit $u$ of the composite, apply [lem-sfb-rosenlicht-product-unit-factorization] on $T_{0,\\bar k}\\times T_{0,\\bar k}$ to $u(xy)$. The normalized identity reads $u(xy)=u(x)u(y)$, so the composite, and therefore $h_{\\bar k}$, is a group homomorphism. Equality of the two coordinate pullbacks descends by injectivity in [lem-sfb-field-extension-tensor-injective]; hence $h$ is a homomorphism over $k$. Its closed-image factorization is [lem-sfb-affine-homomorphism-flat-image]. Density and reducedness of $H$ force the closed-image ideal to be zero, so $h$ is faithfully flat. By [lem-sfb-field-split-torus-flat-quotient], $H$ is a split torus. Its coordinate-factor series has successive quotients $\\mathbf G_m$.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-rosenlicht-product-unit-factorization",
+    "lem-sfb-field-extension-tensor-injective",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-field-split-torus-flat-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, first special case; Proposition 12.49, p.247; quotient of a split torus, p.236."
+   }
+  },
+  {
+   "text": "Next let $H$ be a smooth geometrically connected closed subgroup of $\\mathbf G_a^n$ in characteristic $p>0$, dominated by $f:\\mathbf G_m^N\\to H$. Put $A=k_\\sigma[F]$, $\\sigma(c)=c^p$, with multiplication as in [lem-sfb-primitive-frobenius-module-duality]. That node identifies $P(H)=\\operatorname{Hom}(H,\\mathbf G_a)$ with a finitely generated left $A$-module and reconstructs $H$ from it. By [lem-sfb-affine-group-coordinate-hopf], these homomorphisms are exactly primitive coordinate functions: the equality $a(xy)=a(x)+a(y)$ is $\\Delta(a)=a\\otimes1+1\\otimes a$. A constant primitive is zero, since $c=2c$ implies $c=0$. Thus $P(H)\\to k[H]/k$ is injective. Dominance gives an injective map $k[H]/k\\to L/k$, where $L=k[z_1^{\\pm1},\\ldots,z_N^{\\pm1}]$: if $f^*a=c$, injectivity of $f^*$ gives $a=c$. The composite is $A$-linear for $F[a]=[a^p]$; this action is well-defined modulo constants because $(a+c)^p-a^p=c^p$.",
+   "uses": [
+    "lem-sfb-primitive-frobenius-module-duality",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, elementary-unipotent case, p.345; Theorem 14.46, p.295."
+   }
+  },
+  {
+   "text": "The left $A$-module $L/k$ is free. Index a basis by the vectors $v\\in\\mathbf Z^N\\setminus\\{0\\}$ not in $p\\mathbf Z^N$, sending the generator $e_v$ to $[z^v]$. Indeed each nonzero exponent $u$ has a unique expression $u=p^rv$ with $r\\geq0$ and $v\\notin p\\mathbf Z^N$. For $\\sum_r c_rF^r\\in A$, its value on $[z^v]$ is $\\sum_r c_r[z^{p^rv}]$. Distinct pairs $(v,r)$ give distinct Laurent monomials, so this map $\\bigoplus_v A\\to L/k$ is both injective and surjective, by coefficient comparison. This also covers $N=0$, when both sides are zero. Apply [lem-sfb-frobenius-skew-free-submodules] to the finitely generated image of $P(H)$ in this free module: $P(H)\\simeq A^d$. Reconstruction by [lem-sfb-primitive-frobenius-module-duality] now gives $H\\simeq\\mathbf G_a^d$: an $A$-linear map $A^d\\to R$ is uniquely determined by its $d$ basis values in $R$, with addition coordinatewise. Coordinate-factor subgroups give the desired additive series.",
+   "uses": [
+    "lem-sfb-frobenius-skew-free-submodules",
+    "lem-sfb-primitive-frobenius-module-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, Laurent-monomial argument, p.345; Proposition 14.50, p.296."
+   }
+  },
+  {
+   "text": "In characteristic zero, let $H$ be commutative and smooth geometrically connected, still with a dominant torus morphism. The field is perfect, so [lem-sfb-perfect-commutative-torus-unipotent-product] gives $H\\simeq U\\times T$, with both factors smooth geometrically connected, $T$ a torus and $U$ closed in a unitriangular group. Projection of the dominant morphism onto $T$ is dominant (the projection is surjective and continuous), so step 3 splits $T$. The commutative factor $U$ is a vector group by [lem-sfb-char-zero-commutative-unipotent-vector-group]. The additive coordinate series of $U$, the multiplicative coordinate series of $T$, and step 2 therefore give the required split series of $H$.",
+   "uses": [
+    "lem-sfb-perfect-commutative-torus-unipotent-product",
+    "lem-sfb-char-zero-commutative-unipotent-vector-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, characteristic-zero commutative reduction; Theorem 16.13 and Corollary 16.15, pp.328-329; Corollary 14.33, p.289."
+   }
+  },
+  {
+   "text": "We now prove the solvable conclusion by strong induction on $d=\\dim G$, for every smooth geometrically connected solvable affine group with a dominant torus morphism. Step 1 handles $d=0$. For later reductions, a nontrivial proper smooth geometrically connected normal subgroup $N\\subset G$ has $0<\\dim N<d$: positivity is step 1 and strictness is [lem-wf-affine-dimension-drop], since $G$ is integral. The quotient $Q=G/N$ is smooth geometrically connected by [lem-sfb-affine-normal-quotient-geometry], and [lem-sfb-homogeneous-quotient-krull-dimension] gives $\\dim Q=d-\\dim N<d$. Whenever both $N$ and $Q$ have dominant torus morphisms and are solvable, the induction hypothesis splits each and step 2 splits $G$. This is the induction assertion used below, not an assumption that arbitrary subgroups inherit domination.",
+   "uses": [
+    "lem-wf-affine-dimension-drop",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-homogeneous-quotient-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, general case: dimension induction, p.345."
+   }
+  },
+  {
+   "text": "Take $D=D(G)$ from [lem-sfb-derived-commutator-word-arbitrary-field]. It and $G/D$ are smooth geometrically connected, and the quotient is commutative. Both are solvable: intersect a solvable series with $D$ and use that commutators in each intersection lie in the next; its commutative quotients are represented by [lem-sfb-affine-normal-quotient-geometry]. The quotient $G/D$ is commutative, hence solvable. Explicitly $D^i(G)$ lies in the $i$th term of the given subnormal series; if $D(G)=G$, all $D^i(G)=G$, forcing $G=1$. Thus for nontrivial $G$, $D\\ne G$. If $D=1$, $G$ is commutative. Otherwise $D$ has a dominant torus morphism: compose the dominant word $w_r:G^{2r}\\to D$ with $f^{2r}$. To check dominance, the tensor powers of the injective coordinate map $f^*$ remain injective by [lem-weil-pbc-module-over-field-flat, lem-trf-flat-tensor-preserves-injection], so $f^{2r}$ and then its composite with $w_r$ are dominant. The quotient $G/D$ is dominated by the composite of $f$ with its faithfully flat quotient map. Step 7 applies. It remains only to split commutative $G$; characteristic zero was settled in step 6.",
+   "uses": [
+    "lem-sfb-derived-commutator-word-arbitrary-field",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "def-sfb-solvable-group-structure",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-flat-tensor-preserves-injection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, reduction by the derived group, p.345; Proposition 6.20(a), p.130."
+   }
+  },
+  {
+   "text": "Suppose now $G$ is commutative and $\\operatorname{char}k=p>0$. Factor $[p]_G:G\\to G$ through its closed image $I$ using [lem-sfb-algebraic-group-homomorphism-factorization]. Its kernel $K$ is normal and the quotient description is $I=G/K$. Thus [lem-sfb-affine-normal-quotient-geometry] makes $I$ smooth geometrically connected. It is dominated by the torus through $G\\to I$. The quotient $G/I$ is also smooth geometrically connected and dominated through $G\\to G/I$. All these groups are commutative, hence solvable. If $1\\ne I\\ne G$, step 7 and the induction hypothesis apply to $I\\triangleleft G$; step 2 finishes. If $I=1$, then $[p]_G=0$, and [lem-sfb-smooth-p-torsion-additive-embedding] embeds $G$ as a closed subgroup of a vector group over $k$. Steps 4-5 give $G\\simeq\\mathbf G_a^d$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-p-torsion-additive-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, positive-characteristic multiplication-by-p reduction, p.345; Proposition 14.49, p.296."
+   }
+  },
+  {
+   "text": "In the remaining case $I=G$, the closed immersion $I\\hookrightarrow G$ is an isomorphism ($I$ is smooth, hence reduced, and $G$ is reduced), so $[p]_G$ is flat and surjective on underlying spaces. Its coordinate map is a flat ring map (source and target are affine) inducing a surjection of prime spectra, hence faithfully flat in the sense of [def-weil-pbc-faithfully-flat-ring-map] by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]. Over $F=\\bar k$, apply [lem-sfb-commutative-diagonalizable-unipotent-product]: $G_F\\simeq U\\times D$ with $U\\hookrightarrow\\mathcal U_n$ and $D$ diagonalizable. Each factor is a quotient by the other and hence smooth and geometrically connected by [lem-sfb-affine-normal-quotient-geometry]. For $p^e\\geq n$, every upper unitriangular matrix $1+X$ over every $F$-algebra satisfies $(1+X)^{p^e}=1+X^{p^e}=1$, since $X^n=0$. Thus $[p^e]_U=0$. On the other hand $[p^e]_{G_F}$ is faithfully flat: base change preserves faithful flatness [lem-weil-pbc-faithfully-flat-base-change]. Composition does too directly from [def-weil-pbc-faithfully-flat-ring-map]: for $R\\to S\\to B$, tensoring a complex with $B$ is tensoring first with $S$ and then with $B$ over $S$, and each functor preserves and reflects exactness. The projection $U\\times_FD\\to U$ is faithfully flat: its coordinate map $F[U]\\to F[U]\\otimes_FF[D]$ is the base change along $F\\to F[U]$ of $F\\to F[D]$, which is flat [lem-weil-pbc-module-over-field-flat] and surjective on spectra because $F[D]\\neq0$, hence faithfully flat [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]; base change keeps it faithfully flat [lem-weil-pbc-faithfully-flat-base-change]. The composite $\\operatorname{pr}_U\\circ[p^e]_{G_F}$ is therefore faithfully flat, and it equals $[p^e]_U\\circ\\operatorname{pr}_U$, the constant homomorphism. Injectivity of its coordinate map [lem-weil-pbc-faithfully-flat-universally-injective], applied to the source ring as a module over itself, forces every $a\\in F[U]$ to equal $\\epsilon(a)$, so $U=1$. Thus $G_F\\simeq D$ is diagonalizable and $G$ is of multiplicative type, exactly the geometric definition. Step 3 splits $G$. This completes the strong induction.",
+   "uses": [
+    "lem-sfb-commutative-diagonalizable-unipotent-product",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-module-over-field-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.58, case G=pG, p.345; Theorem 16.13(b), p.328. The geometric product argument avoids imposing perfection on k."
+   }
+  },
+  {
+   "text": "Finally assume the original $G$ is unipotent and use the split series just obtained. Each smooth closed term $G_i$ is unipotent: restrict the faithful representation of $G$; the restriction is still a closed embedding and its geometric matrices remain unipotent. If a quotient $G_i/G_{i+1}$ in this series were $\\mathbf G_m$, its quotient homomorphism would be trivial by [lem-sfb-unipotent-to-multiplicative-trivial], contradicting its faithful flatness onto the nontrivial multiplicative group. Thus every quotient is $\\mathbf G_a$. All terms are smooth geometrically connected and all quotient maps represent the fppf quotients by construction. The group $1$ admits the empty series, also covering a dominant morphism with $N=0$.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Split conventions, Section 16g, p.343 and Definition 14.61, p.299; unipotent-to-multiplicative vanishing, Corollary 14.18(a), p.284."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-rosenlicht-product-unit-factorization",
+  "lem-sfb-field-extension-tensor-injective",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-field-split-torus-flat-quotient",
+  "lem-sfb-primitive-frobenius-module-duality",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-frobenius-skew-free-submodules",
+  "lem-sfb-perfect-commutative-torus-unipotent-product",
+  "lem-sfb-char-zero-commutative-unipotent-vector-group",
+  "lem-wf-affine-dimension-drop",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "lem-sfb-derived-commutator-word-arbitrary-field",
+  "def-sfb-solvable-group-structure",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-trf-flat-tensor-preserves-injection",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-smooth-p-torsion-additive-embedding",
+  "lem-sfb-commutative-diagonalizable-unipotent-product",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.58, printed p.345; explicit Laurent-module, extension-series and geometric-product details as given in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|splitSolvable|SplitSolvable|splitUnipotent|SplitUnipotent",
+   "results": "{\"t\": \"2026-10-24T05:02:01Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|splitSolvable|SplitSolvable|splitUnipotent|SplitUnipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Liouville.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\"], \"digest\": \"b46d613f01e71000\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A solvable algebraic group with a dominant map from a product of punctured affine lines has a split series with additive or multiplicative quotients",
+   "results": "{\"t\": \"2026-10-24T05:02:01Z\", \"tool\": \"leansearch\", \"query\": \"A solvable algebraic group with a dominant map from a product of punctured affine lines has a split series with additive or multiplicative quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"IsSolvable.solvable\", \"IsSolvable.mk\", \"IsSolvable.recOn\", \"IsSolvable.casesOn\", \"subgroup_solvable_of_solvable\", \"IsNilpotent.to_isSolvable\", \"solvable_quotient_of_solvable\"], \"digest\": \"6c83f48a222ea789\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Group\"",
+   "results": "{\"t\": \"2026-10-24T05:02:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddGroup.IsSolvable\", \"Group.IsSolvable\", \"AddGroup.instIsSolvableOfSubsingleton\", \"Group.instIsSolvableOfSubsingleton\", \"AddGroup.instIsSolvableOfIsAddCommutative\", \"Group.instIsSolvableOfIsMulCommutative\", \"AddGroup.instIsSolvableSum\", \"Group.instIsSolvableProd\"], \"digest\": \"7456722fda5562c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A unipotent algebraic group dominated by a split torus has a normal series with additive group quotients over an imperfect field",
+   "results": "{\"t\": \"2026-10-24T05:02:10Z\", \"tool\": \"leanfinder\", \"query\": \"A unipotent algebraic group dominated by a split torus has a normal series with additive group quotients over an imperfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"Group.IsVirtuallyNilpotent\", \"IsSolvable\", \"upperCentralSeries_normal\", \"isSolvable_def\", \"Group.IsNilpotent.nilpotent\", \"Group.IsNilpotent.nilpotent'\", \"IsSolvable.solvable\"], \"digest\": \"ccf0659b25c512c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht theorem a smooth connected solvable algebraic group dominated by a split torus is split solvable",
+   "results": "{\"t\": \"2026-10-24T05:02:11Z\", \"tool\": \"leanfinder\", \"query\": \"Rosenlicht theorem a smooth connected solvable algebraic group dominated by a split torus is split solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"CommGroup.isSolvable\", \"gal_isSolvable_of_splits\", \"isSolvable_def\", \"IsSolvable.solvable\", \"LieAlgebra.ofAbelianIsSolvable\", \"Function.Surjective.lieAlgebra_isSolvable\", \"LieAlgebra.radicalIsSolvable\"], \"digest\": \"f2258d6e1e9c5fa7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract groups, Lie algebras, manifold tangent bundles, or the construction of affine space; none supplies this algebraic-group or attractive-variety theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A solvable algebraic group dominated by a split torus is split solvable over an arbitrary field",
+   "results": "{\"t\": \"2026-10-24T07:04:27Z\", \"tool\": \"leanfinder\", \"query\": \"A solvable algebraic group dominated by a split torus is split solvable over an arbitrary field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"gal_isSolvable_of_splits\", \"IsSolvable\", \"gal_isSolvable_tower\", \"CommGroup.isSolvable\", \"IsNilpotent.to_isSolvable\", \"LieAlgebra.abelian_radical_iff_solvable_is_abelian\", \"LieAlgebra.ofAbelianIsSolvable\", \"LieAlgebra.instIsSolvableSubtypeMemLieSubalgebraTop\"], \"digest\": \"e64d009d9f1b868e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvability, polynomial splitting and perfect-ring Frobenius do not give the stated scheme-theoretic split-series criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"Group\"",
+   "results": "{\"t\": \"2026-10-24T07:08:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddGroup.IsSolvable\", \"Group.IsSolvable\", \"AddGroup.instIsSolvableOfSubsingleton\", \"Group.instIsSolvableOfSubsingleton\", \"AddGroup.instIsSolvableOfIsAddCommutative\", \"Group.instIsSolvableOfIsMulCommutative\", \"AddGroup.instIsSolvableSum\", \"Group.instIsSolvableProd\"], \"digest\": \"7456722fda5562c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvability, polynomial splitting and perfect-ring Frobenius do not give the stated scheme-theoretic split-series criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|SplitSolvable|splitSolvable|splitUnipotent",
+   "results": "{\"t\": \"2026-10-24T07:08:13Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|SplitSolvable|splitSolvable|splitUnipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Liouville.lean\", \"Mathlib/RingTheory/Derivation/Basic.lean\"], \"digest\": \"b46d613f01e71000\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvability, polynomial splitting and perfect-ring Frobenius do not give the stated scheme-theoretic split-series criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth solvable algebraic group dominated by a product of multiplicative groups is split",
+   "results": "{\"t\": \"2026-10-24T07:08:13Z\", \"tool\": \"leansearch\", \"query\": \"A smooth solvable algebraic group dominated by a product of multiplicative groups is split\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.FormallySmooth.of_split\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"IsSolvable.mk\", \"LieAlgebra.ofAbelianIsSolvable\", \"solvable_prod\", \"gal_isSolvable_of_splits\"], \"digest\": \"a5f27705dc8ef3bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvability, polynomial splitting and perfect-ring Frobenius do not give the stated scheme-theoretic split-series criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected commutative algebraic group in characteristic p with surjective multiplication by p is of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T07:13:39Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected commutative algebraic group in characteristic p with surjective multiplication by p is of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZModModule.isPGroup_multiplicative\", \"PerfectRing\", \"PerfectRing.ofSurjective\", \"IsAlgClosed.perfectRing\", \"PerfectRing.ofFiniteOfIsReduced\", \"PerfectField.toPerfectRing\", \"split_by_characteristic_domain\", \"surjective_frobenius\"], \"digest\": \"32db508313c9dc05\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvability, polynomial splitting and perfect-ring Frobenius do not give the stated scheme-theoretic split-series criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-no-invariants-unipotence",
+  "date": "2026-10-24",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 16.58 (Rosenlicht), printed p.345; split solvable convention in Section 16g, p.343; splitness of the unipotent subgroup in Proposition 16.54 and its proof, p.344.",
+   "via": [
+    "lem-sfb-split-torus-no-invariants-unipotence",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rosenlicht-split-solvable-criterion",
+  "worker": "stage1",
+  "summary": "Read Milne 16.58 and its cited special cases. Preserved the statement, supplied dimension induction, primitive-function/Laurent-module proof and additive-only conclusion, reusing existing quotient, image, p-torsion and primitive-duality nodes. Extracted three genuine arbitrary-field/algebraic inputs rather than specializing algebraically closed or perfect-field statements without justification.",
+  "blueprint": "The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the enclosing direct-image route; inherited supporting chain reaches Rosenlicht 16.58 through the split-torus action criterion. This split supplies that criterion without altering a unit or chapter. blueprint_refs.py ancestor returns None, so the inherited null ancestor and exact place/via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic smooth geometrically connected fibre integrality (Stacks 056T/057J), needed to justify reduced coordinate rings and dimension induction over k; the six-functor unit supplies no replacement."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic finite-type zero-dimensional scheme finiteness, used only for the dimension-zero induction base."
+   },
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic Krull-dimension drop for a proper closed subset of an integral affine variety, used only to validate the induction measure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-wf-affine-dimension-drop"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-06679c172",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-06679c172 (reviewer sub-agent of L); spot-checked: The mathematics of the item and its three new nodes is correct; I made one citation repair in step 10. Item statement: unchanged; it matches Milne Theorem 16.58 (p.345) under the conventions of §16g. The added unipotent clause (all quotients G_a) is true and step 11 proves it. Steps 1-11: I checked each against the statement of every node it cites and against Milne. Step 3 (multiplicative type): the unit-factorization node over k̄ makes the translated map a homomorphism; it descends to k, and faithful flatness of its image then gives a split torus (in place of Milne's 12.49). Steps 4-5: primitive-Frobenius duality and the Laurent-monomial basis v∉pZ^N, which is Milne's condition Zp+ΣZr_i=Z. Step 6: characteristic zero, by the perfect-field product and the vector-group node. Step 7: an explicit strong induction on dimension. Step 8: derived reduction; I checked that the derived terms sit inside the given series (D^i⊆G_i) and that the dominant commutator word stays dominant through the tensor power of f. Steps 9-10: factor [p]_G through its image; G=pG is handled by a geometric product argument over k̄, so k need not be perfect. Step 11: the unipotent clause. New nodes, all true, statement-only and not duplicates: (1) derived-commutator-word, from Milne 6.18-6.21; the existing derived-subgroup and word-kernel nodes work only over algebraically closed fields. (2) frobenius-skew-free-submodules: the right division algorithm (Milne p.296) needs no perfection, and 14.50 then applies; the existing left-principal node gives only finite generation, the division node assumes σ is an automorphism, and the cyclic-decomposition node assumes k perfect. (3) perfect-commutative-torus-unipotent-product, from Milne 16.13(b), 16.15 and 14.5; the existing product node works only over k̄ with factors that need not be smooth. Accepted tool_uses: trf smooth-fibre integrality, pc zero-dimensional finiteness and wf dimension drop, all generic. Batch-5 flags: every one goes through generic algebra or definitions (the cover-descent datum, a scheme as an algebraic space, fppf covering base change, flat tensor preserving injections, quotient dimension of vector spaces). None states or proves the trace formula or Poincaré duality, so I accepted them all. FIX in step 10: the factorization node gives [p]_G only as flat and surjective, but the step uses ring-sense faithful flatness. I now cite the existing Mathlib leaf lem-weil-pbc-flat-surjective-spectrum-faithfully-flat for that conversion, after noting that I=G makes the closed immersion an isomorphism (both groups are reduced). The step also asserted without justification that the projection U×D→U is faithfully flat. I justified it as a base change of F→F[D], citing lem-weil-pbc-module-over-field-flat, the same leaf and lem-weil-pbc-faithfully-flat-base-change. proof_deps is updated to match. The corrected item file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-rosenlicht-split-solvable-criterion.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RosenlichtSplitSolvableCriterion",
+  "declaration": "AlgebraicGeometry.exists_split_series_of_dense_splitTorus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RosenlichtSplitSolvableCriterion.lean",
+  "statement": "theorem exists_split_series_of_dense_splitTorus {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) (hG : SolvableGroupStructure.IsAlgebraic G) [Smooth G.X.hom] [GeometricallyConnected G.X.hom] (hsolv : SolvableGroupStructure.IsSolvable G) (N : ℕ) (f : (MultiplicativeType.splitTorus k N).X ⟶ G.X) (hf : DenseRange f.left.base) : ∃ (m : ℕ) (S : Fin (m + 1) → Grp (Over (Spec (.of k)))), Nonempty (S 0 ≅ G) ∧ Nonempty (S (Fin.last m) ≅ Grp.trivial _) ∧ (∀ a : Fin (m + 1), Smooth (S a).X.hom ∧ GeometricallyConnected (S a).X.hom) ∧ ∀ a : Fin m, ∃ (Q : Grp (Over (Spec (.of k)))) (j : S a.succ ⟶ S a.castSucc) (q : S a.castSucc ⟶ Q), IsClosedSubgroupScheme j.hom.hom ∧ IsNormalSubgroupScheme j.hom.hom ∧ SolvableGroupStructure.IsFppfQuotient j.hom.hom q ∧ (Nonempty (Q ≅ Grp.mk (StandardGroupSchemes.additive k)) ∨ Nonempty (Q ≅ Grp.mk (StandardGroupSchemes.multiplicative k))) ∧ (SolvableGroupStructure.IsUnipotent G → Nonempty (Q ≅ Grp.mk (StandardGroupSchemes.additive k)))",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e407a4ece",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Read the item node, all statement-dependency sources (IsAlgebraic, IsSolvable, IsUnipotent, IsFppfQuotient, splitTorus, StandardGroupSchemes additive/multiplicative) and Milne Thm 16.58 p.345 / §16g. Hypotheses exact: arbitrary field, smooth + geometrically connected + affine finite type, recorded solvability, a plain Over-morphism from splitTorus k N with dense range. Conclusion exact: series from G to the trivial group, every term smooth and geometrically connected, closed normal inclusions, represented fppf quotients ≅ G_a or G_m, unipotent clause equivalent by case split. Edge cases N=0, G=1 (m=0), char p, imperfect k all covered; single universe u. H4: no existing criterion; IsSplitSolvable is weaker (only connected, no additive option) and is not cited by the node. Record differs from live only in lean and the added torus stmt_dep; statement matches the file verbatim; only sorry; docstrings carry source, blueprint tag and all 11 steps; report sections present. Earlier Q118 delivery was superseded, not landed. No findings; not recompiled per instructions."
+ }
+}

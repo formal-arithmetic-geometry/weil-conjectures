@@ -1,0 +1,189 @@
+{
+ "id": "lem-zl-common-stage-open-heart-adjunction",
+ "kind": "statement",
+ "title": "Exact extension by zero on the common-stage constructible heart",
+ "status": "split",
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, and an algebraic closure Ω of Q_l. Let j: U → T be an open immersion over the algebraic closure of the finite field, with U and T finite type (not necessarily separated). On each scheme use the actual common-stage constructible heart [def-weil-constructible-heart] and the prescribed common-stage derived pullback [def-weil-derived-pullback-tensor-hom]. For any heart functor F whose composite with the heart inclusion equals the inclusion followed by j*, there exists a functor J from the heart on U to the heart on T preserving finite limits and finite colimits with J left adjoint to F.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-constructible-heart",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/lem-weil-extension-by-zero-exact.proof.md",
+  "place": "Exactness proof and adjacent extension-by-zero-adjunction proof; SGA 4 XVII §5, descended through the recorded completion and coefficient constructions."
+ },
+ "proof": [
+  {
+   "text": "Finite type over the field makes T Noetherian, hence j quasi-compact. Use only ordinaryOpen, openIdentity and systemDirectId from the normalization module (the separated-scheme normalization theorem itself is not used). Use the recorded integral compact-support functor for the compactification (j,id). Its qcqs realization followed by openIdentity identifies it with exact ordinary completed open extension. The cohomology comparison of an exact derived functor proves preservation of each standard cohomological half. The identity-image cancellation is a proved elementary derived-functor identity, not an appeal to the support-normalization theorem or its closed-support comparison.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite evaluation normalization of compactRealization makes compactOperationReduction invertible: cancel the finite comparison isomorphisms and use conservativity of all evaluations of the quotient system. Reduction is fully faithful on the complete constructible subcategory, since its adjunction unit is invertible there. Restrict the system open-extension adjunction along these two fully faithful reductions, using integralComparisonPullbackCounit for the right-functor identification. Ordinary open extension is fully faithful by its slice presentation and invertible unit; transfer this through the realization.",
+   "uses": [
+    "def-weil-system-operation-exchange-realization",
+    "lem-sp-proetale-open-slice-presentation",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the coefficient-linear right adjoint of integral pullback to prove its linearity; its open left adjoint is then linear as well. Extend their Hom maps by tensor base change to the scalar localization. Tensor induction proves functoriality, unit/counit naturality and the triangle identities. The recorded uniqueness specification identifies the resulting rational pullback, and functor extensionality identifies the rational compact-support action. Its unit remains invertible, so the rational open extension is fully faithful. Integral representatives prove standard-class preservation after rationalization.",
+   "uses": [
+    "lem-sf-integral-pullback-linear-adjunction",
+    "def-weil-rationalization-karoubi",
+    "def-weil-compact-support-finite-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the normalized coherent pullback stage morphism. At each field its open left adjoint is the preceding rational extension. The individual normalized scalar-isomorphism theorem provides an isomorphism between scalar extension and open extension; no coherence of these auxiliary isomorphisms is needed. Since both left adjoints are fully faithful, the actual mate of the pullback comparison is invertible: its target is in the essential image by that isomorphism, and its adjoint transpose is invertible. Choose these mates as the left-functor comparisons. The mate unit equation and coherence of the right stage morphism prove coherence of the left family; the mate counit equation gives a compatible counit. Descend both transformations to the pair category and verify the two triangle identities on each object at its given stage. The uniqueness specification identifies the descended right functor with commonStageDerivedPullback. Standard classes are preserved using their finite-stage representatives.",
+   "uses": [
+    "lem-sf-rational-direct-image-coefficient-compatibility",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the descended functor to the degree-zero full subcategories and restrict its adjunction using hF. The published normalized shift-compatible pullback is triangulated; its left adjoint inherits shift compatibility and triangulatedness. A short exact sequence in the heart extends to a distinguished triangle, whose image is distinguished, so the lifted functor preserves short exact sequences and finite limits. The left adjunction supplies finite colimits.",
+   "uses": [
+    "def-weil-constructible-heart",
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-system-operation-exchange-realization",
+  "lem-sp-proetale-open-slice-presentation",
+  "lem-sf-integral-pullback-linear-adjunction",
+  "def-weil-rationalization-karoubi",
+  "def-weil-compact-support-finite-action",
+  "lem-sf-rational-direct-image-coefficient-compatibility",
+  "lem-weil-compact-support-normalized-scalar-isomorphisms",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-constructible-heart",
+  "lem-sf-automorphism-constructible-stage-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/lem-weil-extension-by-zero-exact.proof.md",
+  "place": "Same finite coefficient, completed, rational and common-stage route; implemented using the recorded qcqs realization, quotient-system adjunction, coherent coefficient mates, and short exact sequence/triangle correspondence. E3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion is an exact left adjoint on constructible sheaves",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "TopCat.Sheaf.instIsLeftAdjointPullback",
+     "TopCat.Sheaf.instIsRightAdjointPushforward",
+     "CompHausLike.LocallyConstant.adjunction",
+     "LightCondSet.LocallyConstant.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "TopCat.Sheaf.pullbackPushforwardAdjunction"
+    ],
+    "note": "",
+    "digest": "ba03664e4383fec9"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact common-stage constructible-heart extension theorem; the generic adjunction and exactness transport lemmas are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "open.*heart.*adj|heart.*open.*adj",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact common-stage constructible-heart extension theorem; the generic adjunction and exactness transport lemmas are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": {
+    "ok": true,
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.Adjunction.hasExactColimitsOfShape",
+     "CategoryTheory.abelianOfAdjunction",
+     "CategoryTheory.HasSheafify.mk'",
+     "CategoryTheory.Adjunction.extEquiv",
+     "CategoryTheory.Adjunction.extLinearEquiv",
+     "CategoryTheory.Adjunction.extEquiv_apply",
+     "CategoryTheory.Adjunction.extEquiv_symm_apply",
+     "CategoryTheory.Adjunction.extEquiv_mk₀"
+    ],
+    "note": "",
+    "digest": "ab0cd7edb9232608"
+   },
+   "date": "2026-10-24",
+   "verdict": "No exact common-stage constructible-heart extension theorem; the generic adjunction and exactness transport lemmas are used in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilIndSheafCategory",
+  "date": "2026-10-24",
+  "group": "Z9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-zl-weil-ind-sheaf-category",
+   "place": "Exact open extension by zero before the Ind extension and Frobenius-pair construction.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageOpenHeartAdjunction",
+  "file": "lean/Sheaf/Paper/CommonStageOpenHeartAdjunction.lean",
+  "declaration": "WeilConjectures.commonStageOpenHeartAdjunction",
+  "statement": "theorem commonStageOpenHeartAdjunction\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {U T : Scheme.{u}} [U.Over (Spec (.of D.k))] [T.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))]\n    (j : U ⟶ T) [IsOpenImmersion j] [j.IsOver (Spec (.of D.k))]\n    [∀ x : U, Invertible (l : U.residueField x)]\n    [∀ y : T, Invertible (l : T.residueField y)]\n    (F : sfCommonStageHeart l T Ω ⥤ sfCommonStageHeart l U Ω)\n    (hF : F ⋙ (sfCommonStageHeartProperty l U Ω).ι =\n      (sfCommonStageHeartProperty l T Ω).ι ⋙ commonStageDerivedPullback l Ω j) :\n    ∃ J : sfCommonStageHeart l U Ω ⥤ sfCommonStageHeart l T Ω,\n      PreservesFiniteLimits J ∧ PreservesFiniteColimits J ∧ Nonempty (J ⊣ F)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T034032-L-219411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T143113-L-945563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

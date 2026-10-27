@@ -1,0 +1,120 @@
+{
+ "id": "def-pur-signed-root-coordinate-data",
+ "kind": "definition",
+ "title": "Constant labels and normalized signed Tate-line coordinates",
+ "status": "split",
+ "statement": "Let $S$ be a scheme in universe $u$, with small pro-etale site [def-weil-pbc-proetale-site]. For a commutative ring $A$ in any universe $v$, define its constant label at $U$ to be the map $a\\mapsto\\iota_U(\\operatorname{ULift}(a))$ into the constant ring sheaf of [def-weil-pbc-constant-sheaf], where $\\iota$ is the constant-presheaf sheafification unit and the ring sheaf universe is $\\max(v,u+1)$. This is purPointConstant. Separately let $R$ be any sheaf of commutative rings of universe $u+1$ on this site, and $L$ an $R$-module sheaf. Use the underlying ring sheaf purTwistRing of [def-pur-twist-coefficient-rings], the tensor powers and signed lines $L(s)$ of [def-coefficient-twists-detailed], and their tensor and internal Hom constructions [def-pur-sheaf-tensor-product] and [def-pur-sheaf-hom]. For a family $c_s:R\\simeq L(s)$ of module-sheaf isomorphisms, write $e_s=c_s(1)$. Define IsPurPointSignedCoordinates to mean the following section equations on every pro-etale test $U$: $c_0(b)=b$; $e_{r+2}=e_{r+1}\\otimes e_1$ for every $r\\geq0$, with the tensor section mapped through sheafification; $c_s(b)=b e_s$ for every integer $s$ and every $b\\in R(U)$; $c_{r+1}^{-1}(b e_{r+1})=b$; for every local functional $\\varphi\\in L(-r-1)(U)$, $c_{-r-1}^{-1}(\\varphi)=\\varphi(e_{r+1})$; and $e_{-r-1}(e_{r+1})=1$. In the last two equations evaluation is at the identity object of the localized site $S_{\\mathrm{proet}}/U$. This defines a predicate on the supplied family, asserts no existence, and imposes no point-scheme or field hypothesis.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-twist-coefficient-rings",
+  "def-coefficient-twists-detailed",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+  "place": "(2.2), pp. 280-281, and (2.13), p. 283: constant labels, signed tensor coordinates and evaluation duals. Exact definitions in Sheaf.Paper.PointTateRootCoordinates, applicable to arbitrary schemes."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pro etale roots of unity module scalar extension tensor pure generator and signed Tate line coordinate normalization",
+   "results": "8 hits: Algebra.Generators.extendScalars_val, IsPrimitiveRoot.norm_eq_neg_one_pow, modularCyclotomicCharacter.toFun, Algebra.FormallyEtale.instTensorProduct, modularCyclotomicCharacter.toFun_unique', RootPairing.restrictScalars_coe_root, Algebra.Etale.baseChange, modularCyclotomicCharacter.toFun_spec'. These hits concern algebra generators, cyclotomic characters, algebraic etaleness or root systems, not these module-sheaf definitions.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing project definitions; add only missing definition ownership records."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPurPointSignedCoordinates\"",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRootPro(Module|Tensor|Generator)|purPointConstant|IsPurPointSignedCoordinates",
+   "results": "0 hits:  Mathlib has no matching definition. Project rg finds the exact definitions only in Sheaf.AlgebraicGeometry.FiniteRootSiteComparison and Sheaf.Paper.PointTateRootCoordinates. DAG rg finds only theorem owners; no existing definition node owns them. Upstream WeilConjectures rg gives no matches. blueprint_refs.py searches root tensor and signed coordinates both return 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing project definitions; add only missing definition ownership records."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-twist-root-trivialization",
+  "date": "2026-10-24",
+  "group": "Q135"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph, ordinary affine-line input; sk-prop-a1-kummer Coefficients and final twist sentence of geometric-fibre reduction: tensor powers and evaluation duals of the primitive-root basis",
+   "via": [
+    "lem-pur-finite-twist-root-trivialization",
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.PointTateRootCoordinates",
+  "declaration": "WeilConjectures.IsPurPointSignedCoordinates",
+  "declarations": [
+   "WeilConjectures.purPointConstant",
+   "WeilConjectures.IsPurPointSignedCoordinates"
+  ],
+  "statement": "def IsPurPointSignedCoordinates (S : Scheme.{u})\n    (R : Sheaf (ProEt.topology S) CommRingCat.{u + 1})\n    (L : SheafOfModules.{u + 1} (purTwistRing S R))\n    (c : ∀ m : ℤ, SheafOfModules.unit (purTwistRing S R) ≅ coefficientTwistLine S L m) :\n    Prop",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by L/H2 for immutable head a04626abeb58. Reuses the exact existing public definitions and their bodies, without declaring a new module or choosing any theorem conclusion."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d9910b41",
+  "group": "Q135",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d9910b41",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Re-delivery after return L (H2) at a04626abeb58; the Lean module is byte-identical (sha256 6575c6f8), and the earlier full H3 reading found no substance fault, which I confirmed by rereading all 350 lines. The item changes only lean and stmt_deps: the three theorem nodes are replaced by def-amb-finite-tate-site-comparison-data, the two new existing:true definition nodes and the 7 advisory definition owners; the theorem nodes stay in proof_deps; dependency records are identical to live. def-pur-finite-root-pro-tensor (finiteRootProModule/Tensor/Generator) and def-pur-signed-root-coordinate-data (purPointConstant, IsPurPointSignedCoordinates): signatures verbatim with live l.49-51 and l.54-58; the TeX matches the bodies (restrict scalars, extend, sheafify; six signed clauses); H12 fields correct; no other live owner. All clauses are present: finiteness and ℓ-power order, the cokernel quotient, the tensor presentation, root bases on both sites, signed degrees, the ν* comparison, pullbacks, and arbitrary non-flat coefficient maps. Advisory: owners of integralCoefficientSheaf, rootsOfUnitySheaf, constantZMod and purTwistRing/purTwistFiniteRing are not cited in stmt_deps. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T060857-L-2381299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.point_tate_root_coordinates"
+  ],
+  "sorry_after": []
+ }
+}

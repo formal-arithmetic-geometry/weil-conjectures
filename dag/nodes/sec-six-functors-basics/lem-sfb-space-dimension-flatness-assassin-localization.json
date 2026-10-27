@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-space-dimension-flatness-assassin-localization",
+ "kind": "statement",
+ "title": "Etale localization containing the relative assassin detects dimension-filtered flatness",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space], the universes of [def-weil-size-convention], sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules [def-trf-space-quasi-coherent-module], and tensor pullback [def-trf-space-etale-module-functors]. Use chartwise local finite type and local finite presentation [def-sfb-space-morphism-properties]. Finite presentation means locally of finite presentation, quasi-compact, with quasi-compact diagonal. A module of finite type is locally finitely generated on etale scheme charts; a finitely presented module has locally an exact presentation $\\mathcal O^r\\to\\mathcal O^s\\to M\\to0$ with $r,s$ finite. Let $f:X\\to Y$ have scheme base $Y$, be locally of finite type, let $M$ be a finite type quasi-coherent module, and let $h:X\\prime\\to X$ be representable etale. Put $M\\prime=h^*M$. For a scheme $B\\to Y$, write $X_B=X\\times_YB$ and $M_B$ for tensor pullback. For an integer $n\\geq0$, let $P_n(X,M;B)$ mean that for every representable etale scheme chart $a:U\\to X_B$ and $u\\in U$ mapping to $v\\in B$ with $\\operatorname{trdeg}_{\\kappa(v)}\\kappa(u)\\geq n$, the stalk $(a^*M_B)_u$ is flat over $\\mathcal O_{B,v}$. Residue fields, transcendence degree and base-flatness are [def-weil-residue-field, def-kun-transcendence-degree, def-pc-scheme-module-flat-over]. Use the relative assassin on spaces [def-sfb-space-universal-relative-purity]: $\\operatorname{Ass}_{X/Y}(M)$ is the union of the images of the fibrewise associated points on representable etale scheme charts, with scheme associated points as in [def-trf-relative-assassin]. For every scheme $B\\to Y$, $P_n(X,M;B)$ implies $P_n(X\\prime,M\\prime;B)$. If $h(|X\\prime|)$ contains $\\operatorname{Ass}_{X/Y}(M)$, then for every scheme $B\\to Y$ one has $P_n(X,M;B)\\Longleftrightarrow P_n(X\\prime,M\\prime;B)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX0 (lemma-localize-flat-dimension-n)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-universal-relative-purity",
+  "def-trf-relative-assassin"
+ ],
+ "proof": [
+  {
+   "text": "For each etale scheme chart, interpret the restriction of $M$ as a Zariski quasi-coherent module using [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Use [lem-trf-space-chart-adjunction-tensor-realization] for composition of all tensor pullbacks. The comparison in the former node identifies these with ordinary scheme pullbacks. Finite type is preserved: a local surjection $\\mathcal O^r\\twoheadrightarrow N$ pulls back to the surjection $\\mathcal O^r\\twoheadrightarrow g^*N$, because tensor pullback is a left adjoint and hence right exact. Thus all chart modules used below are finite type quasi-coherent modules; for ordinary scheme base changes quasi-coherence also follows from [lem-weil-pbc-module-pullback-quasi-coherent].",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX0 (lemma-localize-flat-dimension-n), chart modules; scheme/Zariski identifications supplied by Tags 03DX and 03LC."
+   }
+  },
+  {
+   "text": "Fix any scheme $B\\to Y$. If $P_n(X,M;B)$ holds, any chart $A\\to X\\prime_B$ composes with $h_B$ to a representable etale chart $A\\to X_B$ by [lem-trf-space-representable-etale-scheme-tests]. Its map to $B$ is the same composite in both descriptions, so the residue-field degree used in $P_n$ is identical. The tensor-composition identification of step 1 identifies the two module stalks. The asserted flatness on $A$ follows directly from $P_n(X,M;B)$, proving the forward implication without an assassin hypothesis.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX0 (lemma-localize-flat-dimension-n), inclusion of functors, by composition of charts."
+   }
+  },
+  {
+   "text": "Assume the image hypothesis. Choose a representable surjective etale atlas $p:U\\to X$ from a scheme, as in [def-trf-algebraic-space], and put $N=p^*M$. Form $W=U\\times_X X\\prime$. Since $h$ is representable etale, $W$ is a scheme and $q:W\\to U$ is etale; $W\\to X\\prime$ is a surjective etale chart, by [lem-trf-space-representable-etale-scheme-tests]. Every $a\\in\\operatorname{Ass}_{U/Y}(N)$ maps into $\\operatorname{Ass}_{X/Y}(M)$ by the union-of-chart-images definition in the statement. The image hypothesis and the fibre-product image equality of [lem-a1-space-point-open-calculus] therefore imply $a\\in q(W)$. Thus $q(W)$ contains the entire scheme relative assassin. No universal-purity or quasi-separatedness assumption has been used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX0 (lemma-localize-flat-dimension-n), choice of scheme charts; image comparison via Tag 03H4 (lemma-points-cartesian)."
+   }
+  },
+  {
+   "text": "Continue with the arbitrary $B\\to Y$, and put $U_B=U\\times_YB$, $W_B=W\\times_YB$, $N_B=\\operatorname{pr}_U^*N$, $q_B:W_B\\to U_B$. These are scheme charts over $X_B$ and $X\\prime_B$, and $q_B$ is etale by the base-change assertion of [lem-trf-space-representable-etale-scheme-tests]. The map $U\\to Y$ is locally of finite type by [def-sfb-space-morphism-properties], and $U_B\\to B$ has the same property by [lem-weil-pbc-lft-base-change]. The modules are finite type quasi-coherent by step 1. By [lem-sfb-space-dimension-flatness-base-change-sheaf], it suffices for $P_n(X,M;B)$ to verify the ordinary stalk condition on the single surjective atlas $U_B\\to X_B$. If $P_n(X\\prime,M\\prime;B)$ holds, its definition already gives that stalk condition on $W_B\\to X\\prime_B$.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-lft-base-change",
+    "lem-sfb-space-dimension-flatness-base-change-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CX0 (lemma-localize-flat-dimension-n), reduction to scheme functors; Tag 0CWS (lemma-pre-flat-dimension-n), some-atlas/every-chart equivalence."
+   }
+  },
+  {
+   "text": "For any $b\\in B$ and any associated point $a$ of $(N_B)_b$ on $(U_B)_b$, [lem-trf-relative-assassin-base-change] applied to $U\\to Y$, $N$, and $B\\to Y$ shows that its image $a_0\\in U$ belongs to $\\operatorname{Ass}_{U/Y}(N)$. Its hypotheses hold by steps 1 and 4 and it allows an arbitrary base morphism. Step 3 puts $a_0$ in $q(W)$. The fibre-product image equality in [lem-a1-space-point-open-calculus], applied to $W\\to U$ and $U_B\\to U$, now provides $w\\in W_B$ with $q_B(w)=a$. Thus the needed fibre-associated points are covered even after this arbitrary base change.",
+   "uses": [
+    "lem-trf-relative-assassin-base-change",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UD (lemma-localize-flat-dimension-n), use of Tag 05DC (lemma-base-change-relative-assassin); point lifting is Tag 03H4."
+   }
+  },
+  {
+   "text": "Let $u\\in U_B$ lie over $b\\in B$ and satisfy $\\operatorname{trdeg}_{\\kappa(b)}\\kappa(u)\\geq n$. Let $a\\in\\operatorname{Ass}_{(U_B)_b}((N_B)_b)$ specialize to $u$ in this fibre. By [lem-weil-pbc-lft-base-change] the fibre is locally of finite type over $\\kappa(b)$. If $a=u$ its transcendence degree is unchanged; otherwise [lem-sfb-field-specialization-trdeg-drop] gives $\\operatorname{trdeg}_{\\kappa(b)}\\kappa(a)>\\operatorname{trdeg}_{\\kappa(b)}\\kappa(u)$. Lift $a$ to $w\\in W_B$ by step 5. By [lem-weil-pbc-etale-residue-field-extension-separable] the extension $\\kappa(w)/\\kappa(a)$ is algebraic, so [lem-sbc-transcendence-degree-tower] gives equal transcendence degrees over $\\kappa(b)$, in particular at least $n$. The stalk on $W_B$ is therefore $B$-flat by $P_n(X\\prime,M\\prime;B)$. Since $q_B$ is flat by [def-weil-etale-morphism], [lem-trf-relative-flatness-source-cover] reflects that flatness to $(N_B)_a$. This verifies flatness at every fibre-associated generalization of $u$.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "lem-sfb-field-specialization-trdeg-drop",
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "lem-sbc-transcendence-degree-tower",
+    "def-weil-etale-morphism",
+    "lem-trf-relative-flatness-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UD (lemma-localize-flat-dimension-n), associated-point argument, written pointwise using Tag 06RU (lemma-dimension-fibre-specialization) instead of the bad-locus dimension formulation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-flatness-associated-generizations] to $U_B\\to B$, $N_B$, and $u$: local finite type and finite type quasi-coherence were checked in step 4, and step 6 verifies its entire associated-generalization condition over the same local ring $\\mathcal O_{B,b}$. It follows that $(N_B)_u$ is flat over $\\mathcal O_{B,b}$. Since $u$ was arbitrary with the required degree bound, the single-atlas equivalence [lem-sfb-space-dimension-flatness-base-change-sheaf] gives $P_n(X,M;B)$. Together with step 2 this proves the equivalence for every scheme $B\\to Y$.",
+   "uses": [
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-base-change-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05UD (lemma-localize-flat-dimension-n), final application of Tag 05UA (theorem-check-flatness-at-associated-points); chart conclusion as in Tag 0CX0."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-trf-algebraic-space",
+  "lem-a1-space-point-open-calculus",
+  "def-sfb-space-morphism-properties",
+  "lem-weil-pbc-lft-base-change",
+  "lem-sfb-space-dimension-flatness-base-change-sheaf",
+  "lem-trf-relative-assassin-base-change",
+  "lem-sfb-field-specialization-trdeg-drop",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-sbc-transcendence-degree-tower",
+  "def-weil-etale-morphism",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-sfb-scheme-flatness-associated-generizations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX0 (lemma-localize-flat-dimension-n), using the proof of flat.tex Tag 05UD (lemma-localize-flat-dimension-n); its associated-point argument is written directly with transcendence degrees and Tag 06RU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale map whose image contains all relative associated points detects flatness in dimensions at least n after every base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.Etale R S ↔ Algebra.IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"{R : Type u_3} → {S : Type u_4} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension filtered flattening functors agree after etale localization containing the relative assassin",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.Flat.holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": HoldsForLocalizationAway Flat\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism from $ R $ to $ S $ is flat. This means that tensoring with $ S\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \"(F : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat) (α : (AffineZariskiSite.toOpensFunctor X).op ⋙ X.presheaf ⟶ F) : Prop\", \"doc\": \"A property of a functor $ F : (X_{\\\\text{aff}})^{\\\\text{op}} \\\\to \\\\text{CommRing} $ equipped with a natural transformation $ \\\\alpha : \\\\mathcal{O}_X \\\\Rightarrow F $, asserting that for every affine open s\"}\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"RingHom.Flat.ofLocalizationPrime\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": OfLocalizationPrime Flat\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, if for every prime ideal $ J ⊆ S $ the localized homomorphism $ R_{f^{-1}(J)} → S_J $ is flat, then $ f $ itself is flat. \"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R Sₘ] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associated\", \"flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associated.*flat|flat.*associated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension filtered flattening functors agree after etale localization containing the relative assassin",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {A : Type u_4} {B : Type u_5} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B]\\n  (p : Ideal A) [inst_4 : p.IsPrime] (P : Ideal B) [inst_5 : P.IsPrime] [inst_6 : P.LiesOver p],\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associated.*flat|flat.*associated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flatness/localization and etale-locus declarations do not compare dimension-filtered conditions under an etale map covering relative associated points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale localization containing the relative associated points detects flatness in dimensions at least n after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpan\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpan fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"For a ring homomorphism $ f : R → S $ and a subset $ s ⊆ R $ whose ideal span equals $ R $, if the localization of $ f $ at each element of $ s $ is étale, then $ f $ itself is étale. This means that \"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flatness/localization and etale-locus declarations do not compare dimension-filtered conditions under an etale map covering relative associated points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension filtered flatness is detected on an etale neighbourhood of the relative assassin",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flatness/localization and etale-locus declarations do not compare dimension-filtered conditions under an etale map covering relative associated points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associated\", \"flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: returned flatness/localization and etale-locus declarations do not compare dimension-filtered conditions under an etale map covering relative associated points."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension filtered flattening conditions agree for an etale map covering all fibre associated points",
+   "results": "OK 8 hits; top declarations: RingHom.Etale.propertyIsLocal, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.etaleLocus, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_of_isEtaleAt; digest=6227d209cec5cbc5. Search output read in the tool result.",
+   "date": "2026-10-24",
+   "verdict": "no match: etale-locus/locality and standard smooth algebra declarations do not state the dimension-filtered relative-assassin localization assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pure-dimension-flatness-representability",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n).",
+   "via": [
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-dimension-flatness-assassin-localization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reduced to a scheme atlas, proved coverage of its relative assassin after arbitrary base change using 05DC and point-image calculus, and checked flatness at every fibre-associated generalization using transcendence degree and faithfully flat source reflection. Created only the independent 05UA pointwise flatness criterion, after logged Mathlib and whole-DAG searches. All other inputs are existing nodes.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). The seven steps implement Tag 0CX0 and its cited scheme proof 05UD within the inherited support/flattening prerequisite chain. Latest blueprint unit read; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Canonical comparison of chart modules with ordinary scheme modules, needed before applying scheme flatness lemmas. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Canonical composition of tensor pullbacks and restriction to etale charts. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Quasi-coherence of ordinary base-changed chart modules. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Scheme atlases and representable etale scheme tests. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Composition and arbitrary base change of etale charts. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point images of fibre products commute with arbitrary base change. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Local finite type of base-changed charts and fibres. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-trf-relative-assassin-base-change",
+    "why": "Associated points after arbitrary base change map to the original relative assassin. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-etale-residue-field-extension-separable",
+    "why": "An etale chart lift has algebraic residue extension. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-sbc-transcendence-degree-tower",
+    "why": "Algebraic residue extensions preserve transcendence degree over the fibre field. No node of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-trf-relative-flatness-source-cover",
+    "why": "Relative flatness is reflected by a flat scheme map at a lifted point. No node of this unit supplies this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-trf-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-lft-base-change",
+  "lem-trf-relative-assassin-base-change",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-trf-relative-flatness-source-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-f9d4cb34b",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-f9d4cb34b (reviewer sub-agent of L); spot-checked: PASS with no fixes. I read the item, the new node, every cited statement and the Stacks sources: 0CX0, 05UD, 05UA, and 05DC with its remark. The item's statement and stmt_deps match live exactly. On live the item is still unsplit, so no other group has taken it. The 7 steps follow the source route: step 4 reduces to one atlas (0CWS, via the existing node lem-sfb-space-dimension-flatness-base-change-sheaf), then steps 5-7 run the 05UD argument in the item's transcendence-degree terms. Ass coverage after an arbitrary base change uses only the forward direction of 05DC plus the fibre-product image equality. The degree is kept using 06RU (a strict drop under specialization), 02G8 (etale residue extensions are algebraic) and 030H (the transcendence-degree tower). Flatness at w on the chart of X' is reflected to a by flat permanence 02JZ (same base B, same O_{B,b}). Step 7 applies 05UA. Every hypothesis was checked at the step where it is used: local finite type of U->Y via the chart test with V=Y, finite type kept by right exactness of pullback, and W a scheme with q etale. The new node lem-sfb-scheme-flatness-associated-generizations matches 05UA hypothesis by hypothesis. It is statement-only and self-contained, and it is strictly smaller than the item: no dimension cutoff, no space, no base change. A whole-DAG search found no duplicate (by 05UA/05UD tags or by Ass+flat+specialization). I tested it on k[t,x]/(tx) at the origin (both sides non-flat), on an embedded fibre point, on M=0 and on A^2->A^1. Batch-5 check: the 7 listed citations are generic Stacks tools (02OJ/05AT, 03DX/03LC, 03D8/03G8, 03EC, 03H4/03H5, 05DC, 02JZ). A dependency search from each found no Poincare-duality, trace-transport, assumption or trace-formula node in its closure; the a1 point-calculus node reaches sec-trace-formula only through the definition def-trf-algebraic-space. So none of them is a step of the trace formula or Poincare duality. Declared tool_uses accepted as black-box generic tools. No SGA source is used."
+ }
+}

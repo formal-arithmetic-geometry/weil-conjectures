@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-augmented-etale-associated-graded",
+ "kind": "statement",
+ "title": "Infinitesimal neighbourhoods and associated graded rings under formally etale maps",
+ "statement": "Let $\\varphi:A\\to C$ be a homomorphism of commutative rings, $J\\subset C$ an ideal, and suppose the composite $A\\to C/J$ is surjective with kernel $I$. Assume $\\varphi$ is formally etale: for every $A$-algebra $E$ and square-zero ideal $N\\subset E$, reduction induces a bijection $\\operatorname{Hom}_{A\\text{-alg}}(C,E)\\to\\operatorname{Hom}_{A\\text{-alg}}(C,E/N)$. In particular this hypothesis holds if $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. For every integer $n\\ge1$, the map induced by $\\varphi$ is an isomorphism\n$$A/I^n\\xrightarrow{\\sim}C/J^n.$$\nConsequently the canonical map\n$$\\operatorname{gr}_I(A)\\xrightarrow{\\sim}\\operatorname{gr}_J(C)$$\nis an isomorphism of graded $A/I=C/J$-algebras [def-weil-pbc-associated-graded-ring]. These are the maps $[a]\\mapsto[\\varphi(a)]$; hence they commute with compatible ring homomorphisms preserving the specified ideals, and with composition. No Noetherian, finite-generation or equality $J=IC$ assumption is imposed. Quotient rings, algebras and their homomorphisms are [def-weil-pbc-algebra-hom-quotient]; spectra are [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), including its inductive lifting proof; etale implies formally etale: Tag 00UR (lemma-formally-etale-etale). Naturality is that of the canonical quotient maps."
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "For the parenthetical etale case, suppose $\\operatorname{Spec}\\varphi:\\operatorname{Spec}C\\to\\operatorname{Spec}A$ is etale. By [def-weil-etale-morphism] it is flat and unramified, so [lem-weil-pbc-flat-unramified-formally-etale] makes it formally smooth in the sense of [def-sbc-formally-smooth]. Applying [lem-weil-pbc-affine-formally-smooth-iff-ring-lifting] to $\\varphi$: for every $A$-algebra $E$ and square-zero ideal $N\\subset E$, every $A$-algebra map $C\\to E/N$ lifts to an $A$-algebra map $C\\to E$, i.e. the reduction map of the item is surjective. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $\\Omega_{C/A}=0$; the implication (2)$\\Rightarrow$(1) of [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero], with base ring $A$ and algebra $C$, says that such a lift is unique, i.e. the reduction map is injective. Hence the stated lifting hypothesis holds. In the rest of the proof use that lifting hypothesis directly; no finite-presentation assumption is needed there.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "def-sbc-formally-smooth",
+    "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UR (lemma-formally-etale-etale), etale implies formally etale, here via formally smooth plus formally unramified as in the cited nodes."
+   }
+  },
+  {
+   "text": "Write $\\pi_{I,n}:A\\to A/I^n$ and $\\pi_{J,n}:C\\to C/J^n$ for the quotient maps [def-weil-pbc-algebra-hom-quotient]. If $a\\in I$ then $\\varphi(a)\\in J$, so a product of $n$ elements of $I$ maps into $J^n$; sums and multiples give $\\varphi(I^n)\\subseteq J^n$. Thus $f_n([a])=[\\varphi(a)]$ is a well-defined $A$-algebra homomorphism. These maps commute with every reduction map, since both composites send $[a]$ to $[\\varphi(a)]$. For $n=1$, $f_1$ is surjective by assumption, and $f_1([a])=0$ means $a\\in I$, so it is injective. Set $g_1=f_1^{-1}$ and $\\ell_1=g_1\\pi_{J,1}$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: successive square-zero lifts and uniqueness; associated-graded conclusion in the statement, expanded on representatives."
+   }
+  },
+  {
+   "text": "Induct on $n\\ge1$ with claim that $f_n$ has an inverse $g_n$, compatible with every reduction to an earlier positive level. Step 2 is the base case. Given $g_n$, apply [lem-sfb-formally-etale-power-step] to the stated lifting hypothesis and the same $A,C,I,J$: it supplies the two-sided inverse $g_{n+1}$ and $r_ng_{n+1}=g_ns_n$. Composing this equality with earlier reductions preserves the inductive compatibility. Thus all the asserted quotient isomorphisms are obtained.",
+   "uses": [
+    "lem-sfb-formally-etale-power-step"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), proof: one successive dotted arrow, its factorization and the uniqueness argument for the inverse composite."
+   }
+  },
+  {
+   "text": "Since $\\varphi(I)\\subseteq J$ and every $f_n=Q_n(\\varphi)$ is an isomorphism, [lem-sfb-power-quotient-graded-comparison] applies and gives the stated graded $A/I=C/J$-algebra isomorphism, with precisely the homogeneous representative maps $[a]_r\\mapsto[\\varphi(a)]_r$, including degree zero. Its commuting-square, composition and identity formulas give all the required naturality assertions for both quotient and graded maps, even when the comparison maps are not formally etale. Neither cited argument requires $J=IC$ or finiteness hypotheses.",
+   "uses": [
+    "lem-sfb-power-quotient-graded-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), associated-graded conclusion, extracted as a comparison criterion assuming the ideal-power quotient isomorphisms; canonical maps and their functoriality on representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "def-sbc-formally-smooth",
+  "lem-weil-pbc-affine-formally-smooth-iff-ring-lifting",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-sfb-formally-etale-power-step",
+  "lem-sfb-power-quotient-graded-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0H1D (lemma-formally-etale-lift-infinitesimal), successive lifting proof, expanded for factorization, both inverse identities, associated graded rings and naturality; Tag 00UR for the etale special case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Aa]ugment.*[Ee]tale|[Ee]tale.*[Aa]ssociated[Gg]raded|[Ee]tale.*[Aa]dic",
+   "results": "{\"t\": \"2026-10-22T04:03:15Z\", \"tool\": \"grep\", \"query\": \"[Aa]ugment.*[Ee]tale|[Ee]tale.*[Aa]ssociated[Gg]raded|[Ee]tale.*[Aa]dic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero lifting and standard etale presentations do not state the compatible isomorphisms of all ideal-power quotients and their associated graded rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale A algebra map C to E with compatible augmentations to A, C modulo powers of the augmentation ideal is isomorphic to E modulo powers of its augmentation ideal",
+   "results": "{\"t\": \"2026-10-22T04:03:15Z\", \"tool\": \"leansearch\", \"query\": \"For an etale A algebra map C to E with compatible augmentations to A, C modulo powers of the augmentation ideal is isomorphic to E modulo powers of its augmentation ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.Etale.formallyEtale\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.Etale\", \"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective\"], \"digest\": \"06c6fbbfbb0d3c99\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero lifting and standard etale presentations do not state the compatible isomorphisms of all ideal-power quotients and their associated graded rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.FormallyEtale\", \"lift\"",
+   "results": "{\"t\": \"2026-10-22T04:03:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra.FormallyEtale\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero lifting and standard etale presentations do not state the compatible isomorphisms of all ideal-power quotients and their associated graded rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale homomorphism of augmented algebras inducing the identity on the augmentation quotient induces an isomorphism of associated graded algebras of the augmentation ideals",
+   "results": "{\"t\": \"2026-10-22T04:03:20Z\", \"tool\": \"leanfinder\", \"query\": \"An etale homomorphism of augmented algebras inducing the identity on the augmentation quotient induces an isomorphism of associated graded algebras of the augmentation ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp_bijective\", \"RingHom.Etale.respectsIso\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePresentation.lift_bijective\", \"StandardEtalePresentation.toSubmersivePresentation_map\", \"RingHom.Etale.toAlgebra\"], \"digest\": \"37e03966235c43a3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero lifting and standard etale presentations do not state the compatible isomorphisms of all ideal-power quotients and their associated graded rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale neighborhoods of a section have canonically isomorphic infinitesimal neighborhoods and tangent cones along that section",
+   "results": "{\"t\": \"2026-10-22T04:03:22Z\", \"tool\": \"leanfinder\", \"query\": \"Etale neighborhoods of a section have canonically isomorphic infinitesimal neighborhoods and tangent cones along that section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"Algebra.etaleLocus\", \"Algebra.Etale.formallyEtale\", \"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"f63851b2f06d585e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero lifting and standard etale presentations do not state the compatible isomorphisms of all ideal-power quotients and their associated graded rings"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*[Ii]nfinitesimal|[Ff]ormally[Ee]tale.*[Qq]uotient|[Ff]ormally[Ee]tale.*[Gg]raded|[Ff]ormally[Ee]tale.*[Pp]ow",
+   "results": "{\"t\": \"2026-10-22T04:03:58Z\", \"tool\": \"grep\", \"query\": \"lift.*[Ii]nfinitesimal|[Ff]ormally[Ee]tale.*[Qq]uotient|[Ff]ormally[Ee]tale.*[Gg]raded|[Ff]ormally[Ee]tale.*[Pp]ow\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Smooth/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"e9c3234901b160b7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero lifting and standard etale presentations do not state the compatible isomorphisms of all ideal-power quotients and their associated graded rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R to S is formally etale and R to S modulo J is surjective with kernel I, then R modulo I powers equals S modulo J powers and the associated graded rings are isomorphic",
+   "results": "{\"t\": \"2026-10-22T04:04:00Z\", \"tool\": \"leanfinder\", \"query\": \"If R to S is formally etale and R to S modulo J is surjective with kernel I, then R modulo I powers equals S modulo J powers and the associated graded rings are isomorphic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp_bijective\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.FormallyEtale.iff_of_surjective\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallySmooth.comp_surjective\", \"StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation\"], \"digest\": \"da9ec8ea5bdf31dc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: square-zero lifting and standard etale presentations do not state the compatible isomorphisms of all ideal-power quotients and their associated graded rings"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyEtale.*[Qq]uotient|[Ii]nfinitesimal|[Aa]ssociated[Gg]raded",
+   "results": "{\"t\": \"2026-10-22T04:21:39Z\", \"tool\": \"grep\", \"query\": \"FormallyEtale.*[Qq]uotient|[Ii]nfinitesimal|[Aa]ssociated[Gg]raded\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"82cd75bd393025cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide the square-zero lifting criterion, etale implies formally etale, or unrelated field/localization results; none gives all ideal-power quotient and associated-graded isomorphisms as one-line specializations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A formally etale map inducing an isomorphism on quotient rings induces isomorphisms on infinitesimal neighborhoods and associated graded rings",
+   "results": "{\"t\": \"2026-10-22T04:21:39Z\", \"tool\": \"leansearch\", \"query\": \"A formally etale map inducing an isomorphism on quotient rings induces isomorphisms on infinitesimal neighborhoods and associated graded rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyEtale\", \"RingHom.Etale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.Etale.formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"caf2f928a6f3d5c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide the square-zero lifting criterion, etale implies formally etale, or unrelated field/localization results; none gives all ideal-power quotient and associated-graded isomorphisms as one-line specializations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallyEtale\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-22T04:21:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallyEtale\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instIsSeparableQuotientIdealOfEssFiniteTypeOfIsPrime\"], \"digest\": \"ff17318e6a0b16c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide the square-zero lifting criterion, etale implies formally etale, or unrelated field/localization results; none gives all ideal-power quotient and associated-graded isomorphisms as one-line specializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally etale ring homomorphism A to C inducing an isomorphism A modulo I to C modulo J induces isomorphisms modulo all ideal powers and on associated graded rings",
+   "results": "{\"t\": \"2026-10-22T04:21:42Z\", \"tool\": \"leanfinder\", \"query\": \"A formally etale ring homomorphism A to C inducing an isomorphism A modulo I to C modulo J induces isomorphisms modulo all ideal powers and on associated graded rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.comp_bijective\", \"Algebra.FormallyEtale.iff_comp_bijective\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.FormallyUnramified.ext_of_iInf\"], \"digest\": \"54e12d7121db7c8b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide the square-zero lifting criterion, etale implies formally etale, or unrelated field/localization results; none gives all ideal-power quotient and associated-graded isomorphisms as one-line specializations"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*(equiv|bijective)|ideal.*pow|pow.*ideal",
+   "results": "{\"t\": \"2026-10-22T04:21:56Z\", \"tool\": \"grep\", \"query\": \"quotient.*(equiv|bijective)|ideal.*pow|pow.*ideal\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"9129c77b00e6213a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide the square-zero lifting criterion, etale implies formally etale, or unrelated field/localization results; none gives all ideal-power quotient and associated-graded isomorphisms as one-line specializations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally etale algebra has the same adic infinitesimal neighborhoods and tangent cone as its base when the residue quotient maps are isomorphisms",
+   "results": "{\"t\": \"2026-10-22T04:22:08Z\", \"tool\": \"leanfinder\", \"query\": \"A formally etale algebra has the same adic infinitesimal neighborhoods and tangent cone as its base when the residue quotient maps are isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_comp_bijective\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.instFormallyUnramified\", \"Algebra.formallyEtale_iff\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.comp_bijective\", \"StandardEtalePair.instFormallyEtaleRing\", \"RingHom.formallyEtale_algebraMap\"], \"digest\": \"28ef2f5a26a7d4fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide the square-zero lifting criterion, etale implies formally etale, or unrelated field/localization results; none gives all ideal-power quotient and associated-graded isomorphisms as one-line specializations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-branch-double-cover",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices.",
+   "via": [
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-augmented-etale-associated-graded",
+  "worker": "stage1",
+  "summary": "Q31 repair of the 5468-character proof: preserved the statement and all existing metadata, extracted two comparable independent arguments as statement-only unsplit nodes (one-step inverse extension and the generic graded comparison with functoriality). Parent keeps the etale bridge, quotient base case and induction assembly. Full old argument and allocation are retained in the report; all new nodes searched by two semantic phrasings, Loogle and Mathlib grep.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction, through the inherited nodal-branch-double-cover ancestry: the local tangent-cone construction for the two branch choices. Expands the infinitesimal-neighbourhood and associated-graded comparison used there; does not change the unit route. Re-split: new power-step node carries old Steps 3-4; new comparison node carries old Steps 5-7; parent retains old Steps 1-2 and assembles by induction."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-78e93e894",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-78e93e894 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the released re-split note (live and side-live still have the 7-step base proof, so no other group superseded it). Source checked: Stacks algebra.tex 0H1D (lemma-formally-etale-lift-infinitesimal, l.41257) and 00UR; no SGA is used. The item statement is byte-equal to live, so the Q40 Lean binding is unaffected. Old proof against the new delivery: old Steps 3-4 (square-zero lift, factorization through J^{n+1}, both inverse identities, compatibility) are all explicit conclusions of lem-sfb-formally-etale-power-step. Old Steps 5-7 (G_r bijectivity including r=0 via Q_1, the unital multiplicative direct sum, the scalar identity, naturality, composition and identity) are all in lem-sfb-power-quotient-graded-comparison. Old Steps 1-2 stay in the parent verbatim: Step 1 only chains six existing statements (re-read) and Step 2 is the elementary base case. The parent is 4 steps, 2576 chars. The two new nodes are comparable (1647 vs 2264 chars of old proof) and independent, and neither restates the item. I proved both new statements myself. For power-step, ℓ(J) lands in I/I^{n+1} using only the fixed-level g_n (for j in J, g_n[j]=[a] with φ(a)-j in J^n, so a in I); u=f_{n+1}ℓ and v=π_{J,n+1} agree mod J^n, so uniqueness gives u=v. For the comparison: injectivity comes from Q_{r+1}, surjectivity from Q_{r+1} and then Q_r. Edge cases: n=1; I=A; identity; k→k×k with J=0×k; k→k[t] (shows the uniqueness half of the lifting bijection is needed); ℤ→ℤ with J=2ℤ (shows the conditional hypothesis is needed). No duplicates: rg -L for 0H1D and over all 256 associated-graded nodes. Mathlib has no ideal associated-graded ring, and iff_comp_bijective is the hypothesis, not the conclusion. No cited node is in the dropped list. FIX (one fault, search rule B7): lem-sfb-formally-etale-power-step had no LeanSearch record. Its real LeanSearch query (06:01:06Z, digest 13f28ed99c4ca58f) had been filed under lem-sfb-power-quotient-graded-comparison, which has its own. I moved the record unchanged into the power-step node, with a verdict for that node; the corrected whole files are in fixes/dag/nodes/sec-six-functors-basics/ for both new nodes. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallyEtaleAssociatedGraded",
+  "declaration": "Ideal.formallyEtale_powerQuotient_associatedGraded",
+  "declarations": [
+   "Ideal.powerQuotientMap",
+   "Ideal.associatedGradedPieceMap",
+   "Ideal.associatedGradedMap",
+   "Ideal.formallyEtale_powerQuotient_associatedGraded",
+   "Ideal.powerQuotientMap_naturality",
+   "Ideal.associatedGradedMap_naturality",
+   "Ideal.powerQuotientMap_comp",
+   "Ideal.associatedGradedMap_comp",
+   "Ideal.powerQuotientMap_id",
+   "Ideal.associatedGradedMap_id",
+   "AlgebraicGeometry.formallyEtale_of_etale_spec"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormallyEtaleAssociatedGraded.lean",
+  "statement": "theorem formallyEtale_powerQuotient_associatedGraded {A : Type u} {C : Type v} [CommRing A] [CommRing C] (f : A →+* C) (J : Ideal C) (hform : @Algebra.FormallyEtale A C _ _ f.toAlgebra) (hsurj : Function.Surjective ((Ideal.Quotient.mk J).comp f)) : (∀ n : ℕ, 1 ≤ n → Function.Bijective (powerQuotientMap f (J.comap f) J le_rfl n)) ∧ ∃ e : associatedGraded (J.comap f) ≃+* associatedGraded J, e.toAddMonoidHom = associatedGradedMap f (J.comap f) J le_rfl ∧ ∀ (a : A) (x : associatedGraded (J.comap f)), e ((Ideal.Quotient.mk (J.comap f) a) • x) = (Ideal.Quotient.mk J (f a)) • e x",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Stacks 0H1D. The kernel I is written as J.comap f. Quotient isomorphisms are bijectivity of the actual quotient ring homomorphisms; the graded ring equivalence equals the explicitly constructed direct sum map and respects the quotient scalar actions. The additional declarations construct the canonical maps and state the node's naturality, composition, identity and etale-special-case clauses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a65278f58",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node and Stacks 0H1D/00UR: I = J.comap f is exactly the kernel of A -> C/J; Algebra.FormallyEtale with f.toAlgebra is equivalent to the node's square-zero lifting bijection (iff_comp_bijective, no universe limit on test algebras, no finite presentation). Bijectivity of the canonical Ideal.quotientMap for every n >= 1. The ring equivalence of associated graded rings is pinned to the canonical DirectSum.map of Submodule.mapQ piece maps (graded, degree 0 included), with a scalar clause giving A/I = C/J-linearity through the dependency's associatedGradedAlgebra. Naturality, composition and identity are stated for both families of maps; the etale-Spec special case uses the recorded AlgebraicGeometry.Etale and Spec.map. No extra assumptions (no Noetherian, finite generation, J = IC or Nontrivial). Edge cases checked: n = 0, J = top, J = bot, zero rings, k -> k x k, k -> k[t]. No existing associated-graded map or 0H1D statement in Mathlib or the project; helpers are real canonical constructions with source and blueprint docstrings. lean.statement matches the file verbatim, all proofs are sorry, universes are bound, item is not dropped and was not landed earlier. Advisory only: unused private proof-route imports. No compile run since no file changed; the worker reports a clean scompile."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

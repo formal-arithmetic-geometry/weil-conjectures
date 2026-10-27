@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-smooth-diagonal-additive-crossed-vanishing",
+ "kind": "statement",
+ "title": "Principal crossed homomorphisms from a smooth diagonalizable group into an additive subgroup",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All group schemes are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Let $D$ be smooth [def-sbc-smooth-morphisms] and diagonalizable: for a finitely generated abelian group $M$ there is an isomorphism $D\\simeq\\operatorname{Spec}F[M]$ [def-weil-affine-spectrum], where $F[M]$ has basis $e_m$, multiplication $e_me_n=e_{m+n}$, comultiplication $e_m\\mapsto e_m\\otimes e_m$, counit $e_m\\mapsto1$, and antipode $e_m\\mapsto e_{-m}$. Let $\\chi:D\\to\\mathbf G_m$ be a group-scheme homomorphism, and let $N\\subseteq\\mathbf G_a$ be a closed subgroup scheme [def-sc-group-scheme-subgroup, def-weil-closed-immersion] stable under multiplication by $\\chi$: for every commutative $F$-algebra $A$, $d\\in D(A)$ and $x\\in N(A)\\subseteq A$, one has $\\chi_A(d)x\\in N(A)$. Here $\\mathbf G_a(A)=(A,+)$ and $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. If an $F$-scheme morphism $f:D\\to N$ satisfies\n$$f_A(dd')=f_A(d)+\\chi_A(d)f_A(d')$$\nfor every commutative $F$-algebra $A$ and $d,d'\\in D(A)$, then there exists $a\\in N(F)$ such that\n$$f_A(d)=a_A-\\chi_A(d)a_A$$\nfor every such $A,d$, where $a_A$ is the scalar extension of $a$. No smoothness or connectedness of $N$, and no connectedness of $D$, is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 15.3, printed p.303 (commutative unipotent group varieties); nonsmooth additive subgroup form obtained by factoring the morphism from smooth D through N_red, as in the smooth-quotient scope of Summary 16.29, printed p.334."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-gm-ga",
+  "def-sfb-diagonalizable-group",
+  "def-sfb-standard-group-coordinate-points"
+ ],
+ "proof": [
+  {
+   "text": "Use the torsion-kernel lemma with $p=1$ in characteristic zero and $p=\\operatorname{char}F$ otherwise: $H_n=D[n](F)$ is finite of order $c_n$ coprime to $p$, and vanishing on all $H_n$ detects regular functions on $D$. Multiplication by $c_n$ is bijective on $N(F)\\subset F$. Indeed, for $s\\in N(F)$ put $b=s/c_n\\in F$, since $c_n$ is nonzero in $F$. If $N=\\mathbf G_a$ then $b\\in N(F)$. Otherwise the additive-subgroup polynomial lemma supplies a monic additive $P$ with $N(F)=\\{x:P(x)=0\\}$. Repeated additivity gives $c_nP(b)=P(c_nb)=P(s)=0$, so $P(b)=0$ and $b\\in N(F)$. Injectivity follows by cancellation in $F$. No smoothness of $N$ is used.",
+   "uses": [
+    "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density",
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-additive-subgroup-polynomial-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.3, printed p.303, finite-subgroup averaging; Proposition 12.3 and Remark 12.5, pp.231–232; Theorem 12.32, p.242. Division in an arbitrary closed additive subgroup and the divisibility-directed compatibility are written out here."
+   }
+  },
+  {
+   "text": "Fix an admissible $n$ and put $s_n=\\sum_{y\\in H_n}f_F(y)\\in N(F)$. For $x\\in H_n$, summing the crossed identity and permuting $y\\mapsto xy$ gives $s_n=c_nf_F(x)+\\chi_F(x)s_n$. Choose $a_n\\in N(F)$ with $c_na_n=s_n$, as justified above. The scalar $c_n$ is nonzero in $F$, so cancellation in $F$ gives $f_F(x)=(1-\\chi_F(x))a_n$ for every $x\\in H_n$. This is exactly the finite-subgroup averaging of Milne 15.3, with the sign $f(x)=a_n-\\chi(x)a_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.3, printed p.303, finite-subgroup averaging; Proposition 12.3 and Remark 12.5, pp.231–232; Theorem 12.32, p.242. Division in an arbitrary closed additive subgroup and the divisibility-directed compatibility are written out here."
+   }
+  },
+  {
+   "text": "If $\\chi$ is the trivial character, the averaging identity says $f_F(x)=0$ on every $H_n$. Apply the torsion-kernel lemma's regular-function test to the pullback of the additive coordinate under $D\\xrightarrow fN\\hookrightarrow\\mathbf G_a$: it is zero in $F[M]$. Morphisms to $\\mathbf G_a$ are determined by this coordinate, so $f_A(d)=0$ for all $A,d$, and $a=0\\in N(F)$ works.",
+   "uses": [
+    "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density",
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.3, printed p.303, finite-subgroup averaging; Proposition 12.3 and Remark 12.5, pp.231–232; Theorem 12.32, p.242. Division in an arbitrary closed additive subgroup and the divisibility-directed compatibility are written out here."
+   }
+  },
+  {
+   "text": "Otherwise $\\chi^*(t)-1$ is a nonzero regular function on $D$. The same torsion-kernel test supplies an admissible $n_0$ and $h\\in H_{n_0}$ with $\\chi_F(h)\\ne1$. Fix $a=a_{n_0}$. For any admissible $n$, set $m=\\operatorname{lcm}(n,n_0)$, which is admissible and satisfies $H_n,H_{n_0}\\subseteq H_m$. Evaluating the averaging formula for $m$ and $n_0$ at $h$ gives $(1-\\chi_F(h))(a_m-a)=0$, hence $a_m=a$. Thus $f_F(x)=(1-\\chi_F(x))a$ on every $H_n$. Apply the torsion-kernel test to the regular function $f^*(y)-a(1-\\chi^*(t))$ to obtain equality in $F[M]$, hence the stated equality after every $F$-algebra extension. The right side belongs to $N(A)$ by scalar stability and subtraction in its subgroup, and $N(A)\\hookrightarrow A$ is injective, so this is the required identity in $N$, not just in $\\mathbf G_a$.",
+   "uses": [
+    "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density",
+    "def-sc-gm-ga",
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.3, printed p.303, finite-subgroup averaging; Proposition 12.3 and Remark 12.5, pp.231–232; Theorem 12.32, p.242. Division in an arbitrary closed additive subgroup and the divisibility-directed compatibility are written out here."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-diagonal-prime-to-characteristic-torsion-density",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-additive-subgroup-polynomial-quotient",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 15.3, printed p.303, finite-subgroup averaging; Proposition 12.3 and Remark 12.5, pp.231–232; Theorem 12.32, p.242. Division in an arbitrary closed additive subgroup and the divisibility-directed compatibility are written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth diagonalizable algebraic group acting linearly on a closed subgroup scheme N of the additive group, every regular crossed homomorphism to N is principal",
+   "results": "8 hits: groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.Hilbert90.aux, groupCohomology.IsMulCoboundary₁, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, groupCohomology.IsCoboundary₁, Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_norm",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology cocycle/coboundary definitions, Hilbert 90 for Galois actions on field units, and finite cyclic representation cohomology do not state algebraic crossed-homomorphism vanishing for a smooth diagonalizable group acting on an arbitrary closed additive subgroup scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "principal|IsCocycle|coboundary",
+   "results": "10 hits: Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean (directory Mathlib/RepresentationTheory/Homological/GroupCohomology)",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology cocycle/coboundary definitions, Hilbert 90 for Galois actions on field units, and finite cyclic representation cohomology do not state algebraic crossed-homomorphism vanishing for a smooth diagonalizable group acting on an arbitrary closed additive subgroup scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "crossedHom|crossed_hom|diagonalizable.*cocycle|cocycle.*diagonalizable",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology cocycle/coboundary definitions, Hilbert 90 for Galois actions on field units, and finite cyclic representation cohomology do not state algebraic crossed-homomorphism vanishing for a smooth diagonalizable group acting on an arbitrary closed additive subgroup scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every regular crossed homomorphism from a smooth diagonalizable group scheme to a scalar stable closed subgroup scheme of the additive group is a principal cocycle",
+   "results": "8 hits: groupCohomology.cocycles₁, groupCohomology.cocyclesOfIsCocycle₁, groupCohomology.mem_cocycles₁_of_addMonoidHom, CochainComplex.HomComplex.cocycle, groupCohomology.mem_cocycles₁_iff, groupCohomology.instFunLikeSubtypeForallCarrierVModuleCatMemSubmoduleCocycles₁, groupCohomology.mem_cocycles₁_def, groupCohomology.cocyclesOfIsMulCocycle₂",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology cocycle/coboundary definitions, Hilbert 90 for Galois actions on field units, and finite cyclic representation cohomology do not state algebraic crossed-homomorphism vanishing for a smooth diagonalizable group acting on an arbitrary closed additive subgroup scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCocycle\", \"AddMonoidAlgebra\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology cocycle/coboundary definitions, Hilbert 90 for Galois actions on field units, and finite cyclic representation cohomology do not state algebraic crossed-homomorphism vanishing for a smooth diagonalizable group acting on an arbitrary closed additive subgroup scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First algebraic group cohomology vanishes for a smooth group of multiplicative type acting linearly on an additive subgroup",
+   "results": "8 hits: groupCohomology.map₁_one, groupCohomology.map_1_one, groupCohomology.subtype_comp_d₀₁_apply, groupCohomology.d₀₁_eq_zero, groupCohomology.coboundaries₁_eq_bot_of_isTrivial, groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.H1IsoOfIsTrivial, groupCohomology.H1IsoOfIsTrivial_H1π_apply_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: groupCohomology cocycle/coboundary definitions, Hilbert 90 for Galois actions on field units, and finite cyclic representation cohomology do not state algebraic crossed-homomorphism vanishing for a smooth diagonalizable group acting on an arbitrary closed additive subgroup scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular crossed homomorphism from a smooth diagonalizable algebraic group into a closed scalar stable subgroup scheme of the additive group is principal",
+   "results": "8 hits: groupCohomology.Hilbert90.aux, groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Rep.FiniteCyclicGroup.leftRegular.range_norm_eq_ker_applyAsHom_sub, Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_norm, Rep.FiniteCyclicGroup.leftRegular.range_applyAsHom_sub_eq_ker_linearCombination, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-cohomology definitions and multiplicative Galois Hilbert 90 do not state this regular algebraic cocycle theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "crossedHom|crossed_hom|diagonalizable.*cocycle|cocycle.*diagonalizable",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-cohomology definitions and multiplicative Galois Hilbert 90 do not state this regular algebraic cocycle theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular crossed homomorphisms from a diagonalizable algebraic group into a unipotent group are principal",
+   "results": "8 hits: groupCohomology.cochainsIso₁, groupCohomology.coboundaries₁, groupCohomology.cocycles₁IsoOfIsTrivial.congr_simp, toPrincipalIdeal, Rep.leftRegularHomEquiv_apply, groupCohomology.H1IsoOfIsTrivial, Representation.asGroupHom, Action.diagonalOneIsoLeftRegular",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-cohomology definitions and multiplicative Galois Hilbert 90 do not state this regular algebraic cocycle theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCocycle\", \"AddMonoidAlgebra\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-cohomology definitions and multiplicative Galois Hilbert 90 do not state this regular algebraic cocycle theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth diagonalizable algebraic group over an algebraically closed field the finite subgroups killed by integers prime to the characteristic are reduced have order prime to the characteristic and their union is schematically dense",
+   "results": "8 hits: FirstOrder.Field.finite_ACF_prime_not_realize_of_ACF_zero_realize, CommGroup.primaryComponent, ZModModule.isPGroup_multiplicative, IsPGroup.smul_mul_inv_trivial_or_surjective, CommGroup.primaryComponent.isPGroup, Sylow.exists_subgroup_le_card_le, IsArithFrobAt.exists_of_isInvariant, FiniteField.sum_subgroup_units",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-cohomology definitions and multiplicative Galois Hilbert 90 do not state this regular algebraic cocycle theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular algebraic group first cocycles from groups of multiplicative type to the additive group and its closed subgroups vanish in first cohomology",
+   "results": "8 hits: groupCohomology.mapCocycles₁_one, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.H1π_eq_zero_iff, groupCohomology.mem_cocycles₁_of_addMonoidHom, groupCohomology.cocycles₁_map_one, groupCohomology.H1IsoOfIsTrivial_H1π_apply_apply, groupCohomology.cocycles₁IsoOfIsTrivial_hom_hom_apply_apply, groupCohomology.H1ofAutOnUnitsUnique",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group-cohomology definitions and multiplicative Galois Hilbert 90 do not state this regular algebraic cocycle theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-triangular-quotient-section-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: The general complement theorem supplies the section; the item explicitly constructs the inverse multiplication map and projection. In the maximal-torus argument, compare the section furnished by the given torus over its image with the restriction of a section over the whole diagonal quotient; Milne Theorem 16.27(a). Conjugacy induction, the additive crossed-homomorphism step (Milne 16.27(a), using 15.3 with smooth D as in 16.29).",
+   "via": [
+    "lem-sfb-triangular-quotient-section-conjugacy",
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-diagonal-additive-crossed-vanishing",
+  "worker": "stage1",
+  "summary": "Preserved the statement, including nonsmooth N and disconnected smooth D. Expanded Milne 15.3 by finite-subgroup averaging, explicit division in N(F), and compatibility along lcm of torsion indices; one new statement-only input records finite etale kernels and their schematic density. No Lean attachment or Mathlib match.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: The general complement theorem supplies the section; the item explicitly constructs the inverse multiplication map and projection. In the maximal-torus argument, compare the section furnished by the given torus over its image with the restriction of a section over the whole diagonal quotient; Milne Theorem 16.27(a). Conjugacy induction, the additive crossed-homomorphism step (Milne 16.27(a), using 15.3 with smooth D as in 16.29). The latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3) is the upstream route context. The ancestry command returns null; retained that value and the inherited via chain. Searches for crossed homomorphisms, diagonalizable groups, multiplicative type and prime-to-characteristic torsion found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-0a8f99fac",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-0a8f99fac (reviewer sub-agent of L); spot-checked: I read the item, the new node, the cited statements, and Milne iAG2017 pp.302-303 (Prop 15.3, Lemma 15.2), 12.3/12.5 (pp.231-232) and 12.32/12.33 (pp.242-243). Item statement unchanged; the four steps are correct. Step 1: division by c_n in N(F) through the monic additive P of lem-sfb-additive-subgroup-polynomial-quotient, with N=Ga treated separately. Step 2: averaging with the sign checked (Milne's x.m-m with m=-a). Step 3: trivial chi via density of the regular coordinate. Step 4: an lcm(n,n0) compatibility correctly replaces Milne's non-nested M(n). New torsion-density node checked: D[n]=Spec F[M/nM] is split étale for n prime to p; density is exactly Milne 12.32 (smooth case); mu_p is excluded by smoothness. Small cases tested: M=0, Z, Z/l, Z+Z/l, char 0. Duplicate search over the whole DAG (diagonalizable, crossed, torsion density) found no equivalent node, and the new node does not restate a clause of the item. Batch-5 flag: lem-trf-fppf-covering-is-fpqc is Stacks 022C (generic topology, status mathlib), not a step of the trace formula or Poincaré duality, so it is acceptable. FIX (1 repair): the order of H_n was written e_n, which clashes with the basis e_m of F[M] (ambiguous for M=Z); renamed to c_n=|H_n| in the new node's statement and in item steps 1-2. Advisory: 'isomorphism D ≃ Spec F[M]' with the Hopf structure listed is read as a group-scheme isomorphism; the wording is consistent between item and node.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDiagonalAdditiveCrossedVanishing",
+  "declaration": "AlgebraicGeometry.smooth_diagonal_additive_crossed_principal",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDiagonalAdditiveCrossedVanishing.lean",
+  "statement": "theorem smooth_diagonal_additive_crossed_principal {F : Type u} [Field F] [IsAlgClosed F] (D N : Over (Spec (.of F))) [GrpObj D] [GrpObj N] [IsAffine D.left] [LocallyOfFiniteType D.hom] [QuasiCompact D.hom] [IsAffine N.left] [LocallyOfFiniteType N.hom] [QuasiCompact N.hom] [Smooth D.hom] (hdiag : ∃ (M : Type u) (_ : AddCommGroup M) (_ : AddGroup.FG M), Nonempty (Grp.mk D ≅ diagonalizableGroup F M)) (chi : D ⟶ multiplicative F) [IsMonHom chi] (i : N ⟶ additive F) [IsClosedSubgroupScheme i] (hstable : ∀ (A : Type u) [CommRing A] [Algebra F A] (d : affine F A ⟶ D) (x : A), (∃ z : affine F A ⟶ N, z ≫ i = additiveCoordinatePoint F A x) → ∃ z : affine F A ⟶ N, z ≫ i = additiveCoordinatePoint F A (multiplicativeCoordinateValue F (d ≫ chi) * x)) (f : D ⟶ N) (hcrossed : ∀ (A : Type u) [CommRing A] [Algebra F A] (d d' : affine F A ⟶ D) (x y : A), d ≫ f ≫ i = additiveCoordinatePoint F A x → d' ≫ f ≫ i = additiveCoordinatePoint F A y → (d * d') ≫ f ≫ i = additiveCoordinatePoint F A (x + multiplicativeCoordinateValue F (d ≫ chi) * y)) : ∃ a : F, (∃ z : affine F F ⟶ N, z ≫ i = additiveCoordinatePoint F F a) ∧ ∀ (A : Type u) [CommRing A] [Algebra F A] (d : affine F A ⟶ D), d ≫ f ≫ i = additiveCoordinatePoint F A (algebraMap F A a - multiplicativeCoordinateValue F (d ≫ chi) * algebraMap F A a)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9522888a",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 30253a: the Lean module is byte-identical and the only node change is the stmt_dep lem-sfb-additive-subgroup-polynomial-quotient → def-sfb-standard-group-coordinate-points (Q69 be04af62, landed 12:49, on base; existing:true on the plain defs additiveCoordinatePoint = map(aeval x) and multiplicativeCoordinateValue = algSpec preimage at T 1). All 11 stmt_deps are definition nodes; the polynomial theorem stays in proof_deps. Re-read the signature against the node: IsAlgClosed F; affine finite-type (LocallyOfFiniteType + QuasiCompact) D and N; Smooth D; Grp-iso to diagonalizableGroup F M with M FG; IsMonHom chi; IsClosedSubgroupScheme i into Ga; hstable and hcrossed on all A : Type u; conclusion ∃ a ∈ N(F) with f = a − χ a, sign correct; no smoothness or connectedness of N and no connectedness of D. Edge cases covered. lean.statement verbatim, single sorry, source and blueprint docstrings, both report sections present. No file changed, nothing compiled."
+ }
+}

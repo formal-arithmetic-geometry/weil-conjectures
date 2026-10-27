@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-neutral-torus-centralizer-cartan-structure",
+ "kind": "statement",
+ "title": "Neutral maximal-torus centralizer: product structure and finite normalizer quotient",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Let $G$ be smooth and connected. A torus is a group isomorphic to $\\mathbf G_m^r$ for some $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]; a maximal torus is one maximal under inclusion. Let $T\\subseteq G$ be a maximal torus. The centralizer functor is\n$$C_G(T)(A)=\\{g\\in G(A):g_{A'}t=tg_{A'}\\text{ for all commutative }A\\text{-algebras }A'\\text{ and }t\\in T(A')\\}.$$\nIt is represented by a closed subgroup scheme. Let $C=C_G(T)^\\circ$ be its identity component, with the open-subscheme structure [lem-sfb-group-neutral-component-translates]. Then $C$ is smooth and connected, contains $T$, and is solvable: its successive scheme-theoretic commutator subgroups terminate at $1$. There exists a smooth connected unipotent subgroup $U\\subseteq C$ for which multiplication is an isomorphism of group schemes\n$$U\\times_k T\\xrightarrow{\\sim}C.$$\nHere unipotent means that every geometric point in a faithful finite-dimensional matrix representation is a unipotent matrix, that is, satisfies $(u-I)^N=0$ for some $N\\geq1$. Every torus subgroup of $C$ is contained in $T$. A rational point is semisimple if its image in every finite-dimensional algebraic representation of $G$ is diagonalizable; every semisimple point of $G(k)$ belonging to $C(k)$ belongs to $T(k)$. Define\n$$N=\\{g\\in G(k):g_A C(A)g_A^{-1}=C(A)\\text{ for every commutative }k\\text{-algebra }A\\}.$$\nThe set of right cosets $N/C(k)$ is finite. No assertion that $C_G(T)$ is connected is made.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.28 and its proof, printed p.360 (smooth nilpotent neutral centralizer and identity component of its normalizer); Theorem 16.47 and Corollary 16.48, printed p.341 (direct product and unique maximal torus); the first paragraph of the proof of Theorem 17.33(a), printed p.362 (semisimple elements in this product and finite normalizer quotient)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "lem-sfb-group-neutral-component-translates",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-semisimple-group-scheme-point",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Represent the centralizer before taking its component. Apply [lem-sfb-constant-source-closed-factorization-locus] with source $Y=T$, parameter scheme $S=G$, target $X=G\\times_kG$, closed subscheme $W=\\Delta_G$, and map $(t,g)\\mapsto(tg,gt)$. The diagonal is closed since $G$ is affine and hence separated by [lem-weil-pbc-affine-source-morphism-separated]; the same observation checks separatedness of all schemes in this application. The resulting closed locus $F\\subseteq G$ represents exactly the stated centralizer, including its condition after every algebra extension. Commutation with $T$ is preserved under products and inverses, so $F$ is a subgroup scheme. Under the conjugation action of $T$ on $G$, its functor is also $G^T$. Thus [lem-sfb-torus-fixed-scheme-smooth] shows that $F$ is smooth.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-torus-fixed-scheme-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.92, pp.33--34; Corollary 13.10, p.257, via the torus fixed-scheme formulation."
+   }
+  },
+  {
+   "text": "By [lem-sfb-group-neutral-component-translates], the identity component $C=F^\\circ$ is an open and closed connected subgroup scheme. It is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. The commutative subgroup $T$ maps into $F$. Its underlying space is connected: its Laurent polynomial coordinate ring is a domain, so its spectrum is irreducible (also for rank zero). Its image therefore lies in the component containing the identity. By [lem-weil-pbc-morphism-factors-through-open-subscheme] its inclusion factors through $C$. The defining centralizer equations show that $T$ is central in $C$, on all algebra-valued points. A torus in $C$ strictly containing $T$ would also be a torus in $G$ strictly containing $T$; hence $T$ remains maximal in $C$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.28, p.360, first sentence; Proposition 1.34 and Corollary 1.35, pp.16--17."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-central-maximal-torus-nilpotent] to the smooth connected affine group $C$ and its central maximal torus $T$. It gives nilpotence and precisely the required termination of the scheme-theoretic derived series. Its central series also gives a finite normal series with commutative quotients, since $[C,C_i]\\subseteq C_{i+1}$ implies $[C_i,C_i]\\subseteq C_{i+1}$. Thus it satisfies both solvability formulations used below. Since the algebraically closed field $k$ is perfect, [lem-sfb-perfect-solvable-unipotent-torus] supplies a smooth connected normal unipotent subgroup $U\\subseteq C$ with torus quotient $D=C/U$.",
+   "uses": [
+    "lem-sfb-central-maximal-torus-nilpotent",
+    "lem-sfb-perfect-solvable-unipotent-torus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.23, p.359, used in Proposition 17.28; Theorem 16.33(a)--(c), pp.335--336; compare Theorem 16.47 and Corollary 16.48, p.341."
+   }
+  },
+  {
+   "text": "Let $q:C\\to D$ be the quotient map. Its scheme-theoretic kernel is $U$ by [lem-sfb-affine-normal-quotient-geometry]. By [lem-sfb-solvable-torus-complements], $q|_T:T\\to D$ is an isomorphism. Put $\\tau=(q|_T)^{-1}q:C\\to T$. Multiplication $m:U\\times_kT\\to C$ has inverse $c\\mapsto(c\\tau(c)^{-1},\\tau(c))$: the first coordinate factors through the kernel because its image under $q$ is $1$. Substitution verifies both composites on every algebra, so these are inverse scheme morphisms. Finally, centrality of $T$ gives $(ut)(u't')=uu'tt'$ for all algebra-valued points. Hence $m$ is an isomorphism of group schemes with the direct product group law, not only an isomorphism of schemes.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-solvable-torus-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.33(d), p.336; Theorem 16.47 and Corollary 16.48, p.341; product used in Proposition 17.28, p.360."
+   }
+  },
+  {
+   "text": "Let $S\\subseteq C$ be any torus and use the product just constructed to obtain a homomorphism $S\\to U$. By [lem-sfb-geometric-unipotence-unitriangular-embedding], $U$ embeds as a closed subgroup of some upper unitriangular group. A split torus $S\\simeq\\mathbf G_m^a$ is $D_k(\\mathbf Z^a)$: its Laurent monomials give the group-algebra basis and its comultiplication sends each monomial to its tensor square. Therefore [lem-sfb-diagonalizable-to-unipotent-trivial] says that $S\\to U$ is trivial as a group-scheme morphism. In the product $U\\times T$ its inclusion consequently factors through $\\{1\\}\\times T$, which proves $S\\subseteq T$ scheme-theoretically. In particular every $k$-automorphism of $C$ preserves $T$: apply this containment to its image of $T$ and to the inverse automorphism.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-diagonalizable-to-unipotent-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.47(a), p.341; its proof uses Corollary 14.18(b), p.284. Uniqueness used in Proposition 17.28, p.360."
+   }
+  },
+  {
+   "text": "Choose a faithful nonzero finite-dimensional representation $\\rho$ of $G$ using [lem-sfb-central-torus-faithful-weight-blocks] with the trivial central torus of rank zero. On restricting to $T\\simeq\\mathbf G_m^r$, successive application of [lem-sfb-gm-representation-weight-basis] to its $r$ commuting factors yields a simultaneous weight decomposition: each factor preserves the previous weight spaces because the actions commute. Thus $\\rho(t)$ is diagonalizable for $t\\in T(k)$. Write a semisimple $s\\in G(k)\\cap C(k)$ uniquely as $ut$. By [lem-sfb-rational-representation-unipotent-point] applied to $U$, its faithful unipotent realization, and $\\rho|_U$, the matrix $\\rho(u)$ is unipotent. The matrices $\\rho(u)$ and $\\rho(t)$ commute by centrality of $T$. Their product $\\rho(s)$ is diagonalizable by the hypothesis on $s$. Uniqueness in [lem-sfb-multiplicative-jordan-linear-compatibility] identifies its unipotent part both with $\\rho(u)$ and with $1$. Faithfulness gives $u=1$, so $s\\in T(k)$.",
+   "uses": [
+    "lem-sfb-central-torus-faithful-weight-blocks",
+    "lem-sfb-gm-representation-weight-basis",
+    "lem-sfb-rational-representation-unipotent-point",
+    "lem-sfb-multiplicative-jordan-linear-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "First paragraph of the proof of Theorem 17.33(a), p.362; Theorem 9.11, pp.168--169; Proposition 14.6, p.282."
+   }
+  },
+  {
+   "text": "Represent the normalizer of $C$ without using a smoothness or connectedness theorem for centralizers. For the conjugation map $C\\times_kG\\to G$, $(c,g)\\mapsto gcg^{-1}$, [lem-sfb-constant-source-closed-factorization-locus] gives a closed locus $L\\subseteq G$ where it factors through $C$. Intersect $L$ with its inverse image under inversion. This is a closed affine finite-type subgroup scheme $P\\subseteq G$: its points are exactly the elements for which both conjugation and inverse conjugation preserve $C$ after all algebra extensions. Thus $P(k)=N$ with exactly the normalizer definition in the statement. Let $M=(P^\\circ)_{\\mathrm{red}}$. By [lem-sfb-locally-algebraic-group-identity-component], $M$ is smooth, connected and affine of finite type, has the same underlying space as $P^\\circ$, and is a subgroup scheme. Also $C\\subseteq M$: inner conjugation by $C$ preserves $C$, its connected image lies in $P^\\circ$, and its morphism into that open subscheme factors through the reduction since $C$ is reduced (smoothness and [sbc-lem-smooth-geometrically-reduced]). On coordinate rings the last assertion says that a nilpotent pulls back to zero in a reduced ring.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.83, p.31, and Proposition 17.28, p.360; Proposition 1.34 and the reduced identity component construction, pp.16--18."
+   }
+  },
+  {
+   "text": "Conjugation gives an action of $M$ on $C$. For each $m\\in M(k)$ it preserves $T$, by the uniqueness of the torus proved above. To promote this to a scheme action on $T$, apply [lem-sfb-constant-source-closed-factorization-locus] with source $T$, parameter $M$, target $C$, and closed subgroup $T\\subseteq C$, to the conjugation map. Its closed locus $Z\\subseteq M$ contains every $k$-point of $M$. Every element of its defining ideal vanishes on $M(k)$; since $M$ is reduced affine of finite type, [lem-wf-affine-nullstellensatz-vanishing] implies that this ideal is zero. Thus $Z=M$ and conjugation restricts to an action $M\\times T\\to T$. This is an action by group automorphisms, its inverses coming from inversion in $M$. By [lem-sfb-connected-action-torus-rigidity] it is trivial. Therefore the inclusion $M\\to G$ factors through $F=C_G(T)$ as subgroup functors. Its connected image contains the identity, so [lem-weil-pbc-morphism-factors-through-open-subscheme] factors it through $C$. Together with the previous inclusion this gives $M=C$ as closed subgroup schemes of $G$.",
+   "uses": [
+    "lem-sfb-constant-source-closed-factorization-locus",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sfb-connected-action-torus-rigidity",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.28, p.360, normalizer argument using rigidity, Corollary 12.37, p.241; reduced-parameter version suffices for rational cosets."
+   }
+  },
+  {
+   "text": "Finally [lem-sfb-group-neutral-component-translates], applied to the finite-type group scheme $P$, gives finitely many connected components, each with its open subscheme structure a left translate $pP^\\circ$ by a point $p\\in P(k)$. A field-valued point kills every nilpotent, so $P^\\circ(k)=M(k)=C(k)$. Consequently the rational points of each component form exactly one coset $pC(k)$, and there are only finitely many such cosets in $N=P(k)$. These are the cosets denoted $N/C(k)$; if right cosets are written $C(k)p$, inversion gives a bijection between the two coset sets. This proves the required finiteness without asserting that $F=C_G(T)$ is connected.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.28, p.360, and the finite normalizer quotient in Theorem 17.33(a), p.362; Proposition 1.34 and Corollary 1.35, pp.16--17."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-torus-fixed-scheme-smooth",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-sfb-central-maximal-torus-nilpotent",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "lem-sfb-gm-representation-weight-basis",
+  "lem-sfb-rational-representation-unipotent-point",
+  "lem-sfb-multiplicative-jordan-linear-compatibility",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-connected-action-torus-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.28 and Theorem 17.33(a); the product is constructed using Theorem 16.33(a)--(d), giving the decomposition of Theorem 16.47/Corollary 16.48. Reduced-normalizer detail added to obtain exactly the rational-coset conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nilpotent.*torus|torus.*nilpotent|normalizer.*torus|torus.*normalizer",
+   "results": "{\"t\": \"2026-10-23T21:48:02Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*torus|torus.*nilpotent|normalizer.*torus|torus.*normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: abstract finite-group centralizers and Lie Cartan subalgebras do not construct algebraic-group centralizer schemes or the unipotent-times-torus product. LieSubalgebra.IsCartanSubalgebra (Mathlib/Algebra/Lie/CartanSubalgebra.lean:50-55) is a Lie-algebra definition. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The connected centralizer of a maximal torus in a smooth connected affine algebraic group is a direct product of its unipotent subgroup and the torus",
+   "results": "{\"t\": \"2026-10-23T21:48:03Z\", \"tool\": \"leansearch\", \"query\": \"The connected centralizer of a maximal torus in a smooth connected affine algebraic group is a direct product of its unipotent subgroup and the torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"AddSubgroup.centralizer\", \"Set.isClosed_centralizer\", \"AddSubgroup.normal_centralizer\", \"Subgroup.normal_centralizer\", \"AddSubgroup.centralizer_univ\", \"Subgroup.centralizer_univ\", \"Subgroup.centralizer_closure\"], \"digest\": \"b23f1c302d00b1d0\"} Read hits: abstract finite-group centralizers and Lie Cartan subalgebras do not construct algebraic-group centralizer schemes or the unipotent-times-torus product. LieSubalgebra.IsCartanSubalgebra (Mathlib/Algebra/Lie/CartanSubalgebra.lean:50-55) is a Lie-algebra definition. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"torus\"",
+   "results": "{\"t\": \"2026-10-23T21:48:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: abstract finite-group centralizers and Lie Cartan subalgebras do not construct algebraic-group centralizer schemes or the unipotent-times-torus product. LieSubalgebra.IsCartanSubalgebra (Mathlib/Algebra/Lie/CartanSubalgebra.lean:50-55) is a Lie-algebra definition. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a maximal torus of a connected affine algebraic group the identity component of its centralizer is a direct product of a unipotent group and the torus and has finite index in the torus normalizer",
+   "results": "{\"t\": \"2026-10-23T21:48:04Z\", \"tool\": \"leanfinder\", \"query\": \"For a maximal torus of a connected affine algebraic group the identity component of its centralizer is a direct product of a unipotent group and the torus and has finite index in the torus normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sylow.conj_eq_normalizer_conj_of_mem_centralizer\", \"MonoidHom.ker_transferSylow_isComplement'\", \"Sylow.normalizer_le_centralizer_or_le_commutator\", \"Subgroup.normalizerMonoidHom_ker\", \"Subgroup.index_center_le_pow\", \"Subgroup.finiteIndex_center\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"IsCyclic.normalizer_le_centralizer\"], \"digest\": \"65d047deedc9cb15\"} Read hits: abstract finite-group centralizers and Lie Cartan subalgebras do not construct algebraic-group centralizer schemes or the unipotent-times-torus product. LieSubalgebra.IsCartanSubalgebra (Mathlib/Algebra/Lie/CartanSubalgebra.lean:50-55) is a Lie-algebra definition. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Cartan subgroup of a linear algebraic group is nilpotent with unique maximal torus containing all its semisimple elements and the Weyl normalizer has finitely many components",
+   "results": "{\"t\": \"2026-10-23T21:48:37Z\", \"tool\": \"leanfinder\", \"query\": \"A Cartan subgroup of a linear algebraic group is nilpotent with unique maximal torus containing all its semisimple elements and the Weyl normalizer has finitely many components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\"], \"digest\": \"2f3a73bc312470e0\"} Read hits: abstract finite-group centralizers and Lie Cartan subalgebras do not construct algebraic-group centralizer schemes or the unipotent-times-torus product. LieSubalgebra.IsCartanSubalgebra (Mathlib/Algebra/Lie/CartanSubalgebra.lean:50-55) is a Lie-algebra definition. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connected centralizer C of a maximal torus of a linear algebraic group is nilpotent and the normalizer of C has C as its identity component",
+   "results": "{\"t\": \"2026-10-23T21:50:22Z\", \"tool\": \"leanfinder\", \"query\": \"The connected centralizer C of a maximal torus of a linear algebraic group is nilpotent and the normalizer of C has C as its identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"normalizerCondition_of_isNilpotent\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.exists_isCartanSubalgebra_engel\"], \"digest\": \"e80cc6a46ca88cc7\"} Read hits: abstract finite-group centralizers and Lie Cartan subalgebras do not construct algebraic-group centralizer schemes or the unipotent-times-torus product. LieSubalgebra.IsCartanSubalgebra (Mathlib/Algebra/Lie/CartanSubalgebra.lean:50-55) is a Lie-algebra definition. No match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torus.*centralizer|centralizer.*torus|unipotent.*torus|torus.*unipotent",
+   "results": "{\"t\": \"2026-10-23T22:23:20Z\", \"tool\": \"grep\", \"query\": \"torus.*centralizer|centralizer.*torus|unipotent.*torus|torus.*unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned hits: abstract groups and Lie Cartan subalgebras, not the scheme-theoretic statement. No hit for algebraic torus centralizers, unipotent-radical product or algebraic normalizer components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"torus\"",
+   "results": "{\"t\": \"2026-10-23T22:23:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned hits: abstract groups and Lie Cartan subalgebras, not the scheme-theoretic statement. No hit for algebraic torus centralizers, unipotent-radical product or algebraic normalizer components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of the centralizer of a maximal torus in a connected linear algebraic group is a product of a unipotent group and that torus and has finite index in its normalizer",
+   "results": "{\"t\": \"2026-10-23T22:23:21Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of the centralizer of a maximal torus in a connected linear algebraic group is a product of a unipotent group and that torus and has finite index in its normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sylow.conj_eq_normalizer_conj_of_mem_centralizer\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"Sylow.normalizer_le_centralizer_or_le_commutator\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"IsCyclic.normalizer_le_centralizer\", \"LieModule.genWeightSpace_zero_normalizer_eq_self\", \"upperCentralSeriesStep\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\"], \"digest\": \"5dd0821a83cb006a\"} Read returned hits: abstract groups and Lie Cartan subalgebras, not the scheme-theoretic statement. No hit for algebraic torus centralizers, unipotent-radical product or algebraic normalizer components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected smooth solvable algebraic group with central maximal torus is the direct product of its unipotent radical and that torus",
+   "results": "{\"t\": \"2026-10-23T22:23:56Z\", \"tool\": \"leansearch\", \"query\": \"A connected smooth solvable algebraic group with central maximal torus is the direct product of its unipotent radical and that torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"IsSolvable.solvable\", \"IsNilpotent.to_isSolvable\", \"IsSimpleGroup.comm_iff_isSolvable\", \"isSolvable_of_comm\", \"Prod.instLieGroup\"], \"digest\": \"b76571cc621be2b4\"} Read returned hits: abstract groups and Lie Cartan subalgebras, not the scheme-theoretic statement. No hit for algebraic torus centralizers, unipotent-radical product or algebraic normalizer components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartan subgroups of a linear algebraic group are nilpotent with finite quotient by their normalizer and have a unique maximal torus containing every semisimple element",
+   "results": "{\"t\": \"2026-10-23T22:23:59Z\", \"tool\": \"leanfinder\", \"query\": \"Cartan subgroups of a linear algebraic group are nilpotent with finite quotient by their normalizer and have a unique maximal torus containing every semisimple element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.nilpotent\", \"LieSubalgebra.instIsNilpotentSubtypeMemOfIsCartanSubalgebra\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.is_cartan_of_zeroRootSubalgebra_eq\", \"LieSubalgebra.IsCartanSubalgebra\", \"LieAlgebra.zeroRootSubalgebra_eq_iff_is_cartan\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\"], \"digest\": \"bd8b3eaeea7a34fd\"} Read returned hits: abstract groups and Lie Cartan subalgebras, not the scheme-theoretic statement. No hit for algebraic torus centralizers, unipotent-radical product or algebraic normalizer components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-conjugation-cover",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Lemma 17.37 and its proof, printed p.363: the assertion actually proved for each c is existence of a common Borel. The parenthetical finite-union assertion is not included (it fails for the trivial torus). Supporting input for Lemma 17.37: Theorem 17.33(b), printed p.362, supplies a c-fixed point on the quotient by any chosen Borel; existence of a Borel is Definition 17.6 and the following sentence, pp.353–354. Supporting input: Proposition 17.28 and its proof, printed p.360 (smooth nilpotent neutral centralizer and identity component of its normalizer); Theorem 16.47 and Corollary 16.48, printed p.341 (direct product and unique maximal torus); the first paragraph of the proof of Theorem 17.33(a), printed p.362 (semisimple elements in this product and finite normalizer quotient).",
+   "via": [
+    "lem-sfb-borel-conjugation-cover",
+    "lem-sfb-torus-commuting-point-common-borel",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neutral-torus-centralizer-cartan-structure",
+  "worker": "stage1",
+  "summary": "Q66: unchanged statement, nine-step split using existing DAG inputs only. Constructed centralizer and normalizer by closed factorization loci; used solvable quotient and its torus section to write the direct-product inverse; proved uniqueness of the torus and ambient semisimple containment; proved finiteness via the reduced normalizer component and torus rigidity. Avoided circular citations to full centralizer connectedness and torus-normalizer components. No new nodes.",
+  "blueprint": "Inherited supporting chain for det-thm-sf-ctf-stability-direct-images (3), whose current latest proof is sk-thm-sf-ctf-stability-direct-images.proof.md (3): this item supplies the maximal-torus-centralizer input used in the Borel conjugation cover. The created ancestor chain has from.node=null in the live base; this split retains it and the exact existing from.place. Whole-blueprint searches for torus, centralizer, nilpotent, normalizer and solvable found no duplicate statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-e619f8f1a",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-e619f8f1a (reviewer sub-agent of L); spot-checked: Read in full against Milne iAG2017 Prop 17.28 (p.360), Thm 16.47 and Cor 16.48 (p.341), and the proof of Thm 17.33(a) (p.362). The delivery changes only the item; statement and stmt_deps are unchanged, and there are no new nodes. The 9 steps follow Milne's route and fill in the scheme-level details. Step 1: the centralizer F is the closed factorization locus for (t,g)->(tg,gt) and the diagonal; it is smooth by torus-fixed-scheme-smooth, since the centralizer is the fixed-point functor of conjugation. Steps 2-4: C=F° is smooth and contains T as a central maximal torus. C is nilpotent; I checked that its central series is a normal series with commutative quotients. perfect-solvable-unipotent-torus gives U, and the direct product comes from tau=(q|_T)^-1 q with the inverse checked by hand. Step 5: a torus maps trivially to U via the unitriangular embedding and diagonalizable-to-unipotent-trivial with D_k(Z^a), so T is unique and preserved by automorphisms. Step 6: uses a faithful representation of the ambient G (faithful-weight-blocks at rank 0), U-point unipotence and Jordan uniqueness, so semisimple points of C lie in T. Steps 7-9: P is the scheme normalizer with P(k)=N; M=(P°)_red is smooth and connected; Nullstellensatz promotes k-point preservation of T to a scheme action; rigidity then gives M=C, and the finitely many components of P give finitely many cosets of C(k). Hypotheses, edge cases (T=1, G=T, GL_2 with its diagonal torus, characteristic p, non-reduced P) and acyclicity are checked; the cited same-unit nodes do not depend on the item. Off-unit citations are Mathlib leaves or slopmaster2-closed nodes, so no tool_uses are needed. Batch-5: all six flagged citations reach sec-trace-formula only through generic nodes (fibre smoothness criterion, fppf descent-datum definition, fpqc smooth descent, fppf covering base change, flat tensor injectivity); none is a step of the trace formula or Poincare duality, so all are accepted. No SGA source; proof_deps equals the union of uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NeutralTorusCentralizerCartanStructure",
+  "declaration": "AlgebraicGeometry.neutral_torus_centralizer_cartan_structure",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NeutralTorusCentralizerCartanStructure.lean",
+  "statement": "theorem neutral_torus_centralizer_cartan_structure (k : Type u) [Field k] [IsAlgClosed k] (G T : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) : ∃ (F : Grp (Over (Spec (.of k)))) (iF : F ⟶ G), IsClosedSubgroupScheme iF.hom.hom ∧ ∃ (_ : LocallyOfFiniteType F.X.hom) (_ : QuasiCompact F.X.hom), (∀ (A : Type u) [CommRing A] [Algebra k A], Set.range (fun f : StandardGroupSchemes.affine k A ⟶ F.X ↦ f ≫ iF.hom.hom) = ReductiveTorusCentralizer.centralizerPoints iT A) ∧ ∃ (C : Grp (Over (Spec (.of k)))) (eC : C ≅ Grp.mk (GrpObj.identityComponent F.X)) (iC : C ⟶ G) (jT : T ⟶ C), eC.hom.hom.hom ≫ GrpObj.identityComponentι F.X ≫ iF.hom.hom = iC.hom.hom ∧ IsClosedSubgroupScheme iC.hom.hom ∧ SolvableGroupStructure.IsAlgebraic C ∧ Smooth C.X.hom ∧ ConnectedSpace C.X.left ∧ IsSolvableGroupScheme C.X ∧ jT ≫ iC = iT ∧ (∃ (U : Grp (Over (Spec (.of k)))) (jU : U ⟶ C) (e : U ⊗ T ≅ C), IsClosedSubgroupScheme jU.hom.hom ∧ SolvableGroupStructure.IsAlgebraic U ∧ Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ SolvableGroupStructure.IsUnipotent U ∧ e.hom.hom.hom = (fst U.X T.X ≫ jU.hom.hom) * (snd U.X T.X ≫ jT.hom.hom)) ∧ (∀ (S : Grp (Over (Spec (.of k)))) (jS : S ⟶ C), IsClosedSubgroupScheme jS.hom.hom → MultiplicativeType.IsTorus S → ∃ f : S ⟶ T, f ≫ jT = jS) ∧ (∀ s : StandardGroupSchemes.affine k k ⟶ G.X, IsSemisimpleGroupSchemePoint G.X s → s ∈ Set.range (fun c : StandardGroupSchemes.affine k k ⟶ C.X ↦ c ≫ iC.hom.hom) → s ∈ Set.range (fun t : StandardGroupSchemes.affine k k ⟶ T.X ↦ t ≫ iT.hom.hom)) ∧ Finite (RankOneRoots.Weyl iC)",
+  "branch": "sheaf-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acd90f939",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Only stmt_deps (+6 landed def nodes) and the lean record change; statement, proof and source are unchanged, and lean.statement is verbatim. The single theorem is sorry-only with source/blueprint docstrings and the nine proof steps. Clause by clause: G affine finite type, smooth, connected, nothing extra; IsMaximalTorus (torus test after algebraic closure is equivalent here, rank 0 allowed); closed F with points = centralizerPoints on all algebras; C pinned to identityComponent F with its inclusion fixed; smooth, connected, IsSolvableGroupScheme (scheme-theoretic derived series); jT≫iC=iT; U closed smooth connected IsUnipotent with e : U⊗T≅C in Grp equal to multiplication; closed tori of C factor through T; G-semisimple k-points of C lie in T(k); Finite (RankOneRoots.Weyl iC) is N/C(k) with the normalizer tested on all algebras. Edge cases (T trivial, G a torus, G unipotent, char p, nonreduced F, universes) are covered; no H4 duplicate found. Maintainer note: GrpObj.identityComponent is owned by def-wf-algebraic-components, which is not in stmt_deps; it is cited via lem-sfb-group-neutral-component-translates, which also lacks the edge on base. No compile run (no file changed)."
+ }
+}

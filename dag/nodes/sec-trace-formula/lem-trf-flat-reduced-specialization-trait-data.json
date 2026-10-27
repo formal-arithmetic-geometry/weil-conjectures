@@ -1,0 +1,329 @@
+{
+ "id": "lem-trf-flat-reduced-specialization-trait-data",
+ "kind": "statement",
+ "title": "Trait base change of a Noetherian specialization with reduced closed fibre and two sections",
+ "statement": "Let $g:P\\to T$ be a flat morphism [def-weil-flat-morphism] of finite presentation (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]) between Noetherian schemes (locally Noetherian [pqf-def-locnoeth] and quasi-compact). Let $\\sigma:T\\to P$ be a section, $g\\circ\\sigma=\\mathrm{id}_T$, and let $p\\ne q$ be points of $P$ such that $p$ specializes to $q$. Schemes and sections are as in [def-pc-scheme, def-pc-section]. For a morphism $h:Y\\to B$ with section $e$, set $C(h,e)=\\{y\\in Y\\mid y\\text{ belongs to the connected component of }e(h(y))\\text{ in }h^{-1}(\\{h(y)\\})\\}$ [def-weil-connected-scheme]. Assume $q\\in C(g,\\sigma)$ and that the geometric fibre $P_{\\overline{g(q)}}$ [def-weil-geometric-fibre] is reduced [def-pc-reduced-scheme]. There exist a discrete valuation ring $R$ [def-sc-discrete-valuation-ring] and a morphism $a:S=\\operatorname{Spec}R\\to P$ taking the generic point $\\eta$ to $p$ and the closed point $s$ to $q$. Put $b=g\\circ a$, $X=P\\times_TS$, and write $f:X\\to S$, $r:X\\to P$ for the projections [def-pc-base-change, def-pc-fibre-product]. Let $\\sigma_R:S\\to X$ be the base-changed section and $\\tau=(a,\\mathrm{id}_S):S\\to X$ the morphism determined by the projections. Then $f$ is flat and of finite presentation, $S$ and $X$ are Noetherian, and both the closed fibre $X_s$ [def-pc-scheme-fibre] and its underlying topological space are Noetherian (for the space: every descending chain of closed subsets stabilizes). Both $X_{\\bar s}$ and $X_s$ are reduced. The maps $\\sigma_R,\\tau$ are sections of $f$, $r\\circ\\sigma_R=\\sigma\\circ b$, $r\\circ\\tau=a$, $r(\\tau(\\eta))=p$, and $r(\\tau(s))=q$. Furthermore $C(f,\\sigma_R)=r^{-1}C(g,\\sigma)$, and $\\tau(s)$ belongs to the connected component of $\\sigma_R(s)$ in $f^{-1}(\\{s\\})$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, second paragraph: specialization trait, graph section and reduced closed fibre"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-locnoeth",
+  "def-pc-scheme",
+  "def-pc-section",
+  "def-weil-connected-scheme",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_trait_of_strict_specializes [lem-sbc-noetherian-specialization-trait] to obtain a DVR R and a morphism a with the prescribed generic and closed images. Put S = Spec R, b = a ≫ g, X = pullback g b, f = pullback.snd g b and r = pullback.fst g b. The closed point s satisfies b(s) = g(q).",
+   "uses": [
+    "lem-sbc-noetherian-specialization-trait"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use stability under arbitrary base change to obtain Flat f, LocallyOfFinitePresentation f, QuasiCompact f and QuasiSeparated f. A DVR is a principal ideal ring and hence Noetherian; thus S is Noetherian. Local finite presentation implies local finite type by the existing Mathlib instance. The finite-type-over-Noetherian theorem makes X and its closed fibre Noetherian. Apply IsNoetherian.noetherianSpace directly to the latter.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sc-discrete-valuation-ring",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback pasting identifies the algebraic-closure base change of g.fiber(g(q)) with the geometric fibre appearing in hred. Transport reducedness across this isomorphism. Apply the arbitrary-field algebraic-closure criterion to obtain GeometricallyReduced for g.fiberToSpecResidueField(g(q)). The canonical square of ordinary fibres of the pullback square is cartesian, by Mathlib isPullback_fiberToSpecResidueField_of_isPullback; since b(s)=g(q), base-change stability gives GeometricallyReduced for f.fiberToSpecResidueField(s). Over its residue field this morphism is flat and has reduced locally Noetherian base, so Mathlib GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian proves the ordinary closed fibre reduced. Apply geometric reducedness to the canonical algebraic closure of the residue field of s, and transport back along pullbackLeftPullbackSndIso to obtain exactly the asserted reduced geometric closed fibre. No change of chosen algebraic closure and no reduced-fibre-locus theorem are necessary.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre",
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "def-pc-geometrically-irreducible",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct σR and τ with pullback.lift applied to (b ≫ σ, id) and (a, id). The lift projection equations prove both section equations and both first-projection equations. Evaluate τ ≫ r = a at the generic and closed points to obtain the required point images.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply section_component_preimage_of_isPullback [lem-sbc-section-component-cartesian] to the defining pullback square and the two projection equations of σR. Its symmetric equality is the desired component-locus equality. The equation r(τ(s))=q and hq put τ(s) in the inverse-image locus. Rewrite by that equality and use f(τ(s))=s to obtain membership in the connected component of σR(s) in the closed fibre.",
+   "uses": [
+    "lem-sbc-section-component-cartesian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-noetherian-specialization-trait",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sc-discrete-valuation-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "def-pc-geometrically-irreducible",
+  "def-pc-reduced-scheme",
+  "def-pc-base-change",
+  "lem-sbc-section-component-cartesian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055Q, second paragraph; Tags 054F and 055M. Reducedness is transported through the cartesian square of ordinary fibres using the arbitrary-field algebraic-closure criterion (Tags 035X and 020I) and Mathlib geometric-reducedness base-change API."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Realize a specialization in a Noetherian scheme by a discrete valuation ring and the graph section of a pulled back flat family with reduced closed fibre",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.ValuativeCommSq.i₁, AlgebraicGeometry.ValuativeCommSq.K, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf, AlgebraicGeometry.Scheme.range_fromSpecStalk. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "10842f1e09077018"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Noetherian flat family with a reduced geometric fibre and a specialization there exists a trait base change with two sections and reduced closed fibre",
+   "results": "8 hits: Module.Flat.isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.flat_iff, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "355922187a0c3f01"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, IsDiscreteValuationRing",
+   "results": "0 hits: . No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "specializ.*[dD][vV][rR]|[dD][vV][rR].*specializ|trait.*section",
+   "results": "0 hits: . No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specialization of points of a locally Noetherian scheme is realized by the generic and closed points of the spectrum of a discrete valuation ring",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Scheme.le_iff_specializes, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "8ff9459160963945"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[vV]aluation|[vV]aluation.*exists|[dD]iscrete[vV]aluation",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "3946d3106b7d643d"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize a specialization in a Noetherian scheme by a trait, base change a flat finitely presented family and its section, and preserve its reduced closed fibre",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Scheme.le_iff_specializes, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "808922a8e47b4ea4"
+  },
+  {
+   "tool": "grep",
+   "query": "specializ.*[dD][vV][rR]|[dD][vV][rR].*specializ|trait.*section",
+   "results": "0 hits: . No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a strict specialization in a Noetherian scheme, choose a discrete valuation ring tracing it and pull back a flat finitely presented family to a Noetherian trait with its graph section",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence, IsDiscreteValuationRing.TFAE, AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, of_isDiscreteValuationRing, IsDiscreteValuationRing.mk, AlgebraicGeometry.ValuativeCriterion.existence, AlgebraicGeometry.ValuativeCriterion.Existence.eq. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "c482eba747fb4f92"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, IsDiscreteValuationRing",
+   "results": "0 hits: . No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStableUnderBaseChange|instance.*pullback|lemma.*pullback",
+   "results": "3 hits: 85, 86, 87. File-only grep emitted line fields as file fields; read FinitePresentation.lean lines 85-97, and re-ran grep on the containing directory to obtain proper paths. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "d77c87749e364238"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A base change of a morphism of schemes of finite presentation is of finite presentation",
+   "results": "8 hits: Algebra.FinitePresentation.baseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, RingHom.finitePresentation_isStableUnderBaseChange, FinitePresentation.of_isBaseChange, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "5b26530d73137594"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, CategoryTheory.Limits.pullback.snd",
+   "results": "1 hits: AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "f503de973aca6192"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation of morphisms of schemes is stable under arbitrary base change, including quasi compactness and quasi separatedness",
+   "results": "8 hits: AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, RingHom.finitePresentation_isStableUnderBaseChange. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "83af857a7cda9c50"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A specialization of points in a locally Noetherian scheme is traced by the generic and closed points of a discrete valuation ring",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Scheme.le_iff_specializes, AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf, IsLocalRing.specializes_closedPoint. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "faf747a7b00cfe76"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFinitePresentation_isStableUnderBaseChange|LocallyOfFinitePresentation.*pullback",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:85-97: local finite-presentation base change only. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "30f41c39540db2d8"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCompact.*[sS]table|quasiSeparated.*[sS]table|instance.*[sS]nd",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean. Read QuasiCompact.lean:165-184, QuasiSeparated.lean:124-134 and Flat.lean:89; these give separate base-change properties, already covered by existing DAG nodes. No result states the full specialization-trait and two-section datum; hits for individual base-change properties are reused through existing nodes. ",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "fbd7b0d0934a23c5"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-reduced-section-component-generalization",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 055Q generalization argument used in Tag 055R: the section-component openness needed for the flat slicing and alteration route beneath lem-trf-local-term-locality (the nearby-cycle/specialization proof). Auxiliary 055Q argument: Tag 055Q, lemma-connected-along-section-open-neighbourhood, second paragraph: specialization trait, graph section and reduced closed fibre.",
+   "via": [
+    "lem-trf-flat-reduced-section-component-generalization",
+    "lem-trf-flat-reduced-section-component-open",
+    "lem-trf-finite-locally-free-multisection-connected-open",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-flat-reduced-specialization-trait-data",
+  "worker": "stage1",
+  "summary": "Promotion-return repair rebased by deliver.py onto the current server DAG; initial dry run 7a34e7668b2 passed. Re-read all 18 current cited statements and verified all 25 step/node quotes verbatim. Retained the nine-step split, every earlier argument and the logged Mathlib searches. Step 1 now records both values of b and explicitly checks that the construction permits equal images in T despite strict specialization in P. Read the current latest blueprint ef6f9619fdbffa59e88528fb56483d76c70258c8 and Stacks sources. Statement, dependencies and source route unchanged; no new nodes or Mathlib leaves.",
+  "blueprint": "The specialization/nearby-cycle route beneath lem-trf-local-term-locality: the auxiliary Tag 055Q trait construction used for the flat section-component argument. Read the current chapter, unit and ancestor statement/proof in literature/blueprint/latest, snapshot ef6f9619fdbffa59e88528fb56483d76c70258c8. The ancestor still invokes specialization to the normal cone; this split retains the recorded geometric auxiliary beneath it without replacing a chapter or unit argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-noetherian-specialization-trait",
+    "why": "Generic Noetherian-scheme DVR tracing theorem, Tag 054F, explicitly required by the fixed Tag 055Q argument; no node of this unit replaces it."
+   },
+   {
+    "node": "lem-sbc-section-component-cartesian",
+    "why": "Generic cartesian section-component equality, Tag 055M, explicitly used in Tag 055Q; applies to the given finite-presentation family without smoothness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-noetherian-specialization-trait",
+  "lem-sbc-section-component-cartesian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-f46ed2b71",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-f46ed2b71 (reviewer sub-agent of L); spot-checked: 18th re-push of the Q114 trait-data promotion repair (previous head fdc50c2a). The statement, stmt_deps, source, unit and chapter are unchanged. All 18 cited statements are identical to the previous snapshot and none is merged. There is no SGA reference. The only delta is in step 1: 'b(eta)=g(p), b(s)=g(q), the images may coincide'. This is correct (b=g∘a) and kept. Read Stacks more-morphisms 055Q proof paragraph 2; it matches: Noetherian reduction (01T6), DVR from 054F with the special point to x and the generic point to x', 055M inverse image, second section t. Steps 1-4 and 6-8 check against the cited statements: strict trait under local Noetherianity; universal-property sections with r∘σ_R=σ∘b and r∘τ=a; flat base change and qcqs clause (3) for any b; DVR principal ideals plus one chart plus affine quasi-compactness; minimal closed member forcing stabilization; locus equality at b(s)=g(q); inverse φ/ψ maps and injective local rings; algebraic-closure test for arbitrary k, then the identity extension. Edge cases are covered: constant b, σ_R=τ, imperfect κ(s), empty P excluded by p≠q. Fault (C, same as all 17 earlier heads): step 5 claims local finite presentation ⇒ local finite type, and step 9 needs g locally of finite type. def-sbc-locally-finite-presentation is pointwise, but def-weil-finite-type-morphism quantifies over every affine V, so the bridge Stacks 01T2 = lem-weil-pbc-lft-pointwise-criterion is uncited. FIX: step 5 text and uses taken from the fdc5 fix (keeps the generator sentence; the criterion covers g, f and f_s); step 9 gets the prefix 'Step 5, applied to g through [lem-weil-pbc-lft-pointwise-criterion], established' plus the criterion in uses; proof_deps gains the criterion. Union of uses = proof_deps; no control characters. The tool_uses noetherian-specialization-trait and section-component-cartesian are accepted (055Q route).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatReducedSpecializationTraitData",
+  "declaration": "AlgebraicGeometry.exists_flat_reduced_specialization_trait_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatReducedSpecializationTraitData.lean",
+  "statement": "theorem exists_flat_reduced_specialization_trait_data {P T : Scheme.{u}} [IsNoetherian P] [IsNoetherian T] (g : P ⟶ T) [Flat g] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) {p q : P} (hpq : p ⤳ q) (hne : p ≠ q) (hq : q ∈ connectedComponentIn (g ⁻¹' {g q}) (σ (g q))) (hred : IsReduced (pullback g (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField (g q)) (AlgebraicClosure (T.residueField (g q))))) ≫ T.fromSpecResidueField (g q)))) : ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : IsDiscreteValuationRing R) (a : Spec (.of R) ⟶ P), a (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R) = p ∧ a (closedPoint R) = q ∧ Flat (pullback.snd g (a ≫ g)) ∧ LocallyOfFinitePresentation (pullback.snd g (a ≫ g)) ∧ QuasiCompact (pullback.snd g (a ≫ g)) ∧ QuasiSeparated (pullback.snd g (a ≫ g)) ∧ IsNoetherian (Spec (.of R)) ∧ IsNoetherian (pullback g (a ≫ g)) ∧ IsNoetherian ((pullback.snd g (a ≫ g)).fiber (closedPoint R)) ∧ NoetherianSpace ((pullback.snd g (a ≫ g)).fiber (closedPoint R)) ∧ IsReduced (pullback (pullback.snd g (a ≫ g)) (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of R)).residueField (closedPoint R)) (AlgebraicClosure ((Spec (.of R)).residueField (closedPoint R))))) ≫ (Spec (.of R)).fromSpecResidueField (closedPoint R))) ∧ IsReduced ((pullback.snd g (a ≫ g)).fiber (closedPoint R)) ∧ ∃ (σR τ : Spec (.of R) ⟶ pullback g (a ≫ g)), σR ≫ pullback.snd g (a ≫ g) = 𝟙 (Spec (.of R)) ∧ τ ≫ pullback.snd g (a ≫ g) = 𝟙 (Spec (.of R)) ∧ σR ≫ pullback.fst g (a ≫ g) = (a ≫ g) ≫ σ ∧ τ ≫ pullback.fst g (a ≫ g) = a ∧ pullback.fst g (a ≫ g) (τ (⟨⊥, Ideal.isPrime_bot⟩ : PrimeSpectrum R)) = p ∧ pullback.fst g (a ≫ g) (τ (closedPoint R)) = q ∧ {x : ↥(pullback g (a ≫ g)) | x ∈ connectedComponentIn ((pullback.snd g (a ≫ g)) ⁻¹' {pullback.snd g (a ≫ g) x}) (σR (pullback.snd g (a ≫ g) x))} = (pullback.fst g (a ≫ g)) ⁻¹' {y : P | y ∈ connectedComponentIn (g ⁻¹' {g y}) (σ (g y))} ∧ τ (closedPoint R) ∈ connectedComponentIn ((pullback.snd g (a ≫ g)) ⁻¹' {closedPoint R}) (σR (closedPoint R))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4c9c0435",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Stage-2 Lean of lem-trf-flat-reduced-specialization-trait-data checked clause by clause against the node and Stacks 055Q para 2. Hypotheses: IsNoetherian P,T; Flat+LFP+QC+QS g; σ≫g=𝟙; p⤳q, p≠q; q∈connectedComponentIn(g⁻¹'{g q})(σ(g q)); geometric fibre reduced via canonical AlgebraicClosure, as in the def-weil-geometric-fibre record (choice-independent). Conclusions: ∃ DVR R:Type u (as in exists_trait_of_strict_specializes) and a with a(⊥)=p, a(closedPoint)=q; f flat/LFP/QC/QS; S and X Noetherian; fibre IsNoetherian and NoetherianSpace; X_s̄ and X_s reduced; σR,τ sections pinned by both projections (σR≫r=(a≫g)≫σ, τ≫r=a); r∘τ point images; C(f,σR)=r⁻¹C(g,σ) in the same inline form as section_component_preimage_of_isPullback; τ(s) in the component of σR(s). Only the lean field differs from the live node; statement verbatim; docstrings carry source, blueprint id and all 9 steps incl. the lft-pointwise criterion; proof is sorry only; report has Worker report and Second reading sections; no duplicates; edge cases (constant b, σR=τ, imperfect κ(s), empty schemes) covered. No changes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T092651-L-3451628",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

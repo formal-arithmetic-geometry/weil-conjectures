@@ -1,0 +1,134 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-fd-coefficient-comparison-datum"
+ ],
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "id": "lem-fd-integral-stage-exact",
+ "kind": "statement",
+ "title": "Exactness of the supplied integral stage identity",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, an algebraic closure Ω of Q_l, and a noetherian finite-dimensional scheme T with l invertible in every stalk. Let stage_E be a family of FdRationalStageComparison data [def-fd-coefficient-comparison-datum]. For each finite coefficient field E in Ω, stage_E.integral.functor is triangulated for its supplied integral_shift structure. The integral identity and its specified shift normalization identify its composite with the full PBC inclusion with the intrinsic exact coefficient restriction.",
+ "proof": [
+  {
+   "text": "the full intrinsic integral inclusion and the exact coefficient restriction\ninduce an exact derived composite J. The supplied integral_identity identifies I\nfollowed by the PBC inclusion with J. Equality elimination and the supplied\nintegral_shift_normalization identify their two integer-shift structures, so this\nidentity is an exact natural isomorphism. The target full inclusion is exact and\nfully faithful; reflection of distinguished triangles gives exactness of I.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+    "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-fourier-transform/sk-cor-plancherel/def-fd-trace-function.md",
+  "place": "Coefficient-category auxiliary for finite-dimensional algebraically closed coefficient stalks; agent-written integral comparison and localization arguments retained in lem-fd-completion-inverse-scalar-coherence, original steps 1–8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor into a triangulated full subcategory is detected by its composite with the fully faithful inclusion",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.isTriangulated_iff_comp_right, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.distTriang_iff, CategoryTheory.Functor.isTriangulated_of_precomp, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; the proved argument supplies the presentation normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isTriangulated_iff_comp_right\"",
+   "results": "1 hits: CategoryTheory.Functor.isTriangulated_iff_comp_right",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; the proved argument supplies the presentation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftIso_comp_hom_app|isTriangulated_iff_comp_right",
+   "results": "22 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; the proved argument supplies the presentation normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of a functor is reflected by composition with an exact fully faithful functor",
+   "results": "8 hits: CategoryTheory.reflectsIsomorphisms_of_full_and_faithful, CategoryTheory.Functor.reflects_exact_of_faithful, CategoryTheory.ShortComplex.exact_map_iff_of_faithful, CategoryTheory.Functor.FullyFaithful.ofCompFaithful, CategoryTheory.Limits.fullyFaithful_reflectsLimits, CategoryTheory.Limits.fullyFaithful_reflectsColimits, CategoryTheory.exactFunctor, CategoryTheory.LeftExactFunctor.whiskeringLeft_obj_obj_obj",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no coefficient-specific theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits, including the exact-functor shift and triangulation instances in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-27",
+   "verdict": "used the generic exact-functor instances"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FdIntegralScalarDescentInputs",
+  "date": "2026-10-27",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Exactness of the supplied integral stage identity; retained integral scalar descent construction.",
+   "via": [
+    "lem-fd-integral-scalar-descent-inputs",
+    "lem-fd-completion-inverse-scalar-coherence",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FdIntegralStageExact",
+  "file": "lean/Sheaf/Paper/FdIntegralStageExact.lean",
+  "declaration": "WeilConjectures.fdIntegralStageExact",
+  "statement": "theorem fdIntegralStageExact\n    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (T : Scheme.{u}) [IsNoetherian T]\n    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]\n    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]\n    (stage : ∀ E : Padic.FiniteCoefficientFields l Ω, FdRationalStageComparison l Ω T E)\n    (E : Padic.FiniteCoefficientFields l Ω) : (stage E).integral.functor.IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T103526-L-1100696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261027T103526-L-1100696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

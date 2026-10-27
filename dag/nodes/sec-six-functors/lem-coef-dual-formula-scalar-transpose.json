@@ -29,6 +29,32 @@
  ],
  "proof": [
   {
+   "text": "Implemented finiteEtaleDualizing_plus: equip the structure morphism with the specified finiteDualizingCompactification. Apply the existing etale plus_rightDerivedUpperShriek_obj to boundaryCoefficientPlus, whose underlying object is the coefficient unit. This is the bounded-below part of Step 1, with no new hypothesis on W.",
+   "uses": [
+    "lem-etale-lower-shriek-adjoint-from-compactification",
+    "def-weil-boundary-composition-mate"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Implemented ordinaryPush_eq: the completed pull map is the adjoint transpose of sfCompletedCoefficientMap, so applying homEquiv cancels its inverse. After forgetting commutativity, the latter map satisfies every quotient equation of ordinaryIntegralDirectRingMap_existsUnique. Its uniqueness identifies the ring maps. The two module direct images are the same SheafOfModules.pushforward after substituting this equality. Continuity of pro-etale base change is supplied explicitly.",
+   "uses": [
+    "def-sf-ordinary-integral-pullback-construction",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Implemented supportScalar_isIso: map the base-field prime unit to every residue field of X. The equality of predicates in integral_residue_tor upgrades K to the uniform finite-Tor domain. Apply integralCoefficientComparison to obtain invertibility of the specified completed proper/open scalar mate. In the definition of supportScalar, its other three factors are inverses or functorial images of the canonical completion and support-realization isomorphisms, so their composite is invertible. The remaining original proof steps below still describe the five unchanged open theorem obligations.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-coef-integral-finite-extension",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false
+  },
+  {
    "text": "First work simultaneously at $A=A_n$ and $B=B_n=A_{L,en}$. Write $T=-\\otimes_A^LB$, $F_C=Rf_{!,C}$, $G_C=Rf_C^!$, $Q_C=f_C^*D_{Y,C}M$ and $H_CM=D_{X,C}Q_C$ for $C=A,B$ (with $M$ replaced by $T_YM$ over $B$). The finite-free extension lemma gives these coefficient rings and the evaluation-defined finite comparisons. The finite exceptional and biduality theorems put $G_C,D_{W,C}$ in the finite-Tor constructible categories, and pullback preserves them. Tensor products occurring below are also in that domain: constructible cohomology is the finite-tensor theorem, while tensoring flat models supported in $[a,b]$ and $[c,d]$ gives a flat model supported in $[a+c,b+d]$. The structure morphisms $a_W:W\\to s=\\operatorname{Spec}k$ are separated finite type as well. Thus all absolute exceptional adjunctions used below are the constructible ones, including for an empty scheme. Choose a finite integer dimension bound for $X$ by [lem-kun-dimension-finite-type] (bound zero if $X$ is empty). Ordinary adjunction is clause (1) of [fix-prop-adjunctions], and [cor-sf-direct-image-ctf-proetale] ensures that its right adjoint preserves the finite-Tor subcategory, as required when using the absolute-trace exchange lemma. Bounded constructible inputs have etale-origin witnesses by [lem-sf-proetale-constructible-origin], so the stated domain of compact-support composition is met. The evaluation bijection $\\operatorname{Hom}(W,D_{T,C}N)\\cong\\operatorname{Hom}(W\\otimes N,\\omega_{T,C})$, $v\\mapsto\\operatorname{ev}_N\\circ(v\\otimes1)$, required by the absolute-trace exchange lemma and used for every currying below, is the internal tensor--Hom isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] followed by $H^0$ and [lem-pur-rhom-global-sections]; the evaluation and double-dual maps are those of [lem-weil-duality-pairing].",
    "uses": [
     "lem-coef-finite-free-extension",
@@ -52,10 +78,10 @@
    }
   },
   {
-   "text": "Put $P_{W,C}=Ra_{W!,C}$ and let $\\operatorname{tr}_{W,C}:P_{W,C}\\omega_{W,C}\\to C_s$ be its counit. Write $\\gamma_C:P_{Y,C}F_C\\xrightarrow{\\sim}P_{X,C}$ for compact-support composition and $\\theta_C:F_CK\\otimes D_{Y,C}M\\xrightarrow{\\sim}F_C(K\\otimes f_C^*D_{Y,C}M)$ for projection. For $h:K\\to H_CM$, put $e_C(h)=\\operatorname{ev}_{Q_C}\\circ(h\\otimes1):K\\otimes Q_C\\to\\omega_{X,C}$. Define $y_C(h):F_CK\\otimes D_{Y,C}M\\to\\omega_{Y,C}$ by the absolute adjunction equation\n$$\\operatorname{tr}_{Y,C}\\circ P_{Y,C}y_C(h)=\\operatorname{tr}_{X,C}\\circ P_{X,C}e_C(h)\\circ\\gamma_{C,K\\otimes Q_C}\\circ P_{Y,C}\\theta_C.$$\nAll factors are specified: composition is [thm-sf-comp-composition], projection is [fix-prop-projection-formula], and the absolute adjunctions and dualizing objects are in [lem-coef-finite-exceptional]. This defines a unique $y_C(h)$, not a choice between isomorphic objects.",
+   "text": "Put $P_{W,C}=Ra_{W!,C}$ and let $\\operatorname{tr}_{W,C}:P_{W,C}\\omega_{W,C}\\to C_s$ be its counit. Write $\\gamma_C:P_{Y,C}F_C\\xrightarrow{\\sim}P_{X,C}$ for compact-support composition and $\\theta_C:F_CK\\otimes D_{Y,C}M\\xrightarrow{\\sim}F_C(K\\otimes f_C^*D_{Y,C}M)$ for projection. For $h:K\\to H_CM$, put $e_C(h)=\\operatorname{ev}_{Q_C}\\circ(h\\otimes1):K\\otimes Q_C\\to\\omega_{X,C}$. Define $y_C(h):F_CK\\otimes D_{Y,C}M\\to\\omega_{Y,C}$ by the absolute adjunction equation\n$$\\operatorname{tr}_{Y,C}\\circ P_{Y,C}y_C(h)=\\operatorname{tr}_{X,C}\\circ P_{X,C}e_C(h)\\circ\\gamma_{C,K\\otimes Q_C}\\circ P_{Y,C}\\theta_C.$$\nAll factors are specified: composition is [thm-sf-comp-composition], projection is the compact-support projection map [lem-pur-compact-support-projection-coefficient-change], and the absolute adjunctions and dualizing objects are in [lem-coef-finite-exceptional]. This defines a unique $y_C(h)$, not a choice between isomorphic objects.",
    "uses": [
     "thm-sf-comp-composition",
-    "fix-prop-projection-formula",
+    "lem-pur-compact-support-projection-coefficient-change",
     "lem-coef-finite-exceptional"
    ],
    "elementary": false,
@@ -103,9 +129,9 @@
    }
   },
   {
-   "text": "Abbreviate $y_A=y_A(h)$ and $y_B=y_B(d^n_MT_Xh)$. Let\n$$r=\\alpha_{f,K}^{-1}\\otimes(\\beta^Y_M)^{-1}:F_BT_XK\\otimes D_{Y,B}T_YM\\longrightarrow T_Y(F_AK\\otimes D_{Y,A}M)$$\nusing the scalar tensor isomorphism. The scalar-extension compatibility of projection in [fix-prop-projection-formula] is exactly\n$$\\theta_B\\circ(\\alpha_{f,K}\\otimes\\beta^Y_M)=F_B(1\\otimes q_M)\\circ\\alpha_{f,K\\otimes Q_A}\\circ T_Y\\theta_A.$$\nSubstitute this and (3) in the defining trace expression for $y_B$. Naturality of $\\alpha_f$, followed by (2) and then (1) for $X$, identifies the resulting transpose under $P_{Y,B}\\dashv G_{a_Y,B}$ with the scalar extension of the old trace expression. On the other hand (1) for $Y$ and naturality of $\\alpha_Y$ give the same transpose for $u_Y\\circ T_Yy_A\\circ r$. Written on the common source before applying $P_{Y,B}r$, both are\n$$T_s\\bigl(\\operatorname{tr}_{X,A}\\circ P_{X,A}e_A(h)\\circ\\gamma_A\\circ P_{Y,A}\\theta_A\\bigr).$$\nPrecomposition by the invertible $\\alpha_Y$ is harmless; injectivity of the absolute adjunction therefore proves\n$$y_B=u_Y\\circ T_Yy_A\\circ r.\\tag{4}$$",
+   "text": "Abbreviate $y_A=y_A(h)$ and $y_B=y_B(d^n_MT_Xh)$. Let\n$$r=\\alpha_{f,K}^{-1}\\otimes(\\beta^Y_M)^{-1}:F_BT_XK\\otimes D_{Y,B}T_YM\\longrightarrow T_Y(F_AK\\otimes D_{Y,A}M)$$\nusing the scalar tensor isomorphism. The scalar-extension compatibility of projection [lem-pur-compact-support-projection-coefficient-change] is exactly\n$$\\theta_B\\circ(\\alpha_{f,K}\\otimes\\beta^Y_M)=F_B(1\\otimes q_M)\\circ\\alpha_{f,K\\otimes Q_A}\\circ T_Y\\theta_A.$$\nSubstitute this and (3) in the defining trace expression for $y_B$. Naturality of $\\alpha_f$, followed by (2) and then (1) for $X$, identifies the resulting transpose under $P_{Y,B}\\dashv G_{a_Y,B}$ with the scalar extension of the old trace expression. On the other hand (1) for $Y$ and naturality of $\\alpha_Y$ give the same transpose for $u_Y\\circ T_Yy_A\\circ r$. Written on the common source before applying $P_{Y,B}r$, both are\n$$T_s\\bigl(\\operatorname{tr}_{X,A}\\circ P_{X,A}e_A(h)\\circ\\gamma_A\\circ P_{Y,A}\\theta_A\\bigr).$$\nPrecomposition by the invertible $\\alpha_Y$ is harmless; injectivity of the absolute adjunction therefore proves\n$$y_B=u_Y\\circ T_Yy_A\\circ r.\\tag{4}$$",
    "uses": [
-    "fix-prop-projection-formula",
+    "lem-pur-compact-support-projection-coefficient-change",
     "lem-coef-finite-exceptional"
    ],
    "elementary": false,
@@ -195,7 +221,7 @@
   "cor-sf-direct-image-ctf-proetale",
   "lem-sf-proetale-constructible-origin",
   "thm-sf-comp-composition",
-  "fix-prop-projection-formula",
+  "lem-pur-compact-support-projection-coefficient-change",
   "lem-sf-absolute-trace-exchange",
   "lem-coef-finite-adjunction-diagram-realization",
   "lem-coef-finite-free-compact-composition",
@@ -211,12 +237,19 @@
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-pur-rhom-global-sections",
-  "lem-weil-duality-pairing"
+  "lem-weil-duality-pairing",
+  "lem-etale-lower-shriek-adjoint-from-compactification",
+  "def-weil-boundary-composition-mate",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-weil-derived-direct-image",
+  "lem-coef-integral-residue-tor",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.md",
-  "place": "blueprint_update.proof paragraph 8: explicit finite absolute-trace calculation, coherent realization and integral total limit; finite formula Hom chain from lem-coef-finite-exceptional, Proof paragraphs 1-3"
+  "place": "blueprint_update.proof paragraph 8: explicit finite absolute-trace calculation, coherent realization and integral total limit; finite formula Hom chain from lem-coef-finite-exceptional, Proof paragraphs 1-3; G1 partial Lean implementation 2026-10-25: finiteEtaleDualizing_plus, ordinaryPush_eq and supportScalar_isIso proved; the original main-theorem plan remains open"
  },
  "mathlib_searches": [
   {
@@ -475,5 +508,27 @@
   "existing": false,
   "note": "H2/H12 repair of immutable head 810a9f9ed786: canonical intrinsic support realization, ordinary integral pullback/completion, etale support compositor, and compact-support site comparison have dedicated existing-declaration definition nodes. The two theorem nodes previously cited solely for construction data are replaced in stmt_deps by definition nodes. All 27 Lean declarations and the theorem signature are unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a0789",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T101023-L-3650499",
+  "kind": "proof",
+  "note": "independent cc review: delivered CoefDualFormulaScalarTranspose.lean + node json against packet diffs, unit sk-prop-sf-biduality-general realized (empty), cited lemma statements; importers FiniteExceptional/RationalOperations compiled against delivered module; #print axioms of the 3 proved theorems"
+ },
+ "lean_notes": "2026-10-26 (maintainer M, DAG direction fix for prop-sf-pf-coherence): the citation of fix-prop-projection-formula was replaced by lem-pur-compact-support-projection-coefficient-change: the blueprint node does not use fix-prop-projection-formula, the Lean declaration uses none of its declarations (constant walk), and the edge closed the cycle fix-prop-projection-formula -> prop-sf-pf-coherence -> ... -> here."
 }

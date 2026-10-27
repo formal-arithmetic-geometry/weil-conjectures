@@ -6,14 +6,12 @@ Authors: SHEAF contributors
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinaryResolutionRule
-import WeilConjectures.Compactification.StrictTransformBlowup
-import WeilConjectures.RingTheory.StandardSmoothQuotientLift
-import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.Blowup.FlatBaseChange
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 import Sheaf.AlgebraicGeometry.EmbeddedResolutionAmbientComparison
+import Sheaf.AlgebraicGeometry.EmbeddedToIntrinsicSmoothResolution
+import Sheaf.AlgebraicGeometry.IntrinsicResolutionOrdinaryLocalRule
+import Sheaf.AlgebraicGeometry.SynchronizedResolutionZariskiDescent
+import Sheaf.AlgebraicGeometry.SynchronizedResolutionDescentDatum
+import Sheaf.AlgebraicGeometry.DescendedResolutionSmoothComparisons
 
 /-!
 # Smooth-functorial ordinary resolution in characteristic zero
@@ -30,7 +28,16 @@ set_option relaxedAutoImplicit false
 
 universe u
 
+open CategoryTheory
+
 namespace AlgebraicGeometry
+
+private theorem descentEmbeddable_of_isEmbeddable (S : RationalResolutionInput.{u})
+    (hS : S.IsEmbeddable) : OrdinaryResolutionDescent.Embeddable S := by
+  obtain ⟨P, e, over⟩ := hS
+  let := P.closed
+  exact ⟨P.P, P.base, e.hom ≫ P.inclusion, inferInstance, P.smooth, P.separated,
+    P.finiteType, P.quasiCompact, by simpa only [Category.assoc] using over⟩
 
 /-- There is a single ordinary resolution rule functorial for every smooth morphism.
 Source: ILO VIII, Theorem 2.3.10 and Remark 2.3.5(i)
@@ -79,6 +86,39 @@ on every pullback level and meets every nonempty center, hence deletes no stage.
 empty scheme the tower has length zero. -/
 theorem exists_smooth_functorial_ordinary_resolution :
     Nonempty (SmoothFunctorialOrdinaryResolution.{u}) := by
-  sorry
+  -- The embedded and intrinsic reductions provide the local cut diagrams.
+  obtain ⟨L, order, ⟨E⟩⟩ := exists_synchronized_embedded_resolution.{u}
+  let := order
+  obtain ⟨_, _, ⟨I⟩⟩ := exists_intrinsic_resolution_of_embedded L E
+  obtain ⟨B, tower_eq⟩ := intrinsicResolution_ordinary_localRule L E I
+  -- Restrict the realized smooth local comparisons to open immersions.
+  let A : OrdinaryZariskiResolutionRule L :=
+    { tower := fun S hS ↦
+        ⟨(B.tower S (descentEmbeddable_of_isEmbeddable S hS)).tower,
+          (B.tower S (descentEmbeddable_of_isEmbeddable S hS)).labels⟩
+      resolves := fun S hS ↦ (B.tower S (descentEmbeddable_of_isEmbeddable S hS)).regular
+      coherent := fun S hS ↦ (B.tower S (descentEmbeddable_of_isEmbeddable S hS)).coherent
+      empty := by
+        intro S hS emptyS
+        have hp : Nonempty (RationalResolutionEmbedding S) := by
+          obtain ⟨P, e, over⟩ := hS
+          exact ⟨⟨P, e, over⟩⟩
+        obtain ⟨p⟩ := hp
+        have heq := congrArg (fun T : LabeledOrdinaryTower L S.scheme ↦ T.tower.length)
+          (tower_eq S (descentEmbeddable_of_isEmbeddable S hS) p)
+        exact heq.trans ((I.tower ⟨S, ⟨p⟩⟩).empty_input emptyS)
+      comparison := by
+        intro S T hS hT j hj over
+        let := hj
+        let c := B.comparison S T (descentEmbeddable_of_isEmbeddable S hS)
+          (descentEmbeddable_of_isEmbeddable T hT) j over
+        exact ⟨c.toOrdinaryResolutionComparison, c.labels_eq⟩ }
+  -- Glue the ordinary towers, then descend their smooth comparisons.
+  obtain ⟨R, hR, _, _, hdescent, _⟩ :=
+    exists_synchronized_resolution_zariski_descent L A
+  obtain ⟨D, _, _⟩ := synchronizedResolution_descentDatum L A B
+    (by intros; rfl) R hR hdescent
+  obtain ⟨F⟩ := OrdinaryResolutionDescent.descendedResolution_smoothComparisons L D
+  exact ⟨F.rule⟩
 
 end AlgebraicGeometry

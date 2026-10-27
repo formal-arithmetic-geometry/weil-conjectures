@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-tower-p1-single-level-transport",
+ "kind": "statement",
+ "title": "Commuting squares for evaluated triangle composites",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $S$ with $\\ell$ invertible, a finite level $n+1$, and a presentation $p$ with maps $d$ and etale-origin comparisons $h$. For every SingleLevelComparisons $c$ [def-sp-tower-p1-single-level-data], put $a_L=c.push_L$ and $b_H=c.pull_H$. For all bounded-below etale $L$ on $P=\\mathbf P^1_S$ and $H$ on $S$, the specified composite words satisfy $\\nu_S^*(F_n\\eta_{n,L};\\varepsilon_{n,F_nL});a_L=a_L;e_n(F\\eta_{J_PL};\\varepsilon_{FJ_PL})$ and $\\nu_P^*(\\eta_{n,G_nH};G_n\\varepsilon_{n,H});b_H=b_H;e_n(\\eta_{GJ_SH};G\\varepsilon_{J_SH})$, where semicolon denotes composition in diagrammatic order. Neither tower composite is assumed to equal an identity, and this statement asserts no triangle identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levels, single-level realization and evaluation of the finite triangle words"
+ },
+ "stmt_deps": [
+  "def-sp-tower-p1-single-level-data"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-coef-semilinear-derived-sections] for the natural comparisons $e_nF\\simeq Rq_{*,B_n}e_n$ on pro-etale categories and $e_nq_\\bullet^*=q^{-1}e_n$, and for compatibility with tensor, composition and the specified adjunction-mate maps. Apply [lem-sp-tower-p1-etale-origin-comparisons] to pass, on etale-origin levels, to the corresponding ordinary etale operations through the specified comparison mate. Substituting $e_nJ_{n,P}=\\nu_P^*$ and $e_nJ_{n,S}=\\nu_S^*$ yields natural isomorphisms $a_L:e_nFJ_{n,P}L\\simeq\\nu_S^*F_nL$ and $b_H:e_nGJ_{n,S}H\\simeq\\nu_P^*G_nH$. Twists and the shift $[2]$ are included in that cited compatibility. The cited comparison lemma also says that $F,G$ preserve the displayed bounded-below etale-origin domains. Hence it applies again to $FJ_{n,P}L$, $GJ_{n,S}H$ and their iterates. Compose its natural comparisons to obtain those for $FG$ and $GF$. This uses only the level witnesses just constructed, not a compatible choice of etale representatives for a general tower; the cited lemma imposes no finite-Tor hypothesis.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sp-tower-p1-etale-origin-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levels, final paragraph; single-level test objects for the finite triangle identities"
+   }
+  },
+  {
+   "text": "Under these comparisons, $e_n\\eta_{J_{n,P}L}=\\nu_P^*\\eta_{n,L}$ and $e_n\\varepsilon_{J_{n,S}H}=\\nu_S^*\\varepsilon_{n,H}$, with the respective source and target identifications understood. Indeed [lem-sp-tower-p1-etale-origin-comparisons] explicitly identifies the evaluations of the diagonal and splitting-trace formulas, including inverses of the projection/exchange isomorphisms, twists, shifts and the composition identification $p_i\\Delta=1_P$. For the unit this is the word consisting of the composition identification, inverse supported projection, $Rp_{2*}(\\delta\\otimes1)$ and inverse exchange; for the counit it is inverse projection followed by $1\\otimes t_q$. Evaluation preserves composition and sends an inverse isomorphism to the inverse of its image, so the entire words, not just their objects, are identified. The same assertion applies with input $FJ_{n,P}L$ or $GJ_{n,S}H$. Naturality in their chosen witnesses supplies exactly the conjugations by $a_L,b_H$ required for the iterated formulas.",
+   "uses": [
+    "lem-sp-tower-p1-etale-origin-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levels, final paragraph; single-level test objects for the finite triangle identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-sp-tower-p1-etale-origin-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levels, single-level realization and evaluation of the finite triangle words"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor embedding sheaves into a single level of an inverse system with zero transitions and reflecting triangle identities",
+   "results": "CategoryTheory.Functor.IsHomological.mk; ComplexShape.Embedding.truncLEFunctor and truncGEFunctor; CategoryTheory.fullyFaithfulSheafToPresheaf. None constructs this varying-ring single-level comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embed a sheaf at a single level of an inverse system with all other levels zero, then reflect adjunction triangle identities through a faithful functor",
+   "results": "CategoryTheory.constantSheafAdj_counit_w; constant sheaf adjunction and condensed sheaf comparison declarations. None states the single-level construction or its normalized composite-word squares.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleLevel|singleton|triangle.*reflect",
+   "results": "msearch: unrelated singleton-set and subsingleton hits. Local rg finds the assigned item and SystemSingletonScalarExtension; the latter is nonzero at lower levels, so does not supply the zero-off-n singleton.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1SingleLevelTriangles",
+  "date": "2026-10-25",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Levels, single-level realization and evaluation of the finite triangle words",
+   "via": [
+    "lem-sp-tower-p1-single-level-triangles"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1SingleLevelTransport",
+  "file": "lean/Sheaf/Paper/TowerP1SingleLevelTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelTransport"
+  ],
+  "statement": "theorem singleLevelTransport (S : Scheme.{u}) (hS : IsUnit (l : Γ(S, ⊤)))\n    (p : Presentation l E S hS) (d : Maps l E p) (h : EtaleOriginComparisons l E p d)\n    (c : SingleLevelComparisons l E n d h) :\n    (∀ L : DerivedCategory.Plus\n        (Sheaf (ProjectiveLine S).smallEtaleTopology\n          (ModuleCat.{u + 1} (levelRing l E n))),\n      (nu l E n S).map\n          ((singleLevelF l E n S).map\n              (singleLevelEta l E n c.coordinates h.cartier_diagonal L.obj) ≫\n            singleLevelEpsilon l E n c.coordinates ((singleLevelF l E n S).obj L.obj)) ≫\n        c.push.hom.app L =\n      c.push.hom.app L ≫ (SpTowerShriek.Ev l E S n).map\n        ((p.F l E).map (eta l E d ((c.projective.J l E n).obj L)) ≫\n          epsilon l E d ((left l E d).obj ((c.projective.J l E n).obj L)))) ∧\n    (∀ H : DerivedCategory.Plus\n        (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (levelRing l E n))),\n      (nu l E n (ProjectiveLine S)).map\n          (singleLevelEta l E n c.coordinates h.cartier_diagonal\n              ((singleLevelG l E n S).obj H.obj) ≫\n            (singleLevelG l E n S).map (singleLevelEpsilon l E n c.coordinates H.obj)) ≫\n        c.pull.hom.app H =\n      c.pull.hom.app H ≫ (SpTowerShriek.Ev l E (ProjectiveLine S) n).map\n        (eta l E d ((rightRestricted l E d).obj ((c.base.J l E n).obj H)) ≫\n          (p.G l E).map (epsilon l E d ((c.base.J l E n).obj H))))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-95075",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T164647-L-1048928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-95075",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T164647-L-1048928",
+  "kind": "interface",
+  "note": "independent cc review: delivered TowerP1SingleLevelData/Construction/Transport/Triangles + 4 nodes vs clone 919a934 item module and node; moved decls byte-identical, item signature identical; new sorries checked against FormulaLevelComparisons/levelComparisons/pushWord/originWord; sandbox run_set build rc 0, #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

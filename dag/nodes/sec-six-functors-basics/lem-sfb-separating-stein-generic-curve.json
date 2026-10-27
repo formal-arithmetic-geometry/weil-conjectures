@@ -1,0 +1,334 @@
+{
+ "id": "lem-sfb-separating-stein-generic-curve",
+ "kind": "statement",
+ "title": "Separating function fields and the geometrically integral generic curve",
+ "statement": "Let $k\\subseteq F\\subseteq L\\subseteq E$ be fields, with $E/k$ and $F/k$ finitely generated, $E/F$ separably generated of transcendence degree one, and $L/F$ finite. Assume $L$ is algebraically closed in $E$: every element of $E$ algebraic over $L$ lies in $L$. Let $g:T\\to Y$ be a proper dominant $k$-morphism of integral finite-type $k$-schemes, with $T$ normal, together with identifications $k(T)=E$ and $k(Y)=L$ under which the map on function fields is the displayed inclusion. Then $L/F$ is finite separable, $E/L$ is separably generated of transcendence degree one, and the generic fibre $C=T\\times_Y\\operatorname{Spec}L$ is a proper normal geometrically integral finite-type $L$-scheme with function field $E$ and dimension one. Moreover $\\dim Y=\\operatorname{trdeg}_k F$ and $\\dim T=\\operatorname{trdeg}_k F+1$. No smoothness of $C/L$ is asserted. Here separably generated means admitting a finite transcendence basis over which the remaining algebraic extension is finite separable.\n\nThe notions used are [def-weil-field], [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-proper-morphism], [def-sc-function-field], [def-pc-field-extension], [def-kun-transcendence-degree], [def-kun-topological-krull-dimension], [def-weil-pbc-transcendence-basis], [def-weil-pbc-separable-algebraic-extension], [def-pc-fibre-product], [def-pc-geometrically-irreducible], [def-sfb-dominant-function-field-map]. Normal means that every local ring is an integrally closed domain. A projective morphism here means an H-projective morphism: it admits a closed immersion into a finite-dimensional projective space over its target. A semilinear $H$-action means actions by scheme automorphisms and by field automorphisms of $k$, with the structure morphisms equivariant; faithfulness is not assumed. A birational morphism here identifies the function fields and is an isomorphism over a dense open of the target.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 054Q (lemma-geometrically-irreducible-function-field), Tag 0B1C (item-dimension-irreducible-trdeg); algebra.tex Tags 030W (lemma-characterize-separable-field-extensions) and 037Q (lemma-make-geometrically-irreducible); de Jong Lemma 5.2, printed p.613, final generic-fibre argument, expanded in returned steps 15--16."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-sfb-dominant-function-field-map",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-separably-generated-separable] to $E/F$. Since $L/F$ is finite, it is a finitely generated subextension, so the conclusion says that $L/F$ admits a separating transcendence basis. A finite extension is algebraic: the powers of each element are linearly dependent in the finite-dimensional $F$-vector space $L$. Thus its transcendence degree is zero by [lem-kun-transcendence-degree-tower], and its transcendence basis is empty. Its remaining algebraic extension is therefore $L/F$ itself, which is separable. This proves the first assertion.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-separable",
+    "def-weil-pbc-separable-field-extension",
+    "lem-kun-transcendence-degree-tower",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030X, lemma-separably-generated-separable; fields.tex Tag 030H, lemma-transcendence-degree-tower"
+   }
+  },
+  {
+   "text": "By the hypothesis and [def-kun-transcendence-degree], a separating transcendence basis for $E/F$ has one element $t$. Thus $E/F(t)$ is finite separable. The element $t$ remains transcendental over $L$: otherwise $L(t)/L$ and $L/F$ would both be finite-dimensional, making $t$ algebraic over $F$. An $F(t)$-spanning family for $E$ also spans it over $L(t)$, so $E/L(t)$ is finite. For $a\\in E$, let $P$ and $Q$ be its minimal polynomials over $F(t)$ and $L(t)$. Division by the monic $Q$ gives $P=QR$ in $L(t)[X]$: the remainder vanishes at $a$ and has smaller degree than $Q$, hence is zero by minimality. Choose $U,V\\in F(t)[X]$ with $UP+VP^{\\prime}=1$. Since $P^{\\prime}=Q^{\\prime}R+QR^{\\prime}$, we obtain $1=Q(UR+VR^{\\prime})+Q^{\\prime}(VR)$ in $L(t)[X]$. Thus $Q$ is separable. Therefore $t$ is a separating basis for $E/L$, its transcendence degree is one, and $E/L$ is finitely generated (a basis of the finite $L(t)$-vector space $E$, together with $t$, generates it as a field).",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "fields.tex Tag 09H2, lemma-separable-goes-up, its minimal-polynomial argument written out; definition of a separating basis"
+   }
+  },
+  {
+   "text": "Let $\\eta_Y$ and $\\eta_T$ be the generic points, and $j:C\\to T$ the projection. The function-field-map convention gives $g(\\eta_T)=\\eta_Y$, with generic stalk map the prescribed $L\\subseteq E$. The generic fibre $C$ is irreducible by [lem-zl-irreducible-dominant-generic-fibre]. It is proper over $L$ by proper base change [lem-pc-proper-base-change], and consequently finite type over $L$ by the definition of properness.",
+   "uses": [
+    "def-sfb-dominant-function-field-map",
+    "lem-zl-irreducible-dominant-generic-fibre",
+    "lem-pc-proper-base-change",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F, lemma-bertini-irreducible, generic-fibre argument; morphisms.tex Tag 01W4, lemma-base-change-proper"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-spectrum-base-change-stalks] to $g$ and $p=\\eta_Y$, where $\\mathcal O_{Y,p}=L$. Every point of $C$ maps to $p$, since $\\operatorname{Spec}L$ has one point, so its local ring is canonically the local ring of $T$ at its image. All these rings are integrally closed domains. Thus $C$ is normal and reduced, and together with irreducibility from Step 3 it is integral. To identify its generic point, take any nonempty affine $V=\\operatorname{Spec}A\\subseteq Y$ and a nonempty affine $W=\\operatorname{Spec}D\\subseteq g^{-1}V$. These charts cover $C$. The same cited statement identifies $j^{-1}W$ with $\\operatorname{Spec}(S^{-1}D)$ for $S$ the image of $A\\setminus\\{0\\}$. The affine fraction-field lemma and the given inclusion $L\\subseteq E$ show $0\\notin S$. The localization-domain lemma makes this chart integral, with zero prime lying over the zero prime of $D$. The unique lift of $\\eta_T$ is therefore generic in each such chart, hence in $C$. The cited local-ring isomorphism at this lift gives $L$-algebraically $k(C)=\\mathcal O_{C,\\eta_C}\\cong\\mathcal O_{T,\\eta_T}=E$, with the specified inclusion of $L$.",
+   "uses": [
+    "lem-sfb-local-spectrum-base-change-stalks",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "schemes.tex Tag 01J6, lemma-morphism-from-spec-local-ring and Equation 02NA; algebra.tex Tags 00E3, lemma-spec-localization and 00DK, lemma-tensor-localization; affine generic-stalk calculation"
+   }
+  },
+  {
+   "text": "For every field extension $K/L$, apply [lem-weil-pbc-separably-generated-tensor-reduced] with $k=L$, the separably generated extension $E/L$ of Step 2, and the reduced $L$-algebra $S=K$. It gives that $E\\otimes_LK$ is reduced. Step 4 identifies $E$ with the stalk at the unique generic point of the reduced scheme $C$. Hence [lem-pur-geometric-reducedness-from-generic-stalks] applies and proves that $C$ is geometrically reduced over $L$.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-tensor-reduced",
+    "lem-pur-geometric-reducedness-from-generic-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030U, lemma-separable-extension-preserves-reducedness; varieties.tex Tag 04KS, lemma-generic-points-geometrically-reduced (3)"
+   }
+  },
+  {
+   "text": "The subfield of $E$ consisting of elements separably algebraic over $L$ equals $L$, because such elements are algebraic over $L$ and $L$ is algebraically closed in $E$ by hypothesis. Since Step 2 makes $E/L$ finitely generated, [lem-zl-finite-separable-closure] therefore says that $\\operatorname{Spec}E$ is geometrically irreducible over $L$. The generic stalk of $C$ is the field $E$ by Step 4; its maximal ideal is zero, so its residue field is $E$ with the same $L$-structure. Hence [lem-zl-generic-point-geometric-irreducibility] gives geometric irreducibility of $C$. For each extension $K/L$, $C_K$ is now both reduced and irreducible and is nonempty by irreducibility. The definitions give integrality of $C_K$, hence geometric integrality of $C$.",
+   "uses": [
+    "lem-zl-finite-separable-closure",
+    "lem-zl-generic-point-geometric-irreducibility",
+    "def-pc-integral-scheme",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037Q, lemma-make-geometrically-irreducible; varieties.tex Tag 054Q, lemma-geometrically-irreducible-function-field"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-closed-irreducible-dimension-trdeg] to each entire underlying closed subset of the finite-type integral schemes $C/L$, $Y/k$, and $T/k$. Their generic residue fields are their function fields $E$, $L$, and $E$. Thus $\\dim C=\\operatorname{trdeg}_LE=1$, $\\dim Y=\\operatorname{trdeg}_kL$, and $\\dim T=\\operatorname{trdeg}_kE$. Finiteness of $L/F$ gives $\\operatorname{trdeg}_FL=0$; the tower formula gives $\\operatorname{trdeg}_kL=\\operatorname{trdeg}_kF$ and $\\operatorname{trdeg}_kE=\\operatorname{trdeg}_kF+\\operatorname{trdeg}_FE=\\operatorname{trdeg}_kF+1$. These are the remaining assertions.",
+   "uses": [
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-kun-transcendence-degree-tower",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1C, item-dimension-irreducible-trdeg; fields.tex Tag 030H, lemma-transcendence-degree-tower"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separably-generated-separable",
+  "def-weil-pbc-separable-field-extension",
+  "lem-kun-transcendence-degree-tower",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-separable-polynomial",
+  "def-sfb-dominant-function-field-map",
+  "lem-zl-irreducible-dominant-generic-fibre",
+  "lem-pc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-sfb-local-spectrum-base-change-stalks",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-zl-finite-separable-closure",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "def-pc-geometrically-irreducible",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "def-sc-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Expansion of de Jong Lemma 5.2 generic-fibre argument, using Tags 054Q, 04KS, 0B1C, algebra.tex Tags 030X, 030U, 037Q and schemes.tex Tag 01J6. No unavailable de Jong text is used as an unproved input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Generic fibre of a proper dominant morphism of normal varieties is a geometrically integral curve if the function field is separably generated of transcendence degree one and the base field is relatively algebraically closed",
+   "results": "{\"t\": \"2026-10-22T06:07:21Z\", \"tool\": \"leanfinder\", \"query\": \"Generic fibre of a proper dominant morphism of normal varieties is a geometrically integral curve if the function field is separably generated of transcendence degree one and the base field is relatively algebraically closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"d628c8366a0b1494\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"GeometricallyIntegral\"",
+   "results": "{\"t\": \"2026-10-22T06:08:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"GeometricallyIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyIntegral\", \"AlgebraicGeometry.GeometricallyIntegral\", \"AlgebraicGeometry.GeometricallyIntegral.eq_geometrically\", \"AlgebraicGeometry.instGeometricallyIrreducibleOfGeometricallyIntegral\", \"AlgebraicGeometry.instGeometricallyReducedOfGeometricallyIntegral\", \"AlgebraicGeometry.instSurjectiveOfGeometricallyIntegral\", \"AlgebraicGeometry.GeometricallyIntegral.geometrically_isIntegral\", \"AlgebraicGeometry.GeometricallyIntegral.mk\"], \"digest\": \"e37839662c173f25\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyIntegral.*(generic|fiber)|generic.*[Gg]eometricallyIntegral",
+   "results": "{\"t\": \"2026-10-22T06:08:01Z\", \"tool\": \"grep\", \"query\": \"geometricallyIntegral.*(generic|fiber)|generic.*[Gg]eometricallyIntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\"], \"digest\": \"5d3d1c7bba3eb2dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separably generated function field of transcendence degree one over a relatively algebraically closed subfield gives a geometrically integral generic fibre of dimension one",
+   "results": "{\"t\": \"2026-10-22T06:08:29Z\", \"tool\": \"leansearch\", \"query\": \"A separably generated function field of transcendence degree one over a relatively algebraically closed subfield gives a geometrically integral generic fibre of dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSeparable\", \"IsSeparable.isIntegral\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\", \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"AlgebraicGeometry.Scheme.functionField\", \"Algebra.IsSeparable.finInsepDegree_eq\"], \"digest\": \"04ae783252e22e16\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations checked; constituent normalization, rational-map, projectivization, fibre or field results do not state this full lemma or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"fiber\", \"IsIntegral\"",
+   "results": "{\"t\": \"2026-10-22T11:06:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"fiber\\\", \\\"IsIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsIntegralFiberOfGeometricallyIntegral\"], \"digest\": \"bdc9276239939343\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-fibre, normalization and function-field hits have only constituent conclusions; none states this field-tower and geometric generic-curve lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "genericFiber|generic_fiber|genericFibre|generic_fibre",
+   "results": "{\"t\": \"2026-10-22T11:06:09Z\", \"tool\": \"grep\", \"query\": \"genericFiber|generic_fiber|genericFibre|generic_fibre\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-fibre, normalization and function-field hits have only constituent conclusions; none states this field-tower and geometric generic-curve lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic fibre of a dominant morphism between integral schemes is integral, its local rings are the local rings of the source and its function field is unchanged",
+   "results": "{\"t\": \"2026-10-22T11:06:18Z\", \"tool\": \"leanfinder\", \"query\": \"The generic fibre of a dominant morphism between integral schemes is integral, its local rings are the local rings of the source and its function field is unchanged\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"b052ac2111f62654\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-fibre, normalization and function-field hits have only constituent conclusions; none states this field-tower and geometric generic-curve lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generic fiber of a dominant morphism of integral schemes has the same function field and local rings as the source",
+   "results": "{\"t\": \"2026-10-22T11:06:25Z\", \"tool\": \"leansearch\", \"query\": \"The generic fiber of a dominant morphism of integral schemes has the same function field and local rings as the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.IsDominant.rec\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\"], \"digest\": \"059d804f5c490b67\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-fibre, normalization and function-field hits have only constituent conclusions; none states this field-tower and geometric generic-curve lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyIntegral|functionField",
+   "results": "{\"t\": \"2026-10-22T11:07:34Z\", \"tool\": \"grep\", \"query\": \"GeometricallyIntegral|functionField\", \"sub\": \"AlgebraicGeometry/Geometrically\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\"], \"digest\": \"a43be8d2dc957105\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-fibre, normalization and function-field hits have only constituent conclusions; none states this field-tower and geometric generic-curve lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separating transcendence basis and relative algebraic closure give a geometrically integral normal generic fibre of a proper morphism of varieties",
+   "results": "{\"t\": \"2026-10-22T11:07:34Z\", \"tool\": \"leanfinder\", \"query\": \"A separating transcendence basis and relative algebraic closure give a geometrically integral normal generic fibre of a proper morphism of varieties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"d7659fa98841663c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic-fibre, normalization and function-field hits have only constituent conclusions; none states this field-tower and geometric generic-curve lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-curve-pencil",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), direct-image alteration reduction; lem-sfb-equivariant-curve-pencil proof step 5: constant-field separability, normal geometrically integral generic fibre, and dimension drop (de Jong Lemma 5.2 final generic-fibre argument).",
+   "via": [
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separating-stein-generic-curve",
+  "worker": "stage1",
+  "summary": "Q153 repairs the returned delivery 3b51eaed9c8 against the current DAG. The current item is unsplit with the same statement; all 27 retained quotations equal the entire current cited statements, reread in full. Retains the seven-step route and existing dependencies, makes the singleton separating basis, explicit Bezout identity, finite generation over L and generic residue-field identification explicit, and replaces generic tool-use descriptions with their actual inputs. No new nodes, Mathlib leaves, statement changes or Lean writes.",
+  "blueprint": "Realizes the final generic-curve/dimension step of lem-sfb-equivariant-curve-pencil within det-thm-sf-ctf-stability-direct-images proof (3); preserves the alteration route. The inherited null from.node reflects the broken created.item chain reported by blueprint_refs ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separably-generated-separable",
+    "why": "Step 1 uses separability of every finitely generated intermediate extension to deduce finite separability of L/F. This general field-extension theorem is absent from the current six-functor unit."
+   },
+   {
+    "node": "lem-zl-irreducible-dominant-generic-fibre",
+    "why": "Step 3 takes irreducibility of the generic fibre from dominance and irreducibility of T. This generic scheme-theoretic tool is absent from the current unit."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Step 3 uses clause (1) for base change along Spec L to Y, with no finite-type assumption on that base map. This generic permanence theorem is absent from the current unit."
+   },
+   {
+    "node": "lem-weil-pbc-separably-generated-tensor-reduced",
+    "why": "Step 5 takes reducedness of E tensor_L K for each extension K/L from separable generation of E/L. This general field-theoretic tool is absent from the current unit."
+   },
+   {
+    "node": "lem-pur-geometric-reducedness-from-generic-stalks",
+    "why": "Step 5 promotes reducedness of the generic stalk after every field extension to geometric reducedness of the already reduced C. This general scheme-theoretic criterion is absent from the current unit."
+   },
+   {
+    "node": "lem-zl-finite-separable-closure",
+    "why": "Step 6 takes geometric irreducibility over the relative separable algebraic closure, which equals L here. This general field-theoretic criterion is absent from the current unit."
+   },
+   {
+    "node": "lem-zl-generic-point-geometric-irreducibility",
+    "why": "Step 6 transfers geometric irreducibility from the generic residue field E to C. This general scheme-theoretic criterion is absent from the current unit."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Step 7 applies the finite-type dimension formula to the whole closed subsets of C, Y and T. This general dimension theorem is absent from the current unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separably-generated-separable",
+  "lem-zl-irreducible-dominant-generic-fibre",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-zl-finite-separable-closure",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-sc-closed-irreducible-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-ecc738d1b",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-ecc738d1b (reviewer sub-agent of L); spot-checked: PASS: read in full, no repairs. I read the item and all 24 distinct cited node statements. I checked them against Stacks 037Q (algebra.tex:11428), 054Q (varieties.tex:1446), 030U (algebra.tex:10152) and 030X. The delivery adds no new nodes, the statement and stmt_deps are unchanged, there is no SGA citation, and parent lem-sfb-equivariant-curve-pencil step 5 uses exactly these clauses. Previous head 3b51eaed9 was returned only by the landing tool ('completed in this project's DAG but not in the live DAG'), not for any mathematical fault. This head differs from it only by fuller wording in Step 2 (Bezout identity) and Step 6 (residue field at the generic point); the uses lists are identical. Step 1: a finite L/F has trdeg 0, so its basis is empty, so L/F is separable. Step 2 is genuinely elementary: t stays transcendental over L, E/L(t) is finite, P=QR, and Q(UR+VR')+Q'(VR)=UP+VP'=1, so E/L is separably generated of trdeg 1 and finitely generated. Step 3: dominance gives g(eta_T)=eta_Y; 0G4F gives an irreducible fibre; proper base change works for any base map, so C is proper and of finite type. Step 4: every x in C lies over the closed point of Spec L, so it is the unique lift of h(x) and has the same local ring, hence normal, reduced and integral. In the chart, A to D embeds into L to E, so 0 is not in S and the zero prime of S^{-1}D is the generic point of C. The L-structures agree because c∘π=g∘h. Step 5: 030U applies to E/L with S a field, which feeds the generic-stalk criterion. Step 6: the separable closure of L in E is L, so 037Q and 054Q apply, giving geometric integrality. Step 7: 0B1C plus the tower formula gives dim C=1, dim Y=trdeg_k F and dim T=trdeg_k F+1. Edge cases: F=L=k with E=k(t); an inseparable L/F, which the hypotheses exclude; a larger constant field, which Step 6's hypothesis excludes; imperfect L, where smoothness is correctly not claimed. I accept the 8 off-unit tool_uses as general tools the route needs. Maintainer note: if L promotes the item, it should land this head."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatingSteinGenericCurve",
+  "declaration": "AlgebraicGeometry.separating_stein_generic_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatingSteinGenericCurve.lean",
+  "statement": "theorem separating_stein_generic_curve (k F L E : Type u) [Field k] [Field F] [Field L] [Field E] [Algebra k F] [Algebra k L] [Algebra k E] [Algebra F L] [Algebra F E] [Algebra L E] [IsScalarTower k F L] [IsScalarTower k F E] [IsScalarTower k L E] [IsScalarTower F L E] (hEfg : (⊤ : IntermediateField k E).FG) (hFfg : (⊤ : IntermediateField k F).FG) (hsep : Algebra.IsSeparablyGenerated F E) (htrdeg : Algebra.trdeg F E = 1) [FiniteDimensional F L] (hclosed : ∀ a : E, IsAlgebraic L a → ∃ b : L, algebraMap L E b = a) {T Y : Scheme.{u}} [IsIntegral T] [IsIntegral Y] (t : T ⟶ Spec (CommRingCat.of k)) (y : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType t] [QuasiCompact t] [LocallyOfFiniteType y] [QuasiCompact y] (g : T ⟶ Y) [IsProper g] [IsDominant g] (hg : g ≫ y = t) (hT : ∀ x : T, IsDomain (T.presheaf.stalk x) ∧ IsIntegrallyClosed (T.presheaf.stalk x)) (eT : T.functionField ≃+* E) (eY : Y.functionField ≃+* L) (heT : Spec.map (CommRingCat.ofHom eT.toRingHom) ≫ T.fromSpecFunctionField ≫ t = Spec.map (CommRingCat.ofHom (algebraMap k E))) (heY : Spec.map (CommRingCat.ofHom eY.toRingHom) ≫ Y.fromSpecFunctionField ≫ y = Spec.map (CommRingCat.ofHom (algebraMap k L))) (hmap : ∀ a : Y.functionField, eT (@algebraMap Y.functionField T.functionField _ _ g.dominantFunctionFieldAlgebra a) = algebraMap L E (eY a)) (C : Scheme.{u}) (j : C ⟶ T) (c : C ⟶ Spec (CommRingCat.of L)) (hC : IsPullback j c g (Spec.map (CommRingCat.ofHom eY.toRingHom) ≫ Y.fromSpecFunctionField)) : Algebra.IsSeparable F L ∧ Algebra.IsSeparablyGenerated L E ∧ Algebra.trdeg L E = 1 ∧ IsProper c ∧ LocallyOfFiniteType c ∧ QuasiCompact c ∧ (∀ x : C, IsDomain (C.presheaf.stalk x) ∧ IsIntegrallyClosed (C.presheaf.stalk x)) ∧ GeometricallyIntegral c ∧ (∃ _ : IsIntegral C, ∃ eC : C.functionField ≃+* E, Spec.map (CommRingCat.ofHom eC.toRingHom) ≫ C.fromSpecFunctionField ≫ c = Spec.map (CommRingCat.ofHom (algebraMap L E))) ∧ topologicalKrullDim C = 1 ∧ topologicalKrullDim Y = (Cardinal.toENat (Algebra.trdeg k F) : WithBot ℕ∞) ∧ topologicalKrullDim T = (Cardinal.toENat (Algebra.trdeg k F) : WithBot ℕ∞) + 1",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-414ec3fb2",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read the item node, all 14 stmt_dep records with their exact declarations (IsSeparablyGenerated, dominantFunctionFieldAlgebra, fromSpecFunctionField, GeometricallyIntegral = geometrically IsIntegral, IsProper, LOFT+QC, trdeg, topologicalKrullDim, IsPullback), the module and report.md. Clause by clause: fields and towers, field-FG hypotheses, separable generation with trdeg 1 (finite basis forced by finite generation), FiniteDimensional F L, hclosed, integral finite-type T and Y, proper dominant k-morphism g, normality as stalk domain plus integrally closed, k-compatible eT/eY with the canonical generic-stalk map hmap, generic fibre as IsPullback along Spec.map eY ≫ fromSpecFunctionField; conclusions L/F separable, E/L separably generated trdeg 1, C proper finite type normal geometrically integral, function field E over L (equation with algebraMap L E), dimensions 1, trdeg_k F and trdeg_k F + 1 via toENat. Only node changes: lean record plus stmt_dep def-weil-pbc-separable-field-extension, which owns the IsSeparablyGenerated it uses. Statement verbatim; single sorry; no defs; docstrings carry source and blueprint id; no name collision; single universe u is forced. No compile needed (no changes)."
+ }
+}

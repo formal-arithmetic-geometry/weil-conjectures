@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-signed-line-scalar-pullback-naturality",
+ "kind": "statement",
+ "title": "Scalar-square naturality for given normalized signed pullback families",
+ "statement": "Under the same ringed-site assumptions and commuting coefficient square as [lem-pur-signed-line-scalar-pullback-square], assume the four lines, degree-one isomorphisms and scalar square, normalized signed scalar comparisons of [lem-pur-signed-line-scalar-tensor-tower], and given signed pullback families P,Q satisfying the predicates of [def-pur-signed-line-pullback-normalization-data]. Then their scalar square commutes in every integer degree. No families are constructed and no uniqueness is asserted.",
+ "stmt_deps": [
+  "def-pur-signed-line-pullback-normalization-data",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL (tensor pullback), 0GMX (internal-Hom pullback), 0FNY (finite free dual), 04J0 (localization); blueprint/latest prop-weil-twist-preserves.proof.md, tensor powers and internal Homs."
+ },
+ "proof": [
+  {
+   "text": "The unit of the module pullback adjunction is natural in module morphisms and in site objects and is semilinear on sections. For a basis section e of M on C/V, use the basis chart unit ≅ M|V, the localized pullback comparison, the pulled chart, and the canonical pulled-unit isomorphism to trivialize (FM)|U(V). The localization comparison unit equation shows that the pulled section of e maps to 1. Naturality of this trivialization proves that its restrictions are bases on every target slice object. Transport through the given isomorphism p.",
+   "uses": [
+    "lem-pur-ringed-site-pullback-localization-universes",
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-pur-ringed-site-module-pullback-exists-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a signed basis family E, define its target family degree by degree by applying P to the adjunction-unit section of E. The preceding basis transport proves the basis condition. The zero and positive recursion clauses follow directly from the normalization of P and E. At negative degrees the normalized pulled evaluation on the positive basis is a(1)=1. Naturality of the resulting functional on the target slice proves the same evaluation identity on every restricted target object. Thus the family is a signed basis family; similarly for Q.",
+   "uses": [
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-pur-ringed-site-pullback-localization-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a source cover trivializing L, with its signed bases E. Extend each restricted E across c to signed bases F of N using the scalar basis comparison. Their pulled P and Q images are signed bases of L′ and N′ by the preceding step. The degree-one assumed square, evaluated at E(1) and scalar 1, identifies c′ applied to the first target basis with the second. The normalized scalar comparisons B and B′ therefore carry all signed bases to each other. Test the desired equation on an arbitrary section x over V and scalar s. Sheaf separatedness for the pushforward of N′ lets us restrict along the source covering sieve. There x=r E(m); semilinearity of the adjunction unit and the scalar basis coefficient formula reduce both sides to b(ι(r)s) times the target basis and ι′(a(r))b(s) times the same basis. Multiplicativity of b and the coefficient-square hypothesis identify these coefficients. Sheaf separatedness gives the original equality.",
+   "uses": [
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-pullback-localization-universes",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-ringed-site-module-pullback-exists-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0 localization and adjunction-unit comparison; Tags 03EL and 0GMX tensor/dual normalization; completed Lean basis argument by U5."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of module sheaves preserves tensor product and unit, normalized on adjunction unit sections",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; pullbackObjFreeIso; pullbackIso. No theorem for normalized signed powers or arbitrary coefficient scalar squares.",
+   "date": "2026-10-24",
+   "verdict": "Use existing unit/dual APIs; the signed existence and naturality arguments remain separate."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.unit",
+   "results": "Six unit/free comparison lemmas, including pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. No signed comparison theorem.",
+   "date": "2026-10-24",
+   "verdict": "No exact replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "signedLinePower|SignedLinePullbackNormalized|pullback.*tensor",
+   "results": "Seven unrelated Mathlib hits. Repository search finds existing SignedLineScalarTensorTower, generic ModulePullbackTensorIso, and FiniteFreeDualPullback; no actual mixed-universe signed comparison theorem.",
+   "date": "2026-10-24",
+   "verdict": "Reuse existing dependencies and state only the two separate parts not already declared."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SignedLineScalarPullbackSquare",
+  "date": "2026-10-24",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-scalar-pullback-square",
+   "place": "Compatibility of given normalized families",
+   "via": [
+    "lem-pur-signed-line-scalar-pullback-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedLineScalarPullbackNaturality",
+  "file": "lean/Sheaf/Paper/SignedLineScalarPullbackNaturality.lean",
+  "declaration": "SheafOfModules.signedLineScalarPullbackSquare_of_normalized",
+  "statement": "theorem signedLineScalarPullbackSquare_of_normalized\n    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]\n    (_hcover : CoverPreserving J K U)\n    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    [∀ V : D, (K.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]\n    {R S : Sheaf J CommRingCat.{max u v w}}\n    {R' S' : Sheaf K CommRingCat.{max u v w}} (ι : R ⟶ S) (ι' : R' ⟶ S')\n    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶\n      (U.sheafPushforwardContinuous RingCat J K).obj\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))\n    (b : (sheafCompose J (forget₂ CommRingCat RingCat)).obj S ⟶\n      (U.sheafPushforwardContinuous RingCat J K).obj\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S'))\n    (_hab : (sheafCompose J (forget₂ CommRingCat RingCat)).map ι ≫ b =\n      a ≫ (U.sheafPushforwardContinuous RingCat J K).map\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).map ι'))\n    (L : ringedSiteModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))\n    (N : ringedSiteModules.{max u v w}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))\n    (L' : ringedSiteModules.{max u v w}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))\n    (N' : ringedSiteModules.{max u v w}\n      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S'))\n    (_hL : ∃ (I : Type u) (V : I → C), J.CoversTop V ∧\n      ∀ i : I, Nonempty (L.over (V i) ≅\n        unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over (V i))))\n    (_hN : ∃ (I : Type u) (V : I → C), J.CoversTop V ∧\n      ∀ i : I, Nonempty (N.over (V i) ≅\n        unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).over (V i))))\n    (_hL' : ∃ (I : Type u) (V : I → D), K.CoversTop V ∧\n      ∀ i : I, Nonempty (L'.over (V i) ≅\n        unit (((sheafCompose K (forget₂ CommRingCat RingCat)).obj R').over (V i))))\n    (_hN' : ∃ (I : Type u) (V : I → D), K.CoversTop V ∧\n      ∀ i : I, Nonempty (N'.over (V i) ≅\n        unit (((sheafCompose K (forget₂ CommRingCat RingCat)).obj S').over (V i))))\n    (c : changeOfRingsOfUniverses ι L ≅ N)\n    (c' : changeOfRingsOfUniverses ι' L' ≅ N')\n    (p : (ringedSitePullbackFunctor a\n      (module_pushforward_isRightAdjoint_of_universes a)).obj L ≅ L')\n    (q : (ringedSitePullbackFunctor b\n      (module_pushforward_isRightAdjoint_of_universes b)).obj N ≅ N')\n    (_hc : SignedLineScalarPullbackSquare ι ι' a b L N L' N' c c' p q)\n    (B : ∀ m : ℤ, changeOfRingsOfUniverses ι (signedLinePower.{u, v, w} L m) ≅\n      signedLinePower.{u, v, w} N m)\n    (B' : ∀ m : ℤ, changeOfRingsOfUniverses ι' (signedLinePower.{u, v, w} L' m) ≅\n      signedLinePower.{u, v, w} N' m)\n    (_hB : SignedLineComparisonNormalized.{u, v, w} ι L N c B)\n    (_hB' : SignedLineComparisonNormalized.{u, v, w} ι' L' N' c' B')\n    (P : ∀ m : ℤ, (ringedSitePullbackFunctor a\n      (module_pushforward_isRightAdjoint_of_universes a)).obj\n        (signedLinePower.{u, v, w} L m) ≅ signedLinePower.{u, v, w} L' m)\n    (Q : ∀ m : ℤ, (ringedSitePullbackFunctor b\n      (module_pushforward_isRightAdjoint_of_universes b)).obj\n        (signedLinePower.{u, v, w} N m) ≅ signedLinePower.{u, v, w} N' m)\n    (hP : SignedLinePullbackNormalized a L L' p P)\n    (hQ : SignedLinePullbackNormalized b N N' q Q) :\n    ∀ m : ℤ, SignedLineScalarPullbackSquare ι ι' a b\n      (signedLinePower.{u, v, w} L m) (signedLinePower.{u, v, w} N m)\n      (signedLinePower.{u, v, w} L' m) (signedLinePower.{u, v, w} N' m)\n      (B m) (B' m) (P m) (Q m)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-929d5",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T184859-L-3243522",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261025T204943-L-3065032",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

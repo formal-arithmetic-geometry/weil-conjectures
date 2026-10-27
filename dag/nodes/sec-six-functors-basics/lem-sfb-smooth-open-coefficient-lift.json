@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-smooth-open-coefficient-lift",
+ "kind": "statement",
+ "title": "Extend a prescribed lift across a smooth affine open over general coefficients",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\Lambda$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] with a specified residue-field isomorphism $\\Lambda/\\mathfrak m_\\Lambda\\cong k$. Let $A^\\prime\\twoheadrightarrow A$ be a surjective local $\\Lambda$-algebra homomorphism between commutative Artinian local $\\Lambda$-algebras, with specified residue-field identifications $A^\\prime/\\mathfrak m_{A^\\prime}\\cong k$ and $A/\\mathfrak m_A\\cong k$ as $\\Lambda$-algebras, inducing the identity on $k$. Here a local ring has exactly one maximal ideal and an Artinian ring has the descending chain condition on ideals. Let $X$ be a $k$-scheme [def-pc-scheme] covered by affine open subschemes $X=U\\cup V$, with $U\\cap V$ affine. Suppose that $U$ and $U\\cap V$ are smooth over $k$ [def-sbc-smooth-morphisms]. Let $Y\\to\\operatorname{Spec}A$ be flat [def-weil-flat-morphism] with a specified special-fibre isomorphism $\\iota:Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k\\cong X$ [def-pc-fibre-product]. For any open $W\\subseteq X$, write $Y_W$ for the open subscheme corresponding to $W$ under the underlying-space homeomorphism of the nilpotent special fibre. Suppose $Z\\to\\operatorname{Spec}A^\\prime$ is flat and an $A$-isomorphism $e:Z\\times_{\\operatorname{Spec}A^\\prime}\\operatorname{Spec}A\\cong Y_V$ is given. Then there exist a flat $A^\\prime$-scheme $Y^\\prime$, an $A$-isomorphism $\\alpha:Y^\\prime\\times_{\\operatorname{Spec}A^\\prime}\\operatorname{Spec}A\\cong Y$, and an $A^\\prime$-isomorphism $\\gamma:Y^\\prime_V\\cong Z$, such that $e\\circ\\gamma_A=\\alpha|_{Y_V}$. The special fibre of $Y^\\prime$ is identified with $X$ by $\\iota\\circ\\alpha_k$; this identification defines $Y^\\prime_V$, and $\\gamma_A$ denotes reduction to $A$. Empty opens, disconnected schemes and arbitrary dimensions are allowed.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZN (lemma-glueing-smooth), second assertion, specialized to U_1 smooth; situation-glueing and example-schemes. General coefficient category: section-general and formal-defos.tex, definition-CLambda."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=U\\cap V$, $K=\\ker(A^\\prime\\to A)$ and $\\mathfrak m^\\prime=\\mathfrak m_{A^\\prime}$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], the maximal ideals of $A$ and $A^\\prime$ are nilpotent; $K\\subseteq\\mathfrak m^\\prime$ is nilpotent too. On each affine chart, reduction by any of these ideals is $B\\to B/JB$ with $JB$ nilpotent. Every prime contains $JB$, so this is a thickening and a homeomorphism by [def-sbc-first-order-thickening]. Thus labelled opens are well defined and reduction preserves their labels. By [def-weil-flat-morphism], restrictions of a flat morphism to opens are flat, since their local structural homomorphisms are unchanged. The special fibre of $Y_U$ is the affine $U$, so [lem-weil-pbc-thickening-affine-scheme] makes $Y_U$ affine.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "def-sbc-first-order-thickening",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-thickening-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth; situation-glueing and lemma-open; nilpotent opens and affine deformations"
+   }
+  },
+  {
+   "text": "The special fibre $U$ is smooth, hence locally of finite presentation by [lem-pc-smooth-flat]. Apply [lem-sfb-flat-deformation-lfp] to $Y_U\\to\\operatorname{Spec}A$ and the nilpotent maximal ideal of $A$: $Y_U$ is locally of finite presentation over $A$. There is just one point of $\\operatorname{Spec}A$, with residue field $k$, and its fibre is $U$. Consequently [lem-pc-smooth-characterization] shows $Y_U\\to\\operatorname{Spec}A$ is smooth. Apply [lem-sfb-smooth-affine-quotient-lift] to the given surjection $A^\\prime\\to A$ and this affine smooth scheme, obtaining an affine smooth $A^\\prime$-scheme $L$ and an $A$-isomorphism $a:L_A\\xrightarrow{\\sim}Y_U$. The scheme $L$ is flat by [lem-pc-smooth-flat]. Its special fibre is labelled by $U$ using $\\iota a_k$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-flat-deformation-lfp",
+    "lem-pc-smooth-characterization",
+    "lem-sfb-smooth-affine-quotient-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07M8, proposition-lift-smooth (2); examples-defos.tex lemma-lci-unobstructed specialized to the smooth U-piece; lfp ascent is More on Morphisms Tag 06AG, lemma-deform-property (13)"
+   }
+  },
+  {
+   "text": "Let $D\\subseteq L$ and $E\\subseteq Z$ be the opens labelled by $W$, using $a$ and $e$ respectively. Open immersions remain open immersions under base change by [lem-weil-pbc-open-immersion-base-change]. Hence $a$ and $e$ restrict to $a_W:D_A\\xrightarrow{\\sim}Y_W$ and $e_W:E_A\\xrightarrow{\\sim}Y_W$. Both $D$ and $E$ have special fibre $W$, so they are affine by [lem-weil-pbc-thickening-affine-scheme]. They are flat because they are opens of the flat schemes $L,Z$, by [def-weil-flat-morphism]. The smooth special fibre $W$ is locally of finite presentation by [lem-pc-smooth-flat]; [lem-sfb-flat-deformation-lfp] and [lem-pc-smooth-characterization], now over $A^\\prime$, show that $E\\to\\operatorname{Spec}A^\\prime$ is smooth. This uses no prior finite-presentation hypothesis on $Z$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "def-weil-flat-morphism",
+    "lem-pc-smooth-flat",
+    "lem-sfb-flat-deformation-lfp",
+    "lem-pc-smooth-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, matching the two affine overlap deformations; More on Morphisms Tags 06AD and 06AG"
+   }
+  },
+  {
+   "text": "Set $h_0=e_W^{-1}a_W:D_A\\xrightarrow{\\sim}E_A$ and regard its composite with $E_A\\to E$ as an $A^\\prime$-morphism. Write $D=\\operatorname{Spec}B$ and choose $N\\geq1$ with $K^N=0$. Start with this map on $D_1=\\operatorname{Spec}(B/KB)$. For $1\\leq r<N$, the inclusion $D_r\\subseteq D_{r+1}=\\operatorname{Spec}(B/K^{r+1}B)$ has square-zero ideal $K^rB/K^{r+1}B$, since $2r\\geq r+1$. Smoothness of $E$ gives the lifting property of [def-sbc-smooth-morphisms] and [def-sbc-formally-smooth]. Applying it successively yields compatible $A^\\prime$-maps $D_r\\to E$, ending in $h:D=D_N\\to E$ with reduction $h_0$ (as a map to $E_A$ by the fibre-product property).",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H0, definition-formally-smooth; iterate its first order affine lifting condition along powers of K"
+   }
+  },
+  {
+   "text": "The lifted map is an isomorphism, not merely a morphism. Write $E=\\operatorname{Spec}C$. By [lem-weil-pbc-flat-morphism-affine-criterion], $B,C$ are flat $A^\\prime$-modules. The ring map $h^*:C\\to B$ reduces to an isomorphism modulo $K$, hence modulo $\\mathfrak m^\\prime$. Choose a $k$-basis $(\\bar c_i)$ of $C/\\mathfrak m^\\prime C$ and representatives $c_i\\in C$. Their images $h^*(c_i)$ reduce to a basis of $B/\\mathfrak m^\\prime B$. Apply [lem-weil-pbc-local-artinian-basis-when-flat] to both flat modules over the same local ring $A^\\prime$: the two chosen families are bases over $A^\\prime$. The linear map $h^*$ sends one basis to the other, so its inverse sends $h^*(c_i)$ to $c_i$. Thus $h^*$ is bijective, and its inverse preserves products and the unit by applying the injective $h^*$. Therefore $h$ is an $A^\\prime$-isomorphism with $e_Wh_A=a_W$. This argument includes the zero modules when $W$ is empty.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-local-artinian-basis-when-flat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051F, lemma-local-artinian-basis-when-flat; basis comparison for the two flat affine overlaps"
+   }
+  },
+  {
+   "text": "Glue $L$ and $Z$ along $h:D\\xrightarrow{\\sim}E$ by [lem-weil-pbc-glue-schemes], with reverse transition $h^{-1}$. For two pieces every cocycle identity is an identity or $h^{-1}h=1$ or $hh^{-1}=1$. Obtain open immersions $j_L:L\\to Y^\\prime$ and $j_Z:Z\\to Y^\\prime$ whose images cover and whose intersection is exactly $D\\cong E$, with $j_L|_D=j_Zh$. The structural maps glue by [lem-weil-pbc-scheme-morphism-gluing] because $h$ is over $A^\\prime$. Flatness of $Y^\\prime$ follows from [def-weil-flat-morphism]: at each point its local structural map is that of one of the flat open pieces. After reduction to $A$, these pieces still form an open cover by [lem-weil-pbc-open-immersion-base-change] (inverse images of a covering family cover). The maps $a:L_A\\to Y_U$ and $e:Z_A\\to Y_V$ agree on the overlap because $e_Wh_A=a_W$. They glue to $\\alpha:Y^\\prime_A\\to Y$. Conversely the maps $j_{L,A}a^{-1}$ on $Y_U$ and $j_{Z,A}e^{-1}$ on $Y_V$ agree: $h_Aa_W^{-1}=e_W^{-1}$. They glue to an inverse. The composites are identities on the open covers, hence identities by uniqueness in [lem-weil-pbc-scheme-morphism-gluing]. The same uniqueness verifies that the maps are over $A$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYZ, lemma-glueing, construction of the quasi-inverse; Schemes Tags 01JB and 01JC; explicit verification of the reduction marking"
+   }
+  },
+  {
+   "text": "Identify the special fibre of $Y^\\prime$ with $X$ by $\\iota\\alpha_k$. The open $j_Z(Z)$ then has label $V$, since $\\alpha j_{Z,A}=e$. Nilpotent reduction is a homeomorphism as in step 1, so this uniquely specifies the open $Y^\\prime_V$: it equals $j_Z(Z)$. Define $\\gamma:Y^\\prime_V\\xrightarrow{\\sim}Z$ by inverting this open-copy isomorphism. Restricting $\\alpha j_{Z,A}=e$ gives $e\\gamma_A=\\alpha|_{Y_V}$. If $U$ is empty, the result is $Z$; if $V$ or $W$ is empty, the same gluing uses the unique empty overlap. No connectedness or dimension bound was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZN, lemma-glueing-smooth, second assertion: the prescribed-lift compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "lem-pc-smooth-flat",
+  "lem-sfb-flat-deformation-lfp",
+  "lem-sfb-smooth-affine-quotient-lift",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-local-artinian-basis-when-flat",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-pc-smooth-characterization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZN, lemma-glueing-smooth, second assertion for smooth U_1, with the constructive gluing of Tag 0DYZ. Smooth affine existence is 07M8; the overlap rigidity is expanded using formal smoothness and 051F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\"",
+   "results": "{\"t\": \"2026-10-22T06:23:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Deformation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching source text"
+  },
+  {
+   "tool": "grep",
+   "query": "unobstructed|DeformationCategory|deformation.*[Ll]ift|[Ll]ift.*deformation",
+   "results": "{\"t\": \"2026-10-22T06:23:58Z\", \"tool\": \"grep\", \"query\": \"unobstructed|DeformationCategory|deformation.*[Ll]ift|[Ll]ift.*deformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching source text"
+  },
+  {
+   "tool": "grep",
+   "query": "Syntomic|syntomic|[Dd]eformation.*[Gg]lu|[Gg]lu.*[Dd]eformation",
+   "results": "{\"t\": \"2026-10-22T06:24:50Z\", \"tool\": \"grep\", \"query\": \"Syntomic|syntomic|[Dd]eformation.*[Gg]lu|[Gg]lu.*[Dd]eformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching source text"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing deformations of two affine open subschemes across a smooth affine intersection gives a smooth restriction functor of deformation categories",
+   "results": "{\"t\": \"2026-10-22T06:25:00Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing deformations of two affine open subschemes across a smooth affine intersection gives a smooth restriction functor of deformation categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι\"], \"digest\": \"9cef508bee37588e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern formal smoothness of a fixed algebra, ordinary scheme gluing/restriction, or flatness; none constructs lifts of flat scheme deformations over varying Artinian coefficient rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction functor on scheme deformation groupoids is smooth for two affine opens with a smooth affine overlap",
+   "results": "{\"t\": \"2026-10-22T06:25:50Z\", \"tool\": \"leansearch\", \"query\": \"The restriction functor on scheme deformation groupoids is smooth for two affine opens with a smooth affine overlap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.restrictFunctor\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.affineOpensRestrict_apply_coe_coe\"], \"digest\": \"6974147e04f3c32b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern formal smoothness of a fixed algebra, ordinary scheme gluing/restriction, or flatness; none constructs lifts of flat scheme deformations over varying Artinian coefficient rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a flat deformation of a union of two affine opens with one smooth and their intersection smooth affine, extend any prescribed lift on the other open over an Artinian local ring",
+   "results": "{\"t\": \"2026-10-22T06:26:00Z\", \"tool\": \"leanfinder\", \"query\": \"Given a flat deformation of a union of two affine opens with one smooth and their intersection smooth affine, extend any prescribed lift on the other open over an Artinian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"03c914691fb67c43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern formal smoothness of a fixed algebra, ordinary scheme gluing/restriction, or flatness; none constructs lifts of flat scheme deformations over varying Artinian coefficient rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a prescribed flat scheme deformation on one affine open across a smooth affine open over a surjection of Artinian local coefficient rings",
+   "results": "{\"t\": \"2026-10-23T09:28:59Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a prescribed flat scheme deformation on one affine open across a smooth affine open over a surjection of Artinian local coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"70bb67d7a9db0029\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-23T09:29:00Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Algebra.Smooth.formallySmooth\", \"Algebra.Smooth.mk\", \"Algebra.smooth_iff\", \"Algebra.Smooth.of_formallySmooth_fiber\"], \"digest\": \"900b37efb9d42659\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  },
+  {
+   "tool": "grep",
+   "query": "deformation|DeformationCategory|glue.*[Ll]ift|[Ll]ift.*glue",
+   "results": "{\"t\": \"2026-10-23T09:29:00Z\", \"tool\": \"grep\", \"query\": \"deformation|DeformationCategory|glue.*[Ll]ift|[Ll]ift.*glue\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\"], \"digest\": \"03f7652d779d7412\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a flat deformation of a scheme by gluing smooth affine open lifts over local Artinian rings",
+   "results": "{\"t\": \"2026-10-23T09:30:40Z\", \"tool\": \"leansearch\", \"query\": \"Lift a flat deformation of a scheme by gluing smooth affine open lifts over local Artinian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"Algebra.FormallySmooth.lift\", \"AlgebraicGeometry.Scheme.Pullback.gluedLift_p1\", \"AlgebraicGeometry.IsOpenImmersion.lift.congr_simp\"], \"digest\": \"f32ef7e5645a2e47\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed isomorphism between reductions of two flat affine smooth schemes lifts over a nilpotent extension and permits gluing deformations",
+   "results": "{\"t\": \"2026-10-23T09:30:45Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed isomorphism between reductions of two flat affine smooth schemes lifts over a nilpotent extension and permits gluing deformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified\", \"Algebra.Smooth.formallySmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"7f2db05aaf21816e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map between flat modules is an isomorphism if it is an isomorphism modulo a nilpotent ideal",
+   "results": "{\"t\": \"2026-10-23T09:35:12Z\", \"tool\": \"leanfinder\", \"query\": \"A map between flat modules is an isomorphism if it is an isomorphism modulo a nilpotent ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"Module.FaithfullyFlat\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"Module.Flat.of_retract\", \"Module.flat_of_isLocalized_span\", \"Module.faithfullyFlat_iff\", \"Module.Flat.iff_forall_exists_factorization\"], \"digest\": \"bd1651d07461297e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*(bijective|Bijective)|[Bb]ijective.*nilpotent|bijective.*quotient|quotient.*bijective",
+   "results": "{\"t\": \"2026-10-23T09:35:12Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*(bijective|Bijective)|[Bb]ijective.*nilpotent|bijective.*quotient|quotient.*bijective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Jacobson/Polynomial.lean\"], \"digest\": \"88d92877174031e3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Ideal.Quotient",
+   "results": "{\"t\": \"2026-10-23T09:36:48Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Ideal.Quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.Quotient'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern lifting homomorphisms, ordinary gluing, flatness, or smoothness of a fixed morphism, rather than the marked extension of scheme deformations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-unobstructed",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZN (lemma-glueing-smooth), second assertion, specialized to U_1 smooth; situation-glueing and example-schemes. General coefficient category: section-general and formal-defos.tex, definition-CLambda.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-open-coefficient-lift",
+  "worker": "stage1",
+  "summary": "Q26: split by relative smooth affine existence, explicit lift and basis proof of the marked overlap isomorphism, then open gluing with inverse reduction maps. Retain the general Artinian Lambda-coefficient statement; no coefficient-field section is assumed. One new statement-only node, searched with both semantic services, Loogle and source grep.",
+  "blueprint": "Supporting deformation prerequisite attached to the recorded direct-image alteration branch: realize Tag 0DZN with U_1=U smooth and prescribed lift on U_2=V. Read current latest sk-thm-sf-ctf-stability and direct-images proof; this is a local prerequisite, with no replacement of the chapter/unit theorem. ancestor prints None and the inherited from.node=null and via are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-9372379f6",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-9372379f6 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full and found no mathematical fault; one route fault in steps 2 and 3 is repaired. The item statement is identical to live and side-live, so nothing was weakened, and no other group has split it. No SGA is cited. New node lem-sfb-smooth-affine-quotient-lift says exactly what Stacks 07M8(2) says (smoothing.tex l.448: a smooth algebra over R/I lifts to a smooth R-algebra for any surjection) in affine-scheme form. It is not a duplicate of 07CK lem-weil-pbc-standard-smooth-quotient-lift, which covers only standard smooth algebras, nor of the Popescu lifting node or lem-sfb-affine-smooth-trivialization-lift. It does not restate a clause of the item. All 7 steps check: 00J8 nilpotence; 06AD for affineness of Y_U, D and E; 06AG(13) lfp plus the single fibre over Spec A or Spec A' for smoothness; iterating formal smoothness (02H0) over first-order thickenings because (K^r)^2 lies in K^{r+1}; 051F residue-basis lifting, which also covers infinite bases, so the overlap map is an isomorphism; two-piece gluing (01JB/01JC/01JJ) with explicit inverse maps; and the marking equation e∘γ_A = α|_{Y_V}. Edge cases U, V or W empty and mixed characteristic all work. proof_deps equals the union of the steps' uses. FIX (C8, route): steps 2 and 3 cite sbc-lem-smooth-criterion, which is unsplit in unit sk-def-smooth; that unit is outside the transitive route of sk-thm-sf-ctf-stability and was not declared as a tool use. The two declared tool_uses, both in sk-thm-p1, are already in the route and were not needed. I replaced the citation with the in-route lem-pc-smooth-characterization (for an lfp morphism, smooth iff flat with smooth fibres; lfp is proved earlier in both steps) and set split_report.tool_uses to []. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-open-coefficient-lift.json. Maintainer note: the existing split lem-sfb-smooth-open-deformation-lift (NN) is the special case of this item over k-algebras; that overlap predates this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothOpenCoefficientLift",
+  "declaration": "AlgebraicGeometry.exists_smooth_open_coefficient_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothOpenCoefficientLift.lean",
+  "statement": "theorem exists_smooth_open_coefficient_lift (k : Type u) (Λ : Type v) (A' A : Type u) [Field k] [CommRing Λ] [IsLocalRing Λ] [IsNoetherianRing Λ] [Algebra Λ k] (ρΛ : IsLocalRing.ResidueField Λ ≃ₐ[Λ] k) [CommRing A'] [IsLocalRing A'] [IsArtinianRing A'] [Algebra Λ A'] [CommRing A] [IsLocalRing A] [IsArtinianRing A] [Algebra Λ A] (ρ' : IsLocalRing.ResidueField A' ≃ₐ[Λ] k) (ρ : IsLocalRing.ResidueField A ≃ₐ[Λ] k) (φ : A' →ₐ[Λ] A) [IsLocalHom φ.toRingHom] (hφ : Function.Surjective φ) (hresidue : ∀ a : A', ρ (IsLocalRing.residue A (φ a)) = ρ' (IsLocalRing.residue A' a)) (X : Scheme.{u}) (x : X ⟶ Spec (.of k)) (U V : X.Opens) (hcover : U ⊔ V = ⊤) (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hUV : IsAffineOpen (U ⊓ V)) [Smooth (U.ι ≫ x)] [Smooth ((U ⊓ V).ι ≫ x)] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of A)) [Flat y] (ι : pullback y (Spec.map (CommRingCat.ofHom (ρ.toRingHom.comp (IsLocalRing.residue A)))) ≅ X) (hι : ι.hom ≫ x = pullback.snd y (Spec.map (CommRingCat.ofHom (ρ.toRingHom.comp (IsLocalRing.residue A))))) (VY : Y.Opens) (hVY : (ι.inv ≫ pullback.fst y (Spec.map (CommRingCat.ofHom (ρ.toRingHom.comp (IsLocalRing.residue A))))) ⁻¹ᵁ VY = V) (Z : Scheme.{u}) (z : Z ⟶ Spec (.of A')) [Flat z] (e : pullback z (Spec.map (CommRingCat.ofHom φ.toRingHom)) ≅ VY.toScheme) (he : e.hom ≫ VY.ι ≫ y = pullback.snd z (Spec.map (CommRingCat.ofHom φ.toRingHom))) : ∃ (Y' : Scheme.{u}) (y' : Y' ⟶ Spec (.of A')), Flat y' ∧ ∃ α : pullback y' (Spec.map (CommRingCat.ofHom φ.toRingHom)) ≅ Y, α.hom ≫ y = pullback.snd y' (Spec.map (CommRingCat.ofHom φ.toRingHom)) ∧ ∃ (V' : Y'.Opens) (γ : V'.toScheme ≅ Z), γ.hom ≫ z = V'.ι ≫ y' ∧ (ι.inv ≫ pullback.fst y (Spec.map (CommRingCat.ofHom (ρ.toRingHom.comp (IsLocalRing.residue A)))) ≫ α.inv ≫ pullback.fst y' (Spec.map (CommRingCat.ofHom φ.toRingHom))) ⁻¹ᵁ V' = V ∧ pullback.fst z (Spec.map (CommRingCat.ofHom φ.toRingHom)) ≫ γ.inv ≫ V'.ι = e.hom ≫ VY.ι ≫ α.inv ≫ pullback.fst y' (Spec.map (CommRingCat.ofHom φ.toRingHom))",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7f0aa933",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: Λ Noetherian local with Λ-alg residue iso (universe v), A'/A Artinian local Λ-algebras with Λ-alg residue markings, surjective local φ with hresidue, U/V/U∩V affine, U and U∩V smooth, Y flat with ι over k, VY labelled by preimage = V, Z flat with e over A; conclusion Y' flat, α over A, V' labelled via ι∘α_k, γ over A', compatibility as Z_A→Y' equation, equivalent to e∘γ_A=α|_{Y_V} because Y'_A→Y' is a closed immersion (mono). Edge cases (empty opens, empty X, φ iso, mixed char) admitted; no extra assumptions; universes natural. lean.statement verbatim; delivered node differs from live only in lean; imports follow brief-stage2 l.114 and all exist; no duplicate declaration; docstrings with source/blueprint and 7 proof steps; sorry only; report sections present. No changes, no compile run."
+ }
+}

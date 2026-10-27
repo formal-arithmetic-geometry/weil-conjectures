@@ -1,0 +1,331 @@
+{
+ "id": "lem-pur-legacy-rational-tensor-pentagon",
+ "kind": "statement",
+ "title": "Untransported tensor coherence on the specified older raw rational stages",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an arbitrary scheme $Y$, without a structure map to $k$. Let $E,L,M,N$ be finite extensions of $\\mathbf Q_\\ell$, equipped with $\\mathbf Q_\\ell$-algebra homomorphisms $i:E\\to L$, $j:L\\to M$, $h:M\\to N$ [def-weil-l-adic-coefficient-extension]. For each such field $F$, let $\\mathcal A_F^{\\mathrm{old}}$ be exactly $\\mathrm{boundedConstructibleDerivedCompleteIntegralCategory}(D,\\ell,\\ell\\ne p,F,Y)$: the full category of derived-complete integral complexes whose reductions by the specified $\\mathrm{integralDerivedReduction}$ are finite-torsion constructible in a single finite cohomological interval independent of the positive reduction level [def-weil-derived-complete-integral-detailed]. Use its raw Hom scalar localization $C_F^{\\mathrm{old}}=\\mathcal A_F^{\\mathrm{old}}[1/\\varpi_F]=\\mathrm{rationalConstructibleCategory}(D,\\ell,\\ell\\ne p,F,Y)$ [def-weil-rationalization-karoubi]. Write $T_i=\\mathrm{rationalScalarExtension}(D,\\ell,\\ell\\ne p,E,Y,L,i)$, and similarly for every composite map. Let\n$$a_{j,i}:T_jT_i\\xrightarrow{\\sim}T_{j\\circ i}$$\nbe precisely $\\mathrm{rationalConstructibleScalarComp}$, the canonical tensor associator of [lem-weil-scalar-extension-composition] on this older presentation, before transport to any separately named composite coefficient map. Then for every $K\\in C_E^{\\mathrm{old}}$,\n$$T_h(a_{j,i,K})\\,;\\,a_{h,j\\circ i,K}\n=a_{h,j,T_iK}\\,;\\,a_{h\\circ j,i,K},$$\nwhere semicolons compose in the written order, and the two triple composite coefficient maps are identified by associativity of function composition. This includes identity coefficient maps and repeated fields. No identification of this integral predicate with an intrinsic or other integral presentation is part of the assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Step (4), tensor associativity and its pentagon; specified older rational interface read from lean/Sheaf/Paper/ScalarExtensionComposition.lean:1464-1553, rationalConstructibleScalar_coherence, third conjunct. The source here is the retained tensor construction, not an identification with the intrinsic integral predicate."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordinary realization lemma for each of $i,j,h$ and all their composites. Write $B_i$ for its exact ordinary module-sheaf scalar functor, $J_i$ for its restriction after deriving, $S_i$ for its raw rational localization and $c_i:S_i\\simeq T_i$ for the specified normalized completion comparison. All these objects use the older predicate, on arbitrary $Y$. Completed coefficient maps respect composition: after each finite quotient projection both maps are induced by the same composite of valuation-ring maps; the defining limit therefore makes them equal. This also applies to identity maps.",
+   "uses": [
+    "lem-pur-legacy-ordinary-scalar-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Step (4), tensor associativity and its pentagon; retained legacy ScalarExtensionComposition construction"
+   }
+  },
+  {
+   "text": "The ordinary scalar comparisons of the system-scalar lemma give $b_{j,i}:B_jB_i\\simeq B_{ji}$ with $v\\otimes(u\\otimes x)\\mapsto v\\widehat j(u)\\otimes x$. Their inverses send $w\\otimes x$ to $w\\otimes(1\\otimes x)$: the displayed forward formula takes the latter to $w\\otimes x$, so the inverse equations force this value. Compare the inverse paths of the ordinary pentagon. Both send $w\\otimes x$ to $w\\otimes(1\\otimes(1\\otimes x))$. This determines the maps: linearity reduces $w\\otimes x$ to $1\\otimes x$, additivity covers sums in the presheaf tensor, and the universal property of its sheafification extends equality uniquely to sheaf morphisms. Thus $B_h(b_{j,i});b_{h,ji}=b_{h,j}B_i;b_{hj,i}$, including repeated fields.",
+   "uses": [
+    "lem-pur-system-scalar-coherence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; tensor-product paragraph and Tag 0GMW, lemma-sheafification-tensor; blueprint step (4)"
+   }
+  },
+  {
+   "text": "Apply exact derived transformation pasting to the four abelian module-sheaf categories and the six exact ordinary scalar functors from step 1. Its hypothesis is precisely the equality of composites and whiskerings established in step 2. The induced comparisons are the inverse exact-derived compositor followed by the derived ordinary $b$, hence exactly integralOrdinaryDerivedScalarComp. Consequently their pentagon holds on every object of the unbounded derived category. Restrict to $\\mathcal A_E^{\\rm old}$: step 1 ensures every intermediate object lies in the required older subcategory. The restricted associators are integralConstructibleScalarComp, whose hom and inverse are the same ambient derived arrows. The full-subcategory inclusion is faithful by definition, so its equality of ambient arrows is the equality of these integral arrows.",
+   "uses": [
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-pur-legacy-ordinary-scalar-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; normalized pasting statement and ScalarExtensionComposition.lean:931-1020"
+   }
+  },
+  {
+   "text": "Let $A_{j,i}$ be rationalOrdinaryScalarComp. By its defining component formula it is the restricted integral associator tensored with $1$. Every raw object is an integral object, and $S_h(f\\otimes1)=J_h(f)\\otimes1$ by the ordinary realization lemma. In the raw Hom localization, $(f\\otimes1);(g\\otimes1)=(f;g)\\otimes1$ by bilinear composition. Tensoring the integral equality of step 3 with $1$ therefore gives $S_h(A_{j,i,K});A_{h,ji,K}=A_{h,j,S_iK};A_{hj,i,K}$ at every raw object. This uses preservation of equality by localization, not faithfulness of localization.",
+   "uses": [
+    "lem-pur-legacy-ordinary-scalar-realization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Step (4), tensor associativity and its pentagon; retained legacy ScalarExtensionComposition construction"
+   }
+  },
+  {
+   "text": "Expand the definition of rationalConstructibleScalarComp. With composition in the written order it gives, for every pair of maps $u,v$,\n$$a_{v,u,K}=c_{v,T_uK}^{-1};S_v(c_{u,K}^{-1});A_{v,u,K};c_{vu,K}.$$\nHere $A$ is the localized restricted ordinary derived associator from step 4, and the $c$ are exactly those of step 1. This is the four-factor component formula for whiskering and composing the natural isomorphisms in the definition, so it introduces no new choice of comparison. Identify $(hj)i=h(ji)$ by associativity of the algebra-map functions.",
+   "uses": [
+    "lem-pur-legacy-ordinary-scalar-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Step (4), tensor associativity and its pentagon; retained legacy ScalarExtensionComposition construction"
+   }
+  },
+  {
+   "text": "Put $P=c_{h,T_jT_iK}^{-1};S_h(c_{j,T_iK}^{-1});S_hS_j(c_{i,K}^{-1})$. Substitute step 5 in the left pentagon path. Naturality of $c_h$ moves $T_h(a_{j,i,K})$ across $c_h^{-1}$; cancel the adjacent $c_hc_h^{-1}$ and $S_h(c_{ji})S_h(c_{ji}^{-1})$. The result is $P;S_h(A_{j,i,K});A_{h,ji,K};c_{hji,K}$. In the right path the adjacent $c_{hj,T_iK}c_{hj,T_iK}^{-1}$ cancel. Naturality of $A_{h,j}$ at $c_{i,K}^{-1}:T_iK\\to S_iK$ says\n$$A_{h,j,T_iK};S_{hj}(c_{i,K}^{-1})=S_hS_j(c_{i,K}^{-1});A_{h,j,S_iK}.$$\nThe expanded right path is therefore $P;A_{h,j,S_iK};A_{hj,i,K};c_{hji,K}$. Step 4 equates the two middle factors. These equalities use only functoriality, naturality and inverse equations. They impose no distinctness of the fields and remain valid for identity maps, zero objects and the empty scheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "Step (4), tensor associativity and its pentagon; retained legacy ScalarExtensionComposition construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-legacy-ordinary-scalar-realization",
+  "lem-pur-system-scalar-coherence",
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-exact-derived-transformation-pasting",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Step (4), with the explicit older ordinary/derived/raw/conjugation proof in lean/Sheaf/Paper/ScalarExtensionComposition.lean:260-306, 776-814, 931-990, 1256-1311, 1350-1548."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|extendScalarsComp|rationalConstructibleScalar",
+   "results": "OK 7 hits; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean (Mathlib/Algebra/Category/ModuleCat)",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat scalar coherence, graded/localized monoidal coherence and adic module completion do not state coherence for these specified older completed constructible sheaf functors; deriving that identification is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pentagon and unit coherence for scalar extension on rational constructible derived complete l-adic sheaf categories on an arbitrary scheme",
+   "results": "OK 8 hits; CommRingCat.moduleCatExtendScalarsPseudofunctor, ModuleCat.ExtendRestrictScalarsAdj.unit, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, CategoryTheory.Presheaf.coherentExtensiveEquivalence_unitIso, ModuleCat.ExtendRestrictScalarsAdj.counit_app, LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat scalar coherence, graded/localized monoidal coherence and adic module completion do not state coherence for these specified older completed constructible sheaf functors; deriving that identification is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "OK 12 hits; ModuleCat.extendScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat scalar coherence, graded/localized monoidal coherence and adic module completion do not state coherence for these specified older completed constructible sheaf functors; deriving that identification is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor associators of raw rationalized bounded constructible derived complete integral categories satisfy the pentagon for arbitrary finite coefficient field algebra maps",
+   "results": "OK 8 hits; CategoryTheory.GradedObject.Monoidal.pentagon, CategoryTheory.GradedObject.Monoidal.ιTensorObj₃'_associator_hom_assoc, CategoryTheory.GradedObject.Monoidal.ιTensorObj₃_associator_inv_assoc, CategoryTheory.Localization.Monoidal.pentagon, CategoryTheory.GradedObject.Monoidal.ιTensorObj₃_associator_inv, CategoryTheory.GradedObject.Monoidal.pentagon_inv, CategoryTheory.GradedObject.Monoidal.ιTensorObj₃'_associator_hom, CategoryTheory.GradedObject.Monoidal.pentagon_inv_assoc",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat scalar coherence, graded/localized monoidal coherence and adic module completion do not state coherence for these specified older completed constructible sheaf functors; deriving that identification is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of scalar extension for derived complete sheaves remains coherent after localizing Hom groups by a uniformizer",
+   "results": "OK 8 hits; ModuleCat.extendScalars_assoc', SheafOfModules.map_ιFree_mapFree_hom_assoc, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, localCohomology.diagram, AdicCompletion.instIsScalarTower, AdicCompletion.instIsScalarTower_1, AdicCompletion.map_ext''",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat scalar coherence, graded/localized monoidal coherence and adic module completion do not state coherence for these specified older completed constructible sheaf functors; deriving that identification is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalConstructibleScalar|boundedConstructibleDerivedCompleteIntegralCategory|StageSystem",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat scalar coherence, graded/localized monoidal coherence and adic module completion do not state coherence for these specified older completed constructible sheaf functors; deriving that identification is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pentagon coherence of canonical scalar extension associators on raw rationalized derived complete constructible sheaves",
+   "results": {
+    "t": "2026-10-27T07:51:36Z",
+    "tool": "leanfinder",
+    "query": "Pentagon coherence of canonical scalar extension associators on raw rationalized derived complete constructible sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.extendScalars_assoc'",
+     "SheafOfModules.map_ιFree_mapFree_hom_assoc",
+     "ModuleCat.extendScalars_assoc",
+     "ModuleCat.extendScalars_assoc_assoc",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "SheafOfModules.ιFree_mapFree_inv_assoc",
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "digest": "333a5d03081278c2"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat associativity and monoidal localization do not state the specified older completed constructible raw scalar pentagon."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": {
+    "t": "2026-10-27T07:51:37Z",
+    "tool": "loogle",
+    "query": "ModuleCat.extendScalars",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ModuleCat.extendScalars",
+     "ModuleCat.instIsLeftAdjointExtendScalars",
+     "ModuleCat.extendRestrictScalarsAdj",
+     "ModuleCat.extendScalarsId",
+     "ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+     "ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+     "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars"
+    ],
+    "digest": "75b3fad4f701d582"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat associativity and monoidal localization do not state the specified older completed constructible raw scalar pentagon."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalConstructibleScalar|mapDerivedCategoryCompNatIso_cocycle",
+   "results": {
+    "t": "2026-10-27T07:51:37Z",
+    "tool": "grep",
+    "query": "rationalConstructibleScalar|mapDerivedCategoryCompNatIso_cocycle",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat associativity and monoidal localization do not state the specified older completed constructible raw scalar pentagon."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence of tensor associators after completed scalar extension and localization of morphism groups",
+   "results": {
+    "t": "2026-10-27T07:52:23Z",
+    "tool": "leansearch",
+    "query": "Coherence of tensor associators after completed scalar extension and localization of morphism groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.associator_hom",
+     "CategoryTheory.Localization.Monoidal.associator_hom_app",
+     "CategoryTheory.Localization.Monoidal.triangle_aux₁_assoc",
+     "CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc",
+     "ModuleCat.extendScalars_assoc'",
+     "CategoryTheory.MonoidalCoherence.assoc",
+     "CategoryTheory.Localization.Monoidal.associator",
+     "CategoryTheory.Mathlib.Tactic.MonTauto.associator_hom_comp_tensorHom_tensorHom_assoc"
+    ],
+    "digest": "c6a72e93a7506691"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat associativity and monoidal localization do not state the specified older completed constructible raw scalar pentagon."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw Hom scalar localization preserves tensor associativity equations for constructible derived complete integral sheaves",
+   "results": {
+    "t": "2026-10-27T07:52:25Z",
+    "tool": "leanfinder",
+    "query": "Raw Hom scalar localization preserves tensor associativity equations for constructible derived complete integral sheaves",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.Presentation.mapRelations_mapGenerators_assoc",
+     "SheafOfModules.map_ιFree_mapFree_hom_assoc",
+     "IsLocalizedModule.map_lTensor",
+     "SheafOfModules.ιFree_mapFree_inv_assoc",
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "ModuleCat.Tilde.sections_smul_localizations_def",
+     "CategoryTheory.Localization.Monoidal.tensor_comp_assoc",
+     "CategoryTheory.Sheaf.monoidalCategory"
+    ],
+    "digest": "c50fe22acd534667"
+   },
+   "date": "2026-10-27",
+   "verdict": "no match: ordinary ModuleCat associativity and monoidal localization do not state the specified older completed constructible raw scalar pentagon."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-general-legacy-stage-coherence",
+  "date": "2026-10-27",
+  "group": "NP"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained owning proof argument 5, before equality transport: normalized tensor pentagon rationalConstructibleScalar_coherence used in AlgebraicallyClosedCoefficients.lean:75-91.",
+   "via": [
+    "lem-pur-general-legacy-stage-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-legacy-rational-tensor-pentagon",
+  "worker": "stage1",
+  "summary": "Preserved the exact older-category statement. Separated its missing single-arrow ordinary realization and completion comparison from the actual proof of the pentagon. Checked inverse sheaf-tensor generators, exact derived pasting, faithful full-subcategory restriction, raw Hom tensor composition, and every conjugation cancellation. One statement-only node, no Mathlib leaves; no intrinsic/legacy identification or geometric restrictions added.",
+  "blueprint": "Retained owning argument 5 and the tensor pentagon serving AlgebraicallyClosedCoefficients.lean:75-91; latest scalar-extension-functor proof step (4). Steps 1-4 construct the ordinary pentagon and step 5-6 give exactly the specified completed associator.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-scalar-coherence",
+    "why": "Generic normalized ringed-site scalar associator and tensor generator formulas; applies to the same completed coefficient sheaves and does not change the older subcategory."
+   },
+   {
+    "node": "lem-sp-exact-derived-transformation-pasting",
+    "why": "Generic exact-functor localization preserves the ordinary pentagon with the prescribed derived compositors; no statement of this general transfer exists in the owning unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-system-scalar-coherence",
+  "lem-sp-exact-derived-transformation-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NS-d5c26ba78",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-d5c26ba78 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the cited node statements, blueprint sk-def-sp-scalar-extension-functor step (4) (lines 26-34), and the old Lean the item names: ScalarExtensionComposition.lean 560-700, 990-1035, 1160-1340, 1420-1550; IntegralScalarExtension.lean 273-320; IntegralScalarExtensionConstructible.lean 465-500, 640-700; RationalizationKaroubi.lean 245-290. The item statement and stmt_deps are byte-identical to the base. Step 2: I recomputed both inverse pentagon paths, both send w⊗x to w⊗(1⊗(1⊗x)); equality on the generators 1⊗x of the sheafified tensor makes the step elementary. Step 3: the derived cells of the pasting node (inverse compositor, then the localized ordinary cell) are literally integralOrdinaryDerivedScalarComp (Lean 671, mapDerivedCategory). Exactness comes from the new node, and restriction to the old subcategory follows the existsUnique at Lean 998. Step 4 is 1⊗(integral associator) plus composition_tmul, matching the third conjunct of rationalOrdinaryScalar_coherence. Step 5 is exactly completed_comp_formula. Step 6: I redid both expansions; naturality of c_h^{-1} and of A_{h,j} at c_i^{-1} give the same prefix P and suffix c_hji, and step 4 equates the middles (the conj_comp argument). New node lem-pur-legacy-ordinary-scalar-realization bundles exactness, old-predicate preservation, normalized sigma_i, the pure-tensor S_i and c_i=sigma⊗1, matching integralOrdinaryScalar_exact and four sorry declarations: integralOrdinaryDerivedScalar_constructible, integralConstructibleScalarComparison_existsUnique, rationalScalarHom_laws, rationalOrdinaryComparison_existsUnique. It is true: R_F is finite free over R_E with cofinal adic filtrations, so completeness, constructibility and the support interval are preserved. Checked for i=id and empty Y. It is not a duplicate of the finite-free/normalized-completion/constructible nodes, which state ambient or intrinsic analogues and not the old predicate; it is statement-only, cites all its notions, has the three kinds of logged search and the correct blueprint from/via, and creates no cycle. Tool use lem-sp-exact-derived-transformation-pasting accepted as a generic tool; lem-pur-system-scalar-coherence is in the same unit, so no tool use is needed. Advisories: the intermediate Lean associators are unfolded from source, not taken from DAG nodes, which is acceptable because the statement fixes them by name; the new node has no lean_audit, which is common in the snapshot. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarExtensionComposition",
+  "declaration": "WeilConjectures.rationalConstructibleScalar_coherence",
+  "statement": "theorem rationalConstructibleScalar_coherence :\n    (∀ K : rationalConstructibleCategory D l hl E Y,\n      (rationalConstructibleScalarComp l E E (AlgHom.id (Padic l) E) Y L ι D hl).hom.app K =\n        (rationalScalarExtension D l hl E Y L ι).map\n          ((rationalConstructibleScalarUnit l E Y D hl).hom.app K)) ∧\n    (∀ K : rationalConstructibleCategory D l hl E Y,\n      (rationalConstructibleScalarComp l E L ι Y L (AlgHom.id (Padic l) L) D hl).hom.app K =\n        (rationalConstructibleScalarUnit l L Y D hl).hom.app\n          ((rationalScalarExtension D l hl E Y L ι).obj K)) ∧\n    (∀ (N : Type u) [Field N] [Algebra (Padic l) N] [FiniteDimensional (Padic l) N]\n      (k : M →ₐ[Padic l] N) (K : rationalConstructibleCategory D l hl E Y),\n      (rationalScalarExtension D l hl M Y N k).map\n          ((rationalConstructibleScalarComp l E L ι Y M j D hl).hom.app K) ≫\n        (rationalConstructibleScalarComp l E M (j.comp ι) Y N k D hl).hom.app K =\n      (rationalConstructibleScalarComp l L M j Y N k D hl).hom.app\n          ((rationalScalarExtension D l hl E Y L ι).obj K) ≫\n        (rationalConstructibleScalarComp l E L ι Y N (k.comp j) D hl).hom.app K)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "The exact asserted pentagon is the third conjunct: (rationalConstructibleScalar_coherence l E L i Y M j D hl).2.2 N h K. The first two conjuncts are the separately packaged unit equations. This reuses exactly rationalConstructibleCategory, rationalScalarExtension and rationalConstructibleScalarComp on the specified older integral predicate, before transport to named composite coefficient maps. It asserts no identification with the intrinsic sfIntegralConstructibleCategory or sfRationalConstructibleCategory. No module or declaration is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-157fdf37e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Existing:true binding to WeilConjectures.rationalConstructibleScalar_coherence (Sheaf.Paper.ScalarExtensionComposition l.1474); lean.statement verbatim in side-live source; only the item's lean field changed vs side-live. Third conjunct .2.2 N h K is exactly the node's pentagon in written order on the named older objects: boundedConstructibleDerivedCompleteIntegralCategory (∃r≤s uniform over level n+1), rationalConstructibleCategory = raw ScalarLocalization, ∃!-pinned rationalScalarExtension, conjugated rationalConstructibleScalarComp; composite AlgHoms defeq. Y has no Over map; arbitrary AlgHoms; D universe d independent; identity/repeated/empty cases covered. Consumer AlgebraicallyClosedCoefficients:91 uses the same projection. Report has Worker report + Second reading. Advisory: the bound theorem also carries two true unit-law conjuncts, pinned by the note; accepted as an exact existing match. No fixes, no compile needed."
+ }
+}

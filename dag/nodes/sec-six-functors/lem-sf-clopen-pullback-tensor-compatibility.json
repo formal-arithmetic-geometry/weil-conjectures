@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-clopen-pullback-tensor-compatibility",
+ "kind": "statement",
+ "title": "Tensor compatibility of the Cartesian pullback compositor",
+ "statement": "For the normalized Cartesian pullback compositor theta of [lem-sf-open-tensor-normalization] and the canonical tensor comparisons of [def-sf-clopen-comparison-tensor-data], the two iterated pullback tensor comparisons agree after theta. This is an equality on the whole unbounded ringed-site derived category, for arbitrary objects X,Y. Its explicit statement is theorem pullback_tensor_compatibility {m : Mode} {d : Input.{u} m} {t : SiteSquare d}\n    {o : Operations d t} (_a : Assertion o) {A : Scheme.{u}}\n    {s : A ⟶ d.U'} [IsOpenImmersion s] (v : Data o s)\n    (X Y : Der d.R) :\n    o.gUPull.derived.map (o.tensorComparison.comparison.inv.app (X, Y)) ≫\n        o.theta.inv.app (o.tensorX.functor.obj (X, Y)) ≫\n        o.opens.jStar'.map (v.tensorP.comparison.hom.app (X, Y)) =\n      v.tensorQ.comparison.hom.app (o.opens.jStar.obj X, o.opens.jStar.obj Y) ≫\n        o.tensorU'.functor.map\n          (Prod.mkHom (o.theta.inv.app X) (o.theta.inv.app Y)) ≫\n        v.tensorB.tensorComparison.comparison.inv.app\n          (o.gPull.derived.obj X, o.gPull.derived.obj Y)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0D6D (lemma-derived-pullback-composition). Apply their flat K-flat representative constructions to the normalized Cartesian pullback compositor. Original clopen tensor refinement, step 1."
+ },
+ "stmt_deps": [
+  "def-sf-clopen-comparison-tensor-data",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "on flat-term K-flat representatives use theta_model and the representative\nequations of all four tensor comparisons. After cancelling their representative\nisomorphisms, both sides are totalizations of the same ordinary tensor square.\nThat square follows on pure tensors from the ordinary adjunction-mate\nnormalization of theta and the pure-unit formulas. Sheafification and balancing\nextend the calculation to module sheaf maps. No interchange of the two degrees\noccurs, so the signed differentials agree. Two-variable resolving descent extends\nthe equation to arbitrary unbounded derived objects.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sfb-ringed-projection-tensor-structure",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization",
+  "lem-sfb-ringed-projection-tensor-structure",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0GL1 (lemma-j-shriek-and-tensor); agent open-unit and clopen tensor refinement",
+  "by": "agent"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClopenComparisonTensorSquare",
+  "date": "2026-10-24",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence: The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]; clopen comparison tensor compatibility, original seven-step refinement.",
+   "via": [
+    "lem-sf-clopen-comparison-tensor-square",
+    "lem-sf-proper-open-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ClopenPullbackTensorCompatibility",
+  "file": "lean/Sheaf/SixFunctors/ClopenPullbackTensorCompatibility.lean",
+  "declaration": "SheafOfModules.ClopenComparisonTensorSquare.pullback_tensor_compatibility",
+  "statement": "theorem pullback_tensor_compatibility {m : Mode} {d : Input.{u} m} {t : SiteSquare d}\n    {o : Operations d t} (_a : Assertion o) {A : Scheme.{u}}\n    {s : A ⟶ d.U'} [IsOpenImmersion s] (v : Data o s)\n    (X Y : Der d.R) :\n    o.gUPull.derived.map (o.tensorComparison.comparison.inv.app (X, Y)) ≫\n        o.theta.inv.app (o.tensorX.functor.obj (X, Y)) ≫\n        o.opens.jStar'.map (v.tensorP.comparison.hom.app (X, Y)) =\n      v.tensorQ.comparison.hom.app (o.opens.jStar.obj X, o.opens.jStar.obj Y) ≫\n        o.tensorU'.functor.map\n          (Prod.mkHom (o.theta.inv.app X) (o.theta.inv.app Y)) ≫\n        v.tensorB.tensorComparison.comparison.inv.app\n          (o.gPull.derived.obj X, o.gPull.derived.obj Y)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor pullback comparison and clopen restriction extension adjunction",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary pullback adjunctions and module formulas do not give normalized derived tensor compatibility or the clopen reverse module adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits; CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-24",
+   "verdict": "Useful formal adjunction API; no geometric tensor comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Aa]dj|tensor.*[Bb]ase[Cc]hange",
+   "results": "25 hits; Mathlib/Algebra/Lie/Nilpotent.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean",
+   "date": "2026-10-24",
+   "verdict": "Ordinary scalar tensor calculations only; the required derived ringed-site statements remain separate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "clopen restriction adjunction tensor pullback comparison on derived sheaves",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary adjunctions, no canonical derived tensor compatibility or reverse clopen adjunction on these ringed sites."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, moved Data block and 3 new sorry leaves vs clone ClopenComparisonTensorSquare.lean, OpenTensorNormalizationData (Operations/Assertion/Pullback/OpenExtension) and node files"
+ }
+}

@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-strict-log-jacobian-criterion",
+ "kind": "statement",
+ "title": "Strict logarithmic Jacobian criterion",
+ "statement": "Let $S,X,Y$ be locally Noetherian fs log schemes [def-trf-fs-log-blowup], let $f:X\\to S$ and $g:Y\\to S$ be log smooth [def-per-fs-log-smooth-etale], and let $h:X\\to Y$ be a morphism of log schemes with $f=gh$. Assume $h$ is strict, meaning that its source log structure is the associated log structure of the inverse image of the target log structure with its induced map to $\\mathcal O_X$ [lem-trf-associated-log-universal-stalks]. Fix a geometric point $\\bar x$ of $X$, put $\\bar y=h\\bar x$, $A=\\mathcal O_{X,\\bar x}$, $B=\\mathcal O_{Y,\\bar y}$ and $k=A/\\mathfrak m_A$ [def-weil-pbc-geometric-stalks]. Use the logarithmic differential modules of [def-per-log-differential-stalk] and their natural comparison of [def-per-log-cotangent-comparison]. If the induced $k$-linear map\n$$k\\otimes_B\\omega_{g,\\bar y}\\longrightarrow k\\otimes_A\\omega_{f,\\bar x}$$\nis injective, then the underlying scheme morphism $h$ is smooth on an open neighbourhood of $\\bar x$ [def-sbc-smooth-morphisms]. No regularity of the underlying schemes or perfection of any residue field is assumed. Tensor products and scalar extension have their usual module meanings [def-weil-pbc-module-tensor-product, def-weil-module-base-change].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X proof of Proposition 1.2, printed p.138: strictness and the logarithmic Jacobian criterion explicitly attributed to Kato 1988 Proposition 3.12. The general criterion in Kato, Logarithmic structures of Fontaine--Illusie, Proposition 3.12 is WANTED locally. No Stacks tag states the logarithmic assertion."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "lem-trf-associated-log-universal-stalks",
+  "def-weil-pbc-geometric-stalks",
+  "def-per-log-differential-stalk",
+  "def-per-log-cotangent-comparison",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-per-strict-log-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $E=h^*\\omega_g$, $F=\\omega_f$, with $u:E\\to F$ defined by $da\\mapsto d(h^*a)$ and $d\\log m\\mapsto d\\log h^\\flat m$. The chart deformation calculus gives finite locally free logarithmic differential sheaves, with these properties preserved by strict etale localization. Choose a pointed strict etale neighbourhood $e:U\\to X$, and then an affine open in it, on which $E$ and $F$ have finite bases. Its geometric stalks identify with the given stalks: a pointed etale neighbourhood is cofinal among pointed etale neighbourhoods. The relations defining the differential stalk and the comparison identify the fibre of $u$ with the map in the hypothesis. If $p$ is the point of $U$ under the chosen geometric point, the matrix of $u$ over $\\kappa(p)$ therefore has independent columns: a nonzero relation over $\\kappa(p)$ would remain a nonzero relation over its field extension $k$. Apply the finite-free residue-localization lemma to this matrix over $\\Gamma(U,\\mathcal O_U)$. After a principal shrinking containing $p$, there is a left inverse $r:F|_U\\to E|_U$, and $C=\\operatorname{coker}(u|_U)$ is free of finite rank $d$. Thus $ru=1$ and $F|_U=u(E|_U)\\oplus\\ker r$, with $\\ker r\\simeq C$. All these sheaf identities follow from the matrix identities, so remain true after pullback. Replace $f,h$ by their composites with $e$ during the lifting argument.",
+   "uses": [
+    "lem-sfb-chart-log-smooth-deformation-calculus",
+    "def-per-log-differential-stalk",
+    "def-per-log-cotangent-comparison",
+    "def-weil-pbc-geometric-stalks",
+    "lem-pc-finite-free-map-residue-localization-strong"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2 proof, printed p.138 (PDF p.144), strict logarithmic Jacobian argument; agent expansion using infinitesimal log lifts."
+   }
+  },
+  {
+   "text": "The underlying $h:U\\to Y$ is locally of finite presentation. The chart deformation calculus gives this for $U\\to S$ and $Y\\to S$. For each point choose compatible affine opens $\\operatorname{Spec}R\\subset S$, $\\operatorname{Spec}B\\subset Y$, $\\operatorname{Spec}A'\\subset U$ with $h(\\operatorname{Spec}A')\\subset\\operatorname{Spec}B$. The affine-open finite-presentation lemma says that $B$ and $A'$ are finitely presented over $R$. In particular $B$ is of finite type over $R$, so the intermediate-algebra finite-presentation lemma applied to $R\\to B\\to A'$ says that $A'$ is finitely presented over $B$. These opens cover $U$.",
+   "uses": [
+    "lem-sfb-chart-log-smooth-deformation-calculus",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2 proof, printed p.138 (PDF p.144), strict logarithmic Jacobian argument; agent expansion using infinitesimal log lifts."
+   }
+  },
+  {
+   "text": "Fix an arbitrary first order thickening of affine schemes $i:T_0\\hookrightarrow T$, with ideal $\\mathcal I$, and maps $a_0:T_0\\to U$, $b:T\\to Y$ satisfying $ha_0=bi$. Give $T$ the pulled-back log structure $b^*M_Y$ and $T_0$ its pullback. These are fine log structures even when the test schemes are not Noetherian: etale locally on $Y$ choose a finite integral chart $P$ and use on its pullbacks the associated chart log structure of the fine-chart logification lemma. That lemma supplies its universal property and says that reduction modulo $\\mathcal I$ is strict. The local constructions agree because their maps are uniquely determined by the inverse-image log sheaf and the units. Since $h$ is strict, $a_0$ has the canonical log map over $Y$: its log pullback is $(ha_0)^*M_Y=(bi)^*M_Y$. The same statement holds for any scheme lift over $Y$. Conversely a log lift over $Y$ gives such a scheme lift. Apply the chart deformation calculus to $U\\to S$. It supplies log lifts $a:T\\to U$ over $S$ on an etale cover of $T$. This uses only fine test structures, not saturation or Noetherianity of $T$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-sfb-fine-chart-logification-thickening",
+    "lem-sfb-chart-log-smooth-deformation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2 proof, printed p.138 (PDF p.144), strict logarithmic Jacobian argument; agent expansion using infinitesimal log lifts."
+   }
+  },
+  {
+   "text": "On any member of this cover, $ha$ and $b$ are log lifts over $S$ of the same map on $T_0$. By the torsor clause of the chart deformation calculus there is a unique $\\delta:(ha_0)^*\\omega_g\\to\\mathcal I$ with sign convention $ha=b+\\delta$. Put $\\epsilon=-\\delta\\circ a_0^*r:a_0^*\\omega_f\\to\\mathcal I$ and let $a'=a+\\epsilon$ under the torsor action for $U/S$. On a function $v$ of $Y$ the change in $(ha)^\\sharp(v)$ is $\\epsilon(dh^*v)$, and on a log section $m$ it is multiplication by $1+\\epsilon(d\\log h^\\flat m)$. Thus $ha'-ha=\\epsilon\\circ a_0^*u=-\\delta$, because $ru=1$. The actions add since $(1+s)(1+t)=1+s+t$ for $s,t\\in\\mathcal I$. Therefore $ha'=b$ on both functions and log sections, and $a'|_{T_0}=a_0$. We have produced ordinary lifts over $Y$ etale locally on every test $T$.",
+   "uses": [
+    "lem-sfb-chart-log-smooth-deformation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2 proof, printed p.138 (PDF p.144), strict logarithmic Jacobian argument; agent expansion using infinitesimal log lifts."
+   }
+  },
+  {
+   "text": "Let $\\mathcal L$ on $T_{\\mathrm{Et}}$ be the sheaf of ordinary lifts of this fixed square: on $v:V\\to T$ it consists of maps $c:V\\to U$ with $hc=bv$ and $c|_{V\\times_TT_0}=a_0\\operatorname{pr}_{T_0}$. It is a sheaf by the representable-presheaf sheaf theorem applied to $U\\times_Y T$ over $T$; the restriction equality is local on the etale cover of $V\\times_TT_0$. By Step 4 it is locally nonempty. Through strictness these are exactly the log lifts over $Y$. If $c,c'$ are two, the logarithmic torsor calculus over $S$ gives their unique difference $\\eta:a_0^*F\\to\\mathcal I$. Their composites to $Y$ agree if and only if $\\eta\\circ a_0^*u=0$: this is checked on $dv$ and $d\\log m$ by the action formulas. Hence differences factor uniquely through $a_0^*C$. Conversely every map $a_0^*C\\to\\mathcal I$ acts on $c$ and keeps $hc=bv$. These identifications commute with restriction because they are specified on the differential generators. Consequently $\\mathcal L$ is a torsor under $\\mathcal H=\\underline{\\operatorname{Hom}}(a_0^*C,\\mathcal I)$, viewed on $T_{\\mathrm{Et}}$ with scalars through $\\mathcal O_T\\to\\mathcal O_{T_0}$. The free basis of $C$ identifies $\\mathcal H$ with the etale sheaf associated to $\\mathcal I^{\\oplus d}$ on $T$.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-sfb-chart-log-smooth-deformation-calculus",
+    "def-sc-gm-torsor",
+    "def-sc-etale-qcoherent-module",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X Proposition 1.2 proof, printed p.138 (PDF p.144), strict logarithmic Jacobian argument; agent expansion using infinitesimal log lifts."
+   }
+  },
+  {
+   "text": "The ideal $\\mathcal I$ of a first order thickening is quasi-coherent. Since $T=\\operatorname{Spec}D$ is affine, write $\\mathcal I=\\widetilde J$ for its defining ideal $J\\subset D$. Then $\\mathcal I^{\\oplus d}=\\widetilde{J^{\\oplus d}}$: on each principal open $D(s)$ both modules have sections $(J_s)^{\\oplus d}=(J^{\\oplus d})_s$, by sending each coordinate fraction to a common denominator. Thus this finite direct sum is quasi-coherent, including $d=0$. Apply affine etale quasi-coherent vanishing to obtain $H^1(T_{\\mathrm{Et}},\\mathcal H)=0$. The torsor--$H^1$ classification sends the trivial torsor to zero, so the torsor $\\mathcal L$ is trivial and has a global section (the image of zero in a trivialization). This section is the required scheme lift $T\\to U$ over $Y$. As the affine square was arbitrary, $h:U\\to Y$ is formally smooth.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "pqf-def-coherent",
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-torsor-h1",
+    "def-sbc-formally-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2, theorem-zariski-fpqc-quasi-coherent, affine vanishing; sites-cohomology.tex Tag 03AJ, lemma-torsors-h1; the torsor method in more-morphisms.tex Tag 02H6, lemma-smooth-formally-smooth."
+   }
+  },
+  {
+   "text": "Together with Step 2, formal smoothness proves that $h:U\\to Y$ is smooth by the definition of smooth morphisms. Apply the pointwise etale-source locality theorem to $e:U\\to X$ at the chosen lift of $\\bar x$. It says that the original $h:X\\to Y$ is smooth at its image. By its stated meaning of smooth at a point, $h$ is smooth on an open neighbourhood of $\\bar x$. The proof used no regularity of any underlying scheme and no perfection of any residue field.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036U, lemma-smooth-smooth-local-source, pointwise etale-source locality; smoothness in more-morphisms.tex Tag 02H6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chart-log-smooth-deformation-calculus",
+  "def-per-log-differential-stalk",
+  "def-per-log-cotangent-comparison",
+  "def-weil-pbc-geometric-stalks",
+  "lem-pc-finite-free-map-residue-localization-strong",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-first-order-thickening",
+  "lem-sfb-fine-chart-logification-thickening",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-sc-gm-torsor",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-fibre-product",
+  "pqf-def-coherent",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1",
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-etale-source-smoothness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X Proposition 1.2 proof, printed p.138 (PDF p.144), strict logarithmic Jacobian argument; agent expansion using infinitesimal log lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict morphism between fine saturated log smooth schemes over a common base is smooth near a geometric point if the logarithmic cotangent fibre map is injective",
+   "results": "{\"t\": \"2026-10-22T05:10:53Z\", \"tool\": \"leanfinder\", \"query\": \"A strict morphism between fine saturated log smooth schemes over a common base is smooth near a geometric point if the logarithmic cotangent fibre map is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"3a29e9e91e32a4a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogSmooth\", \"Differential\"",
+   "results": "{\"t\": \"2026-10-22T05:11:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogSmooth\\\", \\\"Differential\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]og[Ss]mooth|logarithmic.*[Jj]acobian|strict.*log.*cotangent",
+   "results": "{\"t\": \"2026-10-22T05:11:00Z\", \"tool\": \"grep\", \"query\": \"[Ll]og[Ss]mooth|logarithmic.*[Jj]acobian|strict.*log.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strict morphism of fine saturated log smooth schemes is smooth when its logarithmic cotangent map on a residue field is injective",
+   "results": "{\"t\": \"2026-10-22T05:11:01Z\", \"tool\": \"leansearch\", \"query\": \"A strict morphism of fine saturated log smooth schemes is smooth when its logarithmic cotangent map on a residue field is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"AlgebraicGeometry.IsSmooth.mk\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"d7d001ca5f50e4f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic Jacobian criterion for a strict map between logarithmically smooth spaces over the same logarithmic base",
+   "results": "{\"t\": \"2026-10-22T05:11:12Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic Jacobian criterion for a strict map between logarithmically smooth spaces over the same logarithmic base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.IsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"RingHom.IsStandardSmooth.smooth\", \"RingHom.Smooth.locally_isStandardSmooth\"], \"digest\": \"7872f17d0d5714b4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned signatures concern ordinary scheme smoothness or ordinary Kahler/cotangent modules, not fs log structures or their characteristic monoids; Differential.logDeriv is the logarithmic derivative in a differential ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict morphism between logarithmically smooth fine saturated log schemes is smooth when the logarithmic differential fibre map is injective",
+   "results": "{\"t\": \"2026-10-22T05:39:15Z\", \"tool\": \"leanfinder\", \"query\": \"Strict morphism between logarithmically smooth fine saturated log schemes is smooth when the logarithmic differential fibre map is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"a85a65aeb959ffdf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary scheme or algebra smoothness and ordinary cotangent modules, manifolds, or number-field logarithmic maps. None has fs log structures, strict log morphisms or logarithmic differentials. In particular Mathlib/RingTheory/Smooth/Local.lean:34 and :48 require an ordinary algebra presentation and are not one-line specializations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict logarithmic smooth comparison from injectivity of the logarithmic cotangent map over a residue field",
+   "results": "{\"t\": \"2026-10-22T05:39:22Z\", \"tool\": \"leansearch\", \"query\": \"Strict logarithmic smooth comparison from injectivity of the logarithmic cotangent map over a residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"ENNReal.log_injective\", \"Real.log_injOn_pos\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.Extension.cotangentComplex_injective_iff\"], \"digest\": \"828088fc8b1c7a71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary scheme or algebra smoothness and ordinary cotangent modules, manifolds, or number-field logarithmic maps. None has fs log structures, strict log morphisms or logarithmic differentials. In particular Mathlib/RingTheory/Smooth/Local.lean:34 and :48 require an ordinary algebra presentation and are not one-line specializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic submersion criterion for a strict map over a common fine logarithmic base",
+   "results": "{\"t\": \"2026-10-22T05:39:24Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmic submersion criterion for a strict map over a common fine logarithmic base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion\", \"NumberField.mixedEmbedding.logMap\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale\", \"NumberField.mixedEmbedding.logMap_mul\", \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_eq\", \"NumberField.mixedEmbedding.logMap_apply\", \"NumberField.mixedEmbedding.logMap_apply_of_norm_eq_one\"], \"digest\": \"410d018450918151\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary scheme or algebra smoothness and ordinary cotangent modules, manifolds, or number-field logarithmic maps. None has fs log structures, strict log morphisms or logarithmic differentials. In particular Mathlib/RingTheory/Smooth/Local.lean:34 and :48 require an ordinary algebra presentation and are not one-line specializations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-characteristic-relative-nc-criterion",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts; the strict logarithmic Jacobian argument for the chart comparison in repaired Step 3",
+   "via": [
+    "lem-sfb-free-characteristic-relative-nc-criterion",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-strict-log-jacobian-criterion",
+  "worker": "stage1",
+  "summary": "Expanded ILO X p.138 into the cotangent retraction, logarithmic lift correction, and a global affine lifting argument. Reused the surviving sfb deformation calculus and chart-logification input. The scheme lifts form a torsor under the finite direct sum of the square-zero ideal, whose H1 vanishes. No new nodes, no statement change, no dropped-route citation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts; the strict logarithmic Jacobian argument for the chart comparison in repaired Step 3 Steps 1--7 supply the strict smooth comparison in that inherited alteration-reduction lineage. The current blueprint has no separate node for this criterion; from.node remains the inherited null.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-free-map-residue-localization-strong",
+    "why": "Generic finite-matrix localization gives a retraction and free cokernel; it supplies no alteration or six-functor theorem. No node of the ctf-stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic affine finite-presentation dictionary for the two log-smooth structure maps. No node of the ctf-stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+    "why": "Generic intermediate-algebra finite presentation proves lfp of h. No node of the ctf-stability unit states this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic descent of scheme maps makes the lift presheaf a sheaf. No node of the ctf-stability unit states this generic tool."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic affine quasi-coherent H1 vanishing globalizes the explicitly identified lift torsor. No node of the ctf-stability unit states this generic tool."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic torsor classification turns zero H1 into a global section. No node of the ctf-stability unit states this generic tool."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Generic pointwise etale-source locality returns from the chosen cotangent-trivializing neighbourhood to X. No node of the ctf-stability unit states this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-free-map-residue-localization-strong",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1",
+  "lem-trf-etale-source-smoothness"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-1dc43f27d",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-1dc43f27d (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the full statement of every cited node, plus ILO X Prop 1.2, printed p.138 (PDF p.144). The delivery has 0 new nodes and leaves the statement and stmt_deps as on base. Statement: it matches the source's use of Kato 3.12. S, X, Y are locally Noetherian fs; f and g are log smooth in the chart sense; h is strict with f=gh; injectivity of k⊗ω_g→k⊗ω_f (def-per-log-cotangent-comparison graph G) gives smoothness of the underlying h near x̄. Nothing is weakened. Steps: (1) The calculus node gives local freeness; injectivity over k is the same as over κ(p); lem-pc-finite-free-map-residue-localization-strong gives a left inverse r and a free cokernel C, both used later. (2) 01TQ plus finite presentation over an intermediate finite-type algebra give lfp of h. (3) Fine-chart logification puts a fine log structure b^*M_Y on non-Noetherian affine tests; strictness of h gives a₀ its canonical log map over Y; the calculus for U/S gives étale-local lifts over S. (4) I recomputed the correction: ha=b+δ, ε=−δ∘r, ha′=ha+ε∘u=b, using ru=1 and I²=0. (5) The sheaf of scheme lifts (representable étale sheaf) is a torsor under Hom(a₀^*C,I)≅(I^{⊕d})_et, since difference maps η agree on Y iff η∘u=0. The flatness needed is part of the definition of étale. (6) Affine quasi-coherent étale H¹=0 and torsors↔H¹ give a global lift, so h is formally smooth. (7) The pointwise clause of lem-trf-etale-source-smoothness gives smoothness of h near x̄. Small cases checked: closed immersion fails the hypothesis; projection and a strict log-line product pass; non-strict Kummer t↦tⁿ shows strictness is needed; Frobenius fails the hypothesis; d=0 and h=id are trivial. Dropped and duplicate checks: the item is not in route-pivot-dropped.txt; its only same-statement node is the dropped lem-per-strict-log-jacobian-criterion (line 1924), which the delivery does not cite. The 272-node closure has no dropped id and no trace-formula, Poincaré or nt-assume node. The item is still unsplit in side-live (no supersession), and the cited calculus node is now split and reviewed live with an unchanged statement. Batch-5 flag lem-trf-etale-source-smoothness: generic étale-source locality of smoothness (Stacks 036U type); its 118-node closure contains only the generic lem-trf-smooth-composition, and it is neither an assumed statement nor a step of either assumption's proof, so I accepted it. All 7 declared tool uses are generic and accepted. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLogJacobianCriterion",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.smooth_near_of_strict_logCotangent_injective",
+  "statement": "theorem smooth_near_of_strict_logCotangent_injective\n    {S X Y : FineSaturatedLogScheme.{u}}\n    (f : EtaleLogHom X S) (g : EtaleLogHom Y S) (h : EtaleLogHom X Y)\n    (hover : h.CompEq g f) (hf : f.IsLogSmooth) (hg : g.IsLogSmooth)\n    (hstrict : h.IsStrict) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (t : Spec (.of Ω) ⟶ X.scheme) (hinj : IsLogCotangentInjective f g h t) :\n    ∃ U : X.scheme.Opens,\n      (Scheme.SpecToEquivOfField Ω X.scheme t).1 ∈ U ∧ Smooth (U.ι ≫ h.base)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing statement also recorded for lem-per-strict-log-jacobian-criterion. It uses the same fs log schemes, log-smooth structure maps, log-morphism composite equation, canonical strictness, geometric point, and canonical logarithmic cotangent injectivity, and concludes smoothness on an open neighbourhood. No regularity or residue-field perfection assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5789f7835",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery of 1f587cbc18b4 (returned H2). The only change in the item record is stmt_deps gaining def-per-strict-log-morphism, the landed existing:true owner of EtaleLogHom.IsStrict (FSStrictLogMorphism:54, by NG, not dropped, record identical to side-live), so the H2 finding is resolved. The existing:true lean record (Q25's smooth_near_of_strict_logCotangent_injective) is unchanged and its signature matches the live file character for character. Every clause is owned by a cited stmt_dep: FineSaturatedLogScheme/EtaleLogHom/CompEq by def-trf-fs-log-blowup, IsLogSmooth by def-per-fs-log-smooth-etale, IsStrict by def-per-strict-log-morphism, IsLogCotangentInjective by def-per-log-cotangent-comparison, Smooth by def-sbc-smooth-morphisms. No added assumptions, a single universe u, edge cases covered, body only sorry, no Lean file delivered so nothing compiled, report sections present."
+ }
+}

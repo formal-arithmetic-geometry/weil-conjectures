@@ -1,0 +1,282 @@
+{
+ "id": "lem-trf-exact-block-coefficient-projection",
+ "kind": "statement",
+ "title": "Full-series coefficient projection preserving every earlier block",
+ "statement": "Let $C$ be a smooth affine finite-type scheme over a characteristic-zero field $k$, with etale coordinates $w$, $a\\in C$, and $R=\\mathcal O(C)$ [def-sbc-smooth-morphisms] [def-weil-finite-type-morphism] [def-weil-etale-morphism]. Consider $f_1,\\ldots,f_s\\in R[[T]]$ in finitely many variables $T$ [def-weil-pbc-multivariate-power-series]. Let $\\alpha_1,\\ldots,\\alpha_s\\in\\mathbf N^n$ be the ordered minimal vertices of a monotone orthant diagram in variables $Z_1,\\ldots,Z_n$; form degree blocks, final-segment essential variable sets $T^h$, last indices $s_h$, and first-vertex quotient sets $\\Delta_i^h$ by deleting nonessential coordinates [def-trf-supported-homogeneous-division]. Fix a block $\\ell$ with $T=T^\\ell$ and a finite $Q$, and suppose that the remaining variables $Z\\setminus T^\\ell$ are among the coordinates $w$, in their order. The centered Taylor series at $a$ of each $f_i$ has first coefficient $1$ and first exponent $\\alpha_i$, read in the Taylor variables $(W,T)$ in total-degree lexicographic order with $W$ before $T$; for $i\\le s_\\ell$ this exponent is $(0,\\alpha_i)$. For $h<\\ell$, an earlier test is that the coefficient of $(T^h)^\\eta$ is identically zero as a full series in the other variables whenever $\\eta$ lies in that prefix diagram and $|\\eta|\\le Q$. Suppose $P^-$ projects onto their common kernel, is linear over $R[[T\\setminus T^{\\ell-1}]]$, fixes every $f_i$ with $i>s_{\\ell-1}$, and $P^--1$ takes values in $(f_1,\\ldots,f_{s_{\\ell-1}})$. At $a$ it preserves the first exponent whenever the first monomial passes the earlier tests. Its defining coefficient extractions and full correction columns have regular coefficients on $C$.\nLet $D_h$ be the diagram of the first $h$ blocks restricted to $T^h$ and set\n$$E=\\{\\gamma\\in D_\\ell\\setminus(D_{\\ell-1}\\times\\mathbf N^{|T\\setminus T^{\\ell-1}|}):|\\gamma|\\le Q\\}.$$\nUse the actual coordinate order in this product. Each $\\gamma\\in E$ has a unique assigned pair $(j,\\beta)$ with $s_{\\ell-1}<j\\le s_\\ell$, $\\beta\\in\\Delta_j^\\ell$, and $\\gamma=\\alpha_j+\\beta$. Put $C_\\gamma=P^-(T^\\beta f_j)$ and $B_{\\eta\\gamma}=[T^\\eta]C_\\gamma\\in R$. Then every full $C_\\gamma$ passes the earlier tests, differs from $T^\\beta f_j$ by an earlier-generator combination, and at $a$ has first exponent $(0,\\gamma)$. The matrix $B(a)$ is triangular with diagonal $1$. On the single open $\\det B\\ne0$, define $v(H)=([T^\\eta]H)_{\\eta\\in E}$ and\n$$P_\\ell H=P^-H-\\sum_{\\gamma\\in E}(B^{-1}v(P^-H))_\\gamma C_\\gamma.$$\nThis is an $R$-linear projection onto the common kernel of every earlier test and all degree-$\\le Q$ forbidden coefficient tests for $D_\\ell$. It fixes that kernel, has regular coefficients on this one open, and $P_\\ell-1$ takes values in $(f_1,\\ldots,f_{s_\\ell})$. At $a$ it preserves the first exponent of any series whose first monomial passes all these tests. Replacing only $f_i$ with $i>s_\\ell$ by $P_\\ell f_i$ preserves the generated ideal at every point, every vertex exponent at $a$, and all earlier derivative equations and Jacobians. No tail of a correction column is truncated. If $E$ is empty the sum is zero. All assertions include residue-field extension [def-weil-residue-field].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM 1997 Lemma 9.12 and (9.13)--(9.14), pp.280--281; agent refinement: simultaneous earlier tests and full correction columns. Returned steps 5--7 and the projection invariant of step 1. ILO VIII 2.3.11--2.3.13 is the route reference; BM is read online, absent locally. No single Stacks tag states this result."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-supported-homogeneous-division",
+  "def-weil-residue-field",
+  "def-trf-formal-initial-diagram",
+  "def-trf-regular-hilbert-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Order $E$ increasingly. By [def-trf-supported-homogeneous-division], assigning an exponent to the first vertex dividing it gives disjoint sets $\\alpha_j+\\Delta_j^\\ell$. If $\\gamma\\in E$, no old vertex divides it, whereas a vertex in the new block does; thus the assigned $j$ is in the claimed range and $\\beta=\\gamma-\\alpha_j$ is unique. Nested essential sets embed every earlier prefix diagram into the old prefix diagram in $T$ (with free complementary coordinates, in their actual order). Hence the monomial $T^\\gamma$ passes every earlier test, including those with bound $Q$.",
+   "uses": [
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  },
+  {
+   "text": "Put $G_\\gamma=T^\\beta f_j$. Multiplying its Taylor expansion by the monomial shifts its first exponent to $(0,\\gamma)$ and retains coefficient $1$, by additivity of degree-lex order. Thus $C_\\gamma=P^-G_\\gamma$ passes every old test and has this first exponent, by the hypotheses on $P^-$; its difference from $G_\\gamma$ lies in the earlier-generator ideal. Its first coefficient is also $1$: write $r=[T^\\gamma]C_\\gamma\\in R$. The monomial $rT^\\gamma$ lies in the old kernel and is fixed by $P^-$. If $r(a)\\ne1$, then $G_\\gamma-rT^\\gamma$ has first exponent $(0,\\gamma)$, whereas its image $C_\\gamma-rT^\\gamma$ has no term at or below that exponent, contradicting the assumed exponent preservation. This argument uses the actual regular function $r$, so needs no lift of an arbitrary residue-field element.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  },
+  {
+   "text": "At $a$, the coefficient $B_{\\eta\\gamma}(a)$ vanishes for $\\eta<\\gamma$ and equals $1$ for $\\eta=\\gamma$. In the permutation formula for the determinant [def-weil-pbc-matrix-determinant], every nonidentity permutation has a chosen row smaller than its column, so its product is zero. Therefore $\\det B(a)=1$. On $U=D(\\det B)$ use $B^{-1}=(\\det B)^{-1}\\operatorname{adj}(B)$; [lem-weil-pbc-matrix-adjugate-identity] gives both inverse identities. Its entries are regular on $U$, as are all coefficients of the full $C_\\gamma$ by the stipulated regular construction of $P^-$. We now use $R$ for the restricted coefficient ring.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  },
+  {
+   "text": "For $G=P^-H$ and $c=B^{-1}v(G)$, every column belongs to the old kernel; $R$-linearity of the old coefficient tests puts $G-\\sum c_\\gamma C_\\gamma$ in that kernel. Its $E$-coefficient vector is $v(G)-Bc=0$. Every exponent of $D_\\ell$ of total degree at most $Q$ either belongs to $E$ or has its old-variable restriction in $D_{\\ell-1}$ of degree at most $Q$, so these are exactly all the required new tests together with the old ones. Conversely an $H$ in this common kernel has $P^-H=H$ and $v(H)=0$, giving $P_\\ell H=H$. This proves linearity, the asserted image and idempotence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  },
+  {
+   "text": "For every $H$, write $C_\\gamma=T^\\beta f_j+e_\\gamma$ with $e_\\gamma$ in the old-generator ideal, as proved in step 2. Then\n$$P_\\ell H-H=(P^--1)H-\\sum_{\\gamma\\in E}c_\\gamma(T^\\beta f_j+e_\\gamma)\\in(f_1,\\ldots,f_{s_\\ell}).$$\nThe expression uses the full $e_\\gamma$ and full $f_j$; no tail is discarded. All the maps have regular coefficients on $U$, by step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  },
+  {
+   "text": "Let the nonzero Taylor series of $H$ at $a$ have first exponent $\\mu$, and suppose its first monomial passes every test. Then $G=P^-H$ has first exponent $\\mu$. Put $L=\\kappa(a)$. Since every full $C_\\gamma$ begins at $(0,\\gamma)$, its Taylor coefficient matrix $\\widehat B$ satisfies the support inequalities of [lem-trf-shift-filtered-matrix-inverse] with weights $u_\\gamma=\\gamma$; its constant determinant is $1$ by step 3. Apply that lemma to $\\widehat B^{-1}$. Every term $W^\\delta T^\\eta$ contributing to $v(G)$ has exponent strictly greater than $\\mu$: it cannot be smaller, and equality is excluded because the leading monomial passes the new tests. The inverse support inequality implies that every term $W^\\epsilon$ of $c_\\gamma$ satisfies $(\\epsilon,\\gamma)>\\mu$: multiply a term of $(\\widehat B^{-1})_{\\gamma\\eta}$ by a term of $[T^\\eta]G$ and add their inequalities. Multiplication by $C_\\gamma$, whose terms have exponents at least $(0,\\gamma)$, keeps this strict inequality. Thus the entire correction has no term at or below $\\mu$, and $P_\\ell H$ retains the first term of $G$, in particular its first exponent.",
+   "uses": [
+    "lem-trf-shift-filtered-matrix-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  },
+  {
+   "text": "For $i>s_\\ell$, minimality of the full vertex $\\alpha_i$ means that no earlier vertex divides it. Its monomial therefore passes each prefix test, even when some of its coordinates lie among $W$. Step 6 retains its vertex exponent. Keep $f_i$ unchanged for $i\\le s_\\ell$ and replace the others by $f'_i=P_\\ell f_i$. Step 5 writes each $f'_i-f_i$ using only the unchanged prefix generators; the two inclusions of generated ideals follow by solving this same equality for $f_i$. Specializing at any point of $U$ gives the same ideal equality in its Taylor ring. All earlier derivative equations and their Jacobians involve prefix generators with index at most $s_\\ell$; these generators, the coordinates and their derivative operators are unchanged, so those equations and matrices are identical.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  },
+  {
+   "text": "For $E=\\varnothing$, the determinant is the empty determinant $1$, $v$ is empty and $P_\\ell=P^-$; the old tests already include every required coefficient. All preceding calculations are coefficientwise finite sums and products and multiplication by $\\det B^{-1}$; after any residue-field extension they are the same identities. The initial coefficients equal to $1$ remain $1$, so the same leading-exponent and ideal conclusions hold. This also covers the first block (empty old prefix), no transverse variables, and $Q$ below the degree of the current block.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent refinement of BM 1997 Lemma 9.12, (9.13) and Definition 9.14, pp.280--281, on the ILO VIII 2.3.11--2.3.13 route; full projected correction columns and simultaneous old tests."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-supported-homogeneous-division",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-trf-shift-filtered-matrix-inverse"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13 is the route reference; explicit algebra refines BM 1997 Lemma 9.12 and Definition 9.14, read online at the journal PDF cited in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-exact-block-coefficient-projection: Construct exact coefficient elimination projections using a finite triangular matrix of full formal standard basis multiples, preserving older coefficient tests and initial exponents",
+   "results": "{\"t\": \"2026-10-22T06:41:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-exact-block-coefficient-projection: Construct exact coefficient elimination projections using a finite triangular matrix of full formal standard basis multiples, preserving older coefficient tests and initial exponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Profinite.NobelingProof.CC_exact\", \"Profinite.NobelingProof.GoodProducts.MaxToGood\", \"RootPairing.GeckConstruction.f\", \"Module.Presentation.ofExact_var\", \"Module.Presentation.ofExact_relation\", \"RootPairing.GeckConstruction.v\", \"RootPairing.GeckConstruction.u\"], \"digest\": \"75546ac7199339eb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, LinearMap",
+   "results": "{\"t\": \"2026-10-22T06:41:42Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, LinearMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff\", \"MvPowerSeries.monomial\", \"MvPowerSeries.coeff_apply\", \"MvPowerSeries.monomial_def\", \"MvPowerSeries.coeff_comp_monomial\", \"MvPowerSeries.X_def\", \"MvPowerSeries.coeff_index_single_self_X\", \"MvPowerSeries.coeff_zero\"], \"digest\": \"2829b4be16904768\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*[Pp]rojection|[Pp]rojection.*coefficient|initialExponent|standardBasis",
+   "results": "{\"t\": \"2026-10-22T06:41:42Z\", \"tool\": \"grep\", \"query\": \"coefficient.*[Pp]rojection|[Pp]rojection.*coefficient|initialExponent|standardBasis\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-exact-block-coefficient-projection: Simultaneous support normalization of formal power series by invertible coefficient matrix without truncating correction tails",
+   "results": "{\"t\": \"2026-10-22T06:41:42Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-exact-block-coefficient-projection: Simultaneous support normalization of formal power series by invertible coefficient matrix without truncating correction tails\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.coeff_trunc\", \"MvPowerSeries.coeff\", \"PowerSeries.coeff_coe_trunc_of_lt\", \"PowerSeries.trunc_map\", \"PowerSeries.trunc_trunc_of_le\", \"PowerSeries.coeff\", \"PowerSeries.trunc_trunc\", \"PowerSeries.instNormalizationMonoid\"], \"digest\": \"f2e8ccbe006b2693\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-exact-block-coefficient-projection: Simultaneous support normalization of formal power series by invertible coefficient matrix without truncating correction tails",
+   "results": "{\"t\": \"2026-10-22T06:41:46Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-exact-block-coefficient-projection: Simultaneous support normalization of formal power series by invertible coefficient matrix without truncating correction tails\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv.aux\", \"MvPowerSeries.coeff_inv_aux\", \"FormalMultilinearSeries.leftInv\", \"FormalMultilinearSeries.rightInv\", \"FormalMultilinearSeries.comp_rightInv_aux2\", \"FormalMultilinearSeries.rightInv_coeff\", \"FormalMultilinearSeries.compChangeOfVariables_blocksFun\", \"FormalMultilinearSeries.compChangeOfVariables\"], \"digest\": \"5c74d892fa311d2c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; polynomial division and univariate Weierstrass division, coefficient maps, smooth presentation Jacobians, or abstract semicontinuity do not state this regular Taylor-family or supported multivariate formal-series assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*projection|projection.*coefficient|initialExponent|standardBasis",
+   "results": "{\"t\": \"2026-10-23T11:32:43Z\", \"tool\": \"grep\", \"query\": \"coefficient.*projection|projection.*coefficient|initialExponent|standardBasis\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give coefficient maps, univariate Weierstrass division or profinite abelian-group exactness, not simultaneous full-series coefficient normalization preserving earlier tests"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient elimination on multivariate power series by full monic correction columns",
+   "results": "{\"t\": \"2026-10-23T11:32:44Z\", \"tool\": \"leansearch\", \"query\": \"finite coefficient elimination on multivariate power series by full monic correction columns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFiniteFPowerSeriesOnBall.finite\", \"HasFiniteFPowerSeriesAt.finite\", \"MvPowerSeries.coeff\", \"MvPowerSeries.HasSubst.coeff_zero\", \"MvPolynomial.coeffs\", \"MvPowerSeries.coeff_monomial_mul\", \"MvPowerSeries.coeff_subst_finite\", \"MvPowerSeries.IsHomogeneous.coeff_eq_zero\"], \"digest\": \"bad2a19f77bb4bf4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give coefficient maps, univariate Weierstrass division or profinite abelian-group exactness, not simultaneous full-series coefficient normalization preserving earlier tests"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries.coeff, LinearMap",
+   "results": "{\"t\": \"2026-10-23T11:32:45Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries.coeff, LinearMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.coeff\", \"MvPowerSeries.coeff_apply\", \"MvPowerSeries.coeff_comp_monomial\", \"MvPowerSeries.coeff_index_single_self_X\", \"MvPowerSeries.coeff_zero\", \"MvPowerSeries.coeff_zero_X\", \"MvPowerSeries.eq_zero_iff_forall_coeff_zero\", \"MvPowerSeries.coeff_zero_one\"], \"digest\": \"53852cb472034d6d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give coefficient maps, univariate Weierstrass division or profinite abelian-group exactness, not simultaneous full-series coefficient normalization preserving earlier tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-exact-block-coefficient-projection: full formal power series coefficient projection preserving previous coefficient kernels and leading exponents",
+   "results": "{\"t\": \"2026-10-23T11:32:52Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-exact-block-coefficient-projection: full formal power series coefficient projection preserving previous coefficient kernels and leading exponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.coeff_mul_prod_one_sub_of_lt_order\", \"FormalMultilinearSeries.coeff_fslope\", \"FormalMultilinearSeries.compChangeOfVariables_blocksFun\", \"PowerSeries.coeff_mul_one_sub_of_lt_order\", \"MvPowerSeries.coeff_mul_prod_one_sub_of_lt_order\", \"PowerSeries.coeff_inv_aux\"], \"digest\": \"515b95160ad2fde3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give coefficient maps, univariate Weierstrass division or profinite abelian-group exactness, not simultaneous full-series coefficient normalization preserving earlier tests"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-exact-block-coefficient-projection: projection onto a kernel of finitely many formal coefficient maps by a monic triangular full-series section",
+   "results": "{\"t\": \"2026-10-23T11:34:41Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-exact-block-coefficient-projection: projection onto a kernel of finitely many formal coefficient maps by a monic triangular full-series section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.CC_exact\", \"Profinite.NobelingProof.succ_exact\", \"Profinite.NobelingProof.CC_comp_zero\", \"Profinite.NobelingProof.πs\", \"Profinite.NobelingProof.πs'\", \"Profinite.NobelingProof.Linear_CC'\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"Module.Relations.Solution.π_comp_map\"], \"digest\": \"402b636789137fd7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give coefficient maps, univariate Weierstrass division or profinite abelian-group exactness, not simultaneous full-series coefficient normalization preserving earlier tests"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-regular-hilbert-coefficient-data",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2). Subargument: BM 1997 Lemma 9.12 and (9.13)--(9.14), pp.280--281; agent refinement: simultaneous earlier tests and full correction columns. Returned steps 5--7 and the projection invariant of step 1.",
+   "via": [
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-exact-block-coefficient-projection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Full-series coefficient elimination is proved by the explicit finite solve, retaining old kernels and prefix-generator ideals. One strictly smaller algebra node isolates the shifted support estimate for inverse matrices needed for Taylor leading-exponent preservation. All search hits and cited statements were read; empty sets, residue extensions and complementary coordinate order checked.",
+  "blueprint": "Retains the historical local-term-locality ancestry through regular-hilbert-coefficient-data and its ILO VIII 2.3.11--2.3.13 local invariant input. Steps 1--5 implement the simultaneous earlier-test refinement of BM 9.12/(9.13); steps 6--8 justify the full correction in Definition 9.14 without discarding its tails."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-1b24f85ec",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-1b24f85ec (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and ILO VIII 2.3.11-2.3.13 (PDF pp.99-100) in full. ILO is the route reference only; BM 9.12 is not in the local literature and is marked WANTED, and proof_origin is correctly set to agent. Live still has the item unsplit and there is no repair note, so this is a first split. The statement and stmt_deps are byte-identical to live. No SGA is cited. All citations are same-unit nodes or Mathlib leaves, and proof_deps equals the union of the step uses. Step 1: the first-dividing-vertex rule in def-trf-supported-homogeneous-division gives a unique (j,beta) with j in (s_{l-1}, s_l], and T^gamma passes the old tests. Step 2: the coefficient-1 argument through r T^gamma is valid, including the case where the image is zero. Step 3: B(a) is triangular with det 1, and the adjugate leaf gives the inverse on D(det B). Step 4: every degree-<=Q exponent of D_l lies either in E or in D_{l-1}xN with an old test that kills it, so this is a projection. Step 5: the ideal identity uses the full tails. Step 6: the index orientation is correct; Bhat_{eta gamma} meets the new lemma's hypothesis with u=id, and the strict inequalities compose because the theta embedding into lex Z^{1+m+n} is additive. Step 7: the vertices are incomparable, so the step-6 hypothesis holds for i>s_l. Step 8: the empty case and residue-field extension are handled. New node lem-trf-shift-filtered-matrix-inverse is true by a cofactor argument. I tested it on a 2x2 matrix with u=(0,1), on r=0 and r=1, and with no W variables. It is statement-only and self-contained, the three search kinds are recorded with real results, no duplicate exists in the DAG (the adjugate and continuous-adjugate nodes are different), and it is strictly smaller than the item. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExactBlockCoefficientProjection",
+  "declaration": "AlgebraicGeometry.HilbertCoefficient.exactBlockCoefficientProjection",
+  "declarations": [
+   "AlgebraicGeometry.HilbertCoefficient.blockOperator",
+   "AlgebraicGeometry.HilbertCoefficient.blockRestrictExponent",
+   "AlgebraicGeometry.HilbertCoefficient.blockSlice",
+   "AlgebraicGeometry.HilbertCoefficient.blockTExponent",
+   "AlgebraicGeometry.HilbertCoefficient.blockWExponent",
+   "AlgebraicGeometry.HilbertCoefficient.blockFlatten",
+   "AlgebraicGeometry.HilbertCoefficient.blockTaylor",
+   "AlgebraicGeometry.HilbertCoefficient.blockVariables",
+   "AlgebraicGeometry.HilbertCoefficient.blockForbidden",
+   "AlgebraicGeometry.HilbertCoefficient.blockOldKernel",
+   "AlgebraicGeometry.HilbertCoefficient.blockOldMonomial",
+   "AlgebraicGeometry.HilbertCoefficient.blockNewExponent",
+   "AlgebraicGeometry.HilbertCoefficient.blockColumn",
+   "AlgebraicGeometry.HilbertCoefficient.blockMatrix",
+   "AlgebraicGeometry.HilbertCoefficient.blockProjection",
+   "AlgebraicGeometry.HilbertCoefficient.blockReplacement",
+   "AlgebraicGeometry.HilbertCoefficient.ExactBlockInput",
+   "AlgebraicGeometry.HilbertCoefficient.exactBlockOpen",
+   "AlgebraicGeometry.HilbertCoefficient.blockRestriction",
+   "AlgebraicGeometry.HilbertCoefficient.ExactBlockOver",
+   "AlgebraicGeometry.HilbertCoefficient.ExactBlockOnOpen",
+   "AlgebraicGeometry.HilbertCoefficient.exactBlockCoefficientProjection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactBlockCoefficientProjection.lean",
+  "statement": "theorem exactBlockCoefficientProjection {k : Type u} [Field k] [CharZero k] {C : Scheme.{u}} {m t s Q d : ℕ} (α : Fin s → Fin (m + t) →₀ ℕ) (f : Fin s → MvPowerSeries (Fin t) Γ(C, ⊤)) (K : (Fin t →₀ ℕ) → (Fin t →₀ ℕ) →₀ Γ(C, ⊤)) (A : ExactBlockInput (k := k) C m t s Q d α f K) (E : Finset (Fin t →₀ ℕ)) (hE : ∀ γ : Fin t →₀ ℕ, γ ∈ E ↔ blockNewExponent α Q d γ) : (∀ γ : E, (∃! p : Fin s × (Fin t →₀ ℕ), (α p.1).degree = d ∧ p.2 ∈ MonomialDiagram.quotientSupport (fun j ↦ blockTExponent (α j)) p.1 ∧ γ.val = blockTExponent (α p.1) + p.2) ∧ ∀ p : Fin s × (Fin t →₀ ℕ), (α p.1).degree = d → p.2 ∈ MonomialDiagram.quotientSupport (fun j ↦ blockTExponent (α j)) p.1 → γ.val = blockTExponent (α p.1) + p.2 → blockColumn α d f K γ.val = blockOperator K (RingHom.id Γ(C, ⊤)) (MvPowerSeries.monomial p.2 1 * f p.1)) ∧ (∀ γ : E, blockOldKernel α Q d (blockColumn α d f K γ.val) ∧ (∃ p : Fin s × (Fin t →₀ ℕ), (α p.1).degree = d ∧ γ.val = blockTExponent (α p.1) + p.2 ∧ blockColumn α d f K γ.val - MvPowerSeries.monomial p.2 1 * f p.1 ∈ Ideal.span {F | ∃ i : Fin s, (α i).degree < d ∧ F = f i}) ∧ MonomialDiagram.IsFirstExponent (blockTaylor A.taylor (blockColumn α d f K γ.val)) (Finsupp.mapDomain (Fin.natAdd m) γ.val)) ∧ (∀ η γ : E, Finsupp.DegLex (· < ·) (· < ·) η.val γ.val → C.Γevaluation A.center (blockMatrix α d f K E η γ) = 0) ∧ (∀ γ : E, C.Γevaluation A.center (blockMatrix α d f K E γ γ) = 1) ∧ A.center ∈ exactBlockOpen α d f K E ∧ ExactBlockOnOpen α Q d f K E (exactBlockOpen α d f K E) ∧ (∀ (L : Type (max u v)) [Field L] (ι : C.residueField A.center →+* L), ExactBlockOver α Q d f K E ((MvPowerSeries.map ι).comp A.taylor) ∧ (∀ H : MvPowerSeries (Fin t) (MvPowerSeries (Fin m) L), ∀ μ : Fin (m + t) →₀ ℕ, MonomialDiagram.IsFirstExponent (blockFlatten H) μ → blockOldMonomial α Q d μ → ¬ blockForbidden α Q d (blockTExponent μ) → MonomialDiagram.IsFirstExponent (blockFlatten (blockProjection α d f K E ((MvPowerSeries.map ι).comp A.taylor) H)) μ) ∧ (∀ i : Fin s, MonomialDiagram.IsFirstExponent (blockFlatten (blockReplacement α d f K E ((MvPowerSeries.map ι).comp A.taylor) i)) (α i))) ∧ (∀ (V : C.Opens) (b : C) (hb : b ∈ V), V ≤ exactBlockOpen α d f K E → ∀ (L : Type (max u v)) [Field L] (ι : C.residueField b →+* L) (τ : Γ(C, V) →+* MvPowerSeries (Fin m) L), (∀ r : Γ(C, V), MvPowerSeries.constantCoeff (τ r) = ι ((C.residue b) (C.presheaf.germ V b hb r))) → (∀ z : k, τ (blockRestriction C V (A.coordinates (MvPolynomial.C z))) = MvPowerSeries.C (ι (C.Γevaluation b (A.coordinates (MvPolynomial.C z))))) → (∀ j : Fin m, τ (blockRestriction C V (A.coordinates (MvPolynomial.X j))) = MvPowerSeries.C (ι (C.Γevaluation b (A.coordinates (MvPolynomial.X j)))) + MvPowerSeries.X j) → ExactBlockOver α Q d f K E (ι.comp (C.Γevaluation b).hom) ∧ ExactBlockOver α Q d f K E (τ.comp (blockRestriction C V))) ∧ (E = ∅ → ∀ {B : Type u} [CommRing B] (φ : Γ(C, ⊤) →+* B) (H : MvPowerSeries (Fin t) B), blockProjection α d f K E φ H = blockOperator K φ H)",
+  "branch": "sheaf-dag",
+  "by": "Q70",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The auxiliary declarations spell out this node’s coefficient extractions, full correction columns, canonical finite solve and hypotheses. Original diagram variables embed in W,T in their actual order, retaining coefficient coordinates used by later vertices. Only the final named theorem is postponed.",
+  "fixed_by": "NT-stage2-cc-68b696947"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68b696947",
+  "group": "Q70",
+  "result": "fix",
+  "note": "Conclusion 1 put the column equation inside the ∃!, so uniqueness of the assigned pair (j,β) was only claimed among pairs also satisfying C_γ = P⁻(T^β f_j), which is weaker than the node (H3). Fixed by splitting it into (∃! p, deg α_p = d ∧ p.2 ∈ Δ ∧ γ = α_p + p.2) ∧ ∀ such p, blockColumn γ = P⁻(T^{p.2} f_{p.1}). fixes/ExactBlockCoefficientProjection.lean (complete module) and fixes/lem-trf-exact-block-coefficient-projection.lean-record.json (verbatim statement); compiles clean via nt_compile --json (3.7 s, exit 0). All other clauses checked against the node and the dependency definitions: hypotheses not stronger (monotonicity on the original diagram), finite-row encoding of P⁻ faithful, Taylor map pinned by isTaylorMap, projection/ideal/first-exponent/pointwise/E=∅ conclusions true for the maps used (Noetherian targets, unit determinant on D(det B)). The two added stmt_deps are landed and used; docstrings, single sorry, report sections and searches OK."
+ }
+}

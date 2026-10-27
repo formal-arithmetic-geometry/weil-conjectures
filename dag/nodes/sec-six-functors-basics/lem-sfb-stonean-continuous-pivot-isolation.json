@@ -1,0 +1,177 @@
+{
+ "id": "lem-sfb-stonean-continuous-pivot-isolation",
+ "kind": "statement",
+ "title": "Continuous integral operations isolate one pivot on a Stonean base",
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension with its valuation topology and integer ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $P$ be compact Hausdorff, totally disconnected and extremally disconnected, with universes as in [def-weil-size-convention]. For every $n,m\\ge0$ and every entrywise continuous $F:P\\to\\operatorname{Mat}_{(n+1)\\times(m+1)}(E)$, there are maps $L:P\\to\\operatorname{GL}_{n+1}(\\mathcal O_E)$ and $U:P\\to\\operatorname{GL}_{m+1}(\\mathcal O_E)$ whose entries and inverse entries are continuous after inclusion into $E$, such that $(LFU)_{0,j+1}=0$ for all $j<m$ and $(LFU)_{i+1,0}=0$ for all $i<n$. The lower-right block is unrestricted. Empty $P$, zero matrices, ties and varying zero loci are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.12(2), printed p. 19, bounded division and maximal generator; agent rectangular pivot-isolation variant using compact projectivity."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "For a compact Hausdorff Stonean space $P$ and any compact Hausdorff source $X$ mapping continuously and surjectively to $P$, use [det-pe-stonean-projective] to choose a continuous section. If their universes differ, lift both spaces to the common maximum universe; the ULift homeomorphisms transport compactness, the Hausdorff property and extremal disconnectedness, and transport the section back. This is implemented by the private proved stonean_section helper.",
+   "uses": [
+    "det-pe-stonean-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For continuous $a,b:P\\to E$ with $|a|\\le|b|$, the equation space $Z=\\{(p,t)\\in P\\times\\mathcal O_E:a(p)=b(p)t\\}$ is closed by continuity of the two sides. The integer ring is compact Hausdorff by [lem-sfb-integers-profinite-tower], its product with $P$ is compact by [lem-weil-pbc-tychonoff-product-quasi-compact], and $Z$ is compact by [lem-weil-pbc-closed-in-quasi-compact]. Projection is surjective: take $a(p)/b(p)$ when $b(p)\\ne0$, and zero otherwise, when the bound forces $a(p)=0$. A section gives continuous integral $q$ satisfying $a=bq$. This proves bounded_division.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "det-pe-stonean-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To select a maximum of a finite nonempty family of continuous real functions $f_i$, put the finite index set $I$ in the discrete topology and form $Z=\\{(p,i):\\forall j, f_j(p)\\le f_i(p)\\}$. Evaluation $(p,i)\\mapsto f_i(p)$ is continuous because $I$ is discrete, so $Z$ is closed in compact Hausdorff $P\\times I$. Every finite family has a maximum, making projection surjective. A section gives a continuous index label for a maximum. Apply this to the norms of all $(n+1)(m+1)$ entries. This proves continuous_max_label and handles ties and common zeros without clopen closure iteration.",
+   "uses": [
+    "det-pe-stonean-projective",
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let the selected index be $(r(p),c(p))$. Row and column permutation matrices associated to the swaps $(0,r(p))$ and $(0,c(p))$ give $A=SFT$ with every entry bounded in norm by $h=A_{00}$. Their entries and inverse entries factor through the finite discrete index label, so they are continuous. Permutation-matrix multiplication computes $A_{ij}=F_{(0,r)(i),(0,c)(j)}$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use bounded division separately to obtain continuous integral $q_i,t_j$ such that $A_{i+1,0}=h q_i$ and $A_{0,j+1}=h t_j$. For a column vector $q$, the matrix $N(q)$ with entries $N(q)_{i+1,0}=q_i$ and all other entries zero satisfies $N(q)N(t)=0$. Thus $R=I+N(-q)$ and $C=(I+N(-t))^{\\mathsf T}$ are integral invertible matrices, with inverse obtained by changing plus to minus. Their entries and inverse entries are continuous.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The formulas $(RA)_{0j}=A_{0j}$, $(RA)_{i+1,j}=A_{i+1,j}-q_iA_{0j}$, $(BC)_{i0}=B_{i0}$ and $(BC)_{i,j+1}=B_{i,j+1}-B_{i0}t_j$ show that $RAC$ has zero first row and column except at the pivot. Take $L=RS$ and $U=TC$. Continuity of products follows entrywise by finite sums; inverse products use the reverse order. No assertion is made about the lower-right block, and no division by a zero scalar occurs.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "det-pe-stonean-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.12(2), printed p. 19, bounded division and maximal generator; agent rectangular pivot-isolation variant using compact projectivity. The maximum-label proof uses a closed incidence space instead of iterated clopen comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous integral row and column operations isolate the first pivot of a rectangular matrix over a p-adic field on a Stonean compact space",
+   "results": "{\"t\": \"2026-10-25T14:58:37Z\", \"tool\": \"leansearch\", \"query\": \"Continuous integral row and column operations isolate the first pivot of a rectangular matrix over a p-adic field on a Stonean compact space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Continuous.matrix_updateCol\", \"Continuous.matrix_updateRow\", \"Continuous.matrix_reindex\", \"Matrix.Pivot.listTransvecCol_mul_mul_listTransvecRow_last_col\", \"Continuous.matrix_replicateCol\", \"Continuous.matrix_replicateRow\", \"Matrix.Pivot.listTransvecRow_getElem\", \"Continuous.matrix_blockDiag\"], \"digest\": \"e4c5b3471b7b799f\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: scalar transvection lemmas require a nonzero scalar pivot and do not construct continuous integral factors across varying zero loci"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"pivot\", \"Continuous\"",
+   "results": "{\"t\": \"2026-10-25T15:09:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Matrix\\\", \\\"pivot\\\", \\\"Continuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: scalar transvection lemmas require a nonzero scalar pivot and do not construct continuous integral factors across varying zero loci"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*(maximal|pivot)|pivot.*continuous",
+   "results": "{\"t\": \"2026-10-25T15:13:25Z\", \"tool\": \"grep\", \"query\": \"continuous.*(maximal|pivot)|pivot.*continuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/ContinuousMap/Ideals.lean\", \"Mathlib/Topology/ContinuousMap/Ideals.lean\"], \"digest\": \"160870e61a19befd\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: scalar transvection lemmas require a nonzero scalar pivot and do not construct continuous integral factors across varying zero loci"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.NumberTheory.Padics.StoneanContinuousFieldDiagonalization",
+  "date": "2026-10-25",
+  "group": "R9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; local continuous relation-kernel input before applying closed-pair restriction. Auxiliary Continuous field matrices on Stonean bases admit diagonalization with varying entries. Pivot-isolation step before rectangular induction.",
+   "via": [
+    "lem-sfb-stonean-continuous-field-diagonalization",
+    "lem-sfb-profinite-constant-model-relation-hull",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.NumberTheory.Padics.StoneanContinuousPivotIsolation",
+  "file": "lean/Sheaf/NumberTheory/Padics/StoneanContinuousPivotIsolation.lean",
+  "declaration": "Padic.exists_continuous_integral_pivot_isolation",
+  "statement": "theorem exists_continuous_integral_pivot_isolation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (P : Type v) [TopologicalSpace P] [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] [ExtremallyDisconnected P] (n m : ℕ) (F : P → Matrix (Fin (n + 1)) (Fin (m + 1)) E) (hF : ∀ (i : Fin (n + 1)) (j : Fin (m + 1)), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ F p i j)) : ∃ (L : P → Matrix.GeneralLinearGroup (Fin (n + 1)) (coefficientExtensionIntegers l E)) (U : P → Matrix.GeneralLinearGroup (Fin (m + 1)) (coefficientExtensionIntegers l E)), (∀ (i j : Fin (n + 1)), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ ((L p).val i j : E))) ∧ (∀ (i j : Fin (n + 1)), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ (((L p)⁻¹).val i j : E))) ∧ (∀ (i j : Fin (m + 1)), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ ((U p).val i j : E))) ∧ (∀ (i j : Fin (m + 1)), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ (((U p)⁻¹).val i j : E))) ∧ (∀ (p : P) (j : Fin m), ((L p).val.map (fun x ↦ (x : E)) * F p * (U p).val.map (fun x ↦ (x : E))) 0 j.succ = 0) ∧ (∀ (p : P) (i : Fin n), ((L p).val.map (fun x ↦ (x : E)) * F p * (U p).val.map (fun x ↦ (x : E))) i.succ 0 = 0)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "Sheaf.NumberTheory.Padics.StoneanContinuousFieldDiagonalization",
+  "worker": "R9",
+  "summary": "Proved pivot-isolation step and all private helpers. No remaining sorry. The topological tools are exactly those already approved for the original diagonalization proof.",
+  "blueprint": "Auxiliary scalar calculation below det-sf-comp-coherence-cocycle, refinement-isomorphism paragraph, via det-sf-comp-coherence-refinement (2), closed-fibre heart comparison. Retains the relation-hull parent route; no unit or chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Supplies compact Hausdorffness of O_E for the bounded-division equation space; the compactification unit has no local-field compactness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "why": "Two-factor compactness of P times O_E is a generic topology tool; no compactification-unit statement gives it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-in-quasi-compact",
+    "why": "Closed equation spaces in compact spaces are compact; this generic topology fact is not supplied by the unit."
+   },
+   {
+    "node": "det-pe-stonean-projective",
+    "why": "Condition (3) provides a continuous section of the compact equation-space projection onto the Stonean base; this generic topology theorem is not replaced by the compactification route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T164224-L-974336",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T164224-L-974336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

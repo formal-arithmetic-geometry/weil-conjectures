@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-split-reductive-dvr-cartan-decomposition",
+ "kind": "statement",
+ "title": "Cartan decomposition for a split reductive model over a DVR",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $L$. Let $\\mathcal D$ be a smooth [def-sbc-smooth-morphisms] affine finite-type $R$-group scheme, with multiplication, identity and inverse satisfying the diagrams of [def-sc-group-scheme] over $\\operatorname{Spec}R$. Suppose its geometric fibres are reductive: over an algebraically closed field this means smooth, connected [def-weil-connected-scheme], affine of finite type, with no nontrivial smooth connected normal unipotent subgroup; unipotent means that all geometric points are unipotent matrices in a faithful representation. Let $\\mathcal T\\subseteq\\mathcal D$ be a closed subgroup [def-weil-closed-immersion] isomorphic to $\\mathbf G_{m,R}^{r}$, for an integer $r\\geq0$, whose geometric fibres are maximal tori. Here $\\mathbf G_{m,R}=\\operatorname{Spec}R[z,z^{-1}]$ with multiplication of units, and a torus over an algebraically closed field is a finite product of $\\mathbf G_m$. Put $G=\\mathcal D\\times_R\\operatorname{Spec}L$ and $T=\\mathcal T\\times_R\\operatorname{Spec}L$ [def-pc-fibre-product]. For an $R$-algebra $S$, points mean $R$-scheme morphisms $\\operatorname{Spec}S\\to\\mathcal D$, with group law induced by multiplication. Identify $\\mathcal D(R)$ and $T(L)$ with their images in $G(L)$. Then for every $g\\in G(L)$ there exist $k_1,k_2\\in\\mathcal D(R)$ and $t\\in T(L)$ such that $g=k_1tk_2$. No completeness or local compactness assumption on $L$ is required.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; author-hosted PDF https://sites.math.washington.edu/~jarod/papers/iwahori.pdf, Theorem 4.1 and Remark 4.2, printed p.7, together with the fixed-torus formulation in Remark 3.5, printed p.5."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sc-group-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ and put $\\widehat R=\\varprojlim R/(\\pi^n)$. The completion-DVR node makes $\\widehat R$ a DVR, the local-completion node identifies its maximal ideal as $\\pi\\widehat R$ and its residue field as $R/(\\pi)$, and module-completion completeness gives $\\widehat R/(\\pi^n)\\simeq R/(\\pi^n)$ and completeness. The map $R\\to\\widehat R$ is injective: a nonzero $a=u\\pi^m$ has nonzero image modulo $\\pi^{m+1}$. Thus $L\\hookrightarrow\\widehat L=\\operatorname{Frac}(\\widehat R)$. Moreover $L\\cap\\widehat R=R$: write $x\\in L^\\times$ as $u\\pi^j$ with $u\\in R^\\times$, $j\\in\\mathbf Z$; a negative $j$ cannot be integral in the DVR $\\widehat R$, because $\\pi$ is not a unit there. This also covers $x=0$.",
+   "uses": [
+    "lem-weil-pbc-completion-of-dvr-is-dvr",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion); more-algebra.tex, Tag 0AP1 (lemma-completion-dvr)."
+   }
+  },
+  {
+   "text": "Base change $\\mathcal D$ and $\\mathcal T$ to $\\widehat R$. Smoothness and finite type persist by the two cited base-change statements. Affineness follows from the affine fibre-product formula; the closed torus remains closed because its coordinate-ring surjection remains surjective on tensoring (each tensor is a sum of lifted pure tensors). The group diagrams and the chosen torus splitting base change. A geometric fibre of the new model is a geometric fibre after scalar extension of the original one, so the assumed reductivity and maximality still hold. Apply the complete-DVR cocharacter factorization to $g$, and then integral conjugacy into $\\mathcal T_{\\widehat R}$: absorbing the conjugating element and its inverse into the two integral factors gives $g=a\\nu(\\pi)b$, where $a,b\\in\\mathcal D(\\widehat R)$ and $\\nu:\\mathbf G_{m,\\widehat R}\\to\\mathcal T_{\\widehat R}$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Theorem 1.3 (1) to (3), Remark 3.5, and start of Theorem 4.1 proof, printed pp.5-7."
+   }
+  },
+  {
+   "text": "Under the given splitting $\\mathcal T\\simeq\\mathbf G_{m,R}^r$, write $\\nu=(\\nu_1,\\ldots,\\nu_r)$. Each $\\nu_i$ corresponds to a group-like Laurent polynomial $f=\\sum a_jz^j$ over the domain $\\widehat R$. Comparing coefficients in $f(zw)=f(z)f(w)$ gives $a_j^2=a_j$ and $a_i a_j=0$ for $i\\ne j$, while $f(1)=1$ gives $\\sum a_j=1$. Exactly one coefficient is $1$, so $f=z^{d_i}$ for some integer $d_i$. Consequently $\\nu$ is the base change of $z\\mapsto(z^{d_1},\\ldots,z^{d_r})$ over $R$. In particular $t=\\nu(\\pi)\\in T(L)$ and $g=atb$. For $r=0$, this says $t=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Remark 3.5, Laurent-coordinate calculation, printed p.5; agent coefficient comparison to descend the cocharacter from the completion."
+   }
+  },
+  {
+   "text": "Write $\\mathcal D=\\operatorname{Spec}A$, with $A$ generated over $R$ by $x_1,\\ldots,x_s$. The affine fibre-product formula identifies its generic coordinate ring with $A\\otimes_R L=A[1/\\pi]$. Conjugation $c_t:h\\mapsto tht^{-1}$ is an $L$-group automorphism. For each $j$ choose $m_j\\geq0$ and $y_j\\in A$ with $c_t^*x_j=y_j/\\pi^{m_j}$ in $A[1/\\pi]$, and put $N=1+\\max(0,m_1,\\ldots,m_s)$. If $e\\in\\mathcal D(\\widehat R)$ reduces to $1$ modulo $\\pi^N$, then $y_j(e)-y_j(1)\\in\\pi^N\\widehat R$. Since $c_t(1)=1$, the equality in $\\widehat L$ is $x_j(c_t(e))=x_j(1)+(y_j(e)-y_j(1))/\\pi^{m_j}\\in\\widehat R$. The generators therefore show that the coordinate map of $c_t(e)$ has image in $\\widehat R$, so $c_t(e)\\in\\mathcal D(\\widehat R)$. This gives the precise bound needed below, with no matrix embedding or topology theorem.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Theorem 4.1 proof, approximation error and conjugation, printed p.7; agent affine-coordinate denominator calculation."
+   }
+  },
+  {
+   "text": "The quotient comparison of step 1 identifies the reduction of $b$ modulo $\\pi^N$ with a point of $\\mathcal D(R/(\\pi^N))$. Apply reduction-surjectivity to $R$, $J=(\\pi^N)$ and the given split reductive model: $R$ is a Noetherian local ring and $J$ is contained in its maximal ideal. Obtain $k\\in\\mathcal D(R)$ with the same reduction as $b$. Set $e=bk^{-1}$; the group law commutes with reduction, so $e\\equiv1\\pmod{\\pi^N}$. Step 4 yields $c_t(e)\\in\\mathcal D(\\widehat R)$, and hence $g=at e k=a c_t(e)t k$. Put $h=a c_t(e)=gk^{-1}t^{-1}$, which lies both in $\\mathcal D(\\widehat R)$ and in $G(L)$.",
+   "uses": [
+    "lem-sfb-split-reductive-local-quotient-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Theorem 4.1 proof, approximation of the right factor and absorption of the conjugated error, printed pp.7-8; agent uses full split-group quotient lifting instead of only opposite-root coordinates."
+   }
+  },
+  {
+   "text": "The affine coordinate map of $h\\in G(L)$ sends $A$ into $L$, and, since the same point is in $\\mathcal D(\\widehat R)$, sends $A$ into $\\widehat R$ inside $\\widehat L$. Step 1 gives $L\\cap\\widehat R=R$, so this map has image in $R$ and defines $h\\in\\mathcal D(R)$. Equality of the two generic points implies equality of their coordinate maps because $L\\hookrightarrow\\widehat L$ is injective. Thus $g=htk$ with $h,k\\in\\mathcal D(R)$ and $t\\in T(L)$, as required. The argument uses completion as an auxiliary ring, so imposes no completeness or local compactness on the original field.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Last paragraph of Theorem 4.1 proof, printed p.8: intersection of rational and completed integral points."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-pc-proper-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-complete-dvr-cocharacter-cartan",
+  "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-split-reductive-local-quotient-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "Theorem 4.1 proof, printed pp.7-8, and Remark 3.5, p.5, read online. The affine-denominator and full split-group quotient-lifting version of its approximation argument is written by Q143; PDF WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartan decomposition of a split reductive group over a henselian discrete valuation ring: G(K) equals G(R) T(K) G(R)",
+   "results": "{\"t\": \"2026-10-24T02:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"Cartan decomposition of a split reductive group over a henselian discrete valuation ring: G(K) equals G(R) T(K) G(R)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.decompositionSubgroup\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"ValuationSubring.inertiaSubgroup\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\"], \"digest\": \"c6e821049846824d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: DoubleCoset declarations only describe arbitrary double cosets; valuation decomposition subgroups concern field automorphisms, and Geck Cartan subalgebras concern Lie algebras. None gives integral-point double-coset representatives in a reductive group."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.*decomposition|Iwahori|hyperspecial|maximal.*bounded|SplitReductive",
+   "results": "{\"t\": \"2026-10-24T02:43:45Z\", \"tool\": \"grep\", \"query\": \"Cartan.*decomposition|Iwahori|hyperspecial|maximal.*bounded|SplitReductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/Flasque.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\", \"Mathlib/Order/Zorn.lean\"], \"digest\": \"9c69670d163ce535\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: DoubleCoset declarations only describe arbitrary double cosets; valuation decomposition subgroups concern field automorphisms, and Geck Cartan subalgebras concern Lie algebras. None gives integral-point double-coset representatives in a reductive group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan Iwahori Matsumoto double coset decomposition of reductive group over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T02:43:46Z\", \"tool\": \"leansearch\", \"query\": \"Cartan Iwahori Matsumoto double coset decomposition of reductive group over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DoubleCoset.mk_out_eq_mul\", \"DoubleCoset.doubleCoset\", \"DoubleCoset.instInhabitedQuotientCoeSubgroup\", \"DoubleCoset.doubleCoset_union_rightCoset\", \"DoubleCoset.Quotient\", \"DoubleCoset.mem_doubleCoset\", \"DoubleCoset.setoid\", \"DoubleCoset.union_quotToDoubleCoset\"], \"digest\": \"892c14e1099cb519\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: DoubleCoset declarations only describe arbitrary double cosets; valuation decomposition subgroups concern field automorphisms, and Geck Cartan subalgebras concern Lie algebras. None gives integral-point double-coset representatives in a reductive group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"IsDiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-24T02:43:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeneralLinearGroup\\\", \\\"IsDiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: DoubleCoset declarations only describe arbitrary double cosets; valuation decomposition subgroups concern field automorphisms, and Geck Cartan subalgebras concern Lie algebras. None gives integral-point double-coset representatives in a reductive group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every point of a split reductive group over the fraction field of a DVR is a product of two integral group elements and a point of a fixed split maximal torus",
+   "results": "{\"t\": \"2026-10-24T02:45:08Z\", \"tool\": \"leanfinder\", \"query\": \"Every point of a split reductive group over the fraction field of a DVR is a product of two integral group elements and a point of a fixed split maximal torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.decompositionSubgroup\", \"ValuationSubring.inertiaSubgroup\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"IsDedekindDomain.selmerGroup\", \"Set.unit\", \"groupCohomology.exists_div_of_norm_eq_one\", \"NumberField.Units.closure_fundSystem_sup_torsion_eq_top\", \"IsDedekindDomain.selmerGroup.valuation_ker_eq\"], \"digest\": \"2ce6df580fe4e64c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: DoubleCoset declarations only describe arbitrary double cosets; valuation decomposition subgroups concern field automorphisms, and Geck Cartan subalgebras concern Lie algebras. None gives integral-point double-coset representatives in a reductive group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartan decomposition split reductive group over arbitrary discrete valuation ring fixed maximal torus double cosets",
+   "results": "{\"t\": \"2026-10-24T03:16:18Z\", \"tool\": \"leanfinder\", \"query\": \"Cartan decomposition split reductive group over arbitrary discrete valuation ring fixed maximal torus double cosets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\"], \"digest\": \"3ab1ca4fce3576a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras, scalar valuation rings and decomposition subgroups of field automorphisms do not give Cartan double cosets of group-scheme points."
+  },
+  {
+   "tool": "leansearch",
+   "query": "G(K) = G(R) T(K) G(R) for split reductive groups over discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T03:16:15Z\", \"tool\": \"leansearch\", \"query\": \"G(K) = G(R) T(K) G(R) for split reductive groups over discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.pointwise_smul_subset_iff\", \"IsGaloisGroup.of_isFractionRing\", \"ValuationSubring.decompositionSubgroup\", \"ValuationSubring.subset_pointwise_smul_iff\", \"integralClosure.coe_smul\", \"ValuationSubring.smul_mem_pointwise_smul_iff\", \"ValuationSubring.pointwise_smul_toSubring\", \"ValuationSubring.smul_mem_pointwise_smul\"], \"digest\": \"0beaebaca7a5f6fd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras, scalar valuation rings and decomposition subgroups of field automorphisms do not give Cartan double cosets of group-scheme points."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeneralLinearGroup\", \"IsDiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-24T03:16:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"GeneralLinearGroup\\\", \\\"IsDiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras, scalar valuation rings and decomposition subgroups of field automorphisms do not give Cartan double cosets of group-scheme points."
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.*decomposition|Iwahori|reductive.*group",
+   "results": "{\"t\": \"2026-10-24T03:16:15Z\", \"tool\": \"grep\", \"query\": \"Cartan.*decomposition|Iwahori|reductive.*group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie Cartan subalgebras, scalar valuation rings and decomposition subgroups of field automorphisms do not give Cartan double cosets of group-scheme points."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-integral-maximal-bounded",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument.",
+   "via": [
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-reductive-dvr-cartan-decomposition",
+  "worker": "stage1",
+  "summary": "Statement preserved. Split into a complete-DVR cocharacter factorization, integral cocharacter conjugacy, and local quotient-surjectivity input. Wrote cocharacter descent, a finite-coordinate conjugation bound, and rational/integral intersection explicitly. Three new unsplit nodes; no Mathlib match or project attachment.",
+  "blueprint": "Realizes the Cartan input in the inherited direct-images proof (3) ancestry through maximal boundedness and the integral Chevalley atlas. The latest blueprint direct-images proof (3) was read. The ancestor tool returns None; inherited from.node=null and its via chain are retained. Whole-blueprint searches found no matching Cartan, cocharacter-conjugacy or quotient-lifting statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-of-dvr-is-dvr",
+    "why": "Generic completion algebra needed to pass to a complete DVR; not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic maximal ideal and residue-field identification for a completion."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic quotient comparisons and completeness, with M=R and I=(pi)."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic DVR coordinate calculation to prove injection and the intersection L cap Rhat = R."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only the smooth-base-change clause is used to apply the complete-DVR input to the base changed model."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine tensor-product coordinate formula; used only for coordinate calculations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-of-dvr-is-dvr",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-5dddb467c",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-5dddb467c (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, every cited statement and the parent's use of the item. The source paper (AHLH) is not in literature/: it is marked WANTED, the proof is marked agent-written (by: agent), and I checked each new statement mathematically myself. Step 1: the completion/DVR nodes apply with M=R, I=(pi), giving the quotient iso, completeness and L∩R̂=R. Step 2: smoothness via clause (2) of lem-pc-proper-base-change, finite type via base change, affineness via the fibre-product node; the closed torus stays closed and geometric fibres are preserved; node 1 then node 2, with c and c⁻¹ absorbed in the right order. Step 3: a group-like Laurent polynomial over a domain is z^d, so t=nu(pi) lies in T(L). Step 4: the denominator bound N>m_j is correct. Step 5: node 3 with J=(pi^N), and g=a·c_t(e)·t·k checked. Step 6: L∩R̂=R. proof_deps equals the union of the steps' uses. New nodes: the cocharacter Cartan statement was tested on G_m, GL_n, an unramified Weil restriction and anisotropic SO(3) over R[[t]] (true); integral conjugacy follows from conjugacy of maximal split tori over local rings via the Levi argument; quotient lifting follows from Bruhat cells plus the big cell, with J inside the maximal ideal. No duplicates among the sfb reductive/Bruhat/conjugacy/Gauss-chart nodes. No SGA. tool_uses accepted (generic completion algebra, smooth base change). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitReductiveDVRCartanDecomposition",
+  "declaration": "AlgebraicGeometry.splitReductive_dvr_cartan_decomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitReductiveDVRCartanDecomposition.lean",
+  "statement": "theorem splitReductive_dvr_cartan_decomposition (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (L : Type u) [Field L] [Algebra R L] [IsFractionRing R L] (D T : Grp (Over (Spec (.of R)))) [Smooth D.X.hom] [IsAffine D.X.left] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] (i : T ⟶ D) [IsClosedImmersion i.hom.hom.left] (r : ℕ) (e : T ≅ RingGroupSchemes.splitTorus R r) (hred : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : R →+* Ω), ReductiveTorusCentralizer.IsReductive ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.obj D)) (hmax : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (f : R →+* Ω), ReductiveTorusCentralizer.IsMaximalTorus ((Over.pullback (Spec.map (CommRingCat.ofHom f))).mapGrp.map i)) (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))) ⟶ D.X) : ∃ (k₁ k₂ : 𝟙_ (Over (Spec (.of R))) ⟶ D.X) (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L))) ⟶ T.X), g = (toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L)))) ≫ k₁) * (t ≫ i.hom.hom) * (toUnit (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R L)))) ≫ k₂)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1687ca4ae",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Checked every clause against the node: DVR + fraction field with no completeness; D smooth/affine/finite type as a Grp over Spec R; hred/hmax test every R→Ω with Ω algebraically closed in Type u, equivalent to the geometric-fibre conditions; T closed (IsClosedImmersion), group iso to splitTorus R r; generic-fibre points via the pullback universal property, canonical toUnit restrictions, g = k1*t*k2 in node order. New def-sfb-split-torus-over-ring has real data (Mathlib Hopf Spec of LaurentPolynomial R, Nat.rec cartesian product, rank 0 trivial); only field versions exist in side-live, one built on the same instance, so no duplicate. Item diff vs live: lean record + 2 used stmt_deps; statements verbatim; live lean null, no competing records; sorry only; source/blueprint docstrings and 6-step plan; imports match proof deps. Edge cases r=0, G_m^r, GL_n, residue char checked. No file changed, no compile. Advisory only: ring/field splitTorus comparison."
+ }
+}

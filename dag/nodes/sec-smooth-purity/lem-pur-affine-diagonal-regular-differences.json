@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-affine-diagonal-regular-differences",
+ "kind": "statement",
+ "title": "Ordered coordinate differences regularly generate the affine diagonal locally",
+ "statement": "Let Y be any scheme [def-pc-scheme], let d be a natural number, and write X for its ordered affine d-space tower with projection p [def-amb-affine-trace-tower]. For every point z of X there is an affine open U of X ×_Y X [def-pc-fibre-product] containing Δ_p(z), such that the restrictions f_i of p₂*(x_i)−p₁*(x_i), i in Fin d, form a regular sequence in Γ(U,O_U) [def-weil-pbc-regular-sequence], and their span is precisely the diagonal kernel ideal on U [def-sbc-closed-immersion-ideal-sheaf]. No normal cone, associated graded algebra or relative spectrum occurs in this assertion. It applies to arbitrary base rings; empty Y is permitted and d=0 means the empty regular sequence on a nonempty affine neighborhood of z.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: the diagonal has the trivial normal bundle in ordered difference coordinates; expanded polynomial calculation of parent proof step 5"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-affine-trace-tower",
+  "def-pc-fibre-product",
+  "def-weil-pbc-regular-sequence",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open Spec R of Y containing p(z). Polynomial base-change charts for affine space and the canonical coordinate isomorphism for the tower identify the self-product over this open with Spec R[x,y], an ambient affine open U containing Δ_p(z). The restriction of each prescribed global difference is exactly y_i−x_i.",
+   "uses": [
+    "def-amb-affine-trace-tower",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The polynomial substitution u_i=y_i−x_i, inverse y_i=x_i+u_i, identifies the diagonal ring map with evaluation at u=0 on R[x,u]. Its kernel is the ideal (u): expand a polynomial into its constant term plus the sum of all positive-degree monomials, each divisible by one variable. Successively quotienting by initial variables leaves the polynomial ring in the remaining variables. Comparing coefficients proves that multiplication by the next variable is injective. The final quotient is R[x], nonzero because its spectrum contains z. This proves regularity and the asserted kernel equality. For d=0 the kernel is zero; there are no points to check over an empty scheme.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-sbc-affine-space",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-tower",
+  "def-sbc-affine-space",
+  "def-weil-pbc-regular-sequence",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Agreement on the model: diagonal translated to the zero section; explicit polynomial-coordinate proof"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The coordinate differences of the diagonal of affine space form a regular sequence generating its ideal on affine base charts",
+   "results": "8 hits: immersion of the diagonal, affine-cover diagonal properties, affine-space coordinates and extensionality, and closed-immersion diagonal restriction. No regularity or ideal-generation theorem for the ordered differences.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine neighborhood of the diagonal of affine space the coordinate differences form a regular sequence generating its ideal",
+   "results": "8 hits: regular-sequence definition, flat localization transport and standard smooth coverings; no ordered affine-diagonal neighborhood theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular",
+   "results": "12 hits: definition, nontriviality, empty sequence and congruences; none identifies the actual diagonal ideal or supplied difference coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Rr]egular|[Rr]egular.*diagonal",
+   "results": "15 Mathlib hits on regular representations, no geometric diagonal theorem. Source search found the closed weakly regular X_i−a_i theorem and flat tensor-product coordinate-difference theorem; neither provides the specified ordered affine neighborhood in the global tower. Blueprint search diagonal differences returned zero nodes, and regular sequence found four general definitions or purity results, not this statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineDiagonalGradedCoordinates",
+  "date": "2026-10-25",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Agreement on the model: the diagonal is translated to the zero section in the standard pair; polynomial coordinate differences",
+   "via": [
+    "lem-pur-affine-diagonal-graded-coordinates",
+    "lem-pur-affine-diagonal-integration-orientation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineDiagonalRegularDifferences",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDiagonalRegularDifferences.lean",
+  "declaration": "AlgebraicGeometry.affineDiagonal_regular_differences",
+  "statement": "theorem affineDiagonal_regular_differences (Y : Scheme.{u}) (d : ℕ)\n    (z : affineTraceTower Y d) :\n    ∃ U : (pullback (affineTraceProjection Y d) (affineTraceProjection Y d)).affineOpens,\n      (pullback.diagonal (affineTraceProjection Y d)) z ∈ U.1 ∧\n      let f : Fin d → Γ(pullback (affineTraceProjection Y d) (affineTraceProjection Y d),\n          U.1) := fun j ↦\n        (pullback (affineTraceProjection Y d) (affineTraceProjection Y d)).presheaf.map\n          (homOfLE (show U.1 ≤ ⊤ from le_top)).op\n          ((pullback.snd (affineTraceProjection Y d) (affineTraceProjection Y d)).appTop\n              (affineTraceCoordinate Y d j) -\n            (pullback.fst (affineTraceProjection Y d) (affineTraceProjection Y d)).appTop\n              (affineTraceCoordinate Y d j))\n      RingTheory.Sequence.IsRegular Γ(pullback (affineTraceProjection Y d)\n          (affineTraceProjection Y d), U.1) (List.ofFn f) ∧\n        Ideal.span (Set.range f) =\n          (pullback.diagonal (affineTraceProjection Y d)).ker.ideal U",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T180956-L-4060089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261025T180956-L-4060089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

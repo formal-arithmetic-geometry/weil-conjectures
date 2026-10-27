@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "At a generic point eta, the primes of O_{X,eta} are the generalizations of eta, so there is only the maximal prime; hence this local ring has dimension zero and is Artinian. Its maximal ideal is the nilradical, so every non-unit is nilpotent and therefore a zero-divisor. Consequently every non-zero-divisor is a unit, and the multiplicative set used to define K_X at eta consists only of units. The stalk of the sheafified localization is therefore K_{X,eta}=O_{X,eta}, since a stalk of the sheafification is the stalk of the presheaf and localization commutes with the filtered colimit defining the stalk (elementary; compare the proof of Tag 0EMF: in a local ring of dimension zero any nonzerodivisor is a unit). If eta lies in an open U, then j_eta^{-1}(U)=Spec O_{X,eta}, while if eta is not in U it is empty, since eta has no proper generalization. Evaluating the product on U therefore gives the first displayed product, with its map identified with the germ map.",
+   "text": "At a generic point eta, the map Spec O_{X,eta} → X is an embedding with range the generalizations of eta. Maximality of its irreducible component implies that eta has no proper generalization, so this spectrum is a singleton. Its maximal ideal is therefore a minimal prime and contains no non-zero-divisor. Every regular germ is thus a unit. The ordinary localization map induces a bijection on module stalks: for injectivity, cancel the regular denominator in an equality of fractions after taking germs; for surjectivity, represent the germ by m/b, shrink until b is a unit, and lift it by b^{-1}m. Sheafification preserves stalks, giving the canonical additive equivalences normalized on ordinary germs for every module. For the unit module identify its additive stalk with the underlying additive group of the ring stalk using preservation of colimits by the forgetful functor. The inverse image of U under Spec O_{X,eta} → X is top or bottom according as eta belongs to U. Evaluation preserves products; factors outside U have unique sections, and factors inside U identify with module stalks by tilde.toOpen. Compatibility of the given product isomorphism with ordinary germs, together with the stalk bijection and local equality of representatives, identifies these product coordinates with the canonical germ maps.",
    "uses": [
     "def-weil-pbc-module-stalk"
    ],
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "For an invertible module L, the second product description in [lem-sc-meromorphic-weakass-generic-product] gives K_X(L)(U)=product_{eta in X^0 intersect U} L_eta. Taking stalks commutes with tensor products of O_X-modules, (K_X tensor L)_eta = K_{X,eta} tensor L_eta = O_{X,eta} tensor L_eta = L_eta (elementary, Modules Tag 01CE: both sides are filtered colimits of the section-wise tensor products), and with the module action rule in [def-weil-pbc-module-stalk] this sends a pure tensor f tensor t to f_eta tensor t_eta, which is the germ of ft; by additivity this gives (ft)_eta=f_eta t_eta. The same stalk rule shows these identifications commute with restriction maps.",
+   "text": "Invertibility implies quasi-coherence, so apply the module product theorem to L and also to the unit module. The preceding argument yields the two section bijections. Define multiplication as the unique section whose generic coordinates are the pointwise scalar products; existence and uniqueness come from the L-section bijection. Both inverse stalk maps respect scalar multiplication, as checked on representatives over a common neighborhood. For a fraction m/b, its generic coordinate multiplied by the germ of b is the germ of m, using the localized-module cancellation identity. The germ of every denominator is a unit. Multiplying the proposed fraction identity by the germ of bc therefore reduces it to the ordinary germ scalar-action identity and proves (a/b)(m/c)=(am)/(bc). Germs commute with restriction, and injectivity of the section-coordinate map proves multiplication commutes with restriction. Its action on generic germs is the defining coordinate equation.",
    "uses": [
     "lem-sc-meromorphic-weakass-generic-product",
     "def-sc-invertible-module",
@@ -76,9 +76,10 @@
   "def-sc-invertible-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "X6",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tag 0EMH, proof"
+  "place": "Tags 0EMH and 0EMF; direct stalk localization and coordinate multiplication proof, 2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -133,5 +134,26 @@
   "result": "fix",
   "note": "X Scheme.{u} [IsLocallyNoetherian X] (no CompactSpace: Stacks 0EMH has none); no embedded points = Ass→genericPoints in K1 associatedPoints_eq_weaklyAssociatedPoints spelling (m_x = ⊥.colon {a}); K = meromorphicModule X (unit X), K(L) = meromorphicModule X L (landed def-sc-meromorphic-module, tensor_iso); eK/eL pinned to canonical map on germs; Bijective germ maps on Π over genericPoints ∩ U for every U; restriction; mul pinned by fraction rule + restriction, (ft)_η = f_η t_η; L invertible via IsInvertible; single universe; lets inlined"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261023T132342-L-2259006",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

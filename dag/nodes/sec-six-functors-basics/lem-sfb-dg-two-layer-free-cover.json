@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-dg-two-layer-free-cover",
+ "kind": "statement",
+ "title": "Two-layer graded-free cover of an arbitrary right DG module, surjective on cocycles",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A=\\bigoplus_{r\\in\\mathbf Z}A^r$ be an associative unital graded ring with additive differential $d_A:A^r\\to A^{r+1}$, $d_A^2=0$, and $d_A(ab)=d_A(a)b+(-1)^ra\\,d_A(b)$ for $a\\in A^r$. A right DG $A$-module is a graded right module $N$ with additive differential $d_N:N^s\\to N^{s+1}$, $d_N^2=0$, and $d_N(na)=d_N(n)a+(-1)^sn\\,d_A(a)$ for $n\\in N^s$; a DG map preserves degree, action and differential. The shift $A[k]$ has $A[k]^r=A^{r+k}$, differential $(-1)^kd_A$ and unchanged right action. Suppose the underlying sets of $A,N$ lie in a Grothendieck universe $u$. There exist a right DG $A$-module $Q$, a DG map $\\pi:Q\\to N$, disjoint sets $U,V$ in $u$, integers $t_w$ for $w\\in U\\amalg V$, and a homogeneous graded right $A$-basis $(e_w)_{w\\in U\\amalg V}$ of $Q$, with $|e_w|=t_w$, such that $Q$ has underlying sets in $u$, $\\pi:Q^r\\to N^r$ and $\\ker(d_Q:Q^r\\to Q^{r+1})\\to\\ker(d_N:N^r\\to N^{r+1})$ are surjective for every $r$, $d_Q(e_u)=0$ for $u\\in U$, and $d_Q(e_v)\\in\\bigoplus_{u\\in U}e_uA$ for $v\\in V$. In particular $Q_U=\\bigoplus_{u\\in U}e_uA$ is a DG submodule, its inclusion into $Q$ has a graded right $A$-linear retraction, and $Q_U$ and $Q/Q_U$ are isomorphic as DG modules to $\\bigoplus_{u\\in U}A[-t_u]$ and $\\bigoplus_{v\\in V}A[-t_v]$, respectively. No boundedness, commutativity or countability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KN, lemma-good-quotient, statement and proof (the disks-and-cycles construction, with its homogeneous basis and universe bound made explicit)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=\\coprod_{k\\in\\mathbf Z}N^k$ and $Z=\\{(k,z)\\in E:d_Nz=0\\}$. For each $(k,m)\\in E$ introduce distinct symbols $x_{k,m},y_{k,m}$ of degrees $k,k+1$; for each $(k,z)\\in Z$ introduce a symbol $s_{k,z}$ of degree $k$. Take $V$ to consist of the $x$ symbols and $U$ of the $y,s$ symbols, using disjoint tags, and write $t_w$ for the indicated degrees. Define $Q^n$ to be the additive group of finite-support families $(a_w)$ with $a_w\\in A^{n-t_w}$. Write such a family as $\\sum_we_wa_w$ and define $(e_wa)b=e_w(ab)$ for homogeneous coefficients, extending additively. Coordinatewise distributivity, associativity and the unit law follow from those of $A$. Thus $Q=\\bigoplus_nQ^n$ is a graded right $A$-module with the displayed homogeneous graded basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+   }
+  },
+  {
+   "text": "Write $\\delta_{x_{k,m}}=e_{y_{k,m}}$ and $\\delta_y=\\delta_s=0$. Define an additive map on finite-support families by\n$$D(e_wa)=\\delta_wa+(-1)^{t_w}e_wd_Aa.$$\nUnique coordinates and additivity of $d_A$ make this well-defined; only the finitely many input coordinates and their paired $y$ coordinates can occur in the output. Both terms have degree $t_w+|a|+1$. For homogeneous $a,b$, the algebra Leibniz identity gives\n$$D(e_wab)=\\delta_wab+(-1)^{t_w}e_wd_A(a)b+(-1)^{t_w+|a|}e_wa\\,d_A(b)=D(e_wa)b+(-1)^{t_w+|a|}e_wa\\,d_A(b).$$\nAdding proves the module Leibniz identity for homogeneous finite sums. Also $d_A(1)=0$: applying the algebra Leibniz identity to $1\\cdot1$ gives $d_A(1)=d_A(1)+d_A(1)$. Hence $D(e_w)=\\delta_w$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+   }
+  },
+  {
+   "text": "For a $y$ or $s$ generator, $D^2(e_wa)=(-1)^{2t_w}e_wd_A^2a=0$. For $w=x_{k,m}$ the two mixed terms cancel:\n$$D^2(e_wa)=(-1)^{k+1}e_{y_{k,m}}d_Aa+(-1)^ke_{y_{k,m}}d_Aa+e_wd_A^2a=0.$$\nBy additivity this holds on all finite sums, so $d_Q=D$ makes $Q$ a right DG module. In particular $d_Q(e_u)=0$ for $u\\in U$, while $d_Q(e_{x_{k,m}})=e_{y_{k,m}}$ belongs to the $U$ coordinate submodule.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+   }
+  },
+  {
+   "text": "Set $p_{x_{k,m}}=m$, $p_{y_{k,m}}=d_Nm$, and $p_{s_{k,z}}=z$, and define $\\pi(\\sum_we_wa_w)=\\sum_wp_wa_w$. This is additive, degree-preserving and right $A$-linear by distributivity and associativity. For each symbol, $d_Np_w=\\pi(\\delta_w)$: this is the definition for $x$, the equation $d_N^2m=0$ for $y$, and the defining cocycle condition for $s$. Consequently\n$$d_N(p_wa)=\\pi(\\delta_w)a+(-1)^{t_w}p_wd_Aa=\\pi D(e_wa).$$\nAdding proves that $\\pi$ commutes with differentials. Every $m\\in N^k$ has preimage $e_{x_{k,m}}\\in Q^k$. Every $z\\in\\ker(d_N:N^k\\to N^{k+1})$ has the cocycle preimage $e_{s_{k,z}}$. This proves both required surjections in every degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+   }
+  },
+  {
+   "text": "The coordinate submodule $Q_U=\\bigoplus_{u\\in U}e_uA$ is stable under $D$ because $D(e_ua)=(-1)^{t_u}e_ud_Aa$. The projection retaining the $U$ coordinates and killing the $V$ coordinates is graded right $A$-linear and retracts its inclusion. The map $Q\\to\\bigoplus_{v\\in V}e_vA$ that retains the $V$ coordinates is surjective with kernel exactly $Q_U$, so on cosets it gives a bijective graded right $A$-linear coordinate identification of $Q/Q_U$. Its inverse sends a finite family of $V$ coordinates to its coset. Since $\\delta_v\\in Q_U$, the differential on the quotient satisfies $D(\\bar e_va)=(-1)^{t_v}\\bar e_vd_Aa$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+   }
+  },
+  {
+   "text": "For a generator of degree $t$, the map $a\\mapsto e_wa$ identifies $A[-t]^n=A^{n-t}$ with its coordinate in degree $n$. Its differential is $(-1)^{-t}d_A=(-1)^td_A$, exactly the differential computed above. Thus these coordinate maps, and their coefficient-reading inverses, give DG isomorphisms $\\bigoplus_{u\\in U}A[-t_u]\\simeq Q_U$ and $\\bigoplus_{v\\in V}A[-t_v]\\simeq Q/Q_U$. All maps preserve the unchanged right actions. The retraction in the previous step need only preserve the graded module structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+   }
+  },
+  {
+   "text": "All the sets constructed lie in $u$. The integers lie in the module universe, and the hypothesis places the homogeneous underlying sets of $A,N$ there. Closure of a Grothendieck universe under indexed unions and subsets puts $E,Z$ and their finitely tagged copies $U,V$ in $u$. Put $W=U\\amalg V$. For each $n$, finite-support coefficient families form a subset of the function set from $W$ to the underlying set of $A$, with the degree constraints imposed; function sets are subsets of power sets of Cartesian products, hence belong to $u$. Therefore $Q^n\\in u$ and $\\coprod_nQ^n\\in u$. The same argument applies to the finite-support total graded module. The construction indexed every homogeneous element and every cocycle, without any countability, boundedness or commutativity restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KN, lemma-good-quotient, proof (disk generators and additional cocycle generators); definition-shift for the shift convention."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|[Dd]ifferential.?[Gg]raded|[Ss]emi.?free",
+   "results": "5 hits: Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean, Mathlib/Algebra/Homology/DifferentialObject.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential graded module free cover surjective on cycles built from disks and spheres",
+   "results": "8 hits: Module.Relations.surjective_toQuotient, Algebra.Presentation.differentials.surjective_hom₁, CategoryTheory.ShortComplex.cyclesIsKernel, ModuleCat.projectiveResolution, ModuleCat.instProjectiveObjFree, HomologicalComplex.toCycles, groupHomology.instEpiModuleCatH2π, CategoryTheory.ShortComplex.moduleCatToCycles",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free differential graded module with a two step filtration covers a module and all its cycles",
+   "results": "8 hits: IsModuleFiltration.toIsFiltration, IsModuleFiltration, Ideal.stableFiltration, HomologicalComplex.cycles, CategoryTheory.ShortComplex.cyclesIsKernel, IsModuleFiltration.rec, Ideal.Filtration.Stable, Ideal.Filtration",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedModule\"",
+   "results": "2 hits: GradedModule.isModule, GradedModule.linearEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right module over a graded ring with differential admits a two layer graded free DG cover surjective both on homogeneous elements and on cocycles",
+   "results": "8 hits: HomogeneousLocalization.Away.mk_surjective, GradedRing.projZeroRingHom'_surjective, HomogeneousLocalization.mk_surjective, CochainComplex.HomComplex.Cocycle.toSingleMk_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary modules, cochain complexes or graded modules without a DG algebra action; none states a two-layer DG cover or a property-(P) resolution over an arbitrary DG algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|[Dd]ifferential.?[Gg]raded|[Ss]emi.?free",
+   "results": "{\"t\": \"2026-10-24T01:21:10Z\", \"tool\": \"grep\", \"query\": \"DGModule|DGAlgebra|[Dd]ifferential.?[Gg]raded|[Ss]emi.?free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\"], \"digest\": \"b00540e86065b3f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern ordinary module resolutions, graded-module decompositions, or cocycles of Hom complexes; none constructs a two-layer cover of a module over an arbitrary differential graded ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "GradedModule.linearEquiv",
+   "results": "{\"t\": \"2026-10-24T01:21:11Z\", \"tool\": \"loogle\", \"query\": \"GradedModule.linearEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"GradedModule.linearEquiv\"], \"digest\": \"c58664dd10631a47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern ordinary module resolutions, graded-module decompositions, or cocycles of Hom complexes; none constructs a two-layer cover of a module over an arbitrary differential graded ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every right differential graded module over an arbitrary DG ring has a two layer free cover surjective on elements and cocycles",
+   "results": "{\"t\": \"2026-10-24T01:21:12Z\", \"tool\": \"leanfinder\", \"query\": \"Every right differential graded module over an arbitrary DG ring has a two layer free cover surjective on elements and cocycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective\", \"ModuleCat.projectiveResolution\", \"CochainComplex.HomComplex.Cochain.toSingleMk_surjective\", \"CochainComplex.IsKProjective\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"ModuleCat.instProjectiveObjFree\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_surjective\"], \"digest\": \"728b02e30d1e06ff\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern ordinary module resolutions, graded-module decompositions, or cocycles of Hom complexes; none constructs a two-layer cover of a module over an arbitrary differential graded ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free differential graded module cover surjective on all cochains and all cocycles over a differential graded ring",
+   "results": "{\"t\": \"2026-10-24T01:21:44Z\", \"tool\": \"leansearch\", \"query\": \"Free differential graded module cover surjective on all cochains and all cocycles over a differential graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CochainComplex.HomComplex.CohomologyClass.mk_surjective\", \"groupCohomology.cochainsMap_id_f_map_epi\", \"Module.Relations.surjective_toQuotient\", \"CochainComplex.HomComplex.cocycle\", \"CochainComplex.degreewiseEpiWithInjectiveKernel\", \"CochainComplex.HomComplex.Cocycle.isKernel\", \"CochainComplex.HomComplex.Cocycle\"], \"digest\": \"5c765b0b88a3659e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern ordinary module resolutions, graded-module decompositions, or cocycles of Hom complexes; none constructs a two-layer cover of a module over an arbitrary differential graded ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semifree differential graded right module generated by disks and spheres maps onto any DG module and all its cycles",
+   "results": "{\"t\": \"2026-10-24T01:21:45Z\", \"tool\": \"leanfinder\", \"query\": \"A semifree differential graded right module generated by disks and spheres maps onto any DG module and all its cycles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.liftCycles\", \"HomologicalComplex.liftCycles'\", \"ModuleCat.projectiveResolution\", \"Rep.standardComplex.forget₂ToModuleCat\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.standardComplex.x_projective\"], \"digest\": \"c58dd6bac77cf0fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits concern ordinary module resolutions, graded-module decompositions, or cocycles of Hom complexes; none constructs a two-layer cover of a module over an arbitrary differential graded ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-property-p-resolution",
+  "date": "2026-10-24",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: restrict derived tensor to D_QCoh using lemma-tensor-with-QCoh-complex (09MA). Within lem-sfb-space-dg-tensor-quasicoherent, steps 3 and 4 (Tag 09MA proof, first sentence: 'Let P be a differential graded E-module with property P', the resolution of an arbitrary module by Tag 09KP, lemma-resolve). Supporting input: Tag 09KN, lemma-good-quotient, the surjective-on-elements-and-cocycles two-layer cover used in the first sentence of the proof of Tag 09KP, lemma-resolve.",
+   "via": [
+    "lem-sfb-dg-property-p-resolution",
+    "lem-sfb-space-dg-tensor-quasicoherent",
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-two-layer-free-cover",
+  "worker": "stage1",
+  "summary": "Expanded Tag 09KN into an explicit finite-support disk-and-cocycle construction, verifying the right-module Leibniz signs, square-zero differential, both surjections, the graded retraction, both DG shift identifications and the universe bound. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the inherited supporting input to proof (3) of det-thm-sf-ctf-stability-direct-images in the latest blueprint, through Tag 09KP and its two-layer cover input Tag 09KN. The full inherited from.place and via chain are retained. blueprint_refs.py ancestor returns null; same_as remains empty after whole-blueprint searches.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-a9c6faa8c",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-a9c6faa8c (reviewer sub-agent of L); spot-checked: Read in full: the item and all 7 steps, Stacks dga.tex 09KN (lemma-good-quotient: statement and proof), definition-shift, the first sentence of 09KP, and def-weil-size-convention. Against its base (Q88 run snapshot) the statement, stmt_deps, blueprint, source and created fields are byte-identical; only status, proof, proof_origin, split_report and the appended searches changed. The 5 old searches are kept and 5 were added; together they cover grep, loogle, leanfinder and leansearch. There are no new nodes and no re-split note. Every step was recomputed: (1) Q is a finite-support graded-free module with tags x (degree k), y (degree k+1), s (degree k). (2) D(e_w a)=δ_w a+(-1)^t e_w da satisfies the right-module Leibniz rule with sign (-1)^{t+|a|}, and d_A(1)=0. (3) D^2=0 because the cross terms (-1)^{k+1} and (-1)^k cancel. (4) π commutes with d via d_N p_w=π(δ_w), checked for all three symbol kinds; e_x lifts each element and e_s lifts each cocycle. (5) Q_U is D-stable, its coordinate retraction is graded, and the quotient differential is (-1)^t ē_v da. (6) The differential on A[-t] is (-1)^t d_A, so Q_U and Q/Q_U are DG sums of shifts. (7) The universe bound holds, using Z∈u from the size convention. The reported source error is correct: under definition-shift, the source's 'A[k]' must be A[-k] (example: A=Z, N=Z in degree 1, k=1), and the item already uses A[-t]. Edge cases N=0, A=0, d_N=0, negative degrees and noncommutative A were checked. The duplicate candidates are all special cases or different facts, not restatements: lem-sfb-dg-countable-free-cover (adds countability), lem-pc-derived-free-complex-cover (ring with d=0), lem-pc-zero-differential-free-coproduct and lem-pc-derived-filtered-free-resolution. The item's statement serves its citer lem-sfb-dg-property-p-resolution exactly. There are no SGA citations and no tool_uses, and nothing was fixed."
+ }
+}

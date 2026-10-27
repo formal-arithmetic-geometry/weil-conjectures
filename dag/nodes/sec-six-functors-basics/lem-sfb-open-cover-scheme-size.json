@@ -1,0 +1,417 @@
+{
+ "id": "lem-sfb-open-cover-scheme-size",
+ "kind": "statement",
+ "title": "Scheme size bounded by an open covering",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] and $Y=\\bigcup_{i\\in I}Y_i$ an open covering indexed by a set $I$, with the induced open subscheme structures on the $Y_i$. For a scheme $Z$, put $s(Z)=\\max\\{\\aleph_0,|\\mathcal B(Z)|,\\sup_{V\\in\\mathcal B(Z)}|\\Gamma(V,\\mathcal O_Z)|\\}$, where $\\mathcal B(Z)$ is the set of affine open subschemes and $\\Gamma(V,\\mathcal O_Z)$ is the ring of sections of the structure sheaf on $V$. Then $s(Y)\\leq\\max\\{\\aleph_0,|I|,\\sup_{i\\in I}s(Y_i)\\}$. The empty covering is allowed, in which case $Y$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000Q, lemma-bound-size (with an explicit aleph_0 term to include the empty covering); scheme size defined in section-categories-schemes preceding Tag 000I."
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\kappa=\\max\\{\\aleph_0,|I|,\\sup_i s(Y_i)\\}$ and choose a set $K$ of cardinality $\\kappa$. The inline invariant agrees with [def-sfb-scheme-cardinal-size]. Thus $\\kappa$ is infinite, $|I|\\leq\\kappa$, and for every $i$ both $|\\mathcal B(Y_i)|\\leq\\kappa$ and $|\\Gamma(V,\\mathcal O_{Y_i})|\\leq\\kappa$ for every affine open $V\\subseteq Y_i$. These are just the defining maximum and supremum inequalities.",
+   "uses": [
+    "def-sfb-scheme-cardinal-size"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000Q, lemma-bound-size, proof; cardinal size in section-categories-schemes (Tag 000H)."
+   }
+  },
+  {
+   "text": "For any affine open $U\\subseteq Y$, affine quasi-compactness in [lem-weil-pbc-affine-scheme-qcqs] makes its underlying space quasi-compact. For every $x\\in U$, choose $i$ with $x\\in Y_i$. Apply [lem-weil-pbc-affine-opens-basis] to the open $U\\cap Y_i$ in $Y$ to obtain an affine open $V$ with $x\\in V\\subseteq U\\cap Y_i$. These $V$ cover $U$, so quasi-compactness gives finitely many $V_1,\\ldots,V_n$ covering $U$, with labels $i_1,\\ldots,i_n$ and $V_r\\subseteq Y_{i_r}$. Their induced open subscheme structures are the restrictions of the same structure sheaf, hence each $V_r$ is also an affine open of $Y_{i_r}$. For $U=\\varnothing$, take $n=0$. No intersection of affine opens is asserted to be affine.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000Q, lemma-bound-size, proof; cardinal size in section-categories-schemes (Tag 000H)."
+   }
+  },
+  {
+   "text": "Let $A=\\coprod_{i\\in I}\\mathcal B(Y_i)$, viewed as labelled affine opens of $Y$. Choose injections $j:I\\hookrightarrow K$ and $e_i:\\mathcal B(Y_i)\\hookrightarrow K$, possible by step 1. The map $(i,V)\\mapsto[j(i),e_i(V)]$ injects $A$ into $\\operatorname{List}(K)$. By [lem-weil-pbc-finite-list-cardinality], $|\\operatorname{List}(K)|\\leq\\max(\\aleph_0,\\kappa)=\\kappa$, whence $|A|\\leq\\kappa$. Apply that same node again to get $|\\operatorname{List}(A)|\\leq\\kappa$. This also covers $I=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000Q, lemma-bound-size, proof; cardinal size in section-categories-schemes (Tag 000H)."
+   }
+  },
+  {
+   "text": "Take the subset $L\\subseteq\\operatorname{List}(A)$ of lists whose underlying union in $Y$ is affine. Sending a list to this union gives a surjection $L\\twoheadrightarrow\\mathcal B(Y)$: step 2 supplies such a finite list for each affine $U$, and the empty list represents the empty affine open. Equivalently choose one representing list for each $U$; different $U$ have different unions, so this choice is injective. Therefore $|\\mathcal B(Y)|\\leq|\\operatorname{List}(A)|\\leq\\kappa$ by step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000Q, lemma-bound-size, proof; cardinal size in section-categories-schemes (Tag 000H)."
+   }
+  },
+  {
+   "text": "For the cover $U=\\bigcup_{r=1}^nV_r$ from step 2, the restriction map $\\Gamma(U,\\mathcal O_Y)\\to\\prod_{r=1}^n\\Gamma(V_r,\\mathcal O_Y)$ is injective: sections with equal restrictions on all the members of this open cover are equal by the uniqueness axiom for the structure sheaf. The structure sheaf is a sheaf of rings because a scheme is locally ringed, as in [def-pc-scheme] and [def-weil-locally-ringed-space-morphism]. Restriction to an open subscheme gives $\\Gamma(V_r,\\mathcal O_Y)=\\Gamma(V_r,\\mathcal O_{Y_{i_r}})$, so each factor has cardinality at most $\\kappa$ by step 1. This argument also handles the empty cover: the sheaf uniqueness axiom says there is at most one section on the empty open.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000Q, lemma-bound-size, proof; cardinal size in section-categories-schemes (Tag 000H)."
+   }
+  },
+  {
+   "text": "For each $r$ choose an injection of the $r$-th section ring in step 5 into $K$. A tuple of sections maps injectively to the ordered list of its images in $K$; when $n=0$, the sole tuple maps to the empty list. By [lem-weil-pbc-finite-list-cardinality] this product has cardinality at most $\\max(\\aleph_0,|K|)=\\kappa$. The injection of step 5 proves $|\\Gamma(U,\\mathcal O_Y)|\\leq\\kappa$ for every affine open $U$. Taking the supremum over these $U$, combining with step 4 and $\\aleph_0\\leq\\kappa$, gives $s(Y)\\leq\\kappa$. If $I$ is empty, the covering condition forces $Y=\\varnothing$ and the same argument gives $s(Y)=\\aleph_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-list-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sets.tex",
+    "place": "Tag 000Q, lemma-bound-size, proof; cardinal size in section-categories-schemes (Tag 000H)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-scheme-cardinal-size",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-finite-list-cardinality",
+  "def-pc-scheme",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sets.tex",
+  "place": "Tag 000Q, lemma-bound-size, proof; cardinal size in section-categories-schemes (Tag 000H)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(size|cardinal).*(openCover|open.cover)|(openCover|open.cover).*(size|cardinal)",
+   "results": {
+    "t": "2026-10-23T11:45:47Z",
+    "tool": "grep",
+    "query": "(size|cardinal).*(openCover|open.cover)|(openCover|open.cover).*(size|cardinal)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Cardinal\"",
+   "results": {
+    "t": "2026-10-23T11:45:48Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bound the size of a scheme by cardinality of an open cover and supremum of sizes of covering open subschemes",
+   "results": {
+    "t": "2026-10-23T11:45:48Z",
+    "tool": "leansearch",
+    "query": "Bound the size of a scheme by cardinality of an open cover and supremum of sizes of covering open subschemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.sizeOf_spec",
+     "AlgebraicGeometry.Scheme.AffineCover.mk.sizeOf_spec",
+     "AlgebraicGeometry.QuasiCompactCover.inst",
+     "AlgebraicGeometry.Scheme.GlueData.mk.sizeOf_spec",
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.IsReduced.of_openCover",
+     "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover"
+    ],
+    "digest": "c886dc66102b0bb2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The size of a scheme is at most the maximum of aleph0 the number of open cover members and the sizes of those members",
+   "results": {
+    "t": "2026-10-23T11:45:50Z",
+    "tool": "leanfinder",
+    "query": "The size of a scheme is at most the maximum of aleph0 the number of open cover members and the sizes of those members",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_I₀",
+     "AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange",
+     "AlgebraicGeometry.Scheme.instInhabitedOpenCover",
+     "AlgebraicGeometry.Scheme.openCoverOfISupEqTop",
+     "AlgebraicGeometry.Scheme.OpenCover.iSup_opensRange",
+     "AlgebraicGeometry.Scheme.openCoverOfIsOpenCover",
+     "AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_X"
+    ],
+    "digest": "bbd71f67a1fd59de"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme covered by open subschemes of bounded cardinal size has boundedly many affine opens and sections",
+   "results": {
+    "t": "2026-10-23T11:45:52Z",
+    "tool": "leanfinder",
+    "query": "A scheme covered by open subschemes of bounded cardinal size has boundedly many affine opens and sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineOpenCover_I₀",
+     "AlgebraicGeometry.Scheme.AffineOpenCover",
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.Scheme.directedAffineCover_I₀",
+     "AlgebraicGeometry.Scheme.affineBasisCover",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.AffineCover",
+     "AlgebraicGeometry.Scheme.OpenCover.affineRefinement"
+    ],
+    "digest": "cc920b8d07b40a9e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits give affine schemes, affine opens or covers, not the cardinal size estimate; sizeOf_spec describes Lean structural SizeOf, not Stacks scheme size."
+  },
+  {
+   "tool": "grep",
+   "query": "(size|cardinal).*(openCover|open.cover)|(openCover|open.cover).*(size|cardinal)",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "grep",
+    "query": "(size|cardinal).*(openCover|open.cover)|(openCover|open.cover).*(size|cardinal)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme cover and affine refinement constructions, not the cardinal bound for all affine opens and their section rings; read the cover sources. Structural SizeOf is unrelated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bound the number of affine opens and the cardinalities of their sections from an open covering of a scheme",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "leansearch",
+    "query": "Bound the number of affine opens and the cardinalities of their sections from an open covering of a scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.AffineOpenCover",
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.instInhabitedOpenCover",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+     "AlgebraicGeometry.QuasiCompactCover.inst",
+     "AlgebraicGeometry.Scheme.directedAffineCover"
+    ],
+    "digest": "a89b7a85a671b2a2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme cover and affine refinement constructions, not the cardinal bound for all affine opens and their section rings; read the cover sources. Structural SizeOf is unrelated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Cardinal\"",
+   "results": {
+    "t": "2026-10-23T13:12:47Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Cardinal\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme cover and affine refinement constructions, not the cardinal bound for all affine opens and their section rings; read the cover sources. Structural SizeOf is unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bound the cardinal size of a scheme using the number of affine open subsets and their rings of sections along an open cover",
+   "results": {
+    "t": "2026-10-23T13:12:56Z",
+    "tool": "leanfinder",
+    "query": "Bound the cardinal size of a scheme using the number of affine open subsets and their rings of sections along an open cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineOpenCover_I₀",
+     "AlgebraicGeometry.Scheme.affineOpenCover_idx",
+     "AlgebraicGeometry.Scheme.AffineOpenCover",
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.Scheme.affineOpenCover_X",
+     "AlgebraicGeometry.Scheme.AffineOpenCover.openCover_I₀",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.directedAffineCover_I₀"
+    ],
+    "digest": "88b56b4e8a0948ee"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme cover and affine refinement constructions, not the cardinal bound for all affine opens and their section rings; read the cover sources. Structural SizeOf is unrelated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme covered by open subschemes of bounded cardinal size has boundedly many affine opens and sections",
+   "results": {
+    "t": "2026-10-23T13:16:21Z",
+    "tool": "leanfinder",
+    "query": "A scheme covered by open subschemes of bounded cardinal size has boundedly many affine opens and sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineOpenCover_I₀",
+     "AlgebraicGeometry.Scheme.AffineOpenCover",
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.Scheme.directedAffineCover_I₀",
+     "AlgebraicGeometry.Scheme.affineBasisCover",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.AffineCover",
+     "AlgebraicGeometry.Scheme.OpenCover.affineRefinement"
+    ],
+    "digest": "cc920b8d07b40a9e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme cover and affine refinement constructions, not the cardinal bound for all affine opens and their section rings; read the cover sources. Structural SizeOf is unrelated."
+  },
+  {
+   "tool": "grep",
+   "query": "mk_list_le_max|mul_eq_self",
+   "results": {
+    "t": "2026-10-23T13:16:52Z",
+    "tool": "grep",
+    "query": "mk_list_le_max|mul_eq_self",
+    "sub": "SetTheory/Cardinal",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+     "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+     "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+     "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+     "Mathlib/SetTheory/Cardinal/Arithmetic.lean",
+     "Mathlib/SetTheory/Cardinal/Aleph.lean",
+     "Mathlib/SetTheory/Cardinal/Ordinal.lean",
+     "Mathlib/SetTheory/Cardinal/Ordinal.lean"
+    ],
+    "digest": "de5adf64c7ceb1c7"
+   },
+   "date": "2026-10-23",
+   "verdict": "supporting match only: existing leaf lem-weil-pbc-finite-list-cardinality supplies Cardinal.mk_list_le_max; source read at Arithmetic.lean:746-750. This does not state the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qc-lft-scheme-size-bound",
+  "date": "2026-10-23",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: 04U0, the scheme size estimates ensuring that the coproducts of the refined bases and of their affine atlases belong to the original big site. Split prerequisite: the bound on each quasi-compact locally finite type affine atlas summand. Supporting input for 04T7: its first reduction, using 000Q on the finite affine covering of X; retain aleph_0 for the empty cover.",
+   "via": [
+    "lem-sfb-qc-lft-scheme-size-bound",
+    "lem-sfb-bounded-affine-lft-coproduct",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-cover-scheme-size",
+  "worker": "stage1",
+  "summary": "Q52 read Stacks 000Q and made both finite-affine-list counting and finite-product section counting explicit using the existing finite-list Mathlib leaf. Reused affine compactness and the affine basis; no new nodes. Kept the already corrected empty-cover term. Flagged an existing unsplit duplicate in report.md.",
+  "blueprint": "Supporting size estimate below det-thm-sf-ctf-stability-direct-images (3), as recorded in blueprint.from.place: the 000Q input to the finite affine-cover reduction for 04T7. The current blueprint has no separate size lemma. Steps follow the two estimates in the proof of 000Q.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-50564d9aa",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-50564d9aa (reviewer sub-agent of L); spot-checked: I read the whole item, which has 6 steps and no new nodes. Source checks: Stacks sets.tex 000H (l.311-326) defines size = max(aleph0, #affines, sup|Gamma|), which matches the inline s(Z) and def-sfb-scheme-cardinal-size exactly. Stacks 000Q (l.524-560) has the proof, and the steps follow it. The statement adds aleph0 on the right; this is correct because the empty cover gives s(empty)=aleph0 while Stacks' right side is 0, and it changes nothing when I is nonempty. Step 2 applies quasi-compactness only to an affine U. It applies the affine basis to U∩Y_i inside Y, and each V is affine in Y_i through the restricted sheaf, so no affineness of intersections is used (no E1). Steps 3 and 6 replace the Jech/Kunen cardinal arithmetic with explicit injections into List(K). They cite the Mathlib leaf Cardinal.mk_list_le_max (Arithmetic.lean:746-750, read), which has no nonemptiness hypothesis. Step 4 uses the surjection L -> B(Y) given by unions. Step 5 gets injectivity into the product from the sheaf locality axiom, with the sheaf-of-rings fact taken from def-weil-locally-ringed-space-morphism. proof_deps equals the union of uses, there is no cycle, all cited nodes are Mathlib leaves or definitions (no route issue, no tool_uses), and no SGA source is cited. Small cases checked: empty cover, singleton cover, finite rings, infinite repeated cover, non-quasi-separated ambient scheme. Advisory for the maintainer: the existing unsplit node lem-sfb-scheme-size-open-cover-bound (Q77, same day, cited by lem-sfb-big-site-open-cover-size-closure) duplicates this item and should be merged into it. That duplicate predates this delivery and is not its fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeSizeOpenCoverBound",
+  "declaration": "AlgebraicGeometry.Scheme.cardinalSize_le_openCover",
+  "statement": "theorem cardinalSize_le_openCover (X : Scheme.{u}) {I : Type v} (U : I → X.Opens)\n    (hU : (⨆ i : I, U i) = ⊤) :\n    Cardinal.lift.{v} X.cardinalSize ≤\n      max Cardinal.aleph0\n        (max (Cardinal.lift.{u} (Cardinal.mk I))\n          (⨆ i : I, Cardinal.lift.{v} (U i).toScheme.cardinalSize))",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing statement of lem-sfb-scheme-size-open-cover-bound: arbitrary open covering, induced open subschemes, the same cardinalSize invariant and explicit aleph0 term, including empty covers. No new module or definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5562c1ae1",
+  "group": "Q28",
+  "result": "pass",
+  "note": "existing:true rebind of the landed Q94 decl Scheme.cardinalSize_le_openCover (owner: twin node lem-sfb-scheme-size-open-cover-bound); first S2 delivery of the item; only the item's lean field changed; statement verbatim; matches node and Stacks 000Q/000H clause by clause, including the ℵ₀ empty-cover correction, arbitrary index universe and bounded iSups; advisories: merge twin nodes, cardinal-size def node missing from stmt_deps (it is in proof_deps)"
+ }
+}

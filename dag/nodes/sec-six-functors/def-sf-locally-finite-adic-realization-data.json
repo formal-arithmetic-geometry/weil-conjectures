@@ -1,0 +1,111 @@
+{
+ "id": "def-sf-locally-finite-adic-realization-data",
+ "kind": "definition",
+ "title": "Native locally finite adic realization data",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a scheme $X$. Use the native adic module framework [def-sf-native-weil-derived-framework], the common-field coefficient category [def-weil-algebraically-closed-coefficients] and its raw rational stages [def-weil-rationalization-karoubi], with the recorded finite-Tor constructibility convention [def-weil-finite-tor-amplitude]. Let $B_X$ be the underlying internal abelian-sheaf ring of the native locally finite coefficient. Define its commutative section-ring sheaf and the section-module functor using the canonical internal/ordinary module equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. A coefficient presentation fixes the continuous integral completion, finite quotients, localization, integral inclusion and finite-field inclusion by their constants, residues and pointwise values. Its integral structural map is the composite of these specified maps. A realization datum consists of commutativity and exact additive section functor data; all coefficient presentations with scalar compatibility; an additive triangulated common-field functor into the native derived category, fully faithful with exactly the bounded constructible image; its natural integral scalar-extension comparisons; and source/target essential smallness. Require common-field transition maps to be precisely the completion comparison followed by balanced derived scalar multiplication. This defines data and equations, without asserting existence.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.3 and 6.8.8, Proposition 6.8.14 and Remark 6.8.15; normalized native realization data."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Data for normalized native adic realization coefficient presentations tensor completion and sectionwise module inverse image",
+   "results": "8 hits: AdicCompletion.module, tensor_map_id_left_eq_map, coe_ofTensorProductEquivOfFiniteNoetherian, ofTensorProductEquivOfFiniteNoetherian_apply, ofTensorProductEquivOfFiniteNoetherian.congr_simp, ofTensorProductEquivOfFiniteNoetherian, AdicCompletion, congr_symm_apply. None supplies these sheaf-level data.",
+   "date": "2026-10-23",
+   "verdict": "reuse existing project definitions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized continuous adic coefficient realization and module inverse image from scheme isomorphisms",
+   "results": "8 hits: Scheme.Hom.toNormalization_app_preimage, normalizationDiagram, normalizationDiagramMap, ι_toNormalization, ι_fromNormalization, ι_fromNormalization_assoc, fromNormalization_toNormalization, toNormalization. None supplies these data.",
+   "date": "2026-10-23",
+   "verdict": "reuse existing project definitions"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdicRealization|ConstructibleTensorCompletionPresentation|podCompletedModuleInverseImage|isoSectionwiseModuleInverseImage",
+   "results": "Mathlib: 0 hits. rg in lean/WeilConjectures: no hits. rg in lean/Sheaf: the existing definitions are in LocallyFiniteAdicConstructibleRealization, RationalRealizationTensorComparison, DerivedAutomorphismHomEvaluation, and ProEtale/IsoSectionwiseInverseImage. DAG declaration-name search finds only their theorem owners; def-trf-point-restriction-coordinates merely consumes sectionwise inverse image. blueprint_refs searches native realization, tensor completion presentation, sectionwise inverse image: 0 matches each.",
+   "date": "2026-10-23",
+   "verdict": "existing definitions without definition-node owners; record without redefinition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-23",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Explicit canonical comparison data in the native realization obligation. The parent is a maintainer-created native obligation with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.LocallyFiniteAdicConstructibleRealization",
+  "declaration": "WeilConjectures.LocallyFiniteAdicRealization.Realization",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicRealization.abRing",
+   "WeilConjectures.LocallyFiniteAdicRealization.ringSheaf",
+   "WeilConjectures.LocallyFiniteAdicRealization.sections",
+   "WeilConjectures.LocallyFiniteAdicRealization.embedding",
+   "WeilConjectures.LocallyFiniteAdicRealization.CoefficientPresentation",
+   "WeilConjectures.LocallyFiniteAdicRealization.CoefficientPresentation.integralMap",
+   "WeilConjectures.LocallyFiniteAdicRealization.RealizationCore",
+   "WeilConjectures.LocallyFiniteAdicRealization.completedTensorComparison",
+   "WeilConjectures.LocallyFiniteAdicRealization.commonField",
+   "WeilConjectures.LocallyFiniteAdicRealization.Realization"
+  ],
+  "statement": "structure Realization extends RealizationCore l X",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership requested by maintainer H2 at immutable head 07059192980c. Reuses the unchanged published declarations; no existence theorem is asserted or used as an additional hypothesis, no module is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 0705. H3 repaired: Family.sourceId_unit (pullbackTensorCommonComposition 𝟙 𝟙 M ≫ sourceId at F M = 𝟙, HEq along id_comp) is the pseudofunctor left-unit law; it fixes sourceId through essential surjectivity and naturality, so identity is no longer vacuous. H2 repaired: theorem stmt_deps replaced by def-zl-ringed-...-data plus four existing:true owners; each statement is verbatim in its unchanged module and all declarations exist; the other five Lean files are byte-identical to 0705. FIX: def-sf-adic-closed-reindexing-maps re-owned PodPartialClosed, .evaluation and podPairPullback, already owned by the on-base def-pod-partial-closed-interfaces (Q69, landed 15:55Z 10-22); fixes/def-sf-adic-closed-reindexing-maps.json removes them, cites the owner and rewrites the TeX. Advisory: def-sf-proetale-sectionwise-module-inverse-image duplicates Q15 def-weil-proetale-iso-sectionwise-inverse-image, landed 05:13Z after base 04:33Z; it cannot be cited by a FIX, so the maintainer should merge the nodes. No Lean changed and no compile was run."
+ }
+}

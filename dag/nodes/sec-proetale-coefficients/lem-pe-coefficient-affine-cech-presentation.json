@@ -1,0 +1,135 @@
+{
+ "id": "lem-pe-coefficient-affine-cech-presentation",
+ "kind": "statement",
+ "title": "Coefficient-site affine finite Cech nerve presentations",
+ "statement": "Let X be any scheme in universe u. Let V_a to U be a Fin m-indexed covering in the coefficient-sized pro-etale model of [lem-pe-coefficient-comparison-data], and suppose the structure morphisms of AsSmall.down U and all AsSmall.down V_a are proAffineEtale [sk-def-pe-morphisms]. Fix any chosen iterated products and index maps S [def-weil-pbc-site-cech-complex]. There is a small cofiltered category J in universe u+1 and compatible affine etale covering approximations of this family in the source model. Their normalized chosen Cech complexes have transitions and projections from S commuting with every index map, not only faces. Every intersection is affine, and the cone from its specified S.W to the corresponding stage diagram is a limit after forgetting to schemes over X. This assertion has no coefficient ring, sheaf, injectivity, degree, or cohomology in it. Empty families, repeated factors and arbitrary non-affine X are included.",
+ "stmt_deps": [
+  "lem-pe-coefficient-comparison-data",
+  "sk-def-pe-morphisms",
+  "def-weil-pbc-site-cech-complex",
+  "def-pe-coefficient-affine-cech-presentation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U, lemma-affine-vanishing, finite Cech inverse-limit reductions; Tags 099T, 01ZM, 01ZN and 07RP. The proof reuses the proved affine covering-presentation argument and the canonical nerve-presentation construction."
+ },
+ "proof": [
+  {
+   "text": "Transport the covering sieve through AsSmall.down. Form the finite affine disjoint union using AffineProEt.exists_surjective_factorization. Its map to the covered object is surjective, and the original members form a finite affine open cover of its source. The singleton relative-presentability theorem gives compatible affine-etale presentations of the source and target, with covering singleton stage arrows.",
+   "uses": [
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend this finite affine open cover by Scheme.OpenCover.exists_of_isCofiltered_of_finite, restrict the relative presentation over the resulting index, and compose its member maps with the surjective presentation map. The cone identities identify their limits with the original arrows. Lift points through the singleton stage cover and the descended finite open cover to prove that every resulting stage family covers. This repeats the fully proved cover-presentation argument without the unused affine-ambient hypothesis.",
+   "uses": [
+    "sk-def-pe-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use systemOfPresentation to construct all ordered intersections and transitions, and presentedNerveIsLimit to prove their underlying scheme limit properties. Select normalized SiteCechComplex structures for the covering stages using exists_of_covering. Express an arbitrary chosen nerve as a limiting wide-pullback cone. The unique isomorphism to the ordered product respects every index map, by projecting to each repeated factor.",
+   "uses": [
+    "lem-cbc-cech-nerve-presentation-construction",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate transitions and cone projections by these product isomorphisms. Their identities prove compatibility with all index maps. Affineness transfers through the product isomorphisms and Scheme.isAffine_of_isLimit. Map the normalized stage complexes through AsSmall.up, and replace the small index by AsSmall in universe u+1. Whiskering by the equivalence preserves each limit; postcomposing with the stage isomorphism and changing the cone vertex by its product isomorphism gives exactly the specified cone.",
+   "uses": [
+    "lem-cbc-cech-nerve-presentation-construction",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-cbc-cech-nerve-presentation-construction",
+  "sk-def-pe-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099U. Generalize the proved finite covering-presentation construction by observing that it does not use IsAffine X, then transport arbitrary normalized Cech products and coefficient universes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite cover of affine pro etale schemes has compatible cofiltered affine etale covering presentations and all intersections are limits of their stages",
+   "results": "8 hits in AlgebraicGeometry.AffineTransitionLimit, including Scheme.exists_isOpenCover_and_isAffine and finite-type map descent; no complete compatible Cech presentation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit, CategoryTheory.Limits.WidePullbackCone",
+   "results": "8 hits in WidePullbacks, including reindexIsLimitEquiv, IsLimit.lift, its projection equations and IsLimit.mk. Used wide-pullback limit constructions; no scheme approximation theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "widePullback.*[Ll]imit|[Ll]imit.*widePullback",
+   "results": "25 hits in CechNerve, WidePullbacks and finite-limit support. Generic limit machinery applies, but no affine-etale approximation theorem. Blueprint search finite Cech returned no matching blueprint node.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientComparisonAffineCech",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "Tag 099U, geometric finite Cech inverse-limit reductions inside the affine injective-acyclicity computation.",
+   "via": [
+    "lem-pe-coefficient-comparison-affine-cech",
+    "lem-pe-coefficient-comparison-affine-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientAffineCechPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientAffineCechPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_coefficient_affine_cech_presentation",
+  "statement": "theorem exists_coefficient_affine_cech_presentation (X : Scheme.{u})\n    (U : Scheme.coefficientProEtaleSiteModel.{u, v} X)\n    (m : ℕ) (V : Fin m → Scheme.coefficientProEtaleSiteModel.{u, v} X)\n    (f : ∀ a, V a ⟶ U)\n    (hU : proAffineEtale (AsSmall.down.obj U).hom)\n    (hV : ∀ a, proAffineEtale (AsSmall.down.obj (V a)).hom)\n    (hc : Presieve.ofArrows V f ∈\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X).toPrecoverage U)\n    (S : SiteCechComplex V f) :\n    ∃ (J : Type (u + 1)) (_ : SmallCategory J) (_ : IsCofiltered J)\n      (P : CoefficientAffineCechPresentation X S J),\n      ∀ p t, Nonempty (IsLimit\n        (((AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, v} X ⥤ X.ProEt) ⋙\n          Scheme.ProEt.forget X).mapCone (P.cone p t)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T102409-L-352769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T102409-L-352769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

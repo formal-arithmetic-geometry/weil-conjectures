@@ -1,0 +1,247 @@
+{
+ "id": "lem-trf-continuous-precomposition-injective-module-cech",
+ "kind": "statement",
+ "title": "Continuous precomposition of injective modules has trivial positive Cech cohomology",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites, with objects, arrows, covering indices and coefficient values in one common universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Let $u:\\mathcal C\\to\\mathcal D$ be continuous in the covering-family sense [def-weil-pbc-sites-and-cohomology](3): it sends coverings to coverings and preserves their pullbacks along any map. Let $R$ be a sheaf of commutative rings on $\\mathcal D$ and $I$ an injective sheaf of $R$-modules [def-weil-sheaf-of-modules-category, def-sp-injective-resolutions]. Then $R_u(V)=R(uV)$ and $I_u(V)=I(uV)$, with restrictions $R(u(h))$ and $I(u(h))$ and scalar action inherited sectionwise, are a ring sheaf and an $R_u$-module sheaf on $\\mathcal C$. Write $I_{\\mathrm{ab}}$ and $(I_u)_{\\mathrm{ab}}$ for their underlying abelian sheaves.\nFor every covering $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$, use the chosen iterated fibre products and alternating Cech complexes of [def-weil-pbc-site-cech-complex]. For $n\\geq0$ and $\\mathbf t\\in T^{n+1}$ put $W_{\\mathbf t}=U_{t_0}\\times_U\\cdots\\times_UU_{t_n}$ and $P_{\\mathbf t}=uU_{t_0}\\times_{uU}\\cdots\\times_{uU}uU_{t_n}$. The canonical maps $c_{\\mathbf t}:uW_{\\mathbf t}\\to P_{\\mathbf t}$ are isomorphisms and satisfy\n$$c_{\\mathbf t\\setminus t_j}\\circ u(\\delta_j)=\\delta_j\\circ c_{\\mathbf t}$$\nfor the projections deleting a factor. In $D^+(\\operatorname{Ab})$ [def-weil-abstract-derived-category] there is a canonical isomorphism\n$$Q\\check C^\\bullet(\\mathcal U,(I_u)_{\\mathrm{ab}})\\xrightarrow{\\sim}Q\\check C^\\bullet(u\\mathcal U,I_{\\mathrm{ab}}),$$\nwhere $Q$ is localization at quasi-isomorphisms. It is represented by the cochain isomorphism whose component at $\\mathbf t$ is $I(c_{\\mathbf t}^{-1}):I(uW_{\\mathbf t})\\to I(P_{\\mathbf t})$. In particular $\\check H^q(\\mathcal U,(I_u)_{\\mathrm{ab}})=0$ for every $q>0$. No cocontinuity, preservation of arbitrary fibre products, or injectivity of $I_{\\mathrm{ab}}$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, proof: covering-nerve comparison and injective-module Cech vanishing before applying lemma-cech-vanish-collection."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-site-continuous-pushforward-sheaf], precomposition sends the underlying set sheaf of $R$ and the abelian sheaf $I_{\\mathrm{ab}}$ to sheaves. Apply [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] to the ring presheaf $V\\mapsto R(uV)$ to obtain the ring sheaf $R_u$. Define its action on $I_u(V)$ by the given $R(uV)$-action. The module laws hold sectionwise, and for $h:V\\to W$ one has $I(u(h))(as)=R(u(h))(a)I(u(h))(s)$. Thus [def-weil-sheaf-of-modules-category] gives exactly the asserted $R_u$-module sheaf, with the stated restrictions.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WV (definition-continuous), 00WW (lemma-pushforward-sheaf), and Section 00YR (section-sheaves-algebraic-structures)."
+   }
+  },
+  {
+   "text": "Fix $\\mathcal U$. Continuity sends it to a covering and supplies the canonical pullback isomorphism for every $U_t\\to U$ and every $V\\to U$. These are precisely the hypotheses of [lem-trf-continuous-cover-nerve-comparison]. Its conclusion gives the projection-characterized isomorphisms $c_{\\mathbf t}$ for all positive tuple lengths, and its index-map equation for the increasing injection omitting $j$ is $c_{\\mathbf t\\setminus t_j}u(\\delta_{W,j})=\\delta_{P,j}c_{\\mathbf t}$. This proves both geometric clauses for the choices in the statement.",
+   "uses": [
+    "lem-trf-continuous-cover-nerve-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X (lemma-pullback-injective-pre-limp), proof, displayed iterated fibre-product identity; Sites Tag 00WV."
+   }
+  },
+  {
+   "text": "Put $K=\\check C^\\bullet(\\mathcal U,(I_u)_{\\mathrm{ab}})$ and $L=\\check C^\\bullet(u\\mathcal U,I_{\\mathrm{ab}})$. Define $A^n(s)_{\\mathbf t}=I(c_{\\mathbf t}^{-1})(s_{\\mathbf t})$ for $n\\ge0$ and use the unique map between zero groups for $n<0$. Its inverse in each degree is $B^n(r)_{\\mathbf t}=I(c_{\\mathbf t})(r_{\\mathbf t})$, since restrictions respect identities and composition. For $\\mathbf r=\\mathbf t\\setminus t_j$, step 2 gives $u(\\delta_{W,j})c_{\\mathbf t}^{-1}=c_{\\mathbf r}^{-1}\\delta_{P,j}$, hence contravariance gives $I(c_{\\mathbf t}^{-1})I(u(\\delta_{W,j}))=I(\\delta_{P,j})I(c_{\\mathbf r}^{-1})$. Sum this identity with signs $(-1)^j$. The differential formula of [def-weil-pbc-site-cech-complex] yields $A^{n+1}d_K^n=d_L^nA^n$; it is automatic in negative degrees. Multiplying by $B^{n+1}$ and $B^n$ gives $d_K^nB^n=B^{n+1}d_L^n$. Thus $A$ and $B$ are inverse cochain maps with the required component formula.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, proof, Cech comparison, expanded using Tag 03AM (definition-cech-complex), equation-d-cech."
+   }
+  },
+  {
+   "text": "Both complexes vanish in negative degrees by [def-weil-pbc-site-cech-complex]. Applying the localization functor $Q$ of [def-weil-abstract-derived-category] to $AB=1$ and $BA=1$ gives inverse morphisms in $D^+(\\operatorname{Ab})$. This is the stated isomorphism represented by $A$. It is canonical: the maps $c_{\\mathbf t}$ are uniquely characterized by their projections, so the component formula determines $A$ without any additional choices beyond the chosen fibre products.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-derived-category), localization functor; bounded-below subcategory."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-injective-module-cech-acyclic] to the ringed site $(\\mathcal D,R)$, its injective $R$-module $I$, and the covering $u\\mathcal U$. Its common-universe size restriction agrees with ours, and the site axioms are those assumed here; the small-site sheafification is the usual one. Its conclusion is $H^q(L)=0$ for $q>0$, without assuming $I_{\\mathrm{ab}}$ injective. The inverse cochain maps of step 3 restrict to inverse maps on kernels and images and therefore induce inverse maps on the quotients defining cohomology in [def-weil-pbc-site-cech-complex]. Consequently $\\check H^q(\\mathcal U,(I_u)_{\\mathrm{ab}})=H^q(K)=0$ for $q>0$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC (lemma-injective-module-trivial-cech), applied as in the last sentence of the proof of Tag 0D6X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-continuous-cover-nerve-comparison",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X (lemma-pullback-injective-pre-limp), covering comparison and final invocation of Tag 03FC, stopping before the separate cohomology vanishing criterion; Sites Tags 00WV and 00WW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Cc]ontinu|[Cc]ontinu.*[Cc]ech|[Cc]ech.*[Pp]recomp|[Pp]recomp.*[Cc]ech",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"grep\", \"query\": \"[Cc]ech.*[Cc]ontinu|[Cc]ontinu.*[Cc]ech|[Cc]ech.*[Pp]recomp|[Pp]recomp.*[Cc]ech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/ExtremallyDisconnected.lean\"], \"digest\": \"edff633016c415ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern coherent sheaf conditions, local injectivity of morphisms, ordinary precomposition, or unrelated Stone-Cech topology; none identifies the alternating covering cochain complexes with module-injective vanishing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsContinuous\", \"cech\"",
+   "results": "{\"t\": \"2026-10-22T06:47:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsContinuous\\\", \\\"cech\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern coherent sheaf conditions, local injectivity of morphisms, ordinary precomposition, or unrelated Stone-Cech topology; none identifies the alternating covering cochain complexes with module-injective vanishing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive Cech cohomology of precomposition of an injective sheaf of modules along a continuous site functor vanishes",
+   "results": "{\"t\": \"2026-10-22T06:48:00Z\", \"tool\": \"leansearch\", \"query\": \"Positive Cech cohomology of precomposition of an injective sheaf of modules along a continuous site functor vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instIsStrictlyGEI\", \"CochainComplex.cm5b.I\", \"CategoryTheory.Functor.sheafPushforwardContinuous\", \"TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective\", \"CategoryTheory.Functor.IsContinuous.mk\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"TopCat.Presheaf.stalkFunctor_map_injective_of_app_injective\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\"], \"digest\": \"8477959b4f6a8381\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern coherent sheaf conditions, local injectivity of morphisms, ordinary precomposition, or unrelated Stone-Cech topology; none identifies the alternating covering cochain complexes with module-injective vanishing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous functor of sites identifies Cech complexes of a sheaf precomposed with the functor and an image cover so injective ring module coefficients have zero positive Cech cohomology",
+   "results": "{\"t\": \"2026-10-22T06:48:11Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous functor of sites identifies Cech complexes of a sheaf precomposed with the functor and an image cover so injective ring module coefficients have zero positive Cech cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts\", \"CategoryTheory.Presheaf.isLocallyInjective_forget\", \"CategoryTheory.Presheaf.isLocallyInjective_whisker_iff\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda\", \"CategoryTheory.Presheaf.isLocallyInjective_forget_iff\"], \"digest\": \"acfe2317eec93b74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern coherent sheaf conditions, local injectivity of morphisms, ordinary precomposition, or unrelated Stone-Cech topology; none identifies the alternating covering cochain complexes with module-injective vanishing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous site functor preserves the covering nerve and gives an isomorphism of alternating Cech cochain complexes for restricted abelian coefficients",
+   "results": "{\"t\": \"2026-10-22T06:48:12Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous site functor preserves the covering nerve and gives an isomorphism of alternating Cech cochain complexes for restricted abelian coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.cechNerveTerminalFromIsoCompForget\", \"CategoryTheory.GrothendieckTopology.diagramCompIso\", \"TopCat.Presheaf.whiskerIsoMapGenerateCocone\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso\", \"TopCat.Presheaf.SheafCondition.pairwiseDiagramIso\", \"CategoryTheory.instIsIsoSSetProdComparisonCatCompNerveFunctorHoFunctorOf\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\"], \"digest\": \"65150f8c28cddbf5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern coherent sheaf conditions, local injectivity of morphisms, ordinary precomposition, or unrelated Stone-Cech topology; none identifies the alternating covering cochain complexes with module-injective vanishing."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Cc]ontinu|[Cc]ontinu.*[Cc]ech|[Cc]ech.*[Pp]recomp|[Pp]recomp.*[Cc]ech",
+   "results": "{\"t\": \"2026-10-23T14:48:49Z\", \"tool\": \"grep\", \"query\": \"[Cc]ech.*[Cc]ontinu|[Cc]ontinu.*[Cc]ech|[Cc]ech.*[Pp]recomp|[Pp]recomp.*[Cc]ech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/Compactification/StoneCech.lean\", \"Mathlib/Topology/ExtremallyDisconnected.lean\", \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"Mathlib/Topology/Separation/CompletelyRegular.lean\"], \"digest\": \"5f6f63f8e692afcf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: covering/precomposition sheaf results and local-injectivity or topological comparisons do not give this full module-injective Cech statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology of an injective sheaf of modules vanishes after precomposition with a continuous functor of sites",
+   "results": "{\"t\": \"2026-10-23T14:48:49Z\", \"tool\": \"leansearch\", \"query\": \"Cech cohomology of an injective sheaf of modules vanishes after precomposition with a continuous functor of sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuous\", \"CategoryTheory.Functor.op_comp_isSheaf\", \"CategoryTheory.Functor.IsContinuous.mk\", \"CategoryTheory.Functor.op_comp_isSheaf_of_types\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"CategoryTheory.Functor.IsContinuous.op_comp_isSheaf_of_types\", \"SheafOfModules.pushforwardSections\", \"CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map\"], \"digest\": \"754c01ceb711051d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: covering/precomposition sheaf results and local-injectivity or topological comparisons do not give this full module-injective Cech statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsContinuous\", \"cech\"",
+   "results": "{\"t\": \"2026-10-23T14:48:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsContinuous\\\", \\\"cech\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: covering/precomposition sheaf results and local-injectivity or topological comparisons do not give this full module-injective Cech statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous functor of sites identifies alternating Cech complexes of precomposed sheaves with the image covering and injective sheaves of modules have zero positive Cech cohomology",
+   "results": "{\"t\": \"2026-10-23T14:48:52Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous functor of sites identifies alternating Cech complexes of precomposed sheaves with the image covering and injective sheaves of modules have zero positive Cech cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.isLocallyInjective_of_whisker\", \"CategoryTheory.plusPlusSheaf_preservesZeroMorphisms\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"CategoryTheory.Presheaf.isLocallyInjective_forget\", \"CategoryTheory.Presheaf.isLocallyInjective_forget_iff\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"LightCondAb.ofSheafLightProfinite\"], \"digest\": \"a9caad59d6a0aefd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: covering/precomposition sheaf results and local-injectivity or topological comparisons do not give this full module-injective Cech statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Preserving pullbacks of a covering family gives a natural isomorphism on its Cech cochain complexes for restricted coefficients",
+   "results": "{\"t\": \"2026-10-23T14:55:58Z\", \"tool\": \"leanfinder\", \"query\": \"Preserving pullbacks of a covering family gives a natural isomorphism on its Cech cochain complexes for restricted coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"TopCat.Sheaf.pullbackIso\", \"TopCat.Presheaf.SheafCondition.pairwiseDiagramIso\", \"TopCat.Presheaf.whiskerIsoMapGenerateCocone\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIso\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso\", \"TopCat.Presheaf.SheafCondition.pairwiseCoconeIso\"], \"digest\": \"2d49582ab1b68c5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: covering/precomposition sheaf results and local-injectivity or topological comparisons do not give this full module-injective Cech statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-module-pullback-injective-section-acyclic",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: The higher Ext vanishing for each free module generator against the inverse image of an injective, used in the bounded-above acyclicity test. Re-split of the supporting Ext-vanishing argument: Tag 0D6X, lemma-pullback-injective-pre-limp, proof: covering-nerve comparison and injective-module Cech vanishing before applying lemma-cech-vanish-collection.",
+   "via": [
+    "lem-trf-module-pullback-injective-section-acyclic",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-continuous-precomposition-injective-module-cech",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing fixed-cover nerve comparison and general ringed-site injective-module Cech vanishing. Expanded the restriction formula, differential identity, inverse, and derived localization. No new nodes and no Lean changes.",
+  "blueprint": "Supporting site-theoretic input to the recorded lem-trf-local-term-locality specialization branch: Tag 0D6X covering-nerve comparison and Tag 03FC vanishing, precisely the existing blueprint.from.place; preserves the chapter and unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic continuous-site precomposition sheaf condition (00WW), not a replacement for a trace-formula unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "why": "General injective-module Cech vanishing (03FC), the exact generic input cited by 0D6X; no trace-formula node states the general ringed-site theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-3853c116a",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-3853c116a (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery creates no new nodes and its statement is the base one. Source: Stacks 0D6X proof (continuity ⇒ u𝒰 is a covering and iterated fibre products are preserved ⇒ Ȟ^p(𝒰,g^{-1}I)=Ȟ^p(u𝒰,I)), then 03FC for a ringed site with module-injective I, with no injectivity of I_ab needed. Step 1: the 00WW pushforward node (same continuity (a)+(b)), the leaf turning the underlying set sheaf into a ring sheaf, and the module-sheaf definition (sectionwise semilinear action) give R_u and I_u. Step 2: lem-trf-continuous-cover-nerve-comparison's hypotheses are exactly continuity (a) and (b) with T:=V, and its α-compatibility with α=δ_j is the item's formula; this uses its statement only and makes no cycle. Step 3: I checked the direction: c_t^{-1}:P_t→uW_t, u(δ_W)c_t^{-1}=c_r^{-1}δ_P, and contravariance gives the chain-map identity with the alternating differential of def-weil-pbc-site-cech-complex(c); B is the inverse. Step 4: the localization Q keeps the inverse equations, and both complexes are zero in negative degrees, so they are bounded below. Step 5: the ringed-site 03FC node applies on (𝒟,R,I,u𝒰). Its universes need objects in u and homs, rings, modules and index in v, which the item's single common universe covers (u=v). The HasSheafify and WEqualsLocallyBijective instances for a small site are in Mathlib (Sites/LeftExact.lean 307-310, Sites/LocallyBijective.lean 152-157). Small cases checked: empty covering, singleton covering, repeated indices, q=0. Searched for duplicates: lem-trf-site-pullback-injective-evaluation-acyclic is the abelian-injective variant and nerve-cech-vanishing-transport gives vanishing only, so neither duplicates the item. Accepted tool_uses: lem-weil-pbc-site-continuous-pushforward-sheaf and lem-weil-pbc-ringed-site-injective-module-cech-acyclic, both generic site tools. No SGA source; Mathlib searches of all three kinds are recorded; proof_deps equals the union of uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ContinuousPrecompositionInjectiveModuleCech",
+  "declaration": "CategoryTheory.continuous_precomposition_injective_module_cech",
+  "file": "lean/Sheaf/CategoryTheory/ContinuousPrecompositionInjectiveModuleCech.lean",
+  "statement": "theorem continuous_precomposition_injective_module_cech {C D : Type u} [Category.{u} C] [Category.{u} D] [HasDerivedCategory.{u + 1} AddCommGrpCat.{u}] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (F : C ⥤ D) (hcover : ∀ (X : C) (A : Presieve X), A ∈ J X → A.map F ∈ K (F.obj X)) (hpullback : ∀ (X Y Z : C) (A : Presieve X), A ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), A a → PreservesLimit (cospan a b) F) (R : Sheaf K.toGrothendieck CommRingCat.{u}) (I : ringedSiteModules.{u} ((sheafCompose K.toGrothendieck (forget₂ CommRingCat RingCat)).obj R)) [Injective I] : Presheaf.IsSheaf J.toGrothendieck (F.op ⋙ R.obj) ∧ Presheaf.IsSheaf J.toGrothendieck (((PresheafOfModules.pushforward₀OfCommRingCat F R.obj).obj I.val).presheaf) ∧ ∀ (T : Type u) (U : C) (f : T → C) (a : ∀ t, f t ⟶ U), Presieve.ofArrows f a ∈ J U → ∀ (S : SiteCechComplex f a) (P : SiteCechComplex (fun t ↦ F.obj (f t)) (fun t ↦ F.map (a t))), ∃ c : ∀ (n : ℕ) (t : Fin (n + 1) → T), F.obj (S.W n t) ≅ P.W n t, (∀ (n : ℕ) (t : Fin (n + 1) → T) (k : Fin (n + 1)), (c n t).hom ≫ P.pr n t k = F.map (S.pr n t k)) ∧ (∀ (n : ℕ) (t : Fin (n + 2) → T) (j : Fin (n + 2)), F.map (S.indexMap t j.succAbove) ≫ (c n (t ∘ j.succAbove)).hom = (c (n + 1) t).hom ≫ P.indexMap t j.succAbove) ∧ ∃ e : S.complex (F.op ⋙ I.val.presheaf) ≅ P.complex I.val.presheaf, (∀ (n : ℕ) (s : S.cochains (F.op ⋙ I.val.presheaf) n) (t : Fin (n + 1) → T), (e.hom.f n s) t = I.val.presheaf.map ((c n t).inv.op) (s t)) ∧ (∃ (hS : CochainComplex.plus AddCommGrpCat.{u} ((S.integerComplexFunctor).obj (F.op ⋙ I.val.presheaf))) (hP : CochainComplex.plus AddCommGrpCat.{u} ((P.integerComplexFunctor).obj I.val.presheaf)), ∃ d : (DerivedCategory.Plus.Q (C := AddCommGrpCat.{u})).obj ⟨S.integerComplexFunctor.obj (F.op ⋙ I.val.presheaf), hS⟩ ≅ (DerivedCategory.Plus.Q (C := AddCommGrpCat.{u})).obj ⟨P.integerComplexFunctor.obj I.val.presheaf, hP⟩, (DerivedCategory.Plus.ι (C := AddCommGrpCat.{u})).map d.hom = (DerivedCategory.Q (C := AddCommGrpCat.{u})).map ((ComplexShape.embeddingUpNat.extendFunctor AddCommGrpCat.{u}).map e.hom)) ∧ ∀ (q : ℕ), 0 < q → IsZero ((S.cohomologyFunctor q).obj (F.op ⋙ I.val.presheaf))",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cdc06978",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read item, all 6 stmt_dep records/decls (IsSiteForCoverings, ringedSiteModules, Injective, SiteCechComplex complex/integerComplexFunctor/cohomologyFunctor, DerivedCategory), Mathlib pushforward₀OfCommRingCat, proof-side modules, Stacks 0D6X/03FC. Universes all u; continuity hcover/hpullback same as recorded 00WW node; module-injective only; R_u/I_u sheafness via Mathlib pushforward₀; c pinned by projections; omitted-factor eq and I(c⁻¹) component directions correct; derived iso in D⁺ represented by Q(ext e) via fully faithful ι, plus q>0 vanishing. Edge cases (empty T, repeats, n=0, q=0) ok. Node unchanged except lean; lean.statement verbatim; no dup decls; docstrings/source/blueprint/proof steps present; sorry only. No findings; no compile needed (no change)."
+ }
+}
